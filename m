@@ -1,55 +1,51 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f171.google.com (mail-pf0-f171.google.com
-	[209.85.192.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 942E060797
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C80A6E666
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 May 2016 16:17:32 +0000 (UTC)
-Received: by mail-pf0-f171.google.com with SMTP id 77so36012129pfv.2
+	Sun,  1 May 2016 23:18:05 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id n129so14866730wmn.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 May 2016 09:17:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=QtXW+ny1nrcMASm9itDlNGOaOiSUBWVn9LBWcDTaVhA=;
-	b=AL9Sj6wvwZYodhrZgPuYchO4nIUyXHIJtZEoDWNte3KJBXR4KHFirhF4vnvKRmgCLE
-	3ENT7PPFeu2vvQ0r/+Z0LSFdFjcTA7i8getJp99vVgNkcjldsR8EZy6eID5W6s/D3zkj
-	R0r92sS67yifwsMbbdnDqk4InJO+DStjZW72KuHEHje9BBY6vywpatiWhw12I4d8bpl1
-	wggkfuBgRskkWpBbsuQdju58KY+oKQcyvIyZweEaIDHUdPZaLaSjkEreNKvp50bZv2Y8
-	0jrkAZ1ldpxIwg1kd0p/N9tQNYCUjiv5z79ENdOa+5kEd4JuJR1/LEFVTd/wu0TnPuhK
-	QYZg==
+	Sun, 01 May 2016 16:18:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-transfer-encoding;
+	bh=Q5l05cyukGipS3mQ9GSwZeNBjX8U3sKq8tfas/m5qWY=;
+	b=wyhnbOrAQROoX1tKHb5ewtwV3Bf14iCw4b3KTFWlHr8UEF1jlyjNeGX0kuFZ/p25gm
+	55D3arFKtEZGU6fr78Hjp4gb2kmIgcXZQKkZUQ/5sYky+2KgN0czSDakr1PlA8tawC/M
+	8gdSWHpKQztHQnAdb4rSI9uzmcTxKKN2y/dQmlTI7h6b6W/IdfCZYwtBchiERFmTfGLq
+	czSa/D1HfV0K62MwSXlI4+wAKWRoznVg1NnT2qCfe3yP89VUTc9bdHIdnausStAW6cdE
+	8E1iqOzr0J0fPePdXtsL/IRWrdTO5SjJTmkJFfaFNVF+Tm9FaAxZVA0G4R8XElTvugoM
+	urtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=QtXW+ny1nrcMASm9itDlNGOaOiSUBWVn9LBWcDTaVhA=;
-	b=DcpvI+Q6wmBfRkH06ezm3/kHybshvAHp1N8FNoe1eryGNG0D3sp14wMLXREx/SrNia
-	CxegR22d+8vASEBmcDP77mMoiV/UdEFLMiv+bSaonznFxWAWFExza0+pzyHYZAP7jdUi
-	+aBc6xMVDaTDRljzZDbT3thRpU1KptyW22H6dwBgrD0nmyKNr94vV7q55g++yetDw+dI
-	yIQDzhe6GOb29wOg5WY/floSvgx7QjY4NI+VIuixMVap/mr1nRSEXzkNSvKOwGcIDwMB
-	lQ4Y3onKs8piivP3YilOP5NHPjlTjPDyJRCMOk/gGoCHS0Lkj36x62djzY3XQwDPNhLB
-	m5vg==
-X-Gm-Message-State: AOPr4FUgkv9tp+N/f7WJ9jpSOMK3u6lx8OrSa/trsfuNiIDOoRJOGwivxGyTTeZMBUlq9w==
-X-Received: by 10.98.83.65 with SMTP id h62mr45229370pfb.163.1462119453609;
-	Sun, 01 May 2016 09:17:33 -0700 (PDT)
-Received: from ?IPv6:2601:202:4000:1239:fdac:c1bf:3fbd:cfeb?
-	([2601:202:4000:1239:fdac:c1bf:3fbd:cfeb])
-	by smtp.googlemail.com with ESMTPSA id
-	v75sm38481795pfa.94.2016.05.01.09.17.31
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Sun, 01 May 2016 09:17:32 -0700 (PDT)
-To: Otavio Salvador <otavio.salvador@ossystems.com.br>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Martin Jansa <martin.jansa@gmail.com>
-References: <CAAPZna3rXuTpEx1F=jzqUMRyCkD+xh6S_d+QR++XALMh6bBLZA@mail.gmail.com>
-	<CAP9ODKrfCC+Nyr9EHd931gnoVsyngZ1hvBfBwT4izx4TiOf-Zg@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <57262C1B.8020700@gmail.com>
-Date: Sun, 1 May 2016 09:17:31 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=Q5l05cyukGipS3mQ9GSwZeNBjX8U3sKq8tfas/m5qWY=;
+	b=SGTUlGOTeUK6mvla/yET46evE7kv0FuK7+QEVv6eidUw1P45bQy7AjiAnmz2rHBcD2
+	Yv3NzqsN1ygPt1p26dlCEmIgQEqaw164zwtGYkog44IH+48kwisBXeolFOg2sn699SI8
+	7MRX540dovp4x/2Mw9xfeqnVzddEz+L2SVti9rsGyDWU3ko3rWmaeJY2bnygYpVOw/GQ
+	/n9oFsrO/mohhSJl4T/+U7nRMRBk97rvYXJs/+TL6NTDRvhtVagLZdiJ+skM0DYh97bE
+	gx4SQc/vokAapSA6syJ7y4m3C9XPt19Hz/ZxhBrwIWpJlF1UjjhxCWQst+1gk4JNJhFu
+	qP3w==
+X-Gm-Message-State: AOPr4FVbSei+uAwAyTRYDwL+UmYI96FCRi1LQV61TD+lGqBU379u8X5+qUWSnxwfDREqbg==
+X-Received: by 10.194.175.70 with SMTP id by6mr33168422wjc.19.1462144685647;
+	Sun, 01 May 2016 16:18:05 -0700 (PDT)
+Received: from localhost.localdomain (p5B0A03E5.dip0.t-ipconnect.de.
+	[91.10.3.229]) by smtp.googlemail.com with ESMTPSA id
+	e16sm15572258wmc.3.2016.05.01.16.18.04
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 01 May 2016 16:18:05 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  2 May 2016 01:17:46 +0200
+Message-Id: <1462144669-18427-2-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.5
+In-Reply-To: <1462144669-18427-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1462144669-18427-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-In-Reply-To: <CAP9ODKrfCC+Nyr9EHd931gnoVsyngZ1hvBfBwT4izx4TiOf-Zg@mail.gmail.com>
-Subject: Re: [meta-python][krogoth] Backport python recipes
+Subject: [PATCH 2/5] xfce-polkit: fix warning not able to copy license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,43 +58,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 May 2016 16:17:33 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 01 May 2016 23:18:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
+COPYING is a link on LICENSE. It seems that cause the warning so use LICENSE.
+Fixes:
+| WARNING: xfce-polkit-0.2-r0 do_populate_lic: Could not copy license file /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/xfce-polkit/0.2-r0/git/COPYING to /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/xfce-polkit/0.2-r0/license-destdir/xfce-polkit/COPYING: [Errno 2] No such file or directory: '/home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/xfce-polkit/0.2-r0/license-destdir/xfce-polkit/COPYING'
 
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On 04/25/2016 11:06 AM, Otavio Salvador wrote:
-> Armin,
-> 
-> On Mon, Apr 25, 2016 at 10:45 AM, Fabio Berton
-> <fabio.berton@ossystems.com.br> wrote:
->> Hi all,
->>
->> Recently I sent some python recipes for review and last week were merged to
->> master. Could these recipes be backported for krogoth? I tested all them in
->> krogoth branch.
->>
->> Recipes are listed bellow:
->>
->> python-bcrypt:              cb95c5edaa977c8361628dab04b95192c423fc1a
->> python-blinker:             5a7f267941689eff28b4b0721752708bad4747b6
->> python-flask-bcrypt:        00d5837fd39af7ffae262282f56a0cb42a1c3b89
->> python-flask-bootstrap:     962e2ab371844f5119df2b8ab4a4231f6f7f9f3d
->> python-flask-navigation:    381d498441bd66bdae2d8da1ddcaadee1ff6de73
->> python-flask-sqlalchemy:    3e4ecdd6fe6709f394d92e86ccbc228ae5a43663
->> python-flask-wtf:           4be70064670c34d1b67224672b7caed7b4ed7b04
->> python-pam:                 49b35175d5018dc626a17a9a0662d97e812aab7c
->> python-wtforms:             9676ebb7d14090126f667671d525ce3f3ee89279
->> python-dominate:            5a20e8799eb1c1dd38ec9fee15fd90b88b38bba4
->> python-netaddr:             d3767d923d5044604633be3a3ba8bb4564f51b04
->> python-visitor:             834392bfada652260f6d5924278dd5839d095941
-> 
-> Please check above. To be honest, I think all in meta-oe master could
-> go to krogoth but you are the one to decide on this.
+diff --git a/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb b/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb
+index ab720f8..1fb4a5b 100644
+--- a/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb
++++ b/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "A simple PolicyKit authentication agent for XFCE"
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=758b03f872a88c99fc36d50c5932091c"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=758b03f872a88c99fc36d50c5932091c"
+ 
+ DEPENDS = "libxfce4ui polkit"
+ 
+-- 
+2.5.5
 
-seems reasonable to me.
-
-- armin
-> 
 
