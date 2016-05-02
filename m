@@ -1,61 +1,104 @@
-Return-Path: <neenareddy.busireddy@nxp.com>
-Received: from emea01-am1-obe.outbound.protection.outlook.com
-	(mail-am1on0089.outbound.protection.outlook.com [157.56.112.89])
-	by mail.openembedded.org (Postfix) with ESMTP id 69DBB731A6
+Return-Path: <ra43240@vinca.am.freescale.net>
+X-Greylist: delayed 6079 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 02 May 2016 20:54:59 UTC
+Received: from na01-bn1-obe.outbound.protection.outlook.com
+	(mail-bn1on0098.outbound.protection.outlook.com [157.56.110.98])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F0F7731D6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 May 2016 19:24:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
-	s=selector1-nxp-com;
-	h=From:To:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=etqO6342Gf8OWR7kFAg1lwc40UwAMCbn2zTRT1lqLRE=;
-	b=VEgDabVpUyQk88Tgga0PGvLU6Q6LL9qOobwVlsLMsUE9B5awZgkNx9P49p8FgDow8aSbkGj7M0v7Ln+iBZoQR/3scNf8I/x3GL3B6vF78EVAg5JQZXpBEaUh7qli//wXZYMo/VCAVInDmrhudbRmk6fUwQlAxtY4SJGpF2+QjDo=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
-	header.d=none; lists.openembedded.org;
-	dmarc=none action=none header.from=nxp.com;
-Received: from change-01.am.freescale.net (192.88.168.50) by
-	DB5PR04MB1576.eurprd04.prod.outlook.com (10.164.38.142) with Microsoft
-	SMTP Server (TLS) id 15.1.485.9; Mon, 2 May 2016 19:24:17 +0000
-From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+	Mon,  2 May 2016 20:54:59 +0000 (UTC)
+Received: from BN3PR0301CA0065.namprd03.prod.outlook.com (10.160.152.161) by
+	BY2PR0301MB0711.namprd03.prod.outlook.com (10.160.63.153) with
+	Microsoft SMTP
+	Server (TLS) id 15.1.477.8; Mon, 2 May 2016 20:54:59 +0000
+Received: from BY2FFO11FD022.protection.gbl (2a01:111:f400:7c0c::188) by
+	BN3PR0301CA0065.outlook.office365.com (2a01:111:e400:401e::33) with
+	Microsoft
+	SMTP Server (TLS) id 15.1.485.9 via Frontend Transport; Mon, 2 May 2016
+	20:54:58 +0000
+Authentication-Results: spf=none (sender IP is 192.88.168.50)
+	smtp.mailfrom=vinca.am.freescale.net; nxp.com;
+	dkim=none (message not signed)
+	header.d=none;nxp.com; dmarc=none action=none header.from=nxp.com;
+Received-SPF: None (protection.outlook.com: vinca.am.freescale.net does not
+	designate permitted sender hosts)
+Received: from tx30smr01.am.freescale.net (192.88.168.50) by
+	BY2FFO11FD022.mail.protection.outlook.com (10.1.15.211) with Microsoft
+	SMTP Server (TLS) id 15.1.485.4 via Frontend Transport;
+	Mon, 2 May 2016 20:54:57 +0000
+Received: from vinca.am.freescale.net (vinca.am.freescale.net [10.81.16.111])
+	by tx30smr01.am.freescale.net (8.14.3/8.14.0) with ESMTP id
+	u42Ksu9A025284; Mon, 2 May 2016 13:54:56 -0700
+Received: from vinca.am.freescale.net (localhost [127.0.0.1])
+	by vinca.am.freescale.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP
+	id u42KsGs5030446; Mon, 2 May 2016 15:54:16 -0500
+Received: (from ra43240@localhost)
+	by vinca.am.freescale.net (8.14.4/8.14.4/Submit) id u42KsGNB030445;
+	Mon, 2 May 2016 15:54:16 -0500
+From: Ann Thornton <ann.thornton@nxp.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 2 May 2016 14:22:34 -0500
-Message-ID: <1462216954-8790-1-git-send-email-neenareddy.busireddy@nxp.com>
+Date: Mon, 2 May 2016 15:54:13 -0500
+Message-ID: <1462222453-30407-1-git-send-email-ann.thornton@nxp.com>
 X-Mailer: git-send-email 1.9.1
+X-EOPAttributedMessage: 0
+X-Matching-Connectors: 131066960980467300;
+	(91ab9b29-cfa4-454e-5278-08d120cd25b8); ()
+X-Forefront-Antispam-Report: CIP:192.88.168.50; IPV:NLI; CTRY:US; EFV:NLI;
+	SFV:NSPM;
+	SFS:(10009020)(6009001)(2980300002)(428002)(199003)(189002)(36756003)(42186005)(230783001)(586003)(11100500001)(189998001)(2906002)(50986999)(87936001)(1220700001)(81166005)(4326007)(229853001)(960300001)(50466002)(19580395003)(5008740100001)(48376002)(19580405001)(33646002)(2351001)(47776003)(5003940100001)(110136002)(92566002)(106466001)(101416001)(105586002)(6806005)(50226002)(7059030)(42882005)(87636001);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:BY2PR0301MB0711;
+	H:tx30smr01.am.freescale.net; FPR:; SPF:None; MLV:sfv; A:0; MX:1;
+	LANG:en; 
+X-Microsoft-Exchange-Diagnostics: 1; BY2FFO11FD022;
+	1:okoFz4OBJ8PTZ9meY5BtBOc80OI3Miyw3Hcjy8okY1oCPPAKKWQjQJpbnrnOxzoUug0OrhBWzyJLqDavcde3YvJ1Co629l2m40xvyQiKPcKTKkKPuWzWDP3CA4mqaAZkrdW3b2zQCEXUf9rxtIM0sm7GvmZT5lglKgwImupkJAlsmvX+VrApgG/5MPia0nIlCOulmRNUB996EOBcP2f+Ad8bVGxLsucGVmgiRCfFZcxDQ0FqHlZ3onL9lFwkE7uXDW/UXmSH8UKlBK2+OY4bm0FDRSK6QntpDyzUzBmi7q2FKZk2jCGDs+QUoKalWrtJY9c8rXQ7NAtoy9cubhG7jCshQifXRnA4zDQRGLAF9HhBshgq7OfhPoRhZqsN/RXh9qcvdepn4Mif/7kWRtoDHFOWCkauUNdVSqvTrkVa8Rynhef72ex7ijzSAUSMMkoHprar92uFmjVdXpqfEeJVNl+POlMtH/4UW/Syxb4QDLZQzyL5Lxx3KuX3ayekXhbVTsrCwjXxidTk0LMS5YPbGChN4N3vDUdcFO490sNULCxv84t8VlwWvU9ER6+l34FxzmKlf/y6rJtYhv+HQ2/vK8mZXpEIw7IAKyXQ9ZIOvLPOm5zAD5kFCaVPGB/aUZo2wB0R5l17qirPckqDazbQwOWYmRFCIdzTgBh7h+oxwEDnzwUrGd1adS6815t5dTJ0ZTOZA3oj5LrBMIvHZWBBMIToK5QCjCkn2T2F30K4mD0=
 MIME-Version: 1.0
-X-Originating-IP: [192.88.168.50]
-X-ClientProxiedBy: SN2PR80CA042.lamprd80.prod.outlook.com (10.141.39.180) To
-	DB5PR04MB1576.eurprd04.prod.outlook.com (10.164.38.142)
-X-MS-Office365-Filtering-Correlation-Id: be21906a-e940-456a-a420-08d372bf5b47
-X-Microsoft-Exchange-Diagnostics: 1; DB5PR04MB1576;
-	2:dArl7f2GGyAw2o2dAZS5VuKDeZRp2eD4IWnr/aFomiP+CwgNm8yuV1g/SdFrwF86Op+TOsBwL0boRaNpWjR5mg4/nUhpc+ONO8DpKi5jtXdpz8b8vtljDvhqUGUEmepjKDjUsIeGeE08YTgH/j06BD6srJuJe4aR7HPSs5isvSgWL5Mx8nJOjOsJJ8B7JgLf;
-	3:3oARZJGPLvcmGEGWYnWOFxPkMXgDafLT+fJDxWpM5zfCAjsOIIuD3RWXY549UQt/XdUil4uetP5e0+kmtMeFIpM5zzsNhottuFZvz+RbiAz61FOUAoDi9kzewTj771Ke;
-	25:2yWlhakgsDnwg68od88wob4fiVdh4rfuiymN2XaK/LbVXjTuEChSsXei+0Uf6M5p9pK2JD3z2UZIQyNRiVg0xrmPkzV93Y6/nizjae/5MmHWyThaQUZBltmt18a1EBD7FFDjv7GYeNsRdJzA5OsXnbYOpYLrfdIJPsmM7LRawTuJ3XvPWVDruF1gxGwmBGJSD6mZMoYvqBz1wWmZ4kATF1taptLFvgUpAcwf32bjxZ2mknYVoIktbffWvSV8hWhr/8DZEj4Cpkqz+AFcRMt9TdNOYcVNbxUHg+T091DBuEdkZ+s4qAvmOJ6+kuehv7KpR5+ohpkUG+MaIRt4XGmiaqweSOptebrteYnSMBp227js/1qrGAE+NC+VteclExm9XPniWyMjITjxAD7oE2bcLjIKRWVUDiEbvL0/Pcj23ENhOPDQNQogpUiR473AiMme
-X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:DB5PR04MB1576;
-X-Microsoft-Exchange-Diagnostics: 1; DB5PR04MB1576;
-	20:lP9bIrIQyAkbntx3ft98Hvheb6RcIji9sRbdJvYLqg4y5psPz7l40Zi31Hq6M7X/MEJ0FqrR3zUfXcUssIvw4Q3ATOu8MRqyAeeDatB74hoFFl8cGGHR2NqriMghH8NsVi0MIjhU2vAD6T4E1UnU3ZHmopTeMFwYEdD1I575FWVgFOKHT6ggbHKC35k8SSe9+l7FemiC8E18sGpYBpL8+L3K3kxSXa7+PeflC6knOhOmwMVb7W0iid7CziyCwSpJuADL5ZVjfT/smqJGxoJePU+os8fvx+emUioK86L+x1nziCAOD0gSW/vhQ+t8rfQPaNBiy96+Qqwhw3QfYXgFj/8voWTE9CI5NroMh+RWKuaPcp/SxieCPpb7Wec8NcML28JiZUb1gm6Z+KtiO2n5vckbbciWMcWIQHleEbxAZ79T2+dRQrGVfDKjqu1n4prt39dt0wilKPM5qzdzNyzWwIu7Baytgs54oyS7756ZKpiLtnn0HQqMZWebIOxRRjeU;
-	4:o/lyleRKUGj1GkdC12i/7kdGNZD3WPCYcp8mZ6cXhJcfea998nG9VUsOMnrsAzjAdSYKfWRo2zfP2gNhT4Tqx9yRqwVe2Ue1RhGxjIfZo8/iXFAINzaddN7UFwxWUX5gP4u4lcUduMElN5l1APaULVt5mkaGa8uJFRwIvqwzSvOaFlg4zPTXUCuOAee0bGJtDkP5Z4ZBqD5Igv7RyKJETaobT2kUUSYKaEaQ5fckaspoSeG8/lRNF5lrGjh3XHaFiHZ4r7/eofofIF513qjQQUTeY+bzqwurO1Q/UXJP3CVQotONM79o8AaLVQ6JSmRMmuqj0NuwjAUs4N1fgBlLf6AIc2VwwIbC9wDfoL6x+/ibeakCveZQnmWCNbpBFDZZwpJ4feiJ/f+D5+fxfTWiWjqWqYhNXCFHr4lAVyaKe8Q=
-X-Microsoft-Antispam-PRVS: <DB5PR04MB15769BCE5E82D9A36AF7F62191790@DB5PR04MB1576.eurprd04.prod.outlook.com>
+X-MS-Office365-Filtering-Correlation-Id: 15a1c2f4-5e6c-4f69-d3a4-08d372cc056b
+X-Microsoft-Exchange-Diagnostics: 1; BY2PR0301MB0711;
+	2:M4mXn1StrLQgc0Tk6wr0PSigyvxwE6bfJ6vAe3Vlxl7Qlyz2+C2FiGmE4xK8cWi5Hs1lx2zjQdE5Pvhp+6y9RDdhJMyqiUeLeD8hmK6s6s/xq7s+Qzu2gwr0QCuj67FFfkTI5kEf/ZylfAAzglOrOxD+IEpznXAlSCKUvsC228Q72/9COJIftAD3zoFEFyCp;
+	3:0uofO1kiCnefHcCyztzoaV2wxDE0Cn3Dfam53SPV7ML0f/ECdP5pILby2P2QzebIQycU70ngoZ06Lgw1mO/fP331Ud3bpjVIy6k5BYzqA1zdzZiDjiEk9V4BcoPkPO5l9OMZgfbjU/wMZBr0fVsHK4OjAATuaCuhlWszdgeX88e4X7tSrjUjeLw6P4GPYcs48CuM1kxTjw4Wark1MXtPzd8Xg8uJcEx9HFY8oNbujUQ=
+X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:BY2PR0301MB0711;
+X-Microsoft-Exchange-Diagnostics: 1; BY2PR0301MB0711;
+	25:5kwBf1CSdo71MRU18xu8THNbTATKSwPChzjDrnsGi0niJqYtEyMlyBnYM4FIzrGa+vq75xrWmSlIEftH38yD3woknySi1xFNdI7/Ce3QovkWTHw+rn2c80EylH0mNJ3+IoBxippfVOQjwdvWyXKGOHM/hVfElGXEubMehj2Y08uUBOPCIDy3SY6/n0zxspfQZkS4dUh4SQeerDaS28XC83UjF1Yrp7EvIq5QyfUsU8oyBeedi8yBoYOA+P92n30Skf+1OsSjYGEyZfRZIFVjDuFjhuBz81r8K1xxun7iaywggzouh7qJguti1pVx6UOZ6X/EzEXoFTwqamIQXaWnIScO7vnfFtz78TT7pE+WsciVbEr5jUMkBN/S0Ylysmjfoqaj/+Xbnvzlj0wib0FWrA1tVhVLFDF20HeoP1YPjT3TJFiIw+iP4cqDli3P5PjkmKY7pcwzXzV68E+QOUTgGg29jJUAP2djtTcjKQaHQpJyxnIZ5N1E4/1km692RkUMmHveGmw4vatWBZCA1cZO3qSQClPnPHqD2CFi3CKTzyzsgQB28H7QEBqeVrsu8GffAyDdCNp9Cun/jW1ybRCWek/LBZdeYcu9AInL3EO/yRqLktz0u6vTbpCJBqoGKjlSQDCpIz3cFHZEZ51uLqxS6rRfTLKB4Z+ClEH0gYXtyTSn9Pyo81gkyFvhaZVoLbj+VPGT51rlt3qMoUiq/zpDFA==
+X-Microsoft-Antispam-PRVS: <BY2PR0301MB07119004E94B280063FD43479A790@BY2PR0301MB0711.namprd03.prod.outlook.com>
 X-Exchange-Antispam-Report-Test: UriScan:;
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(9101521096)(601004)(2401047)(5005006)(8121501046)(10201501046)(3002001)(6055026);
-	SRVR:DB5PR04MB1576; BCL:0; PCL:0; RULEID:; SRVR:DB5PR04MB1576; 
+	RULEID:(601004)(2401047)(13018025)(13023025)(13017025)(13015025)(5005006)(8121501046)(13024025)(3002001)(10201501046)(6055026);
+	SRVR:BY2PR0301MB0711; BCL:0; PCL:0; RULEID:(400006);
+	SRVR:BY2PR0301MB0711; 
+X-Microsoft-Exchange-Diagnostics: 1; BY2PR0301MB0711;
+	4:rJufgwwjt17HryzljkOUpdZdOPLCQc+MwiC9V/gdzzCf4cOYi0FjZz3cUJ2HhEW+aIION+kYjjAqvx5Tq9YxQoX9JfJopa81SknwE6DxosAJn2o+WarJHxceVY2+KhOwQgMnQdy9xMRoCX637NQfY7dvidLWByxebAsBSc8ZSnPnwigLVng4D9Xtj45yLxFtlX3moUiHSqU3jb7LCgZWFRJLUDSQNoUZ9DADwl1L+9bpdtwSTOaoHxY57A8hHzbPOK/WYB8qzOnOmJCqctqatXB8BXXzLs14wr35jg34TRWj82PBxKbDYIdiaKmq2MDlh15OjVQ1qZisNYgENFrIjiVpDbHa7UalFLLukpeJQ1WKwYKSNHeFlBmyNx7Na1SC5H2xHBTqzYoyRL7r/pfNTWBLTeVaoIUqOMkc/SmWwlrmXKTyJ1L94BX5GUEiYOi0Rinmb1tJuIM8QfGsE0Vi1oUO60mVnowpXtLq1nqNeI8=
 X-Forefront-PRVS: 0930AAFAD9
-X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10009020)(4630300001)(6009001)(66066001)(48376002)(47776003)(450100001)(50466002)(5003940100001)(19580395003)(19580405001)(50986999)(4326007)(81166005)(229853001)(86362001)(15975445007)(36756003)(2906002)(2351001)(92566002)(5004730100002)(189998001)(110136002)(5008740100001)(42186005)(50226002)(586003)(6116002)(3846002)(77096005)(33646002);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:DB5PR04MB1576;
-	H:change-01.am.freescale.net; FPR:; SPF:None; MLV:sfv; LANG:en; 
-X-Microsoft-Exchange-Diagnostics: 1; DB5PR04MB1576;
-	23:J8w0OKsA0SERmE1q62jP3ASEC9x3V+vGS+BN5vbC/K7T1+lq43OjOAyUgF9S0jWG8kj0oABkRKJOyiKDgG7ESvgQegXI+jeiON0zQ1z2MP71KFGBwLinvLxfJzI3EDJfeMPR7/2FoRehJrgoYGYNdk45EYFXpPoGg+PWqueIutc8q+OzLguchw6BJjo5XLtetVQw4y8FQcQ5qootEIZB2K8dZTObo032MaABA8hWtmqkaqnbBO3wIyfar1i/igIM122zll2FjtthXtWvdKP2MQO9H87RO2AndidC+2ATEA9FXeZN2Cuc1FKEpl2Q8RWqIdSQ9+hijTKJmMcUYwIkte2ibCSqhkZsSvhu8KWw0gpFP6+zfDdtwFDii0xOMPOGDUy+RtT1qPvPhVGLgM4nyAWsrXagi+cLSpxNjzPwdQulaO9UoMf0bp5y9U75s+4Gzv+NjU2Fl9ZDidr33tMGNlnMptJ5y7FGsYYfby4n8aE9N2oOnm9gVXnV3FGMrIwzKrfl6/SE/TotFZ7MIXmyC8m3ptMQ6DeYsg0fC7CKuLtm72FPxObqoroFhlNLRDdChw6kjGEWg55L3NGi1lNDgBzZE3pyIvsmDw+yGMSn+w4t+NcnIY16h//ykNfB5kP6MFzQKdb1/ICKgv5IJ383lL7WTWqMe4j0zZGok/TB+gsNOPY1EsWStFJVWIrbNzTbl2+4JMvr9B+iz9dY8GPJEJYjpuuFi0O9CY2d8rawzUFEjK6H9qSsG+NxnHcLM4PJpVUpHTAGD4wAc3BlHlrpGd2wk+RoHi2VwV2L+keh35of26C/kcRUgSB6Ok3HlBKW8TcqsF3gaeBbsP+U8BO3VAtVZgk2DeSP6FLKRNTDGJgOQocVsaHi4Rj5f5j32fH5
-X-Microsoft-Exchange-Diagnostics: 1; DB5PR04MB1576;
-	5:71q+q+8JMU+eMj9/L43fSLoZEQcnoysACc7BUiLTH6XfBQNQn0kUhNSJRPrAE9dk5USquigHjJMgbJG0QU7P26iMr3AoQ81s891scxyXSJrSRe6Qfo5irtDdPrfMTNN4G4d15o01/RIEa4OcYbjc7A==;
-	24:M3GiU0BJC7W/VANkk1L6Enak+6jA6hUysHSLbLUCNKqYmCq+z+iAf3W+xIxbiHAzKaH+5aolShKw3Ln5L/VudSJf4wKE6fXhIq7fTE7lJzI=;
-	7:QGdJhOFZcA08n/TdOgEgBj5Tle8ufvRPYO26XlNTfeZEkeL6v4Uu63OCxDGgZWl5qcmJWZtEAcbmXu8HX8DhXFUG6VvXDSU0iDU5yE7weFf1p/puJFr4eMd8XVJUE+ZJTA7sZqu1AtBiO6XvyKn9pNOIznurzHVSZzNaeZlzap7gHiZ8xtX9aRNFWQcgs2OR
+X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; BY2PR0301MB0711;
+	23:Btzr44Ek13axhdv5USlbj/yApSF9F3mcC4DkLTm?=
+	=?us-ascii?Q?OBhdZY0siXfTf2poQVowSpQjIgIjPkL0OjDUJA10o6WQJtjEdddR/TYK9G9b?=
+	=?us-ascii?Q?UHzQYojOvmRTCuPEjdiHRRtnvMQvfbp+BazDmTeaUZhfdqHnmAqidxn8pty+?=
+	=?us-ascii?Q?ASbb4EQFlA+JwqLB0A8SB2V8ai8zOXPMPvOykWXcbtTbgS3TTJZhQoZ+8hNG?=
+	=?us-ascii?Q?HNFagnNPQKRzHXBzc1N+uRyvFfLIlmLBBlwGyvHQ32ryHYmn7KthR4370h/W?=
+	=?us-ascii?Q?ZC9++xKSxc4frp1uNgJtj5GtBCokUSS082sTaM3AWO8JCY6Orb2FBo3h1p/E?=
+	=?us-ascii?Q?TG1GS1BWOYhMRagvOtFneq2GEqdL+/+IyR9zrjOff36EjYRrEsyPafehM9c4?=
+	=?us-ascii?Q?sRifOQBvn/ujEHFiyMk5Bsz8Eui+4FCm86q2CYBfxZ2QLNipOQc/kU/w+Ufk?=
+	=?us-ascii?Q?ifGbM/uzwxMQT6jYVnsNQEEE1QaTwR0D+ao3a6c/Avc5rB2sc8+0iY+ogNQO?=
+	=?us-ascii?Q?gz96qXqsMw8RwbvUA5CIQepkXPtc3iY9OgCR3qiUwJNe7A2cx7MLE0WW5uOj?=
+	=?us-ascii?Q?lU3nGdS9JKbkirtd1wIhIfLH426n9FuYeGMyM8yX9W+QWYh6e77WaUTlEpJU?=
+	=?us-ascii?Q?uSKcJHVR47/riUEh+4R0Q+im1QmQ2PNTQB87xdi15bfNW93YfiejJjN1sjZ6?=
+	=?us-ascii?Q?MsQ4x6TrOSaeRCn0vP1aY0gxwndcJXKnPJQZBUkL/uwWRiZYRj6YGTFdttef?=
+	=?us-ascii?Q?jAwRzirRA35VgAUaNV739NEPG/SaWYdh9HNl06IgPYN1+fYDTElMYv9Vykah?=
+	=?us-ascii?Q?/m7NPE6mrm7OcshBP83bY/swIcQ0XOOumOjiLAgH1bUWY5zS3RqpdPhDrzZ4?=
+	=?us-ascii?Q?FVaxRdZehwNRc7BsRntrIJlZIJ/ZqtCnkS0KPgLKI9XaUKs/G3muWSXunj5G?=
+	=?us-ascii?Q?6bBPjnpV7SMWsTzMofmQi/rfrwughusSO0UZHM0chmvAItq7YLZeFyFBddxq?=
+	=?us-ascii?Q?8Ey4=3D?=
+X-Microsoft-Exchange-Diagnostics: 1; BY2PR0301MB0711;
+	5:zqkiFlvZPNcQHsiW0nAqRl+g85PkedU9GA1rw3Ezvp8HuhkcDlhg3dgwhejOw2rAeJqxPvGCtt8puiYPQRPng4sCe7qkQJqJEHGVhMurZ6rBI5z8eZw4AI9yn2fifzOLb8e+L5dgmPrg41OSZhjvQnpmhf5efVszeui7keqQXjI=;
+	24:BnavLu+YLoMopxwmnTyPn2vzVhLf9relfU4B/I7o+/WXA+xZDREqPLL7/vjQKxdY6HgCgnyC2G2avjTHTDHV6H5x0W91gXzyznlTQC3jyBA=;
+	7:654JZIFlKTGeP4uQqj3AUACDVBh6AOfwp2RpW8iaM+rAa94dKmY3Lv7B+JbiNGPeVxRApIXyh00BS+W3puWg8Ou9i4PKEVdhQgvO0M9NMm42Gi2jgHREJcyVmgtpm/td4R0sZIu+MgU7xyp9yWXBHu51yx4DLgR/CZ7y1rkB/JataxIdqFo02Nabh3YI3a5Z
 SpamDiagnosticOutput: 1:23
 SpamDiagnosticMetadata: NSPM
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 May 2016 19:24:17.9644 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB5PR04MB1576
-Subject: [meta-oe][PATCH] glmark2: wl_surface should be destoryed after destroying wl_window
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 May 2016 20:54:57.7191 (UTC)
+X-MS-Exchange-CrossTenant-Id: 5afe0b00-7697-4969-b663-5eab37d5f47e
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=5afe0b00-7697-4969-b663-5eab37d5f47e;
+	Ip=[192.88.168.50]; Helo=[tx30smr01.am.freescale.net]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY2PR0301MB0711
+Subject: [meta-oe][PATCH] packagegroup-tools-bluetooth.bb: Selects the tools appropriate for the version of bluez being used.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,73 +111,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 May 2016 19:24:21 -0000
+X-List-Received-Date: Mon, 02 May 2016 20:55:01 -0000
 Content-Type: text/plain
 
-If wl_surface is destroyed while work thread is still running,
-segmentation fault occurs.
-
-Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
+Signed-off-by: Ann Thornton <ann.thornton@nxp.com>
 ---
- ...ace-should-be-destoryed-after-the-wl_wind.patch | 34 ++++++++++++++++++++++
- meta-oe/recipes-benchmark/glmark2/glmark2_git.bb   |  3 +-
- 2 files changed, 36 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-benchmark/glmark2/files/0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch
+ .../packagegroups/packagegroup-tools-bluetooth.bb  | 40 ++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
 
-diff --git a/meta-oe/recipes-benchmark/glmark2/files/0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch b/meta-oe/recipes-benchmark/glmark2/files/0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch
+diff --git a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
 new file mode 100644
-index 0000000..4395081
+index 0000000..bdab389
 --- /dev/null
-+++ b/meta-oe/recipes-benchmark/glmark2/files/0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch
-@@ -0,0 +1,34 @@
-+From 9c74ec83e2929b1d5ab65d5137b6ba42edeb332d Mon Sep 17 00:00:00 2001
-+From: Yong Gan <b45748@freescale.com>
-+Date: Tue, 27 Oct 2015 18:15:20 +0800
-+Subject: [PATCH] Fix: wl_surface should be destoryed after the wl_window
-+ destroyed.
++++ b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
+@@ -0,0 +1,40 @@
++# Copyright (C) 2014-2015 Freescale Semiconductor
++# Released under the MIT license (see COPYING.MIT for the terms)
 +
-+Upstream-Status: Submitted [https://github.com/glmark2/glmark2/issues/12]
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
++                    file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 +
-+Signed-off-by: Yong Gan <b45748@freescale.com>
++SUMMARY = "Set of Bluetooh related tools for inclusion on images"
++DESCRIPTION = "Add bluetooth tools based on the version of BlueZ in use.\
++The tools that have been tested and work the best are pulled in \
++automatically.  The same packagegroup can be used in a recipe without \
++the need to know which version of BlueZ is in use. \
++Supports BlueZ4 and BlueZ5."
 +
-+---
-+ src/native-state-wayland.cpp | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++inherit packagegroup
 +
-+diff --git a/src/native-state-wayland.cpp b/src/native-state-wayland.cpp
-+index 41fc743..cdcdf34 100644
-+--- a/src/native-state-wayland.cpp
-++++ b/src/native-state-wayland.cpp
-+@@ -56,10 +56,10 @@ NativeStateWayland::~NativeStateWayland()
-+             wl_shell_surface_destroy(window_->shell_surface);
-+         if (window_->opaque_reqion)
-+             wl_region_destroy(window_->opaque_reqion);
-+-        if (window_->surface)
-+-            wl_surface_destroy(window_->surface);
-+         if (window_->native)
-+             wl_egl_window_destroy(window_->native);
-++        if (window_->surface)
-++            wl_surface_destroy(window_->surface);
-+         delete window_;
-+     }
-+ 
-+-- 
-+1.9.1
++BLUEZ4_INSTALL = " \
++    obexftp \
++"
 +
-diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-index 98ce377..e29921b 100644
---- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-+++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-@@ -13,7 +13,8 @@ DEPENDS = "libpng12 jpeg"
- PV = "2014.03+${SRCPV}"
- 
- SRC_URI = "git://github.com/glmark2/glmark2.git;protocol=https \
--           file://build-Check-packages-to-be-used-by-the-enabled-flavo.patch"
-+           file://build-Check-packages-to-be-used-by-the-enabled-flavo.patch \
-+           file://0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch"
- SRCREV = "fa71af2dfab711fac87b9504b6fc9862f44bf72a"
- 
- S = "${WORKDIR}/git"
++BLUEZ5_INSTALL = " \
++     bluez5-noinst-tools \
++     bluez5-obex \
++     bluez5-testtools  \
++     libasound-module-bluez \
++     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', "pulseaudio-module-bluetooth-discover \
++                                                            pulseaudio-module-bluetooth-policy \
++                                                            pulseaudio-module-bluez5-discover \
++                                                            pulseaudio-module-bluez5-device \
++                                                            pulseaudio-module-switch-on-connect \
++                                                            pulseaudio-module-loopback", \
++                                             '', d)} \
++"
++
++# Install either bluez4 or bluez5 if they are in distro.  
++# Otherwise install nothing.
++RDEPENDS_${PN} = " \
++     ${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', '${BLUEZ5_INSTALL}', "", d)} \
++     ${@bb.utils.contains('DISTRO_FEATURES', 'bluez4', '${BLUEZ4_INSTALL}', "", d)} \
++"
 -- 
 1.9.1
 
