@@ -1,49 +1,57 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f66.google.com (mail-pa0-f66.google.com
-	[209.85.220.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CA8B7017B
+Return-Path: <kergoth@gmail.com>
+Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
+	[209.85.223.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F3DD6E687
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 May 2016 21:11:55 +0000 (UTC)
-Received: by mail-pa0-f66.google.com with SMTP id yl2so32972pac.1
+	Mon,  2 May 2016 22:12:48 +0000 (UTC)
+Received: by mail-io0-f196.google.com with SMTP id x35so467848ioi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 May 2016 14:11:56 -0700 (PDT)
+	Mon, 02 May 2016 15:12:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=zCFqyx/hnuYrk5IUSPdTo6TrNrlYdTJo6MlPYhQ/LKU=;
-	b=A5kjrjY6MDndY0pxcgm7aza/xVpeKX9XcrEn8jq8h+ybZuAsUO1VKwQ4Kcx5u4kwf0
-	P/0JtlhXi+EwKpOqNvFgVlKQeNCfTm+BJuvC02z/VMY8aVzG/wDg8a8uM92BRc9oZrjY
-	toFNWvsPMl2uY+/MGKEDfqKT+sxxiOD+OK/AsVoDBICTyrc0v8MTpjsTfUwJaiKJp2UL
-	z0LylIO/k1l+hry/W3a43duujjGY+C5o58er9vkc1ZxhPsd99ohkKa0dRdcHxksif7Eg
-	7GG53BDNaRZc18qjYF6nnzGOtGOtZFX9liZS/kyG/zncKvNAR2c83vpH2rfZc0QVoZ5n
-	iNxQ==
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to; bh=Vt3BKHlnCItY+peHG6DokmqSylEgSaXph6uA/7nUn/U=;
+	b=AGaNq7wEUwNCmHqcVjk8A4K0CFbVjVQkKqcZqhw2BJba59DQRrvQeMy0IBb3ynymlT
+	w+XnEMHq3ZAzdzziFr/AcurvMpoHsK0lSFCymA50TaSzfyTj99KsvT0lBuwb5eSNPkPf
+	8un26RcQgF9gRkDp6IQ+hPKjHydxbzAIJqOP+YjR86rh7/lAM55VTl8CqP8EItoFA5k7
+	W/Uv2Nhg7QdKUv5QRnDnAO1z8QCDhbN5G62ebp1HGvOQ461hg6Jfyjpou+NMnAqQTsAH
+	nB5qHEFF+oBCHJoWRmkmHkbRqkRegdiboBxxzwhlxA8DHSj8wY2gFHXoygKWiAlX9MN0
+	jyZA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=kergoth-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to; bh=Vt3BKHlnCItY+peHG6DokmqSylEgSaXph6uA/7nUn/U=;
+	b=EhiAKchaowBUnfWy8YgQAUBFa3G9tZBtK1ghuPotvGz5KBRztZsKd4X+iIKMBNnAHZ
+	16b6QRbx4AKx8b2nWAmD53+gUFQ4uxFWLn++XGJyE2jrvK6NBOxayQRFKzly4ShLrWhk
+	pVg79B8L5Jp8S83EONigyxnio/681svvJtLAgA6l8wxISvdUkcXE4lrMSDEaBFcj1r4i
+	GIQ82s1LMdgV/zeqJ8MJ3cdv4tEQ5+3EV0tZvTBh5cgU7MH5s4Qn087wdTG/YAfQ8U+6
+	yRlopkyuZAg7X6XqclTn+FXAoqh8N5EAuDIGiK140iNhqW3o0Pp43NNxPB/pO8arI46m
+	LLdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=zCFqyx/hnuYrk5IUSPdTo6TrNrlYdTJo6MlPYhQ/LKU=;
-	b=USyomUYZYxZMiMVKI1UHzf/QOtathLrI6+jER4wF/77ZJTXovILqs+KXE3g+sgXpc/
-	MVMAihaB8byjH712Jn1QGTfy2KtNYzuubR47d15Wv8X+PfECNaOU+a+LM0U+ugijf2qg
-	pRYhnRL96Sc+b09qIGpRjOaEmUE6Juo2tIvUVnnasUy5/4Q0xDRDAPYwAYyn89uES8AG
-	8WFJcBZ7xXh21jqOQi5UJyBL2SvvDvJ29E+Kxb27YVyTw9Q/NlsROZ4+3v/beU6HV2FD
-	DGJlgiyygCiIF+3l8I5bLhRzjIqvNQIB93cu+YdS4Ze7Ql7+LTFz1K5CY0sjAQwp/0PC
-	T2bw==
-X-Gm-Message-State: AOPr4FXKJCN3m0qPxe/eeA2C9dJJF4B0cCiiaR+fT6vCdTgGAqXzbGIlrBKJb3owpk81OQ==
-X-Received: by 10.66.89.228 with SMTP id br4mr50004343pab.110.1462223516429;
-	Mon, 02 May 2016 14:11:56 -0700 (PDT)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207])
-	by smtp.gmail.com with ESMTPSA id f16sm49826pfj.71.2016.05.02.14.11.54
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 02 May 2016 14:11:55 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster@mvista.com,
-	openembedded-devel@lists.openembedded.org
-Date: Mon,  2 May 2016 14:10:35 -0700
-Message-Id: <cover.1462223302.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
+	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
+	:date:message-id:subject:to;
+	bh=Vt3BKHlnCItY+peHG6DokmqSylEgSaXph6uA/7nUn/U=;
+	b=Kwo2riVVgUCeTB8zItLvBSWEt5g6dIoW+rlx3Gx696gKAWX1EuZJt1xac5UO8eA4wg
+	0gVaLDG9aA0ITud2WrWvPPa3ceKr8xPdFr50J11kPS63om3LaoUOgZdU63LrwOsSB0Qg
+	F3FsbMtY5L9nnQa9Lg40HbvuhFav4Pb/SUh9t8djOKwhOItDmb8tAqrdNp2Cd+KtbVMk
+	Vzhag3bf3tOPAg0CBW8dXmaOCh3b7F4McjF0L5N+4UasO79AkoowvptXHVE/PdAIyHNt
+	ZcnmgOU+X78RVFT1cI1racH3enc8s2v6tzUNSh444EbIsImqz1tWh3BrZcYSUyv3P0V4
+	jtow==
+X-Gm-Message-State: AOPr4FW1pXrCOM3CcEBOQZRr08/rBspyHz4HcVmXqKSAcyfYCte9kb5dO+clAPAX0SsLBNIdfuT9LnIotDgG7A==
+X-Received: by 10.107.147.7 with SMTP id v7mr42100748iod.3.1462227169521; Mon,
+	02 May 2016 15:12:49 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH 00/77] [krogoth][V2] next
+Sender: kergoth@gmail.com
+Received: by 10.79.134.70 with HTTP; Mon, 2 May 2016 15:12:30 -0700 (PDT)
+In-Reply-To: <1462222453-30407-1-git-send-email-ann.thornton@nxp.com>
+References: <1462222453-30407-1-git-send-email-ann.thornton@nxp.com>
+From: Christopher Larson <clarson@kergoth.com>
+Date: Mon, 2 May 2016 22:12:30 +0000
+X-Google-Sender-Auth: jMYIe4T4vqzDW6dBtDTNUMXaQcI
+Message-ID: <CABcZANkpmDKL-fsM94nQ5o+193Hqo3_b5ikv9sokc4JO5M=n+g@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH] packagegroup-tools-bluetooth.bb: Selects the tools appropriate for the version of bluez being used.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,371 +64,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 May 2016 21:12:01 -0000
+X-List-Received-Date: Mon, 02 May 2016 22:12:50 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-V2: rebase
+On Mon, May 2, 2016 at 8:54 PM, Ann Thornton <ann.thornton@nxp.com> wrote:
 
-Since Yocto 2.1 released on April 29th, this syncs with the latest changes found in
-that release.
+> Signed-off-by: Ann Thornton <ann.thornton@nxp.com>
+> ---
+>  .../packagegroups/packagegroup-tools-bluetooth.bb  | 40
+> ++++++++++++++++++++++
+>  1 file changed, 40 insertions(+)
+>  create mode 100644 meta-oe/recipes-connectivity/packagegroups/
+> packagegroup-tools-bluetooth.bb
+>
+> diff --git a/meta-oe/recipes-connectivity/packagegroups/
+> packagegroup-tools-bluetooth.bb
+> b/meta-oe/recipes-connectivity/packagegroups/
+> packagegroup-tools-bluetooth.bb
+> new file mode 100644
+> index 0000000..bdab389
+> --- /dev/null
+> +++ b/meta-oe/recipes-connectivity/packagegroups/
+> packagegroup-tools-bluetooth.bb
+> @@ -0,0 +1,40 @@
+> +# Copyright (C) 2014-2015 Freescale Semiconductor
+> +# Released under the MIT license (see COPYING.MIT for the terms)
+> +
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM =
+> "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
+> +
+> file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
+> +
+> +SUMMARY = "Set of Bluetooh related tools for inclusion on images"
+>
 
-please consider these for krogoth-next.
+Typo: Bluetooh
 
-The following changes since commit cb87e40af9abc66ef3c720c863487329a39aa47a:
 
-  samba: remove dependency on ctdb (2016-05-02 12:25:38 -0400)
+> +DESCRIPTION = "Add bluetooth tools based on the version of BlueZ in use.\
+> +The tools that have been tested and work the best are pulled in \
+> +automatically.  The same packagegroup can be used in a recipe without \
+> +the need to know which version of BlueZ is in use. \
+> +Supports BlueZ4 and BlueZ5."
+>
 
-are available in the git repository at:
+This is more a description of the recipe than the package, but this ends up
+in the package. This should describe what the purpose of the package is,
+not how it's implemented. "Tools" is also rather vague here. Which tools,
+for what purpose?
 
-  git://github.com/akuster/meta-openembedded akuster/krogoth-next
-  https://github.com/akuster/meta-openembedded/tree/akuster/krogoth-next
 
-Adrian Dudau (1):
-  umip: unblacklist and disable parallel make
+> +inherit packagegroup
+> +
+> +BLUEZ4_INSTALL = " \
+> +    obexftp \
+> +"
+> +
+> +BLUEZ5_INSTALL = " \
+> +     bluez5-noinst-tools \
+> +     bluez5-obex \
+> +     bluez5-testtools  \
+> +     libasound-module-bluez \
+> +     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio',
+> "pulseaudio-module-bluetooth-discover \
+> +
+> pulseaudio-module-bluetooth-policy \
+> +
+> pulseaudio-module-bluez5-discover \
+> +
+> pulseaudio-module-bluez5-device \
+> +
+> pulseaudio-module-switch-on-connect \
+> +
+> pulseaudio-module-loopback", \
+> +                                             '', d)} \
+>
 
-Andre McCurdy (2):
-  fcgi: update SRC_URI to match new path to fcgi-2.4.0.tar.gz archive
-  libtinyxml2: update 2.2.0 -> 3.0.0
+This "_INSTALL" naming is a bit odd -- this isn't an image. These are
+runtime dependences, not lists of packages to install. The difference is
+subtle, but important. I'd suggest renaming those variables.
 
-Andreas Müller (3):
-  poppler: update to 0.4.1
-  xfce4-whiskermenu-plugin: update to 1.5.3
-  xfce4-weather-plugin: update to 0.8.7
++# Install either bluez4 or bluez5 if they are in distro.
+> +# Otherwise install nothing.
+> +RDEPENDS_${PN} = " \
+> +     ${@bb.utils.contains('DISTRO_FEATURES', 'bluez5',
+> '${BLUEZ5_INSTALL}', "", d)} \
+> +     ${@bb.utils.contains('DISTRO_FEATURES', 'bluez4',
+> '${BLUEZ4_INSTALL}', "", d)} \
+> +"
 
-André Draszik (1):
-  rsnapshot: use ${bindir} as rsync location
 
-Armin Kuster (4):
-  c-ares: Add package to networking
-  udisk2: fix build issue with missing depends
-  xcursorgen: fix License issue
-  flite: fix license issue.
-
-Dai Caiyun (1):
-  hwdata: add new recipe
-
-Denys Dmytriyenko (1):
-  ne10: use bb.debug for debug messages
-
-Derek Straka (25):
-  adduser: update to 3.114
-  libcapture-tiny-perl: update to 0.36
-  libclass-method-modifiers-perl: update to 2.11
-  libcrypt-openssl-random-perl: update to 0.11
-  libcurses-perl: update to 1.34
-  libdbd-sqlite-perl: update to 1.50
-  libdbi-perl: update to 1.634
-  libencode-perl: update to 2.83
-  libextutils-config-perl: update to 0.008
-  libextutils-installpaths-perl: update to 0.011
-  libhtml-parser-perl: update to 3.72
-  python-cython: update to 0.24
-  python-dateutil: update to 2.5.2
-  python-decorator: update to 4.0.9
-  python-whoosh: update to 2.7.4
-  nginx: update to 1.9.14
-  apache2: update to 2.4.20
-  python-parted: update to version 3.10.7
-  libxml++: update to the latest stable version (2.38.1)
-  libio-pty-perl: update to version 1.12
-  log4cplus: update to version 1.2.0
-  libgee: update to the latest stable version (0.18.0)
-  bootchart: update to 1.17
-  concurrencykit: update to version 0.5.1
-  libubox: update to the latest git version for bug fixes
-
-Fabio Berton (12):
-  python-bcrypt: Add recipe for version 2.0.0
-  python-blinker: Add recipe for version 1.4
-  python-flask-bcrypt: Add recipe for version 0.7.1
-  python-flask-bootstrap: Add recipe for version 3.3.5.7
-  python-flask-navigation: Add recipe for version 0.2.0
-  python-flask-sqlalchemy: Add recipe for version 2.1
-  python-flask-wtf: Add recipe for version 0.12
-  python-pam: Add recipe for version 1.8.2
-  python-wtforms: Add recipe for version 2.0.2
-  python-dominate: Add recipe for version 2.2.0
-  python-netaddr: Add recipe for version 0.7.18
-  python-visitor: Add recipe for version 0.1.2
-
-Goran Cengic (1):
-  crash: add cross package
-
-Hongxu Jia (2):
-  gnome-themes: fix icon-name-mapping not found
-  libbonobo.inc: add libbonobo-bin package by lib_package class
-
-Ioan-Adrian Ratiu (2):
-  openconnect: add recipe
-  vpnc: stage vpnc-script
-
-Jacob Stiffler (1):
-  llvm: correct fix for the multilib libdir
-
-Jonathan Liu (2):
-  nodejs: update to 4.4.2
-  nodejs: update to 4.4.3
-
-Karlsson, Johnny (1):
-  Add simple-mtpfs recipe
-
-Koen Kooi (1):
-  mozjs: fix armeb builds
-
-Li xin (2):
-  mozjs_17.0.0.bb: Fix do_srpm error
-  mariadb: Fix rootfs creation errors
-
-Manuel Bachmann (1):
-  wayland-fits: update, get out of PNBLACKLIST
-
-Mark Asselstine (1):
-  mozjs: fix configure host contamination
-
-Nicolas Dechesne (1):
-  openbox: add run time dependency on openbox-theme-clearlooks
-
-Pascal Bach (2):
-  libmodbus: add support for the libmodbus development release
-  gtest, gmock: allow building gtest-native and gmock-native
-
-Ross Burton (7):
-  meta-oe: use bb.utils.contains() instead of base_contains()
-  meta-webserver: use bb.utils.contains() instead of base_contains()
-  meta-xfce: use bb.utils.contains() instead of base_contains()
-  meta-multimedia: use bb.utils.contains() instead of base_contains()
-  meta-efl: use bb.utils.contains() instead of base_contains()
-  meta-gnome: use bb.utils.contains() instead of base_contains()
-  meta-initramfs: use bb.utils.contains() instead of base_contains()
-
-Roy Li (1):
-  krb5: add native and nativesdk extend
-
-Stephano Cetola (1):
-  initramfs-{debug,kexecboot}-image: zero out the rootfs_extra_space in
-    initramfs images
-
-Zhixiong Chi (1):
-  krb5-CVE-2016-3119.patch
-
- meta-efl/recipes-efl/e17/e-wm.inc                  |   4 +-
- meta-efl/recipes-efl/efl/entrance_svn.bb           |   2 +-
- .../simple-mtpfs/simple-mtpfs_git.bb               |  13 ++
- meta-gnome/recipes-gnome/bonobo/libbonobo.inc      |   3 +-
- .../gnome-keyring/gnome-keyring_2.32.1.bb          |   4 +-
- .../gnome-session/gnome-session_2.32.1.bb          |   2 +-
- .../gnome-settings-daemon_2.32.1.bb                |   2 +-
- .../recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb    |   2 +-
- .../recipes-gnome/themes/gnome-themes_2.32.1.bb    |   5 +-
- .../recipes-bsp/images/initramfs-debug-image.bb    |   1 +
- .../images/initramfs-kexecboot-image.bb            |   2 +
- .../recipes-devtools/dracut/dracut_git.bb          |   2 +-
- .../recipes-connectivity/gupnp/gssdp.inc           |   2 +-
- .../recipes-mediacentre/xbmc/xbmc_git.bb           |   6 +-
- .../fluidsynth/fluidsynth_1.1.6.bb                 |   2 +-
- .../recipes-multimedia/libao/libao_1.2.0.bb        |   2 +-
- .../recipes-multimedia/mpg123/mpg123_1.22.4.bb     |  18 +-
- .../recipes-multimedia/musicpd/mpd_0.19.10.bb      |   2 +-
- .../openal/openal-soft_1.15.1.bb                   |   4 +-
- .../recipes-multimedia/sox/sox_14.4.0.bb           |   4 +-
- .../openconnect/openconnect_git.bb                 |  18 ++
- .../recipes-connectivity/vpnc/vpnc_0.5.3.bb        |   7 +
- .../recipes-support/c-ares/c-ares_1.11.0.bb        |  13 ++
- meta-oe/licenses/ManishSingh                       |  19 ++
- meta-oe/licenses/flite                             |  32 ++++
- .../libhugetlbfs/libhugetlbfs_git.bb               |   2 +-
- .../recipes-benchmark/lmbench/lmbench_3.0-a9.bb    |   2 +-
- .../recipes-connectivity/gnokii/gnokii_0.6.31.bb   |   2 +-
- .../krb5/krb5/krb5-CVE-2016-3119.patch             |  36 ++++
- meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb   |  17 +-
- .../recipes-connectivity/libmtp/libmtp_1.1.5.bb    |   2 +-
- meta-oe/recipes-connectivity/umip/umip_1.0.bb      |   2 +-
- .../recipes-connectivity/zabbix/zabbix_2.4.7.bb    |   2 +-
- .../libxml++_ptest.patch                           |   0
- .../libxml/{libxml++-2.37.1 => libxml++}/run-ptest |   0
- .../{libxml++_2.37.1.bb => libxml++_2.38.1.bb}     |   4 +-
- meta-oe/recipes-core/llvm/llvm.inc                 |   4 +-
- .../packagegroups/packagegroup-basic.bb            |  10 +-
- .../packagegroups/packagegroup-boot.bb             |   2 +-
- .../recipes-devtools/bootchart/bootchart_git.bb    |   6 +-
- .../concurrencykit/concurrencykit/cross.patch      |  16 +-
- .../concurrencykit/concurrencykit_git.bb           |   6 +-
- .../libgee/{libgee_0.16.1.bb => libgee_0.18.0.bb}  |   4 +-
- meta-oe/recipes-devtools/libubox/libubox_git.bb    |   2 +-
- .../{log4cplus_1.1.1.bb => log4cplus_1.2.0.bb}     |   6 +-
- meta-oe/recipes-devtools/ltrace/ltrace_git.bb      |   2 +-
- .../nodejs/{nodejs_4.4.1.bb => nodejs_4.4.3.bb}    |   6 +-
- ...bio-pty-perl_1.10.bb => libio-pty-perl_1.12.bb} |   6 +-
- .../recipes-extended/corosync/corosync_2.3.5.bb    |   2 +-
- meta-oe/recipes-extended/dlm/dlm_4.0.2.bb          |   2 +-
- .../konkretcmpi/konkretcmpi-native_0.9.2.bb        |   2 +-
- meta-oe/recipes-extended/lcdproc/lcdproc_0.5.6.bb  |   2 +-
- meta-oe/recipes-extended/libmodbus/libmodbus.inc   |  13 ++
- .../recipes-extended/libmodbus/libmodbus_3.0.6.bb  |  14 +-
- .../recipes-extended/libmodbus/libmodbus_3.1.2.bb  |   7 +
- ...0001-add-support-for-big-endian-32bit-ARM.patch |  26 +++
- meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb     |  15 +-
- .../openlmi/openlmi-providers_0.6.0.bb             |   2 +-
- .../recipes-extended/openwsman/openwsman_2.6.2.bb  |   4 +-
- meta-oe/recipes-extended/polkit/polkit_0.113.bb    |   6 +-
- meta-oe/recipes-extended/rarpd/rarpd_ss981107.bb   |   4 +-
- meta-oe/recipes-extended/rsyslog/rsyslog_7.6.1.bb  |   6 +-
- .../sblim-sfcb/sblim-sfcb_1.4.9.bb                 |   6 +-
- .../smartmontools/smartmontools_6.4.bb             |   4 +-
- meta-oe/recipes-graphics/fbida/fbida_2.10.bb       |  14 +-
- meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb       |   2 +-
- meta-oe/recipes-graphics/lxdm/lxdm_0.5.3.bb        |  18 +-
- meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb  |   2 +-
- meta-oe/recipes-graphics/slim/slim_1.3.2.bb        |   4 +-
- .../terminus-font/terminus-font_4.38.bb            |   8 +-
- .../recipes-graphics/wayland/wayland-fits_git.bb   |   5 +-
- .../xserver-nodm-init/xserver-nodm-init_2.0.bb     |   2 +-
- meta-oe/recipes-kernel/crash/crash_7.1.3.bb        |  23 ++-
- meta-oe/recipes-kernel/ktap/ktap.inc               |   4 +-
- meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb |   2 +-
- .../recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb |   2 +-
- meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb       |   4 +-
- meta-oe/recipes-support/emacs/emacs.inc            |   4 +-
- meta-oe/recipes-support/espeak/espeak_1.37.bb      |   2 +-
- meta-oe/recipes-support/fftw/fftwf_3.3.4.bb        |   2 +-
- meta-oe/recipes-support/gradm/gradm_3.1.bb         |   4 +-
- meta-oe/recipes-support/hwdata/hwdata_0.288.bb     |  21 ++
- .../libcanberra/libcanberra_0.30.bb                |   6 +-
- meta-oe/recipes-support/libee/libee.inc            |   2 +-
- .../libmicrohttpd/libmicrohttpd_0.9.34.bb          |   2 +-
- .../libtinyxml2/libtinyxml2_3.0.0.bb               |  15 ++
- .../recipes-support/libtinyxml2/libtinyxml2_git.bb |  37 ----
- .../recipes-support/lm_sensors/lmsensors_3.4.0.bb  |   2 +-
- meta-oe/recipes-support/lvm2/lvm2.inc              |   4 +-
- meta-oe/recipes-support/mysql/mariadb.inc          |   5 +-
- meta-oe/recipes-support/ne10/ne10_1.2.1.bb         |   4 +-
- meta-oe/recipes-support/openct/openct_0.6.20.bb    |   4 +-
- meta-oe/recipes-support/openwbem/openwbem_3.2.3.bb |   4 +-
- .../fix-qt4e-library-dependencies.patch            |  28 ---
- .../{poppler_0.37.0.bb => poppler_0.41.0.bb}       |   4 +-
- meta-oe/recipes-support/postgresql/postgresql.inc  |   2 +-
- .../rsnapshot/configure-fix-cmd_rsync.patch        |   2 +-
- meta-oe/recipes-support/syslog-ng/syslog-ng.inc    |   6 +-
- meta-oe/recipes-support/udisks/udisks2_2.1.5.bb    |   4 +-
- meta-oe/recipes-support/udisks/udisks_1.0.5.bb     |   2 +-
- meta-oe/recipes-support/vim/vim_7.4.769.bb         |   4 +-
- meta-oe/recipes-test/gmock/gmock_1.7.0.bb          |   2 +-
- meta-oe/recipes-test/gtest/gtest_1.7.0.bb          |   2 +-
- .../{adduser_3.113+nmu3.bb => adduser_3.114.bb}    |   8 +-
- ...y-perl_0.30.bb => libcapture-tiny-perl_0.36.bb} |   4 +-
- ...1.bb => libclass-method-modifiers-perl_2.12.bb} |   4 +-
- ....04.bb => libcrypt-openssl-random-perl_0.11.bb} |   6 +-
- ...bcurses-perl_1.32.bb => libcurses-perl_1.34.bb} |   6 +-
- ...ite-perl_1.40.bb => libdbd-sqlite-perl_1.50.bb} |   4 +-
- .../{libdbi-perl_1.628.bb => libdbi-perl_1.634.bb} |   6 +-
- ...bencode-perl_2.76.bb => libencode-perl_2.83.bb} |   6 +-
- ...l_0.007.bb => libextutils-config-perl_0.008.bb} |   6 +-
- ...0.bb => libextutils-installpaths-perl_0.011.bb} |   6 +-
- ...er-perl_3.71.bb => libhtml-parser-perl_3.72.bb} |   6 +-
- .../recipes-devtools/python/python-bcrypt_2.0.0.bb |  15 ++
- .../recipes-devtools/python/python-blinker_1.4.bb  |   8 +
- .../recipes-devtools/python/python-cython.inc      |   4 +-
- ...thon-cython_0.23.4.bb => python-cython_0.24.bb} |   0
- .../recipes-devtools/python/python-dateutil.inc    |   4 +-
- ...-dateutil_2.5.1.bb => python-dateutil_2.5.2.bb} |   0
- .../recipes-devtools/python/python-decorator.inc   |   4 +-
- ...ecorator_4.0.2.bb => python-decorator_4.0.9.bb} |   0
- .../python/python-dominate_2.2.0.bb                |  10 +
- .../python/python-flask-bcrypt_0.7.1.bb            |  12 ++
- .../python/python-flask-bootstrap_3.3.5.7.bb       |  10 +
- .../python/python-flask-navigation_0.2.0.bb        |  12 ++
- .../python/python-flask-sqlalchemy_2.1.bb          |  12 ++
- .../import-simplejson-as-json.patch                |  28 +++
- .../python/python-flask-wtf_0.12.bb                |  17 ++
- .../python/python-netaddr_0.7.18.bb                |   8 +
- .../recipes-devtools/python/python-pam_1.8.2.bb    |  12 ++
- .../python/python-visitor_0.1.2.bb                 |   8 +
- .../recipes-devtools/python/python-whoosh.inc      |   4 +-
- ...thon-whoosh_2.7.3.bb => python-whoosh_2.7.4.bb} |   0
- .../python/python-wtforms_2.0.2.bb                 |  13 ++
- ...on3-cython_0.23.4.bb => python3-cython_0.24.bb} |   0
- ...dateutil_2.5.1.bb => python3-dateutil_2.5.2.bb} |   0
- ...corator_4.0.2.bb => python3-decorator_4.0.9.bb} |   0
- ...on3-whoosh_2.7.3.bb => python3-whoosh_2.7.4.bb} |   0
- ...yparted_3.10.5.bb => python-pyparted_3.10.7.bb} |   4 +-
- ...2-native_2.4.18.bb => apache2-native_2.4.20.bb} |   4 +-
- .../{apache2_2.4.18.bb => apache2_2.4.20.bb}       |   8 +-
- .../recipes-httpd/cherokee/cherokee_1.2.98.bb      |   4 +-
- .../recipes-httpd/hiawatha/hiawatha_9.2.bb         |   2 +-
- .../recipes-httpd/monkey/monkey_1.5.6.bb           |   2 +-
- .../nginx/nginx-1.9.14/nginx-cross.patch           | 211 +++++++++++++++++++++
- meta-webserver/recipes-httpd/nginx/nginx.inc       |   2 +-
- .../nginx/{nginx_1.9.12.bb => nginx_1.9.14.bb}     |   4 +-
- .../recipes-httpd/nostromo/nostromo_1.9.5.bb       |   2 +-
- meta-webserver/recipes-support/fcgi/fcgi_2.4.0.bb  |   2 +-
- ...ugin_0.8.6.bb => xfce4-weather-plugin_0.8.7.bb} |   4 +-
- ..._1.5.2.bb => xfce4-whiskermenu-plugin_1.5.3.bb} |   4 +-
- .../xfce4-power-manager_1.4.4.bb                   |   4 +-
- .../xfce4-settings/xfce4-settings_git.bb           |   8 +-
- 154 files changed, 861 insertions(+), 336 deletions(-)
- create mode 100644 meta-filesystems/recipes-filesystems/simple-mtpfs/simple-mtpfs_git.bb
- create mode 100644 meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
- create mode 100644 meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
- create mode 100644 meta-oe/licenses/ManishSingh
- create mode 100644 meta-oe/licenses/flite
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/krb5-CVE-2016-3119.patch
- rename meta-oe/recipes-core/libxml/{libxml++-2.37.1 => libxml++}/libxml++_ptest.patch (100%)
- rename meta-oe/recipes-core/libxml/{libxml++-2.37.1 => libxml++}/run-ptest (100%)
- rename meta-oe/recipes-core/libxml/{libxml++_2.37.1.bb => libxml++_2.38.1.bb} (84%)
- rename meta-oe/recipes-devtools/libgee/{libgee_0.16.1.bb => libgee_0.18.0.bb} (83%)
- rename meta-oe/recipes-devtools/log4cplus/{log4cplus_1.1.1.bb => log4cplus_1.2.0.bb} (64%)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_4.4.1.bb => nodejs_4.4.3.bb} (93%)
- rename meta-oe/recipes-devtools/perl/{libio-pty-perl_1.10.bb => libio-pty-perl_1.12.bb} (54%)
- create mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus.inc
- create mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus_3.1.2.bb
- create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0001-add-support-for-big-endian-32bit-ARM.patch
- create mode 100644 meta-oe/recipes-support/hwdata/hwdata_0.288.bb
- create mode 100644 meta-oe/recipes-support/libtinyxml2/libtinyxml2_3.0.0.bb
- delete mode 100644 meta-oe/recipes-support/libtinyxml2/libtinyxml2_git.bb
- delete mode 100644 meta-oe/recipes-support/poppler/poppler-0.35.0/fix-qt4e-library-dependencies.patch
- rename meta-oe/recipes-support/poppler/{poppler_0.37.0.bb => poppler_0.41.0.bb} (93%)
- rename meta-perl/recipes-perl/adduser/{adduser_3.113+nmu3.bb => adduser_3.114.bb} (89%)
- rename meta-perl/recipes-perl/libcapture/{libcapture-tiny-perl_0.30.bb => libcapture-tiny-perl_0.36.bb} (90%)
- rename meta-perl/recipes-perl/libclass/{libclass-method-modifiers-perl_2.11.bb => libclass-method-modifiers-perl_2.12.bb} (84%)
- rename meta-perl/recipes-perl/libcrypt/{libcrypt-openssl-random-perl_0.04.bb => libcrypt-openssl-random-perl_0.11.bb} (56%)
- rename meta-perl/recipes-perl/libcurses/{libcurses-perl_1.32.bb => libcurses-perl_1.34.bb} (78%)
- rename meta-perl/recipes-perl/libdb/{libdbd-sqlite-perl_1.40.bb => libdbd-sqlite-perl_1.50.bb} (88%)
- rename meta-perl/recipes-perl/libdb/{libdbi-perl_1.628.bb => libdbi-perl_1.634.bb} (82%)
- rename meta-perl/recipes-perl/libencode/{libencode-perl_2.76.bb => libencode-perl_2.83.bb} (89%)
- rename meta-perl/recipes-perl/libextutils/{libextutils-config-perl_0.007.bb => libextutils-config-perl_0.008.bb} (73%)
- rename meta-perl/recipes-perl/libextutils/{libextutils-installpaths-perl_0.010.bb => libextutils-installpaths-perl_0.011.bb} (75%)
- rename meta-perl/recipes-perl/libhtml/{libhtml-parser-perl_3.71.bb => libhtml-parser-perl_3.72.bb} (70%)
- create mode 100644 meta-python/recipes-devtools/python/python-bcrypt_2.0.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python-blinker_1.4.bb
- rename meta-python/recipes-devtools/python/{python-cython_0.23.4.bb => python-cython_0.24.bb} (100%)
- rename meta-python/recipes-devtools/python/{python-dateutil_2.5.1.bb => python-dateutil_2.5.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python-decorator_4.0.2.bb => python-decorator_4.0.9.bb} (100%)
- create mode 100644 meta-python/recipes-devtools/python/python-dominate_2.2.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python-flask-bcrypt_0.7.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.5.7.bb
- create mode 100644 meta-python/recipes-devtools/python/python-flask-navigation_0.2.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python-flask-sqlalchemy_2.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python-flask-wtf/import-simplejson-as-json.patch
- create mode 100644 meta-python/recipes-devtools/python/python-flask-wtf_0.12.bb
- create mode 100644 meta-python/recipes-devtools/python/python-netaddr_0.7.18.bb
- create mode 100644 meta-python/recipes-devtools/python/python-pam_1.8.2.bb
- create mode 100644 meta-python/recipes-devtools/python/python-visitor_0.1.2.bb
- rename meta-python/recipes-devtools/python/{python-whoosh_2.7.3.bb => python-whoosh_2.7.4.bb} (100%)
- create mode 100644 meta-python/recipes-devtools/python/python-wtforms_2.0.2.bb
- rename meta-python/recipes-devtools/python/{python3-cython_0.23.4.bb => python3-cython_0.24.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-dateutil_2.5.1.bb => python3-dateutil_2.5.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-decorator_4.0.2.bb => python3-decorator_4.0.9.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-whoosh_2.7.3.bb => python3-whoosh_2.7.4.bb} (100%)
- rename meta-python/recipes-extended/python-pyparted/{python-pyparted_3.10.5.bb => python-pyparted_3.10.7.bb} (91%)
- rename meta-webserver/recipes-httpd/apache2/{apache2-native_2.4.18.bb => apache2-native_2.4.20.bb} (91%)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.18.bb => apache2_2.4.20.bb} (96%)
- create mode 100644 meta-webserver/recipes-httpd/nginx/nginx-1.9.14/nginx-cross.patch
- rename meta-webserver/recipes-httpd/nginx/{nginx_1.9.12.bb => nginx_1.9.14.bb} (66%)
- rename meta-xfce/recipes-panel-plugins/weather/{xfce4-weather-plugin_0.8.6.bb => xfce4-weather-plugin_0.8.7.bb} (72%)
- rename meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_1.5.2.bb => xfce4-whiskermenu-plugin_1.5.3.bb} (63%)
-
+I'd suggest inheriting bluetooth and using the BLUEZ variable which is
+already set to 'bluez5' or 'bluez4' based on the distro features.
+RDEPENDS_${PN} = "${RDEPENDS_${BLUEZ}}" would work, if you defined the
+variables as RDEPENDS_bluez4 and RDEPENDS_bluez5, for example. bitbake can
+handle nested variable references. Anyone else want to weigh in on this?
 -- 
-2.3.5
-
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
