@@ -1,48 +1,48 @@
 Return-Path: <eu@felipetonello.com>
 Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id BF57162137
+	by mail.openembedded.org (Postfix) with ESMTP id C12AA73175
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 May 2016 15:17:03 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id a17so45419818wme.0
+	Tue,  3 May 2016 15:17:04 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id e201so151239210wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 May 2016 08:17:04 -0700 (PDT)
+	Tue, 03 May 2016 08:17:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=felipetonello-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=zXTaG3IQoKlH+QUzofjEDdusIhMXkmsw+byvpJFjZfo=;
-	b=HDK9Hqb37RygSzv+Xda2No209Usi5uw9oWGTcZL0oLL0d41Bs7hstegnCzx4RMDV8n
-	Op1a4gMBSDherQfMRgWgmy0Qap3H9giokESUGoX3pcTmv+f1ZTlNu9B7CfwzD8PGUmpO
-	kgaw+iyAuLGtH2/pytOJvvmJnIwwygKQ+/LM9MUS9+nOXdJFmwqmw90nxS81q82sWe0o
-	riciVbD7/q0Q42gwZrPp4ZR2pnp6J8hC7IqtRVF21C7ZPS5W8zHRr7hm4M85eXm46KdY
-	IRRGXibzpng0S+vc4t9CEjmN5m7wr4BNv09eG80cvizRhG+C9aNMcNK+6NPQKeHAbfv1
-	Yuvg==
+	bh=Oh3D9++y/bq1wo9XobJ3VYvr/zrJmC3H1qKig+cDZV4=;
+	b=MhaD7FmsLNHR45j95WVqGwPQpegZKs3lJemnxpjDiH56IJArPB9H55SZmlVEEiat2R
+	b25iepFtFN6fZ3NgLmXeRfGgFJv3BINzx8M5u7kTabYCsibP9Xz9Jr1iQKTo0QE7BP+O
+	K3qkvuHUU87xbMHX0kF8uHV4DRfBrK4EpAt4LUDSndbkZDtlGJUW2VRLWwgtjGftDMnH
+	IknmVK0twOpe0y8UgeVnROZ3sttCbbOFWtj4sL5Wh5f4OrKss2eWPdwYZewfCTlFKfIM
+	MZm+rnZtJl6sSYw+2eMWV68fM41QKVkU1DFK3UObmnZqlV+Gk1cRVCZcBVRQCB/GtVZu
+	8uUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=zXTaG3IQoKlH+QUzofjEDdusIhMXkmsw+byvpJFjZfo=;
-	b=EdWRSyFtT01wK/VjRtx8+WL8msDYZ1r2vAGSPu8eCcmlJ6pJh6XiR6K3FqdN9BaDuK
-	dUD3eWfqs/4Z0uOiV98+DKIWRPsR3GgHHIRdUXFU023q36vaZTtPC5pnHmETY8Hr2boH
-	g8mpTfIfPSeekLadVHDPuJTdhxHifSLicYPFxl+SyVVQ8LL8UFQBSY6NZuaHbStOVyrS
-	zHwZL48hPksPup8DWcounOjjDbWl8x+Ecykhkos7q+6z/K45kuVJ0zZr9fjrdcLvdPVq
-	uFOxHIJ8GoQzlcB4gb736wb8ZL8bRIYlrcC1XD5Q20B+Wu4JTXsO9B/PLGyyeDsNUcHh
-	6esQ==
-X-Gm-Message-State: AOPr4FXfdUDlzEhY3Y1e8QRUkScpqY/nhFzbH7xnyDRIRTDg60RhlOdCpu3zYti9EM1a5Q==
-X-Received: by 10.28.157.202 with SMTP id g193mr26884857wme.46.1462288623782; 
-	Tue, 03 May 2016 08:17:03 -0700 (PDT)
+	bh=Oh3D9++y/bq1wo9XobJ3VYvr/zrJmC3H1qKig+cDZV4=;
+	b=eHsU/78HwUZOrO+hIjyRJDddavGFhBDqBF2k4BAj33oTEEHpRGgZcay1xbc22adhIi
+	fEXOu26b2mBOMizaCzV+ASOQ/ytZlZrS7GhQG5nuQat4x+IeBdxkOis1YF19a5+MHuq6
+	uj9wrAcjfEZutvDnRJIX03EXlRMlhgqOTrxgwWKiBJ+k6lCnMeYE4WEAxiq8/nTXEpyh
+	yx8YknD/B/Sd2WA5oawgeo9sWkmo4ruoTOLW0rrUcFTzUhlYw3Cx8Ka2l0pHdVd/FxeC
+	n0gemmSb37LnO0JPF5cFiQlEKaorbd7WzmVflbufV4O6t3Gyp8ABJGJbBW5OvuRmd1/R
+	vlew==
+X-Gm-Message-State: AOPr4FVeHC+VtO+YRY+EwROUCRRYoYBQUZfajM/eX3nqgvCoiI4wzaEVCzD4wCG42Y+EKQ==
+X-Received: by 10.194.216.33 with SMTP id on1mr3526084wjc.120.1462288625012;
+	Tue, 03 May 2016 08:17:05 -0700 (PDT)
 Received: from felipe-arch.localdomain ([81.145.202.106])
-	by smtp.gmail.com with ESMTPSA id w82sm5051183wmw.5.2016.05.03.08.17.02
+	by smtp.gmail.com with ESMTPSA id w82sm5051183wmw.5.2016.05.03.08.17.03
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 03 May 2016 08:17:02 -0700 (PDT)
+	Tue, 03 May 2016 08:17:04 -0700 (PDT)
 From: "Felipe F. Tonello" <eu@felipetonello.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 May 2016 16:20:23 +0100
-Message-Id: <1462288824-15975-2-git-send-email-eu@felipetonello.com>
+Date: Tue,  3 May 2016 16:20:24 +0100
+Message-Id: <1462288824-15975-3-git-send-email-eu@felipetonello.com>
 X-Mailer: git-send-email 2.8.0
 In-Reply-To: <1462288824-15975-1-git-send-email-eu@felipetonello.com>
 References: <1462288824-15975-1-git-send-email-eu@felipetonello.com>
-Subject: [PATCH 1/2] protobuf: add protobuf-c recipe
+Subject: [PATCH 2/2] protobuf: split package to main and compiler packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,51 +57,37 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 03 May 2016 15:17:06 -0000
 
-replaces/obsoletes: commit 0d31f8448412 [Added protobuf-c criu dependency]
-in meta-virtualization
-
-This version of the recipe also adds a separated package for the compiler.
+Protobuf has two main features, a compiler and a library. Run-time
+applications only need the libraries to run.
 
 Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
 ---
- .../recipes-devtools/protobuf/protobuf-c_1.2.1.bb  | 28 ++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf-c_1.2.1.bb
+ meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.2.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.2.1.bb
-new file mode 100644
-index 000000000000..40fb96cf47bb
---- /dev/null
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.2.1.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "Protocol Buffers - structured data serialisation mechanism"
-+DESCRIPTION = "This is protobuf-c, a C implementation of the Google Protocol Buffers data \
-+serialization format. It includes libprotobuf-c, a pure C library that \
-+implements protobuf encoding and decoding, and protoc-c, a code generator that \
-+converts Protocol Buffer .proto files to C descriptor code, based on the \
-+original protoc. protobuf-c formerly included an RPC implementation; that code \
-+has been split out into the protobuf-c-rpc project."
-+HOMEPAGE = "https://github.com/protobuf-c/protobuf-c"
-+SECTION = "console/tools"
-+LICENSE = "BSD-2-Clause"
-+
-+DEPENDS = "protobuf-native protobuf"
-+
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb
+index 049f9d4e8f18..2977c59c4bf1 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb
+@@ -6,7 +6,11 @@ HOMEPAGE = "https://github.com/google/protobuf"
+ SECTION = "console/tools"
+ LICENSE = "BSD-3-Clause"
+ 
 +PACKAGE_BEFORE_PN = "${PN}-compiler"
-+RDEPENDS_${PN}-compiler = "protobuf-compiler"
++
+ DEPENDS = "zlib"
++RDEPENDS_${PN}-compiler = "${PN}"
 +RDEPENDS_${PN}-dev += "${PN}-compiler"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=af6809583bfde9a31595a58bb4a24514"
+ 
+@@ -22,4 +26,6 @@ inherit autotools
+ 
+ S = "${WORKDIR}/git"
+ 
++FILES_${PN}-compiler = "${bindir} ${libdir}/libprotoc${SOLIBS}"
 +
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=235c3195a3968524dc1524b4ebea0c0e"
-+SRC_URI = "https://github.com/protobuf-c/protobuf-c/archive/v${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "b884aeba4283309445a8e3b6e7322dd6"
-+SRC_URI[sha256sum] = "2d708fb3c024b9e6e86df141faff802194f5db90a4b79e6d4aa6bd61dd983dd6"
-+
-+inherit autotools pkgconfig
-+
-+FILES_${PN}-compiler = "${bindir}"
-+
-+BBCLASSEXTEND = "native nativesdk"
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.8.0
 
