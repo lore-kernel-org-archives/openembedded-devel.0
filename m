@@ -1,37 +1,40 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 9064C62135
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-pf0-f170.google.com (mail-pf0-f170.google.com
+	[209.85.192.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 8687D73181
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 May 2016 15:51:03 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id i7so1306885qkd.1
+	Tue,  3 May 2016 16:40:53 +0000 (UTC)
+Received: by mail-pf0-f170.google.com with SMTP id 77so12553512pfv.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 May 2016 08:51:05 -0700 (PDT)
+	Tue, 03 May 2016 09:40:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=l3cuETo05jPUfRab5dleQK2vsF0ct5ONUsB4+TqIyH4=;
-	b=Kdsrit4FqQuzZj4jYIT8mUSQMKol3fkdclR2XTwL/InucRECcLbLY2BOrYbJEC/1xd
-	LjXqRZ1UV57vIRoCob8P24caoa9a6lJ2BGwYJwGvAXldxMD8cEFLdzEkGLzZk6pGRhq2
-	Cc9TZW1M6zdhh0Cs7OV/5S0AvQ60FqMT9JsuYhgrVEutJDVFgzlDikSeUycTw/5VX1Vd
-	zWGA3YnUvHXOVHSQ7M39x4T8xj1MX/uUZz6e7SKADlbqkkm1roedTL4I620ozEq+fjc4
-	j+Qfgc/cXJXFs/GW0thuZtkkP4I+pp4XSlVcwSppBOvSo9kMbmVflzCHXD9dp3/sljK9
-	i8kg==
-X-Gm-Message-State: AOPr4FVLzk50lAviwT4KDN8pIRG+VY2w/KMzr8ofSeNZfJ0XzeH3at4icAG9kXvNB3TAhg==
-X-Received: by 10.55.153.3 with SMTP id b3mr3358103qke.102.1462290664541;
-	Tue, 03 May 2016 08:51:04 -0700 (PDT)
-Received: from lnx-dereks-laptop.star.lab
-	(c-68-34-224-206.hsd1.al.comcast.net. [68.34.224.206])
-	by smtp.gmail.com with ESMTPSA id m2sm1245390qhc.29.2016.05.03.08.51.03
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 03 May 2016 08:51:03 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 May 2016 11:50:29 -0400
-Message-Id: <1462290629-11674-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-gpe][PATCH] fbreader: add cflags fix for fribidi 0.19.7
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=qiv/hkOufnAN9FkyFrJNQ9Cep1KbttvYUaUxTFe3cGk=;
+	b=ivP4CCqqbn9AavKJubsTrwdwv0KhgzNK8baa6UWqaqel/w/v3g8tM0BdaUh7xP3/mq
+	WNvLgBa+nrvWo3pulJ8Xk1eSOub1ueoqvUyMVzyH6ITB3dojzIfluCXE5GZhnPi7gDTh
+	OJcfLkMeNU+2ycEodYCat/RoNhZqmRuX8WTyAk2f6bCCEij6FZkKyPlmqMeGAtFZuR+X
+	EaO3nPaSmY9ZYf9jEgn1ParBW6as9afjDHfJT6iRLFmiL/zvc6O4Ws9jKwr0CERrvk75
+	bTKSIk1x7X4Eg/7AbOoKpHd7cu1ILyNzO4mGvZLSJ0YtH4RDJkQy2GTr+70c7uUxT+JO
+	1Png==
+X-Gm-Message-State: AOPr4FXwIHAO1GydhqbTXzaD41Pip6Un7oFR9Y+g/PE9o32doRh6pwm/S5PhAFTtsn9VcQ==
+X-Received: by 10.98.33.207 with SMTP id o76mr4931462pfj.80.1462293654850;
+	Tue, 03 May 2016 09:40:54 -0700 (PDT)
+Received: from localhost ([187.23.154.250])
+	by smtp.gmail.com with ESMTPSA id 71sm54160pfy.32.2016.05.03.09.40.51
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 03 May 2016 09:40:53 -0700 (PDT)
+Received: by localhost (sSMTP sendmail emulation);
+	Tue, 03 May 2016 13:40:46 -0300
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Tue,  3 May 2016 13:40:46 -0300
+Message-Id: <1462293646-16365-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.8.2
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe master krogoth PATCH] opencv: Ensure opencv-dev package do not rdepends on opencv-java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,47 +47,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 May 2016 15:51:05 -0000
+X-List-Received-Date: Tue, 03 May 2016 16:40:54 -0000
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+The opencv-java is not always generated so we ought to include it,
+only if it is available.
+
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- .../fbreader/fbreader-0.12.10/fix-cflags-fribidi.patch        | 11 +++++++++++
- meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb         |  3 ++-
- 2 files changed, 13 insertions(+), 1 deletion(-)
- create mode 100644 meta-gpe/recipes-support/fbreader/fbreader-0.12.10/fix-cflags-fribidi.patch
 
-diff --git a/meta-gpe/recipes-support/fbreader/fbreader-0.12.10/fix-cflags-fribidi.patch b/meta-gpe/recipes-support/fbreader/fbreader-0.12.10/fix-cflags-fribidi.patch
-new file mode 100644
-index 0000000..e72fa8c
---- /dev/null
-+++ b/meta-gpe/recipes-support/fbreader/fbreader-0.12.10/fix-cflags-fribidi.patch
-@@ -0,0 +1,11 @@
-+--- fbreader-0.12.10/makefiles/config.mk.orig	2016-05-03 11:11:07.259734561 -0400
-++++ fbreader-0.12.10/makefiles/config.mk	2016-05-03 11:11:37.447735786 -0400
-+@@ -38,7 +38,7 @@
-+ 	LDFLAGS += -pg
-+ endif
-+ 
-+-ZINCLUDE = -I $(ROOTDIR)/zlibrary/core/include -I $(ROOTDIR)/zlibrary/text/include
-++ZINCLUDE = $(shell pkg-config --cflags fribidi) -I $(ROOTDIR)/zlibrary/core/include -I $(ROOTDIR)/zlibrary/text/include
-+ 
-+ ZLSHARED ?= yes
-+ 
-diff --git a/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb b/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
-index e9ead0f..1487f11 100644
---- a/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
-+++ b/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
-@@ -9,7 +9,8 @@ PR = "r1"
+ meta-oe/recipes-support/opencv/opencv_3.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+index c1f9802..5a48799 100644
+--- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
++++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+@@ -96,7 +96,7 @@ python populate_packages_prepend () {
+     metapkg_rdepends = [ ]
+     packages = d.getVar('PACKAGES', 1).split()
+     for pkg in packages[1:]:
+-        if not pkg in blacklist and not pkg in metapkg_rdepends and pkg.endswith('-dev'):
++        if not pkg in blacklist and not pkg in metapkg_rdepends and (pkg.endswith('-dev') or pkg.endswith('-java')):
+             metapkg_rdepends.append(pkg)
+     d.setVar('RRECOMMENDS_' + metapkg, ' '.join(metapkg_rdepends))
  
- SRC_URI = "http://www.fbreader.org/fbreader-sources-${PV}.tgz \
- file://Makefile.patch \
--file://gcc45.patch"
-+file://gcc45.patch \
-+file://fix-cflags-fribidi.patch"
- 
- # Set the defaults
- READER_RESOLUTION ?= "1024x600"
 -- 
-1.9.1
+2.8.2
 
 
