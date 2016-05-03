@@ -1,48 +1,37 @@
-Return-Path: <eu@felipetonello.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id C12AA73175
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 9064C62135
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 May 2016 15:17:04 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id e201so151239210wme.0
+	Tue,  3 May 2016 15:51:03 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id i7so1306885qkd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 May 2016 08:17:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=felipetonello-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=Oh3D9++y/bq1wo9XobJ3VYvr/zrJmC3H1qKig+cDZV4=;
-	b=MhaD7FmsLNHR45j95WVqGwPQpegZKs3lJemnxpjDiH56IJArPB9H55SZmlVEEiat2R
-	b25iepFtFN6fZ3NgLmXeRfGgFJv3BINzx8M5u7kTabYCsibP9Xz9Jr1iQKTo0QE7BP+O
-	K3qkvuHUU87xbMHX0kF8uHV4DRfBrK4EpAt4LUDSndbkZDtlGJUW2VRLWwgtjGftDMnH
-	IknmVK0twOpe0y8UgeVnROZ3sttCbbOFWtj4sL5Wh5f4OrKss2eWPdwYZewfCTlFKfIM
-	MZm+rnZtJl6sSYw+2eMWV68fM41QKVkU1DFK3UObmnZqlV+Gk1cRVCZcBVRQCB/GtVZu
-	8uUQ==
+	Tue, 03 May 2016 08:51:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=Oh3D9++y/bq1wo9XobJ3VYvr/zrJmC3H1qKig+cDZV4=;
-	b=eHsU/78HwUZOrO+hIjyRJDddavGFhBDqBF2k4BAj33oTEEHpRGgZcay1xbc22adhIi
-	fEXOu26b2mBOMizaCzV+ASOQ/ytZlZrS7GhQG5nuQat4x+IeBdxkOis1YF19a5+MHuq6
-	uj9wrAcjfEZutvDnRJIX03EXlRMlhgqOTrxgwWKiBJ+k6lCnMeYE4WEAxiq8/nTXEpyh
-	yx8YknD/B/Sd2WA5oawgeo9sWkmo4ruoTOLW0rrUcFTzUhlYw3Cx8Ka2l0pHdVd/FxeC
-	n0gemmSb37LnO0JPF5cFiQlEKaorbd7WzmVflbufV4O6t3Gyp8ABJGJbBW5OvuRmd1/R
-	vlew==
-X-Gm-Message-State: AOPr4FVeHC+VtO+YRY+EwROUCRRYoYBQUZfajM/eX3nqgvCoiI4wzaEVCzD4wCG42Y+EKQ==
-X-Received: by 10.194.216.33 with SMTP id on1mr3526084wjc.120.1462288625012;
-	Tue, 03 May 2016 08:17:05 -0700 (PDT)
-Received: from felipe-arch.localdomain ([81.145.202.106])
-	by smtp.gmail.com with ESMTPSA id w82sm5051183wmw.5.2016.05.03.08.17.03
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=l3cuETo05jPUfRab5dleQK2vsF0ct5ONUsB4+TqIyH4=;
+	b=Kdsrit4FqQuzZj4jYIT8mUSQMKol3fkdclR2XTwL/InucRECcLbLY2BOrYbJEC/1xd
+	LjXqRZ1UV57vIRoCob8P24caoa9a6lJ2BGwYJwGvAXldxMD8cEFLdzEkGLzZk6pGRhq2
+	Cc9TZW1M6zdhh0Cs7OV/5S0AvQ60FqMT9JsuYhgrVEutJDVFgzlDikSeUycTw/5VX1Vd
+	zWGA3YnUvHXOVHSQ7M39x4T8xj1MX/uUZz6e7SKADlbqkkm1roedTL4I620ozEq+fjc4
+	j+Qfgc/cXJXFs/GW0thuZtkkP4I+pp4XSlVcwSppBOvSo9kMbmVflzCHXD9dp3/sljK9
+	i8kg==
+X-Gm-Message-State: AOPr4FVLzk50lAviwT4KDN8pIRG+VY2w/KMzr8ofSeNZfJ0XzeH3at4icAG9kXvNB3TAhg==
+X-Received: by 10.55.153.3 with SMTP id b3mr3358103qke.102.1462290664541;
+	Tue, 03 May 2016 08:51:04 -0700 (PDT)
+Received: from lnx-dereks-laptop.star.lab
+	(c-68-34-224-206.hsd1.al.comcast.net. [68.34.224.206])
+	by smtp.gmail.com with ESMTPSA id m2sm1245390qhc.29.2016.05.03.08.51.03
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 03 May 2016 08:17:04 -0700 (PDT)
-From: "Felipe F. Tonello" <eu@felipetonello.com>
+	Tue, 03 May 2016 08:51:03 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 May 2016 16:20:24 +0100
-Message-Id: <1462288824-15975-3-git-send-email-eu@felipetonello.com>
-X-Mailer: git-send-email 2.8.0
-In-Reply-To: <1462288824-15975-1-git-send-email-eu@felipetonello.com>
-References: <1462288824-15975-1-git-send-email-eu@felipetonello.com>
-Subject: [PATCH 2/2] protobuf: split package to main and compiler packages
+Date: Tue,  3 May 2016 11:50:29 -0400
+Message-Id: <1462290629-11674-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 1.9.1
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-gpe][PATCH] fbreader: add cflags fix for fribidi 0.19.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,40 +44,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 May 2016 15:17:06 -0000
+X-List-Received-Date: Tue, 03 May 2016 15:51:05 -0000
 
-Protobuf has two main features, a compiler and a library. Run-time
-applications only need the libraries to run.
-
-Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+ .../fbreader/fbreader-0.12.10/fix-cflags-fribidi.patch        | 11 +++++++++++
+ meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb         |  3 ++-
+ 2 files changed, 13 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gpe/recipes-support/fbreader/fbreader-0.12.10/fix-cflags-fribidi.patch
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb
-index 049f9d4e8f18..2977c59c4bf1 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb
-@@ -6,7 +6,11 @@ HOMEPAGE = "https://github.com/google/protobuf"
- SECTION = "console/tools"
- LICENSE = "BSD-3-Clause"
+diff --git a/meta-gpe/recipes-support/fbreader/fbreader-0.12.10/fix-cflags-fribidi.patch b/meta-gpe/recipes-support/fbreader/fbreader-0.12.10/fix-cflags-fribidi.patch
+new file mode 100644
+index 0000000..e72fa8c
+--- /dev/null
++++ b/meta-gpe/recipes-support/fbreader/fbreader-0.12.10/fix-cflags-fribidi.patch
+@@ -0,0 +1,11 @@
++--- fbreader-0.12.10/makefiles/config.mk.orig	2016-05-03 11:11:07.259734561 -0400
+++++ fbreader-0.12.10/makefiles/config.mk	2016-05-03 11:11:37.447735786 -0400
++@@ -38,7 +38,7 @@
++ 	LDFLAGS += -pg
++ endif
++ 
++-ZINCLUDE = -I $(ROOTDIR)/zlibrary/core/include -I $(ROOTDIR)/zlibrary/text/include
+++ZINCLUDE = $(shell pkg-config --cflags fribidi) -I $(ROOTDIR)/zlibrary/core/include -I $(ROOTDIR)/zlibrary/text/include
++ 
++ ZLSHARED ?= yes
++ 
+diff --git a/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb b/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
+index e9ead0f..1487f11 100644
+--- a/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
++++ b/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
+@@ -9,7 +9,8 @@ PR = "r1"
  
-+PACKAGE_BEFORE_PN = "${PN}-compiler"
-+
- DEPENDS = "zlib"
-+RDEPENDS_${PN}-compiler = "${PN}"
-+RDEPENDS_${PN}-dev += "${PN}-compiler"
+ SRC_URI = "http://www.fbreader.org/fbreader-sources-${PV}.tgz \
+ file://Makefile.patch \
+-file://gcc45.patch"
++file://gcc45.patch \
++file://fix-cflags-fribidi.patch"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=af6809583bfde9a31595a58bb4a24514"
- 
-@@ -22,4 +26,6 @@ inherit autotools
- 
- S = "${WORKDIR}/git"
- 
-+FILES_${PN}-compiler = "${bindir} ${libdir}/libprotoc${SOLIBS}"
-+
- BBCLASSEXTEND = "native nativesdk"
+ # Set the defaults
+ READER_RESOLUTION ?= "1024x600"
 -- 
-2.8.0
+1.9.1
 
 
