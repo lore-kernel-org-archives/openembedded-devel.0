@@ -1,46 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-lf0-f54.google.com (mail-lf0-f54.google.com
-	[209.85.215.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 861CD73194
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
+	[209.85.161.193])
+	by mail.openembedded.org (Postfix) with ESMTP id C443A6FF84
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 May 2016 07:45:35 +0000 (UTC)
-Received: by mail-lf0-f54.google.com with SMTP id j8so12278383lfd.2
+	Tue,  3 May 2016 12:53:04 +0000 (UTC)
+Received: by mail-yw0-f193.google.com with SMTP id v81so1544106ywa.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 May 2016 00:45:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc; bh=czwdEvKNnVKp+/tFwmOQNDlQcaOPEuzBIrrVhQbFeE0=;
-	b=K4OaFFKl3mECJ0WGE9Wms1S7xC56AdN+cQt4VcBjFHk63iZli3oG2XmWWVjIrGlaXJ
-	6s1LnMxOwOB/d+t9br9J238XAjOcuPf35b7mL9RIEUE/LNJ7siXOaZLsTi/bknOjdYqn
-	/7QQcsma//rG7626NPO0k/MX5o6tYZy0ySTaXJrjs92E2cYA02OaO70ekg8Odsu3XhSS
-	+zMc81oBnFTstb2MWMXbE9MBSs2p0pbZsW2KzIm4X85YcNIsR4C/Ocl+sMoNcNy1Tt9r
-	goS8k4p+E4aTaj0fs1jC8jJjh/x3B2D2pUH3HJqQIkmj/bjM89SyyCpKDZLbytargzAY
-	w4rA==
+	Tue, 03 May 2016 05:53:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc;
-	bh=czwdEvKNnVKp+/tFwmOQNDlQcaOPEuzBIrrVhQbFeE0=;
-	b=O6LDrhFEN2CE+zZ2ydqOjDjXxveNGdaDfG3+OsgbkhPn/TuNqv9V1rx2tyfwCmw6l4
-	WgQvCL3EBguthOs2DYfxNrINS7GezQ94r0X4khjEIB3Vx0mmLIdsBERxfxeU9rfNG8Cu
-	1PwwL6468+D971MOPRUSLEvdVwOEgzH8CuXiJ0vBtiFpSdW4Y30IB9SqXcWrNUzm3F4B
-	GE088QNSOfq7jrFjYUT66s0yIYDQMQdWrvmnJDQJ4WV+fqy0SU9dtu38nSH4Ead9lskI
-	0KlVzsvkokVPZjTv8gRuGMi52ap1XstLyQ+rnVWO8ViEc5gg25qE8o3F3GwyG+7JlGFH
-	EOsg==
-X-Gm-Message-State: AOPr4FUC3QyIyok+YxQm/7f8WiSRyyTt6iUMF+t+jowvsXSacsRCC2AKsWd1vThFHmOch2hp4LlcIdsAFak+kw==
-MIME-Version: 1.0
-X-Received: by 10.25.23.155 with SMTP id 27mr450979lfx.3.1462261535408; Tue,
-	03 May 2016 00:45:35 -0700 (PDT)
-Received: by 10.112.180.229 with HTTP; Tue, 3 May 2016 00:45:35 -0700 (PDT)
-In-Reply-To: <1461943248-919-1-git-send-email-derek@asterius.io>
-References: <1461943248-919-1-git-send-email-derek@asterius.io>
-Date: Tue, 3 May 2016 09:45:35 +0200
-Message-ID: <CA+chaQcWWw9nDbbKiqP7Nx9TUDNEOH-akQ=YQQTx0McCNJ52Aw@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=RukTCeVL4meFn/h8dxaD8OJW4X035ueFT4vDiWQjn8o=;
+	b=kaoR+hhc7orXDLSlt4DD9by6lsos1Xa+FLfu1JXiTVF4P5qkQwPsKg7E9eoCgtXNS4
+	r/kBjnPXDOozWwMXPZ5Abgltcncww00v9y8SbM5Ar/pe9qy2DRI6YGV9HNrm7kqaxQ7k
+	/3jFgW6mAzrLDET6I42jADPflr4DIBH0Jm/gY0V9eCx4a59ZS6Qi1b/FQJF1Jhx1wUU+
+	JYGvDMjyVi7yciXfb92izqIfvGdxc8FQyxfg4y57yy0ecB+lFf9qGALLE+7tVej3emws
+	6jsZKHhWzgotKAnXWriWEp0tsGEolAwOTIATk/bvyNfgKUYKcLSHaFrTWBoNp4mpT6uY
+	U40g==
+X-Gm-Message-State: AOPr4FVYASgPKSYpPgW9fv+gFkvp+xe56RM/XrVAVEY3E4meV9cjIKHXXuIyySTLX/44Zg==
+X-Received: by 10.37.13.196 with SMTP id 187mr924848ybn.163.1462279984758;
+	Tue, 03 May 2016 05:53:04 -0700 (PDT)
+Received: from lnx-dereks-laptop.star.lab
+	(c-68-34-224-206.hsd1.al.comcast.net. [68.34.224.206])
+	by smtp.gmail.com with ESMTPSA id
+	n126sm1624332ywd.50.2016.05.03.05.53.04
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 03 May 2016 05:53:04 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  3 May 2016 08:51:37 -0400
+Message-Id: <1462279897-7364-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 1.9.1
 Cc: Derek Straka <derek@asterius.io>
-Subject: Re: [meta-oe][PATCHv2] fribidi: update to version 0.19.7
+Subject: [meta-oe][PATCH] leptonica: update to version 1.73
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,86 +45,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 May 2016 07:45:35 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 03 May 2016 12:53:05 -0000
 
-fbreader is still failing with this:
-http://errors.yoctoproject.org/Errors/Details/61472/
+updated to be compatible with giflib 5.1.x
 
-And it will probably need a fix in fbreader:
-https://bugs.gentoo.org/show_bug.cgi?id=417043
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../leptonica/{leptonica_1.70.bb => leptonica_1.73.bb}                | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/leptonica/{leptonica_1.70.bb => leptonica_1.73.bb} (76%)
 
-On Fri, Apr 29, 2016 at 5:20 PM, Derek Straka <derek@asterius.io> wrote:
+diff --git a/meta-oe/recipes-graphics/leptonica/leptonica_1.70.bb b/meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb
+similarity index 76%
+rename from meta-oe/recipes-graphics/leptonica/leptonica_1.70.bb
+rename to meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb
+index e826e05..57bc5dd 100644
+--- a/meta-oe/recipes-graphics/leptonica/leptonica_1.70.bb
++++ b/meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb
+@@ -4,8 +4,8 @@ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://leptonica-license.txt;md5=20cdd3af097ca431b82004c691f406a6"
+ 
+ SRC_URI = "http://leptonica.com/source/leptonica-${PV}.tar.gz"
+-SRC_URI[md5sum] = "5ac2a31cf5b4f0e8f5a853a5266c42ef"
+-SRC_URI[sha256sum] = "d3d209a1f6d1f7a80119486b5011bc8c6627e582c927ab44ba33c37edb2cfba2"
++SRC_URI[md5sum] = "092cea2e568cada79fff178820397922"
++SRC_URI[sha256sum] = "19e4335c674e7b78af9338d5382cc5266f34a62d4ce533d860af48eaa859afc1"
+ 
+ EXTRA_OECONF += " \
+     --without-libwebp \
+-- 
+1.9.1
 
->  * license copyright entities were updated
->
-> Signed-off-by: Derek Straka <derek@asterius.io>
-> ---
->  meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb | 17
-> -----------------
->  meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb | 17
-> +++++++++++++++++
->  2 files changed, 17 insertions(+), 17 deletions(-)
->  delete mode 100644 meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb
->  create mode 100644 meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb
->
-> diff --git a/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb
-> b/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb
-> deleted file mode 100644
-> index cb4bc24..0000000
-> --- a/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.2.bb
-> +++ /dev/null
-> @@ -1,17 +0,0 @@
-> -SUMMARY = "Fribidi library for bidirectional text"
-> -SECTION = "libs"
-> -PR = "r1"
-> -LICENSE = "LGPLv2.1"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
-> -BBCLASSEXTEND = "native"
-> -
-> -PROVIDES = "libfribidi"
-> -
-> -inherit autotools lib_package pkgconfig
-> -
-> -CFLAGS_append = "  -DPAGE_SIZE=4096 "
-> -
-> -SRC_URI = "http://fribidi.org/download/fribidi-${PV}.tar.gz"
-> -
-> -SRC_URI[md5sum] = "626db17d2d99b43615ad9d12500f568a"
-> -SRC_URI[sha256sum] =
-> "49cf91586e48b52fe25872ff66c1da0dff0daac2593f9f300e2af12f44f64177"
-> diff --git a/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb
-> b/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb
-> new file mode 100644
-> index 0000000..f8e7aa0
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb
-> @@ -0,0 +1,17 @@
-> +SUMMARY = "Fribidi library for bidirectional text"
-> +SECTION = "libs"
-> +LICENSE = "LGPLv2.1"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
-> +BBCLASSEXTEND = "native"
-> +
-> +PROVIDES = "libfribidi"
-> +DEPENDS = "glib-2.0 libpcre"
-> +
-> +inherit autotools lib_package pkgconfig
-> +
-> +CFLAGS_append = "  -DPAGE_SIZE=4096 "
-> +
-> +SRC_URI = "http://fribidi.org/download/fribidi-${PV}.tar.bz2"
-> +
-> +SRC_URI[md5sum] = "6c7e7cfdd39c908f7ac619351c1c5c23"
-> +SRC_URI[sha256sum] =
-> "08222a6212bbc2276a2d55c3bf370109ae4a35b689acbc66571ad2a670595a8e"
-> --
-> 1.9.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
