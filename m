@@ -1,24 +1,46 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9957B605FF
+Return-Path: <paul.betafive@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 5186B70179
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 May 2016 05:51:02 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u445p2Vx026273
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Wed,  4 May 2016 07:23:10 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id e201so8640094wme.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 3 May 2016 22:51:02 -0700
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Tue, 3 May 2016 22:51:01 -0700
-From: Chen Qi <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 4 May 2016 13:43:19 +0800
-Message-ID: <1462340599-26232-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 2.8.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] rrdtool: fix do_configure failure on some hosts
+	Wed, 04 May 2016 00:23:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=7TEbsAADMg3JZlP3dIxkd8bo25NYvZP6qfyoNuXjZjs=;
+	b=HJ0pOqOqexf40NNN6TJNidZ8PjkRnMyTbpd0JpPgno8QTGyLPiwPZl98GdbaM7Xlr3
+	Sib8uuMM4eck1cG8UNcu4P45HeT3Ve6I5kp4L3E/6QasO8xpJQ7fXusUyAlHXG7dAeFB
+	WT5Vzw1mld9gGXqOmA/7BaT+OcKfXcR7TNLnlp4+B0GPm+sdzye9V/T+zZcLjCkmkWbW
+	TTBzoW3lh4q5FsgGyf3xEtZ++EEksquHfLt/l7b0TQ902tGbrujaaTrSCIcQMZ+AXhSG
+	UdpHbZU6Yy85a/tKDEK7Ag0So4RgN1jJz4v03rtEUVhsmyNF0ZEvn7kxtzVig3Ub9HLN
+	cWkg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=7TEbsAADMg3JZlP3dIxkd8bo25NYvZP6qfyoNuXjZjs=;
+	b=O5oS/j2DouhJD9/1nvEMFKeiAYzGwkNAmGV2oSoTQIfN8u9P1rN4iP8368AQy+sM3O
+	+W//3gBasNAKbHBXiTzRHhgtSAKpXEXKenA0bOR+YH3OatVUEEipmuODWJWjnbu2xSU7
+	qFfSPXZoBS9Zw2uizdWAIXeWwjouoTku7yI3AOWEvfI3KCbPQzo5yMxuNgCzIVuV7s48
+	yuOAYBQ2KXYT4nOSJmIcCffAlL3b9A1g04fnEoDPZy1y9mFSH/xGfMreGLGuYVkkWcyw
+	3NcF6WGODy8Ruqvfs8BhkX6/pfScnUM/LH+6X7dgjEHXp8lmRhnTgR1qV47k7wKspzcQ
+	N7vw==
+X-Gm-Message-State: AOPr4FVwGIb6LA10vxuOpjY5AC4hUyb95PI9qRvwfbIYnxsYZ7uDCkBMebrM9b50IjhvVw==
+X-Received: by 10.194.165.226 with SMTP id zb2mr7446761wjb.172.1462346591331; 
+	Wed, 04 May 2016 00:23:11 -0700 (PDT)
+Received: from dev-jessie.betafive.co.uk
+	(cpc11-shep11-2-0-cust130.8-3.cable.virginm.net. [86.27.96.131])
+	by smtp.gmail.com with ESMTPSA id
+	k133sm3279641wmg.7.2016.05.04.00.23.09
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 04 May 2016 00:23:10 -0700 (PDT)
+Sender: Paul Barker <paul.betafive@gmail.com>
+From: Paul Barker <paul@paulbarker.me.uk>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  4 May 2016 08:23:30 +0100
+Message-Id: <1462346612-13017-1-git-send-email-paul@paulbarker.me.uk>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCH 0/2] Upgrade toybox to 0.7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,38 +53,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 May 2016 05:51:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 04 May 2016 07:23:12 -0000
 
-On some hosts, when building rrdtool, we would meet do_configure error like
-below.
+This is a fresh attempt to upgrade toybox to 0.7.0. I noticed the previously
+sent patch after I already had this working.
 
-| *** Module name IN: /usr/lib64/perl/5.22.0/POSIX.pm
-| *** p1: /usr/lib64/  p3: perl/5.22.0/  p5: POSIX.pm
-| *** Module name OUT: /path/to/builddir/tmp/sysroots/x86_64-linux/usr/lib/perl-native/perl/5.22.1/POSIX.pm
-| POSIX object version 1.53_01 does not match $POSIX::VERSION 1.53 at /usr/lib64/perl/5.22.0/XSLoader.pm line 108.
+I've tested this on qemux86 and can login correctly, the hostname is correct and
+I can run a few of the toybox tools.
 
-Set PERLHOSTLIB to "" to fix the above error.
+Paul Barker (2):
+  toybox: Remove out-of-date patch
+  toybox: Upgrade to 0.7.0
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../toybox/toybox/0001-Fix-segfault-in-login.patch |  33 ++
+ .../toybox/0001-Match-paths-with-busybox.patch     | 388 ---------------------
+ .../0002-Add-b-and-F-arguments-to-hostname.patch   |  84 +++++
+ .../toybox/{toybox_0.6.0.bb => toybox_0.7.0.bb}    |  12 +-
+ 4 files changed, 125 insertions(+), 392 deletions(-)
+ create mode 100644 meta-oe/recipes-core/toybox/toybox/0001-Fix-segfault-in-login.patch
+ delete mode 100644 meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch
+ create mode 100644 meta-oe/recipes-core/toybox/toybox/0002-Add-b-and-F-arguments-to-hostname.patch
+ rename meta-oe/recipes-core/toybox/{toybox_0.6.0.bb => toybox_0.7.0.bb} (84%)
 
-diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
-index 8999dbe..82924f0 100644
---- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
-+++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
-@@ -57,6 +57,8 @@ export STAGING_INCDIR
- 
- # emulate cpan_do_configure
- EXTRA_OEMAKE = ' PERL5LIB="${PERL_ARCHLIB}" '
-+# Avoid do_configure error on some hosts
-+export PERLHOSTLIB = ""
- 
- do_configure() {
-     #fix the pkglib problem with newer automake
 -- 
-2.8.1
-
+2.1.4
 
