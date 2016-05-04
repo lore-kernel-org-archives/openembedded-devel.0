@@ -1,26 +1,24 @@
-Return-Path: <Yue.Tao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 651C96E6B1
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9957B605FF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 May 2016 03:32:34 +0000 (UTC)
+	Wed,  4 May 2016 05:51:02 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u443WYXr018172
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u445p2Vx026273
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 3 May 2016 20:32:35 -0700 (PDT)
-Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
-	Tue, 3 May 2016 20:32:33 -0700
-From: Yue Tao <Yue.Tao@windriver.com>
+	Tue, 3 May 2016 22:51:02 -0700
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Tue, 3 May 2016 22:51:01 -0700
+From: Chen Qi <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 4 May 2016 11:32:22 +0800
-Message-ID: <1462332742-168809-1-git-send-email-Yue.Tao@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Wed, 4 May 2016 13:43:19 +0800
+Message-ID: <1462340599-26232-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-X-Originating-IP: [128.224.153.75]
-Cc: yue.tao@windriver.com
-Subject: [meta-networking][PATCH] net-snmp: enable ipv6 support
+Subject: [meta-oe][PATCH] rrdtool: fix do_configure failure on some hosts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,34 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 May 2016 03:32:36 -0000
+X-List-Received-Date: Wed, 04 May 2016 05:51:04 -0000
 Content-Type: text/plain
 
-From: Zhu Yanjun <yanjun.zhu@windriver.com>
+On some hosts, when building rrdtool, we would meet do_configure error like
+below.
 
-Add packageconfig for ipv6 and enable it when it's defined in distro_features.
+| *** Module name IN: /usr/lib64/perl/5.22.0/POSIX.pm
+| *** p1: /usr/lib64/  p3: perl/5.22.0/  p5: POSIX.pm
+| *** Module name OUT: /path/to/builddir/tmp/sysroots/x86_64-linux/usr/lib/perl-native/perl/5.22.1/POSIX.pm
+| POSIX object version 1.53_01 does not match $POSIX::VERSION 1.53 at /usr/lib64/perl/5.22.0/XSLoader.pm line 108.
 
-Signed-off-by: Zhu Yanjun <yanjun.zhu@windriver.com>
-Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
+Set PERLHOSTLIB to "" to fix the above error.
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-index 1a50932..e4d7b17 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-@@ -39,6 +39,9 @@ PACKAGECONFIG ??= ""
- PACKAGECONFIG[elfutils] = "--with-elf, --without-elf, elfutils"
- PACKAGECONFIG[libnl] = "--with-nl, --without-nl, libnl"
+diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
+index 8999dbe..82924f0 100644
+--- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
++++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
+@@ -57,6 +57,8 @@ export STAGING_INCDIR
  
-+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)}"
-+PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,,"
-+
- EXTRA_OECONF = "--disable-embedded-perl \
-                 --with-perl-modules=no \
-                 --disable-manuals \
+ # emulate cpan_do_configure
+ EXTRA_OEMAKE = ' PERL5LIB="${PERL_ARCHLIB}" '
++# Avoid do_configure error on some hosts
++export PERLHOSTLIB = ""
+ 
+ do_configure() {
+     #fix the pkglib problem with newer automake
 -- 
-1.9.1
+2.8.1
 
 
