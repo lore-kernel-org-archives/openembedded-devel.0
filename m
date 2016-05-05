@@ -1,63 +1,53 @@
-Return-Path: <neenareddy.busireddy@nxp.com>
-Received: from emea01-am1-obe.outbound.protection.outlook.com
-	(mail-am1on0094.outbound.protection.outlook.com [157.56.112.94])
-	by mail.openembedded.org (Postfix) with ESMTP id 5883670018
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 379F8731F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 May 2016 19:13:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
-	s=selector1-nxp-com;
-	h=From:To:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=TC5lQG5AwpdN94OHeUo05FNyYZ8AT8CvHE1L2GWd7JY=;
-	b=qEgkBkwHqk0zvivDm1ultPrFU/j9MU2EVCbindjkSFSeGeMqVHeVis5806hoQPWTF8Etg0fYJ9HBgO/XMwUjyHbrbsNmF3kKydS4Sjqs6p7LZHCEYmjpzr/vac4JGEFx7rnO2aUGEt/IkLtB4JFND7gaKVzxD+oDDhZC7/CwLB4=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
-	header.d=none; lists.openembedded.org;
-	dmarc=none action=none header.from=nxp.com;
-Received: from change-01.am.freescale.net (192.88.168.50) by
-	VI1PR04MB1583.eurprd04.prod.outlook.com (10.164.84.141) with Microsoft
-	SMTP Server (TLS) id 15.1.485.9; Thu, 5 May 2016 19:13:56 +0000
-From: Neena Busireddy <neenareddy.busireddy@nxp.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 5 May 2016 14:12:06 -0500
-Message-ID: <1462475526-12554-1-git-send-email-neenareddy.busireddy@nxp.com>
-X-Mailer: git-send-email 1.9.1
+	Thu,  5 May 2016 19:18:28 +0000 (UTC)
+Received: by mail-wm0-f49.google.com with SMTP id g17so43560022wme.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 May 2016 12:18:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=QWGYF7ZlYC4hhyFglHUyEV5mWNnwIxBoiVp2avXwWBI=;
+	b=xQo2eWXmwpiHf21ZL1AFNTU0YOmPoKr1bIR3ytybpL2/3u4/QQyhHiexD7K7232KhR
+	AlXMmnTW/N5wH5x7JXLGGtLSqTmuoxnD772Zd3DdSKG8l/5dawZlhvt1RSfu/vOr+s3k
+	n3iBWpSjWHyAjZFSPkxj2kMEkl/sj4D7cNQ4uuMMKRzhv+BUKbd7qdo/M/eOfrpjjgOz
+	7X9v5APrEIgVhxWX+0KXXgcSqoUr733FpfVeJPRzv0fTNwnTTOq6/Kj7nNeJs0M0b9F7
+	TnqfyKVyqyeMxom/Hlo6EZ5XrW1hBzJEkyRrRP4/YSx7OOVQKkZ23pSxEkUUXpkL6/LA
+	p1+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=QWGYF7ZlYC4hhyFglHUyEV5mWNnwIxBoiVp2avXwWBI=;
+	b=dcy/wFwaVm8ESqXtdWiUxKKc5gNrQAtZoGjp4sINb51igAGJrMIWyQ1FCjYX7ZTjK4
+	AfQScu4wdCZylHxqSGU8RYMCs7+S4F3uXDIz89MfXiZ9jtWnU4vTFVwo3fi60B0bPxWc
+	yH7ROu0SA0ieYR7ta9dUM5PKqR5/PlmZNYInmVH6W1PkVixOnSLLBCb/l7NivsjYeSmL
+	IS4r8MRMxD0d7xiiZ5Qu8PYxp2k1Amt4//OaVT3h+VCAyPxY00+2os+Qc1Fw57BDvs1F
+	2J5GbSwPmWXsyB29/i2Gjq6Rtmk50IqH5N3XsQO436VbpyRsFuQy4f4HkkecnYL/emIC
+	OpyA==
+X-Gm-Message-State: AOPr4FWU5lmd0Be8EDQ0Kd1hfoARW4jgTz37g6/pIPThB566O06WmuQa1FTiO/6HaiJD2Q==
+X-Received: by 10.28.157.202 with SMTP id g193mr5507465wme.46.1462475908721;
+	Thu, 05 May 2016 12:18:28 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	f11sm4612566wmf.22.2016.05.05.12.18.27
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 05 May 2016 12:18:27 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 5 May 2016 21:19:51 +0200
+To: Derek Straka <derek@asterius.io>
+Message-ID: <20160505191951.GD23370@jama>
+References: <1461947081-15513-1-git-send-email-derek@asterius.io>
+	<CA+chaQf7vGXOz61725sEOAG4EBKGmS=KxYq3ZPZS7WfjAPYeXw@mail.gmail.com>
+	<CADNbA1rCRsrU=H8nKKJ0J7Ek-V=HD1fnDW4t8jT4=_3SZgXP0w@mail.gmail.com>
 MIME-Version: 1.0
-X-Originating-IP: [192.88.168.50]
-X-ClientProxiedBy: BLUPR11CA0014.namprd11.prod.outlook.com (10.141.240.24) To
-	VI1PR04MB1583.eurprd04.prod.outlook.com (10.164.84.141)
-X-MS-Office365-Filtering-Correlation-Id: 67f08f78-83c8-4e4c-58f9-08d37519681b
-X-Microsoft-Exchange-Diagnostics: 1; VI1PR04MB1583;
-	2:yt+JRBi9L6aGKfw/drYJ2P4rw4PHnBBgNr+PiAw6w5d43Gi8MtuBlOvCNM6MUBLsOfxJbHYNmsgj8ApgfFrd27KU7Gq5S7K/Sd4AnI5/oqnKQGrAuwaeqt5sgfTq/u1xQjt6RcycDQl04JAaS7lOYcn6nM2Tnyv1eRzshqu535jdkyl+7BKyO2Q1vmuhDds+;
-	3:XNNLrsACx1GzDAgqKnTHucHs6Y3I7ovo6xXMlXXvI9sie+w+DhCqSIr53fwpf/kHGdetr17uQCglTyQMUlYYkeFZfzqiJzk4yyokbUPY3WVu5UC18V571TeGFfx2Vdlt
-X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:VI1PR04MB1583;
-X-Microsoft-Exchange-Diagnostics: 1; VI1PR04MB1583;
-	25:BszTICPJQ71C+3hV1uwa6zjBJGshfPcGJXLfaS1g5PYK+Em1f/cPApeawn7LJyUiqELynlbPlQaJOZAY1GXt1+nDsesdK9rzmLL3SNyG9mvwtW13I2lmGjGhgTNU2YtilsT1cGs8z1Ab6GPic7So+EKebXyqaoht6ICV3fOGdoeNo6m+oUEGMFkPs0G1uoab0VTIOKPyd7oS0oAuC58ImRMP6T67uQSHxbg9PUQF/e9WAPOeO+wv9KbUoHme/q9mzm88VBFs5jil+IQtjq3SHmSSSgdPfp0Ua4GiiYUXdd3zpyiXBnAD9tZDTLDXW3Y4aP1Gq1MUp2+a+l2YyW2asCZFS0UP2P9j7b3VDAgpq0oGfoHvovpPxCW2BuLjFf+JyJYvhbLhNiVd+C+ODTgfy9VNVGeVQmMtzVnvr2GguT/AbC5DjCfX6LlUey74P7bSMC9CITg68TCmL1dcSldO72aV1B9+uDS8Pcb2qlJlgfwUFDxMbTOiqoDmAsBrNoGoQ8TIxe0GsYwnSXThpdMebyZhjKSitmBcQGmFhopTJqzCCiXEqB0IChzE0NiAkVJI42RBGxIs9Yf0tAVycvbH2gab64vbA2j+c+BBQqN9Bw54VSgJg98fbj9I+dre4KKbKfzGHbGRmAukUQuDXyuMwCJBOSJv0Mk7LMIsoWaIashqtP/m0Gr4WMnzLUdKq9bN8/v3Xi/LxFGArzIyy1H3OoCLVIkKbK+As/GYAfo2jVHZjOte/5c6RK5lArD9fUv6FQgLvVxCC4/NWgY9F95VPouDd46K89UdJELDfNKgRXWgbjs6fnbtWCZaMaGykqrziyZ2x9EQV4qmfve4gVPulg==
-X-Microsoft-Exchange-Diagnostics: 1; VI1PR04MB1583;
-	20:E+U3ljzbH6xH3HQHuQAxoeCC8O/q53ZBlwmcQ+sqjYuiOGcZA4o4USS+ag/tXM3T8IQdIt/jbw4WR7d+cP9XShqQGOVUgulsJsLRM2ZCoebvtrPR54hN273hbzBnWznl26uYT6fglcJOeLcgl8ALxxC3BUKTTYxOrcvQDdF1Hs7rAXkhjir/CLWEbVg5k/ZiBMkOl8Er96pZvPd4AUNcvlV+rQh4C6nuGbVESYjkVtXE9DDYurLTzCY2x+G0cqTkR/d+wYfL7hQWjPn4bysvCuFwAuljZloFSYV5rstmcOfgFml41UMVX80H2BEFY1PZrYUa+gykfPVjiJVbyNMsipIWqZrLmBZY4Lno/2Tns52V7Nfl0alPHEr/Lmz9Ie0p4bHW61tKyohlgVHEHbYhAGRcBlHHVSJ/uhbu3w4EU6WrFQuodMTaVWYLf4YI8i/Hbva37HeCz6b3WsYEWnvH6Dj1c9eLdLPlBeS3+V9SNTOGw/LZ3gl90vkND5j+OyHM;
-	4:E3jOWBE5ifGIuzGJadP1gheNQx0tyu36Txc/viTdHvnKoA6+Y2JjBFc0jJNfXF4v3HNyt5F9nJQyaIl+ZtLlx790hzmZI57do+cUsyOptGnICQsAiuCCqoEmPnkL8KxX+kn/ykI3SQnURxxkRUSSb9/Kg/vSx25IQ9Mms7YHnz8feXlCheVuN3T/+VIiZ71qQuUpfo9UOsJmRKU/7i5cBpT8jPB3V5pK+aOE4C4xlhtbC9emH59S11CdRLMYBfcgscStjHPt85uleAQYLnadK1IjHKvvgZcGuUZKOmiYMw69InwBdnYPtRqSvhhcYJEZnYvWqtMEpw64DsRTzADdZeN6ahvc/XZlXZn+nlS+cVQUiq/hE9s0wjbF+rdMvXSFyqfak9Qr8aPJ7/2hatkRW7vBHltVfa+QAc3ulSNg7LI=
-X-Microsoft-Antispam-PRVS: <VI1PR04MB1583DFE7AE054ADF01605BDB917C0@VI1PR04MB1583.eurprd04.prod.outlook.com>
-X-Exchange-Antispam-Report-Test: UriScan:;
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(9101521098)(601004)(2401047)(5005006)(8121501046)(3002001)(10201501046)(6055026);
-	SRVR:VI1PR04MB1583; BCL:0; PCL:0; RULEID:; SRVR:VI1PR04MB1583; 
-X-Forefront-PRVS: 0933E9FD8D
-X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10009020)(4630300001)(6009001)(3846002)(86362001)(6116002)(5004730100002)(81166005)(2906002)(92566002)(189998001)(586003)(4326007)(450100001)(77096005)(110136002)(19580405001)(5008740100001)(15395725005)(50226002)(19580395003)(50986999)(42186005)(5003940100001)(36756003)(15975445007)(33646002)(48376002)(2351001)(50466002)(47776003)(66066001)(8558605004)(229853001)(19623455009);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR04MB1583;
-	H:change-01.am.freescale.net; FPR:; SPF:None; MLV:nov;
-	PTR:InfoNoRecords; LANG:en; 
-X-Microsoft-Exchange-Diagnostics: 1; VI1PR04MB1583;
-	23:eB6OZs/9spfgfZoL52h06ZmimJiX+3LNaOJa7wavs8CcNAXaDKFi1qXBLWL0Tu01/2XrLmFrzHw7bi7huaNAOMpLcpIz/vRfam2n0N7dg7qpirthdr4XoJw9wpfO4K3eiSagZYXmT9mRcDl0uVDRpaai/BO3/tZrMmalJaOvv4fgzzOcO/241xhbkZ6L8mDePtBjI9pXHa4LCVsLGUpJ8PqP6MWXKl+yy8DpZH9hm3/Zm+oC/mIKcwbC8Egx5Xye/17pV60UjiVWrZLPRjFZZT83RrTglVjc73ilJCBIzxYhZsykAKDSYnGYWdMnUsn2phOYHsi/G/AyNfavudL3gbUg5dXmq3cTcOLycb/3cJ0TZcvftsjm7aA6VTkUAUJipW/I4wAIrQ3vqruW3ke132A8+RflSBzFdgA5OEAM+4sov/w4mfBD6bIWESz0kxdtNqe8la7OCnXzetDBoQ4+QFBkNbhtEVYf2tNVtUImZZRR2YNARPcstsf5OvLDmynAiMb6GterulEodNc/amz2yGAy/NdQyTSuZXyS5LBE5CCz9dhdcCYWIc2/y/yhtR4zdUOLPY7QEnFDlHJCSH0O6iJUS/fTh83kQiQifjtz/SMV2VG5LlrkGMsZvn6UbLg5lj3BnSXRK+cY3FdTkYVkuP2B/ax0sft4qu2L9y9CDA40/rUHPg4f5S8ei2Eo6BUBZDs4DqGB+cmL4g4CYXVhUlqWb8sURD3F2vqUxZsgYgwnL0COt2U+sWK26uJ9EI3uIWLt/sNn2QEWEv1IUB8NcIbprvjoR/9fxhnwuLEK+1XIKNEkfO3VmyZdd0/xMCwWqMXMKRs7AK8UB4Ug5M17xJM1TQldByFM1USNlg6UcG1PWTOMIfrHlvAsn1hMI8fYrrGSo1HQw0nJNmABeUoGbO7Fy4hbnp6uVfmHSv82S7lyrUFpUhuyGgnFMGfqbWoq
-X-Microsoft-Exchange-Diagnostics: 1; VI1PR04MB1583;
-	5:s9jcnCieY3v+cQWlUyyeeJPV5q40vdAzfrEaEpoiGHwCsQ7OUgHFpPzROpf3QIoJNKxTG7pynNkDIle344Sl6QRFLY/iXvGWldzeyBQYFPsXNaNSv+LQceGqoQFxza8NL+5pwOLpU7imUT7WEtK5Rw==;
-	24:emK//Y/+34rbG6mw+krEz5TBjo4AAIsbDGqERNfMPQt+/K+sdcoNUL8zSOCVODk97hNw1a+C7foXQtmtqGU+WW0/7oNE1xRWUm/QXni3xNM=;
-	7:NgPiCCo4gGG+HF3Sc+kIefWvf595pv3hP/qVKS/IOWKgOWs2r6cgDt3XcIt9k+SJIvnWap2/wi5jDYdRAlxgBu5eEAzhd5vn9Bzq/A1KlcMgqTnlrCTXb2I17oaGrK0vRW609ehu3g2nCuWOjeb8z69c671tbwYyesxp83LFF1CAaD6bLPsO7hauM3132Tja
-SpamDiagnosticOutput: 1:23
-SpamDiagnosticMetadata: NSPM
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 May 2016 19:13:56.4845 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB1583
-Subject: [meta-oe][PATCH] assimp: Add recipe for Open Asset Import Library
+In-Reply-To: <CADNbA1rCRsrU=H8nKKJ0J7Ek-V=HD1fnDW4t8jT4=_3SZgXP0w@mail.gmail.com>
+User-Agent: Mutt/1.6.1 (2016-04-27)
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCHv2] giflib: update to version 5.1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,43 +60,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 May 2016 19:14:00 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 05 May 2016 19:18:29 -0000
+X-Groupsio-MsgNum: 61348
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="jCrbxBqMcLqd4mOl"
+Content-Disposition: inline
 
-Open Asset Import Library (short name: Assimp) is a portable Open Source library
-to import various well-known 3D model formats in a uniform manner.
+--jCrbxBqMcLqd4mOl
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
----
- meta-oe/recipes-graphics/assimp/assimp_3.1.1.bb | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/assimp/assimp_3.1.1.bb
+On Tue, May 03, 2016 at 08:54:21AM -0400, Derek Straka wrote:
+> Yes.  I'll submit a patch for leptonica -> 1.73 to be compatible with
+> giflib 5.1.x
 
-diff --git a/meta-oe/recipes-graphics/assimp/assimp_3.1.1.bb b/meta-oe/recipes-graphics/assimp/assimp_3.1.1.bb
-new file mode 100644
-index 0000000..d28418d
---- /dev/null
-+++ b/meta-oe/recipes-graphics/assimp/assimp_3.1.1.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "Open Asset Import Library is a portable Open Source library to import \
-+               various well-known 3D model formats in a uniform manner."
-+HOMEPAGE = "http://www.assimp.org/"
-+SECTION = "devel"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD;md5=3775480a712fc46a69647678acb234cb"
-+
-+DEPENDS = "boost"
-+
-+SRC_URI = "http://sourceforge.net/projects/assimp/files/assimp-3.1/assimp-3.1.1_no_test_models.zip"
-+SRC_URI[md5sum] = "ccd4788204509da58a3a53c7aeda7a8b"
-+SRC_URI[sha256sum] = "da9827876f10a8b447270368753392cfd502e70a2e9d1361554e5dfcb1fede9e"
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+inherit cmake
-+
-+FILES_${PN}-dev += "${libdir}/cmake/assimp-3.1/*.cmake"
--- 
-1.9.1
+That unblocked another issue:
 
+| ../../../tracker-0.14.2/src/tracker-extract/tracker-extract-gif.c: In
+function 'tracker_extract_get_metadata':
+|
+=2E./../../tracker-0.14.2/src/tracker-extract/tracker-extract-gif.c:620:17:
+error: too few arguments to function 'DGifOpenFileHandle'
+|   if ((gifFile =3D DGifOpenFileHandle (fd)) =3D=3D NULL) {
+|                  ^
 
+Whole log:
+http://errors.yoctoproject.org/Errors/Details/61673/
+
+Can you please take a look at it?
+
+Breaking giflib API is not fun :/ even when done with good intentions:
+http://esr.ibiblio.org/?p=3D5754
+
+> On Tue, May 3, 2016 at 3:38 AM, Martin Jansa <martin.jansa@gmail.com> wro=
+te:
+>=20
+> > Can you check leptonica, seems to be broken by this upgrade:
+> >
+> > http://errors.yoctoproject.org/Errors/Details/61476/
+> >
+> > On Fri, Apr 29, 2016 at 6:24 PM, Derek Straka <derek@asterius.io> wrote:
+> >
+> >>   - Remove EXTRA_OECONF to disable X11 support since direct X11 window
+> >> rendering has been retired
+> >> Signed-off-by: Derek Straka <derek@asterius.io>
+> >> ---
+> >>  .../recipes-devtools/giflib/{giflib_4.1.6.bb =3D> giflib_5.1.4.bb}   =
+| 7
+> >> ++-----
+> >>  1 file changed, 2 insertions(+), 5 deletions(-)
+> >>  rename meta-oe/recipes-devtools/giflib/{giflib_4.1.6.bb =3D>
+> >> giflib_5.1.4.bb} (67%)
+> >>
+> >> diff --git a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+> >> b/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
+> >> similarity index 67%
+> >> rename from meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+> >> rename to meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
+> >> index e59d0e5..21fa352 100644
+> >> --- a/meta-oe/recipes-devtools/giflib/giflib_4.1.6.bb
+> >> +++ b/meta-oe/recipes-devtools/giflib/giflib_5.1.4.bb
+> >> @@ -2,14 +2,11 @@ SUMMARY =3D "shared library for GIF images"
+> >>  SECTION =3D "libs"
+> >>  LICENSE =3D "MIT"
+> >>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dae11c61b04b2917be39b11f78d=
+71519a"
+> >> -PR =3D "r3"
+> >>
+> >>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/giflib/${BP}.tar.bz2"
+> >>
+> >>  inherit autotools
+> >>
+> >> -EXTRA_OECONF =3D "--disable-x11"
+> >> -
+> >>  PACKAGES +=3D "${PN}-utils"
+> >>  FILES_${PN} =3D "${libdir}/libgif.so.*"
+> >>  FILES_${PN}-utils =3D "${bindir}"
+> >> @@ -18,5 +15,5 @@ BBCLASSEXTEND =3D "native"
+> >>
+> >>  RDEPENDS_${PN}-utils =3D "perl"
+> >>
+> >> -SRC_URI[md5sum] =3D "7125644155ae6ad33dbc9fc15a14735f"
+> >> -SRC_URI[sha256sum] =3D
+> >> "e1c1ced9c5bc8f93ef0faf0a8c7717abf784d10a7b270d2285e8e1f3b93f2bed"
+> >> +SRC_URI[md5sum] =3D "2c171ced93c0e83bb09e6ccad8e3ba2b"
+> >> +SRC_URI[sha256sum] =3D
+> >> "df27ec3ff24671f80b29e6ab1c4971059c14ac3db95406884fc26574631ba8d5"
+> >> --
+> >> 1.9.1
+> >>
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>
+> >
+> >
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--jCrbxBqMcLqd4mOl
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAlcrnNYACgkQN1Ujt2V2gByHSQCcDYoHv5Zg1U7sBXC5aYPnA+hO
+Hr4AmgK2DoTTXKIO9fBaiH4yKnRQawn+
+=5gOp
+-----END PGP SIGNATURE-----
+
+--jCrbxBqMcLqd4mOl--
