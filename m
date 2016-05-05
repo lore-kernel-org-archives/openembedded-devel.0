@@ -1,48 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 942D7731CF
+Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 017DB731A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 May 2016 15:01:44 +0000 (UTC)
-Received: by mail-wm0-f43.google.com with SMTP id n129so24135708wmn.1
+	Thu,  5 May 2016 15:01:42 +0000 (UTC)
+Received: by mail-wm0-f51.google.com with SMTP id g17so32477276wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 May 2016 08:01:45 -0700 (PDT)
+	Thu, 05 May 2016 08:01:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Dh+ArHRx3b0MzToIX3uiKOURrAZKL5NLKxaKW2WVgD0=;
-	b=Mg95kH5z+QwD5y1gsOWlsYWetAXVGYqJ1LCwekSjMkPafRiV2TfXGp7hACHdBA4y7F
-	8a2ls2jYZnxegX1i6aHBjJ4s0ohSxMvar7sH1bGJfajI0Xjqik7ERStEIb027c5nB86f
-	LM5AApRVzJMMZh33PCVD/GwX8/5hBI0XpZxSErWeC5Dcz+THyA8VIw8LVWy5jBMSQK6+
-	81g0W8OEZL57F+SwObEUAt50VYWKRjW6kKxW0HRpSgfcyGlBO1wOKgZGrjecJolwWvPQ
-	4Eg8Hn9PLqJt7Of8DPgQDmV2EgStJXHTJOPnLSbj8skxkOKu3IrZzh8GfKxQaPdYgOI7
-	W+vA==
+	bh=QJAumuXQerwwHGSbxg5kIWBKgB8iKRC/olqZa7rROdQ=;
+	b=XCY2PhsRYca0smTxoT8dblRZSP02YvvAvdT/yoK9sRrlsUMw/do0gosqQYzhhkEU/k
+	nxWj7jL+lX2G7wR51gEEGthF1apOJoJtxjoZVZKkrlKW5ubdW/teMkQq58xfSx36f6Lj
+	QzhFaJB6SCe/nOmAUAg2TjGzvB9mMeVtycCfx2w+P5mvhJ+xoBHYJZVpDvS4OMn81TDK
+	Xve4GZnQRTykVkX6k8qv0bm/zSwigwShD66xcDeejkz+x8+O2msfXda/VCvjDOe5w9jH
+	E+UPEGDDC9UR97shVMTnB2EeFPeCqJGqm8r77AOLHhIAQXjUwwRtj+UURud8jdCpapz9
+	JDaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=Dh+ArHRx3b0MzToIX3uiKOURrAZKL5NLKxaKW2WVgD0=;
-	b=eJZmd9WcxYrez2q54gPJfNwGlAarOwSHIJa2AHsQCvBiwk0pEl/x52S2z8W3wvgjmw
-	CRiv5NDub16fk8VNTv20pI82CudpgziQavRzlkOYeadBzEravIsuOKnb4g9RUV7i67V/
-	n/w2blsApq6ZyZKMqo7BHEFhCswgtJDNYaVlfbLwW19+7OyZWiMkOKv37/kqLqD3HezG
-	nNSA+SKflmcBdWgXrwaXVu9kdPVuLXh4fYfFPTXlFVDQEDrzebeqkyjCeLHIk2mvJyyN
-	SF0yd3s0xDgx0wh90Tu8WNdT5Iu5elzfeuCv6vyA2Hz93Xs1QZVaM+igN58uiZvV0x+T
-	Wt6Q==
-X-Gm-Message-State: AOPr4FX1JTEeiNl9BDPQvQKxgfl/54Vgp9UNAv9R7dc1ICdAJsutVox+affiNhXG6CV2EQ==
-X-Received: by 10.194.203.105 with SMTP id kp9mr15068389wjc.70.1462460504502; 
-	Thu, 05 May 2016 08:01:44 -0700 (PDT)
+	bh=QJAumuXQerwwHGSbxg5kIWBKgB8iKRC/olqZa7rROdQ=;
+	b=llu551hWCNoIANiOKKUoAPjROWU8u3Ix7bb7jt+2gO2koYeld/GbYcZsUi/bXDv021
+	Eb2SLtt8mFvS3/LuihRxSYnHIz+CM5PaG/H1TCNLx+y+njZdgnMm4c5zvgWWm8EVwi74
+	IEafUEA8I8bqpU4Hb7phm0oDxYJAwqMh+9aSpOuj/zfkxJxddXVJMFgz6XveXCmaDtvK
+	yQMShejH7kPE5p1+ylovGVkV0zMVU1YfJ/qaqRqzbQA5fvDQaFpeqMFEzrWrTVEB4Oyt
+	OVNi/Ldif8xoBgoqLE0icUFfjnoeBIjhdFQ1Ys9rNNAcppKi8foqIy/OsP41trYdnOcI
+	tNGQ==
+X-Gm-Message-State: AOPr4FWy2ngrZ/2BbNjY7sqV1w4BRtM/CgijHGdA8P4hFg0Xew512+pFop/heRk7tCEDlQ==
+X-Received: by 10.28.10.7 with SMTP id 7mr3782086wmk.43.1462460502842;
+	Thu, 05 May 2016 08:01:42 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	he10sm1531897wjc.21.2016.05.05.08.01.43
+	f188sm3642096wma.2.2016.05.05.08.01.41
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 05 May 2016 08:01:43 -0700 (PDT)
+	Thu, 05 May 2016 08:01:41 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 May 2016 17:03:00 +0200
-Message-Id: <1462460580-12774-4-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu,  5 May 2016 17:02:59 +0200
+Message-Id: <1462460580-12774-3-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.8.2
 In-Reply-To: <1462460580-12774-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1462460580-12774-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-oe 4/4] poppler: add --std=c++11 to fix build with Qt 5.7
+Subject: [PATCH][meta-oe 3/4] pidgin: use pkg-config instead of hardcoded paths or python-config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,80 +57,93 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 05 May 2016 15:01:45 -0000
 
+* also fix following QA warning:
+WARNING: pidgin-2.10.12-r0 do_package: QA Issue: pidgin: Files/directories were installed but not shipped in any package:
+  /usr/share/appdata
+  /usr/share/appdata/pidgin.appdata.xml
+Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+pidgin: 2 installed and not shipped files. [installed-vs-shipped]
+
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...h-C-11-compilers-that-don-t-define-isinfi.patch | 39 ++++++++++++++++++++++
- meta-oe/recipes-support/poppler/poppler_0.41.0.bb  |  4 +++
- 2 files changed, 43 insertions(+)
- create mode 100644 meta-oe/recipes-support/poppler/poppler/0001-Compile-with-C-11-compilers-that-don-t-define-isinfi.patch
+ .../pidgin/pidgin/pidgin-cross-python-265.patch    | 51 ++++++++++++----------
+ meta-oe/recipes-support/pidgin/pidgin_2.10.12.bb   |  2 +-
+ 2 files changed, 30 insertions(+), 23 deletions(-)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler/0001-Compile-with-C-11-compilers-that-don-t-define-isinfi.patch b/meta-oe/recipes-support/poppler/poppler/0001-Compile-with-C-11-compilers-that-don-t-define-isinfi.patch
-new file mode 100644
-index 0000000..d5c34a6
---- /dev/null
-+++ b/meta-oe/recipes-support/poppler/poppler/0001-Compile-with-C-11-compilers-that-don-t-define-isinfi.patch
-@@ -0,0 +1,39 @@
-+From a8e3399487258e53df0fd4a79c570c8d71188bed Mon Sep 17 00:00:00 2001
-+From: Takahiro Hashimoto <kenya888.en@gmail.com>
-+Date: Wed, 27 Apr 2016 00:16:52 +0200
-+Subject: [PATCH] Compile with C++11 compilers that don't define isinfinite
-+
-+Bug #94761
-+---
-+ poppler/SplashOutputDev.cc | 8 ++++++++
-+ 1 file changed, 8 insertions(+)
-+
-+diff --git a/poppler/SplashOutputDev.cc b/poppler/SplashOutputDev.cc
-+index 13d090c..0e50702 100644
-+--- a/poppler/SplashOutputDev.cc
-++++ b/poppler/SplashOutputDev.cc
-+@@ -36,6 +36,7 @@
-+ // Copyright (C) 2014 Richard PALO <richard@netbsd.org>
-+ // Copyright (C) 2015 Tamas Szekeres <szekerest@gmail.com>
-+ // Copyright (C) 2015 Kenji Uno <ku@digitaldolphins.jp>
-++// Copyright (C) 2016 Takahiro Hashimoto <kenya888.en@gmail.com>
-+ //
-+ // To see a description of the changes please see the Changelog file that
-+ // came with your tarball or type make ChangeLog if you are building from git
-+@@ -94,6 +95,13 @@ extern "C" int unlink(char *filename);
-+ #endif
-+ #endif
-+ 
-++#if __cplusplus > 199711L
-++#include <cmath>
-++#ifndef isfinite
-++#define isfinite(x) std::isfinite(x)
-++#endif
-++#endif
-++
-+ static inline void convertGfxColor(SplashColorPtr dest,
-+                                    SplashColorMode colorMode,
-+                                    GfxColorSpace *colorSpace,
-+-- 
-+2.8.2
-+
-diff --git a/meta-oe/recipes-support/poppler/poppler_0.41.0.bb b/meta-oe/recipes-support/poppler/poppler_0.41.0.bb
-index 4320408..f7cc076 100644
---- a/meta-oe/recipes-support/poppler/poppler_0.41.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_0.41.0.bb
-@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- SRC_URI = " \
-     http://poppler.freedesktop.org/${BP}.tar.xz \
-     file://0001-add-manadatory-options-to-find-qt4-qt5-moc.patch \
-+    file://0001-Compile-with-C-11-compilers-that-don-t-define-isinfi.patch \
- "
- SRC_URI[md5sum] = "849a8bd6af5794efb961b70418414e5a"
- SRC_URI[sha256sum] = "420abaab63caed9e1ee28964a0ba216d1979506726164bc99ad5ade289192a1b"
-@@ -22,6 +23,9 @@ PACKAGECONFIG[openjpeg] = "--enable-libopenjpeg=openjpeg2,--disable-libopenjpeg,
- PACKAGECONFIG[qt5] = "--enable-poppler-qt5 --with-moc-qt5=${STAGING_BINDIR_NATIVE}/qt5/moc,--disable-poppler-qt5,qtbase"
- PACKAGECONFIG[qt4e] = "--enable-poppler-qt4 --with-moc-qt4=${STAGING_BINDIR_NATIVE}/moc4,--disable-poppler-qt4,qt4-embedded"
+diff --git a/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch b/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch
+index cfc681c..72bf4ed 100644
+--- a/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch
++++ b/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch
+@@ -1,27 +1,34 @@
+-From 428836ba7f9048970626ef0d6b805107f7c52d33 Mon Sep 17 00:00:00 2001
+-From: Herrie <github.com@herrie.org>
+-Date: Thu, 5 May 2016 13:33:29 +0200
+-Subject: [PATCH] Updated python patch
++Use pkg-config instead of ${PYTHON}-config to find python
  
-+# Needed for qt5
-+CXXFLAGS += "--std=c++11"
-+
- EXTRA_OECONF = "\
-     --enable-xpdf-headers \
-     --disable-gtk-test \
+----
+- configure.ac | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 94ea8cf..2285adb 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -1587,9 +1587,9 @@ dnl (Thanks to XChat)
++diff -uNr pidgin-2.10.12.orig/configure.ac pidgin-2.10.12/configure.ac
++--- pidgin-2.10.12.orig/configure.ac	2016-01-01 00:19:40.000000000 +0100
+++++ pidgin-2.10.12/configure.ac	2016-05-05 16:55:13.258945925 +0200
++@@ -1585,20 +1585,15 @@
++ dnl Check for Python headers (currently useful only for libgnt)
++ dnl (Thanks to XChat)
+  if test "x$enable_consoleui" = "xyes" -a ! -z "$PYTHON" -a x"$PYTHON" != x"no" ; then
+- 	AC_MSG_CHECKING(for Python compile flags)
+- 	if test -f ${PYTHON}-config; then
++-	AC_MSG_CHECKING(for Python compile flags)
++-	if test -f ${PYTHON}-config; then
+ -		PY_CFLAGS=`${PYTHON}-config --includes`
+ -		PY_LIBS=`${PYTHON}-config --libs`
+ -		AC_DEFINE(USE_PYTHON, [1], [Define if python headers are available.])
+-+		m4_pattern_allow([^PKG_CONFIG_SYSROOT_DIR$])
+-+		PY_LIBS="-L$PKG_CONFIG_SYSROOT_DIR/usr/lib/python$PY_VERSION/config -lpython$PY_VERSION"
+-+		PY_CFLAGS="-I$PKG_CONFIG_SYSROOT_DIR/usr/include/python$PY_VERSION"		AC_DEFINE(USE_PYTHON, [1], [Define if python headers are available.])
+- 		AC_MSG_RESULT(ok)
+- 	else
+- 		AC_MSG_RESULT([Cannot find ${PYTHON}-config])
+-
++-		AC_MSG_RESULT(ok)
++-	else
++-		AC_MSG_RESULT([Cannot find ${PYTHON}-config])
++-		PY_CFLAGS=""
++-		PY_LIBS=""
++-	fi
+++        AC_MSG_CHECKING(for Python compile flags)
+++        PKG_CHECK_MODULES(PY, python, [
+++                AC_SUBST(PY_CFLAGS)
+++                AC_SUBST(PY_LIBS)
+++        ], [
+++                AC_MSG_RESULT(no)
+++                AC_MSG_ERROR([Can't find python])
+++        ])
++ fi
++-AC_SUBST(PY_CFLAGS)
++-AC_SUBST(PY_LIBS)
++ 
++ dnl #######################################################################
++ dnl # Check for Mono support
+diff --git a/meta-oe/recipes-support/pidgin/pidgin_2.10.12.bb b/meta-oe/recipes-support/pidgin/pidgin_2.10.12.bb
+index ac0871f..cd46140 100644
+--- a/meta-oe/recipes-support/pidgin/pidgin_2.10.12.bb
++++ b/meta-oe/recipes-support/pidgin/pidgin_2.10.12.bb
+@@ -83,7 +83,7 @@ FILES_${PN} = "${bindir} ${datadir}/${PN} ${libdir}/${PN}/*.so \
+            ${datadir}/applications"
+ RRECOMMENDS_${PN} = "${PN}-data libpurple-plugin-ssl-gnutls libpurple-protocol-irc libpurple-protocol-xmpp"
+ 
+-FILES_${PN}-data = "${datadir}/pixmaps ${datadir}/sounds ${datadir}/icons"
++FILES_${PN}-data = "${datadir}/pixmaps ${datadir}/sounds ${datadir}/icons ${datadir}/appdata"
+ FILES_${PN}-dev += "${libdir}/${PN}/*.la"
+ 
+ PACKAGES_DYNAMIC += "^libpurple-protocol-.* ^libpurple-plugin-.* ^pidgin-plugin-.* ^finch-plugin-.*"
 -- 
 2.8.2
 
