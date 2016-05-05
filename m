@@ -1,17 +1,15 @@
 Return-Path: <ml@embed.me.uk>
-X-Greylist: delayed 908 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 05 May 2016 12:01:46 UTC
 Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 0121C60232
+	by mail.openembedded.org (Postfix) with ESMTP id 81AA46612C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 May 2016 12:01:46 +0000 (UTC)
+	Thu,  5 May 2016 12:14:52 +0000 (UTC)
 From: ml@embed.me.uk
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 May 2016 13:01:59 +0100
-Message-Id: <1462449719-2382-1-git-send-email-ml@embed.me.uk>
+Date: Thu,  5 May 2016 12:46:50 +0100
+Message-Id: <1462448810-1761-1-git-send-email-ml@embed.me.uk>
 X-Mailer: git-send-email 2.8.2
 Cc: Jack Mitchell <jack@embed.me.uk>
-Subject: [meta-oe][PATCH v2] libsoc: update to 0.8.1
+Subject: [meta-oe][PATCH] libsoc: update to 0.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -24,7 +22,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 May 2016 12:01:53 -0000
+X-List-Received-Date: Thu, 05 May 2016 12:14:54 -0000
 
 From: Jack Mitchell <jack@embed.me.uk>
 
@@ -32,13 +30,9 @@ From: Jack Mitchell <jack@embed.me.uk>
 - New board config options supported
 - PACKAGECONFIG options added for other configure flags
 ---
-
-v2
- - remove $FILES_{PN}-dbg as it's not required
-
- meta-oe/recipes-support/libsoc/libsoc_0.7.1.bb | 17 --------------
- meta-oe/recipes-support/libsoc/libsoc_0.8.1.bb | 32 ++++++++++++++++++++++++++
- 2 files changed, 32 insertions(+), 17 deletions(-)
+ meta-oe/recipes-support/libsoc/libsoc_0.7.1.bb | 17 -------------
+ meta-oe/recipes-support/libsoc/libsoc_0.8.1.bb | 34 ++++++++++++++++++++++++++
+ 2 files changed, 34 insertions(+), 17 deletions(-)
  delete mode 100644 meta-oe/recipes-support/libsoc/libsoc_0.7.1.bb
  create mode 100644 meta-oe/recipes-support/libsoc/libsoc_0.8.1.bb
 
@@ -67,10 +61,10 @@ index 911e0ba..0000000
 -RDEPENDS_${PN} = "libgcc"
 diff --git a/meta-oe/recipes-support/libsoc/libsoc_0.8.1.bb b/meta-oe/recipes-support/libsoc/libsoc_0.8.1.bb
 new file mode 100644
-index 0000000..a02a2a2
+index 0000000..d5c6862
 --- /dev/null
 +++ b/meta-oe/recipes-support/libsoc/libsoc_0.8.1.bb
-@@ -0,0 +1,32 @@
+@@ -0,0 +1,34 @@
 +SUMMARY = "Library for interfacing with common SoC peripherals"
 +DESCRIPTION = "libsoc is a C library to interface with common peripherals (gpio, i2c, spi, pwm) \
 +               found in SoC (System on Chips) through generic Linux Kernel interfaces."
@@ -100,6 +94,8 @@ index 0000000..a02a2a2
 +PACKAGECONFIG[allboardconfigs] = "--with-board-configs,,"
 +PACKAGECONFIG[enableboardconfig] = "--enable-board=${BOARD},,"
 +PACKAGECONFIG[python] = "--enable-python=${PYTHON_PN},,${PYTHON_PN}"
++
++FILES_${PN}-dbg = "${prefix}/src"
 +
 +FILES_${PYTHON_PN}-libsoc-staticdev += "${PYTHON_SITEPACKAGES_DIR}/*/*.a"
 +FILES_${PYTHON_PN}-libsoc += "${PYTHON_SITEPACKAGES_DIR}"
