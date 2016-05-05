@@ -1,41 +1,24 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-yw0-f194.google.com (mail-yw0-f194.google.com
-	[209.85.161.194])
-	by mail.openembedded.org (Postfix) with ESMTP id C2D2360767
+Return-Path: <Rongqing.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EC0C570031
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 May 2016 01:34:55 +0000 (UTC)
-Received: by mail-yw0-f194.google.com with SMTP id v81so10419224ywa.2
+	Thu,  5 May 2016 01:53:39 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u451rd0R025581
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 May 2016 18:34:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=Te+GRCufNmIX7feCd3HgWnR0wYyYwaUxO6lfzgrjWLc=;
-	b=GVNzqaSw2OSPt1Ao2oHc9kLA3oUnzvl46+upND3vr16nSLkkLSG5/gHR911Ygut3Wq
-	bpPzMMesXVsm1vyrgitSOTrGNZ+2gKaoyOQc7tEumW4gy8F+w8fs1ZiPxeAKqpOZ77n2
-	m+QQfmCfsG49QNXhpcGOt/pf6VHJBcl+SpCBSexPYq4NuoSrlLEBcTJHKDN3TWpRGYaN
-	4WrNsk9EYJLYY+9zQn3RseusxH1k/8AJE4LxVkujvlH3iYU9rsqwYtlsfGmvjslU/nOY
-	wtwM2CLPT76nnb6TgfQaTMKW5rO4rZZQELPT+byBkcUgeiFI1svppasM3CMZ6alzxnG1
-	2+tg==
-X-Gm-Message-State: AOPr4FVhJLuQno5bhazWpoVNQE0/+W0PV0mCTnaVqArNGTo3pw32fxd8nr+lFgQOM99CUw==
-X-Received: by 10.129.110.138 with SMTP id j132mr6727044ywc.138.1462412096269; 
-	Wed, 04 May 2016 18:34:56 -0700 (PDT)
-Received: from lnx-dereks-laptop.hil-hsvuvhx.atl.wayport.net
-	(ip-64-134-180-59.public.wayport.net. [64.134.180.59])
-	by smtp.gmail.com with ESMTPSA id
-	y83sm4091529ywc.37.2016.05.04.18.34.55
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 04 May 2016 18:34:55 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 May 2016 21:34:20 -0400
-Message-Id: <1462412060-20750-2-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1462412060-20750-1-git-send-email-derek@asterius.io>
-References: <1462412060-20750-1-git-send-email-derek@asterius.io>
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-oe][PATCHv2 2/2] leptonica: add PACAKGECONFIG for openjpeg
+	Wed, 4 May 2016 18:53:40 -0700
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 4 May 2016 18:53:39 -0700
+From: <rongqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 5 May 2016 09:52:01 +0800
+Message-ID: <1462413121-12399-1-git-send-email-rongqing.li@windriver.com>
+X-Mailer: git-send-email 2.8.1
+MIME-Version: 1.0
+Subject: [PATCH] lmbench: avoid gcc optimize-away multiplication
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,26 +31,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 May 2016 01:34:55 -0000
+X-List-Received-Date: Thu, 05 May 2016 01:53:40 -0000
+Content-Type: text/plain
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+From: Roy Li <rongqing.li@windriver.com>
+
+Change expression used in do_integer_mul and do_uint64_mul
+benchmarks so GCC doesn't optimize-away the loops,
+
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
 ---
- meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../0001-avoid-gcc-optimize-away-the-loops.patch   | 79 ++++++++++++++++++++++
+ .../recipes-benchmark/lmbench/lmbench_3.0-a9.bb    |  1 +
+ 2 files changed, 80 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench/0001-avoid-gcc-optimize-away-the-loops.patch
 
-diff --git a/meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb b/meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb
-index 57bc5dd..0aebe89 100644
---- a/meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb
-+++ b/meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb
-@@ -11,4 +11,7 @@ EXTRA_OECONF += " \
-     --without-libwebp \
- "
- 
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[openjpeg] = "--with-libopenjpeg,--without-libopenjpeg,openjpeg"
+diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench/0001-avoid-gcc-optimize-away-the-loops.patch b/meta-oe/recipes-benchmark/lmbench/lmbench/0001-avoid-gcc-optimize-away-the-loops.patch
+new file mode 100644
+index 0000000..2d8a246
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/lmbench/lmbench/0001-avoid-gcc-optimize-away-the-loops.patch
+@@ -0,0 +1,79 @@
++[PATCH] avoid gcc optimize-away the loops
 +
- inherit autotools pkgconfig
++Upstream-Status: pending
++
++Change expression used in do_integer_mul and do_uint64_mul
++benchmarks so GCC doesn't optimize-away the loops, other
++things are same:
++-               TEN(r *= s;); r -= t;
+++               i = 0;
+++               while ( i++ < 10)
+++                       r *= s;
+++               r -= t;
++
++and TEN is macro:
++	#define TEN(a) a a a a a a a a a a
++
++Signed-off-by: Roy Li <rongqing.li@windriver.com>
++---
++ src/lat_ops.c | 30 +++++++++++++++++++++++++-----
++ 1 file changed, 25 insertions(+), 5 deletions(-)
++
++diff --git a/src/lat_ops.c b/src/lat_ops.c
++index d343ff3..457072b 100644
++--- a/src/lat_ops.c
+++++ b/src/lat_ops.c
++@@ -126,11 +126,23 @@ do_integer_mul(iter_t iterations, void* cookie)
++ 	struct _state *pState = (struct _state*)cookie;
++ 	register int r = pState->N + 37431;
++ 	register int s = pState->N + 4;
++-	register int t = r * s * s * s * s * s * s * s * s * s * s - r;
+++	register int t = r;
+++	int i = 0;
+++
+++	while ( i++ < 10)
+++		t *= s;
+++	t -= r;
++ 
++ 	while (iterations-- > 0) {
++-		TEN(r *= s;); r -= t;
++-		TEN(r *= s;); r -= t;
+++		i = 0;
+++		while ( i++ < 10)
+++			r *= s;
+++		r -= t;
+++
+++		i = 0;
+++		while ( i++ < 10)
+++			r *= s;
+++		r -= t;
++ 	}
++ 	use_int(r);
++ }
++@@ -207,13 +219,21 @@ do_int64_mul(iter_t iterations, void* cookie)
++ 	register int64 r = (int64)pState->N + 37420;
++ 	register int64 s = (int64)pState->N + 4;
++ 	register int64 t;
+++	int i = 0;
++ 
++ 	r += (int64)(pState->N + 6)<<32;
++ 	t = r * s * s * s * s * s * s * s * s * s * s - r;
++ 
++ 	while (iterations-- > 0) {
++-		TEN(r *= s;); r -= t;
++-		TEN(r *= s;); r -= t;
+++		i = 0;
+++		while ( i++ < 10)
+++			r *= s;
+++		r -= t;
+++
+++		i = 0;
+++		while ( i++ < 10)
+++			r *= s;
+++		r -= t;
++ 	}
++ 	use_int((int)r);
++ }
++-- 
++2.8.1
++
+diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+index 24cd0b0..7585436 100644
+--- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
++++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+@@ -18,6 +18,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/lmbench/lmbench-${PV}.tgz \
+            file://use-base_libdir-instead-of-hardcoded-lib.patch \
+            file://lmbench_result_html_report.patch \
+            file://fix-lmbench-memory-check-failure.patch \
++           file://0001-avoid-gcc-optimize-away-the-loops.patch \
+ "
+ SRC_URI[md5sum] = "b3351a3294db66a72e2864a199d37cbf"
+ SRC_URI[sha256sum] = "cbd5777d15f44eab7666dcac418054c3c09df99826961a397d9acf43d8a2a551"
 -- 
-1.9.1
+2.8.1
 
 
