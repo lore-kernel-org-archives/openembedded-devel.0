@@ -1,38 +1,41 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-yw0-f196.google.com (mail-yw0-f196.google.com
-	[209.85.161.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 28B9B60767
+Received: from mail-yw0-f194.google.com (mail-yw0-f194.google.com
+	[209.85.161.194])
+	by mail.openembedded.org (Postfix) with ESMTP id C2D2360767
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 May 2016 01:34:54 +0000 (UTC)
-Received: by mail-yw0-f196.google.com with SMTP id i22so10320984ywc.1
+	Thu,  5 May 2016 01:34:55 +0000 (UTC)
+Received: by mail-yw0-f194.google.com with SMTP id v81so10419224ywa.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 May 2016 18:34:55 -0700 (PDT)
+	Wed, 04 May 2016 18:34:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=RukTCeVL4meFn/h8dxaD8OJW4X035ueFT4vDiWQjn8o=;
-	b=BW6cr1wUlA9e62VkRMhom2RXlFpd/gtqV+F+oL/srHn5dGqZWlHsDZ1iUNVuDYZt+F
-	WpE4AyvtLoLrGIkERS5lhlU1zKNTpcIB9ptiAxORKjC1hCU/x0mOMMY+imEKGa2a6ox+
-	BoMGOS+fXaeGDjN2pdu6SxBfMu7Q8eXy0+Zhn9qaqLa8XiZ1QA7PTgEkN9obbfoG/43n
-	EOgAk13ITC0hdItS/ShHfStmET8Xg/zQP9BQk065uPJScPqTVO58VhgMrzmPh3QdV0gf
-	GCzo2cPrH7bZnBpZsVRP8NmZXTugwQlchc3q6JlIcuy8w0+jXq8F9app+zw9BC+heeOt
-	CS3Q==
-X-Gm-Message-State: AOPr4FVlDuhxzKFfY0leV2Ihc0Ygb7VTkv6ck1w4hPaji0kf3+/DQZpKWQgmEq4mS0qnig==
-X-Received: by 10.13.236.147 with SMTP id v141mr6854046ywe.308.1462412095449; 
-	Wed, 04 May 2016 18:34:55 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=Te+GRCufNmIX7feCd3HgWnR0wYyYwaUxO6lfzgrjWLc=;
+	b=GVNzqaSw2OSPt1Ao2oHc9kLA3oUnzvl46+upND3vr16nSLkkLSG5/gHR911Ygut3Wq
+	bpPzMMesXVsm1vyrgitSOTrGNZ+2gKaoyOQc7tEumW4gy8F+w8fs1ZiPxeAKqpOZ77n2
+	m+QQfmCfsG49QNXhpcGOt/pf6VHJBcl+SpCBSexPYq4NuoSrlLEBcTJHKDN3TWpRGYaN
+	4WrNsk9EYJLYY+9zQn3RseusxH1k/8AJE4LxVkujvlH3iYU9rsqwYtlsfGmvjslU/nOY
+	wtwM2CLPT76nnb6TgfQaTMKW5rO4rZZQELPT+byBkcUgeiFI1svppasM3CMZ6alzxnG1
+	2+tg==
+X-Gm-Message-State: AOPr4FVhJLuQno5bhazWpoVNQE0/+W0PV0mCTnaVqArNGTo3pw32fxd8nr+lFgQOM99CUw==
+X-Received: by 10.129.110.138 with SMTP id j132mr6727044ywc.138.1462412096269; 
+	Wed, 04 May 2016 18:34:56 -0700 (PDT)
 Received: from lnx-dereks-laptop.hil-hsvuvhx.atl.wayport.net
 	(ip-64-134-180-59.public.wayport.net. [64.134.180.59])
 	by smtp.gmail.com with ESMTPSA id
-	y83sm4091529ywc.37.2016.05.04.18.34.54
+	y83sm4091529ywc.37.2016.05.04.18.34.55
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 04 May 2016 18:34:54 -0700 (PDT)
+	Wed, 04 May 2016 18:34:55 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 May 2016 21:34:19 -0400
-Message-Id: <1462412060-20750-1-git-send-email-derek@asterius.io>
+Date: Wed,  4 May 2016 21:34:20 -0400
+Message-Id: <1462412060-20750-2-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1462412060-20750-1-git-send-email-derek@asterius.io>
+References: <1462412060-20750-1-git-send-email-derek@asterius.io>
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-oe][PATCHv2 1/2] leptonica: update to version 1.73
+Subject: [meta-oe][PATCHv2 2/2] leptonica: add PACAKGECONFIG for openjpeg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,32 +50,23 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 05 May 2016 01:34:55 -0000
 
-updated to be compatible with giflib 5.1.x
-
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../leptonica/{leptonica_1.70.bb => leptonica_1.73.bb}                | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/leptonica/{leptonica_1.70.bb => leptonica_1.73.bb} (76%)
+ meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/leptonica/leptonica_1.70.bb b/meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb
-similarity index 76%
-rename from meta-oe/recipes-graphics/leptonica/leptonica_1.70.bb
-rename to meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb
-index e826e05..57bc5dd 100644
---- a/meta-oe/recipes-graphics/leptonica/leptonica_1.70.bb
+diff --git a/meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb b/meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb
+index 57bc5dd..0aebe89 100644
+--- a/meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb
 +++ b/meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb
-@@ -4,8 +4,8 @@ LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://leptonica-license.txt;md5=20cdd3af097ca431b82004c691f406a6"
- 
- SRC_URI = "http://leptonica.com/source/leptonica-${PV}.tar.gz"
--SRC_URI[md5sum] = "5ac2a31cf5b4f0e8f5a853a5266c42ef"
--SRC_URI[sha256sum] = "d3d209a1f6d1f7a80119486b5011bc8c6627e582c927ab44ba33c37edb2cfba2"
-+SRC_URI[md5sum] = "092cea2e568cada79fff178820397922"
-+SRC_URI[sha256sum] = "19e4335c674e7b78af9338d5382cc5266f34a62d4ce533d860af48eaa859afc1"
- 
- EXTRA_OECONF += " \
+@@ -11,4 +11,7 @@ EXTRA_OECONF += " \
      --without-libwebp \
+ "
+ 
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[openjpeg] = "--with-libopenjpeg,--without-libopenjpeg,openjpeg"
++
+ inherit autotools pkgconfig
 -- 
 1.9.1
 
