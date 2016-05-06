@@ -1,33 +1,27 @@
-Return-Path: <denis@denix.org>
-Received: from vms173013pub.verizon.net (vms173013pub.verizon.net
-	[206.46.173.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7BB2773219
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id A5DC260745
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 May 2016 01:05:15 +0000 (UTC)
-Received: from vz-proxy-l002.mx.aol.com ([64.236.82.148])
-	by vms173013.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014)) with ESMTPA id <0O6Q00470DOMWHA0@vms173013.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	05 May 2016 20:05:16 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=hkQRW7prCrFMEwk2DGUM9Q==:117
-	a=kj9zAlcOel0A:10 a=yrkiwgmsf1kA:10	a=KZhFBf4HSkB9xHI1LVEA:9
-	a=CjuIK1q_8ugA:10
-Received: by 100.15.86.14 with SMTP id 4ed88e48; Fri, 06 May 2016 01:05:15 GMT
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3C4FF161FEC; Thu,
-	5 May 2016 21:05:10 -0400 (EDT)
-Date: Thu, 05 May 2016 21:05:10 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20160506010510.GL27602@denix.org>
-References: <20160505171932.GG27602@denix.org>
-	<20160505172844.GH27602@denix.org> <20160505182512.GC23370@jama>
-	<20160505184836.GJ27602@denix.org>
-MIME-version: 1.0
-In-reply-to: <20160505184836.GJ27602@denix.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: meta-oe krogoth release
+	Fri,  6 May 2016 02:04:08 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u46248b2013200
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 5 May 2016 19:04:09 -0700 (PDT)
+Received: from [128.224.162.236] (128.224.162.236) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
+	Thu, 5 May 2016 19:04:07 -0700
+To: <openembedded-devel@lists.openembedded.org>
+References: <1461761346-22151-1-git-send-email-adrian.ratiu@ni.com>
+From: Robert Yang <liezhi.yang@windriver.com>
+Message-ID: <572BFB96.1090006@windriver.com>
+Date: Fri, 6 May 2016 10:04:06 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.7.2
+MIME-Version: 1.0
+In-Reply-To: <1461761346-22151-1-git-send-email-adrian.ratiu@ni.com>
+Subject: Re: [meta-oe][PATCH] openconnect: add missing dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,35 +34,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2016 01:05:15 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 06 May 2016 02:04:09 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, May 05, 2016 at 02:48:36PM -0400, Denys Dmytriyenko wrote:
-> On Thu, May 05, 2016 at 08:25:12PM +0200, Martin Jansa wrote:
-> > On Thu, May 05, 2016 at 01:28:44PM -0400, Denys Dmytriyenko wrote:
-> > > On Thu, May 05, 2016 at 01:19:32PM -0400, Denys Dmytriyenko wrote:
-> > > > Armin, et al,
-> > > > 
-> > > > What's the deal with meta-oe branching into krogoth way too early (April 12th 
-> > > > pretty much) and missing on many updates and fixes that went in to master last 
-> > > > couple of weeks (delayed due to Martin's well deserved absence at the time) 
-> > > > before the actual release of OE-Core last Thursday? I was hoping there would 
-> > > > be a global merge/rebase from master to krogoth at the time of release, but it 
-> > > > doesn't seem to be the case. It would be a shame if those were missed from 
-> > > > krogoth... Are there any plans to pick them up?
-> > > 
-> > > BTW, I do see your past pull request "attempts" (May 2, April 28) on the list, 
-> > > but they don't seem to be pushed. I guess I should re-phrase my question - do 
-> > > you plan to push the latest pull request and what is the ETA? Thanks!
-> > 
-> > They were already pushed to krogoth-next and will be merged to krogoth
-> > soon. Please test it and send ACKs.
-> 
-> Ok, I'll give it a shot then. Thanks!
 
-Made several builds for TI platforms and everything seems to be working fine.
+Hi Ioan,
 
--- 
-Denys
+Is it possible to use PACKAGECONFIG to add these dependencies conditionally ?
+
+On 04/27/2016 08:49 PM, Ioan-Adrian Ratiu wrote:
+> They were autodetected and triggered QA warnings
+>
+> Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+> ---
+>   meta-networking/recipes-connectivity/openconnect/openconnect_git.bb | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
+> index 0a8b875..6d3c252 100644
+> --- a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
+> +++ b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
+> @@ -2,7 +2,7 @@ SUMMARY = "Open client for Cisco AnyConnect VPN"
+>   LICENSE = "LGPLv2.1"
+>   LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=243b725d71bb5df4a1e5920b344b86ad"
+>
+> -DEPENDS = "vpnc libxml2 gnutls"
+> +DEPENDS = "vpnc libxml2 gnutls lz4 krb5 libproxy pcsc-lite"
+>   RDEPENDS_${PN} = "vpnc"
+>
+>   PV = "7.06"
+>
 
