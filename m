@@ -1,58 +1,26 @@
-Return-Path: <trini@konsulko.com>
-Received: from mail-yw0-f178.google.com (mail-yw0-f178.google.com
-	[209.85.161.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 8ED7A75D22
+Return-Path: <Noor_Ahsan@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 12BC7731AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 May 2016 15:18:30 +0000 (UTC)
-Received: by mail-yw0-f178.google.com with SMTP id t10so214394133ywa.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2016 08:18:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=ATgxQODvkPGcgRa4Tj6XbOJ/9jWKEIrU61Pm2S0U8c4=;
-	b=W0Gy8zd48b09Sg4A0uv6SXKi18krkN2e3j86bX1vKV9c+ULc2zQ0a1ft8dhYaj5yvK
-	lWg0StBiq+Sf8n9A74jJ0SEXq7MpX0BvAEy/Indqrgtek6FPZoJWRaaPJIXMvmshrVvV
-	HkhmZE+mhiUqLvNMY6e127WawO6ZvgMojqUNE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=ATgxQODvkPGcgRa4Tj6XbOJ/9jWKEIrU61Pm2S0U8c4=;
-	b=glFvAKcob904Sgrsb8HhGGqyFKMkNixeGfdG+nPYP2gYAg2oYN4ehfXmSBJ1gYlKia
-	/ry8Jfixvle27uYow2Jpjj1kZdWel+ycIN+tFJYIhaMCTFDpPHcRPVO2gCTlFKOEMxBZ
-	+EWrIT7OX2KHhYIOc/nDBpdIQyhj6im3ln9UGzrx0zAQOCO+gjAWWk4yiuvu7OHORmRz
-	sMIW4zbeD0A9nGfTgLY5Q73xlKr4yymHQduMJ7mANFs4AQOpI6didC+vKeXLDr9gKLtI
-	r1qPFu44TnbboLSRKqRk/5zjoeuh8tFjZmq+pdRNZbBqhkwnJcoeyBwIK7Krflix+Yr9
-	9n+Q==
-X-Gm-Message-State: AOPr4FWuKtoot0o4d/TBY+qMBLiFymEWvY8kFsH9yAjlNXPlkjletPZj/DSqc1998ekECg==
-X-Received: by 10.37.59.149 with SMTP id i143mr11872446yba.151.1462547910853; 
-	Fri, 06 May 2016 08:18:30 -0700 (PDT)
-Received: from bill-the-cat ([2001:470:8:32a:7c1e:757f:3bd8:53db])
-	by smtp.gmail.com with ESMTPSA id m8sm9023554ywb.18.2016.05.06.08.18.29
-	(version=TLS1_2 cipher=AES128-SHA bits=128/128);
-	Fri, 06 May 2016 08:18:29 -0700 (PDT)
-Date: Fri, 6 May 2016 11:18:37 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20160506151837.GE24828@bill-the-cat>
-References: <CAMKF1spQn114r9dCAk9z7c3hw-NJp3pVoVP+f3gao2mhLTBHYg@mail.gmail.com>
-	<CAMKF1spwimpQwSE38B5jWmyZXwMKy6znMEF9p-NmTM4mGGr+4g@mail.gmail.com>
-	<CAJTo0Lb25x1H44nGn05d6qBVLDpyiaZ3XW40fdrAWcP_D+qYwg@mail.gmail.com>
-	<CAJTo0LZZ3Hs_yrm5ceik4j8Orv-UQ9T72Wu=R_PCRKw4Y9-WCw@mail.gmail.com>
-	<CAMKF1sozR3_Mhy5PKSaKCo7S2yHrtLzTNrUURFhN38gV0AbkYQ@mail.gmail.com>
-	<20160427221005.GA19598@bill-the-cat>
-	<403123E7-85F1-4CBF-9D6C-E6377B89D5EA@gmail.com>
-	<20160428121437.GJ19598@bill-the-cat>
-	<CAMKF1spK=tkagRSRCyWzipHt8v1atfuhZahQOQ8UZ0FiCs+UsQ@mail.gmail.com>
-	<20160428180131.GN19598@bill-the-cat>
+	Fri,  6 May 2016 15:48:59 +0000 (UTC)
+Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
+	by relay1.mentorg.com with esmtp 
+	id 1ayhzv-0004xD-QS from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 06 May 2016 08:48:59 -0700
+Received: from gemini.alm.mentorg.com (147.34.91.1) by
+	SVR-ORW-FEM-06.mgc.mentorg.com (147.34.97.120) with Microsoft SMTP
+	Server (TLS) id 14.3.224.2; Fri, 6 May 2016 08:49:00 -0700
+Received: from svr-pkl-eng-06.pkl.mentorg.com (svr-pkl-eng-06.pkl.mentorg.com
+	[137.202.156.65])	by gemini.alm.mentorg.com (8.14.4/8.14.4) with
+	ESMTP id u46Fmus4012737;	Fri, 6 May 2016 10:48:58 -0500
+From: "Noor, Ahsan" <noor_ahsan@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 6 May 2016 20:48:54 +0500
+Message-ID: <1462549734-36838-1-git-send-email-noor_ahsan@mentor.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-In-Reply-To: <20160428180131.GN19598@bill-the-cat>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	OE Core mailing list <openembedded-core@lists.openembedded.org>
-Subject: Re: [yocto] [OE-core] [RFT] GCC 6 Recipes
+Subject: [PATCH V3] libnice, farsight2: unblacklist as libnice's nice.pc issue fixed.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,67 +33,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2016 15:18:32 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 06 May 2016 15:49:02 -0000
+Content-Type: text/plain
 
-On Thu, Apr 28, 2016 at 02:01:31PM -0400, Tom Rini wrote:
-> On Thu, Apr 28, 2016 at 07:01:34AM -0700, Khem Raj wrote:
-> > On Thu, Apr 28, 2016 at 5:14 AM, Tom Rini <trini@konsulko.com> wrote:
-> > > On Thu, Apr 28, 2016 at 12:08:46AM -0700, Khem Raj wrote:
-> > >>
-> > >> > On Apr 27, 2016, at 3:10 PM, Tom Rini <trini@konsulko.com> wrote:
-> > >> >
-> > >> > On Wed, Apr 27, 2016 at 10:53:52AM -0700, Khem Raj wrote:
-> > >> >> thanks I think most of them come to these categories. So any help in
-> > >> >> fixing them is welcome.
-> > >> >>
-> > >> >> 1. kernel older than 4.4, backport needed fixed into these branches or
-> > >> >> move to newer kernels.
-> > >> >> 2. uboot dont have gcc6 compiler header files, backport the needed fixes
-> > >> >
-> > >> > 9b2c282b348dfe966bbba967dc7a45ce817cce50 from mainline.
-> > >> >
-> > >> >> 2. meta-qt4 needs to use gnu++98
-> > >> >> 3. gcc6 providing its own stdlib.h in libstdc++
-> > >> >> 4. gcc6 swtiching to gnu++14 for C++ as default.
-> > >> >> 5. GPLv2-only versions of recipes are simply old will need fixing
-> > >> >>
-> > >> >> I will take a stab at fixing the nativesdk recipes which is mostly due
-> > >> >> to stdlib.h issue.
-> > >> >
-> > >> > Please do, I'd like to see some SDKs so I can get more U-Boot testing
-> > >> > done with gcc-6 :)
-> > >> >
-> > >>
-> > >> I have pushed couple of more fixes which should now fix the nativesdk issues and SDKs should be building
-> > >>
-> > >> Tree is here. Let me know how it goes.
-> > >>
-> > >> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/gcc-6
-> > >>
-> > >> and also to github
-> > >>
-> > >> https://github.com/kraj/openembedded-core/tree/kraj/master
-> > >
-> > > debian/jessie, nodistro, MACHINE=qemux86. bitbake busybox:
-> > > | make[1]: Leaving directory
-> > > '/home2/trini/oe-gcc-6/openembedded-core/build/tmp-glibc/work/x86_64-linux/gcc-cross-initial-i586/6.0.0-r0/gcc-6.0.0/build.x86_64-linux.i586-oe-linux/gcc'
-> > > | cp: cannot create regular file
-> > > '/home2/trini/oe-gcc-6/openembedded-core/build/tmp-glibc/work/x86_64-linux/gcc-cross-initial-i586/6.0.0-r0/image/home2/trini/oe-gcc-6/openembedded-core/build/tmp-glibc/sysroots/x86_64-linux/usr/lib/i586-oe-linux.gcc-cross-initial-i586/gcc/i586-oe-linux/6.0.1/include/limits.h':
-> > > No such file or directory
-> > >
-> > > Doing MACHINE=qemux86-64 provides a similar error.  Thanks!
-> > 
-> > I forgot to rename recipes to 6.1 after I did the gcc rebase since 6.1
-> > released yesterday. Anyway done now. please retry.
-> 
-> Making progress now, thanks!
+From: Noor Ahsan <noor_ahsan@mentor.com>
 
-I meant to follow up sooner, sorry, but these spit out valid and useful
-meta-toolchain packages and I'm using them for some U-Boot testing now,
-thanks again!
+* Update do_compile_append where it was updating *.pc from ${S} and
+  removing staging dir folder. Now we have seperate build folder
+  where packages get build. We have to search pc in ${B} not in ${S}.
+  After updating the tmp dir path is removed from nice.pc file.
+* Remove PNBLACKLIST for libnice and farsight2 recipes.
 
+Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+---
+ meta-oe/recipes-support/farsight/farsight2_0.0.22.bb | 2 --
+ meta-oe/recipes-support/farsight/libnice_0.0.13.bb   | 4 +---
+ 2 files changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb b/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
+index ffb222b..2989850 100644
+--- a/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
++++ b/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
+@@ -28,5 +28,3 @@ FILES_${PN}-dbg += "${libdir}/*/.debug"
+ 
+ SRC_URI[md5sum] = "e1f540cf3ebab06c3d7db1f46b44ac88"
+ SRC_URI[sha256sum] = "3ae59aa61a8071c9fad111e5fd606aabc27961eb4192f8729987a27dae6b3974"
+-
+-PNBLACKLIST[farsight2] ?= "Depends on broken libnice"
+diff --git a/meta-oe/recipes-support/farsight/libnice_0.0.13.bb b/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
+index a9081dc..620ee1f 100644
+--- a/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
++++ b/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
+@@ -28,7 +28,7 @@ do_configure_prepend() {
+ }
+ 
+ do_compile_append() {
+-    for i in $(find ${S} -name "*.pc") ; do
++    for i in $(find ${B} -name "*.pc") ; do
+         sed -i -e s:${STAGING_DIR_TARGET}::g \
+                -e s:/${TARGET_SYS}::g \
+                   $i
+@@ -38,5 +38,3 @@ do_compile_append() {
+ 
+ SRC_URI[md5sum] = "e5b9f799a57cb939ea2658ec35253ab9"
+ SRC_URI[sha256sum] = "d8dd260c486a470a6052a5323920878a084e44a19df09b15728b85c9e3d6edf0"
+-
+-PNBLACKLIST[libnice] ?= "BROKEN: QA Issue: nice.pc failed sanity test (tmpdir)"
 -- 
-Tom
+2.8.1
+
 
