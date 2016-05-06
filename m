@@ -1,42 +1,42 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qg0-f49.google.com (mail-qg0-f49.google.com
-	[209.85.192.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 8423373286
+Received: from mail-qk0-f172.google.com (mail-qk0-f172.google.com
+	[209.85.220.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 74EB8731C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 May 2016 14:01:58 +0000 (UTC)
-Received: by mail-qg0-f49.google.com with SMTP id f92so56340205qgf.0
+	Fri,  6 May 2016 14:02:03 +0000 (UTC)
+Received: by mail-qk0-f172.google.com with SMTP id r184so60389652qkc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2016 07:01:59 -0700 (PDT)
+	Fri, 06 May 2016 07:02:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:organization;
-	bh=diU8AKWICjDk2w2eMq+ZV+lg9IjKGOT2x/R1ZVnolvA=;
-	b=LFmrybmicjBgy/MGOyVf/vWlOgLPCYVTKwPf0CllOPYFq5+f6j7yVs9T5+2pebUHJp
-	5zuUlrQzI228LA96sqflWSTixvWVVspYx/E1kKihFHTSOdl7WzVIVAhr7Mn3oR+BF+pH
-	BL31r49O7m3USGEKEA506HG6Gqc1PYL5xZ6Fp1xwMdWWWtzjEDIRucBQJ8RZiomLFPct
-	97aRTbTQRz4ZBlPtR1IYEypvHvPnKpG+b14N/v5wLH5yhTS/va7YbFWfaMIe/dgwzXDO
-	1ro3FiiVpWP3OjVOqWxzr6rDhbOj9S4XqXGVdULt28RkD2rfbEhCD3RZPDcBKLs8uVIF
-	nZIQ==
-X-Gm-Message-State: AOPr4FU4ouZo2U0FqpgneiLIjEkiLA0CCb43/+5eRGddeZBRIQlUfJLOn55/x2pFIvqNWw==
-X-Received: by 10.140.235.14 with SMTP id g14mr20164075qhc.86.1462543319344;
-	Fri, 06 May 2016 07:01:59 -0700 (PDT)
+	bh=GjM4R2hnt687eS1PZGBYk9Z6F/v0wnAjeJy8R2H+HvA=;
+	b=Ru9HyFwE9s48pd6lSdJflRvboQRH20p21dqh9q2rPoIF8IJ0424mVwxQqEsvDPsW+9
+	276EfZAXFHr0wJAaw2Pp3+dmdydMsqV8GpQYrZA2dvLamXLErkH7QQ6+lpDVMhzgarBd
+	hSERhlIoz1b2Mfa4YB0I024blpq7kN8PJFFp08J/Lb/p79UyhstLAvqOMnstcIMKdyxM
+	L8iU5q3td3/yoYR0DERxB2FxD/+EDpoBAcL8HbtqKFQxI0GtAFYgEmKOtER4ft64BQo3
+	tzoHVO848ysFT/29rNPzbX0yGwP4agImDTyuTH0K2gmmwQTCrV9PIJCVsetA7cirRO0Q
+	fmqQ==
+X-Gm-Message-State: AOPr4FV67piEt3m+wcViovNx/UdHbOxxu7c9a0KN4ALxdBYoHnlZTdCDOYF+w9bWhJrM2Q==
+X-Received: by 10.55.163.86 with SMTP id m83mr20642592qke.75.1462543324611;
+	Fri, 06 May 2016 07:02:04 -0700 (PDT)
 Received: from localhost ([187.23.154.250]) by smtp.gmail.com with ESMTPSA id
-	x202sm5749262qhx.30.2016.05.06.07.01.56
+	b40sm5773448qga.47.2016.05.06.07.02.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 06 May 2016 07:01:58 -0700 (PDT)
+	Fri, 06 May 2016 07:02:03 -0700 (PDT)
 Received: by localhost (sSMTP sendmail emulation);
-	Fri, 06 May 2016 11:01:54 -0300
+	Fri, 06 May 2016 11:01:59 -0300
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-Date: Fri,  6 May 2016 11:00:47 -0300
-Message-Id: <1462543259-7206-10-git-send-email-otavio@ossystems.com.br>
+Date: Fri,  6 May 2016 11:00:48 -0300
+Message-Id: <1462543259-7206-11-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 2.8.2
 In-Reply-To: <1462543259-7206-1-git-send-email-otavio@ossystems.com.br>
 References: <1462543259-7206-1-git-send-email-otavio@ossystems.com.br>
 Organization: O.S. Systems Software LTDA.
-Subject: [meta-oe backport krogoth PATCH 10/22] fbida: use separate builddir
+Subject: [meta-oe backport krogoth PATCH 11/22] sblim-sfcb: add missing dependency on unzip-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,44 +49,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2016 14:01:58 -0000
+X-List-Received-Date: Fri, 06 May 2016 14:02:05 -0000
 
-From: Christopher Larson <chris_larson@mentor.com>
+From: Martin Jansa <Martin.Jansa@gmail.com>
 
-Separate builddir from the sourcedir.
+* otherwise configure fails with:
+  | checking whether to build shared libraries... yes
+  | checking whether to build static libraries... no
+  | checking for unzip... no
+  | configure: error: Could not find unzip
+  | NOTE: The following config.log files may provide further information.
+  | NOTE: /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/sblim-sfcb/1.4.9-r0/build/config.log
+  | ERROR: configure failed
+  | ERROR: Function failed: do_configure (log file is located at /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/sblim-sfcb/1.4.9-r0/temp/log.do_configure.9838)
+  NOTE: recipe sblim-sfcb-1.4.9-r0: task do_configure: Failed
+  ERROR: Task 5 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb, do_configure) failed with exit code '1'
 
-Signed-off-by: Christopher Larson <chris_larson@mentor.com>
-Signed-off-by: Sujith H <sujith.h@gmail.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
 
- meta-oe/recipes-graphics/fbida/fbida_2.10.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/fbida/fbida_2.10.bb b/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-index 8d3da69..c14fc9b 100644
---- a/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-+++ b/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-@@ -14,7 +14,9 @@ SRC_URI = "https://www.kraxel.org/releases/fbida/fbida-${PV}.tar.gz"
- SRC_URI[md5sum] = "09460b964b58c2e39b665498eca29018"
- SRC_URI[sha256sum] = "7a5a3aac61b40a6a2bbf716d270a46e2f8e8d5c97e314e927d41398a4d0b6cb6"
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
+index ed5382e..41626d1 100644
+--- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
++++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
+@@ -9,7 +9,7 @@ HOMEPAGE = "http://www.sblim.org"
+ SECTION = "Applications/System"
+ LICENSE = "EPL-1.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=f300afd598546add034364cd0a533261"
+-DEPENDS = "curl libpam openssl sblim-sfc-common"
++DEPENDS = "curl libpam openssl sblim-sfc-common unzip-native"
  
--EXTRA_OEMAKE = "STRIP="
-+B = "${WORKDIR}/build"
-+
-+EXTRA_OEMAKE = "STRIP= 'srcdir=${S}' -f ${S}/GNUmakefile"
- 
- PACKAGECONFIG ??= "gif png curl"
- PACKAGECONFIG[curl] = ",,curl"
-@@ -26,6 +28,7 @@ PACKAGECONFIG[webp] = ",,libwebp"
- PACKAGECONFIG[lirc] = ",,lirc"
- 
- do_compile() {
-+    sed -i -e 's# fbgs# \$(srcdir)/fbgs#; s#-Ijpeg#-I\$(srcdir)/jpeg#; s# jpeg/# \$(srcdir)/jpeg/#' ${S}/GNUmakefile
-     sed -i -e 's:/sbin/ldconfig:echo x:' ${S}/mk/Autoconf.mk
-     sed -i -e 's: cpp: ${TARGET_PREFIX}cpp -I${STAGING_INCDIR}:' ${S}/GNUmakefile
- 
+ SRC_URI = "http://downloads.sourceforge.net/sblim/${BP}.tar.bz2 \
+            file://sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch \
 -- 
 2.8.2
 
