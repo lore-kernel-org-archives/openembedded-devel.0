@@ -1,24 +1,27 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E71A165C8A
+Return-Path: <Noor_Ahsan@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 34B53612E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 May 2016 09:10:09 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u469A9mS015548
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 6 May 2016 02:10:09 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Fri, 6 May 2016 02:10:08 -0700
-From: Chen Qi <Qi.Chen@windriver.com>
+	Fri,  6 May 2016 10:06:00 +0000 (UTC)
+Received: from svr-orw-fem-02x.mgc.mentorg.com ([147.34.96.206]
+	helo=SVR-ORW-FEM-02.mgc.mentorg.com)
+	by relay1.mentorg.com with esmtp 
+	id 1ayce1-0002lb-BX from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 06 May 2016 03:06:01 -0700
+Received: from gemini.alm.mentorg.com (147.34.91.1) by
+	svr-orw-fem-02.mgc.mentorg.com (147.34.96.168) with Microsoft SMTP
+	Server (TLS) id 14.3.224.2; Fri, 6 May 2016 03:06:00 -0700
+Received: from svr-pkl-eng-06.pkl.mentorg.com (svr-pkl-eng-06.pkl.mentorg.com
+	[137.202.156.65])	by gemini.alm.mentorg.com (8.14.4/8.14.4) with
+	ESMTP id u46A5wOi013125;	Fri, 6 May 2016 05:05:59 -0500
+From: "Noor, Ahsan" <noor_ahsan@mentor.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 6 May 2016 17:02:17 +0800
-Message-ID: <1462525337-13509-1-git-send-email-Qi.Chen@windriver.com>
+Date: Fri, 6 May 2016 15:05:54 +0500
+Message-ID: <1462529154-18160-1-git-send-email-noor_ahsan@mentor.com>
 X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] openconnect: add dependency to fix Makefile.am
+Subject: [PATCH V2] Fix "failed sanity test tmpdir" for libnice and update PNBLACKLIST.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,69 +34,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2016 09:10:10 -0000
+X-List-Received-Date: Fri, 06 May 2016 10:06:01 -0000
 Content-Type: text/plain
 
-main.c needs version.c which is generated at build time.
-Add this dependency to avoid the following error.
+From: Noor Ahsan <noor_ahsan@mentor.com>
 
-  ../git/main.c:78:21: fatal error: version.c: No such file or directory
+* Update do_compile_append where it was updating *.pc from ${S} and
+  removing staging dir folder. Now we have seperate build folder
+  where packages got build. We have to search pc in ${B} not in ${S}.
+  After updating the tmp dir path is removed from nice.pc file.
+* Remove PNBLACKLIST for libnice and farsight recipes.
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
 ---
- .../0001-Makefile.am-add-missing-dependency.patch  | 28 ++++++++++++++++++++++
- .../openconnect/openconnect_git.bb                 |  3 ++-
- 2 files changed, 30 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-connectivity/openconnect/files/0001-Makefile.am-add-missing-dependency.patch
+ meta-oe/recipes-support/farsight/farsight2_0.0.22.bb | 1 -
+ meta-oe/recipes-support/farsight/libnice_0.0.13.bb   | 3 +--
+ 2 files changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/openconnect/files/0001-Makefile.am-add-missing-dependency.patch b/meta-networking/recipes-connectivity/openconnect/files/0001-Makefile.am-add-missing-dependency.patch
-new file mode 100644
-index 0000000..c465bf1
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/openconnect/files/0001-Makefile.am-add-missing-dependency.patch
-@@ -0,0 +1,28 @@
-+Upstream-Status: Pending
-+
-+Subject: Makefile.am: add missing dependency
-+
-+Add missing dependency to avoid the following error.
-+
-+  ../git/main.c:78:21: fatal error: version.c: No such file or directory
-+
-+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-+---
-+ Makefile.am | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index d823e01..ea48ec1 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -112,6 +112,7 @@ EXTRA_DIST += $(shell cd "$(top_srcdir)" && \
-+ 
-+ DISTCLEANFILES = $(pkgconfig_DATA)
-+ 
-++main.c: version.c
-+ main.o: version.c
-+ version.c: $(library_srcs) $(lib_openssl_srcs) $(lib_gnutls_srcs) \
-+ 	   $(openconnect_SOURCES) Makefile.am configure.ac \
-+-- 
-+2.8.1
-+
-diff --git a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
-index 6d3c252..d8fe439 100644
---- a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
-+++ b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
-@@ -8,7 +8,8 @@ RDEPENDS_${PN} = "vpnc"
- PV = "7.06"
+diff --git a/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb b/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
+index ffb222b..beb6108 100644
+--- a/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
++++ b/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
+@@ -29,4 +29,3 @@ FILES_${PN}-dbg += "${libdir}/*/.debug"
+ SRC_URI[md5sum] = "e1f540cf3ebab06c3d7db1f46b44ac88"
+ SRC_URI[sha256sum] = "3ae59aa61a8071c9fad111e5fd606aabc27961eb4192f8729987a27dae6b3974"
  
- SRCREV = "35542d52202672b8c12ecc63867432128244013a"
--SRC_URI = "git://git.infradead.org/users/dwmw2/openconnect.git"
-+SRC_URI = "git://git.infradead.org/users/dwmw2/openconnect.git \
-+           file://0001-Makefile.am-add-missing-dependency.patch"
+-PNBLACKLIST[farsight2] ?= "Depends on broken libnice"
+diff --git a/meta-oe/recipes-support/farsight/libnice_0.0.13.bb b/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
+index a9081dc..3d99622 100644
+--- a/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
++++ b/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
+@@ -28,7 +28,7 @@ do_configure_prepend() {
+ }
  
- S = "${WORKDIR}/git"
+ do_compile_append() {
+-    for i in $(find ${S} -name "*.pc") ; do
++    for i in $(find ${B} -name "*.pc") ; do
+         sed -i -e s:${STAGING_DIR_TARGET}::g \
+                -e s:/${TARGET_SYS}::g \
+                   $i
+@@ -39,4 +39,3 @@ do_compile_append() {
+ SRC_URI[md5sum] = "e5b9f799a57cb939ea2658ec35253ab9"
+ SRC_URI[sha256sum] = "d8dd260c486a470a6052a5323920878a084e44a19df09b15728b85c9e3d6edf0"
  
+-PNBLACKLIST[libnice] ?= "BROKEN: QA Issue: nice.pc failed sanity test (tmpdir)"
 -- 
 2.8.1
 
