@@ -1,45 +1,40 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id E536975D4B
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id CB1C075C61
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 May 2016 16:02:07 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id r12so9443338wme.0
+	Fri,  6 May 2016 17:29:54 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id q184so7671508qkf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2016 09:02:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=b6ys1f/5oNNLeyYy8843SHNGV24PVOb6fiOoQ1MOMp8=;
-	b=KxAmNkXaZuDER/byEWKIXGmc7b49Zjr1Y+9ZKzr4zJSXxqlRjiRq3MjrGqanNXfDJh
-	VmbE27a3l6rNpIv8LyGHlBKR1yus6y+qlBy/jeY2dYr3rnCPcpzx/gZQzQ8P9Dhy6qLJ
-	8g5zys7sk1f+kc6l2jjPL0uXDyJ6FeA9YWm9+gifOAwf+Wdfjcwgc+ESiiPVaTOtJ6We
-	juHtizYccyZ7rsiQXWpFS+alEIJ4uY2yqRZ1v9Xhm5AhbT5Xb0M6DDcBIa1RDuEx7EOh
-	9yiYzBKZimcY64WcX74XNXDncr5dzbL5efRbt10AzGjSlBGH2iQwxl0dhYBmVGxUk3WO
-	203A==
+	Fri, 06 May 2016 10:29:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=b6ys1f/5oNNLeyYy8843SHNGV24PVOb6fiOoQ1MOMp8=;
-	b=GvsEwhOSChbSnDjRoND1dlBbwe4oHMhUanjkI/m8AqcWVvnxH0DVxGgWjn5pweJw5R
-	icrH41ibEPcAs82DpdD5GbQW+lh+LQKni548elsUuFyOMPIyE7ahYryC5TVMpHrln+gO
-	lfAJZzj3VHnrTndt8ZqBMx6OsSZ0DwK3uq+c6/7HEDk5yDGHW7kR2/qmNOirKcBtFG+a
-	4CsmSlYKKDBQENHKEIKtkPAKpsQm4uNx9TL83ph8Iqrz0SlqCQc5kdp6e19mZD7PUszE
-	9p8gkZ7l3dJ6sytiE+HToWsD8LUAIhxe7gVGT/IwOAc/3NgdAcuGkcJ7N9KQaqD9p59A
-	J05Q==
-X-Gm-Message-State: AOPr4FWu3boLC/uCpaCe7e4y1lX/ubPO3t+vEc1L7HEgEjMorZKuGtkky3EzFYLCQ2haPA==
-X-Received: by 10.28.48.203 with SMTP id w194mr10764840wmw.67.1462550527957;
-	Fri, 06 May 2016 09:02:07 -0700 (PDT)
-Received: from ThinkPad-T520.homenet.telecomitalia.it
-	(host16-38-dynamic.45-79-r.retail.telecomitalia.it. [79.45.38.16])
-	by smtp.gmail.com with ESMTPSA id
-	hk7sm15600184wjb.5.2016.05.06.09.01.57
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Fri, 06 May 2016 09:02:07 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=4H6ZjybFkyyzO3iIW/VzkW1mPpALlMOPS2rwHMaCv6w=;
+	b=L0RLla8XwomzOlLI4XtgobmOL9GFgHj5zIrCicOweznOSk6zC8USB3o+bNkCjuerDc
+	Sh8pxzTw4VseKGWKO8hMxd0KXxz8GNMCfxF1OpLU29Bx95vDux2yjCQqeV9WbiWlrtpu
+	p4P7xNWu6f+0yhqUZ0buGS8xMkv2KPbZS99znNDi7Xe9pdpdh2p5lfddwbI9y0fPJ2OX
+	LxXLEMnm4Mt/F1oyWQQvWybA3XQf6iQ9LMv1xt8JcFEoLtvo4HLNHtmq/Zc3jIK+UrEL
+	YOqu9zb70r+Pzj09fw8X/LNt8e/PKrujIcsxoljjHB1MEXZhoN09mQdVzFKtUirRyaq1
+	Vj2Q==
+X-Gm-Message-State: AOPr4FXzyfbvaC4cSTy2ZhHmzwTarPy/rprXBgPH5EZrLj3zqK+oTLggiSrgbhEkWEMsFA==
+X-Received: by 10.55.33.167 with SMTP id f39mr3717925qki.156.1462555795649;
+	Fri, 06 May 2016 10:29:55 -0700 (PDT)
+Received: from lnx-dereks-laptop.minotaur.lab
+	(c-73-172-178-168.hsd1.md.comcast.net. [73.172.178.168])
+	by smtp.gmail.com with ESMTPSA id 141sm6113089qhk.7.2016.05.06.10.29.54
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 06 May 2016 10:29:55 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 May 2016 18:01:40 +0200
-Message-Id: <cover.1462550232.git.andrea.adami@gmail.com>
+Date: Fri,  6 May 2016 13:29:27 -0400
+Message-Id: <1462555768-3318-2-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-handheld] Pull Request 2016-05-06
+In-Reply-To: <1462555768-3318-1-git-send-email-derek@asterius.io>
+References: <1462555768-3318-1-git-send-email-derek@asterius.io>
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-gnome][PATCH 2/3] tracker: add missing depends for intltool-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,64 +47,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2016 16:02:08 -0000
+X-List-Received-Date: Fri, 06 May 2016 17:29:56 -0000
 
-The following changes since commit 796a12685dc6a32f6ccc1cb048291f8143d4c9fe:
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-gnome/recipes-support/tracker/tracker_0.14.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-  zaurus.inc: mention linux-kexecboot in the notes for the installer (2016-04-24 00:53:16 +0200)
-
-are available in the git repository at:
-
-  https://github.com/LinuxPDA/meta-handheld master
-
-for you to fetch changes up to 8155d87e06a4198542c559f77883bf6411021bef:
-
-  linux-handheld_4.4: unify spitz and akita configuration (2016-05-06 15:47:56 +0200)
-
-----------------------------------------------------------------
-Andrea Adami (14):
-      zaurus-legacy-tar: update SRC_URI
-      zaurus.inc: add BAD_RECOMMENDATIONS for eudev-hwdb (6MB)
-      linux-handheld: update to 4.4.8
-      linux-handheld: switch Zaurus to XZ kernel compression
-      linux-kexecboot: switch to XZ kernel compression
-      linux-handheld_4.4: readd LOCOMO_KEY_CENTER
-      linux-kexecboot_4.4: readd the OK button for poodle and collie
-      zaurus.inc: switch from cpio.lzma to cpio.xz
-      linux-kexecboot_4.4: switch to cpio.xz for the initramfs
-      linux-kexecboot_4.4: fix defconfig for collie
-      linux-handheld-4.4: update patch for sound/soc/pxa module autoloading
-      linux-handheld_4.4: remove extraneous patch
-      linux-kexecboot_4.4: optimize and standardize Zaurus defconfigs
-      linux-handheld_4.4: unify spitz and akita configuration
-
- conf/machine/include/zaurus.inc                    |  4 +-
- recipes-bsp/zaurus-utils/zaurus-legacy-tar.bb      | 18 ++--
- ...-fix-module-autoload-for-platform-drivers.patch | 95 ++++++++++++++++++++++
- .../linux/linux-handheld-4.4/akita/defconfig       |  2 +-
- .../linux/linux-handheld-4.4/c7x0/defconfig        |  1 +
- .../linux/linux-handheld-4.4/collie/defconfig      |  4 +-
- ...-emit-added-moved-or-deleted-file-warning.patch | 26 ------
- .../0090-locomokbd.c-fix-missing-KEY_CENTER.patch  | 39 +++++++++
- ...omokbd.c-invert-KEY_ENTER-and-KEY_KPENTER.patch | 31 +++++++
- .../linux/linux-handheld-4.4/poodle/defconfig      |  4 +-
- .../snd-soc-pxa2xx-modalias.patch                  |  7 --
- .../linux/linux-handheld-4.4/spitz/defconfig       |  4 +-
- .../linux/linux-handheld-4.4/tosa/defconfig        |  2 +-
- recipes-kernel/linux/linux-handheld_4.4.bb         | 11 +--
- .../linux/linux-kexecboot-4.4/akita/defconfig      | 51 ++++++++++--
- .../linux/linux-kexecboot-4.4/c7x0/defconfig       | 51 ++++++++++--
- .../linux/linux-kexecboot-4.4/collie/defconfig     | 23 +++++-
- .../linux/linux-kexecboot-4.4/poodle/defconfig     | 52 +++++++++---
- .../linux/linux-kexecboot-4.4/spitz/defconfig      | 52 ++++++++++--
- .../linux/linux-kexecboot-4.4/tosa/defconfig       | 73 +++++++++++++----
- recipes-kernel/linux/linux-kexecboot_4.4.bb        |  2 +
- 21 files changed, 440 insertions(+), 112 deletions(-)
- create mode 100644 recipes-kernel/linux/linux-handheld-4.4/ASoC-pxa-fix-module-autoload-for-platform-drivers.patch
- delete mode 100644 recipes-kernel/linux/linux-handheld-4.4/locomo/0039-XXX-don-t-emit-added-moved-or-deleted-file-warning.patch
- create mode 100644 recipes-kernel/linux/linux-handheld-4.4/locomo/0090-locomokbd.c-fix-missing-KEY_CENTER.patch
- create mode 100644 recipes-kernel/linux/linux-handheld-4.4/locomo/0091-locomokbd.c-invert-KEY_ENTER-and-KEY_KPENTER.patch
- delete mode 100644 recipes-kernel/linux/linux-handheld-4.4/snd-soc-pxa2xx-modalias.patch
+diff --git a/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
+index fa7fcd5..302d9b8 100644
+--- a/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
++++ b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Tracker is a tool designed to extract information and metadata about your personal data so that it can be searched easily and quickly."
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ee31012bf90e7b8c108c69f197f3e3a4"
+-DEPENDS = "file gstreamer dbus libexif gettext sqlite3 icu gst-plugins-base libgnome-keyring poppler tiff enca libgsf libunistring giflib taglib bzip2 upower gtk+3 libgee networkmanager"
++DEPENDS = "file gstreamer dbus libexif gettext sqlite3 icu gst-plugins-base libgnome-keyring poppler tiff enca libgsf libunistring giflib taglib bzip2 upower gtk+3 libgee networkmanager intltool-native"
+ 
+ RDEPENDS_${PN} += " gvfs gsettings-desktop-schemas"
+ HOMEPAGE = "http://projects.gnome.org/tracker/"
 -- 
 1.9.1
 
