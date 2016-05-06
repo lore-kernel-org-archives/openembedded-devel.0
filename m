@@ -1,39 +1,38 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk0-f178.google.com (mail-qk0-f178.google.com
-	[209.85.220.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 357ED6B6EA
+Received: from mail-qg0-f49.google.com (mail-qg0-f49.google.com
+	[209.85.192.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 75C8560017
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 May 2016 13:59:49 +0000 (UTC)
-Received: by mail-qk0-f178.google.com with SMTP id r184so60346671qkc.1
+	Fri,  6 May 2016 14:01:04 +0000 (UTC)
+Received: by mail-qg0-f49.google.com with SMTP id w36so56342015qge.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2016 06:59:51 -0700 (PDT)
+	Fri, 06 May 2016 07:01:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
 	bh=Nor0S/6OrU7QhN/ZVqVgBfLpCspJ5zwqDrdLj97I0JA=;
-	b=eg9MvbMMQpoVHHpR03IqcmVY41xMvTH1uoa3L7BdR5dSSn1YjXEKXJN7KlNKlGHJdZ
-	mTdBYiDZHbxw6BtfzpEQd/ncIwSN5ua4de6rwhJ1qb6yTU4jWrzQiO3Kq0UsjSA7ZKif
-	XgSRyZcJRcDDcl+Dl+DgRjeoOJK4bRJHJVhHZUp17qLIJpzgZMSQHV0QZQfPadmSF3KD
-	B9486onJjQshUUU1dF9UinX9j88vqLZJ4Jt30bNRCBgRo91DrkVR6TLriol3kZ+I27t4
-	fuEXLDS5ASKAScWPTltIGEY+GbYOiS7Tar1VeruOBBc7I00vsmX5cd/7nCMx0UQ+2KEq
-	WjgQ==
-X-Gm-Message-State: AOPr4FXJcUGBgjf/jommiTYpITY54Qo/7RVQs1fmrtD3s1RZyb9wlhUsCOxWjFXQ7pG1WA==
-X-Received: by 10.55.76.15 with SMTP id z15mr20377739qka.32.1462543190488;
-	Fri, 06 May 2016 06:59:50 -0700 (PDT)
-Received: from localhost ([187.23.154.250]) by smtp.gmail.com with ESMTPSA id
-	q128sm3530569qhq.9.2016.05.06.06.59.46
+	b=MWfiU6qc9m8GlHKMDYepvDgnxI66b0mSYQiLEJb89K79fWqSMvK9MfGBSvNoF9EFqW
+	ROH0asmmb7MxTC/js0pMmOmvV+Em8d4m4LDnCtAeZQDDu7qv77MO8OJI0ZLwBTPeAYKr
+	gXaOCN0L8d/K5TTbXYcNcgAsvD338TN+HHj+c1AaHJWJICxuRgxVhuCwTBpwVQZsXW17
+	dEGWcDI8JNh04fbSYgnH4T2WJbyg0V0i8GSsx94dATImFsiW/MvaH3pZzUMh+fVOTV9L
+	pa86ib7qUEMeyZP4q7pZA+650AodzHg7HoGH98PaGZZCF5z0Iwa6MuAXYQx4w4OX+xLw
+	TtkQ==
+X-Gm-Message-State: AOPr4FWls6wnlqZLD/hGcjG50aQBbAiAWbP82yfZNN9I0RK5tbA577J87AVzxPvePszYzw==
+X-Received: by 10.140.19.174 with SMTP id 43mr20054427qgh.44.1462543265156;
+	Fri, 06 May 2016 07:01:05 -0700 (PDT)
+Received: from localhost ([187.23.154.250])
+	by smtp.gmail.com with ESMTPSA id q2sm675158qke.15.2016.05.06.07.01.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 06 May 2016 06:59:48 -0700 (PDT)
+	Fri, 06 May 2016 07:01:03 -0700 (PDT)
 Received: by localhost (sSMTP sendmail emulation);
-	Fri, 06 May 2016 10:59:43 -0300
+	Fri, 06 May 2016 11:00:59 -0300
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-Date: Fri,  6 May 2016 10:59:22 -0300
-Message-Id: <1462543183-7080-1-git-send-email-otavio@ossystems.com.br>
+Date: Fri,  6 May 2016 11:00:38 -0300
+Message-Id: <1462543259-7206-1-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 2.8.2
 Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
 Subject: [meta-oe backport krogoth PATCH 01/22] net-snmp: enable ipv6 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -47,7 +46,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2016 13:59:52 -0000
+X-List-Received-Date: Fri, 06 May 2016 14:01:09 -0000
 
 From: Zhu Yanjun <yanjun.zhu@windriver.com>
 
