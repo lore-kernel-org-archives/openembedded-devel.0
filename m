@@ -1,42 +1,42 @@
 Return-Path: <otavio.salvador@gmail.com>
 Received: from mail-qk0-f175.google.com (mail-qk0-f175.google.com
 	[209.85.220.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 81F576012C
+	by mail.openembedded.org (Postfix) with ESMTP id 1EE3273289
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 May 2016 14:01:41 +0000 (UTC)
-Received: by mail-qk0-f175.google.com with SMTP id r184so60382521qkc.1
+	Fri,  6 May 2016 14:01:47 +0000 (UTC)
+Received: by mail-qk0-f175.google.com with SMTP id x7so60299770qkd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2016 07:01:43 -0700 (PDT)
+	Fri, 06 May 2016 07:01:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:organization;
-	bh=dcM5YdPwe8AE9F34oh/y70MzBqd4LCzFHuBxCW6Rnxs=;
-	b=lXSAhzr83ETdXiANdXl/Exzh/Gy3dJrNkS5V+1hoAm9rTSl8XLDjb1MDxgo2LNwDR+
-	o1GyZhOnVOEK3vZM94VPb9myUV+zIJdoFAWGInBodvcN48xiB06dLy76Q0UO9ZCM3QTh
-	fljx3uLO6C6DN2pESx7tSjbfcizN8z74HfAFIbljrNb1HEQgawJo/m8YCa9ZBCd+Casn
-	BXWYZvcFurSIo/WP9aambIEfNKDQUlPTHhhZ/DHHEIBxqxR/Ms0KpzkviVi0xl6OBTHh
-	mkWxuK8MTXKR5of26VbczuOuq+W41vvWcxQF/n3R0BW7g9O7PnaY72/WiRPZE+gRchBW
-	xziw==
-X-Gm-Message-State: AOPr4FUyp+lYN3hFwtVBUbo4RUl6Mcn+wh94+rjcE0mv+ks0nh8IqZZCBkKDEceZUroV9Q==
-X-Received: by 10.55.157.204 with SMTP id g195mr21292692qke.68.1462543302252; 
-	Fri, 06 May 2016 07:01:42 -0700 (PDT)
+	bh=3QL+vhylCitWGcrWWpQu2mYAhORbvmqq9jWIdTehchs=;
+	b=YeUznoqMdAGmucgrxEwE5Ph8bbRwF3TDaNBxXmbi5a9cUFTDuaLzNhzhvNsgresbBh
+	leDDSG54uA4R420j2Ud51H5XQqiFi0bTU6vdAK/mjbn+I0I4RGcmnZh/8dU+YfxuPwoa
+	qTkt0LkfyAXUbeQ9ewZ6q5yT49W5hqgL/rXegNKLZoDQ9kuh1N9ZIxCuQs9kL6MxErQg
+	zVnILeawaeHgJzTcT4LB0q4ghZ2yVZZxMfFDLpju6uvw+O1DknrpCyAhksZPrJOtBAhh
+	PMsudmxRzlUWmnFq1khyxwJvI05qb8AYSsqtToIKRgpzGk420Dr2/nt88F18Mkp/g9de
+	xNYA==
+X-Gm-Message-State: AOPr4FWSxSS27mY4GqIQ2EVbyRGbimTPtRzk9RBh34ZOZerSkP8Nt40tl4p2FKJ6krbIOw==
+X-Received: by 10.55.25.90 with SMTP id k87mr20364867qkh.84.1462543307819;
+	Fri, 06 May 2016 07:01:47 -0700 (PDT)
 Received: from localhost ([187.23.154.250])
-	by smtp.gmail.com with ESMTPSA id x6sm5804731qka.16.2016.05.06.07.01.36
+	by smtp.gmail.com with ESMTPSA id e11sm5760663qhe.2.2016.05.06.07.01.44
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 06 May 2016 07:01:41 -0700 (PDT)
+	Fri, 06 May 2016 07:01:46 -0700 (PDT)
 Received: by localhost (sSMTP sendmail emulation);
-	Fri, 06 May 2016 11:01:33 -0300
+	Fri, 06 May 2016 11:01:42 -0300
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-Date: Fri,  6 May 2016 11:00:44 -0300
-Message-Id: <1462543259-7206-7-git-send-email-otavio@ossystems.com.br>
+Date: Fri,  6 May 2016 11:00:45 -0300
+Message-Id: <1462543259-7206-8-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 2.8.2
 In-Reply-To: <1462543259-7206-1-git-send-email-otavio@ossystems.com.br>
 References: <1462543259-7206-1-git-send-email-otavio@ossystems.com.br>
 Organization: O.S. Systems Software LTDA.
-Subject: [meta-oe backport krogoth PATCH 07/22] squid: CVE-2016-3947
+Subject: [meta-oe backport krogoth PATCH 08/22] ltrace: Error Fix for ARM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,96 +49,152 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2016 14:01:42 -0000
+X-List-Received-Date: Fri, 06 May 2016 14:01:47 -0000
 
-From: Catalin Enache <catalin.enache@windriver.com>
+From: Li xin <lixin.fnst@cn.fujitsu.com>
 
-Heap-based buffer overflow in the Icmp6::Recv function in
-icmp/Icmp6.cc in the pinger in Squid before 3.5.16 and 4.x
-before 4.0.8 allows remote servers to cause a denial of
-service (performance degradation or transition failures)
-or write sensitive information to log files via an ICMPv6
-packet.
+1) The error is as following:
+     root # ltrace ls
+     __libc_start_main(0xb6fbc018, 1, 0xbed8fdc4, 0xb6fd0b88PTRACE_SINGLESTEP: Input/output error
+     2747 couldn't continue when handling __libc_start_main (0xb6fbbde0) at 0xb6fbbde0
+   The master branch fix it.
 
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-3947
+2) remove unused patch:
+     --0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
+     --ltrace-0.7.2-unused-typedef.patch
 
-Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
 
- .../squid/files/CVE-2016-3947.patch                | 48 ++++++++++++++++++++++
- .../recipes-daemons/squid/squid_3.5.7.bb           |  1 +
- 2 files changed, 49 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-2016-3947.patch
+ ...-ltrace-fix-gcc-5-logical-not-parentheses.patch | 38 -----------------
+ .../ltrace/ltrace-0.7.2-unused-typedef.patch       | 49 ----------------------
+ meta-oe/recipes-devtools/ltrace/ltrace_git.bb      |  6 +--
+ 3 files changed, 2 insertions(+), 91 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
+ delete mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/ltrace-0.7.2-unused-typedef.patch
 
-diff --git a/meta-networking/recipes-daemons/squid/files/CVE-2016-3947.patch b/meta-networking/recipes-daemons/squid/files/CVE-2016-3947.patch
-new file mode 100644
-index 0000000..c83e6ab
---- /dev/null
-+++ b/meta-networking/recipes-daemons/squid/files/CVE-2016-3947.patch
-@@ -0,0 +1,48 @@
-+From 0fe108ecb2bbdf684f159950eaa55d22f07c4008 Mon Sep 17 00:00:00 2001
-+From: Catalin Enache <catalin.enache@windriver.com>
-+Date: Wed, 20 Apr 2016 15:17:18 +0300
-+Subject: [PATCH] pinger: Fix buffer overflow in Icmp6::Recv
-+
-+Upstream-Status: Backport
-+CVE: CVE-2016-3947
-+
-+Author: Yuriy M. Kaminskiy <yumkam@gmail.com>
-+Committer: Amos Jeffries <squid3@treenet.co.nz
-+Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
-+---
-+ src/icmp/Icmp6.cc | 5 ++---
-+ 1 file changed, 2 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/icmp/Icmp6.cc b/src/icmp/Icmp6.cc
-+index 794a51a..ee84b80 100644
-+--- a/src/icmp/Icmp6.cc
-++++ b/src/icmp/Icmp6.cc
-+@@ -256,7 +256,7 @@ Icmp6::Recv(void)
-+     #define ip6_hops    // HOPS!!!  (can it be true??)
-+ 
-+         ip = (struct ip6_hdr *) pkt;
-+-        pkt += sizeof(ip6_hdr);
-++        NP: echo size needs to +sizeof(ip6_hdr);
-+ 
-+     debugs(42, DBG_CRITICAL, HERE << "ip6_nxt=" << ip->ip6_nxt <<
-+             ", ip6_plen=" << ip->ip6_plen <<
-+@@ -267,7 +267,6 @@ Icmp6::Recv(void)
-+     */
-+ 
-+     icmp6header = (struct icmp6_hdr *) pkt;
-+-    pkt += sizeof(icmp6_hdr);
-+ 
-+     if (icmp6header->icmp6_type != ICMP6_ECHO_REPLY) {
-+ 
-+@@ -292,7 +291,7 @@ Icmp6::Recv(void)
-+         return;
-+     }
-+ 
-+-    echo = (icmpEchoData *) pkt;
-++    echo = (icmpEchoData *) (pkt + sizeof(icmp6_hdr));
-+ 
-+     preply.opcode = echo->opcode;
-+ 
-+-- 
-+2.7.4
-+
-diff --git a/meta-networking/recipes-daemons/squid/squid_3.5.7.bb b/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
-index c3eabcd..750484a 100644
---- a/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
-+++ b/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
-@@ -19,6 +19,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
-            file://squid-use-serial-tests-config-needed-by-ptest.patch \
-            file://run-ptest \
-            file://volatiles.03_squid \
-+           file://CVE-2016-3947.patch \
- "
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
+deleted file mode 100644
+index 681c43d..0000000
+--- a/meta-oe/recipes-devtools/ltrace/ltrace/0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
++++ /dev/null
+@@ -1,38 +0,0 @@
+-From 876fe5680d77800426f8c4c5680a235732d722e6 Mon Sep 17 00:00:00 2001
+-From: Kai Kang <kai.kang@windriver.com>
+-Date: Mon, 24 Aug 2015 17:37:54 +0800
+-Subject: [PATCH] ltrace: fix gcc 5 logical not parentheses
+-
+-Upstream-Status: Pending
+-
+-Build ltrace with gcc 5.2, it fails with:
+-
+-error: logical not is only applied to the left hand side of comparison
+-[-Werror=logical-not-parentheses]
+-   if (!need_data(data, offset, SIZE / 8) < 0)  \
+-                                             ^
+-
+-Function need_data just return 0 on success and -1 if fail. So it is ok
+-to just test if (need_data(data, offset, SIZE / 8) < 0).
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+----
+- ltrace-elf.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/ltrace-elf.c b/ltrace-elf.c
+-index c571d2a..7fe830f 100644
+---- a/ltrace-elf.c
+-+++ b/ltrace-elf.c
+-@@ -218,7 +218,7 @@ need_data(Elf_Data *data, GElf_Xword offset, GElf_Xword size)
+- 	int								\
+- 	NAME(Elf_Data *data, GElf_Xword offset, uint##SIZE##_t *retp)	\
+- 	{								\
+--		if (!need_data(data, offset, SIZE / 8) < 0)		\
+-+		if (need_data(data, offset, SIZE / 8) < 0)		\
+- 			return -1;					\
+- 									\
+- 		if (data->d_buf == NULL) /* NODATA section */ {		\
+--- 
+-1.9.1
+-
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/ltrace-0.7.2-unused-typedef.patch b/meta-oe/recipes-devtools/ltrace/ltrace/ltrace-0.7.2-unused-typedef.patch
+deleted file mode 100644
+index 8f3c0ec..0000000
+--- a/meta-oe/recipes-devtools/ltrace/ltrace/ltrace-0.7.2-unused-typedef.patch
++++ /dev/null
+@@ -1,49 +0,0 @@
+-diff --git a/value.c b/value.c
+-index d18db17..b98298e 100644
+---- a/value.c
+-+++ b/value.c
+-@@ -1,6 +1,6 @@
+- /*
+-  * This file is part of ltrace.
+-- * Copyright (C) 2011,2012 Petr Machata, Red Hat Inc.
+-+ * Copyright (C) 2011,2012,2013 Petr Machata, Red Hat Inc.
+-  *
+-  * This program is free software; you can redistribute it and/or
+-  * modify it under the terms of the GNU General Public License as
+-@@ -282,9 +282,9 @@ value_init_deref(struct value *ret_val, struct value *valp)
+- 	if (value_extract_word(valp, &l, NULL) < 0)
+- 		return -1;
+- 
+--	/* We need "long" to be long enough to hold platform
+-+	/* We need "long" to be long enough to hold target
+- 	 * pointers.  */
+--	typedef char assert__long_enough_long[-(sizeof(l) < sizeof(void *))];
+-+	assert(sizeof(l) >= sizeof(arch_addr_t));
+- 
+- 	value_common_init(ret_val, valp->inferior, valp,
+- 			  valp->type->u.ptr_info.info, 0);
+-diff --git a/lens_default.c b/lens_default.c
+-index ed3d0e1..5d00814 100644
+---- a/lens_default.c
+-+++ b/lens_default.c
+-@@ -1,6 +1,6 @@
+- /*
+-  * This file is part of ltrace.
+-- * Copyright (C) 2011,2012 Petr Machata, Red Hat Inc.
+-+ * Copyright (C) 2011,2012,2013 Petr Machata, Red Hat Inc.
+-  * Copyright (C) 1998,2004,2007,2008,2009 Juan Cespedes
+-  * Copyright (C) 2006 Ian Wienand
+-  * Copyright (C) 2006 Steve Fink
+-@@ -342,9 +342,9 @@ format_array(FILE *stream, struct value *value, struct value_dict *arguments,
+- 	     struct expr_node *length, size_t maxlen, int before,
+- 	     const char *open, const char *close, const char *delim)
+- {
+--	/* We need "long" to be long enough to cover the whole address
+--	 * space.  */
+--	typedef char assert__long_enough_long[-(sizeof(long) < sizeof(void *))];
+-+	/* We need "long" to be long enough to cover the whole target
+-+	 * address space.  */
+-+	assert(sizeof(long) >= sizeof(arch_addr_t));
+- 	long l;
+- 	if (expr_eval_word(length, value, arguments, &l) < 0)
+- 		return -1;
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+index bc4e271..19899f9 100644
+--- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
++++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+@@ -11,14 +11,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
+ PE = "1"
+ PV = "7.3+git${SRCPV}"
+-SRCREV = "37ecc41b58be3dbdd79592a76e331b5b371e4f81"
++SRCREV = "01b10e191e99d8cb147e5a2b7da8196e0ec6fb94"
+ 
+ DEPENDS = "elfutils"
+ RDEPENDS_${PN} = "elfutils"
+-SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git;branch=ltrace-0.7 \
+-           file://ltrace-0.7.2-unused-typedef.patch \
++SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git;branch=master \
+            file://configure-allow-to-disable-selinux-support.patch \
+-           file://0001-ltrace-fix-gcc-5-logical-not-parentheses.patch \
+           "
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.8.2
 
