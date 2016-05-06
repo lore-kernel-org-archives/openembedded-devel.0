@@ -1,42 +1,42 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk0-f172.google.com (mail-qk0-f172.google.com
-	[209.85.220.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 74EB8731C4
+Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com
+	[209.85.192.45])
+	by mail.openembedded.org (Postfix) with ESMTP id E9AEA73257
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 May 2016 14:02:03 +0000 (UTC)
-Received: by mail-qk0-f172.google.com with SMTP id r184so60389652qkc.1
+	Fri,  6 May 2016 14:02:09 +0000 (UTC)
+Received: by mail-qg0-f45.google.com with SMTP id 90so56342800qgz.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2016 07:02:05 -0700 (PDT)
+	Fri, 06 May 2016 07:02:10 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:organization;
-	bh=GjM4R2hnt687eS1PZGBYk9Z6F/v0wnAjeJy8R2H+HvA=;
-	b=Ru9HyFwE9s48pd6lSdJflRvboQRH20p21dqh9q2rPoIF8IJ0424mVwxQqEsvDPsW+9
-	276EfZAXFHr0wJAaw2Pp3+dmdydMsqV8GpQYrZA2dvLamXLErkH7QQ6+lpDVMhzgarBd
-	hSERhlIoz1b2Mfa4YB0I024blpq7kN8PJFFp08J/Lb/p79UyhstLAvqOMnstcIMKdyxM
-	L8iU5q3td3/yoYR0DERxB2FxD/+EDpoBAcL8HbtqKFQxI0GtAFYgEmKOtER4ft64BQo3
-	tzoHVO848ysFT/29rNPzbX0yGwP4agImDTyuTH0K2gmmwQTCrV9PIJCVsetA7cirRO0Q
-	fmqQ==
-X-Gm-Message-State: AOPr4FV67piEt3m+wcViovNx/UdHbOxxu7c9a0KN4ALxdBYoHnlZTdCDOYF+w9bWhJrM2Q==
-X-Received: by 10.55.163.86 with SMTP id m83mr20642592qke.75.1462543324611;
-	Fri, 06 May 2016 07:02:04 -0700 (PDT)
+	bh=tP3JoxwKLK9vfJzcBAe8JoNDKzEi8YdRZYPb00bQVhc=;
+	b=YodLWj1huYf8SMF4oLHGdM8M5NlPgOpsAOHQiE97VkUyKF4XWu+IrQSHMelI9chmZT
+	ngixro0mfV92lP1CQP8cQYAvUzZ0TQGxOkPxF/M9xokuXvdEggsYweT2Hot3ccqnxvpO
+	XeMEd8ZOA8jvk0pQFj6GHMjjYJlF0wIB8HpXCD79wvyaKq+zR9R1ra26LLyLZMs5/mO/
+	jG1U0VL/jqNCRupwErMkgqYRqV7OBNFaPun8NzyGZzkPFTM0YRZ5NOi445vSm552Qg5W
+	K7tP0VCtYIYRfYBdXkDrc6KSaBKLv2Jqae7JjKQBVNjQVD9gauqeHB/aeLcPb93cIB+v
+	j1Sg==
+X-Gm-Message-State: AOPr4FXybbhOpfVMtXzzQwPfAEip95P9oLzVi0uMGwyumpt8nluvZ8Hfu+JVsD0cRSeBlg==
+X-Received: by 10.140.19.131 with SMTP id 3mr18820691qgh.83.1462543330600;
+	Fri, 06 May 2016 07:02:10 -0700 (PDT)
 Received: from localhost ([187.23.154.250]) by smtp.gmail.com with ESMTPSA id
-	b40sm5773448qga.47.2016.05.06.07.02.01
+	d140sm5833244qke.10.2016.05.06.07.02.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 06 May 2016 07:02:03 -0700 (PDT)
+	Fri, 06 May 2016 07:02:09 -0700 (PDT)
 Received: by localhost (sSMTP sendmail emulation);
-	Fri, 06 May 2016 11:01:59 -0300
+	Fri, 06 May 2016 11:02:04 -0300
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-Date: Fri,  6 May 2016 11:00:48 -0300
-Message-Id: <1462543259-7206-11-git-send-email-otavio@ossystems.com.br>
+Date: Fri,  6 May 2016 11:00:49 -0300
+Message-Id: <1462543259-7206-12-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 2.8.2
 In-Reply-To: <1462543259-7206-1-git-send-email-otavio@ossystems.com.br>
 References: <1462543259-7206-1-git-send-email-otavio@ossystems.com.br>
 Organization: O.S. Systems Software LTDA.
-Subject: [meta-oe backport krogoth PATCH 11/22] sblim-sfcb: add missing dependency on unzip-native
+Subject: [meta-oe backport krogoth PATCH 12/22] syslog-ng.inc: fix prerm script & class includes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,42 +49,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2016 14:02:05 -0000
+X-List-Received-Date: Fri, 06 May 2016 14:02:13 -0000
 
-From: Martin Jansa <Martin.Jansa@gmail.com>
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 
-* otherwise configure fails with:
-  | checking whether to build shared libraries... yes
-  | checking whether to build static libraries... no
-  | checking for unzip... no
-  | configure: error: Could not find unzip
-  | NOTE: The following config.log files may provide further information.
-  | NOTE: /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/sblim-sfcb/1.4.9-r0/build/config.log
-  | ERROR: configure failed
-  | ERROR: Function failed: do_configure (log file is located at /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/sblim-sfcb/1.4.9-r0/temp/log.do_configure.9838)
-  NOTE: recipe sblim-sfcb-1.4.9-r0: task do_configure: Failed
-  ERROR: Task 5 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb, do_configure) failed with exit code '1'
+The order of class includes is very important because it's the order in
+which classes are evaluated. Both update-rc.d and update-alternatives
+write to the prerm script, so the class order decides the script code
+ordering. As they are now, prerm is:
 
+ #!/bin/sh
+        update-alternatives --remove  syslog-init /etc/init.d/syslog.syslog-ng
+if [ -z "$D" ]; then
+        /etc/init.d/syslog stop
+fi
+
+This causes errors because when syslog-ng is the only alternative it is
+removed and then the script tries to stop it (No such file or directory)
+but even if there are other alternatives, the script tries to stop
+something other than syslog-ng which was removed.
+
+By reversing the include order, prerm gets generated correctly and it
+tries to stop syslog-ng before removing it:
+
+if [ -z "$D" ]; then
+        /etc/init.d/syslog stop
+fi
+update-alternatives --remove  syslog-init /etc/init.d/syslog.syslog-ng
+
+Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
 
- meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb | 2 +-
+ meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-index ed5382e..41626d1 100644
---- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-@@ -9,7 +9,7 @@ HOMEPAGE = "http://www.sblim.org"
- SECTION = "Applications/System"
- LICENSE = "EPL-1.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f300afd598546add034364cd0a533261"
--DEPENDS = "curl libpam openssl sblim-sfc-common"
-+DEPENDS = "curl libpam openssl sblim-sfc-common unzip-native"
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+index 382dc5e..4e0f697 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+@@ -22,7 +22,7 @@ SRC_URI = "http://www.balabit.com/downloads/files/syslog-ng/sources/${PV}/source
+            file://configure.ac-add-option-enable-thread-tls-to-manage-.patch \
+ "
  
- SRC_URI = "http://downloads.sourceforge.net/sblim/${BP}.tar.bz2 \
-            file://sblim-sfcb-1.3.9-sfcbrepos-schema-location.patch \
+-inherit autotools systemd pkgconfig update-rc.d update-alternatives
++inherit autotools systemd pkgconfig update-alternatives update-rc.d
+ 
+ EXTRA_OECONF = " \
+     --enable-dynamic-linking \
 -- 
 2.8.2
 
