@@ -1,54 +1,46 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id B549A766A3
+	by mail.openembedded.org (Postfix) with ESMTP id 7E1507327F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 May 2016 14:32:17 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id n129so9048519wmn.1
+	Fri,  6 May 2016 14:33:56 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id n129so9056237wmn.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2016 07:32:18 -0700 (PDT)
+	Fri, 06 May 2016 07:33:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=m1DqTF7QxG5LRvZQKQCBEcB+gA74bs7Th1KAqoY/tiw=;
-	b=l89v5SROS9GBdvZtOWp99/qdl55qslMiCZ73WYHdsSHybICcSL6ZjckUcJ7k7CeeUC
-	uRIkTTDrHnXRI10W2rJayf1JskwOcTEfbUmJygfxmLQiEpKkNboqeB6FFDYCPyhVxGBV
-	JlftzFRUGGXDxUYPKU0kcU4jqMe3dh+ld+kQM4WRJJQEYCoegf9cXgIa3hmw2xm9ZBIU
-	W0+yQdTxgepYu3kOQlJ/YS6smfL5FNAFCywsu55TAe3CQPUUxX8pyqLHYjvtcHuIoPuz
-	bS9AYq5XqC1ZsX0pajAWkIktfEW60H80dik7O0NZVdsM/3/qPn99WIXsd9QbFSCDtcL/
-	ocEQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=Um/MaXU0u5hsHaZEkC6cjV1MkCIa02LjXysuri1hqsU=;
+	b=VI4oG2AgM3mWayuLUW4TtkHuYLKjMSD1nBi805D50Z8p7mLb9bKGFK087r9umwej+Y
+	FwsIvsEjD8rSwFVRdzLmci6aULD0mlAdriNBUYa7p4jAViHqM0U54xTZGoU9cdsy8DBc
+	SYWXjuhTgYLEGqc0J76uXkNU3I9f1QqMx23KfID1Sy6YHCER/yojJf0k3BaNQMq2D/Vm
+	9Ygm+YuqBZp8d4A4Y0OaZwraLAsUi1//heFGehQzhAnJg9L6GVvomqQyY9yqYwFJRLem
+	N5JJtjdYYAijPk7oOle6kk9+7N7sdguBqMpjdbenp/9Jt1eEW3zZsFEAjlEKccXPf/PV
+	ukiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=m1DqTF7QxG5LRvZQKQCBEcB+gA74bs7Th1KAqoY/tiw=;
-	b=dlyBfmw2u0suUCxOcJG4Q5fe6t9kGWKLZnIrPfU/7bMUiMqU16bTToHTDmTzAWDgWt
-	99c0PjTiMgIc4uFCL2+9mUfTb76L70Go5lOps3Ae7zX7W9iwJczgmx6AgMnPWMoFZzLP
-	Wrjfwgc9ww5zd9/tAi0vWVdNdqztJUMuesXipKCc0T456yQ2y5G6UuRFr88f99zX4rqM
-	DbByZAeYk+HPBpjdbhmmmIBHXREfq8jHwnkn1QcdweCGy0H914dnbo4DLSzFuRK7Ir8u
-	IMNKipNa3icXF1kdKoQ0P1iBKoiEWDottXZg6r3GoumKFL6QL5TFsMs+os8i89ux5+mm
-	NHDw==
-X-Gm-Message-State: AOPr4FV6//EqFnVANEppjV/BCxydvo9/fz9F6BZrMo9tbMQVT1afYQBO2NJCOAypPkuuzw==
-X-Received: by 10.194.9.201 with SMTP id c9mr20368692wjb.7.1462545137761;
-	Fri, 06 May 2016 07:32:17 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Um/MaXU0u5hsHaZEkC6cjV1MkCIa02LjXysuri1hqsU=;
+	b=MfjhOH30hhmN8DVQcuzGJ/WNJ6r3BnPKmod0r4sZIazEc4UL9dArftBgcabcf6yiH/
+	3jQRCl270oWJbSAm+oWfhmohtlCu+jYzg7/YK10DEHvIUuRVd7QIY1C7bFD5hmCGIq9J
+	A6+09Gd/e0UjuqfHjQa0Dd9VuVy1e6kjbxOm3jWKhwpVV950XS4SVD4Xc1uj+JFHA7/d
+	LS/swWNw7vb1JEstYwWeg0wRN3+ttzHnP/HBZsEuwGFcbwfGL4IScPt2MGnMI/JfZcZk
+	rr/MRlZdr0fR9IeyN92ANWGiGR9WBpe5tHx3yQXuCDbZ7kxRFQS8izWuEhrSIsxRYO1K
+	1ozA==
+X-Gm-Message-State: AOPr4FU24WvpC+BJYDpWJPwu4ga9yG+TQep55pkeiRQlFPr1EqoOG4qLIZk0RyZTOmzHBg==
+X-Received: by 10.194.32.199 with SMTP id l7mr20309205wji.137.1462545236972;
+	Fri, 06 May 2016 07:33:56 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
 	by smtp.gmail.com with ESMTPSA id
-	s10sm15354232wjp.3.2016.05.06.07.32.15
-	for <openembedded-devel@lists.openembedded.org>
+	q125sm8736941wmd.19.2016.05.06.07.33.54
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 06 May 2016 07:32:16 -0700 (PDT)
+	Fri, 06 May 2016 07:33:55 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 6 May 2016 16:33:47 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160506143347.GF2544@jama>
-References: <1462543259-7206-1-git-send-email-otavio@ossystems.com.br>
-	<1462543259-7206-8-git-send-email-otavio@ossystems.com.br>
-	<20160506141621.GD2544@jama>
-	<CAP9ODKq_Jkd912c8TwBS7u1+M_hwHjM6DKxAM15TuUzBsrgvxg@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAP9ODKq_Jkd912c8TwBS7u1+M_hwHjM6DKxAM15TuUzBsrgvxg@mail.gmail.com>
-User-Agent: Mutt/1.6.1 (2016-04-27)
-Subject: Re: [meta-oe backport krogoth PATCH 08/22] ltrace: Error Fix for ARM
+Date: Fri,  6 May 2016 16:35:22 +0200
+Message-Id: <1462545324-27232-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.8.2
+Cc: Herrie <github.com@herrie.org>
+Subject: [PATCH][krogoth][meta-oe 1/3] pidgin: Update to 2.10.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,60 +53,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2016 14:32:18 -0000
-X-Groupsio-MsgNum: 61388
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="4f28nU6agdXSinmL"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 06 May 2016 14:33:57 -0000
 
---4f28nU6agdXSinmL
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Herrie <github.com@herrie.org>
 
-On Fri, May 06, 2016 at 11:20:56AM -0300, Otavio Salvador wrote:
-> On Fri, May 6, 2016 at 11:16 AM, Martin Jansa <martin.jansa@gmail.com> wr=
-ote:
-> > On Fri, May 06, 2016 at 11:00:45AM -0300, Otavio Salvador wrote:
-> >> From: Li xin <lixin.fnst@cn.fujitsu.com>
-> >>
-> >> 1) The error is as following:
-> >>      root # ltrace ls
-> >>      __libc_start_main(0xb6fbc018, 1, 0xbed8fdc4, 0xb6fd0b88PTRACE_SIN=
-GLESTEP: Input/output error
-> >>      2747 couldn't continue when handling __libc_start_main (0xb6fbbde=
-0) at 0xb6fbbde0
-> >>    The master branch fix it.
-> >>
-> >> 2) remove unused patch:
-> >>      --0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
-> >>      --ltrace-0.7.2-unused-typedef.patch
-> >
-> > This still has issue reported here:
-> > http://lists.openembedded.org/pipermail/openembedded-devel/2016-April/1=
-07207.html
-> >
-> > I would prefer not to backport it to kergoth until it's fixed.
->=20
-> Sure; makes sense. Do you want me to resend the patches with this one
-> dropped or you drop it when queueing?
+Which is compatible with GnuTLS that's included in Krogoth.
 
-I'll let Armin to consolidate pending changes and send pull-request
-after he tests them, so the question is for him not me :).
+Signed-off-by: Herman van Hazendonk <github.com@herrie.org>
+---
+ .../pidgin/pidgin/pidgin-cross-python-265.patch    | 35 ++++++++++++++--------
+ .../pidgin/pidgin/pidgin.desktop-set-icon.patch    | 11 -------
+ .../pidgin/{pidgin_2.10.9.bb => pidgin_2.10.12.bb} | 10 ++-----
+ 3 files changed, 26 insertions(+), 30 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/pidgin/pidgin/pidgin.desktop-set-icon.patch
+ rename meta-oe/recipes-support/pidgin/{pidgin_2.10.9.bb => pidgin_2.10.12.bb} (91%)
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch b/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch
+index 57c4c46..cfc681c 100644
+--- a/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch
++++ b/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch
+@@ -1,16 +1,27 @@
+-Index: pidgin-2.6.5/configure.ac
+-===================================================================
+---- pidgin-2.6.5.orig/configure.ac
+-+++ pidgin-2.6.5/configure.ac
+-@@ -1470,8 +1470,9 @@ if test "_$pythonpath" != _ ; then
+- 		AC_CHECK_LIB(pthread, pthread_create, )
+- 		AC_CHECK_LIB(util, openpty, )
+- 		AC_CHECK_LIB(db, dbopen, )
+--		PY_LIBS="-L$PY_EXEC_PREFIX/lib/python$PY_VERSION/config -lpython$PY_VERSION"
+--		PY_CFLAGS="-I$PY_PREFIX/include/python$PY_VERSION"
++From 428836ba7f9048970626ef0d6b805107f7c52d33 Mon Sep 17 00:00:00 2001
++From: Herrie <github.com@herrie.org>
++Date: Thu, 5 May 2016 13:33:29 +0200
++Subject: [PATCH] Updated python patch
++
++---
++ configure.ac | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index 94ea8cf..2285adb 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -1587,9 +1587,9 @@ dnl (Thanks to XChat)
++ if test "x$enable_consoleui" = "xyes" -a ! -z "$PYTHON" -a x"$PYTHON" != x"no" ; then
++ 	AC_MSG_CHECKING(for Python compile flags)
++ 	if test -f ${PYTHON}-config; then
++-		PY_CFLAGS=`${PYTHON}-config --includes`
++-		PY_LIBS=`${PYTHON}-config --libs`
++-		AC_DEFINE(USE_PYTHON, [1], [Define if python headers are available.])
+ +		m4_pattern_allow([^PKG_CONFIG_SYSROOT_DIR$])
+ +		PY_LIBS="-L$PKG_CONFIG_SYSROOT_DIR/usr/lib/python$PY_VERSION/config -lpython$PY_VERSION"
+-+		PY_CFLAGS="-I$PKG_CONFIG_SYSROOT_DIR/usr/include/python$PY_VERSION"
+- 		AC_DEFINE(USE_PYTHON, [1], [Define if python headers are available.])
+++		PY_CFLAGS="-I$PKG_CONFIG_SYSROOT_DIR/usr/include/python$PY_VERSION"		AC_DEFINE(USE_PYTHON, [1], [Define if python headers are available.])
+  		AC_MSG_RESULT(ok)
+  	else
++ 		AC_MSG_RESULT([Cannot find ${PYTHON}-config])
++
+diff --git a/meta-oe/recipes-support/pidgin/pidgin/pidgin.desktop-set-icon.patch b/meta-oe/recipes-support/pidgin/pidgin/pidgin.desktop-set-icon.patch
+deleted file mode 100644
+index 05f7689..0000000
+--- a/meta-oe/recipes-support/pidgin/pidgin/pidgin.desktop-set-icon.patch
++++ /dev/null
+@@ -1,11 +0,0 @@
+---- pidgin-2.0.1/pidgin.desktop.in.orig	2007-06-20 23:50:44.000000000 +0000
+-+++ pidgin-2.0.1/pidgin.desktop.in	2007-06-20 23:51:05.000000000 +0000
+-@@ -4,7 +4,7 @@
+- _GenericName=Internet Messenger
+- _Comment=Send instant messages over multiple protocols
+- Exec=pidgin
+--Icon=pidgin
+-+Icon=/usr/share/icons/hicolor/48x48/apps/pidgin.png
+- StartupNotify=true
+- Terminal=false
+- Type=Application
+diff --git a/meta-oe/recipes-support/pidgin/pidgin_2.10.9.bb b/meta-oe/recipes-support/pidgin/pidgin_2.10.12.bb
+similarity index 91%
+rename from meta-oe/recipes-support/pidgin/pidgin_2.10.9.bb
+rename to meta-oe/recipes-support/pidgin/pidgin_2.10.12.bb
+index 8352110..9133c1c 100644
+--- a/meta-oe/recipes-support/pidgin/pidgin_2.10.9.bb
++++ b/meta-oe/recipes-support/pidgin/pidgin_2.10.12.bb
+@@ -2,23 +2,19 @@ DESCRIPTION = "multi-protocol instant messaging client"
+ SECTION = "x11/network"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+-DEPENDS = "python startup-notification avahi gtk+ ncurses gnutls virtual/libintl gstreamer dbus intltool-native farsight2 libidn"
++DEPENDS = "python startup-notification avahi gtk+ ncurses gnutls virtual/libintl gstreamer dbus intltool-native farsight2 libidn libxml2 gconf dbus-glib"
+ 
+ inherit autotools gettext pkgconfig gconf perlnative
+ 
+-# http://errors.yoctoproject.org/Errors/Details/25824/
+-PNBLACKLIST[pidgin] ?= "Not compatible with gnutls version 3.4 currently in oe-core and also depends on broken libnice through farsight2"
+-
+ SRC_URI = "\
+     ${SOURCEFORGE_MIRROR}/pidgin/pidgin-${PV}.tar.bz2 \
+     file://sanitize-configure.ac.patch \
+-    file://pidgin.desktop-set-icon.patch \
+     file://purple-OE-branding-25.patch \
+     file://pidgin-cross-python-265.patch \
+ "
+ 
+-SRC_URI[md5sum] = "10a4a69d077893f6dd3438cd8af94e81"
+-SRC_URI[sha256sum] = "dc362ed8577f623eea4554a79e917073aa726825074fea402f2e515f0f51f319"
++SRC_URI[md5sum] = "14e0f5cfb2ed065e4dc80391a806ac76"
++SRC_URI[sha256sum] = "2c7523f0fefe89749c03b2b738ab9f7bd186da435be4762f1487eee31e77ffdd"
+ 
+ EXTRA_OECONF = " \
+     --enable-vv \
+-- 
+2.8.2
 
---4f28nU6agdXSinmL
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlcsq0oACgkQN1Ujt2V2gBxd6wCbBSM8G+WiS7EkVxqrUi9vlAbT
-k1YAoLpAHpPPCzU2CqOb9tTyYa51wbA6
-=duDB
------END PGP SIGNATURE-----
-
---4f28nU6agdXSinmL--
