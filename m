@@ -1,48 +1,58 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id A35B876EBF
+Return-Path: <trini@konsulko.com>
+Received: from mail-yw0-f178.google.com (mail-yw0-f178.google.com
+	[209.85.161.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 8ED7A75D22
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 May 2016 14:34:00 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id w143so9121468wmw.3
+	Fri,  6 May 2016 15:18:30 +0000 (UTC)
+Received: by mail-yw0-f178.google.com with SMTP id t10so214394133ywa.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2016 07:34:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=QJAumuXQerwwHGSbxg5kIWBKgB8iKRC/olqZa7rROdQ=;
-	b=cxDTr019F6FDh/cadRwcpNBdWspcehjnSE2f65pAZ1zOoJZPEwKwFSHZo5m73kRKl+
-	16a7tXhHUPqpA0QsUuSdQnd+Ww/5EW32hxfHFmAw+/FTWB5JKq5erBFt0724Pk094HhG
-	J2FmEtc5kUSaXw38hwzomDcBmUxi2rUAwHigh2FYvFvvxuoH8rsY9TrL1mCAADDQw/dT
-	EZAAumShGyitdGIA51LSB2tDTju/grxLjlxvzIyKGLxk33QUdZwPOnfZBwNlGIdYX5jh
-	Sx7tWBjaayFRxeSJ7kRys1eGbyMCAcUTYtehBVS/h+A/90cm8DGDo7ZhZQjD0lbSK5qv
-	YqCg==
+	Fri, 06 May 2016 08:18:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=ATgxQODvkPGcgRa4Tj6XbOJ/9jWKEIrU61Pm2S0U8c4=;
+	b=W0Gy8zd48b09Sg4A0uv6SXKi18krkN2e3j86bX1vKV9c+ULc2zQ0a1ft8dhYaj5yvK
+	lWg0StBiq+Sf8n9A74jJ0SEXq7MpX0BvAEy/Indqrgtek6FPZoJWRaaPJIXMvmshrVvV
+	HkhmZE+mhiUqLvNMY6e127WawO6ZvgMojqUNE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=QJAumuXQerwwHGSbxg5kIWBKgB8iKRC/olqZa7rROdQ=;
-	b=HLImjOhyCFQBpyKJRHT01liQsEcTAZtqv9ae2CSzPQl+t6AtDcRBCQxLHqUiiyUSoo
-	U/r9ZMbgT+oDLavzNTfB4RygCe0BY1kOoqL0if/9xhgX9RzYsedZXthEHAW7Q1hwCh0i
-	U1FoXDQHzDTkK9eAtHC3LCtz6PXPVmw35a9jbkgAShPdTmz+qc0AJr8qUT0w4eTHBg6z
-	1NX3X0nAta625zioLFBhmeG15YKpbvLgqTHpIz79//rFU3su5IOe+9xmGb0IyWD6uNrp
-	KL/ekUZaSbXatFcPmOEzuCdOC3cBZjEy3bsI0t83ByTO1cyhT9BNUdCBHx/NiPuT0RTU
-	pKxA==
-X-Gm-Message-State: AOPr4FXMO4s5KHDH0ONgUtqYlZXXtGt70/kwRB2xOLQi/ybJOvBezEtcr94aK5X3P7PhUg==
-X-Received: by 10.194.173.161 with SMTP id bl1mr20480959wjc.11.1462545240957; 
-	Fri, 06 May 2016 07:34:00 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	xt9sm15240998wjb.17.2016.05.06.07.33.59
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 06 May 2016 07:33:59 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 May 2016 16:35:24 +0200
-Message-Id: <1462545324-27232-3-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.8.2
-In-Reply-To: <1462545324-27232-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1462545324-27232-1-git-send-email-Martin.Jansa@gmail.com>
-Subject: [PATCH][krogoth][meta-oe 3/3] pidgin: use pkg-config instead of hardcoded paths or python-config
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=ATgxQODvkPGcgRa4Tj6XbOJ/9jWKEIrU61Pm2S0U8c4=;
+	b=glFvAKcob904Sgrsb8HhGGqyFKMkNixeGfdG+nPYP2gYAg2oYN4ehfXmSBJ1gYlKia
+	/ry8Jfixvle27uYow2Jpjj1kZdWel+ycIN+tFJYIhaMCTFDpPHcRPVO2gCTlFKOEMxBZ
+	+EWrIT7OX2KHhYIOc/nDBpdIQyhj6im3ln9UGzrx0zAQOCO+gjAWWk4yiuvu7OHORmRz
+	sMIW4zbeD0A9nGfTgLY5Q73xlKr4yymHQduMJ7mANFs4AQOpI6didC+vKeXLDr9gKLtI
+	r1qPFu44TnbboLSRKqRk/5zjoeuh8tFjZmq+pdRNZbBqhkwnJcoeyBwIK7Krflix+Yr9
+	9n+Q==
+X-Gm-Message-State: AOPr4FWuKtoot0o4d/TBY+qMBLiFymEWvY8kFsH9yAjlNXPlkjletPZj/DSqc1998ekECg==
+X-Received: by 10.37.59.149 with SMTP id i143mr11872446yba.151.1462547910853; 
+	Fri, 06 May 2016 08:18:30 -0700 (PDT)
+Received: from bill-the-cat ([2001:470:8:32a:7c1e:757f:3bd8:53db])
+	by smtp.gmail.com with ESMTPSA id m8sm9023554ywb.18.2016.05.06.08.18.29
+	(version=TLS1_2 cipher=AES128-SHA bits=128/128);
+	Fri, 06 May 2016 08:18:29 -0700 (PDT)
+Date: Fri, 6 May 2016 11:18:37 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20160506151837.GE24828@bill-the-cat>
+References: <CAMKF1spQn114r9dCAk9z7c3hw-NJp3pVoVP+f3gao2mhLTBHYg@mail.gmail.com>
+	<CAMKF1spwimpQwSE38B5jWmyZXwMKy6znMEF9p-NmTM4mGGr+4g@mail.gmail.com>
+	<CAJTo0Lb25x1H44nGn05d6qBVLDpyiaZ3XW40fdrAWcP_D+qYwg@mail.gmail.com>
+	<CAJTo0LZZ3Hs_yrm5ceik4j8Orv-UQ9T72Wu=R_PCRKw4Y9-WCw@mail.gmail.com>
+	<CAMKF1sozR3_Mhy5PKSaKCo7S2yHrtLzTNrUURFhN38gV0AbkYQ@mail.gmail.com>
+	<20160427221005.GA19598@bill-the-cat>
+	<403123E7-85F1-4CBF-9D6C-E6377B89D5EA@gmail.com>
+	<20160428121437.GJ19598@bill-the-cat>
+	<CAMKF1spK=tkagRSRCyWzipHt8v1atfuhZahQOQ8UZ0FiCs+UsQ@mail.gmail.com>
+	<20160428180131.GN19598@bill-the-cat>
+MIME-Version: 1.0
+In-Reply-To: <20160428180131.GN19598@bill-the-cat>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	OE Core mailing list <openembedded-core@lists.openembedded.org>
+Subject: Re: [yocto] [OE-core] [RFT] GCC 6 Recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,96 +65,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2016 14:34:01 -0000
+X-List-Received-Date: Fri, 06 May 2016 15:18:32 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-* also fix following QA warning:
-WARNING: pidgin-2.10.12-r0 do_package: QA Issue: pidgin: Files/directories were installed but not shipped in any package:
-  /usr/share/appdata
-  /usr/share/appdata/pidgin.appdata.xml
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-pidgin: 2 installed and not shipped files. [installed-vs-shipped]
+On Thu, Apr 28, 2016 at 02:01:31PM -0400, Tom Rini wrote:
+> On Thu, Apr 28, 2016 at 07:01:34AM -0700, Khem Raj wrote:
+> > On Thu, Apr 28, 2016 at 5:14 AM, Tom Rini <trini@konsulko.com> wrote:
+> > > On Thu, Apr 28, 2016 at 12:08:46AM -0700, Khem Raj wrote:
+> > >>
+> > >> > On Apr 27, 2016, at 3:10 PM, Tom Rini <trini@konsulko.com> wrote:
+> > >> >
+> > >> > On Wed, Apr 27, 2016 at 10:53:52AM -0700, Khem Raj wrote:
+> > >> >> thanks I think most of them come to these categories. So any help in
+> > >> >> fixing them is welcome.
+> > >> >>
+> > >> >> 1. kernel older than 4.4, backport needed fixed into these branches or
+> > >> >> move to newer kernels.
+> > >> >> 2. uboot dont have gcc6 compiler header files, backport the needed fixes
+> > >> >
+> > >> > 9b2c282b348dfe966bbba967dc7a45ce817cce50 from mainline.
+> > >> >
+> > >> >> 2. meta-qt4 needs to use gnu++98
+> > >> >> 3. gcc6 providing its own stdlib.h in libstdc++
+> > >> >> 4. gcc6 swtiching to gnu++14 for C++ as default.
+> > >> >> 5. GPLv2-only versions of recipes are simply old will need fixing
+> > >> >>
+> > >> >> I will take a stab at fixing the nativesdk recipes which is mostly due
+> > >> >> to stdlib.h issue.
+> > >> >
+> > >> > Please do, I'd like to see some SDKs so I can get more U-Boot testing
+> > >> > done with gcc-6 :)
+> > >> >
+> > >>
+> > >> I have pushed couple of more fixes which should now fix the nativesdk issues and SDKs should be building
+> > >>
+> > >> Tree is here. Let me know how it goes.
+> > >>
+> > >> http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/gcc-6
+> > >>
+> > >> and also to github
+> > >>
+> > >> https://github.com/kraj/openembedded-core/tree/kraj/master
+> > >
+> > > debian/jessie, nodistro, MACHINE=qemux86. bitbake busybox:
+> > > | make[1]: Leaving directory
+> > > '/home2/trini/oe-gcc-6/openembedded-core/build/tmp-glibc/work/x86_64-linux/gcc-cross-initial-i586/6.0.0-r0/gcc-6.0.0/build.x86_64-linux.i586-oe-linux/gcc'
+> > > | cp: cannot create regular file
+> > > '/home2/trini/oe-gcc-6/openembedded-core/build/tmp-glibc/work/x86_64-linux/gcc-cross-initial-i586/6.0.0-r0/image/home2/trini/oe-gcc-6/openembedded-core/build/tmp-glibc/sysroots/x86_64-linux/usr/lib/i586-oe-linux.gcc-cross-initial-i586/gcc/i586-oe-linux/6.0.1/include/limits.h':
+> > > No such file or directory
+> > >
+> > > Doing MACHINE=qemux86-64 provides a similar error.  Thanks!
+> > 
+> > I forgot to rename recipes to 6.1 after I did the gcc rebase since 6.1
+> > released yesterday. Anyway done now. please retry.
+> 
+> Making progress now, thanks!
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../pidgin/pidgin/pidgin-cross-python-265.patch    | 51 ++++++++++++----------
- meta-oe/recipes-support/pidgin/pidgin_2.10.12.bb   |  2 +-
- 2 files changed, 30 insertions(+), 23 deletions(-)
+I meant to follow up sooner, sorry, but these spit out valid and useful
+meta-toolchain packages and I'm using them for some U-Boot testing now,
+thanks again!
 
-diff --git a/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch b/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch
-index cfc681c..72bf4ed 100644
---- a/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch
-+++ b/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch
-@@ -1,27 +1,34 @@
--From 428836ba7f9048970626ef0d6b805107f7c52d33 Mon Sep 17 00:00:00 2001
--From: Herrie <github.com@herrie.org>
--Date: Thu, 5 May 2016 13:33:29 +0200
--Subject: [PATCH] Updated python patch
-+Use pkg-config instead of ${PYTHON}-config to find python
- 
-----
-- configure.ac | 6 +++---
-- 1 file changed, 3 insertions(+), 3 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index 94ea8cf..2285adb 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -1587,9 +1587,9 @@ dnl (Thanks to XChat)
-+diff -uNr pidgin-2.10.12.orig/configure.ac pidgin-2.10.12/configure.ac
-+--- pidgin-2.10.12.orig/configure.ac	2016-01-01 00:19:40.000000000 +0100
-++++ pidgin-2.10.12/configure.ac	2016-05-05 16:55:13.258945925 +0200
-+@@ -1585,20 +1585,15 @@
-+ dnl Check for Python headers (currently useful only for libgnt)
-+ dnl (Thanks to XChat)
-  if test "x$enable_consoleui" = "xyes" -a ! -z "$PYTHON" -a x"$PYTHON" != x"no" ; then
-- 	AC_MSG_CHECKING(for Python compile flags)
-- 	if test -f ${PYTHON}-config; then
-+-	AC_MSG_CHECKING(for Python compile flags)
-+-	if test -f ${PYTHON}-config; then
- -		PY_CFLAGS=`${PYTHON}-config --includes`
- -		PY_LIBS=`${PYTHON}-config --libs`
- -		AC_DEFINE(USE_PYTHON, [1], [Define if python headers are available.])
--+		m4_pattern_allow([^PKG_CONFIG_SYSROOT_DIR$])
--+		PY_LIBS="-L$PKG_CONFIG_SYSROOT_DIR/usr/lib/python$PY_VERSION/config -lpython$PY_VERSION"
--+		PY_CFLAGS="-I$PKG_CONFIG_SYSROOT_DIR/usr/include/python$PY_VERSION"		AC_DEFINE(USE_PYTHON, [1], [Define if python headers are available.])
-- 		AC_MSG_RESULT(ok)
-- 	else
-- 		AC_MSG_RESULT([Cannot find ${PYTHON}-config])
--
-+-		AC_MSG_RESULT(ok)
-+-	else
-+-		AC_MSG_RESULT([Cannot find ${PYTHON}-config])
-+-		PY_CFLAGS=""
-+-		PY_LIBS=""
-+-	fi
-++        AC_MSG_CHECKING(for Python compile flags)
-++        PKG_CHECK_MODULES(PY, python, [
-++                AC_SUBST(PY_CFLAGS)
-++                AC_SUBST(PY_LIBS)
-++        ], [
-++                AC_MSG_RESULT(no)
-++                AC_MSG_ERROR([Can't find python])
-++        ])
-+ fi
-+-AC_SUBST(PY_CFLAGS)
-+-AC_SUBST(PY_LIBS)
-+ 
-+ dnl #######################################################################
-+ dnl # Check for Mono support
-diff --git a/meta-oe/recipes-support/pidgin/pidgin_2.10.12.bb b/meta-oe/recipes-support/pidgin/pidgin_2.10.12.bb
-index ac0871f..cd46140 100644
---- a/meta-oe/recipes-support/pidgin/pidgin_2.10.12.bb
-+++ b/meta-oe/recipes-support/pidgin/pidgin_2.10.12.bb
-@@ -83,7 +83,7 @@ FILES_${PN} = "${bindir} ${datadir}/${PN} ${libdir}/${PN}/*.so \
-            ${datadir}/applications"
- RRECOMMENDS_${PN} = "${PN}-data libpurple-plugin-ssl-gnutls libpurple-protocol-irc libpurple-protocol-xmpp"
- 
--FILES_${PN}-data = "${datadir}/pixmaps ${datadir}/sounds ${datadir}/icons"
-+FILES_${PN}-data = "${datadir}/pixmaps ${datadir}/sounds ${datadir}/icons ${datadir}/appdata"
- FILES_${PN}-dev += "${libdir}/${PN}/*.la"
- 
- PACKAGES_DYNAMIC += "^libpurple-protocol-.* ^libpurple-plugin-.* ^pidgin-plugin-.* ^finch-plugin-.*"
 -- 
-2.8.2
-
+Tom
 
