@@ -1,26 +1,57 @@
-Return-Path: <Noor_Ahsan@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 12BC7731AC
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f67.google.com (mail-pa0-f67.google.com
+	[209.85.220.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 37F7860290
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 May 2016 15:48:59 +0000 (UTC)
-Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
-	by relay1.mentorg.com with esmtp 
-	id 1ayhzv-0004xD-QS from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 May 2016 08:48:59 -0700
-Received: from gemini.alm.mentorg.com (147.34.91.1) by
-	SVR-ORW-FEM-06.mgc.mentorg.com (147.34.97.120) with Microsoft SMTP
-	Server (TLS) id 14.3.224.2; Fri, 6 May 2016 08:49:00 -0700
-Received: from svr-pkl-eng-06.pkl.mentorg.com (svr-pkl-eng-06.pkl.mentorg.com
-	[137.202.156.65])	by gemini.alm.mentorg.com (8.14.4/8.14.4) with
-	ESMTP id u46Fmus4012737;	Fri, 6 May 2016 10:48:58 -0500
-From: "Noor, Ahsan" <noor_ahsan@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 6 May 2016 20:48:54 +0500
-Message-ID: <1462549734-36838-1-git-send-email-noor_ahsan@mentor.com>
-X-Mailer: git-send-email 2.8.1
+	Fri,  6 May 2016 15:52:01 +0000 (UTC)
+Received: by mail-pa0-f67.google.com with SMTP id zy2so12551182pac.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 06 May 2016 08:52:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=SBv16qkziGW+hPgIVt9hnwayISos2MAqx++9siO3uBE=;
+	b=S9GcnV8ruHGYFnseaYJqEbWBmYB37/3NrJHxqrIkm4PDPdKJ4btH4wtWZPuECVZH9c
+	ZwP8hlfHWWY/nbUjtpnk1MbvFeygNId00rkLMoCfnNbLh66N7jJK9ohUD7SXlJG4ZjwX
+	gXq9nD4KUzpViViRwzlo8DxSLad+GacfQk33DxgAWbFF0J5cM3wQGGFHvjCkllqAVwnA
+	qPCYLOi1o5aRUKPzQvp+/qH9x5NhSV4HslxEG5Y4wfaPRSXwtNEXi6Y1as7fQjw5bSjt
+	RuDFODbQ+kgHkJltTcpttfug2NMIE4hLcvuj867ga1PP85heECRQnI127dXY4+CtjgLl
+	OVsw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=SBv16qkziGW+hPgIVt9hnwayISos2MAqx++9siO3uBE=;
+	b=DJeODzGtm8TPGeqHH/g5vFfNmOO1zJ4c/8KIdvQouHE0oLvMerA+DoJ1VS40r5XenO
+	hoxc1HRUA88cw6bTSiF75DxSj1EgrE05M0U88o+sx7n2ioiraxUTpZbVKs6JseGxdVdK
+	1CyeVHV9nPJcmnln65ekbDPixbNmigE+NRHEjKsWt6X6Gy3cxYezu8lKh43xDVXsmzXZ
+	0oxaPCpVf7q1RT9vgH91BuosWy4H22UTdK1QI/CrteTCFhJH2N+ah9I2bROQOeLT8+MQ
+	eueGeS3BK7MzySyCnGb3ZMJK2yu8fey/1BDLEiDfg5dtwW5wn+fuD5FBXEpUOdLij5hN
+	lk1Q==
+X-Gm-Message-State: AOPr4FUaQttWEWp3FRrMmulG0MQ6InnrzGuwGQO6/dK0H7qk8LkWvbe0/GYX2NvVlSna1w==
+X-Received: by 10.66.153.174 with SMTP id vh14mr30135463pab.131.1462549922950; 
+	Fri, 06 May 2016 08:52:02 -0700 (PDT)
+Received: from ?IPv6:2601:202:4000:1239:6856:c509:b9ca:c5c1?
+	([2601:202:4000:1239:6856:c509:b9ca:c5c1])
+	by smtp.googlemail.com with ESMTPSA id
+	i6sm21985831pfc.65.2016.05.06.08.52.01
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Fri, 06 May 2016 08:52:01 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org
+References: <1462543259-7206-1-git-send-email-otavio@ossystems.com.br>
+	<1462543259-7206-8-git-send-email-otavio@ossystems.com.br>
+	<20160506141621.GD2544@jama>
+	<CAP9ODKq_Jkd912c8TwBS7u1+M_hwHjM6DKxAM15TuUzBsrgvxg@mail.gmail.com>
+	<20160506143347.GF2544@jama>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <572CBDA1.4050608@gmail.com>
+Date: Fri, 6 May 2016 08:52:01 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
 MIME-Version: 1.0
-Subject: [PATCH V3] libnice, farsight2: unblacklist as libnice's nice.pc issue fixed.
+In-Reply-To: <20160506143347.GF2544@jama>
+Subject: Re: [meta-oe backport krogoth PATCH 08/22] ltrace: Error Fix for ARM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,53 +64,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2016 15:49:02 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 06 May 2016 15:52:02 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-From: Noor Ahsan <noor_ahsan@mentor.com>
 
-* Update do_compile_append where it was updating *.pc from ${S} and
-  removing staging dir folder. Now we have seperate build folder
-  where packages get build. We have to search pc in ${B} not in ${S}.
-  After updating the tmp dir path is removed from nice.pc file.
-* Remove PNBLACKLIST for libnice and farsight2 recipes.
 
-Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
----
- meta-oe/recipes-support/farsight/farsight2_0.0.22.bb | 2 --
- meta-oe/recipes-support/farsight/libnice_0.0.13.bb   | 4 +---
- 2 files changed, 1 insertion(+), 5 deletions(-)
+On 05/06/2016 07:33 AM, Martin Jansa wrote:
+> On Fri, May 06, 2016 at 11:20:56AM -0300, Otavio Salvador wrote:
+>> On Fri, May 6, 2016 at 11:16 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>>> On Fri, May 06, 2016 at 11:00:45AM -0300, Otavio Salvador wrote:
+>>>> From: Li xin <lixin.fnst@cn.fujitsu.com>
+>>>>
+>>>> 1) The error is as following:
+>>>>      root # ltrace ls
+>>>>      __libc_start_main(0xb6fbc018, 1, 0xbed8fdc4, 0xb6fd0b88PTRACE_SINGLESTEP: Input/output error
+>>>>      2747 couldn't continue when handling __libc_start_main (0xb6fbbde0) at 0xb6fbbde0
+>>>>    The master branch fix it.
+>>>>
+>>>> 2) remove unused patch:
+>>>>      --0001-ltrace-fix-gcc-5-logical-not-parentheses.patch
+>>>>      --ltrace-0.7.2-unused-typedef.patch
+>>>
+>>> This still has issue reported here:
+>>> http://lists.openembedded.org/pipermail/openembedded-devel/2016-April/107207.html
+>>>
+>>> I would prefer not to backport it to kergoth until it's fixed.
+>>
+>> Sure; makes sense. Do you want me to resend the patches with this one
+>> dropped or you drop it when queueing?
 
-diff --git a/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb b/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
-index ffb222b..2989850 100644
---- a/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
-+++ b/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
-@@ -28,5 +28,3 @@ FILES_${PN}-dbg += "${libdir}/*/.debug"
- 
- SRC_URI[md5sum] = "e1f540cf3ebab06c3d7db1f46b44ac88"
- SRC_URI[sha256sum] = "3ae59aa61a8071c9fad111e5fd606aabc27961eb4192f8729987a27dae6b3974"
--
--PNBLACKLIST[farsight2] ?= "Depends on broken libnice"
-diff --git a/meta-oe/recipes-support/farsight/libnice_0.0.13.bb b/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
-index a9081dc..620ee1f 100644
---- a/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
-+++ b/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
-@@ -28,7 +28,7 @@ do_configure_prepend() {
- }
- 
- do_compile_append() {
--    for i in $(find ${S} -name "*.pc") ; do
-+    for i in $(find ${B} -name "*.pc") ; do
-         sed -i -e s:${STAGING_DIR_TARGET}::g \
-                -e s:/${TARGET_SYS}::g \
-                   $i
-@@ -38,5 +38,3 @@ do_compile_append() {
- 
- SRC_URI[md5sum] = "e5b9f799a57cb939ea2658ec35253ab9"
- SRC_URI[sha256sum] = "d8dd260c486a470a6052a5323920878a084e44a19df09b15728b85c9e3d6edf0"
--
--PNBLACKLIST[libnice] ?= "BROKEN: QA Issue: nice.pc failed sanity test (tmpdir)"
--- 
-2.8.1
+no need to resend. I will drop it when I pull them in.
 
+- armin
+
+
+> 
+> I'll let Armin to consolidate pending changes and send pull-request
+> after he tests them, so the question is for him not me :).
+> 
+> 
+> 
 
