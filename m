@@ -1,51 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D11C6E630
+	by mail.openembedded.org (Postfix) with ESMTP id 33E85731C9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 May 2016 10:55:33 +0000 (UTC)
-Received: by mail-wm0-f42.google.com with SMTP id g17so71510383wme.1
+	Fri,  6 May 2016 10:59:26 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id a17so71737082wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2016 03:55:34 -0700 (PDT)
+	Fri, 06 May 2016 03:59:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=tycIF5vITDz43UcjwMXsBNwyehZD5CqXer3YAsI9VbQ=;
-	b=UexhP9CCtkBNwk+0+OvkbMX2H/nXIpy5ucqxnwxptY6jqR+VE59UJLHr9MHLV0EkrS
-	OpXGxBxBoxkArjK0/IgHzfwFx/PjOqrrjBu4UTpcv08igC4WLCORJfGpi2lpkniM7bAn
-	SK/w6C6+yku33s3EGxT6wD//Atg+mt35L+1jE5LaQM4SqSARoZL6kqsDvtUwlDgjt0eM
-	/qvomSzlbVF+eHyv48uONNLWp2tBgeSYza5/T7JLGuDLyA1eshUuJ2MaLvvrJHx82mcd
-	QU0oKkHLvL26B4nUX11qWLSqIW5+r7UGtG+dmWqLD0Qp/AvkUJw29EBmP/EFz/Hg786W
-	JiYg==
+	h=from:to:cc:subject:date:message-id;
+	bh=V3s+6Fe+hrG+1t6GRN4ZwQa+5JoMwzFtErt1H9ieTJg=;
+	b=zgw+NiypHtQ6T2BeqbIConYSVIspWQIRnCNUhhevyzRmUqi1CrCItIB9mINp36FKeL
+	fvbPXpaWUPtmMoJygNdQRxWWHIVf4QIliDUw4F6Dq+flItQBjB2u4vRH9kqGEinB1f9L
+	AXKKWogj+LUVJMbTbl4gxzY1ZiiatRPyvTWwZzolxWEzX6L9qkyjurSrJRx66pJm7l39
+	he+EiUlEfU8CPP7CtI5gtO1WfpYx9COwD0s60Vs1hFy09UjF+AYpdrID4SBcoM7mkkQV
+	YWcPr7Nt96L8MTcjQbRNIlHu8fmWw4UL/xGiTkm/4EbMoFT6p4/677+KtV4lios5kENL
+	YhDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=tycIF5vITDz43UcjwMXsBNwyehZD5CqXer3YAsI9VbQ=;
-	b=j8MB+RqsR0QtqWo0tQjYHM/TuaqiH3pDzMhGLLTyVliDa5kn2LmgDSCnvRyeiJ/5kf
-	JmAANnjoaY1H5ktOYZh/hfCcKbr4ein/0ldpVVlFB3b8W3BlsMW+8OwKRrtHEDm0alYc
-	g8+zk4H0lvTKavMck4QM3TtF5jPB3cL082J05V6lNM84UfLFSnQ9ms2J6VmGb0O0pHLX
-	YIz+LRFbEDjQHb+YfIxdnuqEo1POtKTlgnnpNNh2PopztnNwHzE9cik+VOGlqO4qxrVe
-	c0iOF8rdD3hxOBeAMvv5Zxg+D537PEl3h3dm2+EPQY3sd4Lg32KOLb5NgtmVk/Thh2sG
-	Jt+w==
-X-Gm-Message-State: AOPr4FWclvUH62dzGE9vrdOt5oIeCDIGNWbwXihGoyna0GfUgudsvowSuLWulF9XRoBBVg==
-X-Received: by 10.194.58.195 with SMTP id t3mr18473086wjq.97.1462532133870;
-	Fri, 06 May 2016 03:55:33 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=V3s+6Fe+hrG+1t6GRN4ZwQa+5JoMwzFtErt1H9ieTJg=;
+	b=Q3YmxwsXjC6un4nL+YkC0m4eW96B1AtVJLVWK3yVfA88x/3IKhmsEOJJrFWft5G8Nb
+	aQreJPZZqW6E62W7sby9C8932ns2bVFAGJImuM6c+BTn8E2zxdri96YDH+a0UqWrUdNe
+	2jNCDvd8T9MZJQZaRw/CYafNyj0JM1W4BSIq+FqCBNijDbYKRbF+3NghHeUmIm4SyELu
+	FN3hh+0j5ZuGwJdq/5mmF92jtXYDKI4GHchTb4oCPtl52ulr+UaoaqhneUNfysdAgcyq
+	BUsRX95DNUCckFPLlLeA/23Ww7EbWGaYx4+VNVh3lDDCBDngdYcoLu3u4wR8Ex8waWoB
+	zyJA==
+X-Gm-Message-State: AOPr4FUARY7wGC3MSWeztluOe+ILVyjcnIzex6eWtC59wpM61vEPk06THrerS0QhjEVvDw==
+X-Received: by 10.28.130.133 with SMTP id e127mr9207899wmd.48.1462532367168;
+	Fri, 06 May 2016 03:59:27 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id n66sm7890620wmn.7.2016.05.06.03.55.32
+	by smtp.gmail.com with ESMTPSA id
+	xt9sm14356371wjb.17.2016.05.06.03.59.25
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 06 May 2016 03:55:32 -0700 (PDT)
+	Fri, 06 May 2016 03:59:25 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 6 May 2016 12:57:03 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160506105703.GB2544@jama>
-References: <1462309956-19552-1-git-send-email-otavio@ossystems.com.br>
-	<VI1PR0401MB2031B157C831BDD836874B27E47B0@VI1PR0401MB2031.eurprd04.prod.outlook.com>
-MIME-Version: 1.0
-In-Reply-To: <VI1PR0401MB2031B157C831BDD836874B27E47B0@VI1PR0401MB2031.eurprd04.prod.outlook.com>
-User-Agent: Mutt/1.6.1 (2016-04-27)
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-oe master krogoth PATCH v2] opencv: Fix metapkg dependencies for opencv-java and opencv-locales
+Date: Fri,  6 May 2016 13:00:54 +0200
+Message-Id: <1462532454-10125-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.8.2
+Subject: [PATCH][meta-oe] packagegroup-tools-bluetooth: Selects the tools appropriate for the version of bluez being used.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,109 +52,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2016 10:55:36 -0000
-X-Groupsio-MsgNum: 61358
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="uZ3hkaAS1mZxFaxD"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 06 May 2016 10:59:28 -0000
 
---uZ3hkaAS1mZxFaxD
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Ann Thornton <ann.thornton@nxp.com>
 
-On Wed, May 04, 2016 at 07:11:05PM +0000, Lauren Post wrote:
-> This fixed our build break issues when including opencv and dev-pkgs in o=
-ur development image.
->=20
-> Can this be backported to krogoth branch?
->=20
-> Acked-by: Lauren Post <lauren.post@nxp.com>
+Signed-off-by: Ann Thornton <ann.thornton@nxp.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../packagegroups/packagegroup-tools-bluetooth.bb  | 43 ++++++++++------------
+ 1 file changed, 20 insertions(+), 23 deletions(-)
 
-I've merged the version from master-next today (not sure if it was V2 or
-V1) can someone please test it and if anything is missing (from the
-other review as well) send follow-up patch?
+diff --git a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
+index bdab389..dde4599 100644
+--- a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
++++ b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
+@@ -5,36 +5,33 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
+                     file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
+ 
+-SUMMARY = "Set of Bluetooh related tools for inclusion on images"
+-DESCRIPTION = "Add bluetooth tools based on the version of BlueZ in use.\
+-The tools that have been tested and work the best are pulled in \
+-automatically.  The same packagegroup can be used in a recipe without \
+-the need to know which version of BlueZ is in use. \
++SUMMARY = "Set of Bluetooth related tools for inclusion in images"
++DESCRIPTION = "Includes bluetooth specific tools for this version of BlueZ.\
++These tools are used at runtime. \
+ Supports BlueZ4 and BlueZ5."
+ 
+ inherit packagegroup
++inherit bluetooth
+ 
+-BLUEZ4_INSTALL = " \
++RDEPENDS_bluez4 = " \
+     obexftp \
+ "
+ 
+-BLUEZ5_INSTALL = " \
+-     bluez5-noinst-tools \
+-     bluez5-obex \
+-     bluez5-testtools  \
+-     libasound-module-bluez \
+-     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', "pulseaudio-module-bluetooth-discover \
+-                                                            pulseaudio-module-bluetooth-policy \
+-                                                            pulseaudio-module-bluez5-discover \
+-                                                            pulseaudio-module-bluez5-device \
+-                                                            pulseaudio-module-switch-on-connect \
+-                                                            pulseaudio-module-loopback", \
+-                                             '', d)} \
++RDEPENDS_bluez5 = " \
++    bluez5-noinst-tools \
++    bluez5-obex \
++    bluez5-testtools  \
++    libasound-module-bluez \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', \
++        'pulseaudio-module-bluetooth-discover \
++         pulseaudio-module-bluetooth-policy \
++         pulseaudio-module-bluez5-discover \
++         pulseaudio-module-bluez5-device \
++         pulseaudio-module-switch-on-connect \
++         pulseaudio-module-loopback', \
++        '', d)} \
+ "
+ 
+-# Install either bluez4 or bluez5 if they are in distro.  
++# Install bluez4 tools or bluez5 tools depending on what is specified in the distro.
+ # Otherwise install nothing.
+-RDEPENDS_${PN} = " \
+-     ${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', '${BLUEZ5_INSTALL}', "", d)} \
+-     ${@bb.utils.contains('DISTRO_FEATURES', 'bluez4', '${BLUEZ4_INSTALL}', "", d)} \
+-"
++RDEPENDS_${PN} = "${RDEPENDS_${BLUEZ}}"
+-- 
+2.8.2
 
-Thanks
 
->=20
-> -----Original Message-----
-> From: Otavio Salvador [mailto:otavio@ossystems.com.br]=20
-> Sent: Tuesday, May 03, 2016 4:13 PM
-> To: Meta-OpenEmbedded Mailing listing <openembedded-devel@lists.openembed=
-ded.org>
-> Cc: Lauren Post <lauren.post@nxp.com>; Otavio Salvador <otavio@ossystems.=
-com.br>
-> Subject: [meta-oe master krogoth PATCH v2] opencv: Fix metapkg dependenci=
-es for opencv-java and opencv-locales
->=20
-> The opencv-java is not always generated so we ought to include it, only i=
-f it is available. The opencv-locales is not available and ought to be skip=
-ped.
->=20
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-> ---
->=20
-> Changes in v2:
-> - Fix handling of package when java support is disabled
-> - Avoids rdepends on -locale packages
-> - Improve commit log
->=20
->  meta-oe/recipes-support/opencv/opencv_3.1.bb | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recip=
-es-support/opencv/opencv_3.1.bb
-> index c1f9802..789512f 100644
-> --- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
-> +++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-> @@ -79,7 +79,8 @@ export ANT_DIR=3D"${STAGING_DIR_NATIVE}/usr/share/ant/"
-> =20
->  TARGET_CC_ARCH +=3D "-I${S}/include "
-> =20
-> -PACKAGES +=3D "${PN}-java-dbg ${PN}-java ${PN}-samples-dbg ${PN}-samples=
- ${PN}-apps python-opencv"
-> +PACKAGES +=3D "${PN}-samples-dbg ${PN}-samples ${PN}-apps python-opencv \
-> +             ${@bb.utils.contains('PACKAGECONFIG', 'oracle-java', '${PN}=
--java-dbg ${PN}-java', '', d)}"
-> =20
->  python populate_packages_prepend () {
->      cv_libdir =3D d.expand('${libdir}')
-> @@ -104,7 +105,7 @@ python populate_packages_prepend () {
->      blacklist =3D [ metapkg ]
->      metapkg_rdepends =3D [ ]
->      for pkg in packages[1:]:
-> -        if not pkg in blacklist and not pkg in metapkg_rdepends and not =
-pkg.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-do=
-c') :
-> +        if not pkg in blacklist and not pkg in metapkg_rdepends and not =
-pkg.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-do=
-c') and not pkg.endswith('-locale'):
->              metapkg_rdepends.append(pkg)
->      bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends), d)
-> =20
-> --
-> 2.8.2
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---uZ3hkaAS1mZxFaxD
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlcseH8ACgkQN1Ujt2V2gBx4QACgqQTZcZ5dp3wdFD4R+uhrpXk0
-0gQAn2NbOmD9h0PJ9fZjLQeVwoYAAlPv
-=WQya
------END PGP SIGNATURE-----
-
---uZ3hkaAS1mZxFaxD--
