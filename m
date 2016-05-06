@@ -1,42 +1,42 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com
-	[209.85.192.45])
-	by mail.openembedded.org (Postfix) with ESMTP id E9AEA73257
+Received: from mail-qk0-f171.google.com (mail-qk0-f171.google.com
+	[209.85.220.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 0154C73286
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 May 2016 14:02:09 +0000 (UTC)
-Received: by mail-qg0-f45.google.com with SMTP id 90so56342800qgz.1
+	Fri,  6 May 2016 14:02:15 +0000 (UTC)
+Received: by mail-qk0-f171.google.com with SMTP id n63so60379549qkf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 May 2016 07:02:10 -0700 (PDT)
+	Fri, 06 May 2016 07:02:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:organization;
-	bh=tP3JoxwKLK9vfJzcBAe8JoNDKzEi8YdRZYPb00bQVhc=;
-	b=YodLWj1huYf8SMF4oLHGdM8M5NlPgOpsAOHQiE97VkUyKF4XWu+IrQSHMelI9chmZT
-	ngixro0mfV92lP1CQP8cQYAvUzZ0TQGxOkPxF/M9xokuXvdEggsYweT2Hot3ccqnxvpO
-	XeMEd8ZOA8jvk0pQFj6GHMjjYJlF0wIB8HpXCD79wvyaKq+zR9R1ra26LLyLZMs5/mO/
-	jG1U0VL/jqNCRupwErMkgqYRqV7OBNFaPun8NzyGZzkPFTM0YRZ5NOi445vSm552Qg5W
-	K7tP0VCtYIYRfYBdXkDrc6KSaBKLv2Jqae7JjKQBVNjQVD9gauqeHB/aeLcPb93cIB+v
-	j1Sg==
-X-Gm-Message-State: AOPr4FXybbhOpfVMtXzzQwPfAEip95P9oLzVi0uMGwyumpt8nluvZ8Hfu+JVsD0cRSeBlg==
-X-Received: by 10.140.19.131 with SMTP id 3mr18820691qgh.83.1462543330600;
-	Fri, 06 May 2016 07:02:10 -0700 (PDT)
+	bh=3itGsB4xUGf/vkeMe08oJKqgncqR2ZrWuaDVmFWG8CE=;
+	b=gvTg6nJ2MOzJ4iXzH9oMFg277s75bTf7iEAswtFD2dsnuDVxUcJIhDybuDl9Ss8iDv
+	kDxg7ApZnkRQaYO2e03biY6V1L5P/UDBwxJmb3diEfW3dFXqo71kCD6kF8G2xKveroCx
+	DzR48N3VPR1mQ08s9wu96grryP+HHq8cOQaxZGEE3/sdUVfAY8Fl0op/Bhu44d/+UpuM
+	HoMc1WWXcqz0UpUgQRGOqFuQmRhNOlqSdnCOB0d/abpeuwSzVwOrrXZlgCcuKL8dETUT
+	/oy6CID6A4K7zoUdTr316PLdeLLWpFJjAGz/6IPVHntBL/AnLdHCGcAMEbFk6FFbx1c/
+	JFog==
+X-Gm-Message-State: AOPr4FWl339RC4gq6QK/o/+E22dI6RQJbpdCvAIGNELSUEprgYjEpQBzAjtWhwSyYRiG1A==
+X-Received: by 10.233.222.4 with SMTP id s4mr11140295qkf.19.1462543336092;
+	Fri, 06 May 2016 07:02:16 -0700 (PDT)
 Received: from localhost ([187.23.154.250]) by smtp.gmail.com with ESMTPSA id
-	d140sm5833244qke.10.2016.05.06.07.02.07
+	c39sm5781340qgd.33.2016.05.06.07.02.13
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 06 May 2016 07:02:09 -0700 (PDT)
+	Fri, 06 May 2016 07:02:14 -0700 (PDT)
 Received: by localhost (sSMTP sendmail emulation);
-	Fri, 06 May 2016 11:02:04 -0300
+	Fri, 06 May 2016 11:02:10 -0300
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-Date: Fri,  6 May 2016 11:00:49 -0300
-Message-Id: <1462543259-7206-12-git-send-email-otavio@ossystems.com.br>
+Date: Fri,  6 May 2016 11:00:50 -0300
+Message-Id: <1462543259-7206-13-git-send-email-otavio@ossystems.com.br>
 X-Mailer: git-send-email 2.8.2
 In-Reply-To: <1462543259-7206-1-git-send-email-otavio@ossystems.com.br>
 References: <1462543259-7206-1-git-send-email-otavio@ossystems.com.br>
 Organization: O.S. Systems Software LTDA.
-Subject: [meta-oe backport krogoth PATCH 12/22] syslog-ng.inc: fix prerm script & class includes
+Subject: [meta-oe backport krogoth PATCH 13/22] sox: dep on ffmpeg, not libav
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,55 +49,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2016 14:02:13 -0000
+X-List-Received-Date: Fri, 06 May 2016 14:02:19 -0000
 
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+From: Christopher Larson <chris_larson@mentor.com>
 
-The order of class includes is very important because it's the order in
-which classes are evaluated. Both update-rc.d and update-alternatives
-write to the prerm script, so the class order decides the script code
-ordering. As they are now, prerm is:
+The libav recipe no longer exists, in favor of ffmpeg.
 
- #!/bin/sh
-        update-alternatives --remove  syslog-init /etc/init.d/syslog.syslog-ng
-if [ -z "$D" ]; then
-        /etc/init.d/syslog stop
-fi
-
-This causes errors because when syslog-ng is the only alternative it is
-removed and then the script tries to stop it (No such file or directory)
-but even if there are other alternatives, the script tries to stop
-something other than syslog-ng which was removed.
-
-By reversing the include order, prerm gets generated correctly and it
-tries to stop syslog-ng before removing it:
-
-if [ -z "$D" ]; then
-        /etc/init.d/syslog stop
-fi
-update-alternatives --remove  syslog-init /etc/init.d/syslog.syslog-ng
-
-Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Signed-off-by: Sujith Haridasan <Sujith_Haridasan@mentor.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
 
- meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 2 +-
+ meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-index 382dc5e..4e0f697 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-@@ -22,7 +22,7 @@ SRC_URI = "http://www.balabit.com/downloads/files/syslog-ng/sources/${PV}/source
-            file://configure.ac-add-option-enable-thread-tls-to-manage-.patch \
- "
+diff --git a/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb b/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
+index 3c688bd..4b73aa3 100644
+--- a/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
++++ b/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
+@@ -4,7 +4,7 @@ and can apply different effects and filters to the audio data."
+ HOMEPAGE = "http://sox.sourceforge.net"
+ SECTION = "audio"
  
--inherit autotools systemd pkgconfig update-rc.d update-alternatives
-+inherit autotools systemd pkgconfig update-alternatives update-rc.d
+-DEPENDS = "libpng libav libsndfile1 libvorbis"
++DEPENDS = "libpng ffmpeg libsndfile1 libvorbis"
  
- EXTRA_OECONF = " \
-     --enable-dynamic-linking \
+ PR = "r2"
+ 
 -- 
 2.8.2
 
