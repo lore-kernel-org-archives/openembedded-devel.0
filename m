@@ -1,20 +1,40 @@
-Return-Path: <ray.kinsella@intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id D31D56011A
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qk0-f178.google.com (mail-qk0-f178.google.com
+	[209.85.220.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 357ED6B6EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 May 2016 13:48:51 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by orsmga102.jf.intel.com with ESMTP; 06 May 2016 06:48:51 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.24,587,1455004800"; d="scan'208";a="974064951"
-Received: from silv-debian7-yocto-build.ir.intel.com ([10.237.216.10])
-	by fmsmga002.fm.intel.com with ESMTP; 06 May 2016 06:48:50 -0700
-From: Ray Kinsella <ray.kinsella@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 May 2016 14:49:19 +0100
-Message-Id: <1462542559-10941-1-git-send-email-ray.kinsella@intel.com>
-X-Mailer: git-send-email 1.8.5.6
-Subject: [meta-oe][PATCH] wvstreams: fixing segfault with new gcc optimizations
+	Fri,  6 May 2016 13:59:49 +0000 (UTC)
+Received: by mail-qk0-f178.google.com with SMTP id r184so60346671qkc.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 06 May 2016 06:59:51 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=Nor0S/6OrU7QhN/ZVqVgBfLpCspJ5zwqDrdLj97I0JA=;
+	b=eg9MvbMMQpoVHHpR03IqcmVY41xMvTH1uoa3L7BdR5dSSn1YjXEKXJN7KlNKlGHJdZ
+	mTdBYiDZHbxw6BtfzpEQd/ncIwSN5ua4de6rwhJ1qb6yTU4jWrzQiO3Kq0UsjSA7ZKif
+	XgSRyZcJRcDDcl+Dl+DgRjeoOJK4bRJHJVhHZUp17qLIJpzgZMSQHV0QZQfPadmSF3KD
+	B9486onJjQshUUU1dF9UinX9j88vqLZJ4Jt30bNRCBgRo91DrkVR6TLriol3kZ+I27t4
+	fuEXLDS5ASKAScWPTltIGEY+GbYOiS7Tar1VeruOBBc7I00vsmX5cd/7nCMx0UQ+2KEq
+	WjgQ==
+X-Gm-Message-State: AOPr4FXJcUGBgjf/jommiTYpITY54Qo/7RVQs1fmrtD3s1RZyb9wlhUsCOxWjFXQ7pG1WA==
+X-Received: by 10.55.76.15 with SMTP id z15mr20377739qka.32.1462543190488;
+	Fri, 06 May 2016 06:59:50 -0700 (PDT)
+Received: from localhost ([187.23.154.250]) by smtp.gmail.com with ESMTPSA id
+	q128sm3530569qhq.9.2016.05.06.06.59.46
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 06 May 2016 06:59:48 -0700 (PDT)
+Received: by localhost (sSMTP sendmail emulation);
+	Fri, 06 May 2016 10:59:43 -0300
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri,  6 May 2016 10:59:22 -0300
+Message-Id: <1462543183-7080-1-git-send-email-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.8.2
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe backport krogoth PATCH 01/22] net-snmp: enable ipv6 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,33 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 May 2016 13:48:54 -0000
+X-List-Received-Date: Fri, 06 May 2016 13:59:52 -0000
 
-Recent GCC optimizations -ftree-dce and -foptimize-sibling-calls are causing
-a segfault in the wvstream stackmaster. Fedora had the same problem and
-resolved the issue by removing these optimizations.
+From: Zhu Yanjun <yanjun.zhu@windriver.com>
 
-See: https://bugzilla.redhat.com/show_bug.cgi?id=812651
+Add packageconfig for ipv6 and enable it when it's defined in distro_features.
 
-Signed-off-by: Ray Kinsella <ray.kinsella@intel.com>
+Signed-off-by: Zhu Yanjun <yanjun.zhu@windriver.com>
+Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb | 2 ++
- 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-index 73cfb03..6199a2f 100644
---- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-@@ -20,6 +20,8 @@ inherit autotools-brokensep pkgconfig
+ meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+index 1a50932..ee8878f 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+@@ -39,6 +39,9 @@ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[elfutils] = "--with-elf, --without-elf, elfutils"
+ PACKAGECONFIG[libnl] = "--with-nl, --without-nl, libnl"
  
- PARALLEL_MAKE = ""
- 
-+TARGET_CFLAGS_append = " -fno-tree-dce -fno-optimize-sibling-calls"
++PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)}"
++PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,,"
 +
- LDFLAGS_append = " -Wl,-rpath-link,${CROSS_DIR}/${TARGET_SYS}/lib"
- 
- EXTRA_OECONF = " --without-tcl --without-qt --without-pam --without-valgrind"
+ EXTRA_OECONF = "--disable-embedded-perl \
+                 --with-perl-modules=no \
+                 --disable-manuals \
 -- 
-1.8.5.6
+2.8.2
 
 
