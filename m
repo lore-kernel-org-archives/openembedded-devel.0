@@ -1,49 +1,46 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 3EB3F6072C
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B8BE738AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 May 2016 14:12:56 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id y7so12397094pfb.0
+	Sat,  7 May 2016 14:13:21 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id y7so12397663pfb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 May 2016 07:12:57 -0700 (PDT)
+	Sat, 07 May 2016 07:13:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=U6tBdNXJiq9vzgl8C9BiXa1bCGYvjp30CzCvp8dHqHw=;
-	b=g69LQNoqQ8YRvKm8RtDnsqitXGvr7qRnh0LKShQp+VKXeDTbRekWBnXDqNBnAFZSaE
-	b+WsUyc11N1yVUHoD26pFTr1RL2fZTGz9dbeIRgIzuV8jq5k/JLRXQHcuQ1dkNtzCIP7
-	OHHsj0KqDKgOL6Eo6bciFsmdz53N9rTjykVdh5lfHCpef9ciNbcSPoJ/3T6d/SNvlDLj
-	wW6pmLCNnaW4EuH3AD10KITf6w0n7+SDXUnk/Ved1488mVOHn3Qke/3oR4MAHpPUPtT6
-	c6/Ev7+YCgDCzAtMqLCDVx4c+/4iB0Q/l3pEciDeNPoEl+U8YgkhvUH+uKC4qfMfR/xX
-	mkjQ==
+	h=from:to:subject:date:message-id;
+	bh=eD1GDiyqtLTY+jWb7nZXagw0uAM0vuEKtcmeEl4r700=;
+	b=IZGsY0Udqpfa7IYZbDWFMJoHFIqRcITeT0CF6bbMo4m4sAuCf+QLlAJCnGlIMHaUPm
+	eqA82CTFfGwCUIrYJGiJUtronatW0jPFkkyo5VDxXd3N+gW8gW2EWFRC2Lgu1wT63lFd
+	jMBcMkuhRg4Quq/cHQOyjHkz5xmHIAO5tlTLj/oZH532w6kLWnWymxg/8rJg6zku5Hj9
+	/isYqPT1hCmKcHoUuzrEwQTQSPGxtumYpNVPrp5SDn0NiF9Z+NbGIUOJ//CpVKoC8ifN
+	qHXjkAZrRtGOmaogoalPQupnBMN8doZNa0cEMrlrvrgxy8jUoJ/1ZsVDTuLxOtgQBI++
+	XTmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=U6tBdNXJiq9vzgl8C9BiXa1bCGYvjp30CzCvp8dHqHw=;
-	b=HrantGQj1NNAnJXGkOeMeZELeIPoYFOXAOPYE9Q0O6XK4uDl5dxysyJ23DHoF2vQvS
-	8LSletQHQWVoBRJSsXdRaWo8Tn43QIlcQyAUMFmmh52ODax0PeoL/wf4tMWqAx5OtPKE
-	s6A0jNOouB8M8YqLcRdGlRZapWPCCIZXxulX0HDFf2qn2Y6CfpZQbepszIMmVx2dL2Ww
-	k1jINkRlQzFBIBVX1VzVJoiorjvYLLHSzlEprIYFZv0R+s6vG9d43YeB+Naq2Az9Qc8p
-	pCWwaNsdm53xYDHigXZPnUak8W/J2HXbaYA8O8iqz5/v3grOoZYPRxlWTO1YhfS8OYcr
-	qgYg==
-X-Gm-Message-State: AOPr4FXcf0psUgg+aTkSjTk+fVwaWyiw3B+ky5D1JGHzYc3HcUHckI239K504oZU/yjj7g==
-X-Received: by 10.98.47.66 with SMTP id v63mr21794726pfv.67.1462630377423;
-	Sat, 07 May 2016 07:12:57 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=eD1GDiyqtLTY+jWb7nZXagw0uAM0vuEKtcmeEl4r700=;
+	b=Lzj9Mi81fCkuhthsIAZP8U1i7o9MQJnGB0UKcrS2T/qqBnGTUgdxN1OrpQwQQmgbwC
+	O20m8UM8/YQCAzQI4q2n0ROvGM83/xH0Ognvf4LW0r5mmiYlvwwVpQiC/FnXZIC2OsUF
+	4z2rKT1YP2eJ4fKcMF7XfAJl68RMWQaoEEqG9BsEaQz/M2xbxbs6r6g2xoB0tzvplYhE
+	vdOF8ZK1QN8YLJ0qnHQmrYHdw8V5TR2QnDyxanPmx2kjVe9IMB9dVbiy4owElvmjTV/5
+	5N2lmh2nqanWEe/4yIJ2kVr9VGd1cGAxRMCd9x8YHNxRPo1VNDBGYJFqadhMAawF6D8t
+	5m0A==
+X-Gm-Message-State: AOPr4FXvzp9ixqV+edPhfAUdZA7GVb3j48Y3g1yZMMkP3WfSZkgXLBNNceL1C9opQv8XkA==
+X-Received: by 10.98.55.129 with SMTP id e123mr36500879pfa.4.1462630402104;
+	Sat, 07 May 2016 07:13:22 -0700 (PDT)
 Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
 	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	eh9sm28641312pad.47.2016.05.07.07.12.55
+	71sm28586299pfy.32.2016.05.07.07.13.20
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 07 May 2016 07:12:56 -0700 (PDT)
+	Sat, 07 May 2016 07:13:21 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  7 May 2016 07:12:54 -0700
-Message-Id: <1462630374-1501-1-git-send-email-akuster808@gmail.com>
+Date: Sat,  7 May 2016 07:13:20 -0700
+Message-Id: <1462630400-1562-1-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.3.5
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] acpitests: Fix license issue
+Subject: [meta-networking][PATCH] wireshark: Fix new QA Error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,47 +53,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 May 2016 14:12:57 -0000
-Content-Type: text/plain; charset=y
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 07 May 2016 14:13:24 -0000
 
-WARNING: acpitests-20140828-r0 do_populate_lic: acpitests: No generic license file exists for: Intel in any provider
+NOTE: Resolving any missing task queue dependencies
+ERROR: Nothing PROVIDES 'libepoxy' (but /oss/maint/mylayers/openembedded-core/meta/recipes-gnome/gtk+/gtk+3_3.18.8.bb DEPENDS on or otherwise requires it)
+ERROR: libepoxy was skipped: missing required distro feature 'opengl' (not in DISTRO_FEATURES)
 
-this was copied from the acpitest web page
+add DISTRO_FEATURES check for opengl to enable gtk3
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/licenses/Intel | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-oe/licenses/Intel
+ meta-networking/recipes-support/wireshark/wireshark_2.0.3.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/licenses/Intel b/meta-oe/licenses/Intel
-new file mode 100644
-index 0000000..eb81dd7
---- /dev/null
-+++ b/meta-oe/licenses/Intel
-@@ -0,0 +1,21 @@
-+License for Contributions to ACPICA
-+
-+Copyright (c) 2000 – 2015 Intel Corp.
-+All rights reserved.
-+
-+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-+
-+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-+
-+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
-+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINES
-+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-+POSSIBILITY OF SUCH DAMAGE.
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.0.3.bb b/meta-networking/recipes-support/wireshark/wireshark_2.0.3.bb
+index b264e67..76cb30a 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_2.0.3.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_2.0.3.bb
+@@ -18,11 +18,12 @@ inherit autotools pkgconfig
+ ARM_INSTRUCTION_SET = "arm"
+ 
+ # Works with either gtk+ or gtk3.
+-WHICH_GTK = "gtk3"
++WHICH_GTK = "gtk+"
+ 
+ PACKAGECONFIG ?= "libpcap gnutls libnl libcap"
+-PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "x11", "${WHICH_GTK}  graphics", "", d)}"
++PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk2 graphics", "", d)}"
+ PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "ipv6", "ipv6", "", d)}"
++#PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "gtk3", "", d)}"
+ 
+ PACKAGECONFIG[libcap] = "--with-libcap=${STAGING_LIBDIR}, --with-libcap=no --enable-pcap-ng-default , libcap"
+ PACKAGECONFIG[libpcap] = "--with-pcap=${STAGING_LIBDIR} --with-pcap-remote, --with-pcap=no --enable-pcap-ng-default  , libpcap"
 -- 
 2.3.5
 
