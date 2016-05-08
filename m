@@ -1,20 +1,46 @@
-Return-Path: <dv@pseudoterminal.org>
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 233B9731AC
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id BF999731BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 May 2016 12:20:49 +0000 (UTC)
-Received: from localhost.localdomain (62-178-118-86.cable.dynamic.surfer.at
-	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 8BDEC394A3
+	Sun,  8 May 2016 16:19:17 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id p185so16662371pfb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 May 2016 14:20:49 +0200 (CEST)
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  8 May 2016 14:20:37 +0200
-Message-Id: <1462710038-20023-2-git-send-email-dv@pseudoterminal.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1462710038-20023-1-git-send-email-dv@pseudoterminal.org>
-References: <1462710038-20023-1-git-send-email-dv@pseudoterminal.org>
-Subject: [meta-browser][PATCH v2 2/3] chromium: Create chromium-browser.inc to simplify upgrades
+	Sun, 08 May 2016 09:19:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=7MiwuHXCne9lsuoPJbJzSU8ZgeFtwjRWqAQu2WCcVsg=;
+	b=pua4xSpQqrj6u9tZN1GO6vV7zd4jikPQlNpjgeES/qvoxhSVPf7s56apO91rJogX9c
+	zQDaBQgJ8PoCuvplrCeWYAJ/aAZitT7cmDBVf2IjRnoDPivr3sqKQTzrNqgjV0tgGmRJ
+	hTubs9zFKim7FS4YiOXOiMWu+W6qJPxEXtfRRDe8RBJaPaNvbkVZ0vweJ3pvSE4k2ZAo
+	9Wgkoqbb3EUJ+roAMC3rGK26KHY2mw9vCsms2bEu9P89nE8DTfBRbzZlu2c+OjbdSmPF
+	WH64a1uKrJkZK9ymneV0w/A2Bn4J758Y3nTT/x+ykGnFGdpUHzyyUzdOM3v8dOfJpr+1
+	6yyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=7MiwuHXCne9lsuoPJbJzSU8ZgeFtwjRWqAQu2WCcVsg=;
+	b=UMjOncG0Y8NBU/4GVgTyj3UYUclxJ+V4APLch551nbSEEcHtzX6Ow60AtFJu/7DKCB
+	/Hqhc/0h8rqW63S6mh7JOSSyLc+Q0T6GivtWwmQto9Q8pojngFw9R95XR/q9Ta7TskQW
+	WINTOOgU98ZjAw/O8Wch29u2jAXbpZy4jF2CRyQ1x7M0fmU0O+HXbhCgWU/RDbDP24Fu
+	GQTIdODQ1TwGVhTBV21rTdqbXwBvGUqRb2zIECaWsnzSrljj8L87EyQCiRNRpulfs3f3
+	rlVce098RNlB55LpBmZRFz4cng+klNVIy+j83zunh/LWnLCHjC78IZrzSsWrZea+isOm
+	utVQ==
+X-Gm-Message-State: AOPr4FWjutg2x+xkha+6UnEp4AO1ikPEqs7fIgwfbJeN32p2h9BcrtgGalZrh/Vs5Nz20w==
+X-Received: by 10.98.80.10 with SMTP id e10mr44256129pfb.141.1462724358428;
+	Sun, 08 May 2016 09:19:18 -0700 (PDT)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207])
+	by smtp.gmail.com with ESMTPSA id g5sm34543669pac.1.2016.05.08.09.19.16
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 08 May 2016 09:19:17 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	akuster808@gmail.com
+Date: Sun,  8 May 2016 09:19:15 -0700
+Message-Id: <1462724355-13609-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-oe][v2][PATCH] graphviz: Add new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,543 +53,370 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2016 12:20:51 -0000
+X-List-Received-Date: Sun, 08 May 2016 16:19:18 -0000
 
-This eases the chromium browser upgrade process while ensuring that the
-chromium embedded framework is still supported. With this new structure,
-chromium.inc contains common code for cef3 and the browser, while
-chromium-browser.inc contains common code for browser releases (and itself
-includes chromium.inc). The actual .bb files then mainly set several
-values (and may contain release specific functions).
+V2: don't run configure within the autogen.sh
 
-Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- recipes-browser/chromium/chromium-browser.inc     | 241 ++++++++++++++++++++++
- recipes-browser/chromium/chromium.inc             |  15 +-
- recipes-browser/chromium/chromium_40.0.2214.91.bb | 209 +------------------
- 3 files changed, 249 insertions(+), 216 deletions(-)
- create mode 100644 recipes-browser/chromium/chromium-browser.inc
+ .../graphviz/graphviz_no_mkdef_build.patch         |  90 ++++++++++++++
+ .../graphviz/graphviz/linear_angle.gv              | 101 ++++++++++++++++
+ .../recipes-graphics/graphviz/graphviz/simple.gv   |   1 +
+ .../recipes-graphics/graphviz/graphviz_2.38.0.bb   | 131 +++++++++++++++++++++
+ 4 files changed, 323 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/graphviz_no_mkdef_build.patch
+ create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/linear_angle.gv
+ create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/simple.gv
+ create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz_2.38.0.bb
 
-diff --git a/recipes-browser/chromium/chromium-browser.inc b/recipes-browser/chromium/chromium-browser.inc
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/graphviz_no_mkdef_build.patch b/meta-oe/recipes-graphics/graphviz/graphviz/graphviz_no_mkdef_build.patch
 new file mode 100644
-index 0000000..c6de2ec
+index 0000000..6d4c964
 --- /dev/null
-+++ b/recipes-browser/chromium/chromium-browser.inc
-@@ -0,0 +1,241 @@
-+# Recipe files have to perform the following tasks after including this file:
-+# 1) Add patches to SRC_URI. Version specific patches should be contained in a
-+#    "chromium-XX" subdirectory, where XX is the major version. There are also
-+#    patches that are shared amongst versions but may one day no longer be
-+#    needed (like unistd2.patch). These do not belong in such a subdirectory,
-+#    but still need to be explicitely be added. Do NOT add ozone-wayland patches
-+#    to SRC_URI here!
-+# 2) Add md5sum and sha256sum hashes of the tarball.
-+# 3) Add ozone-wayland patches to the OZONE_WAYLAND_EXTRA_PATCHES variable.
-+#    The rule with the chromium-XX subdirectory also applies here.
-+# 4) Set the OZONE_WAYLAND_GIT_BRANCH and OZONE_WAYLAND_GIT_SRCREV values.
-+# 5) Optionally, set values for these variables:
-+#    * OZONE_WAYLAND_PATCH_FILE_GLOB
-+#    * OZONE_WAYLAND_GIT_DESTSUFFIX
-+#    * CHROMIUM_X11_DEPENDS
-+#    * CHROMIUM_X11_GYP_DEFINES
-+#    * CHROMIUM_WAYLAND_DEPENDS
-+#    * CHROMIUM_WAYLAND_GYP_DEFINES
++++ b/meta-oe/recipes-graphics/graphviz/graphviz/graphviz_no_mkdef_build.patch
+@@ -0,0 +1,90 @@
++Index: graphviz-2.38.0/lib/gvpr/Makefile.in
++===================================================================
++--- graphviz-2.38.0.orig/lib/gvpr/Makefile.in
+++++ graphviz-2.38.0/lib/gvpr/Makefile.in
++@@ -55,7 +55,6 @@ PRE_UNINSTALL = :
++ POST_UNINSTALL = :
++ build_triplet = @build@
++ host_triplet = @host@
++-noinst_PROGRAMS = mkdefs$(EXEEXT)
++ subdir = lib/gvpr
++ DIST_COMMON = $(noinst_HEADERS) $(pkginclude_HEADERS) \
++ 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
++@@ -120,10 +119,6 @@ libgvpr_C_la_LIBADD =
++ am_libgvpr_C_la_OBJECTS = actions.lo compile.lo gvpr.lo gprstate.lo \
++ 	parse.lo queue.lo
++ libgvpr_C_la_OBJECTS = $(am_libgvpr_C_la_OBJECTS)
++-PROGRAMS = $(noinst_PROGRAMS)
++-am_mkdefs_OBJECTS = mkdefs.$(OBJEXT)
++-mkdefs_OBJECTS = $(am_mkdefs_OBJECTS)
++-mkdefs_LDADD = $(LDADD)
++ AM_V_P = $(am__v_P_@AM_V@)
++ am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
++ am__v_P_0 = false
++@@ -158,10 +153,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
++ am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
++ am__v_CCLD_0 = @echo "  CCLD    " $@;
++ am__v_CCLD_1 = 
++-SOURCES = $(libgvpr_la_SOURCES) $(libgvpr_C_la_SOURCES) \
++-	$(mkdefs_SOURCES)
++-DIST_SOURCES = $(libgvpr_la_SOURCES) $(libgvpr_C_la_SOURCES) \
++-	$(mkdefs_SOURCES)
+++SOURCES = $(libgvpr_la_SOURCES) $(libgvpr_C_la_SOURCES)
+++DIST_SOURCES = $(libgvpr_la_SOURCES) $(libgvpr_C_la_SOURCES)
++ am__can_run_installinfo = \
++   case $$AM_UPDATE_INFO_DIR in \
++     n|no|NO) false;; \
++@@ -568,8 +561,7 @@ libgvpr_la_LIBADD = $(libgvpr_C_la_LIBAD
++ 	$(MATH_LIBS)
++ 
++ libgvpr_la_DEPENDENCIES = $(libgvpr_C_la_DEPENDENCIES)
++-mkdefs_SOURCES = mkdefs.c
++-EXTRA_DIST = $(man_MANS) $(pdf_DATA) gprdata mkdefs.c gdefs.h trie.c gvprlib.vcproj
+++EXTRA_DIST = $(man_MANS) $(pdf_DATA) gprdata gdefs.h trie.c gvprlib.vcproj
++ DISTCLEANFILES = $(pdf_DATA) gdefs.h mkdefs
++ all: all-am
++ 
++@@ -657,18 +649,6 @@ libgvpr.la: $(libgvpr_la_OBJECTS) $(libg
++ libgvpr_C.la: $(libgvpr_C_la_OBJECTS) $(libgvpr_C_la_DEPENDENCIES) $(EXTRA_libgvpr_C_la_DEPENDENCIES) 
++ 	$(AM_V_CCLD)$(LINK)  $(libgvpr_C_la_OBJECTS) $(libgvpr_C_la_LIBADD) $(LIBS)
++ 
++-clean-noinstPROGRAMS:
++-	@list='$(noinst_PROGRAMS)'; test -n "$$list" || exit 0; \
++-	echo " rm -f" $$list; \
++-	rm -f $$list || exit $$?; \
++-	test -n "$(EXEEXT)" || exit 0; \
++-	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
++-	echo " rm -f" $$list; \
++-	rm -f $$list
++-mkdefs$(EXEEXT): $(mkdefs_OBJECTS) $(mkdefs_DEPENDENCIES) $(EXTRA_mkdefs_DEPENDENCIES) 
++-	@rm -f mkdefs$(EXEEXT)
++-	$(AM_V_CCLD)$(LINK) $(mkdefs_OBJECTS) $(mkdefs_LDADD) $(LIBS)
++-
++ mostlyclean-compile:
++ 	-rm -f *.$(OBJEXT)
++ 
++Index: graphviz-2.38.0/lib/gvpr/Makefile.am
++===================================================================
++--- graphviz-2.38.0.orig/lib/gvpr/Makefile.am
+++++ graphviz-2.38.0/lib/gvpr/Makefile.am
++@@ -21,7 +21,6 @@ AM_CPPFLAGS = \
++ 	-DDFLT_GVPRPATH="\".$(PATH_SEPARATOR)$(pkgdatadir)/gvpr\""
++ 
++ pkginclude_HEADERS = gvpr.h
++-noinst_PROGRAMS = mkdefs
++ noinst_HEADERS = actions.h compile.h gprstate.h parse.h queue.h trieFA.h trie.c
++ noinst_LTLIBRARIES = libgvpr_C.la
++ lib_LTLIBRARIES = libgvpr.la
++@@ -50,11 +49,10 @@ libgvpr_la_LIBADD = $(libgvpr_C_la_LIBAD
++ 	$(MATH_LIBS)
++ libgvpr_la_DEPENDENCIES = $(libgvpr_C_la_DEPENDENCIES)
++ 
++-mkdefs_SOURCES = mkdefs.c
++ 
++ gdefs.h: $(top_srcdir)/lib/gvpr/gprdata mkdefs
++ 	./mkdefs gdefs.h < $(top_srcdir)/lib/gvpr/gprdata
++ 
++-EXTRA_DIST = $(man_MANS) $(pdf_DATA) gprdata mkdefs.c gdefs.h trie.c gvprlib.vcproj
+++EXTRA_DIST = $(man_MANS) $(pdf_DATA) gprdata gdefs.h trie.c gvprlib.vcproj
++ 
++ DISTCLEANFILES = $(pdf_DATA) gdefs.h mkdefs
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/linear_angle.gv b/meta-oe/recipes-graphics/graphviz/graphviz/linear_angle.gv
+new file mode 100644
+index 0000000..827bde5
+--- /dev/null
++++ b/meta-oe/recipes-graphics/graphviz/graphviz/linear_angle.gv
+@@ -0,0 +1,101 @@
++digraph G { bgcolor="purple:pink" style="filled"
++  subgraph cluster1 {fillcolor="blue:green" style="filled"
++		node [shape=circle fillcolor="gold:brown" style="radial" gradientangle=180]
++		a0 [label=<
++ <TABLE border="10" cellspacing="10" cellpadding="10" style="rounded" bgcolor="yellow:violet" gradientangle="315">
++<TR><TD border="3"  bgcolor="yellow" gradientangle="315">00</TD>
++<TD border="3"  bgcolor="yellow:green" gradientangle="315">01</TD>
++<TD border="3"  bgcolor="green" gradientangle="315">02</TD>
++<TD border="3"  bgcolor="green:blue" gradientangle="315">03</TD>
++<TD border="3"  bgcolor="blue" gradientangle="315">04</TD>
++<TD border="3"  bgcolor="blue:purple" gradientangle="315">05</TD>
++<TD border="3"  bgcolor="purple" gradientangle="315">06</TD>
++<TD border="3"  bgcolor="purple:violet" gradientangle="315">07</TD>
++<TD border="3"  bgcolor="violet" gradientangle="315">08</TD></TR>
++  
++<TR><TD border="3"  bgcolor="yellow:gold"  gradientangle="315">10</TD>
++<TD border="3"  bgcolor="yellow:green"  gradientangle="315">11</TD>
++<TD border="3"  bgcolor="yellow:green"  gradientangle="315">12</TD>
++<TD border="3"  bgcolor="yellow:blue"  gradientangle="315">13</TD>
++<TD border="3"  bgcolor="yellow:blue"  gradientangle="315">14</TD>
++<TD border="3"  bgcolor="yellow:purple"  gradientangle="315">15</TD>
++<TD border="3"  bgcolor="yellow:purple"  gradientangle="315">16</TD>
++<TD border="3"  bgcolor="yellow:violet"  gradientangle="315">17</TD>
++<TD border="3"  bgcolor="yellow:violet"  gradientangle="315">18</TD></TR>
++  
++<TR><TD border="3"  bgcolor="gold"  gradientangle="315">20</TD>
++<TD border="3"  bgcolor="gold:green"  gradientangle="315">21</TD>
++<TD border="3"  bgcolor="gold:green"  gradientangle="315">22</TD>
++<TD border="3"  bgcolor="gold:blue"  gradientangle="315">23</TD>
++<TD border="3"  bgcolor="gold:blue"  gradientangle="315">24</TD>
++<TD border="3"  bgcolor="gold:purple"  gradientangle="315">25</TD>
++<TD border="3"  bgcolor="gold:purple"  gradientangle="315">26</TD>
++<TD border="3"  bgcolor="gold:violet"  gradientangle="315">27</TD>
++<TD border="3"  bgcolor="gold:violet"  gradientangle="315">28</TD></TR>
++  
++<TR><TD border="3"  bgcolor="gold:orange"  gradientangle="315">30</TD>
++<TD border="3"  bgcolor="orange:green"  gradientangle="315">31</TD>
++<TD border="3"  bgcolor="orange:green"  gradientangle="315">32</TD>
++<TD border="3"  bgcolor="orange:blue"  gradientangle="315">33</TD>
++<TD border="3"  bgcolor="orange:blue"  gradientangle="315">34</TD>
++<TD border="3"  bgcolor="orange:purple"  gradientangle="315">35</TD>
++<TD border="3"  bgcolor="orange:purple"  gradientangle="315">36</TD>
++<TD border="3"  bgcolor="orange:violet"  gradientangle="315">37</TD>
++<TD border="3"  bgcolor="orange:violet"  gradientangle="315">38</TD></TR>
++  
++<TR><TD border="3"  bgcolor="orange"  gradientangle="315">40</TD>
++<TD border="3"  bgcolor="orange:green"  gradientangle="315">41</TD>
++<TD border="3"  bgcolor="orange:green"  gradientangle="315">42</TD>
++<TD border="3"  bgcolor="orange:blue"  gradientangle="315">43</TD>
++<TD border="3"  bgcolor="orange:blue"  gradientangle="315">44</TD>
++<TD border="3"  bgcolor="orange:purple"  gradientangle="315">45</TD>
++<TD border="3"  bgcolor="orange:purple"  gradientangle="315">46</TD>
++<TD border="3"  bgcolor="orange:violet"  gradientangle="315">47</TD>
++<TD border="3"  bgcolor="orange:violet"  gradientangle="315">48</TD></TR>
++  
++<TR><TD border="3"  bgcolor="orange:red"  gradientangle="315">50</TD>
++<TD border="3"  bgcolor="red:green"  gradientangle="315">51</TD>
++<TD border="3"  bgcolor="red:green"  gradientangle="315">52</TD>
++<TD border="3"  bgcolor="red:blue"  gradientangle="315">53</TD>
++<TD border="3"  bgcolor="red:blue"  gradientangle="315">54</TD>
++<TD border="3"  bgcolor="red:purple"  gradientangle="315">55</TD>
++<TD border="3"  bgcolor="red:purple"  gradientangle="315">56</TD>
++<TD border="3"  bgcolor="red:violet"  gradientangle="315">57</TD>
++<TD border="3"  bgcolor="red:violet"  gradientangle="315">58</TD></TR>
++  
++<TR><TD border="3"  bgcolor="red"  gradientangle="315">60</TD>
++<TD border="3"  bgcolor="red:green"  gradientangle="315">61</TD>
++<TD border="3"  bgcolor="red:green"  gradientangle="315">62</TD>
++<TD border="3"  bgcolor="red:blue"  gradientangle="315">63</TD>
++<TD border="3"  bgcolor="red:blue"  gradientangle="315">64</TD>
++<TD border="3"  bgcolor="red:purple"  gradientangle="315">65</TD>
++<TD border="3"  bgcolor="red:purple"  gradientangle="315">66</TD>
++<TD border="3"  bgcolor="red:violet"  gradientangle="315">67</TD>
++<TD border="3"  bgcolor="red:violet"  gradientangle="315">68</TD></TR>
++  
++<TR><TD border="3"  bgcolor="red:brown"  gradientangle="315">70</TD>
++<TD border="3"  bgcolor="brown:green"  gradientangle="315">71</TD>
++<TD border="3"  bgcolor="brown:green"  gradientangle="315">72</TD>
++<TD border="3"  bgcolor="brown:blue"  gradientangle="315">73</TD>
++<TD border="3"  bgcolor="brown:blue"  gradientangle="315">74</TD>
++<TD border="3"  bgcolor="brown:purple"  gradientangle="315">75</TD>
++<TD border="3"  bgcolor="brown:purple"  gradientangle="315">76</TD>
++<TD border="3"  bgcolor="brown:violet"  gradientangle="315">77</TD>
++<TD border="3"  bgcolor="brown:violet"  gradientangle="315">78</TD></TR>
++  
++<TR><TD border="3"  bgcolor="brown"  gradientangle="315">80</TD>
++<TD border="3"  bgcolor="brown:green"  gradientangle="315">81</TD>
++<TD border="3"  bgcolor="brown:green"  gradientangle="315">82</TD>
++<TD border="3"  bgcolor="brown:blue"  gradientangle="315">83</TD>
++<TD border="3"  bgcolor="brown:blue"  gradientangle="315">84</TD>
++<TD border="3"  bgcolor="brown:purple"  gradientangle="315">85</TD>
++<TD border="3"  bgcolor="brown:purple"  gradientangle="315">86</TD>
++<TD border="3"  bgcolor="brown:violet"  gradientangle="315">87</TD>
++<TD border="3"  bgcolor="brown:violet"  gradientangle="315">88</TD></TR>
++  
++</TABLE>>];
 +
-+include chromium.inc
++}
 +
-+DESCRIPTION = "Chromium browser"
-+DEPENDS += "libgnome-keyring"
++} 
 +
-+SRC_URI = "\
-+        http://gsdview.appspot.com/chromium-browser-official/${P}.tar.xz \
-+        file://include.gypi \
-+        file://oe-defaults.gypi \
-+        file://google-chrome \
-+        file://google-chrome.desktop \
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/simple.gv b/meta-oe/recipes-graphics/graphviz/graphviz/simple.gv
+new file mode 100644
+index 0000000..1b140f9
+--- /dev/null
++++ b/meta-oe/recipes-graphics/graphviz/graphviz/simple.gv
+@@ -0,0 +1 @@
++    graph { a -- b; b -- c; a -- c; d -- c; e -- c; e -- a; } 
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_2.38.0.bb b/meta-oe/recipes-graphics/graphviz/graphviz_2.38.0.bb
+new file mode 100644
+index 0000000..61ffaef
+--- /dev/null
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_2.38.0.bb
+@@ -0,0 +1,131 @@
++SUMMARY = "Graphviz - Graph Visualization Software."
++DESCRIPTION = "Graphviz is open source graph visualization software. Graph visualization is a way of representing structural information as diagrams of abstract graphs and networks. It has important applications in networking, bioinformatics,  software engineering, database and web design, machine learning, and in visual interfaces for other technical domains."
++HOMEPAGE = "http://www.graphviz.org/"
++SECTION = "graphics"
++LICENSE = "EPL-1.0"
++LIC_FILES_CHKSUM = "file://COPYING;beginline=1;endline=2;md5=737cf7b11c0759e6d3b0d6cb08b7c4f8"
++
++DEPENDS += "graphviz-native bison flex libtool zlib chrpath-replacement-native"
++DEPENDS_class-native = ""
++
++SRC_URI_BASE = "${DEBIAN_MIRROR}/main/g/${BPN}/${BPN}_${PV}.orig.tar.gz;name=archive \
++           ${DEBIAN_MIRROR}/main/g/${BPN}/${BPN}_${PV}-7.debian.tar.xz;name=patch \
 +"
 +
++SRC_URI = "${SRC_URI_BASE} \
++        file://graphviz_no_mkdef_build.patch \
++        file://simple.gv \
++        file://linear_angle.gv \
++        "
 +
-+# PACKAGECONFIG options
-+# ^^^^^^^^^^^^^^^^^^^^^
-+# * use-egl: (on by default)
-+#       Without this packageconfig, the Chromium build will use GLX for
-+#       creating an OpenGL context in X11, and regular OpenGL for painting
-+#       operations. Neither are desirable on embedded platforms. With this
-+#       packageconfig, EGL and OpenGL ES 2.x are used instead.
-+#
-+# * disable-api-keys-info-bar: (off by default)
-+#       This disables the info bar that warns: "Google API keys are missing".
-+#       With some builds, missing API keys are considered OK, so the bar needs
-+#       to go. Conversely, if Chromium is compiled with this option off and
-+#       the user wishes to disable the warning, the following lines can be
-+#       added to the "google-chrome" script (see patchset) before the
-+#       chromium binary is called:
-+#           export GOOGLE_API_KEY="no"
-+#           export GOOGLE_DEFAULT_CLIENT_ID="no"
-+#           export GOOGLE_DEFAULT_CLIENT_SECRET="no"
-+#
-+# * component-build: (off by default)
-+#       Enables component build mode. By default, all of Chromium (with the
-+#       exception of FFmpeg) is linked into one big binary. The linker step
-+#       requires at least 8 GB RAM. Component mode was created to facilitate
-+#       development and testing, since with it, there is not one big binary;
-+#       instead, each component is linked to a separate shared object. Use
-+#       component mode for development, testing, and in case the build machine
-+#       is not a 64-bit one, or has less than 8 GB RAM.
-+#
-+# * ignore-lost-context: (off by default)
-+#       There is a flaw in the HTML Canvas specification. When the canvas'
-+#       backing store is some kind of hardware resource like an OpenGL
-+#       texture, this resource might get lost. In case of OpenGL textures,
-+#       this happens when the OpenGL context gets lost. The canvas should then
-+#       be repainted, but nothing in the Canvas standard reflects that. This
-+#       packageconfig is to be used if the underlying OpenGL (ES) drivers do
-+#       not lose the context, or if losing the context is considered okay
-+#       (note that canvas contents can vanish then).
-+#
-+# * impl-side-painting: (off by default)
-+#       This is a new painting mechanism. Still in
-+#       development stages, it can improve performance See
-+#       http://www.chromium.org/developers/design-documents/impl-side-painting
-+#       for more.
-+#
-+# * kiosk-mode: (off by default)
-+#       Enable this option if you want your browser to start up full-screen,
-+#       without any menu bars, without any clutter, and without any initial
-+#       start-up indicators.
-+#
-+# * proprietary-codecs: (off by default)
-+#       Enable this option if you want to add support for additional proprietary
-+#       codecs, most notably MPEG standards (h.264, h.265, MP4, MP3, AAC, MPEG-2 ..)
++SRC_URI_class-native = "${SRC_URI_BASE}"
 +
-+PACKAGECONFIG ??= "use-egl"
++SRC_URI[archive.md5sum] = "5b6a829b2ac94efcd5fa3c223ed6d3ae"
++SRC_URI[archive.sha256sum] = "81aa238d9d4a010afa73a9d2a704fc3221c731e1e06577c2ab3496bdef67859e"
++SRC_URI[patch.md5sum] = "5cbcff92169d682471cdfdf58d215098"
++SRC_URI[patch.sha256sum] = "312ab8215fbe1800664675cfc284aecfeff3ce699407523b5bdefee64cf1a53c"
 +
-+# this makes sure the dependencies for the EGL mode are present; otherwise, the configure scripts
-+# automatically and silently fall back to GLX
-+PACKAGECONFIG[use-egl] = ",,virtual/egl virtual/libgles2"
++inherit autotools-brokensep pkgconfig
 +
-+# Empty PACKAGECONFIG options listed here to avoid warnings.
-+# The .bb file should use these to conditionally add patches
-+# and command-line switches (extra dependencies should not
-+# be necessary but are OK to add).
-+PACKAGECONFIG[disable-api-keys-info-bar] = ""
-+PACKAGECONFIG[component-build] = ""
-+PACKAGECONFIG[ignore-lost-context] = ""
-+PACKAGECONFIG[impl-side-painting] = ""
-+PACKAGECONFIG[use-egl] = ""
-+PACKAGECONFIG[kiosk-mode] = ""
-+PACKAGECONFIG[proprietary-codecs] = ""
++LDFLAGS += "-Wunused-but-set-variable -Wmaybe-uninitialized -Wunused-variable"
 +
++PACKAGECONFIG ?= "ghost rsvg cairo swig tcl gtk lua sfdp png libgd \
++                ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'X11', '', d)} \
++                ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'glut', '', d)}"
 +
-+# Conditionally add ozone-wayland and its patches to the Chromium sources
-+# You can override this by setting CHROMIUM_ENABLE_WAYLAND=1 or CHROMIUM_ENABLE_WAYLAND=0 in local.conf
-+CHROMIUM_ENABLE_WAYLAND ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '0', \
-+                     bb.utils.contains('DISTRO_FEATURES', 'wayland', '1', \
-+                     '0', d),d)}"
++PACKAGECONFIG_class-native ??= ""
 +
-+# ozone-wayland will be cloned into a directory with this name
-+OZONE_WAYLAND_GIT_DESTSUFFIX ?= "ozone-wayland-git"
-+# Use glob to filter out the patches that shall be applied against ozone-wayland.
-+# Useful if some of the patches would break the build.
-+OZONE_WAYLAND_PATCH_FILE_GLOB ?= "*.patch"
++PACKAGECONFIG[sfdp] = "--enable-sfdp=yes, --disable-sfdp, ,"
++PACKAGECONFIG[swig] = "--enable-swig=yes, --disable-swig, swig,"
++PACKAGECONFIG[lua] = "--enable-lua=yes, --disable-lua, lua,"
++PACKAGECONFIG[cairo] = "--with-pangocairo=yes, --with-pangocairo=no, cairo,"
++PACKAGECONFIG[tcl] = "--enable-tcl=yes --with-tclsh=tclsh, --disable-tcl, tcl, tcl"
++PACKAGECONFIG[glut] = "--with-glut=yes, --without-glut, mesa-glut,"
++PACKAGECONFIG[gtk] = "--with-gtk=yes, --without-gtk, gtk+,"
++PACKAGECONFIG[expect] = "--with-expect=yes, --without-expect, expect,"
++PACKAGECONFIG[ghost] = "--with-ghostscript=yes, --without-ghostscript, ghostscript,"
++PACKAGECONFIG[fontconfig] = "--with-fontconfig=yes, --without-fontconfig, fontconfig,"
++PACKAGECONFIG[freetype] = "--with-freetype2=yes, --with-freetype2=no, freetype,"
++PACKAGECONFIG[poppler] = "--with-poppler=yes, --with-poppler=no, poppler,"
++PACKAGECONFIG[guile] = "--enable-guile, --disable-guile, guile,"
++PACKAGECONFIG[php] = "--enable-php, --disable-php , php,"
++PACKAGECONFIG[perl] = "--enable-perl, --disable-perl, perl,"
++PACKAGECONFIG[python] = "--enable-python, --disable-python, python ,"
++PACKAGECONFIG[ruby] = "--enable-ruby, --disable-ruby, ruby, "
++PACKAGECONFIG[qt] = "--with-qt=yes, --with-qt=no, qte,"
++PACKAGECONFIG[glade] = "--with-glade=yes, --with-glade=no, glade3,"
++PACKAGECONFIG[libgd] = "--with-libgd=yes, --with-libgd=no, libglade,"
++PACKAGECONFIG[png] = "--with-libpng=yes, --with-libpng=no, libpng, libpng"
++PACKAGECONFIG[rsvg] = "--with-rsvg=yes, --with-rsvg=no, librsvg, librsvg"
++PACKAGECONFIG[pixbuf] = "--with-gdk=yes --with-gdk-pixbuf=yes, --with-gdk=no --with-gdk-pixbuf=no, gdk-pixbuf,"
++PACKAGECONFIG[X11] = "--with-x, --without-x, libx11 virtual/libx11 , libxaw7"
 +
-+# Variable for extra ozone-wayland patches, typically extended by BSP layer .bbappends
-+# IMPORTANT: do not simply add extra ozone-wayland patches to the SRC_URI in a
-+# .bbappend, since the base ozone-wayland patches need to be applied first (see below)
-+OZONE_WAYLAND_EXTRA_PATCHES ?= ""
++EXTRA_OECONF += "--enable-ltdl"
 +
++EXTRA_OECONF_class-native += " \
++    --enable-sharp=no \
++    --enable-java=no \
++    --enable-ocaml=no \
++    --enable-r=no \
++    --with-devil=no \
++    --with-lasi=no \
++    --with-gtkgl=no \
++    --with-gtkglext=no \
++    --with-gts=no \
++    --with-ann=no \
++    --with-ortho=no \
++    --with-digcola=no \
++    --with-smyrna=no \
++    --with-ipsepcola=no \
++     "
++EXTRANATIVEPATH += "chrpath-native"
 +
-+# These are present as their own variables, since they have changed between versions
-+# a few times in the past already; making them variables makes it easier to handle that
-+CHROMIUM_X11_DEPENDS ?= ""
-+CHROMIUM_X11_GYP_DEFINES ?= ""
-+CHROMIUM_WAYLAND_DEPENDS ?= ""
-+CHROMIUM_WAYLAND_GYP_DEFINES ?= ""
-+
-+
-+CHROMIUM_EXTRA_ARGS ?= " \
-+        ${@bb.utils.contains('PACKAGECONFIG', 'use-egl', '--use-gl=egl', '', d)} \
-+        ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', '--gpu-no-context-lost', '', d)} \
-+        ${@bb.utils.contains('PACKAGECONFIG', 'impl-side-painting', '--enable-gpu-rasterization --enable-impl-side-painting', '', d)} \
-+        ${@bb.utils.contains('PACKAGECONFIG', 'kiosk-mode', '--start-fullscreen --kiosk --no-first-run', '', d)} \
-+"
-+
-+SRC_URI += "\
-+        ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
-+        ${@oe.utils.conditional('CHROMIUM_ENABLE_WAYLAND', '1', 'git://github.com/01org/ozone-wayland.git;destsuffix=${OZONE_WAYLAND_GIT_DESTSUFFIX};branch=${OZONE_WAYLAND_GIT_BRANCH};rev=${OZONE_WAYLAND_GIT_SRCREV}', '', d)} \
-+"
-+
-+
-+# Some sanity checks.
-+python do_check_variables() {
-+    CHROMIUM_BUILD_TYPE = d.getVar('CHROMIUM_BUILD_TYPE', True)
-+    CHROMIUM_ENABLE_WAYLAND = d.getVar('CHROMIUM_ENABLE_WAYLAND', True)
-+    DISTRO_FEATURES = d.getVar("DISTRO_FEATURES", True).split()
-+    if CHROMIUM_BUILD_TYPE not in ['Release', 'Debug']:
-+        bb.fatal("Wrong value for CHROMIUM_BUILD_TYPE. Please set it either to \'Release\' or to \'Debug\'")
-+    if CHROMIUM_ENABLE_WAYLAND not in ['0', '1']:
-+        bb.fatal("Wrong value for CHROMIUM_ENABLE_WAYLAND. Please set it to \'1\' to enable the feature or to \'0\' to disable it")
-+    if ( (CHROMIUM_ENABLE_WAYLAND == '1') and ('wayland' not in DISTRO_FEATURES) ):
-+        bb.warn("You have selected to build Chromium with Wayland support, but you have not enabled wayland in DISTRO_FEATURES")
-+    if ( (CHROMIUM_ENABLE_WAYLAND != '1') and ('x11' not in DISTRO_FEATURES) ):
-+        bb.warn("You have selected to build Chromium without Wayland support, but you have not enabled x11 in DISTRO_FEATURES")
-+    # Print both on log.do_checkvariables and on the console the configuration that is selected.
-+    # This useful both for throubleshooting and for checking how the build is finally configured.
-+    if (CHROMIUM_ENABLE_WAYLAND == '1'):
-+        bb.plain("INFO: Chromium has been configured with Wayland support (ozone-wayland). Build type is \'%s\'" %CHROMIUM_BUILD_TYPE)
-+    else:
-+        bb.plain("INFO: Chromium has been configured without Wayland support. Build type is \'%s\'" %CHROMIUM_BUILD_TYPE)
-+}
-+addtask check_variables before do_fetch
-+
-+do_unpack[postfuncs] += "${@oe.utils.conditional('CHROMIUM_ENABLE_WAYLAND', '1', 'copy_ozone_wayland_files', '', d)}"
-+do_patch[prefuncs] += "${@oe.utils.conditional('CHROMIUM_ENABLE_WAYLAND', '1', 'add_ozone_wayland_patches', '', d)}"
-+
-+copy_ozone_wayland_files() {
-+	# ozone-wayland sources must be placed in an "ozone"
-+	# subdirectory in ${S} in order for the .gyp build
-+	# scripts to work
-+	cp -r ${WORKDIR}/ozone-wayland-git ${S}/ozone
++debian_do_patch() {
++    cd ${S}
++    while read line; do patch -p1 < ${WORKDIR}/debian/patches/$line; done < ${WORKDIR}/debian/patches/series
 +}
 +
-+python add_ozone_wayland_patches() {
-+    import glob
-+    srcdir = d.getVar('S', True)
-+    # find all ozone-wayland patches and add them to SRC_URI
-+    upstream_patches_dir = srcdir + "/ozone/patches"
-+    upstream_patches = glob.glob(upstream_patches_dir + "/" + d.getVar('OZONE_WAYLAND_PATCH_FILE_GLOB', True))
-+    upstream_patches.sort()
-+    for upstream_patch in upstream_patches:
-+        d.appendVar('SRC_URI', ' file://' + upstream_patch)
-+    # then, add the extra patches to SRC_URI order matters;
-+    # extra patches may depend on the base ozone-wayland ones
-+    d.appendVar('SRC_URI', ' ' + d.getVar('OZONE_WAYLAND_EXTRA_PATCHES', False))
++python do_patch() {
++    bb.build.exec_func('debian_do_patch', d)
++    bb.build.exec_func('patch_do_patch', d)
 +}
 +
-+EXTRA_OEGYP = " \
-+	-Dangle_use_commit_id=0 \
-+	-Dclang=0 \
-+	-Dhost_clang=0 \
-+	-Ddisable_fatal_linker_warnings=1 \
-+	-Dlinux_use_bundled_gold=0 \
-+	-Dlinux_use_bundled_binutils=0 \
-+	${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', '-Dlinux_use_gold_flags=1', '-Dlinux_use_gold_flags=0', d)} \
-+	-I ${WORKDIR}/oe-defaults.gypi \
-+	-I ${WORKDIR}/include.gypi \
-+	${@bb.utils.contains('PACKAGECONFIG', 'component-build', '-I ${WORKDIR}/component-build.gypi', '', d)} \
-+	${@bb.utils.contains('PACKAGECONFIG', 'proprietary-codecs', '-Dproprietary_codecs=1 -Dffmpeg_branding=Chrome', '', d)} \
-+	-f ninja \
-+"
-+
-+python() {
-+    if d.getVar('CHROMIUM_ENABLE_WAYLAND', True) == '1':
-+        d.appendVar('DEPENDS', ' %s ' % d.getVar('CHROMIUM_WAYLAND_DEPENDS', True))
-+        d.appendVar('GYP_DEFINES', ' %s ' % d.getVar('CHROMIUM_WAYLAND_GYP_DEFINES', True))
-+    else:
-+        d.appendVar('DEPENDS', ' %s ' % d.getVar('CHROMIUM_X11_DEPENDS', True))
-+        d.appendVar('GYP_DEFINES', ' %s ' % d.getVar('CHROMIUM_X11_GYP_DEFINES', True))
++do_configure_prepend () {
++    # copy mkdefs from the native graphviz build
++    if [ "${PN}" != "graphviz-native" ]; then
++        cp ${STAGING_BINDIR_NATIVE}/graphviz-${PV}/mkdefs ${S}/lib/gvpr/.
++    fi
++    ./autogen.sh NOCONFIG
 +}
 +
-+do_configure_append() {
-+
-+	build/gyp_chromium --depth=. ${EXTRA_OEGYP}
-+
++do_compile_class-native () {
++    cd lib/gvpr
++    oe_runmake mkdefs
 +}
 +
-+do_compile() {
-+        # build with ninja
-+        ninja -C ${S}/out/${CHROMIUM_BUILD_TYPE} ${PARALLEL_MAKE} chrome chrome_sandbox
++do_install_append () {
++    if [ "${PN}" != "graphviz-native" ]; then
++        install  -d ${D}${datadir}/graphviz
++        install  ${WORKDIR}/*.gv ${D}${datadir}/graphviz/
++    fi
 +}
 +
-+do_install_append() {
-+
-+	# Add extra command line arguments to google-chrome script by modifying
-+        # the dummy "CHROME_EXTRA_ARGS" line
-+        sed -i "s/^CHROME_EXTRA_ARGS=\"\"/CHROME_EXTRA_ARGS=\"${CHROMIUM_EXTRA_ARGS}\"/" ${D}${bindir}/google-chrome
-+
-+        # update ROOT_HOME with the root user's $HOME
-+        sed -i "s#ROOT_HOME#${ROOT_HOME}#" ${D}${bindir}/google-chrome
-+
-+	# Always adding this libdir (not just with component builds), because the
-+        # LD_LIBRARY_PATH line in the google-chromium script refers to it
-+        install -d ${D}${libdir}/${BPN}/
-+        if [ -n "${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'component-build', '', d)}" ]; then
-+                install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/lib/*.so ${D}${libdir}/${BPN}/
-+        fi
++do_install_class-native () {
++    install -d ${D}${bindir}/graphviz-${PV}
++    install -m 755 ${S}/lib/gvpr/mkdefs ${D}${bindir}/graphviz-${PV}/
 +}
-diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
-index 5e8aba6..e5deac1 100644
---- a/recipes-browser/chromium/chromium.inc
-+++ b/recipes-browser/chromium/chromium.inc
-@@ -13,20 +13,7 @@ CHROMIUM_BUILD_TYPE ??= "Release"
- 
- inherit gettext pythonnative
- 
--PACKAGECONFIG ??= "use-egl"
--
--# this makes sure the dependencies for the EGL mode are present; otherwise, the configure scripts
--# automatically and silently fall back to GLX
--PACKAGECONFIG[use-egl] = ",,virtual/egl virtual/libgles2"
--
--# Additional PACKAGECONFIG options - listed here to avoid warnings
--PACKAGECONFIG[component-build] = ""
--PACKAGECONFIG[disable-api-keys-info-bar] = ""
--PACKAGECONFIG[ignore-lost-context] = ""
--PACKAGECONFIG[impl-side-painting] = ""
--PACKAGECONFIG[use-egl] = ""
--PACKAGECONFIG[kiosk-mode] = ""
--
-+ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'arm_float_abi=hard', 'arm_float_abi=softfp', d)}"
- GYP_DEFINES += "${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
- 
- do_configure() {
-diff --git a/recipes-browser/chromium/chromium_40.0.2214.91.bb b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-index 48a5a9e..3966548 100644
---- a/recipes-browser/chromium/chromium_40.0.2214.91.bb
-+++ b/recipes-browser/chromium/chromium_40.0.2214.91.bb
-@@ -1,31 +1,6 @@
--# Recipe files have to perform the following tasks after including this file:
--# 1) Add patches to SRC_URI. Version specific patches should be contained in a
--#    "chromium-XX" subdirectory, where XX is the major version. There are also
--#    patches that are shared amongst versions but may one day no longer be
--#    needed (like unistd2.patch). These do not belong in such a subdirectory,
--#    but still need to be explicitely be added. Do NOT add ozone-wayland patches
--#    to SRC_URI here!
--# 2) Add md5sum and sha256sum hashes of the tarball.
--# 3) Add ozone-wayland patches to the OZONE_WAYLAND_EXTRA_PATCHES variable.
--#    The rule with the chromium-XX subdirectory also applies here.
--# 4) Set the OZONE_WAYLAND_GIT_BRANCH and OZONE_WAYLAND_GIT_SRCREV values.
--# 5) Optionally, set values for these variables:
--#    * OZONE_WAYLAND_PATCH_FILE_GLOB
--#    * CHROMIUM_X11_DEPENDS
--#    * CHROMIUM_X11_GYP_DEFINES
--#    * CHROMIUM_WAYLAND_DEPENDS
--#    * CHROMIUM_WAYLAND_GYP_DEFINES
-+include chromium-browser.inc
- 
--include chromium.inc
--DESCRIPTION = "Chromium browser"
--DEPENDS += "libgnome-keyring"
--SRC_URI = "\
--        http://gsdview.appspot.com/chromium-browser-official/${P}.tar.xz \
--        file://include.gypi \
--        file://oe-defaults.gypi \
--        ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
--        file://google-chrome \
--        file://google-chrome.desktop \
-+SRC_URI += "\
-         file://unistd-2.patch \
-         file://chromium-40/fix-build-error-with-GCC-in-Debug-mode.patch \
-         file://chromium-40/add_missing_stat_h_include.patch \
-@@ -33,117 +8,24 @@ SRC_URI = "\
-         file://chromium-40/0002-image_util.cc-disable-warning-from-gcc-5.patch \
-         file://chromium-40/0003-disable-uninitialized-warning.patch \
-         file://chromium-40/0004-Remove-hard-coded-values-for-CC-and-CXX.patch \
--"
--
--# PACKAGECONFIG options
--# ^^^^^^^^^^^^^^^^^^^^^
--# * use-egl: (on by default)
--#       Without this packageconfig, the Chromium build will use GLX for
--#       creating an OpenGL context in X11, and regular OpenGL for painting
--#       operations. Neither are desirable on embedded platforms. With this
--#       packageconfig, EGL and OpenGL ES 2.x are used instead.
--#
--# * disable-api-keys-info-bar: (off by default)
--#       This disables the info bar that warns: "Google API keys are missing".
--#       With some builds, missing API keys are considered OK, so the bar needs
--#       to go. Conversely, if Chromium is compiled with this option off and
--#       the user wishes to disable the warning, the following lines can be
--#       added to the "google-chrome" script (see patchset) before the
--#       chromium binary is called:
--#           export GOOGLE_API_KEY="no"
--#           export GOOGLE_DEFAULT_CLIENT_ID="no"
--#           export GOOGLE_DEFAULT_CLIENT_SECRET="no"
--#
--# * component-build: (off by default)
--#       Enables component build mode. By default, all of Chromium (with the
--#       exception of FFmpeg) is linked into one big binary. The linker step
--#       requires at least 8 GB RAM. Component mode was created to facilitate
--#       development and testing, since with it, there is not one big binary;
--#       instead, each component is linked to a separate shared object. Use
--#       component mode for development, testing, and in case the build machine
--#       is not a 64-bit one, or has less than 8 GB RAM.
--#
--# * ignore-lost-context: (off by default)
--#       There is a flaw in the HTML Canvas specification. When the canvas'
--#       backing store is some kind of hardware resource like an OpenGL
--#       texture, this resource might get lost. In case of OpenGL textures,
--#       this happens when the OpenGL context gets lost. The canvas should then
--#       be repainted, but nothing in the Canvas standard reflects that. This
--#       packageconfig is to be used if the underlying OpenGL (ES) drivers do
--#       not lose the context, or if losing the context is considered okay
--#       (note that canvas contents can vanish then).
--#
--# * impl-side-painting: (off by default)
--#       This is a new painting mechanism. Still in
--#       development stages, it can improve performance See
--#       http://www.chromium.org/developers/design-documents/impl-side-painting
--#       for more.
--#
--# * kiosk-mode: (off by default)
--#       Enable this option if you want your browser to start up full-screen,
--#       without any menu bars, without any clutter, and without any initial
--#       start-up indicators.
--SRC_URI += "\
-         ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://chromium-40/0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \
-         ${@bb.utils.contains('PACKAGECONFIG', 'impl-side-painting', 'file://chromium-40/0002-Add-Linux-to-impl-side-painting-whitelist.patch', '', d)} \
-         ${@bb.utils.contains('PACKAGECONFIG', 'disable-api-keys-info-bar', 'file://chromium-40/0003-Disable-API-keys-info-bar.patch', '', d)} \
- "
--CHROMIUM_EXTRA_ARGS ?= " \
--	${@bb.utils.contains('PACKAGECONFIG', 'use-egl', '--use-gl=egl', '', d)} \
--	${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', '--gpu-no-context-lost', '', d)} \
--	${@bb.utils.contains('PACKAGECONFIG', 'impl-side-painting', '--enable-gpu-rasterization --enable-impl-side-painting', '', d)} \
--	${@bb.utils.contains('PACKAGECONFIG', 'kiosk-mode', '--start-fullscreen --kiosk --no-first-run', '', d)} \
--"
--
--# Conditionally add ozone-wayland and its patches to the Chromium sources
--# You can override this by setting CHROMIUM_ENABLE_WAYLAND=1 or CHROMIUM_ENABLE_WAYLAND=0 in local.conf
--CHROMIUM_ENABLE_WAYLAND ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '0', \
--                     bb.utils.contains('DISTRO_FEATURES', 'wayland', '1', \
--                     '0', d),d)}"
--# Some sanity checks.
--python do_check_variables() {
--    CHROMIUM_BUILD_TYPE = d.getVar('CHROMIUM_BUILD_TYPE', True)
--    CHROMIUM_ENABLE_WAYLAND = d.getVar('CHROMIUM_ENABLE_WAYLAND', True)
--    DISTRO_FEATURES = d.getVar("DISTRO_FEATURES", True).split()
--    if CHROMIUM_BUILD_TYPE not in ['Release', 'Debug']:
--        bb.fatal("Wrong value for CHROMIUM_BUILD_TYPE. Please set it either to \'Release\' or to \'Debug\'")
--    if CHROMIUM_ENABLE_WAYLAND not in ['0', '1']:
--        bb.fatal("Wrong value for CHROMIUM_ENABLE_WAYLAND. Please set it to \'1\' to enable the feature or to \'0\' to disable it")
--    if ( (CHROMIUM_ENABLE_WAYLAND == '1') and ('wayland' not in DISTRO_FEATURES) ):
--        bb.warn("You have selected to build Chromium with Wayland support, but you have not enabled wayland in DISTRO_FEATURES")
--    if ( (CHROMIUM_ENABLE_WAYLAND != '1') and ('x11' not in DISTRO_FEATURES) ):
--        bb.warn("You have selected to build Chromium without Wayland support, but you have not enabled x11 in DISTRO_FEATURES")
--    # Print both on log.do_checkvariables and on the console the configuration that is selected.
--    # This useful both for throubleshooting and for checking how the build is finally configured.
--    if (CHROMIUM_ENABLE_WAYLAND == '1'):
--        bb.plain("INFO: Chromium has been configured with Wayland support (ozone-wayland). Build type is \'%s\'" %CHROMIUM_BUILD_TYPE)
--    else:
--        bb.plain("INFO: Chromium has been configured without Wayland support. Build type is \'%s\'" %CHROMIUM_BUILD_TYPE)
--}
--addtask check_variables before do_fetch
--
--OZONE_WAYLAND_GIT_DESTSUFFIX = "ozone-wayland-git"
--OZONE_WAYLAND_GIT_BRANCH = "Milestone-ThanksGiving"
--OZONE_WAYLAND_GIT_SRCREV = "5d7baa9bc3b8c88e9b7e476e3d6bc8cd44a887fe"
--SRC_URI += "${@oe.utils.conditional('CHROMIUM_ENABLE_WAYLAND', '1', 'git://github.com/01org/ozone-wayland.git;destsuffix=${OZONE_WAYLAND_GIT_DESTSUFFIX};branch=${OZONE_WAYLAND_GIT_BRANCH};rev=${OZONE_WAYLAND_GIT_SRCREV}', '', d)}"
--OZONE_WAYLAND_PATCH_FILE_GLOB = "*.patch"
--
--do_unpack[postfuncs] += "${@oe.utils.conditional('CHROMIUM_ENABLE_WAYLAND', '1', 'copy_ozone_wayland_files', '', d)}"
--do_patch[prefuncs] += "${@oe.utils.conditional('CHROMIUM_ENABLE_WAYLAND', '1', 'add_ozone_wayland_patches', '', d)}"
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=537e0b52077bf0a616d0a0c8a79bc9d5"
- SRC_URI[md5sum] = "1f5093bd7e435fdebad070e74bfb3438"
- SRC_URI[sha256sum] = "f72fda9ff1ea256ab911610ee532eadf8303137d431f2481d01d3d60e5e64149"
- 
--# Variable for extra ozone-wayland patches, typically extended by BSP layer .bbappends
--# IMPORTANT: do not simply add extra ozone-wayland patches to the SRC_URI in a
--# .bbappend, since the base ozone-wayland patches need to be applied first (see below)
-+OZONE_WAYLAND_GIT_BRANCH = "Milestone-ThanksGiving"
-+OZONE_WAYLAND_GIT_SRCREV = "5d7baa9bc3b8c88e9b7e476e3d6bc8cd44a887fe"
 +
- OZONE_WAYLAND_EXTRA_PATCHES = " \
-         file://chromium-40/0005-Remove-X-libraries-from-GYP-files.patch \
-         file://chromium-40/0010-systemd-218.patch \
- "
--# using 00*.patch to skip the WebRTC patches in ozone-wayland
--# the WebRTC patches remove X11 libraries from the linker flags, which is
-+# using 00*.patch to skip the WebRTC patches in ozone-wayland ThanksGiving milestone.
-+# The WebRTC patches remove X11 libraries from the linker flags, which is
- # already done by another patch (see above). Furthermore, to be able to use
- # these patches, it is necessary to update the git repository in third_party/webrtc,
- # which would further complicate this recipe.
-@@ -157,84 +39,7 @@ python() {
-             bb.fatal("Chromium 40 Wayland version cannot be built in component-mode")
- }
- 
--copy_ozone_wayland_files() {
--	# ozone-wayland sources must be placed in an "ozone"
--	# subdirectory in ${S} in order for the .gyp build
--	# scripts to work
--	cp -r ${WORKDIR}/ozone-wayland-git ${S}/ozone
--}
--
--python add_ozone_wayland_patches() {
--    import glob
--    srcdir = d.getVar('S', True)
--    # find all ozone-wayland patches and add them to SRC_URI
--    upstream_patches_dir = srcdir + "/ozone/patches"
--    upstream_patches = glob.glob(upstream_patches_dir + "/" + d.getVar('OZONE_WAYLAND_PATCH_FILE_GLOB', True))
--    upstream_patches.sort()
--    for upstream_patch in upstream_patches:
--        d.appendVar('SRC_URI', ' file://' + upstream_patch)
--    # then, add the extra patches to SRC_URI order matters;
--    # extra patches may depend on the base ozone-wayland ones
--    d.appendVar('SRC_URI', ' ' + d.getVar('OZONE_WAYLAND_EXTRA_PATCHES', False))
--}
--
--EXTRA_OEGYP =	" \
--	-Dangle_use_commit_id=0 \
--	-Dclang=0 \
--	-Dhost_clang=0 \
--	-Ddisable_fatal_linker_warnings=1 \
--	${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', '', '-Dlinux_use_gold_binary=0', d)} \
--	${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', '', '-Dlinux_use_gold_flags=0', d)} \
--	-I ${WORKDIR}/oe-defaults.gypi \
--	-I ${WORKDIR}/include.gypi \
--	${@bb.utils.contains('PACKAGECONFIG', 'component-build', '-I ${WORKDIR}/component-build.gypi', '', d)} \
--	-f ninja \
--"
--ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'arm_float_abi=hard', 'arm_float_abi=softfp', d)}"
--
--GYP_DEFINES += "${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
--
--# These are present as their own variables, since they have changed between versions
--# a few times in the past already; making them variables makes it easier to handle that
- CHROMIUM_X11_DEPENDS = "xextproto gtk+ libxi libxss"
- CHROMIUM_X11_GYP_DEFINES = ""
- CHROMIUM_WAYLAND_DEPENDS = "wayland libxkbcommon"
- CHROMIUM_WAYLAND_GYP_DEFINES = "use_ash=1 use_aura=1 chromeos=0 use_ozone=1"
--
--python() {
--    if d.getVar('CHROMIUM_ENABLE_WAYLAND', True) == '1':
--        d.appendVar('DEPENDS', ' %s ' % d.getVar('CHROMIUM_WAYLAND_DEPENDS', True))
--        d.appendVar('GYP_DEFINES', ' %s ' % d.getVar('CHROMIUM_WAYLAND_GYP_DEFINES', True))
--    else:
--        d.appendVar('DEPENDS', ' %s ' % d.getVar('CHROMIUM_X11_DEPENDS', True))
--        d.appendVar('GYP_DEFINES', ' %s ' % d.getVar('CHROMIUM_X11_GYP_DEFINES', True))
--}
--
--do_configure_append() {
--
--	build/gyp_chromium --depth=. ${EXTRA_OEGYP}
--
--}
--
--do_compile() {
--        # build with ninja
--        ninja -C ${S}/out/${CHROMIUM_BUILD_TYPE} ${PARALLEL_MAKE} chrome chrome_sandbox
--}
--
--
--do_install_append() {
--
--	# Add extra command line arguments to google-chrome script by modifying
--        # the dummy "CHROME_EXTRA_ARGS" line
--        sed -i "s/^CHROME_EXTRA_ARGS=\"\"/CHROME_EXTRA_ARGS=\"${CHROMIUM_EXTRA_ARGS}\"/" ${D}${bindir}/google-chrome
--
--        # update ROOT_HOME with the root user's $HOME
--        sed -i "s#ROOT_HOME#${ROOT_HOME}#" ${D}${bindir}/google-chrome
--
--	# Always adding this libdir (not just with component builds), because the
--        # LD_LIBRARY_PATH line in the google-chromium script refers to it
--        install -d ${D}${libdir}/${BPN}/
--        if [ -n "${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'component-build', '', d)}" ]; then
--                install -m 0755 ${B}/out/${CHROMIUM_BUILD_TYPE}/lib/*.so ${D}${libdir}/${BPN}/
--        fi
--}
++pkg_postinst_${PN} () {
++if test "x$D" != "x"; then
++    exit 1
++else
++    ${bindr}/dot -c
++fi
++}
++
++INSANE_SKIP_${PN} += "dev-so"
++
++RDEPENDS_${PN} = "libxml2 libcroco"
++RDEPENDS_class-native = ""
++
++BBCLASSEXTEND = "native"
 -- 
-2.7.4
+2.3.5
 
 
