@@ -1,25 +1,46 @@
-Return-Path: <Paul.Gortmaker@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 746A2731C9
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 734806FF56
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 May 2016 19:08:30 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u48J8TS3009913
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 8 May 2016 12:08:30 -0700 (PDT)
-Received: from co-op.corp.ad.wrs.com (128.224.56.235) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Sun, 8 May 2016 12:08:29 -0700
-From: Paul Gortmaker <paul.gortmaker@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 8 May 2016 15:08:13 -0400
-Message-ID: <1462734493-3819-3-git-send-email-paul.gortmaker@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1462734493-3819-1-git-send-email-paul.gortmaker@windriver.com>
-References: <1462734493-3819-1-git-send-email-paul.gortmaker@windriver.com>
-MIME-Version: 1.0
-Subject: [PATCH 2/2] netcf: fix mishandling of gnulib submodule causing build fail
+	Sun,  8 May 2016 23:45:05 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id r187so17272168pfr.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 08 May 2016 16:45:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=brmYkshtXI1abSNtPZFYA1rIC9fBWqOe+j6waZ3bWio=;
+	b=0Zo78cGLOYDPGTOp8pmDUSlIuluDDSpUE3gpt16mEq/0dQTrimYyBTwBieogoSt5hF
+	Na/FjtEPOPAACaz7CVJV4UkFTTmFTSct+dvNWS0WP+BKeAIDEin2L2HO+NpNHz2x+79h
+	lJMRgN6INAzO36gl+qTSYlZ85o2kOPAHEc5+hvlH3oaxHno2POwkuWm55DaFikkNELrN
+	eKF9kqkHgMbW94uAggBLUGdq5XfnzK4uyhcJ+reAlvFsFasUAFUJy3zj+X8UAXPpoN2C
+	QOR1wxwzsjTBUyc4EppX5QnOElmxUetJ4UyWVqaagq49Nhud47yu3BO/ZzcD8gSMzS7Z
+	Lclg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=brmYkshtXI1abSNtPZFYA1rIC9fBWqOe+j6waZ3bWio=;
+	b=R5h0HFck0ypGcN0j2R7jLp3uad5R8o+860M7BmXDtpG0S15UaNvTdflzYdWP+fioNr
+	2+VULa//3+nl4Ck3M0fyj4CUaDQT2cGNkHwzvf+C7F0R6Y85MbIZQgIxTYiOKjCPZJgZ
+	VV/OTS1L/I80tD75tSsPAlnU4NwtBbjNZOFZdyqJf+iNEJWSbQLw5XXrcK8vZdvlJ9D1
+	P7ijGFlk0KZOZH5k6n15+cizPt1LRZ7m6ybBJHX8HAM+OsOuEfBNtU3Oai/3xmvztbaj
+	42xknXSSGnNmGWvH3+tcjr1GC8NOqhJ3x/z6siK7WWPs1M24GQZ229BZlHVuAZaohL/T
+	0uyQ==
+X-Gm-Message-State: AOPr4FXYBI00N+txbu7IUjSZmjo9mXknWyKIP30vgoXYB23VGYg7z5fV2UU8RSx/aIcTvg==
+X-Received: by 10.98.80.196 with SMTP id g65mr13823594pfj.91.1462751106850;
+	Sun, 08 May 2016 16:45:06 -0700 (PDT)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207])
+	by smtp.gmail.com with ESMTPSA id 1sm35782528pah.7.2016.05.08.16.45.04
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 08 May 2016 16:45:05 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	akuster808@gmail.com
+Date: Sun,  8 May 2016 16:45:02 -0700
+Message-Id: <1462751102-8941-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-gnome][master][krogoth][PATCH] libwnck: fix WARNING
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,105 +53,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2016 19:08:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 08 May 2016 23:45:07 -0000
 
-netcf fails to build on certain hosts with newer versions
-of git installed as follows:
+WARNING: libwnck-2.31.0-r0 do_configure: Missing DEPENDS on intltool-native
 
-| ./bootstrap: Bootstrapping from checked-out netcf sources...
-| ./bootstrap: consider installing git-merge-changelog from gnulib
-| ./bootstrap: getting gnulib files...
-| error: pathspec 'gnulib' did not match any file(s) known to git.
-
-If we do a devshell we will see that our configure prepend that
-intended to _create_ the .gitmodules has instead _modified_ it
-and left us with this change present:
-
-  sh-4.3# git diff
-  diff --git a/.gitmodules b/.gitmodules
-  index 7acb1ea19ca7..2d10b0e0e0fe 100644
-  --- a/.gitmodules
-  +++ b/.gitmodules
-  @@ -1,3 +1,3 @@
-   [submodule "gnulib"]
-  -       path = .gnulib
-  -       url = git://git.sv.gnu.org/gnulib.git
-  +       path = gnulib
-  +       url = git://git.sv.gnu.org/gnulib
-  sh-4.3#
-
-What happens is that the newer git does not respect uncommitted
-changes to the .gitmodules file, and hence the path ".gnulib" is
-still considered valid vs. the in tree updated path "gnulib".  It
-doesn't help any that the package has its own tracked files in
-gnulib/ that we stomp over, but the real fail is just uncommitted
-changes to the .gitmodule as this insertion of a random path shows:
-
-  sh-4.3# git diff
-  diff --git a/.gitmodules b/.gitmodules
-  index 7acb1ea19ca7..91bd45f8e4d4 100644
-  --- a/.gitmodules
-  +++ b/.gitmodules
-  @@ -1,3 +1,3 @@
-   [submodule "gnulib"]
-  -       path = .gnulib
-  +       path = gnulibaaa
-          url = git://git.sv.gnu.org/gnulib.git
-  sh-4.3# git --version
-  git version 2.7.4
-  sh-4.3# git submodule init
-  fatal: no submodule mapping found in .gitmodules for path '.gnulib'
-  sh-4.3#
-
-Since the original bbclass simply assumed there was no .gitmodules
-file to begin with, we can easily solve this by not clobbering it
-and respect the path choice used by the package itself.
-
-As the version of ./bootstrap shipped with netcf supports this:
-
-     --no-git       do not use git to update gnulib.  Requires that
-                    --gnulib-srcdir point to a correct gnulib snapshot
-
-we can use it in conjunction with the pathspec since we know the
-gnulib was just copied in from the sysroot, and does not need
-to try and pull any further updates.
-
-Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-support/netcf/netcf_git.bb | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
+ meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/netcf/netcf_git.bb b/meta-networking/recipes-support/netcf/netcf_git.bb
-index f67f4ec6082e..8d6d32a60895 100644
---- a/meta-networking/recipes-support/netcf/netcf_git.bb
-+++ b/meta-networking/recipes-support/netcf/netcf_git.bb
-@@ -28,18 +28,17 @@ do_configure_prepend() {
-     cd ${S}
+diff --git a/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb b/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
+index c939a49..d273e6c 100644
+--- a/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
++++ b/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
+@@ -3,7 +3,7 @@ LICENSE = "LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
  
-     # avoid bootstrap cloning gnulib on every configure
--    cat >.gitmodules <<EOF
--[submodule "gnulib"]
--       path = gnulib
--       url = git://git.sv.gnu.org/gnulib
--EOF
--    cp -rf ${STAGING_DATADIR}/gnulib ${S}
-+    # the rmdir acts as a sentinel to let us know if the pkg ever changes
-+    # the path for GNUlib or populates the dir making it non-empty.
-+    rmdir ${S}/.gnulib
-+    cp -rf ${STAGING_DATADIR}/gnulib ${S}/.gnulib
+ SECTION = "x11/libs"
+-DEPENDS = "gtk+ gdk-pixbuf-native libxres"
++DEPENDS = "intltool-native gtk+ gdk-pixbuf-native libxres"
  
-     # --force to avoid errors on reconfigure e.g if recipes changed we depend on
-     # | bootstrap: running: libtoolize --quiet
-     # | libtoolize:   error: 'libltdl/COPYING.LIB' exists: use '--force' to overwrite
-     # | ...
--    ./bootstrap --force
-+    ./bootstrap --force --no-git --gnulib-srcdir=.gnulib
-+
-     cd $currdir
- }
- 
+ PACKAGECONFIG ??= "startup-notification"
+ PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
 -- 
-2.7.4
+2.3.5
 
 
