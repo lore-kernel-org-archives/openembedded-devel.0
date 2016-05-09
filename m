@@ -1,54 +1,46 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 26E1560721
+Return-Path: <george.mccollister@gmail.com>
+Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
+	[209.85.223.196])
+	by mail.openembedded.org (Postfix) with ESMTP id DF501606BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 May 2016 19:09:41 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id g17so203593089wme.1
+	Mon,  9 May 2016 19:19:32 +0000 (UTC)
+Received: by mail-io0-f196.google.com with SMTP id d62so19623404iof.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 May 2016 12:09:42 -0700 (PDT)
+	Mon, 09 May 2016 12:19:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=sFO/n0+zGA92jNvr9O1XPcpZYpaf5fvZjWEw8hC6Xv0=;
-	b=kpC/7OBaVi4gowuPp7L1ygf5uTrmo3hZgtQ/YapjJA/MiwiAjk9r6VOB4fk+JC49nq
-	BS+yrg5A/U8mcLw9rFzYB7MdIwscXxz747+fhdmZZYqMRBj7rL41wqnP281KCtqAlJ4t
-	3+Ls73aZ4bFYIKYjMME8+xsSAMONj79iaIYj62L9eSK4szHhci412cYNolirwYJVKiqm
-	4c+1kMXj3GoBpApdznJzEyouYyrx+aGI6ZszSevr+XBrJ8ytSrxUtwljzy81sqz6qhro
-	2Ph9fQOJOO8PSy9DVQtZ8z2bJmGM6c9Y8SSocP3ttNPvQRKHm0c0BRjGUqq/Cjwxc/CT
-	f1uw==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc; bh=9ohpbtpCuIqkO/89V2INvIpV9EkigmtQkRQhS34KpSM=;
+	b=Jt2K5NJeqWmEkerplfoQnhijpQzLrQ7keIrOQvbX/eBHoxVt3y9o2ofmxlyhX8zaRO
+	wUMwfv0ZhD1h49ijvPqBnzhSn+aNT7yolJOp75HOTO8HAE3Ycb0UEL01i5H1KucqapZI
+	liJBmJOQeuEAPv4FRgIbVWMtkwnt/m/3XstVlZvXT+l8AeyObKMmpzz9IF+mP5bctSsh
+	HadHmYGhQkb3QrjPoeGczIsGFdECO+ocKJQjAVor/MU/+/lzWA7i4h+pq4tx4p1KHHLd
+	yCzVKEWtgM0Fb29dGaAq/qT5kakNKTp/q+2v07zXigTlfyD9jV3IUqzlBfdUK+wlnqNn
+	A/Rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=sFO/n0+zGA92jNvr9O1XPcpZYpaf5fvZjWEw8hC6Xv0=;
-	b=agOzmRNuKz5zc/ODackI9G0NfQ/JfJjb1pxzoNXSlI3iP8Rdg6u2nhEbFumzloUt/O
-	dyjHRLHSrDg9/IOcPMcehWeE3cHKyzPHmJa77MKYUZH1WagIDp7oKiSrN7wG1H+NW7x2
-	32xC1k9Z+vFWlGuNrzL5xsfVgtwXO2mxHWKI8syoJHL6RMXviKeFAGGp4aj8R4Taa106
-	cgDThwLKEIKv84eiy+2FE/QA7iprxUJ5fTycU8hj5JQ5IgzVWudx+ua3nYE6QsToRv1k
-	6dcTnQkKAvoFFH5t07hG5QomgeaPfS5nRRVe8wHjaF01KO43AcbhruxYrBwo5FK7Oar8
-	ojxA==
-X-Gm-Message-State: AOPr4FUMPQRNyJK52pWOro2g22+csb+x82naan6Pq9flu4hzvb+0zeY6x6gGdsD4c4t5hg==
-X-Received: by 10.194.61.231 with SMTP id t7mr39024302wjr.32.1462820981663;
-	Mon, 09 May 2016 12:09:41 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	b12sm26297560wmb.0.2016.05.09.12.09.40
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 09 May 2016 12:09:40 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 9 May 2016 21:09:50 +0200
-To: akuster808 <akuster808@gmail.com>
-Message-ID: <20160509190950.GD2560@jama>
-References: <1462545324-27232-1-git-send-email-Martin.Jansa@gmail.com>
-	<572E2F5C.1080702@gmail.com>
-	<CA+chaQeo3zZk2ekNVBm_Kfx6PDTrVqce+noRwgmq3WUebPk=Jw@mail.gmail.com>
-	<5730D7A4.2060406@gmail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc;
+	bh=9ohpbtpCuIqkO/89V2INvIpV9EkigmtQkRQhS34KpSM=;
+	b=QFL5Zq4m3gd+ZsgrbdtHc8pKkoPyoldyoV25wnF1Lwo0AJah1cpKTAwPUz7O1mfHMI
+	3WQXBYxueNps2dSNRs4A9GndeGd7whVTr894wN+BA+/P9S01xWodO5LA7Y2GyZW+299z
+	zd73tx72a+lFuWG7zqjNdYK2VIO6Iu1Mb2hU5df2SgBv47gbv62sDBIG6k1B0V3OxVD/
+	xEG2OuVX7YYo321CkAA+rPvlf20bGmx9U5bhK/ReOaSM+mMSX1lErSSkVhiJStic1p1P
+	1EjIAXwcvxL/Xuv1khcSNI7fWKvi2Hlbikiv6XwKdj97eQScPKiqZSc5l3Pkz6tv/4Rr
+	k3Dw==
+X-Gm-Message-State: AOPr4FVjLlzJt80zYV6rv+42Y5XkHAqcMdvYd0pyUdcHHfA9rIsRhGPno4BjY/Y2EmK9WtGiq/pdcDg92SFITQ==
 MIME-Version: 1.0
-In-Reply-To: <5730D7A4.2060406@gmail.com>
-User-Agent: Mutt/1.6.1 (2016-04-27)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][krogoth][meta-oe 1/3] pidgin: Update to 2.10.12
+X-Received: by 10.107.147.138 with SMTP id v132mr36689477iod.38.1462821573159; 
+	Mon, 09 May 2016 12:19:33 -0700 (PDT)
+Received: by 10.36.81.212 with HTTP; Mon, 9 May 2016 12:19:33 -0700 (PDT)
+In-Reply-To: <20160502161809.GD17714@mentor.com>
+References: <1462204748-3435-1-git-send-email-akuster808@gmail.com>
+	<20160502161809.GD17714@mentor.com>
+Date: Mon, 9 May 2016 14:19:33 -0500
+Message-ID: <CAFSKS=P_CqdgrO_rcTpGQPNn7Vo1t9MAUmg2-D8RdANiFY9gGQ@mail.gmail.com>
+From: George McCollister <george.mccollister@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Armin Kuster <akuster@mvista.com>
+Subject: Re: [meta-networking][master][krogoth][jethro][fido][PATCH] ntp: Security fixes via update to 4.2.8p7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,221 +53,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2016 19:09:43 -0000
-X-Groupsio-MsgNum: 61441
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="oj4kGyHlBMXGt3Le"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 09 May 2016 19:19:35 -0000
+Content-Type: text/plain; charset=UTF-8
 
---oj4kGyHlBMXGt3Le
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+4.2.8p7 appears to have been removed from:
+https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/
 
-On Mon, May 09, 2016 at 11:32:04AM -0700, akuster808 wrote:
-> On 5/7/16 2:33 PM, Martin Jansa wrote:
-> > For me the imporant part is already in commit message, old version does=
-n't
-> > build at all, new does, so it's improvement in itself.
-> >
-> > Security fixes are good bonus, but in this case older version wasn't re=
-ally
-> > affected because it couldn't be even built with corresponding gnutls fr=
-om
-> > oe-core release.
->=20
-> I see you got  impatient and pushed the changes in. I have those staged.
+Not sure if this is temporary...
 
-Sorry I've pushed them to krogoth-next only so I don't forgot to make
-you include them eventually, but please stage them in normal
-consolidated pull as always.
+Regards,
+George McCollister
 
-> the "llvm3.3: Disable auto -dbg packages" commit to krogoth-next, is
-> that needed in Master?
+On Mon, May 2, 2016 at 11:18 AM, Joe MacDonald <Joe_MacDonald@mentor.com> wrote:
+> [[meta-networking][master][krogoth][jethro][fido][PATCH] ntp: Security fixes via update to 4.2.8p7] On 16.05.02 (Mon 08:59) Armin Kuster wrote:
+>
+>> From: Armin Kuster <akuster@mvista.com>
+>>
+>> CVE-2016-1551
+>> CVE-2016-2516
+>> CVE-2016-2517
+>> CVE-2016-2518
+>> CVE-2016-2519
+>> CVE-2016-1547
+>> CVE-2015-7704
+>> CVE-2015-8138
+>> CVE-2016-1550
+>>
+>> for more info see:
+>> http://support.ntp.org/bin/view/Main/SecurityNotice#April_2016_NTP_4_2_8p7_Security
+>>
+>> Signed-off-by: Armin Kuster <akuster@mvista.com>
+>
+> Acked-by: Joe MacDonald <joe_macdonald@mentor.com>
+>
+>> ---
+>>  .../recipes-support/ntp/{ntp_4.2.8p6.bb => ntp_4.2.8p7.bb}            | 4 ++--
+>>  1 file changed, 2 insertions(+), 2 deletions(-)
+>>  rename meta-networking/recipes-support/ntp/{ntp_4.2.8p6.bb => ntp_4.2.8p7.bb} (97%)
+>>
+>> diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p6.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb
+>> similarity index 97%
+>> rename from meta-networking/recipes-support/ntp/ntp_4.2.8p6.bb
+>> rename to meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb
+>> index a7b998a..ff4ba64 100644
+>> --- a/meta-networking/recipes-support/ntp/ntp_4.2.8p6.bb
+>> +++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb
+>> @@ -23,8 +23,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
+>>             file://ntpd.list \
+>>  "
+>>
+>> -SRC_URI[md5sum] = "60049f51e9c8305afe30eb22b711c5c6"
+>> -SRC_URI[sha256sum] = "583d0e1c573ace30a9c6afbea0fc52cae9c8c916dbc15c026e485a0dda4ba048"
+>> +SRC_URI[md5sum] = "46dfba933c3e4bc924d8e55068797578"
+>> +SRC_URI[sha256sum] = "81d20c06a0b01abe3b84fac092185bf014252d38fe5e7b2758f604680a0220dc"
+>>
+>>  inherit autotools update-rc.d useradd systemd pkgconfig
+>>
+> --
+> -Joe MacDonald.
+> :wq
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
-yes, it is (fixes DEBUGFS generation) and it's also in master-next will
-be merged to master soon.
-
-> - Armin
-> >
-> > On Sat, May 7, 2016 at 8:09 PM, akuster808 <akuster808@gmail.com> wrote:
-> >
-> >>
-> >> On 05/06/2016 07:35 AM, Martin Jansa wrote:
-> >>> From: Herrie <github.com@herrie.org>
-> >>>
-> >>> Which is compatible with GnuTLS that's included in Krogoth.
-> >> this update includes:
-> >> Potential information leak from XMPP    CVE-2014-3698
-> >> Malicious smiley themes could alter arbitrary files     CVE-2014-3697
-> >> Remote crash parsing malformed Groupwise message        CVE-2014-3696
-> >> Remote crash parsing malformed MXit emoticon    CVE-2014-3695
-> >> Insufficient SSL certificate validation         CVE-2014-3694
-> >>
-> >> info like this helps in deciding patch inclusion.
-> >>
-> >> - armin
-> >>
-> >>> Signed-off-by: Herman van Hazendonk <github.com@herrie.org>
-> >>> ---
-> >>>  .../pidgin/pidgin/pidgin-cross-python-265.patch    | 35
-> >> ++++++++++++++--------
-> >>>  .../pidgin/pidgin/pidgin.desktop-set-icon.patch    | 11 -------
-> >>>  .../pidgin/{pidgin_2.10.9.bb =3D> pidgin_2.10.12.bb} | 10 ++-----
-> >>>  3 files changed, 26 insertions(+), 30 deletions(-)
-> >>>  delete mode 100644
-> >> meta-oe/recipes-support/pidgin/pidgin/pidgin.desktop-set-icon.patch
-> >>>  rename meta-oe/recipes-support/pidgin/{pidgin_2.10.9.bb =3D>
-> >> pidgin_2.10.12.bb} (91%)
-> >>> diff --git
-> >> a/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch
-> >> b/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.patch
-> >>> index 57c4c46..cfc681c 100644
-> >>> --- a/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.p=
-atch
-> >>> +++ b/meta-oe/recipes-support/pidgin/pidgin/pidgin-cross-python-265.p=
-atch
-> >>> @@ -1,16 +1,27 @@
-> >>> -Index: pidgin-2.6.5/configure.ac
-> >>> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >>> ---- pidgin-2.6.5.orig/configure.ac
-> >>> -+++ pidgin-2.6.5/configure.ac
-> >>> -@@ -1470,8 +1470,9 @@ if test "_$pythonpath" !=3D _ ; then
-> >>> -             AC_CHECK_LIB(pthread, pthread_create, )
-> >>> -             AC_CHECK_LIB(util, openpty, )
-> >>> -             AC_CHECK_LIB(db, dbopen, )
-> >>> --            PY_LIBS=3D"-L$PY_EXEC_PREFIX/lib/python$PY_VERSION/conf=
-ig
-> >> -lpython$PY_VERSION"
-> >>> --            PY_CFLAGS=3D"-I$PY_PREFIX/include/python$PY_VERSION"
-> >>> +From 428836ba7f9048970626ef0d6b805107f7c52d33 Mon Sep 17 00:00:00 20=
-01
-> >>> +From: Herrie <github.com@herrie.org>
-> >>> +Date: Thu, 5 May 2016 13:33:29 +0200
-> >>> +Subject: [PATCH] Updated python patch
-> >>> +
-> >>> +---
-> >>> + configure.ac | 6 +++---
-> >>> + 1 file changed, 3 insertions(+), 3 deletions(-)
-> >>> +
-> >>> +diff --git a/configure.ac b/configure.ac
-> >>> +index 94ea8cf..2285adb 100644
-> >>> +--- a/configure.ac
-> >>> ++++ b/configure.ac
-> >>> +@@ -1587,9 +1587,9 @@ dnl (Thanks to XChat)
-> >>> + if test "x$enable_consoleui" =3D "xyes" -a ! -z "$PYTHON" -a x"$PYT=
-HON"
-> >> !=3D x"no" ; then
-> >>> +     AC_MSG_CHECKING(for Python compile flags)
-> >>> +     if test -f ${PYTHON}-config; then
-> >>> +-            PY_CFLAGS=3D`${PYTHON}-config --includes`
-> >>> +-            PY_LIBS=3D`${PYTHON}-config --libs`
-> >>> +-            AC_DEFINE(USE_PYTHON, [1], [Define if python headers are
-> >> available.])
-> >>>  +            m4_pattern_allow([^PKG_CONFIG_SYSROOT_DIR$])
-> >>>  +
-> >> PY_LIBS=3D"-L$PKG_CONFIG_SYSROOT_DIR/usr/lib/python$PY_VERSION/config
-> >> -lpython$PY_VERSION"
-> >>> -+
-> >> PY_CFLAGS=3D"-I$PKG_CONFIG_SYSROOT_DIR/usr/include/python$PY_VERSION"
-> >>> -             AC_DEFINE(USE_PYTHON, [1], [Define if python headers are
-> >> available.])
-> >>> ++
-> >> PY_CFLAGS=3D"-I$PKG_CONFIG_SYSROOT_DIR/usr/include/python$PY_VERSION"
-> >>      AC_DEFINE(USE_PYTHON, [1], [Define if python headers are availabl=
-e.])
-> >>>               AC_MSG_RESULT(ok)
-> >>>       else
-> >>> +             AC_MSG_RESULT([Cannot find ${PYTHON}-config])
-> >>> +
-> >>> diff --git
-> >> a/meta-oe/recipes-support/pidgin/pidgin/pidgin.desktop-set-icon.patch
-> >> b/meta-oe/recipes-support/pidgin/pidgin/pidgin.desktop-set-icon.patch
-> >>> deleted file mode 100644
-> >>> index 05f7689..0000000
-> >>> --- a/meta-oe/recipes-support/pidgin/pidgin/pidgin.desktop-set-icon.p=
-atch
-> >>> +++ /dev/null
-> >>> @@ -1,11 +0,0 @@
-> >>> ---- pidgin-2.0.1/pidgin.desktop.in.orig      2007-06-20
-> >> 23:50:44.000000000 +0000
-> >>> -+++ pidgin-2.0.1/pidgin.desktop.in   2007-06-20 23:51:05.000000000
-> >> +0000
-> >>> -@@ -4,7 +4,7 @@
-> >>> - _GenericName=3DInternet Messenger
-> >>> - _Comment=3DSend instant messages over multiple protocols
-> >>> - Exec=3Dpidgin
-> >>> --Icon=3Dpidgin
-> >>> -+Icon=3D/usr/share/icons/hicolor/48x48/apps/pidgin.png
-> >>> - StartupNotify=3Dtrue
-> >>> - Terminal=3Dfalse
-> >>> - Type=3DApplication
-> >>> diff --git a/meta-oe/recipes-support/pidgin/pidgin_2.10.9.bb
-> >> b/meta-oe/recipes-support/pidgin/pidgin_2.10.12.bb
-> >>> similarity index 91%
-> >>> rename from meta-oe/recipes-support/pidgin/pidgin_2.10.9.bb
-> >>> rename to meta-oe/recipes-support/pidgin/pidgin_2.10.12.bb
-> >>> index 8352110..9133c1c 100644
-> >>> --- a/meta-oe/recipes-support/pidgin/pidgin_2.10.9.bb
-> >>> +++ b/meta-oe/recipes-support/pidgin/pidgin_2.10.12.bb
-> >>> @@ -2,23 +2,19 @@ DESCRIPTION =3D "multi-protocol instant messaging c=
-lient"
-> >>>  SECTION =3D "x11/network"
-> >>>  LICENSE =3D "GPLv2"
-> >>>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaaba=
-a882bbe"
-> >>> -DEPENDS =3D "python startup-notification avahi gtk+ ncurses gnutls
-> >> virtual/libintl gstreamer dbus intltool-native farsight2 libidn"
-> >>> +DEPENDS =3D "python startup-notification avahi gtk+ ncurses gnutls
-> >> virtual/libintl gstreamer dbus intltool-native farsight2 libidn libxml2
-> >> gconf dbus-glib"
-> >>>  inherit autotools gettext pkgconfig gconf perlnative
-> >>>
-> >>> -# http://errors.yoctoproject.org/Errors/Details/25824/
-> >>> -PNBLACKLIST[pidgin] ?=3D "Not compatible with gnutls version 3.4
-> >> currently in oe-core and also depends on broken libnice through farsig=
-ht2"
-> >>> -
-> >>>  SRC_URI =3D "\
-> >>>      ${SOURCEFORGE_MIRROR}/pidgin/pidgin-${PV}.tar.bz2 \
-> >>>      file://sanitize-configure.ac.patch \
-> >>> -    file://pidgin.desktop-set-icon.patch \
-> >>>      file://purple-OE-branding-25.patch \
-> >>>      file://pidgin-cross-python-265.patch \
-> >>>  "
-> >>>
-> >>> -SRC_URI[md5sum] =3D "10a4a69d077893f6dd3438cd8af94e81"
-> >>> -SRC_URI[sha256sum] =3D
-> >> "dc362ed8577f623eea4554a79e917073aa726825074fea402f2e515f0f51f319"
-> >>> +SRC_URI[md5sum] =3D "14e0f5cfb2ed065e4dc80391a806ac76"
-> >>> +SRC_URI[sha256sum] =3D
-> >> "2c7523f0fefe89749c03b2b738ab9f7bd186da435be4762f1487eee31e77ffdd"
-> >>>  EXTRA_OECONF =3D " \
-> >>>      --enable-vv \
-> >>>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>
->=20
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---oj4kGyHlBMXGt3Le
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlcw4HwACgkQN1Ujt2V2gBz9jQCfaacG7Hp7Gq8I0KGCI9oDyA9P
-ZpIAn1iDdkRsU0ry0Ogy0jcVZm1whHl6
-=hgSm
------END PGP SIGNATURE-----
-
---oj4kGyHlBMXGt3Le--
