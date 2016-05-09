@@ -1,46 +1,29 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f65.google.com (mail-pa0-f65.google.com
-	[209.85.220.65])
-	by mail.openembedded.org (Postfix) with ESMTP id B48746FF9D
+Return-Path: <Paul.Gortmaker@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id EFC837317C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 May 2016 15:11:03 +0000 (UTC)
-Received: by mail-pa0-f65.google.com with SMTP id gh9so15915711pac.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 May 2016 08:11:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=97mcMtAnN/+5iUVEedKy5rx236rJAiZiLAhzhCjVdPw=;
-	b=xEXaF4MoJq9i+sBkbErjwPrDmN7R1c8paAeo+LYIxJQfkMx4Gf7XHUHODXYHhZAFET
-	iEc2/49vKeVLcS0OpyNjA79+HN+BR64WHPSABHSRT51Q3NYM+UUb5Mm9GGmMDCAumJbG
-	3o1rWG4BecbIS8PVHIIg0KvsOxBqqipDD124mLpbadheEgg85+Q3ItwAas++ykpySgWv
-	SaajmZ94LR+oFBXY79N2u54N8+P7oIVsP6lTWUGE3eLBvkR4qBu/SwuezSZb9KCBuFNV
-	2SuivFlT9rxbPUfrHY7dMc9tQSOe6SEL28KIXaH5cuA2uHLoKWorceDCAjSOTNGdu3uH
-	O4Lg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=97mcMtAnN/+5iUVEedKy5rx236rJAiZiLAhzhCjVdPw=;
-	b=gcbBhzgLfXyUSqCeUfD/CbRIt/0nPqdSsFIy6xvnnz02wWJTDvXNz5G0Z0l+VtKADF
-	cHmHtpPKCJB96/wprlHQ+vFko+5PUVZMe/QXcL3oGcho7JSZeATt964+CZUtdRu45yzE
-	e75lMxy9++/TBNZKXb33+xeqEdbyIi3R7ALYLl8JUdTo4TtnDghIBNaQh0sJT2L2qT6p
-	gZ/RNJFrwZ4/Ch9jKqFChcvjHhF6xTTmVjHzcd+rHTL1d8Lf1WQGDtMwS4yFeyYNxnJ+
-	amC8XAWttBlvlXg7WhBUYjgm/72BkeZtr8Rna31BLoDvFBWj8TOA2IYVzGdTnRGz2PjB
-	b4Cw==
-X-Gm-Message-State: AOPr4FXdZUOmCfV1UoKW6rix3qlTe7TZO2Qgpog7guuLvym4IEXfUOvnv5+CkoHuiW8jsw==
-X-Received: by 10.66.76.74 with SMTP id i10mr51552390paw.31.1462806664058;
-	Mon, 09 May 2016 08:11:04 -0700 (PDT)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	bf4sm41514687pac.4.2016.05.09.08.11.01
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 09 May 2016 08:11:02 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	akuster808@gmail.com
-Date: Mon,  9 May 2016 08:11:01 -0700
-Message-Id: <1462806661-23970-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-Subject: [meta-oe][master][krogoth][PATCH] libxkbui: Fix license WARNING
+	Mon,  9 May 2016 15:20:04 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u49FK3e6019366
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 9 May 2016 08:20:03 -0700 (PDT)
+Received: from yow-pgortmak-d1 (128.224.56.57) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
+	Mon, 9 May 2016 08:20:03 -0700
+Received: by yow-pgortmak-d1 (Postfix, from userid 1000)	id 24F25280127; Mon,
+	9 May 2016 11:20:02 -0400 (EDT)
+Date: Mon, 9 May 2016 11:20:02 -0400
+From: Paul Gortmaker <paul.gortmaker@windriver.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20160509152002.GY18139@windriver.com>
+References: <1462734493-3819-1-git-send-email-paul.gortmaker@windriver.com>
+	<20160509140831.GC21815@mentor.com> <20160509142654.GC2560@jama>
+MIME-Version: 1.0
+In-Reply-To: <20160509142654.GC2560@jama>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH v2 0/2] netcf build fail / gnulib handling fix.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,33 +36,134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2016 15:11:07 -0000
+X-List-Received-Date: Mon, 09 May 2016 15:20:05 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-WARNING: libxkbui-1_1.0.2-r10 do_populate_lic: libxkbui: No generic license file exists for: GPL in any provider
+[Re: [PATCH v2 0/2] netcf build fail / gnulib handling fix.] On 09/05/2016 =
+(Mon 16:26) Martin Jansa wrote:
 
-sources have:
-Copyright (c) 1996 by Silicon Graphics Computer Systems, Inc.
+> On Mon, May 09, 2016 at 10:08:33AM -0400, Joe MacDonald wrote:
+> > [[PATCH v2 0/2] netcf build fail / gnulib handling fix.] On 16.05.08 (S=
+un 15:08) Paul Gortmaker wrote:
+> >=20
+> > > In the previous version[1] of the attempt to fix the netcf build on
+> > > newer hosts, Martin noted that my change broke fontforge.
+> > >=20
+> > > The reason for that is the ./bootstrap in fontforge is older and
+> > > doesn't support the "--no-git" option I used for netcf.
+> > >=20
+> > > This highlighted the fact that we will want to be able to use
+> > > different args to the ./bootstrap for different packages.
+> > >=20
+> > > The first commit moves the configure_prepend step as-is out to
+> > > the packages, so we can do the above, and thus making
+> > > autotools-bootstrap unused in the process.
+> > >=20
+> > > The second commit fixes the netcf prepend to not overwrite
+> > > contents from the netcf package itself, which was the source
+> > > of the build failure.
+> > >=20
+> > > The functionality of the prepend for fontforge is left as-is
+> > > so that it will continue to build w/o issue.
+> >=20
+> > I've no objection to this change, it seems sensible and low-impact to
+> > me.  That said, if there's any objection to removing the
+> > autotools-bootstrap class, I'd also support a version of this that
+> > leaves the class but divorces netcf from it.
+> >=20
+> > I wonder, though, now that I'm thinking about it, if the crux of the
+> > change is going from:
+> >=20
+> >  21     # | ...
+> >  22     ./bootstrap --force
+> >  23     cd $currdir
+> >  24 }
+> >=20
+> > to something like:
+> >=20
+> >  21     # | ...
+> >  22     ./bootstrap --force --no-git --gnulib-srcdir=3D.gnulib
+> >  23     cd $currdir
+> >  24 }
+> >=20
+> > with the extra logic around the "rmdir .gnulib" being somewhat
+> > peripheral, would it be possible to extend the class instead with a new
+> > varaible that would be set in the respective recipe file, using, say,
+> > breakpad.bbclass as an example?
+> >=20
+> > What I'm thinking of here is something like this:
+> >=20
+> > >>> do_configure_prepend() {
+> > >>>     currdir=3D`pwd`
+> > >>>     cd ${S}
+> > >>>=20
+> > >>>     rmdir ${S}/.gnulib || cat >.gitmodules <<EOF
+> > >>> [submodule "gnulib"]
+> > >>>    path =3D gnulib
+> > >>>    url =3D git://git.sv.gnu.org/gnulib
+> > >>> EOF
+> > >>>     if [ -d ${S}/.gnulib ] ; then
+> > >>>         cp -rf ${STAGING_DATADIR}/gnulib ${S}
+> > >>>     else
+> > >>>         cp -rf ${STAGING_DATADIR}/gnulib ${S}
+> > >>>     fi
+> > >>>=20
+> > >>>     # --force to avoid errors on reconfigure e.g if recipes changed=
+ we depend on
+> > >>>     # | bootstrap: running: libtoolize --quiet
+> > >>>     # | libtoolize:   error: 'libltdl/COPYING.LIB' exists: use '--f=
+orce' to overwrite
+> > >>>     # | ...
+> > >>>     ./bootstrap --force ${BOOTSTRAP_EXTRA}
+> > >>>     cd $currdir
+> > >>> }
+> >=20
+> > then in fontforge, just leave everything as-is (until it gets a review /
+> > update / whatever) and in netcf's recipe we just add a line:
+> >=20
+> >    BOOTSTRAP_EXTRA =3D "--no-git --gnulib-srcdir=3D.gnulib"
+> >=20
+> > Obviously the above is all un-tested and mostly just off-the-top-of-
+> > my-head thinking, so maybe it's completely unworkable.  If Martin is
+> > okay with the patches as sent, I'm fine with them too.
+>=20
+> I'm fine with current patches, but was wondering the same, why not
+> introduce variable so that the same bbclass can be used by both "new"
+> and "old" bootstrap versions.
 
-so picked "SGI-1"
+I did consider a solution along the lines of the above, but the more I
+thought about it, and looked for users outside OE (e.g. Yocto) the more
+I came to the conclusion that the class was largely a solution looking
+for a problem.  There are just these two users of the class now. =20
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-oe/recipes-graphics/xorg-lib/libxkbui_1.0.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Anyone trying to use gnulib (which BTW is meant to help build GNU source
+on non-GNU systems -so hopefully it remains uncommon) is most likely going
+to have to do some custom pre-config [e.g. create submodule file or not]
+so the class boils down to infrastructure for one bootstrap line to be
+"shared".
 
-diff --git a/meta-oe/recipes-graphics/xorg-lib/libxkbui_1.0.2.bb b/meta-oe/recipes-graphics/xorg-lib/libxkbui_1.0.2.bb
-index 66a717e..103da1f 100644
---- a/meta-oe/recipes-graphics/xorg-lib/libxkbui_1.0.2.bb
-+++ b/meta-oe/recipes-graphics/xorg-lib/libxkbui_1.0.2.bb
-@@ -1,6 +1,6 @@
- require recipes-graphics/xorg-lib/xorg-lib-common.inc
- SUMMARY = "X11 keyboard UI presentation library"
--LICENSE = "GPL"
-+LICENSE = "SGI-1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4641deddaa80fe7ca88e944e1fd94a94"
- DEPENDS += "virtual/libx11 libxt libxkbfile"
- PE = "1"
--- 
-2.3.5
+>=20
+> But I don't know anything about this bootstrap, so cannot say if we can
+> expect only these 2 variants or if every bootstrap usage is really
+> specific to given recipe and not worth sharing the common part in bbclass.
+
+Per above, I think it is safe to say we won't see hundreds of gnulib
+users, and speaking only for myself, the fact it was a class to begin
+with led me down the wrong path thinking that I should fix the sharing
+by standardizing on a common bootstrap etc. etc. which was ugly.
+
+Here we retain the value of not downloading gnulib multiple times, and
+we give the pkgs full independence on how they handle bootstrap without
+trying to confine them into what we predict they might need.
+
+Paul.
+--
+
+>=20
+> --=20
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
 
 
