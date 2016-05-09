@@ -1,46 +1,46 @@
 Return-Path: <akuster808@gmail.com>
 Received: from mail-pa0-f65.google.com (mail-pa0-f65.google.com
 	[209.85.220.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 23FEE612E5
+	by mail.openembedded.org (Postfix) with ESMTP id B48746FF9D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 May 2016 14:42:05 +0000 (UTC)
-Received: by mail-pa0-f65.google.com with SMTP id yl2so15881284pac.1
+	Mon,  9 May 2016 15:11:03 +0000 (UTC)
+Received: by mail-pa0-f65.google.com with SMTP id gh9so15915711pac.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 May 2016 07:42:07 -0700 (PDT)
+	Mon, 09 May 2016 08:11:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id;
-	bh=RKjx/pb+cLWjRu3IiDKqN8gBq6xOJ+2yamEkxMNwH80=;
-	b=UdWM803X+bM4dapQ4PHA0uqz5/SfpDM+dvLEbcGuyJqMxi/GlncZFHBzR0gfwFu2br
-	QHNVNb8lW25LXm+xyWDFB8nHW+ub/4g1dSwarLhOn6K4b0TLqI+uVqtHbm5N026WWGKV
-	cF9q/tJGYpF9qqEOc8ZSRL76QRt0kIrIlDF7Dtr9alLRlxUFIm9vGIHKYAmU2Lmm+wDk
-	x9XfvqBFV8EevMK7uTnwKK1na6clYYoRBUcmd1BFF4Zrh8l/RxiCpwOMeyrUXEWTdK8c
-	E5y/b7dUq8e71qqEeBj2YpOG2vCbX3aNzq5ILyvfAlT77QOGYRwXY/i106ty7HakZxzn
-	b8lw==
+	bh=97mcMtAnN/+5iUVEedKy5rx236rJAiZiLAhzhCjVdPw=;
+	b=xEXaF4MoJq9i+sBkbErjwPrDmN7R1c8paAeo+LYIxJQfkMx4Gf7XHUHODXYHhZAFET
+	iEc2/49vKeVLcS0OpyNjA79+HN+BR64WHPSABHSRT51Q3NYM+UUb5Mm9GGmMDCAumJbG
+	3o1rWG4BecbIS8PVHIIg0KvsOxBqqipDD124mLpbadheEgg85+Q3ItwAas++ykpySgWv
+	SaajmZ94LR+oFBXY79N2u54N8+P7oIVsP6lTWUGE3eLBvkR4qBu/SwuezSZb9KCBuFNV
+	2SuivFlT9rxbPUfrHY7dMc9tQSOe6SEL28KIXaH5cuA2uHLoKWorceDCAjSOTNGdu3uH
+	O4Lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=RKjx/pb+cLWjRu3IiDKqN8gBq6xOJ+2yamEkxMNwH80=;
-	b=YHgnLDd+kk1n4BtfH0cOkNslHV+9/24OiZhl34wLz/zuEqmvL3+y8U8saXkffFHNCZ
-	GrqJA2Bc8eE2P/3GyLLBtha9jahleknuqkXPCqLIPQybzPrOPnkghHTZ/8QT897z5dI3
-	LSNX7p1LbtlItBpne2JkKyJdGjgTHKVK1j5kf4Kj5DkcEssLh5N0IOCLblYoKHp4FOrN
-	dNgEkCpuPAOmD8JAksQmCJrvjSy97yvyRYZG4zHE+2HCEl2jQBEqApRYW5ZL5LEyCs7E
-	7EKBl5WFlm5n4nr5J8/mCtqdYBPCSJ1grV7sHfGx58zLEqiagIGEnJIYTQpYHmE/EXia
-	iakg==
-X-Gm-Message-State: AOPr4FWeYwCpaDfq+3aiuDyc6jmcbj8RfjZ0It4LVk28/WFZJU81oeqkDvL8LkjGB8QOtQ==
-X-Received: by 10.66.67.11 with SMTP id j11mr50855777pat.45.1462804926781;
-	Mon, 09 May 2016 07:42:06 -0700 (PDT)
+	bh=97mcMtAnN/+5iUVEedKy5rx236rJAiZiLAhzhCjVdPw=;
+	b=gcbBhzgLfXyUSqCeUfD/CbRIt/0nPqdSsFIy6xvnnz02wWJTDvXNz5G0Z0l+VtKADF
+	cHmHtpPKCJB96/wprlHQ+vFko+5PUVZMe/QXcL3oGcho7JSZeATt964+CZUtdRu45yzE
+	e75lMxy9++/TBNZKXb33+xeqEdbyIi3R7ALYLl8JUdTo4TtnDghIBNaQh0sJT2L2qT6p
+	gZ/RNJFrwZ4/Ch9jKqFChcvjHhF6xTTmVjHzcd+rHTL1d8Lf1WQGDtMwS4yFeyYNxnJ+
+	amC8XAWttBlvlXg7WhBUYjgm/72BkeZtr8Rna31BLoDvFBWj8TOA2IYVzGdTnRGz2PjB
+	b4Cw==
+X-Gm-Message-State: AOPr4FXdZUOmCfV1UoKW6rix3qlTe7TZO2Qgpog7guuLvym4IEXfUOvnv5+CkoHuiW8jsw==
+X-Received: by 10.66.76.74 with SMTP id i10mr51552390paw.31.1462806664058;
+	Mon, 09 May 2016 08:11:04 -0700 (PDT)
 Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
 	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	yp9sm41314880pab.42.2016.05.09.07.42.04
+	bf4sm41514687pac.4.2016.05.09.08.11.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 09 May 2016 07:42:05 -0700 (PDT)
+	Mon, 09 May 2016 08:11:02 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org, TicoTimo@gmail.com,
+To: openembedded-devel@lists.openembedded.org,
 	akuster808@gmail.com
-Date: Mon,  9 May 2016 07:42:04 -0700
-Message-Id: <1462804924-19297-1-git-send-email-akuster808@gmail.com>
+Date: Mon,  9 May 2016 08:11:01 -0700
+Message-Id: <1462806661-23970-1-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.3.5
-Subject: [meta-python][master][krogoth][PATCH] python-numeric: Add LLNL license
+Subject: [meta-oe][master][krogoth][PATCH] libxkbui: Fix license WARNING
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,40 +53,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 May 2016 14:42:06 -0000
+X-List-Received-Date: Mon, 09 May 2016 15:11:07 -0000
 
-WARNING: python-numeric-24.2-ml3 do_populate_lic: python-numeric: No generic license file exists for: LLNL in any provider
+WARNING: libxkbui-1_1.0.2-r10 do_populate_lic: libxkbui: No generic license file exists for: GPL in any provider
 
-copied from sources.
+sources have:
+Copyright (c) 1996 by Silicon Graphics Computer Systems, Inc.
+
+so picked "SGI-1"
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-python/licenses/LLNL | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-python/licenses/LLNL
+ meta-oe/recipes-graphics/xorg-lib/libxkbui_1.0.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/licenses/LLNL b/meta-python/licenses/LLNL
-new file mode 100644
-index 0000000..1127d56
---- /dev/null
-+++ b/meta-python/licenses/LLNL
-@@ -0,0 +1,16 @@
-+Legal Notice
-+
-+*** Legal Notice for all LLNL-contributed files ***
-+
-+Copyright (c) 1996. The Regents of the University of California. All rights reserved.
-+
-+Permission to use, copy, modify, and distribute this software for any purpose without
-+fee is hereby granted, provided that this entire notice is included in all copies of any software which is or includes a copy or modification of this software and in all copies of the supporting documentation for such software.
-+
-+This work was produced at the University of California, Lawrence Livermore National
-+Laboratory under contract no. W-7405-ENG-48 between the U.S. Department of Energy and The Regents of the University of California for the operation of UC LLNL.
-+
-+DISCLAIMER
-+
-+This software was prepared as an account of work sponsored by an agency of the United States Government. Neither the United States Government nor the University of California nor any of their employees, makes any warranty, express or implied, or assumes any liability or responsibility for the accuracy, completeness, or usefulness of any
-+information, apparatus, product, or process disclosed, or represents that its use would not infringe privately-owned rights. Reference herein to any specific commercial products, process, or service by trade name, trademark, manufacturer, or otherwise, does not necessarily constitute or imply its endorsement, recommendation, or favoring by the United States Government or the University of California. The views and opinions of authors expressed herein do not necessarily state or reflect those of the United States Government or the University of California, and shall not be used for advertising or product endorsement purposes.
+diff --git a/meta-oe/recipes-graphics/xorg-lib/libxkbui_1.0.2.bb b/meta-oe/recipes-graphics/xorg-lib/libxkbui_1.0.2.bb
+index 66a717e..103da1f 100644
+--- a/meta-oe/recipes-graphics/xorg-lib/libxkbui_1.0.2.bb
++++ b/meta-oe/recipes-graphics/xorg-lib/libxkbui_1.0.2.bb
+@@ -1,6 +1,6 @@
+ require recipes-graphics/xorg-lib/xorg-lib-common.inc
+ SUMMARY = "X11 keyboard UI presentation library"
+-LICENSE = "GPL"
++LICENSE = "SGI-1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4641deddaa80fe7ca88e944e1fd94a94"
+ DEPENDS += "virtual/libx11 libxt libxkbfile"
+ PE = "1"
 -- 
 2.3.5
 
