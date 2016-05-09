@@ -1,46 +1,46 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f65.google.com (mail-pa0-f65.google.com
-	[209.85.220.65])
-	by mail.openembedded.org (Postfix) with ESMTP id ED38D607A5
+Return-Path: <net147@gmail.com>
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BE4F700EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 May 2016 23:50:48 +0000 (UTC)
-Received: by mail-pa0-f65.google.com with SMTP id yl2so14666781pac.1
+	Mon,  9 May 2016 05:45:37 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id g132so412699pfb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 May 2016 16:50:49 -0700 (PDT)
+	Sun, 08 May 2016 22:45:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=WVFdjAKwn5+PM2C7oXpXuKicyQXtj0+nfiWnG9i5JfQ=;
-	b=YizZGEPCMWUOphNLG0mNb+WWB4BNmyxVa++HMyqd2ZR+Y1q3bunN1F/jU9Ak/kbmAO
-	PCnk9BK6E8++1Vtala1MRyl07vMVCvH+UitAsG8UHex7CX/H39mxK5agAUd1EmOArdu6
-	sCzAQ2j8oBy3cB+V+JT7tA+vC0/kJ1e82RYn9IM9+yfcOGgHDd+3tRwkbJxG2rVCXZ7I
-	7WlZWrWVBf2HB7TJILcAKCRKVCAL7dDFOgeO2deok4d5wo4Q+hUVF9CTorZgYpgdkvTf
-	Dy6m5J3jcHJ/TGXSpwBAocHriIbenSW1iGb2XSLrlqmc6si3SjIND6TYX5SVLgqmuxV/
-	XKYw==
+	h=from:to:cc:subject:date:message-id;
+	bh=SCkJQVFisw7AsFPrSMG/Z3WH9hxYMDWqcEkpc2yrCHM=;
+	b=pfLIrbJHycCIuyUDfGQGENtc8Vz4S95FcvZqZqjLVxaj1Q9ifSr5cNwAl+aI3pYxXf
+	8NR2pYJycyBVHxx1RPY+8t0Sgs1IdvCqGjxAgHYLxRd1ZrOHH5gCmykSzsQ0n9UxBKTp
+	uW9PY/XN3Zv7LEaGD3b6DTvLmCEZha76BfyBkOuNat/Gbm8G7WV7VmF3423ni6Xbz5oK
+	8dRihKihBPisxZjcmLPcg+l/UDhLTp682G6q+VFU7Se2jUuVB2ZOIc9v4xBGCg7YNhv4
+	T2TOz/N/vc4iwnateIV9g5LdkATYp0YRI6/zG8y8KKPgycMY0GKSLIX+ZwaSZWkrE2Uu
+	aN3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=WVFdjAKwn5+PM2C7oXpXuKicyQXtj0+nfiWnG9i5JfQ=;
-	b=Rp5XjLWVloPaFx1ucXzodOzkkNdvdFrN0oXrFy28g9WA4JvCcFLaT/eWJhxj8OAfmc
-	/92oQQlnQG2ne1/sQ3qs3FuO757u9QOrHI5WsE3DXVaToN/7E70voCyctm9KMsbbIn20
-	nrzJ3yoeNJv0dK/Gm0nMD1MMPs7PfGua30MQp/0KIqfZhJBKwH64UPmpwrc0X0i4J1v+
-	yyLyFu+OMg3QDKmOY44cQa2Ue6cOweQ8krtMZEDxVjE4Wvtwcto1M+nyXlWOrSqdC/jq
-	yK0LqWrzBEdYbCJ7Ci8chgcQIGnh3G8YEW8r5JPpkaASaJJ3Dikz0iB32xaIjY06YU4q
-	n5VA==
-X-Gm-Message-State: AOPr4FUvAu1tWY+3JsJJ2uaIGzQzMehklqgZLYLJsXzPuZCHMMkWeTnFriyrJ2IiuxJPJQ==
-X-Received: by 10.66.146.196 with SMTP id te4mr46003584pab.125.1462751449652; 
-	Sun, 08 May 2016 16:50:49 -0700 (PDT)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	133sm35702378pfw.35.2016.05.08.16.50.47
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 08 May 2016 16:50:48 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	akuster808@gmail.com
-Date: Sun,  8 May 2016 16:50:47 -0700
-Message-Id: <1462751447-11852-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-Subject: [meta-oe][master][krogoth][PATCH] upower: fix WARNING
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=SCkJQVFisw7AsFPrSMG/Z3WH9hxYMDWqcEkpc2yrCHM=;
+	b=MjO1IhCbzs28hoOQ3PoDMO/lPu59ui6dJE7Kmq4paxnkEPie+t3fC2Xcv02Q0VEeOb
+	Fj0UMlLADNouG2ItADVtDEoa8hsmWDrPMwUKCOJzFp/BHMJF0NoMRJXsZR8r3HOrullZ
+	MfyMv9LgR44YCIMgNpv8/dxZuG+nfysLz0oBk83QGzRGueWFKXP0ja150uNhE4MPIEtf
+	Jv6MW2tYQ6Sccm/0peDxLv21h2XMeD7LtWi1OK1j1LS1e+IJWGE4SdU8NYbPBQPC5XLR
+	WiBxg3Hb7JDhxpcX3GflT/DPKdo7ZBQNm/SXriH+P0GXtXWdiW4uvBdPni+AfFTxFomD
+	gIRQ==
+X-Gm-Message-State: AOPr4FUR9Y+I82LQbZeVAfYC+ucUdSUrqQs4xkNqPNtH1miJo0AbUPjGOOAnf4LexHyLkw==
+X-Received: by 10.98.55.133 with SMTP id e127mr46757527pfa.81.1462772737833;
+	Sun, 08 May 2016 22:45:37 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by smtp.gmail.com with ESMTPSA id
+	d13sm37103537pfd.80.2016.05.08.22.45.36
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 08 May 2016 22:45:37 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  9 May 2016 15:45:22 +1000
+Message-Id: <1462772722-11626-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 2.8.0
+Subject: [meta-oe][PATCH] nodejs: update to 4.4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,29 +53,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 May 2016 23:50:51 -0000
+X-List-Received-Date: Mon, 09 May 2016 05:45:38 -0000
 
-WARNING: upower-0.9.14-r2 do_configure: Missing DEPENDS on intltool-native
-
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- meta-oe/recipes-support/upower/upower_0.9.14.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-devtools/nodejs/{nodejs_4.4.3.bb => nodejs_4.4.4.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_4.4.3.bb => nodejs_4.4.4.bb} (95%)
 
-diff --git a/meta-oe/recipes-support/upower/upower_0.9.14.bb b/meta-oe/recipes-support/upower/upower_0.9.14.bb
-index dddaa9b..d2c5943 100644
---- a/meta-oe/recipes-support/upower/upower_0.9.14.bb
-+++ b/meta-oe/recipes-support/upower/upower_0.9.14.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0de8fbf1d97a140d1d93b9f14dcfbf08"
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_4.4.3.bb b/meta-oe/recipes-devtools/nodejs/nodejs_4.4.4.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_4.4.3.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_4.4.4.bb
+index 43761ae..8c91720 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_4.4.3.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.4.4.bb
+@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
+ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+     file://no-registry.patch \
+ "
+-SRC_URI[md5sum] = "74e83c9c512bd99b38a02edd740b4334"
+-SRC_URI[sha256sum] = "57499bb0b1b86080459d4066e3c138579a278b2d0b1f5b2f19e66c69b4e8433c"
++SRC_URI[md5sum] = "1ad7915688df85f62a57f43860dc54c6"
++SRC_URI[sha256sum] = "2c9cedc401145a6648877ebd3fa9090c874dfced8bf7a6e7d9d8e9c21827b114"
  
- PR = "r2"
+ S = "${WORKDIR}/node-v${PV}"
  
--DEPENDS = "libusb1 libgudev glib-2.0 dbus-glib polkit"
-+DEPENDS = "intltool-native libusb1 libgudev glib-2.0 dbus-glib polkit"
- 
- SRC_URI = "http://upower.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
- SRC_URI[md5sum] = "18803f82102d56aac90949d1e4251645"
 -- 
-2.3.5
+2.8.0
 
 
