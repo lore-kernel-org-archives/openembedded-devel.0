@@ -1,24 +1,29 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 88CCC731A4
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id B80C773172
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 May 2016 06:48:05 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u4A6m5wq022064
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 9 May 2016 23:48:05 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Mon, 9 May 2016 23:48:04 -0700
-From: Chen Qi <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 10 May 2016 14:39:58 +0800
-Message-ID: <1462862398-7827-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 2.8.1
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] znc: fix QA issue and remove from blacklist
+	Tue, 10 May 2016 09:09:14 +0000 (UTC)
+Received: from us-aus-mgwout1.amer.corp.natinst.com (nb-snip2-1338.natinst.com
+	[130.164.19.135])
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTP id
+	u4A99D3a025389; Tue, 10 May 2016 04:09:13 -0500
+Received: from adi-pc-linux.emea.corp.natinst.com ([130.164.14.198])
+	by us-aus-mgwout1.amer.corp.natinst.com (Lotus Domino Release 8.5.3FP6
+	HF1218) with ESMTP id 2016051004082723-884366 ;
+	Tue, 10 May 2016 04:08:27 -0500 
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 10 May 2016 12:08:18 +0300
+Message-Id: <1462871298-17207-1-git-send-email-adrian.ratiu@ni.com>
+X-Mailer: git-send-email 2.8.2
+X-MIMETrack: Itemize by SMTP Server on US-AUS-MGWOut1/AUS/H/NIC(Release
+	8.5.3FP6 HF1218|December 12, 2014) at 05/10/2016 04:08:27 AM,
+	Serialize by Router on US-AUS-MGWOut1/AUS/H/NIC(Release 8.5.3FP6
+	HF1218|December 12, 2014) at 05/10/2016 04:08:27 AM,
+	Serialize complete at 05/10/2016 04:08:27 AM
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2016-05-10_03:, , signatures=0
+Subject: [meta-oe][PATCH] gnulib: bump git revision
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,32 +36,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2016 06:48:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 10 May 2016 09:09:15 -0000
 
-Modify the .pc file to fix the following QA problem.
+The revision currently used is quite ancient (beginning of 2014) and we
+need bugfixes commited since then. Rather than backport patches it's
+cleaner to uprev.
 
-  "BROKEN: QA Issue: znc.pc failed sanity test"
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 ---
- meta-networking/recipes-irc/znc/znc_git.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/gnulib/gnulib_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-irc/znc/znc_git.bb b/meta-networking/recipes-irc/znc/znc_git.bb
-index 6603c77..22aecba 100644
---- a/meta-networking/recipes-irc/znc/znc_git.bb
-+++ b/meta-networking/recipes-irc/znc/znc_git.bb
-@@ -26,5 +26,6 @@ do_configure_prepend() {
-     automake --add-missing || true
- }
+diff --git a/meta-oe/recipes-support/gnulib/gnulib_git.bb b/meta-oe/recipes-support/gnulib/gnulib_git.bb
+index 766e41a..5b2ed49 100644
+--- a/meta-oe/recipes-support/gnulib/gnulib_git.bb
++++ b/meta-oe/recipes-support/gnulib/gnulib_git.bb
+@@ -11,7 +11,7 @@ SECTION = "devel"
+ LICENSE = "LGPLv2+"
  
--# http://errors.yoctoproject.org/Errors/Details/35142/
--PNBLACKLIST[znc] ?= "BROKEN: QA Issue: znc.pc failed sanity test"
-+do_install_append() {
-+    sed -i 's/-fdebug-prefix-map[^ ]*//g; s#${STAGING_DIR_TARGET}##g' ${D}${libdir}/pkgconfig/*.pc
-+}
+ LIC_FILES_CHKSUM = "file://COPYING;md5=e4cf3810f33a067ea7ccd2cd889fed21"
+-SRCREV = "24379a9217fa4bd62685795aaaa010fd90ced9e3"
++SRCREV = "b6b3ed1fa4c6de12908a9f01d1689f156c3cd441"
+ SRC_URI = "git://git.sv.gnu.org/gnulib;protocol=git \
+ "
+ S = "${WORKDIR}/git"
 -- 
-2.8.1
+2.8.2
 
 
