@@ -1,26 +1,26 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B48173218
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 321C1731F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 May 2016 16:19:51 +0000 (UTC)
+	Tue, 10 May 2016 16:19:53 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u4AGJpWq015325
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Tue, 10 May 2016 09:19:51 -0700
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u4AGJrZs025402
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 10 May 2016 09:19:53 -0700 (PDT)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Tue, 10 May 2016 09:19:50 -0700
+	Tue, 10 May 2016 09:19:52 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <Martin.Jansa@gmail.com>, <koen.kooi@linaro.org>
-Date: Tue, 10 May 2016 12:19:37 -0400
-Message-ID: <79de0c3fdc14f4f5e4a275dc9d69144ba336d720.1462896891.git.hongxu.jia@windriver.com>
+Date: Tue, 10 May 2016 12:19:38 -0400
+Message-ID: <314e9aa4ac456252936abfddd33ce7dd53fef459.1462896891.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.8.1
 In-Reply-To: <cover.1462896891.git.hongxu.jia@windriver.com>
 References: <cover.1462896891.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 3/5] efivar: fix do_install failed
+Subject: [PATCH 4/5] efibootmgr: sync with upstream while efivar upgraded to 0.23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,99 +33,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2016 16:19:52 -0000
+X-List-Received-Date: Tue, 10 May 2016 16:19:54 -0000
 Content-Type: text/plain
 
-It fixes efivar.pc not found:
+Sync with upstream to have the following fix:
 ...
-| install -d -m 755 efivar/0.23-r0/image/usr/lib/pkgconfig/
-| install -m 644 efivar.pc efivar/0.23-r0/image/usr/lib/pkgconfig/
-;  install -m 644 efiboot.pc efivar/0.23-r0/image/usr/lib/pkgconfig/
-;
-| install: cannot stat 'efivar.pc': No such file or directory
-| install: cannot stat 'efiboot.pc': No such file or directory
-| make[1]: *** [install] Error 1
-| make[1]: Leaving directory `efivar/0.23-r0/git/src'
-| make: *** [install] Error 2
-| ERROR: oe_runmake failed
+commit 53aa9cdf7f0746f91f39521d020b024103041384
+Author: Peter Jones <pjones@redhat.com>
+Date:   Thu Mar 3 09:50:03 2016 -0500
+
+    Explicitly pass a mode to efi_set_variable() in all cases.
+
+    We'll have to do this for efivar-0.24 .
+
+    Signed-off-by: Peter Jones <pjones@redhat.com>
 ...
 
-Also sync with latest upstream
+It fixed compile failure:
+...
+efibootmgr.c: In function 'make_boot_var':
+efibootmgr.c:305:7: error: too few arguments to function 'efi_set_variable'
+  rc = efi_set_variable(boot->guid, boot->name, boot->data,
+       ^
+...
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../efivar/0003-efivar-fix-for-cross-compile.patch | 44 ++++++++++++++++++++++
- meta-oe/recipes-extended/efivar/efivar_0.23.bb     |  3 +-
- 2 files changed, 46 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/efivar/efivar/0003-efivar-fix-for-cross-compile.patch
+ meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/efivar/efivar/0003-efivar-fix-for-cross-compile.patch b/meta-oe/recipes-extended/efivar/efivar/0003-efivar-fix-for-cross-compile.patch
-new file mode 100644
-index 0000000..3f43f2a
---- /dev/null
-+++ b/meta-oe/recipes-extended/efivar/efivar/0003-efivar-fix-for-cross-compile.patch
-@@ -0,0 +1,44 @@
-+From 7ead29ca6bb5e280ae07551cc3521281ecf73682 Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Sat, 7 May 2016 02:06:47 -0400
-+Subject: [PATCH] Makefile: fix efivar.pc not found
-+
-+It fixes efivar.pc not found:
-+...
-+| install -d -m 755 efivar/0.23-r0/image/usr/lib/pkgconfig/
-+| install -m 644 efivar.pc efivar/0.23-r0/image/usr/lib/pkgconfig/
-+;  install -m 644 efiboot.pc efivar/0.23-r0/image/usr/lib/pkgconfig/
-+;
-+| install: cannot stat 'efivar.pc': No such file or directory
-+| install: cannot stat 'efiboot.pc': No such file or directory
-+| make[1]: *** [install] Error 1
-+| make[1]: Leaving directory `efivar/0.23-r0/git/src'
-+| make: *** [install] Error 2
-+| ERROR: oe_runmake failed
-+...
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ src/Makefile | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/Makefile b/src/Makefile
-+index c7a0ca3..ad9c427 100644
-+--- a/src/Makefile
-++++ b/src/Makefile
-+@@ -78,7 +78,9 @@ install : all
-+ 		ln -fs $(x).$(VERSION) $(DESTDIR)$(libdir)/$(x).$(MAJOR_VERSION);\
-+ 		ln -fs $(x).$(VERSION) $(DESTDIR)$(libdir)/$(x); )
-+ 	$(INSTALL) -d -m 755 $(DESTDIR)$(PCDIR)
-+-	$(foreach x, $(PCTARGETS), $(INSTALL) -m 644 $(x) $(DESTDIR)$(PCDIR) ;)
-++	$(foreach x, $(PCTARGETS), $(INSTALL) -m 644 $(TOPDIR)/src/$(x).in $(DESTDIR)$(PCDIR)/$(x) ;\
-++		sed -i -e "s:@@LIBDIR@@:$(libdir):g" -e "s:@@VERSION@@:$(VERSION):g" \
-++			$(DESTDIR)$(PCDIR)/$(x); )
-+ 	$(INSTALL) -d -m 755 $(DESTDIR)$(includedir)/efivar
-+ 	$(foreach x, $(wildcard $(TOPDIR)/src/include/efivar/*.h), $(INSTALL) -m 644 $(x) $(DESTDIR)$(includedir)/efivar/$(notdir $(x));)
-+ 	$(INSTALL) -d -m 755 $(DESTDIR)$(bindir)
-+-- 
-+2.8.1
-+
-diff --git a/meta-oe/recipes-extended/efivar/efivar_0.23.bb b/meta-oe/recipes-extended/efivar/efivar_0.23.bb
-index b41be03..9c47461 100644
---- a/meta-oe/recipes-extended/efivar/efivar_0.23.bb
-+++ b/meta-oe/recipes-extended/efivar/efivar_0.23.bb
-@@ -7,10 +7,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6626bb1e20189cfa95f2c508ba286393"
+diff --git a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
+index d80c89f..0dee582 100644
+--- a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
++++ b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
+@@ -10,7 +10,7 @@ DEPENDS = "pciutils zlib efivar"
  
- DEPENDS_class-target = "popt efivar-native"
+ COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
  
--SRCREV = "01abee43d6d6e755f56a4135ab5aa0bfad609ce2"
-+SRCREV = "7367d78281fa3ce390e10c7c9f4608c58e7a6d3d"
- SRC_URI = "git://github.com/rhinstaller/efivar.git"
- SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch \
-                                 file://0002-disable-static-build.patch \
-+                                file://0003-efivar-fix-for-cross-compile.patch \
-                               "
+-SRCREV = "eb6e36c9064eae256cd60df24a977e3abd87fd16"
++SRCREV = "75d25807ba81cb724964c989012611272c8f1f5d"
+ SRC_URI = "git://github.com/rhinstaller/efibootmgr.git;protocol=https \
+           "
  
- S = "${WORKDIR}/git"
 -- 
 2.8.1
 
