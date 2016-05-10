@@ -1,56 +1,33 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id CB42C6018C
+Return-Path: <lixin.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id BE19971E63
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 May 2016 00:22:00 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id y7so16835226pfb.0
+	Tue, 10 May 2016 05:37:03 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; 
+   d="scan'208";a="6383877"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 10 May 2016 13:36:54 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id AB1CF42B561A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 May 2016 17:22:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=Oe6Gcss3seI0I+qUKLsuyvr3+oeFYQOhpij4eoMbBKk=;
-	b=MFEKp31Ex/+koxYELmewso3tXdJ1muZfPPDEhznRBOd8bWeXIHU6a1Oc2ptcz7i2ad
-	vsuqWhy0cquYJFGwoyM2WLyBkPOxuLeWHtWrUmGouEinxBGPz2np1yKnYmVX9AvKnDMA
-	P2ZWnXFB8+HWrEaZPGLUA80fcH/A4ptj3X77XDNb/YuYJ51iuma6PRtNaQ3rS3TG/PgC
-	QZh8BAt515DVJstaOG1D3mb1oHqV4f6Q3j2PiRxwdtwh3Xh2YMcejTLeZEAoAkoGRT+S
-	UJ/XE0uaJf7YZSWJ4oMvQCdLhcyIKgRUWyQEXEkjM6crETY7d6LK/8TZqhzItxMAqMNt
-	7lfQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=Oe6Gcss3seI0I+qUKLsuyvr3+oeFYQOhpij4eoMbBKk=;
-	b=HDunsBRCkiqgxsNxj3FhtqfTnk6MQzbxou9NAoWiLRvqIiVgUFs/c1iIv9KgoXvTQR
-	55QL3pW2P4zQleq97M6ai9uQ1PWjAswPQ8I+ShVh5rFwJuYLWFb5tnmwn9GRQjfcpZ30
-	SGDBedk4BX++YTHNAM7PE3Z4T3A3Xf4jKiDhl4f0Uc3aso/xtByBaQo9MJKo9yp8XwGM
-	1gMFcI2Uzaqby6n5DaJ1w6EK6G1GmmOlALirq/W5UG/P26eApTAwPRbyLAerbFJSJ1tL
-	1mSqdfOMhWpvjnfQF+5xl84yafALC6tlMl+9WWgRloxKBriYm8jcq1Xr4U61AvjczL9i
-	bmyg==
-X-Gm-Message-State: AOPr4FX5PWjQh+82OS3Frt3fwrU3mzTB8r2ae1w+2aOG7SuPUYrLSpvGDHzN5+ETvCr6LQ==
-X-Received: by 10.98.67.7 with SMTP id q7mr54605816pfa.70.1462839721415;
-	Mon, 09 May 2016 17:22:01 -0700 (PDT)
-Received: from Akusters-laptop.local ([2601:202:4000:1239:839:9ac2:c9fe:96e6])
-	by smtp.googlemail.com with ESMTPSA id
-	7sm43120664pfe.88.2016.05.09.17.21.59
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 09 May 2016 17:22:00 -0700 (PDT)
-To: Khem Raj <raj.khem@gmail.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Tom King <ka6sox@gmail.com>
-References: <1462204748-3435-1-git-send-email-akuster808@gmail.com>
-	<20160502161809.GD17714@mentor.com>
-	<CAFSKS=P_CqdgrO_rcTpGQPNn7Vo1t9MAUmg2-D8RdANiFY9gGQ@mail.gmail.com>
-	<20252BD2-C54A-402B-A8F1-A7D9C163BFF1@gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <573129A6.3060100@gmail.com>
-Date: Mon, 9 May 2016 17:21:58 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:38.0)
-	Gecko/20100101 Thunderbird/38.7.2
+	Tue, 10 May 2016 13:36:54 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.31) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.279.2; Tue, 10 May 2016 13:36:54 +0800
+From: Li Xin <lixin.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 10 May 2016 08:36:43 +0300
+Message-ID: <1462858603-1895-1-git-send-email-lixin.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
+In-Reply-To: <CANwerB2JV=wDngzfxLzTehOHwQ95=VcfYQsD2RfeAm6hcyE8tw@mail.gmail.com>
+References: <CANwerB2JV=wDngzfxLzTehOHwQ95=VcfYQsD2RfeAm6hcyE8tw@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20252BD2-C54A-402B-A8F1-A7D9C163BFF1@gmail.com>
-Subject: Re: [meta-networking][master][krogoth][jethro][fido][PATCH] ntp: Security fixes via update to 4.2.8p7
+X-Originating-IP: [10.167.226.31]
+X-yoursite-MailScanner-ID: AB1CF42B561A.AF76A
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: lixin.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-qt5][PATCH v2] qtchooser: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,89 +40,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2016 00:22:01 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 10 May 2016 05:37:06 -0000
+Content-Type: text/plain
 
-On 5/9/16 3:00 PM, Khem Raj wrote:
-> Please work with Tom to get it cached at sources.openembedded.org
+qtchooser is a wrapper used to select between Qt binary versions.
 
-I have a local copy.
+Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
+---
+ .../0001-Makefile-install-the-man-dir.patch        | 35 ++++++++++++++++++++++
+ recipes-qt/qtchooser/qtchooser_git.bb              | 30 +++++++++++++++++++
+ 2 files changed, 65 insertions(+)
+ create mode 100644 recipes-qt/qtchooser/qtchooser/0001-Makefile-install-the-man-dir.patch
+ create mode 100644 recipes-qt/qtchooser/qtchooser_git.bb
 
-let me know where you want me to put it.
+diff --git a/recipes-qt/qtchooser/qtchooser/0001-Makefile-install-the-man-dir.patch b/recipes-qt/qtchooser/qtchooser/0001-Makefile-install-the-man-dir.patch
+new file mode 100644
+index 0000000..8e8e1c6
+--- /dev/null
++++ b/recipes-qt/qtchooser/qtchooser/0001-Makefile-install-the-man-dir.patch
+@@ -0,0 +1,35 @@
++From 3f142e100cc3dd69b816ce79152760c823cb86e9 Mon Sep 17 00:00:00 2001
++From: Li Xin <lixin.fnst@cn.fujitsu.com>
++Date: Fri, 29 Apr 2016 12:41:34 +0900
++Subject: [PATCH] Makefile: install the man dir
++
++upstream-status: backported
++
++Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
++---
++ Makefile | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/Makefile b/Makefile
++index 20b9100..1fd8cd3 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -1,5 +1,6 @@
++ prefix = /usr
++ bindir = $(prefix)/bin
+++MKDIR  = mkdir -p
++ TOOLS = assistant \
++ 	designer \
++ 	lconvert \
++@@ -56,6 +57,8 @@ install:
++ 	case `uname -s` in Darwin) \
++ 	    for tool in $(MACTOOLS); do ln -sf qtchooser "$(INSTALL_ROOT)$(bindir)/$$tool"; done \
++ 	;; esac
+++	$(MKDIR) $(INSTALL_ROOT)$(prefix)/share/man/man1
+++	install -m 644 -p doc/qtchooser.1 $(INSTALL_ROOT)$(prefix)/share/man/man1
++ 
++ uninstall:
++ 	cd src/qtchooser && $(MAKE) uninstall
++-- 
++1.8.4.2
++
+diff --git a/recipes-qt/qtchooser/qtchooser_git.bb b/recipes-qt/qtchooser/qtchooser_git.bb
+new file mode 100644
+index 0000000..68b1c80
+--- /dev/null
++++ b/recipes-qt/qtchooser/qtchooser_git.bb
+@@ -0,0 +1,30 @@
++DESCRIPTION = "Wrapper to select between Qt development binary versions"
++HOMEPAGE = "http://macieira.org/qtchooser"
++LICENSE = "LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | GPL-3.0"
++SRC_URI = "git://code.qt.io/qt/qtchooser.git;branch=master \
++           file://0001-Makefile-install-the-man-dir.patch"
++
++LIC_FILES_CHKSUM = " \
++    file://LGPL_EXCEPTION.txt;md5=0145c4d1b6f96a661c2c139dfb268fb6 \
++    file://LICENSE.GPL;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LICENSE.LGPL;md5=4193e7f1d47a858f6b7c0f1ee66161de \
++"
++S = "${WORKDIR}/git"
++SRCREV = "4717841185d34bbe450e3b24445f2d35e3325a6a"
++PV = "39+git${SRCREV}"
++
++inherit pkgconfig
++
++do_compile() {
++    oe_runmake
++}
++
++do_install() {
++    oe_runmake install INSTALL_ROOT=${D}
++    #install configure file
++    install -d ${D}${sysconfdir}/xdg/qtchooser/
++    install -m 0644 ${S}/tests/auto/qtchooser/testdata/config2/qtchooser/*.conf \
++               ${D}${sysconfdir}/xdg/qtchooser/
++    install -m 0644 ${S}/tests/auto/qtchooser/testdata/default/qtchooser/default.conf \
++               ${D}${sysconfdir}/xdg/qtchooser/
++}
+-- 
+1.8.4.2
 
-- armin
 
-> 
->> On May 9, 2016, at 12:19 PM, George McCollister <george.mccollister@gmail.com> wrote:
->>
->> 4.2.8p7 appears to have been removed from:
->> https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/
->>
->> Not sure if this is temporary...
->>
->> Regards,
->> George McCollister
->>
->> On Mon, May 2, 2016 at 11:18 AM, Joe MacDonald <Joe_MacDonald@mentor.com> wrote:
->>> [[meta-networking][master][krogoth][jethro][fido][PATCH] ntp: Security fixes via update to 4.2.8p7] On 16.05.02 (Mon 08:59) Armin Kuster wrote:
->>>
->>>> From: Armin Kuster <akuster@mvista.com>
->>>>
->>>> CVE-2016-1551
->>>> CVE-2016-2516
->>>> CVE-2016-2517
->>>> CVE-2016-2518
->>>> CVE-2016-2519
->>>> CVE-2016-1547
->>>> CVE-2015-7704
->>>> CVE-2015-8138
->>>> CVE-2016-1550
->>>>
->>>> for more info see:
->>>> http://support.ntp.org/bin/view/Main/SecurityNotice#April_2016_NTP_4_2_8p7_Security
->>>>
->>>> Signed-off-by: Armin Kuster <akuster@mvista.com>
->>>
->>> Acked-by: Joe MacDonald <joe_macdonald@mentor.com>
->>>
->>>> ---
->>>> .../recipes-support/ntp/{ntp_4.2.8p6.bb => ntp_4.2.8p7.bb}            | 4 ++--
->>>> 1 file changed, 2 insertions(+), 2 deletions(-)
->>>> rename meta-networking/recipes-support/ntp/{ntp_4.2.8p6.bb => ntp_4.2.8p7.bb} (97%)
->>>>
->>>> diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p6.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb
->>>> similarity index 97%
->>>> rename from meta-networking/recipes-support/ntp/ntp_4.2.8p6.bb
->>>> rename to meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb
->>>> index a7b998a..ff4ba64 100644
->>>> --- a/meta-networking/recipes-support/ntp/ntp_4.2.8p6.bb
->>>> +++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb
->>>> @@ -23,8 +23,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
->>>>            file://ntpd.list \
->>>> "
->>>>
->>>> -SRC_URI[md5sum] = "60049f51e9c8305afe30eb22b711c5c6"
->>>> -SRC_URI[sha256sum] = "583d0e1c573ace30a9c6afbea0fc52cae9c8c916dbc15c026e485a0dda4ba048"
->>>> +SRC_URI[md5sum] = "46dfba933c3e4bc924d8e55068797578"
->>>> +SRC_URI[sha256sum] = "81d20c06a0b01abe3b84fac092185bf014252d38fe5e7b2758f604680a0220dc"
->>>>
->>>> inherit autotools update-rc.d useradd systemd pkgconfig
->>>>
->>> --
->>> -Joe MacDonald.
->>> :wq
->>>
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> 
+
 
