@@ -1,46 +1,66 @@
-Return-Path: <danismostlikely@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 041D76FFD8
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 May 2016 15:41:34 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id 145so4027231pfz.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 May 2016 08:41:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=PeWchoFy379HSARf4s34t1LekzG13EGKAFgHNEo0Bo4=;
-	b=aHPUhbpGs5MXSacuSqZNetTRw0AZgEyuJRBwqCFNMlZ7I5zYGQvLjHVu4b6bQvExmk
-	Bh9q9Lm5TRKugaZsDmZzCrfSlYFaqZJS9ueQgR01ta3TGxmrf210E4DdhAN9NItW1QT9
-	P0WB/IypIH06TZwMLLKNDGRCCj8En/IMYq1dNLcEK3JNpE2283DqZOej1TvcE8w8EEl/
-	4f3Hc2YzyUAIqikyHdXb0VUm+D1i803rgFfgpDQu34lpVzRXNdhfKLPYlQBbdRAgTqaf
-	W27gvxHqAMCX8hSR2AOKpN5ELJZA9Qf7K13xp9R+xPTqh4hG64Ft6uNTvTbXwTrP3VnL
-	fN8Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=PeWchoFy379HSARf4s34t1LekzG13EGKAFgHNEo0Bo4=;
-	b=d+X2qx5NwcxkasC0iSmhBERz8mdRN560zbhar2sbuakBDDQmdWVjhJvdzi0ZWVQWCz
-	V+GjfCyGUYmY8WUwa5XZYAkr1i4DLnqmUIMIC7AFprMYwt0lmDhFH6UFjZlLz2G4TGzL
-	jPqgmjNLebfYZNxk+wFWV4d6Qh9zKBbn06ihe7NB8zO1+EHx39HGRLZb6BdXRYWSByqA
-	Ws57B/yq10JotMza3gAbfOs8R8HoHcYG9hG8bKstjURhpN13swpEnwJwwRkVo5+NE/z0
-	4+3NK3QIgOe88o+kQhW9EnpsalODLVXg7y9TMnp9qFs+n6c/cxUAj0S4SafDwSgTblCm
-	zz4w==
-X-Gm-Message-State: AOPr4FV955VtfWoUX+DRlCelekdAyRQQv1aVZVZ2qNIlHv2htrJqsB18I/QhTWf7UAnyqw==
-X-Received: by 10.98.52.68 with SMTP id b65mr5991207pfa.24.1462981295317;
-	Wed, 11 May 2016 08:41:35 -0700 (PDT)
-Received: from mediabox.local (71-17-245-40.sktn.hsdb.sasknet.sk.ca.
-	[71.17.245.40]) by smtp.gmail.com with ESMTPSA id
-	76sm13106584pfz.44.2016.05.11.08.41.34
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 11 May 2016 08:41:34 -0700 (PDT)
-From: danismostlikely@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 May 2016 09:41:31 -0600
-Message-Id: <1462981291-6810-1-git-send-email-danismostlikely@gmail.com>
-X-Mailer: git-send-email 2.8.2
-Subject: [meta-oe][master][krogoth][PATCH] krb5: fix uninitialized variable warning
+Return-Path: <neenareddy.busireddy@nxp.com>
+Received: from emea01-db3-obe.outbound.protection.outlook.com
+	(mail-db3on0067.outbound.protection.outlook.com [157.55.234.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 2682E6E6B1;
+	Wed, 11 May 2016 19:03:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+	s=selector1-nxp-com;
+	h=From:To:Date:Subject:Message-ID:Content-Type:MIME-Version;
+	bh=WzbN6aVpQAx0UR+PrBHawjllnQTyqX3O2Mat2YEQIo8=;
+	b=JTeAMntxlOqTo+1hlk0i4e+RJI/+CFYWyYVMkztT1I7R6Yw/aGbyFmbTP3JV5+OAm21uSXv3pn0iedct7D4lMojaS7XspXYp74HJ5/Q9z9bnMBE9dYpkZboA4VlTCsOhUlNfwilAOWqsX/8MJ1jjUyDwD1ObP6q+J1PvT7mZp+A=
+Received: from VI1PR04MB1583.eurprd04.prod.outlook.com (10.164.84.141) by
+	VI1PR04MB1581.eurprd04.prod.outlook.com (10.164.84.139) with Microsoft
+	SMTP Server (TLS) id 15.1.497.12; Wed, 11 May 2016 19:03:06 +0000
+Received: from VI1PR04MB1583.eurprd04.prod.outlook.com ([10.164.84.141]) by
+	VI1PR04MB1583.eurprd04.prod.outlook.com ([10.164.84.141]) with mapi id
+	15.01.0492.016; Wed, 11 May 2016 19:03:06 +0000
+From: Neena Busireddy <neenareddy.busireddy@nxp.com>
+To: "Burton, Ross" <ross.burton@intel.com>
+Thread-Topic: [OE-core] proposal: replace GLUT with FreeGLUT
+Thread-Index: AdGq54YcQBQPfsyrS+qvQPveYmH1oAAHWCiAACyDpVA=
+Date: Wed, 11 May 2016 19:03:05 +0000
+Message-ID: <VI1PR04MB1583D3D7058F8A2309BC645991720@VI1PR04MB1583.eurprd04.prod.outlook.com>
+References: <VI1PR04MB1583BDC40DA6D580FE8F6C3591710@VI1PR04MB1583.eurprd04.prod.outlook.com>
+	<CAJTo0LY9C+-hkUxT5yTQkfMF5kggDByFabzxP-PEC=WzC9=_6A@mail.gmail.com>
+In-Reply-To: <CAJTo0LY9C+-hkUxT5yTQkfMF5kggDByFabzxP-PEC=WzC9=_6A@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: intel.com; dkim=none (message not signed)
+	header.d=none;intel.com; dmarc=none action=none header.from=nxp.com;
+x-originating-ip: [192.88.168.49]
+x-ms-office365-filtering-correlation-id: e5f732a3-7ef3-4f05-6c21-08d379cee2b2
+x-microsoft-exchange-diagnostics: 1; VI1PR04MB1581;
+	5:mY4IhqmVlUTj6H9hIWnuN+bJiVDoR6GEzBgfrKjyAAVpBEYSt1iZLpFBZjxZMq0rh4jTs0QmEeNCNc92pWtIgxdSjQfc/3QoHOrE3Jz25xel+tz5Cwxhe2A2+gD2gqvskVvwaz4FGWnbvB5k9kx/1A==;
+	24:RB1j5dQCtxO3oglWZlAbldKqHhOZi2qV3dARMDCIdquDUS5ZoK0uSMGPx7388nXatLg+ce4/wtO13g1gQfLGt4m04eFM7gWddinXcbwyACI=;
+	7:a4QeUVXQxkQNv4YlgPW/g5KjVsV4vJuSZf1bhOkDohgAyP4lD9utyKoJy3a9GX3I3EkPde2pHALZqJUE35abNFPEdWtVMHhpf1wLcqo6QDHF62UAI+wLVLkSozoU6lWEWEP4QbioAUnXJR8RIIyVCVW5mSkdJy7cYJTKrOyWp05SZhDx8Kn8w3ucIrbsrZP2
+x-microsoft-antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:VI1PR04MB1581;
+x-microsoft-antispam-prvs: <VI1PR04MB1581659BEFD30AA17B3E334591720@VI1PR04MB1581.eurprd04.prod.outlook.com>
+x-exchange-antispam-report-test: UriScan:;
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(601004)(2401047)(5005006)(8121501046)(3002001)(10201501046)(6055026);
+	SRVR:VI1PR04MB1581; BCL:0; PCL:0; RULEID:; SRVR:VI1PR04MB1581; 
+x-forefront-prvs: 0939529DE2
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009020)(24454002)(87936001)(189998001)(19625215002)(6116002)(9686002)(18717965001)(8936002)(54356999)(790700001)(50986999)(81166006)(586003)(4326007)(10400500002)(102836003)(3846002)(2906002)(19300405004)(1220700001)(19580405001)(122556002)(19580395003)(76176999)(11100500001)(76576001)(19609705001)(5008740100001)(86362001)(16236675004)(345774005)(5002640100001)(9326002)(15975445007)(5003600100002)(77096005)(33656002)(110136002)(3660700001)(2950100001)(2900100001)(92566002)(66066001)(3280700002)(19617315012)(74316001)(5004730100002);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR04MB1581;
+	H:VI1PR04MB1583.eurprd04.prod.outlook.com; FPR:; SPF:None;
+	MLV:sfv; LANG:en; 
+spamdiagnosticoutput: 1:23
+spamdiagnosticmetadata: NSPM
+MIME-Version: 1.0
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-originalarrivaltime: 11 May 2016 19:03:06.0283 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB1581
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio.salvador@ossystems.com.br>,
+	"openembedded-core@lists.openembedded.org"
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] proposal: replace GLUT with FreeGLUT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,76 +73,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 May 2016 15:41:35 -0000
+X-List-Received-Date: Wed, 11 May 2016 19:03:09 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-From: Daniel McGregor <daniel.mcgregor@vecima.com>
-
-On some targets clang erroniously detects an uninitialized variable.
-Backport the fix from upstream.
-
-Signed-off-by: Daniel McGregor <daniel.mcgregor@vecima.com>
----
- ...-around-uninitialized-warning-in-cc_kcm.c.patch | 37 ++++++++++++++++++++++
- meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb   |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/0001-Work-around-uninitialized-warning-in-cc_kcm.c.patch
-
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5/0001-Work-around-uninitialized-warning-in-cc_kcm.c.patch b/meta-oe/recipes-connectivity/krb5/krb5/0001-Work-around-uninitialized-warning-in-cc_kcm.c.patch
-new file mode 100644
-index 0000000..c6731a9
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/krb5/krb5/0001-Work-around-uninitialized-warning-in-cc_kcm.c.patch
-@@ -0,0 +1,37 @@
-+From f1b681a44d28946e6d8fc0080f3efe94228d7dfe Mon Sep 17 00:00:00 2001
-+From: Tom Yu <tlyu@mit.edu>
-+Date: Wed, 6 Jan 2016 15:24:16 -0500
-+Subject: [PATCH] Work around uninitialized warning in cc_kcm.c
-+
-+Some versions of clang erroneously detect use of an uninitialized
-+variable reply_len in kcmio_call() when building on non-Mac platforms.
-+Initialize it to work around this warning.
-+
-+(cherry picked from commit 40b007c0d8e2a12c6f4205ac111dee731c9d970c)
-+
-+ticket: 8335
-+version_fixed: 1.13.4
-+tags: -pullup
-+status: resolved
-+
-+Upstream-Status: backport
-+---
-+ src/lib/krb5/ccache/cc_kcm.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/lib/krb5/ccache/cc_kcm.c b/src/lib/krb5/ccache/cc_kcm.c
-+index b763ea4..6337b57 100644
-+--- a/src/lib/krb5/ccache/cc_kcm.c
-++++ b/src/lib/krb5/ccache/cc_kcm.c
-+@@ -377,7 +377,7 @@ static krb5_error_code
-+ kcmio_call(krb5_context context, struct kcmio *io, struct kcmreq *req)
-+ {
-+     krb5_error_code ret;
-+-    size_t reply_len;
-++    size_t reply_len = 0;
-+ 
-+     if (k5_buf_status(&req->reqbuf) != 0)
-+         return ENOMEM;
-+-- 
-+2.8.2
-+
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
-index 713b76c..0c566cb 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
-@@ -33,6 +33,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar
-            file://etc/default/krb5-kdc \
-            file://etc/default/krb5-admin-server \
-            file://krb5-CVE-2016-3119.patch;striplevel=2 \
-+           file://0001-Work-around-uninitialized-warning-in-cc_kcm.c.patch;striplevel=2 \
- "
- SRC_URI[md5sum] = "f7ebfa6c99c10b16979ebf9a98343189"
- SRC_URI[sha256sum] = "e528c30b0209c741f6f320cb83122ded92f291802b6a1a1dc1a01dcdb3ff6de1"
--- 
-2.8.2
-
+SGkgUm9zcywNCg0KT24gMTAgTWF5IDIwMTYgYXQgMTk6MTIsIE5lZW5hIEJ1c2lyZWRkeSA8bmVl
+bmFyZWRkeS5idXNpcmVkZHlAbnhwLmNvbTxtYWlsdG86bmVlbmFyZWRkeS5idXNpcmVkZHlAbnhw
+LmNvbT4+IHdyb3RlOg0KR0xVVCBpcyBkZWFkIHVwc3RyZWFtIGZvciBhbG1vc3QgdGhyZWUgeWVh
+cnMgbm93ICggaHR0cHM6Ly9jZ2l0LmZyZWVkZXNrdG9wLm9yZy9tZXNhL2dsdXQvICApIGFuZCBp
+dCBtYWtlcyBzZW5zZSB0byByZXBsYWNlIEdMVVQgd2l0aCBGcmVlR0xVVCAuDQpTb21lIG9mIHRo
+ZSByZWFzb25zIHRvIHJlcGxhY2Ugd2l0aCBGcmVlR0xVVCBhcmUgbGlzdGVkIGhlcmUgOg0KaHR0
+cDovL2ZyZWVnbHV0LnNvdXJjZWZvcmdlLm5ldC8NCg0KQWxzbywgY3VycmVudCBtZXNhLWdsdXQg
+cmVjaXBlIGRvZXMgbm90IGdlbmVyYXRlIEdMVVQgbGlicmFyeS4gSSB0ZXN0ZWQgdGhpcyB3aGVu
+IEkgZW5hYmxlZCBHTFVUIGluIG1lc2EtZGVtb3MuDQoNCkkgZGlzY3Vzc2VkIHRoaXMgaXNzdWUg
+d2l0aCBPdGF2aW8gYW5kIGhlIHN1Z2dlc3RlZCB0byByZXBsYWNlIEdMVVQgd2l0aCBGcmVlR0xV
+VCBhbmQgdXBncmFkZSBtZXNhLWRlbW9zIHRvIDguMy4NCg0KWW91IG1pZ2h0IHdhbnQgdG8gQ0Mg
+b2UtZGV2ZWwgdG9vLCBhcyBtZXNhLWdsdXQgaXMgcGFydCBvZiBtZXRhLW9lLg0KDQpJJ20gc3Vy
+cHJpc2VkIHRoYXQgbWVzYS1nbHV0IGRvZXNuJ3QgYnVpbGQgdGhlIGdsdXQgbGlicmFyeSwgYnV0
+IEkgaGF2ZSBubyBpbnRlcmVzdCBpbiBnbHV0IHNvIHlvdSBjYW4gZG8gd2hhdGV2ZXIgeW91IHdh
+bnQgaW4gbXkgb3Bpbmlvbi4gOikNCg0KWyBDQyBpbmcgb2UtZGV2ZWwgXQ0KDQpUaGFuayB5b3Ug
+Zm9yIHlvdXIgY29tbWVudHMuIEkgd2lsbCBzZW5kIHBhdGNoZXMgZm9yIEZyZWVHTFVULg0KDQpU
+aGFua3MsDQpOZWVuYQ0K
 
