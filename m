@@ -1,53 +1,28 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 798E573163
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id A7C5A60249
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 May 2016 01:03:48 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id y7so2439744pfb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 May 2016 18:03:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=8UTBaRUt73m4a5bX1wpPCyez4+PJ3sTy3aVZh0N0958=;
-	b=Rz79A4mKtk+4kYzqrQpRELtpgwRAuFVGbS7Lkf/XjZILsaN5oBOe9IC/zImbHsvFzI
-	b99RxkIbrEw4x56zqF4CQhvFxf1iOz7N1zmwbbB/BeRnimsdPoVg/91u0P/kdn8R/zvZ
-	DBnbVdwixZvEtY9XB+eFU0PnUAXE+DVHUol24Br6FpIrcK/pQSKSm52ndIfMfIX077iH
-	Bm4q4TEseW2TaoM3u1HxrBwySquuSp+M3ouaePtVKpgYo/RPQVyu+TC7E6vGl/8zBZ5j
-	9nxy+KDbHLNZVYbNqu1N92Lon+VhVHGJBft8lZ7Mxb7iJxSPcun8Ox2Ldm5XB+BW2T72
-	Fqsw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=8UTBaRUt73m4a5bX1wpPCyez4+PJ3sTy3aVZh0N0958=;
-	b=KqIPrEiIyfBuj6bOJDXS0ebk38BqDE8+vKj0FizZVa5J9t3Zdyv7rNkcEZveCz/Wm/
-	WOEX5qjKUhXxZCZInlnl0JdGHrmPIXNu4IaaUHyFEm+4hzM5GkcQp1Za5yAZUKmTF2ng
-	wFbUiBqA0lmPxbZuGm3sSoS818qTrUX5uGbo2k5sNjsv2Cg+5Kw9eiPnY9Ub55Tq09eX
-	qdl2IQC25wdJfwHqq3W1UKxjiL2z+R9fPkYA7NJYv9Z7i2OCbBFTSY2IWhNmmUJ5sgoA
-	0z4pYCEZgj3jPLN0sgmvPLli1m3TwGl+H2IgCi3L1fmQQU1Y9+XNHLQX7+jofFnZPTgL
-	7DHQ==
-X-Gm-Message-State: AOPr4FUCutATNKfKYRzrh9CupprIfwV5IgPPs3HXwW3hJE0NsWVGkM0QKMHU4w4Hh5tUqw==
-X-Received: by 10.98.75.154 with SMTP id d26mr773426pfj.72.1462928629020;
-	Tue, 10 May 2016 18:03:49 -0700 (PDT)
-Received: from [10.43.100.29] ([64.2.3.194])
-	by smtp.googlemail.com with ESMTPSA id
-	f187sm7228376pfb.60.2016.05.10.18.03.47
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 10 May 2016 18:03:47 -0700 (PDT)
-To: Martin Jansa <martin.jansa@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-References: <1462724355-13609-1-git-send-email-akuster808@gmail.com>
-	<20160510122021.GB5675@jama>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <573284F2.4080005@gmail.com>
-Date: Tue, 10 May 2016 18:03:46 -0700
+	Wed, 11 May 2016 01:33:56 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u4B1XsnP010768
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 10 May 2016 18:33:54 -0700 (PDT)
+Received: from [128.224.162.159] (128.224.162.159) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
+	Tue, 10 May 2016 18:33:54 -0700
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <cover.1462896891.git.hongxu.jia@windriver.com>
+	<20160510211057.GE5675@jama>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <57328BFA.90609@windriver.com>
+Date: Wed, 11 May 2016 09:33:46 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
+	Thunderbird/38.7.2
 MIME-Version: 1.0
-In-Reply-To: <20160510122021.GB5675@jama>
-Subject: Re: [meta-oe][v2][PATCH] graphviz: Add new package
+In-Reply-To: <20160510211057.GE5675@jama>
+Cc: koen.kooi@linaro.org, openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH V5 0/5] efivar: upgrade to 0.23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,399 +35,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 May 2016 01:03:49 -0000
-Content-Type: text/plain; charset=windows-1252
+X-List-Received-Date: Wed, 11 May 2016 01:33:56 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
 Content-Transfer-Encoding: 7bit
 
+On 05/11/2016 05:10 AM, Martin Jansa wrote:
+> On Tue, May 10, 2016 at 12:19:34PM -0400, Hongxu Jia wrote:
+>> Changed in V5:
+>> - Fix unknown option while gold linker used
+> Still fails in world builds:
+>
+> http://errors.yoctoproject.org/Errors/Details/62248/
+>
+> i586-oe-linux-gcc  -m32 -march=i586 --sysroot=/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86  -O2 -pipe -g -feliminate-unused-debug-types -fdebug-prefix-map=/home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/efivar/0.23-r0=/usr/src/debug/efivar/0.23-r0 -fdebug-prefix-map=/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux= -fdebug-prefix-map=/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86=  -I/home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/efivar/0.23-r0/git/src/include/efivar/  -specs=/home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/efivar/0.23-r0/git/gcc.specs  -L.  -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed     -o efivar efivar.c -lefivar -ldl -lpopt
+> /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/i586-oe-linux/gcc/i586-oe-linux/5.3.0/ld: fatal error: -f/--auxiliary may not be used without -shared
+> collect2: error: ld returned 1 exit status
+
+Oh, sorry, the fix was not include:
+- Use 'pie' to replace 'PIE'
+
+//Hongxu
 
 
-On 05/10/2016 05:20 AM, Martin Jansa wrote:
-> On Sun, May 08, 2016 at 09:19:15AM -0700, Armin Kuster wrote:
->> V2: don't run configure within the autogen.sh
-> 
-> graphviz-2.38.0: graphviz: Files/directories were installed but not
-> shipped in any package:
->   /usr/lib/lua/gv.so
-> Please set FILES such that these items are packaged. Alternatively if
-> they are unneeded, avoid installing them or delete them within
-> do_install.
-> graphviz: 1 installed and not shipped files. [installed-vs-shipped]
-> graphviz-2.38.0: graphviz rdepends on gd, but it isn't a build
-> dependency, missing gd in DEPENDS or PACKAGECONFIG? [build-deps]
-> graphviz-2.38.0: /usr/share/graphviz/demo/modgraph.lua contained in
-> package graphviz requires /usr/bin/lua, but no providers found in
-> RDEPENDS_graphviz? [file-rdeps]
-> 
-ok. thanks for the info. haven't seen those before :/
-
-- armin
+>
+>> Changed in V4:
+>> - Fix one failed with:
+>> | install -d -m 755 efivar/0.23-r0/image/usr/lib/pkgconfig/
+>> | install -m 644 efivar.pc efivar/0.23-r0/image/usr/lib/pkgconfig/
+>> ;  install -m 644 efiboot.pc efivar/0.23-r0/image/usr/lib/pkgconfig/
+>> ;
+>> | install: cannot stat 'efivar.pc': No such file or directory
+>> | install: cannot stat 'efiboot.pc': No such file or directory
+>> | make[1]: *** [install] Error 1
+>> | make[1]: Leaving directory `efivar/0.23-r0/git/src'
+>> | make: *** [install] Error 2
+>> | ERROR: oe_runmake failed
 >>
->> Signed-off-by: Armin Kuster <akuster808@gmail.com>
->> ---
->>  .../graphviz/graphviz_no_mkdef_build.patch         |  90 ++++++++++++++
->>  .../graphviz/graphviz/linear_angle.gv              | 101 ++++++++++++++++
->>  .../recipes-graphics/graphviz/graphviz/simple.gv   |   1 +
->>  .../recipes-graphics/graphviz/graphviz_2.38.0.bb   | 131 +++++++++++++++++++++
->>  4 files changed, 323 insertions(+)
->>  create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/graphviz_no_mkdef_build.patch
->>  create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/linear_angle.gv
->>  create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/simple.gv
->>  create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz_2.38.0.bb
+>> //Hongxu
 >>
->> diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/graphviz_no_mkdef_build.patch b/meta-oe/recipes-graphics/graphviz/graphviz/graphviz_no_mkdef_build.patch
->> new file mode 100644
->> index 0000000..6d4c964
->> --- /dev/null
->> +++ b/meta-oe/recipes-graphics/graphviz/graphviz/graphviz_no_mkdef_build.patch
->> @@ -0,0 +1,90 @@
->> +Index: graphviz-2.38.0/lib/gvpr/Makefile.in
->> +===================================================================
->> +--- graphviz-2.38.0.orig/lib/gvpr/Makefile.in
->> ++++ graphviz-2.38.0/lib/gvpr/Makefile.in
->> +@@ -55,7 +55,6 @@ PRE_UNINSTALL = :
->> + POST_UNINSTALL = :
->> + build_triplet = @build@
->> + host_triplet = @host@
->> +-noinst_PROGRAMS = mkdefs$(EXEEXT)
->> + subdir = lib/gvpr
->> + DIST_COMMON = $(noinst_HEADERS) $(pkginclude_HEADERS) \
->> + 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
->> +@@ -120,10 +119,6 @@ libgvpr_C_la_LIBADD =
->> + am_libgvpr_C_la_OBJECTS = actions.lo compile.lo gvpr.lo gprstate.lo \
->> + 	parse.lo queue.lo
->> + libgvpr_C_la_OBJECTS = $(am_libgvpr_C_la_OBJECTS)
->> +-PROGRAMS = $(noinst_PROGRAMS)
->> +-am_mkdefs_OBJECTS = mkdefs.$(OBJEXT)
->> +-mkdefs_OBJECTS = $(am_mkdefs_OBJECTS)
->> +-mkdefs_LDADD = $(LDADD)
->> + AM_V_P = $(am__v_P_@AM_V@)
->> + am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
->> + am__v_P_0 = false
->> +@@ -158,10 +153,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
->> + am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
->> + am__v_CCLD_0 = @echo "  CCLD    " $@;
->> + am__v_CCLD_1 = 
->> +-SOURCES = $(libgvpr_la_SOURCES) $(libgvpr_C_la_SOURCES) \
->> +-	$(mkdefs_SOURCES)
->> +-DIST_SOURCES = $(libgvpr_la_SOURCES) $(libgvpr_C_la_SOURCES) \
->> +-	$(mkdefs_SOURCES)
->> ++SOURCES = $(libgvpr_la_SOURCES) $(libgvpr_C_la_SOURCES)
->> ++DIST_SOURCES = $(libgvpr_la_SOURCES) $(libgvpr_C_la_SOURCES)
->> + am__can_run_installinfo = \
->> +   case $$AM_UPDATE_INFO_DIR in \
->> +     n|no|NO) false;; \
->> +@@ -568,8 +561,7 @@ libgvpr_la_LIBADD = $(libgvpr_C_la_LIBAD
->> + 	$(MATH_LIBS)
->> + 
->> + libgvpr_la_DEPENDENCIES = $(libgvpr_C_la_DEPENDENCIES)
->> +-mkdefs_SOURCES = mkdefs.c
->> +-EXTRA_DIST = $(man_MANS) $(pdf_DATA) gprdata mkdefs.c gdefs.h trie.c gvprlib.vcproj
->> ++EXTRA_DIST = $(man_MANS) $(pdf_DATA) gprdata gdefs.h trie.c gvprlib.vcproj
->> + DISTCLEANFILES = $(pdf_DATA) gdefs.h mkdefs
->> + all: all-am
->> + 
->> +@@ -657,18 +649,6 @@ libgvpr.la: $(libgvpr_la_OBJECTS) $(libg
->> + libgvpr_C.la: $(libgvpr_C_la_OBJECTS) $(libgvpr_C_la_DEPENDENCIES) $(EXTRA_libgvpr_C_la_DEPENDENCIES) 
->> + 	$(AM_V_CCLD)$(LINK)  $(libgvpr_C_la_OBJECTS) $(libgvpr_C_la_LIBADD) $(LIBS)
->> + 
->> +-clean-noinstPROGRAMS:
->> +-	@list='$(noinst_PROGRAMS)'; test -n "$$list" || exit 0; \
->> +-	echo " rm -f" $$list; \
->> +-	rm -f $$list || exit $$?; \
->> +-	test -n "$(EXEEXT)" || exit 0; \
->> +-	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
->> +-	echo " rm -f" $$list; \
->> +-	rm -f $$list
->> +-mkdefs$(EXEEXT): $(mkdefs_OBJECTS) $(mkdefs_DEPENDENCIES) $(EXTRA_mkdefs_DEPENDENCIES) 
->> +-	@rm -f mkdefs$(EXEEXT)
->> +-	$(AM_V_CCLD)$(LINK) $(mkdefs_OBJECTS) $(mkdefs_LDADD) $(LIBS)
->> +-
->> + mostlyclean-compile:
->> + 	-rm -f *.$(OBJEXT)
->> + 
->> +Index: graphviz-2.38.0/lib/gvpr/Makefile.am
->> +===================================================================
->> +--- graphviz-2.38.0.orig/lib/gvpr/Makefile.am
->> ++++ graphviz-2.38.0/lib/gvpr/Makefile.am
->> +@@ -21,7 +21,6 @@ AM_CPPFLAGS = \
->> + 	-DDFLT_GVPRPATH="\".$(PATH_SEPARATOR)$(pkgdatadir)/gvpr\""
->> + 
->> + pkginclude_HEADERS = gvpr.h
->> +-noinst_PROGRAMS = mkdefs
->> + noinst_HEADERS = actions.h compile.h gprstate.h parse.h queue.h trieFA.h trie.c
->> + noinst_LTLIBRARIES = libgvpr_C.la
->> + lib_LTLIBRARIES = libgvpr.la
->> +@@ -50,11 +49,10 @@ libgvpr_la_LIBADD = $(libgvpr_C_la_LIBAD
->> + 	$(MATH_LIBS)
->> + libgvpr_la_DEPENDENCIES = $(libgvpr_C_la_DEPENDENCIES)
->> + 
->> +-mkdefs_SOURCES = mkdefs.c
->> + 
->> + gdefs.h: $(top_srcdir)/lib/gvpr/gprdata mkdefs
->> + 	./mkdefs gdefs.h < $(top_srcdir)/lib/gvpr/gprdata
->> + 
->> +-EXTRA_DIST = $(man_MANS) $(pdf_DATA) gprdata mkdefs.c gdefs.h trie.c gvprlib.vcproj
->> ++EXTRA_DIST = $(man_MANS) $(pdf_DATA) gprdata gdefs.h trie.c gvprlib.vcproj
->> + 
->> + DISTCLEANFILES = $(pdf_DATA) gdefs.h mkdefs
->> diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/linear_angle.gv b/meta-oe/recipes-graphics/graphviz/graphviz/linear_angle.gv
->> new file mode 100644
->> index 0000000..827bde5
->> --- /dev/null
->> +++ b/meta-oe/recipes-graphics/graphviz/graphviz/linear_angle.gv
->> @@ -0,0 +1,101 @@
->> +digraph G { bgcolor="purple:pink" style="filled"
->> +  subgraph cluster1 {fillcolor="blue:green" style="filled"
->> +		node [shape=circle fillcolor="gold:brown" style="radial" gradientangle=180]
->> +		a0 [label=<
->> + <TABLE border="10" cellspacing="10" cellpadding="10" style="rounded" bgcolor="yellow:violet" gradientangle="315">
->> +<TR><TD border="3"  bgcolor="yellow" gradientangle="315">00</TD>
->> +<TD border="3"  bgcolor="yellow:green" gradientangle="315">01</TD>
->> +<TD border="3"  bgcolor="green" gradientangle="315">02</TD>
->> +<TD border="3"  bgcolor="green:blue" gradientangle="315">03</TD>
->> +<TD border="3"  bgcolor="blue" gradientangle="315">04</TD>
->> +<TD border="3"  bgcolor="blue:purple" gradientangle="315">05</TD>
->> +<TD border="3"  bgcolor="purple" gradientangle="315">06</TD>
->> +<TD border="3"  bgcolor="purple:violet" gradientangle="315">07</TD>
->> +<TD border="3"  bgcolor="violet" gradientangle="315">08</TD></TR>
->> +  
->> +<TR><TD border="3"  bgcolor="yellow:gold"  gradientangle="315">10</TD>
->> +<TD border="3"  bgcolor="yellow:green"  gradientangle="315">11</TD>
->> +<TD border="3"  bgcolor="yellow:green"  gradientangle="315">12</TD>
->> +<TD border="3"  bgcolor="yellow:blue"  gradientangle="315">13</TD>
->> +<TD border="3"  bgcolor="yellow:blue"  gradientangle="315">14</TD>
->> +<TD border="3"  bgcolor="yellow:purple"  gradientangle="315">15</TD>
->> +<TD border="3"  bgcolor="yellow:purple"  gradientangle="315">16</TD>
->> +<TD border="3"  bgcolor="yellow:violet"  gradientangle="315">17</TD>
->> +<TD border="3"  bgcolor="yellow:violet"  gradientangle="315">18</TD></TR>
->> +  
->> +<TR><TD border="3"  bgcolor="gold"  gradientangle="315">20</TD>
->> +<TD border="3"  bgcolor="gold:green"  gradientangle="315">21</TD>
->> +<TD border="3"  bgcolor="gold:green"  gradientangle="315">22</TD>
->> +<TD border="3"  bgcolor="gold:blue"  gradientangle="315">23</TD>
->> +<TD border="3"  bgcolor="gold:blue"  gradientangle="315">24</TD>
->> +<TD border="3"  bgcolor="gold:purple"  gradientangle="315">25</TD>
->> +<TD border="3"  bgcolor="gold:purple"  gradientangle="315">26</TD>
->> +<TD border="3"  bgcolor="gold:violet"  gradientangle="315">27</TD>
->> +<TD border="3"  bgcolor="gold:violet"  gradientangle="315">28</TD></TR>
->> +  
->> +<TR><TD border="3"  bgcolor="gold:orange"  gradientangle="315">30</TD>
->> +<TD border="3"  bgcolor="orange:green"  gradientangle="315">31</TD>
->> +<TD border="3"  bgcolor="orange:green"  gradientangle="315">32</TD>
->> +<TD border="3"  bgcolor="orange:blue"  gradientangle="315">33</TD>
->> +<TD border="3"  bgcolor="orange:blue"  gradientangle="315">34</TD>
->> +<TD border="3"  bgcolor="orange:purple"  gradientangle="315">35</TD>
->> +<TD border="3"  bgcolor="orange:purple"  gradientangle="315">36</TD>
->> +<TD border="3"  bgcolor="orange:violet"  gradientangle="315">37</TD>
->> +<TD border="3"  bgcolor="orange:violet"  gradientangle="315">38</TD></TR>
->> +  
->> +<TR><TD border="3"  bgcolor="orange"  gradientangle="315">40</TD>
->> +<TD border="3"  bgcolor="orange:green"  gradientangle="315">41</TD>
->> +<TD border="3"  bgcolor="orange:green"  gradientangle="315">42</TD>
->> +<TD border="3"  bgcolor="orange:blue"  gradientangle="315">43</TD>
->> +<TD border="3"  bgcolor="orange:blue"  gradientangle="315">44</TD>
->> +<TD border="3"  bgcolor="orange:purple"  gradientangle="315">45</TD>
->> +<TD border="3"  bgcolor="orange:purple"  gradientangle="315">46</TD>
->> +<TD border="3"  bgcolor="orange:violet"  gradientangle="315">47</TD>
->> +<TD border="3"  bgcolor="orange:violet"  gradientangle="315">48</TD></TR>
->> +  
->> +<TR><TD border="3"  bgcolor="orange:red"  gradientangle="315">50</TD>
->> +<TD border="3"  bgcolor="red:green"  gradientangle="315">51</TD>
->> +<TD border="3"  bgcolor="red:green"  gradientangle="315">52</TD>
->> +<TD border="3"  bgcolor="red:blue"  gradientangle="315">53</TD>
->> +<TD border="3"  bgcolor="red:blue"  gradientangle="315">54</TD>
->> +<TD border="3"  bgcolor="red:purple"  gradientangle="315">55</TD>
->> +<TD border="3"  bgcolor="red:purple"  gradientangle="315">56</TD>
->> +<TD border="3"  bgcolor="red:violet"  gradientangle="315">57</TD>
->> +<TD border="3"  bgcolor="red:violet"  gradientangle="315">58</TD></TR>
->> +  
->> +<TR><TD border="3"  bgcolor="red"  gradientangle="315">60</TD>
->> +<TD border="3"  bgcolor="red:green"  gradientangle="315">61</TD>
->> +<TD border="3"  bgcolor="red:green"  gradientangle="315">62</TD>
->> +<TD border="3"  bgcolor="red:blue"  gradientangle="315">63</TD>
->> +<TD border="3"  bgcolor="red:blue"  gradientangle="315">64</TD>
->> +<TD border="3"  bgcolor="red:purple"  gradientangle="315">65</TD>
->> +<TD border="3"  bgcolor="red:purple"  gradientangle="315">66</TD>
->> +<TD border="3"  bgcolor="red:violet"  gradientangle="315">67</TD>
->> +<TD border="3"  bgcolor="red:violet"  gradientangle="315">68</TD></TR>
->> +  
->> +<TR><TD border="3"  bgcolor="red:brown"  gradientangle="315">70</TD>
->> +<TD border="3"  bgcolor="brown:green"  gradientangle="315">71</TD>
->> +<TD border="3"  bgcolor="brown:green"  gradientangle="315">72</TD>
->> +<TD border="3"  bgcolor="brown:blue"  gradientangle="315">73</TD>
->> +<TD border="3"  bgcolor="brown:blue"  gradientangle="315">74</TD>
->> +<TD border="3"  bgcolor="brown:purple"  gradientangle="315">75</TD>
->> +<TD border="3"  bgcolor="brown:purple"  gradientangle="315">76</TD>
->> +<TD border="3"  bgcolor="brown:violet"  gradientangle="315">77</TD>
->> +<TD border="3"  bgcolor="brown:violet"  gradientangle="315">78</TD></TR>
->> +  
->> +<TR><TD border="3"  bgcolor="brown"  gradientangle="315">80</TD>
->> +<TD border="3"  bgcolor="brown:green"  gradientangle="315">81</TD>
->> +<TD border="3"  bgcolor="brown:green"  gradientangle="315">82</TD>
->> +<TD border="3"  bgcolor="brown:blue"  gradientangle="315">83</TD>
->> +<TD border="3"  bgcolor="brown:blue"  gradientangle="315">84</TD>
->> +<TD border="3"  bgcolor="brown:purple"  gradientangle="315">85</TD>
->> +<TD border="3"  bgcolor="brown:purple"  gradientangle="315">86</TD>
->> +<TD border="3"  bgcolor="brown:violet"  gradientangle="315">87</TD>
->> +<TD border="3"  bgcolor="brown:violet"  gradientangle="315">88</TD></TR>
->> +  
->> +</TABLE>>];
->> +
->> +}
->> +
->> +} 
->> +
->> diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/simple.gv b/meta-oe/recipes-graphics/graphviz/graphviz/simple.gv
->> new file mode 100644
->> index 0000000..1b140f9
->> --- /dev/null
->> +++ b/meta-oe/recipes-graphics/graphviz/graphviz/simple.gv
->> @@ -0,0 +1 @@
->> +    graph { a -- b; b -- c; a -- c; d -- c; e -- c; e -- a; } 
->> diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_2.38.0.bb b/meta-oe/recipes-graphics/graphviz/graphviz_2.38.0.bb
->> new file mode 100644
->> index 0000000..61ffaef
->> --- /dev/null
->> +++ b/meta-oe/recipes-graphics/graphviz/graphviz_2.38.0.bb
->> @@ -0,0 +1,131 @@
->> +SUMMARY = "Graphviz - Graph Visualization Software."
->> +DESCRIPTION = "Graphviz is open source graph visualization software. Graph visualization is a way of representing structural information as diagrams of abstract graphs and networks. It has important applications in networking, bioinformatics,  software engineering, database and web design, machine learning, and in visual interfaces for other technical domains."
->> +HOMEPAGE = "http://www.graphviz.org/"
->> +SECTION = "graphics"
->> +LICENSE = "EPL-1.0"
->> +LIC_FILES_CHKSUM = "file://COPYING;beginline=1;endline=2;md5=737cf7b11c0759e6d3b0d6cb08b7c4f8"
->> +
->> +DEPENDS += "graphviz-native bison flex libtool zlib chrpath-replacement-native"
->> +DEPENDS_class-native = ""
->> +
->> +SRC_URI_BASE = "${DEBIAN_MIRROR}/main/g/${BPN}/${BPN}_${PV}.orig.tar.gz;name=archive \
->> +           ${DEBIAN_MIRROR}/main/g/${BPN}/${BPN}_${PV}-7.debian.tar.xz;name=patch \
->> +"
->> +
->> +SRC_URI = "${SRC_URI_BASE} \
->> +        file://graphviz_no_mkdef_build.patch \
->> +        file://simple.gv \
->> +        file://linear_angle.gv \
->> +        "
->> +
->> +SRC_URI_class-native = "${SRC_URI_BASE}"
->> +
->> +SRC_URI[archive.md5sum] = "5b6a829b2ac94efcd5fa3c223ed6d3ae"
->> +SRC_URI[archive.sha256sum] = "81aa238d9d4a010afa73a9d2a704fc3221c731e1e06577c2ab3496bdef67859e"
->> +SRC_URI[patch.md5sum] = "5cbcff92169d682471cdfdf58d215098"
->> +SRC_URI[patch.sha256sum] = "312ab8215fbe1800664675cfc284aecfeff3ce699407523b5bdefee64cf1a53c"
->> +
->> +inherit autotools-brokensep pkgconfig
->> +
->> +LDFLAGS += "-Wunused-but-set-variable -Wmaybe-uninitialized -Wunused-variable"
->> +
->> +PACKAGECONFIG ?= "ghost rsvg cairo swig tcl gtk lua sfdp png libgd \
->> +                ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'X11', '', d)} \
->> +                ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'glut', '', d)}"
->> +
->> +PACKAGECONFIG_class-native ??= ""
->> +
->> +PACKAGECONFIG[sfdp] = "--enable-sfdp=yes, --disable-sfdp, ,"
->> +PACKAGECONFIG[swig] = "--enable-swig=yes, --disable-swig, swig,"
->> +PACKAGECONFIG[lua] = "--enable-lua=yes, --disable-lua, lua,"
->> +PACKAGECONFIG[cairo] = "--with-pangocairo=yes, --with-pangocairo=no, cairo,"
->> +PACKAGECONFIG[tcl] = "--enable-tcl=yes --with-tclsh=tclsh, --disable-tcl, tcl, tcl"
->> +PACKAGECONFIG[glut] = "--with-glut=yes, --without-glut, mesa-glut,"
->> +PACKAGECONFIG[gtk] = "--with-gtk=yes, --without-gtk, gtk+,"
->> +PACKAGECONFIG[expect] = "--with-expect=yes, --without-expect, expect,"
->> +PACKAGECONFIG[ghost] = "--with-ghostscript=yes, --without-ghostscript, ghostscript,"
->> +PACKAGECONFIG[fontconfig] = "--with-fontconfig=yes, --without-fontconfig, fontconfig,"
->> +PACKAGECONFIG[freetype] = "--with-freetype2=yes, --with-freetype2=no, freetype,"
->> +PACKAGECONFIG[poppler] = "--with-poppler=yes, --with-poppler=no, poppler,"
->> +PACKAGECONFIG[guile] = "--enable-guile, --disable-guile, guile,"
->> +PACKAGECONFIG[php] = "--enable-php, --disable-php , php,"
->> +PACKAGECONFIG[perl] = "--enable-perl, --disable-perl, perl,"
->> +PACKAGECONFIG[python] = "--enable-python, --disable-python, python ,"
->> +PACKAGECONFIG[ruby] = "--enable-ruby, --disable-ruby, ruby, "
->> +PACKAGECONFIG[qt] = "--with-qt=yes, --with-qt=no, qte,"
->> +PACKAGECONFIG[glade] = "--with-glade=yes, --with-glade=no, glade3,"
->> +PACKAGECONFIG[libgd] = "--with-libgd=yes, --with-libgd=no, libglade,"
->> +PACKAGECONFIG[png] = "--with-libpng=yes, --with-libpng=no, libpng, libpng"
->> +PACKAGECONFIG[rsvg] = "--with-rsvg=yes, --with-rsvg=no, librsvg, librsvg"
->> +PACKAGECONFIG[pixbuf] = "--with-gdk=yes --with-gdk-pixbuf=yes, --with-gdk=no --with-gdk-pixbuf=no, gdk-pixbuf,"
->> +PACKAGECONFIG[X11] = "--with-x, --without-x, libx11 virtual/libx11 , libxaw7"
->> +
->> +EXTRA_OECONF += "--enable-ltdl"
->> +
->> +EXTRA_OECONF_class-native += " \
->> +    --enable-sharp=no \
->> +    --enable-java=no \
->> +    --enable-ocaml=no \
->> +    --enable-r=no \
->> +    --with-devil=no \
->> +    --with-lasi=no \
->> +    --with-gtkgl=no \
->> +    --with-gtkglext=no \
->> +    --with-gts=no \
->> +    --with-ann=no \
->> +    --with-ortho=no \
->> +    --with-digcola=no \
->> +    --with-smyrna=no \
->> +    --with-ipsepcola=no \
->> +     "
->> +EXTRANATIVEPATH += "chrpath-native"
->> +
->> +debian_do_patch() {
->> +    cd ${S}
->> +    while read line; do patch -p1 < ${WORKDIR}/debian/patches/$line; done < ${WORKDIR}/debian/patches/series
->> +}
->> +
->> +python do_patch() {
->> +    bb.build.exec_func('debian_do_patch', d)
->> +    bb.build.exec_func('patch_do_patch', d)
->> +}
->> +
->> +do_configure_prepend () {
->> +    # copy mkdefs from the native graphviz build
->> +    if [ "${PN}" != "graphviz-native" ]; then
->> +        cp ${STAGING_BINDIR_NATIVE}/graphviz-${PV}/mkdefs ${S}/lib/gvpr/.
->> +    fi
->> +    ./autogen.sh NOCONFIG
->> +}
->> +
->> +do_compile_class-native () {
->> +    cd lib/gvpr
->> +    oe_runmake mkdefs
->> +}
->> +
->> +do_install_append () {
->> +    if [ "${PN}" != "graphviz-native" ]; then
->> +        install  -d ${D}${datadir}/graphviz
->> +        install  ${WORKDIR}/*.gv ${D}${datadir}/graphviz/
->> +    fi
->> +}
->> +
->> +do_install_class-native () {
->> +    install -d ${D}${bindir}/graphviz-${PV}
->> +    install -m 755 ${S}/lib/gvpr/mkdefs ${D}${bindir}/graphviz-${PV}/
->> +}
->> +
->> +pkg_postinst_${PN} () {
->> +if test "x$D" != "x"; then
->> +    exit 1
->> +else
->> +    ${bindr}/dot -c
->> +fi
->> +}
->> +
->> +INSANE_SKIP_${PN} += "dev-so"
->> +
->> +RDEPENDS_${PN} = "libxml2 libcroco"
->> +RDEPENDS_class-native = ""
->> +
->> +BBCLASSEXTEND = "native"
->> -- 
->> 2.3.5
+>> The following changes since commit a6c172e2713f0018c5ebac0f957cff28b7ac2630:
+>>
+>>    poppler: add --std=c++11 to fix build with Qt 5.7 (2016-05-06 12:40:28 +0200)
+>>
+>> are available in the git repository at:
+>>
+>>    git://git.openembedded.org/openembedded-core-contrib hongxu/fix-efivar
+>>    http://cgit.openembedded.org/cgit.cgi/openembedded-core-contrib/log/?h=hongxu/fix-efivar
+>>
+>> Hongxu Jia (3):
+>>    efivar: fix do_install failed
+>>    efibootmgr: sync with upstream while efivar upgraded to 0.23
+>>    efivar: fix unknown option while gold linker used
+>>
+>> Koen Kooi (2):
+>>    efivar: update to 0.23
+>>    efibootmgr: update and unblacklist
+>>
+>>   .../recipes-extended/efibootmgr/efibootmgr_0.12.bb | 14 ++---
+>>   .../efibootmgr/files/ldflags.patch                 | 17 ------
+>>   .../efivar/0001-efivar-fix-for-cross-compile.patch | 28 +++++----
+>>   .../efivar/efivar/0002-disable-static-build.patch  | 33 ++++++++++
+>>   .../efivar/0003-efivar-fix-for-cross-compile.patch | 44 ++++++++++++++
+>>   .../0004-fix-unknow-option-for-gold-linker.patch   | 40 ++++++++++++
+>>   ...ptions-not-supported-by-lower-version-gcc.patch | 71 ----------------------
+>>   .../efivar/{efivar_0.21.bb => efivar_0.23.bb}      | 29 ++++-----
+>>   8 files changed, 155 insertions(+), 121 deletions(-)
+>>   delete mode 100644 meta-oe/recipes-extended/efibootmgr/files/ldflags.patch
+>>   create mode 100644 meta-oe/recipes-extended/efivar/efivar/0002-disable-static-build.patch
+>>   create mode 100644 meta-oe/recipes-extended/efivar/efivar/0003-efivar-fix-for-cross-compile.patch
+>>   create mode 100644 meta-oe/recipes-extended/efivar/efivar/0004-fix-unknow-option-for-gold-linker.patch
+>>   delete mode 100644 meta-oe/recipes-extended/efivar/efivar/efivar-drop-options-not-supported-by-lower-version-gcc.patch
+>>   rename meta-oe/recipes-extended/efivar/{efivar_0.21.bb => efivar_0.23.bb} (46%)
 >>
 >> -- 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> 
+>> 2.8.1
+>>
+
 
