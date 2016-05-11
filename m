@@ -1,126 +1,53 @@
-Return-Path: <ann.thornton@nxp.com>
-X-Greylist: delayed 5599 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 10 May 2016 21:58:33 UTC
-Received: from na01-by2-obe.outbound.protection.outlook.com
-	(mail-by2on0065.outbound.protection.outlook.com [207.46.100.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 61B2A6E668
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 798E573163
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 May 2016 21:58:33 +0000 (UTC)
-Received: from BLUPR0301CA0035.namprd03.prod.outlook.com (10.162.113.173) by
-	DM2PR0301MB0605.namprd03.prod.outlook.com (10.160.95.21) with Microsoft
-	SMTP Server (TLS) id 15.1.492.11; Tue, 10 May 2016 20:25:14 +0000
-Received: from BN1BFFO11FD006.protection.gbl (2a01:111:f400:7c10::1:150) by
-	BLUPR0301CA0035.outlook.office365.com (2a01:111:e400:5259::45) with
-	Microsoft SMTP Server (TLS) id 15.1.492.11 via Frontend Transport;
-	Tue, 10 May 2016 20:25:14 +0000
-Authentication-Results: spf=fail (sender IP is 192.88.158.2)
-	smtp.mailfrom=nxp.com; lists.openembedded.org;
-	dkim=none (message not signed)
-	header.d=none;lists.openembedded.org; dmarc=none action=none
-	header.from=nxp.com;
-Received-SPF: Fail (protection.outlook.com: domain of nxp.com does not
-	designate 192.88.158.2 as permitted sender)
-	receiver=protection.outlook.com; 
-	client-ip=192.88.158.2; helo=az84smr01.freescale.net;
-Received: from az84smr01.freescale.net (192.88.158.2) by
-	BN1BFFO11FD006.mail.protection.outlook.com (10.58.144.69) with
-	Microsoft SMTP Server (TLS) id 15.1.492.8 via Frontend Transport;
-	Tue, 10 May 2016 20:25:13 +0000
-Received: from [127.0.0.1] (RA43240-03.am.freescale.net [10.81.17.26])
-	by az84smr01.freescale.net (8.14.3/8.14.0) with ESMTP id u4AKPAwk028974
+	Wed, 11 May 2016 01:03:48 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id y7so2439744pfb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 May 2016 13:25:12 -0700
-References: <1462532454-10125-1-git-send-email-Martin.Jansa@gmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-From: Thornton Ann <ann.thornton@nxp.com>
-X-Forwarded-Message-Id: <1462532454-10125-1-git-send-email-Martin.Jansa@gmail.com>
-Message-ID: <573243A6.5020204@nxp.com>
-Date: Tue, 10 May 2016 15:25:10 -0500
-User-Agent: Mozilla/5.0 (Windows NT 6.1; rv:38.0) Gecko/20100101
-	Thunderbird/38.7.2
+	Tue, 10 May 2016 18:03:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=8UTBaRUt73m4a5bX1wpPCyez4+PJ3sTy3aVZh0N0958=;
+	b=Rz79A4mKtk+4kYzqrQpRELtpgwRAuFVGbS7Lkf/XjZILsaN5oBOe9IC/zImbHsvFzI
+	b99RxkIbrEw4x56zqF4CQhvFxf1iOz7N1zmwbbB/BeRnimsdPoVg/91u0P/kdn8R/zvZ
+	DBnbVdwixZvEtY9XB+eFU0PnUAXE+DVHUol24Br6FpIrcK/pQSKSm52ndIfMfIX077iH
+	Bm4q4TEseW2TaoM3u1HxrBwySquuSp+M3ouaePtVKpgYo/RPQVyu+TC7E6vGl/8zBZ5j
+	9nxy+KDbHLNZVYbNqu1N92Lon+VhVHGJBft8lZ7Mxb7iJxSPcun8Ox2Ldm5XB+BW2T72
+	Fqsw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=8UTBaRUt73m4a5bX1wpPCyez4+PJ3sTy3aVZh0N0958=;
+	b=KqIPrEiIyfBuj6bOJDXS0ebk38BqDE8+vKj0FizZVa5J9t3Zdyv7rNkcEZveCz/Wm/
+	WOEX5qjKUhXxZCZInlnl0JdGHrmPIXNu4IaaUHyFEm+4hzM5GkcQp1Za5yAZUKmTF2ng
+	wFbUiBqA0lmPxbZuGm3sSoS818qTrUX5uGbo2k5sNjsv2Cg+5Kw9eiPnY9Ub55Tq09eX
+	qdl2IQC25wdJfwHqq3W1UKxjiL2z+R9fPkYA7NJYv9Z7i2OCbBFTSY2IWhNmmUJ5sgoA
+	0z4pYCEZgj3jPLN0sgmvPLli1m3TwGl+H2IgCi3L1fmQQU1Y9+XNHLQX7+jofFnZPTgL
+	7DHQ==
+X-Gm-Message-State: AOPr4FUCutATNKfKYRzrh9CupprIfwV5IgPPs3HXwW3hJE0NsWVGkM0QKMHU4w4Hh5tUqw==
+X-Received: by 10.98.75.154 with SMTP id d26mr773426pfj.72.1462928629020;
+	Tue, 10 May 2016 18:03:49 -0700 (PDT)
+Received: from [10.43.100.29] ([64.2.3.194])
+	by smtp.googlemail.com with ESMTPSA id
+	f187sm7228376pfb.60.2016.05.10.18.03.47
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 10 May 2016 18:03:47 -0700 (PDT)
+To: Martin Jansa <martin.jansa@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <1462724355-13609-1-git-send-email-akuster808@gmail.com>
+	<20160510122021.GB5675@jama>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <573284F2.4080005@gmail.com>
+Date: Tue, 10 May 2016 18:03:46 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
 MIME-Version: 1.0
-In-Reply-To: <1462532454-10125-1-git-send-email-Martin.Jansa@gmail.com>
-X-EOPAttributedMessage: 0
-X-Matching-Connectors: 131073855140348926;
-	(91ab9b29-cfa4-454e-5278-08d120cd25b8); ()
-X-Forefront-Antispam-Report: CIP:192.88.158.2; IPV:NLI; CTRY:US; EFV:NLI;
-	SFV:NSPM;
-	SFS:(10009020)(2980300002)(1109001)(1110001)(339900001)(189002)(199003)(2473001)(9170700003)(189998001)(4001350100001)(77096005)(110136002)(107886002)(86362001)(50986999)(450100001)(87936001)(5005550100001)(512944002)(92566002)(80316001)(586003)(81166006)(19580405001)(19580395003)(84326002)(8936002)(83506001)(85426001)(106466001)(2906002)(36756003)(105606002)(2351001)(1220700001)(65956001)(230783001)(120886001)(5008740100001)(16236675004)(11100500001)(87266999)(65816999)(54356999)(33656002)(104016004)(6806005)(2950100001)(270700001)(76176999);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:DM2PR0301MB0605;
-	H:az84smr01.freescale.net; FPR:; SPF:Fail; MLV:sfv; MX:1; A:1;
-	LANG:en; 
-X-Microsoft-Exchange-Diagnostics: 1; BN1BFFO11FD006;
-	1:RcVXJt/NbOxpFoFNS2E6YhzKL6smOw4qHfwRoqV1heLzkNOcuMO+ZBeXjBbDTLiX9ZyJXo/fsl93gWk5L/BYgohhpN9uxcIQbu5b4P+tluLj2M+xSjBYQMn2HEUDlcJsmoScDPHcXfRyD5DuUt1wOc7an9+FTU95nxiLngGNPsMhD53Q+onLEo9Eo/TM01aTQdA3dIUt5ZuGUFGl89zVmRa/qhexGY05iHuaeN7SV4M1Wc6wHtC65N13Xg5+xJ9R3g8wfdGT1gMr5HRQKOKqv/ohplVbREvgdVS7BEpMFdDC9AkKTNNVKd5s1z92z8AvFbWFNDmDAGeVTEOB56RK9AZNQd2EbQn1yjx6NTl/xL/keC0BWNQZIc9w+sjvgF0YGNt3kwhmIld/bXDRhXqckKt/H5HuniC4+mN9DMdlFVro8ddw1A6c47wYAcN2+UiaquvXqQFGM8sN4xxEdHAzAU0GczXhO32c83ClqoVE+xdyl4zkJ/EuBFbcwGWYLHEfusGaornmtr/ZRU9x9hJaUUP5ULqf4dUayvTuqjlayM21m/+1qlj8tTBX4HhTF4ws
-X-MS-Office365-Filtering-Correlation-Id: 82477720-1f5b-4f9c-e29e-08d37911316f
-X-Microsoft-Exchange-Diagnostics: 1; DM2PR0301MB0605;
-	2:r5oqtmFaSyM95RuWzjhG0s4v4arY7/u5ski89wpf7QtxE2e2XjkkrmIjcL8cMrPTHiTajLCalN085hQ2dMrK/AlSitimSeqdUQX5NE4wuvj0iQ+ms7uhe2pDeuWz/DWQfFZt3FOBBM1lFfdV3rug313kUAvjxg39GYPdfatrvp9yHDO2rsbYoatLPYz1q3zC;
-	3:lsM1tyCmaO/qmOjU9o/3uvNmf6vp3c9veaTG1vMXmddUl0RyY4MeyUJ+YTFpjfqLyCWbZMqtl9XWxEqlilX90ezpafLKii9WgbymwnoxDVqdUqX5wdwRoklAF9C4Su1z0m18Oqw1IrStHaNNiIHdc4XgPlVasEB6Qgr7ZZc95EYEZj43MoTwjYA0/qySv0uxmc23LwLFgcSv6a69jTCh+rO+BjE/jYfCDSTj/XxGUFU=
-X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:DM2PR0301MB0605;
-X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; DM2PR0301MB0605;
-	25:ZAePsYDle9DedtANqQ4RnLJ6ECJCGJ1Er17PAL+?=
-	=?us-ascii?Q?y46hE75JKh0yMaCq9eXtWtEf6F5odyYEFR0lqDq1pzxUYCAuNXz3/C7ashDk?=
-	=?us-ascii?Q?ualzL0AbWHXujBc5YQONjbF0tnGv8gVh/f+WKJm2zLDwHs6MPr5W7rJYShD2?=
-	=?us-ascii?Q?1Y0f1a2HwxIA+HUJQe0lAZgK/8Ej+ZK8MbcJmjOuJ1tyx4nyY/ZaKw8ZRn3h?=
-	=?us-ascii?Q?J36SOovGVNZy2ZNL9OTQpfG1kWH298YaGfWnrOrjmdL0fHCih7elQWujEDk8?=
-	=?us-ascii?Q?AyVo1POm4FD4wLR5sHpWB2pTnBNhY6ZaEpnem9EU64K8gijqmVGoT6NlmDud?=
-	=?us-ascii?Q?G6vIrtwwEc36QPud5p2bBbCr6pp2tcFcKNewGQ24HyqhzsdCA4+ZTk3yp10y?=
-	=?us-ascii?Q?NStRZNrImMUhZQoMrEjR3QnzOuZ4i5qypdGLPE8LvYXHS0cP4hmapjiokdmR?=
-	=?us-ascii?Q?dC+pLQso/SrNePHSrGN7Ax+16V0+77GXE/SAgJv8BBbI0PUCjyh0esZTo5PZ?=
-	=?us-ascii?Q?WKSM6G3v9l6+FxclkW40A4xBTESUAq2ZwxF8/2xK2BRdHPWzlKMtlLga5pIt?=
-	=?us-ascii?Q?yvWrpPU4ENHGd8qvW6OoFDTTRsLW71Cdc/yJB0kRE+zrTmvW6Lino1rPNXBZ?=
-	=?us-ascii?Q?SMeLKXyvQxFh4mgrzdaQYf6vosVLo9UKJAz71DyPji6dbGa5h6YXAh1a/Tse?=
-	=?us-ascii?Q?+zZPV3vl0DfurbnWcx8Msn/P1Vc+Cy2KpJ0SB6IMfrF+H7GQd73enmBSom63?=
-	=?us-ascii?Q?i1x3gOeakupiPN46rcAUXhHP/lpMZzYyZEZsWQE4zCff/GUVv1ZS2SvDqZNE?=
-	=?us-ascii?Q?/KLYSg6F1QzIpjIcHfRNawGeICiHPA0hqiP4CaKlpz3m2Ubow+eJyY79axeu?=
-	=?us-ascii?Q?J4PYFT+OpMXaK5qH8MHqbS2LMPzyaKh0VyjyNXskPi0o4/xd6sRVMwy32BHx?=
-	=?us-ascii?Q?hDZChs8t23aytCBZMp1bk0EvJAUKt9SeuG3eXeAFeOQ=3D=3D?=
-X-Microsoft-Antispam-PRVS: <DM2PR0301MB0605E86E1FE7D837A08BE9FD86710@DM2PR0301MB0605.namprd03.prod.outlook.com>
-X-Exchange-Antispam-Report-Test: UriScan:;
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(601004)(2401047)(13023025)(13024025)(13015025)(13018025)(13017025)(8121501046)(5005006)(3002001)(10201501046)(6055026);
-	SRVR:DM2PR0301MB0605; BCL:0; PCL:0; RULEID:(400006);
-	SRVR:DM2PR0301MB0605; 
-X-Microsoft-Exchange-Diagnostics: 1; DM2PR0301MB0605;
-	4:3NkyCfNGkOlUQjT+JDgOxh8s+FW8ZGs/ghG/v0P65LKidAfTjrnartR71fysy1a93rI4PXdIXpn7hoNopUpnR7F7JFrvomw3bpQvPFr+fTd+apmQy8UwfBPmGNZHyFDJj1ztRGroXboELWkt8Zca/KlK+5r29EEDSfYMQIlwSLyHHvnBI1se1yzY7fyxh+otp2EfIUYHh5BJhNyaar54Wn9YUDJ+WBjy/LBPUYucH2UI6bVSka4kUapKERddqQ6oZSn2+np2l/B99k9PO6oImwymSTrsfeDZpILga772TPpxJ8BWro3gzPmkBKaBDJb9MJKFNZR9eZLeTUOoeJdpsjprBC7IpnNyV8c3rmp2DBZ29VsvBxPEADhhDH+lCOyZwjtAERBxchT65426iz8bCgNscg+H14d33qKyBm0FL0enWVcMXgWrRaCP5L4KpKZ35C+1ZRMIuMZUlaboQ4Pv2fkKFS07RhWUL96umoHka/s=
-X-Forefront-PRVS: 0938781D02
-X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; DM2PR0301MB0605;
-	23:GB2iow7VwspOsScWMKkZDRAlBC/xAAUKVzJ2h7F?=
-	=?us-ascii?Q?spO0MZEM90yfKCnZm4ZR+cPiE05cubit2820FdRrCdFB1AEeS7cdJcSnSADF?=
-	=?us-ascii?Q?9R42PfThGXfun+BZmTVBd2vteDzLI9dWDPwBfx0xzqBSx3tCkrtFt8XRhLoJ?=
-	=?us-ascii?Q?ORPgDjgbRpE6+P5pISzslJbEOgEuQ3x4fauCnoflDug3Ek0wk+STT+aSvlBg?=
-	=?us-ascii?Q?gM3nC7RAU04uK7YvZ7XcMuyxvXQejBpXSMUgDG91n5OkkW+UTU+H/j0Oujlu?=
-	=?us-ascii?Q?Yggr2so/yyb0dlxIqGKc4FjsMSZfbSptEaiF0Q6oGx8eM4ZKmSO7TPs62YTo?=
-	=?us-ascii?Q?N4XOhPyG3YSILPLcOjr5o6JIYXIhxFWQUJiwMbDK9p3Q7ld2a13V/3gnEJvO?=
-	=?us-ascii?Q?/xEuSZbBZ2iZxZ+L4sw10r1mpIRjNvBg+nmhxuzH/ckuqyB4yiLuc9KdydCf?=
-	=?us-ascii?Q?I/6NQgpUy+VNEvnBev3xZ0FGMNQSubqBlVJ+WnE8mYQjyU5SJR6DyxU6Eri8?=
-	=?us-ascii?Q?pNO15GKbaeTilYweHmyTP+0/z+4RYYC/xk0TlgDFIUsT7VpWW6k03JVVGzVc?=
-	=?us-ascii?Q?ouIEetR/q0UFegwp06EvpoXOImAQVFHagYLyflBmEaTvPne10AFxEUsOOQqs?=
-	=?us-ascii?Q?hinJpsCYFenFDoTqCjG9rKkIxuwDpQ/nWjjTn2mXjPCES3Fo2DNOnXmRNCW4?=
-	=?us-ascii?Q?PFX5aZcWGy2ZD9gMv8lDy30KJeFiEBNp5Ur74EbhyHFCxhWMLoNc3t5hwqFg?=
-	=?us-ascii?Q?XHgezjct0Hjt1IxmyWmtvq6TJ8tCd0togMIAxM3q7Jn0dT4ga5Lm0d8cYHj+?=
-	=?us-ascii?Q?axbnMUCHCow+EWlz2rDX8QsNVhVv8+cDpSAyoNBCypR+IDbr45+TA7PWE9xS?=
-	=?us-ascii?Q?MrOIlnRE5aPFvw3vKDya0Ip7hpQghjTKzAiFWIM8Zdw2nJXJTkv/G03X85OG?=
-	=?us-ascii?Q?uLItZrXFtQBnpbH1Qr8+MoAo5cBpsAlDWepEGohxfWSP5s7gDxlFCke5Z5h1?=
-	=?us-ascii?Q?4ABSWrpUQiB5mOXaqh0+NtHyjIwGOyz10pyJur8LWQ9Vc+Rxiitke5Ce8b1a?=
-	=?us-ascii?Q?52DsNzlG7UGuMrgDKKcCh5t7doCzh0tvCJyZZHByR5XZ5Jj/B0ROQckRERsz?=
-	=?us-ascii?Q?cyOVL2r54vwxDz77MjXRw69vZIuA+5HeHBJc+3y5cJ2CKBcb/oek2MFhs/sC?=
-	=?us-ascii?Q?uvsPh0m4i6Aae8aw/Qerjbvq8r9qzXVyyClyzYACT6ybFVL3lILLdMEoG+X0?=
-	=?us-ascii?Q?OOHj2EW9nhNoMQODsSciCj1rUy9VysFjs+j+IO3kdvzqHOrgVuf8nddb3K33?=
-	=?us-ascii?Q?9IA=3D=3D?=
-X-Microsoft-Exchange-Diagnostics: 1; DM2PR0301MB0605;
-	5:LBBmwokfoJU96gQLQXCybYbGQzbK9SSR5WRbcS1YDt8QxUsY8mNByoi4w5m5BDltnvuh0jk4qq+Ppj/NPncGHKuJjRTVBLq+Vk7QgdPlRGqegO6LbsJjWzXllPsXsCrmvWjfX7VYGzotSg22IC6NyYCZREBYjOHbeI3pdSrpN1g=;
-	24:BOxi/DF4XwjcpG+mWPKsP65Os5U/HT0BiFv2wHyzITqLIWnLN182ZkLDnffSEfPARrIA+9HAsvZSIdpSigchFz23CYz4FUOtedPJHOJ6HWI=;
-	7:dfkMz18m+uI7LxvXCfqBMPY6xhOJfu6gLRBnGA5dQ5n/wyy/iVPlgVYHyNRR8UAG13ZIbDIXAWZqWShbH1yhxdAyJ/f9osv2+ckqgazk58yJ1OLMeMEgJnwprjHOP2fgb3NzBGTqXUrhXOsR42xzl6Yl+9G7R2BIgbUx+3vQjkEzzuSjoxad5vAYCms2LqeK
-SpamDiagnosticOutput: 1:23
-SpamDiagnosticMetadata: NSPM
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 May 2016 20:25:13.7852 (UTC)
-X-MS-Exchange-CrossTenant-Id: 5afe0b00-7697-4969-b663-5eab37d5f47e
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=5afe0b00-7697-4969-b663-5eab37d5f47e; Ip=[192.88.158.2];
-	Helo=[az84smr01.freescale.net]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM2PR0301MB0605
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [PATCH][meta-oe] packagegroup-tools-bluetooth: Selects the tools appropriate for the version of bluez being used.
+In-Reply-To: <20160510122021.GB5675@jama>
+Subject: Re: [meta-oe][v2][PATCH] graphviz: Add new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -133,97 +60,399 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 May 2016 21:58:33 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
+X-List-Received-Date: Wed, 11 May 2016 01:03:49 -0000
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: 7bit
 
-Thank you, Martin.
-
-Acked by: Ann Thornton <ann.thornton@nxp.com>
-
--------- Forwarded Message --------
-Subject: 	[PATCH][meta-oe] packagegroup-tools-bluetooth: Selects the 
-tools appropriate for the version of bluez being used.
-Date: 	Fri, 6 May 2016 13:00:54 +0200
-From: 	Martin Jansa <martin.jansa@gmail.com>
-To: 	openembedded-devel@lists.openembedded.org
-CC: 	Ann Thornton <ann.thornton@nxp.com>, Martin Jansa 
-<Martin.Jansa@gmail.com>
 
 
+On 05/10/2016 05:20 AM, Martin Jansa wrote:
+> On Sun, May 08, 2016 at 09:19:15AM -0700, Armin Kuster wrote:
+>> V2: don't run configure within the autogen.sh
+> 
+> graphviz-2.38.0: graphviz: Files/directories were installed but not
+> shipped in any package:
+>   /usr/lib/lua/gv.so
+> Please set FILES such that these items are packaged. Alternatively if
+> they are unneeded, avoid installing them or delete them within
+> do_install.
+> graphviz: 1 installed and not shipped files. [installed-vs-shipped]
+> graphviz-2.38.0: graphviz rdepends on gd, but it isn't a build
+> dependency, missing gd in DEPENDS or PACKAGECONFIG? [build-deps]
+> graphviz-2.38.0: /usr/share/graphviz/demo/modgraph.lua contained in
+> package graphviz requires /usr/bin/lua, but no providers found in
+> RDEPENDS_graphviz? [file-rdeps]
+> 
+ok. thanks for the info. haven't seen those before :/
 
-From: Ann Thornton <ann.thornton@nxp.com>
-
-Signed-off-by: Ann Thornton <ann.thornton@nxp.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
-  .../packagegroups/packagegroup-tools-bluetooth.bb  | 43 ++++++++++------------
-  1 file changed, 20 insertions(+), 23 deletions(-)
-
-diff --git a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
-index bdab389..dde4599 100644
---- a/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
-+++ b/meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
-@@ -5,36 +5,33 @@ LICENSE = "MIT"
-  LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3b58 \
-                      file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-  
--SUMMARY = "Set of Bluetooh related tools for inclusion on images"
--DESCRIPTION = "Add bluetooth tools based on the version of BlueZ in use.\
--The tools that have been tested and work the best are pulled in \
--automatically.  The same packagegroup can be used in a recipe without \
--the need to know which version of BlueZ is in use. \
-+SUMMARY = "Set of Bluetooth related tools for inclusion in images"
-+DESCRIPTION = "Includes bluetooth specific tools for this version of BlueZ.\
-+These tools are used at runtime. \
-  Supports BlueZ4 and BlueZ5."
-  
-  inherit packagegroup
-+inherit bluetooth
-  
--BLUEZ4_INSTALL = " \
-+RDEPENDS_bluez4 = " \
-      obexftp \
-  "
-  
--BLUEZ5_INSTALL = " \
--     bluez5-noinst-tools \
--     bluez5-obex \
--     bluez5-testtools  \
--     libasound-module-bluez \
--     ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', "pulseaudio-module-bluetooth-discover \
--                                                            pulseaudio-module-bluetooth-policy \
--                                                            pulseaudio-module-bluez5-discover \
--                                                            pulseaudio-module-bluez5-device \
--                                                            pulseaudio-module-switch-on-connect \
--                                                            pulseaudio-module-loopback", \
--                                             '', d)} \
-+RDEPENDS_bluez5 = " \
-+    bluez5-noinst-tools \
-+    bluez5-obex \
-+    bluez5-testtools  \
-+    libasound-module-bluez \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', \
-+        'pulseaudio-module-bluetooth-discover \
-+         pulseaudio-module-bluetooth-policy \
-+         pulseaudio-module-bluez5-discover \
-+         pulseaudio-module-bluez5-device \
-+         pulseaudio-module-switch-on-connect \
-+         pulseaudio-module-loopback', \
-+        '', d)} \
-  "
-  
--# Install either bluez4 or bluez5 if they are in distro.
-+# Install bluez4 tools or bluez5 tools depending on what is specified in the distro.
-  # Otherwise install nothing.
--RDEPENDS_${PN} = " \
--     ${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', '${BLUEZ5_INSTALL}', "", d)} \
--     ${@bb.utils.contains('DISTRO_FEATURES', 'bluez4', '${BLUEZ4_INSTALL}', "", d)} \
--"
-+RDEPENDS_${PN} = "${RDEPENDS_${BLUEZ}}"
--- 
-2.8.2
-
-
-
+- armin
+>>
+>> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+>> ---
+>>  .../graphviz/graphviz_no_mkdef_build.patch         |  90 ++++++++++++++
+>>  .../graphviz/graphviz/linear_angle.gv              | 101 ++++++++++++++++
+>>  .../recipes-graphics/graphviz/graphviz/simple.gv   |   1 +
+>>  .../recipes-graphics/graphviz/graphviz_2.38.0.bb   | 131 +++++++++++++++++++++
+>>  4 files changed, 323 insertions(+)
+>>  create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/graphviz_no_mkdef_build.patch
+>>  create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/linear_angle.gv
+>>  create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz/simple.gv
+>>  create mode 100644 meta-oe/recipes-graphics/graphviz/graphviz_2.38.0.bb
+>>
+>> diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/graphviz_no_mkdef_build.patch b/meta-oe/recipes-graphics/graphviz/graphviz/graphviz_no_mkdef_build.patch
+>> new file mode 100644
+>> index 0000000..6d4c964
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-graphics/graphviz/graphviz/graphviz_no_mkdef_build.patch
+>> @@ -0,0 +1,90 @@
+>> +Index: graphviz-2.38.0/lib/gvpr/Makefile.in
+>> +===================================================================
+>> +--- graphviz-2.38.0.orig/lib/gvpr/Makefile.in
+>> ++++ graphviz-2.38.0/lib/gvpr/Makefile.in
+>> +@@ -55,7 +55,6 @@ PRE_UNINSTALL = :
+>> + POST_UNINSTALL = :
+>> + build_triplet = @build@
+>> + host_triplet = @host@
+>> +-noinst_PROGRAMS = mkdefs$(EXEEXT)
+>> + subdir = lib/gvpr
+>> + DIST_COMMON = $(noinst_HEADERS) $(pkginclude_HEADERS) \
+>> + 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
+>> +@@ -120,10 +119,6 @@ libgvpr_C_la_LIBADD =
+>> + am_libgvpr_C_la_OBJECTS = actions.lo compile.lo gvpr.lo gprstate.lo \
+>> + 	parse.lo queue.lo
+>> + libgvpr_C_la_OBJECTS = $(am_libgvpr_C_la_OBJECTS)
+>> +-PROGRAMS = $(noinst_PROGRAMS)
+>> +-am_mkdefs_OBJECTS = mkdefs.$(OBJEXT)
+>> +-mkdefs_OBJECTS = $(am_mkdefs_OBJECTS)
+>> +-mkdefs_LDADD = $(LDADD)
+>> + AM_V_P = $(am__v_P_@AM_V@)
+>> + am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
+>> + am__v_P_0 = false
+>> +@@ -158,10 +153,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
+>> + am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
+>> + am__v_CCLD_0 = @echo "  CCLD    " $@;
+>> + am__v_CCLD_1 = 
+>> +-SOURCES = $(libgvpr_la_SOURCES) $(libgvpr_C_la_SOURCES) \
+>> +-	$(mkdefs_SOURCES)
+>> +-DIST_SOURCES = $(libgvpr_la_SOURCES) $(libgvpr_C_la_SOURCES) \
+>> +-	$(mkdefs_SOURCES)
+>> ++SOURCES = $(libgvpr_la_SOURCES) $(libgvpr_C_la_SOURCES)
+>> ++DIST_SOURCES = $(libgvpr_la_SOURCES) $(libgvpr_C_la_SOURCES)
+>> + am__can_run_installinfo = \
+>> +   case $$AM_UPDATE_INFO_DIR in \
+>> +     n|no|NO) false;; \
+>> +@@ -568,8 +561,7 @@ libgvpr_la_LIBADD = $(libgvpr_C_la_LIBAD
+>> + 	$(MATH_LIBS)
+>> + 
+>> + libgvpr_la_DEPENDENCIES = $(libgvpr_C_la_DEPENDENCIES)
+>> +-mkdefs_SOURCES = mkdefs.c
+>> +-EXTRA_DIST = $(man_MANS) $(pdf_DATA) gprdata mkdefs.c gdefs.h trie.c gvprlib.vcproj
+>> ++EXTRA_DIST = $(man_MANS) $(pdf_DATA) gprdata gdefs.h trie.c gvprlib.vcproj
+>> + DISTCLEANFILES = $(pdf_DATA) gdefs.h mkdefs
+>> + all: all-am
+>> + 
+>> +@@ -657,18 +649,6 @@ libgvpr.la: $(libgvpr_la_OBJECTS) $(libg
+>> + libgvpr_C.la: $(libgvpr_C_la_OBJECTS) $(libgvpr_C_la_DEPENDENCIES) $(EXTRA_libgvpr_C_la_DEPENDENCIES) 
+>> + 	$(AM_V_CCLD)$(LINK)  $(libgvpr_C_la_OBJECTS) $(libgvpr_C_la_LIBADD) $(LIBS)
+>> + 
+>> +-clean-noinstPROGRAMS:
+>> +-	@list='$(noinst_PROGRAMS)'; test -n "$$list" || exit 0; \
+>> +-	echo " rm -f" $$list; \
+>> +-	rm -f $$list || exit $$?; \
+>> +-	test -n "$(EXEEXT)" || exit 0; \
+>> +-	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
+>> +-	echo " rm -f" $$list; \
+>> +-	rm -f $$list
+>> +-mkdefs$(EXEEXT): $(mkdefs_OBJECTS) $(mkdefs_DEPENDENCIES) $(EXTRA_mkdefs_DEPENDENCIES) 
+>> +-	@rm -f mkdefs$(EXEEXT)
+>> +-	$(AM_V_CCLD)$(LINK) $(mkdefs_OBJECTS) $(mkdefs_LDADD) $(LIBS)
+>> +-
+>> + mostlyclean-compile:
+>> + 	-rm -f *.$(OBJEXT)
+>> + 
+>> +Index: graphviz-2.38.0/lib/gvpr/Makefile.am
+>> +===================================================================
+>> +--- graphviz-2.38.0.orig/lib/gvpr/Makefile.am
+>> ++++ graphviz-2.38.0/lib/gvpr/Makefile.am
+>> +@@ -21,7 +21,6 @@ AM_CPPFLAGS = \
+>> + 	-DDFLT_GVPRPATH="\".$(PATH_SEPARATOR)$(pkgdatadir)/gvpr\""
+>> + 
+>> + pkginclude_HEADERS = gvpr.h
+>> +-noinst_PROGRAMS = mkdefs
+>> + noinst_HEADERS = actions.h compile.h gprstate.h parse.h queue.h trieFA.h trie.c
+>> + noinst_LTLIBRARIES = libgvpr_C.la
+>> + lib_LTLIBRARIES = libgvpr.la
+>> +@@ -50,11 +49,10 @@ libgvpr_la_LIBADD = $(libgvpr_C_la_LIBAD
+>> + 	$(MATH_LIBS)
+>> + libgvpr_la_DEPENDENCIES = $(libgvpr_C_la_DEPENDENCIES)
+>> + 
+>> +-mkdefs_SOURCES = mkdefs.c
+>> + 
+>> + gdefs.h: $(top_srcdir)/lib/gvpr/gprdata mkdefs
+>> + 	./mkdefs gdefs.h < $(top_srcdir)/lib/gvpr/gprdata
+>> + 
+>> +-EXTRA_DIST = $(man_MANS) $(pdf_DATA) gprdata mkdefs.c gdefs.h trie.c gvprlib.vcproj
+>> ++EXTRA_DIST = $(man_MANS) $(pdf_DATA) gprdata gdefs.h trie.c gvprlib.vcproj
+>> + 
+>> + DISTCLEANFILES = $(pdf_DATA) gdefs.h mkdefs
+>> diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/linear_angle.gv b/meta-oe/recipes-graphics/graphviz/graphviz/linear_angle.gv
+>> new file mode 100644
+>> index 0000000..827bde5
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-graphics/graphviz/graphviz/linear_angle.gv
+>> @@ -0,0 +1,101 @@
+>> +digraph G { bgcolor="purple:pink" style="filled"
+>> +  subgraph cluster1 {fillcolor="blue:green" style="filled"
+>> +		node [shape=circle fillcolor="gold:brown" style="radial" gradientangle=180]
+>> +		a0 [label=<
+>> + <TABLE border="10" cellspacing="10" cellpadding="10" style="rounded" bgcolor="yellow:violet" gradientangle="315">
+>> +<TR><TD border="3"  bgcolor="yellow" gradientangle="315">00</TD>
+>> +<TD border="3"  bgcolor="yellow:green" gradientangle="315">01</TD>
+>> +<TD border="3"  bgcolor="green" gradientangle="315">02</TD>
+>> +<TD border="3"  bgcolor="green:blue" gradientangle="315">03</TD>
+>> +<TD border="3"  bgcolor="blue" gradientangle="315">04</TD>
+>> +<TD border="3"  bgcolor="blue:purple" gradientangle="315">05</TD>
+>> +<TD border="3"  bgcolor="purple" gradientangle="315">06</TD>
+>> +<TD border="3"  bgcolor="purple:violet" gradientangle="315">07</TD>
+>> +<TD border="3"  bgcolor="violet" gradientangle="315">08</TD></TR>
+>> +  
+>> +<TR><TD border="3"  bgcolor="yellow:gold"  gradientangle="315">10</TD>
+>> +<TD border="3"  bgcolor="yellow:green"  gradientangle="315">11</TD>
+>> +<TD border="3"  bgcolor="yellow:green"  gradientangle="315">12</TD>
+>> +<TD border="3"  bgcolor="yellow:blue"  gradientangle="315">13</TD>
+>> +<TD border="3"  bgcolor="yellow:blue"  gradientangle="315">14</TD>
+>> +<TD border="3"  bgcolor="yellow:purple"  gradientangle="315">15</TD>
+>> +<TD border="3"  bgcolor="yellow:purple"  gradientangle="315">16</TD>
+>> +<TD border="3"  bgcolor="yellow:violet"  gradientangle="315">17</TD>
+>> +<TD border="3"  bgcolor="yellow:violet"  gradientangle="315">18</TD></TR>
+>> +  
+>> +<TR><TD border="3"  bgcolor="gold"  gradientangle="315">20</TD>
+>> +<TD border="3"  bgcolor="gold:green"  gradientangle="315">21</TD>
+>> +<TD border="3"  bgcolor="gold:green"  gradientangle="315">22</TD>
+>> +<TD border="3"  bgcolor="gold:blue"  gradientangle="315">23</TD>
+>> +<TD border="3"  bgcolor="gold:blue"  gradientangle="315">24</TD>
+>> +<TD border="3"  bgcolor="gold:purple"  gradientangle="315">25</TD>
+>> +<TD border="3"  bgcolor="gold:purple"  gradientangle="315">26</TD>
+>> +<TD border="3"  bgcolor="gold:violet"  gradientangle="315">27</TD>
+>> +<TD border="3"  bgcolor="gold:violet"  gradientangle="315">28</TD></TR>
+>> +  
+>> +<TR><TD border="3"  bgcolor="gold:orange"  gradientangle="315">30</TD>
+>> +<TD border="3"  bgcolor="orange:green"  gradientangle="315">31</TD>
+>> +<TD border="3"  bgcolor="orange:green"  gradientangle="315">32</TD>
+>> +<TD border="3"  bgcolor="orange:blue"  gradientangle="315">33</TD>
+>> +<TD border="3"  bgcolor="orange:blue"  gradientangle="315">34</TD>
+>> +<TD border="3"  bgcolor="orange:purple"  gradientangle="315">35</TD>
+>> +<TD border="3"  bgcolor="orange:purple"  gradientangle="315">36</TD>
+>> +<TD border="3"  bgcolor="orange:violet"  gradientangle="315">37</TD>
+>> +<TD border="3"  bgcolor="orange:violet"  gradientangle="315">38</TD></TR>
+>> +  
+>> +<TR><TD border="3"  bgcolor="orange"  gradientangle="315">40</TD>
+>> +<TD border="3"  bgcolor="orange:green"  gradientangle="315">41</TD>
+>> +<TD border="3"  bgcolor="orange:green"  gradientangle="315">42</TD>
+>> +<TD border="3"  bgcolor="orange:blue"  gradientangle="315">43</TD>
+>> +<TD border="3"  bgcolor="orange:blue"  gradientangle="315">44</TD>
+>> +<TD border="3"  bgcolor="orange:purple"  gradientangle="315">45</TD>
+>> +<TD border="3"  bgcolor="orange:purple"  gradientangle="315">46</TD>
+>> +<TD border="3"  bgcolor="orange:violet"  gradientangle="315">47</TD>
+>> +<TD border="3"  bgcolor="orange:violet"  gradientangle="315">48</TD></TR>
+>> +  
+>> +<TR><TD border="3"  bgcolor="orange:red"  gradientangle="315">50</TD>
+>> +<TD border="3"  bgcolor="red:green"  gradientangle="315">51</TD>
+>> +<TD border="3"  bgcolor="red:green"  gradientangle="315">52</TD>
+>> +<TD border="3"  bgcolor="red:blue"  gradientangle="315">53</TD>
+>> +<TD border="3"  bgcolor="red:blue"  gradientangle="315">54</TD>
+>> +<TD border="3"  bgcolor="red:purple"  gradientangle="315">55</TD>
+>> +<TD border="3"  bgcolor="red:purple"  gradientangle="315">56</TD>
+>> +<TD border="3"  bgcolor="red:violet"  gradientangle="315">57</TD>
+>> +<TD border="3"  bgcolor="red:violet"  gradientangle="315">58</TD></TR>
+>> +  
+>> +<TR><TD border="3"  bgcolor="red"  gradientangle="315">60</TD>
+>> +<TD border="3"  bgcolor="red:green"  gradientangle="315">61</TD>
+>> +<TD border="3"  bgcolor="red:green"  gradientangle="315">62</TD>
+>> +<TD border="3"  bgcolor="red:blue"  gradientangle="315">63</TD>
+>> +<TD border="3"  bgcolor="red:blue"  gradientangle="315">64</TD>
+>> +<TD border="3"  bgcolor="red:purple"  gradientangle="315">65</TD>
+>> +<TD border="3"  bgcolor="red:purple"  gradientangle="315">66</TD>
+>> +<TD border="3"  bgcolor="red:violet"  gradientangle="315">67</TD>
+>> +<TD border="3"  bgcolor="red:violet"  gradientangle="315">68</TD></TR>
+>> +  
+>> +<TR><TD border="3"  bgcolor="red:brown"  gradientangle="315">70</TD>
+>> +<TD border="3"  bgcolor="brown:green"  gradientangle="315">71</TD>
+>> +<TD border="3"  bgcolor="brown:green"  gradientangle="315">72</TD>
+>> +<TD border="3"  bgcolor="brown:blue"  gradientangle="315">73</TD>
+>> +<TD border="3"  bgcolor="brown:blue"  gradientangle="315">74</TD>
+>> +<TD border="3"  bgcolor="brown:purple"  gradientangle="315">75</TD>
+>> +<TD border="3"  bgcolor="brown:purple"  gradientangle="315">76</TD>
+>> +<TD border="3"  bgcolor="brown:violet"  gradientangle="315">77</TD>
+>> +<TD border="3"  bgcolor="brown:violet"  gradientangle="315">78</TD></TR>
+>> +  
+>> +<TR><TD border="3"  bgcolor="brown"  gradientangle="315">80</TD>
+>> +<TD border="3"  bgcolor="brown:green"  gradientangle="315">81</TD>
+>> +<TD border="3"  bgcolor="brown:green"  gradientangle="315">82</TD>
+>> +<TD border="3"  bgcolor="brown:blue"  gradientangle="315">83</TD>
+>> +<TD border="3"  bgcolor="brown:blue"  gradientangle="315">84</TD>
+>> +<TD border="3"  bgcolor="brown:purple"  gradientangle="315">85</TD>
+>> +<TD border="3"  bgcolor="brown:purple"  gradientangle="315">86</TD>
+>> +<TD border="3"  bgcolor="brown:violet"  gradientangle="315">87</TD>
+>> +<TD border="3"  bgcolor="brown:violet"  gradientangle="315">88</TD></TR>
+>> +  
+>> +</TABLE>>];
+>> +
+>> +}
+>> +
+>> +} 
+>> +
+>> diff --git a/meta-oe/recipes-graphics/graphviz/graphviz/simple.gv b/meta-oe/recipes-graphics/graphviz/graphviz/simple.gv
+>> new file mode 100644
+>> index 0000000..1b140f9
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-graphics/graphviz/graphviz/simple.gv
+>> @@ -0,0 +1 @@
+>> +    graph { a -- b; b -- c; a -- c; d -- c; e -- c; e -- a; } 
+>> diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_2.38.0.bb b/meta-oe/recipes-graphics/graphviz/graphviz_2.38.0.bb
+>> new file mode 100644
+>> index 0000000..61ffaef
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-graphics/graphviz/graphviz_2.38.0.bb
+>> @@ -0,0 +1,131 @@
+>> +SUMMARY = "Graphviz - Graph Visualization Software."
+>> +DESCRIPTION = "Graphviz is open source graph visualization software. Graph visualization is a way of representing structural information as diagrams of abstract graphs and networks. It has important applications in networking, bioinformatics,  software engineering, database and web design, machine learning, and in visual interfaces for other technical domains."
+>> +HOMEPAGE = "http://www.graphviz.org/"
+>> +SECTION = "graphics"
+>> +LICENSE = "EPL-1.0"
+>> +LIC_FILES_CHKSUM = "file://COPYING;beginline=1;endline=2;md5=737cf7b11c0759e6d3b0d6cb08b7c4f8"
+>> +
+>> +DEPENDS += "graphviz-native bison flex libtool zlib chrpath-replacement-native"
+>> +DEPENDS_class-native = ""
+>> +
+>> +SRC_URI_BASE = "${DEBIAN_MIRROR}/main/g/${BPN}/${BPN}_${PV}.orig.tar.gz;name=archive \
+>> +           ${DEBIAN_MIRROR}/main/g/${BPN}/${BPN}_${PV}-7.debian.tar.xz;name=patch \
+>> +"
+>> +
+>> +SRC_URI = "${SRC_URI_BASE} \
+>> +        file://graphviz_no_mkdef_build.patch \
+>> +        file://simple.gv \
+>> +        file://linear_angle.gv \
+>> +        "
+>> +
+>> +SRC_URI_class-native = "${SRC_URI_BASE}"
+>> +
+>> +SRC_URI[archive.md5sum] = "5b6a829b2ac94efcd5fa3c223ed6d3ae"
+>> +SRC_URI[archive.sha256sum] = "81aa238d9d4a010afa73a9d2a704fc3221c731e1e06577c2ab3496bdef67859e"
+>> +SRC_URI[patch.md5sum] = "5cbcff92169d682471cdfdf58d215098"
+>> +SRC_URI[patch.sha256sum] = "312ab8215fbe1800664675cfc284aecfeff3ce699407523b5bdefee64cf1a53c"
+>> +
+>> +inherit autotools-brokensep pkgconfig
+>> +
+>> +LDFLAGS += "-Wunused-but-set-variable -Wmaybe-uninitialized -Wunused-variable"
+>> +
+>> +PACKAGECONFIG ?= "ghost rsvg cairo swig tcl gtk lua sfdp png libgd \
+>> +                ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'X11', '', d)} \
+>> +                ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'glut', '', d)}"
+>> +
+>> +PACKAGECONFIG_class-native ??= ""
+>> +
+>> +PACKAGECONFIG[sfdp] = "--enable-sfdp=yes, --disable-sfdp, ,"
+>> +PACKAGECONFIG[swig] = "--enable-swig=yes, --disable-swig, swig,"
+>> +PACKAGECONFIG[lua] = "--enable-lua=yes, --disable-lua, lua,"
+>> +PACKAGECONFIG[cairo] = "--with-pangocairo=yes, --with-pangocairo=no, cairo,"
+>> +PACKAGECONFIG[tcl] = "--enable-tcl=yes --with-tclsh=tclsh, --disable-tcl, tcl, tcl"
+>> +PACKAGECONFIG[glut] = "--with-glut=yes, --without-glut, mesa-glut,"
+>> +PACKAGECONFIG[gtk] = "--with-gtk=yes, --without-gtk, gtk+,"
+>> +PACKAGECONFIG[expect] = "--with-expect=yes, --without-expect, expect,"
+>> +PACKAGECONFIG[ghost] = "--with-ghostscript=yes, --without-ghostscript, ghostscript,"
+>> +PACKAGECONFIG[fontconfig] = "--with-fontconfig=yes, --without-fontconfig, fontconfig,"
+>> +PACKAGECONFIG[freetype] = "--with-freetype2=yes, --with-freetype2=no, freetype,"
+>> +PACKAGECONFIG[poppler] = "--with-poppler=yes, --with-poppler=no, poppler,"
+>> +PACKAGECONFIG[guile] = "--enable-guile, --disable-guile, guile,"
+>> +PACKAGECONFIG[php] = "--enable-php, --disable-php , php,"
+>> +PACKAGECONFIG[perl] = "--enable-perl, --disable-perl, perl,"
+>> +PACKAGECONFIG[python] = "--enable-python, --disable-python, python ,"
+>> +PACKAGECONFIG[ruby] = "--enable-ruby, --disable-ruby, ruby, "
+>> +PACKAGECONFIG[qt] = "--with-qt=yes, --with-qt=no, qte,"
+>> +PACKAGECONFIG[glade] = "--with-glade=yes, --with-glade=no, glade3,"
+>> +PACKAGECONFIG[libgd] = "--with-libgd=yes, --with-libgd=no, libglade,"
+>> +PACKAGECONFIG[png] = "--with-libpng=yes, --with-libpng=no, libpng, libpng"
+>> +PACKAGECONFIG[rsvg] = "--with-rsvg=yes, --with-rsvg=no, librsvg, librsvg"
+>> +PACKAGECONFIG[pixbuf] = "--with-gdk=yes --with-gdk-pixbuf=yes, --with-gdk=no --with-gdk-pixbuf=no, gdk-pixbuf,"
+>> +PACKAGECONFIG[X11] = "--with-x, --without-x, libx11 virtual/libx11 , libxaw7"
+>> +
+>> +EXTRA_OECONF += "--enable-ltdl"
+>> +
+>> +EXTRA_OECONF_class-native += " \
+>> +    --enable-sharp=no \
+>> +    --enable-java=no \
+>> +    --enable-ocaml=no \
+>> +    --enable-r=no \
+>> +    --with-devil=no \
+>> +    --with-lasi=no \
+>> +    --with-gtkgl=no \
+>> +    --with-gtkglext=no \
+>> +    --with-gts=no \
+>> +    --with-ann=no \
+>> +    --with-ortho=no \
+>> +    --with-digcola=no \
+>> +    --with-smyrna=no \
+>> +    --with-ipsepcola=no \
+>> +     "
+>> +EXTRANATIVEPATH += "chrpath-native"
+>> +
+>> +debian_do_patch() {
+>> +    cd ${S}
+>> +    while read line; do patch -p1 < ${WORKDIR}/debian/patches/$line; done < ${WORKDIR}/debian/patches/series
+>> +}
+>> +
+>> +python do_patch() {
+>> +    bb.build.exec_func('debian_do_patch', d)
+>> +    bb.build.exec_func('patch_do_patch', d)
+>> +}
+>> +
+>> +do_configure_prepend () {
+>> +    # copy mkdefs from the native graphviz build
+>> +    if [ "${PN}" != "graphviz-native" ]; then
+>> +        cp ${STAGING_BINDIR_NATIVE}/graphviz-${PV}/mkdefs ${S}/lib/gvpr/.
+>> +    fi
+>> +    ./autogen.sh NOCONFIG
+>> +}
+>> +
+>> +do_compile_class-native () {
+>> +    cd lib/gvpr
+>> +    oe_runmake mkdefs
+>> +}
+>> +
+>> +do_install_append () {
+>> +    if [ "${PN}" != "graphviz-native" ]; then
+>> +        install  -d ${D}${datadir}/graphviz
+>> +        install  ${WORKDIR}/*.gv ${D}${datadir}/graphviz/
+>> +    fi
+>> +}
+>> +
+>> +do_install_class-native () {
+>> +    install -d ${D}${bindir}/graphviz-${PV}
+>> +    install -m 755 ${S}/lib/gvpr/mkdefs ${D}${bindir}/graphviz-${PV}/
+>> +}
+>> +
+>> +pkg_postinst_${PN} () {
+>> +if test "x$D" != "x"; then
+>> +    exit 1
+>> +else
+>> +    ${bindr}/dot -c
+>> +fi
+>> +}
+>> +
+>> +INSANE_SKIP_${PN} += "dev-so"
+>> +
+>> +RDEPENDS_${PN} = "libxml2 libcroco"
+>> +RDEPENDS_class-native = ""
+>> +
+>> +BBCLASSEXTEND = "native"
+>> -- 
+>> 2.3.5
+>>
+>> -- 
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
 
