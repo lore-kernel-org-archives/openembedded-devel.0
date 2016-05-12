@@ -1,55 +1,45 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 5FCD36FF73
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 May 2016 23:19:45 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id r187so9053549pfr.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 May 2016 16:19:46 -0700 (PDT)
+Return-Path: <jefro.net@gmail.com>
+Received: from mail-lf0-f45.google.com (mail-lf0-f45.google.com
+	[209.85.215.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 2ED06601D3;
+	Thu, 12 May 2016 23:32:21 +0000 (UTC)
+Received: by mail-lf0-f45.google.com with SMTP id u64so80210941lff.3;
+	Thu, 12 May 2016 16:32:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:subject:from:in-reply-to:date:message-id:references:to; 
-	bh=14VmjwCXqdeCZaemKlY3XEw5uGeXkRhTt2WXgTa50ME=;
-	b=z9yUJOfJJOuT+HOMqMqxrpZJMQR+9TS1l4fzaUWPog+gQuSob6L5NHcOPQ9bpe8IK/
-	ZXnjSLpiQsa4ryey6chuZE0pmBlv2Ca4v81mzbtAzG/n1uVd+Ml38GUjEGJF3JbWcPq7
-	VnZsLmXP67EMo85fv+59GA/yUy9nI1Uw03YsQ6ttrYKBGiyUTqKjTlz+kt0XxH9GNGNw
-	BHVBcdGLlb9sGXkf67a1g8R39qCfa3DXuayQALYoB4OJg8PbrEs7EIBTWPPdXl5Jddon
-	mrzLJIkIGF6vFpmQEw7Q0FKbyx05sJETppN5iCNJ5Fczzoviu2LLDKR3MvC6KChcZnUH
-	/vVw==
+	h=mime-version:sender:from:date:message-id:subject:to;
+	bh=hbSOPW3BogUYq3Q7svvrZR0dMQvcExQdvo31ACvoYMs=;
+	b=x3Dw5RCn6u/ORGj5xRwjWx0XS6h/If+ljoEOAT4zXDI0FuBMYKkmI1YtskQ9iJUfmV
+	Wkzo9xJXIDrAeJdr2xYYlNBx2Cqh9IXQAoeW1QHOrYYR0VOVbEPEgFKNNKbHQAGaw89Z
+	qG8tlbwrZgTxn1CD2pENX4eHZH9FoVQidTyHM4peWqbbYc66voqscebANiAQQdvHm/iK
+	B2HGqVoMoviAzOIIENhMyAor5ZbXxuJzlFF/1rYYZpK9fyOl5o3D0mQn0gq4W5iOmc6/
+	jWlrweETTec2wl9h6muHx1N7cjTaM4/0xZCN9pcc0kCtUVofcS8SjDv9bQgcFpkNZjl6
+	w+eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date
-	:message-id:references:to;
-	bh=14VmjwCXqdeCZaemKlY3XEw5uGeXkRhTt2WXgTa50ME=;
-	b=UtZU1QuLsGfUATTOP3PAc3kn6zKWUzqyi8lUSVKBHEG/Xu3ee6jpLSolWYO9SHSLc/
-	PPAYLZGGZNHLwVQvGojq4pelrfNvGL96+7kMUHjMargB4rPpNLkXAu0w73wliUQGj43N
-	6GwJGzk4HJC8Da4PB9XcHOl2+O0GWEDUuE0BwN0UTCAy3FNNv1Xp7lxLe5XZ7dyiWv8l
-	RzYOXNG3ZNNmkgg6h/MGdibLcD9QzU/5n2nqUok90WkxCe6vyHhLBA7oqVcX7FXwHRvw
-	+O+9YdiIgijaG020Sqa6PEZG35JiqLGx5tPz938MgnnyoLBKz9iTXonfpZz2TY8Mqxwi
-	bpBg==
-X-Gm-Message-State: AOPr4FUmWoavSJcai1HkJwMMzOPomTIrgTNCI6nQd8BZO8b7Y3/SL8L+GZYbT8gXmUM1uA==
-X-Received: by 10.98.101.199 with SMTP id z190mr17857954pfb.1.1463095186316;
-	Thu, 12 May 2016 16:19:46 -0700 (PDT)
-Received: from ?IPv6:2601:646:8800:5a9a:ecfa:889b:cbe8:770c?
-	([2601:646:8800:5a9a:ecfa:889b:cbe8:770c])
-	by smtp.gmail.com with ESMTPSA id
-	g70sm22380836pfb.7.2016.05.12.16.19.45
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 12 May 2016 16:19:45 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
-X-Pgp-Agent: GPGMail 2.6b2
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CA+chaQe2qm1KrCbYrKJGW006osec=3gBn_J4=xm_0JBB96+b5g@mail.gmail.com>
-Date: Thu, 12 May 2016 16:19:36 -0700
-Message-Id: <49EDAFCE-4E7C-4F3F-965D-2928E2325C21@gmail.com>
-References: <1463081158-10495-1-git-send-email-neenareddy.busireddy@nxp.com>
-	<1463081158-10495-2-git-send-email-neenareddy.busireddy@nxp.com>
-	<7DEAD0AF-B666-40C9-96C6-23D03A40A679@gmail.com>
-	<CA+chaQe2qm1KrCbYrKJGW006osec=3gBn_J4=xm_0JBB96+b5g@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.3124)
-Subject: Re: [meta-oe][PATCH v2 2/2] freeglut: Add a recipe freeglut to replace mesa-glut
+	h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
+	:to; bh=hbSOPW3BogUYq3Q7svvrZR0dMQvcExQdvo31ACvoYMs=;
+	b=UNS+kyJflQ/0tUOulGraFU8AA8UrdmOnX4wigriAfd1ekOy5PtRosUqNqUe0edn2V0
+	katoODJhA5YMYJjPyfGpuFOjmQgAMS1Q0OJPryFahKQ1OVVk1iPCBXzUWX6PY1A1pXek
+	Zaon4NsrMmgdWgo0xbstGTReiuCA8JEiJFgK1yCrphEKLS41PHxXjId5uqhVhXXf13mH
+	WA8n2TOzbyNy2VBqFEpUIO63RJG0S1DcGXKJ82+N3XpagsgSHVnSHHS4hOrMAB3qE3WY
+	eur4GZZcN6ns2sj5cE6YANLO5YMd/Hvvd2y0dmEesUzF1HNDpa77Ewxu+UMZbEuuqDp3
+	tzrA==
+X-Gm-Message-State: AOPr4FU6w+0HiNN7oAmdlwTcZ+wvG3r4I4PkmpfY3Mf0Cp6zX8+WhT2i9+UA2LOZSfLD0FkoSsleIqI+bGjj0A==
+X-Received: by 10.25.17.212 with SMTP id 81mr5507402lfr.38.1463095940637; Thu,
+	12 May 2016 16:32:20 -0700 (PDT)
+MIME-Version: 1.0
+Sender: jefro.net@gmail.com
+Received: by 10.112.139.200 with HTTP; Thu, 12 May 2016 16:32:01 -0700 (PDT)
+From: Jeff Osier-Mixon <jefro@jefro.net>
+Date: Thu, 12 May 2016 16:32:01 -0700
+X-Google-Sender-Auth: iyvrgr56baqyxeTKqnStdlj25pA
+Message-ID: <CA+YB3rZCfCiLQEg5Br78ZQ=6QJQiXnh_pGTr0-XFQZFkwniYLA@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	"openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>, 
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Please help edit OEDAM minutes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,122 +52,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 May 2016 23:19:47 -0000
-X-Groupsio-MsgNum: 61485
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_17EA7668-FD53-476A-81B1-0F82BA6ED63B";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Thu, 12 May 2016 23:32:22 -0000
+Content-Type: text/plain; charset=UTF-8
 
---Apple-Mail=_17EA7668-FD53-476A-81B1-0F82BA6ED63B
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
+I admit defeat. I have been "trying to get to" the OEDAM minutes for a
+month and I am clearly not getting to it, so I am now getting out of
+the way. We are crowdsourcing these minutes, because collaborative
+effort is what we do best.
 
+My raw notes from the meeting are here. If you were present, please
+help edit, fill in gaps, etc.
 
-> On May 12, 2016, at 3:28 PM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
->=20
-> why?
->=20
-
-As a matter of general practice, so if you include some classes whose =
-DEPENDS may get overwritten
-however I see in this case cmake is using DEPENDS_prepend so we should =
-be safe.
-
-> On Fri, May 13, 2016 at 12:10 AM, Khem Raj <raj.khem@gmail.com> wrote:
->=20
->>=20
->>> On May 12, 2016, at 12:25 PM, Neena Busireddy <
->> neenareddy.busireddy@nxp.com> wrote:
->>>=20
->>> FreeGLUT is a free-software/open-source alternative to the OpenGL
->>> Utility Toolkit (GLUT) library.
->>> More information about this library can be found in
->>> http://freeglut.sourceforge.net/
->>>=20
->>> Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
->>> ---
->>> meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb | 17
->> +++++++++++++++++
->>> 1 file changed, 17 insertions(+)
->>> create mode 100644 =
-meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb
->>>=20
->>> diff --git a/meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb
->> b/meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb
->>> new file mode 100644
->>> index 0000000..a98b289
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb
->>> @@ -0,0 +1,17 @@
->>> +DESCRIPTION =3D "FreeGLUT is a free-software/open-source =
-alternative to
->> the OpenGL \
->>> +               Utility Toolkit (GLUT) library"
->>> +LICENSE =3D "MIT"
->>> +LIC_FILES_CHKSUM =3D =
-"file://COPYING;md5=3D89c0b58a3e01ce3d8254c9f59e78adfb"
->>> +
->>> +SRC_URI =3D "
->> =
-https://sourceforge.net/projects/${BPN}/files/${BPN}/${PV}/${BPN}-${PV}.ta=
-r.gz
->> "
->>> +SRC_URI[md5sum] =3D "90c3ca4dd9d51cf32276bc5344ec9754"
->>> +SRC_URI[sha256sum] =3D
->> "2a43be8515b01ea82bcfa17d29ae0d40bd128342f0930cd1f375f1ff999f76a2"
->>> +
->>> +inherit cmake
->>> +
->>> +# depends on virtual/libx11
->>> +REQUIRED_DISTRO_FEATURES =3D "x11"
->>> +
->>> +PROVIDES +=3D "mesa-glut"
->>> +
->>> +DEPENDS =3D "virtual/libx11 libxmu libxi virtual/libgl libglu =
-libxrandr=E2=80=9D
->>=20
->> should this be +=3D
->>=20
->>> --
->>> 1.9.1
->>>=20
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>=20
->>=20
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>=20
->>=20
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+https://docs.google.com/document/d/1rPvy-QQkP0Z4a0PGOBkljfzGGzFVWREDz18vZzWyL9s/edit?usp=sharing
 
 
---Apple-Mail=_17EA7668-FD53-476A-81B1-0F82BA6ED63B
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
+-- 
+Jeff Osier-Mixon - Open Source Community Engineer, Intel Corporation
 
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlc1D5AACgkQuwUzVZGdMxRDQACZAWPnHOAS07/9SyuJ+ZxQDyOP
-f7QAoI0sQyamNd+TNGrmWL7EKkmwGQkj
-=zeWZ
------END PGP SIGNATURE-----
-
---Apple-Mail=_17EA7668-FD53-476A-81B1-0F82BA6ED63B--
