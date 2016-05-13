@@ -1,51 +1,30 @@
-Return-Path: <jefro.net@gmail.com>
-Received: from mail-lb0-f178.google.com (mail-lb0-f178.google.com
-	[209.85.217.178])
-	by mail.openembedded.org (Postfix) with ESMTP id EE37960745;
-	Fri, 13 May 2016 17:51:24 +0000 (UTC)
-Received: by mail-lb0-f178.google.com with SMTP id ww9so20275075lbc.2;
-	Fri, 13 May 2016 10:51:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=cacnCSHAfr8uq5oVmjmtrABoG7ReADQJnsmB/JXm2Bc=;
-	b=T+fo/vkcvcMfC1aTWmyyeI6tdcPwPW9Lk1tHpx1TRsUTTPWlrzia+NBhuQ47G/qJbU
-	kLd2kNBLDNe7jqSssdcscakOu6leZGiZr6HuJxiFDZOdknCBjQbn/ffsLPPcp3+otQYe
-	bKTCAG9knR3yhG7mn5ZEv1f/BhMyLc84v1+Pe6LhzbIr+YTgSGvfOdPVL26Q2QxguHb2
-	5/NHNUQr5eHWQNxbAGfj2VebRoxUApwu8rEpRLenXVBfbaX1uwFZ9wdvG4sJoNZcJp3T
-	nyzQlXqG7rsNYYXJtkfjjRVL4NkQ4HD2HaWNP4v360I7zbjuLSb8jHsRTvTDiZS6ON0j
-	qNMw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to:cc;
-	bh=cacnCSHAfr8uq5oVmjmtrABoG7ReADQJnsmB/JXm2Bc=;
-	b=H08rC+vmIlqbrxy5/pp40qt9PMDdOxrMOCG3I3rTp2SC4DeWDAPnjwn6k2w3U+t0Sc
-	XxX/LE1w6XSBqsXMuElqFPHxqqhfxic/ai0Q6YqUweFyoki4ZGmjwav/r+d8IvS+PtoK
-	6zUpbHwdM60Sb28ycuIYmLZKx5y2qHGmwU6jLCEJ0FD0KRl5cD0dxKbPFz0L71XRO/73
-	C/S2XQibLJk6JkpPAItZvbuW1ut/B9vyq3ZSi7G6KoFVichY5nVkH3iHsCwH9CmLUMvc
-	rkjW6qKS855aTR01bU399DhjZLv1E2RbwVSB9cVPsT3N5MEyFOSekpp0cxEQPoxkFI3N
-	DUWA==
-X-Gm-Message-State: AOPr4FXe2MkDGybKA6fjlN0nUHtk8yhgq24UrTC6lqWgDRrXgM4k2ukm6W6CY23meUqbanymAG2FtQN11LSqqA==
-X-Received: by 10.112.12.65 with SMTP id w1mr7110579lbb.76.1463161883997; Fri,
-	13 May 2016 10:51:23 -0700 (PDT)
-MIME-Version: 1.0
-Sender: jefro.net@gmail.com
-Received: by 10.112.139.200 with HTTP; Fri, 13 May 2016 10:51:04 -0700 (PDT)
-In-Reply-To: <20160513172401.GC30983@linux-fl6i>
-References: <CA+YB3rZCfCiLQEg5Br78ZQ=6QJQiXnh_pGTr0-XFQZFkwniYLA@mail.gmail.com>
-	<20160513135707.GA30983@linux-fl6i> <20160513172401.GC30983@linux-fl6i>
-From: Jeff Osier-Mixon <jefro@jefro.net>
-Date: Fri, 13 May 2016 10:51:04 -0700
-X-Google-Sender-Auth: JhtrdDEcbLK2O317rJwwvmyjO5I
-Message-ID: <CA+YB3ra6KH+7OYhUjHq8OKRHt-HQ+sRyq8Mp_q4+OEi5NuGiWw@mail.gmail.com>
-To: Trevor Woerner <twoerner@gmail.com>
-Cc: "openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Please help edit OEDAM minutes
+Return-Path: <denis@denix.org>
+Received: from vms173009pub.verizon.net (vms173009pub.verizon.net
+	[206.46.173.9])
+	by mail.openembedded.org (Postfix) with ESMTP id CE0A960721
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 May 2016 18:25:27 +0000 (UTC)
+Received: from vz-proxy-l001.mx.aol.com ([64.236.82.153])
+	by vms173009.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014)) with ESMTPA id <0O74000VGOHQYSA0@vms173009.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	13 May 2016 13:25:12 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=FJ1kTJ0/xm5uTekQe8vMdQ==:117
+	a=yrkiwgmsf1kA:10 a=alK4_DS-AAAA:8	a=pGLkceISAAAA:8 a=sozttTNsAAAA:8
+	a=mVG6GTcMzoc8hLaSjAMA:9
+Received: by 100.15.86.14 with SMTP id 2797e349; Fri, 13 May 2016 18:25:12 GMT
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id AD742161FF8;	Fri,
+	13 May 2016 14:25:01 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 13 May 2016 14:24:54 -0400
+Message-id: <1463163894-23103-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.2.0
+Cc: Otavio Salvador <otavio@ossystems.com.br>, Denys Dmytriyenko <denys@ti.com>
+Subject: [krogoth][PATCH] opencv: Fix metapkg dependencies for opencv-java and opencv-locales
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,38 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2016 17:51:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 13 May 2016 18:25:29 -0000
 
-Fantastic, thanks Trevor!
+From: Otavio Salvador <otavio@ossystems.com.br>
 
-On Fri, May 13, 2016 at 10:24 AM, Trevor Woerner <twoerner@gmail.com> wrote:
-> On Fri 2016-05-13 @ 09:57:07 AM, Trevor Woerner wrote:
->> On Thu 2016-05-12 @ 04:32:01 PM, Jeff Osier-Mixon wrote:
->> > I admit defeat. I have been "trying to get to" the OEDAM minutes for a
->> > month and I am clearly not getting to it, so I am now getting out of
->> > the way. We are crowdsourcing these minutes, because collaborative
->> > effort is what we do best.
->> >
->> > My raw notes from the meeting are here. If you were present, please
->> > help edit, fill in gaps, etc.
->> >
->> > https://docs.google.com/document/d/1rPvy-QQkP0Z4a0PGOBkljfzGGzFVWREDz18vZzWyL9s/edit?usp=sharing
->>
->> Ok, I'll take a stab at some formatting and stuff.
->
-> I've reformatted the notes (hope you like/prefer it?). Also, any place where
-> comments were recorded and attributed to me I tried to expand them to full
-> sentences and add the things I remember saying :-)
->
-> If everyone took 30 minutes to check/expand on anything attributed to them
-> that'd be great.
->
-> Best regards,
->         Trevor
+The opencv-java is not always generated so we ought to include it,
+only if it is available. The opencv-locales is not available and ought
+to be skipped.
 
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+ meta-oe/recipes-support/opencv/opencv_3.1.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-
+diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+index c1f9802..789512f 100644
+--- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
++++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+@@ -79,7 +79,8 @@ export ANT_DIR="${STAGING_DIR_NATIVE}/usr/share/ant/"
+ 
+ TARGET_CC_ARCH += "-I${S}/include "
+ 
+-PACKAGES += "${PN}-java-dbg ${PN}-java ${PN}-samples-dbg ${PN}-samples ${PN}-apps python-opencv"
++PACKAGES += "${PN}-samples-dbg ${PN}-samples ${PN}-apps python-opencv \
++             ${@bb.utils.contains('PACKAGECONFIG', 'oracle-java', '${PN}-java-dbg ${PN}-java', '', d)}"
+ 
+ python populate_packages_prepend () {
+     cv_libdir = d.expand('${libdir}')
+@@ -104,7 +105,7 @@ python populate_packages_prepend () {
+     blacklist = [ metapkg ]
+     metapkg_rdepends = [ ]
+     for pkg in packages[1:]:
+-        if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-doc') :
++        if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-doc') and not pkg.endswith('-locale'):
+             metapkg_rdepends.append(pkg)
+     bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends), d)
+ 
 -- 
-Jeff Osier-Mixon - Open Source Community Engineer, Intel Corporation
+2.2.0
+
 
