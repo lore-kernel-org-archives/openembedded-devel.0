@@ -1,24 +1,44 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id F25366E681
+Return-Path: <jussi.kukkonen@intel.com>
+Received: from mail-oi0-f46.google.com (mail-oi0-f46.google.com
+	[209.85.218.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 2092570179
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 May 2016 03:37:41 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u4D3bgkv010843
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Fri, 13 May 2016 07:15:53 +0000 (UTC)
+Received: by mail-oi0-f46.google.com with SMTP id v145so157337582oie.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 May 2016 20:37:42 -0700
-Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Thu, 12 May 2016 20:37:41 -0700
-From: Robert Yang <liezhi.yang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 12 May 2016 20:37:41 -0700
-Message-ID: <1463110661-40764-1-git-send-email-liezhi.yang@windriver.com>
-X-Mailer: git-send-email 2.8.0
+	Fri, 13 May 2016 00:15:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to:cc;
+	bh=rN58zt7lT5hmiSTx53yp1GrND/Cm/4r+2V+sX5ty6Po=;
+	b=dkDWbWYGuFUAijI+WEFbqOjJ8PpQyv00Ohhh9xVmiEfskMJI4GQXmwgcFWsf+tjk6s
+	qepN2uNSC4KdZdhRih3iS3KcCAwD2p3Q77QaThV7/+2l68u8SKSwNFvY1JpmXdeq/br5
+	ILLzst9ohR0IkkBiqOJcZm4lnlkIFlUPQlVFtF6JrBlBZawgbUGFchvsxeuMjf7cA/vX
+	/PBUWJlI0lnzxtA5fZsBrfDiHTow34YoVOgMByC4DcuNBGhb2GTd9JHHmYX257YPYLK1
+	y4QzLT+vvLXmFMIPbYMDlqXN1yugBqzWnoBhYMgVghBFpVw6He8VPhrlIAJi2l+HoMLC
+	81XQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+	bh=rN58zt7lT5hmiSTx53yp1GrND/Cm/4r+2V+sX5ty6Po=;
+	b=GQ2LL3I70+nqBewIjzqbn5Rvx6rbx8u/gkS7mndshNLVmmDii4HnlMnXr5amUGKm7f
+	wus06M8S1BqKeor8mootP2f/ddgCy6IYDXdg3cL5ZvJBBXYFLDNeUwfgC01wVxjIqkYm
+	rw4IjACvReF1nZ/VZfreP0H8LXRgM5cfxKkAO8LVaTaFKhU/nQBBqXkiktAbAjQMUpw/
+	DAh9ifANmMYmxJnm13JfsUd2D+r2fa4kSyLo6apis+S1+7CbnSuIl7D7E1+9gPbwxJTb
+	3xHNDkDekgvvTIJfEYSJ90jugBYhHDzVEY7/P2WLDUFta301Q6Mq+puxlilfZlYqi/EV
+	obWg==
+X-Gm-Message-State: AOPr4FVl46u1nGrcQ+C+HlJ0ZTTQZpVIUv1YBQHWJXQqIZEx64VFLAX2yd20rUyUFx5tzIaYWf6G/0T9OeV0MWPk
+X-Received: by 10.202.197.70 with SMTP id v67mr6851909oif.63.1463123754110;
+	Fri, 13 May 2016 00:15:54 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe] [PATCH V2] rrdtool: only unset PERLHOSTLIB in do_configure
+Received: by 10.202.61.5 with HTTP; Fri, 13 May 2016 00:15:24 -0700 (PDT)
+From: Jussi Kukkonen <jussi.kukkonen@intel.com>
+Date: Fri, 13 May 2016 10:15:24 +0300
+Message-ID: <CAHiDW_Hu7dZYxLD0cCEbV_M=-VtQF0s7O_8aZxZrXof2LXa5gw@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: augeas: oe-core removal warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,38 +51,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2016 03:37:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 13 May 2016 07:15:54 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The do_compile requires it, otherwise it can't find the native module
-correctly when perl-native is mirrored from another build.
+Morning,
 
-Fixed:
-| Compilation failed in require.
-| BEGIN failed--compilation aborted.
-| Can't locate loadable object for module File::Glob in @INC
+I'm considering removing the augeas recipe from oe-core: it has not
+really been depended on by anything since Danny (rpm has a non-default
+PACKAGECONFIG but even that is accompanied by comments about no
+testing) and we have nothing testing its functionality. Please speak
+up now if you think augeas should stay in oe-core.
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
----
- meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+There is one reverse dependency in meta-oe/meta-networking (netcf) so
+I'll propose adding augeas there before the removal happens (other
+suggestions are welcome).
 
-diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
-index 216aafc..73a5d0e 100644
---- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
-+++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
-@@ -58,9 +58,9 @@ export STAGING_INCDIR
- # emulate cpan_do_configure
- EXTRA_OEMAKE = ' PERL5LIB="${PERL_ARCHLIB}" '
- # Avoid do_configure error on some hosts
--export PERLHOSTLIB = ""
- 
- do_configure() {
-+    unset PERLHOSTLIB
-     #fix the pkglib problem with newer automake
-     #perl
-     sed -i -e "s|-Wl,--rpath -Wl,\$rp||g" \
--- 
-2.8.0
-
+Thanks,
+  Jussi
 
