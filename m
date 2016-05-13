@@ -1,54 +1,44 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-io0-f176.google.com (mail-io0-f176.google.com
-	[209.85.223.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 18D8060762;
-	Fri, 13 May 2016 17:24:04 +0000 (UTC)
-Received: by mail-io0-f176.google.com with SMTP id 190so141146742iow.1;
-	Fri, 13 May 2016 10:24:05 -0700 (PDT)
+Return-Path: <yesipov@gmail.com>
+Received: from mail-lb0-f176.google.com (mail-lb0-f176.google.com
+	[209.85.217.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B05A6FFD8
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 May 2016 17:30:06 +0000 (UTC)
+Received: by mail-lb0-f176.google.com with SMTP id ww9so20054899lbc.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 May 2016 10:30:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=AYJ0FBGoj/hPYLaXeXzScmmmtc74HLnkhLJcZqWGK+c=;
-	b=aDsP7EYz6Em72+U5AaHlfs/wheY+kcQd7r/G2HfTQ27nWsMxxKnQxdQsnj+36W0peY
-	hQPftCyGdlmH3lueEeQILx1zW7BlBpqmVfXmQMP9tb/uU/C/MwtcRkDOxMJb7lslSAvr
-	91Kr7rkOmc4lZ5OfPlKSO2PqLnBzMcIe9RzUb8HGIK83es2d8J4pe70T/z1fVVMeUuyi
-	YL0q79Ihoy0M0xDIpsCKHbmULFYOzDiHQ9V8iALMrubjPmZFMn3aIK6VL8hw52xRN7Rs
-	VguWzCuxPkQTfUAWyjJ/9Hn5V7AV2jnb2iDSME+O5eFBHEk3O57PuKCrMK1x0L9ijHFb
-	ITJA==
+	h=from:to:cc:subject:date:message-id;
+	bh=uWECVjrW+cL9RJDTxSBbhcwKPESd+PXXHnIPEMXrbMk=;
+	b=BPOrutx0rbufE5l2fncptOtO6tyzDwPn1O7UaT1ej2Xhq5Oi5m90vjEK9lTy8hjUpr
+	ongoBLQe2QACkxDoRCsD/ZtZEOtWhwmcqkb8yDVGn7MYuryP+UYhIK6pRlLfoTgq/6Gm
+	h2GXJU24772ysUOyQC/P2SJRPViCJoTXiGq6btH0bU+SaRxfy3q0JNv71qLxRMjW9+s7
+	znzTRf6fUTZc2VAAPFnLhQ5IaCC21n8CBtyA+0loS8C4Hb22yXGM+YPN4Yba7vPXHoml
+	dxCnp8yIGToEMYxaRs4IMumLhd8MCIZ26F8A07CpUGHhfICELoz8TvYCl/GeuyfNqZjz
+	ZfJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=AYJ0FBGoj/hPYLaXeXzScmmmtc74HLnkhLJcZqWGK+c=;
-	b=nNWUo6s4Yc2qiYZAR2SA9ffaxaD8oKsFm1HLrdPzU/8YjUpsjG3LNEsMq0tI/QerAd
-	/yG1jf+T9TVFGKEH74iTvS3fqUeux9J4PnTzoBX3VSnSfPukMHN8Y2hRjOQfMeChSoVI
-	YLiDgJrdBW4DrmrnEv6goZ5+NEJ5TTiiShdHFfJW2NvVNiOYKjKV7D90LvG6abSg7dWM
-	SVnAFadZkTTLKVH9ET+5//ukocjlppLh7jhmHvORNH8/Ka6+KfiyQexHUXVRIZUQf75r
-	MgZFx1uKaG6Qtlvta5duIR+Uf/Gvvx2MF0CTTGy6LwVvMaM8BQ642DijnEYSdkcA0joq
-	/bOg==
-X-Gm-Message-State: AOPr4FVJPmNwV/2wuO5+SfWVdHnyY+1+sXh+RbpoV5jxXw6o9KoHTE8cNJTQMLi2DAh9vA==
-X-Received: by 10.107.157.203 with SMTP id g194mr14246771ioe.82.1463160245251; 
-	Fri, 13 May 2016 10:24:05 -0700 (PDT)
-Received: from linux-fl6i (dsl-67-55-28-109.acanac.net. [67.55.28.109])
-	by smtp.gmail.com with ESMTPSA id
-	g34sm4597218ioj.12.2016.05.13.10.24.04
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 13 May 2016 10:24:04 -0700 (PDT)
-Date: Fri, 13 May 2016 13:24:01 -0400
-From: Trevor Woerner <twoerner@gmail.com>
-To: Jeff Osier-Mixon <jefro@jefro.net>
-Message-ID: <20160513172401.GC30983@linux-fl6i>
-References: <CA+YB3rZCfCiLQEg5Br78ZQ=6QJQiXnh_pGTr0-XFQZFkwniYLA@mail.gmail.com>
-	<20160513135707.GA30983@linux-fl6i>
-MIME-Version: 1.0
-In-Reply-To: <20160513135707.GA30983@linux-fl6i>
-User-Agent: Mutt/1.6.0 (2016-04-01)
-Cc: "openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Please help edit OEDAM minutes
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=uWECVjrW+cL9RJDTxSBbhcwKPESd+PXXHnIPEMXrbMk=;
+	b=G/QWzeMn+VAmIql6UhtKgDgofbrhYlgmMQJo5sBwMuLLptfAvWQt0sQDJuZYlzTGI3
+	tfg4nrA8M07n0UOX3C4N4CwXJmipLuD3ltJPE6sTPKKPIzx11pg1PzSjuYHa5KaDOkin
+	Cdbh3lwOVym5WWGXwUMik3GjaU3OelNK91lRN9vkmxEgRliDQyNODofNZP2zVfWqSx5Z
+	/w3cTEjgvAS91K7PFR288ara0sitYIzDZxhxC3PHDVBaFcQnOB/hNJQR/I7H+E8xU1FL
+	YHr6f401MpzByn9nS7tGxmbnjsJ4q3FGVkMIVhYXcrcyYwEIUoltb3z2NNGG6uJlv3T1
+	awnQ==
+X-Gm-Message-State: AOPr4FXrh3/1Vd+pqKbo2QBeAbRnYeGpv0dlj7nHvG7D0/YPojKShLYpF7hBXx0tmAbYCg==
+X-Received: by 10.112.144.105 with SMTP id sl9mr7261949lbb.108.1463160606067; 
+	Fri, 13 May 2016 10:30:06 -0700 (PDT)
+Received: from nw.d-systems.local (mserver.d-systems.su. [109.236.68.122])
+	by smtp.gmail.com with ESMTPSA id 28sm3133475lfx.43.2016.05.13.10.30.04
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 13 May 2016 10:30:04 -0700 (PDT)
+From: Kirill Esipov <yesipov@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 13 May 2016 20:29:34 +0300
+Message-Id: <1463160574-8096-1-git-send-email-yesipov@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-webserver][PATCH] apache2: fix libtool's path in apxs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,31 +51,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2016 17:24:06 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Fri, 13 May 2016 17:30:07 -0000
 
-On Fri 2016-05-13 @ 09:57:07 AM, Trevor Woerner wrote:
-> On Thu 2016-05-12 @ 04:32:01 PM, Jeff Osier-Mixon wrote:
-> > I admit defeat. I have been "trying to get to" the OEDAM minutes for a
-> > month and I am clearly not getting to it, so I am now getting out of
-> > the way. We are crowdsourcing these minutes, because collaborative
-> > effort is what we do best.
-> > 
-> > My raw notes from the meeting are here. If you were present, please
-> > help edit, fill in gaps, etc.
-> > 
-> > https://docs.google.com/document/d/1rPvy-QQkP0Z4a0PGOBkljfzGGzFVWREDz18vZzWyL9s/edit?usp=sharing
-> 
-> Ok, I'll take a stab at some formatting and stuff.
+libtool-cross recipe install it as ${HOST_SYS}-libtool
 
-I've reformatted the notes (hope you like/prefer it?). Also, any place where
-comments were recorded and attributed to me I tried to expand them to full
-sentences and add the things I remember saying :-)
+Signed-off-by: Kirill Esipov <yesipov@gmail.com>
+---
+ meta-webserver/recipes-httpd/apache2/apache2_2.4.20.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-If everyone took 30 minutes to check/expand on anything attributed to them
-that'd be great.
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.20.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.20.bb
+index 81151d1..ae2ec86 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.20.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.20.bb
+@@ -116,7 +116,7 @@ apache_sysroot_preprocess () {
+     install -d ${SYSROOT_DESTDIR}${sbindir}/
+     install -m 755 ${D}${sbindir}/apachectl ${SYSROOT_DESTDIR}${sbindir}/
+     sed -i 's!my $installbuilddir = .*!my $installbuilddir = "${STAGING_DIR_HOST}/${datadir}/${BPN}/build";!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
+-    sed -i 's!my $libtool = .*!my $libtool = "${STAGING_BINDIR_CROSS}/${TARGET_PREFIX}libtool";!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
++    sed -i 's!my $libtool = .*!my $libtool = "${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool";!' ${SYSROOT_DESTDIR}${bindir_crossscripts}/apxs
+ 
+     sed -i 's!^APR_CONFIG = .*!APR_CONFIG = ${STAGING_BINDIR_CROSS}/apr-1-config!' ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk
+     sed -i 's!^APU_CONFIG = .*!APU_CONFIG = ${STAGING_BINDIR_CROSS}/apu-1-config!' ${SYSROOT_DESTDIR}${datadir}/${BPN}/build/config_vars.mk
+-- 
+2.7.4
 
-Best regards,
-	Trevor
 
