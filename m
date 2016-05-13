@@ -1,46 +1,27 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 883786E681
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 218896E681
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 May 2016 03:24:56 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id 145so8199396pfz.1
+	Fri, 13 May 2016 03:32:36 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u4D3WaBx022392
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 May 2016 20:24:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=Qsxvr/kmKeRVjtOPy4thSggISylc1UVcxylvB4KStHw=;
-	b=rpN2WWIyu2CdLJIlktclGX6l2AE91wxlRYY7XE4829kdzEhdET/DLIT71yI4XykO9C
-	3m6rEBAg+OAH8lsz09JZkxDkRVvMf99MsgPNfq0n11OgDKGsGkNlKThwCA84H0/numsv
-	Au0yG69ijITdJMwIvjIy982mRRBRgDERf7RkkNUzJ5/M6Fk/HhHSniK/R3U9ppLFDsA1
-	1ZAs0KKu1M7AMKr2c/FMV7b1E5bQTPq72DLghViN+Sdp7mE0SSe7roPDQJvsxpTe2jN2
-	otfBwwCuy1OXn1sfFxn0KfjguYFOJKRxqAhHfgwB3tRONtvZj6Lee131N6MeAeVKHce8
-	ExuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=Qsxvr/kmKeRVjtOPy4thSggISylc1UVcxylvB4KStHw=;
-	b=cR56hudHlGXN8Q48o+Z72PqYnS2604cvYiqm5HfMhCbdkLiPcC6eAaf2D2gCBisaUS
-	1VRaMiSMofs+VPgaazEg0W0yYQi4oPCPqff5Sa6+roFkhTlgpSdjB5GCVIToDS4sjylW
-	DZpLH8FtMCvlh8SrdigUvj7WgNbk9HDnJhbZ0wuJ/fFrrGT6QVNGEf7tBjdPzO7BMnVw
-	d4UW1bbgh/YN3HxYfWmtk87LU0CY+gecjPKuMHLN9R9eajD4ofdN2scQqL+Jh3KX38SD
-	pEpSOp+as6PMB4IcAHL2CvcmHxa9bqDQlTfkOlmWna27wuiiAyCFlsSm0DxxJIhu8U1Y
-	fmPQ==
-X-Gm-Message-State: AOPr4FXIpq8zWR3tawnuM6FBJNK91uAhi2xFZfGvtoJSdvkBJSi7Y6JL7Z0UgiZzG207JA==
-X-Received: by 10.98.67.143 with SMTP id l15mr19084290pfi.114.1463109896973;
-	Thu, 12 May 2016 20:24:56 -0700 (PDT)
-Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	m184sm23065730pfb.22.2016.05.12.20.24.55
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 12 May 2016 20:24:55 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 May 2016 20:24:53 -0700
-Message-Id: <1463109893-19155-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-Subject: [meta-python][PATCH] pytest: fix runtime issues.
+	Thu, 12 May 2016 20:32:36 -0700 (PDT)
+Received: from [128.224.162.214] (128.224.162.214) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
+	Thu, 12 May 2016 20:32:35 -0700
+To: <openembedded-devel@lists.openembedded.org>
+References: <1463108189-37514-1-git-send-email-liezhi.yang@windriver.com>
+From: Robert Yang <liezhi.yang@windriver.com>
+Message-ID: <57354AD2.4020901@windriver.com>
+Date: Fri, 13 May 2016 11:32:34 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.7.2
+MIME-Version: 1.0
+In-Reply-To: <1463108189-37514-1-git-send-email-liezhi.yang@windriver.com>
+Subject: Re: [meta-oe] [PATCH] rrdtool: only unset PERLHOSTLIB in do_configure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,28 +34,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 May 2016 03:24:58 -0000
+X-List-Received-Date: Fri, 13 May 2016 03:32:38 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-py.test requires debug, argparse and setuptool modules to run on a target
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-python/recipes-devtools/python/python-pytest_2.9.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pytest_2.9.1.bb b/meta-python/recipes-devtools/python/python-pytest_2.9.1.bb
-index ca53dc4..e21c4f4 100644
---- a/meta-python/recipes-devtools/python/python-pytest_2.9.1.bb
-+++ b/meta-python/recipes-devtools/python/python-pytest_2.9.1.bb
-@@ -5,6 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d8a5609608d9a5a180705b0fa298ae01"
- SRC_URI[md5sum] = "05165740ea50928e4e971378630163ec"
- SRC_URI[sha256sum] = "0d48d27a127644fbe7c8158157e08b35f8255045d4476df694b91eb3a8147e65"
- 
--RDEPENDS_${PN} = "python-py"
-+RDEPENDS_${PN} = "python-py python-setuptools python-argparse python-debugger python-json"
- 
- inherit pypi setuptools
--- 
-2.3.5
+On 05/13/2016 10:56 AM, Robert Yang wrote:
+> The do_compile requires it, otherwise it can't find the native module
+> correctly when perl-native is mirrored from another build.
+>
+> Fixed:
+> | Compilation failed in require.
+> | BEGIN failed--compilation aborted.
+> | Can't locate loadable object for module File::Glob in @INC
+>
+> (LOCAL REV: NOT UPSTREAM -- sent to oe on 20160512)
 
+Sorry, this line should be removed, I will send a V2.
+
+// Robert
+
+>
+> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> ---
+>   meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
+> index 216aafc..73a5d0e 100644
+> --- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
+> +++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb
+> @@ -58,9 +58,9 @@ export STAGING_INCDIR
+>   # emulate cpan_do_configure
+>   EXTRA_OEMAKE = ' PERL5LIB="${PERL_ARCHLIB}" '
+>   # Avoid do_configure error on some hosts
+> -export PERLHOSTLIB = ""
+>
+>   do_configure() {
+> +    unset PERLHOSTLIB
+>       #fix the pkglib problem with newer automake
+>       #perl
+>       sed -i -e "s|-Wl,--rpath -Wl,\$rp||g" \
+>
 
