@@ -1,31 +1,31 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 9839C762B3;
-	Thu, 26 May 2016 21:02:35 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga101.jf.intel.com with ESMTP; 26 May 2016 13:57:17 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.26,370,1459839600"; d="scan'208";a="975287645"
-Received: from ktan57-mobl2.gar.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.255.172.96])
-	by fmsmga001.fm.intel.com with ESMTP; 26 May 2016 13:57:12 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Andreas =?ISO-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>
-Date: Fri, 27 May 2016 08:57:10 +1200
-Message-ID: <1614711.s4bvBbSZBc@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.10 (Linux/4.4.9-300.fc23.x86_64; KDE/4.14.20; x86_64; ;
-	)
-In-Reply-To: <CALbNGRTxYZ-+ZFmxOCguBMbO5X4m6KTaM+jXVqmSBQ8pHuR9UA@mail.gmail.com>
-References: <1464054649898.9b34c448@Nodemailer>
-	<17859297.OlYCXzWKo0@peggleto-mobl.ger.corp.intel.com>
-	<CALbNGRTxYZ-+ZFmxOCguBMbO5X4m6KTaM+jXVqmSBQ8pHuR9UA@mail.gmail.com>
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 648E176536
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 May 2016 03:56:44 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; 
+   d="scan'208";a="6959452"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 27 May 2016 11:56:38 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id A692A489F98A
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 May 2016 11:56:35 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.93) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.279.2; Fri, 27 May 2016 11:56:35 +0800
+From: Lei Maohui <leimaohui@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 17 May 2016 11:32:19 -0700
+Message-ID: <1463509939-25222-1-git-send-email-leimaohui@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Cc: Cliff Brake <cbrake@bec-systems.com>, e8johan@gmail.com,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Unmaintained layers
+X-Originating-IP: [10.167.226.93]
+X-yoursite-MailScanner-ID: A692A489F98A.AD8D0
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] daemontools: Fix a warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,90 +38,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 May 2016 21:02:38 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Fri, 27 May 2016 03:56:46 -0000
+Content-Type: text/plain
 
-On Thu, 26 May 2016 22:42:35 Andreas M=FCller wrote:
-> On Thu, May 26, 2016 at 10:25 PM, Paul Eggleton
->=20
-> <paul.eggleton@linux.intel.com> wrote:
-> > On Thu, 26 May 2016 22:18:34 Andreas M=FCller wrote:
-> >> On Thu, May 26, 2016 at 10:14 PM, Paul Eggleton
-> >>=20
-> >> <paul.eggleton@linux.intel.com> wrote:
-> >> > On Thu, 26 May 2016 13:46:21 Cliff Brake wrote:
-> >> >> On Tue, May 24, 2016 at 5:23 AM, Maxin B. John <maxin.john@inte=
-l.com>
-> >=20
-> > wrote:
-> >> >> > meta-java repo was moved to:
-> >> >> > git://git.yoctoproject.org/meta-java
-> >> >> >=20
-> >> >> > Is it possible to update the list with that info?
-> >> >>=20
-> >> >> Done, thanks!
-> >> >>=20
-> >> >> https://github.com/cbrake/openembedded-admin/commit/51604da79ed=
-5a02341
-> >> >> 562
-> >> >> a9b f254b3dd9dc71704
-> >> >=20
-> >> > At some point it would be great if this script could be driven f=
-rom the
-> >> > OE
-> >> > layer index rather than being a separate entity - then updates w=
-ould
-> >> > largely be self-service for the maintainers, or at least they wo=
-uld
-> >> > only
-> >> > need to be done in one place.
-> >>=20
-> >> Maybe a bit off-topic but layer index should have some mechanism o=
-f
-> >> removing rotten layers.
-> >=20
-> > We've discussed this on-and-off at OE developer meetings for a whil=
-e now.
-> > FWIW I can remove them manually - actually I just got around to del=
-eting
-> > meta- picosam9 which has been unmaintained for years.
-> >=20
-> > Part of the problem though is determining what "rotten" actually me=
-ans.
-> > Additionally, there's an element of leaving things around in case s=
-omeone
-> > comes to fork/revive them again. We do show a "last updated" date b=
-ut it
-> > would be good to figure out some other way of determining and indic=
-ating
-> > "layer health" - to date I don't think we've managed to figure out
-> > anything practical for that.
->=20
-> At least meta-kf5 is a candidate. I think it has never worked and
-> meta-qt5-extra is (try give my best) - maintained.
+To fix the warning as following:
 
-Interesting - I hadn't seen that you're covering KDE in meta-qt5-extra.=
- Johan,=20
-would you be OK with meta-kf5 being dropped in favour of what's in meta=
--qt5-
-extra?
+WARNING: daemontools-native-0.76-r0 do_populate_sysroot: File 'usr/bin/chkshsgr' from daemontools-native was already stripped, this will prevent future debugging!
 
-> What about meta-kde4?
+Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+---
+ .../daemontools/0001-conf-ld-warning-fix.patch     | 26 ++++++++++++++++++++++
+ .../daemontools/daemontools_0.76.bb                |  3 ++-
+ 2 files changed, 28 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/daemontools/daemontools/0001-conf-ld-warning-fix.patch
 
-It seems Samuel has switched himself to "Inactive" - we probably need s=
-ome=20
-kind of alert when the last active maintainer of a layer does that. For=
- now=20
-I've at least added a note to the entry. Samuel, do you have any opinio=
-ns on=20
-what we should do with the listing? Or anyone else?
+diff --git a/meta-oe/recipes-support/daemontools/daemontools/0001-conf-ld-warning-fix.patch b/meta-oe/recipes-support/daemontools/daemontools/0001-conf-ld-warning-fix.patch
+new file mode 100644
+index 0000000..f7bce25
+--- /dev/null
++++ b/meta-oe/recipes-support/daemontools/daemontools/0001-conf-ld-warning-fix.patch
+@@ -0,0 +1,26 @@
++From aa246fb9055bdcb293e9daca571066b72adc1cb2 Mon Sep 17 00:00:00 2001
++From: Li Xin <lixin.fnst@cn.fujitsu.com>
++Date: Thu, 14 Jan 2016 17:54:27 +0900
++Subject: [PATCH] conf-ld: warning fix
++
++WARNING: File 'usr/bin/chkshsgr' from daemontools-native was already stripped, this will prevent future debugging!
++
++Upstream-Status: pending
++
++Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
++---
++ src/conf-ld | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/conf-ld b/src/conf-ld
++index 59a0de7..1d0518a 100644
++--- a/src/conf-ld
+++++ b/src/conf-ld
++@@ -1,3 +1,3 @@
++-gcc -s
+++gcc
++ 
++ This will be used to link .o files into an executable.
++-- 
++1.8.4.2
++
+diff --git a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
+index 161f92f..c3ce5d3 100644
+--- a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
++++ b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
+@@ -16,7 +16,8 @@ LICENSE = "PD"
+ 
+ SRC_URI = "http://cr.yp.to/daemontools/${BPN}-${PV}.tar.gz \
+            file://0001-error.h-include-errno.h-instead-of-extern-int.diff \
+-           file://0002-supervise.c-.-supervise-may-be-a-symlink-if-it-s-da.diff "
++           file://0002-supervise.c-.-supervise-may-be-a-symlink-if-it-s-da.diff \
++           file://0001-conf-ld-warning-fix.patch "
+ 
+ SRC_URI_append_class-target = "file://cross-compile.patch"
+ 
+-- 
+1.8.4.2
 
-Cheers,
-Paul
 
---=20
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
