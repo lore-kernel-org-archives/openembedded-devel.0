@@ -1,61 +1,23 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
-	[209.85.223.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D14E731ED
+Return-Path: <Paul.Gortmaker@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 959746FF60
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 May 2016 16:11:37 +0000 (UTC)
-Received: by mail-io0-f196.google.com with SMTP id x35so4475391ioi.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 May 2016 09:11:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=dWzDkV73ID2gZ1j1PgYixVje3IBCFNBWMwZz/w1UlTs=;
-	b=aIZGNvhRDaUxS28NZ8B9sLI7iPPIi83Ni9dfEIDAb2mlVHrl9TOHfKAufm7Vg3IF1y
-	tjkQEbmDGGrImpCrFZq9EiD0B9zYgVENL8JFKQ6rm2Ha03/7To2sN2L55UwKOHdmkwmZ
-	3at+z51TWCuFht2up8KMXbo7S4V3/MshJqFRkSB+sy/DKbFbzjyMTg27dZepBPUP+vRV
-	SV8SUmFJfjgpWlcAjthNvpLBtSZspcAP2cnTw+AVJpN53zsX06NItC/z48ED8zvsmPwl
-	9No1q/eXEc804SuookxBkLxBgBzrJMjo2G5Z5HpR7WfIOKMZURqCqujZx6ZdG/34pnPR
-	YArA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mentor-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=dWzDkV73ID2gZ1j1PgYixVje3IBCFNBWMwZz/w1UlTs=;
-	b=OEQkpS4j15sgjhQrDavti1T40RFXZvv2lc45rhuI2CAAtWdZyuA78JTiWk9VLZuKzf
-	CtLSuNRftKyecztQ/FmMg3rp6zMxVHQmJCc5M7vVs9/WaY22QYKNPoKUYpg7GXsPS1OW
-	qIqco/YwJkvmij6WTXCi7wgYJPFAnYcdaJFjhuP8g8jQiR85ZQcYQnviXH2YCPu3KCYx
-	FMGPpAjSaMO5J/1sfvk9jpuY27nX7BrJqQX+2c7PzHr1AlSToowFt+db74naNzuS3xLm
-	Vw3bE8szOMPoK8Ngz1V5nguwUggwuEE0ZnRtMScbKmMDvLARH+PMh7XFFABlfAaqbipt
-	dn7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to:cc;
-	bh=dWzDkV73ID2gZ1j1PgYixVje3IBCFNBWMwZz/w1UlTs=;
-	b=Qe+8FA78f9z70YzGbHirl07ontTyWuWRXa1mD0tww/ZXUGvItv6dkHeKQpCNN3u0Vp
-	RES7IdjQFqJr/1/dgLDre39+HAVEZELn9mK8G9NoslXEtxivmNKhkiiiZTeqa2+GwAms
-	699QtSdX/j6bRN7+ixzgOE9O/PNVFLNzK/SUkX5O5AYJbY1yjsYNYjGFYyA/gB3q2/xL
-	sd3eNH+sh4TOIrVbSE/lsNiCBIzT7s0zDJ9S83UaObJ/ifBT8X+KBIn4H0GFYDxv/D4V
-	w9fS3Im5dv8VKr6XFi7UceaoBZs7fS57juf1Cw1Yq2tjya0zPPJZTP4/FCG0NV4vkPfB
-	aTXA==
-X-Gm-Message-State: AOPr4FXYeMCuPCH/aIxq7mEAYJjmsmfHd6NeEF+ZstVx0P17ItQofK7l68gd+sVMcGXEgsL+HzRL/XxGG5QZ3Q==
-X-Received: by 10.36.121.148 with SMTP id z142mr1792589itc.19.1463501498606;
-	Tue, 17 May 2016 09:11:38 -0700 (PDT)
+	Tue, 17 May 2016 18:27:31 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u4HIRULA020871
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 17 May 2016 11:27:30 -0700 (PDT)
+Received: from co-op.corp.ad.wrs.com (128.224.56.235) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Tue, 17 May 2016 11:27:29 -0700
+From: Paul Gortmaker <paul.gortmaker@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 17 May 2016 14:27:22 -0400
+Message-ID: <1463509642-14983-1-git-send-email-paul.gortmaker@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.79.134.70 with HTTP; Tue, 17 May 2016 09:11:19 -0700 (PDT)
-In-Reply-To: <3ab55100823a114a701c63eaa703d0352bca5513.1463501350.git.chris_larson@mentor.com>
-References: <cover.1463501350.git.chris_larson@mentor.com>
-	<3ab55100823a114a701c63eaa703d0352bca5513.1463501350.git.chris_larson@mentor.com>
-From: Christopher Larson <chris_larson@mentor.com>
-Date: Tue, 17 May 2016 09:11:19 -0700
-X-Google-Sender-Auth: oC88I765dGWTifjbsmwkWQetFBs
-Message-ID: <CABcZAN=4CLx1nNHHDsouiLsDYVPZEV9FZecfFvqxt-yaVG2hHw@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: Re: [meta-oe][PATCH 1/6] mg: stop relying on make -e
+Subject: [PATCH] netcf: unconditionally remove gnulib dir to support reconfigure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,27 +30,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2016 16:11:38 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 17 May 2016 18:27:31 -0000
+Content-Type: text/plain
 
-On Tue, May 17, 2016 at 9:10 AM, Christopher Larson <kergoth@gmail.com>
-wrote:
+The rmdir in configure prepend seemed like a nice sanity check to
+ensure the upstream source didn't change their handling of the
+gnulib submodule, but it will be a problem when changed sigs (in
+gnulib for example) trigger a reconfigure in an existing build.
+In such an instance, the .gnulib dir will have the old copy from
+the sysroot, and not be empty and the rmdir will fail.
 
-> From: Christopher Larson <chris_larson@mentor.com>
->
-> Relying on 'make -e' isn't ideal, as it's less implicit behavior, relies on
-> variable exports, and hides the variables being used from someone reading
-> the
-> recipe.
->
-> Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Given that we don't know what changed in the context of the prepend,
+we just assume it could have been the gnulib sysroot content, and
+hence blow away the old dir and re-copy in the possibly updated
+gnulib sysroot content.
 
+This works for both clean builds, and rebuilds that have triggered
+a reconfigure of an existing netcf build.
 
-Erm, clearly meant 'explicit' here :)
+Fixes: 093942197237 ("netcf: fix mishandling of gnulib submodule
+causing build fail")
+Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
+---
+
+Testing: cleansstate of gnulib-native ; rebuild netcf
+         cleansstate of netcf ; build netcf
+
+ meta-networking/recipes-support/netcf/netcf_git.bb | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/meta-networking/recipes-support/netcf/netcf_git.bb b/meta-networking/recipes-support/netcf/netcf_git.bb
+index 8d6d32a60895..ed713ace2887 100644
+--- a/meta-networking/recipes-support/netcf/netcf_git.bb
++++ b/meta-networking/recipes-support/netcf/netcf_git.bb
+@@ -28,9 +28,10 @@ do_configure_prepend() {
+     cd ${S}
+ 
+     # avoid bootstrap cloning gnulib on every configure
+-    # the rmdir acts as a sentinel to let us know if the pkg ever changes
+-    # the path for GNUlib or populates the dir making it non-empty.
+-    rmdir ${S}/.gnulib
++    # the dir starts out empty from the pkg, but unconditionally blow it
++    # away so if we reconfigure due to gnulib sysroot sig changes, we will
++    # get the newer gnulib content into the build here.
++    rm -rf ${S}/.gnulib
+     cp -rf ${STAGING_DATADIR}/gnulib ${S}/.gnulib
+ 
+     # --force to avoid errors on reconfigure e.g if recipes changed we depend on
 -- 
-Christopher Larson
-kergoth at gmail dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+2.7.4
+
 
