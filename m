@@ -1,52 +1,52 @@
 Return-Path: <kergoth@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 245D377029
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 279DD73285
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 May 2016 16:10:32 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id 145so2351403pfz.1
+	Tue, 17 May 2016 16:10:34 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id 145so2351468pfz.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 May 2016 09:10:33 -0700 (PDT)
+	Tue, 17 May 2016 09:10:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:in-reply-to:references;
-	bh=G33N8hWuUh3ZDjGc9YThxATO66F0cHCSEqpcWT/eTzI=;
-	b=qgClNL273AOlViyzmtYYVtr6DkrTA4t2a2C2vuuZ0wBrS6FySzJ+OKwlwY3E+yigtT
-	MdFGhq6wydwVgPEgxiS5zBMAmvZw/Y1qg4ug/3vs/UzKlTbWcd/Ky0FA4mDmngU+/dV6
-	vUW/z37/Uia0efFjdgcX/JshWxyvMb2L/HQO2Ll05MaS7dFctYJsrKKOuLfu4dOjG8Bo
-	XL8VXSmFPl01eRSzSJdlqv82vS/as9RQJcx9xM21SJIfuhsvEsCdPOUXjbyNydwajb3u
-	12J2qHXvWiCM6UhILE7x0UAohhQfqBMvGxx6zSTbhVwahxpqKemETogGnx7yhpOi14fO
-	WqcA==
+	bh=TvGpMyGD+6G3pbkPnXL5K/GDsB5OEAX/NS905VZmKig=;
+	b=cvaIM/f3v8tyaDTt3Fe6ly15Sb6S6SQT6T22Dzj8wD5tWxECvlt9zSqrDgjmXHntVs
+	sy73PWG8qNbaV8E2HkCuyCmQbpKZnb6jHJPabh9C1KXRvC/b1BeHRMNtoqBPsLGGghd/
+	1fZi76908Smvq6kHzlMMmM+nS8DgeS0RtK/WemAmm27e4Icd2nEEyubIdmcFCGfQX8n2
+	J8CUmekvh5OX1AHr5bptYoJDo+fua0K6gdVgW9/DrKsOq7bjyEvGT+D3ylwTE5N5Fe8f
+	KvzJ37sSOSzxQYxY1jyxf0qYbuASsMHJEkZJ68DYMESo505vvW7xqb6f54AyZ8cR6G+q
+	3eTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:in-reply-to:references;
-	bh=G33N8hWuUh3ZDjGc9YThxATO66F0cHCSEqpcWT/eTzI=;
-	b=IyTJzN4t8ZC7LQlVe+Sz1slX78AQcpBDv6mBoPdMFPdXEiZrpLI1qRLPAlhx2W59i8
-	3pnHxPQX02r55BWhNqkpGBzl0kekG8dIO0QbYomlijZZO3XvpABxe7gpcj5iz83UQZ+a
-	+xW/l4bl2wuRRE02dnxvO2+scmrXa/kPzruWe6YkjfKCyIAFiv4sRyvr12KZHxfFrNiJ
-	Vx1uMx7pU6NlvnbmuCG7N3KIkQdIZ4YHD3pDezhlXCZcd80t8+hIm1Xxo9kdJqiqA0Ip
-	tjpUkS2+TzMVLjQGuuDtXHHSbovcgq+55Yw7ZCkt+hhS0Wkr4kC1d4TzfrfnLKFF6Hsx
-	Ampg==
-X-Gm-Message-State: AOPr4FWdTJ1CIf6SUU+HEp8P0LE4scby3jns1M2iru5XRPZJGBRrgeIm7XSnEyP4uaPWiA==
-X-Received: by 10.98.97.67 with SMTP id v64mr3217926pfb.149.1463501433664;
-	Tue, 17 May 2016 09:10:33 -0700 (PDT)
+	bh=TvGpMyGD+6G3pbkPnXL5K/GDsB5OEAX/NS905VZmKig=;
+	b=HbscjJrGQjVdXnK30ghpyGD+A/fs0Da7aZ7NfLY4cRiVmfJ1sJdmmsRvmhe7hlnpax
+	2zw674vmNkrXD5CkkoaRoz8jrYFYZl7JvoAdTdGttGlgG1eDehFsjdXO6thwc2WK4QAZ
+	TkIeqXo+ygMp0ApFAQ/YHgeDKvmonQ7kWKWRcWm/MtIUuT8bxDVpu0OLFaB6ogScl3/W
+	LTHSvQBm6KpUKrUqtIQWiHWio4dvCeMl8Ov/V8m8jJjoGSPzOoYIVL9v8xwef480morj
+	qlrrfLo9P4KqG8kH0fjXGCIEAFUd4rb8+hqTFvd0KLanMjzz/O7ohq3zBr0/tmY/HgQG
+	nX5A==
+X-Gm-Message-State: AOPr4FVQvN46LfhRPg84TmP1+Mpe3TDBG2jXH0BSNB++aB7xMZnXUxUkCkhvjUAlY2OBlA==
+X-Received: by 10.98.30.132 with SMTP id e126mr3290505pfe.109.1463501435751;
+	Tue, 17 May 2016 09:10:35 -0700 (PDT)
 Received: from amyr.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
 	by smtp.gmail.com with ESMTPSA id
-	rw2sm5868665pab.30.2016.05.17.09.10.31
+	rw2sm5868665pab.30.2016.05.17.09.10.33
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 17 May 2016 09:10:32 -0700 (PDT)
+	Tue, 17 May 2016 09:10:34 -0700 (PDT)
 From: Christopher Larson <kergoth@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 May 2016 09:10:19 -0700
-Message-Id: <684e281d2a69fbf64ced3831b355abbd3827c15f.1463501350.git.chris_larson@mentor.com>
+Date: Tue, 17 May 2016 09:10:20 -0700
+Message-Id: <3c3c8becbfcb3ff4440a8453b595d1c4ce132f32.1463501350.git.chris_larson@mentor.com>
 X-Mailer: git-send-email 2.8.0
 In-Reply-To: <3ab55100823a114a701c63eaa703d0352bca5513.1463501350.git.chris_larson@mentor.com>
 References: <3ab55100823a114a701c63eaa703d0352bca5513.1463501350.git.chris_larson@mentor.com>
 In-Reply-To: <cover.1463501350.git.chris_larson@mentor.com>
 References: <cover.1463501350.git.chris_larson@mentor.com>
 Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: [meta-oe][PATCH 5/6] networkmanager: add missing dep on dbus-glib-native
+Subject: [meta-oe][PATCH 6/6] x11vnc: remove old libtool macros from acinclude.m4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,31 +59,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2016 16:10:33 -0000
+X-List-Received-Date: Tue, 17 May 2016 16:10:35 -0000
 
 From: Christopher Larson <chris_larson@mentor.com>
 
-The networkmanager build runs dbus-binding-tool, which only exists if
-dbus-glib-native has been built, and will fail otherwise.
+These can cause build problems. We only want macros in acinclude.m4 which
+aren't available for aclocal to get elsewhere.
 
 Signed-off-by: Christopher Larson <chris_larson@mentor.com>
 ---
- meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb
-index c8447e6..c18afff 100644
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
-                     file://docs/api/html/license.html;md5=51d7fb67bde992e58533a8481cee070b \
- "
- 
--DEPENDS = "intltool-native libnl dbus dbus-glib libgudev util-linux libndp libnewt polkit"
-+DEPENDS = "intltool-native libnl dbus dbus-glib dbus-glib-native libgudev util-linux libndp libnewt polkit"
- 
- inherit gnomebase gettext systemd bluetooth bash-completion vala gobject-introspection
- 
+diff --git a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
+index 7e92965..64c8a5d 100644
+--- a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
++++ b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
+@@ -24,3 +24,9 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi',
+ PACKAGECONFIG[avahi] = "--with-avahi,--without-avahi,avahi"
+ PACKAGECONFIG[xinerama] = "--with-xinerama,--without-xinerama,libxinerama"
+ PACKAGECONFIG[libvncserver] = "--with-system-libvncserver,--without-system-libvncserver,libvncserver"
++
++do_prepare_sources () {
++    # Remove old libtool macros from acinclude.m4
++    sed -i -e '/^# libtool.m4/q' acinclude.m4
++}
++do_patch[postfuncs] += "do_prepare_sources"
 -- 
 2.8.0
 
