@@ -1,52 +1,61 @@
 Return-Path: <kergoth@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 279DD73285
+Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
+	[209.85.223.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 3D14E731ED
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 May 2016 16:10:34 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id 145so2351468pfz.1
+	Tue, 17 May 2016 16:11:37 +0000 (UTC)
+Received: by mail-io0-f196.google.com with SMTP id x35so4475391ioi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 May 2016 09:10:35 -0700 (PDT)
+	Tue, 17 May 2016 09:11:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:in-reply-to:references;
-	bh=TvGpMyGD+6G3pbkPnXL5K/GDsB5OEAX/NS905VZmKig=;
-	b=cvaIM/f3v8tyaDTt3Fe6ly15Sb6S6SQT6T22Dzj8wD5tWxECvlt9zSqrDgjmXHntVs
-	sy73PWG8qNbaV8E2HkCuyCmQbpKZnb6jHJPabh9C1KXRvC/b1BeHRMNtoqBPsLGGghd/
-	1fZi76908Smvq6kHzlMMmM+nS8DgeS0RtK/WemAmm27e4Icd2nEEyubIdmcFCGfQX8n2
-	J8CUmekvh5OX1AHr5bptYoJDo+fua0K6gdVgW9/DrKsOq7bjyEvGT+D3ylwTE5N5Fe8f
-	KvzJ37sSOSzxQYxY1jyxf0qYbuASsMHJEkZJ68DYMESo505vvW7xqb6f54AyZ8cR6G+q
-	3eTA==
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc;
+	bh=dWzDkV73ID2gZ1j1PgYixVje3IBCFNBWMwZz/w1UlTs=;
+	b=aIZGNvhRDaUxS28NZ8B9sLI7iPPIi83Ni9dfEIDAb2mlVHrl9TOHfKAufm7Vg3IF1y
+	tjkQEbmDGGrImpCrFZq9EiD0B9zYgVENL8JFKQ6rm2Ha03/7To2sN2L55UwKOHdmkwmZ
+	3at+z51TWCuFht2up8KMXbo7S4V3/MshJqFRkSB+sy/DKbFbzjyMTg27dZepBPUP+vRV
+	SV8SUmFJfjgpWlcAjthNvpLBtSZspcAP2cnTw+AVJpN53zsX06NItC/z48ED8zvsmPwl
+	9No1q/eXEc804SuookxBkLxBgBzrJMjo2G5Z5HpR7WfIOKMZURqCqujZx6ZdG/34pnPR
+	YArA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=mentor-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc;
+	bh=dWzDkV73ID2gZ1j1PgYixVje3IBCFNBWMwZz/w1UlTs=;
+	b=OEQkpS4j15sgjhQrDavti1T40RFXZvv2lc45rhuI2CAAtWdZyuA78JTiWk9VLZuKzf
+	CtLSuNRftKyecztQ/FmMg3rp6zMxVHQmJCc5M7vVs9/WaY22QYKNPoKUYpg7GXsPS1OW
+	qIqco/YwJkvmij6WTXCi7wgYJPFAnYcdaJFjhuP8g8jQiR85ZQcYQnviXH2YCPu3KCYx
+	FMGPpAjSaMO5J/1sfvk9jpuY27nX7BrJqQX+2c7PzHr1AlSToowFt+db74naNzuS3xLm
+	Vw3bE8szOMPoK8Ngz1V5nguwUggwuEE0ZnRtMScbKmMDvLARH+PMh7XFFABlfAaqbipt
+	dn7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:in-reply-to:references;
-	bh=TvGpMyGD+6G3pbkPnXL5K/GDsB5OEAX/NS905VZmKig=;
-	b=HbscjJrGQjVdXnK30ghpyGD+A/fs0Da7aZ7NfLY4cRiVmfJ1sJdmmsRvmhe7hlnpax
-	2zw674vmNkrXD5CkkoaRoz8jrYFYZl7JvoAdTdGttGlgG1eDehFsjdXO6thwc2WK4QAZ
-	TkIeqXo+ygMp0ApFAQ/YHgeDKvmonQ7kWKWRcWm/MtIUuT8bxDVpu0OLFaB6ogScl3/W
-	LTHSvQBm6KpUKrUqtIQWiHWio4dvCeMl8Ov/V8m8jJjoGSPzOoYIVL9v8xwef480morj
-	qlrrfLo9P4KqG8kH0fjXGCIEAFUd4rb8+hqTFvd0KLanMjzz/O7ohq3zBr0/tmY/HgQG
-	nX5A==
-X-Gm-Message-State: AOPr4FVQvN46LfhRPg84TmP1+Mpe3TDBG2jXH0BSNB++aB7xMZnXUxUkCkhvjUAlY2OBlA==
-X-Received: by 10.98.30.132 with SMTP id e126mr3290505pfe.109.1463501435751;
-	Tue, 17 May 2016 09:10:35 -0700 (PDT)
-Received: from amyr.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
-	by smtp.gmail.com with ESMTPSA id
-	rw2sm5868665pab.30.2016.05.17.09.10.33
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 17 May 2016 09:10:34 -0700 (PDT)
-From: Christopher Larson <kergoth@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 May 2016 09:10:20 -0700
-Message-Id: <3c3c8becbfcb3ff4440a8453b595d1c4ce132f32.1463501350.git.chris_larson@mentor.com>
-X-Mailer: git-send-email 2.8.0
+	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
+	:date:message-id:subject:to:cc;
+	bh=dWzDkV73ID2gZ1j1PgYixVje3IBCFNBWMwZz/w1UlTs=;
+	b=Qe+8FA78f9z70YzGbHirl07ontTyWuWRXa1mD0tww/ZXUGvItv6dkHeKQpCNN3u0Vp
+	RES7IdjQFqJr/1/dgLDre39+HAVEZELn9mK8G9NoslXEtxivmNKhkiiiZTeqa2+GwAms
+	699QtSdX/j6bRN7+ixzgOE9O/PNVFLNzK/SUkX5O5AYJbY1yjsYNYjGFYyA/gB3q2/xL
+	sd3eNH+sh4TOIrVbSE/lsNiCBIzT7s0zDJ9S83UaObJ/ifBT8X+KBIn4H0GFYDxv/D4V
+	w9fS3Im5dv8VKr6XFi7UceaoBZs7fS57juf1Cw1Yq2tjya0zPPJZTP4/FCG0NV4vkPfB
+	aTXA==
+X-Gm-Message-State: AOPr4FXYeMCuPCH/aIxq7mEAYJjmsmfHd6NeEF+ZstVx0P17ItQofK7l68gd+sVMcGXEgsL+HzRL/XxGG5QZ3Q==
+X-Received: by 10.36.121.148 with SMTP id z142mr1792589itc.19.1463501498606;
+	Tue, 17 May 2016 09:11:38 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.79.134.70 with HTTP; Tue, 17 May 2016 09:11:19 -0700 (PDT)
 In-Reply-To: <3ab55100823a114a701c63eaa703d0352bca5513.1463501350.git.chris_larson@mentor.com>
-References: <3ab55100823a114a701c63eaa703d0352bca5513.1463501350.git.chris_larson@mentor.com>
-In-Reply-To: <cover.1463501350.git.chris_larson@mentor.com>
 References: <cover.1463501350.git.chris_larson@mentor.com>
+	<3ab55100823a114a701c63eaa703d0352bca5513.1463501350.git.chris_larson@mentor.com>
+From: Christopher Larson <chris_larson@mentor.com>
+Date: Tue, 17 May 2016 09:11:19 -0700
+X-Google-Sender-Auth: oC88I765dGWTifjbsmwkWQetFBs
+Message-ID: <CABcZAN=4CLx1nNHHDsouiLsDYVPZEV9FZecfFvqxt-yaVG2hHw@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: [meta-oe][PATCH 6/6] x11vnc: remove old libtool macros from acinclude.m4
+Subject: Re: [meta-oe][PATCH 1/6] mg: stop relying on make -e
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,33 +68,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2016 16:10:35 -0000
+X-List-Received-Date: Tue, 17 May 2016 16:11:38 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Christopher Larson <chris_larson@mentor.com>
+On Tue, May 17, 2016 at 9:10 AM, Christopher Larson <kergoth@gmail.com>
+wrote:
 
-These can cause build problems. We only want macros in acinclude.m4 which
-aren't available for aclocal to get elsewhere.
+> From: Christopher Larson <chris_larson@mentor.com>
+>
+> Relying on 'make -e' isn't ideal, as it's less implicit behavior, relies on
+> variable exports, and hides the variables being used from someone reading
+> the
+> recipe.
+>
+> Signed-off-by: Christopher Larson <chris_larson@mentor.com>
 
-Signed-off-by: Christopher Larson <chris_larson@mentor.com>
----
- meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
-index 7e92965..64c8a5d 100644
---- a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
-+++ b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
-@@ -24,3 +24,9 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'avahi',
- PACKAGECONFIG[avahi] = "--with-avahi,--without-avahi,avahi"
- PACKAGECONFIG[xinerama] = "--with-xinerama,--without-xinerama,libxinerama"
- PACKAGECONFIG[libvncserver] = "--with-system-libvncserver,--without-system-libvncserver,libvncserver"
-+
-+do_prepare_sources () {
-+    # Remove old libtool macros from acinclude.m4
-+    sed -i -e '/^# libtool.m4/q' acinclude.m4
-+}
-+do_patch[postfuncs] += "do_prepare_sources"
+Erm, clearly meant 'explicit' here :)
 -- 
-2.8.0
-
+Christopher Larson
+kergoth at gmail dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
