@@ -1,61 +1,79 @@
 Return-Path: <neenareddy.busireddy@nxp.com>
 Received: from emea01-am1-obe.outbound.protection.outlook.com
 	(mail-am1on0088.outbound.protection.outlook.com [157.56.112.88])
-	by mail.openembedded.org (Postfix) with ESMTP id A618173CBD
+	by mail.openembedded.org (Postfix) with ESMTP id 66C1273CBD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 May 2016 21:24:46 +0000 (UTC)
+	Wed, 18 May 2016 21:24:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
 	s=selector1-nxp-com;
 	h=From:To:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=otou4JGQ0jFxx74rDNf4zLzv8Hzmbyx9uWLd8XSJ30w=;
-	b=ROcz7IZ4RlK6on+j/yBCEdqVpWv+5sFHwOCKitNg7+jf6e8T007Dzgq9DLCw5Ilrbla0eajocJtDTwFFNDTl02ZiKSk0es6o+T6Jmf2ppvqzx0AXEufywRZwdOzSoG5mMyKh+RwEaJQIqee/+IkjwrIy/xYRgWYXM/GcHGNbGcc=
+	bh=3WfecC+zTWnJOCW8yKXcGfSL9M0aZnsLzfvw+v+EBdo=;
+	b=XXL6C5VovkVDQbJj6t9YYFXwK2B1+tFHkwtIPqz7F+tvFZPkU2SHh0acgsQC+DaC+o0YTD6aqoECw7IBBLWNfyfP2B8zTbsVRMebnLyGtP4N+wBNdAWYySzL5ipaDqIay9guoXjkAPvOHmNpikr0YVC838i5Qit+J/nv6Yh9BEc=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
 	header.d=none; lists.openembedded.org;
 	dmarc=none action=none header.from=nxp.com;
 Received: from change-01.am.freescale.net (192.88.168.50) by
 	HE1PR04MB1578.eurprd04.prod.outlook.com (10.164.48.140) with Microsoft
-	SMTP Server (TLS) id 15.1.497.12; Wed, 18 May 2016 21:24:45 +0000
+	SMTP Server (TLS) id 15.1.497.12; Wed, 18 May 2016 21:24:46 +0000
 From: Neena Busireddy <neenareddy.busireddy@nxp.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 18 May 2016 16:22:54 -0500
-Message-ID: <1463606575-24741-1-git-send-email-neenareddy.busireddy@nxp.com>
+Date: Wed, 18 May 2016 16:22:55 -0500
+Message-ID: <1463606575-24741-2-git-send-email-neenareddy.busireddy@nxp.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1463606575-24741-1-git-send-email-neenareddy.busireddy@nxp.com>
+References: <1463606575-24741-1-git-send-email-neenareddy.busireddy@nxp.com>
 MIME-Version: 1.0
 X-Originating-IP: [192.88.168.50]
 X-ClientProxiedBy: SN1PR07CA0041.namprd07.prod.outlook.com (10.162.170.179) To
 	HE1PR04MB1578.eurprd04.prod.outlook.com (10.164.48.140)
-X-MS-Office365-Filtering-Correlation-Id: 28ad6b97-6dbc-4cfb-e41b-08d37f62d5c6
+X-MS-Office365-Filtering-Correlation-Id: 7414a1aa-153e-4288-7a64-08d37f62d67e
 X-Microsoft-Exchange-Diagnostics: 1; HE1PR04MB1578;
-	2:JVgJhHu5fPz7enEtbXwytbUkio7KY+8fWRMpz9gydpEKzP5XYzxNaH8XGH2FtgRF/98w213mqZtzb98Ahtzm/mHWL7k9j+cXzWla6DiCWI5nj2hR0DQJXSpiAwITjVc4NWr0CCk1jFIrqa8Wffgs63Hyi68bAj3iX//k8zrDblOU3Xj7fg0NyXu4oCi/xeIL;
-	3:s++rJ86Ipj7UMtq2pOoOcB12u4px2xxmnHFf9Da7Ma7EPQtdC14OlyNQjoYHWtbiICXMyAi5tu9wdxiZilpuds5VuLSi5ytheJpnVaGqwxSHOcug9I+0bqeQu0aQkWK7;
-	25:sbolNnudEvADmb1sW72l4SanUvPOoWRANpSRbV5v2SeXuuGfmQjKLCgwGuuD8XK0lUqmRDQKRasCAzm5zF7SC5xuysSDXYMwe46jqWiFw4zm06gutuoyh0vRICif8XeHYbmgvakct/xlY5fOe97Rypw0KgzIL+UHVxUWSgynVtsw45TnS89F+JLgcrh9bLynBRRmS/jMQa4JQq6eKl0I1zqFsj9E1Jzyt4LBq9OImFfsBjKfLeF55trzGwa+lWao+cN14qrVVA8TCK1KmxBYKgaFudQaY1oacx6gx24DjxDadhW3G9JnRPSRnWuF0rBHukk1T14mxdodDB0x8wYaVNhqfbBmiDH+c4rCC/5jHJeVX9XuI1VGER0XJstnHsOmgsYJCiKvqw3AoOz7bIq7kLEs7yFDjHudJGBV54X7SCo=
+	2:ItSyv4qMaZaEpJKQVwltxMxGtF7/QLjIBypFdDEIVK4IrRTKL33pxxHD2TcFBWFXvXZgn769ev4vX/OxBT0cT4CRQn63Gsv8g1tDZFcza7kncVGMTXm/rKqketYkfMuryTu/2Gc0cOUXOrxqllCWCEkBagEYbtb0s2OKgCbzG7q7MXJNIACWDEfCclRLU2ux;
+	3:rDnbc9WcsqTw613jidDm0KXX1R+2aCHkFuPERDVFJDwZTlf8vgyFPvZHzuGSf242Vtlf78iz22eBeXFwtbdS7DGsVu2Q55rfHsFZCMEExDOnLkoKhnAd/wVMXjDuGP69;
+	25:tFsYkd9CrBb2ZqZwkoTug4NrgKrcfEv13jPQ1K+xT6LWn+56xZwfoXWliCCc6dlPRr2jHtb0yXMU66jD8SvlAJQFYKk5gvRX0b9F5ZzzaUqQ2PDUuZhc5U+h3Bb0wlqJ2liGwSFm3PELnf9tdom4AwupUqsL0vzXqpzbM9ayjyMGDYKg8znAdbrhkyXbxOOdzH7kzab0RiYrPZsxI23b7Pbl4SldRvzyd5JjDTW/9Yo/CPEIz0w/sxS8Ym77QItllPr/u4bCoYRI+4ok7adPtPU15z09hQeWXbbmJNt6+0e9rOKj0v7+2zSBJjhCQSsxFDRjW0fz/xY/LJTJEpHlb1x1WzG+UfXNL4ZqIr2Z2BFnVpqjlzvTSClOC1DOVTDiao4aVH7eGJTnGb0Ko8NNLcbRXSs+o6lAzTZY8XPMxjA=
 X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:HE1PR04MB1578;
 X-Microsoft-Exchange-Diagnostics: 1; HE1PR04MB1578;
-	20:0mmnlzQGddwiytnoNlOUuwIbTXmM55ESTNF3x5+VCfYj+TLyj6zIbIn4JFdmwTGNSND/uuaJwwxM0JmdijkBt3j6igH7oWvK3KS6rRY+JH/h6f2RtZDF7V9K1qk6kn75NbsHVJZu69yHkYeofJlwWJoExAeX0OCuoeDupNhNFccCeNKhlTEW7mTDbQ4RShLAMnx8AMhqH6V95dR+Cqwez0wz55xkFjUnt5FSOJts3KatYY3FnXn2YLs6fqTx82/4Bd0oH0x77Gs4ShFVmgOy2fieINf5QJO0QYeJTlpPZu/MUkBYSrmiNNGDmcb04gMJc8kkxuAR52HtN83DGgmpiXHEsA7H3eDQb8rBpfMN0KNKLV6TjpaaMMF255HHg9QA5oHSXwQpmZfckw6j3gk0JpjmoCUyM0v9Fa30LPGFyVkTBoyVm5V7bT1oGhhzPTZV86DtuZyDn+YyRUQdhHIxdtzJRVjcfdm4HZ3jAqmgNWd2ZaE81fIKNjU2OS+Nfqkv;
-	4:ayB85I1C7qOtwqvqoz6Wu1dYD9WAsoU+7BqM89xo8EheKgKIFvYPUlyFVYvAkLSfQGnBRWW+Pt+KXeHfaZgwVfdn3GdeTuCu/ZIWUSr9tqc/TDmSJkpu8OSpffCuMAoOg/xziYOq7Np0UvKKS2mWVMmDRMim8UDZWWR+qFZrHDebsShsLdJ3xf0m5QWeB/63u9Siu9nE3Jhf7QUFtLRhNrWleq0bhhUdybmVqsYkSg2C9PQWNLdueqizpu7pD4z3BapuL3V1qurWYjHdE6mxoetTq4tgz/0Og+8CQKrbqqO58/2Xxe4Apx12YonzDUiRJoEXFs24AseGVaNhGuOJS9Hi18ejElmvy6czjoJFqTmlUW14dWjD304Fl7WpxtyD
-X-Microsoft-Antispam-PRVS: <HE1PR04MB1578E7F5B1A408978B3FFD0891490@HE1PR04MB1578.eurprd04.prod.outlook.com>
+	20:2uxL4VIYdTFMLses6xxUc37Nl3Mlf2VzBp2dIQGLpP1oSt5UKt5vAE5eyZZhSWMIZ7prFj4Z6zbLOk5OYMRXBkwkv2+cJM/Pv5THDUMrk3BmSGlPgSTTY6mR/HKLnoFv0Ono9y+Hf3EoG/+N4IW0UeTwun0yXqFwKmusZyTz0wcfr6gPa62/JTJgXo/UfEs/Ekk3kh1WQo6dTh0mfpUL07gz4eZiIBtN4BjYiytnIhrlFJ9yEA9fGk8av4m+dBDApMy5kexffA1rZta8TrEtOUPeuMExtsoAMSPkU6JRkTCUffYkngLuUhxZhpjphV7yD0zlKDrStv9gEi0BBupUHsyA2spnVgU3dxQ3Dmqk8hyaQDEsflqs9mwFn5LexCRgeUfRwR3iYsUkRhG8p9zhhnXfu+g5FTG1ZHsoY7OW3p6HYGTyrRjlmE6gaoIBe2aapts5/PuZjbkS+jvhvFTGD2VctXT6SK/zKLPdiAyXNhFm5GrNcQ+vpuvTvdAcMCUy;
+	4:ri2SBoNtfGErPQZ6EtxwVW342JcqZbw0D482+ZAcfN1eC5UhvD3Mz5RNsTsEQ2kObjLCf0WP8KK6HB4XM6LZW4bKltmrYj8hUuD5qFiMZ1KinzhS7A4n9TadzVdl71lBX8fDJ9j7T19FngYw+PbS9ZjPkMwjiYJtkX13o3NxtfjmiWHPS0ZoIIUNhnvmYR/wg9rQ8cp/A2P3rW7bNj/h4QhkNIT/HLIhUgWC5eY1y4umzc7FkW6iQM56o0Iz1ghokeLXjMek2+9FShV92vcLfm0WEW2TRCpTheEbQM63wZqsNGQos58WusGdqJq/2rYaHSEw/z3fmmDnwhQ4bA+iEsgBRTQW58cVND/JwJGJ3Ti0ZQWcmdL0fW8TyrNkwldCmBZ+GAGLVo8U2GfSW0tefQ==
+X-Microsoft-Antispam-PRVS: <HE1PR04MB15784A1CD970EC3B5F09A34791490@HE1PR04MB1578.eurprd04.prod.outlook.com>
 X-Exchange-Antispam-Report-Test: UriScan:;
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
 	RULEID:(601004)(2401047)(5005006)(8121501046)(3002001)(10201501046)(6055026);
 	SRVR:HE1PR04MB1578; BCL:0; PCL:0; RULEID:; SRVR:HE1PR04MB1578; 
 X-Forefront-PRVS: 0946DC87A1
 X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10009020)(4630300001)(6009001)(2906002)(6116002)(4326007)(42186005)(110136002)(586003)(3846002)(66066001)(19580395003)(47776003)(48376002)(86362001)(36756003)(81166006)(450100001)(5003940100001)(8676002)(50466002)(189998001)(5008740100001)(50986999)(50226002)(92566002)(77096005)(5004730100002)(229853001)(2351001)(33646002)(19580405001);
+	SFS:(10009020)(4630300001)(6009001)(2906002)(6116002)(4326007)(42186005)(110136002)(586003)(3846002)(66066001)(19580395003)(47776003)(48376002)(86362001)(36756003)(81166006)(575784001)(450100001)(5003940100001)(8676002)(50466002)(189998001)(5008740100001)(50986999)(50226002)(76176999)(92566002)(77096005)(5004730100002)(2950100001)(229853001)(2351001)(15975445007)(33646002)(19580405001);
 	DIR:OUT; SFP:1101; SCL:1; SRVR:HE1PR04MB1578;
 	H:change-01.am.freescale.net; FPR:; SPF:None; MLV:sfv; LANG:en; 
+X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; HE1PR04MB1578;
+	23:PtNJJ9bMwJyvHc4evoJY4GwagUa4n8qA/DgwaW6Oo?=
+	=?us-ascii?Q?CS07LKXr3+vXHiQ2cqCDKjjtO24e3P1iC2YR+Bz4s9xfY997GyV3LDDXPmCy?=
+	=?us-ascii?Q?KWPm05DhnGQtaxEkOiRA0ErWAAev8FGlWxNkJ3XIcj/8cpkU370UnSnayfV2?=
+	=?us-ascii?Q?KhgRu0s+pnd/LzdOo18EUAbSbCL1D+Ha/B2WmfAsHRNenw73SrtaqN/ttb/m?=
+	=?us-ascii?Q?lW/2+EJhcvQm2ZhjCr+QdRkouG8/QKy6iz7yOIdICK59dcbDpJYOXrzqnan8?=
+	=?us-ascii?Q?uX3HBgMgUL0L1Lo9OCp9YpG8SYd8HUb8Yl8rj5c+sLkkD94lXXQ54Q2LVkP/?=
+	=?us-ascii?Q?u6u4s0ykSkSSdqRXg8kSaqbhJgEte6KpZontZ9Sv8eqO0as9PUsl8//bxR4o?=
+	=?us-ascii?Q?VNtq+LmDInLRcDMf4wiaGOGHX/IM8sQv+IegMJMGLE4E4XAquUOMOKrO8ulK?=
+	=?us-ascii?Q?/Bma0s3fzKCa+qBKlSk0gxj6KADh2lCzkISARyPm7yvn5p0sHHjJH82s7F0G?=
+	=?us-ascii?Q?W1lpaiPaI1FR1wKDIqBvdP1BYtcAK4D6Z/1z59JvMuteEOsFF52kxxlr1f1R?=
+	=?us-ascii?Q?s8Ab5iFJUFyD+5Hxu+VCVzeYbOnj3gWVjumSxIe3A0xCthsXhb9xzv97fPUi?=
+	=?us-ascii?Q?ccgO0O9OIzT/pVd8juoA6ypQ+Y2oVikd61BdXkexobbpcUisA/ev4up3R/OV?=
+	=?us-ascii?Q?yUk7vsi1rSB22KGcMCHZHu61AXFYh99i94CraETLUm3hLl4OgzA/JEz/Cvl7?=
+	=?us-ascii?Q?MFy5mrSV5DKm/VXqCzfBdcdh37Dm87S1/L4+u1o54nzGhF2SchKjMwNMRKab?=
+	=?us-ascii?Q?WZNUCk2KD5x1Q22PlfVpsBx5xemVfgJcnElFCXki8On3Cymf9QkCTfe/eaPb?=
+	=?us-ascii?Q?SdvkBjuqyr/GOoc1TcNkd3jF6Vcn2B/U2YrF+a/z52Ksh84P5oMz0X1PP9MS?=
+	=?us-ascii?Q?GCl49ShBzw552QecVv+8opBKFJqyR95jYvvITc+Pg=3D=3D?=
 X-Microsoft-Exchange-Diagnostics: 1; HE1PR04MB1578;
-	23:q2CREG/DPWa2T1zXjTeqCNp92yP97th2htqI3v6WQOCvmxbDnn1qKj77/K7InoR37jNqWZF26ZZD0O+2peTvsmYZ6L3skW4okb9SM+WSGHRl0hnlTCVzS96fWXzIhuI0vrGI5S8i7tGJvzd1IeZSb7rQH5s8DaH/GJxDot9Ht6PipmxeZlgeggSpMuReozCB8U9vkeNmutkdquRto/GohvdT0UXQe0Uizx3NipDHzYfMoKb3COP6uNH+oJvmiiOKflffIoOCezfhQhJGLOgS4aQuFjMHd8Qp/LZS3TNg8NtIoe6oVG3mrDZGZBOPakwEVE50oiqg7wisVf7ggTLW8vqIO2d1gbNaWZSJFKDiAGBpA+nHcqEAH+hG3bPZyL1un1JJ1zaGLKEbOgZbRqz8jD0uL89rYO9QegacHqX6pJvdbkSFkn7pxZkOKSScZhdi7vwxZTgSKUaGIDPlrSuz0JTig57BYhKH/R7RXxZTEj0xsdZQp+3DHwtK/Zms0xN+LTDoO2os+qkNgkJWjoJtmzZHDGfml4ddZrcWoW3cWDRMFUhoDdGmGL28+DAFmopJt3elupvNUs+n4tsvWbHaR5eoxHM/1/SPU4e/q/dHqK/v9y6H1rR6dAD5gtp9vfQsy6/KvuLHYjWjN2GXwlLozb1IFGlM91eIZ4x44a1wh+8zSm3pcoB58+p/21POHFseNxoo7BnzdV2QpQQrF7iLIp7nbEd1kJ5tX4krnd4dmAmN9sdNKaaz+TWl7tpu7nIZjIsBM25yuqxIx3Q7ZIUif13pJVWLoWRGGTmQW3QrGuDceTKhCgKBMzm8jCTfq9SrXG6NCxsmueKTVEv/zdub6pdOP4AsQ2JxfSha/RKWGjk=
-X-Microsoft-Exchange-Diagnostics: 1; HE1PR04MB1578;
-	5:uZkmpGbTHTwbEPp23W8ARzxq8d/IiK7kh47p41x42esU29NlysGJCwa/sJ3iqGStPEcNrkKJ895wS7N9V2jT8aQ0jlOVPw7pwJpeaOV+OKJeTTkUQrZLxsoBxdWfQpNljQDGJNq2kHy4/EJxnT897g==;
-	24:bLiMEjkcqoL5XxfxClVcvf1jmCFi0GQgs9Zvbn5yx1PFRGIm1BdV6W5B5YwR599pCB6+QJkaWmxpC4vMdqpKIuXg42vNrwp0SlMo+yEHN5k=;
-	7:wE0pszh2xaI+PGn9mKW+vnHiWZghPeMt8p4L354Y0CaYcipgd9r7gZgdEC8qIQ1g+1uprCdZuoOxvT1VxavWfM9qHE1fafW3zp+URBYRu4yz4UvePinCTjVQdiIjrBIpiqz8gfHlFOrqICIIaHiRl1wFDHiQcA6X5lkW0eQUdr0QBIvGYQBDNBm0N+cXqA8i
+	5:bzB4fA6WpCg6PkS8J2Ye7jDXW2AexOCi1ictE6jSsksVc0Yi6+XcRJqgsJN7ESJYAufbpe9RLBhwxw/DFJHgTAgdVIy8/xJWJzETy9zCpqZB/DU4RQSXnVf0w5CUuRfJ2PJvRaKKZ9dTKtYmZlHCOw==;
+	24:v4hmPM6ajDMw8c6wIPyOO9XHOg2IRRKQNSHzzFUAli/5sMJoF2xiIGJBzmBwvT6eaOnCk35LdZtg0UdfHZ6XvnzQRFrvd+/4V5HxLi/D/DI=;
+	7:6ocvrCCJTcx2YLSvpGVdpSTR1HanmWquLoK3rtuYMbSy9c6vVqTT8xVdPrek3MDJkA8HbhKeLtvcLlC21brze08O0bhvM6FcFlR+QuNDnjM6nOHZs5ZzUhjOQYZb+CtO3UtWJomAdn7Vt0GDLVE+HQuXr3fXV8I1/PJnwNQ11qjxyLbujN/16cpYnHnvIgTH
 SpamDiagnosticOutput: 1:23
 SpamDiagnosticMetadata: NSPM
 X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2016 21:24:45.3225 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2016 21:24:46.5101 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR04MB1578
-Subject: [meta-oe][PATCH v3 1/2] mesa-glut: Remove the recipe
+Subject: [meta-oe][PATCH v3 2/2] freeglut: Add a recipe freeglut to replace mesa-glut
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,39 +89,40 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Wed, 18 May 2016 21:24:50 -0000
 Content-Type: text/plain
 
-mesa-glut is dead upstream for almost three years now and it does
-not generate library for GLUT.
-mesa-glut is now replaced by freeGLUT which is a free-software/open-source
-alternative to the OpenGL Utility Toolkit (GLUT) library.
+FreeGLUT is a free-software/open-source alternative to the OpenGL
+Utility Toolkit (GLUT) library.
+More information about this library can be found in
+http://freeglut.sourceforge.net/
 
 Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
 ---
- meta-oe/recipes-graphics/mesa/mesa-glut_8.0.1.bb | 16 ----------------
- 1 file changed, 16 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/mesa/mesa-glut_8.0.1.bb
+ meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb
 
-diff --git a/meta-oe/recipes-graphics/mesa/mesa-glut_8.0.1.bb b/meta-oe/recipes-graphics/mesa/mesa-glut_8.0.1.bb
-deleted file mode 100644
-index 404ee53..0000000
---- a/meta-oe/recipes-graphics/mesa/mesa-glut_8.0.1.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--SUMMARY = "OpenGL Utility Toolkit"
--LICENSE = "Kilgard"
--LIC_FILES_CHKSUM = "file://include/GL/glut.h;md5=4aab626c830aed79d7b2e5a76dfa2dd6;startline=4;endline=8"
--
--SRC_URI = "git://anongit.freedesktop.org/mesa/glut"
--
--SRCREV = "ee89e9aeb49604b036e06f1df6478d32006b30cd"
--PV = "8.0.0+git${SRCPV}"
--
--S = "${WORKDIR}/git"
--
--inherit autotools-brokensep pkgconfig distro_features_check
--# depends on virtual/libx11
--REQUIRED_DISTRO_FEATURES = "x11"
--
--DEPENDS = "virtual/libx11 libxmu libxi virtual/libgl libglu"
+diff --git a/meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb b/meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb
+new file mode 100644
+index 0000000..389d3fb
+--- /dev/null
++++ b/meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb
+@@ -0,0 +1,17 @@
++DESCRIPTION = "FreeGLUT is a free-software/open-source alternative to the OpenGL \
++               Utility Toolkit (GLUT) library"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=89c0b58a3e01ce3d8254c9f59e78adfb"
++
++SRC_URI = "https://sourceforge.net/projects/${BPN}/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz"
++SRC_URI[md5sum] = "90c3ca4dd9d51cf32276bc5344ec9754"
++SRC_URI[sha256sum] = "2a43be8515b01ea82bcfa17d29ae0d40bd128342f0930cd1f375f1ff999f76a2"
++
++inherit cmake distro_features_check
++
++# depends on virtual/libx11
++REQUIRED_DISTRO_FEATURES = "x11"
++
++PROVIDES += "mesa-glut"
++
++DEPENDS = "virtual/libx11 libxmu libxi virtual/libgl libglu libxrandr"
 -- 
 1.9.1
 
