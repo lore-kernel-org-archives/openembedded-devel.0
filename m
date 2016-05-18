@@ -1,50 +1,47 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-qg0-f65.google.com (mail-qg0-f65.google.com
-	[209.85.192.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 16EB06FEFA
+Return-Path: <bruce.ashfield@gmail.com>
+Received: from mail-oi0-f67.google.com (mail-oi0-f67.google.com
+	[209.85.218.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C87B62135
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 May 2016 18:17:14 +0000 (UTC)
-Received: by mail-qg0-f65.google.com with SMTP id b14so4874248qge.2
+	Wed, 18 May 2016 18:21:45 +0000 (UTC)
+Received: by mail-oi0-f67.google.com with SMTP id i2so11606415oib.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 May 2016 11:17:15 -0700 (PDT)
+	Wed, 18 May 2016 11:21:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=R8hHH0u/zZ1KSELhGDuHZJBpOf84fjKe5WI6b/em9eA=;
-	b=JI/GqIy/NVe3PXfPalfL94mLADWuIDrVc8lGRxWOaU+6Za6MscgYs10X74caDlEsvu
-	nDaKUD5KhaHEP/b8cHah0tXKot3nPuDU22rf30PedCC21BpxW2YUhoQzvgXKbZU3hA9S
-	8Gl6k61irrYFzaZ1H7HWo0CUBiBZ5Hp5sa9zABNiOp7MzsoZMkGMBSdixEkKBaD5NGWr
-	uP9Oa7rOObLIwcZ1IAakKS2tLXObQtX34x6RygxJM7+7IaEBSFVrelF2Nj+5wrjduAls
-	fzMJVCRIOG/mv7Jh8LaVHRQd2TJ6okFrQXR3Cn8BpEC1ilZiGQhlaRUSlePhjmQle06h
-	TeXQ==
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc; bh=/GFyJjruWye8VkTeeV0INJ7WyQbKr+dTPuu6xRI0cnU=;
+	b=GclLXMVkv71FktUooSyLWwXByRfLgPM5j2aondgiIxwl64SWI4hNOrOrm6raFxoXaF
+	GRICcmKcl8qnn6XE+9h9DO3ZTOesXi1l+o2DojOKDVOsys9qh6rFebyD1yW2r6rfMiHj
+	O+jGhw6t/Jy6RSIKcZeaLEFZpu6Jg31eIw3asVBNDS5qAqknTXHhNnL8JMsIH1zPa7mL
+	idXM+zKQQL+5nBWt9LuEdeT2TSUsp3r2CMpV+s9hpxeJVmRw89NvQ9xBHbJSgWEGJZzy
+	qyxpWEa2KX1VV/fRG+kyiA7tLNTbMlLA1lYtansIS9bcNM74JFq6/SLfwCeukrkB4X5k
+	09Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=R8hHH0u/zZ1KSELhGDuHZJBpOf84fjKe5WI6b/em9eA=;
-	b=Akx3rs6WL+etlvVWKnzXYxS6RDpZIJT0ZPog1yYrEeKtV/PNDfW7sb0HR2BcXpgwsb
-	jqDk+rnsOE/dLjEgz+Rz7/p+WjPzZA3Va7JE//Xg6tPGyjvNPne/2+LD7t77OdqYXZW0
-	LmTrqmTTDPIFhVQTrIJ2kUAPZhYmcN6rQqMq7w3a+O+MooqqQkEUDzja6GqzPNVynyES
-	skzQGJM2Q4qh5RSq41t8jluRbzy+EJK0K0bzeOBctPBH+LqU3iuZC9uBXqsQ8rP5TyBq
-	ep9iPLym5Hx+v5sUun1b2Z/LJ8/a/Df7R4uQO8KRQ1tlQUR1JtHTUPnxZI5MEOsdxamb
-	/RkQ==
-X-Gm-Message-State: AOPr4FXWTdCuh66hbW/WBeWEORa57CNp2w56VUwGxgA5+seOi02fTjrnA7+RKy57VYlaWA==
-X-Received: by 10.140.18.197 with SMTP id 63mr9015588qgf.18.1463595435570;
-	Wed, 18 May 2016 11:17:15 -0700 (PDT)
-Received: from Pahoa2.mvista.com ([50.233.148.158])
-	by smtp.gmail.com with ESMTPSA id
-	f19sm4744845qgd.21.2016.05.18.11.17.13
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 18 May 2016 11:17:14 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org, joe_macdonald@mentor.com,
-	akuster@mvisa.com
-Date: Wed, 18 May 2016 11:17:09 -0700
-Message-Id: <1463595429-8748-2-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-In-Reply-To: <1463595429-8748-1-git-send-email-akuster808@gmail.com>
-References: <1463595429-8748-1-git-send-email-akuster808@gmail.com>
-Cc: Armin Kuster <akuster@mvista.com>
-Subject: [meta-networking][jethro][PATCH] ntp: Security fixes via update to 4.2.8p7
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc;
+	bh=/GFyJjruWye8VkTeeV0INJ7WyQbKr+dTPuu6xRI0cnU=;
+	b=Vttv9SqdsMWViXRR4gWcLcKR5J+FolmM1fohDMS7LXKnx97p3DsTyHKwT21AeNoxW7
+	a8xNNPmZAYylLgHrM+k4RBbJW29KMZ79pHIxhDky0tE2Qz1Oe8aEKt3tdcoasfXlCy06
+	RQSIzEUr5yqyfnyjtj7Sr+xiVrdiVXOZWSMSAUoZIr+wEFWCwpVOy1cVD8FhFUkN/S9Y
+	Y3aiRO7EzpEnIZACjHeUqcD/SvyWtbIjmXB3sJm3pEn3N4QW7r25y0UNUHCrK5gKtGxO
+	JyVi4VkILwzgcfjuSOFAC7pLzALU8jbFQgwnjb0gPeK61tmE4dsjqVEhZLS556FTxYVA
+	s4Sg==
+X-Gm-Message-State: AOPr4FVcncBntnLHcnrrSnt8EvPOLQRFNhKcbQ/Mgrj8Au+bGaZLYS2HLuhjrf0phy7oe4eMHiLgq1WvvAbJLQ==
+MIME-Version: 1.0
+X-Received: by 10.202.170.65 with SMTP id t62mr5179323oie.60.1463595706628;
+	Wed, 18 May 2016 11:21:46 -0700 (PDT)
+Received: by 10.157.32.135 with HTTP; Wed, 18 May 2016 11:21:46 -0700 (PDT)
+In-Reply-To: <CADkTA4MCY-QGz9_sQ6MYXaFLUdwj5WzXEf16K8oTsB36t4qpXQ@mail.gmail.com>
+References: <d1c192ed-565f-c0f8-fe1d-9be335743e71@eumx.net>
+	<CADkTA4MCY-QGz9_sQ6MYXaFLUdwj5WzXEf16K8oTsB36t4qpXQ@mail.gmail.com>
+Date: Wed, 18 May 2016 14:21:46 -0400
+Message-ID: <CADkTA4MA6t=r7exrgsB7pBqfbUO5HjOyB8EgbXOqKt5QV7a8KA@mail.gmail.com>
+From: Bruce Ashfield <bruce.ashfield@gmail.com>
+To: Jack Mitchell <ml@embed.me.uk>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-virt] google code docker hg dependancies 404
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,50 +54,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 May 2016 18:17:15 -0000
+X-List-Received-Date: Wed, 18 May 2016 18:21:46 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Armin Kuster <akuster@mvista.com>
+On Wed, May 18, 2016 at 12:39 PM, Bruce Ashfield <bruce.ashfield@gmail.com>
+wrote:
 
-CVE-2016-1551
-CVE-2016-2516
-CVE-2016-2517
-CVE-2016-2518
-CVE-2016-2519
-CVE-2016-1547
-CVE-2015-7704
-CVE-2015-8138
-CVE-2016-1550
+>
+>
+> On Wed, May 18, 2016 at 5:36 AM, Jack Mitchell <ml@embed.me.uk> wrote:
+>
+>> I'm hitting 404 errors with a couple of the docker dependancies. Can we
+>> host these somewhere or does anyone know of alternative places these can be
+>> obtained? I looked for the go-sqlite package but it seems to have been out
+>> of development for some time.
+>>
+>
+> FYI: Copy the meta-virt mailing list for issues with meta-virtualization,
+> I almost missed this.
+>
+>
+>
+>>
+>> /home/jack/projects/meta-virt.git/recipes-devtools/go/go-net_hg.bb,
+>> do_fetch
+>> /home/jack/projects/meta-virt.git/recipes-devtools/go/go-sqlite_hg.bb,
+>> do_fetch
+>>
+>> An alternative would be to possible host someones cached downloads in the
+>> alternative mirrors?
+>>
+>>
+> I just cleaned my build and I'm seeing them as well. I'll take care of
+> figuring out what has happened
+> and fixing it.
+>
 
-for more info see:
-http://support.ntp.org/bin/view/Main/SecurityNotice#April_2016_NTP_4_2_8p7_Security
+Turns out that we don't need the dependencies at all. I did a clean build
+and runtime test
+without them, and all is well.
 
-Signed-off-by: Armin Kuster <akuster@mvista.com>
-Acked-by: Joe MacDonald <joe_macdonald@mentor.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../recipes-support/ntp/{ntp_4.2.8p6.bb => ntp_4.2.8p7.bb}            | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/ntp/{ntp_4.2.8p6.bb => ntp_4.2.8p7.bb} (97%)
+I pushed a fix to meta-virt.
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p6.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb
-similarity index 97%
-rename from meta-networking/recipes-support/ntp/ntp_4.2.8p6.bb
-rename to meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb
-index 1836dd9..fba2f5e 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p6.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb
-@@ -23,8 +23,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
-            file://ntpd.list \
- "
- 
--SRC_URI[md5sum] = "60049f51e9c8305afe30eb22b711c5c6"
--SRC_URI[sha256sum] = "583d0e1c573ace30a9c6afbea0fc52cae9c8c916dbc15c026e485a0dda4ba048"
-+SRC_URI[md5sum] = "46dfba933c3e4bc924d8e55068797578"
-+SRC_URI[sha256sum] = "81d20c06a0b01abe3b84fac092185bf014252d38fe5e7b2758f604680a0220dc"
- 
- inherit autotools update-rc.d useradd systemd pkgconfig
- 
+Bruce
+
+
+>
+> Cheers,
+>
+> Bruce
+>
+>
+>> Cheers,
+>> Jack.
+>>
+>
+>
+>
+> --
+> "Thou shalt not follow the NULL pointer, for chaos and madness await thee
+> at its end"
+>
+
+
+
 -- 
-2.3.5
-
+"Thou shalt not follow the NULL pointer, for chaos and madness await thee
+at its end"
 
