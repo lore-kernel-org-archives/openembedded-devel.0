@@ -1,52 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 71C6F73212
+Return-Path: <akuster808@gmail.com>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id E7C377704E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 May 2016 19:27:25 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id w143so15260182wmw.3
+	Wed, 18 May 2016 20:04:44 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id n62so4905777qkc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 May 2016 12:27:26 -0700 (PDT)
+	Wed, 18 May 2016 13:04:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=AmW6NCGmH7Jpzt2MokbCQ65jIikl/6h94fH19MtmSmk=;
-	b=tckhuapTETtvqD7ITekhLHqE5XEZV+UpnrbCRgPUSWsV+pmng6/mwbdKn3EyamW6tq
-	FrU6OJfn/ZHqOII58CaqKpnE9KGbF6tZYybVFdJDnsypftIxpXAuWhsPtLjneC9jwCl5
-	QjKyWFkuBQ65Ak7sMimbIQSWpQ1V+K+0AcAtMYxZ8n1kpPCg+H1lPl+ai8fqAqTi5LeM
-	yK707/YKL06O8F/DQ8R7CjmjJRfbwfIj2OlvDNl+yQVOic1El7ec+2Xk340jBYQgsV3n
-	jw4TdvgRBKJQJX+Hme2hzsQSYQaoly3Uc0pIuE96YYY7VXmQr3IajEzPrEgDWdlgZ7FY
-	NC2g==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=E5ulxjQmH5CUukPkRtJzWtvJPzrF+kKgASC/wOu4l8I=;
+	b=cedQYDFGpJ5jhguAr2olBRRTrhfXP6idPI6YpRd0j2P3yajO/us4/aApGCWrUvsnyq
+	rZIVH25tTUdJhhU4EBl1ra6IayVkn1sJbzSKujGvOUvapq4PkrcRzWQfBmeARImyepIk
+	tSjXptuyTKpVJqkb8U1TwXhp3U06lLEsAe38kfFXw/udOUTwF+Y2fs0zaylSP2J7sYd8
+	En7qLcbmVDJWJ35UVi7JKohCKl+Unee9JO8IppRAKTxpSESDAfbptAA4Zh3IRIXQ9ut1
+	xMrl3ItezG8Ixd+6ha3o8KsBPwlwBXHOLX9uez23RO9CadfPKINs221kcPiXFvrsujcA
+	IilQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=AmW6NCGmH7Jpzt2MokbCQ65jIikl/6h94fH19MtmSmk=;
-	b=hq19OigAjG9XVR6hbjH/sbBb8FBwzBLUunDGCc3AnUyHgAWbebgyAl4I8i97uspk6x
-	ZdCy6g05kp15TmkGM9e7NAfCLt6yz02ek4rcmGX5q2ME4f70PMWRh+EalF+Xw69Z04/u
-	rD2SEdH527kQeRzXAPdvCN/9jgcTdKKRc8Hs1AB20cbXVQZLJ6CzGGtdhNIXyTZJk01M
-	A+t2V2ilU4D3WOT//U/5z974QC13deAnDg6KBU0Sx2ehG7REHujz63qRyjE4ODWPomCf
-	yWw1nexRRKec936M4rJnk9dZrWXV0ZXvkbmt04FyLX5eIHR/yzsmE6wZYCNbk9WA6od2
-	gs7g==
-X-Gm-Message-State: AOPr4FXV32RPIygJMhT4zlA8TguC8n6l86ItatH0R7Ze9mE1LrcOgHaMYmGvSsvpAmTSRQ==
-X-Received: by 10.194.59.108 with SMTP id y12mr8952405wjq.63.1463599645521;
-	Wed, 18 May 2016 12:27:25 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	r75sm31098668wme.18.2016.05.18.12.27.24
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 18 May 2016 12:27:24 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 18 May 2016 21:27:55 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160518192755.GF2579@jama>
-References: <1462995709-6171-1-git-send-email-neenareddy.busireddy@nxp.com>
-	<1462995709-6171-2-git-send-email-neenareddy.busireddy@nxp.com>
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=E5ulxjQmH5CUukPkRtJzWtvJPzrF+kKgASC/wOu4l8I=;
+	b=IukaJoza2BGl74eOt5SU9RFv0VOAWqgBcIWiJEBV8J0ahvi8636bhuYdfvkzBcfYtX
+	Jfof1d1qB4OKry64FMlPoIN5nB+x+ILbvwBl32JGZmMSyMkMd05z9QwOfO3SxtvBFnZp
+	/00MzhXTkPuv2Y+67EZ+VWK/JUiZtwArqnlqVFBkB0KVanU5kWw2G4SgiIMXUvhH/kZ+
+	+7qQz0JgMHaraEQjJEcCnKAeyZo0bS6sHBOmb+iGAG/imySV7EPCdhLfai7WMWuCQJk+
+	Fg6C4fIy9es4E7WsdRvLD10uBhZ4UX+ft7WpXLD1Z2sKvl66Ulje+rWNNJhflrKcNTgx
+	L1WQ==
+X-Gm-Message-State: AOPr4FX/3CrsAuRHJQumo7vUC4XI7AtbWYJwBX+IDqD0HZJJcy0/fb9B4tc3/YfSZFdnsA==
+X-Received: by 10.55.20.13 with SMTP id e13mr10015430qkh.180.1463601885178;
+	Wed, 18 May 2016 13:04:45 -0700 (PDT)
+Received: from Pahoa2.mvista.com ([50.233.148.158])
+	by smtp.gmail.com with ESMTPSA id f6sm4971942qgf.4.2016.05.18.13.04.43
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 18 May 2016 13:04:44 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster@mvista.com,
+	openembedded-devel@lists.openembedded.org
+Date: Wed, 18 May 2016 13:04:01 -0700
+Message-Id: <cover.1463601459.git.akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
 MIME-Version: 1.0
-In-Reply-To: <1462995709-6171-2-git-send-email-neenareddy.busireddy@nxp.com>
-User-Agent: Mutt/1.6.1 (2016-04-27)
-Subject: Re: [meta-oe][PATCH 2/2] freeglut: Add a recipe freeglut to replace mesa-glut
+Subject: [PATCH 00/38] Krogoth-next pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,84 +55,164 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 May 2016 19:27:26 -0000
-X-Groupsio-MsgNum: 61544
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="GV0iVqYguTV4Q9ER"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 18 May 2016 20:04:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---GV0iVqYguTV4Q9ER
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Please consider these changes for meta-openembedded krogot-next
 
-On Wed, May 11, 2016 at 02:41:49PM -0500, Neena Busireddy wrote:
-> FreeGLUT is a free-software/open-source alternative to the OpenGL
-> Utility Toolkit (GLUT) library.
-> More information about this library can be found in
-> http://freeglut.sourceforge.net/
->=20
-> Signed-off-by: Neena Busireddy <neenareddy.busireddy@nxp.com>
-> ---
->  meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb | 17 +++++++++++++++=
-++
->  1 file changed, 17 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb
->=20
-> diff --git a/meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb b/meta-o=
-e/recipes-graphics/freeglut/freeglut_3.0.0.bb
-> new file mode 100644
-> index 0000000..7671e75
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb
-> @@ -0,0 +1,17 @@
-> +DESCRIPTION =3D "FreeGLUT is a free-software/open-source alternative to =
-the OpenGL \
-> +               Utility Toolkit (GLUT) library"
-> +LICENSE =3D "X-Consortium"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D89c0b58a3e01ce3d8254c9f59e78a=
-dfb"
-> +
-> +SRC_URI =3D "https://sourceforge.net/projects/${BPN}/files/${BPN}/${PV}/=
-${BPN}-${PV}.tar.gz"
-> +SRC_URI[md5sum] =3D "90c3ca4dd9d51cf32276bc5344ec9754"
-> +SRC_URI[sha256sum] =3D "2a43be8515b01ea82bcfa17d29ae0d40bd128342f0930cd1=
-f375f1ff999f76a2"
-> +
-> +inherit cmake
+The following changes since commit 2092396f0e4fd3891b398c7180528aba67e1d522:
 
-you're missing distro_features_check here, so the check bellow doesn't
-work
+  ntp: Security fixes via update to 4.2.8p7 (2016-05-02 14:04:13 -0700)
 
-> +
-> +# depends on virtual/libx11
-> +REQUIRED_DISTRO_FEATURES =3D "x11"
-> +
-> +PROVIDES +=3D "mesa-glut"
-> +
-> +DEPENDS =3D "virtual/libx11 libxmu libxi virtual/libgl libglu libxrandr"
-> --=20
-> 1.9.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+are available in the git repository at:
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+  git://github.com/akuster/meta-openembedded akuster/krogoth-next
+  https://github.com/akuster/meta-openembedded/tree/akuster/krogoth-next
 
---GV0iVqYguTV4Q9ER
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Andreas Müller (3):
+  meta-xfce: add intltool-native to DEPENDS
+  xfce-polkit: fix warning not able to copy license
+  fluidsynth: set correct portaudio packageconfig dependency
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
+Ann Thornton (2):
+  packagegroup-tools-bluetooth.bb: Selects the tools appropriate for the
+    version of bluez being used.
+  packagegroup-tools-bluetooth: Selects the tools appropriate for the
+    version of bluez being used.
 
-iEYEARECAAYFAlc8wjoACgkQN1Ujt2V2gBzeYQCeKZVrcUYBMjQNhgE5Zaubq4l6
-ShcAniB/5mMecc/7i7H8NiolHDrzfQZ8
-=6/Ux
------END PGP SIGNATURE-----
+Armin Kuster (4):
+  acpitests: Fix license issue
+  libwnck: fix WARNING
+  upower: fix WARNING
+  wireshark: Fix new QA Error
 
---GV0iVqYguTV4Q9ER--
+Catalin Enache (2):
+  proftpd: CVE-2016-3125
+  squid: CVE-2016-3947
+
+Christopher Larson (2):
+  fbida: use separate builddir
+  sox: dep on ffmpeg, not libav
+
+Derek Straka (2):
+  python-pyparsing: modify build to correctly use setuptools rather than
+    distutils
+  leptonica: add PACAKGECONFIG for openjpeg
+
+Herrie (1):
+  pidgin: Update to 2.10.12
+
+Ioan-Adrian Ratiu (2):
+  openconnect: add missing dependencies
+  syslog-ng.inc: fix prerm script & class includes
+
+Kinsella, Ray (1):
+  wvstreams: fixing segfault with new gcc optimizations
+
+Li xin (1):
+  rp-pppoe: Fix rootfs creation errors
+
+Martin Jansa (5):
+  sblim-sfcb: add missing dependency on unzip-native
+  pidgin: add PACKAGECONFIGs
+  pidgin: use pkg-config instead of hardcoded paths or python-config
+  llvm3.3: Disable auto -dbg packages
+  poppler: add --std=c++11 to fix build with Qt 5.7
+
+Neena Busireddy (1):
+  glmark2: wl_surface should be destoryed after destroying wl_window
+
+Noor Ahsan (1):
+  libnice, farsight2: unblacklist as libnice's nice.pc issue fixed.
+
+Otavio Salvador (1):
+  opencv: Fix metapkg dependencies for opencv-java and opencv-locales
+
+Paul Barker (1):
+  toybox: Remove out-of-date patch
+
+Paul Gortmaker (2):
+  autotools-bootstrap: make bootstrap package specific.
+  netcf: fix mishandling of gnulib submodule causing build fail
+
+Qi.Chen@windriver.com (4):
+  dovecot: fix QA issue and remove from blacklist
+  rrdtool: fix do_configure failure on some hosts
+  curlpp: fix recipe
+  znc: fix QA issue and remove from blacklist
+
+Robert Yang (1):
+  nbd: fix LIC_FILES_CHKSUM
+
+Roy Li (1):
+  lmbench: avoid gcc optimize-away multiplication
+
+Zhu Yanjun (1):
+  net-snmp: enable ipv6 support
+
+ meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb |   2 +-
+ .../fluidsynth/fluidsynth_1.1.6.bb                 |   2 +-
+ .../recipes-multimedia/sox/sox_14.4.0.bb           |   2 +-
+ .../openconnect/openconnect_git.bb                 |   2 +-
+ .../proftpd/files/CVE-2016-3125.patch              | 247 +++++++++++++
+ .../recipes-daemons/proftpd/proftpd_1.3.5a.bb      |   1 +
+ .../squid/files/CVE-2016-3947.patch                |  48 +++
+ .../recipes-daemons/squid/squid_3.5.7.bb           |   1 +
+ meta-networking/recipes-irc/znc/znc_git.bb         |   5 +-
+ .../recipes-protocols/net-snmp/net-snmp_5.7.3.bb   |   3 +
+ .../recipes-protocols/rp-pppoe/rp-pppoe_3.12.bb    |   4 +
+ .../recipes-support/curlpp/curlpp_0.7.3.bb         |  60 ----
+ .../recipes-support/dovecot/dovecot_2.2.21.bb      |   8 +-
+ meta-networking/recipes-support/nbd/nbd_3.11.bb    |   2 +-
+ meta-networking/recipes-support/netcf/netcf_git.bb |  21 +-
+ .../recipes-support/wireshark/wireshark_2.0.2.bb   |   5 +-
+ meta-oe/classes/autotools-bootstrap.bbclass        |  24 --
+ meta-oe/licenses/Intel                             |  21 ++
+ ...ace-should-be-destoryed-after-the-wl_wind.patch |  34 ++
+ meta-oe/recipes-benchmark/glmark2/glmark2_git.bb   |   3 +-
+ .../0001-avoid-gcc-optimize-away-the-loops.patch   |  79 +++++
+ .../recipes-benchmark/lmbench/lmbench_3.0-a9.bb    |   1 +
+ .../packagegroups/packagegroup-tools-bluetooth.bb  |  37 ++
+ .../recipes-connectivity/wvdial/wvstreams_4.6.1.bb |   2 +
+ meta-oe/recipes-core/llvm/llvm.inc                 |   3 +-
+ .../toybox/0001-Match-paths-with-busybox.patch     | 388 ---------------------
+ meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb  |   2 +
+ .../sblim-sfcb/sblim-sfcb_1.4.9.bb                 |   2 +-
+ meta-oe/recipes-graphics/fbida/fbida_2.10.bb       |   5 +-
+ .../fontforge/fontforge_20150824.bb                |  18 +-
+ .../recipes-graphics/leptonica/leptonica_1.70.bb   |   3 +
+ .../recipes-support/farsight/farsight2_0.0.22.bb   |   2 -
+ meta-oe/recipes-support/farsight/libnice_0.0.13.bb |   4 +-
+ meta-oe/recipes-support/opencv/opencv_3.1.bb       |   5 +-
+ .../pidgin/pidgin/pidgin-cross-python-265.patch    |  50 ++-
+ .../pidgin/pidgin/pidgin.desktop-set-icon.patch    |  11 -
+ .../pidgin/{pidgin_2.10.9.bb => pidgin_2.10.12.bb} |  41 ++-
+ ...h-C-11-compilers-that-don-t-define-isinfi.patch |  39 +++
+ meta-oe/recipes-support/poppler/poppler_0.41.0.bb  |   4 +
+ meta-oe/recipes-support/syslog-ng/syslog-ng.inc    |   2 +-
+ meta-oe/recipes-support/upower/upower_0.9.14.bb    |   2 +-
+ .../python/python-pyparsing_2.1.1.bb               |   2 +-
+ meta-xfce/classes/xfce.bbclass                     |   2 +
+ .../recipes-apps/xfce-polkit/xfce-polkit_0.2.bb    |   2 +-
+ .../xfce4-taskmanager/xfce4-taskmanager_1.1.0.bb   |   2 +-
+ .../recipes-multimedia/parole/parole_0.8.1.bb      |   2 +-
+ .../notes/xfce4-notes-plugin_1.8.1.bb              |   2 +-
+ .../xfce4-power-manager_1.4.4.bb                   |   2 +-
+ 48 files changed, 661 insertions(+), 548 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/proftpd/files/CVE-2016-3125.patch
+ create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-2016-3947.patch
+ delete mode 100644 meta-oe/classes/autotools-bootstrap.bbclass
+ create mode 100644 meta-oe/licenses/Intel
+ create mode 100644 meta-oe/recipes-benchmark/glmark2/files/0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch
+ create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench/0001-avoid-gcc-optimize-away-the-loops.patch
+ create mode 100644 meta-oe/recipes-connectivity/packagegroups/packagegroup-tools-bluetooth.bb
+ delete mode 100644 meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch
+ delete mode 100644 meta-oe/recipes-support/pidgin/pidgin/pidgin.desktop-set-icon.patch
+ rename meta-oe/recipes-support/pidgin/{pidgin_2.10.9.bb => pidgin_2.10.12.bb} (67%)
+ create mode 100644 meta-oe/recipes-support/poppler/poppler/0001-Compile-with-C-11-compilers-that-don-t-define-isinfi.patch
+
+-- 
+2.3.5
+
+
