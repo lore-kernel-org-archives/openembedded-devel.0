@@ -1,53 +1,45 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-qk0-f174.google.com (mail-qk0-f174.google.com
-	[209.85.220.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 275D365CBA
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f65.google.com (mail-pa0-f65.google.com
+	[209.85.220.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 2E00E60796
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 May 2016 22:17:44 +0000 (UTC)
-Received: by mail-qk0-f174.google.com with SMTP id n62so15476189qkc.2
+	Wed, 18 May 2016 04:43:05 +0000 (UTC)
+Received: by mail-pa0-f65.google.com with SMTP id xm6so3721667pab.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 May 2016 15:17:45 -0700 (PDT)
+	Tue, 17 May 2016 21:43:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:cc:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding;
-	bh=32CiAFz/UwX4TuMz+Sgh+hvQyV/Rj6e5gtKyZskGaHw=;
-	b=j3622sjYsdB3QbkriKidHwG8rXsN04akXVFwjGW0VY4BOyNquB3eGnTA1J3AnI5ZLL
-	kEla0W0EfKa0WoQr+03fNRMUsfGANTg5RDrOCKX53HbcGXwGd5beD5ocr19idIC5Jo78
-	fOQ5SFrAWyjNA+igg7OHRdo99zjxxTjY0UUDEK/M3gHe8A9XNPb8+WH/4a5cp1nWb3Ke
-	L97e+fJ1sUvSRSwJBxwgFHMzMD2Azx4jdy27jVSgeLCSR6TUFfsRv1LamSKT+RH4Cu+T
-	qcFAMr1ACuBK9B8w6QwZkHjDog9QzrJ1pEBxO0ozA4vF8yAbbEJUokvlwdO//1g5Wymc
-	jp/w==
+	h=from:to:cc:subject:date:message-id;
+	bh=s1U+JqbrqAFDxTAa4W3p9aJDziLBipvP5Y1/laDRzCY=;
+	b=oDaDO6ApPsKWSHIUMu4vBCYrPizMc+7OHrWUNyXK+B3msjXByalDc6S6BwXUoJN741
+	mSIem+n4sFw3eq3u38VC5VqFgPIO1wDtsKp+u2FHVMw6qaPJL0Pg5pWO21+lkDrqnFSs
+	zQemazb6sS+BO/X4x7026vHZmUgaS0eCneQk4xNqqbF/qNfnuR6gKrn0LuKmX5HN6tFQ
+	yBaMtephQ7ycGyPNLZEYxVmLn2OPqPzPpRVnYtqCHTLz6bFoG/599mGS8Ee63ES6uIaw
+	BrR0NEibvfeid7x11U9hXFwCqoe6h4DrcPMLt+GgNIrXJZUjMP3NwGLoEK2be+RC+eaX
+	bi+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=32CiAFz/UwX4TuMz+Sgh+hvQyV/Rj6e5gtKyZskGaHw=;
-	b=k50B1ipCbRkPdDg1CdTo6yq0jUlcoKR7Jvvgn4XiwBQ21M7lPIE2tP7tS+PJp0bLS3
-	A/GpZry7ZuvTJSREFySz0a4Hci+ts+GJ1dcQ6A+YOafXOUbnjSTN2D6Q1LEJ+Uw81lAk
-	pHzzOTJbKgaMv0N8airM7OChteERsgmLZwtYl00i4/pihh2ynNB+U1r1PDQN1xZSiKKV
-	/JtdxyEMam4kD2hCUmP7utk84kU3qbV0TnFGt4bnNvHE9bEYen0H7ifusN7oNvLi4b4s
-	N+MXVuJ29fLf2VsqYjrdLUKV+7z1E5CZ/k2XMo5E4b/WtDINXKmak7FPB9SV/vyjGcaU
-	oQJw==
-X-Gm-Message-State: AOPr4FWXZYroYD1gCGkO+c+CrIX9rymHRDBvSG6qVfb2pDT75F6zqb8pR9uMoBKmF27Jaw==
-X-Received: by 10.55.19.21 with SMTP id d21mr4672482qkh.118.1463523465142;
-	Tue, 17 May 2016 15:17:45 -0700 (PDT)
-Received: from [10.43.100.29] ([50.233.148.158])
-	by smtp.googlemail.com with ESMTPSA id
-	k4sm2529888qke.49.2016.05.17.15.17.43
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 17 May 2016 15:17:43 -0700 (PDT)
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <573B8BD4.10503@gmail.com>
-	<CA+chaQere0t5x397taYZspvW=7j9PgepFPgG82X=io-srn0XKw@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <573B9888.2080403@gmail.com>
-Date: Tue, 17 May 2016 15:17:44 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
-MIME-Version: 1.0
-In-Reply-To: <CA+chaQere0t5x397taYZspvW=7j9PgepFPgG82X=io-srn0XKw@mail.gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: jethro-next merge
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=s1U+JqbrqAFDxTAa4W3p9aJDziLBipvP5Y1/laDRzCY=;
+	b=OOmrjMcjbHebZ1BF6VVHUEGd0Jt+3AKeIEOCgYxWdHlOkMspPXk0FpJcyVHlx7G90t
+	nIi50vlHup3qMWDjmbTcreYI+MQ3xpXNDqxfZu6Cs79Wu1Cd8kda4E8Uz/YNwiq74CUw
+	IbcBLf/WnPPXbDaYVfCSLNNwsmEMwHlDmHC1B67H9vdLsNWjXjNBqJKAj/Bqvs9DaQ02
+	IJN3so9Eqnm6Pei/TQ7thuS5GxDrWV+Jpk+T+j9UmYxTJRxnj/r4RZsZQ9c0t6Ygb4Ma
+	c9OKHgZ8DRxdBjlmQbwTEh+ej15GUmeqsNCOYTLoKOHiT5zK7d+R2Dn4M8ZUQm+Bwiwx
+	wo3g==
+X-Gm-Message-State: AOPr4FWgssoaGQ2fXghJTXhL8mAydpk8m5EyjZU6/cwvSwmZqHiIpuQ1NvKoI+qLbhy4Mg==
+X-Received: by 10.66.62.106 with SMTP id x10mr7703924par.136.1463546587019;
+	Tue, 17 May 2016 21:43:07 -0700 (PDT)
+Received: from haswell.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
+	126sm8307958pfg.93.2016.05.17.21.43.06
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 17 May 2016 21:43:06 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 17 May 2016 21:42:58 -0700
+Message-Id: <1463546578-7021-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.8.2
+Subject: [meta-initramfs][PATCH] initramfs-kexecboot-klibc-image: Skip for nios2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,28 +52,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 May 2016 22:17:45 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 18 May 2016 04:43:07 -0000
 
+nios2 does not support klibc
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-bsp/images/initramfs-kexecboot-klibc-image.bb           | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-On 05/17/2016 02:34 PM, Martin Jansa wrote:
-> Just waiting for the request :)
+diff --git a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb
+index df97511..da3023f 100644
+--- a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb
++++ b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb
+@@ -5,3 +5,9 @@ SUMMARY = "Initramfs image for kexecboot kernel (klibc-static binaries)"
+ # We really need just kexecboot, kexec and ubiattach
+ # statically compiled against klibc
+ IMAGE_INSTALL = "kexecboot-klibc kexec-klibc ubiattach-klibc"
++
++python () {
++    if d.getVar('TARGET_ARCH', True) == "nios2":
++        raise bb.parse.SkipPackage("'nios2' not supported arch")
++}
++
+-- 
+2.8.2
 
-So I have ask twice? Once from my initial pull request and another to
-move from next to stable? I will make a note for next time.
-
-thanks,
-Armin
-
-> 
-> On Tue, May 17, 2016 at 11:23 PM, akuster808 <akuster808@gmail.com> wrote:
-> 
->> Any ETA on when jethro-next will be merged to jethro? its been three weeks.
->>
->> regards,
->> Armin
->>
-> 
 
