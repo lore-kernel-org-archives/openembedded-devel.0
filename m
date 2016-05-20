@@ -1,49 +1,30 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 6928B60721
+Return-Path: <daicy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C5FF6011A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 May 2016 20:10:03 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id s63so9390014wme.2
+	Fri, 20 May 2016 02:22:08 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; 
+   d="scan'208";a="6726112"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 20 May 2016 10:22:09 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 0431B42B66FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 May 2016 13:10:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=6g/Uq5qjrKLnPgk/Jf8R5tRpWOmCVc74LC2HzFwFdtU=;
-	b=bQo4QPEGrVaaptNkHHmM7GqW/P6pJYeJgnNNqY2vYNvXtw93xMdyBsqSvB/hkkfRPH
-	zBJAIM3WifvUz9vRx0ocFOof0daFEcIG3UAZnx5N1wQn08vzBwKclNLbP5W4fpUxvL1R
-	FwuGJMqNNnWZQzZWWoWaCeWGLSG0vQaJQEYwpPEX1dLnHzL1BRyT5kKw3VIaAVK82z4E
-	TYzrpax67lgIt2/VNJxBhSBCLvs95z80OvkTjpbMP7JHS32Zp+QhJ9zeeQXqQKaz7hpH
-	nEzypVN5p46TaIAAAPew8kzO8Qjc/gNrQi/1n34Zuiki/bsRGKDFK41ukJmLiQ37+FIa
-	4HOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=6g/Uq5qjrKLnPgk/Jf8R5tRpWOmCVc74LC2HzFwFdtU=;
-	b=Qq9NgyJILnPQQ8DbYjRG23ZXtCE8u1qCoU9Os2e+Yp27KOG6PU40bRzXrKJpnffciz
-	3LFcX95V3Xy6mtUGIjSyXbuB94QoX4/vxBCUO9yg203k1VBmNL2w4s41M/Axzj2nrhLz
-	Dhoi5qNuy4KbTbc3lLXfPIOzijCAz+Fls/zJUiDt39vmqKkH0oWs2mFkrh3dciAvbNNW
-	HUVYILvyNyVAXyTBWJJKF8J8ztGt6K3vKlUlwE35T/u9wo31p0ndqAtbqO694O3sPThT
-	++E6b3JSIWJkmuHlcpYJChOQ67YHiEaehZeSqA43SXaFiCa4m0kjsV2n98GABPNDM+1G
-	4WzQ==
-X-Gm-Message-State: AOPr4FWEkgIWDFkwSPu87ujBmOCnMfoeBNlVH+hhZMyZqcoSt4ZU0T5/KjC5PSBmOvMtig==
-X-Received: by 10.28.23.138 with SMTP id 132mr16147923wmx.50.1463688604472;
-	Thu, 19 May 2016 13:10:04 -0700 (PDT)
-Received: from localhost.localdomain (p5B0A38BA.dip0.t-ipconnect.de.
-	[91.10.56.186]) by smtp.googlemail.com with ESMTPSA id
-	w3sm16129913wjt.0.2016.05.19.13.10.03
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 19 May 2016 13:10:03 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 May 2016 22:09:40 +0200
-Message-Id: <1463688580-15506-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.5.5
+	Fri, 20 May 2016 10:22:05 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.24) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.279.2; Fri, 20 May 2016 10:22:04 +0800
+From: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <1456615592-11508-1-git-send-email-daicy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-Subject: [PATCH] fontforge: add back gnulib to DEPENDS
+X-Originating-IP: [10.167.226.24]
+X-yoursite-MailScanner-ID: 0431B42B66FA.AC721
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: daicy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] openct: Fix rootfs creation errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,53 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 May 2016 20:10:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Date: Fri, 20 May 2016 02:22:11 -0000
+X-Original-Date: Sun, 28 Feb 2016 02:26:32 +0300
+X-List-Received-Date: Fri, 20 May 2016 02:22:11 -0000
+Content-Type: text/plain
 
-commit 00ec8bc10df539ecedc3beb2dde28a8e4665cad8
-Author: Paul Gortmaker <paul.gortmaker@windriver.com>
-Date:   Sun May 8 15:08:12 2016 -0400
+To fix error as following:
+    file /var/run from install of openct-0.6.20-r0
+    conflicts with file from package base-files-3.0.14
 
-    autotools-bootstrap: make bootstrap package specific.
-
-removed this dependency causing:
-
-ERROR: fontforge-20150824-r0 do_configure: Function failed: do_configure (log file is located at /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/fontforge/20150824-r0/temp/log.do_configure.26234)
-ERROR: Logfile of failure stored in: /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/fontforge/20150824-r0/temp/log.do_configure.26234
-Log data follows:
-| DEBUG: Executing python function sysroot_cleansstate
-| DEBUG: Python function sysroot_cleansstate finished
-| DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'arm-32', 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
-| DEBUG: Executing shell function autotools_preconfigure
-| DEBUG: Shell function autotools_preconfigure finished
-| DEBUG: Executing python function autotools_copy_aclocals
-| DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'arm-32', 'common-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
-| DEBUG: Python function autotools_copy_aclocals finished
-| DEBUG: Executing shell function do_configure
-| cp: cannot stat '/home/superandy/tmp/oe-core-glibc/sysroots/raspberrypi2/usr/share/gnulib': No such file or directory
-| WARNING: /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/fontforge/20150824-r0/temp/run.do_configure.26234:1 exit 1 from 'cp -rf /home/superandy/tmp/oe-core-glibc/sysroots/raspberrypi2/usr/share/gnulib /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/fontforge/20150824-r0/git'
-| ERROR: Function failed: do_configure (log file is located at /home/superandy/tmp/oe-core-glibc/work/cortexa7t2hf-neon-vfpv4-angstrom-linux-gnueabi/fontforge/20150824-r0/temp/log.do_configure.26234)
-
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/openct/openct_0.6.20.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
-index 53899f1..6f876aa 100644
---- a/meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
-+++ b/meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = " \
-     file://LICENSE;md5=3f922b42ed0033fa0fd4cd3268f6429c \
- "
+diff --git a/meta-oe/recipes-support/openct/openct_0.6.20.bb b/meta-oe/recipes-support/openct/openct_0.6.20.bb
+index bf1ff57..d4ad9c1 100644
+--- a/meta-oe/recipes-support/openct/openct_0.6.20.bb
++++ b/meta-oe/recipes-support/openct/openct_0.6.20.bb
+@@ -55,6 +55,9 @@ FILES_${PN}-dbg += " \
  
--DEPENDS = "glib-2.0 pango giflib tiff libxml2 jpeg python libtool uthash"
-+DEPENDS = "glib-2.0 pango giflib tiff libxml2 jpeg python libtool uthash gnulib"
- DEPENDS_append_class-target = " libxi"
+ INSANE_SKIP_${PN} += "dev-deps"
  
- inherit autotools pkgconfig pythonnative distro_features_check
++do_install_append() {
++    rm -r ${D}/${localstatedir}/run
++}
+ 
+ do_install () {
+     rm -rf ${D}
 -- 
-2.5.5
+1.8.4.2
+
+
 
 
