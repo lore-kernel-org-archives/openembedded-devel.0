@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
-	[209.85.161.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B8CD60589
+Received: from mail-yw0-f196.google.com (mail-yw0-f196.google.com
+	[209.85.161.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 96E3470179
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 May 2016 12:21:53 +0000 (UTC)
-Received: by mail-yw0-f193.google.com with SMTP id y6so18044905ywe.0
+	Sat, 21 May 2016 12:31:35 +0000 (UTC)
+Received: by mail-yw0-f196.google.com with SMTP id i22so18065509ywc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 May 2016 05:21:54 -0700 (PDT)
+	Sat, 21 May 2016 05:31:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=lNPn/+q/zQB4XLiUw41P/bb89avqwlBymVUK0h75xqs=;
-	b=nE1FO/nFyk+HORQYDu9QUeA35hEZHOukMLwp4P8tPJ7mD5A7ObvV00AYIunY+E35Cy
-	gqe3AqICAGPLQaRB+RXxXwBhmFMNBxqQme7MyRuoah24gJOqMo0XcgKNlbO4YsiDMgi0
-	hjIAMmDkJCfhKMBXtrTUCcHe/IQiwBs6eDqAgYZtnKa9ehzjfZicbcjr4AwXiP1aPbw1
-	5vFjUDgUcExg58c0tEA+HAIU9o5eWFAkrhqSbdNwCFL/ggLRxrwuzY9JmsUdFLERAQVx
-	Nsb2Y6yrXT53QS5zewDH1OEy+Y1pV7vzAofV7taP8tckgCOcrS8ZlSKYV6Q2Xuphm/Jb
-	/NFg==
-X-Gm-Message-State: AOPr4FWX/bLHy1gabOt+vXt+wildY4lDAx0ktDTFp3Wrxz3Fh/xXBPk/ZajkrAo9WcqKAQ==
-X-Received: by 10.129.97.85 with SMTP id v82mr4504925ywb.109.1463833314312;
-	Sat, 21 May 2016 05:21:54 -0700 (PDT)
-Received: from localhost.localdomain ([104.129.204.71])
+	bh=tExBswuVoQ58bX5VaDE1O2EDvMZZ+NFWhGUtqUJxV4Y=;
+	b=SWQiSkLaL6IDuKSiEM07DDQ5S9v7C95F5T4f754OHcYCzEeuD767TkTzIIhiWb/lp0
+	lLtoIB5vdk6mIkUsDUFQiq+RVSFcmhsom5YmWmb4c2aTvnJNkw73jbzEpjx8wA2E9CkZ
+	pgps+aRPAjYn+qyvIkCMX725CivQ/+1JsYU6eJBzHjwEUG7k9LfjABR96WjEZn393lH2
+	guHGb78JTh3Py51GenWjT3SQfcbeCp+ZiCGpopzczmyIcD/qAU8GpZ+U8Q8a30L+2JSR
+	cbiZM6Wa5Cyra+V0EmTx/KCBpLSDnBO+XqtYnNunWDwFxVL90D/kdK8lK6pV5xWiecZd
+	okrA==
+X-Gm-Message-State: AOPr4FXf0QzGY//dTfiUD3i56SCxwEER6RTSFxDq8nD2DxygBAHnUVFoD6mUVc8KISWyQg==
+X-Received: by 10.129.89.134 with SMTP id n128mr5136980ywb.102.1463833895759; 
+	Sat, 21 May 2016 05:31:35 -0700 (PDT)
+Received: from localhost.localdomain ([104.129.204.116])
 	by smtp.gmail.com with ESMTPSA id
-	j3sm13821912ywj.32.2016.05.21.05.21.53
+	w185sm13927000ywe.1.2016.05.21.05.31.35
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 21 May 2016 05:21:53 -0700 (PDT)
+	Sat, 21 May 2016 05:31:35 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 May 2016 08:21:26 -0400
-Message-Id: <1463833286-6457-1-git-send-email-derek@asterius.io>
+Date: Sat, 21 May 2016 08:31:26 -0400
+Message-Id: <1463833886-3626-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python-backports-ssl: update to version 3.5.0.1
+Subject: [meta-python][PATCH] python-enum34: update to version 1.1.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,38 +44,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 May 2016 12:21:56 -0000
-
-updated license checksum for new package config file
+X-List-Received-Date: Sat, 21 May 2016 12:31:36 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- ...on-backports-ssl_3.4.0.2.bb => python-backports-ssl_3.5.0.1.bb} | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-backports-ssl_3.4.0.2.bb => python-backports-ssl_3.5.0.1.bb} (71%)
+ meta-python/recipes-devtools/python/python-enum34_1.1.2.bb | 8 --------
+ meta-python/recipes-devtools/python/python-enum34_1.1.6.bb | 9 +++++++++
+ 2 files changed, 9 insertions(+), 8 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-enum34_1.1.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-enum34_1.1.6.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-backports-ssl_3.4.0.2.bb b/meta-python/recipes-devtools/python/python-backports-ssl_3.5.0.1.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python-backports-ssl_3.4.0.2.bb
-rename to meta-python/recipes-devtools/python/python-backports-ssl_3.5.0.1.bb
-index 5e2d174..3d0f21c 100644
---- a/meta-python/recipes-devtools/python/python-backports-ssl_3.4.0.2.bb
-+++ b/meta-python/recipes-devtools/python/python-backports-ssl_3.5.0.1.bb
-@@ -7,10 +7,11 @@ match_hostname() function for performing this check instead of requiring every a
- implement the check separately. This backport brings match_hostname() to users of earlier versions of Python"
- 
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=77b684960b86b7a4bb4a450ffde08605"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=95a5ee8fd779fbeca8b4cbca64433c87"
- 
--SRC_URI[md5sum] = "788214f20214c64631f0859dc79f23c6"
--SRC_URI[sha256sum] = "07410e7fb09aab7bdaf5e618de66c3dac84e2e3d628352814dc4c37de321d6ae"
-+SRC_URI[md5sum] = "c03fc5e2c7b3da46b81acf5cbacfe1e6"
-+SRC_URI[sha256sum] = "502ad98707319f4a51fa2ca1c677bd659008d27ded9f6380c79e8932e38dcdf2"
-+PYPI_PACKAGE_HASH = "76212dc61178a2038a5cb35d14b61467c6ac632791ed05131dda72c20e7b9e23"
- 
- PYPI_PACKAGE = "backports.ssl_match_hostname"
- inherit pypi setuptools
+diff --git a/meta-python/recipes-devtools/python/python-enum34_1.1.2.bb b/meta-python/recipes-devtools/python/python-enum34_1.1.2.bb
+deleted file mode 100644
+index 5083bda..0000000
+--- a/meta-python/recipes-devtools/python/python-enum34_1.1.2.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-SUMMARY = "backport of Python 3.4's enum package"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://enum/LICENSE;md5=0a97a53a514564c20efd7b2e8976c87e"
+-
+-SRC_URI[md5sum] = "025bb71b3f9d2fad15d0ee53e48dc873"
+-SRC_URI[sha256sum] = "2475d7fcddf5951e92ff546972758802de5260bf409319a9f1934e6bbc8b1dc7"
+-
+-inherit pypi setuptools
+diff --git a/meta-python/recipes-devtools/python/python-enum34_1.1.6.bb b/meta-python/recipes-devtools/python/python-enum34_1.1.6.bb
+new file mode 100644
+index 0000000..26293ee
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-enum34_1.1.6.bb
+@@ -0,0 +1,9 @@
++SUMMARY = "backport of Python 3.4's enum package"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://enum/LICENSE;md5=0a97a53a514564c20efd7b2e8976c87e"
++
++SRC_URI[md5sum] = "5f13a0841a61f7fc295c514490d120d0"
++SRC_URI[sha256sum] = "8ad8c4783bf61ded74527bffb48ed9b54166685e4230386a9ed9b1279e2df5b1"
++PYPI_PACKAGE_HASH = "bf3e31d502c25302814a7c2f1d3959d2a3b3f78e509002ba91aea64993936876"
++
++inherit pypi setuptools
 -- 
 1.9.1
 
