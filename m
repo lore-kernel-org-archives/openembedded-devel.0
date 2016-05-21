@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
 	[209.85.161.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 1DDBC73176
+	by mail.openembedded.org (Postfix) with ESMTP id BDD5470149
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 May 2016 12:40:11 +0000 (UTC)
-Received: by mail-yw0-f193.google.com with SMTP id n16so4927988ywd.2
+	Sat, 21 May 2016 12:58:57 +0000 (UTC)
+Received: by mail-yw0-f193.google.com with SMTP id i22so18116456ywc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 May 2016 05:40:12 -0700 (PDT)
+	Sat, 21 May 2016 05:58:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=84tOc4cldHNLG3RU4Hh7tJFrkOYjLtGc5FUfJQtse20=;
-	b=WER57Clh2xLKVIy4WZhQ6KuRU5NFh2fDznefUpCDJclOqM6cc/nZ7RFyF9cBgymYin
-	ko0vhzYEWQOO99sgFct1vdAMSVT3DqLpgJd9LYROjf9jn6KfrFMMEiisR6iQQVfBXKoY
-	t/m1cZourv7YZh/YWgKY77PKKPQ2DcF7qnCxChCF0rTAmERaBv2NRxY14QtwpjZVwove
-	u+oIQUzrZqQsgEk6VLA+1W/jsW3d7JveV+1hhgclL93CvbciLCugIzpGjsLb6LRKJn/W
-	4pP5OTztMxZorHZw00BWIIE49gElcWe4VLlb6YZwgSdUwTfVyFzw9ZZ5x7Qh8XB1ZMhI
-	hojg==
-X-Gm-Message-State: AOPr4FWRtPITs6Z03mjf3qiWBnD8rcIBSoGp3RYcMAbtoZzquWJkM/UsOaKXOfiWl+p4Dg==
-X-Received: by 10.37.68.137 with SMTP id r131mr4378347yba.22.1463834411893;
-	Sat, 21 May 2016 05:40:11 -0700 (PDT)
-Received: from localhost.localdomain ([104.129.204.70])
+	bh=pRu1Er1ahxvMNC0RW1T9yvBR8OctKRe8+C5+fs9rEYk=;
+	b=E8nBv34UwPnPw2S4qG0cnPZp4++ezJGiC63hWAcetOfv+l76B9gENyG7POJpS3i+pj
+	vyXRZfEsn1ReEpJw74BSnrQCeD1EPE0juRnIfWov22q0U9fUBbqfENh4FAyx89UyBSBJ
+	iFClw/Zk8pv29Pu3q3GjPPEdm8nfeM/56e4VVQKZXC8axNfSyLvf3lVzW1DTnHYEalPj
+	wLqVFR4IBjeqrZi+/i2mXU2GlPU3i2fGCOdkPSDzvWxMSl7AVseci7OQ6WbC1Xz6BEai
+	XnEzY2hvlcMKUfsCeyzEFtSU3KWju9GNr38YZPJTSLwfSilvOq1JoHSANBvNQ02Kvp+/
+	McQw==
+X-Gm-Message-State: AOPr4FXadaETs3EVo7IbL9EXyIf6AcqtbSTNDclTe3Pf30zfADlMTal8noTEj6QqxfubLw==
+X-Received: by 10.129.97.85 with SMTP id v82mr4579590ywb.109.1463835538774;
+	Sat, 21 May 2016 05:58:58 -0700 (PDT)
+Received: from localhost.localdomain ([104.129.204.116])
 	by smtp.gmail.com with ESMTPSA id
-	i196sm13905799ywg.33.2016.05.21.05.40.11
+	j3sm13893590ywj.32.2016.05.21.05.58.58
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 21 May 2016 05:40:11 -0700 (PDT)
+	Sat, 21 May 2016 05:58:58 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 May 2016 08:39:59 -0400
-Message-Id: <1463834399-4971-1-git-send-email-derek@asterius.io>
+Date: Sat, 21 May 2016 08:58:39 -0400
+Message-Id: <1463835519-6491-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python-greenlet: update to version 0.4.9
+Subject: [meta-python][PATCH] python-mock: update to version 2.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,33 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 May 2016 12:40:11 -0000
+X-List-Received-Date: Sat, 21 May 2016 12:58:59 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/{python-greenlet_0.4.7.bb => python-greenlet_0.4.9.bb}    | 5 +++--
+ .../python/{python-mock_1.3.0.bb => python-mock_2.0.0.bb}            | 5 +++--
  1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-greenlet_0.4.7.bb => python-greenlet_0.4.9.bb} (55%)
+ rename meta-python/recipes-devtools/python/{python-mock_1.3.0.bb => python-mock_2.0.0.bb} (59%)
 
-diff --git a/meta-python/recipes-devtools/python/python-greenlet_0.4.7.bb b/meta-python/recipes-devtools/python/python-greenlet_0.4.9.bb
-similarity index 55%
-rename from meta-python/recipes-devtools/python/python-greenlet_0.4.7.bb
-rename to meta-python/recipes-devtools/python/python-greenlet_0.4.9.bb
-index a69eb64..703a151 100644
---- a/meta-python/recipes-devtools/python/python-greenlet_0.4.7.bb
-+++ b/meta-python/recipes-devtools/python/python-greenlet_0.4.9.bb
-@@ -3,8 +3,9 @@ LICENSE = "MIT & PSF"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
-                     file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
+diff --git a/meta-python/recipes-devtools/python/python-mock_1.3.0.bb b/meta-python/recipes-devtools/python/python-mock_2.0.0.bb
+similarity index 59%
+rename from meta-python/recipes-devtools/python/python-mock_1.3.0.bb
+rename to meta-python/recipes-devtools/python/python-mock_2.0.0.bb
+index 8a7894c..eb473d2 100644
+--- a/meta-python/recipes-devtools/python/python-mock_1.3.0.bb
++++ b/meta-python/recipes-devtools/python/python-mock_2.0.0.bb
+@@ -2,8 +2,9 @@ SUMMARY = "A Python Mocking and Patching Library for Testing"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=de9dfbf780446b18aab11f00baaf5b7e"
  
--SRC_URI[md5sum] = "c2333a8ff30fa75c5d5ec0e67b461086"
--SRC_URI[sha256sum] = "f32c4fa4e06443e1bdb0d32b69e7617c25ff772c3ffc6d0aa63d192e9fd795fe"
-+SRC_URI[md5sum] = "c6659cdb2a5e591723e629d2eef22e82"
-+SRC_URI[sha256sum] = "58b2f3a2e7075c655616bf95e82868db4980f3bb6661db70ad02a51e4ddd2252"
-+PYPI_PACKAGE_HASH = "4e3d9d421539b74e33608b245092870156b2e171fb49f2b51390aa4641eecb4a"
+-SRC_URI[md5sum] = "73ee8a4afb3ff4da1b4afa287f39fdeb"
+-SRC_URI[sha256sum] = "1e247dbecc6ce057299eb7ee019ad68314bb93152e81d9a6110d35f4d5eca0f6"
++SRC_URI[md5sum] = "0febfafd14330c9dcaa40de2d82d40ad"
++SRC_URI[sha256sum] = "b158b6df76edd239b8208d481dc46b6afd45a846b7812ff0ce58971cf5bc8bba"
++PYPI_PACKAGE_HASH = "0c53014354fc93c591ccc4abff12c473ad565a2eb24dcd82490fae33dbf2539f"
  
- PYPI_PACKAGE_EXT = "zip"
- inherit pypi distutils
+ inherit pypi setuptools
+ 
 -- 
 1.9.1
 
