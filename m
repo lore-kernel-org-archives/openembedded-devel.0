@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-yw0-f196.google.com (mail-yw0-f196.google.com
-	[209.85.161.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C35F60667
+Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
+	[209.85.161.193])
+	by mail.openembedded.org (Postfix) with ESMTP id D08C160589
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 May 2016 13:25:40 +0000 (UTC)
-Received: by mail-yw0-f196.google.com with SMTP id i22so18170528ywc.1
+	Sat, 21 May 2016 13:32:36 +0000 (UTC)
+Received: by mail-yw0-f193.google.com with SMTP id u62so18187861ywe.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 May 2016 06:25:41 -0700 (PDT)
+	Sat, 21 May 2016 06:32:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=s34bPi/ymbbVh644NrIDiNRmMc1y406M79cNSqv82pk=;
-	b=ZVjZj4lZpfGL+tkMO712mcA8XRrLakAsCnvDmmbkArcsNw0t5Ff0eko1fjc171r1Et
-	IHhtZgZokpyGzhim2cNOkhNZ8NDTuO+l4IBPwso+80WEnbI7hXZWt4M+ZJ3/82+miNN0
-	JE51q/aNo/lfFKlSqK6yHIrVt/CXLe6HZJ8Lgs3hCcNhJho1kNFN2jEmbwfD8cUifSrP
-	/YOqdj+Npk1acSZc9TjxMe23Z6Dyr5+n9XG319r+hbsWfpPm2Zb6C2GHIchwc03jHdmX
-	cseehc61XvcUvPTaiRUo5THyGhknC+8M+TRWjPM1csxLAW6AXJ5lWm4GioPukgkmrlo0
-	LRDQ==
-X-Gm-Message-State: AOPr4FWC9KWpDAXEmaJ/KtSzDhvQ5slP9g8fR48uNT+leqty7bA8XlT55qIwYCOWpY0ECw==
-X-Received: by 10.129.165.144 with SMTP id c138mr5103250ywh.271.1463837141296; 
-	Sat, 21 May 2016 06:25:41 -0700 (PDT)
-Received: from localhost.localdomain ([104.129.204.116])
+	bh=MRm4K9RaONcdzqJ30qS3VAhP6Z0XWOLaRqzwLkfHM+k=;
+	b=IGg/OmaBcKPzt5evFdx8w21gHel0EC50HjZinyGi7bycYA+hMTpjRzS1se6e9PZKPH
+	R0GMha2GM+ij/mw+srPiKYVs35TCzWZR0Qu7ybC/rJkuOBV5Jw73KCZqdjKDDS2jy9jg
+	u3J1NcR2hHdhOzjzjlRTrSY53fvi8cvzs24IxatJ84i2hWueJWu6xv9DJpEMHNAZJGIV
+	rylPZW0r68rRVwQiyARtxgOprjnRMJDikStvXJyubI0kg+nV3mgL3wRWg+MYW0bdULUt
+	qgaI6XeVhUSOHFnj+++dmGNUmgGQ7UDc12Kcdoc8J++iaNnLmsFdcGYVRLfYX8o5kl6S
+	vLRg==
+X-Gm-Message-State: AOPr4FUu7Fs0iGEJvZmz68LOYIaZtzDyOD2W+dSRPlRUWFXl7+LltaSfze2HvbjeT2Djuw==
+X-Received: by 10.129.115.138 with SMTP id o132mr4665847ywc.48.1463837557325; 
+	Sat, 21 May 2016 06:32:37 -0700 (PDT)
+Received: from localhost.localdomain ([104.129.204.71])
 	by smtp.gmail.com with ESMTPSA id
-	p66sm13984967ywc.40.2016.05.21.06.25.40
+	i187sm13993533ywb.51.2016.05.21.06.32.36
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 21 May 2016 06:25:40 -0700 (PDT)
+	Sat, 21 May 2016 06:32:36 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 May 2016 09:25:30 -0400
-Message-Id: <1463837130-12117-1-git-send-email-derek@asterius.io>
+Date: Sat, 21 May 2016 09:32:30 -0400
+Message-Id: <1463837550-16551-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python-pyflakes: update to version 1.2.3
+Subject: [meta-python][PATCH] python-pyopenssl: update to version 16.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,59 +44,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 May 2016 13:25:41 -0000
-
-updated license checksum to account for extra release notes in readme
+X-List-Received-Date: Sat, 21 May 2016 13:32:37 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-pyflakes_1.1.0.bb      | 14 --------------
- .../recipes-devtools/python/python-pyflakes_1.2.3.bb      | 15 +++++++++++++++
- 2 files changed, 15 insertions(+), 14 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pyflakes_1.1.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python-pyflakes_1.2.3.bb
+ .../{python-pyopenssl_0.15.1.bb => python-pyopenssl_16.0.0.bb}      | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyopenssl_0.15.1.bb => python-pyopenssl_16.0.0.bb} (66%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyflakes_1.1.0.bb b/meta-python/recipes-devtools/python/python-pyflakes_1.1.0.bb
-deleted file mode 100644
-index ae7d471..0000000
---- a/meta-python/recipes-devtools/python/python-pyflakes_1.1.0.bb
-+++ /dev/null
-@@ -1,14 +0,0 @@
--SUMMARY = "passive checker of Python programs"
--HOMEPAGE = "https://github.com/dreamhost/cliff"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://README.rst;md5=fe719d45f4c604c6e2c86872b6e9485f"
--
--SRC_URI[md5sum] = "e0bf854cd5abd4527e149692925b82eb"
--SRC_URI[sha256sum] = "e5f959931987e2be178781554b485d52342ec9f1b43f891d2dad07a691c7a89a"
--
--inherit pypi setuptools
--
--RDEPENDS_${PN} += " \
--    python-prettytable \
--    python-cmd2 \
--    python-pyparsing"
-diff --git a/meta-python/recipes-devtools/python/python-pyflakes_1.2.3.bb b/meta-python/recipes-devtools/python/python-pyflakes_1.2.3.bb
-new file mode 100644
-index 0000000..35906bd
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyflakes_1.2.3.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "passive checker of Python programs"
-+HOMEPAGE = "https://github.com/dreamhost/cliff"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://README.rst;md5=eb48916870306ef34a061cec727ccae5"
-+
-+SRC_URI[md5sum] = "995747589e97c75055cf5b4e1e031e0b"
-+SRC_URI[sha256sum] = "2e4a1b636d8809d8f0a69f341acf15b2e401a3221ede11be439911d23ce2139e"
-+PYPI_PACKAGE_HASH = "54806a641f832eb6c6a8f7e151e7087aff7a7c04dd8b4aa6134817942cdda1b6"
-+
-+inherit pypi setuptools
-+
-+RDEPENDS_${PN} += " \
-+    python-prettytable \
-+    python-cmd2 \
-+    python-pyparsing"
+diff --git a/meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb b/meta-python/recipes-devtools/python/python-pyopenssl_16.0.0.bb
+similarity index 66%
+rename from meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb
+rename to meta-python/recipes-devtools/python/python-pyopenssl_16.0.0.bb
+index 5027c6d..d1d8f63 100644
+--- a/meta-python/recipes-devtools/python/python-pyopenssl_0.15.1.bb
++++ b/meta-python/recipes-devtools/python/python-pyopenssl_16.0.0.bb
+@@ -3,10 +3,10 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+ DEPENDS = "openssl python-cryptography"
+-PE = "1"
+ 
+-SRC_URI[md5sum] = "f447644afcbd5f0a1f47350fec63a4c6"
+-SRC_URI[sha256sum] = "f0a26070d6db0881de8bcc7846934b7c3c930d8f9c79d45883ee48984bc0d672"
++SRC_URI[md5sum] = "9587d813dcf656e9f2760e41a3682dc3"
++SRC_URI[sha256sum] = "363d10ee43d062285facf4e465f4f5163f9f702f9134f0a5896f134cbb92d17d"
++PYPI_PACKAGE_HASH = "77f2bccec75ca4280a9fa762a90a1b8b152a22eac5d9c726d7da1fcbfe0a20e6"
+ 
+ PYPI_PACKAGE = "pyOpenSSL"
+ inherit pypi setuptools
 -- 
 1.9.1
 
