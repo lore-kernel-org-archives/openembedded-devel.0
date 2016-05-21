@@ -1,36 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
 	[209.85.161.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 651E260589
+	by mail.openembedded.org (Postfix) with ESMTP id 1DDBC73176
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 May 2016 12:37:48 +0000 (UTC)
-Received: by mail-yw0-f193.google.com with SMTP id n16so4923159ywd.2
+	Sat, 21 May 2016 12:40:11 +0000 (UTC)
+Received: by mail-yw0-f193.google.com with SMTP id n16so4927988ywd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 May 2016 05:37:50 -0700 (PDT)
+	Sat, 21 May 2016 05:40:12 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=OIA88CheAxrkmUdF20abhiGlz+E0nXU6jh6uyYPPwV4=;
-	b=cuBCIuSiJiPmoNxVyFGVkOvd8TgbR147TzklUcpgayROwrgGMWb5CUgmEuVFN/TKpv
-	d4ATyrCLT89QvFTNQ+U2P6J5d60Po7nB2tX7y6lwID5i+HHapOi37LplBLf6FnFn98vN
-	7WNgUEl5SqkObb2OanVzVlIJ18omNIJB5odOhDuNAgdw76gjLqrKwI2X6TeW33mLfCd9
-	B2vwO0sA07tZ1rvl0Dt1GJkjDbLxGGCaNP2IXwTeUswygxeaO4CFFe6WbE+Wg2JhCv0c
-	/Vsf0QnZVtB4bQC8rG0/iQ2puGuh8kDpz3A4vkPU3ox1cPOMbwk7yOOLAzPDrO0b4yPE
-	LPsw==
-X-Gm-Message-State: AOPr4FWAGywp2CKrMccBFSUl0bGv99jx9IUmIWBv2qNESiiDOu30AXCG4PyEkBjmCVOvrg==
-X-Received: by 10.129.46.141 with SMTP id u135mr4421570ywu.180.1463833421568; 
-	Sat, 21 May 2016 05:23:41 -0700 (PDT)
+	bh=84tOc4cldHNLG3RU4Hh7tJFrkOYjLtGc5FUfJQtse20=;
+	b=WER57Clh2xLKVIy4WZhQ6KuRU5NFh2fDznefUpCDJclOqM6cc/nZ7RFyF9cBgymYin
+	ko0vhzYEWQOO99sgFct1vdAMSVT3DqLpgJd9LYROjf9jn6KfrFMMEiisR6iQQVfBXKoY
+	t/m1cZourv7YZh/YWgKY77PKKPQ2DcF7qnCxChCF0rTAmERaBv2NRxY14QtwpjZVwove
+	u+oIQUzrZqQsgEk6VLA+1W/jsW3d7JveV+1hhgclL93CvbciLCugIzpGjsLb6LRKJn/W
+	4pP5OTztMxZorHZw00BWIIE49gElcWe4VLlb6YZwgSdUwTfVyFzw9ZZ5x7Qh8XB1ZMhI
+	hojg==
+X-Gm-Message-State: AOPr4FWRtPITs6Z03mjf3qiWBnD8rcIBSoGp3RYcMAbtoZzquWJkM/UsOaKXOfiWl+p4Dg==
+X-Received: by 10.37.68.137 with SMTP id r131mr4378347yba.22.1463834411893;
+	Sat, 21 May 2016 05:40:11 -0700 (PDT)
 Received: from localhost.localdomain ([104.129.204.70])
-	by smtp.gmail.com with ESMTPSA id o5sm7734669ywo.38.2016.05.21.05.23.40
+	by smtp.gmail.com with ESMTPSA id
+	i196sm13905799ywg.33.2016.05.21.05.40.11
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 21 May 2016 05:23:41 -0700 (PDT)
+	Sat, 21 May 2016 05:40:11 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 May 2016 08:23:34 -0400
-Message-Id: <1463833414-6615-1-git-send-email-derek@asterius.io>
+Date: Sat, 21 May 2016 08:39:59 -0400
+Message-Id: <1463834399-4971-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python-cffi: update to version 1.6.0
+Subject: [meta-python][PATCH] python-greenlet: update to version 0.4.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,33 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 May 2016 12:37:51 -0000
+X-List-Received-Date: Sat, 21 May 2016 12:40:11 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/{python-cffi_1.5.2.bb => python-cffi_1.6.0.bb}            | 5 +++--
+ .../python/{python-greenlet_0.4.7.bb => python-greenlet_0.4.9.bb}    | 5 +++--
  1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cffi_1.5.2.bb => python-cffi_1.6.0.bb} (51%)
+ rename meta-python/recipes-devtools/python/{python-greenlet_0.4.7.bb => python-greenlet_0.4.9.bb} (55%)
 
-diff --git a/meta-python/recipes-devtools/python/python-cffi_1.5.2.bb b/meta-python/recipes-devtools/python/python-cffi_1.6.0.bb
-similarity index 51%
-rename from meta-python/recipes-devtools/python/python-cffi_1.5.2.bb
-rename to meta-python/recipes-devtools/python/python-cffi_1.6.0.bb
-index 8b25877..bd42abb 100644
---- a/meta-python/recipes-devtools/python/python-cffi_1.5.2.bb
-+++ b/meta-python/recipes-devtools/python/python-cffi_1.6.0.bb
-@@ -3,8 +3,9 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
- DEPENDS = "libffi python-pycparser"
+diff --git a/meta-python/recipes-devtools/python/python-greenlet_0.4.7.bb b/meta-python/recipes-devtools/python/python-greenlet_0.4.9.bb
+similarity index 55%
+rename from meta-python/recipes-devtools/python/python-greenlet_0.4.7.bb
+rename to meta-python/recipes-devtools/python/python-greenlet_0.4.9.bb
+index a69eb64..703a151 100644
+--- a/meta-python/recipes-devtools/python/python-greenlet_0.4.7.bb
++++ b/meta-python/recipes-devtools/python/python-greenlet_0.4.9.bb
+@@ -3,8 +3,9 @@ LICENSE = "MIT & PSF"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
+                     file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
  
--SRC_URI[md5sum] = "fa766133f7299464c8bf857e0c966a82"
--SRC_URI[sha256sum] = "da9bde99872e46f7bb5cff40a9b1cc08406765efafb583c704de108b6cb821dd"
-+SRC_URI[md5sum] = "2fae9160991afefb20ff0fbde3b14faf"
-+SRC_URI[sha256sum] = "a7f75c4ef2362c0a0e54657add0a6c509fecbfa3b3807bc0925f5cb1c9f927db"
-+PYPI_PACKAGE_HASH = "b69811feff87072e2e640fb8320712b781eccdef05d588618915236b32289d5a"
+-SRC_URI[md5sum] = "c2333a8ff30fa75c5d5ec0e67b461086"
+-SRC_URI[sha256sum] = "f32c4fa4e06443e1bdb0d32b69e7617c25ff772c3ffc6d0aa63d192e9fd795fe"
++SRC_URI[md5sum] = "c6659cdb2a5e591723e629d2eef22e82"
++SRC_URI[sha256sum] = "58b2f3a2e7075c655616bf95e82868db4980f3bb6661db70ad02a51e4ddd2252"
++PYPI_PACKAGE_HASH = "4e3d9d421539b74e33608b245092870156b2e171fb49f2b51390aa4641eecb4a"
  
- inherit pypi setuptools
- 
+ PYPI_PACKAGE_EXT = "zip"
+ inherit pypi distutils
 -- 
 1.9.1
 
