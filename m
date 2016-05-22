@@ -1,37 +1,46 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-yw0-f195.google.com (mail-yw0-f195.google.com
-	[209.85.161.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 33E1A60667
+Return-Path: <bernard_mentink@trimble.com>
+Received: from mail-yw0-f174.google.com (mail-yw0-f174.google.com
+	[209.85.161.174])
+	by mail.openembedded.org (Postfix) with ESMTP id D36DB6012C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 May 2016 14:03:41 +0000 (UTC)
-Received: by mail-yw0-f195.google.com with SMTP id u62so18247024ywe.3
+	Sun, 22 May 2016 18:43:17 +0000 (UTC)
+Received: by mail-yw0-f174.google.com with SMTP id c127so36023305ywb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 May 2016 07:03:42 -0700 (PDT)
+	Sun, 22 May 2016 11:43:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=trimble-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to; 
+	bh=qmV6ghZxb7FZ6PK0UcHo35/yPCHFI7udGhMU94lARB8=;
+	b=QEFnfmy0Ao3iD+i+dzOFFIgVmmBy/TVzoUl7WVupIdr9ifAWg0wQgcrkLOJ2co0Bqz
+	azDgv8v9EeK51r6nt1bHSqrrk/wnbY/pPBq4MfOJXWFn9kpWpmSvzYxph0QiUFZi2fcm
+	QI6Qa28g4WnECJO2ckg2Yv8HXq7dah4tVixKU47TXC7XbVF9cptbKsuPREXQfYBbcWyC
+	X7y4WhTm1MW2qFeZzTZtMQfRZeC/L5NMEzv77s4erD5hXhNnGNLrbZq+Glw//mWZVilw
+	8hF7mfA2vxdGVBU9TBLhzTPUluwfqU5eCweLigVWF2XV2njDlGCBLBd66+pX4VigUISd
+	6ypQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=QzFP9xxJV50Wfy5hlpJNbCmqvzRJC4FmrxejlNydd1w=;
-	b=LvJQDIlxmUQYm44saxchT0y3WySjk9zPwpt4/0gTjQGFxDLRBFSdA77/kl75l2QQCw
-	c+pFYrRzDk29ono3O/HbcopbH8N1/JnLlx1sh80z1awGm6DUthzheOrogtb90iiJgEtM
-	9SX56I4n8xJUPj0SHXAq66ZTeVEry1rrlOeTuEsVwfCgP9iJrT4tin+g07fE4hIz8AbQ
-	F153wsL0IlPQO4++28nexSiAzZvV/DIhRYxw8AUn7HoWfc1jf+KEfJqv4/65Y7ayfdi1
-	Z3XvwDmYMxQ5dXSq8vMOKCjkh5CDqb2g9Y3EKZNEjXAY/ZadBANMXfBpbOOzCPVxxsTY
-	O4SA==
-X-Gm-Message-State: AOPr4FVXJfb9aB1W1g/mJjPjuAFbL2uRalt0DjJrZUF33MkoTMjRlzmjd7cEOS3TqjMg1A==
-X-Received: by 10.37.111.215 with SMTP id k206mr4652844ybc.47.1463839421934;
-	Sat, 21 May 2016 07:03:41 -0700 (PDT)
-Received: from localhost.localdomain ([104.129.204.116])
-	by smtp.gmail.com with ESMTPSA id
-	z17sm3872760ywz.56.2016.05.21.07.03.41
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 21 May 2016 07:03:41 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to;
+	bh=qmV6ghZxb7FZ6PK0UcHo35/yPCHFI7udGhMU94lARB8=;
+	b=HMf9EdDCZ2UxoaVvWWa1CJ98G1EXQqGZsyh+twexbl1WlJarjhYXaRQvex/NUii1iJ
+	HL+aeaCgm6rZCJ6kWzmnTv1ScY2tI9h/AArTii6Gvk6msSaXHjqEgOmRwdgMtXpRob9p
+	QryK9nPAvF9uLA5KiV3rYE5Ld9MSVz/YWnkoDQjXaIeXgcYnF3uBLrU9XLxnGfN2iVgv
+	63udZYewTDxajbKvkYTjy0bkIl0KIB1Qvry+r3qvn9inN//CLRO8ZXzaOFY/qisxKeO1
+	3npiOSGoVSwFDjcC3jVUiFwXULGyJ8K/LpmFYZ8Gt0V9M1LmZet10BjX3n5EszFo39Y0
+	vXzw==
+X-Gm-Message-State: AOPr4FUfLEZum74bCKJCFto+kbdXJO1VXzLMEiSBfdtAZsW+dLjPwcHlDHAcSrHO3BBr/A4GTrBV/Vyk/4k/0bIR
+MIME-Version: 1.0
+X-Received: by 10.129.160.194 with SMTP id x185mr7793583ywg.130.1463942597696; 
+	Sun, 22 May 2016 11:43:17 -0700 (PDT)
+Received: by 10.129.1.1 with HTTP; Sun, 22 May 2016 11:43:17 -0700 (PDT)
+In-Reply-To: <573f2581.d3168c0a.a7019.44b4@mx.google.com>
+References: <573f2581.d3168c0a.a7019.44b4@mx.google.com>
+Date: Mon, 23 May 2016 06:43:17 +1200
+Message-ID: <CAHkvPB+Coq2r+myAT+KOJ1gZ1jdRYJOmk-u38a72zWuwSS2QPA@mail.gmail.com>
+From: Bernard Mentink <bernard_mentink@trimble.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 May 2016 10:03:29 -0400
-Message-Id: <1463839409-23314-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python-thrift: update to version 0.9.3
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: Updates to meta-browser (master) in 2016-05-20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,57 +53,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 May 2016 14:03:43 -0000
+X-List-Received-Date: Sun, 22 May 2016 18:43:18 -0000
+Content-Type: text/plain; charset=UTF-8
 
-update recipe to use pypi class
-update license checksum for latest version
+Can someone send me a link to unsubscribe from this list ..
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../python-thrift/python-thrift_0.9.2.bb                 | 16 ----------------
- .../python-thrift/python-thrift_0.9.3.bb                 |  9 +++++++++
- 2 files changed, 9 insertions(+), 16 deletions(-)
- delete mode 100644 meta-python/recipes-connectivity/python-thrift/python-thrift_0.9.2.bb
- create mode 100644 meta-python/recipes-connectivity/python-thrift/python-thrift_0.9.3.bb
+Thanks
 
-diff --git a/meta-python/recipes-connectivity/python-thrift/python-thrift_0.9.2.bb b/meta-python/recipes-connectivity/python-thrift/python-thrift_0.9.2.bb
-deleted file mode 100644
-index d0c4af7..0000000
---- a/meta-python/recipes-connectivity/python-thrift/python-thrift_0.9.2.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--SUMMARY = "Python bindings for the Apache Thrift RPC system"
--HOMEPAGE = "https://pypi.python.org/pypi/amqp/"
--SECTION = "devel/python"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=df17a59cc9e1327ec49c2285e13ac477"
--
--SRCNAME = "thrift"
--
--SRC_URI = "https://pypi.python.org/packages/source/t/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
--
--SRC_URI[md5sum] = "91f1c224c46a257bb428431943387dfd"
--SRC_URI[sha256sum] = "08f665e4b033c9d2d0b6174d869273104362c80e77ee4c01054a74141e378afa"
--
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-diff --git a/meta-python/recipes-connectivity/python-thrift/python-thrift_0.9.3.bb b/meta-python/recipes-connectivity/python-thrift/python-thrift_0.9.3.bb
-new file mode 100644
-index 0000000..a8a8ff8
---- /dev/null
-+++ b/meta-python/recipes-connectivity/python-thrift/python-thrift_0.9.3.bb
-@@ -0,0 +1,9 @@
-+SUMMARY = "Python bindings for the Apache Thrift RPC system"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1203b6a05c3bff3229710e3f063ddca7"
-+
-+SRC_URI[md5sum] = "b519551d7a086bb0b4f222a8f566b7e8"
-+SRC_URI[sha256sum] = "dfbc3d3bd19d396718dab05abaf46d93ae8005e2df798ef02e32793cd963877e"
-+PYPI_PACKAGE_HASH = "ae5835e3f0cd290039ff862c2c9d8ae8a76896665d70343d833bdc2f748b8e55"
-+
-+inherit pypi setuptools
--- 
-1.9.1
+On Sat, May 21, 2016 at 2:55 AM, Otavio Salvador <otavio.salvador@gmail.com>
+wrote:
 
+> Hello,
+>
+> I pushed following updates:
+>
+> commit 825ea9349fe9b7da39f1de0c3e8e15d9d62f2774 (HEAD -> pending,
+> origin/master, origin/HEAD)
+> Author: Carlos Rafael Giani <dv@pseudoterminal.org>
+> Date:   Fri May 20 13:41:47 2016 +0200
+>
+>     chromium: Add workarounds for compiler errors
+>
+>     Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+>     Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+>
+> Regards,
+>
+> --
+> Otavio Salvador                             O.S. Systems
+> http://www.ossystems.com.br        http://code.ossystems.com.br
+> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
