@@ -1,45 +1,26 @@
-Return-Path: <bernard_mentink@trimble.com>
-Received: from mail-yw0-f174.google.com (mail-yw0-f174.google.com
-	[209.85.161.174])
-	by mail.openembedded.org (Postfix) with ESMTP id D36DB6012C
+Return-Path: <philip@balister.org>
+X-Greylist: delayed 399 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 23 May 2016 01:08:29 UTC
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id B5EB5605BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 May 2016 18:43:17 +0000 (UTC)
-Received: by mail-yw0-f174.google.com with SMTP id c127so36023305ywb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 May 2016 11:43:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=trimble-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to; 
-	bh=qmV6ghZxb7FZ6PK0UcHo35/yPCHFI7udGhMU94lARB8=;
-	b=QEFnfmy0Ao3iD+i+dzOFFIgVmmBy/TVzoUl7WVupIdr9ifAWg0wQgcrkLOJ2co0Bqz
-	azDgv8v9EeK51r6nt1bHSqrrk/wnbY/pPBq4MfOJXWFn9kpWpmSvzYxph0QiUFZi2fcm
-	QI6Qa28g4WnECJO2ckg2Yv8HXq7dah4tVixKU47TXC7XbVF9cptbKsuPREXQfYBbcWyC
-	X7y4WhTm1MW2qFeZzTZtMQfRZeC/L5NMEzv77s4erD5hXhNnGNLrbZq+Glw//mWZVilw
-	8hF7mfA2vxdGVBU9TBLhzTPUluwfqU5eCweLigVWF2XV2njDlGCBLBd66+pX4VigUISd
-	6ypQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to;
-	bh=qmV6ghZxb7FZ6PK0UcHo35/yPCHFI7udGhMU94lARB8=;
-	b=HMf9EdDCZ2UxoaVvWWa1CJ98G1EXQqGZsyh+twexbl1WlJarjhYXaRQvex/NUii1iJ
-	HL+aeaCgm6rZCJ6kWzmnTv1ScY2tI9h/AArTii6Gvk6msSaXHjqEgOmRwdgMtXpRob9p
-	QryK9nPAvF9uLA5KiV3rYE5Ld9MSVz/YWnkoDQjXaIeXgcYnF3uBLrU9XLxnGfN2iVgv
-	63udZYewTDxajbKvkYTjy0bkIl0KIB1Qvry+r3qvn9inN//CLRO8ZXzaOFY/qisxKeO1
-	3npiOSGoVSwFDjcC3jVUiFwXULGyJ8K/LpmFYZ8Gt0V9M1LmZet10BjX3n5EszFo39Y0
-	vXzw==
-X-Gm-Message-State: AOPr4FUfLEZum74bCKJCFto+kbdXJO1VXzLMEiSBfdtAZsW+dLjPwcHlDHAcSrHO3BBr/A4GTrBV/Vyk/4k/0bIR
-MIME-Version: 1.0
-X-Received: by 10.129.160.194 with SMTP id x185mr7793583ywg.130.1463942597696; 
-	Sun, 22 May 2016 11:43:17 -0700 (PDT)
-Received: by 10.129.1.1 with HTTP; Sun, 22 May 2016 11:43:17 -0700 (PDT)
-In-Reply-To: <573f2581.d3168c0a.a7019.44b4@mx.google.com>
-References: <573f2581.d3168c0a.a7019.44b4@mx.google.com>
-Date: Mon, 23 May 2016 06:43:17 +1200
-Message-ID: <CAHkvPB+Coq2r+myAT+KOJ1gZ1jdRYJOmk-u38a72zWuwSS2QPA@mail.gmail.com>
-From: Bernard Mentink <bernard_mentink@trimble.com>
+	Mon, 23 May 2016 01:08:29 +0000 (UTC)
+Received: (qmail 6064 invoked by uid 1003); 23 May 2016 01:01:50 -0000
+Received: from unknown (HELO ?192.168.11.140?)
+	(philip@opensdr.com@108.44.118.32)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	23 May 2016 01:01:50 -0000
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+References: <573f2581.d3168c0a.a7019.44b4@mx.google.com>
+	<CAHkvPB+Coq2r+myAT+KOJ1gZ1jdRYJOmk-u38a72zWuwSS2QPA@mail.gmail.com>
+From: Philip Balister <philip@balister.org>
+Message-ID: <316189de-d5f8-5d6d-ba1b-616e96ea2293@balister.org>
+Date: Sun, 22 May 2016 21:01:48 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.0
+MIME-Version: 1.0
+In-Reply-To: <CAHkvPB+Coq2r+myAT+KOJ1gZ1jdRYJOmk-u38a72zWuwSS2QPA@mail.gmail.com>
 Subject: Re: Updates to meta-browser (master) in 2016-05-20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -53,40 +34,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 May 2016 18:43:18 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 23 May 2016 01:08:30 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-Can someone send me a link to unsubscribe from this list ..
+See the bottom of the email from the list.
 
-Thanks
+Philip
 
-On Sat, May 21, 2016 at 2:55 AM, Otavio Salvador <otavio.salvador@gmail.com>
-wrote:
-
-> Hello,
->
-> I pushed following updates:
->
-> commit 825ea9349fe9b7da39f1de0c3e8e15d9d62f2774 (HEAD -> pending,
-> origin/master, origin/HEAD)
-> Author: Carlos Rafael Giani <dv@pseudoterminal.org>
-> Date:   Fri May 20 13:41:47 2016 +0200
->
->     chromium: Add workarounds for compiler errors
->
->     Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
->     Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
->
-> Regards,
->
-> --
-> Otavio Salvador                             O.S. Systems
-> http://www.ossystems.com.br        http://code.ossystems.com.br
-> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+On 05/22/2016 02:43 PM, Bernard Mentink wrote:
+> Can someone send me a link to unsubscribe from this list ..
+> 
+> Thanks
+> 
+> On Sat, May 21, 2016 at 2:55 AM, Otavio Salvador <otavio.salvador@gmail.com>
+> wrote:
+> 
+>> Hello,
+>>
+>> I pushed following updates:
+>>
+>> commit 825ea9349fe9b7da39f1de0c3e8e15d9d62f2774 (HEAD -> pending,
+>> origin/master, origin/HEAD)
+>> Author: Carlos Rafael Giani <dv@pseudoterminal.org>
+>> Date:   Fri May 20 13:41:47 2016 +0200
+>>
+>>     chromium: Add workarounds for compiler errors
+>>
+>>     Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+>>     Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+>>
+>> Regards,
+>>
+>> --
+>> Otavio Salvador                             O.S. Systems
+>> http://www.ossystems.com.br        http://code.ossystems.com.br
+>> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
 
