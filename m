@@ -1,26 +1,23 @@
-Return-Path: <Abdur_Rehman@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 55AC36FF5D
+Return-Path: <stefan@agner.ch>
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id 59B5160589
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 May 2016 19:08:19 +0000 (UTC)
-Received: from nat-ies.mentorg.com ([192.94.31.2]
-	helo=SVR-IES-FEM-02.mgc.mentorg.com)
-	by relay1.mentorg.com with esmtp 
-	id 1b5Hgi-0004FR-4T from Abdur_Rehman@mentor.com ;
-	Tue, 24 May 2016 12:08:20 -0700
-Received: from svr-pkl-eng-06.pkl.mentorg.com (137.202.0.76) by
-	SVR-IES-FEM-02.mgc.mentorg.com (137.202.0.106) with Microsoft SMTP
-	Server id 14.3.224.2; Tue, 24 May 2016 20:08:18 +0100
-From: Abdur Rehman <abdur_rehman@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 25 May 2016 00:07:51 +0500
-Message-ID: <1464116871-38779-2-git-send-email-abdur_rehman@mentor.com>
-X-Mailer: git-send-email 2.8.1
-In-Reply-To: <1464116871-38779-1-git-send-email-abdur_rehman@mentor.com>
-References: <1464116871-38779-1-git-send-email-abdur_rehman@mentor.com>
-MIME-Version: 1.0
-Cc: Gary Thomas <gary@mlbassoc.com>
-Subject: [meta-oe][PATCH v4 2/2] mpv: Media Player
+	Tue, 24 May 2016 20:43:15 +0000 (UTC)
+Received: from seahawk.toradex.int
+	(75-146-58-181-Washington.hfc.comcastbusiness.net [75.146.58.181])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id 451F95C0776;
+	Tue, 24 May 2016 22:40:46 +0200 (CEST)
+From: Stefan Agner <stefan@agner.ch>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 24 May 2016 13:43:11 -0700
+Message-Id: <1464122591-32671-1-git-send-email-stefan@agner.ch>
+X-Mailer: git-send-email 1.9.1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1464122447; bh=BGU+vaYI98YiMqLIjwuUPC07nzvpUZIdmOUOUQ3b3B8=;
+	h=From:To:Cc:Subject:Date:Message-Id;
+	b=Nuo2FcZJpThx38wvbvCVySgbBivQD83FelDYkLZVh8QT9xAA8tJBvUZXWZRteMLyKEHWG0kCFW2IktbsMxmWD3TtqHKITJJP/6c37Jf8aUPs3Yzy4AcMhH2tmAkmmtP/UizUWLEdVsI1SytmnMd5HCLB3+1NsZUlIBPURTjTcMU=
+Cc: Stefan Agner <stefan.agner@toradex.com>
+Subject: [meta-oe][PATCH] florence: move to latest GTK2 version 0.5.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,95 +30,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 May 2016 19:08:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 24 May 2016 20:43:17 -0000
 
-mpv is a fork of mplayer2 and MPlayer. It shares some features with
-the former projects while introducing many more.
+From: Stefan Agner <stefan.agner@toradex.com>
 
-Signed-off-by: Gary Thomas <gary@mlbassoc.com>
-Signed-off-by: Abdur Rehman <abdur_rehman@mentor.com>
+The latest GTK2 version is 0.5.4, which contains several bug fixes.
+Noteable, it fixes an issue where the SVG keys have not been displayed
+with recent versions of its dependencies.
+
+Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
 ---
- meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb | 69 ++++++++++++++++++++++++
- 1 file changed, 69 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
+ .../florence/files/fix-no-atspi-compile.patch      | 30 ++++++++++++++++++++++
+ .../recipes-support/florence/florence_0.5.1.bb     | 20 ---------------
+ .../recipes-support/florence/florence_0.5.4.bb     | 20 +++++++++++++++
+ 3 files changed, 50 insertions(+), 20 deletions(-)
+ create mode 100644 meta-gnome/recipes-support/florence/files/fix-no-atspi-compile.patch
+ delete mode 100644 meta-gnome/recipes-support/florence/florence_0.5.1.bb
+ create mode 100644 meta-gnome/recipes-support/florence/florence_0.5.4.bb
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
+diff --git a/meta-gnome/recipes-support/florence/files/fix-no-atspi-compile.patch b/meta-gnome/recipes-support/florence/files/fix-no-atspi-compile.patch
 new file mode 100644
-index 0000000..e5d5c53
+index 0000000..0bb5dee
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
-@@ -0,0 +1,69 @@
-+SUMMARY = "Open Source multimedia player"
-+SECTION = "multimedia"
-+HOMEPAGE = "http://www.mpv.io/"
-+DEPENDS = "zlib ffmpeg jpeg virtual/libx11 xsp libxv \
-+           libxscrnsaver libv4l libxinerama \
-+"
++++ b/meta-gnome/recipes-support/florence/files/fix-no-atspi-compile.patch
+@@ -0,0 +1,30 @@
++diff --git a/src/florence.c b/src/florence.c
++index b27c31b..feadefe 100644
++--- a/src/florence.c
+++++ b/src/florence.c
++@@ -44,12 +44,6 @@
++ /* exit signal */
++ static int flo_exit=FALSE;
++ 
++-#ifdef ENABLE_AT_SPI2
++-void flo_check_show (struct florence *florence, AtspiAccessible *obj);
++-#else
++-void flo_check_show (struct florence *florence, Accessible *obj);
++-#endif
++-
++ /* Called on destroy event (systray quit or close window) */
++ void flo_destroy (void)
++ {
++@@ -61,6 +55,12 @@ void flo_destroy (void)
++ }
++ 
++ #ifdef AT_SPI
+++#ifdef ENABLE_AT_SPI2
+++void flo_check_show (struct florence *florence, AtspiAccessible *obj);
+++#else
+++void flo_check_show (struct florence *florence, Accessible *obj);
+++#endif
+++
++ /* Called to destroy the icon */
++ void flo_icon_destroy (GtkWidget *widget, gpointer user_data)
++ {
+diff --git a/meta-gnome/recipes-support/florence/florence_0.5.1.bb b/meta-gnome/recipes-support/florence/florence_0.5.1.bb
+deleted file mode 100644
+index 71014f0..0000000
+--- a/meta-gnome/recipes-support/florence/florence_0.5.1.bb
++++ /dev/null
+@@ -1,20 +0,0 @@
+-DESCRIPTION = "Florence is a virtual keyboard (also called on-screen-keyboard), which allows the user to input text through a touchscreen."
+-HOMEPAGE = "http://florence.sourceforge.net/english.html"
+-
+-#NOTICE: If florence can't find its gconf settings, you need to start florence with --config for one time and save the configuration once.
+-
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+-
+-PR = "r1"
+-
+-DEPENDS = "gtk+ libxml2 libglade librsvg libxtst gconf cairo intltool-native gnome-doc-utils libnotify"
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/florence/florence/${PV}/florence-${PV}.tar.bz2 \
+-           file://0001-Fix-glib-includes.patch"
+-SRC_URI[md5sum] = "56d12e5b47c100d9df172aa5ddc0f609"
+-SRC_URI[sha256sum] = "7b06ed84ef2b7b22d8d2cf0c7d013a05409bd82028240ac8719a68b192d5bc62"
+-
+-inherit gettext autotools gconf pkgconfig
+-
+-EXTRA_OECONF = "--disable-scrollkeeper --without-docs --without-at-spi --without-panelapplet"
+diff --git a/meta-gnome/recipes-support/florence/florence_0.5.4.bb b/meta-gnome/recipes-support/florence/florence_0.5.4.bb
+new file mode 100644
+index 0000000..dfdb6bd
+--- /dev/null
++++ b/meta-gnome/recipes-support/florence/florence_0.5.4.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "Florence is a virtual keyboard (also called on-screen-keyboard), which allows the user to input text through a touchscreen."
++HOMEPAGE = "http://florence.sourceforge.net/english.html"
 +
-+REQUIRED_DISTRO_FEATURES = "x11"
++#NOTICE: If florence can't find its gconf settings, you need to start florence with --config for one time and save the configuration once.
 +
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=91f1cb870c1cc2d31351a4d2595441cb"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
 +
-+SRC_URI = "https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz;name=mpv \
-+           http://www.freehackers.org/~tnagy/release/waf-1.8.12;name=waf \
-+"
-+SRC_URI[mpv.md5sum] = "9042bd3fbff2bc8ba0b7fadaa4a22101"
-+SRC_URI[mpv.sha256sum] = "7d31217ba8572f364fcea2955733f821374ae6d8c6d8f22f8bc63c44c0400bdc"
-+SRC_URI[waf.md5sum] = "cef4ee82206b1843db082d0b0506bf71"
-+SRC_URI[waf.sha256sum] = "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f22fca60c98b"
++PR = "r1"
 +
-+inherit pkgconfig pythonnative
++DEPENDS = "gtk+ libxml2 libglade librsvg libxtst gconf cairo intltool-native gnome-doc-utils libnotify gstreamer"
 +
-+# Note: both lua and libass are required to get on-screen-display (controls)
-+PACKAGECONFIG ??= "lua libass"
-+PACKAGECONFIG[lua] = "--enable-lua,--disable-lua,lua luajit"
-+PACKAGECONFIG[libass] = "--enable-libass,--disable-libass,libass"
-+PACKAGECONFIG[libarchive] = "--enable-libarchive,--disable-libarchive,libarchive"
-+PACKAGECONFIG[jack] = "--enable-jack, --disable-jack, jack"
++SRC_URI = "${SOURCEFORGE_MIRROR}/florence/florence/${PV}-gtk2/florence-${PV}.tar.bz2 \
++           file://fix-no-atspi-compile.patch"
++SRC_URI[md5sum] = "8d5c2367a28485bfcf577650b0badab7"
++SRC_URI[sha256sum] = "26d33aa20d5fbf34ceeded4c41cb922d2988b6082e33d9acc46dd7bfe56d31a1"
 +
-+EXTRA_OECONF = " \
-+    --prefix=${prefix} \
-+    --target=${SIMPLE_TARGET_SYS} \
-+    --confdir=${sysconfdir} \
-+    --datadir=${datadir} \
-+    --disable-manpage-build \
-+    --disable-gl \
-+    --disable-libsmbclient \
-+    --disable-encoding \
-+    --disable-libbluray \
-+    --disable-dvdread \
-+    --disable-dvdnav \
-+    --disable-cdda \
-+    --disable-enca \
-+    --disable-libguess \
-+    --disable-uchardet \
-+    --disable-rubberband \
-+    --disable-lcms2 \
-+    --disable-vapoursynth \
-+    --disable-vapoursynth-lazy \
-+"
++inherit gettext autotools gconf pkgconfig
 +
-+do_configure() {
-+    if [ ! -L ../waf ]; then
-+        chmod a+x ../waf-1.8.12
-+	ln -s waf-1.8.12 ../waf
-+    fi
-+    export SIMPLE_TARGET_SYS="$(echo ${TARGET_SYS} | sed s:${TARGET_VENDOR}::g)"
-+    ../waf configure ${EXTRA_OECONF}
-+}
-+
-+do_compile () {
-+    ../waf build
-+}
-+
-+do_install() {
-+    ../waf install --destdir=${D}
-+}
-+
-+FILES_${PN} += "${datadir}/icons"
++EXTRA_OECONF = "--disable-scrollkeeper --without-docs --without-at-spi --without-panelapplet --without-xrecord"
 -- 
-2.8.1
+1.9.1
 
 
