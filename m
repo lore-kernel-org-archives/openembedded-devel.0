@@ -1,63 +1,25 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-ig0-f171.google.com (mail-ig0-f171.google.com
-	[209.85.213.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B6BC60616
+Return-Path: <Abdur_Rehman@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id D89DA62132
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 May 2016 16:37:57 +0000 (UTC)
-Received: by mail-ig0-f171.google.com with SMTP id bi2so55709565igb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 May 2016 09:37:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to; bh=W/zw9QK16HnpwVCoNwI8oFZdXZ7K/OwBhe+NiPu0NRg=;
-	b=NXhPjEZsuefVQKjERoiBHNqO6FHnvXSn/KcVdrOHk5C9Y06ekLNtnvf6R2zuZAbxDu
-	lu8obzaeFYLvU/Z6JhcEK02IijpkO+1KM5MmtN2y4YkvPEVgOF4+JEspe/HFLzwdIp4o
-	3zv1QVpOn7OB3tyWTAolr0XV7aoCrW6tANq08XbBS5Pz+HME6ToC2pv/Rq5l3am0TAam
-	1f8Xya5nu6Ghm+C3GAj6fyzg6l19AZKKbDg7GiNBUeLSLTRb0WtAmMiMadaMz9bWZ8vs
-	5IaiAinXfdQedZ3NbWcSdodHGI8G4hzgtmENvZQIBWNd0hIGsJNHte7nIVIz/O/OKZpY
-	0IYQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=kergoth-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to; bh=W/zw9QK16HnpwVCoNwI8oFZdXZ7K/OwBhe+NiPu0NRg=;
-	b=rdRaDfXT9uqcU4Ahty/sYS8/Yq8a28ltVgWVvbZez98Wkvep0yGZnYlNt8hbnR9ZLt
-	Jbd4ivR8+Y6zv8lSBLyPzE2b62j6StYsOhRVa+ol7YIzkUFgVK+9BGyAkps9sl3gBD9E
-	6FrcHUqYeXw2qu23gtOghYFqIkrsLn3jNVwq4vtxsCu0DtrAhzyhC/3ZL0++S+/xB1E1
-	rVO+HSP1r2jw178ANPCZOCVpKPeAo6Hx1JPOrC/Cll0CQedEJFFmDT4uPLCs+Rh3EAiF
-	VIF+vakzkKkV6zvtdHwrYmsxptujw4FVaDzUpuFHqCrlWsdKbzQ3kXgRwKwcnIUT2sHs
-	Psvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to;
-	bh=W/zw9QK16HnpwVCoNwI8oFZdXZ7K/OwBhe+NiPu0NRg=;
-	b=Xi2TYDa4YLQ+Q0/nJ0Xl3pVDbT8TscggZPBBIfxhxxQL8jUb3AaUG7C1bMsbSFTJYS
-	jIVhwkDA/RbPAhb4t6XJ8tpZbyIKlh2XX5aDVdbapMBGF+1iLpdKLLhRHO+zyXKyKMRu
-	uR5Q0w1Pb1fj+akRq+3XkB0LeiMWuPbEEdh8TGQqLgRqcTRUOX1vYIKuvwrX2cYL1LYV
-	tNf4PEHvRrJx3T17w1uAkw+pNSDcxsH2UXkYOqqWSN19Yz9D5Q16KARnbhIou5m1Ag8X
-	+wzfYmjgfa0OcW3b/yETjyhnx0/jX4BgFMctjfl9rDGZYzYR/ebN7hxOneD5LgQGzu2Q
-	9ABA==
-X-Gm-Message-State: AOPr4FVwW91KY5cy5PsKBx06VSBZK1fbLieNesBzpaGPMMaXeZeh1NiR8WvstmoCGldMLUOU9N51xm724ZhSjg==
-X-Received: by 10.50.123.161 with SMTP id mb1mr19323307igb.20.1464107877718;
-	Tue, 24 May 2016 09:37:57 -0700 (PDT)
+	Tue, 24 May 2016 19:08:09 +0000 (UTC)
+Received: from nat-ies.mentorg.com ([192.94.31.2]
+	helo=SVR-IES-FEM-02.mgc.mentorg.com)
+	by relay1.mentorg.com with esmtp 
+	id 1b5HgX-0004DC-Eq from Abdur_Rehman@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 24 May 2016 12:08:09 -0700
+Received: from svr-pkl-eng-06.pkl.mentorg.com (137.202.0.76) by
+	SVR-IES-FEM-02.mgc.mentorg.com (137.202.0.106) with Microsoft SMTP
+	Server id 14.3.224.2; Tue, 24 May 2016 20:08:08 +0100
+From: Abdur Rehman <abdur_rehman@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 25 May 2016 00:07:50 +0500
+Message-ID: <1464116871-38779-1-git-send-email-abdur_rehman@mentor.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.79.100.5 with HTTP; Tue, 24 May 2016 09:37:38 -0700 (PDT)
-In-Reply-To: <365E1805BC95084CBE82381A0B8699940127D133B7@EU-MBX-01.mgc.mentorg.com>
-References: <1457626042-28653-1-git-send-email-gary@mlbassoc.com>
-	<1457626042-28653-3-git-send-email-gary@mlbassoc.com>
-	<20160311131752.GA2555@jama>
-	<56E3A074.2020509@mlbassoc.com> <56EA7828.4030606@mlbassoc.com>
-	<CA+chaQcnUGp3=ovW17O+-6Do_fimaOST6BeprK6L+=++Rh0_oA@mail.gmail.com>
-	<56EA7CB3.30002@mlbassoc.com> <20160317144519.GD2553@jama>
-	<365E1805BC95084CBE82381A0B8699940127D133B7@EU-MBX-01.mgc.mentorg.com>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Tue, 24 May 2016 09:37:38 -0700
-X-Google-Sender-Auth: RTcWdsm6FGAcQXfIFk8o80066tw
-Message-ID: <CABcZANkWcZ3bgbckV_MxyRUdPKFxA+2DcFXt=WCEgN+MpPCXmw@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH v3 2/2] mpv: Media Player
+Cc: Christopher Larson <chris_larson@mentor.com>
+Subject: [meta-oe][PATCH v4 1/2] libass: add newer version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,23 +32,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 May 2016 16:37:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 24 May 2016 19:08:14 -0000
+Content-Type: text/plain
 
-On Thu, Apr 21, 2016 at 7:49 AM, Ahsan, Noor <Noor_Ahsan@mentor.com> wrote:
+* mpv requires newer libass to build
+* move SRC_URI from Google Code to GitHub
+* ENCA support has been removed https://github.com/libass/libass/pull/197
+  remove --enable-enca which is now an [unknown-configure-option]
+* Fix [textrel] for x86 targets
 
-> Hello Gary,
->
-> Are you planning to send updated PR for MPV?
->
-> Noor
->
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Signed-off-by: Abdur Rehman <abdur_rehman@mentor.com>
+---
+ meta-oe/recipes-multimedia/libass/libass.inc       | 10 +++++-----
+ meta-oe/recipes-multimedia/libass/libass_0.10.1.bb |  5 -----
+ meta-oe/recipes-multimedia/libass/libass_0.13.2.bb |  4 ++++
+ 3 files changed, 9 insertions(+), 10 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/libass/libass_0.10.1.bb
+ create mode 100644 meta-oe/recipes-multimedia/libass/libass_0.13.2.bb
 
-Any news on this series?
+diff --git a/meta-oe/recipes-multimedia/libass/libass.inc b/meta-oe/recipes-multimedia/libass/libass.inc
+index 328cd14..85ac873 100644
+--- a/meta-oe/recipes-multimedia/libass/libass.inc
++++ b/meta-oe/recipes-multimedia/libass/libass.inc
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "libass is a portable subtitle renderer for the ASS/SSA (Advanced Substation Alpha/Substation Alpha) subtitle format. It is mostly compatible with VSFilter."
+-HOMEPAGE = "http://code.google.com/p/libass/"
++HOMEPAGE = "https://github.com/libass/libass"
+ SECTION = "libs/multimedia"
+ 
+ LICENSE = "ISC"
+@@ -7,9 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ae98663bac55afe5d989919d296f28a"
+ 
+ DEPENDS = "enca fontconfig freetype libpng fribidi"
+ 
+-INC_PR = "r1"
+-
+-SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz"
++SRC_URI = "https://github.com/libass/libass/releases/download/${PV}/libass-${PV}.tar.xz"
+ 
+ inherit autotools pkgconfig
+ 
+@@ -17,10 +15,12 @@ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[harfbuzz] = "--enable-harfbuzz,--disable-harfbuzz,harfbuzz"
+ 
+ EXTRA_OECONF = " \
+-    --enable-enca \
+     --enable-fontconfig \
+ "
+ 
++# Disable compiling with ASM for x86 to avoid textrel
++EXTRA_OECONF_append_x86 = " --disable-asm"
++
+ PACKAGES =+ "${PN}-tests"
+ 
+ FILES_${PN}-tests = " \
+diff --git a/meta-oe/recipes-multimedia/libass/libass_0.10.1.bb b/meta-oe/recipes-multimedia/libass/libass_0.10.1.bb
+deleted file mode 100644
+index 0b32276..0000000
+--- a/meta-oe/recipes-multimedia/libass/libass_0.10.1.bb
++++ /dev/null
+@@ -1,5 +0,0 @@
+-require ${PN}.inc
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[md5sum] = "6cace482a013a3c4bf3b31a68ac66026"
+-SRC_URI[sha256sum] = "629a7e81fff92dea8d0399b818a41fd1b61e381c67a5961b1eaec2efadb14c6c"
+diff --git a/meta-oe/recipes-multimedia/libass/libass_0.13.2.bb b/meta-oe/recipes-multimedia/libass/libass_0.13.2.bb
+new file mode 100644
+index 0000000..8cf2bd8
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/libass/libass_0.13.2.bb
+@@ -0,0 +1,4 @@
++require recipes-multimedia/${BPN}/${BPN}.inc
++
++SRC_URI[md5sum] = "1c8cbd5751aeb192bda04a65d0464fd9"
++SRC_URI[sha256sum] = "d698d0a6adca7c36c5a86b540d67b05bfd36cebc3c351ab7646497c43fe1face"
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+2.8.1
+
 
