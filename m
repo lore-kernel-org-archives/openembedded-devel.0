@@ -1,24 +1,24 @@
 Return-Path: <alexander.kanavin@linux.intel.com>
 Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id BB816731D8
+	by mail.openembedded.org (Postfix) with ESMTP id 5F51A731D8
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 24 May 2016 11:56:07 +0000 (UTC)
 Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-	by fmsmga102.fm.intel.com with ESMTP; 24 May 2016 04:56:08 -0700
+	by fmsmga102.fm.intel.com with ESMTP; 24 May 2016 04:56:09 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.26,359,1459839600"; d="scan'208";a="109498908"
+X-IronPort-AV: E=Sophos;i="5.26,359,1459839600"; d="scan'208";a="109498917"
 Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by fmsmga004.fm.intel.com with ESMTP; 24 May 2016 04:56:08 -0700
+	by fmsmga004.fm.intel.com with ESMTP; 24 May 2016 04:56:09 -0700
 From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 May 2016 14:56:58 +0300
-Message-Id: <91d47835b27b3e7b3580eb69f8caee2848a7982a.1464090710.git.alexander.kanavin@linux.intel.com>
+Date: Tue, 24 May 2016 14:56:59 +0300
+Message-Id: <9b8c1ff28b105001b94ea2b45063c40e3038938b.1464090710.git.alexander.kanavin@linux.intel.com>
 X-Mailer: git-send-email 2.8.1
 In-Reply-To: <cover.1464090710.git.alexander.kanavin@linux.intel.com>
 References: <cover.1464090710.git.alexander.kanavin@linux.intel.com>
 In-Reply-To: <cover.1464090710.git.alexander.kanavin@linux.intel.com>
 References: <cover.1464090710.git.alexander.kanavin@linux.intel.com>
-Subject: [PATCH 5/8] python-pyrex: add a recipe
+Subject: [PATCH 6/8] python-pygobject: add a recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,78 +33,101 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 24 May 2016 11:56:08 -0000
 
-This is moved from oe-core.
+oe-core provides only python3-pygobject now, and a few recipes in meta-oe
+still need the version built against Python 2.
 
 Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 ---
- .../python/python-pyrex-native_0.9.9.bb            |  5 +++++
- .../python-pyrex/pyrex-fix-optimized-mode.patch    | 15 +++++++++++++++
- .../recipes-devtools/python/python-pyrex_0.9.9.bb  | 22 ++++++++++++++++++++++
- 3 files changed, 42 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-pyrex-native_0.9.9.bb
- create mode 100644 meta-python/recipes-devtools/python/python-pyrex/pyrex-fix-optimized-mode.patch
- create mode 100644 meta-python/recipes-devtools/python/python-pyrex_0.9.9.bb
+ ...c-add-sysroot-path-to-GI_DATADIR-don-t-se.patch | 41 ++++++++++++++++++++++
+ .../python/python-pygobject_3.18.2.bb              | 31 ++++++++++++++++
+ 2 files changed, 72 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/python/python-pygobject/0001-configure.ac-add-sysroot-path-to-GI_DATADIR-don-t-se.patch
+ create mode 100644 meta-oe/recipes-devtools/python/python-pygobject_3.18.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-pyrex-native_0.9.9.bb b/meta-python/recipes-devtools/python/python-pyrex-native_0.9.9.bb
+diff --git a/meta-oe/recipes-devtools/python/python-pygobject/0001-configure.ac-add-sysroot-path-to-GI_DATADIR-don-t-se.patch b/meta-oe/recipes-devtools/python/python-pygobject/0001-configure.ac-add-sysroot-path-to-GI_DATADIR-don-t-se.patch
 new file mode 100644
-index 0000000..e8ef1aa
+index 0000000..a391f7e
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyrex-native_0.9.9.bb
-@@ -0,0 +1,5 @@
-+require python-pyrex_${PV}.bb
-+inherit native pythonnative
-+DEPENDS = "python-native"
-+RDEPENDS_${PN} = ""
-+PR = "r3"
-diff --git a/meta-python/recipes-devtools/python/python-pyrex/pyrex-fix-optimized-mode.patch b/meta-python/recipes-devtools/python/python-pyrex/pyrex-fix-optimized-mode.patch
-new file mode 100644
-index 0000000..c58c328
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyrex/pyrex-fix-optimized-mode.patch
-@@ -0,0 +1,15 @@
-+Upstream-Status: Pending
++++ b/meta-oe/recipes-devtools/python/python-pygobject/0001-configure.ac-add-sysroot-path-to-GI_DATADIR-don-t-se.patch
+@@ -0,0 +1,41 @@
++From 5e5350d730f85957a42c6d846d347d080e7dd996 Mon Sep 17 00:00:00 2001
++From: Alexander Kanavin <alex.kanavin@gmail.com>
++Date: Fri, 23 Oct 2015 12:40:34 +0300
++Subject: [PATCH] configure.ac: add sysroot path to GI_DATADIR; don't set
++ introspection scanner and compiler paths
 +
-+Index: Pyrex-0.9.8.4/Pyrex/Distutils/extension.py
-+===================================================================
-+--- Pyrex-0.9.8.4.orig/Pyrex/Distutils/extension.py
-++++ Pyrex-0.9.8.4/Pyrex/Distutils/extension.py
-+@@ -15,7 +15,7 @@ except ImportError:
-+     warnings = None
++Upstream-Status: Pending [review on oe-core maillist]
++Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
++---
++ configure.ac | 8 +-------
++ 1 file changed, 1 insertion(+), 7 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index 2c0cfbd..cfcb3bf 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -194,7 +194,7 @@ PKG_CHECK_MODULES(GI,
++     gobject-introspection-1.0 >= introspection_required_version
++ )
 + 
-+ class Extension(_Extension.Extension):
-+-    _Extension.Extension.__doc__ + \
-++    _Extension.Extension.__doc__ or "" + \
-+     """pyrex_include_dirs : [string]
-+         list of directories to search for Pyrex header files (.pxd) (in
-+         Unix form for portability)
-diff --git a/meta-python/recipes-devtools/python/python-pyrex_0.9.9.bb b/meta-python/recipes-devtools/python/python-pyrex_0.9.9.bb
-new file mode 100644
-index 0000000..c4dd2e6
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyrex_0.9.9.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "Language for writing Python extension modules"
-+DESCRIPTION = "Pyrex is a language specially designed for writing Python extension modules. \
-+It's designed to bridge the gap between the nice, high-level, easy-to-use world of Python \
-+and the messy, low-level world of C."
-+SECTION = "devel/python"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=771d472f53f933033f57eeee7808e5bd"
-+SRCNAME = "Pyrex"
-+PR = "r4"
++-GI_DATADIR=$($PKG_CONFIG --variable=gidatadir gobject-introspection-1.0)
+++GI_DATADIR=$PKG_CONFIG_SYSROOT_DIR$($PKG_CONFIG --variable=gidatadir gobject-introspection-1.0)
++ AC_SUBST(GI_DATADIR)
++ 
++ if test "$enable_cairo" != no; then
++@@ -219,12 +219,6 @@ AC_ARG_WITH(common,
++     with_common=yes)
++ AM_CONDITIONAL(WITH_COMMON, test "$with_common" = "yes")
++ 
++-INTROSPECTION_SCANNER=`$PKG_CONFIG --variable=g_ir_scanner gobject-introspection-1.0`
++-INTROSPECTION_COMPILER=`$PKG_CONFIG --variable=g_ir_compiler gobject-introspection-1.0`
++-
++-AC_SUBST(INTROSPECTION_SCANNER)
++-AC_SUBST(INTROSPECTION_COMPILER)
++-
++ # compiler warnings, errors, required cflags, and code coverage support
++ GNOME_COMPILE_WARNINGS([maximum])
++ AC_MSG_CHECKING(for Gnome code coverage support)
++-- 
++2.1.4
 +
-+SRC_URI = "\
-+  http://www.cosc.canterbury.ac.nz/greg.ewing/python/${SRCNAME}/${SRCNAME}-${PV}.tar.gz \
-+  file://pyrex-fix-optimized-mode.patch \
+diff --git a/meta-oe/recipes-devtools/python/python-pygobject_3.18.2.bb b/meta-oe/recipes-devtools/python/python-pygobject_3.18.2.bb
+new file mode 100644
+index 0000000..e4eeafb
+--- /dev/null
++++ b/meta-oe/recipes-devtools/python/python-pygobject_3.18.2.bb
+@@ -0,0 +1,31 @@
++SUMMARY = "Python GObject bindings"
++SECTION = "devel/python"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
++
++inherit autotools pkgconfig gnomebase distutils-base gobject-introspection
++
++DEPENDS += "python glib-2.0"
++
++SRCNAME="pygobject"
++SRC_URI = " \
++    http://ftp.gnome.org/pub/GNOME/sources/${SRCNAME}/${@gnome_verdir("${PV}")}/${SRCNAME}-${PV}.tar.xz \
++    file://0001-configure.ac-add-sysroot-path-to-GI_DATADIR-don-t-se.patch \
 +"
 +
-+SRC_URI[md5sum] = "515dee67d15d4393841e2d60e8341947"
-+SRC_URI[sha256sum] = "5f87df06831d0b3412eb4bc9d3fc2ee7bfae1b913d7da8c23ab2bf5699fb6b50"
++SRC_URI[md5sum] = "0a956f3e785e23b0f136832f2e57a862"
++SRC_URI[sha256sum] = "2a3cad1517916b74e131e6002c3824361aee0671ffb0d55ded119477fc1c2c5f"
++
 +S = "${WORKDIR}/${SRCNAME}-${PV}"
 +
-+inherit distutils
++BBCLASSEXTEND = "native"
 +
-+FILES_${PN} += "${datadir}${base_libdir}/${PYTHON_DIR}/site-packages/Pyrex/Compiler/Lexicon.pickle"
++EXTRA_OECONF = "--disable-cairo --with-python=python2.7"
++
++RDEPENDS_${PN} += "python-setuptools python-importlib"
++
++do_install_append() {
++    # Remove files that clash with python3-pygobject; their content is same
++    rm ${D}${includedir}/pygobject-3.0/pygobject.h ${D}${libdir}/pkgconfig/pygobject-3.0.pc
++}
++
 -- 
 2.8.1
 
