@@ -1,49 +1,53 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f67.google.com (mail-vk0-f67.google.com
-	[209.85.213.67])
-	by mail.openembedded.org (Postfix) with ESMTP id A4E136612C
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f68.google.com (mail-pa0-f68.google.com
+	[209.85.220.68])
+	by mail.openembedded.org (Postfix) with ESMTP id CE3BF6FF69
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 May 2016 21:02:11 +0000 (UTC)
-Received: by mail-vk0-f67.google.com with SMTP id k1so4903019vka.1
+	Tue, 24 May 2016 22:27:43 +0000 (UTC)
+Received: by mail-pa0-f68.google.com with SMTP id yl2so3259552pac.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 May 2016 14:02:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-transfer-encoding;
-	bh=SX/Czx11xv46MnngoKfJujrQy7IeyPlIR1Wnn5fzaJQ=;
-	b=T2GpZo1CDdiAxMtc5yzSKhcQpci8qTIti1ZDenWjowsBeaszV8StFSa4XphFHfpc+a
-	0wauAfHhD/t7xE6O7aVCJd2qvkV2sxhxUgW5wRaAybCH3xbG+qZtasw0O30jm5bKEGol
-	ULZXKymUAbYvjl0sZmkqfA04QDQOrQWO9i6aLtAd4T+9e6X5dTR2gkLI29M4p2fSF9Zg
-	hmrq+Knt3x8OF1Ch1tcd6yPnAv9m73fSmK7/7J6ixhj0KoeQ/FqglH+7aHaqU7Xfie9P
-	9Ow4+AOggab5oAMbSziUzdc4gY++BtigP8jbhfTkunMuZw3ho7l1vlivGGyoXSig29qX
-	JLDw==
+	Tue, 24 May 2016 15:27:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=p5whUTzJr/iqebHDK/Zbn+kcYVBA/qTB4x3zH79mzuc=;
+	b=NuLwnv4VY9LhC+FM5uOKuTOL+jzqt8I0RU6CjrKZK1Zfg7fqhLxlRiF+cwMZcO/pJ/
+	aeMJlU4WcHTHBagmTJbQXXRCGnJD5odT1+/ZGxWUJz+Ih6I4ozvMuMvmfADK1qeeDDcq
+	3gTYcq5w0+r1GJqoJZm5Wob30b4kl3tjEewxmFUMIdyYbxv/0yANMHZgyrDw+2RmCnLH
+	D+WPfFHdAyjhNWtb3DcHqEjjqEMFfnyGFEcxjRLNquvmf7ZiFpu4Ery2zL/gJOa2/rzv
+	n6rHy2QDaQavuEA+VFtG8BnLs2wNjJ/824z4jJ34uc1alV+0LZiS29voKvQwKblIj4Md
+	JMpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:content-transfer-encoding;
-	bh=SX/Czx11xv46MnngoKfJujrQy7IeyPlIR1Wnn5fzaJQ=;
-	b=FXi2vu14Qro8KBZg/orJzQ4Kqj85etzjO5Sh5aGLBJA33+OHuo8Pwthyfw/mT2yb6g
-	lpnebP03rEwnDnp75uNbM7wR+FF5Mn52hOpsidqusLSeEIn/H21V9hElUPu14sKg1Gs9
-	BUJVQs7yw1P3I6h7iEcP3F53pqmMghbs4nyCX5AI2cyDON0PfjmpMAcbL4n0suf2dcaZ
-	6xex6nrNkioWgk1+6PI8l/myZFchqlos49yVSMELFrhMYBYcvX/CqVRVvJvDszGPyeUU
-	leWoMY3EqJn2j+BtIKKCqzoobx4DstV9WVVcigDdj4oqnT0dI0EGUQfbeEXwdhEbcUli
-	sEGA==
-X-Gm-Message-State: ALyK8tLNScjl3/ZuYDkxaKUxbe0VlIXMqj72L6xBtfi6yL056z5e5xAr0bl0pMK+iV3Lo5DP4kwJMB7JkYsJeA==
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=p5whUTzJr/iqebHDK/Zbn+kcYVBA/qTB4x3zH79mzuc=;
+	b=S4rJiYiWf7M1c/WcT3brfMzUNwzNky8ZQF9VEkOqsy2ZnEuj39hNXUmtON7JiVTWtp
+	Ov2g0zaE5o4cGQQyb77tXFXXlDFi9M+Ses7NXDOmKJACF5c/Or+dhh2/K3M3Iga/FO1+
+	+Sblx219GZDxkxHr60yPexfDH0ACnZ4qxL1zwS89eRPfYEZm0aYuZP7r5Fnhwv5sGV2y
+	jYiEqUYlzQ47WqgRsesPURI04/f3utWRxvov8JZb4SOVtFZT7Iqa8OJEzF3QXIMaCK85
+	j6wQhGslrYJ1XlrVhdvmkvqDRTtdGDzzmA8wHT2m0oeLd2+/rR8ksi0qm2iD/AhpW0e4
+	Cbfw==
+X-Gm-Message-State: ALyK8tIGD/Do9in6Uuyu5DqNtEWM2WayQEQTzlnK5CJP+lTN4csuJGY2XkeTli7q4+iKWg==
+X-Received: by 10.66.21.102 with SMTP id u6mr837935pae.118.1464128864082;
+	Tue, 24 May 2016 15:27:44 -0700 (PDT)
+Received: from [10.43.100.29] ([50.233.148.158])
+	by smtp.googlemail.com with ESMTPSA id
+	17sm20753524pfj.96.2016.05.24.15.27.42
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 24 May 2016 15:27:42 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org
+References: <cover.1463601459.git.akuster808@gmail.com>
+	<CA+chaQcoZwD+L33zozQpVR6Z+OFhy-hyaVKQ38_aEUvrn8852A@mail.gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <5744D55D.3090304@gmail.com>
+Date: Tue, 24 May 2016 15:27:41 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
 MIME-Version: 1.0
-X-Received: by 10.159.38.54 with SMTP id 51mr139316uag.27.1464123731581; Tue,
-	24 May 2016 14:02:11 -0700 (PDT)
-Received: by 10.159.39.68 with HTTP; Tue, 24 May 2016 14:02:11 -0700 (PDT)
-In-Reply-To: <20160523185815.GB2560@jama>
-References: <1463439882-26273-1-git-send-email-schnitzeltony@googlemail.com>
-	<1463439882-26273-3-git-send-email-schnitzeltony@googlemail.com>
-	<20160523185815.GB2560@jama>
-Date: Tue, 24 May 2016 23:02:11 +0200
-Message-ID: <CALbNGRStT57rLv--=xhyfUPc=cRQcga5iJVfATR9guGMVj9UDw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 3/3] geany-plugins: initial add 1.27
+In-Reply-To: <CA+chaQcoZwD+L33zozQpVR6Z+OFhy-hyaVKQ38_aEUvrn8852A@mail.gmail.com>
+Subject: Re: [PATCH 00/38] Krogoth-next pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,328 +60,200 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 May 2016 21:02:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 24 May 2016 22:27:44 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On Mon, May 23, 2016 at 8:58 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> On Tue, May 17, 2016 at 01:04:42AM +0200, Andreas M=C3=BCller wrote:
->> geany-plugins comes around as a loose collection of modules. I thought a=
-bout
->> using PACKAGES_DYNAMIC but this way seems better maintainable:
+
+
+On 05/24/2016 01:47 PM, Martin Jansa wrote:
+> On Wed, May 18, 2016 at 10:04 PM, Armin Kuster <akuster808@gmail.com> wrote:
+> 
+>> Please consider these changes for meta-openembedded krogot-next
 >>
->> * a removed plugin will at least complain for license file missing
->> * a new plugin will complain for unpacked files
+>> The following changes since commit
+>> 2092396f0e4fd3891b398c7180528aba67e1d522:
 >>
->> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->> ---
->>  .../recipes-devtools/geany/geany-plugins_1.27.bb   | 216 ++++++++++++++=
-+++++++
->>  1 file changed, 216 insertions(+)
->>  create mode 100644 meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
+>>   ntp: Security fixes via update to 4.2.8p7 (2016-05-02 14:04:13 -0700)
 >>
->> diff --git a/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb b/meta=
--oe/recipes-devtools/geany/geany-plugins_1.27.bb
->> new file mode 100644
->> index 0000000..08f79bb
->> --- /dev/null
->> +++ b/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
->> @@ -0,0 +1,216 @@
->> +DESCRIPTION =3D "A fast and lightweight IDE"
->> +HOMEPAGE =3D "http://plugins.geany.org/"
->> +# majority's default
->> +LICENSE =3D "GPLv2"
->> +
->> +DEPENDS =3D "geany lua libxml2 libsoup-2.4 vte enchant intltool-native =
-libassuan gpgme"
->> +
->> +inherit autotools pkgconfig gtk-icon-cache
->> +
->> +SRC_URI =3D "http://plugins.geany.org/${PN}/${PN}-${PV}.tar.bz2"
->> +SRC_URI[md5sum] =3D "31e4aa4b771a4ff8ccfd74efe7ba7b44"
->> +SRC_URI[sha256sum] =3D "03195a0b7a361ddb2ee4138f46fa87b6d9b9801ff006574=
-56ab9c8b8908c0ce0"
->
-> Now it started failing in world builds with:
-> autoreconf: configure.ac: not using Gettext
-> autoreconf: running: aclocal --system-acdir=3D
-> /tmp-glibc/work/core2-64-oe-linux/geany-plugins/1.27-r0/build/aclocal-cop=
-y/
-> -I
-> /tmp-glibc/work/core2-64-oe-linux/geany-plugins/1.27-r0/geany-plugins-1.2=
-7/build/
-> -I
-> /tmp-glibc/work/core2-64-oe-linux/geany-plugins/1.27-r0/geany-plugins-1.2=
-7/build/
-> --force -I build/cache -I build -I build/bundled -I geanypy/m4 --install
-> build/cache/glib-gettext.m4:39: error: m4_copy: won't overwrite defined
-> macro: glib_DEFUN
-> build/cache/glib-gettext.m4:39: the top level
-> autom4te: m4 failed with exit status: 1
-> aclocal: error: echo failed with exit status: 1
-> autoreconf: aclocal failed with exit status: 1
-> WARNING: exit code 1 from a shell command.
-> ERROR: autoreconf execution failed.
-> ERROR: Function failed: do_configure (log file is located at
-> /tmp-glibc/work/core2-64-oe-linux/geany-plugins/1.27-r0/temp/log.do_confi=
-gure.9960)
->
-> http://errors.yoctoproject.org/Errors/Details/64645/
->
->> +
->> +FILES_${PN} +=3D "${datadir}/icons"
->> +FILES_${PN}-dev +=3D "${libdir}/geany/*.la ${libdir}/${PN}/*/*.la"
->> +
->> +PLUGINS +=3D "${PN}-addons"
->> +LIC_FILES_CHKSUM +=3D "file://addons/COPYING;md5=3D4325afd396febcb659c3=
-6b49533135d4"
->> +FILES_${PN}-addons =3D "${libdir}/geany/addons.so"
->> +RDEPENDS_${PN}-addons =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-autoclose"
->> +LIC_FILES_CHKSUM +=3D "file://autoclose/COPYING;md5=3D751419260aa954499=
-f7abaabaa882bbe"
->> +FILES_${PN}-autoclose =3D "${libdir}/geany/autoclose.so"
->> +RDEPENDS_${PN}-autoclose =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-automark"
->> +LIC_FILES_CHKSUM +=3D "file://automark/COPYING;md5=3D751419260aa954499f=
-7abaabaa882bbe"
->> +FILES_${PN}-automark =3D "${libdir}/geany/automark.so"
->> +RDEPENDS_${PN}-automark =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-codenav"
->> +LIC_FILES_CHKSUM +=3D "file://codenav/COPYING;md5=3D751419260aa954499f7=
-abaabaa882bbe"
->> +FILES_${PN}-codenav =3D "${libdir}/geany/codenav.so"
->> +RDEPENDS_${PN}-codenav =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-commander"
->> +LIC_FILES_CHKSUM +=3D "file://commander/COPYING;md5=3Dd32239bcb673463ab=
-874e80d47fae504"
->> +LICENSE_${PN}-commander =3D "GPLv3"
->> +FILES_${PN}-commander =3D "${libdir}/geany/commander.so"
->> +RDEPENDS_${PN}-commander =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-debugger"
->> +LIC_FILES_CHKSUM +=3D "file://debugger/COPYING;md5=3D4325afd396febcb659=
-c36b49533135d4"
->> +FILES_${PN}-debugger =3D "${libdir}/geany/debugger.so ${datadir}/${PN}/=
-debugger"
->> +RDEPENDS_${PN}-debugger =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-defineformat"
->> +LIC_FILES_CHKSUM +=3D "file://defineformat/COPYING;md5=3D751419260aa954=
-499f7abaabaa882bbe"
->> +FILES_${PN}-defineformat =3D "${libdir}/geany/defineformat.so"
->> +RDEPENDS_${PN}-defineformat =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-devhelp"
->> +LIC_FILES_CHKSUM +=3D "file://devhelp/COPYING;md5=3Dd32239bcb673463ab87=
-4e80d47fae504"
->> +LICENSE_${PN}-devhelp =3D "GPLv3"
->> +FILES_${PN}-devhelp =3D "${libdir}/geany/devhelp.so"
->> +RDEPENDS_${PN}-devhelp =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-geanyctags"
->> +LIC_FILES_CHKSUM +=3D "file://geanyctags/COPYING;md5=3Dc107cf754550e657=
-55c42985a5d4e9c9"
->> +FILES_${PN}-geanyctags =3D "${libdir}/geany/geanyctags.so"
->> +RDEPENDS_${PN}-geanyctags =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-geanydoc"
->> +LIC_FILES_CHKSUM +=3D "file://geanydoc/COPYING;md5=3Dd32239bcb673463ab8=
-74e80d47fae504"
->> +LICENSE_${PN}-geanydoc =3D "GPLv3"
->> +FILES_${PN}-geanydoc =3D "${libdir}/geany/geanydoc.so"
->> +RDEPENDS_${PN}-geanydoc =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-geanyextrasel"
->> +LIC_FILES_CHKSUM +=3D "file://geanyextrasel/COPYING;md5=3Dc107cf754550e=
-65755c42985a5d4e9c9"
->> +FILES_${PN}-geanyextrasel =3D "${libdir}/geany/geanyextrasel.so"
->> +RDEPENDS_${PN}-geanyextrasel =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-geanyinsertnum"
->> +LIC_FILES_CHKSUM +=3D "file://geanyinsertnum/COPYING;md5=3Dc107cf754550=
-e65755c42985a5d4e9c9"
->> +FILES_${PN}-geanyinsertnum =3D "${libdir}/geany/geanyinsertnum.so"
->> +RDEPENDS_${PN}-geanyinsertnum =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-geanylatex"
->> +LIC_FILES_CHKSUM +=3D "file://geanylatex/COPYING;md5=3Dc107cf754550e657=
-55c42985a5d4e9c9"
->> +FILES_${PN}-geanylatex =3D "${libdir}/geany/geanylatex.so"
->> +RDEPENDS_${PN}-geanylatex =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-geanylipsum"
->> +LIC_FILES_CHKSUM +=3D "file://geanylipsum/COPYING;md5=3D4325afd396febcb=
-659c36b49533135d4"
->> +FILES_${PN}-geanylipsum =3D "${libdir}/geany/geanylipsum.so"
->> +RDEPENDS_${PN}-geanylipsum =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-geanylua"
->> +LIC_FILES_CHKSUM +=3D "file://geanylua/COPYING;md5=3D4325afd396febcb659=
-c36b49533135d4"
->> +FILES_${PN}-geanylua =3D "${libdir}/geany/geanylua.so ${libdir}/${PN}/g=
-eanylua/*.so"
->> +RDEPENDS_${PN}-geanylua =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-geanymacro"
->> +LIC_FILES_CHKSUM +=3D "file://geanymacro/COPYING;md5=3Dc107cf754550e657=
-55c42985a5d4e9c9"
->> +FILES_${PN}-geanymacro =3D "${libdir}/geany/geanymacro.so"
->> +RDEPENDS_${PN}-geanymacro =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-geanyminiscript"
->> +LIC_FILES_CHKSUM +=3D "file://geanyminiscript/COPYING;md5=3D4325afd396f=
-ebcb659c36b49533135d4"
->> +FILES_${PN}-geanyminiscript =3D "${libdir}/geany/geanyminiscript.so"
->> +RDEPENDS_${PN}-geanyminiscript =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-geanynumberedbookmarks"
->> +LIC_FILES_CHKSUM +=3D "file://geanynumberedbookmarks/COPYING;md5=3Dc107=
-cf754550e65755c42985a5d4e9c9"
->> +FILES_${PN}-geanynumberedbookmarks =3D "${libdir}/geany/geanynumberedbo=
-okmarks.so"
->> +RDEPENDS_${PN}-geanynumberedbookmarks =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-geanypg"
->> +LIC_FILES_CHKSUM +=3D "file://geanypg/COPYING;md5=3Db234ee4d69f5fce4486=
-a80fdaf4a4263"
->> +FILES_${PN}-geanypg =3D "${libdir}/geany/geanypg.so"
->> +RDEPENDS_${PN}-geanypg =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-geanyprj"
->> +LIC_FILES_CHKSUM +=3D "file://geanyprj/COPYING;md5=3Dd32239bcb673463ab8=
-74e80d47fae504"
->> +LICENSE_${PN}-geanyprj =3D "GPLv3"
->> +FILES_${PN}-geanyprj =3D "${libdir}/geany/geanyprj.so"
->> +RDEPENDS_${PN}-geanyprj =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-geanysendmail"
->> +LIC_FILES_CHKSUM +=3D "file://geanysendmail/COPYING;md5=3Dc107cf754550e=
-65755c42985a5d4e9c9"
->> +FILES_${PN}-geanysendmail =3D "${libdir}/geany/geanysendmail.so"
->> +RDEPENDS_${PN}-geanysendmail =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-geanyvc"
->> +LIC_FILES_CHKSUM +=3D "file://geanyvc/COPYING;md5=3Dc107cf754550e65755c=
-42985a5d4e9c9"
->> +FILES_${PN}-geanyvc =3D "${libdir}/geany/geanyvc.so"
->> +RDEPENDS_${PN}-geanyvc =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-geniuspaste"
->> +LIC_FILES_CHKSUM +=3D "file://geniuspaste/COPYING;md5=3Dbfc203269f8862e=
-bfc1198cdc809a95a"
->> +FILES_${PN}-geniuspaste =3D "${libdir}/geany/geniuspaste.so ${datadir}/=
-${PN}/geniuspaste"
->> +RDEPENDS_${PN}-geniuspaste =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-lineoperations"
->> +LIC_FILES_CHKSUM +=3D "file://lineoperations/COPYING;md5=3Dc107cf754550=
-e65755c42985a5d4e9c9"
->> +FILES_${PN}-lineoperations =3D "${libdir}/geany/lineoperations.so"
->> +RDEPENDS_${PN}-lineoperations =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-multiterm"
->> +LIC_FILES_CHKSUM +=3D "file://multiterm/COPYING;md5=3Db234ee4d69f5fce44=
-86a80fdaf4a4263"
->> +FILES_${PN}-multiterm =3D "${libdir}/geany/multiterm.so"
->> +RDEPENDS_${PN}-multiterm =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-overview"
->> +LIC_FILES_CHKSUM +=3D "file://overview/overview/overviewplugin.c;beginl=
-ine=3D4;endline=3D20;md5=3D1aa33522916cdeb46cccac0c629da0d0"
->> +FILES_${PN}-overview =3D "${libdir}/geany/overview.so ${datadir}/${PN}/=
-overview"
->> +RDEPENDS_${PN}-overview =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-pairtaghighlighter"
->> +LICENSE_${PN}-pairtaghighlighter =3D "BSD-2-Clause"
->> +LIC_FILES_CHKSUM +=3D "file://pairtaghighlighter/COPYING;md5=3Dd6d92752=
-5a612b3a8dbebc4b2e9b47c1"
->> +FILES_${PN}-pairtaghighlighter =3D "${libdir}/geany/pairtaghighlighter.=
-so"
->> +RDEPENDS_${PN}-pairtaghighlighter =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-pohelper"
->> +LICENSE_${PN}-pohelper =3D "GPLv3"
->> +LIC_FILES_CHKSUM +=3D "file://pohelper/COPYING;md5=3Dd32239bcb673463ab8=
-74e80d47fae504"
->> +FILES_${PN}-pohelper =3D "${libdir}/geany/pohelper.so"
->> +RDEPENDS_${PN}-pohelper =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-pretty-printer"
->> +LIC_FILES_CHKSUM +=3D "file://pretty-printer/src/PrettyPrinter.c;beginl=
-ine=3D1;endline=3D17;md5=3D1665115c2fadb17c1b53cdb4e43b2440"
->> +FILES_${PN}-pretty-printer =3D "${libdir}/geany/pretty-printer.so"
->> +RDEPENDS_${PN}-pretty-printer =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-projectorganizer"
->> +LIC_FILES_CHKSUM +=3D "file://projectorganizer/COPYING;md5=3Dc107cf7545=
-50e65755c42985a5d4e9c9"
->> +FILES_${PN}-projectorganizer =3D "${libdir}/geany/projectorganizer.so"
->> +RDEPENDS_${PN}-projectorganizer =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-shiftcolumn"
->> +LIC_FILES_CHKSUM +=3D "file://shiftcolumn/COPYING;md5=3D751419260aa9544=
-99f7abaabaa882bbe"
->> +FILES_${PN}-shiftcolumn =3D "${libdir}/geany/shiftcolumn.so"
->> +RDEPENDS_${PN}-shiftcolumn =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-scope"
->> +LIC_FILES_CHKSUM +=3D "file://scope/COPYING;md5=3Dc107cf754550e65755c42=
-985a5d4e9c9"
->> +FILES_${PN}-scope =3D "${libdir}/geany/scope.so"
->> +RDEPENDS_${PN}-scope =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-spellcheck"
->> +LIC_FILES_CHKSUM +=3D "file://spellcheck/COPYING;md5=3D4325afd396febcb6=
-59c36b49533135d4"
->> +FILES_${PN}-spellcheck =3D "${libdir}/geany/spellcheck.so"
->> +RDEPENDS_${PN}-spellcheck =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-tableconvert"
->> +LIC_FILES_CHKSUM +=3D "file://tableconvert/COPYING;md5=3D6753686878d090=
-a1f3f9445661d3dfbc"
->> +FILES_${PN}-tableconvert =3D "${libdir}/geany/tableconvert.so"
->> +RDEPENDS_${PN}-tableconvert =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-treebrowser"
->> +LIC_FILES_CHKSUM +=3D "file://treebrowser/README;beginline=3D67;endline=
-=3D67;md5=3D52f90857fd1a9672111e472dd056a0d8"
->> +FILES_${PN}-treebrowser =3D "${libdir}/geany/treebrowser.so"
->> +RDEPENDS_${PN}-treebrowser =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-updatechecker"
->> +LIC_FILES_CHKSUM +=3D "file://updatechecker/COPYING;md5=3D4325afd396feb=
-cb659c36b49533135d4"
->> +FILES_${PN}-updatechecker =3D "${libdir}/geany/updatechecker.so"
->> +RDEPENDS_${PN}-updatechecker =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-webhelper"
->> +LIC_FILES_CHKSUM +=3D "file://webhelper/COPYING;md5=3Dd32239bcb673463ab=
-874e80d47fae504"
->> +LICENSE_${PN}-webhelper =3D "GPLv3"
->> +FILES_${PN}-webhelper =3D "${libdir}/geany/webhelper.so"
->> +RDEPENDS_${PN}-webhelper =3D "${PN}"
->> +
->> +PLUGINS +=3D "${PN}-xmlsnippets"
->> +LIC_FILES_CHKSUM +=3D "file://xmlsnippets/COPYING;md5=3D4325afd396febcb=
-659c36b49533135d4"
->> +FILES_${PN}-xmlsnippets =3D "${libdir}/geany/xmlsnippets.so"
->> +RDEPENDS_${PN}-xmlsnippets =3D "${PN}"
->> +
->> +PACKAGES =3D+ "${PLUGINS}"
->> +RDEPENDS_${PN} =3D "${PLUGINS}"
->> +ALLOW_EMPTY_${PN} =3D "1"
->> --
->> 2.5.5
+>> are available in the git repository at:
+>>
+>>   git://github.com/akuster/meta-openembedded akuster/krogoth-next
+>>   https://github.com/akuster/meta-openembedded/tree/akuster/krogoth-next
+>>
+>> Andreas Müller (3):
+>>   meta-xfce: add intltool-native to DEPENDS
+>>   xfce-polkit: fix warning not able to copy license
+>>   fluidsynth: set correct portaudio packageconfig dependency
+>>
+>> Ann Thornton (2):
+>>   packagegroup-tools-bluetooth.bb: Selects the tools appropriate for the
+>>     version of bluez being used.
+>>   packagegroup-tools-bluetooth: Selects the tools appropriate for the
+>>     version of bluez being used.
+>>
+>> Armin Kuster (4):
+>>   acpitests: Fix license issue
+>>   libwnck: fix WARNING
+>>   upower: fix WARNING
+>>   wireshark: Fix new QA Error
+>>
+>> Catalin Enache (2):
+>>   proftpd: CVE-2016-3125
+>>   squid: CVE-2016-3947
+>>
+>> Christopher Larson (2):
+>>   fbida: use separate builddir
+>>   sox: dep on ffmpeg, not libav
+>>
+>> Derek Straka (2):
+>>   python-pyparsing: modify build to correctly use setuptools rather than
+>>     distutils
+>>   leptonica: add PACAKGECONFIG for openjpeg
+>>
+> 
+> This breaks the build, because without leptonica upgrade (which is only in
+> master) the option is unrecognized:
+> 
+> configure: WARNING: unrecognized options: --without-libopenjpeg
+
+well that sucks. I did build this series.
+
+I send a correction patch.
+
+- armin
+> 
+> 
+>>
+>> Herrie (1):
+>>   pidgin: Update to 2.10.12
+>>
+>> Ioan-Adrian Ratiu (2):
+>>   openconnect: add missing dependencies
+>>   syslog-ng.inc: fix prerm script & class includes
+>>
+>> Kinsella, Ray (1):
+>>   wvstreams: fixing segfault with new gcc optimizations
+>>
+>> Li xin (1):
+>>   rp-pppoe: Fix rootfs creation errors
+>>
+>> Martin Jansa (5):
+>>   sblim-sfcb: add missing dependency on unzip-native
+>>   pidgin: add PACKAGECONFIGs
+>>   pidgin: use pkg-config instead of hardcoded paths or python-config
+>>   llvm3.3: Disable auto -dbg packages
+>>   poppler: add --std=c++11 to fix build with Qt 5.7
+>>
+>> Neena Busireddy (1):
+>>   glmark2: wl_surface should be destoryed after destroying wl_window
+>>
+>> Noor Ahsan (1):
+>>   libnice, farsight2: unblacklist as libnice's nice.pc issue fixed.
+>>
+>> Otavio Salvador (1):
+>>   opencv: Fix metapkg dependencies for opencv-java and opencv-locales
+>>
+>> Paul Barker (1):
+>>   toybox: Remove out-of-date patch
+>>
+>> Paul Gortmaker (2):
+>>   autotools-bootstrap: make bootstrap package specific.
+>>   netcf: fix mishandling of gnulib submodule causing build fail
+>>
+>> Qi.Chen@windriver.com (4):
+>>   dovecot: fix QA issue and remove from blacklist
+>>   rrdtool: fix do_configure failure on some hosts
+>>   curlpp: fix recipe
+>>   znc: fix QA issue and remove from blacklist
+>>
+>> Robert Yang (1):
+>>   nbd: fix LIC_FILES_CHKSUM
+>>
+>> Roy Li (1):
+>>   lmbench: avoid gcc optimize-away multiplication
+>>
+>> Zhu Yanjun (1):
+>>   net-snmp: enable ipv6 support
+>>
+>>  meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb |   2 +-
+>>  .../fluidsynth/fluidsynth_1.1.6.bb                 |   2 +-
+>>  .../recipes-multimedia/sox/sox_14.4.0.bb           |   2 +-
+>>  .../openconnect/openconnect_git.bb                 |   2 +-
+>>  .../proftpd/files/CVE-2016-3125.patch              | 247 +++++++++++++
+>>  .../recipes-daemons/proftpd/proftpd_1.3.5a.bb      |   1 +
+>>  .../squid/files/CVE-2016-3947.patch                |  48 +++
+>>  .../recipes-daemons/squid/squid_3.5.7.bb           |   1 +
+>>  meta-networking/recipes-irc/znc/znc_git.bb         |   5 +-
+>>  .../recipes-protocols/net-snmp/net-snmp_5.7.3.bb   |   3 +
+>>  .../recipes-protocols/rp-pppoe/rp-pppoe_3.12.bb    |   4 +
+>>  .../recipes-support/curlpp/curlpp_0.7.3.bb         |  60 ----
+>>  .../recipes-support/dovecot/dovecot_2.2.21.bb      |   8 +-
+>>  meta-networking/recipes-support/nbd/nbd_3.11.bb    |   2 +-
+>>  meta-networking/recipes-support/netcf/netcf_git.bb |  21 +-
+>>  .../recipes-support/wireshark/wireshark_2.0.2.bb   |   5 +-
+>>  meta-oe/classes/autotools-bootstrap.bbclass        |  24 --
+>>  meta-oe/licenses/Intel                             |  21 ++
+>>  ...ace-should-be-destoryed-after-the-wl_wind.patch |  34 ++
+>>  meta-oe/recipes-benchmark/glmark2/glmark2_git.bb   |   3 +-
+>>  .../0001-avoid-gcc-optimize-away-the-loops.patch   |  79 +++++
+>>  .../recipes-benchmark/lmbench/lmbench_3.0-a9.bb    |   1 +
+>>  .../packagegroups/packagegroup-tools-bluetooth.bb  |  37 ++
+>>  .../recipes-connectivity/wvdial/wvstreams_4.6.1.bb |   2 +
+>>  meta-oe/recipes-core/llvm/llvm.inc                 |   3 +-
+>>  .../toybox/0001-Match-paths-with-busybox.patch     | 388
+>> ---------------------
+>>  meta-oe/recipes-extended/rrdtool/rrdtool_1.5.4.bb  |   2 +
+>>  .../sblim-sfcb/sblim-sfcb_1.4.9.bb                 |   2 +-
+>>  meta-oe/recipes-graphics/fbida/fbida_2.10.bb       |   5 +-
+>>  .../fontforge/fontforge_20150824.bb                |  18 +-
+>>  .../recipes-graphics/leptonica/leptonica_1.70.bb   |   3 +
+>>  .../recipes-support/farsight/farsight2_0.0.22.bb   |   2 -
+>>  meta-oe/recipes-support/farsight/libnice_0.0.13.bb |   4 +-
+>>  meta-oe/recipes-support/opencv/opencv_3.1.bb       |   5 +-
+>>  .../pidgin/pidgin/pidgin-cross-python-265.patch    |  50 ++-
+>>  .../pidgin/pidgin/pidgin.desktop-set-icon.patch    |  11 -
+>>  .../pidgin/{pidgin_2.10.9.bb => pidgin_2.10.12.bb} |  41 ++-
+>>  ...h-C-11-compilers-that-don-t-define-isinfi.patch |  39 +++
+>>  meta-oe/recipes-support/poppler/poppler_0.41.0.bb  |   4 +
+>>  meta-oe/recipes-support/syslog-ng/syslog-ng.inc    |   2 +-
+>>  meta-oe/recipes-support/upower/upower_0.9.14.bb    |   2 +-
+>>  .../python/python-pyparsing_2.1.1.bb               |   2 +-
+>>  meta-xfce/classes/xfce.bbclass                     |   2 +
+>>  .../recipes-apps/xfce-polkit/xfce-polkit_0.2.bb    |   2 +-
+>>  .../xfce4-taskmanager/xfce4-taskmanager_1.1.0.bb   |   2 +-
+>>  .../recipes-multimedia/parole/parole_0.8.1.bb      |   2 +-
+>>  .../notes/xfce4-notes-plugin_1.8.1.bb              |   2 +-
+>>  .../xfce4-power-manager_1.4.4.bb                   |   2 +-
+>>  48 files changed, 661 insertions(+), 548 deletions(-)
+>>  create mode 100644
+>> meta-networking/recipes-daemons/proftpd/files/CVE-2016-3125.patch
+>>  create mode 100644
+>> meta-networking/recipes-daemons/squid/files/CVE-2016-3947.patch
+>>  delete mode 100644 meta-oe/classes/autotools-bootstrap.bbclass
+>>  create mode 100644 meta-oe/licenses/Intel
+>>  create mode 100644
+>> meta-oe/recipes-benchmark/glmark2/files/0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch
+>>  create mode 100644
+>> meta-oe/recipes-benchmark/lmbench/lmbench/0001-avoid-gcc-optimize-away-the-loops.patch
+>>  create mode 100644 meta-oe/recipes-connectivity/packagegroups/
+>> packagegroup-tools-bluetooth.bb
+>>  delete mode 100644
+>> meta-oe/recipes-core/toybox/toybox/0001-Match-paths-with-busybox.patch
+>>  delete mode 100644
+>> meta-oe/recipes-support/pidgin/pidgin/pidgin.desktop-set-icon.patch
+>>  rename meta-oe/recipes-support/pidgin/{pidgin_2.10.9.bb =>
+>> pidgin_2.10.12.bb} (67%)
+>>  create mode 100644
+>> meta-oe/recipes-support/poppler/poppler/0001-Compile-with-C-11-compilers-that-don-t-define-isinfi.patch
 >>
 >> --
-Aargh - am under project pressure but'll try to reproduce..
-
-Andreas
+>> 2.3.5
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
 
