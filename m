@@ -1,60 +1,46 @@
-Return-Path: <gerard.b@tekmagic.net>
-Received: from mail-yw0-f182.google.com (mail-yw0-f182.google.com
-	[209.85.161.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 29EAD605FF
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 42FCD601A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 May 2016 19:32:46 +0000 (UTC)
-Received: by mail-yw0-f182.google.com with SMTP id c127so63989006ywb.1
+	Tue, 24 May 2016 01:34:04 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id 145so360830pfz.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 May 2016 12:32:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=tekmagic-net.20150623.gappssmtp.com; s=20150623;
-	h=reply-to:from:to:cc:references:in-reply-to:subject:date
-	:organization:message-id:mime-version:thread-index:content-language;
-	bh=MkndG34cMugAG04k6yaIBquP3s+odzkJDXHrUV8v0fo=;
-	b=HuyMx2+h2eCElcFLUP3KxzDqWS71UAkx+Zgw9ie4epcobOKufUTHddp7s4Y0VX9FQJ
-	kcOQM2h5C2v1Sj1vCeUirCz+57rTr8iKJgo197mps4IGf1meuWFwG+TBik1QtZpkg59Z
-	4dCDJ5WwSkMuLjAQiLYXJzpJhGcTiXUTZ4x3IUzGNDOIuxAjXjAn5Q9Bv0Oatq/cfIN4
-	hNe7WE1Ok010rszR1PxhDAzC0e/5NhFIaP3lPqfTsSKzLXl35HBRPGFC5/HhRvwRlCE6
-	G7B6aGLR/237Kev0jPI/N8lk25ytHzk5OLLWQCXYFVg4GpI6e1Chu3gelN7jEz1+Ew/U
-	jztw==
+	Mon, 23 May 2016 18:34:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=lfpMA7mmWdDGQzLjtdeJsNkk41QIuQHIEd8MstARZSA=;
+	b=WeEPlWwMmwsknMW7yEMwx58ISl+c++Y/ThYcz5NPfnHxQq+tLaVzhwYkBJHqzOU6Gg
+	c0dg4ZWU9WGPOBqJHHksLWZkqf4YSDNFU710yQt224WlTDy3B/ykqvbh9/UCJevWw4bN
+	atUVZbcy9NeBgY/uSzQyFNvJiw9Usu69P5JsNPPY+NSoDoD6Os6rKn5aSKG5xKm4daUz
+	68kwMVe/z16GlZT6MA/IOQuvp4A5zsljWscGUhjLGqlqANHqMI3oyaf+j+WqDK5m4T1T
+	PTNurW9Yk2iqJStAqIIW2WO2x1uT+1q2te8Qg9xSBmpJzVnxQimSueVFzT/J2zDikxij
+	wF6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:reply-to:from:to:cc:references:in-reply-to
-	:subject:date:organization:message-id:mime-version:thread-index
-	:content-language;
-	bh=MkndG34cMugAG04k6yaIBquP3s+odzkJDXHrUV8v0fo=;
-	b=EluXsUjKO9DCiZvxS9HTX4g3Ar6kLeRXnsWzewknw2mPfIjUEoaQFvNQmQXxCH4qYW
-	fDlN76PvzWGFEHmDbMh7v+Sa7qpWyiWKuP93IKvxZ3BEhxy5wL3oYQRR0USfX87f7yB3
-	vAeHGqI9skrf5HNE+nH1tdEc43PiF76r5DMUZJVxsUUprhJI6enXpLVoc6buUue2Z3sT
-	3tQl/aZz25PsE0FovfORIQbCoDCsKo+jyLnkMWjpBFKOkojnkptkWb2GSAxQP3uvM7Ny
-	XGB+i0KZ3Rfn+l8MKUn3iZUohI65najpkIAolRHyDlDtaEkGbnCmNFNhPf5QqxcGbqZF
-	znOw==
-X-Gm-Message-State: ALyK8tLstb23P4CHQbIvtnO7LmAlO6X3iEaEr8FVzL2Zr8dcFGKti1T/Rt8Qunalgriwvw==
-X-Received: by 10.37.59.81 with SMTP id i78mr283857yba.35.1464031967444;
-	Mon, 23 May 2016 12:32:47 -0700 (PDT)
-Received: from Win8onMBA (pool-72-78-196-69.phlapa.fios.verizon.net.
-	[72.78.196.69]) by smtp.gmail.com with ESMTPSA id
-	t189sm20154130ywd.43.2016.05.23.12.32.45
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 23 May 2016 12:32:46 -0700 (PDT)
-Reply-To: <gerard.b@tekmagic.net>
-From: "Gerard Bucas" <gerard.b@tekmagic.net>
-To: <openembedded-devel@lists.openembedded.org>
-References: <03d601d1b528$7bca9b90$735fd2b0$@tekmagic.net>
-	<03e401d1b529$3aaa2210$affe6630$@tekmagic.net>
-	<03f101d1b529$74cdb560$5e692020$@tekmagic.net>
-In-Reply-To: <03f101d1b529$74cdb560$5e692020$@tekmagic.net>
-Date: Mon, 23 May 2016 15:32:45 -0400
-Organization: TekMagic
-Message-ID: <03f901d1b529$e233fec0$a69bfc40$@tekmagic.net>
-MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 15.0
-Thread-Index: AQETnGQTInMdIZQuBkIycC+8kkK3LgKNOVTRAX/z6OmhIrF8wA==
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: 'Otavio Salvador' <otavio@ossystems.com.br>,
-	=?iso-8859-1?Q?'Eric_B=E9nard'?= <eric@eukrea.com>
-Subject: Re: libsoup build error in master (missing gssapi/gssapi.h ?)
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=lfpMA7mmWdDGQzLjtdeJsNkk41QIuQHIEd8MstARZSA=;
+	b=ZdK9qlp9ULD/oFlKdeITmlJmn9NZKkwHnBD//gciBUuY+aO08uGUKT9CnkBvdAPjaZ
+	35gUvKYL4a3CtYGSrIO6w9QFFphQtreIL88Rb7adQO6/dQr00xanFzmnvmGROWYKECV0
+	r8Th3p2V3im1r8f0bo+5zsFzqxAAiOGWmXxe7P+TdxFhNdv094qTetnIy3Enu5g5ypzR
+	nCUCDKASYrw4EvBmm9+yUCrj66yoB+v40YKwBEpB1b+cc9JpnhrkWVLlZjACUZ29EjLE
+	8EWELFKZCdg2nIFoFm3lhKpnjKoFdANE6DnCrhlbu5elVQJWDUo11NczeMtuoqWe21tt
+	v7Xw==
+X-Gm-Message-State: ALyK8tI1M0zXEyzu4ZL4C4GUaKrJDyLmwDL7+A71W2sSDSiA9M2fX5rwLsj4ckq2kw6Wkg==
+X-Received: by 10.98.58.156 with SMTP id v28mr2652899pfj.137.1464053644730;
+	Mon, 23 May 2016 18:34:04 -0700 (PDT)
+Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
+	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
+	n190sm49499103pfn.23.2016.05.23.18.34.01
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 23 May 2016 18:34:03 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	joe_macdonald@mentor.com
+Date: Mon, 23 May 2016 18:34:00 -0700
+Message-Id: <1464053640-24977-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [meta-networking][PATCH] opensaf: update to 5.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,134 +53,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 May 2016 19:32:47 -0000
-Content-Language: en-us
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 24 May 2016 01:34:06 -0000
 
-Hi
+clean up to meet style guide
 
-=20
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../opensaf/{opensaf_4.7.0.bb => opensaf_5.0.0.bb} | 37 ++++++++++------------
+ 1 file changed, 17 insertions(+), 20 deletions(-)
+ rename meta-networking/recipes-daemons/opensaf/{opensaf_4.7.0.bb => opensaf_5.0.0.bb} (94%)
 
-I have been trying to build yocto with chromium but keep on getting a
-libsoup error that I can=92t seem to resolve.
-
-=20
-
-Looks like: fatal error: gssapi/gssapi.h: No such file or directory
-
-=20
-
-=20
-
-So probably has a missing dependency in libsoup recipe?
-
-=20
-
-Any ideas from anyone on how to resolve this?
-
-=20
-
-x86_64-poky-linux-libtool: compile:  x86_64-poky-linux-gcc -m64 =
--march=3Dcore2
-
--mtune=3Dcore2 -msse3 -mfpmath=3Dsse
-
---sysroot=3D/home/gerard/development/minnowMax/yocto/poky/build/tmp/sysro=
-ots/g
-
-enericx86-64 -DHAVE_CONFIG_H -I. -I../../libsoup-2.54.1/libsoup -I..
-
--DG_LOG_DOMAIN=3D\"libsoup\" -DLIBSOUP_COMPILATION
--DLOCALEDIR=3D\"/usr/share/locale\" -I../../libsoup-2.54.1 -I.. -pthread
-
--I/home/gerard/development/minnowMax/yocto/poky/build/tmp/sysroots/generi=
-cx8
-
-6-64/usr/include/glib-2.0
-
--I/home/gerard/development/minnowMax/yocto/poky/build/tmp/sysroots/generi=
-cx8
-
-6-64/usr/lib/glib-2.0/include =
--DGLIB_VERSION_MIN_REQUIRED=3DGLIB_VERSION_2_38
-
--I/home/gerard/development/minnowMax/yocto/poky/build/tmp/sysroots/generi=
-cx8
-
-6-64/usr/include/libxml2 -fvisibility=3Dhidden -O2 -pipe -g
--feliminate-unused-debug-types
--fdebug-prefix-map=3D/home/gerard/development/minnowMax/yocto/poky/build/=
-tmp/w
-
-ork/core2-64-poky-linux/libsoup-2.4/2.54.1-r0=3D/usr/src/debug/libsoup-2.=
-4/2.5
-
-4.1-r0
-
--fdebug-prefix-map=3D/home/gerard/development/minnowMax/yocto/poky/build/=
-tmp/s
-
-ysroots/x86_64-linux=3D
-
--fdebug-prefix-map=3D/home/gerard/development/minnowMax/yocto/poky/build/=
-tmp/s
-
-ysroots/genericx86-64=3D -Wall -Wstrict-prototypes =
--Werror=3Dmissing-prototypes
--Werror=3Dimplicit-function-declaration -Werror=3Dpointer-arith
--Werror=3Dinit-self -Werror=3Dformat=3D2 -Wno-format-zero-length
--Werror=3Dmissing-include-dirs -Werror=3Daggregate-return
--Werror=3Ddeclaration-after-statement -c
-../../libsoup-2.54.1/libsoup/soup-session-feature.c  -fPIC -DPIC -o
-.libs/libsoup_2_4_la-soup-session-feature.o
-
-make[3]: Leaving directory
-
-`/home/gerard/development/minnowMax/yocto/poky/build/tmp/work/core2-64-po=
-ky-
-
-linux/libsoup-2.4/2.54.1-r0/build/libsoup'
-
-make[2]: *** [all] Error 2
-
-make[2]: Leaving directory
-
-`/home/gerard/development/minnowMax/yocto/poky/build/tmp/work/core2-64-po=
-ky-
-
-linux/libsoup-2.4/2.54.1-r0/build/libsoup'
-
-make[1]: *** [all-recursive] Error 1
-
-make[1]: Leaving directory
-
-`/home/gerard/development/minnowMax/yocto/poky/build/tmp/work/core2-64-po=
-ky-
-
-linux/libsoup-2.4/2.54.1-r0/build'
-
-make: *** [all] Error 2
-
-WARNING: exit code 1 from a shell command.
-
-ERROR: oe_runmake failed
-
-ERROR: Function failed: do_compile (log file is located at
-/home/gerard/development/minnowMax/yocto/poky/build/tmp/work/core2-64-pok=
-y-l
-
-inux/libsoup-2.4/2.54.1-r0/temp/log.do_compile.31332)
-
-=20
-
-Thanks!
-
-=20
-
-Gerard
-
-=20
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_4.7.0.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb
+similarity index 94%
+rename from meta-networking/recipes-daemons/opensaf/opensaf_4.7.0.bb
+rename to meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb
+index 42e883a..f687378 100644
+--- a/meta-networking/recipes-daemons/opensaf/opensaf_4.7.0.bb
++++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb
+@@ -10,22 +10,21 @@ an informal group of supporters of the OpenSAF initiative. The OpenSAF \
+ Foundation was founded on January 22nd 2008 with Emerson Network Power, \
+ Ericsson, Nokia Siemens Networks, HP and Sun Microsystems as founding members."
+ HOMEPAGE = "http://www.opensaf.org"
++SECTION = "admin"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a916467b91076e631dd8edb7424769c7"
+ 
+-inherit autotools useradd systemd pkgconfig
++DEPENDS = "libxml2 python"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
+            file://install-samples-from-srcdir.patch \
+            file://0001-plmcd-error-fix.patch \
+            "
+ 
+-SRC_URI[md5sum] = "82dd2777a672140e22b8205f10aa55d3"
+-SRC_URI[sha256sum] = "da9e138650b835728ad51d99268d3a31419b254c4cb4e87c6ec90bc45266d7d2"
+-
+-SECTION = "admin"
+-LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a916467b91076e631dd8edb7424769c7"
++SRC_URI[md5sum] = "94cd1a4c0406e6a45bb04c003f8690e7"
++SRC_URI[sha256sum] = "4b4188a0f3d0ed1ed0e3d77de27c45e2c96b437401de08e7df2ed9ecd54bb999"
+ 
+-DEPENDS = "libxml2 python"
++inherit autotools useradd systemd pkgconfig
+ 
+ USERADD_PACKAGES = "${PN}"
+ GROUPADD_PARAM_${PN} = "-f -r opensaf"
+@@ -37,22 +36,14 @@ SYSTEMD_AUTO_ENABLE = "disable"
+ PACKAGECONFIG[systemd] = "--enable-systemd-daemon"
+ PACKAGECONFIG[openhpi] = "--with-hpi-interface=B03 --enable-ais-plm,,openhpi"
+ 
+-do_configure_prepend () {
+-        ( cd ${S}; autoreconf -f -i -s )
+-}
+-
+ EXTRA_OECONF += " --libdir=${libdir}/opensaf "
+ EXTRA_OEMAKE += " -Wl,-rpath,${libdir}/opensaf "
+ 
+ PKGLIBDIR="${libdir}/opensaf/opensaf"
+ 
+-FILES_${PN} += "${localstatedir}/run"
+-
+-FILES_${PN}-staticdev += "${PKGLIBDIR}/*.a"
+-
+-RDEPENDS_${PN} += "bash python"
+-
+-INSANE_SKIP_${PN} = "dev-so"
++do_configure_prepend () {
++        ( cd ${S}; autoreconf -f -i -s )
++}
+ 
+ do_install_append() {
+     rm -fr "${D}${localstatedir}/lock"
+@@ -62,5 +53,11 @@ do_install_append() {
+     install -m 0644 ${B}/osaf/services/infrastructure/nid/config/opensafd.service \
+         ${D}${systemd_unitdir}/system
+     install -m 0644 ${B}/contrib/plmc/config/*.service ${D}/${systemd_unitdir}/system
+-
+ }
++
++FILES_${PN} += "${localstatedir}/run"
++FILES_${PN}-staticdev += "${PKGLIBDIR}/*.a"
++
++INSANE_SKIP_${PN} = "dev-so"
++
++RDEPENDS_${PN} += "bash python"
+-- 
+2.3.5
 
 
