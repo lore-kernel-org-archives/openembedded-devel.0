@@ -1,46 +1,30 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f66.google.com (mail-pa0-f66.google.com
-	[209.85.220.66])
-	by mail.openembedded.org (Postfix) with ESMTP id A2D6D60761
+Return-Path: <daicy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id E93DC6010B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 May 2016 01:27:59 +0000 (UTC)
-Received: by mail-pa0-f66.google.com with SMTP id yl2so3568488pac.1
+	Wed, 25 May 2016 03:29:48 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; 
+   d="scan'208";a="6875456"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 25 May 2016 11:29:43 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id BAB0642B671F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 May 2016 18:28:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=ZXj+7Ps09a/iYSlzs9forRmPQgkI8zLivZvsYqBhKqg=;
-	b=E6OPHi7bbFF5IN+KOtjjUxtCymZXyd7V6AobNu2r7j6OpoNhPK+TlUFz8ILgVTHb70
-	gznNegntITrG8DWhFJZEYA2Gz7qt2+iQHM3KYbfj8BFEahb18W2WLrWVxerAyC521D2v
-	X7KnU7WB6maJRkwM5XcueshEr/oRgCm7YUmkubGnXQuL1pmUkZq0uP+Qi4saFEN7sKof
-	NS3EyXJMMpJdaTJsyARGynoPr5e3soPu04Zhbf0cR2DxzEK/SbGsJCNnAYXJ45YxIums
-	f4VDAQhuexNQSSP5cISe83iP8+A28UHCy51UvMWI0CGae25fwHjkmeTFbitxthtOtpsP
-	zZtQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=ZXj+7Ps09a/iYSlzs9forRmPQgkI8zLivZvsYqBhKqg=;
-	b=Uz6fz6HH/zXc4pSD80Wun+sVKR8uDp1gGQAFuuXEpI1DojdYXpmfcGBl4PMyRqFDsU
-	WkBDWpdUmlSc30qrG2JCseeh7TRikmZJU01TnKAFr5IDjpcVvARh6lIQmxlCyDqBYETG
-	14uD4XzP59+QjwYEDss9QB0e5j9lq/f6vDVs9JmJfrLZoY5tv30f8GhCo7CSc7H43ZJl
-	PziU3m9uwTNhJqo3kbDuWzYlelUANoI1dKyasy+TlA553ZlXFdsUGSeY5CWOW0vPzAJX
-	USmwj6ZaFVIWK3U84gMGbefHNEoM5heb7/AeFv8zMN7aRGgKEfuIeMKsIlNUj6q6BKWD
-	HPsQ==
-X-Gm-Message-State: ALyK8tIkPuRPLDkufTbk83aHkuY+366YgkZCnOKnDhsY+Hj933yBGsGsBBToJzziHhXtxg==
-X-Received: by 10.66.229.33 with SMTP id sn1mr1762845pac.49.1464139680635;
-	Tue, 24 May 2016 18:28:00 -0700 (PDT)
-Received: from Pahoa2.mvista.com ([50.233.148.158])
-	by smtp.gmail.com with ESMTPSA id
-	17sm21223872pfj.96.2016.05.24.18.27.59
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 24 May 2016 18:27:59 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 May 2016 18:27:58 -0700
-Message-Id: <1464139678-18772-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-Subject: [meta-oe][krogoth][PATCH] Revert "leptonica: add PACAKGECONFIG for openjpeg"
+	Wed, 25 May 2016 11:29:40 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.51) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.279.2; Wed, 25 May 2016 11:29:40 +0800
+From: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <1456644183-12870-1-git-send-email-daicy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.51]
+X-yoursite-MailScanner-ID: BAB0642B671F.ADCD8
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: daicy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-networking][PATCH] postfix: Fix rootfs creation errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,31 +37,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 May 2016 01:28:01 -0000
+Date: Wed, 25 May 2016 03:29:49 -0000
+X-Original-Date: Sun, 28 Feb 2016 10:23:03 +0300
+X-List-Received-Date: Wed, 25 May 2016 03:29:49 -0000
+Content-Type: text/plain
 
-This reverts commit 1726e7172b66769c1597719cf7aba852159317a0.
+1) error: file /usr/share/man/man1/mailq.1 from install of postfix-doc
+        conflicts with file from package esmtp-doc
+2) error: file /usr/share/man/man1/newaliases.1 from install of postfix-doc
+        conflicts with file from package esmtp-doc
+3) error: file /usr/share/man/man1/sendmail.1 from install of postfix-doc
+        conflicts with file from package esmtp-doc
 
-This patch added a build warning.
-WARNING: leptonica-1.70-r0 do_configure: QA Issue: leptonica: configure was passed unrecognised options: --without-libopenjpeg [unknown-configure-option]
-
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-graphics/leptonica/leptonica_1.70.bb | 3 ---
- 1 file changed, 3 deletions(-)
+ meta-networking/recipes-daemons/postfix/postfix.inc | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-oe/recipes-graphics/leptonica/leptonica_1.70.bb b/meta-oe/recipes-graphics/leptonica/leptonica_1.70.bb
-index 28701fc..e826e05 100644
---- a/meta-oe/recipes-graphics/leptonica/leptonica_1.70.bb
-+++ b/meta-oe/recipes-graphics/leptonica/leptonica_1.70.bb
-@@ -11,7 +11,4 @@ EXTRA_OECONF += " \
-     --without-libwebp \
- "
+diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
+index 228a815..c00c77f 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix.inc
++++ b/meta-networking/recipes-daemons/postfix/postfix.inc
+@@ -224,6 +224,11 @@ ALTERNATIVE_TARGET[sendmail] = "${sbindir}/sendmail.postfix"
+ ALTERNATIVE_LINK_NAME[sendmail] = "${sbindir}/sendmail"
+ ALTERNATIVE_PRIORITY = "120"
  
--PACKAGECONFIG ??= ""
--PACKAGECONFIG[openjpeg] = "--with-libopenjpeg,--without-libopenjpeg,openjpeg"
--
- inherit autotools pkgconfig
++ALTERNATIVE_${PN}-doc += "mailq.1 newaliases.1 sendmail.1"
++ALTERNATIVE_LINK_NAME[mailq.1] = "${mandir}/man1/mailq.1"
++ALTERNATIVE_LINK_NAME[newaliases.1] = "${mandir}/man1/newaliases.1"
++ALTERNATIVE_LINK_NAME[sendmail.1] = "${mandir}/man1/sendmail.1"
++
+ pkg_postinst_${PN} () {
+     if [ "x$D" = "x" ]; then
+         touch /etc/aliases
 -- 
-2.3.5
+1.8.4.2
+
+
 
 
