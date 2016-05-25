@@ -1,52 +1,33 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f46.google.com (mail-vk0-f46.google.com
-	[209.85.213.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 78D6F62135
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.analogue-micro.com (mail.analogue-micro.com
+	[217.144.149.242])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A3A26011C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 May 2016 11:37:49 +0000 (UTC)
-Received: by mail-vk0-f46.google.com with SMTP id r140so60232993vkf.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 May 2016 04:37:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-transfer-encoding;
-	bh=twcNiS11l1eD/hobvOuMTAQAfuPDArOWPWSsan6BpNg=;
-	b=vYASUOcsfxp1w5AKDoaXZkB2DzHza0nrdwU0sv87+rput1Ifqu67JIV9E3U5D85Z/E
-	SSXhVcr5hv1lExHBdOXfTg+s3Cc/v/Qyl6neHuZ5BtrclCiKc+6uFcqachscpdYYxkPa
-	tuZMHqJXh0LbITkjyhgFeD8qxHFLLDmOvZ0YHO4Y4qflKAqK0eCM1lJDONWAakwKbHvv
-	FQ2z6j0YvL2JgkQnD4vOROJejsqRgykUiEA8cZuHeBq7as+FfnPCvE+ef+8KyXFpcI2p
-	zTBW7WAxw4yqk6JmQ3ZCsJYF5PvCnvTm+A5htcSeb/XaDkEvHmnTaW/2iKO8+aPdSg/N
-	KYQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc:content-transfer-encoding;
-	bh=twcNiS11l1eD/hobvOuMTAQAfuPDArOWPWSsan6BpNg=;
-	b=XMQtIclhRiGb2WgauQcEfvEQ7Nq8V0c4KTX8gSvtgq1ef3PkpFWywnXebxIh64MwWG
-	xe23P0C4ILAIx+boLTaO66yHW9Bg+iY5hfvrQJNtW6NGDqvS7jteZ8AFji3yEEE1eG8X
-	N4KNYWBarKYqXS9PRmSQzTDZzvQVQz7/+qoNTz+/n67+rnJIXTcO8oK6hn89g3+AGyaT
-	WEncR/TejT9MINQYkZgW3JBu1BxAJde0kL/X4SL0vtMAHgtOxduvyf4gh2lYe2F3jTNg
-	ymcfwIkpkRKdlUTNk1lPXqrT72smAINSE5i9W6i8GWPyZpSWCGsUKFoN+wSSdRwhSqlh
-	N2hg==
-X-Gm-Message-State: ALyK8tIZCIC3ypyfCeeceocSGQyyhNWctu4k18pYKyMUW2Rb3gGtQgOUd4ZuhrBDQBZ0UNXP2AbZ8ZVYbBsDyg==
+	Wed, 25 May 2016 12:00:17 +0000 (UTC)
+Received: by mail.analogue-micro.com (Postfix, from userid 999)
+	id 15C7168A01C; Wed, 25 May 2016 13:00:16 +0100 (BST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	loki.analogue-micro-ltd.com
+X-Spam-Level: *
+X-Spam-Status: No, score=1.7 required=5.0 tests=ALL_TRUSTED,BAYES_40,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
+	by mail.analogue-micro.com (Postfix) with ESMTP id 6BB4168A019;
+	Wed, 25 May 2016 13:00:15 +0100 (BST)
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by zeus.mlbassoc.com (Postfix) with ESMTP id 91DD067402C1;
+	Wed, 25 May 2016 14:00:13 +0200 (CEST)
+To: openembedded-devel@lists.openembedded.org
+References: <5745392B.4030307@mlbassoc.com>
+	<57456352.2080407@pseudoterminal.org>
+From: Gary Thomas <gary@mlbassoc.com>
+Message-ID: <574593CB.7090504@mlbassoc.com>
+Date: Wed, 25 May 2016 14:00:11 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.8.0
 MIME-Version: 1.0
-X-Received: by 10.31.220.2 with SMTP id t2mr1805415vkg.113.1464176270348; Wed,
-	25 May 2016 04:37:50 -0700 (PDT)
-Received: by 10.159.39.68 with HTTP; Wed, 25 May 2016 04:37:50 -0700 (PDT)
-In-Reply-To: <574569EC.7050601@windriver.com>
-References: <1464159700-16254-1-git-send-email-zhenbo.gao@windriver.com>
-	<D9C8A333-331C-4D27-A60D-EDB3DDC244D3@dominion.thruhere.net>
-	<57456517.1030405@windriver.com>
-	<94DE3B87-251D-431D-9BD2-AA3B841C130D@dominion.thruhere.net>
-	<574569EC.7050601@windriver.com>
-Date: Wed, 25 May 2016 13:37:50 +0200
-Message-ID: <CALbNGRTAq9kD6whZkHdbD-qwTmx1iB-a7TtG9cXf3MMmiEDcng@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][PATCH] networkmanager: add alias for networkmanager
+In-Reply-To: <57456352.2080407@pseudoterminal.org>
+Subject: Re: [meta-qt5] build error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,23 +40,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 May 2016 11:37:51 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 25 May 2016 12:00:17 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, May 25, 2016 at 11:01 AM, zhenbo <zhenbo.gao@windriver.com> wrote:
+On 2016-05-25 10:33, Carlos Rafael Giani wrote:
+> Is this a qtbase build with X11 enabled?
+> EGL with X11 on i.MX6 might be broken. I know it was once before.
 >
+> "#error qtextstream.h must be included before any header file that defines Status" indicates as much. "Status" is one of
+> those wonderful X11 definitions with super generic names. If the Vivante EGL headers include X11 headers it might be
+> causing problems here.
+
+Yes, I do have X11 enabled.  If I disable that, what will I get (I've
+not tried wayland/weston yet)?
+
 >
->> So fix packagegroup-self-hosted to not specify a connection manager,
->> crippling the connman and nm recipes with a virtual isn=E2=80=99t the so=
-lution.
+> On 2016-05-25 07:33, Gary Thomas wrote:
+>> I just tried to build qtbase for my i.MX6Q target and it failed
+>> miserably (tons of compile errors).  I'm using Poky master(c7e614c438706)
+>> with GCC 4.9.3.  Error log attached.
 >>
-> Ok, i will give a try.  thanks for your feedback and suggestion.
->
-> Zhenbo
->
-Maybe a bit off topic: Isn't it possible to make newworkmanager a
-packageconfig for xfce4-power-manager?
+>> Any ideas what I'm missing?
 
-Andreas
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
