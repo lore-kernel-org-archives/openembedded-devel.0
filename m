@@ -1,23 +1,28 @@
-Return-Path: <dv@pseudoterminal.org>
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 13D74602D9
+Return-Path: <Zhenbo.Gao@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CEAA06FFC7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 May 2016 08:33:23 +0000 (UTC)
-Received: from [172.16.1.106] (62-178-118-86.cable.dynamic.surfer.at
-	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 799F730520
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 May 2016 10:33:23 +0200 (CEST)
-To: openembedded-devel@lists.openembedded.org
-References: <5745392B.4030307@mlbassoc.com>
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-Message-ID: <57456352.2080407@pseudoterminal.org>
-Date: Wed, 25 May 2016 10:33:22 +0200
+	Wed, 25 May 2016 08:41:03 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u4P8f1Mr011931
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Wed, 25 May 2016 01:41:02 -0700
+Received: from [128.224.162.191] (128.224.162.191) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Wed, 25 May 2016 01:41:01 -0700
+To: Koen Kooi <koen@dominion.thruhere.net>
+References: <1464159700-16254-1-git-send-email-zhenbo.gao@windriver.com>
+	<D9C8A333-331C-4D27-A60D-EDB3DDC244D3@dominion.thruhere.net>
+From: zhenbo <zhenbo.gao@windriver.com>
+Message-ID: <57456517.1030405@windriver.com>
+Date: Wed, 25 May 2016 16:40:55 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.8.0
+	Thunderbird/38.3.0
 MIME-Version: 1.0
-In-Reply-To: <5745392B.4030307@mlbassoc.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt5] build error
+In-Reply-To: <D9C8A333-331C-4D27-A60D-EDB3DDC244D3@dominion.thruhere.net>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] networkmanager: add alias for networkmanager
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,26 +35,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 May 2016 08:33:24 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 25 May 2016 08:41:07 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Is this a qtbase build with X11 enabled?
-EGL with X11 on i.MX6 might be broken. I know it was once before.
 
-"#error qtextstream.h must be included before any header file that 
-defines Status" indicates as much. "Status" is one of those wonderful 
-X11 definitions with super generic names. If the Vivante EGL headers 
-include X11 headers it might be causing problems here.
 
-On 2016-05-25 07:33, Gary Thomas wrote:
-> I just tried to build qtbase for my i.MX6Q target and it failed
-> miserably (tons of compile errors).  I'm using Poky master(c7e614c438706)
-> with GCC 4.9.3.  Error log attached.
->
-> Any ideas what I'm missing?
->
->
->
+On 2016年05月25日 16:11, Koen Kooi wrote:
+>> Op 25 mei 2016, om 09:01 heeft Zhenbo Gao <zhenbo.gao@windriver.com> het volgende geschreven:
+>>
+>> connman get conflicts with networkmanager when building
+>> the project.
+> What’s the conflict? I’m hesitant to add yet another virtual since history has shown that most OE people can’t deal with the consequences and maintenance load for keeping the virtuals working
+Hi Koen Kooi,
+
+Thanks for replying this mail.
+
+When my project includes xfce and self-hosted at the same time, the 
+compile step will fail and the error information shows that 
+networkmanager get conflict with connman:
+---
+...
+Computing transaction...error: Can't install 
+xfce4-power-manager-1.4.4-r0.0@corei7_64: unable to install provider for 
+networkmanager:
+error:     networkmanager-1.0.4-r0.0@corei7_64 conflicts with 
+connman-1.30-r0.0@corei7_64
+...
+The dependence relationship is:
+xfce4-power-manager --> networkmanager
+packagegroup-self-hosted --> connman
+
+Thanks,
+Zhenbo
+
+>> here introduce alias virtual/networkmanager for these
+>> two recipes, so setting PREFERRED_PROVIDER to the proper
+>> one can solve the conflicts.
+>>
+>> this patch is for networkmanager recipe.
+>>
+>> Signed-off-by: Zhenbo Gao <zhenbo.gao@windriver.com>
+>> ---
+>> meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb    | 1 +
+>> meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.4.bb | 2 +-
+>> 2 files changed, 2 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb
+>> index 831ddf0..efd4d08 100644
+>> --- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb
+>> +++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.10.bb
+>> @@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=cbbffd568227ada506640fe950a4823b \
+>> "
+>>
+>> DEPENDS = "libnl dbus dbus-glib libgudev util-linux libndp libnewt polkit"
+>> +PROVIDES = "virtual/networkmanager"
+>>
+>> inherit gnomebase gettext systemd bluetooth bash-completion vala gobject-introspection
+>>
+>> diff --git a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.4.bb b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.4.bb
+>> index 2070db2..59e1d40 100644
+>> --- a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.4.bb
+>> +++ b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.4.4.bb
+>> @@ -34,7 +34,7 @@ FILES_xfce4-powermanager-plugin = " \
+>> "
+>>
+>> RDEPENDS_xfce4-powermanager-plugin = "${PN}"
+>> -RDEPENDS_${PN} = "networkmanager ${@bb.utils.contains('DISTRO_FEATURES','systemd','','consolekit',d)}"
+>> +RDEPENDS_${PN} = "virtual/networkmanager ${@bb.utils.contains('DISTRO_FEATURES','systemd','','consolekit',d)}"
+>>
+>> # xfce4-brightness-plugin was replaced by xfce4-powermanager-plugin
+>> RPROVIDES_xfce4-powermanager-plugin += "xfce4-brightness-plugin"
+>> -- 
+>> 1.9.1
+>>
 
 
