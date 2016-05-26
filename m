@@ -1,49 +1,51 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 0335771951
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 May 2016 08:07:44 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id a136so2829696wme.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 May 2016 01:07:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=VqztNDvxRlcptH3hnZlzyuMn17r/auREcwm512dLirs=;
-	b=Unn6ln4vk/mOprLx7D5V6Bjd/NXLOWg9RWEYKJSmaIA4oeL6rkPSeSRPnmwl8S+HIc
-	kd8fEINQ66AUgI+U8xuOwa33auKsJGV0tLyxGxa4JOG3MA8Iif5gZjaWXmEZcGDb+2lP
-	zsWVhYn/PD6gAg58a+mJehdEc7FYTuWmy9hUGHb8q+xK6KSnWl/uI5CmEPpCEb1LqKue
-	WTHx8Dr8ZFYyl1tWDPN/7mSZm0hoqBmjF5tdjz5nR7DWn7j5ihuxiWdcg/DSFZ/KMeY1
-	BXdlqAAl8zdfx5Fl/PTk2vmIZUNaIg6+cfVge0prCojqY1FMVD28nyXYVRV1i8t3TmNn
-	7F6w==
+Return-Path: <cliff.brake@gmail.com>
+Received: from mail-oi0-f47.google.com (mail-oi0-f47.google.com
+	[209.85.218.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E7C9731BE;
+	Thu, 26 May 2016 17:46:20 +0000 (UTC)
+Received: by mail-oi0-f47.google.com with SMTP id j1so135955665oih.3;
+	Thu, 26 May 2016 10:46:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:date:message-id:subject
+	:from:to:cc; bh=O+lOj1Gsee0cNLydfn1t5AL+2e2z2Bgu85ULMK/Fpns=;
+	b=G9GI757o8Q0PrtHPjPhuvbaFeUG+N9qv7GRD4jzPevBG4TJow5vJt7VIa2k3Nd7O05
+	ZaUtDga67cNpiEl/aLrr3bBFOc0qAuMka02BWvNuTmNRhvLP4+gpcMuRjIhVwuHg1I/Z
+	XrNKy+FlyrRPzameth3kwFVhfPA0pG+QRsYVTyjSS/QIPnIcafqkF/j9svPMws4lBL9U
+	OEnnxzxhGUolwnVT+qObBPDHTtV9+KdXnmGF7KQGUwo0fM/OVK+eW+KSCcw5wZYaK8Te
+	jvJexWBdfUE/6rAI7c1Ib+xzTcsvZFzxLhxJJpFih/SEyyQjXVXUBeKVf6KLwhu1rLSf
+	b6hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=VqztNDvxRlcptH3hnZlzyuMn17r/auREcwm512dLirs=;
-	b=ZiQFEs39cbPK8VNSDO/Gb1k8VggS/+KrZ5oDvyyTWFh9PbKIuTXyAVe+4k5p5K5b9k
-	pxCliK0q8z5gVXjiVloNpFtn8/yeUtOMVJkJU4Ih0iXaT6JbkbMgz2GDubivuyFy0iG3
-	E8jofIQgqx9YRi4dg4OgeqtQX+9wX1HkhDJpE+3TlBZjT4uuJ1DiUD3hLbDmnhn/f+P+
-	Z8oS9OlwocLuVpcocuWUzUBYFEPjZA5jvegzM1zNGcvyJAAYqhYLhg1sRG1vtEOCuXX7
-	MJjTil+FdfTz7ewq/AdH+xnI25y2YRuU2a6CfwcpWw9eg9FHIxtOTdJPErq4XbXWNxEC
-	C/oA==
-X-Gm-Message-State: ALyK8tLvNrKMzmMeaYwR63p1ihZYN5vsaXen+6rZNMn9IOki7TXBIhSyTXmkF17ZT96BuA==
-X-Received: by 10.28.45.200 with SMTP id t191mr2189267wmt.40.1464250065240;
-	Thu, 26 May 2016 01:07:45 -0700 (PDT)
-Received: from localhost.localdomain (p5B0A2F80.dip0.t-ipconnect.de.
-	[91.10.47.128]) by smtp.googlemail.com with ESMTPSA id
-	d7sm2173167wmd.11.2016.05.26.01.07.44
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 26 May 2016 01:07:44 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 May 2016 10:07:31 +0200
-Message-Id: <1464250051-24295-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.5.5
+	h=x-gm-message-state:mime-version:sender:in-reply-to:references:date
+	:message-id:subject:from:to:cc;
+	bh=O+lOj1Gsee0cNLydfn1t5AL+2e2z2Bgu85ULMK/Fpns=;
+	b=Y7CGoJwZM2Or2gkV/19gRKkamWO7UoOHiFgo6fti1CCsTURd/VeCHVkpdo5FrVumhS
+	o7RQCAi/+3XiQvCi8r2HeMaXOsNpWzZdwMrpMUyDTZXTws/9qOZQGb/6KJmh9kBecUNM
+	v98TMUHs+TuvNzqajOchFQcsxmgCW9bGlLTo/arFEDDuhrUax5jvKsIWx5zaRWYofGUU
+	aKH7XDbyLJlOXcmfOyOqO8LVcbDtN4VOoUeo/FnD+dzM41fk0f7rE3I02Wl6jpkA+Spm
+	WnfL3n8Cv96FVrLeXYgLYcFfY3YBdguGykPqZmag0oFKYf8A9CvLgXF5N6K4KBhhcMjT
+	yDwQ==
+X-Gm-Message-State: ALyK8tKuijM8TzWvOz1I7mu7O0OTGIZNsI0uCfFFzWINj6DqwVT6ccG0ShfS4q9rWhACIS8B2TfTHYxHjM6bgg==
 MIME-Version: 1.0
-Subject: [PATCH] geany-plugins: fix build
+X-Received: by 10.202.228.78 with SMTP id b75mr6269413oih.46.1464284781527;
+	Thu, 26 May 2016 10:46:21 -0700 (PDT)
+Sender: cliff.brake@gmail.com
+Received: by 10.157.35.230 with HTTP; Thu, 26 May 2016 10:46:21 -0700 (PDT)
+In-Reply-To: <20160524092336.GA27824@mbabyjoh-desk.ger.corp.intel.com>
+References: <1464054649898.9b34c448@Nodemailer>
+	<20160524092336.GA27824@mbabyjoh-desk.ger.corp.intel.com>
+Date: Thu, 26 May 2016 13:46:21 -0400
+X-Google-Sender-Auth: friNJjqfQeje139eST4r22TWrNE
+Message-ID: <CAOd_LFwLw9QMk4YdpbE2aD5k3CwiWQfcqhczdFM4=iBGhFQ98A@mail.gmail.com>
+From: Cliff Brake <cbrake@bec-systems.com>
+To: "Maxin B. John" <maxin.john@intel.com>
+Cc: "meta-ti@yoctoproject.org" <meta-ti@yoctoproject.org>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Discussion of the angstrom distribution development
+	<angstrom-distro-devel@linuxtogo.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] OE Changelog since 2016-05-15 until 2016-05-22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,35 +58,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 May 2016 08:07:46 -0000
+X-List-Received-Date: Thu, 26 May 2016 17:46:21 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-| build/cache/glib-gettext.m4:39: error: m4_copy: won't overwrite defined macro: glib_DEFUN
-| build/cache/glib-gettext.m4:39: the top level
-| autom4te: m4 failed with exit status: 1
+Done, thanks!
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+https://github.com/cbrake/openembedded-admin/commit/51604da79ed5a02341562a9bf254b3dd9dc71704
 
-diff --git a/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb b/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
-index 08f79bb..9a39150 100644
---- a/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
-+++ b/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
-@@ -11,6 +11,10 @@ SRC_URI = "http://plugins.geany.org/${PN}/${PN}-${PV}.tar.bz2"
- SRC_URI[md5sum] = "31e4aa4b771a4ff8ccfd74efe7ba7b44"
- SRC_URI[sha256sum] = "03195a0b7a361ddb2ee4138f46fa87b6d9b9801ff00657456ab9c8b8908c0ce0"
- 
-+do_configure_prepend() {
-+    rm -f ${S}/build/cache/glib-gettext.m4
-+}
-+
- FILES_${PN} += "${datadir}/icons"
- FILES_${PN}-dev += "${libdir}/geany/*.la ${libdir}/${PN}/*/*.la"
- 
--- 
-2.5.5
+Cliff
 
+
+On Tue, May 24, 2016 at 5:23 AM, Maxin B. John <maxin.john@intel.com> wrote:
+>
+> meta-java repo was moved to:
+> git://git.yoctoproject.org/meta-java
+>
+> Is it possible to update the list with that info?
+>
+
+> Best Regards,
+> Maxin
+> --
+> _______________________________________________
+> Openembedded-core mailing list
+> Openembedded-core@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
