@@ -1,30 +1,53 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id A8313738AE;
-	Thu, 26 May 2016 20:25:28 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by fmsmga101.fm.intel.com with ESMTP; 26 May 2016 13:25:29 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.26,370,1459839600"; d="scan'208";a="963105799"
-Received: from ktan57-mobl2.gar.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.255.172.96])
-	by orsmga001.jf.intel.com with ESMTP; 26 May 2016 13:25:27 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Andreas =?ISO-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>
-Date: Fri, 27 May 2016 08:25:23 +1200
-Message-ID: <17859297.OlYCXzWKo0@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.10 (Linux/4.4.9-300.fc23.x86_64; KDE/4.14.20; x86_64; ;
-	)
-In-Reply-To: <CALbNGRTBcwNx0SMYjQ2GbRJviekG8h734t0yH24zeyiQEG367Q@mail.gmail.com>
+Return-Path: <cliff.brake@gmail.com>
+Received: from mail-qk0-f179.google.com (mail-qk0-f179.google.com
+	[209.85.220.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A043736B6;
+	Thu, 26 May 2016 20:41:55 +0000 (UTC)
+Received: by mail-qk0-f179.google.com with SMTP id h185so34881794qke.2;
+	Thu, 26 May 2016 13:41:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=HmHB+vWIsWtOo1kvNr3Ro8hngiUKLE5HYtzp8ZYBRco=;
+	b=COpCxB4+qQMoO0ebLcBOzPWzOeZGo/ta0MxTgv8fPXaTVRreaD9iUmv3nqTmBpQ9i1
+	bqqo9QK8dBVza7p125RESxZ69agCZOmGcQs7CF6OALmjahIfHEKY4fAlBjqueaO2PILm
+	Qx3TJ3C+ojwZf0cOIJ0vf8WpjGzgLjCrzDucoHR6H4ZjtHaKVH7a6cEvxhYuwRTg6ScA
+	vR3IOgriji/kludwSI1H6deg/cXZ3WBz2cNN3VhPI3/C5LIPLKgMr6pgwCevEr8k4r39
+	yXSVwLHN2b6n497ad1JNXKGljFF3oRD5Fv41NBfdtf2CMloGcvsP73bGGBPmqPvN967M
+	4Tjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=HmHB+vWIsWtOo1kvNr3Ro8hngiUKLE5HYtzp8ZYBRco=;
+	b=N+z4uTTvGQSX7oUVPooo7FotVJ03WVoPhjbwDBfqPHw0Cy8L/eC127UP+3tfHx8rVn
+	lO5j+RTyBMJHcDgYMbtOl2f9rEnsQXOEg2IUiKnArTpUp6WFNGnZf8xmlQzSVaFN3j6d
+	GaVKFUEC8QJuQE9rxlF4sor5lhUXagHCpAcAecO07Yc1lyNBdAWEb3XRTtENQsnD+YJL
+	w98MzYeg9F7AYXqt0D5BayPvZOVswDVGjv0PnDFHq06WMfMdE2U0p777fQeYUP0osaMy
+	CDVqBNWVPCVJ/pc5qLQ3VJHroAbbaqmk4AjotOPrfpqY2fVqW3PZDSu3b5IWbu8+FHAf
+	6LxA==
+X-Gm-Message-State: ALyK8tLrLoyavEeEhK7kUrIawkL6vOtQeqNz0p9kSdD+14Xi8g6+UBn44Pg5q/KkQQ54/Q==
+X-Received: by 10.55.82.6 with SMTP id g6mr11135720qkb.40.1464295315986;
+	Thu, 26 May 2016 13:41:55 -0700 (PDT)
+Received: from [192.168.1.139] (cable-pool5-cs-73.doycomm.com. [66.219.182.73])
+	by smtp.gmail.com with ESMTPSA id
+	t91sm1602131qgd.24.2016.05.26.13.41.54
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Thu, 26 May 2016 13:41:55 -0700 (PDT)
+To: Paul Eggleton <paul.eggleton@linux.intel.com>,
+	openembedded-core@lists.openembedded.org,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
 References: <1464054649898.9b34c448@Nodemailer>
+	<20160524092336.GA27824@mbabyjoh-desk.ger.corp.intel.com>
+	<CAOd_LFwLw9QMk4YdpbE2aD5k3CwiWQfcqhczdFM4=iBGhFQ98A@mail.gmail.com>
 	<3785754.gtfDI8MhLU@peggleto-mobl.ger.corp.intel.com>
-	<CALbNGRTBcwNx0SMYjQ2GbRJviekG8h734t0yH24zeyiQEG367Q@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+Message-ID: <bb71cddc-082c-ecd4-287c-79be3e672748@gmail.com>
+Date: Thu, 26 May 2016 16:41:54 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.1.0
 MIME-Version: 1.0
-Cc: Cliff Brake <cbrake@bec-systems.com>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
+In-Reply-To: <3785754.gtfDI8MhLU@peggleto-mobl.ger.corp.intel.com>
 Subject: Re: [OE-core] OE Changelog since 2016-05-15 until 2016-05-22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -38,63 +61,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 May 2016 20:25:29 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Thu, 26 May 2016 20:41:56 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-On Thu, 26 May 2016 22:18:34 Andreas M=FCller wrote:
-> On Thu, May 26, 2016 at 10:14 PM, Paul Eggleton
->=20
-> <paul.eggleton@linux.intel.com> wrote:
-> > On Thu, 26 May 2016 13:46:21 Cliff Brake wrote:
-> >> On Tue, May 24, 2016 at 5:23 AM, Maxin B. John <maxin.john@intel.c=
-om>=20
-wrote:
-> >> > meta-java repo was moved to:
-> >> > git://git.yoctoproject.org/meta-java
-> >> >=20
-> >> > Is it possible to update the list with that info?
-> >>=20
-> >> Done, thanks!
-> >>=20
-> >> https://github.com/cbrake/openembedded-admin/commit/51604da79ed5a0=
-2341562
-> >> a9b f254b3dd9dc71704
-> >=20
-> > At some point it would be great if this script could be driven from=
- the OE
-> > layer index rather than being a separate entity - then updates woul=
-d
-> > largely be self-service for the maintainers, or at least they would=
- only
-> > need to be done in one place.
->=20
-> Maybe a bit off-topic but layer index should have some mechanism of
-> removing rotten layers.
+Excellent idea -- I'll plan to do at some point ...
 
-We've discussed this on-and-off at OE developer meetings for a while no=
-w. FWIW=20
-I can remove them manually - actually I just got around to deleting met=
-a-
-picosam9 which has been unmaintained for years.
+Thanks,
+Cliff
 
-Part of the problem though is determining what "rotten" actually means.=
-=20
-Additionally, there's an element of leaving things around in case someo=
-ne=20
-comes to fork/revive them again. We do show a "last updated" date but i=
-t would=20
-be good to figure out some other way of determining and indicating "lay=
-er=20
-health" - to date I don't think we've managed to figure out anything pr=
-actical=20
-for that.
 
-Cheers,
-Paul
 
---=20
+On 05/26/2016 04:14 PM, Paul Eggleton wrote:
+> On Thu, 26 May 2016 13:46:21 Cliff Brake wrote:
+>> On Tue, May 24, 2016 at 5:23 AM, Maxin B. John <maxin.john@intel.com> wrote:
+>>> meta-java repo was moved to:
+>>> git://git.yoctoproject.org/meta-java
+>>>
+>>> Is it possible to update the list with that info?
+>> Done, thanks!
+>>
+>> https://github.com/cbrake/openembedded-admin/commit/51604da79ed5a02341562a9b
+>> f254b3dd9dc71704
+> At some point it would be great if this script could be driven from the OE 
+> layer index rather than being a separate entity - then updates would largely 
+> be self-service for the maintainers, or at least they would only need to be 
+> done in one place.
+>
+> Cheers,
+> Paul
+>
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
