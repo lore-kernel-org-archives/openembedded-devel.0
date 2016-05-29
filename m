@@ -1,46 +1,46 @@
 Return-Path: <net147@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E8A29731A3
+Received: from mail-pa0-f66.google.com (mail-pa0-f66.google.com
+	[209.85.220.66])
+	by mail.openembedded.org (Postfix) with ESMTP id E922776536
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 May 2016 10:43:27 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id b124so18431031pfb.0
+	Sun, 29 May 2016 10:43:36 +0000 (UTC)
+Received: by mail-pa0-f66.google.com with SMTP id fg1so18193245pad.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 May 2016 03:43:28 -0700 (PDT)
+	Sun, 29 May 2016 03:43:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=KwsEB8+dcB/ErZbThlhX81AhgpP2PWLRcrYCdb5hFlk=;
-	b=X/Z95XOUF1y4pZxBvFvwoSnw9YeIVm/89DBMRTXc6yJ5IzbGk9KPbwZND9jFioA74B
-	+zLb5CXINL0FxaPioRnN3GlSgVlMqIqL+Tavb8xQZBC48zvN76aHe7KeoG/GFh0MTjFT
-	Pmyam5Xw8dUX4WZ6Ij3bWY8617ejjC0UW9lcqshg2bW2pvgeAm11/ZVWT6HSkm+NhkLF
-	akwfUfJGHQtlFI2nYwLFNGK1kbySQqgUAtCM1vHTpEFN/PRymaUup5PCO6H1nKMGe2qu
-	ebLJh7N8EK9FxswRYzqsePSyNK3YbihovsTBUZivnhEN5shGJ+AeRE9Gveld7WHKxNB3
-	bL7A==
+	bh=owoSLCuwQPOVaqU4FM13vk2duW+rh8yRm9jNuY0eqwg=;
+	b=U4DXFnxVJn7Qyq6FCDRGFuM4dIuMQoybg1+sxfxp5xBzOAs3erSux0Ab9ARDB0JVNj
+	B1TF3bEXpUaSV4jiDWWpUhTNZh1hkpeCV9X3UUDISB56E4R4r5MPFSF9oTW9QCJtNwmx
+	PZqTSd7/UQkNU0XUrY0QENmVmaAgi9xdWNqLkDG+nbOjR5s5nqpBL7fJXR0NS2dP1ZpX
+	0QvyMLTAmh1UVTaK+4bh0uABGkYrIX8GGkdOHlT1sv5fiIhq28aMHDPjCCHOtf33tl6K
+	X9XT5R2abkcf5ux3klrOnwNbfR3tRQXklsQqj2eh6S43qEGIU1zo/G5JdmaJjB/p5O6u
+	lG3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=KwsEB8+dcB/ErZbThlhX81AhgpP2PWLRcrYCdb5hFlk=;
-	b=aPlDOZ7D8RDnmdb1vbnP+fnE/gV22nbyBgW6OOA8odOexqHWffOh/nNcrvfJg9ZdRa
-	hKyWtPO0BzG2bSwroMrVmTJx2d+iYLzNY7qFtj5HEQH0TSQVT3BWH6rK19gGi1Skk+9D
-	sBZP556JGdnlz9rgUnFofcY8Q6smiKispBxv4rm61fo1VZV7KLyWR0kaB7ccCwUBQOjw
-	Tx5qPvmrBzJTEPM2bMhx9eBzjX18HJZOmPiV9Rho8K2dU7kB8sgJkAuRFlaxwI7jURnS
-	OF62/IwwD4ycIDWZMeEHRV+PDrfoQ8Ujn+cXiu8fk4vNf6cmAFgxko6IJZwIXg8OjxmY
-	8+5A==
-X-Gm-Message-State: ALyK8tKzwYCF/n0+y4c28CPOxoJWw1xXQt0b3nj6TZvC5Pif+e0dWtrXxyVzpDyXxAK3+w==
-X-Received: by 10.98.70.3 with SMTP id t3mr37646485pfa.147.1464518608192;
-	Sun, 29 May 2016 03:43:28 -0700 (PDT)
+	bh=owoSLCuwQPOVaqU4FM13vk2duW+rh8yRm9jNuY0eqwg=;
+	b=VkJSUAVUA/jrMahYDvEkUiZdNN9iXP5oM/tG8QWyOn0JqWgafy5q8pSTEMZYPev2Jh
+	8EdOvoFvvXD8VD4qMGdzZycAKhQPj7/HM6MzHikqcNRhqh11b+7zYqC47iTXvMplIyyE
+	xY4VfrDIv32fhxWlX0SDVSx9Sg0UVsNekGrBS7r2blYcpTuspDb7DVhHLELYoP1dO/IJ
+	8H3/p43LBQG42ohwFr+B7V19BKjIC03nXJ5jeqrY/X58y+wnTIibw5mcwEglSqu+oak1
+	SPuy/GaCiJ998fTOnSowUT6yFi/4zSjK9FGJCKXtPV023b0lh/dN5u9Lj+dWN8Dr7IIb
+	UfIA==
+X-Gm-Message-State: ALyK8tLUfG47hGfHftNmT7/1jAt6m24V3jlunFIRXiDnFHfOAvPJKqodZkpRAnfH/5zWtg==
+X-Received: by 10.66.145.195 with SMTP id sw3mr37067559pab.36.1464518617438;
+	Sun, 29 May 2016 03:43:37 -0700 (PDT)
 Received: from 60-242-179-244.static.tpgi.com.au
 	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
 	by smtp.gmail.com with ESMTPSA id
-	w23sm25436772pfa.38.2016.05.29.03.43.27
+	e2sm25443241pfd.20.2016.05.29.03.43.36
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 29 May 2016 03:43:27 -0700 (PDT)
+	Sun, 29 May 2016 03:43:36 -0700 (PDT)
 From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 May 2016 20:43:43 +1000
-Message-Id: <1464518623-23458-1-git-send-email-net147@gmail.com>
+Date: Sun, 29 May 2016 20:44:15 +1000
+Message-Id: <1464518655-4302-1-git-send-email-net147@gmail.com>
 X-Mailer: git-send-email 2.8.0
-Subject: [meta-networking][PATCH] libtevent: add missing libaio dependency
+Subject: [meta-networking][PATCH] libtdb: add missing libaio dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,32 +53,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 May 2016 10:43:28 -0000
-
-Fixes the following compile error:
-| [ 6/27] Compiling lib/replace/test/testsuite.c
-| In file included from ../lib/replace/test/testsuite.c:49:0:
-| ../lib/replace/system/aio.h:29:20: fatal error: libaio.h: No such file or directory
-| compilation terminated.
+X-List-Received-Date: Sun, 29 May 2016 10:43:37 -0000
 
 Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-support/libtdb/libtdb_1.3.8.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb b/meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb
-index d0ad748..3f5d7f4 100644
---- a/meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb
-+++ b/meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://tevent.samba.org"
+diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.3.8.bb b/meta-networking/recipes-support/libtdb/libtdb_1.3.8.bb
+index bf6698a..7fbbe34 100644
+--- a/meta-networking/recipes-support/libtdb/libtdb_1.3.8.bb
++++ b/meta-networking/recipes-support/libtdb/libtdb_1.3.8.bb
+@@ -2,6 +2,8 @@ SUMMARY = "The tdb library"
  SECTION = "libs"
- LICENSE = "LGPLv3+"
+ LICENSE = "LGPL-3.0+ & GPL-3.0+"
  
--DEPENDS += "libbsd libtalloc"
-+DEPENDS += "libaio libbsd libtalloc"
- RDEPENDS_python-tevent = "python"
++DEPENDS += "libaio"
++
+ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
+                     file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
  
- SRC_URI = "http://samba.org/ftp/tevent/tevent-${PV}.tar.gz"
 -- 
 2.8.0
 
