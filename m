@@ -1,63 +1,46 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-it0-f67.google.com (mail-it0-f67.google.com
-	[209.85.214.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 8675B76806
+Return-Path: <net147@gmail.com>
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id E8A29731A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 May 2016 03:43:46 +0000 (UTC)
-Received: by mail-it0-f67.google.com with SMTP id z123so3050437itg.2
+	Sun, 29 May 2016 10:43:27 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id b124so18431031pfb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 May 2016 20:43:47 -0700 (PDT)
+	Sun, 29 May 2016 03:43:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=exZqylFHqbErAvGIqJgmHwWtoLVVESu+e18gS4MAW2o=;
-	b=HFzH2JYpGA5GSkfcee54HluCsNi78poVhbfw9AwOp+FQrlzRy9fxdIlRX8VR80rSke
-	rOAZlLsbA/CuJBPOYX4ZyPeXitE/f3ns4Bwn5yYxMddBcBXKzz/WsJJEkP9qzPVBO6OP
-	1/E31z205stDrN6YknIMcm+BI4JhEvx9W9PXL05CarwvND32Hzc9JWwSEQpJNKS9LrhU
-	oaH7c9/jTtRBOEDj/iPRL+p/D/SjyZaNcDZcAcN7muXBm/Uy5aqX0z9WZK8IrzLBMWC6
-	gDIa8QJtRKGHTG191XcQxj2uX8YSxG5FiIe+3iP0PPq6ssNaYBYMfQgAele1ewLO60jA
-	XLHg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mentor-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=exZqylFHqbErAvGIqJgmHwWtoLVVESu+e18gS4MAW2o=;
-	b=D2VGFhpwTk2K1q8RvJtOX5O+FMZjySfaeE8uVPC4x9UmpM1XMjH/qN4K9jh2myV1N5
-	/hFRuP9svJ/5/PIxW5hzQSZc7dYynR07kbleGsNw8EH2EsZ/HKB6qPPCKEflZZh8liFg
-	F+22w3MwvfNOSLzKbab3J1pGYAZGV4/G8ejRgxVqFj+mIDwfQMKgkW9crTPo8Xhk5oy8
-	EsUY2yegKf8DQcxg1V9fNQHRBMi7D8h3qVcThlpyLFoJSyhBsFXOQtlpUZ4cXlujqGtE
-	pq1dqW4R+gGem4fZs+pYH5Lt9ZJ5xfQzQ+bfaayUr/LdQbkCElQGD7VEcbWTf7SRaqL5
-	Pa3Q==
+	h=from:to:cc:subject:date:message-id;
+	bh=KwsEB8+dcB/ErZbThlhX81AhgpP2PWLRcrYCdb5hFlk=;
+	b=X/Z95XOUF1y4pZxBvFvwoSnw9YeIVm/89DBMRTXc6yJ5IzbGk9KPbwZND9jFioA74B
+	+zLb5CXINL0FxaPioRnN3GlSgVlMqIqL+Tavb8xQZBC48zvN76aHe7KeoG/GFh0MTjFT
+	Pmyam5Xw8dUX4WZ6Ij3bWY8617ejjC0UW9lcqshg2bW2pvgeAm11/ZVWT6HSkm+NhkLF
+	akwfUfJGHQtlFI2nYwLFNGK1kbySQqgUAtCM1vHTpEFN/PRymaUup5PCO6H1nKMGe2qu
+	ebLJh7N8EK9FxswRYzqsePSyNK3YbihovsTBUZivnhEN5shGJ+AeRE9Gveld7WHKxNB3
+	bL7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to:cc;
-	bh=exZqylFHqbErAvGIqJgmHwWtoLVVESu+e18gS4MAW2o=;
-	b=eBCBlpVv+7xaLU/+q6rtSt1vQZ5Hlet+020VZj+lEIW2WviGLiqhB4+bySZ+Yawt5g
-	tMnOkyuJt50guQ8qhid/PVtQ9E2oSU1iEb2TXC3tFRoda3kz7dqoZ2GORkDmZ8EpiS/J
-	TxV6LF8jzf0GHmDJ7tPbAh3XBytngkbbeVe6UAiCkW1E5Ouz0G6uev6VswqI38kUzztR
-	s05Efpz3Npur3H2fZuBrl5MeHaqa88T+BFNFArEKg5CtsDT9qOThqUYq7iP55F+1eFiU
-	DabwHP0xibwpVeaEHVvBaJB1s7csNjFCbRHrfVpUKo5E5oOblKP/efiy0EeYdocReGlY
-	bboA==
-X-Gm-Message-State: ALyK8tIEBceFIuWsJjF4r4rMr5umSzhnHN/KEtizD6RMHhLGAxGW9Fc52FKNXnqzTM+VinS9HC2xU9dfT4cPhg==
-X-Received: by 10.36.218.68 with SMTP id z65mr3994624itg.19.1464493426877;
-	Sat, 28 May 2016 20:43:46 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.79.100.5 with HTTP; Sat, 28 May 2016 20:43:27 -0700 (PDT)
-In-Reply-To: <CABcZAN=sp3YTzAMZFSE0RrH3ebv_xpE6w8yo7++S6fytNma+aw@mail.gmail.com>
-References: <cover.1463501350.git.chris_larson@mentor.com>
-	<3ab55100823a114a701c63eaa703d0352bca5513.1463501350.git.chris_larson@mentor.com>
-	<328bdd83910d94b0c35eaff11abd98838c20493e.1463501350.git.chris_larson@mentor.com>
-	<CABcZAN=sp3YTzAMZFSE0RrH3ebv_xpE6w8yo7++S6fytNma+aw@mail.gmail.com>
-From: Christopher Larson <chris_larson@mentor.com>
-Date: Sat, 28 May 2016 20:43:27 -0700
-X-Google-Sender-Auth: Y7pqv2l10lbXHeErsxCxnmqG_fM
-Message-ID: <CABcZAN=sCH-O0HXsr1xGmtKa+8GxkORq=sGX-SUqhi+kYontEg@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: Re: [meta-oe][PATCH 2/6] luajit: fix build issues, obey more vars
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=KwsEB8+dcB/ErZbThlhX81AhgpP2PWLRcrYCdb5hFlk=;
+	b=aPlDOZ7D8RDnmdb1vbnP+fnE/gV22nbyBgW6OOA8odOexqHWffOh/nNcrvfJg9ZdRa
+	hKyWtPO0BzG2bSwroMrVmTJx2d+iYLzNY7qFtj5HEQH0TSQVT3BWH6rK19gGi1Skk+9D
+	sBZP556JGdnlz9rgUnFofcY8Q6smiKispBxv4rm61fo1VZV7KLyWR0kaB7ccCwUBQOjw
+	Tx5qPvmrBzJTEPM2bMhx9eBzjX18HJZOmPiV9Rho8K2dU7kB8sgJkAuRFlaxwI7jURnS
+	OF62/IwwD4ycIDWZMeEHRV+PDrfoQ8Ujn+cXiu8fk4vNf6cmAFgxko6IJZwIXg8OjxmY
+	8+5A==
+X-Gm-Message-State: ALyK8tKzwYCF/n0+y4c28CPOxoJWw1xXQt0b3nj6TZvC5Pif+e0dWtrXxyVzpDyXxAK3+w==
+X-Received: by 10.98.70.3 with SMTP id t3mr37646485pfa.147.1464518608192;
+	Sun, 29 May 2016 03:43:28 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by smtp.gmail.com with ESMTPSA id
+	w23sm25436772pfa.38.2016.05.29.03.43.27
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 29 May 2016 03:43:27 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 29 May 2016 20:43:43 +1000
+Message-Id: <1464518623-23458-1-git-send-email-net147@gmail.com>
+X-Mailer: git-send-email 2.8.0
+Subject: [meta-networking][PATCH] libtevent: add missing libaio dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,50 +53,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 May 2016 03:43:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 29 May 2016 10:43:28 -0000
 
-On Sat, May 28, 2016 at 8:41 PM, Christopher Larson <chris_larson@mentor.com
-> wrote:
+Fixes the following compile error:
+| [ 6/27] Compiling lib/replace/test/testsuite.c
+| In file included from ../lib/replace/test/testsuite.c:49:0:
+| ../lib/replace/system/aio.h:29:20: fatal error: libaio.h: No such file or directory
+| compilation terminated.
 
-> On Tue, May 17, 2016 at 9:10 AM, Christopher Larson <kergoth@gmail.com>
-> wrote:
->
->> From: Christopher Larson <chris_larson@mentor.com>
->>
->> Rework how variables are passed in to ensure that more of our flag vars
->> are
->> obeyed, make it obey more of our target path vars, and use fewer of its
->> hardcoded flags. Also add verbosity to the compile output for debugging.
->>
->> Without this, errors were seen for us:
->>
->>     | In file included from
->> .../lib/gcc/i686-pc-linux-gnu/5.2.0/include-fixed/64/sgxx-glibc/syslimits.h:7:0,
->>     |                  from
->> .../lib/gcc/i686-pc-linux-gnu/5.2.0/include-fixed/64/sgxx-glibc/limits.h:34,
->>     |                  from luaconf.h:12,
->>     |                  from lua.h:16,
->>     |                  from lj_arch.h:9:
->>     |
->> .../lib/gcc/i686-pc-linux-gnu/5.2.0/include-fixed/64/sgxx-glibc/limits.h:168:61:
->> fatal error: limits.h: No such file or directory
->>     | compilation terminated.
->>     | Makefile:233: *** Unsupported target architecture.  Stop.
->>     | make[1]: Leaving directory '.../luajit/2.0.4-r0/LuaJIT-2.0.4/src'
->>
->> Signed-off-by: Christopher Larson <chris_larson@mentor.com>
->>
->
-> Were there issues with this one? I noticed the other patches in this
-> series were applied, but this one wasn't.
->
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Ah, nevermind, I see it's on master-next.
+diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb b/meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb
+index d0ad748..3f5d7f4 100644
+--- a/meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb
++++ b/meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://tevent.samba.org"
+ SECTION = "libs"
+ LICENSE = "LGPLv3+"
+ 
+-DEPENDS += "libbsd libtalloc"
++DEPENDS += "libaio libbsd libtalloc"
+ RDEPENDS_python-tevent = "python"
+ 
+ SRC_URI = "http://samba.org/ftp/tevent/tevent-${PV}.tar.gz"
 -- 
-Christopher Larson
-kergoth at gmail dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+2.8.0
+
 
