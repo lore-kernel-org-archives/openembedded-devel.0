@@ -1,46 +1,50 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pa0-f67.google.com (mail-pa0-f67.google.com
-	[209.85.220.67])
-	by mail.openembedded.org (Postfix) with ESMTP id F19A3731BC
+Return-Path: <s.stirtzel@googlemail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C871731DF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 May 2016 12:30:26 +0000 (UTC)
-Received: by mail-pa0-f67.google.com with SMTP id x1so2003317pav.1
+	Mon, 30 May 2016 07:37:01 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id n129so19782242wmn.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 May 2016 05:30:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=2oJ58jaM5qyZDCaWKGCX89P2jqIHIX4xRYXFbfxMb/k=;
-	b=qbugLJM6Sia1QSGRsfPv1bJG5g+VFUm4BAP7zwllqT03TsH8A/c17fclvfS5qa5lKu
-	5G+v2ak8UiELEfFHuTEYmLuHdnOp8XryHPHuf+247bmtN0SvPBJruWF0oTNBjZlesWAD
-	mAL8tGfBBKemnYEtZTrAnH891Aq7WR721UF8+Au42fuTvtrSteCHxQewTdGSWUVMFU1r
-	ZPHPwMMcemm2OlpgTmUzfV1nYGAUkSuUICBUqmtEWJo5/9XbuYHW/kTvacM94CGB85hm
-	zj9A82EOODT3YzsIqkCjnrjeo2oopoPkGvnjroXV01BWAVLr032J0xRE4kCm7PxAoQHx
-	KMxg==
+	Mon, 30 May 2016 00:37:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=J959oVqSSoMb3I1qr7D/cc58ekbH/NbU6kaWGrn71/g=;
+	b=DDNFocg1oFzgMVKDYSaxZy/AyW/Gynn0z3P+uZpdA00COeDzVSV9ZUY4xYaQ19K34P
+	zmzkYR4F0jxmm5AQLKIlTRTRyhhRYCfg45cs7Qss/BLNNwUXikVEMdJ8yWpdQtuYhcae
+	1NOdNavVkICI/QSnFxxNxhumFuH0zvLvw14dWTaP/g/e+eOAP2yr3RnPfzPri3dBE35f
+	6RY3VyXxcy0zvryXrIx6Q4mOKRRF5tvuhgH05FMkD/CmMD7l8EALMciMS008/s8l78IG
+	M91teuA5kEyaxR4HXkAwdwgDya/ele+UpWgsOT2Cy+hp0VuZuoCapPGZVDLEEkxXhVRX
+	T7kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=2oJ58jaM5qyZDCaWKGCX89P2jqIHIX4xRYXFbfxMb/k=;
-	b=Mg9skhGYEcnUKZfQLoncTVdGurjaonkPiDm7hIBSGQ9pPxam0aBVPmOvsanwdB7Hj6
-	SYTSFJGt7JZyu97pX6BCByOdA4PUDNMcN7eynadDlKmX4zQeM5i/MVLGFSl/Dr5UBOoy
-	p6gRpaQ6wVNHy3VtQmlKOxxdg0TbOVoKQcoug61e8HryUewAqAHfjfMRX71ltHgbER2x
-	XGqo0Se8i326XaUJrXkZcIqLKbnaSkN66E5gzf2CuRUEApL2/T9V1KtSpN8v2xW7gbQF
-	U9RBve9R/2/c3td4RDS+z+bRyLbyIVhffLGCjPS/JfeXzoRCgs6OQhjDj6kBw7J/XMJ0
-	rkig==
-X-Gm-Message-State: ALyK8tK2Jl0GFZJ06c663DGxAq2aP0EFnr05D1Ni4aggSRqQrKPRb5GM6mhyMmIPDO1hLA==
-X-Received: by 10.66.222.3 with SMTP id qi3mr37935553pac.24.1464525027546;
-	Sun, 29 May 2016 05:30:27 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by smtp.gmail.com with ESMTPSA id
-	f191sm25935926pfa.26.2016.05.29.05.30.26
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 29 May 2016 05:30:26 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 May 2016 22:31:06 +1000
-Message-Id: <1464525066-31118-1-git-send-email-net147@gmail.com>
-X-Mailer: git-send-email 2.8.0
-Subject: [meta-oe][PATCH] nodejs: update to 4.4.5
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=J959oVqSSoMb3I1qr7D/cc58ekbH/NbU6kaWGrn71/g=;
+	b=DdAsUPex5CWq27EEgl24Q+MGmsiGg72uxf+wCWk9KfNV4vGVLt2BPj+URBMPxcATNH
+	0vrJmLk131P2erC207SLhC872Mv5lHiMRiDRJaa4HFDslx48lbnPmdXr+QQvsUs9XPiY
+	r4bttdS/E3M+UWWO0cMBeuF+2tmkG8Wa5vC0Gk/bhBpkzX5ERHqx6E/+4vC3dBSugJ25
+	KpktR/E5nDu57RqjJrA+5H6zDJYluoNafyd2X07vRVUiW3sFDov3pYIXXGI1JsCrSQkO
+	dfml6f6SPWcKRBjbAoO1Zjk7v6yjakCp3VT2MBuQkBdFH5X+D36lLtkkopil2JJxcn44
+	eWkQ==
+X-Gm-Message-State: ALyK8tJHGbKgNHSXyQBh/nGMQy4Vh5SX18xYb4J1Z2/aByYf5CYCJEAnJBvREKeBhkcePNCS6TzcTMi7QfNKKA==
+X-Received: by 10.28.18.11 with SMTP id 11mr8843137wms.51.1464593822284; Mon,
+	30 May 2016 00:37:02 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.28.3.131 with HTTP; Mon, 30 May 2016 00:36:32 -0700 (PDT)
+In-Reply-To: <1614711.s4bvBbSZBc@peggleto-mobl.ger.corp.intel.com>
+References: <1464054649898.9b34c448@Nodemailer>
+	<17859297.OlYCXzWKo0@peggleto-mobl.ger.corp.intel.com>
+	<CALbNGRTxYZ-+ZFmxOCguBMbO5X4m6KTaM+jXVqmSBQ8pHuR9UA@mail.gmail.com>
+	<1614711.s4bvBbSZBc@peggleto-mobl.ger.corp.intel.com>
+From: Samuel Stirtzel <s.stirtzel@googlemail.com>
+Date: Mon, 30 May 2016 09:36:32 +0200
+Message-ID: <CAGiJk9f=t2VZrN1URi7uZuz-ChgT1QTEN0vaECM-t9jCcmPmHw@mail.gmail.com>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Cc: Cliff Brake <cbrake@bec-systems.com>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [OE-core] Unmaintained layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,33 +57,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 May 2016 12:30:27 -0000
+X-List-Received-Date: Mon, 30 May 2016 07:37:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
----
- meta-oe/recipes-devtools/nodejs/{nodejs_4.4.4.bb => nodejs_4.4.5.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_4.4.4.bb => nodejs_4.4.5.bb} (95%)
+2016-05-26 22:57 GMT+02:00 Paul Eggleton <paul.eggleton@linux.intel.com>:
+> On Thu, 26 May 2016 22:42:35 Andreas M=C3=BCller wrote:
+>> What about meta-kde4?
+>
+> It seems Samuel has switched himself to "Inactive" - we probably need som=
+e
+> kind of alert when the last active maintainer of a layer does that. For n=
+ow
+> I've at least added a note to the entry. Samuel, do you have any opinions=
+ on
+> what we should do with the listing? Or anyone else?
+>
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_4.4.4.bb b/meta-oe/recipes-devtools/nodejs/nodejs_4.4.5.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_4.4.4.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_4.4.5.bb
-index 8c91720..479c973 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_4.4.4.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.4.5.bb
-@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
- SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-     file://no-registry.patch \
- "
--SRC_URI[md5sum] = "1ad7915688df85f62a57f43860dc54c6"
--SRC_URI[sha256sum] = "2c9cedc401145a6648877ebd3fa9090c874dfced8bf7a6e7d9d8e9c21827b114"
-+SRC_URI[md5sum] = "376140907bbe362f36065a30af04f020"
-+SRC_URI[sha256sum] = "eaec2cd3c26a1cc101b829d32fef392268285187d1d9eda3718db288e7be28c6"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
--- 
-2.8.0
+Hi,
 
+IMO just drop it from the list.
+If possible you could add a HTTP 301 forward to the web repo address,
+that would at least avoid some of the broken links.
+
+Or add a page with a list of all unsupported layers and the last known
+web repository address, and use HTTP 301 forwards to that page.
+
+
+--=20
+Regards
+Samuel
 
