@@ -1,23 +1,57 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B31C77123
+Return-Path: <mats.dev.list@gmail.com>
+Received: from mail-lf0-f47.google.com (mail-lf0-f47.google.com
+	[209.85.215.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 261BF731C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2016 07:39:26 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u4U7dQVV011773
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 30 May 2016 00:39:26 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
-	Mon, 30 May 2016 00:39:25 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 30 May 2016 03:39:23 -0400
-Message-ID: <1464593963-76595-1-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Mon, 30 May 2016 08:01:12 +0000 (UTC)
+Received: by mail-lf0-f47.google.com with SMTP id s64so44986014lfe.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 May 2016 01:01:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:to:references:cc:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding;
+	bh=XMIZmTMSMgvDWbNn2/l1kc97JU2YZviOmXdza3g1ruE=;
+	b=vhcGv3IVmMVQc3c4Q1wZC/KjQ0FL0SB5xfd5jb4NFi/P3tT/bxQNFD/vpofliZzZ+8
+	s56wuonRNyX8B3Aj93JzKG6uKiS3prcThXN2+FMHgQAntVdng1+0WuLBRfTz8QZidWvV
+	k7/1dhHnPY/siNu9RRZ17FU++rBbO6CzQ2vQIof5aV66FIUryuljyv48/Nodv9fvcB68
+	81lJvjZ94kZKA64oPNhcm/GM5ffDP1Lqt3bF/5DG/tq12nRbGxjygOucsCw5XeyPSgGq
+	fFfQMjN6MWbjld0xMR4IkS6iuYwWlarWpG6w7QNbpmgecB9QIAd2CR6GbL6CkEaaEfnR
+	k+ng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=XMIZmTMSMgvDWbNn2/l1kc97JU2YZviOmXdza3g1ruE=;
+	b=RSccEl0fFelSlU46fYEYvmmSQUk7MZUpLYK9IurcR3o9ERqXAWbeHMJlIqiHPR/k+A
+	lQIEFiQjglaOwn/S+MQ5JKcmmgXZg4s52fQ9lvpti8Z0tjNavpy4aWSW0QaphOuBadb/
+	dEKjG3rZaeAVG0JsbxFZ52nCQAOHiU7f3qof5OzGArUbA5hKPn1dkaasVUmjHYRu+Lv+
+	Otw23lAlvAfSVOtVaTThcESZ4JlO9HNrw7XRQHdN93VRhjw+OqT9h99fbefQ7qty9Bcs
+	Sv6WQx4aAOZfZly00iETiGDbYOiUqR+tAFIpTiSU8S5zUHo/AEBWv2L3BeW32j713+wb
+	HPPg==
+X-Gm-Message-State: ALyK8tL0xCdcpq0YYMluc2PR09BWnrLrm/QmBLimIb+fsm9RbLDApJ1jmz0IyBR/Xh/iZA==
+X-Received: by 10.46.5.194 with SMTP id 185mr5177166ljf.65.1464595272051;
+	Mon, 30 May 2016 01:01:12 -0700 (PDT)
+Received: from [10.10.1.129] (h217-27-188-82.cust.tyfon.se. [217.27.188.82])
+	by smtp.gmail.com with ESMTPSA id
+	xx7sm4295655lbb.19.2016.05.30.01.01.11
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Mon, 30 May 2016 01:01:11 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org,
+	Paul Eggleton <paul.eggleton@linux.intel.com>
+References: <1464054649898.9b34c448@Nodemailer>
+	<17859297.OlYCXzWKo0@peggleto-mobl.ger.corp.intel.com>
+	<CALbNGRTxYZ-+ZFmxOCguBMbO5X4m6KTaM+jXVqmSBQ8pHuR9UA@mail.gmail.com>
+	<1614711.s4bvBbSZBc@peggleto-mobl.ger.corp.intel.com>
+	<CAGiJk9f=t2VZrN1URi7uZuz-ChgT1QTEN0vaECM-t9jCcmPmHw@mail.gmail.com>
+From: Mats Karrman <mats.dev.list@gmail.com>
+Message-ID: <574BF347.4060609@gmail.com>
+Date: Mon, 30 May 2016 10:01:11 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.8.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] efivar-native: fix compile failure with older host gcc (<=4.6)
+In-Reply-To: <CAGiJk9f=t2VZrN1URi7uZuz-ChgT1QTEN0vaECM-t9jCcmPmHw@mail.gmail.com>
+Cc: Cliff Brake <cbrake@bec-systems.com>
+Subject: Re: [OE-core] Unmaintained layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,91 +64,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 May 2016 07:39:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 30 May 2016 08:01:14 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-While host gcc version is 4.6.3 in ubuntu 1204, it
-did not recognize -std=gnu11 and -Wmaybe-uninitialized.
 
-While host gcc version is 4.4.7 in centos6, it
-did not recognize -std=gnu11, -Wmaybe-uninitialized,
-and -flto.
 
-For native build, use -std=gnu99 to replace -std=gnu11,
-and directly remove -Wmaybe-uninitialized and -flto.
+On 2016-05-30 09:36, Samuel Stirtzel wrote:
+> Or add a page with a list of all unsupported layers and the last known 
+> web repository address, and use HTTP 301 forwards to that page. 
++1 for that
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- .../fix-compile-failure-with-host-gcc-4.6.patch    | 45 ++++++++++++++++++++++
- meta-oe/recipes-extended/efivar/efivar_0.23.bb     |  2 +
- 2 files changed, 47 insertions(+)
- create mode 100644 meta-oe/recipes-extended/efivar/efivar/fix-compile-failure-with-host-gcc-4.6.patch
-
-diff --git a/meta-oe/recipes-extended/efivar/efivar/fix-compile-failure-with-host-gcc-4.6.patch b/meta-oe/recipes-extended/efivar/efivar/fix-compile-failure-with-host-gcc-4.6.patch
-new file mode 100644
-index 0000000..1c68a29
---- /dev/null
-+++ b/meta-oe/recipes-extended/efivar/efivar/fix-compile-failure-with-host-gcc-4.6.patch
-@@ -0,0 +1,45 @@
-+From 1361225abbaba878960f970df39a4570bbc39553 Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Thu, 26 May 2016 21:50:01 -0400
-+Subject: [PATCH] fix compile failure with older host gcc (<=4.6)
-+
-+While host gcc version is 4.6.3 in ubuntu 1204, it
-+did not recognize -std=gnu11 and -Wmaybe-uninitialized.
-+
-+While host gcc version is 4.4.7 in centos6, it
-+did not recognize -std=gnu11, -Wmaybe-uninitialized,
-+and -flto.
-+
-+For native build, use -std=gnu99 to replace -std=gnu11,
-+and directly remove -Wmaybe-uninitialized and -flto.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ gcc.specs | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/gcc.specs b/gcc.specs
-+index 0d4bbda..3802ca6 100644
-+--- a/gcc.specs
-++++ b/gcc.specs
-+@@ -2,13 +2,13 @@
-+ + -D_GNU_SOURCE
-+ 
-+ *efivar_cpp_options:
-+- -Werror -Wall -std=gnu11 -Wextra
-++ -Werror -Wall -std=gnu99 -Wextra
-+ 
-+ *cpp_options:
-+ + %(efivar_cpp_options)
-+ 
-+ *cc1_options:
-+-+ %(efivar_cpp_options) -Wmaybe-uninitialized -fno-merge-constants -flto -fvisibility=hidden %{!r:%{!fpie:%{!fPIE:%{!fpic:%{!fPIC:%{!fno-pic:-fPIE}}}}}}
-+++ %(efivar_cpp_options) -fno-merge-constants -fvisibility=hidden %{!r:%{!fpie:%{!fPIE:%{!fpic:%{!fPIC:%{!fno-pic:-fPIE}}}}}}
-+ 
-+ *self_spec:
-+ + %{!shared:%{!static:%{!r:-pie}}} %{static:-Wl,-no-fatal-warnings -Wl,-static -static -Wl,-z,relro,-z,now}
-+-- 
-+2.8.1
-+
-diff --git a/meta-oe/recipes-extended/efivar/efivar_0.23.bb b/meta-oe/recipes-extended/efivar/efivar_0.23.bb
-index 6e9a51f..046cad9 100644
---- a/meta-oe/recipes-extended/efivar/efivar_0.23.bb
-+++ b/meta-oe/recipes-extended/efivar/efivar_0.23.bb
-@@ -14,6 +14,8 @@ SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch \
-                                 file://0003-efivar-fix-for-cross-compile.patch \
-                                 file://0004-fix-unknow-option-for-gold-linker.patch \
-                               "
-+SRC_URI_append_class-native = " file://fix-compile-failure-with-host-gcc-4.6.patch \
-+                              "
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.8.1
-
+// Mats
 
