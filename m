@@ -1,58 +1,39 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 34F4973192
+Return-Path: <paul@paulbarker.me.uk>
+X-Greylist: delayed 27598 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 30 May 2016 16:19:05 UTC
+Received: from 12.mo4.mail-out.ovh.net (12.mo4.mail-out.ovh.net
+	[178.33.104.253])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C9ED606D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2016 16:07:31 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id q184so21466887qkf.0
+	Mon, 30 May 2016 16:19:05 +0000 (UTC)
+Received: from player773.ha.ovh.net (b9.ovh.net [213.186.33.59])
+	by mo4.mail-out.ovh.net (Postfix) with ESMTP id ED6311000E57
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2016 09:07:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to; 
-	bh=jTK80+os1cv6Wb+811L7+YGgzoCvLPZ2a+cvEoKrNM0=;
-	b=s2AAiLrsYY4RF1BVxPZILhUvmphcOBMJAII32LIUFBj6xw/aKw+o0A0ELCa/29Iut+
-	/IPgX9tkaUrWOfA0ag7PlMaDmZaCmf5Y++Y0Z9zKF6qz0D1hs3R5GniEW4BeHhqyLny3
-	unxtRnpIGsB7AJdMa3ukIE3shakU/L957CojbkfgFMbuMPnn9rf+rhLJh2HshAogMuvn
-	dReDlXZdf5bMKDTSFndRP+aG66QWoZZIV3977+c+bMDex3Gym0t8oG0fSRgRx0McUX7E
-	zEw4xC/qm8omWSv72HBLG3MFqxNw5hhmxbUlsr6UNjzgtODp+yNBp51j4YGwuW/Jhm1Y
-	59Ow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to;
-	bh=jTK80+os1cv6Wb+811L7+YGgzoCvLPZ2a+cvEoKrNM0=;
-	b=mltHmCGNjkPghj9/BxfQTfYICQRulI5SM93saRranEwHF570sbFpufBSZkloWxv/Wn
-	VZW5hyKQYGDVObsprU38I7PD3PpiCLkq09P+WuQhlqdoPpLgTQWo09ZwLMWyvrKhZek5
-	ew8zPJlaFYDplpK9qRc0QI6Jlad5N1nbdlGZHNzL69AvMT1JnOrl9Y1JSeGeTMYQVuuN
-	/N7EPD+r7NwMn66xPWEHz8j6XEKqrUvw2DJyjeowff62k5+Zd/nwF6WpaZ3G4SuhM2RV
-	qCO9xSVFqdf2ShPCeh6x3dIaFEW44nDaYSXuKelIrX6DCQ9CwTBXrjuNaRKB/qSSYxPQ
-	Gb0Q==
-X-Gm-Message-State: ALyK8tJweE79IBBD3KWyAcw7F0+Ubl8hnmUsX8l3E+znnrXmRy3kRecRen228p2Ahiho2Q==
-X-Received: by 10.200.40.242 with SMTP id j47mr26392896qtj.99.1464624452370;
-	Mon, 30 May 2016 09:07:32 -0700 (PDT)
-Received: from mail-qk0-f173.google.com (mail-qk0-f173.google.com.
-	[209.85.220.173]) by smtp.gmail.com with ESMTPSA id
-	e127sm9523745qkb.34.2016.05.30.09.07.31
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 30 May 2016 09:07:31 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-qk0-f173.google.com with SMTP id n63so125171781qkf.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 May 2016 09:07:31 -0700 (PDT)
+	Mon, 30 May 2016 10:02:51 +0200 (CEST)
+Received: from nuc.betafive.co.uk
+	(cpc11-shep11-2-0-cust130.8-3.cable.virginm.net [86.27.96.131])
+	(Authenticated sender: paul@betafive.co.uk)
+	by player773.ha.ovh.net (Postfix) with ESMTPSA id 84347600076;
+	Mon, 30 May 2016 10:02:49 +0200 (CEST)
+Date: Mon, 30 May 2016 09:04:28 +0100
+From: Paul Barker <paul@paulbarker.me.uk>
+To: Paul Eggleton <paul.eggleton@linux.intel.com>
+Message-ID: <20160530090428.4b070d61@nuc.betafive.co.uk>
+In-Reply-To: <17859297.OlYCXzWKo0@peggleto-mobl.ger.corp.intel.com>
+References: <1464054649898.9b34c448@Nodemailer>
+	<3785754.gtfDI8MhLU@peggleto-mobl.ger.corp.intel.com>
+	<CALbNGRTBcwNx0SMYjQ2GbRJviekG8h734t0yH24zeyiQEG367Q@mail.gmail.com>
+	<17859297.OlYCXzWKo0@peggleto-mobl.ger.corp.intel.com>
+X-Mailer: Claws Mail 3.11.1 (GTK+ 2.24.25; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-X-Received: by 10.55.51.71 with SMTP id z68mr27898887qkz.50.1464624450782;
-	Mon, 30 May 2016 09:07:30 -0700 (PDT)
-Received: by 10.237.54.229 with HTTP; Mon, 30 May 2016 09:07:30 -0700 (PDT)
-In-Reply-To: <1464593963-76595-1-git-send-email-hongxu.jia@windriver.com>
-References: <1464593963-76595-1-git-send-email-hongxu.jia@windriver.com>
-Date: Mon, 30 May 2016 13:07:30 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKpF4kmM5CcfFsvu_O-tkUJW84sEZ9WD+fJ3OV84sNG3ow@mail.gmail.com>
-Message-ID: <CAP9ODKpF4kmM5CcfFsvu_O-tkUJW84sEZ9WD+fJ3OV84sNG3ow@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] efivar-native: fix compile failure with older host gcc (<=4.6)
+X-Ovh-Tracer-Id: 17558127575192013244
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeekledrhedvgddufeefucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfenuceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddm
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] OE Changelog since 2016-05-15 until 2016-05-22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,28 +46,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 May 2016 16:07:32 -0000
+X-List-Received-Date: Mon, 30 May 2016 16:19:08 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 30, 2016 at 4:39 AM, Hongxu Jia <hongxu.jia@windriver.com> wrote:
-> While host gcc version is 4.6.3 in ubuntu 1204, it
-> did not recognize -std=gnu11 and -Wmaybe-uninitialized.
->
-> While host gcc version is 4.4.7 in centos6, it
-> did not recognize -std=gnu11, -Wmaybe-uninitialized,
-> and -flto.
->
-> For native build, use -std=gnu99 to replace -std=gnu11,
-> and directly remove -Wmaybe-uninitialized and -flto.
->
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+On Fri, 27 May 2016 08:25:23 +1200
+Paul Eggleton <paul.eggleton@linux.intel.com> wrote:
 
-I am concerned about supporting such old GCC versions; this seems like
-something Wind River ought to maintain privately since OE-Core does
-not state it supports those host distribution versions.
+> On Thu, 26 May 2016 22:18:34 Andreas M=C3=BCller wrote:
+> >=20
+> > Maybe a bit off-topic but layer index should have some mechanism of
+> > removing rotten layers.
+>=20
+> We've discussed this on-and-off at OE developer meetings for a while
+> now. FWIW I can remove them manually - actually I just got around to
+> deleting meta- picosam9 which has been unmaintained for years.
+>=20
+> Part of the problem though is determining what "rotten" actually
+> means. Additionally, there's an element of leaving things around in
+> case someone comes to fork/revive them again. We do show a "last
+> updated" date but it would be good to figure out some other way of
+> determining and indicating "layer health" - to date I don't think
+> we've managed to figure out anything practical for that.
+>=20
+> Cheers,
+> Paul
+>=20
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+meta-mmmpi can go, I haven't updated it in over 2 years, SRC_URI links
+are out-of-date and it almost certainly won't compile against recent
+releases.
+
+Perhaps "last updated" could be used to nudge layer maintainers when a
+layer looks stale. An automated email could tell them to check in to
+confirm that the layer is still valid or let you know that it can be
+removed.
+
+Thanks,
+Paul Barker
 
