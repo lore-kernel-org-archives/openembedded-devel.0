@@ -1,60 +1,48 @@
 Return-Path: <kergoth@gmail.com>
-Received: from mail-it0-f65.google.com (mail-it0-f65.google.com
-	[209.85.214.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 4414E77229
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D69977175
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 May 2016 19:21:43 +0000 (UTC)
-Received: by mail-it0-f65.google.com with SMTP id k76so96035ita.1
+	Tue, 31 May 2016 19:36:34 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id e3so275135wme.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 May 2016 12:21:44 -0700 (PDT)
+	Tue, 31 May 2016 12:36:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=5v3kZMWqbAgX5Atr1AKFdmWLqVSTxL9PfSXQCqgx+Po=;
-	b=Yn8Zgnf0ZjETf1sWl6kcihMDwyf0ctVgf7nnU/BWhZdaXhUkv5UU4iRkt8FnaoV9tg
-	vA4/qqYUajUjIkBqwRcLbJ8y8S1Al7QMh5RjZ8lnxut9fwUmfFG2s10YaM8N6/7Fa/PL
-	6NtSmy5wMzwaGQlTnXq1hDZ+hxyj1usWe3gaPK6qhod1ybtxhgFi/zgUq2vVk8qWQDvW
-	fv6heuNh/jItWxFYWbbWdaAMbcXXwo39SU/gxMFGe9ODiiSdZJM2fJ0YgI7CstJWnc2U
-	U8yEy8DsAC+1V3RiORiuWIFVSBXRpyypnnpYvharAbrlQTdS7SOtJJP8Ui/sZWrAYXFE
-	1MrA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mentor-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=5v3kZMWqbAgX5Atr1AKFdmWLqVSTxL9PfSXQCqgx+Po=;
-	b=M0uZYG6Oio+Wci2PKkIg/Oad834MEdwYzAOdayoHRNddbEWlRthdGhNCY24sFmtwIT
-	J68zC8RSrNbdB9KtYEzVivfrUW6JbYuxydC/lCkyvu611rgNX0ANs+SEHvWZ+1YyGoLW
-	VAiE+wduC4yoTvxaU6e3NqJ8mrPZjXz6chgnqXyhA9mlb8iS3BMvjGUwtxW8byG/H8I2
-	SURKA4bT7o55TwtauDiSJQw45aTgbo4fXP0D3XID51ZAfTDKQg0wFot8SmXJ8T561P6Q
-	F7t74eyvxaZGjnBD/mQUIbRknq0V2e/0BwkBUYq8X1zD0roNCtqkrGbhZCT9jO1I7J8R
-	F0FA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=4wtlC00T0ArObB90LSzQiMZnS0YPe/8UIcNl8KbsC2Q=;
+	b=IZmW69joNpCbcObcKwbNBYcl+nyoAsmQY+CvN0p0UPw8J3C9qqQhyo+sjn8wh7f96q
+	xVNzG3zpatJspawHp4/e+pmQ6Le08BnB3q6sDynxwIqJAbi5wzhrOnHWIh2DgogQCno1
+	5ppxvEfdc1NdJ5dec27lIP2hbume2svwGdHC0w3wfLfjXBY95BIDOHOC0+Hmt63j41g0
+	fu7ADWLndTZOKAAJYdqM6mNwK+Uq6l41t7k+aVr5IGD+WHQeKthvGPmmtHchRSry/4qW
+	GQVaVfqSmDHbSxmFhztYyxVa74RH9HfYSqCE5veQdlXQ3xB0r3WhGOYlJyICVAemTxI1
+	uGsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to:cc;
-	bh=5v3kZMWqbAgX5Atr1AKFdmWLqVSTxL9PfSXQCqgx+Po=;
-	b=AVYukxFIekqzskKyJxnJ1ZGIwo2XyJl41nsCfN2hxQmhkDyAlpBTIULIL6AROdYXQh
-	kn45H5yHVcPDQeeqr0QnET/EodRFOwCxQniiyZWhGhkrW37hJYNGZHLRZQtGtEPio8UV
-	l1MvTwHxw4uuh5oXxXFyUnRlC6XVntFVz25vU+jZcEgD3kRZcDTIDa3Zfb4MUiiL4aFy
-	jJgrqpFNIOKjentVcFRNsx1E5TWIw/+xSbN5+Pv1VOVYP2oazum+FBbxcyMZ58W4xqqS
-	Q1pF0bpQ++h1KZDjWCGz3mjCn/uPdjRoS6C4yR4wVDKu/TosvmGLdPmDaV4mMH0WcRzi
-	L/vg==
-X-Gm-Message-State: ALyK8tLuobOg1HUvZ2dTA5XMBOjalBG27h9tiRQBQ0vddcq1MvSRkCdfY7DVoX0wolRFgO3/JarYNXzEz1teyQ==
-X-Received: by 10.36.53.134 with SMTP id k128mr16040099ita.66.1464722504505;
-	Tue, 31 May 2016 12:21:44 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.79.100.5 with HTTP; Tue, 31 May 2016 12:21:24 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=4wtlC00T0ArObB90LSzQiMZnS0YPe/8UIcNl8KbsC2Q=;
+	b=hdJBfLqNvsLgQSOxBwB+8z3BuumSrTzkhTuS6BH9agB5oMlYuA1rhS+5Hi3NaJ5IIU
+	qQvX2Ku28G4ZGLs4SeswuASuRVrfcWSf9gXqaGQFeVZFTwYve2CxxAtSmiE+7+OrZg9O
+	An4e3J4rdmhpAVhi20I1rVnDp/SvaEauB66Uy3PgMn8aX6Mvnptcxlc4/VozfrW09/8k
+	R+cq7skzSbZhblrskFSaLP6g/Zmt0xOxO4pcAXgh4czLSXWZcXAqMyIP9abeFzYqiFiv
+	cpdlJmA+5I8DugpFtbR1FwFuPaezkz1+GFtln0hjX/j/TX8/57IBizmgappnBvxfNRE0
+	5JLQ==
+X-Gm-Message-State: ALyK8tI3z638LV3lepXY6WFhSA8i6b32255aZdeGIomcCpxv+yeDIbOOMpdX+0Ytd0wBxw==
+X-Received: by 10.28.26.145 with SMTP id a139mr18940666wma.55.1464723394412;
+	Tue, 31 May 2016 12:36:34 -0700 (PDT)
+Received: from amyr.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
+	by smtp.gmail.com with ESMTPSA id
+	x124sm30971462wmg.24.2016.05.31.12.36.31
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 31 May 2016 12:36:32 -0700 (PDT)
+From: Christopher Larson <kergoth@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 31 May 2016 12:36:28 -0700
+Message-Id: <1464723388-27569-1-git-send-email-kergoth@gmail.com>
+X-Mailer: git-send-email 2.8.0
 In-Reply-To: <1464722120-6702-1-git-send-email-kergoth@gmail.com>
 References: <1464722120-6702-1-git-send-email-kergoth@gmail.com>
-From: Christopher Larson <chris_larson@mentor.com>
-Date: Tue, 31 May 2016 12:21:24 -0700
-X-Google-Sender-Auth: DW2LqA_048Rfh1KRNkvb063UsqU
-Message-ID: <CABcZANncZO9cmxRKP=_5dx6TMMNtRtgf7LuGa+xK-++cdkBjuw@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: Re: [meta-oe][PATCH] plymouth: allow disabling the dracut dep
+Subject: [meta-oe][PATCH v2] plymouth: allow disabling the dracut dep
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,29 +55,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 May 2016 19:21:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 31 May 2016 19:36:36 -0000
 
-On Tue, May 31, 2016 at 12:15 PM, Christopher Larson <kergoth@gmail.com>
-wrote:
+From: Christopher Larson <chris_larson@mentor.com>
 
-> From: Christopher Larson <chris_larson@mentor.com>
->
-> Add a 'initrd' PACKAGECONFIG to disable emission of the plymouth-initrd
-> package which includes initramfs files for use by dracut. Disabling this
-> will
-> avoid the runtime dependency on dracut, which is useful if one doesn't
-> need or
-> want dracut and doesn't want to pull in meta-initramfs.
->
-> Signed-off-by: Christopher Larson <chris_larson@mentor.com>
->
+Add a 'initrd' PACKAGECONFIG to disable emission of the plymouth-initrd
+package which includes initramfs files for use by dracut. Disabling this will
+avoid the runtime dependency on dracut, which is useful if one doesn't need or
+want dracut and doesn't want to pull in meta-initramfs.
 
-Ignore this, needs a rebase. v2 forthcoming.
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+---
+ meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
+index 9ca8502..de23dcd 100644
+--- a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
++++ b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
+@@ -24,29 +24,33 @@ EXTRA_OECONF += " --enable-shared --disable-static --disable-gtk --disable-docum
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--enable-systemd-integration --with-system-root-install', '', d)} \
+                 "
+ 
++PACKAGECONFIG ??= "pango initrd"
++PACKAGECONFIG_append_x86 = " drm"
++PACKAGECONFIG_append_x86-64 = " drm"
++
+ PACKAGECONFIG[drm] = "--enable-drm,--disable-drm,libdrm"
+ PACKAGECONFIG[pango] = "--enable-pango,--disable-pango,pango"
+ PACKAGECONFIG[gtk] = "--enable-gtk,--disable-gtk,gtk+"
+-
+-PACKAGECONFIG ??= "pango"
++PACKAGECONFIG[initrd] = ",,,"
+ 
+ LOGO ??= "${datadir}/plymouth/bizcom.png"
+ 
+-PACKAGECONFIG_append_x86 = " drm"
+-PACKAGECONFIG_append_x86-64 = " drm"
+-
+ inherit autotools pkgconfig systemd
+ 
+-
+ do_install_append() {
+ 	install -d ${D}${systemd_unitdir}/system
+ 	install -m 644 ${B}/systemd-units/*.service ${D}${systemd_unitdir}/system
+ 	install -m 644 ${B}/systemd-units/systemd-ask-password-plymouth.path ${D}${systemd_unitdir}/system
+ 	# Remove /var/run from package as plymouth will populate it on startup
+ 	rm -fr "${D}${localstatedir}/run"
++
++	if ! ${@bb.utils.contains('PACKAGECONFIG', 'initrd', 'true', 'false', d)}; then
++		rm -rf "${D}${libexecdir}"
++	fi
+ }
+ 
+-PACKAGES =+ "${PN}-initrd ${PN}-set-default-theme"
++PACKAGES =. "${@bb.utils.contains('PACKAGECONFIG', 'initrd', '${PN}-initrd ', '', d)}"
++PACKAGES =+ "${PN}-set-default-theme"
+ 
+ FILES_${PN}-initrd = "${libexecdir}/plymouth/*"
+ FILES_${PN}-set-default-theme = "${sbindir}/plymouth-set-default-theme"
 -- 
-Christopher Larson
-kergoth at gmail dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+2.8.0
+
 
