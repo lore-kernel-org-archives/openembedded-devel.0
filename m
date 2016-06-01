@@ -1,24 +1,47 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 58B3177299
+Return-Path: <ricardo.ribalda@gmail.com>
+Received: from mail-lf0-f65.google.com (mail-lf0-f65.google.com
+	[209.85.215.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 7ADE67730D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Jun 2016 09:32:31 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga103.jf.intel.com with ESMTP; 01 Jun 2016 02:32:31 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.26,400,1459839600"; d="scan'208";a="988721409"
-Received: from mbabyjoh-desk.fi.intel.com (HELO
-	mbabyjoh-desk.ger.corp.intel.com) ([10.237.72.71])
-	by orsmga002.jf.intel.com with ESMTP; 01 Jun 2016 02:32:30 -0700
-Date: Wed, 1 Jun 2016 12:32:57 +0300
-From: "Maxin B. John" <maxin.john@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160601093257.GA15832@mbabyjoh-desk.ger.corp.intel.com>
-References: <1464745422-12428-1-git-send-email-Feng.Mu@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <1464745422-12428-1-git-send-email-Feng.Mu@windriver.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-java][PATCH] javasqlite: add support
+	Wed,  1 Jun 2016 12:33:46 +0000 (UTC)
+Received: by mail-lf0-f65.google.com with SMTP id h68so1827682lfh.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Jun 2016 05:33:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=SsgTSqtaytzMG1KjJresWO7MsDD80aRiJSLm6fjlMBg=;
+	b=H0pP1efZf82HO9sSjCdIPM5d73/PuE+fbxpqkENpdiPfE3CRysEWyvEGfHlUUfY3Al
+	dBKtGunAVw/WNguIQlf6jRzMYccciTUc+wg0ihxJrcvWw53S5C+ZvMTBhgmgkPOgZkHz
+	ri7J476XVznVOVTb0ulUA2I4VWYSgsmF3cQw9HQl0cfEEli+Uqqf8gyTOQL1MVob+NTx
+	PvvdPsgzLK0winQOKc3WheTjctX/dAeFYg+pN4PQPQU/Opypbez0lyoixpKH0ASJe7Ud
+	nC7RzLhoLIOoQ8JDL2qgln/TEdERqlYtpR0SLcNxcZYo64yzYS4yQiODFYiq/GUEJD+9
+	7Fig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=SsgTSqtaytzMG1KjJresWO7MsDD80aRiJSLm6fjlMBg=;
+	b=g53sn/0YLy3tGOGWnvBar4xbyMo9sO/QlINHifIZHCsMvC2EO8eJ8UNq6sSvUoymJG
+	6Nw2/130gV9QOUGByNW+C9shBtsREIQ9hZq2OB0eOSzZdVrlmAYCN5BRVLd/8ru5Y4vK
+	X7PhpXSpJKzEKt2OG9OvSpR092FP/dOE/UqCetwX9moPL2lNOTq1Tn8B+sNXrUm1U/9q
+	Gr8BjxJZoRYBmwxvMWhJNquOVKSbRS6XsZaoqbsN6dQI/1Ga6I5LDDO+GjUU+Rh2Q6MF
+	9mGyZbybUVedRl7lFdq6Y4SJLPU33JPm2Giy8+3mXzRGnxyCE2/1wdB+CgJHdk7pIPE6
+	4Oig==
+X-Gm-Message-State: ALyK8tKFTNEVVzHB2fLgC1Rbo6fC+X4c4eQDr1BG1OR+VbRhhqVYxNSZB4horETtA5WkrQ==
+X-Received: by 10.25.43.85 with SMTP id r82mr1687967lfr.63.1464784426198;
+	Wed, 01 Jun 2016 05:33:46 -0700 (PDT)
+Received: from neopili.qtec.com
+	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
+	by smtp.gmail.com with ESMTPSA id
+	h72sm3522329ljh.38.2016.06.01.05.33.44
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 01 Jun 2016 05:33:44 -0700 (PDT)
+From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+To: openembedded-devel@lists.openembedded.org, Martin.Jansa@gmail.com,
+	otavio@ossystems.com.br
+Date: Wed,  1 Jun 2016 14:33:42 +0200
+Message-Id: <1464784422-7127-1-git-send-email-ricardo.ribalda@gmail.com>
+X-Mailer: git-send-email 2.8.1
+Subject: [meta-oe][PATCH] opencv: Make gphoto2 dep optional via PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,67 +54,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jun 2016 09:32:31 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 01 Jun 2016 12:33:49 -0000
 
-Hi,
+Opencv can build without support for gphoto2 if needed.
 
-On Wed, Jun 01, 2016 at 09:43:42AM +0800, Feng Mu wrote:
-> Javasqlite is a Java wrapper including a basic JDBC driver
-> for SQLite 2/3.
-> 
-> Signed-off-by: Feng Mu <Feng.Mu@windriver.com>
-> ---
->  .../0001-fix-errors-during-cross-compile.patch     | 533 +++++++++++++++++++++
->  recipes-core/javasqlite/javasqlite_20150419.bb     |  41 ++
->  2 files changed, 574 insertions(+)
->  create mode 100644 recipes-core/javasqlite/files/0001-fix-errors-during-cross-compile.patch
->  create mode 100644 recipes-core/javasqlite/javasqlite_20150419.bb
-> 
-> diff --git a/recipes-core/javasqlite/files/0001-fix-errors-during-cross-compile.patch b/recipes-core/javasqlite/files/0001-fix-errors-during-cross-compile.patch
-> new file mode 100644
-> index 0000000..d9f85e4
-> --- /dev/null
-> +++ b/recipes-core/javasqlite/files/0001-fix-errors-during-cross-compile.patch
-> @@ -0,0 +1,533 @@
-> +From 7714a4c0e589f8b654e1270575512555ea4ad6c7 Mon Sep 17 00:00:00 2001
-> +From: Feng Mu <Feng.Mu@windriver.com>
-> +Date: Fri, 27 May 2016 16:44:33 +0800
-> +Subject: [PATCH] fix errors during cross compile
+Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+---
+ meta-oe/recipes-support/opencv/opencv_3.1.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Missing upstream-status
+diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+index 789512f9e0ac..512f1b3dea9b 100644
+--- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
++++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+@@ -10,7 +10,7 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+-DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0 libwebp libgphoto2 protobuf protobuf-native"
++DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0 libwebp protobuf protobuf-native"
+ 
+ SRCREV_opencv = "92387b1ef8fad15196dd5f7fb4931444a68bc93a"
+ SRCREV_contrib = "5409d5ad560523c85c6796cc5a009347072d883c"
+@@ -54,6 +54,7 @@ PACKAGECONFIG ??= "eigen jpeg png tiff v4l libv4l gstreamer samples tbb \
+ PACKAGECONFIG[amdblas] = "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libclamdblas,"
+ PACKAGECONFIG[amdfft] = "-DWITH_OPENCLAMDFFT=ON,-DWITH_OPENCLAMDFFT=OFF,libclamdfft,"
+ PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen,"
++PACKAGECONFIG[gphoto2] = "-DWITH_GPHOTO2=ON,-DWITH_GPHOTO2=OFF,libgphoto2,"
+ PACKAGECONFIG[gstreamer] = "-DWITH_GSTREAMER=ON,-DWITH_GSTREAMER=OFF,gstreamer1.0 gstreamer1.0-plugins-base,"
+ PACKAGECONFIG[gtk] = "-DWITH_GTK=ON,-DWITH_GTK=OFF,gtk+3,"
+ PACKAGECONFIG[jasper] = "-DWITH_JASPER=ON,-DWITH_JASPER=OFF,jasper,"
+-- 
+2.8.1
 
-> +Signed-off-by: Feng Mu <Feng.Mu@windriver.com>
-> +---
-> + Makefile.in  |  56 +++++++--
-> + configure.in | 382 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
-> + 2 files changed, 423 insertions(+), 14 deletions(-)
-> +
-
-<snip>
-
-> +
-> +SRC_URI[md5sum] = "242e384c1cd863d6996a35cf8c1c1e97"
-> +SRC_URI[sha256sum] = "b6b26e2c1a2174f5525d904eb3ff698c3f7089f0d4b4c84cf6121da08c8d801f"
-> +
-> +EXTRA_OECONF = " \
-> +    --with-sqlite3=${STAGING_DIR_NATIVE}/usr \
-> +    --with-sqlite3-target=${STAGING_DIR_TARGET}/usr \
-> +    --with-jdk=${STAGING_DIR_NATIVE}/usr/lib/jvm/icedtea7-native/ \
-> +    "
-> +
-> +EXTRA_OEMAKE = "DESTDIR=${D}"
-> +
-
-It will be better if we have a comment explaining the reason for using INSANE_SKIP.
-
-> +INSANE_SKIP_${PN}-dev = "dev-elf"
-> +
-> +do_configure_append (){
-> +	cp ${S}/*-libtool ${S}/libtool
-> +}
-
-Best Regards,
-Maxin
 
