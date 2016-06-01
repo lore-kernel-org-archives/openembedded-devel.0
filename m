@@ -1,59 +1,59 @@
 Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-qg0-f67.google.com (mail-qg0-f67.google.com
-	[209.85.192.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 43C4877323
+Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
+	[209.85.220.193])
+	by mail.openembedded.org (Postfix) with ESMTP id E44217737C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Jun 2016 13:43:23 +0000 (UTC)
-Received: by mail-qg0-f67.google.com with SMTP id l75so13547412qgd.3
+	Wed,  1 Jun 2016 13:44:15 +0000 (UTC)
+Received: by mail-qk0-f193.google.com with SMTP id q79so1990667qke.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jun 2016 06:43:24 -0700 (PDT)
+	Wed, 01 Jun 2016 06:44:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
 	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=L2oBt/uOTSoiYcDJ1UViDDjc7DKjz60tZqQgDoXLSa4=;
-	b=Y7LQqDlBIKvxnL8HIC/Ys5g3Yfe0fgzPMeqai2nzbALM3ArfinH1uOVddUIya5igrK
-	ZGIpLtGMJFRtmY/9wkOX15lxzdowKLLNtE4L9g+UOXmmhxZ7hMRH3b49mhbHcM4H/uw5
-	ELRJaYMkED6dtWBt+1qWhD1K9NBvTbIEV3pSUk55ZiHuWhQSuUzRgBfnDvtvWYusRGNn
-	Va2DxxBap0j6s27kY9CksTAaWgh1L38RkTZJa9O9m7fjFRmTHoFIIqEMlhRGyW7rzX0o
-	FffGp353AcJEsQcboFrZTcMwJ/zBkoPBF2UQiRonTuXKfVyUxDBa7slza02gSUgpzuif
-	glhA==
+	:cc; bh=bhY0cbaQyGBrTgnoSBQBT7SXRKGIqn1cWBN11SVOSc4=;
+	b=pTckp2a7LtJh4wq+H8JVyLd+UxPNXW70W8phtI7EE709Fys/vI5qX5CpqXwyugAW1s
+	Oo+YSGOlMWrcc4kZJGkd1l2Ms9g5ycEBOyGIplGhlBSGIxpe9L0IalQixy+ELczQ6B60
+	OT2a8OoM6nniHVAm5yF9YAT1/GmRw5bxHqXeItsWZjHdWQJi63QfvYwOGI0N0NzDyb9a
+	tl+BTx+tiyHcgZlEqFJhWqUiwALXZlqXtnuL8gRwtILnn637wk6OM3V+VGU6xH9nrura
+	a8UH8qWqC2v9IFk78FPOaHvrDwkC8OPLFZSQLTV3zGUKF53n68dNOjdXjxKzldH0xSwh
+	6yZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
 	:message-id:subject:to:cc;
-	bh=L2oBt/uOTSoiYcDJ1UViDDjc7DKjz60tZqQgDoXLSa4=;
-	b=OsIgNXjkWxWmSK7WMSpv9zh30Dp6WuBW+WD+Ah5l9GqIJalvtEOZal1bswPqmTyICC
-	UbDMVAxBtpYqxjj3BMT7Wxk0TWIyabQngqmAWebVQYHfJ/3cdfqgkfxv3FrobRRDYDTT
-	Z9GOrxj8AydqT5Lsh1U/Nn8smIMWG95tNTpb1whlarZWwrc0kJfXy/oqvqu0Yy9lbs/B
-	kmqm41ZK51ikkeaOHynL7rYimd78eF2b+5AoJbI+dvzZsjqsYo2Z0RFU/FU15hujCHn5
-	PI7Mrxfwp5dHkIdkmnqWy2t2YCPS5TSg4xKByd9RbrVbl9U+9jt0tHhfrMya9d7DqCHr
-	0p6w==
-X-Gm-Message-State: ALyK8tKFUVfnch4kD6AvVUm1ITY+WjAPvkuHM+BUfZsCWRE6kTT7JDjI1s3Ut7qoXOvUsA==
-X-Received: by 10.140.19.5 with SMTP id 5mr35600751qgg.98.1464788603637;
-	Wed, 01 Jun 2016 06:43:23 -0700 (PDT)
-Received: from mail-qk0-f182.google.com (mail-qk0-f182.google.com.
-	[209.85.220.182])
-	by smtp.gmail.com with ESMTPSA id 13sm10889051qhr.9.2016.06.01.06.43.21
+	bh=bhY0cbaQyGBrTgnoSBQBT7SXRKGIqn1cWBN11SVOSc4=;
+	b=EV8TsOQp9fIWNpqDC9KGW1g2bCfKYcjnKAJSLYZ16f+CgMSiRTjlBVeugmR+Cbt1Y6
+	E73WxquIsxnm2O0cNiaXX1thXtRMR49fdZe8K6/DWuxVIevK2a5GU/fXTbcPUCUv5Ber
+	lSys8lQ5YneWy+dzmHeHQnqVrBAu0hMluTarx54mQiUH+ASLC0ZKvSG8hlKJYfVpa2f7
+	tkso/Qc7raK3njDDDEHhZupqGSPV9eeRtOX56cxDY51ULspQ2fNz9yw6gEXLYVFNggsV
+	nujXTfXjXRp59H+GBM898jmyt7YyJwViQNcsioT+QV0oQBbGCtgirR5nx+IfOIC6X24f
+	TQHQ==
+X-Gm-Message-State: ALyK8tKDdBNki7+gLaY2tXN5+H5odRlEQTmzVCUIh9eBvYgxyds2Ug4t4VppyI+TXhkybw==
+X-Received: by 10.55.137.68 with SMTP id l65mr37410991qkd.194.1464788656147;
+	Wed, 01 Jun 2016 06:44:16 -0700 (PDT)
+Received: from mail-qg0-f45.google.com (mail-qg0-f45.google.com.
+	[209.85.192.45]) by smtp.gmail.com with ESMTPSA id
+	l35sm12636328qtd.10.2016.06.01.06.44.15
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 01 Jun 2016 06:43:22 -0700 (PDT)
+	Wed, 01 Jun 2016 06:44:15 -0700 (PDT)
 From: Otavio Salvador <otavio.salvador@ossystems.com.br>
 X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-qk0-f182.google.com with SMTP id y126so14494034qke.1
+Received: by mail-qg0-f45.google.com with SMTP id p34so37912670qgp.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jun 2016 06:43:21 -0700 (PDT)
+	Wed, 01 Jun 2016 06:44:15 -0700 (PDT)
 MIME-Version: 1.0
-X-Received: by 10.55.99.216 with SMTP id x207mr12795992qkb.163.1464788601676; 
-	Wed, 01 Jun 2016 06:43:21 -0700 (PDT)
-Received: by 10.237.54.197 with HTTP; Wed, 1 Jun 2016 06:43:21 -0700 (PDT)
-In-Reply-To: <1464784422-7127-1-git-send-email-ricardo.ribalda@gmail.com>
-References: <1464784422-7127-1-git-send-email-ricardo.ribalda@gmail.com>
-Date: Wed, 1 Jun 2016 10:43:21 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKoZYt9A0ggaM3=6+uazqVVoNEFiU8vR6RofmWZGOiGW_w@mail.gmail.com>
-Message-ID: <CAP9ODKoZYt9A0ggaM3=6+uazqVVoNEFiU8vR6RofmWZGOiGW_w@mail.gmail.com>
+X-Received: by 10.141.28.204 with SMTP id f195mr31113649qhe.97.1464788654743; 
+	Wed, 01 Jun 2016 06:44:14 -0700 (PDT)
+Received: by 10.237.54.197 with HTTP; Wed, 1 Jun 2016 06:44:14 -0700 (PDT)
+In-Reply-To: <1464786802-11176-1-git-send-email-ricardo.ribalda@gmail.com>
+References: <1464786802-11176-1-git-send-email-ricardo.ribalda@gmail.com>
+Date: Wed, 1 Jun 2016 10:44:14 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKp+wY9AVGxgS7HfKwgGmrKXadOmLYzL5R104-N5MNu7xg@mail.gmail.com>
+Message-ID: <CAP9ODKp+wY9AVGxgS7HfKwgGmrKXadOmLYzL5R104-N5MNu7xg@mail.gmail.com>
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-oe][PATCH] opencv: Make gphoto2 dep optional via PACKAGECONFIG
+Subject: Re: [meta-oe][PATCH] opencv: Reorder PACKAGES variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,16 +66,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jun 2016 13:43:24 -0000
+X-List-Received-Date: Wed, 01 Jun 2016 13:44:16 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, Jun 1, 2016 at 9:33 AM, Ricardo Ribalda Delgado
+On Wed, Jun 1, 2016 at 10:13 AM, Ricardo Ribalda Delgado
 <ricardo.ribalda@gmail.com> wrote:
-> Opencv can build without support for gphoto2 if needed.
+> PACKAGES content order is important, because it determines the
+> destination of the files, when the folders overlaps.
 >
+> Without this patch:
+>
+> NOTE: Executing RunQueue Tasks
+> ERROR: QA Issue: non debug package contains .debug directory:
+> opencv-apps path
+> packages-split/opencv-apps/usr/share/OpenCV/java/.debug/libopencv_java310.so
+> [debug-files]
+> WARNING: QA Issue: opencv-apps: found library in wrong location:
+> /usr/share/OpenCV/java/libopencv_java310.so
+> opencv-apps: found library in wrong location:
+> /usr/share/OpenCV/java/.debug/libopencv_java310.so [libdir]
+> ERROR: QA run found fatal errors. Please consider fixing them.
+> ERROR: Function failed: do_package_qa
+>
+> Fixes: 3132af1d1d15 ("opencv: Fix metapkg dependencies for opencv-java ... ")
+
+Empty line here, please.
+
 > Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 
+
 Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+
 
 -- 
 Otavio Salvador                             O.S. Systems
