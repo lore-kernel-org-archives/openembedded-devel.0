@@ -1,19 +1,21 @@
 Return-Path: <sjl@vctlabs.com>
 Received: from dent.vctlabs.com (net-cf9a4187.iis.impulse.net [207.154.65.135])
-	by mail.openembedded.org (Postfix) with ESMTP id 60B2D731D2
+	by mail.openembedded.org (Postfix) with ESMTP id 7DED477166
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Jun 2016 19:57:12 +0000 (UTC)
+	Wed,  1 Jun 2016 20:20:27 +0000 (UTC)
 Received: by dent.vctlabs.com (Postfix, from userid 1000)
-	id 436762809CD; Wed,  1 Jun 2016 12:57:13 -0700 (PDT)
-Date: Wed, 1 Jun 2016 12:57:13 -0700
+	id BE10C2809CD; Wed,  1 Jun 2016 13:20:27 -0700 (PDT)
+Date: Wed, 1 Jun 2016 13:20:27 -0700
 From: "S. Lockwood-Childs" <sjl@vctlabs.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160601195713.GS7939@vctlabs.com>
+Message-ID: <20160601202027.GT7939@vctlabs.com>
 Mail-Followup-To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
 	openembedded-devel@lists.openembedded.org
+References: <20160601195713.GS7939@vctlabs.com>
 MIME-Version: 1.0
+In-Reply-To: <20160601195713.GS7939@vctlabs.com>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: [meta-python][PATCH] python-tornado: add missing python2 runtime deps
+Subject: [meta-python][PATCH v2] python-tornado: add missing python2 runtime deps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,9 +28,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Jun 2016 19:57:14 -0000
+X-List-Received-Date: Wed, 01 Jun 2016 20:20:28 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+
+Sorry about missing character in the previous version, I think this is the
+unmangled version of patch...
+
+---
 
 Tornado 4.3 needs a couple more backport modules to prevent tornado/gen.py
 from bombing on import errors when running on python2 rather than python3.4
@@ -100,7 +107,7 @@ index 55a48b8..d30f88f 100644
  inherit pypi setuptools
  require python-tornado.inc
 -RDEPENDS_${PN} += "${PYTHON_PN}-backports-ssl"
-+RDEPENDS_${PN} += "${PYTHON_PN}-backports-ssl ${PYTHON_P}-backports-abc ${PYTHON_PN}-singledispatch"
++RDEPENDS_${PN} += "${PYTHON_PN}-backports-ssl ${PYTHON_PN}-backports-abc ${PYTHON_PN}-singledispatch"
 -- 
 1.9.1
 
