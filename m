@@ -1,46 +1,51 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
-	[209.85.215.66])
-	by mail.openembedded.org (Postfix) with ESMTP id DBF6F773F0
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id E21C97744E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jun 2016 12:50:38 +0000 (UTC)
-Received: by mail-lf0-f66.google.com with SMTP id 65so5027351lfq.1
+	Thu,  2 Jun 2016 16:44:27 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id e3so17250104wme.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jun 2016 05:50:39 -0700 (PDT)
+	Thu, 02 Jun 2016 09:44:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=9arAYHsEefhzhjnnf9Ur2E+JT+3HYTnDNnZ8e6e/YNE=;
-	b=nk6YN7ifV0LR3j0kPG6wrR0GV0TX0OKnm8b0EIwSguxTMYCeuWpuZmj2dDaiXJ8MaW
-	1y4CgQIshxJ0gTq7sJHoiI1RKw0I+FkrzUKNjtg9ATWU+5eJPjTlVYZjThBvqNCjPt3+
-	4F8d503PWz0R8b2FUPy76CMwBKKv8ZaUM69molWG4qWu+z5+gNmuBTBpya4zGNPfoKed
-	HtjoZq6vtJWl2rNUH0ZcnQ4nj7YlJho5JCAIInmzDdb3kiMKw6hyfvHmBGlk52aP8zBv
-	zzQJWdIggSCuybuwxga6Lxq3HZEayj24CztoejrWfW2gn75Yb/6EwOSXWqMpEFK9t8Ra
-	WWfQ==
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=CHiskU3gl4gI89b4J5F6Dcrnd9TFt1PrmZw8HCC/oOo=;
+	b=yXYVxyqRVo8NlnjSH3z9SxNpXYS3e0uUXbl/EkNsxumDtl8UjXpVzEdldspSfhar6n
+	CCGsvn+kW3lXK/pPMKqslfEwiMuAZbcdhYJscbPNZ9MRZoYQ/qBVEWa/rO6qp4zihIuW
+	+a8HHu+zOFYB7vCCz5FZQX1zybxk5xqqXmmdkN0rrMq5Ny9ZY8ARJULm3axtuhDIiDnc
+	xfvumoEHiS0Xk3mV3xfRmiarWXuWxfDq3Lsx4rWGIo77tDqxFJzl2hDq1H6r8E81rYVJ
+	9fYOSA6lkRzD2S2LFn3LXAyKZvNeGqWDe7h1/mKop15FV74sXI4S21VaD/55UxLDlT/o
+	uP5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=9arAYHsEefhzhjnnf9Ur2E+JT+3HYTnDNnZ8e6e/YNE=;
-	b=NzqgmS2OmAy+8Hyd0P3LIcGxZH308FoaUD3J1MKYRlJ6vJQ4Bsn+yReSPnKCwRkzF8
-	wyghPsjVvsP6pZVvZEFeS4z0apvV4Qy6A/lKWjKD7/FFOxd8rB1sNNdJNx3MMhGKFRqb
-	3RdBdC29HXNupvT7RnZZdWvAcnnuwCRDi9bnBZl/ffNEiR8atO/08tM2QJTT5xy2k1nM
-	JtBt5cnNntwc5LCSNn6mSVcDZ/fNE4amIH2NiRrM8O7BaCyn6LRQdmpLizMznCYPkZTx
-	I52tf7vr+Rv0/wa2jQciPEiJZ3RSO2ui1rdnA3AABA2wed59016XfI+vThh7KsM5nWCE
-	H28g==
-X-Gm-Message-State: ALyK8tIqVK7YJEG3ECVm/F8Uat3dRuXQRP34dKpx4xOzYk/Ewtfhj1zTH6CYBE1wWt1alA==
-X-Received: by 10.46.32.91 with SMTP id g88mr3816549ljg.42.1464871837441;
-	Thu, 02 Jun 2016 05:50:37 -0700 (PDT)
-Received: from neopili.qtec.com
-	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id z1sm36681lbl.32.2016.06.02.05.50.36
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 02 Jun 2016 05:50:36 -0700 (PDT)
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-To: openembedded-devel@lists.openembedded.org, otavio@ossystems.com.br,
-	Martin.Jansa@gmail.com, koen@dominion.thruhere.net
-Date: Thu,  2 Jun 2016 14:49:28 +0200
-Message-Id: <1464871769-25990-1-git-send-email-ricardo.ribalda@gmail.com>
-X-Mailer: git-send-email 2.8.1
-Subject: [meta-oe][PATCH v2 1/2] opencv: Make gphoto2 dep optional via PACKAGECONFIG
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=CHiskU3gl4gI89b4J5F6Dcrnd9TFt1PrmZw8HCC/oOo=;
+	b=Lrab4QwAS+GnNGPBynLS6e0GvkVX4qAU9cwFj9iipJunPY22oQ1jUitSPGbuV65AT0
+	lvKmUFZQkimAA8C2up6ycsri4SzeT1XhlBThTotB0/If0vmuII+Ll2czTq23DlAJ+MUs
+	tiObmthPzzkzbvR+WedqZ/sk4UGQRfmDOYxUuYyl418e6vSTC3gi/Ol6S5ETM7AlNRXZ
+	q4nEz0jQtTEZ0I0amu3aPhYFUFxTF2tj1f0Q76Y42O36aG+zFBEt7x5PtCxNpphttX+W
+	FEeDKLftimyoEe5y1h0r5iDFAX4/InhiNtvoKdbTwFlz5GKrGi/Y8hLpTkyFFMyUEOa9
+	kAOw==
+X-Gm-Message-State: ALyK8tKw49L0LgOpZKJsUbij1NSQ79FbHl7EleUea1vrUvu4c4TGA7aS24ZCGmrwhLqXPQ==
+X-Received: by 10.194.176.167 with SMTP id cj7mr10939979wjc.36.1464885867962; 
+	Thu, 02 Jun 2016 09:44:27 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id m8sm1395770wjd.34.2016.06.02.09.44.26
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 02 Jun 2016 09:44:26 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 2 Jun 2016 18:44:53 +0200
+To: openembedded-devel@lists.openembedded.org,
+	Stefan Agner <stefan.agner@toradex.com>
+Message-ID: <20160602164453.GB2571@jama>
+References: <cover.1464090710.git.alexander.kanavin@linux.intel.com>
+	<2e56393d31a7bc3596af56ffb0803409d2127aa1.1464090710.git.alexander.kanavin@linux.intel.com>
+MIME-Version: 1.0
+In-Reply-To: <2e56393d31a7bc3596af56ffb0803409d2127aa1.1464090710.git.alexander.kanavin@linux.intel.com>
+User-Agent: Mutt/1.6.1 (2016-04-27)
+Subject: Re: [PATCH 2/8] florence: update to 0.6.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,46 +58,139 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jun 2016 12:50:39 -0000
+X-List-Received-Date: Thu, 02 Jun 2016 16:44:28 -0000
+X-Groupsio-MsgNum: 61691
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="/NkBOFFp2J2Af1nK"
+Content-Disposition: inline
 
-Opencv can be built without support for gphoto2 if needed.
+--/NkBOFFp2J2Af1nK
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
-Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
----
- meta-oe/recipes-support/opencv/opencv_3.1.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+On Tue, May 24, 2016 at 02:56:55PM +0300, Alexander Kanavin wrote:
+> Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+> ---
+>  .../florence/files/0001-Fix-glib-includes.patch    | 33 ----------------=
+------
+>  .../{florence_0.5.1.bb =3D> florence_0.6.3.bb}       | 10 +++----
+>  2 files changed, 5 insertions(+), 38 deletions(-)
+>  delete mode 100644 meta-gnome/recipes-support/florence/files/0001-Fix-gl=
+ib-includes.patch
+>  rename meta-gnome/recipes-support/florence/{florence_0.5.1.bb =3D> flore=
+nce_0.6.3.bb} (71%)
+>=20
+> diff --git a/meta-gnome/recipes-support/florence/files/0001-Fix-glib-incl=
+udes.patch b/meta-gnome/recipes-support/florence/files/0001-Fix-glib-includ=
+es.patch
+> deleted file mode 100644
+> index 83e598e..0000000
+> --- a/meta-gnome/recipes-support/florence/files/0001-Fix-glib-includes.pa=
+tch
+> +++ /dev/null
+> @@ -1,33 +0,0 @@
+> -From c8419ef05ff92ffa3de2e626eb6acd5d2df3baa1 Mon Sep 17 00:00:00 2001
+> -From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@googlem=
+ail.com>
+> -Date: Tue, 15 May 2012 13:40:05 +0200
+> -Subject: [PATCH] Fix glib includes
+> -MIME-Version: 1.0
+> -Content-Type: text/plain; charset=3DUTF-8
+> -Content-Transfer-Encoding: 8bit
+> -Upstream-Status: unknown
+> -
+> -Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> ----
+> - src/trace.c |    5 +----
+> - 1 files changed, 1 insertions(+), 4 deletions(-)
+> -
+> -diff --git a/src/trace.c b/src/trace.c
+> -index 5ea5c13..774c56d 100644
+> ---- a/src/trace.c
+> -+++ b/src/trace.c
+> -@@ -21,10 +21,7 @@
+> -=20
+> - #include "trace.h"
+> - #include "system.h"
+> --#include <glib/gprintf.h>
+> --#include <glib/gutils.h>
+> --#include <glib/gslist.h>
+> --#include <glib/gstrfuncs.h>
+> -+#include <glib.h>
+> - #include <stdio.h>
+> - #include <stdarg.h>
+> -=20
+> ---=20
+> -1.7.6.5
+> -
+> diff --git a/meta-gnome/recipes-support/florence/florence_0.5.1.bb b/meta=
+-gnome/recipes-support/florence/florence_0.6.3.bb
+> similarity index 71%
+> rename from meta-gnome/recipes-support/florence/florence_0.5.1.bb
+> rename to meta-gnome/recipes-support/florence/florence_0.6.3.bb
+> index 71014f0..a8600a4 100644
+> --- a/meta-gnome/recipes-support/florence/florence_0.5.1.bb
+> +++ b/meta-gnome/recipes-support/florence/florence_0.6.3.bb
+> @@ -8,13 +8,13 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D59530bdf3365=
+9b29e73d4adb9f9f6552"
+> =20
+>  PR =3D "r1"
+> =20
+> -DEPENDS =3D "gtk+ libxml2 libglade librsvg libxtst gconf cairo intltool-=
+native gnome-doc-utils libnotify"
+> +DEPENDS =3D "gtk+ libxml2 libglade librsvg libxtst gconf cairo intltool-=
+native gnome-doc-utils libnotify gstreamer1.0"
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-index 789512f9e0ac..e6480704a62c 100644
---- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-@@ -10,7 +10,7 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
- 
- DEFAULT_PREFERENCE = "-1"
- 
--DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0 libwebp libgphoto2 protobuf protobuf-native"
-+DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0 libwebp protobuf protobuf-native"
- 
- SRCREV_opencv = "92387b1ef8fad15196dd5f7fb4931444a68bc93a"
- SRCREV_contrib = "5409d5ad560523c85c6796cc5a009347072d883c"
-@@ -47,13 +47,14 @@ EXTRA_OECMAKE = "-DPYTHON2_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DI
- "
- EXTRA_OECMAKE_append_x86 = " -DX86=ON"
- 
--PACKAGECONFIG ??= "eigen jpeg png tiff v4l libv4l gstreamer samples tbb \
-+PACKAGECONFIG ??= "eigen jpeg png tiff v4l libv4l gstreamer samples tbb  gphoto2 \
-                    ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)} \
- 		   ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libav", "", d)}"
- 
- PACKAGECONFIG[amdblas] = "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libclamdblas,"
- PACKAGECONFIG[amdfft] = "-DWITH_OPENCLAMDFFT=ON,-DWITH_OPENCLAMDFFT=OFF,libclamdfft,"
- PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen,"
-+PACKAGECONFIG[gphoto2] = "-DWITH_GPHOTO2=ON,-DWITH_GPHOTO2=OFF,libgphoto2,"
- PACKAGECONFIG[gstreamer] = "-DWITH_GSTREAMER=ON,-DWITH_GSTREAMER=OFF,gstreamer1.0 gstreamer1.0-plugins-base,"
- PACKAGECONFIG[gtk] = "-DWITH_GTK=ON,-DWITH_GTK=OFF,gtk+3,"
- PACKAGECONFIG[jasper] = "-DWITH_JASPER=ON,-DWITH_JASPER=OFF,jasper,"
--- 
-2.8.1
+Does it depend on gtk3 or this commit message wasn't correct?
 
 
+commit 5adc7db356071e22219d652e11911b98d9f8bf6e
+Author: Stefan Agner <stefan.agner@toradex.com>
+Date:   Tue May 24 13:43:11 2016 -0700
+
+    florence: move to latest GTK2 version 0.5.4
+
+It also doesn't apply because of this, so please confirm and resend.
+
+>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/florence/florence/${PV}/florence-${PV=
+}.tar.bz2 \
+> -           file://0001-Fix-glib-includes.patch"
+> -SRC_URI[md5sum] =3D "56d12e5b47c100d9df172aa5ddc0f609"
+> -SRC_URI[sha256sum] =3D "7b06ed84ef2b7b22d8d2cf0c7d013a05409bd82028240ac8=
+719a68b192d5bc62"
+> +          "
+> +SRC_URI[md5sum] =3D "8775051d7352f75dec5a86dc9964e8e0"
+> +SRC_URI[sha256sum] =3D "422992fd07d285be73cce721a203e22cee21320d69b0fda1=
+579ce62944c5091e"
+> =20
+> -inherit gettext autotools gconf pkgconfig
+> +inherit gettext autotools gconf pkgconfig gsettings
+> =20
+>  EXTRA_OECONF =3D "--disable-scrollkeeper --without-docs --without-at-spi=
+ --without-panelapplet"
+> --=20
+> 2.8.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--/NkBOFFp2J2Af1nK
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAldQYoMACgkQN1Ujt2V2gBxoeACeJsN8hAF5qpm0th3q/mIdtO7B
+2pQAni/FMD+ua/Ta0Qs7Vwmsv8dYC6Jp
+=bRMN
+-----END PGP SIGNATURE-----
+
+--/NkBOFFp2J2Af1nK--
