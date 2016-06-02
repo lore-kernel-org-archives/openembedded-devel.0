@@ -1,34 +1,60 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id C4B95773BC
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-qk0-f171.google.com (mail-qk0-f171.google.com
+	[209.85.220.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 3150577424
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jun 2016 10:21:42 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1b8Pkz-0001Fx-A3 for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jun 2016 12:21:41 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jun 2016 12:21:41 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Thu,  2 Jun 2016 11:07:57 +0000 (UTC)
+Received: by mail-qk0-f171.google.com with SMTP id s186so3482558qkc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jun 2016 12:21:41 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 2 Jun 2016 12:21:08 +0200
-Message-ID: <nip1ak$o6r$1@ger.gmane.org>
-References: <20160601195713.GS7939@vctlabs.com>
-	<20160601202027.GT7939@vctlabs.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:45.0)
-	Gecko/20100101 Thunderbird/45.1.0
-In-Reply-To: <20160601202027.GT7939@vctlabs.com>
-Subject: Re: [meta-python][PATCH v2] python-tornado: add missing python2 runtime deps
+	Thu, 02 Jun 2016 04:07:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to; 
+	bh=T9hD9CmiYgKaXKXHXrLldS9tPD3cEhldoSEvKCmnn8M=;
+	b=gPVxS1mpy2czZSZb6GoAnFxPJrqOwEnVNA2h62gdVJ9VeRMEMqNwQ1C/9dazhaAAzg
+	OzkEA2+3ePaeN/heuESj8XC3wlN97Dq98Y43gS68PRNQaarbboFLg8NFtNxDJ9ziclUl
+	t6LAeF4T1esVEVbGXCZ+eheYlbWeDzanQ60WI8Gy1gn3GUDuNPaLNb0/bdIlgSp5Wd2r
+	Zzc3NxfcIJ9+M1gntov1BsKly4WpxN/nYybjmwJXfPku1lOSvPhBXrrBKz4RYdjHse2l
+	5XSL2Blb6eXZsCVhMYufojqHorYzr4vo/CIKWYYnBIl5/RjYShD7OYpAKnPpof0eZgeQ
+	Abrw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to;
+	bh=T9hD9CmiYgKaXKXHXrLldS9tPD3cEhldoSEvKCmnn8M=;
+	b=BIC0l9DHOgDuDf5seGtMjDhVl0Ft/FeIi/jVT2kiPfAX0nSTDVDhuCyg3uG3MunDL6
+	5BpR3GlDMJXQ2maS/fagkuHUdFKoJ8CvoOberu2TLdj0qsRZE3lfO9Ya0RvCjcnD07IH
+	AOnUjZWP67RM6PFIN6ecZOWb/4k3Ketjs1tQlBWigHivkkgrLneBzVXjmjRNn5I85J0d
+	/yo0W8nczAJqTcXClAQQHfM82Fw0tx2yvvauhZgNCwpPFCpJVd8rkiKYZ2+4d9ltgea9
+	gSxg9VJtRvvvv+R6fQAZZdHkFepmvCe0qgLUV/1xxv4knDmQMEQO0ckz1Vv0ByqsjbZD
+	bD7A==
+X-Gm-Message-State: ALyK8tLLhn8YYPnQufJn/c1DbfTAz05hiD899SzLy1oWwJhZqkvVvYQg7qH/vwCKqmRfVA==
+X-Received: by 10.200.51.89 with SMTP id u25mr8597255qta.58.1464865678289;
+	Thu, 02 Jun 2016 04:07:58 -0700 (PDT)
+Received: from mail-qt0-f174.google.com (mail-qt0-f174.google.com.
+	[209.85.216.174]) by smtp.gmail.com with ESMTPSA id
+	n194sm13687825qkn.3.2016.06.02.04.07.56
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 02 Jun 2016 04:07:56 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-qt0-f174.google.com with SMTP id q45so3316842qtq.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Jun 2016 04:07:56 -0700 (PDT)
+MIME-Version: 1.0
+X-Received: by 10.237.37.67 with SMTP id w3mr8351208qtc.75.1464865676455; Thu,
+	02 Jun 2016 04:07:56 -0700 (PDT)
+Received: by 10.237.54.197 with HTTP; Thu, 2 Jun 2016 04:07:56 -0700 (PDT)
+In-Reply-To: <CAPybu_1SQ0Gw36wB8fiisLZ_zmo0B3gWF85T2M2t2i-X7oe3dg@mail.gmail.com>
+References: <1464786802-11176-1-git-send-email-ricardo.ribalda@gmail.com>
+	<CAP9ODKp+wY9AVGxgS7HfKwgGmrKXadOmLYzL5R104-N5MNu7xg@mail.gmail.com>
+	<CAPybu_1SQ0Gw36wB8fiisLZ_zmo0B3gWF85T2M2t2i-X7oe3dg@mail.gmail.com>
+Date: Thu, 2 Jun 2016 08:07:56 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKoww_v0Sq_E_H0KA2az7ULkmt0Cd9dgSxipMEFYewPufQ@mail.gmail.com>
+Message-ID: <CAP9ODKoww_v0Sq_E_H0KA2az7ULkmt0Cd9dgSxipMEFYewPufQ@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] opencv: Reorder PACKAGES variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,95 +67,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jun 2016 10:21:44 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Jun 2016 11:07:59 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Op 01-06-16 om 22:20 schreef S. Lockwood-Childs:
-> Sorry about missing character in the previous version, I think this is the
-> unmangled version of patch...
-> 
-> ---
-> 
-> Tornado 4.3 needs a couple more backport modules to prevent tornado/gen.py
-> from bombing on import errors when running on python2 rather than python3.4
-> 
->   ImportError: No module named singledispatch
-> 
->   ImportError: No module named backports_abc
-> 
-> Fixed by creating python-singledispatch and python-backports-abc recipes
-> respectively and adding them to RDEPENDS.
-> 
-> Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
+On Thu, Jun 2, 2016 at 7:08 AM, Ricardo Ribalda Delgado
+<ricardo.ribalda@gmail.com> wrote:
+> Shall i send a v2 with the empty line?
 
-It's customary to split a patch like this into 3 patches.
+Martin?
 
-regards,
-
-Koen
-
-> ---
->  .../python/python-backports-abc_0.4.bb                 | 18 ++++++++++++++++++
->  .../python/python-singledispatch_3.4.0.3.bb            | 13 +++++++++++++
->  .../recipes-devtools/python/python-tornado_4.3.bb      |  2 +-
->  3 files changed, 32 insertions(+), 1 deletion(-)
->  create mode 100644 meta-python/recipes-devtools/python/python-backports-abc_0.4.bb
->  create mode 100644 meta-python/recipes-devtools/python/python-singledispatch_3.4.0.3.bb
-> 
-> diff --git a/meta-python/recipes-devtools/python/python-backports-abc_0.4.bb b/meta-python/recipes-devtools/python/python-backports-abc_0.4.bb
-> new file mode 100644
-> index 0000000..6a4d267
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-backports-abc_0.4.bb
-> @@ -0,0 +1,18 @@
-> +SUMMARY = "collections.abc from Python 3.4"
-> +DESCRIPTION = "A backport of recent additions to the 'collections.abc' module"
-> +
-> +LICENSE = "PSF"
-> +LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=dd98d01d471fac8d8dbdd975229dba03"
-> +
-> +# pypi package doesn't have valid entry for license
-> +SRC_URI += "https://raw.githubusercontent.com/cython/backports_abc/master/LICENSE;name=license"
-> +
-> +SRC_URI[md5sum] = "0b65a216ce9dc9c1a7e20a729dd7c05b"
-> +SRC_URI[sha256sum] = "8b3e4092ba3d541c7a2f9b7d0d9c0275b21c6a01c53a61c731eba6686939d0a5"
-> +SRC_URI[license.md5sum] = "dd98d01d471fac8d8dbdd975229dba03"
-> +SRC_URI[license.sha256sum] = "0a4f3b38055f50f047a42521568fa6ddb9a5976c2884f6ae138796d0f71150ca"
-> +
-> +
-> +
-> +PYPI_PACKAGE = "backports_abc"
-> +inherit pypi setuptools
-> diff --git a/meta-python/recipes-devtools/python/python-singledispatch_3.4.0.3.bb b/meta-python/recipes-devtools/python/python-singledispatch_3.4.0.3.bb
-> new file mode 100644
-> index 0000000..87f46e5
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-singledispatch_3.4.0.3.bb
-> @@ -0,0 +1,13 @@
-> +SUMMARY = "functools.singledispatch from Python 3.4"
-> +DESCRIPTION = "PEP 443 proposed to expose a mechanism in the functools standard library module \
-> +in Python 3.4 that provides a simple form of generic programming known as single-dispatch \
-> +generic functions.  This library is a backport of this functionality to Python 2.6 - 3.3"
-> +
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://README.rst;md5=ee3cd67264adc7eb07981f3644dc17dc"
-> +
-> +SRC_URI[md5sum] = "af2fc6a3d6cc5a02d0bf54d909785fcb"
-> +SRC_URI[sha256sum] = "5b06af87df13818d14f08a028e42f566640aef80805c3b50c5056b086e3c2b9c"
-> +
-> +PYPI_PACKAGE = "singledispatch"
-> +inherit pypi setuptools
-> diff --git a/meta-python/recipes-devtools/python/python-tornado_4.3.bb b/meta-python/recipes-devtools/python/python-tornado_4.3.bb
-> index 55a48b8..d30f88f 100644
-> --- a/meta-python/recipes-devtools/python/python-tornado_4.3.bb
-> +++ b/meta-python/recipes-devtools/python/python-tornado_4.3.bb
-> @@ -1,3 +1,3 @@
->  inherit pypi setuptools
->  require python-tornado.inc
-> -RDEPENDS_${PN} += "${PYTHON_PN}-backports-ssl"
-> +RDEPENDS_${PN} += "${PYTHON_PN}-backports-ssl ${PYTHON_PN}-backports-abc ${PYTHON_PN}-singledispatch"
-> 
-
-
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
