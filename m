@@ -1,33 +1,44 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 487A665CC2
+Return-Path: <ricardo.ribalda@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 50745773A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jun 2016 09:47:04 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1b8PDQ-0004qC-Hz for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Jun 2016 11:47:00 +0200
-Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jun 2016 11:47:00 +0200
-Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Thu,  2 Jun 2016 10:08:31 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id a20so2826419wma.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jun 2016 11:47:00 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 2 Jun 2016 11:46:44 +0200
-Message-ID: <niova4$jt0$1@ger.gmane.org>
-References: <1464784422-7127-1-git-send-email-ricardo.ribalda@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:45.0)
-	Gecko/20100101 Thunderbird/45.1.0
-In-Reply-To: <1464784422-7127-1-git-send-email-ricardo.ribalda@gmail.com>
-Subject: Re: [meta-oe][PATCH] opencv: Make gphoto2 dep optional via PACKAGECONFIG
+	Thu, 02 Jun 2016 03:08:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=edPicQYOHBYldL5MBEK2xvdmIkD6RJOlEDwZ72jmUXM=;
+	b=HEiIIQiAyLG/BRaBQcpIPcnxBqvHb1lIzTgoqvuBhvooppGo7r8trwuTKG2G3xddrY
+	r+oFrsqZ5tdTKqsNEQ9lyjAJDZz7kW0ZG1ar4vuCEj0T/nnNK1TQ+hz+FVibZhb1Ei74
+	6bqej5dQsMbDzFDm8IJMt2YrnQ4F4Z0rPQ5MbCJreu4NG71EE656H/GWyOUG+el3nwPv
+	T09q9ODOSCOaucZAJI7Ipj+wTHUp4HISEGy+XOmxQiHa68d8QbtXQ0e6zgkRVUO+7fbr
+	jrPNPWJtPH0JKpangAa2hJNEa6SvtgwFzMq4teMUhiexQLP3fP+wemtIfYze0ZVUyPeg
+	RyCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=edPicQYOHBYldL5MBEK2xvdmIkD6RJOlEDwZ72jmUXM=;
+	b=WDlPRMqvG8WBXkw2v1Z4+8f/x584qRV+WpnAKp1WoXck9FCT5Q3nD1v7Lg/E0W+4W8
+	nBQQRbkZEAgD9ZjcrGaYUZaexGyOz8+hckAHx0PcIEOeLukmpVctoFWNSGwnF+64RlpB
+	RlT3WeJ4pPdy1QcG1L/lQy+ivNbfaF23ayZL0euKckoieGyQ5usgoxqdhBcgjXLMRUm+
+	/Rx2aPB8T8KmyXKgo92FasoOvbZSvDbHbkCYuj64Dr3UbqEPbp4CKwuaV8T9E1it6yCD
+	A50emsScpha2PL2+ToKwu+01Cojvv0DfVYFrd8PQ/Je/nn8oNtUR+P6haDLzTJytFi04
+	8mlQ==
+X-Gm-Message-State: ALyK8tKNm95OgCtWz3Q+7/CsF1BtBTJo+/UCAOPWigoDupope32W/Rj6PDiX50heru3KhpIlEHefkCP4K80XLQ==
+X-Received: by 10.194.18.141 with SMTP id w13mr8834899wjd.32.1464862112413;
+	Thu, 02 Jun 2016 03:08:32 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.28.88.84 with HTTP; Thu, 2 Jun 2016 03:08:12 -0700 (PDT)
+In-Reply-To: <CAP9ODKp+wY9AVGxgS7HfKwgGmrKXadOmLYzL5R104-N5MNu7xg@mail.gmail.com>
+References: <1464786802-11176-1-git-send-email-ricardo.ribalda@gmail.com>
+	<CAP9ODKp+wY9AVGxgS7HfKwgGmrKXadOmLYzL5R104-N5MNu7xg@mail.gmail.com>
+From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Date: Thu, 2 Jun 2016 12:08:12 +0200
+Message-ID: <CAPybu_1SQ0Gw36wB8fiisLZ_zmo0B3gWF85T2M2t2i-X7oe3dg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] opencv: Reorder PACKAGES variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,51 +51,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jun 2016 09:47:06 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Jun 2016 10:08:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Op 01-06-16 om 14:33 schreef Ricardo Ribalda Delgado:
-> Opencv can build without support for gphoto2 if needed.
-
-You're changing the default without mentioning it, so please add 'gphoto2'
-into the default PACKAGECONFIG in v2 of this patch.
-
-> 
-> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com> --- 
-> meta-oe/recipes-support/opencv/opencv_3.1.bb | 3 ++- 1 file changed, 2
-> insertions(+), 1 deletion(-)
-> 
-> diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb
-> b/meta-oe/recipes-support/opencv/opencv_3.1.bb index
-> 789512f9e0ac..512f1b3dea9b 100644 ---
-> a/meta-oe/recipes-support/opencv/opencv_3.1.bb +++
-> b/meta-oe/recipes-support/opencv/opencv_3.1.bb @@ -10,7 +10,7 @@
-> ARM_INSTRUCTION_SET_armv5 = "arm"
-> 
-> DEFAULT_PREFERENCE = "-1"
-> 
-> -DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib
-> glib-2.0 libwebp libgphoto2 protobuf protobuf-native" +DEPENDS =
-> "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0 libwebp
-> protobuf protobuf-native"
-> 
-> SRCREV_opencv = "92387b1ef8fad15196dd5f7fb4931444a68bc93a" SRCREV_contrib
-> = "5409d5ad560523c85c6796cc5a009347072d883c" @@ -54,6 +54,7 @@
-> PACKAGECONFIG ??= "eigen jpeg png tiff v4l libv4l gstreamer samples tbb
-> \ PACKAGECONFIG[amdblas] =
-> "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libclamdblas," 
-> PACKAGECONFIG[amdfft] =
-> "-DWITH_OPENCLAMDFFT=ON,-DWITH_OPENCLAMDFFT=OFF,libclamdfft," 
-> PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen," 
-> +PACKAGECONFIG[gphoto2] =
-> "-DWITH_GPHOTO2=ON,-DWITH_GPHOTO2=OFF,libgphoto2," 
-> PACKAGECONFIG[gstreamer] =
-> "-DWITH_GSTREAMER=ON,-DWITH_GSTREAMER=OFF,gstreamer1.0
-> gstreamer1.0-plugins-base," PACKAGECONFIG[gtk] =
-> "-DWITH_GTK=ON,-DWITH_GTK=OFF,gtk+3," PACKAGECONFIG[jasper] =
-> "-DWITH_JASPER=ON,-DWITH_JASPER=OFF,jasper,"
-> 
+Shall i send a v2 with the empty line?
 
 
+Thanks!
+
+On Wed, Jun 1, 2016 at 3:44 PM, Otavio Salvador
+<otavio.salvador@ossystems.com.br> wrote:
+> On Wed, Jun 1, 2016 at 10:13 AM, Ricardo Ribalda Delgado
+> <ricardo.ribalda@gmail.com> wrote:
+>> PACKAGES content order is important, because it determines the
+>> destination of the files, when the folders overlaps.
+>>
+>> Without this patch:
+>>
+>> NOTE: Executing RunQueue Tasks
+>> ERROR: QA Issue: non debug package contains .debug directory:
+>> opencv-apps path
+>> packages-split/opencv-apps/usr/share/OpenCV/java/.debug/libopencv_java310.so
+>> [debug-files]
+>> WARNING: QA Issue: opencv-apps: found library in wrong location:
+>> /usr/share/OpenCV/java/libopencv_java310.so
+>> opencv-apps: found library in wrong location:
+>> /usr/share/OpenCV/java/.debug/libopencv_java310.so [libdir]
+>> ERROR: QA run found fatal errors. Please consider fixing them.
+>> ERROR: Function failed: do_package_qa
+>>
+>> Fixes: 3132af1d1d15 ("opencv: Fix metapkg dependencies for opencv-java ... ")
+>
+> Empty line here, please.
+>
+>> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+>
+>
+> Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+>
+>
+> --
+> Otavio Salvador                             O.S. Systems
+> http://www.ossystems.com.br        http://code.ossystems.com.br
+> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+
+-- 
+Ricardo Ribalda
 
