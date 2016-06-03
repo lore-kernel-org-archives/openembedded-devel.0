@@ -1,41 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id F01CA7757F
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 14B7D77581
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Jun 2016 15:38:25 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id q184so7945036qkf.0
+	Fri,  3 Jun 2016 15:38:24 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id v3so4263396qki.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Jun 2016 08:38:26 -0700 (PDT)
+	Fri, 03 Jun 2016 08:38:25 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=IUomDTBTAN1s83omw8FCvXSRD7BP2dDvYfxp2DcQGNI=;
-	b=jXO3YlfgCEnIyX2vQFHH09Gs09MqcKl18+q5Nv5yoYOjGLhfyA03lCff07lzez7peE
-	7Vs46IuO3Agf+weMVzg0+HQ55fkZQq/+1uIARW/lhPJ/6nzdm4JClDGJDsMDkGoYzTRU
-	0En3XnDPMpriGqEuG8bROvyYbz2ZA0jwNLlvqsXKoYp9WobgHfzHb/8l1rni7Is4SnVr
-	E5IbaQPZTvGm6sw9bwJpgBPg2gmpr2Ls6xre1IpdVJmnaf6DMmRDsVISEatngZ+VzJsJ
-	7LmpzRvfzEPaNR27rnofqI9H6c9dAQWRBYUcyNByJN4R7tQMINlU5qs5WywjpUkHOUhr
-	k1Rg==
-X-Gm-Message-State: ALyK8tLpHQuvrh892E8nkOBnvzYWkAlNrAEHuCNDIGjP173GcdrOMb99WtRPuxV0arAAbA==
-X-Received: by 10.55.33.40 with SMTP id h40mr3885442qkh.148.1464968305869;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=cPnHZLLiCSu83q0qpxTcxu9toq4Qg8cKis77u6ALC0I=;
+	b=WnbLBUKxaFWEs0KoXzo3ygtMz8fH+Zd9nP8snQCvwW28esioQxNrshQ6uRwnpBpiMz
+	MGqpDO9qqoxF5LW1JQKdi43YKJXzIflJAEfKX9TMhAlaWEjdKiYS1xDXxnlUPNd35erF
+	bw2xgYFMsvLR6B7FQw47gAiVIPDU1zpWnp825Jwgp/3hC3V5m8nbdQiDMeFQkrwuCQgJ
+	OHA+U2VFA7kCUVRoZkPehOyuIuMGiP24v+5x6nWWGTVqwM3F839Zii8pv4D8viA+ZxgE
+	hK7njDErpART+7hAsWIhYNpCrO4yJKZ2zsWMNS03Bv8/svHF1/9rO01TwBDR3iHHAIMQ
+	suVA==
+X-Gm-Message-State: ALyK8tJ1+re5MhkHA5Es8P96ZXZ+73DJuJFOl7Y6ga2pBwpBvitg1uO12gGaup0+zz0d9Q==
+X-Received: by 10.55.157.196 with SMTP id g187mr4013561qke.68.1464968305084;
 	Fri, 03 Jun 2016 08:38:25 -0700 (PDT)
 Received: from lnx-dereks-laptop.star.lab
 	(c-68-34-224-206.hsd1.al.comcast.net. [68.34.224.206])
 	by smtp.gmail.com with ESMTPSA id
-	m129sm1192584qkb.22.2016.06.03.08.38.25
+	m129sm1192584qkb.22.2016.06.03.08.38.24
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 03 Jun 2016 08:38:25 -0700 (PDT)
+	Fri, 03 Jun 2016 08:38:24 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  3 Jun 2016 10:38:16 -0500
-Message-Id: <1464968296-2180-2-git-send-email-derek@asterius.io>
+Date: Fri,  3 Jun 2016 10:38:15 -0500
+Message-Id: <1464968296-2180-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1464968296-2180-1-git-send-email-derek@asterius.io>
-References: <1464968296-2180-1-git-send-email-derek@asterius.io>
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-webserver][PATCH 2/2] nginx: update to version 1.11.1
+Subject: [meta-webserver][PATCH 1/2] nginx: update stable version to 1.10.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,25 +51,36 @@ X-List-Received-Date: Fri, 03 Jun 2016 15:38:26 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-httpd/nginx/{nginx_1.9.15.bb => nginx_1.11.1.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-webserver/recipes-httpd/nginx/{nginx_1.9.15.bb => nginx_1.11.1.bb} (64%)
+ meta-webserver/recipes-httpd/nginx/nginx_1.10.0.bb | 6 ------
+ meta-webserver/recipes-httpd/nginx/nginx_1.10.1.bb | 6 ++++++
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+ delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.10.0.bb
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.10.1.bb
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.9.15.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.11.1.bb
-similarity index 64%
-rename from meta-webserver/recipes-httpd/nginx/nginx_1.9.15.bb
-rename to meta-webserver/recipes-httpd/nginx/nginx_1.11.1.bb
-index abbec53..eade7ed 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.9.15.bb
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.11.1.bb
-@@ -6,5 +6,5 @@ DEFAULT_PREFERENCE = "-1"
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0bb58ed0dfd4f5dbece3b52aba79f023"
- 
--SRC_URI[md5sum] = "13cd38e9da3789035750dd45882c4a26"
--SRC_URI[sha256sum] = "cc89b277cc03f403c0b746d60aa5943cdecf59ae48278f8cb7e2df0cbdb6dac3"
-+SRC_URI[md5sum] = "0f3900165b11c417854535f3538913cb"
-+SRC_URI[sha256sum] = "5d8dd0197e3ffeb427729c045382182fb28db8e045c635221b2e0e6722821ad0"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.10.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.10.0.bb
+deleted file mode 100644
+index 53cce00..0000000
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.10.0.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require nginx.inc
+-
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=0bb58ed0dfd4f5dbece3b52aba79f023"
+-
+-SRC_URI[md5sum] = "c184c873d2798c5ba92be95ed1209c02"
+-SRC_URI[sha256sum] = "8ed647c3dd65bc4ced03b0e0f6bf9e633eff6b01bac772bcf97077d58bc2be4d"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.10.1.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.10.1.bb
+new file mode 100644
+index 0000000..c5392c7
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.10.1.bb
+@@ -0,0 +1,6 @@
++require nginx.inc
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=0bb58ed0dfd4f5dbece3b52aba79f023"
++
++SRC_URI[md5sum] = "088292d9caf6059ef328aa7dda332e44"
++SRC_URI[sha256sum] = "1fd35846566485e03c0e318989561c135c598323ff349c503a6c14826487a801"
 -- 
 1.9.1
 
