@@ -1,27 +1,25 @@
 Return-Path: <gyurco@freemail.hu>
-X-Greylist: delayed 313 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 04 Jun 2016 16:23:14 UTC
 Received: from primary.intra.htm-hungary.hu (mail.htm-hungary.hu [80.98.98.89])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C10077194
+	by mail.openembedded.org (Postfix) with ESMTP id E46D177194
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  4 Jun 2016 16:23:14 +0000 (UTC)
+	Sat,  4 Jun 2016 16:23:15 +0000 (UTC)
 Received: from localhost (primary [127.0.0.1])
-	by primary.intra.htm-hungary.hu (Postfix) with ESMTP id 62FC9803A5;
-	Sat,  4 Jun 2016 18:18:00 +0200 (CEST)
+	by primary.intra.htm-hungary.hu (Postfix) with ESMTP id 5100280405;
+	Sat,  4 Jun 2016 18:23:16 +0200 (CEST)
 X-Virus-Scanned: amavisd-new at htm-hungary.com
 Received: from primary.intra.htm-hungary.hu ([127.0.0.1])
 	by localhost (primary.intra.htm-hungary.hu [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with ESMTP id iRy0v48PNMZ5; Sat,  4 Jun 2016 18:17:57 +0200 (CEST)
+	with ESMTP id wUmmybSvpQtP; Sat,  4 Jun 2016 18:23:15 +0200 (CEST)
 Received: from gyurco.lan (unknown [10.8.0.14])
-	by primary.intra.htm-hungary.hu (Postfix) with ESMTPA id 39CCE80059;
-	Sat,  4 Jun 2016 18:17:56 +0200 (CEST)
+	by primary.intra.htm-hungary.hu (Postfix) with ESMTPA id F268480059;
+	Sat,  4 Jun 2016 18:23:14 +0200 (CEST)
 From: Gyorgy Szombathelyi <gyurco@freemail.hu>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  4 Jun 2016 18:17:49 +0200
-Message-Id: <1465057069-3546-1-git-send-email-gyurco@freemail.hu>
+Date: Sat,  4 Jun 2016 18:23:08 +0200
+Message-Id: <1465057388-4043-1-git-send-email-gyurco@freemail.hu>
 X-Mailer: git-send-email 2.5.5
-Subject: [PATCH] MPD: update to 0.19.15
+Subject: [meta-multimedia][PATCH] MPD: update to 0.19.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,7 +32,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Jun 2016 16:23:15 -0000
+X-List-Received-Date: Sat, 04 Jun 2016 16:23:16 -0000
 
 This fixes a build issue
 ---
