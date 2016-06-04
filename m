@@ -1,49 +1,46 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
-	[209.85.223.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 8FA2F7753E
+Return-Path: <net147@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E8DC771BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Jun 2016 22:17:57 +0000 (UTC)
-Received: by mail-io0-f196.google.com with SMTP id f128so1288127iof.3
+	Sat,  4 Jun 2016 15:07:28 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id f144so14170249pfa.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Jun 2016 15:17:58 -0700 (PDT)
+	Sat, 04 Jun 2016 08:07:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=IumxlUc2pVSqU0WVDrXrpeJcu79SP1TsUJFe4/2VnnQ=;
-	b=kQKlD3tFgZON5Kplz40RVMuQi6QlwuQlownNnyck8OWZ9OGY2uNGBrqzQmkFcjrFGw
-	39SsZ6AAU5mlccUTukXYppF2QlOEosqoiJLfLOgOYudyT6X8nbrkfJIF3olPG2ZkYE3g
-	+P13BHBfEZVatxEPQE7F0gOFtcYaqdNc1RqSx372/WRPYnge831P1B3owdo38pDyyOTr
-	0fmmc0A09aGNrNwKIYJXh/zTx8LGdxtiRv7TZBfGMu5ofJVwx3dUM8MrL1C0SkQLW6A/
-	tlulOlRumlyFz/c8CEGvrPCArrPAKjDDRqVykoX2Wtzj9eR/n/7h5Dagrtx/i48OrZyV
-	pUKw==
+	h=from:to:cc:subject:date:message-id;
+	bh=qcFgYJxiDDERKyvtBJ1N9UJ2FTsMP+ytJ2PNJREmZ0U=;
+	b=GJqFfY51oGNdbK9uigfi6kc1DU/h7kAPwZBJSUIed5+3Lv30fd/9GL+Gy0tvzWNNLx
+	CD4IaXj7X6yBOOkPi9DIO2inzt/jpdVCt1rz1dQAxKGUpW8yqkcV7mj3HzVcXbU13T2v
+	5fzE5wCdWGVYXiuDEocpoFHOxJLG/U4h0/V6xpJGKwUfo7+e64Ow5vVA2ml64TRBSz1E
+	TYVg/IMtJ7bxypYYykYAx+OrxQwg/wXQyzVd1BVoBgwm69tAVjTw8ZHJv4jGRzcmnFPa
+	wuXJ1IuT4A3L4a+tIj3vPM79a7zy3+Ah4bnlN1c+dih2WWhwSblMHyebgmuKPpRkyzNS
+	hzyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to:cc;
-	bh=IumxlUc2pVSqU0WVDrXrpeJcu79SP1TsUJFe4/2VnnQ=;
-	b=MFFqq7sNxyUMSCwrxFSRA4ffotwc29Lm/LixVO82kmwYolnWeVrtWLv/liugM19S52
-	Mk4mPwbFoAq3z3blXBeNPQ6wQI3WlyKz7Ot5qeKz9kfxhHPyBXOUCdNnb5/hBxTQ4A1l
-	3V0S716SMQ046d8Rx0t0iJmQ8TPvFn69+3k4DIwA71A3bwatLM0QS5RYHBqtP5sngpW/
-	FBm0lnVXkz47lw/ytFrgAmpYK+7BwrGRGKRzoXbzq9Lvr8ZIUEXXpm3UrZmKTWFEw9NQ
-	KO0t2DuME1zYLFneNhSzzM8EfnTVMHV/LuXgmQab5QszsIOpeleIpFy8hXT3O/eKHof0
-	DSkg==
-X-Gm-Message-State: ALyK8tIBPI+xL7xWabSEY+MyA6zQrWt8Nh0PtfwuVU8zVLqkHWiVle52NMLwoOBmatzpG168e+gD/8easnRKTw==
-X-Received: by 10.36.3.7 with SMTP id e7mr2625404ite.15.1464992277814; Fri, 03
-	Jun 2016 15:17:57 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.79.100.5 with HTTP; Fri, 3 Jun 2016 15:17:38 -0700 (PDT)
-In-Reply-To: <1464979004-19187-1-git-send-email-kergoth@gmail.com>
-References: <1464979004-19187-1-git-send-email-kergoth@gmail.com>
-From: Christopher Larson <chris_larson@mentor.com>
-Date: Fri, 3 Jun 2016 15:17:38 -0700
-X-Google-Sender-Auth: U4Xf4tm9h4uUvad08rys48NZiUE
-Message-ID: <CABcZANmeS76=CDWMHm0TOJ_HbzdzLPJWazseMsQy=AUHhW1maw@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: Re: [meta-oe][PATCH] gitpkgv: ensure that we close our opened files
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=qcFgYJxiDDERKyvtBJ1N9UJ2FTsMP+ytJ2PNJREmZ0U=;
+	b=lD+9YePCD2Cw97ReNe7oV1QzmI2RH9NPuEVwPd3uLvxLQ6gJaJd5X7vz/h0mw2J7+Y
+	se9RETadUqgvsz6/J8nQioMG2ZALz9MWWSjx6iQD7z2ssGGnruJm7MGFk6CKoSfA/6Os
+	Fv8QyZbN/g6OLvzdgHiODerOLuutzQdA5jSx40CGcoLc7IXbD6WrLHuKL5ilCMPTpo+S
+	kVzUXqNjj0g2tgVbtYqsrks3xVD/lwTBy4HXcQ9kfrs9R0OeGaGsB0KRcxtKW3i371Yk
+	fuEUCsn/QeRHjPlwtaY/HGw95rOmvJQxa+kzl/wAz+TcufNHxme7X8v0bxH+4uqKG/Bw
+	SC7w==
+X-Gm-Message-State: ALyK8tJHRhUAyagpytJqnEI0drKML7/J3Pfe1oavJ0LXYHLIkcCg7Zk7YzJFS3fioWKYmw==
+X-Received: by 10.98.79.73 with SMTP id d70mr13070459pfb.120.1465052849322;
+	Sat, 04 Jun 2016 08:07:29 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by smtp.gmail.com with ESMTPSA id
+	a17sm15994118pfa.70.2016.06.04.08.07.27
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 04 Jun 2016 08:07:28 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  5 Jun 2016 01:06:57 +1000
+Message-Id: <20160604150657.5175-1-net147@gmail.com>
+X-Mailer: git-send-email 2.8.3
+Subject: [meta-oe][PATCH] libftdi: update to 1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,61 +53,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jun 2016 22:17:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 04 Jun 2016 15:07:29 -0000
 
-Ignore this, just noticed the fix is already on master-next.
+COPYING.LIB license checksum has changed to fix the FSF address.
 
-On Fri, Jun 3, 2016 at 11:36 AM, Christopher Larson <kergoth@gmail.com>
-wrote:
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ meta-oe/recipes-support/libftdi/{libftdi_1.2.bb => libftdi_1.3.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/libftdi/{libftdi_1.2.bb => libftdi_1.3.bb} (79%)
 
-> From: Christopher Larson <chris_larson@mentor.com>
->
-> Avoids warnings like this with python3:
->
->     WARNING:
-> .../meta-openembedded/meta-filesystems/recipes-filesystems/smbnetfs/
-> smbnetfs_git.bb: <string>:94: ResourceWarning: unclosed file
-> <_io.TextIOWrapper
-> name='.../build/downloads/git2/smbnetfs.git.sourceforge.net.gitroot.smbnetfs.smbnetfs/oe-gitpkgv_ace1c519d4'
-> mode='r' encoding='UTF-8'>
->
-> Signed-off-by: Christopher Larson <chris_larson@mentor.com>
-> ---
->  meta-oe/classes/gitpkgv.bbclass | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/classes/gitpkgv.bbclass
-> b/meta-oe/classes/gitpkgv.bbclass
-> index 1cba00c..4866fac 100644
-> --- a/meta-oe/classes/gitpkgv.bbclass
-> +++ b/meta-oe/classes/gitpkgv.bbclass
-> @@ -87,11 +87,13 @@ def get_git_pkgv(d, use_tags):
->
->                      if commits != "":
->                          oe.path.remove(rev_file, recurse=False)
-> -                        open(rev_file, "w").write("%d\n" % int(commits))
-> +                        with open(rev_file, "w") as f:
-> +                            f.write("%d\n" % int(commits))
->                      else:
->                          commits = "0"
->                  else:
-> -                    commits = open(rev_file, "r").readline(128).strip()
-> +                    with open(rev_file, "r") as f:
-> +                        commits = f.readline(128).strip()
->
->                  if use_tags:
->                      try:
-> --
-> 2.8.0
->
->
-
-
+diff --git a/meta-oe/recipes-support/libftdi/libftdi_1.2.bb b/meta-oe/recipes-support/libftdi/libftdi_1.3.bb
+similarity index 79%
+rename from meta-oe/recipes-support/libftdi/libftdi_1.2.bb
+rename to meta-oe/recipes-support/libftdi/libftdi_1.3.bb
+index 9b290fb..5eee0db 100644
+--- a/meta-oe/recipes-support/libftdi/libftdi_1.2.bb
++++ b/meta-oe/recipes-support/libftdi/libftdi_1.3.bb
+@@ -7,15 +7,15 @@ SECTION = "libs"
+ LICENSE = "LGPLv2.1 & GPLv2"
+ LIC_FILES_CHKSUM= "\
+     file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe \
+-    file://COPYING.LIB;md5=db979804f025cf55aabec7129cb671ed \
++    file://COPYING.LIB;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
+ "
+ 
+ DEPENDS = "libusb1"
+ 
+ SRC_URI = "http://www.intra2net.com/en/developer/${BPN}/download/${BPN}1-${PV}.tar.bz2"
+ 
+-SRC_URI[md5sum] = "89dff802d89c4c0d55d8b4665fd52d0b"
+-SRC_URI[sha256sum] = "a6ea795c829219015eb372b03008351cee3fb39f684bff3bf8a4620b558488d6"
++SRC_URI[md5sum] = "156cdf40cece9f8a3ce1582db59a502a"
++SRC_URI[sha256sum] = "9a8c95c94bfbcf36584a0a58a6e2003d9b133213d9202b76aec76302ffaa81f4"
+ 
+ S = "${WORKDIR}/${BPN}1-${PV}"
+ 
 -- 
-Christopher Larson
-kergoth at gmail dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+2.8.3
+
 
