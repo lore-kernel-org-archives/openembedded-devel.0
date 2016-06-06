@@ -1,27 +1,28 @@
-Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 32804605BA
+Return-Path: <pascal.bach@siemens.com>
+X-Greylist: delayed 545 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 06 Jun 2016 15:36:19 UTC
+Received: from gecko.sbs.de (gecko.sbs.de [194.138.37.40])
+	by mail.openembedded.org (Postfix) with ESMTP id 4D65F7705C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Jun 2016 12:44:53 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 06 Jun 2016 05:44:55 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.26,427,1459839600"; d="scan'208";a="981749895"
-Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
-	([10.237.68.161])
-	by fmsmga001.fm.intel.com with ESMTP; 06 Jun 2016 05:44:53 -0700
+	Mon,  6 Jun 2016 15:36:18 +0000 (UTC)
+Received: from mail2.sbs.de (mail2.sbs.de [192.129.41.66])
+	by gecko.sbs.de (8.15.2/8.15.2) with ESMTPS id u56FRDIl001021
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 6 Jun 2016 17:27:13 +0200
+Received: from [139.16.79.161] (MD1FZU9C.ww002.siemens.net [139.16.79.161])
+	by mail2.sbs.de (8.15.2/8.15.2) with ESMTPS id u56FRDIY013298
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 6 Jun 2016 17:27:13 +0200
 To: openembedded-devel@lists.openembedded.org
-References: <cover.1464090710.git.alexander.kanavin@linux.intel.com>
-	<2e56393d31a7bc3596af56ffb0803409d2127aa1.1464090710.git.alexander.kanavin@linux.intel.com>
-	<20160602164453.GB2571@jama>
-From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Message-ID: <df345609-0ba6-5629-15dc-aa77b68ad9ba@linux.intel.com>
-Date: Mon, 6 Jun 2016 15:44:55 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Icedove/45.1.0
+From: Pascal Bach <pascal.bach@siemens.com>
+Message-ID: <57559651.3050805@siemens.com>
+Date: Mon, 6 Jun 2016 17:27:13 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101
+	Thunderbird/38.7.2
 MIME-Version: 1.0
-In-Reply-To: <20160602164453.GB2571@jama>
-Subject: Re: [PATCH 2/8] florence: update to 0.6.3
+Subject: [meta-qt5] backport 2 commits to krogoth
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,23 +35,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jun 2016 12:44:54 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
+X-List-Received-Date: Mon, 06 Jun 2016 15:36:20 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-On 06/02/2016 07:44 PM, Martin Jansa wrote:
-> commit 5adc7db356071e22219d652e11911b98d9f8bf6e
-> Author: Stefan Agner <stefan.agner@toradex.com>
-> Date:   Tue May 24 13:43:11 2016 -0700
->
->     florence: move to latest GTK2 version 0.5.4
->
-> It also doesn't apply because of this, so please confirm and resend.
+Hello
 
-No need to. I updated florence to fix build failures against my oe-core 
-changes, and this update to an older version does the job just fine as 
-well. I have no special interest in florence :)
+I would like to request a backport of the following two fixes to the krogoth branch of meta-qt5
 
-Alex
+https://github.com/meta-qt5/meta-qt5/commit/0717c65abc24d67887c93b773129156f714d033b
+https://github.com/meta-qt5/meta-qt5/commit/05103827d50ec218954dee3866ec40bee9ec59af
 
+These two issues prevent us from building any CMake enabled projects with an optional dependency to Qt5.
+Event recipes in meta-openembedded need some hack to work around this issue: https://github.com/openembedded/meta-openembedded/blob/master/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb#L12
+
+Since master is already on 5.7 it would help to have these fixes in krogoth where 5.6 is the default.
+
+Regards
+Pascal
 
