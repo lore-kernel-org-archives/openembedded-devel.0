@@ -1,24 +1,26 @@
 Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BFC5377070
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D48DD77070
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jun 2016 08:21:40 +0000 (UTC)
+	Tue,  7 Jun 2016 08:21:41 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u578LeA6007644
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u578LfIH023135
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 7 Jun 2016 01:21:41 -0700
+	Tue, 7 Jun 2016 01:21:41 -0700 (PDT)
 Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Tue, 7 Jun 2016 01:21:40 -0700
+	Tue, 7 Jun 2016 01:21:41 -0700
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 7 Jun 2016 01:21:39 -0700
-Message-ID: <1465287700-18359-1-git-send-email-liezhi.yang@windriver.com>
+Date: Tue, 7 Jun 2016 01:21:40 -0700
+Message-ID: <1465287700-18359-2-git-send-email-liezhi.yang@windriver.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1465287700-18359-1-git-send-email-liezhi.yang@windriver.com>
+References: <1465287700-18359-1-git-send-email-liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/2] nginx: add group www-data
+Subject: [PATCH 2/2] nostromo: add group www-data
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jun 2016 08:21:40 -0000
+X-List-Received-Date: Tue, 07 Jun 2016 08:21:42 -0000
 Content-Type: text/plain
 
 Fixed:
@@ -40,21 +42,21 @@ useradd: group 'www-data' does not exist
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-webserver/recipes-httpd/nginx/nginx.inc | 1 +
+ meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index ebf926a..946db12 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -130,6 +130,7 @@ INITSCRIPT_NAME = "nginx"
- INITSCRIPT_PARAMS = "defaults 92 20"
- 
+diff --git a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb
+index 562ecd0..c6593e1 100644
+--- a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb
++++ b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.5.bb
+@@ -30,6 +30,7 @@ do_compile() {
+ # we need user/group www-data to exist when we install
+ #
  USERADD_PACKAGES = "${PN}"
 +GROUPADD_PARAM_${PN} = "--system www-data"
- USERADD_PARAM_${PN} = " \
-     --system --no-create-home \
-     --home ${NGINX_WWWDIR} \
+ USERADD_PARAM_${PN} = "--system -g www-data www-data"
+ 
+ do_install() {
 -- 
 2.7.4
 
