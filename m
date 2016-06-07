@@ -1,45 +1,36 @@
-Return-Path: <koen.kooi@linaro.org>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 64F9A76312
+Return-Path: <fan.xin@jp.fujitsu.com>
+X-Greylist: delayed 679 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 07 Jun 2016 09:29:54 UTC
+Received: from mgwkm02.jp.fujitsu.com (mgwkm02.jp.fujitsu.com [202.219.69.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 5508D7705D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jun 2016 08:39:03 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id n184so125895462wmn.1
+	Tue,  7 Jun 2016 09:29:54 +0000 (UTC)
+Received: from kw-mxoi2.gw.nic.fujitsu.com (unknown [192.168.231.133]) by
+	mgwkm02.jp.fujitsu.com with smtp
+	id 5c9b_454c_22b5cb41_7cdc_41d1_a551_6ac44d8b17bc;
+	Tue, 07 Jun 2016 18:18:30 +0900
+Received: from g01jpfmpwyt03.exch.g01.fujitsu.local
+	(g01jpfmpwyt03.exch.g01.fujitsu.local [10.128.193.57])
+	by kw-mxoi2.gw.nic.fujitsu.com (Postfix) with ESMTP id 7D9FAAC0312
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Jun 2016 01:39:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=AQXOp+zWBDsJgZafWG9VozDKDusvR3HO2RoKpZV3Cdg=;
-	b=YEW3TEAVdDKtmGG05KreQOvNS96VF4q9Cyobfz6t7WDWmSH6ExfdBCBT47zWPnKM/1
-	o49YW0Q+MczvKSFhsXR0Vdd9TZ3BvW79Vi/au89u4nG7Dke1eqQYSho+kBME8LzqzTzA
-	UqH0/0z8Mbt0p7VbLD6ZGM7C2XlGzdh33I0fI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=AQXOp+zWBDsJgZafWG9VozDKDusvR3HO2RoKpZV3Cdg=;
-	b=ULtIMyGJMhOeX4I+sAzBrz8RD5J1wBwUv9T0Hcivs1dLa1ZrQUUwSHbS8iwZdJtXjf
-	3J3M7Vf08sQgoPM4L+j2+kseP2AFEmrEwWY0lTsNDd/oYdASzbmosnQkH43XyRfL58zt
-	SkN/PDnphM+4zHBONeBvMN1fkr0cpPiY0WjoCNS8Ubu87CBbV3+xrmdrmCoY06biSTDI
-	k7VRyW/brJkW2T7PqT3vGxxrDIWvyB/qblKaGZiqHzNNUUJ4D/m24jmra6Hv1CM8/TmG
-	9MwKM4PShOAHVE/jj/4nXhImoDks+kM4db2o8Myo2p11KN+xxU8r2Ts4U4gTRZkq4Dt7
-	AvFA==
-X-Gm-Message-State: ALyK8tKu/5hTWVHhFVxLcG+ytagnvj38nYOmYKFyOdkvDNI1XTvIQK4aUZyHI36gcR3C189X
-X-Received: by 10.28.136.200 with SMTP id k191mr1362605wmd.57.1465288744409;
-	Tue, 07 Jun 2016 01:39:04 -0700 (PDT)
-Received: from thinkpad.localdomain (ip4da2a5ae.direct-adsl.nl.
-	[77.162.165.174])
-	by smtp.gmail.com with ESMTPSA id t1sm24301018wjy.3.2016.06.07.01.39.03
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 07 Jun 2016 01:39:03 -0700 (PDT)
-From: Koen Kooi <koen.kooi@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Jun 2016 10:38:52 +0200
-Message-Id: <1465288732-2288-2-git-send-email-koen.kooi@linaro.org>
-X-Mailer: git-send-email 2.4.3
-In-Reply-To: <1465288732-2288-1-git-send-email-koen.kooi@linaro.org>
-References: <1465288732-2288-1-git-send-email-koen.kooi@linaro.org>
-Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: [meta-gnome][PATCH 2/2] abiword 3.0.1: fix python code to work with python3
+	Tue,  7 Jun 2016 18:18:29 +0900 (JST)
+Received: from g01jpexchyt35.g01.fujitsu.local (unknown [10.128.193.4])
+	by g01jpfmpwyt03.exch.g01.fujitsu.local (Postfix) with ESMTP id
+	B79CB46E579 for <openembedded-devel@lists.openembedded.org>;
+	Tue,  7 Jun 2016 18:18:28 +0900 (JST)
+Received: from localhost.localdomain (10.24.19.99) by
+	g01jpexchyt35.g01.fujitsu.local (10.128.193.50) with Microsoft SMTP
+	Server id 14.3.266.1; Tue, 7 Jun 2016 18:18:29 +0900
+From: Fan Xin <fan.xin@jp.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 7 Jun 2016 18:18:26 +0900
+Message-ID: <1465291106-3984-1-git-send-email-fan.xin@jp.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-SecurityPolicyCheck-GC: OK by FENCE-Mail
+X-TM-AS-MML: disable
+Cc: Fan Xin <fan.xin@jp.fujitsu.com>
+Subject: [PATCH] ntp: Security fixes via Upgrade to 4.2.8p8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,36 +43,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jun 2016 08:39:05 -0000
+X-List-Received-Date: Tue, 07 Jun 2016 09:29:57 -0000
+Content-Type: text/plain
 
-Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+CVE-2016-4957
+CVE-2016-4953
+CVE-2016-4954
+CVE-2016-4955
+CVE-2016-4956
+
+For more info to see:
+http://support.ntp.org/bin/view/Main/SecurityNotice#June_2016_ntp_4_2_8p8_NTP_Securi
+
+Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
 ---
- meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb | 4 ++--
+ .../recipes-support/ntp/{ntp_4.2.8p7.bb => ntp_4.2.8p8.bb}            | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/ntp/{ntp_4.2.8p7.bb => ntp_4.2.8p8.bb} (97%)
 
-diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb b/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
-index 962a56c..0d0ba11 100644
---- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
-+++ b/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
-@@ -102,7 +102,7 @@ FILES_${PN}-templates      += "${datadir}/${PN}-${SHRT_VER}/templates"
- PACKAGES_DYNAMIC += "^${PN}-meta.* ^${PN}-plugin-.*"
+diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p8.bb
+similarity index 97%
+rename from meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb
+rename to meta-networking/recipes-support/ntp/ntp_4.2.8p8.bb
+index d242f93..5f60441 100644
+--- a/meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb
++++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p8.bb
+@@ -23,8 +23,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
+            file://ntpd.list \
+ "
  
- python populate_packages_prepend () {
--    abiword_libdir    = d.expand('${libdir}/${PN}-${SHRT_VER}/plugins')
-+    abiword_libdir = d.expand('${libdir}/${PN}-${SHRT_VER}/plugins')
-     do_split_packages(d, abiword_libdir, '(.*)\.so$', 'abiword-plugin-%s', 'Abiword plugin for %s', extra_depends='')
+-SRC_URI[md5sum] = "46dfba933c3e4bc924d8e55068797578"
+-SRC_URI[sha256sum] = "81d20c06a0b01abe3b84fac092185bf014252d38fe5e7b2758f604680a0220dc"
++SRC_URI[md5sum] = "4a8636260435b230636f053ffd070e34"
++SRC_URI[sha256sum] = "2ab3d0b5f0456e6311dda1cc27ab75da108762773a19e46abd938bd9407b97ee"
  
-     metapkg = "abiword-meta"
-@@ -113,7 +113,7 @@ python populate_packages_prepend () {
-     packages = d.getVar('PACKAGES', 1).split()
-     for pkg in packages[1:]:
-         if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.count("-dev") and not pkg.count("-dbg") and not pkg.count("static") and not pkg.count("locale") and not pkg.count("abiword-doc"):
--            print "Modifying ", pkg
-+            print ("Modifying %s" % pkg)
-             metapkg_rdepends.append(pkg)
-     d.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends))
-     d.setVar('DESCRIPTION_' + metapkg, 'abiword-plugin meta package')
+ inherit autotools update-rc.d useradd systemd pkgconfig
+ 
 -- 
-2.4.3
+1.8.4.2
 
 
