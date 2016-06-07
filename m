@@ -1,20 +1,25 @@
-Return-Path: <jussi.kukkonen@intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 4685673219
+Return-Path: <Abdur_Rehman@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A63B70030
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jun 2016 11:46:05 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga102.fm.intel.com with ESMTP; 07 Jun 2016 04:46:07 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.26,432,1459839600"; d="scan'208";a="992654328"
-Received: from theory.fi.intel.com ([10.237.72.196])
-	by orsmga002.jf.intel.com with ESMTP; 07 Jun 2016 04:46:05 -0700
-From: Jussi Kukkonen <jussi.kukkonen@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Jun 2016 14:45:51 +0300
-Message-Id: <1465299951-11226-1-git-send-email-jussi.kukkonen@intel.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [PATCH][meta-gnome] gtk-engines: Move from oe-core
+	Tue,  7 Jun 2016 12:02:57 +0000 (UTC)
+Received: from nat-ies.mentorg.com ([192.94.31.2]
+	helo=SVR-IES-FEM-01.mgc.mentorg.com)
+	by relay1.mentorg.com with esmtp 
+	id 1bAFij-0004Cj-Eh from Abdur_Rehman@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Jun 2016 05:02:57 -0700
+Received: from PKL-ABDURREHMAN-UBUNTU.pkl.mentorg.com (137.202.0.76) by
+	SVR-IES-FEM-01.mgc.mentorg.com (137.202.0.104) with Microsoft SMTP
+	Server id 14.3.224.2; Tue, 7 Jun 2016 13:02:56 +0100
+From: Abdur Rehman <abdur_rehman@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 7 Jun 2016 17:01:23 +0500
+Message-ID: <1465300884-32459-1-git-send-email-abdur_rehman@mentor.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Cc: Christopher Larson <chris_larson@mentor.com>
+Subject: [meta-oe][PATCH v5 1/2] libass: add newer version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,162 +32,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jun 2016 11:46:06 -0000
+X-List-Received-Date: Tue, 07 Jun 2016 12:02:58 -0000
+Content-Type: text/plain
 
-gtk-engines is being removed from oe-core (as there will be
-no themes there that need an engine). Move recipe to meta-gnome
-since gnome-themes depends on gtk-engines.
+* mpv requires newer libass to build
+* move SRC_URI from Google Code to GitHub
+* ENCA support has been removed https://github.com/libass/libass/pull/197
+  remove --enable-enca which is now an [unknown-configure-option]
+* Fix [textrel] for x86 targets
 
-Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Signed-off-by: Abdur Rehman <abdur_rehman@mentor.com>
 ---
+ meta-oe/recipes-multimedia/libass/libass.inc       | 10 +++++-----
+ meta-oe/recipes-multimedia/libass/libass_0.10.1.bb |  5 -----
+ meta-oe/recipes-multimedia/libass/libass_0.13.2.bb |  4 ++++
+ 3 files changed, 9 insertions(+), 10 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/libass/libass_0.10.1.bb
+ create mode 100644 meta-oe/recipes-multimedia/libass/libass_0.13.2.bb
 
-The oe-core patch email can be found on
-openembedded-core@lists.openembedded.org with the title
-"[PATCH 37/37] gtk-engines: Remove as unused". 
-
-
- .../gtk-engines/files/glib-2.32.patch              | 23 +++++++++
- .../gtk-engines/files/substitute-tests.patch       | 37 +++++++++++++++
- .../gtk-engines/gtk-engines_2.20.2.bb              | 55 ++++++++++++++++++++++
- 3 files changed, 115 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gtk-engines/files/glib-2.32.patch
- create mode 100644 meta-gnome/recipes-gnome/gtk-engines/files/substitute-tests.patch
- create mode 100644 meta-gnome/recipes-gnome/gtk-engines/gtk-engines_2.20.2.bb
-
-diff --git a/meta-gnome/recipes-gnome/gtk-engines/files/glib-2.32.patch b/meta-gnome/recipes-gnome/gtk-engines/files/glib-2.32.patch
+diff --git a/meta-oe/recipes-multimedia/libass/libass.inc b/meta-oe/recipes-multimedia/libass/libass.inc
+index 328cd14..85ac873 100644
+--- a/meta-oe/recipes-multimedia/libass/libass.inc
++++ b/meta-oe/recipes-multimedia/libass/libass.inc
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "libass is a portable subtitle renderer for the ASS/SSA (Advanced Substation Alpha/Substation Alpha) subtitle format. It is mostly compatible with VSFilter."
+-HOMEPAGE = "http://code.google.com/p/libass/"
++HOMEPAGE = "https://github.com/libass/libass"
+ SECTION = "libs/multimedia"
+ 
+ LICENSE = "ISC"
+@@ -7,9 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ae98663bac55afe5d989919d296f28a"
+ 
+ DEPENDS = "enca fontconfig freetype libpng fribidi"
+ 
+-INC_PR = "r1"
+-
+-SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz"
++SRC_URI = "https://github.com/libass/libass/releases/download/${PV}/libass-${PV}.tar.xz"
+ 
+ inherit autotools pkgconfig
+ 
+@@ -17,10 +15,12 @@ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[harfbuzz] = "--enable-harfbuzz,--disable-harfbuzz,harfbuzz"
+ 
+ EXTRA_OECONF = " \
+-    --enable-enca \
+     --enable-fontconfig \
+ "
+ 
++# Disable compiling with ASM for x86 to avoid textrel
++EXTRA_OECONF_append_x86 = " --disable-asm"
++
+ PACKAGES =+ "${PN}-tests"
+ 
+ FILES_${PN}-tests = " \
+diff --git a/meta-oe/recipes-multimedia/libass/libass_0.10.1.bb b/meta-oe/recipes-multimedia/libass/libass_0.10.1.bb
+deleted file mode 100644
+index 0b32276..0000000
+--- a/meta-oe/recipes-multimedia/libass/libass_0.10.1.bb
++++ /dev/null
+@@ -1,5 +0,0 @@
+-require ${PN}.inc
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[md5sum] = "6cace482a013a3c4bf3b31a68ac66026"
+-SRC_URI[sha256sum] = "629a7e81fff92dea8d0399b818a41fd1b61e381c67a5961b1eaec2efadb14c6c"
+diff --git a/meta-oe/recipes-multimedia/libass/libass_0.13.2.bb b/meta-oe/recipes-multimedia/libass/libass_0.13.2.bb
 new file mode 100644
-index 0000000..f0b878d
+index 0000000..8cf2bd8
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gtk-engines/files/glib-2.32.patch
-@@ -0,0 +1,23 @@
-+From 8d49a386f467cbf8e0842d2218126f643e50f834 Mon Sep 17 00:00:00 2001
-+From: Dominique Leuenberger <dimstar@opensuse.org>
-+Date: Sun, 27 Nov 2011 14:24:57 +0000
-+Subject: Fix build with glib 2.31: Only glib.h can be #include'd. Fixes bug #664914
++++ b/meta-oe/recipes-multimedia/libass/libass_0.13.2.bb
+@@ -0,0 +1,4 @@
++require recipes-multimedia/${BPN}/${BPN}.inc
 +
-+Upstream-Status: Backport
-+
-+---
-+diff --git a/engines/clearlooks/src/animation.c b/engines/clearlooks/src/animation.c
-+index 1f7a41f..56a9286 100644
-+--- a/engines/clearlooks/src/animation.c
-++++ b/engines/clearlooks/src/animation.c
-+@@ -28,7 +28,7 @@
-+ #include "animation.h"
-+ 
-+ #ifdef HAVE_WORKING_ANIMATION
-+-#include <glib/gtimer.h>
-++#include <glib.h>
-+ 
-+ struct _AnimationInfo {
-+ 	GTimer *timer;
-+--
-+cgit v0.9.0.2
-diff --git a/meta-gnome/recipes-gnome/gtk-engines/files/substitute-tests.patch b/meta-gnome/recipes-gnome/gtk-engines/files/substitute-tests.patch
-new file mode 100644
-index 0000000..5c557ba
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gtk-engines/files/substitute-tests.patch
-@@ -0,0 +1,37 @@
-+Upstream-Status: Pending
-+
-+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
-+diff -Nurd gtk-engines-2.20.2/configure.ac gtk-engines-2.20.2/configure.ac
-+--- gtk-engines-2.20.2/configure.ac	2010-10-01 15:42:37.000000000 +0300
-++++ gtk-engines-2.20.2/configure.ac	2013-08-20 02:50:27.930510565 +0300
-+@@ -166,6 +166,9 @@
-+
-+ AC_SUBST(DEVELOPMENT_CFLAGS)
-+
-++AC_SUBST([exported_symbols_tests], [[$(EXPORTED_SYMBOLS_TESTS)]])
-++AC_SUBST([torture_test_tests], [[$(TORTURE_TEST_TESTS)]])
-++
-+ AM_CONFIG_HEADER([engines/support/config.h])
-+
-+ AC_CONFIG_FILES([
-+diff -Nurd gtk-engines-2.20.2/test/Makefile.am gtk-engines-2.20.2/test/Makefile.am
-+--- gtk-engines-2.20.2/test/Makefile.am	2010-09-19 18:18:21.000000000 +0300
-++++ gtk-engines-2.20.2/test/Makefile.am	2013-08-20 02:50:36.842510865 +0300
-+@@ -66,7 +66,7 @@
-+ # Prefix with exported_
-+ EXPORTED_SYMBOLS_TESTS = $(patsubst %,exported_%,$(BUILD_ENGINES))
-+
-+-TESTS += $(EXPORTED_SYMBOLS_TESTS)
-++TESTS += @exported_symbols_tests@
-+
-+
-+ #############################################################
-+@@ -88,7 +88,7 @@
-+ TORTURE_TEST_TESTS = torture_buildin $(patsubst %,torture_%,$(TORTURE_TEST_ENGINES))
-+
-+ # Add TORTURE_TEST_ENGINES to list of tests
-+-TESTS += $(TORTURE_TEST_TESTS)
-++TESTS += @torture_test_tests@
-+
-+ # Possible other tests:
-+ #  - An extensive theme switch tests that loads/unloads the engine
-diff --git a/meta-gnome/recipes-gnome/gtk-engines/gtk-engines_2.20.2.bb b/meta-gnome/recipes-gnome/gtk-engines/gtk-engines_2.20.2.bb
-new file mode 100644
-index 0000000..c0ac911
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gtk-engines/gtk-engines_2.20.2.bb
-@@ -0,0 +1,55 @@
-+SUMMARY = "GTK+ theme engines"
-+HOMEPAGE = "http://www.gnome.org/"
-+BUGTRACKER = "https://bugzilla.gnome.org/"
-+
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
-+
-+SECTION = "x11/base"
-+DEPENDS = "intltool-native gtk+ gettext-native"
-+
-+PR = "r3"
-+
-+PACKAGES += "${PN}-schemas"
-+PACKAGES_DYNAMIC += "^gtk-engine-.* ^gtk-theme-.*"
-+
-+RDEPENDS_gtk-theme-redmond = "gtk-engine-redmond95"
-+RDEPENDS_gtk-theme-metal = "gtk-engine-metal"
-+RDEPENDS_gtk-theme-mist = "gtk-engine-mist"
-+RDEPENDS_gtk-theme-crux = "gtk-engine-crux-engine"
-+RDEPENDS_gtk-theme-lighthouseblue = "gtk-engine-lighthouseblue"
-+RDEPENDS_gtk-theme-thinice = "gtk-engine-thinice"
-+RDEPENDS_gtk-theme-industrial = "gtk-engine-industrial"
-+RDEPENDS_gtk-theme-clearlooks = "gtk-engine-clearlooks"
-+
-+FILES_${PN} = ""
-+FILES_${PN}-dev += "${libdir}/gtk-2.0/*/engines/*.la"
-+FILES_${PN}-schemas = "${datadir}/gtk-engines/*.xml"
-+
-+CFLAGS_prepend = "-DHAVE_ANIMATION "
-+
-+RDEPENDS_${PN}-dev = ""
-+
-+inherit gnomebase
-+GNOME_COMPRESS_TYPE="bz2"
-+
-+inherit distro_features_check
-+ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
-+
-+# This picks stable releases in the 2.x series (but not 2.90 onwards,
-+# which were GNOME 3 betas).
-+UPSTREAM_CHECK_REGEX = "(?P<pver>2\.([0-8]*[02468])+(\.\d+)+)"
-+
-+python populate_packages_prepend() {
-+    engines_root = os.path.join(d.getVar('libdir', True), "gtk-2.0/2.10.0/engines")
-+    themes_root = os.path.join(d.getVar('datadir', True), "themes")
-+
-+    do_split_packages(d, engines_root, '^lib(.*)\.so$', 'gtk-engine-%s', 'GTK %s theme engine', extra_depends='')
-+    do_split_packages(d, themes_root, '(.*)', 'gtk-theme-%s', 'GTK theme %s', allow_dirs=True, extra_depends='')
-+    # TODO: mark theme packages as arch all
-+}
-+
-+SRC_URI += "file://glib-2.32.patch \
-+            file://substitute-tests.patch"
-+SRC_URI[archive.md5sum] = "5deb287bc6075dc21812130604c7dc4f"
-+SRC_URI[archive.sha256sum] = "15b680abca6c773ecb85253521fa100dd3b8549befeecc7595b10209d62d66b5"
++SRC_URI[md5sum] = "1c8cbd5751aeb192bda04a65d0464fd9"
++SRC_URI[sha256sum] = "d698d0a6adca7c36c5a86b540d67b05bfd36cebc3c351ab7646497c43fe1face"
 -- 
-2.1.4
+1.9.1
 
 
