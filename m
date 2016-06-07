@@ -1,26 +1,25 @@
-Return-Path: <Abdur_Rehman@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 2ABA7765DB
+Return-Path: <prvs=959aba4a0=Richard.Leitner@skidata.com>
+X-Greylist: delayed 595 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 07 Jun 2016 12:26:53 UTC
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 91B327319F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jun 2016 12:03:05 +0000 (UTC)
-Received: from nat-ies.mentorg.com ([192.94.31.2]
-	helo=SVR-IES-FEM-01.mgc.mentorg.com)
-	by relay1.mentorg.com with esmtp 
-	id 1bAFis-0004GF-Ea from Abdur_Rehman@mentor.com ;
-	Tue, 07 Jun 2016 05:03:06 -0700
-Received: from PKL-ABDURREHMAN-UBUNTU.pkl.mentorg.com (137.202.0.76) by
-	SVR-IES-FEM-01.mgc.mentorg.com (137.202.0.104) with Microsoft SMTP
-	Server id 14.3.224.2; Tue, 7 Jun 2016 13:03:05 +0100
-From: Abdur Rehman <abdur_rehman@mentor.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 7 Jun 2016 17:01:24 +0500
-Message-ID: <1465300884-32459-2-git-send-email-abdur_rehman@mentor.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1465300884-32459-1-git-send-email-abdur_rehman@mentor.com>
-References: <1465300884-32459-1-git-send-email-abdur_rehman@mentor.com>
+	Tue,  7 Jun 2016 12:26:53 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: A2CsBACeulZX/0oKEKxdhRAGrmaHLxqEMoF5iAYSAQEBAQEBAYEBC4RHBCRVBiMHBgIFFgsCCwMCAQIBDyYWDQYCAogRAw+qa40XDYQMMYEBhSaHEIR+glkFkziEXzSBWIpUAYNkhFKDCRcMhTiGPYE2h2wlDIFZgjpsiRB/AQEB
+X-IPAS-Result: A2CsBACeulZX/0oKEKxdhRAGrmaHLxqEMoF5iAYSAQEBAQEBAYEBC4RHBCRVBiMHBgIFFgsCCwMCAQIBDyYWDQYCAogRAw+qa40XDYQMMYEBhSaHEIR+glkFkziEXzSBWIpUAYNkhFKDCRcMhTiGPYE2h2wlDIFZgjpsiRB/AQEB
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+From: Richard Leitner <richard.leitner@skidata.com>
+Message-ID: <5756BB6E.1010309@skidata.com>
+Date: Tue, 7 Jun 2016 14:17:50 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Icedove/38.8.0
 MIME-Version: 1.0
-Cc: Gary Thomas <gary@mlbassoc.com>
-Subject: [meta-oe][PATCH v5 2/2] mpv: Media Player
+X-Originating-IP: [172.16.60.30]
+X-ClientProxiedBy: sdex1srv.skidata.net (172.16.10.92) To sdex1srv.skidata.net
+	(172.16.10.92)
+Subject: [jethro] Backport 12e31ce9d6065086fa0a84733f7b45664d41b7e9 from master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,95 +32,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jun 2016 12:03:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 07 Jun 2016 12:26:57 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
 
-mpv is a fork of mplayer2 and MPlayer. It shares some features with
-the former projects while introducing many more.
+Hello,
+please backport commit 12e31ce9d6065086fa0a84733f7b45664d41b7e9 from
+master to jethro branch!
+This is needed for samba to work on a readonly rootfs!
 
-Signed-off-by: Gary Thomas <gary@mlbassoc.com>
-Signed-off-by: Abdur Rehman <abdur_rehman@mentor.com>
----
- meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb | 69 ++++++++++++++++++++++++
- 1 file changed, 69 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
+> commit 12e31ce9d6065086fa0a84733f7b45664d41b7e9
+> Author: Johannes Pointner <johannes.pointner@br-automation.com>
+> Date:   Fri Apr 15 11:23:42 2016 +0200
+>
+> samba: add volatile file to support readonly rootfs
+>
+> This patch adds a volatile file for samba which was removed by the
+> update from 3.6.25 to 4.1.12. This file is necessary to build a image
+> that uses the read-only-rootfs feature.
+>
+> Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
-new file mode 100644
-index 0000000..4f4aec1
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
-@@ -0,0 +1,69 @@
-+SUMMARY = "Open Source multimedia player"
-+SECTION = "multimedia"
-+HOMEPAGE = "http://www.mpv.io/"
-+DEPENDS = "zlib ffmpeg jpeg virtual/libx11 xsp libxv \
-+           libxscrnsaver libv4l libxinerama \
-+"
-+
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=91f1cb870c1cc2d31351a4d2595441cb"
-+
-+SRC_URI = "https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz;name=mpv \
-+           http://www.freehackers.org/~tnagy/release/waf-1.8.12;name=waf \
-+"
-+SRC_URI[mpv.md5sum] = "9042bd3fbff2bc8ba0b7fadaa4a22101"
-+SRC_URI[mpv.sha256sum] = "7d31217ba8572f364fcea2955733f821374ae6d8c6d8f22f8bc63c44c0400bdc"
-+SRC_URI[waf.md5sum] = "cef4ee82206b1843db082d0b0506bf71"
-+SRC_URI[waf.sha256sum] = "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f22fca60c98b"
-+
-+inherit pkgconfig pythonnative distro_features_check
-+# depends on virtual/libx11
-+REQUIRED_DISTRO_FEATURES = "x11"
-+
-+# Note: both lua and libass are required to get on-screen-display (controls)
-+PACKAGECONFIG ??= "lua libass"
-+PACKAGECONFIG[lua] = "--enable-lua,--disable-lua,lua luajit"
-+PACKAGECONFIG[libass] = "--enable-libass,--disable-libass,libass"
-+PACKAGECONFIG[libarchive] = "--enable-libarchive,--disable-libarchive,libarchive"
-+PACKAGECONFIG[jack] = "--enable-jack, --disable-jack, jack"
-+
-+EXTRA_OECONF = " \
-+    --prefix=${prefix} \
-+    --target=${SIMPLE_TARGET_SYS} \
-+    --confdir=${sysconfdir} \
-+    --datadir=${datadir} \
-+    --disable-manpage-build \
-+    --disable-gl \
-+    --disable-libsmbclient \
-+    --disable-encoding \
-+    --disable-libbluray \
-+    --disable-dvdread \
-+    --disable-dvdnav \
-+    --disable-cdda \
-+    --disable-enca \
-+    --disable-libguess \
-+    --disable-uchardet \
-+    --disable-rubberband \
-+    --disable-lcms2 \
-+    --disable-vapoursynth \
-+    --disable-vapoursynth-lazy \
-+"
-+
-+do_configure() {
-+    if [ ! -L ../waf ]; then
-+        chmod a+x ../waf-1.8.12
-+	ln -s waf-1.8.12 ../waf
-+    fi
-+    export SIMPLE_TARGET_SYS="$(echo ${TARGET_SYS} | sed s:${TARGET_VENDOR}::g)"
-+    ../waf configure ${EXTRA_OECONF}
-+}
-+
-+do_compile () {
-+    ../waf build
-+}
-+
-+do_install() {
-+    ../waf install --destdir=${D}
-+}
-+
-+FILES_${PN} += "${datadir}/icons"
--- 
-1.9.1
+Thank you!
+
+Kind regards,
+Richard
+
 
 
