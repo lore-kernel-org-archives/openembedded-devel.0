@@ -1,25 +1,26 @@
 Return-Path: <Abdur_Rehman@mentor.com>
 Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A63B70030
+	by mail.openembedded.org (Postfix) with ESMTP id 2ABA7765DB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jun 2016 12:02:57 +0000 (UTC)
+	Tue,  7 Jun 2016 12:03:05 +0000 (UTC)
 Received: from nat-ies.mentorg.com ([192.94.31.2]
 	helo=SVR-IES-FEM-01.mgc.mentorg.com)
 	by relay1.mentorg.com with esmtp 
-	id 1bAFij-0004Cj-Eh from Abdur_Rehman@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Jun 2016 05:02:57 -0700
+	id 1bAFis-0004GF-Ea from Abdur_Rehman@mentor.com ;
+	Tue, 07 Jun 2016 05:03:06 -0700
 Received: from PKL-ABDURREHMAN-UBUNTU.pkl.mentorg.com (137.202.0.76) by
 	SVR-IES-FEM-01.mgc.mentorg.com (137.202.0.104) with Microsoft SMTP
-	Server id 14.3.224.2; Tue, 7 Jun 2016 13:02:56 +0100
+	Server id 14.3.224.2; Tue, 7 Jun 2016 13:03:05 +0100
 From: Abdur Rehman <abdur_rehman@mentor.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 7 Jun 2016 17:01:23 +0500
-Message-ID: <1465300884-32459-1-git-send-email-abdur_rehman@mentor.com>
+Date: Tue, 7 Jun 2016 17:01:24 +0500
+Message-ID: <1465300884-32459-2-git-send-email-abdur_rehman@mentor.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1465300884-32459-1-git-send-email-abdur_rehman@mentor.com>
+References: <1465300884-32459-1-git-send-email-abdur_rehman@mentor.com>
 MIME-Version: 1.0
-Cc: Christopher Larson <chris_larson@mentor.com>
-Subject: [meta-oe][PATCH v5 1/2] libass: add newer version
+Cc: Gary Thomas <gary@mlbassoc.com>
+Subject: [meta-oe][PATCH v5 2/2] mpv: Media Player
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,82 +33,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jun 2016 12:02:58 -0000
+X-List-Received-Date: Tue, 07 Jun 2016 12:03:07 -0000
 Content-Type: text/plain
 
-* mpv requires newer libass to build
-* move SRC_URI from Google Code to GitHub
-* ENCA support has been removed https://github.com/libass/libass/pull/197
-  remove --enable-enca which is now an [unknown-configure-option]
-* Fix [textrel] for x86 targets
+mpv is a fork of mplayer2 and MPlayer. It shares some features with
+the former projects while introducing many more.
 
-Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+Signed-off-by: Gary Thomas <gary@mlbassoc.com>
 Signed-off-by: Abdur Rehman <abdur_rehman@mentor.com>
 ---
- meta-oe/recipes-multimedia/libass/libass.inc       | 10 +++++-----
- meta-oe/recipes-multimedia/libass/libass_0.10.1.bb |  5 -----
- meta-oe/recipes-multimedia/libass/libass_0.13.2.bb |  4 ++++
- 3 files changed, 9 insertions(+), 10 deletions(-)
- delete mode 100644 meta-oe/recipes-multimedia/libass/libass_0.10.1.bb
- create mode 100644 meta-oe/recipes-multimedia/libass/libass_0.13.2.bb
+ meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb | 69 ++++++++++++++++++++++++
+ 1 file changed, 69 insertions(+)
+ create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
 
-diff --git a/meta-oe/recipes-multimedia/libass/libass.inc b/meta-oe/recipes-multimedia/libass/libass.inc
-index 328cd14..85ac873 100644
---- a/meta-oe/recipes-multimedia/libass/libass.inc
-+++ b/meta-oe/recipes-multimedia/libass/libass.inc
-@@ -1,5 +1,5 @@
- DESCRIPTION = "libass is a portable subtitle renderer for the ASS/SSA (Advanced Substation Alpha/Substation Alpha) subtitle format. It is mostly compatible with VSFilter."
--HOMEPAGE = "http://code.google.com/p/libass/"
-+HOMEPAGE = "https://github.com/libass/libass"
- SECTION = "libs/multimedia"
- 
- LICENSE = "ISC"
-@@ -7,9 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ae98663bac55afe5d989919d296f28a"
- 
- DEPENDS = "enca fontconfig freetype libpng fribidi"
- 
--INC_PR = "r1"
--
--SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz"
-+SRC_URI = "https://github.com/libass/libass/releases/download/${PV}/libass-${PV}.tar.xz"
- 
- inherit autotools pkgconfig
- 
-@@ -17,10 +15,12 @@ PACKAGECONFIG ??= ""
- PACKAGECONFIG[harfbuzz] = "--enable-harfbuzz,--disable-harfbuzz,harfbuzz"
- 
- EXTRA_OECONF = " \
--    --enable-enca \
-     --enable-fontconfig \
- "
- 
-+# Disable compiling with ASM for x86 to avoid textrel
-+EXTRA_OECONF_append_x86 = " --disable-asm"
-+
- PACKAGES =+ "${PN}-tests"
- 
- FILES_${PN}-tests = " \
-diff --git a/meta-oe/recipes-multimedia/libass/libass_0.10.1.bb b/meta-oe/recipes-multimedia/libass/libass_0.10.1.bb
-deleted file mode 100644
-index 0b32276..0000000
---- a/meta-oe/recipes-multimedia/libass/libass_0.10.1.bb
-+++ /dev/null
-@@ -1,5 +0,0 @@
--require ${PN}.inc
--PR = "${INC_PR}.0"
--
--SRC_URI[md5sum] = "6cace482a013a3c4bf3b31a68ac66026"
--SRC_URI[sha256sum] = "629a7e81fff92dea8d0399b818a41fd1b61e381c67a5961b1eaec2efadb14c6c"
-diff --git a/meta-oe/recipes-multimedia/libass/libass_0.13.2.bb b/meta-oe/recipes-multimedia/libass/libass_0.13.2.bb
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
 new file mode 100644
-index 0000000..8cf2bd8
+index 0000000..4f4aec1
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/libass/libass_0.13.2.bb
-@@ -0,0 +1,4 @@
-+require recipes-multimedia/${BPN}/${BPN}.inc
++++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
+@@ -0,0 +1,69 @@
++SUMMARY = "Open Source multimedia player"
++SECTION = "multimedia"
++HOMEPAGE = "http://www.mpv.io/"
++DEPENDS = "zlib ffmpeg jpeg virtual/libx11 xsp libxv \
++           libxscrnsaver libv4l libxinerama \
++"
 +
-+SRC_URI[md5sum] = "1c8cbd5751aeb192bda04a65d0464fd9"
-+SRC_URI[sha256sum] = "d698d0a6adca7c36c5a86b540d67b05bfd36cebc3c351ab7646497c43fe1face"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=91f1cb870c1cc2d31351a4d2595441cb"
++
++SRC_URI = "https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz;name=mpv \
++           http://www.freehackers.org/~tnagy/release/waf-1.8.12;name=waf \
++"
++SRC_URI[mpv.md5sum] = "9042bd3fbff2bc8ba0b7fadaa4a22101"
++SRC_URI[mpv.sha256sum] = "7d31217ba8572f364fcea2955733f821374ae6d8c6d8f22f8bc63c44c0400bdc"
++SRC_URI[waf.md5sum] = "cef4ee82206b1843db082d0b0506bf71"
++SRC_URI[waf.sha256sum] = "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f22fca60c98b"
++
++inherit pkgconfig pythonnative distro_features_check
++# depends on virtual/libx11
++REQUIRED_DISTRO_FEATURES = "x11"
++
++# Note: both lua and libass are required to get on-screen-display (controls)
++PACKAGECONFIG ??= "lua libass"
++PACKAGECONFIG[lua] = "--enable-lua,--disable-lua,lua luajit"
++PACKAGECONFIG[libass] = "--enable-libass,--disable-libass,libass"
++PACKAGECONFIG[libarchive] = "--enable-libarchive,--disable-libarchive,libarchive"
++PACKAGECONFIG[jack] = "--enable-jack, --disable-jack, jack"
++
++EXTRA_OECONF = " \
++    --prefix=${prefix} \
++    --target=${SIMPLE_TARGET_SYS} \
++    --confdir=${sysconfdir} \
++    --datadir=${datadir} \
++    --disable-manpage-build \
++    --disable-gl \
++    --disable-libsmbclient \
++    --disable-encoding \
++    --disable-libbluray \
++    --disable-dvdread \
++    --disable-dvdnav \
++    --disable-cdda \
++    --disable-enca \
++    --disable-libguess \
++    --disable-uchardet \
++    --disable-rubberband \
++    --disable-lcms2 \
++    --disable-vapoursynth \
++    --disable-vapoursynth-lazy \
++"
++
++do_configure() {
++    if [ ! -L ../waf ]; then
++        chmod a+x ../waf-1.8.12
++	ln -s waf-1.8.12 ../waf
++    fi
++    export SIMPLE_TARGET_SYS="$(echo ${TARGET_SYS} | sed s:${TARGET_VENDOR}::g)"
++    ../waf configure ${EXTRA_OECONF}
++}
++
++do_compile () {
++    ../waf build
++}
++
++do_install() {
++    ../waf install --destdir=${D}
++}
++
++FILES_${PN} += "${datadir}/icons"
 -- 
 1.9.1
 
