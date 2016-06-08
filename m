@@ -1,44 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 10AE660797
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 614696FF22
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Jun 2016 13:18:26 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id r5so2964925wmr.0
+	Wed,  8 Jun 2016 13:40:47 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id m124so3081371wme.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Jun 2016 06:18:28 -0700 (PDT)
+	Wed, 08 Jun 2016 06:40:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=XrvyBY03movU/eLhNznEMg86Rv52CfOhglnyjfRfnZs=;
-	b=UloMqbX+/jxYMoV+UijhrInhM0w/43KjD+/xLyNdEhS6QScdWHFPd8bcQavhCKzUsw
-	VMNjTKHmYtcg67IXN2AZ0+zrX8DzdRD+E8JYmCTGzTl3J2vVmR/dd4ns+A43cYBtRPSs
-	K05WVq0H+TumI6liNAxQjKhIac1zJZDAsQHkcydY8NyeIIcpGIFXi8Aw/kYCDNoM53E0
-	YDzxo765CnI4nOhi6lzTIZQBUjZrggevwUCge1gHjq3M+xawNDWA+CCn+PAa0QOhXZhP
-	gZaWKIlNAPbGJO9VnJrTO356hQLsSmZBAgTJojZykiU0EFLCSunbQ3t5WdhNo9bSYB1x
-	xz9A==
+	bh=aAR6YbVAZr/kouCGxz2Q9WyzE3aT6sUmh460do7A9z8=;
+	b=ZiVawvd7jAEyA+B1nGgTkJ18/BgxMxjT869CUS2I+01qY5x2q2YUtB1ZKcPDmPFYJR
+	5X9SHNLoPwt5O+Vsqgd8DQo1NA/Y9lFjn14QEQl6CuXpjymsREmTDoEXvzMYV6Wn4Jza
+	/AQZEjEj0MoQIWKXI5EsIoP+XtkM7K2h+Zz2MExv4KQwL7TedBnWZK455hPTLliOgHhW
+	2rHoCzXj7DRkyIo5INP21dDPkL8VlPknvl6FHzapKZauPP1MiSI6ElE7d/gNg4qsACgm
+	b6XSDnvia1Wlo3nmcER4k2vRKbG6HC4R5TasfUJ20wKbzZwO3Bfw1itRnwsTWfjtWSEH
+	9sXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=XrvyBY03movU/eLhNznEMg86Rv52CfOhglnyjfRfnZs=;
-	b=MLLEZWYxDvBY4KgPjxBsWyA8nmC/P8aNJTtifOZMPOj8LnT9lNTF/crnspziuHN69g
-	dBTYtVe79Bx9b+s5Op5h6Vk/OQru+Hl59gy9x51RsmoujJNjmRyL8s4vBJNXXQ9SCm70
-	intYv3I6v2xFiF727V7eKASDSN6joGb6Li74b4zTqlFzeEpDlIYdWXtttGARc3IiQxYJ
-	nzibZz65S/ku/7gMfTFTQpLBnOsIrEsWJxRMb8DFpVR0wVOlSVyl8mOROh6tZEhk6fG3
-	YqvUOxGZrC5VpxjOMBDMR9s4KTX5muc5QUUvhcgeIRwXU09Yo9GBq3EWN++a9cjSTu/8
-	zqvQ==
-X-Gm-Message-State: ALyK8tKwkLlh+rmi1cKwmTNg+n5WILKIehrKwBBK5xLrxLxWhtZW+UFl5oW+o43r52BWGA==
-X-Received: by 10.28.31.213 with SMTP id f204mr7679858wmf.69.1465391906960;
-	Wed, 08 Jun 2016 06:18:26 -0700 (PDT)
+	bh=aAR6YbVAZr/kouCGxz2Q9WyzE3aT6sUmh460do7A9z8=;
+	b=Ot+BX2QTaUw1MCipN4NmRuZSsLYwCZKfapy03rnge8BqRK0FEAEYOqjpDGZz3K2C0F
+	aT/0N5buD47JdOJHqvzlcy0Pg1iB2zllex11inlFJSv5wpEVIvguVgOQ/Zzh0lj6eTXI
+	9KqTbSTbBcoXJjBHrFzBFzqhjyyaTujqPS5kmJ6XDjDXMmwN7lzfzUd4cF7vJ4h87xIm
+	Cg1P12R3mf2MvQbmK8qu2ikSpIOV6RxkkR8t1H2+fYDi1huf2vsHmLvP46xAZtjFRukE
+	ax5H3xz/yUV65W9OybwX2kfJu7q38XxS+wH8TbviLiWGkKt2Lnb48B9K6q+c1k7Y7KWn
+	+K4Q==
+X-Gm-Message-State: ALyK8tLBKjozR7DA/AN/F8ytADtCUTjTxE993kr5j9dlb3TSZooFTpAcjR0nUESTumbZiw==
+X-Received: by 10.28.94.194 with SMTP id s185mr5327011wmb.62.1465393248003;
+	Wed, 08 Jun 2016 06:40:48 -0700 (PDT)
 Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id g3sm1446929wjb.47.2016.06.08.06.18.26
+	by smtp.gmail.com with ESMTPSA id
+	r129sm2190405wmr.20.2016.06.08.06.40.46
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 08 Jun 2016 06:18:26 -0700 (PDT)
+	Wed, 08 Jun 2016 06:40:46 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Jun 2016 15:18:43 +0200
-Message-Id: <20160608131843.3507-1-Martin.Jansa@gmail.com>
+Date: Wed,  8 Jun 2016 15:39:38 +0200
+Message-Id: <20160608133938.4309-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.8.4
-Subject: [PATCH] evince, gedit, gnome-panel, gnome-session, gnome-terminal, libgnomecups, gtksourceview2, libgweather, libgnomeui, tracker, gimp, poppler, mousepad: blacklist, fails to build with gcc-6
+Subject: [PATCH] abiword, fbreader, tvheadend, glmark2, libqmi, modemmanager, thrift, wvdial, wvstreams, dt, collectd, gtkmathview, tcsh, glcompbench, geos, libspatialite, geis, grail, opencv, openwbem, fwts: blacklist, fails to build with gcc-6 or glibc-2.24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,160 +52,259 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jun 2016 13:18:29 -0000
+X-List-Received-Date: Wed, 08 Jun 2016 13:40:49 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/evince/evince_3.18.2.bb                | 2 ++
- meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb                  | 1 +
- meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb      | 2 ++
- meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb  | 3 +++
- meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb         | 3 +++
- meta-gnome/recipes-gnome/gnome/libgnomecups_0.2.3.bb            | 2 ++
- meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb | 3 +++
- meta-gnome/recipes-gnome/gweather/libgweather_2.30.3.bb         | 3 ++-
- meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.3.bb          | 3 +++
- meta-gnome/recipes-support/tracker/tracker_0.14.2.bb            | 2 ++
- meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb                    | 2 ++
- meta-oe/recipes-support/poppler/poppler_0.43.0.bb               | 3 +++
- meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb               | 2 ++
- 13 files changed, 30 insertions(+), 1 deletion(-)
+ meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb                | 2 ++
+ meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb            | 3 +++
+ meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb           | 3 +++
+ meta-oe/recipes-benchmark/glmark2/glmark2_git.bb                 | 3 +++
+ meta-oe/recipes-connectivity/libqmi/libqmi_1.12.6.bb             | 3 +++
+ meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.12.bb | 2 ++
+ meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb              | 2 ++
+ meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb               | 2 ++
+ meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb           | 3 +++
+ meta-oe/recipes-devtools/dt/dt_18.32.bb                          | 2 ++
+ meta-oe/recipes-extended/collectd/collectd_5.5.0.bb              | 3 +++
+ meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb         | 3 +++
+ meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb                    | 3 +++
+ meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb      | 3 +++
+ meta-oe/recipes-navigation/geos/geos_3.4.2.bb                    | 3 +++
+ meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb  | 2 ++
+ meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb      | 2 ++
+ meta-oe/recipes-support/canonical-multitouch/grail_3.1.0.bb      | 3 +++
+ meta-oe/recipes-support/opencv/opencv_3.1.bb                     | 2 ++
+ meta-oe/recipes-support/openwbem/openwbem_3.2.3.bb               | 3 +++
+ meta-oe/recipes-test/fwts/fwts_git.bb                            | 3 +++
+ 21 files changed, 55 insertions(+)
 
-diff --git a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb b/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-index fe63093..4fa11a5 100644
---- a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-+++ b/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-@@ -46,3 +46,5 @@ FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a \
-                           ${libdir}/evince/*/backends/*.a"
- FILES_${PN}-nautilus-extension = "${libdir}/nautilus/*/*so"
- FILES_${PN}-browser-plugin = "${libdir}/mozilla/*/*so"
-+
-+PNBLACKLIST[evince] ?= "Depends on broken poppler"
-diff --git a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
-index 4ae5bbb..7e6b343 100644
---- a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
-+++ b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
-@@ -20,3 +20,4 @@ EXTRA_OECONF = "--disable-scrollkeeper \
- FILES_${PN} += "${libdir}/gedit-2/plugin* ${datadir}/gedit-2"
- FILES_${PN}-dbg += "${libdir}/gedit-2/plugin-loaders/.debug ${libdir}/gedit-2/plugins/.debug"
- 
-+PNBLACKLIST[gedit] ?= "Depends on broken gtksourceview2"
-diff --git a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-index 0f7cb59..b85850e 100644
---- a/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb
-@@ -43,3 +43,5 @@ FILES_${PN} =+ "${datadir}/gnome* \
-                 ${datadir}/PolicyKit \
-                 ${libdir}/bonobo \
- "
-+
-+PNBLACKLIST[gnome-panel] ?= "Depends on broken libgweather"
-diff --git a/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb
-index c6fb75b..db85af7 100644
---- a/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb
-@@ -27,3 +27,6 @@ do_configure_append() {
- RRECOMMENDS_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam-plugin-ck-connector', '', d)}"
- FILES_${PN} += "${datadir}/xsessions ${datadir}/icons ${datadir}/gnome ${libdir}/gnome-session/helpers"
- FILES_${PN}-dbg += "${libexecdir}/gnome-session/helpers/.debug"
-+
-+# http://errors.yoctoproject.org/Errors/Details/68621/
-+PNBLACKLIST[libgnomeui] ?= "BROKEN: fails to build with gcc-6"
-diff --git a/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb b/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
-index 0ac2b20..4695e1e 100644
---- a/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
-@@ -17,3 +17,6 @@ SRC_URI[archive.sha256sum] = "2c7af2250698b9f9f53c6eaa93211c1118cf2c7e29cbbacfd1
- GNOME_COMPRESS_TYPE="bz2"
- 
- RRECOMMENDS_${PN} += "gnome-common-schemas"
-+
-+# http://errors.yoctoproject.org/Errors/Details/68636/
-+PNBLACKLIST[libgnomeui] ?= "BROKEN: fails to build with gcc-6"
-diff --git a/meta-gnome/recipes-gnome/gnome/libgnomecups_0.2.3.bb b/meta-gnome/recipes-gnome/gnome/libgnomecups_0.2.3.bb
-index 6bb6816..2caa820 100644
---- a/meta-gnome/recipes-gnome/gnome/libgnomecups_0.2.3.bb
-+++ b/meta-gnome/recipes-gnome/gnome/libgnomecups_0.2.3.bb
-@@ -21,3 +21,5 @@ SRC_URI += "\
- SRC_URI[archive.md5sum] = "dc4920c15c9f886f73ea74fbff0ae48b"
- SRC_URI[archive.sha256sum] = "e130e80942b386de19a288a4c194ff3dbe9140315b31e982058c8bffbb6a1d29"
- GNOME_COMPRESS_TYPE="bz2"
-+
-+PNBLACKLIST[libgnomecups] ?= "Depends on broken libgnomeui"
-diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
-index c745e34..46d547f 100644
---- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
-+++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
-@@ -26,3 +26,6 @@ do_configure_prepend() {
+diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb b/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
+index e0888c1..b413722 100644
+--- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
++++ b/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
+@@ -122,3 +122,5 @@ python populate_packages_prepend () {
  }
  
- FILES_${PN} += " ${datadir}/gtksourceview-2.0"
+ FILES_${PN}-plugin-openxml += "${datadir}/${PN}-${SHRT_VER}/omml_xslt"
 +
-+# http://errors.yoctoproject.org/Errors/Details/68609/
-+PNBLACKLIST[libgnomeui] ?= "BROKEN: fails to build with gcc-6"
-diff --git a/meta-gnome/recipes-gnome/gweather/libgweather_2.30.3.bb b/meta-gnome/recipes-gnome/gweather/libgweather_2.30.3.bb
-index aeec2d3..71fe545 100644
---- a/meta-gnome/recipes-gnome/gweather/libgweather_2.30.3.bb
-+++ b/meta-gnome/recipes-gnome/gweather/libgweather_2.30.3.bb
-@@ -20,4 +20,5 @@ FILES_${PN} += "${datadir}/gnome* \
- PACKAGES =+ "${PN}-locationdata"
- FILES_${PN}-locationdata = "${datadir}/libgweather/Locations*"
++PNBLACKLIST[abiword] ?= "Depends on broken gtkmathview"
+diff --git a/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb b/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
+index 1487f11..7a9de86 100644
+--- a/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
++++ b/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
+@@ -41,3 +41,6 @@ do_install() {
  
--
-+# http://errors.yoctoproject.org/Errors/Details/68608/
-+PNBLACKLIST[libgweather] ?= "BROKEN: fails to build with gcc-6"
-diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.3.bb b/meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.3.bb
-index 6fb2786..3208a81 100644
---- a/meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.3.bb
-+++ b/meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.3.bb
-@@ -5,3 +5,6 @@ PR = "r1"
- SRC_URI[archive.md5sum] = "ceab6f4370581d1a03c09f15cc103099"
- SRC_URI[archive.sha256sum] = "04c81f3bb5a337cdf3ed1230916f82d29857ee95eb884f58dd2f5c6860efe803"
- GNOME_COMPRESS_TYPE="bz2"
+ SRC_URI[md5sum] = "da9ec4721efdb0ec0aaa182bff16ad82"
+ SRC_URI[sha256sum] = "328aec454db80e225aa0b5c31adef74bf62a14357482947e87e9731686b3c624"
 +
-+# http://errors.yoctoproject.org/Errors/Details/68607/
-+PNBLACKLIST[libgnomeui] ?= "BROKEN: fails to build with gcc-6"
-diff --git a/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
-index ff53669..7e6c400 100644
---- a/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
-+++ b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
-@@ -83,3 +83,5 @@ FILES_${PN}-nautilus-extension += "${libdir}/nautilus/extensions-2.0/*.so"
++# http://errors.yoctoproject.org/Errors/Details/68618/
++PNBLACKLIST[fbreader] ?= "BROKEN: fails to build with gcc-6"
+diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+index 65d43c6..2df8537 100644
+--- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
++++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+@@ -29,3 +29,6 @@ do_install() {
+ }
  
- SRC_URI[md5sum] = "f3a871beeebf86fd752863ebd22af9ac"
- SRC_URI[sha256sum] = "9b59330aa2e9e09feee587ded895e9247f71fc25f46b023d616d9969314bc7f1"
+ FILES_${PN} += "${datadir}/${BPN}"
 +
-+PNBLACKLIST[tracker] ?= "Depends on broken poppler"
-diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
-index 29ed4d9..3c134bb 100644
---- a/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
-+++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
-@@ -30,3 +30,5 @@ CFLAGS += "-fPIC"
++# http://errors.yoctoproject.org/Errors/Details/68628/
++PNBLACKLIST[tvheadend] ?= "BROKEN: fails to build with gcc-6"
+diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+index e29921b..9c5ef18 100644
+--- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
++++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+@@ -50,3 +50,6 @@ python __anonymous() {
+     if flavors:
+         d.appendVar("EXTRA_OECONF", " --with-flavors=%s" % ",".join(flavors))
+ }
++
++# http://errors.yoctoproject.org/Errors/Details/68626/
++PNBLACKLIST[glmark2] ?= "BROKEN: fails to build with gcc-6"
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.12.6.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.12.6.bb
+index 7a15527..937fafc 100644
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.12.6.bb
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.12.6.bb
+@@ -14,3 +14,6 @@ inherit autotools pkgconfig
+ SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
+ SRC_URI[md5sum] = "24c9eb300662ba6cff0152de89bd9ec0"
+ SRC_URI[sha256sum] = "0857bffece4e8ddfa7f721dd9ca63b4c78de345ac9ae2faebf04062cacba3780"
++
++# http://errors.yoctoproject.org/Errors/Details/68616/
++PNBLACKLIST[libqmi] ?= "BROKEN: fails to build with gcc-6"
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.12.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.12.bb
+index a173e69..00b85ff 100644
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.12.bb
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.12.bb
+@@ -17,6 +17,8 @@ SRC_URI[sha256sum] = "7ef5035375a953b285a742591df0a65fd442f4641ce4d8f4392a41d6d6
  
- FILES_${PN}-dbg += "${libdir}/gimp/2.0/*/.debug"
- FILES_${PN}  += "${datadir}/appdata"
-+
-+PNBLACKLIST[gimp] ?= "Depends on broken poppler"
-diff --git a/meta-oe/recipes-support/poppler/poppler_0.43.0.bb b/meta-oe/recipes-support/poppler/poppler_0.43.0.bb
-index 95cd5e5..743e0aa 100644
---- a/meta-oe/recipes-support/poppler/poppler_0.43.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_0.43.0.bb
-@@ -53,3 +53,6 @@ FILES_libpoppler = "${libdir}/libpoppler.so.*"
- FILES_libpoppler-glib = "${libdir}/libpoppler-glib.so.*"
+ S = "${WORKDIR}/ModemManager-${PV}"
  
- RDEPENDS_libpoppler = "poppler-data"
++PNBLACKLIST[modemmanager] ?= "Depends on broken libqmi"
 +
-+# http://errors.yoctoproject.org/Errors/Details/68605/
-+PNBLACKLIST[poppler] ?= "BROKEN: fails to build with gcc-6"
-diff --git a/meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb b/meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb
-index 4ca21a6..3748a06 100644
---- a/meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb
-+++ b/meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb
-@@ -17,3 +17,5 @@ SRC_URI[sha256sum] = "60114431eac8db6bb6ce18bd38f1630cccb684375b97a445a1b6fd6198
- EXTRA_OECONF = "--disable-gtk3"
+ PACKAGECONFIG ??= "mbim qmi polkit \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
+ "
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
+index b6b73ad..e1413b0 100644
+--- a/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
++++ b/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
+@@ -33,3 +33,5 @@ do_install_append () {
+ 	ln -sf thrift ${D}/${bindir}/thrift-compiler
+ }
  
- FILES_${PN} += "${datadir}/glib-2.0/schemas"
++# http://errors.yoctoproject.org/Errors/Details/68622/
++PNBLACKLIST[thrift] ?= "BROKEN: fails to build with gcc-6"
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb b/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
+index f7adf4c..65617fa 100644
+--- a/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
++++ b/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
+@@ -28,3 +28,5 @@ do_configure() {
+ do_install() {
+     oe_runmake prefix=${D}/usr PPPDIR=${D}/etc/ppp/peers install
+ }
 +
-+PNBLACKLIST[mousepad] ?= "Depends on broken gtksourceview2"
++PNBLACKLIST[wvdial] ?= "Depends on broken wvstreams"
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+index 6199a2f..8d86448 100644
+--- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+@@ -46,3 +46,6 @@ FILES_libwvstreams-extras-dbg = "${libdir}/.debug/libwvbase.so.* ${libdir}/.debu
+ 
+ FILES_${PN}-valgrind = "${libdir}/valgrind/wvstreams.supp"
+ RDEPENDS_${PN} += "perl"
++
++# http://errors.yoctoproject.org/Errors/Details/68614/
++PNBLACKLIST[wvstreams] ?= "BROKEN: fails to build with gcc-6"
+diff --git a/meta-oe/recipes-devtools/dt/dt_18.32.bb b/meta-oe/recipes-devtools/dt/dt_18.32.bb
+index 9688d02..d472fab 100644
+--- a/meta-oe/recipes-devtools/dt/dt_18.32.bb
++++ b/meta-oe/recipes-devtools/dt/dt_18.32.bb
+@@ -45,3 +45,5 @@ do_install() {
+ }
+ 
+ RDEPENDS_${PN} += "tcsh"
++
++PNBLACKLIST[dt] ?= "Rdepends on broken tcsh"
+diff --git a/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb b/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
+index 6a3476f..b95f6e3 100644
+--- a/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
++++ b/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
+@@ -82,3 +82,6 @@ INITSCRIPT_PARAMS = "defaults"
+ # threshold.so load.so are also provided by gegl
+ # disk.so is also provided by libgphoto2-camlibs
+ PRIVATE_LIBS = "threshold.so load.so disk.so"
++
++# http://errors.yoctoproject.org/Errors/Details/68629/
++PNBLACKLIST[collectd] ?= "BROKEN: fails to build with glibc-2.24"
+diff --git a/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb b/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
+index 3edbeed..9c6af16 100644
+--- a/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
++++ b/meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb
+@@ -21,3 +21,6 @@ do_configure_append() {
+     # avoid host polution inf pkg-config files
+     sed -i "s:${STAGING_DIR_HOST}::g" `find -name '*.pc'`
+ }
++
++# http://errors.yoctoproject.org/Errors/Details/68615/
++PNBLACKLIST[gtkmathview] ?= "BROKEN: fails to build with gcc-6"
+diff --git a/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb b/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb
+index 1dd4cb5..5a6f190 100644
+--- a/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb
++++ b/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb
+@@ -47,3 +47,6 @@ pkg_postinst_${PN} () {
+ #!/bin/sh -e
+ echo /usr/bin/tcsh >> $D/etc/shells
+ }
++
++# http://errors.yoctoproject.org/Errors/Details/68619/
++PNBLACKLIST[tcsh] ?= "BROKEN: fails to build with glibc-2.24"
+diff --git a/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb b/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
+index d0f4494..0c5d7b5 100644
+--- a/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
++++ b/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
+@@ -14,3 +14,6 @@ SRC_URI[sha256sum] = "b04b738cec06c6786ceafa86e4735fd8b971c078265754854ef356b037
+ inherit pkgconfig waf distro_features_check
+ # depends on virtual/libx11
+ REQUIRED_DISTRO_FEATURES = "x11"
++
++# http://errors.yoctoproject.org/Errors/Details/68631/
++PNBLACKLIST[glcompbench] ?= "BROKEN: fails to build with gcc-6"
+diff --git a/meta-oe/recipes-navigation/geos/geos_3.4.2.bb b/meta-oe/recipes-navigation/geos/geos_3.4.2.bb
+index 3a9a028..a0c43f3 100644
+--- a/meta-oe/recipes-navigation/geos/geos_3.4.2.bb
++++ b/meta-oe/recipes-navigation/geos/geos_3.4.2.bb
+@@ -4,3 +4,6 @@ SRC_URI += "file://geos-config-Add-includedir-variable.patch"
+ 
+ SRC_URI[md5sum] = "fc5df2d926eb7e67f988a43a92683bae"
+ SRC_URI[sha256sum] = "15e8bfdf7e29087a957b56ac543ea9a80321481cef4d4f63a7b268953ad26c53"
++
++# http://errors.yoctoproject.org/Errors/Details/68613/
++PNBLACKLIST[geos] ?= "BROKEN: fails to build with gcc-6"
+diff --git a/meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb b/meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb
+index d66dc87..fff195a 100644
+--- a/meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb
++++ b/meta-oe/recipes-navigation/libspatialite/libspatialite_4.2.0.bb
+@@ -21,3 +21,5 @@ SRC_URI[md5sum] = "83305ed694a77152120d1f74c5151779"
+ SRC_URI[sha256sum] = "9f138a6854740c7827fdee53845eb1485fce3e805a7aa9fc9151f8046ebd312d"
+ 
+ SRC_URI += "file://geos-config.patch"
++
++PNBLACKLIST[libspatialite] ?= "Depends on broken geos"
+diff --git a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
+index bc88143..f7898ba 100644
+--- a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
++++ b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
+@@ -52,3 +52,5 @@ FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/.debug"
+ FILES_${PN}-dev += "${libdir}/${PYTHON_DIR}/site-packages/_*.la"
+ 
+ FILES_${PN}-staticdev += "${libdir}/${PYTHON_DIR}/site-packages/_*.a"
++
++PNBLACKLIST[geis] ?= "Depends on broken grail"
+diff --git a/meta-oe/recipes-support/canonical-multitouch/grail_3.1.0.bb b/meta-oe/recipes-support/canonical-multitouch/grail_3.1.0.bb
+index 6ea10d6..6c8f295 100644
+--- a/meta-oe/recipes-support/canonical-multitouch/grail_3.1.0.bb
++++ b/meta-oe/recipes-support/canonical-multitouch/grail_3.1.0.bb
+@@ -21,3 +21,6 @@ PACKAGECONFIG[x11] = "--with-x11, --without-x11, libxi"
+ 
+ PACKAGE_BEFORE_PN += "${PN}-test"
+ FILES_${PN}-test = "${bindir}/grail-test*"
++
++# http://errors.yoctoproject.org/Errors/Details/68611/
++PNBLACKLIST[grail] ?= "BROKEN: fails to build with gcc-6"
+diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+index 36876da..c41baec 100644
+--- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
++++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+@@ -146,3 +146,5 @@ do_install_append() {
+     cp -f bin/*-tutorial-* bin/*-example-* ${D}${datadir}/OpenCV/samples/bin/
+ }
+ 
++# http://errors.yoctoproject.org/Errors/Details/68617/
++PNBLACKLIST[opencv] ?= "BROKEN: fails to build with gcc-6"
+diff --git a/meta-oe/recipes-support/openwbem/openwbem_3.2.3.bb b/meta-oe/recipes-support/openwbem/openwbem_3.2.3.bb
+index ed8ef26..93cbdd7 100644
+--- a/meta-oe/recipes-support/openwbem/openwbem_3.2.3.bb
++++ b/meta-oe/recipes-support/openwbem/openwbem_3.2.3.bb
+@@ -110,3 +110,6 @@ FILES_${PN}-dev = " \
+     ${includedir} \
+     ${datadir}/aclocal/openwbem.m4 \
+ "
++
++# http://errors.yoctoproject.org/Errors/Details/68630/
++PNBLACKLIST[openwbem] ?= "BROKEN: fails to build with gcc-6"
+diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb b/meta-oe/recipes-test/fwts/fwts_git.bb
+index b943d6d..cad2ae0 100644
+--- a/meta-oe/recipes-test/fwts/fwts_git.bb
++++ b/meta-oe/recipes-test/fwts/fwts_git.bb
+@@ -22,3 +22,6 @@ FILES_${PN} += "${libdir}/fwts/lib*${SOLIBS}"
+ FILES_${PN}-dev += "${libdir}/fwts/lib*${SOLIBSDEV} ${libdir}/fwts/lib*.la"
+ FILES_${PN}-staticdev += "${libdir}/fwts/lib*a"
+ FILES_${PN}-dbg += "${libdir}/fwts/.debug"
++
++# http://errors.yoctoproject.org/Errors/Details/68633/
++PNBLACKLIST[fwts] ?= "BROKEN: fails to build with gcc-6"
 -- 
 2.8.4
 
