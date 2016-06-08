@@ -1,24 +1,34 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id F23316FFC8
+Return-Path: <praveenreddy.p@hcl.com>
+Received: from GWS07.hcl.com (gws07.hcl.com [192.8.186.130])
+	by mail.openembedded.org (Postfix) with ESMTP id BC6DE6FFE8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Jun 2016 03:06:39 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u5836dda005843
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 7 Jun 2016 20:06:39 -0700
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
-	Tue, 7 Jun 2016 20:06:38 -0700
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 7 Jun 2016 23:06:37 -0400
-Message-ID: <1465355197-28010-1-git-send-email-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Wed,  8 Jun 2016 05:21:24 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.26,437,1459794600"; d="scan'208";a="50944716"
+Received: from unknown (HELO CHN-CORP-HT01.CORP.HCL.IN) ([10.249.2.33])
+	by GWS07.hcl.com with ESMTP/TLS/AES128-SHA; 08 Jun 2016 10:51:19 +0530
+Received: from CHN-HCLT-CSHT07.HCLT.CORP.HCL.IN (10.150.12.32) by
+	CHN-CORP-HT01.CORP.HCL.IN (10.249.2.33) with Microsoft SMTP Server
+	(TLS) id 14.3.235.1; Wed, 8 Jun 2016 10:50:51 +0530
+Received: from CHN-HCLT-MBS08.HCLT.CORP.HCL.IN ([10.150.12.23]) by
+	CHN-HCLT-CSHT07.HCLT.CORP.HCL.IN ([::1]) with mapi id 14.03.0235.001;
+	Wed, 8 Jun 2016 10:50:51 +0530
+From: Praveenreddy Padamati <praveenreddy.p@hcl.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] Reg: Yocto build error( gcc_4.8)
+Thread-Index: AdHAxSJ9pKlPffvASgSwdBL23xQSuf//q0SAgAFUYZI=
+Date: Wed, 8 Jun 2016 05:20:50 +0000
+Message-ID: <09856974BCEE6F48AB378E52E4CAA73C230E9E59@chn-hclt-mbs08.HCLT.CORP.HCL.IN>
+References: <09856974BCEE6F48AB378E52E4CAA73C230E93B3@chn-hclt-mbs08.HCLT.CORP.HCL.IN>,
+	<5756DA11.6040509@mlbassoc.com>
+In-Reply-To: <5756DA11.6040509@mlbassoc.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.151.34.14]
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] krb5: add systemd support
+Cc: "phani.kara@alstom.com" <phani.kara@alstom.com>
+Subject: Re: Reg: Yocto build error( gcc_4.8)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,127 +41,205 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jun 2016 03:06:40 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 08 Jun 2016 05:21:27 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+Hi all,
 
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
- .../krb5/krb5/krb5-admin-server.service            | 14 +++++++++++
- .../krb5/krb5/krb5-kdc.service                     | 13 ++++++++++
- meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb   | 29 +++++++++++++++-------
- 3 files changed, 47 insertions(+), 9 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/krb5-admin-server.service
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/krb5-kdc.service
+Please find the "gcc_4.8.bb, > do_compile failed with exit code".     error=
+ log below
 
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5/krb5-admin-server.service b/meta-oe/recipes-connectivity/krb5/krb5/krb5-admin-server.service
-new file mode 100644
-index 0000000..1b42716
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/krb5/krb5/krb5-admin-server.service
-@@ -0,0 +1,14 @@
-+[Unit]
-+Description=MIT Kerberos KDC administrative daemon
-+After=syslog.target network.target
-+ConditionPathExists=/etc/krb5.conf
-+
-+[Service]
-+Type=forking
-+ExecStartPre=/bin/sh -c "test ! -f /var/log/kadmind.log || test ! -x /sbin/restorecon || /sbin/restorecon -F /var/log/kadmind.log"
-+ExecStart=/usr/sbin/kadmind
-+SuccessExitStatus=1 2 SIGKILL
-+TimeoutStopSec=30
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5/krb5-kdc.service b/meta-oe/recipes-connectivity/krb5/krb5/krb5-kdc.service
-new file mode 100644
-index 0000000..d5e5a95
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/krb5/krb5/krb5-kdc.service
-@@ -0,0 +1,13 @@
-+[Unit]
-+Description=MIT Kerberos KDC
-+After=syslog.target network.target
-+ConditionPathExists=/etc/krb5.conf
-+
-+[Service]
-+Type=forking
-+ExecStart=/usr/sbin/krb5kdc
-+SuccessExitStatus=1 2 SIGKILL
-+TimeoutStopSec=30
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
-index 0c566cb..d60e332 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
-@@ -17,7 +17,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=f64248328d2d9928e1f04158b5243e7f"
- DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
- 
--inherit autotools-brokensep binconfig perlnative
-+inherit autotools-brokensep binconfig perlnative systemd
- 
- SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
- SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar \
-@@ -32,6 +32,8 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar
-            file://etc/init.d/krb5-admin-server \
-            file://etc/default/krb5-kdc \
-            file://etc/default/krb5-admin-server \
-+           file://krb5-kdc.service \
-+           file://krb5-admin-server.service \
-            file://krb5-CVE-2016-3119.patch;striplevel=2 \
-            file://0001-Work-around-uninitialized-warning-in-cc_kcm.c.patch;striplevel=2 \
- "
-@@ -40,6 +42,9 @@ SRC_URI[sha256sum] = "e528c30b0209c741f6f320cb83122ded92f291802b6a1a1dc1a01dcdb3
- 
- S = "${WORKDIR}/${BP}/src"
- 
-+SYSTEMD_SERVICE_${PN} = "krb5-admin-server.service krb5-kdc.service"
-+SYSTEMD_AUTO_ENABLE = "disable"
-+
- PACKAGECONFIG ??= "openssl"
- PACKAGECONFIG[libedit] = "--with-libedit,--without-libedit,libedit"
- PACKAGECONFIG[openssl] = "--with-pkinit-crypto-impl=openssl,,openssl"
-@@ -79,20 +84,26 @@ do_configure() {
- }
- 
- do_install_append() {
--    mkdir -p ${D}/${sysconfdir}/init.d ${D}/${sysconfdir}/default
--    install -m 0755 ${WORKDIR}/etc/init.d/* ${D}/${sysconfdir}/init.d
--    install -m 0644 ${WORKDIR}/etc/default/* ${D}/${sysconfdir}/default
--
-     rm -rf ${D}/${localstatedir}/run
--    mkdir -p ${D}/${sysconfdir}/default/volatiles
--    echo "d root root 0755 ${localstatedir}/run/krb5kdc none" \
--           > ${D}${sysconfdir}/default/volatiles/87_krb5
-+
-+    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-+        mkdir -p ${D}/${sysconfdir}/init.d ${D}/${sysconfdir}/default
-+        install -m 0755 ${WORKDIR}/etc/init.d/* ${D}/${sysconfdir}/init.d
-+        install -m 0644 ${WORKDIR}/etc/default/* ${D}/${sysconfdir}/default
-+
-+        mkdir -p ${D}/${sysconfdir}/default/volatiles
-+        echo "d root root 0755 ${localstatedir}/run/krb5kdc none" \
-+              > ${D}${sysconfdir}/default/volatiles/87_krb5
-+    fi
-     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-         install -d ${D}${sysconfdir}/tmpfiles.d
-         echo "d /run/krb5kdc - - - -" \
-               > ${D}${sysconfdir}/tmpfiles.d/krb5.conf
--    fi
- 
-+        install -d ${D}${systemd_unitdir}/system
-+        install -m 0644 ${WORKDIR}/krb5-admin-server.service ${D}${systemd_unitdir}/system
-+        install -m 0644 ${WORKDIR}/krb5-kdc.service ${D}${systemd_unitdir}/system
-+    fi
- }
- 
- pkg_postinst_${PN} () {
--- 
-2.8.1
+
+HCL-Desktop:~/fsl-release-bsp/build$ bitbake core-image-sato
+Parsing recipes: 100% |####################################################=
+###########################################| Time: 00:01:30
+Parsing of 1748 .bb files complete (0 cached, 1748 parsed). 2192 targets, 8=
+4 skipped, 1 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+NOTE: multiple providers are available for jpeg (jpeg, libjpeg-turbo)
+NOTE: consider defining a PREFERRED_PROVIDER entry to match jpeg
+NOTE: multiple providers are available for jpeg-native (jpeg-native, libjpe=
+g-turbo-native)
+NOTE: consider defining a PREFERRED_PROVIDER entry to match jpeg-native
+
+Build Configuration:
+BB_VERSION        =3D "1.22.0"
+BUILD_SYS         =3D "x86_64-linux"
+NATIVELSBSTRING   =3D "Ubuntu-14.04"
+TARGET_SYS        =3D "arm-poky-linux-gnueabi"
+MACHINE           =3D "imx6dlsabresd"
+DISTRO            =3D "poky"
+DISTRO_VERSION    =3D "1.6.2"
+TUNE_FEATURES     =3D "armv7a vfp neon callconvention-hard cortexa9"
+TARGET_FPU        =3D "vfp-neon"
+meta              =
+
+meta-yocto        =3D "(nobranch):30b8d9378b8260e452552b806610dc9b6fe0b69f"
+meta-oe           =3D "(nobranch):8065dd8456913457a0114ddb2b4bd4842847b2a3"
+meta-fsl-arm      =3D "(nobranch):9bc540eec9a7e280af13371ea70650fcc47ea627"
+meta-fsl-arm-extra =3D "(nobranch):e1085deb3d915d2a95a65cceadc77c6de0dadfb6"
+meta-fsl-demos    =3D "(nobranch):f141c7d1158b8addbd6f1ed047a1b47c2ed85f8f"
+meta-fsl-arm      =
+
+meta-fsl-demos    =3D "(nobranch):0c5367e963b5f7797ded59f835313466b896d7e9"
+meta-browser      =3D "(nobranch):63963cc56c8d0291779693e62b66cb16e5c86883"
+meta-gnome        =
+
+meta-networking   =
+
+meta-ruby         =3D "(nobranch):8065dd8456913457a0114ddb2b4bd4842847b2a3"
+meta-qt5          =3D "(nobranch):c29c317e0f22202bfaa85329a580564bbc179089"
+meta-fsl-qt5      =
+
+meta-fsl-bluez    =3D "(nobranch):0c5367e963b5f7797ded59f835313466b896d7e9"
+
+NOTE: Preparing runqueue
+NOTE: Executing SetScene Tasks
+NOTE: Executing RunQueue Tasks
+ERROR: Function failed: do_compile (log file is located at /home/kumarn/fsl=
+-release-bsp/build/tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/gcc/4.8.=
+2-r0/temp/log.do_compile.4349)
+ERROR: Logfile of failure stored in: /home/kumarn/fsl-release-bsp/build/tmp=
+/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/gcc/4.8.2-r0/temp/log.do_compi=
+le.4349
+Log data follows:
+| DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'common-linux=
+', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
+| DEBUG: Executing shell function do_compile
+| NOTE: make -j 2 ARCH_FLAGS_FOR_TARGET=3D -march=3Darmv7-a -mthumb-interwo=
+rk -mfloat-abi=3Dhard -mfpu=3Dneon -mtune=3Dcortex-a9 -isystem/home/kumarn/=
+fsl-release-bsp/build/tmp/sysroots/imx6dlsabresd/usr/include -I/home/kumarn=
+/fsl-release-bsp/build/tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/gcc/=
+4.8.2-r0/gcc-4.8.2/build.arm-poky-linux-gnueabi.arm-poky-linux-gnueabi/gcc/=
+include/
+| make[1]: Entering directory `/home/kumarn/fsl-release-bsp/build/tmp/work/=
+cortexa9hf-vfp-neon-poky-linux-gnueabi/gcc/4.8.2-r0/gcc-4.8.2/build.arm-pok=
+y-linux-gnueabi.arm-poky-linux-gnueabi'
+| Configuring in ./libiberty
+| Configuring in ./fixincludes
+| configure: loading cache ./config.cache
+| configure: loading cache ./config.cache
+| configure: error: `CC' has changed since the previous run:
+| configure:   former value:  `arm-poky-linux-gnueabi-gcc  -march=3Darmv7-a=
+ -mthumb-interwork -mfloat-abi=3Dhard -mfpu=3Dneon -mtune=3Dcortex-a9 --sys=
+root=3D/home/kumarn/fsl-release-bsp/build/tmp/sysroots/imx6dlsabresd'
+| configure:   current value: `arm-poky-linux-gnueabi-gcc  -march=3Darmv7-a=
+ -mthumb-interwork -mfloat-abi=3Dhard -mfpu=3Dneon -mtune=3Dcortex-a9 --sys=
+root=3D/home/kumarn/fsl-release-bsp/build/tmp/sysroots/imx6qsabresd'
+| configure: error: in `/home/kumarn/fsl-release-bsp/build/tmp/work/cortexa=
+9hf-vfp-neon-poky-linux-gnueabi/gcc/4.8.2-r0/gcc-4.8.2/build.arm-poky-linux=
+-gnueabi.arm-poky-linux-gnueabi/fixincludes':
+| configure: error: changes in the environment can compromise the build
+| configure: error: run `make distclean' and/or `rm ./config.cache' and sta=
+rt over
+| configure: error: `CC' has changed since the previous run:
+| configure:   former value:  `arm-poky-linux-gnueabi-gcc  -march=3Darmv7-a=
+ -mthumb-interwork -mfloat-abi=3Dhard -mfpu=3Dneon -mtune=3Dcortex-a9 --sys=
+root=3D/home/kumarn/fsl-release-bsp/build/tmp/sysroots/imx6dlsabresd'
+| configure:   current value: `arm-poky-linux-gnueabi-gcc  -march=3Darmv7-a=
+ -mthumb-interwork -mfloat-abi=3Dhard -mfpu=3Dneon -mtune=3Dcortex-a9 --sys=
+root=3D/home/kumarn/fsl-release-bsp/build/tmp/sysroots/imx6qsabresd'
+| configure: error: in `/home/kumarn/fsl-release-bsp/build/tmp/work/cortexa=
+9hf-vfp-neon-poky-linux-gnueabi/gcc/4.8.2-r0/gcc-4.8.2/build.arm-poky-linux=
+-gnueabi.arm-poky-linux-gnueabi/libiberty':
+| configure: error: changes in the environment can compromise the build
+| configure: error: run `make distclean' and/or `rm ./config.cache' and sta=
+rt over
+| make[1]: *** [configure-fixincludes] Error 1
+| make[1]: *** Waiting for unfinished jobs....
+| make[1]: *** [configure-libiberty] Error 1
+| make[1]: Leaving directory `/home/kumarn/fsl-release-bsp/build/tmp/work/c=
+ortexa9hf-vfp-neon-poky-linux-gnueabi/gcc/4.8.2-r0/gcc-4.8.2/build.arm-poky=
+-linux-gnueabi.arm-poky-linux-gnueabi'
+| make: *** [all] Error 2
+| ERROR: oe_runmake failed
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_compile (log file is located at /home/kumarn/f=
+sl-release-bsp/build/tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/gcc/4.=
+8.2-r0/temp/log.do_compile.4349)
+ERROR: Task 3578 (/home/kumarn/fsl-release-bsp/sources/poky/meta/recipes-de=
+vtools/gcc/gcc_4.8.bb, do_compile) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 3317 tasks of which 3188 didn't need to be r=
+erun and 1 failed.
+Waiting for 0 running tasks to finish:
+
+Summary: 1 task failed:
+  /home/kumarn/fsl-release-bsp/sources/poky/meta/recipes-devtools/gcc/gcc_4=
+.8.bb, do_compile
+Summary: There was 1 ERROR message shown, returning a non-zero exit code.
+
+
+
+Thanks & Regards
+Praveen Reddy P
+_  _______________________________________
+From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
+-bounces@lists.openembedded.org] on behalf of Gary Thomas [gary@mlbassoc.co=
+m]
+Sent: Tuesday, June 07, 2016 7:58 PM
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] Reg: Yocto build error( gcc_4.8)
+
+On 2016-06-07 16:03, Praveenreddy Padamati wrote:
+> Hi all,
+>  ""gccgccgcc_4.8.bb, > do_compile failed with exit code".  ""gccgccgcc_4.=
+8.bb, > do_compile failed with exit code".  ""gccgccgcc_4.8.bb, > do_compil=
+e failed with exit code".      ""gccgccgcc_4.8.bb, > do_compile failed with=
+ exit code".""gccgccgcc_4.8.bb, > do_compile failed with exit code".""gccgc=
+cgcc_4.8.bb, > do_compile failed with exit code".
+> We are compiling the yocto build system with "bitbake core-image-sato" co=
+mmand. We are facing one problem. It is not compiling, it is showing "gcc_4=
+.8.bb, > do_compile failed with exit code".
+> Please do the needful.
+
+You'll need to provide a LOT more info to be able to get help.
+What version of Yocto (OE-core, Poky, etc), along with any
+extra layers you are using.  Also GCCCC/4.8 has been gone for
+quite some time so you must be using a very old branch/release.
+We'll also need to know your build host, $DISTRO, $MACHINE, etc.
+These are all printed when you run bitbake.
+
+A detailed log (send it to postbin if it's very big) will also
+help you get the aid you need.
+
+--
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
+--
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+::DISCLAIMER::
+---------------------------------------------------------------------------=
+-------------------------------------------------------------------------
+
+The contents of this e-mail and any attachment(s) are confidential and inte=
+nded for the named recipient(s) only.
+E-mail transmission is not guaranteed to be secure or error-free as informa=
+tion could be intercepted, corrupted,
+lost, destroyed, arrive late or incomplete, or may contain viruses in trans=
+mission. The e mail and its contents
+(with or without referred errors) shall therefore not attach any liability =
+on the originator or HCL or its affiliates.
+Views or opinions, if any, presented in this email are solely those of the =
+author and may not necessarily reflect the
+views or opinions of HCL or its affiliates. Any form of reproduction, disse=
+mination, copying, disclosure, modification,
+distribution and / or publication of this message without the prior written=
+ consent of authorized representative of
+HCL is strictly prohibited. If you have received this email in error please=
+ delete it and notify the sender immediately.
+Before opening any email and/or attachments, please check them for viruses =
+and other defects.
+
+---------------------------------------------------------------------------=
+-------------------------------------------------------------------------
 
 
