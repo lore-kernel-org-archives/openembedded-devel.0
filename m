@@ -1,36 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-pa0-f66.google.com (mail-pa0-f66.google.com
-	[209.85.220.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 714CD6FEFE
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 250BE6FF23
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Jun 2016 18:22:59 +0000 (UTC)
-Received: by mail-pa0-f66.google.com with SMTP id fg1so1018668pad.3
+	Wed,  8 Jun 2016 19:14:00 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id 62so1149395pfd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Jun 2016 11:23:00 -0700 (PDT)
+	Wed, 08 Jun 2016 12:14:01 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=98UkQ8/ccoMmCOlV71L3v8J5KVQWurAC2v9bTDC48GM=;
-	b=e4J9huy/nKxsllks3/U9RCu92OZo38OzQkBvWsCYZsZh57HztjFlHbdkuz0ezr2Poh
-	hsTYhqYv7Km3N63d3mr3PL2MJr/MSDAWMHL5WPw6Q23C4iwMoeu6xVCOvYR/86t7chws
-	/uhsFNIE1313vSIKhpdcJSZS9nIOdIsNVtTlW32eHDlyf8oDRVTnli1s28j7rmLPATsT
-	yMjTMjSFJ5ch/ohVfNA+hzWkc/DnO947qEieFRsfmFGLVdwrPkRKlwibVwfIwakV0djm
-	1g7sxNRFhHc5hWPu8sHK+2h/axHTxHPf3n3QOojjh2WsbHgJfgu5+24AaQHB1ScQcHzl
-	yOsg==
-X-Gm-Message-State: ALyK8tJ9aOqwQb4rjo+nkb0iGf9h9+OhvyCbB2r7OmK0rApjyi4ESmGZnab+Verae3p+ZQ==
-X-Received: by 10.66.84.164 with SMTP id a4mr7080368paz.90.1465410180292;
-	Wed, 08 Jun 2016 11:23:00 -0700 (PDT)
+	bh=6LYwuIiDEeOKSoKVzRBcGb4v+dSLeEQmah+LNo2tUIc=;
+	b=IRWB1ThYenfNHyKiA02Rds2+ByF9VOxFaGwFyWig5U1AH1EWqWfD4bavM3LMFsovMU
+	oLaPMd8xYvQ9LoO4PYh/+5qNEw+2/ZtRyPlGn0QXRgVSRZQTvI8QmYmshHBGihzeeADp
+	dNN+vJ1e1tNetb33bpD+1ZB2omHxOe3Ih0+hZ6RdY3UcXao37qqheN2XDX0rqoo+AYt3
+	AOgAR/9bWXSd3KgJnWRBkjXXpESFZMxjgIuZ2O8pI5IV+Rd1OEYa2oi+67VTPSnbAOt/
+	Sy9LP37s1PcGsbsODxzMRpi6GbnAcQ6cRL08vAA6UnPWUoyiCxku504qPMyq3GS0cMxe
+	nQmw==
+X-Gm-Message-State: ALyK8tI9Il1cm/Cri+Y9cyFTMcIurYDmSMMbDuhCQyrdMfWqk3euzbCLf/1vLdWuQmxR5w==
+X-Received: by 10.98.192.83 with SMTP id x80mr7408441pff.88.1465413241003;
+	Wed, 08 Jun 2016 12:14:01 -0700 (PDT)
 Received: from localhost.localdomain ([192.55.54.58])
-	by smtp.gmail.com with ESMTPSA id ql1sm4099037pac.2.2016.06.08.11.22.59
+	by smtp.gmail.com with ESMTPSA id m1sm4079815pab.46.2016.06.08.12.13.59
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 08 Jun 2016 11:22:59 -0700 (PDT)
+	Wed, 08 Jun 2016 12:14:00 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Jun 2016 14:22:50 -0400
-Message-Id: <1465410170-17226-1-git-send-email-derek@asterius.io>
+Date: Wed,  8 Jun 2016 15:13:50 -0400
+Message-Id: <1465413230-10555-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-oe][PATCH] tcsh: fix the wait definition to support gcc6
+Subject: [meta-gpe][PATCH] fbreader: fix return code issue on gcc6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,63 +43,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jun 2016 18:23:01 -0000
+X-List-Received-Date: Wed, 08 Jun 2016 19:14:01 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-extended/tcsh/files/fix-gcc6-wait-union.patch | 11 +++++++++++
- meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb                 | 10 +++++++---
- 2 files changed, 18 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-extended/tcsh/files/fix-gcc6-wait-union.patch
+ .../fbreader/fbreader-0.12.10/fix-return-code-gcc6.patch      | 11 +++++++++++
+ meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb         |  3 ++-
+ 2 files changed, 13 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gpe/recipes-support/fbreader/fbreader-0.12.10/fix-return-code-gcc6.patch
 
-diff --git a/meta-oe/recipes-extended/tcsh/files/fix-gcc6-wait-union.patch b/meta-oe/recipes-extended/tcsh/files/fix-gcc6-wait-union.patch
+diff --git a/meta-gpe/recipes-support/fbreader/fbreader-0.12.10/fix-return-code-gcc6.patch b/meta-gpe/recipes-support/fbreader/fbreader-0.12.10/fix-return-code-gcc6.patch
 new file mode 100644
-index 0000000..acc2ce9
+index 0000000..97ab4d3
 --- /dev/null
-+++ b/meta-oe/recipes-extended/tcsh/files/fix-gcc6-wait-union.patch
++++ b/meta-gpe/recipes-support/fbreader/fbreader-0.12.10/fix-return-code-gcc6.patch
 @@ -0,0 +1,11 @@
-+--- tcsh-6.18.01/sh.proc.c.orig	2016-06-08 16:11:02.902326725 +0000
-++++ tcsh-6.18.01/sh.proc.c	2016-06-08 16:38:22.150304901 +0000
-+@@ -48,7 +48,7 @@
-+ #endif /* aiws */
++--- fbreader-0.12.10/fbreader/src/database/booksdb/BooksDB.cpp.orig	2016-06-08 14:54:04.206196501 -0400
+++++ fbreader-0.12.10/fbreader/src/database/booksdb/BooksDB.cpp	2016-06-08 14:54:17.686196322 -0400
++@@ -145,7 +145,7 @@
 + 
-+ #if defined(_BSD) || (defined(IRIS4D) && __STDC__) || defined(__lucid) || defined(__linux__) || defined(__GNU__) || defined(__GLIBC__)
-+-# if !defined(__ANDROID__)
-++# if !defined(__ANDROID__) && !defined(__GLIBC__)
-+ #  define BSDWAIT
-+ # endif
-+ #endif /* _BSD || (IRIS4D && __STDC__) || __lucid || glibc */
-diff --git a/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb b/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb
-index 1dd4cb5..d7a7fd4 100644
---- a/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb
-+++ b/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb
-@@ -10,7 +10,8 @@ SECTION = "base"
- DEPENDS = "ncurses gettext-native"
- SRC_URI = " \
-     ${DEBIAN_MIRROR}/main/t/tcsh/tcsh_${PV}.orig.tar.gz;name=tarball \
--    ${DEBIAN_MIRROR}/main/t/tcsh/tcsh_${PV}-2.diff.gz;name=diffs \
-+    ${DEBIAN_MIRROR}/main/t/tcsh/tcsh_${PV}-2.diff.gz;name=diffs2 \
-+    ${DEBIAN_MIRROR}/main/t/tcsh/tcsh_${PV}-5.diff.gz;name=diffs5 \
-     file://01_build.1.patch \
-     file://01_build.2.patch \
-     file://01_build.3.patch \
-@@ -21,11 +22,14 @@ SRC_URI = " \
-     file://12_unknown_lscolors.patch \
-     file://tcsh-6.17.02-multibyte.patch \
-     file://disable-broken-test.patch \
-+    file://fix-gcc6-wait-union.patch \
- "
- SRC_URI[tarball.md5sum] = "6eed09dbd4223ab5b6955378450d228a"
- SRC_URI[tarball.sha256sum] = "d81ca27851f3e8545666399b4bcf25433e602a195113b3f7c73886fef84c9fa8"
--SRC_URI[diffs.md5sum] = "ea39b818b624aca49ebf2cd2708d6ff9"
--SRC_URI[diffs.sha256sum] = "95b0c1a339b745c47c5d2f9d02c22a71597462e2e882b51614a9d1f75bd3d16c"
-+SRC_URI[diffs2.md5sum] = "ea39b818b624aca49ebf2cd2708d6ff9"
-+SRC_URI[diffs2.sha256sum] = "95b0c1a339b745c47c5d2f9d02c22a71597462e2e882b51614a9d1f75bd3d16c"
-+SRC_URI[diffs5.md5sum] = "d536c12a02dc48c332cc472b86927319"
-+SRC_URI[diffs5.sha256sum] = "7548d64bf996548bfbc13f3e0959fd2e8455f8375381a31da67d79554aabc7af"
++ 	myFindFileId->setFileName(fileName);
++ 	if (!myFindFileId->run()) {
++-		return false;
+++		return 0;
++ 	}
++ 	((DBIntValue&)*myLoadBook->parameter("@file_id").value()) = myFindFileId->fileId();
++ 	shared_ptr<DBDataReader> reader = myLoadBook->executeReader();
+diff --git a/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb b/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
+index 1487f11..f8ecc93 100644
+--- a/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
++++ b/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
+@@ -10,7 +10,8 @@ PR = "r1"
+ SRC_URI = "http://www.fbreader.org/fbreader-sources-${PV}.tgz \
+ file://Makefile.patch \
+ file://gcc45.patch \
+-file://fix-cflags-fribidi.patch"
++file://fix-cflags-fribidi.patch \
++file://fix-return-code-gcc6.patch"
  
- inherit autotools
- 
+ # Set the defaults
+ READER_RESOLUTION ?= "1024x600"
 -- 
 1.9.1
 
