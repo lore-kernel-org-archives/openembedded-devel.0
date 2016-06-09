@@ -1,48 +1,44 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E642C6FF9B
+Return-Path: <net147@gmail.com>
+Received: from mail-it0-f66.google.com (mail-it0-f66.google.com
+	[209.85.214.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 0527360796
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jun 2016 12:28:36 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id r5so10323187wmr.0
+	Thu,  9 Jun 2016 14:00:43 +0000 (UTC)
+Received: by mail-it0-f66.google.com with SMTP id h190so5233766ith.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Jun 2016 05:28:37 -0700 (PDT)
+	Thu, 09 Jun 2016 07:00:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=QyrOFAQKOVt6HuVfLyVs8ENtMLtJ/nv1l+Bhku5UTB8=;
-	b=RB6pv8U/hnsKsQ+bhEkVC9B3+wF5jW/9I++hc7s1uk51e1DS466R6x2TyOkogSh0d5
-	mhCFq7Ft103Q92RJARSL1N9Ei/XNzH8/MnaE0u6zDL1lMi+oviAoMZkRajeTGbUXt7Dr
-	AaLCySjVJ94YGeQbDo8AkpoETtGBhI9TlLlCb0U9Qz2Pze4xwXPlpLtFzO6TM/ElMb3L
-	Wg1gcS4FU/jRuZ0lKjVQCY9zPLaCSHvgoRbpWqZhqoRHmvq1sA/nMBBahodXYW7Cuigt
-	NfzTJEudR38cyebs3eyykDGQW02lshk59OcVdZ3sqIHbcgK4KjqMHjQXae4JY/9IeLfI
-	brhg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=9uprJ0bJvRsVqb4+6ucqvOXMiOEQLSqFhQB7BXOCU5c=;
+	b=uEoMOyngy357L0Q39mu9COR3hjtNRqGnCSIEH0U+9o37LQiHGGy/0lE+Q6J90gCEhn
+	x2xAfz7bYHpIfH42ogaBcVl6btIx24PIUedZCYFC4kZuh400aMt2/q1LDuXw3eFNHxRi
+	MpCqSkG7WBj/m6y3zuf2t/g0bhazaOpweEIYurlty54DsQgV46xgOcFJbnsktV5/nxEP
+	Kv1Lsy30b+Nrc1nLUdkoPd5W3tMA32fvCcK3l+V3ihQC34THBWSf5d7hwp4VjmS5mYZs
+	iE3yMWvEpAvKuTtEAHONhkPVy9BY6HUrHyIG5bhLEseiKdyv0jF61+81kIK7IC8dzy5Y
+	UH4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=QyrOFAQKOVt6HuVfLyVs8ENtMLtJ/nv1l+Bhku5UTB8=;
-	b=i5W2/DQADliLjbMmFA2K40MbYW3JNt3XeZAVQ6h/WNQ+gA/zAMHkKGyeJXxRRkLnXv
-	WVpgn/tN+zJkbWRS7TCRyVhKnjAGPmEEwIfGUtethrfnmE8jBUjkLIn9SkjuLv0qVt+u
-	R8sH0ixM4U24Pp4426YYV60FImO1nOC5PgM1ogXLHrfioJ7mt0aRYRwg0vyoDiry8WFA
-	J2ly3wIkPeuPSVpab4UljMX0Q06HklNQnxdemYV+gJl0VBVEU/+CH6YBaH+UdMREuzzP
-	T7+YeKiMhmGUFlmsgKK3JZNxBGjLp3F0gSO4mgfHHVDf4I3jd8Dz0cHqr3Dlk6q7sxJc
-	aipw==
-X-Gm-Message-State: ALyK8tISAYmiiHBXHbAGGduf47PBbYrpwMlPYesR3sgXHNy2Ispz6sprXvCBAn+lgAjNrA==
-X-Received: by 10.194.79.168 with SMTP id k8mr9452760wjx.52.1465475317155;
-	Thu, 09 Jun 2016 05:28:37 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	dj4sm6841458wjc.13.2016.06.09.05.28.36
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 09 Jun 2016 05:28:36 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 Jun 2016 14:29:00 +0200
-Message-Id: <20160609122900.12978-2-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.8.4
-In-Reply-To: <20160609122900.12978-1-Martin.Jansa@gmail.com>
-References: <20160609122900.12978-1-Martin.Jansa@gmail.com>
-Subject: [PATCHv2 2/2] elementary, evas-generic-loaders: Drop poppler dependency
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=9uprJ0bJvRsVqb4+6ucqvOXMiOEQLSqFhQB7BXOCU5c=;
+	b=GhIlZP4G+l/KquOxX1+d+wXvj+QscjxNnVn5WOKKHIcofz4zp21ELa3NZPJwGHKkdC
+	jNhZK/RHyxdLRIy6ttyJu9M3EpDswrCKQrsl5BINYblf3hBZ+1WzxfG1ELLc1Dp+CBRv
+	UerwZbxAa0c34agiFwccqHEwe/I7NpFDCaqnpfsn60MFGzjYfRs31pCfZbbeuJh++9Ez
+	4c/YQ8WAuTKZvM8kwcx1J7ZJf+HqtM3Jjv0Y6gfp8zlFTpnFl0k47viwZkYWFR0mkMLY
+	xZC2iKAVa9tuNdqGYDLtxMNiAqGMYoFBvxLpO1ICDkTtuftmANE9zK/5FVFK3vw61BZO
+	soBA==
+X-Gm-Message-State: ALyK8tL5jAw1n2KqD4v86f1DZdqtEHNRAmSjmd8ajiBBfP66KRV+UJujPwkKfHHH3QhShn6M6pdnSFzzfzI4lg==
+X-Received: by 10.36.233.68 with SMTP id f65mr21921929ith.19.1465480841758;
+	Thu, 09 Jun 2016 07:00:41 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.36.209.71 with HTTP; Thu, 9 Jun 2016 07:00:40 -0700 (PDT)
+In-Reply-To: <20160608140019.6787-1-Martin.Jansa@gmail.com>
+References: <20160608140019.6787-1-Martin.Jansa@gmail.com>
+From: Jonathan Liu <net147@gmail.com>
+Date: Fri, 10 Jun 2016 00:00:40 +1000
+Message-ID: <CANwerB1HUzfkg9Yzn-7aMcW5AvKzXz2mdnhbF8F75cra8Fa0eA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-qt5 1/2] qtcharts: Add dependency on qtmultimedia
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,61 +51,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jun 2016 12:28:38 -0000
+X-List-Received-Date: Thu, 09 Jun 2016 14:00:44 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* elementary doesn't seem to use poppler at all
-* add PACKAGECONFIG for poppler in evas-generic-loaders and disable
-  it by default as ATM poppler is broken
+On 9 June 2016 at 00:00, Martin Jansa <martin.jansa@gmail.com> wrote:
+> * fixes QA:
+>   qtcharts-5.6.99+5.7.0-beta+gitAUTOINC+8a78184181: qtcharts-examples rdepends on qtmultimedia, but it isn't a build dependency, missing qtmultimedia in DEPENDS or PACKAGECONFIG? [build-deps]
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  recipes-qt/qt5/qtcharts_git.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/recipes-qt/qt5/qtcharts_git.bb b/recipes-qt/qt5/qtcharts_git.bb
+> index 5aaddc9..99d1471 100644
+> --- a/recipes-qt/qt5/qtcharts_git.bb
+> +++ b/recipes-qt/qt5/qtcharts_git.bb
+> @@ -6,6 +6,6 @@ LIC_FILES_CHKSUM = " \
+>      file://LICENSE.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
+>  "
+>
+> -DEPENDS += "qtbase qtdeclarative"
+> +DEPENDS += "qtbase qtdeclarative qtmultimedia"
+>
+>  SRCREV = "8a781841812a42ed728a76c0dcdcaa6196eac44e"
+> --
+> 2.8.4
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-efl/recipes-efl/efl/elementary.inc           | 2 +-
- meta-efl/recipes-efl/efl/evas-generic-loaders.inc | 6 ++++--
- 2 files changed, 5 insertions(+), 3 deletions(-)
+Looks good to me. Though qtmultimedia is only needed if the "examples"
+PACKAGECONFIG is enabled in either qtbase or qtcharts. I wonder if
+there is a good way to make the dependency conditional on that.
 
-diff --git a/meta-efl/recipes-efl/efl/elementary.inc b/meta-efl/recipes-efl/efl/elementary.inc
-index f0a92df..cec67aa 100644
---- a/meta-efl/recipes-efl/efl/elementary.inc
-+++ b/meta-efl/recipes-efl/efl/elementary.inc
-@@ -1,7 +1,7 @@
- DESCRIPTION = "EFL based widget set for mobile devices"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=a173054a93896e933df53e3382d472c2"
--DEPENDS = "eet-native edje-native elementary-native efreet evas ecore edje eet eldbus ethumb poppler eio"
-+DEPENDS = "eet-native edje-native elementary-native efreet evas ecore edje eet eldbus ethumb eio"
- DEPENDS_class-native = "efl-native"
- 
- inherit efl gettext
-diff --git a/meta-efl/recipes-efl/efl/evas-generic-loaders.inc b/meta-efl/recipes-efl/efl/evas-generic-loaders.inc
-index 5cd9ec1..d277c11 100644
---- a/meta-efl/recipes-efl/efl/evas-generic-loaders.inc
-+++ b/meta-efl/recipes-efl/efl/evas-generic-loaders.inc
-@@ -1,20 +1,22 @@
- DESCRIPTION = "Evas generic loaders"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=a87563ed30add2b0e3460272d3138a00"
--DEPENDS = "eina poppler librsvg cairo"
-+DEPENDS = "eina librsvg cairo"
- 
- inherit efl
- 
- SRCNAME = "evas_generic_loaders"
- 
- EXTRA_OECONF = " \
--    --enable-poppler \
-     --enable-svg \
-     --disable-gstreamer \
-     --disable-libraw \
-     --disable-spectre \
- "
- 
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[poppler] = "--enable-poppler,--disable-poppler,poppler"
-+
- PACKAGESPLITFUNCS_prepend = "split_evas_loader_packages "
- 
- python split_evas_loader_packages () {
--- 
-2.8.4
-
+Regards,
+Jonathan
 
