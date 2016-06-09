@@ -1,54 +1,60 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-it0-f50.google.com (mail-it0-f50.google.com
-	[209.85.214.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 6489D6612C
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jun 2016 16:36:50 +0000 (UTC)
-Received: by mail-it0-f50.google.com with SMTP id a5so42320163ita.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Jun 2016 09:36:52 -0700 (PDT)
+Return-Path: <kergoth@gmail.com>
+Received: from mail-it0-f66.google.com (mail-it0-f66.google.com
+	[209.85.214.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 450FB60667;
+	Thu,  9 Jun 2016 17:02:48 +0000 (UTC)
+Received: by mail-it0-f66.google.com with SMTP id z123so5912787itg.2;
+	Thu, 09 Jun 2016 10:02:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc;
+	bh=ilzvZkNQ+sX99WpiAQifbzc9DFQF1jc4AJI0bPZMnCs=;
+	b=wZH+MmaZlTzEX2My2wXo5eHZwv8zSOgCv3H6AeuzRZ9WJKcNieN1aeNHp6yDOvkLSq
+	07eG1OhMFOxY+0msCWK+mpM9JndAkufBM6AHvEi4Xz4pkoGyS8mrylT9RRkjGBj5X6FS
+	uAtBxCKpbo/d34w//iW/inRIgJRrvpi/0o044D55lYjS2kpCvgpz8avo0kqUg4W0UPwp
+	Ge+4uet48V+ZFsIkbBoDdwwCD1/vgFO5O6D5Y3dvhfTewEU9QzvPxVTamk2Ro18lHcTt
+	f/tlNPKf4UCMAHqpkuCCN8R7khHff7ufV+z9FAOXpRsneISjXc3GNXLX5zfbI+MCJeY2
+	wB+Q==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=Nf2mA7/Da5idcen5RzOpq20fx0Vc4TwLkDKk4t/4bCo=;
-	b=OtAQqgJNriWwrpuU0jR7J9DKJDYGODTlDjROevZKgkxHhWIhEDtfKzs/t3ONGx+ai3
-	Dteg+9X0BJp9fke8JOlLeeHzCJgRLoCrXMXgIZzEdIwFGIjaky9tnB5mSUrv4ugwgrz3
-	VegT69Y6bLaL8An64hoiTsFgG9mxgcDsoIw7aVsGOko+mRaf8MQou6wQYVUcdcz0ArG6
-	63rdXE1butYaGsPsYEkn9rRW9sZTC6GopMCurRk3vBc+uez3GaxOzDxtEFXobpDZONXN
-	rDdEK6bvdW5W/43m1T5PD/3w8JQZRxHd/f0CSRx4sqy2njzYELKehJgZD4sh/WG8ucaC
-	s3kw==
+	d=kergoth-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc;
+	bh=ilzvZkNQ+sX99WpiAQifbzc9DFQF1jc4AJI0bPZMnCs=;
+	b=deXW4YUN41G2O+mRyg84XQRPOARkGwgDFpBFa16DF0YU+gB6yv8BJyGxnwA8mr/JQ7
+	ukIud5H9opHEyAAW2aRDd/5PFo0cCvzWqtVJIcd3saGRdGAlD8mHCmi/qUcme6rkhrz2
+	50zOoo+iq5itP1HBG8MOAac1jXb64e5CZCiRziLhTA3LFc+muOaMpyxnI1wlGykNv8jF
+	yOIyztrjXhYaXt7hM0LAlD+SFrMAxugWrPNYtb9TPYHGOlvJTbGBdKnM+Efis+hpNiWo
+	y4OodZOIBu8s1LzKyGUBTjHZW5O5MoUkKLORMvTb5YVHL7s0MrYciOV1zqvJsI2B6pg3
+	xxJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=Nf2mA7/Da5idcen5RzOpq20fx0Vc4TwLkDKk4t/4bCo=;
-	b=Wnr5ESjF88Yw0a1TMlR9hYP6q9/Ve3EhNq1GSrm2OfUjXPXMKGTugrhP1HZdz2JHTA
-	wiH+SinisqJf5YbIGffFNGJEcfUG8UJ6MtQHH7P6+ziMJtKv8OIlnRt8B1Wzv5N9dLfX
-	D4AYjlIrbc8TZ8S9TyC4FMWvE+k6NIVEa4AWpd00pImJsBBl0NNtEh0IH8vXIog1/3n4
-	lpldHHM88J/Da40eex/1STViLeQHriJ+IffNNpw6fxtbgxUyaq+YjjZj+v/dXjDkT6w6
-	5ufh63ZaRXbvZfa94G0eghwcBxrYYvkl8ecJE8TZPqAotxK8pfujw8v1Oyy5yZTlQ4Wx
-	e+3w==
-X-Gm-Message-State: ALyK8tLmsQl3qXcl+0v6Tj+ixbljPvOgT/aUxrzkSbDTxZQb7J7RqQgdmwAxOxoEZNoTPYYCA1LYbfkOn5iNYlzS
-X-Received: by 10.36.120.193 with SMTP id p184mr23945017itc.22.1465490211790; 
-	Thu, 09 Jun 2016 09:36:51 -0700 (PDT)
+	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
+	:date:message-id:subject:to:cc;
+	bh=ilzvZkNQ+sX99WpiAQifbzc9DFQF1jc4AJI0bPZMnCs=;
+	b=I9e+vp1dNfxbh6b4mPkaQbhARkitPvyG2WyBQYaam0MjZTPVd5tMMYNcbktcchfvz/
+	xwGMjIGgRlcZEUWBvDP7rWkJIsMOUKxIsLf4kcE17uxvTH/tAzPnXeHXkyrV11b6YmrP
+	ecy3c1ymoUcbvLNhg9XlbnrmTPljfhQgVAFwCjuEobgfheoMU/YurHAzDpV5WpdiaRmd
+	NHQYjLV4d8xyGqwG50+i5IWL4oTPDXxUI4u24WiGhSeZa8fgWpbCPSGKnn/srzb441Dv
+	FQ3k3qVLFVoUA2UJhMWxJNs11j4mZc6M2QLrksF35a+pxOMAtYr8Y6Ehdkd7uvqoTys6
+	XFxg==
+X-Gm-Message-State: ALyK8tLojLB96Oc/E7i/Xc7l0xbSgvS/oyIWQVFuhxuvZU9yYzICYlCL9UBwWnr5EDS/la9+zVXTLO3CzcoI5A==
+X-Received: by 10.36.40.69 with SMTP id h66mr19924236ith.66.1465491769675;
+	Thu, 09 Jun 2016 10:02:49 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.107.162.6 with HTTP; Thu, 9 Jun 2016 09:36:32 -0700 (PDT)
-In-Reply-To: <CAHPquwP2RDW3T5hiizow6=1xJzwgCPDDs=z+OHgaEedcXTh6bg@mail.gmail.com>
-References: <cfce0a18-6762-9da4-1f4a-1969a912bf50@linux.intel.com>
-	<c487579e-eb43-81b5-b888-da9ad493102a@balister.org>
-	<CAJTo0LZnh1+tvznjgKKFrSoP-ie0vMD0m_5AtTEi0DcrpFjX6g@mail.gmail.com>
-	<33320.10.7.198.51.1465487815.squirrel@linux.intel.com>
-	<CAHPquwP2RDW3T5hiizow6=1xJzwgCPDDs=z+OHgaEedcXTh6bg@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 9 Jun 2016 17:36:32 +0100
-Message-ID: <CAJTo0LZhrKJvg=m05_SUPktikELaDRq8gTvvtjfhaj_9Uq+vPw@mail.gmail.com>
-To: Petr Nechaev <petr.nechaev@cogentembedded.com>
+Sender: kergoth@gmail.com
+Received: by 10.79.130.66 with HTTP; Thu, 9 Jun 2016 10:02:30 -0700 (PDT)
+In-Reply-To: <20160609070345.GA27764@jama>
+References: <20160609070345.GA27764@jama>
+From: Christopher Larson <clarson@kergoth.com>
+Date: Thu, 9 Jun 2016 10:02:30 -0700
+X-Google-Sender-Auth: CXIv_dLORzrp18zxQPVTX9MxKtg
+Message-ID: <CABcZAN=DzML_E8PWTf2zB1einsWZm9iyepo6T95eaJdGXmqfHA@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Konstantin Ripak <konstantin.ripak@cogentembedded.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+Cc: Openembedded Discussion <openembedded-devel@lists.openembedded.org>,
 	Patches and discussions about the oe-core layer
 	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] the fate of Vala in OE
+Subject: Re: [OE-core] State of bitbake world 2016-06-07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,20 +67,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jun 2016 16:36:51 -0000
+X-List-Received-Date: Thu, 09 Jun 2016 17:02:49 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On 9 June 2016 at 16:59, Petr Nechaev <petr.nechaev@cogentembedded.com>
+On Thu, Jun 9, 2016 at 12:03 AM, Martin Jansa <martin.jansa@gmail.com>
 wrote:
 
-> We do use Vala for internal gstreamer-related projects so I would
-> volunteer to support it in oe-core.
+> This report includes python3 changes, there are few more failures, but
+> it's hard to see what is new, so I've sent couple PNBLACKLISTs for
+> recipes reported in previous 2 reports which are still failing with
+> glibc-2.24 and gcc-6. Hopefully next report will show only "new" issues
+> caused by python3 switch.
 >
+> == Number of issues - stats ==
+> {| class='wikitable'
+> !|Date               !!colspan='3'|Failed tasks
+>  !!colspan='6'|Failed depencencies                    !!|Signatures
+>     !!colspan='12'|QA !!Comment
+> |-
+> ||              ||qemuarm       ||qemux86       ||qemux86_64
+> ||qemuarm||max||min     ||qemux86||max||min     ||all   ||already-stripped
+>     ||libdir        ||textrel       ||build-deps    ||file-rdeps
+> ||version-going-backwards       ||host-user-contaminated
+> ||installed-vs-shipped  ||unknown-configure-option
+> ||symlink-to-sysroot    ||invalid-pkgconfig     ||pkgname       ||
+> |-
+> ||2016-06-07    ||34    ||40    ||39    ||84    ||38    ||37    ||92
+> ||42    ||41    ||0     ||0             ||0             ||1
+>  ||3             ||18            ||0             ||0             ||0
+>      ||0             ||0             ||0             ||0             ||
+> |}
+>
+> http://www.openembedded.org/wiki/Bitbake_World_Status
 
-Would you volunteer to maintain it in a separate layer if possible?  If
-nothing in core uses it and it can be maintained out of core then I think
-it should be moved out.  Currently, vala support is in oe-core but nothing
-in oe-core uses it... so the autobuilder can't tell if it works.
 
-Ross
+chkconfig-alternatives-native is failing, but natives are excluded from
+world by default. This recipe should only be built if it's the preferred
+update-alternatives-native provider, otherwise you'll hit the conflict that
+your build is hitting. If you're undoing the EXCLUDE_FROM_WORLD for all
+natives, better keep it here. I am surprised the bits that skip
+non-preferred recipes didn't happen here, though.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
