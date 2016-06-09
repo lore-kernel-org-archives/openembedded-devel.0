@@ -1,45 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 49C4B6AC4B
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qg0-f66.google.com (mail-qg0-f66.google.com
+	[209.85.192.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 8CDA46E6B1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Jun 2016 20:56:39 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id m124so5850691wme.3
+	Thu,  9 Jun 2016 01:27:43 +0000 (UTC)
+Received: by mail-qg0-f66.google.com with SMTP id p34so1905991qgp.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Jun 2016 13:56:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=ezSxnYcLiGwBuwslyIe0YEKjUWmHfhnqJaHpIm8zGWw=;
-	b=lppuGMdQAcFVWCDpbyfg4tB3acmg7bZws3QuO/ZfWjUmJh+7UzugKmlVaak49K+uYx
-	JHbJU1dLkFEJ+dYgslQJVD8RjRhS3eSbCfWO73qXZ7MyWgRCEnTkFe1Afi1dQztbC3iF
-	/7iNuNwbycaxQa3jZJg9grWbFhBcWjAZ5VKYI4l1lncKz6i43JD014qZC+n4TmHcW9x8
-	0RebZjR9PH6voC75ULDxEBqY209+IwkExXs5Gm79ExywkHkDpsIarrmNw50wRmHcRQHE
-	Iz3x1HhGM8WnX65hN3s1WZEUwHaTjyayZxbbNKMDKgcH8PTQzrzJ8LnXmBRPPVMOqUUG
-	H9Ag==
+	Wed, 08 Jun 2016 18:27:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=ezSxnYcLiGwBuwslyIe0YEKjUWmHfhnqJaHpIm8zGWw=;
-	b=BSf1NNad/g+Ng7JhherIAhXpO+o4mnbyaTvrI2wj65yKsoa1KHT7QicyupELwb76uJ
-	OM5T0x4NqDtE6HXeIudpFDJsQ6Zy1K357NKPjpnvBjqRTOsErTmJuZM5pjI9j/1uZSEW
-	uftv6iVcgrzaXPIDidZhhtnol0dbqfgXzOeslPETrs+QgA5sWhp8lpAAiTSauKYHHw47
-	e7Bzw/Px4uhw7cgStNqEraSFGPicMn03fyni74zsBsAnq+6D7MCpympG+If2WOgYYU3t
-	1sMipfPLGSKcJr/UNP3yuqV7S6cp1o659jD2EUTg6JlilX+TCxjz4BpyXqqcaBHtqlz3
-	eshw==
-X-Gm-Message-State: ALyK8tLtOm4v83polfD4FzR7U2PXvPOysYyTWuUCHLnBpIVVmTn0v0eRUbOv7GL2KeYSu+hrJ0Ga/g7D4ZHeyw==
-X-Received: by 10.194.142.231 with SMTP id rz7mr5842385wjb.99.1465419399589;
-	Wed, 08 Jun 2016 13:56:39 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.194.60.111 with HTTP; Wed, 8 Jun 2016 13:56:38 -0700 (PDT)
-In-Reply-To: <nj9u25$rs5$1@ger.gmane.org>
-References: <1465288732-2288-1-git-send-email-koen.kooi@linaro.org>
-	<5756B2B0.4020804@mlbassoc.com> <nj9u25$rs5$1@ger.gmane.org>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 8 Jun 2016 22:56:38 +0200
-Message-ID: <CA+chaQf_10Sfow=5+TJRCErKUPtU30MopAenRJ7oRgWoBYUwSA@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-gnome][PATCH 1/2] gnome-vfs 2.24.4: drop useless print
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=OTNDJoM4xZdF32EsqGyuaRHaukiFd2wFXRcnuKADuE4=;
+	b=mwJoeBLzO815B716rRkg3n7kb6MHInPEXqZBmlflyFEHLeAlYdEpQS9C0xrGqWJJN9
+	po8ve2mTAjV4G1itdScCfpduQHcYqSWNbd8OeCAp6B4s50ZfjVy3xejnBBTbmhk9zUnv
+	zcXiBkLQdxjg043/Ld9j5kCT/SeKjozwPZe5UtTEonOApnRk/ivnYvtpXLJDW1s6/6lI
+	4+oIayh1XLi6pYREkB5c6lmpAyhCy6u2UdLlM9q/+lvnFaWZVcvFq/d+eQuG4LAMYUJ/
+	JtM5c/GV7j0sO2c+yrwk8lvBz0G0xyQxNHTbwTaBi5JTEiXk7onZ6ov0Flk3p9PlXMok
+	dn0Q==
+X-Gm-Message-State: ALyK8tIFQgDR1hY1TZIghnReqLPGAxEkekLrBgJD4VFxt471419hzGrYU3cANTbPKOIQZw==
+X-Received: by 10.140.91.202 with SMTP id z68mr2722367qgd.56.1465435663636;
+	Wed, 08 Jun 2016 18:27:43 -0700 (PDT)
+Received: from lnx-dereks-laptop.minotaur.lab
+	(c-73-172-178-168.hsd1.md.comcast.net. [73.172.178.168])
+	by smtp.gmail.com with ESMTPSA id
+	q12sm1069607qkc.27.2016.06.08.18.27.42
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 08 Jun 2016 18:27:43 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  8 Jun 2016 21:27:26 -0400
+Message-Id: <1465435646-3745-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 1.9.1
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-multimedia][PATCH] tvheadend: add CFLAG to ignore misleading indentations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,28 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jun 2016 20:56:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 09 Jun 2016 01:27:45 -0000
 
-You need to search for gnone-vfs, but I've fixed that typo when
-cherry-picking to master-next :).
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-On Wed, Jun 8, 2016 at 10:09 PM, Koen Kooi <koen@dominion.thruhere.net>
-wrote:
+diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+index 65d43c6..9fed042 100644
+--- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
++++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+@@ -14,6 +14,8 @@ PV = "3.3"
+ 
+ S = "${WORKDIR}/git"
+ 
++TARGET_CFLAGS += "-Wno-error=misleading-indentation"
++
+ do_configure() {
+     ./configure --prefix=${prefix} \
+                 --libdir=${libdir} \
+-- 
+1.9.1
 
-> Op 07-06-16 om 13:40 schreef Gary Thomas:
-> > On 2016-06-07 10:38, Koen Kooi wrote:
-> >> This fixes the python3 traceback.
-> >
-> > RP already sent patches for this and the other python3 related issue.
->
-> They didn't show up in patchwork nor in thunderbird search :/
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
