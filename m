@@ -1,54 +1,21 @@
-Return-Path: <mike.looijmans@topicproducts.com>
-Received: from mx18-13.smtp.antispamcloud.com (mx18-13.smtp.antispamcloud.com
-	[207.244.64.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 06686607F8
+Return-Path: <prvs=9628b212d=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E27E60290
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jun 2016 06:06:17 +0000 (UTC)
-Received: from 100-208.ftth.onsbrabantnet.nl ([88.159.208.100]
-	helo=TOP-EX01.TOPIC.LOCAL)
-	by mx18.antispamcloud.com with esmtps (TLSv1:AES256-SHA:256)
-	(Exim 4.85) (envelope-from <mike.looijmans@topicproducts.com>)
-	id 1bBFaA-0004YM-Fq; Fri, 10 Jun 2016 08:06:16 +0200
-Received: from [192.168.80.121] (192.168.80.121) by TOP-EX01.TOPIC.LOCAL
-	(192.168.10.102) with Microsoft SMTP Server id 14.3.224.2;
-	Fri, 10 Jun 2016 08:06:09 +0200
-To: <openembedded-devel@lists.openembedded.org>
-References: <1464860046-15121-1-git-send-email-richard.purdie@linuxfoundation.org>
-	<57568DB8.6010209@topic.nl>
-	<1465307382.13979.78.camel@linuxfoundation.org>
-From: Mike Looijmans <mike.looijmans@topic.nl>
-Organization: TOPIC
-Message-ID: <575A58D1.3070606@topic.nl>
-Date: Fri, 10 Jun 2016 08:06:09 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.8.0
+	Fri, 10 Jun 2016 07:15:09 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: A2A4AgCMaFpX/0oKEKxdhBR9BqcWiAWJcYIPgXoahXmBbRQBAQEBAQEBgQyFFwEtKFo8AQ0FiBUDsxwBhx4Ng3sBAQEHAgEkhieHEIc7HAWYKjSBWIQshikBgXyBZ4dyDIU5hkKBOYdtHoI+GxaBN2wBiQh/AQEB
+X-IPAS-Result: A2A4AgCMaFpX/0oKEKxdhBR9BqcWiAWJcYIPgXoahXmBbRQBAQEBAQEBgQyFFwEtKFo8AQ0FiBUDsxwBhx4Ng3sBAQEHAgEkhieHEIc7HAWYKjSBWIQshikBgXyBZ4dyDIU5hkKBOYdtHoI+GxaBN2wBiQh/AQEB
+From: Richard Leitner <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
+Date: Fri, 10 Jun 2016 09:15:22 +0200
+Message-ID: <1465542922-21002-1-git-send-email-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.1.4
 MIME-Version: 1.0
-In-Reply-To: <1465307382.13979.78.camel@linuxfoundation.org>
-X-Originating-IP: [192.168.80.121]
-X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
-X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
-X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W6KAUC/fjyuDn
-	NXFr4uarw3m8KyO/e3OFX2RUwx7xEEvBqm3RvM5N1UuDkdL5rJuDWYSHbx/2iEXlZ3vyVN/fF+Iu
-	NqWVQJTrKtJ9y7p4b9mIqVXVcArPTKJ173BjamDICPT5v9s5yYGFyGM7BAaP3Xg9i+nEmou2UMHg
-	mE6z+uPpnAH3Z/yWJ/1UVv3cE79AS8/p6qm/+Srh1DpyyOtNC8srclQ9E0taDpYFK2PbcOzXYu/I
-	cQJuWHlbnMOsg605uIsVkmFiKN4g6sbzZ/DG2bYbk+PuJAkSa01TMfeJ1noZd57uU+vYl1kpKtSO
-	Wrva29UU3frYgZ0TR7bi/ToFn8OpyKA69LF1Ge2GaGfxmfqxg/+p2ZjpNnFVhpbuUAsdZ/RlU1v5
-	1vXjaHvNDaZvYntRBOMqkNRCP7fVbbh/uqGqlWnJ+tQkP1HvU99403+oc/e1rVLsLRRzePcb6lVD
-	iRz9D+/9oSt5jUrIaWXjdPQICGSqDH5ZxqCCXyEbbNwy6cMiiH3izwFu+xwdVhZyX5L5g2m8DCGg
-	UHHxn6e6gArzX5NI37q4AO7kJrqw2Qae7o6cW64wNyLmPPFRGqR1pJnckpWaLvahyBjmQxBKOzsM
-	ppduCVf+i9mk5WykwrtPRhC1JeifEZi+kYyqZHU3A+NiHxNXMYbXox8YlpbR9REN2vxcDlHOkrTL
-	QldwJ2dGzJxsPdynu43xqHKIl4dwQzEvuGslKTrRIXcXpFg5ivY=
-X-Report-Abuse-To: spam@mx99.antispamcloud.com
-X-Originating-IP: 88.159.208.100
-X-SpamExperts-Domain: topic.nl
-X-SpamExperts-Username: 88.159.208.100
-Authentication-Results: antispamcloud.com;
-	auth=pass smtp.auth=88.159.208.100@topic.nl
-X-SpamExperts-Outgoing-Class: ham
-X-SpamExperts-Outgoing-Evidence: Combined (0.02)
-X-Recommended-Action: accept
-Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
-Subject: Re: [PATCH 1/3] gitkpkgv: Ensure files are closed
+X-Originating-IP: [172.16.60.30]
+X-ClientProxiedBy: sdex1srv.skidata.net (172.16.10.92) To sdex1srv.skidata.net
+	(172.16.10.92)
+Subject: [meta-networking][jethro][backport][PATCH] samba: add volatile file to support readonly rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,83 +28,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jun 2016 06:06:18 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 10 Jun 2016 07:15:12 -0000
+Content-Type: text/plain
 
-=EF=BB=BFOn 07-06-16 15:49, Richard Purdie wrote:
-> On Tue, 2016-06-07 at 11:02 +0200, Mike Looijmans wrote:
->> =EF=BB=BFLooks like regression in Python itself?
->>
->> In both Python 2 and 3, the file is closed properly if the file
->> object is not
->> being stored:
->>
->>   >>> import os
->>   >>> os.listdir('/proc/self/fd')
->> ['0', '1', '2', '3']
->>   >>> l=3Dopen('/proc/self/stat').readline()
->>   >>> os.listdir('/proc/self/fd')
->> ['0', '1', '2', '3']
->>   >>> f=3Dopen('/proc/self/stat')
->>   >>> os.listdir('/proc/self/fd')
->> ['0', '1', '2', '3', '4']
->>   >>>
->>
->>
->> (file descriptor "3" is the one being used to read the /proc/self/fd
->> directory, "4" is the one used for reading the stat file)
->>
->> The "with" construction should not be needed here. Something else is
->> causing
->> this (e.g. nested function definition or exception handler?).
->
-> $ python2 -Wdefault -c "open('/bin/bash')"
-> $ python3 -Wdefault -c "open('/bin/bash')"
-> -c:1: ResourceWarning: unclosed file <_io.TextIOWrapper name=3D'/bin/bash=
-' mode=3D'r' encoding=3D'UTF-8'>
->
-> Admittedly its not an out the box warning but it is one that seems to
-> be enabled under bitbake. Details in:
->
-> https://bugs.python.org/issue10093
->
-> but the gist of the issue is that relying on the garbage collector to
-> close files is a cpython'ism and other implementations of python may
-> not do this.
->
-> So whilst "with" might not be strictly required, it is recommended.
+This patch adds a volatile file for samba which was removed by the
+update from 3.6.25 to 4.1.12. This file is necessary to build a image
+that uses the read-only-rootfs feature.
 
-Oh dear, looks like's there's been a change of sorts in the Python communit=
-y=20
-and they're now adopting the Java stupidity of "the garbage collector doesn=
-'t=20
-actually work so you'll have to do all your own resource management".
+Backported from master 12e31ce
 
-These are reasons why projects are so reluctant to move from Python 2 to 3.=
-=20
-Python 3 is just a different language.
+Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+---
+ .../recipes-connectivity/samba/samba-4.1.12/volatiles.03_samba         | 3 +++
+ meta-networking/recipes-connectivity/samba/samba_4.1.12.bb             | 2 ++
+ 2 files changed, 5 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12/volatiles.03_samba
 
-Ah well, guess we'll have to live with that. I'm already getting used to=20
-embedded devices running 30MB of software to enable the flashlight...
-
-
-Kind regards,
-
-Mike Looijmans
-System Expert
-
-TOPIC Embedded Products
-Eindhovenseweg 32-C, NL-5683 KH Best
-Postbus 440, NL-5680 AK Best
-Telefoon: +31 (0) 499 33 69 79
-E-mail: mike.looijmans@topicproducts.com
-Website: www.topicproducts.com
-
-Please consider the environment before printing this e-mail
-
-
-
-
+diff --git a/meta-networking/recipes-connectivity/samba/samba-4.1.12/volatiles.03_samba b/meta-networking/recipes-connectivity/samba/samba-4.1.12/volatiles.03_samba
+new file mode 100644
+index 0000000..4bdfa7d
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/samba/samba-4.1.12/volatiles.03_samba
+@@ -0,0 +1,3 @@
++# <type> <owner> <group> <mode> <path> <linksource>
++d root root 0755 /var/log/samba none
++d root root 0755 /var/run/samba none
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
+index 4d2ab66..733821b 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
+@@ -34,6 +34,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
+            file://19-systemd-daemon-is-contained-by-libsystemd.patch \
+            file://20-do-not-import-target-module-while-cross-compile.patch \
+            file://21-add-config-option-without-valgrind.patch \
++           file://volatiles.03_samba \
+           "
+ 
+ SRC_URI[md5sum] = "232016d7581a1ba11e991ec2674553c4"
+@@ -135,6 +136,7 @@ do_install_append() {
+     install -d ${D}${sysconfdir}/samba
+     echo "127.0.0.1 localhost" > ${D}${sysconfdir}/samba/lmhosts
+     install -m644 packaging/LSB/smb.conf ${D}${sysconfdir}/samba/smb.conf
++    install -D -m 644 ${WORKDIR}/volatiles.03_samba ${D}${sysconfdir}/default/volatiles/03_samba
+ 
+     install -d ${D}${libdir}/tmpfiles.d
+     install -m644 packaging/systemd/samba.conf.tmp ${D}${libdir}/tmpfiles.d/samba.conf
+-- 
+2.1.4
 
 
