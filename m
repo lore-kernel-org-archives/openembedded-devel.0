@@ -1,21 +1,39 @@
-Return-Path: <prvs=9628b212d=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E27E60290
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.analogue-micro.com (mail.analogue-micro.com
+	[217.144.149.242])
+	by mail.openembedded.org (Postfix) with ESMTP id 83C2B6080F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jun 2016 07:15:09 +0000 (UTC)
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: A2A4AgCMaFpX/0oKEKxdhBR9BqcWiAWJcYIPgXoahXmBbRQBAQEBAQEBgQyFFwEtKFo8AQ0FiBUDsxwBhx4Ng3sBAQEHAgEkhieHEIc7HAWYKjSBWIQshikBgXyBZ4dyDIU5hkKBOYdtHoI+GxaBN2wBiQh/AQEB
-X-IPAS-Result: A2A4AgCMaFpX/0oKEKxdhBR9BqcWiAWJcYIPgXoahXmBbRQBAQEBAQEBgQyFFwEtKFo8AQ0FiBUDsxwBhx4Ng3sBAQEHAgEkhieHEIc7HAWYKjSBWIQshikBgXyBZ4dyDIU5hkKBOYdtHoI+GxaBN2wBiQh/AQEB
-From: Richard Leitner <richard.leitner@skidata.com>
-To: <openembedded-devel@lists.openembedded.org>, <akuster808@gmail.com>
-Date: Fri, 10 Jun 2016 09:15:22 +0200
-Message-ID: <1465542922-21002-1-git-send-email-richard.leitner@skidata.com>
-X-Mailer: git-send-email 2.1.4
+	Fri, 10 Jun 2016 08:36:37 +0000 (UTC)
+Received: by mail.analogue-micro.com (Postfix, from userid 999)
+	id 9EC2768A01C; Fri, 10 Jun 2016 09:36:37 +0100 (BST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	loki.analogue-micro-ltd.com
+X-Spam-Level: *
+X-Spam-Status: No, score=1.7 required=5.0 tests=ALL_TRUSTED,BAYES_40,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
+	by mail.analogue-micro.com (Postfix) with ESMTP id 507BF68A019;
+	Fri, 10 Jun 2016 09:36:37 +0100 (BST)
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by zeus.mlbassoc.com (Postfix) with ESMTP id CD039674036C;
+	Fri, 10 Jun 2016 10:35:55 +0200 (CEST)
+To: openembedded-devel@lists.openembedded.org
+References: <cfce0a18-6762-9da4-1f4a-1969a912bf50@linux.intel.com>
+	<c487579e-eb43-81b5-b888-da9ad493102a@balister.org>
+	<CAJTo0LZnh1+tvznjgKKFrSoP-ie0vMD0m_5AtTEi0DcrpFjX6g@mail.gmail.com>
+	<33320.10.7.198.51.1465487815.squirrel@linux.intel.com>
+	<CAHPquwP2RDW3T5hiizow6=1xJzwgCPDDs=z+OHgaEedcXTh6bg@mail.gmail.com>
+	<CAJTo0LZhrKJvg=m05_SUPktikELaDRq8gTvvtjfhaj_9Uq+vPw@mail.gmail.com>
+	<20160609181613.GB2586@jama>
+	<CAHPquwPKh0hgOuvHvB0KYVfU0PhtR_sZ8vKO8EgH_YgsZrwtkA@mail.gmail.com>
+From: Gary Thomas <gary@mlbassoc.com>
+Message-ID: <575A7BEB.1060808@mlbassoc.com>
+Date: Fri, 10 Jun 2016 10:35:55 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.8.0
 MIME-Version: 1.0
-X-Originating-IP: [172.16.60.30]
-X-ClientProxiedBy: sdex1srv.skidata.net (172.16.10.92) To sdex1srv.skidata.net
-	(172.16.10.92)
-Subject: [meta-networking][jethro][backport][PATCH] samba: add volatile file to support readonly rootfs
+In-Reply-To: <CAHPquwPKh0hgOuvHvB0KYVfU0PhtR_sZ8vKO8EgH_YgsZrwtkA@mail.gmail.com>
+Subject: Re: [OE-core] the fate of Vala in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,55 +46,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jun 2016 07:15:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 10 Jun 2016 08:36:37 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-This patch adds a volatile file for samba which was removed by the
-update from 3.6.25 to 4.1.12. This file is necessary to build a image
-that uses the read-only-rootfs feature.
+On 2016-06-10 02:04, Petr Nechaev wrote:
+> I can see that libsecret in oe-core depends on vala though for testing only.
+>
+> If moving to meta-oe is community's decision, I will prepare the patch.
+>
 
-Backported from master 12e31ce
+It looks like a lot of things need vala (or more precisely vala-native).
+I just tried a build which included meta-browser (I know this isn't OE-core
+but _is_ very common) and saw this dependency chain:
+"vala-native" -> "libxslt-native" [style=solid]
+"vala-native" -> "glib-2.0-native" [style=solid]
+"vala-native" -> "autoconf-native" [style=solid]
+"vala-native" -> "automake-native" [style=solid]
+"vala-native" -> "libtool-native" [style=solid]
+"vala-native" -> "gnu-config-native" [style=solid]
+"vala-native" -> "pkgconfig-native" [style=solid]
+"vala-native" -> "flex-native" [style=solid]
+"vala-native" -> "bison-native" [style=solid]
 
-Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
----
- .../recipes-connectivity/samba/samba-4.1.12/volatiles.03_samba         | 3 +++
- meta-networking/recipes-connectivity/samba/samba_4.1.12.bb             | 2 ++
- 2 files changed, 5 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/samba/samba-4.1.12/volatiles.03_samba
+In this case, I think vala (vala-native) deserves OE-core status.
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba-4.1.12/volatiles.03_samba b/meta-networking/recipes-connectivity/samba/samba-4.1.12/volatiles.03_samba
-new file mode 100644
-index 0000000..4bdfa7d
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/samba/samba-4.1.12/volatiles.03_samba
-@@ -0,0 +1,3 @@
-+# <type> <owner> <group> <mode> <path> <linksource>
-+d root root 0755 /var/log/samba none
-+d root root 0755 /var/run/samba none
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-index 4d2ab66..733821b 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.1.12.bb
-@@ -34,6 +34,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
-            file://19-systemd-daemon-is-contained-by-libsystemd.patch \
-            file://20-do-not-import-target-module-while-cross-compile.patch \
-            file://21-add-config-option-without-valgrind.patch \
-+           file://volatiles.03_samba \
-           "
- 
- SRC_URI[md5sum] = "232016d7581a1ba11e991ec2674553c4"
-@@ -135,6 +136,7 @@ do_install_append() {
-     install -d ${D}${sysconfdir}/samba
-     echo "127.0.0.1 localhost" > ${D}${sysconfdir}/samba/lmhosts
-     install -m644 packaging/LSB/smb.conf ${D}${sysconfdir}/samba/smb.conf
-+    install -D -m 644 ${WORKDIR}/volatiles.03_samba ${D}${sysconfdir}/default/volatiles/03_samba
- 
-     install -d ${D}${libdir}/tmpfiles.d
-     install -m644 packaging/systemd/samba.conf.tmp ${D}${libdir}/tmpfiles.d/samba.conf
 -- 
-2.1.4
-
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
