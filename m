@@ -1,45 +1,54 @@
-Return-Path: <henry@pericynthion.org>
-Received: from mail-qt0-f171.google.com (mail-qt0-f171.google.com
-	[209.85.216.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 07CA96E668
+Return-Path: <petr.nechaev@cogentembedded.com>
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 6AF3C70031
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jun 2016 19:14:52 +0000 (UTC)
-Received: by mail-qt0-f171.google.com with SMTP id 9so13053088qtg.2
+	Fri, 10 Jun 2016 00:04:18 +0000 (UTC)
+Received: by mail-wm0-f43.google.com with SMTP id m124so80671720wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Jun 2016 12:14:53 -0700 (PDT)
+	Thu, 09 Jun 2016 17:04:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=pericynthion-org.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=QO7aTkWCfOJy8hZtwD2WKyOs4oiV7foBOypU2fnd410=;
-	b=o264DfBuKogzjzhaArhsvzrZHD2L1XTqhtoFaeevJfRk44eIQzZ+OtZBTP4HXuDm/D
-	Nu9hoQSN45kmSHq8jBpX622VMsekuFBqvjS9JAv3IcH5txdCx9r9DLAM+DgV4AKbsbDG
-	+d8UUvsos04etiUPiYUXzSnE6oGiqhHeOFRYqo9cZB3RnkV6zH0a9deyU8vjeWu9KOrJ
-	kg15zaGrLPDox/s6IfVElI2c93w6weUqCmDwj1FILDMw32IEs87VkcjkFr7/aTOv/Nyl
-	B0IDGe69vqxJbu+NOaigJ5MhGJHmCOTT+d2ZE804xHX+PflBxXslsoQ3A+QNRhhKYnYj
-	fdbg==
+	d=cogentembedded-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=PMP2QKcqNGzawl/sgy3N7+JIaVnEgGbk3Oufo6vM3MA=;
+	b=BS1soEGXtCS+7OZPA475Mw0MLglEX3YIV4AmvOIE5Hl9k+ospyd+tsGWk3ReAAJh0L
+	HAS1MXezWP4yW19zdlRf8m0QV6zaK9LfuTTM9Do1AR6SjpRGNg/zcx1gUgqTHpnlD0me
+	Zo1FGXLi29aaI9pMpt/GzUjDyEF3efleHP4/fJCOyq3NjTMd8MJbDUAsxXt+Xd6D/FpF
+	rT7+vsUcoH2nNLGCfsSu96fSxbuwau9i/FyO14BmBdiu+ndkoaAgfrHYvHQqlA1KGCyq
+	aIAXTAUjsH99iSWUaUvN+rB8JfQczVNkBoiyVCwPDaSCTkLa3UbGzfRw76Civud1Yz81
+	X43Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=QO7aTkWCfOJy8hZtwD2WKyOs4oiV7foBOypU2fnd410=;
-	b=XcrFvSfj0n4qOqr6ErjHqHiWJdBJUqq3J7xMO/W80ZAymvtx5U4O+aeWERRO9fmyfe
-	W8pFBcpmKot6ZyiBC9J5jyBREmy1aij40aZsWcvX9GWCj79XZrCmtKqeicEhDUo2ZUns
-	NaMb4Q2eX7H7Maxc1gm+TMl75a2bMcoH3f6g3vZO8i0j0Kv0qGIJk2Ae55It9JxlGl4f
-	46mVM0aGEi8vwBMmCK2Qgue7WA3oPmvqyhQlv4urGuHiIBeohSenQeZhocXEJ1sxlS/B
-	XIyHy1WcW3g9+CqybP7/fFcOsFOOfuOuTAJPejwwVXF2XQ2TiH9ZmS7xyvezpt6f/Eo3
-	z4mA==
-X-Gm-Message-State: ALyK8tJurFGconOyqXqFtNx+Bdm4Ef1cA4enGnqElfnz7kroPQzHvCIUrdSa+42MDkidpvsVw7PWQU19SiZ1Lg==
-X-Received: by 10.200.56.13 with SMTP id q13mr9696256qtb.29.1465499693163;
-	Thu, 09 Jun 2016 12:14:53 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=PMP2QKcqNGzawl/sgy3N7+JIaVnEgGbk3Oufo6vM3MA=;
+	b=khiKkNBlQiQyzcdkSfgh8ki3kAl4BnIDE6YDJ3lS3zvp88YhfJnw3uv/cVRUcC4yAa
+	rmCR4Noig0ncRu/lbZi9VQMd4p2hhUajd7LV6Z7yv71PUkO6rldUNU90mLJlcrlmBWBD
+	K27x3oGPsVhJfom/8PQj6K8vnUq1kJFWEqZL8Kveir1hT9OSUEyipMaNRwmXBEMiqgIc
+	i8fv/fv9lKWa9o5nkOwEmOKITDxKnuLcyiwXVDdJ+zHIr08iek9Qg7CVhsBGPqHzwWI4
+	ghu8MCNQtXY2rce357Lpr9gqNAHLBu2ML/Xx3obuzpJ2MWE/RLnsFsyo931m3z4mIPe7
+	5kLQ==
+X-Gm-Message-State: ALyK8tKO//5LnBOn1LOCyqmOSBBWI7eqFKrkTbgkKn5eltms8bq821qsrWLiTReVgVZnEK8pMXCO2L9XMveC/A==
+X-Received: by 10.195.17.166 with SMTP id gf6mr11711319wjd.124.1465517058711; 
+	Thu, 09 Jun 2016 17:04:18 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.55.107.131 with HTTP; Thu, 9 Jun 2016 12:14:33 -0700 (PDT)
-In-Reply-To: <1465499198-340-1-git-send-email-henry@pericynthion.org>
-References: <1465499198-340-1-git-send-email-henry@pericynthion.org>
-From: Henry Hallam <henry@pericynthion.org>
-Date: Thu, 9 Jun 2016 12:14:33 -0700
-Message-ID: <CAAxKAvJxiQwVif67O6tXyPsDGfF=Wk4kD0CES3+bZnhDWUQNng@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] chrony: Versatile implementation of NTP
+Received: by 10.194.44.40 with HTTP; Thu, 9 Jun 2016 17:04:17 -0700 (PDT)
+In-Reply-To: <20160609181613.GB2586@jama>
+References: <cfce0a18-6762-9da4-1f4a-1969a912bf50@linux.intel.com>
+	<c487579e-eb43-81b5-b888-da9ad493102a@balister.org>
+	<CAJTo0LZnh1+tvznjgKKFrSoP-ie0vMD0m_5AtTEi0DcrpFjX6g@mail.gmail.com>
+	<33320.10.7.198.51.1465487815.squirrel@linux.intel.com>
+	<CAHPquwP2RDW3T5hiizow6=1xJzwgCPDDs=z+OHgaEedcXTh6bg@mail.gmail.com>
+	<CAJTo0LZhrKJvg=m05_SUPktikELaDRq8gTvvtjfhaj_9Uq+vPw@mail.gmail.com>
+	<20160609181613.GB2586@jama>
+From: Petr Nechaev <petr.nechaev@cogentembedded.com>
+Date: Thu, 9 Jun 2016 20:04:17 -0400
+Message-ID: <CAHPquwPKh0hgOuvHvB0KYVfU0PhtR_sZ8vKO8EgH_YgsZrwtkA@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: Konstantin Ripak <konstantin.ripak@cogentembedded.com>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] the fate of Vala in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,18 +61,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jun 2016 19:14:53 -0000
+X-List-Received-Date: Fri, 10 Jun 2016 00:04:20 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Thu, Jun 9, 2016 at 12:06 PM, Henry Hallam <henry@kittyhawk.aero> wrote:
-> chrony is an alternative to ntpd.  In particular it may be useful
-> for quasi-realtime embedded systems that have a pulse-per-second
-> time reference available and need to rapidly synchronize to it after
-> boot, which appears to be unachievable with ntpd.
+I can see that libsecret in oe-core depends on vala though for testing only.
 
-This is my first attempt to contribute to yocto/openembedded, so any
-and all feedback (stylistic or otherwise) would be greatly
-appreciated.
-
-Thanks, Henry
+If moving to meta-oe is community's decision, I will prepare the patch.
 
