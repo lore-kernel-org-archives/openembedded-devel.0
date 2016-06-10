@@ -1,23 +1,54 @@
-Return-Path: <NIDHI.CHADHA2@cognizant.com>
-X-Greylist: delayed 332 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 10 Jun 2016 05:54:21 UTC
-Received: from chnog22.cognizant.com (chnog22.cognizant.com [203.99.199.27])
-	by mail.openembedded.org (Postfix) with ESMTP id C869762132
+Return-Path: <mike.looijmans@topicproducts.com>
+Received: from mx18-13.smtp.antispamcloud.com (mx18-13.smtp.antispamcloud.com
+	[207.244.64.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 06686607F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jun 2016 05:54:21 +0000 (UTC)
-From: <NIDHI.CHADHA2@cognizant.com>
+	Fri, 10 Jun 2016 06:06:17 +0000 (UTC)
+Received: from 100-208.ftth.onsbrabantnet.nl ([88.159.208.100]
+	helo=TOP-EX01.TOPIC.LOCAL)
+	by mx18.antispamcloud.com with esmtps (TLSv1:AES256-SHA:256)
+	(Exim 4.85) (envelope-from <mike.looijmans@topicproducts.com>)
+	id 1bBFaA-0004YM-Fq; Fri, 10 Jun 2016 08:06:16 +0200
+Received: from [192.168.80.121] (192.168.80.121) by TOP-EX01.TOPIC.LOCAL
+	(192.168.10.102) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 10 Jun 2016 08:06:09 +0200
 To: <openembedded-devel@lists.openembedded.org>
-Thread-Topic: hostapd and openssl version mismatch 
-Thread-Index: AdHC27h/dyeDkkW0QoOfUFTxFACUDg==
-Date: Fri, 10 Jun 2016 05:48:47 +0000
-Message-ID: <C2EDADA61C95714D9B62AFF0B58BEC4D098E590C@CTSINCHNSXMBL.cts.com>
-Accept-Language: en-US, en-IN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.232.192.81]
+References: <1464860046-15121-1-git-send-email-richard.purdie@linuxfoundation.org>
+	<57568DB8.6010209@topic.nl>
+	<1465307382.13979.78.camel@linuxfoundation.org>
+From: Mike Looijmans <mike.looijmans@topic.nl>
+Organization: TOPIC
+Message-ID: <575A58D1.3070606@topic.nl>
+Date: Fri, 10 Jun 2016 08:06:09 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.8.0
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: hostapd and openssl version mismatch
+In-Reply-To: <1465307382.13979.78.camel@linuxfoundation.org>
+X-Originating-IP: [192.168.80.121]
+X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
+X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
+X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W6KAUC/fjyuDn
+	NXFr4uarw3m8KyO/e3OFX2RUwx7xEEvBqm3RvM5N1UuDkdL5rJuDWYSHbx/2iEXlZ3vyVN/fF+Iu
+	NqWVQJTrKtJ9y7p4b9mIqVXVcArPTKJ173BjamDICPT5v9s5yYGFyGM7BAaP3Xg9i+nEmou2UMHg
+	mE6z+uPpnAH3Z/yWJ/1UVv3cE79AS8/p6qm/+Srh1DpyyOtNC8srclQ9E0taDpYFK2PbcOzXYu/I
+	cQJuWHlbnMOsg605uIsVkmFiKN4g6sbzZ/DG2bYbk+PuJAkSa01TMfeJ1noZd57uU+vYl1kpKtSO
+	Wrva29UU3frYgZ0TR7bi/ToFn8OpyKA69LF1Ge2GaGfxmfqxg/+p2ZjpNnFVhpbuUAsdZ/RlU1v5
+	1vXjaHvNDaZvYntRBOMqkNRCP7fVbbh/uqGqlWnJ+tQkP1HvU99403+oc/e1rVLsLRRzePcb6lVD
+	iRz9D+/9oSt5jUrIaWXjdPQICGSqDH5ZxqCCXyEbbNwy6cMiiH3izwFu+xwdVhZyX5L5g2m8DCGg
+	UHHxn6e6gArzX5NI37q4AO7kJrqw2Qae7o6cW64wNyLmPPFRGqR1pJnckpWaLvahyBjmQxBKOzsM
+	ppduCVf+i9mk5WykwrtPRhC1JeifEZi+kYyqZHU3A+NiHxNXMYbXox8YlpbR9REN2vxcDlHOkrTL
+	QldwJ2dGzJxsPdynu43xqHKIl4dwQzEvuGslKTrRIXcXpFg5ivY=
+X-Report-Abuse-To: spam@mx99.antispamcloud.com
+X-Originating-IP: 88.159.208.100
+X-SpamExperts-Domain: topic.nl
+X-SpamExperts-Username: 88.159.208.100
+Authentication-Results: antispamcloud.com;
+	auth=pass smtp.auth=88.159.208.100@topic.nl
+X-SpamExperts-Outgoing-Class: ham
+X-SpamExperts-Outgoing-Evidence: Combined (0.02)
+X-Recommended-Action: accept
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: Re: [PATCH 1/3] gitkpkgv: Ensure files are closed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,75 +61,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jun 2016 05:54:24 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 10 Jun 2016 06:06:18 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-Hi All,
+=EF=BB=BFOn 07-06-16 15:49, Richard Purdie wrote:
+> On Tue, 2016-06-07 at 11:02 +0200, Mike Looijmans wrote:
+>> =EF=BB=BFLooks like regression in Python itself?
+>>
+>> In both Python 2 and 3, the file is closed properly if the file
+>> object is not
+>> being stored:
+>>
+>>   >>> import os
+>>   >>> os.listdir('/proc/self/fd')
+>> ['0', '1', '2', '3']
+>>   >>> l=3Dopen('/proc/self/stat').readline()
+>>   >>> os.listdir('/proc/self/fd')
+>> ['0', '1', '2', '3']
+>>   >>> f=3Dopen('/proc/self/stat')
+>>   >>> os.listdir('/proc/self/fd')
+>> ['0', '1', '2', '3', '4']
+>>   >>>
+>>
+>>
+>> (file descriptor "3" is the one being used to read the /proc/self/fd
+>> directory, "4" is the one used for reading the stat file)
+>>
+>> The "with" construction should not be needed here. Something else is
+>> causing
+>> this (e.g. nested function definition or exception handler?).
+>
+> $ python2 -Wdefault -c "open('/bin/bash')"
+> $ python3 -Wdefault -c "open('/bin/bash')"
+> -c:1: ResourceWarning: unclosed file <_io.TextIOWrapper name=3D'/bin/bash=
+' mode=3D'r' encoding=3D'UTF-8'>
+>
+> Admittedly its not an out the box warning but it is one that seems to
+> be enabled under bitbake. Details in:
+>
+> https://bugs.python.org/issue10093
+>
+> but the gist of the issue is that relying on the garbage collector to
+> close files is a cpython'ism and other implementations of python may
+> not do this.
+>
+> So whilst "with" might not be strictly required, it is recommended.
 
-Reference to oe-core branch  Jethro
-Revision: 69b1e25a53255433262178b91ab3e328768ad725
+Oh dear, looks like's there's been a change of sorts in the Python communit=
+y=20
+and they're now adopting the Java stupidity of "the garbage collector doesn=
+'t=20
+actually work so you'll have to do all your own resource management".
 
-Hostapd 2.4-r0 build with openssl version 1.0.2d has an issue in compilatio=
-n due to no
-Compile time support of md4 in 1.0.2d version of openssl .
-The compilation issue is undefined reference to EVP_md4 , which is defined
-In openssl/1.0.2d-r0/openssl-1.0.2d/crypto/evp/evp.h under the MACRO OPENSS=
-L_NO_MD4.
-The macro OPENSSL_NO_MD4 is enabled only if openssl configuration and gener=
-ated makefile define "no-md4"
+These are reasons why projects are so reluctant to move from Python 2 to 3.=
+=20
+Python 3 is just a different language.
 
-// place where EVP_md4 is defined
-openssl/1.0.2d-r0/openssl-1.0.2d/crypto/evp/evp.h
-# ifndef OPENSSL_NO_MD4
-const EVP_MD *EVP_md4(void);
-# endif
-
-//Makefile which configures no-md4 flag
-CONFIGURE_ARGS : no-md4
-DEPFLAG=3D -DOPENSSL_NO_MD4
-
-Hostapd depends on md4 for number of EAP methods which require md4 support =
-.
-To disable the use of EVP_md4 function call in function md4_vector , macro =
-defined in
-OPENSSL_NO_MD4 should be used . In case of OPENSSL_NO_MD4 enabled ,
-md4_vector returns the value returned by function
-openssl_digest_vector(EVP_md4(), num_elem, addr, len, mac);
-
-following patch should be applied in crypto_openssl.c
-
---- crypto_openssl.c_ori               2016-06-07 12:51:35.571749090 +0530
-+++ crypto_openssl.c    2016-06-07 12:37:54.967772380 +0530
-@@ -95,7 +95,11 @@
-
- int md4_vector(size_t num_elem, const u8 *addr[], const size_t *len, u8 *m=
-ac)
-{
-+#ifdef OPENSSL_NO_MD4
-+             return -1;
-+#else
-               return openssl_digest_vector(EVP_md4(), num_elem, addr, len,=
- mac);
-+#endif
-}
-
-Has anyone faced this issue or Jethro branch has already taken care or this=
- is just a version mismatch for openssl and hostpad?
+Ah well, guess we'll have to live with that. I'm already getting used to=20
+embedded devices running 30MB of software to enable the flashlight...
 
 
-Thanks
-Nidhi
+Kind regards,
+
+Mike Looijmans
+System Expert
+
+TOPIC Embedded Products
+Eindhovenseweg 32-C, NL-5683 KH Best
+Postbus 440, NL-5680 AK Best
+Telefoon: +31 (0) 499 33 69 79
+E-mail: mike.looijmans@topicproducts.com
+Website: www.topicproducts.com
+
+Please consider the environment before printing this e-mail
 
 
-This e-mail and any files transmitted with it are for the sole use of the i=
-ntended recipient(s) and may contain confidential and privileged informatio=
-n. If you are not the intended recipient(s), please reply to the sender and=
- destroy all copies of the original message. Any unauthorized review, use, =
-disclosure, dissemination, forwarding, printing or copying of this email, a=
-nd/or any action taken in reliance on the contents of this e-mail is strict=
-ly prohibited and may be unlawful. Where permitted by applicable law, this =
-e-mail and other e-mail communications sent to and from Cognizant e-mail ad=
-dresses may be monitored.
+
+
+
 
