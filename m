@@ -1,49 +1,30 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id DF2CD6057B
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.analogue-micro.com (mail.analogue-micro.com
+	[217.144.149.242])
+	by mail.openembedded.org (Postfix) with ESMTP id C69A360796
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jun 2016 14:31:00 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id n184so18379388wmn.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jun 2016 07:31:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=vwp4+2ELVMRcirMxg8ZqgP/lOv+dQ10xIFoNPOS9VN0=;
-	b=xGJOxrv+khS+bE0uW1sOeOUhfzYef9tRcbjS5w2SDNttTmqbW9rV/kgHbstBgJ6uqH
-	ES/16tOPgnCkFRwNROI96GdvVqNc7NSDMLW47uew6pZOrhV6gBBmsHdgeXoQ7m0M9ufu
-	XO5iV1ywL//wK2xrLM/WxMaNZ/srQdoIFfxxnV2Lxyzz1GcZSKGtRyFbyuhjFo1oKX08
-	TGzW5AQGtWzGU5a781j/Zx5hambyRSFARfGpqDyqPiiXljZxUfvze47siNdya91wKXpA
-	pTJNQxhCwEZmqnBxclOtOiHaVkZFVZIw5gaZLRncYydQZCPR7FREAoyUr5P8KzTewfZe
-	o2tg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=vwp4+2ELVMRcirMxg8ZqgP/lOv+dQ10xIFoNPOS9VN0=;
-	b=Ko8W9bVqWaFk9jAeI8l6QUFW7/URSBvXomxV0JWIBTXfjQ3qLVj9+bbpt5hpnSsJOj
-	/y6fEU7k63YMLZVP0N7NY+6u4GPrBepe4R6jR/9UitBsYcDokzuwJG6sStIBVlJlz65k
-	5ZXrPmwrypnNCzvoiW8DsrX3YCSVJbHyttOaf1dwGRSqEFVa/6A2xjhhJDuid7rbISpO
-	ry0WqfTeN9pcvKY9ppZtesTSn+xeoNsEjEyTFj8jlwqYx23pLGb7BOwcCqTnGDXU27N8
-	GI0GWGseeKTyQ0IGzMQXAnHmGuft1YJG6tP4cNCZgwPvJb3v5jyhRdt6BOSexX+rs25H
-	HQLg==
-X-Gm-Message-State: ALyK8tJAB5kInenP5eyVSOLSbbxaMikDn12GP76CZ82mwbWqaNyjHJTUeBoRtSBtN4Kflg==
-X-Received: by 10.194.18.34 with SMTP id t2mr2468120wjd.180.1465569061136;
-	Fri, 10 Jun 2016 07:31:01 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	u70sm26192030wmd.4.2016.06.10.07.31.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 10 Jun 2016 07:31:00 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Sat, 11 Jun 2016 10:11:55 +0000 (UTC)
+Received: by mail.analogue-micro.com (Postfix, from userid 999)
+	id 884DB68A01C; Sat, 11 Jun 2016 11:11:54 +0100 (BST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	loki.analogue-micro-ltd.com
+X-Spam-Level: *
+X-Spam-Status: No, score=1.7 required=5.0 tests=ALL_TRUSTED,BAYES_20,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
+	by mail.analogue-micro.com (Postfix) with ESMTP id F067568A019;
+	Sat, 11 Jun 2016 11:11:53 +0100 (BST)
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by zeus.mlbassoc.com (Postfix) with ESMTP id 9F80E674018E;
+	Sat, 11 Jun 2016 12:11:53 +0200 (CEST)
+From: Gary Thomas <gary@mlbassoc.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Jun 2016 16:31:31 +0200
-Message-Id: <20160610143131.22311-2-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.8.4
-In-Reply-To: <20160610143131.22311-1-Martin.Jansa@gmail.com>
-References: <c34b9a92-71a6-fdf8-2a27-b92fc7c9cb86@linux.intel.com>
-	<20160610143131.22311-1-Martin.Jansa@gmail.com>
-Subject: [PATCH 2/2] postgresql: blacklist because tcl in oe-core is broken for last month
+Message-ID: <575BE3E8.8060809@mlbassoc.com>
+Date: Sat, 11 Jun 2016 12:11:52 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.8.0
+MIME-Version: 1.0
+Subject: Chromium build broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,24 +37,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jun 2016 14:31:03 -0000
+X-List-Received-Date: Sat, 11 Jun 2016 10:11:56 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-support/postgresql/postgresql_9.4.5.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Building chromium is broken on my i.MX6 target.
 
-diff --git a/meta-oe/recipes-support/postgresql/postgresql_9.4.5.bb b/meta-oe/recipes-support/postgresql/postgresql_9.4.5.bb
-index 54b660e..4a0296d 100644
---- a/meta-oe/recipes-support/postgresql/postgresql_9.4.5.bb
-+++ b/meta-oe/recipes-support/postgresql/postgresql_9.4.5.bb
-@@ -12,3 +12,5 @@ SRC_URI += "\
- SRC_URI[md5sum] = "8b2e3472a8dc786649b4d02d02e039a0"
- SRC_URI[sha256sum] = "b87c50c66b6ea42a9712b5f6284794fabad0616e6ae420cf0f10523be6d94a39"
- 
-+# http://lists.openembedded.org/pipermail/openembedded-core/2016-May/122095.html
-+PNBLACKLIST[postgresql] ?= "Depends on broken tcl"
+Poky/Yocto info:
+BB_VERSION        = "1.31.0"
+BUILD_SYS         = "x86_64-linux"
+NATIVELSBSTRING   = "Ubuntu-15.10"
+TARGET_SYS        = "arm-amltd-linux-gnueabi"
+MACHINE           = "teton-p0382"
+DISTRO            = "amltd"
+DISTRO_VERSION    = "2.1+snapshot-20160611"
+TUNE_FEATURES     = "arm armv7a vfp thumb neon       callconvention-hard       cortexa9"
+TARGET_FPU        = "hard"
+meta              = "master:40e789d1fee7f0df2d23230fff38325119ad2935"
+meta-teton-imx6-p0382 = "master:5f3d52b357c0b05e7ea5cfc309e04c8c3aad1260"
+meta-fsl-arm      = "master:00b46e11e32f859a0d2dad5a5d53d5540be9c15e"
+meta-fsl-arm-extra = "master:089ce85e2e2dd78e45b773b947643ab8f4e2b965"
+meta-browser      = "master:825ea9349fe9b7da39f1de0c3e8e15d9d62f2774"
+
+Error:
+| ninja: Entering directory 
+`/local/p0382_2016-01-13/tmp/work/cortexa9hf-neon-mx6qdl-amltd-linux-gnueabi/chromium/48.0.2548.0-r0/chromium-48.0.2548.0/out/Release'
+| [1/9316] SOLINK lib/libnative_theme.so
+| [2/9316] CXX obj/components/infobars/core/infobars_core.infobar_container.o
+| [3/9316] CXX obj/components/infobars/core/infobars_core.infobars_switches.o
+| [4/9316] CXX obj/components/infobars/core/infobars_core.infobar.o
+| [5/9316] STAMP obj/ui/compositor/compositor.compile_depends.stamp
+| [6/9316] CXX obj/ui/compositor/compositor.callback_layer_animation_observer.o
+| FAILED: if [ ! -e lib/libnative_theme.so -o ! -e lib/libnative_theme.so.TOC ]; then arm-amltd-linux-gnueabi-g++ 
+-march=armv7-a -marm -mfpu=neon  -mfloat-abi=hard -mcpu=cortex-a9 
+--sysroot=/local/p0382_2016-01-13/tmp/sysroots/teton-p0382 -shared -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed 
+-Wl,-z,now -Wl,-z,relro -Wl,-z,defs -pthread -Wl,-z,noexecstack -fPIC -Wl,--disable-new-dtags -L. -Wl,-O1 
+-Wl,--as-needed -Wl,--gc-sections -o lib/libnative_theme.so -Wl,-soname=libnative_theme.so @lib/libnative_theme.so.rsp 
+&& { readelf -d lib/libnative_theme.so | grep SONAME ; arm-amltd-linux-gnueabi-nm -gD -f p lib/libnative_theme.so | cut 
+-f1-2 -d' '; } > lib/libnative_theme.so.TOC; else arm-amltd-linux-gnueabi-g++  -march=armv7-a -marm -mfpu=neon 
+-mfloat-abi=hard -mcpu=cortex-a9 --sysroot=/local/p0382_2016-01-13/tmp/sysroots/teton-p0382 -shared -Wl,-O1 
+-Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,now -Wl,-z,relro -Wl,-z,defs -pthread -Wl,-z,noexecstack -fPIC 
+-Wl,--disable-new-dtags -L. -Wl,-O1 -Wl,--as-needed -Wl,--gc-sections -o lib/libnative_theme.so 
+-Wl,-soname=libnative_theme.so @lib/libnative_theme.so.rsp && { readelf -d lib/libnative_theme.so | grep SONAME ; 
+arm-amltd-linux-gnueabi-nm -gD -f p lib/libnative_theme.so | cut -f1-2 -d' '; } > lib/libnative_theme.so.tmp && if ! cmp 
+-s lib/libnative_theme.so.tmp lib/libnative_theme.so.TOC; then mv lib/libnative_theme.so.tmp lib/libnative_theme.so.TOC 
+; fi; fi
+| obj/ui/native_theme/native_theme.common_theme.o: In function `_GLOBAL__sub_I_common_theme.cc':
+| /usr/src/debug/chromium/48.0.2548.0-r0/chromium-48.0.2548.0/ui/native_theme/common_theme.cc:273: undefined reference 
+to `gfx::kGoogleBlue500'
+| /usr/src/debug/chromium/48.0.2548.0-r0/chromium-48.0.2548.0/ui/native_theme/common_theme.cc:273: undefined reference 
+to `gfx::kGoogleBlue300'
+
+Note: I'm still using GCC/4.9.x with the standard linker (not gold)
+
 -- 
-2.8.4
-
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
