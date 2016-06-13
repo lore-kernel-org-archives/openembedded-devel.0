@@ -1,18 +1,45 @@
-Return-Path: <lukas.bulwahn@oss.bmw-carit.de>
-Received: from linuxmail.bmw-carit.de (unknown [212.118.206.70])
-	by mail.openembedded.org (Postfix) with ESMTP id B20F6607F8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 7399060667
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jun 2016 12:23:31 +0000 (UTC)
-Received: from hulk.bmw-carit.intra (unknown [10.10.50.129])
-	by linuxmail.bmw-carit.de (Postfix) with ESMTP id 371CA40411;
-	Mon, 13 Jun 2016 14:15:27 +0200 (CEST)
-From: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+	Mon, 13 Jun 2016 17:05:34 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id n184so16387696wmn.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Jun 2016 10:05:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=bosSUZb460GZQPqjIeZo+G0BJan/m3+CSiFB7soIW10=;
+	b=Ve658UH+s7DX8hZNODVLY6LY4w8meTkhbwn6OIg75SW5cqRhyhf7mCUJhXsTzxz4rE
+	Dr8nAFzbuE1GHjEPBTmUYUFiBPRQNGeB3vSnqiB+WCHn1IMPrRUlWMc8OnRl0WhlkdCC
+	Pl43veUJjeLuBwe2fpBwnbGJnZJfI2jAXg6GJ0o+iO5zbghh+ZJN/Bz1D9r/bUr43diS
+	F7GfjQXUmcC1nVpU8Gep6z0cir4qhnBGJ7dvSMH2GNvaLnefDSgWM8qxoyPjnF/bGBBu
+	lIqXtTJOCne+YLZzM7WN1qVesZrpUP7JOtWglueE86TYBMF/tHd5hmnb2aXIJMZHzr+x
+	/fAg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=bosSUZb460GZQPqjIeZo+G0BJan/m3+CSiFB7soIW10=;
+	b=eZ8z6HZwbOsAW75dyJ74zS7MCZWMfNV6zo+iD03Il39v+ejY2hpwU5TE43qbvLL1en
+	BZMjod74vbOvmBhSFxn+wtzMkDMzZiX/A0i0QTQ4e2+BINk9tQhlmHGPHTA35PiXR/Es
+	uRdrWTaORe+4QOvBPlTXbKCvowW0rfnzYYO6qHW9nil5izr53zFVoowr8CCP8yn6Hye2
+	5AtF+HfQWMmoa/D434SCIfbVcv0A2QiWhl2Sy9vZ7Iac09hxinfDMhE926gsSzkVJdjT
+	ZGPcXzVpLyUyFTO1M0EevXpcgcfw9yjbtVsuvUdtlgN2DEoqAmsLGAsdsFbHduHn9OoK
+	5BaA==
+X-Gm-Message-State: ALyK8tIYPNcOq3C4HkdYzIKjM9HgefUPusRRqN9N2fcINXaCh4aWo4Zbe6JoYQGWh4Hd/g==
+X-Received: by 10.194.75.196 with SMTP id e4mr2083601wjw.44.1465837534548;
+	Mon, 13 Jun 2016 10:05:34 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	o203sm15275364wmg.22.2016.06.13.10.05.33
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 13 Jun 2016 10:05:33 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Jun 2016 14:23:28 +0200
-Message-Id: <1465820608-5732-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
-X-Mailer: git-send-email 2.5.5
-MIME-Version: 1.0
-Subject: [PATCH] libeigen: update to 3.2.8
+Date: Mon, 13 Jun 2016 19:05:43 +0200
+Message-Id: <20160613170543.20673-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.8.4
+Subject: [meta-ruby][PATCH] ruby.bbclass: Fix usage with python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -25,79 +52,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jun 2016 12:23:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 13 Jun 2016 17:05:35 -0000
 
-Due to the update, the pkg_config_libdir configuration has become
-obsolete, and instead the pkgconfig directory must be added to the
-dev-package.
+* otherwise every recipe inheriting ruby fails with:
+  WARNING: Exception during build_dependencies for GEM_HOME
+  WARNING: Error during finalise of /home/jenkins/oe/world/shr-core/meta-openembedded/meta-ruby/recipes-devtools/ruby/bundler_git.bb
+  ERROR: Failure expanding variable RUBY_GEM_VERSION, expression was ${@get_rubygemsversion("/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/bin")} which triggered exception TypeError: can't use a string pattern on a bytes-like object
+  ERROR: Task 22219 (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-ruby/recipes-devtools/ruby/bundler_git.bb, do_fetch) failed with exit code '1'
 
-Signed-off-by: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-support/libeigen/libeigen_3.2.6.bb | 23 ----------------------
- meta-oe/recipes-support/libeigen/libeigen_3.2.8.bb | 21 ++++++++++++++++++++
- 2 files changed, 21 insertions(+), 23 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libeigen/libeigen_3.2.6.bb
- create mode 100644 meta-oe/recipes-support/libeigen/libeigen_3.2.8.bb
+ meta-ruby/classes/ruby.bbclass | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.2.6.bb b/meta-oe/recipes-support/libeigen/libeigen_3.2.6.bb
-deleted file mode 100644
-index 89a25a9..0000000
---- a/meta-oe/recipes-support/libeigen/libeigen_3.2.6.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--DESCRIPTION = "Eigen is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms."
--AUTHOR = "Benoît Jacob and Gaël Guennebaud and others"
--HOMEPAGE = "http://eigen.tuxfamily.org/"
--LICENSE = "MPL-2.0"
--LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad"
--
--SRC_URI = "http://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2 \
--           file://0001-CMakeLists.txt-install-FindEigen3.cmake-script.patch"
--SRC_URI[md5sum] = "87274966745d2d3e7964fcc654d0a24b"
--SRC_URI[sha256sum] = "8a3352f9a5361fe90e451a7305fb1896fc7f771dc16cc0edd8e6b157f52c343e"
--
--S = "${WORKDIR}/eigen-eigen-c58038c56923"
--
--inherit cmake
--
--EXTRA_OECMAKE += "-Dpkg_config_libdir=${libdir}"
--
--FILES_${PN} = "${includedir} ${libdir}"
--FILES_${PN}-dev = "${datadir}/cmake/Modules"
--
--# ${PN} is empty so we need to tweak -dev and -dbg package dependencies
--RDEPENDS_${PN}-dev = ""
--RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
-diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.2.8.bb b/meta-oe/recipes-support/libeigen/libeigen_3.2.8.bb
-new file mode 100644
-index 0000000..9e14ee1
---- /dev/null
-+++ b/meta-oe/recipes-support/libeigen/libeigen_3.2.8.bb
-@@ -0,0 +1,21 @@
-+DESCRIPTION = "Eigen is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms."
-+AUTHOR = "Benoît Jacob and Gaël Guennebaud and others"
-+HOMEPAGE = "http://eigen.tuxfamily.org/"
-+LICENSE = "MPL-2.0"
-+LIC_FILES_CHKSUM = "file://COPYING.MPL2;md5=815ca599c9df247a0c7f619bab123dad"
-+
-+SRC_URI = "http://bitbucket.org/eigen/eigen/get/${PV}.tar.bz2 \
-+           file://0001-CMakeLists.txt-install-FindEigen3.cmake-script.patch"
-+SRC_URI[md5sum] = "9e3bfaaab3db18253cfd87ea697b3ab1"
-+SRC_URI[sha256sum] = "722a63d672b70f39c271c5e2a4a43ba14d12015674331790414fcb167c357e55"
-+
-+S = "${WORKDIR}/eigen-eigen-07105f7124f9"
-+
-+inherit cmake
-+
-+FILES_${PN} = "${includedir} ${libdir}"
-+FILES_${PN}-dev = "${datadir}/cmake/Modules ${datadir}/pkgconfig"
-+
-+# ${PN} is empty so we need to tweak -dev and -dbg package dependencies
-+RDEPENDS_${PN}-dev = ""
-+RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
+diff --git a/meta-ruby/classes/ruby.bbclass b/meta-ruby/classes/ruby.bbclass
+index ef844f2..1acf2e0 100644
+--- a/meta-ruby/classes/ruby.bbclass
++++ b/meta-ruby/classes/ruby.bbclass
+@@ -18,7 +18,7 @@ def get_rubyversion(p):
+     if not isfile(cmd):
+        return found_version
+ 
+-    version = subprocess.Popen([cmd, "--version"], stdout=subprocess.PIPE).communicate()[0]
++    version = subprocess.Popen([cmd, "--version"], stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
+     
+     r = re.compile("ruby ([0-9]+\.[0-9]+\.[0-9]+)*")
+     m = r.match(version)
+@@ -38,7 +38,7 @@ def get_rubygemslocation(p):
+     if not isfile(cmd):
+        return found_loc
+ 
+-    loc = subprocess.Popen([cmd, "env"], stdout=subprocess.PIPE).communicate()[0]
++    loc = subprocess.Popen([cmd, "env"], stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
+ 
+     r = re.compile(".*\- (/usr.*/ruby/gems/.*)")
+     for line in loc.split('\n'):
+@@ -60,7 +60,7 @@ def get_rubygemsversion(p):
+     if not isfile(cmd):
+        return found_version
+ 
+-    version = subprocess.Popen([cmd, "env", "gemdir"], stdout=subprocess.PIPE).communicate()[0]
++    version = subprocess.Popen([cmd, "env", "gemdir"], stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
+     
+     r = re.compile(".*([0-9]+\.[0-9]+\.[0-9]+)$")
+     m = r.match(version)
 -- 
-2.5.5
+2.8.4
 
 
