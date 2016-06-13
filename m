@@ -1,48 +1,33 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 6DA4862134
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id C02D762132
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jun 2016 10:41:13 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id r5so13785227wmr.0
+	Mon, 13 Jun 2016 11:04:11 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1bCPf8-0004FM-6I for openembedded-devel@lists.openembedded.org;
+	Mon, 13 Jun 2016 13:04:10 +0200
+Received: from ip4da2a5ae.direct-adsl.nl ([77.162.165.174])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Jun 2016 13:04:10 +0200
+Received: from koen by ip4da2a5ae.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jun 2016 03:41:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=1szG5xaU/T3Hqe/8MSXRIZm04PVgc+8NpUatjhtQbRM=;
-	b=Pwcex2/6u/A0ZPrYM1H/ExJViQM99LT1md1AkARsexWglRyG9tsyCELzg6vFz5Zuil
-	5POBX5Rlkv0tBS9kzCTMSB1GPVtaZktLnZc29skhEaZXvooj9E6pDIpP6oUeM/NlY0X2
-	KsPZDChY3nCBNpGeyXxzdabWyGwgGUW8Ut7lQ+51eGwx3l1Yqyx+JjXOaBYo4Idp0SMO
-	BKGqYnjTsWig9E+lRHeuiZqNWzsM1c/5vzIcJEylod+r34UhuXdWCLcgJJ16056llhQ3
-	sCAeBwBsvey1QpLT3/pQ3h1eTmCqMB9EvkVCHrNaGeU273ypR5rf6vydeog6Hn3GgaDd
-	0AAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=1szG5xaU/T3Hqe/8MSXRIZm04PVgc+8NpUatjhtQbRM=;
-	b=OS6d03qIhrDkNd4jRN3C6+zAoWGK1/RsU7dTC6rMHFUnMG3+t4c+GSL+5T0e+Mh36v
-	WBur5ZEMWjfXN93ZZVWCXDuqKohLH+rhdq5pp3tAFtoQ+TtypHOHP7Uizq+pD8osp5ng
-	BPqXfHEpJKzqevrF8yZL6+al5QUuPdCvZE+lTRKYmRi3AWzt44Sv15QhAQSJoGegxjhx
-	FwEZWq3ZJTQASGx3s88QvcVNfyv923PtH/DSboavFm6nShczHX9izWUkE7NFwox1TFep
-	z5ceZjMXDbDE8s+CDnmcAAti/hYQfBQ5IaPbkrus7vxLBPtejlzshEKFfMZuybNECf4i
-	TgVA==
-X-Gm-Message-State: ALyK8tK1hIbDF/4hGxAFH1amNlw/ikx8r6LJfR/hexfhe8ZZzfQbozV4dNCeeFpBFU2s1A==
-X-Received: by 10.194.81.8 with SMTP id v8mr386496wjx.155.1465814473647;
-	Mon, 13 Jun 2016 03:41:13 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	a198sm13669971wme.16.2016.06.13.03.41.11
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 13 Jun 2016 03:41:11 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Mon, 13 Jun 2016 13:04:10 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Jun 2016 12:41:20 +0200
-Message-Id: <20160613104120.30748-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.8.4
-In-Reply-To: <c34b9a92-71a6-fdf8-2a27-b92fc7c9cb86@linux.intel.com>
-References: <c34b9a92-71a6-fdf8-2a27-b92fc7c9cb86@linux.intel.com>
-Subject: [meta-smartphone][PATCH] frameworkd, mdbus, gta04-gps-handler, pisi: Remove runtime dependency on broken python-pygobject
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Mon, 13 Jun 2016 13:03:55 +0200
+Message-ID: <njm3ur$ri4$1@ger.gmane.org>
+References: <1465499198-340-1-git-send-email-henry@pericynthion.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: ip4da2a5ae.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:45.0)
+	Gecko/20100101 Thunderbird/45.1.1
+In-Reply-To: <1465499198-340-1-git-send-email-henry@pericynthion.org>
+Subject: Re: [meta-networking][PATCH] chrony: Versatile implementation of NTP
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,97 +40,235 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jun 2016 10:41:15 -0000
+X-List-Received-Date: Mon, 13 Jun 2016 11:04:12 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-* these components need to be upgraded to python3 (python3-pygobject) or
-  python-pygobject will need to be fixed
+Op 09-06-16 om 21:06 schreef Henry Hallam:
+> chrony is an alternative to ntpd.  In particular it may be useful
+> for quasi-realtime embedded systems that have a pulse-per-second
+> time reference available and need to rapidly synchronize to it after
+> boot, which appears to be unachievable with ntpd.
+> 
+> Signed-off-by: Henry Hallam <henry@pericynthion.org>
+> ---
+>  .../recipes-support/chrony/chrony/chrony.conf      | 40 +++++++++++
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-fso/recipes-freesmartphone/freesmartphone/frameworkd.inc  |  4 +++-
- meta-fso/recipes-freesmartphone/freesmartphone/mdbus_git.bb    | 10 ++++++----
- .../recipes-bsp/gta04-gps-handler/gta04-gps-handler_git.bb     |  5 ++++-
- meta-shr/recipes-shr/3rdparty/pisi_0.5.3.bb                    |  5 ++++-
- 4 files changed, 17 insertions(+), 7 deletions(-)
+That file hardcodes /etc, /var, etc
 
-diff --git a/meta-fso/recipes-freesmartphone/freesmartphone/frameworkd.inc b/meta-fso/recipes-freesmartphone/freesmartphone/frameworkd.inc
-index 29ecf3e..3ec3721 100644
---- a/meta-fso/recipes-freesmartphone/freesmartphone/frameworkd.inc
-+++ b/meta-fso/recipes-freesmartphone/freesmartphone/frameworkd.inc
-@@ -46,7 +46,6 @@ RDEPENDS_${PN} += "\
-   python-logging \
-   python-pprint \
-   python-pyalsaaudio \
--  python-pygobject \
-   python-pyrtc \
-   python-pyserial \
-   python-pyyaml \
-@@ -59,6 +58,9 @@ RDEPENDS_${PN} += "\
-   ${PN}-config \
- "
- 
-+# python-pygobject is broken http://lists.openembedded.org/pipermail/openembedded-devel/2016-June/107798.html
-+# RDEPENDS_${PN} += "python-pygobject"
-+
- RRECOMMENDS_${PN} += "\
-   alsa-utils-amixer \
-   python-phoneutils \
-diff --git a/meta-fso/recipes-freesmartphone/freesmartphone/mdbus_git.bb b/meta-fso/recipes-freesmartphone/freesmartphone/mdbus_git.bb
-index f94f1db..4cc5ed5 100644
---- a/meta-fso/recipes-freesmartphone/freesmartphone/mdbus_git.bb
-+++ b/meta-fso/recipes-freesmartphone/freesmartphone/mdbus_git.bb
-@@ -16,8 +16,10 @@ do_install() {
- }
- 
- RDEPENDS_${PN} = "\
--  python-dbus \
--  python-pygobject \
--  python-pprint \
--  python-xml \
-+    python-dbus \
-+    python-pprint \
-+    python-xml \
- "
-+
-+# python-pygobject is broken http://lists.openembedded.org/pipermail/openembedded-devel/2016-June/107798.html
-+# RDEPENDS_${PN} += "python-pygobject"
-diff --git a/meta-openmoko/recipes-bsp/gta04-gps-handler/gta04-gps-handler_git.bb b/meta-openmoko/recipes-bsp/gta04-gps-handler/gta04-gps-handler_git.bb
-index 34c791a..74b4168 100644
---- a/meta-openmoko/recipes-bsp/gta04-gps-handler/gta04-gps-handler_git.bb
-+++ b/meta-openmoko/recipes-bsp/gta04-gps-handler/gta04-gps-handler_git.bb
-@@ -6,7 +6,10 @@ SECTION = "base"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
--RDEPENDS_${PN} += "python-pygps python-pygobject python-core"
-+RDEPENDS_${PN} += "python-pygps python-core"
-+
-+# python-pygobject is broken http://lists.openembedded.org/pipermail/openembedded-devel/2016-June/107798.html
-+# RDEPENDS_${PN} += "python-pygobject"
- 
- PR = "r3"
- PV = "0.0.0+gitr${SRCPV}"
-diff --git a/meta-shr/recipes-shr/3rdparty/pisi_0.5.3.bb b/meta-shr/recipes-shr/3rdparty/pisi_0.5.3.bb
-index 9423cef..9daae52 100644
---- a/meta-shr/recipes-shr/3rdparty/pisi_0.5.3.bb
-+++ b/meta-shr/recipes-shr/3rdparty/pisi_0.5.3.bb
-@@ -5,11 +5,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8f0e2cd40e05189ec81232da84bd6e1a"
- HOMEPAGE = "http://freshmeat.net/projects/pisiom"
- SRCNAME = "pisi"
- DEPENDS = "python-native"
--RDEPENDS_${PN} = "python-vobject python-core python-pygtk python-pygobject python-pycairo\
-+RDEPENDS_${PN} = "python-vobject python-core python-pygtk python-pycairo\
-            python-gdata python-webdav python-ldap python-epydoc python-core\
-            python-dateutil python-sqlite3 python-netserver python-netclient\
-            python-misc python-ctypes libsyncml"
- 
-+# python-pygobject is broken http://lists.openembedded.org/pipermail/openembedded-devel/2016-June/107798.html
-+# RDEPENDS_${PN} += "python-pygobject"
-+
- # Rdepends on libsyncml and python-pygtk
- #PNBLACKLIST[pisi] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
- PNBLACKLIST[pisi] ?= "RDEPENDS on python-pygtk which was removed from oe-core"
--- 
-2.8.4
+
+>  .../recipes-support/chrony/chrony/chronyd          | 58 +++++++++++++++
+>  .../recipes-support/chrony/chrony_2.4.bb           | 83 ++++++++++++++++++++++
+
+While the recipe is well behaved and uses ${sysconfdir} and friends. You'll
+likely need to add a sed -i -e s:/var:${localstatedir}:g -e
+s:/etc/:${sysconfdir}:g -e .... -e..... to do_install to fix that up.
+
+>  3 files changed, 181 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/chrony/chrony/chrony.conf
+>  create mode 100644 meta-networking/recipes-support/chrony/chrony/chronyd
+>  create mode 100644 meta-networking/recipes-support/chrony/chrony_2.4.bb
+> 
+> diff --git a/meta-networking/recipes-support/chrony/chrony/chrony.conf b/meta-networking/recipes-support/chrony/chrony/chrony.conf
+> new file mode 100644
+> index 0000000..435a4f9
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/chrony/chrony/chrony.conf
+> @@ -0,0 +1,40 @@
+> +# Use public NTP servers from the pool.ntp.org project.
+> +pool pool.ntp.org iburst
+> +
+> +# Use a local timeserver in preference to the pool, if it's reachable.
+> +#server 192.168.22.22 iburst minpoll 2 prefer
+> +
+> +# Sync to pulse-per-second from an onboard GPS.
+> +# refclock PPS /dev/pps0 poll 0 prefer
+> +# You'll want to enable CONFIG_PPS and CONFIG_PPS_CLIENT_GPIO in your kernel,
+> +# and an entry something like this in your device tree:
+> +#	pps {
+> +#		compatible = "pps-gpio";
+> +#		gpios = <&ps7_gpio_0 56 0>;
+> +#	};
+> +
+> +# Record the rate at which the system clock gains/loses time,
+> +# improving accuracy after reboot
+> +driftfile /var/lib/chrony.drift
+> +
+> +# In first three updates step the system clock instead of slew
+> +# if the adjustment is larger than 1 second.
+> +makestep 1.0 3
+> +
+> +# Enable kernel synchronization of the real-time clock (RTC).
+> +#rtcsync
+> +
+> +# Allow NTP client access from local network.
+> +#allow 192.168/16
+> +
+> +# Serve time even if not synchronized to any NTP server.
+> +#local stratum 10
+> +
+> +# Specify file containing keys for NTP authentication.
+> +#keyfile /etc/chrony.keys
+> +
+> +# Specify directory for log files.
+> +logdir /var/log/chrony
+> +
+> +# Select which information is logged.
+> +#log measurements statistics tracking
+> diff --git a/meta-networking/recipes-support/chrony/chrony/chronyd b/meta-networking/recipes-support/chrony/chrony/chronyd
+> new file mode 100644
+> index 0000000..04f1b68
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/chrony/chrony/chronyd
+> @@ -0,0 +1,58 @@
+> +#! /bin/sh
+> +
+> +# System V init script for chrony
+> +# Adapted from the script already in meta-networking for ntpd
+> +
+> +### BEGIN INIT INFO
+> +# Provides:        chrony
+> +# Required-Start:  $network $remote_fs $syslog
+> +# Required-Stop:   $network $remote_fs $syslog
+> +# Default-Start:   2 3 4 5
+> +# Default-Stop:
+> +# Short-Description: Start chrony time daemon
+> +### END INIT INFO
+> +
+> +PATH=/sbin:/bin:/usr/bin:/usr/sbin
+> +
+> +DAEMON=/usr/sbin/chronyd
+> +PIDFILE=/var/run/chronyd.pid
+> +
+> +test -x $DAEMON -a -r /etc/chrony.conf || exit 0
+> +
+> +# Source function library.
+> +. /etc/init.d/functions
+> +
+> +# Functions to do individual actions
+> +startdaemon(){
+> +	echo -n "Starting chronyd: "
+> +	start-stop-daemon --start --quiet --oknodo --pidfile $PIDFILE --startas $DAEMON -- "$@"
+> +	echo "done"
+> +}
+> +stopdaemon(){
+> +	echo -n "Stopping chronyd: "
+> +	start-stop-daemon --stop --quiet --oknodo -p $PIDFILE
+> +	echo "done"
+> +}
+> +
+> +case "$1" in
+> +  start)
+> +	startdaemon
+> +	;;
+> +  stop)
+> +  	stopdaemon
+> +	;;
+> +  force-reload | restart | reload)
+> +  	stopdaemon
+> +	startdaemon
+> +	;;
+> +  status)
+> +	status /usr/sbin/chronyd;
+> +	exit $?
+> +	;;
+> +  *)
+> +	echo "Usage: chronyd { start | stop | status | restart | reload }" >&2
+> +	exit 1
+> +	;;
+> +esac
+> +
+> +exit 0
+> diff --git a/meta-networking/recipes-support/chrony/chrony_2.4.bb b/meta-networking/recipes-support/chrony/chrony_2.4.bb
+> new file mode 100644
+> index 0000000..2b6ae5b
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/chrony/chrony_2.4.bb
+> @@ -0,0 +1,83 @@
+> +SUMMARY = "Versatile implementation of the Network Time Protocol"
+> +DESCRIPTION = "Chrony can synchronize the system clock with NTP \
+> +servers, reference clocks (e.g. GPS receiver), and manual input using \
+> +wristwatch and keyboard. It can also operate as an NTPv4 (RFC 5905) \
+> +server and peer to provide a time service to other computers in the \
+> +network. \
+> +\
+> +It is designed to perform well in a wide range of conditions, \
+> +including intermittent network connections, heavily congested \
+> +networks, changing temperatures (ordinary computer clocks are \
+> +sensitive to temperature), and systems that do not run continuosly, or \
+> +run on a virtual machine. \
+> +\
+> +Typical accuracy between two machines on a LAN is in tens, or a few \
+> +hundreds, of microseconds; over the Internet, accuracy is typically \
+> +within a few milliseconds. With a good hardware reference clock \
+> +sub-microsecond accuracy is possible. \
+> +\
+> +Two programs are included in chrony: chronyd is a daemon that can be \
+> +started at boot time and chronyc is a command-line interface program \
+> +which can be used to monitor chronyd's performance and to change \
+> +various operating parameters whilst it is running."
+> +
+> +HOMEPAGE = "http://chrony.tuxfamily.org/"
+> +SECTION = "net"
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+> +
+> +DEPENDS = "libcap readline"
+> +# It's probably a bad idea to run chrony and ntpd on the same system.
+> +RCONFLICTS_${PN} = "ntp"
+> +
+> +SRC_URI = "https://download.tuxfamily.org/chrony/chrony-${PV}.tar.gz \
+> +	   file://chrony.conf \
+> +	   file://chronyd"
+> +
+> +SRC_URI[md5sum] = "d0598aa8a9be8faccef9386f6fc0d5f2"
+> +SRC_URI[sha256sum] = "8d04e7cda2333289c2104b731d39c3c1db94816e43bae35d7ee4e7ae8af6391f"
+> +
+> +# Note: chrony does not use autotools, although it is built via './configure; make; make install'.
+> +inherit update-rc.d systemd
+> +
+> +CONFFILES_${PN} = "${sysconfdir}/chrony.conf"
+> +
+> +INITSCRIPT_NAME = "chronyd"
+> +INITSCRIPT_PARAMS = "defaults"
+> +
+> +SYSTEMD_PACKAGES = "${PN}"
+> +SYSTEMD_SERVICE_${PN} = "chronyd.service"
+> +
+> +do_configure() {
+> +	./configure --sysconfdir=${sysconfdir} --bindir=${bindir} --sbindir=${sbindir} --localstatedir=${localstatedir} --datarootdir=${datadir}
+> +}
+> +
+> +do_compile() {
+> +	make ${PARALLEL_MAKE}
+> +}
+> +
+> +do_install() {
+> +	# binaries
+> +        install -d ${D}${bindir}
+> +        install -m 0755 ${S}/chronyc ${D}${bindir}
+> +        install -d ${D}${sbindir}
+> +        install -m 0755 ${S}/chronyd ${D}${sbindir}
+> +
+> +        # config files
+> +        install -d ${D}${sysconfdir}
+> +	install -m 644 ${WORKDIR}/chrony.conf ${D}${sysconfdir}
+> +
+> +	# System V init scripts
+> +	install -d ${D}${sysconfdir}/init.d
+> +	install -m 755 ${WORKDIR}/chronyd ${D}${sysconfdir}/init.d
+> +	
+> +	# systemd unit
+> +	install -d ${D}${systemd_unitdir}/system
+> +	install -m 0644 ${S}/examples/chronyd.service ${D}${systemd_unitdir}/system/
+> +	
+> +        # variable data (for drift file)
+> +        install -d ${D}${localstatedir}/lib/chrony
+> +
+> +        # log files
+> +        install -d ${D}${localstatedir}/log/chrony
+> +}
+> 
+
 
 
