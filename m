@@ -1,20 +1,17 @@
 Return-Path: <lukas.bulwahn@oss.bmw-carit.de>
-X-Greylist: delayed 574 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 13 Jun 2016 11:43:13 UTC
 Received: from linuxmail.bmw-carit.de (unknown [212.118.206.70])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F20F60249
+	by mail.openembedded.org (Postfix) with ESMTP id B20F6607F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jun 2016 11:43:13 +0000 (UTC)
+	Mon, 13 Jun 2016 12:23:31 +0000 (UTC)
 Received: from hulk.bmw-carit.intra (unknown [10.10.50.129])
-	by linuxmail.bmw-carit.de (Postfix) with ESMTP id C568140472;
-	Mon, 13 Jun 2016 13:25:36 +0200 (CEST)
+	by linuxmail.bmw-carit.de (Postfix) with ESMTP id 371CA40411;
+	Mon, 13 Jun 2016 14:15:27 +0200 (CEST)
 From: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Jun 2016 13:33:37 +0200
-Message-Id: <1465817617-3212-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
+Date: Mon, 13 Jun 2016 14:23:28 +0200
+Message-Id: <1465820608-5732-1-git-send-email-lukas.bulwahn@oss.bmw-carit.de>
 X-Mailer: git-send-email 2.5.5
 MIME-Version: 1.0
-Cc: Lukas Bulwahn <lukas.bulwahn@oss.bmw-carit.de>
 Subject: [PATCH] libeigen: update to 3.2.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -28,7 +25,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jun 2016 11:43:16 -0000
+X-List-Received-Date: Mon, 13 Jun 2016 12:23:33 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
