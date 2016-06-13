@@ -1,25 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id C4E38607A4
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CE943607A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jun 2016 09:09:57 +0000 (UTC)
+	Mon, 13 Jun 2016 09:09:59 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u5D99wcf019290
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 13 Jun 2016 02:09:58 -0700 (PDT)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u5D99xRn004244
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Mon, 13 Jun 2016 02:10:00 -0700
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
-	Mon, 13 Jun 2016 02:09:57 -0700
+	Mon, 13 Jun 2016 02:09:59 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 13 Jun 2016 05:09:40 -0400
-Message-ID: <89eb06df35a49ec74f4c431a3ade52d7dcf90a46.1465808701.git.hongxu.jia@windriver.com>
+Date: Mon, 13 Jun 2016 05:09:41 -0400
+Message-ID: <9a9556850084b86785dbcd0efc066412cf64cc3f.1465808701.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.8.1
 In-Reply-To: <cover.1465808701.git.hongxu.jia@windriver.com>
 References: <cover.1465808701.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 06/10] libnewt/libnewt-python: upgrade to 0.52.19
+Subject: [PATCH 07/10] libxml2: upgrade to 2.9.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,71 +32,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jun 2016 09:09:57 -0000
+X-List-Received-Date: Mon, 13 Jun 2016 09:10:00 -0000
 Content-Type: text/plain
 
-- Drop remove_slang_include.patch, libnewt 0.52.19 has fixed it.
+- Drop configure.ac-fix-cross-compiling-warning.patch,
+  libxml2 2.9.4 has fixed it
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../newt/files/remove_slang_include.patch                | 16 ----------------
- ...bnewt-python_0.52.18.bb => libnewt-python_0.52.19.bb} |  0
- .../newt/{libnewt_0.52.18.bb => libnewt_0.52.19.bb}      |  5 ++---
- 3 files changed, 2 insertions(+), 19 deletions(-)
- delete mode 100644 meta/recipes-extended/newt/files/remove_slang_include.patch
- rename meta/recipes-extended/newt/{libnewt-python_0.52.18.bb => libnewt-python_0.52.19.bb} (100%)
- rename meta/recipes-extended/newt/{libnewt_0.52.18.bb => libnewt_0.52.19.bb} (88%)
+ .../configure.ac-fix-cross-compiling-warning.patch | 45 ----------------------
+ .../libxml/{libxml2_2.9.3.bb => libxml2_2.9.4.bb}  |  5 +--
+ 2 files changed, 2 insertions(+), 48 deletions(-)
+ delete mode 100644 meta/recipes-core/libxml/libxml2/configure.ac-fix-cross-compiling-warning.patch
+ rename meta/recipes-core/libxml/{libxml2_2.9.3.bb => libxml2_2.9.4.bb} (93%)
 
-diff --git a/meta/recipes-extended/newt/files/remove_slang_include.patch b/meta/recipes-extended/newt/files/remove_slang_include.patch
+diff --git a/meta/recipes-core/libxml/libxml2/configure.ac-fix-cross-compiling-warning.patch b/meta/recipes-core/libxml/libxml2/configure.ac-fix-cross-compiling-warning.patch
 deleted file mode 100644
-index a2634ec..0000000
---- a/meta/recipes-extended/newt/files/remove_slang_include.patch
+index 2f8079b..0000000
+--- a/meta/recipes-core/libxml/libxml2/configure.ac-fix-cross-compiling-warning.patch
 +++ /dev/null
-@@ -1,16 +0,0 @@
+@@ -1,45 +0,0 @@
+-configure.ac: fix cross compiling warning
 -
--Upstream-Status: Pending
+-There is a warning while cross compiling which triggered a
+-failure by do_qa_configure
+-...
+-|configure:12652: checking for gzread in -lz
+-|configure:12677: mips-poky-linux-gcc  -meb -mabi=32 -mhard-float
+- -L/lib conftest.c -lz   >&5
+-|ld: warning: library search path "/lib" is unsafe for cross-compilation
+-...
 -
--Index: git/Makefile.in
--===================================================================
----- git.orig/Makefile.in
--+++ git/Makefile.in
--@@ -5,7 +5,7 @@ CC = @CC@
-- CPP = @CPP@
-- CFLAGS = @CFLAGS@
-- LDFLAGS = @LDFLAGS@
---CPPFLAGS = -D_GNU_SOURCE -I/usr/include/slang @CPPFLAGS@ 
--+CPPFLAGS = -D_GNU_SOURCE @CPPFLAGS@ 
-- GNU_LD = @GNU_LD@
+-While do the lib checking, do not add '-L${Z_DIR}/lib' to LDFLAGS could fix it.
+-
+-Upstream-Status: Inappropriate [oe specific]
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- configure.ac | 5 +----
+- 1 file changed, 1 insertion(+), 4 deletions(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 9a90600..0bac8a4 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -391,8 +391,6 @@ if test "$with_zlib" = "no"; then
+-     echo "Disabling compression support"
+- else
+-     AC_CHECK_HEADERS(zlib.h,
+--        [SAVE_LDFLAGS="${LDFLAGS}"
+--	 LDFLAGS="-L${Z_DIR}/lib"
+- 	AC_CHECK_LIB(z, gzread,[
+- 	    AC_DEFINE([HAVE_LIBZ], [1], [Have compression library])
+- 	    WITH_ZLIB=1
+-@@ -406,8 +404,7 @@ else
+- 		esac]
+- 	    else
+- 		Z_LIBS="-lz"
+--	    fi])
+--	 LDFLAGS="${SAVE_LDFLAGS}"])
+-+	    fi]))
+- fi
 - 
-- VERSION = @VERSION@
-diff --git a/meta/recipes-extended/newt/libnewt-python_0.52.18.bb b/meta/recipes-extended/newt/libnewt-python_0.52.19.bb
-similarity index 100%
-rename from meta/recipes-extended/newt/libnewt-python_0.52.18.bb
-rename to meta/recipes-extended/newt/libnewt-python_0.52.19.bb
-diff --git a/meta/recipes-extended/newt/libnewt_0.52.18.bb b/meta/recipes-extended/newt/libnewt_0.52.19.bb
-similarity index 88%
-rename from meta/recipes-extended/newt/libnewt_0.52.18.bb
-rename to meta/recipes-extended/newt/libnewt_0.52.19.bb
-index b6a9cd4..b45461c 100644
---- a/meta/recipes-extended/newt/libnewt_0.52.18.bb
-+++ b/meta/recipes-extended/newt/libnewt_0.52.19.bb
-@@ -18,15 +18,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
- DEPENDS = "slang popt"
+- AC_SUBST(Z_CFLAGS)
+--- 
+-1.9.1
+-
+diff --git a/meta/recipes-core/libxml/libxml2_2.9.3.bb b/meta/recipes-core/libxml/libxml2_2.9.4.bb
+similarity index 93%
+rename from meta/recipes-core/libxml/libxml2_2.9.3.bb
+rename to meta/recipes-core/libxml/libxml2_2.9.4.bb
+index ae65159..5ff508a 100644
+--- a/meta/recipes-core/libxml/libxml2_2.9.3.bb
++++ b/meta/recipes-core/libxml/libxml2_2.9.4.bb
+@@ -19,11 +19,10 @@ SRC_URI = "ftp://xmlsoft.org/libxml2/libxml2-${PV}.tar.gz;name=libtar \
+            file://run-ptest \
+            file://python-sitepackages-dir.patch \
+            file://libxml-m4-use-pkgconfig.patch \
+-           file://configure.ac-fix-cross-compiling-warning.patch \
+           "
  
- SRC_URI = "https://fedorahosted.org/releases/n/e/newt/newt-${PV}.tar.gz \
--           file://remove_slang_include.patch \
-            file://fix_SHAREDDIR.patch \
-            file://cross_ar.patch \
-            file://Makefile.in-Add-tinfo-library-to-the-linking-librari.patch \
-            file://pie-flags.patch \
- "
- 
--SRC_URI[md5sum] = "685721bee1a318570704b19dcf31d268"
--SRC_URI[sha256sum] = "771b0e634ede56ae6a6acd910728bb5832ac13ddb0d1d27919d2498dab70c91e"
-+SRC_URI[md5sum] = "e4aa0f7943edd39c52481a87f68f412a"
-+SRC_URI[sha256sum] = "08c0db56c21996af6a7cbab99491b774c6c09cef91cd9b03903c84634bff2e80"
- 
- S = "${WORKDIR}/newt-${PV}"
+-SRC_URI[libtar.md5sum] = "daece17e045f1c107610e137ab50c179"
+-SRC_URI[libtar.sha256sum] = "4de9e31f46b44d34871c22f54bfc54398ef124d6f7cafb1f4a5958fbcd3ba12d"
++SRC_URI[libtar.md5sum] = "ae249165c173b1ff386ee8ad676815f5"
++SRC_URI[libtar.sha256sum] = "ffb911191e509b966deb55de705387f14156e1a56b21824357cdf0053233633c"
+ SRC_URI[testtar.md5sum] = "ae3d1ebe000a3972afa104ca7f0e1b4a"
+ SRC_URI[testtar.sha256sum] = "96151685cec997e1f9f3387e3626d61e6284d4d6e66e0e440c209286c03e9cc7"
  
 -- 
 2.8.1
