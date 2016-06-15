@@ -1,41 +1,51 @@
-Return-Path: <schaefer.hutter@gmail.com>
-Received: from mail-vk0-f42.google.com (mail-vk0-f42.google.com
-	[209.85.213.42])
-	by mail.openembedded.org (Postfix) with ESMTP id E42EE6018C
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E7B062134
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jun 2016 09:47:46 +0000 (UTC)
-Received: by mail-vk0-f42.google.com with SMTP id d185so22260952vkg.0
+	Wed, 15 Jun 2016 10:01:55 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id m124so4610768wme.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jun 2016 02:47:47 -0700 (PDT)
+	Wed, 15 Jun 2016 03:01:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=jp6WX6xvsta2oLZxtbJUtg/f3hHbHvtIuq3n+vyuTys=;
-	b=DE/hpuXcqTC2//ygVlmoHQG+MMKIapGcrx5pgxpePVKhs7Q78kvfK4msK6m+mYeIFh
-	csbabpwPJhfeM0z9kiFO1U09E5ixrMIOCIYZBpy47sGiNH32T8x2PqLKudDJJiJ1NT2t
-	L5viIGC03/FWdCb4E7//qWPubYEJMqORb02vY7ASWPqP1W9zHrOpcrj4plV6gBr2o4gX
-	0rhV26egAddL+aJ7XghcqlPx3N35oHToz19iTpDiwRvR7MultnGhXLLzXju3n6XQXgd4
-	PJtz1Dw+/osUzs2Gjl3xVUCoA/aOxxsqCwZm4BkP11CL7EgoIH/G2CvGpLMbL/sBVPmz
-	/WbA==
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=xeSDGB74k4SVrco9PeLuvE2pZUqCkGBc1e8BbF4D1WI=;
+	b=RJg8+Nb8q/an30camabLwsRXg1Tl5gpqd79ECHNyPSgzASC4GkOw9G3FLbTZw6BP8K
+	WqBQuyio6HCkaFqkbvGzXNdYkeonojj73wGUbw5ATGi7GuVq/pjny/4B6upk29yrLW4G
+	9LIVfzh/bB7IpnlGfD6MbwKNn1zIUEvEjmaNXfyGIMH2fVXURASVR4YACVFfmHrgacM5
+	Wfq79R0FoB9OXYPcrK7hpan1x8NxCXSboUYFvDDbk6aO1RHI830/W/ThewRc+dW9Fria
+	Ei+CJNhfvMyQnYVVIpI9fazgcrt3E8Evs6za36YutU7Le9BuxU//vkcRO2plZi4nZWLq
+	Pw7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=jp6WX6xvsta2oLZxtbJUtg/f3hHbHvtIuq3n+vyuTys=;
-	b=dN5lyKKqeIHn+B13KBhB9ruwuVNlRHYfNyLCx/d4jU3SPLCykYGFA3PD9m9E2nmEEV
-	lvJon1tTqYJLdKPX4A5K8NklS6go8Uj7CHJVdym6TJwmn3quj/DCArb+IZcvdiChAMIH
-	W6+RYEc1zG4VjqUYq3c1sR+LQrl+1IaL7gxMUvwjmnPuBNLdHX0+CxhpP67HKp7lAmNb
-	amLm8NA0gQcclePGVN6CunJLu1iy1LWM9zc4FjxGyBVNAZ4KQeqGpn5B+vVjb8zvU4OP
-	1ElQXa81mxcu1xX3uCgdhPSHEBfB1o7uGgL48F0YfpaB8jHKA+4/T2WX0tsvfw0CF5UQ
-	1/Gg==
-X-Gm-Message-State: ALyK8tI1sVM+R8qyfW75LeRaKbXxqp54XlxT1yn3cCBqA2qNVTxcjsPHfjsnlWmBgYyoIeDhWHcLQ2a0snqwSA==
-X-Received: by 10.176.69.141 with SMTP id u13mr11589687uau.133.1465984066943; 
-	Wed, 15 Jun 2016 02:47:46 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.103.122.77 with HTTP; Wed, 15 Jun 2016 02:47:46 -0700 (PDT)
-From: =?UTF-8?B?U2Now6RmZXItSHV0dGVy?= <schaefer.hutter@gmail.com>
-Date: Wed, 15 Jun 2016 11:47:46 +0200
-Message-ID: <CAK7uLydzisVkd4Tc+qNYZV3o1CeyXcbBjKpNu2eXE3TOANncEQ@mail.gmail.com>
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=xeSDGB74k4SVrco9PeLuvE2pZUqCkGBc1e8BbF4D1WI=;
+	b=YcZWwxMY78VcWJ05ZueQv8a6oHC1W9UMLSNSfQt4bwDHzByuRa5Jw25l4aqU9qd74f
+	4eZwG0//BlfNjcqQm0dfbSjX56NCu0p6b8kGm8ZtWGkHsbiYwBo6zw3zZSfHLzkYNeVp
+	k+SaSvElU13lLTo+CKUy956MCjj0F/weq0v52h1vJrdlIBvipDAvVHDrBCb7nNX7qimM
+	MxwtaHOMdK55nYh5AHMJbl1EnrPdRU7p5lgQMXMHW1VNWOIKF2YA/60ckxOxvTo1gA1J
+	fo6mrGMl9Xt/cT3adYmovTDwoSnKbsYY8N7yWOetvJQbNroFfdNtJud9AsmI6WZVoiNF
+	nYug==
+X-Gm-Message-State: ALyK8tLOPbuDHYce8zLAPAycOuGeGsh27memHwXTrMCgZ6yVIg+oty1AjW7SS+HHhFYMNA==
+X-Received: by 10.28.215.148 with SMTP id o142mr8813835wmg.72.1465984915155;
+	Wed, 15 Jun 2016 03:01:55 -0700 (PDT)
+Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
+	by smtp.gmail.com with ESMTPSA id
+	r129sm8798755wmr.20.2016.06.15.03.01.54
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 15 Jun 2016 03:01:54 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 15 Jun 2016 12:02:18 +0200
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe] gpsd fails to compile due to scons-generated malformed command line
+Message-ID: <20160615100218.GA2569@jama>
+References: <1465982612-45997-1-git-send-email-j.remmet@phytec.de>
+MIME-Version: 1.0
+In-Reply-To: <1465982612-45997-1-git-send-email-j.remmet@phytec.de>
+User-Agent: Mutt/1.6.1 (2016-04-27)
+Subject: Re: [PATCH] rootfs-postcommands: generate /var/lib/systemd/clock
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,38 +58,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jun 2016 09:47:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 15 Jun 2016 10:01:58 -0000
+X-Groupsio-MsgNum: 61833
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="2oS5YaxWCcQjTEyO"
+Content-Disposition: inline
 
-Hi there,
+--2oS5YaxWCcQjTEyO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I'm getting the following error when trying to compile gpsd:
+On Wed, Jun 15, 2016 at 11:23:32AM +0200, Jan Remmet wrote:
+> systemd timesyncd check /var/lib/systemd/clock instead of
+> /etc/timestamp.
+> If this file is missing it defaults to TIME_EPOCH. It's set while
+> configuring systemd.
 
-| arm-linux-gnueabihf-gcc -march=armv7-a -marm -mthumb-interwork
--mfloat-abi=hard -mfpu=neon -mtune=cortex-a15
---sysroot=/home/ashaepe/yocto/tmn2000/build/arago-tmp-external-linaro-toolchain/sysroots/k2l-evm
--o bits.os -c -isystem/opt/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/arm-linux-gnueabihf/include
--Wno-error=unused-value -fstack-protector -O2 -pipe -g
--feliminate-unused-debug-types -D_GNU_SOURCE
---sysroot=/home/ashaepe/yocto/tmn2000/build/arago-tmp-external-linaro-toolchain/sysroots/k2l-evm
--Wextra -Wall -Wno-uninitialized -Wno-missing-field-initializers
--Wcast-align -Wmissing-declarations -Wmissing-prototypes
--Wstrict-prototypes -Wpointer-arith -Wreturn-type -g -O0 -fPIC "
--isystem/opt/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/arm-linux-gnueabihf/include
--Wno-error=unused-value -fstack-protector" bits.c
-| arm-linux-gnueabihf-gcc: error:
--isystem/opt/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/arm-linux-gnueabihf/include
--Wno-error=unused-value -fstack-protector: No such file or directory
-| scons: *** [bits.os] Error 1
+Wrong ML, re-send to openembedded-core
+>=20
+> Signed-off-by: Jan Remmet <j.remmet@phytec.de>
+> ---
+>  meta/classes/rootfs-postcommands.bbclass | 6 ++++++
+>  1 file changed, 6 insertions(+)
+>=20
+> diff --git a/meta/classes/rootfs-postcommands.bbclass b/meta/classes/root=
+fs-postcommands.bbclass
+> index db8b551..0c7b764 100644
+> --- a/meta/classes/rootfs-postcommands.bbclass
+> +++ b/meta/classes/rootfs-postcommands.bbclass
+> @@ -234,6 +234,12 @@ python write_image_manifest () {
+>  # sane default time setting
+>  rootfs_update_timestamp () {
+>  	date -u +%4Y%2m%2d%2H%2M%2S >${IMAGE_ROOTFS}/etc/timestamp
+> +
+> +	if ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "true", "false", =
+d)}; then
+> +		# touch needs timestamp as [[CC]YY]MMDDhhmm[.ss]
+> +		TS=3D$(sed 's/[.]*/&./13' ${IMAGE_ROOTFS}/etc/timestamp)
+> +		touch -t $TS ${IMAGE_ROOTFS}/var/lib/systemd/clock
+> +	fi
+>  }
+> =20
+>  # Prevent X from being started
+> --=20
+> 1.9.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-Obviously the command line part in double quotes ("
--isystem/opt/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/arm-linux-gnueabihf/include
--Wno-error=unused-value -fstack-protector") is wrongly placed/repeated
-by SCons.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-But I'm lost finding a reason for this behaviour? Any hint would be
-appreciated greatly...
+--2oS5YaxWCcQjTEyO
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Regards,
-  Peter
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
+iEYEARECAAYFAldhJ6kACgkQN1Ujt2V2gBxHvgCglTMYdI5Eiz2I5+G2lA2+hlhg
+/ZgAn0cNROXm31yPtF8rD9+iWjl3K1f3
+=H3YM
+-----END PGP SIGNATURE-----
+
+--2oS5YaxWCcQjTEyO--
