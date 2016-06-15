@@ -1,30 +1,41 @@
-Return-Path: <j.remmet@phytec.de>
-X-Greylist: delayed 351 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 15 Jun 2016 09:31:09 UTC
-Received: from root.phytec.de (mail.x-arc.de [217.6.246.34])
-	by mail.openembedded.org (Postfix) with ESMTP id F107E601F6
+Return-Path: <schaefer.hutter@gmail.com>
+Received: from mail-vk0-f42.google.com (mail-vk0-f42.google.com
+	[209.85.213.42])
+	by mail.openembedded.org (Postfix) with ESMTP id E42EE6018C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jun 2016 09:31:09 +0000 (UTC)
-Received: from idefix.phytec.de (idefix.phytec.de [172.16.0.10])
-	by root.phytec.de (Postfix) with ESMTP id 1564DA0033C
+	Wed, 15 Jun 2016 09:47:46 +0000 (UTC)
+Received: by mail-vk0-f42.google.com with SMTP id d185so22260952vkg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jun 2016 11:26:08 +0200 (CEST)
-Received: from augenblix.phytec.de ([172.16.0.56])
-	by idefix.phytec.de (IBM Domino Release 9.0.1FP5 HF413)
-	with ESMTP id 2016061511250311-315429 ;
-	Wed, 15 Jun 2016 11:25:03 +0200 
-From: Jan Remmet <j.remmet@phytec.de>
+	Wed, 15 Jun 2016 02:47:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=jp6WX6xvsta2oLZxtbJUtg/f3hHbHvtIuq3n+vyuTys=;
+	b=DE/hpuXcqTC2//ygVlmoHQG+MMKIapGcrx5pgxpePVKhs7Q78kvfK4msK6m+mYeIFh
+	csbabpwPJhfeM0z9kiFO1U09E5ixrMIOCIYZBpy47sGiNH32T8x2PqLKudDJJiJ1NT2t
+	L5viIGC03/FWdCb4E7//qWPubYEJMqORb02vY7ASWPqP1W9zHrOpcrj4plV6gBr2o4gX
+	0rhV26egAddL+aJ7XghcqlPx3N35oHToz19iTpDiwRvR7MultnGhXLLzXju3n6XQXgd4
+	PJtz1Dw+/osUzs2Gjl3xVUCoA/aOxxsqCwZm4BkP11CL7EgoIH/G2CvGpLMbL/sBVPmz
+	/WbA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=jp6WX6xvsta2oLZxtbJUtg/f3hHbHvtIuq3n+vyuTys=;
+	b=dN5lyKKqeIHn+B13KBhB9ruwuVNlRHYfNyLCx/d4jU3SPLCykYGFA3PD9m9E2nmEEV
+	lvJon1tTqYJLdKPX4A5K8NklS6go8Uj7CHJVdym6TJwmn3quj/DCArb+IZcvdiChAMIH
+	W6+RYEc1zG4VjqUYq3c1sR+LQrl+1IaL7gxMUvwjmnPuBNLdHX0+CxhpP67HKp7lAmNb
+	amLm8NA0gQcclePGVN6CunJLu1iy1LWM9zc4FjxGyBVNAZ4KQeqGpn5B+vVjb8zvU4OP
+	1ElQXa81mxcu1xX3uCgdhPSHEBfB1o7uGgL48F0YfpaB8jHKA+4/T2WX0tsvfw0CF5UQ
+	1/Gg==
+X-Gm-Message-State: ALyK8tI1sVM+R8qyfW75LeRaKbXxqp54XlxT1yn3cCBqA2qNVTxcjsPHfjsnlWmBgYyoIeDhWHcLQ2a0snqwSA==
+X-Received: by 10.176.69.141 with SMTP id u13mr11589687uau.133.1465984066943; 
+	Wed, 15 Jun 2016 02:47:46 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.103.122.77 with HTTP; Wed, 15 Jun 2016 02:47:46 -0700 (PDT)
+From: =?UTF-8?B?U2Now6RmZXItSHV0dGVy?= <schaefer.hutter@gmail.com>
+Date: Wed, 15 Jun 2016 11:47:46 +0200
+Message-ID: <CAK7uLydzisVkd4Tc+qNYZV3o1CeyXcbBjKpNu2eXE3TOANncEQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Jun 2016 11:23:32 +0200
-Message-Id: <1465982612-45997-1-git-send-email-j.remmet@phytec.de>
-X-Mailer: git-send-email 1.9.1
-X-MIMETrack: Itemize by SMTP Server on Idefix/Phytec(Release 9.0.1FP5
-	HF413|March 21, 2016) at 15.06.2016 11:25:03,
-	Serialize by Router on Idefix/Phytec(Release 9.0.1FP5 HF413|March 21,
-	2016) at 15.06.2016 11:25:03,
-	Serialize complete at 15.06.2016 11:25:03
-X-TNEFEvaluated: 1
-Subject: [PATCH] rootfs-postcommands: generate /var/lib/systemd/clock
+Subject: [meta-oe] gpsd fails to compile due to scons-generated malformed command line
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,36 +48,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jun 2016 09:31:10 -0000
+X-List-Received-Date: Wed, 15 Jun 2016 09:47:47 -0000
+Content-Type: text/plain; charset=UTF-8
 
-systemd timesyncd check /var/lib/systemd/clock instead of
-/etc/timestamp.
-If this file is missing it defaults to TIME_EPOCH. It's set while
-configuring systemd.
+Hi there,
 
-Signed-off-by: Jan Remmet <j.remmet@phytec.de>
----
- meta/classes/rootfs-postcommands.bbclass | 6 ++++++
- 1 file changed, 6 insertions(+)
+I'm getting the following error when trying to compile gpsd:
 
-diff --git a/meta/classes/rootfs-postcommands.bbclass b/meta/classes/rootfs-postcommands.bbclass
-index db8b551..0c7b764 100644
---- a/meta/classes/rootfs-postcommands.bbclass
-+++ b/meta/classes/rootfs-postcommands.bbclass
-@@ -234,6 +234,12 @@ python write_image_manifest () {
- # sane default time setting
- rootfs_update_timestamp () {
- 	date -u +%4Y%2m%2d%2H%2M%2S >${IMAGE_ROOTFS}/etc/timestamp
-+
-+	if ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "true", "false", d)}; then
-+		# touch needs timestamp as [[CC]YY]MMDDhhmm[.ss]
-+		TS=$(sed 's/[.]*/&./13' ${IMAGE_ROOTFS}/etc/timestamp)
-+		touch -t $TS ${IMAGE_ROOTFS}/var/lib/systemd/clock
-+	fi
- }
- 
- # Prevent X from being started
--- 
-1.9.1
+| arm-linux-gnueabihf-gcc -march=armv7-a -marm -mthumb-interwork
+-mfloat-abi=hard -mfpu=neon -mtune=cortex-a15
+--sysroot=/home/ashaepe/yocto/tmn2000/build/arago-tmp-external-linaro-toolchain/sysroots/k2l-evm
+-o bits.os -c -isystem/opt/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/arm-linux-gnueabihf/include
+-Wno-error=unused-value -fstack-protector -O2 -pipe -g
+-feliminate-unused-debug-types -D_GNU_SOURCE
+--sysroot=/home/ashaepe/yocto/tmn2000/build/arago-tmp-external-linaro-toolchain/sysroots/k2l-evm
+-Wextra -Wall -Wno-uninitialized -Wno-missing-field-initializers
+-Wcast-align -Wmissing-declarations -Wmissing-prototypes
+-Wstrict-prototypes -Wpointer-arith -Wreturn-type -g -O0 -fPIC "
+-isystem/opt/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/arm-linux-gnueabihf/include
+-Wno-error=unused-value -fstack-protector" bits.c
+| arm-linux-gnueabihf-gcc: error:
+-isystem/opt/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/arm-linux-gnueabihf/include
+-Wno-error=unused-value -fstack-protector: No such file or directory
+| scons: *** [bits.os] Error 1
 
+Obviously the command line part in double quotes ("
+-isystem/opt/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/arm-linux-gnueabihf/include
+-Wno-error=unused-value -fstack-protector") is wrongly placed/repeated
+by SCons.
+
+But I'm lost finding a reason for this behaviour? Any hint would be
+appreciated greatly...
+
+Regards,
+  Peter
 
