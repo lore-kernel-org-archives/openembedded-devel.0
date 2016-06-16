@@ -1,54 +1,28 @@
-Return-Path: <patrick.ohly@intel.com>
-Received: from mail-it0-f52.google.com (mail-it0-f52.google.com
-	[209.85.214.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 3BE0060589
+Return-Path: <gthomas@mlbassoc.com>
+Received: from mail.analogue-micro.com (mail.analogue-micro.com
+	[217.144.149.242])
+	by mail.openembedded.org (Postfix) with ESMTP id 0EA0660589
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jun 2016 09:09:06 +0000 (UTC)
-Received: by mail-it0-f52.google.com with SMTP id e5so41640688ith.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jun 2016 02:09:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=message-id:subject:from:to:date:in-reply-to:references:organization
-	:mime-version:content-transfer-encoding;
-	bh=sJ9yGuLNVUETg9uRcqGV/qsAlGll2mCgrHi6v7ZWFAY=;
-	b=VKWxOeuG81tKRvj6SsgEpBkbbX8diQRuusD8tpsrTTgS538kHxVFmuzjyLIstlJqkZ
-	UYq8q5ggKGPb17iG/00LUgLIqR9oOpc9NbVere7KnizGTC75Vp1PfU4HNXafsH/JCq9I
-	Kx+tggbL3qMwSyJ88YBu0b+uMm5XpRld5OZvVePaRQ5/TuMEvgxJVFgfTTHNtcH6kbDA
-	IjmphdgboHoaiOMcjpJUU/2FgF5axzMJNkrb/saQAEzPXg6BLOPE71uvvk9k0TgUhceK
-	HH9GAPMGMrNkLqbR3uCY4TiBWNQunyguEoehQwJJjUBWphBk1bcQ5rDwPck2RBTRRVsM
-	5QHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-	:references:organization:mime-version:content-transfer-encoding;
-	bh=sJ9yGuLNVUETg9uRcqGV/qsAlGll2mCgrHi6v7ZWFAY=;
-	b=NxNvA6Db6R1z87LZyUUp0hiDn4YwyKPLC3QmJGBHGXT4wpaxzwhjzj/v1TxJw9OIfQ
-	iH0psotZKt7/2ug2yDnqMCbvCN89cuG0bo30xws7tPTyr18F3Srdu3+6Jm1OSqHsgFnz
-	LhHZQ/Yu+c2+6juu4nxa8VB8oP46B2O/W6zYx017dKJn8UC3ELf95hlFa6qHxWLFtCr/
-	Jp/vmufA25SLbrrxvCmD3vWguAa+oDqPGx7zMKG8kPJ0k5L5MP75uVbwcC0w04Zuwd/f
-	NsDczN9nveTcFItA1J1m/vZqEOBy8Tk36cddSQwziviuMO5pvMTRmNpzd8ohteAG/dyB
-	l0jQ==
-X-Gm-Message-State: ALyK8tIMexni3/FcMU3+6ak+Eifqd8FRLXZyplDF0rnKQoTTo5JgvSWU/59gph6uSWCGuM9j
-X-Received: by 10.36.16.67 with SMTP id 64mr5941478ity.88.1466068146537;
-	Thu, 16 Jun 2016 02:09:06 -0700 (PDT)
-Received: from pohly-mobl1 (p5DE8D8A2.dip0.t-ipconnect.de. [93.232.216.162])
-	by smtp.gmail.com with ESMTPSA id
-	w189sm3178473itc.1.2016.06.16.02.09.05
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 16 Jun 2016 02:09:06 -0700 (PDT)
-Message-ID: <1466068144.19334.34.camel@intel.com>
-From: Patrick Ohly <patrick.ohly@intel.com>
+	Thu, 16 Jun 2016 09:29:59 +0000 (UTC)
+Received: by mail.analogue-micro.com (Postfix, from userid 999)
+	id 22AEE68A01F; Thu, 16 Jun 2016 10:30:00 +0100 (BST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	loki.analogue-micro-ltd.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.2 required=5.0 tests=ALL_TRUSTED,BAYES_00,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
+	by mail.analogue-micro.com (Postfix) with ESMTP id A6C7468A01A;
+	Thu, 16 Jun 2016 10:29:51 +0100 (BST)
+Received: by zeus.mlbassoc.com (Postfix, from userid 1000)
+	id 6B83B674043C; Thu, 16 Jun 2016 11:29:51 +0200 (CEST)
+From: Gary Thomas <gary@mlbassoc.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Jun 2016 11:09:04 +0200
-In-Reply-To: <1466003282-21411-1-git-send-email-patrick.ohly@intel.com>
-References: <1466002419.9543.1.camel@intel.com>
-	<1466003282-21411-1-git-send-email-patrick.ohly@intel.com>
-Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
-X-Mailer: Evolution 3.12.9-1+b1 
-Mime-Version: 1.0
-Subject: Re: [meta-oe][PATCH 1/2] libgphoto2: fix compatibility with libjpeg-turbo
+Date: Thu, 16 Jun 2016 11:29:48 +0200
+Message-Id: <1466069388-18584-1-git-send-email-gary@mlbassoc.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Gary Thomas <gary@mlbassoc.com>
+Subject: [meta-oe][PATCH] v4lutils: Update to latest upstream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,23 +35,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jun 2016 09:09:07 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 16 Jun 2016 09:30:00 -0000
 
-On Wed, 2016-06-15 at 17:08 +0200, Patrick Ohly wrote:
-> +Upstream-Status: Submitted [https://github.com/gphoto/libgphoto2/pull/64]
+Update to latest upstream version (1.10.1 2016-06-15).
+Now builds with libjpeg-turbo so remove blacklist
 
-FWIW, the patch was merged, so "Backported" is now more accurate.
+Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+---
+ .../v4l2apps/{v4l-utils_1.6.2.bb => v4l-utils_1.10.1.bb}          | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-multimedia/v4l2apps/{v4l-utils_1.6.2.bb => v4l-utils_1.10.1.bb} (82%)
 
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb
+similarity index 82%
+rename from meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb
+rename to meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb
+index 1141bff..6148695 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.6.2.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb
+@@ -17,8 +17,8 @@ SRC_URI = "http://linuxtv.org/downloads/v4l-utils/v4l-utils-${PV}.tar.bz2 \
+            file://mediactl-pkgconfig.patch \
+            file://export-mediactl-headers.patch \
+           "
+-SRC_URI[md5sum] = "9cb3c178f937954e65bf30920af433ef"
+-SRC_URI[sha256sum] = "d3d6eb1f0204fb11f3d318bfca35d5f73cc077f88fac7665a47856a16496be7d"
++SRC_URI[md5sum] = "936c9c58343840e91294e4dcec7dc05f"
++SRC_URI[sha256sum] = "6147ccc29fe7dd3c5c3994d613c4f2a099bac8b44694a96e5cf4d7caca8336c0"
+ 
+ EXTRA_OECONF = "--disable-qv4l2 --enable-shared --with-udevdir=${base_libdir}/udev"
+ 
+@@ -43,7 +43,3 @@ FILES_libv4l-dbg += "${libdir}/libv4l/.debug ${libdir}/libv4l/plugins/.debug"
+ FILES_libv4l-dev += "${includedir} ${libdir}/pkgconfig \
+                      ${libdir}/libv4l*${SOLIBSDEV} ${libdir}/*.la \
+                      ${libdir}/v4l*${SOLIBSDEV} ${libdir}/libv4l/*.la ${libdir}/libv4l/plugins/*.la"
+-
+-# | ../../../v4l-utils-1.6.2/lib/libv4lconvert/jpeg_memsrcdest.h:4:1: error: conflicting types for 'jpeg_mem_src'
+-# |  jpeg_mem_src (j_decompress_ptr cinfo, unsigned char * buffer,
+-PNBLACKLIST[v4l-utils] ?= "Not compatible with libjpeg-turbo-1.5.0"
 -- 
-Best Regards, Patrick Ohly
-
-The content of this message is my personal opinion only and although
-I am an employee of Intel, the statements I make here in no way
-represent Intel's position on the issue, nor am I authorized to speak
-on behalf of Intel on this matter.
-
-
+2.7.4
 
 
