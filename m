@@ -1,32 +1,42 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.analogue-micro.com (mail.analogue-micro.com
-	[217.144.149.242])
-	by mail.openembedded.org (Postfix) with ESMTP id 26629731E1
+Return-Path: <prvs=4975d639f8=michael.davis@essvote.com>
+Received: from m2.essvote.com (m2.essvote.com [66.37.226.14])
+	by mail.openembedded.org (Postfix) with ESMTP id 9FC147321C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jun 2016 11:23:27 +0000 (UTC)
-Received: by mail.analogue-micro.com (Postfix, from userid 999)
-	id 06EC568A01D; Thu, 16 Jun 2016 12:23:27 +0100 (BST)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	loki.analogue-micro-ltd.com
-X-Spam-Level: *
-X-Spam-Status: No, score=1.7 required=5.0 tests=ALL_TRUSTED,BAYES_40,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
-	by mail.analogue-micro.com (Postfix) with ESMTP id 7C74468A01A;
-	Thu, 16 Jun 2016 12:23:27 +0100 (BST)
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by zeus.mlbassoc.com (Postfix) with ESMTP id 40990674043C;
-	Thu, 16 Jun 2016 13:23:27 +0200 (CEST)
-To: openembedded-devel@lists.openembedded.org
-References: <575BE3E8.8060809@mlbassoc.com> <57628A53.201@pseudoterminal.org>
-From: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <57628C2F.5030608@mlbassoc.com>
-Date: Thu, 16 Jun 2016 13:23:27 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.8.0
+	Thu, 16 Jun 2016 13:32:20 +0000 (UTC)
+X-AuditID: 0a00029b-f79436d000000d21-d5-5762aa6323ff
+Received: from ESS-EX01.essvote.corp.local (Unknown_Domain [172.16.110.40])
+	by m2.essvote.com (Symantec Messaging Gateway) with SMTP id
+	A2.2D.03361.36AA2675; Thu, 16 Jun 2016 08:32:20 -0500 (CDT)
+Received: from ESS-EX01.essvote.corp.local ([::1]) by
+	ESS-EX01.essvote.corp.local ([::1]) with mapi id 14.03.0235.001;
+	Thu, 16 Jun 2016 08:32:19 -0500
+From: "Davis, Michael" <michael.davis@essvote.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-browser] Browser blacklists
+Thread-Index: AQHRx54BDcuXWgr4ykSYbf2mE2cP+p/sIeWAgABJsQA=
+Date: Thu, 16 Jun 2016 13:32:19 +0000
+Message-ID: <3500964.FV5XFluSRj@localhost.localdomain>
+References: <57625081.8000304@mlbassoc.com> <20160616090833.GA2563@jama>
+In-Reply-To: <20160616090833.GA2563@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.1.1.137]
 MIME-Version: 1.0
-In-Reply-To: <57628A53.201@pseudoterminal.org>
-Subject: Re: Chromium build broken
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprJIsWRmVeSWpSXmKPExsWyRiBPQzdlVVK4wd/FnBa//k5htrh4eCmz
+	A5PHzll32T3ObVzBGMAUxW2TlFhSFpyZnqdvl8CdMaG5l61gFnvF/qmv2BoYL7F2MXJySAiY
+	SHStuMwOYYtJXLi3nq2LkYtDSOAoo8Sj9wfZIZxZjBJPT/4B62ATMJI4d30TI4gtIhArMW/T
+	TCYQm1lAU+Le419gk4QFjCUaOnZA1ZhIrD5zEijOAWRbSWy7ywESZhFQldi0YTFYCa+AmcSv
+	1yeYQWwhAQ+JRUeWsoHYnEAjp779AWYzAh33/dQaqFXiEreezGeCOFpAYsme88wQtqjEy8f/
+	WEFWSQjISfzf4gFRriOxYPcnNgjbSuL8192MELa2xLKFr5khThCUODnzCcsERvFZSDbMQtI+
+	C0n7LCTts5C0L2BkXcXIl2ukl1pcXJZfkqqXnJ+7iREYYVwMTLN3MO6Z4HCIUYCDUYmH98LB
+	xHAh1sSy4srcQ4zSHCxK4rwqQkrhQgLpiSWp2ampBalF8UWlOanFhxiZODgPMUpwcEmJFKfm
+	paQWJZaWZMSDYja+GBi1Ug2Mdv9Ni6NiX/+/8Tvz496ZSu19/tlXdu86Us62YU+frc9/nVtc
+	GvNP59xqnFfm53wy2PNd4t6wJQfvnvA+zpbBsb7t0PZbYlt6V3bXcyWsZXy6RNgpvSqzyJD1
+	/u9whphrHeuXtRd6sHld/hftMNlP7I/9cdGnLq3BM1/1Hd5YHiGlVbtOuV5MiaU4I9FQi7mo
+	OBEAR7xn6qwCAAA=
+Subject: Re: [meta-browser] Browser blacklists
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,76 +49,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jun 2016 11:23:28 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 16 Jun 2016 13:32:25 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <A847FB635B8B714CB2319D1D0BF656DE@essvote.com>
+Content-Transfer-Encoding: quoted-printable
 
-On 2016-06-16 13:15, Carlos Rafael Giani wrote:
-> This indicates a problem related to this patch: 0012-Workaround-for-unused-variable-error-in-ui-gfx-color.patch
-> It is possible that the new .cc file needs to be linked in somewhere else as well.
->
-> I tried to do it differently by disabling the unused-variable warning inline, but it did not work.
->
+I ran into this as well and had to spend some time figuring out how to get =
+around it.
+Some sort of note in the readme or even commit message about how to get aro=
+und it would have been nice.
 
-How can I help you diagnose this failure?
-
-> On 2016-06-11 12:11, Gary Thomas wrote:
->> Building chromium is broken on my i.MX6 target.
->>
->> Poky/Yocto info:
->> BB_VERSION        = "1.31.0"
->> BUILD_SYS         = "x86_64-linux"
->> NATIVELSBSTRING   = "Ubuntu-15.10"
->> TARGET_SYS        = "arm-amltd-linux-gnueabi"
->> MACHINE           = "teton-p0382"
->> DISTRO            = "amltd"
->> DISTRO_VERSION    = "2.1+snapshot-20160611"
->> TUNE_FEATURES     = "arm armv7a vfp thumb neon callconvention-hard       cortexa9"
->> TARGET_FPU        = "hard"
->> meta              = "master:40e789d1fee7f0df2d23230fff38325119ad2935"
->> meta-teton-imx6-p0382 = "master:5f3d52b357c0b05e7ea5cfc309e04c8c3aad1260"
->> meta-fsl-arm      = "master:00b46e11e32f859a0d2dad5a5d53d5540be9c15e"
->> meta-fsl-arm-extra = "master:089ce85e2e2dd78e45b773b947643ab8f4e2b965"
->> meta-browser      = "master:825ea9349fe9b7da39f1de0c3e8e15d9d62f2774"
->>
->> Error:
->> | ninja: Entering directory
->> `/local/p0382_2016-01-13/tmp/work/cortexa9hf-neon-mx6qdl-amltd-linux-gnueabi/chromium/48.0.2548.0-r0/chromium-48.0.2548.0/out/Release'
->>
->> | [1/9316] SOLINK lib/libnative_theme.so
->> | [2/9316] CXX obj/components/infobars/core/infobars_core.infobar_container.o
->> | [3/9316] CXX obj/components/infobars/core/infobars_core.infobars_switches.o
->> | [4/9316] CXX obj/components/infobars/core/infobars_core.infobar.o
->> | [5/9316] STAMP obj/ui/compositor/compositor.compile_depends.stamp
->> | [6/9316] CXX obj/ui/compositor/compositor.callback_layer_animation_observer.o
->> | FAILED: if [ ! -e lib/libnative_theme.so -o ! -e lib/libnative_theme.so.TOC ]; then arm-amltd-linux-gnueabi-g++
->> -march=armv7-a -marm -mfpu=neon  -mfloat-abi=hard -mcpu=cortex-a9
->> --sysroot=/local/p0382_2016-01-13/tmp/sysroots/teton-p0382 -shared -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
->> -Wl,-z,now -Wl,-z,relro -Wl,-z,defs -pthread -Wl,-z,noexecstack -fPIC -Wl,--disable-new-dtags -L. -Wl,-O1
->> -Wl,--as-needed -Wl,--gc-sections -o lib/libnative_theme.so -Wl,-soname=libnative_theme.so @lib/libnative_theme.so.rsp
->> && { readelf -d lib/libnative_theme.so | grep SONAME ; arm-amltd-linux-gnueabi-nm -gD -f p lib/libnative_theme.so |
->> cut -f1-2 -d' '; } > lib/libnative_theme.so.TOC; else arm-amltd-linux-gnueabi-g++ -march=armv7-a -marm -mfpu=neon
->> -mfloat-abi=hard -mcpu=cortex-a9 --sysroot=/local/p0382_2016-01-13/tmp/sysroots/teton-p0382 -shared -Wl,-O1
->> -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,now -Wl,-z,relro -Wl,-z,defs -pthread -Wl,-z,noexecstack -fPIC
->> -Wl,--disable-new-dtags -L. -Wl,-O1 -Wl,--as-needed -Wl,--gc-sections -o lib/libnative_theme.so
->> -Wl,-soname=libnative_theme.so @lib/libnative_theme.so.rsp && { readelf -d lib/libnative_theme.so | grep SONAME ;
->> arm-amltd-linux-gnueabi-nm -gD -f p lib/libnative_theme.so | cut -f1-2 -d' '; } > lib/libnative_theme.so.tmp && if !
->> cmp -s lib/libnative_theme.so.tmp lib/libnative_theme.so.TOC; then mv lib/libnative_theme.so.tmp
->> lib/libnative_theme.so.TOC ; fi; fi
->> | obj/ui/native_theme/native_theme.common_theme.o: In function `_GLOBAL__sub_I_common_theme.cc':
->> | /usr/src/debug/chromium/48.0.2548.0-r0/chromium-48.0.2548.0/ui/native_theme/common_theme.cc:273: undefined reference
->> to `gfx::kGoogleBlue500'
->> | /usr/src/debug/chromium/48.0.2548.0-r0/chromium-48.0.2548.0/ui/native_theme/common_theme.cc:273: undefined reference
->> to `gfx::kGoogleBlue300'
->>
->> Note: I'm still using GCC/4.9.x with the standard linker (not gold)
->>
->
+On a related side note it would be nice to get krogoth branch/tag before th=
+is blacklist.
+I saw there isn't one currently and it would give people a working tag that=
+ isn't as old as jethro.
 
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+On Thursday, June 16, 2016 11:08:33 AM Martin Jansa wrote:
+> On Thu, Jun 16, 2016 at 09:08:49AM +0200, Gary Thomas wrote:
+> > I notice that both firefox and chromium are currently blacklisted
+> > as "fails to build with gcc-6".  What about those of us that aren't
+> > using gcc-6?  This seems an overly broad blacklisting :-(
+>=20
+> You can easily unblacklist them in your configuration where you also
+> change the gcc version, but they are broken in default configuration, so
+> they are blacklisted.
+>=20
+> =
 
