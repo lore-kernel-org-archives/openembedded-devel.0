@@ -1,52 +1,32 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id A85B36B6EA
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.analogue-micro.com (mail.analogue-micro.com
+	[217.144.149.242])
+	by mail.openembedded.org (Postfix) with ESMTP id 61173731D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jun 2016 10:40:45 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id 187so8437813wmz.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jun 2016 03:40:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=WxeH9zLtbj0pO8IukHBHxEaR21TQ0iJMOGRBZNJ35FM=;
-	b=RH/9IofPBZ931njr/MeBYlyDCgN+F1iRU3MLGzEgQF30RIXj9R2ZqryhNvYMtQ5Gmx
-	BnAJhNTr0EA1Y1VGpnB99XGnszfSDyZOgibehXjBUFRpVTwHnmT+0l8NI4E0idD5muJH
-	rqCV5NrxrdnfIpNuRAsljGN5tnGmapRAMWqhfcy+/MnXUcgu4IGjeW0FY7a5vKlcpyuH
-	KUXrRRU4SCESs6pSKSpVAuBqa/RruO61FMuOvVx+cmcx4EpPCtvBqmY4vjmFibzCqYmg
-	smRyO5yqhnuDSGDG3uRUMt1k6XEMoetTr+lMiqWa8CXXTyaqI8Ks6vzXWsL2E9Dve1y6
-	RfPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=WxeH9zLtbj0pO8IukHBHxEaR21TQ0iJMOGRBZNJ35FM=;
-	b=CHNklazMaC9rZm8ZVXYgQec4X8hr/xNavyLbfQSJ9cXxteUom3N48Ve2T2Kkg2kMzZ
-	vN3tz8fQMxPVl1D70R5oX8o6mq4AeHi4LeX5nt3aCuH5YFZmE+87UfPJuLbGsdWKxP2d
-	p2/ee0N5cwYzJ/va59Ih1qbDgz/q8q5iJy2ky0zAvsyonj7dQ2t1RbM6z3gcFF05bA7O
-	H/AKtoxYAdik9Vhj1hvOnP3r/PklSN3Bj3nd4pZ/MmpOO4wNWETwe9Re0AhMbNhRfQ1Q
-	5KcN/X9EYM4gKAGfec26tRaFVNEP3ItChzI94WquHioDBKkUhtNXFKNykBuzdiKcBrxt
-	RY6A==
-X-Gm-Message-State: ALyK8tJKIMtwn/gwvZuwWOHNeysN4VaNKw6uxKpu8Vpe6+iwOye+wUcbG1g8fhNcAfSyUQ==
-X-Received: by 10.28.195.131 with SMTP id t125mr3872006wmf.25.1466073645951;
-	Thu, 16 Jun 2016 03:40:45 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id
-	w76sm14198690wmd.11.2016.06.16.03.40.44
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 16 Jun 2016 03:40:44 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 16 Jun 2016 12:41:15 +0200
+	Thu, 16 Jun 2016 10:47:31 +0000 (UTC)
+Received: by mail.analogue-micro.com (Postfix, from userid 999)
+	id 8BF7268A01A; Thu, 16 Jun 2016 11:47:32 +0100 (BST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	loki.analogue-micro-ltd.com
+X-Spam-Level: *
+X-Spam-Status: No, score=1.7 required=5.0 tests=ALL_TRUSTED,BAYES_20,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
+	by mail.analogue-micro.com (Postfix) with ESMTP id F2C4768A01A;
+	Thu, 16 Jun 2016 11:47:31 +0100 (BST)
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by zeus.mlbassoc.com (Postfix) with ESMTP id BA9E9674019D;
+	Thu, 16 Jun 2016 12:47:31 +0200 (CEST)
+From: Gary Thomas <gary@mlbassoc.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160616104115.GB2563@jama>
-References: <1465287700-18359-1-git-send-email-liezhi.yang@windriver.com>
-	<575D321E.6010308@windriver.com>
+References: <575BE3E8.8060809@mlbassoc.com>
+Message-ID: <576283C3.5040105@mlbassoc.com>
+Date: Thu, 16 Jun 2016 12:47:31 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.8.0
 MIME-Version: 1.0
-In-Reply-To: <575D321E.6010308@windriver.com>
-User-Agent: Mutt/1.6.1 (2016-04-27)
-Subject: Re: [PATCH 1/2] nginx: add group www-data
+In-Reply-To: <575BE3E8.8060809@mlbassoc.com>
+Subject: Re: Chromium build broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,74 +39,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jun 2016 10:40:47 -0000
-X-Groupsio-MsgNum: 61855
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="/NkBOFFp2J2Af1nK"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 16 Jun 2016 10:47:32 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
---/NkBOFFp2J2Af1nK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2016-06-11 12:11, Gary Thomas wrote:
+> Building chromium is broken on my i.MX6 target.
+>
+> Poky/Yocto info:
+> BB_VERSION        = "1.31.0"
+> BUILD_SYS         = "x86_64-linux"
+> NATIVELSBSTRING   = "Ubuntu-15.10"
+> TARGET_SYS        = "arm-amltd-linux-gnueabi"
+> MACHINE           = "teton-p0382"
+> DISTRO            = "amltd"
+> DISTRO_VERSION    = "2.1+snapshot-20160611"
+> TUNE_FEATURES     = "arm armv7a vfp thumb neon       callconvention-hard       cortexa9"
+> TARGET_FPU        = "hard"
+> meta              = "master:40e789d1fee7f0df2d23230fff38325119ad2935"
+> meta-teton-imx6-p0382 = "master:5f3d52b357c0b05e7ea5cfc309e04c8c3aad1260"
+> meta-fsl-arm      = "master:00b46e11e32f859a0d2dad5a5d53d5540be9c15e"
+> meta-fsl-arm-extra = "master:089ce85e2e2dd78e45b773b947643ab8f4e2b965"
+> meta-browser      = "master:825ea9349fe9b7da39f1de0c3e8e15d9d62f2774"
+>
+> Error:
+> | ninja: Entering directory
+> `/local/p0382_2016-01-13/tmp/work/cortexa9hf-neon-mx6qdl-amltd-linux-gnueabi/chromium/48.0.2548.0-r0/chromium-48.0.2548.0/out/Release'
+>
+> | [1/9316] SOLINK lib/libnative_theme.so
+> | [2/9316] CXX obj/components/infobars/core/infobars_core.infobar_container.o
+> | [3/9316] CXX obj/components/infobars/core/infobars_core.infobars_switches.o
+> | [4/9316] CXX obj/components/infobars/core/infobars_core.infobar.o
+> | [5/9316] STAMP obj/ui/compositor/compositor.compile_depends.stamp
+> | [6/9316] CXX obj/ui/compositor/compositor.callback_layer_animation_observer.o
+> | FAILED: if [ ! -e lib/libnative_theme.so -o ! -e lib/libnative_theme.so.TOC ]; then arm-amltd-linux-gnueabi-g++
+> -march=armv7-a -marm -mfpu=neon  -mfloat-abi=hard -mcpu=cortex-a9
+> --sysroot=/local/p0382_2016-01-13/tmp/sysroots/teton-p0382 -shared -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed
+> -Wl,-z,now -Wl,-z,relro -Wl,-z,defs -pthread -Wl,-z,noexecstack -fPIC -Wl,--disable-new-dtags -L. -Wl,-O1
+> -Wl,--as-needed -Wl,--gc-sections -o lib/libnative_theme.so -Wl,-soname=libnative_theme.so @lib/libnative_theme.so.rsp
+> && { readelf -d lib/libnative_theme.so | grep SONAME ; arm-amltd-linux-gnueabi-nm -gD -f p lib/libnative_theme.so | cut
+> -f1-2 -d' '; } > lib/libnative_theme.so.TOC; else arm-amltd-linux-gnueabi-g++  -march=armv7-a -marm -mfpu=neon
+> -mfloat-abi=hard -mcpu=cortex-a9 --sysroot=/local/p0382_2016-01-13/tmp/sysroots/teton-p0382 -shared -Wl,-O1
+> -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,now -Wl,-z,relro -Wl,-z,defs -pthread -Wl,-z,noexecstack -fPIC
+> -Wl,--disable-new-dtags -L. -Wl,-O1 -Wl,--as-needed -Wl,--gc-sections -o lib/libnative_theme.so
+> -Wl,-soname=libnative_theme.so @lib/libnative_theme.so.rsp && { readelf -d lib/libnative_theme.so | grep SONAME ;
+> arm-amltd-linux-gnueabi-nm -gD -f p lib/libnative_theme.so | cut -f1-2 -d' '; } > lib/libnative_theme.so.tmp && if ! cmp
+> -s lib/libnative_theme.so.tmp lib/libnative_theme.so.TOC; then mv lib/libnative_theme.so.tmp lib/libnative_theme.so.TOC
+> ; fi; fi
+> | obj/ui/native_theme/native_theme.common_theme.o: In function `_GLOBAL__sub_I_common_theme.cc':
+> | /usr/src/debug/chromium/48.0.2548.0-r0/chromium-48.0.2548.0/ui/native_theme/common_theme.cc:273: undefined reference
+> to `gfx::kGoogleBlue500'
+> | /usr/src/debug/chromium/48.0.2548.0-r0/chromium-48.0.2548.0/ui/native_theme/common_theme.cc:273: undefined reference
+> to `gfx::kGoogleBlue300'
+>
+> Note: I'm still using GCC/4.9.x with the standard linker (not gold)
+>
 
-On Sun, Jun 12, 2016 at 05:57:50PM +0800, Robert Yang wrote:
->=20
-> Sorry, please hold on the two patches, base-passwd does provide
-> www-data, I should not meet this orror in theory.
+BTW, still broken on i.MX6 after update to meta-browser/1b4f1e588b
 
-For some reason nostromo, nginx, sthttpd are now failing because of
-www-data user group:
-http://errors.yoctoproject.org/Errors/Build/17410/
+Was that change supposed to affect my issue?  If so, what am I missing?
+If not, what [else] needs to happen?
 
-Any idea why it happends? I suspect last sthttpd change.
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
->=20
-> // Robert
->=20
-> On 06/07/2016 04:21 PM, Robert Yang wrote:
-> > Fixed:
-> > Running useradd commands...
-> > useradd: group 'www-data' does not exist
-> >
-> > Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
-> > ---
-> >   meta-webserver/recipes-httpd/nginx/nginx.inc | 1 +
-> >   1 file changed, 1 insertion(+)
-> >
-> > diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webser=
-ver/recipes-httpd/nginx/nginx.inc
-> > index ebf926a..946db12 100644
-> > --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> > +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> > @@ -130,6 +130,7 @@ INITSCRIPT_NAME =3D "nginx"
-> >   INITSCRIPT_PARAMS =3D "defaults 92 20"
-> >
-> >   USERADD_PACKAGES =3D "${PN}"
-> > +GROUPADD_PARAM_${PN} =3D "--system www-data"
-> >   USERADD_PARAM_${PN} =3D " \
-> >       --system --no-create-home \
-> >       --home ${NGINX_WWWDIR} \
-> >
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---/NkBOFFp2J2Af1nK
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAldigZQACgkQN1Ujt2V2gBzsJQCfUCBMiajKZP8LjYmj7ijizx1q
-qTYAn2miFOsM+NvVhtWBBO9Mtd4gGONo
-=CC8f
------END PGP SIGNATURE-----
-
---/NkBOFFp2J2Af1nK--
