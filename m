@@ -1,22 +1,22 @@
-Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id 44FE9731E3
+Return-Path: <dv@pseudoterminal.org>
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id BC63A731D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jun 2016 11:00:52 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga104.fm.intel.com with ESMTP; 16 Jun 2016 04:00:26 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.26,480,1459839600"; d="scan'208";a="998855129"
-Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by orsmga002.jf.intel.com with ESMTP; 16 Jun 2016 04:00:25 -0700
-From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+	Thu, 16 Jun 2016 11:15:32 +0000 (UTC)
+Received: from [172.16.1.106] (62-178-118-86.cable.dynamic.surfer.at
+	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 3B9FF2EBC8
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Jun 2016 13:15:32 +0200 (CEST)
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Jun 2016 14:00:06 +0300
-Message-Id: <1466074806-14158-2-git-send-email-alexander.kanavin@linux.intel.com>
-X-Mailer: git-send-email 2.8.1
-In-Reply-To: <1466074806-14158-1-git-send-email-alexander.kanavin@linux.intel.com>
-References: <1466074806-14158-1-git-send-email-alexander.kanavin@linux.intel.com>
-Subject: [PATCH 2/2] libmad: add the recipe
+References: <575BE3E8.8060809@mlbassoc.com>
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+Message-ID: <57628A53.201@pseudoterminal.org>
+Date: Thu, 16 Jun 2016 13:15:31 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.8.0
+MIME-Version: 1.0
+In-Reply-To: <575BE3E8.8060809@mlbassoc.com>
+Subject: Re: Chromium build broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,246 +29,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jun 2016 11:00:52 -0000
+X-List-Received-Date: Thu, 16 Jun 2016 11:15:37 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The recipe has been removed from oe-core, see https://bugzilla.yoctoproject.org/show_bug.cgi?id=6020
+This indicates a problem related to this patch: 
+0012-Workaround-for-unused-variable-error-in-ui-gfx-color.patch
+It is possible that the new .cc file needs to be linked in somewhere 
+else as well.
 
-Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
----
- .../libmad/libmad/add-pkgconfig.patch              | 70 ++++++++++++++++++++++
- .../libmad/libmad/automake-foreign.patch           | 12 ++++
- .../libmad/fix_for_mips_with_gcc-4.5.0.patch       | 33 ++++++++++
- .../libmad/libmad/no-force-mem.patch               | 18 ++++++
- .../libmad/libmad/obsolete_automake_macros.patch   | 14 +++++
- .../recipes-multimedia/libmad/libmad_0.15.1b.bb    | 36 +++++++++++
- 6 files changed, 183 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/libmad/libmad/add-pkgconfig.patch
- create mode 100644 meta-oe/recipes-multimedia/libmad/libmad/automake-foreign.patch
- create mode 100644 meta-oe/recipes-multimedia/libmad/libmad/fix_for_mips_with_gcc-4.5.0.patch
- create mode 100644 meta-oe/recipes-multimedia/libmad/libmad/no-force-mem.patch
- create mode 100644 meta-oe/recipes-multimedia/libmad/libmad/obsolete_automake_macros.patch
- create mode 100644 meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb
+I tried to do it differently by disabling the unused-variable warning 
+inline, but it did not work.
 
-diff --git a/meta-oe/recipes-multimedia/libmad/libmad/add-pkgconfig.patch b/meta-oe/recipes-multimedia/libmad/libmad/add-pkgconfig.patch
-new file mode 100644
-index 0000000..b49dc8c
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/libmad/libmad/add-pkgconfig.patch
-@@ -0,0 +1,70 @@
-+Here is a patch for adding pkg-config support to libmad.
-+It would make life a bit easier for distro maintainers if this was applied.
-+In case you didn't know, pkg-config is a tool for providing LDFLAGS and
-+CFLAGS for packages using shared libraries. It's on freedesktop.org.
-+Debian has already been distributing the pkg-config file mad.pc with
-+libmad for some time, and people developing on debian (notably xmms2 
-+developers) have started relying on this support being present, causing
-+some confusion for people installing from source and on some BSDs which
-+do not provide mad.pc (google: pkgconfig libmad).
-+
-+EMH
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+--h31gzZEtNLTqOjlF
-+Content-Type: text/plain; charset=us-ascii
-+Content-Disposition: attachment; filename=&quot;libmad-0.15.1b-pkgconfig.patch&quot;
-+
-+diff -Naur libmad-0.15.1b.old/configure.ac libmad-0.15.1b/configure.ac
-+--- libmad-0.15.1b.old/configure.ac	2004-01-23 10:41:32.000000000 +0100
-++++ libmad-0.15.1b/configure.ac	2004-08-07 02:25:24.633462168 +0200
-+@@ -429,5 +429,5 @@
-+ dnl AC_SUBST(LTLIBOBJS)
-+ 
-+ AC_CONFIG_FILES([Makefile msvc++/Makefile  \
-+-	libmad.list])
-++	libmad.list mad.pc])
-+ AC_OUTPUT
-+diff -Naur libmad-0.15.1b.old/mad.pc.in libmad-0.15.1b/mad.pc.in
-+--- libmad-0.15.1b.old/mad.pc.in	1970-01-01 01:00:00.000000000 +0100
-++++ libmad-0.15.1b/mad.pc.in	2004-08-07 02:04:59.617692872 +0200
-+@@ -0,0 +1,14 @@
-++# libmad pkg-config source file
-++
-++prefix=@prefix@
-++exec_prefix=@exec_prefix@
-++libdir=@libdir@
-++includedir=@includedir@
-++
-++Name: mad
-++Description: MPEG Audio Decoder
-++Version: @VERSION@
-++Requires:
-++Conflicts:
-++Libs: -L${libdir} -lmad -lm
-++Cflags: -I${includedir}
-+diff -Naur libmad-0.15.1b.old/Makefile.am libmad-0.15.1b/Makefile.am
-+--- libmad-0.15.1b.old/Makefile.am	2004-02-17 03:02:03.000000000 +0100
-++++ libmad-0.15.1b/Makefile.am	2004-08-07 02:03:19.859858368 +0200
-+@@ -24,6 +24,9 @@
-+ SUBDIRS =		
-+ DIST_SUBDIRS =		msvc++
-+ 
-++pkgconfigdir =		$(libdir)/pkgconfig
-++pkgconfig_DATA =	mad.pc
-++
-+ lib_LTLIBRARIES =	libmad.la
-+ include_HEADERS =	mad.h
-+ 
-+@@ -34,7 +37,8 @@
-+ minimad_LDADD =		libmad.la
-+ 
-+ EXTRA_DIST =		mad.h.sed  \
-+-			CHANGES COPYRIGHT CREDITS README TODO VERSION
-++			CHANGES COPYRIGHT CREDITS README TODO VERSION \
-++			mad.pc.in
-+ 
-+ exported_headers =	version.h fixed.h bit.h timer.h stream.h frame.h  \
-+ 			synth.h decoder.h
-+
-diff --git a/meta-oe/recipes-multimedia/libmad/libmad/automake-foreign.patch b/meta-oe/recipes-multimedia/libmad/libmad/automake-foreign.patch
-new file mode 100644
-index 0000000..3e54424
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/libmad/libmad/automake-foreign.patch
-@@ -0,0 +1,12 @@
-+Pass foreign to AM_INIT_AUTOMAKE so it doesn't enforce GNU strictness.
-+
-+Upstream-Status: Pending
-+Signed-off-by: Ross Burton <ross.burton@intel.com>
-+
-+diff --git a/configure.ac b/configure.ac
-+index e602fd3..e075b86 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -29 +29 @@ AC_CONFIG_SRCDIR([decoder.h])
-+-AM_INIT_AUTOMAKE
-++AM_INIT_AUTOMAKE([foreign])
-diff --git a/meta-oe/recipes-multimedia/libmad/libmad/fix_for_mips_with_gcc-4.5.0.patch b/meta-oe/recipes-multimedia/libmad/libmad/fix_for_mips_with_gcc-4.5.0.patch
-new file mode 100644
-index 0000000..01c7aa3
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/libmad/libmad/fix_for_mips_with_gcc-4.5.0.patch
-@@ -0,0 +1,33 @@
-+gcc 4.4 did this: The MIPS port no longer recognizes the h  asm constraint. It was necessary to remove this constraint in order to avoid generating unpredictable code sequences. 
-+
-+so the libmad build with gcc-4.5.0 was failing.
-+
-+Found a solution here:
-+
-+http://us.generation-nt.com/answer/bug-568418-libmad0-dev-mpg321-compilation-errors-mips-mipsel-architectures-help-169033451.html
-+
-+Upstream-Status: Pending
-+
-+2010/07/29
-+Nitin A Kamble <nitin.a.kamble@intel.com>
-+
-+Index: libmad-0.15.1b/fixed.h
-+===================================================================
-+--- libmad-0.15.1b.orig/fixed.h
-++++ libmad-0.15.1b/fixed.h
-+@@ -297,6 +297,15 @@ mad_fixed_t mad_f_mul_inline(mad_fixed_t
-+ 
-+ /* --- MIPS ---------------------------------------------------------------- */
-+ 
-++# elif defined(FPM_MIPS) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 4))
-++    typedef unsigned int u64_di_t __attribute__ ((mode (DI)));
-++#   define MAD_F_MLX(hi, lo, x, y) \
-++    do { \
-++        u64_di_t __ll = (u64_di_t) (x) * (y); \
-++        hi = __ll >> 32; \
-++        lo = __ll; \
-++     } while (0)
-++
-+ # elif defined(FPM_MIPS)
-+ 
-+ /*
-diff --git a/meta-oe/recipes-multimedia/libmad/libmad/no-force-mem.patch b/meta-oe/recipes-multimedia/libmad/libmad/no-force-mem.patch
-new file mode 100644
-index 0000000..d5e6d20
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/libmad/libmad/no-force-mem.patch
-@@ -0,0 +1,18 @@
-+This option no longer exists in gcc 3.4.1
-+
-+RP - 18/07/2008
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+Index: libmad-0.15.1b/configure.ac
-+===================================================================
-+--- libmad-0.15.1b.orig/configure.ac	2008-07-18 15:45:30.000000000 +0100
-++++ libmad-0.15.1b/configure.ac	2008-07-18 15:45:37.000000000 +0100
-+@@ -140,7 +140,6 @@
-+     case "$optimize" in
-+ 	-O|"-O "*)
-+ 	    optimize="-O"
-+-	    optimize="$optimize -fforce-mem"
-+ 	    optimize="$optimize -fforce-addr"
-+ 	    : #x optimize="$optimize -finline-functions"
-+ 	    : #- optimize="$optimize -fstrength-reduce"
-diff --git a/meta-oe/recipes-multimedia/libmad/libmad/obsolete_automake_macros.patch b/meta-oe/recipes-multimedia/libmad/libmad/obsolete_automake_macros.patch
-new file mode 100644
-index 0000000..cc87d29
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/libmad/libmad/obsolete_automake_macros.patch
-@@ -0,0 +1,14 @@
-+Upstream-Status: Submitted [https://sourceforge.net/tracker/?group_id=12349&atid=112349]
-+
-+Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
-+diff -Nurd libmad-0.15.1b/configure.ac libmad-0.15.1b/configure.ac
-+--- libmad-0.15.1b/configure.ac	2004-01-23 11:41:32.000000000 +0200
-++++ libmad-0.15.1b/configure.ac	2013-01-03 08:28:23.718693697 +0200
-+@@ -28,7 +28,7 @@
-+
-+ AM_INIT_AUTOMAKE
-+
-+-AM_CONFIG_HEADER([config.h])
-++AC_CONFIG_HEADERS([config.h])
-+
-+ dnl System type.
-diff --git a/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb b/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb
-new file mode 100644
-index 0000000..d431abd
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb
-@@ -0,0 +1,36 @@
-+SUMMARY = "MPEG Audio Decoder library"
-+HOMEPAGE = "http://sourceforge.net/projects/mad/"
-+BUGTRACKER = "http://sourceforge.net/tracker/?group_id=12349&atid=112349"
-+LICENSE = "GPLv2+"
-+LICENSE_FLAGS = "commercial"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-+			file://COPYRIGHT;md5=8e55eb14894e782b84488d5a239bc23d \
-+			file://version.h;beginline=1;endline=8;md5=aa07311dd39288d4349f28e1de516454"
-+SECTION = "libs"
-+DEPENDS = "libid3tag"
-+PR = "r3"
-+
-+SRC_URI = "ftp://ftp.mars.org/pub/mpeg/libmad-${PV}.tar.gz \
-+           file://no-force-mem.patch \
-+           file://add-pkgconfig.patch \
-+           file://fix_for_mips_with_gcc-4.5.0.patch \
-+           file://obsolete_automake_macros.patch \
-+           file://automake-foreign.patch \
-+"
-+
-+SRC_URI[md5sum] = "1be543bc30c56fb6bea1d7bf6a64e66c"
-+SRC_URI[sha256sum] = "bbfac3ed6bfbc2823d3775ebb931087371e142bb0e9bb1bee51a76a6e0078690" 
-+
-+S = "${WORKDIR}/libmad-${PV}"
-+
-+inherit autotools pkgconfig
-+
-+EXTRA_OECONF = "-enable-speed --enable-shared"
-+EXTRA_OECONF_append_arm = " --enable-fpm=arm"
-+
-+do_configure_prepend () {
-+#	damn picky automake...
-+	touch NEWS AUTHORS ChangeLog
-+}
-+
-+ARM_INSTRUCTION_SET = "arm"
--- 
-2.8.1
+On 2016-06-11 12:11, Gary Thomas wrote:
+> Building chromium is broken on my i.MX6 target.
+>
+> Poky/Yocto info:
+> BB_VERSION        = "1.31.0"
+> BUILD_SYS         = "x86_64-linux"
+> NATIVELSBSTRING   = "Ubuntu-15.10"
+> TARGET_SYS        = "arm-amltd-linux-gnueabi"
+> MACHINE           = "teton-p0382"
+> DISTRO            = "amltd"
+> DISTRO_VERSION    = "2.1+snapshot-20160611"
+> TUNE_FEATURES     = "arm armv7a vfp thumb neon 
+> callconvention-hard       cortexa9"
+> TARGET_FPU        = "hard"
+> meta              = "master:40e789d1fee7f0df2d23230fff38325119ad2935"
+> meta-teton-imx6-p0382 = "master:5f3d52b357c0b05e7ea5cfc309e04c8c3aad1260"
+> meta-fsl-arm      = "master:00b46e11e32f859a0d2dad5a5d53d5540be9c15e"
+> meta-fsl-arm-extra = "master:089ce85e2e2dd78e45b773b947643ab8f4e2b965"
+> meta-browser      = "master:825ea9349fe9b7da39f1de0c3e8e15d9d62f2774"
+>
+> Error:
+> | ninja: Entering directory 
+> `/local/p0382_2016-01-13/tmp/work/cortexa9hf-neon-mx6qdl-amltd-linux-gnueabi/chromium/48.0.2548.0-r0/chromium-48.0.2548.0/out/Release'
+> | [1/9316] SOLINK lib/libnative_theme.so
+> | [2/9316] CXX 
+> obj/components/infobars/core/infobars_core.infobar_container.o
+> | [3/9316] CXX 
+> obj/components/infobars/core/infobars_core.infobars_switches.o
+> | [4/9316] CXX obj/components/infobars/core/infobars_core.infobar.o
+> | [5/9316] STAMP obj/ui/compositor/compositor.compile_depends.stamp
+> | [6/9316] CXX 
+> obj/ui/compositor/compositor.callback_layer_animation_observer.o
+> | FAILED: if [ ! -e lib/libnative_theme.so -o ! -e 
+> lib/libnative_theme.so.TOC ]; then arm-amltd-linux-gnueabi-g++ 
+> -march=armv7-a -marm -mfpu=neon  -mfloat-abi=hard -mcpu=cortex-a9 
+> --sysroot=/local/p0382_2016-01-13/tmp/sysroots/teton-p0382 -shared 
+> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,now -Wl,-z,relro 
+> -Wl,-z,defs -pthread -Wl,-z,noexecstack -fPIC -Wl,--disable-new-dtags 
+> -L. -Wl,-O1 -Wl,--as-needed -Wl,--gc-sections -o 
+> lib/libnative_theme.so -Wl,-soname=libnative_theme.so 
+> @lib/libnative_theme.so.rsp && { readelf -d lib/libnative_theme.so | 
+> grep SONAME ; arm-amltd-linux-gnueabi-nm -gD -f p 
+> lib/libnative_theme.so | cut -f1-2 -d' '; } > 
+> lib/libnative_theme.so.TOC; else arm-amltd-linux-gnueabi-g++  
+> -march=armv7-a -marm -mfpu=neon -mfloat-abi=hard -mcpu=cortex-a9 
+> --sysroot=/local/p0382_2016-01-13/tmp/sysroots/teton-p0382 -shared 
+> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,now -Wl,-z,relro 
+> -Wl,-z,defs -pthread -Wl,-z,noexecstack -fPIC -Wl,--disable-new-dtags 
+> -L. -Wl,-O1 -Wl,--as-needed -Wl,--gc-sections -o 
+> lib/libnative_theme.so -Wl,-soname=libnative_theme.so 
+> @lib/libnative_theme.so.rsp && { readelf -d lib/libnative_theme.so | 
+> grep SONAME ; arm-amltd-linux-gnueabi-nm -gD -f p 
+> lib/libnative_theme.so | cut -f1-2 -d' '; } > 
+> lib/libnative_theme.so.tmp && if ! cmp -s lib/libnative_theme.so.tmp 
+> lib/libnative_theme.so.TOC; then mv lib/libnative_theme.so.tmp 
+> lib/libnative_theme.so.TOC ; fi; fi
+> | obj/ui/native_theme/native_theme.common_theme.o: In function 
+> `_GLOBAL__sub_I_common_theme.cc':
+> | 
+> /usr/src/debug/chromium/48.0.2548.0-r0/chromium-48.0.2548.0/ui/native_theme/common_theme.cc:273: 
+> undefined reference to `gfx::kGoogleBlue500'
+> | 
+> /usr/src/debug/chromium/48.0.2548.0-r0/chromium-48.0.2548.0/ui/native_theme/common_theme.cc:273: 
+> undefined reference to `gfx::kGoogleBlue300'
+>
+> Note: I'm still using GCC/4.9.x with the standard linker (not gold)
+>
 
 
