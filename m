@@ -1,44 +1,37 @@
-Return-Path: <prvs=697689aa8d=michael.davis@essvote.com>
-Received: from mail1.essvote.com (mail1.essvote.com [66.37.226.19])
-	by mail.openembedded.org (Postfix) with ESMTP id 590DA607A5
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
+	[209.85.220.193])
+	by mail.openembedded.org (Postfix) with ESMTP id D4336731E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jun 2016 17:57:18 +0000 (UTC)
-X-AuditID: 0a000213-f79116d0000013a5-78-576439fd5016
-Received: from ESS-EX01.essvote.corp.local (Unknown_Domain [172.16.110.40])
-	by mail1.essvote.com (Symantec Messaging Gateway) with SMTP id
-	7B.83.05029.DF934675; Fri, 17 Jun 2016 12:57:17 -0500 (CDT)
-Received: from ESS-EX01.essvote.corp.local ([::1]) by
-	ESS-EX01.essvote.corp.local ([::1]) with mapi id 14.03.0235.001;
-	Fri, 17 Jun 2016 12:57:17 -0500
-From: "Davis, Michael" <michael.davis@essvote.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-browser] Browser blacklists
-Thread-Index: AQHRx54BDcuXWgr4ykSYbf2mE2cP+p/sIeWAgABJsQCAAct1gIAAEOgA
-Date: Fri, 17 Jun 2016 17:57:16 +0000
-Message-ID: <2677503.mWG80oeSdS@localhost.localdomain>
-References: <57625081.8000304@mlbassoc.com>
-	<3500964.FV5XFluSRj@localhost.localdomain>
-	<CADseiPnqtEB_m4jgoZtTJ-8AjM29X0nOiGa51phUpZg4_VN_Ww@mail.gmail.com>
-In-Reply-To: <CADseiPnqtEB_m4jgoZtTJ-8AjM29X0nOiGa51phUpZg4_VN_Ww@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.1.137]
-MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprLIsWRmVeSWpSXmKPExsWyRiBPQ/evZUq4wdENJhZLDj1ntbh4eCmz
-	A5PHw708Huc2rmAMYIritklKLCkLzkzP07dL4M7Y9PsaW0EDb8WvZ3+YGxj7uLoYOTkkBEwk
-	Tk46yQphi0lcuLeerYuRi0NI4ASjRNeGC1DOLEaJR4s2s4NUsQkYSZy7vokRxBYRiJWYt2km
-	E4jNLKAl8WnCaWYQW1jAWKKhYwdUjYnE6jMn2SFsN4nFtw+A1bMIqEqc3dnKBmLzCphJdF49
-	wAKxbD6jxMQdrWANnAKBEkeP/wEbygh03vdTa6CWiUvcejKfCeJsAYkle84zQ9iiEi8f/wN6
-	hwPIlpP4v8UDolxHYsHuT2wQtpXExL/P2CFsbYllC18zQ9wgKHFy5hOWCYzis5BsmIWkfRaS
-	9llI2mchaV/AyLqKUTA3MTPHUC+1uLgsvyRVLzk/dxMjMNK4GJiEdzDOmWJ7iFGAg1GJh/dC
-	c3K4EGtiWXFl7iFGaQ4WJXFeFSGlcCGB9MSS1OzU1ILUovii0pzU4kOMTBychxglOLikRIpT
-	81JSixJLSzLiQdEbXwyMX6kGxitJO4KFhX49vxEmZSG+57fY/9oovbMONVKTNjwu2aHne//4
-	o87NgfZ72Hblf81Zz2SZejZR3Ca4LDd1wsbPW1c3C3j3x9zk7Pyy+/Ss7TPXZ+/bn+bc5Hpo
-	9zfNo4nsp9ycFd6kO4pwzJebZ/x77/pfzAq3jMR3P7y9Q29LDcOzUy7qghJb65VYijMSDbWY
-	i4oTAY1UfCewAgAA
-Subject: Re: [meta-browser] Browser blacklists
+	Fri, 17 Jun 2016 17:59:34 +0000 (UTC)
+Received: by mail-qk0-f193.google.com with SMTP id l81so12869690qke.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Jun 2016 10:59:35 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=jZTAtQldjyCtpzcDViKEk24wW0XsTlOImn2J4U1L5w4=;
+	b=EuXx0RdDoR3trZ/WZx/6qWn23+UCD6g4Ruhn3S+nRUfPB5QFDzS0BGktPThOEFrClW
+	MjweSW47uetgwvrwvGm6zNdhSn9Ffyeuf3roiTumZXMRmhKDpVZZxkv3Qfnvm1WrW1ss
+	pLbz26/fIZseOY47yS1PSO1aANs78/I49tNGzCWY4ZI7EBgVGsPbDOEBKeQowpqAsNof
+	bc1oxnxsfNXsQzOy0NpIHRvQq3ULahdv/Q7csSghRvTqin3yXcNKB8TnZsCm4oH283Qz
+	+060t9HqkAs8jNmrqryOrv1Xcp+PjwN4OtFPZmu1843VR4FtwBrBjEohSFwUgxUDZVXF
+	sVtw==
+X-Gm-Message-State: ALyK8tJGzJ+agSwXScmYITeiKrvX7veXgxqDXguiFw/hn6QUXxRSsgQSpVTpYI9V59tACw==
+X-Received: by 10.237.36.108 with SMTP id s41mr3854699qtc.66.1466186375147;
+	Fri, 17 Jun 2016 10:59:35 -0700 (PDT)
+Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
+	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
+	u85sm13318977qku.44.2016.06.17.10.59.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 17 Jun 2016 10:59:34 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 17 Jun 2016 13:59:27 -0400
+Message-Id: <1466186367-17993-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 1.9.1
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-oe][PATCH] libqmi: update to version 1.14.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,60 +44,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jun 2016 17:57:19 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <5D225E678F998346A0D020ADE9DD61DF@essvote.com>
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 17 Jun 2016 17:59:35 -0000
 
-Add the following to your distro's conf or local.conf=20
+ * Addresses build issues with gcc-6
 
-#Stop the blacklist due to broken gcc6
-PNBLACKLIST[chromium] =3D ""
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../libqmi/{libqmi_1.12.6.bb => libqmi_1.14.2.bb}                | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.12.6.bb => libqmi_1.14.2.bb} (65%)
 
-On Friday, June 17, 2016 09:56:45 AM Ian Coolidge wrote:
-> >
-> > I ran into this as well and had to spend some time figuring out how to =
-get
-> > around it.
->=20
->=20
-> How'd you get around it?
->=20
-> On Thu, Jun 16, 2016 at 6:32 AM, Davis, Michael <michael.davis@essvote.co=
-m>
-> wrote:
->=20
-> > I ran into this as well and had to spend some time figuring out how to =
-get
-> > around it.
-> > Some sort of note in the readme or even commit message about how to get
-> > around it would have been nice.
-> >
-> > On a related side note it would be nice to get krogoth branch/tag befor=
-e
-> > this blacklist.
-> > I saw there isn't one currently and it would give people a working tag
-> > that isn't as old as jethro.
-> >
-> >
-> > On Thursday, June 16, 2016 11:08:33 AM Martin Jansa wrote:
-> > > On Thu, Jun 16, 2016 at 09:08:49AM +0200, Gary Thomas wrote:
-> > > > I notice that both firefox and chromium are currently blacklisted
-> > > > as "fails to build with gcc-6".  What about those of us that aren't
-> > > > using gcc-6?  This seems an overly broad blacklisting :-(
-> > >
-> > > You can easily unblacklist them in your configuration where you also
-> > > change the gcc version, but they are broken in default configuration,=
- so
-> > > they are blacklisted.
-> > >
-> > >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> =
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.12.6.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.14.2.bb
+similarity index 65%
+rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.12.6.bb
+rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.14.2.bb
+index 937fafc..84936e7 100644
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.12.6.bb
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.14.2.bb
+@@ -9,11 +9,8 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS = "glib-2.0"
+ 
+-inherit autotools pkgconfig
++inherit autotools pkgconfig bash-completion
+ 
+ SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
+-SRC_URI[md5sum] = "24c9eb300662ba6cff0152de89bd9ec0"
+-SRC_URI[sha256sum] = "0857bffece4e8ddfa7f721dd9ca63b4c78de345ac9ae2faebf04062cacba3780"
+-
+-# http://errors.yoctoproject.org/Errors/Details/68616/
+-PNBLACKLIST[libqmi] ?= "BROKEN: fails to build with gcc-6"
++SRC_URI[md5sum] = "6ec55d1a1941bb18802ab8498baca7e0"
++SRC_URI[sha256sum] = "6283b80aea1b2721523e5229087764b4d6a1c9f53488690fa16a11adff4a0040"
+-- 
+1.9.1
+
 
