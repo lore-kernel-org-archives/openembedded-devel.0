@@ -1,51 +1,22 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E5646FF91
+Return-Path: <pascal.bach@siemens.com>
+Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
+	by mail.openembedded.org (Postfix) with ESMTP id 48DC9731D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jun 2016 14:01:46 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id r201so55500wme.0
+	Fri, 17 Jun 2016 14:10:48 +0000 (UTC)
+Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
+	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id u5HEAgjk007369
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jun 2016 07:01:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=1SGzkePbT6rI5UEyP3tQkedodEoxhB1UQWtRSTiQDX0=;
-	b=VzWJLqEiNRRE7DrngTjAB7Suxa8/5hR9ytC5T6tZvtrEdqJmKfCZdMMGnCP8u8xoSt
-	mluFRqTMqLmoY2WLXRcAUrI5rGCX40zJcGKcjS09+YkngsL55/8IQAuDq/trFeXq6yka
-	agXGxK0KXhy5s4GyEvfUoRk9X08NUOcYxjWd4EldCMleaM16xdUzcp5j55iCAwP2V3Hv
-	jr9MsT8Kd2/I9OE31UXixdDDrE99s0aIoiVJwmkA9Qst9lthSWpN02Fq0O9qsKgq+QUW
-	2iDS5ydZv76VXDOwRV9chi5mIHKZAH0fFO3zTAFAjz/nGlOxaLZ89VdMK9vU03CghvqB
-	L3wg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=1SGzkePbT6rI5UEyP3tQkedodEoxhB1UQWtRSTiQDX0=;
-	b=btwjk9Kh5HBCr04FhlmqjxOz5C+7Bt00ps8mvynkXF7YDy477Zz9dJYA0ioyxf1gHE
-	nLhrubHditKgDw6iEVIpCz4wkUD6o+3wqwhxH6ygOoQllOipR9pADQK3C5bPu02h5qdB
-	vPCk3hscxdHDJjernMqdWWN4bPToNKAuxlM1KlqQIE6AZWTJUNViwNKfRL2IL+FTdf3Y
-	VCwH1uw/NVdUM/hVsdaqHHTvn2+2sPl0yQGccgKHMNkHfckTrCdFgwFMxMqiSIkXJpcJ
-	VAD/CTCria/cDvBxGlW09gJxWo2lvKu0b67HB+qLjtEJ+rQKSM4Sn+/N3w5haiPyNejf
-	A//g==
-X-Gm-Message-State: ALyK8tKrPo6iLoqD6Q6ZgGMDAILsbPwLeWZ5cdDIR2muZg821jan/9woFymYSxS7SMZdmA==
-X-Received: by 10.28.12.8 with SMTP id 8mr21380102wmm.6.1466172106435;
-	Fri, 17 Jun 2016 07:01:46 -0700 (PDT)
-Received: from localhost (ip-86-49-34-37.net.upcbroadband.cz. [86.49.34.37])
-	by smtp.gmail.com with ESMTPSA id y6sm3778948wmy.8.2016.06.17.07.01.44
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 17 Jun 2016 07:01:44 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 17 Jun 2016 16:02:22 +0200
+	Fri, 17 Jun 2016 16:10:43 +0200
+Received: from dev.sbt.siemens.com (MD1FZU9C.ww002.siemens.net [139.16.77.141])
+	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id u5HEAg3B028571;
+	Fri, 17 Jun 2016 16:10:42 +0200
+From: Pascal Bach <pascal.bach@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160617140222.GB2574@jama>
-References: <1465435705-3794-1-git-send-email-derek@asterius.io>
-	<E49AE6D7-2850-4C61-B163-F39F26CF732A@gmail.com>
-	<CADNbA1o+aK2tr=1jHwJ21Szk28vWZMVNM4mXGCkebJHaZbYHCA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CADNbA1o+aK2tr=1jHwJ21Szk28vWZMVNM4mXGCkebJHaZbYHCA@mail.gmail.com>
-User-Agent: Mutt/1.6.1 (2016-04-27)
-Subject: Re: [meta-oe][PATCH] geis: add CFLAG to ignore misleading indentations
+Date: Fri, 17 Jun 2016 16:10:41 +0200
+Message-Id: <1466172641-30441-1-git-send-email-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCHv2] p7zip: update to version 15.14.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,92 +29,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jun 2016 14:01:46 -0000
-X-Groupsio-MsgNum: 61866
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="1UWUbFP1cBYEclgG"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 17 Jun 2016 14:10:49 -0000
 
---1UWUbFP1cBYEclgG
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The copying.txt file contains white space changes and the address of the
+Free Software Foundation mentioned in the LGPLv3.1 changed from:
+51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
+to:
+59 Temple Place, Suite 330, Boston, MA  02111-1307
+otherwise the license text remains unchanged.
 
-On Fri, Jun 17, 2016 at 09:38:51AM -0400, Derek Straka wrote:
-> It didn't seem worthwhile to create a patchset to fix whitespace issues. =
- I
-> can create the patches if people prefer that to suppressing the error.
+An additional License.txt containing top level license information is now
+also covered by LIC_FILES_CHKSUM
 
-I would prefer fixing the issue, but I'm very grateful for your changes
-fixing the build failures (in any way), there are only very few people actu=
-ally
-sending any fixes. And simple work around is still better than even
-more PNBLACKLISTs.
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+---
+ ...do_not_override_compiler_and_do_not_strip.patch | 25 +++++++++++-----------
+ .../p7zip/{p7zip_9.20.1.bb => p7zip_15.14.1.bb}    |  9 ++++----
+ 2 files changed, 17 insertions(+), 17 deletions(-)
+ rename meta-oe/recipes-extended/p7zip/{p7zip_9.20.1.bb => p7zip_15.14.1.bb} (71%)
 
-Thanks!
+diff --git a/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler_and_do_not_strip.patch b/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler_and_do_not_strip.patch
+index a3b02c5..b0a560f 100644
+--- a/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler_and_do_not_strip.patch
++++ b/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler_and_do_not_strip.patch
+@@ -7,25 +7,24 @@ Upstream-Status: Pending
+ Signed-off-by: Raphael Freudiger <raphael.freudiger@siemens.com>
+ Reviewed-By: Pascal Bach <pascal.bach@siemens.com>
+ 
+-Index: p7zip_9.20.1/makefile.machine
+-=====================================================================
+---- p7zip_9.20.1/makefile.machine	2011-03-13 12:54:57.000000000 +0100
+-+++ p7zip_9.20.1/makefile.machine	2015-02-03 08:39:44.427696944 +0100
+-@@ -4,14 +4,14 @@
++diff -Nurp p7zip_15.14.1_orig/makefile.machine p7zip_15.14.1/makefile.machine
++--- p7zip_15.14.1_orig/makefile.machine	2016-03-23 20:37:47.000000000 +0100
+++++ p7zip_15.14.1/makefile.machine	2016-06-17 15:33:39.720454477 +0200
++@@ -2,7 +2,7 @@
++ # makefile for Linux (x86, PPC, alpha ...)
++ #
+  
+- OPTFLAGS=-O
++-OPTFLAGS=-O -s
+++OPTFLAGS=-O
+  
+--ALLFLAGS=${OPTFLAGS} -pipe -s \
+-+ALLFLAGS=${OPTFLAGS} -pipe \
++ ALLFLAGS=${OPTFLAGS} -pipe \
+      	-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE \
+- 	-DNDEBUG -D_REENTRANT -DENV_UNIX \
++@@ -10,8 +10,6 @@ ALLFLAGS=${OPTFLAGS} -pipe \
+  	-D_7ZIP_LARGE_PAGES \
+  	$(LOCAL_FLAGS)
+  
+--CXX=g++ $(ALLFLAGS)
+--CC=gcc $(ALLFLAGS)
+-+CXX+=$(ALLFLAGS)
+-+CC+=$(ALLFLAGS)
++-CXX=g++
++-CC=gcc
+  CC_SHARED=-fPIC
+  LINK_SHARED=-fPIC -shared
+  
+diff --git a/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb b/meta-oe/recipes-extended/p7zip/p7zip_15.14.1.bb
+similarity index 71%
+rename from meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
+rename to meta-oe/recipes-extended/p7zip/p7zip_15.14.1.bb
+index b89fc42..8e2e241 100644
+--- a/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
++++ b/meta-oe/recipes-extended/p7zip/p7zip_15.14.1.bb
+@@ -1,13 +1,14 @@
+ SUMMARY = "7-zip is a commandline utility handling 7z archives."
+ HOMEPAGE = "http://www.7-zip.org/"
+ LICENSE = "LGPL-2.1+ & unRAR"
+-LIC_FILES_CHKSUM = "file://DOCS/copying.txt;md5=ecfc54c9e37b63ac58900061ce2eab5a \
+-                    file://DOCS/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de"
++LIC_FILES_CHKSUM = "file://DOC/copying.txt;md5=4fbd65380cdd255951079008b364516c \
++                    file://DOC/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de \
++                    file://DOC/License.txt;md5=8346bfd0a2fa0987e7a3a512adf84ab9"
+ 
+ SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_all.tar.bz2 \
+           file://do_not_override_compiler_and_do_not_strip.patch"
+-SRC_URI[md5sum] = "bd6caaea567dc0d995c990c5cc883c89"
+-SRC_URI[sha256sum] = "49557e7ffca08100f9fc687f4dfc5aea703ca207640c76d9dee7b66f03cb4782"
++SRC_URI[md5sum] = "92cca093312b5a71a7be7dc7d1d32509"
++SRC_URI[sha256sum] = "699db4da3621904113e040703220abb1148dfef477b55305e2f14a4f1f8f25d4"
+ 
+ S = "${WORKDIR}/${BPN}_${PV}"
+ 
+-- 
+2.1.4
 
-> -Derek
->=20
-> On Fri, Jun 17, 2016 at 12:17 AM, Khem Raj <raj.khem@gmail.com> wrote:
->=20
-> >
-> > > On Jun 8, 2016, at 6:28 PM, Derek Straka <derek@asterius.io> wrote:
-> > >
-> > > Signed-off-by: Derek Straka <derek@asterius.io>
-> > > ---
-> > > meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb | 2 ++
-> > > 1 file changed, 2 insertions(+)
-> > >
-> > > diff --git a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17=
-=2Ebb
-> > b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-> > > index bc88143..9b087a8 100644
-> > > --- a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-> > > +++ b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-> > > @@ -24,6 +24,8 @@ SRC_URI[md5sum] =3D "2ff9d76a3ea5794516bb02c9d1924f=
-af"
-> > > SRC_URI[sha256sum] =3D
-> > "8a60f5683852094038904e690d23cc5a90a980fc52da67f0f28890baa25c70eb"
-> > >
-> > > EXTRA_OECONF =3D "--disable-integration-tests"
-> > > +TARGET_CFLAGS +=3D "-Wno-error=3Dmisleading-indentation=E2=80=9D
-> >
-> > why not fix the code
-> >
-> > > +
-> >
-> > >
-> > > FILES_${PN}-bin =3D "${bindir}"
-> > > RDEPENDS_${PN}-bin =3D " \
-> > > --
-> > > 1.9.1
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> >
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---1UWUbFP1cBYEclgG
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAldkAu0ACgkQN1Ujt2V2gBwHPgCfSDtqp4irxBYv+ahJLr86RO8+
-VJsAoJ4D1COS5MeDLNQzyLZTwDa5m1Gg
-=aIO0
------END PGP SIGNATURE-----
-
---1UWUbFP1cBYEclgG--
