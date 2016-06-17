@@ -1,40 +1,46 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id B4710766A3
+Return-Path: <kergoth@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 924A7607A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jun 2016 19:40:14 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id l81so13304866qke.3
+	Fri, 17 Jun 2016 20:31:54 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id i123so3794375pfg.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jun 2016 12:40:15 -0700 (PDT)
+	Fri, 17 Jun 2016 13:31:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=1pEr5ISjDsHj4FR94BJxJqaSIl1QJSn1Vsb3IUSl55M=;
+	b=FhQOPi/tnJEoXYcdL3X8QiOGyyK+YoCPODTkla/EAxYil8RFbGPZLjmKRxRey1uix0
+	B8yLeChu4MyerO/AS+ulJWX/FjCt5TSHTJLK0k5iyfox/E6psCl8F/TKXdrFc8JNYTVN
+	/3o5BvW9fiZiO0/rBOjCKxChUFV54GkUDIELawttZ6ZnZg9fr6UVobIzL3C+QtsqJ+pD
+	yj3UBteDy7e3WHn0kITcUlyyQNL8Wwa+ZOjrjm5Ck6esRaCrILUHcfMfZqQ/JamWJucO
+	G+jRrOj4W/q53DjMtsNJRhON0mHZXmg2QJCvRfeG/L5UGqfYcOLC41xPbtOrol/uI4Bf
+	lpzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=a083KW+zyvPV962brBdrSyTUtF7icS6yWPl7kgKog9Y=;
-	b=YjHIjem+aA3uy+NUP7fK6jadrXVW1oRsRdSXIFxH4BvJpCjizphIHeXxFMua0l2KUT
-	pOM1HPl780L4N/2/FSqZP+xIc4nSr1DuCQqdcYqZW4udXf7RFf6OpBwhdfibbHCV15b/
-	6FQGq2kr6rUiFRwFi1RI/21BoJm9+kpEIBcp3jF4imcRTEphKLpjprrG72dlaIgaGOK+
-	rDwDybzUDzLf95a23SMTMiQUsfEKbaTVC7eBV/MT8cOxdggKHJHZP6PuLkhcH2Cg2Na+
-	ZX3TpYXG/n3JKFSUYzC7HxJxNfF0x9rfAau8S6u0t2sATSLdKOtWkgwwFztN/PFrajRV
-	lVMw==
-X-Gm-Message-State: ALyK8tJPQwuw/nYwdINGhZgiG5SDX/xlg9l8VoFFPxRn4XDD4iBD3Puq1nnFqBbD5JV6XQ==
-X-Received: by 10.200.57.116 with SMTP id t49mr4643610qtb.58.1466192415479;
-	Fri, 17 Jun 2016 12:40:15 -0700 (PDT)
-Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	h60sm11614824qtd.28.2016.06.17.12.40.14
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=1pEr5ISjDsHj4FR94BJxJqaSIl1QJSn1Vsb3IUSl55M=;
+	b=kVbfwP2W1r7oCYzoHGW/WaiMacdS/jBHPfJcbYJbKq4z671toerCkasyVf+w7eHknS
+	nTJAkkqi4PjOCjH2Jtmn3qe97ujWMwTtiSDBQwImuoDkehCRSRrvvR7yrRWtcX/GLufE
+	d4Lpie1ur1Y4BCR28zbvVq/5uowhI7Zw3N/iBOjz+gBDYxpmcbBbMqPSiDTom58vZztS
+	pkgo9kMHdUwpOfS97aNqGKyOg5sw9Ls41KEW5w/z+5Wtt1F1/URExUi5z7V4WFgPdai5
+	h5mALMZyJrAlRdJEdyfsM7fugvaJy6tBRwjJTzGFHxIb3xcQZILWd47Knj/qsdHPRWRs
+	LZnA==
+X-Gm-Message-State: ALyK8tK4OO2F1cM9e6P1MVvhEKMIRZSitwBrMLDWiyZaMFttAOVf6/2E+mcNlujP6izaAw==
+X-Received: by 10.98.58.203 with SMTP id v72mr4334574pfj.113.1466195515737;
+	Fri, 17 Jun 2016 13:31:55 -0700 (PDT)
+Received: from amyr.alm.mentorg.com (nat-lmt.mentorg.com. [139.181.28.34])
+	by smtp.gmail.com with ESMTPSA id
+	o84sm65969067pfj.95.2016.06.17.13.31.54
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 17 Jun 2016 12:40:15 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+	Fri, 17 Jun 2016 13:31:54 -0700 (PDT)
+From: Christopher Larson <kergoth@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 17 Jun 2016 15:40:09 -0400
-Message-Id: <1466192409-3297-2-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1466192409-3297-1-git-send-email-derek@asterius.io>
-References: <1466192409-3297-1-git-send-email-derek@asterius.io>
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-oe][PATCH 2/2] Remove blacklisted recipes due to poppler build failures
+Date: Fri, 17 Jun 2016 13:31:51 -0700
+Message-Id: <1466195511-6914-1-git-send-email-kergoth@gmail.com>
+X-Mailer: git-send-email 2.8.0
+Cc: Christopher Larson <chris_larson@mentor.com>
+Subject: [meta-oe][PATCH] vboxguestdrivers: obey LDFLAGS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,68 +53,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jun 2016 19:40:15 -0000
+X-List-Received-Date: Fri, 17 Jun 2016 20:31:57 -0000
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+From: Christopher Larson <chris_larson@mentor.com>
+
+We need to obey LDFLAGS to get the correct hash style for external toolchains.
+
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
 ---
- meta-efl/recipes-efl/efl/epdf_svn.bb                 | 2 --
- meta-gnome/recipes-gnome/evince/evince_3.18.2.bb     | 2 --
- meta-gnome/recipes-support/tracker/tracker_0.14.2.bb | 2 --
- meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb         | 2 --
- meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb     | 2 --
- 5 files changed, 10 deletions(-)
+ meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_4.3.36.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-efl/recipes-efl/efl/epdf_svn.bb b/meta-efl/recipes-efl/efl/epdf_svn.bb
-index a4c7d49..e32a5fd 100644
---- a/meta-efl/recipes-efl/efl/epdf_svn.bb
-+++ b/meta-efl/recipes-efl/efl/epdf_svn.bb
-@@ -25,5 +25,3 @@ EXTRA_OECONF = "\
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_4.3.36.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_4.3.36.bb
+index 781e3d5..081e977 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_4.3.36.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_4.3.36.bb
+@@ -40,7 +40,7 @@ do_export_sources() {
  
- # Some upgrade path tweaking, as in evas
- AUTO_LIBNAME_PKGS = ""
--
--PNBLACKLIST[epdf] ?= "Depends on broken poppler"
-diff --git a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb b/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-index 4fa11a5..fe63093 100644
---- a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-+++ b/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-@@ -46,5 +46,3 @@ FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a \
-                           ${libdir}/evince/*/backends/*.a"
- FILES_${PN}-nautilus-extension = "${libdir}/nautilus/*/*so"
- FILES_${PN}-browser-plugin = "${libdir}/mozilla/*/*so"
--
--PNBLACKLIST[evince] ?= "Depends on broken poppler"
-diff --git a/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
-index 7e6c400..ff53669 100644
---- a/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
-+++ b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
-@@ -83,5 +83,3 @@ FILES_${PN}-nautilus-extension += "${libdir}/nautilus/extensions-2.0/*.so"
+ # compile and install mount utility
+ do_compile_append() {
+-    oe_runmake -C ${S}/utils
++    oe_runmake 'LD=${CC}' 'LDFLAGS=${LDFLAGS}' -C ${S}/utils
+ }
  
- SRC_URI[md5sum] = "f3a871beeebf86fd752863ebd22af9ac"
- SRC_URI[sha256sum] = "9b59330aa2e9e09feee587ded895e9247f71fc25f46b023d616d9969314bc7f1"
--
--PNBLACKLIST[tracker] ?= "Depends on broken poppler"
-diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
-index 3c134bb..29ed4d9 100644
---- a/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
-+++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
-@@ -30,5 +30,3 @@ CFLAGS += "-fPIC"
- 
- FILES_${PN}-dbg += "${libdir}/gimp/2.0/*/.debug"
- FILES_${PN}  += "${datadir}/appdata"
--
--PNBLACKLIST[gimp] ?= "Depends on broken poppler"
-diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
-index 5a0fc6d..66385a4 100644
---- a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
-+++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
-@@ -27,5 +27,3 @@ FILES_${PN}-dbg += "${libdir}/tumbler-1/.debug \
-                     ${libdir}/tumbler-1/plugins/.debug \
-                     ${libdir}/tumbler-1/plugins/cache/.debug \
- "
--
--PNBLACKLIST[tumbler] ?= "Depends on broken poppler"
+ module_do_install() {
 -- 
-1.9.1
+2.8.0
 
 
