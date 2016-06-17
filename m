@@ -1,50 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f66.google.com (mail-pa0-f66.google.com
-	[209.85.220.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C18F7665F
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+X-Greylist: delayed 615 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 17 Jun 2016 13:49:08 UTC
+Received: from mail4.static.mgsend.net (mail4.static.mgsend.net
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B7F07319C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jun 2016 04:17:26 +0000 (UTC)
-Received: by mail-pa0-f66.google.com with SMTP id ts6so4941016pac.0
+	Fri, 17 Jun 2016 13:49:08 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1466171348; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=BKf1WWce1KeOT3+Eg9U0O82aMp5dzqjQUkRxEgsZHsI=;
+	b=TcBu77Np0XaiW0exVZqxJdyTpSrp7BAwYI0ybS+pxb+np7riJVga449lQVXGAzHmYFlDLGyh
+	ZXyXQJDRjZJGzCIT8GyDiWFLSapY5bFmXbaTHDJt5AOPOlH4j1gZYumW97qkQR37QkJBVT5t
+	BSqf31qE+2lkrPKM0e/4cd1aeHs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
+	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
+	Message-ID: Subject: To: Cc: Content-Type;
+	b=cWIgU3F1nQUf3de0j5xo2ioOcBzoKLxR3YJequK3WO4eXp2BqLeS7O8t9VF+vCClZgacLm
+	yQ1k0nBzsZxOI62vujqaYNHpV97QnJ8HBcCmEzIv+h3Y7NK8yZzR/5f+0n0EH7HUQWQ1sILo
+	ACeNV8ONJmSd2/iKOqlqxEV2S1FeQ=
+Sender: derek@asterius.io
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Received: from mail-io0-f172.google.com (mail-io0-f172.google.com
+	[209.85.223.172])
+	by mxa.mailgun.org with ESMTP id 5763fd6b.7f42d1492870-in07;
+	Fri, 17 Jun 2016 13:38:51 -0000 (UTC)
+Received: by mail-io0-f172.google.com with SMTP id f30so69282618ioj.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jun 2016 21:17:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:from:in-reply-to:date:cc:message-id:references
-	:to; bh=JWPbfLWfR5Sy26LPyzwqxGIq5sz2RK3cPvL7HBYr4eA=;
-	b=WcTSEIx65PcKHSaBTyuihsTv+eMN9syj73rxdeCsJDI7XXHRfTLvwVuA9EIkqD0Znz
-	0Dk47ApcgTjOM9NkIJjkI5zEIBZEGpW8HSf04KdWC2uxJ/LOZ6WNcYoCF2JEKs50QSiO
-	JuBJ3y+VZCTDyBOC3o3ntPOntrnnTzLqaOWkI7KB6x917ohfrrGXf7q0xnZWU21WSGye
-	f0jvDD18BxSeq68Eg0Zcuj+/QpbIVRtpPZpl9g4Ea78wZ0mCcbhrjrm4HMcam+GVBF3i
-	msqdywEsy7IRoip1PihPiu5/JzQ2Wqknbs0+bvexRIl2/eromQXLaLPKzEnS6C4kabFf
-	E6MA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:mime-version:from:in-reply-to:date:cc
-	:message-id:references:to;
-	bh=JWPbfLWfR5Sy26LPyzwqxGIq5sz2RK3cPvL7HBYr4eA=;
-	b=U1J+fEVx1NM8hyA3L9+f6H2m0fUwat+VHaG8O1BqTUVg2gD7/pLnsTutj+Rd2xJyC/
-	Q3KsPMHOpn7ICF4fZpsmmGIRAmih/A9m01c5KpGszTcEd8QVvBAZlveBStRo47ijZEhq
-	FA4mvHLkkZdzTYwSRPtSzroglJNRRR6JH9xcC7LAQLFNO/M5lISNwWBU7XvDE5WYKRe+
-	M6BJ0xWyYW8CKEjJkz1xtPEqlNES4oheebtb9n24ymLdE6YwXW5RYAP9JNDJ1cPiz7jq
-	aii7NVywxj/buzdiyWxSg7J42SdbMErVMbVWgi1r3hMdKr4k5aX6h77nm4b644EiTNU8
-	MyFw==
-X-Gm-Message-State: ALyK8tKcr2ZCYYJhxqV4axxpouZiX8imoIyqt4WbKKByG4T8+gqJUGofAk9YNt6ALnEe7Q==
-X-Received: by 10.66.135.40 with SMTP id pp8mr4612pab.113.1466137047323;
-	Thu, 16 Jun 2016 21:17:27 -0700 (PDT)
-Received: from [192.168.0.6] (c-76-102-32-192.hsd1.ca.comcast.net.
-	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	j5sm23521535pfj.71.2016.06.16.21.17.25
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Thu, 16 Jun 2016 21:17:26 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
-X-Pgp-Agent: GPGMail 2.6b2
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1465435705-3794-1-git-send-email-derek@asterius.io>
-Date: Thu, 16 Jun 2016 21:17:14 -0700
-Message-Id: <E49AE6D7-2850-4C61-B163-F39F26CF732A@gmail.com>
+	Fri, 17 Jun 2016 06:38:51 -0700 (PDT)
+X-Gm-Message-State: ALyK8tLhLWpHS/dwQQE21VTery0FSAXn3onA3Ym+MRJVKW7UaJFOAzC2No6oijdetYy9p6Ej4PMGNGnrJaR1aA==
+X-Received: by 10.107.18.225 with SMTP id 94mr3161005ios.157.1466170731533;
+	Fri, 17 Jun 2016 06:38:51 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.107.178.131 with HTTP; Fri, 17 Jun 2016 06:38:51 -0700 (PDT)
+In-Reply-To: <E49AE6D7-2850-4C61-B163-F39F26CF732A@gmail.com>
 References: <1465435705-3794-1-git-send-email-derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.3124)
-Cc: Derek Straka <derek@asterius.io>
+	<E49AE6D7-2850-4C61-B163-F39F26CF732A@gmail.com>
+From: Derek Straka <derek@asterius.io>
+Date: Fri, 17 Jun 2016 09:38:51 -0400
+X-Gmail-Original-Message-ID: <CADNbA1o+aK2tr=1jHwJ21Szk28vWZMVNM4mXGCkebJHaZbYHCA@mail.gmail.com>
+Message-ID: <CADNbA1o+aK2tr=1jHwJ21Szk28vWZMVNM4mXGCkebJHaZbYHCA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH] geis: add CFLAG to ignore misleading indentations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -58,70 +56,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jun 2016 04:17:27 -0000
-X-Groupsio-MsgNum: 61862
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_BBC1FF5E-98CE-48C5-8E4C-AED1BD7B9FA3";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-
---Apple-Mail=_BBC1FF5E-98CE-48C5-8E4C-AED1BD7B9FA3
+X-List-Received-Date: Fri, 17 Jun 2016 13:49:11 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
 
+It didn't seem worthwhile to create a patchset to fix whitespace issues.  I
+can create the patches if people prefer that to suppressing the error.
 
-> On Jun 8, 2016, at 6:28 PM, Derek Straka <derek@asterius.io> wrote:
->=20
-> Signed-off-by: Derek Straka <derek@asterius.io>
-> ---
-> meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb | 2 ++
-> 1 file changed, 2 insertions(+)
->=20
-> diff --git =
-a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb =
-b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-> index bc88143..9b087a8 100644
-> --- a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-> +++ b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-> @@ -24,6 +24,8 @@ SRC_URI[md5sum] =3D =
-"2ff9d76a3ea5794516bb02c9d1924faf"
-> SRC_URI[sha256sum] =3D =
-"8a60f5683852094038904e690d23cc5a90a980fc52da67f0f28890baa25c70eb"
->=20
-> EXTRA_OECONF =3D "--disable-integration-tests"
-> +TARGET_CFLAGS +=3D "-Wno-error=3Dmisleading-indentation=E2=80=9D
+-Derek
 
-why not fix the code
+On Fri, Jun 17, 2016 at 12:17 AM, Khem Raj <raj.khem@gmail.com> wrote:
 
-> +
+>
+> > On Jun 8, 2016, at 6:28 PM, Derek Straka <derek@asterius.io> wrote:
+> >
+> > Signed-off-by: Derek Straka <derek@asterius.io>
+> > ---
+> > meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb | 2 ++
+> > 1 file changed, 2 insertions(+)
+> >
+> > diff --git a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.b=
+b
+> b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
+> > index bc88143..9b087a8 100644
+> > --- a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
+> > +++ b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
+> > @@ -24,6 +24,8 @@ SRC_URI[md5sum] =3D "2ff9d76a3ea5794516bb02c9d1924faf=
+"
+> > SRC_URI[sha256sum] =3D
+> "8a60f5683852094038904e690d23cc5a90a980fc52da67f0f28890baa25c70eb"
+> >
+> > EXTRA_OECONF =3D "--disable-integration-tests"
+> > +TARGET_CFLAGS +=3D "-Wno-error=3Dmisleading-indentation=E2=80=9D
+>
+> why not fix the code
+>
+> > +
+>
+> >
+> > FILES_${PN}-bin =3D "${bindir}"
+> > RDEPENDS_${PN}-bin =3D " \
+> > --
+> > 1.9.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
->=20
-> FILES_${PN}-bin =3D "${bindir}"
-> RDEPENDS_${PN}-bin =3D " \
-> --
-> 1.9.1
->=20
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
---Apple-Mail=_BBC1FF5E-98CE-48C5-8E4C-AED1BD7B9FA3
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAldjedQACgkQuwUzVZGdMxTAyQCfY8NIX0Q4Oasyd2RyUazLoE8s
-rd0AoIxOe/VbdGtBgWsd+rSW4bH7B65Z
-=SH3K
------END PGP SIGNATURE-----
-
---Apple-Mail=_BBC1FF5E-98CE-48C5-8E4C-AED1BD7B9FA3--
