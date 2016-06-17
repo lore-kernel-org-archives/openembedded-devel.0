@@ -1,49 +1,22 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-X-Greylist: delayed 615 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 17 Jun 2016 13:49:08 UTC
-Received: from mail4.static.mgsend.net (mail4.static.mgsend.net
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B7F07319C
+Return-Path: <pascal.bach@siemens.com>
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+	by mail.openembedded.org (Postfix) with ESMTP id B9788731AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jun 2016 13:49:08 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1466171348; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=BKf1WWce1KeOT3+Eg9U0O82aMp5dzqjQUkRxEgsZHsI=;
-	b=TcBu77Np0XaiW0exVZqxJdyTpSrp7BAwYI0ybS+pxb+np7riJVga449lQVXGAzHmYFlDLGyh
-	ZXyXQJDRjZJGzCIT8GyDiWFLSapY5bFmXbaTHDJt5AOPOlH4j1gZYumW97qkQR37QkJBVT5t
-	BSqf31qE+2lkrPKM0e/4cd1aeHs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
-	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
-	Message-ID: Subject: To: Cc: Content-Type;
-	b=cWIgU3F1nQUf3de0j5xo2ioOcBzoKLxR3YJequK3WO4eXp2BqLeS7O8t9VF+vCClZgacLm
-	yQ1k0nBzsZxOI62vujqaYNHpV97QnJ8HBcCmEzIv+h3Y7NK8yZzR/5f+0n0EH7HUQWQ1sILo
-	ACeNV8ONJmSd2/iKOqlqxEV2S1FeQ=
-Sender: derek@asterius.io
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Received: from mail-io0-f172.google.com (mail-io0-f172.google.com
-	[209.85.223.172])
-	by mxa.mailgun.org with ESMTP id 5763fd6b.7f42d1492870-in07;
-	Fri, 17 Jun 2016 13:38:51 -0000 (UTC)
-Received: by mail-io0-f172.google.com with SMTP id f30so69282618ioj.2
+	Fri, 17 Jun 2016 13:53:41 +0000 (UTC)
+Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id u5HDreWQ006414
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jun 2016 06:38:51 -0700 (PDT)
-X-Gm-Message-State: ALyK8tLhLWpHS/dwQQE21VTery0FSAXn3onA3Ym+MRJVKW7UaJFOAzC2No6oijdetYy9p6Ej4PMGNGnrJaR1aA==
-X-Received: by 10.107.18.225 with SMTP id 94mr3161005ios.157.1466170731533;
-	Fri, 17 Jun 2016 06:38:51 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.107.178.131 with HTTP; Fri, 17 Jun 2016 06:38:51 -0700 (PDT)
-In-Reply-To: <E49AE6D7-2850-4C61-B163-F39F26CF732A@gmail.com>
-References: <1465435705-3794-1-git-send-email-derek@asterius.io>
-	<E49AE6D7-2850-4C61-B163-F39F26CF732A@gmail.com>
-From: Derek Straka <derek@asterius.io>
-Date: Fri, 17 Jun 2016 09:38:51 -0400
-X-Gmail-Original-Message-ID: <CADNbA1o+aK2tr=1jHwJ21Szk28vWZMVNM4mXGCkebJHaZbYHCA@mail.gmail.com>
-Message-ID: <CADNbA1o+aK2tr=1jHwJ21Szk28vWZMVNM4mXGCkebJHaZbYHCA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] geis: add CFLAG to ignore misleading indentations
+	Fri, 17 Jun 2016 15:53:40 +0200
+Received: from dev.sbt.siemens.com (MD1FZU9C.ww002.siemens.net [139.16.77.141])
+	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id u5HDre0e025070;
+	Fri, 17 Jun 2016 15:53:40 +0200
+From: Pascal Bach <pascal.bach@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 17 Jun 2016 15:53:31 +0200
+Message-Id: <1466171611-29613-1-git-send-email-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCH] p7zip: update to version 15.14.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,54 +29,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jun 2016 13:49:11 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 17 Jun 2016 13:53:42 -0000
 
-It didn't seem worthwhile to create a patchset to fix whitespace issues.  I
-can create the patches if people prefer that to suppressing the error.
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+---
+ ...do_not_override_compiler_and_do_not_strip.patch | 25 +++++++++++-----------
+ .../p7zip/{p7zip_9.20.1.bb => p7zip_15.14.1.bb}    |  9 ++++----
+ 2 files changed, 17 insertions(+), 17 deletions(-)
+ rename meta-oe/recipes-extended/p7zip/{p7zip_9.20.1.bb => p7zip_15.14.1.bb} (71%)
 
--Derek
+diff --git a/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler_and_do_not_strip.patch b/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler_and_do_not_strip.patch
+index a3b02c5..b0a560f 100644
+--- a/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler_and_do_not_strip.patch
++++ b/meta-oe/recipes-extended/p7zip/files/do_not_override_compiler_and_do_not_strip.patch
+@@ -7,25 +7,24 @@ Upstream-Status: Pending
+ Signed-off-by: Raphael Freudiger <raphael.freudiger@siemens.com>
+ Reviewed-By: Pascal Bach <pascal.bach@siemens.com>
+ 
+-Index: p7zip_9.20.1/makefile.machine
+-=====================================================================
+---- p7zip_9.20.1/makefile.machine	2011-03-13 12:54:57.000000000 +0100
+-+++ p7zip_9.20.1/makefile.machine	2015-02-03 08:39:44.427696944 +0100
+-@@ -4,14 +4,14 @@
++diff -Nurp p7zip_15.14.1_orig/makefile.machine p7zip_15.14.1/makefile.machine
++--- p7zip_15.14.1_orig/makefile.machine	2016-03-23 20:37:47.000000000 +0100
+++++ p7zip_15.14.1/makefile.machine	2016-06-17 15:33:39.720454477 +0200
++@@ -2,7 +2,7 @@
++ # makefile for Linux (x86, PPC, alpha ...)
++ #
+  
+- OPTFLAGS=-O
++-OPTFLAGS=-O -s
+++OPTFLAGS=-O
+  
+--ALLFLAGS=${OPTFLAGS} -pipe -s \
+-+ALLFLAGS=${OPTFLAGS} -pipe \
++ ALLFLAGS=${OPTFLAGS} -pipe \
+      	-D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE \
+- 	-DNDEBUG -D_REENTRANT -DENV_UNIX \
++@@ -10,8 +10,6 @@ ALLFLAGS=${OPTFLAGS} -pipe \
+  	-D_7ZIP_LARGE_PAGES \
+  	$(LOCAL_FLAGS)
+  
+--CXX=g++ $(ALLFLAGS)
+--CC=gcc $(ALLFLAGS)
+-+CXX+=$(ALLFLAGS)
+-+CC+=$(ALLFLAGS)
++-CXX=g++
++-CC=gcc
+  CC_SHARED=-fPIC
+  LINK_SHARED=-fPIC -shared
+  
+diff --git a/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb b/meta-oe/recipes-extended/p7zip/p7zip_15.14.1.bb
+similarity index 71%
+rename from meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
+rename to meta-oe/recipes-extended/p7zip/p7zip_15.14.1.bb
+index b89fc42..8e2e241 100644
+--- a/meta-oe/recipes-extended/p7zip/p7zip_9.20.1.bb
++++ b/meta-oe/recipes-extended/p7zip/p7zip_15.14.1.bb
+@@ -1,13 +1,14 @@
+ SUMMARY = "7-zip is a commandline utility handling 7z archives."
+ HOMEPAGE = "http://www.7-zip.org/"
+ LICENSE = "LGPL-2.1+ & unRAR"
+-LIC_FILES_CHKSUM = "file://DOCS/copying.txt;md5=ecfc54c9e37b63ac58900061ce2eab5a \
+-                    file://DOCS/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de"
++LIC_FILES_CHKSUM = "file://DOC/copying.txt;md5=4fbd65380cdd255951079008b364516c \
++                    file://DOC/unRarLicense.txt;md5=9c87ddde469ef94aed153b0951d088de \
++                    file://DOC/License.txt;md5=8346bfd0a2fa0987e7a3a512adf84ab9"
+ 
+ SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_all.tar.bz2 \
+           file://do_not_override_compiler_and_do_not_strip.patch"
+-SRC_URI[md5sum] = "bd6caaea567dc0d995c990c5cc883c89"
+-SRC_URI[sha256sum] = "49557e7ffca08100f9fc687f4dfc5aea703ca207640c76d9dee7b66f03cb4782"
++SRC_URI[md5sum] = "92cca093312b5a71a7be7dc7d1d32509"
++SRC_URI[sha256sum] = "699db4da3621904113e040703220abb1148dfef477b55305e2f14a4f1f8f25d4"
+ 
+ S = "${WORKDIR}/${BPN}_${PV}"
+ 
+-- 
+2.1.4
 
-On Fri, Jun 17, 2016 at 12:17 AM, Khem Raj <raj.khem@gmail.com> wrote:
-
->
-> > On Jun 8, 2016, at 6:28 PM, Derek Straka <derek@asterius.io> wrote:
-> >
-> > Signed-off-by: Derek Straka <derek@asterius.io>
-> > ---
-> > meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb | 2 ++
-> > 1 file changed, 2 insertions(+)
-> >
-> > diff --git a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.b=
-b
-> b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-> > index bc88143..9b087a8 100644
-> > --- a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-> > +++ b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-> > @@ -24,6 +24,8 @@ SRC_URI[md5sum] =3D "2ff9d76a3ea5794516bb02c9d1924faf=
-"
-> > SRC_URI[sha256sum] =3D
-> "8a60f5683852094038904e690d23cc5a90a980fc52da67f0f28890baa25c70eb"
-> >
-> > EXTRA_OECONF =3D "--disable-integration-tests"
-> > +TARGET_CFLAGS +=3D "-Wno-error=3Dmisleading-indentation=E2=80=9D
->
-> why not fix the code
->
-> > +
->
-> >
-> > FILES_${PN}-bin =3D "${bindir}"
-> > RDEPENDS_${PN}-bin =3D " \
-> > --
-> > 1.9.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
 
