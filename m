@@ -1,37 +1,40 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id E5BF5766A3
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id B4710766A3
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 17 Jun 2016 19:40:14 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id j2so13323508qkf.1
+Received: by mail-qk0-f196.google.com with SMTP id l81so13304866qke.3
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 17 Jun 2016 12:40:15 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=donikdDRInxsocSifADN2GWhY6JvP+zJnI/38m1PTOo=;
-	b=P/MwJPfXjJ8PywXQV5XgR9dw0oIDu3kYByC8xmfL2nI9mWpQf3w1IDWSzLk84460uU
-	L6a6jVsDqAvg5vtKmPOnTWh4xoJGBsxVqT5H9Fjl6uLBJwGuNZTBJTiOgI4grqdUJGkS
-	7IPk8Sh3kHDNLQfgSU/67sQozq0SEH8cXbOBDCNZOUL/QN7qUWxikVRphCMdwiTQD1Fg
-	sqi0lcCNdxTyA0qDfgrGufaevo4GhKf6DKM6Gz4aAG2toC27FIPe+9HdoscZf4XVB/bg
-	qv6kDK4C71wLD4kbTRLSgMCyzhOBV0Bt9Q4LnHPjcfCAKPpTYCiT6Fdw4hi30UDGvtuH
-	Z1wA==
-X-Gm-Message-State: ALyK8tJeMkGnzmKnpZyQ+X4y/OcQFHghW46WG9SK+pVYu+ZomM4k/0EmwVBlEEj0QQxfoA==
-X-Received: by 10.55.10.147 with SMTP id 141mr4632841qkk.91.1466192414886;
-	Fri, 17 Jun 2016 12:40:14 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=a083KW+zyvPV962brBdrSyTUtF7icS6yWPl7kgKog9Y=;
+	b=YjHIjem+aA3uy+NUP7fK6jadrXVW1oRsRdSXIFxH4BvJpCjizphIHeXxFMua0l2KUT
+	pOM1HPl780L4N/2/FSqZP+xIc4nSr1DuCQqdcYqZW4udXf7RFf6OpBwhdfibbHCV15b/
+	6FQGq2kr6rUiFRwFi1RI/21BoJm9+kpEIBcp3jF4imcRTEphKLpjprrG72dlaIgaGOK+
+	rDwDybzUDzLf95a23SMTMiQUsfEKbaTVC7eBV/MT8cOxdggKHJHZP6PuLkhcH2Cg2Na+
+	ZX3TpYXG/n3JKFSUYzC7HxJxNfF0x9rfAau8S6u0t2sATSLdKOtWkgwwFztN/PFrajRV
+	lVMw==
+X-Gm-Message-State: ALyK8tJPQwuw/nYwdINGhZgiG5SDX/xlg9l8VoFFPxRn4XDD4iBD3Puq1nnFqBbD5JV6XQ==
+X-Received: by 10.200.57.116 with SMTP id t49mr4643610qtb.58.1466192415479;
+	Fri, 17 Jun 2016 12:40:15 -0700 (PDT)
 Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
 	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
 	h60sm11614824qtd.28.2016.06.17.12.40.14
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 17 Jun 2016 12:40:14 -0700 (PDT)
+	Fri, 17 Jun 2016 12:40:15 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 17 Jun 2016 15:40:08 -0400
-Message-Id: <1466192409-3297-1-git-send-email-derek@asterius.io>
+Date: Fri, 17 Jun 2016 15:40:09 -0400
+Message-Id: <1466192409-3297-2-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1466192409-3297-1-git-send-email-derek@asterius.io>
+References: <1466192409-3297-1-git-send-email-derek@asterius.io>
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-oe][PATCH 1/2] poppler: fix ambiguity on math functions related to gcc-6
+Subject: [meta-oe][PATCH 2/2] Remove blacklisted recipes due to poppler build failures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,47 +51,63 @@ X-List-Received-Date: Fri, 17 Jun 2016 19:40:15 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../poppler/0002-fix-gcc-6-math-ambiguous-errors.patch        | 11 +++++++++++
- meta-oe/recipes-support/poppler/poppler_0.43.0.bb             |  4 +---
- 2 files changed, 12 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-support/poppler/poppler/0002-fix-gcc-6-math-ambiguous-errors.patch
+ meta-efl/recipes-efl/efl/epdf_svn.bb                 | 2 --
+ meta-gnome/recipes-gnome/evince/evince_3.18.2.bb     | 2 --
+ meta-gnome/recipes-support/tracker/tracker_0.14.2.bb | 2 --
+ meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb         | 2 --
+ meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb     | 2 --
+ 5 files changed, 10 deletions(-)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler/0002-fix-gcc-6-math-ambiguous-errors.patch b/meta-oe/recipes-support/poppler/poppler/0002-fix-gcc-6-math-ambiguous-errors.patch
-new file mode 100644
-index 0000000..406009f
---- /dev/null
-+++ b/meta-oe/recipes-support/poppler/poppler/0002-fix-gcc-6-math-ambiguous-errors.patch
-@@ -0,0 +1,11 @@
-+--- poppler-0.45.0/poppler/CairoOutputDev.cc.orig	2016-06-17 14:23:35.399083929 -0400
-++++ poppler-0.45.0/poppler/CairoOutputDev.cc	2016-06-17 14:36:53.351097825 -0400
-+@@ -42,7 +42,7 @@
-+ #endif
-+ 
-+ #include <string.h>
-+-#include <math.h>
-++#include <cmath>
-+ #include <assert.h>
-+ #include <cairo.h>
-+ 
-diff --git a/meta-oe/recipes-support/poppler/poppler_0.43.0.bb b/meta-oe/recipes-support/poppler/poppler_0.43.0.bb
-index 743e0aa..9abcd2c 100644
---- a/meta-oe/recipes-support/poppler/poppler_0.43.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_0.43.0.bb
-@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- SRC_URI = " \
-     http://poppler.freedesktop.org/${BP}.tar.xz \
-     file://0001-add-manadatory-options-to-find-qt4-qt5-moc.patch \
-+    file://0002-fix-gcc-6-math-ambiguous-errors.patch \
- "
- SRC_URI[md5sum] = "1d2b001663119855cdfbc0713dbfb9c6"
- SRC_URI[sha256sum] = "c720e26a26ee10b7ebc9e256d2ee7adcdb536cf85f9f1c4777a38f7f81fb2456"
-@@ -53,6 +54,3 @@ FILES_libpoppler = "${libdir}/libpoppler.so.*"
- FILES_libpoppler-glib = "${libdir}/libpoppler-glib.so.*"
+diff --git a/meta-efl/recipes-efl/efl/epdf_svn.bb b/meta-efl/recipes-efl/efl/epdf_svn.bb
+index a4c7d49..e32a5fd 100644
+--- a/meta-efl/recipes-efl/efl/epdf_svn.bb
++++ b/meta-efl/recipes-efl/efl/epdf_svn.bb
+@@ -25,5 +25,3 @@ EXTRA_OECONF = "\
  
- RDEPENDS_libpoppler = "poppler-data"
+ # Some upgrade path tweaking, as in evas
+ AUTO_LIBNAME_PKGS = ""
 -
--# http://errors.yoctoproject.org/Errors/Details/68605/
--PNBLACKLIST[poppler] ?= "BROKEN: fails to build with gcc-6"
+-PNBLACKLIST[epdf] ?= "Depends on broken poppler"
+diff --git a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb b/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
+index 4fa11a5..fe63093 100644
+--- a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
++++ b/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
+@@ -46,5 +46,3 @@ FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a \
+                           ${libdir}/evince/*/backends/*.a"
+ FILES_${PN}-nautilus-extension = "${libdir}/nautilus/*/*so"
+ FILES_${PN}-browser-plugin = "${libdir}/mozilla/*/*so"
+-
+-PNBLACKLIST[evince] ?= "Depends on broken poppler"
+diff --git a/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
+index 7e6c400..ff53669 100644
+--- a/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
++++ b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
+@@ -83,5 +83,3 @@ FILES_${PN}-nautilus-extension += "${libdir}/nautilus/extensions-2.0/*.so"
+ 
+ SRC_URI[md5sum] = "f3a871beeebf86fd752863ebd22af9ac"
+ SRC_URI[sha256sum] = "9b59330aa2e9e09feee587ded895e9247f71fc25f46b023d616d9969314bc7f1"
+-
+-PNBLACKLIST[tracker] ?= "Depends on broken poppler"
+diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
+index 3c134bb..29ed4d9 100644
+--- a/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
++++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.14.bb
+@@ -30,5 +30,3 @@ CFLAGS += "-fPIC"
+ 
+ FILES_${PN}-dbg += "${libdir}/gimp/2.0/*/.debug"
+ FILES_${PN}  += "${datadir}/appdata"
+-
+-PNBLACKLIST[gimp] ?= "Depends on broken poppler"
+diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
+index 5a0fc6d..66385a4 100644
+--- a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
++++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
+@@ -27,5 +27,3 @@ FILES_${PN}-dbg += "${libdir}/tumbler-1/.debug \
+                     ${libdir}/tumbler-1/plugins/.debug \
+                     ${libdir}/tumbler-1/plugins/cache/.debug \
+ "
+-
+-PNBLACKLIST[tumbler] ?= "Depends on broken poppler"
 -- 
 1.9.1
 
