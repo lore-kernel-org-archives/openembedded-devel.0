@@ -1,25 +1,28 @@
-Return-Path: <gyurco@freemail.hu>
-Received: from primary.intra.htm-hungary.hu (mail.htm-hungary.hu [80.98.98.89])
-	by mail.openembedded.org (Postfix) with ESMTP id 77D4F6FFEA
+Return-Path: <Wenzong.Fan@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E01773174
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Jun 2016 19:07:05 +0000 (UTC)
-Received: from localhost (primary [127.0.0.1])
-	by primary.intra.htm-hungary.hu (Postfix) with ESMTP id 1C80280568;
-	Sat, 18 Jun 2016 21:07:05 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at htm-hungary.com
-Received: from primary.intra.htm-hungary.hu ([127.0.0.1])
-	by localhost (primary.intra.htm-hungary.hu [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id 1rZpb9AvxKaL; Sat, 18 Jun 2016 21:07:03 +0200 (CEST)
-Received: from gyurco.lan (unknown [10.8.0.14])
-	by primary.intra.htm-hungary.hu (Postfix) with ESMTPA id 2314D80405;
-	Sat, 18 Jun 2016 21:07:03 +0200 (CEST)
-From: Gyorgy Szombathelyi <gyurco@freemail.hu>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 18 Jun 2016 21:06:57 +0200
-Message-Id: <1466276817-4209-1-git-send-email-gyurco@freemail.hu>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] Samba: use only libsystemd
+	Mon, 20 Jun 2016 01:55:56 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u5K1tvIQ006382
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 19 Jun 2016 18:55:57 -0700 (PDT)
+Received: from [128.224.162.188] (128.224.162.188) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
+	Sun, 19 Jun 2016 18:55:56 -0700
+Message-ID: <57674D2B.9040805@windriver.com>
+Date: Mon, 20 Jun 2016 09:55:55 +0800
+From: wenzong fan <wenzong.fan@windriver.com>
+User-Agent: Mozilla/5.0 (X11; Linux i686;
+	rv:31.0) Gecko/20100101 Thunderbird/31.5.0
+MIME-Version: 1.0
+To: <openembedded-devel@lists.openembedded.org>
+References: <1465355197-28010-1-git-send-email-wenzong.fan@windriver.com>	<20160613203211.GC2580@jama>
+	<CAEGpDuaUm6oiZjfEwp0GD2gCsBa++naDaCRuwk3h3=Q2skB4Bg@mail.gmail.com>
+In-Reply-To: <CAEGpDuaUm6oiZjfEwp0GD2gCsBa++naDaCRuwk3h3=Q2skB4Bg@mail.gmail.com>
+Subject: Re: [PATCH][meta-oe] krb5: add systemd support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,117 +35,191 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Jun 2016 19:07:09 -0000
+X-List-Received-Date: Mon, 20 Jun 2016 01:55:57 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-This patch was disappeared while moved to 4.4.2
+On 06/14/2016 06:22 AM, Pau Espin Pedrol wrote:
+> Hi, could you please use "${D}${systemd_system_unitdir}/XYZ.service"
+> instead of "${D}${systemd_unitdir}/system/XYZ.service" in here?
+>
 
-Signed-off-by: Gyorgy Szombathelyi <gyurco@freemail.hu>
----
- .../samba/samba-4.4.2/10-use-only-libsystemd.patch | 81 ++++++++++++++++++++++
- .../recipes-connectivity/samba/samba_4.4.2.bb      |  1 +
- 2 files changed, 82 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/samba/samba-4.4.2/10-use-only-libsystemd.patch
+Ok, thanks for your review, I'll send V2 then.
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba-4.4.2/10-use-only-libsystemd.patch b/meta-networking/recipes-connectivity/samba/samba-4.4.2/10-use-only-libsystemd.patch
-new file mode 100644
-index 0000000..81621ff
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/samba/samba-4.4.2/10-use-only-libsystemd.patch
-@@ -0,0 +1,81 @@
-+diff -ur samba-4.4.2/lib/util/become_daemon.c samba-4.4.2/lib/util/become_daemon.c
-+--- samba-4.4.2/lib/util/become_daemon.c	2016-05-08 18:33:24.000000000 +0200
-++++ samba-4.4.2/lib/util/become_daemon.c	2016-05-08 18:26:50.275177918 +0200
-+@@ -24,7 +24,7 @@
-+ #include "includes.h"
-+ #include "system/filesys.h"
-+ #include "system/locale.h"
-+-#if HAVE_LIBSYSTEMD_DAEMON
-++#if HAVE_LIBSYSTEMD
-+ #include <systemd/sd-daemon.h>
-+ #endif
-+ #include "lib/util/close_low_fd.h"
-+@@ -69,9 +69,9 @@
-+ 	if (do_fork) {
-+ 		newpid = fork();
-+ 		if (newpid) {
-+-#if HAVE_LIBSYSTEMD_DAEMON
-++#if HAVE_LIBSYSTEMD
-+ 			sd_notifyf(0, "READY=0\nSTATUS=Starting process...\nMAINPID=%lu", (unsigned long) newpid);
-+-#endif /* HAVE_LIBSYSTEMD_DAEMON */
-++#endif /* HAVE_LIBSYSTEMD */
-+ 			_exit(0);
-+ 		}
-+ 	}
-+@@ -98,7 +98,7 @@
-+ 
-+ _PUBLIC_ void exit_daemon(const char *msg, int error)
-+ {
-+-#ifdef HAVE_LIBSYSTEMD_DAEMON
-++#ifdef HAVE_LIBSYSTEMD
-+ 	if (msg == NULL) {
-+ 		msg = strerror(error);
-+ 	}
-+@@ -117,7 +117,7 @@
-+ 	if (name == NULL) {
-+ 		name = "Samba";
-+ 	}
-+-#ifdef HAVE_LIBSYSTEMD_DAEMON
-++#ifdef HAVE_LIBSYSTEMD
-+ 	sd_notifyf(0, "READY=1\nSTATUS=%s: ready to serve connections...", name);
-+ #endif
-+ 	DEBUG(0, ("STATUS=daemon '%s' finished starting up and ready to serve "
-+@@ -129,7 +129,7 @@
-+ 	if (name == NULL) {
-+ 		name = "Samba";
-+ 	}
-+-#ifdef HAVE_LIBSYSTEMD_DAEMON
-++#ifdef HAVE_LIBSYSTEMD
-+ 	sd_notifyf(0, "\nSTATUS=%s: %s", name, msg);
-+ #endif
-+ 	DEBUG(0, ("STATUS=daemon '%s' : %s", name, msg));
-+diff -ur samba-4.4.2/lib/util/debug.c samba-4.4.2/lib/util/debug.c
-+--- samba-4.4.2/lib/util/debug.c	2016-05-08 18:33:24.000000000 +0200
-++++ samba-4.4.2/lib/util/debug.c	2016-05-08 18:27:09.341481492 +0200
-+@@ -102,7 +102,7 @@
-+ 	.fd = 2 /* stderr by default */
-+ };
-+ 
-+-#if defined(WITH_SYSLOG) || defined(HAVE_LIBSYSTEMD_JOURNAL)
-++#if defined(WITH_SYSLOG) || defined(HAVE_LIBSYSTEMD)
-+ static int debug_level_to_priority(int level)
-+ {
-+ 	/*
-+@@ -179,7 +179,7 @@
-+ }
-+ #endif /* WITH_SYSLOG */
-+ 
-+-#ifdef HAVE_LIBSYSTEMD_JOURNAL
-++#ifdef HAVE_LIBSYSTEMD
-+ #include <systemd/sd-journal.h>
-+ static void debug_systemd_log(int msg_level,
-+ 			      const char *msg, const char *msg_no_nl)
-+@@ -251,7 +251,7 @@
-+ 	},
-+ #endif
-+ 
-+-#ifdef HAVE_LIBSYSTEMD_JOURNAL
-++#ifdef HAVE_LIBSYSTEMD
-+ 	{
-+ 		.name = "systemd",
-+ 		.log = debug_systemd_log,
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
-index 50c100e..b7ee730 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
-@@ -13,6 +13,7 @@ ${SAMBA_MIRROR}    http://www.mirrorservice.org/sites/ftp.samba.org \n \
- 
- SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
-            file://00-fix-typos-in-man-pages.patch \
-+           file://10-use-only-libsystemd.patch \
-            file://16-do-not-check-xsltproc-manpages.patch \
-            file://20-do-not-import-target-module-while-cross-compile.patch \
-            file://21-add-config-option-without-valgrind.patch \
--- 
-2.7.4
+Thanks
+Wenzong
 
+> Pau Espin Pedrol
+> mail/jabber: pespin.shar@gmail.com
+> http://blog.espeweb.net
+>
+> 2016-06-13 22:32 GMT+02:00 Martin Jansa <martin.jansa@gmail.com>:
+>
+>> On Tue, Jun 07, 2016 at 11:06:37PM -0400, wenzong.fan@windriver.com wrote:
+>>> From: Wenzong Fan <wenzong.fan@windriver.com>
+>>>
+>>> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+>>> ---
+>>>   .../krb5/krb5/krb5-admin-server.service            | 14 +++++++++++
+>>>   .../krb5/krb5/krb5-kdc.service                     | 13 ++++++++++
+>>>   meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb   | 29
+>> +++++++++++++++-------
+>>>   3 files changed, 47 insertions(+), 9 deletions(-)
+>>>   create mode 100644
+>> meta-oe/recipes-connectivity/krb5/krb5/krb5-admin-server.service
+>>>   create mode 100644
+>> meta-oe/recipes-connectivity/krb5/krb5/krb5-kdc.service
+>>>
+>>> diff --git
+>> a/meta-oe/recipes-connectivity/krb5/krb5/krb5-admin-server.service
+>> b/meta-oe/recipes-connectivity/krb5/krb5/krb5-admin-server.service
+>>> new file mode 100644
+>>> index 0000000..1b42716
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-connectivity/krb5/krb5/krb5-admin-server.service
+>>> @@ -0,0 +1,14 @@
+>>> +[Unit]
+>>> +Description=MIT Kerberos KDC administrative daemon
+>>> +After=syslog.target network.target
+>>> +ConditionPathExists=/etc/krb5.conf
+>>> +
+>>> +[Service]
+>>> +Type=forking
+>>> +ExecStartPre=/bin/sh -c "test ! -f /var/log/kadmind.log || test ! -x
+>> /sbin/restorecon || /sbin/restorecon -F /var/log/kadmind.log"
+>>> +ExecStart=/usr/sbin/kadmind
+>>> +SuccessExitStatus=1 2 SIGKILL
+>>> +TimeoutStopSec=30
+>>> +
+>>> +[Install]
+>>> +WantedBy=multi-user.target
+>>> diff --git a/meta-oe/recipes-connectivity/krb5/krb5/krb5-kdc.service
+>> b/meta-oe/recipes-connectivity/krb5/krb5/krb5-kdc.service
+>>> new file mode 100644
+>>> index 0000000..d5e5a95
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-connectivity/krb5/krb5/krb5-kdc.service
+>>> @@ -0,0 +1,13 @@
+>>> +[Unit]
+>>> +Description=MIT Kerberos KDC
+>>> +After=syslog.target network.target
+>>> +ConditionPathExists=/etc/krb5.conf
+>>> +
+>>> +[Service]
+>>> +Type=forking
+>>> +ExecStart=/usr/sbin/krb5kdc
+>>> +SuccessExitStatus=1 2 SIGKILL
+>>> +TimeoutStopSec=30
+>>> +
+>>> +[Install]
+>>> +WantedBy=multi-user.target
+>>> diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
+>> b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
+>>> index 0c566cb..d60e332 100644
+>>> --- a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
+>>> +++ b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
+>>> @@ -17,7 +17,7 @@ LICENSE = "MIT"
+>>>   LIC_FILES_CHKSUM =
+>> "file://${S}/../NOTICE;md5=f64248328d2d9928e1f04158b5243e7f"
+>>>   DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
+>>>
+>>> -inherit autotools-brokensep binconfig perlnative
+>>> +inherit autotools-brokensep binconfig perlnative systemd
+>>>
+>>>   SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
+>>>   SRC_URI = "
+>> http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar \
+>>> @@ -32,6 +32,8 @@ SRC_URI = "
+>> http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar
+>>>              file://etc/init.d/krb5-admin-server \
+>>>              file://etc/default/krb5-kdc \
+>>>              file://etc/default/krb5-admin-server \
+>>> +           file://krb5-kdc.service \
+>>> +           file://krb5-admin-server.service \
+>>>              file://krb5-CVE-2016-3119.patch;striplevel=2 \
+>>>
+>>   file://0001-Work-around-uninitialized-warning-in-cc_kcm.c.patch;striplevel=2
+>> \
+>>>   "
+>>> @@ -40,6 +42,9 @@ SRC_URI[sha256sum] =
+>> "e528c30b0209c741f6f320cb83122ded92f291802b6a1a1dc1a01dcdb3
+>>>
+>>>   S = "${WORKDIR}/${BP}/src"
+>>>
+>>> +SYSTEMD_SERVICE_${PN} = "krb5-admin-server.service krb5-kdc.service"
+>>> +SYSTEMD_AUTO_ENABLE = "disable"
+>>> +
+>>>   PACKAGECONFIG ??= "openssl"
+>>>   PACKAGECONFIG[libedit] = "--with-libedit,--without-libedit,libedit"
+>>>   PACKAGECONFIG[openssl] = "--with-pkinit-crypto-impl=openssl,,openssl"
+>>> @@ -79,20 +84,26 @@ do_configure() {
+>>>   }
+>>>
+>>>   do_install_append() {
+>>> -    mkdir -p ${D}/${sysconfdir}/init.d ${D}/${sysconfdir}/default
+>>> -    install -m 0755 ${WORKDIR}/etc/init.d/* ${D}/${sysconfdir}/init.d
+>>> -    install -m 0644 ${WORKDIR}/etc/default/* ${D}/${sysconfdir}/default
+>>> -
+>>>       rm -rf ${D}/${localstatedir}/run
+>>> -    mkdir -p ${D}/${sysconfdir}/default/volatiles
+>>> -    echo "d root root 0755 ${localstatedir}/run/krb5kdc none" \
+>>> -           > ${D}${sysconfdir}/default/volatiles/87_krb5
+>>> +
+>>> +    if ${@base_contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false',
+>> d)}; then
+>>
+>> Don't use base_contains
+>>
+>> Did you test this change in master? You would see this note:
+>>
+>> NOTE:
+>> /OE/build/oe-core/meta-openembedded/meta-oe/recipes-connectivity/krb5/
+>> krb5_1.13.2.bb: base_contains is deprecated, please use bb.utils.contains
+>> instead.
+>>
+>>> +        mkdir -p ${D}/${sysconfdir}/init.d ${D}/${sysconfdir}/default
+>>> +        install -m 0755 ${WORKDIR}/etc/init.d/*
+>> ${D}/${sysconfdir}/init.d
+>>> +        install -m 0644 ${WORKDIR}/etc/default/*
+>> ${D}/${sysconfdir}/default
+>>> +
+>>> +        mkdir -p ${D}/${sysconfdir}/default/volatiles
+>>> +        echo "d root root 0755 ${localstatedir}/run/krb5kdc none" \
+>>> +              > ${D}${sysconfdir}/default/volatiles/87_krb5
+>>> +    fi
+>>>       if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true',
+>> 'false', d)}; then
+>>>           install -d ${D}${sysconfdir}/tmpfiles.d
+>>>           echo "d /run/krb5kdc - - - -" \
+>>>                 > ${D}${sysconfdir}/tmpfiles.d/krb5.conf
+>>> -    fi
+>>>
+>>> +        install -d ${D}${systemd_unitdir}/system
+>>> +        install -m 0644 ${WORKDIR}/krb5-admin-server.service
+>> ${D}${systemd_unitdir}/system
+>>> +        install -m 0644 ${WORKDIR}/krb5-kdc.service
+>> ${D}${systemd_unitdir}/system
+>>> +    fi
+>>>   }
+>>>
+>>>   pkg_postinst_${PN} () {
+>>> --
+>>> 2.8.1
+>>>
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>> --
+>> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>>
 
