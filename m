@@ -1,51 +1,29 @@
-Return-Path: <mhalstead@linuxfoundation.org>
-Received: from mail-pf0-f169.google.com (mail-pf0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id A75776FF9B
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jun 2016 17:47:17 +0000 (UTC)
-Received: by mail-pf0-f169.google.com with SMTP id t190so56230652pfb.3
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jun 2016 10:47:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linuxfoundation.org; s=google;
-	h=to:from:subject:cc:message-id:date:user-agent:mime-version
-	:content-transfer-encoding;
-	bh=+X6O1zGSio43Wm2gSwb6lHeU0Z8ZARXFUmUJsdW4cMg=;
-	b=iNrknTAkyOZmU4n8Ol8UgWtMuMiESxt34ANs/8MLlfllJu8vyJK7BVObju+whtppai
-	xDsh2BBhNRo73EjC0HJ9K3hKf6kz8myYjSfY5jDCDksamIUCJdkn0Q2hU531tLsiJ2jm
-	SIlNRyLZ/2CnRxuKXO7oTIXeiJYyHsv7PHJ2Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:to:from:subject:cc:message-id:date:user-agent
-	:mime-version:content-transfer-encoding;
-	bh=+X6O1zGSio43Wm2gSwb6lHeU0Z8ZARXFUmUJsdW4cMg=;
-	b=aLw6iBC7wDyzEfTzaNOUx3Xu0ArEr7wF6ubUb1+ijQBIhDS/us+6SvCbYAwEiZA/Tv
-	lxZSPMlqocME/9HGEMVZvxc0rh1DXRw1a/b3QaG+D3A8EXaP+5HxsjDArnnRyjdI88h1
-	JJXr/JwMIexKDnBI6XtgvXecbrqs5Q2lU3hs/wOWKtn03a2Y2e2YU9po3SBMs9HOeNM7
-	ZVR/1xXtRKRIDjvi0ndaiz63X3Lx6mrPof/G/VnHmQQBJAPfXbNNDkI5keqtNCk8jhdE
-	uxsK8SFKfyE4p9pNT1C2x8TIRHkmxCZOpZ6gGSSt/V1RBVJendQDc6nk6X/sKHxTLfd9
-	VX6g==
-X-Gm-Message-State: ALyK8tJ1C/J/4kN9xSgYQRG3xDUb1QSRRZbxks0+EKG9KPGCmKT2J0CERbLjCE9SVviUhV/O
-X-Received: by 10.98.93.65 with SMTP id r62mr22693252pfb.114.1466444837911;
-	Mon, 20 Jun 2016 10:47:17 -0700 (PDT)
-Received: from yct-desktop.lan ([2001:470:b:16e:222:4dff:fe50:c906])
-	by smtp.gmail.com with ESMTPSA id da2sm6863331pad.3.2016.06.20.10.47.16
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Mon, 20 Jun 2016 10:47:16 -0700 (PDT)
-To: bitbake-devel@lists.openembedded.org,
-	Openembedded-core@lists.openembedded.org,
-	Openembedded-devel@lists.openembedded.org, yocto@yoctoproject.org
-From: Michael Halstead <mhalstead@linuxfoundation.org>
-Message-ID: <13986bd3-af12-4768-0a4c-78447c33c8b6@linuxfoundation.org>
-Date: Mon, 20 Jun 2016 10:47:16 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.1.1
+Return-Path: <gyurco@freemail.hu>
+X-Greylist: delayed 579 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 20 Jun 2016 17:59:21 UTC
+Received: from mail-outd.mail.t-online.hu (mail-outd.mail.t-online.hu
+	[195.228.240.66])
+	by mail.openembedded.org (Postfix) with ESMTP id A2F49731C9
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Jun 2016 17:59:21 +0000 (UTC)
+Received: from fsmeopfe.local (1F2EA8E2.dsl.pool.telekom.hu [31.46.168.226])
+	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail00k.mail.t-online.hu (Postfix) with ESMTPSA id 3rYJK14zrDz6Rl;
+	Mon, 20 Jun 2016 19:49:41 +0200 (CEST)
+From: Szombathelyi =?ISO-8859-1?Q?Gy=F6rgy?= <gyurco@freemail.hu>
+To: Joe MacDonald <Joe_MacDonald@mentor.com>
+Date: Mon, 20 Jun 2016 19:49:41 +0200
+Message-ID: <2201005.gbJOnNeX38@gyurco.localdomain>
+User-Agent: KMail/5.1.3 (Linux/4.5.7-300.fc24.x86_64; KDE/5.22.0; x86_64; ; )
+In-Reply-To: <20160620140845.GA4931@mentor.com>
+References: <1466276817-4209-1-git-send-email-gyurco@freemail.hu>
+	<20160620140845.GA4931@mentor.com>
 MIME-Version: 1.0
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
-	Belen Barros Pena <belen.barros.pena@intel.com>, "Perez Carranza,
-	Jose" <jose.perez.carranza@intel.com>
-Subject: Patchwork users: Help test new version
+X-DCC--Metrics: mail00k.mail.t-online.hu 1307; Body=2 Fuz1=2 Fuz2=2
+X-Spam-Probability: 0.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] Samba: use only libsystemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,24 +36,167 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jun 2016 17:47:19 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 20 Jun 2016 17:59:24 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"
 
-Hello,
+On Monday, June 20, 2016 10:08:45 AM CEST Joe MacDonald wrote:
+> Hi Gyorgy,
+>=20
+> [[oe] [meta-networking][PATCH] Samba: use only libsystemd] On 16.06.18 (S=
+at=20
+21:06) Gyorgy Szombathelyi wrote:
+> > This patch was disappeared while moved to 4.4.2
+>=20
+> I can't find this patch in the git history, but I'm happy to merge it if
+> you can provide a bit more detail on it.  Is it always valid to assume
+> HAVE_LIBSYSTEMD will always mean HAVE_LIBSYSTEMD_JOURNAL and
+> HAVE_LIBSYSTEMD_DAEMON?  Also, can you provide an upstream-status on
+> this?
 
-OpenEmbedded is nearly ready to upgrade to a new version of Patchwork.
-The new version offers several new features that will allow OpenEmbedded
-to improve developer workflow and automated checks on incoming patches.
+Hi Joe,
 
-If you are a Patchwork user please visit
-https://patchwork-next.openembedded.org/ and take a look. If you find
-anything amiss please e-mail me directly and include patchwork in the
-subject line.
+I did not do a deep research, but without the patch, the systemd notify cod=
+e=20
+doesn't work, so a systemctl start smb will never succeed.=20
+Seems some (older?) systemd installations had libsystemd-journal.so and
+libsystemd-daemon.so, but now only libsystemd.so exists.
 
-Thank you for your help upgrading this important system!
+Br,
+Gy=F6rgy
+>=20
+> Thanks.
+> -J.
+>=20
+> > Signed-off-by: Gyorgy Szombathelyi <gyurco@freemail.hu>
+> > ---
+> >=20
+> >  .../samba/samba-4.4.2/10-use-only-libsystemd.patch | 81
+> >  ++++++++++++++++++++++ .../recipes-connectivity/samba/samba_4.4.2.bb  =
+ =20
+> >   |  1 +
+> >  2 files changed, 82 insertions(+)
+> >  create mode 100644
+> >  meta-networking/recipes-connectivity/samba/samba-4.4.2/10-use-only-lib=
+sy
+> >  stemd.patch>=20
+> > diff --git
+> > a/meta-networking/recipes-connectivity/samba/samba-4.4.2/10-use-only-li=
+bs
+> > ystemd.patch
+> > b/meta-networking/recipes-connectivity/samba/samba-4.4.2/10-use-only-li=
+bs
+> > ystemd.patch new file mode 100644
+> > index 0000000..81621ff
+> > --- /dev/null
+> > +++
+> > b/meta-networking/recipes-connectivity/samba/samba-4.4.2/10-use-only-li=
+bs
+> > ystemd.patch @@ -0,0 +1,81 @@
+> > +diff -ur samba-4.4.2/lib/util/become_daemon.c
+> > samba-4.4.2/lib/util/become_daemon.c +---
+> > samba-4.4.2/lib/util/become_daemon.c	2016-05-08 18:33:24.000000000 +0200
+> > ++++ samba-4.4.2/lib/util/become_daemon.c	2016-05-08 18:26:50.275177918
+> > +0200 +@@ -24,7 +24,7 @@
+> > + #include "includes.h"
+> > + #include "system/filesys.h"
+> > + #include "system/locale.h"
+> > +-#if HAVE_LIBSYSTEMD_DAEMON
+> > ++#if HAVE_LIBSYSTEMD
+> > + #include <systemd/sd-daemon.h>
+> > + #endif
+> > + #include "lib/util/close_low_fd.h"
+> > +@@ -69,9 +69,9 @@
+> > + 	if (do_fork) {
+> > + 		newpid =3D fork();
+> > + 		if (newpid) {
+> > +-#if HAVE_LIBSYSTEMD_DAEMON
+> > ++#if HAVE_LIBSYSTEMD
+> > + 			sd_notifyf(0, "READY=3D0\nSTATUS=3DStarting process...\nMAINPID=3D
+%lu",
+> > (unsigned long) newpid); +-#endif /* HAVE_LIBSYSTEMD_DAEMON */
+> > ++#endif /* HAVE_LIBSYSTEMD */
+> > + 			_exit(0);
+> > + 		}
+> > + 	}
+> > +@@ -98,7 +98,7 @@
+> > +
+> > + _PUBLIC_ void exit_daemon(const char *msg, int error)
+> > + {
+> > +-#ifdef HAVE_LIBSYSTEMD_DAEMON
+> > ++#ifdef HAVE_LIBSYSTEMD
+> > + 	if (msg =3D=3D NULL) {
+> > + 		msg =3D strerror(error);
+> > + 	}
+> > +@@ -117,7 +117,7 @@
+> > + 	if (name =3D=3D NULL) {
+> > + 		name =3D "Samba";
+> > + 	}
+> > +-#ifdef HAVE_LIBSYSTEMD_DAEMON
+> > ++#ifdef HAVE_LIBSYSTEMD
+> > + 	sd_notifyf(0, "READY=3D1\nSTATUS=3D%s: ready to serve connections...=
+",
+> > name); + #endif
+> > + 	DEBUG(0, ("STATUS=3Ddaemon '%s' finished starting up and ready to se=
+rve=20
+"
+> > +@@ -129,7 +129,7 @@
+> > + 	if (name =3D=3D NULL) {
+> > + 		name =3D "Samba";
+> > + 	}
+> > +-#ifdef HAVE_LIBSYSTEMD_DAEMON
+> > ++#ifdef HAVE_LIBSYSTEMD
+> > + 	sd_notifyf(0, "\nSTATUS=3D%s: %s", name, msg);
+> > + #endif
+> > + 	DEBUG(0, ("STATUS=3Ddaemon '%s' : %s", name, msg));
+> > +diff -ur samba-4.4.2/lib/util/debug.c samba-4.4.2/lib/util/debug.c
+> > +--- samba-4.4.2/lib/util/debug.c	2016-05-08 18:33:24.000000000 +0200
+> > ++++ samba-4.4.2/lib/util/debug.c	2016-05-08 18:27:09.341481492 +0200
+> > +@@ -102,7 +102,7 @@
+> > + 	.fd =3D 2 /* stderr by default */
+> > + };
+> > +
+> > +-#if defined(WITH_SYSLOG) || defined(HAVE_LIBSYSTEMD_JOURNAL)
+> > ++#if defined(WITH_SYSLOG) || defined(HAVE_LIBSYSTEMD)
+> > + static int debug_level_to_priority(int level)
+> > + {
+> > + 	/*
+> > +@@ -179,7 +179,7 @@
+> > + }
+> > + #endif /* WITH_SYSLOG */
+> > +
+> > +-#ifdef HAVE_LIBSYSTEMD_JOURNAL
+> > ++#ifdef HAVE_LIBSYSTEMD
+> > + #include <systemd/sd-journal.h>
+> > + static void debug_systemd_log(int msg_level,
+> > + 			      const char *msg, const char *msg_no_nl)
+> > +@@ -251,7 +251,7 @@
+> > + 	},
+> > + #endif
+> > +
+> > +-#ifdef HAVE_LIBSYSTEMD_JOURNAL
+> > ++#ifdef HAVE_LIBSYSTEMD
+> > + 	{
+> > + 		.name =3D "systemd",
+> > + 		.log =3D debug_systemd_log,
+> > diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
+> > b/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb index
+> > 50c100e..b7ee730 100644
+> > --- a/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
+> > +++ b/meta-networking/recipes-connectivity/samba/samba_4.4.2.bb
+> > @@ -13,6 +13,7 @@ ${SAMBA_MIRROR}  =20
+> > http://www.mirrorservice.org/sites/ftp.samba.org \n \>=20
+> >  SRC_URI =3D "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
+> > =20
+> >             file://00-fix-typos-in-man-pages.patch \
+> >=20
+> > +           file://10-use-only-libsystemd.patch \
+> >=20
+> >             file://16-do-not-check-xsltproc-manpages.patch \
+> >             file://20-do-not-import-target-module-while-cross-compile.p=
+atc
+> >             h \
+> >             file://21-add-config-option-without-valgrind.patch \
 
--- 
-Michael Halstead
-Linux Foundation / SysAdmin
+
 
