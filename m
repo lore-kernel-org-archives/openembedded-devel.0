@@ -1,49 +1,77 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 3163D6018C
+Return-Path: <soren.brinkmann@xilinx.com>
+X-Greylist: delayed 2042 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 21 Jun 2016 13:50:23 UTC
+Received: from NAM02-CY1-obe.outbound.protection.outlook.com
+	(mail-cys01nam02on0068.outbound.protection.outlook.com
+	[104.47.37.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 466CF6010B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jun 2016 13:04:52 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id l81so2775856qke.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jun 2016 06:04:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc; bh=9Dv9V9E4h1VHyf2JwcGagmFvMAuPej2a8cuf3flguYo=;
-	b=FkV+HA0t0oH3CcYeWaeBNiOa0AtpvgcuvZBjnpcVYqwgDxX476MdVguwIM6lb88YBY
-	5celOCBm/xC4IzJRxiXuvSRk0wUsdiqDH5RntC2evay9BwE9mxAhh2T1aJzlJUsXMXbR
-	/7QUFqvz9F5aEGDRRXC7RDCjaZOtFi/nSFzGj6L90luIhHQe7TozQJZNM8W7QUH6jG9O
-	bfi8RPDRz6dauY7+0ADwEvt4rAZrihdPM+2PxIgiP8KSv0r3tkRXZeX50rpKegGSeeSS
-	xhhvd09d4+r0/3Czfkjptr8WVUcEURVohPHrDxq+IwE57lktUKYZbXdPIpkJXWkU0MBd
-	8RAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc;
-	bh=9Dv9V9E4h1VHyf2JwcGagmFvMAuPej2a8cuf3flguYo=;
-	b=apIbo5JDQyeiNlwj9dOFGGz1G+fK8nm8UY8IM+zvasLh+f/NhK5LP6frqHUrJvCv3+
-	jlRhOKVifp3rPAj/PCivw/jf8SsEs7tZGTBskFhHyqMiwXLQyG99LhfXJRfsq8pEik8A
-	0xdS5fFhEQIM5Dait8KKIe5YgsnvlAm1GlkafZ7IhAzS8WXAjm9gVOwhE1NAnISe8QpE
-	GM2Q3zw8mjjmzgXd+uFzBBZfSfzbUmHGhbbxaRuGCIRACdcbKJ62m96mZAP576LR197d
-	3hYwi1rqt6XlDGGvdgRiASHivP/y8M9laD1oIJ5awJDHUPmxWyqSpqa95hHctSclfvdV
-	FJnQ==
-X-Gm-Message-State: ALyK8tIPiBH8fDv6S595nzQlmloLGx26wvalmzn3Y2v5/ZokwxHe4UhQfoJcamQSncbkAcntjeoFhXCtxG/aHw==
+	Tue, 21 Jun 2016 13:50:23 +0000 (UTC)
+Received: from BL2NAM02FT019.eop-nam02.prod.protection.outlook.com
+	(10.152.76.59) by BL2NAM02HT209.eop-nam02.prod.protection.outlook.com
+	(10.152.77.74) with Microsoft SMTP Server (TLS) id 15.1.517.7;
+	Tue, 21 Jun 2016 13:16:20 +0000
+Authentication-Results: spf=pass (sender IP is 149.199.60.100)
+	smtp.mailfrom=xilinx.com; lists.openembedded.org; dkim=none (message not
+	signed) header.d=none; lists.openembedded.org;
+	dmarc=bestguesspass action=none header.from=xilinx.com;
+Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
+	149.199.60.100 as permitted sender) receiver=protection.outlook.com;
+	client-ip=149.199.60.100; helo=xsj-pvapsmtpgw02;
+Received: from xsj-pvapsmtpgw02 (149.199.60.100) by
+	BL2NAM02FT019.mail.protection.outlook.com (10.152.77.166) with
+	Microsoft SMTP Server (TLS) id 15.1.523.9 via Frontend Transport;
+	Tue, 21 Jun 2016 13:16:20 +0000
+Received: from unknown-38-66.xilinx.com ([149.199.38.66]:51280
+	helo=xsj-pvapsmtp01) by xsj-pvapsmtpgw02 with esmtp (Exim 4.63)
+	(envelope-from <soren.brinkmann@xilinx.com>) id 1bFLXM-00068O-RU
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Jun 2016 06:16:16 -0700
+Received: from [127.0.0.1] (helo=localhost)
+	by xsj-pvapsmtp01 with smtp (Exim 4.63)
+	(envelope-from <soren.brinkmann@xilinx.com>) id 1bFLXP-0004nR-EK
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Jun 2016 06:16:19 -0700
+Received: from xsj-pvapsmtp01 (mailman.xilinx.com [149.199.38.66])
+	by xsj-smtp-dlp2.xlnx.xilinx.com (8.13.8/8.13.1) with ESMTP id
+	u5LDGFRL010284; Tue, 21 Jun 2016 06:16:15 -0700
+Received: from [172.19.74.49] (helo=localhost)
+	by xsj-pvapsmtp01 with esmtp (Exim 4.63)
+	(envelope-from <soren.brinkmann@xilinx.com>)
+	id 1bFLXK-0004mQ-V9; Tue, 21 Jun 2016 06:16:15 -0700
+From: Soren Brinkmann <soren.brinkmann@xilinx.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 21 Jun 2016 06:16:12 -0700
+Message-ID: <20160621131612.3616-1-soren.brinkmann@xilinx.com>
+X-Mailer: git-send-email 2.9.0.3.g94f1210
+X-RCIS-Action: ALLOW
+X-TM-AS-Product-Ver: IMSS-7.1.0.1224-8.0.0.1202-22404.005
+X-TM-AS-User-Approved-Sender: Yes;Yes
+X-EOPAttributedMessage: 0
+X-Forefront-Antispam-Report: CIP:149.199.60.100; IPV:NLI; CTRY:US; EFV:NLI;
+	SFV:NSPM;
+	SFS:(10009020)(6009001)(7916002)(2980300002)(438002)(199003)(189002)(450100001)(11100500001)(87936001)(63266004)(50466002)(356003)(50986999)(575784001)(92566002)(86362001)(6806005)(110136002)(77096005)(9786002)(57986006)(48376002)(76506005)(107886002)(15650500001)(36756003)(8936002)(50226002)(586003)(81156014)(1076002)(4326007)(81166006)(189998001)(33646002)(106466001)(8676002)(5003940100001)(19580405001)(19580395003)(7846002)(47776003)(229853001)(2351001)(36386004)(2906002)(4001430100002)(107986001)(5001870100001);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:BL2NAM02HT209; H:xsj-pvapsmtpgw02;
+	FPR:; SPF:Pass; PTR:xapps1.xilinx.com,unknown-60-100.xilinx.com;
+	A:1; MX:1; CAT:NONE; LANG:en; CAT:NONE; 
 MIME-Version: 1.0
-X-Received: by 10.55.39.141 with SMTP id n135mr30535109qkn.149.1466514293446; 
-	Tue, 21 Jun 2016 06:04:53 -0700 (PDT)
-Received: by 10.55.8.133 with HTTP; Tue, 21 Jun 2016 06:04:53 -0700 (PDT)
-Received: by 10.55.8.133 with HTTP; Tue, 21 Jun 2016 06:04:53 -0700 (PDT)
-In-Reply-To: <CAP0W-Rk=55MPUs2L19W27oERVYqrk5Q+PEEaDW372BF6qa7HfA@mail.gmail.com>
-References: <1466415303-25975-1-git-send-email-koen.kooi@linaro.org>
-	<CAMKF1sqc-6OpVNMb7m9FRg2tPtj32r9f4itzo4SSa4f_zh7BwA@mail.gmail.com>
-	<CAP0W-Rk=55MPUs2L19W27oERVYqrk5Q+PEEaDW372BF6qa7HfA@mail.gmail.com>
-Date: Tue, 21 Jun 2016 06:04:53 -0700
-Message-ID: <CAMKF1sqbTfpfc7wCQfJZOcXz7WyxAaQsZHp=g1zz7qY5Mud-+g@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: Koen Kooi <koen.kooi@linaro.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] fwts: update to latest git and fix build with gcc 5
+X-MS-Office365-Filtering-Correlation-Id: 46a03552-ce65-4d01-d971-08d399d63c57
+X-Microsoft-Antispam: UriScan:; BCL:0; PCL:0; RULEID:(8251501002);
+	SRVR:BL2NAM02HT209; 
+X-Microsoft-Antispam-PRVS: <a4ec9b04f4ca42bab3cd9b45bebd333c@BL2NAM02HT209.eop-nam02.prod.protection.outlook.com>
+X-Exchange-Antispam-Report-Test: UriScan:(166708455590820)(192813158149592);
+X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
+	RULEID:(601004)(2401047)(13018025)(13023025)(13017025)(8121501046)(13015025)(13024025)(5005006)(3002001)(10201501046)(6055026);
+	SRVR:BL2NAM02HT209; BCL:0; PCL:0; RULEID:; SRVR:BL2NAM02HT209; 
+X-Forefront-PRVS: 098076C36C
+X-OriginatorOrg: xilinx.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jun 2016 13:16:20.1938 (UTC)
+X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;
+	Ip=[149.199.60.100]; Helo=[xsj-pvapsmtpgw02]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL2NAM02HT209
+Subject: [meta-oe][PATCH] analyze-suspend: Bump to latest Git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,86 +84,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jun 2016 13:04:53 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 21 Jun 2016 13:50:26 -0000
+Content-Type: text/plain
 
-On Jun 20, 2016 10:04 PM, "Koen Kooi" <koen.kooi@linaro.org> wrote:
->
-> On 20 June 2016 at 18:07, Khem Raj <raj.khem@gmail.com> wrote:
-> > On Mon, Jun 20, 2016 at 2:35 AM, Koen Kooi <koen.kooi@linaro.org> wrote:
-> >> License checksum change due to 2014->2016 changes. Fix build with gcc
-5 by removing -Wno-werror:
-> >>
-> >>         cc1: error: -Werror=misleading-indentation: no option
--Wmisleading-indentation
-> >
-> > This would then break build with gcc6 unless the indentations are
-> > fixed in new version. Can you confirm that
-> > it works with gcc6 equally well ?
->
-> ATM I can't, since I don't have a gcc6 config setup. But this is a
-> general problem: How can we turn off that indentation warning for gcc6
-> without breaking gcc5?
+Signed-off-by: Soren Brinkmann <soren.brinkmann@xilinx.com>
+---
+ meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-One way is to fix the code
->
-> >
-> >>
-> >> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
-> >> ---
-> >>  meta-oe/recipes-test/fwts/fwts_git.bb | 10 ++++++----
-> >>  1 file changed, 6 insertions(+), 4 deletions(-)
-> >>
-> >> diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb
-b/meta-oe/recipes-test/fwts/fwts_git.bb
-> >> index 197fe20..2868034 100644
-> >> --- a/meta-oe/recipes-test/fwts/fwts_git.bb
-> >> +++ b/meta-oe/recipes-test/fwts/fwts_git.bb
-> >> @@ -3,11 +3,11 @@ DESCRIPTION = "The tool fwts comprises of over fifty
-tests that are designed to
-> >>  HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
-> >>
-> >>  LICENSE = "GPLv2+"
-> >> -LIC_FILES_CHKSUM =
-"file://src/main.c;beginline=1;endline=16;md5=deb8af5388e838d133eaa036f4d1496f"
-> >> +LIC_FILES_CHKSUM =
-"file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd34dcdb9e4db568519"
-> >>
-> >> -PV = "14.12.00"
-> >> +PV = "16.05.01"
-> >>
-> >> -SRCREV = "efc18d16294f492b7f72bba64344b2eed50e6a69"
-> >> +SRCREV = "4d9500d1fb119e2136e07c0cc2844f51b5e5b97a"
-> >>  SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git"
-> >>
-> >>  S = "${WORKDIR}/git"
-> >> @@ -16,7 +16,9 @@ DEPENDS = "libpcre json-c glib-2.0"
-> >>
-> >>  inherit autotools-brokensep
-> >>
-> >> -CFLAGS += "-I${STAGING_INCDIR}/json-c
--Wno-error=misleading-indentation"
-> >> +CFLAGS += "-I${STAGING_INCDIR}/json-c"
-> >> +
-> >> +RDEPENDS_${PN} += "dtc"
-> >>
-> >>  FILES_${PN} += "${libdir}/fwts/lib*${SOLIBS}"
-> >>  FILES_${PN}-dev += "${libdir}/fwts/lib*${SOLIBSDEV}
-${libdir}/fwts/lib*.la"
-> >> --
-> >> 2.4.3
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
->
-> --
-> Koen Kooi
->
-> Builds and Baselines | Release Manager
-> Linaro.org | Open source software for ARM SoCs
+diff --git a/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb b/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb
+index d97ff0a5bdd2..afbaaba07808 100644
+--- a/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb
++++ b/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_git.bb
+@@ -17,7 +17,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
+ RDEPENDS_${PN} += "python-core python-datetime python-stringold"
+ 
+ PV = "3.2+gitr${SRCPV}"
+-SRCREV = "bce3cbec43bc2ce7a8c79b210314dd9d9ac1010b"
++SRCREV = "c669e002a2e7504f21e277ad248fa81033926391"
+ SRC_URI = "git://github.com/01org/suspendresume.git;protocol=https"
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.9.0.3.g94f1210
+
 
