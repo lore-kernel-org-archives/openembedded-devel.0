@@ -1,25 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9622960721
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5FB1060721
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jun 2016 05:40:02 +0000 (UTC)
+	Tue, 21 Jun 2016 05:40:03 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u5L5e1XF025329
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Mon, 20 Jun 2016 22:40:01 -0700
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u5L5e3Bj019718
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 20 Jun 2016 22:40:03 -0700 (PDT)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
-	Mon, 20 Jun 2016 22:40:01 -0700
+	Mon, 20 Jun 2016 22:40:03 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 21 Jun 2016 01:39:52 -0400
-Message-ID: <8f05b4ccbfed5d0b80bfd37f0db339bdd8a7cc9e.1466487409.git.hongxu.jia@windriver.com>
+Date: Tue, 21 Jun 2016 01:39:53 -0400
+Message-ID: <da581fde516db076f04ecfb81cd70ebce9f5c1f8.1466487409.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.8.1
 In-Reply-To: <cover.1466487409.git.hongxu.jia@windriver.com>
 References: <cover.1466487409.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/3] python-pygobject: fix do_configure failed
+Subject: [PATCH 3/3] python-cloudeebus: fix do_compile failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,41 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jun 2016 05:40:02 -0000
+X-List-Received-Date: Tue, 21 Jun 2016 05:40:03 -0000
 Content-Type: text/plain
 
-Fix build failure since it was moved to meta-oe
-
-http://lists.openembedded.org/pipermail/openembedded-devel/2016-June/107798.html
+It fixed the following failure:
+...
+  2 Traceback (most recent call last):
+  3   File "setup.py", line 24, in <module>
+  4     from setuptools import setup
+  5 ImportError: No module named setuptools
+...
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-oe/recipes-devtools/python/python-pygobject_3.18.2.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python-cloudeebus_0.6.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/python/python-pygobject_3.18.2.bb b/meta-oe/recipes-devtools/python/python-pygobject_3.18.2.bb
-index e4eeafb..52ef425 100644
---- a/meta-oe/recipes-devtools/python/python-pygobject_3.18.2.bb
-+++ b/meta-oe/recipes-devtools/python/python-pygobject_3.18.2.bb
-@@ -5,6 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
+diff --git a/meta-python/recipes-devtools/python/python-cloudeebus_0.6.0.bb b/meta-python/recipes-devtools/python/python-cloudeebus_0.6.0.bb
+index 120a8a7..1490e22 100644
+--- a/meta-python/recipes-devtools/python/python-cloudeebus_0.6.0.bb
++++ b/meta-python/recipes-devtools/python/python-cloudeebus_0.6.0.bb
+@@ -9,7 +9,7 @@ SRCREV = "b5cc957eeabfe98cb996baf8e5a0ac848993c3d4"
  
- inherit autotools pkgconfig gnomebase distutils-base gobject-introspection
+ S = "${WORKDIR}/git"
  
-+PYTHON_BASEVERSION = "2.7"
-+PYTHON_PN = "python"
-+
- DEPENDS += "python glib-2.0"
+-inherit distutils 
++inherit distutils setuptools
  
- SRCNAME="pygobject"
-@@ -20,7 +23,7 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
- 
- BBCLASSEXTEND = "native"
- 
--EXTRA_OECONF = "--disable-cairo --with-python=python2.7"
-+EXTRA_OECONF = "--disable-cairo --with-python=${PYTHON}"
- 
- RDEPENDS_${PN} += "python-setuptools python-importlib"
- 
+ DEPENDS_${PN} = "python python-distribute"
+ RDEPENDS_${PN} = "python python-dbus python-json python-argparse python-pygobject python-autobahn python-twisted python-subprocess"
 -- 
 2.8.1
 
