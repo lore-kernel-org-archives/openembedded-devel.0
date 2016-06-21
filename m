@@ -1,66 +1,49 @@
-Return-Path: <anders@chargestorm.se>
-Received: from mail-lf0-f51.google.com (mail-lf0-f51.google.com
-	[209.85.215.51])
-	by mail.openembedded.org (Postfix) with ESMTP id C5E7060118
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 3163D6018C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jun 2016 12:43:00 +0000 (UTC)
-Received: by mail-lf0-f51.google.com with SMTP id h129so22143258lfh.1
+	Tue, 21 Jun 2016 13:04:52 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id l81so2775856qke.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jun 2016 05:43:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=chargestorm-se.20150623.gappssmtp.com; s=20150623;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-disposition:content-transfer-encoding
-	:in-reply-to:organization:user-agent;
-	bh=2N4dPWHEAZpVJ+m69Ac8kpkvcB3zWuSYkNX7EDR5ygg=;
-	b=Y0ekdi0hsebd/M+Pk8/dJ9kpficbNQsaDW9bCIdEa2uNTM1ZglYralNMpaEB1LHgxZ
-	BuNSG0jyms+Zb+7Hq/q/nrHAK+TgSqgpDR6nUiWLwgzsXGO4JJ9HiKMKbh1tG69pQZUk
-	Y7VpAHvht/kr2ospZR2wh52EX8e4FZ4JOZ4A3NXbh2KOtMCXpjknzIzeUK4PcC4qRLOx
-	gECEUAJ3GKxUCTt/tpmkueNNvBW+3dFZQXDbg/c3vugKtzs2kXO5u2NN/VCDBe8my3ZI
-	TfxrpklxEoDnrpmUoUjLCC+74P6n17A8XHm8KPUgHsAJDeG83AZtBMRowWbeSxhcGn12
-	O//g==
+	Tue, 21 Jun 2016 06:04:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc; bh=9Dv9V9E4h1VHyf2JwcGagmFvMAuPej2a8cuf3flguYo=;
+	b=FkV+HA0t0oH3CcYeWaeBNiOa0AtpvgcuvZBjnpcVYqwgDxX476MdVguwIM6lb88YBY
+	5celOCBm/xC4IzJRxiXuvSRk0wUsdiqDH5RntC2evay9BwE9mxAhh2T1aJzlJUsXMXbR
+	/7QUFqvz9F5aEGDRRXC7RDCjaZOtFi/nSFzGj6L90luIhHQe7TozQJZNM8W7QUH6jG9O
+	bfi8RPDRz6dauY7+0ADwEvt4rAZrihdPM+2PxIgiP8KSv0r3tkRXZeX50rpKegGSeeSS
+	xhhvd09d4+r0/3Czfkjptr8WVUcEURVohPHrDxq+IwE57lktUKYZbXdPIpkJXWkU0MBd
+	8RAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
-	:references:mime-version:content-disposition
-	:content-transfer-encoding:in-reply-to:organization:user-agent;
-	bh=2N4dPWHEAZpVJ+m69Ac8kpkvcB3zWuSYkNX7EDR5ygg=;
-	b=a+poQVcWUCpk0JaA8Z2XtLwFq4l/mWqYZRXhkk0Is28Luq7+OnHh5FfrtohP9jbT8n
-	f/tK0e4c1RrHs/hcrYOPnGWC8NCA+wH3wRcdF2Tmlrp4C7qdUvEaQUbs6q7E0PhEvOuv
-	W5t4YZWpM+YzV5cSx9DoCP7h7+k0uhsDeciTANM8BfGminOmKCQyjTVb1Nx/2qVt7euG
-	oBslzsQkpRdYr6Dpp2E5+0+9Sr1lVeWm08tDjAGw2lJBaG21RWuoAA20mcu7um+W1dPE
-	JWMZ5C+cRybDbib7s0/eIiUQA9ye4cvmLPO85I2Qf/wdQ5cPHsvcL/9oPHC69OKIVJ2o
-	mOhg==
-X-Gm-Message-State: ALyK8tKJy3lG3ChGT4MM0fngBHhXxOsUWdMJbqU2C6E6nAuKQYJisibFWy1U76zr8nCZRw==
-X-Received: by 10.25.17.210 with SMTP id 79mr5130071lfr.113.1466512980125;
-	Tue, 21 Jun 2016 05:43:00 -0700 (PDT)
-Received: from ad.chargestorm.se (213-64-218-130-no126.business.telia.com.
-	[213.64.218.130]) by smtp.gmail.com with ESMTPSA id
-	g24sm4134270ljg.20.2016.06.21.05.42.59
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Tue, 21 Jun 2016 05:42:59 -0700 (PDT)
-Date: Tue, 21 Jun 2016 14:42:57 +0200
-From: Anders Darander <anders@chargestorm.se>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160621124257.GB20646@ad.chargestorm.se>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <7fb5e28e-d153-a396-58ae-c4d656835524@emagii.com>
-	<6c3c2d7a-0b1e-fb20-1be9-679b3a728dcb@smile.fr>
-	<01564453-efa0-c067-83bc-67f995a86452@emagii.com>
-	<8646f486-90f9-738d-9daf-6ba1644c83ba@smile.fr>
-	<16a6d5ea-a179-f36b-6a64-2a8c790e662f@emagii.com>
-	<496a4384-fb09-36f9-f945-ad52aee9e978@smile.fr>
-	<a807ca01-806e-3505-db34-7e3c195fe977@emagii.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to:cc;
+	bh=9Dv9V9E4h1VHyf2JwcGagmFvMAuPej2a8cuf3flguYo=;
+	b=apIbo5JDQyeiNlwj9dOFGGz1G+fK8nm8UY8IM+zvasLh+f/NhK5LP6frqHUrJvCv3+
+	jlRhOKVifp3rPAj/PCivw/jf8SsEs7tZGTBskFhHyqMiwXLQyG99LhfXJRfsq8pEik8A
+	0xdS5fFhEQIM5Dait8KKIe5YgsnvlAm1GlkafZ7IhAzS8WXAjm9gVOwhE1NAnISe8QpE
+	GM2Q3zw8mjjmzgXd+uFzBBZfSfzbUmHGhbbxaRuGCIRACdcbKJ62m96mZAP576LR197d
+	3hYwi1rqt6XlDGGvdgRiASHivP/y8M9laD1oIJ5awJDHUPmxWyqSpqa95hHctSclfvdV
+	FJnQ==
+X-Gm-Message-State: ALyK8tIPiBH8fDv6S595nzQlmloLGx26wvalmzn3Y2v5/ZokwxHe4UhQfoJcamQSncbkAcntjeoFhXCtxG/aHw==
 MIME-Version: 1.0
-In-Reply-To: <a807ca01-806e-3505-db34-7e3c195fe977@emagii.com>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: Mutt/1.6.0 (2016-04-01)
-Subject: Re: Using EXTERNALSRC in practice
+X-Received: by 10.55.39.141 with SMTP id n135mr30535109qkn.149.1466514293446; 
+	Tue, 21 Jun 2016 06:04:53 -0700 (PDT)
+Received: by 10.55.8.133 with HTTP; Tue, 21 Jun 2016 06:04:53 -0700 (PDT)
+Received: by 10.55.8.133 with HTTP; Tue, 21 Jun 2016 06:04:53 -0700 (PDT)
+In-Reply-To: <CAP0W-Rk=55MPUs2L19W27oERVYqrk5Q+PEEaDW372BF6qa7HfA@mail.gmail.com>
+References: <1466415303-25975-1-git-send-email-koen.kooi@linaro.org>
+	<CAMKF1sqc-6OpVNMb7m9FRg2tPtj32r9f4itzo4SSa4f_zh7BwA@mail.gmail.com>
+	<CAP0W-Rk=55MPUs2L19W27oERVYqrk5Q+PEEaDW372BF6qa7HfA@mail.gmail.com>
+Date: Tue, 21 Jun 2016 06:04:53 -0700
+Message-ID: <CAMKF1sqbTfpfc7wCQfJZOcXz7WyxAaQsZHp=g1zz7qY5Mud-+g@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: Koen Kooi <koen.kooi@linaro.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] fwts: update to latest git and fix build with gcc 5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -73,46 +56,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jun 2016 12:43:03 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 21 Jun 2016 13:04:53 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* Ulf Samuelsson <openembedded@emagii.com> [160621 13:24]:
+On Jun 20, 2016 10:04 PM, "Koen Kooi" <koen.kooi@linaro.org> wrote:
+>
+> On 20 June 2016 at 18:07, Khem Raj <raj.khem@gmail.com> wrote:
+> > On Mon, Jun 20, 2016 at 2:35 AM, Koen Kooi <koen.kooi@linaro.org> wrote:
+> >> License checksum change due to 2014->2016 changes. Fix build with gcc
+5 by removing -Wno-werror:
+> >>
+> >>         cc1: error: -Werror=misleading-indentation: no option
+-Wmisleading-indentation
+> >
+> > This would then break build with gcc6 unless the indentations are
+> > fixed in new version. Can you confirm that
+> > it works with gcc6 equally well ?
+>
+> ATM I can't, since I don't have a gcc6 config setup. But this is a
+> general problem: How can we turn off that indentation warning for gcc6
+> without breaking gcc5?
 
-> Den 2016-06-21 kl. 09:27, skrev J=E9r=E9my Rosen:
-
-> > ${THISDIR} should be what you want, if I understand correctly...
-
-> Tried that, but that ended up in the build tree.
-
-> The <kernel>.bb file is located in the build tree, and the <kernel>.bbapp=
-end
-> is somewhere else.
-> Don't ask me why, LOL...
-
-> I need the directory of the bbappend file.
-
-Yes, ${THISDIR} is exactly what you're looking for. Your issue is that
-you're probably using it like:
-
-SOMEVAR =3D "${THISDIR}/.."
-
-Using bitbake and OE, all variables on the right hand side are expanded
-and evaluated at towards the end of the processing. At that point in
-time, THISDIR is correct to point to the directory with the .bb-file.
-
-You need to immediately expand ${THISDIR} by using:
-
-SOMEVAR :=3D "${THISDIR}/.."
-
-See for instance the discussion at
-http://www.yoctoproject.org/docs/2.1/ref-manual/ref-manual.html#var-FILESEX=
-TRAPATHS
-
-Cheers,
-Anders
---=20
-Anders Darander, Senior System Architect
-ChargeStorm AB / eStorm AB
+One way is to fix the code
+>
+> >
+> >>
+> >> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+> >> ---
+> >>  meta-oe/recipes-test/fwts/fwts_git.bb | 10 ++++++----
+> >>  1 file changed, 6 insertions(+), 4 deletions(-)
+> >>
+> >> diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb
+b/meta-oe/recipes-test/fwts/fwts_git.bb
+> >> index 197fe20..2868034 100644
+> >> --- a/meta-oe/recipes-test/fwts/fwts_git.bb
+> >> +++ b/meta-oe/recipes-test/fwts/fwts_git.bb
+> >> @@ -3,11 +3,11 @@ DESCRIPTION = "The tool fwts comprises of over fifty
+tests that are designed to
+> >>  HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
+> >>
+> >>  LICENSE = "GPLv2+"
+> >> -LIC_FILES_CHKSUM =
+"file://src/main.c;beginline=1;endline=16;md5=deb8af5388e838d133eaa036f4d1496f"
+> >> +LIC_FILES_CHKSUM =
+"file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd34dcdb9e4db568519"
+> >>
+> >> -PV = "14.12.00"
+> >> +PV = "16.05.01"
+> >>
+> >> -SRCREV = "efc18d16294f492b7f72bba64344b2eed50e6a69"
+> >> +SRCREV = "4d9500d1fb119e2136e07c0cc2844f51b5e5b97a"
+> >>  SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git"
+> >>
+> >>  S = "${WORKDIR}/git"
+> >> @@ -16,7 +16,9 @@ DEPENDS = "libpcre json-c glib-2.0"
+> >>
+> >>  inherit autotools-brokensep
+> >>
+> >> -CFLAGS += "-I${STAGING_INCDIR}/json-c
+-Wno-error=misleading-indentation"
+> >> +CFLAGS += "-I${STAGING_INCDIR}/json-c"
+> >> +
+> >> +RDEPENDS_${PN} += "dtc"
+> >>
+> >>  FILES_${PN} += "${libdir}/fwts/lib*${SOLIBS}"
+> >>  FILES_${PN}-dev += "${libdir}/fwts/lib*${SOLIBSDEV}
+${libdir}/fwts/lib*.la"
+> >> --
+> >> 2.4.3
+> >>
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
+>
+> --
+> Koen Kooi
+>
+> Builds and Baselines | Release Manager
+> Linaro.org | Open source software for ARM SoCs
 
