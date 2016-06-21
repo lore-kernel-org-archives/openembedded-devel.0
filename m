@@ -1,42 +1,28 @@
-Return-Path: <koen.kooi@linaro.org>
-Received: from mail-lf0-f48.google.com (mail-lf0-f48.google.com
-	[209.85.215.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 4257062132
+Return-Path: <openembedded@emagii.com>
+Received: from v-smtpout1.han.skanova.net (v-smtpout1.han.skanova.net
+	[81.236.60.154])
+	by mail.openembedded.org (Postfix) with ESMTP id B065B601D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jun 2016 07:45:15 +0000 (UTC)
-Received: by mail-lf0-f48.google.com with SMTP id q132so10374928lfe.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jun 2016 00:45:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=ylk0ck82BPIt6qcHxYGpP5omIYI/xBRQznnQakZcE7w=;
-	b=ATGrwSKS3lJsTjiAgk/4b9SDYCW7SiHADQ9q66zPwA4HD8ZH4zyZ4A+X1touKaBwj9
-	ejwPmjIqT4ls9dMXe8gBniHqSRsQq2h6fo42HHhn/Hx5KJ/nYY0z0SOr3fM6tqJ2IqkQ
-	EVbRtZKhWWfGlkj4MNy117KosnGD+h7GN2oKA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=ylk0ck82BPIt6qcHxYGpP5omIYI/xBRQznnQakZcE7w=;
-	b=XqRn46R6E7Gw0QU1s6il2Xkhu6j96hzlOtzSZTJSwXoypaHXmJYSFOHrNtCeI8Bhgg
-	r/7w7jSJur8ij40Ez6heZ2o4YSxYFWBdJv/ymKpht8aAHl7N8zjGhzsOqb5NkFOSUFjy
-	BsypntvHNps00yMmxN4+f5qGARpTWJ5ND5c+aKd2HKNO8CYXufcvwEZR1aS7MR+uSWKT
-	FwVrFFBbFf+HnGaKnjYleE5l7A1Qlctsk6IfNt3L30cZ6a2uGNKQRx77ZE49xQfiuzRm
-	74fxa1+uaH8YWKlPV55/KABt/rwrNIpoqRlL0pLCV7w92zxDh7mq1bRZO0yAMbIAebN3
-	K2Qg==
-X-Gm-Message-State: ALyK8tKL+DC4mpfZ8agOVU8cghhWiRwrjSpPrAVCsY8gtSVaW7IzCVgMcE5xHDMi6xm5N4lPP+OVAw3fGG2fpBQC
-X-Received: by 10.25.20.213 with SMTP id 82mr5903906lfu.90.1466495115431; Tue,
-	21 Jun 2016 00:45:15 -0700 (PDT)
+	Tue, 21 Jun 2016 11:22:52 +0000 (UTC)
+Received: from [10.175.196.110] ([155.4.129.69]) by cmsmtp with SMTP
+	id FJlabyQ1XCjZEFJlabkqZj; Tue, 21 Jun 2016 13:22:50 +0200
+To: openembedded-devel@lists.openembedded.org
+References: <7fb5e28e-d153-a396-58ae-c4d656835524@emagii.com>
+	<6c3c2d7a-0b1e-fb20-1be9-679b3a728dcb@smile.fr>
+	<01564453-efa0-c067-83bc-67f995a86452@emagii.com>
+	<8646f486-90f9-738d-9daf-6ba1644c83ba@smile.fr>
+	<16a6d5ea-a179-f36b-6a64-2a8c790e662f@emagii.com>
+	<496a4384-fb09-36f9-f945-ad52aee9e978@smile.fr>
+From: Ulf Samuelsson <openembedded@emagii.com>
+Message-ID: <a807ca01-806e-3505-db34-7e3c195fe977@emagii.com>
+Date: Tue, 21 Jun 2016 13:22:52 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
+	Thunderbird/45.1.1
 MIME-Version: 1.0
-Received: by 10.25.77.146 with HTTP; Tue, 21 Jun 2016 00:45:14 -0700 (PDT)
-In-Reply-To: <1466415303-25975-1-git-send-email-koen.kooi@linaro.org>
-References: <1466415303-25975-1-git-send-email-koen.kooi@linaro.org>
-From: Koen Kooi <koen.kooi@linaro.org>
-Date: Tue, 21 Jun 2016 09:45:14 +0200
-Message-ID: <CAP0W-Rkd3y0k-5iR89HyxcHcRjKGg9VCDV-zeOM41aDsi79xpg@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Koen Kooi <koen.kooi@linaro.org>
-Subject: Re: [meta-oe][PATCH v2] fwts: update to latest git and fix build with gcc 5
+In-Reply-To: <496a4384-fb09-36f9-f945-ad52aee9e978@smile.fr>
+X-CMAE-Envelope: MS4wfHucaspNAChUcTssCoFD/Vz6pNm8AvdYUhEpkOGTA5Lu9F7+HPB7DX1oM6s/J3YXAGSyFfVsiQS4oXVqBENSOz7Zsp2neSXGWkR5zD41wJi/VuyUE0Q/
+	FkB6HXpB725QmWJowQU2sCocJimOZOjmsFFuVStDUUm8FZSFv8ndnkmXBxCH6L2X6K4BpKFq1D/gJXrJcOr8rkXHshhbpdtfh1k=
+Subject: Re: Using EXTERNALSRC in practice
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,61 +35,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jun 2016 07:45:16 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 21 Jun 2016 11:22:54 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 20 June 2016 at 11:35, Koen Kooi <koen.kooi@linaro.org> wrote:
-> License checksum change due to 2014->2016 changes. Fix build with gcc 5 by removing -Wno-werror:
+Den 2016-06-21 kl. 09:27, skrev Jérémy Rosen:
 >
->         cc1: error: -Werror=misleading-indentation: no option -Wmisleading-indentation
 >
-> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+> On 21/06/2016 00:02, Ulf Samuelsson wrote:
+>> Den 2016-06-20 kl. 15:58, skrev Jérémy Rosen:
+>>>
+>>>
+>>> On 20/06/2016 15:48, Ulf Samuelsson wrote:
+>>>> Den 2016-06-20 kl. 14:37, skrev Jérémy Rosen:
+>>>>>
+>>>>> On 20/06/2016 14:08, Ulf Samuelsson wrote:
+>>>>>> We have a meta-layer which builds the kernel.
+>>>>>>
+>>>>>> This contains among other things:
+>>>>>>
+>>>>>> FILESEXTRAPATHS_prepend_<machine> = "${THIS_DIR}/<machine>"
+>>>>>>
+>>>>>> SRC_URI = "git://<server>/<repo.git>;protocol=ssh;branch=<branch>"
+>>>>>> SRC_URI += "file://defconfig"
+>>>>>>
+>>>>>> PV = "...+git${SRCPV}"
+>>>>>> SRCREV = "<shaid>"
+>>>>>> ...
+>>>>>>
+>>>>>> Would like to have an option to build the kernel with external 
+>>>>>> source.
+>>>>>> That option should be easy to enable/disable
+>>>>>>
+>>>>> [skip the rest]
+>>>>>
+>>>>> What you are describing here is very close to how the devtool 
+>>>>> works. I think it can deal with kernel packages in its latest 
+>>>>> iteration
+>>>>>
+>>>>> did you have a look at that tool ? does it satisfy your need ? if 
+>>>>> not, what would it need to do what you want...
+>>>>
+>>>> No, where can I find more information?
+>>>>
+>>> The yocto manual has quite a section on that tool
+>>>
+>>>> The customer does not use the latest version of Yocto right now, so 
+>>>> that might be a problem,
+>>>
+>>> depends on how old "not the latest" is... but if you can do a 
+>>> sandbox with the latest version, you can probably see how devtool 
+>>> works and manually do the same thing...
+>>
+>> They use Yocto Layers, but not poky, so devtool is not present.
+>> Anyway, devtool will generate an absolute path, and I am looking for
+>> a recipe which uses a relative path to allow multiple yocto instances.
+>>
+>> projects
+>>         project1
+>>                 yocto
+>>                         kernelsrc + patchset1
+>>         project2
+>>                 yocto
+>>                         kernelsrc + patchset2
+>>         project3
+>>                 yocto
+>>                         kernelsrc + patchset3
+>>         project4
+>>                 yocto
+>>                         kernelsrc + patchset4
+>>
+>> Is there any way I can from inside a bbappend file find out the path 
+>> to that bbappend file?
+>>
+>>
+>
+> ${THISDIR} should be what you want, if I understand correctly...
 
-*sigh* this builds fine on armv8, but breaks on armv7 :(
+Tried that, but that ended up in the build tree.
 
-> ---
->  meta-oe/recipes-test/fwts/fwts_git.bb | 10 ++++++----
->  1 file changed, 6 insertions(+), 4 deletions(-)
+The <kernel>.bb file is located in the build tree, and the 
+<kernel>.bbappend is somewhere else.
+Don't ask me why, LOL...
+
+I need the directory of the bbappend file.
+
 >
-> diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb b/meta-oe/recipes-test/fwts/fwts_git.bb
-> index 197fe20..2868034 100644
-> --- a/meta-oe/recipes-test/fwts/fwts_git.bb
-> +++ b/meta-oe/recipes-test/fwts/fwts_git.bb
-> @@ -3,11 +3,11 @@ DESCRIPTION = "The tool fwts comprises of over fifty tests that are designed to
->  HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
->
->  LICENSE = "GPLv2+"
-> -LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=deb8af5388e838d133eaa036f4d1496f"
-> +LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd34dcdb9e4db568519"
->
-> -PV = "14.12.00"
-> +PV = "16.05.01"
->
-> -SRCREV = "efc18d16294f492b7f72bba64344b2eed50e6a69"
-> +SRCREV = "4d9500d1fb119e2136e07c0cc2844f51b5e5b97a"
->  SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git"
->
->  S = "${WORKDIR}/git"
-> @@ -16,7 +16,9 @@ DEPENDS = "libpcre json-c glib-2.0"
->
->  inherit autotools-brokensep
->
-> -CFLAGS += "-I${STAGING_INCDIR}/json-c -Wno-error=misleading-indentation"
-> +CFLAGS += "-I${STAGING_INCDIR}/json-c"
-> +
-> +RDEPENDS_${PN} += "dtc"
->
->  FILES_${PN} += "${libdir}/fwts/lib*${SOLIBS}"
->  FILES_${PN}-dev += "${libdir}/fwts/lib*${SOLIBSDEV} ${libdir}/fwts/lib*.la"
-> --
-> 2.4.3
+>>>>
+>>>> so It would be good to have an example ".bbappend" to start with.
+>>>>
+>>>> BR
+>>>>
+>>>> Ulf
+>>>>
+>>>>
+>>>
+>>
 >
 
-
-
--- 
-Koen Kooi
-
-Builds and Baselines | Release Manager
-Linaro.org | Open source software for ARM SoCs
 
