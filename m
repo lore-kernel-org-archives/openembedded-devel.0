@@ -1,27 +1,65 @@
-Return-Path: <openembedded@emagii.com>
-Received: from v-smtpout1.han.skanova.net (v-smtpout1.han.skanova.net
-	[81.236.60.154])
-	by mail.openembedded.org (Postfix) with ESMTP id B065B601D3
+Return-Path: <anders@chargestorm.se>
+Received: from mail-lf0-f51.google.com (mail-lf0-f51.google.com
+	[209.85.215.51])
+	by mail.openembedded.org (Postfix) with ESMTP id C5E7060118
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jun 2016 11:22:52 +0000 (UTC)
-Received: from [10.175.196.110] ([155.4.129.69]) by cmsmtp with SMTP
-	id FJlabyQ1XCjZEFJlabkqZj; Tue, 21 Jun 2016 13:22:50 +0200
+	Tue, 21 Jun 2016 12:43:00 +0000 (UTC)
+Received: by mail-lf0-f51.google.com with SMTP id h129so22143258lfh.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Jun 2016 05:43:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=chargestorm-se.20150623.gappssmtp.com; s=20150623;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-disposition:content-transfer-encoding
+	:in-reply-to:organization:user-agent;
+	bh=2N4dPWHEAZpVJ+m69Ac8kpkvcB3zWuSYkNX7EDR5ygg=;
+	b=Y0ekdi0hsebd/M+Pk8/dJ9kpficbNQsaDW9bCIdEa2uNTM1ZglYralNMpaEB1LHgxZ
+	BuNSG0jyms+Zb+7Hq/q/nrHAK+TgSqgpDR6nUiWLwgzsXGO4JJ9HiKMKbh1tG69pQZUk
+	Y7VpAHvht/kr2ospZR2wh52EX8e4FZ4JOZ4A3NXbh2KOtMCXpjknzIzeUK4PcC4qRLOx
+	gECEUAJ3GKxUCTt/tpmkueNNvBW+3dFZQXDbg/c3vugKtzs2kXO5u2NN/VCDBe8my3ZI
+	TfxrpklxEoDnrpmUoUjLCC+74P6n17A8XHm8KPUgHsAJDeG83AZtBMRowWbeSxhcGn12
+	O//g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
+	:references:mime-version:content-disposition
+	:content-transfer-encoding:in-reply-to:organization:user-agent;
+	bh=2N4dPWHEAZpVJ+m69Ac8kpkvcB3zWuSYkNX7EDR5ygg=;
+	b=a+poQVcWUCpk0JaA8Z2XtLwFq4l/mWqYZRXhkk0Is28Luq7+OnHh5FfrtohP9jbT8n
+	f/tK0e4c1RrHs/hcrYOPnGWC8NCA+wH3wRcdF2Tmlrp4C7qdUvEaQUbs6q7E0PhEvOuv
+	W5t4YZWpM+YzV5cSx9DoCP7h7+k0uhsDeciTANM8BfGminOmKCQyjTVb1Nx/2qVt7euG
+	oBslzsQkpRdYr6Dpp2E5+0+9Sr1lVeWm08tDjAGw2lJBaG21RWuoAA20mcu7um+W1dPE
+	JWMZ5C+cRybDbib7s0/eIiUQA9ye4cvmLPO85I2Qf/wdQ5cPHsvcL/9oPHC69OKIVJ2o
+	mOhg==
+X-Gm-Message-State: ALyK8tKJy3lG3ChGT4MM0fngBHhXxOsUWdMJbqU2C6E6nAuKQYJisibFWy1U76zr8nCZRw==
+X-Received: by 10.25.17.210 with SMTP id 79mr5130071lfr.113.1466512980125;
+	Tue, 21 Jun 2016 05:43:00 -0700 (PDT)
+Received: from ad.chargestorm.se (213-64-218-130-no126.business.telia.com.
+	[213.64.218.130]) by smtp.gmail.com with ESMTPSA id
+	g24sm4134270ljg.20.2016.06.21.05.42.59
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Tue, 21 Jun 2016 05:42:59 -0700 (PDT)
+Date: Tue, 21 Jun 2016 14:42:57 +0200
+From: Anders Darander <anders@chargestorm.se>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160621124257.GB20646@ad.chargestorm.se>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
 References: <7fb5e28e-d153-a396-58ae-c4d656835524@emagii.com>
 	<6c3c2d7a-0b1e-fb20-1be9-679b3a728dcb@smile.fr>
 	<01564453-efa0-c067-83bc-67f995a86452@emagii.com>
 	<8646f486-90f9-738d-9daf-6ba1644c83ba@smile.fr>
 	<16a6d5ea-a179-f36b-6a64-2a8c790e662f@emagii.com>
 	<496a4384-fb09-36f9-f945-ad52aee9e978@smile.fr>
-From: Ulf Samuelsson <openembedded@emagii.com>
-Message-ID: <a807ca01-806e-3505-db34-7e3c195fe977@emagii.com>
-Date: Tue, 21 Jun 2016 13:22:52 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
-	Thunderbird/45.1.1
+	<a807ca01-806e-3505-db34-7e3c195fe977@emagii.com>
 MIME-Version: 1.0
-In-Reply-To: <496a4384-fb09-36f9-f945-ad52aee9e978@smile.fr>
-X-CMAE-Envelope: MS4wfHucaspNAChUcTssCoFD/Vz6pNm8AvdYUhEpkOGTA5Lu9F7+HPB7DX1oM6s/J3YXAGSyFfVsiQS4oXVqBENSOz7Zsp2neSXGWkR5zD41wJi/VuyUE0Q/
-	FkB6HXpB725QmWJowQU2sCocJimOZOjmsFFuVStDUUm8FZSFv8ndnkmXBxCH6L2X6K4BpKFq1D/gJXrJcOr8rkXHshhbpdtfh1k=
+In-Reply-To: <a807ca01-806e-3505-db34-7e3c195fe977@emagii.com>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: Mutt/1.6.0 (2016-04-01)
 Subject: Re: Using EXTERNALSRC in practice
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -35,102 +73,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jun 2016 11:22:54 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 21 Jun 2016 12:43:03 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Den 2016-06-21 kl. 09:27, skrev Jérémy Rosen:
->
->
-> On 21/06/2016 00:02, Ulf Samuelsson wrote:
->> Den 2016-06-20 kl. 15:58, skrev Jérémy Rosen:
->>>
->>>
->>> On 20/06/2016 15:48, Ulf Samuelsson wrote:
->>>> Den 2016-06-20 kl. 14:37, skrev Jérémy Rosen:
->>>>>
->>>>> On 20/06/2016 14:08, Ulf Samuelsson wrote:
->>>>>> We have a meta-layer which builds the kernel.
->>>>>>
->>>>>> This contains among other things:
->>>>>>
->>>>>> FILESEXTRAPATHS_prepend_<machine> = "${THIS_DIR}/<machine>"
->>>>>>
->>>>>> SRC_URI = "git://<server>/<repo.git>;protocol=ssh;branch=<branch>"
->>>>>> SRC_URI += "file://defconfig"
->>>>>>
->>>>>> PV = "...+git${SRCPV}"
->>>>>> SRCREV = "<shaid>"
->>>>>> ...
->>>>>>
->>>>>> Would like to have an option to build the kernel with external 
->>>>>> source.
->>>>>> That option should be easy to enable/disable
->>>>>>
->>>>> [skip the rest]
->>>>>
->>>>> What you are describing here is very close to how the devtool 
->>>>> works. I think it can deal with kernel packages in its latest 
->>>>> iteration
->>>>>
->>>>> did you have a look at that tool ? does it satisfy your need ? if 
->>>>> not, what would it need to do what you want...
->>>>
->>>> No, where can I find more information?
->>>>
->>> The yocto manual has quite a section on that tool
->>>
->>>> The customer does not use the latest version of Yocto right now, so 
->>>> that might be a problem,
->>>
->>> depends on how old "not the latest" is... but if you can do a 
->>> sandbox with the latest version, you can probably see how devtool 
->>> works and manually do the same thing...
->>
->> They use Yocto Layers, but not poky, so devtool is not present.
->> Anyway, devtool will generate an absolute path, and I am looking for
->> a recipe which uses a relative path to allow multiple yocto instances.
->>
->> projects
->>         project1
->>                 yocto
->>                         kernelsrc + patchset1
->>         project2
->>                 yocto
->>                         kernelsrc + patchset2
->>         project3
->>                 yocto
->>                         kernelsrc + patchset3
->>         project4
->>                 yocto
->>                         kernelsrc + patchset4
->>
->> Is there any way I can from inside a bbappend file find out the path 
->> to that bbappend file?
->>
->>
->
-> ${THISDIR} should be what you want, if I understand correctly...
+* Ulf Samuelsson <openembedded@emagii.com> [160621 13:24]:
 
-Tried that, but that ended up in the build tree.
+> Den 2016-06-21 kl. 09:27, skrev J=E9r=E9my Rosen:
 
-The <kernel>.bb file is located in the build tree, and the 
-<kernel>.bbappend is somewhere else.
-Don't ask me why, LOL...
+> > ${THISDIR} should be what you want, if I understand correctly...
 
-I need the directory of the bbappend file.
+> Tried that, but that ended up in the build tree.
 
->
->>>>
->>>> so It would be good to have an example ".bbappend" to start with.
->>>>
->>>> BR
->>>>
->>>> Ulf
->>>>
->>>>
->>>
->>
->
+> The <kernel>.bb file is located in the build tree, and the <kernel>.bbapp=
+end
+> is somewhere else.
+> Don't ask me why, LOL...
 
+> I need the directory of the bbappend file.
+
+Yes, ${THISDIR} is exactly what you're looking for. Your issue is that
+you're probably using it like:
+
+SOMEVAR =3D "${THISDIR}/.."
+
+Using bitbake and OE, all variables on the right hand side are expanded
+and evaluated at towards the end of the processing. At that point in
+time, THISDIR is correct to point to the directory with the .bb-file.
+
+You need to immediately expand ${THISDIR} by using:
+
+SOMEVAR :=3D "${THISDIR}/.."
+
+See for instance the discussion at
+http://www.yoctoproject.org/docs/2.1/ref-manual/ref-manual.html#var-FILESEX=
+TRAPATHS
+
+Cheers,
+Anders
+--=20
+Anders Darander, Senior System Architect
+ChargeStorm AB / eStorm AB
 
