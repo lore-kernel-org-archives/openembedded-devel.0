@@ -1,46 +1,29 @@
-Return-Path: <jefro.net@gmail.com>
-Received: from mail-vk0-f65.google.com (mail-vk0-f65.google.com
-	[209.85.213.65])
-	by mail.openembedded.org (Postfix) with ESMTP id C01F0607F8;
-	Wed, 22 Jun 2016 06:13:24 +0000 (UTC)
-Received: by mail-vk0-f65.google.com with SMTP id w1so6152872vka.1;
-	Tue, 21 Jun 2016 23:13:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:from:date:message-id:subject:to;
-	bh=590SFT4TaxlCNdr0j3VEQur0AIOrELVyJ59DFlgG4Fk=;
-	b=NIPh5wrKB4shG+YPncNxxedCKVxHAjWp4ca2N7bi00DtFcbGhS2PBw+J6bQzFxZh6h
-	OmjVGuA1eUWZkYb9HyZPBa/579x8CMxzZKCiy+70vQ2VO2KPXj8Wz2naFsmnOg8IndAu
-	EKR5ljIIn7lVqVAKqSjmgkoELkSmCYUP3HoHIS1TZut9H7CrNnnnb0GCzpu8iLu9Wmhm
-	Ebh6BeJcAwNQN2wDE7ffDcThSeIKMPv/lLjLgg63IMtO5UlFnN2BUmSxlVPxXISqWFS1
-	qlneTdUL2zpirgtlRKljGStqwi4GGiWDWTnHVI6CmkkZ+xFmFT2ZfXcsXx7q3QPEL4rO
-	4NIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
-	:to; bh=590SFT4TaxlCNdr0j3VEQur0AIOrELVyJ59DFlgG4Fk=;
-	b=AKRdqiC7EKQFhRWrRjjj86EvQ7JSfuAiyf1yTDd/ZwgkUMJDvA90sXlguppILch1yw
-	jWf9RYlNyoTNkzitMUMmCjEMzb0YsUmbbCi1HFAXGhEJ47ySwQWoNvZucug1SjeyI1dz
-	UyrE8R7hOAW6WBVDFgAb/0Yn/dGY/U5bnMjAx5j9s+kokxZR0oXZ91PqjI9mVSJmLBrr
-	Ug7GLBA9M4llvoA4SfuAFFd4Wb5DQ9i8nLY4gaeZWsTGFI1/OfMRwjZp2+5ukwfUR2wb
-	pBWn/bUyiHWaelzU5F8b8O8YCQ3n2uSJCt5vkgXKkb1r0u+FldjcdPahBJq49Krnq32M
-	GBRg==
-X-Gm-Message-State: ALyK8tKTeJzjBV5aWjyrXmyK0RCo3/Mv08UQhXjFlBoYSl5p9EP3TfJ+C6mSLEbvJhMyhE5RsfOaOZKYGgg5YA==
-X-Received: by 10.31.227.196 with SMTP id a187mr12107486vkh.116.1466576004645; 
-	Tue, 21 Jun 2016 23:13:24 -0700 (PDT)
-MIME-Version: 1.0
-Sender: jefro.net@gmail.com
-Received: by 10.103.68.65 with HTTP; Tue, 21 Jun 2016 23:13:05 -0700 (PDT)
-From: Jeff Osier-Mixon <jefro@jefro.net>
-Date: Tue, 21 Jun 2016 23:13:05 -0700
-X-Google-Sender-Auth: XrBW79hJthLU1s_dM7TQog3e0Us
-Message-ID: <CA+YB3rapfPf_s6sWGxR+Ya9oCQMnsMp7vPYGDO4n2Ws=-6bm6w@mail.gmail.com>
-To: "openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>, 
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, 
-	openembedded-core <openembedded-core@lists.openembedded.org>, 
-	Yocto Project <yocto@yoctoproject.org>
-Subject: Yocto Project Developer Day & OEDEM at ELCE this fall
+Return-Path: <frederico.cadete@awtce.be>
+Received: from barracuda.aweurope.be (barracuda.aweurope.be [212.166.56.147])
+	by mail.openembedded.org (Postfix) with ESMTP id F28C760118
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Jun 2016 10:57:04 +0000 (UTC)
+X-ASG-Debug-ID: 1466593023-0a6d4a62ba7ac6c0001-aWHRdb
+Received: from localhost.localdomain ([172.23.1.67]) by barracuda.aweurope.be
+	with ESMTP id t3b7ZrAYx0qRIL0p;
+	Wed, 22 Jun 2016 12:57:03 +0200 (CEST)
+X-Barracuda-Envelope-From: frederico.cadete@awtce.be
+X-Barracuda-RBL-Trusted-Forwarder: 172.23.1.67
+X-ASG-Whitelist: Client
+From: Frederico Cadete <frederico.cadete@awtce.be>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 22 Jun 2016 12:56:52 +0200
+X-ASG-Orig-Subj: [meta-oe][PATCH] gtest: fix installation in multilib
+Message-Id: <1466593012-16243-1-git-send-email-frederico.cadete@awtce.be>
+X-Mailer: git-send-email 1.9.1
+X-Barracuda-Connect: UNKNOWN[172.23.1.67]
+X-Barracuda-Start-Time: 1466593023
+X-Barracuda-URL: https://172.23.0.236:443/cgi-mod/mark.cgi
+X-Barracuda-Scan-Msg-Size: 7573
+X-Virus-Scanned: by bsmtpd at aweurope.be
+X-Barracuda-BRTS-Status: 1
+Cc: koen@dominion.thruhere.net
+Subject: [meta-oe][PATCH] gtest: fix installation in multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,26 +36,185 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jun 2016 06:13:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 22 Jun 2016 10:57:06 -0000
 
-Hi all - in case folks are starting to make travel arrangements for
-ELCE in Berlin this October, we are planning both a YP DevDay (paid
-training event) and OEDEM (OpenEmbedded members & developers meeting).
-We don't have venues yet, but these two events will likely occur on
-the Monday and Friday before and after ELCE, Oct 10 and Oct 14. We
-aren't sure yet which will be on which day, but chances are good that
-DevDay will be on Monday and OEDEM on Friday.
+The installation and pkgconfig patches have to be reworked to consider
+the install directories from OE.
+---
+ ...install-command-for-libraries-and-headers.patch | 32 ++++++++++++++++++
+ ...test.pc.in-Add-pkg-config-support-to-gte.patch} | 24 ++++++-------
+ ...install-command-for-libraries-and-headers.patch | 39 ----------------------
+ meta-oe/recipes-test/gtest/gtest_1.7.0.bb          |  4 +--
+ 4 files changed, 46 insertions(+), 53 deletions(-)
+ create mode 100644 meta-oe/recipes-test/gtest/gtest/0001-Add-install-command-for-libraries-and-headers.patch
+ rename meta-oe/recipes-test/gtest/gtest/{CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch => 0002-CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch} (68%)
+ delete mode 100644 meta-oe/recipes-test/gtest/gtest/cmake-Add-install-command-for-libraries-and-headers.patch
 
-I will keep these lists informed as we move forward.
-
-Also, the CFP for ELCE, OpenIOT Summit, and LinuxCon EU are still
-open, so please get your talks in. ELCE is here:
-
-http://events.linuxfoundation.org/events/embedded-linux-conference-europe
-
-Please feel free to let me know of any questions.
-
+diff --git a/meta-oe/recipes-test/gtest/gtest/0001-Add-install-command-for-libraries-and-headers.patch b/meta-oe/recipes-test/gtest/gtest/0001-Add-install-command-for-libraries-and-headers.patch
+new file mode 100644
+index 0000000..b8f5d6f
+--- /dev/null
++++ b/meta-oe/recipes-test/gtest/gtest/0001-Add-install-command-for-libraries-and-headers.patch
+@@ -0,0 +1,32 @@
++From bdcbef7b8adde424ee29e7eddc3b0570cc336449 Mon Sep 17 00:00:00 2001
++From: Frederico Cadete <frederico.cadete@awtce.be>
++Date: Tue, 21 Jun 2016 10:55:38 +0200
++Subject: [PATCH 1/2] Add install command for libraries and headers
++
++Signed-off-by: Frederico Cadete <frederico.cadete@awtce.be>
++---
++ CMakeLists.txt | 8 ++++++++
++ 1 file changed, 8 insertions(+)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 57470c8..e969648 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -73,6 +73,14 @@ target_link_libraries(gtest_main gtest)
++ 
++ ########################################################################
++ #
+++# Install rules
+++install(TARGETS gtest gtest_main
+++  DESTINATION ${CMAKE_INSTALL_LIBDIR})
+++install(DIRECTORY ${gtest_SOURCE_DIR}/include/gtest
+++  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+++
+++########################################################################
+++#
++ # Samples on how to link user tests with gtest or gtest_main.
++ #
++ # They are not built by default.  To build them, set the
++-- 
++2.5.0
++
+diff --git a/meta-oe/recipes-test/gtest/gtest/CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch b/meta-oe/recipes-test/gtest/gtest/0002-CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch
+similarity index 68%
+rename from meta-oe/recipes-test/gtest/gtest/CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch
+rename to meta-oe/recipes-test/gtest/gtest/0002-CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch
+index 1ece136..7a19f72 100644
+--- a/meta-oe/recipes-test/gtest/gtest/CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch
++++ b/meta-oe/recipes-test/gtest/gtest/0002-CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch
+@@ -1,7 +1,7 @@
+-From d4b25ce723812faf78d8ee038b7cbed00cbba682 Mon Sep 17 00:00:00 2001
++From 89639e76d5ee039a55004e5e910d565e6e84ed35 Mon Sep 17 00:00:00 2001
+ From: Rodrigo Caimi <caimi@datacom.ind.br>
+ Date: Tue, 7 Oct 2014 15:37:10 -0300
+-Subject: [PATCH] CMakeLists, gtest.pc.in: Add pkg-config support to gtest
++Subject: [PATCH 2/2] CMakeLists, gtest.pc.in: Add pkg-config support to gtest
+  1.7.0
+ 
+ Signed-off-by: Rodrigo Caimi <caimi@datacom.ind.br>
+@@ -12,7 +12,7 @@ Signed-off-by: Rodrigo Caimi <caimi@datacom.ind.br>
+  create mode 100644 gtest.pc.in
+ 
+ diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 281c4c2..e4354a8 100644
++index e969648..0038826 100644
+ --- a/CMakeLists.txt
+ +++ b/CMakeLists.txt
+ @@ -29,6 +29,9 @@ if (COMMAND pre_project_set_up_hermetic_build)
+@@ -25,19 +25,19 @@ index 281c4c2..e4354a8 100644
+  ########################################################################
+  #
+  # Project-wide settings
+-@@ -75,6 +78,9 @@ target_link_libraries(gtest_main gtest)
+- 
+- install(TARGETS gtest DESTINATION lib)
+- install(TARGETS gtest_main DESTINATION lib)
++@@ -78,6 +81,9 @@ install(TARGETS gtest gtest_main
++   DESTINATION ${CMAKE_INSTALL_LIBDIR})
++ install(DIRECTORY ${gtest_SOURCE_DIR}/include/gtest
++   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+ +install(FILES "${CMAKE_CURRENT_BINARY_DIR}/gtest.pc"
+-+    DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig/"
+++    DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig/"
+ +)
+  
+  ########################################################################
+  #
+ diff --git a/gtest.pc.in b/gtest.pc.in
+ new file mode 100644
+-index 0000000..57b1049
++index 0000000..52e622b
+ --- /dev/null
+ +++ b/gtest.pc.in
+ @@ -0,0 +1,9 @@
+@@ -46,10 +46,10 @@ index 0000000..57b1049
+ +Description: Google's framework for writing C++ tests on a variety of platforms
+ +
+ +prefix=@CMAKE_INSTALL_PREFIX@
+-+includedir=${prefix}/include
+-+libdir=${prefix}/lib
+++includedir=@CMAKE_INSTALL_INCLUDEDIR@
+++libdir=@CMAKE_INSTALL_LIBDIR@
+ +Cflags:-I${includedir}/gtest
+ +Libs: -L${libdir} -lgtest -lgtest_main
+ -- 
+-1.9.1
++2.5.0
+ 
+diff --git a/meta-oe/recipes-test/gtest/gtest/cmake-Add-install-command-for-libraries-and-headers.patch b/meta-oe/recipes-test/gtest/gtest/cmake-Add-install-command-for-libraries-and-headers.patch
+deleted file mode 100644
+index 0c160b0..0000000
+--- a/meta-oe/recipes-test/gtest/gtest/cmake-Add-install-command-for-libraries-and-headers.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-From 5318983562be6babeb5a6996e7dda4b31acfdba8 Mon Sep 17 00:00:00 2001
+-From: Otavio Salvador <otavio@ossystems.com.br>
+-Date: Wed, 30 Jul 2014 16:49:53 -0300
+-Subject: [PATCH] cmake: Add install command for libraries and headers
+-Organization: O.S. Systems Software LTDA.
+-
+-Upstream-Status: Inappropriate [embedded specific]
+-
+-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+----
+- CMakeLists.txt | 5 +++++
+- 1 file changed, 5 insertions(+)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 57470c8..281c4c2 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -56,6 +56,8 @@ include_directories(
+-   ${gtest_SOURCE_DIR}/include
+-   ${gtest_SOURCE_DIR})
+- 
+-+install(DIRECTORY ${gtest_SOURCE_DIR}/include/gtest DESTINATION include)
+-+
+- # Where Google Test's libraries can be found.
+- link_directories(${gtest_BINARY_DIR}/src)
+- 
+-@@ -71,6 +73,9 @@ cxx_library(gtest "${cxx_strict}" src/gtest-all.cc)
+- cxx_library(gtest_main "${cxx_strict}" src/gtest_main.cc)
+- target_link_libraries(gtest_main gtest)
+- 
+-+install(TARGETS gtest DESTINATION lib)
+-+install(TARGETS gtest_main DESTINATION lib)
+-+
+- ########################################################################
+- #
+- # Samples on how to link user tests with gtest or gtest_main.
+--- 
+-1.9.1
+-
+diff --git a/meta-oe/recipes-test/gtest/gtest_1.7.0.bb b/meta-oe/recipes-test/gtest/gtest_1.7.0.bb
+index edeeab6..8e68c7c 100644
+--- a/meta-oe/recipes-test/gtest/gtest_1.7.0.bb
++++ b/meta-oe/recipes-test/gtest/gtest_1.7.0.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cbbd27594afd089daa160d3a16dd515a"
+ 
+ SRC_URI = "\
+     http://googletest.googlecode.com/files/${BPN}-${PV}.zip \
+-    file://cmake-Add-install-command-for-libraries-and-headers.patch \
+-    file://CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch \
++    file://0001-Add-install-command-to-Yocto-destinations.patch \
++    file://0002-CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch \
+ "
+ 
+ SRC_URI[md5sum] = "2d6ec8ccdf5c46b05ba54a9fd1d130d7"
 -- 
-Jeff Osier-Mixon - Open Source Community Engineer, Intel Corporation
+1.9.1
+
 
