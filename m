@@ -1,51 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
-	[209.85.220.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 617F060125
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id DE9BB60125
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jun 2016 20:08:26 +0000 (UTC)
-Received: by mail-pa0-f51.google.com with SMTP id hl6so19751857pac.2
+	Wed, 22 Jun 2016 20:16:34 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id b136so12231881qkg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jun 2016 13:08:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:subject:from:in-reply-to:date:message-id:references:to; 
-	bh=gHRV5WsankWgINbhLCI+1evlhDfhAjysCHKB0XsV0/A=;
-	b=aHg03UAsokmE+v/FAkdjzLvnEMBT7S1ebcM0aqiJTMLWg3G3WXll6587jMBOWm7opq
-	UYAHRYcbfGMmUZtcFx29AFicxQ4Ii6zQpGnXOz7nl69Epd8snap1YnKeZDHwrr7nREaE
-	KrB2wkfWUnBTaZJslUfQAeUDBH2d3R0lmYqcPgNNHRoKV7eYqIoJkkGnBnsi4Mxho2XB
-	d4POcFORFUSNBew8Sqot8YDV13PuOdZc5HUQQI2kWOIy2GG3BkkkQ5PmPfVTcL8SqDEd
-	EkkasB7N0JU4f/GPzm0bacGwAk2AUWXzEpBftS1eVQw0sjxGmWh4mNWmevRaIjz4KiqM
-	O6Iw==
+	Wed, 22 Jun 2016 13:16:35 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date
-	:message-id:references:to;
-	bh=gHRV5WsankWgINbhLCI+1evlhDfhAjysCHKB0XsV0/A=;
-	b=LStaz5iUKjuzXGb0OF+ViAYxYL0c00T76j16kqIZaMYLp512djfmPDLqTOi5jbdR5J
-	2vmIthhI+5x2tt2lUz1EYAfIs2v0mMt7GSLnNmwxbWOipLTlZANA3rjqzHExfDxY43hS
-	4+SKvSX00IhSuOu9wilGiLJBiDhKW5TUO6Sipe2G7++nf50swXPHsC/K3O4nJ4KfrAQY
-	8iEf/TYwaMtfmXYN70cxJQZC7jUwTCr9YNx+AbSfdCg5Yq4mzWHXkHNBflseZwGqHOii
-	kMMzXG3jajnV4W6u04yD5s4VEotTyW1WBt9OYE7oAnAXmA9eptPapavj3y6buNzypsMd
-	EHOg==
-X-Gm-Message-State: ALyK8tK78I1BBAaggQjdAPioN44G5P49/xMGiKvz5wyWM2afp5OZZjOq8Dcr1vaB38B0+A==
-X-Received: by 10.67.15.72 with SMTP id fm8mr37174085pad.50.1466626107403;
-	Wed, 22 Jun 2016 13:08:27 -0700 (PDT)
-Received: from ?IPv6:2601:647:4c00:115c:c15d:825f:58bc:113e?
-	([2601:647:4c00:115c:c15d:825f:58bc:113e])
-	by smtp.gmail.com with ESMTPSA id 77sm1655290pfp.66.2016.06.22.13.08.26
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 22 Jun 2016 13:08:26 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
-X-Pgp-Agent: GPGMail 2.6b2
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <8c01a78d-fd75-d1ce-aa0e-c618f12da265@embed.me.uk>
-Date: Wed, 22 Jun 2016 13:08:22 -0700
-Message-Id: <B36836F6-ADFA-4EAC-9789-A4E51DBE6E9B@gmail.com>
-References: <8c01a78d-fd75-d1ce-aa0e-c618f12da265@embed.me.uk>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=SyXlxKPZCyw3K5Dyf7HYmSlUtNsZk+gw1HubTH2ff2o=;
+	b=NTmbCoiDQkLxV1PwyGjaJs/eHgajxplzn8QS+m83YPVEJp1XeAU6JFGxuhkdlf56nV
+	RZtaCkb42uZBPHxXojiFIAmFGgnS74dwajVH4FehTLXb1+xduo2Z0xGskdQCil+o9bpm
+	4eyFrDJ6cF1t62a2iYB6HqpVQ5SnO/MNGQ9G70cDVag/HP40gO2DdPZRgQaP//nmZtj1
+	lBeaz6/FeAQhqbdUDfxepqqQpPhmdxYDMDzU6O4klcAfFiyuOZl7FwsUBpP1hVJCPrZv
+	GRb05+I57tB2wvflJ6iKmbvvqgGtwxKk2yYIiO3r0+O461tkYthu2mnK8LFTrEAhaCYh
+	BeaA==
+X-Gm-Message-State: ALyK8tL5ZIAlg6EVUUulA/Fatbns72QRiFPz28XJrpcZgkkRcPf/rrJTli+QRNcYJOR3Ww==
+X-Received: by 10.55.131.196 with SMTP id f187mr21827125qkd.54.1466626595083; 
+	Wed, 22 Jun 2016 13:16:35 -0700 (PDT)
+Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
+	[73.172.178.168])
+	by smtp.gmail.com with ESMTPSA id m7sm752422qte.0.2016.06.22.13.16.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 22 Jun 2016 13:16:34 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.3124)
-Subject: Re: opencv 3.1 gcc 6 compile errors
+Date: Wed, 22 Jun 2016 16:16:12 -0400
+Message-Id: <1466626572-10868-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 1.9.1
+Cc: Derek Straka <derek@asterius.io>
+Subject: [meta-gnome][PATCH] evince: fix build errors with gcc-6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,64 +44,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jun 2016 20:08:28 -0000
-X-Groupsio-MsgNum: 61939
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_6A666655-7417-48B0-A6FD-478251ABE601";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Wed, 22 Jun 2016 20:16:35 -0000
 
---Apple-Mail=_6A666655-7417-48B0-A6FD-478251ABE601
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../evince/evince/0002-fix-gcc6-errors.patch       | 39 ++++++++++++++++++++++
+ meta-gnome/recipes-gnome/evince/evince_3.18.2.bb   |  4 ++-
+ 2 files changed, 42 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gnome/recipes-gnome/evince/evince/0002-fix-gcc6-errors.patch
+
+diff --git a/meta-gnome/recipes-gnome/evince/evince/0002-fix-gcc6-errors.patch b/meta-gnome/recipes-gnome/evince/evince/0002-fix-gcc6-errors.patch
+new file mode 100644
+index 0000000..b8e30f7
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/evince/evince/0002-fix-gcc6-errors.patch
+@@ -0,0 +1,39 @@
++--- evince-3.18.2/backend/comics/comics-document.c.orig	2016-06-22 20:08:01.789805750 +0000
+++++ evince-3.18.2/backend/comics/comics-document.c	2016-06-22 20:07:00.817804688 +0000
++@@ -241,6 +241,8 @@
++ /* This function shows how to use the choosen command for decompressing a
++  * comic book file. It modifies fields of the ComicsDocument struct with 
++  * this information */
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wformat-nonliteral"
++ static gboolean 
++ comics_generate_command_lines (ComicsDocument *comics_document, 
++ 			       GError         **error)
++@@ -296,6 +298,7 @@
++ 	}
++ 
++ }
+++#pragma GCC diagnostic pop
++ 
++ /* This function chooses an external command for decompressing a comic 
++  * book based on its mime tipe. */
++--- evince-3.18.2/libdocument/ev-document-misc.c.orig	2016-06-22 20:01:49.205799262 +0000
+++++ evince-3.18.2/libdocument/ev-document-misc.c	2016-06-22 20:02:27.233799924 +0000
++@@ -519,7 +519,8 @@
++ 
++ 	return (dp / di);
++ }
++-
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wformat-y2k"
++ /* Returns a locale specific date and time representation */
++ gchar *
++ ev_document_misc_format_date (GTime utime)
++@@ -542,6 +543,7 @@
++ 
++ 	return g_locale_to_utf8 (s, -1, NULL, NULL, NULL);
++ }
+++#pragma GCC diagnostic pop
++ 
++ void
++ ev_document_misc_get_pointer_position (GtkWidget *widget,
+diff --git a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb b/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
+index fe63093..5e6b30f 100644
+--- a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
++++ b/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
+@@ -10,7 +10,9 @@ inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection
+ SRC_URI[archive.md5sum] = "c39af6b8b1c44d4393ef8ac9dab99c0b"
+ SRC_URI[archive.sha256sum] = "42ad6c7354d881a9ecab136ea84ff867acb942605bcfac48b6c12e1c2d8ecb17"
+ 
+-SRC_URI += "file://0001-help-remove-YELP-macro.patch"
++SRC_URI += "file://0001-help-remove-YELP-macro.patch \
++            file://0002-fix-gcc6-errors.patch \
++"
+ 
+ EXTRA_OECONF = " --enable-thumbnailer \
+ "
+-- 
+1.9.1
 
 
-> On Jun 3, 2016, at 3:37 AM, Jack Mitchell <ml@embed.me.uk> wrote:
->=20
-> I'm hitting compile errors with opencv 3.1 and gcc6. I've been playing =
-with disabling/enabling different options to try get round the issues =
-but it's too widespread.
->=20
-> There is a patch upstream [1] which says it fixes the issues but it =
-doesn't seem to help.
->=20
-> I've attached the build log without the patch, and the build log with =
-the patch, if anyone has ideas then please shout up.
->=20
-
-Such errors usually means that package is violating gcc include =
-hierarchy. either by using -isystem and trying to sneak some headers in =
-the middle of the supposed hierarchy. So you should look into getting =
-rid of any -system that the package might
-be specifying in its build system.
-
-> Cheers,
-> Jack.
->=20
-> [1] =
-https://github.com/Itseez/opencv/pull/6541/commits/a0fdc91a14f07de25d85803=
-7940fcd3ba859b4e2
-> <opencv.log><opencv-gcc6patch.log>--
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
---Apple-Mail=_6A666655-7417-48B0-A6FD-478251ABE601
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAldq8DoACgkQuwUzVZGdMxQVSgCfUYGFHi8rKIPcPtBrTGbGlyPt
-tnEAn0ECydghkQzf6ZGtaVVYOyj7QWMK
-=2XHv
------END PGP SIGNATURE-----
-
---Apple-Mail=_6A666655-7417-48B0-A6FD-478251ABE601--
