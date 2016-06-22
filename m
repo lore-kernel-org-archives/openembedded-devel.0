@@ -1,30 +1,46 @@
-Return-Path: <frederico.cadete@awtce.be>
-Received: from barracuda.aweurope.be (barracuda.aweurope.be [212.166.56.147])
-	by mail.openembedded.org (Postfix) with ESMTP id A5D5373196
+Return-Path: <danismostlikely@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id A7456731C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jun 2016 15:30:44 +0000 (UTC)
-X-ASG-Debug-ID: 1466609445-0a6d4a62ba7b34f0001-aWHRdb
-Received: from localhost.localdomain ([172.23.1.67]) by barracuda.aweurope.be
-	with ESMTP id GFTEM4bHX8vVGGHE;
-	Wed, 22 Jun 2016 17:30:45 +0200 (CEST)
-X-Barracuda-Envelope-From: frederico.cadete@awtce.be
-X-Barracuda-RBL-Trusted-Forwarder: 172.23.1.67
-X-ASG-Whitelist: Client
-From: Frederico Cadete <frederico.cadete@awtce.be>
+	Wed, 22 Jun 2016 16:38:48 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id c74so4470713pfb.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Jun 2016 09:38:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=hypZR7auqXwO/8QN88DFjBsz8NSUVNZVm4w5cpBez+E=;
+	b=XxX5y9oAN8dwmSGFqTIaVZaeMSAIZcko7uNuRSIBFbTKPJilviDBvGnK5YADU6ncTf
+	OcjxZA2ZpN/L0U5UHSU+ucqZYlMG+bbliwMB4ZE80NCEs0cvLZ2QAXb0WUPVmqKp/6bM
+	/spAVyl3sTQOeHc+sJ0nTnxB2jAmFP+b5mkamfo3y3OSGbyu/EFKTaP06IKcsGJHeM/z
+	ANaYiTHY00/0bprb2W/Xt5WlU6d1ToWO3jT+hfPt8YdAujO7e2q8uRyxyftIdgkoA5py
+	dTn/PBtvihAce+Vip7uZbH1w/un/F6MU5PLXTWmFlFtaQzka4gJw9NgZ3DxkoopmYKgS
+	+JRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=hypZR7auqXwO/8QN88DFjBsz8NSUVNZVm4w5cpBez+E=;
+	b=gQqEjppATRbDBEJIfcVeSCOb962yL7esINwlp0wRb29Lv8twlXdZxRRfo/0CusZGlt
+	abPxi5Yx26UwJMSkho4CH93ksaoCrwnSTtzq+fpHlLBlpjUvrFFLrcrz5VlfjqOSiw99
+	uciWQHaPXLXPnrY0+HU16Fer0bnu3XvzE8ckvNZeDGvoZef95sP/ovOhXNIh37qgwN2P
+	7zx28sqizg4zFsK3LWCqRmLKXCYU+grlfharPhGIYMCFdXbD4Dg1gck//G9Qt9aOraD1
+	lyEZsRqLJJrqfc5YTcXPoumlXFVwPETRLf2LOcjt17YV2k6BfveN4aH1tsZpJ0+ljzCi
+	p6ug==
+X-Gm-Message-State: ALyK8tLI3sFAHGZp/KeEduYF4z45OP3bYty0xJXVnweZbURrhwWfe4NeMTaqd/IDbusqMQ==
+X-Received: by 10.98.35.133 with SMTP id q5mr35016312pfj.7.1466613528908;
+	Wed, 22 Jun 2016 09:38:48 -0700 (PDT)
+Received: from mediabox.local (71-17-245-40.sktn.hsdb.sasknet.sk.ca.
+	[71.17.245.40])
+	by smtp.gmail.com with ESMTPSA id 6sm913630pfx.68.2016.06.22.09.38.48
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 22 Jun 2016 09:38:48 -0700 (PDT)
+From: Dan McGregor <danismostlikely@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Jun 2016 17:29:35 +0200
-X-ASG-Orig-Subj: [meta-oe][PATCH v3] gtest: fix installation in multilib
-Message-Id: <1466609375-10357-1-git-send-email-frederico.cadete@awtce.be>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <20160622152735.GA10344@awe-nav5>
-References: <20160622152735.GA10344@awe-nav5>
-X-Barracuda-Connect: UNKNOWN[172.23.1.67]
-X-Barracuda-Start-Time: 1466609445
-X-Barracuda-URL: https://172.23.0.236:443/cgi-mod/mark.cgi
-X-Barracuda-Scan-Msg-Size: 7640
-X-Virus-Scanned: by bsmtpd at aweurope.be
-X-Barracuda-BRTS-Status: 1
-Subject: [meta-oe][PATCH v3] gtest: fix installation in multilib
+Date: Wed, 22 Jun 2016 10:38:45 -0600
+Message-Id: <20160622163845.29573-1-danismostlikely@gmail.com>
+X-Mailer: git-send-email 2.9.0
+Subject: [meta-java][PATCH] openjdk-8: make GCC6 happy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,187 +53,194 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jun 2016 15:30:46 -0000
+X-List-Received-Date: Wed, 22 Jun 2016 16:38:49 -0000
 
-The installation and pkgconfig patches have to be reworked to consider
-the install directories from OE.
+From: Daniel McGregor <daniel.mcgregor@vecima.com>
 
-Signed-off-by: Frederico Cadete <frederico.cadete@awtce.be>
+GCC 6 sets the default C++ standard to C++14 and introduces dead store
+elimination by default. OpenJDK 8 is not ready for either of these
+changes, so set the C++ standard back to gnu++98 and disable dead
+store elimination.
+
+Switched to using --with-extra-cflags, cxxflags, and ldflags. The added
+patch fixes building when using those flags, and are needed to get
+CFLAGS into the JDK build in the native case.
+
+Signed-off-by: Daniel McGregor <daniel.mcgregor@vecima.com>
 ---
- ...install-command-for-libraries-and-headers.patch | 32 ++++++++++++++++++
- ...test.pc.in-Add-pkg-config-support-to-gte.patch} | 24 ++++++-------
- ...install-command-for-libraries-and-headers.patch | 39 ----------------------
- meta-oe/recipes-test/gtest/gtest_1.7.0.bb          |  4 +--
- 4 files changed, 46 insertions(+), 53 deletions(-)
- create mode 100644 meta-oe/recipes-test/gtest/gtest/0001-Add-install-command-for-libraries-and-headers.patch
- rename meta-oe/recipes-test/gtest/gtest/{CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch => 0002-CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch} (68%)
- delete mode 100644 meta-oe/recipes-test/gtest/gtest/cmake-Add-install-command-for-libraries-and-headers.patch
+ recipes-core/openjdk/openjdk-8-common.inc          |  4 ++
+ recipes-core/openjdk/openjdk-8-cross.inc           | 11 ++---
+ recipes-core/openjdk/openjdk-8-native.inc          | 15 +++---
+ recipes-core/openjdk/openjdk-8-release-72b05.inc   |  1 +
+ .../openjdk8-avoid-early-ldflags-expansion.patch   | 53 ++++++++++++++++++++++
+ 5 files changed, 68 insertions(+), 16 deletions(-)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/openjdk8-avoid-early-ldflags-expansion.patch
 
-diff --git a/meta-oe/recipes-test/gtest/gtest/0001-Add-install-command-for-libraries-and-headers.patch b/meta-oe/recipes-test/gtest/gtest/0001-Add-install-command-for-libraries-and-headers.patch
-new file mode 100644
-index 0000000..b8f5d6f
---- /dev/null
-+++ b/meta-oe/recipes-test/gtest/gtest/0001-Add-install-command-for-libraries-and-headers.patch
-@@ -0,0 +1,32 @@
-+From bdcbef7b8adde424ee29e7eddc3b0570cc336449 Mon Sep 17 00:00:00 2001
-+From: Frederico Cadete <frederico.cadete@awtce.be>
-+Date: Tue, 21 Jun 2016 10:55:38 +0200
-+Subject: [PATCH 1/2] Add install command for libraries and headers
+diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
+index 3206ec4..90c20d2 100644
+--- a/recipes-core/openjdk/openjdk-8-common.inc
++++ b/recipes-core/openjdk/openjdk-8-common.inc
+@@ -229,3 +229,7 @@ JDK_ARCH = "${@get_jdk_arch(d)}"
+ export DEBUG_BINARIES = "true"
+ 
+ ALTERNATIVE_PRIORITY = "50"
 +
-+Signed-off-by: Frederico Cadete <frederico.cadete@awtce.be>
-+---
-+ CMakeLists.txt | 8 ++++++++
-+ 1 file changed, 8 insertions(+)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 57470c8..e969648 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -73,6 +73,14 @@ target_link_libraries(gtest_main gtest)
-+ 
-+ ########################################################################
-+ #
-++# Install rules
-++install(TARGETS gtest gtest_main
-++  DESTINATION ${CMAKE_INSTALL_LIBDIR})
-++install(DIRECTORY ${gtest_SOURCE_DIR}/include/gtest
-++  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-++
-++########################################################################
-++#
-+ # Samples on how to link user tests with gtest or gtest_main.
-+ #
-+ # They are not built by default.  To build them, set the
-+-- 
-+2.5.0
-+
-diff --git a/meta-oe/recipes-test/gtest/gtest/CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch b/meta-oe/recipes-test/gtest/gtest/0002-CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch
-similarity index 68%
-rename from meta-oe/recipes-test/gtest/gtest/CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch
-rename to meta-oe/recipes-test/gtest/gtest/0002-CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch
-index 1ece136..7a19f72 100644
---- a/meta-oe/recipes-test/gtest/gtest/CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch
-+++ b/meta-oe/recipes-test/gtest/gtest/0002-CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch
-@@ -1,7 +1,7 @@
--From d4b25ce723812faf78d8ee038b7cbed00cbba682 Mon Sep 17 00:00:00 2001
-+From 89639e76d5ee039a55004e5e910d565e6e84ed35 Mon Sep 17 00:00:00 2001
- From: Rodrigo Caimi <caimi@datacom.ind.br>
- Date: Tue, 7 Oct 2014 15:37:10 -0300
--Subject: [PATCH] CMakeLists, gtest.pc.in: Add pkg-config support to gtest
-+Subject: [PATCH 2/2] CMakeLists, gtest.pc.in: Add pkg-config support to gtest
-  1.7.0
- 
- Signed-off-by: Rodrigo Caimi <caimi@datacom.ind.br>
-@@ -12,7 +12,7 @@ Signed-off-by: Rodrigo Caimi <caimi@datacom.ind.br>
-  create mode 100644 gtest.pc.in
- 
- diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 281c4c2..e4354a8 100644
-+index e969648..0038826 100644
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
- @@ -29,6 +29,9 @@ if (COMMAND pre_project_set_up_hermetic_build)
-@@ -25,19 +25,19 @@ index 281c4c2..e4354a8 100644
-  ########################################################################
-  #
-  # Project-wide settings
--@@ -75,6 +78,9 @@ target_link_libraries(gtest_main gtest)
-- 
-- install(TARGETS gtest DESTINATION lib)
-- install(TARGETS gtest_main DESTINATION lib)
-+@@ -78,6 +81,9 @@ install(TARGETS gtest gtest_main
-+   DESTINATION ${CMAKE_INSTALL_LIBDIR})
-+ install(DIRECTORY ${gtest_SOURCE_DIR}/include/gtest
-+   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
- +install(FILES "${CMAKE_CURRENT_BINARY_DIR}/gtest.pc"
--+    DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig/"
-++    DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig/"
- +)
-  
-  ########################################################################
-  #
- diff --git a/gtest.pc.in b/gtest.pc.in
- new file mode 100644
--index 0000000..57b1049
-+index 0000000..52e622b
- --- /dev/null
- +++ b/gtest.pc.in
- @@ -0,0 +1,9 @@
-@@ -46,10 +46,10 @@ index 0000000..57b1049
- +Description: Google's framework for writing C++ tests on a variety of platforms
- +
- +prefix=@CMAKE_INSTALL_PREFIX@
--+includedir=${prefix}/include
--+libdir=${prefix}/lib
-++includedir=@CMAKE_INSTALL_INCLUDEDIR@
-++libdir=@CMAKE_INSTALL_LIBDIR@
- +Cflags:-I${includedir}/gtest
- +Libs: -L${libdir} -lgtest -lgtest_main
- -- 
--1.9.1
-+2.5.0
- 
-diff --git a/meta-oe/recipes-test/gtest/gtest/cmake-Add-install-command-for-libraries-and-headers.patch b/meta-oe/recipes-test/gtest/gtest/cmake-Add-install-command-for-libraries-and-headers.patch
-deleted file mode 100644
-index 0c160b0..0000000
---- a/meta-oe/recipes-test/gtest/gtest/cmake-Add-install-command-for-libraries-and-headers.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--From 5318983562be6babeb5a6996e7dda4b31acfdba8 Mon Sep 17 00:00:00 2001
--From: Otavio Salvador <otavio@ossystems.com.br>
--Date: Wed, 30 Jul 2014 16:49:53 -0300
--Subject: [PATCH] cmake: Add install command for libraries and headers
--Organization: O.S. Systems Software LTDA.
--
--Upstream-Status: Inappropriate [embedded specific]
--
--Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
-----
-- CMakeLists.txt | 5 +++++
-- 1 file changed, 5 insertions(+)
--
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index 57470c8..281c4c2 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -56,6 +56,8 @@ include_directories(
--   ${gtest_SOURCE_DIR}/include
--   ${gtest_SOURCE_DIR})
-- 
--+install(DIRECTORY ${gtest_SOURCE_DIR}/include/gtest DESTINATION include)
--+
-- # Where Google Test's libraries can be found.
-- link_directories(${gtest_BINARY_DIR}/src)
-- 
--@@ -71,6 +73,9 @@ cxx_library(gtest "${cxx_strict}" src/gtest-all.cc)
-- cxx_library(gtest_main "${cxx_strict}" src/gtest_main.cc)
-- target_link_libraries(gtest_main gtest)
-- 
--+install(TARGETS gtest DESTINATION lib)
--+install(TARGETS gtest_main DESTINATION lib)
--+
-- ########################################################################
-- #
-- # Samples on how to link user tests with gtest or gtest_main.
---- 
--1.9.1
--
-diff --git a/meta-oe/recipes-test/gtest/gtest_1.7.0.bb b/meta-oe/recipes-test/gtest/gtest_1.7.0.bb
-index edeeab6..5bacf6c 100644
---- a/meta-oe/recipes-test/gtest/gtest_1.7.0.bb
-+++ b/meta-oe/recipes-test/gtest/gtest_1.7.0.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=cbbd27594afd089daa160d3a16dd515a"
- 
- SRC_URI = "\
-     http://googletest.googlecode.com/files/${BPN}-${PV}.zip \
--    file://cmake-Add-install-command-for-libraries-and-headers.patch \
--    file://CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch \
-+    file://0001-Add-install-command-for-libraries-and-headers.patch \
-+    file://0002-CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch \
++CFLAGS_append = " -fno-lifetime-dse -fno-delete-null-pointer-checks"
++CXXFLAGS_append = " -fno-lifetime-dse -fno-delete-null-pointer-checks"
++CXX_append = " -std=gnu++98"
+diff --git a/recipes-core/openjdk/openjdk-8-cross.inc b/recipes-core/openjdk/openjdk-8-cross.inc
+index 3189764..11e94ce 100644
+--- a/recipes-core/openjdk/openjdk-8-cross.inc
++++ b/recipes-core/openjdk/openjdk-8-cross.inc
+@@ -39,9 +39,6 @@ SRC_URI_append = "\
+     file://jvm.cfg \
  "
  
- SRC_URI[md5sum] = "2d6ec8ccdf5c46b05ba54a9fd1d130d7"
+-# do not use --wth-extra-cflags, it breaks building demos for jdk
+-# maybe disabling demos is more reasonable than avoiding --wth-extra-cflags
+-# needs discussion
+ EXTRA_OECONF_append = "\
+     --with-jobs=${@get_jdk8_native_jobs(d)} \
+     \
+@@ -53,6 +50,10 @@ EXTRA_OECONF_append = "\
+     --disable-precompiled-headers \
+     --disable-zip-debug-info \
+     \
++    --with-extra-cflags='${CFLAGS}' \
++    --with-extra-cxxflags='${CXXFLAGS}' \
++    --with-extra-ldflags='${LDFLAGS}' \
++    \
+     ${@jdk_configure_options(d)} \
+ "
+ 
+@@ -83,10 +84,6 @@ export MFLAGS="${@jdk_make_options(d)} MAKE_VERBOSE=y QUIETLY= VERBOSE=-s LOG_LE
+ BUILD_LD="${BUILD_CCLD}"
+ 
+ EXTRA_OEMAKE_append = '\
+-    OE_CFLAGS="${CFLAGS}" \
+-    OE_CPPFLAGS="${CPPFLAGS}" \
+-    OE_CXXFLAGS="${CXXFLAGS}" \
+-    OE_LDFLAGS="${LDFLAGS}" \
+     ${@jdk_make_options(d)} \
+     ALT_SDT_H="${STAGING_INCDIR}" \
+     ALT_CUPS_HEADERS_PATH="${STAGING_INCDIR}" \
+diff --git a/recipes-core/openjdk/openjdk-8-native.inc b/recipes-core/openjdk/openjdk-8-native.inc
+index 7a37d1a..91080d2 100644
+--- a/recipes-core/openjdk/openjdk-8-native.inc
++++ b/recipes-core/openjdk/openjdk-8-native.inc
+@@ -15,15 +15,16 @@ PACKAGECONFIG[cups] = "--with-cups,,cups"
+ PACKAGECONFIG[alsa] = "--with-alsa,,alsa-lib-native"
+ PACKAGECONFIG[jce] = "--enable-unlimited-crypto,,"
+ 
+-# do not use --wth-extra-cflags, it breaks building demos for jdk
+-# maybe disabling demos is more reasonable than avoiding --wth-extra-cflags
+-# needs discussion
+ EXTRA_OECONF_append = "\
+     --with-jobs=${@get_jdk8_native_jobs(d)} \
+     \
+     --with-sys-root=${STAGING_DIR_NATIVE} \
+     --with-tools-dir=${STAGING_DIR_NATIVE} \
+     --with-boot-jdk=${STAGING_LIBDIR_NATIVE}/jvm/icedtea7-native \
++    --with-extra-cflags='${CFLAGS}' \
++    --with-extra-cxxflags='${CXXFLAGS}' \
++    --with-extra-ldflags='${LDFLAGS}' \
++    --with-stdc++lib=dynamic \
+     ${@jdk_configure_options(d)} \
+ "
+ # --with-boot-jdk=${WORKDIR}/fake-jdk
+@@ -32,18 +33,14 @@ inherit native
+ 
+ require openjdk-8-common.inc
+ 
+-CFLAGS_append = "${@jdk_cpp_options(d)}"
++CFLAGS_append = " ${@jdk_cpp_options(d)}"
+ CPPFLAGS_append = "${@jdk_cpp_options(d)}"
+-CXXFLAGS_append = "${@jdk_cpp_options(d)}"
++CXXFLAGS_append = " ${@jdk_cpp_options(d)}"
+ 
+ export MAKE_VERBOSE = "y"
+ export MFLAGS="${@jdk_make_options(d)} MAKE_VERBOSE=y QUIETLY= VERBOSE=-s LOG_LEVEL=trace"
+ 
+ EXTRA_OEMAKE_append = ' \
+-    OE_CFLAGS="${CFLAGS}" \
+-    OE_CPPFLAGS="${CPPFLAGS}" \
+-    OE_CXXFLAGS="${CXXFLAGS}" \
+-    OE_LDFLAGS="${LDFLAGS}" \
+     ${@jdk_make_options(d)} \
+     MAKE_VERBOSE=y VERBOSE=-s LOG_LEVEL=trace \
+     QUIETLY= \
+diff --git a/recipes-core/openjdk/openjdk-8-release-72b05.inc b/recipes-core/openjdk/openjdk-8-release-72b05.inc
+index f8ba367..ce31f3d 100644
+--- a/recipes-core/openjdk/openjdk-8-release-72b05.inc
++++ b/recipes-core/openjdk/openjdk-8-release-72b05.inc
+@@ -4,6 +4,7 @@ PATCHES_URI="\
+     file://dont-expect-fqpn-for-make.patch;striplevel=0 \
+     file://openjdk8-no-genx11-in-headless.patch;apply=no \
+     file://openjdk8-no-unused-deps.patch;apply=no \
++    file://openjdk8-avoid-early-ldflags-expansion.patch;apply=no \
+     file://openjdk8-find-compiler-fix-env-respect.patch;apply=no \
+     file://openjdk8-prevent-debuginfo-in-favour-of-openembedded-package-split.patch;apply=no \
+ "
+diff --git a/recipes-core/openjdk/patches-openjdk-8/openjdk8-avoid-early-ldflags-expansion.patch b/recipes-core/openjdk/patches-openjdk-8/openjdk8-avoid-early-ldflags-expansion.patch
+new file mode 100644
+index 0000000..528560c
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/openjdk8-avoid-early-ldflags-expansion.patch
+@@ -0,0 +1,53 @@
++# HG changeset patch
++# User andrew
++# Date 1452261185 0
++#      Fri Jan 08 13:53:05 2016 +0000
++# Node ID 92c6a16b6daccda4b7c7f9612e4057df006b9f22
++# Parent  b95e325137b439b33a7bb013be21475df5da3a03
++8146566: OpenJDK build can't handle commas in LDFLAGS
++Summary: Backport part of 8142907 to avoid early LDFLAGS expansion
++Reviewed-by: erikj
++
++diff --git jdk/make/CompileDemos.gmk jdk/make/CompileDemos.gmk
++--- jdk/make/CompileDemos.gmk
+++++ jdk/make/CompileDemos.gmk
++@@ -224,17 +224,17 @@ define SetupJVMTIDemo
++       $$(wildcard $$(addprefix $(JDK_TOPDIR)/src/share/demo/jvmti/, $2)/README.txt) \
++       $$(wildcard $$(addprefix $(JDK_TOPDIR)/src/share/demo/jvmti/, $2)/sample.makefile.txt)
++   BUILD_DEMO_JVMTI_$1_EXTRA_INC := $$(addprefix -I, $$(BUILD_DEMO_JVMTI_$1_EXTRA_SRC))
++   BUILD_DEMO_JVMTI_$1_LANG := C
++   ifneq (, $4)
++     BUILD_DEMO_JVMTI_$1_LANG := $4
++   endif
++   ifeq (C++, $4)
++-    $1_EXTRA_CXX := $(LDFLAGS_CXX_JDK) $(LIBCXX)
+++    $1_EXTRA_CXX := $$(LDFLAGS_CXX_JDK) $(LIBCXX)
++   endif
++ 
++   $1_CXXFLAGS := $(CXXFLAGS_JDKLIB) -I$(JDK_TOPDIR)/src/share/demo/jvmti/$1 \
++       $$(BUILD_DEMO_JVMTI_$1_EXTRA_INC) $3 \
++       $(CXXFLAGS_DEBUG_SYMBOLS)
++   ifeq ($1-$(OPENJDK_TARGET_CPU_ARCH), waiters-sparc)
++     $1_FILTER := -xregs=no%appl
++     $1_CXXFLAGS := $$(filter-out $$($1_FILTER), $$($1_CXXFLAGS))
++@@ -246,18 +246,18 @@ define SetupJVMTIDemo
++       -I$(JDK_TOPDIR)/src/share/demo/jvmti/$1 $$(BUILD_DEMO_JVMTI_$1_EXTRA_INC) $3
++ 
++   # Remove the -incremental:no setting to get .ilk-files like in the old build.
++   $$(eval $$(call SetupNativeCompilation,BUILD_DEMO_JVMTI_$1, \
++       SRC := $(JDK_TOPDIR)/src/share/demo/jvmti/$1 $$(BUILD_DEMO_JVMTI_$1_EXTRA_SRC), \
++       LANG := $$(BUILD_DEMO_JVMTI_$1_LANG), \
++       OPTIMIZATION := LOW, \
++       CXXFLAGS := $$($1_CXXFLAGS), \
++-      LDFLAGS := $(filter-out -incremental:no -opt:ref, $(LDFLAGS_JDKLIB)), \
++-      LDFLAGS_macosx := $(call SET_EXECUTABLE_ORIGIN), \
+++      LDFLAGS := $(filter-out -incremental:no -opt:ref, $$(LDFLAGS_JDKLIB)), \
+++      LDFLAGS_macosx := $$(call SET_EXECUTABLE_ORIGIN), \
++       LDFLAGS_SUFFIX := $$($1_EXTRA_CXX), \
++       LDFLAGS_SUFFIX_posix := $5, \
++       LDFLAGS_SUFFIX_windows := $6, \
++       LDFLAGS_SUFFIX_solaris := $7 -lc, \
++       LDFLAGS_SUFFIX_linux := $8, \
++       VERSIONINFO_RESOURCE := $(JDK_TOPDIR)/src/windows/resource/version.rc, \
++       RC_FLAGS := $$(RC_FLAGS) \
++           -D "JDK_FNAME=$1.dll" \
 -- 
-1.9.1
+2.9.0
 
 
