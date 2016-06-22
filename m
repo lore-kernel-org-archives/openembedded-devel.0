@@ -1,53 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f182.google.com (mail-pf0-f182.google.com
-	[209.85.192.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D8136FF01
+Received: from mail-pa0-f51.google.com (mail-pa0-f51.google.com
+	[209.85.220.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 617F060125
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jun 2016 20:01:53 +0000 (UTC)
-Received: by mail-pf0-f182.google.com with SMTP id t190so20647847pfb.3
+	Wed, 22 Jun 2016 20:08:26 +0000 (UTC)
+Received: by mail-pa0-f51.google.com with SMTP id hl6so19751857pac.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jun 2016 13:01:55 -0700 (PDT)
+	Wed, 22 Jun 2016 13:08:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:subject:from:in-reply-to:date:message-id:references:to; 
-	bh=/H8uN+5DlTlBGqnCC2Qmhs8tW/1sQAHHeHP3XqfBlZo=;
-	b=fQkc/+nTSiliYoUmmLfgSbDQMq1A3xsBvmPTEb1YzifJpQ9ZrDP9I7P0G85z8rKLTz
-	K/WSuqME7BNqJanXPqFz7Atlm9BAEfrfc/xjcxD/IqmbvFEL3JAKDoUWUcKT44uOSFzr
-	7sFt9sLOOZA8+2ZZmxc0HH7K9KQQREHbi1S+2Jwul2cCeCv1OfDH/WWzphQtRKEc3lOo
-	7a43gKlsR6DRMb5vJ5rlc/WrghksZyQoEGq3+3Xek++/xCYEuY4DCTt/RtMwocMso5+C
-	stvsTsBuy+s3lXtOTh84cMJoYJ0DwxesWLKdVpeRPH4EddjLRZMCKfZkC0UUKO2us/hq
-	1VKw==
+	bh=gHRV5WsankWgINbhLCI+1evlhDfhAjysCHKB0XsV0/A=;
+	b=aHg03UAsokmE+v/FAkdjzLvnEMBT7S1ebcM0aqiJTMLWg3G3WXll6587jMBOWm7opq
+	UYAHRYcbfGMmUZtcFx29AFicxQ4Ii6zQpGnXOz7nl69Epd8snap1YnKeZDHwrr7nREaE
+	KrB2wkfWUnBTaZJslUfQAeUDBH2d3R0lmYqcPgNNHRoKV7eYqIoJkkGnBnsi4Mxho2XB
+	d4POcFORFUSNBew8Sqot8YDV13PuOdZc5HUQQI2kWOIy2GG3BkkkQ5PmPfVTcL8SqDEd
+	EkkasB7N0JU4f/GPzm0bacGwAk2AUWXzEpBftS1eVQw0sjxGmWh4mNWmevRaIjz4KiqM
+	O6Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date
 	:message-id:references:to;
-	bh=/H8uN+5DlTlBGqnCC2Qmhs8tW/1sQAHHeHP3XqfBlZo=;
-	b=a4pEnhFeKLKpSVpyoxh+Z4LpdEmwLNMlGq0pihhKvuGi6H1FxMbXfvhER5C7UVgBpa
-	IYAV0NCM9KPjE/VhvzhnLQ3CIj2Z6R8nfUK6ZVlgZn1VHXcG5es3pKKRqNx0xNjLMquU
-	yxYDyvdAqAF18bvyTtC5tMZLpq1YbZ2W+AkpThPvbDqTumCC/rxLIRQ4rfcX/hZQOAYA
-	r9K50cP4cMSWepF2JL8EjZ7ZSa2+ltg7BsRSLwdYWTJqNVTbbyAgz579Q/dz0JHCkjfA
-	F28b6LwXdIVhHlLU1qH+uxjyjkR2NiUzZVC4M8FL2aOf96rq0gJ3Li4qqirS/zpZbdwr
-	NK7A==
-X-Gm-Message-State: ALyK8tJ91llAxcBbks2MqPFGQbH3WtxrdVEYOmnOELnYjLUt0RwKOtqMZ/JDGMrH0LOK7w==
-X-Received: by 10.98.65.2 with SMTP id o2mr7308817pfa.97.1466625714368;
-	Wed, 22 Jun 2016 13:01:54 -0700 (PDT)
+	bh=gHRV5WsankWgINbhLCI+1evlhDfhAjysCHKB0XsV0/A=;
+	b=LStaz5iUKjuzXGb0OF+ViAYxYL0c00T76j16kqIZaMYLp512djfmPDLqTOi5jbdR5J
+	2vmIthhI+5x2tt2lUz1EYAfIs2v0mMt7GSLnNmwxbWOipLTlZANA3rjqzHExfDxY43hS
+	4+SKvSX00IhSuOu9wilGiLJBiDhKW5TUO6Sipe2G7++nf50swXPHsC/K3O4nJ4KfrAQY
+	8iEf/TYwaMtfmXYN70cxJQZC7jUwTCr9YNx+AbSfdCg5Yq4mzWHXkHNBflseZwGqHOii
+	kMMzXG3jajnV4W6u04yD5s4VEotTyW1WBt9OYE7oAnAXmA9eptPapavj3y6buNzypsMd
+	EHOg==
+X-Gm-Message-State: ALyK8tK78I1BBAaggQjdAPioN44G5P49/xMGiKvz5wyWM2afp5OZZjOq8Dcr1vaB38B0+A==
+X-Received: by 10.67.15.72 with SMTP id fm8mr37174085pad.50.1466626107403;
+	Wed, 22 Jun 2016 13:08:27 -0700 (PDT)
 Received: from ?IPv6:2601:647:4c00:115c:c15d:825f:58bc:113e?
 	([2601:647:4c00:115c:c15d:825f:58bc:113e])
-	by smtp.gmail.com with ESMTPSA id
-	ns4sm1747675pab.40.2016.06.22.13.01.53
+	by smtp.gmail.com with ESMTPSA id 77sm1655290pfp.66.2016.06.22.13.08.26
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLSv1/SSLv3 cipher=OTHER);
-	Wed, 22 Jun 2016 13:01:53 -0700 (PDT)
+	Wed, 22 Jun 2016 13:08:26 -0700 (PDT)
 Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
 X-Pgp-Agent: GPGMail 2.6b2
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <B7D5FA7C76968448B8E9D735071E5AC8163992B2@VSVR01.ZenoTrack.local>
-Date: Wed, 22 Jun 2016 13:01:52 -0700
-Message-Id: <41ABB027-8C2A-4C9A-A7D8-7AB45D67D749@gmail.com>
-References: <8105716b-d375-8d23-d4ab-151da7078b8f@stella.at>
-	<B7D5FA7C76968448B8E9D735071E5AC8163992B2@VSVR01.ZenoTrack.local>
+In-Reply-To: <8c01a78d-fd75-d1ce-aa0e-c618f12da265@embed.me.uk>
+Date: Wed, 22 Jun 2016 13:08:22 -0700
+Message-Id: <B36836F6-ADFA-4EAC-9789-A4E51DBE6E9B@gmail.com>
+References: <8c01a78d-fd75-d1ce-aa0e-c618f12da265@embed.me.uk>
 To: openembedded-devel@lists.openembedded.org
 X-Mailer: Apple Mail (2.3124)
-Subject: Re: LXDM only showing black screen in krogoth
+Subject: Re: opencv 3.1 gcc 6 compile errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,61 +58,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jun 2016 20:01:55 -0000
-X-Groupsio-MsgNum: 61938
+X-List-Received-Date: Wed, 22 Jun 2016 20:08:28 -0000
+X-Groupsio-MsgNum: 61939
 Content-Type: multipart/signed;
-	boundary="Apple-Mail=_6A65DD4C-F920-4DB8-B93A-AF7510C5147C";
+	boundary="Apple-Mail=_6A666655-7417-48B0-A6FD-478251ABE601";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---Apple-Mail=_6A65DD4C-F920-4DB8-B93A-AF7510C5147C
+--Apple-Mail=_6A666655-7417-48B0-A6FD-478251ABE601
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain;
-	charset=utf-8
+	charset=us-ascii
 
 
-> On Jun 2, 2016, at 9:50 AM, Kai Iskratsch =
-<Kai.Iskratsch@zenotrack.com> wrote:
+> On Jun 3, 2016, at 3:37 AM, Jack Mitchell <ml@embed.me.uk> wrote:
 >=20
-> Our system is based on an intel-atom and i was just testing the =
-upgrade from yocto 2.0 to 2.1. In Jethro lxdm with configured autologin =
-to a xfce4 session is workign without problems.
-> now i tried a testbuild based on krogoth the build went through =
-without problems, but in this image lxdm is just displaying a black =
-screen. So i tried disabling the autologin, but that did not change =
-anything.
+> I'm hitting compile errors with opencv 3.1 and gcc6. I've been playing =
+with disabling/enabling different options to try get round the issues =
+but it's too widespread.
 >=20
-> lxdm and X seem to be running, there is just nothing displayed, only =
-hint seems to be in lxdm log (** Message: spawn lxdm-session fail)
-
-
-you lxdm logs say
-
-** Message: find greeter (nil)
-
-may be thats a starting point to investigate
-
+> There is a patch upstream [1] which says it fixes the issues but it =
+doesn't seem to help.
 >=20
-> root@xxxxx~# systemctl status lxdm
-> =E2=97=8F lxdm.service - LXDE Display Manager
->   Loaded: loaded (/lib/systemd/system/lxdm.service; enabled; vendor =
-preset: enabled)
->   Active: active (running) since Thu 2016-06-02 09:10:13 CEST; 4min 3s =
-ago
-> Main PID: 532 (lxdm-binary)
->   CGroup: /system.slice/lxdm.service
->           =E2=94=9C=E2=94=80532 /usr/sbin/lxdm-binary
->           =E2=94=94=E2=94=80571 /usr/bin/X -s 0 :0 vt07 -nolisten tcp =
--novtswitch -auth /var/run/lxdm/lxdm-:0.auth
+> I've attached the build log without the patch, and the build log with =
+the patch, if anyone has ideas then please shout up.
 >=20
-> Jun 02 09:10:13 xxxxx systemd[1]: Started LXDE Display Manager.
-> <Xorg.0.log><lxdm.log>--
+
+Such errors usually means that package is violating gcc include =
+hierarchy. either by using -isystem and trying to sneak some headers in =
+the middle of the supposed hierarchy. So you should look into getting =
+rid of any -system that the package might
+be specifying in its build system.
+
+> Cheers,
+> Jack.
+>=20
+> [1] =
+https://github.com/Itseez/opencv/pull/6541/commits/a0fdc91a14f07de25d85803=
+7940fcd3ba859b4e2
+> <opencv.log><opencv-gcc6patch.log>--
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
---Apple-Mail=_6A65DD4C-F920-4DB8-B93A-AF7510C5147C
+--Apple-Mail=_6A666655-7417-48B0-A6FD-478251ABE601
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment;
 	filename=signature.asc
@@ -125,9 +113,9 @@ Content-Description: Message signed with OpenPGP using GPGMail
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAldq7rAACgkQuwUzVZGdMxS8WwCfcPNh/v3B7HUULVLWQ+LVLiD9
-EaIAnAlUhNsBfbWzrfrqqUMO3v5Mh8va
-=/ZUl
+iEYEARECAAYFAldq8DoACgkQuwUzVZGdMxQVSgCfUYGFHi8rKIPcPtBrTGbGlyPt
+tnEAn0ECydghkQzf6ZGtaVVYOyj7QWMK
+=2XHv
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_6A65DD4C-F920-4DB8-B93A-AF7510C5147C--
+--Apple-Mail=_6A666655-7417-48B0-A6FD-478251ABE601--
