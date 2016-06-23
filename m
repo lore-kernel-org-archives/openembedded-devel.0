@@ -1,37 +1,52 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id DE9BB60125
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f68.google.com (mail-pa0-f68.google.com
+	[209.85.220.68])
+	by mail.openembedded.org (Postfix) with ESMTP id CC9E4601A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jun 2016 20:16:34 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id b136so12231881qkg.2
+	Thu, 23 Jun 2016 00:52:26 +0000 (UTC)
+Received: by mail-pa0-f68.google.com with SMTP id ts6so5146117pac.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jun 2016 13:16:35 -0700 (PDT)
+	Wed, 22 Jun 2016 17:52:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=2bZ3clSq5P7yynhGAfavM6R2DWtGHTO4/M3vkxPeElA=;
+	b=UxS7ALwWSrN0Y8uopNU/j8ASSsbnqmL7pthw0nLveb76lnA8uE4m/wSyPICuNUwTgW
+	s1vZ+r7G0TgRP76TSRdNSBr7gE5hERY9/f+kOTiSZJ6pYqi/vljBy/1MBs/fzayOgBUi
+	bGSamNahUss14f/cD2fzae71AxV+Fc0cOo2GxnDjQDfqGtVon9vantYU1iHM5MgbNhNR
+	CFo3OX7tbkoNo3I8RBvF72l0llqOOXSLMt/KOY7hETFnWP2kgEg3eIoH6YsE6l4soqKU
+	wuMSvlOTsjMC/6OPSByr5JP+qi/VqkDKEPiWmSaXgJWrKwg8ia63VAEmpFgRuaHjLpUl
+	jH2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=SyXlxKPZCyw3K5Dyf7HYmSlUtNsZk+gw1HubTH2ff2o=;
-	b=NTmbCoiDQkLxV1PwyGjaJs/eHgajxplzn8QS+m83YPVEJp1XeAU6JFGxuhkdlf56nV
-	RZtaCkb42uZBPHxXojiFIAmFGgnS74dwajVH4FehTLXb1+xduo2Z0xGskdQCil+o9bpm
-	4eyFrDJ6cF1t62a2iYB6HqpVQ5SnO/MNGQ9G70cDVag/HP40gO2DdPZRgQaP//nmZtj1
-	lBeaz6/FeAQhqbdUDfxepqqQpPhmdxYDMDzU6O4klcAfFiyuOZl7FwsUBpP1hVJCPrZv
-	GRb05+I57tB2wvflJ6iKmbvvqgGtwxKk2yYIiO3r0+O461tkYthu2mnK8LFTrEAhaCYh
-	BeaA==
-X-Gm-Message-State: ALyK8tL5ZIAlg6EVUUulA/Fatbns72QRiFPz28XJrpcZgkkRcPf/rrJTli+QRNcYJOR3Ww==
-X-Received: by 10.55.131.196 with SMTP id f187mr21827125qkd.54.1466626595083; 
-	Wed, 22 Jun 2016 13:16:35 -0700 (PDT)
-Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168])
-	by smtp.gmail.com with ESMTPSA id m7sm752422qte.0.2016.06.22.13.16.34
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 22 Jun 2016 13:16:34 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=2bZ3clSq5P7yynhGAfavM6R2DWtGHTO4/M3vkxPeElA=;
+	b=m/UUHyHqDlGcabCMuCfgMWcnk70DwJ4gDAkRh6SYdsBPRiuFwcSGy5p8eOrW4sxhdg
+	vPxQLF0tnbCMYGDrAoph6XdKKPx+ccKDZnx/CilTGjfiD98SMq4SyV19gOsSKzsMq5o4
+	XUuwhsKvJEnVxRm0R8ObHLjg8dDgFwF6RAgZKzFpx69bDAbQmhyLgUD1CsX4bGgJsmGO
+	tSgPfVcw3fFNcXjkJcr8Drd6BwLph+LCdJ+7uKlREB+mCPjTFT7rWVmcheaWQ09nKu3+
+	kNnKirV/BJEd0stuvCBLb0oRqfuS3xbgF0ovKJVbG9tb8V6h9kgiCZgx5Cm2dzVFafI3
+	5Vvw==
+X-Gm-Message-State: ALyK8tJP4K72CFkQU/1n3S/VNHwWpDcnLiYaSXnZE0RyfHRqUcSIx2Sg7eP0WxT8QXI7AQ==
+X-Received: by 10.66.81.70 with SMTP id y6mr38199075pax.121.1466643146432;
+	Wed, 22 Jun 2016 17:52:26 -0700 (PDT)
+Received: from [10.43.100.29] ([50.233.148.158])
+	by smtp.googlemail.com with ESMTPSA id
+	ql1sm2577548pac.2.2016.06.22.17.52.24
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLSv1/SSLv3 cipher=OTHER);
+	Wed, 22 Jun 2016 17:52:25 -0700 (PDT)
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Jun 2016 16:16:12 -0400
-Message-Id: <1466626572-10868-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-gnome][PATCH] evince: fix build errors with gcc-6
+References: <1466025817-30091-1-git-send-email-akuster@mvista.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <576B32C7.6090209@gmail.com>
+Date: Wed, 22 Jun 2016 17:52:23 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
+MIME-Version: 1.0
+In-Reply-To: <1466025817-30091-1-git-send-email-akuster@mvista.com>
+Subject: Re: [meta-oe][v2][PATCH] cpuset: add new python package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,76 +59,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jun 2016 20:16:35 -0000
+X-List-Received-Date: Thu, 23 Jun 2016 00:52:26 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../evince/evince/0002-fix-gcc6-errors.patch       | 39 ++++++++++++++++++++++
- meta-gnome/recipes-gnome/evince/evince_3.18.2.bb   |  4 ++-
- 2 files changed, 42 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-gnome/evince/evince/0002-fix-gcc6-errors.patch
 
-diff --git a/meta-gnome/recipes-gnome/evince/evince/0002-fix-gcc6-errors.patch b/meta-gnome/recipes-gnome/evince/evince/0002-fix-gcc6-errors.patch
-new file mode 100644
-index 0000000..b8e30f7
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/evince/evince/0002-fix-gcc6-errors.patch
-@@ -0,0 +1,39 @@
-+--- evince-3.18.2/backend/comics/comics-document.c.orig	2016-06-22 20:08:01.789805750 +0000
-++++ evince-3.18.2/backend/comics/comics-document.c	2016-06-22 20:07:00.817804688 +0000
-+@@ -241,6 +241,8 @@
-+ /* This function shows how to use the choosen command for decompressing a
-+  * comic book file. It modifies fields of the ComicsDocument struct with 
-+  * this information */
-++#pragma GCC diagnostic push
-++#pragma GCC diagnostic ignored "-Wformat-nonliteral"
-+ static gboolean 
-+ comics_generate_command_lines (ComicsDocument *comics_document, 
-+ 			       GError         **error)
-+@@ -296,6 +298,7 @@
-+ 	}
-+ 
-+ }
-++#pragma GCC diagnostic pop
-+ 
-+ /* This function chooses an external command for decompressing a comic 
-+  * book based on its mime tipe. */
-+--- evince-3.18.2/libdocument/ev-document-misc.c.orig	2016-06-22 20:01:49.205799262 +0000
-++++ evince-3.18.2/libdocument/ev-document-misc.c	2016-06-22 20:02:27.233799924 +0000
-+@@ -519,7 +519,8 @@
-+ 
-+ 	return (dp / di);
-+ }
-+-
-++#pragma GCC diagnostic push
-++#pragma GCC diagnostic ignored "-Wformat-y2k"
-+ /* Returns a locale specific date and time representation */
-+ gchar *
-+ ev_document_misc_format_date (GTime utime)
-+@@ -542,6 +543,7 @@
-+ 
-+ 	return g_locale_to_utf8 (s, -1, NULL, NULL, NULL);
-+ }
-++#pragma GCC diagnostic pop
-+ 
-+ void
-+ ev_document_misc_get_pointer_position (GtkWidget *widget,
-diff --git a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb b/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-index fe63093..5e6b30f 100644
---- a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-+++ b/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-@@ -10,7 +10,9 @@ inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection
- SRC_URI[archive.md5sum] = "c39af6b8b1c44d4393ef8ac9dab99c0b"
- SRC_URI[archive.sha256sum] = "42ad6c7354d881a9ecab136ea84ff867acb942605bcfac48b6c12e1c2d8ecb17"
- 
--SRC_URI += "file://0001-help-remove-YELP-macro.patch"
-+SRC_URI += "file://0001-help-remove-YELP-macro.patch \
-+            file://0002-fix-gcc6-errors.patch \
-+"
- 
- EXTRA_OECONF = " --enable-thumbnailer \
- "
--- 
-1.9.1
+Ping.
 
+I don't see this in the patch queue, was it removed, dropped or did I
+mess up the submittal? Did I miss a response ?
+
+regards,
+Armin
+
+On 06/15/2016 02:23 PM, Armin Kuster wrote:
+> Signed-off-by: Armin Kuster <akuster@mvista.com>
+> ---
+>  .../recipes-devtools/python/python-cpuset_1.5.7.bb | 23 ++++++++++++++++++++++
+>  1 file changed, 23 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
+> 
+> diff --git a/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb b/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
+> new file mode 100644
+> index 0000000..8f6532c
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
+> @@ -0,0 +1,23 @@
+> +SUMMARY = "Cpuset is a Python application to make using the cpusets facilities in the Linux kernel easier"
+> +SECTION = "devel/python"
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+> +
+> +SRCNAME = "cpuset"
+> +
+> +SRC_URI = "https://github.com/lpechacek/${SRCNAME}/archive/v${PV}.tar.gz"
+> +
+> +SRC_URI[md5sum] = "6ad79b26ba03f559604d74513cc34392"
+> +SRC_URI[sha256sum] = "32334e164415ed5aec83c5ffc3dc01c418406eb02d96d881fdfd495587ff0c01"
+> +
+> +S = "${WORKDIR}/${SRCNAME}-${PV}"
+> +
+> +inherit distutils
+> +
+> +RDEPENDS_${PN} = "\
+> +    python-core \
+> +    python-re \
+> +    python-logging \
+> +    python-textutils \
+> +    python-unixadmin \
+> +    "
+> 
 
