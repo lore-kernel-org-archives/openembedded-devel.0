@@ -1,29 +1,28 @@
 Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 744A0601B8
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 053936014F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jun 2016 03:45:54 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga103.fm.intel.com with ESMTP; 22 Jun 2016 20:45:54 -0700
+	Thu, 23 Jun 2016 04:18:02 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP; 22 Jun 2016 21:18:04 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.26,509,1459839600"; d="scan'208";a="1003500639"
+X-IronPort-AV: E=Sophos;i="5.26,509,1459839600"; d="scan'208";a="1007895874"
 Received: from clim19-mobl.gar.corp.intel.com (HELO
 	peggleto-mobl.ger.corp.intel.com) ([10.255.149.148])
-	by orsmga002.jf.intel.com with ESMTP; 22 Jun 2016 20:45:53 -0700
+	by fmsmga002.fm.intel.com with ESMTP; 22 Jun 2016 21:18:01 -0700
 From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Ulf Samuelsson <openembedded@emagii.com>
-Date: Thu, 23 Jun 2016 15:45:50 +1200
-Message-ID: <8016846.8dGgvebKxB@peggleto-mobl.ger.corp.intel.com>
+To: akuster808 <akuster808@gmail.com>
+Date: Thu, 23 Jun 2016 16:17:58 +1200
+Message-ID: <3397381.B6WPiHmTEs@peggleto-mobl.ger.corp.intel.com>
 Organization: Intel Corporation
 User-Agent: KMail/4.14.10 (Linux/4.5.7-200.fc23.x86_64; KDE/4.14.20; x86_64; ;
 	)
-In-Reply-To: <16a6d5ea-a179-f36b-6a64-2a8c790e662f@emagii.com>
-References: <7fb5e28e-d153-a396-58ae-c4d656835524@emagii.com>
-	<8646f486-90f9-738d-9daf-6ba1644c83ba@smile.fr>
-	<16a6d5ea-a179-f36b-6a64-2a8c790e662f@emagii.com>
+In-Reply-To: <576B32C7.6090209@gmail.com>
+References: <1466025817-30091-1-git-send-email-akuster@mvista.com>
+	<576B32C7.6090209@gmail.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Using EXTERNALSRC in practice
+Subject: Re: [meta-oe][v2][PATCH] cpuset: add new python package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,86 +35,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jun 2016 03:45:54 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Thu, 23 Jun 2016 04:18:04 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hi Ulf,
+Hi Armin,
 
-On Tue, 21 Jun 2016 00:02:12 Ulf Samuelsson wrote:
-> Den 2016-06-20 kl. 15:58, skrev J=E9r=E9my Rosen:
-> > On 20/06/2016 15:48, Ulf Samuelsson wrote:
-> >> Den 2016-06-20 kl. 14:37, skrev J=E9r=E9my Rosen:
-> >>> On 20/06/2016 14:08, Ulf Samuelsson wrote:
-> >>>> We have a meta-layer which builds the kernel.
-> >>>>=20
-> >>>> This contains among other things:
-> >>>>=20
-> >>>> FILESEXTRAPATHS_prepend_<machine> =3D "${THIS_DIR}/<machine>"
-> >>>>=20
-> >>>> SRC_URI =3D "git://<server>/<repo.git>;protocol=3Dssh;branch=3D<=
-branch>"
-> >>>> SRC_URI +=3D "file://defconfig"
-> >>>>=20
-> >>>> PV =3D "...+git${SRCPV}"
-> >>>> SRCREV =3D "<shaid>"
-> >>>> ...
-> >>>>=20
-> >>>> Would like to have an option to build the kernel with external s=
-ource.
-> >>>> That option should be easy to enable/disable
-> >>>=20
-> >>> [skip the rest]
-> >>>=20
-> >>> What you are describing here is very close to how the devtool wor=
-ks.
-> >>> I think it can deal with kernel packages in its latest iteration
-> >>>=20
-> >>> did you have a look at that tool ? does it satisfy your need ? if=
-
-> >>> not, what would it need to do what you want...
-> >>=20
-> >> No, where can I find more information?
-> >=20
-> > The yocto manual has quite a section on that tool
-> >=20
-> >> The customer does not use the latest version of Yocto right now, s=
-o
-> >> that might be a problem,
-> >=20
-> > depends on how old "not the latest" is... but if you can do a sandb=
-ox
-> > with the latest version, you can probably see how devtool works and=
-
-> > manually do the same thing...
->=20
-> They use Yocto Layers, but not poky, so devtool is not present.
-
-No part of devtool is in poky alone - where did you get this idea?
-devtool is part of OE-Core, so unless you have a version of OE-Core tha=
-t's=20
-older than fido then you should have it.
-
-> Anyway, devtool will generate an absolute path, and I am looking for
-> a recipe which uses a relative path to allow multiple yocto instances=
-.
-
-Right, this isn't what devtool is intended to be used for. externalsrc =
-alone=20
-should allow it however - provided you could either use ${THISDIR} or=20=
-
-${COREBASE} as paths if you wanted something relative to where all the=20=
-
-metadata is checked out. Note you'll need to use :=3D if you use ${THIS=
-DIR} so=20
-that it is evaluated when the bbappend is parsed and not at any other t=
-ime=20
-(where the file context might be different).
+It didn't show up in the archives nor in my inbox, so I suspect it never made 
+it to the list for some reason.
 
 Cheers,
 Paul
 
---=20
+On Wed, 22 Jun 2016 17:52:23 akuster808 wrote:
+> Ping.
+> 
+> I don't see this in the patch queue, was it removed, dropped or did I
+> mess up the submittal? Did I miss a response ?
+> 
+> regards,
+> Armin
+> 
+> On 06/15/2016 02:23 PM, Armin Kuster wrote:
+> > Signed-off-by: Armin Kuster <akuster@mvista.com>
+> > ---
+> > 
+> >  .../recipes-devtools/python/python-cpuset_1.5.7.bb | 23
+> >  ++++++++++++++++++++++ 1 file changed, 23 insertions(+)
+> >  create mode 100644 meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
+> > 
+> > diff --git a/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
+> > b/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb new file mode
+> > 100644
+> > index 0000000..8f6532c
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
+> > @@ -0,0 +1,23 @@
+> > +SUMMARY = "Cpuset is a Python application to make using the cpusets
+> > facilities in the Linux kernel easier" +SECTION = "devel/python"
+> > +LICENSE = "GPLv2"
+> > +LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+> > +
+> > +SRCNAME = "cpuset"
+> > +
+> > +SRC_URI = "https://github.com/lpechacek/${SRCNAME}/archive/v${PV}.tar.gz"
+> > +
+> > +SRC_URI[md5sum] = "6ad79b26ba03f559604d74513cc34392"
+> > +SRC_URI[sha256sum] =
+> > "32334e164415ed5aec83c5ffc3dc01c418406eb02d96d881fdfd495587ff0c01" +
+> > +S = "${WORKDIR}/${SRCNAME}-${PV}"
+> > +
+> > +inherit distutils
+> > +
+> > +RDEPENDS_${PN} = "\
+> > +    python-core \
+> > +    python-re \
+> > +    python-logging \
+> > +    python-textutils \
+> > +    python-unixadmin \
+> > +    "
+
+-- 
 
 Paul Eggleton
 Intel Open Source Technology Centre
