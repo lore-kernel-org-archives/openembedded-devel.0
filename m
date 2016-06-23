@@ -1,52 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id C1A546FFCE;
-	Thu, 23 Jun 2016 10:21:10 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id a66so9616536wme.2;
-	Thu, 23 Jun 2016 03:21:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=qP7FBmyOFKII4gJ51w5TWStakw4luCd27DlbxFvcs3A=;
-	b=y1RQu1GlTFph4Ctfk665zYKbs8DHRizgwlHnzl3/FF2scWCQcT9XKCEo+JLx8gHdUF
-	cwfJOPq3dAJIXLFU3EK2H0tXLpJSKOBDu8DvUQcOQoAwJ2OHb8xHBohQJy0/7YODAL6r
-	bM51bi9DT614tPZJw8I8prBv9qqm3PrY9/qqty3T+EM1xx+vQ0WUlejTUAXbVEw8dRiX
-	VZFVwZ7Q3GZg+g8WcllfkaziJaYO2pNOTNt1aCqQCfZuraDIcR2bhBBzt7MOOnOnvxfi
-	pO+oEdmyqfpVjV5Wk+xst9wGVaB7zOD9IhVREeCWP1s4wY6p/rHr87ehE81UQF0cpdvL
-	ua+A==
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vk0-f67.google.com (mail-vk0-f67.google.com
+	[209.85.213.67])
+	by mail.openembedded.org (Postfix) with ESMTP id C4916731C6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Jun 2016 10:32:58 +0000 (UTC)
+Received: by mail-vk0-f67.google.com with SMTP id x7so5839240vka.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Jun 2016 03:32:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=SQNf0EHKmiN9YPi+QWeg0Xh2Jm8o5/I9+X+nWYWZ3FA=;
+	b=YrTIljRcMsZdvw/8tDHYxF2sUG0N1Odf3g54thjy2PV0uk+PY9yZKUXIRwe42Qbm5w
+	Fx/ZmRbA2A0EAFV9i9NPS3ljlVQr9j2u4EP6aMiF9uSU9MhCtsyZRNB/4SYTnjonkyjI
+	kH7I0X6vygSDh3+eTpy7R5mrhNTIni/gvwU9Lggs83fnSJQ85HloedNMUmT69hjaQVgB
+	WVctuyWlJocKq5BZuKfqHP6LIp2mqK/gOHWaUWfabNEL19pz0Af+XFymMA1gQl7YaLtn
+	8J+HnbKGfl7lz7i1pGQOD5dOioIOqlRTwgQb2oQvcYKkyj5t24ieTCrSJDyKhrv4Lyfr
+	iKAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=qP7FBmyOFKII4gJ51w5TWStakw4luCd27DlbxFvcs3A=;
-	b=Nk5iPFsTMeFCs0VF/xrRAVinr1R/Rc8xtBb8LhYYeZRyopzt9mBcLwRlk8fAW03Ugd
-	uVX5kAaMVUdgTneL3WIHH9LAOgVJ5wNj5fkwQYaQ7IvnXSMwN7b6UrAuLulzitN8t+SO
-	YCSel3hXMt4AhiquYt3NPPUBd1X5n/PkfFxEhQ+GlaNVtqtZjMWbu3M3vawYoY7K9VY1
-	Ogu8s2Mh5nlJunH6p0411+tXFuOYr32xtHALwHWZtlZJU9kLCgT75LQRZY85jemWCcGC
-	sczLeLRSHHxg7PAL315VS6WpJMIgcWqNHDwrwpRbPHfBDOsTTDrkP2RGyubJStTF0BoK
-	IW+Q==
-X-Gm-Message-State: ALyK8tK0rAo66Vs/xDqhbkYHZAVEchuKVvRtZE1cYdxcQWdaDOGDi9ByaXOhdUjjuPR/zw==
-X-Received: by 10.28.224.69 with SMTP id x66mr13034142wmg.89.1466677271460;
-	Thu, 23 Jun 2016 03:21:11 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169])
-	by smtp.gmail.com with ESMTPSA id k6sm3650133wjz.28.2016.06.23.03.21.10
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 23 Jun 2016 03:21:10 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 23 Jun 2016 12:21:38 +0200
-To: Michael Halstead <mhalstead@linuxfoundation.org>
-Message-ID: <20160623102138.GA2567@jama>
-References: <13986bd3-af12-4768-0a4c-78447c33c8b6@linuxfoundation.org>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=SQNf0EHKmiN9YPi+QWeg0Xh2Jm8o5/I9+X+nWYWZ3FA=;
+	b=Ir6L3HRHP/BE4IoHZaTmV2laQljJw8df1eh4cXaArQG3TqVoOpbmAKRjCUuaX31dKO
+	7wer5fN43L0weJ41afvrRFcojILFoS+LwUDrlfHGSLp/y+gU0hmnP4t3NbP4dRQHmqDR
+	Pc70MryC5D2xcZCpFOhN2oI8HqQp5I8bhNq4PU7LuuXfTTyhpxR3mN8VTKg5rNk61/kb
+	7Nc5BtbZxiRskyn5unIf/f6EoZ+gvOhrNOZhiCf1PYRId/UHu5rhGvY/jM268lv9lKLm
+	zlphG7giuRisYbyP9A2aX3s+OJRWZ8zsLgCRArixKCYM6tYKh/4F/6IOyk8uji5emhb6
+	gX/g==
+X-Gm-Message-State: ALyK8tJMOqZEO49kK7dX35Fj/5423lzmw0Oy1/qRxLtYfawyUHMIWX9fnQptTt5gO32CGOB63q5IEm59gT6Mxw==
+X-Received: by 10.31.9.65 with SMTP id 62mr1589912vkj.89.1466677978765; Thu,
+	23 Jun 2016 03:32:58 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <13986bd3-af12-4768-0a4c-78447c33c8b6@linuxfoundation.org>
-User-Agent: Mutt/1.6.1 (2016-04-27)
-Cc: yocto@yoctoproject.org, Paul Eggleton <paul.eggleton@linux.intel.com>,
-	bitbake-devel@lists.openembedded.org,
-	Openembedded-devel@lists.openembedded.org,
-	Openembedded-core@lists.openembedded.org
-Subject: Re: [yocto] Patchwork users: Help test new version
+Received: by 10.176.3.72 with HTTP; Thu, 23 Jun 2016 03:32:58 -0700 (PDT)
+In-Reply-To: <1466670841-22706-2-git-send-email-jussi.kukkonen@intel.com>
+References: <1466670841-22706-1-git-send-email-jussi.kukkonen@intel.com>
+	<1466670841-22706-2-git-send-email-jussi.kukkonen@intel.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 23 Jun 2016 12:32:58 +0200
+Message-ID: <CALbNGRRAop9c=z-6i_sOKU3-1u+JCJ=4OOmzo_sn4jPgfRKG5A@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Cc: mark.asselstine@windriver.com
+Subject: Re: [meta-oe][PATCH 2/2] Update vte users to use vte9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,50 +55,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jun 2016 10:21:15 -0000
-X-Groupsio-MsgNum: 61947
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="tThc/1wpZn/ma/RB"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 23 Jun 2016 10:32:59 -0000
+Content-Type: text/plain; charset=UTF-8
 
---tThc/1wpZn/ma/RB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, Jun 23, 2016 at 10:34 AM, Jussi Kukkonen
+<jussi.kukkonen@intel.com> wrote:
+> geany-plugins seems to compile fine with new vte: that recipe was
+> not modified. gnome-terminal and valaterminal are currently
+> blacklisted for other reasons.
+>
+> Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
+> ---
+>  meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb       | 2 +-
+>  meta-oe/recipes-support/toscoterm/toscoterm_git.bb            | 2 +-
+>  meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb    | 2 +-
+>  meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb | 2 +-
+>  4 files changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb b/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
+> index ae28ffd..18e74da 100644
+> --- a/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
+> +++ b/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
+> @@ -1,7 +1,7 @@
+>  SUMMARY = "GNOME Terminal"
+>  LICENSE = "GPL-2.0"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=5b51eba4ba4cafe64073227530c061ed"
+> -DEPENDS = "gtk+ glib-2.0 startup-notification dbus-glib vte gnome-doc-utils intltool-native"
+> +DEPENDS = "gtk+ glib-2.0 startup-notification dbus-glib vte9 gnome-doc-utils intltool-native"
+>  PR = "r1"
+>
+>  inherit gnome
+> diff --git a/meta-oe/recipes-support/toscoterm/toscoterm_git.bb b/meta-oe/recipes-support/toscoterm/toscoterm_git.bb
+> index 24f813b..6b31fd6 100644
+> --- a/meta-oe/recipes-support/toscoterm/toscoterm_git.bb
+> +++ b/meta-oe/recipes-support/toscoterm/toscoterm_git.bb
+> @@ -1,6 +1,6 @@
+>  SUMMARY = "A very small and simple terminal emulator"
+>  SECTION = "x11/applications"
+> -DEPENDS = "vte"
+> +DEPENDS = "vte9"
+>
+>  LICENSE = "GPLv3"
+>  LIC_FILES_CHKSUM = "file://main.c;start_line=5;end_line=16;md5=9ae4bf20caf291afa94530026bd15229"
+> diff --git a/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb b/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
+> index 07ff318..ef0cfaf 100644
+> --- a/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
+> +++ b/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
+> @@ -1,6 +1,6 @@
+>  SUMMARY = "A lightweight Terminal Emulator based on libvte, written in Vala"
+>  SECTION = "x11/applications"
+> -DEPENDS = "vte intltool-native"
+> +DEPENDS = "vte9 intltool-native"
+>  SRCREV = "0fefa38087581f85fa0631b40500b9428369c146"
+>  LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+> diff --git a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb
+> index 1049b27..22b81af 100644
+> --- a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb
+> +++ b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb
+> @@ -1,7 +1,7 @@
+>  SUMMARY = "Terminal emulator for the Xfce desktop environment"
+>  LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> -DEPENDS = "glib-2.0 gtk+ vte libxfce4ui"
+> +DEPENDS = "glib-2.0 gtk+ vte9 libxfce4ui"
+>
+>  inherit xfce-app
+>
+> --
+> 2.1.4
+>
+Have not time for test but to say thanks :)
 
-On Mon, Jun 20, 2016 at 10:47:16AM -0700, Michael Halstead wrote:
-> Hello,
->=20
-> OpenEmbedded is nearly ready to upgrade to a new version of Patchwork.
-> The new version offers several new features that will allow OpenEmbedded
-> to improve developer workflow and automated checks on incoming patches.
->=20
-> If you are a Patchwork user please visit
-> https://patchwork-next.openembedded.org/ and take a look. If you find
-> anything amiss please e-mail me directly and include patchwork in the
-> subject line.
->=20
-> Thank you for your help upgrading this important system!
+Andreas
 
-I was using it to update meta-oe/master-next in last few days and it
-seems to work the same as old patchwork for me.
-
-But quite often I've noticed very slow response, is it running on
-slower HW while testing or is the new version just a lot slower?
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---tThc/1wpZn/ma/RB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAldruCgACgkQN1Ujt2V2gBwgPQCfYHbLjnHn3pjTP/YHXoUHWAVZ
-KocAoKj1yLQp5ooBXz9WUaXJypP1TJDT
-=ANzc
------END PGP SIGNATURE-----
-
---tThc/1wpZn/ma/RB--
