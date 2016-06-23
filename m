@@ -1,48 +1,27 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f67.google.com (mail-vk0-f67.google.com
-	[209.85.213.67])
-	by mail.openembedded.org (Postfix) with ESMTP id C4916731C6
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id A94D960123
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jun 2016 10:32:58 +0000 (UTC)
-Received: by mail-vk0-f67.google.com with SMTP id x7so5839240vka.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jun 2016 03:32:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=SQNf0EHKmiN9YPi+QWeg0Xh2Jm8o5/I9+X+nWYWZ3FA=;
-	b=YrTIljRcMsZdvw/8tDHYxF2sUG0N1Odf3g54thjy2PV0uk+PY9yZKUXIRwe42Qbm5w
-	Fx/ZmRbA2A0EAFV9i9NPS3ljlVQr9j2u4EP6aMiF9uSU9MhCtsyZRNB/4SYTnjonkyjI
-	kH7I0X6vygSDh3+eTpy7R5mrhNTIni/gvwU9Lggs83fnSJQ85HloedNMUmT69hjaQVgB
-	WVctuyWlJocKq5BZuKfqHP6LIp2mqK/gOHWaUWfabNEL19pz0Af+XFymMA1gQl7YaLtn
-	8J+HnbKGfl7lz7i1pGQOD5dOioIOqlRTwgQb2oQvcYKkyj5t24ieTCrSJDyKhrv4Lyfr
-	iKAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=SQNf0EHKmiN9YPi+QWeg0Xh2Jm8o5/I9+X+nWYWZ3FA=;
-	b=Ir6L3HRHP/BE4IoHZaTmV2laQljJw8df1eh4cXaArQG3TqVoOpbmAKRjCUuaX31dKO
-	7wer5fN43L0weJ41afvrRFcojILFoS+LwUDrlfHGSLp/y+gU0hmnP4t3NbP4dRQHmqDR
-	Pc70MryC5D2xcZCpFOhN2oI8HqQp5I8bhNq4PU7LuuXfTTyhpxR3mN8VTKg5rNk61/kb
-	7Nc5BtbZxiRskyn5unIf/f6EoZ+gvOhrNOZhiCf1PYRId/UHu5rhGvY/jM268lv9lKLm
-	zlphG7giuRisYbyP9A2aX3s+OJRWZ8zsLgCRArixKCYM6tYKh/4F/6IOyk8uji5emhb6
-	gX/g==
-X-Gm-Message-State: ALyK8tJMOqZEO49kK7dX35Fj/5423lzmw0Oy1/qRxLtYfawyUHMIWX9fnQptTt5gO32CGOB63q5IEm59gT6Mxw==
-X-Received: by 10.31.9.65 with SMTP id 62mr1589912vkj.89.1466677978765; Thu,
-	23 Jun 2016 03:32:58 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.176.3.72 with HTTP; Thu, 23 Jun 2016 03:32:58 -0700 (PDT)
-In-Reply-To: <1466670841-22706-2-git-send-email-jussi.kukkonen@intel.com>
+	Thu, 23 Jun 2016 12:32:51 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u5NCWpXI021807
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 23 Jun 2016 05:32:51 -0700 (PDT)
+Received: from tal.localnet (128.224.22.147) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Thu, 23 Jun 2016 05:32:50 -0700
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: Jussi Kukkonen <jussi.kukkonen@intel.com>
+Date: Thu, 23 Jun 2016 08:32:48 -0400
+Message-ID: <1553881.KNAJ9boN2U@tal>
+Organization: Wind River 
+User-Agent: KMail/4.13.3 (Linux/3.13.0-88-generic; KDE/4.13.3; x86_64; ; )
+In-Reply-To: <1466670841-22706-1-git-send-email-jussi.kukkonen@intel.com>
 References: <1466670841-22706-1-git-send-email-jussi.kukkonen@intel.com>
-	<1466670841-22706-2-git-send-email-jussi.kukkonen@intel.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Thu, 23 Jun 2016 12:32:58 +0200
-Message-ID: <CALbNGRRAop9c=z-6i_sOKU3-1u+JCJ=4OOmzo_sn4jPgfRKG5A@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Cc: mark.asselstine@windriver.com
-Subject: Re: [meta-oe][PATCH 2/2] Update vte users to use vte9
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 1/2] vte9: Add old vte into meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,77 +34,247 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jun 2016 10:32:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 23 Jun 2016 12:32:52 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Thu, Jun 23, 2016 at 10:34 AM, Jussi Kukkonen
-<jussi.kukkonen@intel.com> wrote:
-> geany-plugins seems to compile fine with new vte: that recipe was
-> not modified. gnome-terminal and valaterminal are currently
-> blacklisted for other reasons.
->
+On June 23, 2016 11:34:00 Jussi Kukkonen wrote:
+> vte versioning is a little confusing:
+> 
+> vte-2.91.pc (version 0.44.1)
+>     provided by oe-core "vte"
+> vte-2.90.pc (current version 0.36.3)
+>     not in openembedded, can be patched to use "vte"
+> vte.pc (current version 0.28.2):
+>     provided by meta-oe "vte9" (naming from debian)
+> 
 > Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
 > ---
->  meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb       | 2 +-
->  meta-oe/recipes-support/toscoterm/toscoterm_git.bb            | 2 +-
->  meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb    | 2 +-
->  meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb | 2 +-
->  4 files changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb b/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
-> index ae28ffd..18e74da 100644
-> --- a/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
-> +++ b/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
-> @@ -1,7 +1,7 @@
->  SUMMARY = "GNOME Terminal"
->  LICENSE = "GPL-2.0"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=5b51eba4ba4cafe64073227530c061ed"
-> -DEPENDS = "gtk+ glib-2.0 startup-notification dbus-glib vte gnome-doc-utils intltool-native"
-> +DEPENDS = "gtk+ glib-2.0 startup-notification dbus-glib vte9 gnome-doc-utils intltool-native"
->  PR = "r1"
->
->  inherit gnome
-> diff --git a/meta-oe/recipes-support/toscoterm/toscoterm_git.bb b/meta-oe/recipes-support/toscoterm/toscoterm_git.bb
-> index 24f813b..6b31fd6 100644
-> --- a/meta-oe/recipes-support/toscoterm/toscoterm_git.bb
-> +++ b/meta-oe/recipes-support/toscoterm/toscoterm_git.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "A very small and simple terminal emulator"
->  SECTION = "x11/applications"
-> -DEPENDS = "vte"
-> +DEPENDS = "vte9"
->
->  LICENSE = "GPLv3"
->  LIC_FILES_CHKSUM = "file://main.c;start_line=5;end_line=16;md5=9ae4bf20caf291afa94530026bd15229"
-> diff --git a/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb b/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
-> index 07ff318..ef0cfaf 100644
-> --- a/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
-> +++ b/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
-> @@ -1,6 +1,6 @@
->  SUMMARY = "A lightweight Terminal Emulator based on libvte, written in Vala"
->  SECTION = "x11/applications"
-> -DEPENDS = "vte intltool-native"
-> +DEPENDS = "vte9 intltool-native"
->  SRCREV = "0fefa38087581f85fa0631b40500b9428369c146"
->  LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
-> diff --git a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb
-> index 1049b27..22b81af 100644
-> --- a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb
-> +++ b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb
-> @@ -1,7 +1,7 @@
->  SUMMARY = "Terminal emulator for the Xfce desktop environment"
->  LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> -DEPENDS = "glib-2.0 gtk+ vte libxfce4ui"
-> +DEPENDS = "glib-2.0 gtk+ vte9 libxfce4ui"
->
->  inherit xfce-app
->
-> --
-> 2.1.4
->
-Have not time for test but to say thanks :)
 
-Andreas
+This was on my TODO list to get done this morning but it looks like you beat 
+me to it. The remaining items on my todo list thank you.
+
+Mark
+
+>  meta-oe/recipes-gnome/vte9/vte9.inc                |  19 +++
+>  .../recipes-gnome/vte9/vte9/cve-2012-2738.patch    | 136
+> +++++++++++++++++++++ .../vte9/vte9/obsolete_automake_macros.patch       | 
+> 14 +++
+>  meta-oe/recipes-gnome/vte9/vte9_0.28.2.bb          |  12 ++
+>  4 files changed, 181 insertions(+)
+>  create mode 100644 meta-oe/recipes-gnome/vte9/vte9.inc
+>  create mode 100644 meta-oe/recipes-gnome/vte9/vte9/cve-2012-2738.patch
+>  create mode 100644
+> meta-oe/recipes-gnome/vte9/vte9/obsolete_automake_macros.patch create mode
+> 100644 meta-oe/recipes-gnome/vte9/vte9_0.28.2.bb
+> 
+> diff --git a/meta-oe/recipes-gnome/vte9/vte9.inc
+> b/meta-oe/recipes-gnome/vte9/vte9.inc new file mode 100644
+> index 0000000..6a5c63c
+> --- /dev/null
+> +++ b/meta-oe/recipes-gnome/vte9/vte9.inc
+> @@ -0,0 +1,19 @@
+> +SUMMARY = "Virtual terminal emulator GTK+ widget library"
+> +BUGTRACKER = "https://bugzilla.gnome.org/buglist.cgi?product=vte"
+> +LICENSE = "LGPLv2.0"
+> +DEPENDS = " glib-2.0 gtk+ intltool-native ncurses"
+> +RDEPENDS_libvte = "vte-termcap"
+> +
+> +# help gnomebase get the SRC_URI correct
+> +GNOMEBN = "vte"
+> +S = "${WORKDIR}/vte-${PV}"
+> +
+> +inherit gnome gtk-doc distro_features_check upstream-version-is-even
+> gobject-introspection +ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
+> +
+> +EXTRA_OECONF = "--disable-python"
+> +
+> +PACKAGES =+ "libvte9 vte9-termcap"
+> +FILES_libvte9 = "${libdir}/*.so.* ${libexecdir}/gnome-pty-helper"
+> +FILES_vte9-termcap = "${datadir}/vte/termcap-0.0"
+> +
+> diff --git a/meta-oe/recipes-gnome/vte9/vte9/cve-2012-2738.patch
+> b/meta-oe/recipes-gnome/vte9/vte9/cve-2012-2738.patch new file mode 100644
+> index 0000000..9b99803
+> --- /dev/null
+> +++ b/meta-oe/recipes-gnome/vte9/vte9/cve-2012-2738.patch
+> @@ -0,0 +1,136 @@
+> +Upstream-Status: Backport
+> +CVE: CVE-2012-2738
+> +Signed-off-by: Ross Burton <ross.burton@intel.com>
+> +
+> +From e524b0b3bd8fad844ffa73927c199545b892cdbd Mon Sep 17 00:00:00 2001
+> +From: Christian Persch <chpe@gnome.org>
+> +Date: Sat, 19 May 2012 19:36:09 +0200
+> +Subject: [PATCH 1/2] emulation: Limit integer arguments to 65535
+> +
+> +To guard against malicious sequences containing excessively big numbers,
+> +limit all parsed numbers to 16 bit range. Doing this here in the parsing
+> +routine is a catch-all guard; this doesn't preclude enforcing
+> +more stringent limits in the handlers themselves.
+> +
+> +https://bugzilla.gnome.org/show_bug.cgi?id=676090
+> +---
+> + src/table.c  | 2 +-
+> + src/vteseq.c | 2 +-
+> + 2 files changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/src/table.c b/src/table.c
+> +index 140e8c8..85cf631 100644
+> +--- a/src/table.c
+> ++++ b/src/table.c
+> +@@ -550,7 +550,7 @@ _vte_table_extract_numbers(GValueArray **array,
+> + 		if (G_UNLIKELY (*array == NULL)) {
+> + 			*array = g_value_array_new(1);
+> + 		}
+> +-		g_value_set_long(&value, total);
+> ++		g_value_set_long(&value, CLAMP (total, 0, G_MAXUSHORT));
+> + 		g_value_array_append(*array, &value);
+> + 	} while (i++ < arginfo->length);
+> + 	g_value_unset(&value);
+> +diff --git a/src/vteseq.c b/src/vteseq.c
+> +index 7ef4c8c..10991db 100644
+> +--- a/src/vteseq.c
+> ++++ b/src/vteseq.c
+> +@@ -557,7 +557,7 @@ vte_sequence_handler_multiple(VteTerminal *terminal,
+> +                               GValueArray *params,
+> +                               VteTerminalSequenceHandler handler)
+> + {
+> +-        vte_sequence_handler_multiple_limited(terminal, params, handler,
+> G_MAXLONG); ++        vte_sequence_handler_multiple_limited(terminal,
+> params, handler, G_MAXUSHORT); + }
+> +
+> + static void
+> +--
+> +2.4.9 (Apple Git-60)
+> +
+> +
+> +From cf1ad453a8def873c49cf6d88162593402f32bb2 Mon Sep 17 00:00:00 2001
+> +From: Christian Persch <chpe@gnome.org>
+> +Date: Sat, 19 May 2012 20:04:12 +0200
+> +Subject: [PATCH 2/2] emulation: Limit repetitions
+> +
+> +Don't allow malicious sequences to cause excessive repetitions.
+> +
+> +https://bugzilla.gnome.org/show_bug.cgi?id=676090
+> +---
+> + src/vteseq.c | 25 ++++++++++++++++++-------
+> + 1 file changed, 18 insertions(+), 7 deletions(-)
+> +
+> +diff --git a/src/vteseq.c b/src/vteseq.c
+> +index 10991db..209522f 100644
+> +--- a/src/vteseq.c
+> ++++ b/src/vteseq.c
+> +@@ -1392,7 +1392,7 @@ vte_sequence_handler_dc (VteTerminal *terminal,
+> GValueArray *params) + static void
+> + vte_sequence_handler_DC (VteTerminal *terminal, GValueArray *params)
+> + {
+> +-	vte_sequence_handler_multiple(terminal, params, vte_sequence_handler_dc);
+> ++	vte_sequence_handler_multiple_r(terminal, params,
+> vte_sequence_handler_dc); + }
+> +
+> + /* Delete a line at the current cursor position. */
+> +@@ -1785,7 +1785,7 @@ vte_sequence_handler_reverse_index (VteTerminal
+> *terminal, GValueArray *params) + static void
+> + vte_sequence_handler_RI (VteTerminal *terminal, GValueArray *params)
+> + {
+> +-	vte_sequence_handler_multiple(terminal, params, vte_sequence_handler_nd);
+> ++	vte_sequence_handler_multiple_r(terminal, params,
+> vte_sequence_handler_nd); + }
+> +
+> + /* Save cursor (position). */
+> +@@ -2777,8 +2777,7 @@ vte_sequence_handler_insert_lines (VteTerminal
+> *terminal, GValueArray *params) + {
+> + 	GValue *value;
+> + 	VteScreen *screen;
+> +-	long param, end, row;
+> +-	int i;
+> ++	long param, end, row, i, limit;
+> + 	screen = terminal->pvt->screen;
+> + 	/* The default is one. */
+> + 	param = 1;
+> +@@ -2796,7 +2795,13 @@ vte_sequence_handler_insert_lines (VteTerminal
+> *terminal, GValueArray *params) + 	} else {
+> + 		end = screen->insert_delta + terminal->row_count - 1;
+> + 	}
+> +-	/* Insert the new lines at the cursor. */
+> ++
+> ++	/* Only allow to insert as many lines as there are between this row
+> ++         * and the end of the scrolling region. See bug #676090.
+> ++         */
+> ++        limit = end - row + 1;
+> ++        param = MIN (param, limit);
+> ++
+> + 	for (i = 0; i < param; i++) {
+> + 		/* Clear a line off the end of the region and add one to the
+> + 		 * top of the region. */
+> +@@ -2817,8 +2822,7 @@ vte_sequence_handler_delete_lines (VteTerminal
+> *terminal, GValueArray *params) + {
+> + 	GValue *value;
+> + 	VteScreen *screen;
+> +-	long param, end, row;
+> +-	int i;
+> ++	long param, end, row, i, limit;
+> +
+> + 	screen = terminal->pvt->screen;
+> + 	/* The default is one. */
+> +@@ -2837,6 +2841,13 @@ vte_sequence_handler_delete_lines (VteTerminal
+> *terminal, GValueArray *params) + 	} else {
+> + 		end = screen->insert_delta + terminal->row_count - 1;
+> + 	}
+> ++
+> ++        /* Only allow to delete as many lines as there are between this
+> row ++         * and the end of the scrolling region. See bug #676090. ++  
+>       */
+> ++        limit = end - row + 1;
+> ++        param = MIN (param, limit);
+> ++
+> + 	/* Clear them from below the current cursor. */
+> + 	for (i = 0; i < param; i++) {
+> + 		/* Insert a line at the end of the region and remove one from
+> +--
+> +2.4.9 (Apple Git-60)
+> +
+> diff --git a/meta-oe/recipes-gnome/vte9/vte9/obsolete_automake_macros.patch
+> b/meta-oe/recipes-gnome/vte9/vte9/obsolete_automake_macros.patch new file
+> mode 100644
+> index 0000000..6763d37
+> --- /dev/null
+> +++ b/meta-oe/recipes-gnome/vte9/vte9/obsolete_automake_macros.patch
+> @@ -0,0 +1,14 @@
+> +Upstream-Status: Submitted
+> [https://bugzilla.gnome.org/show_bug.cgi?id=691545] +
+> +Signed-off-by: Marko Lindqvist <cazfi74@gmail.com>
+> +diff -Nurd vte-0.28.2/gnome-pty-helper/configure.in
+> vte-0.28.2/gnome-pty-helper/configure.in +---
+> vte-0.28.2/gnome-pty-helper/configure.in	2010-07-15 20:08:44.000000000
+> +0300 ++++ vte-0.28.2/gnome-pty-helper/configure.in	2013-01-11
+> 14:50:34.971027440 +0200 +@@ -8,7 +8,6 @@
+> + AC_ISC_POSIX
+> + AC_PROG_CC
+> + AC_STDC_HEADERS
+> +-AM_PROG_CC_STDC
+> +
+> + if test -z "$enable_maintainer_mode"; then
+> +   enable_maintainer_mode=yes
+> diff --git a/meta-oe/recipes-gnome/vte9/vte9_0.28.2.bb
+> b/meta-oe/recipes-gnome/vte9/vte9_0.28.2.bb new file mode 100644
+> index 0000000..72bc9ec
+> --- /dev/null
+> +++ b/meta-oe/recipes-gnome/vte9/vte9_0.28.2.bb
+> @@ -0,0 +1,12 @@
+> +require vte9.inc
+> +
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
+> +
+> +SRC_URI += "file://obsolete_automake_macros.patch \
+> +            file://cve-2012-2738.patch \
+> +           "
+> +
+> +CFLAGS += "-D_GNU_SOURCE"
+> +
+> +SRC_URI[archive.md5sum] = "497f26e457308649e6ece32b3bb142ff"
+> +SRC_URI[archive.sha256sum] =
+> "86cf0b81aa023fa93ed415653d51c96767f20b2d7334c893caba71e42654b0ae"
+
 
