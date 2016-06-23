@@ -1,28 +1,23 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 053936014F
+Return-Path: <jussi.kukkonen@intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 3549A73172
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jun 2016 04:18:02 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 22 Jun 2016 21:18:04 -0700
+	Thu, 23 Jun 2016 08:35:05 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 23 Jun 2016 01:35:07 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.26,509,1459839600"; d="scan'208";a="1007895874"
-Received: from clim19-mobl.gar.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.255.149.148])
-	by fmsmga002.fm.intel.com with ESMTP; 22 Jun 2016 21:18:01 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: akuster808 <akuster808@gmail.com>
-Date: Thu, 23 Jun 2016 16:17:58 +1200
-Message-ID: <3397381.B6WPiHmTEs@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.10 (Linux/4.5.7-200.fc23.x86_64; KDE/4.14.20; x86_64; ;
-	)
-In-Reply-To: <576B32C7.6090209@gmail.com>
-References: <1466025817-30091-1-git-send-email-akuster@mvista.com>
-	<576B32C7.6090209@gmail.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][v2][PATCH] cpuset: add new python package
+X-IronPort-AV: E=Sophos;i="5.26,515,1459839600"; d="scan'208";a="993491465"
+Received: from theory.fi.intel.com ([10.237.72.196])
+	by fmsmga001.fm.intel.com with ESMTP; 23 Jun 2016 01:35:06 -0700
+From: Jussi Kukkonen <jussi.kukkonen@intel.com>
+To: openembedded-devel@lists.openembedded.org,
+	mark.asselstine@windriver.com
+Date: Thu, 23 Jun 2016 11:34:01 +0300
+Message-Id: <1466670841-22706-2-git-send-email-jussi.kukkonen@intel.com>
+X-Mailer: git-send-email 2.1.4
+In-Reply-To: <1466670841-22706-1-git-send-email-jussi.kukkonen@intel.com>
+References: <1466670841-22706-1-git-send-email-jussi.kukkonen@intel.com>
+Subject: [meta-oe][PATCH 2/2] Update vte users to use vte9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,68 +30,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jun 2016 04:18:04 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 23 Jun 2016 08:35:06 -0000
 
-Hi Armin,
+geany-plugins seems to compile fine with new vte: that recipe was
+not modified. gnome-terminal and valaterminal are currently
+blacklisted for other reasons.
 
-It didn't show up in the archives nor in my inbox, so I suspect it never made 
-it to the list for some reason.
+Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
+---
+ meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb       | 2 +-
+ meta-oe/recipes-support/toscoterm/toscoterm_git.bb            | 2 +-
+ meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb    | 2 +-
+ meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-Cheers,
-Paul
-
-On Wed, 22 Jun 2016 17:52:23 akuster808 wrote:
-> Ping.
-> 
-> I don't see this in the patch queue, was it removed, dropped or did I
-> mess up the submittal? Did I miss a response ?
-> 
-> regards,
-> Armin
-> 
-> On 06/15/2016 02:23 PM, Armin Kuster wrote:
-> > Signed-off-by: Armin Kuster <akuster@mvista.com>
-> > ---
-> > 
-> >  .../recipes-devtools/python/python-cpuset_1.5.7.bb | 23
-> >  ++++++++++++++++++++++ 1 file changed, 23 insertions(+)
-> >  create mode 100644 meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
-> > 
-> > diff --git a/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
-> > b/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb new file mode
-> > 100644
-> > index 0000000..8f6532c
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
-> > @@ -0,0 +1,23 @@
-> > +SUMMARY = "Cpuset is a Python application to make using the cpusets
-> > facilities in the Linux kernel easier" +SECTION = "devel/python"
-> > +LICENSE = "GPLv2"
-> > +LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-> > +
-> > +SRCNAME = "cpuset"
-> > +
-> > +SRC_URI = "https://github.com/lpechacek/${SRCNAME}/archive/v${PV}.tar.gz"
-> > +
-> > +SRC_URI[md5sum] = "6ad79b26ba03f559604d74513cc34392"
-> > +SRC_URI[sha256sum] =
-> > "32334e164415ed5aec83c5ffc3dc01c418406eb02d96d881fdfd495587ff0c01" +
-> > +S = "${WORKDIR}/${SRCNAME}-${PV}"
-> > +
-> > +inherit distutils
-> > +
-> > +RDEPENDS_${PN} = "\
-> > +    python-core \
-> > +    python-re \
-> > +    python-logging \
-> > +    python-textutils \
-> > +    python-unixadmin \
-> > +    "
-
+diff --git a/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb b/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
+index ae28ffd..18e74da 100644
+--- a/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
++++ b/meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "GNOME Terminal"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5b51eba4ba4cafe64073227530c061ed"
+-DEPENDS = "gtk+ glib-2.0 startup-notification dbus-glib vte gnome-doc-utils intltool-native"
++DEPENDS = "gtk+ glib-2.0 startup-notification dbus-glib vte9 gnome-doc-utils intltool-native"
+ PR = "r1"
+ 
+ inherit gnome
+diff --git a/meta-oe/recipes-support/toscoterm/toscoterm_git.bb b/meta-oe/recipes-support/toscoterm/toscoterm_git.bb
+index 24f813b..6b31fd6 100644
+--- a/meta-oe/recipes-support/toscoterm/toscoterm_git.bb
++++ b/meta-oe/recipes-support/toscoterm/toscoterm_git.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "A very small and simple terminal emulator"
+ SECTION = "x11/applications"
+-DEPENDS = "vte"
++DEPENDS = "vte9"
+ 
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://main.c;start_line=5;end_line=16;md5=9ae4bf20caf291afa94530026bd15229"
+diff --git a/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb b/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
+index 07ff318..ef0cfaf 100644
+--- a/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
++++ b/meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "A lightweight Terminal Emulator based on libvte, written in Vala"
+ SECTION = "x11/applications"
+-DEPENDS = "vte intltool-native"
++DEPENDS = "vte9 intltool-native"
+ SRCREV = "0fefa38087581f85fa0631b40500b9428369c146"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+diff --git a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb
+index 1049b27..22b81af 100644
+--- a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb
++++ b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Terminal emulator for the Xfce desktop environment"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+-DEPENDS = "glib-2.0 gtk+ vte libxfce4ui"
++DEPENDS = "glib-2.0 gtk+ vte9 libxfce4ui"
+ 
+ inherit xfce-app
+ 
 -- 
+2.1.4
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
