@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 618636080F
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B4C66080F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jun 2016 20:41:51 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id j2so17822027qkf.1
+	Thu, 23 Jun 2016 20:48:13 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id j2so17847660qkf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jun 2016 13:41:52 -0700 (PDT)
+	Thu, 23 Jun 2016 13:48:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=h7COA9+A3dK3P8c7YibSJJFw9gxl/m+I9/iknXHxvtM=;
-	b=URJF6QNlW3OwLjjLgvC+3zssYznw/DoInorByqH/npjkgkQlzwt6Kc87l36GyisgCm
-	I+3q2WbIe4hwphsOz255ctRXPxu8e1o9GNP4QbqQKnkWj7CAx1/+6mUrpfDRkxhaPs8s
-	LX8wI9jDTIYPyOnITt38Im/qfI7yqZ5pypqltWFmcNvy8PSoi9R8AR9blsF7IfHvqnX5
-	AcrGNTl1gvDOG/QizkNZC/UUrI1UqP1guTfaltFByyVqnh84WJwmOiW7bqmumYIqS1gV
-	f15TNDwhQqlChol5ZMqsFZTvPE6p+5XCJyToK9a6JBTggU+MGQCAog9RGATIvpXEOe1c
-	d9QA==
-X-Gm-Message-State: ALyK8tICaxnaf5Tq6g+1wS0VEAej4e85EGFy0nV2ABOss6gyH6Ly7VviXmTToyMM9pWgpg==
-X-Received: by 10.200.40.181 with SMTP id i50mr556052qti.89.1466714511853;
-	Thu, 23 Jun 2016 13:41:51 -0700 (PDT)
+	bh=RJtuVgS4TDYCqBGXa1WjqmRJVkf6r6PZpuiYnDJh1DA=;
+	b=NwZzuq/yoKBraCE2axlojhRKrnhWJwEmpyI1Y1vVtPO8x8s1OYS8MetuW/8zWR+y/h
+	8gn/YrFdIOxCsr7pB4nHXMGkt9fMfkpJktpqBuWpgeeZyqUuiV4MbRy6OO3VBPUonJFk
+	zCAYoAhObgWyFk2U1j5WIwaYZx1IcUrfyypFhyqYJtWULklS8ZnltMIr+sn84tGgO3oA
+	WHnOPmLcC2iTO3nIDqsebFJiGGHXd0x5768wwH7QIOrhdQ4Vw5U0M0Zh0IT1N+VSut40
+	WjFi674d7hIR/cn9n5bFbwI7XC8kTwJsg+sFRPTHFvGAFBoS0LgUMTk60X0F1KeFwgnD
+	z22w==
+X-Gm-Message-State: ALyK8tIasCJyBLOjww0VaTJqPbyyOWf6OoxzehKr7tNcg3txJNtT4wEJnwstQ6aZArIOhQ==
+X-Received: by 10.55.154.136 with SMTP id c130mr573114qke.79.1466714894265;
+	Thu, 23 Jun 2016 13:48:14 -0700 (PDT)
 Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
 	[73.172.178.168])
-	by smtp.gmail.com with ESMTPSA id 29sm764014qtx.4.2016.06.23.13.41.50
+	by smtp.gmail.com with ESMTPSA id x21sm753502qkx.12.2016.06.23.13.48.13
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 23 Jun 2016 13:41:51 -0700 (PDT)
+	Thu, 23 Jun 2016 13:48:13 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Jun 2016 16:41:43 -0400
-Message-Id: <1466714503-8983-1-git-send-email-derek@asterius.io>
+Date: Thu, 23 Jun 2016 16:48:07 -0400
+Message-Id: <1466714887-11968-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
 Cc: Derek Straka <derek@asterius.io>
-Subject: [meta-python][PATCH] python-pymisp: update to version 2.4.48.1
+Subject: [meta-python][PATCH] python-pyserial: update to version 3.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,45 +44,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jun 2016 20:41:52 -0000
+X-List-Received-Date: Thu, 23 Jun 2016 20:48:14 -0000
 
-  * Update license checksum for updated changelog
+ * Update license checksum for copyright year
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pymisp.inc               | 6 +++---
- .../python/{python-pymisp_2.4.36.bb => python-pymisp_2.4.48.1.bb}   | 0
- .../python/{python3-pymisp_2.4.36.bb => python3-pymisp_2.4.48.1.bb} | 0
+ meta-python/recipes-devtools/python/python-pyserial.inc             | 6 +++---
+ .../python/{python-pyserial_3.0.1.bb => python-pyserial_3.1.1.bb}   | 0
+ .../python/{python3-pyserial_3.0.1.bb => python3-pyserial_3.1.1.bb} | 0
  3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pymisp_2.4.36.bb => python-pymisp_2.4.48.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.36.bb => python3-pymisp_2.4.48.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-pyserial_3.0.1.bb => python-pyserial_3.1.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyserial_3.0.1.bb => python3-pyserial_3.1.1.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pymisp.inc b/meta-python/recipes-devtools/python/python-pymisp.inc
-index d765f4d..c49bf47 100644
---- a/meta-python/recipes-devtools/python/python-pymisp.inc
-+++ b/meta-python/recipes-devtools/python/python-pymisp.inc
-@@ -1,10 +1,10 @@
- DESCRIPTION = "Python API for MISP"
- HOMEPAGE = "https://github.com/MISP/PyMISP"
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=9e88f5bb83eea02852e3673b8c0c004a"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=f64d66a9942f5e2de6c06b0dab2764b3"
- PR = "r0"
+diff --git a/meta-python/recipes-devtools/python/python-pyserial.inc b/meta-python/recipes-devtools/python/python-pyserial.inc
+index 08eef74..a4c7728 100644
+--- a/meta-python/recipes-devtools/python/python-pyserial.inc
++++ b/meta-python/recipes-devtools/python/python-pyserial.inc
+@@ -1,6 +1,6 @@
+ SUMMARY = "Serial Port Support for Python"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=0051a0dc811ee3fdb17a2fd0be44f3ad"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d476d94926db6e0008a5b3860d1f5c0d"
  
--SRC_URI[md5sum] = "9da2b395cf6d00368d0a6b5b11f706dd"
--SRC_URI[sha256sum] = "22a05d2b442991df82eeadfd36b0f54e4e9514e228fdb0a01598184335fe3f4d"
-+SRC_URI[md5sum] = "581ec9d30e15b537dcb203f0756aa136"
-+SRC_URI[sha256sum] = "ba909f0d2186f10f59da383d9fccd20ce3d589b6ff243e7ea8a8ebbfce135f68"
+ # FIXME might stop packaging serialwin32 and serialjava files
  
- RDEPENDS_${PN} += " ${PYTHON_PN}-requests"
-diff --git a/meta-python/recipes-devtools/python/python-pymisp_2.4.36.bb b/meta-python/recipes-devtools/python/python-pymisp_2.4.48.1.bb
+@@ -10,7 +10,7 @@ RDEPENDS_${PN} = "\
+     ${PYTHON_PN}-stringold \
+ "
+ 
+-SRC_URI[md5sum] = "c8521e49f8852196aac39431e0901703"
+-SRC_URI[sha256sum] = "969cb6405d1d87f8960cf9c10f597ae58f85da2fb9769dba96f4aeeaade54656"
++SRC_URI[md5sum] = "2f72100de3e410b36d575e12e82e9d27"
++SRC_URI[sha256sum] = "d657051249ce3cbd0446bcfb2be07a435e1029da4d63f53ed9b4cdde7373364c"
+ 
+ inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-pyserial_3.0.1.bb b/meta-python/recipes-devtools/python/python-pyserial_3.1.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pymisp_2.4.36.bb
-rename to meta-python/recipes-devtools/python/python-pymisp_2.4.48.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.36.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.48.1.bb
+rename from meta-python/recipes-devtools/python/python-pyserial_3.0.1.bb
+rename to meta-python/recipes-devtools/python/python-pyserial_3.1.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyserial_3.0.1.bb b/meta-python/recipes-devtools/python/python3-pyserial_3.1.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.36.bb
-rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.48.1.bb
+rename from meta-python/recipes-devtools/python/python3-pyserial_3.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-pyserial_3.1.1.bb
 -- 
 1.9.1
 
