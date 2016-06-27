@@ -1,46 +1,23 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D2FD60043
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D36606E5CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Jun 2016 15:06:45 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id c74so11855997pfb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Jun 2016 08:06:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=1x/5w4EASsELUt7f5ZaN4lSpMifbdSLKWbogHOmUVK8=;
-	b=bSZr1mplh4VZyPafq8ROLFmPsnQgluy2SwoE1tnGvVRjU/hIReZcxx6NeGHiBL3pIp
-	uecec3Lie42OtXyFQi92+ZP9j/3dK8ZWnvln6ZZHVhSSDZIxQYaAVPWO6nJ0fIdBl4Qf
-	nHUSETvgyA4GBYLVRRWLLeN47EEbUr+vNnY8mKgfkb0/LMW81n7AJroVCdSV+FAx9+tB
-	rZh3dKhSsWSCnNZku3CZ0457zlKHJm6LSX2KH5B0tVkOxW4z+SYzsFfc04/+Ju08+fLs
-	jUJMkSzs6jZYz36QST/JZJz7ovR6KmfgX7Muf4XOTjnSL6/dGxcAmTIbCITotzd7mp4C
-	8bdw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=1x/5w4EASsELUt7f5ZaN4lSpMifbdSLKWbogHOmUVK8=;
-	b=Nx6ijnzeoOdXFTL+SChsxfdBji6cnEGlrSUBnysbvQPSwM1mxAWDhBKZOQn25Olyyp
-	K2ZKoGQoqePYbC+r4BOia0YDEEJX/NL7UUzbHImIniXJpXbqnaoYyNiBT/CIX/8wlJl0
-	sWjTac0eMbCB+EVMU9uTfuP7o+WT3XdVzyyxPrH19xlAx4NPx8ZJY22PadSCI4c5K12X
-	qggOaWlvEUAte0K7F/BaI8+XLFQHw4dG4AdS+7uCnSH177kJirqZrNV/HyYG4UbhNfQx
-	7MCAiVbbLZmmhgJLAc/pmxNsQm70U5yuZtatZXpybZeCrnFhkVl43caaRMixlW83+Yj6
-	xmpg==
-X-Gm-Message-State: ALyK8tIAstJmcYrhaLKtKfOG90Lu/B//aUK6m699ykhJAbVcp1g7Q3wiXlBZI9nK37djWw==
-X-Received: by 10.98.131.206 with SMTP id h197mr17117762pfe.124.1466867206381; 
-	Sat, 25 Jun 2016 08:06:46 -0700 (PDT)
-Received: from Pahoa2.hsd1.ca.comcast.net (c-76-20-92-207.hsd1.ca.comcast.net.
-	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	p187sm609594pfg.67.2016.06.25.08.06.43
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 25 Jun 2016 08:06:44 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	akuster@mvista.com
-Date: Sat, 25 Jun 2016 08:06:41 -0700
-Message-Id: <1466867201-27560-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-Subject: [meta-oe][PATCH] cpuset: add new python package
+	Mon, 27 Jun 2016 08:57:14 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u5R8vDQT012933
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Mon, 27 Jun 2016 01:57:13 -0700
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
+	Mon, 27 Jun 2016 01:57:12 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 27 Jun 2016 04:57:11 -0400
+Message-ID: <1467017831-170380-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] x11vnc: remove redundant RPATH to fix QA issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,46 +30,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Jun 2016 15:06:47 -0000
+X-List-Received-Date: Mon, 27 Jun 2016 08:57:16 -0000
+Content-Type: text/plain
 
-From: Armin Kuster <akuster@mvista.com>
+The useless rpath caused oe QA issue:
+...
+|ERROR: QA Issue: x11vnc: work/i586-poky-linux/x11vnc/0.9.13-r0/packages-split/
+x11vnc/usr/bin/x11vnc contains probably-redundant RPATH /usr/lib [useless-rpaths]
+...
 
-Signed-off-by: Armin Kuster <akuster@mvista.com>
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../recipes-devtools/python/python-cpuset_1.5.7.bb | 23 ++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
+ .../x11vnc/files/remove-redundant-RPATH.patch      | 71 ++++++++++++++++++++++
+ meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb   |  4 +-
+ 2 files changed, 74 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-graphics/x11vnc/files/remove-redundant-RPATH.patch
 
-diff --git a/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb b/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
+diff --git a/meta-oe/recipes-graphics/x11vnc/files/remove-redundant-RPATH.patch b/meta-oe/recipes-graphics/x11vnc/files/remove-redundant-RPATH.patch
 new file mode 100644
-index 0000000..8f6532c
+index 0000000..4b14c92
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "Cpuset is a Python application to make using the cpusets facilities in the Linux kernel easier"
-+SECTION = "devel/python"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++++ b/meta-oe/recipes-graphics/x11vnc/files/remove-redundant-RPATH.patch
+@@ -0,0 +1,71 @@
++From aaca2889c15abab52bfa8fa92b3add4b7d242bea Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Mon, 27 Jun 2016 04:44:14 -0400
++Subject: [PATCH] configure.ac: remove redundant RPATH
 +
-+SRCNAME = "cpuset"
++It caused oe QA issue:
++...
++|ERROR: QA Issue: x11vnc: work/i586-poky-linux/x11vnc/0.9.13-r0/packages-split/
++x11vnc/usr/bin/x11vnc contains probably-redundant RPATH /usr/lib [useless-rpaths]
++...
 +
-+SRC_URI = "https://github.com/lpechacek/${SRCNAME}/archive/v${PV}.tar.gz"
++Upstream-Status: Inappropriate [oe specific]
 +
-+SRC_URI[md5sum] = "6ad79b26ba03f559604d74513cc34392"
-+SRC_URI[sha256sum] = "32334e164415ed5aec83c5ffc3dc01c418406eb02d96d881fdfd495587ff0c01"
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ configure.ac | 11 +++++------
++ 1 file changed, 5 insertions(+), 6 deletions(-)
 +
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
++diff --git a/configure.ac b/configure.ac
++index 6f664d0..3cb1ea3 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -333,7 +333,7 @@ if test "x$with_crypto" != "xno" -a "x$with_ssl" != "xno"; then
++ 		if test "x$ld_minus_R" = "xno"; then
++ 			:
++ 		elif test "x$GCC" = "xyes"; then
++-			LDFLAGS="$LDFLAGS -Xlinker -R$with_ssl/lib"
+++			:
++ 		else
++ 			LDFLAGS="$LDFLAGS -R$with_ssl/lib"
++ 		fi
++@@ -450,7 +450,7 @@ if test ! -z "$with_system_libvncserver" -a "x$with_system_libvncserver" != "xno
++ 		if test "x$ld_minus_R" = "xno"; then
++ 			:
++ 		elif test "x$GCC" = "xyes"; then
++-			rflag="-Xlinker -R$with_system_libvncserver/lib"
+++			:
++ 		else
++ 			rflag="-R$with_system_libvncserver/lib"
++ 		fi
++@@ -487,7 +487,7 @@ new enough.
++ 		if test "x$ld_minus_R" = "xno"; then
++ 			:
++ 		elif test "x$GCC" = "xyes"; then
++-			rflag=" -Xlinker -R$rprefix/lib "
+++			:
++ 		else
++ 			rflag=" -R$rprefix/lib "
++ 		fi
++@@ -544,8 +544,7 @@ if test "x$with_jpeg" != "xno"; then
++ 		if test "x$ld_minus_R" = "xno"; then
++ 			:
++ 		elif test "x$GCC" = "xyes"; then
++-			# this is not complete... in general a rat's nest.
++-			LDFLAGS="$LDFLAGS -Xlinker -R$with_jpeg/lib"
+++			:
++ 		else
++ 			LDFLAGS="$LDFLAGS -R$with_jpeg/lib"
++ 		fi
++@@ -593,7 +592,7 @@ if test "x$with_zlib" != "xno" -a "x$with_libz" != "xno"; then
++ 		if test "x$ld_minus_R" = "xno"; then
++ 			:
++ 		elif test "x$GCC" = "xyes"; then
++-			LDFLAGS="$LDFLAGS -Xlinker -R$with_zlib/lib"
+++			:
++ 		else
++ 			LDFLAGS="$LDFLAGS -R$with_zlib/lib"
++ 		fi
++-- 
++2.8.1
 +
-+inherit distutils
-+
-+RDEPENDS_${PN} = "\
-+    python-core \
-+    python-re \
-+    python-logging \
-+    python-textutils \
-+    python-unixadmin \
-+    "
+diff --git a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
+index 64c8a5d..98a0734 100644
+--- a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
++++ b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
+@@ -9,7 +9,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f \
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/libvncserver/x11vnc/${PV}/x11vnc-${PV}.tar.gz\
+            file://starting-fix.patch \
+-           file://endian-fix.patch "
++           file://endian-fix.patch \
++           file://remove-redundant-RPATH.patch \
++"
+ 
+ SRC_URI[md5sum] = "a372ec4fe8211221547b1c108cf56e4c"
+ SRC_URI[sha256sum] = "f6829f2e629667a5284de62b080b13126a0736499fe47cdb447aedb07a59f13b"
 -- 
-2.3.5
+2.8.1
 
 
