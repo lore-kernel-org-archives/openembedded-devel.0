@@ -1,20 +1,24 @@
-Return-Path: <dmitry.rozhkov@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 795A4606D0
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 224C973189
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jun 2016 09:21:53 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga101.jf.intel.com with ESMTP; 27 Jun 2016 02:21:54 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.26,536,1459839600"; d="scan'208";a="1005817719"
-Received: from drozhkov-desk.fi.intel.com ([10.237.72.185])
-	by orsmga002.jf.intel.com with ESMTP; 27 Jun 2016 02:21:28 -0700
-From: Dmitry Rozhkov <dmitry.rozhkov@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Jun 2016 12:20:19 +0300
-Message-Id: <1467019219-11879-1-git-send-email-dmitry.rozhkov@linux.intel.com>
-X-Mailer: git-send-email 2.5.5
-Subject: [meta-oe][PATCH] libxfce4ui: Use native intltool for building the lib
+	Tue, 28 Jun 2016 05:52:55 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u5S5qt3s010754
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Jun 2016 22:52:56 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
+	Mon, 27 Jun 2016 22:52:55 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 28 Jun 2016 01:52:54 -0400
+Message-ID: <1467093174-75463-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.8.1
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH] libtevent: Add back the dependency on libcap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,30 +31,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jun 2016 09:21:55 -0000
+X-List-Received-Date: Tue, 28 Jun 2016 05:52:56 -0000
+Content-Type: text/plain
 
-Otherwise the dependency on intltool-dev is icluded
-mistakenly to RRECOMMENDS of the libxfce4ui-dev package.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Signed-off-by: Dmitry Rozhkov <dmitry.rozhkov@linux.intel.com>
+The dependency on libcap was removed by:
+418d59459148621d593054dc397335d24165a655
+"libtevent: rework dependencies for deterministic build"
+
+but in fact there was not a patch to properly avoid
+dependency on libcap then we got error:
+|In file included from ../lib/replace/test/testsuite.c:34:0:
+|../lib/replace/system/capability.h:40:28: fatal error: sys/capability.h: No such file or directory
+|compilation terminated.
+
+so add the dependency back.
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.12.1.bb | 2 +-
+ meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.12.1.bb b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.12.1.bb
-index 723c20d..a8758e3 100644
---- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.12.1.bb
-+++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.12.1.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Xfce4 Widget library and X Window System interaction"
- SECTION = "x11/libs"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=252890d9eee26aab7b432e8b8a616475"
--DEPENDS = "perl-native glib-2.0 gtk+ gtk+3 intltool libxfce4util xfconf xfce4-dev-tools virtual/libx11 libsm libice"
-+DEPENDS = "perl-native glib-2.0 gtk+ gtk+3 intltool-native libxfce4util xfconf xfce4-dev-tools virtual/libx11 libsm libice"
+diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb b/meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb
+index 3f5d7f4..28759ec 100644
+--- a/meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb
++++ b/meta-networking/recipes-support/libtevent/libtevent_0.9.28.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://tevent.samba.org"
+ SECTION = "libs"
+ LICENSE = "LGPLv3+"
  
- inherit xfce autotools gettext gtk-doc
+-DEPENDS += "libaio libbsd libtalloc"
++DEPENDS += "libaio libbsd libtalloc libcap"
+ RDEPENDS_python-tevent = "python"
  
+ SRC_URI = "http://samba.org/ftp/tevent/tevent-${PV}.tar.gz"
 -- 
-2.5.5
+2.8.1
 
 
