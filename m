@@ -1,47 +1,47 @@
 Return-Path: <ticotimo@gmail.com>
 Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
 	[209.85.215.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 80CB960119
+	by mail.openembedded.org (Postfix) with ESMTP id 718ED60119
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jun 2016 14:56:00 +0000 (UTC)
-Received: by mail-lf0-f67.google.com with SMTP id a2so2088913lfe.3
+	Tue, 28 Jun 2016 14:56:45 +0000 (UTC)
+Received: by mail-lf0-f67.google.com with SMTP id w130so2096247lfd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jun 2016 07:56:01 -0700 (PDT)
+	Tue, 28 Jun 2016 07:56:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=ZxYO3yadYZ0aRS+rerWnZK8iDqPaoG3iXeBROkQLIBw=;
-	b=krMcDxmEljs+NB6Ea3zSF6goaYNR/ZdL+naSIg7mb3ID6oJDdg/frzC5jig6Bqy9e8
-	EpHck8bDISQ0fMcdtRWXBVm17DNTcBlS92U2Hf47lU666gkvHMD0WlIatW4Gt4wS4Ex+
-	FE7cHvOZ1Unf/xejF0m1jRFhLmFvIJM8EWxgVN+I1LYjecXJ15pmaNGNwpUAY5rkbD1w
-	1zd3Ed55cmYoir5E3ZURpxhy7LJUGjhEXw9tG8cgI8JMnMWkJ5/lppahe9LdvX7CagEs
-	5OpdoZ/OL4j+mIJoP5uq0PfljI4dcDcmSs8VOTX8+00ZUQQnX0vKrHaS6k4kver7MutB
-	vn0Q==
+	bh=6dvz1o9adjdFxqRxGe+U5BPxOHqNIYrqmtL+YTYDEDQ=;
+	b=iZIr6SQgjOKKcAlllUUg5uAKB2i1jw+0ngXCFXbCE2H75ij2qeQXxhLSK7EBBJR8kI
+	vY7dGt3jD5gCOOestZ2/5/4zpSztj2wd1qCLqX1n9hGz0Mp6675fgg5Bk2BS18aaM0iW
+	XaXxTUyYDkw9J4K8bcjI97+rQR/v7+aCPH94OQFzKJv0O4ueulbKMi4N8pZZrCZwKKiR
+	F/Pt0KCcAZ5iE0lUdgcFtLYgixQuLIX3AXQc9V6/zhQu9oGe+hTIRIQFsJSlP2Z+601U
+	tvM0hgCi3WjtYdZrG8ieNPHigoJmpj8gfTy6gwPmxa3u6knzfakKDrTq0HwAg7ZfE0UA
+	hAOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=ZxYO3yadYZ0aRS+rerWnZK8iDqPaoG3iXeBROkQLIBw=;
-	b=lwoqz6krijjorZqKku5QCllOEM2So6DwvUIjfCBvGnDWgoETV8frc+gGYgNAKAIZVd
-	PAYP1mh04e4en6YGJjt92PeNf7T0HZvAMbuqwZAqOzY44cD/NGPRbVSyDYT5c7/5XvSQ
-	K1zE833geyzmKZXr/hb2PANg4TKG4D6xdAsk73NJs1yJtqPShqT7cd+mXV6MpEY81oSc
-	lUGC/Jd8ML/HR8/RM+UejNGnauO4jwnSCecVXzCBClXLagKqBUD+516S6E9dfYH+KjIi
-	ggWmJw5/nIAA2PFcINoeu2xwJkLigdyT3EyeypIB0mpfHafNq8wYNmYa4YUcdg0Z02jT
-	aZRw==
-X-Gm-Message-State: ALyK8tLLCWF+81UvW+p/9rtbjqbLiyICloTEozOcWAz/FsQTBaR8Ff3s3T6yn5RzHBFViHHhhgTD0o5OVQXscg==
-X-Received: by 10.25.159.8 with SMTP id i8mr1326116lfe.74.1467125759953; Tue,
-	28 Jun 2016 07:55:59 -0700 (PDT)
+	bh=6dvz1o9adjdFxqRxGe+U5BPxOHqNIYrqmtL+YTYDEDQ=;
+	b=RvPQMjSpq5nesTqsbKw5cxZzus3ISCSN0J+Lda1Nptwi/qNBAS7lBz4i3U9PqD6RR7
+	scVWhtUGeE3GNzqN1+yLrvw+rHSprpizNvD1uBtdUMjly665AXB67ymUyPy5z+GUwku9
+	84NvSGKn20qzQef8Iu3hFlNYTTHmPc4kpu/jN60BtXVpG1y3rIb5oVtWRxOTqoPlD+xb
+	JbQh330oCRuIfOa4RAjgY8j4Ew0JZ4vZ/wJ+2QKClvBgIguvXBSXwR2D2ud5Jwz0zuuK
+	PAvkYByqgPpW20nm+WaYxkkWAJbGD50juAXj8+wifZOh7WHkp4GcssI7zVb0EIW56D2V
+	hXcA==
+X-Gm-Message-State: ALyK8tIso9dDSvLacBo8JzDUDLoObWTUvt9P8zsSu5wo8I0SvmjGd7Af4Fpuy2HE2ZPoQfuvpVoUh5TPogQgjw==
+X-Received: by 10.25.4.202 with SMTP id 193mr1377344lfe.204.1467125805615;
+	Tue, 28 Jun 2016 07:56:45 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.25.23.39 with HTTP; Tue, 28 Jun 2016 07:55:59 -0700 (PDT)
-In-Reply-To: <1467102993-4925-2-git-send-email-mingli.yu@windriver.com>
+Received: by 10.25.23.39 with HTTP; Tue, 28 Jun 2016 07:56:45 -0700 (PDT)
+In-Reply-To: <1467102993-4925-3-git-send-email-mingli.yu@windriver.com>
 References: <1467102993-4925-1-git-send-email-mingli.yu@windriver.com>
-	<1467102993-4925-2-git-send-email-mingli.yu@windriver.com>
+	<1467102993-4925-3-git-send-email-mingli.yu@windriver.com>
 From: Tim Orling <ticotimo@gmail.com>
-Date: Tue, 28 Jun 2016 07:55:59 -0700
-Message-ID: <CANx9H-Bd94VW0SkM2=PN5LGKQ9EePa7bUO5wzX6PGP5wrJVs=g@mail.gmail.com>
+Date: Tue, 28 Jun 2016 07:56:45 -0700
+Message-ID: <CANx9H-BvJ1ONU6ebaEYR8NSaNdYhAioMuMxNmE6ntWTBn7ZBYQ@mail.gmail.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH 1/3] python-mccabe: Remove pytest
+Subject: Re: [PATCH 2/3] python-pbr: add python-pbr bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,89 +54,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jun 2016 14:56:01 -0000
+X-List-Received-Date: Tue, 28 Jun 2016 14:56:46 -0000
 Content-Type: text/plain; charset=UTF-8
 
 On Tue, Jun 28, 2016 at 1:36 AM, <mingli.yu@windriver.com> wrote:
 
 > From: Mingli Yu <mingli.yu@windriver.com>
 >
-> * Remove pytest to avoid dependency on python-runner
->   as only one file test_mccabe.py import pytest and this
->   test_mccabe.py file not install on our target eventually.
+> * Add python-pbr bb file as python-mock depends on
+>   python-pbr-native
 >
-> That "one file" is where all the tests are housed. Just because you don't
-plan to install the tests on target is no reason to disable testing. If
-anything we need to see more testing of recipes, not less. The solution is
-to add a recipe for the dependency of python-pytest-runner. Then you can
-inherit ptest and package the tests separately.
-
-
 > Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 > ---
->  .../python-mccabe-Remove-pytest.patch              | 32
+>  .../recipes-devtools/python/python-pbr_1.10.0.bb   | 22
 > ++++++++++++++++++++++
->  .../recipes-devtools/python/python-mccabe_0.4.0.bb |  1 +
->  2 files changed, 33 insertions(+)
->  create mode 100644
-> meta-python/recipes-devtools/python/python-mccabe/python-mccabe-Remove-pytest.patch
+>  1 file changed, 22 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python-pbr_1.10.0.bb
 >
-> diff --git
-> a/meta-python/recipes-devtools/python/python-mccabe/python-mccabe-Remove-pytest.patch
-> b/meta-python/recipes-devtools/python/python-mccabe/python-mccabe-Remove-pytest.patch
+> diff --git a/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
+> b/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
 > new file mode 100644
-> index 0000000..ebe70c5
+> index 0000000..4a08bde
 > --- /dev/null
-> +++
-> b/meta-python/recipes-devtools/python/python-mccabe/python-mccabe-Remove-pytest.patch
-> @@ -0,0 +1,32 @@
-> +From 7c0dc893cd3e57df16cf43d2c51c047997ea5c69 Mon Sep 17 00:00:00 2001
-> +From: Mingli Yu <mingli.yu@windriver.com>
-> +Date: Wed, 22 Jun 2016 02:33:48 +0000
-> +Subject: [PATCH] python-mccabe: Remove pytest
+> +++ b/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
+> @@ -0,0 +1,22 @@
+> +DESCRIPTION = "Python Build Reasonableness: PBR is a library that injects
+> some useful and sensible default behaviors into your setuptools run"
+> +HOMEPAGE = "https://pypi.python.org/pypi/pbr"
+> +SECTION = "devel/python"
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
 > +
-> +* Remove pytest to avoid dependency on python-runner
-> +  as only one file test_mccabe.py import pytest and this
-> +  test_mccabe.py file not install on our target eventually.
+> +SRCNAME = "pbr"
 > +
-> +Upstream-Status: Inappropriate[oe specific]
-> +
-> +Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-> +---
-> + setup.py | 2 --
-> + 1 file changed, 2 deletions(-)
-> +
-> +diff --git a/setup.py b/setup.py
-> +index e59903d..64c3ded 100644
-> +--- a/setup.py
-> ++++ b/setup.py
-> +@@ -33,8 +33,6 @@ setup(
-> +     license='Expat license',
-> +     py_modules=['mccabe'],
-> +     zip_safe=False,
-> +-    setup_requires=['pytest-runner'],
-> +-    tests_require=['pytest'],
-> +     entry_points={
-> +         'flake8.extension': [
-> +             'C90 = mccabe:McCabeChecker',
-> +--
-> +2.8.2
-> +
-> diff --git a/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
-> b/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
-> index 0958f75..1377446 100644
-> --- a/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
-> +++ b/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
-> @@ -3,6 +3,7 @@ HOMEPAGE = "https://github.com/dreamhost/cliff"
->  LICENSE = "Apache-2.0"
->  LIC_FILES_CHKSUM =
-> "file://README.rst;md5=f8b50fba1711ecac6bcdb6324f85a66d"
+> +SRC_URI = "
+> https://pypi.python.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz
+> "
 >
-> +SRC_URI = "file://python-mccabe-Remove-pytest.patch"
->  SRC_URI[md5sum] = "8c425db05f310adcd4bb174b991f26f5"
->  SRC_URI[sha256sum] =
-> "9a2b12ebd876e77c72e41ebf401cc2e7c5b566649d50105ca49822688642207b"
->
+
+You don't need to do this if you inherit pypi.
+
+
+> +
+> +SRC_URI[md5sum] = "8e4968c587268f030e38329feb9c8f17"
+> +SRC_URI[sha256sum] =
+> "186428c270309e6fdfe2d5ab0949ab21ae5f7dea831eab96701b86bd666af39c"
+> +
+> +S = "${WORKDIR}/${SRCNAME}-${PV}"
+> +
+> +inherit setuptools
+> +
+> +DEPENDS_class-target += " \
+> +        python-pip \
+> +        "
+> +
+> +BBCLASSEXTEND = "native"
 > --
 > 2.8.1
 >
