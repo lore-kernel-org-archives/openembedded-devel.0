@@ -1,25 +1,43 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B76E60616
+Return-Path: <piyush.mohabansi@gmail.com>
+Received: from mail-vk0-f45.google.com (mail-vk0-f45.google.com
+	[209.85.213.45])
+	by mail.openembedded.org (Postfix) with ESMTP id CC2A560107
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jun 2016 19:46:42 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u5UJkgm6029837
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Thu, 30 Jun 2016 21:38:52 +0000 (UTC)
+Received: by mail-vk0-f45.google.com with SMTP id c2so128830908vkg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jun 2016 12:46:42 -0700
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 30 Jun 2016 12:46:42 -0700
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <liezhi.yang@windriver.com>, 
-	<randy.macleod@windriver.com>
-Date: Thu, 30 Jun 2016 12:46:42 -0700
-Message-ID: <1467316002-12489-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
+	Thu, 30 Jun 2016 14:38:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:date:message-id:subject:from:to;
+	bh=zg3/IdlT36SGT4bNGeG2UPJ3OSHWY8objAJ2K63fYlg=;
+	b=mKUDQn7O70/dw9dO7Xlwbb1wJwgKCYEWihcjNRCQekFar5Bt4s9ATExrkvjudQz3uO
+	2I8VAWn3ZraGZAfRwWr9H5irWv00Rv+Y2oOMJnx+1zPcL4kwCjQCJdQhbP65V1AfU+1t
+	yDL/Hl5RmOS30eOVgqits1yGJzpcSaVXX9Fc9wA3E1tQLlXB0zmcFF+TTzPwmkvMQXMk
+	vHxVNqBzvuOcE60OCEO/JJJaeruHDKEMa6APCTMWbrpawZQwOTfiO8O5LDqsxhb8WKJi
+	gLAVZJIDiW5IoFRx/NNJcEYin814zgGlrBd6jZXZuQr5IoHvW3InY+qh9ES/ex7vNHl3
+	1Tcw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:date:message-id:subject:from:to;
+	bh=zg3/IdlT36SGT4bNGeG2UPJ3OSHWY8objAJ2K63fYlg=;
+	b=cx66mvs8uvPTBriCahbVWz8XTes5u9tAAGg1EPiOCUNGdh1Rzv7QLTznbeJdnEGXF7
+	jabPzWQyY6weefWIKZhOG1QagPGuREDu64MPe53FEJ08lA21Ow5OOHDTgP8iHdMmERNa
+	q0fsuFituRrfKe/ejUdHH7S3R+b1Zx3aetDhvukL+O/imNriiSjc5qwjxHcob9TMJvrR
+	aDyHeSoqhyAKyN458cVL3Gqo9Wjmb7AoEdfvvWt8j/61LddZt5I4OFi5XvLkU1i9R4Xz
+	i1mmFACEFN86e0ezpfg6kMeAal8rtcrHurNx0Igj7oC8YbgLubjFDNQuE9xrcwuP7DWy
+	XWcw==
+X-Gm-Message-State: ALyK8tKv/oCqBnXf2BgoVnYW/tKaVqNDQWEK1L/SDrqJsBj1aGQUhQ0DpJlU4fXZSfT3FjSRSSZIL3CQL5xPTA==
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/1] openconnect: PACKAGECONFIG certain dependencies
+X-Received: by 10.31.83.197 with SMTP id h188mr7863450vkb.23.1467322733467;
+	Thu, 30 Jun 2016 14:38:53 -0700 (PDT)
+Received: by 10.103.71.1 with HTTP; Thu, 30 Jun 2016 14:38:53 -0700 (PDT)
+Date: Thu, 30 Jun 2016 17:38:53 -0400
+Message-ID: <CA+1cOABFhC+k0YBVxpCSyMTTv2Kmy3qOK-W6EQzi2hxgo5+D5g@mail.gmail.com>
+From: Piyush Mohabansi <piyush.mohabansi@gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-qt5] how enable WebGL or Canvas3D
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,45 +50,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jun 2016 19:46:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 30 Jun 2016 21:38:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Some items now in DEPENDS are configuration options,
-so we create PACKAGECONFIG[] entries for them.
+Hi,
 
-We do not select pcsc-lite by default because it is
-GPLv3.
+I'm new to yocto project and I'm trying to demonstrate webgl or canvas3D qt
+capability. I'm able to build the project. But when I try to run the
+application it says the webgl or canvas3D is not enabled or no support is
+available.
 
-Signed-off-by: Joe Slater <jslater@windriver.com>
----
- .../openconnect/openconnect_git.bb                 |   13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+Need your kind help in this regards or if you know who can help me with my
+query then please pass on the contact info.
 
-diff --git a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
-index 6d3c252..e81165c 100644
---- a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
-+++ b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
-@@ -2,8 +2,17 @@ SUMMARY = "Open client for Cisco AnyConnect VPN"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=243b725d71bb5df4a1e5920b344b86ad"
- 
--DEPENDS = "vpnc libxml2 gnutls lz4 krb5 libproxy pcsc-lite"
--RDEPENDS_${PN} = "vpnc"
-+DEPENDS = "vpnc libxml2 krb5"
-+
-+PACKAGECONFIG ??= "gnutls lz4 libproxy"
-+
-+# config defaults
-+PACKAGECONFIG[gnutls] = ",--without-gnutls,gnutls,"
-+PACKAGECONFIG[lz4] = ",--without-lz4,lz4,"
-+PACKAGECONFIG[libproxy] = ",--without-libproxy,libproxy,"
-+
-+# not config defaults
-+PACKAGECONFIG[pcsc-lite] = ",--without-libpcsclite,pcsc-lite,"
- 
- PV = "7.06"
- 
--- 
-1.7.9.5
+Thank you for your help & support here.
 
+Kind regards,
+Piyush
 
