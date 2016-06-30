@@ -1,43 +1,48 @@
-Return-Path: <piyush.mohabansi@gmail.com>
-Received: from mail-vk0-f45.google.com (mail-vk0-f45.google.com
-	[209.85.213.45])
-	by mail.openembedded.org (Postfix) with ESMTP id CC2A560107
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jun 2016 21:38:52 +0000 (UTC)
-Received: by mail-vk0-f45.google.com with SMTP id c2so128830908vkg.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jun 2016 14:38:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:date:message-id:subject:from:to;
-	bh=zg3/IdlT36SGT4bNGeG2UPJ3OSHWY8objAJ2K63fYlg=;
-	b=mKUDQn7O70/dw9dO7Xlwbb1wJwgKCYEWihcjNRCQekFar5Bt4s9ATExrkvjudQz3uO
-	2I8VAWn3ZraGZAfRwWr9H5irWv00Rv+Y2oOMJnx+1zPcL4kwCjQCJdQhbP65V1AfU+1t
-	yDL/Hl5RmOS30eOVgqits1yGJzpcSaVXX9Fc9wA3E1tQLlXB0zmcFF+TTzPwmkvMQXMk
-	vHxVNqBzvuOcE60OCEO/JJJaeruHDKEMa6APCTMWbrpawZQwOTfiO8O5LDqsxhb8WKJi
-	gLAVZJIDiW5IoFRx/NNJcEYin814zgGlrBd6jZXZuQr5IoHvW3InY+qh9ES/ex7vNHl3
-	1Tcw==
+Return-Path: <mhalstead@linuxfoundation.org>
+Received: from mail-pa0-f45.google.com (mail-pa0-f45.google.com
+	[209.85.220.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C41B60616
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Jun 2016 23:03:07 +0000 (UTC)
+Received: by mail-pa0-f45.google.com with SMTP id hl6so32501598pac.2
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Jun 2016 16:03:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linuxfoundation.org; s=google;
+	h=to:from:subject:message-id:date:user-agent:mime-version
+	:content-transfer-encoding;
+	bh=JdyA5e9e8cGPSPva1gKfq9rs7DpFmLWV//og5oxYWKM=;
+	b=WOO8wEwo2MAl3Rjc0JR7Ax3WHFP+Un2BoM99L5DOwsnEdqlGUF2EYIYgGILC5Djc4y
+	sfhOkONj6yTOwjhpjqzPyNJJfDLuMO89jESah3yVM0f4yAIXg0evQ6nLYBoQOlU3Egz8
+	LmD7+IiYU2FzNaIZm9inUEqezL3jOtpp5MCXU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:date:message-id:subject:from:to;
-	bh=zg3/IdlT36SGT4bNGeG2UPJ3OSHWY8objAJ2K63fYlg=;
-	b=cx66mvs8uvPTBriCahbVWz8XTes5u9tAAGg1EPiOCUNGdh1Rzv7QLTznbeJdnEGXF7
-	jabPzWQyY6weefWIKZhOG1QagPGuREDu64MPe53FEJ08lA21Ow5OOHDTgP8iHdMmERNa
-	q0fsuFituRrfKe/ejUdHH7S3R+b1Zx3aetDhvukL+O/imNriiSjc5qwjxHcob9TMJvrR
-	aDyHeSoqhyAKyN458cVL3Gqo9Wjmb7AoEdfvvWt8j/61LddZt5I4OFi5XvLkU1i9R4Xz
-	i1mmFACEFN86e0ezpfg6kMeAal8rtcrHurNx0Igj7oC8YbgLubjFDNQuE9xrcwuP7DWy
-	XWcw==
-X-Gm-Message-State: ALyK8tKv/oCqBnXf2BgoVnYW/tKaVqNDQWEK1L/SDrqJsBj1aGQUhQ0DpJlU4fXZSfT3FjSRSSZIL3CQL5xPTA==
+	h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+	:mime-version:content-transfer-encoding;
+	bh=JdyA5e9e8cGPSPva1gKfq9rs7DpFmLWV//og5oxYWKM=;
+	b=dNbU5ZmhDl14x3J6LXet4AxPzL/XqZ3N/+jjPvYpbQwpzpE0A53hVm665XL68poi6z
+	IA5OwsFVJRUCVUBITAquHP8yaVX0rjVMqPR4CdO56HLdzmKnlwm2TpnM1i/s3Wn5Dfy/
+	bagO/hRfqNhh2oU1qKxFoogVhe4ddsYoBvFSriAwDOmqs2Qb38gnXKd7S6yLZtid3JAo
+	a2GlHUzSSi1Mfl90zIC/rs6FyKmdTL+kqAeXpTe85OM1EMxGhm2Tx1r5z8etpOlK2dyd
+	qUhqisroLhiooCpTSaN1U/yVQK8WGA4uGYsESEeTeRc+Gf/JTdTjr9U79ss81QL3+IFQ
+	nGqg==
+X-Gm-Message-State: ALyK8tLDnuXD/EgdkWS42Jgs8jzeBzsRGYFP0rNVr0DqBr+hQOUIaizihTAk4FYDbQVczch8
+X-Received: by 10.66.234.65 with SMTP id uc1mr25495792pac.81.1467327788549;
+	Thu, 30 Jun 2016 16:03:08 -0700 (PDT)
+Received: from yct-desktop.lan ([2001:470:b:16e:222:4dff:fe50:c906])
+	by smtp.gmail.com with ESMTPSA id s12sm168716pfj.57.2016.06.30.16.03.07
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 30 Jun 2016 16:03:07 -0700 (PDT)
+To: bitbake-devel@lists.openembedded.org,
+	Openembedded-core@lists.openembedded.org,
+	Openembedded-devel@lists.openembedded.org, yocto@yoctoproject.org
+From: Michael Halstead <mhalstead@linuxfoundation.org>
+Message-ID: <ae4e2654-ca20-85d1-d53b-b0b05ab25a26@linuxfoundation.org>
+Date: Thu, 30 Jun 2016 16:03:06 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.1.1
 MIME-Version: 1.0
-X-Received: by 10.31.83.197 with SMTP id h188mr7863450vkb.23.1467322733467;
-	Thu, 30 Jun 2016 14:38:53 -0700 (PDT)
-Received: by 10.103.71.1 with HTTP; Thu, 30 Jun 2016 14:38:53 -0700 (PDT)
-Date: Thu, 30 Jun 2016 17:38:53 -0400
-Message-ID: <CA+1cOABFhC+k0YBVxpCSyMTTv2Kmy3qOK-W6EQzi2hxgo5+D5g@mail.gmail.com>
-From: Piyush Mohabansi <piyush.mohabansi@gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-qt5] how enable WebGL or Canvas3D
+Subject: Patchwork upgrade tonight
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,21 +55,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jun 2016 21:38:55 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 30 Jun 2016 23:03:09 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Hi,
+After 2 weeks of testing and some performance tuning we are going to
+proceed with the Patchwork upgrade. Data entered into the current
+version in the next few hours may need to be re-entered after the upgrade.
 
-I'm new to yocto project and I'm trying to demonstrate webgl or canvas3D qt
-capability. I'm able to build the project. But when I try to run the
-application it says the webgl or canvas3D is not enabled or no support is
-available.
+All features of the current Patchwork install work in the new version.
+So while there are still issues surrounding detection of patch series
+there are no known regressions. Series detection can be addressed after
+the upgrade.
 
-Need your kind help in this regards or if you know who can help me with my
-query then please pass on the contact info.
+The rollback plan can be executed very quickly if needed.
 
-Thank you for your help & support here.
+Please reach out if you have concerns.
 
-Kind regards,
-Piyush
+-- 
+Michael Halstead
+Linux Foundation / SysAdmin
 
