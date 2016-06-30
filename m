@@ -1,58 +1,48 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-vk0-f47.google.com (mail-vk0-f47.google.com
-	[209.85.213.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 70D916E630
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qk0-f175.google.com (mail-qk0-f175.google.com
+	[209.85.220.175])
+	by mail.openembedded.org (Postfix) with ESMTP id B61F86FEE0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jun 2016 15:04:29 +0000 (UTC)
-Received: by mail-vk0-f47.google.com with SMTP id k68so26891646vkb.0
+	Thu, 30 Jun 2016 15:08:36 +0000 (UTC)
+Received: by mail-qk0-f175.google.com with SMTP id j2so95719981qkf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jun 2016 08:04:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to; 
-	bh=DO0cJoF09i2VkDCjGlMpJgf++RHMEs6rhR2OAbbpldA=;
-	b=rDxgGOruuvJxO989R0J916L7MhJ1GSqa1Ld6FORPn+9EHvas4MKq1xB11akby0zztE
-	3ORC7urtq5x38onxTG0E+KtogTyOjrAHQ/wOKNMr4VUdmAulwt63SSr2Y7JnXrD6Uy1E
-	yR4v5sO1pX1Cp8yzqQQoUXbORAZjsQiWFIIqVhR1HCSV87RKfuzOR/DV66D5GqFb2Z9P
-	mvrpbMqBVUnCtPyoadpS9vodhUicPcrZ+3fg4sfNOWMSodVWmMqvRnrrsDA0/qPQ+bzM
-	cnptadHVxSI+f9zAXv3lSWkQ73kwskMD+SZ9JnmWGy0AXks0tM9wG0vFZSUUzavFXVb5
-	dxEw==
+	Thu, 30 Jun 2016 08:08:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:from:date:to:subject:user-agent;
+	bh=OJSwsg9Micgcwn27MM0kCs2t6omuPS50EI4Kf/W8vI8=;
+	b=Ez24/2HocMxnBH++57dKY+Sw2t8MR++odVv4wntOgZvCMXqDe83hcI0Ct8UJ1al+H4
+	3mzPotnrzrQYu9dPPARYpfoapZIVO8vDR8S7F+/lHZRXc0AcefxzrzA8N5OAmNE2fRYl
+	2EaqkkUQskttYvsiF327nFJ46bWhTy8Vt9vayqAGVZyNuqtACpocwbBVdTm6Hv+aTNYl
+	JwDQz/+Umrd/PnQrTasNrzuW79mQUPhuvLChlWw5Lj8IRPWDRYRRZET+4b3HC5dUjMNH
+	i/ZNsbrwtPmGRAlLsfNI1e6eioIbbfyXzN5uuk7pzB3drQJHwXqr6ISaLxQHBmRNlOjD
+	FA7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to;
-	bh=DO0cJoF09i2VkDCjGlMpJgf++RHMEs6rhR2OAbbpldA=;
-	b=k5Hpezs/OApz/BWc3/6LZsZFkKkYE+Add3qsXnOAE6S5k1q0H1XY3t2HhUzRF5n7ka
-	ZNVaKW/g+V2ktwgGy+q6lkUQAqnTHL79f9/wujjdnXsaGKbiX8a7kcJQmLKFViGKUfgg
-	Ay+Bm72J9Xl7jFWUoM5eakBwyENxkzYZG1i5///FCRVe0QKFHedC8V+hv87AZHXfgGOc
-	FMXAnEM4EmWUEnqvO6aj6uQgDZlPOwBH9GGc1khs80oYEUiwixhV9KrTEjghj8BqhNqn
-	Z/fOJScjKvRfiLscJyG0jANa7dpN3bshlKUQ7MK2QO20s0qO8xv2xOobIUZPDRBpNW8y
-	ZC+w==
-X-Gm-Message-State: ALyK8tLOKdzOxQ1CNxlrmQA0FqioIRkNdR5K2tlS47mhohuqSYw5EHCTQyF83odXRFmCKg==
-X-Received: by 10.176.0.210 with SMTP id 76mr4302107uaj.151.1467299069352;
-	Thu, 30 Jun 2016 08:04:29 -0700 (PDT)
-Received: from mail-vk0-f48.google.com (mail-vk0-f48.google.com.
-	[209.85.213.48]) by smtp.gmail.com with ESMTPSA id
-	f199sm1472516vke.8.2016.06.30.08.04.28
+	h=x-gm-message-state:message-id:from:date:to:subject:user-agent;
+	bh=OJSwsg9Micgcwn27MM0kCs2t6omuPS50EI4Kf/W8vI8=;
+	b=eOKSjrP9Cv0H4zD4Izrxs/oRBVOz5E3y11PJCw8uXZMfmCnatEYOQIh8B9ROnBAZOC
+	u+qvJ5HuhXjMjjERiwbMdyR3g3oasBwLpKulaDylLfYZ4+asbcBn+O7m/sr5awenI9+w
+	x9hdcC6RvjJloDw3wckumcFl+o/cOhaUIJNLkmqU4lIfe17VNLUD5wewUgFOLB0yf5PB
+	NND5hgpQwm7pUdfQwnQ/LfdVXxKZsTA8XLsLL1J0uzQjTnBjpQA2IYMTUJlY7t86zpwU
+	fKjUCkZJ2WG/m/xtZcANfdoBqYdqZWO/msd1gX2iM4j1OAQ5q+9aAuJJsNpVGgvyLhZr
+	KCvg==
+X-Gm-Message-State: ALyK8tLpPdclR5M5Mwp2w6MeFRKjCiQFkYuUOTcLP0QIc7dhyOds+n0066ioOm8ArFLxVA==
+X-Received: by 10.55.204.213 with SMTP id n82mr20520796qkl.40.1467299316633;
+	Thu, 30 Jun 2016 08:08:36 -0700 (PDT)
+Received: from localhost ([179.105.243.72]) by smtp.gmail.com with ESMTPSA id
+	a195sm1780905qkc.24.2016.06.30.08.08.33
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 30 Jun 2016 08:04:28 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-vk0-f48.google.com with SMTP id k68so26890056vkb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jun 2016 08:04:28 -0700 (PDT)
-X-Received: by 10.31.193.4 with SMTP id r4mr6706255vkf.4.1467299067841; Thu,
-	30 Jun 2016 08:04:27 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.31.192.195 with HTTP; Thu, 30 Jun 2016 08:04:27 -0700 (PDT)
-In-Reply-To: <1467206440-4906-1-git-send-email-bernhard@bdick.de>
-References: <1467206440-4906-1-git-send-email-bernhard@bdick.de>
-Date: Thu, 30 Jun 2016 12:04:27 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKpx9Ny=b0_N4CFKeHgpnJfT0ZDCXcMTSZJDM7xf1zB36w@mail.gmail.com>
-Message-ID: <CAP9ODKpx9Ny=b0_N4CFKeHgpnJfT0ZDCXcMTSZJDM7xf1zB36w@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java][PATCH] openjdk-8: Add update version and build number to the java binaries
+	Thu, 30 Jun 2016 08:08:35 -0700 (PDT)
+Message-ID: <577535f3.cc66370a.e9738.ffff9a3c@mx.google.com>
+Received: by localhost (sSMTP sendmail emulation);
+	Thu, 30 Jun 2016 12:08:29 -0300
+From: "Otavio Salvador" <otavio.salvador@gmail.com>
+Date: Thu, 30 Jun 2016 12:08:29 -0300
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+User-Agent: mail v14.8.8
+Subject: Updates to meta-java (master) in 2016-06-30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,21 +55,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jun 2016 15:04:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 30 Jun 2016 15:08:37 -0000
 
-On Wed, Jun 29, 2016 at 10:20 AM, Bernhard Dick <bernhard@bdick.de> wrote:
-> The OpenJDK builds did not include the update version and build number
-> leading to problems when applications check for the minimum needed version.
-> This commit fixes it by adding the update version and build number to the
-> configure parameters.
->
-> Signed-off-by: Bernhard Dick <bernhard@bdick.de>
+Hello,
 
-I applied this on master; thanks for the patch.
+I pushed following updates:
 
+commit 33ddb28a6428b02ddcc82d1954ecf27cd426fbb5 (HEAD -> pending, yocto/master-next, yocto/master, m/master, m/krogoth)
+Author: Daniel McGregor <daniel.mcgregor@vecima.com>
+Date:   Wed Jun 22 10:38:45 2016 -0600
 
--- 
+    openjdk-8: make GCC6 happy
+    
+    GCC 6 sets the default C++ standard to C++14 and introduces dead store
+    elimination by default. OpenJDK 8 is not ready for either of these
+    changes, so set the C++ standard back to gnu++98 and disable dead
+    store elimination.
+    
+    Switched to using --with-extra-cflags, cxxflags, and ldflags. The added
+    patch fixes building when using those flags, and are needed to get
+    CFLAGS into the JDK build in the native case.
+    
+    Signed-off-by: Daniel McGregor <daniel.mcgregor@vecima.com>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+commit 6483010d92be7f6e1e0a268d1ca4b5fc4353c70e
+Author: Daniel McGregor <daniel.mcgregor@vecima.com>
+Date:   Tue Jun 21 15:07:07 2016 -0600
+
+    icedtea7-native: make GCC 6 happy
+    
+    GCC 6 sets the default C++ standard to C++14 and introduces dead store
+    elimination by default. icedtea7 is not ready for either of these
+    changes, so just set the C++ standard back to gnu++98 and disable dead
+    store elimination.
+    
+    Signed-off-by: Daniel McGregor <daniel.mcgregor@vecima.com>
+    Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+commit 8ee871a86a9999a2272d103855033da4685165d8
+Author: Bernhard Dick <bernhard@bdick.de>
+Date:   Wed Jun 29 15:20:40 2016 +0200
+
+    openjdk-8: Add update version and build number to the java binaries
+    
+    The OpenJDK builds did not include the update version and build number
+    leading to problems when applications check for the minimum needed version.
+    This commit fixes it by adding the update version and build number to the
+    configure parameters.
+    
+    Signed-off-by: Bernhard Dick <bernhard@bdick.de>
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+
+Regards,
+
+--
 Otavio Salvador                             O.S. Systems
 http://www.ossystems.com.br        http://code.ossystems.com.br
 Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
