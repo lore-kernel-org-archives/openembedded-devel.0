@@ -1,47 +1,34 @@
-Return-Path: <victorascroft@gmail.com>
-Received: from mail-pa0-f48.google.com (mail-pa0-f48.google.com
-	[209.85.220.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 85C0160124
+Return-Path: <joe.slater@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BF07160124
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Jul 2016 18:27:20 +0000 (UTC)
-Received: by mail-pa0-f48.google.com with SMTP id bz2so40849175pad.1
+	Fri,  1 Jul 2016 20:25:14 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u61KPFro005288
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Jul 2016 11:27:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:mime-version:content-disposition
-	:user-agent; bh=50oogiYf70JfgTt/hiKE86vqcKeNacAtlDRqv1FgJg4=;
-	b=PEAB3uqVwXANIG1CDhc8VzIB9GhKBbpIMnfYMsyyL8dh4fjsTxdI6XcyepDhmrKbZE
-	x0UIL8HmkSeib3yVKAFUlqOhIKDWEGG+X752S7/iqRGJgRalBpTNdzbRyEjDjQK5W9AZ
-	BK7I9VKkiGrdvoBqK7CBtZP1BKmPsKzhOa/4fE5Ejo7ffSbI14Gyn5yTXIagnGZvT+UA
-	MEG+JUvXwsTrhKrhjTxHVsMcxNAyV7BOcBYJ0HoZP56diR0yFZdIKXJUbydFyHMaqzx5
-	cE2oSAg0BxczBCGM/GfJzVDx7TziiiZbQriqwQKAfo+XKnCwln6iTfMoO2CPhjkQtggN
-	kOrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:mime-version
-	:content-disposition:user-agent;
-	bh=50oogiYf70JfgTt/hiKE86vqcKeNacAtlDRqv1FgJg4=;
-	b=P0LOXrdzLhjGmlspPAF0sNaySWKU6qfwtFXbcI/r/sqsQiMWU0OzfXgNC75DzzjAdx
-	fUQoH2Kl8cizM6R1Tf1dQxReqbcnUW7OibvNdfpFZR8i23gmpHtopMmXOPj90ua4plys
-	xQ8vgxuAJxqO0iwe+IQBViJsTgmq8B1F5obf1clyY2VzrC6mhnvnfPp8fjGrF1Xd66Wj
-	sCDGbgcyBITQp87qgxtS5vQZ+/hNMSCSwFs64uoQS9tEvvtc8mjP9Nh88lkS+vy6o0Jf
-	hDJdYf+KisZNmTYk4T7nj8a4tHRTyUAovXMr2FidevQmTl0nL9/9nIWK0kE9rOjct8xg
-	Dptg==
-X-Gm-Message-State: ALyK8tJRWXxSFYOa9kcwm32dMczEaAETYT0oBd+NcrkkbsBSin103/GbhBjuXMpcaEq25w==
-X-Received: by 10.66.89.228 with SMTP id br4mr34047262pab.110.1467397640563;
-	Fri, 01 Jul 2016 11:27:20 -0700 (PDT)
-Received: from localhost ([106.51.137.1]) by smtp.gmail.com with ESMTPSA id
-	o22sm7333909pfa.15.2016.07.01.11.27.19
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 01 Jul 2016 11:27:20 -0700 (PDT)
-Date: Fri, 1 Jul 2016 23:50:08 +0530
-From: victorascroft@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160701182008.GA20145@Sanchayan-Arch.localdomain>
+	Fri, 1 Jul 2016 13:25:15 -0700
+Received: from ALA-MBB.corp.ad.wrs.com ([169.254.1.50]) by
+	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0248.002;
+	Fri, 1 Jul 2016 13:25:14 -0700
+From: "Slater, Joseph" <joe.slater@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-networking][PATCH 1/1] openconnect: PACKAGECONFIG
+	certain dependencies
+Thread-Index: AQHR0wggy/HNrvv7U0CQ7O0hLHCAgKADfeGAgACI5aA=
+Date: Fri, 1 Jul 2016 20:25:13 +0000
+Message-ID: <007BD92917A2324FA403BCF9A464CF84A6F8DED5@ALA-MBB.corp.ad.wrs.com>
+References: <1467316002-12489-1-git-send-email-jslater@windriver.com>
+	<CABcZANnH_85yL9=_VBfwsuFTivqK+VbW5zyz=aoXvTA5a3k1Lw@mail.gmail.com>
+In-Reply-To: <CABcZANnH_85yL9=_VBfwsuFTivqK+VbW5zyz=aoXvTA5a3k1Lw@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [147.11.216.160]
 MIME-Version: 1.0
-User-Agent: Mutt/1.6.1 (2016-04-27)
-Subject: Building php with postgres support
+Subject: Re: [meta-networking][PATCH 1/1] openconnect: PACKAGECONFIG certain dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,31 +41,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jul 2016 18:27:22 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Fri, 01 Jul 2016 20:25:16 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
 
-I want to build php with postgres support. Am using the jethro
-branch. Looking at the php.inc file
 
-http://cgit.openembedded.org/meta-openembedded/tree/meta-oe/recipes-devtools/php/php.inc?h=jethro
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Christopher Larson
+> Sent: Thursday, June 30, 2016 10:13 PM
+> To: Openembedded Discussion
+> Subject: Re: [oe] [meta-networking][PATCH 1/1] openconnect: PACKAGECONFIG=
+ certain
+> dependencies
+>=20
+> On Thu, Jun 30, 2016 at 12:46 PM, Joe Slater <jslater@windriver.com> wrot=
+e:
+>=20
+> > +PACKAGECONFIG ??=3D "gnutls lz4 libproxy"
+> > +
+> > +# config defaults
+> > +PACKAGECONFIG[gnutls] =3D ",--without-gnutls,gnutls,"
+> > +PACKAGECONFIG[lz4] =3D ",--without-lz4,lz4,"
+> > +PACKAGECONFIG[libproxy] =3D ",--without-libproxy,libproxy,"
+> > +
+> > +# not config defaults
+> > +PACKAGECONFIG[pcsc-lite] =3D ",--without-libpcsclite,pcsc-lite,"
+> >
+>=20
+> Why are the options not being passed for the enabled case, here? We prefe=
+r
+> to be explicit, rather than relying on defaults.
 
-postgres doesn't seem to be enabled by default.
+I can easily add them.  I left them out because configure help only mention=
+s the --without
+options to override the defaults.
 
-Tried enabling postgres by adding the following to EXTRA_OECONF
+Joe
 
---with-pgsql=${STAGING_DIR_TARGET}${exec_prefix}
 
-based on the PKGCONFIG defined in that file later but that does not
-seem to work.
-
-Checking phpinfo does not show postgres support enabled.
-
-What would be the required change to php.inc file for enabling
-postgres with php?
-
-Regards,
-Victor.
+> --
+> Christopher Larson
+> clarson at kergoth dot com
+> Founder - BitBake, OpenEmbedded, OpenZaurus
+> Maintainer - Tslib
+> Senior Software Engineer, Mentor Graphics
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
