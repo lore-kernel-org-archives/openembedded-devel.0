@@ -1,49 +1,25 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-it0-f54.google.com (mail-it0-f54.google.com
-	[209.85.214.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 001036012C
+Return-Path: <joe.slater@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 939B660124
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Jul 2016 20:44:40 +0000 (UTC)
-Received: by mail-it0-f54.google.com with SMTP id a5so27549316ita.1
+	Fri,  1 Jul 2016 23:16:48 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u61NGmbx009107
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Jul 2016 13:44:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to; bh=hbqCrNRSYEHP4UadaIKGnhgu7kF/f7MiCNk0wbW8UQo=;
-	b=h/q0Hr+IDf+TuvxctVvZjCM7n/h0EZ70zKdfyS9Sr8IpSmBExSmJL20+znOySoQyS1
-	Nn7Er3BzYa5pfRxDi19b4A/wk8rO2QZ7v2ARj4wvB71uVbyp/rvofFkn39BBOuoBElmZ
-	UNdMko1lnVfjcqBzIkgtlXqrlJQunrChhhkH90OGcGUZ3r0ozngHm91bf5vIbT+ksB+v
-	CsNTB8z+25XWSA9dtqIPgpyeKw0CFWQJBhSM0/LNClcfn1o3bVsLmsHuwPOinQg6U0/f
-	yim8GlXYGRJl73bCADFflGVcSITihO9JCKwQpDlHp9nKHugfKhQY/o61tn8UfKoTjesv
-	04/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to;
-	bh=hbqCrNRSYEHP4UadaIKGnhgu7kF/f7MiCNk0wbW8UQo=;
-	b=kv4xaqCivJiaT+XdKGNOSAgtsxf8hu1Sf+KO5nwym5sCIPNkNlwt1Zobz03iVaZwF/
-	qZ+r2BXG3jQLB4LiQAAmy7K1/xCk7XkkRpRFLNHXSjMCse2ojru6xK6M0QGL7Z2oTbqa
-	DPVVWdao3YHRqIGlOLlyTpCZ7rBbYy3vSuqEyp/XBy8iScJ3RDNSiMrHR0c6/NsJSe3Z
-	ACFKDOcewuVd63bc09YxLN3A+xY4jTochE5eZmMLl9bBaAmMxlkIsFQ2Z19liVoeXlo8
-	li/2oyn5jvVaGl8hQZhs/AZbTk22n2ulovkLZXh8lnLVUhHq7Y/6o8bIz++2AnKx0rjs
-	+SIg==
-X-Gm-Message-State: ALyK8tIWKfhZe8fYWv0V+DyUgUgENSexw7TNavZq3SdWnurxHewJdB9RqoCB/pbVh7CfjyqRZktUFEIk9SLq7w==
-X-Received: by 10.36.216.5 with SMTP id b5mr156855itg.19.1467405881176; Fri,
-	01 Jul 2016 13:44:41 -0700 (PDT)
+	Fri, 1 Jul 2016 16:16:48 -0700
+Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Fri, 1 Jul 2016 16:16:48 -0700
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <liezhi.yang@windriver.com>, 
+	<randy.macleod@windriver.com>
+Date: Fri, 1 Jul 2016 16:16:48 -0700
+Message-ID: <1467415008-20400-1-git-send-email-jslater@windriver.com>
+X-Mailer: git-send-email 1.7.3.4
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.79.19.70 with HTTP; Fri, 1 Jul 2016 13:44:21 -0700 (PDT)
-In-Reply-To: <007BD92917A2324FA403BCF9A464CF84A6F8DED5@ALA-MBB.corp.ad.wrs.com>
-References: <1467316002-12489-1-git-send-email-jslater@windriver.com>
-	<CABcZANnH_85yL9=_VBfwsuFTivqK+VbW5zyz=aoXvTA5a3k1Lw@mail.gmail.com>
-	<007BD92917A2324FA403BCF9A464CF84A6F8DED5@ALA-MBB.corp.ad.wrs.com>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Fri, 1 Jul 2016 13:44:21 -0700
-X-Google-Sender-Auth: cN60yXC4zevNWdRv_2XzD2qTK0U
-Message-ID: <CABcZANmFkGOLJRfuya=EZ=YngjBoxtQdo8qbHt_Au6gC1uJAaQ@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-networking][PATCH 1/1] openconnect: PACKAGECONFIG certain dependencies
+Subject: [V2][meta-networking][PATCH 1/1] openconnect: PACKAGECONFIG certain dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,52 +32,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jul 2016 20:44:41 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 01 Jul 2016 23:16:48 -0000
+Content-Type: text/plain
 
-On Fri, Jul 1, 2016 at 1:25 PM, Slater, Joseph <joe.slater@windriver.com>
-wrote:
+Some items now in DEPENDS are configuration options,
+so we create PACKAGECONFIG[] entries for them.
 
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org [mailto:
-> openembedded-devel-
-> > bounces@lists.openembedded.org] On Behalf Of Christopher Larson
-> > Sent: Thursday, June 30, 2016 10:13 PM
-> > To: Openembedded Discussion
-> > Subject: Re: [oe] [meta-networking][PATCH 1/1] openconnect:
-> PACKAGECONFIG certain
-> > dependencies
-> >
-> > On Thu, Jun 30, 2016 at 12:46 PM, Joe Slater <jslater@windriver.com>
-> wrote:
-> >
-> > > +PACKAGECONFIG ??= "gnutls lz4 libproxy"
-> > > +
-> > > +# config defaults
-> > > +PACKAGECONFIG[gnutls] = ",--without-gnutls,gnutls,"
-> > > +PACKAGECONFIG[lz4] = ",--without-lz4,lz4,"
-> > > +PACKAGECONFIG[libproxy] = ",--without-libproxy,libproxy,"
-> > > +
-> > > +# not config defaults
-> > > +PACKAGECONFIG[pcsc-lite] = ",--without-libpcsclite,pcsc-lite,"
-> > >
-> >
-> > Why are the options not being passed for the enabled case, here? We
-> prefer
-> > to be explicit, rather than relying on defaults.
->
-> I can easily add them.  I left them out because configure help only
-> mentions the --without
-> options to override the defaults.
+We do not select pcsc-lite by default because it is
+GPLv3.
 
+Signed-off-by: Joe Slater <jslater@windriver.com>
+---
+ .../openconnect/openconnect_git.bb                 |   13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
 
-It'd be best to add them, then we're explicitly specifying what we want,
-and potentially avoid issues if the upstream default behavior changes
-during an upgrade in the future.
+diff --git a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
+index 6d3c252..60e7e6e 100644
+--- a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
++++ b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
+@@ -2,8 +2,17 @@ SUMMARY = "Open client for Cisco AnyConnect VPN"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=243b725d71bb5df4a1e5920b344b86ad"
+ 
+-DEPENDS = "vpnc libxml2 gnutls lz4 krb5 libproxy pcsc-lite"
+-RDEPENDS_${PN} = "vpnc"
++DEPENDS = "vpnc libxml2 krb5"
++
++PACKAGECONFIG ??= "gnutls lz4 libproxy"
++
++# config defaults
++PACKAGECONFIG[gnutls]    = "--with-gnutls,--without-gnutls,gnutls,"
++PACKAGECONFIG[lz4]       = "--with-lz4,--without-lz4,lz4,"
++PACKAGECONFIG[libproxy]  = "--with-libproxy,--without-libproxy,libproxy,"
++
++# not config defaults
++PACKAGECONFIG[pcsc-lite] = "--with-libpcsclite,--without-libpcsclite,pcsc-lite,"
+ 
+ PV = "7.06"
+ 
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+1.7.9.5
+
 
