@@ -1,25 +1,40 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 939B660124
+Return-Path: <fathi.boudra@linaro.org>
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 7747860088
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Jul 2016 23:16:48 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u61NGmbx009107
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Sat,  2 Jul 2016 15:41:38 +0000 (UTC)
+Received: by mail-wm0-f50.google.com with SMTP id v199so57717116wmv.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 1 Jul 2016 16:16:48 -0700
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Fri, 1 Jul 2016 16:16:48 -0700
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <liezhi.yang@windriver.com>, 
-	<randy.macleod@windriver.com>
-Date: Fri, 1 Jul 2016 16:16:48 -0700
-Message-ID: <1467415008-20400-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
+	Sat, 02 Jul 2016 08:41:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=MUzhqiSpPzZsVEcE6yjyBQ3xFWdR2hkvt7PH7C6XUr4=;
+	b=CdLqRoMMjwUjrNRAfPzYr5oQFw8oSYbVRV9ad17j/djX5sq5KJeG9fuTD1QBs0SPyq
+	5Hv5wXfyDDZlc8toCU7vrIP/AJOI/33oS+SGjKINL1sY13xXvK6aBajqkg4FaJaIlbCe
+	1Dji2uYcdTUfhOSJ3CUHFFsYdQZRj3Art0t0U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=MUzhqiSpPzZsVEcE6yjyBQ3xFWdR2hkvt7PH7C6XUr4=;
+	b=WB4Hw9ssk9G3+L9XmDbTMJ0EiHG9A+UKRC4FRQiGz2bnZcrBkm9XnAT4+X2cw7h+TG
+	tnDclvWQ+a+quY7VmmJIPgudGNEFt3mlsV9xng2DzBQgkNryKQ5uxNpZGjtwFzJoFr/2
+	p4ow+Cq8VPfnxaFRHim65NCuSvmZV46Ayz/did7hhBg+VH05UGmfkj4+b4xheOZQJjvD
+	oMXsGJiUStE8lYAun+0YYdNkXzpl30DhcyjfOHf2MwlpGkH1IrjfOl/bn5Lj1rzE/Efu
+	yGc0wmLVyRxLv/8rClP7VDxjJSd4XrucXAbydD9m3ThwvQ9oYSBilwL/xTzoow76oZCC
+	rmLA==
+X-Gm-Message-State: ALyK8tKbwpckO5ibOwBcLdz76UQewNd14SAWnjIvelXvfDelZ2mRdgShWIt0aml7VQ3ce/u2mJq+Swad0Qge4vT0
+X-Received: by 10.194.157.162 with SMTP id wn2mr3482471wjb.103.1467474099010; 
+	Sat, 02 Jul 2016 08:41:39 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [V2][meta-networking][PATCH 1/1] openconnect: PACKAGECONFIG certain dependencies
+Received: by 10.28.179.65 with HTTP; Sat, 2 Jul 2016 08:41:38 -0700 (PDT)
+In-Reply-To: <20160701051457.20909-1-raj.khem@gmail.com>
+References: <20160701051457.20909-1-raj.khem@gmail.com>
+From: Fathi Boudra <fathi.boudra@linaro.org>
+Date: Sat, 2 Jul 2016 18:41:38 +0300
+Message-ID: <CAGNsrLAET5WkH9MkfqqTAE+=x0kRgNt1QBXimzeUywag_MTQMw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] android-tools: Fix, enhance and move from meta-shr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,45 +47,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jul 2016 23:16:48 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 02 Jul 2016 15:41:39 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Some items now in DEPENDS are configuration options,
-so we create PACKAGECONFIG[] entries for them.
+Hi Khem,
 
-We do not select pcsc-lite by default because it is
-GPLv3.
+On 1 July 2016 at 08:14, Khem Raj <raj.khem@gmail.com> wrote:
+> android tools offer filsystem tools for creating sparse
+> images, so package them in package of its own.
 
-Signed-off-by: Joe Slater <jslater@windriver.com>
----
- .../openconnect/openconnect_git.bb                 |   13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+fwiw, I plan to rework android-tools recipes for:
+https://bugs.linaro.org/show_bug.cgi?id=2179
 
-diff --git a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
-index 6d3c252..60e7e6e 100644
---- a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
-+++ b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
-@@ -2,8 +2,17 @@ SUMMARY = "Open client for Cisco AnyConnect VPN"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING.LGPL;md5=243b725d71bb5df4a1e5920b344b86ad"
- 
--DEPENDS = "vpnc libxml2 gnutls lz4 krb5 libproxy pcsc-lite"
--RDEPENDS_${PN} = "vpnc"
-+DEPENDS = "vpnc libxml2 krb5"
-+
-+PACKAGECONFIG ??= "gnutls lz4 libproxy"
-+
-+# config defaults
-+PACKAGECONFIG[gnutls]    = "--with-gnutls,--without-gnutls,gnutls,"
-+PACKAGECONFIG[lz4]       = "--with-lz4,--without-lz4,lz4,"
-+PACKAGECONFIG[libproxy]  = "--with-libproxy,--without-libproxy,libproxy,"
-+
-+# not config defaults
-+PACKAGECONFIG[pcsc-lite] = "--with-libpcsclite,--without-libpcsclite,pcsc-lite,"
- 
- PV = "7.06"
- 
--- 
-1.7.9.5
+It's currently based on Ubuntu package, forked for Ubuntu phone.
+I've updated Debian package built from AOSP source and up-to-date.
+I've dropped the ubuntu-ism which will never be upstreamed.
 
+The plan is to be closer to the upstream AOSP source code and be able
+to update the recipe regularly.
+
+Obviously, it doesn't prevent to get current recipe moved to meta-oe.
+It's just a heads up :)
+
+Cheers,
+Fathi
 
