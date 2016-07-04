@@ -1,49 +1,27 @@
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-lf0-f53.google.com (mail-lf0-f53.google.com
-	[209.85.215.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 6084F6011C
+Return-Path: <maxin.john@intel.com>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id D6A37601A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jul 2016 12:08:03 +0000 (UTC)
-Received: by mail-lf0-f53.google.com with SMTP id h129so116029859lfh.1
+	Mon,  4 Jul 2016 13:45:54 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga103.jf.intel.com with ESMTP; 04 Jul 2016 06:45:55 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.26,574,1459839600"; d="scan'208";a="1015382435"
+Received: from linux.intel.com ([10.54.29.200])
+	by fmsmga002.fm.intel.com with ESMTP; 04 Jul 2016 06:45:55 -0700
+Received: from mbabyjoh-desk.fi.intel.com (mbabyjoh-desk.fi.intel.com
+	[10.237.72.71])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by linux.intel.com (Postfix) with ESMTP id 623476A4080
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jul 2016 05:08:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=8FRAA50FPFgjhQokBQrQLiyoV0TifLbprgEdC621voE=;
-	b=amYB3wkPfkFB+pdoYAl3DPmz1x2kF01ZpBhWYAYIKZx2usI6uJEtjs93vkeeoqCCzo
-	OcU+T4klGRsosUgAQA5AFwk/i55U1E+ysYIrLHcBdngEP/bHvPwkkHO70ghWOrLR4hhY
-	SLXvUNP7n5IFS8SnfBxhk5uYRMPa4no9hk0SDLJbRkZk1gY5bdiXTWmy8D7+0Mc5cz0D
-	sag5UB+kCBqZ9j59ptAoEY9aSWBGBquQeuOYZAH3di7nCEpq9XSi20UcJYsHBkOk0DQ/
-	BTh97yXsFK+i73zTJHbsXxqUkHlK1ry0Nq9zOd/7DiGz/UunNKYrFRRnAiCh5BdOr6gb
-	yXpA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=8FRAA50FPFgjhQokBQrQLiyoV0TifLbprgEdC621voE=;
-	b=i1CqhsYJd4CwDzV4wsVnMa97wrvjUIKFa9F+y8kPJ8adlNqDwTWP6MNEt90XhxfEXi
-	cPYsWqAEJYgxAHlolN6SpEkrAg1Wrgg3nr0EAiDvbfq+2eHQadFqYaqupPHjSnU2UdWo
-	uoBQFkdtZVhhTXt6iW5LYp15pu5HaL5lzybq3rq2FnYgLW9SeNurdmllwr4bogMaX9FG
-	AdKEWBiqPB2f+Ob32QS5jgqAF2putcQYYbWCh+6WZI2ipd+DDEz3E8aoN3kDpuWDiQ5S
-	IeXPmIJbviiUIa38t8rtK6stsLdDgmnW/QcGwT2/9uumfxr42AnMbz11X4y8zkzw0cpG
-	woog==
-X-Gm-Message-State: ALyK8tJ9x97f88wWmrZt1wLHflI45SGes2oK3RYf1ztjViIR3FAe9nPKvS+s9P8Q2NUS8xaeElBnTkZbz6CSWg==
-X-Received: by 10.25.157.142 with SMTP id g136mr3464718lfe.216.1467634083812; 
-	Mon, 04 Jul 2016 05:08:03 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.25.5.215 with HTTP; Mon, 4 Jul 2016 05:07:34 -0700 (PDT)
-X-Originating-IP: [179.105.243.72]
-In-Reply-To: <CAAPZna0UsMMTXfQZi-Xuk3aRfrpV4yxZjKxjRP561FAaqjO5FA@mail.gmail.com>
-References: <1467378824-13923-1-git-send-email-fabio.berton@ossystems.com.br>
-	<CAMKF1so5SPCvuyiVXej2z3M2n+Z2uCskG7_2f5hdYZx+3JGS9w@mail.gmail.com>
-	<CAAPZna0UsMMTXfQZi-Xuk3aRfrpV4yxZjKxjRP561FAaqjO5FA@mail.gmail.com>
-From: Fabio Berton <fabio.berton@ossystems.com.br>
-Date: Mon, 4 Jul 2016 09:07:34 -0300
-Message-ID: <CAAPZna2Aq719=Eu6uO13r09iHcz6dgR5iEvVztdEaQxe+Ve25g@mail.gmail.com>
+	Mon,  4 Jul 2016 06:45:49 -0700 (PDT)
+From: "Maxin B. John" <maxin.john@intel.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-browser][PATCH] firefox: Fix build using gcc 6
+Date: Mon,  4 Jul 2016 16:45:53 +0300
+Message-Id: <1467639953-22278-1-git-send-email-maxin.john@intel.com>
+X-Mailer: git-send-email 2.4.0
+Subject: [PATCH] directfb: move recipe to meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,169 +34,661 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jul 2016 12:08:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 04 Jul 2016 13:45:57 -0000
 
-Hi Khem,
+directfb.org has been down for about a year now. Since there
+are active users for this recipe, it makes sense to move this
+from oe-core to meta-oe.
 
-The option -fno-schedule-insn2 is not needed. I sent a v2.
+Signed-off-by: Maxin B. John <maxin.john@intel.com>
+---
+ .../configure.in-Fix-string-argument-syntax.patch  |  28 +++++
+ .../directfb/directfb-examples_1.7.0.bb            |  21 ++++
+ meta-oe/recipes-graphics/directfb/directfb.inc     |  80 ++++++++++++++
+ ...direct-Aboid-usng-VLAs-and-printf-formats.patch |  61 +++++++++++
+ .../directfb/directfb/bashism.patch                |  18 ++++
+ .../directfb/directfb/compar_fn_t.patch            |  62 +++++++++++
+ .../directfb/directfb/configurefix.patch           |  60 +++++++++++
+ .../fix-client-gfx_state-initialisation.patch      |  38 +++++++
+ .../directfb/directfb/fusion.patch                 |  36 +++++++
+ .../directfb/directfb/union-sigval.patch           |  19 ++++
+ .../directfb/use-PTHREAD_MUTEX_RECURSIVE.patch     | 116 +++++++++++++++++++++
+ .../recipes-graphics/directfb/directfb_1.7.7.bb    |   8 ++
+ 12 files changed, 547 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/directfb/directfb-examples/configure.in-Fix-string-argument-syntax.patch
+ create mode 100644 meta-oe/recipes-graphics/directfb/directfb-examples_1.7.0.bb
+ create mode 100644 meta-oe/recipes-graphics/directfb/directfb.inc
+ create mode 100644 meta-oe/recipes-graphics/directfb/directfb/0001-gfx-direct-Aboid-usng-VLAs-and-printf-formats.patch
+ create mode 100644 meta-oe/recipes-graphics/directfb/directfb/bashism.patch
+ create mode 100644 meta-oe/recipes-graphics/directfb/directfb/compar_fn_t.patch
+ create mode 100644 meta-oe/recipes-graphics/directfb/directfb/configurefix.patch
+ create mode 100644 meta-oe/recipes-graphics/directfb/directfb/fix-client-gfx_state-initialisation.patch
+ create mode 100644 meta-oe/recipes-graphics/directfb/directfb/fusion.patch
+ create mode 100644 meta-oe/recipes-graphics/directfb/directfb/union-sigval.patch
+ create mode 100644 meta-oe/recipes-graphics/directfb/directfb/use-PTHREAD_MUTEX_RECURSIVE.patch
+ create mode 100644 meta-oe/recipes-graphics/directfb/directfb_1.7.7.bb
 
-Thanks.
+diff --git a/meta-oe/recipes-graphics/directfb/directfb-examples/configure.in-Fix-string-argument-syntax.patch b/meta-oe/recipes-graphics/directfb/directfb-examples/configure.in-Fix-string-argument-syntax.patch
+new file mode 100644
+index 0000000..0717ea6
+--- /dev/null
++++ b/meta-oe/recipes-graphics/directfb/directfb-examples/configure.in-Fix-string-argument-syntax.patch
+@@ -0,0 +1,28 @@
++From 88077ed156a714f32bb408f422278d61611ffd41 Mon Sep 17 00:00:00 2001
++From: Otavio Salvador <otavio@ossystems.com.br>
++Date: Sat, 26 Jul 2014 16:57:46 -0300
++Subject: [PATCH] configure.in: Fix string argument syntax
++
++Upstream-Status: Submitted
++
++Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
++---
++ configure.in |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/configure.in b/configure.in
++index bfe1b82..e939bbd 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -65,7 +65,7 @@ fi)
++ 
++ DIRECTFB_REQUIRED_VERSION=1.4.14
++ 
++-PKG_CHECK_MODULES(DIRECTFB, directfb >= $DIRECTFB_REQUIRED_VERSION,[ WATER=`$PKG_CONFIG --variable=water directfb` ],
+++PKG_CHECK_MODULES([DIRECTFB], directfb >= $DIRECTFB_REQUIRED_VERSION,[ WATER=`$PKG_CONFIG --variable=water directfb` ],
++ 	AC_MSG_ERROR([$DIRECTFB_PKG_ERRORS
++ *** DirectFB $DIRECTFB_REQUIRED_VERSION or newer is required. The latest version
++ *** of DirectFB is available from http://www.directfb.org/.]))
++-- 
++1.7.10.4
++
+diff --git a/meta-oe/recipes-graphics/directfb/directfb-examples_1.7.0.bb b/meta-oe/recipes-graphics/directfb/directfb-examples_1.7.0.bb
+new file mode 100644
+index 0000000..7907c5c
+--- /dev/null
++++ b/meta-oe/recipes-graphics/directfb/directfb-examples_1.7.0.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "Example DirectFB applications"
++DESCRIPTION = "The DirectFB-examples package contains a set of simple DirectFB \
++      applications that can be used to test and demonstrate various DirectFB \
++      features"
++DEPENDS = "directfb"
++SECTION = "libs"
++LICENSE = "MIT"
++
++SRC_URI = " \
++           http://downloads.yoctoproject.org/mirror/sources/DirectFB-examples-${PV}.tar.gz \
++           file://configure.in-Fix-string-argument-syntax.patch \
++          "
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=ecf6fd2b19915afc4da56043926ca18f"
++
++S = "${WORKDIR}/DirectFB-examples-${PV}"
++
++inherit autotools pkgconfig
++
++SRC_URI[md5sum] = "8b60c867af295481c32a8c7fc5802307"
++SRC_URI[sha256sum] = "9a2104cc4da8123c8371813551b66b943198979f745cbebc034bb5e10844122a"
+diff --git a/meta-oe/recipes-graphics/directfb/directfb.inc b/meta-oe/recipes-graphics/directfb/directfb.inc
+new file mode 100644
+index 0000000..46e0838
+--- /dev/null
++++ b/meta-oe/recipes-graphics/directfb/directfb.inc
+@@ -0,0 +1,80 @@
++SUMMARY = "Graphics abstraction library for the Linux Framebuffer Device"
++DESCRIPTION = "DirectFB is a thin library that provides developers \
++with hardware graphics acceleration, input device handling and \
++abstraction, an integrated windowing system with support for \
++translucent windows and multiple display layers on top of the \
++Linux framebuffer device."
++SECTION = "libs"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=dcf3c825659e82539645da41a7908589"
++
++HOMEPAGE = "http://directfb.org"
++DEPENDS = "jpeg libpng freetype zlib tslib sysfsutils"
++
++SRC_URI = "http://downloads.yoctoproject.org/mirror/sources/DirectFB-${PV}.tar.gz \
++           file://configurefix.patch \
++           file://fusion.patch \
++           file://bashism.patch \
++           file://0001-gfx-direct-Aboid-usng-VLAs-and-printf-formats.patch \
++           file://compar_fn_t.patch \
++           file://union-sigval.patch \
++           file://use-PTHREAD_MUTEX_RECURSIVE.patch \
++           file://fix-client-gfx_state-initialisation.patch \
++          "
++
++S = "${WORKDIR}/DirectFB-${PV}"
++
++LDFLAGS_append =" -lts -lm"
++
++# Workaround for linking issues seen with armv7a + gold
++LDFLAGS_append_arm = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
++
++BINCONFIG = "${bindir}/directfb-config"
++
++inherit autotools binconfig-disabled pkgconfig
++
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[jpeg2000] = "--enable-jpeg2000,--disable-jpeg2000,jasper"
++PACKAGECONFIG[drmkms] = "--enable-drmkms,--disable-drmkms,libdrm"
++PACKAGECONFIG[tiff] = "--enable-tiff,--disable-tiff,tiff"
++PACKAGECONFIG[webp] = "--enable-webp,--disable-webp,libwebp"
++
++EXTRA_OECONF = "\
++  --with-gfxdrivers=none \
++  --enable-freetype=yes \
++  --enable-zlib \
++  --disable-imlib2 \
++  --disable-mesa \
++  --disable-sdl \
++  --disable-vnc \
++  --disable-x11 \
++"
++
++#Once -fno-omit-frame-pointer option of gcc is added into TARGET_CLFAGS as default
++#this will cause directfb build failure on x86 arch, so filter out it.
++TARGET_CFLAGS_remove_x86 = "-fno-omit-frame-pointer"
++
++#PACKAGES_DYNAMIC += "^directfb-inputdrivers-.*"
++#
++#python populate_packages_prepend () {
++#    inputdrivers_libdir = d.expand('${libdir}/directfb-${RV}/inputdrivers')
++#    do_split_packages(d, inputdrivers_libdir, '*.so$', 'directfb-inputdrivers-%s', 'Directfb plugin for %s')
++#}
++
++# NOTE: monolithic packaging for now, should improve that eventually
++
++FILES_${PN}-dev += "\
++  ${bindir}/directfb-config \
++  ${libdir}/directfb-${RV}/systems/*.la \
++  ${libdir}/directfb-${RV}/inputdrivers/*.la \
++  ${libdir}/directfb-${RV}/interfaces/*/*.la \
++  ${libdir}/directfb-${RV}/wm/*.la \
++"
++
++FILES_${PN} += "\
++  ${libdir}/directfb-${RV}/systems/*.so \
++  ${libdir}/directfb-${RV}/inputdrivers/*.so \
++  ${libdir}/directfb-${RV}/interfaces/*/*.so \
++  ${libdir}/directfb-${RV}/wm/*.so \
++  ${datadir}/directfb-${PV} \
++"
+diff --git a/meta-oe/recipes-graphics/directfb/directfb/0001-gfx-direct-Aboid-usng-VLAs-and-printf-formats.patch b/meta-oe/recipes-graphics/directfb/directfb/0001-gfx-direct-Aboid-usng-VLAs-and-printf-formats.patch
+new file mode 100644
+index 0000000..76e0f75
+--- /dev/null
++++ b/meta-oe/recipes-graphics/directfb/directfb/0001-gfx-direct-Aboid-usng-VLAs-and-printf-formats.patch
+@@ -0,0 +1,61 @@
++From f43ef44806ffb8e3b35d99070dde9b6cc1714d3d Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 8 Sep 2015 21:32:20 +0000
++Subject: [PATCH] gfx,direct: Aboid usng VLAs and printf formats
++
++VLAs are flagged by clang when using non-POD types, therefore replace
++the usage with alloca which is exact same allocation on stack
++
++ __attribute__((__format__ (__printf__))) is not portable as used here
++ therefore disable the check for clang here, we lose no functionality
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++Upstream-Status: Pending
++
++ lib/direct/util.h | 2 +-
++ src/gfx/util.cpp  | 8 ++++----
++ 2 files changed, 5 insertions(+), 5 deletions(-)
++
++diff --git a/lib/direct/util.h b/lib/direct/util.h
++index 72941e9..8e7fa4a 100644
++--- a/lib/direct/util.h
+++++ b/lib/direct/util.h
++@@ -98,7 +98,7 @@
++ #define D_CONST_FUNC
++ #endif
++ 
++-#if __GNUC__ >= 3
+++#if __GNUC__ >= 3 && !defined __clang__
++ #define D_FORMAT_PRINTF(n)         __attribute__((__format__ (__printf__, n, n+1)))
++ #define D_FORMAT_VPRINTF(n)        __attribute__((__format__ (__printf__, n, 0)))
++ #else
++diff --git a/src/gfx/util.cpp b/src/gfx/util.cpp
++index 40032bc..d1015d4 100644
++--- a/src/gfx/util.cpp
+++++ b/src/gfx/util.cpp
++@@ -294,8 +294,8 @@ dfb_gfx_copy_regions_stereo( CoreSurface           *source,
++ {
++      unsigned int i, n = 0;
++      DFBRectangle rect = { 0, 0, source->config.size.w, source->config.size.h };
++-     DFBRectangle rects[num];
++-     DFBPoint     points[num];
+++     DFBRectangle *rects =  (DFBRectangle*)alloca( sizeof(struct DFBRectangle) * num);
+++     DFBPoint *points =  (DFBPoint*)alloca( sizeof(struct DFBPoint) * num);
++ 
++      for (i=0; i<num; i++) {
++           DFB_REGION_ASSERT( &regions[i] );
++@@ -351,8 +351,8 @@ dfb_gfx_copy_regions_client( CoreSurface             *source,
++ {
++      unsigned int             i, n = 0;
++      DFBRectangle             rect = { 0, 0, source->config.size.w, source->config.size.h };
++-     DFBRectangle             rects[num];
++-     DFBPoint                 points[num];
+++     DFBRectangle            *rects =  (DFBRectangle*)alloca( sizeof(struct DFBRectangle) * num);
+++     DFBPoint                *points =  (DFBPoint*)alloca( sizeof(struct DFBPoint) * num);
++      CoreGraphicsStateClient *client = _client ? _client : &StateClient::Get()->client;
++      CardState               *state  = client->state;
++      CardState                backup;
++-- 
++2.5.1
++
+diff --git a/meta-oe/recipes-graphics/directfb/directfb/bashism.patch b/meta-oe/recipes-graphics/directfb/directfb/bashism.patch
+new file mode 100644
+index 0000000..2ef4e93
+--- /dev/null
++++ b/meta-oe/recipes-graphics/directfb/directfb/bashism.patch
+@@ -0,0 +1,18 @@
++${x//y/} is a bash syntax. Replace with something dash compatible
++
++RP 2015/5/3
++Upstream-Status: Pending
++
++Index: DirectFB-1.7.7/configure.in
++===================================================================
++--- DirectFB-1.7.7.orig/configure.in
+++++ DirectFB-1.7.7/configure.in
++@@ -2696,7 +2696,7 @@ AM_CONDITIONAL(BUILD_TOOLS, test "$with_
++ AM_CONDITIONAL(CROSS_COMPILING, test "$cross_compiling" = "yes")
++ 
++ CFLAGS="$CFLAGS $DFB_INTERNAL_CFLAGS"
++-CXXFLAGS="$CXXFLAGS ${CFLAGS//-Werror-implicit-function-declaration/}"
+++CXXFLAGS="$CXXFLAGS $(printf '%s\n' "$CFLAGS" | sed 's/-Werror-implicit-function-declaration//g')"
++ DFB_LDFLAGS="$LDFLAGS $ZLIB_LIBS"
++ 
++ CFLAGS="$CFLAGS $CFLAGS_STD"
+diff --git a/meta-oe/recipes-graphics/directfb/directfb/compar_fn_t.patch b/meta-oe/recipes-graphics/directfb/directfb/compar_fn_t.patch
+new file mode 100644
+index 0000000..ee4d900
+--- /dev/null
++++ b/meta-oe/recipes-graphics/directfb/directfb/compar_fn_t.patch
+@@ -0,0 +1,62 @@
++test for __compar_fn_t and if not defined by libc then define it
++help make directfb compile with musl
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++Index: DirectFB-1.7.7/configure.in
++===================================================================
++--- DirectFB-1.7.7.orig/configure.in
+++++ DirectFB-1.7.7/configure.in
++@@ -112,6 +112,17 @@ AC_CHECK_SIZEOF(long)
++ AC_CHECK_SIZEOF(long long)
++ AC_CHECK_FUNCS(fork)
++ 
+++AC_CACHE_CHECK([for compar_fn_t in stdlib.h],ccache_cv_COMPAR_FN_T, [
+++    AC_TRY_COMPILE(
+++        [#include <stdlib.h>],
+++        [void test_fn(void) { qsort(NULL, 0, 0, (__compar_fn_t)NULL); }],
+++        ccache_cv_COMPAR_FN_T=yes,
+++        ccache_cv_COMPAR_FN_T=no)])
+++if test x"$ccache_cv_COMPAR_FN_T" = x"yes"; then
+++   AC_DEFINE(HAVE_COMPAR_FN_T, 1,
+++             Define to 1 if you have the `__compar_fn_t' typedef.)
+++fi
+++
++ AC_PATH_PROGS(PERL, perl5 perl)
++ 
++ AC_PATH_PROG(MAN2HTML, man2html, no)
++Index: DirectFB-1.7.7/inputdrivers/lirc/lirc.c
++===================================================================
++--- DirectFB-1.7.7.orig/inputdrivers/lirc/lirc.c
+++++ DirectFB-1.7.7/inputdrivers/lirc/lirc.c
++@@ -59,6 +59,11 @@
++ 
++ #include <core/input_driver.h>
++ 
+++#if HAVE_COMPAR_FN_T
+++#define COMPAR_FN_T __compar_fn_t
+++#else
+++typedef int (*COMPAR_FN_T)(const void *, const void *);
+++#endif
++ 
++ DFB_INPUT_DRIVER( lirc )
++ 
++@@ -97,7 +102,7 @@ static DFBInputDeviceKeySymbol lirc_pars
++           qsort ( keynames,
++                   D_ARRAY_SIZE( keynames ),
++                   sizeof(keynames[0]),
++-                  (__compar_fn_t) keynames_sort_compare );
+++                  (COMPAR_FN_T) keynames_sort_compare );
++           keynames_sorted = true;
++      }
++ 
++@@ -124,7 +129,7 @@ static DFBInputDeviceKeySymbol lirc_pars
++                symbol_name = bsearch( name, keynames,
++                                       D_ARRAY_SIZE( keynames ),
++                                       sizeof(keynames[0]),
++-                                      (__compar_fn_t) keynames_compare );
+++                                      (COMPAR_FN_T) keynames_compare );
++                if (symbol_name)
++                     return symbol_name->symbol;
++                break;
+diff --git a/meta-oe/recipes-graphics/directfb/directfb/configurefix.patch b/meta-oe/recipes-graphics/directfb/directfb/configurefix.patch
+new file mode 100644
+index 0000000..dd8c019
+--- /dev/null
++++ b/meta-oe/recipes-graphics/directfb/directfb/configurefix.patch
+@@ -0,0 +1,60 @@
++Libtool needs these set correctly else we end up with pointless rpaths
++such as the QA warnings:
++
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/bin/dfblayer contains probably-redundant RPATH /usr/libWARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/bin/dfbmaster contains probably-redundant RPATH /usr/libWARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/bin/mkdgifft contains probably-redundant RPATH /usr/libWARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/bin/dfbdump contains probably-redundant RPATH /usr/libWARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/bin/dfbinput contains probably-redundant RPATH /usr/libWARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/bin/dfbfx contains probably-redundant RPATH /usr/libWARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/pack
+ ages-split/directfb/usr/bin/dfbscreen contains probably-redundant RPATH /usr/libWARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/bin/mkdgiff contains probably-redundant RPATH /usr/libWARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/bin/dfbinspector contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/bin/mkdfiff contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/bin/dfbinfo contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/bin/dfbpenmount contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/bin/dfbg contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/libfusion-1.4.so.6 contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/libdirectfb-1.4.so.6.0.9 contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/libdirectfb-1.4.so.6 contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/libfusion-1.4.so.6.0.9 contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/systems/libdirectfb_fbdev.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/systems/libdirectfb_devmem.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/systems/libdirectfb_dummy.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/interfaces/IDirectFBVideoProvider/libidirectfbvideoprovider_v4l.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/interfaces/IDirectFBVideoProvider/libidirectfbvideoprovider_gif.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/interfaces/ICoreResourceManager/libicoreresourcemanager_test.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_jpeg.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_png.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_dfiff.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/interfaces/IDirectFBImageProvider/libidirectfbimageprovider_gif.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/interfaces/IDirectFBFont/libidirectfbfont_ft2.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/interfaces/IDirectFBFont/libidirectfbfont_dgiff.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/wm/libdirectfbwm_default.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/inputdrivers/libdirectfb_zytronic.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/inputdrivers/libdirectfb_penmount.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/inputdrivers/libdirectfb_linux_input.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/inputdrivers/libdirectfb_serialmouse.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/inputdrivers/libdirectfb_mutouch.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/inputdrivers/libdirectfb_tslib.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/inputdrivers/libdirectfb_joystick.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/inputdrivers/libdirectfb_sonypi.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/inputdrivers/libdirectfb_lirc.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/inputdrivers/libdirectfb_wm97xx_ts.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/inputdrivers/libdirectfb_ps2mouse.so contains probably-redundant RPATH /usr/lib
++WARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/lib/directfb-1.4-6/inputdrivers/libdirectfb_keyboard.so contains probably-redundant RPATH /usr/lib
++
++Upstream-Status: Pending
++
++RP 2012/03/16
++
++Index: DirectFB-1.4.15/configure.in
++===================================================================
++--- DirectFB-1.4.15.orig/configure.in	2012-03-16 13:32:23.692402879 +0000
+++++ DirectFB-1.4.15/configure.in	2012-03-16 13:33:22.312400960 +0000
++@@ -97,13 +97,6 @@
++ AC_CHECK_SIZEOF(long long)
++ AC_CHECK_FUNCS(fork)
++ 
++-
++-## Work around libstuhl during cross build...
++-if test "$host" != "$build"; then
++-  sys_lib_dlsearch_path_spec=""
++-  sys_lib_search_path_spec=""
++-fi
++-
++ AC_PATH_PROGS(PERL, perl5 perl)
++ 
++ AC_PATH_PROG(MAN2HTML, man2html, no)
+diff --git a/meta-oe/recipes-graphics/directfb/directfb/fix-client-gfx_state-initialisation.patch b/meta-oe/recipes-graphics/directfb/directfb/fix-client-gfx_state-initialisation.patch
+new file mode 100644
+index 0000000..57a9b0d
+--- /dev/null
++++ b/meta-oe/recipes-graphics/directfb/directfb/fix-client-gfx_state-initialisation.patch
+@@ -0,0 +1,38 @@
++From 8e53c0b9cedb62b82e2b7680d793d433b647ae20 Mon Sep 17 00:00:00 2001
++From: Andre McCurdy <armccurdy@gmail.com>
++Date: Mon, 13 Jun 2016 13:32:44 -0700
++Subject: [PATCH] fix client->gfx_state initialisation
++
++Shortly before the DirectFB 1.7.7 release, an optimisation was added
++to CoreGraphicsStateClient_Init() to avoid creating an extended
++Graphics State object if it will not later be required:
++
++  4d422fb Client: Create extended Graphics State object when needed for later usage
++
++Unfortunately the client->gfx_state variable used to track the
++extended Graphics State object is not initialised, which can lead to
++crashes etc due to creation of the Graphics State object erroneously
++being skipped.
++
++Upstream-Status: Pending
++
++Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
++---
++ src/core/CoreGraphicsStateClient.cpp | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/src/core/CoreGraphicsStateClient.cpp b/src/core/CoreGraphicsStateClient.cpp
++index 5d46f0e..5007755 100644
++--- a/src/core/CoreGraphicsStateClient.cpp
+++++ b/src/core/CoreGraphicsStateClient.cpp
++@@ -364,6 +364,7 @@ CoreGraphicsStateClient_Init( CoreGraphicsStateClient *client,
++      client->renderer  = NULL;
++      client->requestor = NULL;
++      client->throttle  = NULL;
+++     client->gfx_state = NULL;
++ 
++      if (dfb_config->task_manager) {
++           if (dfb_config->call_nodirect) {
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-graphics/directfb/directfb/fusion.patch b/meta-oe/recipes-graphics/directfb/directfb/fusion.patch
+new file mode 100644
+index 0000000..1f81a67
+--- /dev/null
++++ b/meta-oe/recipes-graphics/directfb/directfb/fusion.patch
+@@ -0,0 +1,36 @@
++directfb: Fix for hangs in direct_test, fusion_skirmish on exit
++
++Upstream-Status: Pending
++Signed-off-by: Lauren Post <lauren.post@freescale.com>
++
++--- a/lib/fusion/fusion.c	2013-01-18 22:57:11.000000000 +0800
+++++ b/lib/fusion/fusion.c	2013-07-04 10:42:56.502699119 +0800
++@@ -2853,9 +2853,14 @@
++           direct_mutex_lock( &world->event_dispatcher_mutex );
++ 
++           while (1) {
++-               if (!world->event_dispatcher_buffers)
+++               if (!world->event_dispatcher_buffers){
++                     direct_waitqueue_wait( &world->event_dispatcher_cond, &world->event_dispatcher_mutex );
++-
+++                    if (world->dispatch_stop) {
+++                         D_DEBUG_AT( Fusion_Main_Dispatch, "  -> IGNORING (dispatch_stop!)\n" );
+++                         direct_mutex_unlock( &world->event_dispatcher_mutex );
+++                         return NULL;
+++                    }
+++               }
++                buf = (FusionEventDispatcherBuffer *)world->event_dispatcher_buffers;
++                D_MAGIC_ASSERT( buf, FusionEventDispatcherBuffer );
++ 
++@@ -2872,6 +2877,11 @@
++ //D_INFO("waiting...\n");
++                     D_ASSERT( buf->read_pos == buf->write_pos );
++                     direct_waitqueue_wait( &world->event_dispatcher_cond, &world->event_dispatcher_mutex );
+++		      if (world->dispatch_stop) {
+++                         D_DEBUG_AT( Fusion_Main_Dispatch, "  -> IGNORING (dispatch_stop!)\n" );
+++                         direct_mutex_unlock( &world->event_dispatcher_mutex );
+++                         return NULL;
+++                    }
++                }
++ 
++                buf = (FusionEventDispatcherBuffer *)world->event_dispatcher_buffers;
+diff --git a/meta-oe/recipes-graphics/directfb/directfb/union-sigval.patch b/meta-oe/recipes-graphics/directfb/directfb/union-sigval.patch
+new file mode 100644
+index 0000000..29f45c7
+--- /dev/null
++++ b/meta-oe/recipes-graphics/directfb/directfb/union-sigval.patch
+@@ -0,0 +1,19 @@
++This patch is taken from gentoo musl overlay
++sigval_t is glibc only construct, we use a union of sigval
++which pretty much is same effect as sigval_t
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++diff -Naur DirectFB-1.7.6.orig/lib/direct/os/linux/glibc/system.c DirectFB-1.7.6/lib/direct/os/linux/glibc/system.c
++--- DirectFB-1.7.6.orig/lib/direct/os/linux/glibc/system.c	2014-07-15 02:54:58.000000000 -0400
+++++ DirectFB-1.7.6/lib/direct/os/linux/glibc/system.c	2015-07-18 16:55:35.077989166 -0400
++@@ -111,7 +111,7 @@
++ void
++ direct_trap( const char *domain, int sig )
++ {
++-     sigval_t val;
+++     union sigval val;
++ 
++      if (direct_config->delay_trap_ms) {
++           D_LOG( Direct_Trap, VERBOSE, "NOT RAISING signal %d from %s, waiting for %dms... attach gdb --pid=%d\n", sig, domain, direct_config->delay_trap_ms, getpid() );
+diff --git a/meta-oe/recipes-graphics/directfb/directfb/use-PTHREAD_MUTEX_RECURSIVE.patch b/meta-oe/recipes-graphics/directfb/directfb/use-PTHREAD_MUTEX_RECURSIVE.patch
+new file mode 100644
+index 0000000..ac48f68
+--- /dev/null
++++ b/meta-oe/recipes-graphics/directfb/directfb/use-PTHREAD_MUTEX_RECURSIVE.patch
+@@ -0,0 +1,116 @@
++Remove use of DIRECT_RECURSIVE_MUTEX_INITIALIZER its not portable
++use portable way to initialize recursive mutex using pthread_once() and direct_recursive_mutex_init()
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Index: DirectFB-1.7.7/lib/direct/os/linux/glibc/mutex.h
++===================================================================
++--- DirectFB-1.7.7.orig/lib/direct/os/linux/glibc/mutex.h
+++++ DirectFB-1.7.7/lib/direct/os/linux/glibc/mutex.h
++@@ -46,7 +46,6 @@ struct __D_DirectMutex {
++ /**********************************************************************************************************************/
++ 
++ #define DIRECT_MUTEX_INITIALIZER(name)            { PTHREAD_MUTEX_INITIALIZER }
++-#define DIRECT_RECURSIVE_MUTEX_INITIALIZER(name)  { PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP }
++ 
++ #endif
++ 
++Index: DirectFB-1.7.7/lib/direct/trace.c
++===================================================================
++--- DirectFB-1.7.7.orig/lib/direct/trace.c
+++++ DirectFB-1.7.7/lib/direct/trace.c
++@@ -89,8 +89,15 @@ struct __D_DirectTraceBuffer {
++ /**************************************************************************************************/
++ 
++ static DirectLink  *buffers;
++-static DirectMutex  buffers_lock = DIRECT_RECURSIVE_MUTEX_INITIALIZER(buffers_lock);
++ 
+++static pthread_once_t buffers_lock_init_once = PTHREAD_ONCE_INIT;
+++static DirectMutex buffers_lock;
+++
+++static void
+++buffers_lock_init( void )
+++{
+++     direct_recursive_mutex_init(&buffers_lock);
+++}
++ /**************************************************************************************************/
++ 
++ __dfb_no_instrument_function__
++@@ -113,6 +120,7 @@ get_trace_buffer( void )
++ 
++           D_MAGIC_SET( buffer, DirectTraceBuffer );
++ 
+++          pthread_once(&buffers_lock_init_once, buffers_lock_init);
++           direct_mutex_lock( &buffers_lock );
++           direct_list_append( &buffers, &buffer->link );
++           direct_mutex_unlock( &buffers_lock );
++@@ -138,8 +146,14 @@ typedef struct {
++ } SymbolTable;
++ 
++ static DirectLink  *tables      = NULL;
++-static DirectMutex  tables_lock = DIRECT_RECURSIVE_MUTEX_INITIALIZER(tables_lock);
+++static pthread_once_t tables_lock_init_once = PTHREAD_ONCE_INIT;
+++static DirectMutex tables_lock;
++ 
+++static void
+++tables_lock_init( void )
+++{
+++     direct_recursive_mutex_init(&tabless_lock);
+++}
++ 
++ __dfb_no_instrument_function__
++ static void
++@@ -370,6 +384,7 @@ direct_trace_lookup_symbol( const char *
++      Symbol      *symbol;
++      SymbolTable *table;
++ 
+++     pthread_once(&tables_lock_init_once, tables_lock_init);
++      direct_mutex_lock( &tables_lock );
++ 
++      table = find_table( filename );
++@@ -514,6 +529,7 @@ direct_trace_print_stacks()
++      DirectTraceBuffer *b;
++      DirectTraceBuffer *buffer = get_trace_buffer();
++ 
+++     pthread_once(&buffers_lock_init_once, buffers_lock_init);
++      direct_mutex_lock( &buffers_lock );
++ 
++      if (buffer && buffer->level)
++@@ -611,6 +627,7 @@ direct_trace_free_buffer( DirectTraceBuf
++      D_MAGIC_ASSERT( buffer, DirectTraceBuffer );
++ 
++      if (buffer->thread) {
+++          pthread_once(&buffers_lock_init_once, buffers_lock_init);
++           direct_mutex_lock( &buffers_lock );
++           direct_list_remove( &buffers, &buffer->link );
++           direct_mutex_unlock( &buffers_lock );
++Index: DirectFB-1.7.7/src/directfb.c
++===================================================================
++--- DirectFB-1.7.7.orig/src/directfb.c
+++++ DirectFB-1.7.7/src/directfb.c
++@@ -99,6 +99,15 @@ const unsigned int directfb_micro_versio
++ const unsigned int directfb_binary_age    = DIRECTFB_BINARY_AGE;
++ const unsigned int directfb_interface_age = DIRECTFB_INTERFACE_AGE;
++ 
+++static pthread_once_t lock_init_once = PTHREAD_ONCE_INIT;
+++static DirectMutex lock;
+++
+++static void
+++lock_init( void )
+++{
+++     direct_recursive_mutex_init(&lock);
+++}
+++
++ const char *
++ DirectFBCheckVersion( unsigned int required_major,
++                       unsigned int required_minor,
++@@ -215,8 +224,7 @@ DirectFBCreate( IDirectFB **interface_pt
++      if (dfb_config->remote.host)
++           return CreateRemote( dfb_config->remote.host, dfb_config->remote.port, interface_ptr );
++ 
++-     static DirectMutex lock = DIRECT_RECURSIVE_MUTEX_INITIALIZER(lock);
++-
+++     pthread_once(&lock_init_once, lock_init);
++      direct_mutex_lock( &lock );
++ 
++      if (!dfb_config->no_singleton && idirectfb_singleton) {
+diff --git a/meta-oe/recipes-graphics/directfb/directfb_1.7.7.bb b/meta-oe/recipes-graphics/directfb/directfb_1.7.7.bb
+new file mode 100644
+index 0000000..c6c070e
+--- /dev/null
++++ b/meta-oe/recipes-graphics/directfb/directfb_1.7.7.bb
+@@ -0,0 +1,8 @@
++require directfb.inc
++
++RV = "1.7-7"
++
++LEAD_SONAME = "libdirectfb-1.7.so.0"
++
++SRC_URI[md5sum] = "152cf1863b1a3a28aa1370e9053440bf"
++SRC_URI[sha256sum] = "b785c638dc31b8fe3a7c81be1475c89b2255ab3d67b777c747d3fbc52f8027a3"
+-- 
+2.4.0
 
-On Fri, Jul 1, 2016 at 11:56 AM, Fabio Berton <fabio.berton@ossystems.com.br
-> wrote:
-
-> For me only worked with these options, but I can make more tests and try
-> without -fno-schedule-insn2 option.
->
-> On Fri, Jul 1, 2016 at 11:49 AM, Khem Raj <raj.khem@gmail.com> wrote:
->
->> On Fri, Jul 1, 2016 at 6:13 AM, Fabio Berton
->> <fabio.berton@ossystems.com.br> wrote:
->> > Append CFLAGS and CXXFLAGS to set work around code which gcc6 would
->> > otherwise regard as out-of-specification and allow it to produce a
->> > working program.
->> > Add patch to to correct the source to be compatible with gcc6 by
->> > preventing c++ scope errors.
->> >
->> > Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
->> > ---
->> >  ...-source-to-be-compatible-with-gcc6-by-pre.patch | 29
->> ++++++++++++++++++++++
->> >  recipes-mozilla/firefox/firefox_38.8.0esr.bb       | 19 +++-----------
->> >  2 files changed, 33 insertions(+), 15 deletions(-)
->> >  create mode 100644
->> recipes-mozilla/firefox/firefox/fixes/Correct-the-source-to-be-compatible-with-gcc6-by-pre.patch
->> >
->> > diff --git
->> a/recipes-mozilla/firefox/firefox/fixes/Correct-the-source-to-be-compatible-with-gcc6-by-pre.patch
->> b/recipes-mozilla/firefox/firefox/fixes/Correct-the-source-to-be-compatible-with-gcc6-by-pre.patch
->> > new file mode 100644
->> > index 0000000..643fef2
->> > --- /dev/null
->> > +++
->> b/recipes-mozilla/firefox/firefox/fixes/Correct-the-source-to-be-compatible-with-gcc6-by-pre.patch
->> > @@ -0,0 +1,29 @@
->> > +From fd21526d36bd579f2a227b3add38bd615e59db5e Mon Sep 17 00:00:00 2001
->> > +From: Fabio Berton <fabio.berton@ossystems.com.br>
->> > +Date: Thu, 30 Jun 2016 16:57:00 -0300
->> > +Subject: [PATCH] Correct the source to be compatible with gcc6 by
->> preventing
->> > + c++ scope errors
->> > +Organization: O.S. Systems Software LTDA.
->> > +
->> > +Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
->> > +---
->> > + nsprpub/config/make-system-wrappers.pl | 2 ++
->> > + 1 file changed, 2 insertions(+)
->> > +
->> > +diff --git a/nsprpub/config/make-system-wrappers.pl b/nsprpub/config/
->> make-system-wrappers.pl
->> > +index fa0873a..bf09583 100644
->> > +--- a/nsprpub/config/make-system-wrappers.pl
->> > ++++ b/nsprpub/config/make-system-wrappers.pl
->> > +@@ -19,7 +19,9 @@ while (<STDIN>) {
->> > +     open OUT, ">$output_dir/$_";
->> > +     print OUT "#pragma GCC system_header\n";  # suppress include_next
->> warning
->> > +     print OUT "#pragma GCC visibility push(default)\n";
->> > ++        print OUT "#define _GLIBCXX_INCLUDE_NEXT_C_HEADERS\n";
->> > +     print OUT "#include_next \<$_\>\n";
->> > ++        print OUT "#undef _GLIBCXX_INCLUDE_NEXT_C_HEADERS\n";
->> > +     print OUT "#pragma GCC visibility pop\n";
->> > +     close OUT;
->> > + }
->> > +--
->> > +2.1.4
->> > +
->> > diff --git a/recipes-mozilla/firefox/firefox_38.8.0esr.bb
->> b/recipes-mozilla/firefox/firefox_38.8.0esr.bb
->> > index bd9b82c..94e5e04 100644
->> > --- a/recipes-mozilla/firefox/firefox_38.8.0esr.bb
->> > +++ b/recipes-mozilla/firefox/firefox_38.8.0esr.bb
->> > @@ -48,6 +48,7 @@ SRC_URI = "
->> https://archive.mozilla.org/pub/firefox/releases/${PV}/source/firefox
->> >
->>  file://debian-hacks/Work-around-binutils-assertion-on-mips.patch \
->> >
->>  file://debian-hacks/Revert-Bump-search-engine-max-icon-size-to-35kB.patch \
->> >             file://fixes/Fix-firefox-install-dir.patch \
->> > +
->>  file://fixes/Correct-the-source-to-be-compatible-with-gcc6-by-pre.patch \
->> >             "
->> >
->> >  SRC_URI[archive.md5sum] = "af46898414a433f8260c5373efb97d19"
->> > @@ -63,6 +64,9 @@ EXTRA_OEMAKE += "installdir=${libdir}/${PN}"
->> >
->> >  ARM_INSTRUCTION_SET = "arm"
->> >
->> > +CFLAGS +=" -fno-delete-null-pointer-checks -fno-lifetime-dse
->> -fno-schedule-insns2"
->> > +CXXFLAGS +=" -fno-delete-null-pointer-checks -fno-lifetime-dse
->> -fno-schedule-insns2"
->> > +
->>
->> I am ok with this patch, however am curious why -fno-schedule-insn2 is
->> needed ?
->>
->>
->> >  do_install_append() {
->> >      install -d ${D}${datadir}/applications
->> >      install -d ${D}${datadir}/pixmaps
->> > @@ -105,18 +109,3 @@ PRIVATE_LIBS += " \
->> >      libssl3.so \
->> >      libsoftokn3.so \
->> >  "
->> > -
->> > -# | i586-oe-linux-gcc  -m32 -march=i586
->> --sysroot=/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86 -o
->> WebMElement.o -c
->> > -#  -I../../dist/system_wrappers -include
->> /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/firefox/38.7.1esr-r0/mozilla-esr38/config/gcc_hidden.h
->> -DMOZ_GLUE_IN_PROGRAM -DAB_CD=en-US -DNO_NSPR_10_SUPPORT
->> > -#
->> -I/home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/firefox/38.7.1esr-r0/mozilla-esr38/media/libmkv
->> -I.
->> > -#  -I../../dist/include
->>  -I/home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/firefox/38.7.1esr-r0/mozilla-esr38/firefox-build-dir/dist/include/nspr
->> -I/home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/firefox/38.7.1esr-r0/mozilla-esr38/firefox-build-dir/dist/include/nss
->> > -#
->> -I/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/include/pixman-1
->>  -fPIC   -include ../../mozilla-config.h -DMOZILLA_CLIENT -MD -MP -MF
->> .deps/WebMElement.o.pp  -Wall -Wdeclaration-after-statement -Wempty-body
->> -Wpointer-to-int-cast -Wsign-compare -Wtype-limits -Wno-unused -Wcast-align
->> -Os -fsigned-char -fno-strict-aliasing -std=gnu99 -fgnu89-inline
->> -fno-strict-aliasing -fno-math-errno -pthread -pipe  -DNDEBUG -DTRIMMED
->> -freorder-blocks -Os -fomit-frame-pointer
->>  /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/firefox/38.7.1esr-r0/mozilla-esr38/media/libmkv/WebMElement.c
->> > -# | In file included from ../../../dist/system_wrappers/stdlib.h:3:0,
->> > -# |                  from ../../../dist/include/mozilla/mozalloc.h:15,
->> > -# |                  from ../../../dist/stl_wrappers/cstdlib:39,
->> > -# |                  from
->> /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/firefox/38.7.1esr-r0/mozilla-esr38/gfx/graphite2/src/inc/Main.h:29,
->> > -# |                  from
->> /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/firefox/38.7.1esr-r0/mozilla-esr38/gfx/graphite2/src/CmapCache.cpp:28,
->> > -# |                  from
->> /home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/firefox/38.7.1esr-r0/mozilla-esr38/firefox-build-dir/gfx/graphite2/src/Unified_cpp_gfx_graphite2_src0.cpp:11:
->> > -# |
->> /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86/usr/include/c++/6.1.1/stdlib.h:38:12:
->> error: 'std::abort' has not been declared
->> > -# |  using std::abort;
->> > -PNBLACKLIST[firefox] ?= "BROKEN: fails to build with gcc-6"
->> > --
->> > 2.1.4
->> >
->> > --
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
->
->
 
