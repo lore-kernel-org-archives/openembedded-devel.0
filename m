@@ -1,24 +1,26 @@
 Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id C65DE60119
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A71C60119
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jul 2016 08:07:36 +0000 (UTC)
+	Mon,  4 Jul 2016 08:07:38 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u6487bN1004761
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u6487c9a016669
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 4 Jul 2016 01:07:37 -0700 (PDT)
+	Mon, 4 Jul 2016 01:07:38 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Mon, 4 Jul 2016 01:07:36 -0700
+	14.3.248.2; Mon, 4 Jul 2016 01:07:38 -0700
 From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 4 Jul 2016 16:06:11 +0800
-Message-ID: <1467619576-13899-1-git-send-email-mingli.yu@windriver.com>
+Date: Mon, 4 Jul 2016 16:06:12 +0800
+Message-ID: <1467619576-13899-2-git-send-email-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.8.1
+In-Reply-To: <1467619576-13899-1-git-send-email-mingli.yu@windriver.com>
+References: <1467619576-13899-1-git-send-email-mingli.yu@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH v2] Add some python packages bb
+Subject: [meta-python][PATCH v2 1/5] python-pbr: Add python-pbr bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,22 +33,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jul 2016 08:07:38 -0000
+X-List-Received-Date: Mon, 04 Jul 2016 08:07:39 -0000
 Content-Type: text/plain
 
-1, Add python-pbr bb file as python-mock depends on
-   python-pbr-native
+From: Mingli Yu <mingli.yu@windriver.com>
 
-2, Update python-mock bb to add python-pbr-native dependency 
-   for python-mock
+* Add python-pbr bb file as python-mock depends on
+  python-pbr-native
 
-3, Update python-mccabe bb to add python-pytest-runner 
-   dependency for python-mccabe
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ meta-python/recipes-devtools/python/python-pbr_1.10.0.bb | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
 
-4, Add python-pytest-runner bb as python-mccabe depends
-   on python-pytest-runner
-
-5, Add python-setuptools-scm bb as python-pytest-runner depends
-   on python-setuptools-scm
+diff --git a/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb b/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
+new file mode 100644
+index 0000000..fd35197
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "Python Build Reasonableness: PBR is a library that injects some useful and sensible default behaviors into your setuptools run"
++HOMEPAGE = "https://pypi.python.org/pypi/pbr"
++SECTION = "devel/python"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
++
++SRC_URI[md5sum] = "8e4968c587268f030e38329feb9c8f17"
++SRC_URI[sha256sum] = "186428c270309e6fdfe2d5ab0949ab21ae5f7dea831eab96701b86bd666af39c"
++
++inherit pypi setuptools
++
++DEPENDS_class-target += " \
++        python-pip \
++        "
++
++BBCLASSEXTEND = "native"
+-- 
+2.8.1
 
 
