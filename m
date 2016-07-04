@@ -1,42 +1,24 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id ECB4F6013D
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C65DE60119
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jul 2016 06:55:13 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id f126so90977810wma.1
+	Mon,  4 Jul 2016 08:07:36 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u6487bN1004761
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Jul 2016 23:55:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=G4qETpijcX7CW1N8s3XWT5QwHtUukjWEGXEzz6bo01g=;
-	b=F+R5ZxiSE/+4MJsjqydRPbLTip74wdSy64p8bAB9g8EmDVjXV8g60A2Z70l7/swpYO
-	BLpKyTcvNpgFb4ON1v/OU5IqqNrIv7S/GnMm7ADJGuwirB6qWzZSkZ0xajBdJeEyC9/Y
-	ZhqJjG6MgrWTa0IKm1idtZu2H908tCBiiIoFg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=G4qETpijcX7CW1N8s3XWT5QwHtUukjWEGXEzz6bo01g=;
-	b=Eva3HECQHaoqsFCfWZiu/xS3eWc3eJOjMDbPaZ9beuOQ+ZHqcqZhNyF6+28vRKEncR
-	rn5iujBJEpMoNCzYCCdi7fFu+AqDNHYP1iW3uWQ0yFEqJ270NmAYKTrYkQqU1W+xCedH
-	D+0mYadIfiddxk+GYz7Vx3XYqfIIc/wltGaOtLc3wPFSXV9hKAHPG+SqaoIxu2A8DQEL
-	ubuCoRApvEJdIWvswcmwXFLEWlsWl3YCqT9FYYoeBDDKxkagA2I6EjOziI69gTCTgQNW
-	fKWjz9CS704wapU19dkm6j0511+gXvLoAQxbnne4xOq8XvXkgMhdOHEieGuAqdldgCpy
-	8vrA==
-X-Gm-Message-State: ALyK8tKZYdqtxCCLYmr8H6655K8yfJvQjrYD5aNN5fPMUk+LHHIX1iZwLIyRNRjG96ff/YcS/vcT+VL1ErgyFKr8
-X-Received: by 10.194.85.34 with SMTP id e2mr7565523wjz.153.1467615313363;
-	Sun, 03 Jul 2016 23:55:13 -0700 (PDT)
+	Mon, 4 Jul 2016 01:07:37 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Mon, 4 Jul 2016 01:07:36 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 4 Jul 2016 16:06:11 +0800
+Message-ID: <1467619576-13899-1-git-send-email-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Received: by 10.194.163.225 with HTTP; Sun, 3 Jul 2016 23:54:53 -0700 (PDT)
-In-Reply-To: <CAMKF1srWbfeeihoVr_8M55Y_NfiPvAw==PHZ14jAjNQnniwgiA@mail.gmail.com>
-References: <20160701051457.20909-1-raj.khem@gmail.com>
-	<CAGNsrLAET5WkH9MkfqqTAE+=x0kRgNt1QBXimzeUywag_MTQMw@mail.gmail.com>
-	<CAMKF1srWbfeeihoVr_8M55Y_NfiPvAw==PHZ14jAjNQnniwgiA@mail.gmail.com>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Mon, 4 Jul 2016 08:54:53 +0200
-Message-ID: <CAP71Wjw_aSj4Daa=hqSFq9msScNeuSKJYJXUgAjLN8tA5S_0iA@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] android-tools: Fix, enhance and move from meta-shr
+Subject: [meta-python][PATCH v2] Add some python packages bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,15 +31,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jul 2016 06:55:14 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 04 Jul 2016 08:07:38 -0000
+Content-Type: text/plain
 
-On Sat, Jul 2, 2016 at 7:15 PM, Khem Raj <raj.khem@gmail.com> wrote:
->> Obviously, it doesn't prevent to get current recipe moved to meta-oe.
->> It's just a heads up :)
->
-> Thanks for.update. I think this really should go into oe core. Since sparse
-> file system is across many devices
+1, Add python-pbr bb file as python-mock depends on
+   python-pbr-native
 
-+1. for sure.. that would be very nice.
+2, Update python-mock bb to add python-pbr-native dependency 
+   for python-mock
+
+3, Update python-mccabe bb to add python-pytest-runner 
+   dependency for python-mccabe
+
+4, Add python-pytest-runner bb as python-mccabe depends
+   on python-pytest-runner
+
+5, Add python-setuptools-scm bb as python-pytest-runner depends
+   on python-setuptools-scm
+
 
