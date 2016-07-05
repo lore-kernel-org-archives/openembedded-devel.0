@@ -1,46 +1,25 @@
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 89F066011C
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7544A601D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jul 2016 21:13:24 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id m2so12340647qtd.1
+	Tue,  5 Jul 2016 02:04:47 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u6524mMD008727
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jul 2016 14:13:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:organization;
-	bh=dmWhQ5x7g/8T1M3AJl0AY+z4SDZJdAvPhym9vJZdBqw=;
-	b=Ka4/fZVKVPKWpM5kKCEi7ElVB4OlxlJEtxiulnCTo5Qv4FKtMNLPN0Ig2tJ7keuKQ3
-	8EhPq7ujdtwIBWpTEFiTxTMwJGK6xFaW12A7GLl2Uq2P6JKpvwBpyM7WsGrK5nKWNAW8
-	/ENusaZxd9mo5ekSUe48/VBdYmld3xgLrNrhqMrGVIDQrxSqzgSFKgfnd5NaAGO8bBLH
-	33enCHt1XuTTWqtQY9AWXvVyD1pVYpShQPTyMD7h+e96vn5mP8bRlwsXLcELdbhT/66v
-	Tkro4/BV7gYytf8pILyv2EodC+WkIG2rsEr5we3ifwbc7gIl7h9M5JyoZxeKwcISCmhk
-	Rkqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
-	bh=dmWhQ5x7g/8T1M3AJl0AY+z4SDZJdAvPhym9vJZdBqw=;
-	b=PyniYlxPwGKx2+NQrxbBnlwjx7DRf1i15EQ0ldPYIQeWzFSfSYr4HOqTE7IkI7tTsX
-	nupXrbyemjMETqgWWRgFOlKzVDaSBPdsWSzkhvN5ekd7SxT2XVlbM++Cue2wUCngtivy
-	OY/5ezy79B06golWPN2f8GZMAthzFwQZDhwMShHSJlI/nj9jwkbA36A++PLpam7vlozN
-	wCHLTzayewti7ID3N0OjZNaS9Qsh3isEat8JbUUUf+/ZhGTjJl8jRfvVDwjHkdi7+AWI
-	0AGbd/ODWtngMUQju1qln7JYhwulEwIvXylBlo4QyOVGbS19ZTB89/ayiwCSn7i6vbOC
-	s6Dw==
-X-Gm-Message-State: ALyK8tLN7NpL5rPH2kMsSKclvJcfwzDBJaiCVLtOWCHmT/CCDHvBOhtGSRMmx9HkU65hTQ==
-X-Received: by 10.200.49.165 with SMTP id h34mr21985895qte.43.1467666804992;
-	Mon, 04 Jul 2016 14:13:24 -0700 (PDT)
-Received: from monster.lab.ossystems.com.br ([177.127.6.231])
-	by smtp.gmail.com with ESMTPSA id 9sm2551610qts.26.2016.07.04.14.13.22
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 04 Jul 2016 14:13:24 -0700 (PDT)
-From: Fabio Berton <fabio.berton@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Jul 2016 18:13:11 -0300
-Message-Id: <1467666791-14819-1-git-send-email-fabio.berton@ossystems.com.br>
-X-Mailer: git-send-email 2.1.4
-Organization: O.S. Systems Software LTDA.
-Subject: [meta-java][PATCH] rxtx: Add remove-libtool class to remove all .la files
+	Mon, 4 Jul 2016 19:04:48 -0700
+Received: from localhost (128.224.162.178) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
+	Mon, 4 Jul 2016 19:04:47 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 5 Jul 2016 10:04:43 +0800
+Message-ID: <cover.1467683887.git.yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+X-Originating-IP: [128.224.162.178]
+Subject: [meta-gnome][PATCH 0/2] gtksourceview2 and mousepad: fix build error with gcc6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,40 +32,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jul 2016 21:13:26 -0000
+X-List-Received-Date: Tue, 05 Jul 2016 02:04:48 -0000
+Content-Type: text/plain
 
-Class remove-libtool adds a postfunc to do_install to remove all .la
-files installed by libtool, so that they are absent from both the
-sysroots and target packages.
 
-Fix error:
-ERROR: rxtx-2.2.0-r2 do_populate_sysroot: QA Issue: librxtxRaw.la
-  failed sanity test (workdir) in path
-  ../build/tmp/work/cortexa9hf-neon-emcontrols-linux-gnueabi/
-  rxtx/2.2.0-r2/sysroot-destdir/usr/lib/jni [la]
-ERROR: rxtx-2.2.0-r2 do_populate_sysroot: QA staging was broken by the
-  package built above
-ERROR: rxtx-2.2.0-r2 do_populate_sysroot: Function failed: do_qa_staging
+The following changes since commit 1cb7275961fd4bca3a6cb70e064ad6e6e1ff04d6:
 
-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
----
- recipes-extended/rxtx/rxtx_2.2.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+  gnome-terminal, toscoterm, vala-terminal, xfce4-terminal: use vte9 (2016-06-23 15:21:27 +0200)
 
-diff --git a/recipes-extended/rxtx/rxtx_2.2.0.bb b/recipes-extended/rxtx/rxtx_2.2.0.bb
-index 564df32..c3fbc13 100644
---- a/recipes-extended/rxtx/rxtx_2.2.0.bb
-+++ b/recipes-extended/rxtx/rxtx_2.2.0.bb
-@@ -28,7 +28,7 @@ S = "${WORKDIR}/rxtx-2.2pre2"
- 
- INSANE_SKIP_${JPN} += "dev-so"
- 
--inherit autotools-brokensep java-library
-+inherit autotools-brokensep java-library remove-libtool
- PACKAGE_ARCH = "${TUNE_PKGARCH}"
- 
- JARFILENAME = "RXTXcomm.jar"
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib yzhao/gcc6-fixes
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=yzhao/gcc6-fixes
+
+Yi Zhao (2):
+  gtksourceview2: fix build with gcc6
+  mousepad: remove blacklist caused by gtksourceview2
+
+ .../suppress-string-format-literal-warning.patch   | 33 ++++++++++++++++++++++
+ .../gtksourceview/gtksourceview2_2.10.5.bb         |  3 +-
+ meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb  |  1 -
+ 3 files changed, 34 insertions(+), 3 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/gtksourceview/gtksourceview2/suppress-string-format-literal-warning.patch
+
 -- 
-2.1.4
+2.7.4
 
 
