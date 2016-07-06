@@ -1,55 +1,51 @@
-Return-Path: <tobias.andersson@multiq.com>
-Received: from mail1.bemta3.messagelabs.com (mail1.bemta3.messagelabs.com
-	[195.245.230.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 05CC060119
+Return-Path: <piotr.lewicki@elfin.de>
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id A560F60119
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jul 2016 13:15:24 +0000 (UTC)
-Received: from [85.158.137.3] by server-14.bemta-3.messagelabs.com id
-	D5/DC-07949-C640D775; Wed, 06 Jul 2016 13:15:24 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrPIsWRWlGSWpSXmKPExsVy2HCNuW4OS22
-	4wcqzYhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8bzq8vYCt6LV7R9WsDcwPhYtIuRk0NIYDqj
-	xL+XVV2MHBxsAiYSq9ZbgYRFBGIklp4/zwZiCwsoSbz+sI4dIq4uMeHtPyjbSeLyhHusIDaLg
-	IrEp48nWEBsXoEgib0td9ghxj9glFi4VR7E5hQIlrh9eQ0jiM0oICtx//s9sHpmAXGJz3MfMI
-	HYEgICEkv2nGeGsEUlXj7+xwphy0tMm9/CBlGfJ7Hm1Cw2iF2CEidnPmGZwCg4C8moWUjKZiE
-	pg4jrSdyYOoUNwtaWWLbwNTOErSsx498hFmTxBYzsqxjVi1OLylKLdA31kooy0zNKchMzc3QN
-	DYz1clOLixPTU3MSk4r1kvNzNzECI4IBCHYwLv/odIhRkoNJSZSX5Vt1uBBfUn5KZUZicUZ8U
-	WlOavEhRhkODiUJ3itMteFCgkWp6akVaZk5wNiESUtw8CiJ8H4ASfMWFyTmFmemQ6ROMSpKif
-	PeAkkIgCQySvPg2mDp4BKjrJQwLyPQIUI8BalFuZklqPKvGMU5GJWEea+BTOHJzCuBm/4KaDE
-	T0OKfLtUgi0sSEVJSDYySd3edmxF42Ob6Aat0gZlHhTSXls+qXViwyPtEmO/5tYfz0j7MuVGm
-	I6i5t9te83S6m2K/z67Qtd5Vz3vzVs/W72hZkTk5fk0zh9Lp27u2sHYXGc0JYbM9KMf0eqrun
-	8h5wu5p3jfZWwWulGwRDDindzk4MrspeMP8jv37N5x8dtbRRTp6BrMSS3FGoqEWc1FxIgANnd
-	RdAgMAAA==
-X-Env-Sender: tobias.andersson@multiq.com
-X-Msg-Ref: server-5.tower-38.messagelabs.com!1467810923!23365621!1
-X-Originating-IP: [195.49.172.55]
-X-StarScan-Received: 
-X-StarScan-Version: 8.46; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 9711 invoked from network); 6 Jul 2016 13:15:24 -0000
-Received: from unknown (HELO exch02-esl-se.Multiq2.local) (195.49.172.55)
-	by server-5.tower-38.messagelabs.com with AES256-SHA encrypted SMTP;
-	6 Jul 2016 13:15:24 -0000
-Received: from exch02-esl-se.Multiq2.local ([::1]) by
-	exch02-esl-se.Multiq2.local ([::1]) with mapi id 14.03.0224.002;
-	Wed, 6 Jul 2016 15:15:23 +0200
-From: Tobias Andersson <tobias.andersson@multiq.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-oe][krogoth][issue]
-Thread-Index: AdHXdwKkkt/wsnFLRsetlGXEPkoahwAAbUaTAAL9nUwAAO4QMw==
-Date: Wed, 6 Jul 2016 13:15:22 +0000
-Message-ID: <A126740DBD3CFF4C92C08C03B00BC6C80135FF3C@exch02-esl-se.Multiq2.local>
-References: <A126740DBD3CFF4C92C08C03B00BC6C80135FD79@exch02-esl-se.Multiq2.local>,
-	<A126740DBD3CFF4C92C08C03B00BC6C80135FDEE@exch02-esl-se.Multiq2.local>,
-	<A126740DBD3CFF4C92C08C03B00BC6C80135FE70@exch02-esl-se.Multiq2.local>
-In-Reply-To: <A126740DBD3CFF4C92C08C03B00BC6C80135FE70@exch02-esl-se.Multiq2.local>
-Accept-Language: sv-SE, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [85.235.1.83]
+	Wed,  6 Jul 2016 15:01:57 +0000 (UTC)
+Received: by mail-wm0-f46.google.com with SMTP id a66so196521039wme.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Jul 2016 08:01:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=elfin.de; s=google;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=1le2BHusG42xvT7ZZFLwSU6KIx2y4KqynYWj8Gc94vk=;
+	b=OOGqdNtkw1ciq3NdKFvWclf9TNbOL+TfIwaarzqexFv2Gh+jIyG+V/0nFNnWEY5e2B
+	Oaevoewtk6gQIPJ1dahz+lVVoPtT1oKpMtjQG1bgzFHJQRLgtqT4capcCVFrX+Y9Kzow
+	s2CnmBLxNbAKiYxvNrN9Ydp9h3ACqVyeKZGVViRDc2BKxCTdk3yKkSzPiGDT40vDQ9G7
+	MlScUgbHNzTuWWJX0VlsYUXLkoMV5MdiQnwlafpChiLcRfUdCJcB+lTpCwS0WjMXrqSw
+	7UEnAQbSKh3qMt8gw2IvOvMtscHIpAPhpBgOZr9pahMvasI6tzo+AVr9Y6GeMtdJw52G
+	hqkw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=1le2BHusG42xvT7ZZFLwSU6KIx2y4KqynYWj8Gc94vk=;
+	b=EMnG+qiAUZ9q+6acKE0bKDzVyW9ZQ/R3JzHeFiD26n3hhFvkIlYLVC+82vSkxNx0ZM
+	trqu/nBbOc8C1FXXGLfbdfoM7dhQt77E1wz5iAJ9FSCJO+NbAdirH6YtNaynQ9PPvO3l
+	SWyZkdDU2ekOg0hgghPq/Et0qPtHfYgZCy5l0Cfsx3KjoV/zjzEQNVbRh7635KrOcYFj
+	P/hPkWdkxlvIvkW0EgsbAmyxAR8Zx9w98JYQJ52HW5na4hYCFXCHsSsomL0KY/g+9NJC
+	eZuxyCO5PGkvQjaWf3jhGJGAZCRGXNhHY/QCFUVXSlMKFjw9N4iHNGEwxvvZHPU+GRUM
+	FC+A==
+X-Gm-Message-State: ALyK8tLN+V9H7Gfi3AB0QweIg9htXFWcw06SpM4QLRuCMYgaKqiHvOjNeBELTilGLky3Gg==
+X-Received: by 10.194.82.74 with SMTP id g10mr20667009wjy.11.1467817317849;
+	Wed, 06 Jul 2016 08:01:57 -0700 (PDT)
+Received: from [192.168.2.170] (b2b-94-79-174-114.unitymedia.biz.
+	[94.79.174.114]) by smtp.gmail.com with ESMTPSA id
+	w184sm2930799wmd.11.2016.07.06.08.01.57
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 06 Jul 2016 08:01:57 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org
+References: <1467360339-10236-1-git-send-email-ed.bartosh@linux.intel.com>
+From: "piotr.lewicki" <piotr.lewicki@elfin.de>
+Message-ID: <577D1D64.8080604@elfin.de>
+Date: Wed, 6 Jul 2016 17:01:56 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.8.0
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-oe][krogoth][issue]
+In-Reply-To: <1467360339-10236-1-git-send-email-ed.bartosh@linux.intel.com>
+Subject: [OE-core] problem with blacklisted packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,31 +58,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jul 2016 13:15:25 -0000
-Content-Language: sv-SE
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 06 Jul 2016 15:01:59 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I have an issue with php-cgi failing on execute with error msg:
+Hi,
+I'm having problem with some of the recipes which are blacklisted due to 
+problems with compilation using GCC-6.
 
-php-cgi: relocation error: php-cgi: symbol mysql_server_init, version libmy=
-sqlclient_16 not defined in file libmysqlclient.so.18 with link time refere=
-nce
+I wonder if there is a way to "whitelist" those packages without 
+changing content of original recipe?
 
-libmysqlclient.so.18 comes from mariadb
-branch is krogoth
+For now I have:
+
+GCCVERSION = "5.%"
+
+in my distro.conf so if a recipe is not building due to problems with 
+gcc6 I simply edit the recipe and remove the line with PNBLACKLIST.
+
+Is there a better way to deal with those problems?
+Can this blacklisting depend on "GCCVERSION" ?
+
+Example of problematic recipe : crda (from crda_3.18.bb)
 
 
-Med v=E4nlig h=E4lsning/ Kind Regards
 
-Tobias Andersson
-
-Software Developer
-
-Direct: +46 (0)10 211 66 05
-Office: +46 (0)10 211 66 00
-
-tobias.andersson@multiq.com
-
-www.multiq.com
+Thanks,
+Piotr Lewicki
 
