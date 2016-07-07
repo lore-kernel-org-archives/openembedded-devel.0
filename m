@@ -1,26 +1,50 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id A9564601A4
+Return-Path: <victorascroft@gmail.com>
+Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com
+	[209.85.192.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 4EB996013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jul 2016 02:18:08 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u672I9co020118
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu,  7 Jul 2016 04:04:32 +0000 (UTC)
+Received: by mail-pf0-f175.google.com with SMTP id c2so2356437pfa.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 6 Jul 2016 19:18:09 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Wed, 6 Jul 2016 19:18:08 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 6 Jul 2016 22:18:04 -0400
-Message-ID: <24221e26c3869173885c9d3228bf27636bf2c296.1467857744.git.jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.8.1
-In-Reply-To: <cover.1467857744.git.jackie.huang@windriver.com>
-References: <cover.1467857744.git.jackie.huang@windriver.com>
+	Wed, 06 Jul 2016 21:04:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=Qb2V6ViFDCmqz8Bd/ozBGH3+16LXz4mkywMgkaIdLyo=;
+	b=jbK2rGVlP613FtzpWcvwrLi0b8q8hfX2rfnApeYf8nsdgeE5blhuXXMICDTS/Z7UZf
+	X40HzoLr2eUKkqx/4lBxd9Ygp+q4vSrz1YdGVS3Q2sgmSaBQF2xuUNOrd/qUA7p5KeI1
+	KSOHfJE1dR9Q0VlISfmyc9Jcz9CJLguKd7/2nVyqieXo0eH6Y9yfuT4QDohp34dvECJ4
+	Hv+eJOaJE5tF03HIJ2O3VmIecrKdywzgRg2L0He2d/HaRMPG2KgICpzgCUzIE4gf2ZGn
+	tRTnYjp5oSFPT3en6p4TDF7lC0cY6uP9MHJM0hp9BP2RfOeH9+GoyL37RAbNMhfnu4Xf
+	T9rQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=Qb2V6ViFDCmqz8Bd/ozBGH3+16LXz4mkywMgkaIdLyo=;
+	b=XBxaS2oAfJXLqkruRRqbnf+AMCKrWu/ZndfhmgKtM5fk5lRGzkOCtdZAtQ3ya6q9gI
+	+ZeS29ZmmKZIdb9VvbXs4OuVWAE0tw1bUQN8PI6PPor74fQQXPfYHdUVrUEHE/DxIeqH
+	FQng8FtFAX02euQ/WqUqsosYWLLb1FdU+L3C10Zy+vKj46uHv1K8OP1tqiOVpiIha1my
+	OBIlNFIuwbtRVOyrXJEEu5Dqec5ulLUtigRiDrdnGeGzqQtiO9PpiYnDih0d0O75bkIu
+	CuNvOcg2Dh+TtMsGKH0f5amo4HjOH3s2dvWRK04Yh+cvE8W6P9jXtna4RJz5HUuS9z/y
+	9BIA==
+X-Gm-Message-State: ALyK8tKdC1LzxSrc5pj5Yi5f0CcnTA+os+n8qNrj37Pvd/5csc95GusUGvDZSwN1kRo7pw==
+X-Received: by 10.98.10.25 with SMTP id s25mr1563072pfi.44.1467864273164;
+	Wed, 06 Jul 2016 21:04:33 -0700 (PDT)
+Received: from localhost ([115.115.243.34])
+	by smtp.gmail.com with ESMTPSA id e14sm135332pfb.89.2016.07.06.21.04.32
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 06 Jul 2016 21:04:32 -0700 (PDT)
+Date: Thu, 7 Jul 2016 09:27:14 +0530
+From: victorascroft@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160707035714.GA2617@Sanchayan-Arch.localdomain>
+References: <20160701182008.GA20145@Sanchayan-Arch.localdomain>
 MIME-Version: 1.0
-Subject: [PATCH 2/2] net-snmp: initscripts are located in net-snmp-server-snmp package
+In-Reply-To: <20160701182008.GA20145@Sanchayan-Arch.localdomain>
+User-Agent: Mutt/1.6.1 (2016-04-27)
+Subject: Re: Building php with postgres support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,41 +57,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jul 2016 02:18:09 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 07 Jul 2016 04:04:34 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-From: Li Wang <li.wang@windriver.com>
+Hello,
 
-The net-snmp-server package is a meta-package requiring
-net-snmp-server-snmpd and net-snmp-server-snmptrapd package.
-The net-snmp-server-snmpd package provides the startup scripts
-not the meta net-snmp-server package.
+Ping?
 
-Signed-off-by: Anders Wallin <anders.wallin@windriver.com>
-Signed-off-by: Li Wang <li.wang@windriver.com>
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-index ca98fc0..4ad5b21 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
-@@ -143,9 +143,9 @@ FILES_${PN}-dev += "${bindir}/mib2c ${bindir}/mib2c-update"
- CONFFILES_${PN}-server-snmpd = "${sysconfdir}/snmp/snmpd.conf"
- CONFFILES_${PN}-server-snmptrapd = "${sysconfdir}/snmp/snmptrapd.conf"
- 
--INITSCRIPT_PACKAGES = "${PN}-server"
--INITSCRIPT_NAME_${PN}-server = "snmpd"
--INITSCRIPT_PARAMS_${PN}-server = "start 90 2 3 4 5 . stop 60 0 1 6 ."
-+INITSCRIPT_PACKAGES = "${PN}-server-snmpd"
-+INITSCRIPT_NAME_${PN}-server-snmpd = "snmpd"
-+INITSCRIPT_PARAMS_${PN}-server-snmpd = "start 90 2 3 4 5 . stop 60 0 1 6 ."
- 
- EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemd', '--without-systemd', d)}"
- 
--- 
-2.8.1
-
+On 16-07-01 23:50:08, victorascroft@gmail.com wrote:
+> Hello,
+> 
+> I want to build php with postgres support. Am using the jethro
+> branch. Looking at the php.inc file
+> 
+> http://cgit.openembedded.org/meta-openembedded/tree/meta-oe/recipes-devtools/php/php.inc?h=jethro
+> 
+> postgres doesn't seem to be enabled by default.
+> 
+> Tried enabling postgres by adding the following to EXTRA_OECONF
+> 
+> --with-pgsql=${STAGING_DIR_TARGET}${exec_prefix}
+> 
+> based on the PKGCONFIG defined in that file later but that does not
+> seem to work.
+> 
+> Checking phpinfo does not show postgres support enabled.
+> 
+> What would be the required change to php.inc file for enabling
+> postgres with php?
+> 
+> Regards,
+> Victor.
 
