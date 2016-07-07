@@ -1,24 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9BA7560119
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id A9564601A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jul 2016 02:18:05 +0000 (UTC)
+	Thu,  7 Jul 2016 02:18:08 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u672I6kT013111
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u672I9co020118
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 6 Jul 2016 19:18:06 -0700
+	Wed, 6 Jul 2016 19:18:09 -0700 (PDT)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Wed, 6 Jul 2016 19:18:05 -0700
+	Wed, 6 Jul 2016 19:18:08 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 6 Jul 2016 22:18:02 -0400
-Message-ID: <cover.1467857744.git.jackie.huang@windriver.com>
+Date: Wed, 6 Jul 2016 22:18:04 -0400
+Message-ID: <24221e26c3869173885c9d3228bf27636bf2c296.1467857744.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.8.1
+In-Reply-To: <cover.1467857744.git.jackie.huang@windriver.com>
+References: <cover.1467857744.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 0/2] net-snmp: fix AgentX crash and initscripts packages
+Subject: [PATCH 2/2] net-snmp: initscripts are located in net-snmp-server-snmp package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,28 +36,37 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Thu, 07 Jul 2016 02:18:09 -0000
 Content-Type: text/plain
 
-From: Jackie Huang <jackie.huang@windriver.com>
+From: Li Wang <li.wang@windriver.com>
 
-The following changes since commit 1cb7275961fd4bca3a6cb70e064ad6e6e1ff04d6:
+The net-snmp-server package is a meta-package requiring
+net-snmp-server-snmpd and net-snmp-server-snmptrapd package.
+The net-snmp-server-snmpd package provides the startup scripts
+not the meta net-snmp-server package.
 
-  gnome-terminal, toscoterm, vala-terminal, xfce4-terminal: use vte9 (2016-06-23 15:21:27 +0200)
+Signed-off-by: Anders Wallin <anders.wallin@windriver.com>
+Signed-off-by: Li Wang <li.wang@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-are available in the git repository at:
-
-  git://git.pokylinux.org/poky-contrib.git jhuang0/fp_net-snmp_160707_0
-  http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/fp_net-snmp_160707_0
-
-Jackie Huang (1):
-  net-snmp: fix snmpd crash via AgentX connection
-
-Li Wang (1):
-  net-snmp: initscripts are located in net-snmp-server-snmp package
-
- .../net-snmp/net-snmp/net-snmp-agentx-crash.patch  | 75 ++++++++++++++++++++++
- .../recipes-protocols/net-snmp/net-snmp_5.7.3.bb   |  7 +-
- 2 files changed, 79 insertions(+), 3 deletions(-)
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/net-snmp-agentx-crash.patch
-
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+index ca98fc0..4ad5b21 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+@@ -143,9 +143,9 @@ FILES_${PN}-dev += "${bindir}/mib2c ${bindir}/mib2c-update"
+ CONFFILES_${PN}-server-snmpd = "${sysconfdir}/snmp/snmpd.conf"
+ CONFFILES_${PN}-server-snmptrapd = "${sysconfdir}/snmp/snmptrapd.conf"
+ 
+-INITSCRIPT_PACKAGES = "${PN}-server"
+-INITSCRIPT_NAME_${PN}-server = "snmpd"
+-INITSCRIPT_PARAMS_${PN}-server = "start 90 2 3 4 5 . stop 60 0 1 6 ."
++INITSCRIPT_PACKAGES = "${PN}-server-snmpd"
++INITSCRIPT_NAME_${PN}-server-snmpd = "snmpd"
++INITSCRIPT_PARAMS_${PN}-server-snmpd = "start 90 2 3 4 5 . stop 60 0 1 6 ."
+ 
+ EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemd', '--without-systemd', d)}"
+ 
 -- 
 2.8.1
 
