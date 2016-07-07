@@ -1,50 +1,54 @@
-Return-Path: <victorascroft@gmail.com>
-Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com
-	[209.85.192.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 4EB996013D
+Return-Path: <piotr.lewicki@elfin.de>
+Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id C39F66013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jul 2016 04:04:32 +0000 (UTC)
-Received: by mail-pf0-f175.google.com with SMTP id c2so2356437pfa.2
+	Thu,  7 Jul 2016 08:50:18 +0000 (UTC)
+Received: by mail-wm0-f52.google.com with SMTP id n127so7317242wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jul 2016 21:04:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=Qb2V6ViFDCmqz8Bd/ozBGH3+16LXz4mkywMgkaIdLyo=;
-	b=jbK2rGVlP613FtzpWcvwrLi0b8q8hfX2rfnApeYf8nsdgeE5blhuXXMICDTS/Z7UZf
-	X40HzoLr2eUKkqx/4lBxd9Ygp+q4vSrz1YdGVS3Q2sgmSaBQF2xuUNOrd/qUA7p5KeI1
-	KSOHfJE1dR9Q0VlISfmyc9Jcz9CJLguKd7/2nVyqieXo0eH6Y9yfuT4QDohp34dvECJ4
-	Hv+eJOaJE5tF03HIJ2O3VmIecrKdywzgRg2L0He2d/HaRMPG2KgICpzgCUzIE4gf2ZGn
-	tRTnYjp5oSFPT3en6p4TDF7lC0cY6uP9MHJM0hp9BP2RfOeH9+GoyL37RAbNMhfnu4Xf
-	T9rQ==
+	Thu, 07 Jul 2016 01:50:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=elfin.de; s=google;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=0FeiIOxe+aHs83PuuIZQE5nBIhgRGgjhJAcAV5MiVno=;
+	b=R8Fbh5KcKhKqpe9r0XXk69u2MvmoxTQ2BmUrqVR5s93mp0vJUe4LtyKKJPGZ62hfOf
+	HxWWr5AsI1ei5YZtcabE408VdcwjpARjbqNhvMOI/LXwwG5GAypGUlhFsqylEEpP5CJC
+	xDOP71OwQLicgBAOW8KbaWe3N4sElf/GM0i46IeRVQbrh+cMRlYvUrLIkoJOjf45DxwJ
+	KNx31z6oGS64ng7ZExmED10ONNIaOvWSJQzwZmvb4rdunSgBSZsKXlmJkgjhNoKzzCVE
+	KGBI0yDEmBfpqg8R+qaRWHWdrHipYvguvBA/mxuEO7HlWSOZOe/yh85upQG75fAk66Pm
+	GLeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=Qb2V6ViFDCmqz8Bd/ozBGH3+16LXz4mkywMgkaIdLyo=;
-	b=XBxaS2oAfJXLqkruRRqbnf+AMCKrWu/ZndfhmgKtM5fk5lRGzkOCtdZAtQ3ya6q9gI
-	+ZeS29ZmmKZIdb9VvbXs4OuVWAE0tw1bUQN8PI6PPor74fQQXPfYHdUVrUEHE/DxIeqH
-	FQng8FtFAX02euQ/WqUqsosYWLLb1FdU+L3C10Zy+vKj46uHv1K8OP1tqiOVpiIha1my
-	OBIlNFIuwbtRVOyrXJEEu5Dqec5ulLUtigRiDrdnGeGzqQtiO9PpiYnDih0d0O75bkIu
-	CuNvOcg2Dh+TtMsGKH0f5amo4HjOH3s2dvWRK04Yh+cvE8W6P9jXtna4RJz5HUuS9z/y
-	9BIA==
-X-Gm-Message-State: ALyK8tKdC1LzxSrc5pj5Yi5f0CcnTA+os+n8qNrj37Pvd/5csc95GusUGvDZSwN1kRo7pw==
-X-Received: by 10.98.10.25 with SMTP id s25mr1563072pfi.44.1467864273164;
-	Wed, 06 Jul 2016 21:04:33 -0700 (PDT)
-Received: from localhost ([115.115.243.34])
-	by smtp.gmail.com with ESMTPSA id e14sm135332pfb.89.2016.07.06.21.04.32
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 06 Jul 2016 21:04:32 -0700 (PDT)
-Date: Thu, 7 Jul 2016 09:27:14 +0530
-From: victorascroft@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160707035714.GA2617@Sanchayan-Arch.localdomain>
-References: <20160701182008.GA20145@Sanchayan-Arch.localdomain>
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=0FeiIOxe+aHs83PuuIZQE5nBIhgRGgjhJAcAV5MiVno=;
+	b=e47Nt+eOPQ2pEOjKRcSxnizUYRjGqY9RXmSzntzCTBhRo2CmuGaUlxykyEkG7YlkXd
+	8v73oHy7PW4D0pCEy5WCZAxqN2Uk3v7Hp/RfmyswhRZ8MzGHO4VuUT7Bh/zDAq/1TOuh
+	7SVLGS8DJqzUDWSIp890b+jY5/cczi5KZhtXc7z08y/cf0zbDvL7F4auX1fTmKBcN+Gf
+	uzQ3GeNcSQoiORHgh2pKzFcMoRvVFoeOQ3QV0JhjL/pz5ldDDSI3o3H09W9R2aDBuyzi
+	5nrtMlwFq/LFKP/DecsROb0uu0KFCs6fgJ92CTFoivcpC6Ro7q8Xg5F82MDz8FwnpshO
+	/0oQ==
+X-Gm-Message-State: ALyK8tKz4mL3ZJzoXGWi42zcYFyLrtimgSoMsi3smzIU53Q27XQ/eUByPxVZ3fBQA9NtSw==
+X-Received: by 10.28.156.87 with SMTP id f84mr17399680wme.86.1467881418135;
+	Thu, 07 Jul 2016 01:50:18 -0700 (PDT)
+Received: from [192.168.2.170] (b2b-94-79-174-114.unitymedia.biz.
+	[94.79.174.114]) by smtp.gmail.com with ESMTPSA id
+	u145sm2343788wmu.4.2016.07.07.01.50.17
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 07 Jul 2016 01:50:17 -0700 (PDT)
+To: "Davis, Michael" <michael.davis@essvote.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core@list.openembedded.org
+References: <1467360339-10236-1-git-send-email-ed.bartosh@linux.intel.com>
+	<577D1D64.8080604@elfin.de> <2476892.ILE9ZpP5Yr@localhost.localdomain>
+From: "piotr.lewicki" <piotr.lewicki@elfin.de>
+Message-ID: <577E17C8.1050105@elfin.de>
+Date: Thu, 7 Jul 2016 10:50:16 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.8.0
 MIME-Version: 1.0
-In-Reply-To: <20160701182008.GA20145@Sanchayan-Arch.localdomain>
-User-Agent: Mutt/1.6.1 (2016-04-27)
-Subject: Re: Building php with postgres support
+In-Reply-To: <2476892.ILE9ZpP5Yr@localhost.localdomain>
+Subject: Re: [OE-core] problem with blacklisted packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,36 +61,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jul 2016 04:04:34 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 07 Jul 2016 08:50:19 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello,
+Awesome.
+Then maybe some comment should be added to 
+meta/classes/blacklist.bbclass for clarity.
+Like this:
 
-Ping?
+# * Package can be unblacklisted by setting:
+#   PNBLACKLIST[pn] = ""
+#
 
-On 16-07-01 23:50:08, victorascroft@gmail.com wrote:
-> Hello,
-> 
-> I want to build php with postgres support. Am using the jethro
-> branch. Looking at the php.inc file
-> 
-> http://cgit.openembedded.org/meta-openembedded/tree/meta-oe/recipes-devtools/php/php.inc?h=jethro
-> 
-> postgres doesn't seem to be enabled by default.
-> 
-> Tried enabling postgres by adding the following to EXTRA_OECONF
-> 
-> --with-pgsql=${STAGING_DIR_TARGET}${exec_prefix}
-> 
-> based on the PKGCONFIG defined in that file later but that does not
-> seem to work.
-> 
-> Checking phpinfo does not show postgres support enabled.
-> 
-> What would be the required change to php.inc file for enabling
-> postgres with php?
-> 
-> Regards,
-> Victor.
+
+Thanks,
+Piotr Lewicki
+
+
+On 06.07.2016 17:35, Davis, Michael wrote:
+> You can override the blacklist to off.  That is what I have been doing.
+> Put the following in your local.conf or distro conf file.
+> PNBLACKLIST[crda] = ""
+>
+> On Wednesday, July 06, 2016 05:01:56 PM piotr. lewicki wrote:
+>> Hi,
+>> I'm having problem with some of the recipes which are blacklisted due to
+>> problems with compilation using GCC-6.
+>>
+>> I wonder if there is a way to "whitelist" those packages without
+>> changing content of original recipe?
+>>
+>> For now I have:
+>>
+>> GCCVERSION = "5.%"
+>>
+>> in my distro.conf so if a recipe is not building due to problems with
+>> gcc6 I simply edit the recipe and remove the line with PNBLACKLIST.
+>>
+>> Is there a better way to deal with those problems?
+>> Can this blacklisting depend on "GCCVERSION" ?
+>>
+>> Example of problematic recipe : crda (from crda_3.18.bb)
+>>
+>>
+>>
+>> Thanks,
+>> Piotr Lewicki
+
 
