@@ -1,43 +1,26 @@
-Return-Path: <prvs=0995cbc558=michael.davis@essvote.com>
-Received: from m2.essvote.com (m2.essvote.com [66.37.226.14])
-	by mail.openembedded.org (Postfix) with ESMTP id 9581F60119
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C1B6C6013D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Jul 2016 15:35:48 +0000 (UTC)
-X-AuditID: 0a00029b-f79876d000000e4a-44-577d2554d139
-Received: from ESS-EX01.essvote.corp.local (Unknown_Domain [172.16.110.40])
-	by m2.essvote.com (Symantec Messaging Gateway) with SMTP id
-	F3.E4.03658.4552D775; Wed,  6 Jul 2016 10:35:48 -0500 (CDT)
-Received: from ESS-EX01.essvote.corp.local ([::1]) by
-	ESS-EX01.essvote.corp.local ([::1]) with mapi id 14.03.0301.000;
-	Wed, 6 Jul 2016 10:35:47 -0500
-From: "Davis, Michael" <michael.davis@essvote.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [OE-core] problem with blacklisted packages
-Thread-Index: AQHR15d7/AAptruz1ESnACoRRKFahKAL3MSA
-Date: Wed, 6 Jul 2016 15:35:47 +0000
-Message-ID: <2476892.ILE9ZpP5Yr@localhost.localdomain>
-References: <1467360339-10236-1-git-send-email-ed.bartosh@linux.intel.com>
-	<577D1D64.8080604@elfin.de>
-In-Reply-To: <577D1D64.8080604@elfin.de>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.1.137]
+	Thu,  7 Jul 2016 02:18:07 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u672I7kW011320
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 6 Jul 2016 19:18:07 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
+	Wed, 6 Jul 2016 19:18:07 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 6 Jul 2016 22:18:03 -0400
+Message-ID: <300e066d93895e453c91f0174aad900646b1244c.1467857744.git.jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.8.1
+In-Reply-To: <cover.1467857744.git.jackie.huang@windriver.com>
+References: <cover.1467857744.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprGIsWRmVeSWpSXmKPExsWyRiBPQzdEtTbc4NgnEYuLh5cyW1xduZ/N
-	gcnjxssGRo9zG1cwBjBFcdskJZaUBWem5+nbJXBnLHjUzlLQxV4xdU14A+Mp1i5GTg4JAROJ
-	3qsLoWwxiQv31rN1MXJxCAkcZZQ40v+YHcKZySix5f9XNpAqNgEjiXPXNzGC2CICsRLzNs1k
-	ArGZBXQlri9+zQJiCwvYSvT+PgtVYycx8c41NgjbSOLqw4tg9SwCKhKbD3xjBrF5Bcwklq8/
-	BWRzAC3LkGj4kQMS5hTQkPh07D1YOSPQcd9PrYFaJS5x68l8JoijBSSW7DnPDGGLSrx8/I8V
-	ZIyEgJzE/y0eEOU6Egt2f2IDCTMLWElsXuAEEdaWWLbwNdQBghInZz5hmcAoPgvJgllIumch
-	dM9C0j0LSfcCRtZVjHy5RnqpxcVl+SWpesn5uZsYgbHFxcA0ewfjngkOhxgFOBiVeHgvyNeE
-	C7EmlhVX5h5ilOZgURLnVRFSChcSSE8sSc1OTS1ILYovKs1JLT7EyMTBeYhRgoNLSqQ4NS8l
-	tSixtCQjHhSt8cXAeJVqYNQ+HiD42uyPhbVFPafzmpttWz9cm5iUamZVnNZc+rXnfflheYW0
-	SIXjThZLm5ZcXde69YjJ0dkn485FXg9N01jPlHAnTWXucds9FifkFhu1v/u0//wLhS0p5Zt3
-	7AnTD+iNCbQVEuI6vX8pv/qmclOekPDf22PmhkydN/X23VuH598uWKm5JF6JpTgj0VCLuag4
-	EQBWuQ65qQIAAA==
-Subject: Re: [OE-core] problem with blacklisted packages
+Subject: [PATCH 1/2] net-snmp: fix snmpd crash via AgentX connection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,40 +33,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jul 2016 15:35:54 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <9ED85F869FC523488452256D6FA8A174@essvote.com>
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 07 Jul 2016 02:18:09 -0000
+Content-Type: text/plain
 
-You can override the blacklist to off.  That is what I have been doing.
-Put the following in your local.conf or distro conf file.
-PNBLACKLIST[crda] =3D ""
+From: Jackie Huang <jackie.huang@windriver.com>
 
-On Wednesday, July 06, 2016 05:01:56 PM piotr. lewicki wrote:
-> Hi,
-> I'm having problem with some of the recipes which are blacklisted due to=
-=20
-> problems with compilation using GCC-6.
->=20
-> I wonder if there is a way to "whitelist" those packages without=20
-> changing content of original recipe?
->=20
-> For now I have:
->=20
-> GCCVERSION =3D "5.%"
->=20
-> in my distro.conf so if a recipe is not building due to problems with=20
-> gcc6 I simply edit the recipe and remove the line with PNBLACKLIST.
->=20
-> Is there a better way to deal with those problems?
-> Can this blacklisting depend on "GCCVERSION" ?
->=20
-> Example of problematic recipe : crda (from crda_3.18.bb)
->=20
->=20
->=20
-> Thanks,
-> Piotr Lewicki
-> =
+backport a patch to fixed snmpd crashing when an AgentX
+subagent disconnect in the middle of processing of a request.
+
+Signed-off-by: Zhu Yanjun <yanjun.zhu@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ .../net-snmp/net-snmp/net-snmp-agentx-crash.patch  | 75 ++++++++++++++++++++++
+ .../recipes-protocols/net-snmp/net-snmp_5.7.3.bb   |  1 +
+ 2 files changed, 76 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/net-snmp-agentx-crash.patch
+
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/net-snmp-agentx-crash.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/net-snmp-agentx-crash.patch
+new file mode 100644
+index 0000000..5eed893
+--- /dev/null
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/net-snmp-agentx-crash.patch
+@@ -0,0 +1,75 @@
++Description: fix snmpd crash via AgentX connection
++
++ taken from Fedora, net-snmp-5.7-agentx-crash.patch
++
++bz729738 - net-snmp dumps core in netsnmp_oid_find_prefix
++bz1038011 - net-snmp: snmpd crashes/hangs when AgentX subagent times-out
++
++commit f9304c83f76202db0e684269ca1af32e43cd9db4
++Author: Jan Safranek <jsafranek@users.sourceforge.net>
++Date:   Tue Feb 7 14:53:44 2012 +0100
++
++    CHANGES: PATCH 1633670: fixed snmpd crashing when an AgentX subagent
++    disconnect in the middle of processing of a request.
++
++    I fixed also the memory leak reported in the tracker comments.
++
++Upstream-Status: Backport
++
++Signed-off-by: Zhu Yanjun <yanjun.zhu@windriver.com>
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++
++---
++ agent/mibgroup/agentx/master.c       | 5 +++++
++ agent/mibgroup/agentx/master_admin.c | 9 +++++++--
++ 2 files changed, 12 insertions(+), 2 deletions(-)
++
++diff --git a/agent/mibgroup/agentx/master.c b/agent/mibgroup/agentx/master.c
++index c42a42a..baeebaf 100644
++--- a/agent/mibgroup/agentx/master.c
+++++ b/agent/mibgroup/agentx/master.c
++@@ -219,6 +219,9 @@ agentx_got_response(int operation,
++     if (!cache) {
++         DEBUGMSGTL(("agentx/master", "response too late on session %8p\n",
++                     session));
+++        /* response is too late, free the cache */
+++        if (magic)
+++            netsnmp_free_delegated_cache((netsnmp_delegated_cache*) magic);
++         return 0;
++     }
++     requests = cache->requests;
++@@ -606,6 +609,8 @@ agentx_master_handler(netsnmp_mib_handler *handler,
++     result = snmp_async_send(ax_session, pdu, agentx_got_response, cb_data);
++     if (result == 0) {
++         snmp_free_pdu(pdu);
+++        if (cb_data)
+++            netsnmp_free_delegated_cache((netsnmp_delegated_cache*) cb_data);
++     }
++ 
++     return SNMP_ERR_NOERROR;
++diff --git a/agent/mibgroup/agentx/master_admin.c b/agent/mibgroup/agentx/master_admin.c
++index f16f392..b84b85e 100644
++--- a/agent/mibgroup/agentx/master_admin.c
+++++ b/agent/mibgroup/agentx/master_admin.c
++@@ -133,11 +133,16 @@ close_agentx_session(netsnmp_session * session, int sessid)
++          * requests, so that the delegated request will be completed and
++          * further requests can be processed
++          */
++-        netsnmp_remove_delegated_requests_for_session(session);
+++	while (netsnmp_remove_delegated_requests_for_session(session)) {
+++		DEBUGMSGTL(("agentx/master", "Continue removing delegated reqests\n"));
+++	}
+++
++         if (session->subsession != NULL) {
++             netsnmp_session *subsession = session->subsession;
++             for(; subsession; subsession = subsession->next) {
++-                netsnmp_remove_delegated_requests_for_session(subsession);
+++                while (netsnmp_remove_delegated_requests_for_session(subsession)) {
+++			DEBUGMSGTL(("agentx/master", "Continue removing delegated subsession reqests\n"));
+++		}
++             }
++         }
++                 
++-- 
++2.7.4
++
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+index 79892a1..ca98fc0 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+@@ -22,6 +22,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
+         file://0001-config_os_headers-Error-Fix.patch \
+         file://0001-config_os_libs2-Error-Fix.patch \
+         file://0001-snmplib-keytools.c-Don-t-check-for-return-from-EVP_M.patch \
++        file://net-snmp-agentx-crash.patch \
+ "
+ SRC_URI[md5sum] = "9f682bd70c717efdd9f15b686d07baee"
+ SRC_URI[sha256sum] = "e8dfc79b6539b71a6ff335746ce63d2da2239062ad41872fff4354cafed07a3e"
+-- 
+2.8.1
+
 
