@@ -1,47 +1,47 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-it0-f67.google.com (mail-it0-f67.google.com
-	[209.85.214.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 30AF560119
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-lf0-f65.google.com (mail-lf0-f65.google.com
+	[209.85.215.65])
+	by mail.openembedded.org (Postfix) with ESMTP id E517560119
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Jul 2016 16:30:50 +0000 (UTC)
-Received: by mail-it0-f67.google.com with SMTP id u186so5597464ita.1
+	Fri,  8 Jul 2016 17:03:10 +0000 (UTC)
+Received: by mail-lf0-f65.google.com with SMTP id w130so8264705lfd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jul 2016 09:30:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=deserted-net.20150623.gappssmtp.com; s=20150623;
-	h=sender:from:to:subject:date:message-id;
-	bh=VTRJajCBo3XTMv7iz1qa8sT8RFLWg8flkGBYoCJS9IU=;
-	b=1pREdFC6lOSQDSxn0MoI/AysMkdIEyyBpAN0RGiqJX+nzFhXScZaTvoQgzLPYTrGdU
-	ap3F5JO2nIjrW4YDlxzpC2ayS/YtaH3csvGQ4BQVyvuGBKg76balzpczCb386boWD89q
-	0b7NubLxjEmRF12pKa/r9K5h6rcu9gNuRhg0JH8ZMWOKK5bui90RdiXDxj0VAPrOLzlb
-	BGqM8IPvG2H/dILyBRtfkcnK0Du7Zxa5dJrBcD12hZrvmDNMMNx+/eRjcTeXzPJlvk0+
-	nYkFEH3R6wCuWDx9LBiA3dxyZHHZ9Q4xBzG0xTbdX4pwJwVb44Ul/8Jb4w6Kd4YJ3zbQ
-	v2ig==
+	Fri, 08 Jul 2016 10:03:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=lAsHKTYj19kxW1tUS9ezZJg9zviUMidoyYFPBh87jMk=;
+	b=Kb79OmUmk0JQx7E3oT7xWv4+X/qsgCSS9U5JR6k8Er/q6ITvKn+LuE0gw+b/fDOLu3
+	n9QmOUfDQCtGl3rb/aQ43QoJAolpzI4NSNQM7vhk/q/QxOGeAScyOaXRJBAUJL8f6XLb
+	VN/WmA/CPYRuY1VaUSf+q+JR+LpVGwl4rgzXK9Cv91eMC1eLESO/+7QEiTiW+qhDOEYl
+	oKh5Q5hnaZKPdcGatMNQ9rQ5zrJBzqcQ0j8rzziKHdVQrDAPPbNkN5a2Wh0eOOymT6cT
+	uZ+qV178+O1PW/tsJelYBo4HJSBxjcGGb4YM9xMMk14loe3qaTMYNLHOs0/xiKa8JB7x
+	9IAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:subject:date:message-id;
-	bh=VTRJajCBo3XTMv7iz1qa8sT8RFLWg8flkGBYoCJS9IU=;
-	b=fa7wda08cRrF50ef7XDPrywxhRY+ZtmOwfl3tYYezlFTt/JDHnB0vySc6EatIvqglu
-	LGn3DlYFFKFpUsvQyhSIAlzXqgk8yWI/Mxw+I2rxczHlT+nrPS5fbRy+pjtPqQTUqBqf
-	+0WbXLDn3z5XXB1roiO5/6XX06+Y/+f+Bqkf3LpqTlX7oeyEcfZs5ij3XwrsYJANUS8a
-	AVbTpWSvlPNzvrw4lrhAsaiWIznJThq/fQpR6nJCmjGRLmPbeQIwG8XAXMlcLDGeNiCv
-	s6w+mWukflPOqjrdg9mM8+MlRTTdIMJj+f8cwRgVryS2JIeQfxMradNFwDlCcysv89Cy
-	QuYQ==
-X-Gm-Message-State: ALyK8tKl/9Nl98M3ggy7HAfHcbxx83eJkV5E4y69SgUgiMFRVvJHXWLQqN6wf6nKadRdjg==
-X-Received: by 10.36.39.78 with SMTP id g75mr3889557ita.53.1467995451133;
-	Fri, 08 Jul 2016 09:30:51 -0700 (PDT)
-Received: from mir.deserted.net ([23.233.31.74])
-	by smtp.gmail.com with ESMTPSA id l63sm672739ioi.14.2016.07.08.09.30.49
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 08 Jul 2016 09:30:49 -0700 (PDT)
-Sender: Joe MacDonald <joe@deserted.net>
-From: Joe MacDonald <joe_macdonald@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Jul 2016 12:30:52 -0400
-Message-Id: <1467995452-30013-1-git-send-email-joe_macdonald@mentor.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] plymouth: remove virtual prefix for RPROVIDES
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=lAsHKTYj19kxW1tUS9ezZJg9zviUMidoyYFPBh87jMk=;
+	b=N3nIYFH9wBJR7c06FQPmL96h2RKoEfk+dgH6Cpt8PA4NW4Me0Vbe1ARNEdwCz0nHrc
+	hRU0eCZpqjB2MUKidv2TCKykhWW6gHKPWgg5OrIXkWxlH5nkGLq+A3qM5ccbUbijlPcq
+	PqzClS92gLGwmLh9q6pNDwPbHUUyyrubhg3Izc9CAprl2ptsVulPQZuDecfkZqj7aUpn
+	wEeKPNjt3mbzyn9BtSQAeU2FrdvpL5EDbrEHzuR2hxKvsk3J6yr2IwBIePb+bH0rCr15
+	W/Lde7bFKIzvtZRwHaeMkSRasBwEg5ZTeM7acDNkt5b5amUnhJnX6UbY+3FwWUniqFkx
+	Jm3A==
+X-Gm-Message-State: ALyK8tLjRIHUY9fTPR621iSG0IkgymzQIyRYFz4f3wi5NbSlwQmIKKVNFqnUyM+//Cm3MtCAdNG67iGdx1a+1w==
+X-Received: by 10.25.79.18 with SMTP id d18mr1544425lfb.171.1467997390171;
+	Fri, 08 Jul 2016 10:03:10 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.25.10.10 with HTTP; Fri, 8 Jul 2016 10:03:09 -0700 (PDT)
+In-Reply-To: <1467619576-13899-2-git-send-email-mingli.yu@windriver.com>
+References: <1467619576-13899-1-git-send-email-mingli.yu@windriver.com>
+	<1467619576-13899-2-git-send-email-mingli.yu@windriver.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Fri, 8 Jul 2016 10:03:09 -0700
+Message-ID: <CANx9H-DiLXAuEoNrg2-R+OuSg=Bc98Odi-Xrj1KM-R7SJgU4Yw@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-python][PATCH v2 1/5] python-pbr: Add python-pbr bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,30 +54,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jul 2016 16:30:51 -0000
+X-List-Received-Date: Fri, 08 Jul 2016 17:03:13 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The 'virtual' namespace is only intended to be used for build-time
-dependencies, not in the runtime package namespace.
+Built ok for beaglebone.
 
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
----
- meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+NOTE: Requires Derek's pypi.bbclass patch
+https://patchwork.openembedded.org/patch/125551/ or else fetcher failure.
 
-diff --git a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
-index de23dcd..597d8cd 100644
---- a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
-+++ b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
-@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
- DEPENDS = "libcap libpng cairo dbus udev"
- PROVIDES = "virtual/psplash"
--RPROVIDES_${PN} = "virtual/psplash virtual/psplash-support"
-+RPROVIDES_${PN} += "psplash psplash-support"
- 
- SRC_URI = "http://www.freedesktop.org/software/plymouth/releases/${BPN}-${PV}.tar.bz2"
- SRC_URI[md5sum] = "ff420994deb7ea203df678df92e7ab7d"
--- 
-1.9.1
+NOTE: SUMMARY is __strongly__ recommended (it helps with the layer index)
+http://www.openembedded.org/wiki/Styleguide
 
+Acked-by: Tim Orling (Intel OpenSource Technology Center) <
+ticotimo@gmail.com>
+
+
+
+On Mon, Jul 4, 2016 at 1:06 AM, <mingli.yu@windriver.com> wrote:
+
+> From: Mingli Yu <mingli.yu@windriver.com>
+>
+> * Add python-pbr bb file as python-mock depends on
+>   python-pbr-native
+>
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ---
+>  meta-python/recipes-devtools/python/python-pbr_1.10.0.bb | 16
+> ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python-pbr_1.10.0.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
+> b/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
+> new file mode 100644
+> index 0000000..fd35197
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
+> @@ -0,0 +1,16 @@
+> +DESCRIPTION = "Python Build Reasonableness: PBR is a library that injects
+> some useful and sensible default behaviors into your setuptools run"
+> +HOMEPAGE = "https://pypi.python.org/pypi/pbr"
+> +SECTION = "devel/python"
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
+> +
+> +SRC_URI[md5sum] = "8e4968c587268f030e38329feb9c8f17"
+> +SRC_URI[sha256sum] =
+> "186428c270309e6fdfe2d5ab0949ab21ae5f7dea831eab96701b86bd666af39c"
+> +
+> +inherit pypi setuptools
+> +
+> +DEPENDS_class-target += " \
+> +        python-pip \
+> +        "
+> +
+> +BBCLASSEXTEND = "native"
+> --
+> 2.8.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
