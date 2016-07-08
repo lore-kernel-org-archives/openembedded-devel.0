@@ -1,47 +1,47 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
-	[209.85.215.67])
-	by mail.openembedded.org (Postfix) with ESMTP id DEFA560119
+Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
+	[209.85.215.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 2FFC260119
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Jul 2016 17:05:32 +0000 (UTC)
-Received: by mail-lf0-f67.google.com with SMTP id l188so8290722lfe.0
+	Fri,  8 Jul 2016 17:06:23 +0000 (UTC)
+Received: by mail-lf0-f68.google.com with SMTP id a10so6589571lfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jul 2016 10:05:33 -0700 (PDT)
+	Fri, 08 Jul 2016 10:06:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=rC0C4uIuNjmC68cvTbn+mfZECEDv0y4mjF/b5HDAEYc=;
-	b=qLF7OvuvoL82TSmo4yHnJ3YSYLtZzsYvpLEZhXDx0ayWqakrJcijNpabhQ/hHNjxxH
-	QMavELWXciGkFFxTTzGoo3i7500zdo3q3AVHO0UHpm8pB1FoN+PbBf9xQpslFoONzFaa
-	bgtMtlToVIU+twvE9wKb2LT/W7qoHnI2+zZ1n4HmOV7Re8J6YeL1tuQTX+c7VvjW+q7e
-	HzAQisdB0mk8pgaKPHayBsqAjsWdMN+1PSFrneMqmTkj9OkxWQcmQLVbMQHJuCeL9EXW
-	HT+mOoF69nDznJnVkMZzxE2H5uUx4IWt1k2YOnUpOaK4Gj9lr/9ZHhOSJs67t4v4g0JP
-	3anw==
+	bh=OWbXYAsV2GuAxs+YSm4UU840u9doVFoZqp7guc7lmho=;
+	b=vO70QRrhfFG/zLFYPymI/Hg0Ha2QZWiUrwb0yQ4dT+L+HcBYQpHI1Zc6xCWqvtebD4
+	vDQWmOrmKrHgcrdGdIv/HEJEKZ310cxuL0TPp0rK2H7UgU94Y3hoiE/ZySVKxwoYInlB
+	7mekwGdzslmcsnvpJLZCcOlGcTiLiJOodE1TbhsDWYMnjipH/058LJIhOqM4AHWo0RAA
+	VWrRHx3FLO+8nNnPb4z4RRgLRBwyPU+kYbVWV8r4IBPQtEsziHz0im+9eOZHZtYARDTt
+	88IGmz9Sp8t17mA5j7BhGaIkBwVGSYVJnit/nykrxGxmFVbN4SJ4NkLj/mmZhLPUe8S7
+	apuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=rC0C4uIuNjmC68cvTbn+mfZECEDv0y4mjF/b5HDAEYc=;
-	b=mnn/IZyxQEYxgcEi/SzXgtpujKgoo8tbhCNYDBr2vFIkOOyaE3UEGmFjrfj4Go2AAM
-	5ZxPsu5AnxDCwdHKaPoHtfqHYHO80RydaaGZuKc1CWIErQo/etxmrYEkPnLj+6d4JdCs
-	UPKikFBWclXjn1C8oKqO718YQ1FU4S0YXmXRMzhJQJP4u4jKh6c1WhGxDSPRR9aCktvU
-	VHukOXorHth2fvpmehv+RD05d8Z3o/QUV9o92a299JtrbZEDhC+yMkwR6cKQYJ8rJqks
-	R6sAl3sJGOoVU7dNWGS2bjzQfCqxKsTI2It+L4/ggj3Sc/I2ryhhbMUoMCiKeWupGp36
-	pnvw==
-X-Gm-Message-State: ALyK8tI0T7qncVKEPuUOHaXajtz+wpdhtBHJ/kSsa34WRBckaskLhCVaW3dTGDEzvMMvxFMGSg4Gsbk8jJRatQ==
-X-Received: by 10.46.1.148 with SMTP id f20mr1811837lji.52.1467997532802; Fri,
-	08 Jul 2016 10:05:32 -0700 (PDT)
+	bh=OWbXYAsV2GuAxs+YSm4UU840u9doVFoZqp7guc7lmho=;
+	b=lEDWGPe5W1ePCLMvSPJl+Z+u63WXvTS80kCly3ZjCma3BXmIHapUccM1V+vfWYtpu8
+	4Q18HijeKafYvvEXeyGDU1XShpxHSUJfm7EoD2b8cpDLOKTvWe9rAIo3VPbjR0r0fUp8
+	3At4buoUef6KipQ/hddVo+/AKKSQHMJT7eV6+urDg4kdwacu+RHrfYvdGlQAP9TnNSVt
+	Fz81zm9NXNu/kW9OuM8rEFldA1/8pWii6/8rrGH+eR5kaXDwemefCbn5iHMHE6mT+fDY
+	W6xxlBqxfnkxoEZoRRAmJD5B+IlY7iVhioCpSi0KByCYVMa73ZgrOrtBUn37fvJLWrCm
+	djjQ==
+X-Gm-Message-State: ALyK8tIR/wEby05DptyEHFXYQXecfW6OgSLGgZlprBTWEibn4td4l6WTvqhg+ICc7zzEMvF4zYOm1PtpchAh4w==
+X-Received: by 10.25.153.148 with SMTP id b142mr1964284lfe.61.1467997583446;
+	Fri, 08 Jul 2016 10:06:23 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.25.10.10 with HTTP; Fri, 8 Jul 2016 10:05:32 -0700 (PDT)
-In-Reply-To: <1467619576-13899-3-git-send-email-mingli.yu@windriver.com>
+Received: by 10.25.10.10 with HTTP; Fri, 8 Jul 2016 10:06:22 -0700 (PDT)
+In-Reply-To: <1467619576-13899-4-git-send-email-mingli.yu@windriver.com>
 References: <1467619576-13899-1-git-send-email-mingli.yu@windriver.com>
-	<1467619576-13899-3-git-send-email-mingli.yu@windriver.com>
+	<1467619576-13899-4-git-send-email-mingli.yu@windriver.com>
 From: Tim Orling <ticotimo@gmail.com>
-Date: Fri, 8 Jul 2016 10:05:32 -0700
-Message-ID: <CANx9H-A6bB0mNKV7MRRut-2mRcoO_RdLZ_vgn5tgES33+y4OVg@mail.gmail.com>
+Date: Fri, 8 Jul 2016 10:06:22 -0700
+Message-ID: <CANx9H-A60g=TQCg3hWm4JDNCcOvd8HRL6vg5XyEi8-pou1AHbA@mail.gmail.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-python][PATCH v2 2/5] python-mock: Add python-pbr-native dependency
+Subject: Re: [meta-python][PATCH v2 3/5] python-mccabe: Add python-pytest-runner dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,7 +54,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jul 2016 17:05:33 -0000
+X-List-Received-Date: Fri, 08 Jul 2016 17:06:24 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Built ok for beaglebone.
@@ -66,25 +66,25 @@ On Mon, Jul 4, 2016 at 1:06 AM, <mingli.yu@windriver.com> wrote:
 
 > From: Mingli Yu <mingli.yu@windriver.com>
 >
-> * Add python-pbr-native dependency for python-mock
+> * Add python-pytest-runner dependency for python-mccabe
 >
 > Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 > ---
->  meta-python/recipes-devtools/python/python-mock_2.0.0.bb | 3 +++
+>  meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb | 3 +++
 >  1 file changed, 3 insertions(+)
 >
-> diff --git a/meta-python/recipes-devtools/python/python-mock_2.0.0.bb
-> b/meta-python/recipes-devtools/python/python-mock_2.0.0.bb
-> index eb473d2..849c99e 100644
-> --- a/meta-python/recipes-devtools/python/python-mock_2.0.0.bb
-> +++ b/meta-python/recipes-devtools/python/python-mock_2.0.0.bb
-> @@ -8,6 +8,9 @@ PYPI_PACKAGE_HASH =
-> "0c53014354fc93c591ccc4abff12c473ad565a2eb24dcd82490fae33dbf
+> diff --git a/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
+> b/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
+> index 0958f75..ba966eb 100644
+> --- a/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
+> +++ b/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
+> @@ -8,6 +8,9 @@ SRC_URI[sha256sum] =
+> "9a2b12ebd876e77c72e41ebf401cc2e7c5b566649d50105ca498226886
 >
 >  inherit pypi setuptools
 >
 > +DEPENDS += " \
-> +    python-pbr-native"
+> +    python-pytest-runner"
 > +
 >  RDEPENDS_${PN} += " \
 >      python-prettytable \
