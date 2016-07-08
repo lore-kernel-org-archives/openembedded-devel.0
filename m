@@ -1,47 +1,47 @@
 Return-Path: <ticotimo@gmail.com>
 Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
 	[209.85.215.67])
-	by mail.openembedded.org (Postfix) with ESMTP id A0D9860119
+	by mail.openembedded.org (Postfix) with ESMTP id F39E960119
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Jul 2016 17:07:25 +0000 (UTC)
-Received: by mail-lf0-f67.google.com with SMTP id w130so8267733lfd.2
+	Fri,  8 Jul 2016 17:09:19 +0000 (UTC)
+Received: by mail-lf0-f67.google.com with SMTP id a2so8242474lfe.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jul 2016 10:07:26 -0700 (PDT)
+	Fri, 08 Jul 2016 10:09:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=642izPNONkplOcUtZcCs0YVnu9jAp6S+8iVSjd7Gn6s=;
-	b=SsCtGWW4QKunqJWRi47QaXGqgi4nQRB9Pn1rrXGATmSWfvgFHhhG8zmyGT98qcMOVy
-	WSUdYbl/kkIaubLKW3EV6iv2yKfnGndOqlckirqOTcx+9qgZNm8qJ93lBVck17PaWGLo
-	w0wW2oWKY0eFr59ep4bFmhD+qIGnV8dtyzL8P3+9o20DjPfFaU9fmMwUoM9RtX083zzq
-	7umLrbycgJvm8zXg5CL6glnlzyzSd2UpM7Rp2EFxH6JMPlVSixGG0hHzyuaz5JmNJOp9
-	reIkGdRccV08Q173QUtsDmxFKgfJ2fGIkJ1N3hG2f9YJvyzYi2ayvJWY33Dbo2W/HOq2
-	XnmA==
+	bh=cPljf6PagOfSDi2pZdvAYMHxD09xyFdXBpHXSJ9Uxuc=;
+	b=s4GhdM1IEa5Ahff1eTXTTuUKIKi3ldSl4OqoUtsIrs+US0ialVvStBogqajFxSxHdE
+	sCRsRdQYhcQpASnBBzg+n6+qbdQOD31aLNB1i8Bgy0qpZdeCO9ncHb+XE1GwYw4Abp8Y
+	5gAuIyHfEpGONSEsGKPTELTc+CJN1s3DtOMpkTYhJ4RAugj4/lSdsNMEe7VyeWjC8d3g
+	yAnzZlu4r9xVc2BvXzRSZRgm12HSMxyZicL1Kej+OxD43XdNMAQfarJC3H042UHkNZAd
+	ZlygIbw/SOcV5yIJAXUUEIE/CKD17B0/sLg7xTctXY+36qXFkeM1Ds2Jz45TMD2b6U0B
+	js6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=642izPNONkplOcUtZcCs0YVnu9jAp6S+8iVSjd7Gn6s=;
-	b=Ys3unqgo/CUlp7379UorSefkozsWmB++gf7/+bOkaQ8alT1h5/SiSzXGnl6WwGak1/
-	5qEqC5QjnpZd8auCefZDf3sWqPBWX7gUUR+BEovGTnjxZH0fc/zuiEcOLZsikVf8bmat
-	FBqAGZptvmk8hzx/lwIX22gnOBFXtzSxwIQJZHwz6F1OENjGjbPvZXpR3MItxLCDtW3S
-	wOwUSV5xMdRhuiDyF0mt+gXkA/t1wWoj23zFmYtWye37s2L7gcYvh6TLZWVzOU7Ma5jV
-	LNo6xSUNfHSC2vLaohLbXnIcLl/4iDIQHxVuXDpuqeAdpa8TL7UBpIOKAzz9B9y0uGAC
-	cKfg==
-X-Gm-Message-State: ALyK8tJDSlMiBMl4yovNGuQTmMgrp16OriBRIaZ5OSx96QsP/W2kCgdD4nzui5aPtppHqzsAQ+Jw6RW4/HNm6w==
-X-Received: by 10.46.5.211 with SMTP id 202mr608064ljf.16.1467997645872; Fri,
-	08 Jul 2016 10:07:25 -0700 (PDT)
+	bh=cPljf6PagOfSDi2pZdvAYMHxD09xyFdXBpHXSJ9Uxuc=;
+	b=VHOdK02LTlQ7gy+oWGWwEs45pRAZAgOnZ/1+GNqda1stEp/wkC0mkG3vABx4XezZwM
+	6+HKbO5oIZp0tgBDY/plm81rTGlB4X246/55RumTwpch9Vms1v1HSl6knt6TVnu71a6D
+	27vxZiGpGct4+kC8SlyugE1y97yMHRmigvoxQRFi6jX6m7h36a7nZZa7ro3zRYmEwNxK
+	3FCkaRXWr5y5Ld+lgroanz4cN5WJyfsMFkbXYVOMzZI4dp5q3BguyPH3ZNktRtBZ2kso
+	ZJXyNYM+tjJhhcSUwv/2yfj8uivmRO3Jguz2OPJITYaCxVlf7NDdrM2iLkI5qZz9h8tr
+	t56w==
+X-Gm-Message-State: ALyK8tIgmiIE6lJUqD6B0k4oqf3S3otR3VVL6jEFE3VVNXYdYMy142vXCtiy4r89cb31KijvOfCO4s7UO8r1mw==
+X-Received: by 10.25.4.202 with SMTP id 193mr1959833lfe.204.1467997759890;
+	Fri, 08 Jul 2016 10:09:19 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.25.10.10 with HTTP; Fri, 8 Jul 2016 10:07:25 -0700 (PDT)
-In-Reply-To: <1467619576-13899-5-git-send-email-mingli.yu@windriver.com>
+Received: by 10.25.10.10 with HTTP; Fri, 8 Jul 2016 10:09:19 -0700 (PDT)
+In-Reply-To: <1467619576-13899-6-git-send-email-mingli.yu@windriver.com>
 References: <1467619576-13899-1-git-send-email-mingli.yu@windriver.com>
-	<1467619576-13899-5-git-send-email-mingli.yu@windriver.com>
+	<1467619576-13899-6-git-send-email-mingli.yu@windriver.com>
 From: Tim Orling <ticotimo@gmail.com>
-Date: Fri, 8 Jul 2016 10:07:25 -0700
-Message-ID: <CANx9H-BSGrcTHTiyreukh5xNgyNLORFMjef48dqLOKSSXpGVdw@mail.gmail.com>
+Date: Fri, 8 Jul 2016 10:09:19 -0700
+Message-ID: <CANx9H-DVRsHZGBJVkc2k1p4fTdWOchBhQBnm3Y8HuhTtiuzwMA@mail.gmail.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-python][PATCH v2 4/5] python-pytest-runner: Add python-pytest-runner bb
+Subject: Re: [meta-python][PATCH v2 5/5] python-setuptools-scm: Add python-setuptools-scm bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,10 +54,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jul 2016 17:07:26 -0000
+X-List-Received-Date: Fri, 08 Jul 2016 17:09:20 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Built ok for beaglebone.
+
+NOTE: SRC_URI probably not required with Derek's pypi.bbclass patch
+https://patchwork.openembedded.org/patch/125551/ but I did not test for
+that.
+
 
 Acked-by: Tim Orling (Intel OpenSource Technology Center) <
 ticotimo@gmail.com>
@@ -66,42 +71,47 @@ On Mon, Jul 4, 2016 at 1:06 AM, <mingli.yu@windriver.com> wrote:
 
 > From: Mingli Yu <mingli.yu@windriver.com>
 >
-> * Add python-pytest-runner bb as python-mccabe depends
->   on python-pytest-runner
+> * Add python-setuptools-scm bb as python-pytest-runner depends
+>   on python-setuptools-scm
 >
 > Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 > ---
->  .../recipes-devtools/python/python-pytest-runner_2.8.bb    | 14
-> ++++++++++++++
->  1 file changed, 14 insertions(+)
+>  .../python/python-setuptools-scm_1.11.1.bb             | 18
+> ++++++++++++++++++
+>  1 file changed, 18 insertions(+)
 >  create mode 100644 meta-python/recipes-devtools/python/
-> python-pytest-runner_2.8.bb
+> python-setuptools-scm_1.11.1.bb
 >
 > diff --git a/meta-python/recipes-devtools/python/
-> python-pytest-runner_2.8.bb b/meta-python/recipes-devtools/python/
-> python-pytest-runner_2.8.bb
+> python-setuptools-scm_1.11.1.bb b/meta-python/recipes-devtools/python/
+> python-setuptools-scm_1.11.1.bb
 > new file mode 100644
-> index 0000000..a4685ec
+> index 0000000..2a3b97d
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-pytest-runner_2.8.bb
-> @@ -0,0 +1,14 @@
-> +SUMMARY = "Invoke py.test as distutils command with dependency resolution"
+> +++ b/meta-python/recipes-devtools/python/python-setuptools-scm_1.11.1.bb
+> @@ -0,0 +1,18 @@
+> +SUMMARY = "the blessed package to manage your versions by scm tags"
 > +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=e38b971c2b4c33b978d1b9c9ece9ae63"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=838c366f69b72c5df05c96dff79b35f2"
 > +
-> +SRC_URI[md5sum] = "041f3624f450d87a242e3907d7f90e8f"
+> +inherit pypi setuptools
+> +
+> +SRCNAME = "setuptools_scm"
+> +
+> +SRC_URI = "
+> https://pypi.python.org/packages/84/aa/c693b5d41da513fed3f0ee27f1bf02a303caa75bbdfa5c8cc233a1d778c4/${SRCNAME}-${PV}.tar.gz
+> "
+> +
+> +SRC_URI[md5sum] = "4d19b2bc9580016d991f665ac20e2e8f"
 > +SRC_URI[sha256sum] =
-> "1ec44deddaa551f85fd563c40a4c483a2609aca1f284a95399566a74d0680d5c"
-> +PYPI_PACKAGE_HASH =
-> "466cff61a9e0d513222afa3529bdb565a465812b7e50b218a5afd705f46b258c"
+> "8c45f738a23410c5276b0ed9294af607f491e4260589f1eb90df8312e23819bf"
 > +
-> +DEPENDS += " \
-> +    python-setuptools-scm"
+> +S = "${WORKDIR}/${SRCNAME}-${PV}"
 > +
 > +RDEPENDS_${PN} = "python-py python-setuptools python-argparse
 > python-debugger python-json"
 > +
-> +inherit pypi setuptools
+> +
 > --
 > 2.8.1
 >
