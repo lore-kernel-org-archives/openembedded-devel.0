@@ -1,51 +1,47 @@
-Return-Path: <patrick.ohly@intel.com>
-Received: from mail-io0-f177.google.com (mail-io0-f177.google.com
-	[209.85.223.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 5ECE860119
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
+	[209.85.215.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B92760119
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Jul 2016 11:24:13 +0000 (UTC)
-Received: by mail-io0-f177.google.com with SMTP id f30so43041800ioj.2
+	Fri,  8 Jul 2016 15:43:03 +0000 (UTC)
+Received: by mail-lf0-f67.google.com with SMTP id l188so7976275lfe.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jul 2016 04:24:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=message-id:subject:from:to:date:organization:mime-version
-	:content-transfer-encoding;
-	bh=cdqWD4BgBQyn/UViOOLaXSL25lWpi9+lTgltmLRg3vg=;
-	b=fbHTQk2FxNXAjB0S0fO2gyI/qULnfLGdrIL+0QbxHVmlkW4SDLLr2L1kjuBH3zcHMN
-	ZGQPqeVz/s81ebQrOaa2L+RGvVPptep+qv0l0Oqk+rv5/v/6E5rRQ+TzRF0xmTsr9Z+R
-	SxK5x928JyO1ce5u0XCPUnTpYUjo5TNIRzLWbBDaR3COFBFlY0plMddM5hNWb6ExvZmw
-	o7pfi2lTtQA7DDA0zEsWjYZS8cWs7SkFqkfptcDexaUKUnv/yo7Ziz7OuCded2jCDlIK
-	NDcpHJ3TvaoXglWIN//KuGMPvLTF85MRdQjt9/OoLsCBNTJTlOOCG52qD9P7ijddzM6m
-	zglQ==
+	Fri, 08 Jul 2016 08:43:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=ViHCnpgKlSZCXzP3CjDQYxWi3m72AM28TNbEINAVY9c=;
+	b=C96SvYYI+BlQSN7xr1LCzayKmtQthdgKmLKK2R6gf2jk6MiqVVDL2+HLvWFVFDT6sq
+	CPvHPXvyxNCVcN18qHZhlxURAaaC7HaD//oEuDwyQr7Gchouqbu8j9kD6n3YfELz9677
+	YVEObB0caVGPaJ6rKognSWec9Z0xStTmFhh/NZP6RHYveVBtUcSkVXiU3VjNPqNnjU2j
+	czyfbjgt6ABr5yjNSSyJ/wozv+DP/lzyUkdyTiFn+/Jsj1qoIi7123BPYHHzTw0RmwJ3
+	AmNbily8OdoOEPvdZBY9xqLgL4MU2dU+srDkxYLPYFR+eSqC5dCdeZMDgKm2hbdpqNiQ
+	tPRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:subject:from:to:date:organization
-	:mime-version:content-transfer-encoding;
-	bh=cdqWD4BgBQyn/UViOOLaXSL25lWpi9+lTgltmLRg3vg=;
-	b=h1tIji24tcZ3z8hDJ+zZDejK7iN5ZeyuqdX08uHtOIn2vzlRBD43cR3I5qe/3eVQ8e
-	I+kQ6L+peBwCsVWRZ0C/SD0RzPxNh6TpsGLapyGmmd1CL5HqKtFFWnTsMqpYnNfBPYud
-	hx7CgDFuWvz9iXqWJw6KbaqIgT3TRLvv65lGDGDx0s9y8vAbxR2/W05KFPAv3L+bWilJ
-	CY5dOELCUmUfznIJ1ka9ioLU+jdqcmf+QYH7cIuTGe6IYe4HZHnIEwRFr1qpQA/svPPi
-	vFr+S/14Kf7gfWj6NyqpUl/2owTvEs8RxqrZ5DLc06PJQcMHIh9NWb7lmjcFKCLcOENr
-	OofQ==
-X-Gm-Message-State: ALyK8tK6iWZA7I9gRPHUfbYOHMlFCmDF2tUVKA1huhoel3jXFoPA3fw8fW/Ms0VlK0FP/QNh
-X-Received: by 10.107.129.164 with SMTP id l36mr7685533ioi.179.1467977054244; 
-	Fri, 08 Jul 2016 04:24:14 -0700 (PDT)
-Received: from pohly-mobl1 (p5DE8C814.dip0.t-ipconnect.de. [93.232.200.20])
-	by smtp.gmail.com with ESMTPSA id
-	r78sm1149821ioe.15.2016.07.08.04.24.13
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 08 Jul 2016 04:24:13 -0700 (PDT)
-Message-ID: <1467977051.1401.9.camel@intel.com>
-From: Patrick Ohly <patrick.ohly@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 08 Jul 2016 13:24:11 +0200
-Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
-X-Mailer: Evolution 3.12.9-1+b1 
-Mime-Version: 1.0
-Subject: [meta-java] icedtea7-native - IOException constructor compile error
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=ViHCnpgKlSZCXzP3CjDQYxWi3m72AM28TNbEINAVY9c=;
+	b=dNmkLlGj/rBCLvbH5gOMtSLmbjADQkyU4XVW0ijU1va0s7uhfs6dAedGXdVJGmC4IS
+	z31eIZFep/dQqDV738HXtvSJ4hjST+3MLCdmsjWKaEKspFrCQpZ9hkFWf9cQJ2EEJrgW
+	1IvL2oUo86tVu4C2ecbpHHh8QB4plPKtpiYbq2IyBil/Nq6nW69rR8pbNb5SYxmZpxLl
+	HV6HYp8//fblrXfl5PHUYXu5ffHp/Q6dTSr7onChhdMPbsojX/5ySWrSYrjcJnFz/F43
+	GfBrBxirUjXe4GzAS1Jd62Hu7dqkzymjsppu50bwbRMr1xc0BhTeo4DefY+vTjl0pmUA
+	x+Bw==
+X-Gm-Message-State: ALyK8tKtgDjdtftbeIbimAhADji0OpHHvpuo3F8Kq3Z/qV6Yha0du42kJlf16nN5M9h0yZ7Qnx9FjZC6Du07Vw==
+X-Received: by 10.25.153.148 with SMTP id b142mr1860024lfe.61.1467992583555;
+	Fri, 08 Jul 2016 08:43:03 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.25.10.10 with HTTP; Fri, 8 Jul 2016 08:43:02 -0700 (PDT)
+In-Reply-To: <20160708102904.10675-1-andrei@resin.io>
+References: <20160708102904.10675-1-andrei@resin.io>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Fri, 8 Jul 2016 08:43:02 -0700
+Message-ID: <CANx9H-C3h3ehH9pCy2EZgwUgZ5J_i9W8pV3amyxrVZEeio0gAQ@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Andrei Gherzan <andrei@resin.io>
+Subject: Re: [meta-python][PATCH 1/1] python-imaging: Add patch to fix host sysroot fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,99 +54,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jul 2016 11:24:14 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 08 Jul 2016 15:43:04 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hello!
+I built for beaglebone and saw the same error. I did not run-time test.
 
-I'm trying to build openjdk8, using the master branches of OE and
-meta-java. Distro is Ostro, which configures:
+Since this recipe does not include -native support, this patch seems ok.
+I have a tingling "not quite the right fix" feeling about it, but...it does
+fix the error. I assume you have run-time tested?
 
-PREFERRED_PROVIDER_virtual/java-initial-native = "cacao-initial-native"
-PREFERRED_PROVIDER_virtual/java-native = "cacao-native"
-PREFERRED_PROVIDER_virtual/javac-native = "ecj-bootstrap-native"
+PIL is really old, any chance pillow would work for your use case?
 
-In this configuration, cacao-initial-native ecj-initial-native
-classpath-native ecj-bootstrap-native jikes-initial-native get build
-before icedtea7-native fails to compile with:
+Acked-by: Tim Orling <ticotimo@gmail.com>
 
-        build-bootstrap-javac:
-            [javac] Compiling 1 source file to /fast/build/ostro/x86/tmp-glibc/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build-boot/langtools/build/bootstrap/classes
-            [javac] ----------
-            [javac] 1. ERROR in /fast/build/ostro/x86/tmp-glibc/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/langtools/src/share/classes/com/sun/tools/javac/file/ZipFileIndex.java (at line 1169)
-            [javac]     super(message, cause);
-            [javac]     ^^^^^^^^^^^^^^^^^^^^^^
-            [javac] The constructor IOException(String, Throwable) is undefined
-            [javac] ----------
-            [javac] 1 problem (1 error)
-        
-        BUILD FAILED
-        /fast/build/ostro/x86/tmp-glibc/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/langtools/make/build.xml:446: The following error occurred while executing this line:
-        /fast/build/ostro/x86/tmp-glibc/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk-boot/langtools/make/build.xml:789: Compile failed; see the compiler error output for details.
-        
-        Total time: 2 seconds
-        Makefile:201: recipe for target 'build' failed
+On Fri, Jul 8, 2016 at 3:29 AM, Andrei Gherzan <andrei@gherzan.ro> wrote:
 
-Sure enough, classpath_0.99 only has IOException with a constructor that
-takes a single parameter
-(classpath-native/0.99-r6.0/classpath-0.99/java/io/IOException.java):
-
-        public class IOException extends Exception
-        {
-          /**
-           * Compatible with JDK 1.0+.
-           */
-          private static final long serialVersionUID = 7818375828146090155L;
-        
-          /**
-           * Create an exception without a descriptive error message.
-           */
-          public IOException()
-          {
-          }
-        
-          /**
-           * Create an exception with a descriptive error message.
-           *
-           * @param message the descriptive error message
-           */
-          public IOException(String message)
-          {
-            super(message);
-          }
-        } // class IOException
-        
-        
-
-The code which doesn't compile is
-icedtea-2.1.3/build/openjdk-boot/langtools/src/share/classes/com/sun/tools/javac/file/ZipFileIndex.java:
-
-    static final class ZipFormatException extends IOException {
-        private static final long serialVersionUID = 8000196834066748623L;
-        protected ZipFormatException(String message) {
-            super(message);
-        }
-
-        protected ZipFormatException(String message, Throwable cause) {
-            super(message, cause);
-        }
-    }
-
-So I'm not surprised that it fails; this can't work. The questions are:
-what combination does work, and when did the combination above stop
-working?
-
-[please reply also directly, I'm not receiving list emails]
-
--- 
-Best Regards, Patrick Ohly
-
-The content of this message is my personal opinion only and although
-I am an employee of Intel, the statements I make here in no way
-represent Intel's position on the issue, nor am I authorized to speak
-on behalf of Intel on this matter.
-
-
-
+> Signed-off-by: Andrei Gherzan <andrei@resin.io>
+> ---
+>  .../python/python-imaging/remove-host-libdir.patch | 25
+> ++++++++++++++++++++++
+>  .../python/python-imaging_1.1.7.bb                 |  3 ++-
+>  2 files changed, 27 insertions(+), 1 deletion(-)
+>  create mode 100644
+> meta-python/recipes-devtools/python/python-imaging/remove-host-libdir.patch
+>
+> diff --git
+> a/meta-python/recipes-devtools/python/python-imaging/remove-host-libdir.patch
+> b/meta-python/recipes-devtools/python/python-imaging/remove-host-libdir.patch
+> new file mode 100644
+> index 0000000..028a51a
+> --- /dev/null
+> +++
+> b/meta-python/recipes-devtools/python/python-imaging/remove-host-libdir.patch
+> @@ -0,0 +1,25 @@
+> +Avoid getting host sysroot paths in the library paths to fix issue like:
+> +
+> +|
+> /home/andrei/work/yocto/build-rpi-master/tmp/sysroots/x86_64-linux/usr/lib/libz.so:
+> file not recognized: File format not recognized
+> +
+> +Upstream-Status: Inappropriate [configuration]
+> +
+> +Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+> +
+> +
+> +Index: Imaging-1.1.7/setup.py
+> +===================================================================
+> +--- Imaging-1.1.7.orig/setup.py
+> ++++ Imaging-1.1.7/setup.py
+> +@@ -155,11 +155,6 @@ class pil_build_ext(build_ext):
+> +
+> +         # FIXME: check /opt/stuff directories here?
+> +
+> +-        prefix = sysconfig.get_config_var("prefix")
+> +-        if prefix:
+> +-            add_directory(library_dirs, os.path.join(prefix, "lib"))
+> +-            add_directory(include_dirs, os.path.join(prefix, "include"))
+> +-
+> +         #
+> +         # locate tkinter libraries
+> +
+> diff --git a/meta-python/recipes-devtools/python/python-imaging_1.1.7.bb
+> b/meta-python/recipes-devtools/python/python-imaging_1.1.7.bb
+> index a678328..d2f1a8c 100644
+> --- a/meta-python/recipes-devtools/python/python-imaging_1.1.7.bb
+> +++ b/meta-python/recipes-devtools/python/python-imaging_1.1.7.bb
+> @@ -9,7 +9,8 @@ PR = "r5"
+>  SRC_URI = "http://effbot.org/downloads/Imaging-${PV}.tar.gz \
+>
+> file://0001-python-imaging-setup.py-force-paths-for-zlib-freetyp.patch \
+>             file://allow.to.disable.some.features.patch \
+> -           file://fix-freetype-includes.patch"
+> +           file://fix-freetype-includes.patch \
+> +           file://remove-host-libdir.patch"
+>
+>  SRC_URI[md5sum] = "fc14a54e1ce02a0225be8854bfba478e"
+>  SRC_URI[sha256sum] =
+> "895bc7c2498c8e1f9b99938f1a40dc86b3f149741f105cf7c7bd2e0725405211"
+> --
+> 2.9.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
