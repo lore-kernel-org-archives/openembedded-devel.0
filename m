@@ -1,48 +1,45 @@
 Return-Path: <andrei@gherzan.ro>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id E77B360119
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 2514660119
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Jul 2016 10:29:08 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id f89so4864885qtd.0
+	Fri,  8 Jul 2016 10:30:30 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id n127so5086724wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jul 2016 03:29:09 -0700 (PDT)
+	Fri, 08 Jul 2016 03:30:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=gherzan-ro.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=hePoqfgyds1UwqcOD+amqds0w+lGGLu42V+mWKGg4jg=;
-	b=zhj+nYu9E1t7Zyym4VDR8eLTdLsVEfWVdozRrAbox8D7jLwpZJPeY9v2SiYycdhn3v
-	O3bbnsrIZ7ImKNYVlV2ZH6ur5wsFVrGZZZQbHJRMIJMvV5MuEe8B5JlCegd1YKC1ZqOZ
-	LHJh8KBGvesXD/PTeQuyywN6gOs9nVd1F60TqrvajEPArVZkIhg7P90OwrQ+z9XxwWuG
-	u5e2yiAj+6+oLskjOBCjZLlKWc5up/e/lt4RzWLRprfNDvXwYEVqd7xn9Gt8RUJ21RBd
-	/XltjWddwMw1oP5b+z7gI/8pXnRxSXeTTOkaXBUN5OL15dHNOzTJOqb/fAf5+sDM/REE
-	dOZg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=UXQ+JUiHpCIZMpmbgRIDcNYmCvo1cqj8dKh9JnZNQh8=;
+	b=Z0RALPTytPdofEaR37UAvsQ1OPVdOH4/ZPAgVSi/wLDtrObHMO9aj2WFv+n18PkWgC
+	cvw9QGOCMYpeRbr2S5ZTrTSXmAKT1d5ZyozUIMg8/mbOzxR6ukscZ3mBUTvJOLD7B+hd
+	91PgNOvBH7dAFn7Bk1YdtDu/1xrVBKUPClSFwB55mvc/BUVyw301pI0R0Z7cnxquSgZ2
+	0fZyU/o9IAIVt/6GtVXBvgZYezP7B7SZUv7jCDW18KhdFZCPlTOUszYvJ7y9bgaOqQLj
+	gkx+ni0XvvEOrNp9vTxB+67Rfe8ENdVComjYqMrDoUzu3/xJhrwcnw4JYk60KccDEvxH
+	IYsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=hePoqfgyds1UwqcOD+amqds0w+lGGLu42V+mWKGg4jg=;
-	b=MwN92vGI5JIBwLs4zNTOoiDBu5TJsmuBhaGUa3r9nPQjldCw+MOdEIC+eSJh3Z5h7K
-	+vgfHEm1Wshhj7kxR6BP8FvEXjDMBWvsCRq4hVZ+w22zX4TUo06uPucklyLr0H6gVhOG
-	ysCeCOh567EBCN0JeuOXgrJvfR2ru8n7PisicgckbQYvTWxQmIqmLCvt4psaj0eA3hG4
-	itfqBQzzfAxIjXKCihL+ylIp3n5SFFF0R8AefR4S0Bh6mS1N9SZqqLh0PMyN/MHmxoGQ
-	bEezL2tt725zm07rWKy01Vn/N9+2xSGfe4uI1zHx10jzQZrQxOwty4vIwcNDxyEvkXAH
-	h6Hg==
-X-Gm-Message-State: ALyK8tJ3QG7rFUkh1vpfK+4zgEJ0xpKb1VWgYQzD9QY/yD/WWapOwXdtq1OUeLYhusYMKQ==
-X-Received: by 10.194.117.35 with SMTP id kb3mr5179106wjb.136.1467973748942;
-	Fri, 08 Jul 2016 03:29:08 -0700 (PDT)
-Received: from resin.home (host86-179-71-94.range86-179.btcentralplus.com.
-	[86.179.71.94])
-	by smtp.gmail.com with ESMTPSA id ck1sm26638wjc.1.2016.07.08.03.29.07
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 08 Jul 2016 03:29:07 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=UXQ+JUiHpCIZMpmbgRIDcNYmCvo1cqj8dKh9JnZNQh8=;
+	b=KrJ12HjBVj9qrqI12kOMZr/0D0OSg+3RvW4SydyaVP3KDEwa2CJyQO0Q0vnrY771DD
+	cBuIaxRv2ulVxrStl5NlELHNyA9tpzu24qtGsZ7IlZrFdzE3Ms1Af26jkM+qvD2Z0Nbb
+	BcUnqjXZxA1ReLKXO3o14t6oMUEhyunI0ca8VIRMCHNfeTFVY/Q9ScqvktmonIp1kS4b
+	EpJV9BGMyB+RWeQYX7u9tWXIwYApeqlfYaWeE91D5mNTRRosgrEvDOBMJEam5MBeDub3
+	gvlGaPsZnE4ioHh8ysth0V7rJ39zwgqysGIVzPcbwirpKGfONq6jgWzggj2vXJfXG8jG
+	gn1Q==
+X-Gm-Message-State: ALyK8tLkuA8rJF5AqXVEI4037LXq8zxcLreJpVfmqz62VHv5WN4qRi6WfipCO8AD5ApKe0baXLPBcdgzg1eCrg==
+X-Received: by 10.28.234.16 with SMTP id i16mr2798605wmh.36.1467973830588;
+	Fri, 08 Jul 2016 03:30:30 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.28.26.204 with HTTP; Fri, 8 Jul 2016 03:29:51 -0700 (PDT)
+X-Originating-IP: [86.179.71.94]
+In-Reply-To: <20160708102607.7068-1-andrei@resin.io>
+References: <20160708102607.7068-1-andrei@resin.io>
 From: Andrei Gherzan <andrei@gherzan.ro>
-X-Google-Original-From: Andrei Gherzan <andrei@resin.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Jul 2016 11:29:04 +0100
-Message-Id: <20160708102904.10675-1-andrei@resin.io>
-X-Mailer: git-send-email 2.9.0
-Cc: Andrei Gherzan <andrei@resin.io>
-Subject: [meta-python][PATCH 1/1] python-imaging: Add patch to fix host sysroot fails
+Date: Fri, 8 Jul 2016 11:29:51 +0100
+Message-ID: <CAK18fxGGw5QTivskp3gTvPEi3Nf0ugWAL_XFutb-27W0jZouAA@mail.gmail.com>
+To: openembedded <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] netmap: blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,61 +52,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jul 2016 10:29:09 -0000
+X-List-Received-Date: Fri, 08 Jul 2016 10:30:32 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Andrei Gherzan <andrei@resin.io>
----
- .../python/python-imaging/remove-host-libdir.patch | 25 ++++++++++++++++++++++
- .../python/python-imaging_1.1.7.bb                 |  3 ++-
- 2 files changed, 27 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python-imaging/remove-host-libdir.patch
+On Fri, Jul 8, 2016 at 11:26 AM, Andrei Gherzan <andrei@gherzan.ro> wrote:
+> From: Martin Jansa <Martin.Jansa@gmail.com>
+>
 
-diff --git a/meta-python/recipes-devtools/python/python-imaging/remove-host-libdir.patch b/meta-python/recipes-devtools/python/python-imaging/remove-host-libdir.patch
-new file mode 100644
-index 0000000..028a51a
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-imaging/remove-host-libdir.patch
-@@ -0,0 +1,25 @@
-+Avoid getting host sysroot paths in the library paths to fix issue like:
-+
-+| /home/andrei/work/yocto/build-rpi-master/tmp/sysroots/x86_64-linux/usr/lib/libz.so: file not recognized: File format not recognized
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
-+
-+
-+Index: Imaging-1.1.7/setup.py
-+===================================================================
-+--- Imaging-1.1.7.orig/setup.py
-++++ Imaging-1.1.7/setup.py
-+@@ -155,11 +155,6 @@ class pil_build_ext(build_ext):
-+ 
-+         # FIXME: check /opt/stuff directories here?
-+ 
-+-        prefix = sysconfig.get_config_var("prefix")
-+-        if prefix:
-+-            add_directory(library_dirs, os.path.join(prefix, "lib"))
-+-            add_directory(include_dirs, os.path.join(prefix, "include"))
-+-
-+         #
-+         # locate tkinter libraries
-+ 
-diff --git a/meta-python/recipes-devtools/python/python-imaging_1.1.7.bb b/meta-python/recipes-devtools/python/python-imaging_1.1.7.bb
-index a678328..d2f1a8c 100644
---- a/meta-python/recipes-devtools/python/python-imaging_1.1.7.bb
-+++ b/meta-python/recipes-devtools/python/python-imaging_1.1.7.bb
-@@ -9,7 +9,8 @@ PR = "r5"
- SRC_URI = "http://effbot.org/downloads/Imaging-${PV}.tar.gz \
-            file://0001-python-imaging-setup.py-force-paths-for-zlib-freetyp.patch \
-            file://allow.to.disable.some.features.patch \
--           file://fix-freetype-includes.patch"
-+           file://fix-freetype-includes.patch \
-+           file://remove-host-libdir.patch"
- 
- SRC_URI[md5sum] = "fc14a54e1ce02a0225be8854bfba478e"
- SRC_URI[sha256sum] = "895bc7c2498c8e1f9b99938f1a40dc86b3f149741f105cf7c7bd2e0725405211"
--- 
-2.9.0
+Please ignore this. Sorry for the noise.
 
+> * it's broken for very long time
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+> ---
+>  meta-networking/recipes-kernel/netmap/netmap_git.bb | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/meta-networking/recipes-kernel/netmap/netmap_git.bb b/meta-networking/recipes-kernel/netmap/netmap_git.bb
+> index a028585..667e7cc 100644
+> --- a/meta-networking/recipes-kernel/netmap/netmap_git.bb
+> +++ b/meta-networking/recipes-kernel/netmap/netmap_git.bb
+> @@ -32,3 +32,6 @@ do_install () {
+>  FILES_${PN} += "${bindir}"
+>  RDEPENDS_${PN} = "kernel-module-netmap"
+>  RRECOMMENDS_${PN} = "kernel-module-netmap"
+> +
+> +# http://errors.yoctoproject.org/Errors/Details/69733/
+> +PNBLACKLIST[netmap] ?= "BROKEN: Tries to build kernel module and fails, either it should be disabled or there should be dependency on kernel like in netmap-modules"
+> --
+> 2.9.0
+>
 
