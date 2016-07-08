@@ -1,46 +1,46 @@
-Return-Path: <danismostlikely@gmail.com>
-Received: from mail-pa0-f67.google.com (mail-pa0-f67.google.com
-	[209.85.220.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 5BB296013D
+Return-Path: <andrei@gherzan.ro>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id AA0A260119
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jul 2016 16:55:21 +0000 (UTC)
-Received: by mail-pa0-f67.google.com with SMTP id ts6so2239908pac.0
+	Fri,  8 Jul 2016 10:26:19 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id k123so5033779wme.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Jul 2016 09:55:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=WtleyVHMY7E6rTjsXNCb1BnqZJ56gn/kXMJbEkgDEQ0=;
-	b=l19ik0R5YRnCDZjROui8jZ+ZPIBlqIRthNFRDOe05+IIjwKQa2x4BiKtSzJhSao4Gs
-	noNVaEV1vcn3YaLJgaqSfL/sflaYKaGXUNhm+OLAcmsfhtAZyVSwnxUo5xdwSGtjAHuO
-	5tXF//KNV1rkVkmx61/F5i/AHJKqS+JjwXojSCuzYXTB7JEQc3SxXAD6gkCOVu+IWFL3
-	9HdDPv89pHeKThvCWgKnklSntqUzeq27ifY4Qe+PdaEgOS8mQ41Wk0LOMKuZ6KcJesQs
-	f6h9I8Tjrotltc/CU25fMVdcDNxiL5tQgiGgryOU/G8iOvnlfWF4T9WAyYxheLosaH9r
-	c3ew==
+	Fri, 08 Jul 2016 03:26:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=gherzan-ro.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=mJ4O3oJcQEt49fUDwUIOuX6b2gwcEuv2W1HvA5i2SDw=;
+	b=pf/gcB7troUCKDEMw7V1fCnuogwdhwF1zqd7w3Cn9o6+fX888lMGWcXUN4wg+CxTeH
+	mFMXdp8C2ImUiPh/DRfF7lN8Cxb8p3mU7WC7f+QThihE4GkkJeseZAgj4Q5YFb88KNky
+	U8/J/fkWl5OVoPcgUpnLQRK7QiH+J6DZi4Ndvrh0ds0Y8zbHi8j1y3IsJZHjlsC4cllQ
+	lxtDu/htJT1+3goSuqtbECUDZppemR0e+dZM5K67/s8l6hEozr9YILuShB2CB/peHgBN
+	gQ8xO+/zqSUiNKbZ+3v+dJOVP0dTtwbuI6QfFjeluYMzI1LBgohxIJWT2kQ5sAUcth7N
+	f7yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=WtleyVHMY7E6rTjsXNCb1BnqZJ56gn/kXMJbEkgDEQ0=;
-	b=bTfDBAUzUVzHJupCuAov2IgfFphA25nOaVcbtrOgDQFESZds9Q2vMt/FEFLXgoyufW
-	8jYhYCoHflqrZZJgvM6S+3H4NhoRZJUMbBcoV3xPzdn1lSmIork6BRdteX7da7QCDQZ4
-	UyUqSIgljTXKzFpLDkwrpGBFo9kEmhesTssPvXzuGlOFpHX6FaBJV0VNIm9UsyfGjUYd
-	dgBC7WZPChUg0jj9k4/SXxgKt1y3HbNAlY8z4GNzCnDBnCb+1dXfn8JcJrCMovT6l1xm
-	bqfCUWWv3ClAFOuXNsoVQ5DfKNoHty5l/yxidb3qBFr1QZagSSf2aQBYIGohS+O8hJHY
-	fSXw==
-X-Gm-Message-State: ALyK8tKFZyod8vGY6SMA9FWVfKW3sHeJEQf32AIVf7ZmxAGAGzJwgr7RjjX7k7CJzZFk6A==
-X-Received: by 10.66.138.110 with SMTP id qp14mr1903784pab.135.1467910521737; 
-	Thu, 07 Jul 2016 09:55:21 -0700 (PDT)
-Received: from mediabox.local (71-17-245-40.sktn.hsdb.sasknet.sk.ca.
-	[71.17.245.40]) by smtp.gmail.com with ESMTPSA id
-	yt4sm5674470pab.26.2016.07.07.09.55.20
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=mJ4O3oJcQEt49fUDwUIOuX6b2gwcEuv2W1HvA5i2SDw=;
+	b=MFJuHpau4bEgI548gzPyvVMAkwFWET4n1VHg+anuYRmUqTkm7T7a6Z98VJwrbyjpEM
+	vZNKmbuJl0S41QISQC6nbCZnNz99qLi7xIpApQVN12mqFTwduMpJHYzbTEIA8Ks6bJia
+	Oy1Gb9b24yCnvNI/xN/8z23rRiGSrDh1xcn7HVec1MQyoIqNLSjT5/a2wqKhGTek2m6F
+	S7H1TfN+g/0InBTVwZO+zHN1EzTwiMLm8d+zWtoLFa0MHsJXV7jQv9/odqZBxBqIu5mt
+	jnKb/fN4n9+pIQyYHMrWWg92w4e/2s055q0Mqje3Lp2lwH83kKxBaxFJrp7v80i4OqxA
+	rITg==
+X-Gm-Message-State: ALyK8tKMfwJDhZftlCTG6W8V1G13ZIVzOAdd3fQuRH+CfQtpOX0zUSvd07RLpqLxwDq8zA==
+X-Received: by 10.28.68.213 with SMTP id r204mr2713665wma.23.1467973579922;
+	Fri, 08 Jul 2016 03:26:19 -0700 (PDT)
+Received: from resin.home (host86-179-71-94.range86-179.btcentralplus.com.
+	[86.179.71.94]) by smtp.gmail.com with ESMTPSA id
+	o142sm1289626wme.20.2016.07.08.03.26.18
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Jul 2016 09:55:21 -0700 (PDT)
-From: Dan McGregor <danismostlikely@gmail.com>
+	Fri, 08 Jul 2016 03:26:18 -0700 (PDT)
+From: Andrei Gherzan <andrei@gherzan.ro>
+X-Google-Original-From: Andrei Gherzan <andrei@resin.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Jul 2016 10:55:18 -0600
-Message-Id: <20160707165518.22440-1-danismostlikely@gmail.com>
-X-Mailer: git-send-email 2.9.0.18.g2ff7dff
-Subject: [meta-java][PATCH] openjdk-7, openjdk-8: use vardeps to fix shared state
+Date: Fri,  8 Jul 2016 11:26:07 +0100
+Message-Id: <20160708102607.7068-1-andrei@resin.io>
+X-Mailer: git-send-email 2.9.0
+Subject: [meta-python][PATCH] netmap: blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,45 +53,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jul 2016 16:55:21 -0000
+X-List-Received-Date: Fri, 08 Jul 2016 10:26:21 -0000
 
-From: Daniel McGregor <daniel.mcgregor@vecima.com>
+From: Martin Jansa <Martin.Jansa@gmail.com>
 
-Previously if PARALLEL_MAKE changed, so did the task signature
-for do_configure. Use vardepsvalue so that the signature remains
-constant.
+* it's broken for very long time
 
-Signed-off-by: Daniel McGregor <daniel.mcgregor@vecima.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 ---
- recipes-core/openjdk/openjdk-7-common.inc | 1 +
- recipes-core/openjdk/openjdk-8-common.inc | 2 ++
- 2 files changed, 3 insertions(+)
+ meta-networking/recipes-kernel/netmap/netmap_git.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/recipes-core/openjdk/openjdk-7-common.inc b/recipes-core/openjdk/openjdk-7-common.inc
-index bb399b1..759b426 100644
---- a/recipes-core/openjdk/openjdk-7-common.inc
-+++ b/recipes-core/openjdk/openjdk-7-common.inc
-@@ -80,6 +80,7 @@ def get_jdk7_jobs(d):
-     # Whatever found in PARALLEL_MAKE was not suitable.
-     return "1"
- 
-+get_jdk7_jobs[vardepsexclude] += "OPENJDK_PARALLEL_MAKE"
- JDK_JOBS = "${@get_jdk7_jobs(d)}"
- 
- EXTRA_OECONF = " \
-diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
-index dd3d397..74f686d 100644
---- a/recipes-core/openjdk/openjdk-8-common.inc
-+++ b/recipes-core/openjdk/openjdk-8-common.inc
-@@ -186,6 +186,8 @@ def get_jdk8_native_jobs(d):
-     # Whatever found in PARALLEL_MAKE was not suitable.
-     return "1"
- 
-+get_jdk8_native_jobs[vardepsexclude] += "OPENJDK8_PARALLEL_MAKE"
+diff --git a/meta-networking/recipes-kernel/netmap/netmap_git.bb b/meta-networking/recipes-kernel/netmap/netmap_git.bb
+index a028585..667e7cc 100644
+--- a/meta-networking/recipes-kernel/netmap/netmap_git.bb
++++ b/meta-networking/recipes-kernel/netmap/netmap_git.bb
+@@ -32,3 +32,6 @@ do_install () {
+ FILES_${PN} += "${bindir}"
+ RDEPENDS_${PN} = "kernel-module-netmap"
+ RRECOMMENDS_${PN} = "kernel-module-netmap"
 +
- # A function that is needed in the Shark builds.
- def get_llvm_configure_arch(d):
-     import bb;
++# http://errors.yoctoproject.org/Errors/Details/69733/
++PNBLACKLIST[netmap] ?= "BROKEN: Tries to build kernel module and fails, either it should be disabled or there should be dependency on kernel like in netmap-modules"
 -- 
 2.9.0
 
