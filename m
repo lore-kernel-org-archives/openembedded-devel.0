@@ -1,47 +1,47 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
-	[209.85.215.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 2FFC260119
+Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
+	[209.85.215.67])
+	by mail.openembedded.org (Postfix) with ESMTP id A0D9860119
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Jul 2016 17:06:23 +0000 (UTC)
-Received: by mail-lf0-f68.google.com with SMTP id a10so6589571lfb.1
+	Fri,  8 Jul 2016 17:07:25 +0000 (UTC)
+Received: by mail-lf0-f67.google.com with SMTP id w130so8267733lfd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jul 2016 10:06:24 -0700 (PDT)
+	Fri, 08 Jul 2016 10:07:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=OWbXYAsV2GuAxs+YSm4UU840u9doVFoZqp7guc7lmho=;
-	b=vO70QRrhfFG/zLFYPymI/Hg0Ha2QZWiUrwb0yQ4dT+L+HcBYQpHI1Zc6xCWqvtebD4
-	vDQWmOrmKrHgcrdGdIv/HEJEKZ310cxuL0TPp0rK2H7UgU94Y3hoiE/ZySVKxwoYInlB
-	7mekwGdzslmcsnvpJLZCcOlGcTiLiJOodE1TbhsDWYMnjipH/058LJIhOqM4AHWo0RAA
-	VWrRHx3FLO+8nNnPb4z4RRgLRBwyPU+kYbVWV8r4IBPQtEsziHz0im+9eOZHZtYARDTt
-	88IGmz9Sp8t17mA5j7BhGaIkBwVGSYVJnit/nykrxGxmFVbN4SJ4NkLj/mmZhLPUe8S7
-	apuw==
+	bh=642izPNONkplOcUtZcCs0YVnu9jAp6S+8iVSjd7Gn6s=;
+	b=SsCtGWW4QKunqJWRi47QaXGqgi4nQRB9Pn1rrXGATmSWfvgFHhhG8zmyGT98qcMOVy
+	WSUdYbl/kkIaubLKW3EV6iv2yKfnGndOqlckirqOTcx+9qgZNm8qJ93lBVck17PaWGLo
+	w0wW2oWKY0eFr59ep4bFmhD+qIGnV8dtyzL8P3+9o20DjPfFaU9fmMwUoM9RtX083zzq
+	7umLrbycgJvm8zXg5CL6glnlzyzSd2UpM7Rp2EFxH6JMPlVSixGG0hHzyuaz5JmNJOp9
+	reIkGdRccV08Q173QUtsDmxFKgfJ2fGIkJ1N3hG2f9YJvyzYi2ayvJWY33Dbo2W/HOq2
+	XnmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=OWbXYAsV2GuAxs+YSm4UU840u9doVFoZqp7guc7lmho=;
-	b=lEDWGPe5W1ePCLMvSPJl+Z+u63WXvTS80kCly3ZjCma3BXmIHapUccM1V+vfWYtpu8
-	4Q18HijeKafYvvEXeyGDU1XShpxHSUJfm7EoD2b8cpDLOKTvWe9rAIo3VPbjR0r0fUp8
-	3At4buoUef6KipQ/hddVo+/AKKSQHMJT7eV6+urDg4kdwacu+RHrfYvdGlQAP9TnNSVt
-	Fz81zm9NXNu/kW9OuM8rEFldA1/8pWii6/8rrGH+eR5kaXDwemefCbn5iHMHE6mT+fDY
-	W6xxlBqxfnkxoEZoRRAmJD5B+IlY7iVhioCpSi0KByCYVMa73ZgrOrtBUn37fvJLWrCm
-	djjQ==
-X-Gm-Message-State: ALyK8tIR/wEby05DptyEHFXYQXecfW6OgSLGgZlprBTWEibn4td4l6WTvqhg+ICc7zzEMvF4zYOm1PtpchAh4w==
-X-Received: by 10.25.153.148 with SMTP id b142mr1964284lfe.61.1467997583446;
-	Fri, 08 Jul 2016 10:06:23 -0700 (PDT)
+	bh=642izPNONkplOcUtZcCs0YVnu9jAp6S+8iVSjd7Gn6s=;
+	b=Ys3unqgo/CUlp7379UorSefkozsWmB++gf7/+bOkaQ8alT1h5/SiSzXGnl6WwGak1/
+	5qEqC5QjnpZd8auCefZDf3sWqPBWX7gUUR+BEovGTnjxZH0fc/zuiEcOLZsikVf8bmat
+	FBqAGZptvmk8hzx/lwIX22gnOBFXtzSxwIQJZHwz6F1OENjGjbPvZXpR3MItxLCDtW3S
+	wOwUSV5xMdRhuiDyF0mt+gXkA/t1wWoj23zFmYtWye37s2L7gcYvh6TLZWVzOU7Ma5jV
+	LNo6xSUNfHSC2vLaohLbXnIcLl/4iDIQHxVuXDpuqeAdpa8TL7UBpIOKAzz9B9y0uGAC
+	cKfg==
+X-Gm-Message-State: ALyK8tJDSlMiBMl4yovNGuQTmMgrp16OriBRIaZ5OSx96QsP/W2kCgdD4nzui5aPtppHqzsAQ+Jw6RW4/HNm6w==
+X-Received: by 10.46.5.211 with SMTP id 202mr608064ljf.16.1467997645872; Fri,
+	08 Jul 2016 10:07:25 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.25.10.10 with HTTP; Fri, 8 Jul 2016 10:06:22 -0700 (PDT)
-In-Reply-To: <1467619576-13899-4-git-send-email-mingli.yu@windriver.com>
+Received: by 10.25.10.10 with HTTP; Fri, 8 Jul 2016 10:07:25 -0700 (PDT)
+In-Reply-To: <1467619576-13899-5-git-send-email-mingli.yu@windriver.com>
 References: <1467619576-13899-1-git-send-email-mingli.yu@windriver.com>
-	<1467619576-13899-4-git-send-email-mingli.yu@windriver.com>
+	<1467619576-13899-5-git-send-email-mingli.yu@windriver.com>
 From: Tim Orling <ticotimo@gmail.com>
-Date: Fri, 8 Jul 2016 10:06:22 -0700
-Message-ID: <CANx9H-A60g=TQCg3hWm4JDNCcOvd8HRL6vg5XyEi8-pou1AHbA@mail.gmail.com>
+Date: Fri, 8 Jul 2016 10:07:25 -0700
+Message-ID: <CANx9H-BSGrcTHTiyreukh5xNgyNLORFMjef48dqLOKSSXpGVdw@mail.gmail.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-python][PATCH v2 3/5] python-mccabe: Add python-pytest-runner dependency
+Subject: Re: [meta-python][PATCH v2 4/5] python-pytest-runner: Add python-pytest-runner bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,7 +54,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jul 2016 17:06:24 -0000
+X-List-Received-Date: Fri, 08 Jul 2016 17:07:26 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Built ok for beaglebone.
@@ -66,29 +66,42 @@ On Mon, Jul 4, 2016 at 1:06 AM, <mingli.yu@windriver.com> wrote:
 
 > From: Mingli Yu <mingli.yu@windriver.com>
 >
-> * Add python-pytest-runner dependency for python-mccabe
+> * Add python-pytest-runner bb as python-mccabe depends
+>   on python-pytest-runner
 >
 > Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 > ---
->  meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb | 3 +++
->  1 file changed, 3 insertions(+)
+>  .../recipes-devtools/python/python-pytest-runner_2.8.bb    | 14
+> ++++++++++++++
+>  1 file changed, 14 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python-pytest-runner_2.8.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
-> b/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
-> index 0958f75..ba966eb 100644
-> --- a/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
-> +++ b/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
-> @@ -8,6 +8,9 @@ SRC_URI[sha256sum] =
-> "9a2b12ebd876e77c72e41ebf401cc2e7c5b566649d50105ca498226886
->
->  inherit pypi setuptools
->
-> +DEPENDS += " \
-> +    python-pytest-runner"
+> diff --git a/meta-python/recipes-devtools/python/
+> python-pytest-runner_2.8.bb b/meta-python/recipes-devtools/python/
+> python-pytest-runner_2.8.bb
+> new file mode 100644
+> index 0000000..a4685ec
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-pytest-runner_2.8.bb
+> @@ -0,0 +1,14 @@
+> +SUMMARY = "Invoke py.test as distutils command with dependency resolution"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=e38b971c2b4c33b978d1b9c9ece9ae63"
 > +
->  RDEPENDS_${PN} += " \
->      python-prettytable \
->      python-cmd2 \
+> +SRC_URI[md5sum] = "041f3624f450d87a242e3907d7f90e8f"
+> +SRC_URI[sha256sum] =
+> "1ec44deddaa551f85fd563c40a4c483a2609aca1f284a95399566a74d0680d5c"
+> +PYPI_PACKAGE_HASH =
+> "466cff61a9e0d513222afa3529bdb565a465812b7e50b218a5afd705f46b258c"
+> +
+> +DEPENDS += " \
+> +    python-setuptools-scm"
+> +
+> +RDEPENDS_${PN} = "python-py python-setuptools python-argparse
+> python-debugger python-json"
+> +
+> +inherit pypi setuptools
 > --
 > 2.8.1
 >
