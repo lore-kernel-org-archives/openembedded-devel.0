@@ -1,36 +1,46 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 39ED1601A4
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
+	[209.85.215.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 1DBD8601A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Jul 2016 15:15:28 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id q62so373105qkf.2
+	Sat,  9 Jul 2016 16:33:08 +0000 (UTC)
+Received: by mail-lf0-f67.google.com with SMTP id l89so202651lfi.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Jul 2016 08:15:29 -0700 (PDT)
+	Sat, 09 Jul 2016 09:33:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=Vx23Q3EalJLf/F7AFmWVXbYpr7OJJxea0rEB1Pc5scI=;
+	b=FgqpaHHpv527GP6PwO8THIFqEpMRHfdMSetmiG3NRfc515PKOqCijYSXJkGcS3lzs5
+	Jxw5USsSfJXMl+CZZEHfv0laD+GX20T/s5ykD+OsFKxSkiv8sGUilg6eyl7Y7MCgtYwG
+	3ML6pfZsZAIfFNgm47K0zocWUh/M46uviTja5bJCJtQNHlv6IozoHfkyR+b447XvxvNc
+	1Ww/HZmrUCm4BN7SMWz7kySX9xA0d8/JNnqD65dqntXNkrqGk2TrxV7KeAq76Vj2Z7w6
+	B/OqywO/3wmoWufems2NJ0EIrsSTF7FY5eq6gRRS/gazYr4tp50pYX7pMucAxyLNHrcY
+	jI9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=3iT0EReLaHoykuPdSNjbP/E5DQTgl6LGQKlc0ISP/vs=;
-	b=biqcNuFySmn/Q9a9Lo2jLOr4tePves3PPrqQunlZdjZ7MSZsMMwpdaHT1GgrsoR4R3
-	4xHyjdviW4fh0B2/UIrjBoziGEptnCkZ+vIBmheV+kL3xXUFgfpGke/sEsqi+8oli/ul
-	jaCDhDDF0ANDiojbCWqpvWtFYzeQTt3isMtl4P9Ssvc8nJ+/si+Qwmvi5ul1MMoPPKfl
-	LDQnoU808LYm6M7pyOk7F6m2STSlcp6zJzCet7FuN/R6jgDlFk6j5BI+0wFi/b8wjygQ
-	5S0is3CTl85Rk4fonvfhfpjyp26hE6S0kVTbJkc4wlykPTbs/FB2q7gINR7cXk0YMndk
-	xfxg==
-X-Gm-Message-State: ALyK8tK807h7xHrJQNuCzNO9iRSKLPgIhLuI55zSZ26lZxItODUQzyz733JHn/qSKjXRqg==
-X-Received: by 10.55.126.7 with SMTP id z7mr13976405qkc.172.1468077328720;
-	Sat, 09 Jul 2016 08:15:28 -0700 (PDT)
-Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	o27sm1929360qto.29.2016.07.09.08.15.27
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 09 Jul 2016 08:15:28 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Jul 2016 11:14:58 -0400
-Message-Id: <1468077298-14504-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-python][PATCH] python-tornado: remove deprecated version 2.2.1
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=Vx23Q3EalJLf/F7AFmWVXbYpr7OJJxea0rEB1Pc5scI=;
+	b=UyAa22uLj7QzgM3GBXOBE4ApHyAVmvr7RbZRlQXKAOMxj5mwSqfO1YZH05npw2lyaK
+	NNisXpwWVkpEEQe0prn6qiMk++6hgRRvvyzbUD+5QwhiRXd/PxklYTe8tPHtIzxkDDEW
+	4u3G8LaOdePNu40Bv+otAJ/mKcy30vD9iYhIartw/DuricwZX8SlqZz1eR3q5tHdDPLy
+	vMkYMcENwVX8mrt5EcZOKML5d83+UkXsUo5lOICNrI5o2BhuI9fHE+T65PRIVpeb0U6g
+	9KtZa+gOqAlr7S+6T+4JZNGn3K75mIV8gymJG0qIwjKkgHsctpxHJf8XHlYI1LPU6NE6
+	9EvQ==
+X-Gm-Message-State: ALyK8tIIOZBxEU4MwRajV7iEOQpQnsAmcQ3AOMFu2vNdieOeztKcBJFj4/AivL/LZFMX70qh2tn1z38uS+5fFA==
+X-Received: by 10.25.21.223 with SMTP id 92mr2331256lfv.19.1468081988473; Sat,
+	09 Jul 2016 09:33:08 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.25.10.10 with HTTP; Sat, 9 Jul 2016 09:33:07 -0700 (PDT)
+In-Reply-To: <1468065358-32604-1-git-send-email-derek@asterius.io>
+References: <1468065358-32604-1-git-send-email-derek@asterius.io>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Sat, 9 Jul 2016 09:33:07 -0700
+Message-ID: <CANx9H-DDmHxmn8rkBq3-MKVMdjFbhHY=uNrtaxCw-UCBtO14tg@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-python][PATCH] Add Derek Straka as a maintainer for the meta-python layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,77 +53,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Jul 2016 15:15:30 -0000
+X-List-Received-Date: Sat, 09 Jul 2016 16:33:10 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../0001-disable-AI_ADDRCONFIG-flag.patch          | 32 ----------------------
- .../python/python-tornado_2.2.1.bb                 | 16 -----------
- 2 files changed, 48 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-tornado/0001-disable-AI_ADDRCONFIG-flag.patch
- delete mode 100644 meta-python/recipes-devtools/python/python-tornado_2.2.1.bb
+Signed-off-by: Tim Orling (Intel Open Source Technology Center) <
+ticotimo@gmail.com>
 
-diff --git a/meta-python/recipes-devtools/python/python-tornado/0001-disable-AI_ADDRCONFIG-flag.patch b/meta-python/recipes-devtools/python/python-tornado/0001-disable-AI_ADDRCONFIG-flag.patch
-deleted file mode 100644
-index 0b0d471..0000000
---- a/meta-python/recipes-devtools/python/python-tornado/0001-disable-AI_ADDRCONFIG-flag.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From d7fb0a6ef3f3cbdfc1f21f5a67d54fa9d2c1e183 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen@dominion.thruhere.net>
--Date: Wed, 2 Nov 2011 11:07:24 +0100
--Subject: [PATCH] disable AI_ADDRCONFIG flag
--
--Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
--
--Upstream-Status: unknown
-----
-- tornado/netutil.py |    6 ------
-- 1 files changed, 0 insertions(+), 6 deletions(-)
--
--diff --git a/tornado/netutil.py b/tornado/netutil.py
--index cfff0ba..c181f24 100644
----- a/tornado/netutil.py
--+++ b/tornado/netutil.py
--@@ -238,12 +238,6 @@ def bind_sockets(port, address=None, family=socket.AF_UNSPEC, backlog=128):
--     if address == "":
--         address = None
--     flags = socket.AI_PASSIVE
---    if hasattr(socket, "AI_ADDRCONFIG"):
---        # AI_ADDRCONFIG ensures that we only try to bind on ipv6
---        # if the system is configured for it, but the flag doesn't
---        # exist on some platforms (specifically WinXP, although
---        # newer versions of windows have it)
---        flags |= socket.AI_ADDRCONFIG
--     for res in set(socket.getaddrinfo(address, port, family, socket.SOCK_STREAM,
--                                   0, flags):
--         af, socktype, proto, canonname, sockaddr = res
---- 
--1.7.2.5
--
-diff --git a/meta-python/recipes-devtools/python/python-tornado_2.2.1.bb b/meta-python/recipes-devtools/python/python-tornado_2.2.1.bb
-deleted file mode 100644
-index 28026b3..0000000
---- a/meta-python/recipes-devtools/python/python-tornado_2.2.1.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--DESCRIPTION = "Tornado is an open source version of the scalable, non-blocking web server and tools that power FriendFeed."
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://README;md5=e7fb9954003d7cd93322ccf282210d1c"
--
--PV = "2.2.1+git${SRCPV}"
--
--SRCREV = "c501917eba46dec30b1f2ef12497dffc4beec505"
--SRC_URI = "git://github.com/facebook/tornado.git;branch=branch2.2 \
--           file://0001-disable-AI_ADDRCONFIG-flag.patch \
--"
--
--S = "${WORKDIR}/git"
--
--inherit setuptools
--
--
--- 
-1.9.1
+On Sat, Jul 9, 2016 at 4:55 AM, Derek Straka <derek@asterius.io> wrote:
 
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+>  meta-python/README | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-python/README b/meta-python/README
+> index f62ab8f..905d5ee 100644
+> --- a/meta-python/README
+> +++ b/meta-python/README
+> @@ -50,4 +50,5 @@ Maintenance
+>  Maintainers:
+>          Tim "moto-timo" Orling <TicoTimo@gmail.com>
+>          Paul "bluelightning" Eggleton <paul.eggleton@linux.intel.com>
+> +        Derek Straka <derek@asterius.io>
+>
+> --
+> 1.9.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
