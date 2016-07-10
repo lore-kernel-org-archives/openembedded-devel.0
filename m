@@ -1,39 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 9508D601F6
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 30360606D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jul 2016 12:27:25 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id q62so1386589qkf.2
+	Sun, 10 Jul 2016 12:32:56 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id j37so491389qta.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jul 2016 05:27:26 -0700 (PDT)
+	Sun, 10 Jul 2016 05:32:57 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=z/2P6RHxvEMxZaFtLFB1wwrtMOteiy+AyLhQ/jvDrg0=;
-	b=klQuAmnoNNKgZBW43aXeMAdA7s8y0veK9RUcjFNjJHe/KbQ2lUrZnEGVI5K7DEAqu3
-	hdh9zQmaVA9W6a3c8IXHEjRPAlmHUcl+9Z6z3RyokQohEV9TVIBn6+6vF0q4oBvXbbeD
-	7F/R2YwvAPcsXkSG46c7QuWB+9MjS09wcXRRyPtt0M96Nw1MfmuiPg/7Zq6KwVn08IhD
-	iymb/2U3Rzlnaxx/rzFUcSBp9vY1DfPhOSU9GDwAtgM0lkXuf4D5ufkyIDUBPCfkrhOR
-	EGj2NBUlxVgpq54B/E7gHwxlvoiZ0OO4JCxkcu7mPVCAK1pZKebukUF+T2n0HWxm7U9t
-	ScUg==
-X-Gm-Message-State: ALyK8tKAphqKLigfZWLuK3pY/Z3fYlb6p9YuUQ5o/4Av/bcOxe2ysyInZpQlsif8aPN7zg==
-X-Received: by 10.55.212.147 with SMTP id s19mr19205613qks.64.1468153646009;
-	Sun, 10 Jul 2016 05:27:26 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=5DvGXNU4BZAyaW8m4tgYsSSNeZ8iUAU/nckaAOEo6tA=;
+	b=fN6922N8cChxPT8Z4WzwsMu3lTR4IhEi6d7ygX3zYv8qYKvIZLJdvyuIJOFo1ThTxi
+	9qYXMC9V0ibHdY3TxBSyo+2dJf/Ex5v85iR0h9wMxxptmgD5ZViXBRi1Kn7lcKGj2dur
+	PRPgfDJ7Z5Cv+O07CbAZ1jdbzPgz8eJZ1QbeCZ+0GgYEfgSlWx/cT94Q3NOk9OlGgBD1
+	XjCiGzqjA4LcKmUZ+W5mutITo/5udvzNPVxKd0xjNjMw7CWONS91GjzCKmtPbcYEOnPk
+	A3UZUWkm0W1S/hJG3bn5wLL7hcre5RYSF9bQ4RuwKOGAj6vNtqrYgAbcndbCMl06mC/O
+	nxPA==
+X-Gm-Message-State: ALyK8tIHEkFaCbS/BaBJyD87Wae7FYBVHGP+tjwPtydMGg9ePQSsJdpmxmmz2vnny4fnaQ==
+X-Received: by 10.237.33.69 with SMTP id 63mr22001453qtc.45.1468153977267;
+	Sun, 10 Jul 2016 05:32:57 -0700 (PDT)
 Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168])
-	by smtp.gmail.com with ESMTPSA id 59sm1356879qtb.21.2016.07.10.05.27.25
+	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
+	w17sm2205131qtc.47.2016.07.10.05.32.56
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 10 Jul 2016 05:27:25 -0700 (PDT)
+	Sun, 10 Jul 2016 05:32:56 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Jul 2016 08:27:17 -0400
-Message-Id: <1468153637-19826-2-git-send-email-derek@asterius.io>
+Date: Sun, 10 Jul 2016 08:32:45 -0400
+Message-Id: <1468153965-26801-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1468153637-19826-1-git-send-email-derek@asterius.io>
-References: <1468153637-19826-1-git-send-email-derek@asterius.io>
-Subject: [meta-python][PATCH 2/2] python-vobject: add RDEPENDS for the package
+Subject: [meta-python][PATCH] python-visitor: update to version 0.1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,26 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jul 2016 12:27:25 -0000
+X-List-Received-Date: Sun, 10 Jul 2016 12:32:57 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-vobject_0.9.2.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ .../python/{python-visitor_0.1.2.bb => python-visitor_0.1.3.bb}       | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-visitor_0.1.2.bb => python-visitor_0.1.3.bb} (57%)
 
-diff --git a/meta-python/recipes-devtools/python/python-vobject_0.9.2.bb b/meta-python/recipes-devtools/python/python-vobject_0.9.2.bb
-index d5fd9db..aa2ffdb 100644
---- a/meta-python/recipes-devtools/python/python-vobject_0.9.2.bb
-+++ b/meta-python/recipes-devtools/python/python-vobject_0.9.2.bb
-@@ -8,3 +8,8 @@ SRC_URI[md5sum] = "ccf66aeb1c896d8c34ac62a8b4e7ecfb"
- SRC_URI[sha256sum] = "8b310c21a4d58e13aeb7e60fd846a1748e1c9c3374f3e2acc96f728c3ae5d6e1"
+diff --git a/meta-python/recipes-devtools/python/python-visitor_0.1.2.bb b/meta-python/recipes-devtools/python/python-visitor_0.1.3.bb
+similarity index 57%
+rename from meta-python/recipes-devtools/python/python-visitor_0.1.2.bb
+rename to meta-python/recipes-devtools/python/python-visitor_0.1.3.bb
+index f53091e..1236506 100644
+--- a/meta-python/recipes-devtools/python/python-visitor_0.1.2.bb
++++ b/meta-python/recipes-devtools/python/python-visitor_0.1.3.bb
+@@ -2,7 +2,7 @@ SUMMARY = "A tiny pythonic visitor implementation."
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
+ 
+-SRC_URI[md5sum] = "e9471b44e5d426b0adf5d27694598be0"
+-SRC_URI[sha256sum] = "d9444ffca56a46a920719460d4952f8c88f8fef97f1ea7d2b1f7c50f675022bd"
++SRC_URI[md5sum] = "94a024ed0ec1b02b4497c15267d319ca"
++SRC_URI[sha256sum] = "2c737903b2b6864ebc6167eef7cf3b997126f1aa94bdf590f90f1436d23e480a"
  
  inherit pypi setuptools
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-dateutil \
-+    ${PYTHON_PN}-numbers \
-+    "
 -- 
 1.9.1
 
