@@ -1,60 +1,50 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-io0-f175.google.com (mail-io0-f175.google.com
-	[209.85.223.175])
-	by mail.openembedded.org (Postfix) with ESMTP id EA36F607A5
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-lf0-f54.google.com (mail-lf0-f54.google.com
+	[209.85.215.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E39660589
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 17:43:48 +0000 (UTC)
-Received: by mail-io0-f175.google.com with SMTP id b62so10716548iod.3
+	Mon, 11 Jul 2016 20:12:32 +0000 (UTC)
+Received: by mail-lf0-f54.google.com with SMTP id h129so81646831lfh.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 10:43:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to; 
-	bh=UX2uNDe8DgV13hDMA9WDOJF/nBxKc0jS3gzKZ7zatnY=;
-	b=SbZUmJRaNWWLHLtNacQbKQXTYwmy9ngT/RVw4PzIEQKLQkskr7dQ2XWnzGVVkW6mq6
-	Cw77CP0VaoQUj2KXbkuVXR4VXlOTdFb6s5T2Erm3P5tBm58QfNKrkWmKuHBnAC7hHoCi
-	+WwAYJN3g3DMJozbMaQ4RRbsJq3OPQiPEWFpGnIJPuSosP71HFjG0mPkZFxEyQvyotQw
-	nv2BIBFbt+PdyJZkM4DCHqWtmOUMHHJC2BafgaZNoUVTJ1HElZHMIzrr9VsjYRZUucIu
-	p/dsNlr4z+h1x0cNWoSRs8bgIMBfleA18TVPukdtWxLqAYxRP9349D4N1VUtsJj6Zaow
-	w9vQ==
+	Mon, 11 Jul 2016 13:12:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=11TYy/lnR87VyPtk9B0y8h05YPY1kNJkClH7L3oFs+Q=;
+	b=ZSsz3WIL+5X/dUukMQsuQ6WrgwJreu5pRDg4eLa430NHtsLXtYBBbDQbpdFyIwYd7E
+	z3Tm6CntjpMy54LZFVkA7oQTJR5BU4+5JbVkutJXUL9C2hj2aS+ZnQuZK6gXDu0hT4Q0
+	DmSF2jviGbGL8SuzcDehd79210vz5AIUF1Du9VfSZBorq2e+2V2FhlAHCfdChCk2vyYZ
+	X6Z+xYtBejuY1DBwbns2vTnvCIaPot5o87Jsshiu20XMkNCHsR+0qONpqeC9DLJphI62
+	mC/Fhc+D6dJOQx4m8eE2HSEfXJR2X+zLOXQmnwn8QIyE5E3kkmzckZweVO0XF9Cnqdx1
+	r+Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=UX2uNDe8DgV13hDMA9WDOJF/nBxKc0jS3gzKZ7zatnY=;
-	b=N/7R3PkiJToUYbk7VAY/777C/xp0pfipUvuDg86ggSUfqVHwCJ7WBBKhKCunRyfo5T
-	qCrLbQz6GaNz0MRcTRqpNuzEkdGLL6uNiDhE0wT9WrLReh/bQKu1M/mqSvrydOybKBWr
-	nUbSoK49gg25Sge1bKbHTJJ1S0QZPkdtowiUpq0PHih+aYdqK0KzCho5ospQHtMquGb1
-	IVeIZfLfxPYAap13exdZUZVcM1RDiA/814bZUXnUX7AaAlJQ24v8i2NnDEoKgdzLvt+0
-	CgDeyLsJvdGCXfBLFDfb2C4WNm6ZfHaZ+mobKUsXLedGzonnL+zRGeVf1Cnonutzku5f
-	uTjQ==
-X-Gm-Message-State: ALyK8tIKwfyipI1uBA+WLI9s329LeuI3ECaws2BToUHbyxU2krJaqpU3C+VE7o/Twq+Kuw==
-X-Received: by 10.107.12.194 with SMTP id 63mr21014931iom.21.1468259028829;
-	Mon, 11 Jul 2016 10:43:48 -0700 (PDT)
-Received: from mail-io0-f169.google.com (mail-io0-f169.google.com.
-	[209.85.223.169]) by smtp.gmail.com with ESMTPSA id
-	q126sm8442934ioe.44.2016.07.11.10.43.47
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 11 Jul 2016 10:43:47 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-io0-f169.google.com with SMTP id b62so10715744iod.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 10:43:47 -0700 (PDT)
-X-Received: by 10.107.7.231 with SMTP id g100mr2142815ioi.64.1468259027251;
-	Mon, 11 Jul 2016 10:43:47 -0700 (PDT)
+	bh=11TYy/lnR87VyPtk9B0y8h05YPY1kNJkClH7L3oFs+Q=;
+	b=Qv2RTPsrSyNuiAcvQNG4Uo9I1qEcJsL1mSgNcWdMeDWjrwXD/qzQURVq/F3dkUPVYQ
+	C9hxSuLU90qoVb/odN30Sr9sloV0gTvVIRpj5h9a+ntlff3VqXRm4GgHJYv5Bwav+hGL
+	PZF3DC8e3VK4Ikf/mDEimBfP81tsLWvPakeATJRzZ+g+mCFRs03/xDBnWEL1ft7OSyVZ
+	mZpjOzWi0A+LR3+sK71d6s16QFDsi35LiGM/T6fAi2Ttk2p9dc6F+A7n7y/sVX+5nsNx
+	o41c00QSMARdQpLBPAjWbCeR/Hvs77T9fGSd57B6GyTh0vUy6NocMzADGXTtVa9uYW3H
+	pBCw==
+X-Gm-Message-State: ALyK8tJtB67xtET/AeUszMYftn1gvmd1NEZEf/5h34Vg70/fcQyXTXb0FWxgtFdR2UMZVHXwtZt/GEhJkbvjyw==
+X-Received: by 10.25.4.202 with SMTP id 193mr6808121lfe.204.1468267951798;
+	Mon, 11 Jul 2016 13:12:31 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.107.198.16 with HTTP; Mon, 11 Jul 2016 10:43:46 -0700 (PDT)
-In-Reply-To: <CAMKF1soG_dmoqDtjGqM+=trw9OLfJs54m6Z85N+A-8QVEHmAgg@mail.gmail.com>
-References: <20160622163845.29573-1-danismostlikely@gmail.com>
-	<loom.20160711T131713-153@post.gmane.org>
-	<CAMKF1soG_dmoqDtjGqM+=trw9OLfJs54m6Z85N+A-8QVEHmAgg@mail.gmail.com>
-Date: Mon, 11 Jul 2016 14:43:46 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKo2j4Q9_CT9BSY9-d275tqrMzmuZR=THLHMRF9fyux8TA@mail.gmail.com>
-Message-ID: <CAP9ODKo2j4Q9_CT9BSY9-d275tqrMzmuZR=THLHMRF9fyux8TA@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java][PATCH] openjdk-8: make GCC6 happy
+Received: by 10.25.10.10 with HTTP; Mon, 11 Jul 2016 13:12:30 -0700 (PDT)
+In-Reply-To: <CADNbA1pfxK1PNxXXEmP9281MzvsnBtVU+iAbMpjUkpqRjdLy0A@mail.gmail.com>
+References: <1467619576-13899-1-git-send-email-mingli.yu@windriver.com>
+	<1467619576-13899-6-git-send-email-mingli.yu@windriver.com>
+	<CANx9H-DVRsHZGBJVkc2k1p4fTdWOchBhQBnm3Y8HuhTtiuzwMA@mail.gmail.com>
+	<57836590.7@windriver.com>
+	<CADNbA1pfxK1PNxXXEmP9281MzvsnBtVU+iAbMpjUkpqRjdLy0A@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Mon, 11 Jul 2016 13:12:30 -0700
+Message-ID: <CANx9H-BqbQv_P2KGQSMdWxyQztc_1v8JQeo5QGKcjNCvt3R=8Q@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-python][PATCH v2 5/5] python-setuptools-scm: Add python-setuptools-scm bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,81 +57,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jul 2016 17:43:49 -0000
+X-List-Received-Date: Mon, 11 Jul 2016 20:12:33 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jul 11, 2016 at 11:33 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Mon, Jul 11, 2016 at 4:29 AM, Patrick Ohly <patrick.ohly@intel.com> wrote:
->> Dan McGregor <danismostlikely <at> gmail.com> writes:
->>> From: Daniel McGregor <daniel.mcgregor <at> vecima.com>
->>>
->>> GCC 6 sets the default C++ standard to C++14 and introduces dead store
->>> elimination by default. OpenJDK 8 is not ready for either of these
->>> changes, so set the C++ standard back to gnu++98 and disable dead
->>> store elimination.
->>>
->>> Switched to using --with-extra-cflags, cxxflags, and ldflags. The added
->>> patch fixes building when using those flags, and are needed to get
->>> CFLAGS into the JDK build in the native case.
->>
->> Has anyone tested this on a host system where gcc is still 4.x, like 4.9.2
->> on Debian Wheezy?
->>
->> I'm finding that -fno-lifetime-dse is also getting passed to the gcc used
->> for compiling native binaries (obviously in openjdk-8-native, but also for
->> some helper executables in openjdk-8). This then breaks the compilation
->> because older gcc rejects that flag.
->>
->> I've briefly toyed with the patch below which worked for openjdk-8-native,
->> but not for openjdk-8. I'm just going to work around it by staying on gcc
->> 5.x and clearing these extra flags.
->>
->> I'm not familiar enough with the openjdk-8 build process to propose a better
->> solution, but perhaps someone else has an idea?
->>
->> diff --git a/meta-java/recipes-core/openjdk/openjdk-8-common.inc
->> b/meta-java/recipes-core/openjdk/openjdk-8-common.inc
->> index dd3d397..060d828 100644
->> --- a/meta-java/recipes-core/openjdk/openjdk-8-common.inc
->> +++ b/meta-java/recipes-core/openjdk/openjdk-8-common.inc
->> @@ -237,6 +237,25 @@ EXTRA_OECONF_append = "\
->>          --with-update-version=${OPENJDK_UPDATE_VERSION} \
->>  "
->>
->> -CFLAGS_append = " -fno-lifetime-dse -fno-delete-null-pointer-checks"
->> -CXXFLAGS_append = " -fno-lifetime-dse -fno-delete-null-pointer-checks"
->> +# GCC 6 sets the default C++ standard to C++14 and introduces dead store
->> +# elimination by default. OpenJDK 8 is not ready for either of these
->> +# changes.
->> +FLAGS_GCC6 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
->> +
->> +# All supported cross compilers support the compiler flags that were
->> +# added to make compilation with gcc6 work. But the host compiler for
->> +# native compilation is a different story: it may be too old (for example,
->> +# gcc 4.9.2 on Debian Wheezy). In that case we need to check what the
->> +# version is and unset the flags when gcc is not yet GCC 6.
->> +python () {
->> +    if d.getVar('PN', True).endswith('-native'):
->> +        import re, subprocess
->> +        version = subprocess.check_output(d.expand('${CC}
->> --version').split()).decode('utf-8')
->> +        m = re.search(r'^gcc.* (\d+)(\.\d+)*$', version, re.MULTILINE)
->> +        if m and int(m.group(1)) < 6:
->> +            d.setVar('FLAGS_GCC6', '')
->> +}
->> +
->> +CFLAGS_append = " ${FLAGS_GCC6}"
->> +CXXFLAGS_append = " ${FLAGS_GCC6}"
->>  CXX_append = " -std=gnu++98"
+NOTE to self: we should update the README on meta-python to give best
+practices for pypi packaging.
+
+On Mon, Jul 11, 2016 at 5:41 AM, Derek Straka <derek@asterius.io> wrote:
+
+> Could you use PYPI_PACKAGE =3D "setuptools_scm" to override the default p=
+ypi
+> package name?
 >
-> I can see this needed in several other cases too. May be this should be made
-> a common utility
-
-I agree but this can be done after we fix meta-java case, so we can
-avoid a bottleneck here.
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> On Mon, Jul 11, 2016 at 5:23 AM, Yu, Mingli <mingli.yu@windriver.com>
+> wrote:
+>
+> >
+> >
+> > On 2016=E5=B9=B407=E6=9C=8809=E6=97=A5 01:09, Tim Orling wrote:
+> >
+> >> Built ok for beaglebone.
+> >>
+> >> NOTE: SRC_URI probably not required with Derek's pypi.bbclass patch
+> >> https://patchwork.openembedded.org/patch/125551/ but I did not test fo=
+r
+> >> that.
+> >>
+> > We still need this SRC_URI as we do translation for the package
+> > python-setuptools-scm as the previous packages name as
+> > python-setuptools_scm which includes underline=EF=BC=8C but the package=
+ name part
+> > can't include underline for a recipe name.
+> >
+> > Thanks,
+> > Grace
+> >
+> >>
+> >>
+> >> Acked-by: Tim Orling (Intel OpenSource Technology Center) <
+> >> ticotimo@gmail.com>
+> >>
+> >> On Mon, Jul 4, 2016 at 1:06 AM, <mingli.yu@windriver.com> wrote:
+> >>
+> >> From: Mingli Yu <mingli.yu@windriver.com>
+> >>>
+> >>> * Add python-setuptools-scm bb as python-pytest-runner depends
+> >>>    on python-setuptools-scm
+> >>>
+> >>> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> >>> ---
+> >>>   .../python/python-setuptools-scm_1.11.1.bb             | 18
+> >>> ++++++++++++++++++
+> >>>   1 file changed, 18 insertions(+)
+> >>>   create mode 100644 meta-python/recipes-devtools/python/
+> >>> python-setuptools-scm_1.11.1.bb
+> >>>
+> >>> diff --git a/meta-python/recipes-devtools/python/
+> >>> python-setuptools-scm_1.11.1.bb b/meta-python/recipes-devtools/python=
+/
+> >>> python-setuptools-scm_1.11.1.bb
+> >>> new file mode 100644
+> >>> index 0000000..2a3b97d
+> >>> --- /dev/null
+> >>> +++ b/meta-python/recipes-devtools/python/
+> >>> python-setuptools-scm_1.11.1.bb
+> >>> @@ -0,0 +1,18 @@
+> >>> +SUMMARY =3D "the blessed package to manage your versions by scm tags=
+"
+> >>> +LICENSE =3D "MIT"
+> >>> +LIC_FILES_CHKSUM =3D
+> "file://LICENSE;md5=3D838c366f69b72c5df05c96dff79b35f2"
+> >>> +
+> >>> +inherit pypi setuptools
+> >>> +
+> >>> +SRCNAME =3D "setuptools_scm"
+> >>> +
+> >>> +SRC_URI =3D "
+> >>>
+> >>>
+> https://pypi.python.org/packages/84/aa/c693b5d41da513fed3f0ee27f1bf02a303=
+caa75bbdfa5c8cc233a1d778c4/${SRCNAME}-${PV}.tar.gz
+> >>> "
+> >>> +
+> >>> +SRC_URI[md5sum] =3D "4d19b2bc9580016d991f665ac20e2e8f"
+> >>> +SRC_URI[sha256sum] =3D
+> >>> "8c45f738a23410c5276b0ed9294af607f491e4260589f1eb90df8312e23819bf"
+> >>> +
+> >>> +S =3D "${WORKDIR}/${SRCNAME}-${PV}"
+> >>> +
+> >>> +RDEPENDS_${PN} =3D "python-py python-setuptools python-argparse
+> >>> python-debugger python-json"
+> >>> +
+> >>> +
+> >>> --
+> >>> 2.8.1
+> >>>
+> >>> --
+> >>> _______________________________________________
+> >>> Openembedded-devel mailing list
+> >>> Openembedded-devel@lists.openembedded.org
+> >>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>>
+> >>> --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
