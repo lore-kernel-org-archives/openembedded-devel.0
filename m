@@ -1,50 +1,45 @@
-Return-Path: <jacopo.malvestio@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id BBBB660589
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id EF0736FF7B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 22:32:58 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id o80so120645wme.0
+	Mon, 11 Jul 2016 23:48:58 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id q62so3867826qkf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 15:32:59 -0700 (PDT)
+	Mon, 11 Jul 2016 16:48:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=references:subject:to:reply-to:from:message-id:date:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=ktjB80mIFcQ/OhcfyU0c6rGIMNfvkzf5i7BrGI+iWUA=;
-	b=mNXG1LYjrBHdtqx6ppEjIU0SWytWAkTQks/mKtVq5goAMo4v8KxJ5e3aVWG+HHp3Ii
-	/mmitXuuHNWHaqHJ9QXXdd7TWgqT6P0sjIuza+8jJMA72q9xElyhTGwN7BGl+fNhRcXC
-	yyW0RSRqpap7Z5RqVtXJDeTjg0SnQi4+6tlmHCfb91DmdEusraYnZZ72WJiCliwWNFsU
-	H9vJlfN3LsezM1ieiW9M3XDvOPLhDEAgtSCD3a9mVXrkNWqpXLgYpVRJ6psl2KTMoVq1
-	G5lFbMcIbO0pehzhynInhnLA8QwdxdLEoKWwnopQ1ES9DOdEb+NWcnyZe/My5J+F9AXy
-	J7Iw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=yEdmj+9j3gX8gdcI/YSl5CbrJ4nz73uRkmR1AjaO6V0=;
+	b=pLxhV0z+bIjj/9PBpLNUOKEDr93giNGBYPG1F3wGwtTowUpdgYPs199ohAfrFM2EK4
+	ECHw4KT6THWzg2ElZk34z49fm71v4zwBbSMoxCcyN/jh9YtPlzQrwRPnwfTiQG1UwD8s
+	lNYvS50+1T4gTQMXa3q4Qg4JYcSCQA1MuIcYSCFUAdD4FsvOBHA7ZJk9+LnHIeAj+fgv
+	HrF2QTA3DbMhr9VskIS8aYOwD9+7BPQRNwytwr8tYA7TT4l46PP3mVo9G6Usva+bmVKw
+	0ll8OPA19QJoJOGZelnBo87LKQRAIo0GT/l2qgf9FWKs4jboYjKuqQP61xoPVpeUkIX2
+	50RQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:references:subject:to:reply-to:from:message-id
-	:date:mime-version:in-reply-to:content-transfer-encoding;
-	bh=ktjB80mIFcQ/OhcfyU0c6rGIMNfvkzf5i7BrGI+iWUA=;
-	b=lQy//CNIIZyVHKhE1aUgk/GT5allS6Sy5XuioaHLFxGk5F9QBka1IaREt7z4jbNhG6
-	w4WJjekH6DJTYnRxKMSykkmUx4Knb02BENSf92Kz5h1eNGVr6e3shunPgM5thJ4pTFLF
-	XAjOBlqh3klnXfvqzypq5TN0gwKxKneEeJa/we550v77aooCzaro9/X2BlJCJDxOaKt9
-	snsTevqNOFq8jAVGb/uSkG0EX3sGqhRkaA3sW0Yf4RVV8DcujKZZuJmUUDlQZpCu6ygB
-	4q61OveL0ahurIot2WjT8C+C47f9Jh6eD8Xc6wc5luZCG/Few4JBdvSScTdlyrtdpmvN
-	7uSw==
-X-Gm-Message-State: ALyK8tKl7vXrFlQkeP6+PCN09QKGL+IfcQt7Iil4/MVep1PbrLBhTOiulIFwnZ6/nJeWLg==
-X-Received: by 10.28.203.2 with SMTP id b2mr11392044wmg.78.1468276378221;
-	Mon, 11 Jul 2016 15:32:58 -0700 (PDT)
-Received: from [192.168.81.105] (2-234-21-239.ip220.fastwebnet.it.
-	[2.234.21.239]) by smtp.gmail.com with ESMTPSA id
-	kg2sm1899510wjb.10.2016.07.11.15.32.57
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 11 Jul 2016 15:32:57 -0700 (PDT)
-References: <14c344e66a5112f492cc21c9a7d0f217@xmsnet.nl>
-To: openembedded-devel@lists.openembedded.org
-Reply-To: jacopo.malvestio@gmail.com
-From: Jacopo Malvestio <jacopo.malvestio@gmail.com>
-Message-ID: <9b1d361b-b845-700f-d780-bbccc958a1c2@gmail.com>
-Date: Tue, 12 Jul 2016 00:32:55 +0200
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=yEdmj+9j3gX8gdcI/YSl5CbrJ4nz73uRkmR1AjaO6V0=;
+	b=feKwDYwMLVQlBJ3CDcWoI64k3UHZrt5Ol6XjiiZPDXp8FlDZiVPKFRSzN0oeMwk5oD
+	xFl6URoRr1QO/rTV6ft0ZfyponysWcJnn3vR8STbZdf0yRQirnCoLQoSbb116/4QF3Z9
+	q/1v2agXnfG40zXZSwt6dQCjJgPiCnXiRjHfPyyym/pm4p47ubgsaHHEzoQ6iUBOtvgR
+	YNwH0WyNrNZc5FaQOI//PJhCEl0jLm2EGud6u8YKWmPQV4d1uK1q2kWqD/l+kWi7aE36
+	rv1HD4Z+yf1rXneSJ+31oPUJHXCreKomLLDa+hrAwlWHD3YtEvI7o7ZZ19F9JQvHevsT
+	+hmw==
+X-Gm-Message-State: ALyK8tLG+EAUpCnsGgCa1MePxCMJa0FJq/On/N6XdDivh7QdeW+nv4iyTSQgSXqUUuVfJq320cXqGep+MlxZpQ==
+X-Received: by 10.55.97.80 with SMTP id v77mr29904614qkb.41.1468280939163;
+	Mon, 11 Jul 2016 16:48:59 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <14c344e66a5112f492cc21c9a7d0f217@xmsnet.nl>
-Subject: [meta-java] gcc 4.8 and openjdk-8
+Received: by 10.55.214.83 with HTTP; Mon, 11 Jul 2016 16:48:29 -0700 (PDT)
+In-Reply-To: <9b1d361b-b845-700f-d780-bbccc958a1c2@gmail.com>
+References: <14c344e66a5112f492cc21c9a7d0f217@xmsnet.nl>
+	<9b1d361b-b845-700f-d780-bbccc958a1c2@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 11 Jul 2016 16:48:29 -0700
+Message-ID: <CAMKF1srD_3zFdtdF_rGGpJhTvO8JFgeUOG8NCYhG08OjWVOwjQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java] gcc 4.8 and openjdk-8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,40 +52,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jul 2016 22:32:59 -0000
+X-List-Received-Date: Mon, 11 Jul 2016 23:49:00 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
-Hello All,
+On Mon, Jul 11, 2016 at 3:32 PM, Jacopo Malvestio
+<jacopo.malvestio@gmail.com> wrote:
+> Hello All,
+>
+> I've created a .bbappend file with:
+>
+> CFLAGS_remove = "-fno-lifetime-dse"
+> CXXFLAGS_remove = "-fno-lifetime-dse"
+>
+> but the do_configure step fail, bitbake -v openjdk-8 log:
+>
+> | configure: Current directory is /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/build.
+> | configure: Since this is not the source root, configure will output the configuration here
+> | configure: (as opposed to creating a configuration in <src_root>/build/<conf-name>).
+> | configure: However, this directory is not empty. This is not allowed, since it could
+> | configure: seriously mess up just about everything.
+> | configure: Try 'cd /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/jdk8u-e8bed1496ff2' and restart configure
+> | configure: (or create a new empty directory and cd to it).
+> | configure: error: Will not continue creating configuration in /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/build
+> | NOTE: The following config.log files may provide further information.
+> | NOTE: /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/build/config.log
+> | ERROR: configure failed
+> | ERROR: Function failed: do_configure (log file is located at /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/temp/log.do_configure.2980
+>
+> I'm running on ubuntu 14.04 with gcc4.8 and openjdk 1.8, i don't think it's a side effect of the gcc6 patch,  but in your opinion, i forgot something?
+>
 
-I've created a .bbappend file with:
+this is building openjdk-8-native package. So you need to add a
+bbappend for openjdk-8-native_72b05.bb as well
 
-CFLAGS_remove = "-fno-lifetime-dse"
-CXXFLAGS_remove = "-fno-lifetime-dse"
-
-but the do_configure step fail, bitbake -v openjdk-8 log:
-
-| configure: Current directory is /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/build.
-| configure: Since this is not the source root, configure will output the configuration here
-| configure: (as opposed to creating a configuration in <src_root>/build/<conf-name>).
-| configure: However, this directory is not empty. This is not allowed, since it could
-| configure: seriously mess up just about everything.
-| configure: Try 'cd /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/jdk8u-e8bed1496ff2' and restart configure
-| configure: (or create a new empty directory and cd to it).
-| configure: error: Will not continue creating configuration in /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/build
-| NOTE: The following config.log files may provide further information.
-| NOTE: /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/build/config.log
-| ERROR: configure failed
-| ERROR: Function failed: do_configure (log file is located at /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/temp/log.do_configure.2980
-
-I'm running on ubuntu 14.04 with gcc4.8 and openjdk 1.8, i don't think it's a side effect of the gcc6 patch,  but in your opinion, i forgot something?
-
-thank you
-
---
-Jacopo
-
-
-
-
+> thank you
+>
+> --
+> Jacopo
+>
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
