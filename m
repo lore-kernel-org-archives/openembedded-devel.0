@@ -1,61 +1,45 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-vk0-f47.google.com (mail-vk0-f47.google.com
-	[209.85.213.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 396C46FF7B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk0-f178.google.com (mail-qk0-f178.google.com
+	[209.85.220.178])
+	by mail.openembedded.org (Postfix) with ESMTP id EB40C60797
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 14:28:33 +0000 (UTC)
-Received: by mail-vk0-f47.google.com with SMTP id o63so57916957vkg.1
+	Mon, 11 Jul 2016 14:34:15 +0000 (UTC)
+Received: by mail-qk0-f178.google.com with SMTP id o67so28816710qke.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 07:28:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=nrMFVhyrNRQyturw2JJ3lKzLtDdl846F9yRP6Cx5304=;
-	b=nrRTFpwk9YYTPd7pjhStnDM34yBFEbmXVwhaWGBdMYphPLBCB8Pp98aJkimugFpIBs
-	xyYYMxST2SiDQhIM5tsM9wxhUaarzrdrr5OJiYzWw6uvHgPLTNH76GW6lJVCOqptxPiV
-	yvLrq//+E7x6+Xpaol5Fr9+lTAf0x8NThXosi/bv8BcHsdZGkLx3HhXjzyTHkHejwI8s
-	xP6f7aIxVKQNggQieuLm/ofOs8007vvX2ugU0TkG4HEAHXmrEzVKr+3ziH7k1B8ZWhFv
-	az99zrswroPAVugDJRYsTYM8gJS4cErXTniue3D5X6gboSoxHAulXJ2E5G8jqqTi9wWV
-	XoqQ==
+	Mon, 11 Jul 2016 07:34:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=uTwLwBKwSCSvp46fTdwsWB4J7TwWy0bWBWk/ZV6KpKs=;
+	b=RMVGM4KwQVHaPTMcFypIa98cwzE52eFTdmchfKnE082R/XGhGpEZoRWLmDM6QymtWf
+	W7t2it2pZKoH6dXwiA/F/XJJoHfwO/IHoJxqCkuON4USoDy2qgRxh1CHWtahd+DtHlr4
+	QGTsYMt6ZfzuHZvhyyniDQC8THpJg5imNXuim6awDhDhVve/oCq3CnkTrOYnn7gZZqNj
+	kkH0kIoIT+FRz/W8C+jH0vEjYEZ4jtP0wh/VkY+2JM1aeC5t1+IkJe2HbqPHQFaYB1Jh
+	gXp93Q7Y9oead8G1hdLFD3YWTzAbwqpzcRuBNOiRIVzl2f7NXAxIGyVUxOqtKMc98VwQ
+	ouIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc;
-	bh=nrMFVhyrNRQyturw2JJ3lKzLtDdl846F9yRP6Cx5304=;
-	b=FO/UIffj4ghAgI6M4mS5eXqlMWV6rgQBBCzY/BstbKNWLw0wzYIBxm0AOvVzPRI4un
-	4+7nm3iVtPBrtqnMxGIvbyCYDi6HfWmtgLtyibHALaexRQoGaIWfTHuG7i6DmHZ1piFW
-	XJBIeeRJSQcM9+j7w6eWMOmzv3CB/LZErWiTGUbeXezY/CIaF2QVKM89jQnYCLP8nX4F
-	XxB/Y4xckIxSwoMlkn5MsW4ZC9slmFiPubkeepYt0L3A14qvTZ8grn+BNtmnRgnCimAq
-	G/p4Damm/wHOmEMzQeRTXQGbzuLkQUyiPgHcfnGrxVrjQrqCSk4QSr5i41xbY5qn554I
-	5gyw==
-X-Gm-Message-State: ALyK8tJ0EyWRUdlsPsZ0t53QElqQbfcuDyiQRWhzqwsd2TMs2EcwBE1IYI/beyFSYAerWg==
-X-Received: by 10.31.227.197 with SMTP id a188mr7791362vkh.136.1468247313618; 
-	Mon, 11 Jul 2016 07:28:33 -0700 (PDT)
-Received: from mail-vk0-f42.google.com (mail-vk0-f42.google.com.
-	[209.85.213.42])
-	by smtp.gmail.com with ESMTPSA id 41sm2538830uag.27.2016.07.11.07.28.32
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 11 Jul 2016 07:28:32 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-vk0-f42.google.com with SMTP id v6so140795276vkb.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 07:28:32 -0700 (PDT)
-X-Received: by 10.159.35.143 with SMTP id 15mr3643391uao.39.1468247311993;
-	Mon, 11 Jul 2016 07:28:31 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=uTwLwBKwSCSvp46fTdwsWB4J7TwWy0bWBWk/ZV6KpKs=;
+	b=a4cHxF6A3TLXdYR1aNl7W/mlUHWdZ+b5+h4tYoDmn6S8ZBlJOkLXsoqlMbBX5ocjdg
+	YJmEn4VJncSIrA8Uy4d/02gjy8eeyHFo9wHrGxyDeiyVjhP7DxQqQWtmcLsIFjW5ZccN
+	n08ndWP0VPg1juarIXL2zVxv9gjEjADnkOyR0dZJ2EPWRUPHFgNlkZjsDtXIzp+xhXv2
+	H8UMoY4OugTy1bKsUCOub4qv81FC1BwIv+x48BJkpY8ybwkgd+MZjJ2HuIULMUUofPe/
+	3aD809DSevUDFNXYD2GyCcrbPGLdde3yiBA8XKsx0UDqRCKwQoMLS1lJCyo8fRwQhAcV
+	HNMQ==
+X-Gm-Message-State: ALyK8tJrUsKCxfUECI5Nwde54FPnfwhD4K1+t3v7Vlhu1Qi8ioV40Me1YMDhBob81BxZSTW2FB8xDw6vxj4HwQ==
+X-Received: by 10.55.178.195 with SMTP id b186mr24064080qkf.81.1468247656053; 
+	Mon, 11 Jul 2016 07:34:16 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.31.192.195 with HTTP; Mon, 11 Jul 2016 07:28:31 -0700 (PDT)
-In-Reply-To: <CAMKF1srk_pR33o4OJWQCtRg8XY5V_57rj-2yA7dRzq_A72QSoA@mail.gmail.com>
-References: <fd5cee43db0bd882f662d5cd2f3d0c34@xmsnet.nl>
-	<CAP9ODKp7eCBu70Aj0M1dT8qPrJK2gnjKD-iVqL58q7Fy7qPTnA@mail.gmail.com>
-	<CAMKF1srk_pR33o4OJWQCtRg8XY5V_57rj-2yA7dRzq_A72QSoA@mail.gmail.com>
-Date: Mon, 11 Jul 2016 11:28:31 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKr+hbfefRKPvt9vciJhvbg5YboWjo1v6o1UP_t3q6qz=g@mail.gmail.com>
-Message-ID: <CAP9ODKr+hbfefRKPvt9vciJhvbg5YboWjo1v6o1UP_t3q6qz=g@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: daniel.mcgregor@vecima.com, Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-java] gcc6 support breaks build for gcc < 6
+Received: by 10.55.214.83 with HTTP; Mon, 11 Jul 2016 07:33:46 -0700 (PDT)
+In-Reply-To: <loom.20160711T131713-153@post.gmane.org>
+References: <20160622163845.29573-1-danismostlikely@gmail.com>
+	<loom.20160711T131713-153@post.gmane.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 11 Jul 2016 07:33:46 -0700
+Message-ID: <CAMKF1soG_dmoqDtjGqM+=trw9OLfJs54m6Z85N+A-8QVEHmAgg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java][PATCH] openjdk-8: make GCC6 happy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,43 +52,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jul 2016 14:28:34 -0000
+X-List-Received-Date: Mon, 11 Jul 2016 14:34:19 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Mon, Jul 11, 2016 at 11:24 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Mon, Jul 11, 2016 at 6:19 AM, Otavio Salvador
-> <otavio.salvador@ossystems.com.br> wrote:
->> Hello Dobbe,
+On Mon, Jul 11, 2016 at 4:29 AM, Patrick Ohly <patrick.ohly@intel.com> wrote:
+> Dan McGregor <danismostlikely <at> gmail.com> writes:
+>> From: Daniel McGregor <daniel.mcgregor <at> vecima.com>
 >>
->> (Added Khem and Fabio on Cc)
+>> GCC 6 sets the default C++ standard to C++14 and introduces dead store
+>> elimination by default. OpenJDK 8 is not ready for either of these
+>> changes, so set the C++ standard back to gnu++98 and disable dead
+>> store elimination.
 >>
->> On Mon, Jul 11, 2016 at 8:37 AM, Winfried <winfried_mb2@xmsnet.nl> wrote:
->>> Commit  33ddb28a6428b02ddcc82d1954ecf27cd426fbb5 (openjdk-8: make GCC6
->>> happy) adds gcc option -fno-lifetime-dse, which was added in gcc6. This
->>> breaks the compilation of openjdk-native on hosts where gcc4 or gcc5 is the
->>> default compiler.
->>>
->>> If this is intentional, I think the README file should mention that
->>> meta-java requires gcc6. Better would be to add the '-fno-lifetime-dse'
->>> option only if gcc >= 6 is used for native compilation (if that is
->>> possible).
->>
->> This is a non-desired side effect of the patch. Daniel, could you take
->> a look on this?
+>> Switched to using --with-extra-cflags, cxxflags, and ldflags. The added
+>> patch fixes building when using those flags, and are needed to get
+>> CFLAGS into the JDK build in the native case.
 >
-> If you are not using default compiler then you have to take some action
+> Has anyone tested this on a host system where gcc is still 4.x, like 4.9.2
+> on Debian Wheezy?
 >
-> add
+> I'm finding that -fno-lifetime-dse is also getting passed to the gcc used
+> for compiling native binaries (obviously in openjdk-8-native, but also for
+> some helper executables in openjdk-8). This then breaks the compilation
+> because older gcc rejects that flag.
 >
-> CFLAGS_remove = " -fno-tree-dse"
-> CXXFLAGS_remove = " -fno-tree-dse"
+> I've briefly toyed with the patch below which worked for openjdk-8-native,
+> but not for openjdk-8. I'm just going to work around it by staying on gcc
+> 5.x and clearing these extra flags.
 >
-> via a .bbappend in your layer.
+> I'm not familiar enough with the openjdk-8 build process to propose a better
+> solution, but perhaps someone else has an idea?
+>
+> diff --git a/meta-java/recipes-core/openjdk/openjdk-8-common.inc
+> b/meta-java/recipes-core/openjdk/openjdk-8-common.inc
+> index dd3d397..060d828 100644
+> --- a/meta-java/recipes-core/openjdk/openjdk-8-common.inc
+> +++ b/meta-java/recipes-core/openjdk/openjdk-8-common.inc
+> @@ -237,6 +237,25 @@ EXTRA_OECONF_append = "\
+>          --with-update-version=${OPENJDK_UPDATE_VERSION} \
+>  "
+>
+> -CFLAGS_append = " -fno-lifetime-dse -fno-delete-null-pointer-checks"
+> -CXXFLAGS_append = " -fno-lifetime-dse -fno-delete-null-pointer-checks"
+> +# GCC 6 sets the default C++ standard to C++14 and introduces dead store
+> +# elimination by default. OpenJDK 8 is not ready for either of these
+> +# changes.
+> +FLAGS_GCC6 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+> +
+> +# All supported cross compilers support the compiler flags that were
+> +# added to make compilation with gcc6 work. But the host compiler for
+> +# native compilation is a different story: it may be too old (for example,
+> +# gcc 4.9.2 on Debian Wheezy). In that case we need to check what the
+> +# version is and unset the flags when gcc is not yet GCC 6.
+> +python () {
+> +    if d.getVar('PN', True).endswith('-native'):
+> +        import re, subprocess
+> +        version = subprocess.check_output(d.expand('${CC}
+> --version').split()).decode('utf-8')
+> +        m = re.search(r'^gcc.* (\d+)(\.\d+)*$', version, re.MULTILINE)
+> +        if m and int(m.group(1)) < 6:
+> +            d.setVar('FLAGS_GCC6', '')
+> +}
+> +
+> +CFLAGS_append = " ${FLAGS_GCC6}"
+> +CXXFLAGS_append = " ${FLAGS_GCC6}"
+>  CXX_append = " -std=gnu++98"
 
-Khem, this is for /native/ so it uses hosts GCC.
+I can see this needed in several other cases too. May be this should be made
+a common utility
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+>
+> Bye, Patrick
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
