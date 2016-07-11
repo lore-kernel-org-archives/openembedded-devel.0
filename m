@@ -1,48 +1,48 @@
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
-	[209.85.215.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E1C1A60797
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mgsend.net (mail4.static.mgsend.net
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id B570C607A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 12:05:09 +0000 (UTC)
-Received: by mail-lf0-f68.google.com with SMTP id f93so1301949lfi.0
+	Mon, 11 Jul 2016 12:41:47 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1468240907; h=Content-Type: To: Subject: Message-ID: Date:
+	From: References: In-Reply-To: MIME-Version: Sender;
+	bh=Y5QQGSI986xlD3s9jPmmdCDtboEG4u77P1pEImT5q4M=;
+	b=vmkRLPO/32ftsggnl6ICgpatAL6jP7eWi0c+YfBHPzdwbWbhmTNI/t0tEmoz/puL8e0hWbLH
+	PJOGhHjwnIkLQlh9zU0nbGPPrstb2cIH66V0SPx+6C+6BkyaSSRHtAoTmOJcmQ0MpJcO102g
+	e+S+bk0YiWwlcdBb0g2kxoCm9RM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
+	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
+	Message-ID: Subject: To: Content-Type;
+	b=rXSeMwXYlk4RkL7eWPlbsVgFQuY5PYPdXdnHpdIrqqr8alzKywBjb+pdFSgbsOZEao2uyY
+	6f7arktNlM97qFeVDfwtiaqlNCc1bbofabfZCj0tl+fy8Uv7A4HWD2FdkHcgUaflvdxv1m9R
+	pGzOiNynxILdooXKSRqGsHI615uAM=
+Sender: derek@asterius.io
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Received: from mail-io0-f170.google.com (mail-io0-f170.google.com
+	[209.85.223.170])
+	by mxa.mailgun.org with ESMTP id 5783940b.7f61c445a5f0-in3;
+	Mon, 11 Jul 2016 12:41:47 -0000 (UTC)
+Received: by mail-io0-f170.google.com with SMTP id 38so4909035iol.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 05:05:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=ziZhjkKQzeI970UvV3xBlUHvuqpurkGpl6TXoWxht/s=;
-	b=dcOg5+T6n2O7enNMWtyzny+KPmGG7EKVS0gSsdFnJIh8L/wAEJoNIw0f/LyNPdx8vt
-	52oM2w8ZnN+jsdzqzlx0fDGXLk9b9jd0Jl/hlF/0MkmK8ADQKYDovcvFpJOXK2sqIx5N
-	XIqGrewQNohiEp12SqmU1KkWTx1e4m7OfS6G8OMMR3OGYhN0/lrNDvcNjngEWdNGlZ6R
-	XsqwFwQhQQ6am6etnV+4+hBCmO58vu9ju16hCEmc4/JVIMEbTLiqWSZjWzsGp9BCSvPo
-	lTAsb/d8zaaX22to1HfzYgwJ5Ovr26X7GYRB3w5nVWLV+9yr8DIvghM7MHQDt0Nf0fY/
-	xV+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=ziZhjkKQzeI970UvV3xBlUHvuqpurkGpl6TXoWxht/s=;
-	b=XF9gbr/sWqWfo4rHZ+lR2sj2q++QGsDTLFSWJCmIKgePUjNoatmLgOB8116q0v1MPc
-	h/usKIb9ieour/4qtijq0r5fhRE9o2CXCxhOeOXVgz1I3tPQqXNwm83rH0KmZUX3bdPX
-	4wZWmRj5VFw42PJgOAZAbmkzfVqtXhj7+G3VXTCdM+lp8ogTERusidDIH4Bxny5KJJ+E
-	Y7rcvag7zzV8J1XI2zrrBwkYat/N8a1AeXYq8CfI3Qy8IHJyOIPvnYc8MC70FSHkxZ6+
-	7zk3nSS9Dode775Rvf0OzUs1LfXtf+i3sYdTF6RcjJBQbGyVvqMb9fT0JZyQQFpz12mY
-	2rJw==
-X-Gm-Message-State: ALyK8tKiDHBm/uV/mPwfkT6+cLKuZwluuO3Ideq438niGP8HKmYowKXC/nWHmUlJRxDhHjg3HNf76udCx0AxiA==
-X-Received: by 10.25.169.195 with SMTP id s186mr4679885lfe.84.1468238708895;
-	Mon, 11 Jul 2016 05:05:08 -0700 (PDT)
+	Mon, 11 Jul 2016 05:41:47 -0700 (PDT)
+X-Gm-Message-State: ALyK8tLCIijXHMHAcGfmzhnVsLLRK3L+5HHtFWhV6BJXF/idcF/lgcb+AGRDz6Mfz0XQjZBI6z6AOG7keZD6qw==
+X-Received: by 10.107.18.225 with SMTP id 94mr18561926ios.157.1468240906846;
+	Mon, 11 Jul 2016 05:41:46 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.25.7.8 with HTTP; Mon, 11 Jul 2016 05:04:39 -0700 (PDT)
-X-Originating-IP: [177.100.227.79]
-In-Reply-To: <loom.20160711T131713-153@post.gmane.org>
-References: <20160622163845.29573-1-danismostlikely@gmail.com>
-	<loom.20160711T131713-153@post.gmane.org>
-From: Fabio Berton <fabio.berton@ossystems.com.br>
-Date: Mon, 11 Jul 2016 09:04:39 -0300
-Message-ID: <CAAPZna0PPMMoO-caWAg8Ssp=1CX+Pbb6TgpQU7hXkEJCCY0TZA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.107.178.215 with HTTP; Mon, 11 Jul 2016 05:41:46 -0700 (PDT)
+In-Reply-To: <57836590.7@windriver.com>
+References: <1467619576-13899-1-git-send-email-mingli.yu@windriver.com>
+	<1467619576-13899-6-git-send-email-mingli.yu@windriver.com>
+	<CANx9H-DVRsHZGBJVkc2k1p4fTdWOchBhQBnm3Y8HuhTtiuzwMA@mail.gmail.com>
+	<57836590.7@windriver.com>
+From: Derek Straka <derek@asterius.io>
+Date: Mon, 11 Jul 2016 08:41:46 -0400
+X-Gmail-Original-Message-ID: <CADNbA1pfxK1PNxXXEmP9281MzvsnBtVU+iAbMpjUkpqRjdLy0A@mail.gmail.com>
+Message-ID: <CADNbA1pfxK1PNxXXEmP9281MzvsnBtVU+iAbMpjUkpqRjdLy0A@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-java][PATCH] openjdk-8: make GCC6 happy
+Subject: Re: [meta-python][PATCH v2 5/5] python-setuptools-scm: Add python-setuptools-scm bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,82 +55,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jul 2016 12:05:11 -0000
+X-List-Received-Date: Mon, 11 Jul 2016 12:41:48 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi Patrick,
+Could you use PYPI_PACKAGE =3D "setuptools_scm" to override the default pyp=
+i
+package name?
 
-Yes, same problem here. I'm using Debian Jessie with GCC 4.9.2.
+On Mon, Jul 11, 2016 at 5:23 AM, Yu, Mingli <mingli.yu@windriver.com> wrote=
+:
 
-On Mon, Jul 11, 2016 at 8:29 AM, Patrick Ohly <patrick.ohly@intel.com>
-wrote:
-
-> Dan McGregor <danismostlikely <at> gmail.com> writes:
-> > From: Daniel McGregor <daniel.mcgregor <at> vecima.com>
-> >
-> > GCC 6 sets the default C++ standard to C++14 and introduces dead store
-> > elimination by default. OpenJDK 8 is not ready for either of these
-> > changes, so set the C++ standard back to gnu++98 and disable dead
-> > store elimination.
-> >
-> > Switched to using --with-extra-cflags, cxxflags, and ldflags. The added
-> > patch fixes building when using those flags, and are needed to get
-> > CFLAGS into the JDK build in the native case.
 >
-> Has anyone tested this on a host system where gcc is still 4.x, like 4.9.2
-> on Debian Wheezy?
 >
-> I'm finding that -fno-lifetime-dse is also getting passed to the gcc used
-> for compiling native binaries (obviously in openjdk-8-native, but also for
-> some helper executables in openjdk-8). This then breaks the compilation
-> because older gcc rejects that flag.
+> On 2016=E5=B9=B407=E6=9C=8809=E6=97=A5 01:09, Tim Orling wrote:
 >
-> I've briefly toyed with the patch below which worked for openjdk-8-native,
-> but not for openjdk-8. I'm just going to work around it by staying on gcc
-> 5.x and clearing these extra flags.
+>> Built ok for beaglebone.
+>>
+>> NOTE: SRC_URI probably not required with Derek's pypi.bbclass patch
+>> https://patchwork.openembedded.org/patch/125551/ but I did not test for
+>> that.
+>>
+> We still need this SRC_URI as we do translation for the package
+> python-setuptools-scm as the previous packages name as
+> python-setuptools_scm which includes underline=EF=BC=8C but the package n=
+ame part
+> can't include underline for a recipe name.
 >
-> I'm not familiar enough with the openjdk-8 build process to propose a
-> better
-> solution, but perhaps someone else has an idea?
+> Thanks,
+> Grace
 >
-> diff --git a/meta-java/recipes-core/openjdk/openjdk-8-common.inc
-> b/meta-java/recipes-core/openjdk/openjdk-8-common.inc
-> index dd3d397..060d828 100644
-> --- a/meta-java/recipes-core/openjdk/openjdk-8-common.inc
-> +++ b/meta-java/recipes-core/openjdk/openjdk-8-common.inc
-> @@ -237,6 +237,25 @@ EXTRA_OECONF_append = "\
->          --with-update-version=${OPENJDK_UPDATE_VERSION} \
->  "
->
-> -CFLAGS_append = " -fno-lifetime-dse -fno-delete-null-pointer-checks"
-> -CXXFLAGS_append = " -fno-lifetime-dse -fno-delete-null-pointer-checks"
-> +# GCC 6 sets the default C++ standard to C++14 and introduces dead store
-> +# elimination by default. OpenJDK 8 is not ready for either of these
-> +# changes.
-> +FLAGS_GCC6 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
-> +
-> +# All supported cross compilers support the compiler flags that were
-> +# added to make compilation with gcc6 work. But the host compiler for
-> +# native compilation is a different story: it may be too old (for example,
-> +# gcc 4.9.2 on Debian Wheezy). In that case we need to check what the
-> +# version is and unset the flags when gcc is not yet GCC 6.
-> +python () {
-> +    if d.getVar('PN', True).endswith('-native'):
-> +        import re, subprocess
-> +        version = subprocess.check_output(d.expand('${CC}
-> --version').split()).decode('utf-8')
-> +        m = re.search(r'^gcc.* (\d+)(\.\d+)*$', version, re.MULTILINE)
-> +        if m and int(m.group(1)) < 6:
-> +            d.setVar('FLAGS_GCC6', '')
-> +}
-> +
-> +CFLAGS_append = " ${FLAGS_GCC6}"
-> +CXXFLAGS_append = " ${FLAGS_GCC6}"
->  CXX_append = " -std=gnu++98"
->
-> Bye, Patrick
->
-> --
+>>
+>>
+>> Acked-by: Tim Orling (Intel OpenSource Technology Center) <
+>> ticotimo@gmail.com>
+>>
+>> On Mon, Jul 4, 2016 at 1:06 AM, <mingli.yu@windriver.com> wrote:
+>>
+>> From: Mingli Yu <mingli.yu@windriver.com>
+>>>
+>>> * Add python-setuptools-scm bb as python-pytest-runner depends
+>>>    on python-setuptools-scm
+>>>
+>>> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+>>> ---
+>>>   .../python/python-setuptools-scm_1.11.1.bb             | 18
+>>> ++++++++++++++++++
+>>>   1 file changed, 18 insertions(+)
+>>>   create mode 100644 meta-python/recipes-devtools/python/
+>>> python-setuptools-scm_1.11.1.bb
+>>>
+>>> diff --git a/meta-python/recipes-devtools/python/
+>>> python-setuptools-scm_1.11.1.bb b/meta-python/recipes-devtools/python/
+>>> python-setuptools-scm_1.11.1.bb
+>>> new file mode 100644
+>>> index 0000000..2a3b97d
+>>> --- /dev/null
+>>> +++ b/meta-python/recipes-devtools/python/
+>>> python-setuptools-scm_1.11.1.bb
+>>> @@ -0,0 +1,18 @@
+>>> +SUMMARY =3D "the blessed package to manage your versions by scm tags"
+>>> +LICENSE =3D "MIT"
+>>> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D838c366f69b72c5df05c96dff79=
+b35f2"
+>>> +
+>>> +inherit pypi setuptools
+>>> +
+>>> +SRCNAME =3D "setuptools_scm"
+>>> +
+>>> +SRC_URI =3D "
+>>>
+>>> https://pypi.python.org/packages/84/aa/c693b5d41da513fed3f0ee27f1bf02a3=
+03caa75bbdfa5c8cc233a1d778c4/${SRCNAME}-${PV}.tar.gz
+>>> "
+>>> +
+>>> +SRC_URI[md5sum] =3D "4d19b2bc9580016d991f665ac20e2e8f"
+>>> +SRC_URI[sha256sum] =3D
+>>> "8c45f738a23410c5276b0ed9294af607f491e4260589f1eb90df8312e23819bf"
+>>> +
+>>> +S =3D "${WORKDIR}/${SRCNAME}-${PV}"
+>>> +
+>>> +RDEPENDS_${PN} =3D "python-py python-setuptools python-argparse
+>>> python-debugger python-json"
+>>> +
+>>> +
+>>> --
+>>> 2.8.1
+>>>
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>>> --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
