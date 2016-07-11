@@ -1,48 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f169.google.com (mail-qt0-f169.google.com
-	[209.85.216.169])
-	by mail.openembedded.org (Postfix) with ESMTP id DA6BC6FEF5
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-lf0-f43.google.com (mail-lf0-f43.google.com
+	[209.85.215.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 79E396FF78
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 14:37:39 +0000 (UTC)
-Received: by mail-qt0-f169.google.com with SMTP id j35so18606803qtj.2
+	Mon, 11 Jul 2016 14:46:29 +0000 (UTC)
+Received: by mail-lf0-f43.google.com with SMTP id q132so75359935lfe.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 07:37:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=jaHdmLEjsztc4OaE7r1jHhObqoqTWri4E5WpJU6vRI4=;
-	b=VNu66ZdL7uNRE4pqp00wvjqGwiHZGjhuaTwPLD2tJZBQ0XCPvVx049QMjhNN1YpMVw
-	nZ89fW9Sk2MA0Hhk9KT6UmSNm1CDAwhBHlXCs9qXpKTwTPF5HJZeH5kxRZXEKP6apQhe
-	JX1bap+0TZRtf2xgD97ZDFUytXaWKAnA4QFFS9iPPyXEu5p+VSi34EnEfaJ9gd0kSIeM
-	kCCvVfd+EeXHFEGwQ85D5QnXMtfyNCzmFoMZ0aIqKcBmOW51bDmoOQ/3Trrilhm24UnL
-	ZCBJ3pDVd5VqaqyuTSFiZSWogXuFrAhTOfa3+G1sAHL7O6bKGyt9/9MH81WaVUGOPxyD
-	5RvQ==
+	Mon, 11 Jul 2016 07:46:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=edul2VkM5sqj+NtOkiFCx42XRK9dnQxeOTV2K83/7U8=;
+	b=GuGzIVn9Dcq6BGWatKGIN129m71cgK4cJVUw1CLLBya73klxKnRisMpoArsuge8l7X
+	km2JT9O7kGzjK+4PsZDjvfaYVIxB1m4jBVUb0dcpvEMPRHcl3cTGuLhLOlwRna5eyc+Q
+	y96eEE5K9CEE1154L2tKJK7N+9BaTFNbg32p2vKcPSvoclLAtNJyKUtLdFaaSnQQTkaP
+	6jrCdajC7cDU8rrrn0ywmRdZUpUMxRNV3C5gsEkS1hokWC6N/6MCbAHiooaA7LqEROY7
+	LEhVx1oFcFZ1HBLjyTd1PuYmzA4dG5Av2HflrQMzR30PbkhJiw+6vb4roWU7PsI7OgG1
+	nqxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=jaHdmLEjsztc4OaE7r1jHhObqoqTWri4E5WpJU6vRI4=;
-	b=U22V6znviOycJz9CiuRuQnpi2r0pCVpPd7h9PPgh3LP16ss8C6fo2yD/GfjbY+Cy0E
-	wzxaQ8fQlK1P887arOmY4hOF41CgKEHyo9F3SUabdhMfuHVTl3Qyqi6au7LnmxEM4aEy
-	FKbOXN8HLm5UPH18LAmHbM4RslY8lhCe8DI4lyC0jLc+UF6wCcOC2hl4XdB/i6fzlsJb
-	pXz8ZLxdX5PQKR7GuIhozaf20i+8rIZlN9d773ooeGPbGyVndhejA9WNtq257nzmTHoH
-	6hrkbOE7NIjUsmwQRicZ09kQra7fWxXsuKqZrU7CRatr849z0Zdfr166qqmWNEqKlaW5
-	EwPA==
-X-Gm-Message-State: ALyK8tK5jtSeYnspEIjav4oPmfqEn441NL66anOQPTrHA+mSGtRuUiZHvPipWsfGrztcXttDfevIxd+m5qoxPw==
-X-Received: by 10.200.48.141 with SMTP id v13mr24613233qta.76.1468247859741;
-	Mon, 11 Jul 2016 07:37:39 -0700 (PDT)
+	:message-id:subject:to;
+	bh=edul2VkM5sqj+NtOkiFCx42XRK9dnQxeOTV2K83/7U8=;
+	b=cc9VEu8o9x8LicPYdGo5cl/Tqxae0Tttz7z5De4k3nCp+fSv6ZAacB9T4DvHqOMXHD
+	KonBXq4b05zbGlHTQFwr67D4PNW5Sd9cBhM3iSha4nVwKjgRLB/q27LK+HtUzkgoRWcM
+	fsR5iau/B0CWxIWeTxUfkGqk36lUI64R64XGhiSoyHkNZc40tIwfaPe9QoQxJ13YdUBN
+	GGBd/3VvVlVvTSji9YEenXmmpgMZvDbyWIVxS2IeID8ssTItUS4+gKRMXzMMUf1qIiF6
+	+vkjn4sGoT8hcg4RQjdiViwzhMkEKJ9jC0LhHTyn110+1T75uKcKuMgnqB6FUuEGb+bM
+	mJCQ==
+X-Gm-Message-State: ALyK8tLtfSKqhcx9tNXshfTkL2J6+KAIr9Lpf6AnWA3lY23Cjn1hx7gp5703cqBiDpJaT77PoOD22zQxk6nujQ==
+X-Received: by 10.25.147.200 with SMTP id v191mr6934430lfd.9.1468248389780;
+	Mon, 11 Jul 2016 07:46:29 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.55.214.83 with HTTP; Mon, 11 Jul 2016 07:37:10 -0700 (PDT)
-In-Reply-To: <CAP9ODKr+hbfefRKPvt9vciJhvbg5YboWjo1v6o1UP_t3q6qz=g@mail.gmail.com>
-References: <fd5cee43db0bd882f662d5cd2f3d0c34@xmsnet.nl>
-	<CAP9ODKp7eCBu70Aj0M1dT8qPrJK2gnjKD-iVqL58q7Fy7qPTnA@mail.gmail.com>
-	<CAMKF1srk_pR33o4OJWQCtRg8XY5V_57rj-2yA7dRzq_A72QSoA@mail.gmail.com>
-	<CAP9ODKr+hbfefRKPvt9vciJhvbg5YboWjo1v6o1UP_t3q6qz=g@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 11 Jul 2016 07:37:10 -0700
-Message-ID: <CAMKF1spT4ADu2axBzz_1xvcp3EToLyfUjuXpxBO7rQb-83ZW1A@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: daniel.mcgregor@vecima.com, Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-java] gcc6 support breaks build for gcc < 6
+Received: by 10.25.7.8 with HTTP; Mon, 11 Jul 2016 07:46:00 -0700 (PDT)
+X-Originating-IP: [177.100.227.79]
+In-Reply-To: <CAMKF1soG_dmoqDtjGqM+=trw9OLfJs54m6Z85N+A-8QVEHmAgg@mail.gmail.com>
+References: <20160622163845.29573-1-danismostlikely@gmail.com>
+	<loom.20160711T131713-153@post.gmane.org>
+	<CAMKF1soG_dmoqDtjGqM+=trw9OLfJs54m6Z85N+A-8QVEHmAgg@mail.gmail.com>
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+Date: Mon, 11 Jul 2016 11:46:00 -0300
+Message-ID: <CAAPZna2W0ScPrJYMgWkA9-QEwtVJjeJTbLmT6FTDGWKo5STnZA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-java][PATCH] openjdk-8: make GCC6 happy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,46 +56,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jul 2016 14:37:42 -0000
+X-List-Received-Date: Mon, 11 Jul 2016 14:46:31 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Mon, Jul 11, 2016 at 7:28 AM, Otavio Salvador
-<otavio.salvador@ossystems.com.br> wrote:
-> On Mon, Jul 11, 2016 at 11:24 AM, Khem Raj <raj.khem@gmail.com> wrote:
->> On Mon, Jul 11, 2016 at 6:19 AM, Otavio Salvador
->> <otavio.salvador@ossystems.com.br> wrote:
->>> Hello Dobbe,
->>>
->>> (Added Khem and Fabio on Cc)
->>>
->>> On Mon, Jul 11, 2016 at 8:37 AM, Winfried <winfried_mb2@xmsnet.nl> wrote:
->>>> Commit  33ddb28a6428b02ddcc82d1954ecf27cd426fbb5 (openjdk-8: make GCC6
->>>> happy) adds gcc option -fno-lifetime-dse, which was added in gcc6. This
->>>> breaks the compilation of openjdk-native on hosts where gcc4 or gcc5 is the
->>>> default compiler.
->>>>
->>>> If this is intentional, I think the README file should mention that
->>>> meta-java requires gcc6. Better would be to add the '-fno-lifetime-dse'
->>>> option only if gcc >= 6 is used for native compilation (if that is
->>>> possible).
->>>
->>> This is a non-desired side effect of the patch. Daniel, could you take
->>> a look on this?
->>
->> If you are not using default compiler then you have to take some action
->>
->> add
->>
->> CFLAGS_remove = " -fno-tree-dse"
->> CXXFLAGS_remove = " -fno-tree-dse"
->>
->> via a .bbappend in your layer.
->
-> Khem, this is for /native/ so it uses hosts GCC.
+Hi Patrick,
+I tested your solution and works fine. Can you send this as a patch to list?
 
-oh, in such a case, there are two options, one is to have this difference
-detected during configuring and then not inject it via recipe
+Thanks,
 
-second is to have an utility in OE to detect the compiler version.
-Which was posted in another thread
+Fabio.
 
