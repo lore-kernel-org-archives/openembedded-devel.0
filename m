@@ -1,48 +1,59 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mgsend.net (mail4.static.mgsend.net
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id B570C607A5
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-vk0-f50.google.com (mail-vk0-f50.google.com
+	[209.85.213.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 11F7C60797
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 12:41:47 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1468240907; h=Content-Type: To: Subject: Message-ID: Date:
-	From: References: In-Reply-To: MIME-Version: Sender;
-	bh=Y5QQGSI986xlD3s9jPmmdCDtboEG4u77P1pEImT5q4M=;
-	b=vmkRLPO/32ftsggnl6ICgpatAL6jP7eWi0c+YfBHPzdwbWbhmTNI/t0tEmoz/puL8e0hWbLH
-	PJOGhHjwnIkLQlh9zU0nbGPPrstb2cIH66V0SPx+6C+6BkyaSSRHtAoTmOJcmQ0MpJcO102g
-	e+S+bk0YiWwlcdBb0g2kxoCm9RM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
-	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
-	Message-ID: Subject: To: Content-Type;
-	b=rXSeMwXYlk4RkL7eWPlbsVgFQuY5PYPdXdnHpdIrqqr8alzKywBjb+pdFSgbsOZEao2uyY
-	6f7arktNlM97qFeVDfwtiaqlNCc1bbofabfZCj0tl+fy8Uv7A4HWD2FdkHcgUaflvdxv1m9R
-	pGzOiNynxILdooXKSRqGsHI615uAM=
-Sender: derek@asterius.io
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Received: from mail-io0-f170.google.com (mail-io0-f170.google.com
-	[209.85.223.170])
-	by mxa.mailgun.org with ESMTP id 5783940b.7f61c445a5f0-in3;
-	Mon, 11 Jul 2016 12:41:47 -0000 (UTC)
-Received: by mail-io0-f170.google.com with SMTP id 38so4909035iol.0
+	Mon, 11 Jul 2016 13:19:36 +0000 (UTC)
+Received: by mail-vk0-f50.google.com with SMTP id f7so122635638vkb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 05:41:47 -0700 (PDT)
-X-Gm-Message-State: ALyK8tLCIijXHMHAcGfmzhnVsLLRK3L+5HHtFWhV6BJXF/idcF/lgcb+AGRDz6Mfz0XQjZBI6z6AOG7keZD6qw==
-X-Received: by 10.107.18.225 with SMTP id 94mr18561926ios.157.1468240906846;
-	Mon, 11 Jul 2016 05:41:46 -0700 (PDT)
+	Mon, 11 Jul 2016 06:19:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:cc; bh=nuc3sjZ/1FYjdmtt/BFMrzwoyZfDTpntktsprDcaMG8=;
+	b=shdQYomo3a2zeucN3rbHNhcok/rQkywzolZbTpJopHy8YhgY0d1pMb+XlCzhQp0pz5
+	wunil+hDzRfv3k2kh/dgo0eHQs+bMeivvf3dz0CDq0TFdmD4LPdmamfE4XSn80POaeVW
+	LbysLQ/iCS51/cV2HaImg/hehzcyKFCK1R/pbU8JKiDLpDW4xRTXbCTipdM/Wa+U85CY
+	f9vQeSxxobXPWCQDC5/S0wv6kiDrFYUg6Rw/3R9xmtGdf+ll2ASxxtGpTp+oBOt767/F
+	96d49xEWYpveQGt8Nt2FCczKidtWLFzMPXenjDY/LWA7Qx1Q3idu7Hs5kkJ+MXQeTYGt
+	TO8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:cc;
+	bh=nuc3sjZ/1FYjdmtt/BFMrzwoyZfDTpntktsprDcaMG8=;
+	b=NBuR339VZ9YeXz1Tz8d1IDVopYbaTo6iqzzeMqkkmFXNmc2uSKOHGTRR4YXbomnItm
+	bdUxHEJuBnjIj9WwEtb2zKqv+1xmTBflMZtB+5QZbrL2zKy8qpzbD1jDESUDDMvliIFy
+	ZKaecOZEvYz11pVUjwmgRK6FYJ2QKs0X2i8E+577rqvbqfMX4hyhXfwDq0WJPTSWBETZ
+	w6CVoMuTOSPRk0PSt4y580MU03MVpTF+ISp8M1/FXNuz0Z5/wVY77SY/kPdLTf7SSR9G
+	NjmJ56iXdr4mG/0sC+2vyO/Ymt+5ti0mux32F6nKI9NVnrRe7zZ1S90IxM63iu2UhP8a
+	vP/Q==
+X-Gm-Message-State: ALyK8tJS80jsSeHb4WE0JjR6xJsXBkgtO5DvLlpAUFTIjHxXm+81Y2pfNTKGLM0C+koYrA==
+X-Received: by 10.31.92.15 with SMTP id q15mr5816440vkb.92.1468243176829;
+	Mon, 11 Jul 2016 06:19:36 -0700 (PDT)
+Received: from mail-vk0-f54.google.com (mail-vk0-f54.google.com.
+	[209.85.213.54]) by smtp.gmail.com with ESMTPSA id
+	l137sm2301391vke.0.2016.07.11.06.19.35
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 11 Jul 2016 06:19:35 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-vk0-f54.google.com with SMTP id o63so54957249vkg.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Jul 2016 06:19:35 -0700 (PDT)
+X-Received: by 10.31.94.205 with SMTP id s196mr3135119vkb.78.1468243174982;
+	Mon, 11 Jul 2016 06:19:34 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.107.178.215 with HTTP; Mon, 11 Jul 2016 05:41:46 -0700 (PDT)
-In-Reply-To: <57836590.7@windriver.com>
-References: <1467619576-13899-1-git-send-email-mingli.yu@windriver.com>
-	<1467619576-13899-6-git-send-email-mingli.yu@windriver.com>
-	<CANx9H-DVRsHZGBJVkc2k1p4fTdWOchBhQBnm3Y8HuhTtiuzwMA@mail.gmail.com>
-	<57836590.7@windriver.com>
-From: Derek Straka <derek@asterius.io>
-Date: Mon, 11 Jul 2016 08:41:46 -0400
-X-Gmail-Original-Message-ID: <CADNbA1pfxK1PNxXXEmP9281MzvsnBtVU+iAbMpjUkpqRjdLy0A@mail.gmail.com>
-Message-ID: <CADNbA1pfxK1PNxXXEmP9281MzvsnBtVU+iAbMpjUkpqRjdLy0A@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-python][PATCH v2 5/5] python-setuptools-scm: Add python-setuptools-scm bb
+Received: by 10.31.192.195 with HTTP; Mon, 11 Jul 2016 06:19:34 -0700 (PDT)
+In-Reply-To: <fd5cee43db0bd882f662d5cd2f3d0c34@xmsnet.nl>
+References: <fd5cee43db0bd882f662d5cd2f3d0c34@xmsnet.nl>
+Date: Mon, 11 Jul 2016 10:19:34 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKp7eCBu70Aj0M1dT8qPrJK2gnjKD-iVqL58q7Fy7qPTnA@mail.gmail.com>
+Message-ID: <CAP9ODKp7eCBu70Aj0M1dT8qPrJK2gnjKD-iVqL58q7Fy7qPTnA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: daniel.mcgregor@vecima.com, Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-java] gcc6 support breaks build for gcc < 6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,103 +66,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jul 2016 12:41:48 -0000
+X-List-Received-Date: Mon, 11 Jul 2016 13:19:37 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-Could you use PYPI_PACKAGE =3D "setuptools_scm" to override the default pyp=
-i
-package name?
+Hello Dobbe,
 
-On Mon, Jul 11, 2016 at 5:23 AM, Yu, Mingli <mingli.yu@windriver.com> wrote=
-:
+(Added Khem and Fabio on Cc)
 
+On Mon, Jul 11, 2016 at 8:37 AM, Winfried <winfried_mb2@xmsnet.nl> wrote:
+> Commit  33ddb28a6428b02ddcc82d1954ecf27cd426fbb5 (openjdk-8: make GCC6
+> happy) adds gcc option -fno-lifetime-dse, which was added in gcc6. This
+> breaks the compilation of openjdk-native on hosts where gcc4 or gcc5 is the
+> default compiler.
 >
->
-> On 2016=E5=B9=B407=E6=9C=8809=E6=97=A5 01:09, Tim Orling wrote:
->
->> Built ok for beaglebone.
->>
->> NOTE: SRC_URI probably not required with Derek's pypi.bbclass patch
->> https://patchwork.openembedded.org/patch/125551/ but I did not test for
->> that.
->>
-> We still need this SRC_URI as we do translation for the package
-> python-setuptools-scm as the previous packages name as
-> python-setuptools_scm which includes underline=EF=BC=8C but the package n=
-ame part
-> can't include underline for a recipe name.
->
-> Thanks,
-> Grace
->
->>
->>
->> Acked-by: Tim Orling (Intel OpenSource Technology Center) <
->> ticotimo@gmail.com>
->>
->> On Mon, Jul 4, 2016 at 1:06 AM, <mingli.yu@windriver.com> wrote:
->>
->> From: Mingli Yu <mingli.yu@windriver.com>
->>>
->>> * Add python-setuptools-scm bb as python-pytest-runner depends
->>>    on python-setuptools-scm
->>>
->>> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
->>> ---
->>>   .../python/python-setuptools-scm_1.11.1.bb             | 18
->>> ++++++++++++++++++
->>>   1 file changed, 18 insertions(+)
->>>   create mode 100644 meta-python/recipes-devtools/python/
->>> python-setuptools-scm_1.11.1.bb
->>>
->>> diff --git a/meta-python/recipes-devtools/python/
->>> python-setuptools-scm_1.11.1.bb b/meta-python/recipes-devtools/python/
->>> python-setuptools-scm_1.11.1.bb
->>> new file mode 100644
->>> index 0000000..2a3b97d
->>> --- /dev/null
->>> +++ b/meta-python/recipes-devtools/python/
->>> python-setuptools-scm_1.11.1.bb
->>> @@ -0,0 +1,18 @@
->>> +SUMMARY =3D "the blessed package to manage your versions by scm tags"
->>> +LICENSE =3D "MIT"
->>> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D838c366f69b72c5df05c96dff79=
-b35f2"
->>> +
->>> +inherit pypi setuptools
->>> +
->>> +SRCNAME =3D "setuptools_scm"
->>> +
->>> +SRC_URI =3D "
->>>
->>> https://pypi.python.org/packages/84/aa/c693b5d41da513fed3f0ee27f1bf02a3=
-03caa75bbdfa5c8cc233a1d778c4/${SRCNAME}-${PV}.tar.gz
->>> "
->>> +
->>> +SRC_URI[md5sum] =3D "4d19b2bc9580016d991f665ac20e2e8f"
->>> +SRC_URI[sha256sum] =3D
->>> "8c45f738a23410c5276b0ed9294af607f491e4260589f1eb90df8312e23819bf"
->>> +
->>> +S =3D "${WORKDIR}/${SRCNAME}-${PV}"
->>> +
->>> +RDEPENDS_${PN} =3D "python-py python-setuptools python-argparse
->>> python-debugger python-json"
->>> +
->>> +
->>> --
->>> 2.8.1
->>>
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->>> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+> If this is intentional, I think the README file should mention that
+> meta-java requires gcc6. Better would be to add the '-fno-lifetime-dse'
+> option only if gcc >= 6 is used for native compilation (if that is
+> possible).
+
+This is a non-desired side effect of the patch. Daniel, could you take
+a look on this?
+
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
