@@ -1,36 +1,24 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F9AE606D1
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id AB7A3605BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jul 2016 13:14:35 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id q62so1424577qkf.2
+	Mon, 11 Jul 2016 09:17:16 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u6B9HG9C004012
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jul 2016 06:14:36 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Xw0g53+rrX74akNF5NnKenRbruw520Y9q0PvvWR8vuo=;
-	b=I4jw/BTUT48srNwwKS3VME9DSH+q/heQDMVdAPB6oG0XWk6Ffb5Vh1s8WoUIUQpoga
-	edtVAUxr6Ijn2VN5ud3TNnoqR7RogT/p70iR/+umSAmCMQXQ80GXcjH+09CdzptWikQ7
-	OI8LJLaVdX6E/k7SDxCIAS3ifzY8ktWD+7ZwsqKEZexaP9ELgN8crMtiw/iibPVXUv8v
-	N9l232c6akt8AkcP2APrzLsXwJVJvxPepv4IiQIE+SgNYZ3b7s27WhCYco99MwboiY+L
-	9fq+JzebljqTjh2Imc/4UdvMP44Eu0cPuvH+OvifGDTZpU9p6TARALqfggV6nqpkHiaq
-	2+OA==
-X-Gm-Message-State: ALyK8tKUBSeNHemisYH/LBSa3ODGNha45z7lBTZL2MBul+cCh19JosX1kRs6tn/NoEW2sQ==
-X-Received: by 10.55.159.148 with SMTP id i142mr19623774qke.53.1468156476620; 
-	Sun, 10 Jul 2016 06:14:36 -0700 (PDT)
-Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	b66sm1049488qkj.39.2016.07.10.06.14.35
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 10 Jul 2016 06:14:36 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Jul 2016 09:14:28 -0400
-Message-Id: <1468156468-28251-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-python][PATCH] python-ujson: correct RDEPENDS to pull in needed python packages
+	Mon, 11 Jul 2016 02:17:16 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Mon, 11 Jul 2016 02:17:16 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 11 Jul 2016 17:15:26 +0800
+Message-ID: <1468228526-32411-1-git-send-email-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.8.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] freeglut: add opengl to REQUIRED_DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,27 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jul 2016 13:14:36 -0000
+X-List-Received-Date: Mon, 11 Jul 2016 09:17:17 -0000
+Content-Type: text/plain
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+* Add opengl to REQUIRED_DISTRO_FEATURES as it depends on
+  virtual/libgl
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-ujson_1.35.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-ujson_1.35.bb b/meta-python/recipes-devtools/python/python-ujson_1.35.bb
-index 29207f3..4ef3d18 100644
---- a/meta-python/recipes-devtools/python/python-ujson_1.35.bb
-+++ b/meta-python/recipes-devtools/python/python-ujson_1.35.bb
-@@ -10,4 +10,7 @@ SRC_URI[sha256sum] = "f66073e5506e91d204ab0c614a148d5aa938bdbf104751be66f8ad7a22
- PYPI_PACKAGE = "ujson"
- inherit pypi setuptools
+diff --git a/meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb b/meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb
+index 389d3fb..d54fafc 100644
+--- a/meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb
++++ b/meta-oe/recipes-graphics/freeglut/freeglut_3.0.0.bb
+@@ -9,8 +9,8 @@ SRC_URI[sha256sum] = "2a43be8515b01ea82bcfa17d29ae0d40bd128342f0930cd1f375f1ff99
  
--RDEPENDS_${PN} += "python-numbers"
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-datetime \
-+    ${PYTHON_PN}-numbers \
-+    "
+ inherit cmake distro_features_check
+ 
+-# depends on virtual/libx11
+-REQUIRED_DISTRO_FEATURES = "x11"
++# depends on virtual/libx11, virtual/libgl
++REQUIRED_DISTRO_FEATURES = "x11 opengl"
+ 
+ PROVIDES += "mesa-glut"
+ 
 -- 
-1.9.1
+2.8.1
 
 
