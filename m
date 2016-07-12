@@ -1,45 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id EF0736FF7B
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-yw0-f195.google.com (mail-yw0-f195.google.com
+	[209.85.161.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 35F3E70101
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 23:48:58 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id q62so3867826qkf.2
+	Tue, 12 Jul 2016 00:58:54 +0000 (UTC)
+Received: by mail-yw0-f195.google.com with SMTP id i12so59888ywa.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 16:48:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=yEdmj+9j3gX8gdcI/YSl5CbrJ4nz73uRkmR1AjaO6V0=;
-	b=pLxhV0z+bIjj/9PBpLNUOKEDr93giNGBYPG1F3wGwtTowUpdgYPs199ohAfrFM2EK4
-	ECHw4KT6THWzg2ElZk34z49fm71v4zwBbSMoxCcyN/jh9YtPlzQrwRPnwfTiQG1UwD8s
-	lNYvS50+1T4gTQMXa3q4Qg4JYcSCQA1MuIcYSCFUAdD4FsvOBHA7ZJk9+LnHIeAj+fgv
-	HrF2QTA3DbMhr9VskIS8aYOwD9+7BPQRNwytwr8tYA7TT4l46PP3mVo9G6Usva+bmVKw
-	0ll8OPA19QJoJOGZelnBo87LKQRAIo0GT/l2qgf9FWKs4jboYjKuqQP61xoPVpeUkIX2
-	50RQ==
+	Mon, 11 Jul 2016 17:58:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=yEdmj+9j3gX8gdcI/YSl5CbrJ4nz73uRkmR1AjaO6V0=;
-	b=feKwDYwMLVQlBJ3CDcWoI64k3UHZrt5Ol6XjiiZPDXp8FlDZiVPKFRSzN0oeMwk5oD
-	xFl6URoRr1QO/rTV6ft0ZfyponysWcJnn3vR8STbZdf0yRQirnCoLQoSbb116/4QF3Z9
-	q/1v2agXnfG40zXZSwt6dQCjJgPiCnXiRjHfPyyym/pm4p47ubgsaHHEzoQ6iUBOtvgR
-	YNwH0WyNrNZc5FaQOI//PJhCEl0jLm2EGud6u8YKWmPQV4d1uK1q2kWqD/l+kWi7aE36
-	rv1HD4Z+yf1rXneSJ+31oPUJHXCreKomLLDa+hrAwlWHD3YtEvI7o7ZZ19F9JQvHevsT
-	+hmw==
-X-Gm-Message-State: ALyK8tLG+EAUpCnsGgCa1MePxCMJa0FJq/On/N6XdDivh7QdeW+nv4iyTSQgSXqUUuVfJq320cXqGep+MlxZpQ==
-X-Received: by 10.55.97.80 with SMTP id v77mr29904614qkb.41.1468280939163;
-	Mon, 11 Jul 2016 16:48:59 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.55.214.83 with HTTP; Mon, 11 Jul 2016 16:48:29 -0700 (PDT)
-In-Reply-To: <9b1d361b-b845-700f-d780-bbccc958a1c2@gmail.com>
-References: <14c344e66a5112f492cc21c9a7d0f217@xmsnet.nl>
-	<9b1d361b-b845-700f-d780-bbccc958a1c2@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 11 Jul 2016 16:48:29 -0700
-Message-ID: <CAMKF1srD_3zFdtdF_rGGpJhTvO8JFgeUOG8NCYhG08OjWVOwjQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java] gcc 4.8 and openjdk-8
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=WwMOXTOmZrwjt3yGM+ovlsFuXXGRJRcZyEHNZsnUN7o=;
+	b=kMWYDwGVJkdtJ8jxo7Mtoe8NUgc/cxzswNyz7vV/1BY8L7zQu2P3qIP+xh63Zh7XIB
+	IcgySjG3W6iPBL5xddj+rXQ+oYdHW2pBTj2j2uhRsr3A8K4TT2QRnIdXQh8ZRGZ5d2LL
+	6fEMqzU9WkBr1BC2o0wb9kPH6cEj5sg/PCkzPk4ZO6PxgrVI6hQ2tkrEkHLg0qTV2pYY
+	8F1OfQYKHTQn6DIj8kIi3FMSay7riiqMEBNdEyn4CA+MiJ29h61nT+687Tx9kPrtuex3
+	r2S8svXTOq7flIdzRxaWUDY4WWf/4u7KM8gFC0K7lvW+jCZRbwaEl30UJ6zERbwKLlFs
+	zbJw==
+X-Gm-Message-State: ALyK8tIm4z4vuUfycpBKmI//4ssZBijAG2MWUaKQirwVQz1dm2Bf9g1a5KMj3s7YdsT1uw==
+X-Received: by 10.37.119.195 with SMTP id s186mr14598370ybc.173.1468285135392; 
+	Mon, 11 Jul 2016 17:58:55 -0700 (PDT)
+Received: from lnx-dereks-laptop.star.lab
+	(ip-64-134-183-30.public.wayport.net. [64.134.183.30])
+	by smtp.gmail.com with ESMTPSA id k5sm5272971ywd.50.2016.07.11.17.58.54
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 11 Jul 2016 17:58:54 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 11 Jul 2016 20:58:44 -0400
+Message-Id: <1468285124-28876-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-python][PATCH] python-pyephem: add RDEPENDS to package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,50 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jul 2016 23:49:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 12 Jul 2016 00:58:56 -0000
 
-On Mon, Jul 11, 2016 at 3:32 PM, Jacopo Malvestio
-<jacopo.malvestio@gmail.com> wrote:
-> Hello All,
->
-> I've created a .bbappend file with:
->
-> CFLAGS_remove = "-fno-lifetime-dse"
-> CXXFLAGS_remove = "-fno-lifetime-dse"
->
-> but the do_configure step fail, bitbake -v openjdk-8 log:
->
-> | configure: Current directory is /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/build.
-> | configure: Since this is not the source root, configure will output the configuration here
-> | configure: (as opposed to creating a configuration in <src_root>/build/<conf-name>).
-> | configure: However, this directory is not empty. This is not allowed, since it could
-> | configure: seriously mess up just about everything.
-> | configure: Try 'cd /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/jdk8u-e8bed1496ff2' and restart configure
-> | configure: (or create a new empty directory and cd to it).
-> | configure: error: Will not continue creating configuration in /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/build
-> | NOTE: The following config.log files may provide further information.
-> | NOTE: /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/build/config.log
-> | ERROR: configure failed
-> | ERROR: Function failed: do_configure (log file is located at /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/temp/log.do_configure.2980
->
-> I'm running on ubuntu 14.04 with gcc4.8 and openjdk 1.8, i don't think it's a side effect of the gcc6 patch,  but in your opinion, i forgot something?
->
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-extended/python-pyephem/python-pyephem_3.7.6.0.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-this is building openjdk-8-native package. So you need to add a
-bbappend for openjdk-8-native_72b05.bb as well
+diff --git a/meta-python/recipes-extended/python-pyephem/python-pyephem_3.7.6.0.bb b/meta-python/recipes-extended/python-pyephem/python-pyephem_3.7.6.0.bb
+index 2e97013..e28ce6c 100644
+--- a/meta-python/recipes-extended/python-pyephem/python-pyephem_3.7.6.0.bb
++++ b/meta-python/recipes-extended/python-pyephem/python-pyephem_3.7.6.0.bb
+@@ -11,3 +11,7 @@ PYPI_PACKAGE = "ephem"
+ 
+ inherit pypi setuptools
+ 
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-math \
++    "
+-- 
+1.9.1
 
-> thank you
->
-> --
-> Jacopo
->
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
