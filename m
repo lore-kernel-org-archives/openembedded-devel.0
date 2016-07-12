@@ -1,48 +1,51 @@
-Return-Path: <danismostlikely@gmail.com>
-Received: from mail-vk0-f43.google.com (mail-vk0-f43.google.com
-	[209.85.213.43])
-	by mail.openembedded.org (Postfix) with ESMTP id D4F7B73174
+Return-Path: <jacopo.malvestio@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id EB681731AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jul 2016 04:52:07 +0000 (UTC)
-Received: by mail-vk0-f43.google.com with SMTP id o63so6362932vkg.1
+	Tue, 12 Jul 2016 05:09:35 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id i5so864315wmg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 21:52:08 -0700 (PDT)
+	Mon, 11 Jul 2016 22:09:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc; bh=K7+c3Yt6z7BjUq+XAvkXrjmK6YwdixMof2aJdblznIY=;
-	b=yWj8XU7hXUoT5Bvfkt7x7rE252Ef+3KYcNRTFyqWYSAnT4qzGPQzeE/sG+f/FZKhdj
-	rvTBe1sAoyb9SnQ5CNbZGbsXpPNB9VGIA9B6/SjZmCcUitCM7ufJhe4OJXbDrwReERh4
-	6Ovx79PdMYj3lKB1dX3yoXOd1XhFfL0W/pC5KKzJpDQpXpeuafw58Svst0QSq7A0K0+C
-	oXAnIT6l7pIiDsV3920t/wOnhWNPN45IWXaelhT6ZVi+HAMS7/ghyF6uFGeVClxmiQpW
-	skpLrGSS6CWlW1UyKAJ0lgmIavhm4VwtYYsavnCdpRrsLEkJ4MDmJzyQSqvTJ5HeiJKp
-	sQLw==
+	h=reply-to:subject:references:to:from:message-id:date:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=2ZWG2+JbZhgEiH1MfXr33C3ZUqU4Oe0S5A/ofBjSS6s=;
+	b=uAsQ/tsC7nUyfM0GcVC4oFENdCWMQ2SaAD5CvRotSMByhkU5ZKlcZX7xKvUCmGLZsc
+	tJzpsByKMNEd5eZhlCXVbC0x6wJ+8vU06TIu0BijTS8HxFhNvT7o6MAOUgk3aG96bCoQ
+	+C13trF1DdC6VOJlKGIkvjXszmErFgExsvsMYJ0V7YHKnY0TNXi10Prinzl6RweKcqIM
+	Ea8k0/iMTc8TByqVdluMimfWOgWVsX3yGG4vonWkAraDfVW4HSMj+z/5FTstIkR9GdrI
+	6L/6Hqzaw7ZtShmWYWY/HWXKp0UxN+4cclHOCb0FidHyRW+yS8fJYkmbUdD5phvf62xM
+	k+Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc;
-	bh=K7+c3Yt6z7BjUq+XAvkXrjmK6YwdixMof2aJdblznIY=;
-	b=dKlCzQL9ahjWJUqEfQoTEPHW8hkqWBhqGbUwRXQLlaZP0vVwB/b0bsiq4mJXbwHMWI
-	g0/FXD7+H71Wumq++EyNlxi6u+RB0yKhfxJx+pHfqafsk83iFFedPoGY/uZFqcrsEpf2
-	V3m8EK4yc1gWsSA2KF9ze480bhVfpTeZYxnAkZssEwoO1OOJhp1TSdHw1Bb2mPRDl+ZO
-	kq5mZssBvWcB995dxxbRmOo8RF/AjWWQ5cMbXXwzB35ix0mbLgdvSeu1ulTvz069fr73
-	aLakwNAcXYJveVN/jF+khdkk7V2Z7FI6yHKuFpRSblTWhhS9jZEtv7EWnqLVUAqY/0RO
-	C2Ng==
-X-Gm-Message-State: ALyK8tIABDetPRME22F2vJ72tQQf4zzTS+onprHym1F0hR9nNCPq3R39rplxHWnC1GTLJHbzFOaC+uJqGQSbcw==
+	h=x-gm-message-state:reply-to:subject:references:to:from:message-id
+	:date:mime-version:in-reply-to:content-transfer-encoding;
+	bh=2ZWG2+JbZhgEiH1MfXr33C3ZUqU4Oe0S5A/ofBjSS6s=;
+	b=XZGiA62u0gNn23Jf2Pl/elhC/mAGgBE4DG8E4jIGwEwzRubTNZSfKALuD8kuhgrpoX
+	vB9pE9XU+yePcATwMknm5J6VOdbSJHlhDSMf6kP51C5irWgzI6FjyPMMG9bHElf2A4/m
+	OPnOYd6KSdpgMfBzofzq76Tt/p8E0YpDZn7xty7EYBuCJzlsw1nYPyFKGp+bJegnesQD
+	prfgVWgVZn4hTkgS6TNbNbKSX972dm/877v7NX9bvqPK99ze1BTWo5wx9uyD/+Y7pQ0A
+	4A7pWIE7Bzn3mCMFyIyWUoGiE2m400P/5KOe8i8fOZJZfO2wPPfQTFSYQiGg4QBINgPX
+	oQSQ==
+X-Gm-Message-State: ALyK8tLP1B5ifSz5WLfCx6EEsXndmCVeaXoTYxinvLWvwJkAWJRGyZXu4cjBVd2EukS9JA==
+X-Received: by 10.28.7.20 with SMTP id 20mr738217wmh.52.1468300175899;
+	Mon, 11 Jul 2016 22:09:35 -0700 (PDT)
+Received: from [172.20.10.2] ([5.90.34.26]) by smtp.gmail.com with ESMTPSA id
+	a198sm26382369wme.16.2016.07.11.22.09.34
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 11 Jul 2016 22:09:35 -0700 (PDT)
+Reply-To: jacopo.malvestio@gmail.com
+References: <14c344e66a5112f492cc21c9a7d0f217@xmsnet.nl>
+	<9b1d361b-b845-700f-d780-bbccc958a1c2@gmail.com>
+	<CAMKF1srD_3zFdtdF_rGGpJhTvO8JFgeUOG8NCYhG08OjWVOwjQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+From: Jacopo Malvestio <jacopo.malvestio@gmail.com>
+Message-ID: <36c35de6-8808-cc4a-5868-f9616fb0ec95@gmail.com>
+Date: Tue, 12 Jul 2016 07:09:32 +0200
 MIME-Version: 1.0
-X-Received: by 10.159.54.143 with SMTP id p15mr127944uap.148.1468299127654;
-	Mon, 11 Jul 2016 21:52:07 -0700 (PDT)
-Received: by 10.103.51.77 with HTTP; Mon, 11 Jul 2016 21:52:07 -0700 (PDT)
-Received: by 10.103.51.77 with HTTP; Mon, 11 Jul 2016 21:52:07 -0700 (PDT)
-In-Reply-To: <CAP9ODKp7eCBu70Aj0M1dT8qPrJK2gnjKD-iVqL58q7Fy7qPTnA@mail.gmail.com>
-References: <fd5cee43db0bd882f662d5cd2f3d0c34@xmsnet.nl>
-	<CAP9ODKp7eCBu70Aj0M1dT8qPrJK2gnjKD-iVqL58q7Fy7qPTnA@mail.gmail.com>
-Date: Mon, 11 Jul 2016 22:52:07 -0600
-Message-ID: <CACS+7ZSfFsqdEc32rdFDE+P=yzKeRauqc1gjUvFrmrnUwOAsdQ@mail.gmail.com>
-From: Dan McGregor <danismostlikely@gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: daniel.mcgregor@vecima.com, Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-java] gcc6 support breaks build for gcc < 6
+In-Reply-To: <CAMKF1srD_3zFdtdF_rGGpJhTvO8JFgeUOG8NCYhG08OjWVOwjQ@mail.gmail.com>
+Subject: Re: [meta-java] gcc 4.8 and openjdk-8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,41 +58,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jul 2016 04:52:08 -0000
+X-List-Received-Date: Tue, 12 Jul 2016 05:09:38 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 11 Jul 2016 7:19 a.m., "Otavio Salvador" <
-otavio.salvador@ossystems.com.br> wrote:
->
-> Hello Dobbe,
->
-> (Added Khem and Fabio on Cc)
->
-> On Mon, Jul 11, 2016 at 8:37 AM, Winfried <winfried_mb2@xmsnet.nl> wrote:
-> > Commit  33ddb28a6428b02ddcc82d1954ecf27cd426fbb5 (openjdk-8: make GCC6
-> > happy) adds gcc option -fno-lifetime-dse, which was added in gcc6. This
-> > breaks the compilation of openjdk-native on hosts where gcc4 or gcc5 is
-the
-> > default compiler.
-> >
-> > If this is intentional, I think the README file should mention that
-> > meta-java requires gcc6. Better would be to add the '-fno-lifetime-dse'
-> > option only if gcc >= 6 is used for native compilation (if that is
-> > possible).
->
-> This is a non-desired side effect of the patch. Daniel, could you take
-> a look on this?
+On 12/07/2016 01:48, Khem Raj wrote:
+> On Mon, Jul 11, 2016 at 3:32 PM, Jacopo Malvestio
+> <jacopo.malvestio@gmail.com> wrote:
+>> Hello All,
+>>
+>> I've created a .bbappend file with:
+>>
+>> CFLAGS_remove = "-fno-lifetime-dse"
+>> CXXFLAGS_remove = "-fno-lifetime-dse"
+>>
+>> but the do_configure step fail, bitbake -v openjdk-8 log:
+>>
+>> | configure: Current directory is /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/build.
+>> | configure: Since this is not the source root, configure will output the configuration here
+>> | configure: (as opposed to creating a configuration in <src_root>/build/<conf-name>).
+>> | configure: However, this directory is not empty. This is not allowed, since it could
+>> | configure: seriously mess up just about everything.
+>> | configure: Try 'cd /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/jdk8u-e8bed1496ff2' and restart configure
+>> | configure: (or create a new empty directory and cd to it).
+>> | configure: error: Will not continue creating configuration in /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/build
+>> | NOTE: The following config.log files may provide further information.
+>> | NOTE: /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/build/config.log
+>> | ERROR: configure failed
+>> | ERROR: Function failed: do_configure (log file is located at /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/temp/log.do_configure.2980
+>>
+>> I'm running on ubuntu 14.04 with gcc4.8 and openjdk 1.8, i don't think it's a side effect of the gcc6 patch,  but in your opinion, i forgot something?
+>>
+> 
+> this is building openjdk-8-native package. So you need to add a
+> bbappend for openjdk-8-native_72b05.bb as well
 
-Yep. I'll take a look in the morning.
+already done:
 
->
-> --
-> Otavio Salvador                             O.S. Systems
-> http://www.ossystems.com.br        http://code.ossystems.com.br
-> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+➜  openjdk git:(develop) cat openjdk-8-native_72b05.bbappend
+CFLAGS_remove = "-fno-lifetime-dse"
+CXXFLAGS_remove = "-fno-lifetime-dse"
+
+openjdk-8 is not a recipe, correct? any suggestion?
+
+thank you. jacob
 
