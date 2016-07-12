@@ -1,25 +1,20 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 77ED16E65F
+Return-Path: <jussi.kukkonen@intel.com>
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by mail.openembedded.org (Postfix) with ESMTP id 0680E606D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jul 2016 11:00:26 +0000 (UTC)
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga101.fm.intel.com with ESMTP; 12 Jul 2016 04:00:27 -0700
+	Tue, 12 Jul 2016 11:50:44 +0000 (UTC)
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+	by fmsmga104.fm.intel.com with ESMTP; 12 Jul 2016 04:50:44 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.28,351,1464678000"; d="scan'208";a="844763416"
-Received: from mbabyjoh-desk.fi.intel.com (HELO
-	mbabyjoh-desk.ger.corp.intel.com) ([10.237.72.71])
-	by orsmga003.jf.intel.com with ESMTP; 12 Jul 2016 04:00:26 -0700
-Date: Tue, 12 Jul 2016 14:00:48 +0300
-From: "Maxin B. John" <maxin.john@intel.com>
+X-IronPort-AV: E=Sophos;i="5.28,351,1464678000"; d="scan'208";a="137741848"
+Received: from theory.fi.intel.com ([10.237.72.196])
+	by fmsmga004.fm.intel.com with ESMTP; 12 Jul 2016 04:50:43 -0700
+From: Jussi Kukkonen <jussi.kukkonen@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160712110048.GA26262@mbabyjoh-desk.ger.corp.intel.com>
-References: <1467639953-22278-1-git-send-email-maxin.john@intel.com>
-	<20160711143536.s6nx2scag4j7sffc@jama>
-MIME-Version: 1.0
-In-Reply-To: <20160711143536.s6nx2scag4j7sffc@jama>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [PATCH] directfb: move recipe to meta-oe
+Date: Tue, 12 Jul 2016 14:50:37 +0300
+Message-Id: <1468324237-13346-1-git-send-email-jussi.kukkonen@intel.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-networking][PATCH] augeas: Move from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,60 +27,165 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jul 2016 11:00:30 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 12 Jul 2016 11:50:46 -0000
 
-Hi Martin,
+augeas is being removed from oe-core as nothing there uses or tests
+it. Move the recipe to meta-networking where the only meta-oe reverse
+dependency (netcf) lives.
 
-On Mon, Jul 11, 2016 at 04:35:37PM +0200, Martin Jansa wrote:
-> On Mon, Jul 04, 2016 at 04:45:53PM +0300, Maxin B. John wrote:
-> > directfb.org has been down for about a year now. Since there
-> > are active users for this recipe, it makes sense to move this
-> > from oe-core to meta-oe.
-> 
-> Fails to apply:
-> 
-> OE @ ~/meta-openembedded $ pwam 126087
-> 2016-07-11 15:29:51 URL:https://patchwork.openembedded.org/patch/126087/mbox/ [33428] -> "pw-am-126087.patch" [1]
-> Applying: directfb: move recipe to meta-oe
-> .git/rebase-apply/patch:51: trailing whitespace.
->  
-> .git/rebase-apply/patch:53: trailing whitespace.
->  
-> .git/rebase-apply/patch:56: space before tab in indent.
->         AC_MSG_ERROR([$DIRECTFB_PKG_ERRORS
-> .git/rebase-apply/patch:59: trailing whitespace.
-> -- 
-> .git/rebase-apply/patch:207: trailing whitespace.
->  
-> fatal: corrupt patch at line 401
-> Patch failed at 0001 directfb: move recipe to meta-oe
-> The copy of the patch that failed is found in: .git/rebase-apply/patch
-> When you have resolved this problem, run "git am --continue".
-> If you prefer to skip this patch, run "git am --skip" instead.
-> To restore the original branch and stop patching, run "git am --abort".
-> OE @ ~/meta-openembedded $ patch -p1 < pw-am-126087.patch 
-> patching file meta-oe/recipes-graphics/directfb/directfb-examples/configure.in-Fix-string-argument-syntax.patch
-> patching file meta-oe/recipes-graphics/directfb/directfb-examples_1.7.0.bb
-> patching file meta-oe/recipes-graphics/directfb/directfb.inc
-> patching file meta-oe/recipes-graphics/directfb/directfb/0001-gfx-direct-Aboid-usng-VLAs-and-printf-formats.patch
-> patching file meta-oe/recipes-graphics/directfb/directfb/bashism.patch
-> patching file meta-oe/recipes-graphics/directfb/directfb/compar_fn_t.patch
-> patching file meta-oe/recipes-graphics/directfb/directfb/configurefix.patch
-> patch: **** malformed patch at line 360:  ages-split/directfb/usr/bin/dfbscreen contains probably-redundant RPATH /usr/libWARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/bin/mkdgiff contains probably-redundant RPATH /usr/libWARNING: QA Issue: directfb: /work/i586-poky-linux/directfb-1.4.15-r1/packages-split/directfb/usr/bin/dfbinspector contains probably-redundant RPATH /usr/lib
-> 
-> Because there is extra line feed in
-> meta-oe/recipes-graphics/directfb/directfb/configurefix.patch
-> (very long line), please check your sender configuration to prevent mangling the patches in future.
+Also upgrade to 1.5.0: no recipe changes needed.
 
-Sorry for that. I had to send the patch with "--no-validate" option because it
-contained lines longer than 998 characters.
+Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
+---
+ meta-networking/recipes-support/augeas/augeas.inc  | 30 ++++++++++++++++++++++
+ ...need_charset_alias-when-building-for-musl.patch | 30 ++++++++++++++++++++++
+ .../augeas/add-missing-argz-conditional.patch      | 20 +++++++++++++++
+ .../augeas/augeas/sepbuildfix.patch                | 22 ++++++++++++++++
+ .../recipes-support/augeas/augeas_1.5.0.bb         |  4 +++
+ 5 files changed, 106 insertions(+)
+ create mode 100644 meta-networking/recipes-support/augeas/augeas.inc
+ create mode 100644 meta-networking/recipes-support/augeas/augeas/0001-Unset-need_charset_alias-when-building-for-musl.patch
+ create mode 100644 meta-networking/recipes-support/augeas/augeas/add-missing-argz-conditional.patch
+ create mode 100644 meta-networking/recipes-support/augeas/augeas/sepbuildfix.patch
+ create mode 100644 meta-networking/recipes-support/augeas/augeas_1.5.0.bb
 
-> This time I've fixed and applied it manually.
+diff --git a/meta-networking/recipes-support/augeas/augeas.inc b/meta-networking/recipes-support/augeas/augeas.inc
+new file mode 100644
+index 0000000..23d12ca
+--- /dev/null
++++ b/meta-networking/recipes-support/augeas/augeas.inc
+@@ -0,0 +1,30 @@
++SUMMARY = "Augeas configuration API"
++HOMEPAGE = "http://augeas.net/"
++BUGTRACKER = "https://fedorahosted.org/augeas/report/1"
++
++LICENSE = "LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=bbb461211a33b134d42ed5ee802b37ff"
++
++SRC_URI = "http://download.augeas.net/${BP}.tar.gz \
++           file://add-missing-argz-conditional.patch \
++           file://sepbuildfix.patch \
++           file://0001-Unset-need_charset_alias-when-building-for-musl.patch \
++          "
++
++DEPENDS = "readline libxml2"
++
++inherit autotools pkgconfig
++
++PACKAGES =+ "${PN}-lenses lib${BPN}"
++
++FILES_${PN}-lenses = "${datadir}/augeas/lenses"
++FILES_lib${BPN} = "${libdir}/lib*${SOLIBS}"
++
++RDEPENDS_lib${BPN} += "${PN}-lenses"
++RRECOMMENDS_lib${BPN} += "${PN}"
++
++LEAD_SONAME = "libaugeas.so"
++
++do_install_append() {
++	rm -fr ${D}${datadir}/vim
++}
+diff --git a/meta-networking/recipes-support/augeas/augeas/0001-Unset-need_charset_alias-when-building-for-musl.patch b/meta-networking/recipes-support/augeas/augeas/0001-Unset-need_charset_alias-when-building-for-musl.patch
+new file mode 100644
+index 0000000..9a19876
+--- /dev/null
++++ b/meta-networking/recipes-support/augeas/augeas/0001-Unset-need_charset_alias-when-building-for-musl.patch
+@@ -0,0 +1,30 @@
++From b9565dc2fe0c4f7daaec91b7e83bc7313dee2f4a Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 13 Apr 2015 17:02:13 -0700
++Subject: [PATCH] Unset need_charset_alias when building for musl
++
++localcharset uses ac_cv_gnu_library_2_1 from glibc21.m4
++which actually shoudl be fixed in gnulib and then all downstream
++projects will get it eventually. For now we apply the fix to
++coreutils
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ lib/gnulib.mk | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++Index: augeas-1.2.0/gnulib/lib/Makefile.am
++===================================================================
++--- augeas-1.2.0.orig/gnulib/lib/Makefile.am
+++++ augeas-1.2.0/gnulib/lib/Makefile.am
++@@ -463,7 +463,7 @@ install-exec-localcharset: all-local
++ 	  case '$(host_os)' in \
++ 	    darwin[56]*) \
++ 	      need_charset_alias=true ;; \
++-	    darwin* | cygwin* | mingw* | pw32* | cegcc*) \
+++	    darwin* | cygwin* | mingw* | pw32* | cegcc* | linux-musl*) \
++ 	      need_charset_alias=false ;; \
++ 	    *) \
++ 	      need_charset_alias=true ;; \
+diff --git a/meta-networking/recipes-support/augeas/augeas/add-missing-argz-conditional.patch b/meta-networking/recipes-support/augeas/augeas/add-missing-argz-conditional.patch
+new file mode 100644
+index 0000000..abbdbaa
+--- /dev/null
++++ b/meta-networking/recipes-support/augeas/augeas/add-missing-argz-conditional.patch
+@@ -0,0 +1,20 @@
++Add missing GL_GENERATE_ARGZ_H conditional
++
++- GL_GENERATE_ARGZ_H is used in gnulib/lib/Makefile.am
++
++Upstream-Status: Pending
++Signed-off-by: Constantin Musca <constantinx.musca@intel.com>
++
++Index: augeas-1.0.0/configure.ac
++===================================================================
++--- augeas-1.0.0.orig/configure.ac
+++++ augeas-1.0.0/configure.ac
++@@ -55,6 +55,8 @@ AC_ARG_WITH([failmalloc],
++ 
++ AM_CONDITIONAL([WITH_FAILMALLOC], [test x$with_failmalloc != xno])
++ 
+++AM_CONDITIONAL([GL_GENERATE_ARGZ_H], [test -n "$ARGZ_H"])
+++
++ dnl --enable-debug=(yes|no)
++ AC_ARG_ENABLE([debug],
++               [AC_HELP_STRING([--enable-debug=no/yes],
+diff --git a/meta-networking/recipes-support/augeas/augeas/sepbuildfix.patch b/meta-networking/recipes-support/augeas/augeas/sepbuildfix.patch
+new file mode 100644
+index 0000000..b82a3ee
+--- /dev/null
++++ b/meta-networking/recipes-support/augeas/augeas/sepbuildfix.patch
+@@ -0,0 +1,22 @@
++Ensure that builds in separate builddirs (${B} != ${S}) correctly install the 
++lenses files.
++
++Upstream-Status: Pending
++
++RP 2013/4/17
++
++Index: augeas-1.0.0/Makefile.am
++===================================================================
++--- augeas-1.0.0.orig/Makefile.am	2012-11-02 15:20:11.000000000 +0000
+++++ augeas-1.0.0/Makefile.am	2013-04-17 10:36:24.033400125 +0000
++@@ -5,8 +5,8 @@
++ lensdir=$(datadir)/augeas/lenses/dist
++ lenstestdir=$(datadir)/augeas/lenses/dist/tests
++ 
++-dist_lens_DATA=$(wildcard lenses/*.aug)
++-dist_lenstest_DATA=$(wildcard lenses/tests/*.aug)
+++dist_lens_DATA=$(wildcard $(top_srcdir)/lenses/*.aug)
+++dist_lenstest_DATA=$(wildcard $(top_srcdir)lenses/tests/*.aug)
++ 
++ EXTRA_DIST=augeas.spec build/aux/move-if-change Makefile.am HACKING
++ 
+diff --git a/meta-networking/recipes-support/augeas/augeas_1.5.0.bb b/meta-networking/recipes-support/augeas/augeas_1.5.0.bb
+new file mode 100644
+index 0000000..c4f62e7
+--- /dev/null
++++ b/meta-networking/recipes-support/augeas/augeas_1.5.0.bb
+@@ -0,0 +1,4 @@
++require augeas.inc
++
++SRC_URI[md5sum] = "01190e455c513124a2dae29a1182c113"
++SRC_URI[sha256sum] = "223bb6e6fe3e9e92277dafd5d34e623733eb969a72a382998d204feab253f73f"
+-- 
+2.1.4
 
-Thank you very much.
-
-Best Regards,
-Maxin
 
