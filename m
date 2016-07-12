@@ -1,51 +1,24 @@
-Return-Path: <jacopo.malvestio@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id EB681731AF
+Return-Path: <xiao.zhang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id E36B560589
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jul 2016 05:09:35 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id i5so864315wmg.2
+	Tue, 12 Jul 2016 07:15:20 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u6C7FKE1015633
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jul 2016 22:09:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=reply-to:subject:references:to:from:message-id:date:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=2ZWG2+JbZhgEiH1MfXr33C3ZUqU4Oe0S5A/ofBjSS6s=;
-	b=uAsQ/tsC7nUyfM0GcVC4oFENdCWMQ2SaAD5CvRotSMByhkU5ZKlcZX7xKvUCmGLZsc
-	tJzpsByKMNEd5eZhlCXVbC0x6wJ+8vU06TIu0BijTS8HxFhNvT7o6MAOUgk3aG96bCoQ
-	+C13trF1DdC6VOJlKGIkvjXszmErFgExsvsMYJ0V7YHKnY0TNXi10Prinzl6RweKcqIM
-	Ea8k0/iMTc8TByqVdluMimfWOgWVsX3yGG4vonWkAraDfVW4HSMj+z/5FTstIkR9GdrI
-	6L/6Hqzaw7ZtShmWYWY/HWXKp0UxN+4cclHOCb0FidHyRW+yS8fJYkmbUdD5phvf62xM
-	k+Mw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:reply-to:subject:references:to:from:message-id
-	:date:mime-version:in-reply-to:content-transfer-encoding;
-	bh=2ZWG2+JbZhgEiH1MfXr33C3ZUqU4Oe0S5A/ofBjSS6s=;
-	b=XZGiA62u0gNn23Jf2Pl/elhC/mAGgBE4DG8E4jIGwEwzRubTNZSfKALuD8kuhgrpoX
-	vB9pE9XU+yePcATwMknm5J6VOdbSJHlhDSMf6kP51C5irWgzI6FjyPMMG9bHElf2A4/m
-	OPnOYd6KSdpgMfBzofzq76Tt/p8E0YpDZn7xty7EYBuCJzlsw1nYPyFKGp+bJegnesQD
-	prfgVWgVZn4hTkgS6TNbNbKSX972dm/877v7NX9bvqPK99ze1BTWo5wx9uyD/+Y7pQ0A
-	4A7pWIE7Bzn3mCMFyIyWUoGiE2m400P/5KOe8i8fOZJZfO2wPPfQTFSYQiGg4QBINgPX
-	oQSQ==
-X-Gm-Message-State: ALyK8tLP1B5ifSz5WLfCx6EEsXndmCVeaXoTYxinvLWvwJkAWJRGyZXu4cjBVd2EukS9JA==
-X-Received: by 10.28.7.20 with SMTP id 20mr738217wmh.52.1468300175899;
-	Mon, 11 Jul 2016 22:09:35 -0700 (PDT)
-Received: from [172.20.10.2] ([5.90.34.26]) by smtp.gmail.com with ESMTPSA id
-	a198sm26382369wme.16.2016.07.11.22.09.34
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 11 Jul 2016 22:09:35 -0700 (PDT)
-Reply-To: jacopo.malvestio@gmail.com
-References: <14c344e66a5112f492cc21c9a7d0f217@xmsnet.nl>
-	<9b1d361b-b845-700f-d780-bbccc958a1c2@gmail.com>
-	<CAMKF1srD_3zFdtdF_rGGpJhTvO8JFgeUOG8NCYhG08OjWVOwjQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-From: Jacopo Malvestio <jacopo.malvestio@gmail.com>
-Message-ID: <36c35de6-8808-cc4a-5868-f9616fb0ec95@gmail.com>
-Date: Tue, 12 Jul 2016 07:09:32 +0200
+	Tue, 12 Jul 2016 00:15:20 -0700 (PDT)
+Received: from xzhang1-OptiPlex-9020.corp.ad.wrs.com (128.224.162.142) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Tue, 12 Jul 2016 00:15:19 -0700
+From: Zhang Xiao <xiao.zhang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 12 Jul 2016 15:15:17 +0800
+Message-ID: <1468307717-13359-1-git-send-email-xiao.zhang@windriver.com>
+X-Mailer: git-send-email 2.1.4
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1srD_3zFdtdF_rGGpJhTvO8JFgeUOG8NCYhG08OjWVOwjQ@mail.gmail.com>
-Subject: Re: [meta-java] gcc 4.8 and openjdk-8
+Subject: [recipes-extended][PATCH] pax: strip off file name's trailing slash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,48 +31,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jul 2016 05:09:38 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 12 Jul 2016 07:15:22 -0000
+Content-Type: text/plain
 
-On 12/07/2016 01:48, Khem Raj wrote:
-> On Mon, Jul 11, 2016 at 3:32 PM, Jacopo Malvestio
-> <jacopo.malvestio@gmail.com> wrote:
->> Hello All,
->>
->> I've created a .bbappend file with:
->>
->> CFLAGS_remove = "-fno-lifetime-dse"
->> CXXFLAGS_remove = "-fno-lifetime-dse"
->>
->> but the do_configure step fail, bitbake -v openjdk-8 log:
->>
->> | configure: Current directory is /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/build.
->> | configure: Since this is not the source root, configure will output the configuration here
->> | configure: (as opposed to creating a configuration in <src_root>/build/<conf-name>).
->> | configure: However, this directory is not empty. This is not allowed, since it could
->> | configure: seriously mess up just about everything.
->> | configure: Try 'cd /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/jdk8u-e8bed1496ff2' and restart configure
->> | configure: (or create a new empty directory and cd to it).
->> | configure: error: Will not continue creating configuration in /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/build
->> | NOTE: The following config.log files may provide further information.
->> | NOTE: /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/build/config.log
->> | ERROR: configure failed
->> | ERROR: Function failed: do_configure (log file is located at /home/jacopo/yjp/poky/build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/temp/log.do_configure.2980
->>
->> I'm running on ubuntu 14.04 with gcc4.8 and openjdk 1.8, i don't think it's a side effect of the gcc6 patch,  but in your opinion, i forgot something?
->>
-> 
-> this is building openjdk-8-native package. So you need to add a
-> bbappend for openjdk-8-native_72b05.bb as well
+When extracting packaes, the trailing slash of the file name
+has no means but may cause some issue on system call lstat.
+Remove it.
 
-already done:
+Upstream-Status: Pending
 
-➜  openjdk git:(develop) cat openjdk-8-native_72b05.bbappend
-CFLAGS_remove = "-fno-lifetime-dse"
-CXXFLAGS_remove = "-fno-lifetime-dse"
+Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
+---
+ .../pax-strip-off-file-name-s-trailing-slash.patch | 48 ++++++++++++++++++++++
+ meta/recipes-extended/pax/pax_3.4.bb               |  4 +-
+ 2 files changed, 51 insertions(+), 1 deletion(-)
+ create mode 100644 meta/recipes-extended/pax/pax/pax-strip-off-file-name-s-trailing-slash.patch
 
-openjdk-8 is not a recipe, correct? any suggestion?
+diff --git a/meta/recipes-extended/pax/pax/pax-strip-off-file-name-s-trailing-slash.patch b/meta/recipes-extended/pax/pax/pax-strip-off-file-name-s-trailing-slash.patch
+new file mode 100644
+index 0000000..a602b30
+--- /dev/null
++++ b/meta/recipes-extended/pax/pax/pax-strip-off-file-name-s-trailing-slash.patch
+@@ -0,0 +1,48 @@
++From aa8ba118869b75a2a9cd681b2f0362d9d8f1c7ec Mon Sep 17 00:00:00 2001
++From: Zhang Xiao <xiao.zhang@windriver.com>
++Date: Tue, 12 Jul 2016 11:34:45 +0800
++Subject: [PATCH] pax: strip off file name's trailing slash
++
++When extracting packaes, the trailing slash of the file name
++has no means but may cause some issue on system call lstat.
++Remove it.
++
++Upstream-Status: Pending
++
++Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
++---
++ src/pat_rep.c | 11 ++++++++++-
++ 1 file changed, 10 insertions(+), 1 deletion(-)
++
++diff --git a/src/pat_rep.c b/src/pat_rep.c
++index b9a4636..4cbf6bf 100644
++--- a/src/pat_rep.c
+++++ b/src/pat_rep.c
++@@ -605,7 +605,7 @@ int
++ mod_name(ARCHD *arcn)
++ {
++ 	int res = 0;
++-
+++	char *pt;
++ 	/*
++ 	 * Strip off leading '/' if appropriate.
++ 	 * Currently, this option is only set for the tar format.
++@@ -639,6 +639,15 @@ mod_name(ARCHD *arcn)
++ 	}
++ 
++ 	/*
+++	 * strip off trailing slash.
+++	 */
+++	pt = &(arcn->name[strlen(arcn->name) - 1]);
+++	if (*pt == '/') {
+++		 *pt = '\0';
+++		arcn->nlen = strlen(arcn->name);
+++	}
+++
+++	/*
++ 	 * IMPORTANT: We have a problem. what do we do with symlinks?
++ 	 * Modifying a hard link name makes sense, as we know the file it
++ 	 * points at should have been seen already in the archive (and if it
++-- 
++1.8.5.2.233.g932f7e4
++
+diff --git a/meta/recipes-extended/pax/pax_3.4.bb b/meta/recipes-extended/pax/pax_3.4.bb
+index 9d1abfb..7ce43ce 100644
+--- a/meta/recipes-extended/pax/pax_3.4.bb
++++ b/meta/recipes-extended/pax/pax_3.4.bb
+@@ -16,7 +16,9 @@ DEPENDS_append_libc-musl = " fts "
+ 
+ SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/${BPN}/${BP}.tar.bz2/fbd9023b590b45ac3ade95870702a0d6/${BP}.tar.bz2 \
+ 	file://fix_for_compile_with_gcc-4.6.0.patch \
+-	file://pax-3.4_fix_for_x32.patch"
++	file://pax-3.4_fix_for_x32.patch \
++	file://pax-strip-off-file-name-s-trailing-slash.patch \
++"
+ 
+ SRC_URI_append_libc-musl = " file://0001-Fix-build-with-musl.patch \
+                              file://0001-use-strtoll-instead-of-strtoq.patch \
+-- 
+2.1.4
 
-thank you. jacob
 
