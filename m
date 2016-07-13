@@ -1,36 +1,46 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E8696AC4B
+Return-Path: <philip.balister@gmail.com>
+Received: from mail-yw0-f196.google.com (mail-yw0-f196.google.com
+	[209.85.161.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E42B6067C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jul 2016 12:47:08 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id 82so2910268qko.1
+	Wed, 13 Jul 2016 13:28:23 +0000 (UTC)
+Received: by mail-yw0-f196.google.com with SMTP id l125so3088352ywb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jul 2016 05:47:09 -0700 (PDT)
+	Wed, 13 Jul 2016 06:28:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=Unt5aCmA8EFD5661dHd2s6ebdlA/EwaKv/hLWCmsm0E=;
+	b=uhnZCAsvnnIXr3vgf96Jrbj4THnUUN/8Jd6JaiozDKPElB2mH0a9pAZlw40K77xX9d
+	73m6nn8yMm0FOsxcH1q/JzqHS4uJ5kcYg5SGHWDvRuJ0HlTPAlydiZQw0yWQkB6V0NpG
+	ZfELFANYCvVY9O7JcRE3zGC7IfJQggVM2yoHe8L6DypisTCFSMLsXFR78FHknJyFpWr5
+	ywZJHz2BoNUAlbeU77/qYKuc9OBpSq6QDHl9862ozVpWBnEkFmAlzXog1TPLhs3IBOo6
+	1K7IaWSSNSfQKuP8p0qwQC/7JkWmnnso0sVdN8wCEvhEVEXe0ChT71R0m6z77f9JLTTF
+	/TSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=EayT7pL2EDLZViP78rMdy7z28Q16uEzJXPAGRmduALo=;
-	b=lUFXe+yF6ccYd6uhAIe1py7kYnm0i/DBWnhdgxIE9hmBl8mjLHb2A7jmyKK706nuNo
-	+wbgVd48JNFpfazLl5Nq1RSA+w9Z8dHKEfJSD8IxBrNSMtP3c+6Auq9RIbpcYvKT2yoL
-	oYvD6ilN5haa0/rNU1Lkt7VG17RXoEv8Ka0l6ZaZ2l34/1Q1LFtk+yvnesCjTOQDiPlA
-	yNQEHRErT+T0V9DRiSDsdfIkWGHR/v2ndSfGUPABaJHf42caMQ9NW8cUFI/7xu+abM7A
-	bGtlKnhtFLA9xNUxpBQ8Wu0hBtbnsigr5pEWA68ETGMrGBSZWtO6T0+SUhHOWdM9Vkkl
-	uZWQ==
-X-Gm-Message-State: ALyK8tJjsxNJUlPiA6A8XjIeTfg4B3mEkSGynxa68ILksKo7UQSeMYhkMV2e8gCHQRYXLQ==
-X-Received: by 10.55.96.66 with SMTP id u63mr9749362qkb.88.1468414028305;
-	Wed, 13 Jul 2016 05:47:08 -0700 (PDT)
-Received: from lnx-dereks-laptop.star.lab
-	(c-68-34-224-206.hsd1.al.comcast.net. [68.34.224.206])
-	by smtp.gmail.com with ESMTPSA id s52sm2512139qtc.4.2016.07.13.05.47.07
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 13 Jul 2016 05:47:07 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=Unt5aCmA8EFD5661dHd2s6ebdlA/EwaKv/hLWCmsm0E=;
+	b=nEB3B9PX8h7WfoJEt/BZacqfZlM/bUWXXdjA6u7//zwU5N9chq6x5ml9qzGnCqDtrG
+	eyIF1PyXLZKmnzo58Gp/dhu/21beaFHtBrXzWofO1bZp+SjM7aC23pZLyZt0qb/yoJyd
+	GRHLNpsHZqS+dxZKXxCeG3gqZ16+NprpOhBtOtzcLzqNs0tgYkF3CORTVEPS9g25MscD
+	O6RYdn5COXJUtwA4jnLR3q2iR84wctzcJ8666qTN8FdxptUGVTSR2ah7VaAXTdV/tNDU
+	lDE1XZBS9N2WhPlPfNXsqg0UlirtlvSfDwuA8hkwjlYKJUsLijAHDbZyuLnIgcNdmmzx
+	RSvg==
+X-Gm-Message-State: ALyK8tJTn6PnUkBGdg/oR0QEwblx9KLeN7ERdN/YmJVxjjSr/b+7gGA3Uz8+xHDbhP6QbA==
+X-Received: by 10.13.218.7 with SMTP id c7mr5497234ywe.165.1468416502949;
+	Wed, 13 Jul 2016 06:28:22 -0700 (PDT)
+Received: from thuvia.localdomain (pool-71-171-10-138.ronkva.east.verizon.net.
+	[71.171.10.138])
+	by smtp.gmail.com with ESMTPSA id j7sm8349153ywb.30.2016.07.13.06.28.19
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 13 Jul 2016 06:28:21 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Jul 2016 08:46:59 -0400
-Message-Id: <1468414019-951-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-webserver][PATCH] apache2: update to version 2.4.23
+Date: Wed, 13 Jul 2016 09:28:14 -0400
+Message-Id: <1468416494-17044-1-git-send-email-philip@balister.org>
+X-Mailer: git-send-email 2.5.5
+Subject: [meta-oe][PATCH] libsodium: Update to 1.0.10.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,53 +53,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jul 2016 12:47:09 -0000
+X-List-Received-Date: Wed, 13 Jul 2016 13:28:25 -0000
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Signed-off-by: Philip Balister <philip@balister.org>
 ---
- .../apache2/{apache2-native_2.4.20.bb => apache2-native_2.4.23.bb}    | 4 ++--
- .../recipes-httpd/apache2/{apache2_2.4.20.bb => apache2_2.4.23.bb}    | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2-native_2.4.20.bb => apache2-native_2.4.23.bb} (91%)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.20.bb => apache2_2.4.23.bb} (98%)
+ meta-oe/recipes-support/libsodium/libsodium_1.0.10.bb | 10 ++++++++++
+ meta-oe/recipes-support/libsodium/libsodium_1.0.8.bb  | 11 -----------
+ 2 files changed, 10 insertions(+), 11 deletions(-)
+ create mode 100644 meta-oe/recipes-support/libsodium/libsodium_1.0.10.bb
+ delete mode 100644 meta-oe/recipes-support/libsodium/libsodium_1.0.8.bb
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.20.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
-similarity index 91%
-rename from meta-webserver/recipes-httpd/apache2/apache2-native_2.4.20.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
-index 9932d12..b227f19 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.20.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
-@@ -15,8 +15,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
- S = "${WORKDIR}/httpd-${PV}"
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
--SRC_URI[md5sum] = "3ff4f00ee051cf5d5304b47b1bc418b8"
--SRC_URI[sha256sum] = "0e76a375ed3dbac636f50ac39de966ece443751fe4d62392f9a360a19d94d0da"
-+SRC_URI[md5sum] = "04f19c60e810c028f5240a062668a688"
-+SRC_URI[sha256sum] = "0c1694b2aad7765896faf92843452ee2555b9591ae10d4f19b245f2adfe85e58"
- 
- EXTRA_OECONF = "--with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \
-                 --with-apr-util=${STAGING_BINDIR_CROSS}/apu-1-config \
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.20.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-similarity index 98%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.20.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-index ae2ec86..5bea876 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.20.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-@@ -23,8 +23,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-           "
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
--SRC_URI[md5sum] = "3ff4f00ee051cf5d5304b47b1bc418b8"
--SRC_URI[sha256sum] = "0e76a375ed3dbac636f50ac39de966ece443751fe4d62392f9a360a19d94d0da"
-+SRC_URI[md5sum] = "04f19c60e810c028f5240a062668a688"
-+SRC_URI[sha256sum] = "0c1694b2aad7765896faf92843452ee2555b9591ae10d4f19b245f2adfe85e58"
- 
- S = "${WORKDIR}/httpd-${PV}"
- 
+diff --git a/meta-oe/recipes-support/libsodium/libsodium_1.0.10.bb b/meta-oe/recipes-support/libsodium/libsodium_1.0.10.bb
+new file mode 100644
+index 0000000..370f553
+--- /dev/null
++++ b/meta-oe/recipes-support/libsodium/libsodium_1.0.10.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "The Sodium crypto library"
++HOMEPAGE = "http://libsodium.org/"
++LICENSE = "ISC"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=2278eb2755b451372dde7ffeae8cde98"
++
++SRC_URI = "https://download.libsodium.org/libsodium/releases/${BPN}-${PV}.tar.gz"
++SRC_URI[md5sum] = "ea89dcbbda0b2b6ff6a1c476231870dd"
++SRC_URI[sha256sum] = "71b786a96dd03693672b0ca3eb77f4fb08430df307051c0d45df5353d22bc4be"
++
++inherit autotools
+diff --git a/meta-oe/recipes-support/libsodium/libsodium_1.0.8.bb b/meta-oe/recipes-support/libsodium/libsodium_1.0.8.bb
+deleted file mode 100644
+index a2eef4b..0000000
+--- a/meta-oe/recipes-support/libsodium/libsodium_1.0.8.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-SUMMARY = "The Sodium crypto library"
+-HOMEPAGE = "http://libsodium.org/"
+-LICENSE = "ISC"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=092a09b78c3be486fac807435bf17b7a"
+-
+-SRC_URI = "https://download.libsodium.org/libsodium/releases/${BPN}-${PV}.tar.gz"
+-
+-SRC_URI[md5sum] = "0a66b86fd3aab3fe4c858edcd2772760"
+-SRC_URI[sha256sum] = "c0f191d2527852641e0a996b7b106d2e04cbc76ea50731b2d0babd3409301926"
+-
+-inherit autotools
 -- 
-1.9.1
+2.5.5
 
 
