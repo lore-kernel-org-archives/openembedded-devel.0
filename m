@@ -1,47 +1,46 @@
-Return-Path: <cynthia.ms.chiu@gmail.com>
-Received: from mail-oi0-f68.google.com (mail-oi0-f68.google.com
-	[209.85.218.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 881706067C
+Return-Path: <philip.balister@gmail.com>
+Received: from mail-yw0-f196.google.com (mail-yw0-f196.google.com
+	[209.85.161.196])
+	by mail.openembedded.org (Postfix) with ESMTP id CE5326067C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jul 2016 16:25:09 +0000 (UTC)
-Received: by mail-oi0-f68.google.com with SMTP id c199so4735295oig.1
+	Wed, 13 Jul 2016 17:37:40 +0000 (UTC)
+Received: by mail-yw0-f196.google.com with SMTP id l125so3547591ywb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jul 2016 09:25:11 -0700 (PDT)
+	Wed, 13 Jul 2016 10:37:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=rMV4ARJ34CfQoxaW1v6pmb+leZjvjVj+/43et64seaI=;
-	b=z3UneEX8tCS6PTspiEhQFNT/tyvFPtjZpCESUh06BHMV6RDh+R5eqvGIMCvHfFoPuF
-	cYq9ff+p0yDkQhe/4jIyqzgNGLtm28UyD4MN2BQeVFClBGT4zEt5NBIv2J403YgwOD5M
-	bZr2LoEnW5Zn6t0hkBD4Lgu5z6ThHyMtxMDoOXylAzm0eoZ8kGU0nvOvcvvmp97LLoBo
-	hYbgofcbkUK8WoflzJJWSk2q+WoVOR3/+E/3uLz1DASkQvEHA6i1uCTx6/KaI8FIz8z1
-	0nPrHv3myqQ9R1ZZ2sbowkt8Qx8HBYBecqLlpHuBjzaWyiM2R+AYDgUqbss6CcSnBLMz
-	5QyA==
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=C/dk6CGMmrHLiYcCCY3JFurJMUR5i4icKHjsVvJmVZc=;
+	b=OJGjjrDAxEBJsHoTjgtZ9LrbdRd+SoAWgu10EAVhSZQdAO5oUOuDtgtlqUtg+ZIURa
+	TMiv5hBeWNEH3oLRqLmawGa+U5/XYgBwX00jjAZktKV1xs5Ugm0nFQP5yAZkVHwd0Xba
+	1P63r3cLgClj3AdhHGoIGVn8EhJs8XbL/X37R5uH4B27Ph7CKsyB5GF9nqVHwb+7x3bJ
+	3XEE/Vg1qmXTm/r2z2/bs+SXhGKc5Ies2Olu+pfXbQBDPLk36leKeWINvjBzbCcupD/J
+	dypmHKeBNO972Pvo9F/PjM8/scrQw+/JuGHKd7sqjOYWunvPjkJck5GsAQ0/+PAqKudG
+	LEDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=rMV4ARJ34CfQoxaW1v6pmb+leZjvjVj+/43et64seaI=;
-	b=UITqRAvxR0SACJxe1sYHwUDC39Ns081rKm3yNANC4HEe4dhuA8XlvVLfLJUpLAoI7e
-	PE9FCEuFLymJjBRuSCmIUXco6KDEKIiiR9XGzv+12VtIRgKV3UbAiBhir3a44O4mmnhd
-	sNYTrt+DH/+bl/pIvpdfXKIxDr1svKf56EsXBPrnjPYiXs/W9CTBgH17uqZs7uWWnhe7
-	9JqK20PjEy8GFCQocBnI510kQkyWDTVqvzPBRotH0z88Cc3ncpumszOYtZb28e44Phi/
-	HZ8DV+XnAsXZFZphQlqAV04dGNUNxk1Q+QMSikbw66llOLFBFBhdOROCy0SYtnXJTrco
-	mD5A==
-X-Gm-Message-State: ALyK8tKCkYj4qWRgaj95Pc9MfzRIoyDpbAYocmcFDtCLQ+6D6uPIMqQCD8MpZFhFWL1mzK3+SYAlNQDjuiGpZg==
-X-Received: by 10.157.37.181 with SMTP id q50mr6067005ota.79.1468427110553;
-	Wed, 13 Jul 2016 09:25:10 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.202.105.213 with HTTP; Wed, 13 Jul 2016 09:25:10 -0700 (PDT)
-In-Reply-To: <CADNbA1rUxG5LJb5VahaWFVkvfTM99N5Ba7VrxV9e5f_LnbXx9w@mail.gmail.com>
-References: <1468421827-11561-1-git-send-email-cynthia.ms.chiu@gmail.com>
-	<CADNbA1q33HHYm-52EZjFLE1beKLusD_rHTD4HJGiLP_5mAOvxw@mail.gmail.com>
-	<CADNbA1rUxG5LJb5VahaWFVkvfTM99N5Ba7VrxV9e5f_LnbXx9w@mail.gmail.com>
-From: Cynthia Chiu <cynthia.ms.chiu@gmail.com>
-Date: Wed, 13 Jul 2016 10:25:10 -0600
-Message-ID: <CAFn+KXCXJ8_90D8KAy_kO9hFWmFs1wLVnh=WhnGk91jXuEpdyA@mail.gmail.com>
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=C/dk6CGMmrHLiYcCCY3JFurJMUR5i4icKHjsVvJmVZc=;
+	b=X/S+zn1DnulbreO+bfs8bGn4KE/MSpONCCAZYr3cfvpsn4q1ArYDjUdTr+U8WXqrbl
+	IQ/5n43v9e2OqCWC9+F/3qprT8B9MbhrCCA9ZvWR9oHTgPgDJIf1xsEDikS5VvOa4FbD
+	ZKAiL0pnV9H+/bM/q9ZT9OeQP6hNj/LkDDX/Izlhso+CGlVPqld9q0G+fsmoOO1JWPTl
+	QjZEIr/E1Q2io5iyf0ui37VFFASgK7s6zUHauHhDet3ogSZfCuINRfyXkuuHwN9vk0Ie
+	LAu8qvy54bgIw8Y4uLOIYXUSaiW/u9dxMbye9jd/PKBV5L7ittiBwFsF3du4KgRzqJFa
+	CwRA==
+X-Gm-Message-State: ALyK8tJpxkXoQRPQpH0j2QHh9h73e9bzmU0+f6FUFBVolH++3qZAB4fx3u0S9D1Hzl9m3g==
+X-Received: by 10.129.41.17 with SMTP id p17mr6626846ywp.154.1468431461344;
+	Wed, 13 Jul 2016 10:37:41 -0700 (PDT)
+Received: from thuvia.localdomain (pool-71-171-10-138.ronkva.east.verizon.net.
+	[71.171.10.138])
+	by smtp.gmail.com with ESMTPSA id z62sm558428ywb.43.2016.07.13.10.37.40
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 13 Jul 2016 10:37:40 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] CANopenNode: recipe for building the CANopenSocket tools
+Date: Wed, 13 Jul 2016 13:37:35 -0400
+Message-Id: <1468431455-13901-1-git-send-email-philip@balister.org>
+X-Mailer: git-send-email 2.5.5
+Subject: [meta-oe][PATCH] zeromq: Update to version 4.1.5.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,91 +53,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jul 2016 16:25:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 13 Jul 2016 17:37:41 -0000
 
-Thanks for your feedback! I have updated it to use gitsm.
+Added PACKAGECONFIG to use libsodium instead of builtin tweetnacl.
 
-On Wed, Jul 13, 2016 at 9:50 AM, Derek Straka <derek@asterius.io> wrote:
+Compiling with current master led to:
 
-> Have you tried using the gitsm (
->
-> https://www.yoctoproject.org/docs/2.1/bitbake-user-manual/bitbake-user-manual.html#gitsm-fetcher
-> )
-> fetcher instead of git?  I believe gitsm should do all of the submodule
-> init and update actions automatically rather than having to use a
-> do_compile_prepend.
->
-> -Derek
->
->
-> On Wed, Jul 13, 2016 at 10:57 AM, cynthiachiu <cynthia.ms.chiu@gmail.com>
-> > wrote:
-> >
-> >> Initial check-in for the CANopenSocket tools recipe.
-> >>
-> >> Signed-off-by: cynthiachiu <cynthia.ms.chiu@gmail.com>
-> >> ---
-> >>  .../canopennode/canopensocket_git.bb               | 31
-> >> ++++++++++++++++++++++
-> >>  1 file changed, 31 insertions(+)
-> >>  create mode 100644 meta-oe/recipes-extended/canopennode/
-> >> canopensocket_git.bb
-> >>
-> >> diff --git a/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
-> >> b/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
-> >> new file mode 100644
-> >> index 0000000..4506698
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
-> >> @@ -0,0 +1,31 @@
-> >> +SUMMARY = "Linux CANOpen tools"
-> >> +DESCRIPTION = "Linux CANOpen Protocol Stack Tools"
-> >> +LICENSE = "GPLv2"
-> >> +LIC_FILES_CHKSUM =
-> >> "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> >> +
-> >> +SRC_URI = "git://github.com/CANopenNode/CANopenSocket.git"
-> >> +SRCREV = "${AUTOREV}"
-> >> +
-> >> +S = "${WORKDIR}/git"
-> >> +
-> >> +do_compile_prepend() {
-> >> +    cd ${S}
-> >> +    git submodule init
-> >> +    git submodule update
-> >> +}
-> >> +
-> >> +do_compile() {
-> >> +    cd ${S}/canopend
-> >> +    make
-> >> +    cd ${S}/canopencomm
-> >> +    make
-> >> +    cd ${S}/canopencgi
-> >> +    make
-> >> +}
-> >> +
-> >> +do_install(){
-> >> +    install -d ${D}${bindir}
-> >> +    install -m 0755 ${S}/canopend/app/canopend ${D}${bindir}
-> >> +    install -m 0755 ${S}/canopencomm/canopencomm ${D}${bindir}
-> >> +    install -m 0755 ${S}/canopencgi/canopen.cgi ${D}${bindir}
-> >> +}
-> >> --
-> >> 1.9.1
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>
-> >
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+| ../zeromq-4.1.5/src/ctx.cpp:50:28: fatal error: randombytes.h: No such file or directory
+|  #   include "randombytes.h"
+|                             ^
+| compilation terminated.
+| Makefile:2573: recipe for target 'src/libzmq_la-ctx.lo' failed
+| make[1]: *** [src/libzmq_la-ctx.lo] Error 1
+| make[1]: *** Waiting for unfinished jobs....
+| In file included from ../zeromq-4.1.5/src/curve_client.cpp:41:0:
+| ../zeromq-4.1.5/src/curve_client.hpp:39:31: fatal error: tweetnacl_base.h: No such file or directory
+|  #   include "tweetnacl_base.h"
+|                                ^
+| compilation terminated.
+
+Using external libsodium works around this. The default for PACKAGECONFIG is
+set to use external libsodium so the recipe builds.
+
+Signed-off-by: Philip Balister <philip@balister.org>
+---
+ .../zeromq/{zeromq_4.1.4.bb => zeromq_4.1.5.bb}                | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-connectivity/zeromq/{zeromq_4.1.4.bb => zeromq_4.1.5.bb} (69%)
+
+diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.4.bb b/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.5.bb
+similarity index 69%
+rename from meta-oe/recipes-connectivity/zeromq/zeromq_4.1.4.bb
+rename to meta-oe/recipes-connectivity/zeromq/zeromq_4.1.5.bb
+index 2090152..3fa5724 100644
+--- a/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.4.bb
++++ b/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.5.bb
+@@ -2,13 +2,15 @@ DESCRIPTION = "ZeroMQ looks like an embeddable networking library but acts like
+ HOMEPAGE = "http://www.zeromq.org"
+ LICENSE = "LGPLv3+"
+ LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=d5311495d952062e0e4fbba39cbf3de1"
+-DEPENDS = "libsodium"
+ 
+-SRC_URI = "http://download.zeromq.org/zeromq-${PV}.tar.gz \
++PACKAGECONFIG ??= "libsodium"
++PACKAGECONFIG[libsodium] = "--with-libsodium, --without-libsodium, libsodium"
++
++SRC_URI = "http://github.com/zeromq/zeromq4-1/releases/download/v${PV}/zeromq-${PV}.tar.gz \
+            file://run-ptest \
+            "
+-SRC_URI[md5sum] = "a611ecc93fffeb6d058c0e6edf4ad4fb"
+-SRC_URI[sha256sum] = "e99f44fde25c2e4cb84ce440f87ca7d3fe3271c2b8cfbc67d55e4de25e6fe378"
++SRC_URI[md5sum] = "e7adf4b7dbae09b28cfd10d26cd67fac"
++SRC_URI[sha256sum] = "04aac57f081ffa3a2ee5ed04887be9e205df3a7ddade0027460b8042432bdbcf"
+ 
+ S = "${WORKDIR}/zeromq-${PV}"
+ 
+-- 
+2.5.5
+
 
