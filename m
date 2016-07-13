@@ -1,36 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-yw0-f196.google.com (mail-yw0-f196.google.com
-	[209.85.161.196])
-	by mail.openembedded.org (Postfix) with ESMTP id B80A06067C
+Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
+	[209.85.161.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 7498F6FEFA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jul 2016 02:36:16 +0000 (UTC)
-Received: by mail-yw0-f196.google.com with SMTP id c13so2269588ywh.2
+	Wed, 13 Jul 2016 02:37:44 +0000 (UTC)
+Received: by mail-yw0-f193.google.com with SMTP id c13so2271268ywh.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jul 2016 19:36:17 -0700 (PDT)
+	Tue, 12 Jul 2016 19:37:45 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=wOvIRy1KjooxOD/yeOvvPzU/enUT+Z3+0n5GKRDuqIw=;
-	b=T34OZkDChngQZi1AyCBOhm2ZJv2B/BNi2PoFILRILAH5BLkLRi+rNTXk30a0UGtWre
-	UT+9jrL9szvVNrbVQkSZMpChrVEK7K5HgQHztl7PC7wQCdByU3CJkwSdyDPT7sbJPaEg
-	GexDEEhvP8L0ZSFHgAGb9h/7d+sue/SIFTuwykaisAD4CYmu29jXx/wDJp3nq2DssutN
-	ayLLDvFXM4PcKMXD9bWlH1Wbg5lqHStI7dQBXQkXE0w1vZn6MblPX7yjGc2yjdhwo5JF
-	/CNw2+NXAVxqgdWbTseOAMZpf4fZguw9iTMcpnw6gWNRTAcm+3cEGlSYev/mNRuUM72l
-	a+MQ==
-X-Gm-Message-State: ALyK8tI377NEseUokGQbZIEbGS1tXDX3tWImss7IS0lGHHdOPoCtI7MzeNJpd5r1TTop7w==
-X-Received: by 10.129.75.6 with SMTP id y6mr193879ywa.156.1468377376862;
-	Tue, 12 Jul 2016 19:36:16 -0700 (PDT)
+	bh=MwEG4iGAQ8AKs+SIMMZ0dPE9vhzrfEEEN9rKr2QsJv8=;
+	b=OZxND4fsy3Y71JWSHyNvjiwY65Bfyi4t+pZNrtgmsIgekb8UvMjEj1qu92clHBWUsA
+	Wj5B6y3txPhLQaxwRxyJfImdO3Aqp7bIyvoORXOIm6yXsvFdd9Cc7hiAdkfW4VQLPg7T
+	Zu1uMsw85zpEWWJeDGZ6Mx5avLDP8JmgdpY4g2riN6T0aHeYFURSHNitp7b6AW+caIKy
+	e8LD4BSjJlUeJSOLC6t/D59djVpxUn0AbhjcKMu47ZGnbWlFSekOmMlgLNK5x2lDST1f
+	6cgkT8DAyEyohfa1OQpT1vOlkctCftUb39cWeG4GTxYmzjSTJSMO49Krobd7ow14gUdi
+	lIXw==
+X-Gm-Message-State: ALyK8tKfRu1B9FU+WTc/toB1bmU0V6wGO+xqWbmvf96EOx1C+BY6smnhElDjp2ANnsIULQ==
+X-Received: by 10.129.78.147 with SMTP id c141mr4000135ywb.57.1468377464535;
+	Tue, 12 Jul 2016 19:37:44 -0700 (PDT)
 Received: from lnx-dereks-laptop.star.lab
 	(ip-64-134-183-30.public.wayport.net. [64.134.183.30])
-	by smtp.gmail.com with ESMTPSA id s78sm920415ywg.26.2016.07.12.19.36.15
+	by smtp.gmail.com with ESMTPSA id
+	h62sm6738582ywd.46.2016.07.12.19.37.43
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 12 Jul 2016 19:36:16 -0700 (PDT)
+	Tue, 12 Jul 2016 19:37:43 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Jul 2016 22:36:07 -0400
-Message-Id: <1468377367-5826-1-git-send-email-derek@asterius.io>
+Date: Tue, 12 Jul 2016 22:37:35 -0400
+Message-Id: <1468377456-5886-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-python][PATCH] python-decorator: add package RDEPENDS
+Subject: [meta-python][PATCH 1/2] python-cffi: update to version 1.7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,35 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jul 2016 02:36:18 -0000
+X-List-Received-Date: Wed, 13 Jul 2016 02:37:44 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-decorator.inc       | 4 ++++
- meta-python/recipes-devtools/python/python-decorator_4.0.10.bb | 2 ++
- 2 files changed, 6 insertions(+)
+ .../python/{python-cffi_1.6.0.bb => python-cffi_1.7.0.bb}             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cffi_1.6.0.bb => python-cffi_1.7.0.bb} (63%)
 
-diff --git a/meta-python/recipes-devtools/python/python-decorator.inc b/meta-python/recipes-devtools/python/python-decorator.inc
-index c1fdfac..9264cef 100644
---- a/meta-python/recipes-devtools/python/python-decorator.inc
-+++ b/meta-python/recipes-devtools/python/python-decorator.inc
-@@ -13,3 +13,7 @@ SRC_URI[md5sum] = "434b57fdc3230c500716c5aff8896100"
- SRC_URI[sha256sum] = "9c6e98edcb33499881b86ede07d9968c81ab7c769e28e9af24075f0a5379f070"
+diff --git a/meta-python/recipes-devtools/python/python-cffi_1.6.0.bb b/meta-python/recipes-devtools/python/python-cffi_1.7.0.bb
+similarity index 63%
+rename from meta-python/recipes-devtools/python/python-cffi_1.6.0.bb
+rename to meta-python/recipes-devtools/python/python-cffi_1.7.0.bb
+index 7a02514..6f4d77a 100644
+--- a/meta-python/recipes-devtools/python/python-cffi_1.6.0.bb
++++ b/meta-python/recipes-devtools/python/python-cffi_1.7.0.bb
+@@ -3,8 +3,8 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
+ DEPENDS = "libffi python-pycparser"
  
- inherit pypi
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-stringold \
-+    "
-diff --git a/meta-python/recipes-devtools/python/python-decorator_4.0.10.bb b/meta-python/recipes-devtools/python/python-decorator_4.0.10.bb
-index f262168..2a2b455 100644
---- a/meta-python/recipes-devtools/python/python-decorator_4.0.10.bb
-+++ b/meta-python/recipes-devtools/python/python-decorator_4.0.10.bb
-@@ -1,2 +1,4 @@
- inherit setuptools
- require python-decorator.inc
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-contextlib"
+-SRC_URI[md5sum] = "2fae9160991afefb20ff0fbde3b14faf"
+-SRC_URI[sha256sum] = "a7f75c4ef2362c0a0e54657add0a6c509fecbfa3b3807bc0925f5cb1c9f927db"
++SRC_URI[md5sum] = "34122a545060cee58bab88feab57006d"
++SRC_URI[sha256sum] = "6ed5dd6afd8361f34819c68aaebf9e8fc12b5a5893f91f50c9e50c8886bb60df"
+ 
+ inherit pypi setuptools
+ 
 -- 
 1.9.1
 
