@@ -1,43 +1,32 @@
-Return-Path: <prvs=300251fa7c=michael.davis@essvote.com>
-Received: from mail1.essvote.com (mail1.essvote.com [66.37.226.19])
-	by mail.openembedded.org (Postfix) with ESMTP id CC4806AC4B
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.analogue-micro.com (mail.analogue-micro.com
+	[217.144.149.242])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A44D6067C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jul 2016 13:29:42 +0000 (UTC)
-X-AuditID: 0a000213-f79066d0000013b8-0f-5786424506b9
-Received: from ESS-EX01.essvote.corp.local (Unknown_Domain [172.16.110.40])
-	by mail1.essvote.com (Symantec Messaging Gateway) with SMTP id
-	3D.67.05048.54246875; Wed, 13 Jul 2016 08:29:42 -0500 (CDT)
-Received: from ESS-EX01.essvote.corp.local ([::1]) by
-	ESS-EX01.essvote.corp.local ([::1]) with mapi id 14.03.0301.000;
-	Wed, 13 Jul 2016 08:29:21 -0500
-From: "Davis, Michael" <michael.davis@essvote.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] nodejs: newer npm?
-Thread-Index: AQHR3NmxfJRA5kqUrEazkUEVribB2aAWVlKAgABY6wA=
-Date: Wed, 13 Jul 2016 13:29:20 +0000
-Message-ID: <2056819.lo3LDqAOXZ@localhost.localdomain>
+	Wed, 13 Jul 2016 14:25:08 +0000 (UTC)
+Received: by mail.analogue-micro.com (Postfix, from userid 999)
+	id 334C168A01A; Wed, 13 Jul 2016 15:25:07 +0100 (BST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	loki.analogue-micro-ltd.com
+X-Spam-Level: **
+X-Spam-Status: No, score=2.5 required=5.0 tests=ALL_TRUSTED,BAYES_50,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
+	by mail.analogue-micro.com (Postfix) with ESMTP id 38E0568A019;
+	Wed, 13 Jul 2016 15:24:53 +0100 (BST)
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by zeus.mlbassoc.com (Postfix) with ESMTP id CAA8C6740256;
+	Wed, 13 Jul 2016 16:24:52 +0200 (CEST)
+To: openembedded-devel@lists.openembedded.org
 References: <5785F022.8030404@mlbassoc.com> <5785F799.4000804@mlbassoc.com>
-In-Reply-To: <5785F799.4000804@mlbassoc.com>
-Reply-To: "Davis, Michael" <michael.davis@essvote.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.1.158]
+	<2056819.lo3LDqAOXZ@localhost.localdomain>
+From: Gary Thomas <gary@mlbassoc.com>
+Message-ID: <57864F34.2010704@mlbassoc.com>
+Date: Wed, 13 Jul 2016 16:24:52 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.8.0
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrEIsWRmVeSWpSXmKPExsWyRiBPQ9fNqS3c4MsabotLvRPYLS4eXsrs
-	wORxbuMKRo+vmyexBDBFcdskJZaUBWem5+nbJXBn7DlhUDCPo+LFLcsGxhNsXYycHBICJhI3
-	7y6AssUkLtxbD2YLCZxglPjyRqeLkQvInsUocfTDDHaQBJuAkcS565sYQWwRgViJeZtmMoHY
-	zALKEt/2XAVrFhZQkWhY+50JokZVYt6LrcwQtpXE17snwOIsQPHXz7YC1XNw8AqYSXz6lQux
-	11tix9wPjCBhTgEdiYn/hSHCZhJtD1+ygNiMQGd+P7UGaqu4xK0n85kgzheQWLLnPDOELSrx
-	8vE/VpAxEgJyEt+/eEKU60gs2P0JbCkz0DHrP6tDhLUlli18DdbJKyAocXLmE5YJjBKzkCyY
-	haR7FkL3LCTds5B0L2BkXcUomJuYmWOol1pcXJZfkqqXnJ+7iREYc1wMTMI7GOdMsT3EKMDB
-	qMTDGxDVGi7EmlhWXJl7iFGag0VJnFdFSClcSCA9sSQ1OzW1ILUovqg0J7X4ECMTB+chRgkO
-	LimR4tS8lNSixNKSjHhQFMcXA+NYqoFx2dqk5Z/P7tbNvnNXTm1PhXxUaI+gsNFlpxTp1BkB
-	ZR92rLLd8o/dfm76nLvngo+9XDTTz0T/2LLz904pS4dtUppQkhUnuWE2L7fTh+SirR7/InzP
-	Cth+2uV2Vdie5V2EZ6XA409M0u1fHHslH5RLB87mZXVZpF/yUZ8xtHkLk96sjUcjXyYpsRRn
-	JBpqMRcVJwIAzrd7OLUCAAA=
-Cc: Gary Thomas <gary@mlbassoc.com>
+In-Reply-To: <2056819.lo3LDqAOXZ@localhost.localdomain>
 Subject: Re: nodejs: newer npm?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -51,35 +40,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jul 2016 13:29:43 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <00DEDFFA03EDCE438AC12E12F60697AB@essvote.com>
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 13 Jul 2016 14:25:09 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I am currently using angular from a different meta layer.
-https://github.com/imyller/meta-nodejs
-It maintains newer versions of nodejs. =20
-It might be something you want to try.
+On 2016-07-13 15:29, Davis, Michael wrote:
+> I am currently using angular from a different meta layer.
+> https://github.com/imyller/meta-nodejs
+> It maintains newer versions of nodejs.
+> It might be something you want to try.
+
+I have tried this and yes, the versions are newer, but my simple example
+still does not work :-(
+
+What target/platform are you using?
+Any idea why there is a separate layer for something that is in a
+more mainstream (meta-oe) layer for the same things?
+
+>
+>
+> On Wednesday, July 13, 2016 10:11:05 AM Gary Thomas wrote:
+>> On 2016-07-13 09:39, Gary Thomas wrote:
+>>> The current (at least 4.4.4) nodejs recipe also creates nodejs-npm
+>>> which is npm version 2.15.1.  I'm trying to run angularjs that needs
+>>> npm >= 3.3.x.  I've not yet tried the update to 4.4.5, so if this
+>>> fixes the issue just let me know.
+>>>
+>>> What needs to be done to get a newer npm?
+>>>
+>>> BTW, the current one segfaults when trying to install the
+>>> attached package file.
+>>
+>> I have now tried nodejs-4.4.5 which has npm-2.15.5  It no longer
+>> segfaults on the install step, but it doesn't really work :-(
+>> Any access just returns 'Cannot GET /'
+>>
+>> Anyone have suggestions on how I might debug this?  It's a known
+>> working (simple) application I got from
+>> https://angular.io/docs/ts/latest/quickstart.html
 
 
-On Wednesday, July 13, 2016 10:11:05 AM Gary Thomas wrote:
-> On 2016-07-13 09:39, Gary Thomas wrote:
-> > The current (at least 4.4.4) nodejs recipe also creates nodejs-npm
-> > which is npm version 2.15.1.  I'm trying to run angularjs that needs
-> > npm >=3D 3.3.x.  I've not yet tried the update to 4.4.5, so if this
-> > fixes the issue just let me know.
-> >=20
-> > What needs to be done to get a newer npm?
-> >=20
-> > BTW, the current one segfaults when trying to install the
-> > attached package file.
->=20
-> I have now tried nodejs-4.4.5 which has npm-2.15.5  It no longer
-> segfaults on the install step, but it doesn't really work :-(
-> Any access just returns 'Cannot GET /'
->=20
-> Anyone have suggestions on how I might debug this?  It's a known
-> working (simple) application I got from
-> https://angular.io/docs/ts/latest/quickstart.html=
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
