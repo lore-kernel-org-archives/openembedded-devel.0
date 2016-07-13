@@ -1,46 +1,44 @@
-Return-Path: <philip.balister@gmail.com>
-Received: from mail-yw0-f196.google.com (mail-yw0-f196.google.com
-	[209.85.161.196])
-	by mail.openembedded.org (Postfix) with ESMTP id CE5326067C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 5FC9B6067C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jul 2016 17:37:40 +0000 (UTC)
-Received: by mail-yw0-f196.google.com with SMTP id l125so3547591ywb.1
+	Wed, 13 Jul 2016 17:53:54 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id u25so1981238qtb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jul 2016 10:37:41 -0700 (PDT)
+	Wed, 13 Jul 2016 10:53:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=C/dk6CGMmrHLiYcCCY3JFurJMUR5i4icKHjsVvJmVZc=;
-	b=OJGjjrDAxEBJsHoTjgtZ9LrbdRd+SoAWgu10EAVhSZQdAO5oUOuDtgtlqUtg+ZIURa
-	TMiv5hBeWNEH3oLRqLmawGa+U5/XYgBwX00jjAZktKV1xs5Ugm0nFQP5yAZkVHwd0Xba
-	1P63r3cLgClj3AdhHGoIGVn8EhJs8XbL/X37R5uH4B27Ph7CKsyB5GF9nqVHwb+7x3bJ
-	3XEE/Vg1qmXTm/r2z2/bs+SXhGKc5Ies2Olu+pfXbQBDPLk36leKeWINvjBzbCcupD/J
-	dypmHKeBNO972Pvo9F/PjM8/scrQw+/JuGHKd7sqjOYWunvPjkJck5GsAQ0/+PAqKudG
-	LEDw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=tkLL7zcNZBBab0PAUJqfcnBiSSpbDPXMF88pCNEnL+0=;
+	b=dui3VkoB6NOzJN5/pqF8oTuZpMGSkG+7TB6PGX0kuyNZNTGjYF1loNs+DBq+HKRVfD
+	NQficHRvaVmw2vAt7iaw66R7wsduWeCg4N67rymoSiuUzrWq3ux555/uxtpA0PGpA63W
+	1FUbSyOkASF9mPFvsNYmzOx42RF/3t2Wd/OWNXBPrfG5yQ0LXDj8J5jvb0/LbrjNFp+I
+	4ErK8BQMEZhkMafntNNv2SxCSxRqJh1yavQSuEcZFV3D+t7Af1jcobnV/K8HP2kzWRLN
+	+KC7Ik53r+C0BNPYXUJb4JeXc0S2aeVLNc1FOPvlgTZciACATjjCLXWduUry9DVQBurE
+	TL+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=C/dk6CGMmrHLiYcCCY3JFurJMUR5i4icKHjsVvJmVZc=;
-	b=X/S+zn1DnulbreO+bfs8bGn4KE/MSpONCCAZYr3cfvpsn4q1ArYDjUdTr+U8WXqrbl
-	IQ/5n43v9e2OqCWC9+F/3qprT8B9MbhrCCA9ZvWR9oHTgPgDJIf1xsEDikS5VvOa4FbD
-	ZKAiL0pnV9H+/bM/q9ZT9OeQP6hNj/LkDDX/Izlhso+CGlVPqld9q0G+fsmoOO1JWPTl
-	QjZEIr/E1Q2io5iyf0ui37VFFASgK7s6zUHauHhDet3ogSZfCuINRfyXkuuHwN9vk0Ie
-	LAu8qvy54bgIw8Y4uLOIYXUSaiW/u9dxMbye9jd/PKBV5L7ittiBwFsF3du4KgRzqJFa
-	CwRA==
-X-Gm-Message-State: ALyK8tJpxkXoQRPQpH0j2QHh9h73e9bzmU0+f6FUFBVolH++3qZAB4fx3u0S9D1Hzl9m3g==
-X-Received: by 10.129.41.17 with SMTP id p17mr6626846ywp.154.1468431461344;
-	Wed, 13 Jul 2016 10:37:41 -0700 (PDT)
-Received: from thuvia.localdomain (pool-71-171-10-138.ronkva.east.verizon.net.
-	[71.171.10.138])
-	by smtp.gmail.com with ESMTPSA id z62sm558428ywb.43.2016.07.13.10.37.40
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 13 Jul 2016 10:37:40 -0700 (PDT)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Jul 2016 13:37:35 -0400
-Message-Id: <1468431455-13901-1-git-send-email-philip@balister.org>
-X-Mailer: git-send-email 2.5.5
-Subject: [meta-oe][PATCH] zeromq: Update to version 4.1.5.
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=tkLL7zcNZBBab0PAUJqfcnBiSSpbDPXMF88pCNEnL+0=;
+	b=meZc09oq0eQsucIgMaO3ZBarbdaa9l1P2xBH48Vp4jpm1g5ZDY6wKB5wakWFbUEHgW
+	2BOqfIxuHptnzJljNh1yXszQdPbkoYW5TX17+lstbV+29bxFxQz+QIWXCWIXVO2RxmD5
+	GYKohsrbsZ6AZBO0q9Yxj77fN/GIn1hNDGdDARDGnfPcBgQrGMTJFp8b1JwHYu8dJH42
+	Vy7zjl1A/kaWolG7qpWRFzTj8oXOuA0nPIVwf+s/EnMq+tqvS2VGmneow4BYuFP5Wfyv
+	VVEoi486PE2acNcOsRxrbgowayE/mbQobKcToSWPLyzNicbkoVkduFPg1LEiUGv01mA7
+	MN7Q==
+X-Gm-Message-State: ALyK8tLSx+MEdt4TLE4kK/DfGvZPLUsr4OXKgfQFmeuXLi4sUIV/FY/0ZLs5g/wTKTAJP4U5HEb17YkF8MVCIA==
+X-Received: by 10.200.33.172 with SMTP id 41mr14005424qty.26.1468432435301;
+	Wed, 13 Jul 2016 10:53:55 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.55.214.83 with HTTP; Wed, 13 Jul 2016 10:53:25 -0700 (PDT)
+In-Reply-To: <1468416494-17044-1-git-send-email-philip@balister.org>
+References: <1468416494-17044-1-git-send-email-philip@balister.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 13 Jul 2016 10:53:25 -0700
+Message-ID: <CAMKF1sqK0p0Cmoa+bTVLq-TEDD+=zQQ8O0RzLgqr1sdzp2Q1+A@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libsodium: Update to 1.0.10.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,62 +51,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jul 2016 17:37:41 -0000
+X-List-Received-Date: Wed, 13 Jul 2016 17:53:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Added PACKAGECONFIG to use libsodium instead of builtin tweetnacl.
+On Wed, Jul 13, 2016 at 6:28 AM, Philip Balister <philip@balister.org> wrote:
+> Signed-off-by: Philip Balister <philip@balister.org>
+> ---
+>  meta-oe/recipes-support/libsodium/libsodium_1.0.10.bb | 10 ++++++++++
+>  meta-oe/recipes-support/libsodium/libsodium_1.0.8.bb  | 11 -----------
+>  2 files changed, 10 insertions(+), 11 deletions(-)
+>  create mode 100644 meta-oe/recipes-support/libsodium/libsodium_1.0.10.bb
+>  delete mode 100644 meta-oe/recipes-support/libsodium/libsodium_1.0.8.bb
+>
 
-Compiling with current master led to:
+you should use -M when generating these patches or add
 
-| ../zeromq-4.1.5/src/ctx.cpp:50:28: fatal error: randombytes.h: No such file or directory
-|  #   include "randombytes.h"
-|                             ^
-| compilation terminated.
-| Makefile:2573: recipe for target 'src/libzmq_la-ctx.lo' failed
-| make[1]: *** [src/libzmq_la-ctx.lo] Error 1
-| make[1]: *** Waiting for unfinished jobs....
-| In file included from ../zeromq-4.1.5/src/curve_client.cpp:41:0:
-| ../zeromq-4.1.5/src/curve_client.hpp:39:31: fatal error: tweetnacl_base.h: No such file or directory
-|  #   include "tweetnacl_base.h"
-|                                ^
-| compilation terminated.
+[diff]
+        renames = copies
 
-Using external libsodium works around this. The default for PACKAGECONFIG is
-set to use external libsodium so the recipe builds.
+in your ~/.gitconfig file.
 
-Signed-off-by: Philip Balister <philip@balister.org>
----
- .../zeromq/{zeromq_4.1.4.bb => zeromq_4.1.5.bb}                | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-connectivity/zeromq/{zeromq_4.1.4.bb => zeromq_4.1.5.bb} (69%)
+It shows that md5 for LICENSE file has changed and it would be better
+to document what changed in the commit message.
 
-diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.4.bb b/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.5.bb
-similarity index 69%
-rename from meta-oe/recipes-connectivity/zeromq/zeromq_4.1.4.bb
-rename to meta-oe/recipes-connectivity/zeromq/zeromq_4.1.5.bb
-index 2090152..3fa5724 100644
---- a/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.4.bb
-+++ b/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.5.bb
-@@ -2,13 +2,15 @@ DESCRIPTION = "ZeroMQ looks like an embeddable networking library but acts like
- HOMEPAGE = "http://www.zeromq.org"
- LICENSE = "LGPLv3+"
- LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=d5311495d952062e0e4fbba39cbf3de1"
--DEPENDS = "libsodium"
- 
--SRC_URI = "http://download.zeromq.org/zeromq-${PV}.tar.gz \
-+PACKAGECONFIG ??= "libsodium"
-+PACKAGECONFIG[libsodium] = "--with-libsodium, --without-libsodium, libsodium"
-+
-+SRC_URI = "http://github.com/zeromq/zeromq4-1/releases/download/v${PV}/zeromq-${PV}.tar.gz \
-            file://run-ptest \
-            "
--SRC_URI[md5sum] = "a611ecc93fffeb6d058c0e6edf4ad4fb"
--SRC_URI[sha256sum] = "e99f44fde25c2e4cb84ce440f87ca7d3fe3271c2b8cfbc67d55e4de25e6fe378"
-+SRC_URI[md5sum] = "e7adf4b7dbae09b28cfd10d26cd67fac"
-+SRC_URI[sha256sum] = "04aac57f081ffa3a2ee5ed04887be9e205df3a7ddade0027460b8042432bdbcf"
- 
- S = "${WORKDIR}/zeromq-${PV}"
- 
--- 
-2.5.5
-
+> diff --git a/meta-oe/recipes-support/libsodium/libsodium_1.0.10.bb b/meta-oe/recipes-support/libsodium/libsodium_1.0.10.bb
+> new file mode 100644
+> index 0000000..370f553
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/libsodium/libsodium_1.0.10.bb
+> @@ -0,0 +1,10 @@
+> +SUMMARY = "The Sodium crypto library"
+> +HOMEPAGE = "http://libsodium.org/"
+> +LICENSE = "ISC"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=2278eb2755b451372dde7ffeae8cde98"
+> +
+> +SRC_URI = "https://download.libsodium.org/libsodium/releases/${BPN}-${PV}.tar.gz"
+> +SRC_URI[md5sum] = "ea89dcbbda0b2b6ff6a1c476231870dd"
+> +SRC_URI[sha256sum] = "71b786a96dd03693672b0ca3eb77f4fb08430df307051c0d45df5353d22bc4be"
+> +
+> +inherit autotools
+> diff --git a/meta-oe/recipes-support/libsodium/libsodium_1.0.8.bb b/meta-oe/recipes-support/libsodium/libsodium_1.0.8.bb
+> deleted file mode 100644
+> index a2eef4b..0000000
+> --- a/meta-oe/recipes-support/libsodium/libsodium_1.0.8.bb
+> +++ /dev/null
+> @@ -1,11 +0,0 @@
+> -SUMMARY = "The Sodium crypto library"
+> -HOMEPAGE = "http://libsodium.org/"
+> -LICENSE = "ISC"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=092a09b78c3be486fac807435bf17b7a"
+> -
+> -SRC_URI = "https://download.libsodium.org/libsodium/releases/${BPN}-${PV}.tar.gz"
+> -
+> -SRC_URI[md5sum] = "0a66b86fd3aab3fe4c858edcd2772760"
+> -SRC_URI[sha256sum] = "c0f191d2527852641e0a996b7b106d2e04cbc76ea50731b2d0babd3409301926"
+> -
+> -inherit autotools
+> --
+> 2.5.5
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
