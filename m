@@ -1,53 +1,46 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 660E36E667
+Return-Path: <prvs=80039eedd9=michael.davis@essvote.com>
+Received: from m2.essvote.com (m2.essvote.com [66.37.226.14])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E8146AC4B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jul 2016 14:33:00 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id g202so4906053pfb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jul 2016 07:33:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=u7NEoeSpR86qdWN8fNmwK44yTYmWtoYaA85tksQj3yA=;
-	b=r8V/r9UcV3tugcY3zLTlyc25LKZZtWTuOt9LyEIAQ9VP0hr3Of+Tp/aF9qpLyIK1ts
-	WaQOiqY4zX6V24LaitMGDbtKytsF7OL+jooEwzGg2KUPaWOW3KqVr0z1ElAZOeLMjuWN
-	3mBqm048ZZ0L2oUGGeK9BXOASiP0TQrmG7iRHxDTYGP2TWWgE/e3zjkPMcF3W3mKvAwo
-	XdJmXJoyHnY5B/8uSarUsNTb+EaT+aBoJX7zld5ty6W/s/vLA6e9ugAn8CcSo997bczi
-	8eOyKeJ/l3Vq4H+DklbFQknWcr2SzumJj8Ea90qNSXJIN2hrhFM7s1bJmd+8GHLlORl/
-	8Chg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=u7NEoeSpR86qdWN8fNmwK44yTYmWtoYaA85tksQj3yA=;
-	b=OJSi6PHVUsNPJzskdBC4GRlHR+FW7mkjWiURLZ+XjnIQazzhZ2cckhjAMmn5NNrQFk
-	lclNHQ8Bj3xIIF6Bt4Pd3fgLpj2kAxyj3GvS/nxKGlx1pS0i9C4C6K3RAmUECYKZrjqE
-	+vhd8n/EbTgRLby4elHjKRiT0IZkn8fOsyxP5LxLgN5lGivxn7qUK4lT787THE2WY05x
-	Yu91mN7BauE1VvxoFskC8rCl98dkvYV6eY4RhITR5savULNwR9SH85A/QPl2aUIIXq1V
-	J2mF/FEJnNy/bQGos7PVl5qoHTL3cO91iA2QGkxil8bb13geUenxHhOI12k0nLv+ipYg
-	z0ww==
-X-Gm-Message-State: ALyK8tILW4jpLh3ep/gCVhZ92pRqyIXuDUacTQyrumIR38cZMndUeWNgYfMJaJZUQKQG/g==
-X-Received: by 10.98.90.193 with SMTP id o184mr13015694pfb.101.1468506779893; 
-	Thu, 14 Jul 2016 07:32:59 -0700 (PDT)
-Received: from ?IPv6:2601:202:4001:9ea0:ab:9240:fd9e:fe24?
-	([2601:202:4001:9ea0:ab:9240:fd9e:fe24])
-	by smtp.googlemail.com with ESMTPSA id
-	h189sm4533722pfc.52.2016.07.14.07.32.58
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 14 Jul 2016 07:32:58 -0700 (PDT)
-To: openembedded-devel@lists.openembedded.org
-References: <1464599876-108961-1-git-send-email-catalin.enache@windriver.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <5787A291.80603@gmail.com>
-Date: Thu, 14 Jul 2016 07:32:49 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
+	Thu, 14 Jul 2016 14:55:06 +0000 (UTC)
+X-AuditID: 0a00029b-f79dd6d00000338a-df-5787a7c91fda
+Received: from ESS-EX01.essvote.corp.local (Unknown_Domain [172.16.110.40])
+	by m2.essvote.com (Symantec Messaging Gateway) with SMTP id
+	B8.C2.13194.9C7A7875; Thu, 14 Jul 2016 09:55:06 -0500 (CDT)
+Received: from ESS-EX01.essvote.corp.local ([::1]) by
+	ESS-EX01.essvote.corp.local ([::1]) with mapi id 14.03.0301.000;
+	Thu, 14 Jul 2016 09:55:05 -0500
+From: "Davis, Michael" <michael.davis@essvote.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] nodejs: newer npm?
+Thread-Index: AQHR3NmxfJRA5kqUrEazkUEVribB2aAWVlKAgABY6wCAAXgVgIAAMjQA
+Date: Thu, 14 Jul 2016 14:55:05 +0000
+Message-ID: <3133651.lLCjRHXOa2@localhost.localdomain>
+References: <5785F022.8030404@mlbassoc.com>
+	<2056819.lo3LDqAOXZ@localhost.localdomain>
+	<57877DAB.9090906@mlbassoc.com>
+In-Reply-To: <57877DAB.9090906@mlbassoc.com>
+Reply-To: "Davis, Michael" <michael.davis@essvote.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.1.1.158]
 MIME-Version: 1.0
-In-Reply-To: <1464599876-108961-1-git-send-email-catalin.enache@windriver.com>
-Subject: Re: [PATCH] squid: CVE-2016-4554
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrKIsWRmVeSWpSXmKPExsWyRiBPQ/fU8vZwg+VneC0u9U5gt7h4eCmz
+	A5PHuY0rGD2+bp7EEsAUxW2TlFhSFpyZnqdvl8CdMX3XH9aCfq6KpotXWBsYmzi6GDk5JARM
+	JGYfW8cMYYtJXLi3nq2LkYtDSOAoo8SN/08ZQRJCArMYJd4/tAWx2QSMJM5d3wQWFxGIlZi3
+	aSYTiM0soCzxbc9VNhBbWEBFomHtdyaIGlWJeS+2MkPYbhKr900Gq2EBiu/4soYVxOYVMJNY
+	8f4ZK8SuComlq+eygNicAjoSP/81M0HEzSTaHr4EizMCHfr91BqoveISt57MZ4J4QEBiyZ7z
+	UM+ISrx8/A9oJgeQLSfx/YsnRLmOxILdn9ggbCuJX00TmCFsbYllC18zQ5wjKHFy5hOWCYwS
+	s5BsmIWkfRaS9llI2mchaV/AyLqKkS/XSC+1uLgsvyRVLzk/dxMjMPK4GJhm72DcM8HhEKMA
+	B6MSD++F1W3hQqyJZcWVuYcYpTlYlMR5VYSUwoUE0hNLUrNTUwtSi+KLSnNSiw8xMnFwHmKU
+	4OCSEilOzUtJLUosLcmIB8VyfDEwmqUaGDffT/yy68b5BHkR2YfWYep3L72UX/QxlOmU+Y7G
+	74x+yYf/a/9bHcLhdzh2XSFX6uwGn5yzijGXTxjPvfuz/wuTjM0L3uzAla5xsnp83b3WzLX8
+	F6O5hTb+3H7CQuPT+smeWr8329l37or3bOWw4j749k5ck2JVeGr91GSjE3znuNetMZ+wToml
+	OCPRUIu5qDgRAAOehjm4AgAA
+Cc: Gary Thomas <gary@mlbassoc.com>
+Subject: Re: nodejs: newer npm?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,79 +53,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jul 2016 14:33:01 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 14 Jul 2016 14:55:09 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <04E7547F6DFDC445BE877F9CBC154B8D@essvote.com>
+Content-Transfer-Encoding: quoted-printable
 
-ping
+Angular JS 1.5
 
-On 05/30/2016 02:17 AM, Catalin Enache wrote:
-> mime_header.cc in Squid before 3.5.18 allows remote attackers
-> to bypass intended same-origin restrictions and possibly
-> conduct cache-poisoning attacks via a crated HTTP Host header,
-> aka a header smuggling issue.
-> 
-> http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-4554
-> 
-> Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
-> ---
->  .../squid/files/CVE-2016-4554.patch                | 35 ++++++++++++++++++++++
->  .../recipes-daemons/squid/squid_3.5.7.bb           |  1 +
->  2 files changed, 36 insertions(+)
->  create mode 100644 meta-networking/recipes-daemons/squid/files/CVE-2016-4554.patch
-> 
-> diff --git a/meta-networking/recipes-daemons/squid/files/CVE-2016-4554.patch b/meta-networking/recipes-daemons/squid/files/CVE-2016-4554.patch
-> new file mode 100644
-> index 0000000..c02b67e
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/squid/files/CVE-2016-4554.patch
-> @@ -0,0 +1,35 @@
-> +From a5d62fe9d7326b8aef2ebcb700d4a228c8b2681a Mon Sep 17 00:00:00 2001
-> +From: Catalin Enache <catalin.enache@windriver.com>
-> +Date: Thu, 26 May 2016 10:31:48 +0300
-> +Subject: [PATCH] Require exact match in Host header name lookup
-> +
-> +Upstream-Status: Backport
-> +CVE: CVE-2016-4554
-> +
-> +Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
-> +---
-> + src/mime_header.cc | 6 +++---
-> + 1 file changed, 3 insertions(+), 3 deletions(-)
-> +
-> +diff --git a/src/mime_header.cc b/src/mime_header.cc
-> +index 4190b37..db18764 100644
-> +--- a/src/mime_header.cc
-> ++++ b/src/mime_header.cc
-> +@@ -36,11 +36,11 @@ mime_get_header_field(const char *mime, const char *name, const char *prefix)
-> + 
-> +     debugs(25, 5, "mime_get_header: looking for '" << name << "'");
-> + 
-> +-    for (p = mime; *p; p += strcspn(p, "\n\r")) {
-> +-        if (strcmp(p, "\r\n\r\n") == 0 || strcmp(p, "\n\n") == 0)
-> ++    for (p = mime; *p; p += strcspn(p, "\n")) {
-> ++        if (strcmp(p, "\n\r\n") == 0 || strcmp(p, "\n\n") == 0)
-> +             return NULL;
-> + 
-> +-        while (xisspace(*p))
-> ++        if (*p == '\n')
-> +             ++p;
-> + 
-> +         if (strncasecmp(p, name, namelen))
-> +-- 
-> +2.7.4
-> +
-> diff --git a/meta-networking/recipes-daemons/squid/squid_3.5.7.bb b/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
-> index d0e1b16..7fe41ee 100644
-> --- a/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
-> +++ b/meta-networking/recipes-daemons/squid/squid_3.5.7.bb
-> @@ -30,6 +30,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
->             file://run-ptest \
->             file://volatiles.03_squid \
->             file://CVE-2016-3947.patch \
-> +           file://CVE-2016-4554.patch \
->  "
->  
->  LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
-> 
+
+
+On Thursday, July 14, 2016 01:55:23 PM Gary Thomas wrote:
+> On 2016-07-13 15:29, Davis, Michael wrote:
+> > I am currently using angular from a different meta layer.
+> > https://github.com/imyller/meta-nodejs
+> > It maintains newer versions of nodejs.
+> > It might be something you want to try.
+>=20
+> Are you using AngularJS-1 or AngularJS-2?
+>=20
+> > On Wednesday, July 13, 2016 10:11:05 AM Gary Thomas wrote:
+> >> On 2016-07-13 09:39, Gary Thomas wrote:
+> >>> The current (at least 4.4.4) nodejs recipe also creates nodejs-npm
+> >>> which is npm version 2.15.1.  I'm trying to run angularjs that needs
+> >>> npm >=3D 3.3.x.  I've not yet tried the update to 4.4.5, so if this
+> >>> fixes the issue just let me know.
+> >>>=20
+> >>> What needs to be done to get a newer npm?
+> >>>=20
+> >>> BTW, the current one segfaults when trying to install the
+> >>> attached package file.
+> >>=20
+> >> I have now tried nodejs-4.4.5 which has npm-2.15.5  It no longer
+> >> segfaults on the install step, but it doesn't really work :-(
+> >> Any access just returns 'Cannot GET /'
+> >>=20
+> >> Anyone have suggestions on how I might debug this?  It's a known
+> >> working (simple) application I got from
+> >> https://angular.io/docs/ts/latest/quickstart.html=
 
