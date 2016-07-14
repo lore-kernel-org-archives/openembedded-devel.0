@@ -1,45 +1,45 @@
-Return-Path: <cynthia.ms.chiu@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id AA0416AC4B
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id A40E86AC4B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jul 2016 15:08:40 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id i6so4586942pfe.0
+	Thu, 14 Jul 2016 16:22:19 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id i5so9597937wmg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jul 2016 08:08:41 -0700 (PDT)
+	Thu, 14 Jul 2016 09:22:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=nYZFM/Wmd0E8jIB1J0KZrwRtB0EkAQWcfZBzhGLQLjI=;
-	b=PsMLDSRvgT77SxWQRhDbw0AsgvEVHDbix4uWhhmyMT2Bh5Rn2yMZuJXsVLvbFiKyAC
-	omI9W3cSU1tN5yCnLKZuEEUOtizxaluTkzViA++2RDpQhp/yKg7ioOxXy2M+Z0x3H0sw
-	DdFCtI7g5ivvwSqz8ghvxUujhv88LfKriRSBdYLXNn9UvpzqJNr0nH7A/+qtjzDUWxgc
-	XQOzKr7D7KBJbFoMJ35+341xr/XcgRHEZ5WYqS28yxx4LidhIMEKWSvdXAWEwlrfjZxM
-	vcLX8Lc7tzgJoD5JOpcsP//p2WL0LDNXm73hmT00pn9h1oLZMEo5jmCsF8EA4l8dsOXs
-	+T6w==
+	bh=vRumtWKkUd6vCkRIeMnqtQfOgtwnndY1WZC+naCJCSQ=;
+	b=Eb82UFZgtiXdQrP4lq/Lxl0d0C5OFQvyUacUA4/L6SqJHdo73bnU5DMR1HsYfQr/Ym
+	ThmT6wnsJKveQdbSKKjx8/d5estAlzwhB9lKNu0GNA5VoOLHfnDvHC9U5R8jYo59BTaG
+	U8CqSrfIh09kJ6ab5MQPvqE9oBajcXGAV2Qz+BSEDaWmcg7KXwx+WOttYXHXC80uqrJd
+	BLRMNb4NaAgkY9R5VFd9g6a/Qqs7gkwtgJ+Q4nno0r48nm24ayM4wnQx1r+v97uwg7EI
+	SY27TClI9u4MXUPz4LIc/rFHZeW1asFobvotdCuA04ejOZ2uKRpv049MWHo1LYshmFYW
+	EXLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=nYZFM/Wmd0E8jIB1J0KZrwRtB0EkAQWcfZBzhGLQLjI=;
-	b=l4fW7Wk7FPADDKfhO1G518HjvQyOnEt1ME99hweWpx77YUgnvBV5g/53IL2QdKNdSS
-	ejOHP3HyR4otiwpbyN2t2KeC/iTts8plQ9HEyQMEUGz0nI9pduy8KVNTNi7sFXMxcaoQ
-	aVSidvE1+mLPbLeDHQuEJbUX6We/nXr1Zr7dS/liOZe5GVOS/49yeNg5g1Ftrg1Oh8uy
-	O6MzT3vIjqPjzkQ2MIFm+o062RqpCALripx8qGPdB2hat45aflP/kw/lLepCROe4Xy7b
-	tAfzKrgXrz76bY+Ryn+sgYJbdYz0zWZaNephbPxxsKqKRC0B/xiGXt5j6WoVGsieSfIl
-	ODMA==
-X-Gm-Message-State: ALyK8tL5UTH7vzEPyNXzztGD265Pq5EF2zld5Y1Ka8n91LHejp80cIP0s6Qf0TlJD6u2bg==
-X-Received: by 10.98.104.71 with SMTP id d68mr2591897pfc.163.1468508921321;
-	Thu, 14 Jul 2016 08:08:41 -0700 (PDT)
-Received: from cynthia-VirtualBox.int.pason.com ([69.58.16.38])
-	by smtp.gmail.com with ESMTPSA id
-	y184sm6370083pfg.94.2016.07.14.08.08.40
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 14 Jul 2016 08:08:40 -0700 (PDT)
-From: cynthiachiu <cynthia.ms.chiu@gmail.com>
+	bh=vRumtWKkUd6vCkRIeMnqtQfOgtwnndY1WZC+naCJCSQ=;
+	b=U1z5k5utpPH5aU7Uu8ZLjwFaljQGVRuQC/klKZEDX4kq8WHXdGOnvhSYvL8lgdAhs1
+	J1Y/U0o1Ths8hGajhlKSd4PeKuV31H30eSe5UrPmZbUBrTerKRNqkSRIPwuXvQaUIto2
+	MNIodnjYgJwjVqKQ1aavdfRgb3iurcBFwfUvEDfT3esg4xjWCj1uSUOCJbK1xRTa0aDi
+	gUJyjadjkGcl9oziIgGCk0wb0JbvUDSIsJeLQsXkUVNkVuo6pH3GRpmx4rkQj7IlvcQ6
+	z2atkzZVhqJC00vNpcEwokUtNYFIG95NtXFnTvNT7Ku1hmSG5O/ccVrucYWnh7FpAP3y
+	QhVA==
+X-Gm-Message-State: ALyK8tL4YH8xC+mW6GzFNqAnmWgnJudlFv6rR4X05utFbN4AOp+X3/P0zw5zu713Klqb6g==
+X-Received: by 10.28.134.203 with SMTP id i194mr17033166wmd.22.1468513340274; 
+	Thu, 14 Jul 2016 09:22:20 -0700 (PDT)
+Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
+	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
+	d64sm4712888wmc.22.2016.07.14.09.22.19
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 14 Jul 2016 09:22:19 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Jul 2016 09:08:34 -0600
-Message-Id: <1468508914-17420-1-git-send-email-cynthia.ms.chiu@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH v2] CANopenNode: recipe for building the CANopenSocket tools
+Date: Thu, 14 Jul 2016 18:22:19 +0200
+Message-Id: <20160714162219.13172-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.9.0
+Subject: [meta-oe][PATCH] lirc: inherit python3native instead of pythonnative
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,54 +52,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jul 2016 15:08:44 -0000
+X-List-Received-Date: Thu, 14 Jul 2016 16:22:23 -0000
 
-Initial check-in for the CANopenSocket tools recipe.
+* when native python 2.7 is used, do_configure fails with:
+  checking whether sysroots/x86_64-linux/usr/bin/python-native/python version is >= 3.1... no
+  configure: error: Python interpreter is too old
+  WARNING: exit code 1 from a shell command.
 
-Signed-off-by: cynthiachiu <cynthia.ms.chiu@gmail.com>
-
-Including a specific revision for the recipe.
-
-Using gitsm.
-
-Signed-off-by: cynthiachiu <cynthia.ms.chiu@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../canopennode/canopensocket_git.bb               | 25 ++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-oe/recipes-extended/canopennode/canopensocket_git.bb
+ meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/canopennode/canopensocket_git.bb b/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
-new file mode 100644
-index 0000000..7c58a26
---- /dev/null
-+++ b/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "Linux CANOpen tools"
-+DESCRIPTION = "Linux CANOpen Protocol Stack Tools"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+SRC_URI = "gitsm://github.com/CANopenNode/CANopenSocket.git"
-+SRCREV = "7777653da3a630b0dc02b3fa5ff029d9bc57cd26"
-+
-+S = "${WORKDIR}/git"
-+
-+do_compile() {
-+    cd ${S}/canopend
-+    make
-+    cd ${S}/canopencomm
-+    make
-+    cd ${S}/canopencgi
-+    make
-+}
-+
-+do_install(){
-+    install -d ${D}${bindir}
-+    install -m 0755 ${S}/canopend/app/canopend ${D}${bindir}
-+    install -m 0755 ${S}/canopencomm/canopencomm ${D}${bindir}
-+    install -m 0755 ${S}/canopencgi/canopen.cgi ${D}${bindir}
-+}
+diff --git a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb b/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
+index 900b68d..7162fcd 100644
+--- a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
++++ b/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
+@@ -17,7 +17,7 @@ SYSTEMD_PACKAGES = "lirc"
+ SYSTEMD_SERVICE_${PN} = "lircd.service lircmd.service"
+ SYSTEMD_AUTO_ENABLE_lirc = "enable"
+ 
+-inherit autotools pkgconfig systemd pythonnative
++inherit autotools pkgconfig systemd python3native
+ 
+ PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--without-systemdsystemunitdir,systemd"
+ PACKAGECONFIG[x11] = "--with-x,--with-x=no,libx11,"
 -- 
-1.9.1
+2.9.0
 
 
