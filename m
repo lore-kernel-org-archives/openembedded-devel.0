@@ -1,45 +1,26 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id A40E86AC4B
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with SMTP id 07BE36AC4B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jul 2016 16:22:19 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id i5so9597937wmg.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jul 2016 09:22:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=vRumtWKkUd6vCkRIeMnqtQfOgtwnndY1WZC+naCJCSQ=;
-	b=Eb82UFZgtiXdQrP4lq/Lxl0d0C5OFQvyUacUA4/L6SqJHdo73bnU5DMR1HsYfQr/Ym
-	ThmT6wnsJKveQdbSKKjx8/d5estAlzwhB9lKNu0GNA5VoOLHfnDvHC9U5R8jYo59BTaG
-	U8CqSrfIh09kJ6ab5MQPvqE9oBajcXGAV2Qz+BSEDaWmcg7KXwx+WOttYXHXC80uqrJd
-	BLRMNb4NaAgkY9R5VFd9g6a/Qqs7gkwtgJ+Q4nno0r48nm24ayM4wnQx1r+v97uwg7EI
-	SY27TClI9u4MXUPz4LIc/rFHZeW1asFobvotdCuA04ejOZ2uKRpv049MWHo1LYshmFYW
-	EXLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=vRumtWKkUd6vCkRIeMnqtQfOgtwnndY1WZC+naCJCSQ=;
-	b=U1z5k5utpPH5aU7Uu8ZLjwFaljQGVRuQC/klKZEDX4kq8WHXdGOnvhSYvL8lgdAhs1
-	J1Y/U0o1Ths8hGajhlKSd4PeKuV31H30eSe5UrPmZbUBrTerKRNqkSRIPwuXvQaUIto2
-	MNIodnjYgJwjVqKQ1aavdfRgb3iurcBFwfUvEDfT3esg4xjWCj1uSUOCJbK1xRTa0aDi
-	gUJyjadjkGcl9oziIgGCk0wb0JbvUDSIsJeLQsXkUVNkVuo6pH3GRpmx4rkQj7IlvcQ6
-	z2atkzZVhqJC00vNpcEwokUtNYFIG95NtXFnTvNT7Ku1hmSG5O/ccVrucYWnh7FpAP3y
-	QhVA==
-X-Gm-Message-State: ALyK8tL4YH8xC+mW6GzFNqAnmWgnJudlFv6rR4X05utFbN4AOp+X3/P0zw5zu713Klqb6g==
-X-Received: by 10.28.134.203 with SMTP id i194mr17033166wmd.22.1468513340274; 
-	Thu, 14 Jul 2016 09:22:20 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	d64sm4712888wmc.22.2016.07.14.09.22.19
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 14 Jul 2016 09:22:19 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Jul 2016 18:22:19 +0200
-Message-Id: <20160714162219.13172-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.9.0
-Subject: [meta-oe][PATCH] lirc: inherit python3native instead of pythonnative
+	Thu, 14 Jul 2016 17:03:41 +0000 (UTC)
+Received: (qmail 18965 invoked by uid 1003); 14 Jul 2016 17:03:41 -0000
+Received: from unknown (HELO ?192.168.11.142?)
+	(philip@opensdr.com@108.44.115.86)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	14 Jul 2016 17:03:40 -0000
+To: "openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>,
+	Yocto Project <yocto@yoctoproject.org>
+From: Philip Balister <philip@balister.org>
+Message-ID: <4037473c-25e3-015d-25fb-be5cd3ece4bc@balister.org>
+Date: Thu, 14 Jul 2016 13:03:39 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.1.1
+MIME-Version: 1.0
+Subject: Save the dates (OEDEM and Yocto Project Developer Day)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,32 +33,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jul 2016 16:22:23 -0000
+X-List-Received-Date: Thu, 14 Jul 2016 17:03:44 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-* when native python 2.7 is used, do_configure fails with:
-  checking whether sysroots/x86_64-linux/usr/bin/python-native/python version is >= 3.1... no
-  configure: error: Python interpreter is too old
-  WARNING: exit code 1 from a shell command.
+ELCE is in Berlin this year on Oct 11-13 (Tuesday-Thursday). After
+conversations with the Yocto Project, we've worked out that there will
+be a Yocto Project developer day on Monday, Oct 10 and OEDEM
+(OpenEmbedded developer meeting) on Friday, Oct 14.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The Yocto Project developer day is basically a training class with
+beginner and advanced topics.
 
-diff --git a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb b/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
-index 900b68d..7162fcd 100644
---- a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
-+++ b/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
-@@ -17,7 +17,7 @@ SYSTEMD_PACKAGES = "lirc"
- SYSTEMD_SERVICE_${PN} = "lircd.service lircmd.service"
- SYSTEMD_AUTO_ENABLE_lirc = "enable"
- 
--inherit autotools pkgconfig systemd pythonnative
-+inherit autotools pkgconfig systemd python3native
- 
- PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,--without-systemdsystemunitdir,systemd"
- PACKAGECONFIG[x11] = "--with-x,--with-x=no,libx11,"
--- 
-2.9.0
+The OpenEmbedded developer meeting is a chance to talk with developers
+about various project topics. We'll work out the agenda closer to ELCE.
 
+Philip
 
