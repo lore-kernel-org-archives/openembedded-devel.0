@@ -1,48 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 69DEC6067C
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.analogue-micro.com (mail.analogue-micro.com
+	[217.144.149.242])
+	by mail.openembedded.org (Postfix) with ESMTP id 50AA9606A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jul 2016 22:42:14 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id q11so2232993qtb.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jul 2016 15:42:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc; bh=opegLGalBzOJdYI4ITUgskqPg/dawwi3K6Td7ULkSY8=;
-	b=IqG6saGsmtARGA6a/M9r0M85n4aj3ggwQfJdosUM9KV4ieIcZPuxlI2uMNfkfl6RwO
-	ObAqjbAXfICRhQLniifbHcZRixvj8aiABmUziV2yQy8W4Kwuh9VkYtpKzRsvPC7TYSwA
-	d1iV4m0fsWKs7xRTytUDZW/p6/oXXlXiFl4ewVluF9jfLbTiYjlEMr07aRwHfXRYkHTe
-	2iJ5k1POG/abwEhlq6JQwObnla2smG7YXhI8fKrPjhlg/+VmP9oaRwRHoKaTgdfJzFKn
-	zUb0MR/RlztsIvhctAatOr6smoYkjSTPVwKnbVV48D0qcFjNsfBWGc2b9rldFhJKtVDd
-	881g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:date
-	:message-id:subject:from:to:cc;
-	bh=opegLGalBzOJdYI4ITUgskqPg/dawwi3K6Td7ULkSY8=;
-	b=TGjzfBL3SCSxxSh+6P7c19iXMcw9/FSgvsS4HHZBtlW5764muNKaTgwRceUyJ3thG6
-	4m0tINWsqwrj24U9J9M3q8oVFrRGYfHdJY7YMOSzKSeOWROS1YNVB1aAZBEhoJI0nx0i
-	DUX3eHCkXVNM7Zl8NLnX8Dqi0V2LgllbWElB8rxFerWrJ2b5K0UzRcsbih9rCdI9i1r4
-	cKzt8AhKbwT++3KfuL8UahYr2KimZ78nDhYlcitxye20rbg35p7MrcaFwBZpiooqkESE
-	CGQ4juJU5/MWE7k6duQ/zU+efEfYGrxCjqU21BmILs4BSbo4xtmLYnqjJZ2j3zhVucuh
-	S8QQ==
-X-Gm-Message-State: ALyK8tIgU2yyrf6/Sf1FCHNRsJMjOKVgx8prqUu5Lb7P5jcjScdCaERSO5bIoDA/Wso/Rc/gN72YJ+R1F3UB7Q==
-MIME-Version: 1.0
-X-Received: by 10.200.45.181 with SMTP id p50mr16219818qta.31.1468449735463;
-	Wed, 13 Jul 2016 15:42:15 -0700 (PDT)
-Received: by 10.55.214.83 with HTTP; Wed, 13 Jul 2016 15:42:15 -0700 (PDT)
-Received: by 10.55.214.83 with HTTP; Wed, 13 Jul 2016 15:42:15 -0700 (PDT)
-In-Reply-To: <3494682.OJBsBs5TlE@peggleto-mobl.ger.corp.intel.com>
-References: <1467995452-30013-1-git-send-email-joe_macdonald@mentor.com>
-	<20160712135845.pva3tpjpq34yxwes@jama>
-	<3494682.OJBsBs5TlE@peggleto-mobl.ger.corp.intel.com>
-Date: Wed, 13 Jul 2016 15:42:15 -0700
-Message-ID: <CAMKF1spL-iak6j8be4_N7U+pWOnbnyCVUEK=xVudcyeCS-9ixg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 14 Jul 2016 11:55:26 +0000 (UTC)
+Received: by mail.analogue-micro.com (Postfix, from userid 999)
+	id 37E8C68A019; Thu, 14 Jul 2016 12:55:26 +0100 (BST)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	loki.analogue-micro-ltd.com
+X-Spam-Level: **
+X-Spam-Status: No, score=2.5 required=5.0 tests=ALL_TRUSTED,BAYES_50,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
+	by mail.analogue-micro.com (Postfix) with ESMTP id A3D7F68A019;
+	Thu, 14 Jul 2016 12:55:23 +0100 (BST)
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by zeus.mlbassoc.com (Postfix) with ESMTP id 5A2286740256;
+	Thu, 14 Jul 2016 13:55:23 +0200 (CEST)
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] plymouth: remove virtual prefix for RPROVIDES
+References: <5785F022.8030404@mlbassoc.com> <5785F799.4000804@mlbassoc.com>
+	<2056819.lo3LDqAOXZ@localhost.localdomain>
+From: Gary Thomas <gary@mlbassoc.com>
+Message-ID: <57877DAB.9090906@mlbassoc.com>
+Date: Thu, 14 Jul 2016 13:55:23 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.8.0
+MIME-Version: 1.0
+In-Reply-To: <2056819.lo3LDqAOXZ@localhost.localdomain>
+Subject: Re: nodejs: newer npm?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,63 +40,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jul 2016 22:42:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Jul 2016 11:55:28 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Infact it is a direct replacement
+On 2016-07-13 15:29, Davis, Michael wrote:
+> I am currently using angular from a different meta layer.
+> https://github.com/imyller/meta-nodejs
+> It maintains newer versions of nodejs.
+> It might be something you want to try.
+>
 
-On Jul 13, 2016 3:32 PM, "Paul Eggleton" <paul.eggleton@linux.intel.com>
-wrote:
+Are you using AngularJS-1 or AngularJS-2?
 
-> On Tue, 12 Jul 2016 15:58:45 Martin Jansa wrote:
-> > On Fri, Jul 08, 2016 at 12:30:52PM -0400, Joe MacDonald wrote:
-> > > The 'virtual' namespace is only intended to be used for build-time
-> > > dependencies, not in the runtime package namespace.
-> > >
-> > > Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-> > > ---
-> > >
-> > >  meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >
-> > > diff --git a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
-> > > b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb index
-> de23dcd..597d8cd
-> > > 100644
-> > > --- a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
-> > > +++ b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
-> > > @@ -13,7 +13,7 @@ LIC_FILES_CHKSUM =
-> > > "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f">
-> > >  DEPENDS = "libcap libpng cairo dbus udev"
-> > >  PROVIDES = "virtual/psplash"
-> > >
-> > > -RPROVIDES_${PN} = "virtual/psplash virtual/psplash-support"
-> > > +RPROVIDES_${PN} += "psplash psplash-support"
-> >
-> > This causes new NOTE in every build:
-> > NOTE: multiple providers are available for runtime psplash (psplash,
-> > plymouth) NOTE: consider defining a PREFERRED_RPROVIDER entry to match
-> > psplash
-> >
-> > Do you want to update
-> > meta/conf/distro/include/default-providers.inc
-> > to resolve this first?
->
-> Is this even the right thing to do? Is plymouth a direct drop-in
-> replacement
-> for psplash as this implies or (as I suspect) are there subtle differences?
->
-> Cheers,
-> Paul
->
-> --
->
-> Paul Eggleton
-> Intel Open Source Technology Centre
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+> On Wednesday, July 13, 2016 10:11:05 AM Gary Thomas wrote:
+>> On 2016-07-13 09:39, Gary Thomas wrote:
+>>> The current (at least 4.4.4) nodejs recipe also creates nodejs-npm
+>>> which is npm version 2.15.1.  I'm trying to run angularjs that needs
+>>> npm >= 3.3.x.  I've not yet tried the update to 4.4.5, so if this
+>>> fixes the issue just let me know.
+>>>
+>>> What needs to be done to get a newer npm?
+>>>
+>>> BTW, the current one segfaults when trying to install the
+>>> attached package file.
+>>
+>> I have now tried nodejs-4.4.5 which has npm-2.15.5  It no longer
+>> segfaults on the install step, but it doesn't really work :-(
+>> Any access just returns 'Cannot GET /'
+>>
+>> Anyone have suggestions on how I might debug this?  It's a known
+>> working (simple) application I got from
+>> https://angular.io/docs/ts/latest/quickstart.html
+
+
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
