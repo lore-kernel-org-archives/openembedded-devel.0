@@ -1,48 +1,29 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-it0-f51.google.com (mail-it0-f51.google.com
-	[209.85.214.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 5A0596E667
+Return-Path: <pascal.bach@siemens.com>
+Received: from lizzard.sbs.de (lizzard.sbs.de [194.138.37.39])
+	by mail.openembedded.org (Postfix) with ESMTP id 10DBC7317F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jul 2016 14:34:51 +0000 (UTC)
-Received: by mail-it0-f51.google.com with SMTP id u186so20338316ita.0
+	Fri, 15 Jul 2016 14:35:04 +0000 (UTC)
+Received: from mail2.sbs.de (mail2.sbs.de [192.129.41.66])
+	by lizzard.sbs.de (8.15.2/8.15.2) with ESMTPS id u6FEZ2kt004201
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jul 2016 07:34:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to; bh=LDrOc2SmA1UuQAKijukch2iZMI3m/arbdgeBoSM91pw=;
-	b=Jp+Nje0sC+1DZ7ffi67R+zpFOgWqUnkWjsdZ8YB0+G/hWML8og8ACI1lw8rprbVYlS
-	Kmztfg89wDnNalm5cwXqDxtra7gLeIkO19fjiMJrCgpfZ8tSNBdIwDj5HXdbJszEvlv3
-	lbyyFqNwEp4h8i7RV3kEd3uqUNotT4vK0ZXB+0AAmShGM5vBRmEJAiNzheSrCq8Efdv3
-	BtQixHY4C7dsC9G3X/b/fR4QaM9pt1J7nLzmOFUDbgzNdYG6MZYRsZDwampxK4Z7RnMQ
-	jGeoipdGNNevoswRIBALfUOBM48kt6Rh85dr2hoTIdqNo0LlE15Gys7f/0g5T7NfOkN+
-	KKig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to;
-	bh=LDrOc2SmA1UuQAKijukch2iZMI3m/arbdgeBoSM91pw=;
-	b=LKx37Hd8HRzuuwQkfGjmwkzDzyNdQHL/9d8K+Az0SZGugVEulWAZuWo/vf1Q5NZBwk
-	52JCqIaDAzgK964A+YUZ4z6RP17hqXJU7rQTsiNO3A/FXvknmOBLSjD8OaTB49df+R92
-	Y2hjvzDZHtYdR4hSFxCKTcqm+/+zSsfolEg+yIM5Y+6eZYsBpLKy8agMyHyZKABFfC9U
-	VZaEHqqu6XCatfX3L6G/HCwoGss4GxrnatfztkaioILJXbcAOZ1aL+3uG//bV6qjt4qa
-	FemAfVKImKN8OKd9O1DIYqME/XQSm7Aclo2wisiS6g7g84HBHoj+g54S5xYvkhKTrclo
-	tMNg==
-X-Gm-Message-State: ALyK8tJRdrRUPrhK1goJEUjSk7HhEX1SPtqNa5twwyiNGXHpBCVsKPvSlXReZgKa5wcGkbqsmcT3NNT7eW7wXw==
-X-Received: by 10.36.142.129 with SMTP id h123mr22718961ite.66.1468593292456; 
-	Fri, 15 Jul 2016 07:34:52 -0700 (PDT)
+	Fri, 15 Jul 2016 16:35:02 +0200
+Received: from [139.16.77.104] (MD1FZU9C.ww002.siemens.net [139.16.77.104])
+	by mail2.sbs.de (8.15.2/8.15.2) with ESMTPS id u6FEZ2BO026310
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Jul 2016 16:35:02 +0200
+To: openembedded-devel@lists.openembedded.org
+References: <1467976306-4442-1-git-send-email-pascal.bach@siemens.com>
+	<20160712135247.w2bcuhgvtlvyr3hk@jama>
+From: Pascal Bach <pascal.bach@siemens.com>
+Message-ID: <052d4b80-f033-ade9-9479-e1258594010c@siemens.com>
+Date: Fri, 15 Jul 2016 16:34:59 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
+	Thunderbird/45.1.1
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.79.21.197 with HTTP; Fri, 15 Jul 2016 07:34:33 -0700 (PDT)
-In-Reply-To: <1468587261-18160-2-git-send-email-git@andred.net>
-References: <1468587261-18160-1-git-send-email-git@andred.net>
-	<1468587261-18160-2-git-send-email-git@andred.net>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Fri, 15 Jul 2016 07:34:33 -0700
-X-Google-Sender-Auth: eohD2BxzU_Ntu9qZ75ZBk4Rqa8w
-Message-ID: <CABcZANna5ip=FF0NknkneG6pj6w3SvKyrRdP+zmK+vMJgGbnxA@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-networking][PATCH 2/2] meta-networking: override SECURITY_CFLAGS for c-ares
+In-Reply-To: <20160712135247.w2bcuhgvtlvyr3hk@jama>
+Subject: Re: [meta-oe][PATCH] poco: update to 1.7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,32 +36,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jul 2016 14:34:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 15 Jul 2016 14:35:05 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-On Fri, Jul 15, 2016 at 5:54 AM, <git@andred.net> wrote:
 
-> From: Andr=C3=A9 Draszik <adraszik@tycoint.com>
+On 12.07.2016 15:52, Martin Jansa wrote:
+> On Fri, Jul 08, 2016 at 01:11:46PM +0200, Pascal Bach wrote:
+>> Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+>> ---
+>>  meta-oe/recipes-support/poco/{poco_1.7.1.bb => poco_1.7.3.bb} | 4 ++--
+>>  1 file changed, 2 insertions(+), 2 deletions(-)
+>>  rename meta-oe/recipes-support/poco/{poco_1.7.1.bb => poco_1.7.3.bb} (96%)
+>>
+>> diff --git a/meta-oe/recipes-support/poco/poco_1.7.1.bb b/meta-oe/recipes-support/poco/poco_1.7.3.bb
+>> similarity index 96%
+>> rename from meta-oe/recipes-support/poco/poco_1.7.1.bb
+>> rename to meta-oe/recipes-support/poco/poco_1.7.3.bb
+>> index 135d2aa..75e0997 100644
+>> --- a/meta-oe/recipes-support/poco/poco_1.7.1.bb
+>> +++ b/meta-oe/recipes-support/poco/poco_1.7.3.bb
+>> @@ -17,8 +17,8 @@ SRC_URI = " \
+>>      file://run-ptest \
+>>     "
+>>  
+>> -SRC_URI[md5sum] = "a4b755d47303b20a0e2586f281d05a36"
+>> -SRC_URI[sha256sum] = "6dbbc2018912ad9af6af96f605933ed91354a1e7423e5dbd04d8e9a2b2d15c05"
+>> +SRC_URI[md5sum] = "6b979d7d9c1751c2e063338cb5ea8977"
+>> +SRC_URI[sha256sum] = "af75f279c9eac35b39fc998d8d20dc45d5bef91eb75851ff99d948ca128c7740"
+> Don't use github archives which don't have stable checksums, this fails
+> again the same as I've reported when you sent this change last time.
 >
-> c-ares doesn't build if the distro has enabled usage of the
-> security_flags.inc file as it is picky about what is placed
-> into CPPFLAGS and CFLAGS. It complains and errors out if any
-> preprocessor options appear in CFLAGS.
->
-> Fix this by providing an additional include file that is
-> require'd from conf/layer.conf.
->
-> Signed-off-by: Andr=C3=A9 Draszik <adraszik@tycoint.com>
->
-
-This commit message is a little misleading. The fact that you added a .inc
-isn't what fixed the problem, the move of the defines from CFLAGS to
-CPPFLAGS was.
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Sorry I completely missed that. I will submit a revised patch. Thanks for the hint.
 
