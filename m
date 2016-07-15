@@ -1,20 +1,21 @@
-Return-Path: <jussi.kukkonen@intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id A8EEE73166
+Return-Path: <sjl@vctlabs.com>
+X-Greylist: delayed 552 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 15 Jul 2016 07:56:05 UTC
+Received: from dent.vctlabs.com (net-cf9a4187.iis.impulse.net [207.154.65.135])
+	by mail.openembedded.org (Postfix) with ESMTP id 74A0F60722
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jul 2016 07:05:01 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga102.fm.intel.com with ESMTP; 15 Jul 2016 00:05:00 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.28,367,1464678000"; d="scan'208";a="1017338564"
-Received: from theory.fi.intel.com ([10.237.72.196])
-	by orsmga002.jf.intel.com with ESMTP; 15 Jul 2016 00:04:52 -0700
-From: Jussi Kukkonen <jussi.kukkonen@intel.com>
+	Fri, 15 Jul 2016 07:56:05 +0000 (UTC)
+Received: by dent.vctlabs.com (Postfix, from userid 1000)
+	id 7567B2806CA; Fri, 15 Jul 2016 00:46:54 -0700 (PDT)
+Date: Fri, 15 Jul 2016 00:46:54 -0700
+From: "S. Lockwood-Childs" <sjl@vctlabs.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Jul 2016 10:04:48 +0300
-Message-Id: <1468566288-23566-1-git-send-email-jussi.kukkonen@intel.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-oe][PATCHv2] augeas: Move from oe-core
+Message-ID: <20160715074654.GY7939@vctlabs.com>
+Mail-Followup-To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
+	openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: [meta-oe][PATCH] uw-imap: use cross-tools to create static library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,170 +28,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jul 2016 07:05:01 -0000
+X-List-Received-Date: Fri, 15 Jul 2016 07:56:08 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-augeas is being removed from oe-core as nothing there uses or tests
-it. Move the recipe to meta-oe as there's still one dependency in
-meta-openembedded (netcf in meta-networking).
+Build was failing with complaint:
 
-Also upgrade to 1.5.0: no recipe changes needed.
+  ../c-client/c-client.a: error adding symbols: Archive has no index; run
+  ranlib to add one
 
-Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
+Turns out build was using host tools for 'ar' and 'ranlib'. Solved by
+overriding ARRC ('ar' with -rc) and RANLIB on the make command-line,
+as was already being done for CC.
+
+Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
 ---
+ meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Changes since v1:
-* Move to meta-oe instead of meta-networking
-
-
- meta-oe/recipes-support/augeas/augeas.inc          | 30 ++++++++++++++++++++++
- ...need_charset_alias-when-building-for-musl.patch | 30 ++++++++++++++++++++++
- .../augeas/add-missing-argz-conditional.patch      | 20 +++++++++++++++
- .../augeas/augeas/sepbuildfix.patch                | 22 ++++++++++++++++
- meta-oe/recipes-support/augeas/augeas_1.5.0.bb     |  4 +++
- 5 files changed, 106 insertions(+)
- create mode 100644 meta-oe/recipes-support/augeas/augeas.inc
- create mode 100644 meta-oe/recipes-support/augeas/augeas/0001-Unset-need_charset_alias-when-building-for-musl.patch
- create mode 100644 meta-oe/recipes-support/augeas/augeas/add-missing-argz-conditional.patch
- create mode 100644 meta-oe/recipes-support/augeas/augeas/sepbuildfix.patch
- create mode 100644 meta-oe/recipes-support/augeas/augeas_1.5.0.bb
-
-diff --git a/meta-oe/recipes-support/augeas/augeas.inc b/meta-oe/recipes-support/augeas/augeas.inc
-new file mode 100644
-index 0000000..23d12ca
---- /dev/null
-+++ b/meta-oe/recipes-support/augeas/augeas.inc
-@@ -0,0 +1,30 @@
-+SUMMARY = "Augeas configuration API"
-+HOMEPAGE = "http://augeas.net/"
-+BUGTRACKER = "https://fedorahosted.org/augeas/report/1"
-+
-+LICENSE = "LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=bbb461211a33b134d42ed5ee802b37ff"
-+
-+SRC_URI = "http://download.augeas.net/${BP}.tar.gz \
-+           file://add-missing-argz-conditional.patch \
-+           file://sepbuildfix.patch \
-+           file://0001-Unset-need_charset_alias-when-building-for-musl.patch \
-+          "
-+
-+DEPENDS = "readline libxml2"
-+
-+inherit autotools pkgconfig
-+
-+PACKAGES =+ "${PN}-lenses lib${BPN}"
-+
-+FILES_${PN}-lenses = "${datadir}/augeas/lenses"
-+FILES_lib${BPN} = "${libdir}/lib*${SOLIBS}"
-+
-+RDEPENDS_lib${BPN} += "${PN}-lenses"
-+RRECOMMENDS_lib${BPN} += "${PN}"
-+
-+LEAD_SONAME = "libaugeas.so"
-+
-+do_install_append() {
-+	rm -fr ${D}${datadir}/vim
-+}
-diff --git a/meta-oe/recipes-support/augeas/augeas/0001-Unset-need_charset_alias-when-building-for-musl.patch b/meta-oe/recipes-support/augeas/augeas/0001-Unset-need_charset_alias-when-building-for-musl.patch
-new file mode 100644
-index 0000000..9a19876
---- /dev/null
-+++ b/meta-oe/recipes-support/augeas/augeas/0001-Unset-need_charset_alias-when-building-for-musl.patch
-@@ -0,0 +1,30 @@
-+From b9565dc2fe0c4f7daaec91b7e83bc7313dee2f4a Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 13 Apr 2015 17:02:13 -0700
-+Subject: [PATCH] Unset need_charset_alias when building for musl
-+
-+localcharset uses ac_cv_gnu_library_2_1 from glibc21.m4
-+which actually shoudl be fixed in gnulib and then all downstream
-+projects will get it eventually. For now we apply the fix to
-+coreutils
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ lib/gnulib.mk | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+Index: augeas-1.2.0/gnulib/lib/Makefile.am
-+===================================================================
-+--- augeas-1.2.0.orig/gnulib/lib/Makefile.am
-++++ augeas-1.2.0/gnulib/lib/Makefile.am
-+@@ -463,7 +463,7 @@ install-exec-localcharset: all-local
-+ 	  case '$(host_os)' in \
-+ 	    darwin[56]*) \
-+ 	      need_charset_alias=true ;; \
-+-	    darwin* | cygwin* | mingw* | pw32* | cegcc*) \
-++	    darwin* | cygwin* | mingw* | pw32* | cegcc* | linux-musl*) \
-+ 	      need_charset_alias=false ;; \
-+ 	    *) \
-+ 	      need_charset_alias=true ;; \
-diff --git a/meta-oe/recipes-support/augeas/augeas/add-missing-argz-conditional.patch b/meta-oe/recipes-support/augeas/augeas/add-missing-argz-conditional.patch
-new file mode 100644
-index 0000000..abbdbaa
---- /dev/null
-+++ b/meta-oe/recipes-support/augeas/augeas/add-missing-argz-conditional.patch
-@@ -0,0 +1,20 @@
-+Add missing GL_GENERATE_ARGZ_H conditional
-+
-+- GL_GENERATE_ARGZ_H is used in gnulib/lib/Makefile.am
-+
-+Upstream-Status: Pending
-+Signed-off-by: Constantin Musca <constantinx.musca@intel.com>
-+
-+Index: augeas-1.0.0/configure.ac
-+===================================================================
-+--- augeas-1.0.0.orig/configure.ac
-++++ augeas-1.0.0/configure.ac
-+@@ -55,6 +55,8 @@ AC_ARG_WITH([failmalloc],
-+ 
-+ AM_CONDITIONAL([WITH_FAILMALLOC], [test x$with_failmalloc != xno])
-+ 
-++AM_CONDITIONAL([GL_GENERATE_ARGZ_H], [test -n "$ARGZ_H"])
-++
-+ dnl --enable-debug=(yes|no)
-+ AC_ARG_ENABLE([debug],
-+               [AC_HELP_STRING([--enable-debug=no/yes],
-diff --git a/meta-oe/recipes-support/augeas/augeas/sepbuildfix.patch b/meta-oe/recipes-support/augeas/augeas/sepbuildfix.patch
-new file mode 100644
-index 0000000..b82a3ee
---- /dev/null
-+++ b/meta-oe/recipes-support/augeas/augeas/sepbuildfix.patch
-@@ -0,0 +1,22 @@
-+Ensure that builds in separate builddirs (${B} != ${S}) correctly install the 
-+lenses files.
-+
-+Upstream-Status: Pending
-+
-+RP 2013/4/17
-+
-+Index: augeas-1.0.0/Makefile.am
-+===================================================================
-+--- augeas-1.0.0.orig/Makefile.am	2012-11-02 15:20:11.000000000 +0000
-++++ augeas-1.0.0/Makefile.am	2013-04-17 10:36:24.033400125 +0000
-+@@ -5,8 +5,8 @@
-+ lensdir=$(datadir)/augeas/lenses/dist
-+ lenstestdir=$(datadir)/augeas/lenses/dist/tests
-+ 
-+-dist_lens_DATA=$(wildcard lenses/*.aug)
-+-dist_lenstest_DATA=$(wildcard lenses/tests/*.aug)
-++dist_lens_DATA=$(wildcard $(top_srcdir)/lenses/*.aug)
-++dist_lenstest_DATA=$(wildcard $(top_srcdir)lenses/tests/*.aug)
-+ 
-+ EXTRA_DIST=augeas.spec build/aux/move-if-change Makefile.am HACKING
-+ 
-diff --git a/meta-oe/recipes-support/augeas/augeas_1.5.0.bb b/meta-oe/recipes-support/augeas/augeas_1.5.0.bb
-new file mode 100644
-index 0000000..c4f62e7
---- /dev/null
-+++ b/meta-oe/recipes-support/augeas/augeas_1.5.0.bb
-@@ -0,0 +1,4 @@
-+require augeas.inc
-+
-+SRC_URI[md5sum] = "01190e455c513124a2dae29a1182c113"
-+SRC_URI[sha256sum] = "223bb6e6fe3e9e92277dafd5d34e623733eb969a72a382998d204feab253f73f"
+diff --git a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
+index 52b689e..402c42e 100644
+--- a/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
++++ b/meta-oe/recipes-devtools/uw-imap/uw-imap_2007f.bb
+@@ -20,7 +20,7 @@ S = "${WORKDIR}/imap-${PV}"
+ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
+ PACKAGECONFIG[pam] = ",,libpam"
+ 
+-EXTRA_OEMAKE = "CC='${CC}'"
++EXTRA_OEMAKE = "CC='${CC}' ARRC='${AR} -rc' RANLIB='${RANLIB}'"
+ 
+ HEADERS = "src/c-client/*.h src/osdep/unix/*.h c-client/auths.c c-client/linkage.c c-client/linkage.h c-client/osdep.h"
+ 
 -- 
-2.1.4
+2.9.0
 
 
