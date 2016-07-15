@@ -1,22 +1,27 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
-	by mail.openembedded.org (Postfix) with ESMTP id 44FBA6E660
+Return-Path: <clopez@igalia.com>
+X-Greylist: delayed 602 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 15 Jul 2016 17:23:06 UTC
+Received: from smtp4.mundo-r.com (smtp3.mundo-r.com [212.51.32.191])
+	by mail.openembedded.org (Postfix) with ESMTP id 1AE8F606D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jul 2016 14:38:09 +0000 (UTC)
-Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id u6FEc57E031764
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Fri, 15 Jul 2016 17:23:06 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: A2DrAgCHGIlX/5tjdVtcKgGDE1Y1R7Zlgg+BexIIhzE4FAEBAQEBAQFlJ4YrgQKINAGhXp45hiqJWYRyHQWOCIsZhhOISAKCN4x8kBseNoE6DHiBN2yGUwEBAQ
+X-IPAS-Result: A2DrAgCHGIlX/5tjdVtcKgGDE1Y1R7Zlgg+BexIIhzE4FAEBAQEBAQFlJ4YrgQKINAGhXp45hiqJWYRyHQWOCIsZhhOISAKCN4x8kBseNoE6DHiBN2yGUwEBAQ
+X-IronPort-AV: E=Sophos;i="5.28,368,1464645600"; d="scan'208";a="151881795"
+Received: from fanzine.igalia.com ([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 15 Jul 2016 19:13:03 +0200
+Received: from 1.14.117.91.dynamic.reverse-mundo-r.com ([91.117.14.1]
+	helo=trinity.local.igalia.com) by fanzine.igalia.com with esmtpsa 
+	(Cipher TLS1.0:RSA_AES_128_CBC_SHA1:16) (Exim) id 1bO6ff-0003nd-Js
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jul 2016 16:38:05 +0200
-Received: from dev.sbt.siemens.com (MD1FZU9C.ww002.siemens.net [139.16.77.104])
-	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id u6FEc549030364;
-	Fri, 15 Jul 2016 16:38:05 +0200
-From: Pascal Bach <pascal.bach@siemens.com>
+	Fri, 15 Jul 2016 19:13:03 +0200
+From: Carlos Alberto Lopez Perez <clopez@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Jul 2016 16:37:44 +0200
-Message-Id: <1468593464-17303-1-git-send-email-pascal.bach@siemens.com>
+Date: Fri, 15 Jul 2016 19:12:54 +0200
+Message-Id: <1468602774-12745-1-git-send-email-clopez@igalia.com>
 X-Mailer: git-send-email 2.1.4
-Subject: [meta-oe][PATCHv2] poco: update to 1.7.3
+Subject: [meta-browser][PATCH] chromium: install all pak files plus resources and blob.bin files.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,40 +34,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jul 2016 14:38:10 -0000
+X-List-Received-Date: Fri, 15 Jul 2016 17:23:07 -0000
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+ * This files contain localized strings and other resources that are
+   needed for support of internationalization and localization.
+
+ * Files under the resources directory are needed for the web inspector.
+
+Signed-off-by: Carlos Alberto Lopez Perez <clopez@igalia.com>
 ---
- meta-oe/recipes-support/poco/{poco_1.7.1.bb => poco_1.7.3.bb} | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-support/poco/{poco_1.7.1.bb => poco_1.7.3.bb} (94%)
+ recipes-browser/chromium/chromium.inc | 28 ++++++++++++++++++++--------
+ 1 file changed, 20 insertions(+), 8 deletions(-)
 
-diff --git a/meta-oe/recipes-support/poco/poco_1.7.1.bb b/meta-oe/recipes-support/poco/poco_1.7.3.bb
-similarity index 94%
-rename from meta-oe/recipes-support/poco/poco_1.7.1.bb
-rename to meta-oe/recipes-support/poco/poco_1.7.3.bb
-index 135d2aa..32f56d4 100644
---- a/meta-oe/recipes-support/poco/poco_1.7.1.bb
-+++ b/meta-oe/recipes-support/poco/poco_1.7.3.bb
-@@ -12,15 +12,13 @@ inherit cmake ptest
+diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
+index e5deac1..0e7250e 100644
+--- a/recipes-browser/chromium/chromium.inc
++++ b/recipes-browser/chromium/chromium.inc
+@@ -52,20 +52,32 @@ do_install() {
+ 	if [ -f "${WORKDIR}/google-chrome.desktop" ]; then
+ 		install -Dm 0644 ${WORKDIR}/google-chrome.desktop ${D}${datadir}/applications/google-chrome.desktop
+ 	fi
+-	#Chromium plugins libs
++	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/product_logo_48.png" ]; then
++		install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/product_logo_48.png ${D}${bindir}/${BPN}/product_logo_48.png
++	fi
++
++	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/natives_blob.bin" ]; then
++		install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/natives_blob.bin ${D}${bindir}/${BPN}/natives_blob.bin
++	fi
++	if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/snapshot_blob.bin" ]; then
++		install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/snapshot_blob.bin ${D}${bindir}/${BPN}/snapshot_blob.bin
++	fi
++
++	# Chromium plugins libs
+ 	for f in libpdf.so libosmesa.so libffmpegsumo.so; do
+ 		if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/$f" ]; then
+ 			install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/$f ${D}${libdir}/${BPN}/$f
+ 		fi
+ 	done
  
- BBCLASSEXTEND = "native"
+-	# Chromium *.pak files and CEF pak files (prefixed with cef_)
+-	for f in content_resources.pak keyboard_resources.pak chrome_100_percent.pak product_logo_48.png resources.pak \
+-	         cef_100_percent.pak cef_200_percent.pak cef_resources.pak cef.pak \
+-		 locales/en-US.pak; do
+-		if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/$f" ]; then
+-			install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/$f ${D}${bindir}/${BPN}/$f
+-		fi
++	# Chromium *.pak files and CEF pak files ( prefixed with cef_ )
++	for f in $(cd ${B}/out/${CHROMIUM_BUILD_TYPE}/ && find . -type f -name \*.pak); do
++			install -Dm 0644 "${B}/out/${CHROMIUM_BUILD_TYPE}/${f}" "${D}${bindir}/${BPN}/${f}"
++	done
++
++	# Chromium resource files (for the inspector).
++	for f in $(cd ${B}/out/${CHROMIUM_BUILD_TYPE}/ && test -d resources && find resources -type f); do
++			install -Dm 0644 "${B}/out/${CHROMIUM_BUILD_TYPE}/${f}" "${D}${bindir}/${BPN}/${f}"
+ 	done
  
-+SRCREV = "abc4742ebe6718530a2503fcc3f2554a6296ef5a"
- SRC_URI = " \
--    https://github.com/pocoproject/poco/archive/poco-${PV}-release.tar.gz \
-+    git://github.com/pocoproject/poco.git \
-     file://run-ptest \
-    "
- 
--SRC_URI[md5sum] = "a4b755d47303b20a0e2586f281d05a36"
--SRC_URI[sha256sum] = "6dbbc2018912ad9af6af96f605933ed91354a1e7423e5dbd04d8e9a2b2d15c05"
--
--S = "${WORKDIR}/poco-poco-${PV}-release"
-+S = "${WORKDIR}/git"
- 
- EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=RelWithDebInfo -DPOCO_UNBUNDLED=ON \
-                  ${@bb.utils.contains('PTEST_ENABLED', '1', '-DENABLE_TESTS=ON ', '', d)}"
+ }
 -- 
 2.1.4
 
