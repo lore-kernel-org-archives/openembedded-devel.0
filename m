@@ -1,26 +1,26 @@
 Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id ED23B6E5CB
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 093A773169
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jul 2016 05:52:53 +0000 (UTC)
+	Fri, 15 Jul 2016 05:52:54 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u6F5qrE6023997
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u6F5qs0f020053
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jul 2016 22:52:53 -0700 (PDT)
+	Thu, 14 Jul 2016 22:52:55 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 14 Jul 2016 22:52:52 -0700
+	14.3.248.2; Thu, 14 Jul 2016 22:52:54 -0700
 From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 15 Jul 2016 13:50:41 +0800
-Message-ID: <1468561844-10190-2-git-send-email-mingli.yu@windriver.com>
+Date: Fri, 15 Jul 2016 13:50:42 +0800
+Message-ID: <1468561844-10190-3-git-send-email-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.8.1
 In-Reply-To: <1468561844-10190-1-git-send-email-mingli.yu@windriver.com>
 References: <1468561844-10190-1-git-send-email-mingli.yu@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/4] grubby: add grubby bb
+Subject: [meta-oe][PATCH 2/4] grubby: fix the grub-editenv name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,60 +34,93 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 15 Jul 2016 05:52:56 -0000
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-* Add grubby bb
+* Rename grub2-editenv to grub-editenv as
+  we don't use the name grub2-editenv for grub2
 
 Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- meta-oe/recipes-support/grubby/grubby_8.40.bb | 38 +++++++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
- create mode 100644 meta-oe/recipes-support/grubby/grubby_8.40.bb
+ ...ubby-rename-grub2-editenv-to-grub-editenv.patch | 69 ++++++++++++++++++++++
+ 1 file changed, 69 insertions(+)
+ create mode 100644 meta-oe/recipes-support/grubby/grubby/grubby-rename-grub2-editenv-to-grub-editenv.patch
 
-diff --git a/meta-oe/recipes-support/grubby/grubby_8.40.bb b/meta-oe/recipes-support/grubby/grubby_8.40.bb
+diff --git a/meta-oe/recipes-support/grubby/grubby/grubby-rename-grub2-editenv-to-grub-editenv.patch b/meta-oe/recipes-support/grubby/grubby/grubby-rename-grub2-editenv-to-grub-editenv.patch
 new file mode 100644
-index 0000000..dc6cc62
+index 0000000..d936249
 --- /dev/null
-+++ b/meta-oe/recipes-support/grubby/grubby_8.40.bb
-@@ -0,0 +1,38 @@
-+SUMMARY = "A command line tool for updating and displaying info about boot loaders"
-+DESCRIPTION = "grubby is a command line tool for updating and displaying information \
-+about the configuration files for the grub, lilo, elilo (ia64), yaboot (powerpc) and \
-+zipl (s390) boot loaders. It is primarily designed to be used from scripts which install \
-+new kernels and need to find information about the current boot environment. \
-+"
-+LICENSE = "GPLv2+"
++++ b/meta-oe/recipes-support/grubby/grubby/grubby-rename-grub2-editenv-to-grub-editenv.patch
+@@ -0,0 +1,69 @@
++From 0841706a5b5280e501c8e392c70c466c5fbcf0aa Mon Sep 17 00:00:00 2001
++From: Jackie Huang <jackie.huang@windriver.com>
++Date: Tue, 4 Aug 2015 23:54:41 -0700
++Subject: [PATCH] rename grub2-editenv to grub-editenv
 +
-+LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
++We don't use the name grub2-editenv for grub2.
 +
-+DEPENDS = "popt util-linux"
++Upstream-Status: Inappropriate
 +
-+SRC_URI = "https://github.com/rhinstaller/${BPN}/archive/${PV}-1.tar.gz;downloadfilename=${BPN}-${PV}-1.tar.gz \
-+           file://grubby-rename-grub2-editenv-to-grub-editenv.patch \
-+           file://run-ptest \
-+           file://grubby-remove-bashisms-in-test.sh.patch \
-+"
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++---
++ grubby.c | 4 ++--
++ test.sh  | 6 +++---
++ 2 files changed, 5 insertions(+), 5 deletions(-)
 +
-+SRC_URI[md5sum] = "1005907b275d6d93368d045274537d86"
-+SRC_URI[sha256sum] = "85f1c678484f74c8978e8643451594967defce463a86c35cb1ee56d12767a9df"
++diff --git a/grubby.c b/grubby.c
++index d4ebb86..47a1a15 100644
++--- a/grubby.c
+++++ b/grubby.c
++@@ -290,7 +290,7 @@ static char *grub2GetEnv(struct configFileInfo *info, char *name)
++     char *s = NULL;
++     char *ret = NULL;
++     char *envFile = info->envFile ? info->envFile : "/boot/grub2/grubenv";
++-    int rc = asprintf(&s, "grub2-editenv %s list | grep '^%s='", envFile, name);
+++    int rc = asprintf(&s, "grub-editenv %s list | grep '^%s='", envFile, name);
++ 
++     if (rc < 0)
++ 	return NULL;
++@@ -361,7 +361,7 @@ static int grub2SetEnv(struct configFileInfo *info, char *name, char *value)
++     if (!value)
++ 	    return -1;
++ 
++-    rc = asprintf(&s, "grub2-editenv %s set '%s=%s'", envFile, name, value);
+++    rc = asprintf(&s, "grub-editenv %s set '%s=%s'", envFile, name, value);
++     free(value);
++     if (rc <0)
++ 	return -1;
++diff --git a/test.sh b/test.sh
++index 6379698..f738388 100755
++--- a/test.sh
+++++ b/test.sh
++@@ -574,7 +574,7 @@ if [ "$testgrub2" == "y" ]; then
++         --title='title' --initrd=/boot/new-initrd --boot-filesystem=/boot/ \
++         --copy-default
++     commandTest "saved_default output" \
++-        "grub2-editenv test/grub2-support_files/env_temp list" \
+++        "grub-editenv test/grub2-support_files/env_temp list" \
++         "saved_entry=Linux, with Fedora 2.6.38.8-32.fc15.x86_64"
++ 
++     testing="GRUB2 add kernel with default=saved_entry and a terrible title"
++@@ -587,13 +587,13 @@ if [ "$testgrub2" == "y" ]; then
++     testing="GRUB2 set default with default=saved_entry and a terrible name"
++     grub2Test grub2.9 add/g2-1.9 --env grubenv.1 --set-default-index=0
++     commandTest "saved_default output" \
++-        "grub2-editenv test/grub2-support_files/env_temp list" \
+++        "grub-editenv test/grub2-support_files/env_temp list" \
++         'saved_entry=Fedora (3.10.3-300.fc19.x86_64) 19 (Schrödinger’s Cat)'
++ 
++     testing="GRUB2 set default with default=saved_entry"
++     grub2Test grub2.8 add/g2-1.8 --env grubenv.1 --set-default-index=0
++     commandTest "saved_default output" \
++-        "grub2-editenv test/grub2-support_files/env_temp list" \
+++        "grub-editenv test/grub2-support_files/env_temp list" \
++         "saved_entry=title"
++ 
++     testing="GRUB2 --default-index with default=saved_entry"
++-- 
++2.3.5
 +
-+S = "${WORKDIR}/${BPN}-${PV}-1"
-+
-+RDEPENDS_${PN} += "dracut"
-+
-+inherit autotools-brokensep ptest
-+
-+EXTRA_OEMAKE = "'CC=${CC}'"
-+
-+do_install_ptest() {
-+	install -d ${D}${PTEST_PATH}
-+	cp -r ${S}/test ${S}/test.sh ${D}${PTEST_PATH}
-+	sed -i 's|./grubby|grubby|' ${D}${PTEST_PATH}/test.sh
-+}
-+
-+RDEPENDS_${PN}-ptest = "util-linux-getopt"
-+
-+COMPATIBLE_HOST = '(x86_64.*|i.86.*)-(linux|freebsd.*)'
 -- 
 2.8.1
 
