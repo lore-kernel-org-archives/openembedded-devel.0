@@ -1,34 +1,45 @@
-Return-Path: <michael@walle.cc>
-Received: from ssl.serverraum.org (ssl.serverraum.org [213.133.101.245])
-	by mail.openembedded.org (Postfix) with ESMTP id A40DD606D0
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-lf0-f54.google.com (mail-lf0-f54.google.com
+	[209.85.215.54])
+	by mail.openembedded.org (Postfix) with ESMTP id E8979606D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jul 2016 09:58:39 +0000 (UTC)
-Received: from mwalle01.kse.adk.loc (unknown [194.25.174.126])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by ssl.serverraum.org (Postfix) with ESMTPSA id 8FE1C22380;
-	Fri, 15 Jul 2016 11:58:37 +0200 (CEST)
-Authentication-Results: ssl.serverraum.org; dmarc=none header.from=walle.cc
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=walle.cc;
-	s=mail2016061301; t=1468576718;
-	bh=9xAia/pLSiaWA+/WttpsiwZ3t3UskG7R1S+rwR3qIVg=;
-	h=From:To:Cc:Subject:Date:From;
-	b=MUUucHJkm95CxRVvYFYYfh606k8SWsTaSTA8oK4ki9hyCuTqmXui25Q0j+24U4X/v
-	fE5FsTPEzeHLyJEipprrJ/tauKeIinWsxcEsXK2Fpde0+8WpO5l9sbb6541zUWPOVX
-	jlWtGqpXfOpHPlS33AbjJx8nBHBglcVa1SwPVlmo=
-From: Michael Walle <michael@walle.cc>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Jul 2016 11:58:30 +0200
-Message-Id: <1468576710-25964-1-git-send-email-michael@walle.cc>
-X-Mailer: git-send-email 2.1.4
-X-Virus-Scanned: clamav-milter 0.99.2 at web
-X-Virus-Status: Clean
-X-Spam-Status: No, score=-0.1 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,UNPARSEABLE_RELAY,URIBL_BLOCKED autolearn=ham
-	autolearn_force=no version=3.4.0
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on web.serverraum.org
-Cc: Michael Walle <michael@walle.cc>
-Subject: [PATCH] klibc: fix install destination in 64bit env
+	Fri, 15 Jul 2016 12:37:25 +0000 (UTC)
+Received: by mail-lf0-f54.google.com with SMTP id f93so87428966lfi.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Jul 2016 05:37:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=GkhRiRVyV7hAM0uAW1HvRE0Mx3P5a5SVlhm8NyRxCMI=;
+	b=bmXmfU1s6lp+dOwMgRMRBtDO1jTiY2F6aRCMXoFHR3GhkMAb1eZqmkOXbvMyFnKpxg
+	iusezR9ieeY9q9fZLQt/DkAsYErAwpOV+AiaJ7C2KrqDjCH8dFNcrAlI+z/A9SwB4GwH
+	kQlNxGosqrOdU7sKnZEnCx+PVP/XYx+39VDaaawGeefCGeet7aneZt/fHFNA31jmTT1i
+	8cs27yx/L8LNNdxD29RBM6i/+EbZ0J2KT/Pv6CbSSl+LEt7nkTnDn5xekCiZmNPkPNVr
+	lkWyIDjjhTCKw/xFdlKy9vVaK+mHgHOb++CSjXAGXWO4BYueZc7pYJl3cJ3XMPQEiH11
+	MCEA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=GkhRiRVyV7hAM0uAW1HvRE0Mx3P5a5SVlhm8NyRxCMI=;
+	b=V8Y8NfyPq0CbxSC8j4CmmepNNwhZ/s8Tu+uTrJORPfZLlwv/jq7c3uiCjow/pXV1cJ
+	0CFX2AjnMxWuiVDGNVH1UfBn78ty0F9pL+/avtERr9Njy3M0yzdKMFthmGpoZc1iH2RH
+	SP4wATCY0bAoZ7U0eIiZK07xmXvhAut7KMm/SbhN2rgPWYNSu2Y/Nc/Az+wF9MS3nHYl
+	c5pNYAjtScESX8t9blSv/DahdRI0RMw1bGoQiOBRTiIx1tbbr6QqvVK/lm/rwlEdw1rO
+	uYGtDff6zXpxDnc1oxBN6eXhEb39hvgguwxobVjFCApumXWG2VaoYgn+rrraxvaZ2hHx
+	MZYA==
+X-Gm-Message-State: ALyK8tL4DcnpFi/BffgSi4AUFwjP4S+CNy3KfHV+sYmsmOTZ9cZeuDg5V+TZJlrOiH1iYZ6VaF61s4jthG4vng==
+X-Received: by 10.25.165.211 with SMTP id o202mr9207943lfe.95.1468586245580;
+	Fri, 15 Jul 2016 05:37:25 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.25.87.12 with HTTP; Fri, 15 Jul 2016 05:37:24 -0700 (PDT)
+In-Reply-To: <1468561844-10190-1-git-send-email-mingli.yu@windriver.com>
+References: <1468561844-10190-1-git-send-email-mingli.yu@windriver.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 15 Jul 2016 14:37:24 +0200
+Message-ID: <CA+chaQf6a6n-89735f5tuiFYdocWy30AycpDKth72bUG6Wun2A@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH] grubby: add grubby with version 8.40-1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,30 +52,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jul 2016 09:58:39 -0000
+X-List-Received-Date: Fri, 15 Jul 2016 12:37:26 -0000
+Content-Type: text/plain; charset=UTF-8
 
-klibc installs everything into /usr/lib by default. But the recipe assumes
-it installs to ${libdir} which is /usr/lib64 in 64bit environment. Package
-generation fails badly in this case. Set INSTALLDIR to fix this.
+FFS, squash all 4 together, the first is already using all 3 files anyway..
 
-Signed-off-by: Michael Walle <michael@walle.cc>
----
- meta-initramfs/recipes-devtools/klibc/klibc.inc | 1 +
- 1 file changed, 1 insertion(+)
+On Fri, Jul 15, 2016 at 7:50 AM, <mingli.yu@windriver.com> wrote:
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index 65ee868..f00e31a 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -27,6 +27,7 @@ EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
-                 'KLIBCLIBGCC=${STAGING_DIR_TARGET}${libdir}/${TARGET_SYS}/*/libgcc.a' \
-                 'prefix=${exec_prefix}' \
-                 'INSTALLROOT=${D}' \
-+                'INSTALLDIR=${libdir}/klibc' \
-                 'SHLIBDIR=${libdir}' \
-                 "
- 
--- 
-2.1.4
-
+> 1, Add grubby bb
+>
+> 2, Fix the grub-editenv name
+>
+> 3, Add ptest support
+>
+> 4, Remove bashisms in test.sh
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
