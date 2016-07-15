@@ -1,37 +1,39 @@
 Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id C968B606D0
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 9734C606D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jul 2016 12:54:24 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id x83so2041322wma.3
+	Fri, 15 Jul 2016 12:54:25 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id q128so2076635wma.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jul 2016 05:54:25 -0700 (PDT)
+	Fri, 15 Jul 2016 05:54:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=rlXDZ0ozWmZVa4WlxF13m0E1hyEj7rkP9RZZF4dpAQg=;
-	b=SSHeX9W5KHqHxalX/qXZZIZdyM9yVtGla0tu0loS6NpLOQ0NCOZ4q+F1UhblFlL93I
-	iDWUA8UkWDCsgfelZ9qBwM5+DG2ig8KwKGJUm0inRaoHpX+GCNdkH2pToNioXkQdvX02
-	Z+EgugBzYCi+Ll543736nQVdpOnEECd5IDlkmbsN0w5LfJPvgJTlU0k9qgubDdaHg8Yp
-	tBst+v6z7oeJHAVGt276Pi4PSjvhCi1zieM248t0KMp1LixX7IiJvpZlDnzHc4sOcb+v
-	1dypCEzmmlMjaoqwFbJA9In+IVOCKts33HPa1j1l6iYwVQeUtLDEHi5KKB8RTvii8WHE
-	feRg==
-X-Gm-Message-State: ALyK8tLcE4BsVjQpQv/homL1pPrDKejM9M5qLL97TdUJBepEPFXKRFTyO/91pDZZeCbH/g==
-X-Received: by 10.194.186.178 with SMTP id fl18mr634173wjc.8.1468587263987;
-	Fri, 15 Jul 2016 05:54:23 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=TRVNFrODj+ubyRmiBu0eHXP51SGEUc70lYfHf9WxL5Q=;
+	b=Bugxl4kipdyhn4+pqblGeWi4BPLiEt/pk1re1XUHZTQkUjEyVkjfuVE/0MkUXhYKj/
+	e+hnzhuKL9KAEzRtMlWjV3PV7DIEUe7Tb24MCyQpdge3a0C4o4kNh3OipXgzlasXR1fR
+	ZWhOFSpa5deuHhEVEIyaClMVdFiLDSB/T+JfXSPE5fh04AzrUNgEbDzfy0Ee5zYmbFvm
+	xtkjzNU7Re0qcdX1sDt4m+ESaz/iSohItyYIQoUvg0hDAsXYSY87fqZMg7+H9LHNwzp0
+	Wu5h8gVbF0Me4TUd6twg4EVxuV997I/VC+cEHtE84Cp7eitUvOWXr21qJDNwZviW3cKk
+	B+xA==
+X-Gm-Message-State: ALyK8tJacrkLY/18doqt8kOMmGCxU2/S8RjvOeqwDR2Skhl4xjUvN03JCUE7WRQHH/Q3cg==
+X-Received: by 10.28.157.214 with SMTP id g205mr4027146wme.34.1468587265355;
+	Fri, 15 Jul 2016 05:54:25 -0700 (PDT)
 Received: from tfsielt31850.TYCOFS.COM ([185.46.212.59])
-	by smtp.gmail.com with ESMTPSA id f4sm59861wmf.8.2016.07.15.05.54.22
+	by smtp.gmail.com with ESMTPSA id f4sm59861wmf.8.2016.07.15.05.54.24
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 15 Jul 2016 05:54:22 -0700 (PDT)
+	Fri, 15 Jul 2016 05:54:24 -0700 (PDT)
 From: git@andred.net
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Jul 2016 13:54:20 +0100
-Message-Id: <1468587261-18160-1-git-send-email-git@andred.net>
+Date: Fri, 15 Jul 2016 13:54:21 +0100
+Message-Id: <1468587261-18160-2-git-send-email-git@andred.net>
 X-Mailer: git-send-email 2.8.1
+In-Reply-To: <1468587261-18160-1-git-send-email-git@andred.net>
+References: <1468587261-18160-1-git-send-email-git@andred.net>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/2] c-ares: use our compilation flags
+Subject: [meta-networking][PATCH 2/2] meta-networking: override SECURITY_CFLAGS for c-ares
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,71 +52,44 @@ Content-Transfer-Encoding: 8bit
 
 From: André Draszik <adraszik@tycoint.com>
 
-If not requested otherwise as ./configure option, c-ares will strip
-any -g from CFLAGS / CPPFLAGS and add -g0 instead, disabling all
-debug info.
-Similarly, it will try to enable optimisation (but bail out since in
-that case it honors an existing -O in CFLAGS / CPPFLAGS)
+c-ares doesn't build if the distro has enabled usage of the
+security_flags.inc file as it is picky about what is placed
+into CPPFLAGS and CFLAGS. It complains and errors out if any
+preprocessor options appear in CFLAGS.
 
-Since we want to control code generation, patch out the code
-mangling -g (and -O for consistency). Alternatively, if we were to
-pass --enable-debug to ./configure, c-ares would at the same time
-assume that we don't want optimisation anymore.
+Fix this by providing an additional include file that is
+require'd from conf/layer.conf.
 
 Signed-off-by: André Draszik <adraszik@tycoint.com>
 ---
- ...configure.ac-don-t-override-passed-cflags.patch | 26 ++++++++++++++++++++++
- .../recipes-support/c-ares/c-ares_1.11.0.bb        |  4 +++-
- 2 files changed, 29 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/c-ares/c-ares/0001-configure.ac-don-t-override-passed-cflags.patch
+ .../conf/distro/include/meta_networking_security_flags.inc          | 6 ++++++
+ meta-networking/conf/layer.conf                                     | 3 +++
+ 2 files changed, 9 insertions(+)
+ create mode 100644 meta-networking/conf/distro/include/meta_networking_security_flags.inc
 
-diff --git a/meta-networking/recipes-support/c-ares/c-ares/0001-configure.ac-don-t-override-passed-cflags.patch b/meta-networking/recipes-support/c-ares/c-ares/0001-configure.ac-don-t-override-passed-cflags.patch
+diff --git a/meta-networking/conf/distro/include/meta_networking_security_flags.inc b/meta-networking/conf/distro/include/meta_networking_security_flags.inc
 new file mode 100644
-index 0000000..10fad4e
+index 0000000..06802d6
 --- /dev/null
-+++ b/meta-networking/recipes-support/c-ares/c-ares/0001-configure.ac-don-t-override-passed-cflags.patch
-@@ -0,0 +1,26 @@
-+From 2a7236d2a7bb9c3d3c3f44ebf59404bf7134fcb3 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <adraszik@tycoint.com>
-+Date: Tue, 12 Apr 2016 11:37:28 +0100
-+Subject: [PATCH] configure.ac: don't override passed cflags
-+
-+We are controlling debug and optimiser flags from OE
-+---
-+ configure.ac | 2 --
-+ 1 file changed, 2 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 5c02450..3cf9fcd 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -147,8 +147,6 @@ dnl **********************************************************************
-+ 
-+ CARES_CHECK_COMPILER
-+ CARES_SET_COMPILER_BASIC_OPTS
-+-CARES_SET_COMPILER_DEBUG_OPTS
-+-CARES_SET_COMPILER_OPTIMIZE_OPTS
-+ CARES_SET_COMPILER_WARNING_OPTS
-+ 
-+ if test "$compiler_id" = "INTEL_UNIX_C"; then
-+-- 
-+2.8.0.rc3
-+
-diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb b/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
-index 2f72ab4..c98be7d 100644
---- a/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
-+++ b/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
-@@ -6,7 +6,9 @@ SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://ares_init.c;beginline=1;endline=3;md5=53f5ecf4c22c37cf1ddd1ef8f8eccce0"
++++ b/meta-networking/conf/distro/include/meta_networking_security_flags.inc
+@@ -0,0 +1,6 @@
++# configure righteously complains:
++# | configure:3479: using CFLAGS:  -O2 -pipe -g -feliminate-unused-debug-types -fstack-protector-strong -pie -fpie -D_FORTIFY_SOURCE=2
++# | configure:3485: CFLAGS error: CFLAGS may only be used to specify C compiler flags, not macro definitions. Use CPPFLAGS for: -D_FORTIFY_SOURCE=2
++# | configure:3516: error: Can not continue. Fix errors mentioned immediately above this line.
++TARGET_CFLAGS_remove_pn-c-ares = "${lcl_maybe_fortify}"
++TARGET_CPPFLAGS_append_pn-c-ares = "${lcl_maybe_fortify}"
+diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
+index 5fd636a..c09ba4a 100644
+--- a/meta-networking/conf/layer.conf
++++ b/meta-networking/conf/layer.conf
+@@ -21,3 +21,6 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
  
--SRC_URI = "http://c-ares.haxx.se/download/${BP}.tar.gz"
-+SRC_URI = "http://c-ares.haxx.se/download/${BP}.tar.gz \
-+           file://0001-configure.ac-don-t-override-passed-cflags.patch \
-+"
- SRC_URI[md5sum] = "d5c6d522cfc54bb6f215a0b7912d46be"
- SRC_URI[sha256sum] = "b3612e6617d9682928a1d50c1040de4db6519f977f0b25d40cf1b632900b3efd"
- 
+ # used by waf-samba.bbclass
+ WAF_CROSS_ANSWERS_PATH = "${LAYERDIR}/files/waf-cross-answers"
++
++# Override security flags
++require conf/distro/include/meta_networking_security_flags.inc
 -- 
 2.8.1
 
