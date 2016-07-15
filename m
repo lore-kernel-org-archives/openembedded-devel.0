@@ -1,26 +1,20 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 32C706E5CB
+Return-Path: <jussi.kukkonen@intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id A8EEE73166
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jul 2016 05:52:57 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u6F5qvWG024024
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jul 2016 22:52:58 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 14 Jul 2016 22:52:57 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 15 Jul 2016 13:50:44 +0800
-Message-ID: <1468561844-10190-5-git-send-email-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.8.1
-In-Reply-To: <1468561844-10190-1-git-send-email-mingli.yu@windriver.com>
-References: <1468561844-10190-1-git-send-email-mingli.yu@windriver.com>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH 4/4] grubby: remove bashisms in test.sh
+	Fri, 15 Jul 2016 07:05:01 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by fmsmga102.fm.intel.com with ESMTP; 15 Jul 2016 00:05:00 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.28,367,1464678000"; d="scan'208";a="1017338564"
+Received: from theory.fi.intel.com ([10.237.72.196])
+	by orsmga002.jf.intel.com with ESMTP; 15 Jul 2016 00:04:52 -0700
+From: Jussi Kukkonen <jussi.kukkonen@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 15 Jul 2016 10:04:48 +0300
+Message-Id: <1468566288-23566-1-git-send-email-jussi.kukkonen@intel.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCHv2] augeas: Move from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,54 +27,170 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jul 2016 05:52:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 15 Jul 2016 07:05:01 -0000
 
-* Update #!/bin/bash to #!/bin/sh in test.sh to remove
-  bashisms
+augeas is being removed from oe-core as nothing there uses or tests
+it. Move the recipe to meta-oe as there's still one dependency in
+meta-openembedded (netcf in meta-networking).
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Also upgrade to 1.5.0: no recipe changes needed.
+
+Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
 ---
- .../grubby/grubby-remove-bashisms-in-test.sh.patch | 29 ++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 meta-oe/recipes-support/grubby/grubby/grubby-remove-bashisms-in-test.sh.patch
 
-diff --git a/meta-oe/recipes-support/grubby/grubby/grubby-remove-bashisms-in-test.sh.patch b/meta-oe/recipes-support/grubby/grubby/grubby-remove-bashisms-in-test.sh.patch
+Changes since v1:
+* Move to meta-oe instead of meta-networking
+
+
+ meta-oe/recipes-support/augeas/augeas.inc          | 30 ++++++++++++++++++++++
+ ...need_charset_alias-when-building-for-musl.patch | 30 ++++++++++++++++++++++
+ .../augeas/add-missing-argz-conditional.patch      | 20 +++++++++++++++
+ .../augeas/augeas/sepbuildfix.patch                | 22 ++++++++++++++++
+ meta-oe/recipes-support/augeas/augeas_1.5.0.bb     |  4 +++
+ 5 files changed, 106 insertions(+)
+ create mode 100644 meta-oe/recipes-support/augeas/augeas.inc
+ create mode 100644 meta-oe/recipes-support/augeas/augeas/0001-Unset-need_charset_alias-when-building-for-musl.patch
+ create mode 100644 meta-oe/recipes-support/augeas/augeas/add-missing-argz-conditional.patch
+ create mode 100644 meta-oe/recipes-support/augeas/augeas/sepbuildfix.patch
+ create mode 100644 meta-oe/recipes-support/augeas/augeas_1.5.0.bb
+
+diff --git a/meta-oe/recipes-support/augeas/augeas.inc b/meta-oe/recipes-support/augeas/augeas.inc
 new file mode 100644
-index 0000000..6734e7f
+index 0000000..23d12ca
 --- /dev/null
-+++ b/meta-oe/recipes-support/grubby/grubby/grubby-remove-bashisms-in-test.sh.patch
-@@ -0,0 +1,29 @@
-+From c3a004b8d6dff1a767573dd7baf5d45efddb9f2b Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Fri, 15 Jul 2016 11:23:17 +0800
-+Subject: [PATCH] grubby: remove bashisms in test.sh
++++ b/meta-oe/recipes-support/augeas/augeas.inc
+@@ -0,0 +1,30 @@
++SUMMARY = "Augeas configuration API"
++HOMEPAGE = "http://augeas.net/"
++BUGTRACKER = "https://fedorahosted.org/augeas/report/1"
 +
-+* Update #!/bin/bash to #!/bin/sh in test.sh to
-+  remove below warning:
-+  QA Issue: /usr/lib/grubby/ptest/test.sh contained
-+  in package grubby-ptest requires /bin/bash, but no
-+  providers found in RDEPENDS_grubby-ptest? [file-rdeps]
++LICENSE = "LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=bbb461211a33b134d42ed5ee802b37ff"
 +
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++SRC_URI = "http://download.augeas.net/${BP}.tar.gz \
++           file://add-missing-argz-conditional.patch \
++           file://sepbuildfix.patch \
++           file://0001-Unset-need_charset_alias-when-building-for-musl.patch \
++          "
++
++DEPENDS = "readline libxml2"
++
++inherit autotools pkgconfig
++
++PACKAGES =+ "${PN}-lenses lib${BPN}"
++
++FILES_${PN}-lenses = "${datadir}/augeas/lenses"
++FILES_lib${BPN} = "${libdir}/lib*${SOLIBS}"
++
++RDEPENDS_lib${BPN} += "${PN}-lenses"
++RRECOMMENDS_lib${BPN} += "${PN}"
++
++LEAD_SONAME = "libaugeas.so"
++
++do_install_append() {
++	rm -fr ${D}${datadir}/vim
++}
+diff --git a/meta-oe/recipes-support/augeas/augeas/0001-Unset-need_charset_alias-when-building-for-musl.patch b/meta-oe/recipes-support/augeas/augeas/0001-Unset-need_charset_alias-when-building-for-musl.patch
+new file mode 100644
+index 0000000..9a19876
+--- /dev/null
++++ b/meta-oe/recipes-support/augeas/augeas/0001-Unset-need_charset_alias-when-building-for-musl.patch
+@@ -0,0 +1,30 @@
++From b9565dc2fe0c4f7daaec91b7e83bc7313dee2f4a Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 13 Apr 2015 17:02:13 -0700
++Subject: [PATCH] Unset need_charset_alias when building for musl
++
++localcharset uses ac_cv_gnu_library_2_1 from glibc21.m4
++which actually shoudl be fixed in gnulib and then all downstream
++projects will get it eventually. For now we apply the fix to
++coreutils
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ test.sh | 2 +-
++ lib/gnulib.mk | 2 +-
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/test.sh b/test.sh
-+index f738388..f3537f3 100755
-+--- a/test.sh
-++++ b/test.sh
-+@@ -1,4 +1,4 @@
-+-#!/bin/bash
-++#!/bin/sh
-+ #
-+ # test.sh -- grubby regression tests
-+ #
-+-- 
-+2.8.1
++Index: augeas-1.2.0/gnulib/lib/Makefile.am
++===================================================================
++--- augeas-1.2.0.orig/gnulib/lib/Makefile.am
+++++ augeas-1.2.0/gnulib/lib/Makefile.am
++@@ -463,7 +463,7 @@ install-exec-localcharset: all-local
++ 	  case '$(host_os)' in \
++ 	    darwin[56]*) \
++ 	      need_charset_alias=true ;; \
++-	    darwin* | cygwin* | mingw* | pw32* | cegcc*) \
+++	    darwin* | cygwin* | mingw* | pw32* | cegcc* | linux-musl*) \
++ 	      need_charset_alias=false ;; \
++ 	    *) \
++ 	      need_charset_alias=true ;; \
+diff --git a/meta-oe/recipes-support/augeas/augeas/add-missing-argz-conditional.patch b/meta-oe/recipes-support/augeas/augeas/add-missing-argz-conditional.patch
+new file mode 100644
+index 0000000..abbdbaa
+--- /dev/null
++++ b/meta-oe/recipes-support/augeas/augeas/add-missing-argz-conditional.patch
+@@ -0,0 +1,20 @@
++Add missing GL_GENERATE_ARGZ_H conditional
 +
++- GL_GENERATE_ARGZ_H is used in gnulib/lib/Makefile.am
++
++Upstream-Status: Pending
++Signed-off-by: Constantin Musca <constantinx.musca@intel.com>
++
++Index: augeas-1.0.0/configure.ac
++===================================================================
++--- augeas-1.0.0.orig/configure.ac
+++++ augeas-1.0.0/configure.ac
++@@ -55,6 +55,8 @@ AC_ARG_WITH([failmalloc],
++ 
++ AM_CONDITIONAL([WITH_FAILMALLOC], [test x$with_failmalloc != xno])
++ 
+++AM_CONDITIONAL([GL_GENERATE_ARGZ_H], [test -n "$ARGZ_H"])
+++
++ dnl --enable-debug=(yes|no)
++ AC_ARG_ENABLE([debug],
++               [AC_HELP_STRING([--enable-debug=no/yes],
+diff --git a/meta-oe/recipes-support/augeas/augeas/sepbuildfix.patch b/meta-oe/recipes-support/augeas/augeas/sepbuildfix.patch
+new file mode 100644
+index 0000000..b82a3ee
+--- /dev/null
++++ b/meta-oe/recipes-support/augeas/augeas/sepbuildfix.patch
+@@ -0,0 +1,22 @@
++Ensure that builds in separate builddirs (${B} != ${S}) correctly install the 
++lenses files.
++
++Upstream-Status: Pending
++
++RP 2013/4/17
++
++Index: augeas-1.0.0/Makefile.am
++===================================================================
++--- augeas-1.0.0.orig/Makefile.am	2012-11-02 15:20:11.000000000 +0000
+++++ augeas-1.0.0/Makefile.am	2013-04-17 10:36:24.033400125 +0000
++@@ -5,8 +5,8 @@
++ lensdir=$(datadir)/augeas/lenses/dist
++ lenstestdir=$(datadir)/augeas/lenses/dist/tests
++ 
++-dist_lens_DATA=$(wildcard lenses/*.aug)
++-dist_lenstest_DATA=$(wildcard lenses/tests/*.aug)
+++dist_lens_DATA=$(wildcard $(top_srcdir)/lenses/*.aug)
+++dist_lenstest_DATA=$(wildcard $(top_srcdir)lenses/tests/*.aug)
++ 
++ EXTRA_DIST=augeas.spec build/aux/move-if-change Makefile.am HACKING
++ 
+diff --git a/meta-oe/recipes-support/augeas/augeas_1.5.0.bb b/meta-oe/recipes-support/augeas/augeas_1.5.0.bb
+new file mode 100644
+index 0000000..c4f62e7
+--- /dev/null
++++ b/meta-oe/recipes-support/augeas/augeas_1.5.0.bb
+@@ -0,0 +1,4 @@
++require augeas.inc
++
++SRC_URI[md5sum] = "01190e455c513124a2dae29a1182c113"
++SRC_URI[sha256sum] = "223bb6e6fe3e9e92277dafd5d34e623733eb969a72a382998d204feab253f73f"
 -- 
-2.8.1
+2.1.4
 
 
