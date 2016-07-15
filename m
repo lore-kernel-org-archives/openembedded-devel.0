@@ -1,26 +1,24 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with SMTP id 07BE36AC4B
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id AC9E560722
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jul 2016 17:03:41 +0000 (UTC)
-Received: (qmail 18965 invoked by uid 1003); 14 Jul 2016 17:03:41 -0000
-Received: from unknown (HELO ?192.168.11.142?)
-	(philip@opensdr.com@108.44.115.86)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	14 Jul 2016 17:03:40 -0000
-To: "openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	Yocto Project <yocto@yoctoproject.org>
-From: Philip Balister <philip@balister.org>
-Message-ID: <4037473c-25e3-015d-25fb-be5cd3ece4bc@balister.org>
-Date: Thu, 14 Jul 2016 13:03:39 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.1.1
+	Fri, 15 Jul 2016 05:52:51 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u6F5qpLH027265
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Jul 2016 22:52:51 -0700
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Thu, 14 Jul 2016 22:52:50 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 15 Jul 2016 13:50:40 +0800
+Message-ID: <1468561844-10190-1-git-send-email-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Subject: Save the dates (OEDEM and Yocto Project Developer Day)
+Subject: [meta-oe][PATCH] grubby: add grubby with version 8.40-1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,20 +31,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jul 2016 17:03:44 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 15 Jul 2016 05:52:52 -0000
+Content-Type: text/plain
 
-ELCE is in Berlin this year on Oct 11-13 (Tuesday-Thursday). After
-conversations with the Yocto Project, we've worked out that there will
-be a Yocto Project developer day on Monday, Oct 10 and OEDEM
-(OpenEmbedded developer meeting) on Friday, Oct 14.
+1, Add grubby bb
 
-The Yocto Project developer day is basically a training class with
-beginner and advanced topics.
+2, Fix the grub-editenv name 
 
-The OpenEmbedded developer meeting is a chance to talk with developers
-about various project topics. We'll work out the agenda closer to ELCE.
+3, Add ptest support
 
-Philip
+4, Remove bashisms in test.sh
 
