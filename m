@@ -1,44 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C38327317F
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-it0-f67.google.com (mail-it0-f67.google.com
+	[209.85.214.67])
+	by mail.openembedded.org (Postfix) with ESMTP id F0070731C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Jul 2016 00:04:52 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id q62so7613907qkf.2
+	Sat, 16 Jul 2016 10:52:58 +0000 (UTC)
+Received: by mail-it0-f67.google.com with SMTP id h190so2866143ith.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jul 2016 17:04:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=CuZI/MsLFstUvsvZzAioLKMOhrtv4xK1RRsgjs47NOk=;
-	b=PtNvdk7E3ZWsLOIA9ZCM2RbDTO2riFgrQOPcEb18SGMHF2bodZjSnQcMk1iNc5F/Tn
-	1oVmc7vVgnU5soOO1glxh18Zsl0/6uiwNei1vCbsQVv7TD2q5tfbWZaKF8a0HAXgnD+S
-	5VdAjIaJDIpkoV/CToarlPrhu/fXDWbo2k7Xu8rI8A52dTJDHqp7li89vgUZekptR+KU
-	UBlCxYaddmFnc67fQTFJJhOvD9uveng2dbIRTzXuuGw8zspvnf52y8vXRZv6yImIR/TY
-	e4QADxEm3bjApDsUpmAFxrMRn9v5uJexwMiadqCybpEOoEilUXO618nAk+/9n2pnzkT5
-	MU6A==
+	Sat, 16 Jul 2016 03:52:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=CuZI/MsLFstUvsvZzAioLKMOhrtv4xK1RRsgjs47NOk=;
-	b=LbTGwVM3eCEbWHc/tTz1HCBc+a1CZNdOUuW2aXk9cGH1kK3v4pmA0cE5iuW9mZC8MZ
-	YePzRGe0GnTXH60LHtM2sST0+uCzi2EwGExzNrY/aaZIrO4PUrtEFrb9q2oKHFjDEWV8
-	jXiIL8g9RwjoO6AK6HwR4jEm/P+HlCmtTfMa2fShYehDNYKUuI8WNcAU2C2UnocyFn+z
-	Ot1kZwfG3AR6ZxGtTPp18yTIo8bz67mjgTwiyvLhJKskcJ3XDg+4kK4RXMoM0XvCAtcp
-	Jx3o5H4TDVTeyoq69HD5iw00Jg7nTs03vzQ/Q9J5F93Uj80ttZIF1bvefBgC/thLKYWL
-	wpLw==
-X-Gm-Message-State: ALyK8tJ4G+HmeSg1ejBmmnoB+P5mG+z7VkQBYZYYW7nwE/mCwDTsaqyobiQFNzQ+DC5lZxTiUtJbdoZHoVk3sQ==
-X-Received: by 10.55.187.4 with SMTP id l4mr29506633qkf.152.1468627493097;
-	Fri, 15 Jul 2016 17:04:53 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:date
+	:message-id:subject:from:to;
+	bh=ir9PvZiOxJbmiA3XFC4IyEb9FD/gpjkVN1fR+bHDBlw=;
+	b=cFmLZy7sLPlogS5+I07scdYbHsar+VzAdI/gomA9Mj1urUEWu1PfBZ+MYE/uEOkxJo
+	kCbFAc1daTK6Nr0bYvR/JsLFjAr23NPuojw+57toItPhBqnchKDr7DWpm8p/dvc0zjjV
+	E2Sl7lnQMxe+DK+XAE3uggShQjXqlDWmsfqbpng4fdN5leLuqzRsa2tM5RHpRqcRiOXz
+	nlbb1aFJgIHlvKLR0ZUOXTyj/LnTwYrtMQTHDzkwL4GPTW0HlJwWqTKzDFdsjhXlg1dA
+	p3U7Blp6gXoGqxN7Cq6kqUtdQpTQQk9FSiF6SLqBgLoqXIF9ZvmK1vklowMS8jZ9d5Lf
+	QOEQ==
+X-Gm-Message-State: ALyK8tKjB9eEItEB4kAHIDVKO43KIAHvHJOQX3G2cGV9D1zzdndhvYz5F3nto6hg9iGZeA==
+X-Received: by 10.36.34.14 with SMTP id o14mr26904097ito.11.1468666379108;
+	Sat, 16 Jul 2016 03:52:59 -0700 (PDT)
+Received: from mail-io0-f182.google.com (mail-io0-f182.google.com.
+	[209.85.223.182]) by smtp.gmail.com with ESMTPSA id
+	f129sm5008324ioe.35.2016.07.16.03.52.58
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 16 Jul 2016 03:52:58 -0700 (PDT)
+Received: by mail-io0-f182.google.com with SMTP id m101so124454422ioi.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Jul 2016 03:52:58 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.55.214.83 with HTTP; Fri, 15 Jul 2016 17:04:23 -0700 (PDT)
-In-Reply-To: <1468602774-12745-1-git-send-email-clopez@igalia.com>
-References: <1468602774-12745-1-git-send-email-clopez@igalia.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 15 Jul 2016 17:04:23 -0700
-Message-ID: <CAMKF1srJSb=ZJRo+pRSrZL4e179NhVa47JYBdBY-QQknZMsFZA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser][PATCH] chromium: install all pak files plus resources and blob.bin files.
+X-Received: by 10.107.35.129 with SMTP id j123mr9050993ioj.4.1468666378056;
+	Sat, 16 Jul 2016 03:52:58 -0700 (PDT)
+Received: by 10.64.24.74 with HTTP; Sat, 16 Jul 2016 03:52:57 -0700 (PDT)
+Received: by 10.64.24.74 with HTTP; Sat, 16 Jul 2016 03:52:57 -0700 (PDT)
+In-Reply-To: <CABcZANna5ip=FF0NknkneG6pj6w3SvKyrRdP+zmK+vMJgGbnxA@mail.gmail.com>
+References: <1468587261-18160-1-git-send-email-git@andred.net>
+	<1468587261-18160-2-git-send-email-git@andred.net>
+	<CABcZANna5ip=FF0NknkneG6pj6w3SvKyrRdP+zmK+vMJgGbnxA@mail.gmail.com>
+Date: Sat, 16 Jul 2016 11:52:57 +0100
+X-Gmail-Original-Message-ID: <CAKUP++vemmXt5ReFHCavtHN4Ha_8AD2g7t0Vt=-N5XwvoVWD8g@mail.gmail.com>
+Message-ID: <CAKUP++vemmXt5ReFHCavtHN4Ha_8AD2g7t0Vt=-N5XwvoVWD8g@mail.gmail.com>
+From: =?UTF-8?Q?Andr=C3=A9_Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-networking][PATCH 2/2] meta-networking: override SECURITY_CFLAGS for c-ares
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,75 +58,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Jul 2016 00:04:54 -0000
+X-List-Received-Date: Sat, 16 Jul 2016 10:53:03 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 15, 2016 at 10:12 AM, Carlos Alberto Lopez Perez
-<clopez@igalia.com> wrote:
->  * This files contain localized strings and other resources that are
->    needed for support of internationalization and localization.
+On 15 Jul 2016 3:35 pm, "Christopher Larson" <clarson@kergoth.com> wrote:
 >
->  * Files under the resources directory are needed for the web inspector.
+> On Fri, Jul 15, 2016 at 5:54 AM, <git@andred.net> wrote:
 >
-> Signed-off-by: Carlos Alberto Lopez Perez <clopez@igalia.com>
+> > From: Andr=C3=A9 Draszik <adraszik@tycoint.com>
+> >
+> > c-ares doesn't build if the distro has enabled usage of the
+> > security_flags.inc file as it is picky about what is placed
+> > into CPPFLAGS and CFLAGS. It complains and errors out if any
+> > preprocessor options appear in CFLAGS.
+> >
+> > Fix this by providing an additional include file that is
+> > require'd from conf/layer.conf.
+> >
+> > Signed-off-by: Andr=C3=A9 Draszik <adraszik@tycoint.com>
+> >
+>
+> This commit message is a little misleading. The fact that you added a .in=
+c
+> isn't what fixed the problem, the move of the defines from CFLAGS to
+> CPPFLAGS was.
 
-this is ok
+Well, I copied that part of the commit message from the commit that added a
+similar .inc file to to meta-oe. I'll rewrite it.
 
-> ---
->  recipes-browser/chromium/chromium.inc | 28 ++++++++++++++++++++--------
->  1 file changed, 20 insertions(+), 8 deletions(-)
->
-> diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
-> index e5deac1..0e7250e 100644
-> --- a/recipes-browser/chromium/chromium.inc
-> +++ b/recipes-browser/chromium/chromium.inc
-> @@ -52,20 +52,32 @@ do_install() {
->         if [ -f "${WORKDIR}/google-chrome.desktop" ]; then
->                 install -Dm 0644 ${WORKDIR}/google-chrome.desktop ${D}${datadir}/applications/google-chrome.desktop
->         fi
-> -       #Chromium plugins libs
-> +       if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/product_logo_48.png" ]; then
-> +               install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/product_logo_48.png ${D}${bindir}/${BPN}/product_logo_48.png
-> +       fi
-> +
-> +       if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/natives_blob.bin" ]; then
-> +               install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/natives_blob.bin ${D}${bindir}/${BPN}/natives_blob.bin
-> +       fi
-> +       if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/snapshot_blob.bin" ]; then
-> +               install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/snapshot_blob.bin ${D}${bindir}/${BPN}/snapshot_blob.bin
-> +       fi
-> +
-> +       # Chromium plugins libs
->         for f in libpdf.so libosmesa.so libffmpegsumo.so; do
->                 if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/$f" ]; then
->                         install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/$f ${D}${libdir}/${BPN}/$f
->                 fi
->         done
->
-> -       # Chromium *.pak files and CEF pak files (prefixed with cef_)
-> -       for f in content_resources.pak keyboard_resources.pak chrome_100_percent.pak product_logo_48.png resources.pak \
-> -                cef_100_percent.pak cef_200_percent.pak cef_resources.pak cef.pak \
-> -                locales/en-US.pak; do
-> -               if [ -f "${B}/out/${CHROMIUM_BUILD_TYPE}/$f" ]; then
-> -                       install -Dm 0644 ${B}/out/${CHROMIUM_BUILD_TYPE}/$f ${D}${bindir}/${BPN}/$f
-> -               fi
-> +       # Chromium *.pak files and CEF pak files ( prefixed with cef_ )
-> +       for f in $(cd ${B}/out/${CHROMIUM_BUILD_TYPE}/ && find . -type f -name \*.pak); do
-> +                       install -Dm 0644 "${B}/out/${CHROMIUM_BUILD_TYPE}/${f}" "${D}${bindir}/${BPN}/${f}"
-> +       done
-> +
-> +       # Chromium resource files (for the inspector).
-> +       for f in $(cd ${B}/out/${CHROMIUM_BUILD_TYPE}/ && test -d resources && find resources -type f); do
-> +                       install -Dm 0644 "${B}/out/${CHROMIUM_BUILD_TYPE}/${f}" "${D}${bindir}/${BPN}/${f}"
->         done
->
->  }
-> --
-> 2.1.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+A.
 
