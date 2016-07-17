@@ -1,24 +1,36 @@
-Return-Path: <sveinse@seldal.com>
-X-Greylist: delayed 454 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sun, 17 Jul 2016 12:33:27 UTC
-Received: from smtp.domeneshop.no (smtp.domeneshop.no [194.63.252.55])
-	by mail.openembedded.org (Postfix) with ESMTP id B126960589
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id AA9C160589
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jul 2016 12:33:27 +0000 (UTC)
-Received: from 156.92-221-160.customer.lyse.net ([92.221.160.156]:49320
-	helo=[10.5.5.121]) by smtp.domeneshop.no with esmtpsa
-	(TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128) (Exim 4.80)
-	(envelope-from <sveinse@seldal.com>) id 1bOl8r-0003mx-3f
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jul 2016 14:25:53 +0200
+	Sun, 17 Jul 2016 12:51:42 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id q62so10036769qkf.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Jul 2016 05:51:43 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=KC+EseWMKYLL5Kd/UOGH+zH0CiL7MGJED6ZxovLy5n0=;
+	b=WCrjVR+TEY9AVhGHZk/sWj9L8nzbA9RpdSMjjUjyJqODttUbnFJip++KIMGhdnHMg8
+	gFY6U8rKJxGJ/YrC7FZtmBqiKLBT8v8T9lJeyNS18ZKbMt9jYN1n6SpYE/4F3uuglfLU
+	gQW9Hm0nCFZ4fDghlL4NgVV+OOwUPjdkJVdmEKvS0ZSk+XHspQKUCrzrO/A0IPIw4X3d
+	M0izgJGCDlpuKPcXYAqLkSOIKqPr3AunyHVwRzS1isONCvAF00h8RCPOVKH5pU1Bqu9j
+	5Bby4aG8EA0cGVqG9B5lyGmY+7kxQUewaPwYOzI9b+RlxG7jfeNRpZL05lMqO9lyXoA6
+	M3HQ==
+X-Gm-Message-State: ALyK8tJBr63IglONRLgyZKzL+4tUmqRZEIEYGZ6kgFLGXmuUA5YCeXfT7WPEDgyaZDdl0w==
+X-Received: by 10.55.140.1 with SMTP id o1mr38219683qkd.143.1468759902736;
+	Sun, 17 Jul 2016 05:51:42 -0700 (PDT)
+Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
+	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
+	u57sm1340818qta.20.2016.07.17.05.51.42
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 17 Jul 2016 05:51:42 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-From: Svein Seldal <sveinse@seldal.com>
-Message-ID: <578B7950.2050800@seldal.com>
-Date: Sun, 17 Jul 2016 14:25:52 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.8.0
-MIME-Version: 1.0
-Subject: Qt5 meta and HostBinaries path
+Date: Sun, 17 Jul 2016 08:51:35 -0400
+Message-Id: <1468759895-10992-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-python][PATCH] python-flask-bcrypt: update package RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,27 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jul 2016 12:33:28 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 17 Jul 2016 12:51:44 -0000
 
-Hi
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-flask-bcrypt_0.7.1.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-I am porting a large Qt5 application to Yocto and are using the meta-qt5 
-layer. I have discovered that the qmake conf file, qt.conf, sets most 
-Host* fields to the absolute host/sysroot path as expected. However, 
-HostBinaries is not; It is set to /usr/bin/qt5, which cause our Qt5 app 
-to fail compiling.
+diff --git a/meta-python/recipes-devtools/python/python-flask-bcrypt_0.7.1.bb b/meta-python/recipes-devtools/python/python-flask-bcrypt_0.7.1.bb
+index d08883d..f035862 100644
+--- a/meta-python/recipes-devtools/python/python-flask-bcrypt_0.7.1.bb
++++ b/meta-python/recipes-devtools/python/python-flask-bcrypt_0.7.1.bb
+@@ -1,4 +1,4 @@
+-DESCRIPTION = "Brcrypt hashing for Flask."
++DESCRIPTION = "Bcrypt hashing for Flask."
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0ee2ee5bee7fe96597770e92db5719a8"
+ 
+@@ -9,4 +9,4 @@ PYPI_PACKAGE = "Flask-Bcrypt"
+ 
+ inherit pypi setuptools
+ 
+-RDEPENDS_${PN} = "python-bcrypt"
++RDEPENDS_${PN} += "${PYTHON_PN}-bcrypt ${PYTHON_PN}-flask"
+-- 
+1.9.1
 
-My first reaction is that this is clearly a bug, but after sifting 
-through the codebase and googling about it, I am not so sure. I see that 
-oe adds a new ExternalHostBinaries setting, and that this contains what 
-HostBinaries would.
-
-Can someone please explain if this is intentional and why its done like 
-this?
-
-
-Best regards,
-Svein Seldal
 
