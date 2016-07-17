@@ -1,25 +1,26 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 337006FFD4
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id B8DF76FFD4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jul 2016 11:52:21 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id j37so5840564qta.0
+	Sun, 17 Jul 2016 11:52:22 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id j37so5840571qta.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jul 2016 04:52:22 -0700 (PDT)
+	Sun, 17 Jul 2016 04:52:23 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=H3gJY9ekpkLUxxayXAsYz+5MFnFzR4ouRjVtO1M8p78=;
-	b=fX6/x5Q59OzzLEgpXfPgtthV5yjP1I0OcefKGtx60X0rPhSjMpUNWoTcV6SA4Zndv6
-	SGMEszDro5hseXjd2I/7hU1ipMCgg2T2WdshOug8gY6ZXWjgeLhDwAefBKEwKZZlws55
-	pN/9sC6Mxed19QdKJhJp3vpeOKhVwfyccHTrs3onls4ER2/4m7CWlC5Ov0X0pO65kZlA
-	NJtlvsoc1iqAe7dKMIHr1ulp9/onhHlrjjKyT1N3v3gm97Az6POAxugXeTmoaYrkEZeh
-	vLGEtlkCx0mDzrXrmXHj7Cco4a7lTANis3ef/jiNBClxAkJjFJVIPjw1WpH/i1khXjGE
-	+x1w==
-X-Gm-Message-State: ALyK8tJ8b2+ctM4Z27+Ak0U6B1bPBmoA4Jn/t7iNVM3n9OJJMMNnN34O8kYaSkdlKlJLZg==
-X-Received: by 10.200.36.13 with SMTP id c13mr4430153qtc.45.1468756341658;
-	Sun, 17 Jul 2016 04:52:21 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=MtrN+33E6jkvbXz1/PgPRo+9a6tR5Sn1PA6xapuqRYU=;
+	b=TMkeXIbVjOOLJgP67PIgAuEMlLhfIQf2Ww//U9jTIhcHSbIs5hjViByAOEJ3y18Ti6
+	i7qDfLXI+K1+kjhv3qcDRnodJisgUPDnqBgYPCzsfvzQbttzAytBKSFTZkadLBbYDEt/
+	zYKNg80Gc90gq3NwqPB9OFU9ZhXPPMvKBPyxqs0UsINAMMTeVKxwnXPMJj7r3EEi/Rmm
+	p55spYrfl1T8SuP+/URTr/gTiETmsRBP1yWbibPWWvoGDBz+6T1rOtE9bBw3dJIBy1W1
+	raCdS16GNU02kb9pBKgNGyew1HH3GUQ7j2Fxn83hJrsr2h6G0PyeDCso/0C+LuqjxG3w
+	aUMg==
+X-Gm-Message-State: ALyK8tJLuo7bGsS8OPd5LufIQVc7W9OncYVvGRsnkBoaO8FhWdw4Am53lJ2roullozwrCg==
+X-Received: by 10.200.43.105 with SMTP id 38mr15987997qtv.73.1468756342916;
+	Sun, 17 Jul 2016 04:52:22 -0700 (PDT)
 Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
 	[73.172.178.168])
 	by smtp.gmail.com with ESMTPSA id x20sm415502qtb.7.2016.07.17.04.52.21
@@ -27,10 +28,12 @@ Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
 	Sun, 17 Jul 2016 04:52:21 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Jul 2016 07:52:00 -0400
-Message-Id: <1468756321-27744-1-git-send-email-derek@asterius.io>
+Date: Sun, 17 Jul 2016 07:52:01 -0400
+Message-Id: <1468756321-27744-2-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-python][PATCH 1/2] python-click: add recipe for the python click package required by the new version of flask
+In-Reply-To: <1468756321-27744-1-git-send-email-derek@asterius.io>
+References: <1468756321-27744-1-git-send-email-derek@asterius.io>
+Subject: [meta-python][PATCH 2/2] python-flask: update RDEPENDS to include python-click
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,55 +50,19 @@ X-List-Received-Date: Sun, 17 Jul 2016 11:52:23 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-click.inc    | 17 +++++++++++++++++
- meta-python/recipes-devtools/python/python-click_6.6.bb |  4 ++++
- .../recipes-devtools/python/python3-click_6.6.bb        |  2 ++
- 3 files changed, 23 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-click.inc
- create mode 100644 meta-python/recipes-devtools/python/python-click_6.6.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-click_6.6.bb
+ meta-python/recipes-devtools/python/python-flask.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-click.inc b/meta-python/recipes-devtools/python/python-click.inc
-new file mode 100644
-index 0000000..f3d5b36
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-click.inc
-@@ -0,0 +1,17 @@
-+SUMMARY = "A simple wrapper around optparse for powerful command line utilities."
-+DESCRIPTION = "\
-+Click is a Python package for creating beautiful command line interfaces \
-+in a composable way with as little code as necessary. It's the "Command \
-+Line Interface Creation Kit". It's highly configurable but comes with \
-+sensible defaults out of the box."
-+HOMEPAGE = "http://click.pocoo.org/"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=09e8b7869f94ba9e9a7b260d53c65dab"
-+
-+SRC_URI[md5sum] = "d0b09582123605220ad6977175f3e51d"
-+SRC_URI[sha256sum] = "cc6a19da8ebff6e7074f731447ef7e112bd23adf3de5c597cf9989f2fd8defe9"
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-threading \
-+    "
-diff --git a/meta-python/recipes-devtools/python/python-click_6.6.bb b/meta-python/recipes-devtools/python/python-click_6.6.bb
-new file mode 100644
-index 0000000..f63e27c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-click_6.6.bb
-@@ -0,0 +1,4 @@
-+inherit pypi setuptools
-+require python-click.inc
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-contextlib"
-diff --git a/meta-python/recipes-devtools/python/python3-click_6.6.bb b/meta-python/recipes-devtools/python/python3-click_6.6.bb
-new file mode 100644
-index 0000000..1920644
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-click_6.6.bb
-@@ -0,0 +1,2 @@
-+inherit pypi setuptools3
-+require python-click.inc
+diff --git a/meta-python/recipes-devtools/python/python-flask.inc b/meta-python/recipes-devtools/python/python-flask.inc
+index ee7f7c2..87d020e 100644
+--- a/meta-python/recipes-devtools/python/python-flask.inc
++++ b/meta-python/recipes-devtools/python/python-flask.inc
+@@ -11,4 +11,4 @@ SRC_URI[sha256sum] = "b4713f2bfb9ebc2966b8a49903ae0d3984781d5c878591cf2f7b484d28
+ 
+ PYPI_PACKAGE = "Flask"
+ 
+-RDEPENDS_${PN} = "${PYTHON_PN}-werkzeug ${PYTHON_PN}-jinja2 ${PYTHON_PN}-itsdangerous"
++RDEPENDS_${PN} = "${PYTHON_PN}-werkzeug ${PYTHON_PN}-jinja2 ${PYTHON_PN}-itsdangerous ${PYTHON_PN}-click"
 -- 
 1.9.1
 
