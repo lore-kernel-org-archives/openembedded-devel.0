@@ -1,36 +1,46 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 62604731C5
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f66.google.com (mail-pa0-f66.google.com
+	[209.85.220.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 316FF60589
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Jul 2016 15:59:53 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id j37so5116740qta.0
+	Sun, 17 Jul 2016 11:47:05 +0000 (UTC)
+Received: by mail-pa0-f66.google.com with SMTP id hh10so9194200pac.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Jul 2016 08:59:55 -0700 (PDT)
+	Sun, 17 Jul 2016 04:47:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=XOWzfYIOkJ/hx7kIhuHB9VbSoaLBDjjRgH3I5SLAxgg=;
+	b=ngqGXP2bMVK5IQpvBg0egKnEvayGnR8YBhnAhK4XnNMzW5m/cWQX/tQd7y3q9wec+q
+	20wKSXkugnL7MP8cngRxAf91mX6mROvzq3gajfsZduYCn8/J77PyK8ovaGHctof+KQ55
+	tgoQDbTO0Jc14ErTfEIE74QR5ah5yjq1/XwUQqbtyLloO+fUfGlIDq3KkjNUsamtkZa/
+	OL9QT+EcM9Dgu/oAnV6KrBmiw7ay3aZTiQrYIm/0PUqqJuDgPpHJcpUR8P4uVr6VT27Q
+	xlvgPxwsqJ9k4yO7DqMkHkxXaX7zRpBeB7dAd2+cOQ7A17GkFAQJT1ax+GTL897QM0PK
+	0TJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=MtQmVoRe2rugZVvRb8PN5gK1Mzq2fXDUTlzz1CE5Yjg=;
-	b=Kl+CBrgpJ34CpAt/Nkiq+EjScG9YhUMO53IRdT80CJTzm+PiDJlgPurZWrGovCxJhm
-	Cbjp8A8CtsgIbl0IY3KTN1cevt90GYydddLXB8kLVZuIXg4Z6MGQE7mDIp5qBjnv5bmP
-	cjSmXmDYQkdVMNnWipDusqtvos9LBICvJrUnDIqIs3h8zdw0aMFLXXsN11owpYkMsHrE
-	biWfFixrSFPKfMCm5bkW3DMQfkaa/RNyli70pYpYTUVvAVu//QYc1jzvv2IfI3oWS894
-	mKgLmXkeTyDVJqvpzfuhklg7hCo41g/IhNMYbJ381uvBZdNBN4nHzIm1hn3+2qdIsTD4
-	BF9A==
-X-Gm-Message-State: ALyK8tIQgt3lH3FfSQYS9KXjg9/Q5tnWutljG6/lQxuLld7p19mNSeJHNPaILtu62NitUg==
-X-Received: by 10.200.50.20 with SMTP id x20mr38270894qta.71.1468684794425;
-	Sat, 16 Jul 2016 08:59:54 -0700 (PDT)
-Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	t15sm2520012qtc.26.2016.07.16.08.59.53
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 16 Jul 2016 08:59:53 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+	bh=XOWzfYIOkJ/hx7kIhuHB9VbSoaLBDjjRgH3I5SLAxgg=;
+	b=SYwGKJIppCcerbu03iUwPie7wR1z8VjzNYnPvugHeOFFYzS2+q2bsY4hVNtaFumnVo
+	JBgPJRAIwRqvcyN1Dy1axqMBAGKLSv1fZFAmQJv6o6kwcfMCMEG/YaqH5XbO5GfBrAHK
+	T6yLOv35w8zToIG6QmNPmCtrlLZsz0fRwMP2TyvIG1uwCAvhPtQ4MgMJQeh7YO0Fv74U
+	yAqx6hUxLeq22QB3a5Y+eH7WyzZDdEG3WIuTNLjQfButW3M/kJCOx44HeAotxEGnX1ZQ
+	fQJ9gAhBqFcQNty2xRb8w6DOES5X1z8iP6rNrUx/VEA92xBFzuXlgVG72sdjJVfcjNvQ
+	dkLg==
+X-Gm-Message-State: ALyK8tL9hmdfhn7E1DBcJQM6MgAmtEd0Leesf91reYE0Dwfc3u3mhl/bmd/TnqMBZ4QG8g==
+X-Received: by 10.66.218.70 with SMTP id pe6mr2705761pac.29.1468756026248;
+	Sun, 17 Jul 2016 04:47:06 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by smtp.gmail.com with ESMTPSA id
+	x66sm2048335pfi.84.2016.07.17.04.47.05
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 17 Jul 2016 04:47:05 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 16 Jul 2016 11:59:46 -0400
-Message-Id: <1468684786-5400-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-python][PATCH] python-feedformatter: add package RDEPENDS
+Date: Sun, 17 Jul 2016 21:46:03 +1000
+Message-Id: <20160717114603.7071-1-net147@gmail.com>
+X-Mailer: git-send-email 2.9.0
+Subject: [meta-qt5][PATCH] qtserialbus: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,28 +53,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Jul 2016 15:59:55 -0000
+X-List-Received-Date: Sun, 17 Jul 2016 11:47:06 -0000
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Qt Serial Bus module was added in Qt 5.7.
+
+Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-feedformatter.inc | 6 ++++++
- 1 file changed, 6 insertions(+)
+ recipes-qt/qt5/qtserialbus_git.bb | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtserialbus_git.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-feedformatter.inc b/meta-python/recipes-devtools/python/python-feedformatter.inc
-index 1a02a4f..499bed2 100644
---- a/meta-python/recipes-devtools/python/python-feedformatter.inc
-+++ b/meta-python/recipes-devtools/python/python-feedformatter.inc
-@@ -9,3 +9,9 @@ PR = "r0"
- SRC_URI = "git://github.com/marianoguerra/feedformatter.git"
- 
- S = "${WORKDIR}/git"
+diff --git a/recipes-qt/qt5/qtserialbus_git.bb b/recipes-qt/qt5/qtserialbus_git.bb
+new file mode 100644
+index 0000000..731bd48
+--- /dev/null
++++ b/recipes-qt/qt5/qtserialbus_git.bb
+@@ -0,0 +1,13 @@
++require qt5.inc
++require qt5-git.inc
 +
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-datetime \
-+    ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-xml \
-+    "
++LICENSE = "GFDL-1.3 & (LGPL-3.0 | GPL-2.0)"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
++    file://LICENSE.GPLv2;md5=05832301944453ec79e40ba3c3cfceec \
++    file://LICENSE.FDL;md5=f70ee9a6c44ae8917586fea34dff0ab5 \
++"
++
++DEPENDS += "qtbase qtserialport"
++
++SRCREV = "f9201ca7bad9220149fb39b89914e83a4a14dffc"
 -- 
-1.9.1
+2.9.0
 
 
