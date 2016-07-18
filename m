@@ -1,26 +1,35 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D91660797
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 92740606D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jul 2016 02:30:43 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u6I2Uh7I005813
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 18 Jul 2016 07:52:09 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1bP3LU-00028g-P5 for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Jul 2016 09:52:09 +0200
+Received: from p5DE8CA75.dip0.t-ipconnect.de ([93.232.202.117])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Jul 2016 09:52:08 +0200
+Received: from patrick.ohly by p5DE8CA75.dip0.t-ipconnect.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jul 2016 19:30:43 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Sun, 17 Jul 2016 19:30:43 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 18 Jul 2016 10:28:13 +0800
-Message-ID: <1468808893-5752-3-git-send-email-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.6.1
-In-Reply-To: <1468808893-5752-1-git-send-email-kai.kang@windriver.com>
-References: <1468808893-5752-1-git-send-email-kai.kang@windriver.com>
-MIME-Version: 1.0
-Subject: [PATCH 2/2] ttf-vlgothic: add a ttf font
+	Mon, 18 Jul 2016 09:52:08 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Patrick Ohly <patrick.ohly@intel.com>
+Date: Mon, 18 Jul 2016 07:51:55 +0000 (UTC)
+Message-ID: <loom.20160718T094851-958@post.gmane.org>
+References: <20160622163845.29573-1-danismostlikely@gmail.com>
+	<loom.20160711T131713-153@post.gmane.org>
+	<CACS+7ZQ_GxdipW4exewtzfyK2nrDFR2=jHJ83d_Ze=@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 93.232.202.117 (Mozilla/5.0 (X11; Linux x86_64;
+	rv:38.0) Gecko/20100101 Firefox/38.0 Iceweasel/38.7.1)
+Subject: Re: [meta-java][PATCH] openjdk-8: make GCC6 happy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,57 +42,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jul 2016 02:30:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 18 Jul 2016 07:52:11 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-From: Kai Kang <kai.kang@windriver.com>
+Dan McGregor <danismostlikely <at> gmail.com> writes: 
+> On 11 July 2016 at 05:29, Patrick Ohly <patrick.ohly <at> intel.com> wrote:
+> > Dan McGregor <danismostlikely <at> gmail.com> writes:
+> >> From: Daniel McGregor <daniel.mcgregor <at> vecima.com>
+> >>
+> >> GCC 6 sets the default C++ standard to C++14 and introduces dead store
+> >> elimination by default. OpenJDK 8 is not ready for either of these
+> >> changes, so set the C++ standard back to gnu++98 and disable dead
+> >> store elimination.
+> >>
+> >> Switched to using --with-extra-cflags, cxxflags, and ldflags. The added
+> >> patch fixes building when using those flags, and are needed to get
+> >> CFLAGS into the JDK build in the native case.
+> >
+> > Has anyone tested this on a host system where gcc is still 4.x, like 4.9.2
+> > on Debian Wheezy?
+> >
+> > I'm finding that -fno-lifetime-dse is also getting passed to the gcc used
+> > for compiling native binaries (obviously in openjdk-8-native, but also for
+> > some helper executables in openjdk-8). This then breaks the compilation
+> > because older gcc rejects that flag.
+> >
+> > I've briefly toyed with the patch below which worked for openjdk-8-native,
+> > but not for openjdk-8. I'm just going to work around it by staying on gcc
+> > 5.x and clearing these extra flags.
+> >
+> > I'm not familiar enough with the openjdk-8 build process to propose a better
+> > solution, but perhaps someone else has an idea?
+> >
+[...]
+> This regex doesn't work in the cross case because the version string
+> doesn't start with "gcc". It starts with '<target-triple>-gcc', so
+> that should be checked instead.
+> 
+> I'll fiddle with this patch some more. It looks like a good short-term
+> solution to building OpenJDK on GCC 4 hosts.
 
-Add an extra ttf font vlgothic.
+Thanks for taking this further. But please really test on such an older 
+system, because the patch alone is not enough. Something also needs to
+be done when configuring openjdk-8 such that it uses different flags
+when invoking the host compiler (old gcc) and the target compiler (gcc 6).
 
-The font is derived from from M+ FONTS which is created by M+ FONTS
-PROJECT and under the Free license. So it has to obey the mplus licence.
+I haven't found a solution for that (not familiar enough with the Java
+build system).
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../ttf-fonts/ttf-vlgothic_20141206.bb             | 28 ++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb
-
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb
-new file mode 100644
-index 0000000..62f2bb2
---- /dev/null
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb
-@@ -0,0 +1,28 @@
-+require ttf.inc
-+
-+SUMMARY = "Japanese TrueType fonts from Vine Linux"
-+AUTHOR = "Contributor: noonov <noonov@gmail.com>"
-+HOMEPAGE = "http://vlgothic.dicey.org/"
-+
-+LICENSE = "mplus & BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE.en;md5=66ecd0fd7e4da6246fa30317c7b66755 \
-+                    file://LICENSE_E.mplus;md5=1c4767416f20215f1e61b970f2117db9 \
-+"
-+
-+SRC_URI = "https://osdn.jp/dl/vlgothic/VLGothic-${PV}.tar.xz"
-+
-+SRC_URI[md5sum] = "bb7fadb2dff09a4fb6a11dc9dfdc0c36"
-+SRC_URI[sha256sum] = "982040db2f9cb73d7c6ab7d9d163f2ed46d1180f330c9ba2fae303649bf8102d"
-+
-+S = "${WORKDIR}/VLGothic"
-+
-+do_install_append () {
-+    install -D -m644 ${S}/LICENSE_E.mplus ${D}${datadir}/licenses/${PN}/COPYING_MPLUS.txt
-+    install -D -m644 ${S}/README.sazanami ${D}${datadir}/licenses/${PN}/COPYING_SAZANAMI.txt
-+    install -D -m644 ${S}/LICENSE.en ${D}${datadir}/licenses/${PN}/COPYING_VLGOTHIC.txt
-+}
-+
-+PACKAGES = "${PN}"
-+FONT_PACKAGES = "${PN}"
-+
-+FILES_${PN} = "${datadir}/fonts/truetype ${datadir}/licenses"
--- 
-2.6.1
+Bye, Patrick
 
 
