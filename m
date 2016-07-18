@@ -1,48 +1,60 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 0830A60797
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-vk0-f46.google.com (mail-vk0-f46.google.com
+	[209.85.213.46])
+	by mail.openembedded.org (Postfix) with ESMTP id E27F660746
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jul 2016 13:40:09 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id p126so6660238qke.1
+	Mon, 18 Jul 2016 13:44:58 +0000 (UTC)
+Received: by mail-vk0-f46.google.com with SMTP id x130so239097492vkc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jul 2016 06:40:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:from:date:to:subject:user-agent;
-	bh=1IZZCqKbW7moE1j18wgy6IzcTyDoztCzPpviZ9tsBzw=;
-	b=lN8qwtkmz6WAfr+1dOe0NN/TSutgK7x39AJgG9pQo4WQbiVZCVsHLc5ZaRFTe4AAZK
-	PsQ1W4ei9wDZRrJRvBMVptyv8FyyYKW+Z0xArlJ0u6VrnKJRxxT8L8iUj/WV5j+fHLQq
-	F33yE7ZX+IqgA3iCeuoHV1oZPNN8f/bonqu8goBfCTLXzLBDpphFS6lLxxyuWeNZb0ou
-	wd1I1pY9pJWl7hM0tfIh2s0x8ka1xxLbpdrKvp35RLQ3b47+hUacV1Tlh/9gWLpwtvwD
-	Mt2duk5krogaeT13ypByzkVYpd4n1d64v7qWOqyKQiSjlpvqwTqu4mnrELk3ktt0zrM/
-	+/7A==
+	Mon, 18 Jul 2016 06:44:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to; 
+	bh=O+d2K03dlec+qQBFaCtEihfOMmjKc2XWMjKfYL2x0h4=;
+	b=nYtFLizWDbgYcU5bWAv0Vu8Ot7+ARIgZVRt/N+g4VsHZl1O/iPLa3COI84tbNVq/R4
+	MTNJXifzIAyT8GMeEiTXZyk7sRVgGIdsSx0zjDXye/5yIt0JgdVFpdXTihaXcFe9GFDP
+	3DJ1FrSemhBJUjo/7Ni+WXTB2QF2iXBXSiPOF/1TBNLjijiFwBxMY88HaW7eH82Aeq33
+	nlcafDWfrDnXtlfzo/wUCDiFBOPCNAMhrJJ+3JH8IvzNRtXjyRt5PEO7uk/dujghFr2l
+	VGzb8gM5TxVJBM+GtQ6pPXz+6l7F26997KrL+zIji6Vlsyb+Nzp/XkSGIoDzO4p+3ddX
+	F+RA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:from:date:to:subject:user-agent;
-	bh=1IZZCqKbW7moE1j18wgy6IzcTyDoztCzPpviZ9tsBzw=;
-	b=ld3V1cu6AwY4whJD98Z3xsFDEpSmfh4XbR/KBNqziVaX2Dgpb81qBw/59isZDpG+bA
-	NZRpiS1cXSQpfTsvHOY4fpOsEGiXRjwiaoGMzSRkswq79jUG8crkjGlzqoXcBIR8+LSh
-	6lgTK3xzQcnog0giSwlbyOqRKTDDoiAJRH75jZqgEu2TZTfyGDS90hUQZ6bsknOmK/+z
-	1gtDjAZnb0PBOTYHPIUECrXeCULJ0fxhH75pCLX3dvSVIXMuN+2I+qkjzy9hR5FrizJU
-	SfEgswIEaPxA/oBSHsq456BNQHDw73IZHy0vzq1hNEdXAkSRMPoimiHIb0S0lmZ2h6Zp
-	YUew==
-X-Gm-Message-State: ALyK8tKIjTAZXZrRFxKgAgLHJWl+n9KBYKCjxLKamRCV3gzVGHg1gcbFMvpN1WGpPyqNlg==
-X-Received: by 10.55.21.97 with SMTP id f94mr43461495qkh.8.1468849210069;
-	Mon, 18 Jul 2016 06:40:10 -0700 (PDT)
-Received: from localhost ([177.100.227.79])
-	by smtp.gmail.com with ESMTPSA id a66sm398562qkg.2.2016.07.18.06.40.06
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to;
+	bh=O+d2K03dlec+qQBFaCtEihfOMmjKc2XWMjKfYL2x0h4=;
+	b=jBbBClym7sTZwBQxn94poehN0VAxWKSMlIQ+G+WjENYHhCvN6NQlx46lHIk+SVV1xr
+	eSe/o1//SmuT6fldcKDA9z2RnklTwHAjngBkeH8ryLz4CnDPWF8sWnsrjADIB8ybUqe+
+	mZsL2OltnB46UP3SqjSNxucvs5ZNL3vgKnUkQm7Fm/UgVG3Jikh69UoGlL1vLvGvREu2
+	zSvDXBAbLkQAxCaC6mIU7/VFEg9TN21xfjdzbS7uFNLwtcpkbmvqZgCB7Xs7EzqBsvDG
+	gfGohrNTmD2neSoLJGJC2rhahN92eqmholwLi4NUzRdFxoe1nXjuShMePdBiU6ixNvBK
+	/gDQ==
+X-Gm-Message-State: ALyK8tKR/7B7bJQVq6/YrVt78cQ1Xu+n/Yk/RWEl5TLkr8VzEx5t/LvfBmdWBHowjIieqg==
+X-Received: by 10.31.93.193 with SMTP id r184mr17083404vkb.53.1468849498607;
+	Mon, 18 Jul 2016 06:44:58 -0700 (PDT)
+Received: from mail-vk0-f47.google.com (mail-vk0-f47.google.com.
+	[209.85.213.47]) by smtp.gmail.com with ESMTPSA id
+	131sm3053154vkn.22.2016.07.18.06.44.56
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 18 Jul 2016 06:40:08 -0700 (PDT)
-Message-ID: <578cdc38.45e8e90a.7ef52.2915@mx.google.com>
-Received: by localhost (sSMTP sendmail emulation);
-	Mon, 18 Jul 2016 10:40:02 -0300
-From: "Otavio Salvador" <otavio.salvador@gmail.com>
-Date: Mon, 18 Jul 2016 10:40:02 -0300
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-User-Agent: mail v14.8.9
-Subject: Updates to meta-java (master) in 2016-07-18
+	Mon, 18 Jul 2016 06:44:56 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-vk0-f47.google.com with SMTP id x130so239095872vkc.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Jul 2016 06:44:56 -0700 (PDT)
+X-Received: by 10.31.161.81 with SMTP id k78mr17714410vke.122.1468849496491;
+	Mon, 18 Jul 2016 06:44:56 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.31.192.195 with HTTP; Mon, 18 Jul 2016 06:44:54 -0700 (PDT)
+In-Reply-To: <1464832273.22882.2.camel@pek-signage.wrs.com>
+References: <1464745422-12428-1-git-send-email-Feng.Mu@windriver.com>
+	<20160601093257.GA15832@mbabyjoh-desk.ger.corp.intel.com>
+	<1464832273.22882.2.camel@pek-signage.wrs.com>
+Date: Mon, 18 Jul 2016 10:44:54 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKqKk5=T_cVvGQhTeLBgSmLb8jRT9DUHG2vryk6LXWC=iw@mail.gmail.com>
+Message-ID: <CAP9ODKqKk5=T_cVvGQhTeLBgSmLb8jRT9DUHG2vryk6LXWC=iw@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java][PATCH] javasqlite: add support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,44 +67,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jul 2016 13:40:10 -0000
+X-List-Received-Date: Mon, 18 Jul 2016 13:45:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hello,
+On Wed, Jun 1, 2016 at 10:51 PM, Feng Mu <Feng.Mu@windriver.com> wrote:
+> Attached please find the new PATCH.
 
-I pushed following updates:
+Send this using the send-email too; attached patches are bad for
+git-am and patchwork workflow.
 
-commit 5019f33ecc30608431f1221b27cdc78d439df328 (HEAD -> pending, yocto/master-next, yocto/master, m/master, m/krogoth)
-Author: Daniel McGregor <daniel.mcgregor@vecima.com>
-Date:   Fri Jul 15 15:08:20 2016 -0600
 
-    openjdk-8: Detect compiler version
-    
-    Some supported hosts still use GCC 4.X. These don't support the flags
-    needed to make GCC 6 work, so check the GCC version and add appropriate
-    compiler flags.
-    
-    This implementation will append flags for any gcc version, but it's only
-    used for GCC 6 right now.
-    
-    Signed-off-by: Daniel McGregor <daniel.mcgregor@vecima.com>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 
-commit dcef9ff46b9dc6f718cf2e63d48842dd0236bed1
-Author: Daniel McGregor <daniel.mcgregor@vecima.com>
-Date:   Thu Jul 7 10:55:18 2016 -0600
-
-    openjdk-7, openjdk-8: use vardeps to fix shared state
-    
-    Previously if PARALLEL_MAKE changed, so did the task signature
-    for do_configure. Use vardepsvalue so that the signature remains
-    constant.
-    
-    Signed-off-by: Daniel McGregor <daniel.mcgregor@vecima.com>
-    Signed-off-by: Maxin B. John <maxin.john@intel.com>
-
-Regards,
-
---
+-- 
 Otavio Salvador                             O.S. Systems
 http://www.ossystems.com.br        http://code.ossystems.com.br
 Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
