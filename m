@@ -1,26 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E46870101
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D91660797
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jul 2016 02:30:41 +0000 (UTC)
+	Mon, 18 Jul 2016 02:30:43 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u6I2Uchs017607
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u6I2Uh7I005813
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jul 2016 19:30:41 -0700
+	Sun, 17 Jul 2016 19:30:43 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Sun, 17 Jul 2016 19:30:36 -0700
+	14.3.248.2; Sun, 17 Jul 2016 19:30:43 -0700
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 18 Jul 2016 10:28:12 +0800
-Message-ID: <1468808893-5752-2-git-send-email-kai.kang@windriver.com>
+Date: Mon, 18 Jul 2016 10:28:13 +0800
+Message-ID: <1468808893-5752-3-git-send-email-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.6.1
 In-Reply-To: <1468808893-5752-1-git-send-email-kai.kang@windriver.com>
 References: <1468808893-5752-1-git-send-email-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/2] liberation-sans-narrow: add a ttf font
+Subject: [PATCH 2/2] ttf-vlgothic: add a ttf font
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,83 +33,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jul 2016 02:30:42 -0000
+X-List-Received-Date: Mon, 18 Jul 2016 02:30:45 -0000
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-Add an extra ttf font liberation-sans-narrow for X.
+Add an extra ttf font vlgothic.
+
+The font is derived from from M+ FONTS which is created by M+ FONTS
+PROJECT and under the Free license. So it has to obey the mplus licence.
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../30-0-liberation-sans-narrow.conf               | 18 ++++++++++++
- .../ttf-fonts/ttf-liberation-sans-narrow_1.07.4.bb | 32 ++++++++++++++++++++++
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-sans-narrow/30-0-liberation-sans-narrow.conf
- create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-sans-narrow_1.07.4.bb
+ .../ttf-fonts/ttf-vlgothic_20141206.bb             | 28 ++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-sans-narrow/30-0-liberation-sans-narrow.conf b/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-sans-narrow/30-0-liberation-sans-narrow.conf
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb
 new file mode 100644
-index 0000000..a4f4da7
+index 0000000..62f2bb2
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-sans-narrow/30-0-liberation-sans-narrow.conf
-@@ -0,0 +1,18 @@
-+<?xml version="1.0" encoding="UTF-8"?>
-+<!DOCTYPE fontconfig SYSTEM "../fonts.dtd">
-+<fontconfig>
-+         <!-- Microsoft -->
-+        <alias binding="same">
-+          <family>Arial Narrow</family>
-+            <accept>
-+              <family>Liberation Sans Narrow</family>
-+            </accept>
-+        </alias>
-+        <alias binding="same">
-+          <family>Liberation Sans Narrow</family>
-+            <default>
-+              <family>Arial Narrow</family>
-+            </default>
-+        </alias>
-+</fontconfig>
-+
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-sans-narrow_1.07.4.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-sans-narrow_1.07.4.bb
-new file mode 100644
-index 0000000..f36cf4b
---- /dev/null
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-sans-narrow_1.07.4.bb
-@@ -0,0 +1,32 @@
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-vlgothic_20141206.bb
+@@ -0,0 +1,28 @@
 +require ttf.inc
 +
-+SUMMARY = "Liberation(tm) Fonts"
-+DESCRIPTION = "The Liberation(tm) Fonts is a font family originally \
-+created by Ascender(c) which aims at metric compatibility with \
-+Arial, Times New Roman, Courier New."
++SUMMARY = "Japanese TrueType fonts from Vine Linux"
++AUTHOR = "Contributor: noonov <noonov@gmail.com>"
++HOMEPAGE = "http://vlgothic.dicey.org/"
 +
-+HOMEPAGE = "https://fedorahosted.org/liberation-fonts/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+
-+SRC_URI = "https://fedorahosted.org/releases/l/i/liberation-fonts/liberation-fonts-ttf-${PV}.tar.gz \
-+           file://30-0-liberation-sans-narrow.conf \
++LICENSE = "mplus & BSD"
++LIC_FILES_CHKSUM = "file://LICENSE.en;md5=66ecd0fd7e4da6246fa30317c7b66755 \
++                    file://LICENSE_E.mplus;md5=1c4767416f20215f1e61b970f2117db9 \
 +"
 +
-+SRC_URI[md5sum] = "134d8262145fc793c6af494dcace3e71"
-+SRC_URI[sha256sum] = "61a7e2b6742a43c73e8762cdfeaf6dfcf9abdd2cfa0b099a9854d69bc4cfee5c"
++SRC_URI = "https://osdn.jp/dl/vlgothic/VLGothic-${PV}.tar.xz"
 +
-+S = "${WORKDIR}/liberation-fonts-ttf-${PV}"
++SRC_URI[md5sum] = "bb7fadb2dff09a4fb6a11dc9dfdc0c36"
++SRC_URI[sha256sum] = "982040db2f9cb73d7c6ab7d9d163f2ed46d1180f330c9ba2fae303649bf8102d"
++
++S = "${WORKDIR}/VLGothic"
 +
 +do_install_append () {
-+    install -d ${D}${datadir}/fonts/TTF/
-+    install -d ${D}${sysconfdir}/fonts/conf.d/
-+    install -m 0644 LiberationSansNarrow*.ttf ${D}${datadir}/fonts/TTF/
-+    install -D -m 0644 ${WORKDIR}/30-0-liberation-sans-narrow.conf ${D}${sysconfdir}/conf.avail/30-${PN}-sans.conf
-+    install -D -m 0644 ${S}/License.txt ${D}${datadir}/licenses/${PN}/LICENSE
++    install -D -m644 ${S}/LICENSE_E.mplus ${D}${datadir}/licenses/${PN}/COPYING_MPLUS.txt
++    install -D -m644 ${S}/README.sazanami ${D}${datadir}/licenses/${PN}/COPYING_SAZANAMI.txt
++    install -D -m644 ${S}/LICENSE.en ${D}${datadir}/licenses/${PN}/COPYING_VLGOTHIC.txt
 +}
 +
 +PACKAGES = "${PN}"
 +FONT_PACKAGES = "${PN}"
 +
-+FILES_${PN} = "${datadir}/fonts ${sysconfdir} ${datadir}/licenses"
++FILES_${PN} = "${datadir}/fonts/truetype ${datadir}/licenses"
 -- 
 2.6.1
 
