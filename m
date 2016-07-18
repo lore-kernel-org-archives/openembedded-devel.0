@@ -1,35 +1,40 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 92740606D0
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
+	[209.85.215.68])
+	by mail.openembedded.org (Postfix) with ESMTP id A648860589
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jul 2016 07:52:09 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1bP3LU-00028g-P5 for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jul 2016 09:52:09 +0200
-Received: from p5DE8CA75.dip0.t-ipconnect.de ([93.232.202.117])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jul 2016 09:52:08 +0200
-Received: from patrick.ohly by p5DE8CA75.dip0.t-ipconnect.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	Mon, 18 Jul 2016 08:02:54 +0000 (UTC)
+Received: by mail-lf0-f68.google.com with SMTP id l89so10787786lfi.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jul 2016 09:52:08 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 18 Jul 2016 01:02:55 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=IWY/7FdqjiG39FcOpOPSa/JihTT/HzhERh1H8QQ3YAQ=;
+	b=Abp5iPE+TNl17fJuszcpxjHGEQoBEzJUheOFmITq+YOiFCRWb2drKUEr3hWZAdTxHy
+	BKCRiQVYqqIqEXMdwxys27nbg6hNBKEFXYI8hn+czaai7zEaL3gGQnHpYqQKw9J0bSgj
+	Qn8/I29iG3DB4wWUYmm+ZDIjVUs8yb/wOKlFYy8U+s4nyEjgEQ/sA8PlSmX4N7asiHnB
+	G08x1MLY/xPsucR4KVAbJpDu9Kbn0VXHNRX4fuQLw9qDcEwsqq6XSUPv204XciAF0Akw
+	eqo7xMrVawLQA6cgOjhZeY2uaxiETfZ13HQaxwQDzzb9diOrriNgA2uciYpp0PmSVaJ/
+	03QA==
+X-Gm-Message-State: ALyK8tIkd3A/yP5reIWVvROk4Hhitmi5QJuG3bY9U2UfnhXnwZYEmm32g9TvFbxtbB+i1Q==
+X-Received: by 10.25.23.99 with SMTP id n96mr16070975lfi.64.1468828974725;
+	Mon, 18 Jul 2016 01:02:54 -0700 (PDT)
+Received: from tfsielt31850.TYCOFS.COM ([185.46.212.59])
+	by smtp.gmail.com with ESMTPSA id 29sm4170845lfu.43.2016.07.18.01.02.53
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 18 Jul 2016 01:02:53 -0700 (PDT)
+From: git@andred.net
 To: openembedded-devel@lists.openembedded.org
-From: Patrick Ohly <patrick.ohly@intel.com>
-Date: Mon, 18 Jul 2016 07:51:55 +0000 (UTC)
-Message-ID: <loom.20160718T094851-958@post.gmane.org>
-References: <20160622163845.29573-1-danismostlikely@gmail.com>
-	<loom.20160711T131713-153@post.gmane.org>
-	<CACS+7ZQ_GxdipW4exewtzfyK2nrDFR2=jHJ83d_Ze=@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 93.232.202.117 (Mozilla/5.0 (X11; Linux x86_64;
-	rv:38.0) Gecko/20100101 Firefox/38.0 Iceweasel/38.7.1)
-Subject: Re: [meta-java][PATCH] openjdk-8: make GCC6 happy
+Date: Mon, 18 Jul 2016 09:02:48 +0100
+Message-Id: <1468828968-19388-2-git-send-email-git@andred.net>
+X-Mailer: git-send-email 2.8.1
+In-Reply-To: <1468828968-19388-1-git-send-email-git@andred.net>
+References: <1468828968-19388-1-git-send-email-git@andred.net>
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH v2 2/2] meta-networking: override SECURITY_CFLAGS for c-ares
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,55 +47,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jul 2016 07:52:11 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 18 Jul 2016 08:02:58 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Dan McGregor <danismostlikely <at> gmail.com> writes: 
-> On 11 July 2016 at 05:29, Patrick Ohly <patrick.ohly <at> intel.com> wrote:
-> > Dan McGregor <danismostlikely <at> gmail.com> writes:
-> >> From: Daniel McGregor <daniel.mcgregor <at> vecima.com>
-> >>
-> >> GCC 6 sets the default C++ standard to C++14 and introduces dead store
-> >> elimination by default. OpenJDK 8 is not ready for either of these
-> >> changes, so set the C++ standard back to gnu++98 and disable dead
-> >> store elimination.
-> >>
-> >> Switched to using --with-extra-cflags, cxxflags, and ldflags. The added
-> >> patch fixes building when using those flags, and are needed to get
-> >> CFLAGS into the JDK build in the native case.
-> >
-> > Has anyone tested this on a host system where gcc is still 4.x, like 4.9.2
-> > on Debian Wheezy?
-> >
-> > I'm finding that -fno-lifetime-dse is also getting passed to the gcc used
-> > for compiling native binaries (obviously in openjdk-8-native, but also for
-> > some helper executables in openjdk-8). This then breaks the compilation
-> > because older gcc rejects that flag.
-> >
-> > I've briefly toyed with the patch below which worked for openjdk-8-native,
-> > but not for openjdk-8. I'm just going to work around it by staying on gcc
-> > 5.x and clearing these extra flags.
-> >
-> > I'm not familiar enough with the openjdk-8 build process to propose a better
-> > solution, but perhaps someone else has an idea?
-> >
-[...]
-> This regex doesn't work in the cross case because the version string
-> doesn't start with "gcc". It starts with '<target-triple>-gcc', so
-> that should be checked instead.
-> 
-> I'll fiddle with this patch some more. It looks like a good short-term
-> solution to building OpenJDK on GCC 4 hosts.
+From: André Draszik <adraszik@tycoint.com>
 
-Thanks for taking this further. But please really test on such an older 
-system, because the patch alone is not enough. Something also needs to
-be done when configuring openjdk-8 such that it uses different flags
-when invoking the host compiler (old gcc) and the target compiler (gcc 6).
+c-ares doesn't build if the distro has enabled usage of the
+security_flags.inc file as it is picky about what is placed
+into CPPFLAGS and CFLAGS. It complains and errors out if any
+preprocessor options appear in CFLAGS.
 
-I haven't found a solution for that (not familiar enough with the Java
-build system).
+Fix this by providing an additional include file that is
+require'd from conf/layer.conf which for c-ares moves the
+defines added by security_flags.inc from CFLAGS to CPPFLAGS.
 
-Bye, Patrick
+Signed-off-by: André Draszik <adraszik@tycoint.com>
+---
+ .../conf/distro/include/meta_networking_security_flags.inc          | 6 ++++++
+ meta-networking/conf/layer.conf                                     | 3 +++
+ 2 files changed, 9 insertions(+)
+ create mode 100644 meta-networking/conf/distro/include/meta_networking_security_flags.inc
+
+diff --git a/meta-networking/conf/distro/include/meta_networking_security_flags.inc b/meta-networking/conf/distro/include/meta_networking_security_flags.inc
+new file mode 100644
+index 0000000..06802d6
+--- /dev/null
++++ b/meta-networking/conf/distro/include/meta_networking_security_flags.inc
+@@ -0,0 +1,6 @@
++# configure righteously complains:
++# | configure:3479: using CFLAGS:  -O2 -pipe -g -feliminate-unused-debug-types -fstack-protector-strong -pie -fpie -D_FORTIFY_SOURCE=2
++# | configure:3485: CFLAGS error: CFLAGS may only be used to specify C compiler flags, not macro definitions. Use CPPFLAGS for: -D_FORTIFY_SOURCE=2
++# | configure:3516: error: Can not continue. Fix errors mentioned immediately above this line.
++TARGET_CFLAGS_remove_pn-c-ares = "${lcl_maybe_fortify}"
++TARGET_CPPFLAGS_append_pn-c-ares = "${lcl_maybe_fortify}"
+diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
+index 5fd636a..c09ba4a 100644
+--- a/meta-networking/conf/layer.conf
++++ b/meta-networking/conf/layer.conf
+@@ -21,3 +21,6 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
+ # used by waf-samba.bbclass
+ WAF_CROSS_ANSWERS_PATH = "${LAYERDIR}/files/waf-cross-answers"
++
++# Override security flags
++require conf/distro/include/meta_networking_security_flags.inc
+-- 
+2.8.1
 
 
