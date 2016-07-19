@@ -1,56 +1,29 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f174.google.com (mail-pf0-f174.google.com
-	[209.85.192.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 1B82060797;
-	Mon, 18 Jul 2016 23:27:39 +0000 (UTC)
-Received: by mail-pf0-f174.google.com with SMTP id p64so647452pfb.1;
-	Mon, 18 Jul 2016 16:27:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:from:in-reply-to:date:cc:message-id:references
-	:to; bh=rnA0KY86zRx/HbT9W4Zwyp438fsxhmqM1b0ye338/VU=;
-	b=KrLxhNgdFP8w/ToX7sXT49gkckNQZ8ZOATQ3t37sbewkpSPlkhrqPF21xm8sJ6OWf4
-	oqb67FiZGv3xKBp2oN5iiyXLPVmhNAMz+PQJpBfUqLfoBckerljO7HyD8HtxUBXH9MxE
-	egsANjJ47K6yJOXi53EqQvAB6haHKiU/DjpQnnYP+QW2YT2xwOuYGfYe3X5efWX0ftGC
-	M17T7HzF5f6xuOHPxwXtE9oUltX5zLYT40b8g2x1Q2J38x6ztCqD13WZWODajT1FrOOI
-	q5cgLwAeRC8XUbXKwymAtC10sTskwiyLs7jYlaTfqnhNQZR4YBRAKBQLuF/cXHg0H1a2
-	7xxg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:mime-version:from:in-reply-to:date:cc
-	:message-id:references:to;
-	bh=rnA0KY86zRx/HbT9W4Zwyp438fsxhmqM1b0ye338/VU=;
-	b=On+E1RkXkOK+pU304L3VQfGIVKUDOeWTSKy05xNq1AmXzjeEb1tSBecznnCTxdnTfx
-	kwTkUdFE87ttHJVTUuoW/t2xUHDLDVZP6kMe721tUKiY31rpKzaDFH2gWERouw44GpKu
-	Cy//EZXrz3zRKaw/v0iaaPOUm5j/BydqrzhX6b5pEx1CfHbRLvBilmN3nHVMAFSp8uXa
-	em+mzWtPlcs8VaL1Zxpp3i7OhXeT9mJk1bu37o+M2P7O61EEQlumwLgOSHasusGzxTB0
-	uYhwH1BdN53lZWN7KjC82hlQCqqlugjWBntLftrlHVvEtjSOyW6EZNL0YfMhc7l3p8ds
-	VKbw==
-X-Gm-Message-State: ALyK8tK1badYzp5XFGgE2Y3iMJpwp7YPRpi4kCuE7v9ZvcV32bPl/w5g07scdWv9BX4q4w==
-X-Received: by 10.98.49.133 with SMTP id x127mr49645286pfx.90.1468884460568;
-	Mon, 18 Jul 2016 16:27:40 -0700 (PDT)
-Received: from ?IPv6:2601:646:8882:b8c:2dca:f3e2:ce03:4e42?
-	([2601:646:8882:b8c:2dca:f3e2:ce03:4e42])
-	by smtp.gmail.com with ESMTPSA id l82sm7432829pfk.8.2016.07.18.16.27.39
-	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 18 Jul 2016 16:27:39 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
-X-Pgp-Agent: GPGMail
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CADkTA4OMij4vsjGfw9Vwjh3ymGYkJDUsAKou6=hU7f0Yt05FXA@mail.gmail.com>
-Date: Mon, 18 Jul 2016 16:27:31 -0700
-Message-Id: <FD626B02-4D25-4358-8983-298FD08E6240@gmail.com>
-References: <CAJTo0LYNjoPfahXjaKEVP6ey=mY3MKDKK5DoCPB9Dp151UgFpw@mail.gmail.com>
-	<1468880306.2228.69.camel@pbcl.net>
-	<CADkTA4OMij4vsjGfw9Vwjh3ymGYkJDUsAKou6=hU7f0Yt05FXA@mail.gmail.com>
-To: Bruce Ashfield <bruce.ashfield@gmail.com>
-X-Mailer: Apple Mail (2.3124)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	openembedded-architecture
-	<openembedded-architecture@lists.openembedded.org>,
-	Phil Blundell <pb@pbcl.net>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [Openembedded-architecture] Removal of uclibc from oe-core?
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CF589607A5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jul 2016 01:59:14 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u6J1xEMx009400
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Jul 2016 18:59:15 -0700
+Received: from [128.224.163.140] (128.224.163.140) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
+	Mon, 18 Jul 2016 18:59:14 -0700
+To: <openembedded-devel@lists.openembedded.org>
+References: <1468561844-10190-1-git-send-email-mingli.yu@windriver.com>
+	<CA+chaQf6a6n-89735f5tuiFYdocWy30AycpDKth72bUG6Wun2A@mail.gmail.com>
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+Message-ID: <578D88EF.7080604@windriver.com>
+Date: Tue, 19 Jul 2016 09:57:03 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQf6a6n-89735f5tuiFYdocWy30AycpDKth72bUG6Wun2A@mail.gmail.com>
+X-Originating-IP: [128.224.163.140]
+Subject: Re: [meta-oe][PATCH] grubby: add grubby with version 8.40-1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,85 +36,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jul 2016 23:27:40 -0000
-X-Groupsio-MsgNum: 62237
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_624F99E3-A077-458D-92F8-F60EFC42C8EE";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-
---Apple-Mail=_624F99E3-A077-458D-92F8-F60EFC42C8EE
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+X-List-Received-Date: Tue, 19 Jul 2016 01:59:15 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
 
-> On Jul 18, 2016, at 3:48 PM, Bruce Ashfield <bruce.ashfield@gmail.com> =
-wrote:
->=20
->=20
->=20
-> On Mon, Jul 18, 2016 at 6:18 PM, Phil Blundell <pb@pbcl.net =
-<mailto:pb@pbcl.net>> wrote:
-> On Mon, 2016-07-18 at 23:01 +0100, Burton, Ross wrote:
->=20
-> > Now that musl is fairly mature I think it's time to take uclibc out =
-to
-> > pasture, where the pasture is possibly called meta-uclibc.
->=20
-> I think this is a splendid idea.
->=20
-> Agreed.
->=20
-> But do we need a sharpened stake to make sure it doesn't come back ?
 
-I think its just about time. Given the health of uclibc project and =
-maintenance burden we impose on OE-Core, if someone
-needs to have it beyond 2.1, please step up and we can create a new =
-layer mnta-uclibc and it can be hosted there. but it
-certainly should go out of OE-Core.
+On 2016年07月15日 20:37, Martin Jansa wrote:
+> FFS, squash all 4 together, the first is already using all 3 files anyway..
+Thanks! Already send v2 version to squash all 4 together.
 
->=20
-> Bruce
->=20
->=20
-> p.
->=20
->=20
->=20
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org =
-<mailto:Openembedded-core@lists.openembedded.org>
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core =
-<http://lists.openembedded.org/mailman/listinfo/openembedded-core>
->=20
->=20
->=20
-> --
-> "Thou shalt not follow the NULL pointer, for chaos and madness await =
-thee at its end"
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+Thanks,
+Grace
+>
+> On Fri, Jul 15, 2016 at 7:50 AM, <mingli.yu@windriver.com> wrote:
+>
+>> 1, Add grubby bb
+>>
+>> 2, Fix the grub-editenv name
+>>
+>> 3, Add ptest support
+>>
+>> 4, Remove bashisms in test.sh
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
 
-
---Apple-Mail=_624F99E3-A077-458D-92F8-F60EFC42C8EE
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAleNZekACgkQuwUzVZGdMxQ4DACgkFWhJ6aB5e/B8TNmP0wXmiaF
-4A8AnAqSHd9GaV57mKt5s36QWQ5OaRHs
-=aSta
------END PGP SIGNATURE-----
-
---Apple-Mail=_624F99E3-A077-458D-92F8-F60EFC42C8EE--
