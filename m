@@ -1,33 +1,51 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A182606D1
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id ADDF2606D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jul 2016 09:42:33 +0000 (UTC)
-Received: from list by plane.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1bPRXr-00009l-Ga for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jul 2016 11:42:31 +0200
-Received: from p5DE8CA1F.dip0.t-ipconnect.de ([93.232.202.31])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jul 2016 11:42:31 +0200
-Received: from patrick.ohly by p5DE8CA1F.dip0.t-ipconnect.de with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	Tue, 19 Jul 2016 11:00:39 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id i5so2420628wmg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jul 2016 11:42:31 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 19 Jul 2016 04:00:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=OKgP/ZXuYsDLlpGrDGs0VXKqbQRpZ2mf7p0AT3o3Qsc=;
+	b=C7M+ZcyuLMXJ7EBGTxQFcQ9p0QMltpxsrvKj1k6mhdhbRb5lqwb+JToFn3yPb71zNj
+	NN7S1yWBSCMGTY19ljeE7lzUWqxNuNXjjd8cIinf/oxU6O10e1lqC/OEAIMgkW5mYb3H
+	cv+HXOfI614NmXpvy9K7iHk/Nm+NYLe02kF3SRmp16usXOPU136xNfoyZzt/TxSJPWKK
+	4ONmzJtLXag6scIxezgDD7qEK8heVWy8Yn+w4Nie90nQhz8SsyqQpTG7sGdla0hF3c+i
+	/+UfkfEbWrP/6gKUfSsSwI6ODsJB515GEWWNBQnZ4xVxt0cuqcZSO9gN0xy6eqYO+qsK
+	ZiIg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=OKgP/ZXuYsDLlpGrDGs0VXKqbQRpZ2mf7p0AT3o3Qsc=;
+	b=hH8woi8CsWm2Lg+FYZm0aN7CHskg7p2ShQMqNbXR04KQ0dRp5QmSchJ98zKZRPUB8Z
+	Vu6JMcQ6rB4YFcbee5bDwFOqr/UF+lMyap/vYqxSH+ITxUvYm9w1UzTladAQlekiNOcO
+	fdPLSSltAemIPoKmz1KEhAamDOd97gx35PhIymtS2gIlDJF/SclKl7gdvyaVFmtY18tN
+	qOp6REG3375PVXODfX84zXBokE6t4wIBOKqEM4TOvvQVVUYjngeLb1NkyXlLrYD5/qbZ
+	niNGL4x13vZ5/83fLwFEUvk7BiGrbMhm/VQMi9sjaP07RiLWtxrBvyZPiL2k50OvRsEu
+	WwRg==
+X-Gm-Message-State: ALyK8tITygDhwxrdXFE4b81AiTmVuOsgikvp9T90J2FVhVrWft6axojgR2V6n2vblERRpA==
+X-Received: by 10.28.139.144 with SMTP id n138mr3441272wmd.71.1468926038983;
+	Tue, 19 Jul 2016 04:00:38 -0700 (PDT)
+Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
+	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
+	b186sm12202960wmg.23.2016.07.19.04.00.37
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 19 Jul 2016 04:00:37 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 19 Jul 2016 13:00:42 +0200
 To: openembedded-devel@lists.openembedded.org
-From: Patrick Ohly <patrick.ohly@intel.com>
-Date: Tue, 19 Jul 2016 09:42:17 +0000 (UTC)
-Message-ID: <loom.20160719T113248-200@post.gmane.org>
-References: <20160715210820.6801-1-danismostlikely@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 93.232.202.31 (Mozilla/5.0 (X11; Linux x86_64;
-	rv:38.0) Gecko/20100101 Firefox/38.0 Iceweasel/38.7.1)
-Subject: Re: [meta-java][PATCH] openjdk-8: Detect compiler version
+Message-ID: <20160719110042.lqungonwdgywullf@jama>
+References: <1468307717-13359-1-git-send-email-xiao.zhang@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <1468307717-13359-1-git-send-email-xiao.zhang@windriver.com>
+User-Agent: Mutt/1.6.2 (2016-06-11)
+Subject: Re: [recipes-extended][PATCH] pax: strip off file name's trailing slash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,77 +58,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jul 2016 09:42:33 -0000
+X-List-Received-Date: Tue, 19 Jul 2016 11:00:40 -0000
+X-Groupsio-MsgNum: 62250
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="qt7bkkyjp6ty3xly"
+Content-Disposition: inline
+
+--qt7bkkyjp6ty3xly
 Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Dan McGregor <danismostlikely <at> gmail.com> writes:
+On Tue, Jul 12, 2016 at 03:15:17PM +0800, Zhang Xiao wrote:
+> When extracting packaes, the trailing slash of the file name
+> has no means but may cause some issue on system call lstat.
+> Remove it.
+>=20
+> Upstream-Status: Pending
+>=20
+> Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
+> ---
+>  .../pax-strip-off-file-name-s-trailing-slash.patch | 48 ++++++++++++++++=
+++++++
+>  meta/recipes-extended/pax/pax_3.4.bb               |  4 +-
 
+Wrong ML and wrong subject tag.
 
-> From: Daniel McGregor <daniel.mcgregor <at> vecima.com>
-> 
-> Some supported hosts still use GCC 4.X. These don't support the flags
-> needed to make GCC 6 work, so check the GCC version and add appropriate
-> compiler flags.
-> 
-> This implementation will append flags for any gcc version, but it's only
-> used for GCC 6 right now.
-
-Now I am getting an error directly when bitbake parses the updated
-recipes in meta-java:
-
-ERROR: ExpansionError during parsing
-.../ostro-os/meta-java/recipes-core/openjdk/openjdk-8_72b05.bb
-...
-bb.data_smart.ExpansionError: Failure expanding variable CFLAGS,
-expression was  -O2 -pipe -g -feliminate-unused-debug-types
--fdebug-prefix-map=.../ostro-os/build/tmp-glibc/work/corei7-64-ostro-
-linux/openjdk-8/72b05-r0=/usr/src/debug/openjdk-8/72b05-r0
--fdebug-prefix-map=.../ostro-os/build/tmp-glibc/sysroots/x86_64-linux=
--fdebug-prefix-map=.../ostro-os/build/tmp-glibc/sysroots/intel-corei7-64=
- -fstack-protector-strong -D_FORTIFY_SOURCE=2 
-${@version_specific_cflags(d)} -Wno-error=deprecated-declarations which
-triggered exception TypeError: can only join an iterable
-
-> +def version_specific_cflags(d):
-> +    extraflags = None
-> +    version = None
+>  2 files changed, 51 insertions(+), 1 deletion(-)
+>  create mode 100644 meta/recipes-extended/pax/pax/pax-strip-off-file-name=
+-s-trailing-slash.patch
+>=20
+> diff --git a/meta/recipes-extended/pax/pax/pax-strip-off-file-name-s-trai=
+ling-slash.patch b/meta/recipes-extended/pax/pax/pax-strip-off-file-name-s-=
+trailing-slash.patch
+> new file mode 100644
+> index 0000000..a602b30
+> --- /dev/null
+> +++ b/meta/recipes-extended/pax/pax/pax-strip-off-file-name-s-trailing-sl=
+ash.patch
+> @@ -0,0 +1,48 @@
+> +From aa8ba118869b75a2a9cd681b2f0362d9d8f1c7ec Mon Sep 17 00:00:00 2001
+> +From: Zhang Xiao <xiao.zhang@windriver.com>
+> +Date: Tue, 12 Jul 2016 11:34:45 +0800
+> +Subject: [PATCH] pax: strip off file name's trailing slash
 > +
-> +    if bb.data.inherits_class('native', d):
-> +        from subprocess import Popen, PIPE
+> +When extracting packaes, the trailing slash of the file name
+> +has no means but may cause some issue on system call lstat.
+> +Remove it.
 > +
-> +        cmd = d.expand('${CPP} -P -').split()
-> +        cc = Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
-> +        # This check is GCC specific. Clang always returns 4. For Clang
-> +        # __clang_major__ and __clang_minor__ need to be checked. Ideally
-> +        # __GNUC_MINOR__ would be checked as well, but for this recipe
-> +        # GCC major is all we care about.
-> +        version = cc.communicate(b'__GNUC__')[0].decode('utf-8')[0]
-> +    else:
-> +        # in the cross case, trust that GCCVERSION is correct. This won't
-> +        # work if the native toolchain is Clang, but as of this writing that
-> +        # doesn't work anyway.
-> +        version = d.getVar('GCCVERSION', expand=True)[0]
+> +Upstream-Status: Pending
 > +
-> +    if int(version) >= 4:
-> +        extraflags = d.getVar('FLAGS_GCC%d' % int(version), True)
+> +Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
+> +---
+> + src/pat_rep.c | 11 ++++++++++-
+> + 1 file changed, 10 insertions(+), 1 deletion(-)
 > +
-> +    return ''.join(extraflags)
+> +diff --git a/src/pat_rep.c b/src/pat_rep.c
+> +index b9a4636..4cbf6bf 100644
+> +--- a/src/pat_rep.c
+> ++++ b/src/pat_rep.c
+> +@@ -605,7 +605,7 @@ int
+> + mod_name(ARCHD *arcn)
+> + {
+> + 	int res =3D 0;
+> +-
+> ++	char *pt;
+> + 	/*
+> + 	 * Strip off leading '/' if appropriate.
+> + 	 * Currently, this option is only set for the tar format.
+> +@@ -639,6 +639,15 @@ mod_name(ARCHD *arcn)
+> + 	}
+> +=20
+> + 	/*
+> ++	 * strip off trailing slash.
+> ++	 */
+> ++	pt =3D &(arcn->name[strlen(arcn->name) - 1]);
+> ++	if (*pt =3D=3D '/') {
+> ++		 *pt =3D '\0';
+> ++		arcn->nlen =3D strlen(arcn->name);
+> ++	}
+> ++
+> ++	/*
+> + 	 * IMPORTANT: We have a problem. what do we do with symlinks?
+> + 	 * Modifying a hard link name makes sense, as we know the file it
+> + 	 * points at should have been seen already in the archive (and if it
+> +--=20
+> +1.8.5.2.233.g932f7e4
+> +
+> diff --git a/meta/recipes-extended/pax/pax_3.4.bb b/meta/recipes-extended=
+/pax/pax_3.4.bb
+> index 9d1abfb..7ce43ce 100644
+> --- a/meta/recipes-extended/pax/pax_3.4.bb
+> +++ b/meta/recipes-extended/pax/pax_3.4.bb
+> @@ -16,7 +16,9 @@ DEPENDS_append_libc-musl =3D " fts "
+> =20
+>  SRC_URI =3D "http://pkgs.fedoraproject.org/repo/pkgs/${BPN}/${BP}.tar.bz=
+2/fbd9023b590b45ac3ade95870702a0d6/${BP}.tar.bz2 \
+>  	file://fix_for_compile_with_gcc-4.6.0.patch \
+> -	file://pax-3.4_fix_for_x32.patch"
+> +	file://pax-3.4_fix_for_x32.patch \
+> +	file://pax-strip-off-file-name-s-trailing-slash.patch \
+> +"
+> =20
+>  SRC_URI_append_libc-musl =3D " file://0001-Fix-build-with-musl.patch \
+>                               file://0001-use-strtoll-instead-of-strtoq.p=
+atch \
+> --=20
+> 2.1.4
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-The code above only works when FLAGS_GCC<version> is set. In Ostro OS, we
-are using GCCVERSION ?= "5.%" because of these unsolveed build breakages
-with gcc6, and thus extraflags becomes None, which then triggers the 
-exception.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-The same problem should also appear when gcc on the host is older than v6.
-Has the patch actually been tested on a system where the problem occurs?
+--qt7bkkyjp6ty3xly
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-As I said in the other mail thread, fixing flags for openjdk-native is one
-part of the problem. The other part is distinguishing between flags for the
-host compiler and and target compiler when building openjdk - that part is
-unsolved, and thus I'd expect compilation to still fail when building on a
-host with gcc 4.x and default target gcc.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
-Bye, Patrick
+iEYEARECAAYFAleOBt4ACgkQN1Ujt2V2gByOIwCfTdjII7a8+b65v2lyvz5J+fNU
+WJQAoLGAyJqt7UtpjujsjE0yqtjjbiwB
+=+HQ1
+-----END PGP SIGNATURE-----
 
-
+--qt7bkkyjp6ty3xly--
