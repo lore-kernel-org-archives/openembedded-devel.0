@@ -1,24 +1,33 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 71DF4606D1
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from plane.gmane.org (plane.gmane.org [80.91.229.3])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A182606D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jul 2016 09:14:50 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u6J9EoVn002473
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 19 Jul 2016 09:42:33 +0000 (UTC)
+Received: from list by plane.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1bPRXr-00009l-Ga for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Jul 2016 11:42:31 +0200
+Received: from p5DE8CA1F.dip0.t-ipconnect.de ([93.232.202.31])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jul 2016 11:42:31 +0200
+Received: from patrick.ohly by p5DE8CA1F.dip0.t-ipconnect.de with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jul 2016 02:14:50 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Tue, 19 Jul 2016 02:14:49 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 19 Jul 2016 05:14:48 -0400
-Message-ID: <1468919688-249403-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.8.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] php: update to 5.5.37 and 5.6.23
+	Tue, 19 Jul 2016 11:42:31 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Patrick Ohly <patrick.ohly@intel.com>
+Date: Tue, 19 Jul 2016 09:42:17 +0000 (UTC)
+Message-ID: <loom.20160719T113248-200@post.gmane.org>
+References: <20160715210820.6801-1-danismostlikely@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 93.232.202.31 (Mozilla/5.0 (X11; Linux x86_64;
+	rv:38.0) Gecko/20100101 Firefox/38.0 Iceweasel/38.7.1)
+Subject: Re: [meta-java][PATCH] openjdk-8: Detect compiler version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,60 +40,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jul 2016 09:14:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 19 Jul 2016 09:42:33 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-From: Jackie Huang <jackie.huang@windriver.com>
+Dan McGregor <danismostlikely <at> gmail.com> writes:
 
-Includes many CVE fixes and other bug fixes:
-http://php.net/ChangeLog-5.php#5.5.37
-http://php.net/ChangeLog-5.php#5.6.23
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- .../{php-5.6.18 => php-5.6.23}/change-AC_TRY_RUN-to-AC_TRY_LINK.patch | 0
- meta-oe/recipes-devtools/php/{php_5.5.32.bb => php_5.5.37.bb}         | 4 ++--
- meta-oe/recipes-devtools/php/{php_5.6.18.bb => php_5.6.23.bb}         | 4 ++--
- 3 files changed, 4 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-devtools/php/{php-5.6.18 => php-5.6.23}/change-AC_TRY_RUN-to-AC_TRY_LINK.patch (100%)
- rename meta-oe/recipes-devtools/php/{php_5.5.32.bb => php_5.5.37.bb} (39%)
- rename meta-oe/recipes-devtools/php/{php_5.6.18.bb => php_5.6.23.bb} (51%)
+> From: Daniel McGregor <daniel.mcgregor <at> vecima.com>
+> 
+> Some supported hosts still use GCC 4.X. These don't support the flags
+> needed to make GCC 6 work, so check the GCC version and add appropriate
+> compiler flags.
+> 
+> This implementation will append flags for any gcc version, but it's only
+> used for GCC 6 right now.
 
-diff --git a/meta-oe/recipes-devtools/php/php-5.6.18/change-AC_TRY_RUN-to-AC_TRY_LINK.patch b/meta-oe/recipes-devtools/php/php-5.6.23/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/php/php-5.6.18/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
-rename to meta-oe/recipes-devtools/php/php-5.6.23/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
-diff --git a/meta-oe/recipes-devtools/php/php_5.5.32.bb b/meta-oe/recipes-devtools/php/php_5.5.37.bb
-similarity index 39%
-rename from meta-oe/recipes-devtools/php/php_5.5.32.bb
-rename to meta-oe/recipes-devtools/php/php_5.5.37.bb
-index 4ee3c38..c7655bc 100644
---- a/meta-oe/recipes-devtools/php/php_5.5.32.bb
-+++ b/meta-oe/recipes-devtools/php/php_5.5.37.bb
-@@ -2,5 +2,5 @@ require php.inc
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=464ca70af214d2407f6b7d4458158afd"
- 
--SRC_URI[md5sum] = "47443f39152d671d24bc839e6a49049d"
--SRC_URI[sha256sum] = "b0f2c108db8e05db9f6366aaba9a754fd0ee31f3f86ee889561b608dfd6e92ee"
-+SRC_URI[md5sum] = "3a4b249bee5451a0982263a94a8a8c9d"
-+SRC_URI[sha256sum] = "d2380ebe46caf17f2c4cd055867d00a82e6702dc5f62dc29ce864a5742905d88"
-diff --git a/meta-oe/recipes-devtools/php/php_5.6.18.bb b/meta-oe/recipes-devtools/php/php_5.6.23.bb
-similarity index 51%
-rename from meta-oe/recipes-devtools/php/php_5.6.18.bb
-rename to meta-oe/recipes-devtools/php/php_5.6.23.bb
-index 2ce012f..002ca74 100644
---- a/meta-oe/recipes-devtools/php/php_5.6.18.bb
-+++ b/meta-oe/recipes-devtools/php/php_5.6.23.bb
-@@ -3,5 +3,5 @@ require php.inc
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b602636d46a61c0ac0432bbf5c078fe4"
- 
- SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch"
--SRC_URI[md5sum] = "7340353bedd998286ba2c4d87d7864f8"
--SRC_URI[sha256sum] = "c3cd4a29a9562309d36e2b128407d6eaa5c7dde590d2b1a464457383e517f4ed"
-+SRC_URI[md5sum] = "147734b7e0164ebdd2dc18474fcfb309"
-+SRC_URI[sha256sum] = "facd280896d277e6f7084b60839e693d4db68318bfc92085d3dc0251fd3558c7"
--- 
-2.8.1
+Now I am getting an error directly when bitbake parses the updated
+recipes in meta-java:
+
+ERROR: ExpansionError during parsing
+.../ostro-os/meta-java/recipes-core/openjdk/openjdk-8_72b05.bb
+...
+bb.data_smart.ExpansionError: Failure expanding variable CFLAGS,
+expression was  -O2 -pipe -g -feliminate-unused-debug-types
+-fdebug-prefix-map=.../ostro-os/build/tmp-glibc/work/corei7-64-ostro-
+linux/openjdk-8/72b05-r0=/usr/src/debug/openjdk-8/72b05-r0
+-fdebug-prefix-map=.../ostro-os/build/tmp-glibc/sysroots/x86_64-linux=
+-fdebug-prefix-map=.../ostro-os/build/tmp-glibc/sysroots/intel-corei7-64=
+ -fstack-protector-strong -D_FORTIFY_SOURCE=2 
+${@version_specific_cflags(d)} -Wno-error=deprecated-declarations which
+triggered exception TypeError: can only join an iterable
+
+> +def version_specific_cflags(d):
+> +    extraflags = None
+> +    version = None
+> +
+> +    if bb.data.inherits_class('native', d):
+> +        from subprocess import Popen, PIPE
+> +
+> +        cmd = d.expand('${CPP} -P -').split()
+> +        cc = Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+> +        # This check is GCC specific. Clang always returns 4. For Clang
+> +        # __clang_major__ and __clang_minor__ need to be checked. Ideally
+> +        # __GNUC_MINOR__ would be checked as well, but for this recipe
+> +        # GCC major is all we care about.
+> +        version = cc.communicate(b'__GNUC__')[0].decode('utf-8')[0]
+> +    else:
+> +        # in the cross case, trust that GCCVERSION is correct. This won't
+> +        # work if the native toolchain is Clang, but as of this writing that
+> +        # doesn't work anyway.
+> +        version = d.getVar('GCCVERSION', expand=True)[0]
+> +
+> +    if int(version) >= 4:
+> +        extraflags = d.getVar('FLAGS_GCC%d' % int(version), True)
+> +
+> +    return ''.join(extraflags)
+
+The code above only works when FLAGS_GCC<version> is set. In Ostro OS, we
+are using GCCVERSION ?= "5.%" because of these unsolveed build breakages
+with gcc6, and thus extraflags becomes None, which then triggers the 
+exception.
+
+The same problem should also appear when gcc on the host is older than v6.
+Has the patch actually been tested on a system where the problem occurs?
+
+As I said in the other mail thread, fixing flags for openjdk-native is one
+part of the problem. The other part is distinguishing between flags for the
+host compiler and and target compiler when building openjdk - that part is
+unsolved, and thus I'd expect compilation to still fail when building on a
+host with gcc 4.x and default target gcc.
+
+Bye, Patrick
 
 
