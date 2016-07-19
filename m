@@ -1,24 +1,24 @@
-Return-Path: <Zhe.He@windriver.com>
+Return-Path: <Jackie.Huang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 556FC607A5
+	by mail.openembedded.org (Postfix) with ESMTP id 1288073196
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jul 2016 02:33:05 +0000 (UTC)
+	Tue, 19 Jul 2016 07:17:53 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u6J2X6EW012508
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u6J7Hsm9006926
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jul 2016 19:33:06 -0700 (PDT)
+	Tue, 19 Jul 2016 00:17:54 -0700 (PDT)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
-	Mon, 18 Jul 2016 19:33:05 -0700
-From: <zhe.he@windriver.com>
+	Tue, 19 Jul 2016 00:17:53 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 18 Jul 2016 22:33:04 -0400
-Message-ID: <1468895584-217422-1-git-send-email-zhe.he@windriver.com>
+Date: Tue, 19 Jul 2016 03:17:52 -0400
+Message-ID: <1468912672-231243-1-git-send-email-jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Subject: [PATCH v2] lmbench: Fix compilation error of gcc format-security
+Subject: [meta-networking][PATCH] wireshark: inherit perlnative
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,69 +31,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jul 2016 02:33:07 -0000
+X-List-Received-Date: Tue, 19 Jul 2016 07:17:54 -0000
 Content-Type: text/plain
 
-From: He Zhe <zhe.he@windriver.com>
+From: Jackie Huang <jackie.huang@windriver.com>
 
-oe-core "security_flags: turn potential string format security issues
-into an error" adds "-Wformat -Wformat-security -Werror=format-security"
-to the default SECURITY_CFLAGS, which may cause lmbench compilation
-failure.
+wireshark needs pod2man and pod2html (provided by perl-native)
+to create doc files, inherit perlnative instead of the
+dependency only, so it sets the correct path to find these
+native commands.
 
-This patch fixes lmbench's code.
-
-Signed-off-by: He Zhe <zhe.he@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- ...ttp-Use-puts-instead-of-printf-to-avoid-f.patch | 26 ++++++++++++++++++++++
- .../recipes-benchmark/lmbench/lmbench_3.0-a9.bb    |  1 +
- 2 files changed, 27 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench/lat_http-Use-puts-instead-of-printf-to-avoid-f.patch
+ meta-networking/recipes-support/wireshark/wireshark_2.0.4.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench/lat_http-Use-puts-instead-of-printf-to-avoid-f.patch b/meta-oe/recipes-benchmark/lmbench/lmbench/lat_http-Use-puts-instead-of-printf-to-avoid-f.patch
-new file mode 100644
-index 0000000..48613ef
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench/lat_http-Use-puts-instead-of-printf-to-avoid-f.patch
-@@ -0,0 +1,26 @@
-+[PATCH] lat_http: Use puts instead of printf to avoid gcc
-+format-security error
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: He Zhe <zhe.he@windriver.com>
-+---
-+ src/lat_http.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/lat_http.c b/src/lat_http.c
-+index c630d59..42e64a1 100644
-+--- a/src/lat_http.c
-++++ b/src/lat_http.c
-+@@ -27,7 +27,7 @@ http(char *server, char *file, int prog)
-+ 	sock = tcp_connect(server, prog, SOCKOPT_REUSE);
-+ 	sprintf(buf, "GET /%s HTTP/1.0\r\n\r\n\n", file);
-+ 	if (debug) {
-+-		printf(buf);
-++		printf("%s", buf);
-+ 	}
-+ 	write(sock, buf, strlen(buf));
-+ 	while ((n = read(sock, buf, XFERSIZE)) > 0) {
-+-- 
-+2.8.2
-+
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-index 24cd0b0..b5edaeb 100644
---- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-@@ -18,6 +18,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/lmbench/lmbench-${PV}.tgz \
-            file://use-base_libdir-instead-of-hardcoded-lib.patch \
-            file://lmbench_result_html_report.patch \
-            file://fix-lmbench-memory-check-failure.patch \
-+           file://lat_http-Use-puts-instead-of-printf-to-avoid-f.patch \
- "
- SRC_URI[md5sum] = "b3351a3294db66a72e2864a199d37cbf"
- SRC_URI[sha256sum] = "cbd5777d15f44eab7666dcac418054c3c09df99826961a397d9acf43d8a2a551"
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.0.4.bb b/meta-networking/recipes-support/wireshark/wireshark_2.0.4.bb
+index 8aec230..d36c3f3 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_2.0.4.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_2.0.4.bb
+@@ -4,7 +4,7 @@ SECTION = "net"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
+ 
+-DEPENDS = "perl-native pcre expat glib-2.0 sbc"
++DEPENDS = "pcre expat glib-2.0 sbc"
+ 
+ SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
+ 
+@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "9ea9c82da9942194ebc8fc5c951a02e6d179afa7472cb6d96ca7615451
+ 
+ PE = "1"
+ 
+-inherit autotools pkgconfig
++inherit autotools pkgconfig perlnative
+ 
+ ARM_INSTRUCTION_SET = "arm"
+ 
 -- 
 2.8.1
 
