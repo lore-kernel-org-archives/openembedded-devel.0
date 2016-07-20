@@ -1,49 +1,49 @@
 Return-Path: <twoerner@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E8CED6212F
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 037E96FFD4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jul 2016 19:51:38 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id u25so2735183qtb.3
+	Wed, 20 Jul 2016 19:51:40 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id j37so2746871qta.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jul 2016 12:51:39 -0700 (PDT)
+	Wed, 20 Jul 2016 12:51:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=xnCZf6lCoHMGItaEQgEaDRv077YNzLlNCi3TO39jd7M=;
-	b=wOvSpjJsAOe4zKwBDLGrgnkZUq73CaIPmX+wV+jwMXhYIIFDceZVz0d5gyxoHmt9as
-	+gdjM9x9GP9/lE6wl3UufSOnXfhvGFXFQlLToMpbZVw96daQ0ExwfMeny2fWQyaVpmjx
-	EdC3daDg740jbDkF7lo+9UNruLImvGpRYdxaa229wl+NBbF6PkFV4LWgDyno5u+NIkbt
-	2zCtJunwAobxaB3nOo5NNHWk7IFMUUbtVvUI2mkHANyLG1TGh/3JqZiKrMCiaweITob2
-	ry52tJKZwjTnU1dO6GrROAMb0deBzClaruQhm40pwJ0Dy6SaxEJ2Up1OG/AGrHzemWQ3
-	t5pw==
+	bh=MgLeWuzLl4/YjN1Azxr1IDPaNLC0vbUhP4gEiaRJcMc=;
+	b=HgW4Rcd3AA1BZ1BYzdGd0nOckTaxDvIvHr73eba2uBFz5PnBdYyZaVvpPaWSxWYKcK
+	WIGB3n8scWErGo9pHjcWrLBahJ3mFe74Y5PG1wW5GWAhHfdlaBNqQGssKv2DyF5rAb8q
+	iH2fkqCvhpi4ju8AFLbEePVoUFISyynP0mQwvuRpFzbzwmwdfuyQqcaZyx+kEtA1PwY5
+	v5Q6JZqfE1F+jv+hzBZiq3Coq+te9Y6n8NZTwzvXivN/S4ECkofsAII8mhxUuMmkJA+q
+	WIH3CCJbvGlNig9OvmSEOjsrRFjs3K9kG020QfaUUaOGIitnfPbdKub0PNh8M0xKcoKn
+	lz7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=xnCZf6lCoHMGItaEQgEaDRv077YNzLlNCi3TO39jd7M=;
-	b=VSw9IBG4o5yqYizzvRAoJVx271a30lTEBqVPWB/NS8v2XbaVdaeNzLPb3e8T1kEiI4
-	t1mC1bxbSSsgRY8Z7uHvD2NXtOFPV8VmI30Pg0vHWtCMsxn5T3VMG8G9VDPF9Pa+ewNb
-	ZioSjzQY3m9G2CLUt0EAN+Ph0GkeoEH+XANE0daNwdeX3Nb3jXgYUr18MTHBQ85C8tnD
-	qfP8YcrlR8uYXvoTqWNYnzFYas3YxVFOJMprmbsfVIxyXm/XJPLkxZUmysAoyo+YUhNX
-	d3BzoFuLaoHtS97RDrEstxLIiH300rbeQQVDZ7Nt086G3pfb7N5mPGmMowRjHsivybmB
-	R4cA==
-X-Gm-Message-State: ALyK8tIsFI2tWahVqXDnb2IXSBc9Cv4EGcVqqgK7+07Aka9Mr5rUn/ee7qjppVq4I4IevA==
-X-Received: by 10.200.35.44 with SMTP id a41mr50113302qta.25.1469044299215;
-	Wed, 20 Jul 2016 12:51:39 -0700 (PDT)
+	bh=MgLeWuzLl4/YjN1Azxr1IDPaNLC0vbUhP4gEiaRJcMc=;
+	b=LDTuOAgMPsHzHk7tFMs90P57weiuHEAvmYC/jL3+R2s1V5bW5OQcF+ZthtML5nHYIS
+	RhFzXgKMmiQPmsHe/4qIG3i/O1TKrc6u7AMXm+dSYhi2UZ9OX54wqUujPTLiWukcxTHR
+	ySoRjbMnKhOwUNfVXdmjj6h1SDvignpifJ5XxBZK5Yaz+LWCucL7FdKPmoA5u24LB/4j
+	NEXWFErKmRMRkBuwp89ZsXtzht0oLsiM4JDfHjNv2Nbsn8BUbwp18MmvO7bo//eoEUgW
+	tJPS+kWyxsdI95fw258E9J0IdegQ2doXWxki3jpyeNpYRK50cAgz1Mm9wXDrge0ZvxFi
+	DUug==
+X-Gm-Message-State: ALyK8tIpPeXpCO/Qscq7Jvc9AlcdkjagoXghYGEG+xDiMI9VMZ+T4ffjUnz89h9Ik9Qo1A==
+X-Received: by 10.200.36.83 with SMTP id d19mr33535323qtd.94.1469044301001;
+	Wed, 20 Jul 2016 12:51:41 -0700 (PDT)
 Received: from openSUSE-i7.site (dsl-67-55-28-109.acanac.net. [67.55.28.109])
 	by smtp.gmail.com with ESMTPSA id
-	l1sm2258049qtd.49.2016.07.20.12.51.38
+	l1sm2258049qtd.49.2016.07.20.12.51.39
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 20 Jul 2016 12:51:38 -0700 (PDT)
+	Wed, 20 Jul 2016 12:51:40 -0700 (PDT)
 From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Jul 2016 15:51:58 -0400
-Message-Id: <20160720195201.22250-2-twoerner@gmail.com>
+Date: Wed, 20 Jul 2016 15:51:59 -0400
+Message-Id: <20160720195201.22250-3-twoerner@gmail.com>
 X-Mailer: git-send-email 2.9.0
 In-Reply-To: <20160720195201.22250-1-twoerner@gmail.com>
 References: <20160720195201.22250-1-twoerner@gmail.com>
-Subject: [meta-browser][PATCH 1/4] chromium: remove unused patch
+Subject: [meta-browser][PATCH 2/4] chromium: gcc-6 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,66 +56,457 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jul 2016 19:51:39 -0000
+X-List-Received-Date: Wed, 20 Jul 2016 19:51:41 -0000
 
-The unistd-2 patch was no longer being referenced by the recipe, so remove it.
+Allow chromium to build with gcc-6.
 
 Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
- recipes-browser/chromium/chromium-browser.inc    |  5 ++---
- recipes-browser/chromium/chromium/unistd-2.patch | 27 ------------------------
- 2 files changed, 2 insertions(+), 30 deletions(-)
- delete mode 100644 recipes-browser/chromium/chromium/unistd-2.patch
+ ...0001-bignum.cc-disable-warning-from-gcc-5.patch | 60 ---------------
+ ...-image_util.cc-disable-warning-from-gcc-5.patch | 39 ----------
+ .../0008-Fix-GCC-uninitialized-warning.patch       | 26 -------
+ ...9-Fix-build-errors-with-GCC-in-Debug-mode.patch | 46 ------------
+ ...be-used-uninitialized-in-this-function-wa.patch | 25 -------
+ ...for-unused-variable-error-in-ui-gfx-color.patch | 86 ----------------------
+ .../chromium/chromium-48/remove-Werror.patch       | 73 ++++++++++++++++++
+ recipes-browser/chromium/chromium_48.0.2548.0.bb   | 12 +--
+ 8 files changed, 74 insertions(+), 293 deletions(-)
+ delete mode 100644 recipes-browser/chromium/chromium/chromium-48/0001-bignum.cc-disable-warning-from-gcc-5.patch
+ delete mode 100644 recipes-browser/chromium/chromium/chromium-48/0002-image_util.cc-disable-warning-from-gcc-5.patch
+ delete mode 100644 recipes-browser/chromium/chromium/chromium-48/0008-Fix-GCC-uninitialized-warning.patch
+ delete mode 100644 recipes-browser/chromium/chromium/chromium-48/0009-Fix-build-errors-with-GCC-in-Debug-mode.patch
+ delete mode 100644 recipes-browser/chromium/chromium/chromium-48/0010-Fix-rv-may-be-used-uninitialized-in-this-function-wa.patch
+ delete mode 100644 recipes-browser/chromium/chromium/chromium-48/0012-Workaround-for-unused-variable-error-in-ui-gfx-color.patch
+ create mode 100644 recipes-browser/chromium/chromium/chromium-48/remove-Werror.patch
 
-diff --git a/recipes-browser/chromium/chromium-browser.inc b/recipes-browser/chromium/chromium-browser.inc
-index 365f883..c9da1f7 100644
---- a/recipes-browser/chromium/chromium-browser.inc
-+++ b/recipes-browser/chromium/chromium-browser.inc
-@@ -2,9 +2,8 @@
- # 1) Add patches to SRC_URI. Version specific patches should be contained in a
- #    "chromium-XX" subdirectory, where XX is the major version. There are also
- #    patches that are shared amongst versions but may one day no longer be
--#    needed (like unistd2.patch). These do not belong in such a subdirectory,
--#    but still need to be explicitely be added. Do NOT add ozone-wayland patches
--#    to SRC_URI here!
-+#    needed. These do not belong in such a subdirectory, but still need to be
-+#    explicitely be added. Do NOT add ozone-wayland patches to SRC_URI here!
- # 2) Add md5sum and sha256sum hashes of the tarball.
- # 3) Add ozone-wayland patches to the OZONE_WAYLAND_EXTRA_PATCHES variable.
- #    The rule with the chromium-XX subdirectory also applies here.
-diff --git a/recipes-browser/chromium/chromium/unistd-2.patch b/recipes-browser/chromium/chromium/unistd-2.patch
+diff --git a/recipes-browser/chromium/chromium/chromium-48/0001-bignum.cc-disable-warning-from-gcc-5.patch b/recipes-browser/chromium/chromium/chromium-48/0001-bignum.cc-disable-warning-from-gcc-5.patch
 deleted file mode 100644
-index 6b5018b..0000000
---- a/recipes-browser/chromium/chromium/unistd-2.patch
+index 67f9800..0000000
+--- a/recipes-browser/chromium/chromium/chromium-48/0001-bignum.cc-disable-warning-from-gcc-5.patch
 +++ /dev/null
-@@ -1,27 +0,0 @@
--diff --git a/chrome/browser/memory_details_linux.cc b/chrome/browser/memory_details_linux.cc
--index bee24ce..299f237 100644
----- a/chrome/browser/memory_details_linux.cc
--+++ b/chrome/browser/memory_details_linux.cc
--@@ -7,6 +7,10 @@
-- #include <map>
-- #include <set>
+@@ -1,60 +0,0 @@
+-From 5b8c53a6bb11c8aa9b575b5a8155c25c5085f349 Mon Sep 17 00:00:00 2001
+-From: Max Krummenacher <max.oss.09@gmail.com>
+-Date: Fri, 6 Nov 2015 12:22:35 +0100
+-Subject: [PATCH] bignum.cc: disable warning from gcc 5
+-
+-addresses:
+-  ../../third_party/WebKit/Source/wtf/dtoa/bignum.cc:105:10: error: assuming
+-  signed overflow does not occur when assuming that (X + c) < X is always
+-  false [-Werror=strict-overflow]
+-      void Bignum::AssignDecimalString(Vector<const char> value) {
+-           ^
+-
+-Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+-
+-Upstream-Status: Pending
+-See the discussion on the issue in Chromium upstream:
+-https://groups.google.com/a/chromium.org/forum/#!topic/chromium-dev/3uwBwunIa7g
+----
+- third_party/WebKit/Source/wtf/dtoa/bignum.cc | 3 +++
+- 1 file changed, 3 insertions(+)
+-
+-diff --git a/third_party/WebKit/Source/wtf/dtoa/bignum.cc b/third_party/WebKit/Source/wtf/dtoa/bignum.cc
+-index a000b46..6c6d336 100644
+---- a/third_party/WebKit/Source/wtf/dtoa/bignum.cc
+-+++ b/third_party/WebKit/Source/wtf/dtoa/bignum.cc
+-@@ -102,7 +102,10 @@
+-     }
 - 
--+#if defined(OS_POSIX)
--+#include <unistd.h>
--+#endif
+- 
+-+#pragma GCC diagnostic push
+-+#pragma GCC diagnostic warning "-Wstrict-overflow"
+-     void Bignum::AssignDecimalString(Vector<const char> value) {
+-+#pragma GCC diagnostic pop
+-         // 2^64 = 18446744073709551616 > 10^19
+-         const int kMaxUint64DecimalDigits = 19;
+-         Zero();
+-@@ -696,7 +696,10 @@
+-     }
+-
+-
+-+#pragma GCC diagnostic push
+-+#pragma GCC diagnostic warning "-Wstrict-overflow"
+-     void Bignum::Align(const Bignum& other) {
+-+#pragma GCC diagnostic pop
+-         if (exponent_ > other.exponent_) {
+-             // If "X" represents a "hidden" digit (by the exponent) then we are in the
+-             // following case (a == this, b == other):
+-@@ -709,7 +709,10 @@
+-             for (int i = used_digits_ - 1; i >= 0; --i) {
+-                 bigits_[i + zero_digits] = bigits_[i];
+-             }
+-+#pragma GCC diagnostic push
+-+#pragma GCC diagnostic warning "-Wstrict-overflow"
+-             for (int i = 0; i < zero_digits; ++i) {
+-+#pragma GCC diagnostic pop
+-                 bigits_[i] = 0;
+-             }
+-             used_digits_ += zero_digits;
+--- 
+-1.8.4.5
+diff --git a/recipes-browser/chromium/chromium/chromium-48/0002-image_util.cc-disable-warning-from-gcc-5.patch b/recipes-browser/chromium/chromium/chromium-48/0002-image_util.cc-disable-warning-from-gcc-5.patch
+deleted file mode 100644
+index 1825a85..0000000
+--- a/recipes-browser/chromium/chromium/chromium-48/0002-image_util.cc-disable-warning-from-gcc-5.patch
++++ /dev/null
+@@ -1,39 +0,0 @@
+-From 2f674d980a116075dc7123a3e243b1451e4a732d Mon Sep 17 00:00:00 2001
+-From: Max Krummenacher <max.oss.09@gmail.com>
+-Date: Tue, 3 Nov 2015 22:13:40 +0100
+-Subject: [PATCH] image_util.cc: disable warning from gcc 5
+-
+-addresses:
+-  ../../ui/gfx/image/image_util.cc:50:6: error: assuming signed overflow does
+-  not occur when assuming that (X - c) <= X is always true
+-  [-Werror=strict-overflow]
+-  bool VisibleMargins(const ImageSkia& image, int* leading, int* trailing) {
+-       ^
+-
+-Signed-off-by: Max Krummenacher <max.oss.09@gmail.com>
+-
+-Upstream-Status: Pending
+-See the discussion on the issue in Chromium upstream:
+-https://groups.google.com/a/chromium.org/forum/#!topic/chromium-dev/3uwBwunIa7g
+-
+----
+- ui/gfx/image/image_util.cc | 3 +++
+- 1 file changed, 3 insertions(+)
+-
+-diff --git a/ui/gfx/image/image_util.cc b/ui/gfx/image/image_util.cc
+-index 89a3f8c..d595da3 100644
+---- a/ui/gfx/image/image_util.cc
+-+++ b/ui/gfx/image/image_util.cc
+-@@ -47,7 +47,10 @@
+- }
+- #endif  // !defined(OS_IOS)
+- 
+-+#pragma GCC diagnostic push
+-+#pragma GCC diagnostic warning "-Wstrict-overflow"
+- bool VisibleMargins(const ImageSkia& image, int* leading, int* trailing) {
+-+#pragma GCC diagnostic pop
+-   *leading = 0;
+-   *trailing = std::max(1, image.width()) - 1;
+-   if (!image.HasRepresentation(1.0))
+--- 
+-1.8.4.5
+diff --git a/recipes-browser/chromium/chromium/chromium-48/0008-Fix-GCC-uninitialized-warning.patch b/recipes-browser/chromium/chromium/chromium-48/0008-Fix-GCC-uninitialized-warning.patch
+deleted file mode 100644
+index 3bf6d96..0000000
+--- a/recipes-browser/chromium/chromium/chromium-48/0008-Fix-GCC-uninitialized-warning.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From 12d7fb643188ea5033aaf70ffe64b4c58eefc5eb Mon Sep 17 00:00:00 2001
+-From: Carlos Rafael Giani <dv@pseudoterminal.org>
+-Date: Fri, 29 Apr 2016 14:02:44 +0200
+-Subject: [PATCH] Fix GCC uninitialized warning
+-
+-Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+----
+- third_party/ots/src/name.cc | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/third_party/ots/src/name.cc b/third_party/ots/src/name.cc
+-index a0dd1ea..070ddae 100644
+---- a/third_party/ots/src/name.cc
+-+++ b/third_party/ots/src/name.cc
+-@@ -79,7 +79,7 @@ bool ots_name_parse(Font *font, const uint8_t* data, size_t length) {
+-   const char* string_base = reinterpret_cast<const char*>(data) +
+-       string_offset;
+- 
+--  NameRecord prev_record;
+-+  NameRecord prev_record(0, 0, 0, 0);
+-   bool sort_required = false;
+- 
+-   // Read all the names, discarding any with invalid IDs,
+--- 
+-2.5.0
+-
+diff --git a/recipes-browser/chromium/chromium/chromium-48/0009-Fix-build-errors-with-GCC-in-Debug-mode.patch b/recipes-browser/chromium/chromium/chromium-48/0009-Fix-build-errors-with-GCC-in-Debug-mode.patch
+deleted file mode 100644
+index f5f7889..0000000
+--- a/recipes-browser/chromium/chromium/chromium-48/0009-Fix-build-errors-with-GCC-in-Debug-mode.patch
++++ /dev/null
+@@ -1,46 +0,0 @@
+-From 2d7143090fdfd82950be352078daa5019279d81f Mon Sep 17 00:00:00 2001
+-From: Carlos Rafael Giani <dv@pseudoterminal.org>
+-Date: Fri, 29 Apr 2016 17:14:15 +0200
+-Subject: [PATCH] Fix build errors with GCC in Debug mode
+-
+-Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+----
+- third_party/WebKit/Source/wtf/dtoa/utils.h                         | 7 +++++++
+- .../cacheinvalidation/src/google/cacheinvalidation/include/types.h | 2 +-
+- 2 files changed, 8 insertions(+), 1 deletion(-)
+-
+-diff --git a/third_party/WebKit/Source/wtf/dtoa/utils.h b/third_party/WebKit/Source/wtf/dtoa/utils.h
+-index 0a61c01..7738e9a 100644
+---- a/third_party/WebKit/Source/wtf/dtoa/utils.h
+-+++ b/third_party/WebKit/Source/wtf/dtoa/utils.h
+-@@ -165,7 +165,14 @@ namespace double_conversion {
+- 
+-         // Access individual vector elements - checks bounds in debug mode.
+-         T& operator[](int index) const {
+-+#if !defined(NDEBUG)
+-+#pragma GCC diagnostic push
+-+#pragma GCC diagnostic ignored "-Wstrict-overflow"
+-+#endif // !defined(NDEBUG)
+-             ASSERT(0 <= index && index < length_);
+-+#if !defined(NDEBUG)
+-+#pragma GCC diagnostic pop
+-+#endif // !defined(NDEBUG)
+-             return start_[index];
+-         }
+- 
+-diff --git a/third_party/cacheinvalidation/src/google/cacheinvalidation/include/types.h b/third_party/cacheinvalidation/src/google/cacheinvalidation/include/types.h
+-index 4e3be27..835e956 100644
+---- a/third_party/cacheinvalidation/src/google/cacheinvalidation/include/types.h
+-+++ b/third_party/cacheinvalidation/src/google/cacheinvalidation/include/types.h
+-@@ -172,7 +172,7 @@ class ErrorInfo {
+-  */
+- class ObjectId {
+-  public:
+--  ObjectId() : is_initialized_(false) {}
+-+  ObjectId() : is_initialized_(false), source_(0) {}
+- 
+-   /* Creates an object id for the given source and name (the name is copied). */
+-   ObjectId(int source, const string& name)
+--- 
+-2.5.0
+-
+diff --git a/recipes-browser/chromium/chromium/chromium-48/0010-Fix-rv-may-be-used-uninitialized-in-this-function-wa.patch b/recipes-browser/chromium/chromium/chromium-48/0010-Fix-rv-may-be-used-uninitialized-in-this-function-wa.patch
+deleted file mode 100644
+index 30cd511..0000000
+--- a/recipes-browser/chromium/chromium/chromium-48/0010-Fix-rv-may-be-used-uninitialized-in-this-function-wa.patch
++++ /dev/null
+@@ -1,25 +0,0 @@
+-From 135debdc4613d5d323d1659166466f74f2e75284 Mon Sep 17 00:00:00 2001
+-From: Carlos Rafael Giani <dv@pseudoterminal.org>
+-Date: Fri, 6 May 2016 12:44:36 +0200
+-Subject: [PATCH] Fix "'rv' may be used uninitialized in this function" warning
+-
+-Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+----
+- third_party/mojo/src/mojo/edk/system/unique_identifier.cc | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/third_party/mojo/src/mojo/edk/system/unique_identifier.cc b/third_party/mojo/src/mojo/edk/system/unique_identifier.cc
+-index 22abf22..6f9a761 100644
+---- a/third_party/mojo/src/mojo/edk/system/unique_identifier.cc
+-+++ b/third_party/mojo/src/mojo/edk/system/unique_identifier.cc
+-@@ -31,6 +31,7 @@ UniqueIdentifier UniqueIdentifier::FromString(const std::string& s,
+-     memcpy(rv.data_, &bytes[0], sizeof(rv.data_));
+-     *success = true;
+-   } else {
+-+    memset(rv.data_, 0, sizeof(rv.data_));
+-     *success = false;
+-   }
+-   return rv;
+--- 
+-2.7.4
+-
+diff --git a/recipes-browser/chromium/chromium/chromium-48/0012-Workaround-for-unused-variable-error-in-ui-gfx-color.patch b/recipes-browser/chromium/chromium/chromium-48/0012-Workaround-for-unused-variable-error-in-ui-gfx-color.patch
+deleted file mode 100644
+index e3f20ef..0000000
+--- a/recipes-browser/chromium/chromium/chromium-48/0012-Workaround-for-unused-variable-error-in-ui-gfx-color.patch
++++ /dev/null
+@@ -1,86 +0,0 @@
+-From 41cb20a99eb12443f649051a608c7dfe28661d85 Mon Sep 17 00:00:00 2001
+-From: Carlos Rafael Giani <dv@pseudoterminal.org>
+-Date: Thu, 19 May 2016 22:38:32 +0200
+-Subject: [PATCH] Workaround for unused-variable error in
+- ui/gfx/color_palette.h
+-
+-Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+----
+- ui/gfx/BUILD.gn         |  1 +
+- ui/gfx/color_palette.cc | 12 ++++++++++++
+- ui/gfx/color_palette.h  | 12 ++++++------
+- ui/gfx/gfx.gyp          |  1 +
+- 4 files changed, 20 insertions(+), 6 deletions(-)
+- create mode 100644 ui/gfx/color_palette.cc
+-
+-diff --git a/ui/gfx/BUILD.gn b/ui/gfx/BUILD.gn
+-index dcd15b0..bf1455c 100644
+---- a/ui/gfx/BUILD.gn
+-+++ b/ui/gfx/BUILD.gn
+-@@ -61,6 +61,7 @@ component("gfx") {
+-     "codec/png_codec.h",
+-     "color_analysis.cc",
+-     "color_analysis.h",
+-+    "color_palette.cc",
+-     "color_palette.h",
+-     "color_profile.cc",
+-     "color_profile.h",
+-diff --git a/ui/gfx/color_palette.cc b/ui/gfx/color_palette.cc
+-new file mode 100644
+-index 0000000..a8e6280
+---- /dev/null
+-+++ b/ui/gfx/color_palette.cc
+-@@ -0,0 +1,12 @@
+-+#include "color_palette.h"
 -+
-- #include "base/bind.h"
-- #include "base/process_util.h"
-- #include "base/string_util.h"
--diff --git a/ipc/ipc_channel.h b/ipc/ipc_channel.h
--index 14c375b..345f9eb 100644
----- a/ipc/ipc_channel.h
--+++ b/ipc/ipc_channel.h
--@@ -10,6 +10,7 @@
+-+namespace gfx {
+-+
+-+const SkColor kChromeIconGrey = SkColorSetRGB(0x5A, 0x5A, 0x5A);
+-+const SkColor kGoogleBlue300 = SkColorSetRGB(0x7B, 0xAA, 0xF7);
+-+const SkColor kGoogleBlue500 = SkColorSetRGB(0x42, 0x85, 0xF4);
+-+const SkColor kGoogleRed700 = SkColorSetRGB(0xC5, 0x39, 0x29);
+-+const SkColor kGoogleGreen700 = SkColorSetRGB(0x0B, 0x80, 0x43);
+-+const SkColor kGoogleYellow700 = SkColorSetRGB(0xF0, 0x93, 0x00);
+-+
+-+}  // namespace gfx
+-diff --git a/ui/gfx/color_palette.h b/ui/gfx/color_palette.h
+-index 372f52c..63fa8af 100644
+---- a/ui/gfx/color_palette.h
+-+++ b/ui/gfx/color_palette.h
+-@@ -9,15 +9,15 @@
 - 
-- #if defined(OS_POSIX)
-- #include <sys/types.h>
--+#include <unistd.h>
-- #endif
+- namespace gfx {
 - 
-- #include "base/compiler_specific.h"
+--const SkColor kChromeIconGrey = SkColorSetRGB(0x5A, 0x5A, 0x5A);
+-+extern const SkColor kChromeIconGrey;
+- 
+- // The number refers to the shade of darkness. Each color in the MD
+- // palette ranges from 100-900.
+--const SkColor kGoogleBlue300 = SkColorSetRGB(0x7B, 0xAA, 0xF7);
+--const SkColor kGoogleBlue500 = SkColorSetRGB(0x42, 0x85, 0xF4);
+--const SkColor kGoogleRed700 = SkColorSetRGB(0xC5, 0x39, 0x29);
+--const SkColor kGoogleGreen700 = SkColorSetRGB(0x0B, 0x80, 0x43);
+--const SkColor kGoogleYellow700 = SkColorSetRGB(0xF0, 0x93, 0x00);
+-+extern const SkColor kGoogleBlue300;
+-+extern const SkColor kGoogleBlue500;
+-+extern const SkColor kGoogleRed700;
+-+extern const SkColor kGoogleGreen700;
+-+extern const SkColor kGoogleYellow700;
+- 
+- }  // namespace gfx
+- 
+-diff --git a/ui/gfx/gfx.gyp b/ui/gfx/gfx.gyp
+-index 8067bee..98b6312 100644
+---- a/ui/gfx/gfx.gyp
+-+++ b/ui/gfx/gfx.gyp
+-@@ -142,6 +142,7 @@
+-         'codec/png_codec.h',
+-         'color_analysis.cc',
+-         'color_analysis.h',
+-+        'color_palette.cc',
+-         'color_palette.h',
+-         'color_profile.cc',
+-         'color_profile.h',
+--- 
+-2.7.4
+-
+diff --git a/recipes-browser/chromium/chromium/chromium-48/remove-Werror.patch b/recipes-browser/chromium/chromium/chromium-48/remove-Werror.patch
+new file mode 100644
+index 0000000..2d1842b
+--- /dev/null
++++ b/recipes-browser/chromium/chromium/chromium-48/remove-Werror.patch
+@@ -0,0 +1,73 @@
++Index: chromium-48.0.2548.0/build/common.gypi
++===================================================================
++--- chromium-48.0.2548.0.orig/build/common.gypi
+++++ chromium-48.0.2548.0/build/common.gypi
++@@ -1421,7 +1421,7 @@
++ 
++     # Disable fatal linker warnings, similarly to how we make it possible
++     # to disable -Werror (e.g. for different toolchain versions).
++-    'disable_fatal_linker_warnings%': 0,
+++    'disable_fatal_linker_warnings%': 1,
++ 
++     'release_valgrind_build%': 0,
++ 
++@@ -3135,12 +3135,6 @@
++               '-Wsign-compare',
++             ]
++           }],
++-          # TODO: Fix all warnings on chromeos too.
++-          [ 'os_posix==1 and OS!="mac" and OS!="ios" and (clang!=1 or chromeos==1)', {
++-            'cflags!': [
++-              '-Werror',
++-            ],
++-          }],
++           [ 'os_posix==1 and os_bsd!=1 and OS!="mac" and OS!="android"', {
++             'cflags': [
++               # Don't warn about ignoring the return value from e.g. close().
++@@ -3692,10 +3686,10 @@
++     }],
++     ['os_posix==1 and OS!="mac" and OS!="ios"', {
++       'target_defaults': {
++-        # Enable -Werror by default, but put it in a variable so it can
+++        # Disable -Werror by default, but put it in a variable so it can
++         # be disabled in ~/.gyp/include.gypi on the valgrind builders.
++         'variables': {
++-          'werror%': '-Werror',
+++          'werror%': '',
++           'libraries_for_target%': '',
++         },
++         'defines': [
++@@ -5045,7 +5039,7 @@
++           'GCC_OBJC_CALL_CXX_CDTORS': 'YES',        # -fobjc-call-cxx-cdtors
++           'GCC_SYMBOLS_PRIVATE_EXTERN': 'YES',      # -fvisibility=hidden
++           'GCC_THREADSAFE_STATICS': 'NO',           # -fno-threadsafe-statics
++-          'GCC_TREAT_WARNINGS_AS_ERRORS': 'YES',    # -Werror
+++          'GCC_TREAT_WARNINGS_AS_ERRORS': 'NO',     # -Werror
++           'GCC_VERSION': '4.2',
++           'GCC_WARN_ABOUT_MISSING_NEWLINE': 'YES',  # -Wnewline-eof
++           'USE_HEADERMAP': 'NO',
++Index: chromium-48.0.2548.0/build/config/compiler/BUILD.gn
++===================================================================
++--- chromium-48.0.2548.0.orig/build/config/compiler/BUILD.gn
+++++ chromium-48.0.2548.0/build/config/compiler/BUILD.gn
++@@ -687,7 +687,6 @@ config("default_warnings") {
++     cflags += [
++       # Enables.
++       "-Wendif-labels",  # Weird old-style text after an #endif.
++-      "-Werror",  # Warnings as errors.
++ 
++       # Disables.
++       "-Wno-missing-field-initializers",  # "struct foo f = {0};"
++Index: chromium-48.0.2548.0/build/nocompile.gypi
++===================================================================
++--- chromium-48.0.2548.0.orig/build/nocompile.gypi
+++++ chromium-48.0.2548.0/build/nocompile.gypi
++@@ -81,7 +81,7 @@
++             '<(nocompile_driver)',
++             '4', # number of compilers to invoke in parallel.
++             '<(RULE_INPUT_PATH)',
++-            '-Wall -Werror -Wfatal-errors -I<(DEPTH)',
+++            '-Wall -I<(DEPTH)',
++             '<(nc_result_path)',
++             ],
++           'message': 'Generating no compile results for <(RULE_INPUT_PATH)',
+diff --git a/recipes-browser/chromium/chromium_48.0.2548.0.bb b/recipes-browser/chromium/chromium_48.0.2548.0.bb
+index 2a52568..70afa6c 100644
+--- a/recipes-browser/chromium/chromium_48.0.2548.0.bb
++++ b/recipes-browser/chromium/chromium_48.0.2548.0.bb
+@@ -2,16 +2,11 @@ include chromium-browser.inc
+ 
+ SRC_URI += "\
+         file://chromium-48/add_missing_stat_h_include.patch \
+-        file://chromium-48/0001-bignum.cc-disable-warning-from-gcc-5.patch \
+-        file://chromium-48/0002-image_util.cc-disable-warning-from-gcc-5.patch \
+         file://chromium-48/0003-Remove-hard-coded-values-for-CC-and-CXX.patch \
+         file://chromium-48/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch \
+         file://chromium-48/0005-Override-root-filesystem-access-restriction.patch \
+-        file://chromium-48/0008-Fix-GCC-uninitialized-warning.patch \
+-        file://chromium-48/0009-Fix-build-errors-with-GCC-in-Debug-mode.patch \
+-        file://chromium-48/0010-Fix-rv-may-be-used-uninitialized-in-this-function-wa.patch \
+         file://chromium-48/0011-Replace-readdir_r-with-readdir.patch \
+-        file://chromium-48/0012-Workaround-for-unused-variable-error-in-ui-gfx-color.patch \
++        file://chromium-48/remove-Werror.patch \
+         ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://chromium-48/0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \
+         ${@bb.utils.contains('PACKAGECONFIG', 'disable-api-keys-info-bar', 'file://chromium-48/0002-Disable-API-keys-info-bar.patch', '', d)} \
+ "
+@@ -43,8 +38,3 @@ CHROMIUM_X11_DEPENDS = "xextproto gtk+ libxi libxss"
+ CHROMIUM_X11_GYP_DEFINES = ""
+ CHROMIUM_WAYLAND_DEPENDS = "wayland libxkbcommon"
+ CHROMIUM_WAYLAND_GYP_DEFINES = "use_ash=1 use_aura=1 chromeos=0 use_ozone=1 use_xkbcommon=1"
+-
+-# | gen/protoc_out/components/enhanced_bookmarks/proto/cluster.pb.cc:257:3: error: this 'if' clause does not guard... [-Werror=misleading-indentation]
+-# |    if (!_extensions_.IsInitialized()) return false;  return true;
+-# |    ^~
+-PNBLACKLIST[chromium] ?= "BROKEN: fails to build with gcc-6"
 -- 
 2.9.0
 
