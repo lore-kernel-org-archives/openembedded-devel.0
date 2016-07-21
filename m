@@ -1,41 +1,44 @@
-Return-Path: <sven.ebenfeld@vaillant-group.com>
-Received: from mailgw01.hp-net.de (mailgw01.hp-net.de [213.15.0.25])
-	by mail.openembedded.org (Postfix) with ESMTP id 99A15605BA
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk0-f177.google.com (mail-qk0-f177.google.com
+	[209.85.220.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 78A756E667
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 13:09:52 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailgw01.hp-net.de (Postfix) with ESMTP id 6E56F22910F
+	Thu, 21 Jul 2016 13:34:38 +0000 (UTC)
+Received: by mail-qk0-f177.google.com with SMTP id x1so73569519qkb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 15:09:53 +0200 (CEST)
-X-Virus-Scanned: Virusscanner at mailgw01
-Received: from mailgw01.hp-net.de ([127.0.0.1])
-	by localhost (mailgw01.hp-net.de [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8WjiD5ra0NDk
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 15:09:53 +0200 (CEST)
-Received: from jv-de-dc-fideas01.vaillant.vhgroup.lan
-	(jv-de-dc-fideas01.vaillant.vhgroup.lan [10.107.7.215])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mailgw01.hp-net.de (Postfix) with ESMTPS id 59C0B22910E
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 15:09:53 +0200 (CEST)
-Received: from vadeff07.vaillant.vhgroup.lan (unknown [10.107.77.149])
-	by jv-de-dc-fideas01.vaillant.vhgroup.lan (Postfix) with ESMTPS
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 15:09:53 +0200 (CEST)
-Received: from ubuntu.vaillant.vhgroup.lan (10.107.185.224) by
-	vadeff07.vaillant.vhgroup.lan (10.107.77.149) with Microsoft SMTP
-	Server id 14.3.301.0; Thu, 21 Jul 2016 15:09:52 +0200
-From: Sven Ebenfeld <sven.ebenfeld@vaillant-group.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Jul 2016 15:09:47 +0200
-Message-ID: <1469106587-2338-1-git-send-email-sven.ebenfeld@vaillant-group.com>
-X-Mailer: git-send-email 1.9.1
+	Thu, 21 Jul 2016 06:34:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=hy1pqA4PxD5ViNv4UZsALE1nC8ykm6v11bSSkXBieB8=;
+	b=X6E3fX+4nnTTu+E5CfqXL5VTFuovUSeEDhUBqXcsV5o/lq8lj4I3er48V3PaC+Ap60
+	v9N5bt9OgEHqSddq7qfDuj4+yus80m6fXT6lyO09gkGgXHydYS4BEzdaWGFPN+GJN+SZ
+	xb2UuuMc2Hmb/31nndJs0HtlEE8m7MS8zI7Um305lrqUVIuTbE5b3TxTsQf6uIQL1bPv
+	hc16L3PejdlarpnmTDJyFhO6z1TbhunA3HXAb2Es8RO7y39QOx9DNGAf9rUV5KFPEUl6
+	Uc4KbpgA/grk8B8bwtl1pwiVNurfT9TxqU4ysS7nS5WuepvPWVga/ZTFUmRz4QPcER0R
+	U9UA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=hy1pqA4PxD5ViNv4UZsALE1nC8ykm6v11bSSkXBieB8=;
+	b=lcVZyvp2W+NwElDq4bAxQ8sgHjk+ju9i64XK1ys0DY8gWYSF9ohQgo9xFP4W08YEjT
+	3bazoS04pYK3wlvvFbgMyrsWYkHYSPgVmUBhOkTWVBXfQaBHkswFaps61gIErtW7g2qq
+	+qYmdd56qlc8sY3CnJnt79pkXsITg4sjCGwtRyEXt36o4Nc/ByWVYe3UqHQILrMjBjdu
+	yK9ekchHV8JQbEFc4rsNOMex39YZBilzK/BOg+k56l9jye7CCYcR6XTCHGPQ0lqkNJ6I
+	olRYth+32YW+XM4b/GysPwZJAKMfS2TbqRfYEZjRJFIGUrP11osuevE1TF3dt/xWYkef
+	ud2g==
+X-Gm-Message-State: ALyK8tIep2XIoo2zRcsX+zL40/ntJTNN0Z3L8H+hULB+1LxDNUKtoG3FSjKLxQUi7N2WaG/4l/xLmnhReixt8g==
+X-Received: by 10.55.97.18 with SMTP id v18mr66367010qkb.102.1469108079219;
+	Thu, 21 Jul 2016 06:34:39 -0700 (PDT)
 MIME-Version: 1.0
-X-OLX-Disclaimer: Done
-Cc: Sven Ebenfeld <sven.ebenfeld@vaillant-group.com>
-Subject: [meta-java][PATCH v2] openjdk-8: ignore wrong GCCVERSION-flag
+Received: by 10.55.214.83 with HTTP; Thu, 21 Jul 2016 06:34:09 -0700 (PDT)
+In-Reply-To: <1469096700-11775-1-git-send-email-mingli.yu@windriver.com>
+References: <1469096700-11775-1-git-send-email-mingli.yu@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 21 Jul 2016 06:34:09 -0700
+Message-ID: <CAMKF1sqvsGYWddJTUUe7FkZSqTCK23nPjboDcn4zz_my8EpgTw@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] makedumpfile: add makedumpfile 1.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,38 +51,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2016 13:09:55 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 21 Jul 2016 13:34:39 -0000
+Content-Type: text/plain; charset=UTF-8
 
-During my recipe parsing, GCCVERSION in the cross case seems to
-be 'l' this leads to a ValueError during recipe parsing. Therefore
-check type before trying to parse the version flag.
+On Thu, Jul 21, 2016 at 3:25 AM,  <mingli.yu@windriver.com> wrote:
+> ++CFLAGS_COMMON = $(CFLAGS_ARCH) \
+> ++              -DVERSION='"$(VERSION)"' \
+> ++              -DRELEASE_DATE='"$(DATE)"'
+> ++
 
-Signed-off-by: Sven Ebenfeld <sven.ebenfeld@vaillant-group.com>
----
- recipes-core/openjdk/openjdk-8-common.inc | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
-index 089f907..33b7909 100644
---- a/recipes-core/openjdk/openjdk-8-common.inc
-+++ b/recipes-core/openjdk/openjdk-8-common.inc
-@@ -271,10 +271,12 @@ def version_specific_cflags(d):
-         # doesn't work anyway.
-         version = d.getVar('GCCVERSION', expand=True)[0]
- 
--    if int(version) >= 4:
-+    if version.isdigit() and int(version) >= 4:
-         extraflags = d.getVar('FLAGS_GCC%d' % int(version), True)
- 
--    return ''.join(extraflags)
-+    if extraflags:
-+        return ''.join(extraflags)
-+    return ''
- 
- CFLAGS_append = " ${@version_specific_cflags(d)}"
- CXXFLAGS_append = " ${@version_specific_cflags(d)}"
--- 
-1.9.1
-
+how is DATE calculated ? such things can hamper reproducability if
+they use the system date at build time.
 
