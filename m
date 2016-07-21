@@ -1,52 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 44DA770031
+	by mail.openembedded.org (Postfix) with ESMTP id 6E89965CBF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 13:51:16 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id x83so2538758wma.3
+	Thu, 21 Jul 2016 13:54:22 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id x83so2547500wma.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 06:51:18 -0700 (PDT)
+	Thu, 21 Jul 2016 06:54:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=/2K9tzA8Y/emMjIU0WmfCG9KU/GgFN4SyuLZB+BDchI=;
-	b=ceAuuLa6GJPjA++Xla65b5rRG9lRpm2yfLRt9bcVOQOWSTiyqLMiL9z399HHdZIzHN
-	jOXeRUr6IB2Z8oz6rWTnGihPuL9P3A1Fgs6nSKh0RmxbVeygcq8iHWHP9HSYALgANvVk
-	AiMRpddkU/ZCxBaiIW6U83pSEnF7I3Jx17bEOJdH8Mndl2RE/vSOgmSSRrKZxN1t6NHw
-	Frk5rkBfPIAZAZ3evaKAfX3a+lFTJ2m0/O5x+pp+TkP0HmL3yeo6oTBanoraWgZjBh00
-	ZhBZSDKEHMJVqNY6y8hGuf/CyEFzspW61Iqfwdgbwj5aIBAEWo/BCRpTGVKYTQaCkQwt
-	tLmw==
+	h=from:to:cc:subject:date:message-id;
+	bh=Aap55YgG7O2jdFm6ItjHsSYLmzKiWSGzUClv3px1qzc=;
+	b=HdCgi399wYsbkpY18fBltd2y0ydvE3lQfNY9Vx+jaot5woJZ3tmOBzqXwdiGtp1pDA
+	Qw+ZP1SjUvxRW4HHE7RM27JppE4HGduoiu1dNzVkIJ2eFQjBdVaMHwDaEVsZs4m34gTZ
+	AH4g5caO+FZV94TSGVcKNaclSkm1cmk47Hze5gZIc4OWgz0Hvj02ncmf9MLsQiT7s8RS
+	ocjM5pgC7dg8qzFNXtaW73I7HoW0AET/kdkM9IJEpwUA+VoaE3rfOjP6Sn2CXRiaMps+
+	+fImUv1molCrf+IWJo/pME4st/HY+Hya4sfcHtpDpJJJU+G2KQ7E2XZcp8I7aoqxdHvS
+	T+8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=/2K9tzA8Y/emMjIU0WmfCG9KU/GgFN4SyuLZB+BDchI=;
-	b=IhgCMcfcG4T28d1klFaqX7/EM4jfw5qe9Svw2ckxTdcjqz5LI+X5UjMxbmgpxefvml
-	SgfYa+af5Tp/HFeRBRGo8YXRNj1EyAvUG0svoJUMSkOL3e4b9gjP6didTKokJJTp91oi
-	rS5Tg/zU/L4OxiPVM5gtB0MJi3aaBoRM4dTbQo5zQszKaYaGzF5tWXoK5rZJKGRSnEkc
-	QwPTOEC+7COgRrRn8gJDyMmV9qkptSrMEuu/misZKS+yeNrzqqcVzKYp/RXzW3Ges4qc
-	TKbi7CaDAr8TqhDR1jLP+D/+xdob0pIdBu0Uv1N1oqI3ZjRokNQySJtan1NSk4E3e3Pf
-	4KJA==
-X-Gm-Message-State: ALyK8tKO6n8t+kwmBAEMrOzbcfIVqxRdd/NC2Pgm4MIs7ldGVmDk5s0tio7fjPtwci8qWQ==
-X-Received: by 10.28.13.211 with SMTP id 202mr17764937wmn.47.1469109077049;
-	Thu, 21 Jul 2016 06:51:17 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Aap55YgG7O2jdFm6ItjHsSYLmzKiWSGzUClv3px1qzc=;
+	b=QW4VC9b31BN/t7Tbgfv5YPZmgRSZs2k1SSdkDQnAOCDGFcRAsQKSZG6IgPPqWjwh5T
+	NVMwqHivEIWCL+0YFy8WlaZzplnT3NzAFeDL170j9B8Jm+dsfUYwRqMDBepGgAZjmPLd
+	M4ICfOS3MX+qVnuCmH/TKSbOOalyWXAE5ZNB2nfaX9PsH2lWnhkvSTE0f3ZyZgXltmsc
+	PYfMO5d13V4yrgt8o+FNsUUWE0ICEAO+smLJo/htKIitU08haL51qITpHZrgPI4Uk7BX
+	lp5JkSuoJfqE9H1Voymsf9Q2tf82lqbDmHsVezmrDvid+5yj/Eo+oMUju1V++luxQr5O
+	MAyQ==
+X-Gm-Message-State: ALyK8tIOKkj9jZYsUJBA/IhTYkaCtwuq0EnFmbk6/p89Asfb/ZVje4eX6pJ5LyKnCC4yQw==
+X-Received: by 10.28.26.69 with SMTP id a66mr17033807wma.8.1469109263301;
+	Thu, 21 Jul 2016 06:54:23 -0700 (PDT)
 Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169])
-	by smtp.gmail.com with ESMTPSA id p23sm4269285wme.8.2016.07.21.06.51.14
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 21 Jul 2016 06:51:14 -0700 (PDT)
+	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
+	v203sm4300180wmv.2.2016.07.21.06.54.21
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 21 Jul 2016 06:54:21 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 21 Jul 2016 15:51:23 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160721135123.g6m5towwtvdfqyob@jama>
-References: <1468587261-18160-1-git-send-email-git@andred.net>
-	<1468587261-18160-2-git-send-email-git@andred.net>
-MIME-Version: 1.0
-In-Reply-To: <1468587261-18160-2-git-send-email-git@andred.net>
-User-Agent: Mutt/1.6.2 (2016-06-11)
-Subject: Re: [meta-networking][PATCH 2/2] meta-networking: override SECURITY_CFLAGS for c-ares
+Date: Thu, 21 Jul 2016 15:54:28 +0200
+Message-Id: <20160721135428.6275-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.9.2
+Subject: [meta-networking][PATCH] meta_networking_security_flags.inc: add weak assignment for lcl_maybe_fortify
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,115 +52,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2016 13:51:19 -0000
-X-Groupsio-MsgNum: 62296
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="fhio7vgxx3lhpecv"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 21 Jul 2016 13:54:26 -0000
 
---fhio7vgxx3lhpecv
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Jul 15, 2016 at 01:54:21PM +0100, git@andred.net wrote:
-> From: Andr=E9 Draszik <adraszik@tycoint.com>
->=20
-> c-ares doesn't build if the distro has enabled usage of the
-> security_flags.inc file as it is picky about what is placed
-> into CPPFLAGS and CFLAGS. It complains and errors out if any
-> preprocessor options appear in CFLAGS.
->=20
-> Fix this by providing an additional include file that is
-> require'd from conf/layer.conf.
->=20
-> Signed-off-by: Andr=E9 Draszik <adraszik@tycoint.com>
-> ---
->  .../conf/distro/include/meta_networking_security_flags.inc          | 6 =
-++++++
->  meta-networking/conf/layer.conf                                     | 3 =
-+++
->  2 files changed, 9 insertions(+)
->  create mode 100644 meta-networking/conf/distro/include/meta_networking_s=
-ecurity_flags.inc
->=20
-> diff --git a/meta-networking/conf/distro/include/meta_networking_security=
-_flags.inc b/meta-networking/conf/distro/include/meta_networking_security_f=
-lags.inc
-> new file mode 100644
-> index 0000000..06802d6
-> --- /dev/null
-> +++ b/meta-networking/conf/distro/include/meta_networking_security_flags.=
-inc
-> @@ -0,0 +1,6 @@
-> +# configure righteously complains:
-> +# | configure:3479: using CFLAGS:  -O2 -pipe -g -feliminate-unused-debug=
--types -fstack-protector-strong -pie -fpie -D_FORTIFY_SOURCE=3D2
-> +# | configure:3485: CFLAGS error: CFLAGS may only be used to specify C c=
-ompiler flags, not macro definitions. Use CPPFLAGS for: -D_FORTIFY_SOURCE=
-=3D2
-> +# | configure:3516: error: Can not continue. Fix errors mentioned immedi=
-ately above this line.
-> +TARGET_CFLAGS_remove_pn-c-ares =3D "${lcl_maybe_fortify}"
-> +TARGET_CPPFLAGS_append_pn-c-ares =3D "${lcl_maybe_fortify}"
-
-This actually breaks builds which don't include
+Without this it breaks builds which don't include
 conf/distro/include/security_flags.inc
 with:
-lcl_maybe_fortify =3D "${@base_conditional('DEBUG_BUILD','1','','-D_FORTIFY=
-_SOURCE=3D2',d)}"
+lcl_maybe_fortify = "${@base_conditional('DEBUG_BUILD','1','','-D_FORTIFY_SOURCE=2',d)}"
 
 because then lcl_maybe_fortify isn't defined and gcc in c-ares
 do_configure gets it unexpaned and fails:
 
 configure:3926: checking whether the C compiler works
-configure:3948: arm-oe-linux-gnueabi-gcc -march=3Darmv7-a -mthumb -mfpu=3Dn=
-eon -mfloat-abi=3Dsoftfp -mcpu=3Dcortex-a9 -mtune=3Dcortex-a9 -funwind-tabl=
-es -rdynamic -Os --sysroot=3D/OE/sysroots/MACHINE -O2 -pipe -g -feliminate-=
-unused-debug-types -fdebug-prefix-map=3D/OE/work/MACHINE-oe-linux-gnueabi/c=
--ares/1.10.0-r0=3D/usr/src/debug/c-ares/1.10.0-r0 -fdebug-prefix-map=3D/OE/=
-sysroots/x86_64-linux=3D -fdebug-prefix-map=3D/OE/sysroots/MACHINE=3D -Os $=
-{lcl_maybe_fortify} -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed conftest=
-=2Ec  >&5
-arm-oe-linux-gnueabi-gcc: error: ${lcl_maybe_fortify}: No such file or dire=
-ctory
+configure:3948: arm-oe-linux-gnueabi-gcc -march=armv7-a -mthumb -mfpu=neon -mfloat-abi=softfp -mcpu=cortex-a9 -mtune=cortex-a9 -funwind-tables -rdynamic -Os
+--sysroot=/OE/sysroots/MACHINE -O2 -pipe -g -feliminate-unused-debug-types
+-fdebug-prefix-map=/OE/work/MACHINE-oe-linux-gnueabi/c-ares/1.10.0-r0=/usr/src/debug/c-ares/1.10.0-r0 -fdebug-prefix-map=/OE/sysroots/x86_64-linux=
+-fdebug-prefix-map=/OE/sysroots/MACHINE= -Os ${lcl_maybe_fortify} -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed conftest.c  >&5
+arm-oe-linux-gnueabi-gcc: error: ${lcl_maybe_fortify}: No such file or directory
 
-I'll send a patch to add weak assignment before using lcl_maybe_fortify
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../conf/distro/include/meta_networking_security_flags.inc            | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-> diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer=
-=2Econf
-> index 5fd636a..c09ba4a 100644
-> --- a/meta-networking/conf/layer.conf
-> +++ b/meta-networking/conf/layer.conf
-> @@ -21,3 +21,6 @@ LICENSE_PATH +=3D "${LAYERDIR}/licenses"
-> =20
->  # used by waf-samba.bbclass
->  WAF_CROSS_ANSWERS_PATH =3D "${LAYERDIR}/files/waf-cross-answers"
-> +
-> +# Override security flags
-> +require conf/distro/include/meta_networking_security_flags.inc
-> --=20
-> 2.8.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-networking/conf/distro/include/meta_networking_security_flags.inc b/meta-networking/conf/distro/include/meta_networking_security_flags.inc
+index 06802d6..19e13ea 100644
+--- a/meta-networking/conf/distro/include/meta_networking_security_flags.inc
++++ b/meta-networking/conf/distro/include/meta_networking_security_flags.inc
+@@ -2,5 +2,9 @@
+ # | configure:3479: using CFLAGS:  -O2 -pipe -g -feliminate-unused-debug-types -fstack-protector-strong -pie -fpie -D_FORTIFY_SOURCE=2
+ # | configure:3485: CFLAGS error: CFLAGS may only be used to specify C compiler flags, not macro definitions. Use CPPFLAGS for: -D_FORTIFY_SOURCE=2
+ # | configure:3516: error: Can not continue. Fix errors mentioned immediately above this line.
++
++# Make sure it's at least empty in builds which don't include
++# conf/distro/include/security_flags.inc
++lcl_maybe_fortify ?= ""
+ TARGET_CFLAGS_remove_pn-c-ares = "${lcl_maybe_fortify}"
+ TARGET_CPPFLAGS_append_pn-c-ares = "${lcl_maybe_fortify}"
+-- 
+2.9.2
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---fhio7vgxx3lhpecv
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAleQ01oACgkQN1Ujt2V2gBykCwCeJDTL2HfMoQ6rqfoCIoOKbK//
-f8oAnivDWUb2oiSWD876zDx3lXw6fuwm
-=C7SF
------END PGP SIGNATURE-----
-
---fhio7vgxx3lhpecv--
