@@ -1,46 +1,45 @@
 Return-Path: <cynthia.ms.chiu@gmail.com>
-Received: from mail-oi0-f67.google.com (mail-oi0-f67.google.com
-	[209.85.218.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 182376FFAB
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 23FC3605BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 19:36:24 +0000 (UTC)
-Received: by mail-oi0-f67.google.com with SMTP id d204so8591554oig.3
+	Thu, 21 Jul 2016 19:38:20 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id h186so5915862pfg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 12:36:25 -0700 (PDT)
+	Thu, 21 Jul 2016 12:38:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=VGm9pr3jBx+uWCpoVEJFf27Ckt3KbrrbrJnh3NWfJG8=;
-	b=MCiKH62pC3TeIvcICeufUS+hh3MNqxOap3VJqPOALdYr8U9FjFm3xp85XS5x0lamFu
-	YaDvwBzBJiNCoGVzJNsouY3GceGGOwtIFdeXsuD2QqTtOZqyTmla3u8VfWH9t4/eBXV2
-	j0wYqSIMtwqUIxaor9CTJM5JcHJUdy4MuzaZnXDkxKi7Ng7tlLIYoL8M7SiVfRp8i1LA
-	AmFDTOaABe8/m21i7MoplJ7shY91kCKYBumOt6fc//EVdV1HNs+zBlXBhU9aJrDfKOtG
-	46ZTrpHVye2bx84bh9Q866nCJYZu7N+RWPtGWgo8zA38aWFjejesULUd7n3NzwF4zIf4
-	6b8g==
+	h=from:to:cc:subject:date:message-id;
+	bh=CFVn0G1zHnQk4/c5gP5Zuk32+xu6/QNRFwm4ma4YpBY=;
+	b=QW2o+GVyfgpsr8lBLweCrrq99623u+XX5EocJDDUxhtNCJxhABwWxt94KR2VTqIerv
+	6U9znqttOtB3yy2FlxLCLMKf8o3Q8nth6ZMQGVlu1KsWBTS6bq66g2ZVw8B/63tGe115
+	S9q6Y/2t/o8eUgt7UI2of/8efH/XUIYwgf8U/eYCOPqHB68KEnbl4C5tc/RDaouLSns+
+	wmZ3ik78A6mhQEbVb1Pz+gUYF1YpPPETOCvDXtZUkizR434myyUCAOpCIZLF+r3NNQ4Y
+	u5K0k7mXNBqufwqY7huBmQfca/npE2IlJSIca7O33bBsMHoMuQoRgybhRDbl+LoW2Z02
+	FkxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=VGm9pr3jBx+uWCpoVEJFf27Ckt3KbrrbrJnh3NWfJG8=;
-	b=F5HnuaQzSOAzDFTZ99Oz8vDunFdFIb3B0VIxDuDR4Yl7UXMHMyOoOFKDc2O21DGd6o
-	dncQGIPyLxxFWOHDgIVZnqmElyZUqq1GwCin49sD5/9yxOWMy2nPACVy9cFhoUimkN0i
-	aMzj0XtjHSz2OCZ6nSaqq97gLTVateySnyaGpAylLZlKgysqHlsY9I8ilg80BaS+ooSo
-	SAyfl1FY6Yhz0mvmPZqQgJKKx2rHsKKJpLbqV8H76vjG+jcs2FlN7C08NiDQi53k8n/I
-	DWzFNfJs4e39Ep0UOEHKZnZx+J5efZUa1NHmEk1XgZkAwcBhc9ilUiYAldSpL/4rnDPJ
-	oyWg==
-X-Gm-Message-State: ALyK8tIRbyPRTkPg6xa19Od4R9mj5+EwtLD1iM6AempKpaUKklWAbxjHXAXQf1C+ktzpZH1hAThZqGOjH3DCZQ==
-X-Received: by 10.157.37.181 with SMTP id q50mr33233589ota.79.1469129784869;
-	Thu, 21 Jul 2016 12:36:24 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.202.171.7 with HTTP; Thu, 21 Jul 2016 12:36:24 -0700 (PDT)
-In-Reply-To: <CA+chaQcKT3UUFryKvo40Y2b4Ng28Afig3_257bx309PLN4VgNA@mail.gmail.com>
-References: <1469035439-23466-1-git-send-email-cynthia.ms.chiu@gmail.com>
-	<CA+chaQcKT3UUFryKvo40Y2b4Ng28Afig3_257bx309PLN4VgNA@mail.gmail.com>
-From: Cynthia Chiu <cynthia.ms.chiu@gmail.com>
-Date: Thu, 21 Jul 2016 13:36:24 -0600
-Message-ID: <CAFn+KXAx=btsDOCrJEHn9YHkRo-6juNk=RV2gUKMBnMrCtbcBQ@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=CFVn0G1zHnQk4/c5gP5Zuk32+xu6/QNRFwm4ma4YpBY=;
+	b=JEDm2+f2oGN2Nyy1aBkSq+z9/DYe1tnEp6gXhhHaSj/oYrNKykhYL7RAOuExPXCNML
+	J/zCDm/Sh7xyqIzljJ3pHci8v+Ly+GNryRfHoWC9/0hRGoJROxwbE0YMxDZ0wm5osfOA
+	6E9TIkkW0sj2IZAmyZXUv8bUDodYip37bJICkr3JDRysUGHIJJM6dnRUbFDl/TQDAnLc
+	mXRP0z2GO74HX66QJvBqs5eM3IllsyF27gBaNtfCXbC/50BW5tzbWuDbR49cip/0kHgq
+	WY9z0ejQfggOSZqbjpPFf3tPRPcO+D3iYxQ2xKl6YdRFe9vCBOcDYm1t17YTQ9rt2akJ
+	xI+A==
+X-Gm-Message-State: ALyK8tJGd7oH/JACDPIRrdE7QbqHMWlReurPeR3RvgbV4uCuk/8/oB/fqHZE/jtKuERioA==
+X-Received: by 10.98.29.201 with SMTP id d192mr69115761pfd.142.1469129901319; 
+	Thu, 21 Jul 2016 12:38:21 -0700 (PDT)
+Received: from cynthia-VirtualBox.int.pason.com ([69.58.16.38])
+	by smtp.gmail.com with ESMTPSA id
+	tm1sm14178887pab.31.2016.07.21.12.38.20
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 21 Jul 2016 12:38:20 -0700 (PDT)
+From: cynthiachiu <cynthia.ms.chiu@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH v3] Pointing the LIC_FILES_CHKSUM to a valid file.
+Date: Thu, 21 Jul 2016 13:38:16 -0600
+Message-Id: <1469129896-2662-1-git-send-email-cynthia.ms.chiu@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH v3] Pointing the LIC_FILES_CHKSUM to a valid file.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,55 +52,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2016 19:36:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 21 Jul 2016 19:38:22 -0000
 
-Will do. Thanks for your feedback!
+Signed-off-by: cynthiachiu <cynthia.ms.chiu@gmail.com>
+---
+ .../canopennode/canopensocket_git.bb               | 25 ++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/canopennode/canopensocket_git.bb
 
-On Wed, Jul 20, 2016 at 11:37 AM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+diff --git a/meta-oe/recipes-extended/canopennode/canopensocket_git.bb b/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
+new file mode 100644
+index 0000000..656d417
+--- /dev/null
++++ b/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "Linux CANopen tools"
++DESCRIPTION = "Linux CANOpen Protocol Stack Tools"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++SRC_URI = "gitsm://github.com/CANopenNode/CANopenSocket.git"
++SRCREV = "7777653da3a630b0dc02b3fa5ff029d9bc57cd26"
++
++S = "${WORKDIR}/git"
++
++do_compile() {
++    cd ${S}/canopend
++    make
++    cd ${S}/canopencomm
++    make
++    cd ${S}/canopencgi
++    make
++}
++
++do_install(){
++    install -d ${D}${bindir}
++    install -m 0755 ${S}/canopend/app/canopend ${D}${bindir}
++    install -m 0755 ${S}/canopencomm/canopencomm ${D}${bindir}
++    install -m 0755 ${S}/canopencgi/canopen.cgi ${D}${bindir}
++}
+-- 
+1.9.1
 
-> Squash this into v2 to make it proper v3.
->
-> Thanks.
->
-> On Wed, Jul 20, 2016 at 7:23 PM, cynthiachiu <cynthia.ms.chiu@gmail.com>
-> wrote:
->
-> > Signed-off-by: cynthiachiu <cynthia.ms.chiu@gmail.com>
-> > ---
-> >  meta-oe/recipes-extended/canopennode/canopensocket_git.bb | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
-> > b/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
-> > index 7c58a26..1e0f7d0 100644
-> > --- a/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
-> > +++ b/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
-> > @@ -1,7 +1,7 @@
-> >  SUMMARY = "Linux CANOpen tools"
-> >  DESCRIPTION = "Linux CANOpen Protocol Stack Tools"
-> >  LICENSE = "GPLv2"
-> > -LIC_FILES_CHKSUM =
-> > "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> > +LIC_FILES_CHKSUM =
-> > "file://LICENSE.GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> >
-> >  SRC_URI = "gitsm://github.com/CANopenNode/CANopenSocket.git"
-> >  SRCREV = "7777653da3a630b0dc02b3fa5ff029d9bc57cd26"
-> > --
-> > 1.9.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
