@@ -1,49 +1,24 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 922C36FF0E
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 80C596072C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 04:21:30 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id c52so3251446qte.1
+	Thu, 21 Jul 2016 10:27:37 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u6LARY5Q026247
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jul 2016 21:21:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=fAEIstMaXRkQPQkx8sOj0HLimcSnvdZr17xgd79TVVI=;
-	b=iA+LbPaQziLe0mXo7LqOZbRRcvlN8JgzpGpwUAQXko/sMTaybS9wQuQleXJVDfhwQY
-	07H2LeTe4kW3FsC411xciPEwautU9fbOOQfk862jAPjexEHhAv2rjkTpUr7/ZHON8ySf
-	m1eZ189FZ+MtWPc+qLpxNuqa487rihFbARxBVdJEo+Ad/DyzNLwNrMr0G86gBdCaIjAA
-	GYWVy/i+ME3nkCSjJzRx4Zx/VBbwwhJnbm6vNv54XWLeCtsZzDYb6uPxi2U2+g+5sbK/
-	J4E/D9+OaDKhz3nubWu1oluA35DrUfLVqcA0PhRaFjFA6/5XBVBpwPekFo3c0hfROhVO
-	0kHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=fAEIstMaXRkQPQkx8sOj0HLimcSnvdZr17xgd79TVVI=;
-	b=NLPfaN6hNRrIQ7o6gUx4U3DDBqXV2fl3EFMdSBiDDaEdpn23BMl76ljgorxn0JjiQy
-	OIx1jNFrcss+QOJHPQjaxg9UYdUlMSNPnfABZB05n1BdtnH/89vO642RbzP1RdBo16jx
-	Tn+VN9yj3ITDMHZnnSYLV3oJ9CwcAZlaIvffBB8Wfnk14fWvVTlgT0kOT03lfh8hwOj3
-	4nIdBNd8dDba5y+R7ooBLwoalPJgHeSTH174XozEgThX/j0tT0eNUbX1TTQVcuwsvSd0
-	+5tkf5aotBkRL3jmAnw4AbkoGT/r79ZVyfbkxpc2JEqylSBrRwn1mXhvx+RNB4GHL1LZ
-	biaQ==
-X-Gm-Message-State: ALyK8tKuccV4R+YXbiMm3831kEAzSlag47A/wHCb2Cc/NmqQqXwdKWzaDRDyx2J8gLIgbg==
-X-Received: by 10.237.38.35 with SMTP id z32mr73032020qtc.69.1469074890239;
-	Wed, 20 Jul 2016 21:21:30 -0700 (PDT)
-Received: from openSUSE-i7.site (dsl-67-55-28-109.acanac.net. [67.55.28.109])
-	by smtp.gmail.com with ESMTPSA id
-	b132sm3342006qkg.8.2016.07.20.21.21.23
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 20 Jul 2016 21:21:25 -0700 (PDT)
-From: Trevor Woerner <twoerner@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Jul 2016 00:21:34 -0400
-Message-Id: <20160721042134.14806-5-twoerner@gmail.com>
-X-Mailer: git-send-email 2.9.0
-In-Reply-To: <20160721042134.14806-1-twoerner@gmail.com>
-References: <20160721042134.14806-1-twoerner@gmail.com>
-Subject: [meta-browser][PATCH v2 4/4] chromium: update 48.0.2548.0 -> 52.0.2743.76
+	Thu, 21 Jul 2016 03:27:37 -0700
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Thu, 21 Jul 2016 03:27:33 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 21 Jul 2016 18:25:00 +0800
+Message-ID: <1469096700-11775-1-git-send-email-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.8.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] makedumpfile: add makedumpfile 1.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,634 +31,232 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2016 04:21:30 -0000
+X-List-Received-Date: Thu, 21 Jul 2016 10:27:40 -0000
+Content-Type: text/plain
 
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+* Add makedumpfile 1.6.0
+* Create alias for target such as powerpc as powerpc32
+* Remove hardcode CFLAGS
+* Add CFLAGS_COMMON to instead of CFLAGS so can flexibly
+  customize CFLAGS and not hardcode the CFLAGS as previously
+* Forcibly to link dynamic library as the poky build
+  system doesn't build static library by default
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- recipes-browser/chromium/chromium-browser.inc      |  1 +
- .../chromium/chromium-wayland_48.0.2548.0.bb       |  9 +--
- .../0002-Disable-API-keys-info-bar.patch           | 33 ---------
- ...accelerated-Canvas-support-from-blacklist.patch | 49 -------------
- .../chromium/0002-Disable-API-keys-info-bar.patch  | 33 ---------
- ...3-Remove-hard-coded-values-for-CC-and-CXX.patch | 43 -----------
- ...y-i18n_process_css_test.html-file-to-avoi.patch | 26 -------
- ...erride-root-filesystem-access-restriction.patch | 30 --------
- .../0011-Replace-readdir_r-with-readdir.patch      | 55 +-------------
- .../chromium/add_missing_stat_h_include.patch      | 12 +--
- .../chromium/chromium/chromium/remove-Werror.patch | 85 +++++++++++-----------
- recipes-browser/chromium/chromium_48.0.2548.0.bb   | 19 -----
- recipes-browser/chromium/chromium_52.0.2743.76.bb  | 18 +++++
- ...accelerated-Canvas-support-from-blacklist.patch |  0
- ...3-Remove-hard-coded-values-for-CC-and-CXX.patch |  0
- ...y-i18n_process_css_test.html-file-to-avoi.patch |  0
- ...erride-root-filesystem-access-restriction.patch |  0
- recipes-browser/chromium/files/api-keys.patch      | 13 ++++
- 18 files changed, 87 insertions(+), 339 deletions(-)
- delete mode 100644 recipes-browser/chromium/chromium/chromium-wayland/0002-Disable-API-keys-info-bar.patch
- delete mode 100644 recipes-browser/chromium/chromium/chromium/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
- delete mode 100644 recipes-browser/chromium/chromium/chromium/0002-Disable-API-keys-info-bar.patch
- delete mode 100644 recipes-browser/chromium/chromium/chromium/0003-Remove-hard-coded-values-for-CC-and-CXX.patch
- delete mode 100644 recipes-browser/chromium/chromium/chromium/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch
- delete mode 100644 recipes-browser/chromium/chromium/chromium/0005-Override-root-filesystem-access-restriction.patch
- delete mode 100644 recipes-browser/chromium/chromium_48.0.2548.0.bb
- create mode 100644 recipes-browser/chromium/chromium_52.0.2743.76.bb
- rename recipes-browser/chromium/{chromium/chromium-wayland => files}/0001-Remove-accelerated-Canvas-support-from-blacklist.patch (100%)
- rename recipes-browser/chromium/{chromium/chromium-wayland => files}/0003-Remove-hard-coded-values-for-CC-and-CXX.patch (100%)
- rename recipes-browser/chromium/{chromium/chromium-wayland => files}/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch (100%)
- rename recipes-browser/chromium/{chromium/chromium-wayland => files}/0005-Override-root-filesystem-access-restriction.patch (100%)
- create mode 100644 recipes-browser/chromium/files/api-keys.patch
+ ...0001-makedumpfile-replace-hardcode-CFLAGS.patch | 134 +++++++++++++++++++++
+ .../makedumpfile/makedumpfile_1.6.0.bb             |  60 +++++++++
+ 2 files changed, 194 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
+ create mode 100644 meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
 
-diff --git a/recipes-browser/chromium/chromium-browser.inc b/recipes-browser/chromium/chromium-browser.inc
-index fc7ac04..4fb47fd 100644
---- a/recipes-browser/chromium/chromium-browser.inc
-+++ b/recipes-browser/chromium/chromium-browser.inc
-@@ -23,6 +23,7 @@ SRC_URI = "\
-         file://include.gypi \
-         file://oe-defaults.gypi \
-         file://google-chrome \
-+        ${@bb.utils.contains('PACKAGECONFIG', 'disable-api-keys-info-bar', 'file://api-keys.patch;patchdir=${WORKDIR}', '', d)} \
-         file://google-chrome.desktop \
- "
- 
-diff --git a/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb b/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
-index a5d59a0..b1a32dc 100644
---- a/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
-+++ b/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
-@@ -4,16 +4,15 @@ DEPENDS += "wayland libxkbcommon"
- 
- SRC_URI += "\
-         file://chromium-wayland/add_missing_stat_h_include.patch \
--        file://chromium-wayland/0003-Remove-hard-coded-values-for-CC-and-CXX.patch \
--        file://chromium-wayland/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch \
--        file://chromium-wayland/0005-Override-root-filesystem-access-restriction.patch \
-+        file://0003-Remove-hard-coded-values-for-CC-and-CXX.patch \
-+        file://0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch \
-+        file://0005-Override-root-filesystem-access-restriction.patch \
- 	file://chromium-wayland/0006-Remove-GBM-support-from-wayland.gyp.patch \
- 	file://chromium-wayland/0007-Workaround-for-glib-related-build-error-with-ozone-w.patch \
-         file://chromium-wayland/0011-Replace-readdir_r-with-readdir.patch \
-         file://chromium-wayland/remove-Werror.patch \
-         ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
--        ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://chromium-wayland/0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \
--        ${@bb.utils.contains('PACKAGECONFIG', 'disable-api-keys-info-bar', 'file://chromium-wayland/0002-Disable-API-keys-info-bar.patch', '', d)} \
-+        ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \
- "
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0fca02217a5d49a14dfe2d11837bb34d"
-diff --git a/recipes-browser/chromium/chromium/chromium-wayland/0002-Disable-API-keys-info-bar.patch b/recipes-browser/chromium/chromium/chromium-wayland/0002-Disable-API-keys-info-bar.patch
-deleted file mode 100644
-index 56a5b28..0000000
---- a/recipes-browser/chromium/chromium/chromium-wayland/0002-Disable-API-keys-info-bar.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--From 68773f2faea2608145e820bf23cf5efaf50e3399 Mon Sep 17 00:00:00 2001
--From: Carlos Rafael Giani <dv@pseudoterminal.org>
--Date: Mon, 9 Jun 2014 15:05:11 +0200
--Subject: [PATCH] Disable API keys info bar
--
--Upstream-Status: Inappropriate [other]
--The info bar is not a bug; it is just undesirable in some use cases.
--A clean approach - which requires discussion with upstream - is to
--disable it by using a command line option.
--
--Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-----
-- chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc | 2 ++
-- 1 file changed, 2 insertions(+)
--
--diff --git a/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc b/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
--index edea11a..4aef68f 100644
----- a/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
--+++ b/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
--@@ -18,8 +18,10 @@ void GoogleApiKeysInfoBarDelegate::Create(InfoBarService* infobar_service) {
--   if (google_apis::HasKeysConfigured())
--     return;
-- 
--+#if 0
--   infobar_service->AddInfoBar(infobar_service->CreateConfirmInfoBar(
--       scoped_ptr<ConfirmInfoBarDelegate>(new GoogleApiKeysInfoBarDelegate())));
--+#endif
-- }
-- 
-- GoogleApiKeysInfoBarDelegate::GoogleApiKeysInfoBarDelegate()
---- 
--1.9.1
--
-diff --git a/recipes-browser/chromium/chromium/chromium/0001-Remove-accelerated-Canvas-support-from-blacklist.patch b/recipes-browser/chromium/chromium/chromium/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
-deleted file mode 100644
-index 2d7bf84..0000000
---- a/recipes-browser/chromium/chromium/chromium/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
-+++ /dev/null
-@@ -1,49 +0,0 @@
--From be6f1d02f3f784594642929dff289dae33014d56 Mon Sep 17 00:00:00 2001
--From: Carlos Rafael Giani <dv@pseudoterminal.org>
--Date: Sun, 3 Apr 2016 17:46:59 +0200
--Subject: [PATCH] Remove accelerated Canvas support from blacklist
--
--Together with the --gpu-no-context-lost command line switch, this patch is
--necessary to enable hardware accelerated 2D canvas rendering when using
--EGL.
--
--Note the implications on the behavior of Canvas, in particular with lost
--contexts, as discussed here:
--
--http://lists.whatwg.org/htdig.cgi/whatwg-whatwg.org/2012-September/206450.html
--
--Upstream-Status: Inappropiate [see link above]
-----
-- gpu/config/software_rendering_list_json.cc | 16 ----------------
-- 1 file changed, 16 deletions(-)
--
--diff --git a/gpu/config/software_rendering_list_json.cc b/gpu/config/software_rendering_list_json.cc
--index 484467d..c3b5855 100644
----- a/gpu/config/software_rendering_list_json.cc
--+++ b/gpu/config/software_rendering_list_json.cc
--@@ -240,22 +240,6 @@ const char kSoftwareRenderingListJson[] = LONG_STRING_CONST(
--       ]
--     },
--     {
---      "id": 24,
---      "description": "Accelerated 2d canvas is unstable in Linux at the moment",
---      "os": {
---        "type": "linux"
---      },
---      "exceptions": [
---        {
---          "gl_vendor": "Vivante Corporation", 
---          "gl_renderer": "Vivante GC1000"
---        }
---      ],
---      "features": [
---        "accelerated_2d_canvas"
---      ]
---    },
---    {
--       "id": 27,
--       "description": "ATI/AMD cards with older drivers in Linux are crash-prone",
--       "cr_bugs": [95934, 94973, 136240, 357314],
---- 
--2.5.0
--
-diff --git a/recipes-browser/chromium/chromium/chromium/0002-Disable-API-keys-info-bar.patch b/recipes-browser/chromium/chromium/chromium/0002-Disable-API-keys-info-bar.patch
-deleted file mode 100644
-index 56a5b28..0000000
---- a/recipes-browser/chromium/chromium/chromium/0002-Disable-API-keys-info-bar.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--From 68773f2faea2608145e820bf23cf5efaf50e3399 Mon Sep 17 00:00:00 2001
--From: Carlos Rafael Giani <dv@pseudoterminal.org>
--Date: Mon, 9 Jun 2014 15:05:11 +0200
--Subject: [PATCH] Disable API keys info bar
--
--Upstream-Status: Inappropriate [other]
--The info bar is not a bug; it is just undesirable in some use cases.
--A clean approach - which requires discussion with upstream - is to
--disable it by using a command line option.
--
--Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-----
-- chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc | 2 ++
-- 1 file changed, 2 insertions(+)
--
--diff --git a/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc b/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
--index edea11a..4aef68f 100644
----- a/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
--+++ b/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
--@@ -18,8 +18,10 @@ void GoogleApiKeysInfoBarDelegate::Create(InfoBarService* infobar_service) {
--   if (google_apis::HasKeysConfigured())
--     return;
-- 
--+#if 0
--   infobar_service->AddInfoBar(infobar_service->CreateConfirmInfoBar(
--       scoped_ptr<ConfirmInfoBarDelegate>(new GoogleApiKeysInfoBarDelegate())));
--+#endif
-- }
-- 
-- GoogleApiKeysInfoBarDelegate::GoogleApiKeysInfoBarDelegate()
---- 
--1.9.1
--
-diff --git a/recipes-browser/chromium/chromium/chromium/0003-Remove-hard-coded-values-for-CC-and-CXX.patch b/recipes-browser/chromium/chromium/chromium/0003-Remove-hard-coded-values-for-CC-and-CXX.patch
-deleted file mode 100644
-index 7bc8d14..0000000
---- a/recipes-browser/chromium/chromium/chromium/0003-Remove-hard-coded-values-for-CC-and-CXX.patch
-+++ /dev/null
-@@ -1,43 +0,0 @@
--From 518135b0cd6878e91e5fcf489f3185740ec307c0 Mon Sep 17 00:00:00 2001
--From: Carlos Rafael Giani <dv@pseudoterminal.org>
--Date: Sun, 12 Oct 2014 19:31:47 +0200
--Subject: [PATCH] Remove hard coded values for CC and CXX
--
--In spite of what the comment says, the environment variables do *not*
--override the variables; "which which arm-linux-gnueabihf-gcc" etc. are
--always called. To undo this, remove the change.
--
--Upstream-Status: Pending
--
--The default values cannot be overriden without the patch; upstream
--might be interested in this.
--
--Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-----
-- build/common.gypi | 10 ----------
-- 1 file changed, 10 deletions(-)
--
--diff --git a/build/common.gypi b/build/common.gypi
--index 7ec5ae2..11e8d1d 100644
----- a/build/common.gypi
--+++ b/build/common.gypi
--@@ -6047,16 +6047,6 @@
--         ['CXX.host', '<(host_cxx)'],
--       ],
--     }],
---    ['OS=="linux" and target_arch=="arm" and host_arch!="arm" and chromeos==0 and clang==0', {
---      # Set default ARM cross tools on linux.  These can be overridden
---      # using CC,CXX,CC.host and CXX.host environment variables.
---      'make_global_settings': [
---        ['CC', '<!(which arm-linux-gnueabihf-gcc)'],
---        ['CXX', '<!(which arm-linux-gnueabihf-g++)'],
---        ['CC.host', '<(host_cc)'],
---        ['CXX.host', '<(host_cxx)'],
---      ],
---    }],
--     # TODO(yyanagisawa): supports GENERATOR==make
--     #  make generator doesn't support CC_wrapper without CC
--     #  in make_global_settings yet.
---- 
--1.9.1
--
-diff --git a/recipes-browser/chromium/chromium/chromium/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch b/recipes-browser/chromium/chromium/chromium/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch
-deleted file mode 100644
-index 24bec71..0000000
---- a/recipes-browser/chromium/chromium/chromium/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From 5158da97132db1a43c95f4c0ad65b4ac2629c4da Mon Sep 17 00:00:00 2001
--From: Carlos Rafael Giani <dv@pseudoterminal.org>
--Date: Sat, 23 Apr 2016 14:05:04 +0200
--Subject: [PATCH] Create empty i18n_process_css_test.html file to avoid build
-- failure
--
--According to https://groups.google.com/a/chromium.org/forum/#!topic/chromium-packagers/9JX1N2nf4PU
--creating an empty i18n_process_css_test.html is a valid workaround for the
--following build error:
--
--"Exception: Failed to open test/data/webui/i18n_process_css_test.html while trying to flatten test/data/webui/i18n_process_css_test.html. (No such file or directory)"
--
--Upstream-Status: Pending
--
--Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-----
-- chrome/test/data/webui/i18n_process_css_test.html | 0
-- 1 file changed, 0 insertions(+), 0 deletions(-)
-- create mode 100644 chrome/test/data/webui/i18n_process_css_test.html
--
--diff --git a/chrome/test/data/webui/i18n_process_css_test.html b/chrome/test/data/webui/i18n_process_css_test.html
--new file mode 100644
--index 0000000..e69de29
---- 
--2.5.0
--
-diff --git a/recipes-browser/chromium/chromium/chromium/0005-Override-root-filesystem-access-restriction.patch b/recipes-browser/chromium/chromium/chromium/0005-Override-root-filesystem-access-restriction.patch
-deleted file mode 100644
-index ceb6c6c..0000000
---- a/recipes-browser/chromium/chromium/chromium/0005-Override-root-filesystem-access-restriction.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From ef3aaa58be440c1845e60432a498501088da07fe Mon Sep 17 00:00:00 2001
--From: Carlos Rafael Giani <dv@pseudoterminal.org>
--Date: Thu, 28 Apr 2016 09:29:59 +0200
--Subject: [PATCH] Override root filesystem access restriction
--
--Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-----
-- sandbox/linux/suid/client/setuid_sandbox_client.cc | 4 ++++
-- 1 file changed, 4 insertions(+)
--
--diff --git a/sandbox/linux/suid/client/setuid_sandbox_client.cc b/sandbox/linux/suid/client/setuid_sandbox_client.cc
--index 12ef7f9..b59908a 100644
----- a/sandbox/linux/suid/client/setuid_sandbox_client.cc
--+++ b/sandbox/linux/suid/client/setuid_sandbox_client.cc
--@@ -21,8 +21,12 @@
-- namespace {
-- 
-- bool IsFileSystemAccessDenied() {
--+#if 0
--   base::ScopedFD root_dir(HANDLE_EINTR(open("/", O_RDONLY)));
--   return !root_dir.is_valid();
--+#else
--+  return true;
--+#endif
-- }
-- 
-- int GetHelperApi(base::Environment* env) {
---- 
--2.5.0
--
-diff --git a/recipes-browser/chromium/chromium/chromium/0011-Replace-readdir_r-with-readdir.patch b/recipes-browser/chromium/chromium/chromium/0011-Replace-readdir_r-with-readdir.patch
-index 36c7ec2..eaf9568 100644
---- a/recipes-browser/chromium/chromium/chromium/0011-Replace-readdir_r-with-readdir.patch
-+++ b/recipes-browser/chromium/chromium/chromium/0011-Replace-readdir_r-with-readdir.patch
-@@ -20,10 +20,10 @@ diff --git a/base/files/file_enumerator_posix.cc b/base/files/file_enumerator_po
- index 7533a24..637b8cd 100644
- --- a/base/files/file_enumerator_posix.cc
- +++ b/base/files/file_enumerator_posix.cc
--@@ -7,6 +7,7 @@
-- #include <dirent.h>
-+@@ -8,6 +8,7 @@
-  #include <errno.h>
-  #include <fnmatch.h>
-+ #include <stdint.h>
- +#include <string.h>
-  
-  #include "base/logging.h"
-@@ -135,57 +135,6 @@ index 8341b4a..1603415 100644
-      if (S_ISDIR(s.st_mode)) {
-        return true;
-      }
--diff --git a/third_party/boringssl/src/crypto/directory_posix.c b/third_party/boringssl/src/crypto/directory_posix.c
--index b944b69..17143a7 100644
----- a/third_party/boringssl/src/crypto/directory_posix.c
--+++ b/third_party/boringssl/src/crypto/directory_posix.c
--@@ -24,10 +24,6 @@
--  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
--  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
-- 
---#if !defined(_POSIX_C_SOURCE)
---#define _POSIX_C_SOURCE 201409  /* for readdir_r */
---#endif
---
-- #include "directory.h"
-- 
-- 
--@@ -38,21 +34,6 @@
-- #include <stdlib.h>
-- #include <string.h>
-- 
---#if defined(OPENSSL_PNACL)
---/* pnacl doesn't include readdir_r! So we do the best we can. */
---int readdir_r(DIR *dirp, struct dirent *entry, struct dirent **result) {
---  errno = 0;
---  *result = readdir(dirp);
---  if (*result != NULL) {
---    return 0;
---  }
---  if (errno) {
---    return 1;
---  }
---  return 0;
---}
---#endif
---
-- struct OPENSSL_dir_context_st {
--   DIR *dir;
--   struct dirent dirent;
--@@ -85,10 +66,10 @@ const char *OPENSSL_DIR_read(OPENSSL_DIR_CTX **ctx, const char *directory) {
--     }
--   }
-- 
---  if (readdir_r((*ctx)->dir, &(*ctx)->dirent, &dirent) != 0 ||
---      dirent == NULL) {
--+  errno = 0;
--+  dirent = readdir((*ctx)->dir);
--+  if (dirent == NULL || errno != 0)
--     return 0;
---  }
-- 
--   return (*ctx)->dirent.d_name;
-- }
- diff --git a/third_party/crashpad/crashpad/util/posix/close_multiple.cc b/third_party/crashpad/crashpad/util/posix/close_multiple.cc
- index d94d575..4c1287a 100644
- --- a/third_party/crashpad/crashpad/util/posix/close_multiple.cc
-diff --git a/recipes-browser/chromium/chromium/chromium/add_missing_stat_h_include.patch b/recipes-browser/chromium/chromium/chromium/add_missing_stat_h_include.patch
-index 4620db2..dc34437 100644
---- a/recipes-browser/chromium/chromium/chromium/add_missing_stat_h_include.patch
-+++ b/recipes-browser/chromium/chromium/chromium/add_missing_stat_h_include.patch
-@@ -27,13 +27,13 @@ Tested with ARCH armv7.
- Signed-off-by: Max Krummenacher <max.oss.09 at gmail.com>
- Upstream-Status: Pending
- 
----- a/components/storage_monitor/storage_monitor_linux.cc~	2015-01-21 21:28:16.000000000 +0100
--+++ b/components/storage_monitor/storage_monitor_linux.cc	2015-10-27 13:21:08.405655894 +0100
--@@ -8,6 +8,7 @@
-- 
-+--- chromium-53.0.2774.4-ORIG/components/storage_monitor/storage_monitor_linux.cc       2016-06-22 12:04:10.000000000 -0400
-++++ chromium-53.0.2774.4/components/storage_monitor/storage_monitor_linux.cc    2016-06-24 17:43:39.874640219 -0400
-+@@ -9,6 +9,7 @@
-  #include <mntent.h>
-+ #include <stdint.h>
-  #include <stdio.h>
- +#include <sys/stat.h>
-- 
-+ #include <limits>
-  #include <list>
-- 
-+ #include <utility>
-diff --git a/recipes-browser/chromium/chromium/chromium/remove-Werror.patch b/recipes-browser/chromium/chromium/chromium/remove-Werror.patch
-index 2d1842b..e69b643 100644
---- a/recipes-browser/chromium/chromium/chromium/remove-Werror.patch
-+++ b/recipes-browser/chromium/chromium/chromium/remove-Werror.patch
-@@ -1,8 +1,8 @@
--Index: chromium-48.0.2548.0/build/common.gypi
-+Index: chromium-53.0.2774.4/build/common.gypi
- ===================================================================
----- chromium-48.0.2548.0.orig/build/common.gypi
--+++ chromium-48.0.2548.0/build/common.gypi
--@@ -1421,7 +1421,7 @@
-+--- chromium-53.0.2774.4.orig/build/common.gypi
-++++ chromium-53.0.2774.4/build/common.gypi
-+@@ -1446,7 +1446,7 @@
-  
-      # Disable fatal linker warnings, similarly to how we make it possible
-      # to disable -Werror (e.g. for different toolchain versions).
-@@ -11,9 +11,9 @@ Index: chromium-48.0.2548.0/build/common.gypi
-  
-      'release_valgrind_build%': 0,
-  
--@@ -3135,12 +3135,6 @@
--               '-Wsign-compare',
--             ]
-+@@ -3074,12 +3074,6 @@
-+             # third-party code either.
-+             'cflags!': [ '-Wall' ],
-            }],
- -          # TODO: Fix all warnings on chromeos too.
- -          [ 'os_posix==1 and OS!="mac" and OS!="ios" and (clang!=1 or chromeos==1)', {
-@@ -21,53 +21,54 @@ Index: chromium-48.0.2548.0/build/common.gypi
- -              '-Werror',
- -            ],
- -          }],
--           [ 'os_posix==1 and os_bsd!=1 and OS!="mac" and OS!="android"', {
--             'cflags': [
--               # Don't warn about ignoring the return value from e.g. close().
--@@ -3692,10 +3686,10 @@
-+           [ 'OS=="win"', {
-+             'defines': [
-+               '_CRT_SECURE_NO_DEPRECATE',
-+@@ -3615,10 +3609,10 @@
-      }],
-      ['os_posix==1 and OS!="mac" and OS!="ios"', {
-        'target_defaults': {
- -        # Enable -Werror by default, but put it in a variable so it can
--+        # Disable -Werror by default, but put it in a variable so it can
-++        # Disable -Werror by default and put it in a variable so it can
-          # be disabled in ~/.gyp/include.gypi on the valgrind builders.
-          'variables': {
- -          'werror%': '-Werror',
- +          'werror%': '',
-            'libraries_for_target%': '',
--         },
--         'defines': [
--@@ -5045,7 +5039,7 @@
-+           'conditions' : [
-+             # Enable -Wextra for chromium_code when we control the compiler.
-+@@ -5076,7 +5070,7 @@
-            'GCC_OBJC_CALL_CXX_CDTORS': 'YES',        # -fobjc-call-cxx-cdtors
-            'GCC_SYMBOLS_PRIVATE_EXTERN': 'YES',      # -fvisibility=hidden
-            'GCC_THREADSAFE_STATICS': 'NO',           # -fno-threadsafe-statics
- -          'GCC_TREAT_WARNINGS_AS_ERRORS': 'YES',    # -Werror
--+          'GCC_TREAT_WARNINGS_AS_ERRORS': 'NO',     # -Werror
--           'GCC_VERSION': '4.2',
--           'GCC_WARN_ABOUT_MISSING_NEWLINE': 'YES',  # -Wnewline-eof
-++          'GCC_TREAT_WARNINGS_AS_ERRORS': 'NO',    # -Werror
-+           'GCC_VERSION': 'com.apple.compilers.llvm.clang.1_0',
-            'USE_HEADERMAP': 'NO',
--Index: chromium-48.0.2548.0/build/config/compiler/BUILD.gn
-+           'WARNING_CFLAGS': [
-+Index: chromium-53.0.2774.4/build/config/compiler/BUILD.gn
- ===================================================================
----- chromium-48.0.2548.0.orig/build/config/compiler/BUILD.gn
--+++ chromium-48.0.2548.0/build/config/compiler/BUILD.gn
--@@ -687,7 +687,6 @@ config("default_warnings") {
--     cflags += [
--       # Enables.
--       "-Wendif-labels",  # Weird old-style text after an #endif.
---      "-Werror",  # Warnings as errors.
-- 
--       # Disables.
--       "-Wno-missing-field-initializers",  # "struct foo f = {0};"
--Index: chromium-48.0.2548.0/build/nocompile.gypi
--===================================================================
----- chromium-48.0.2548.0.orig/build/nocompile.gypi
--+++ chromium-48.0.2548.0/build/nocompile.gypi
--@@ -81,7 +81,7 @@
--             '<(nocompile_driver)',
--             '4', # number of compilers to invoke in parallel.
--             '<(RULE_INPUT_PATH)',
---            '-Wall -Werror -Wfatal-errors -I<(DEPTH)',
--+            '-Wall -I<(DEPTH)',
--             '<(nc_result_path)',
--             ],
--           'message': 'Generating no compile results for <(RULE_INPUT_PATH)',
-+--- chromium-53.0.2774.4.orig/build/config/compiler/BUILD.gn
-++++ chromium-53.0.2774.4/build/config/compiler/BUILD.gn
-+@@ -1040,9 +1040,6 @@ config("chromium_code") {
-+     cflags = [ "/W4" ]  # Warning level 4.
-+   } else {
-+     cflags = [ "-Wall" ]
-+-    if (treat_warnings_as_errors) {
-+-      cflags += [ "-Werror" ]
-+-    }
-+     if (is_clang) {
-+       # Enable -Wextra for chromium_code when we control the compiler.
-+       cflags += [ "-Wextra" ]
-+@@ -1089,11 +1086,6 @@ config("no_chromium_code") {
-+       "_CRT_NONSTDC_NO_DEPRECATE",
-+     ]
-+   } else {
-+-    # GCC may emit unsuppressible warnings so don't add -Werror for no chromium
-+-    # code. crbug.com/589724
-+-    if (treat_warnings_as_errors && is_clang) {
-+-      cflags += [ "-Werror" ]
-+-    }
-+     if (is_clang && !is_nacl) {
-+       # TODO(thakis): Remove !is_nacl once
-+       # https://codereview.webrtc.org/1552863002/ made its way into chromium.
-diff --git a/recipes-browser/chromium/chromium_48.0.2548.0.bb b/recipes-browser/chromium/chromium_48.0.2548.0.bb
-deleted file mode 100644
-index d72c621..0000000
---- a/recipes-browser/chromium/chromium_48.0.2548.0.bb
-+++ /dev/null
-@@ -1,19 +0,0 @@
--include chromium-browser.inc
--
--DEPENDS += "xextproto gtk+ libxi libxss"
--
--SRC_URI += "\
--        file://chromium/add_missing_stat_h_include.patch \
--        file://chromium/0003-Remove-hard-coded-values-for-CC-and-CXX.patch \
--        file://chromium/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch \
--        file://chromium/0005-Override-root-filesystem-access-restriction.patch \
--        file://chromium/0011-Replace-readdir_r-with-readdir.patch \
--        file://chromium/remove-Werror.patch \
--        ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
--        ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://chromium/0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \
--        ${@bb.utils.contains('PACKAGECONFIG', 'disable-api-keys-info-bar', 'file://chromium/0002-Disable-API-keys-info-bar.patch', '', d)} \
--"
--
--LIC_FILES_CHKSUM = "file://LICENSE;md5=0fca02217a5d49a14dfe2d11837bb34d"
--SRC_URI[md5sum] = "0534981cc21efcd11e64b67b85854420"
--SRC_URI[sha256sum] = "4ca4e2adb340b3fb4d502266ad7d6bda45fa3519906dbf63cce11a63f680dbc8"
-diff --git a/recipes-browser/chromium/chromium_52.0.2743.76.bb b/recipes-browser/chromium/chromium_52.0.2743.76.bb
+diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
 new file mode 100644
-index 0000000..14b519c
+index 0000000..d599a91
 --- /dev/null
-+++ b/recipes-browser/chromium/chromium_52.0.2743.76.bb
-@@ -0,0 +1,18 @@
-+include chromium-browser.inc
++++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
+@@ -0,0 +1,134 @@
++From 3c2f4ff583a156a7ed2fa0cc002a413c391d063d Mon Sep 17 00:00:00 2001
++From: Mingli Yu <mingli.yu@windriver.com>
++Date: Thu, 21 Jul 2016 18:06:21 +0800
++Subject: [PATCH] makedumpfile: replace hardcode CFLAGS
 +
-+DEPENDS += "xextproto gtk+ libxi libxss"
++* Create alias for target such as powerpc as powerpc32
++* Remove hardcode CFLAGS
++* Add CFLAGS_COMMON to instead of CFLAGS so can flexibly
++  customize CFLAGS and not hardcode the CFLAGS as previously
++* Forcibly to link dynamic library as the poky build
++  system doesn't build static library by default
 +
-+SRC_URI += "\
-+        file://chromium/add_missing_stat_h_include.patch \
-+        file://0003-Remove-hard-coded-values-for-CC-and-CXX.patch \
-+        file://0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch \
-+        file://0005-Override-root-filesystem-access-restriction.patch \
-+        file://chromium/0011-Replace-readdir_r-with-readdir.patch \
-+        file://chromium/remove-Werror.patch \
-+        ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
-+        ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \
-+"
++Upstream-Status: Inappropriate[oe specific]
 +
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=0fca02217a5d49a14dfe2d11837bb34d"
-+SRC_URI[md5sum] = "0fee71466e1f2dc39ed4549d04b58ee2"
-+SRC_URI[sha256sum] = "c54cdc11c3324152f3d5be98dcb4eae2bda0fc9dac7dd5f9010150458d68c18c"
-diff --git a/recipes-browser/chromium/chromium/chromium-wayland/0001-Remove-accelerated-Canvas-support-from-blacklist.patch b/recipes-browser/chromium/files/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
-similarity index 100%
-rename from recipes-browser/chromium/chromium/chromium-wayland/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
-rename to recipes-browser/chromium/files/0001-Remove-accelerated-Canvas-support-from-blacklist.patch
-diff --git a/recipes-browser/chromium/chromium/chromium-wayland/0003-Remove-hard-coded-values-for-CC-and-CXX.patch b/recipes-browser/chromium/files/0003-Remove-hard-coded-values-for-CC-and-CXX.patch
-similarity index 100%
-rename from recipes-browser/chromium/chromium/chromium-wayland/0003-Remove-hard-coded-values-for-CC-and-CXX.patch
-rename to recipes-browser/chromium/files/0003-Remove-hard-coded-values-for-CC-and-CXX.patch
-diff --git a/recipes-browser/chromium/chromium/chromium-wayland/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch b/recipes-browser/chromium/files/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch
-similarity index 100%
-rename from recipes-browser/chromium/chromium/chromium-wayland/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch
-rename to recipes-browser/chromium/files/0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch
-diff --git a/recipes-browser/chromium/chromium/chromium-wayland/0005-Override-root-filesystem-access-restriction.patch b/recipes-browser/chromium/files/0005-Override-root-filesystem-access-restriction.patch
-similarity index 100%
-rename from recipes-browser/chromium/chromium/chromium-wayland/0005-Override-root-filesystem-access-restriction.patch
-rename to recipes-browser/chromium/files/0005-Override-root-filesystem-access-restriction.patch
-diff --git a/recipes-browser/chromium/files/api-keys.patch b/recipes-browser/chromium/files/api-keys.patch
-new file mode 100644
-index 0000000..85dc40c
---- /dev/null
-+++ b/recipes-browser/chromium/files/api-keys.patch
-@@ -0,0 +1,13 @@
-+--- a/google-chrome	2016-07-08 09:47:11.121810646 -0400
-++++ b/google-chrome	2016-07-08 09:47:37.881683637 -0400
-+@@ -3,6 +3,10 @@
-+ export CHROME_DEVEL_SANDBOX=/usr/sbin/chrome-devel-sandbox
-+ export LD_LIBRARY_PATH=/usr/lib/chromium
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ Makefile | 46 +++++++++++++++++++++++-----------------------
++ 1 file changed, 23 insertions(+), 23 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index 7dde3e4..c5286ac 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -8,13 +8,6 @@ ifeq ($(strip $CC),)
++ CC	= gcc
++ endif
 + 
-++export GOOGLE_API_KEY="no"
-++export GOOGLE_DEFAULT_CLIENT_ID="no"
-++export GOOGLE_DEFAULT_CLIENT_SECRET="no"
++-CFLAGS = -g -O2 -Wall -D_FILE_OFFSET_BITS=64 \
++-	  -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE \
++-	  -DVERSION='"$(VERSION)"' -DRELEASE_DATE='"$(DATE)"'
++-CFLAGS_ARCH	= -g -O2 -Wall -D_FILE_OFFSET_BITS=64 \
++-		    -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE
++-# LDFLAGS = -L/usr/local/lib -I/usr/local/include
++-
++ HOST_ARCH := $(shell uname -m)
++ # Use TARGET as the target architecture if specified.
++ # Defaults to uname -m
++@@ -22,29 +15,36 @@ ifeq ($(strip($TARGET)),)
++ TARGET := $(HOST_ARCH)
++ endif
++ 
++-ARCH := $(shell echo ${TARGET}  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
++-			       -e s/arm.*/arm/ -e s/sa110/arm/ \
++-			       -e s/s390x/s390/ -e s/parisc64/parisc/ \
++-			       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/)
+++ARCH := $(shell echo __${TARGET}__  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
+++		       -e s/arm.*/arm/ -e s/sa110/arm/ \
+++		       -e s/s390x/s390/ -e s/parisc64/parisc/ \
+++		       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/ \
+++		       -e s/_powerpc_/_powerpc32_/)
++ 
++ CROSS :=
++ ifneq ($(TARGET), $(HOST_ARCH))
++ CROSS := -U__$(HOST_ARCH)__
++ endif
++ 
++-CFLAGS += -D__$(ARCH)__ $(CROSS)
++-CFLAGS_ARCH += -D__$(ARCH)__ $(CROSS)
+++CFLAGS_ARCH += -D$(ARCH) $(CROSS)
++ 
++-ifeq ($(ARCH), powerpc64)
++-CFLAGS += -m64
+++ifeq ($(ARCH), __powerpc64__)
++ CFLAGS_ARCH += -m64
++ endif
++ 
++-ifeq ($(ARCH), powerpc32)
++-CFLAGS += -m32
+++ifeq ($(ARCH), __powerpc32__)
++ CFLAGS_ARCH += -m32
++ endif
++ 
+++CFLAGS_ARCH += $(CFLAGS) \
+++		-D_FILE_OFFSET_BITS=64 \
+++		-D_LARGEFILE_SOURCE \
+++		-D_LARGEFILE64_SOURCE
 ++
-+ CHROME_EXTRA_ARGS=""
-+ if [ "`whoami`" = "root" ] ; then
-+ 	CHROME_EXTRA_ARGS="${CHROME_EXTRA_ARGS} --user-data-dir=ROOT_HOME/.chromium/"
+++CFLAGS_COMMON = $(CFLAGS_ARCH) \
+++		-DVERSION='"$(VERSION)"' \
+++		-DRELEASE_DATE='"$(DATE)"'
+++
++ SRC_BASE = makedumpfile.c makedumpfile.h diskdump_mod.h sadump_mod.h sadump_info.h
++ SRC_PART = print_info.c dwarf_info.c elf_info.c erase_info.c sadump_info.c cache.c
++ OBJ_PART=$(patsubst %.c,%.o,$(SRC_PART))
++@@ -54,17 +54,17 @@ OBJ_ARCH=$(patsubst %.c,%.o,$(SRC_ARCH))
++ 
++ LIBS = -ldw -lbz2 -lebl -ldl -lelf -lz
++ ifneq ($(LINKTYPE), dynamic)
++-LIBS := -static $(LIBS)
+++LIBS := $(LIBS)
++ endif
++ 
++ ifeq ($(USELZO), on)
++ LIBS := -llzo2 $(LIBS)
++-CFLAGS += -DUSELZO
+++CFLAGS_COMMON += -DUSELZO
++ endif
++ 
++ ifeq ($(USESNAPPY), on)
++ LIBS := -lsnappy $(LIBS)
++-CFLAGS += -DUSESNAPPY
+++CFLAGS_COMMON += -DUSESNAPPY
++ endif
++ 
++ LIBS := -lpthread $(LIBS)
++@@ -72,14 +72,14 @@ LIBS := -lpthread $(LIBS)
++ all: makedumpfile
++ 
++ $(OBJ_PART): $(SRC_PART)
++-	$(CC) $(CFLAGS) -c -o ./$@ $(VPATH)$(@:.o=.c)
+++	$(CC) $(CFLAGS_COMMON) -c -o ./$@ $(VPATH)$(@:.o=.c)
++ 
++ $(OBJ_ARCH): $(SRC_ARCH)
++ 	@mkdir -p $(@D)
++ 	$(CC) $(CFLAGS_ARCH) -c -o ./$@ $(VPATH)$(@:.o=.c)
++ 
++ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(OBJ_ARCH)
++-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ_PART) $(OBJ_ARCH) -rdynamic -o $@ $< $(LIBS)
+++	$(CC) $(CFLAGS_COMMON) $(LDFLAGS) $(OBJ_PART) $(OBJ_ARCH) -rdynamic -o $@ $< $(LIBS)
++ 	echo .TH MAKEDUMPFILE 8 \"$(DATE)\" \"makedumpfile v$(VERSION)\" \"Linux System Administrator\'s Manual\" > temp.8
++ 	grep -v "^.TH MAKEDUMPFILE 8" $(VPATH)makedumpfile.8 >> temp.8
++ 	mv temp.8 makedumpfile.8
++@@ -90,7 +90,7 @@ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(OBJ_ARCH)
++ 	gzip -c ./makedumpfile.conf.5 > ./makedumpfile.conf.5.gz
++ 
++ eppic_makedumpfile.so: extension_eppic.c
++-	$(CC) $(CFLAGS) $(LDFLAGS) -shared -rdynamic -o $@ extension_eppic.c -fPIC -leppic -ltinfo
+++	$(CC) $(CFLAGS_COMMON) $(LDFLAGS) -shared -rdynamic -o $@ extension_eppic.c -fPIC -leppic -ltinfo
++ 
++ clean:
++ 	rm -f $(OBJ) $(OBJ_PART) $(OBJ_ARCH) makedumpfile makedumpfile.8.gz makedumpfile.conf.5.gz
++-- 
++2.8.1
++
+diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
+new file mode 100644
+index 0000000..db13885
+--- /dev/null
++++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
+@@ -0,0 +1,60 @@
++#
++# Copyright (C) 2014 Wind River Systems, Inc.
++#
++# Previous versions of this recipe built a local version of elfutils.  This
++# should not be necessary unless we require a newer version of elfutils than
++# is provided by default, and that is not the case.
++#
++SUMMARY = "VMcore extraction tool"
++DESCRIPTION = "\
++	This program is used to extract a subset of the memory available either \
++	via /dev/mem or /proc/vmcore (for crashdumps). It is used to get memory \
++	images without extra uneeded information (zero pages, userspace programs, \
++	etc). \
++	"
++HOMEPAGE = "http://makedumpfile.sourceforge.net"
++
++DEPENDS = "bzip2 zlib elfutils"
++RDEPENDS_${PN}-tools = "perl ${PN}"
++
++# arm would compile but has never been tested upstream.  mips would not compile.
++#
++COMPATIBLE_HOST = "(x86_64|i.86|powerpc).*-linux"
++
++PACKAGES =+ "${PN}-tools"
++FILES_${PN}-tools = "${bindir}/*.pl"
++
++SRC_URI = "\
++	${SOURCEFORGE_MIRROR}/makedumpfile/${BPN}-${PV}.tar.gz \
++	file://0001-makedumpfile-replace-hardcode-CFLAGS.patch \
++	"
++LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++LICENSE = "GPLv2.0"
++
++SRC_URI[md5sum] = "041c5c6de2c3066600e4ca646c2397d6"
++SRC_URI[sha256sum] = "e3147abc52df2ceac1e9affef45bf37e2f2e1d9979bc94a761ee11e4044072ac"
++
++SECTION = "base"
++
++# If we do not specify TARGET, makedumpfile will build for the host but use the
++# target gcc.
++#
++EXTRA_OEMAKE = "\
++	LINKTYPE=static \
++	TARGET=${TARGET_ARCH} \
++	"
++
++do_install () {
++	mkdir -p ${D}/usr/bin
++	install -m 755 ${S}/makedumpfile ${D}/usr/bin
++	install -m 755 ${S}/makedumpfile-R.pl ${D}/usr/bin
++
++	mkdir -p ${D}/usr/share/man/man8
++	install -m 644 ${S}/makedumpfile.8.gz ${D}/usr/share/man/man8
++
++	mkdir -p ${D}/usr/share/man/man5
++	install -m 644 ${S}/makedumpfile.conf.5.gz ${D}/usr/share/man/man5
++
++	mkdir -p ${D}/etc/
++	install -m 644 ${S}/makedumpfile.conf ${D}/etc/makedumpfile.conf.sample
++}
 -- 
-2.9.0
+2.8.1
 
 
