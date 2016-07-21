@@ -1,24 +1,51 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 80C596072C
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E178607A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 10:27:37 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u6LARY5Q026247
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Thu, 21 Jul 2016 11:14:08 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id i5so2129538wmg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 03:27:37 -0700
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 21 Jul 2016 03:27:33 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Jul 2016 18:25:00 +0800
-Message-ID: <1469096700-11775-1-git-send-email-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Thu, 21 Jul 2016 04:14:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=d9SElaQbylVV3Zog39oZyQlrlGeoAyM1ySAicE4dG+w=;
+	b=oHeQcH4P+sK50c6ByOSEOSbX4kRWvpV3fICNb4JvKx7gBcmE1Hj/p6iUacXO7v1hbh
+	MHY2AzZ4+H1b4bj3Og3gszUmtRrlzhHahVZoTNGASHcAniRWD+dqnnWlvUXZxmWnagud
+	DnPrivIMyJucMRbHvqLk2FUhrpfW2ZMYIQ11ZlPw1WmdJotfZppoB7rnrJvwoNOncGTN
+	HPq3s6AlPgNc3cU+kc9rzju/UbZg6nbgpQtfYVlbM2jMPL2KsJdSBc+KVZTHrZ36bEt9
+	7VV5iIU2eOg1g60QmasjrBowj70iklhMGWv6u+hW4/TJ8NiNkdjW1N5D2PT5T3ZgzJtE
+	ocLw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=d9SElaQbylVV3Zog39oZyQlrlGeoAyM1ySAicE4dG+w=;
+	b=cvGUV+/nSM83VMsxcuzQWv4vAo6R5XYBzHxNSx+DZwgbi9a/BAqAuoG+9PRiIl9MYx
+	rBa1Db1LCOuys6ax2O79zJVISq6/vRINkYBIm0f+qG2U+UEa0NV5Ngu/kb4FR0BF4jjR
+	6TBtvbrk1xgHbtUeYXa9fgEaMxsiCJO4JQNqbdoLpBtT+9JPcwlrZAHavFSoEbMQZDu6
+	MLOs5tC/PE2THsaauvs7kaIvG+Iv5FW+DBFt37ysNTmkBXQQHchuO2gkPA8yWWSTBGmA
+	c8DhXmZ/9ZF16UKL90jzI4cb1jsNShUbvNeoxmu8WzEa9aZBb911EtEf5Q/rU5sHwS7q
+	rXgg==
+X-Gm-Message-State: ALyK8tK0bluNptzt+PjuWv/zoaT9JRa2wjus84zzBJhkkbuCnoS3RnqVmDlA2f+apypfWA==
+X-Received: by 10.28.196.14 with SMTP id u14mr8338437wmf.17.1469099648708;
+	Thu, 21 Jul 2016 04:14:08 -0700 (PDT)
+Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
+	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
+	m127sm3165636wmm.21.2016.07.21.04.14.07
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 21 Jul 2016 04:14:07 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 21 Jul 2016 13:14:16 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160721111416.6xtpu574dgaavsbx@jama>
+References: <1468893439-29598-1-git-send-email-mingli.yu@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] makedumpfile: add makedumpfile 1.6.0
+In-Reply-To: <1468893439-29598-1-git-send-email-mingli.yu@windriver.com>
+User-Agent: Mutt/1.6.2 (2016-06-11)
+Subject: Re: [meta-oe][PATCH V2] grubby: add grubby 8.40-1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,232 +58,256 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2016 10:27:40 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 21 Jul 2016 11:14:09 -0000
+X-Groupsio-MsgNum: 62292
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="dlhy44lil7up4sfq"
+Content-Disposition: inline
 
-* Add makedumpfile 1.6.0
-* Create alias for target such as powerpc as powerpc32
-* Remove hardcode CFLAGS
-* Add CFLAGS_COMMON to instead of CFLAGS so can flexibly
-  customize CFLAGS and not hardcode the CFLAGS as previously
-* Forcibly to link dynamic library as the poky build
-  system doesn't build static library by default
+--dlhy44lil7up4sfq
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- ...0001-makedumpfile-replace-hardcode-CFLAGS.patch | 134 +++++++++++++++++++++
- .../makedumpfile/makedumpfile_1.6.0.bb             |  60 +++++++++
- 2 files changed, 194 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
- create mode 100644 meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
+On Tue, Jul 19, 2016 at 09:57:19AM +0800, mingli.yu@windriver.com wrote:
+> * Add grubby bb
+> * Rename grub2-editenv to grub-editenv as
+>   we don't use the name grub2-editenv for grub2
+> * Add ptest support
+> * Update #!/bin/bash to #!/bin/sh in test.sh to remove
+>   bashisms
+>=20
+> Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> ---
+>  .../grubby/grubby-remove-bashisms-in-test.sh.patch | 29 +++++++++
+>  ...ubby-rename-grub2-editenv-to-grub-editenv.patch | 69 ++++++++++++++++=
+++++++
+>  meta-oe/recipes-support/grubby/grubby/run-ptest    |  3 +
+>  meta-oe/recipes-support/grubby/grubby_8.40.bb      | 38 ++++++++++++
+>  4 files changed, 139 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/grubby/grubby/grubby-remove-b=
+ashisms-in-test.sh.patch
+>  create mode 100644 meta-oe/recipes-support/grubby/grubby/grubby-rename-g=
+rub2-editenv-to-grub-editenv.patch
+>  create mode 100644 meta-oe/recipes-support/grubby/grubby/run-ptest
+>  create mode 100644 meta-oe/recipes-support/grubby/grubby_8.40.bb
+>=20
+> diff --git a/meta-oe/recipes-support/grubby/grubby/grubby-remove-bashisms=
+-in-test.sh.patch b/meta-oe/recipes-support/grubby/grubby/grubby-remove-bas=
+hisms-in-test.sh.patch
+> new file mode 100644
+> index 0000000..6734e7f
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/grubby/grubby/grubby-remove-bashisms-in-tes=
+t.sh.patch
+> @@ -0,0 +1,29 @@
+> +From c3a004b8d6dff1a767573dd7baf5d45efddb9f2b Mon Sep 17 00:00:00 2001
+> +From: Mingli Yu <mingli.yu@windriver.com>
+> +Date: Fri, 15 Jul 2016 11:23:17 +0800
+> +Subject: [PATCH] grubby: remove bashisms in test.sh
+> +
+> +* Update #!/bin/bash to #!/bin/sh in test.sh to
+> +  remove below warning:
+> +  QA Issue: /usr/lib/grubby/ptest/test.sh contained
+> +  in package grubby-ptest requires /bin/bash, but no
+> +  providers found in RDEPENDS_grubby-ptest? [file-rdeps]
+> +
+> +Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+> +---
+> + test.sh | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/test.sh b/test.sh
+> +index f738388..f3537f3 100755
+> +--- a/test.sh
+> ++++ b/test.sh
+> +@@ -1,4 +1,4 @@
+> +-#!/bin/bash
+> ++#!/bin/sh
+> + #
+> + # test.sh -- grubby regression tests
+> + #
+> +--=20
+> +2.8.1
+> +
+> diff --git a/meta-oe/recipes-support/grubby/grubby/grubby-rename-grub2-ed=
+itenv-to-grub-editenv.patch b/meta-oe/recipes-support/grubby/grubby/grubby-=
+rename-grub2-editenv-to-grub-editenv.patch
+> new file mode 100644
+> index 0000000..d936249
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/grubby/grubby/grubby-rename-grub2-editenv-t=
+o-grub-editenv.patch
+> @@ -0,0 +1,69 @@
+> +From 0841706a5b5280e501c8e392c70c466c5fbcf0aa Mon Sep 17 00:00:00 2001
+> +From: Jackie Huang <jackie.huang@windriver.com>
+> +Date: Tue, 4 Aug 2015 23:54:41 -0700
+> +Subject: [PATCH] rename grub2-editenv to grub-editenv
+> +
+> +We don't use the name grub2-editenv for grub2.
+> +
+> +Upstream-Status: Inappropriate
+> +
+> +Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> +---
+> + grubby.c | 4 ++--
+> + test.sh  | 6 +++---
+> + 2 files changed, 5 insertions(+), 5 deletions(-)
+> +
+> +diff --git a/grubby.c b/grubby.c
+> +index d4ebb86..47a1a15 100644
+> +--- a/grubby.c
+> ++++ b/grubby.c
+> +@@ -290,7 +290,7 @@ static char *grub2GetEnv(struct configFileInfo *info=
+, char *name)
+> +     char *s =3D NULL;
+> +     char *ret =3D NULL;
+> +     char *envFile =3D info->envFile ? info->envFile : "/boot/grub2/grub=
+env";
+> +-    int rc =3D asprintf(&s, "grub2-editenv %s list | grep '^%s=3D'", en=
+vFile, name);
+> ++    int rc =3D asprintf(&s, "grub-editenv %s list | grep '^%s=3D'", env=
+File, name);
+> +=20
+> +     if (rc < 0)
+> + 	return NULL;
+> +@@ -361,7 +361,7 @@ static int grub2SetEnv(struct configFileInfo *info, =
+char *name, char *value)
+> +     if (!value)
+> + 	    return -1;
+> +=20
+> +-    rc =3D asprintf(&s, "grub2-editenv %s set '%s=3D%s'", envFile, name=
+, value);
+> ++    rc =3D asprintf(&s, "grub-editenv %s set '%s=3D%s'", envFile, name,=
+ value);
+> +     free(value);
+> +     if (rc <0)
+> + 	return -1;
+> +diff --git a/test.sh b/test.sh
+> +index 6379698..f738388 100755
+> +--- a/test.sh
+> ++++ b/test.sh
+> +@@ -574,7 +574,7 @@ if [ "$testgrub2" =3D=3D "y" ]; then
+> +         --title=3D'title' --initrd=3D/boot/new-initrd --boot-filesystem=
+=3D/boot/ \
+> +         --copy-default
+> +     commandTest "saved_default output" \
+> +-        "grub2-editenv test/grub2-support_files/env_temp list" \
+> ++        "grub-editenv test/grub2-support_files/env_temp list" \
+> +         "saved_entry=3DLinux, with Fedora 2.6.38.8-32.fc15.x86_64"
+> +=20
+> +     testing=3D"GRUB2 add kernel with default=3Dsaved_entry and a terrib=
+le title"
+> +@@ -587,13 +587,13 @@ if [ "$testgrub2" =3D=3D "y" ]; then
+> +     testing=3D"GRUB2 set default with default=3Dsaved_entry and a terri=
+ble name"
+> +     grub2Test grub2.9 add/g2-1.9 --env grubenv.1 --set-default-index=3D0
+> +     commandTest "saved_default output" \
+> +-        "grub2-editenv test/grub2-support_files/env_temp list" \
+> ++        "grub-editenv test/grub2-support_files/env_temp list" \
+> +         'saved_entry=3DFedora (3.10.3-300.fc19.x86_64) 19 (Schr=C3=B6di=
+nger=E2=80=99s Cat)'
+> +=20
+> +     testing=3D"GRUB2 set default with default=3Dsaved_entry"
+> +     grub2Test grub2.8 add/g2-1.8 --env grubenv.1 --set-default-index=3D0
+> +     commandTest "saved_default output" \
+> +-        "grub2-editenv test/grub2-support_files/env_temp list" \
+> ++        "grub-editenv test/grub2-support_files/env_temp list" \
+> +         "saved_entry=3Dtitle"
+> +=20
+> +     testing=3D"GRUB2 --default-index with default=3Dsaved_entry"
+> +--=20
+> +2.3.5
+> +
+> diff --git a/meta-oe/recipes-support/grubby/grubby/run-ptest b/meta-oe/re=
+cipes-support/grubby/grubby/run-ptest
+> new file mode 100644
+> index 0000000..b06ac59
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/grubby/grubby/run-ptest
+> @@ -0,0 +1,3 @@
+> +#!/bin/sh
+> +
+> +./test.sh -v
+> diff --git a/meta-oe/recipes-support/grubby/grubby_8.40.bb b/meta-oe/reci=
+pes-support/grubby/grubby_8.40.bb
+> new file mode 100644
+> index 0000000..dc6cc62
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/grubby/grubby_8.40.bb
+> @@ -0,0 +1,38 @@
+> +SUMMARY =3D "A command line tool for updating and displaying info about =
+boot loaders"
+> +DESCRIPTION =3D "grubby is a command line tool for updating and displayi=
+ng information \
+> +about the configuration files for the grub, lilo, elilo (ia64), yaboot (=
+powerpc) and \
+> +zipl (s390) boot loaders. It is primarily designed to be used from scrip=
+ts which install \
+> +new kernels and need to find information about the current boot environm=
+ent. \
+> +"
+> +LICENSE =3D "GPLv2+"
+> +
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D892f569a555ba9c07a568a7c0c4fa=
+63a"
+> +
+> +DEPENDS =3D "popt util-linux"
+> +
+> +SRC_URI =3D "https://github.com/rhinstaller/${BPN}/archive/${PV}-1.tar.g=
+z;downloadfilename=3D${BPN}-${PV}-1.tar.gz \
+> +           file://grubby-rename-grub2-editenv-to-grub-editenv.patch \
+> +           file://run-ptest \
+> +           file://grubby-remove-bashisms-in-test.sh.patch \
+> +"
+> +
+> +SRC_URI[md5sum] =3D "1005907b275d6d93368d045274537d86"
+> +SRC_URI[sha256sum] =3D "85f1c678484f74c8978e8643451594967defce463a86c35c=
+b1ee56d12767a9df"
+> +
+> +S =3D "${WORKDIR}/${BPN}-${PV}-1"
+> +
+> +RDEPENDS_${PN} +=3D "dracut"
 
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
-new file mode 100644
-index 0000000..d599a91
---- /dev/null
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
-@@ -0,0 +1,134 @@
-+From 3c2f4ff583a156a7ed2fa0cc002a413c391d063d Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Thu, 21 Jul 2016 18:06:21 +0800
-+Subject: [PATCH] makedumpfile: replace hardcode CFLAGS
-+
-+* Create alias for target such as powerpc as powerpc32
-+* Remove hardcode CFLAGS
-+* Add CFLAGS_COMMON to instead of CFLAGS so can flexibly
-+  customize CFLAGS and not hardcode the CFLAGS as previously
-+* Forcibly to link dynamic library as the poky build
-+  system doesn't build static library by default
-+
-+Upstream-Status: Inappropriate[oe specific]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ Makefile | 46 +++++++++++++++++++++++-----------------------
-+ 1 file changed, 23 insertions(+), 23 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 7dde3e4..c5286ac 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -8,13 +8,6 @@ ifeq ($(strip $CC),)
-+ CC	= gcc
-+ endif
-+ 
-+-CFLAGS = -g -O2 -Wall -D_FILE_OFFSET_BITS=64 \
-+-	  -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE \
-+-	  -DVERSION='"$(VERSION)"' -DRELEASE_DATE='"$(DATE)"'
-+-CFLAGS_ARCH	= -g -O2 -Wall -D_FILE_OFFSET_BITS=64 \
-+-		    -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE
-+-# LDFLAGS = -L/usr/local/lib -I/usr/local/include
-+-
-+ HOST_ARCH := $(shell uname -m)
-+ # Use TARGET as the target architecture if specified.
-+ # Defaults to uname -m
-+@@ -22,29 +15,36 @@ ifeq ($(strip($TARGET)),)
-+ TARGET := $(HOST_ARCH)
-+ endif
-+ 
-+-ARCH := $(shell echo ${TARGET}  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
-+-			       -e s/arm.*/arm/ -e s/sa110/arm/ \
-+-			       -e s/s390x/s390/ -e s/parisc64/parisc/ \
-+-			       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/)
-++ARCH := $(shell echo __${TARGET}__  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
-++		       -e s/arm.*/arm/ -e s/sa110/arm/ \
-++		       -e s/s390x/s390/ -e s/parisc64/parisc/ \
-++		       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/ \
-++		       -e s/_powerpc_/_powerpc32_/)
-+ 
-+ CROSS :=
-+ ifneq ($(TARGET), $(HOST_ARCH))
-+ CROSS := -U__$(HOST_ARCH)__
-+ endif
-+ 
-+-CFLAGS += -D__$(ARCH)__ $(CROSS)
-+-CFLAGS_ARCH += -D__$(ARCH)__ $(CROSS)
-++CFLAGS_ARCH += -D$(ARCH) $(CROSS)
-+ 
-+-ifeq ($(ARCH), powerpc64)
-+-CFLAGS += -m64
-++ifeq ($(ARCH), __powerpc64__)
-+ CFLAGS_ARCH += -m64
-+ endif
-+ 
-+-ifeq ($(ARCH), powerpc32)
-+-CFLAGS += -m32
-++ifeq ($(ARCH), __powerpc32__)
-+ CFLAGS_ARCH += -m32
-+ endif
-+ 
-++CFLAGS_ARCH += $(CFLAGS) \
-++		-D_FILE_OFFSET_BITS=64 \
-++		-D_LARGEFILE_SOURCE \
-++		-D_LARGEFILE64_SOURCE
-++
-++CFLAGS_COMMON = $(CFLAGS_ARCH) \
-++		-DVERSION='"$(VERSION)"' \
-++		-DRELEASE_DATE='"$(DATE)"'
-++
-+ SRC_BASE = makedumpfile.c makedumpfile.h diskdump_mod.h sadump_mod.h sadump_info.h
-+ SRC_PART = print_info.c dwarf_info.c elf_info.c erase_info.c sadump_info.c cache.c
-+ OBJ_PART=$(patsubst %.c,%.o,$(SRC_PART))
-+@@ -54,17 +54,17 @@ OBJ_ARCH=$(patsubst %.c,%.o,$(SRC_ARCH))
-+ 
-+ LIBS = -ldw -lbz2 -lebl -ldl -lelf -lz
-+ ifneq ($(LINKTYPE), dynamic)
-+-LIBS := -static $(LIBS)
-++LIBS := $(LIBS)
-+ endif
-+ 
-+ ifeq ($(USELZO), on)
-+ LIBS := -llzo2 $(LIBS)
-+-CFLAGS += -DUSELZO
-++CFLAGS_COMMON += -DUSELZO
-+ endif
-+ 
-+ ifeq ($(USESNAPPY), on)
-+ LIBS := -lsnappy $(LIBS)
-+-CFLAGS += -DUSESNAPPY
-++CFLAGS_COMMON += -DUSESNAPPY
-+ endif
-+ 
-+ LIBS := -lpthread $(LIBS)
-+@@ -72,14 +72,14 @@ LIBS := -lpthread $(LIBS)
-+ all: makedumpfile
-+ 
-+ $(OBJ_PART): $(SRC_PART)
-+-	$(CC) $(CFLAGS) -c -o ./$@ $(VPATH)$(@:.o=.c)
-++	$(CC) $(CFLAGS_COMMON) -c -o ./$@ $(VPATH)$(@:.o=.c)
-+ 
-+ $(OBJ_ARCH): $(SRC_ARCH)
-+ 	@mkdir -p $(@D)
-+ 	$(CC) $(CFLAGS_ARCH) -c -o ./$@ $(VPATH)$(@:.o=.c)
-+ 
-+ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(OBJ_ARCH)
-+-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ_PART) $(OBJ_ARCH) -rdynamic -o $@ $< $(LIBS)
-++	$(CC) $(CFLAGS_COMMON) $(LDFLAGS) $(OBJ_PART) $(OBJ_ARCH) -rdynamic -o $@ $< $(LIBS)
-+ 	echo .TH MAKEDUMPFILE 8 \"$(DATE)\" \"makedumpfile v$(VERSION)\" \"Linux System Administrator\'s Manual\" > temp.8
-+ 	grep -v "^.TH MAKEDUMPFILE 8" $(VPATH)makedumpfile.8 >> temp.8
-+ 	mv temp.8 makedumpfile.8
-+@@ -90,7 +90,7 @@ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(OBJ_ARCH)
-+ 	gzip -c ./makedumpfile.conf.5 > ./makedumpfile.conf.5.gz
-+ 
-+ eppic_makedumpfile.so: extension_eppic.c
-+-	$(CC) $(CFLAGS) $(LDFLAGS) -shared -rdynamic -o $@ extension_eppic.c -fPIC -leppic -ltinfo
-++	$(CC) $(CFLAGS_COMMON) $(LDFLAGS) -shared -rdynamic -o $@ extension_eppic.c -fPIC -leppic -ltinfo
-+ 
-+ clean:
-+ 	rm -f $(OBJ) $(OBJ_PART) $(OBJ_ARCH) makedumpfile makedumpfile.8.gz makedumpfile.conf.5.gz
-+-- 
-+2.8.1
-+
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
-new file mode 100644
-index 0000000..db13885
---- /dev/null
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
-@@ -0,0 +1,60 @@
-+#
-+# Copyright (C) 2014 Wind River Systems, Inc.
-+#
-+# Previous versions of this recipe built a local version of elfutils.  This
-+# should not be necessary unless we require a newer version of elfutils than
-+# is provided by default, and that is not the case.
-+#
-+SUMMARY = "VMcore extraction tool"
-+DESCRIPTION = "\
-+	This program is used to extract a subset of the memory available either \
-+	via /dev/mem or /proc/vmcore (for crashdumps). It is used to get memory \
-+	images without extra uneeded information (zero pages, userspace programs, \
-+	etc). \
-+	"
-+HOMEPAGE = "http://makedumpfile.sourceforge.net"
-+
-+DEPENDS = "bzip2 zlib elfutils"
-+RDEPENDS_${PN}-tools = "perl ${PN}"
-+
-+# arm would compile but has never been tested upstream.  mips would not compile.
-+#
-+COMPATIBLE_HOST = "(x86_64|i.86|powerpc).*-linux"
-+
-+PACKAGES =+ "${PN}-tools"
-+FILES_${PN}-tools = "${bindir}/*.pl"
-+
-+SRC_URI = "\
-+	${SOURCEFORGE_MIRROR}/makedumpfile/${BPN}-${PV}.tar.gz \
-+	file://0001-makedumpfile-replace-hardcode-CFLAGS.patch \
-+	"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+LICENSE = "GPLv2.0"
-+
-+SRC_URI[md5sum] = "041c5c6de2c3066600e4ca646c2397d6"
-+SRC_URI[sha256sum] = "e3147abc52df2ceac1e9affef45bf37e2f2e1d9979bc94a761ee11e4044072ac"
-+
-+SECTION = "base"
-+
-+# If we do not specify TARGET, makedumpfile will build for the host but use the
-+# target gcc.
-+#
-+EXTRA_OEMAKE = "\
-+	LINKTYPE=static \
-+	TARGET=${TARGET_ARCH} \
-+	"
-+
-+do_install () {
-+	mkdir -p ${D}/usr/bin
-+	install -m 755 ${S}/makedumpfile ${D}/usr/bin
-+	install -m 755 ${S}/makedumpfile-R.pl ${D}/usr/bin
-+
-+	mkdir -p ${D}/usr/share/man/man8
-+	install -m 644 ${S}/makedumpfile.8.gz ${D}/usr/share/man/man8
-+
-+	mkdir -p ${D}/usr/share/man/man5
-+	install -m 644 ${S}/makedumpfile.conf.5.gz ${D}/usr/share/man/man5
-+
-+	mkdir -p ${D}/etc/
-+	install -m 644 ${S}/makedumpfile.conf ${D}/etc/makedumpfile.conf.sample
-+}
--- 
-2.8.1
+dracut is in meta-initramfs and meta-oe doesn't depend on
+meta-initramfs, can you make this runtime dependency optional or just
+move whole recipe to meta-initramfs?
 
+> +inherit autotools-brokensep ptest
+> +
+> +EXTRA_OEMAKE =3D "'CC=3D${CC}'"
+> +
+> +do_install_ptest() {
+> +	install -d ${D}${PTEST_PATH}
+> +	cp -r ${S}/test ${S}/test.sh ${D}${PTEST_PATH}
+> +	sed -i 's|./grubby|grubby|' ${D}${PTEST_PATH}/test.sh
+> +}
+> +
+> +RDEPENDS_${PN}-ptest =3D "util-linux-getopt"
+> +
+> +COMPATIBLE_HOST =3D '(x86_64.*|i.86.*)-(linux|freebsd.*)'
+> --=20
+> 2.8.1
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--dlhy44lil7up4sfq
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAleQrewACgkQN1Ujt2V2gBzuLwCfTmDnt/oK1zBjGAcj0ICnniYA
+5XkAn1/JK9I8vVOIuMJDmdJ7GMH61KTR
+=ZaH3
+-----END PGP SIGNATURE-----
+
+--dlhy44lil7up4sfq--
