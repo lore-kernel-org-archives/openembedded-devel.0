@@ -1,46 +1,45 @@
-Return-Path: <fedor@lightpad.com>
-Received: from mail-io0-f175.google.com (mail-io0-f175.google.com
-	[209.85.223.175])
-	by mail.openembedded.org (Postfix) with ESMTP id B1AE76FFFE
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
+	[209.85.215.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 3AFA16FFAB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 14:24:16 +0000 (UTC)
-Received: by mail-io0-f175.google.com with SMTP id 38so77543372iol.0
+	Thu, 21 Jul 2016 14:56:08 +0000 (UTC)
+Received: by mail-lf0-f66.google.com with SMTP id l69so5688044lfg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 07:24:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lightpad-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=dirFAkZbThCOzlNQCCEvuVJtSsKhiNlnkIc1arv5iBs=;
-	b=Fw/bxiPiSKKqfL5YLCfQ7WhG3wXyynHayYWyYdpW1s5g6AZFbWRJjZ6KOjxPfbFwg5
-	+CgwaQd4sWjOd/ZGAiS1la1tv1ac55Z10VOo4thu9haqjcKMYeHE9TV7KnsT/yaXEbmu
-	UVFH02PzPmqKNCh/F3fLLDWx5eOgd9e9spmRGsUQEBfxZzGgJNQPQERYU3SuON00gmic
-	CuHzw5laUiKjjiDtZdgZ6JPrI24mM+zzjNoi8wNdr2F/KWVIYAU6eyMqxXrgQjrHx72J
-	yTLK/4OKOBgUIHOsv0aoe9c7nMG8R2xxJeXZm2o0VqPt9kGJlh4wh/b3qRfcmxUo+MPC
-	5WnA==
+	Thu, 21 Jul 2016 07:56:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=dirFAkZbThCOzlNQCCEvuVJtSsKhiNlnkIc1arv5iBs=;
-	b=cqTzRKyFAwzE+P7Azx0koWrBIErlpS2gF/cMCa8Y9/2IAIME8NFvLZXboJgukPpo7t
-	O5Sij+gkreVXwWlfDQlAtJgf0oSFc0Euj3HSh5HSNgej1ntBhdnS0wgtD/eAD4QTP67Z
-	mNgE//2C9foZMUU2oJGT+m5B4BOh8mnz1JkyPzNUeb1EkMNGqwl0KfGmhKlOCk6hEd9Q
-	UGv+suJGo/vEsvsZlrPjhmAUR/kwWW/ee2iWujNzqHOhc/eKcgITwq6R+V5l2suyYg7Y
-	eWFTquZ3gNMWsEYvqmQGT6nRyBftM8Da6Q4GIBGOYSG3q9i410AaqTgmrWR9ndIlqeTu
-	hHjw==
-X-Gm-Message-State: ALyK8tKsyLNfj16wioA1qDpjgLkUATVlxsCx5z3VnCduAwjblUypGXBm7Wy/epkXMiyJb6JJoM4VLxYLvqnOwvIL
-X-Received: by 10.107.195.14 with SMTP id t14mr35623195iof.175.1469111056841; 
-	Thu, 21 Jul 2016 07:24:16 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.79.78.3 with HTTP; Thu, 21 Jul 2016 07:24:16 -0700 (PDT)
-In-Reply-To: <CAGreREwcXB2Gv65fndDFXDK7Ng1kPYvrbSgvMy4LKGfcsUj_Aw@mail.gmail.com>
-References: <CAGreREwcXB2Gv65fndDFXDK7Ng1kPYvrbSgvMy4LKGfcsUj_Aw@mail.gmail.com>
-From: Fedor L <fedor@lightpad.com>
-Date: Thu, 21 Jul 2016 17:24:16 +0300
-Message-ID: <CAGreRExRAEwWuw6-HJLyqS=4LVL26gO+rPakSZCbYJpcW+ybWQ@mail.gmail.com>
+	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=JaP8hy++QTnFEg3xAOnoC7YyEJHojvuJNwt5ONb6/H4=;
+	b=X3X7h0gRtyjAvYq3r+ML+LvO/Wn37T2pQdx9OnFn6n0wNJqtO8ZA+dNjrUQUrPHTTn
+	Ix1Cla+kfzOS6ALe5GHkqv0RqE+otK06U3WJ7Bp8LWpE8Scvun3llJpV+AzYeFPQt9a3
+	sboIanDSzZfALWgR7XgqODKkP9xAv787JcgrNPq6cc7XzmGrKEU3hw6cInrgJei22OOW
+	F51YiV3h+WCXNqy1qk6Q92S2xnZ0+O4eSx8ZA9KQxAGwoC6pywQf1TJhJYHLkZeJ9uvJ
+	b3Dx8ZD+lrz+GzgakzDnr2ZSVIajeIXiLw6HRQ/O6xkqfNBCUZt9J8c+hhk/AgFOs7FI
+	jC4g==
+X-Gm-Message-State: ALyK8tLa4/stj27PZdSPPdaBctWY3HQ7Ia3zD5mO6EsvJanJksAiTgzGxnpITuANsJPl/A==
+X-Received: by 10.25.44.71 with SMTP id s68mr15122615lfs.197.1469112968571;
+	Thu, 21 Jul 2016 07:56:08 -0700 (PDT)
+Received: from localhost ([185.46.212.65]) by smtp.gmail.com with ESMTPSA id
+	e79sm1923848lji.42.2016.07.21.07.56.07
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 21 Jul 2016 07:56:07 -0700 (PDT)
+Message-ID: <1469112965.6229.37.camel@andred.net>
+From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Building OpenJDK 8 with X11 support
+Date: Thu, 21 Jul 2016 15:56:05 +0100
+In-Reply-To: <68B4CABC-D2D5-46F3-817C-6C7462E3E5A2@gmail.com>
+References: <1468828968-19388-1-git-send-email-git@andred.net>
+	<1468828968-19388-2-git-send-email-git@andred.net>
+	<CAMKF1spStNbUubBvO1DLq86wdHRVbGvOVB7LRUVa2be0Mdes3Q@mail.gmail.com>
+	<CAJ86T=XnuktZ1DB6_Cco+0NnjFOAaa6F4+=dCW8+Pw1t_Yo4nA@mail.gmail.com>
+	<1468835203.4658.12.camel@andred.net>
+	<68B4CABC-D2D5-46F3-817C-6C7462E3E5A2@gmail.com>
+X-Mailer: Evolution 3.20.4-1 
+Mime-Version: 1.0
+Subject: Re: [meta-networking][PATCH v2 2/2] meta-networking: override SECURITY_CFLAGS for c-ares
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,48 +52,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2016 14:24:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 21 Jul 2016 14:56:09 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-Hello,
+On Mo, 2016-07-18 at 02:52 -0700, Khem Raj wrote:
+> > 
+> > On Jul 18, 2016, at 2:46 AM, André Draszik <git@andred.net> wrote:
+> > 
+> > On Mo, 2016-07-18 at 01:37 -0700, Andre McCurdy wrote:
+> > > 
+> > > On Mon, Jul 18, 2016 at 1:16 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> > > > 
+> > > > 
+> > > > On Mon, Jul 18, 2016 at 1:03 AM <git@andred.net> wrote:
+> > > > 
+> > > > > 
+> > > > > 
+> > > > > From: André Draszik <adraszik@tycoint.com>
+> > > > > 
+> > > > > c-ares doesn't build if the distro has enabled usage of the
+> > > > > security_flags.inc file as it is picky about what is placed
+> > > > > into CPPFLAGS and CFLAGS. It complains and errors out if any
+> > > > > preprocessor options appear in CFLAGS.
+> > > 
+> > > Curl (on which c-ares's configure files seem to be based) used to have
+> > > the same problem but was fixed upstream by:
+> > > 
+> > > 
+> > > https://github.com/curl/curl/commit/5d3cbde72ece7d83c280492957a26e26ab
+> > > 4e5c
+> > > ca
+> > 
+> > I must say I agree with c-ares' error here, and this really highlights a
+> > bug
+> > in how OE handles the security flags. By convention, preprocessor flags
+> > belong into CPPFLAGS, not CFLAGS.
+> > 
+> > The real solution hence should be to have OE place -D flags (including
+> > ${lcl_maybe_fortify} into CPPFLAGS, not CFLAGS in the first place.
+> 
+> right. Would you might sending a patch for OE-core
+> 
+> > 
+> > 
+> > But that'd be a change I am not in a position to test, as it would touch
+> > everything. E.g. there might be build-environments that (silently)
+> > ignore
+> > user-supplied CPPFLAGS completely (cmake being one of those [1]).
+> 
+> Auto builders can help. Do whatever testing you can do. On minimum add the
+> flags
+> to CPPFLAGS
+
+Looking around a little bit, I don't think this is feasible.
+
+meta/conf/bitbake.conf unconditionally adds TARGET_CPPFLAGS to
+TARGET_CFLAGS. So adding the flag to CPPFLAGS alone isn't going to do much,
+we'd just have it in the compiler command line thrice.
+
+Moving the flag from CFLAGS to CPPFLAGS by default is not going to be
+feasible either.
+I was under the impression that any recipe that inherits autotools*.bbclass
+would continue to work fine, but various projects use hand-crafted
+Makefile.in which again don't respect CPPFLAGS.
+
+I could split out CPPFLAGS from SECURITY_CFLAGS in oe-core:
+
+SECURITY_CFLAGS_NO_CPPFLAGS ?= "-fstack-protector-strong -pie -fpie ${SECURITY_STRINGFORMAT}"
+SECURITY_CFLAGS ?= "${SECURITY_CFLAGS_NO_CPPFLAGS} ${lcl_maybe_fortify}"
+
+Then I could in meta-openembedded:
+
+lcl_maybe_fortify ?= ""
+SECURITY_CFLAGS_pn-c-ares = "${SECURITY_CFLAGS_NO_CPPFLAGS}"
+TARGET_CPPFLAGS_append_pn-c-ares = "${lcl_maybe_fortify}"
+
+(but I'd also have to
+TARGET_CFLAGS_remove = "${TARGET_CPPFLAGS}"
+in c-ares.bb due to bitbake.conf)
 
 
-I'm trying to get a Java application running on a Yocto Linux / OE based
-(arm) board. The application uses Java 8 with AWT in headless mode. As I
-understand, sun.awt.X11.XToolkit instance is still needed to get it running
-even in headless mode.
-
-I'm using meta-java layer from OE. By default, recipe for OpenJDK 8 builds
-it without X11 support, so the application fails to run in such
-environment.
-
-To add X11 support I've created following .bbappend files:
-icedtea7-native_2.1.3.bbappend
-openjdk-8-native_72b05.bbappend
-openjdk-8_72b05.bbappend
-
-They contain one line only,
-PACKAGECONFIG_append = " x11 "
-
-I'm using "bitbake openjdk-8" to build it. The build of openjdk-8-native
-fails with following errors:
-
-build/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/jdk8u-e8bed1496ff2/jdk/src/solaris/classes/sun/awt/X11/XDragSourceContextPeer.java:369:
-error: cannot find symbol
-    private boolean processClientMessage(XClientMessageEvent xclient) {
-                                         ^
-  symbol:   class XClientMessageEvent
-  location: class XDragSourceContextPeer
-
-and a lot of similar errors - apparently wrapper of X11 API isn't found /
-isn't generated?
-
-So far I've checked icedtea7-native build (it succeeds) - and it is the
-only place where the wrapper is generated, but I cannot figure out whether
-it is packaged and uploaded to sysroot for openjdk build to use - and if
-not, how to do that. Or maybe openjdk should generate the wrapper itself?
-Anyway, I'm stuck; any help will be appreciated!
+This all looks like lots of churn and I don't think that's much better than
+what I proposed originally. What do you think?
 
 
--Fedor
+Cheers,
+Andre'
+
 
