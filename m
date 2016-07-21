@@ -1,45 +1,41 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
-	[209.85.215.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 3AFA16FFAB
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 74769605BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 14:56:08 +0000 (UTC)
-Received: by mail-lf0-f66.google.com with SMTP id l69so5688044lfg.1
+	Thu, 21 Jul 2016 19:35:36 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id q62so7088028qkf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 07:56:09 -0700 (PDT)
+	Thu, 21 Jul 2016 12:35:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=JaP8hy++QTnFEg3xAOnoC7YyEJHojvuJNwt5ONb6/H4=;
-	b=X3X7h0gRtyjAvYq3r+ML+LvO/Wn37T2pQdx9OnFn6n0wNJqtO8ZA+dNjrUQUrPHTTn
-	Ix1Cla+kfzOS6ALe5GHkqv0RqE+otK06U3WJ7Bp8LWpE8Scvun3llJpV+AzYeFPQt9a3
-	sboIanDSzZfALWgR7XgqODKkP9xAv787JcgrNPq6cc7XzmGrKEU3hw6cInrgJei22OOW
-	F51YiV3h+WCXNqy1qk6Q92S2xnZ0+O4eSx8ZA9KQxAGwoC6pywQf1TJhJYHLkZeJ9uvJ
-	b3Dx8ZD+lrz+GzgakzDnr2ZSVIajeIXiLw6HRQ/O6xkqfNBCUZt9J8c+hhk/AgFOs7FI
-	jC4g==
-X-Gm-Message-State: ALyK8tLa4/stj27PZdSPPdaBctWY3HQ7Ia3zD5mO6EsvJanJksAiTgzGxnpITuANsJPl/A==
-X-Received: by 10.25.44.71 with SMTP id s68mr15122615lfs.197.1469112968571;
-	Thu, 21 Jul 2016 07:56:08 -0700 (PDT)
-Received: from localhost ([185.46.212.65]) by smtp.gmail.com with ESMTPSA id
-	e79sm1923848lji.42.2016.07.21.07.56.07
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 21 Jul 2016 07:56:07 -0700 (PDT)
-Message-ID: <1469112965.6229.37.camel@andred.net>
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Jul 2016 15:56:05 +0100
-In-Reply-To: <68B4CABC-D2D5-46F3-817C-6C7462E3E5A2@gmail.com>
-References: <1468828968-19388-1-git-send-email-git@andred.net>
-	<1468828968-19388-2-git-send-email-git@andred.net>
-	<CAMKF1spStNbUubBvO1DLq86wdHRVbGvOVB7LRUVa2be0Mdes3Q@mail.gmail.com>
-	<CAJ86T=XnuktZ1DB6_Cco+0NnjFOAaa6F4+=dCW8+Pw1t_Yo4nA@mail.gmail.com>
-	<1468835203.4658.12.camel@andred.net>
-	<68B4CABC-D2D5-46F3-817C-6C7462E3E5A2@gmail.com>
-X-Mailer: Evolution 3.20.4-1 
-Mime-Version: 1.0
-Subject: Re: [meta-networking][PATCH v2 2/2] meta-networking: override SECURITY_CFLAGS for c-ares
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=Q6ojOJwbJjWHbPw/K/5Q6QcF4VEGDA+Psr6ufzH6K/E=;
+	b=lhn3jdvK3nakXwCxH24suEjqq/J8EDRInBeDLkd5VsGZvbZVPihPpb3GxCKIhm5P6W
+	sDiTdZPUofQVipnPLii2zQuL1BbMv5MvhVvnkUk9ouXIwaxEQUETAVgBDuhKTaam7cwt
+	y0Gb/7xbPMHHVKqAHdmFMITvFv3OdBK1hB7MvPRRwbMtvu4dBoYOTgF9eWP7bIndS1Si
+	+yjIBEwYp5JkMgHgdYHy0dMojVjjEyKhe73yWry7KdgP0lThZlY6Sjcm6J2Y4eVRSEfN
+	dbcN0cDVtOFdYdsMivWFzS/OWTwWlwnI/48/X/npsvb7D3fLutgIeHP6f7QA149XxhTp
+	faEw==
+X-Gm-Message-State: AEkoouuvdO4P5YEfYC8VZuDfUtX5NdRw1SmCMJb4Su4l26G0UtUYkMPDsdMXGItZt7VgRA==
+X-Received: by 10.55.195.75 with SMTP id a72mr4820qkj.4.1469129736650;
+	Thu, 21 Jul 2016 12:35:36 -0700 (PDT)
+Received: from localhost ([177.100.227.79])
+	by smtp.gmail.com with ESMTPSA id i33sm275870qtd.28.2016.07.21.12.35.31
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 21 Jul 2016 12:35:35 -0700 (PDT)
+Received: by localhost (sSMTP sendmail emulation);
+	Thu, 21 Jul 2016 16:35:28 -0300
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 21 Jul 2016 16:35:27 -0300
+Message-Id: <20160721193527.7581-1-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.9.0
+Organization: O.S. Systems Software LTDA.
+Cc: tom.hochstein@nxp.com, samuli.piippo@theqtcompany.com, junzhu@nxp.com,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-qt5 PATCH v3] qtwayland: Rework recipe to allow PACKAGECONFIG use
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,92 +48,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2016 14:56:09 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 21 Jul 2016 19:35:40 -0000
 
-On Mo, 2016-07-18 at 02:52 -0700, Khem Raj wrote:
-> > 
-> > On Jul 18, 2016, at 2:46 AM, André Draszik <git@andred.net> wrote:
-> > 
-> > On Mo, 2016-07-18 at 01:37 -0700, Andre McCurdy wrote:
-> > > 
-> > > On Mon, Jul 18, 2016 at 1:16 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> > > > 
-> > > > 
-> > > > On Mon, Jul 18, 2016 at 1:03 AM <git@andred.net> wrote:
-> > > > 
-> > > > > 
-> > > > > 
-> > > > > From: André Draszik <adraszik@tycoint.com>
-> > > > > 
-> > > > > c-ares doesn't build if the distro has enabled usage of the
-> > > > > security_flags.inc file as it is picky about what is placed
-> > > > > into CPPFLAGS and CFLAGS. It complains and errors out if any
-> > > > > preprocessor options appear in CFLAGS.
-> > > 
-> > > Curl (on which c-ares's configure files seem to be based) used to have
-> > > the same problem but was fixed upstream by:
-> > > 
-> > > 
-> > > https://github.com/curl/curl/commit/5d3cbde72ece7d83c280492957a26e26ab
-> > > 4e5c
-> > > ca
-> > 
-> > I must say I agree with c-ares' error here, and this really highlights a
-> > bug
-> > in how OE handles the security flags. By convention, preprocessor flags
-> > belong into CPPFLAGS, not CFLAGS.
-> > 
-> > The real solution hence should be to have OE place -D flags (including
-> > ${lcl_maybe_fortify} into CPPFLAGS, not CFLAGS in the first place.
-> 
-> right. Would you might sending a patch for OE-core
-> 
-> > 
-> > 
-> > But that'd be a change I am not in a position to test, as it would touch
-> > everything. E.g. there might be build-environments that (silently)
-> > ignore
-> > user-supplied CPPFLAGS completely (cmake being one of those [1]).
-> 
-> Auto builders can help. Do whatever testing you can do. On minimum add the
-> flags
-> to CPPFLAGS
+The Qt Wayland uses some modules which can be enabled/disabled
+depending on users needs, however this must be deterministic. So we
+now use PACKAGECONFIG to enable/disable those features. Following
+options are available:
 
-Looking around a little bit, I don't think this is feasible.
+ - xcompositor
+ - glx
+ - xkb
+ - wayland-egl
+ - brcm-egl
+ - drm-egl
+ - libhybris-egl
 
-meta/conf/bitbake.conf unconditionally adds TARGET_CPPFLAGS to
-TARGET_CFLAGS. So adding the flag to CPPFLAGS alone isn't going to do much,
-we'd just have it in the compiler command line thrice.
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
 
-Moving the flag from CFLAGS to CPPFLAGS by default is not going to be
-feasible either.
-I was under the impression that any recipe that inherits autotools*.bbclass
-would continue to work fine, but various projects use hand-crafted
-Makefile.in which again don't respect CPPFLAGS.
+Changes in v3:
+- Use done_config_<foo> for enable case. This is need so the test is
+  skipped otherwise in case it fails, it may remove the feature and
+  the support for it would not be enabled, causing a problem in
+  determinism.
 
-I could split out CPPFLAGS from SECURITY_CFLAGS in oe-core:
+Changes in v2:
+- Add compositor-api and enable it by default
+- Add xkb by default or the build fails badly (FIXME)
 
-SECURITY_CFLAGS_NO_CPPFLAGS ?= "-fstack-protector-strong -pie -fpie ${SECURITY_STRINGFORMAT}"
-SECURITY_CFLAGS ?= "${SECURITY_CFLAGS_NO_CPPFLAGS} ${lcl_maybe_fortify}"
+ recipes-qt/qt5/qtwayland_git.bb | 29 +++++++++++++++++++----------
+ 1 file changed, 19 insertions(+), 10 deletions(-)
 
-Then I could in meta-openembedded:
-
-lcl_maybe_fortify ?= ""
-SECURITY_CFLAGS_pn-c-ares = "${SECURITY_CFLAGS_NO_CPPFLAGS}"
-TARGET_CPPFLAGS_append_pn-c-ares = "${lcl_maybe_fortify}"
-
-(but I'd also have to
-TARGET_CFLAGS_remove = "${TARGET_CPPFLAGS}"
-in c-ares.bb due to bitbake.conf)
-
-
-This all looks like lots of churn and I don't think that's much better than
-what I proposed originally. What do you think?
-
-
-Cheers,
-Andre'
+diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
+index e36d2c0..01641c1 100644
+--- a/recipes-qt/qt5/qtwayland_git.bb
++++ b/recipes-qt/qt5/qtwayland_git.bb
+@@ -1,6 +1,8 @@
+ require qt5.inc
+ require qt5-git.inc
+ 
++DEPENDS += "qtbase qtdeclarative wayland wayland-native qtwayland-native"
++
+ # There are no LGPLv3-only licensed files in this component.
+ LICENSE = "BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+ LIC_FILES_CHKSUM = " \
+@@ -11,18 +13,25 @@ LIC_FILES_CHKSUM = " \
+     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
+ "
+ 
+-# wayland-native is already in wayland DEPENDS, but add it here
+-# explicitly, because it's native wayland-scanner we're looking for
+-# libxkbcommon isn't mandatory make it easier to remove by .bbappend
+-# (e.g. for building qtwayland with danny which doesn't have libxkbcommon in oe-core).
+-XKB_DEPENDS = "libxkbcommon xproto"
+-DEPENDS += "qtbase qtdeclarative wayland wayland-native qtwayland-native ${XKB_DEPENDS} ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxcomposite', '', d)}"
++#FIXME: xkb should be optional; we add it here to fix the build error without it
++#       (https://bugreports.qt.io/browse/QTBUG-54851)
++PACKAGECONFIG ?= " \
++    compositor-api \
++    wayland-egl \
++    xkb \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xcompositor xkb glx', '', d)} \
++"
+ 
+-QT_WAYLAND_CONFIG ?= "wayland-compositor"
+-QT_WAYLAND_DEFINES ?= ""
++PACKAGECONFIG[compositor-api] = "CONFIG+=config_wayland_compositor,CONFIG+=done_config_wayland_compositor"
++PACKAGECONFIG[xcompositor] = "CONFIG+=config_xcomposite,CONFIG+=done_config_xcomposite,libxcomposite"
++PACKAGECONFIG[glx] = "CONFIG+=config_glx,CONFIG+=done_config_glx,virtual/mesa"
++PACKAGECONFIG[xkb] = "CONFIG+=config_xkbcommon,CONFIG+=done_config_xkbcommon,libxkbcommon xproto"
++PACKAGECONFIG[wayland-egl] = "CONFIG+=config_wayland_egl,CONFIG+=done_config_wayland_egl,virtual/egl"
++PACKAGECONFIG[brcm-egl] = "CONFIG+=config_brcm_egl,CONFIG+=done_config_brcm_egl,virtual/egl"
++PACKAGECONFIG[drm-egl] = "CONFIG+=config_drm_egl,CONFIG+=done_config_drm_egl,libdrm virtual/egl"
++PACKAGECONFIG[libhybris-egl] = "CONFIG+=config_libhybris_egl_server,CONFIG+=done_config_libhybris_egl_server,libhybris"
+ 
+-EXTRA_QMAKEVARS_PRE += "CONFIG+=${QT_WAYLAND_CONFIG}"
+-EXTRA_QMAKEVARS_PRE += "DEFINES+=${QT_WAYLAND_DEFINES}"
++EXTRA_QMAKEVARS_PRE += "${PACKAGECONFIG_CONFARGS}"
+ 
+ FILES_${PN}-plugins += " \
+     ${OE_QMAKE_PATH_PLUGINS}/*/*/*${SOLIBSDEV} \
+-- 
+2.9.0
 
 
