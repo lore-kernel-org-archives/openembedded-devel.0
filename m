@@ -1,41 +1,46 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 74769605BA
+Return-Path: <cynthia.ms.chiu@gmail.com>
+Received: from mail-oi0-f67.google.com (mail-oi0-f67.google.com
+	[209.85.218.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 182376FFAB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 19:35:36 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id q62so7088028qkf.2
+	Thu, 21 Jul 2016 19:36:24 +0000 (UTC)
+Received: by mail-oi0-f67.google.com with SMTP id d204so8591554oig.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 12:35:37 -0700 (PDT)
+	Thu, 21 Jul 2016 12:36:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=VGm9pr3jBx+uWCpoVEJFf27Ckt3KbrrbrJnh3NWfJG8=;
+	b=MCiKH62pC3TeIvcICeufUS+hh3MNqxOap3VJqPOALdYr8U9FjFm3xp85XS5x0lamFu
+	YaDvwBzBJiNCoGVzJNsouY3GceGGOwtIFdeXsuD2QqTtOZqyTmla3u8VfWH9t4/eBXV2
+	j0wYqSIMtwqUIxaor9CTJM5JcHJUdy4MuzaZnXDkxKi7Ng7tlLIYoL8M7SiVfRp8i1LA
+	AmFDTOaABe8/m21i7MoplJ7shY91kCKYBumOt6fc//EVdV1HNs+zBlXBhU9aJrDfKOtG
+	46ZTrpHVye2bx84bh9Q866nCJYZu7N+RWPtGWgo8zA38aWFjejesULUd7n3NzwF4zIf4
+	6b8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
-	bh=Q6ojOJwbJjWHbPw/K/5Q6QcF4VEGDA+Psr6ufzH6K/E=;
-	b=lhn3jdvK3nakXwCxH24suEjqq/J8EDRInBeDLkd5VsGZvbZVPihPpb3GxCKIhm5P6W
-	sDiTdZPUofQVipnPLii2zQuL1BbMv5MvhVvnkUk9ouXIwaxEQUETAVgBDuhKTaam7cwt
-	y0Gb/7xbPMHHVKqAHdmFMITvFv3OdBK1hB7MvPRRwbMtvu4dBoYOTgF9eWP7bIndS1Si
-	+yjIBEwYp5JkMgHgdYHy0dMojVjjEyKhe73yWry7KdgP0lThZlY6Sjcm6J2Y4eVRSEfN
-	dbcN0cDVtOFdYdsMivWFzS/OWTwWlwnI/48/X/npsvb7D3fLutgIeHP6f7QA149XxhTp
-	faEw==
-X-Gm-Message-State: AEkoouuvdO4P5YEfYC8VZuDfUtX5NdRw1SmCMJb4Su4l26G0UtUYkMPDsdMXGItZt7VgRA==
-X-Received: by 10.55.195.75 with SMTP id a72mr4820qkj.4.1469129736650;
-	Thu, 21 Jul 2016 12:35:36 -0700 (PDT)
-Received: from localhost ([177.100.227.79])
-	by smtp.gmail.com with ESMTPSA id i33sm275870qtd.28.2016.07.21.12.35.31
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 21 Jul 2016 12:35:35 -0700 (PDT)
-Received: by localhost (sSMTP sendmail emulation);
-	Thu, 21 Jul 2016 16:35:28 -0300
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Jul 2016 16:35:27 -0300
-Message-Id: <20160721193527.7581-1-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.9.0
-Organization: O.S. Systems Software LTDA.
-Cc: tom.hochstein@nxp.com, samuli.piippo@theqtcompany.com, junzhu@nxp.com,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-qt5 PATCH v3] qtwayland: Rework recipe to allow PACKAGECONFIG use
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=VGm9pr3jBx+uWCpoVEJFf27Ckt3KbrrbrJnh3NWfJG8=;
+	b=F5HnuaQzSOAzDFTZ99Oz8vDunFdFIb3B0VIxDuDR4Yl7UXMHMyOoOFKDc2O21DGd6o
+	dncQGIPyLxxFWOHDgIVZnqmElyZUqq1GwCin49sD5/9yxOWMy2nPACVy9cFhoUimkN0i
+	aMzj0XtjHSz2OCZ6nSaqq97gLTVateySnyaGpAylLZlKgysqHlsY9I8ilg80BaS+ooSo
+	SAyfl1FY6Yhz0mvmPZqQgJKKx2rHsKKJpLbqV8H76vjG+jcs2FlN7C08NiDQi53k8n/I
+	DWzFNfJs4e39Ep0UOEHKZnZx+J5efZUa1NHmEk1XgZkAwcBhc9ilUiYAldSpL/4rnDPJ
+	oyWg==
+X-Gm-Message-State: ALyK8tIRbyPRTkPg6xa19Od4R9mj5+EwtLD1iM6AempKpaUKklWAbxjHXAXQf1C+ktzpZH1hAThZqGOjH3DCZQ==
+X-Received: by 10.157.37.181 with SMTP id q50mr33233589ota.79.1469129784869;
+	Thu, 21 Jul 2016 12:36:24 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.202.171.7 with HTTP; Thu, 21 Jul 2016 12:36:24 -0700 (PDT)
+In-Reply-To: <CA+chaQcKT3UUFryKvo40Y2b4Ng28Afig3_257bx309PLN4VgNA@mail.gmail.com>
+References: <1469035439-23466-1-git-send-email-cynthia.ms.chiu@gmail.com>
+	<CA+chaQcKT3UUFryKvo40Y2b4Ng28Afig3_257bx309PLN4VgNA@mail.gmail.com>
+From: Cynthia Chiu <cynthia.ms.chiu@gmail.com>
+Date: Thu, 21 Jul 2016 13:36:24 -0600
+Message-ID: <CAFn+KXAx=btsDOCrJEHn9YHkRo-6juNk=RV2gUKMBnMrCtbcBQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH v3] Pointing the LIC_FILES_CHKSUM to a valid file.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,87 +53,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jul 2016 19:35:40 -0000
+X-List-Received-Date: Thu, 21 Jul 2016 19:36:25 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The Qt Wayland uses some modules which can be enabled/disabled
-depending on users needs, however this must be deterministic. So we
-now use PACKAGECONFIG to enable/disable those features. Following
-options are available:
+Will do. Thanks for your feedback!
 
- - xcompositor
- - glx
- - xkb
- - wayland-egl
- - brcm-egl
- - drm-egl
- - libhybris-egl
+On Wed, Jul 20, 2016 at 11:37 AM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
-
-Changes in v3:
-- Use done_config_<foo> for enable case. This is need so the test is
-  skipped otherwise in case it fails, it may remove the feature and
-  the support for it would not be enabled, causing a problem in
-  determinism.
-
-Changes in v2:
-- Add compositor-api and enable it by default
-- Add xkb by default or the build fails badly (FIXME)
-
- recipes-qt/qt5/qtwayland_git.bb | 29 +++++++++++++++++++----------
- 1 file changed, 19 insertions(+), 10 deletions(-)
-
-diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
-index e36d2c0..01641c1 100644
---- a/recipes-qt/qt5/qtwayland_git.bb
-+++ b/recipes-qt/qt5/qtwayland_git.bb
-@@ -1,6 +1,8 @@
- require qt5.inc
- require qt5-git.inc
- 
-+DEPENDS += "qtbase qtdeclarative wayland wayland-native qtwayland-native"
-+
- # There are no LGPLv3-only licensed files in this component.
- LICENSE = "BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM = " \
-@@ -11,18 +13,25 @@ LIC_FILES_CHKSUM = " \
-     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
- "
- 
--# wayland-native is already in wayland DEPENDS, but add it here
--# explicitly, because it's native wayland-scanner we're looking for
--# libxkbcommon isn't mandatory make it easier to remove by .bbappend
--# (e.g. for building qtwayland with danny which doesn't have libxkbcommon in oe-core).
--XKB_DEPENDS = "libxkbcommon xproto"
--DEPENDS += "qtbase qtdeclarative wayland wayland-native qtwayland-native ${XKB_DEPENDS} ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxcomposite', '', d)}"
-+#FIXME: xkb should be optional; we add it here to fix the build error without it
-+#       (https://bugreports.qt.io/browse/QTBUG-54851)
-+PACKAGECONFIG ?= " \
-+    compositor-api \
-+    wayland-egl \
-+    xkb \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xcompositor xkb glx', '', d)} \
-+"
- 
--QT_WAYLAND_CONFIG ?= "wayland-compositor"
--QT_WAYLAND_DEFINES ?= ""
-+PACKAGECONFIG[compositor-api] = "CONFIG+=config_wayland_compositor,CONFIG+=done_config_wayland_compositor"
-+PACKAGECONFIG[xcompositor] = "CONFIG+=config_xcomposite,CONFIG+=done_config_xcomposite,libxcomposite"
-+PACKAGECONFIG[glx] = "CONFIG+=config_glx,CONFIG+=done_config_glx,virtual/mesa"
-+PACKAGECONFIG[xkb] = "CONFIG+=config_xkbcommon,CONFIG+=done_config_xkbcommon,libxkbcommon xproto"
-+PACKAGECONFIG[wayland-egl] = "CONFIG+=config_wayland_egl,CONFIG+=done_config_wayland_egl,virtual/egl"
-+PACKAGECONFIG[brcm-egl] = "CONFIG+=config_brcm_egl,CONFIG+=done_config_brcm_egl,virtual/egl"
-+PACKAGECONFIG[drm-egl] = "CONFIG+=config_drm_egl,CONFIG+=done_config_drm_egl,libdrm virtual/egl"
-+PACKAGECONFIG[libhybris-egl] = "CONFIG+=config_libhybris_egl_server,CONFIG+=done_config_libhybris_egl_server,libhybris"
- 
--EXTRA_QMAKEVARS_PRE += "CONFIG+=${QT_WAYLAND_CONFIG}"
--EXTRA_QMAKEVARS_PRE += "DEFINES+=${QT_WAYLAND_DEFINES}"
-+EXTRA_QMAKEVARS_PRE += "${PACKAGECONFIG_CONFARGS}"
- 
- FILES_${PN}-plugins += " \
-     ${OE_QMAKE_PATH_PLUGINS}/*/*/*${SOLIBSDEV} \
--- 
-2.9.0
-
+> Squash this into v2 to make it proper v3.
+>
+> Thanks.
+>
+> On Wed, Jul 20, 2016 at 7:23 PM, cynthiachiu <cynthia.ms.chiu@gmail.com>
+> wrote:
+>
+> > Signed-off-by: cynthiachiu <cynthia.ms.chiu@gmail.com>
+> > ---
+> >  meta-oe/recipes-extended/canopennode/canopensocket_git.bb | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
+> > b/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
+> > index 7c58a26..1e0f7d0 100644
+> > --- a/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
+> > +++ b/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
+> > @@ -1,7 +1,7 @@
+> >  SUMMARY = "Linux CANOpen tools"
+> >  DESCRIPTION = "Linux CANOpen Protocol Stack Tools"
+> >  LICENSE = "GPLv2"
+> > -LIC_FILES_CHKSUM =
+> > "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> > +LIC_FILES_CHKSUM =
+> > "file://LICENSE.GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> >
+> >  SRC_URI = "gitsm://github.com/CANopenNode/CANopenSocket.git"
+> >  SRCREV = "7777653da3a630b0dc02b3fa5ff029d9bc57cd26"
+> > --
+> > 1.9.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
