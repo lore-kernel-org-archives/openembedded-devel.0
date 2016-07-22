@@ -1,29 +1,24 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E92F660290
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 73553607A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jul 2016 02:52:16 +0000 (UTC)
+	Fri, 22 Jul 2016 02:54:42 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u6M2qGWK017701
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u6M2shsG008015
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 19:52:16 -0700
-Received: from [128.224.163.140] (128.224.163.140) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
-	Thu, 21 Jul 2016 19:52:15 -0700
+	Thu, 21 Jul 2016 19:54:43 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
+	Thu, 21 Jul 2016 19:54:42 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1469096700-11775-1-git-send-email-mingli.yu@windriver.com>
-	<CAMKF1sqvsGYWddJTUUe7FkZSqTCK23nPjboDcn4zz_my8EpgTw@mail.gmail.com>
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-Message-ID: <579189D6.9030105@windriver.com>
-Date: Fri, 22 Jul 2016 10:49:58 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.4.0
+Date: Thu, 21 Jul 2016 22:54:41 -0400
+Message-ID: <1469156081-157926-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqvsGYWddJTUUe7FkZSqTCK23nPjboDcn4zz_my8EpgTw@mail.gmail.com>
-X-Originating-IP: [128.224.163.140]
-Subject: Re: [meta-oe][PATCH] makedumpfile: add makedumpfile 1.6.0
+Subject: [meta-oe][PATCH v2] minicoredumper: add the recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,24 +31,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jul 2016 02:52:17 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 22 Jul 2016 02:54:43 -0000
+Content-Type: text/plain
 
+From: Roy Li <rongqing.li@windriver.com>
 
+minicoredumper provides an alternate core dump facility for Linux
+to allow minimal and customized crash dumps
 
-On 2016年07月21日 21:34, Khem Raj wrote:
-> On Thu, Jul 21, 2016 at 3:25 AM,  <mingli.yu@windriver.com> wrote:
->> ++CFLAGS_COMMON = $(CFLAGS_ARCH) \
->> ++              -DVERSION='"$(VERSION)"' \
->> ++              -DRELEASE_DATE='"$(DATE)"'
->> ++
->
-> how is DATE calculated ? such things can hamper reproducability if
-> they use the system date at build time.
-The DATE is hardcode in the Makefile as "DATE=9 Jun 2016".
+Signed-off-by: Roy Li <rongqing.li@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ .../minicoredumper/files/minicoredumper.init       | 40 ++++++++++++++++++++++
+ .../minicoredumper/files/minicoredumper.service    | 11 ++++++
+ .../minicoredumper/minicoredumper_1.0.2.bb         | 31 +++++++++++++++++
+ 3 files changed, 82 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
+ create mode 100644 meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
+ create mode 100644 meta-oe/recipes-kernel/minicoredumper/minicoredumper_1.0.2.bb
 
-Thanks,
-Grace
->
+diff --git a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
+new file mode 100644
+index 0000000..90ef7fa
+--- /dev/null
++++ b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
+@@ -0,0 +1,40 @@
++#!/bin/sh
++#
++# minicoredumper This shell script takes care of starting and stopping minicoredumper.
++#
++# chkconfig:   2345 24 89
++# description: minicoredumper.
++#
++# processname:
++# config:      /etc/minicoredumper/
++
++### BEGIN INIT INFO
++# Provides: minicoredumper
++# Default-Start: 2 3 4 5
++# Default-Stop: 0 1 6
++# Should-Start: $syslog $network
++# Should-Stop: $syslog $network
++# Short-Description:
++# Description:
++### END INIT INFO
++
++. /etc/init.d/functions
++
++case "$1" in
++    start)
++        echo "|/usr/bin/minicoredumper %p %u %g %s %t %h %e" > /proc/sys/kernel/core_pattern
++        ;;
++    stop)
++        echo "core" > /proc/sys/kernel/core_pattern
++	;;
++    status)
++        if  grep -q minicoredumper /proc/sys/kernel/core_pattern ; then
++            echo "minicoredumper is running"
++        else
++            echo "minicoredumper is stopped"
++        fi
++        ;;
++    *)
++        echo $"Usage: $0 {start|stop|status}"
++        exit 2
++esac
+diff --git a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
+new file mode 100644
+index 0000000..851b54c
+--- /dev/null
++++ b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
+@@ -0,0 +1,11 @@
++[Unit]
++Description=Enable minicoredumper.
++
++[Service]
++Type=oneshot
++RemainAfterExit=yes
++ExecStart=/bin/sh -c '/bin/echo "|/usr/bin/minicoredumper %%p %%u %%g %%s %%t %%h %%e" > /proc/sys/kernel/core_pattern'
++ExecStop=/bin/sh -c '/bin/echo "core" > /proc/sys/kernel/core_pattern'
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_1.0.2.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_1.0.2.bb
+new file mode 100644
+index 0000000..babe544
+--- /dev/null
++++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_1.0.2.bb
+@@ -0,0 +1,31 @@
++SUMMARY = "minicoredumper provides an alternate core dump facility for Linux \
++to allow minimal and customized crash dumps"
++LICENSE = " LGPLv2.1 & BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=45445387350de96a0e70410470ee5cab"
++DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux"
++
++inherit autotools pkgconfig systemd update-rc.d
++
++SRC_URI = "https://linutronix.de/${BPN}/files/${BPN}-${PV}.tar.gz \
++           file://minicoredumper.service \
++           file://minicoredumper.init \
++"
++SRC_URI[md5sum] = "5ba9d116b52a8e2fb93456260644e753"
++SRC_URI[sha256sum] = "1b0eeb3d70dbd2ad6f2f673e4e3446e5dd784e132730e21d8f9dc0977e47dd9a"
++
++SYSTEMD_SERVICE_${PN} = "minicoredumper.service"
++SYSTEMD_AUTO_ENABLE = "enable"
++
++INITSCRIPT_PACKAGES = "${PN}"
++INITSCRIPT_NAME_${PN} = "minicoredumper"
++INITSCRIPT_PARAMS_${PN} = "defaults 89"
++
++do_install_append() {
++    install -d ${D}/${sysconfdir}/minicoredumper
++    cp -rf ${S}/etc/* ${D}/${sysconfdir}/
++
++    install -d ${D}${systemd_system_unitdir}
++    install -m 0644 ${WORKDIR}/minicoredumper.service ${D}${systemd_system_unitdir}
++    install -d ${D}${sysconfdir}/init.d
++    install -m 0644 ${WORKDIR}/minicoredumper.init ${D}${sysconfdir}/init.d/minicoredumper
++}
+-- 
+2.8.1
+
 
