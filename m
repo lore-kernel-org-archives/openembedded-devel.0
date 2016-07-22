@@ -1,24 +1,24 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 73553607A5
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 37B196E667
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jul 2016 02:54:42 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u6M2shsG008015
+	Fri, 22 Jul 2016 02:57:38 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u6M2vdIo025444
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 19:54:43 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Thu, 21 Jul 2016 19:54:42 -0700
-From: <jackie.huang@windriver.com>
+	Thu, 21 Jul 2016 19:57:39 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Thu, 21 Jul 2016 19:57:38 -0700
+From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Jul 2016 22:54:41 -0400
-Message-ID: <1469156081-157926-1-git-send-email-jackie.huang@windriver.com>
+Date: Fri, 22 Jul 2016 10:55:02 +0800
+Message-ID: <1469156102-30362-1-git-send-email-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2] minicoredumper: add the recipe
+Subject: [meta-oe][PATCH V2] makedumpfile: add makedumpfile 1.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,124 +31,223 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jul 2016 02:54:43 -0000
+X-List-Received-Date: Fri, 22 Jul 2016 02:57:39 -0000
 Content-Type: text/plain
 
-From: Roy Li <rongqing.li@windriver.com>
+* Add makedumpfile 1.6.0
+* Create alias for target such as powerpc as powerpc32
+* Remove hardcode CFLAGS
+* Add CFLAGS_COMMON to instead of CFLAGS so can flexibly
+  customize CFLAGS and not hardcode the CFLAGS as previously
+* Forcibly to link dynamic library as the poky build
+  system doesn't build static library by default
 
-minicoredumper provides an alternate core dump facility for Linux
-to allow minimal and customized crash dumps
-
-Signed-off-by: Roy Li <rongqing.li@windriver.com>
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
 ---
- .../minicoredumper/files/minicoredumper.init       | 40 ++++++++++++++++++++++
- .../minicoredumper/files/minicoredumper.service    | 11 ++++++
- .../minicoredumper/minicoredumper_1.0.2.bb         | 31 +++++++++++++++++
- 3 files changed, 82 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
- create mode 100644 meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
- create mode 100644 meta-oe/recipes-kernel/minicoredumper/minicoredumper_1.0.2.bb
+ ...0001-makedumpfile-replace-hardcode-CFLAGS.patch | 134 +++++++++++++++++++++
+ .../makedumpfile/makedumpfile_1.6.0.bb             |  53 ++++++++
+ 2 files changed, 187 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
+ create mode 100644 meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
 
-diff --git a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
+diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
 new file mode 100644
-index 0000000..90ef7fa
+index 0000000..d599a91
 --- /dev/null
-+++ b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.init
-@@ -0,0 +1,40 @@
-+#!/bin/sh
-+#
-+# minicoredumper This shell script takes care of starting and stopping minicoredumper.
-+#
-+# chkconfig:   2345 24 89
-+# description: minicoredumper.
-+#
-+# processname:
-+# config:      /etc/minicoredumper/
++++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
+@@ -0,0 +1,134 @@
++From 3c2f4ff583a156a7ed2fa0cc002a413c391d063d Mon Sep 17 00:00:00 2001
++From: Mingli Yu <mingli.yu@windriver.com>
++Date: Thu, 21 Jul 2016 18:06:21 +0800
++Subject: [PATCH] makedumpfile: replace hardcode CFLAGS
 +
-+### BEGIN INIT INFO
-+# Provides: minicoredumper
-+# Default-Start: 2 3 4 5
-+# Default-Stop: 0 1 6
-+# Should-Start: $syslog $network
-+# Should-Stop: $syslog $network
-+# Short-Description:
-+# Description:
-+### END INIT INFO
++* Create alias for target such as powerpc as powerpc32
++* Remove hardcode CFLAGS
++* Add CFLAGS_COMMON to instead of CFLAGS so can flexibly
++  customize CFLAGS and not hardcode the CFLAGS as previously
++* Forcibly to link dynamic library as the poky build
++  system doesn't build static library by default
 +
-+. /etc/init.d/functions
++Upstream-Status: Inappropriate[oe specific]
 +
-+case "$1" in
-+    start)
-+        echo "|/usr/bin/minicoredumper %p %u %g %s %t %h %e" > /proc/sys/kernel/core_pattern
-+        ;;
-+    stop)
-+        echo "core" > /proc/sys/kernel/core_pattern
-+	;;
-+    status)
-+        if  grep -q minicoredumper /proc/sys/kernel/core_pattern ; then
-+            echo "minicoredumper is running"
-+        else
-+            echo "minicoredumper is stopped"
-+        fi
-+        ;;
-+    *)
-+        echo $"Usage: $0 {start|stop|status}"
-+        exit 2
-+esac
-diff --git a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
++Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
++---
++ Makefile | 46 +++++++++++++++++++++++-----------------------
++ 1 file changed, 23 insertions(+), 23 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index 7dde3e4..c5286ac 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -8,13 +8,6 @@ ifeq ($(strip $CC),)
++ CC	= gcc
++ endif
++ 
++-CFLAGS = -g -O2 -Wall -D_FILE_OFFSET_BITS=64 \
++-	  -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE \
++-	  -DVERSION='"$(VERSION)"' -DRELEASE_DATE='"$(DATE)"'
++-CFLAGS_ARCH	= -g -O2 -Wall -D_FILE_OFFSET_BITS=64 \
++-		    -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE
++-# LDFLAGS = -L/usr/local/lib -I/usr/local/include
++-
++ HOST_ARCH := $(shell uname -m)
++ # Use TARGET as the target architecture if specified.
++ # Defaults to uname -m
++@@ -22,29 +15,36 @@ ifeq ($(strip($TARGET)),)
++ TARGET := $(HOST_ARCH)
++ endif
++ 
++-ARCH := $(shell echo ${TARGET}  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
++-			       -e s/arm.*/arm/ -e s/sa110/arm/ \
++-			       -e s/s390x/s390/ -e s/parisc64/parisc/ \
++-			       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/)
+++ARCH := $(shell echo __${TARGET}__  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
+++		       -e s/arm.*/arm/ -e s/sa110/arm/ \
+++		       -e s/s390x/s390/ -e s/parisc64/parisc/ \
+++		       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/ \
+++		       -e s/_powerpc_/_powerpc32_/)
++ 
++ CROSS :=
++ ifneq ($(TARGET), $(HOST_ARCH))
++ CROSS := -U__$(HOST_ARCH)__
++ endif
++ 
++-CFLAGS += -D__$(ARCH)__ $(CROSS)
++-CFLAGS_ARCH += -D__$(ARCH)__ $(CROSS)
+++CFLAGS_ARCH += -D$(ARCH) $(CROSS)
++ 
++-ifeq ($(ARCH), powerpc64)
++-CFLAGS += -m64
+++ifeq ($(ARCH), __powerpc64__)
++ CFLAGS_ARCH += -m64
++ endif
++ 
++-ifeq ($(ARCH), powerpc32)
++-CFLAGS += -m32
+++ifeq ($(ARCH), __powerpc32__)
++ CFLAGS_ARCH += -m32
++ endif
++ 
+++CFLAGS_ARCH += $(CFLAGS) \
+++		-D_FILE_OFFSET_BITS=64 \
+++		-D_LARGEFILE_SOURCE \
+++		-D_LARGEFILE64_SOURCE
+++
+++CFLAGS_COMMON = $(CFLAGS_ARCH) \
+++		-DVERSION='"$(VERSION)"' \
+++		-DRELEASE_DATE='"$(DATE)"'
+++
++ SRC_BASE = makedumpfile.c makedumpfile.h diskdump_mod.h sadump_mod.h sadump_info.h
++ SRC_PART = print_info.c dwarf_info.c elf_info.c erase_info.c sadump_info.c cache.c
++ OBJ_PART=$(patsubst %.c,%.o,$(SRC_PART))
++@@ -54,17 +54,17 @@ OBJ_ARCH=$(patsubst %.c,%.o,$(SRC_ARCH))
++ 
++ LIBS = -ldw -lbz2 -lebl -ldl -lelf -lz
++ ifneq ($(LINKTYPE), dynamic)
++-LIBS := -static $(LIBS)
+++LIBS := $(LIBS)
++ endif
++ 
++ ifeq ($(USELZO), on)
++ LIBS := -llzo2 $(LIBS)
++-CFLAGS += -DUSELZO
+++CFLAGS_COMMON += -DUSELZO
++ endif
++ 
++ ifeq ($(USESNAPPY), on)
++ LIBS := -lsnappy $(LIBS)
++-CFLAGS += -DUSESNAPPY
+++CFLAGS_COMMON += -DUSESNAPPY
++ endif
++ 
++ LIBS := -lpthread $(LIBS)
++@@ -72,14 +72,14 @@ LIBS := -lpthread $(LIBS)
++ all: makedumpfile
++ 
++ $(OBJ_PART): $(SRC_PART)
++-	$(CC) $(CFLAGS) -c -o ./$@ $(VPATH)$(@:.o=.c)
+++	$(CC) $(CFLAGS_COMMON) -c -o ./$@ $(VPATH)$(@:.o=.c)
++ 
++ $(OBJ_ARCH): $(SRC_ARCH)
++ 	@mkdir -p $(@D)
++ 	$(CC) $(CFLAGS_ARCH) -c -o ./$@ $(VPATH)$(@:.o=.c)
++ 
++ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(OBJ_ARCH)
++-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ_PART) $(OBJ_ARCH) -rdynamic -o $@ $< $(LIBS)
+++	$(CC) $(CFLAGS_COMMON) $(LDFLAGS) $(OBJ_PART) $(OBJ_ARCH) -rdynamic -o $@ $< $(LIBS)
++ 	echo .TH MAKEDUMPFILE 8 \"$(DATE)\" \"makedumpfile v$(VERSION)\" \"Linux System Administrator\'s Manual\" > temp.8
++ 	grep -v "^.TH MAKEDUMPFILE 8" $(VPATH)makedumpfile.8 >> temp.8
++ 	mv temp.8 makedumpfile.8
++@@ -90,7 +90,7 @@ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(OBJ_ARCH)
++ 	gzip -c ./makedumpfile.conf.5 > ./makedumpfile.conf.5.gz
++ 
++ eppic_makedumpfile.so: extension_eppic.c
++-	$(CC) $(CFLAGS) $(LDFLAGS) -shared -rdynamic -o $@ extension_eppic.c -fPIC -leppic -ltinfo
+++	$(CC) $(CFLAGS_COMMON) $(LDFLAGS) -shared -rdynamic -o $@ extension_eppic.c -fPIC -leppic -ltinfo
++ 
++ clean:
++ 	rm -f $(OBJ) $(OBJ_PART) $(OBJ_ARCH) makedumpfile makedumpfile.8.gz makedumpfile.conf.5.gz
++-- 
++2.8.1
++
+diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
 new file mode 100644
-index 0000000..851b54c
+index 0000000..be859a2
 --- /dev/null
-+++ b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.service
-@@ -0,0 +1,11 @@
-+[Unit]
-+Description=Enable minicoredumper.
++++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
+@@ -0,0 +1,53 @@
++SUMMARY = "VMcore extraction tool"
++DESCRIPTION = "\
++	This program is used to extract a subset of the memory available either \
++	via /dev/mem or /proc/vmcore (for crashdumps). It is used to get memory \
++	images without extra uneeded information (zero pages, userspace programs, \
++	etc). \
++	"
++HOMEPAGE = "http://makedumpfile.sourceforge.net"
 +
-+[Service]
-+Type=oneshot
-+RemainAfterExit=yes
-+ExecStart=/bin/sh -c '/bin/echo "|/usr/bin/minicoredumper %%p %%u %%g %%s %%t %%h %%e" > /proc/sys/kernel/core_pattern'
-+ExecStop=/bin/sh -c '/bin/echo "core" > /proc/sys/kernel/core_pattern'
++DEPENDS = "bzip2 zlib elfutils"
++RDEPENDS_${PN}-tools = "perl ${PN}"
 +
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_1.0.2.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_1.0.2.bb
-new file mode 100644
-index 0000000..babe544
---- /dev/null
-+++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_1.0.2.bb
-@@ -0,0 +1,31 @@
-+SUMMARY = "minicoredumper provides an alternate core dump facility for Linux \
-+to allow minimal and customized crash dumps"
-+LICENSE = " LGPLv2.1 & BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=45445387350de96a0e70410470ee5cab"
-+DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux"
++# arm would compile but has never been tested upstream.  mips would not compile.
++#
++COMPATIBLE_HOST = "(x86_64|i.86|powerpc).*-linux"
 +
-+inherit autotools pkgconfig systemd update-rc.d
++PACKAGES =+ "${PN}-tools"
++FILES_${PN}-tools = "${bindir}/*.pl"
 +
-+SRC_URI = "https://linutronix.de/${BPN}/files/${BPN}-${PV}.tar.gz \
-+           file://minicoredumper.service \
-+           file://minicoredumper.init \
-+"
-+SRC_URI[md5sum] = "5ba9d116b52a8e2fb93456260644e753"
-+SRC_URI[sha256sum] = "1b0eeb3d70dbd2ad6f2f673e4e3446e5dd784e132730e21d8f9dc0977e47dd9a"
++SRC_URI = "\
++	${SOURCEFORGE_MIRROR}/makedumpfile/${BPN}-${PV}.tar.gz \
++	file://0001-makedumpfile-replace-hardcode-CFLAGS.patch \
++	"
++LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++LICENSE = "GPLv2.0"
 +
-+SYSTEMD_SERVICE_${PN} = "minicoredumper.service"
-+SYSTEMD_AUTO_ENABLE = "enable"
++SRC_URI[md5sum] = "041c5c6de2c3066600e4ca646c2397d6"
++SRC_URI[sha256sum] = "e3147abc52df2ceac1e9affef45bf37e2f2e1d9979bc94a761ee11e4044072ac"
 +
-+INITSCRIPT_PACKAGES = "${PN}"
-+INITSCRIPT_NAME_${PN} = "minicoredumper"
-+INITSCRIPT_PARAMS_${PN} = "defaults 89"
++SECTION = "base"
 +
-+do_install_append() {
-+    install -d ${D}/${sysconfdir}/minicoredumper
-+    cp -rf ${S}/etc/* ${D}/${sysconfdir}/
++# If we do not specify TARGET, makedumpfile will build for the host but use the
++# target gcc.
++#
++EXTRA_OEMAKE = "\
++	LINKTYPE=static \
++	TARGET=${TARGET_ARCH} \
++	"
 +
-+    install -d ${D}${systemd_system_unitdir}
-+    install -m 0644 ${WORKDIR}/minicoredumper.service ${D}${systemd_system_unitdir}
-+    install -d ${D}${sysconfdir}/init.d
-+    install -m 0644 ${WORKDIR}/minicoredumper.init ${D}${sysconfdir}/init.d/minicoredumper
++do_install () {
++	mkdir -p ${D}/usr/bin
++	install -m 755 ${S}/makedumpfile ${D}/usr/bin
++	install -m 755 ${S}/makedumpfile-R.pl ${D}/usr/bin
++
++	mkdir -p ${D}/usr/share/man/man8
++	install -m 644 ${S}/makedumpfile.8.gz ${D}/usr/share/man/man8
++
++	mkdir -p ${D}/usr/share/man/man5
++	install -m 644 ${S}/makedumpfile.conf.5.gz ${D}/usr/share/man/man5
++
++	mkdir -p ${D}/etc/
++	install -m 644 ${S}/makedumpfile.conf ${D}/etc/makedumpfile.conf.sample
 +}
 -- 
 2.8.1
