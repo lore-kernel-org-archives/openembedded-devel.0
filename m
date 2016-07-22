@@ -1,24 +1,33 @@
-Return-Path: <Mingli.Yu@windriver.com>
+Return-Path: <Jackie.Huang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 37B196E667
+	by mail.openembedded.org (Postfix) with ESMTP id 533E66080F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jul 2016 02:57:38 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u6M2vdIo025444
+	Fri, 22 Jul 2016 03:01:07 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u6M31834025721
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jul 2016 19:57:39 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 21 Jul 2016 19:57:38 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 22 Jul 2016 10:55:02 +0800
-Message-ID: <1469156102-30362-1-git-send-email-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Thu, 21 Jul 2016 20:01:08 -0700 (PDT)
+Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.195]) by
+	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0248.002;
+	Thu, 21 Jul 2016 20:01:07 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [PATCH][meta-oe] minicoredumper: add the recipe
+Thread-Index: AQHRlJqFpLnuQ0tK1UasRv6BMgC5q6AkYLPw
+Date: Fri, 22 Jul 2016 03:01:06 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AA01310036B1@ALA-MBA.corp.ad.wrs.com>
+References: <1459318294-8974-1-git-send-email-rongqing.li@windriver.com>
+	<20160412090710.GC2564@jama>
+In-Reply-To: <20160412090710.GC2564@jama>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.132]
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH V2] makedumpfile: add makedumpfile 1.6.0
+Subject: Re: [PATCH][meta-oe] minicoredumper: add the recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,225 +40,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jul 2016 02:57:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 22 Jul 2016 03:01:07 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-* Add makedumpfile 1.6.0
-* Create alias for target such as powerpc as powerpc32
-* Remove hardcode CFLAGS
-* Add CFLAGS_COMMON to instead of CFLAGS so can flexibly
-  customize CFLAGS and not hardcode the CFLAGS as previously
-* Forcibly to link dynamic library as the poky build
-  system doesn't build static library by default
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- ...0001-makedumpfile-replace-hardcode-CFLAGS.patch | 134 +++++++++++++++++++++
- .../makedumpfile/makedumpfile_1.6.0.bb             |  53 ++++++++
- 2 files changed, 187 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
- create mode 100644 meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
 
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
-new file mode 100644
-index 0000000..d599a91
---- /dev/null
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0001-makedumpfile-replace-hardcode-CFLAGS.patch
-@@ -0,0 +1,134 @@
-+From 3c2f4ff583a156a7ed2fa0cc002a413c391d063d Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Thu, 21 Jul 2016 18:06:21 +0800
-+Subject: [PATCH] makedumpfile: replace hardcode CFLAGS
-+
-+* Create alias for target such as powerpc as powerpc32
-+* Remove hardcode CFLAGS
-+* Add CFLAGS_COMMON to instead of CFLAGS so can flexibly
-+  customize CFLAGS and not hardcode the CFLAGS as previously
-+* Forcibly to link dynamic library as the poky build
-+  system doesn't build static library by default
-+
-+Upstream-Status: Inappropriate[oe specific]
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ Makefile | 46 +++++++++++++++++++++++-----------------------
-+ 1 file changed, 23 insertions(+), 23 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 7dde3e4..c5286ac 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -8,13 +8,6 @@ ifeq ($(strip $CC),)
-+ CC	= gcc
-+ endif
-+ 
-+-CFLAGS = -g -O2 -Wall -D_FILE_OFFSET_BITS=64 \
-+-	  -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE \
-+-	  -DVERSION='"$(VERSION)"' -DRELEASE_DATE='"$(DATE)"'
-+-CFLAGS_ARCH	= -g -O2 -Wall -D_FILE_OFFSET_BITS=64 \
-+-		    -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE
-+-# LDFLAGS = -L/usr/local/lib -I/usr/local/include
-+-
-+ HOST_ARCH := $(shell uname -m)
-+ # Use TARGET as the target architecture if specified.
-+ # Defaults to uname -m
-+@@ -22,29 +15,36 @@ ifeq ($(strip($TARGET)),)
-+ TARGET := $(HOST_ARCH)
-+ endif
-+ 
-+-ARCH := $(shell echo ${TARGET}  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
-+-			       -e s/arm.*/arm/ -e s/sa110/arm/ \
-+-			       -e s/s390x/s390/ -e s/parisc64/parisc/ \
-+-			       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/)
-++ARCH := $(shell echo __${TARGET}__  | sed -e s/i.86/x86/ -e s/sun4u/sparc64/ \
-++		       -e s/arm.*/arm/ -e s/sa110/arm/ \
-++		       -e s/s390x/s390/ -e s/parisc64/parisc/ \
-++		       -e s/ppc64/powerpc64/ -e s/ppc/powerpc32/ \
-++		       -e s/_powerpc_/_powerpc32_/)
-+ 
-+ CROSS :=
-+ ifneq ($(TARGET), $(HOST_ARCH))
-+ CROSS := -U__$(HOST_ARCH)__
-+ endif
-+ 
-+-CFLAGS += -D__$(ARCH)__ $(CROSS)
-+-CFLAGS_ARCH += -D__$(ARCH)__ $(CROSS)
-++CFLAGS_ARCH += -D$(ARCH) $(CROSS)
-+ 
-+-ifeq ($(ARCH), powerpc64)
-+-CFLAGS += -m64
-++ifeq ($(ARCH), __powerpc64__)
-+ CFLAGS_ARCH += -m64
-+ endif
-+ 
-+-ifeq ($(ARCH), powerpc32)
-+-CFLAGS += -m32
-++ifeq ($(ARCH), __powerpc32__)
-+ CFLAGS_ARCH += -m32
-+ endif
-+ 
-++CFLAGS_ARCH += $(CFLAGS) \
-++		-D_FILE_OFFSET_BITS=64 \
-++		-D_LARGEFILE_SOURCE \
-++		-D_LARGEFILE64_SOURCE
-++
-++CFLAGS_COMMON = $(CFLAGS_ARCH) \
-++		-DVERSION='"$(VERSION)"' \
-++		-DRELEASE_DATE='"$(DATE)"'
-++
-+ SRC_BASE = makedumpfile.c makedumpfile.h diskdump_mod.h sadump_mod.h sadump_info.h
-+ SRC_PART = print_info.c dwarf_info.c elf_info.c erase_info.c sadump_info.c cache.c
-+ OBJ_PART=$(patsubst %.c,%.o,$(SRC_PART))
-+@@ -54,17 +54,17 @@ OBJ_ARCH=$(patsubst %.c,%.o,$(SRC_ARCH))
-+ 
-+ LIBS = -ldw -lbz2 -lebl -ldl -lelf -lz
-+ ifneq ($(LINKTYPE), dynamic)
-+-LIBS := -static $(LIBS)
-++LIBS := $(LIBS)
-+ endif
-+ 
-+ ifeq ($(USELZO), on)
-+ LIBS := -llzo2 $(LIBS)
-+-CFLAGS += -DUSELZO
-++CFLAGS_COMMON += -DUSELZO
-+ endif
-+ 
-+ ifeq ($(USESNAPPY), on)
-+ LIBS := -lsnappy $(LIBS)
-+-CFLAGS += -DUSESNAPPY
-++CFLAGS_COMMON += -DUSESNAPPY
-+ endif
-+ 
-+ LIBS := -lpthread $(LIBS)
-+@@ -72,14 +72,14 @@ LIBS := -lpthread $(LIBS)
-+ all: makedumpfile
-+ 
-+ $(OBJ_PART): $(SRC_PART)
-+-	$(CC) $(CFLAGS) -c -o ./$@ $(VPATH)$(@:.o=.c)
-++	$(CC) $(CFLAGS_COMMON) -c -o ./$@ $(VPATH)$(@:.o=.c)
-+ 
-+ $(OBJ_ARCH): $(SRC_ARCH)
-+ 	@mkdir -p $(@D)
-+ 	$(CC) $(CFLAGS_ARCH) -c -o ./$@ $(VPATH)$(@:.o=.c)
-+ 
-+ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(OBJ_ARCH)
-+-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ_PART) $(OBJ_ARCH) -rdynamic -o $@ $< $(LIBS)
-++	$(CC) $(CFLAGS_COMMON) $(LDFLAGS) $(OBJ_PART) $(OBJ_ARCH) -rdynamic -o $@ $< $(LIBS)
-+ 	echo .TH MAKEDUMPFILE 8 \"$(DATE)\" \"makedumpfile v$(VERSION)\" \"Linux System Administrator\'s Manual\" > temp.8
-+ 	grep -v "^.TH MAKEDUMPFILE 8" $(VPATH)makedumpfile.8 >> temp.8
-+ 	mv temp.8 makedumpfile.8
-+@@ -90,7 +90,7 @@ makedumpfile: $(SRC_BASE) $(OBJ_PART) $(OBJ_ARCH)
-+ 	gzip -c ./makedumpfile.conf.5 > ./makedumpfile.conf.5.gz
-+ 
-+ eppic_makedumpfile.so: extension_eppic.c
-+-	$(CC) $(CFLAGS) $(LDFLAGS) -shared -rdynamic -o $@ extension_eppic.c -fPIC -leppic -ltinfo
-++	$(CC) $(CFLAGS_COMMON) $(LDFLAGS) -shared -rdynamic -o $@ extension_eppic.c -fPIC -leppic -ltinfo
-+ 
-+ clean:
-+ 	rm -f $(OBJ) $(OBJ_PART) $(OBJ_ARCH) makedumpfile makedumpfile.8.gz makedumpfile.conf.5.gz
-+-- 
-+2.8.1
-+
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
-new file mode 100644
-index 0000000..be859a2
---- /dev/null
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
-@@ -0,0 +1,53 @@
-+SUMMARY = "VMcore extraction tool"
-+DESCRIPTION = "\
-+	This program is used to extract a subset of the memory available either \
-+	via /dev/mem or /proc/vmcore (for crashdumps). It is used to get memory \
-+	images without extra uneeded information (zero pages, userspace programs, \
-+	etc). \
-+	"
-+HOMEPAGE = "http://makedumpfile.sourceforge.net"
-+
-+DEPENDS = "bzip2 zlib elfutils"
-+RDEPENDS_${PN}-tools = "perl ${PN}"
-+
-+# arm would compile but has never been tested upstream.  mips would not compile.
-+#
-+COMPATIBLE_HOST = "(x86_64|i.86|powerpc).*-linux"
-+
-+PACKAGES =+ "${PN}-tools"
-+FILES_${PN}-tools = "${bindir}/*.pl"
-+
-+SRC_URI = "\
-+	${SOURCEFORGE_MIRROR}/makedumpfile/${BPN}-${PV}.tar.gz \
-+	file://0001-makedumpfile-replace-hardcode-CFLAGS.patch \
-+	"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+LICENSE = "GPLv2.0"
-+
-+SRC_URI[md5sum] = "041c5c6de2c3066600e4ca646c2397d6"
-+SRC_URI[sha256sum] = "e3147abc52df2ceac1e9affef45bf37e2f2e1d9979bc94a761ee11e4044072ac"
-+
-+SECTION = "base"
-+
-+# If we do not specify TARGET, makedumpfile will build for the host but use the
-+# target gcc.
-+#
-+EXTRA_OEMAKE = "\
-+	LINKTYPE=static \
-+	TARGET=${TARGET_ARCH} \
-+	"
-+
-+do_install () {
-+	mkdir -p ${D}/usr/bin
-+	install -m 755 ${S}/makedumpfile ${D}/usr/bin
-+	install -m 755 ${S}/makedumpfile-R.pl ${D}/usr/bin
-+
-+	mkdir -p ${D}/usr/share/man/man8
-+	install -m 644 ${S}/makedumpfile.8.gz ${D}/usr/share/man/man8
-+
-+	mkdir -p ${D}/usr/share/man/man5
-+	install -m 644 ${S}/makedumpfile.conf.5.gz ${D}/usr/share/man/man5
-+
-+	mkdir -p ${D}/etc/
-+	install -m 644 ${S}/makedumpfile.conf ${D}/etc/makedumpfile.conf.sample
-+}
--- 
-2.8.1
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Martin Jansa
+> Sent: Tuesday, April 12, 2016 5:07 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [PATCH][meta-oe] minicoredumper: add the recipe
+>=20
+> On Wed, Mar 30, 2016 at 02:11:34PM +0800, rongqing.li@windriver.com wrote=
+:
+> > From: Roy Li <rongqing.li@windriver.com>
+> >
+> > minicoredumper provides an alternate core dump facility for Linux
+> > to allow minimal and customized crash dumps
+> >
+> > Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> > ---
+> >  .../minicoredumper/files/minicoredumper.service    |  9 ++++++++
+> >  .../minicoredumper/minicoredumper_1.0.2.bb         | 24 ++++++++++++++=
+++++++++
+> >  2 files changed, 33 insertions(+)
+> >  create mode 100644 meta-oe/recipes-kernel/minicoredumper/files/minicor=
+edumper.service
+> >  create mode 100644 meta-oe/recipes-kernel/minicoredumper/minicoredumpe=
+r_1.0.2.bb
+> >
+> > diff --git a/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper=
+.service b/meta-
+> oe/recipes-kernel/minicoredumper/files/minicoredumper.service
+> > new file mode 100644
+> > index 0000000..161ce88
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-kernel/minicoredumper/files/minicoredumper.servic=
+e
+> > @@ -0,0 +1,9 @@
+> > +[Unit]
+> > +Description=3DEnable minicoredumper.
+> > +
+> > +[Service]
+> > +Type=3Doneshot
+> > +ExecStart=3D/bin/sh -c '/bin/echo "|/usr/bin/minicoredumper %%p %%u %%=
+g %%s %%t %%h %%e" >
+> /proc/sys/kernel/core_pattern'
+> > +
+> > +[Install]
+> > +WantedBy=3Dmulti-user.target
+> > diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_1.0.2=
+.bb b/meta-oe/recipes-
+> kernel/minicoredumper/minicoredumper_1.0.2.bb
+> > new file mode 100644
+> > index 0000000..6b55732
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_1.0.2.bb
+> > @@ -0,0 +1,24 @@
+> > +SUMMARY =3D "minicoredumper provides an alternate core dump facility f=
+or Linux \
+> > +to allow minimal and customized crash dumps"
+> > +LICENSE =3D " LGPLv2.1 & BSD"
+> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D45445387350de96a0e70410470e=
+e5cab"
+> > +DEPENDS =3D "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-li=
+nux"
+> > +
+> > +inherit autotools pkgconfig systemd
+> > +
+> > +SRC_URI =3D "https://linutronix.de/${BPN}/files/${BPN}-${PV}.tar.gz \
+> > +           file://minicoredumper.service \
+> > +"
+> > +SRC_URI[md5sum] =3D "5ba9d116b52a8e2fb93456260644e753"
+> > +SRC_URI[sha256sum] =3D
+> "1b0eeb3d70dbd2ad6f2f673e4e3446e5dd784e132730e21d8f9dc0977e47dd9a"
+> > +
+> > +SYSTEMD_SERVICE_${PN} =3D "minicoredumper.service"
+> > +SYSTEMD_AUTO_ENABLE =3D "enable"
+> > +
+> > +do_install_append() {
+> > +	install -d ${D}/${sysconfdir}/minicoredumper
+> > +	cp -rf ${S}/etc/* ${D}/${sysconfdir}/
+> > +
+> > +	install -d ${D}${systemd_unitdir}/system
+> > +	install -m 0644 ${WORKDIR}/minicoredumper.service ${D}${systemd_unitd=
+ir}/system
+>=20
+> Use 4 spaces for indentation.
 
+I'm taking care this of and sent a v2 with the following changes:
+
+- Use 4 spaces for indentation
+- Add sysv init script
+- Use ${systemd_system_unitdir} instead of ${systemd_unitdir}/system
+
+Thanks,
+Jackie
+
+>=20
+> > +}
+> > --
+> > 1.9.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
