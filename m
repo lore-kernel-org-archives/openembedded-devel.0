@@ -1,48 +1,41 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id EC7E16067D
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 8BDF46067D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jul 2016 14:47:40 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id q8so8798614qke.3
+	Fri, 22 Jul 2016 16:51:40 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id q8so9019940qke.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jul 2016 07:47:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=message-id:from:date:to:subject:user-agent;
-	bh=+oTZhY/pghfCo4qnzFvlZg1KanipWdmipiS8xmFQdY8=;
-	b=Ph0xw0SEZGdwh2SoJ5oiI5pWAeehGIMSf9P5uYEoscBUFPT0pnL2HGJjzKQOF6NZE6
-	lg7vpRvMIPQr41bDXLa1uplkOsn3uOgUeievQ0fxshRb62zhd8Aq9FMrfVKeGar5UcWg
-	HzvYaMo6Nw3342OtqddL8NHHu7At6iFkkb+DWsSRsqpq8VqjH6wYq8TTizsnEKoxIw5f
-	8iJKC1CknuUlAf3x0BOoejJOP/L85jamJjbLGQ6QlqdP45LSxe/3B8/GrPW4ChTL1Md+
-	DN+sh4uzmTIR/0AtSAvXXTs+R7E04HQnYGBxhpmyFr337l+Er6ifE/0/Dn88UD7tKmkI
-	XNBA==
+	Fri, 22 Jul 2016 09:51:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:from:date:to:subject:user-agent;
-	bh=+oTZhY/pghfCo4qnzFvlZg1KanipWdmipiS8xmFQdY8=;
-	b=Q0AxZb+Y6QP6tkdYhd8vAcS4XzPF9XXgc7q+dSh/14wmI1TrkBVMZkdXv2nTtFWlFT
-	U+LN0pgZ/hVJwdkfTdxQUfZk7yf4cTuDHBixd9V2yKaTpZaOXU8uugjSZtJUEf/v7pdy
-	xnIrtOqkUUqXmwJyCRpdzZmOFVJaoSR+DnzBiLcHszwZ0Dqo4cDtC4fVyq9+0AacTFn2
-	jWXiVva5mUtGZLao/ys1QoN4T1rElNYHWj/dLY370Xj+iwZl/NIaNHeRSZLH8R1UG7kC
-	djdlkzoME2ONjPCEMFOQbFoKIQlkQ3M1Zi0+ronzuoh87+JbsfCBcfhdIImKY8xYiKKL
-	eQJw==
-X-Gm-Message-State: AEkooutL2QPvsQZueNVNOHwTFZZWpIf/orW3EB5ElvOyUby7141pAw2CaqqsDXUFOcnAYw==
-X-Received: by 10.55.102.85 with SMTP id a82mr5326070qkc.173.1469198860936;
-	Fri, 22 Jul 2016 07:47:40 -0700 (PDT)
-Received: from localhost ([177.100.227.79])
-	by smtp.gmail.com with ESMTPSA id e7sm7490627qtb.9.2016.07.22.07.47.38
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=lP3iV6PI+DbugJmOFTIYWr179oBHUPW7aND83LAELZM=;
+	b=kbPMZTpYh+zKlqyoMaBB3+pfJNUQtBN8Gq12V0nBhunzvNqHwil15ekx5ahHBT/InU
+	782cmeMUVHPEkUZqlIro1L6qoFDz1D+qY4iIu1dxKjgTn84WYSo+DznRpl51gJHsgy/w
+	TBsUGy63jMPIov86j9Z+qpm7rhKNsOdAHXyWnYr+m5RrwbGk3S3v1kFQwaQCe3G9bf5g
+	SRXFIzAPHUHs5iMiPIc0g4BDhNjhMsi6dsS/I0rZkMmtxVHFWMRh/WNBP/4c/nrOjqm/
+	gzjOhx8jCCm7oqa8VufE/J9uIU8inFR7X1h1YzyMFPxTKm/ad5pdM8PKcZfPrOl5M1EE
+	7FKw==
+X-Gm-Message-State: AEkoousqWvCXJ3hruSmlvAfRfOZC/xA8YMPjgZIO+oyG0idYjbvYUK7Bc9ZndQl/hzuENg==
+X-Received: by 10.55.89.197 with SMTP id n188mr5948979qkb.169.1469206301636;
+	Fri, 22 Jul 2016 09:51:41 -0700 (PDT)
+Received: from localhost ([177.100.227.79]) by smtp.gmail.com with ESMTPSA id
+	f135sm7788365qke.37.2016.07.22.09.51.37
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 22 Jul 2016 07:47:40 -0700 (PDT)
-Message-ID: <5792320c.0736ed0a.4a5ff.6cab@mx.google.com>
+	Fri, 22 Jul 2016 09:51:40 -0700 (PDT)
 Received: by localhost (sSMTP sendmail emulation);
-	Fri, 22 Jul 2016 11:47:34 -0300
-From: "Otavio Salvador" <otavio.salvador@gmail.com>
-Date: Fri, 22 Jul 2016 11:47:34 -0300
+	Fri, 22 Jul 2016 13:51:33 -0300
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-User-Agent: mail v14.8.9
-Subject: Updates to meta-java (master) in 2016-07-22
+Date: Fri, 22 Jul 2016 13:51:32 -0300
+Message-Id: <20160722165132.26441-1-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.9.0
+Organization: O.S. Systems Software LTDA.
+Cc: tom.hochstein@nxp.com, samuli.piippo@theqtcompany.com, junzhu@nxp.com,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-qt5 PATCH v5] qtwayland: Rework recipe to allow PACKAGECONFIG use
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,75 +48,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jul 2016 14:47:43 -0000
+X-List-Received-Date: Fri, 22 Jul 2016 16:51:43 -0000
 
-Hello,
+The Qt Wayland uses some modules which can be enabled/disabled
+depending on users needs, however this must be deterministic. So we
+now use PACKAGECONFIG to enable/disable those features. Following
+options are available:
 
-I pushed following updates:
+ - brcm-egl
+ - compositor-api
+ - drm-egl
+ - glx
+ - libhybris-egl
+ - wayland-egl
+ - xcompositor
+ - xkb
 
-commit 4ae7c0c40e1f8fccc98d2f58cf61ef58c5a27da6 (HEAD -> pending, yocto/master-next, yocto/master, m/master, m/krogoth)
-Author: Patrick Ohly <patrick.ohly@intel.com>
-Date:   Wed Jul 20 11:48:36 2016 +0200
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
 
-    do_unpackpost: explicitly set working directory
-    
-    bitbake rev 67a7b8b02 "build: don't use $B as the default cwd for
-    functions" (included in current bitbake master) breaks the assumption
-    that do_unpackpost runs inside the build directory. Now that has to be
-    set explicitly, which is also okay for older bitbake versions.
-    
-    Signed-off-by: Patrick Ohly <patrick.ohly@intel.com>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Changes in v5:
+- Add compositor-api to the commit log (Tom)
+- Rework compositor-api enablement (Tom)
+- Fix xcompositor flags (Tom)
+- Fix drm-egl flags (Tom)
 
-commit 065ee5a0160d7ad95861417a845c9e208499061e
-Author: Patrick Ohly <patrick.ohly@intel.com>
-Date:   Wed Jul 20 11:48:08 2016 +0200
+Changes in v4:
+- Use done_config_<foo> for enable case. This is need so the test is
+  skipped otherwise in case it fails, it may remove the feature and
+  the support for it would not be enabled, causing a problem in
+  determinism.
 
-    openjdk-8: fix compiler detection
-    
-    When GCC is at version 4 or 5, parsing the recipe fails with:
-    
-    ERROR: ExpansionError during parsing
-    .../ostro-os/meta-java/recipes-core/openjdk/openjdk-8_72b05.bb
-    ...
-    bb.data_smart.ExpansionError: Failure expanding variable CFLAGS,
-    expression was  -O2 -pipe -g -feliminate-unused-debug-types
-    -fdebug-prefix-map=.../ostro-os/build/tmp-glibc/work/corei7-64-ostro-
-    linux/openjdk-8/72b05-r0=/usr/src/debug/openjdk-8/72b05-r0
-    -fdebug-prefix-map=.../ostro-os/build/tmp-glibc/sysroots/x86_64-linux=
-    -fdebug-prefix-map=.../ostro-os/build/tmp-glibc/sysroots/intel-corei7-64=
-     -fstack-protector-strong -D_FORTIFY_SOURCE=2
-    ${ <at> version_specific_cflags(d)} -Wno-error=deprecated-declarations which
-    triggered exception TypeError: can only join an iterable
-    
-    That's because FLAGS_GCC<version> may be unset, thus leading to
-    d.getVar() returning None and ''.join(extraflags) failing.
-    
-    The join() is also redundant: extraflags already is a string. It
-    happened to work because Python treats a string as sequence of
-    single-character strings, and thus ''.join() re-created the original
-    string.
-    
-    Signed-off-by: Patrick Ohly <patrick.ohly@intel.com>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Changes in v2:
+- Add compositor-api and enable it by default
+- Add xkb by default or the build fails badly (FIXME)
 
-commit 4f7fb37a87e7d63a7419e480ea403aa02a2ce900
-Author: Jackie Huang <jackie.huang@windriver.com>
-Date:   Mon May 30 04:37:47 2016 -0400
+ recipes-qt/qt5/qtwayland_git.bb | 29 +++++++++++++++++++----------
+ 1 file changed, 19 insertions(+), 10 deletions(-)
 
-    java.bbclass: change a warning message to note
-    
-    The logic is to check if the destination file exists before
-    create the symlink, and give a message about removing the
-    existing file, it's harmless and not necessary to be a warning.
-    
-    Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
+index e36d2c0..df42f30 100644
+--- a/recipes-qt/qt5/qtwayland_git.bb
++++ b/recipes-qt/qt5/qtwayland_git.bb
+@@ -1,6 +1,8 @@
+ require qt5.inc
+ require qt5-git.inc
+ 
++DEPENDS += "qtbase qtdeclarative wayland wayland-native qtwayland-native"
++
+ # There are no LGPLv3-only licensed files in this component.
+ LICENSE = "BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+ LIC_FILES_CHKSUM = " \
+@@ -11,18 +13,25 @@ LIC_FILES_CHKSUM = " \
+     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
+ "
+ 
+-# wayland-native is already in wayland DEPENDS, but add it here
+-# explicitly, because it's native wayland-scanner we're looking for
+-# libxkbcommon isn't mandatory make it easier to remove by .bbappend
+-# (e.g. for building qtwayland with danny which doesn't have libxkbcommon in oe-core).
+-XKB_DEPENDS = "libxkbcommon xproto"
+-DEPENDS += "qtbase qtdeclarative wayland wayland-native qtwayland-native ${XKB_DEPENDS} ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxcomposite', '', d)}"
++#FIXME: xkb should be optional; we add it here to fix the build error without it
++#       (https://bugreports.qt.io/browse/QTBUG-54851)
++PACKAGECONFIG ?= " \
++    compositor-api \
++    wayland-egl \
++    xkb \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xcompositor xkb glx', '', d)} \
++"
+ 
+-QT_WAYLAND_CONFIG ?= "wayland-compositor"
+-QT_WAYLAND_DEFINES ?= ""
++PACKAGECONFIG[compositor-api] = "CONFIG+=wayland-compositor"
++PACKAGECONFIG[xcompositor] = "CONFIG+=config_xcomposite CONFIG+=done_config_xcomposite,CONFIG+=done_config_xcomposite,libxcomposite"
++PACKAGECONFIG[glx] = "CONFIG+=config_glx CONFIG+=done_config_glx,CONFIG+=done_config_glx,virtual/mesa"
++PACKAGECONFIG[xkb] = "CONFIG+=config_xkbcommon CONFIG+=done_config_xkbcommon,CONFIG+=done_config_xkbcommon,libxkbcommon xproto"
++PACKAGECONFIG[wayland-egl] = "CONFIG+=config_wayland_egl CONFIG+=done_config_wayland_egl,CONFIG+=done_config_wayland_egl,virtual/egl"
++PACKAGECONFIG[brcm-egl] = "CONFIG+=config_brcm_egl CONFIG+=done_config_brcm_egl,CONFIG+=done_config_brcm_egl,virtual/egl"
++PACKAGECONFIG[drm-egl] = "CONFIG+=config_drm_egl_server CONFIG+=done_config_drm_egl_server,CONFIG+=done_config_drm_egl_server,libdrm virtual/egl"
++PACKAGECONFIG[libhybris-egl] = "CONFIG+=config_libhybris_egl_server CONFIG+=done_config_libhybris_egl_server,CONFIG+=done_config_libhybris_egl_server,libhybris"
+ 
+-EXTRA_QMAKEVARS_PRE += "CONFIG+=${QT_WAYLAND_CONFIG}"
+-EXTRA_QMAKEVARS_PRE += "DEFINES+=${QT_WAYLAND_DEFINES}"
++EXTRA_QMAKEVARS_PRE += "${PACKAGECONFIG_CONFARGS}"
+ 
+ FILES_${PN}-plugins += " \
+     ${OE_QMAKE_PATH_PLUGINS}/*/*/*${SOLIBSDEV} \
+-- 
+2.9.0
 
-Regards,
-
---
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
