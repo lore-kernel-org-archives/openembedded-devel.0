@@ -1,38 +1,48 @@
-Return-Path: <michael@walle.cc>
-Received: from ssl.serverraum.org (ssl.serverraum.org [213.133.101.245])
-	by mail.openembedded.org (Postfix) with ESMTP id D08A06067D
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qk0-f172.google.com (mail-qk0-f172.google.com
+	[209.85.220.172])
+	by mail.openembedded.org (Postfix) with ESMTP id D37446067D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jul 2016 17:17:01 +0000 (UTC)
-Received: from ssl.serverraum.org (web.serverraum.org [172.16.0.2])
-	(using TLSv1 with cipher DHE-RSA-CAMELLIA256-SHA (256/256 bits))
-	(No client certificate requested)
-	by ssl.serverraum.org (Postfix) with ESMTPSA id 1847222375
+	Fri, 22 Jul 2016 19:27:14 +0000 (UTC)
+Received: by mail-qk0-f172.google.com with SMTP id x1so110046107qkb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jul 2016 19:16:58 +0200 (CEST)
-Authentication-Results: ssl.serverraum.org; dmarc=none header.from=walle.cc
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=walle.cc;
-	s=mail2016061301; t=1469207818;
-	bh=FF/RQ+dlRfXSfpv1rsfwkl/4CkdcJA8Kk5d0vNc5Kbo=;
-	h=Date:From:To:Subject:In-Reply-To:References:From;
-	b=oGM1SR9ScUEykMcO8XYLAu19M3i9w+d5yptYa+ajBjxfVhzu8VVeEapC+EHz9zl1+
-	kKJzq3bXAwGJfJq2xc5Abnnn7pQleZO+V8LP2SL6yW3QWjv+EQp8wXkWK2PlHOLVVl
-	qzBsw3GdUmnK7lozFATGM17mzwngnmnGlNGRLHYs=
-MIME-Version: 1.0
-Date: Fri, 22 Jul 2016 19:16:58 +0200
-From: Michael Walle <michael@walle.cc>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1468576710-25964-1-git-send-email-michael@walle.cc>
-References: <1468576710-25964-1-git-send-email-michael@walle.cc>
-Message-ID: <50c079e4930da85fc915be10a0335c93@walle.cc>
-X-Sender: michael@walle.cc
-User-Agent: Roundcube Webmail/1.1.5
-X-Virus-Scanned: clamav-milter 0.99.2 at web
-X-Virus-Status: Clean
-X-Spam-Status: No, score=-0.1 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,UNPARSEABLE_RELAY,URIBL_BLOCKED autolearn=ham
-	autolearn_force=no version=3.4.0
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on web.serverraum.org
-Subject: Re: [PATCH] klibc: fix install destination in 64bit env
+	Fri, 22 Jul 2016 12:27:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=message-id:from:date:to:subject:user-agent;
+	bh=7dcT+6rlmvlXIbVf3mdXPG7EHxHcLQhzBfyEQXJ/1kE=;
+	b=AJqDDOBq0lWYl0pZ6bP6zgkaQrFDbISHEBAbdGsaAqw4XdXpuvSd29h4/pSUzXspgx
+	+B+jt3NwpC+//cqbw3k6M1umGOnRmvL/6hs3+XV6xjng/RjGKJWi9dgc7DsluSCVePs/
+	BJnuN3/nFUdZKhkZBgcTV0YfiCByV0KcJk7/yeCLf1aOG5vWmkUNLZH025R4K/eVnbzr
+	Yv+NGuZjRD4gOE/1xplKhuHJqpdIUMGQzRwDwygd190l8dibQ2+xYi8ZOlop/SwK6KFy
+	Ju/2qhpIO/tSsRREeEZ76NbliyGAB4IuVNvBKBMD6UbBT5nAm3QqPGlLeZIAq4hF+BcE
+	V0hQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:from:date:to:subject:user-agent;
+	bh=7dcT+6rlmvlXIbVf3mdXPG7EHxHcLQhzBfyEQXJ/1kE=;
+	b=K3P2cmm1sMfXdYfC3e1GodLjAu8GfcXBWExfQx271TQXxjDjnSESr6TuJHXz2BCK5i
+	Gg66plf0rVPv7GlNHXeVYvA+bueDO4HkqkTAUtCzQ2STD4w94rKDYgQR1uRDdRC0N/Du
+	gzXaHzhDfk8K0y8460dNKzQDziZNNhZpIZKx1xE9eUL8ckHdKrRC5S4JecDqgqjsr1hh
+	jnmE52cpEvO9VW2Gnoj8edciI9MtIXla9zSEsEU6o3LQSdMvj0yKyYBs/KPiIWQ8bsNG
+	y74Iws7bUXJK6OGNW+XlgDWC5o+wetgm/4Ka+YiE7geNhbEdjVWzTX5Sz2HoqXZ6toUv
+	BUgA==
+X-Gm-Message-State: AEkoouvEmtv6+5K0/m0nP815sGFnvYw5QiLcTKAsvTTeSmA4FxnnipLZkP8ZAFBJoOz4dw==
+X-Received: by 10.55.80.68 with SMTP id e65mr6451984qkb.156.1469215634875;
+	Fri, 22 Jul 2016 12:27:14 -0700 (PDT)
+Received: from localhost ([177.100.227.79]) by smtp.gmail.com with ESMTPSA id
+	j38sm8146498qtj.35.2016.07.22.12.27.11
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 22 Jul 2016 12:27:14 -0700 (PDT)
+Message-ID: <57927392.e928c80a.e0984.b806@mx.google.com>
+Received: by localhost (sSMTP sendmail emulation);
+	Fri, 22 Jul 2016 16:27:08 -0300
+From: "Otavio Salvador" <otavio.salvador@gmail.com>
+Date: Fri, 22 Jul 2016 16:27:08 -0300
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+User-Agent: mail v14.8.9
+Subject: Updates to meta-qt5 (master) in 2016-07-22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,39 +55,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jul 2016 17:17:03 -0000
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 22 Jul 2016 19:27:15 -0000
 
-Am 2016-07-15 11:58, schrieb Michael Walle:
-> klibc installs everything into /usr/lib by default. But the recipe 
-> assumes
-> it installs to ${libdir} which is /usr/lib64 in 64bit environment. 
-> Package
-> generation fails badly in this case. Set INSTALLDIR to fix this.
-> 
-> Signed-off-by: Michael Walle <michael@walle.cc>
-> ---
->  meta-initramfs/recipes-devtools/klibc/klibc.inc | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-> b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-> index 65ee868..f00e31a 100644
-> --- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-> +++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-> @@ -27,6 +27,7 @@ EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
-> 
-> 'KLIBCLIBGCC=${STAGING_DIR_TARGET}${libdir}/${TARGET_SYS}/*/libgcc.a'
-> \
->                  'prefix=${exec_prefix}' \
->                  'INSTALLROOT=${D}' \
-> +                'INSTALLDIR=${libdir}/klibc' \
->                  'SHLIBDIR=${libdir}' \
->                  "
+Hello,
 
-ping?
+I pushed following updates:
 
--michael
+commit ecf7db0bd5012162d5fff5cb25f9a07a1a6e084a (HEAD -> pending, m/master, m/krogoth, github/master)
+Author: Otavio Salvador <otavio@ossystems.com.br>
+Date:   Fri Jul 8 13:56:10 2016 -0300
+
+    qtwayland: Rework recipe to allow PACKAGECONFIG use
+    
+    The Qt Wayland uses some modules which can be enabled/disabled
+    depending on users needs, however this must be deterministic. So we
+    now use PACKAGECONFIG to enable/disable those features. Following
+    options are available:
+    
+     - brcm-egl
+     - compositor-api
+     - drm-egl
+     - glx
+     - libhybris-egl
+     - wayland-egl
+     - xcompositor
+     - xkb
+    
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+    Acked-by: Tom Hochstein <tom.hochstein@nxp.com>
+
+Regards,
+
+--
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
