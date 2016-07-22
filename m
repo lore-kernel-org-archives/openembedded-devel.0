@@ -1,41 +1,38 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 8BDF46067D
+Return-Path: <michael@walle.cc>
+Received: from ssl.serverraum.org (ssl.serverraum.org [213.133.101.245])
+	by mail.openembedded.org (Postfix) with ESMTP id D08A06067D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jul 2016 16:51:40 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id q8so9019940qke.3
+	Fri, 22 Jul 2016 17:17:01 +0000 (UTC)
+Received: from ssl.serverraum.org (web.serverraum.org [172.16.0.2])
+	(using TLSv1 with cipher DHE-RSA-CAMELLIA256-SHA (256/256 bits))
+	(No client certificate requested)
+	by ssl.serverraum.org (Postfix) with ESMTPSA id 1847222375
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jul 2016 09:51:42 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
-	bh=lP3iV6PI+DbugJmOFTIYWr179oBHUPW7aND83LAELZM=;
-	b=kbPMZTpYh+zKlqyoMaBB3+pfJNUQtBN8Gq12V0nBhunzvNqHwil15ekx5ahHBT/InU
-	782cmeMUVHPEkUZqlIro1L6qoFDz1D+qY4iIu1dxKjgTn84WYSo+DznRpl51gJHsgy/w
-	TBsUGy63jMPIov86j9Z+qpm7rhKNsOdAHXyWnYr+m5RrwbGk3S3v1kFQwaQCe3G9bf5g
-	SRXFIzAPHUHs5iMiPIc0g4BDhNjhMsi6dsS/I0rZkMmtxVHFWMRh/WNBP/4c/nrOjqm/
-	gzjOhx8jCCm7oqa8VufE/J9uIU8inFR7X1h1YzyMFPxTKm/ad5pdM8PKcZfPrOl5M1EE
-	7FKw==
-X-Gm-Message-State: AEkoousqWvCXJ3hruSmlvAfRfOZC/xA8YMPjgZIO+oyG0idYjbvYUK7Bc9ZndQl/hzuENg==
-X-Received: by 10.55.89.197 with SMTP id n188mr5948979qkb.169.1469206301636;
-	Fri, 22 Jul 2016 09:51:41 -0700 (PDT)
-Received: from localhost ([177.100.227.79]) by smtp.gmail.com with ESMTPSA id
-	f135sm7788365qke.37.2016.07.22.09.51.37
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 22 Jul 2016 09:51:40 -0700 (PDT)
-Received: by localhost (sSMTP sendmail emulation);
-	Fri, 22 Jul 2016 13:51:33 -0300
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 22 Jul 2016 13:51:32 -0300
-Message-Id: <20160722165132.26441-1-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.9.0
-Organization: O.S. Systems Software LTDA.
-Cc: tom.hochstein@nxp.com, samuli.piippo@theqtcompany.com, junzhu@nxp.com,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-qt5 PATCH v5] qtwayland: Rework recipe to allow PACKAGECONFIG use
+	Fri, 22 Jul 2016 19:16:58 +0200 (CEST)
+Authentication-Results: ssl.serverraum.org; dmarc=none header.from=walle.cc
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=walle.cc;
+	s=mail2016061301; t=1469207818;
+	bh=FF/RQ+dlRfXSfpv1rsfwkl/4CkdcJA8Kk5d0vNc5Kbo=;
+	h=Date:From:To:Subject:In-Reply-To:References:From;
+	b=oGM1SR9ScUEykMcO8XYLAu19M3i9w+d5yptYa+ajBjxfVhzu8VVeEapC+EHz9zl1+
+	kKJzq3bXAwGJfJq2xc5Abnnn7pQleZO+V8LP2SL6yW3QWjv+EQp8wXkWK2PlHOLVVl
+	qzBsw3GdUmnK7lozFATGM17mzwngnmnGlNGRLHYs=
+MIME-Version: 1.0
+Date: Fri, 22 Jul 2016 19:16:58 +0200
+From: Michael Walle <michael@walle.cc>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1468576710-25964-1-git-send-email-michael@walle.cc>
+References: <1468576710-25964-1-git-send-email-michael@walle.cc>
+Message-ID: <50c079e4930da85fc915be10a0335c93@walle.cc>
+X-Sender: michael@walle.cc
+User-Agent: Roundcube Webmail/1.1.5
+X-Virus-Scanned: clamav-milter 0.99.2 at web
+X-Virus-Status: Clean
+X-Spam-Status: No, score=-0.1 required=5.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,UNPARSEABLE_RELAY,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on web.serverraum.org
+Subject: Re: [PATCH] klibc: fix install destination in 64bit env
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,94 +45,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jul 2016 16:51:43 -0000
+X-List-Received-Date: Fri, 22 Jul 2016 17:17:03 -0000
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-The Qt Wayland uses some modules which can be enabled/disabled
-depending on users needs, however this must be deterministic. So we
-now use PACKAGECONFIG to enable/disable those features. Following
-options are available:
+Am 2016-07-15 11:58, schrieb Michael Walle:
+> klibc installs everything into /usr/lib by default. But the recipe 
+> assumes
+> it installs to ${libdir} which is /usr/lib64 in 64bit environment. 
+> Package
+> generation fails badly in this case. Set INSTALLDIR to fix this.
+> 
+> Signed-off-by: Michael Walle <michael@walle.cc>
+> ---
+>  meta-initramfs/recipes-devtools/klibc/klibc.inc | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc
+> b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+> index 65ee868..f00e31a 100644
+> --- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
+> +++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+> @@ -27,6 +27,7 @@ EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
+> 
+> 'KLIBCLIBGCC=${STAGING_DIR_TARGET}${libdir}/${TARGET_SYS}/*/libgcc.a'
+> \
+>                  'prefix=${exec_prefix}' \
+>                  'INSTALLROOT=${D}' \
+> +                'INSTALLDIR=${libdir}/klibc' \
+>                  'SHLIBDIR=${libdir}' \
+>                  "
 
- - brcm-egl
- - compositor-api
- - drm-egl
- - glx
- - libhybris-egl
- - wayland-egl
- - xcompositor
- - xkb
+ping?
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
-
-Changes in v5:
-- Add compositor-api to the commit log (Tom)
-- Rework compositor-api enablement (Tom)
-- Fix xcompositor flags (Tom)
-- Fix drm-egl flags (Tom)
-
-Changes in v4:
-- Use done_config_<foo> for enable case. This is need so the test is
-  skipped otherwise in case it fails, it may remove the feature and
-  the support for it would not be enabled, causing a problem in
-  determinism.
-
-Changes in v2:
-- Add compositor-api and enable it by default
-- Add xkb by default or the build fails badly (FIXME)
-
- recipes-qt/qt5/qtwayland_git.bb | 29 +++++++++++++++++++----------
- 1 file changed, 19 insertions(+), 10 deletions(-)
-
-diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
-index e36d2c0..df42f30 100644
---- a/recipes-qt/qt5/qtwayland_git.bb
-+++ b/recipes-qt/qt5/qtwayland_git.bb
-@@ -1,6 +1,8 @@
- require qt5.inc
- require qt5-git.inc
- 
-+DEPENDS += "qtbase qtdeclarative wayland wayland-native qtwayland-native"
-+
- # There are no LGPLv3-only licensed files in this component.
- LICENSE = "BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM = " \
-@@ -11,18 +13,25 @@ LIC_FILES_CHKSUM = " \
-     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
- "
- 
--# wayland-native is already in wayland DEPENDS, but add it here
--# explicitly, because it's native wayland-scanner we're looking for
--# libxkbcommon isn't mandatory make it easier to remove by .bbappend
--# (e.g. for building qtwayland with danny which doesn't have libxkbcommon in oe-core).
--XKB_DEPENDS = "libxkbcommon xproto"
--DEPENDS += "qtbase qtdeclarative wayland wayland-native qtwayland-native ${XKB_DEPENDS} ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxcomposite', '', d)}"
-+#FIXME: xkb should be optional; we add it here to fix the build error without it
-+#       (https://bugreports.qt.io/browse/QTBUG-54851)
-+PACKAGECONFIG ?= " \
-+    compositor-api \
-+    wayland-egl \
-+    xkb \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xcompositor xkb glx', '', d)} \
-+"
- 
--QT_WAYLAND_CONFIG ?= "wayland-compositor"
--QT_WAYLAND_DEFINES ?= ""
-+PACKAGECONFIG[compositor-api] = "CONFIG+=wayland-compositor"
-+PACKAGECONFIG[xcompositor] = "CONFIG+=config_xcomposite CONFIG+=done_config_xcomposite,CONFIG+=done_config_xcomposite,libxcomposite"
-+PACKAGECONFIG[glx] = "CONFIG+=config_glx CONFIG+=done_config_glx,CONFIG+=done_config_glx,virtual/mesa"
-+PACKAGECONFIG[xkb] = "CONFIG+=config_xkbcommon CONFIG+=done_config_xkbcommon,CONFIG+=done_config_xkbcommon,libxkbcommon xproto"
-+PACKAGECONFIG[wayland-egl] = "CONFIG+=config_wayland_egl CONFIG+=done_config_wayland_egl,CONFIG+=done_config_wayland_egl,virtual/egl"
-+PACKAGECONFIG[brcm-egl] = "CONFIG+=config_brcm_egl CONFIG+=done_config_brcm_egl,CONFIG+=done_config_brcm_egl,virtual/egl"
-+PACKAGECONFIG[drm-egl] = "CONFIG+=config_drm_egl_server CONFIG+=done_config_drm_egl_server,CONFIG+=done_config_drm_egl_server,libdrm virtual/egl"
-+PACKAGECONFIG[libhybris-egl] = "CONFIG+=config_libhybris_egl_server CONFIG+=done_config_libhybris_egl_server,CONFIG+=done_config_libhybris_egl_server,libhybris"
- 
--EXTRA_QMAKEVARS_PRE += "CONFIG+=${QT_WAYLAND_CONFIG}"
--EXTRA_QMAKEVARS_PRE += "DEFINES+=${QT_WAYLAND_DEFINES}"
-+EXTRA_QMAKEVARS_PRE += "${PACKAGECONFIG_CONFARGS}"
- 
- FILES_${PN}-plugins += " \
-     ${OE_QMAKE_PATH_PLUGINS}/*/*/*${SOLIBSDEV} \
--- 
-2.9.0
-
+-michael
 
