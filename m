@@ -1,51 +1,52 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F30373174
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id CA181606BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jul 2016 12:02:59 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id x83so12607199wma.3
+	Sun, 24 Jul 2016 12:05:12 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id q128so12648402wma.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jul 2016 05:03:01 -0700 (PDT)
+	Sun, 24 Jul 2016 05:05:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=zXdgW3PhfJjsrq8+VUDR2JGUlMDyQt8xbUhRV6s+eG0=;
-	b=mqRBp9JPUItkqtqhch7OTd1HkVyu8pGlEjV2ExK3NDPCbXIVcQKKTzTxYb51mvdFKT
-	VBS1ybDMT8YAWLs3P4V9xVzM5apwccktsi43f47fszLUWVnNbpJf8DtFs8MnYPyemvUt
-	dmivP9TzwV8ijLGeio1A7qlB7kRxhAk8VjXTqk0LlJI2Xnx0a7w8q5y5YxrNHRNhiwZ+
-	9aXS0VIicFHLx7xF/q0uZVoFvL/OtaaIr90yAY4drd6+2YiF/FR5th+01i5ZNJWxUvLo
-	bOxnrIqR6vDTh50mzVCaosRwKBqN5qMYaaTZj2Lwi3s0iaSIIIUCwmq5S9twWy3LG0bc
-	xwsQ==
+	bh=nq7NnxGNFhBtHxHHN7276GiLtUejwBQZe3kDkvS1Gik=;
+	b=CAsroMKwnrsPiyRJsCMChEKbUQsa132hAzQu6QFWgLTZDJfvoHyU1CVJAUKiWrLu2V
+	5ZRFbASuSUAEfmjpoEfXjSKUQWHIvZApNL0qdUD7eqruVrYVSnUEVSZjQFgwrry3+obk
+	74uHiX/2kPXOevwvEPXr7oLkU0WLt0MPdcD1xcoL6TepjbgmC7/bArova72kdVhcOX3Z
+	N9ag82oKN6hAdCdggie+aR+xo//NfxT7QKYPz/+a9mwRfkycMTdisO6kTR1hnIEw0WU7
+	Nos0Sf/lJCIe+TFErBBrgpoz6oItFatt0GJ8OjNDgGLPjyZHEuIFHnViD0uCU15bCpkf
+	oEgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=zXdgW3PhfJjsrq8+VUDR2JGUlMDyQt8xbUhRV6s+eG0=;
-	b=N6uIEjLLqW9EoRbAspgbXo9sz4LW66HMN4J6foSu1bUKimdrikSVxkNrVc669Ga3oI
-	rGvg4L7lN5N9ErRQGWupub+SkM/EOVPEXqRfXQ8uId2Q2TrDYiGbUk1Dd77fK9PLQYWH
-	LXFpvz/R2TawFvV9PVSzN13uW2DD37slKrAKobXyV+FCij79wwqavyFGpJq151gCSvHF
-	7a8intiavS5sIj+udvbLj1iuoJs3q5yDjDD17lj2d38/EgjAw+E45UNAqbSkAgPavA+Y
-	hNkJdlhnaO1dAEUgiGiWQSNRCkwM1L5QirO9Gy4wQ5t3edouxIhEUSWPKoH+XQRIxHhQ
-	xkmg==
-X-Gm-Message-State: AEkoous9FF4hZ1hZptBk2W59uHMeGQkrYBCaxphdgpLGhq6ZpFLk+j6IsggkjYKXpOzPnA==
-X-Received: by 10.194.85.97 with SMTP id g1mr10289528wjz.72.1469361780133;
-	Sun, 24 Jul 2016 05:03:00 -0700 (PDT)
+	bh=nq7NnxGNFhBtHxHHN7276GiLtUejwBQZe3kDkvS1Gik=;
+	b=bqVkIbaHNAr9l9s6Uzv7m6jxjHK5iSzrNdtDwWW7iwx9cgZfR0kmBWc02nfPCEGWdy
+	HoU1v1H5fQuF+Cb1Qp89giladXx84G+B4x1LykarUZbFwoieOUpy3+k2I1EEmIDs9fqe
+	H47jG0T34o6GJ0uizTF4z0oqF6NeA+wCezIb26AoA1c7Npya3vpXPOAlHXNvabTvEPWk
+	PTb3+gUKUNigMHZvHK+ZwWlqES4OOajcKeUYZEuhoxHvHXLvpJHF6EiNIFpRXXp3qC9S
+	SdGN2USeaQkXdAn4CEOeYbfKpChwd2TWgDfw5K6Up20T/kZL/PYeP7orSFCbABdOAXwE
+	13Rw==
+X-Gm-Message-State: ALyK8tJx9f3d37ScRB5ynlHOg3cx1/Gl3DfXBORSerYgUMGqN/CJHVhE/G2fPqrNRcu7gw==
+X-Received: by 10.28.138.18 with SMTP id m18mr36521555wmd.63.1469361912657;
+	Sun, 24 Jul 2016 05:05:12 -0700 (PDT)
 Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
 	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	hy3sm10402327wjb.8.2016.07.24.05.02.58
-	for <openembedded-devel@lists.openembedded.org>
+	190sm14101529wmk.13.2016.07.24.05.05.11
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 24 Jul 2016 05:02:58 -0700 (PDT)
+	Sun, 24 Jul 2016 05:05:11 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sun, 24 Jul 2016 14:03:10 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160724120310.dkepnbam3767u4zu@jama>
-References: <1464383975-25421-1-git-send-email-akuster808@gmail.com>
+Date: Sun, 24 Jul 2016 14:05:23 +0200
+To: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <20160724120523.mjotstuu5gpnzkvx@jama>
+References: <1467017831-170380-1-git-send-email-hongxu.jia@windriver.com>
+	<1467101998-72781-1-git-send-email-hongxu.jia@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1464383975-25421-1-git-send-email-akuster808@gmail.com>
+In-Reply-To: <1467101998-72781-1-git-send-email-hongxu.jia@windriver.com>
 User-Agent: Mutt/1.6.2 (2016-06-11)
-Subject: Re: [meta-gnome][master][krogoth][PATCH] gnome-menus: Fix QA warnings.
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH V2] x11vnc: remove redundant RPATH to fix QA issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,146 +59,200 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jul 2016 12:03:02 -0000
-X-Groupsio-MsgNum: 62324
+X-List-Received-Date: Sun, 24 Jul 2016 12:05:13 -0000
+X-Groupsio-MsgNum: 62325
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="a3bsm7ke45gkjb2s"
+	protocol="application/pgp-signature"; boundary="emj37httg74nsbjv"
 Content-Disposition: inline
 
---a3bsm7ke45gkjb2s
+--emj37httg74nsbjv
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 27, 2016 at 02:19:35PM -0700, Armin Kuster wrote:
-> WARNING: gnome-menus-2.30.5-r1 do_configure: Missing DEPENDS on intltool-=
-native
-> WARNING: gnome-menus-2.30.5-r1 do_package_qa: QA Issue: non -staticdev pa=
-ckage contains static .a library: gnome-menus-python path 'work/i586-oe-lin=
-ux/gnome-menus/2.30.5-r1/packages-split/gnome-menus-python/usr/lib/python2.=
-7/site-packages/gmenu.a' [staticdev]
-> WARNING: gnome-menus-2.30.5-r1 do_package_qa: QA Issue: /usr/bin/gmenu-si=
-mple-editor contained in package gnome-menus requires /home/akuster/oss/mai=
-nt/mylayers/openembedded-core/build/tmp-glibc/sysroots/x86_64-linux/usr/bin=
-/python-native/python, but no providers found in RDEPENDS_gnome-menus? [fil=
-e-rdeps]
+On Tue, Jun 28, 2016 at 04:19:58AM -0400, Hongxu Jia wrote:
+> The useless rpath caused oe QA issue:
+> ...
+> |ERROR: QA Issue: x11vnc: work/i586-poky-linux/x11vnc/0.9.13-r0/packages-=
+split/
+> x11vnc/usr/bin/x11vnc contains probably-redundant RPATH /usr/lib [useless=
+-rpaths]
+> ...
 >=20
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> In oe build, it is unnecessary and redundant to pass "-R/usr/lib" to the =
+linker.
+
+Probably not caused by this change, but for some reason x11vnc now fails
+with:
+
+| NOTE: Applying patch 'starting-fix.patch' (meta-openembedded/meta-oe/reci=
+pes-graphics/x11vnc/files/starting-fix.patch)
+| NOTE: Applying patch 'endian-fix.patch' (meta-openembedded/meta-oe/recipe=
+s-graphics/x11vnc/files/endian-fix.patch)
+| NOTE: Applying patch 'remove-redundant-RPATH.patch' (meta-openembedded/me=
+ta-oe/recipes-graphics/x11vnc/files/remove-redundant-RPATH.patch)
+| DEBUG: Python function patch_do_patch finished
+| DEBUG: Python function do_patch finished
+| DEBUG: SITE files ['endian-little', 'bit-32', 'arm-common', 'arm-32', 'co=
+mmon-linux', 'common-glibc', 'arm-linux', 'arm-linux-gnueabi', 'common']
+| DEBUG: Executing shell function do_prepare_sources
+| sed: can't read acinclude.m4: No such file or directory
+| WARNING: exit code 2 from a shell command.
+| ERROR: Function failed: do_prepare_sources (log file is located at /home/=
+jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/x11vnc/0.=
+9.13-r0/temp/log.do_patch.3859)
+NOTE: recipe x11vnc-0.9.13-r0: task do_patch: Failed
+ERROR: Task /home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recip=
+es-graphics/x11vnc/x11vnc_0.9.13.bb:do_patch (/home/jenkins/oe/world/shr-co=
+re/meta-openembedded/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb:do_pa=
+tch) failed with exit code '1'
+
+
+>=20
+> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 > ---
->  .../recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb       | 15 +++++++++=
-+-----
->  1 file changed, 10 insertions(+), 5 deletions(-)
+>  .../x11vnc/files/remove-redundant-RPATH.patch      | 86 ++++++++++++++++=
+++++++
+>  meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb   |  4 +-
+>  2 files changed, 89 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-graphics/x11vnc/files/remove-redundan=
+t-RPATH.patch
 >=20
-> diff --git a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb b=
-/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb
-> index 1b84a54..1e31b56 100644
-> --- a/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb
-> +++ b/meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb
-> @@ -5,7 +5,7 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fc=
-e4486a80fdaf4a4263 \
->                      file://COPYING.LIB;md5=3D5f30f0716dfdd0d91eb439ebec5=
-22ec2"
->  PR =3D "r1"
-> =20
-> -DEPENDS =3D "python libxml2 gconf popt gtk+"
-> +DEPENDS =3D "python libxml2 gconf popt gtk+ intltool-native"
-> =20
->  inherit gnomebase pkgconfig python-dir pythonnative gobject-introspection
-> =20
-> @@ -13,10 +13,15 @@ SRC_URI[archive.md5sum] =3D "caa6772e63ed5870cf43dc3d=
-354e0624"
->  SRC_URI[archive.sha256sum] =3D "6dcc565006d6e8c2025ae83ab1f82edf6bd04d61=
-c804c0dc9bf5ea50629c4caa"
->  GNOME_COMPRESS_TYPE=3D"bz2"
-> =20
-> -PACKAGES +=3D "${PN}-python"
-> +do_configure_append () {
+> diff --git a/meta-oe/recipes-graphics/x11vnc/files/remove-redundant-RPATH=
+=2Epatch b/meta-oe/recipes-graphics/x11vnc/files/remove-redundant-RPATH.pat=
+ch
+> new file mode 100644
+> index 0000000..8e894bd
+> --- /dev/null
+> +++ b/meta-oe/recipes-graphics/x11vnc/files/remove-redundant-RPATH.patch
+> @@ -0,0 +1,86 @@
+> +From 7be055c13c7d0d640941830a3291af3b404928c1 Mon Sep 17 00:00:00 2001
+> +From: Hongxu Jia <hongxu.jia@windriver.com>
+> +Date: Mon, 27 Jun 2016 04:44:14 -0400
+> +Subject: [PATCH] configure.ac: remove redundant RPATH
 > +
-> +    # this expands to native-pthon which we don't want.
-> +    sed -i 's:\@PYTHON\@:/usr/bin/env python:' ${S}/simple-editor/gmenu-=
-simple-editor.in
+> +It caused oe QA issue:
+> +...
+> +|ERROR: QA Issue: x11vnc: work/i586-poky-linux/x11vnc/0.9.13-r0/packages=
+-split/
+> +x11vnc/usr/bin/x11vnc contains probably-redundant RPATH /usr/lib [useles=
+s-rpaths]
+> +...
 > +
-> +}
-
-Probably wasn't caused by this, but do you have some idea why it fails
-now like this:
-
-| ../arm-oe-linux-gnueabi-libtool  --tag=3DCC   --mode=3Dlink
-arm-oe-linux-gnueabi-gcc  -march=3Darmv5te -mthumb
---sysroot=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm
--Wall -Wstrict-prototypes -Wnested-externs -Werror=3Dmissing-prototypes
--Werror=3Dimplicit-function-declaration -Werror=3Dpointer-arith
--Werror=3Dinit-self -Werror=3Dformat=3D2 -Werror=3Dmissing-include-dirs
--Werror=3Dreturn-type  -O2 -pipe -g -feliminate-unused-debug-types
--fdebug-prefix-map=3D/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te=
--oe-linux-gnueabi/gnome-menus/2.30.5-r1=3D/usr/src/debug/gnome-menus/2.30.5=
--r1
--fdebug-prefix-map=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86=
-_64-linux=3D
--fdebug-prefix-map=3D/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qem=
-uarm=3D
--version-info 6:10:4 -no-undefined -export-symbols-regex gmenu_tree
--Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -o libgnome-menu.la -rpath
-/usr/lib canonicalize.lo desktop-entries.lo entry-directories.lo
-gmenu-tree.lo menu-layout.lo menu-monitor.lo menu-util.lo -lgio-2.0
--lgobject-2.0 -lglib-2.0 -L  -lpython3.5
-| ERROR: oe_runmake failed
-| arm-oe-linux-gnueabi-libtool:   error: require no space between '-L'
-and '-lpython3.5'
-| make[2]: *** [libgnome-menu.la] Error 1
-| make[2]: Leaving directory
-`/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/gn=
-ome-menus/2.30.5-r1/build/libmenu'
-| make[1]: *** [all-recursive] Error 1
-| make[1]: Leaving directory
-`/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/gn=
-ome-menus/2.30.5-r1/build'
-| make: *** [all] Error 2
-| ERROR: Function failed: do_compile (log file is located at
-/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/gno=
-me-menus/2.30.5-r1/temp/log.do_compile.31939)
-NOTE: recipe gnome-menus-2.30.5-r1: task do_compile: Failed
-NOTE: recipe libgnome-2.32.1-r2: task do_rm_work_all: Succeeded
-ERROR: Task
-/home/jenkins/oe/world/shr-core/meta-openembedded/meta-gnome/recipes-gnome/=
-gnome-menus/gnome-menus_2.30.5.bb:do_compile
-(/home/jenkins/oe/world/shr-core/meta-openembedded/meta-gnome/recipes-gnome=
-/gnome-menus/gnome-menus_2.30.5.bb:do_compile)
-failed with exit code '1'
-
-> +PACKAGES +=3D "${PN}-python ${PN}-python-staticdev"
->  FILES_${PN} +=3D "${datadir}/desktop-directories/"
-> -FILES_${PN}-python =3D "${libdir}/python*"
-> +FILES_${PN}-python-staticdev =3D "${PYTHON_SITEPACKAGES_DIR}/gmenu.a ${P=
-YTHON_SITEPACKAGES_DIR}/gmenu.la"
-> +FILES_${PN}-python =3D "${PYTHON_SITEPACKAGES_DIR}/gmenu.so ${PYTHON_SIT=
-EPACKAGES_DIR}/GMenuSimpleEditor "
->  FILES_${PN}-dbg +=3D "${PYTHON_SITEPACKAGES_DIR}/*/.debug \
->                      ${PYTHON_SITEPACKAGES_DIR}/.debug"
-> -
-> -
+> +Upstream-Status: Inappropriate [oe specific]
+> +
+> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> +---
+> + configure.ac | 21 +++++----------------
+> + 1 file changed, 5 insertions(+), 16 deletions(-)
+> +
+> +diff --git a/configure.ac b/configure.ac
+> +index 6f664d0..f986686 100644
+> +--- a/configure.ac
+> ++++ b/configure.ac
+> +@@ -330,10 +330,8 @@ if test "x$with_crypto" !=3D "xno" -a "x$with_ssl" =
+!=3D "xno"; then
+> + 		saved_LDFLAGS=3D"$LDFLAGS"
+> + 		CPPFLAGS=3D"$CPPFLAGS -I$with_ssl/include"
+> + 		LDFLAGS=3D"$LDFLAGS -L$with_ssl/lib"
+> +-		if test "x$ld_minus_R" =3D "xno"; then
+> ++		if test "x$ld_minus_R" =3D "xno" -o "x$GCC" =3D "xyes"; then
+> + 			:
+> +-		elif test "x$GCC" =3D "xyes"; then
+> +-			LDFLAGS=3D"$LDFLAGS -Xlinker -R$with_ssl/lib"
+> + 		else
+> + 			LDFLAGS=3D"$LDFLAGS -R$with_ssl/lib"
+> + 		fi
+> +@@ -447,10 +445,8 @@ if test ! -z "$with_system_libvncserver" -a "x$with=
+_system_libvncserver" !=3D "xno
+> + 	fi
+> + 	if test "x$with_system_libvncserver" !=3D "xyes"; then
+> + 		rflag=3D""
+> +-		if test "x$ld_minus_R" =3D "xno"; then
+> ++		if test "x$ld_minus_R" =3D "xno" -o "x$GCC" =3D "xyes"; then
+> + 			:
+> +-		elif test "x$GCC" =3D "xyes"; then
+> +-			rflag=3D"-Xlinker -R$with_system_libvncserver/lib"
+> + 		else
+> + 			rflag=3D"-R$with_system_libvncserver/lib"
+> + 		fi
+> +@@ -484,10 +480,8 @@ new enough.
+> + 	elif libvncserver-config --version 1>/dev/null 2>&1; then
+> + 		rflag=3D""
+> + 		rprefix=3D`libvncserver-config --prefix`
+> +-		if test "x$ld_minus_R" =3D "xno"; then
+> ++		if test "x$ld_minus_R" =3D "xno" -o "x$GCC" =3D "xyes"; then
+> + 			:
+> +-		elif test "x$GCC" =3D "xyes"; then
+> +-			rflag=3D" -Xlinker -R$rprefix/lib "
+> + 		else
+> + 			rflag=3D" -R$rprefix/lib "
+> + 		fi
+> +@@ -541,11 +535,8 @@ if test "x$with_jpeg" !=3D "xno"; then
+> + 		saved_LDFLAGS=3D"$LDFLAGS"
+> + 		CPPFLAGS=3D"$CPPFLAGS -I$with_jpeg/include"
+> + 		LDFLAGS=3D"$LDFLAGS -L$with_jpeg/lib"
+> +-		if test "x$ld_minus_R" =3D "xno"; then
+> ++		if test "x$ld_minus_R" =3D "xno" -o "x$GCC" =3D "xyes"; then
+> + 			:
+> +-		elif test "x$GCC" =3D "xyes"; then
+> +-			# this is not complete... in general a rat's nest.
+> +-			LDFLAGS=3D"$LDFLAGS -Xlinker -R$with_jpeg/lib"
+> + 		else
+> + 			LDFLAGS=3D"$LDFLAGS -R$with_jpeg/lib"
+> + 		fi
+> +@@ -590,10 +581,8 @@ if test "x$with_zlib" !=3D "xno" -a "x$with_libz" !=
+=3D "xno"; then
+> + 		saved_LDFLAGS=3D"$LDFLAGS"
+> + 		CPPFLAGS=3D"$CPPFLAGS -I$with_zlib/include"
+> + 		LDFLAGS=3D"$LDFLAGS -L$with_zlib/lib"
+> +-		if test "x$ld_minus_R" =3D "xno"; then
+> ++		if test "x$ld_minus_R" =3D "xno" -o "x$GCC" =3D "xyes"; then
+> + 			:
+> +-		elif test "x$GCC" =3D "xyes"; then
+> +-			LDFLAGS=3D"$LDFLAGS -Xlinker -R$with_zlib/lib"
+> + 		else
+> + 			LDFLAGS=3D"$LDFLAGS -R$with_zlib/lib"
+> + 		fi
+> +--=20
+> +2.8.1
+> +
+> diff --git a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb b/meta-oe/r=
+ecipes-graphics/x11vnc/x11vnc_0.9.13.bb
+> index 64c8a5d..98a0734 100644
+> --- a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
+> +++ b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.13.bb
+> @@ -9,7 +9,9 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D361b6b837cad26=
+c6900a926b62aada5f \
+> =20
+>  SRC_URI =3D "${SOURCEFORGE_MIRROR}/libvncserver/x11vnc/${PV}/x11vnc-${PV=
+}.tar.gz\
+>             file://starting-fix.patch \
+> -           file://endian-fix.patch "
+> +           file://endian-fix.patch \
+> +           file://remove-redundant-RPATH.patch \
+> +"
+> =20
+>  SRC_URI[md5sum] =3D "a372ec4fe8211221547b1c108cf56e4c"
+>  SRC_URI[sha256sum] =3D "f6829f2e629667a5284de62b080b13126a0736499fe47cdb=
+447aedb07a59f13b"
 > --=20
-> 2.3.5
+> 2.8.1
 >=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---a3bsm7ke45gkjb2s
+--emj37httg74nsbjv
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAleUrn4ACgkQN1Ujt2V2gByrNwCglFKBfX7X6DWHf0uLbnJVWuox
-dUIAn1x6q8xboI52Mc5NTQycuHl1iGmv
-=vkZW
+iEYEARECAAYFAleUrvkACgkQN1Ujt2V2gBy2dACfUwpBvdgGOHy3R057svwmy0/o
+YdEAn0u3qabUfSxsEKWdEihm49lcdF+p
+=W4e/
 -----END PGP SIGNATURE-----
 
---a3bsm7ke45gkjb2s--
+--emj37httg74nsbjv--
