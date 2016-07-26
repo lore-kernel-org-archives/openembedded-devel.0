@@ -1,41 +1,30 @@
-Return-Path: <sven.ebenfeld@vaillant-group.com>
-Received: from mailgw01.hp-net.de (mailgw01.hp-net.de [213.15.0.25])
-	by mail.openembedded.org (Postfix) with ESMTP id 41FAB6FFAB
+Return-Path: <daicy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 6880260721
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jul 2016 06:17:07 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailgw01.hp-net.de (Postfix) with ESMTP id 54A552290C4
+	Tue, 26 Jul 2016 02:12:39 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; 
+   d="scan'208";a="9085029"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 26 Jul 2016 10:12:35 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 651EB42984C3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jul 2016 08:17:07 +0200 (CEST)
-X-Virus-Scanned: Virusscanner at mailgw01
-Received: from mailgw01.hp-net.de ([127.0.0.1])
-	by localhost (mailgw01.hp-net.de [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id phzwqbkFXmvG
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jul 2016 08:17:07 +0200 (CEST)
-Received: from jv-de-dc-fideas01.vaillant.vhgroup.lan
-	(jv-de-dc-fideas01.vaillant.vhgroup.lan [10.107.7.215])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mailgw01.hp-net.de (Postfix) with ESMTPS id 42DFE22908B
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jul 2016 08:17:07 +0200 (CEST)
-Received: from vadeff07.vaillant.vhgroup.lan (unknown [10.107.77.149])
-	by jv-de-dc-fideas01.vaillant.vhgroup.lan (Postfix) with ESMTPS
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jul 2016 08:17:06 +0200 (CEST)
-Received: from ubuntu.vaillant.vhgroup.lan (10.107.185.224) by
-	vadeff07.vaillant.vhgroup.lan (10.107.77.149) with Microsoft SMTP
-	Server id 14.3.301.0; Mon, 25 Jul 2016 08:17:06 +0200
-From: Sven Ebenfeld <sven.ebenfeld@vaillant-group.com>
+	Tue, 26 Jul 2016 10:12:33 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.25) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.279.2; Tue, 26 Jul 2016 10:12:32 +0800
+From: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 25 Jul 2016 08:16:57 +0200
-Message-ID: <1469427417-45044-1-git-send-email-sven.ebenfeld@vaillant-group.com>
-X-Mailer: git-send-email 1.9.1
+Message-ID: <1461031604-39175-1-git-send-email-daicy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
-X-OLX-Disclaimer: Done
-Cc: Sven Ebenfeld <sven.ebenfeld@vaillant-group.com>
-Subject: [meta-java][PATCH v3] openjdk-8: ignore wrong GCCVERSION-flag
+X-Originating-IP: [10.167.226.25]
+X-yoursite-MailScanner-ID: 651EB42984C3.AE9C5
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: daicy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] libnih: Modify PR to avoid build errors.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,36 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jul 2016 06:17:10 -0000
+Date: Tue, 26 Jul 2016 02:12:42 -0000
+X-Original-Date: Tue, 19 Apr 2016 05:06:44 +0300
+X-List-Received-Date: Tue, 26 Jul 2016 02:12:42 -0000
 Content-Type: text/plain
 
-During my recipe parsing, GCCVERSION in the cross case seems to
-be 'l' this leads to a ValueError during recipe parsing. Therefore
-check type before trying to parse the version flag.
+invalid tag value("^[A-Za-z0-9+._]+$") Release: Release: r2-4ubuntu16
+  meta-webos don't have people maintain for two years 
 
-Signed-off-by: Sven Ebenfeld <sven.ebenfeld@vaillant-group.com>
+Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
 ---
- recipes-core/openjdk/openjdk-8-common.inc | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ recipes-upstreamable/libnih/libnih_1.0.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
-index 7ad802a..c2f9eb4 100644
---- a/recipes-core/openjdk/openjdk-8-common.inc
-+++ b/recipes-core/openjdk/openjdk-8-common.inc
-@@ -271,8 +271,10 @@ def version_specific_cflags(d):
-         # doesn't work anyway.
-         version = d.getVar('GCCVERSION', expand=True)[0]
+diff --git a/recipes-upstreamable/libnih/libnih_1.0.3.bb b/recipes-upstreamable/libnih/libnih_1.0.3.bb
+index 5f70ef3..b5e5e12 100644
+--- a/recipes-upstreamable/libnih/libnih_1.0.3.bb
++++ b/recipes-upstreamable/libnih/libnih_1.0.3.bb
+@@ -22,7 +22,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ DEPENDS = "dbus libnih-native"
+ DEPENDS_class-native = "dbus-native"
  
--    extraflags = d.getVar('FLAGS_GCC%d' % int(version), True) or ''
--    return extraflags
-+    if version.isdigit():
-+        extraflags = d.getVar('FLAGS_GCC%d' % int(version), True) or ''
-+        return extraflags
-+    return ''
+-PR = "r2-4ubuntu16"
++PR = "r0"
  
- CFLAGS_append = " ${@version_specific_cflags(d)}"
- CXXFLAGS_append = " ${@version_specific_cflags(d)}"
+ SRC_URI = "https://launchpad.net/${BPN}/1.0/${PV}/+download/${BP}.tar.gz;name=tarball"
+ SRC_URI += "file://libnih_1.0.3-4ubuntu16.patch;name=patch"
 -- 
-1.9.1
+1.8.4.2
+
+
 
 
