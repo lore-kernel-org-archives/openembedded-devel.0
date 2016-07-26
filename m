@@ -1,24 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B9295606BF
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4DAF8606BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jul 2016 09:18:10 +0000 (UTC)
+	Tue, 26 Jul 2016 09:18:11 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u6Q9IAad026797
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u6Q9ICvG000436
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jul 2016 02:18:10 -0700
+	Tue, 26 Jul 2016 02:18:12 -0700 (PDT)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Tue, 26 Jul 2016 02:18:09 -0700
+	Tue, 26 Jul 2016 02:18:11 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 26 Jul 2016 05:18:06 -0400
-Message-ID: <cover.1469524511.git.jackie.huang@windriver.com>
+Date: Tue, 26 Jul 2016 05:18:07 -0400
+Message-ID: <c5db424fbf578e677fb4b731f96aa48ee97ff4d8.1469524511.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.8.1
+In-Reply-To: <cover.1469524511.git.jackie.huang@windriver.com>
+References: <cover.1469524511.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 0/2] unixodbc and psqlodbc: Add new recipes
+Subject: [meta-oe][PATCH 1/2] unixodbc: Add the new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,42 +33,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jul 2016 09:18:11 -0000
+X-List-Received-Date: Tue, 26 Jul 2016 09:18:12 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-The following changes since commit 5c69367d848271cdf3a3bd1a087665f324d3fd34:
+unixODBC is an Open Source ODBC sub-system and an
+ODBC SDK for Linux, Mac OSX, and UNIX.
 
-  python-flask-bootstrap: update to version 3.3.6.0 and fix RDEPENDS (2016-07-22 21:45:42 +0200)
-
-are available in the git repository at:
-
-  git://git.pokylinux.org/poky-contrib.git jhuang0/r_add_odbc_160718_0
-  http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/r_add_odbc_160718_0
-
-Jackie Huang (2):
-  unixodbc: Add the new recipe
-  psqlodbc: Add the new recipe
-
- .../psqlodbc-donot-use-the-hardcode-libdir.patch   |  26 ++++
- .../files/psqlodbc-fix-for-ptest-support.patch     | 148 +++++++++++++++++++++
- ...bc-remove-some-checks-for-cross-compiling.patch | 118 ++++++++++++++++
- meta-oe/recipes-support/psqlodbc/files/run-ptest   |  46 +++++++
- meta-oe/recipes-support/psqlodbc/psqlodbc.inc      |  50 +++++++
- .../psqlodbc/psqlodbc_09.05.0300.bb                |  14 ++
- .../do-not-use-libltdl-source-directory.patch      |  43 ++++++
- meta-oe/recipes-support/unixodbc/unixodbc_2.3.4.bb |  27 ++++
- 8 files changed, 472 insertions(+)
- create mode 100644 meta-oe/recipes-support/psqlodbc/files/psqlodbc-donot-use-the-hardcode-libdir.patch
- create mode 100644 meta-oe/recipes-support/psqlodbc/files/psqlodbc-fix-for-ptest-support.patch
- create mode 100644 meta-oe/recipes-support/psqlodbc/files/psqlodbc-remove-some-checks-for-cross-compiling.patch
- create mode 100644 meta-oe/recipes-support/psqlodbc/files/run-ptest
- create mode 100644 meta-oe/recipes-support/psqlodbc/psqlodbc.inc
- create mode 100644 meta-oe/recipes-support/psqlodbc/psqlodbc_09.05.0300.bb
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ .../do-not-use-libltdl-source-directory.patch      | 43 ++++++++++++++++++++++
+ meta-oe/recipes-support/unixodbc/unixodbc_2.3.4.bb | 27 ++++++++++++++
+ 2 files changed, 70 insertions(+)
  create mode 100644 meta-oe/recipes-support/unixodbc/files/do-not-use-libltdl-source-directory.patch
  create mode 100644 meta-oe/recipes-support/unixodbc/unixodbc_2.3.4.bb
 
+diff --git a/meta-oe/recipes-support/unixodbc/files/do-not-use-libltdl-source-directory.patch b/meta-oe/recipes-support/unixodbc/files/do-not-use-libltdl-source-directory.patch
+new file mode 100644
+index 0000000..69d26ad
+--- /dev/null
++++ b/meta-oe/recipes-support/unixodbc/files/do-not-use-libltdl-source-directory.patch
+@@ -0,0 +1,43 @@
++Subject: [PATCH] do not use libltdl source directory
++
++Don't use the included libltdl, use the one provided
++by our libtool instead.
++
++Upstream-Status: Inappropriate [configuration]
++
++Signed-off-by: Song.Li <Song.Li@windriver.com>
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++---
++ Makefile.am  | 1 -
++ configure.ac | 2 --
++ 2 files changed, 3 deletions(-)
++
++diff --git a/Makefile.am b/Makefile.am
++index e881cca..1321802 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -5,7 +5,6 @@ SUBDIRS = \
++ 	log \
++ 	lst \
++ 	ini \
++-    libltdl \
++ 	odbcinst \
++ 	DriverManager \
++ 	exe \
++diff --git a/configure.ac b/configure.ac
++index 218502f..d50b7af 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -136,9 +136,7 @@ dnl AC_CONFIG_MACRO_DIR([libltdl/m4])
++ dnl LT_CONFIG_LTDL_DIR([libltdl])
++ dnl LTDL_INIT
++ 
++-LT_CONFIG_LTDL_DIR([libltdl])
++ LT_INIT([dlopen])
++-LTDL_INIT([convenience])
++ 
++ dnl Substitute INCLTDL and LIBLTDL in the Makefiles
++ AC_SUBST(LTDLINCL)
++-- 
++2.8.1
++
+diff --git a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.4.bb b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.4.bb
+new file mode 100644
+index 0000000..23d6d04
+--- /dev/null
++++ b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.4.bb
+@@ -0,0 +1,27 @@
++SUMMARY = "An Open Source ODBC sub-system"
++DESCRIPTION = "unixODBC is an Open Source ODBC sub-system and an ODBC SDK \
++for Linux, Mac OSX, and UNIX."
++
++HOMEPAGE = "http://www.unixodbc.org/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d7b37bf80a3df5a65b355433ae36d206"
++
++DEPENDS = "libtool mysql5"
++
++SRC_URI = "ftp://ftp.unixodbc.org/pub/unixODBC/unixODBC-${PV}.tar.gz \
++           file://do-not-use-libltdl-source-directory.patch \
++"
++SRC_URI[md5sum] = "bd25d261ca1808c947cb687e2034be81"
++SRC_URI[sha256sum] = "2e1509a96bb18d248bf08ead0d74804957304ff7c6f8b2e5965309c632421e39"
++
++inherit autotools-brokensep
++
++S = "${WORKDIR}/unixODBC-${PV}"
++
++EXTRA_OEMAKE += "LIBS=-lltdl"
++
++do_configure_prepend() {
++	# old m4 files will cause libtool version don't match
++	rm -rf m4/*
++	rm -fr libltdl
++}
 -- 
 2.8.1
 
