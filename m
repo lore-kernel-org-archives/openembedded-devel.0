@@ -1,42 +1,43 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id B1244606BF
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
+	[209.85.223.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 52626606BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jul 2016 12:35:00 +0000 (UTC)
-Received: by mail-wm0-f45.google.com with SMTP id f65so172178172wmi.0
+	Tue, 26 Jul 2016 13:31:21 +0000 (UTC)
+Received: by mail-io0-f178.google.com with SMTP id 38so20089704iol.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jul 2016 05:35:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=9D8GPk7rQ0mWrpGbVre2iQhWBrMWT0ati5/0zMHGPSI=;
-	b=N5qUXvnBMqWc/W94CNRpoZqor8ZE/wFJSU26VDbMrBP3reJvPQSNr8dlZqlcBm+MLz
-	acDISGa92BTEW8lJqCAtJ6HYiuXAV9x59kK6DoDTF04MniRGghTZBvw6xueOJMyUiJO4
-	406cj3HFtUFhgMgIfL6gyQisnpY9iUYZct+M4=
+	Tue, 26 Jul 2016 06:31:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=wcsDBoETOZcDb1T3QX0G1iak98lSGXETssHhWvWCoGc=;
+	b=hxPNPIqWIQTWUduCQx8d96noNM3lpkJ8VUIyekIsEUoDp8Aaz3qvSaG4LPmp7+cj1q
+	SxyLU8jhsTZUoee9NC3NJtKhf1fpPxUPoiMA5zoa8LLBt/wqOwrFlHBwekAsFIZK1x3c
+	jvZOm8OpBQt/JMWs1PtDn1KwQkzUAEkbo+XW1wEpd1tzMwibVBbx9SfEanBt3waovUEm
+	69G1C8v6W9tv5cCY1GzlgD/mBjmgARWO1ReoL33juoKyLCfqLUOqa7m7MF1g+QuncjO+
+	qLXdXcbf+X3axtMCTky+TgzYDJix57u0JRFdu1QS5sz17gAnohyQ5KRlIACnBr4bwx3A
+	dhXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=9D8GPk7rQ0mWrpGbVre2iQhWBrMWT0ati5/0zMHGPSI=;
-	b=SzHZW7JxFFUNQx6aPuQRSJOf33tT6YI8s+Z5eZrqlofZYtjY0rul93fqnvbx4WYQrW
-	q3WW3I8x8rAfsCQfVgpz9p5mn096XabsLGcVXp1uVdeGPI7w3RHLzGsfM6QmnOshvbY5
-	ADapPt/iCxVXBZjj/3/9o98fGU5YB28+5/PMY8x4C+x3Szp/xGV3q14ZZCalKm5EaCGY
-	LnVG0hUawWD2Q/QFZw573dsvPJsptGsR+mEtDwT+xyhj8saVybFP7mN2qX+xuEsz/d6Q
-	RRXpTpjsixXeF1Yquz2VKP3n85Du2c2wp+6CSbL5p3DcerI0W9cVk81NS5UevqT7crXZ
-	domg==
-X-Gm-Message-State: AEkoouvRl1pMf/VUcTTvzedDoJODjRJwQMtFprDRHJqXQrB5hCJbI7maR0NnZW3UCHICGmjL
-X-Received: by 10.28.221.8 with SMTP id u8mr24760654wmg.61.1469536500249;
-	Tue, 26 Jul 2016 05:35:00 -0700 (PDT)
-Received: from hackbox.linaro.org ([81.128.185.36])
-	by smtp.gmail.com with ESMTPSA id
-	q139sm32729272wmb.18.2016.07.26.05.34.59
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 26 Jul 2016 05:34:59 -0700 (PDT)
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 Jul 2016 13:34:56 +0100
-Message-Id: <1469536496-8976-1-git-send-email-nicolas.dechesne@linaro.org>
-X-Mailer: git-send-email 2.7.0
-Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Subject: [meta-oe][PATCH v2] sysbench: add new recipe
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=wcsDBoETOZcDb1T3QX0G1iak98lSGXETssHhWvWCoGc=;
+	b=TcOfeG6Qv8rCRpawa0e9nDeMSfyhVtTAd0ohcjmTnsPX2lEvw+ZF11GjtlJQpxasF6
+	L5RrrWiCgQgywNsC/AkS65Vj18tp+H3AZVYRmgz8mBs/tGPQWODCzc9XnF4M3QWGvblf
+	yJCRGyBIIg1+Zywqk8fNM3pTv8th6jgTRLxBV7xEGaduO8P6z8bVAkhEl0suZ7rVwWwG
+	XDW+0Fy88YKLFIXejSoQUyNSnlN8ebSoigGraqg3gnbsKOeYAdzOni0ZLkeMFlE4YY+x
+	A/z6gCMyxgKTmCyKPZ2y3QwOxLZSACuToj1br7yLCI/p8wJRuhMxe9d00kaeRHW3wS0k
+	7DSw==
+X-Gm-Message-State: AEkooutkG80rQNJ68JnD13lUzlP5te6JOUwt8sAMZAIxrPKkxT4uZEaVilYahonuluMptx2M8wCnMWuXOcn+9SXM
+X-Received: by 10.107.154.196 with SMTP id c187mr24991368ioe.99.1469539882139; 
+	Tue, 26 Jul 2016 06:31:22 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.107.18.17 with HTTP; Tue, 26 Jul 2016 06:31:02 -0700 (PDT)
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 26 Jul 2016 14:31:02 +0100
+Message-ID: <CAJTo0LYsTtk9eFD=kdhdrtFUCPr-eOn5dnPxDR+hM9LRbL40ug@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Meson build system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,60 +50,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jul 2016 12:35:02 -0000
+X-List-Received-Date: Tue, 26 Jul 2016 13:31:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The project used to be hosted on Sourceforge, then Launchpad, and it moved to
-Github. The last stable release (0.4.12) cannot be found on Sourceforge anymore,
-and is not available (as tarball) on github. So using the tarball from Launchpad
-instead. We can move to github when the next release happens (which will be the
-first one from github).
+Hi,
 
-Tested with and without mysql, with and without aio.
+FWIW I started looking at packaging and writing a class for the Meson build
+system (mesonbuild.com) last night.  It's not finished and needs quite a
+lot of work, but if anyone has a need for Meson or just fancies finishing
+it off as a project then I can share the recipes and braindump what's left
+to do.
 
-Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
----
-
-Changes in v2:
-* fixed "QA Issue: sysbench rdepends on libaio, but it isn't a build dependency"
-* added aio PACKAGECONFIG, and keep it disable by default
-
- .../recipes-benchmark/sysbench/sysbench_0.4.12.bb  | 26 ++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/sysbench/sysbench_0.4.12.bb
-
-diff --git a/meta-oe/recipes-benchmark/sysbench/sysbench_0.4.12.bb b/meta-oe/recipes-benchmark/sysbench/sysbench_0.4.12.bb
-new file mode 100644
-index 0000000..3c69548
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/sysbench/sysbench_0.4.12.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "System performance benchmark"
-+HOMEPAGE = "http://github.com/akopytov/sysbench"
-+SECTION = "console/tests"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+
-+inherit autotools
-+
-+# The project has moved from Sourceforge to Launchpad, to Github. Use the source tarball from 
-+# Launchpad until the next release is available from Github.
-+SRC_URI = "https://launchpad.net/ubuntu/+archive/primary/+files/${BPN}_${PV}.orig.tar.gz"
-+
-+SRC_URI[md5sum] = "3a6d54fdd3fe002328e4458206392b9d"
-+SRC_URI[sha256sum] = "83fa7464193e012c91254e595a89894d8e35b4a38324b52a5974777e3823ea9e"
-+
-+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', 'largefile', '', d)}"
-+PACKAGECONFIG[largefile] = "--enable-largefile,--disable-largefile,,"
-+PACKAGECONFIG[aio] = "--enable-aio,--disable-aio,libaio,"
-+PACKAGECONFIG[mysql] = "--with-mysql \
-+                        --with-mysql-includes=${STAGING_INCDIR}/mysql \
-+                        --with-mysql-libs=${STAGING_LIBDIR}, \
-+                        --without-mysql,mysql5"
-+
-+do_configure_prepend() {
-+    touch ${S}/NEWS ${S}/AUTHORS 
-+}
--- 
-2.7.0
-
+Ross
 
