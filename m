@@ -1,52 +1,42 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 11AA3731F9
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A6E4606BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jul 2016 10:52:20 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id o80so1055368wme.0
+	Tue, 26 Jul 2016 12:04:35 +0000 (UTC)
+Received: by mail-wm0-f54.google.com with SMTP id o80so13372120wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jul 2016 03:52:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=fAhfg7B5iktrbhxr6hmvRPxgBgayuv+cki7oCwdukpY=;
-	b=uOCGRf9Eks1P18UMsO4GOyYB8WZGNhUAeGFBh1gWkF7xNo7o7fWxRqKVF97ae7YyQx
-	9b1gc0PgVutyNdYnTc/hGu00j8Ts0lo7mWc2NBn3q/l+K7L/Vv6U+PIgpwU963PhnhSQ
-	d7syu1Rveh45ZM7rMokOohhIGYVJaF7x9ugK6i7V86dqtdm5EM0CrM5I6bv2gJRPR9Oi
-	/ZRx4zvdKMoAWVnWASVoiaZst/2sDT5hiinQbt/8VOQYJpkezL7ciMsZHqXVTnbD3c/f
-	xLsOlebgWc6IOr0tGGSTkhF127CdUd7wJ4F2z8NcZMKZ6GijbK6IMQoAeRyLgHkuzDRz
-	1oBQ==
+	Tue, 26 Jul 2016 05:04:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=lStuSsWVpf70NpT2wkLZJQYG/qNX205Mccy660jzIWI=;
+	b=gXYZE8h4E1kD0EtVHw0YqNf73i1Tsu/+Msny7BFDCyXIhTJZV8gfthV66tdEclitJ5
+	zTMRwBJz1ajw9pZbtt78TRNxcur45O8HwwS96Vxhn4dPK7rn6RsL0iV45hAZol+zjt58
+	4wvLEk9p/2XqEJP5Vw6jWL7xyKhYHvH3qByEQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=fAhfg7B5iktrbhxr6hmvRPxgBgayuv+cki7oCwdukpY=;
-	b=MeJdi51yolQzw8WMzLTSxX/4Z52lL/nn/ymY/7RA21YcLL1lJXA7B5noq/FCrDOGNF
-	yYjqBau7EDnm8M0zwlcU4iQ0o+CoYyiLrDGZ1U6uK6sTQKRtZaFqkqCjiKoSCmCjVT1I
-	hnlS69eR505SjRFgAQZhXaHzQinz9FPChvSnlpYNizqKxNuVhJERnlmMtUTr5kamlDkI
-	/lpG8lfGwxG7RFF5BcHAvJskWpBpwhGNxjXUMEgMcolcLeYpKSJFRj+m13vEn/eCLsTr
-	howzkri/enlwiTpQg5k4KNbTZx5YkrhaRq45x5pMSBCGgQJhB8+g0iWoiZJq7BYN0w/9
-	YpLA==
-X-Gm-Message-State: AEkooutQhfEQTFFmgZRUtPozV5ZTL34qXW5KodK1FKINWZvRCJTz3T05mw/P4s1+RmvY6A==
-X-Received: by 10.195.18.129 with SMTP id gm1mr19979207wjd.148.1469530340672; 
-	Tue, 26 Jul 2016 03:52:20 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169])
-	by smtp.gmail.com with ESMTPSA id f10sm305051wje.14.2016.07.26.03.52.19
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 26 Jul 2016 03:52:19 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 26 Jul 2016 12:52:21 +0200
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=lStuSsWVpf70NpT2wkLZJQYG/qNX205Mccy660jzIWI=;
+	b=C/CKKCVutUugHgbkghO2TUC7VIqqCwyW98MEDUj+gYxmJmKd1kOmumB1vFkur2j8Sf
+	6L3253+oH/49TVPMIPFAdTqIYPgKcVUfV+his6fOMLEuqgRdNB5nSTh0DnlF+mEaJKlL
+	fKKit3wRbpnC408Nz8gREpTN+ltfnfmlVvBlu4eFE5MpwaQi91gu276S3uUO2KHN6l5X
+	2fsceDPyIlDgCE3i9yogtztMmP7JK9EcsyccjDnZsXDofLCUPr0NxBk3u4oN7QTRLsPJ
+	jVNqw8KY9o36eSfSCLh3xtir7IalKzIR/ZSnuNSdxwWxanbTEeh7+U4rp4TKDoBfN5tP
+	RVjw==
+X-Gm-Message-State: AEkooutuit753NiwEEM0Jpq0hkvVGg5jK54hfPDqfFIfFlzF8yu4qYovDi10r1MMXmtTIbpd
+X-Received: by 10.28.198.6 with SMTP id w6mr9480254wmf.63.1469534676238;
+	Tue, 26 Jul 2016 05:04:36 -0700 (PDT)
+Received: from hackbox.linaro.org ([81.128.185.36])
+	by smtp.gmail.com with ESMTPSA id
+	q23sm1356256wme.17.2016.07.26.05.04.35
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 26 Jul 2016 05:04:35 -0700 (PDT)
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160726105221.h2moj7mrfihp5v74@jama>
-References: <cover.1469524511.git.jackie.huang@windriver.com>
-	<c5db424fbf578e677fb4b731f96aa48ee97ff4d8.1469524511.git.jackie.huang@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <c5db424fbf578e677fb4b731f96aa48ee97ff4d8.1469524511.git.jackie.huang@windriver.com>
-User-Agent: Mutt/1.6.2 (2016-06-11)
-Subject: Re: [meta-oe][PATCH 1/2] unixodbc: Add the new recipe
+Date: Tue, 26 Jul 2016 13:04:04 +0100
+Message-Id: <1469534644-19083-1-git-send-email-nicolas.dechesne@linaro.org>
+X-Mailer: git-send-email 2.7.0
+Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Subject: [meta-oe][PATCH] sysbench: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,148 +49,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jul 2016 10:52:21 -0000
-X-Groupsio-MsgNum: 62339
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="hqyoiyczqxhuz4jl"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 26 Jul 2016 12:04:36 -0000
 
---hqyoiyczqxhuz4jl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The project used to be hosted on Sourceforge, then Launchpad, and it moved to
+Github. The last stable release (0.4.12) cannot be found on Sourceforge anymore,
+and is not available (as tarball) on github. So using the tarball from Launchpad
+instead. We can move to github when the next release happens (which will be the
+first one from github).
 
-On Tue, Jul 26, 2016 at 05:18:07AM -0400, jackie.huang@windriver.com wrote:
-> From: Jackie Huang <jackie.huang@windriver.com>
->=20
-> unixODBC is an Open Source ODBC sub-system and an
-> ODBC SDK for Linux, Mac OSX, and UNIX.
->=20
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
->  .../do-not-use-libltdl-source-directory.patch      | 43 ++++++++++++++++=
-++++++
->  meta-oe/recipes-support/unixodbc/unixodbc_2.3.4.bb | 27 ++++++++++++++
->  2 files changed, 70 insertions(+)
->  create mode 100644 meta-oe/recipes-support/unixodbc/files/do-not-use-lib=
-ltdl-source-directory.patch
->  create mode 100644 meta-oe/recipes-support/unixodbc/unixodbc_2.3.4.bb
->=20
-> diff --git a/meta-oe/recipes-support/unixodbc/files/do-not-use-libltdl-so=
-urce-directory.patch b/meta-oe/recipes-support/unixodbc/files/do-not-use-li=
-bltdl-source-directory.patch
-> new file mode 100644
-> index 0000000..69d26ad
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/unixodbc/files/do-not-use-libltdl-source-di=
-rectory.patch
-> @@ -0,0 +1,43 @@
-> +Subject: [PATCH] do not use libltdl source directory
-> +
-> +Don't use the included libltdl, use the one provided
-> +by our libtool instead.
-> +
-> +Upstream-Status: Inappropriate [configuration]
-> +
-> +Signed-off-by: Song.Li <Song.Li@windriver.com>
-> +Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> +---
-> + Makefile.am  | 1 -
-> + configure.ac | 2 --
-> + 2 files changed, 3 deletions(-)
-> +
-> +diff --git a/Makefile.am b/Makefile.am
-> +index e881cca..1321802 100644
-> +--- a/Makefile.am
-> ++++ b/Makefile.am
-> +@@ -5,7 +5,6 @@ SUBDIRS =3D \
-> + 	log \
-> + 	lst \
-> + 	ini \
-> +-    libltdl \
-> + 	odbcinst \
-> + 	DriverManager \
-> + 	exe \
-> +diff --git a/configure.ac b/configure.ac
-> +index 218502f..d50b7af 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -136,9 +136,7 @@ dnl AC_CONFIG_MACRO_DIR([libltdl/m4])
-> + dnl LT_CONFIG_LTDL_DIR([libltdl])
-> + dnl LTDL_INIT
-> +=20
-> +-LT_CONFIG_LTDL_DIR([libltdl])
-> + LT_INIT([dlopen])
-> +-LTDL_INIT([convenience])
-> +=20
-> + dnl Substitute INCLTDL and LIBLTDL in the Makefiles
-> + AC_SUBST(LTDLINCL)
-> +--=20
-> +2.8.1
-> +
-> diff --git a/meta-oe/recipes-support/unixodbc/unixodbc_2.3.4.bb b/meta-oe=
-/recipes-support/unixodbc/unixodbc_2.3.4.bb
-> new file mode 100644
-> index 0000000..23d6d04
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/unixodbc/unixodbc_2.3.4.bb
-> @@ -0,0 +1,27 @@
-> +SUMMARY =3D "An Open Source ODBC sub-system"
-> +DESCRIPTION =3D "unixODBC is an Open Source ODBC sub-system and an ODBC =
-SDK \
-> +for Linux, Mac OSX, and UNIX."
-> +
-> +HOMEPAGE =3D "http://www.unixodbc.org/"
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd7b37bf80a3df5a65b355433ae36d=
-206"
-> +
-> +DEPENDS =3D "libtool mysql5"
-> +
-> +SRC_URI =3D "ftp://ftp.unixodbc.org/pub/unixODBC/unixODBC-${PV}.tar.gz \
-> +           file://do-not-use-libltdl-source-directory.patch \
-> +"
-> +SRC_URI[md5sum] =3D "bd25d261ca1808c947cb687e2034be81"
-> +SRC_URI[sha256sum] =3D "2e1509a96bb18d248bf08ead0d74804957304ff7c6f8b2e5=
-965309c632421e39"
-> +
-> +inherit autotools-brokensep
-> +
-> +S =3D "${WORKDIR}/unixODBC-${PV}"
-> +
-> +EXTRA_OEMAKE +=3D "LIBS=3D-lltdl"
-> +
-> +do_configure_prepend() {
-> +	# old m4 files will cause libtool version don't match
-> +	rm -rf m4/*
-> +	rm -fr libltdl
+Tested with and without mysql.
 
-Don't use tabs in meta-oe layers. I'll fix it this time, but next time
-just reject it.
+Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+---
+ .../recipes-benchmark/sysbench/sysbench_0.4.12.bb  | 25 ++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/sysbench/sysbench_0.4.12.bb
 
-> +}
-> --=20
-> 2.8.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-benchmark/sysbench/sysbench_0.4.12.bb b/meta-oe/recipes-benchmark/sysbench/sysbench_0.4.12.bb
+new file mode 100644
+index 0000000..5873470
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/sysbench/sysbench_0.4.12.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "System performance benchmark"
++HOMEPAGE = "http://github.com/akopytov/sysbench"
++SECTION = "console/tests"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++
++inherit autotools
++
++# The project has moved from Sourceforge to Launchpad, to Github. Use the source tarball from 
++# Launchpad until the next release is available from Github.
++SRC_URI = "https://launchpad.net/ubuntu/+archive/primary/+files/${BPN}_${PV}.orig.tar.gz"
++
++SRC_URI[md5sum] = "3a6d54fdd3fe002328e4458206392b9d"
++SRC_URI[sha256sum] = "83fa7464193e012c91254e595a89894d8e35b4a38324b52a5974777e3823ea9e"
++
++PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', 'largefile', '', d)}"
++PACKAGECONFIG[largefile] = "--enable-largefile,--disable-largefile,,"
++PACKAGECONFIG[mysql] = "--with-mysql \
++                        --with-mysql-includes=${STAGING_INCDIR}/mysql \
++                        --with-mysql-libs=${STAGING_LIBDIR}, \
++                        --without-mysql,mysql5"
++
++do_configure_prepend() {
++    touch ${S}/NEWS ${S}/AUTHORS 
++}
+-- 
+2.7.0
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---hqyoiyczqxhuz4jl
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAleXQOQACgkQN1Ujt2V2gBwC6wCgpvBjgCjitmr6NptDAhKOX0Cl
-+bMAn0/YQNK3LmFF/D6svyS7poodKdHC
-=/bxk
------END PGP SIGNATURE-----
-
---hqyoiyczqxhuz4jl--
