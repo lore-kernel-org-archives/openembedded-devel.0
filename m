@@ -1,43 +1,50 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
-	[209.85.223.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 52626606BF
+Return-Path: <peteasa@gmail.com>
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D5A4606BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jul 2016 13:31:21 +0000 (UTC)
-Received: by mail-io0-f178.google.com with SMTP id 38so20089704iol.0
+	Tue, 26 Jul 2016 19:40:57 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id o80so31476754wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jul 2016 06:31:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=wcsDBoETOZcDb1T3QX0G1iak98lSGXETssHhWvWCoGc=;
-	b=hxPNPIqWIQTWUduCQx8d96noNM3lpkJ8VUIyekIsEUoDp8Aaz3qvSaG4LPmp7+cj1q
-	SxyLU8jhsTZUoee9NC3NJtKhf1fpPxUPoiMA5zoa8LLBt/wqOwrFlHBwekAsFIZK1x3c
-	jvZOm8OpBQt/JMWs1PtDn1KwQkzUAEkbo+XW1wEpd1tzMwibVBbx9SfEanBt3waovUEm
-	69G1C8v6W9tv5cCY1GzlgD/mBjmgARWO1ReoL33juoKyLCfqLUOqa7m7MF1g+QuncjO+
-	qLXdXcbf+X3axtMCTky+TgzYDJix57u0JRFdu1QS5sz17gAnohyQ5KRlIACnBr4bwx3A
-	dhXw==
+	Tue, 26 Jul 2016 12:40:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:subject:to:message-id:date:user-agent:mime-version
+	:content-transfer-encoding;
+	bh=80LFfuD2ePOFU04VcAQcA3KJmtPCPY7W9YRcQ1nYM/s=;
+	b=1EyZshaFNOeswQMr4N+718sAITwCU8hUx+nvtK8ng9MIguGsqJrYqQ+MWrxhSIkhGc
+	yIqBMdv9Cz44xdPxCIojMma2KCxHBBjkxSikK2pUjEPQYuRJj8rKEVikXPZQnSRfpEk/
+	J3CyivRJaOBTschYx2c7e/soy+YywckfKawhNArCbInMAv5DiTgtAuQ8ZziLrtQIB2/N
+	Sl1BWqU/y5Q3FmFb4T/+Yow6E7G10Tllr14kWlgUfzgBd0nu94aXer+3yniFodjp1u7V
+	jeLo0SatWw4G8JRxvySWcTMdPlY3lCUCSLdr5/W+p9xZ0so/iKUfrJU+y7xqguiazsNL
+	uvwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=wcsDBoETOZcDb1T3QX0G1iak98lSGXETssHhWvWCoGc=;
-	b=TcOfeG6Qv8rCRpawa0e9nDeMSfyhVtTAd0ohcjmTnsPX2lEvw+ZF11GjtlJQpxasF6
-	L5RrrWiCgQgywNsC/AkS65Vj18tp+H3AZVYRmgz8mBs/tGPQWODCzc9XnF4M3QWGvblf
-	yJCRGyBIIg1+Zywqk8fNM3pTv8th6jgTRLxBV7xEGaduO8P6z8bVAkhEl0suZ7rVwWwG
-	XDW+0Fy88YKLFIXejSoQUyNSnlN8ebSoigGraqg3gnbsKOeYAdzOni0ZLkeMFlE4YY+x
-	A/z6gCMyxgKTmCyKPZ2y3QwOxLZSACuToj1br7yLCI/p8wJRuhMxe9d00kaeRHW3wS0k
-	7DSw==
-X-Gm-Message-State: AEkooutkG80rQNJ68JnD13lUzlP5te6JOUwt8sAMZAIxrPKkxT4uZEaVilYahonuluMptx2M8wCnMWuXOcn+9SXM
-X-Received: by 10.107.154.196 with SMTP id c187mr24991368ioe.99.1469539882139; 
-	Tue, 26 Jul 2016 06:31:22 -0700 (PDT)
+	h=x-gm-message-state:from:subject:to:message-id:date:user-agent
+	:mime-version:content-transfer-encoding;
+	bh=80LFfuD2ePOFU04VcAQcA3KJmtPCPY7W9YRcQ1nYM/s=;
+	b=ELGheUo9RqzlWz9g4cJDhiSy26IFbNmuzqSBnJMhFyT6Dmvo16WglBsNskXykiZX1v
+	jiAst8dm2KSmsFrqPZFnzKZN2jVuiakDrZ3p6uX8OFxYEKn/dNDJ005zLZ+XHNXGoxom
+	s9QfSPrYQt5eQ+wJZyjict3mKHhU4CHBcBbK77Y/gF83vInVqfgX4TqAcxNHxZ+6JNba
+	tEjDozYsfdeTwhu+LuiWpMtfLicEw6QMeEJyKU4YclJIn3SXS2FDtFsBXq0URBU0zYck
+	/5B/iGUMrAEnAzxpKgud6SRKN8gyZOuF3HcPWGwjSpeAMi2FG/jgDs1aXbnfTQrnDwe7
+	Mguw==
+X-Gm-Message-State: AEkooutQRO9y6pE4QT51dQD+5HmQzjhecVEfh90T0Tl92XOLHZKND95JMSx+1nIwfLM4aQ==
+X-Received: by 10.28.39.133 with SMTP id n127mr28040293wmn.6.1469562057403;
+	Tue, 26 Jul 2016 12:40:57 -0700 (PDT)
+Received: from [192.169.0.118]
+	(cpc26-heme10-2-0-cust765.9-1.cable.virginm.net. [86.3.58.254])
+	by smtp.googlemail.com with ESMTPSA id
+	r16sm34509363wme.16.2016.07.26.12.40.56
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 26 Jul 2016 12:40:56 -0700 (PDT)
+From: Peter Saunderson <peteasa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <a0077818-58b3-bad2-3940-924b1df7afd7@gmail.com>
+Date: Tue, 26 Jul 2016 20:40:56 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.2.0
 MIME-Version: 1.0
-Received: by 10.107.18.17 with HTTP; Tue, 26 Jul 2016 06:31:02 -0700 (PDT)
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 26 Jul 2016 14:31:02 +0100
-Message-ID: <CAJTo0LYsTtk9eFD=kdhdrtFUCPr-eOn5dnPxDR+hM9LRbL40ug@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Meson build system
+Subject: meta-epiphany and meta-exotic layers waiting for approval
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,16 +57,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jul 2016 13:31:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 26 Jul 2016 19:40:58 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
 Hi,
 
-FWIW I started looking at packaging and writing a class for the Meson build
-system (mesonbuild.com) last night.  It's not finished and needs quite a
-lot of work, but if anyone has a need for Meson or just fancies finishing
-it off as a project then I can share the recipes and braindump what's left
-to do.
+I have just submitted two new layers for approval:
 
-Ross
+The meta-exotic layer provides a generic method of creating the set of 
+tools needed to support a Microcontroller or other secondary processor 
+in the Yocto environment.
+
+The meta-epiphany layer uses the meta-exotic layer to create the tools 
+needed to support the Epiphany (http://www.adapteva.com/epiphanyiii/) 
+processor in an Arm based linux environment.
+
+Peter.
+
 
