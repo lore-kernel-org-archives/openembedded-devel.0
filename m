@@ -1,24 +1,45 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C064606BF
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
+	[209.85.215.66])
+	by mail.openembedded.org (Postfix) with ESMTP id E47C3606BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jul 2016 06:19:41 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u6Q6Jf6m020831
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 26 Jul 2016 07:32:39 +0000 (UTC)
+Received: by mail-lf0-f66.google.com with SMTP id l69so12299230lfg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jul 2016 23:19:41 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Mon, 25 Jul 2016 23:19:40 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 26 Jul 2016 14:16:46 +0800
-Message-ID: <1469513806-12568-1-git-send-email-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Tue, 26 Jul 2016 00:32:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=dtrJzTXjdR8+L4aj40CwIFoxYHJVZ6mD1bPYGXSS06Q=;
+	b=WeHRpGLmWRYFRaIgrv1f7tDlkl/Q07Z2jnZ/TX9Is1zk6LWfpex+STtqcR/feyoJPs
+	WIP8z/BFyT1yh/E6T4pzBDl5zcjbTbfUb/JR6gairzmAGwDDcy9MM3xIKOJOFx4jNHey
+	PWecK5QK7molsEB4j8tdqP2cFtgX9lLUDMKTst2sVIFrQ5p2xl7fFjIAFXPgqXU1lISa
+	mt6qnSlKoNUYosd3hIVRnLE0GMLyG1e3OpanB0kXYXknIgUJ1FFvE7dmX+Pec7cwXDlf
+	FXSmmsHYjD8Yy/aCC1WseAmBwUvBnRwpQI7pQNpAsuTRNwvKduaWql8vw4RC3PYqOFRf
+	ZYpg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=dtrJzTXjdR8+L4aj40CwIFoxYHJVZ6mD1bPYGXSS06Q=;
+	b=mXqbf6stA37IZtp2TwbekkCcHox5BYrJbqXhClFzalfnOMzS+gFpqtuGMhvUxLxVmc
+	wf54Jk2Is9oDf8Atd4kKv6zTceDPaXxjzz+4VDe4FtDoElNgNuw4njDBu2nNuRHFFgUU
+	2vt+7iXFSyXlP+eaTX5cApLwijVUwHI0JYtkH0Q/orETDAScX5I8Up6FuETr+2dZCRHd
+	XIG/isTpKbNyBEoeoqJ1HK1TQmmZ93dMOR6gAC/e3An+5Ks27c6qcFyIG4QGXv6Inib9
+	6Blng2PqCvFxAGofXZIAVLjalWpZDFnYTmwss6IwQDn0gZR+IwgHwwLv4bTNGyWVlSYT
+	eSfg==
+X-Gm-Message-State: AEkoouvpIhQzCg5XSMVXesVlW0Nb4oR7DbXSuEG0f0E2bNaOMH7GJRWdbby0IPCj4JX3KDxIfVDLqwaA7t4KqA==
+X-Received: by 10.25.1.213 with SMTP id 204mr9127767lfb.114.1469518359363;
+	Tue, 26 Jul 2016 00:32:39 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] efivar: add COMPATIBLE_HOST item
+Received: by 10.25.87.12 with HTTP; Tue, 26 Jul 2016 00:32:38 -0700 (PDT)
+In-Reply-To: <1461031604-39175-1-git-send-email-daicy.fnst@cn.fujitsu.com>
+References: <1461031604-39175-1-git-send-email-daicy.fnst@cn.fujitsu.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 26 Jul 2016 09:32:38 +0200
+Message-ID: <CA+chaQdvoEJgke34kzN+S+AzkyJ91YGADkKoHhnQBiaHe-kYLA@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH] libnih: Modify PR to avoid build errors.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,32 +52,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jul 2016 06:19:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 26 Jul 2016 07:32:41 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* Add COMPATIBLE_HOST item to avoid build error
-  on mips and ppc as efivar actually a UEFI tool
-  which is specific to x86 and arm.
+I'll squash this into the previous change, so that there isn't PR going
+backwards.
 
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
----
- meta-oe/recipes-extended/efivar/efivar_0.23.bb | 2 ++
- 1 file changed, 2 insertions(+)
+On Tue, Apr 19, 2016 at 4:06 AM, Dai Caiyun <daicy.fnst@cn.fujitsu.com>
+wrote:
 
-diff --git a/meta-oe/recipes-extended/efivar/efivar_0.23.bb b/meta-oe/recipes-extended/efivar/efivar_0.23.bb
-index 046cad9..5879031 100644
---- a/meta-oe/recipes-extended/efivar/efivar_0.23.bb
-+++ b/meta-oe/recipes-extended/efivar/efivar_0.23.bb
-@@ -7,6 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6626bb1e20189cfa95f2c508ba286393"
- 
- DEPENDS_class-target = "popt efivar-native"
- 
-+COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
-+
- SRCREV = "7367d78281fa3ce390e10c7c9f4608c58e7a6d3d"
- SRC_URI = "git://github.com/rhinstaller/efivar.git"
- SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch \
--- 
-2.8.1
-
+> invalid tag value("^[A-Za-z0-9+._]+$") Release: Release: r2-4ubuntu16
+>   meta-webos don't have people maintain for two years
+>
+> Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
+> ---
+>  recipes-upstreamable/libnih/libnih_1.0.3.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/recipes-upstreamable/libnih/libnih_1.0.3.bb
+> b/recipes-upstreamable/libnih/libnih_1.0.3.bb
+> index 5f70ef3..b5e5e12 100644
+> --- a/recipes-upstreamable/libnih/libnih_1.0.3.bb
+> +++ b/recipes-upstreamable/libnih/libnih_1.0.3.bb
+> @@ -22,7 +22,7 @@ LIC_FILES_CHKSUM =
+> "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+>  DEPENDS = "dbus libnih-native"
+>  DEPENDS_class-native = "dbus-native"
+>
+> -PR = "r2-4ubuntu16"
+> +PR = "r0"
+>
+>  SRC_URI = "
+> https://launchpad.net/${BPN}/1.0/${PV}/+download/${BP}.tar.gz;name=tarball
+> "
+>  SRC_URI += "file://libnih_1.0.3-4ubuntu16.patch;name=patch"
+> --
+> 1.8.4.2
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
