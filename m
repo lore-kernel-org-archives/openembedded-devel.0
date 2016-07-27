@@ -1,36 +1,36 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 3601 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 27 Jul 2016 20:42:07 UTC
-Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
-	[206.46.173.23])
-	by mail.openembedded.org (Postfix) with ESMTP id 82A2F606BF;
-	Wed, 27 Jul 2016 20:42:07 +0000 (UTC)
-Received: from vz-proxy-m007.mx.aol.com ([64.236.83.14])
-	by vms173023.mailsrvcs.net
-	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
-	2014))
-	with ESMTPA id <0OAZ005CNO1SS120@vms173023.mailsrvcs.net>; Wed,
-	27 Jul 2016 14:41:52 -0500 (CDT)
-X-CMAE-Score: 0
-X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=MJxOpqxZADbEbEImuSX/mw==:117
-	a=kj9zAlcOel0A:10 a=cAmyUtKerLwA:10	a=Q4-j1AaZAAAA:8
-	a=-sANZeLuJjCnSeQa-GEA:9 a=CjuIK1q_8ugA:10
-Received: by 100.15.86.14 with SMTP id 408d1c22; Wed, 27 Jul 2016 19:41:51 GMT
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0BABB1620C2; Wed,
-	27 Jul 2016 15:41:52 -0400 (EDT)
-Date: Wed, 27 Jul 2016 15:41:51 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-members@lists.openembedded.org
-Message-id: <20160727194151.GJ8521@denix.org>
-References: <4037473c-25e3-015d-25fb-be5cd3ece4bc@balister.org>
-MIME-version: 1.0
-In-reply-to: <4037473c-25e3-015d-25fb-be5cd3ece4bc@balister.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: Save the dates (OEDEM and Yocto Project Developer Day)
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id CA78E606BF
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Jul 2016 21:07:58 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id n202so3510576qke.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Jul 2016 14:07:59 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=2gWAlbSBI05OT5HS9PWrU1pwAOJk2coD50v7XZU9Jho=;
+	b=eqzYlHCvcB7+wBJM5Y14DDRvce8dehRcQqVHwwxapYkvMtnbIakxx/HLh0FKmrQL20
+	mKN3wESfR0Q90qKAOWg4WWzv/3b/eJRd47+m0TzUZDN0rcjcR/QBf3LPZ3A6ko83mSr7
+	BtQah2s6pY3nBlA4WTLE7b7tbyxiGFK/QGRiVdp3B9ZM++cvACsC/kztDzH1inXQlSFK
+	QlurtR0dmwSq0LFu+Jr9TMxn9vtC607awQ5patLihh5DI+2qTM/uCRpQUcyDkOPgoF3T
+	KRBYGWW3R2w/HRITDLTQnOu1sRkZ2Zohn12h7VEgou6BFXqB1MoQc65piWnS0BAxWtaL
+	EIJA==
+X-Gm-Message-State: AEkoouuWKbUPhOCjmBi9GELRwEeiUYdERW2hjm/1gXYVd+KwZXZHJVcpbHqS8Cf1Uy9nrw==
+X-Received: by 10.55.179.129 with SMTP id c123mr40929465qkf.50.1469653678922; 
+	Wed, 27 Jul 2016 14:07:58 -0700 (PDT)
+Received: from lnx-dereks-laptop.star.lab
+	(mobile-166-137-178-128.mycingular.net. [166.137.178.128])
+	by smtp.gmail.com with ESMTPSA id z64sm5367239qkb.3.2016.07.27.14.07.57
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 27 Jul 2016 14:07:58 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 27 Jul 2016 17:07:45 -0400
+Message-Id: <1469653666-11180-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH 1/2] libssh2: Add native to BBCLASSEXTEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,29 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jul 2016 20:42:09 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 27 Jul 2016 21:07:59 -0000
 
-On Thu, Jul 14, 2016 at 01:03:39PM -0400, Philip Balister wrote:
-> ELCE is in Berlin this year on Oct 11-13 (Tuesday-Thursday). After
-> conversations with the Yocto Project, we've worked out that there will
-> be a Yocto Project developer day on Monday, Oct 10 and OEDEM
-> (OpenEmbedded developer meeting) on Friday, Oct 14.
-> 
-> The Yocto Project developer day is basically a training class with
-> beginner and advanced topics.
-> 
-> The OpenEmbedded developer meeting is a chance to talk with developers
-> about various project topics. We'll work out the agenda closer to ELCE.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Wiki page for OEDEM 2016 has been created:
-
-http://openembedded.org/wiki/OEDEM_2016
-
-If you already know you will be attending, please add yourself to the list. 
-Thanks.
-
+diff --git a/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb b/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
+index c43164e..ad0f677 100644
+--- a/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
++++ b/meta-oe/recipes-support/libssh2/libssh2_1.6.0.bb
+@@ -22,3 +22,5 @@ EXTRA_OECONF += "\
+ PACKAGECONFIG ??= "openssl"
+ PACKAGECONFIG[openssl] = "--with-openssl --with-libssl-prefix=${STAGING_LIBDIR},--without-openssl,openssl"
+ PACKAGECONFIG[gcrypt] = "--with-libgcrypt --with-libgcrypt-prefix=${STAGING_EXECPREFIXDIR},--without-libgcrypt,libgcrypt"
++
++BBCLASSEXTEND += "native"
 -- 
-Denys
+1.9.1
+
 
