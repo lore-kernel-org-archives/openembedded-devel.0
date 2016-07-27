@@ -1,30 +1,39 @@
 Return-Path: <daicy.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C3F99606BF
+	by mail.openembedded.org (Postfix) with ESMTP id 05458606BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jul 2016 03:30:44 +0000 (UTC)
+	Wed, 27 Jul 2016 03:36:39 +0000 (UTC)
 X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; 
-   d="scan'208";a="9134610"
+   d="scan'208";a="9134823"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 27 Jul 2016 11:30:42 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id BCB8742984CB
+	by heian.cn.fujitsu.com with ESMTP; 27 Jul 2016 11:36:41 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id E003C42984C3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jul 2016 11:30:38 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.25) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.279.2; Wed, 27 Jul 2016 11:30:09 +0800
-From: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <1461122644-42503-1-git-send-email-daicy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
+	Wed, 27 Jul 2016 11:36:35 +0800 (CST)
+Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
+	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
+	14.03.0279.002; Wed, 27 Jul 2016 11:36:34 +0800
+From: "Dai, Caiyun" <daicy.fnst@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] libnih: add new recipe to meta-oe
+Thread-Index: AQHR5upGQ8E8SKOvhk2X8h1XoTs7MqAqA1MAgAGerbA=
+Date: Wed, 27 Jul 2016 03:36:33 +0000
+Message-ID: <F96CF52C4114D94498E9D1443A2CDDE2CDA5B0EA@G08CNEXMBPEKD03.g08.fujitsu.local>
+References: <1461034656-39314-1-git-send-email-daicy.fnst@cn.fujitsu.com>
+	<20160726105116.nanzyyq6dsl3qisu@jama>
+In-Reply-To: <20160726105116.nanzyyq6dsl3qisu@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.25]
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.25]
-X-yoursite-MailScanner-ID: BCB8742984CB.AE098
+X-yoursite-MailScanner-ID: E003C42984C3.AD5CE
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: daicy.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe][PATCH] libnih: add new recipe to meta-oe
+Subject: =?UTF-8?B?562U5aSNOiBbbWV0YS1vZV1bUEFUQ0hdIGxpYm5paDogYWRkIG5ldyByZWNpcGUgdG8gbWV0YS1vZQ==?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,3674 +46,3197 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-Date: Wed, 27 Jul 2016 03:30:49 -0000
-X-Original-Date: Wed, 20 Apr 2016 06:24:02 +0300
-X-List-Received-Date: Wed, 27 Jul 2016 03:30:49 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 27 Jul 2016 03:36:45 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-meta-webos hasn't been maitained for about 2years.
-So, how about add libnih into meta-oe.
-
-Fix the error as foloowing:
-invalid tag value("^[A-Za-z0-9+._]+$") Release: Release: r2-4ubuntu16.
-
-Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
----
- .../libnih-1.0.3/libnih_1.0.3-4ubuntu16.patch      | 3593 ++++++++++++++++++++
- meta-oe/recipes-support/libnih/libnih_1.0.3.bb     |   40 +
- 2 files changed, 3633 insertions(+)
- create mode 100644 meta-oe/recipes-support/libnih/libnih-1.0.3/libnih_1.0.3-4ubuntu16.patch
- create mode 100644 meta-oe/recipes-support/libnih/libnih_1.0.3.bb
-
-diff --git a/meta-oe/recipes-support/libnih/libnih-1.0.3/libnih_1.0.3-4ubuntu16.patch b/meta-oe/recipes-support/libnih/libnih-1.0.3/libnih_1.0.3-4ubuntu16.patch
-new file mode 100644
-index 0000000..5d125c8
---- /dev/null
-+++ b/meta-oe/recipes-support/libnih/libnih-1.0.3/libnih_1.0.3-4ubuntu16.patch
-@@ -0,0 +1,3593 @@
-+--- libnih-1.0.3.orig/ChangeLog
-++++ libnih-1.0.3/ChangeLog
-+@@ -1,3 +1,84 @@
-++2013-03-13  Steve Langasek  <steve.langasek@ubuntu.com>
-++
-++	* nih/watch.c (nih_watch_walk_filter): New NihFileFilter function
-++	passed to nih_dir_walk_scan() to ensure the nih_watch_new() filter
-++	function is passed the NihWatch data rather than the data passed to
-++	the nih_dir_walk() NihFileVisitor function (LP: #776532).
-++
-++	* nih/tests/test_watch.c (test_new): New test "with filter and data"
-++	to ensure filter is passed correct value.
-++
-++2013-02-28  James Hunt  <james.hunt@ubuntu.com>
-++
-++	* Removal of gcc 'malloc' function attribute resulting from
-++	  a clarification in its description which makes its use invalid.
-++	  (LP: #1123588).
-++
-++2013-02-05  James Hunt  <james.hunt@ubuntu.com>
-++
-++	* nih/logging.c: nih_log_abort_message(): Remove erroneous check
-++	  left over from use of __abort_msg weak symbol.
-++	* nih/tests/test_logging.c: Remove unecessary check on whether
-++	  __nih_abort_msg has an address.
-++
-++2012-12-13  Stéphane Graber  <stgraber@ubuntu.com>
-++
-++	* nih-dbus-tool/type.c, nih-dbus-tool/marshal.c: Update dbus code
-++	generator to allow for empty lists for type 'as'.  This drops the
-++	!= NULL check for NULL terminated arrays and moves the iteration
-++	loop inside an 'if' statement.
-++
-++2012-12-11  Dmitrijs Ledkovs  <dmitrijs.ledkovs@canonical.com>
-++
-++	* nih/file.c (nih_dir_walk_scan): Fallback to lstat, if the
-++	non-portable dirent.d_type is not available (LP: #672643) (Closes:
-++	#695604).
-++
-++2012-12-10  Petr Lautrbach  <plautrba@redhat.com>
-++
-++	* nih/tests/test_file.c: don't use dirent.d_type (not portable)
-++
-++2012-10-25  James Hunt  <james.hunt@ubuntu.com>
-++
-++	* nih/logging.c: Use our own __nih_abort_msg rather than the
-++	(e)glibc private symbol __abort_msg to avoid upgrade issues (LP: #997359).
-++	* nih/tests/test_logging.c: Update tests for __nih_abort_msg.
-++
-++2011-08-31  James Hunt  <james.hunt@ubuntu.com>
-++
-++	* nih-dbus-tool/tests/test_com.netsplit.Nih.Test_object.c
-++	(test_unix_fd_to_str): Sanity check value before invoking strchr in
-++	case it returns address of null (which would give a misleading test
-++	pass).
-++	* nih-dbus-tool/tests/test_com.netsplit.Nih.Test_proxy.c
-++	(test_unix_fd_to_str, test_unix_fd_to_str_sync): Sanity check value
-++	before invoking strchr in case it returns address of null (which would
-++	give a misleading test pass).
-++	* nih/config.c (): nih_config_block_end: Add check to ensure strchr()
-++	doesn't return address of null since this would result in a misleading
-++	return value of TRUE.
-++
-++	* nih/string.c (nih_str_split): Fixes to avoid over-running
-++	input string and also returning an empty string array entry
-++	when repeat is true (LP: #834813).
-++	* nih/tests/test_string.c (test_str_split): Added a lot of new
-++	tests for nih_str_split().
-++
-++2011-08-26  James Hunt  <james.hunt@ubuntu.com>
-++
-++	* nih/io.c (nih_io_select_fds): Ensure number of fds being managed
-++	is within limits.
-++
-++	* nih/config.c, nih/error.h, nih/io.c, nih/test_files.h: Correct
-++	typos in comments.
-++
-++2011-06-20  James Hunt  <james.hunt@ubuntu.com>
-++
-++	* nih/watch.c (nih_watch_handle): Handle non-directory watches;
-++	previously a file watch resulted in an invalid file path ending in
-++	a single slash (LP:#777097).
-++	* nih/tests/test_watch.c: Added explicit test for watch on a file.
-++
-+ 2010-12-23  Scott James Remnant  <scott@netsplit.com>
-+ 
-+ 	* NEWS: Release 1.0.3
-+--- libnih-1.0.3.orig/nih/watch.c
-++++ libnih-1.0.3/nih/watch.c
-+@@ -2,8 +2,8 @@
-+  *
-+  * watch.c - watching of files and directories with inotify
-+  *
-+- * Copyright © 2009 Scott James Remnant <scott@netsplit.com>.
-+- * Copyright © 2009 Canonical Ltd.
-++ * Copyright © 2011 Scott James Remnant <scott@netsplit.com>.
-++ * Copyright © 2011 Canonical Ltd.
-+  *
-+  * This program is free software; you can redistribute it and/or modify
-+  * it under the terms of the GNU General Public License version 2, as
-+@@ -71,6 +71,9 @@
-+ 					      uint32_t events, uint32_t cookie,
-+ 					      const char *name,
-+ 					      int *caught_free);
-++static int             nih_watch_walk_filter (void *data, const char *path,
-++					      int is_dir)
-++	__attribute__ ((warn_unused_result));
-+ 
-+ 
-+ /**
-+@@ -91,7 +94,7 @@
-+  * sub-directories will be automatically watched.
-+  *
-+  * Additionally, the set of files and directories within @path can be
-+- * limited by passing a @filter function which will recieve the paths and
-++ * limited by passing a @filter function which will receive the paths and
-+  * may return TRUE to indicate that the path received should not be watched.
-+  *
-+  * When a file is created within @path, or moved from outside this location
-+@@ -104,7 +107,7 @@
-+  * files that exist under @path when the watch is first added.  This only
-+  * occurs if the watch can be added.
-+  *
-+- * This is a very high level wrapped around the inotify API; lower levels
-++ * This is a very high level wrapper around the inotify API; lower levels
-+  * can be obtained using the inotify API itself and some of the helper
-+  * functions used by this one.
-+  *
-+@@ -185,6 +188,35 @@
-+ }
-+ 
-+ 
-++ /**
-++ * nih_watch_walk_filter:
-++ * @data: NihWatch,
-++ * @path: path to file,
-++ * @is_dir: TRUE if @path is a directory.
-++ *
-++ * Callback function for nih_dir_walk(), used by nih_watch_add() to wrap
-++ * the user-specified NihFileFilter (watch->filter) with a filter that can
-++ * take watch itself as an argument.
-++ *
-++ * Returns: TRUE if the path should be ignored, FALSE otherwise.
-++ **/
-++static int
-++nih_watch_walk_filter (void *data, const char *path, int is_dir)
-++{
-++    NihWatch *watch;
-++
-++    watch = (NihWatch *)data;
-++
-++    nih_assert (watch);
-++
-++    /* No filter, so accept all files */
-++    if (! watch->filter)
-++           return FALSE;
-++
-++    return watch->filter (watch->data, path, is_dir);
-++}
-++
-++
-+ /**
-+  * nih_watch_handle_by_wd:
-+  * @watch: watch to search,
-+@@ -295,7 +327,7 @@
-+ 	 * one; errors within the walk are warned automatically, so if this
-+ 	 * fails, it means we literally couldn't watch the top-level.
-+ 	 */
-+-	if (subdirs && (nih_dir_walk (path, watch->filter,
-++	if (subdirs && (nih_dir_walk (path, nih_watch_walk_filter,
-+ 				      (NihFileVisitor)nih_watch_add_visitor,
-+ 				      NULL, watch) < 0)) {
-+ 		NihError *err;
-+@@ -494,12 +526,21 @@
-+ 		return;
-+ 	}
-+ 
-++	/* Every other event must come with a name */
-++	if (name && *name) {
-+ 
-+-	/* Every other event must come with a name. */
-+-	if ((! name) || strchr (name, '/'))
-+-		return;
-++		/* If name refers to a directory, there should be no associated
-++		 * path - just the name of the path element.
-++		 */
-++		if (strchr (name, '/'))
-++			return;
-+ 
-+-	path = NIH_MUST (nih_sprintf (NULL, "%s/%s", handle->path, name));
-++		/* Event occured for file within a watched directory */
-++		path = NIH_MUST (nih_sprintf (NULL, "%s/%s", handle->path, name));
-++	} else {
-++		/* File event occured */
-++		path = NIH_MUST (nih_strdup (NULL, handle->path));
-++	}
-+ 
-+ 	/* Check the filter */
-+ 	if (watch->filter && watch->filter (watch->data, path,
-+--- libnih-1.0.3.orig/nih/hash.h
-++++ libnih-1.0.3/nih/hash.h
-+@@ -141,7 +141,7 @@
-+  * @hash: hash table to iterate,
-+  * @iter: name of iterator variable.
-+  *
-+- * Expans to nested for statements that iterate over each entry in each
-++ * Expands to nested for statements that iterate over each entry in each
-+  * bin of @hash, except for the bin head pointer, setting @iter to each
-+  * entry for the block within the loop.  A variable named _@iter_i is used
-+  * to iterate the hash bins.
-+@@ -203,7 +203,7 @@
-+ 				   NihKeyFunction key_function,
-+ 				   NihHashFunction hash_function,
-+ 				   NihCmpFunction cmp_function)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NihList *   nih_hash_add          (NihHash *hash, NihList *entry);
-+ NihList *   nih_hash_add_unique   (NihHash *hash, NihList *entry);
-+--- libnih-1.0.3.orig/nih/main.h
-++++ libnih-1.0.3/nih/main.h
-+@@ -138,7 +138,7 @@
-+ 
-+ NihMainLoopFunc *nih_main_loop_add_func  (const void *parent,
-+ 					  NihMainLoopCb callback, void *data)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ void             nih_main_term_signal    (void *data, NihSignal *signal);
-+ 
-+--- libnih-1.0.3.orig/nih/command.h
-++++ libnih-1.0.3/nih/command.h
-+@@ -123,7 +123,7 @@
-+ 
-+ NihCommand *nih_command_join   (const void *parent,
-+ 				const NihCommand *a, const NihCommand *b)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih/config.h
-++++ libnih-1.0.3/nih/config.h
-+@@ -140,10 +140,10 @@
-+ char *    nih_config_next_token      (const void *parent, const char *file,
-+ 				      size_t len, size_t *pos, size_t *lineno,
-+ 				      const char *delim, int dequote)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *    nih_config_next_arg        (const void *parent, const char *file,
-+ 				      size_t len, size_t *pos, size_t *lineno)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ void      nih_config_next_line       (const char *file, size_t len,
-+ 				      size_t *pos, size_t *lineno);
-+ 
-+@@ -155,15 +155,15 @@
-+ 
-+ char **   nih_config_parse_args      (const void *parent, const char *file,
-+ 				      size_t len, size_t *pos, size_t *lineno)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *    nih_config_parse_command   (const void *parent, const char *file,
-+ 				      size_t len, size_t *pos, size_t *lineno)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *    nih_config_parse_block     (const void *parent, const char *file,
-+ 				      size_t len, size_t *pos, size_t *lineno,
-+ 				      const char *type)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ int       nih_config_skip_block      (const char *file, size_t len,
-+ 				      size_t *lineno, size_t *pos,
-+ 				      const char *type, size_t *endpos)
-+--- libnih-1.0.3.orig/nih/io.c
-++++ libnih-1.0.3/nih/io.c
-+@@ -2,8 +2,8 @@
-+  *
-+  * io.c - file and socket input/output handling
-+  *
-+- * Copyright © 2009 Scott James Remnant <scott@netsplit.com>.
-+- * Copyright © 2009 Canonical Ltd.
-++ * Copyright © 2011 Scott James Remnant <scott@netsplit.com>.
-++ * Copyright © 2011 Canonical Ltd.
-+  *
-+  * This program is free software; you can redistribute it and/or modify
-+  * it under the terms of the GNU General Public License version 2, as
-+@@ -165,6 +165,7 @@
-+ 	nih_assert (readfds != NULL);
-+ 	nih_assert (writefds != NULL);
-+ 	nih_assert (exceptfds != NULL);
-++	nih_assert (*nfds <= FD_SETSIZE);
-+ 
-+ 	nih_io_init ();
-+ 
-+@@ -186,6 +187,9 @@
-+ 			*nfds = nih_max (*nfds, watch->fd + 1);
-+ 		}
-+ 	}
-++
-++	/* Re-check in case we exceeded the limit in the loop */
-++	nih_assert (*nfds <= FD_SETSIZE);
-+ }
-+ 
-+ /**
-+@@ -901,7 +905,7 @@
-+  * read and placed into the receive buffer or queue, and the reader function
-+  * is called if set.
-+  *
-+- * Any data or messaages in the send buffer or queue are written out if the
-++ * Any data or messages in the send buffer or queue are written out if the
-+  * @events includes NIH_IO_WRITE.
-+  *
-+  * Errors are handled when data is read, and result in the error handled
-+@@ -1211,7 +1215,7 @@
-+  * This function is called when the local end of a file descriptor being
-+  * managed by NihIo should be closed.  Usually this is because the remote
-+  * end has been closed (without error) but it can also be because no
-+- * error handler was given
-++ * error handler was given.
-+  *
-+  * Normally this just calls the close handler, or if not available, it
-+  * closes the file descriptor and frees the structure (which may be
-+@@ -1291,7 +1295,7 @@
-+  * @io: structure to be destroyed.
-+  *
-+  * Closes the file descriptor associated with an NihIo structure so that
-+- * the structure can be freed.  IF an error is caught by closing the
-++ * the structure can be freed.  If an error is caught by closing the
-+  * descriptor, the error handler is called instead of the error being raised;
-+  * this allows you to group your error handling in one place rather than
-+  * special-case close.
-+--- libnih-1.0.3.orig/nih/watch.h
-++++ libnih-1.0.3/nih/watch.h
-+@@ -156,7 +156,7 @@
-+ 			     NihCreateHandler create_handler,
-+ 			     NihModifyHandler modify_handler,
-+ 			     NihDeleteHandler delete_handler, void *data)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ int       nih_watch_add     (NihWatch *watch, const char *path, int subdirs)
-+ 	__attribute__ ((warn_unused_result));
-+--- libnih-1.0.3.orig/nih/tree.h
-++++ libnih-1.0.3/nih/tree.h
-+@@ -344,9 +344,9 @@
-+ 
-+ void          nih_tree_init           (NihTree *tree);
-+ NihTree *     nih_tree_new            (const void *parent)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ NihTreeEntry *nih_tree_entry_new      (const void *parent)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NihTree *     nih_tree_add            (NihTree *tree, NihTree *node,
-+ 				       NihTreeWhere where);
-+--- libnih-1.0.3.orig/nih/file.c
-++++ libnih-1.0.3/nih/file.c
-+@@ -65,7 +65,7 @@
-+ /* Prototypes for static functions */
-+ static char **nih_dir_walk_scan  (const char *path, NihFileFilter filter,
-+ 				  void *data)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ static int    nih_dir_walk_visit (const char *dirname, NihList *dirs,
-+ 				  const char *path, NihFileFilter filter,
-+ 				  NihFileVisitor visitor,
-+@@ -619,6 +619,8 @@
-+ 	struct dirent  *ent;
-+ 	char          **paths;
-+ 	size_t          npaths;
-++	int             isdir;
-++	struct stat     statbuf;
-+ 
-+ 	nih_assert (path != NULL);
-+ 
-+@@ -640,7 +642,15 @@
-+ 		subpath = NIH_MUST (nih_sprintf (NULL, "%s/%s",
-+ 						 path, ent->d_name));
-+ 
-+-		if (filter && filter (data, subpath, ent->d_type == DT_DIR))
-++		if (ent->d_type == DT_UNKNOWN) {
-++			if ( lstat (subpath, &statbuf))
-++				isdir = 0;
-++			else
-++				isdir = S_ISDIR(statbuf.st_mode);
-++		} else
-++			isdir = ent->d_type == DT_DIR;
-++
-++		if (filter && filter (data, subpath, isdir))
-+ 			continue;
-+ 
-+ 		NIH_MUST (nih_str_array_addp (&paths, NULL, &npaths, subpath));
-+--- libnih-1.0.3.orig/nih/alloc.c
-++++ libnih-1.0.3/nih/alloc.c
-+@@ -119,8 +119,7 @@
-+ static inline int          nih_alloc_context_free   (NihAllocCtx *ctx);
-+ 
-+ static inline NihAllocRef *nih_alloc_ref_new        (NihAllocCtx *parent,
-+-						     NihAllocCtx *child)
-+-	__attribute__ ((malloc));
-++						     NihAllocCtx *child);
-+ static inline void         nih_alloc_ref_free       (NihAllocRef *ref);
-+ static inline NihAllocRef *nih_alloc_ref_lookup     (NihAllocCtx *parent,
-+ 						     NihAllocCtx *child);
-+--- libnih-1.0.3.orig/nih/timer.h
-++++ libnih-1.0.3/nih/timer.h
-+@@ -59,7 +59,7 @@
-+  * @months: months (1-12),
-+  * @wdays: days of week (0-7).
-+  *
-+- * Indidcates when scheduled timers should be run, each member is a bit
-++ * Indicates when scheduled timers should be run, each member is a bit
-+  * field where the bit is 1 if the timer should be run for that value and
-+  * 0 if not.
-+  **/
-+@@ -117,14 +117,14 @@
-+ 
-+ NihTimer *nih_timer_add_timeout   (const void *parent, time_t timeout,
-+ 				   NihTimerCb callback, void *data)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ NihTimer *nih_timer_add_periodic  (const void *parent, time_t period,
-+ 				   NihTimerCb callback, void *data)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ NihTimer *nih_timer_add_scheduled (const void *parent,
-+ 				   NihTimerSchedule *schedule,
-+ 				   NihTimerCb callback, void *data)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NihTimer *nih_timer_next_due       (void);
-+ void      nih_timer_poll           (void);
-+--- libnih-1.0.3.orig/nih/config.c
-++++ libnih-1.0.3/nih/config.c
-+@@ -2,8 +2,8 @@
-+  *
-+  * config.c - configuration file parsing
-+  *
-+- * Copyright © 2009 Scott James Remnant <scott@netsplit.com>.
-+- * Copyright © 2009 Canonical Ltd.
-++ * Copyright © 2011 Scott James Remnant <scott@netsplit.com>.
-++ * Copyright © 2011 Canonical Ltd.
-+  *
-+  * This program is free software; you can redistribute it and/or modify
-+  * it under the terms of the GNU General Public License version 2, as
-+@@ -657,7 +657,7 @@
-+  * of the returned string are freed, the returned string will also be
-+  * freed.
-+  *
-+- * Returns: the command found or NULL on raised error.
-++ * Returns: the newly allocated command found or NULL on raised error.
-+  **/
-+ char *
-+ nih_config_parse_command (const void *parent,
-+@@ -714,7 +714,7 @@
-+  * @lineno: line number,
-+  * @type: block identifier.
-+  *
-+- * Extracts a block of text from @line, stopping when the pharse "end @type"
-++ * Extracts a block of text from @line, stopping when the phrase "end @type"
-+  * is encountered without any quotes or blackslash escaping within it.
-+  *
-+  * @file may be a memory mapped file, in which case @pos should be given
-+@@ -950,7 +950,7 @@
-+ 		return FALSE;
-+ 
-+ 	/* Must be whitespace after */
-+-	if (! strchr (NIH_CONFIG_WS, file[p + 3]))
-++	if (file[p + 3] && ! strchr (NIH_CONFIG_WS, file[p + 3]))
-+ 		return FALSE;
-+ 
-+ 	/* Find the second word */
-+--- libnih-1.0.3.orig/nih/option.h
-++++ libnih-1.0.3/nih/option.h
-+@@ -124,11 +124,11 @@
-+ char **    nih_option_parser         (const void *parent,
-+ 				      int argc, char *argv[],
-+ 				      NihOption *options, int break_nonopt)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NihOption *nih_option_join           (const void *parent,
-+ 				      const NihOption *a, const NihOption *b)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ int        nih_option_count          (NihOption *option, const char *arg);
-+ int        nih_option_int            (NihOption *option, const char *arg);
-+--- libnih-1.0.3.orig/nih/signal.h
-++++ libnih-1.0.3/nih/signal.h
-+@@ -76,7 +76,7 @@
-+ 
-+ NihSignal * nih_signal_add_handler (const void *parent, int signum,
-+ 				   NihSignalHandler handler, void *data)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ void        nih_signal_handler     (int signum);
-+ void        nih_signal_poll        (void);
-+--- libnih-1.0.3.orig/nih/list.h
-++++ libnih-1.0.3/nih/list.h
-+@@ -37,7 +37,7 @@
-+  * after a known entry, and remove an entry from the list.
-+  *
-+  * List entries may be created in one of two ways.  The most common is to
-+- * embed the NihList structure as the frist member of your own structure,
-++ * embed the NihList structure as the first member of your own structure,
-+  * and initialise it with nih_list_init() after allocating the structure.
-+  * Alternatively you may create NihListEntry structures with
-+  * nih_list_entry_new() and point at your own data from them.
-+@@ -196,10 +196,10 @@
-+ 
-+ void          nih_list_init      (NihList *entry);
-+ NihList *     nih_list_new       (const void *parent)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NihListEntry *nih_list_entry_new (const void *parent)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ 
-+ NihList *     nih_list_add       (NihList *list, NihList *entry);
-+--- libnih-1.0.3.orig/nih/logging.c
-++++ libnih-1.0.3/nih/logging.c
-+@@ -39,11 +39,11 @@
-+ 
-+ 
-+ /**
-+- * __abort_msg:
-++ * __nih_abort_msg:
-+  *
-+- * A glibc variable that keeps the assertion message in the core dump.
-++ * A variable that keeps the assertion message in the core dump.
-+  **/
-+-extern char *__abort_msg __attribute__ ((weak));
-++char *__nih_abort_msg = NULL;
-+ 
-+ /**
-+  * logger:
-+@@ -114,19 +114,16 @@
-+  * nih_log_abort_message:
-+  * @message: message to be logged.
-+  *
-+- * Save @message in the glibc __abort_msg variable so it can be retrieved
-++ * Save @message in the __nih_abort_msg variable so it can be retrieved
-+  * by debuggers if we should crash at this point.
-+  **/
-+ static void
-+ nih_log_abort_message (const char *message)
-+ {
-+-	if (! &__abort_msg)
-+-		return;
-++	if (__nih_abort_msg)
-++		nih_discard (__nih_abort_msg);
-+ 
-+-	if (__abort_msg)
-+-		nih_discard (__abort_msg);
-+-
-+-	__abort_msg = NIH_MUST (nih_strdup (NULL, message));
-++	__nih_abort_msg = NIH_MUST (nih_strdup (NULL, message));
-+ }
-+ 
-+ /**
-+--- libnih-1.0.3.orig/nih/test_files.h
-++++ libnih-1.0.3/nih/test_files.h
-+@@ -1,7 +1,7 @@
-+ /* libnih
-+  *
-+- * Copyright © 2009 Scott James Remnant <scott@netsplit.com>.
-+- * Copyright © 2009 Canonical Ltd.
-++ * Copyright © 2011 Scott James Remnant <scott@netsplit.com>.
-++ * Copyright © 2011 Canonical Ltd.
-+  *
-+  * This program is free software; you can redistribute it and/or modify
-+  * it under the terms of the GNU General Public License version 2, as
-+@@ -39,7 +39,7 @@
-+  * TEST_FILENAME:
-+  * @_var: variable to store filename in.
-+  *
-+- * Generate a filename that may be used for testing, it's unlinked it if
-++ * Generate a filename that may be used for testing, it's unlinked if it
-+  * exists and it's up to you to unlink it when done.  @_var should be at
-+  * least PATH_MAX long.
-+  **/
-+--- libnih-1.0.3.orig/nih/test_process.h
-++++ libnih-1.0.3/nih/test_process.h
-+@@ -36,7 +36,7 @@
-+  * Spawn a child in which a test can be performed without affecting the
-+  * main flow of the process.  The pid of the child is stored in @_pid.
-+  *
-+- * This macro ensures that the child has begun exectution before the
-++ * This macro ensures that the child has begun execution before the
-+  * parent is allowed to continue through the usual use of a pipe.
-+  *
-+  * A block of code should follow this macro, which is the code that will
-+--- libnih-1.0.3.orig/nih/child.h
-++++ libnih-1.0.3/nih/child.h
-+@@ -98,7 +98,7 @@
-+ NihChildWatch *nih_child_add_watch (const void *parent, pid_t pid,
-+ 				    NihChildEvents events,
-+ 				    NihChildHandler handler, void *data)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ void           nih_child_poll      (void);
-+ 
-+--- libnih-1.0.3.orig/nih/alloc.h
-++++ libnih-1.0.3/nih/alloc.h
-+@@ -299,7 +299,7 @@
-+  * It is permissible to take references to foo within its scope, or by
-+  * functions called, in which case it will not be freed.  Also it is
-+  * generally nonsensical to allocate with a parent, since this too will
-+- * prevent it from beign freed.
-++ * prevent it from being freed.
-+  **/
-+ #define nih_local __attribute__ ((cleanup(_nih_discard_local)))
-+ 
-+@@ -307,11 +307,11 @@
-+ NIH_BEGIN_EXTERN
-+ 
-+ void * nih_alloc                     (const void *parent, size_t size)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ void * nih_realloc                   (void *ptr, const void *parent,
-+ 				      size_t size)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ int    nih_free                      (void *ptr);
-+ int    nih_discard                   (void *ptr);
-+--- libnih-1.0.3.orig/nih/io.h
-++++ libnih-1.0.3/nih/io.h
-+@@ -269,7 +269,7 @@
-+ NihIoWatch *  nih_io_add_watch           (const void *parent, int fd,
-+ 					  NihIoEvents events,
-+ 					  NihIoWatcher watcher, void *data)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ void          nih_io_select_fds          (int *nfds, fd_set *readfds,
-+ 					  fd_set *writefds, fd_set *exceptfds);
-+@@ -278,12 +278,12 @@
-+ 
-+ 
-+ NihIoBuffer * nih_io_buffer_new          (const void *parent)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ int           nih_io_buffer_resize       (NihIoBuffer *buffer, size_t grow);
-+ char *        nih_io_buffer_pop          (const void *parent,
-+ 					  NihIoBuffer *buffer, size_t *len)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ void          nih_io_buffer_shrink       (NihIoBuffer *buffer, size_t len);
-+ int           nih_io_buffer_push         (NihIoBuffer *buffer,
-+ 					  const char *str, size_t len)
-+@@ -291,7 +291,7 @@
-+ 
-+ 
-+ NihIoMessage *nih_io_message_new         (const void *parent)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ int           nih_io_message_add_control (NihIoMessage *message, int level,
-+ 					  int type, socklen_t len,
-+@@ -300,7 +300,7 @@
-+ 
-+ NihIoMessage *nih_io_message_recv        (const void *parent, int fd,
-+ 					  size_t *len)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ ssize_t       nih_io_message_send        (NihIoMessage *message, int fd)
-+ 	__attribute__ ((warn_unused_result));
-+ 
-+@@ -310,7 +310,7 @@
-+ 					  NihIoCloseHandler close_handler,
-+ 					  NihIoErrorHandler error_handler,
-+ 					  void *data)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ void          nih_io_shutdown            (NihIo *io);
-+ int           nih_io_destroy             (NihIo *io);
-+ 
-+@@ -319,14 +319,14 @@
-+ 
-+ char *        nih_io_read                (const void *parent, NihIo *io,
-+ 					  size_t *len)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ int           nih_io_write               (NihIo *io, const char *str,
-+ 					  size_t len)
-+ 	__attribute__ ((warn_unused_result));
-+ 
-+ char *        nih_io_get                 (const void *parent, NihIo *io,
-+ 					  const char *delim)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ int           nih_io_printf              (NihIo *io, const char *format, ...)
-+ 	__attribute__ ((warn_unused_result, format (printf, 2, 3)));
-+--- libnih-1.0.3.orig/nih/test_output.h
-++++ libnih-1.0.3/nih/test_output.h
-+@@ -61,10 +61,10 @@
-+ 
-+ /**
-+  * TEST_FEATURE:
-+- * @_feat: name of function feature being tested.
-++ * @_feat: name of function or group feature being tested.
-+  *
-+- * Output a message indicating that a sub-test of a function is being
-+- * performed, specifically the feature named _feat.
-++ * Output a message indicating that a sub-test of a function or
-++ * group is being performed, specifically the feature named _feat.
-+  **/
-+ #define TEST_FEATURE(_feat) \
-+ 	printf ("...%s\n", _feat);
-+--- libnih-1.0.3.orig/nih/error.h
-++++ libnih-1.0.3/nih/error.h
-+@@ -1,7 +1,7 @@
-+ /* libnih
-+  *
-+- * Copyright © 2009 Scott James Remnant <scott@netsplit.com>.
-+- * Copyright © 2009 Canonical Ltd.
-++ * Copyright © 2011 Scott James Remnant <scott@netsplit.com>.
-++ * Copyright © 2011 Canonical Ltd.
-+  *
-+  * This program is free software; you can redistribute it and/or modify
-+  * it under the terms of the GNU General Public License version 2, as
-+@@ -111,7 +111,7 @@
-+  * @message: human-readable message.
-+  *
-+  * Raises an error with the given details in the current error context,
-+- * if an unhandled error already exists then an error message is emmitted
-++ * if an unhandled error already exists then an error message is emitted
-+  * through the logging system; you should try to avoid this.
-+  *
-+  * @message should be a static string, as it will not be freed when the
-+@@ -126,7 +126,7 @@
-+  * @format: format string for human-readable message.
-+  *
-+  * Raises an error with the given details in the current error context,
-+- * if an unhandled error already exists then an error message is emmitted
-++ * if an unhandled error already exists then an error message is emitted
-+  * through the logging system; you should try to avoid this.
-+  *
-+  * The human-readable message for the error is parsed according to @format,
-+@@ -140,7 +140,7 @@
-+  * nih_error_raise_system:
-+  *
-+  * Raises an error with details taken from the current value of errno,
-+- * if an unhandled error already exists then an error message is emmitted
-++ * if an unhandled error already exists then an error message is emitted
-+  * through the logging system; you should try to avoid this.
-+  **/
-+ #define nih_error_raise_system() \
-+@@ -162,7 +162,7 @@
-+  * @error: existing object to raise.
-+  *
-+  * Raises the existing error object in the current error context,
-+- * if an unhandled error already exists then an error message is emmitted
-++ * if an unhandled error already exists then an error message is emitted
-+  * through the logging system; you should try to avoid this.
-+  *
-+  * This is normally used to raise a taken error that has not been handled,
-+@@ -182,7 +182,7 @@
-+  * @message: human-readable message.
-+  *
-+  * Raises an error with the given details in the current error context,
-+- * if an unhandled error already exists then an error message is emmitted
-++ * if an unhandled error already exists then an error message is emitted
-+  * through the logging system; you should try to avoid this.
-+  *
-+  * Will return from the current function with @retval, which may be left
-+@@ -199,7 +199,7 @@
-+  * @retval: return value for function.
-+  *
-+  * Raises an error with details taken from the current value of errno,
-+- * if an unhandled error already exists then an error message is emmitted
-++ * if an unhandled error already exists then an error message is emitted
-+  * through the logging system; you should try to avoid this.
-+  *
-+  * Will return from the current function with @retval, which may be left
-+--- libnih-1.0.3.orig/nih/string.h
-++++ libnih-1.0.3/nih/string.h
-+@@ -35,60 +35,60 @@
-+ NIH_BEGIN_EXTERN
-+ 
-+ char * nih_sprintf          (const void *parent, const char *format, ...)
-+-	__attribute__ ((format (printf, 2, 3), warn_unused_result, malloc));
-++	__attribute__ ((format (printf, 2, 3), warn_unused_result));
-+ 
-+ char * nih_vsprintf         (const void *parent, const char *format,
-+ 			     va_list args)
-+-	__attribute__ ((format (printf, 2, 0), warn_unused_result, malloc));
-++	__attribute__ ((format (printf, 2, 0), warn_unused_result));
-+ 
-+ char * nih_strdup           (const void *parent, const char *str)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char * nih_strndup          (const void *parent, const char *str, size_t len)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char * nih_strcat           (char **str, const void *parent, const char *src)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char * nih_strncat          (char **str, const void *parent, const char *src,
-+ 			     size_t len)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char * nih_strcat_sprintf   (char **str, const void *parent,
-+ 			     const char *format, ...)
-+-	__attribute__ ((format (printf, 3, 4), warn_unused_result, malloc));
-++	__attribute__ ((format (printf, 3, 4), warn_unused_result));
-+ char * nih_strcat_vsprintf  (char **str, const void *parent,
-+ 			     const char *format, va_list args)
-+-	__attribute__ ((format (printf, 3, 0), warn_unused_result, malloc));
-++	__attribute__ ((format (printf, 3, 0), warn_unused_result));
-+ 
-+ char **nih_str_split        (const void *parent, const char *str,
-+ 			     const char *delim, int repeat)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char **nih_str_array_new    (const void *parent)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char **nih_str_array_add    (char ***array, const void *parent, size_t *len,
-+ 			     const char *str)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char **nih_str_array_addn   (char ***array, const void *parent, size_t *len,
-+ 			     const char *str, size_t strlen)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char **nih_str_array_addp   (char ***array, const void *parent, size_t *len,
-+ 			     void *ptr)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char **nih_str_array_copy   (const void *parent, size_t *len,
-+ 			     char * const *array)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char **nih_str_array_append (char ***array, const void *parent, size_t *len,
-+ 			     char * const *args)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char * nih_str_wrap         (const void *parent, const char *str, size_t len,
-+ 		             size_t first_indent, size_t indent)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ size_t nih_str_screen_width (void);
-+ char * nih_str_screen_wrap  (const void *parent, const char *str,
-+ 			     size_t first_indent, size_t indent)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih/string.c
-++++ libnih-1.0.3/nih/string.c
-+@@ -405,7 +405,7 @@
-+ 		const char  *ptr;
-+ 
-+ 		/* Skip initial delimiters */
-+-		while (repeat && strchr (delim, *str))
-++		while (repeat && *str && strchr (delim, *str))
-+ 			str++;
-+ 
-+ 		/* Find the end of the token */
-+@@ -413,6 +413,13 @@
-+ 		while (*str && (! strchr (delim, *str)))
-+ 			str++;
-+ 
-++		/* Don't create an empty string array element in repeat
-++		 * mode if there is no token (as a result of a
-++		 * duplicated delimiter character).
-++		 */
-++		if (repeat && (str == ptr))
-++			continue;
-++
-+ 		if (! nih_str_array_addn (&array, parent, &len,
-+ 					  ptr, str - ptr)) {
-+ 			nih_free (array);
-+--- libnih-1.0.3.orig/nih/file.h
-++++ libnih-1.0.3/nih/file.h
-+@@ -82,7 +82,7 @@
-+ 
-+ char *nih_file_read         (const void *parent, const char *path,
-+ 			     size_t *length)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ void *nih_file_map          (const char *path, int flags, size_t *length)
-+ 	__attribute__ ((warn_unused_result));
-+--- libnih-1.0.3.orig/nih/tests/test_option.c
-++++ libnih-1.0.3/nih/tests/test_option.c
-+@@ -1574,7 +1574,7 @@
-+ 		output = tmpfile ();
-+ 		TEST_CHILD (pid) {
-+ 			TEST_DIVERT_STDOUT (output) {
-+-				char **args;
-++				char **args __attribute__((unused));
-+ 
-+ 				args = nih_option_parser (NULL, argc, argv,
-+ 							  options, FALSE);
-+@@ -1652,7 +1652,7 @@
-+ 			unsetenv ("COLUMNS");
-+ 
-+ 			TEST_DIVERT_STDOUT (output) {
-+-				char **args;
-++				char **args __attribute__((unused));
-+ 
-+ 				args = nih_option_parser (NULL, argc, argv,
-+ 							  options, FALSE);
-+--- libnih-1.0.3.orig/nih/tests/test_logging.c
-++++ libnih-1.0.3/nih/tests/test_logging.c
-+@@ -31,7 +31,7 @@
-+ #include <nih/main.h>
-+ 
-+ 
-+-extern char *__abort_msg __attribute__ ((weak));
-++extern char *__nih_abort_msg;
-+ 
-+ static NihLogLevel last_priority = NIH_LOG_UNKNOWN;
-+ static char *      last_message = NULL;
-+@@ -156,68 +156,63 @@
-+ 	}
-+ 
-+ 
-+-	/* Check that a fatal message is also stored in the glibc __abort_msg
-++	/* Check that a fatal message is also stored in the __nih_abort_msg
-+ 	 * variable.
-+ 	 */
-+-	if (&__abort_msg) {
-+-		TEST_FEATURE ("with fatal message");
-+-		TEST_ALLOC_FAIL {
-+-			__abort_msg = NULL;
-+-			last_priority = NIH_LOG_UNKNOWN;
-+-			last_message = NULL;
-+-
-+-			ret = nih_log_message (NIH_LOG_FATAL,
-+-					       "message with %s %d formatting",
-+-					       "some", 20);
-+-
-+-			TEST_EQ (ret, 0);
-+-			TEST_EQ (last_priority, NIH_LOG_FATAL);
-+-			TEST_EQ_STR (last_message, "message with some 20 formatting");
-+-
-+-			TEST_NE_P (__abort_msg, NULL);
-+-			TEST_ALLOC_PARENT (__abort_msg, NULL);
-+-			TEST_EQ_STR (__abort_msg, "message with some 20 formatting");
-++	TEST_FEATURE ("with fatal message");
-++	TEST_ALLOC_FAIL {
-++		__nih_abort_msg = NULL;
-++		last_priority = NIH_LOG_UNKNOWN;
-++		last_message = NULL;
-+ 
-+-			free (last_message);
-+-		}
-++		ret = nih_log_message (NIH_LOG_FATAL,
-++				"message with %s %d formatting",
-++				"some", 20);
-+ 
-++		TEST_EQ (ret, 0);
-++		TEST_EQ (last_priority, NIH_LOG_FATAL);
-++		TEST_EQ_STR (last_message, "message with some 20 formatting");
-+ 
-+-		/* Check that a fatal message can safely overwrite one already stored
-+-		 * in the glibc __abort_msg variable.
-+-		 */
-+-		TEST_FEATURE ("with second fatal message");
-+-		TEST_ALLOC_FAIL {
-+-			TEST_ALLOC_SAFE {
-+-				msg = nih_strdup (NULL, "test");
-+-			}
-+-
-+-			__abort_msg = msg;
-+-			TEST_FREE_TAG (msg);
-+-
-+-			last_priority = NIH_LOG_UNKNOWN;
-+-			last_message = NULL;
-+-
-+-			ret = nih_log_message (NIH_LOG_FATAL,
-+-					       "message with %s %d formatting",
-+-					       "some", 20);
-+-
-+-			TEST_EQ (ret, 0);
-+-			TEST_EQ (last_priority, NIH_LOG_FATAL);
-+-			TEST_EQ_STR (last_message, "message with some 20 formatting");
-+-
-+-			TEST_FREE (msg);
-+-
-+-			TEST_NE_P (__abort_msg, NULL);
-+-			TEST_ALLOC_PARENT (__abort_msg, NULL);
-+-			TEST_EQ_STR (__abort_msg, "message with some 20 formatting");
-++		TEST_NE_P (__nih_abort_msg, NULL);
-++		TEST_ALLOC_PARENT (__nih_abort_msg, NULL);
-++		TEST_EQ_STR (__nih_abort_msg, "message with some 20 formatting");
-+ 
-+-			free (last_message);
-+-		}
-+-	} else {
-+-		printf ("SKIP: __abort_msg not available\n");
-++		free (last_message);
-+ 	}
-+ 
-+ 
-++	/* Check that a fatal message can safely overwrite one already stored
-++	 * in the __nih_abort_msg variable.
-++	 */
-++	TEST_FEATURE ("with second fatal message");
-++	TEST_ALLOC_FAIL {
-++		TEST_ALLOC_SAFE {
-++			msg = nih_strdup (NULL, "test");
-++		}
-++
-++		__nih_abort_msg = msg;
-++		TEST_FREE_TAG (msg);
-++
-++		last_priority = NIH_LOG_UNKNOWN;
-++		last_message = NULL;
-++
-++		ret = nih_log_message (NIH_LOG_FATAL,
-++				"message with %s %d formatting",
-++				"some", 20);
-++
-++		TEST_EQ (ret, 0);
-++		TEST_EQ (last_priority, NIH_LOG_FATAL);
-++		TEST_EQ_STR (last_message, "message with some 20 formatting");
-++
-++		TEST_FREE (msg);
-++
-++		TEST_NE_P (__nih_abort_msg, NULL);
-++		TEST_ALLOC_PARENT (__nih_abort_msg, NULL);
-++		TEST_EQ_STR (__nih_abort_msg, "message with some 20 formatting");
-++
-++		free (last_message);
-++	}
-++
-+ 	/* Check that the nih_debug macro wraps the call properly and
-+ 	 * includes the function in which the message occurred.
-+ 	 */
-+--- libnih-1.0.3.orig/nih/tests/test_hash.c
-++++ libnih-1.0.3/nih/tests/test_hash.c
-+@@ -470,7 +470,8 @@
-+ test_lookup (void)
-+ {
-+ 	NihHash *hash;
-+-	NihList *entry1, *entry2, *entry3, *ptr;
-++	NihList *entry1, *entry2, *ptr;
-++	NihList *entry3 __attribute__((unused));
-+ 
-+ 	TEST_FUNCTION ("nih_hash_lookup");
-+ 	hash = nih_hash_string_new (NULL, 0);
-+--- libnih-1.0.3.orig/nih/tests/test_main.c
-++++ libnih-1.0.3/nih/tests/test_main.c
-+@@ -457,7 +457,7 @@
-+ test_main_loop (void)
-+ {
-+ 	NihMainLoopFunc *func;
-+-	NihTimer        *timer;
-++	NihTimer        *timer __attribute__((unused));
-+ 	int              ret;
-+ 
-+ 	/* Check that we can run through the main loop, and that the
-+--- libnih-1.0.3.orig/nih/tests/test_watch.c
-++++ libnih-1.0.3/nih/tests/test_watch.c
-+@@ -2,8 +2,8 @@
-+  *
-+  * test_watch.c - test suite for nih/watch.c
-+  *
-+- * Copyright © 2009 Scott James Remnant <scott@netsplit.com>.
-+- * Copyright © 2009 Canonical Ltd.
-++ * Copyright © 2011 Scott James Remnant <scott@netsplit.com>.
-++ * Copyright © 2011 Canonical Ltd.
-+  *
-+  * This program is free software; you can redistribute it and/or modify
-+  * it under the terms of the GNU General Public License version 2, as
-+@@ -39,6 +39,8 @@
-+ #include <nih/error.h>
-+ #include <nih/logging.h>
-+ 
-++/* Read "The Hitchhikers Guide to the Galaxy" */
-++#define FILTER_VALUE 42
-+ 
-+ static int
-+ my_filter (void       *data,
-+@@ -54,6 +56,26 @@
-+ 	return FALSE;
-+ }
-+ 
-++/* Set by my_filter2 () so it knows if it has already been called */
-++static int my_filter2_called = 0;
-++
-++static int
-++my_filter2 (int       *value,
-++	   const char *path,
-++	   int         is_dir)
-++{
-++	/* we only want to toggle the value once */
-++	if (my_filter2_called)
-++		return TRUE;
-++
-++	my_filter2_called = 1;
-++
-++	nih_assert (value && *value == FILTER_VALUE);
-++	*value = 0;
-++
-++	return FALSE;
-++}
-++
-+ static int create_called = 0;
-+ static int modify_called = 0;
-+ static int delete_called = 0;
-+@@ -553,6 +575,44 @@
-+ 		nih_free (watch);
-+ 	}
-+ 
-++	/* Ensure the file filter gets passed the correct data pointer.
-++	 */
-++	TEST_FEATURE ("with filter and data");
-++
-++	/* Ensure we have a new directory */
-++	TEST_FILENAME (dirname);
-++	mkdir (dirname, 0755);
-++
-++	/* Create a single file */
-++	strcpy (filename, dirname);
-++	strcat (filename, "/foo");
-++
-++	fd = fopen (filename, "w");
-++	fprintf (fd, "test\n");
-++	fclose (fd);
-++
-++	TEST_ALLOC_FAIL {
-++		int watch_data = FILTER_VALUE;
-++
-++		/* Reset required to appease TEST_ALLOC_FAIL */
-++		my_filter2_called = 0;
-++
-++		watch = nih_watch_new (NULL, dirname,
-++				TRUE, TRUE,
-++				(NihFileFilter)my_filter2,
-++				NULL, NULL, NULL,
-++				&watch_data);
-++
-++		TEST_NE_P (watch, NULL);
-++
-++		/* Ensure the filter was called and changed the value */
-++
-++		TEST_NE (my_filter2_called, 0);
-++		TEST_EQ (watch_data, 0);
-++
-++		nih_free (watch);
-++	}
-++
-+ 	strcpy (filename, dirname);
-+ 	strcat (filename, "/bar");
-+ 	chmod (filename, 0755);
-+@@ -946,13 +1006,82 @@
-+ 	nih_error_init ();
-+ 
-+ 	TEST_FILENAME (dirname);
-+-	mkdir (dirname, 0755);
-++	TEST_EQ (mkdir (dirname, 0755), 0);
-+ 
-+-	watch = nih_watch_new (NULL, dirname, TRUE, TRUE, my_filter,
-+-			       my_create_handler, my_modify_handler,
-++	TEST_FEATURE ("with watched file");
-++	strcpy (filename, dirname);
-++	strcat (filename, "/foo");
-++
-++	/* Create file first since we don't set a create handler on the
-++	 * watch.
-++	 */
-++	fd = fopen (filename, "w");
-++	fprintf (fd, "bar\n");
-++	fclose (fd);
-++
-++	create_called = 0;
-++	modify_called = 0;
-++	delete_called = 0;
-++	logger_called = 0;
-++	last_path  = NULL;
-++	last_watch = NULL;
-++	last_data  = NULL;
-++
-++	watch = nih_watch_new (NULL, filename, FALSE, FALSE, NULL,
-++			       NULL, my_modify_handler,
-+ 			       my_delete_handler, &watch);
-++	TEST_NE_P (watch, NULL);
-++
-++	/* Now, modify the existing file to trigger the modify handler. */
-++	fd = fopen (filename, "a+");
-++	fprintf (fd, "baz\n");
-++	fclose (fd);
-++
-++	nfds = 0;
-++	FD_ZERO (&readfds);
-++	FD_ZERO (&writefds);
-++	FD_ZERO (&exceptfds);
-++
-++	nih_io_select_fds (&nfds, &readfds, &writefds, &exceptfds);
-++	select (nfds, &readfds, &writefds, &exceptfds, NULL);
-++	nih_io_handle_fds (&readfds, &writefds, &exceptfds);
-++
-++	TEST_EQ_STR (watch->path, filename);
-++
-++	/* Ensure no regression to old behaviour (LP:#777097) */
-++	TEST_NE (last_path[ strlen(last_path) - 1 ], '/');
-++
-++	TEST_EQ_STR (last_path, filename);
-++	TEST_EQ (modify_called, 1);
-++
-++	unlink (filename);
-++
-++	nfds = 0;
-++	FD_ZERO (&readfds);
-++	FD_ZERO (&writefds);
-++	FD_ZERO (&exceptfds);
-++
-++	nih_io_select_fds (&nfds, &readfds, &writefds, &exceptfds);
-++	select (nfds, &readfds, &writefds, &exceptfds, NULL);
-++	nih_io_handle_fds (&readfds, &writefds, &exceptfds);
-+ 
-++	TEST_EQ (delete_called, 1);
-+ 
-++	rmdir (filename);
-++	nih_free (last_path);
-++
-++	create_called = 0;
-++	modify_called = 0;
-++	delete_called = 0;
-++	logger_called = 0;
-++	last_path  = NULL;
-++	last_watch = NULL;
-++	last_data  = NULL;
-++
-++
-++	watch = nih_watch_new (NULL, dirname, TRUE, TRUE, my_filter,
-++			       my_create_handler, my_modify_handler,
-++			       my_delete_handler, &watch);
-+ 	/* Check that creating a file within the directory being watched
-+ 	 * results in the create handler being called, and passed the full
-+ 	 * path of the created file to it.
-+--- libnih-1.0.3.orig/nih/tests/test_string.c
-++++ libnih-1.0.3/nih/tests/test_string.c
-+@@ -619,6 +619,215 @@
-+ 		nih_free (array);
-+ 	}
-+ 
-++	TEST_FEATURE ("with no repeat and multiple identical delimiter "
-++			"characters at string start");
-++	TEST_ALLOC_FAIL {
-++		array = nih_str_split (NULL, "\t\tthis is a test", " \t", FALSE);
-++
-++		if (test_alloc_failed) {
-++			TEST_EQ_P (array, NULL);
-++			continue;
-++		}
-++
-++		TEST_ALLOC_SIZE (array, sizeof (char *) * 7);
-++		for (i = 0; i < 6; i++)
-++			TEST_ALLOC_PARENT (array[i], array);
-++
-++		TEST_EQ_STR (array[0], "");
-++		TEST_EQ_STR (array[1], "");
-++		TEST_EQ_STR (array[2], "this");
-++		TEST_EQ_STR (array[3], "is");
-++		TEST_EQ_STR (array[4], "a");
-++		TEST_EQ_STR (array[5], "test");
-++		TEST_EQ_P (array[6], NULL);
-++
-++		nih_free (array);
-++	}
-++
-++	TEST_FEATURE ("with no repeat and multiple different delimiter "
-++			"characters at string start");
-++	TEST_ALLOC_FAIL {
-++		array = nih_str_split (NULL, " \tthis is a test", " \t", FALSE);
-++
-++		if (test_alloc_failed) {
-++			TEST_EQ_P (array, NULL);
-++			continue;
-++		}
-++
-++		TEST_ALLOC_SIZE (array, sizeof (char *) * 7);
-++		for (i = 0; i < 6; i++)
-++			TEST_ALLOC_PARENT (array[i], array);
-++
-++		TEST_EQ_STR (array[0], "");
-++		TEST_EQ_STR (array[1], "");
-++		TEST_EQ_STR (array[2], "this");
-++		TEST_EQ_STR (array[3], "is");
-++		TEST_EQ_STR (array[4], "a");
-++		TEST_EQ_STR (array[5], "test");
-++		TEST_EQ_P (array[6], NULL);
-++
-++		nih_free (array);
-++	}
-++
-++	TEST_FEATURE ("with no repeat and multiple identical delimiter "
-++			"characters within string");
-++	TEST_ALLOC_FAIL {
-++		array = nih_str_split (NULL, "this is   a\t\ttest", " \t", FALSE);
-++
-++		if (test_alloc_failed) {
-++			TEST_EQ_P (array, NULL);
-++			continue;
-++		}
-++
-++		TEST_ALLOC_SIZE (array, sizeof (char *) * 8);
-++		for (i = 0; i < 7; i++)
-++			TEST_ALLOC_PARENT (array[i], array);
-++
-++		TEST_EQ_STR (array[0], "this");
-++		TEST_EQ_STR (array[1], "is");
-++		TEST_EQ_STR (array[2], "");
-++		TEST_EQ_STR (array[3], "");
-++		TEST_EQ_STR (array[4], "a");
-++		TEST_EQ_STR (array[5], "");
-++		TEST_EQ_STR (array[6], "test");
-++		TEST_EQ_P (array[7], NULL);
-++
-++		nih_free (array);
-++	}
-++
-++	TEST_FEATURE ("with no repeat and multiple different delimiter "
-++			"characters within string");
-++	TEST_ALLOC_FAIL {
-++		array = nih_str_split (NULL, "this is \n\ta\ttest", " \t\n", FALSE);
-++
-++		if (test_alloc_failed) {
-++			TEST_EQ_P (array, NULL);
-++			continue;
-++		}
-++
-++		TEST_ALLOC_SIZE (array, sizeof (char *) * 7);
-++		for (i = 0; i < 6; i++)
-++			TEST_ALLOC_PARENT (array[i], array);
-++
-++		TEST_EQ_STR (array[0], "this");
-++		TEST_EQ_STR (array[1], "is");
-++		TEST_EQ_STR (array[2], "");
-++		TEST_EQ_STR (array[3], "");
-++		TEST_EQ_STR (array[4], "a");
-++		TEST_EQ_STR (array[5], "test");
-++		TEST_EQ_P (array[6], NULL);
-++
-++		nih_free (array);
-++	}
-++
-++	TEST_FEATURE ("with no repeat and multiple identical delimiter "
-++			"characters at string end");
-++	TEST_ALLOC_FAIL {
-++		array = nih_str_split (NULL, "this is a test  ", " \t", FALSE);
-++
-++		if (test_alloc_failed) {
-++			TEST_EQ_P (array, NULL);
-++			continue;
-++		}
-++
-++		TEST_ALLOC_SIZE (array, sizeof (char *) * 6);
-++		for (i = 0; i < 5; i++)
-++			TEST_ALLOC_PARENT (array[i], array);
-++
-++		TEST_EQ_STR (array[0], "this");
-++		TEST_EQ_STR (array[1], "is");
-++		TEST_EQ_STR (array[2], "a");
-++		TEST_EQ_STR (array[3], "test");
-++		TEST_EQ_STR (array[4], "");
-++		TEST_EQ_P (array[5], NULL);
-++
-++		nih_free (array);
-++	}
-++
-++	TEST_FEATURE ("with no repeat and multiple different delimiter "
-++			"characters at string end");
-++	TEST_ALLOC_FAIL {
-++		array = nih_str_split (NULL, "this is a test \t", " \t", FALSE);
-++
-++		if (test_alloc_failed) {
-++			TEST_EQ_P (array, NULL);
-++			continue;
-++		}
-++
-++		TEST_ALLOC_SIZE (array, sizeof (char *) * 6);
-++		for (i = 0; i < 5; i++)
-++			TEST_ALLOC_PARENT (array[i], array);
-++
-++		TEST_EQ_STR (array[0], "this");
-++		TEST_EQ_STR (array[1], "is");
-++		TEST_EQ_STR (array[2], "a");
-++		TEST_EQ_STR (array[3], "test");
-++		TEST_EQ_STR (array[4], "");
-++		TEST_EQ_P (array[5], NULL);
-++
-++		nih_free (array);
-++	}
-++
-++	TEST_FEATURE ("with no repeat and multiple identical delimiter "
-++			"characters at beginning, middle and end of string");
-++	TEST_ALLOC_FAIL {
-++		array = nih_str_split (NULL, "   this is\n\n\na test\t\t\t", " \t\n", FALSE);
-++
-++		if (test_alloc_failed) {
-++			TEST_EQ_P (array, NULL);
-++			continue;
-++		}
-++
-++		TEST_ALLOC_SIZE (array, sizeof (char *) * 12);
-++		for (i = 0; i < 11; i++)
-++			TEST_ALLOC_PARENT (array[i], array);
-++
-++		TEST_EQ_STR (array[0], "");
-++		TEST_EQ_STR (array[1], "");
-++		TEST_EQ_STR (array[2], "");
-++		TEST_EQ_STR (array[3], "this");
-++		TEST_EQ_STR (array[4], "is");
-++		TEST_EQ_STR (array[5], "");
-++		TEST_EQ_STR (array[6], "");
-++		TEST_EQ_STR (array[7], "a");
-++		TEST_EQ_STR (array[8], "test");
-++		TEST_EQ_STR (array[9], "");
-++		TEST_EQ_STR (array[10], "");
-++		TEST_EQ_P (array[11], NULL);
-++
-++		nih_free (array);
-++	}
-++
-++	TEST_FEATURE ("with no repeat and multiple different delimiter "
-++			"characters at beginning, middle and end of string");
-++	TEST_ALLOC_FAIL {
-++		array = nih_str_split (NULL, ": \nthis is\t \n:a test:\n ", "\n :\t", FALSE);
-++
-++		if (test_alloc_failed) {
-++			TEST_EQ_P (array, NULL);
-++			continue;
-++		}
-++
-++		TEST_ALLOC_SIZE (array, sizeof (char *) * 13);
-++		for (i = 0; i < 12; i++)
-++			TEST_ALLOC_PARENT (array[i], array);
-++
-++		TEST_EQ_STR (array[0], "");
-++		TEST_EQ_STR (array[1], "");
-++		TEST_EQ_STR (array[2], "");
-++		TEST_EQ_STR (array[3], "this");
-++		TEST_EQ_STR (array[4], "is");
-++		TEST_EQ_STR (array[5], "");
-++		TEST_EQ_STR (array[6], "");
-++		TEST_EQ_STR (array[7], "");
-++		TEST_EQ_STR (array[8], "a");
-++		TEST_EQ_STR (array[9], "test");
-++		TEST_EQ_STR (array[10], "");
-++		TEST_EQ_STR (array[11], "");
-++		TEST_EQ_P (array[12], NULL);
-++
-++		nih_free (array);
-++	}
-+ 
-+ 	/* Check that we can split a string treating multiple consecutive
-+ 	 * matching characters as a single separator to be skipped.
-+@@ -645,6 +854,177 @@
-+ 		nih_free (array);
-+ 	}
-+ 
-++	/* Check that we can split a string containing multiple
-++	 * occurences of one of the delimiter characters at the
-++	 * beginning of the string.
-++	 */
-++	TEST_FEATURE ("with repeat and multiple identical adjacent delimiter characters at string start");
-++	TEST_ALLOC_FAIL {
-++		array = nih_str_split (NULL, "\n\nhello", " \t\r\n", TRUE);
-++
-++		if (test_alloc_failed) {
-++			TEST_EQ_P (array, NULL);
-++			continue;
-++		}
-++
-++		TEST_ALLOC_SIZE (array, sizeof (char *) * 2);
-++		for (i = 0; i < 1; i++)
-++			TEST_ALLOC_PARENT (array[i], array);
-++
-++		TEST_EQ_STR (array[0], "hello");
-++		TEST_EQ_P (array[1], NULL);
-++
-++		nih_free (array);
-++	}
-++
-++	TEST_FEATURE ("with repeat and multiple different adjacent delimiter characters at string start");
-++	TEST_ALLOC_FAIL {
-++		array = nih_str_split (NULL, "\n\r hello", " \t\r\n", TRUE);
-++
-++		if (test_alloc_failed) {
-++			TEST_EQ_P (array, NULL);
-++			continue;
-++		}
-++
-++		TEST_ALLOC_SIZE (array, sizeof (char *) * 2);
-++		for (i = 0; i < 1; i++)
-++			TEST_ALLOC_PARENT (array[i], array);
-++
-++		TEST_EQ_STR (array[0], "hello");
-++		TEST_EQ_P (array[1], NULL);
-++
-++		nih_free (array);
-++	}
-++
-++	TEST_FEATURE ("with repeat and multiple identical adjacent delimiter "
-++			"characters within string");
-++	TEST_ALLOC_FAIL {
-++		array = nih_str_split (NULL, "hello\n\rworld", " \t\n\r", TRUE);
-++
-++		if (test_alloc_failed) {
-++			TEST_EQ_P (array, NULL);
-++			continue;
-++		}
-++
-++		TEST_ALLOC_SIZE (array, sizeof (char *) * 3);
-++		for (i = 0; i < 2; i++)
-++			TEST_ALLOC_PARENT (array[i], array);
-++
-++		TEST_EQ_STR (array[0], "hello");
-++		TEST_EQ_STR (array[1], "world");
-++		TEST_EQ_P (array[2], NULL);
-++
-++		nih_free (array);
-++	}
-++
-++	TEST_FEATURE ("with repeat and multiple different adjacent delimiter "
-++			"characters within string");
-++	TEST_ALLOC_FAIL {
-++		array = nih_str_split (NULL, "hello\n\r\tworld", " \t\n\r", TRUE);
-++
-++		if (test_alloc_failed) {
-++			TEST_EQ_P (array, NULL);
-++			continue;
-++		}
-++
-++		TEST_ALLOC_SIZE (array, sizeof (char *) * 3);
-++		for (i = 0; i < 2; i++)
-++			TEST_ALLOC_PARENT (array[i], array);
-++
-++		TEST_EQ_STR (array[0], "hello");
-++		TEST_EQ_STR (array[1], "world");
-++		TEST_EQ_P (array[2], NULL);
-++
-++		nih_free (array);
-++	}
-++
-++	TEST_FEATURE ("with repeat and multiple identical adjacent delimiter "
-++			"characters at string end");
-++	TEST_ALLOC_FAIL {
-++		array = nih_str_split (NULL, "hello\n\n\n\n\n\n\n", " \t\r\n", TRUE);
-++
-++		if (test_alloc_failed) {
-++			TEST_EQ_P (array, NULL);
-++			continue;
-++		}
-++
-++		TEST_ALLOC_SIZE (array, sizeof (char *) * 2);
-++		for (i = 0; i < 1; i++)
-++			TEST_ALLOC_PARENT (array[i], array);
-++
-++		TEST_EQ_STR (array[0], "hello");
-++		TEST_EQ_P (array[1], NULL);
-++
-++		nih_free (array);
-++	}
-++
-++	TEST_FEATURE ("with repeat and multiple different adjacent delimiter "
-++			"characters at string end");
-++	TEST_ALLOC_FAIL {
-++		array = nih_str_split (NULL, "hello \r\t\r\t\n ", " \t\r\n", TRUE);
-++
-++		if (test_alloc_failed) {
-++			TEST_EQ_P (array, NULL);
-++			continue;
-++		}
-++
-++		TEST_ALLOC_SIZE (array, sizeof (char *) * 2);
-++		for (i = 0; i < 1; i++)
-++			TEST_ALLOC_PARENT (array[i], array);
-++
-++		TEST_EQ_STR (array[0], "hello");
-++		TEST_EQ_P (array[1], NULL);
-++
-++		nih_free (array);
-++	}
-++
-++	TEST_FEATURE ("with repeat and multiple identical adjacent delimiter "
-++			"characters at beginning, middle and end of string");
-++	TEST_ALLOC_FAIL {
-++		array = nih_str_split (NULL,
-++				"        hello\n\n\n,  world\n\n\n",
-++				"\r\t\n ", TRUE);
-++
-++		if (test_alloc_failed) {
-++			TEST_EQ_P (array, NULL);
-++			continue;
-++		}
-++
-++		TEST_ALLOC_SIZE (array, sizeof (char *) * 4);
-++		for (i = 0; i < 3; i++)
-++			TEST_ALLOC_PARENT (array[i], array);
-++
-++		TEST_EQ_STR (array[0], "hello");
-++		TEST_EQ_STR (array[1], ",");
-++		TEST_EQ_STR (array[2], "world");
-++		TEST_EQ_P (array[3], NULL);
-++
-++		nih_free (array);
-++	}
-++
-++	TEST_FEATURE ("with repeat and multiple different adjacent delimiter "
-++			"characters at beginning, middle and end of string");
-++	TEST_ALLOC_FAIL {
-++		array = nih_str_split (NULL,
-++				"\n    \r\thello\n\n\r , \n\t\rworld\t \r\n \n",
-++				" \t\n\r", TRUE);
-++
-++		if (test_alloc_failed) {
-++			TEST_EQ_P (array, NULL);
-++			continue;
-++		}
-++
-++		TEST_ALLOC_SIZE (array, sizeof (char *) * 4);
-++		for (i = 0; i < 3; i++)
-++			TEST_ALLOC_PARENT (array[i], array);
-++
-++		TEST_EQ_STR (array[0], "hello");
-++		TEST_EQ_STR (array[1], ",");
-++		TEST_EQ_STR (array[2], "world");
-++		TEST_EQ_P (array[3], NULL);
-++
-++		nih_free (array);
-++	}
-+ 
-+ 	/* Check that we can give an empty string, and end up with a
-+ 	 * one-element array that only contains a NULL pointer.
-+--- libnih-1.0.3.orig/nih/tests/test_file.c
-++++ libnih-1.0.3/nih/tests/test_file.c
-+@@ -724,6 +724,25 @@
-+ 	return FALSE;
-+ }
-+ 
-++/* find only frodo files */
-++static int
-++my_filter_frodo_file (void       *data,
-++	   const char *path,
-++	   int         is_dir)
-++{
-++	char *slash;
-++
-++	if (is_dir)
-++		return FALSE;
-++
-++	slash = strrchr (path, '/');
-++	if (strcmp (slash, "/frodo"))
-++		return TRUE;
-++
-++	return FALSE;
-++}
-++
-++
-+ static int logger_called = 0;
-+ 
-+ static int
-+@@ -905,6 +924,48 @@
-+ 		TEST_EQ_STR (v->path, filename);
-+ 
-+ 		nih_free (visited);
-++
-++				/* Try also inverse filter */
-++		TEST_ALLOC_SAFE {
-++			visitor_called = 0;
-++			visited = nih_list_new (NULL);
-++		}
-++
-++		ret = nih_dir_walk (dirname, my_filter_frodo_file,
-++				    my_visitor, NULL, &ret);
-++
-++		TEST_EQ (ret, 0);
-++		TEST_EQ (visitor_called, 4);
-++
-++		v = (Visited *)visited->next;
-++		TEST_EQ (v->data, &ret);
-++		TEST_EQ_STR (v->dirname, dirname);
-++		strcpy (filename, dirname);
-++		strcat (filename, "/bar");
-++		TEST_EQ_STR (v->path, filename);
-++
-++		v = (Visited *)v->entry.next;
-++		TEST_EQ (v->data, &ret);
-++		TEST_EQ_STR (v->dirname, dirname);
-++		strcpy (filename, dirname);
-++		strcat (filename, "/bar/frodo");
-++		TEST_EQ_STR (v->path, filename);
-++
-++		v = (Visited *)v->entry.next;
-++		TEST_EQ (v->data, &ret);
-++		TEST_EQ_STR (v->dirname, dirname);
-++		strcpy (filename, dirname);
-++		strcat (filename, "/baz");
-++		TEST_EQ_STR (v->path, filename);
-++
-++		v = (Visited *)v->entry.next;
-++		TEST_EQ (v->data, &ret);
-++		TEST_EQ_STR (v->dirname, dirname);
-++		strcpy (filename, dirname);
-++		strcat (filename, "/frodo");
-++		TEST_EQ_STR (v->path, filename);
-++
-++		nih_free (visited);
-+ 	}
-+ 
-+ 
-+--- libnih-1.0.3.orig/debian/control
-++++ libnih-1.0.3/debian/control
-+@@ -0,0 +1,81 @@
-++Source: libnih
-++Section: libs
-++Priority: required
-++Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-++XSBC-Original-Maintainer: Scott James Remnant <scott@netsplit.com>
-++Standards-Version: 3.9.4
-++Build-Depends: debhelper (>= 9), pkg-config (>= 0.22), libdbus-1-dev (>= 1.4), libexpat1-dev (>= 2.0.0), dbus (>= 1.4), libc6-dev (>= 2.15~) | libc6.1-dev (>= 2.15~),
-++               dh-autoreconf, autopoint, dpkg-dev (>= 1.16.1~)
-++# To cross build this package also needs: libdbus-1-dev:native (>= 1.4), libexpat1-dev:native (>= 2.0.0)
-++# But :native build-deps are not supported yet, so instead one can do
-++# $ apt-get build-dep libnih
-++# $ apt-get build-dep libnih -aarmhf
-++# instead to get all required build-deps
-++Vcs-Bzr: lp:ubuntu/libnih
-++XSC-Debian-Vcs-Git: git://git.debian.org/git/collab-maint/libnih.git
-++XSC-Debian-Vcs-Browser: http://git.debian.org/?p=collab-maint/libnih.git;a=summary
-++Homepage: https://launchpad.net/libnih
-++
-++Package: libnih1
-++Architecture: any
-++Pre-Depends: ${misc:Pre-Depends}, ${shlibs:Depends}, ${misc:Depends}
-++Multi-Arch: same
-++Description: NIH Utility Library
-++ libnih is a light-weight "standard library" of C functions to ease the
-++ development of other libraries and applications, especially those
-++ normally found in /lib.
-++ .
-++ This package contains the shared library.
-++
-++Package: libnih-dev
-++Priority: optional
-++Section: libdevel
-++Architecture: any
-++Multi-Arch: same
-++Depends: libnih1 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-++Description: NIH Utility Library (development files)
-++ libnih is a light-weight "standard library" of C functions to ease the
-++ development of other libraries and applications, especially those
-++ normally found in /lib.
-++ .
-++ This package contains the static library and C header files which are
-++ needed for developing software using libnih.
-++
-++Package: libnih-dbus1
-++Architecture: any
-++Pre-Depends: ${misc:Pre-Depends}
-++Depends: libnih1 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-++Multi-Arch: same
-++Description: NIH D-Bus Bindings Library
-++ libnih-dbus is a D-Bus bindings library that integrates with the main
-++ loop provided by libnih.
-++ .
-++ This package contains the shared library.
-++
-++Package: libnih-dbus-dev
-++Priority: optional
-++Section: libdevel
-++Architecture: any
-++Multi-Arch: same
-++Depends: libnih-dbus1 (= ${binary:Version}), libnih-dev (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-++Recommends: nih-dbus-tool (= ${binary:Version})
-++Description: NIH D-Bus Bindings Library (development files)
-++ libnih-dbus is a D-Bus bindings library that integrates with the main
-++ loop provided by libnih.
-++ .
-++ This package contains the static library and C header files which are
-++ needed for developing software using libnih-dbus.
-++
-++Package: nih-dbus-tool
-++Section: devel
-++Architecture: any
-++Multi-Arch: foreign
-++Depends: ${shlibs:Depends}, ${misc:Depends}
-++Recommends: libnih-dbus-dev (= ${binary:Version})
-++Description: NIH D-Bus Binding Tool
-++ nih-dbus-tool generates C source code from the D-Bus Introspection XML
-++ data provided by most services; either to make implementing the
-++ described objects in C programs or to make proxying to the described
-++ remote objects easier.
-++ .
-++ The generated code requires libnih-dbus-dev to be compiled.
-+--- libnih-1.0.3.orig/debian/libnih-dev.install
-++++ libnih-1.0.3/debian/libnih-dev.install
-+@@ -0,0 +1,6 @@
-++lib/*/libnih.a
-++lib/*/libnih.so
-++usr/include/libnih.h
-++usr/include/nih
-++usr/lib/*/pkgconfig/libnih.pc
-++usr/share/aclocal/libnih.m4
-+--- libnih-1.0.3.orig/debian/libnih1.docs
-++++ libnih-1.0.3/debian/libnih1.docs
-+@@ -0,0 +1,3 @@
-++AUTHORS
-++NEWS
-++README
-+--- libnih-1.0.3.orig/debian/libnih-dbus1.install
-++++ libnih-1.0.3/debian/libnih-dbus1.install
-+@@ -0,0 +1 @@
-++lib/*/libnih-dbus.so.*
-+--- libnih-1.0.3.orig/debian/libnih1.install
-++++ libnih-1.0.3/debian/libnih1.install
-+@@ -0,0 +1 @@
-++lib/*/libnih.so.*
-+--- libnih-1.0.3.orig/debian/rules
-++++ libnih-1.0.3/debian/rules
-+@@ -0,0 +1,54 @@
-++#!/usr/bin/make -f
-++
-++include /usr/share/dpkg/architecture.mk
-++
-++%:
-++	dh $@ --with autoreconf
-++
-++
-++CFLAGS := -Wall -fstack-protector -fPIE $(shell dpkg-buildflags --get CFLAGS)
-++LDFLAGS := -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -pie $(shell dpkg-buildflags --get LDFLAGS)
-++
-++override_dh_auto_configure:
-++ifeq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
-++	dh_auto_configure -- CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" \
-++		--libdir=/lib/$(DEB_HOST_MULTIARCH)
-++else
-++	dh_auto_configure -B build-dbus-tool/ -- CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" \
-++		--libdir=/lib/$(DEB_BUILD_MULTIARCH) \
-++		--host=$(DEB_BUILD_GNU_TYPE)
-++	dh_auto_build -B build-dbus-tool/ --parallel
-++	dh_auto_configure -- CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" \
-++		NIH_DBUS_TOOL=$(CURDIR)/build-dbus-tool/nih-dbus-tool/nih-dbus-tool \
-++		--libdir=/lib/$(DEB_HOST_MULTIARCH)
-++endif
-++
-++override_dh_auto_build:
-++	dh_auto_build --parallel
-++
-++override_dh_auto_test:
-++ifeq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
-++	dh_auto_test --parallel
-++endif
-++
-++override_dh_auto_install:
-++	dh_auto_install -- pkgconfigdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH)/pkgconfig
-++
-++override_dh_makeshlibs:
-++	dh_makeshlibs -plibnih1 -V 'libnih1 (>= 1.0.0)'
-++	dh_makeshlibs -plibnih-dbus1 -V 'libnih-dbus1 (>= 1.0.0)'
-++	dh_makeshlibs -Nlibnih1 -Nlibnih-dbus1
-++
-++override_dh_shlibdeps:
-++	dh_shlibdeps
-++	sed -i 's/2\.14/2.15/' debian/*.substvars
-++	sed -i 's/>= 2.15)/>= 2.15~)/g' debian/*.substvars
-++
-++
-++# Symlink /usr/share/doc directories together
-++override_dh_installdocs:
-++	dh_installdocs --link-doc=libnih1
-++
-++override_dh_clean:
-++	rm -rf build-dbus-tool/
-++	dh_clean
-+--- libnih-1.0.3.orig/debian/compat
-++++ libnih-1.0.3/debian/compat
-+@@ -0,0 +1 @@
-++9
-+--- libnih-1.0.3.orig/debian/nih-dbus-tool.install
-++++ libnih-1.0.3/debian/nih-dbus-tool.install
-+@@ -0,0 +1,2 @@
-++usr/bin/nih-dbus-tool
-++usr/share/man/man1/nih-dbus-tool.1
-+--- libnih-1.0.3.orig/debian/copyright
-++++ libnih-1.0.3/debian/copyright
-+@@ -0,0 +1,18 @@
-++This is the Ubuntu package of libnih, the NIH Utility Library.
-++
-++Copyright © 2009 Canonical Ltd.
-++Copyright © 2009 Scott James Remnant <scott@netsplit.com>
-++
-++Licence:
-++
-++This program is free software; you can redistribute it and/or modify
-++it under the terms of the GNU General Public License version 2, as
-++published by the Free Software Foundation.
-++
-++This program is distributed in the hope that it will be useful, but
-++WITHOUT ANY WARRANTY; without even the implied warranty of
-++MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-++General Public License for more details.
-++
-++On Ubuntu systems, the complete text of the GNU General Public License
-++can be found in ‘/usr/share/common-licenses/GPL-2’.
-+--- libnih-1.0.3.orig/debian/libnih-dbus1.postinst
-++++ libnih-1.0.3/debian/libnih-dbus1.postinst
-+@@ -0,0 +1,53 @@
-++#!/bin/sh
-++
-++set -e
-++
-++if [ "$1" = configure ]; then
-++    # A dependent library of Upstart has changed, so restart Upstart
-++    # such that it can safely unmount the root filesystem (LP: #740390)
-++
-++    # Query running version of Upstart, but only when we know
-++    # that initctl will work.
-++    #
-++    # The calculated version string may be the null string if
-++    # Upstart is not running (where for example an alternative
-++    # init is running outside a chroot environment) or if the
-++    # query failed for some reason. However, the version check
-++    # below handles a null version string correctly.
-++    UPSTART_VERSION_RUNNING=$(initctl version 2>/dev/null |\
-++        awk '{print $3}'|tr -d ')' || :)
-++
-++    if ischroot; then
-++        # Do not honour re-exec when requested from within a
-++        # chroot since:
-++        #
-++        # (a) The version of Upstart outside might not support it.
-++        # (b) An isolated environment such as a chroot should
-++        #     not be able to modify its containing environment.
-++        #
-++        # A sufficiently new Upstart will actually handle a re-exec
-++        # request coming from telinit within a chroot correctly (by
-++        # doing nothing) but it's simple enough to perform the check
-++        # here and save Upstart the effort.
-++        :
-++    elif dpkg --compare-versions "$UPSTART_VERSION_RUNNING" ge 1.6.1; then
-++        # We are not running inside a chroot and the running version
-++        # of Upstart supports stateful re-exec, so we can
-++        # restart immediately.
-++        #
-++        # XXX: Note that the check on the running version must
-++        # remain *indefinitely* since it's the only safe way to
-++        # know if stateful re-exec is supported: simply checking
-++        # packaged version numbers is not sufficient since
-++        # the package could be upgraded multiple times without a
-++        # reboot.
-++        telinit u || :
-++    else
-++        # Before we shutdown or reboot, we need to re-exec so that we
-++        # can safely remount the root filesystem; we can't just do that
-++        # here because we lose state.
-++        touch /var/run/init.upgraded || :
-++    fi
-++fi
-++
-++#DEBHELPER#
-+--- libnih-1.0.3.orig/debian/changelog.DEBIAN
-++++ libnih-1.0.3/debian/changelog.DEBIAN
-+@@ -0,0 +1,118 @@
-++libnih (1.0.3-4) unstable; urgency=low
-++
-++  * Rebuild for new libc to update versioned dependency; this comes from
-++    the __abort_msg dependency, dpkg-shlibs needs overriding since this is
-++    actually a weak link, but this rebuild fixes things for now.
-++    Closes: #625257.
-++
-++ -- Scott James Remnant <scott@netsplit.com>  Mon, 02 May 2011 15:08:33 -0700
-++
-++libnih (1.0.3-3) unstable; urgency=low
-++
-++  * New maintainer.  Closes: #624442.
-++
-++ -- Scott James Remnant <scott@netsplit.com>  Thu, 28 Apr 2011 14:26:05 -0700
-++
-++libnih (1.0.3-2) unstable; urgency=low
-++
-++  * Bump build dependency on libdbus-1-dev and dbus to (>= 1.4) for Unix file
-++    descriptor passing support.
-++
-++ -- Michael Biebl <biebl@debian.org>  Thu, 10 Feb 2011 20:25:18 +0100
-++
-++libnih (1.0.3-1ubuntu1) natty; urgency=low
-++
-++  * Rebuild with libc6-dev (>= 2.13~).
-++
-++ -- Matthias Klose <doko@ubuntu.com>  Fri, 18 Feb 2011 12:09:29 +0100
-++
-++libnih (1.0.3-1) unstable; urgency=low
-++
-++  * New upstream release.
-++  * Bump debhelper compatibility level to 8 and update build dependency
-++    accordingly.
-++
-++ -- Michael Biebl <biebl@debian.org>  Mon, 07 Feb 2011 22:19:13 +0100
-++
-++libnih (1.0.2-2) unstable; urgency=low
-++
-++  * Install library development files to /usr/lib and not /lib.
-++  * Remove libtool *.la files as there are no reverse dependencies referencing
-++    them.
-++  * Bump Standards-Version to 3.9.1. No further changes.
-++
-++ -- Michael Biebl <biebl@debian.org>  Sun, 02 Jan 2011 21:09:40 +0100
-++
-++libnih (1.0.2-1ubuntu3) natty; urgency=low
-++
-++  * Disable some tests on ppc64 to build an initial package.
-++
-++ -- Matthias Klose <doko@ubuntu.com>  Thu, 18 Nov 2010 10:59:38 +0100
-++
-++libnih (1.0.2-1ubuntu2) maverick; urgency=low
-++
-++  * Re-add -fPIE to the testsuite on armel, removing all armel-specific tests;
-++    current gcc-4.4 don't seem affected by the ICE anymore (see LP #398403).
-++
-++ -- Loïc Minier <loic.minier@linaro.org>  Mon, 23 Aug 2010 10:25:31 +0200
-++
-++libnih (1.0.2-1ubuntu1) maverick; urgency=low
-++
-++  * Rebuild with libc6-dev (>= 2.12~), after checking that
-++    __abort_msg is available with the same signature in eglibc 2.12.
-++  * Don't build the testsuite with -fPIE on armel; LP: #398403.
-++
-++ -- Matthias Klose <doko@ubuntu.com>  Sun, 30 May 2010 02:54:56 +0200
-++
-++libnih (1.0.2-1) unstable; urgency=low
-++
-++  * Initial upload to Debian. Closes: #585071
-++  * Based on the Ubuntu package for Lucid done by Scott James Remnant with the
-++    following changes:
-++    - Switch packages to priority optional.
-++    - Use binary:Version instead of Source-Version.
-++    - Bump Standards-Version to 3.8.4.
-++    - Add Homepage and Vcs-* fields.
-++    - Don't symlink /usr/share/doc directories.
-++    - Refer to versioned /usr/share/common-licenses/GPL-2 file in
-++      debian/copyright.
-++    - List all symbols explicitly instead of using a wildcard and add symbols
-++      introduced in 1.0.1.
-++    - Use the symbols files to create the correct version info instead of
-++      specifying it manually via shlibs.
-++    - Switch to source format 3.0 (quilt).
-++    - Add watch file to track new upstream releases.
-++
-++ -- Michael Biebl <biebl@debian.org>  Sun, 13 Jun 2010 23:36:52 +0200
-++
-++libnih (1.0.1-1) lucid; urgency=low
-++
-++  * New upstream release:
-++    - Add missing __nih_* symbols to linker version script so that we
-++      can link Upstart's test suite.
-++    - Glibc __abort_msg symbol now only linked as a weak symbol.
-++
-++ -- Scott James Remnant <scott@ubuntu.com>  Thu, 04 Feb 2010 14:53:26 -0800
-++
-++libnih (1.0.0-2build1) lucid; urgency=low
-++
-++  * Rebuild to pick up relaxed dependency on libc6, after checking that
-++    __abort_msg is available with the same signature in eglibc 2.11.
-++    LP: #508702.
-++
-++ -- Matthias Klose <doko@ubuntu.com>  Mon, 18 Jan 2010 16:09:13 +0100
-++
-++libnih (1.0.0-2) lucid; urgency=low
-++
-++  * debian/control: Add build-dependency on dbus so the test suite can
-++    pass on the buildds.
-++
-++ -- Scott James Remnant <scott@ubuntu.com>  Sat, 28 Nov 2009 23:28:27 +0000
-++
-++libnih (1.0.0-1) lucid; urgency=low
-++
-++  * First upstream release.  Previously this code was included in the
-++    upstart, mountall and ureadahead source packages.
-++
-++ -- Scott James Remnant <scott@ubuntu.com>  Sat, 28 Nov 2009 21:14:00 +0000
-++
-+--- libnih-1.0.3.orig/debian/libnih1.symbols
-++++ libnih-1.0.3/debian/libnih1.symbols
-+@@ -0,0 +1,2 @@
-++libnih.so.1 libnih1 #MINVER#
-++ *@LIBNIH_1_0 1.0.0
-+--- libnih-1.0.3.orig/debian/libnih-dbus-dev.install
-++++ libnih-1.0.3/debian/libnih-dbus-dev.install
-+@@ -0,0 +1,5 @@
-++lib/*/libnih-dbus.a
-++lib/*/libnih-dbus.so
-++usr/include/libnih-dbus.h
-++usr/include/nih-dbus
-++usr/lib/*/pkgconfig/libnih-dbus.pc
-+--- libnih-1.0.3.orig/debian/libnih1.postinst
-++++ libnih-1.0.3/debian/libnih1.postinst
-+@@ -0,0 +1,53 @@
-++#!/bin/sh
-++
-++set -e
-++
-++if [ "$1" = configure ]; then
-++    # A dependent library of Upstart has changed, so restart Upstart
-++    # such that it can safely unmount the root filesystem (LP: #740390)
-++
-++    # Query running version of Upstart, but only when we know
-++    # that initctl will work.
-++    #
-++    # The calculated version string may be the null string if
-++    # Upstart is not running (where for example an alternative
-++    # init is running outside a chroot environment) or if the
-++    # query failed for some reason. However, the version check
-++    # below handles a null version string correctly.
-++    UPSTART_VERSION_RUNNING=$(initctl version 2>/dev/null |\
-++        awk '{print $3}'|tr -d ')' || :)
-++
-++    if ischroot; then
-++        # Do not honour re-exec when requested from within a
-++        # chroot since:
-++        #
-++        # (a) The version of Upstart outside might not support it.
-++        # (b) An isolated environment such as a chroot should
-++        #     not be able to modify its containing environment.
-++        #
-++        # A sufficiently new Upstart will actually handle a re-exec
-++        # request coming from telinit within a chroot correctly (by
-++        # doing nothing) but it's simple enough to perform the check
-++        # here and save Upstart the effort.
-++        :
-++    elif dpkg --compare-versions "$UPSTART_VERSION_RUNNING" ge 1.6.1; then
-++        # We are not running inside a chroot and the running version
-++        # of Upstart supports stateful re-exec, so we can
-++        # restart immediately.
-++        #
-++        # XXX: Note that the check on the running version must
-++        # remain *indefinitely* since it's the only safe way to
-++        # know if stateful re-exec is supported: simply checking
-++        # packaged version numbers is not sufficient since
-++        # the package could be upgraded multiple times without a
-++        # reboot.
-++        telinit u || :
-++    else
-++        # Before we shutdown or reboot, we need to re-exec so that we
-++        # can safely remount the root filesystem; we can't just do that
-++        # here because we lose state.
-++        touch /var/run/init.upgraded || :
-++    fi
-++fi
-++
-++#DEBHELPER#
-+--- libnih-1.0.3.orig/debian/libnih-dbus1.symbols
-++++ libnih-1.0.3/debian/libnih-dbus1.symbols
-+@@ -0,0 +1,2 @@
-++libnih-dbus.so.1 libnih-dbus1 #MINVER#
-++ *@LIBNIH_DBUS_1_0 1.0.0
-+--- libnih-1.0.3.orig/debian/changelog
-++++ libnih-1.0.3/debian/changelog
-+@@ -0,0 +1,213 @@
-++libnih (1.0.3-4ubuntu16) raring; urgency=low
-++
-++  * debian/{libnih1.postinst,libnih-dbus1.postinst}: Force an upgrade to
-++    restart Upstart (to pick up new package version) if the running
-++    instance supports it.
-++  * Merge of important fixes from lp:~upstart-devel/libnih/nih
-++    (LP: #776532, LP: #777097, LP: #834813, LP: #1123588).
-++
-++ -- James Hunt <james.hunt@ubuntu.com>  Thu, 14 Mar 2013 09:14:22 +0000
-++
-++libnih (1.0.3-4ubuntu15) raring; urgency=low
-++
-++  * Enable cross-building, sans adding :native build-dependencies.
-++    See comments in debian/control.
-++  * Lintian fixes.
-++
-++ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Tue, 08 Jan 2013 15:38:58 +0000
-++
-++libnih (1.0.3-4ubuntu14) raring; urgency=low
-++
-++  * Update dbus code generator to allow for empty lists for type 'as'.
-++    This drops the != NULL check for NULL terminated arrays and moves the
-++    iteration loop inside an 'if' statement.
-++
-++ -- Stéphane Graber <stgraber@ubuntu.com>  Thu, 13 Dec 2012 10:00:27 -0500
-++
-++libnih (1.0.3-4ubuntu13) raring; urgency=low
-++
-++  [ Petr Lautrbach <plautrba@redhat.com>, Dmitrijs Ledkovs ]
-++  * Fallback to lstat, if dirent.d_type is not available (not portable)
-++    (LP: #672643) (Closes: #695604)
-++
-++ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Tue, 11 Dec 2012 17:26:52 +0000
-++
-++libnih (1.0.3-4ubuntu12) raring; urgency=low
-++
-++  * nih/logging.c: Use our own __nih_abort_msg rather than the (e)glibc
-++    private symbol __abort_msg to avoid upgrade issues (LP: #997359).
-++  * nih/tests/test_logging.c: Update tests for __nih_abort_msg.
-++
-++ -- James Hunt <james.hunt@ubuntu.com>  Thu, 25 Oct 2012 10:57:30 +0100
-++
-++libnih (1.0.3-4ubuntu11) quantal; urgency=low
-++
-++  * Addition of debian/libnih-dbus1.postinst and
-++    debian/libnih1.postinst to force Upstart re-exec on shutdown
-++    to avoid unmounting disks uncleanly (LP: #740390).
-++
-++ -- James Hunt <james.hunt@ubuntu.com>  Wed, 03 Oct 2012 16:49:40 +0100
-++
-++libnih (1.0.3-4ubuntu10) quantal; urgency=low
-++
-++  * Update config.guess,sub for aarch64
-++
-++ -- Wookey <wookey@wookware.org>  Mon, 01 Oct 2012 12:57:05 +0100
-++
-++libnih (1.0.3-4ubuntu9) precise; urgency=low
-++
-++  * Mark the nih-dbus-tool package Multi-Arch: foreign so it can be used as
-++    a build-dependency of upstart when cross-building.
-++
-++ -- Steve Langasek <steve.langasek@ubuntu.com>  Wed, 15 Feb 2012 22:57:50 -0800
-++
-++libnih (1.0.3-4ubuntu8) precise; urgency=low
-++
-++  * libnih1 needs a versioned Pre-Depend on libc6 instead of just a Depend,
-++    because libc6 itself uses runlevel from the upstart package in its
-++    preinst, which in turn uses libnih1, which needs to be loadable (i.e.,
-++    its symbol references resolve).  We therefore need to ensure that
-++    libnih1's dependencies are always unpacked before libnih1 itself is
-++    unpacked.  While having something further up the stack (such as upstart,
-++    or something on top of upstart) being marked Essential: yes and with the
-++    necessary pre-depends would let apt handle this for us with its
-++    "immediate configuration" support, but for various reasons we don't want
-++    to make upstart essential.  LP: #508083.
-++
-++ -- Steve Langasek <steve.langasek@ubuntu.com>  Fri, 10 Feb 2012 12:13:25 -0800
-++
-++libnih (1.0.3-4ubuntu7) precise; urgency=low
-++
-++  * Relax dependency on libc6.
-++
-++ -- Matthias Klose <doko@ubuntu.com>  Wed, 08 Feb 2012 23:43:21 +0100
-++
-++libnih (1.0.3-4ubuntu6) precise; urgency=low
-++
-++  * Rebuild with libc6-dev (>= 2.15~).
-++
-++ -- Matthias Klose <doko@ubuntu.com>  Wed, 08 Feb 2012 21:48:57 +0100
-++
-++libnih (1.0.3-4ubuntu5) precise; urgency=low
-++
-++  * Mark libnih-dev and libnih-dbus-dev Multi-Arch: same as well.
-++
-++ -- Steve Langasek <steve.langasek@ubuntu.com>  Sun, 06 Nov 2011 14:45:07 -0800
-++
-++libnih (1.0.3-4ubuntu4) precise; urgency=low
-++
-++  * Make libnih1 and libnih-dbus1 installable using multi-arch.
-++
-++ -- James Hunt <james.hunt@ubuntu.com>  Tue, 01 Nov 2011 14:25:09 -0400
-++
-++libnih (1.0.3-4ubuntu3) precise; urgency=low
-++
-++  * Build to install with eglibc-2.15.
-++
-++ -- Matthias Klose <doko@ubuntu.com>  Fri, 14 Oct 2011 14:05:03 +0200
-++
-++libnih (1.0.3-4ubuntu2) oneiric; urgency=low
-++
-++  * Use dpkg-buildflags to get the build flags.
-++  * Build with the default build flags, don't hard-code -Os. LP: #791315.
-++
-++ -- Matthias Klose <doko@ubuntu.com>  Wed, 15 Jun 2011 16:45:42 +0200
-++
-++libnih (1.0.3-4ubuntu1) oneiric; urgency=low
-++
-++  * Merge from debian unstable. Retained Ubuntu Build-Depends and Priority.
-++
-++ -- James Hunt <james.hunt@ubuntu.com>  Mon, 23 May 2011 19:28:19 +0100
-++
-++libnih (1.0.3-1ubuntu1) natty; urgency=low
-++
-++  * Rebuild with libc6-dev (>= 2.13~).
-++
-++ -- Matthias Klose <doko@ubuntu.com>  Fri, 18 Feb 2011 12:09:29 +0100
-++
-++libnih (1.0.3-1) natty; urgency=low
-++
-++  * New upstream release:
-++    - Added support for passing file descriptors over D-Bus to nih-dbus-tool
-++
-++ -- Scott James Remnant <scott@ubuntu.com>  Thu, 23 Dec 2010 22:28:24 +0000
-++
-++libnih (1.0.2-2) natty; urgency=low
-++
-++  * Revert the previous upload.  It is never acceptable to simply disable
-++    tests, especially when it turns out that the test that was disabled
-++    was failing because there was a serious bug that could cause kernel
-++    panics for people on boot.
-++
-++    Test suites are here for a reason.
-++
-++  * Bumped libdbus Build-Dependency to the version with the bug fix that
-++    caused the test suite to fail.
-++
-++ -- Scott James Remnant <scott@ubuntu.com>  Wed, 08 Dec 2010 19:40:15 +0000
-++
-++libnih (1.0.2-1ubuntu3) natty; urgency=low
-++
-++  * Disable some tests on ppc64 to build an initial package.
-++
-++ -- Matthias Klose <doko@ubuntu.com>  Thu, 18 Nov 2010 10:59:38 +0100
-++
-++libnih (1.0.2-1ubuntu2) maverick; urgency=low
-++
-++  * Re-add -fPIE to the testsuite on armel, removing all armel-specific tests;
-++    current gcc-4.4 don't seem affected by the ICE anymore (see LP #398403).
-++
-++ -- Loïc Minier <loic.minier@linaro.org>  Mon, 23 Aug 2010 10:25:31 +0200
-++
-++libnih (1.0.2-1ubuntu1) maverick; urgency=low
-++
-++  * Rebuild with libc6-dev (>= 2.12~), after checking that
-++    __abort_msg is available with the same signature in eglibc 2.12.
-++  * Don't build the testsuite with -fPIE on armel; LP: #398403.
-++
-++ -- Matthias Klose <doko@ubuntu.com>  Sun, 30 May 2010 02:54:56 +0200
-++
-++libnih (1.0.2-1) maverick; urgency=low
-++
-++  * New upstream release:
-++    - Rename AC_COPYRIGHT to NIH_COPYRIGHT to avoid conflict with other
-++      packages.
-++    - Add serial to libnih.m4
-++    - Add NIH_WITH_LOCAL_LIBNIH macro.
-++
-++  * Fix use of ${Source-Version} to be ${binary:Version}
-++  * Add debian/source/format with "1.0" to be future compatible.
-++  * Bump standards version.
-++
-++ -- Scott James Remnant <scott@ubuntu.com>  Tue, 27 Apr 2010 10:49:55 -0700
-++
-++libnih (1.0.1-1) lucid; urgency=low
-++
-++  * New upstream release:
-++    - Add missing __nih_* symbols to linker version script so that we
-++      can link Upstart's test suite.
-++    - Glibc __abort_msg symbol now only linked as a weak symbol.
-++
-++ -- Scott James Remnant <scott@ubuntu.com>  Thu, 04 Feb 2010 14:53:26 -0800
-++
-++libnih (1.0.0-2build1) lucid; urgency=low
-++
-++  * Rebuild to pick up relaxed dependency on libc6, after checking that
-++    __abort_msg is available with the same signature in eglibc 2.11.
-++    LP: #508702.
-++
-++ -- Matthias Klose <doko@ubuntu.com>  Mon, 18 Jan 2010 16:09:13 +0100
-++
-++libnih (1.0.0-2) lucid; urgency=low
-++
-++  * debian/control: Add build-dependency on dbus so the test suite can
-++    pass on the buildds.
-++
-++ -- Scott James Remnant <scott@ubuntu.com>  Sat, 28 Nov 2009 23:28:27 +0000
-++
-++libnih (1.0.0-1) lucid; urgency=low
-++
-++  * First upstream release.  Previously this code was included in the
-++    upstart, mountall and ureadahead source packages.
-++
-++ -- Scott James Remnant <scott@ubuntu.com>  Sat, 28 Nov 2009 21:14:00 +0000
-+--- libnih-1.0.3.orig/debian/source/format
-++++ libnih-1.0.3/debian/source/format
-+@@ -0,0 +1 @@
-++1.0
-+--- libnih-1.0.3.orig/nih-dbus/dbus_proxy.h
-++++ libnih-1.0.3/nih-dbus/dbus_proxy.h
-+@@ -146,14 +146,14 @@
-+ 					    const char *name, const char *path,
-+ 					    NihDBusLostHandler lost_handler,
-+ 					    void *data)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NihDBusProxySignal *nih_dbus_proxy_connect (NihDBusProxy *proxy,
-+ 					    const NihDBusInterface *interface,
-+ 					    const char *name,
-+ 					    NihDBusSignalHandler handler,
-+ 					    void *data)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih-dbus/dbus_object.h
-++++ libnih-1.0.3/nih-dbus/dbus_object.h
-+@@ -61,8 +61,7 @@
-+ 				    DBusConnection *connection,
-+ 				    const char *path,
-+ 				    const NihDBusInterface **interfaces,
-+-				    void *data)
-+-	__attribute__ ((malloc));
-++				    void *data);
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih-dbus/dbus_util.h
-++++ libnih-1.0.3/nih-dbus/dbus_util.h
-+@@ -26,7 +26,7 @@
-+ NIH_BEGIN_EXTERN
-+ 
-+ char *nih_dbus_path (const void *parent, const char *root, ...)
-+-	__attribute__ ((sentinel, warn_unused_result, malloc));
-++	__attribute__ ((sentinel, warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih-dbus/dbus_pending_data.h
-++++ libnih-1.0.3/nih-dbus/dbus_pending_data.h
-+@@ -104,7 +104,7 @@
-+ 					       NihDBusReplyHandler handler,
-+ 					       NihDBusErrorHandler error_handler,
-+ 					       void *data)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih-dbus/dbus_proxy.c
-++++ libnih-1.0.3/nih-dbus/dbus_proxy.c
-+@@ -46,11 +46,11 @@
-+ 	__attribute__ ((warn_unused_result));
-+ static char *nih_dbus_proxy_name_rule         (const void *parent,
-+ 					       NihDBusProxy *proxy)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ static int   nih_dbus_proxy_signal_destroy    (NihDBusProxySignal *proxied);
-+ static char *nih_dbus_proxy_signal_rule       (const void *parent,
-+ 					       NihDBusProxySignal *proxied)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ /* Prototypes for handler functions */
-+ static DBusHandlerResult nih_dbus_proxy_name_owner_changed (DBusConnection *connection,
-+--- libnih-1.0.3.orig/nih-dbus-tool/symbol.c
-++++ libnih-1.0.3/nih-dbus-tool/symbol.c
-+@@ -40,10 +40,10 @@
-+ /* Prototypes for static functions */
-+ static char *symbol_strcat_interface (char **str, const void *parent,
-+ 				      const char *format, ...)
-+-	__attribute__ ((format (printf, 3, 4), warn_unused_result, malloc));
-++	__attribute__ ((format (printf, 3, 4), warn_unused_result));
-+ static char *symbol_strcat_title     (char **str, const void *parent,
-+ 				      const char *format, ...)
-+-	__attribute__ ((format (printf, 3, 4), warn_unused_result, malloc));
-++	__attribute__ ((format (printf, 3, 4), warn_unused_result));
-+ 
-+ 
-+ /**
-+--- libnih-1.0.3.orig/nih-dbus-tool/demarshal.h
-++++ libnih-1.0.3/nih-dbus-tool/demarshal.h
-+@@ -37,7 +37,7 @@
-+ 		 const char *prefix, const char *interface_symbol,
-+ 		 const char *member_symbol, const char *symbol,
-+ 		 NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih-dbus-tool/symbol.h
-++++ libnih-1.0.3/nih-dbus-tool/symbol.h
-+@@ -28,22 +28,22 @@
-+ int   symbol_valid     (const char *symbol);
-+ 
-+ char *symbol_from_name (const void *parent, const char *name)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *symbol_impl      (const void *parent, const char *prefix,
-+ 			const char *interface_name, const char *name,
-+ 			const char *postfix)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *symbol_extern    (const void *parent, const char *prefix,
-+ 			const char *interface_symbol, const char *midfix,
-+ 			const char *symbol, const char *postfix)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *symbol_typedef   (const void *parent, const char *prefix,
-+ 			const char *interface_symbol, const char *midfix,
-+ 			const char *symbol, const char *postfix)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih-dbus-tool/output.h
-++++ libnih-1.0.3/nih-dbus-tool/output.h
-+@@ -35,9 +35,9 @@
-+ 	__attribute__ ((warn_unused_result));
-+ 
-+ char *output_preamble (const void *parent, const char *path)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *output_sentinel (const void *parent, const char *path)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih-dbus-tool/parse.h
-++++ libnih-1.0.3/nih-dbus-tool/parse.h
-+@@ -95,7 +95,7 @@
-+ 
-+ ParseStack *parse_stack_push (const void *parent, NihList *stack,
-+ 			      ParseStackType type, void *data)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ ParseStack *parse_stack_top  (NihList *stack);
-+ 
-+ void        parse_start_tag  (XML_Parser xmlp, const char *tag,
-+@@ -103,7 +103,7 @@
-+ void        parse_end_tag    (XML_Parser xmlp, const char *tag);
-+ 
-+ Node *      parse_xml        (const void *parent, int fd, const char *filename)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih-dbus-tool/type.h
-++++ libnih-1.0.3/nih-dbus-tool/type.h
-+@@ -94,43 +94,43 @@
-+ 
-+ char *      type_of               (const void * parent,
-+ 				   DBusSignatureIter *iter)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ TypeVar *   type_var_new          (const void *parent, const char *type,
-+ 				   const char *name)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *      type_var_to_string    (const void *parent, TypeVar *var)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *      type_var_layout       (const void *parent, NihList *vars)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ TypeFunc *  type_func_new         (const void *parent, const char *type,
-+ 				   const char *name)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *      type_func_to_string   (const void *parent, TypeFunc *func)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *      type_func_to_typedef  (const void *parent, TypeFunc *func)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *      type_func_layout      (const void *parent, NihList *funcs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ TypeStruct *type_struct_new       (const void *parent, const char *name)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *      type_struct_to_string (const void *parent, TypeStruct *structure)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *      type_to_const         (char **type, const void *parent)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *      type_to_pointer       (char **type, const void *parent)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *      type_to_static        (char **type, const void *parent)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *      type_to_extern        (char **type, const void *parent)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *      type_strcat_assert    (char **block, const void *parent,
-+ 				   TypeVar *var, TypeVar *prev, TypeVar *next)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih-dbus-tool/argument.h
-++++ libnih-1.0.3/nih-dbus-tool/argument.h
-+@@ -61,7 +61,7 @@
-+ 
-+ Argument *argument_new        (const void *parent, const char *name,
-+ 			       const char *type, NihDBusArgDir direction)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ int       argument_start_tag  (XML_Parser xmlp, const char *tag,
-+ 			       char * const *attr)
-+--- libnih-1.0.3.orig/nih-dbus-tool/indent.h
-++++ libnih-1.0.3/nih-dbus-tool/indent.h
-+@@ -26,9 +26,9 @@
-+ NIH_BEGIN_EXTERN
-+ 
-+ char *indent  (char **str, const void *parent, int level)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *comment (char **str, const void *parent)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih-dbus-tool/main.c
-++++ libnih-1.0.3/nih-dbus-tool/main.c
-+@@ -52,10 +52,10 @@
-+ /* Prototypes for local functions */
-+ char *source_file_path (const void *parent, const char *output_path,
-+ 			const char *filename)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *header_file_path (const void *parent, const char *output_path,
-+ 			const char *filename)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ 
-+ /**
-+--- libnih-1.0.3.orig/nih-dbus-tool/signal.h
-++++ libnih-1.0.3/nih-dbus-tool/signal.h
-+@@ -58,7 +58,7 @@
-+ int       signal_name_valid      (const char *name);
-+ 
-+ Signal *  signal_new             (const void *parent, const char *name)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ int       signal_start_tag       (XML_Parser xmlp, const char *tag,
-+ 				  char * const *attr)
-+@@ -76,18 +76,18 @@
-+ char *    signal_object_function (const void *parent, const char *prefix,
-+ 				  Interface *interface, Signal *signal,
-+ 				  NihList *prototypes, NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *    signal_proxy_function  (const void *parent, const char *prefix,
-+ 				  Interface *interface, Signal *signal,
-+ 				  NihList *prototypes, NihList *typedefs,
-+ 				  NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *    signal_args_array      (const void *parent, const char *prefix,
-+ 				  Interface *interface, Signal *signal,
-+ 				  NihList *prototypes)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih-dbus-tool/marshal.c
-++++ libnih-1.0.3/nih-dbus-tool/marshal.c
-+@@ -49,7 +49,7 @@
-+ 			     const char *prefix, const char *interface_symbol,
-+ 			     const char *member_symbol, const char *symbol,
-+ 			     NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ static char *marshal_array  (const void *parent,
-+ 			     DBusSignatureIter *iter,
-+ 			     const char *iter_name, const char *name,
-+@@ -58,7 +58,7 @@
-+ 			     const char *prefix, const char *interface_symbol,
-+ 			     const char *member_symbol, const char *symbol,
-+ 			     NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ static char *marshal_struct (const void *parent,
-+ 			     DBusSignatureIter *iter,
-+ 			     const char *iter_name, const char *name,
-+@@ -67,7 +67,7 @@
-+ 			     const char *prefix, const char *interface_symbol,
-+ 			     const char *member_symbol, const char *symbol,
-+ 			     NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ 
-+ /**
-+@@ -364,6 +364,7 @@
-+ 	nih_local TypeVar *element_len_var = NULL;
-+ 	nih_local char *   block = NULL;
-+ 	nih_local char *   vars_block = NULL;
-++	nih_local char *   loop_block = NULL;
-+ 
-+ 	nih_assert (iter != NULL);
-+ 	nih_assert (iter_name != NULL);
-+@@ -448,7 +449,7 @@
-+ 	nih_list_add (locals, &array_iter_var->entry);
-+ 
-+ 	if (dbus_type_is_fixed (element_type)) {
-+-		if (! nih_strcat_sprintf (&code, parent,
-++		if (! nih_strcat_sprintf (&loop_block, parent,
-+ 					  "for (size_t %s = 0; %s < %s; %s++) {\n",
-+ 					  loop_name, loop_name, len_name, loop_name)) {
-+ 			nih_free (code);
-+@@ -456,6 +457,12 @@
-+ 		}
-+ 	} else {
-+ 		if (! nih_strcat_sprintf (&code, parent,
-++					  "if (%s) {\n",
-++					  name)) {
-++			nih_free (code);
-++			return NULL;
-++		}
-++		if (! nih_strcat_sprintf (&loop_block, parent,
-+ 					  "for (size_t %s = 0; %s[%s]; %s++) {\n",
-+ 					  loop_name, name, loop_name, loop_name)) {
-+ 			nih_free (code);
-+@@ -576,7 +583,7 @@
-+ 	}
-+ 
-+ 
-+-	if (! nih_strcat_sprintf (&code, parent,
-++	if (! nih_strcat_sprintf (&loop_block, parent,
-+ 			   "%s"
-+ 			   "\n"
-+ 			   "%s"
-+@@ -590,9 +597,34 @@
-+ 	}
-+ 
-+ 	/* Close the container again */
-++	if (! nih_strcat_sprintf (&loop_block, parent,
-++				  "}\n")) {
-++		nih_free (code);
-++		return NULL;
-++	}
-++
-++	if (dbus_type_is_fixed (element_type)) {
-++		if (! nih_strcat_sprintf (&code, parent,
-++				 "%s\n", loop_block)) {
-++			nih_free (code);
-++			return NULL;
-++		}
-++	}
-++	else {
-++		if (! indent (&loop_block, NULL, 1)) {
-++			nih_free (code);
-++			return NULL;
-++		}
-++
-++		if (! nih_strcat_sprintf (&code, parent,
-++				 "%s"
-++				 "}\n\n", loop_block)) {
-++			nih_free (code);
-++			return NULL;
-++		}
-++	}
-++
-+ 	if (! nih_strcat_sprintf (&code, parent,
-+-				  "}\n"
-+-				  "\n"
-+ 				  "if (! dbus_message_iter_close_container (&%s, &%s)) {\n"
-+ 				  "%s"
-+ 				  "}\n",
-+--- libnih-1.0.3.orig/nih-dbus-tool/demarshal.c
-++++ libnih-1.0.3/nih-dbus-tool/demarshal.c
-+@@ -51,7 +51,7 @@
-+ 			       const char *prefix, const char *interface_symbol,
-+ 			       const char *member_symbol, const char *symbol,
-+ 			       NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ static char *demarshal_array  (const void *parent,
-+ 			       DBusSignatureIter *iter,
-+ 			       const char *parent_name,
-+@@ -62,7 +62,7 @@
-+ 			       const char *prefix, const char *interface_symbol,
-+ 			       const char *member_symbol, const char *symbol,
-+ 			       NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ static char *demarshal_struct (const void *parent,
-+ 			       DBusSignatureIter *iter,
-+ 			       const char *parent_name,
-+@@ -73,7 +73,7 @@
-+ 			       const char *prefix, const char *interface_symbol,
-+ 			       const char *member_symbol, const char *symbol,
-+ 			       NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ 
-+ /**
-+--- libnih-1.0.3.orig/nih-dbus-tool/interface.h
-++++ libnih-1.0.3/nih-dbus-tool/interface.h
-+@@ -61,7 +61,7 @@
-+ 
-+ Interface *interface_new                           (const void *parent,
-+ 						    const char *name)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ int        interface_start_tag                     (XML_Parser xmlp,
-+ 						    const char *tag,
-+@@ -81,26 +81,26 @@
-+ 						    Interface *interface,
-+ 						    int with_handlers,
-+ 						    NihList *prototypes)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *     interface_signals_array                 (const void *parent,
-+ 						    const char *prefix,
-+ 						    Interface *interface,
-+ 						    int with_filters,
-+ 						    NihList *prototypes)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *     interface_properties_array              (const void *parent,
-+ 						    const char *prefix,
-+ 						    Interface *interface,
-+ 						    int with_handlers,
-+ 						    NihList *prototypes)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *     interface_struct                        (const void *parent,
-+ 						    const char *prefix,
-+ 						    Interface *interface,
-+ 						    int object,
-+ 						    NihList *prototypes)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ 
-+ char *     interface_proxy_get_all_function        (const void *parent,
-+@@ -108,7 +108,7 @@
-+ 						    Interface *interface,
-+ 						    NihList *prototypes,
-+ 						    NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *     interface_proxy_get_all_notify_function (const void *parent,
-+ 						    const char *prefix,
-+@@ -116,14 +116,14 @@
-+ 						    NihList *prototypes,
-+ 						    NihList *typedefs,
-+ 						    NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *     interface_proxy_get_all_sync_function   (const void *parent,
-+ 						    const char *prefix,
-+ 						    Interface *interface,
-+ 						    NihList *prototypes,
-+ 						    NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih-dbus-tool/method.h
-++++ libnih-1.0.3/nih-dbus-tool/method.h
-+@@ -62,7 +62,7 @@
-+ int       method_name_valid            (const char *name);
-+ 
-+ Method *  method_new                   (const void *parent, const char *name)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ int       method_start_tag             (XML_Parser xmlp, const char *tag,
-+ 					char * const *attr)
-+@@ -82,33 +82,33 @@
-+ 					Interface *interface, Method *method,
-+ 					NihList *prototypes, NihList *handlers,
-+ 					NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *    method_reply_function        (const void *parent, const char *prefix,
-+ 					Interface *interface, Method *method,
-+ 					NihList *prototypes, NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *    method_proxy_function        (const void *parent, const char *prefix,
-+ 					Interface *interface, Method *method,
-+ 					NihList *prototypes, NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *    method_proxy_notify_function (const void *parent, const char *prefix,
-+ 					Interface *interface, Method *method,
-+ 					NihList *prototypes, NihList *typedefs,
-+ 					NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *    method_proxy_sync_function   (const void *parent, const char *prefix,
-+ 					Interface *interface, Method *method,
-+ 					NihList *prototypes, NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *    method_args_array            (const void *parent, const char *prefix,
-+ 					Interface *interface, Method *method,
-+ 					NihList *prototypes)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih-dbus-tool/node.h
-++++ libnih-1.0.3/nih-dbus-tool/node.h
-+@@ -47,7 +47,7 @@
-+ int        node_path_valid       (const char *name);
-+ 
-+ Node *     node_new              (const void *parent, const char *path)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ int        node_start_tag        (XML_Parser xmlp, const char *tag,
-+ 				  char * const *attr)
-+@@ -59,18 +59,18 @@
-+ 
-+ char *     node_interfaces_array (const void *parent, const char *prefix,
-+ 				  Node *node, int object, NihList *prototypes)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *     node_object_functions (const void *parent, const char *prefix,
-+ 				  Node *node,
-+ 				  NihList *prototypes, NihList *handlers,
-+ 				  NihList *structs, NihList *externs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *     node_proxy_functions  (const void *parent, const char *prefix,
-+ 				  Node *node,
-+ 				  NihList *prototypes, NihList *structs,
-+ 				  NihList *typedefs, NihList *externs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih-dbus-tool/marshal.h
-++++ libnih-1.0.3/nih-dbus-tool/marshal.h
-+@@ -35,7 +35,7 @@
-+ 	       const char *prefix, const char *interface_symbol,
-+ 	       const char *member_symbol, const char *symbol,
-+ 	       NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih-dbus-tool/type.c
-++++ libnih-1.0.3/nih-dbus-tool/type.c
-+@@ -1101,7 +1101,7 @@
-+ 	nih_assert (block != NULL);
-+ 	nih_assert (var != NULL);
-+ 
-+-	if (! strchr (var->type, '*'))
-++	if (! strchr (var->type, '*') || ! strcmp (var->type, "char * const *"))
-+ 		return *block;
-+ 
-+ 	if (next && (! strcmp (next->type, "size_t"))) {
-+--- libnih-1.0.3.orig/nih-dbus-tool/property.h
-++++ libnih-1.0.3/nih-dbus-tool/property.h
-+@@ -65,7 +65,7 @@
-+ 					      const char *name,
-+ 					      const char *type,
-+ 					      NihDBusAccess access)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ int       property_start_tag                 (XML_Parser xmlp, const char *tag,
-+ 					      char * const *attr)
-+@@ -88,7 +88,7 @@
-+ 					      NihList *prototypes,
-+ 					      NihList *handlers,
-+ 					      NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *    property_object_set_function       (const void *parent,
-+ 					      const char *prefix,
-+ 					      Interface *interface,
-+@@ -96,7 +96,7 @@
-+ 					      NihList *prototypes,
-+ 					      NihList *handlers,
-+ 					      NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *    property_proxy_get_function        (const void *parent,
-+ 					      const char *prefix,
-+@@ -104,7 +104,7 @@
-+ 					      Property *property,
-+ 					      NihList *prototypes,
-+ 					      NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *    property_proxy_get_notify_function (const void *parent,
-+ 					      const char *prefix,
-+ 					      Interface *interface,
-+@@ -112,7 +112,7 @@
-+ 					      NihList *prototypes,
-+ 					      NihList *typedefs,
-+ 					      NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *    property_proxy_set_function        (const void *parent,
-+ 					      const char *prefix,
-+@@ -120,7 +120,7 @@
-+ 					      Property *property,
-+ 					      NihList *prototypes,
-+ 					      NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *    property_proxy_set_notify_function (const void *parent,
-+ 					      const char *prefix,
-+ 					      Interface *interface,
-+@@ -128,7 +128,7 @@
-+ 					      NihList *prototypes,
-+ 					      NihList *typedefs,
-+ 					      NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ char *    property_proxy_get_sync_function   (const void *parent,
-+ 					      const char *prefix,
-+@@ -136,14 +136,14 @@
-+ 					      Property *property,
-+ 					      NihList *prototypes,
-+ 					      NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ char *    property_proxy_set_sync_function   (const void *parent,
-+ 					      const char *prefix,
-+ 					      Interface *interface,
-+ 					      Property *property,
-+ 					      NihList *prototypes,
-+ 					      NihList *structs)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ NIH_END_EXTERN
-+ 
-+--- libnih-1.0.3.orig/nih-dbus-tool/tests/test_main.c
-++++ libnih-1.0.3/nih-dbus-tool/tests/test_main.c
-+@@ -100,10 +100,10 @@
-+ 
-+ extern char *source_file_path (const void *parent, const char *output_path,
-+ 			       const char *filename)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ extern char *header_file_path (const void *parent, const char *output_path,
-+ 			       const char *filename)
-+-	__attribute__ ((warn_unused_result, malloc));
-++	__attribute__ ((warn_unused_result));
-+ 
-+ void
-+ test_source_file_path (void)
-+--- libnih-1.0.3.orig/nih-dbus-tool/tests/test_com.netsplit.Nih.Test_object.c
-++++ libnih-1.0.3/nih-dbus-tool/tests/test_com.netsplit.Nih.Test_object.c
-+@@ -12524,6 +12524,7 @@
-+ 		dbus_message_iter_init (reply, &iter);
-+ 
-+ 		dbus_message_iter_get_basic (&iter, &str_value);
-++		TEST_NE (str_value[0], '\0');
-+ 		TEST_TRUE (strchr ("0123456789", str_value[0]));
-+ 
-+ 		dbus_message_unref (reply);
-+--- libnih-1.0.3.orig/nih-dbus-tool/tests/test_marshal.c
-++++ libnih-1.0.3/nih-dbus-tool/tests/test_marshal.c
-+@@ -1479,39 +1479,41 @@
-+ 				   "\treturn -1;\n"
-+ 				   "}\n"
-+ 				   "\n"
-+-				   "for (size_t value_i = 0; value[value_i]; value_i++) {\n"
-+-				   "\tDBusMessageIter value_element_iter;\n"
-+-				   "\tconst int16_t * value_element;\n"
-+-				   "\tsize_t          value_element_len;\n"
-++				   "if (value) {\n"
-++				   "\tfor (size_t value_i = 0; value[value_i]; value_i++) {\n"
-++				   "\t\tDBusMessageIter value_element_iter;\n"
-++				   "\t\tconst int16_t * value_element;\n"
-++				   "\t\tsize_t          value_element_len;\n"
-+ 				   "\n"
-+-				   "\tvalue_element = value[value_i];\n"
-+-				   "\tvalue_element_len = value_len[value_i];\n"
-++				   "\t\tvalue_element = value[value_i];\n"
-++				   "\t\tvalue_element_len = value_len[value_i];\n"
-+ 				   "\n"
-+ 
-+-				   "\t/* Marshal an array onto the message */\n"
-+-				   "\tif (! dbus_message_iter_open_container (&value_iter, DBUS_TYPE_ARRAY, \"n\", &value_element_iter)) {\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-+-				   "\t\treturn -1;\n"
-+-				   "\t}\n"
-++				   "\t\t/* Marshal an array onto the message */\n"
-++				   "\t\tif (! dbus_message_iter_open_container (&value_iter, DBUS_TYPE_ARRAY, \"n\", &value_element_iter)) {\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-++				   "\t\t\treturn -1;\n"
-++				   "\t\t}\n"
-+ 				   "\n"
-+-				   "\tfor (size_t value_element_i = 0; value_element_i < value_element_len; value_element_i++) {\n"
-+-				   "\t\tint16_t value_element_element;\n"
-++				   "\t\tfor (size_t value_element_i = 0; value_element_i < value_element_len; value_element_i++) {\n"
-++				   "\t\t\tint16_t value_element_element;\n"
-+ 				   "\n"
-+-				   "\t\tvalue_element_element = value_element[value_element_i];\n"
-++				   "\t\t\tvalue_element_element = value_element[value_element_i];\n"
-+ 				   "\n"
-+-				   "\t\t/* Marshal a int16_t onto the message */\n"
-+-				   "\t\tif (! dbus_message_iter_append_basic (&value_element_iter, DBUS_TYPE_INT16, &value_element_element)) {\n"
-+-				   "\t\t\tdbus_message_iter_abandon_container (&value_iter, &value_element_iter);\n"
-++				   "\t\t\t/* Marshal a int16_t onto the message */\n"
-++				   "\t\t\tif (! dbus_message_iter_append_basic (&value_element_iter, DBUS_TYPE_INT16, &value_element_element)) {\n"
-++				   "\t\t\t\tdbus_message_iter_abandon_container (&value_iter, &value_element_iter);\n"
-++				   "\t\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-++				   "\t\t\t\treturn -1;\n"
-++				   "\t\t\t}\n"
-++				   "\t\t}\n"
-++				   "\n"
-++				   "\t\tif (! dbus_message_iter_close_container (&value_iter, &value_element_iter)) {\n"
-+ 				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-+ 				   "\t\t\treturn -1;\n"
-+ 				   "\t\t}\n"
-+-				   "\t}\n"
-+-				   "\n"
-+-				   "\tif (! dbus_message_iter_close_container (&value_iter, &value_element_iter)) {\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-+-				   "\t\treturn -1;\n"
-+-				   "\t}\n"
-+ 
-++				   "\t}\n"
-+ 				   "}\n"
-+ 				   "\n"
-+ 				   "if (! dbus_message_iter_close_container (&iter, &value_iter)) {\n"
-+@@ -1766,15 +1768,17 @@
-+ 				   "\treturn -1;\n"
-+ 				   "}\n"
-+ 				   "\n"
-+-				   "for (size_t value_i = 0; value[value_i]; value_i++) {\n"
-+-				   "\tconst char *value_element;\n"
-++				   "if (value) {\n"
-++				   "\tfor (size_t value_i = 0; value[value_i]; value_i++) {\n"
-++				   "\t\tconst char *value_element;\n"
-+ 				   "\n"
-+-				   "\tvalue_element = value[value_i];\n"
-++				   "\t\tvalue_element = value[value_i];\n"
-+ 				   "\n"
-+-				   "\t/* Marshal a char * onto the message */\n"
-+-				   "\tif (! dbus_message_iter_append_basic (&value_iter, DBUS_TYPE_STRING, &value_element)) {\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-+-				   "\t\treturn -1;\n"
-++				   "\t\t/* Marshal a char * onto the message */\n"
-++				   "\t\tif (! dbus_message_iter_append_basic (&value_iter, DBUS_TYPE_STRING, &value_element)) {\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-++				   "\t\t\treturn -1;\n"
-++				   "\t\t}\n"
-+ 				   "\t}\n"
-+ 				   "}\n"
-+ 				   "\n"
-+@@ -1933,35 +1937,39 @@
-+ 				   "\treturn -1;\n"
-+ 				   "}\n"
-+ 				   "\n"
-+-				   "for (size_t value_i = 0; value[value_i]; value_i++) {\n"
-+-				   "\tDBusMessageIter value_element_iter;\n"
-+-				   "\tchar * const *  value_element;\n"
-++				   "if (value) {\n"
-++				   "\tfor (size_t value_i = 0; value[value_i]; value_i++) {\n"
-++				   "\t\tDBusMessageIter value_element_iter;\n"
-++				   "\t\tchar * const *  value_element;\n"
-+ 				   "\n"
-+-				   "\tvalue_element = value[value_i];\n"
-++				   "\t\tvalue_element = value[value_i];\n"
-+ 				   "\n"
-+-				   "\t/* Marshal an array onto the message */\n"
-+-				   "\tif (! dbus_message_iter_open_container (&value_iter, DBUS_TYPE_ARRAY, \"s\", &value_element_iter)) {\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-+-				   "\t\treturn -1;\n"
-+-				   "\t}\n"
-+-				   "\n"
-+-				   "\tfor (size_t value_element_i = 0; value_element[value_element_i]; value_element_i++) {\n"
-+-				   "\t\tconst char *value_element_element;\n"
-++				   "\t\t/* Marshal an array onto the message */\n"
-++				   "\t\tif (! dbus_message_iter_open_container (&value_iter, DBUS_TYPE_ARRAY, \"s\", &value_element_iter)) {\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-++				   "\t\t\treturn -1;\n"
-++				   "\t\t}\n"
-+ 				   "\n"
-+-				   "\t\tvalue_element_element = value_element[value_element_i];\n"
-++				   "\t\tif (value_element) {\n"
-++				   "\t\t\tfor (size_t value_element_i = 0; value_element[value_element_i]; value_element_i++) {\n"
-++				   "\t\t\t\tconst char *value_element_element;\n"
-++				   "\n"
-++				   "\t\t\t\tvalue_element_element = value_element[value_element_i];\n"
-++				   "\n"
-++				   "\t\t\t\t/* Marshal a char * onto the message */\n"
-++				   "\t\t\t\tif (! dbus_message_iter_append_basic (&value_element_iter, DBUS_TYPE_STRING, &value_element_element)) {\n"
-++				   "\t\t\t\t\tdbus_message_iter_abandon_container (&value_iter, &value_element_iter);\n"
-++				   "\t\t\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-++				   "\t\t\t\t\treturn -1;\n"
-++				   "\t\t\t\t}\n"
-++				   "\t\t\t}\n"
-++				   "\t\t}\n"
-+ 				   "\n"
-+-				   "\t\t/* Marshal a char * onto the message */\n"
-+-				   "\t\tif (! dbus_message_iter_append_basic (&value_element_iter, DBUS_TYPE_STRING, &value_element_element)) {\n"
-+-				   "\t\t\tdbus_message_iter_abandon_container (&value_iter, &value_element_iter);\n"
-++				   "\t\tif (! dbus_message_iter_close_container (&value_iter, &value_element_iter)) {\n"
-+ 				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-+ 				   "\t\t\treturn -1;\n"
-+ 				   "\t\t}\n"
-+ 				   "\t}\n"
-+-				   "\n"
-+-				   "\tif (! dbus_message_iter_close_container (&value_iter, &value_element_iter)) {\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-+-				   "\t\treturn -1;\n"
-+-				   "\t}\n"
-+ 				   "}\n"
-+ 				   "\n"
-+ 				   "if (! dbus_message_iter_close_container (&iter, &value_iter)) {\n"
-+@@ -2194,16 +2202,18 @@
-+ 				   "\treturn -1;\n"
-+ 				   "}\n"
-+ 				   "\n"
-+-				   "for (size_t value_item2_i = 0; value_item2[value_item2_i]; value_item2_i++) {\n"
-+-				   "\tconst char *value_item2_element;\n"
-++				   "if (value_item2) {\n"
-++				   "\tfor (size_t value_item2_i = 0; value_item2[value_item2_i]; value_item2_i++) {\n"
-++				   "\t\tconst char *value_item2_element;\n"
-+ 				   "\n"
-+-				   "\tvalue_item2_element = value_item2[value_item2_i];\n"
-++				   "\t\tvalue_item2_element = value_item2[value_item2_i];\n"
-+ 				   "\n"
-+-				   "\t/* Marshal a char * onto the message */\n"
-+-				   "\tif (! dbus_message_iter_append_basic (&value_item2_iter, DBUS_TYPE_STRING, &value_item2_element)) {\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&value_iter, &value_item2_iter);\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-+-				   "\t\treturn -1;\n"
-++				   "\t\t/* Marshal a char * onto the message */\n"
-++				   "\t\tif (! dbus_message_iter_append_basic (&value_item2_iter, DBUS_TYPE_STRING, &value_item2_element)) {\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&value_iter, &value_item2_iter);\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-++				   "\t\t\treturn -1;\n"
-++				   "\t\t}\n"
-+ 				   "\t}\n"
-+ 				   "}\n"
-+ 				   "\n"
-+@@ -2642,41 +2652,43 @@
-+ 				   "\treturn -1;\n"
-+ 				   "}\n"
-+ 				   "\n"
-+-				   "for (size_t value_i = 0; value[value_i]; value_i++) {\n"
-+-				   "\tDBusMessageIter                  value_element_iter;\n"
-+-				   "\tconst char *                     value_element_item0;\n"
-+-				   "\tuint32_t                         value_element_item1;\n"
-+-				   "\tconst MyStructArrayValueElement *value_element;\n"
-++				   "if (value) {\n"
-++				   "\tfor (size_t value_i = 0; value[value_i]; value_i++) {\n"
-++				   "\t\tDBusMessageIter                  value_element_iter;\n"
-++				   "\t\tconst char *                     value_element_item0;\n"
-++				   "\t\tuint32_t                         value_element_item1;\n"
-++				   "\t\tconst MyStructArrayValueElement *value_element;\n"
-+ 				   "\n"
-+-				   "\tvalue_element = value[value_i];\n"
-++				   "\t\tvalue_element = value[value_i];\n"
-+ 				   "\n"
-+-				   "\t/* Marshal a structure onto the message */\n"
-+-				   "\tif (! dbus_message_iter_open_container (&value_iter, DBUS_TYPE_STRUCT, NULL, &value_element_iter)) {\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-+-				   "\t\treturn -1;\n"
-+-				   "\t}\n"
-++				   "\t\t/* Marshal a structure onto the message */\n"
-++				   "\t\tif (! dbus_message_iter_open_container (&value_iter, DBUS_TYPE_STRUCT, NULL, &value_element_iter)) {\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-++				   "\t\t\treturn -1;\n"
-++				   "\t\t}\n"
-+ 				   "\n"
-+-				   "\tvalue_element_item0 = value_element->item0;\n"
-++				   "\t\tvalue_element_item0 = value_element->item0;\n"
-+ 				   "\n"
-+-				   "\t/* Marshal a char * onto the message */\n"
-+-				   "\tif (! dbus_message_iter_append_basic (&value_element_iter, DBUS_TYPE_STRING, &value_element_item0)) {\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&value_iter, &value_element_iter);\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-+-				   "\t\treturn -1;\n"
-+-				   "\t}\n"
-++				   "\t\t/* Marshal a char * onto the message */\n"
-++				   "\t\tif (! dbus_message_iter_append_basic (&value_element_iter, DBUS_TYPE_STRING, &value_element_item0)) {\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&value_iter, &value_element_iter);\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-++				   "\t\t\treturn -1;\n"
-++				   "\t\t}\n"
-+ 				   "\n"
-+-				   "\tvalue_element_item1 = value_element->item1;\n"
-++				   "\t\tvalue_element_item1 = value_element->item1;\n"
-+ 				   "\n"
-+-				   "\t/* Marshal a uint32_t onto the message */\n"
-+-				   "\tif (! dbus_message_iter_append_basic (&value_element_iter, DBUS_TYPE_UINT32, &value_element_item1)) {\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&value_iter, &value_element_iter);\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-+-				   "\t\treturn -1;\n"
-+-				   "\t}\n"
-++				   "\t\t/* Marshal a uint32_t onto the message */\n"
-++				   "\t\tif (! dbus_message_iter_append_basic (&value_element_iter, DBUS_TYPE_UINT32, &value_element_item1)) {\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&value_iter, &value_element_iter);\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-++				   "\t\t\treturn -1;\n"
-++				   "\t\t}\n"
-+ 				   "\n"
-+-				   "\tif (! dbus_message_iter_close_container (&value_iter, &value_element_iter)) {\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-+-				   "\t\treturn -1;\n"
-++				   "\t\tif (! dbus_message_iter_close_container (&value_iter, &value_element_iter)) {\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-++				   "\t\t\treturn -1;\n"
-++				   "\t\t}\n"
-+ 				   "\t}\n"
-+ 				   "}\n"
-+ 				   "\n"
-+@@ -2912,41 +2924,43 @@
-+ 				   "\treturn -1;\n"
-+ 				   "}\n"
-+ 				   "\n"
-+-				   "for (size_t value_i = 0; value[value_i]; value_i++) {\n"
-+-				   "\tDBusMessageIter                     value_element_iter;\n"
-+-				   "\tconst char *                        value_element_item0;\n"
-+-				   "\tuint32_t                            value_element_item1;\n"
-+-				   "\tconst MyDictEntryArrayValueElement *value_element;\n"
-++				   "if (value) {\n"
-++				   "\tfor (size_t value_i = 0; value[value_i]; value_i++) {\n"
-++				   "\t\tDBusMessageIter                     value_element_iter;\n"
-++				   "\t\tconst char *                        value_element_item0;\n"
-++				   "\t\tuint32_t                            value_element_item1;\n"
-++				   "\t\tconst MyDictEntryArrayValueElement *value_element;\n"
-+ 				   "\n"
-+-				   "\tvalue_element = value[value_i];\n"
-++				   "\t\tvalue_element = value[value_i];\n"
-+ 				   "\n"
-+-				   "\t/* Marshal a structure onto the message */\n"
-+-				   "\tif (! dbus_message_iter_open_container (&value_iter, DBUS_TYPE_DICT_ENTRY, NULL, &value_element_iter)) {\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-+-				   "\t\treturn -1;\n"
-+-				   "\t}\n"
-++				   "\t\t/* Marshal a structure onto the message */\n"
-++				   "\t\tif (! dbus_message_iter_open_container (&value_iter, DBUS_TYPE_DICT_ENTRY, NULL, &value_element_iter)) {\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-++				   "\t\t\treturn -1;\n"
-++				   "\t\t}\n"
-+ 				   "\n"
-+-				   "\tvalue_element_item0 = value_element->item0;\n"
-++				   "\t\tvalue_element_item0 = value_element->item0;\n"
-+ 				   "\n"
-+-				   "\t/* Marshal a char * onto the message */\n"
-+-				   "\tif (! dbus_message_iter_append_basic (&value_element_iter, DBUS_TYPE_STRING, &value_element_item0)) {\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&value_iter, &value_element_iter);\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-+-				   "\t\treturn -1;\n"
-+-				   "\t}\n"
-++				   "\t\t/* Marshal a char * onto the message */\n"
-++				   "\t\tif (! dbus_message_iter_append_basic (&value_element_iter, DBUS_TYPE_STRING, &value_element_item0)) {\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&value_iter, &value_element_iter);\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-++				   "\t\t\treturn -1;\n"
-++				   "\t\t}\n"
-+ 				   "\n"
-+-				   "\tvalue_element_item1 = value_element->item1;\n"
-++				   "\t\tvalue_element_item1 = value_element->item1;\n"
-+ 				   "\n"
-+-				   "\t/* Marshal a uint32_t onto the message */\n"
-+-				   "\tif (! dbus_message_iter_append_basic (&value_element_iter, DBUS_TYPE_UINT32, &value_element_item1)) {\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&value_iter, &value_element_iter);\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-+-				   "\t\treturn -1;\n"
-+-				   "\t}\n"
-++				   "\t\t/* Marshal a uint32_t onto the message */\n"
-++				   "\t\tif (! dbus_message_iter_append_basic (&value_element_iter, DBUS_TYPE_UINT32, &value_element_item1)) {\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&value_iter, &value_element_iter);\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-++				   "\t\t\treturn -1;\n"
-++				   "\t\t}\n"
-+ 				   "\n"
-+-				   "\tif (! dbus_message_iter_close_container (&value_iter, &value_element_iter)) {\n"
-+-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-+-				   "\t\treturn -1;\n"
-++				   "\t\tif (! dbus_message_iter_close_container (&value_iter, &value_element_iter)) {\n"
-++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-++				   "\t\t\treturn -1;\n"
-++				   "\t\t}\n"
-+ 				   "\t}\n"
-+ 				   "}\n"
-+ 				   "\n"
-+--- libnih-1.0.3.orig/nih-dbus-tool/tests/test_com.netsplit.Nih.Test_proxy.c
-++++ libnih-1.0.3/nih-dbus-tool/tests/test_com.netsplit.Nih.Test_proxy.c
-+@@ -27359,6 +27359,7 @@
-+ 		TEST_TRUE (unix_fd_to_str_replied);
-+ 
-+ 		TEST_EQ_P (last_data, parent);
-++		TEST_NE (last_str_value[0], '\0');
-+ 		TEST_TRUE (strchr ("0123456789", last_str_value[0]));
-+ 		TEST_ALLOC_PARENT (last_str_value, parent);
-+ 
-+@@ -27673,6 +27674,7 @@
-+ 
-+ 		TEST_EQ (ret, 0);
-+ 
-++		TEST_NE (str_value[0], '\0');
-+ 		TEST_TRUE (strchr ("0123456789", str_value[0]));
-+ 		TEST_ALLOC_PARENT (str_value, parent);
-+ 
-+--- libnih-1.0.3.orig/nih-dbus-tool/tests/test_property.c
-++++ libnih-1.0.3/nih-dbus-tool/tests/test_property.c
-+@@ -8733,7 +8733,7 @@
-+ 	TypeVar *       var;
-+ 	NihListEntry *  attrib;
-+ 	NihDBusProxy *  proxy = NULL;
-+-	void *          parent = NULL;
-++	void *          parent __attribute__((unused)) = NULL;
-+ 	pid_t           pid = -1;
-+ 	int             status;
-+ 	DBusMessage *   method_call;
-+--- libnih-1.0.3.orig/nih-dbus-tool/tests/expected/test_method_object_function_standard.c
-++++ libnih-1.0.3/nih-dbus-tool/tests/expected/test_method_object_function_standard.c
-+@@ -136,17 +136,19 @@
-+ 			goto enomem;
-+ 		}
-+ 
-+-		for (size_t output_i = 0; output[output_i]; output_i++) {
-+-			const char *output_element;
-++		if (output) {
-++			for (size_t output_i = 0; output[output_i]; output_i++) {
-++				const char *output_element;
-+ 
-+-			output_element = output[output_i];
-++				output_element = output[output_i];
-+ 
-+-			/* Marshal a char * onto the message */
-+-			if (! dbus_message_iter_append_basic (&output_iter, DBUS_TYPE_STRING, &output_element)) {
-+-				dbus_message_iter_abandon_container (&iter, &output_iter);
-+-				dbus_message_unref (reply);
-+-				reply = NULL;
-+-				goto enomem;
-++				/* Marshal a char * onto the message */
-++				if (! dbus_message_iter_append_basic (&output_iter, DBUS_TYPE_STRING, &output_element)) {
-++					dbus_message_iter_abandon_container (&iter, &output_iter);
-++					dbus_message_unref (reply);
-++					reply = NULL;
-++					goto enomem;
-++				}
-+ 			}
-+ 		}
-+ 
-+--- libnih-1.0.3.orig/nih-dbus-tool/tests/expected/test_method_reply_function_standard.c
-++++ libnih-1.0.3/nih-dbus-tool/tests/expected/test_method_reply_function_standard.c
-+@@ -7,7 +7,6 @@
-+ 	DBusMessageIter output_iter;
-+ 
-+ 	nih_assert (message != NULL);
-+-	nih_assert (output != NULL);
-+ 
-+ 	/* If the sender doesn't care about a reply, don't bother wasting
-+ 	 * effort constructing and sending one.
-+@@ -28,16 +27,18 @@
-+ 		return -1;
-+ 	}
-+ 
-+-	for (size_t output_i = 0; output[output_i]; output_i++) {
-+-		const char *output_element;
-+-
-+-		output_element = output[output_i];
-+-
-+-		/* Marshal a char * onto the message */
-+-		if (! dbus_message_iter_append_basic (&output_iter, DBUS_TYPE_STRING, &output_element)) {
-+-			dbus_message_iter_abandon_container (&iter, &output_iter);
-+-			dbus_message_unref (reply);
-+-			return -1;
-++	if (output) {
-++		for (size_t output_i = 0; output[output_i]; output_i++) {
-++			const char *output_element;
-++
-++			output_element = output[output_i];
-++
-++			/* Marshal a char * onto the message */
-++			if (! dbus_message_iter_append_basic (&output_iter, DBUS_TYPE_STRING, &output_element)) {
-++				dbus_message_iter_abandon_container (&iter, &output_iter);
-++				dbus_message_unref (reply);
-++				return -1;
-++			}
-+ 		}
-+ 	}
-+ 
-+--- libnih-1.0.3.orig/nih-dbus-tool/tests/expected/test_method_reply_function_deprecated.c
-++++ libnih-1.0.3/nih-dbus-tool/tests/expected/test_method_reply_function_deprecated.c
-+@@ -7,7 +7,6 @@
-+ 	DBusMessageIter output_iter;
-+ 
-+ 	nih_assert (message != NULL);
-+-	nih_assert (output != NULL);
-+ 
-+ 	/* If the sender doesn't care about a reply, don't bother wasting
-+ 	 * effort constructing and sending one.
-+@@ -28,16 +27,18 @@
-+ 		return -1;
-+ 	}
-+ 
-+-	for (size_t output_i = 0; output[output_i]; output_i++) {
-+-		const char *output_element;
-+-
-+-		output_element = output[output_i];
-+-
-+-		/* Marshal a char * onto the message */
-+-		if (! dbus_message_iter_append_basic (&output_iter, DBUS_TYPE_STRING, &output_element)) {
-+-			dbus_message_iter_abandon_container (&iter, &output_iter);
-+-			dbus_message_unref (reply);
-+-			return -1;
-++	if (output) {
-++		for (size_t output_i = 0; output[output_i]; output_i++) {
-++			const char *output_element;
-++
-++			output_element = output[output_i];
-++
-++			/* Marshal a char * onto the message */
-++			if (! dbus_message_iter_append_basic (&output_iter, DBUS_TYPE_STRING, &output_element)) {
-++				dbus_message_iter_abandon_container (&iter, &output_iter);
-++				dbus_message_unref (reply);
-++				return -1;
-++			}
-+ 		}
-+ 	}
-+ 
-+--- libnih-1.0.3.orig/nih-dbus-tool/tests/expected/test_method_object_function_no_input.c
-++++ libnih-1.0.3/nih-dbus-tool/tests/expected/test_method_object_function_no_input.c
-+@@ -88,17 +88,19 @@
-+ 			goto enomem;
-+ 		}
-+ 
-+-		for (size_t output_i = 0; output[output_i]; output_i++) {
-+-			const char *output_element;
-++		if (output) {
-++			for (size_t output_i = 0; output[output_i]; output_i++) {
-++				const char *output_element;
-+ 
-+-			output_element = output[output_i];
-++				output_element = output[output_i];
-+ 
-+-			/* Marshal a char * onto the message */
-+-			if (! dbus_message_iter_append_basic (&output_iter, DBUS_TYPE_STRING, &output_element)) {
-+-				dbus_message_iter_abandon_container (&iter, &output_iter);
-+-				dbus_message_unref (reply);
-+-				reply = NULL;
-+-				goto enomem;
-++				/* Marshal a char * onto the message */
-++				if (! dbus_message_iter_append_basic (&output_iter, DBUS_TYPE_STRING, &output_element)) {
-++					dbus_message_iter_abandon_container (&iter, &output_iter);
-++					dbus_message_unref (reply);
-++					reply = NULL;
-++					goto enomem;
-++				}
-+ 			}
-+ 		}
-+ 
-diff --git a/meta-oe/recipes-support/libnih/libnih_1.0.3.bb b/meta-oe/recipes-support/libnih/libnih_1.0.3.bb
-new file mode 100644
-index 0000000..b5e5e12
---- /dev/null
-+++ b/meta-oe/recipes-support/libnih/libnih_1.0.3.bb
-@@ -0,0 +1,40 @@
-+# Copyright (c) 2013  LG Electronics, Inc.
-+
-+SUMMARY = "libnih library"
-+DESCRIPTION = "libnih is a small library for C application development \
-+    containing functions that, despite its name, are not implemented \
-+    elsewhere in the standard library set. \
-+    \
-+    libnih is roughly equivalent to other C libraries such as glib, \
-+    except that its focus is on a small size and intended for \
-+    applications that sit very low in the software stack, especially \
-+    outside of /usr. \
-+    \
-+    It expressly does not reimplement functions that already exist in \
-+    libraries ordinarily shipped in /lib such libc6, and does not do \
-+    foolish things like invent arbitrary typedefs for perfectly good C types."
-+
-+SECTION = "libs"
-+
-+LICENSE = "GPL-2.0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+
-+DEPENDS = "dbus libnih-native"
-+DEPENDS_class-native = "dbus-native"
-+
-+PR = "r0"
-+
-+SRC_URI = "https://launchpad.net/${BPN}/1.0/${PV}/+download/${BP}.tar.gz;name=tarball"
-+SRC_URI += "file://libnih_1.0.3-4ubuntu16.patch;name=patch"
-+
-+SRC_URI[tarball.md5sum] = "db7990ce55e01daffe19006524a1ccb0"
-+SRC_URI[tarball.sha256sum] = "897572df7565c0a90a81532671e23c63f99b4efde2eecbbf11e7857fbc61f405"
-+
-+SRC_URI[patch.md5sum] = ""
-+SRC_URI[patch.sha256sum] = ""
-+
-+inherit autotools
-+inherit gettext
-+
-+# target libnih requires native nih-dbus-tool
-+BBCLASSEXTEND = "native"
--- 
-1.8.4.2
-
-
-
+VGhhbmtzICwgSSB3aWxsIHJlc2VuZCB0aGlzIHBhdGNoLg0KDQotLS0tLemC
+ruS7tuWOn+S7ti0tLS0tDQrlj5Hku7bkuro6IG9wZW5lbWJlZGRlZC1kZXZl
+bC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcgW21haWx0bzpvcGVu
+ZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3Jn
+XSDku6PooaggTWFydGluIEphbnNhDQrlj5HpgIHml7bpl7Q6IDIwMTblubQ3
+5pyIMjbml6UgMTg6NTENCuaUtuS7tuS6ujogb3BlbmVtYmVkZGVkLWRldmVs
+QGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCuS4u+mimDogUmU6IFtvZV0gW21l
+dGEtb2VdW1BBVENIXSBsaWJuaWg6IGFkZCBuZXcgcmVjaXBlIHRvIG1ldGEt
+b2UNCg0KT24gVHVlLCBBcHIgMTksIDIwMTYgYXQgMDU6NTc6MzZBTSArMDMw
+MCwgRGFpIENhaXl1biB3cm90ZToNCj4gbWV0YS13ZWJvcyBoYXNuJ3QgYmVl
+biBtYWl0YWluZWQgZm9yIGFib3V0IDJ5ZWFycy4NCj4gU28sIGhvdyBhYm91
+dCBhZGQgbGlibmloIGludG8gbWV0YS1vZS4NCj4gDQo+IEZpeCB0aGUgZXJy
+b3IgYXMgZm9sb293aW5nOg0KPiBpbnZhbGlkIHRhZyB2YWx1ZSgiXltBLVph
+LXowLTkrLl9dKyQiKSBSZWxlYXNlOiBSZWxlYXNlOiByMi00dWJ1bnR1MTYu
+DQoNClRoaXMgZGlkbid0IG1ha2UgaXQgaW50byBNTCB1bnRpbCB0b2RheSBh
+bmQgaXQncyBhbHNvIG1pc3NpbmcgaW4NCnBhdGNod29yaywgY2FuIHlvdSBw
+bGVhc2UgcmVzZW5kIGlmIHlvdSBzdGlsbCBuZWVkIHRoaXM/DQoNCj4gU2ln
+bmVkLW9mZi1ieTogRGFpIENhaXl1biA8ZGFpY3kuZm5zdEBjbi5mdWppdHN1
+LmNvbT4NCj4gLS0tDQo+ICAuLi4vbGlibmloLTEuMC4zL2xpYm5paF8xLjAu
+My00dWJ1bnR1MTYucGF0Y2ggICAgICB8IDM1OTMgKysrKysrKysrKysrKysr
+KysrKysNCj4gIG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYm5paC9saWJu
+aWhfMS4wLjMuYmIgICAgIHwgICA0MCArDQo+ICAyIGZpbGVzIGNoYW5nZWQs
+IDM2MzMgaW5zZXJ0aW9ucygrKQ0KPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IG1l
+dGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYm5paC9saWJuaWgtMS4wLjMvbGli
+bmloXzEuMC4zLTR1YnVudHUxNi5wYXRjaA0KPiAgY3JlYXRlIG1vZGUgMTAw
+NjQ0IG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2xpYm5paC9saWJuaWhfMS4w
+LjMuYmINCj4gDQo+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3Vw
+cG9ydC9saWJuaWgvbGlibmloLTEuMC4zL2xpYm5paF8xLjAuMy00dWJ1bnR1
+MTYucGF0Y2ggYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJuaWgvbGli
+bmloLTEuMC4zL2xpYm5paF8xLjAuMy00dWJ1bnR1MTYucGF0Y2gNCj4gbmV3
+IGZpbGUgbW9kZSAxMDA2NDQNCj4gaW5kZXggMDAwMDAwMC4uNWQxMjVjOA0K
+PiAtLS0gL2Rldi9udWxsDQo+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1zdXBw
+b3J0L2xpYm5paC9saWJuaWgtMS4wLjMvbGlibmloXzEuMC4zLTR1YnVudHUx
+Ni5wYXRjaA0KPiBAQCAtMCwwICsxLDM1OTMgQEANCj4gKy0tLSBsaWJuaWgt
+MS4wLjMub3JpZy9DaGFuZ2VMb2cNCj4gKysrKyBsaWJuaWgtMS4wLjMvQ2hh
+bmdlTG9nDQo+ICtAQCAtMSwzICsxLDg0IEBADQo+ICsrMjAxMy0wMy0xMyAg
+U3RldmUgTGFuZ2FzZWsgIDxzdGV2ZS5sYW5nYXNla0B1YnVudHUuY29tPg0K
+PiArKw0KPiArKwkqIG5paC93YXRjaC5jIChuaWhfd2F0Y2hfd2Fsa19maWx0
+ZXIpOiBOZXcgTmloRmlsZUZpbHRlciBmdW5jdGlvbg0KPiArKwlwYXNzZWQg
+dG8gbmloX2Rpcl93YWxrX3NjYW4oKSB0byBlbnN1cmUgdGhlIG5paF93YXRj
+aF9uZXcoKSBmaWx0ZXINCj4gKysJZnVuY3Rpb24gaXMgcGFzc2VkIHRoZSBO
+aWhXYXRjaCBkYXRhIHJhdGhlciB0aGFuIHRoZSBkYXRhIHBhc3NlZCB0bw0K
+PiArKwl0aGUgbmloX2Rpcl93YWxrKCkgTmloRmlsZVZpc2l0b3IgZnVuY3Rp
+b24gKExQOiAjNzc2NTMyKS4NCj4gKysNCj4gKysJKiBuaWgvdGVzdHMvdGVz
+dF93YXRjaC5jICh0ZXN0X25ldyk6IE5ldyB0ZXN0ICJ3aXRoIGZpbHRlciBh
+bmQgZGF0YSINCj4gKysJdG8gZW5zdXJlIGZpbHRlciBpcyBwYXNzZWQgY29y
+cmVjdCB2YWx1ZS4NCj4gKysNCj4gKysyMDEzLTAyLTI4ICBKYW1lcyBIdW50
+ICA8amFtZXMuaHVudEB1YnVudHUuY29tPg0KPiArKw0KPiArKwkqIFJlbW92
+YWwgb2YgZ2NjICdtYWxsb2MnIGZ1bmN0aW9uIGF0dHJpYnV0ZSByZXN1bHRp
+bmcgZnJvbQ0KPiArKwkgIGEgY2xhcmlmaWNhdGlvbiBpbiBpdHMgZGVzY3Jp
+cHRpb24gd2hpY2ggbWFrZXMgaXRzIHVzZSBpbnZhbGlkLg0KPiArKwkgIChM
+UDogIzExMjM1ODgpLg0KPiArKw0KPiArKzIwMTMtMDItMDUgIEphbWVzIEh1
+bnQgIDxqYW1lcy5odW50QHVidW50dS5jb20+DQo+ICsrDQo+ICsrCSogbmlo
+L2xvZ2dpbmcuYzogbmloX2xvZ19hYm9ydF9tZXNzYWdlKCk6IFJlbW92ZSBl
+cnJvbmVvdXMgY2hlY2sNCj4gKysJICBsZWZ0IG92ZXIgZnJvbSB1c2Ugb2Yg
+X19hYm9ydF9tc2cgd2VhayBzeW1ib2wuDQo+ICsrCSogbmloL3Rlc3RzL3Rl
+c3RfbG9nZ2luZy5jOiBSZW1vdmUgdW5lY2Vzc2FyeSBjaGVjayBvbiB3aGV0
+aGVyDQo+ICsrCSAgX19uaWhfYWJvcnRfbXNnIGhhcyBhbiBhZGRyZXNzLg0K
+PiArKw0KPiArKzIwMTItMTItMTMgIFN0w6lwaGFuZSBHcmFiZXIgIDxzdGdy
+YWJlckB1YnVudHUuY29tPg0KPiArKw0KPiArKwkqIG5paC1kYnVzLXRvb2wv
+dHlwZS5jLCBuaWgtZGJ1cy10b29sL21hcnNoYWwuYzogVXBkYXRlIGRidXMg
+Y29kZQ0KPiArKwlnZW5lcmF0b3IgdG8gYWxsb3cgZm9yIGVtcHR5IGxpc3Rz
+IGZvciB0eXBlICdhcycuICBUaGlzIGRyb3BzIHRoZQ0KPiArKwkhPSBOVUxM
+IGNoZWNrIGZvciBOVUxMIHRlcm1pbmF0ZWQgYXJyYXlzIGFuZCBtb3ZlcyB0
+aGUgaXRlcmF0aW9uDQo+ICsrCWxvb3AgaW5zaWRlIGFuICdpZicgc3RhdGVt
+ZW50Lg0KPiArKw0KPiArKzIwMTItMTItMTEgIERtaXRyaWpzIExlZGtvdnMg
+IDxkbWl0cmlqcy5sZWRrb3ZzQGNhbm9uaWNhbC5jb20+DQo+ICsrDQo+ICsr
+CSogbmloL2ZpbGUuYyAobmloX2Rpcl93YWxrX3NjYW4pOiBGYWxsYmFjayB0
+byBsc3RhdCwgaWYgdGhlDQo+ICsrCW5vbi1wb3J0YWJsZSBkaXJlbnQuZF90
+eXBlIGlzIG5vdCBhdmFpbGFibGUgKExQOiAjNjcyNjQzKSAoQ2xvc2VzOg0K
+PiArKwkjNjk1NjA0KS4NCj4gKysNCj4gKysyMDEyLTEyLTEwICBQZXRyIExh
+dXRyYmFjaCAgPHBsYXV0cmJhQHJlZGhhdC5jb20+DQo+ICsrDQo+ICsrCSog
+bmloL3Rlc3RzL3Rlc3RfZmlsZS5jOiBkb24ndCB1c2UgZGlyZW50LmRfdHlw
+ZSAobm90IHBvcnRhYmxlKQ0KPiArKw0KPiArKzIwMTItMTAtMjUgIEphbWVz
+IEh1bnQgIDxqYW1lcy5odW50QHVidW50dS5jb20+DQo+ICsrDQo+ICsrCSog
+bmloL2xvZ2dpbmcuYzogVXNlIG91ciBvd24gX19uaWhfYWJvcnRfbXNnIHJh
+dGhlciB0aGFuIHRoZQ0KPiArKwkoZSlnbGliYyBwcml2YXRlIHN5bWJvbCBf
+X2Fib3J0X21zZyB0byBhdm9pZCB1cGdyYWRlIGlzc3VlcyAoTFA6ICM5OTcz
+NTkpLg0KPiArKwkqIG5paC90ZXN0cy90ZXN0X2xvZ2dpbmcuYzogVXBkYXRl
+IHRlc3RzIGZvciBfX25paF9hYm9ydF9tc2cuDQo+ICsrDQo+ICsrMjAxMS0w
+OC0zMSAgSmFtZXMgSHVudCAgPGphbWVzLmh1bnRAdWJ1bnR1LmNvbT4NCj4g
+KysNCj4gKysJKiBuaWgtZGJ1cy10b29sL3Rlc3RzL3Rlc3RfY29tLm5ldHNw
+bGl0Lk5paC5UZXN0X29iamVjdC5jDQo+ICsrCSh0ZXN0X3VuaXhfZmRfdG9f
+c3RyKTogU2FuaXR5IGNoZWNrIHZhbHVlIGJlZm9yZSBpbnZva2luZyBzdHJj
+aHIgaW4NCj4gKysJY2FzZSBpdCByZXR1cm5zIGFkZHJlc3Mgb2YgbnVsbCAo
+d2hpY2ggd291bGQgZ2l2ZSBhIG1pc2xlYWRpbmcgdGVzdA0KPiArKwlwYXNz
+KS4NCj4gKysJKiBuaWgtZGJ1cy10b29sL3Rlc3RzL3Rlc3RfY29tLm5ldHNw
+bGl0Lk5paC5UZXN0X3Byb3h5LmMNCj4gKysJKHRlc3RfdW5peF9mZF90b19z
+dHIsIHRlc3RfdW5peF9mZF90b19zdHJfc3luYyk6IFNhbml0eSBjaGVjayB2
+YWx1ZQ0KPiArKwliZWZvcmUgaW52b2tpbmcgc3RyY2hyIGluIGNhc2UgaXQg
+cmV0dXJucyBhZGRyZXNzIG9mIG51bGwgKHdoaWNoIHdvdWxkDQo+ICsrCWdp
+dmUgYSBtaXNsZWFkaW5nIHRlc3QgcGFzcykuDQo+ICsrCSogbmloL2NvbmZp
+Zy5jICgpOiBuaWhfY29uZmlnX2Jsb2NrX2VuZDogQWRkIGNoZWNrIHRvIGVu
+c3VyZSBzdHJjaHIoKQ0KPiArKwlkb2Vzbid0IHJldHVybiBhZGRyZXNzIG9m
+IG51bGwgc2luY2UgdGhpcyB3b3VsZCByZXN1bHQgaW4gYSBtaXNsZWFkaW5n
+DQo+ICsrCXJldHVybiB2YWx1ZSBvZiBUUlVFLg0KPiArKw0KPiArKwkqIG5p
+aC9zdHJpbmcuYyAobmloX3N0cl9zcGxpdCk6IEZpeGVzIHRvIGF2b2lkIG92
+ZXItcnVubmluZw0KPiArKwlpbnB1dCBzdHJpbmcgYW5kIGFsc28gcmV0dXJu
+aW5nIGFuIGVtcHR5IHN0cmluZyBhcnJheSBlbnRyeQ0KPiArKwl3aGVuIHJl
+cGVhdCBpcyB0cnVlIChMUDogIzgzNDgxMykuDQo+ICsrCSogbmloL3Rlc3Rz
+L3Rlc3Rfc3RyaW5nLmMgKHRlc3Rfc3RyX3NwbGl0KTogQWRkZWQgYSBsb3Qg
+b2YgbmV3DQo+ICsrCXRlc3RzIGZvciBuaWhfc3RyX3NwbGl0KCkuDQo+ICsr
+DQo+ICsrMjAxMS0wOC0yNiAgSmFtZXMgSHVudCAgPGphbWVzLmh1bnRAdWJ1
+bnR1LmNvbT4NCj4gKysNCj4gKysJKiBuaWgvaW8uYyAobmloX2lvX3NlbGVj
+dF9mZHMpOiBFbnN1cmUgbnVtYmVyIG9mIGZkcyBiZWluZyBtYW5hZ2VkDQo+
+ICsrCWlzIHdpdGhpbiBsaW1pdHMuDQo+ICsrDQo+ICsrCSogbmloL2NvbmZp
+Zy5jLCBuaWgvZXJyb3IuaCwgbmloL2lvLmMsIG5paC90ZXN0X2ZpbGVzLmg6
+IENvcnJlY3QNCj4gKysJdHlwb3MgaW4gY29tbWVudHMuDQo+ICsrDQo+ICsr
+MjAxMS0wNi0yMCAgSmFtZXMgSHVudCAgPGphbWVzLmh1bnRAdWJ1bnR1LmNv
+bT4NCj4gKysNCj4gKysJKiBuaWgvd2F0Y2guYyAobmloX3dhdGNoX2hhbmRs
+ZSk6IEhhbmRsZSBub24tZGlyZWN0b3J5IHdhdGNoZXM7DQo+ICsrCXByZXZp
+b3VzbHkgYSBmaWxlIHdhdGNoIHJlc3VsdGVkIGluIGFuIGludmFsaWQgZmls
+ZSBwYXRoIGVuZGluZyBpbg0KPiArKwlhIHNpbmdsZSBzbGFzaCAoTFA6Izc3
+NzA5NykuDQo+ICsrCSogbmloL3Rlc3RzL3Rlc3Rfd2F0Y2guYzogQWRkZWQg
+ZXhwbGljaXQgdGVzdCBmb3Igd2F0Y2ggb24gYSBmaWxlLg0KPiArKw0KPiAr
+IDIwMTAtMTItMjMgIFNjb3R0IEphbWVzIFJlbW5hbnQgIDxzY290dEBuZXRz
+cGxpdC5jb20+DQo+ICsgDQo+ICsgCSogTkVXUzogUmVsZWFzZSAxLjAuMw0K
+PiArLS0tIGxpYm5paC0xLjAuMy5vcmlnL25paC93YXRjaC5jDQo+ICsrKysg
+bGlibmloLTEuMC4zL25paC93YXRjaC5jDQo+ICtAQCAtMiw4ICsyLDggQEAN
+Cj4gKyAgKg0KPiArICAqIHdhdGNoLmMgLSB3YXRjaGluZyBvZiBmaWxlcyBh
+bmQgZGlyZWN0b3JpZXMgd2l0aCBpbm90aWZ5DQo+ICsgICoNCj4gKy0gKiBD
+b3B5cmlnaHQgwqkgMjAwOSBTY290dCBKYW1lcyBSZW1uYW50IDxzY290dEBu
+ZXRzcGxpdC5jb20+Lg0KPiArLSAqIENvcHlyaWdodCDCqSAyMDA5IENhbm9u
+aWNhbCBMdGQuDQo+ICsrICogQ29weXJpZ2h0IMKpIDIwMTEgU2NvdHQgSmFt
+ZXMgUmVtbmFudCA8c2NvdHRAbmV0c3BsaXQuY29tPi4NCj4gKysgKiBDb3B5
+cmlnaHQgwqkgMjAxMSBDYW5vbmljYWwgTHRkLg0KPiArICAqDQo+ICsgICog
+VGhpcyBwcm9ncmFtIGlzIGZyZWUgc29mdHdhcmU7IHlvdSBjYW4gcmVkaXN0
+cmlidXRlIGl0IGFuZC9vciBtb2RpZnkNCj4gKyAgKiBpdCB1bmRlciB0aGUg
+dGVybXMgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIHZlcnNp
+b24gMiwgYXMNCj4gK0BAIC03MSw2ICs3MSw5IEBADQo+ICsgCQkJCQkgICAg
+ICB1aW50MzJfdCBldmVudHMsIHVpbnQzMl90IGNvb2tpZSwNCj4gKyAJCQkJ
+CSAgICAgIGNvbnN0IGNoYXIgKm5hbWUsDQo+ICsgCQkJCQkgICAgICBpbnQg
+KmNhdWdodF9mcmVlKTsNCj4gKytzdGF0aWMgaW50ICAgICAgICAgICAgIG5p
+aF93YXRjaF93YWxrX2ZpbHRlciAodm9pZCAqZGF0YSwgY29uc3QgY2hhciAq
+cGF0aCwNCj4gKysJCQkJCSAgICAgIGludCBpc19kaXIpDQo+ICsrCV9fYXR0
+cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4gKyAN
+Cj4gKyAvKioNCj4gK0BAIC05MSw3ICs5NCw3IEBADQo+ICsgICogc3ViLWRp
+cmVjdG9yaWVzIHdpbGwgYmUgYXV0b21hdGljYWxseSB3YXRjaGVkLg0KPiAr
+ICAqDQo+ICsgICogQWRkaXRpb25hbGx5LCB0aGUgc2V0IG9mIGZpbGVzIGFu
+ZCBkaXJlY3RvcmllcyB3aXRoaW4gQHBhdGggY2FuIGJlDQo+ICstICogbGlt
+aXRlZCBieSBwYXNzaW5nIGEgQGZpbHRlciBmdW5jdGlvbiB3aGljaCB3aWxs
+IHJlY2lldmUgdGhlIHBhdGhzIGFuZA0KPiArKyAqIGxpbWl0ZWQgYnkgcGFz
+c2luZyBhIEBmaWx0ZXIgZnVuY3Rpb24gd2hpY2ggd2lsbCByZWNlaXZlIHRo
+ZSBwYXRocyBhbmQNCj4gKyAgKiBtYXkgcmV0dXJuIFRSVUUgdG8gaW5kaWNh
+dGUgdGhhdCB0aGUgcGF0aCByZWNlaXZlZCBzaG91bGQgbm90IGJlIHdhdGNo
+ZWQuDQo+ICsgICoNCj4gKyAgKiBXaGVuIGEgZmlsZSBpcyBjcmVhdGVkIHdp
+dGhpbiBAcGF0aCwgb3IgbW92ZWQgZnJvbSBvdXRzaWRlIHRoaXMgbG9jYXRp
+b24NCj4gK0BAIC0xMDQsNyArMTA3LDcgQEANCj4gKyAgKiBmaWxlcyB0aGF0
+IGV4aXN0IHVuZGVyIEBwYXRoIHdoZW4gdGhlIHdhdGNoIGlzIGZpcnN0IGFk
+ZGVkLiAgVGhpcyBvbmx5DQo+ICsgICogb2NjdXJzIGlmIHRoZSB3YXRjaCBj
+YW4gYmUgYWRkZWQuDQo+ICsgICoNCj4gKy0gKiBUaGlzIGlzIGEgdmVyeSBo
+aWdoIGxldmVsIHdyYXBwZWQgYXJvdW5kIHRoZSBpbm90aWZ5IEFQSTsgbG93
+ZXIgbGV2ZWxzDQo+ICsrICogVGhpcyBpcyBhIHZlcnkgaGlnaCBsZXZlbCB3
+cmFwcGVyIGFyb3VuZCB0aGUgaW5vdGlmeSBBUEk7IGxvd2VyIGxldmVscw0K
+PiArICAqIGNhbiBiZSBvYnRhaW5lZCB1c2luZyB0aGUgaW5vdGlmeSBBUEkg
+aXRzZWxmIGFuZCBzb21lIG9mIHRoZSBoZWxwZXINCj4gKyAgKiBmdW5jdGlv
+bnMgdXNlZCBieSB0aGlzIG9uZS4NCj4gKyAgKg0KPiArQEAgLTE4NSw2ICsx
+ODgsMzUgQEANCj4gKyB9DQo+ICsgDQo+ICsgDQo+ICsrIC8qKg0KPiArKyAq
+IG5paF93YXRjaF93YWxrX2ZpbHRlcjoNCj4gKysgKiBAZGF0YTogTmloV2F0
+Y2gsDQo+ICsrICogQHBhdGg6IHBhdGggdG8gZmlsZSwNCj4gKysgKiBAaXNf
+ZGlyOiBUUlVFIGlmIEBwYXRoIGlzIGEgZGlyZWN0b3J5Lg0KPiArKyAqDQo+
+ICsrICogQ2FsbGJhY2sgZnVuY3Rpb24gZm9yIG5paF9kaXJfd2FsaygpLCB1
+c2VkIGJ5IG5paF93YXRjaF9hZGQoKSB0byB3cmFwDQo+ICsrICogdGhlIHVz
+ZXItc3BlY2lmaWVkIE5paEZpbGVGaWx0ZXIgKHdhdGNoLT5maWx0ZXIpIHdp
+dGggYSBmaWx0ZXIgdGhhdCBjYW4NCj4gKysgKiB0YWtlIHdhdGNoIGl0c2Vs
+ZiBhcyBhbiBhcmd1bWVudC4NCj4gKysgKg0KPiArKyAqIFJldHVybnM6IFRS
+VUUgaWYgdGhlIHBhdGggc2hvdWxkIGJlIGlnbm9yZWQsIEZBTFNFIG90aGVy
+d2lzZS4NCj4gKysgKiovDQo+ICsrc3RhdGljIGludA0KPiArK25paF93YXRj
+aF93YWxrX2ZpbHRlciAodm9pZCAqZGF0YSwgY29uc3QgY2hhciAqcGF0aCwg
+aW50IGlzX2RpcikNCj4gKyt7DQo+ICsrICAgIE5paFdhdGNoICp3YXRjaDsN
+Cj4gKysNCj4gKysgICAgd2F0Y2ggPSAoTmloV2F0Y2ggKilkYXRhOw0KPiAr
+Kw0KPiArKyAgICBuaWhfYXNzZXJ0ICh3YXRjaCk7DQo+ICsrDQo+ICsrICAg
+IC8qIE5vIGZpbHRlciwgc28gYWNjZXB0IGFsbCBmaWxlcyAqLw0KPiArKyAg
+ICBpZiAoISB3YXRjaC0+ZmlsdGVyKQ0KPiArKyAgICAgICAgICAgcmV0dXJu
+IEZBTFNFOw0KPiArKw0KPiArKyAgICByZXR1cm4gd2F0Y2gtPmZpbHRlciAo
+d2F0Y2gtPmRhdGEsIHBhdGgsIGlzX2Rpcik7DQo+ICsrfQ0KPiArKw0KPiAr
+Kw0KPiArIC8qKg0KPiArICAqIG5paF93YXRjaF9oYW5kbGVfYnlfd2Q6DQo+
+ICsgICogQHdhdGNoOiB3YXRjaCB0byBzZWFyY2gsDQo+ICtAQCAtMjk1LDcg
+KzMyNyw3IEBADQo+ICsgCSAqIG9uZTsgZXJyb3JzIHdpdGhpbiB0aGUgd2Fs
+ayBhcmUgd2FybmVkIGF1dG9tYXRpY2FsbHksIHNvIGlmIHRoaXMNCj4gKyAJ
+ICogZmFpbHMsIGl0IG1lYW5zIHdlIGxpdGVyYWxseSBjb3VsZG4ndCB3YXRj
+aCB0aGUgdG9wLWxldmVsLg0KPiArIAkgKi8NCj4gKy0JaWYgKHN1YmRpcnMg
+JiYgKG5paF9kaXJfd2FsayAocGF0aCwgd2F0Y2gtPmZpbHRlciwNCj4gKysJ
+aWYgKHN1YmRpcnMgJiYgKG5paF9kaXJfd2FsayAocGF0aCwgbmloX3dhdGNo
+X3dhbGtfZmlsdGVyLA0KPiArIAkJCQkgICAgICAoTmloRmlsZVZpc2l0b3Ip
+bmloX3dhdGNoX2FkZF92aXNpdG9yLA0KPiArIAkJCQkgICAgICBOVUxMLCB3
+YXRjaCkgPCAwKSkgew0KPiArIAkJTmloRXJyb3IgKmVycjsNCj4gK0BAIC00
+OTQsMTIgKzUyNiwyMSBAQA0KPiArIAkJcmV0dXJuOw0KPiArIAl9DQo+ICsg
+DQo+ICsrCS8qIEV2ZXJ5IG90aGVyIGV2ZW50IG11c3QgY29tZSB3aXRoIGEg
+bmFtZSAqLw0KPiArKwlpZiAobmFtZSAmJiAqbmFtZSkgew0KPiArIA0KPiAr
+LQkvKiBFdmVyeSBvdGhlciBldmVudCBtdXN0IGNvbWUgd2l0aCBhIG5hbWUu
+ICovDQo+ICstCWlmICgoISBuYW1lKSB8fCBzdHJjaHIgKG5hbWUsICcvJykp
+DQo+ICstCQlyZXR1cm47DQo+ICsrCQkvKiBJZiBuYW1lIHJlZmVycyB0byBh
+IGRpcmVjdG9yeSwgdGhlcmUgc2hvdWxkIGJlIG5vIGFzc29jaWF0ZWQNCj4g
+KysJCSAqIHBhdGggLSBqdXN0IHRoZSBuYW1lIG9mIHRoZSBwYXRoIGVsZW1l
+bnQuDQo+ICsrCQkgKi8NCj4gKysJCWlmIChzdHJjaHIgKG5hbWUsICcvJykp
+DQo+ICsrCQkJcmV0dXJuOw0KPiArIA0KPiArLQlwYXRoID0gTklIX01VU1Qg
+KG5paF9zcHJpbnRmIChOVUxMLCAiJXMvJXMiLCBoYW5kbGUtPnBhdGgsIG5h
+bWUpKTsNCj4gKysJCS8qIEV2ZW50IG9jY3VyZWQgZm9yIGZpbGUgd2l0aGlu
+IGEgd2F0Y2hlZCBkaXJlY3RvcnkgKi8NCj4gKysJCXBhdGggPSBOSUhfTVVT
+VCAobmloX3NwcmludGYgKE5VTEwsICIlcy8lcyIsIGhhbmRsZS0+cGF0aCwg
+bmFtZSkpOw0KPiArKwl9IGVsc2Ugew0KPiArKwkJLyogRmlsZSBldmVudCBv
+Y2N1cmVkICovDQo+ICsrCQlwYXRoID0gTklIX01VU1QgKG5paF9zdHJkdXAg
+KE5VTEwsIGhhbmRsZS0+cGF0aCkpOw0KPiArKwl9DQo+ICsgDQo+ICsgCS8q
+IENoZWNrIHRoZSBmaWx0ZXIgKi8NCj4gKyAJaWYgKHdhdGNoLT5maWx0ZXIg
+JiYgd2F0Y2gtPmZpbHRlciAod2F0Y2gtPmRhdGEsIHBhdGgsDQo+ICstLS0g
+bGlibmloLTEuMC4zLm9yaWcvbmloL2hhc2guaA0KPiArKysrIGxpYm5paC0x
+LjAuMy9uaWgvaGFzaC5oDQo+ICtAQCAtMTQxLDcgKzE0MSw3IEBADQo+ICsg
+ICogQGhhc2g6IGhhc2ggdGFibGUgdG8gaXRlcmF0ZSwNCj4gKyAgKiBAaXRl
+cjogbmFtZSBvZiBpdGVyYXRvciB2YXJpYWJsZS4NCj4gKyAgKg0KPiArLSAq
+IEV4cGFucyB0byBuZXN0ZWQgZm9yIHN0YXRlbWVudHMgdGhhdCBpdGVyYXRl
+IG92ZXIgZWFjaCBlbnRyeSBpbiBlYWNoDQo+ICsrICogRXhwYW5kcyB0byBu
+ZXN0ZWQgZm9yIHN0YXRlbWVudHMgdGhhdCBpdGVyYXRlIG92ZXIgZWFjaCBl
+bnRyeSBpbiBlYWNoDQo+ICsgICogYmluIG9mIEBoYXNoLCBleGNlcHQgZm9y
+IHRoZSBiaW4gaGVhZCBwb2ludGVyLCBzZXR0aW5nIEBpdGVyIHRvIGVhY2gN
+Cj4gKyAgKiBlbnRyeSBmb3IgdGhlIGJsb2NrIHdpdGhpbiB0aGUgbG9vcC4g
+IEEgdmFyaWFibGUgbmFtZWQgX0BpdGVyX2kgaXMgdXNlZA0KPiArICAqIHRv
+IGl0ZXJhdGUgdGhlIGhhc2ggYmlucy4NCj4gK0BAIC0yMDMsNyArMjAzLDcg
+QEANCj4gKyAJCQkJICAgTmloS2V5RnVuY3Rpb24ga2V5X2Z1bmN0aW9uLA0K
+PiArIAkJCQkgICBOaWhIYXNoRnVuY3Rpb24gaGFzaF9mdW5jdGlvbiwNCj4g
+KyAJCQkJICAgTmloQ21wRnVuY3Rpb24gY21wX2Z1bmN0aW9uKQ0KPiArLQlf
+X2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2MpKTsN
+Cj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0K
+PiArIA0KPiArIE5paExpc3QgKiAgIG5paF9oYXNoX2FkZCAgICAgICAgICAo
+TmloSGFzaCAqaGFzaCwgTmloTGlzdCAqZW50cnkpOw0KPiArIE5paExpc3Qg
+KiAgIG5paF9oYXNoX2FkZF91bmlxdWUgICAoTmloSGFzaCAqaGFzaCwgTmlo
+TGlzdCAqZW50cnkpOw0KPiArLS0tIGxpYm5paC0xLjAuMy5vcmlnL25paC9t
+YWluLmgNCj4gKysrKyBsaWJuaWgtMS4wLjMvbmloL21haW4uaA0KPiArQEAg
+LTEzOCw3ICsxMzgsNyBAQA0KPiArIA0KPiArIE5paE1haW5Mb29wRnVuYyAq
+bmloX21haW5fbG9vcF9hZGRfZnVuYyAgKGNvbnN0IHZvaWQgKnBhcmVudCwN
+Cj4gKyAJCQkJCSAgTmloTWFpbkxvb3BDYiBjYWxsYmFjaywgdm9pZCAqZGF0
+YSkNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwg
+bWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9y
+ZXN1bHQpKTsNCj4gKyANCj4gKyB2b2lkICAgICAgICAgICAgIG5paF9tYWlu
+X3Rlcm1fc2lnbmFsICAgICh2b2lkICpkYXRhLCBOaWhTaWduYWwgKnNpZ25h
+bCk7DQo+ICsgDQo+ICstLS0gbGlibmloLTEuMC4zLm9yaWcvbmloL2NvbW1h
+bmQuaA0KPiArKysrIGxpYm5paC0xLjAuMy9uaWgvY29tbWFuZC5oDQo+ICtA
+QCAtMTIzLDcgKzEyMyw3IEBADQo+ICsgDQo+ICsgTmloQ29tbWFuZCAqbmlo
+X2NvbW1hbmRfam9pbiAgIChjb25zdCB2b2lkICpwYXJlbnQsDQo+ICsgCQkJ
+CWNvbnN0IE5paENvbW1hbmQgKmEsIGNvbnN0IE5paENvbW1hbmQgKmIpDQo+
+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxv
+YykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0
+KSk7DQo+ICsgDQo+ICsgTklIX0VORF9FWFRFUk4NCj4gKyANCj4gKy0tLSBs
+aWJuaWgtMS4wLjMub3JpZy9uaWgvY29uZmlnLmgNCj4gKysrKyBsaWJuaWgt
+MS4wLjMvbmloL2NvbmZpZy5oDQo+ICtAQCAtMTQwLDEwICsxNDAsMTAgQEAN
+Cj4gKyBjaGFyICogICAgbmloX2NvbmZpZ19uZXh0X3Rva2VuICAgICAgKGNv
+bnN0IHZvaWQgKnBhcmVudCwgY29uc3QgY2hhciAqZmlsZSwNCj4gKyAJCQkJ
+ICAgICAgc2l6ZV90IGxlbiwgc2l6ZV90ICpwb3MsIHNpemVfdCAqbGluZW5v
+LA0KPiArIAkJCQkgICAgICBjb25zdCBjaGFyICpkZWxpbSwgaW50IGRlcXVv
+dGUpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQs
+IG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRf
+cmVzdWx0KSk7DQo+ICsgY2hhciAqICAgIG5paF9jb25maWdfbmV4dF9hcmcg
+ICAgICAgIChjb25zdCB2b2lkICpwYXJlbnQsIGNvbnN0IGNoYXIgKmZpbGUs
+DQo+ICsgCQkJCSAgICAgIHNpemVfdCBsZW4sIHNpemVfdCAqcG9zLCBzaXpl
+X3QgKmxpbmVubykNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2Vk
+X3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJu
+X3VudXNlZF9yZXN1bHQpKTsNCj4gKyB2b2lkICAgICAgbmloX2NvbmZpZ19u
+ZXh0X2xpbmUgICAgICAgKGNvbnN0IGNoYXIgKmZpbGUsIHNpemVfdCBsZW4s
+DQo+ICsgCQkJCSAgICAgIHNpemVfdCAqcG9zLCBzaXplX3QgKmxpbmVubyk7
+DQo+ICsgDQo+ICtAQCAtMTU1LDE1ICsxNTUsMTUgQEANCj4gKyANCj4gKyBj
+aGFyICoqICAgbmloX2NvbmZpZ19wYXJzZV9hcmdzICAgICAgKGNvbnN0IHZv
+aWQgKnBhcmVudCwgY29uc3QgY2hhciAqZmlsZSwNCj4gKyAJCQkJICAgICAg
+c2l6ZV90IGxlbiwgc2l6ZV90ICpwb3MsIHNpemVfdCAqbGluZW5vKQ0KPiAr
+LQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2Mp
+KTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkp
+Ow0KPiArIGNoYXIgKiAgICBuaWhfY29uZmlnX3BhcnNlX2NvbW1hbmQgICAo
+Y29uc3Qgdm9pZCAqcGFyZW50LCBjb25zdCBjaGFyICpmaWxlLA0KPiArIAkJ
+CQkgICAgICBzaXplX3QgbGVuLCBzaXplX3QgKnBvcywgc2l6ZV90ICpsaW5l
+bm8pDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQs
+IG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRf
+cmVzdWx0KSk7DQo+ICsgDQo+ICsgY2hhciAqICAgIG5paF9jb25maWdfcGFy
+c2VfYmxvY2sgICAgIChjb25zdCB2b2lkICpwYXJlbnQsIGNvbnN0IGNoYXIg
+KmZpbGUsDQo+ICsgCQkJCSAgICAgIHNpemVfdCBsZW4sIHNpemVfdCAqcG9z
+LCBzaXplX3QgKmxpbmVubywNCj4gKyAJCQkJICAgICAgY29uc3QgY2hhciAq
+dHlwZSkNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3Vs
+dCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNl
+ZF9yZXN1bHQpKTsNCj4gKyBpbnQgICAgICAgbmloX2NvbmZpZ19za2lwX2Js
+b2NrICAgICAgKGNvbnN0IGNoYXIgKmZpbGUsIHNpemVfdCBsZW4sDQo+ICsg
+CQkJCSAgICAgIHNpemVfdCAqbGluZW5vLCBzaXplX3QgKnBvcywNCj4gKyAJ
+CQkJICAgICAgY29uc3QgY2hhciAqdHlwZSwgc2l6ZV90ICplbmRwb3MpDQo+
+ICstLS0gbGlibmloLTEuMC4zLm9yaWcvbmloL2lvLmMNCj4gKysrKyBsaWJu
+aWgtMS4wLjMvbmloL2lvLmMNCj4gK0BAIC0yLDggKzIsOCBAQA0KPiArICAq
+DQo+ICsgICogaW8uYyAtIGZpbGUgYW5kIHNvY2tldCBpbnB1dC9vdXRwdXQg
+aGFuZGxpbmcNCj4gKyAgKg0KPiArLSAqIENvcHlyaWdodCDCqSAyMDA5IFNj
+b3R0IEphbWVzIFJlbW5hbnQgPHNjb3R0QG5ldHNwbGl0LmNvbT4uDQo+ICst
+ICogQ29weXJpZ2h0IMKpIDIwMDkgQ2Fub25pY2FsIEx0ZC4NCj4gKysgKiBD
+b3B5cmlnaHQgwqkgMjAxMSBTY290dCBKYW1lcyBSZW1uYW50IDxzY290dEBu
+ZXRzcGxpdC5jb20+Lg0KPiArKyAqIENvcHlyaWdodCDCqSAyMDExIENhbm9u
+aWNhbCBMdGQuDQo+ICsgICoNCj4gKyAgKiBUaGlzIHByb2dyYW0gaXMgZnJl
+ZSBzb2Z0d2FyZTsgeW91IGNhbiByZWRpc3RyaWJ1dGUgaXQgYW5kL29yIG1v
+ZGlmeQ0KPiArICAqIGl0IHVuZGVyIHRoZSB0ZXJtcyBvZiB0aGUgR05VIEdl
+bmVyYWwgUHVibGljIExpY2Vuc2UgdmVyc2lvbiAyLCBhcw0KPiArQEAgLTE2
+NSw2ICsxNjUsNyBAQA0KPiArIAluaWhfYXNzZXJ0IChyZWFkZmRzICE9IE5V
+TEwpOw0KPiArIAluaWhfYXNzZXJ0ICh3cml0ZWZkcyAhPSBOVUxMKTsNCj4g
+KyAJbmloX2Fzc2VydCAoZXhjZXB0ZmRzICE9IE5VTEwpOw0KPiArKwluaWhf
+YXNzZXJ0ICgqbmZkcyA8PSBGRF9TRVRTSVpFKTsNCj4gKyANCj4gKyAJbmlo
+X2lvX2luaXQgKCk7DQo+ICsgDQo+ICtAQCAtMTg2LDYgKzE4Nyw5IEBADQo+
+ICsgCQkJKm5mZHMgPSBuaWhfbWF4ICgqbmZkcywgd2F0Y2gtPmZkICsgMSk7
+DQo+ICsgCQl9DQo+ICsgCX0NCj4gKysNCj4gKysJLyogUmUtY2hlY2sgaW4g
+Y2FzZSB3ZSBleGNlZWRlZCB0aGUgbGltaXQgaW4gdGhlIGxvb3AgKi8NCj4g
+KysJbmloX2Fzc2VydCAoKm5mZHMgPD0gRkRfU0VUU0laRSk7DQo+ICsgfQ0K
+PiArIA0KPiArIC8qKg0KPiArQEAgLTkwMSw3ICs5MDUsNyBAQA0KPiArICAq
+IHJlYWQgYW5kIHBsYWNlZCBpbnRvIHRoZSByZWNlaXZlIGJ1ZmZlciBvciBx
+dWV1ZSwgYW5kIHRoZSByZWFkZXIgZnVuY3Rpb24NCj4gKyAgKiBpcyBjYWxs
+ZWQgaWYgc2V0Lg0KPiArICAqDQo+ICstICogQW55IGRhdGEgb3IgbWVzc2Fh
+Z2VzIGluIHRoZSBzZW5kIGJ1ZmZlciBvciBxdWV1ZSBhcmUgd3JpdHRlbiBv
+dXQgaWYgdGhlDQo+ICsrICogQW55IGRhdGEgb3IgbWVzc2FnZXMgaW4gdGhl
+IHNlbmQgYnVmZmVyIG9yIHF1ZXVlIGFyZSB3cml0dGVuIG91dCBpZiB0aGUN
+Cj4gKyAgKiBAZXZlbnRzIGluY2x1ZGVzIE5JSF9JT19XUklURS4NCj4gKyAg
+Kg0KPiArICAqIEVycm9ycyBhcmUgaGFuZGxlZCB3aGVuIGRhdGEgaXMgcmVh
+ZCwgYW5kIHJlc3VsdCBpbiB0aGUgZXJyb3IgaGFuZGxlZA0KPiArQEAgLTEy
+MTEsNyArMTIxNSw3IEBADQo+ICsgICogVGhpcyBmdW5jdGlvbiBpcyBjYWxs
+ZWQgd2hlbiB0aGUgbG9jYWwgZW5kIG9mIGEgZmlsZSBkZXNjcmlwdG9yIGJl
+aW5nDQo+ICsgICogbWFuYWdlZCBieSBOaWhJbyBzaG91bGQgYmUgY2xvc2Vk
+LiAgVXN1YWxseSB0aGlzIGlzIGJlY2F1c2UgdGhlIHJlbW90ZQ0KPiArICAq
+IGVuZCBoYXMgYmVlbiBjbG9zZWQgKHdpdGhvdXQgZXJyb3IpIGJ1dCBpdCBj
+YW4gYWxzbyBiZSBiZWNhdXNlIG5vDQo+ICstICogZXJyb3IgaGFuZGxlciB3
+YXMgZ2l2ZW4NCj4gKysgKiBlcnJvciBoYW5kbGVyIHdhcyBnaXZlbi4NCj4g
+KyAgKg0KPiArICAqIE5vcm1hbGx5IHRoaXMganVzdCBjYWxscyB0aGUgY2xv
+c2UgaGFuZGxlciwgb3IgaWYgbm90IGF2YWlsYWJsZSwgaXQNCj4gKyAgKiBj
+bG9zZXMgdGhlIGZpbGUgZGVzY3JpcHRvciBhbmQgZnJlZXMgdGhlIHN0cnVj
+dHVyZSAod2hpY2ggbWF5IGJlDQo+ICtAQCAtMTI5MSw3ICsxMjk1LDcgQEAN
+Cj4gKyAgKiBAaW86IHN0cnVjdHVyZSB0byBiZSBkZXN0cm95ZWQuDQo+ICsg
+ICoNCj4gKyAgKiBDbG9zZXMgdGhlIGZpbGUgZGVzY3JpcHRvciBhc3NvY2lh
+dGVkIHdpdGggYW4gTmloSW8gc3RydWN0dXJlIHNvIHRoYXQNCj4gKy0gKiB0
+aGUgc3RydWN0dXJlIGNhbiBiZSBmcmVlZC4gIElGIGFuIGVycm9yIGlzIGNh
+dWdodCBieSBjbG9zaW5nIHRoZQ0KPiArKyAqIHRoZSBzdHJ1Y3R1cmUgY2Fu
+IGJlIGZyZWVkLiAgSWYgYW4gZXJyb3IgaXMgY2F1Z2h0IGJ5IGNsb3Npbmcg
+dGhlDQo+ICsgICogZGVzY3JpcHRvciwgdGhlIGVycm9yIGhhbmRsZXIgaXMg
+Y2FsbGVkIGluc3RlYWQgb2YgdGhlIGVycm9yIGJlaW5nIHJhaXNlZDsNCj4g
+KyAgKiB0aGlzIGFsbG93cyB5b3UgdG8gZ3JvdXAgeW91ciBlcnJvciBoYW5k
+bGluZyBpbiBvbmUgcGxhY2UgcmF0aGVyIHRoYW4NCj4gKyAgKiBzcGVjaWFs
+LWNhc2UgY2xvc2UuDQo+ICstLS0gbGlibmloLTEuMC4zLm9yaWcvbmloL3dh
+dGNoLmgNCj4gKysrKyBsaWJuaWgtMS4wLjMvbmloL3dhdGNoLmgNCj4gK0BA
+IC0xNTYsNyArMTU2LDcgQEANCj4gKyAJCQkgICAgIE5paENyZWF0ZUhhbmRs
+ZXIgY3JlYXRlX2hhbmRsZXIsDQo+ICsgCQkJICAgICBOaWhNb2RpZnlIYW5k
+bGVyIG1vZGlmeV9oYW5kbGVyLA0KPiArIAkJCSAgICAgTmloRGVsZXRlSGFu
+ZGxlciBkZWxldGVfaGFuZGxlciwgdm9pZCAqZGF0YSkNCj4gKy0JX19hdHRy
+aWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsr
+CV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyAN
+Cj4gKyBpbnQgICAgICAgbmloX3dhdGNoX2FkZCAgICAgKE5paFdhdGNoICp3
+YXRjaCwgY29uc3QgY2hhciAqcGF0aCwgaW50IHN1YmRpcnMpDQo+ICsgCV9f
+YXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKy0tLSBs
+aWJuaWgtMS4wLjMub3JpZy9uaWgvdHJlZS5oDQo+ICsrKysgbGlibmloLTEu
+MC4zL25paC90cmVlLmgNCj4gK0BAIC0zNDQsOSArMzQ0LDkgQEANCj4gKyAN
+Cj4gKyB2b2lkICAgICAgICAgIG5paF90cmVlX2luaXQgICAgICAgICAgIChO
+aWhUcmVlICp0cmVlKTsNCj4gKyBOaWhUcmVlICogICAgIG5paF90cmVlX25l
+dyAgICAgICAgICAgIChjb25zdCB2b2lkICpwYXJlbnQpDQo+ICstCV9fYXR0
+cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiAr
+KwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsg
+TmloVHJlZUVudHJ5ICpuaWhfdHJlZV9lbnRyeV9uZXcgICAgICAoY29uc3Qg
+dm9pZCAqcGFyZW50KQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVz
+ZWRfcmVzdWx0LCBtYWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdh
+cm5fdW51c2VkX3Jlc3VsdCkpOw0KPiArIA0KPiArIE5paFRyZWUgKiAgICAg
+bmloX3RyZWVfYWRkICAgICAgICAgICAgKE5paFRyZWUgKnRyZWUsIE5paFRy
+ZWUgKm5vZGUsDQo+ICsgCQkJCSAgICAgICBOaWhUcmVlV2hlcmUgd2hlcmUp
+Ow0KPiArLS0tIGxpYm5paC0xLjAuMy5vcmlnL25paC9maWxlLmMNCj4gKysr
+KyBsaWJuaWgtMS4wLjMvbmloL2ZpbGUuYw0KPiArQEAgLTY1LDcgKzY1LDcg
+QEANCj4gKyAvKiBQcm90b3R5cGVzIGZvciBzdGF0aWMgZnVuY3Rpb25zICov
+DQo+ICsgc3RhdGljIGNoYXIgKipuaWhfZGlyX3dhbGtfc2NhbiAgKGNvbnN0
+IGNoYXIgKnBhdGgsIE5paEZpbGVGaWx0ZXIgZmlsdGVyLA0KPiArIAkJCQkg
+IHZvaWQgKmRhdGEpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNl
+ZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fy
+bl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgc3RhdGljIGludCAgICBuaWhfZGly
+X3dhbGtfdmlzaXQgKGNvbnN0IGNoYXIgKmRpcm5hbWUsIE5paExpc3QgKmRp
+cnMsDQo+ICsgCQkJCSAgY29uc3QgY2hhciAqcGF0aCwgTmloRmlsZUZpbHRl
+ciBmaWx0ZXIsDQo+ICsgCQkJCSAgTmloRmlsZVZpc2l0b3IgdmlzaXRvciwN
+Cj4gK0BAIC02MTksNiArNjE5LDggQEANCj4gKyAJc3RydWN0IGRpcmVudCAg
+KmVudDsNCj4gKyAJY2hhciAgICAgICAgICAqKnBhdGhzOw0KPiArIAlzaXpl
+X3QgICAgICAgICAgbnBhdGhzOw0KPiArKwlpbnQgICAgICAgICAgICAgaXNk
+aXI7DQo+ICsrCXN0cnVjdCBzdGF0ICAgICBzdGF0YnVmOw0KPiArIA0KPiAr
+IAluaWhfYXNzZXJ0IChwYXRoICE9IE5VTEwpOw0KPiArIA0KPiArQEAgLTY0
+MCw3ICs2NDIsMTUgQEANCj4gKyAJCXN1YnBhdGggPSBOSUhfTVVTVCAobmlo
+X3NwcmludGYgKE5VTEwsICIlcy8lcyIsDQo+ICsgCQkJCQkJIHBhdGgsIGVu
+dC0+ZF9uYW1lKSk7DQo+ICsgDQo+ICstCQlpZiAoZmlsdGVyICYmIGZpbHRl
+ciAoZGF0YSwgc3VicGF0aCwgZW50LT5kX3R5cGUgPT0gRFRfRElSKSkNCj4g
+KysJCWlmIChlbnQtPmRfdHlwZSA9PSBEVF9VTktOT1dOKSB7DQo+ICsrCQkJ
+aWYgKCBsc3RhdCAoc3VicGF0aCwgJnN0YXRidWYpKQ0KPiArKwkJCQlpc2Rp
+ciA9IDA7DQo+ICsrCQkJZWxzZQ0KPiArKwkJCQlpc2RpciA9IFNfSVNESVIo
+c3RhdGJ1Zi5zdF9tb2RlKTsNCj4gKysJCX0gZWxzZQ0KPiArKwkJCWlzZGly
+ID0gZW50LT5kX3R5cGUgPT0gRFRfRElSOw0KPiArKw0KPiArKwkJaWYgKGZp
+bHRlciAmJiBmaWx0ZXIgKGRhdGEsIHN1YnBhdGgsIGlzZGlyKSkNCj4gKyAJ
+CQljb250aW51ZTsNCj4gKyANCj4gKyAJCU5JSF9NVVNUIChuaWhfc3RyX2Fy
+cmF5X2FkZHAgKCZwYXRocywgTlVMTCwgJm5wYXRocywgc3VicGF0aCkpOw0K
+PiArLS0tIGxpYm5paC0xLjAuMy5vcmlnL25paC9hbGxvYy5jDQo+ICsrKysg
+bGlibmloLTEuMC4zL25paC9hbGxvYy5jDQo+ICtAQCAtMTE5LDggKzExOSw3
+IEBADQo+ICsgc3RhdGljIGlubGluZSBpbnQgICAgICAgICAgbmloX2FsbG9j
+X2NvbnRleHRfZnJlZSAgIChOaWhBbGxvY0N0eCAqY3R4KTsNCj4gKyANCj4g
+KyBzdGF0aWMgaW5saW5lIE5paEFsbG9jUmVmICpuaWhfYWxsb2NfcmVmX25l
+dyAgICAgICAgKE5paEFsbG9jQ3R4ICpwYXJlbnQsDQo+ICstCQkJCQkJICAg
+ICBOaWhBbGxvY0N0eCAqY2hpbGQpDQo+ICstCV9fYXR0cmlidXRlX18gKCht
+YWxsb2MpKTsNCj4gKysJCQkJCQkgICAgIE5paEFsbG9jQ3R4ICpjaGlsZCk7
+DQo+ICsgc3RhdGljIGlubGluZSB2b2lkICAgICAgICAgbmloX2FsbG9jX3Jl
+Zl9mcmVlICAgICAgIChOaWhBbGxvY1JlZiAqcmVmKTsNCj4gKyBzdGF0aWMg
+aW5saW5lIE5paEFsbG9jUmVmICpuaWhfYWxsb2NfcmVmX2xvb2t1cCAgICAg
+KE5paEFsbG9jQ3R4ICpwYXJlbnQsDQo+ICsgCQkJCQkJICAgICBOaWhBbGxv
+Y0N0eCAqY2hpbGQpOw0KPiArLS0tIGxpYm5paC0xLjAuMy5vcmlnL25paC90
+aW1lci5oDQo+ICsrKysgbGlibmloLTEuMC4zL25paC90aW1lci5oDQo+ICtA
+QCAtNTksNyArNTksNyBAQA0KPiArICAqIEBtb250aHM6IG1vbnRocyAoMS0x
+MiksDQo+ICsgICogQHdkYXlzOiBkYXlzIG9mIHdlZWsgKDAtNykuDQo+ICsg
+ICoNCj4gKy0gKiBJbmRpZGNhdGVzIHdoZW4gc2NoZWR1bGVkIHRpbWVycyBz
+aG91bGQgYmUgcnVuLCBlYWNoIG1lbWJlciBpcyBhIGJpdA0KPiArKyAqIElu
+ZGljYXRlcyB3aGVuIHNjaGVkdWxlZCB0aW1lcnMgc2hvdWxkIGJlIHJ1biwg
+ZWFjaCBtZW1iZXIgaXMgYSBiaXQNCj4gKyAgKiBmaWVsZCB3aGVyZSB0aGUg
+Yml0IGlzIDEgaWYgdGhlIHRpbWVyIHNob3VsZCBiZSBydW4gZm9yIHRoYXQg
+dmFsdWUgYW5kDQo+ICsgICogMCBpZiBub3QuDQo+ICsgICoqLw0KPiArQEAg
+LTExNywxNCArMTE3LDE0IEBADQo+ICsgDQo+ICsgTmloVGltZXIgKm5paF90
+aW1lcl9hZGRfdGltZW91dCAgIChjb25zdCB2b2lkICpwYXJlbnQsIHRpbWVf
+dCB0aW1lb3V0LA0KPiArIAkJCQkgICBOaWhUaW1lckNiIGNhbGxiYWNrLCB2
+b2lkICpkYXRhKQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRf
+cmVzdWx0LCBtYWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5f
+dW51c2VkX3Jlc3VsdCkpOw0KPiArIE5paFRpbWVyICpuaWhfdGltZXJfYWRk
+X3BlcmlvZGljICAoY29uc3Qgdm9pZCAqcGFyZW50LCB0aW1lX3QgcGVyaW9k
+LA0KPiArIAkJCQkgICBOaWhUaW1lckNiIGNhbGxiYWNrLCB2b2lkICpkYXRh
+KQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBt
+YWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jl
+c3VsdCkpOw0KPiArIE5paFRpbWVyICpuaWhfdGltZXJfYWRkX3NjaGVkdWxl
+ZCAoY29uc3Qgdm9pZCAqcGFyZW50LA0KPiArIAkJCQkgICBOaWhUaW1lclNj
+aGVkdWxlICpzY2hlZHVsZSwNCj4gKyAJCQkJICAgTmloVGltZXJDYiBjYWxs
+YmFjaywgdm9pZCAqZGF0YSkNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5f
+dW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18g
+KCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4gKyBOaWhUaW1lciAq
+bmloX3RpbWVyX25leHRfZHVlICAgICAgICh2b2lkKTsNCj4gKyB2b2lkICAg
+ICAgbmloX3RpbWVyX3BvbGwgICAgICAgICAgICh2b2lkKTsNCj4gKy0tLSBs
+aWJuaWgtMS4wLjMub3JpZy9uaWgvY29uZmlnLmMNCj4gKysrKyBsaWJuaWgt
+MS4wLjMvbmloL2NvbmZpZy5jDQo+ICtAQCAtMiw4ICsyLDggQEANCj4gKyAg
+Kg0KPiArICAqIGNvbmZpZy5jIC0gY29uZmlndXJhdGlvbiBmaWxlIHBhcnNp
+bmcNCj4gKyAgKg0KPiArLSAqIENvcHlyaWdodCDCqSAyMDA5IFNjb3R0IEph
+bWVzIFJlbW5hbnQgPHNjb3R0QG5ldHNwbGl0LmNvbT4uDQo+ICstICogQ29w
+eXJpZ2h0IMKpIDIwMDkgQ2Fub25pY2FsIEx0ZC4NCj4gKysgKiBDb3B5cmln
+aHQgwqkgMjAxMSBTY290dCBKYW1lcyBSZW1uYW50IDxzY290dEBuZXRzcGxp
+dC5jb20+Lg0KPiArKyAqIENvcHlyaWdodCDCqSAyMDExIENhbm9uaWNhbCBM
+dGQuDQo+ICsgICoNCj4gKyAgKiBUaGlzIHByb2dyYW0gaXMgZnJlZSBzb2Z0
+d2FyZTsgeW91IGNhbiByZWRpc3RyaWJ1dGUgaXQgYW5kL29yIG1vZGlmeQ0K
+PiArICAqIGl0IHVuZGVyIHRoZSB0ZXJtcyBvZiB0aGUgR05VIEdlbmVyYWwg
+UHVibGljIExpY2Vuc2UgdmVyc2lvbiAyLCBhcw0KPiArQEAgLTY1Nyw3ICs2
+NTcsNyBAQA0KPiArICAqIG9mIHRoZSByZXR1cm5lZCBzdHJpbmcgYXJlIGZy
+ZWVkLCB0aGUgcmV0dXJuZWQgc3RyaW5nIHdpbGwgYWxzbyBiZQ0KPiArICAq
+IGZyZWVkLg0KPiArICAqDQo+ICstICogUmV0dXJuczogdGhlIGNvbW1hbmQg
+Zm91bmQgb3IgTlVMTCBvbiByYWlzZWQgZXJyb3IuDQo+ICsrICogUmV0dXJu
+czogdGhlIG5ld2x5IGFsbG9jYXRlZCBjb21tYW5kIGZvdW5kIG9yIE5VTEwg
+b24gcmFpc2VkIGVycm9yLg0KPiArICAqKi8NCj4gKyBjaGFyICoNCj4gKyBu
+aWhfY29uZmlnX3BhcnNlX2NvbW1hbmQgKGNvbnN0IHZvaWQgKnBhcmVudCwN
+Cj4gK0BAIC03MTQsNyArNzE0LDcgQEANCj4gKyAgKiBAbGluZW5vOiBsaW5l
+IG51bWJlciwNCj4gKyAgKiBAdHlwZTogYmxvY2sgaWRlbnRpZmllci4NCj4g
+KyAgKg0KPiArLSAqIEV4dHJhY3RzIGEgYmxvY2sgb2YgdGV4dCBmcm9tIEBs
+aW5lLCBzdG9wcGluZyB3aGVuIHRoZSBwaGFyc2UgImVuZCBAdHlwZSINCj4g
+KysgKiBFeHRyYWN0cyBhIGJsb2NrIG9mIHRleHQgZnJvbSBAbGluZSwgc3Rv
+cHBpbmcgd2hlbiB0aGUgcGhyYXNlICJlbmQgQHR5cGUiDQo+ICsgICogaXMg
+ZW5jb3VudGVyZWQgd2l0aG91dCBhbnkgcXVvdGVzIG9yIGJsYWNrc2xhc2gg
+ZXNjYXBpbmcgd2l0aGluIGl0Lg0KPiArICAqDQo+ICsgICogQGZpbGUgbWF5
+IGJlIGEgbWVtb3J5IG1hcHBlZCBmaWxlLCBpbiB3aGljaCBjYXNlIEBwb3Mg
+c2hvdWxkIGJlIGdpdmVuDQo+ICtAQCAtOTUwLDcgKzk1MCw3IEBADQo+ICsg
+CQlyZXR1cm4gRkFMU0U7DQo+ICsgDQo+ICsgCS8qIE11c3QgYmUgd2hpdGVz
+cGFjZSBhZnRlciAqLw0KPiArLQlpZiAoISBzdHJjaHIgKE5JSF9DT05GSUdf
+V1MsIGZpbGVbcCArIDNdKSkNCj4gKysJaWYgKGZpbGVbcCArIDNdICYmICEg
+c3RyY2hyIChOSUhfQ09ORklHX1dTLCBmaWxlW3AgKyAzXSkpDQo+ICsgCQly
+ZXR1cm4gRkFMU0U7DQo+ICsgDQo+ICsgCS8qIEZpbmQgdGhlIHNlY29uZCB3
+b3JkICovDQo+ICstLS0gbGlibmloLTEuMC4zLm9yaWcvbmloL29wdGlvbi5o
+DQo+ICsrKysgbGlibmloLTEuMC4zL25paC9vcHRpb24uaA0KPiArQEAgLTEy
+NCwxMSArMTI0LDExIEBADQo+ICsgY2hhciAqKiAgICBuaWhfb3B0aW9uX3Bh
+cnNlciAgICAgICAgIChjb25zdCB2b2lkICpwYXJlbnQsDQo+ICsgCQkJCSAg
+ICAgIGludCBhcmdjLCBjaGFyICphcmd2W10sDQo+ICsgCQkJCSAgICAgIE5p
+aE9wdGlvbiAqb3B0aW9ucywgaW50IGJyZWFrX25vbm9wdCkNCj4gKy0JX19h
+dHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+
+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4g
+KyANCj4gKyBOaWhPcHRpb24gKm5paF9vcHRpb25fam9pbiAgICAgICAgICAg
+KGNvbnN0IHZvaWQgKnBhcmVudCwNCj4gKyAJCQkJICAgICAgY29uc3QgTmlo
+T3B0aW9uICphLCBjb25zdCBOaWhPcHRpb24gKmIpDQo+ICstCV9fYXR0cmli
+dXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlf
+X2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgDQo+
+ICsgaW50ICAgICAgICBuaWhfb3B0aW9uX2NvdW50ICAgICAgICAgIChOaWhP
+cHRpb24gKm9wdGlvbiwgY29uc3QgY2hhciAqYXJnKTsNCj4gKyBpbnQgICAg
+ICAgIG5paF9vcHRpb25faW50ICAgICAgICAgICAgKE5paE9wdGlvbiAqb3B0
+aW9uLCBjb25zdCBjaGFyICphcmcpOw0KPiArLS0tIGxpYm5paC0xLjAuMy5v
+cmlnL25paC9zaWduYWwuaA0KPiArKysrIGxpYm5paC0xLjAuMy9uaWgvc2ln
+bmFsLmgNCj4gK0BAIC03Niw3ICs3Niw3IEBADQo+ICsgDQo+ICsgTmloU2ln
+bmFsICogbmloX3NpZ25hbF9hZGRfaGFuZGxlciAoY29uc3Qgdm9pZCAqcGFy
+ZW50LCBpbnQgc2lnbnVtLA0KPiArIAkJCQkgICBOaWhTaWduYWxIYW5kbGVy
+IGhhbmRsZXIsIHZvaWQgKmRhdGEpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3
+YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0
+ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgDQo+ICsgdm9pZCAg
+ICAgICAgbmloX3NpZ25hbF9oYW5kbGVyICAgICAoaW50IHNpZ251bSk7DQo+
+ICsgdm9pZCAgICAgICAgbmloX3NpZ25hbF9wb2xsICAgICAgICAodm9pZCk7
+DQo+ICstLS0gbGlibmloLTEuMC4zLm9yaWcvbmloL2xpc3QuaA0KPiArKysr
+IGxpYm5paC0xLjAuMy9uaWgvbGlzdC5oDQo+ICtAQCAtMzcsNyArMzcsNyBA
+QA0KPiArICAqIGFmdGVyIGEga25vd24gZW50cnksIGFuZCByZW1vdmUgYW4g
+ZW50cnkgZnJvbSB0aGUgbGlzdC4NCj4gKyAgKg0KPiArICAqIExpc3QgZW50
+cmllcyBtYXkgYmUgY3JlYXRlZCBpbiBvbmUgb2YgdHdvIHdheXMuICBUaGUg
+bW9zdCBjb21tb24gaXMgdG8NCj4gKy0gKiBlbWJlZCB0aGUgTmloTGlzdCBz
+dHJ1Y3R1cmUgYXMgdGhlIGZyaXN0IG1lbWJlciBvZiB5b3VyIG93biBzdHJ1
+Y3R1cmUsDQo+ICsrICogZW1iZWQgdGhlIE5paExpc3Qgc3RydWN0dXJlIGFz
+IHRoZSBmaXJzdCBtZW1iZXIgb2YgeW91ciBvd24gc3RydWN0dXJlLA0KPiAr
+ICAqIGFuZCBpbml0aWFsaXNlIGl0IHdpdGggbmloX2xpc3RfaW5pdCgpIGFm
+dGVyIGFsbG9jYXRpbmcgdGhlIHN0cnVjdHVyZS4NCj4gKyAgKiBBbHRlcm5h
+dGl2ZWx5IHlvdSBtYXkgY3JlYXRlIE5paExpc3RFbnRyeSBzdHJ1Y3R1cmVz
+IHdpdGgNCj4gKyAgKiBuaWhfbGlzdF9lbnRyeV9uZXcoKSBhbmQgcG9pbnQg
+YXQgeW91ciBvd24gZGF0YSBmcm9tIHRoZW0uDQo+ICtAQCAtMTk2LDEwICsx
+OTYsMTAgQEANCj4gKyANCj4gKyB2b2lkICAgICAgICAgIG5paF9saXN0X2lu
+aXQgICAgICAoTmloTGlzdCAqZW50cnkpOw0KPiArIE5paExpc3QgKiAgICAg
+bmloX2xpc3RfbmV3ICAgICAgIChjb25zdCB2b2lkICpwYXJlbnQpDQo+ICst
+CV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykp
+Ow0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7
+DQo+ICsgDQo+ICsgTmloTGlzdEVudHJ5ICpuaWhfbGlzdF9lbnRyeV9uZXcg
+KGNvbnN0IHZvaWQgKnBhcmVudCkNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdh
+cm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRl
+X18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4gKyANCj4gKyBO
+aWhMaXN0ICogICAgIG5paF9saXN0X2FkZCAgICAgICAoTmloTGlzdCAqbGlz
+dCwgTmloTGlzdCAqZW50cnkpOw0KPiArLS0tIGxpYm5paC0xLjAuMy5vcmln
+L25paC9sb2dnaW5nLmMNCj4gKysrKyBsaWJuaWgtMS4wLjMvbmloL2xvZ2dp
+bmcuYw0KPiArQEAgLTM5LDExICszOSwxMSBAQA0KPiArIA0KPiArIA0KPiAr
+IC8qKg0KPiArLSAqIF9fYWJvcnRfbXNnOg0KPiArKyAqIF9fbmloX2Fib3J0
+X21zZzoNCj4gKyAgKg0KPiArLSAqIEEgZ2xpYmMgdmFyaWFibGUgdGhhdCBr
+ZWVwcyB0aGUgYXNzZXJ0aW9uIG1lc3NhZ2UgaW4gdGhlIGNvcmUgZHVtcC4N
+Cj4gKysgKiBBIHZhcmlhYmxlIHRoYXQga2VlcHMgdGhlIGFzc2VydGlvbiBt
+ZXNzYWdlIGluIHRoZSBjb3JlIGR1bXAuDQo+ICsgICoqLw0KPiArLWV4dGVy
+biBjaGFyICpfX2Fib3J0X21zZyBfX2F0dHJpYnV0ZV9fICgod2VhaykpOw0K
+PiArK2NoYXIgKl9fbmloX2Fib3J0X21zZyA9IE5VTEw7DQo+ICsgDQo+ICsg
+LyoqDQo+ICsgICogbG9nZ2VyOg0KPiArQEAgLTExNCwxOSArMTE0LDE2IEBA
+DQo+ICsgICogbmloX2xvZ19hYm9ydF9tZXNzYWdlOg0KPiArICAqIEBtZXNz
+YWdlOiBtZXNzYWdlIHRvIGJlIGxvZ2dlZC4NCj4gKyAgKg0KPiArLSAqIFNh
+dmUgQG1lc3NhZ2UgaW4gdGhlIGdsaWJjIF9fYWJvcnRfbXNnIHZhcmlhYmxl
+IHNvIGl0IGNhbiBiZSByZXRyaWV2ZWQNCj4gKysgKiBTYXZlIEBtZXNzYWdl
+IGluIHRoZSBfX25paF9hYm9ydF9tc2cgdmFyaWFibGUgc28gaXQgY2FuIGJl
+IHJldHJpZXZlZA0KPiArICAqIGJ5IGRlYnVnZ2VycyBpZiB3ZSBzaG91bGQg
+Y3Jhc2ggYXQgdGhpcyBwb2ludC4NCj4gKyAgKiovDQo+ICsgc3RhdGljIHZv
+aWQNCj4gKyBuaWhfbG9nX2Fib3J0X21lc3NhZ2UgKGNvbnN0IGNoYXIgKm1l
+c3NhZ2UpDQo+ICsgew0KPiArLQlpZiAoISAmX19hYm9ydF9tc2cpDQo+ICst
+CQlyZXR1cm47DQo+ICsrCWlmIChfX25paF9hYm9ydF9tc2cpDQo+ICsrCQlu
+aWhfZGlzY2FyZCAoX19uaWhfYWJvcnRfbXNnKTsNCj4gKyANCj4gKy0JaWYg
+KF9fYWJvcnRfbXNnKQ0KPiArLQkJbmloX2Rpc2NhcmQgKF9fYWJvcnRfbXNn
+KTsNCj4gKy0NCj4gKy0JX19hYm9ydF9tc2cgPSBOSUhfTVVTVCAobmloX3N0
+cmR1cCAoTlVMTCwgbWVzc2FnZSkpOw0KPiArKwlfX25paF9hYm9ydF9tc2cg
+PSBOSUhfTVVTVCAobmloX3N0cmR1cCAoTlVMTCwgbWVzc2FnZSkpOw0KPiAr
+IH0NCj4gKyANCj4gKyAvKioNCj4gKy0tLSBsaWJuaWgtMS4wLjMub3JpZy9u
+aWgvdGVzdF9maWxlcy5oDQo+ICsrKysgbGlibmloLTEuMC4zL25paC90ZXN0
+X2ZpbGVzLmgNCj4gK0BAIC0xLDcgKzEsNyBAQA0KPiArIC8qIGxpYm5paA0K
+PiArICAqDQo+ICstICogQ29weXJpZ2h0IMKpIDIwMDkgU2NvdHQgSmFtZXMg
+UmVtbmFudCA8c2NvdHRAbmV0c3BsaXQuY29tPi4NCj4gKy0gKiBDb3B5cmln
+aHQgwqkgMjAwOSBDYW5vbmljYWwgTHRkLg0KPiArKyAqIENvcHlyaWdodCDC
+qSAyMDExIFNjb3R0IEphbWVzIFJlbW5hbnQgPHNjb3R0QG5ldHNwbGl0LmNv
+bT4uDQo+ICsrICogQ29weXJpZ2h0IMKpIDIwMTEgQ2Fub25pY2FsIEx0ZC4N
+Cj4gKyAgKg0KPiArICAqIFRoaXMgcHJvZ3JhbSBpcyBmcmVlIHNvZnR3YXJl
+OyB5b3UgY2FuIHJlZGlzdHJpYnV0ZSBpdCBhbmQvb3IgbW9kaWZ5DQo+ICsg
+ICogaXQgdW5kZXIgdGhlIHRlcm1zIG9mIHRoZSBHTlUgR2VuZXJhbCBQdWJs
+aWMgTGljZW5zZSB2ZXJzaW9uIDIsIGFzDQo+ICtAQCAtMzksNyArMzksNyBA
+QA0KPiArICAqIFRFU1RfRklMRU5BTUU6DQo+ICsgICogQF92YXI6IHZhcmlh
+YmxlIHRvIHN0b3JlIGZpbGVuYW1lIGluLg0KPiArICAqDQo+ICstICogR2Vu
+ZXJhdGUgYSBmaWxlbmFtZSB0aGF0IG1heSBiZSB1c2VkIGZvciB0ZXN0aW5n
+LCBpdCdzIHVubGlua2VkIGl0IGlmDQo+ICsrICogR2VuZXJhdGUgYSBmaWxl
+bmFtZSB0aGF0IG1heSBiZSB1c2VkIGZvciB0ZXN0aW5nLCBpdCdzIHVubGlu
+a2VkIGlmIGl0DQo+ICsgICogZXhpc3RzIGFuZCBpdCdzIHVwIHRvIHlvdSB0
+byB1bmxpbmsgaXQgd2hlbiBkb25lLiAgQF92YXIgc2hvdWxkIGJlIGF0DQo+
+ICsgICogbGVhc3QgUEFUSF9NQVggbG9uZy4NCj4gKyAgKiovDQo+ICstLS0g
+bGlibmloLTEuMC4zLm9yaWcvbmloL3Rlc3RfcHJvY2Vzcy5oDQo+ICsrKysg
+bGlibmloLTEuMC4zL25paC90ZXN0X3Byb2Nlc3MuaA0KPiArQEAgLTM2LDcg
+KzM2LDcgQEANCj4gKyAgKiBTcGF3biBhIGNoaWxkIGluIHdoaWNoIGEgdGVz
+dCBjYW4gYmUgcGVyZm9ybWVkIHdpdGhvdXQgYWZmZWN0aW5nIHRoZQ0KPiAr
+ICAqIG1haW4gZmxvdyBvZiB0aGUgcHJvY2Vzcy4gIFRoZSBwaWQgb2YgdGhl
+IGNoaWxkIGlzIHN0b3JlZCBpbiBAX3BpZC4NCj4gKyAgKg0KPiArLSAqIFRo
+aXMgbWFjcm8gZW5zdXJlcyB0aGF0IHRoZSBjaGlsZCBoYXMgYmVndW4gZXhl
+Y3R1dGlvbiBiZWZvcmUgdGhlDQo+ICsrICogVGhpcyBtYWNybyBlbnN1cmVz
+IHRoYXQgdGhlIGNoaWxkIGhhcyBiZWd1biBleGVjdXRpb24gYmVmb3JlIHRo
+ZQ0KPiArICAqIHBhcmVudCBpcyBhbGxvd2VkIHRvIGNvbnRpbnVlIHRocm91
+Z2ggdGhlIHVzdWFsIHVzZSBvZiBhIHBpcGUuDQo+ICsgICoNCj4gKyAgKiBB
+IGJsb2NrIG9mIGNvZGUgc2hvdWxkIGZvbGxvdyB0aGlzIG1hY3JvLCB3aGlj
+aCBpcyB0aGUgY29kZSB0aGF0IHdpbGwNCj4gKy0tLSBsaWJuaWgtMS4wLjMu
+b3JpZy9uaWgvY2hpbGQuaA0KPiArKysrIGxpYm5paC0xLjAuMy9uaWgvY2hp
+bGQuaA0KPiArQEAgLTk4LDcgKzk4LDcgQEANCj4gKyBOaWhDaGlsZFdhdGNo
+ICpuaWhfY2hpbGRfYWRkX3dhdGNoIChjb25zdCB2b2lkICpwYXJlbnQsIHBp
+ZF90IHBpZCwNCj4gKyAJCQkJICAgIE5paENoaWxkRXZlbnRzIGV2ZW50cywN
+Cj4gKyAJCQkJICAgIE5paENoaWxkSGFuZGxlciBoYW5kbGVyLCB2b2lkICpk
+YXRhKQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0
+LCBtYWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2Vk
+X3Jlc3VsdCkpOw0KPiArIA0KPiArIHZvaWQgICAgICAgICAgIG5paF9jaGls
+ZF9wb2xsICAgICAgKHZvaWQpOw0KPiArIA0KPiArLS0tIGxpYm5paC0xLjAu
+My5vcmlnL25paC9hbGxvYy5oDQo+ICsrKysgbGlibmloLTEuMC4zL25paC9h
+bGxvYy5oDQo+ICtAQCAtMjk5LDcgKzI5OSw3IEBADQo+ICsgICogSXQgaXMg
+cGVybWlzc2libGUgdG8gdGFrZSByZWZlcmVuY2VzIHRvIGZvbyB3aXRoaW4g
+aXRzIHNjb3BlLCBvciBieQ0KPiArICAqIGZ1bmN0aW9ucyBjYWxsZWQsIGlu
+IHdoaWNoIGNhc2UgaXQgd2lsbCBub3QgYmUgZnJlZWQuICBBbHNvIGl0IGlz
+DQo+ICsgICogZ2VuZXJhbGx5IG5vbnNlbnNpY2FsIHRvIGFsbG9jYXRlIHdp
+dGggYSBwYXJlbnQsIHNpbmNlIHRoaXMgdG9vIHdpbGwNCj4gKy0gKiBwcmV2
+ZW50IGl0IGZyb20gYmVpZ24gZnJlZWQuDQo+ICsrICogcHJldmVudCBpdCBm
+cm9tIGJlaW5nIGZyZWVkLg0KPiArICAqKi8NCj4gKyAjZGVmaW5lIG5paF9s
+b2NhbCBfX2F0dHJpYnV0ZV9fICgoY2xlYW51cChfbmloX2Rpc2NhcmRfbG9j
+YWwpKSkNCj4gKyANCj4gK0BAIC0zMDcsMTEgKzMwNywxMSBAQA0KPiArIE5J
+SF9CRUdJTl9FWFRFUk4NCj4gKyANCj4gKyB2b2lkICogbmloX2FsbG9jICAg
+ICAgICAgICAgICAgICAgICAgKGNvbnN0IHZvaWQgKnBhcmVudCwgc2l6ZV90
+IHNpemUpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1
+bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVz
+ZWRfcmVzdWx0KSk7DQo+ICsgDQo+ICsgdm9pZCAqIG5paF9yZWFsbG9jICAg
+ICAgICAgICAgICAgICAgICh2b2lkICpwdHIsIGNvbnN0IHZvaWQgKnBhcmVu
+dCwNCj4gKyAJCQkJICAgICAgc2l6ZV90IHNpemUpDQo+ICstCV9fYXR0cmli
+dXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlf
+X2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgDQo+
+ICsgaW50ICAgIG5paF9mcmVlICAgICAgICAgICAgICAgICAgICAgICh2b2lk
+ICpwdHIpOw0KPiArIGludCAgICBuaWhfZGlzY2FyZCAgICAgICAgICAgICAg
+ICAgICAodm9pZCAqcHRyKTsNCj4gKy0tLSBsaWJuaWgtMS4wLjMub3JpZy9u
+aWgvaW8uaA0KPiArKysrIGxpYm5paC0xLjAuMy9uaWgvaW8uaA0KPiArQEAg
+LTI2OSw3ICsyNjksNyBAQA0KPiArIE5paElvV2F0Y2ggKiAgbmloX2lvX2Fk
+ZF93YXRjaCAgICAgICAgICAgKGNvbnN0IHZvaWQgKnBhcmVudCwgaW50IGZk
+LA0KPiArIAkJCQkJICBOaWhJb0V2ZW50cyBldmVudHMsDQo+ICsgCQkJCQkg
+IE5paElvV2F0Y2hlciB3YXRjaGVyLCB2b2lkICpkYXRhKQ0KPiArLQlfX2F0
+dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2MpKTsNCj4g
+KysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0KPiAr
+IA0KPiArIHZvaWQgICAgICAgICAgbmloX2lvX3NlbGVjdF9mZHMgICAgICAg
+ICAgKGludCAqbmZkcywgZmRfc2V0ICpyZWFkZmRzLA0KPiArIAkJCQkJICBm
+ZF9zZXQgKndyaXRlZmRzLCBmZF9zZXQgKmV4Y2VwdGZkcyk7DQo+ICtAQCAt
+Mjc4LDEyICsyNzgsMTIgQEANCj4gKyANCj4gKyANCj4gKyBOaWhJb0J1ZmZl
+ciAqIG5paF9pb19idWZmZXJfbmV3ICAgICAgICAgIChjb25zdCB2b2lkICpw
+YXJlbnQpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1
+bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVz
+ZWRfcmVzdWx0KSk7DQo+ICsgDQo+ICsgaW50ICAgICAgICAgICBuaWhfaW9f
+YnVmZmVyX3Jlc2l6ZSAgICAgICAoTmloSW9CdWZmZXIgKmJ1ZmZlciwgc2l6
+ZV90IGdyb3cpOw0KPiArIGNoYXIgKiAgICAgICAgbmloX2lvX2J1ZmZlcl9w
+b3AgICAgICAgICAgKGNvbnN0IHZvaWQgKnBhcmVudCwNCj4gKyAJCQkJCSAg
+TmloSW9CdWZmZXIgKmJ1ZmZlciwgc2l6ZV90ICpsZW4pDQo+ICstCV9fYXR0
+cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiAr
+KwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsg
+dm9pZCAgICAgICAgICBuaWhfaW9fYnVmZmVyX3NocmluayAgICAgICAoTmlo
+SW9CdWZmZXIgKmJ1ZmZlciwgc2l6ZV90IGxlbik7DQo+ICsgaW50ICAgICAg
+ICAgICBuaWhfaW9fYnVmZmVyX3B1c2ggICAgICAgICAoTmloSW9CdWZmZXIg
+KmJ1ZmZlciwNCj4gKyAJCQkJCSAgY29uc3QgY2hhciAqc3RyLCBzaXplX3Qg
+bGVuKQ0KPiArQEAgLTI5MSw3ICsyOTEsNyBAQA0KPiArIA0KPiArIA0KPiAr
+IE5paElvTWVzc2FnZSAqbmloX2lvX21lc3NhZ2VfbmV3ICAgICAgICAgKGNv
+bnN0IHZvaWQgKnBhcmVudCkNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5f
+dW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18g
+KCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4gKyBpbnQgICAgICAg
+ICAgIG5paF9pb19tZXNzYWdlX2FkZF9jb250cm9sIChOaWhJb01lc3NhZ2Ug
+Km1lc3NhZ2UsIGludCBsZXZlbCwNCj4gKyAJCQkJCSAgaW50IHR5cGUsIHNv
+Y2tsZW5fdCBsZW4sDQo+ICtAQCAtMzAwLDcgKzMwMCw3IEBADQo+ICsgDQo+
+ICsgTmloSW9NZXNzYWdlICpuaWhfaW9fbWVzc2FnZV9yZWN2ICAgICAgICAo
+Y29uc3Qgdm9pZCAqcGFyZW50LCBpbnQgZmQsDQo+ICsgCQkJCQkgIHNpemVf
+dCAqbGVuKQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVz
+dWx0LCBtYWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51
+c2VkX3Jlc3VsdCkpOw0KPiArIHNzaXplX3QgICAgICAgbmloX2lvX21lc3Nh
+Z2Vfc2VuZCAgICAgICAgKE5paElvTWVzc2FnZSAqbWVzc2FnZSwgaW50IGZk
+KQ0KPiArIAlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7
+DQo+ICsgDQo+ICtAQCAtMzEwLDcgKzMxMCw3IEBADQo+ICsgCQkJCQkgIE5p
+aElvQ2xvc2VIYW5kbGVyIGNsb3NlX2hhbmRsZXIsDQo+ICsgCQkJCQkgIE5p
+aElvRXJyb3JIYW5kbGVyIGVycm9yX2hhbmRsZXIsDQo+ICsgCQkJCQkgIHZv
+aWQgKmRhdGEpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9y
+ZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91
+bnVzZWRfcmVzdWx0KSk7DQo+ICsgdm9pZCAgICAgICAgICBuaWhfaW9fc2h1
+dGRvd24gICAgICAgICAgICAoTmloSW8gKmlvKTsNCj4gKyBpbnQgICAgICAg
+ICAgIG5paF9pb19kZXN0cm95ICAgICAgICAgICAgIChOaWhJbyAqaW8pOw0K
+PiArIA0KPiArQEAgLTMxOSwxNCArMzE5LDE0IEBADQo+ICsgDQo+ICsgY2hh
+ciAqICAgICAgICBuaWhfaW9fcmVhZCAgICAgICAgICAgICAgICAoY29uc3Qg
+dm9pZCAqcGFyZW50LCBOaWhJbyAqaW8sDQo+ICsgCQkJCQkgIHNpemVfdCAq
+bGVuKQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0
+LCBtYWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2Vk
+X3Jlc3VsdCkpOw0KPiArIGludCAgICAgICAgICAgbmloX2lvX3dyaXRlICAg
+ICAgICAgICAgICAgKE5paElvICppbywgY29uc3QgY2hhciAqc3RyLA0KPiAr
+IAkJCQkJICBzaXplX3QgbGVuKQ0KPiArIAlfX2F0dHJpYnV0ZV9fICgod2Fy
+bl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgDQo+ICsgY2hhciAqICAgICAgICBu
+aWhfaW9fZ2V0ICAgICAgICAgICAgICAgICAoY29uc3Qgdm9pZCAqcGFyZW50
+LCBOaWhJbyAqaW8sDQo+ICsgCQkJCQkgIGNvbnN0IGNoYXIgKmRlbGltKQ0K
+PiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxs
+b2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3Vs
+dCkpOw0KPiArIA0KPiArIGludCAgICAgICAgICAgbmloX2lvX3ByaW50ZiAg
+ICAgICAgICAgICAgKE5paElvICppbywgY29uc3QgY2hhciAqZm9ybWF0LCAu
+Li4pDQo+ICsgCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQs
+IGZvcm1hdCAocHJpbnRmLCAyLCAzKSkpOw0KPiArLS0tIGxpYm5paC0xLjAu
+My5vcmlnL25paC90ZXN0X291dHB1dC5oDQo+ICsrKysgbGlibmloLTEuMC4z
+L25paC90ZXN0X291dHB1dC5oDQo+ICtAQCAtNjEsMTAgKzYxLDEwIEBADQo+
+ICsgDQo+ICsgLyoqDQo+ICsgICogVEVTVF9GRUFUVVJFOg0KPiArLSAqIEBf
+ZmVhdDogbmFtZSBvZiBmdW5jdGlvbiBmZWF0dXJlIGJlaW5nIHRlc3RlZC4N
+Cj4gKysgKiBAX2ZlYXQ6IG5hbWUgb2YgZnVuY3Rpb24gb3IgZ3JvdXAgZmVh
+dHVyZSBiZWluZyB0ZXN0ZWQuDQo+ICsgICoNCj4gKy0gKiBPdXRwdXQgYSBt
+ZXNzYWdlIGluZGljYXRpbmcgdGhhdCBhIHN1Yi10ZXN0IG9mIGEgZnVuY3Rp
+b24gaXMgYmVpbmcNCj4gKy0gKiBwZXJmb3JtZWQsIHNwZWNpZmljYWxseSB0
+aGUgZmVhdHVyZSBuYW1lZCBfZmVhdC4NCj4gKysgKiBPdXRwdXQgYSBtZXNz
+YWdlIGluZGljYXRpbmcgdGhhdCBhIHN1Yi10ZXN0IG9mIGEgZnVuY3Rpb24g
+b3INCj4gKysgKiBncm91cCBpcyBiZWluZyBwZXJmb3JtZWQsIHNwZWNpZmlj
+YWxseSB0aGUgZmVhdHVyZSBuYW1lZCBfZmVhdC4NCj4gKyAgKiovDQo+ICsg
+I2RlZmluZSBURVNUX0ZFQVRVUkUoX2ZlYXQpIFwNCj4gKyAJcHJpbnRmICgi
+Li4uJXNcbiIsIF9mZWF0KTsNCj4gKy0tLSBsaWJuaWgtMS4wLjMub3JpZy9u
+aWgvZXJyb3IuaA0KPiArKysrIGxpYm5paC0xLjAuMy9uaWgvZXJyb3IuaA0K
+PiArQEAgLTEsNyArMSw3IEBADQo+ICsgLyogbGlibmloDQo+ICsgICoNCj4g
+Ky0gKiBDb3B5cmlnaHQgwqkgMjAwOSBTY290dCBKYW1lcyBSZW1uYW50IDxz
+Y290dEBuZXRzcGxpdC5jb20+Lg0KPiArLSAqIENvcHlyaWdodCDCqSAyMDA5
+IENhbm9uaWNhbCBMdGQuDQo+ICsrICogQ29weXJpZ2h0IMKpIDIwMTEgU2Nv
+dHQgSmFtZXMgUmVtbmFudCA8c2NvdHRAbmV0c3BsaXQuY29tPi4NCj4gKysg
+KiBDb3B5cmlnaHQgwqkgMjAxMSBDYW5vbmljYWwgTHRkLg0KPiArICAqDQo+
+ICsgICogVGhpcyBwcm9ncmFtIGlzIGZyZWUgc29mdHdhcmU7IHlvdSBjYW4g
+cmVkaXN0cmlidXRlIGl0IGFuZC9vciBtb2RpZnkNCj4gKyAgKiBpdCB1bmRl
+ciB0aGUgdGVybXMgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNl
+IHZlcnNpb24gMiwgYXMNCj4gK0BAIC0xMTEsNyArMTExLDcgQEANCj4gKyAg
+KiBAbWVzc2FnZTogaHVtYW4tcmVhZGFibGUgbWVzc2FnZS4NCj4gKyAgKg0K
+PiArICAqIFJhaXNlcyBhbiBlcnJvciB3aXRoIHRoZSBnaXZlbiBkZXRhaWxz
+IGluIHRoZSBjdXJyZW50IGVycm9yIGNvbnRleHQsDQo+ICstICogaWYgYW4g
+dW5oYW5kbGVkIGVycm9yIGFscmVhZHkgZXhpc3RzIHRoZW4gYW4gZXJyb3Ig
+bWVzc2FnZSBpcyBlbW1pdHRlZA0KPiArKyAqIGlmIGFuIHVuaGFuZGxlZCBl
+cnJvciBhbHJlYWR5IGV4aXN0cyB0aGVuIGFuIGVycm9yIG1lc3NhZ2UgaXMg
+ZW1pdHRlZA0KPiArICAqIHRocm91Z2ggdGhlIGxvZ2dpbmcgc3lzdGVtOyB5
+b3Ugc2hvdWxkIHRyeSB0byBhdm9pZCB0aGlzLg0KPiArICAqDQo+ICsgICog
+QG1lc3NhZ2Ugc2hvdWxkIGJlIGEgc3RhdGljIHN0cmluZywgYXMgaXQgd2ls
+bCBub3QgYmUgZnJlZWQgd2hlbiB0aGUNCj4gK0BAIC0xMjYsNyArMTI2LDcg
+QEANCj4gKyAgKiBAZm9ybWF0OiBmb3JtYXQgc3RyaW5nIGZvciBodW1hbi1y
+ZWFkYWJsZSBtZXNzYWdlLg0KPiArICAqDQo+ICsgICogUmFpc2VzIGFuIGVy
+cm9yIHdpdGggdGhlIGdpdmVuIGRldGFpbHMgaW4gdGhlIGN1cnJlbnQgZXJy
+b3IgY29udGV4dCwNCj4gKy0gKiBpZiBhbiB1bmhhbmRsZWQgZXJyb3IgYWxy
+ZWFkeSBleGlzdHMgdGhlbiBhbiBlcnJvciBtZXNzYWdlIGlzIGVtbWl0dGVk
+DQo+ICsrICogaWYgYW4gdW5oYW5kbGVkIGVycm9yIGFscmVhZHkgZXhpc3Rz
+IHRoZW4gYW4gZXJyb3IgbWVzc2FnZSBpcyBlbWl0dGVkDQo+ICsgICogdGhy
+b3VnaCB0aGUgbG9nZ2luZyBzeXN0ZW07IHlvdSBzaG91bGQgdHJ5IHRvIGF2
+b2lkIHRoaXMuDQo+ICsgICoNCj4gKyAgKiBUaGUgaHVtYW4tcmVhZGFibGUg
+bWVzc2FnZSBmb3IgdGhlIGVycm9yIGlzIHBhcnNlZCBhY2NvcmRpbmcgdG8g
+QGZvcm1hdCwNCj4gK0BAIC0xNDAsNyArMTQwLDcgQEANCj4gKyAgKiBuaWhf
+ZXJyb3JfcmFpc2Vfc3lzdGVtOg0KPiArICAqDQo+ICsgICogUmFpc2VzIGFu
+IGVycm9yIHdpdGggZGV0YWlscyB0YWtlbiBmcm9tIHRoZSBjdXJyZW50IHZh
+bHVlIG9mIGVycm5vLA0KPiArLSAqIGlmIGFuIHVuaGFuZGxlZCBlcnJvciBh
+bHJlYWR5IGV4aXN0cyB0aGVuIGFuIGVycm9yIG1lc3NhZ2UgaXMgZW1taXR0
+ZWQNCj4gKysgKiBpZiBhbiB1bmhhbmRsZWQgZXJyb3IgYWxyZWFkeSBleGlz
+dHMgdGhlbiBhbiBlcnJvciBtZXNzYWdlIGlzIGVtaXR0ZWQNCj4gKyAgKiB0
+aHJvdWdoIHRoZSBsb2dnaW5nIHN5c3RlbTsgeW91IHNob3VsZCB0cnkgdG8g
+YXZvaWQgdGhpcy4NCj4gKyAgKiovDQo+ICsgI2RlZmluZSBuaWhfZXJyb3Jf
+cmFpc2Vfc3lzdGVtKCkgXA0KPiArQEAgLTE2Miw3ICsxNjIsNyBAQA0KPiAr
+ICAqIEBlcnJvcjogZXhpc3Rpbmcgb2JqZWN0IHRvIHJhaXNlLg0KPiArICAq
+DQo+ICsgICogUmFpc2VzIHRoZSBleGlzdGluZyBlcnJvciBvYmplY3QgaW4g
+dGhlIGN1cnJlbnQgZXJyb3IgY29udGV4dCwNCj4gKy0gKiBpZiBhbiB1bmhh
+bmRsZWQgZXJyb3IgYWxyZWFkeSBleGlzdHMgdGhlbiBhbiBlcnJvciBtZXNz
+YWdlIGlzIGVtbWl0dGVkDQo+ICsrICogaWYgYW4gdW5oYW5kbGVkIGVycm9y
+IGFscmVhZHkgZXhpc3RzIHRoZW4gYW4gZXJyb3IgbWVzc2FnZSBpcyBlbWl0
+dGVkDQo+ICsgICogdGhyb3VnaCB0aGUgbG9nZ2luZyBzeXN0ZW07IHlvdSBz
+aG91bGQgdHJ5IHRvIGF2b2lkIHRoaXMuDQo+ICsgICoNCj4gKyAgKiBUaGlz
+IGlzIG5vcm1hbGx5IHVzZWQgdG8gcmFpc2UgYSB0YWtlbiBlcnJvciB0aGF0
+IGhhcyBub3QgYmVlbiBoYW5kbGVkLA0KPiArQEAgLTE4Miw3ICsxODIsNyBA
+QA0KPiArICAqIEBtZXNzYWdlOiBodW1hbi1yZWFkYWJsZSBtZXNzYWdlLg0K
+PiArICAqDQo+ICsgICogUmFpc2VzIGFuIGVycm9yIHdpdGggdGhlIGdpdmVu
+IGRldGFpbHMgaW4gdGhlIGN1cnJlbnQgZXJyb3IgY29udGV4dCwNCj4gKy0g
+KiBpZiBhbiB1bmhhbmRsZWQgZXJyb3IgYWxyZWFkeSBleGlzdHMgdGhlbiBh
+biBlcnJvciBtZXNzYWdlIGlzIGVtbWl0dGVkDQo+ICsrICogaWYgYW4gdW5o
+YW5kbGVkIGVycm9yIGFscmVhZHkgZXhpc3RzIHRoZW4gYW4gZXJyb3IgbWVz
+c2FnZSBpcyBlbWl0dGVkDQo+ICsgICogdGhyb3VnaCB0aGUgbG9nZ2luZyBz
+eXN0ZW07IHlvdSBzaG91bGQgdHJ5IHRvIGF2b2lkIHRoaXMuDQo+ICsgICoN
+Cj4gKyAgKiBXaWxsIHJldHVybiBmcm9tIHRoZSBjdXJyZW50IGZ1bmN0aW9u
+IHdpdGggQHJldHZhbCwgd2hpY2ggbWF5IGJlIGxlZnQNCj4gK0BAIC0xOTks
+NyArMTk5LDcgQEANCj4gKyAgKiBAcmV0dmFsOiByZXR1cm4gdmFsdWUgZm9y
+IGZ1bmN0aW9uLg0KPiArICAqDQo+ICsgICogUmFpc2VzIGFuIGVycm9yIHdp
+dGggZGV0YWlscyB0YWtlbiBmcm9tIHRoZSBjdXJyZW50IHZhbHVlIG9mIGVy
+cm5vLA0KPiArLSAqIGlmIGFuIHVuaGFuZGxlZCBlcnJvciBhbHJlYWR5IGV4
+aXN0cyB0aGVuIGFuIGVycm9yIG1lc3NhZ2UgaXMgZW1taXR0ZWQNCj4gKysg
+KiBpZiBhbiB1bmhhbmRsZWQgZXJyb3IgYWxyZWFkeSBleGlzdHMgdGhlbiBh
+biBlcnJvciBtZXNzYWdlIGlzIGVtaXR0ZWQNCj4gKyAgKiB0aHJvdWdoIHRo
+ZSBsb2dnaW5nIHN5c3RlbTsgeW91IHNob3VsZCB0cnkgdG8gYXZvaWQgdGhp
+cy4NCj4gKyAgKg0KPiArICAqIFdpbGwgcmV0dXJuIGZyb20gdGhlIGN1cnJl
+bnQgZnVuY3Rpb24gd2l0aCBAcmV0dmFsLCB3aGljaCBtYXkgYmUgbGVmdA0K
+PiArLS0tIGxpYm5paC0xLjAuMy5vcmlnL25paC9zdHJpbmcuaA0KPiArKysr
+IGxpYm5paC0xLjAuMy9uaWgvc3RyaW5nLmgNCj4gK0BAIC0zNSw2MCArMzUs
+NjAgQEANCj4gKyBOSUhfQkVHSU5fRVhURVJODQo+ICsgDQo+ICsgY2hhciAq
+IG5paF9zcHJpbnRmICAgICAgICAgIChjb25zdCB2b2lkICpwYXJlbnQsIGNv
+bnN0IGNoYXIgKmZvcm1hdCwgLi4uKQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgo
+Zm9ybWF0IChwcmludGYsIDIsIDMpLCB3YXJuX3VudXNlZF9yZXN1bHQsIG1h
+bGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgoZm9ybWF0IChwcmludGYs
+IDIsIDMpLCB3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4gKyBjaGFy
+ICogbmloX3ZzcHJpbnRmICAgICAgICAgKGNvbnN0IHZvaWQgKnBhcmVudCwg
+Y29uc3QgY2hhciAqZm9ybWF0LA0KPiArIAkJCSAgICAgdmFfbGlzdCBhcmdz
+KQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgoZm9ybWF0IChwcmludGYsIDIsIDAp
+LCB3YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJp
+YnV0ZV9fICgoZm9ybWF0IChwcmludGYsIDIsIDApLCB3YXJuX3VudXNlZF9y
+ZXN1bHQpKTsNCj4gKyANCj4gKyBjaGFyICogbmloX3N0cmR1cCAgICAgICAg
+ICAgKGNvbnN0IHZvaWQgKnBhcmVudCwgY29uc3QgY2hhciAqc3RyKQ0KPiAr
+LQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2Mp
+KTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkp
+Ow0KPiArIA0KPiArIGNoYXIgKiBuaWhfc3RybmR1cCAgICAgICAgICAoY29u
+c3Qgdm9pZCAqcGFyZW50LCBjb25zdCBjaGFyICpzdHIsIHNpemVfdCBsZW4p
+DQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQsIG1h
+bGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVz
+dWx0KSk7DQo+ICsgDQo+ICsgY2hhciAqIG5paF9zdHJjYXQgICAgICAgICAg
+IChjaGFyICoqc3RyLCBjb25zdCB2b2lkICpwYXJlbnQsIGNvbnN0IGNoYXIg
+KnNyYykNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3Vs
+dCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNl
+ZF9yZXN1bHQpKTsNCj4gKyBjaGFyICogbmloX3N0cm5jYXQgICAgICAgICAg
+KGNoYXIgKipzdHIsIGNvbnN0IHZvaWQgKnBhcmVudCwgY29uc3QgY2hhciAq
+c3JjLA0KPiArIAkJCSAgICAgc2l6ZV90IGxlbikNCj4gKy0JX19hdHRyaWJ1
+dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9f
+YXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4g
+KyBjaGFyICogbmloX3N0cmNhdF9zcHJpbnRmICAgKGNoYXIgKipzdHIsIGNv
+bnN0IHZvaWQgKnBhcmVudCwNCj4gKyAJCQkgICAgIGNvbnN0IGNoYXIgKmZv
+cm1hdCwgLi4uKQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgoZm9ybWF0IChwcmlu
+dGYsIDMsIDQpLCB3YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiAr
+KwlfX2F0dHJpYnV0ZV9fICgoZm9ybWF0IChwcmludGYsIDMsIDQpLCB3YXJu
+X3VudXNlZF9yZXN1bHQpKTsNCj4gKyBjaGFyICogbmloX3N0cmNhdF92c3By
+aW50ZiAgKGNoYXIgKipzdHIsIGNvbnN0IHZvaWQgKnBhcmVudCwNCj4gKyAJ
+CQkgICAgIGNvbnN0IGNoYXIgKmZvcm1hdCwgdmFfbGlzdCBhcmdzKQ0KPiAr
+LQlfX2F0dHJpYnV0ZV9fICgoZm9ybWF0IChwcmludGYsIDMsIDApLCB3YXJu
+X3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9f
+ICgoZm9ybWF0IChwcmludGYsIDMsIDApLCB3YXJuX3VudXNlZF9yZXN1bHQp
+KTsNCj4gKyANCj4gKyBjaGFyICoqbmloX3N0cl9zcGxpdCAgICAgICAgKGNv
+bnN0IHZvaWQgKnBhcmVudCwgY29uc3QgY2hhciAqc3RyLA0KPiArIAkJCSAg
+ICAgY29uc3QgY2hhciAqZGVsaW0sIGludCByZXBlYXQpDQo+ICstCV9fYXR0
+cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiAr
+KwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsg
+DQo+ICsgY2hhciAqKm5paF9zdHJfYXJyYXlfbmV3ICAgIChjb25zdCB2b2lk
+ICpwYXJlbnQpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9y
+ZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91
+bnVzZWRfcmVzdWx0KSk7DQo+ICsgY2hhciAqKm5paF9zdHJfYXJyYXlfYWRk
+ICAgIChjaGFyICoqKmFycmF5LCBjb25zdCB2b2lkICpwYXJlbnQsIHNpemVf
+dCAqbGVuLA0KPiArIAkJCSAgICAgY29uc3QgY2hhciAqc3RyKQ0KPiArLQlf
+X2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2MpKTsN
+Cj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0K
+PiArIGNoYXIgKipuaWhfc3RyX2FycmF5X2FkZG4gICAoY2hhciAqKiphcnJh
+eSwgY29uc3Qgdm9pZCAqcGFyZW50LCBzaXplX3QgKmxlbiwNCj4gKyAJCQkg
+ICAgIGNvbnN0IGNoYXIgKnN0ciwgc2l6ZV90IHN0cmxlbikNCj4gKy0JX19h
+dHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+
+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4g
+KyBjaGFyICoqbmloX3N0cl9hcnJheV9hZGRwICAgKGNoYXIgKioqYXJyYXks
+IGNvbnN0IHZvaWQgKnBhcmVudCwgc2l6ZV90ICpsZW4sDQo+ICsgCQkJICAg
+ICB2b2lkICpwdHIpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNl
+ZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fy
+bl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgY2hhciAqKm5paF9zdHJfYXJyYXlf
+Y29weSAgIChjb25zdCB2b2lkICpwYXJlbnQsIHNpemVfdCAqbGVuLA0KPiAr
+IAkJCSAgICAgY2hhciAqIGNvbnN0ICphcnJheSkNCj4gKy0JX19hdHRyaWJ1
+dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9f
+YXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyBjaGFy
+ICoqbmloX3N0cl9hcnJheV9hcHBlbmQgKGNoYXIgKioqYXJyYXksIGNvbnN0
+IHZvaWQgKnBhcmVudCwgc2l6ZV90ICpsZW4sDQo+ICsgCQkJICAgICBjaGFy
+ICogY29uc3QgKmFyZ3MpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3Vu
+dXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgo
+d2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgDQo+ICsgY2hhciAqIG5paF9z
+dHJfd3JhcCAgICAgICAgIChjb25zdCB2b2lkICpwYXJlbnQsIGNvbnN0IGNo
+YXIgKnN0ciwgc2l6ZV90IGxlbiwNCj4gKyAJCSAgICAgICAgICAgICBzaXpl
+X3QgZmlyc3RfaW5kZW50LCBzaXplX3QgaW5kZW50KQ0KPiArLQlfX2F0dHJp
+YnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2MpKTsNCj4gKysJ
+X19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0KPiArIHNp
+emVfdCBuaWhfc3RyX3NjcmVlbl93aWR0aCAodm9pZCk7DQo+ICsgY2hhciAq
+IG5paF9zdHJfc2NyZWVuX3dyYXAgIChjb25zdCB2b2lkICpwYXJlbnQsIGNv
+bnN0IGNoYXIgKnN0ciwNCj4gKyAJCQkgICAgIHNpemVfdCBmaXJzdF9pbmRl
+bnQsIHNpemVfdCBpbmRlbnQpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJu
+X3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9f
+ICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgDQo+ICsgTklIX0VORF9F
+WFRFUk4NCj4gKyANCj4gKy0tLSBsaWJuaWgtMS4wLjMub3JpZy9uaWgvc3Ry
+aW5nLmMNCj4gKysrKyBsaWJuaWgtMS4wLjMvbmloL3N0cmluZy5jDQo+ICtA
+QCAtNDA1LDcgKzQwNSw3IEBADQo+ICsgCQljb25zdCBjaGFyICAqcHRyOw0K
+PiArIA0KPiArIAkJLyogU2tpcCBpbml0aWFsIGRlbGltaXRlcnMgKi8NCj4g
+Ky0JCXdoaWxlIChyZXBlYXQgJiYgc3RyY2hyIChkZWxpbSwgKnN0cikpDQo+
+ICsrCQl3aGlsZSAocmVwZWF0ICYmICpzdHIgJiYgc3RyY2hyIChkZWxpbSwg
+KnN0cikpDQo+ICsgCQkJc3RyKys7DQo+ICsgDQo+ICsgCQkvKiBGaW5kIHRo
+ZSBlbmQgb2YgdGhlIHRva2VuICovDQo+ICtAQCAtNDEzLDYgKzQxMywxMyBA
+QA0KPiArIAkJd2hpbGUgKCpzdHIgJiYgKCEgc3RyY2hyIChkZWxpbSwgKnN0
+cikpKQ0KPiArIAkJCXN0cisrOw0KPiArIA0KPiArKwkJLyogRG9uJ3QgY3Jl
+YXRlIGFuIGVtcHR5IHN0cmluZyBhcnJheSBlbGVtZW50IGluIHJlcGVhdA0K
+PiArKwkJICogbW9kZSBpZiB0aGVyZSBpcyBubyB0b2tlbiAoYXMgYSByZXN1
+bHQgb2YgYQ0KPiArKwkJICogZHVwbGljYXRlZCBkZWxpbWl0ZXIgY2hhcmFj
+dGVyKS4NCj4gKysJCSAqLw0KPiArKwkJaWYgKHJlcGVhdCAmJiAoc3RyID09
+IHB0cikpDQo+ICsrCQkJY29udGludWU7DQo+ICsrDQo+ICsgCQlpZiAoISBu
+aWhfc3RyX2FycmF5X2FkZG4gKCZhcnJheSwgcGFyZW50LCAmbGVuLA0KPiAr
+IAkJCQkJICBwdHIsIHN0ciAtIHB0cikpIHsNCj4gKyAJCQluaWhfZnJlZSAo
+YXJyYXkpOw0KPiArLS0tIGxpYm5paC0xLjAuMy5vcmlnL25paC9maWxlLmgN
+Cj4gKysrKyBsaWJuaWgtMS4wLjMvbmloL2ZpbGUuaA0KPiArQEAgLTgyLDcg
+KzgyLDcgQEANCj4gKyANCj4gKyBjaGFyICpuaWhfZmlsZV9yZWFkICAgICAg
+ICAgKGNvbnN0IHZvaWQgKnBhcmVudCwgY29uc3QgY2hhciAqcGF0aCwNCj4g
+KyAJCQkgICAgIHNpemVfdCAqbGVuZ3RoKQ0KPiArLQlfX2F0dHJpYnV0ZV9f
+ICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2MpKTsNCj4gKysJX19hdHRy
+aWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0KPiArIA0KPiArIHZv
+aWQgKm5paF9maWxlX21hcCAgICAgICAgICAoY29uc3QgY2hhciAqcGF0aCwg
+aW50IGZsYWdzLCBzaXplX3QgKmxlbmd0aCkNCj4gKyAJX19hdHRyaWJ1dGVf
+XyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0KPiArLS0tIGxpYm5paC0xLjAu
+My5vcmlnL25paC90ZXN0cy90ZXN0X29wdGlvbi5jDQo+ICsrKysgbGlibmlo
+LTEuMC4zL25paC90ZXN0cy90ZXN0X29wdGlvbi5jDQo+ICtAQCAtMTU3NCw3
+ICsxNTc0LDcgQEANCj4gKyAJCW91dHB1dCA9IHRtcGZpbGUgKCk7DQo+ICsg
+CQlURVNUX0NISUxEIChwaWQpIHsNCj4gKyAJCQlURVNUX0RJVkVSVF9TVERP
+VVQgKG91dHB1dCkgew0KPiArLQkJCQljaGFyICoqYXJnczsNCj4gKysJCQkJ
+Y2hhciAqKmFyZ3MgX19hdHRyaWJ1dGVfXygodW51c2VkKSk7DQo+ICsgDQo+
+ICsgCQkJCWFyZ3MgPSBuaWhfb3B0aW9uX3BhcnNlciAoTlVMTCwgYXJnYywg
+YXJndiwNCj4gKyAJCQkJCQkJICBvcHRpb25zLCBGQUxTRSk7DQo+ICtAQCAt
+MTY1Miw3ICsxNjUyLDcgQEANCj4gKyAJCQl1bnNldGVudiAoIkNPTFVNTlMi
+KTsNCj4gKyANCj4gKyAJCQlURVNUX0RJVkVSVF9TVERPVVQgKG91dHB1dCkg
+ew0KPiArLQkJCQljaGFyICoqYXJnczsNCj4gKysJCQkJY2hhciAqKmFyZ3Mg
+X19hdHRyaWJ1dGVfXygodW51c2VkKSk7DQo+ICsgDQo+ICsgCQkJCWFyZ3Mg
+PSBuaWhfb3B0aW9uX3BhcnNlciAoTlVMTCwgYXJnYywgYXJndiwNCj4gKyAJ
+CQkJCQkJICBvcHRpb25zLCBGQUxTRSk7DQo+ICstLS0gbGlibmloLTEuMC4z
+Lm9yaWcvbmloL3Rlc3RzL3Rlc3RfbG9nZ2luZy5jDQo+ICsrKysgbGlibmlo
+LTEuMC4zL25paC90ZXN0cy90ZXN0X2xvZ2dpbmcuYw0KPiArQEAgLTMxLDcg
+KzMxLDcgQEANCj4gKyAjaW5jbHVkZSA8bmloL21haW4uaD4NCj4gKyANCj4g
+KyANCj4gKy1leHRlcm4gY2hhciAqX19hYm9ydF9tc2cgX19hdHRyaWJ1dGVf
+XyAoKHdlYWspKTsNCj4gKytleHRlcm4gY2hhciAqX19uaWhfYWJvcnRfbXNn
+Ow0KPiArIA0KPiArIHN0YXRpYyBOaWhMb2dMZXZlbCBsYXN0X3ByaW9yaXR5
+ID0gTklIX0xPR19VTktOT1dOOw0KPiArIHN0YXRpYyBjaGFyICogICAgICBs
+YXN0X21lc3NhZ2UgPSBOVUxMOw0KPiArQEAgLTE1Niw2OCArMTU2LDYzIEBA
+DQo+ICsgCX0NCj4gKyANCj4gKyANCj4gKy0JLyogQ2hlY2sgdGhhdCBhIGZh
+dGFsIG1lc3NhZ2UgaXMgYWxzbyBzdG9yZWQgaW4gdGhlIGdsaWJjIF9fYWJv
+cnRfbXNnDQo+ICsrCS8qIENoZWNrIHRoYXQgYSBmYXRhbCBtZXNzYWdlIGlz
+IGFsc28gc3RvcmVkIGluIHRoZSBfX25paF9hYm9ydF9tc2cNCj4gKyAJICog
+dmFyaWFibGUuDQo+ICsgCSAqLw0KPiArLQlpZiAoJl9fYWJvcnRfbXNnKSB7
+DQo+ICstCQlURVNUX0ZFQVRVUkUgKCJ3aXRoIGZhdGFsIG1lc3NhZ2UiKTsN
+Cj4gKy0JCVRFU1RfQUxMT0NfRkFJTCB7DQo+ICstCQkJX19hYm9ydF9tc2cg
+PSBOVUxMOw0KPiArLQkJCWxhc3RfcHJpb3JpdHkgPSBOSUhfTE9HX1VOS05P
+V047DQo+ICstCQkJbGFzdF9tZXNzYWdlID0gTlVMTDsNCj4gKy0NCj4gKy0J
+CQlyZXQgPSBuaWhfbG9nX21lc3NhZ2UgKE5JSF9MT0dfRkFUQUwsDQo+ICst
+CQkJCQkgICAgICAgIm1lc3NhZ2Ugd2l0aCAlcyAlZCBmb3JtYXR0aW5nIiwN
+Cj4gKy0JCQkJCSAgICAgICAic29tZSIsIDIwKTsNCj4gKy0NCj4gKy0JCQlU
+RVNUX0VRIChyZXQsIDApOw0KPiArLQkJCVRFU1RfRVEgKGxhc3RfcHJpb3Jp
+dHksIE5JSF9MT0dfRkFUQUwpOw0KPiArLQkJCVRFU1RfRVFfU1RSIChsYXN0
+X21lc3NhZ2UsICJtZXNzYWdlIHdpdGggc29tZSAyMCBmb3JtYXR0aW5nIik7
+DQo+ICstDQo+ICstCQkJVEVTVF9ORV9QIChfX2Fib3J0X21zZywgTlVMTCk7
+DQo+ICstCQkJVEVTVF9BTExPQ19QQVJFTlQgKF9fYWJvcnRfbXNnLCBOVUxM
+KTsNCj4gKy0JCQlURVNUX0VRX1NUUiAoX19hYm9ydF9tc2csICJtZXNzYWdl
+IHdpdGggc29tZSAyMCBmb3JtYXR0aW5nIik7DQo+ICsrCVRFU1RfRkVBVFVS
+RSAoIndpdGggZmF0YWwgbWVzc2FnZSIpOw0KPiArKwlURVNUX0FMTE9DX0ZB
+SUwgew0KPiArKwkJX19uaWhfYWJvcnRfbXNnID0gTlVMTDsNCj4gKysJCWxh
+c3RfcHJpb3JpdHkgPSBOSUhfTE9HX1VOS05PV047DQo+ICsrCQlsYXN0X21l
+c3NhZ2UgPSBOVUxMOw0KPiArIA0KPiArLQkJCWZyZWUgKGxhc3RfbWVzc2Fn
+ZSk7DQo+ICstCQl9DQo+ICsrCQlyZXQgPSBuaWhfbG9nX21lc3NhZ2UgKE5J
+SF9MT0dfRkFUQUwsDQo+ICsrCQkJCSJtZXNzYWdlIHdpdGggJXMgJWQgZm9y
+bWF0dGluZyIsDQo+ICsrCQkJCSJzb21lIiwgMjApOw0KPiArIA0KPiArKwkJ
+VEVTVF9FUSAocmV0LCAwKTsNCj4gKysJCVRFU1RfRVEgKGxhc3RfcHJpb3Jp
+dHksIE5JSF9MT0dfRkFUQUwpOw0KPiArKwkJVEVTVF9FUV9TVFIgKGxhc3Rf
+bWVzc2FnZSwgIm1lc3NhZ2Ugd2l0aCBzb21lIDIwIGZvcm1hdHRpbmciKTsN
+Cj4gKyANCj4gKy0JCS8qIENoZWNrIHRoYXQgYSBmYXRhbCBtZXNzYWdlIGNh
+biBzYWZlbHkgb3ZlcndyaXRlIG9uZSBhbHJlYWR5IHN0b3JlZA0KPiArLQkJ
+ICogaW4gdGhlIGdsaWJjIF9fYWJvcnRfbXNnIHZhcmlhYmxlLg0KPiArLQkJ
+ICovDQo+ICstCQlURVNUX0ZFQVRVUkUgKCJ3aXRoIHNlY29uZCBmYXRhbCBt
+ZXNzYWdlIik7DQo+ICstCQlURVNUX0FMTE9DX0ZBSUwgew0KPiArLQkJCVRF
+U1RfQUxMT0NfU0FGRSB7DQo+ICstCQkJCW1zZyA9IG5paF9zdHJkdXAgKE5V
+TEwsICJ0ZXN0Iik7DQo+ICstCQkJfQ0KPiArLQ0KPiArLQkJCV9fYWJvcnRf
+bXNnID0gbXNnOw0KPiArLQkJCVRFU1RfRlJFRV9UQUcgKG1zZyk7DQo+ICst
+DQo+ICstCQkJbGFzdF9wcmlvcml0eSA9IE5JSF9MT0dfVU5LTk9XTjsNCj4g
+Ky0JCQlsYXN0X21lc3NhZ2UgPSBOVUxMOw0KPiArLQ0KPiArLQkJCXJldCA9
+IG5paF9sb2dfbWVzc2FnZSAoTklIX0xPR19GQVRBTCwNCj4gKy0JCQkJCSAg
+ICAgICAibWVzc2FnZSB3aXRoICVzICVkIGZvcm1hdHRpbmciLA0KPiArLQkJ
+CQkJICAgICAgICJzb21lIiwgMjApOw0KPiArLQ0KPiArLQkJCVRFU1RfRVEg
+KHJldCwgMCk7DQo+ICstCQkJVEVTVF9FUSAobGFzdF9wcmlvcml0eSwgTklI
+X0xPR19GQVRBTCk7DQo+ICstCQkJVEVTVF9FUV9TVFIgKGxhc3RfbWVzc2Fn
+ZSwgIm1lc3NhZ2Ugd2l0aCBzb21lIDIwIGZvcm1hdHRpbmciKTsNCj4gKy0N
+Cj4gKy0JCQlURVNUX0ZSRUUgKG1zZyk7DQo+ICstDQo+ICstCQkJVEVTVF9O
+RV9QIChfX2Fib3J0X21zZywgTlVMTCk7DQo+ICstCQkJVEVTVF9BTExPQ19Q
+QVJFTlQgKF9fYWJvcnRfbXNnLCBOVUxMKTsNCj4gKy0JCQlURVNUX0VRX1NU
+UiAoX19hYm9ydF9tc2csICJtZXNzYWdlIHdpdGggc29tZSAyMCBmb3JtYXR0
+aW5nIik7DQo+ICsrCQlURVNUX05FX1AgKF9fbmloX2Fib3J0X21zZywgTlVM
+TCk7DQo+ICsrCQlURVNUX0FMTE9DX1BBUkVOVCAoX19uaWhfYWJvcnRfbXNn
+LCBOVUxMKTsNCj4gKysJCVRFU1RfRVFfU1RSIChfX25paF9hYm9ydF9tc2cs
+ICJtZXNzYWdlIHdpdGggc29tZSAyMCBmb3JtYXR0aW5nIik7DQo+ICsgDQo+
+ICstCQkJZnJlZSAobGFzdF9tZXNzYWdlKTsNCj4gKy0JCX0NCj4gKy0JfSBl
+bHNlIHsNCj4gKy0JCXByaW50ZiAoIlNLSVA6IF9fYWJvcnRfbXNnIG5vdCBh
+dmFpbGFibGVcbiIpOw0KPiArKwkJZnJlZSAobGFzdF9tZXNzYWdlKTsNCj4g
+KyAJfQ0KPiArIA0KPiArIA0KPiArKwkvKiBDaGVjayB0aGF0IGEgZmF0YWwg
+bWVzc2FnZSBjYW4gc2FmZWx5IG92ZXJ3cml0ZSBvbmUgYWxyZWFkeSBzdG9y
+ZWQNCj4gKysJICogaW4gdGhlIF9fbmloX2Fib3J0X21zZyB2YXJpYWJsZS4N
+Cj4gKysJICovDQo+ICsrCVRFU1RfRkVBVFVSRSAoIndpdGggc2Vjb25kIGZh
+dGFsIG1lc3NhZ2UiKTsNCj4gKysJVEVTVF9BTExPQ19GQUlMIHsNCj4gKysJ
+CVRFU1RfQUxMT0NfU0FGRSB7DQo+ICsrCQkJbXNnID0gbmloX3N0cmR1cCAo
+TlVMTCwgInRlc3QiKTsNCj4gKysJCX0NCj4gKysNCj4gKysJCV9fbmloX2Fi
+b3J0X21zZyA9IG1zZzsNCj4gKysJCVRFU1RfRlJFRV9UQUcgKG1zZyk7DQo+
+ICsrDQo+ICsrCQlsYXN0X3ByaW9yaXR5ID0gTklIX0xPR19VTktOT1dOOw0K
+PiArKwkJbGFzdF9tZXNzYWdlID0gTlVMTDsNCj4gKysNCj4gKysJCXJldCA9
+IG5paF9sb2dfbWVzc2FnZSAoTklIX0xPR19GQVRBTCwNCj4gKysJCQkJIm1l
+c3NhZ2Ugd2l0aCAlcyAlZCBmb3JtYXR0aW5nIiwNCj4gKysJCQkJInNvbWUi
+LCAyMCk7DQo+ICsrDQo+ICsrCQlURVNUX0VRIChyZXQsIDApOw0KPiArKwkJ
+VEVTVF9FUSAobGFzdF9wcmlvcml0eSwgTklIX0xPR19GQVRBTCk7DQo+ICsr
+CQlURVNUX0VRX1NUUiAobGFzdF9tZXNzYWdlLCAibWVzc2FnZSB3aXRoIHNv
+bWUgMjAgZm9ybWF0dGluZyIpOw0KPiArKw0KPiArKwkJVEVTVF9GUkVFICht
+c2cpOw0KPiArKw0KPiArKwkJVEVTVF9ORV9QIChfX25paF9hYm9ydF9tc2cs
+IE5VTEwpOw0KPiArKwkJVEVTVF9BTExPQ19QQVJFTlQgKF9fbmloX2Fib3J0
+X21zZywgTlVMTCk7DQo+ICsrCQlURVNUX0VRX1NUUiAoX19uaWhfYWJvcnRf
+bXNnLCAibWVzc2FnZSB3aXRoIHNvbWUgMjAgZm9ybWF0dGluZyIpOw0KPiAr
+Kw0KPiArKwkJZnJlZSAobGFzdF9tZXNzYWdlKTsNCj4gKysJfQ0KPiArKw0K
+PiArIAkvKiBDaGVjayB0aGF0IHRoZSBuaWhfZGVidWcgbWFjcm8gd3JhcHMg
+dGhlIGNhbGwgcHJvcGVybHkgYW5kDQo+ICsgCSAqIGluY2x1ZGVzIHRoZSBm
+dW5jdGlvbiBpbiB3aGljaCB0aGUgbWVzc2FnZSBvY2N1cnJlZC4NCj4gKyAJ
+ICovDQo+ICstLS0gbGlibmloLTEuMC4zLm9yaWcvbmloL3Rlc3RzL3Rlc3Rf
+aGFzaC5jDQo+ICsrKysgbGlibmloLTEuMC4zL25paC90ZXN0cy90ZXN0X2hh
+c2guYw0KPiArQEAgLTQ3MCw3ICs0NzAsOCBAQA0KPiArIHRlc3RfbG9va3Vw
+ICh2b2lkKQ0KPiArIHsNCj4gKyAJTmloSGFzaCAqaGFzaDsNCj4gKy0JTmlo
+TGlzdCAqZW50cnkxLCAqZW50cnkyLCAqZW50cnkzLCAqcHRyOw0KPiArKwlO
+aWhMaXN0ICplbnRyeTEsICplbnRyeTIsICpwdHI7DQo+ICsrCU5paExpc3Qg
+KmVudHJ5MyBfX2F0dHJpYnV0ZV9fKCh1bnVzZWQpKTsNCj4gKyANCj4gKyAJ
+VEVTVF9GVU5DVElPTiAoIm5paF9oYXNoX2xvb2t1cCIpOw0KPiArIAloYXNo
+ID0gbmloX2hhc2hfc3RyaW5nX25ldyAoTlVMTCwgMCk7DQo+ICstLS0gbGli
+bmloLTEuMC4zLm9yaWcvbmloL3Rlc3RzL3Rlc3RfbWFpbi5jDQo+ICsrKysg
+bGlibmloLTEuMC4zL25paC90ZXN0cy90ZXN0X21haW4uYw0KPiArQEAgLTQ1
+Nyw3ICs0NTcsNyBAQA0KPiArIHRlc3RfbWFpbl9sb29wICh2b2lkKQ0KPiAr
+IHsNCj4gKyAJTmloTWFpbkxvb3BGdW5jICpmdW5jOw0KPiArLQlOaWhUaW1l
+ciAgICAgICAgKnRpbWVyOw0KPiArKwlOaWhUaW1lciAgICAgICAgKnRpbWVy
+IF9fYXR0cmlidXRlX18oKHVudXNlZCkpOw0KPiArIAlpbnQgICAgICAgICAg
+ICAgIHJldDsNCj4gKyANCj4gKyAJLyogQ2hlY2sgdGhhdCB3ZSBjYW4gcnVu
+IHRocm91Z2ggdGhlIG1haW4gbG9vcCwgYW5kIHRoYXQgdGhlDQo+ICstLS0g
+bGlibmloLTEuMC4zLm9yaWcvbmloL3Rlc3RzL3Rlc3Rfd2F0Y2guYw0KPiAr
+KysrIGxpYm5paC0xLjAuMy9uaWgvdGVzdHMvdGVzdF93YXRjaC5jDQo+ICtA
+QCAtMiw4ICsyLDggQEANCj4gKyAgKg0KPiArICAqIHRlc3Rfd2F0Y2guYyAt
+IHRlc3Qgc3VpdGUgZm9yIG5paC93YXRjaC5jDQo+ICsgICoNCj4gKy0gKiBD
+b3B5cmlnaHQgwqkgMjAwOSBTY290dCBKYW1lcyBSZW1uYW50IDxzY290dEBu
+ZXRzcGxpdC5jb20+Lg0KPiArLSAqIENvcHlyaWdodCDCqSAyMDA5IENhbm9u
+aWNhbCBMdGQuDQo+ICsrICogQ29weXJpZ2h0IMKpIDIwMTEgU2NvdHQgSmFt
+ZXMgUmVtbmFudCA8c2NvdHRAbmV0c3BsaXQuY29tPi4NCj4gKysgKiBDb3B5
+cmlnaHQgwqkgMjAxMSBDYW5vbmljYWwgTHRkLg0KPiArICAqDQo+ICsgICog
+VGhpcyBwcm9ncmFtIGlzIGZyZWUgc29mdHdhcmU7IHlvdSBjYW4gcmVkaXN0
+cmlidXRlIGl0IGFuZC9vciBtb2RpZnkNCj4gKyAgKiBpdCB1bmRlciB0aGUg
+dGVybXMgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIHZlcnNp
+b24gMiwgYXMNCj4gK0BAIC0zOSw2ICszOSw4IEBADQo+ICsgI2luY2x1ZGUg
+PG5paC9lcnJvci5oPg0KPiArICNpbmNsdWRlIDxuaWgvbG9nZ2luZy5oPg0K
+PiArIA0KPiArKy8qIFJlYWQgIlRoZSBIaXRjaGhpa2VycyBHdWlkZSB0byB0
+aGUgR2FsYXh5IiAqLw0KPiArKyNkZWZpbmUgRklMVEVSX1ZBTFVFIDQyDQo+
+ICsgDQo+ICsgc3RhdGljIGludA0KPiArIG15X2ZpbHRlciAodm9pZCAgICAg
+ICAqZGF0YSwNCj4gK0BAIC01NCw2ICs1NiwyNiBAQA0KPiArIAlyZXR1cm4g
+RkFMU0U7DQo+ICsgfQ0KPiArIA0KPiArKy8qIFNldCBieSBteV9maWx0ZXIy
+ICgpIHNvIGl0IGtub3dzIGlmIGl0IGhhcyBhbHJlYWR5IGJlZW4gY2FsbGVk
+ICovDQo+ICsrc3RhdGljIGludCBteV9maWx0ZXIyX2NhbGxlZCA9IDA7DQo+
+ICsrDQo+ICsrc3RhdGljIGludA0KPiArK215X2ZpbHRlcjIgKGludCAgICAg
+ICAqdmFsdWUsDQo+ICsrCSAgIGNvbnN0IGNoYXIgKnBhdGgsDQo+ICsrCSAg
+IGludCAgICAgICAgIGlzX2RpcikNCj4gKyt7DQo+ICsrCS8qIHdlIG9ubHkg
+d2FudCB0byB0b2dnbGUgdGhlIHZhbHVlIG9uY2UgKi8NCj4gKysJaWYgKG15
+X2ZpbHRlcjJfY2FsbGVkKQ0KPiArKwkJcmV0dXJuIFRSVUU7DQo+ICsrDQo+
+ICsrCW15X2ZpbHRlcjJfY2FsbGVkID0gMTsNCj4gKysNCj4gKysJbmloX2Fz
+c2VydCAodmFsdWUgJiYgKnZhbHVlID09IEZJTFRFUl9WQUxVRSk7DQo+ICsr
+CSp2YWx1ZSA9IDA7DQo+ICsrDQo+ICsrCXJldHVybiBGQUxTRTsNCj4gKyt9
+DQo+ICsrDQo+ICsgc3RhdGljIGludCBjcmVhdGVfY2FsbGVkID0gMDsNCj4g
+KyBzdGF0aWMgaW50IG1vZGlmeV9jYWxsZWQgPSAwOw0KPiArIHN0YXRpYyBp
+bnQgZGVsZXRlX2NhbGxlZCA9IDA7DQo+ICtAQCAtNTUzLDYgKzU3NSw0NCBA
+QA0KPiArIAkJbmloX2ZyZWUgKHdhdGNoKTsNCj4gKyAJfQ0KPiArIA0KPiAr
+KwkvKiBFbnN1cmUgdGhlIGZpbGUgZmlsdGVyIGdldHMgcGFzc2VkIHRoZSBj
+b3JyZWN0IGRhdGEgcG9pbnRlci4NCj4gKysJICovDQo+ICsrCVRFU1RfRkVB
+VFVSRSAoIndpdGggZmlsdGVyIGFuZCBkYXRhIik7DQo+ICsrDQo+ICsrCS8q
+IEVuc3VyZSB3ZSBoYXZlIGEgbmV3IGRpcmVjdG9yeSAqLw0KPiArKwlURVNU
+X0ZJTEVOQU1FIChkaXJuYW1lKTsNCj4gKysJbWtkaXIgKGRpcm5hbWUsIDA3
+NTUpOw0KPiArKw0KPiArKwkvKiBDcmVhdGUgYSBzaW5nbGUgZmlsZSAqLw0K
+PiArKwlzdHJjcHkgKGZpbGVuYW1lLCBkaXJuYW1lKTsNCj4gKysJc3RyY2F0
+IChmaWxlbmFtZSwgIi9mb28iKTsNCj4gKysNCj4gKysJZmQgPSBmb3BlbiAo
+ZmlsZW5hbWUsICJ3Iik7DQo+ICsrCWZwcmludGYgKGZkLCAidGVzdFxuIik7
+DQo+ICsrCWZjbG9zZSAoZmQpOw0KPiArKw0KPiArKwlURVNUX0FMTE9DX0ZB
+SUwgew0KPiArKwkJaW50IHdhdGNoX2RhdGEgPSBGSUxURVJfVkFMVUU7DQo+
+ICsrDQo+ICsrCQkvKiBSZXNldCByZXF1aXJlZCB0byBhcHBlYXNlIFRFU1Rf
+QUxMT0NfRkFJTCAqLw0KPiArKwkJbXlfZmlsdGVyMl9jYWxsZWQgPSAwOw0K
+PiArKw0KPiArKwkJd2F0Y2ggPSBuaWhfd2F0Y2hfbmV3IChOVUxMLCBkaXJu
+YW1lLA0KPiArKwkJCQlUUlVFLCBUUlVFLA0KPiArKwkJCQkoTmloRmlsZUZp
+bHRlcilteV9maWx0ZXIyLA0KPiArKwkJCQlOVUxMLCBOVUxMLCBOVUxMLA0K
+PiArKwkJCQkmd2F0Y2hfZGF0YSk7DQo+ICsrDQo+ICsrCQlURVNUX05FX1Ag
+KHdhdGNoLCBOVUxMKTsNCj4gKysNCj4gKysJCS8qIEVuc3VyZSB0aGUgZmls
+dGVyIHdhcyBjYWxsZWQgYW5kIGNoYW5nZWQgdGhlIHZhbHVlICovDQo+ICsr
+DQo+ICsrCQlURVNUX05FIChteV9maWx0ZXIyX2NhbGxlZCwgMCk7DQo+ICsr
+CQlURVNUX0VRICh3YXRjaF9kYXRhLCAwKTsNCj4gKysNCj4gKysJCW5paF9m
+cmVlICh3YXRjaCk7DQo+ICsrCX0NCj4gKysNCj4gKyAJc3RyY3B5IChmaWxl
+bmFtZSwgZGlybmFtZSk7DQo+ICsgCXN0cmNhdCAoZmlsZW5hbWUsICIvYmFy
+Iik7DQo+ICsgCWNobW9kIChmaWxlbmFtZSwgMDc1NSk7DQo+ICtAQCAtOTQ2
+LDEzICsxMDA2LDgyIEBADQo+ICsgCW5paF9lcnJvcl9pbml0ICgpOw0KPiAr
+IA0KPiArIAlURVNUX0ZJTEVOQU1FIChkaXJuYW1lKTsNCj4gKy0JbWtkaXIg
+KGRpcm5hbWUsIDA3NTUpOw0KPiArKwlURVNUX0VRIChta2RpciAoZGlybmFt
+ZSwgMDc1NSksIDApOw0KPiArIA0KPiArLQl3YXRjaCA9IG5paF93YXRjaF9u
+ZXcgKE5VTEwsIGRpcm5hbWUsIFRSVUUsIFRSVUUsIG15X2ZpbHRlciwNCj4g
+Ky0JCQkgICAgICAgbXlfY3JlYXRlX2hhbmRsZXIsIG15X21vZGlmeV9oYW5k
+bGVyLA0KPiArKwlURVNUX0ZFQVRVUkUgKCJ3aXRoIHdhdGNoZWQgZmlsZSIp
+Ow0KPiArKwlzdHJjcHkgKGZpbGVuYW1lLCBkaXJuYW1lKTsNCj4gKysJc3Ry
+Y2F0IChmaWxlbmFtZSwgIi9mb28iKTsNCj4gKysNCj4gKysJLyogQ3JlYXRl
+IGZpbGUgZmlyc3Qgc2luY2Ugd2UgZG9uJ3Qgc2V0IGEgY3JlYXRlIGhhbmRs
+ZXIgb24gdGhlDQo+ICsrCSAqIHdhdGNoLg0KPiArKwkgKi8NCj4gKysJZmQg
+PSBmb3BlbiAoZmlsZW5hbWUsICJ3Iik7DQo+ICsrCWZwcmludGYgKGZkLCAi
+YmFyXG4iKTsNCj4gKysJZmNsb3NlIChmZCk7DQo+ICsrDQo+ICsrCWNyZWF0
+ZV9jYWxsZWQgPSAwOw0KPiArKwltb2RpZnlfY2FsbGVkID0gMDsNCj4gKysJ
+ZGVsZXRlX2NhbGxlZCA9IDA7DQo+ICsrCWxvZ2dlcl9jYWxsZWQgPSAwOw0K
+PiArKwlsYXN0X3BhdGggID0gTlVMTDsNCj4gKysJbGFzdF93YXRjaCA9IE5V
+TEw7DQo+ICsrCWxhc3RfZGF0YSAgPSBOVUxMOw0KPiArKw0KPiArKwl3YXRj
+aCA9IG5paF93YXRjaF9uZXcgKE5VTEwsIGZpbGVuYW1lLCBGQUxTRSwgRkFM
+U0UsIE5VTEwsDQo+ICsrCQkJICAgICAgIE5VTEwsIG15X21vZGlmeV9oYW5k
+bGVyLA0KPiArIAkJCSAgICAgICBteV9kZWxldGVfaGFuZGxlciwgJndhdGNo
+KTsNCj4gKysJVEVTVF9ORV9QICh3YXRjaCwgTlVMTCk7DQo+ICsrDQo+ICsr
+CS8qIE5vdywgbW9kaWZ5IHRoZSBleGlzdGluZyBmaWxlIHRvIHRyaWdnZXIg
+dGhlIG1vZGlmeSBoYW5kbGVyLiAqLw0KPiArKwlmZCA9IGZvcGVuIChmaWxl
+bmFtZSwgImErIik7DQo+ICsrCWZwcmludGYgKGZkLCAiYmF6XG4iKTsNCj4g
+KysJZmNsb3NlIChmZCk7DQo+ICsrDQo+ICsrCW5mZHMgPSAwOw0KPiArKwlG
+RF9aRVJPICgmcmVhZGZkcyk7DQo+ICsrCUZEX1pFUk8gKCZ3cml0ZWZkcyk7
+DQo+ICsrCUZEX1pFUk8gKCZleGNlcHRmZHMpOw0KPiArKw0KPiArKwluaWhf
+aW9fc2VsZWN0X2ZkcyAoJm5mZHMsICZyZWFkZmRzLCAmd3JpdGVmZHMsICZl
+eGNlcHRmZHMpOw0KPiArKwlzZWxlY3QgKG5mZHMsICZyZWFkZmRzLCAmd3Jp
+dGVmZHMsICZleGNlcHRmZHMsIE5VTEwpOw0KPiArKwluaWhfaW9faGFuZGxl
+X2ZkcyAoJnJlYWRmZHMsICZ3cml0ZWZkcywgJmV4Y2VwdGZkcyk7DQo+ICsr
+DQo+ICsrCVRFU1RfRVFfU1RSICh3YXRjaC0+cGF0aCwgZmlsZW5hbWUpOw0K
+PiArKw0KPiArKwkvKiBFbnN1cmUgbm8gcmVncmVzc2lvbiB0byBvbGQgYmVo
+YXZpb3VyIChMUDojNzc3MDk3KSAqLw0KPiArKwlURVNUX05FIChsYXN0X3Bh
+dGhbIHN0cmxlbihsYXN0X3BhdGgpIC0gMSBdLCAnLycpOw0KPiArKw0KPiAr
+KwlURVNUX0VRX1NUUiAobGFzdF9wYXRoLCBmaWxlbmFtZSk7DQo+ICsrCVRF
+U1RfRVEgKG1vZGlmeV9jYWxsZWQsIDEpOw0KPiArKw0KPiArKwl1bmxpbmsg
+KGZpbGVuYW1lKTsNCj4gKysNCj4gKysJbmZkcyA9IDA7DQo+ICsrCUZEX1pF
+Uk8gKCZyZWFkZmRzKTsNCj4gKysJRkRfWkVSTyAoJndyaXRlZmRzKTsNCj4g
+KysJRkRfWkVSTyAoJmV4Y2VwdGZkcyk7DQo+ICsrDQo+ICsrCW5paF9pb19z
+ZWxlY3RfZmRzICgmbmZkcywgJnJlYWRmZHMsICZ3cml0ZWZkcywgJmV4Y2Vw
+dGZkcyk7DQo+ICsrCXNlbGVjdCAobmZkcywgJnJlYWRmZHMsICZ3cml0ZWZk
+cywgJmV4Y2VwdGZkcywgTlVMTCk7DQo+ICsrCW5paF9pb19oYW5kbGVfZmRz
+ICgmcmVhZGZkcywgJndyaXRlZmRzLCAmZXhjZXB0ZmRzKTsNCj4gKyANCj4g
+KysJVEVTVF9FUSAoZGVsZXRlX2NhbGxlZCwgMSk7DQo+ICsgDQo+ICsrCXJt
+ZGlyIChmaWxlbmFtZSk7DQo+ICsrCW5paF9mcmVlIChsYXN0X3BhdGgpOw0K
+PiArKw0KPiArKwljcmVhdGVfY2FsbGVkID0gMDsNCj4gKysJbW9kaWZ5X2Nh
+bGxlZCA9IDA7DQo+ICsrCWRlbGV0ZV9jYWxsZWQgPSAwOw0KPiArKwlsb2dn
+ZXJfY2FsbGVkID0gMDsNCj4gKysJbGFzdF9wYXRoICA9IE5VTEw7DQo+ICsr
+CWxhc3Rfd2F0Y2ggPSBOVUxMOw0KPiArKwlsYXN0X2RhdGEgID0gTlVMTDsN
+Cj4gKysNCj4gKysNCj4gKysJd2F0Y2ggPSBuaWhfd2F0Y2hfbmV3IChOVUxM
+LCBkaXJuYW1lLCBUUlVFLCBUUlVFLCBteV9maWx0ZXIsDQo+ICsrCQkJICAg
+ICAgIG15X2NyZWF0ZV9oYW5kbGVyLCBteV9tb2RpZnlfaGFuZGxlciwNCj4g
+KysJCQkgICAgICAgbXlfZGVsZXRlX2hhbmRsZXIsICZ3YXRjaCk7DQo+ICsg
+CS8qIENoZWNrIHRoYXQgY3JlYXRpbmcgYSBmaWxlIHdpdGhpbiB0aGUgZGly
+ZWN0b3J5IGJlaW5nIHdhdGNoZWQNCj4gKyAJICogcmVzdWx0cyBpbiB0aGUg
+Y3JlYXRlIGhhbmRsZXIgYmVpbmcgY2FsbGVkLCBhbmQgcGFzc2VkIHRoZSBm
+dWxsDQo+ICsgCSAqIHBhdGggb2YgdGhlIGNyZWF0ZWQgZmlsZSB0byBpdC4N
+Cj4gKy0tLSBsaWJuaWgtMS4wLjMub3JpZy9uaWgvdGVzdHMvdGVzdF9zdHJp
+bmcuYw0KPiArKysrIGxpYm5paC0xLjAuMy9uaWgvdGVzdHMvdGVzdF9zdHJp
+bmcuYw0KPiArQEAgLTYxOSw2ICs2MTksMjE1IEBADQo+ICsgCQluaWhfZnJl
+ZSAoYXJyYXkpOw0KPiArIAl9DQo+ICsgDQo+ICsrCVRFU1RfRkVBVFVSRSAo
+IndpdGggbm8gcmVwZWF0IGFuZCBtdWx0aXBsZSBpZGVudGljYWwgZGVsaW1p
+dGVyICINCj4gKysJCQkiY2hhcmFjdGVycyBhdCBzdHJpbmcgc3RhcnQiKTsN
+Cj4gKysJVEVTVF9BTExPQ19GQUlMIHsNCj4gKysJCWFycmF5ID0gbmloX3N0
+cl9zcGxpdCAoTlVMTCwgIlx0XHR0aGlzIGlzIGEgdGVzdCIsICIgXHQiLCBG
+QUxTRSk7DQo+ICsrDQo+ICsrCQlpZiAodGVzdF9hbGxvY19mYWlsZWQpIHsN
+Cj4gKysJCQlURVNUX0VRX1AgKGFycmF5LCBOVUxMKTsNCj4gKysJCQljb250
+aW51ZTsNCj4gKysJCX0NCj4gKysNCj4gKysJCVRFU1RfQUxMT0NfU0laRSAo
+YXJyYXksIHNpemVvZiAoY2hhciAqKSAqIDcpOw0KPiArKwkJZm9yIChpID0g
+MDsgaSA8IDY7IGkrKykNCj4gKysJCQlURVNUX0FMTE9DX1BBUkVOVCAoYXJy
+YXlbaV0sIGFycmF5KTsNCj4gKysNCj4gKysJCVRFU1RfRVFfU1RSIChhcnJh
+eVswXSwgIiIpOw0KPiArKwkJVEVTVF9FUV9TVFIgKGFycmF5WzFdLCAiIik7
+DQo+ICsrCQlURVNUX0VRX1NUUiAoYXJyYXlbMl0sICJ0aGlzIik7DQo+ICsr
+CQlURVNUX0VRX1NUUiAoYXJyYXlbM10sICJpcyIpOw0KPiArKwkJVEVTVF9F
+UV9TVFIgKGFycmF5WzRdLCAiYSIpOw0KPiArKwkJVEVTVF9FUV9TVFIgKGFy
+cmF5WzVdLCAidGVzdCIpOw0KPiArKwkJVEVTVF9FUV9QIChhcnJheVs2XSwg
+TlVMTCk7DQo+ICsrDQo+ICsrCQluaWhfZnJlZSAoYXJyYXkpOw0KPiArKwl9
+DQo+ICsrDQo+ICsrCVRFU1RfRkVBVFVSRSAoIndpdGggbm8gcmVwZWF0IGFu
+ZCBtdWx0aXBsZSBkaWZmZXJlbnQgZGVsaW1pdGVyICINCj4gKysJCQkiY2hh
+cmFjdGVycyBhdCBzdHJpbmcgc3RhcnQiKTsNCj4gKysJVEVTVF9BTExPQ19G
+QUlMIHsNCj4gKysJCWFycmF5ID0gbmloX3N0cl9zcGxpdCAoTlVMTCwgIiBc
+dHRoaXMgaXMgYSB0ZXN0IiwgIiBcdCIsIEZBTFNFKTsNCj4gKysNCj4gKysJ
+CWlmICh0ZXN0X2FsbG9jX2ZhaWxlZCkgew0KPiArKwkJCVRFU1RfRVFfUCAo
+YXJyYXksIE5VTEwpOw0KPiArKwkJCWNvbnRpbnVlOw0KPiArKwkJfQ0KPiAr
+Kw0KPiArKwkJVEVTVF9BTExPQ19TSVpFIChhcnJheSwgc2l6ZW9mIChjaGFy
+ICopICogNyk7DQo+ICsrCQlmb3IgKGkgPSAwOyBpIDwgNjsgaSsrKQ0KPiAr
+KwkJCVRFU1RfQUxMT0NfUEFSRU5UIChhcnJheVtpXSwgYXJyYXkpOw0KPiAr
+Kw0KPiArKwkJVEVTVF9FUV9TVFIgKGFycmF5WzBdLCAiIik7DQo+ICsrCQlU
+RVNUX0VRX1NUUiAoYXJyYXlbMV0sICIiKTsNCj4gKysJCVRFU1RfRVFfU1RS
+IChhcnJheVsyXSwgInRoaXMiKTsNCj4gKysJCVRFU1RfRVFfU1RSIChhcnJh
+eVszXSwgImlzIik7DQo+ICsrCQlURVNUX0VRX1NUUiAoYXJyYXlbNF0sICJh
+Iik7DQo+ICsrCQlURVNUX0VRX1NUUiAoYXJyYXlbNV0sICJ0ZXN0Iik7DQo+
+ICsrCQlURVNUX0VRX1AgKGFycmF5WzZdLCBOVUxMKTsNCj4gKysNCj4gKysJ
+CW5paF9mcmVlIChhcnJheSk7DQo+ICsrCX0NCj4gKysNCj4gKysJVEVTVF9G
+RUFUVVJFICgid2l0aCBubyByZXBlYXQgYW5kIG11bHRpcGxlIGlkZW50aWNh
+bCBkZWxpbWl0ZXIgIg0KPiArKwkJCSJjaGFyYWN0ZXJzIHdpdGhpbiBzdHJp
+bmciKTsNCj4gKysJVEVTVF9BTExPQ19GQUlMIHsNCj4gKysJCWFycmF5ID0g
+bmloX3N0cl9zcGxpdCAoTlVMTCwgInRoaXMgaXMgICBhXHRcdHRlc3QiLCAi
+IFx0IiwgRkFMU0UpOw0KPiArKw0KPiArKwkJaWYgKHRlc3RfYWxsb2NfZmFp
+bGVkKSB7DQo+ICsrCQkJVEVTVF9FUV9QIChhcnJheSwgTlVMTCk7DQo+ICsr
+CQkJY29udGludWU7DQo+ICsrCQl9DQo+ICsrDQo+ICsrCQlURVNUX0FMTE9D
+X1NJWkUgKGFycmF5LCBzaXplb2YgKGNoYXIgKikgKiA4KTsNCj4gKysJCWZv
+ciAoaSA9IDA7IGkgPCA3OyBpKyspDQo+ICsrCQkJVEVTVF9BTExPQ19QQVJF
+TlQgKGFycmF5W2ldLCBhcnJheSk7DQo+ICsrDQo+ICsrCQlURVNUX0VRX1NU
+UiAoYXJyYXlbMF0sICJ0aGlzIik7DQo+ICsrCQlURVNUX0VRX1NUUiAoYXJy
+YXlbMV0sICJpcyIpOw0KPiArKwkJVEVTVF9FUV9TVFIgKGFycmF5WzJdLCAi
+Iik7DQo+ICsrCQlURVNUX0VRX1NUUiAoYXJyYXlbM10sICIiKTsNCj4gKysJ
+CVRFU1RfRVFfU1RSIChhcnJheVs0XSwgImEiKTsNCj4gKysJCVRFU1RfRVFf
+U1RSIChhcnJheVs1XSwgIiIpOw0KPiArKwkJVEVTVF9FUV9TVFIgKGFycmF5
+WzZdLCAidGVzdCIpOw0KPiArKwkJVEVTVF9FUV9QIChhcnJheVs3XSwgTlVM
+TCk7DQo+ICsrDQo+ICsrCQluaWhfZnJlZSAoYXJyYXkpOw0KPiArKwl9DQo+
+ICsrDQo+ICsrCVRFU1RfRkVBVFVSRSAoIndpdGggbm8gcmVwZWF0IGFuZCBt
+dWx0aXBsZSBkaWZmZXJlbnQgZGVsaW1pdGVyICINCj4gKysJCQkiY2hhcmFj
+dGVycyB3aXRoaW4gc3RyaW5nIik7DQo+ICsrCVRFU1RfQUxMT0NfRkFJTCB7
+DQo+ICsrCQlhcnJheSA9IG5paF9zdHJfc3BsaXQgKE5VTEwsICJ0aGlzIGlz
+IFxuXHRhXHR0ZXN0IiwgIiBcdFxuIiwgRkFMU0UpOw0KPiArKw0KPiArKwkJ
+aWYgKHRlc3RfYWxsb2NfZmFpbGVkKSB7DQo+ICsrCQkJVEVTVF9FUV9QIChh
+cnJheSwgTlVMTCk7DQo+ICsrCQkJY29udGludWU7DQo+ICsrCQl9DQo+ICsr
+DQo+ICsrCQlURVNUX0FMTE9DX1NJWkUgKGFycmF5LCBzaXplb2YgKGNoYXIg
+KikgKiA3KTsNCj4gKysJCWZvciAoaSA9IDA7IGkgPCA2OyBpKyspDQo+ICsr
+CQkJVEVTVF9BTExPQ19QQVJFTlQgKGFycmF5W2ldLCBhcnJheSk7DQo+ICsr
+DQo+ICsrCQlURVNUX0VRX1NUUiAoYXJyYXlbMF0sICJ0aGlzIik7DQo+ICsr
+CQlURVNUX0VRX1NUUiAoYXJyYXlbMV0sICJpcyIpOw0KPiArKwkJVEVTVF9F
+UV9TVFIgKGFycmF5WzJdLCAiIik7DQo+ICsrCQlURVNUX0VRX1NUUiAoYXJy
+YXlbM10sICIiKTsNCj4gKysJCVRFU1RfRVFfU1RSIChhcnJheVs0XSwgImEi
+KTsNCj4gKysJCVRFU1RfRVFfU1RSIChhcnJheVs1XSwgInRlc3QiKTsNCj4g
+KysJCVRFU1RfRVFfUCAoYXJyYXlbNl0sIE5VTEwpOw0KPiArKw0KPiArKwkJ
+bmloX2ZyZWUgKGFycmF5KTsNCj4gKysJfQ0KPiArKw0KPiArKwlURVNUX0ZF
+QVRVUkUgKCJ3aXRoIG5vIHJlcGVhdCBhbmQgbXVsdGlwbGUgaWRlbnRpY2Fs
+IGRlbGltaXRlciAiDQo+ICsrCQkJImNoYXJhY3RlcnMgYXQgc3RyaW5nIGVu
+ZCIpOw0KPiArKwlURVNUX0FMTE9DX0ZBSUwgew0KPiArKwkJYXJyYXkgPSBu
+aWhfc3RyX3NwbGl0IChOVUxMLCAidGhpcyBpcyBhIHRlc3QgICIsICIgXHQi
+LCBGQUxTRSk7DQo+ICsrDQo+ICsrCQlpZiAodGVzdF9hbGxvY19mYWlsZWQp
+IHsNCj4gKysJCQlURVNUX0VRX1AgKGFycmF5LCBOVUxMKTsNCj4gKysJCQlj
+b250aW51ZTsNCj4gKysJCX0NCj4gKysNCj4gKysJCVRFU1RfQUxMT0NfU0la
+RSAoYXJyYXksIHNpemVvZiAoY2hhciAqKSAqIDYpOw0KPiArKwkJZm9yIChp
+ID0gMDsgaSA8IDU7IGkrKykNCj4gKysJCQlURVNUX0FMTE9DX1BBUkVOVCAo
+YXJyYXlbaV0sIGFycmF5KTsNCj4gKysNCj4gKysJCVRFU1RfRVFfU1RSIChh
+cnJheVswXSwgInRoaXMiKTsNCj4gKysJCVRFU1RfRVFfU1RSIChhcnJheVsx
+XSwgImlzIik7DQo+ICsrCQlURVNUX0VRX1NUUiAoYXJyYXlbMl0sICJhIik7
+DQo+ICsrCQlURVNUX0VRX1NUUiAoYXJyYXlbM10sICJ0ZXN0Iik7DQo+ICsr
+CQlURVNUX0VRX1NUUiAoYXJyYXlbNF0sICIiKTsNCj4gKysJCVRFU1RfRVFf
+UCAoYXJyYXlbNV0sIE5VTEwpOw0KPiArKw0KPiArKwkJbmloX2ZyZWUgKGFy
+cmF5KTsNCj4gKysJfQ0KPiArKw0KPiArKwlURVNUX0ZFQVRVUkUgKCJ3aXRo
+IG5vIHJlcGVhdCBhbmQgbXVsdGlwbGUgZGlmZmVyZW50IGRlbGltaXRlciAi
+DQo+ICsrCQkJImNoYXJhY3RlcnMgYXQgc3RyaW5nIGVuZCIpOw0KPiArKwlU
+RVNUX0FMTE9DX0ZBSUwgew0KPiArKwkJYXJyYXkgPSBuaWhfc3RyX3NwbGl0
+IChOVUxMLCAidGhpcyBpcyBhIHRlc3QgXHQiLCAiIFx0IiwgRkFMU0UpOw0K
+PiArKw0KPiArKwkJaWYgKHRlc3RfYWxsb2NfZmFpbGVkKSB7DQo+ICsrCQkJ
+VEVTVF9FUV9QIChhcnJheSwgTlVMTCk7DQo+ICsrCQkJY29udGludWU7DQo+
+ICsrCQl9DQo+ICsrDQo+ICsrCQlURVNUX0FMTE9DX1NJWkUgKGFycmF5LCBz
+aXplb2YgKGNoYXIgKikgKiA2KTsNCj4gKysJCWZvciAoaSA9IDA7IGkgPCA1
+OyBpKyspDQo+ICsrCQkJVEVTVF9BTExPQ19QQVJFTlQgKGFycmF5W2ldLCBh
+cnJheSk7DQo+ICsrDQo+ICsrCQlURVNUX0VRX1NUUiAoYXJyYXlbMF0sICJ0
+aGlzIik7DQo+ICsrCQlURVNUX0VRX1NUUiAoYXJyYXlbMV0sICJpcyIpOw0K
+PiArKwkJVEVTVF9FUV9TVFIgKGFycmF5WzJdLCAiYSIpOw0KPiArKwkJVEVT
+VF9FUV9TVFIgKGFycmF5WzNdLCAidGVzdCIpOw0KPiArKwkJVEVTVF9FUV9T
+VFIgKGFycmF5WzRdLCAiIik7DQo+ICsrCQlURVNUX0VRX1AgKGFycmF5WzVd
+LCBOVUxMKTsNCj4gKysNCj4gKysJCW5paF9mcmVlIChhcnJheSk7DQo+ICsr
+CX0NCj4gKysNCj4gKysJVEVTVF9GRUFUVVJFICgid2l0aCBubyByZXBlYXQg
+YW5kIG11bHRpcGxlIGlkZW50aWNhbCBkZWxpbWl0ZXIgIg0KPiArKwkJCSJj
+aGFyYWN0ZXJzIGF0IGJlZ2lubmluZywgbWlkZGxlIGFuZCBlbmQgb2Ygc3Ry
+aW5nIik7DQo+ICsrCVRFU1RfQUxMT0NfRkFJTCB7DQo+ICsrCQlhcnJheSA9
+IG5paF9zdHJfc3BsaXQgKE5VTEwsICIgICB0aGlzIGlzXG5cblxuYSB0ZXN0
+XHRcdFx0IiwgIiBcdFxuIiwgRkFMU0UpOw0KPiArKw0KPiArKwkJaWYgKHRl
+c3RfYWxsb2NfZmFpbGVkKSB7DQo+ICsrCQkJVEVTVF9FUV9QIChhcnJheSwg
+TlVMTCk7DQo+ICsrCQkJY29udGludWU7DQo+ICsrCQl9DQo+ICsrDQo+ICsr
+CQlURVNUX0FMTE9DX1NJWkUgKGFycmF5LCBzaXplb2YgKGNoYXIgKikgKiAx
+Mik7DQo+ICsrCQlmb3IgKGkgPSAwOyBpIDwgMTE7IGkrKykNCj4gKysJCQlU
+RVNUX0FMTE9DX1BBUkVOVCAoYXJyYXlbaV0sIGFycmF5KTsNCj4gKysNCj4g
+KysJCVRFU1RfRVFfU1RSIChhcnJheVswXSwgIiIpOw0KPiArKwkJVEVTVF9F
+UV9TVFIgKGFycmF5WzFdLCAiIik7DQo+ICsrCQlURVNUX0VRX1NUUiAoYXJy
+YXlbMl0sICIiKTsNCj4gKysJCVRFU1RfRVFfU1RSIChhcnJheVszXSwgInRo
+aXMiKTsNCj4gKysJCVRFU1RfRVFfU1RSIChhcnJheVs0XSwgImlzIik7DQo+
+ICsrCQlURVNUX0VRX1NUUiAoYXJyYXlbNV0sICIiKTsNCj4gKysJCVRFU1Rf
+RVFfU1RSIChhcnJheVs2XSwgIiIpOw0KPiArKwkJVEVTVF9FUV9TVFIgKGFy
+cmF5WzddLCAiYSIpOw0KPiArKwkJVEVTVF9FUV9TVFIgKGFycmF5WzhdLCAi
+dGVzdCIpOw0KPiArKwkJVEVTVF9FUV9TVFIgKGFycmF5WzldLCAiIik7DQo+
+ICsrCQlURVNUX0VRX1NUUiAoYXJyYXlbMTBdLCAiIik7DQo+ICsrCQlURVNU
+X0VRX1AgKGFycmF5WzExXSwgTlVMTCk7DQo+ICsrDQo+ICsrCQluaWhfZnJl
+ZSAoYXJyYXkpOw0KPiArKwl9DQo+ICsrDQo+ICsrCVRFU1RfRkVBVFVSRSAo
+IndpdGggbm8gcmVwZWF0IGFuZCBtdWx0aXBsZSBkaWZmZXJlbnQgZGVsaW1p
+dGVyICINCj4gKysJCQkiY2hhcmFjdGVycyBhdCBiZWdpbm5pbmcsIG1pZGRs
+ZSBhbmQgZW5kIG9mIHN0cmluZyIpOw0KPiArKwlURVNUX0FMTE9DX0ZBSUwg
+ew0KPiArKwkJYXJyYXkgPSBuaWhfc3RyX3NwbGl0IChOVUxMLCAiOiBcbnRo
+aXMgaXNcdCBcbjphIHRlc3Q6XG4gIiwgIlxuIDpcdCIsIEZBTFNFKTsNCj4g
+KysNCj4gKysJCWlmICh0ZXN0X2FsbG9jX2ZhaWxlZCkgew0KPiArKwkJCVRF
+U1RfRVFfUCAoYXJyYXksIE5VTEwpOw0KPiArKwkJCWNvbnRpbnVlOw0KPiAr
+KwkJfQ0KPiArKw0KPiArKwkJVEVTVF9BTExPQ19TSVpFIChhcnJheSwgc2l6
+ZW9mIChjaGFyICopICogMTMpOw0KPiArKwkJZm9yIChpID0gMDsgaSA8IDEy
+OyBpKyspDQo+ICsrCQkJVEVTVF9BTExPQ19QQVJFTlQgKGFycmF5W2ldLCBh
+cnJheSk7DQo+ICsrDQo+ICsrCQlURVNUX0VRX1NUUiAoYXJyYXlbMF0sICIi
+KTsNCj4gKysJCVRFU1RfRVFfU1RSIChhcnJheVsxXSwgIiIpOw0KPiArKwkJ
+VEVTVF9FUV9TVFIgKGFycmF5WzJdLCAiIik7DQo+ICsrCQlURVNUX0VRX1NU
+UiAoYXJyYXlbM10sICJ0aGlzIik7DQo+ICsrCQlURVNUX0VRX1NUUiAoYXJy
+YXlbNF0sICJpcyIpOw0KPiArKwkJVEVTVF9FUV9TVFIgKGFycmF5WzVdLCAi
+Iik7DQo+ICsrCQlURVNUX0VRX1NUUiAoYXJyYXlbNl0sICIiKTsNCj4gKysJ
+CVRFU1RfRVFfU1RSIChhcnJheVs3XSwgIiIpOw0KPiArKwkJVEVTVF9FUV9T
+VFIgKGFycmF5WzhdLCAiYSIpOw0KPiArKwkJVEVTVF9FUV9TVFIgKGFycmF5
+WzldLCAidGVzdCIpOw0KPiArKwkJVEVTVF9FUV9TVFIgKGFycmF5WzEwXSwg
+IiIpOw0KPiArKwkJVEVTVF9FUV9TVFIgKGFycmF5WzExXSwgIiIpOw0KPiAr
+KwkJVEVTVF9FUV9QIChhcnJheVsxMl0sIE5VTEwpOw0KPiArKw0KPiArKwkJ
+bmloX2ZyZWUgKGFycmF5KTsNCj4gKysJfQ0KPiArIA0KPiArIAkvKiBDaGVj
+ayB0aGF0IHdlIGNhbiBzcGxpdCBhIHN0cmluZyB0cmVhdGluZyBtdWx0aXBs
+ZSBjb25zZWN1dGl2ZQ0KPiArIAkgKiBtYXRjaGluZyBjaGFyYWN0ZXJzIGFz
+IGEgc2luZ2xlIHNlcGFyYXRvciB0byBiZSBza2lwcGVkLg0KPiArQEAgLTY0
+NSw2ICs4NTQsMTc3IEBADQo+ICsgCQluaWhfZnJlZSAoYXJyYXkpOw0KPiAr
+IAl9DQo+ICsgDQo+ICsrCS8qIENoZWNrIHRoYXQgd2UgY2FuIHNwbGl0IGEg
+c3RyaW5nIGNvbnRhaW5pbmcgbXVsdGlwbGUNCj4gKysJICogb2NjdXJlbmNl
+cyBvZiBvbmUgb2YgdGhlIGRlbGltaXRlciBjaGFyYWN0ZXJzIGF0IHRoZQ0K
+PiArKwkgKiBiZWdpbm5pbmcgb2YgdGhlIHN0cmluZy4NCj4gKysJICovDQo+
+ICsrCVRFU1RfRkVBVFVSRSAoIndpdGggcmVwZWF0IGFuZCBtdWx0aXBsZSBp
+ZGVudGljYWwgYWRqYWNlbnQgZGVsaW1pdGVyIGNoYXJhY3RlcnMgYXQgc3Ry
+aW5nIHN0YXJ0Iik7DQo+ICsrCVRFU1RfQUxMT0NfRkFJTCB7DQo+ICsrCQlh
+cnJheSA9IG5paF9zdHJfc3BsaXQgKE5VTEwsICJcblxuaGVsbG8iLCAiIFx0
+XHJcbiIsIFRSVUUpOw0KPiArKw0KPiArKwkJaWYgKHRlc3RfYWxsb2NfZmFp
+bGVkKSB7DQo+ICsrCQkJVEVTVF9FUV9QIChhcnJheSwgTlVMTCk7DQo+ICsr
+CQkJY29udGludWU7DQo+ICsrCQl9DQo+ICsrDQo+ICsrCQlURVNUX0FMTE9D
+X1NJWkUgKGFycmF5LCBzaXplb2YgKGNoYXIgKikgKiAyKTsNCj4gKysJCWZv
+ciAoaSA9IDA7IGkgPCAxOyBpKyspDQo+ICsrCQkJVEVTVF9BTExPQ19QQVJF
+TlQgKGFycmF5W2ldLCBhcnJheSk7DQo+ICsrDQo+ICsrCQlURVNUX0VRX1NU
+UiAoYXJyYXlbMF0sICJoZWxsbyIpOw0KPiArKwkJVEVTVF9FUV9QIChhcnJh
+eVsxXSwgTlVMTCk7DQo+ICsrDQo+ICsrCQluaWhfZnJlZSAoYXJyYXkpOw0K
+PiArKwl9DQo+ICsrDQo+ICsrCVRFU1RfRkVBVFVSRSAoIndpdGggcmVwZWF0
+IGFuZCBtdWx0aXBsZSBkaWZmZXJlbnQgYWRqYWNlbnQgZGVsaW1pdGVyIGNo
+YXJhY3RlcnMgYXQgc3RyaW5nIHN0YXJ0Iik7DQo+ICsrCVRFU1RfQUxMT0Nf
+RkFJTCB7DQo+ICsrCQlhcnJheSA9IG5paF9zdHJfc3BsaXQgKE5VTEwsICJc
+blxyIGhlbGxvIiwgIiBcdFxyXG4iLCBUUlVFKTsNCj4gKysNCj4gKysJCWlm
+ICh0ZXN0X2FsbG9jX2ZhaWxlZCkgew0KPiArKwkJCVRFU1RfRVFfUCAoYXJy
+YXksIE5VTEwpOw0KPiArKwkJCWNvbnRpbnVlOw0KPiArKwkJfQ0KPiArKw0K
+PiArKwkJVEVTVF9BTExPQ19TSVpFIChhcnJheSwgc2l6ZW9mIChjaGFyICop
+ICogMik7DQo+ICsrCQlmb3IgKGkgPSAwOyBpIDwgMTsgaSsrKQ0KPiArKwkJ
+CVRFU1RfQUxMT0NfUEFSRU5UIChhcnJheVtpXSwgYXJyYXkpOw0KPiArKw0K
+PiArKwkJVEVTVF9FUV9TVFIgKGFycmF5WzBdLCAiaGVsbG8iKTsNCj4gKysJ
+CVRFU1RfRVFfUCAoYXJyYXlbMV0sIE5VTEwpOw0KPiArKw0KPiArKwkJbmlo
+X2ZyZWUgKGFycmF5KTsNCj4gKysJfQ0KPiArKw0KPiArKwlURVNUX0ZFQVRV
+UkUgKCJ3aXRoIHJlcGVhdCBhbmQgbXVsdGlwbGUgaWRlbnRpY2FsIGFkamFj
+ZW50IGRlbGltaXRlciAiDQo+ICsrCQkJImNoYXJhY3RlcnMgd2l0aGluIHN0
+cmluZyIpOw0KPiArKwlURVNUX0FMTE9DX0ZBSUwgew0KPiArKwkJYXJyYXkg
+PSBuaWhfc3RyX3NwbGl0IChOVUxMLCAiaGVsbG9cblxyd29ybGQiLCAiIFx0
+XG5cciIsIFRSVUUpOw0KPiArKw0KPiArKwkJaWYgKHRlc3RfYWxsb2NfZmFp
+bGVkKSB7DQo+ICsrCQkJVEVTVF9FUV9QIChhcnJheSwgTlVMTCk7DQo+ICsr
+CQkJY29udGludWU7DQo+ICsrCQl9DQo+ICsrDQo+ICsrCQlURVNUX0FMTE9D
+X1NJWkUgKGFycmF5LCBzaXplb2YgKGNoYXIgKikgKiAzKTsNCj4gKysJCWZv
+ciAoaSA9IDA7IGkgPCAyOyBpKyspDQo+ICsrCQkJVEVTVF9BTExPQ19QQVJF
+TlQgKGFycmF5W2ldLCBhcnJheSk7DQo+ICsrDQo+ICsrCQlURVNUX0VRX1NU
+UiAoYXJyYXlbMF0sICJoZWxsbyIpOw0KPiArKwkJVEVTVF9FUV9TVFIgKGFy
+cmF5WzFdLCAid29ybGQiKTsNCj4gKysJCVRFU1RfRVFfUCAoYXJyYXlbMl0s
+IE5VTEwpOw0KPiArKw0KPiArKwkJbmloX2ZyZWUgKGFycmF5KTsNCj4gKysJ
+fQ0KPiArKw0KPiArKwlURVNUX0ZFQVRVUkUgKCJ3aXRoIHJlcGVhdCBhbmQg
+bXVsdGlwbGUgZGlmZmVyZW50IGFkamFjZW50IGRlbGltaXRlciAiDQo+ICsr
+CQkJImNoYXJhY3RlcnMgd2l0aGluIHN0cmluZyIpOw0KPiArKwlURVNUX0FM
+TE9DX0ZBSUwgew0KPiArKwkJYXJyYXkgPSBuaWhfc3RyX3NwbGl0IChOVUxM
+LCAiaGVsbG9cblxyXHR3b3JsZCIsICIgXHRcblxyIiwgVFJVRSk7DQo+ICsr
+DQo+ICsrCQlpZiAodGVzdF9hbGxvY19mYWlsZWQpIHsNCj4gKysJCQlURVNU
+X0VRX1AgKGFycmF5LCBOVUxMKTsNCj4gKysJCQljb250aW51ZTsNCj4gKysJ
+CX0NCj4gKysNCj4gKysJCVRFU1RfQUxMT0NfU0laRSAoYXJyYXksIHNpemVv
+ZiAoY2hhciAqKSAqIDMpOw0KPiArKwkJZm9yIChpID0gMDsgaSA8IDI7IGkr
+KykNCj4gKysJCQlURVNUX0FMTE9DX1BBUkVOVCAoYXJyYXlbaV0sIGFycmF5
+KTsNCj4gKysNCj4gKysJCVRFU1RfRVFfU1RSIChhcnJheVswXSwgImhlbGxv
+Iik7DQo+ICsrCQlURVNUX0VRX1NUUiAoYXJyYXlbMV0sICJ3b3JsZCIpOw0K
+PiArKwkJVEVTVF9FUV9QIChhcnJheVsyXSwgTlVMTCk7DQo+ICsrDQo+ICsr
+CQluaWhfZnJlZSAoYXJyYXkpOw0KPiArKwl9DQo+ICsrDQo+ICsrCVRFU1Rf
+RkVBVFVSRSAoIndpdGggcmVwZWF0IGFuZCBtdWx0aXBsZSBpZGVudGljYWwg
+YWRqYWNlbnQgZGVsaW1pdGVyICINCj4gKysJCQkiY2hhcmFjdGVycyBhdCBz
+dHJpbmcgZW5kIik7DQo+ICsrCVRFU1RfQUxMT0NfRkFJTCB7DQo+ICsrCQlh
+cnJheSA9IG5paF9zdHJfc3BsaXQgKE5VTEwsICJoZWxsb1xuXG5cblxuXG5c
+blxuIiwgIiBcdFxyXG4iLCBUUlVFKTsNCj4gKysNCj4gKysJCWlmICh0ZXN0
+X2FsbG9jX2ZhaWxlZCkgew0KPiArKwkJCVRFU1RfRVFfUCAoYXJyYXksIE5V
+TEwpOw0KPiArKwkJCWNvbnRpbnVlOw0KPiArKwkJfQ0KPiArKw0KPiArKwkJ
+VEVTVF9BTExPQ19TSVpFIChhcnJheSwgc2l6ZW9mIChjaGFyICopICogMik7
+DQo+ICsrCQlmb3IgKGkgPSAwOyBpIDwgMTsgaSsrKQ0KPiArKwkJCVRFU1Rf
+QUxMT0NfUEFSRU5UIChhcnJheVtpXSwgYXJyYXkpOw0KPiArKw0KPiArKwkJ
+VEVTVF9FUV9TVFIgKGFycmF5WzBdLCAiaGVsbG8iKTsNCj4gKysJCVRFU1Rf
+RVFfUCAoYXJyYXlbMV0sIE5VTEwpOw0KPiArKw0KPiArKwkJbmloX2ZyZWUg
+KGFycmF5KTsNCj4gKysJfQ0KPiArKw0KPiArKwlURVNUX0ZFQVRVUkUgKCJ3
+aXRoIHJlcGVhdCBhbmQgbXVsdGlwbGUgZGlmZmVyZW50IGFkamFjZW50IGRl
+bGltaXRlciAiDQo+ICsrCQkJImNoYXJhY3RlcnMgYXQgc3RyaW5nIGVuZCIp
+Ow0KPiArKwlURVNUX0FMTE9DX0ZBSUwgew0KPiArKwkJYXJyYXkgPSBuaWhf
+c3RyX3NwbGl0IChOVUxMLCAiaGVsbG8gXHJcdFxyXHRcbiAiLCAiIFx0XHJc
+biIsIFRSVUUpOw0KPiArKw0KPiArKwkJaWYgKHRlc3RfYWxsb2NfZmFpbGVk
+KSB7DQo+ICsrCQkJVEVTVF9FUV9QIChhcnJheSwgTlVMTCk7DQo+ICsrCQkJ
+Y29udGludWU7DQo+ICsrCQl9DQo+ICsrDQo+ICsrCQlURVNUX0FMTE9DX1NJ
+WkUgKGFycmF5LCBzaXplb2YgKGNoYXIgKikgKiAyKTsNCj4gKysJCWZvciAo
+aSA9IDA7IGkgPCAxOyBpKyspDQo+ICsrCQkJVEVTVF9BTExPQ19QQVJFTlQg
+KGFycmF5W2ldLCBhcnJheSk7DQo+ICsrDQo+ICsrCQlURVNUX0VRX1NUUiAo
+YXJyYXlbMF0sICJoZWxsbyIpOw0KPiArKwkJVEVTVF9FUV9QIChhcnJheVsx
+XSwgTlVMTCk7DQo+ICsrDQo+ICsrCQluaWhfZnJlZSAoYXJyYXkpOw0KPiAr
+Kwl9DQo+ICsrDQo+ICsrCVRFU1RfRkVBVFVSRSAoIndpdGggcmVwZWF0IGFu
+ZCBtdWx0aXBsZSBpZGVudGljYWwgYWRqYWNlbnQgZGVsaW1pdGVyICINCj4g
+KysJCQkiY2hhcmFjdGVycyBhdCBiZWdpbm5pbmcsIG1pZGRsZSBhbmQgZW5k
+IG9mIHN0cmluZyIpOw0KPiArKwlURVNUX0FMTE9DX0ZBSUwgew0KPiArKwkJ
+YXJyYXkgPSBuaWhfc3RyX3NwbGl0IChOVUxMLA0KPiArKwkJCQkiICAgICAg
+ICBoZWxsb1xuXG5cbiwgIHdvcmxkXG5cblxuIiwNCj4gKysJCQkJIlxyXHRc
+biAiLCBUUlVFKTsNCj4gKysNCj4gKysJCWlmICh0ZXN0X2FsbG9jX2ZhaWxl
+ZCkgew0KPiArKwkJCVRFU1RfRVFfUCAoYXJyYXksIE5VTEwpOw0KPiArKwkJ
+CWNvbnRpbnVlOw0KPiArKwkJfQ0KPiArKw0KPiArKwkJVEVTVF9BTExPQ19T
+SVpFIChhcnJheSwgc2l6ZW9mIChjaGFyICopICogNCk7DQo+ICsrCQlmb3Ig
+KGkgPSAwOyBpIDwgMzsgaSsrKQ0KPiArKwkJCVRFU1RfQUxMT0NfUEFSRU5U
+IChhcnJheVtpXSwgYXJyYXkpOw0KPiArKw0KPiArKwkJVEVTVF9FUV9TVFIg
+KGFycmF5WzBdLCAiaGVsbG8iKTsNCj4gKysJCVRFU1RfRVFfU1RSIChhcnJh
+eVsxXSwgIiwiKTsNCj4gKysJCVRFU1RfRVFfU1RSIChhcnJheVsyXSwgIndv
+cmxkIik7DQo+ICsrCQlURVNUX0VRX1AgKGFycmF5WzNdLCBOVUxMKTsNCj4g
+KysNCj4gKysJCW5paF9mcmVlIChhcnJheSk7DQo+ICsrCX0NCj4gKysNCj4g
+KysJVEVTVF9GRUFUVVJFICgid2l0aCByZXBlYXQgYW5kIG11bHRpcGxlIGRp
+ZmZlcmVudCBhZGphY2VudCBkZWxpbWl0ZXIgIg0KPiArKwkJCSJjaGFyYWN0
+ZXJzIGF0IGJlZ2lubmluZywgbWlkZGxlIGFuZCBlbmQgb2Ygc3RyaW5nIik7
+DQo+ICsrCVRFU1RfQUxMT0NfRkFJTCB7DQo+ICsrCQlhcnJheSA9IG5paF9z
+dHJfc3BsaXQgKE5VTEwsDQo+ICsrCQkJCSJcbiAgICBcclx0aGVsbG9cblxu
+XHIgLCBcblx0XHJ3b3JsZFx0IFxyXG4gXG4iLA0KPiArKwkJCQkiIFx0XG5c
+ciIsIFRSVUUpOw0KPiArKw0KPiArKwkJaWYgKHRlc3RfYWxsb2NfZmFpbGVk
+KSB7DQo+ICsrCQkJVEVTVF9FUV9QIChhcnJheSwgTlVMTCk7DQo+ICsrCQkJ
+Y29udGludWU7DQo+ICsrCQl9DQo+ICsrDQo+ICsrCQlURVNUX0FMTE9DX1NJ
+WkUgKGFycmF5LCBzaXplb2YgKGNoYXIgKikgKiA0KTsNCj4gKysJCWZvciAo
+aSA9IDA7IGkgPCAzOyBpKyspDQo+ICsrCQkJVEVTVF9BTExPQ19QQVJFTlQg
+KGFycmF5W2ldLCBhcnJheSk7DQo+ICsrDQo+ICsrCQlURVNUX0VRX1NUUiAo
+YXJyYXlbMF0sICJoZWxsbyIpOw0KPiArKwkJVEVTVF9FUV9TVFIgKGFycmF5
+WzFdLCAiLCIpOw0KPiArKwkJVEVTVF9FUV9TVFIgKGFycmF5WzJdLCAid29y
+bGQiKTsNCj4gKysJCVRFU1RfRVFfUCAoYXJyYXlbM10sIE5VTEwpOw0KPiAr
+Kw0KPiArKwkJbmloX2ZyZWUgKGFycmF5KTsNCj4gKysJfQ0KPiArIA0KPiAr
+IAkvKiBDaGVjayB0aGF0IHdlIGNhbiBnaXZlIGFuIGVtcHR5IHN0cmluZywg
+YW5kIGVuZCB1cCB3aXRoIGENCj4gKyAJICogb25lLWVsZW1lbnQgYXJyYXkg
+dGhhdCBvbmx5IGNvbnRhaW5zIGEgTlVMTCBwb2ludGVyLg0KPiArLS0tIGxp
+Ym5paC0xLjAuMy5vcmlnL25paC90ZXN0cy90ZXN0X2ZpbGUuYw0KPiArKysr
+IGxpYm5paC0xLjAuMy9uaWgvdGVzdHMvdGVzdF9maWxlLmMNCj4gK0BAIC03
+MjQsNiArNzI0LDI1IEBADQo+ICsgCXJldHVybiBGQUxTRTsNCj4gKyB9DQo+
+ICsgDQo+ICsrLyogZmluZCBvbmx5IGZyb2RvIGZpbGVzICovDQo+ICsrc3Rh
+dGljIGludA0KPiArK215X2ZpbHRlcl9mcm9kb19maWxlICh2b2lkICAgICAg
+ICpkYXRhLA0KPiArKwkgICBjb25zdCBjaGFyICpwYXRoLA0KPiArKwkgICBp
+bnQgICAgICAgICBpc19kaXIpDQo+ICsrew0KPiArKwljaGFyICpzbGFzaDsN
+Cj4gKysNCj4gKysJaWYgKGlzX2RpcikNCj4gKysJCXJldHVybiBGQUxTRTsN
+Cj4gKysNCj4gKysJc2xhc2ggPSBzdHJyY2hyIChwYXRoLCAnLycpOw0KPiAr
+KwlpZiAoc3RyY21wIChzbGFzaCwgIi9mcm9kbyIpKQ0KPiArKwkJcmV0dXJu
+IFRSVUU7DQo+ICsrDQo+ICsrCXJldHVybiBGQUxTRTsNCj4gKyt9DQo+ICsr
+DQo+ICsrDQo+ICsgc3RhdGljIGludCBsb2dnZXJfY2FsbGVkID0gMDsNCj4g
+KyANCj4gKyBzdGF0aWMgaW50DQo+ICtAQCAtOTA1LDYgKzkyNCw0OCBAQA0K
+PiArIAkJVEVTVF9FUV9TVFIgKHYtPnBhdGgsIGZpbGVuYW1lKTsNCj4gKyAN
+Cj4gKyAJCW5paF9mcmVlICh2aXNpdGVkKTsNCj4gKysNCj4gKysJCQkJLyog
+VHJ5IGFsc28gaW52ZXJzZSBmaWx0ZXIgKi8NCj4gKysJCVRFU1RfQUxMT0Nf
+U0FGRSB7DQo+ICsrCQkJdmlzaXRvcl9jYWxsZWQgPSAwOw0KPiArKwkJCXZp
+c2l0ZWQgPSBuaWhfbGlzdF9uZXcgKE5VTEwpOw0KPiArKwkJfQ0KPiArKw0K
+PiArKwkJcmV0ID0gbmloX2Rpcl93YWxrIChkaXJuYW1lLCBteV9maWx0ZXJf
+ZnJvZG9fZmlsZSwNCj4gKysJCQkJICAgIG15X3Zpc2l0b3IsIE5VTEwsICZy
+ZXQpOw0KPiArKw0KPiArKwkJVEVTVF9FUSAocmV0LCAwKTsNCj4gKysJCVRF
+U1RfRVEgKHZpc2l0b3JfY2FsbGVkLCA0KTsNCj4gKysNCj4gKysJCXYgPSAo
+VmlzaXRlZCAqKXZpc2l0ZWQtPm5leHQ7DQo+ICsrCQlURVNUX0VRICh2LT5k
+YXRhLCAmcmV0KTsNCj4gKysJCVRFU1RfRVFfU1RSICh2LT5kaXJuYW1lLCBk
+aXJuYW1lKTsNCj4gKysJCXN0cmNweSAoZmlsZW5hbWUsIGRpcm5hbWUpOw0K
+PiArKwkJc3RyY2F0IChmaWxlbmFtZSwgIi9iYXIiKTsNCj4gKysJCVRFU1Rf
+RVFfU1RSICh2LT5wYXRoLCBmaWxlbmFtZSk7DQo+ICsrDQo+ICsrCQl2ID0g
+KFZpc2l0ZWQgKil2LT5lbnRyeS5uZXh0Ow0KPiArKwkJVEVTVF9FUSAodi0+
+ZGF0YSwgJnJldCk7DQo+ICsrCQlURVNUX0VRX1NUUiAodi0+ZGlybmFtZSwg
+ZGlybmFtZSk7DQo+ICsrCQlzdHJjcHkgKGZpbGVuYW1lLCBkaXJuYW1lKTsN
+Cj4gKysJCXN0cmNhdCAoZmlsZW5hbWUsICIvYmFyL2Zyb2RvIik7DQo+ICsr
+CQlURVNUX0VRX1NUUiAodi0+cGF0aCwgZmlsZW5hbWUpOw0KPiArKw0KPiAr
+KwkJdiA9IChWaXNpdGVkICopdi0+ZW50cnkubmV4dDsNCj4gKysJCVRFU1Rf
+RVEgKHYtPmRhdGEsICZyZXQpOw0KPiArKwkJVEVTVF9FUV9TVFIgKHYtPmRp
+cm5hbWUsIGRpcm5hbWUpOw0KPiArKwkJc3RyY3B5IChmaWxlbmFtZSwgZGly
+bmFtZSk7DQo+ICsrCQlzdHJjYXQgKGZpbGVuYW1lLCAiL2JheiIpOw0KPiAr
+KwkJVEVTVF9FUV9TVFIgKHYtPnBhdGgsIGZpbGVuYW1lKTsNCj4gKysNCj4g
+KysJCXYgPSAoVmlzaXRlZCAqKXYtPmVudHJ5Lm5leHQ7DQo+ICsrCQlURVNU
+X0VRICh2LT5kYXRhLCAmcmV0KTsNCj4gKysJCVRFU1RfRVFfU1RSICh2LT5k
+aXJuYW1lLCBkaXJuYW1lKTsNCj4gKysJCXN0cmNweSAoZmlsZW5hbWUsIGRp
+cm5hbWUpOw0KPiArKwkJc3RyY2F0IChmaWxlbmFtZSwgIi9mcm9kbyIpOw0K
+PiArKwkJVEVTVF9FUV9TVFIgKHYtPnBhdGgsIGZpbGVuYW1lKTsNCj4gKysN
+Cj4gKysJCW5paF9mcmVlICh2aXNpdGVkKTsNCj4gKyAJfQ0KPiArIA0KPiAr
+IA0KPiArLS0tIGxpYm5paC0xLjAuMy5vcmlnL2RlYmlhbi9jb250cm9sDQo+
+ICsrKysgbGlibmloLTEuMC4zL2RlYmlhbi9jb250cm9sDQo+ICtAQCAtMCww
+ICsxLDgxIEBADQo+ICsrU291cmNlOiBsaWJuaWgNCj4gKytTZWN0aW9uOiBs
+aWJzDQo+ICsrUHJpb3JpdHk6IHJlcXVpcmVkDQo+ICsrTWFpbnRhaW5lcjog
+VWJ1bnR1IERldmVsb3BlcnMgPHVidW50dS1kZXZlbC1kaXNjdXNzQGxpc3Rz
+LnVidW50dS5jb20+DQo+ICsrWFNCQy1PcmlnaW5hbC1NYWludGFpbmVyOiBT
+Y290dCBKYW1lcyBSZW1uYW50IDxzY290dEBuZXRzcGxpdC5jb20+DQo+ICsr
+U3RhbmRhcmRzLVZlcnNpb246IDMuOS40DQo+ICsrQnVpbGQtRGVwZW5kczog
+ZGViaGVscGVyICg+PSA5KSwgcGtnLWNvbmZpZyAoPj0gMC4yMiksIGxpYmRi
+dXMtMS1kZXYgKD49IDEuNCksIGxpYmV4cGF0MS1kZXYgKD49IDIuMC4wKSwg
+ZGJ1cyAoPj0gMS40KSwgbGliYzYtZGV2ICg+PSAyLjE1fikgfCBsaWJjNi4x
+LWRldiAoPj0gMi4xNX4pLA0KPiArKyAgICAgICAgICAgICAgIGRoLWF1dG9y
+ZWNvbmYsIGF1dG9wb2ludCwgZHBrZy1kZXYgKD49IDEuMTYuMX4pDQo+ICsr
+IyBUbyBjcm9zcyBidWlsZCB0aGlzIHBhY2thZ2UgYWxzbyBuZWVkczogbGli
+ZGJ1cy0xLWRldjpuYXRpdmUgKD49IDEuNCksIGxpYmV4cGF0MS1kZXY6bmF0
+aXZlICg+PSAyLjAuMCkNCj4gKysjIEJ1dCA6bmF0aXZlIGJ1aWxkLWRlcHMg
+YXJlIG5vdCBzdXBwb3J0ZWQgeWV0LCBzbyBpbnN0ZWFkIG9uZSBjYW4gZG8N
+Cj4gKysjICQgYXB0LWdldCBidWlsZC1kZXAgbGlibmloDQo+ICsrIyAkIGFw
+dC1nZXQgYnVpbGQtZGVwIGxpYm5paCAtYWFybWhmDQo+ICsrIyBpbnN0ZWFk
+IHRvIGdldCBhbGwgcmVxdWlyZWQgYnVpbGQtZGVwcw0KPiArK1Zjcy1CenI6
+IGxwOnVidW50dS9saWJuaWgNCj4gKytYU0MtRGViaWFuLVZjcy1HaXQ6IGdp
+dDovL2dpdC5kZWJpYW4ub3JnL2dpdC9jb2xsYWItbWFpbnQvbGlibmloLmdp
+dA0KPiArK1hTQy1EZWJpYW4tVmNzLUJyb3dzZXI6IGh0dHA6Ly9naXQuZGVi
+aWFuLm9yZy8/cD1jb2xsYWItbWFpbnQvbGlibmloLmdpdDthPXN1bW1hcnkN
+Cj4gKytIb21lcGFnZTogaHR0cHM6Ly9sYXVuY2hwYWQubmV0L2xpYm5paA0K
+PiArKw0KPiArK1BhY2thZ2U6IGxpYm5paDENCj4gKytBcmNoaXRlY3R1cmU6
+IGFueQ0KPiArK1ByZS1EZXBlbmRzOiAke21pc2M6UHJlLURlcGVuZHN9LCAk
+e3NobGliczpEZXBlbmRzfSwgJHttaXNjOkRlcGVuZHN9DQo+ICsrTXVsdGkt
+QXJjaDogc2FtZQ0KPiArK0Rlc2NyaXB0aW9uOiBOSUggVXRpbGl0eSBMaWJy
+YXJ5DQo+ICsrIGxpYm5paCBpcyBhIGxpZ2h0LXdlaWdodCAic3RhbmRhcmQg
+bGlicmFyeSIgb2YgQyBmdW5jdGlvbnMgdG8gZWFzZSB0aGUNCj4gKysgZGV2
+ZWxvcG1lbnQgb2Ygb3RoZXIgbGlicmFyaWVzIGFuZCBhcHBsaWNhdGlvbnMs
+IGVzcGVjaWFsbHkgdGhvc2UNCj4gKysgbm9ybWFsbHkgZm91bmQgaW4gL2xp
+Yi4NCj4gKysgLg0KPiArKyBUaGlzIHBhY2thZ2UgY29udGFpbnMgdGhlIHNo
+YXJlZCBsaWJyYXJ5Lg0KPiArKw0KPiArK1BhY2thZ2U6IGxpYm5paC1kZXYN
+Cj4gKytQcmlvcml0eTogb3B0aW9uYWwNCj4gKytTZWN0aW9uOiBsaWJkZXZl
+bA0KPiArK0FyY2hpdGVjdHVyZTogYW55DQo+ICsrTXVsdGktQXJjaDogc2Ft
+ZQ0KPiArK0RlcGVuZHM6IGxpYm5paDEgKD0gJHtiaW5hcnk6VmVyc2lvbn0p
+LCAke3NobGliczpEZXBlbmRzfSwgJHttaXNjOkRlcGVuZHN9DQo+ICsrRGVz
+Y3JpcHRpb246IE5JSCBVdGlsaXR5IExpYnJhcnkgKGRldmVsb3BtZW50IGZp
+bGVzKQ0KPiArKyBsaWJuaWggaXMgYSBsaWdodC13ZWlnaHQgInN0YW5kYXJk
+IGxpYnJhcnkiIG9mIEMgZnVuY3Rpb25zIHRvIGVhc2UgdGhlDQo+ICsrIGRl
+dmVsb3BtZW50IG9mIG90aGVyIGxpYnJhcmllcyBhbmQgYXBwbGljYXRpb25z
+LCBlc3BlY2lhbGx5IHRob3NlDQo+ICsrIG5vcm1hbGx5IGZvdW5kIGluIC9s
+aWIuDQo+ICsrIC4NCj4gKysgVGhpcyBwYWNrYWdlIGNvbnRhaW5zIHRoZSBz
+dGF0aWMgbGlicmFyeSBhbmQgQyBoZWFkZXIgZmlsZXMgd2hpY2ggYXJlDQo+
+ICsrIG5lZWRlZCBmb3IgZGV2ZWxvcGluZyBzb2Z0d2FyZSB1c2luZyBsaWJu
+aWguDQo+ICsrDQo+ICsrUGFja2FnZTogbGlibmloLWRidXMxDQo+ICsrQXJj
+aGl0ZWN0dXJlOiBhbnkNCj4gKytQcmUtRGVwZW5kczogJHttaXNjOlByZS1E
+ZXBlbmRzfQ0KPiArK0RlcGVuZHM6IGxpYm5paDEgKD0gJHtiaW5hcnk6VmVy
+c2lvbn0pLCAke3NobGliczpEZXBlbmRzfSwgJHttaXNjOkRlcGVuZHN9DQo+
+ICsrTXVsdGktQXJjaDogc2FtZQ0KPiArK0Rlc2NyaXB0aW9uOiBOSUggRC1C
+dXMgQmluZGluZ3MgTGlicmFyeQ0KPiArKyBsaWJuaWgtZGJ1cyBpcyBhIEQt
+QnVzIGJpbmRpbmdzIGxpYnJhcnkgdGhhdCBpbnRlZ3JhdGVzIHdpdGggdGhl
+IG1haW4NCj4gKysgbG9vcCBwcm92aWRlZCBieSBsaWJuaWguDQo+ICsrIC4N
+Cj4gKysgVGhpcyBwYWNrYWdlIGNvbnRhaW5zIHRoZSBzaGFyZWQgbGlicmFy
+eS4NCj4gKysNCj4gKytQYWNrYWdlOiBsaWJuaWgtZGJ1cy1kZXYNCj4gKytQ
+cmlvcml0eTogb3B0aW9uYWwNCj4gKytTZWN0aW9uOiBsaWJkZXZlbA0KPiAr
+K0FyY2hpdGVjdHVyZTogYW55DQo+ICsrTXVsdGktQXJjaDogc2FtZQ0KPiAr
+K0RlcGVuZHM6IGxpYm5paC1kYnVzMSAoPSAke2JpbmFyeTpWZXJzaW9ufSks
+IGxpYm5paC1kZXYgKD0gJHtiaW5hcnk6VmVyc2lvbn0pLCAke3NobGliczpE
+ZXBlbmRzfSwgJHttaXNjOkRlcGVuZHN9DQo+ICsrUmVjb21tZW5kczogbmlo
+LWRidXMtdG9vbCAoPSAke2JpbmFyeTpWZXJzaW9ufSkNCj4gKytEZXNjcmlw
+dGlvbjogTklIIEQtQnVzIEJpbmRpbmdzIExpYnJhcnkgKGRldmVsb3BtZW50
+IGZpbGVzKQ0KPiArKyBsaWJuaWgtZGJ1cyBpcyBhIEQtQnVzIGJpbmRpbmdz
+IGxpYnJhcnkgdGhhdCBpbnRlZ3JhdGVzIHdpdGggdGhlIG1haW4NCj4gKysg
+bG9vcCBwcm92aWRlZCBieSBsaWJuaWguDQo+ICsrIC4NCj4gKysgVGhpcyBw
+YWNrYWdlIGNvbnRhaW5zIHRoZSBzdGF0aWMgbGlicmFyeSBhbmQgQyBoZWFk
+ZXIgZmlsZXMgd2hpY2ggYXJlDQo+ICsrIG5lZWRlZCBmb3IgZGV2ZWxvcGlu
+ZyBzb2Z0d2FyZSB1c2luZyBsaWJuaWgtZGJ1cy4NCj4gKysNCj4gKytQYWNr
+YWdlOiBuaWgtZGJ1cy10b29sDQo+ICsrU2VjdGlvbjogZGV2ZWwNCj4gKytB
+cmNoaXRlY3R1cmU6IGFueQ0KPiArK011bHRpLUFyY2g6IGZvcmVpZ24NCj4g
+KytEZXBlbmRzOiAke3NobGliczpEZXBlbmRzfSwgJHttaXNjOkRlcGVuZHN9
+DQo+ICsrUmVjb21tZW5kczogbGlibmloLWRidXMtZGV2ICg9ICR7YmluYXJ5
+OlZlcnNpb259KQ0KPiArK0Rlc2NyaXB0aW9uOiBOSUggRC1CdXMgQmluZGlu
+ZyBUb29sDQo+ICsrIG5paC1kYnVzLXRvb2wgZ2VuZXJhdGVzIEMgc291cmNl
+IGNvZGUgZnJvbSB0aGUgRC1CdXMgSW50cm9zcGVjdGlvbiBYTUwNCj4gKysg
+ZGF0YSBwcm92aWRlZCBieSBtb3N0IHNlcnZpY2VzOyBlaXRoZXIgdG8gbWFr
+ZSBpbXBsZW1lbnRpbmcgdGhlDQo+ICsrIGRlc2NyaWJlZCBvYmplY3RzIGlu
+IEMgcHJvZ3JhbXMgb3IgdG8gbWFrZSBwcm94eWluZyB0byB0aGUgZGVzY3Jp
+YmVkDQo+ICsrIHJlbW90ZSBvYmplY3RzIGVhc2llci4NCj4gKysgLg0KPiAr
+KyBUaGUgZ2VuZXJhdGVkIGNvZGUgcmVxdWlyZXMgbGlibmloLWRidXMtZGV2
+IHRvIGJlIGNvbXBpbGVkLg0KPiArLS0tIGxpYm5paC0xLjAuMy5vcmlnL2Rl
+Ymlhbi9saWJuaWgtZGV2Lmluc3RhbGwNCj4gKysrKyBsaWJuaWgtMS4wLjMv
+ZGViaWFuL2xpYm5paC1kZXYuaW5zdGFsbA0KPiArQEAgLTAsMCArMSw2IEBA
+DQo+ICsrbGliLyovbGlibmloLmENCj4gKytsaWIvKi9saWJuaWguc28NCj4g
+Kyt1c3IvaW5jbHVkZS9saWJuaWguaA0KPiArK3Vzci9pbmNsdWRlL25paA0K
+PiArK3Vzci9saWIvKi9wa2djb25maWcvbGlibmloLnBjDQo+ICsrdXNyL3No
+YXJlL2FjbG9jYWwvbGlibmloLm00DQo+ICstLS0gbGlibmloLTEuMC4zLm9y
+aWcvZGViaWFuL2xpYm5paDEuZG9jcw0KPiArKysrIGxpYm5paC0xLjAuMy9k
+ZWJpYW4vbGlibmloMS5kb2NzDQo+ICtAQCAtMCwwICsxLDMgQEANCj4gKytB
+VVRIT1JTDQo+ICsrTkVXUw0KPiArK1JFQURNRQ0KPiArLS0tIGxpYm5paC0x
+LjAuMy5vcmlnL2RlYmlhbi9saWJuaWgtZGJ1czEuaW5zdGFsbA0KPiArKysr
+IGxpYm5paC0xLjAuMy9kZWJpYW4vbGlibmloLWRidXMxLmluc3RhbGwNCj4g
+K0BAIC0wLDAgKzEgQEANCj4gKytsaWIvKi9saWJuaWgtZGJ1cy5zby4qDQo+
+ICstLS0gbGlibmloLTEuMC4zLm9yaWcvZGViaWFuL2xpYm5paDEuaW5zdGFs
+bA0KPiArKysrIGxpYm5paC0xLjAuMy9kZWJpYW4vbGlibmloMS5pbnN0YWxs
+DQo+ICtAQCAtMCwwICsxIEBADQo+ICsrbGliLyovbGlibmloLnNvLioNCj4g
+Ky0tLSBsaWJuaWgtMS4wLjMub3JpZy9kZWJpYW4vcnVsZXMNCj4gKysrKyBs
+aWJuaWgtMS4wLjMvZGViaWFuL3J1bGVzDQo+ICtAQCAtMCwwICsxLDU0IEBA
+DQo+ICsrIyEvdXNyL2Jpbi9tYWtlIC1mDQo+ICsrDQo+ICsraW5jbHVkZSAv
+dXNyL3NoYXJlL2Rwa2cvYXJjaGl0ZWN0dXJlLm1rDQo+ICsrDQo+ICsrJToN
+Cj4gKysJZGggJEAgLS13aXRoIGF1dG9yZWNvbmYNCj4gKysNCj4gKysNCj4g
+KytDRkxBR1MgOj0gLVdhbGwgLWZzdGFjay1wcm90ZWN0b3IgLWZQSUUgJChz
+aGVsbCBkcGtnLWJ1aWxkZmxhZ3MgLS1nZXQgQ0ZMQUdTKQ0KPiArK0xERkxB
+R1MgOj0gLVdsLC0tYXMtbmVlZGVkIC1XbCwteixyZWxybyAtV2wsLXosbm93
+IC1waWUgJChzaGVsbCBkcGtnLWJ1aWxkZmxhZ3MgLS1nZXQgTERGTEFHUykN
+Cj4gKysNCj4gKytvdmVycmlkZV9kaF9hdXRvX2NvbmZpZ3VyZToNCj4gKytp
+ZmVxICgkKERFQl9CVUlMRF9HTlVfVFlQRSksICQoREVCX0hPU1RfR05VX1RZ
+UEUpKQ0KPiArKwlkaF9hdXRvX2NvbmZpZ3VyZSAtLSBDRkxBR1M9IiQoQ0ZM
+QUdTKSIgTERGTEFHUz0iJChMREZMQUdTKSIgXA0KPiArKwkJLS1saWJkaXI9
+L2xpYi8kKERFQl9IT1NUX01VTFRJQVJDSCkNCj4gKytlbHNlDQo+ICsrCWRo
+X2F1dG9fY29uZmlndXJlIC1CIGJ1aWxkLWRidXMtdG9vbC8gLS0gQ0ZMQUdT
+PSIkKENGTEFHUykiIExERkxBR1M9IiQoTERGTEFHUykiIFwNCj4gKysJCS0t
+bGliZGlyPS9saWIvJChERUJfQlVJTERfTVVMVElBUkNIKSBcDQo+ICsrCQkt
+LWhvc3Q9JChERUJfQlVJTERfR05VX1RZUEUpDQo+ICsrCWRoX2F1dG9fYnVp
+bGQgLUIgYnVpbGQtZGJ1cy10b29sLyAtLXBhcmFsbGVsDQo+ICsrCWRoX2F1
+dG9fY29uZmlndXJlIC0tIENGTEFHUz0iJChDRkxBR1MpIiBMREZMQUdTPSIk
+KExERkxBR1MpIiBcDQo+ICsrCQlOSUhfREJVU19UT09MPSQoQ1VSRElSKS9i
+dWlsZC1kYnVzLXRvb2wvbmloLWRidXMtdG9vbC9uaWgtZGJ1cy10b29sIFwN
+Cj4gKysJCS0tbGliZGlyPS9saWIvJChERUJfSE9TVF9NVUxUSUFSQ0gpDQo+
+ICsrZW5kaWYNCj4gKysNCj4gKytvdmVycmlkZV9kaF9hdXRvX2J1aWxkOg0K
+PiArKwlkaF9hdXRvX2J1aWxkIC0tcGFyYWxsZWwNCj4gKysNCj4gKytvdmVy
+cmlkZV9kaF9hdXRvX3Rlc3Q6DQo+ICsraWZlcSAoJChERUJfQlVJTERfR05V
+X1RZUEUpLCAkKERFQl9IT1NUX0dOVV9UWVBFKSkNCj4gKysJZGhfYXV0b190
+ZXN0IC0tcGFyYWxsZWwNCj4gKytlbmRpZg0KPiArKw0KPiArK292ZXJyaWRl
+X2RoX2F1dG9faW5zdGFsbDoNCj4gKysJZGhfYXV0b19pbnN0YWxsIC0tIHBr
+Z2NvbmZpZ2Rpcj1cJCR7cHJlZml4fS9saWIvJChERUJfSE9TVF9NVUxUSUFS
+Q0gpL3BrZ2NvbmZpZw0KPiArKw0KPiArK292ZXJyaWRlX2RoX21ha2VzaGxp
+YnM6DQo+ICsrCWRoX21ha2VzaGxpYnMgLXBsaWJuaWgxIC1WICdsaWJuaWgx
+ICg+PSAxLjAuMCknDQo+ICsrCWRoX21ha2VzaGxpYnMgLXBsaWJuaWgtZGJ1
+czEgLVYgJ2xpYm5paC1kYnVzMSAoPj0gMS4wLjApJw0KPiArKwlkaF9tYWtl
+c2hsaWJzIC1ObGlibmloMSAtTmxpYm5paC1kYnVzMQ0KPiArKw0KPiArK292
+ZXJyaWRlX2RoX3NobGliZGVwczoNCj4gKysJZGhfc2hsaWJkZXBzDQo+ICsr
+CXNlZCAtaSAncy8yXC4xNC8yLjE1LycgZGViaWFuLyouc3Vic3R2YXJzDQo+
+ICsrCXNlZCAtaSAncy8+PSAyLjE1KS8+PSAyLjE1fikvZycgZGViaWFuLyou
+c3Vic3R2YXJzDQo+ICsrDQo+ICsrDQo+ICsrIyBTeW1saW5rIC91c3Ivc2hh
+cmUvZG9jIGRpcmVjdG9yaWVzIHRvZ2V0aGVyDQo+ICsrb3ZlcnJpZGVfZGhf
+aW5zdGFsbGRvY3M6DQo+ICsrCWRoX2luc3RhbGxkb2NzIC0tbGluay1kb2M9
+bGlibmloMQ0KPiArKw0KPiArK292ZXJyaWRlX2RoX2NsZWFuOg0KPiArKwly
+bSAtcmYgYnVpbGQtZGJ1cy10b29sLw0KPiArKwlkaF9jbGVhbg0KPiArLS0t
+IGxpYm5paC0xLjAuMy5vcmlnL2RlYmlhbi9jb21wYXQNCj4gKysrKyBsaWJu
+aWgtMS4wLjMvZGViaWFuL2NvbXBhdA0KPiArQEAgLTAsMCArMSBAQA0KPiAr
+KzkNCj4gKy0tLSBsaWJuaWgtMS4wLjMub3JpZy9kZWJpYW4vbmloLWRidXMt
+dG9vbC5pbnN0YWxsDQo+ICsrKysgbGlibmloLTEuMC4zL2RlYmlhbi9uaWgt
+ZGJ1cy10b29sLmluc3RhbGwNCj4gK0BAIC0wLDAgKzEsMiBAQA0KPiArK3Vz
+ci9iaW4vbmloLWRidXMtdG9vbA0KPiArK3Vzci9zaGFyZS9tYW4vbWFuMS9u
+aWgtZGJ1cy10b29sLjENCj4gKy0tLSBsaWJuaWgtMS4wLjMub3JpZy9kZWJp
+YW4vY29weXJpZ2h0DQo+ICsrKysgbGlibmloLTEuMC4zL2RlYmlhbi9jb3B5
+cmlnaHQNCj4gK0BAIC0wLDAgKzEsMTggQEANCj4gKytUaGlzIGlzIHRoZSBV
+YnVudHUgcGFja2FnZSBvZiBsaWJuaWgsIHRoZSBOSUggVXRpbGl0eSBMaWJy
+YXJ5Lg0KPiArKw0KPiArK0NvcHlyaWdodCDCqSAyMDA5IENhbm9uaWNhbCBM
+dGQuDQo+ICsrQ29weXJpZ2h0IMKpIDIwMDkgU2NvdHQgSmFtZXMgUmVtbmFu
+dCA8c2NvdHRAbmV0c3BsaXQuY29tPg0KPiArKw0KPiArK0xpY2VuY2U6DQo+
+ICsrDQo+ICsrVGhpcyBwcm9ncmFtIGlzIGZyZWUgc29mdHdhcmU7IHlvdSBj
+YW4gcmVkaXN0cmlidXRlIGl0IGFuZC9vciBtb2RpZnkNCj4gKytpdCB1bmRl
+ciB0aGUgdGVybXMgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNl
+IHZlcnNpb24gMiwgYXMNCj4gKytwdWJsaXNoZWQgYnkgdGhlIEZyZWUgU29m
+dHdhcmUgRm91bmRhdGlvbi4NCj4gKysNCj4gKytUaGlzIHByb2dyYW0gaXMg
+ZGlzdHJpYnV0ZWQgaW4gdGhlIGhvcGUgdGhhdCBpdCB3aWxsIGJlIHVzZWZ1
+bCwgYnV0DQo+ICsrV0lUSE9VVCBBTlkgV0FSUkFOVFk7IHdpdGhvdXQgZXZl
+biB0aGUgaW1wbGllZCB3YXJyYW50eSBvZg0KPiArK01FUkNIQU5UQUJJTElU
+WSBvciBGSVRORVNTIEZPUiBBIFBBUlRJQ1VMQVIgUFVSUE9TRS4gIFNlZSB0
+aGUgR05VDQo+ICsrR2VuZXJhbCBQdWJsaWMgTGljZW5zZSBmb3IgbW9yZSBk
+ZXRhaWxzLg0KPiArKw0KPiArK09uIFVidW50dSBzeXN0ZW1zLCB0aGUgY29t
+cGxldGUgdGV4dCBvZiB0aGUgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UN
+Cj4gKytjYW4gYmUgZm91bmQgaW4g4oCYL3Vzci9zaGFyZS9jb21tb24tbGlj
+ZW5zZXMvR1BMLTLigJkuDQo+ICstLS0gbGlibmloLTEuMC4zLm9yaWcvZGVi
+aWFuL2xpYm5paC1kYnVzMS5wb3N0aW5zdA0KPiArKysrIGxpYm5paC0xLjAu
+My9kZWJpYW4vbGlibmloLWRidXMxLnBvc3RpbnN0DQo+ICtAQCAtMCwwICsx
+LDUzIEBADQo+ICsrIyEvYmluL3NoDQo+ICsrDQo+ICsrc2V0IC1lDQo+ICsr
+DQo+ICsraWYgWyAiJDEiID0gY29uZmlndXJlIF07IHRoZW4NCj4gKysgICAg
+IyBBIGRlcGVuZGVudCBsaWJyYXJ5IG9mIFVwc3RhcnQgaGFzIGNoYW5nZWQs
+IHNvIHJlc3RhcnQgVXBzdGFydA0KPiArKyAgICAjIHN1Y2ggdGhhdCBpdCBj
+YW4gc2FmZWx5IHVubW91bnQgdGhlIHJvb3QgZmlsZXN5c3RlbSAoTFA6ICM3
+NDAzOTApDQo+ICsrDQo+ICsrICAgICMgUXVlcnkgcnVubmluZyB2ZXJzaW9u
+IG9mIFVwc3RhcnQsIGJ1dCBvbmx5IHdoZW4gd2Uga25vdw0KPiArKyAgICAj
+IHRoYXQgaW5pdGN0bCB3aWxsIHdvcmsuDQo+ICsrICAgICMNCj4gKysgICAg
+IyBUaGUgY2FsY3VsYXRlZCB2ZXJzaW9uIHN0cmluZyBtYXkgYmUgdGhlIG51
+bGwgc3RyaW5nIGlmDQo+ICsrICAgICMgVXBzdGFydCBpcyBub3QgcnVubmlu
+ZyAod2hlcmUgZm9yIGV4YW1wbGUgYW4gYWx0ZXJuYXRpdmUNCj4gKysgICAg
+IyBpbml0IGlzIHJ1bm5pbmcgb3V0c2lkZSBhIGNocm9vdCBlbnZpcm9ubWVu
+dCkgb3IgaWYgdGhlDQo+ICsrICAgICMgcXVlcnkgZmFpbGVkIGZvciBzb21l
+IHJlYXNvbi4gSG93ZXZlciwgdGhlIHZlcnNpb24gY2hlY2sNCj4gKysgICAg
+IyBiZWxvdyBoYW5kbGVzIGEgbnVsbCB2ZXJzaW9uIHN0cmluZyBjb3JyZWN0
+bHkuDQo+ICsrICAgIFVQU1RBUlRfVkVSU0lPTl9SVU5OSU5HPSQoaW5pdGN0
+bCB2ZXJzaW9uIDI+L2Rldi9udWxsIHxcDQo+ICsrICAgICAgICBhd2sgJ3tw
+cmludCAkM30nfHRyIC1kICcpJyB8fCA6KQ0KPiArKw0KPiArKyAgICBpZiBp
+c2Nocm9vdDsgdGhlbg0KPiArKyAgICAgICAgIyBEbyBub3QgaG9ub3VyIHJl
+LWV4ZWMgd2hlbiByZXF1ZXN0ZWQgZnJvbSB3aXRoaW4gYQ0KPiArKyAgICAg
+ICAgIyBjaHJvb3Qgc2luY2U6DQo+ICsrICAgICAgICAjDQo+ICsrICAgICAg
+ICAjIChhKSBUaGUgdmVyc2lvbiBvZiBVcHN0YXJ0IG91dHNpZGUgbWlnaHQg
+bm90IHN1cHBvcnQgaXQuDQo+ICsrICAgICAgICAjIChiKSBBbiBpc29sYXRl
+ZCBlbnZpcm9ubWVudCBzdWNoIGFzIGEgY2hyb290IHNob3VsZA0KPiArKyAg
+ICAgICAgIyAgICAgbm90IGJlIGFibGUgdG8gbW9kaWZ5IGl0cyBjb250YWlu
+aW5nIGVudmlyb25tZW50Lg0KPiArKyAgICAgICAgIw0KPiArKyAgICAgICAg
+IyBBIHN1ZmZpY2llbnRseSBuZXcgVXBzdGFydCB3aWxsIGFjdHVhbGx5IGhh
+bmRsZSBhIHJlLWV4ZWMNCj4gKysgICAgICAgICMgcmVxdWVzdCBjb21pbmcg
+ZnJvbSB0ZWxpbml0IHdpdGhpbiBhIGNocm9vdCBjb3JyZWN0bHkgKGJ5DQo+
+ICsrICAgICAgICAjIGRvaW5nIG5vdGhpbmcpIGJ1dCBpdCdzIHNpbXBsZSBl
+bm91Z2ggdG8gcGVyZm9ybSB0aGUgY2hlY2sNCj4gKysgICAgICAgICMgaGVy
+ZSBhbmQgc2F2ZSBVcHN0YXJ0IHRoZSBlZmZvcnQuDQo+ICsrICAgICAgICA6
+DQo+ICsrICAgIGVsaWYgZHBrZyAtLWNvbXBhcmUtdmVyc2lvbnMgIiRVUFNU
+QVJUX1ZFUlNJT05fUlVOTklORyIgZ2UgMS42LjE7IHRoZW4NCj4gKysgICAg
+ICAgICMgV2UgYXJlIG5vdCBydW5uaW5nIGluc2lkZSBhIGNocm9vdCBhbmQg
+dGhlIHJ1bm5pbmcgdmVyc2lvbg0KPiArKyAgICAgICAgIyBvZiBVcHN0YXJ0
+IHN1cHBvcnRzIHN0YXRlZnVsIHJlLWV4ZWMsIHNvIHdlIGNhbg0KPiArKyAg
+ICAgICAgIyByZXN0YXJ0IGltbWVkaWF0ZWx5Lg0KPiArKyAgICAgICAgIw0K
+PiArKyAgICAgICAgIyBYWFg6IE5vdGUgdGhhdCB0aGUgY2hlY2sgb24gdGhl
+IHJ1bm5pbmcgdmVyc2lvbiBtdXN0DQo+ICsrICAgICAgICAjIHJlbWFpbiAq
+aW5kZWZpbml0ZWx5KiBzaW5jZSBpdCdzIHRoZSBvbmx5IHNhZmUgd2F5IHRv
+DQo+ICsrICAgICAgICAjIGtub3cgaWYgc3RhdGVmdWwgcmUtZXhlYyBpcyBz
+dXBwb3J0ZWQ6IHNpbXBseSBjaGVja2luZw0KPiArKyAgICAgICAgIyBwYWNr
+YWdlZCB2ZXJzaW9uIG51bWJlcnMgaXMgbm90IHN1ZmZpY2llbnQgc2luY2UN
+Cj4gKysgICAgICAgICMgdGhlIHBhY2thZ2UgY291bGQgYmUgdXBncmFkZWQg
+bXVsdGlwbGUgdGltZXMgd2l0aG91dCBhDQo+ICsrICAgICAgICAjIHJlYm9v
+dC4NCj4gKysgICAgICAgIHRlbGluaXQgdSB8fCA6DQo+ICsrICAgIGVsc2UN
+Cj4gKysgICAgICAgICMgQmVmb3JlIHdlIHNodXRkb3duIG9yIHJlYm9vdCwg
+d2UgbmVlZCB0byByZS1leGVjIHNvIHRoYXQgd2UNCj4gKysgICAgICAgICMg
+Y2FuIHNhZmVseSByZW1vdW50IHRoZSByb290IGZpbGVzeXN0ZW07IHdlIGNh
+bid0IGp1c3QgZG8gdGhhdA0KPiArKyAgICAgICAgIyBoZXJlIGJlY2F1c2Ug
+d2UgbG9zZSBzdGF0ZS4NCj4gKysgICAgICAgIHRvdWNoIC92YXIvcnVuL2lu
+aXQudXBncmFkZWQgfHwgOg0KPiArKyAgICBmaQ0KPiArK2ZpDQo+ICsrDQo+
+ICsrI0RFQkhFTFBFUiMNCj4gKy0tLSBsaWJuaWgtMS4wLjMub3JpZy9kZWJp
+YW4vY2hhbmdlbG9nLkRFQklBTg0KPiArKysrIGxpYm5paC0xLjAuMy9kZWJp
+YW4vY2hhbmdlbG9nLkRFQklBTg0KPiArQEAgLTAsMCArMSwxMTggQEANCj4g
+KytsaWJuaWggKDEuMC4zLTQpIHVuc3RhYmxlOyB1cmdlbmN5PWxvdw0KPiAr
+Kw0KPiArKyAgKiBSZWJ1aWxkIGZvciBuZXcgbGliYyB0byB1cGRhdGUgdmVy
+c2lvbmVkIGRlcGVuZGVuY3k7IHRoaXMgY29tZXMgZnJvbQ0KPiArKyAgICB0
+aGUgX19hYm9ydF9tc2cgZGVwZW5kZW5jeSwgZHBrZy1zaGxpYnMgbmVlZHMg
+b3ZlcnJpZGluZyBzaW5jZSB0aGlzIGlzDQo+ICsrICAgIGFjdHVhbGx5IGEg
+d2VhayBsaW5rLCBidXQgdGhpcyByZWJ1aWxkIGZpeGVzIHRoaW5ncyBmb3Ig
+bm93Lg0KPiArKyAgICBDbG9zZXM6ICM2MjUyNTcuDQo+ICsrDQo+ICsrIC0t
+IFNjb3R0IEphbWVzIFJlbW5hbnQgPHNjb3R0QG5ldHNwbGl0LmNvbT4gIE1v
+biwgMDIgTWF5IDIwMTEgMTU6MDg6MzMgLTA3MDANCj4gKysNCj4gKytsaWJu
+aWggKDEuMC4zLTMpIHVuc3RhYmxlOyB1cmdlbmN5PWxvdw0KPiArKw0KPiAr
+KyAgKiBOZXcgbWFpbnRhaW5lci4gIENsb3NlczogIzYyNDQ0Mi4NCj4gKysN
+Cj4gKysgLS0gU2NvdHQgSmFtZXMgUmVtbmFudCA8c2NvdHRAbmV0c3BsaXQu
+Y29tPiAgVGh1LCAyOCBBcHIgMjAxMSAxNDoyNjowNSAtMDcwMA0KPiArKw0K
+PiArK2xpYm5paCAoMS4wLjMtMikgdW5zdGFibGU7IHVyZ2VuY3k9bG93DQo+
+ICsrDQo+ICsrICAqIEJ1bXAgYnVpbGQgZGVwZW5kZW5jeSBvbiBsaWJkYnVz
+LTEtZGV2IGFuZCBkYnVzIHRvICg+PSAxLjQpIGZvciBVbml4IGZpbGUNCj4g
+KysgICAgZGVzY3JpcHRvciBwYXNzaW5nIHN1cHBvcnQuDQo+ICsrDQo+ICsr
+IC0tIE1pY2hhZWwgQmllYmwgPGJpZWJsQGRlYmlhbi5vcmc+ICBUaHUsIDEw
+IEZlYiAyMDExIDIwOjI1OjE4ICswMTAwDQo+ICsrDQo+ICsrbGlibmloICgx
+LjAuMy0xdWJ1bnR1MSkgbmF0dHk7IHVyZ2VuY3k9bG93DQo+ICsrDQo+ICsr
+ICAqIFJlYnVpbGQgd2l0aCBsaWJjNi1kZXYgKD49IDIuMTN+KS4NCj4gKysN
+Cj4gKysgLS0gTWF0dGhpYXMgS2xvc2UgPGRva29AdWJ1bnR1LmNvbT4gIEZy
+aSwgMTggRmViIDIwMTEgMTI6MDk6MjkgKzAxMDANCj4gKysNCj4gKytsaWJu
+aWggKDEuMC4zLTEpIHVuc3RhYmxlOyB1cmdlbmN5PWxvdw0KPiArKw0KPiAr
+KyAgKiBOZXcgdXBzdHJlYW0gcmVsZWFzZS4NCj4gKysgICogQnVtcCBkZWJo
+ZWxwZXIgY29tcGF0aWJpbGl0eSBsZXZlbCB0byA4IGFuZCB1cGRhdGUgYnVp
+bGQgZGVwZW5kZW5jeQ0KPiArKyAgICBhY2NvcmRpbmdseS4NCj4gKysNCj4g
+KysgLS0gTWljaGFlbCBCaWVibCA8YmllYmxAZGViaWFuLm9yZz4gIE1vbiwg
+MDcgRmViIDIwMTEgMjI6MTk6MTMgKzAxMDANCj4gKysNCj4gKytsaWJuaWgg
+KDEuMC4yLTIpIHVuc3RhYmxlOyB1cmdlbmN5PWxvdw0KPiArKw0KPiArKyAg
+KiBJbnN0YWxsIGxpYnJhcnkgZGV2ZWxvcG1lbnQgZmlsZXMgdG8gL3Vzci9s
+aWIgYW5kIG5vdCAvbGliLg0KPiArKyAgKiBSZW1vdmUgbGlidG9vbCAqLmxh
+IGZpbGVzIGFzIHRoZXJlIGFyZSBubyByZXZlcnNlIGRlcGVuZGVuY2llcyBy
+ZWZlcmVuY2luZw0KPiArKyAgICB0aGVtLg0KPiArKyAgKiBCdW1wIFN0YW5k
+YXJkcy1WZXJzaW9uIHRvIDMuOS4xLiBObyBmdXJ0aGVyIGNoYW5nZXMuDQo+
+ICsrDQo+ICsrIC0tIE1pY2hhZWwgQmllYmwgPGJpZWJsQGRlYmlhbi5vcmc+
+ICBTdW4sIDAyIEphbiAyMDExIDIxOjA5OjQwICswMTAwDQo+ICsrDQo+ICsr
+bGlibmloICgxLjAuMi0xdWJ1bnR1MykgbmF0dHk7IHVyZ2VuY3k9bG93DQo+
+ICsrDQo+ICsrICAqIERpc2FibGUgc29tZSB0ZXN0cyBvbiBwcGM2NCB0byBi
+dWlsZCBhbiBpbml0aWFsIHBhY2thZ2UuDQo+ICsrDQo+ICsrIC0tIE1hdHRo
+aWFzIEtsb3NlIDxkb2tvQHVidW50dS5jb20+ICBUaHUsIDE4IE5vdiAyMDEw
+IDEwOjU5OjM4ICswMTAwDQo+ICsrDQo+ICsrbGlibmloICgxLjAuMi0xdWJ1
+bnR1MikgbWF2ZXJpY2s7IHVyZ2VuY3k9bG93DQo+ICsrDQo+ICsrICAqIFJl
+LWFkZCAtZlBJRSB0byB0aGUgdGVzdHN1aXRlIG9uIGFybWVsLCByZW1vdmlu
+ZyBhbGwgYXJtZWwtc3BlY2lmaWMgdGVzdHM7DQo+ICsrICAgIGN1cnJlbnQg
+Z2NjLTQuNCBkb24ndCBzZWVtIGFmZmVjdGVkIGJ5IHRoZSBJQ0UgYW55bW9y
+ZSAoc2VlIExQICMzOTg0MDMpLg0KPiArKw0KPiArKyAtLSBMb8OvYyBNaW5p
+ZXIgPGxvaWMubWluaWVyQGxpbmFyby5vcmc+ICBNb24sIDIzIEF1ZyAyMDEw
+IDEwOjI1OjMxICswMjAwDQo+ICsrDQo+ICsrbGlibmloICgxLjAuMi0xdWJ1
+bnR1MSkgbWF2ZXJpY2s7IHVyZ2VuY3k9bG93DQo+ICsrDQo+ICsrICAqIFJl
+YnVpbGQgd2l0aCBsaWJjNi1kZXYgKD49IDIuMTJ+KSwgYWZ0ZXIgY2hlY2tp
+bmcgdGhhdA0KPiArKyAgICBfX2Fib3J0X21zZyBpcyBhdmFpbGFibGUgd2l0
+aCB0aGUgc2FtZSBzaWduYXR1cmUgaW4gZWdsaWJjIDIuMTIuDQo+ICsrICAq
+IERvbid0IGJ1aWxkIHRoZSB0ZXN0c3VpdGUgd2l0aCAtZlBJRSBvbiBhcm1l
+bDsgTFA6ICMzOTg0MDMuDQo+ICsrDQo+ICsrIC0tIE1hdHRoaWFzIEtsb3Nl
+IDxkb2tvQHVidW50dS5jb20+ICBTdW4sIDMwIE1heSAyMDEwIDAyOjU0OjU2
+ICswMjAwDQo+ICsrDQo+ICsrbGlibmloICgxLjAuMi0xKSB1bnN0YWJsZTsg
+dXJnZW5jeT1sb3cNCj4gKysNCj4gKysgICogSW5pdGlhbCB1cGxvYWQgdG8g
+RGViaWFuLiBDbG9zZXM6ICM1ODUwNzENCj4gKysgICogQmFzZWQgb24gdGhl
+IFVidW50dSBwYWNrYWdlIGZvciBMdWNpZCBkb25lIGJ5IFNjb3R0IEphbWVz
+IFJlbW5hbnQgd2l0aCB0aGUNCj4gKysgICAgZm9sbG93aW5nIGNoYW5nZXM6
+DQo+ICsrICAgIC0gU3dpdGNoIHBhY2thZ2VzIHRvIHByaW9yaXR5IG9wdGlv
+bmFsLg0KPiArKyAgICAtIFVzZSBiaW5hcnk6VmVyc2lvbiBpbnN0ZWFkIG9m
+IFNvdXJjZS1WZXJzaW9uLg0KPiArKyAgICAtIEJ1bXAgU3RhbmRhcmRzLVZl
+cnNpb24gdG8gMy44LjQuDQo+ICsrICAgIC0gQWRkIEhvbWVwYWdlIGFuZCBW
+Y3MtKiBmaWVsZHMuDQo+ICsrICAgIC0gRG9uJ3Qgc3ltbGluayAvdXNyL3No
+YXJlL2RvYyBkaXJlY3Rvcmllcy4NCj4gKysgICAgLSBSZWZlciB0byB2ZXJz
+aW9uZWQgL3Vzci9zaGFyZS9jb21tb24tbGljZW5zZXMvR1BMLTIgZmlsZSBp
+bg0KPiArKyAgICAgIGRlYmlhbi9jb3B5cmlnaHQuDQo+ICsrICAgIC0gTGlz
+dCBhbGwgc3ltYm9scyBleHBsaWNpdGx5IGluc3RlYWQgb2YgdXNpbmcgYSB3
+aWxkY2FyZCBhbmQgYWRkIHN5bWJvbHMNCj4gKysgICAgICBpbnRyb2R1Y2Vk
+IGluIDEuMC4xLg0KPiArKyAgICAtIFVzZSB0aGUgc3ltYm9scyBmaWxlcyB0
+byBjcmVhdGUgdGhlIGNvcnJlY3QgdmVyc2lvbiBpbmZvIGluc3RlYWQgb2YN
+Cj4gKysgICAgICBzcGVjaWZ5aW5nIGl0IG1hbnVhbGx5IHZpYSBzaGxpYnMu
+DQo+ICsrICAgIC0gU3dpdGNoIHRvIHNvdXJjZSBmb3JtYXQgMy4wIChxdWls
+dCkuDQo+ICsrICAgIC0gQWRkIHdhdGNoIGZpbGUgdG8gdHJhY2sgbmV3IHVw
+c3RyZWFtIHJlbGVhc2VzLg0KPiArKw0KPiArKyAtLSBNaWNoYWVsIEJpZWJs
+IDxiaWVibEBkZWJpYW4ub3JnPiAgU3VuLCAxMyBKdW4gMjAxMCAyMzozNjo1
+MiArMDIwMA0KPiArKw0KPiArK2xpYm5paCAoMS4wLjEtMSkgbHVjaWQ7IHVy
+Z2VuY3k9bG93DQo+ICsrDQo+ICsrICAqIE5ldyB1cHN0cmVhbSByZWxlYXNl
+Og0KPiArKyAgICAtIEFkZCBtaXNzaW5nIF9fbmloXyogc3ltYm9scyB0byBs
+aW5rZXIgdmVyc2lvbiBzY3JpcHQgc28gdGhhdCB3ZQ0KPiArKyAgICAgIGNh
+biBsaW5rIFVwc3RhcnQncyB0ZXN0IHN1aXRlLg0KPiArKyAgICAtIEdsaWJj
+IF9fYWJvcnRfbXNnIHN5bWJvbCBub3cgb25seSBsaW5rZWQgYXMgYSB3ZWFr
+IHN5bWJvbC4NCj4gKysNCj4gKysgLS0gU2NvdHQgSmFtZXMgUmVtbmFudCA8
+c2NvdHRAdWJ1bnR1LmNvbT4gIFRodSwgMDQgRmViIDIwMTAgMTQ6NTM6MjYg
+LTA4MDANCj4gKysNCj4gKytsaWJuaWggKDEuMC4wLTJidWlsZDEpIGx1Y2lk
+OyB1cmdlbmN5PWxvdw0KPiArKw0KPiArKyAgKiBSZWJ1aWxkIHRvIHBpY2sg
+dXAgcmVsYXhlZCBkZXBlbmRlbmN5IG9uIGxpYmM2LCBhZnRlciBjaGVja2lu
+ZyB0aGF0DQo+ICsrICAgIF9fYWJvcnRfbXNnIGlzIGF2YWlsYWJsZSB3aXRo
+IHRoZSBzYW1lIHNpZ25hdHVyZSBpbiBlZ2xpYmMgMi4xMS4NCj4gKysgICAg
+TFA6ICM1MDg3MDIuDQo+ICsrDQo+ICsrIC0tIE1hdHRoaWFzIEtsb3NlIDxk
+b2tvQHVidW50dS5jb20+ICBNb24sIDE4IEphbiAyMDEwIDE2OjA5OjEzICsw
+MTAwDQo+ICsrDQo+ICsrbGlibmloICgxLjAuMC0yKSBsdWNpZDsgdXJnZW5j
+eT1sb3cNCj4gKysNCj4gKysgICogZGViaWFuL2NvbnRyb2w6IEFkZCBidWls
+ZC1kZXBlbmRlbmN5IG9uIGRidXMgc28gdGhlIHRlc3Qgc3VpdGUgY2FuDQo+
+ICsrICAgIHBhc3Mgb24gdGhlIGJ1aWxkZHMuDQo+ICsrDQo+ICsrIC0tIFNj
+b3R0IEphbWVzIFJlbW5hbnQgPHNjb3R0QHVidW50dS5jb20+ICBTYXQsIDI4
+IE5vdiAyMDA5IDIzOjI4OjI3ICswMDAwDQo+ICsrDQo+ICsrbGlibmloICgx
+LjAuMC0xKSBsdWNpZDsgdXJnZW5jeT1sb3cNCj4gKysNCj4gKysgICogRmly
+c3QgdXBzdHJlYW0gcmVsZWFzZS4gIFByZXZpb3VzbHkgdGhpcyBjb2RlIHdh
+cyBpbmNsdWRlZCBpbiB0aGUNCj4gKysgICAgdXBzdGFydCwgbW91bnRhbGwg
+YW5kIHVyZWFkYWhlYWQgc291cmNlIHBhY2thZ2VzLg0KPiArKw0KPiArKyAt
+LSBTY290dCBKYW1lcyBSZW1uYW50IDxzY290dEB1YnVudHUuY29tPiAgU2F0
+LCAyOCBOb3YgMjAwOSAyMToxNDowMCArMDAwMA0KPiArKw0KPiArLS0tIGxp
+Ym5paC0xLjAuMy5vcmlnL2RlYmlhbi9saWJuaWgxLnN5bWJvbHMNCj4gKysr
+KyBsaWJuaWgtMS4wLjMvZGViaWFuL2xpYm5paDEuc3ltYm9scw0KPiArQEAg
+LTAsMCArMSwyIEBADQo+ICsrbGlibmloLnNvLjEgbGlibmloMSAjTUlOVkVS
+Iw0KPiArKyAqQExJQk5JSF8xXzAgMS4wLjANCj4gKy0tLSBsaWJuaWgtMS4w
+LjMub3JpZy9kZWJpYW4vbGlibmloLWRidXMtZGV2Lmluc3RhbGwNCj4gKysr
+KyBsaWJuaWgtMS4wLjMvZGViaWFuL2xpYm5paC1kYnVzLWRldi5pbnN0YWxs
+DQo+ICtAQCAtMCwwICsxLDUgQEANCj4gKytsaWIvKi9saWJuaWgtZGJ1cy5h
+DQo+ICsrbGliLyovbGlibmloLWRidXMuc28NCj4gKyt1c3IvaW5jbHVkZS9s
+aWJuaWgtZGJ1cy5oDQo+ICsrdXNyL2luY2x1ZGUvbmloLWRidXMNCj4gKyt1
+c3IvbGliLyovcGtnY29uZmlnL2xpYm5paC1kYnVzLnBjDQo+ICstLS0gbGli
+bmloLTEuMC4zLm9yaWcvZGViaWFuL2xpYm5paDEucG9zdGluc3QNCj4gKysr
+KyBsaWJuaWgtMS4wLjMvZGViaWFuL2xpYm5paDEucG9zdGluc3QNCj4gK0BA
+IC0wLDAgKzEsNTMgQEANCj4gKysjIS9iaW4vc2gNCj4gKysNCj4gKytzZXQg
+LWUNCj4gKysNCj4gKytpZiBbICIkMSIgPSBjb25maWd1cmUgXTsgdGhlbg0K
+PiArKyAgICAjIEEgZGVwZW5kZW50IGxpYnJhcnkgb2YgVXBzdGFydCBoYXMg
+Y2hhbmdlZCwgc28gcmVzdGFydCBVcHN0YXJ0DQo+ICsrICAgICMgc3VjaCB0
+aGF0IGl0IGNhbiBzYWZlbHkgdW5tb3VudCB0aGUgcm9vdCBmaWxlc3lzdGVt
+IChMUDogIzc0MDM5MCkNCj4gKysNCj4gKysgICAgIyBRdWVyeSBydW5uaW5n
+IHZlcnNpb24gb2YgVXBzdGFydCwgYnV0IG9ubHkgd2hlbiB3ZSBrbm93DQo+
+ICsrICAgICMgdGhhdCBpbml0Y3RsIHdpbGwgd29yay4NCj4gKysgICAgIw0K
+PiArKyAgICAjIFRoZSBjYWxjdWxhdGVkIHZlcnNpb24gc3RyaW5nIG1heSBi
+ZSB0aGUgbnVsbCBzdHJpbmcgaWYNCj4gKysgICAgIyBVcHN0YXJ0IGlzIG5v
+dCBydW5uaW5nICh3aGVyZSBmb3IgZXhhbXBsZSBhbiBhbHRlcm5hdGl2ZQ0K
+PiArKyAgICAjIGluaXQgaXMgcnVubmluZyBvdXRzaWRlIGEgY2hyb290IGVu
+dmlyb25tZW50KSBvciBpZiB0aGUNCj4gKysgICAgIyBxdWVyeSBmYWlsZWQg
+Zm9yIHNvbWUgcmVhc29uLiBIb3dldmVyLCB0aGUgdmVyc2lvbiBjaGVjaw0K
+PiArKyAgICAjIGJlbG93IGhhbmRsZXMgYSBudWxsIHZlcnNpb24gc3RyaW5n
+IGNvcnJlY3RseS4NCj4gKysgICAgVVBTVEFSVF9WRVJTSU9OX1JVTk5JTkc9
+JChpbml0Y3RsIHZlcnNpb24gMj4vZGV2L251bGwgfFwNCj4gKysgICAgICAg
+IGF3ayAne3ByaW50ICQzfSd8dHIgLWQgJyknIHx8IDopDQo+ICsrDQo+ICsr
+ICAgIGlmIGlzY2hyb290OyB0aGVuDQo+ICsrICAgICAgICAjIERvIG5vdCBo
+b25vdXIgcmUtZXhlYyB3aGVuIHJlcXVlc3RlZCBmcm9tIHdpdGhpbiBhDQo+
+ICsrICAgICAgICAjIGNocm9vdCBzaW5jZToNCj4gKysgICAgICAgICMNCj4g
+KysgICAgICAgICMgKGEpIFRoZSB2ZXJzaW9uIG9mIFVwc3RhcnQgb3V0c2lk
+ZSBtaWdodCBub3Qgc3VwcG9ydCBpdC4NCj4gKysgICAgICAgICMgKGIpIEFu
+IGlzb2xhdGVkIGVudmlyb25tZW50IHN1Y2ggYXMgYSBjaHJvb3Qgc2hvdWxk
+DQo+ICsrICAgICAgICAjICAgICBub3QgYmUgYWJsZSB0byBtb2RpZnkgaXRz
+IGNvbnRhaW5pbmcgZW52aXJvbm1lbnQuDQo+ICsrICAgICAgICAjDQo+ICsr
+ICAgICAgICAjIEEgc3VmZmljaWVudGx5IG5ldyBVcHN0YXJ0IHdpbGwgYWN0
+dWFsbHkgaGFuZGxlIGEgcmUtZXhlYw0KPiArKyAgICAgICAgIyByZXF1ZXN0
+IGNvbWluZyBmcm9tIHRlbGluaXQgd2l0aGluIGEgY2hyb290IGNvcnJlY3Rs
+eSAoYnkNCj4gKysgICAgICAgICMgZG9pbmcgbm90aGluZykgYnV0IGl0J3Mg
+c2ltcGxlIGVub3VnaCB0byBwZXJmb3JtIHRoZSBjaGVjaw0KPiArKyAgICAg
+ICAgIyBoZXJlIGFuZCBzYXZlIFVwc3RhcnQgdGhlIGVmZm9ydC4NCj4gKysg
+ICAgICAgIDoNCj4gKysgICAgZWxpZiBkcGtnIC0tY29tcGFyZS12ZXJzaW9u
+cyAiJFVQU1RBUlRfVkVSU0lPTl9SVU5OSU5HIiBnZSAxLjYuMTsgdGhlbg0K
+PiArKyAgICAgICAgIyBXZSBhcmUgbm90IHJ1bm5pbmcgaW5zaWRlIGEgY2hy
+b290IGFuZCB0aGUgcnVubmluZyB2ZXJzaW9uDQo+ICsrICAgICAgICAjIG9m
+IFVwc3RhcnQgc3VwcG9ydHMgc3RhdGVmdWwgcmUtZXhlYywgc28gd2UgY2Fu
+DQo+ICsrICAgICAgICAjIHJlc3RhcnQgaW1tZWRpYXRlbHkuDQo+ICsrICAg
+ICAgICAjDQo+ICsrICAgICAgICAjIFhYWDogTm90ZSB0aGF0IHRoZSBjaGVj
+ayBvbiB0aGUgcnVubmluZyB2ZXJzaW9uIG11c3QNCj4gKysgICAgICAgICMg
+cmVtYWluICppbmRlZmluaXRlbHkqIHNpbmNlIGl0J3MgdGhlIG9ubHkgc2Fm
+ZSB3YXkgdG8NCj4gKysgICAgICAgICMga25vdyBpZiBzdGF0ZWZ1bCByZS1l
+eGVjIGlzIHN1cHBvcnRlZDogc2ltcGx5IGNoZWNraW5nDQo+ICsrICAgICAg
+ICAjIHBhY2thZ2VkIHZlcnNpb24gbnVtYmVycyBpcyBub3Qgc3VmZmljaWVu
+dCBzaW5jZQ0KPiArKyAgICAgICAgIyB0aGUgcGFja2FnZSBjb3VsZCBiZSB1
+cGdyYWRlZCBtdWx0aXBsZSB0aW1lcyB3aXRob3V0IGENCj4gKysgICAgICAg
+ICMgcmVib290Lg0KPiArKyAgICAgICAgdGVsaW5pdCB1IHx8IDoNCj4gKysg
+ICAgZWxzZQ0KPiArKyAgICAgICAgIyBCZWZvcmUgd2Ugc2h1dGRvd24gb3Ig
+cmVib290LCB3ZSBuZWVkIHRvIHJlLWV4ZWMgc28gdGhhdCB3ZQ0KPiArKyAg
+ICAgICAgIyBjYW4gc2FmZWx5IHJlbW91bnQgdGhlIHJvb3QgZmlsZXN5c3Rl
+bTsgd2UgY2FuJ3QganVzdCBkbyB0aGF0DQo+ICsrICAgICAgICAjIGhlcmUg
+YmVjYXVzZSB3ZSBsb3NlIHN0YXRlLg0KPiArKyAgICAgICAgdG91Y2ggL3Zh
+ci9ydW4vaW5pdC51cGdyYWRlZCB8fCA6DQo+ICsrICAgIGZpDQo+ICsrZmkN
+Cj4gKysNCj4gKysjREVCSEVMUEVSIw0KPiArLS0tIGxpYm5paC0xLjAuMy5v
+cmlnL2RlYmlhbi9saWJuaWgtZGJ1czEuc3ltYm9scw0KPiArKysrIGxpYm5p
+aC0xLjAuMy9kZWJpYW4vbGlibmloLWRidXMxLnN5bWJvbHMNCj4gK0BAIC0w
+LDAgKzEsMiBAQA0KPiArK2xpYm5paC1kYnVzLnNvLjEgbGlibmloLWRidXMx
+ICNNSU5WRVIjDQo+ICsrICpATElCTklIX0RCVVNfMV8wIDEuMC4wDQo+ICst
+LS0gbGlibmloLTEuMC4zLm9yaWcvZGViaWFuL2NoYW5nZWxvZw0KPiArKysr
+IGxpYm5paC0xLjAuMy9kZWJpYW4vY2hhbmdlbG9nDQo+ICtAQCAtMCwwICsx
+LDIxMyBAQA0KPiArK2xpYm5paCAoMS4wLjMtNHVidW50dTE2KSByYXJpbmc7
+IHVyZ2VuY3k9bG93DQo+ICsrDQo+ICsrICAqIGRlYmlhbi97bGlibmloMS5w
+b3N0aW5zdCxsaWJuaWgtZGJ1czEucG9zdGluc3R9OiBGb3JjZSBhbiB1cGdy
+YWRlIHRvDQo+ICsrICAgIHJlc3RhcnQgVXBzdGFydCAodG8gcGljayB1cCBu
+ZXcgcGFja2FnZSB2ZXJzaW9uKSBpZiB0aGUgcnVubmluZw0KPiArKyAgICBp
+bnN0YW5jZSBzdXBwb3J0cyBpdC4NCj4gKysgICogTWVyZ2Ugb2YgaW1wb3J0
+YW50IGZpeGVzIGZyb20gbHA6fnVwc3RhcnQtZGV2ZWwvbGlibmloL25paA0K
+PiArKyAgICAoTFA6ICM3NzY1MzIsIExQOiAjNzc3MDk3LCBMUDogIzgzNDgx
+MywgTFA6ICMxMTIzNTg4KS4NCj4gKysNCj4gKysgLS0gSmFtZXMgSHVudCA8
+amFtZXMuaHVudEB1YnVudHUuY29tPiAgVGh1LCAxNCBNYXIgMjAxMyAwOTox
+NDoyMiArMDAwMA0KPiArKw0KPiArK2xpYm5paCAoMS4wLjMtNHVidW50dTE1
+KSByYXJpbmc7IHVyZ2VuY3k9bG93DQo+ICsrDQo+ICsrICAqIEVuYWJsZSBj
+cm9zcy1idWlsZGluZywgc2FucyBhZGRpbmcgOm5hdGl2ZSBidWlsZC1kZXBl
+bmRlbmNpZXMuDQo+ICsrICAgIFNlZSBjb21tZW50cyBpbiBkZWJpYW4vY29u
+dHJvbC4NCj4gKysgICogTGludGlhbiBmaXhlcy4NCj4gKysNCj4gKysgLS0g
+RG1pdHJpanMgTGVka292cyA8ZG1pdHJpai5sZWRrb3ZAdWJ1bnR1LmNvbT4g
+IFR1ZSwgMDggSmFuIDIwMTMgMTU6Mzg6NTggKzAwMDANCj4gKysNCj4gKyts
+aWJuaWggKDEuMC4zLTR1YnVudHUxNCkgcmFyaW5nOyB1cmdlbmN5PWxvdw0K
+PiArKw0KPiArKyAgKiBVcGRhdGUgZGJ1cyBjb2RlIGdlbmVyYXRvciB0byBh
+bGxvdyBmb3IgZW1wdHkgbGlzdHMgZm9yIHR5cGUgJ2FzJy4NCj4gKysgICAg
+VGhpcyBkcm9wcyB0aGUgIT0gTlVMTCBjaGVjayBmb3IgTlVMTCB0ZXJtaW5h
+dGVkIGFycmF5cyBhbmQgbW92ZXMgdGhlDQo+ICsrICAgIGl0ZXJhdGlvbiBs
+b29wIGluc2lkZSBhbiAnaWYnIHN0YXRlbWVudC4NCj4gKysNCj4gKysgLS0g
+U3TDqXBoYW5lIEdyYWJlciA8c3RncmFiZXJAdWJ1bnR1LmNvbT4gIFRodSwg
+MTMgRGVjIDIwMTIgMTA6MDA6MjcgLTA1MDANCj4gKysNCj4gKytsaWJuaWgg
+KDEuMC4zLTR1YnVudHUxMykgcmFyaW5nOyB1cmdlbmN5PWxvdw0KPiArKw0K
+PiArKyAgWyBQZXRyIExhdXRyYmFjaCA8cGxhdXRyYmFAcmVkaGF0LmNvbT4s
+IERtaXRyaWpzIExlZGtvdnMgXQ0KPiArKyAgKiBGYWxsYmFjayB0byBsc3Rh
+dCwgaWYgZGlyZW50LmRfdHlwZSBpcyBub3QgYXZhaWxhYmxlIChub3QgcG9y
+dGFibGUpDQo+ICsrICAgIChMUDogIzY3MjY0MykgKENsb3NlczogIzY5NTYw
+NCkNCj4gKysNCj4gKysgLS0gRG1pdHJpanMgTGVka292cyA8ZG1pdHJpai5s
+ZWRrb3ZAdWJ1bnR1LmNvbT4gIFR1ZSwgMTEgRGVjIDIwMTIgMTc6MjY6NTIg
+KzAwMDANCj4gKysNCj4gKytsaWJuaWggKDEuMC4zLTR1YnVudHUxMikgcmFy
+aW5nOyB1cmdlbmN5PWxvdw0KPiArKw0KPiArKyAgKiBuaWgvbG9nZ2luZy5j
+OiBVc2Ugb3VyIG93biBfX25paF9hYm9ydF9tc2cgcmF0aGVyIHRoYW4gdGhl
+IChlKWdsaWJjDQo+ICsrICAgIHByaXZhdGUgc3ltYm9sIF9fYWJvcnRfbXNn
+IHRvIGF2b2lkIHVwZ3JhZGUgaXNzdWVzIChMUDogIzk5NzM1OSkuDQo+ICsr
+ICAqIG5paC90ZXN0cy90ZXN0X2xvZ2dpbmcuYzogVXBkYXRlIHRlc3RzIGZv
+ciBfX25paF9hYm9ydF9tc2cuDQo+ICsrDQo+ICsrIC0tIEphbWVzIEh1bnQg
+PGphbWVzLmh1bnRAdWJ1bnR1LmNvbT4gIFRodSwgMjUgT2N0IDIwMTIgMTA6
+NTc6MzAgKzAxMDANCj4gKysNCj4gKytsaWJuaWggKDEuMC4zLTR1YnVudHUx
+MSkgcXVhbnRhbDsgdXJnZW5jeT1sb3cNCj4gKysNCj4gKysgICogQWRkaXRp
+b24gb2YgZGViaWFuL2xpYm5paC1kYnVzMS5wb3N0aW5zdCBhbmQNCj4gKysg
+ICAgZGViaWFuL2xpYm5paDEucG9zdGluc3QgdG8gZm9yY2UgVXBzdGFydCBy
+ZS1leGVjIG9uIHNodXRkb3duDQo+ICsrICAgIHRvIGF2b2lkIHVubW91bnRp
+bmcgZGlza3MgdW5jbGVhbmx5IChMUDogIzc0MDM5MCkuDQo+ICsrDQo+ICsr
+IC0tIEphbWVzIEh1bnQgPGphbWVzLmh1bnRAdWJ1bnR1LmNvbT4gIFdlZCwg
+MDMgT2N0IDIwMTIgMTY6NDk6NDAgKzAxMDANCj4gKysNCj4gKytsaWJuaWgg
+KDEuMC4zLTR1YnVudHUxMCkgcXVhbnRhbDsgdXJnZW5jeT1sb3cNCj4gKysN
+Cj4gKysgICogVXBkYXRlIGNvbmZpZy5ndWVzcyxzdWIgZm9yIGFhcmNoNjQN
+Cj4gKysNCj4gKysgLS0gV29va2V5IDx3b29rZXlAd29va3dhcmUub3JnPiAg
+TW9uLCAwMSBPY3QgMjAxMiAxMjo1NzowNSArMDEwMA0KPiArKw0KPiArK2xp
+Ym5paCAoMS4wLjMtNHVidW50dTkpIHByZWNpc2U7IHVyZ2VuY3k9bG93DQo+
+ICsrDQo+ICsrICAqIE1hcmsgdGhlIG5paC1kYnVzLXRvb2wgcGFja2FnZSBN
+dWx0aS1BcmNoOiBmb3JlaWduIHNvIGl0IGNhbiBiZSB1c2VkIGFzDQo+ICsr
+ICAgIGEgYnVpbGQtZGVwZW5kZW5jeSBvZiB1cHN0YXJ0IHdoZW4gY3Jvc3Mt
+YnVpbGRpbmcuDQo+ICsrDQo+ICsrIC0tIFN0ZXZlIExhbmdhc2VrIDxzdGV2
+ZS5sYW5nYXNla0B1YnVudHUuY29tPiAgV2VkLCAxNSBGZWIgMjAxMiAyMjo1
+Nzo1MCAtMDgwMA0KPiArKw0KPiArK2xpYm5paCAoMS4wLjMtNHVidW50dTgp
+IHByZWNpc2U7IHVyZ2VuY3k9bG93DQo+ICsrDQo+ICsrICAqIGxpYm5paDEg
+bmVlZHMgYSB2ZXJzaW9uZWQgUHJlLURlcGVuZCBvbiBsaWJjNiBpbnN0ZWFk
+IG9mIGp1c3QgYSBEZXBlbmQsDQo+ICsrICAgIGJlY2F1c2UgbGliYzYgaXRz
+ZWxmIHVzZXMgcnVubGV2ZWwgZnJvbSB0aGUgdXBzdGFydCBwYWNrYWdlIGlu
+IGl0cw0KPiArKyAgICBwcmVpbnN0LCB3aGljaCBpbiB0dXJuIHVzZXMgbGli
+bmloMSwgd2hpY2ggbmVlZHMgdG8gYmUgbG9hZGFibGUgKGkuZS4sDQo+ICsr
+ICAgIGl0cyBzeW1ib2wgcmVmZXJlbmNlcyByZXNvbHZlKS4gIFdlIHRoZXJl
+Zm9yZSBuZWVkIHRvIGVuc3VyZSB0aGF0DQo+ICsrICAgIGxpYm5paDEncyBk
+ZXBlbmRlbmNpZXMgYXJlIGFsd2F5cyB1bnBhY2tlZCBiZWZvcmUgbGlibmlo
+MSBpdHNlbGYgaXMNCj4gKysgICAgdW5wYWNrZWQuICBXaGlsZSBoYXZpbmcg
+c29tZXRoaW5nIGZ1cnRoZXIgdXAgdGhlIHN0YWNrIChzdWNoIGFzIHVwc3Rh
+cnQsDQo+ICsrICAgIG9yIHNvbWV0aGluZyBvbiB0b3Agb2YgdXBzdGFydCkg
+YmVpbmcgbWFya2VkIEVzc2VudGlhbDogeWVzIGFuZCB3aXRoIHRoZQ0KPiAr
+KyAgICBuZWNlc3NhcnkgcHJlLWRlcGVuZHMgd291bGQgbGV0IGFwdCBoYW5k
+bGUgdGhpcyBmb3IgdXMgd2l0aCBpdHMNCj4gKysgICAgImltbWVkaWF0ZSBj
+b25maWd1cmF0aW9uIiBzdXBwb3J0LCBidXQgZm9yIHZhcmlvdXMgcmVhc29u
+cyB3ZSBkb24ndCB3YW50DQo+ICsrICAgIHRvIG1ha2UgdXBzdGFydCBlc3Nl
+bnRpYWwuICBMUDogIzUwODA4My4NCj4gKysNCj4gKysgLS0gU3RldmUgTGFu
+Z2FzZWsgPHN0ZXZlLmxhbmdhc2VrQHVidW50dS5jb20+ICBGcmksIDEwIEZl
+YiAyMDEyIDEyOjEzOjI1IC0wODAwDQo+ICsrDQo+ICsrbGlibmloICgxLjAu
+My00dWJ1bnR1NykgcHJlY2lzZTsgdXJnZW5jeT1sb3cNCj4gKysNCj4gKysg
+ICogUmVsYXggZGVwZW5kZW5jeSBvbiBsaWJjNi4NCj4gKysNCj4gKysgLS0g
+TWF0dGhpYXMgS2xvc2UgPGRva29AdWJ1bnR1LmNvbT4gIFdlZCwgMDggRmVi
+IDIwMTIgMjM6NDM6MjEgKzAxMDANCj4gKysNCj4gKytsaWJuaWggKDEuMC4z
+LTR1YnVudHU2KSBwcmVjaXNlOyB1cmdlbmN5PWxvdw0KPiArKw0KPiArKyAg
+KiBSZWJ1aWxkIHdpdGggbGliYzYtZGV2ICg+PSAyLjE1fikuDQo+ICsrDQo+
+ICsrIC0tIE1hdHRoaWFzIEtsb3NlIDxkb2tvQHVidW50dS5jb20+ICBXZWQs
+IDA4IEZlYiAyMDEyIDIxOjQ4OjU3ICswMTAwDQo+ICsrDQo+ICsrbGlibmlo
+ICgxLjAuMy00dWJ1bnR1NSkgcHJlY2lzZTsgdXJnZW5jeT1sb3cNCj4gKysN
+Cj4gKysgICogTWFyayBsaWJuaWgtZGV2IGFuZCBsaWJuaWgtZGJ1cy1kZXYg
+TXVsdGktQXJjaDogc2FtZSBhcyB3ZWxsLg0KPiArKw0KPiArKyAtLSBTdGV2
+ZSBMYW5nYXNlayA8c3RldmUubGFuZ2FzZWtAdWJ1bnR1LmNvbT4gIFN1biwg
+MDYgTm92IDIwMTEgMTQ6NDU6MDcgLTA4MDANCj4gKysNCj4gKytsaWJuaWgg
+KDEuMC4zLTR1YnVudHU0KSBwcmVjaXNlOyB1cmdlbmN5PWxvdw0KPiArKw0K
+PiArKyAgKiBNYWtlIGxpYm5paDEgYW5kIGxpYm5paC1kYnVzMSBpbnN0YWxs
+YWJsZSB1c2luZyBtdWx0aS1hcmNoLg0KPiArKw0KPiArKyAtLSBKYW1lcyBI
+dW50IDxqYW1lcy5odW50QHVidW50dS5jb20+ICBUdWUsIDAxIE5vdiAyMDEx
+IDE0OjI1OjA5IC0wNDAwDQo+ICsrDQo+ICsrbGlibmloICgxLjAuMy00dWJ1
+bnR1MykgcHJlY2lzZTsgdXJnZW5jeT1sb3cNCj4gKysNCj4gKysgICogQnVp
+bGQgdG8gaW5zdGFsbCB3aXRoIGVnbGliYy0yLjE1Lg0KPiArKw0KPiArKyAt
+LSBNYXR0aGlhcyBLbG9zZSA8ZG9rb0B1YnVudHUuY29tPiAgRnJpLCAxNCBP
+Y3QgMjAxMSAxNDowNTowMyArMDIwMA0KPiArKw0KPiArK2xpYm5paCAoMS4w
+LjMtNHVidW50dTIpIG9uZWlyaWM7IHVyZ2VuY3k9bG93DQo+ICsrDQo+ICsr
+ICAqIFVzZSBkcGtnLWJ1aWxkZmxhZ3MgdG8gZ2V0IHRoZSBidWlsZCBmbGFn
+cy4NCj4gKysgICogQnVpbGQgd2l0aCB0aGUgZGVmYXVsdCBidWlsZCBmbGFn
+cywgZG9uJ3QgaGFyZC1jb2RlIC1Pcy4gTFA6ICM3OTEzMTUuDQo+ICsrDQo+
+ICsrIC0tIE1hdHRoaWFzIEtsb3NlIDxkb2tvQHVidW50dS5jb20+ICBXZWQs
+IDE1IEp1biAyMDExIDE2OjQ1OjQyICswMjAwDQo+ICsrDQo+ICsrbGlibmlo
+ICgxLjAuMy00dWJ1bnR1MSkgb25laXJpYzsgdXJnZW5jeT1sb3cNCj4gKysN
+Cj4gKysgICogTWVyZ2UgZnJvbSBkZWJpYW4gdW5zdGFibGUuIFJldGFpbmVk
+IFVidW50dSBCdWlsZC1EZXBlbmRzIGFuZCBQcmlvcml0eS4NCj4gKysNCj4g
+KysgLS0gSmFtZXMgSHVudCA8amFtZXMuaHVudEB1YnVudHUuY29tPiAgTW9u
+LCAyMyBNYXkgMjAxMSAxOToyODoxOSArMDEwMA0KPiArKw0KPiArK2xpYm5p
+aCAoMS4wLjMtMXVidW50dTEpIG5hdHR5OyB1cmdlbmN5PWxvdw0KPiArKw0K
+PiArKyAgKiBSZWJ1aWxkIHdpdGggbGliYzYtZGV2ICg+PSAyLjEzfikuDQo+
+ICsrDQo+ICsrIC0tIE1hdHRoaWFzIEtsb3NlIDxkb2tvQHVidW50dS5jb20+
+ICBGcmksIDE4IEZlYiAyMDExIDEyOjA5OjI5ICswMTAwDQo+ICsrDQo+ICsr
+bGlibmloICgxLjAuMy0xKSBuYXR0eTsgdXJnZW5jeT1sb3cNCj4gKysNCj4g
+KysgICogTmV3IHVwc3RyZWFtIHJlbGVhc2U6DQo+ICsrICAgIC0gQWRkZWQg
+c3VwcG9ydCBmb3IgcGFzc2luZyBmaWxlIGRlc2NyaXB0b3JzIG92ZXIgRC1C
+dXMgdG8gbmloLWRidXMtdG9vbA0KPiArKw0KPiArKyAtLSBTY290dCBKYW1l
+cyBSZW1uYW50IDxzY290dEB1YnVudHUuY29tPiAgVGh1LCAyMyBEZWMgMjAx
+MCAyMjoyODoyNCArMDAwMA0KPiArKw0KPiArK2xpYm5paCAoMS4wLjItMikg
+bmF0dHk7IHVyZ2VuY3k9bG93DQo+ICsrDQo+ICsrICAqIFJldmVydCB0aGUg
+cHJldmlvdXMgdXBsb2FkLiAgSXQgaXMgbmV2ZXIgYWNjZXB0YWJsZSB0byBz
+aW1wbHkgZGlzYWJsZQ0KPiArKyAgICB0ZXN0cywgZXNwZWNpYWxseSB3aGVu
+IGl0IHR1cm5zIG91dCB0aGF0IHRoZSB0ZXN0IHRoYXQgd2FzIGRpc2FibGVk
+DQo+ICsrICAgIHdhcyBmYWlsaW5nIGJlY2F1c2UgdGhlcmUgd2FzIGEgc2Vy
+aW91cyBidWcgdGhhdCBjb3VsZCBjYXVzZSBrZXJuZWwNCj4gKysgICAgcGFu
+aWNzIGZvciBwZW9wbGUgb24gYm9vdC4NCj4gKysNCj4gKysgICAgVGVzdCBz
+dWl0ZXMgYXJlIGhlcmUgZm9yIGEgcmVhc29uLg0KPiArKw0KPiArKyAgKiBC
+dW1wZWQgbGliZGJ1cyBCdWlsZC1EZXBlbmRlbmN5IHRvIHRoZSB2ZXJzaW9u
+IHdpdGggdGhlIGJ1ZyBmaXggdGhhdA0KPiArKyAgICBjYXVzZWQgdGhlIHRl
+c3Qgc3VpdGUgdG8gZmFpbC4NCj4gKysNCj4gKysgLS0gU2NvdHQgSmFtZXMg
+UmVtbmFudCA8c2NvdHRAdWJ1bnR1LmNvbT4gIFdlZCwgMDggRGVjIDIwMTAg
+MTk6NDA6MTUgKzAwMDANCj4gKysNCj4gKytsaWJuaWggKDEuMC4yLTF1YnVu
+dHUzKSBuYXR0eTsgdXJnZW5jeT1sb3cNCj4gKysNCj4gKysgICogRGlzYWJs
+ZSBzb21lIHRlc3RzIG9uIHBwYzY0IHRvIGJ1aWxkIGFuIGluaXRpYWwgcGFj
+a2FnZS4NCj4gKysNCj4gKysgLS0gTWF0dGhpYXMgS2xvc2UgPGRva29AdWJ1
+bnR1LmNvbT4gIFRodSwgMTggTm92IDIwMTAgMTA6NTk6MzggKzAxMDANCj4g
+KysNCj4gKytsaWJuaWggKDEuMC4yLTF1YnVudHUyKSBtYXZlcmljazsgdXJn
+ZW5jeT1sb3cNCj4gKysNCj4gKysgICogUmUtYWRkIC1mUElFIHRvIHRoZSB0
+ZXN0c3VpdGUgb24gYXJtZWwsIHJlbW92aW5nIGFsbCBhcm1lbC1zcGVjaWZp
+YyB0ZXN0czsNCj4gKysgICAgY3VycmVudCBnY2MtNC40IGRvbid0IHNlZW0g
+YWZmZWN0ZWQgYnkgdGhlIElDRSBhbnltb3JlIChzZWUgTFAgIzM5ODQwMyku
+DQo+ICsrDQo+ICsrIC0tIExvw69jIE1pbmllciA8bG9pYy5taW5pZXJAbGlu
+YXJvLm9yZz4gIE1vbiwgMjMgQXVnIDIwMTAgMTA6MjU6MzEgKzAyMDANCj4g
+KysNCj4gKytsaWJuaWggKDEuMC4yLTF1YnVudHUxKSBtYXZlcmljazsgdXJn
+ZW5jeT1sb3cNCj4gKysNCj4gKysgICogUmVidWlsZCB3aXRoIGxpYmM2LWRl
+diAoPj0gMi4xMn4pLCBhZnRlciBjaGVja2luZyB0aGF0DQo+ICsrICAgIF9f
+YWJvcnRfbXNnIGlzIGF2YWlsYWJsZSB3aXRoIHRoZSBzYW1lIHNpZ25hdHVy
+ZSBpbiBlZ2xpYmMgMi4xMi4NCj4gKysgICogRG9uJ3QgYnVpbGQgdGhlIHRl
+c3RzdWl0ZSB3aXRoIC1mUElFIG9uIGFybWVsOyBMUDogIzM5ODQwMy4NCj4g
+KysNCj4gKysgLS0gTWF0dGhpYXMgS2xvc2UgPGRva29AdWJ1bnR1LmNvbT4g
+IFN1biwgMzAgTWF5IDIwMTAgMDI6NTQ6NTYgKzAyMDANCj4gKysNCj4gKyts
+aWJuaWggKDEuMC4yLTEpIG1hdmVyaWNrOyB1cmdlbmN5PWxvdw0KPiArKw0K
+PiArKyAgKiBOZXcgdXBzdHJlYW0gcmVsZWFzZToNCj4gKysgICAgLSBSZW5h
+bWUgQUNfQ09QWVJJR0hUIHRvIE5JSF9DT1BZUklHSFQgdG8gYXZvaWQgY29u
+ZmxpY3Qgd2l0aCBvdGhlcg0KPiArKyAgICAgIHBhY2thZ2VzLg0KPiArKyAg
+ICAtIEFkZCBzZXJpYWwgdG8gbGlibmloLm00DQo+ICsrICAgIC0gQWRkIE5J
+SF9XSVRIX0xPQ0FMX0xJQk5JSCBtYWNyby4NCj4gKysNCj4gKysgICogRml4
+IHVzZSBvZiAke1NvdXJjZS1WZXJzaW9ufSB0byBiZSAke2JpbmFyeTpWZXJz
+aW9ufQ0KPiArKyAgKiBBZGQgZGViaWFuL3NvdXJjZS9mb3JtYXQgd2l0aCAi
+MS4wIiB0byBiZSBmdXR1cmUgY29tcGF0aWJsZS4NCj4gKysgICogQnVtcCBz
+dGFuZGFyZHMgdmVyc2lvbi4NCj4gKysNCj4gKysgLS0gU2NvdHQgSmFtZXMg
+UmVtbmFudCA8c2NvdHRAdWJ1bnR1LmNvbT4gIFR1ZSwgMjcgQXByIDIwMTAg
+MTA6NDk6NTUgLTA3MDANCj4gKysNCj4gKytsaWJuaWggKDEuMC4xLTEpIGx1
+Y2lkOyB1cmdlbmN5PWxvdw0KPiArKw0KPiArKyAgKiBOZXcgdXBzdHJlYW0g
+cmVsZWFzZToNCj4gKysgICAgLSBBZGQgbWlzc2luZyBfX25paF8qIHN5bWJv
+bHMgdG8gbGlua2VyIHZlcnNpb24gc2NyaXB0IHNvIHRoYXQgd2UNCj4gKysg
+ICAgICBjYW4gbGluayBVcHN0YXJ0J3MgdGVzdCBzdWl0ZS4NCj4gKysgICAg
+LSBHbGliYyBfX2Fib3J0X21zZyBzeW1ib2wgbm93IG9ubHkgbGlua2VkIGFz
+IGEgd2VhayBzeW1ib2wuDQo+ICsrDQo+ICsrIC0tIFNjb3R0IEphbWVzIFJl
+bW5hbnQgPHNjb3R0QHVidW50dS5jb20+ICBUaHUsIDA0IEZlYiAyMDEwIDE0
+OjUzOjI2IC0wODAwDQo+ICsrDQo+ICsrbGlibmloICgxLjAuMC0yYnVpbGQx
+KSBsdWNpZDsgdXJnZW5jeT1sb3cNCj4gKysNCj4gKysgICogUmVidWlsZCB0
+byBwaWNrIHVwIHJlbGF4ZWQgZGVwZW5kZW5jeSBvbiBsaWJjNiwgYWZ0ZXIg
+Y2hlY2tpbmcgdGhhdA0KPiArKyAgICBfX2Fib3J0X21zZyBpcyBhdmFpbGFi
+bGUgd2l0aCB0aGUgc2FtZSBzaWduYXR1cmUgaW4gZWdsaWJjIDIuMTEuDQo+
+ICsrICAgIExQOiAjNTA4NzAyLg0KPiArKw0KPiArKyAtLSBNYXR0aGlhcyBL
+bG9zZSA8ZG9rb0B1YnVudHUuY29tPiAgTW9uLCAxOCBKYW4gMjAxMCAxNjow
+OToxMyArMDEwMA0KPiArKw0KPiArK2xpYm5paCAoMS4wLjAtMikgbHVjaWQ7
+IHVyZ2VuY3k9bG93DQo+ICsrDQo+ICsrICAqIGRlYmlhbi9jb250cm9sOiBB
+ZGQgYnVpbGQtZGVwZW5kZW5jeSBvbiBkYnVzIHNvIHRoZSB0ZXN0IHN1aXRl
+IGNhbg0KPiArKyAgICBwYXNzIG9uIHRoZSBidWlsZGRzLg0KPiArKw0KPiAr
+KyAtLSBTY290dCBKYW1lcyBSZW1uYW50IDxzY290dEB1YnVudHUuY29tPiAg
+U2F0LCAyOCBOb3YgMjAwOSAyMzoyODoyNyArMDAwMA0KPiArKw0KPiArK2xp
+Ym5paCAoMS4wLjAtMSkgbHVjaWQ7IHVyZ2VuY3k9bG93DQo+ICsrDQo+ICsr
+ICAqIEZpcnN0IHVwc3RyZWFtIHJlbGVhc2UuICBQcmV2aW91c2x5IHRoaXMg
+Y29kZSB3YXMgaW5jbHVkZWQgaW4gdGhlDQo+ICsrICAgIHVwc3RhcnQsIG1v
+dW50YWxsIGFuZCB1cmVhZGFoZWFkIHNvdXJjZSBwYWNrYWdlcy4NCj4gKysN
+Cj4gKysgLS0gU2NvdHQgSmFtZXMgUmVtbmFudCA8c2NvdHRAdWJ1bnR1LmNv
+bT4gIFNhdCwgMjggTm92IDIwMDkgMjE6MTQ6MDAgKzAwMDANCj4gKy0tLSBs
+aWJuaWgtMS4wLjMub3JpZy9kZWJpYW4vc291cmNlL2Zvcm1hdA0KPiArKysr
+IGxpYm5paC0xLjAuMy9kZWJpYW4vc291cmNlL2Zvcm1hdA0KPiArQEAgLTAs
+MCArMSBAQA0KPiArKzEuMA0KPiArLS0tIGxpYm5paC0xLjAuMy5vcmlnL25p
+aC1kYnVzL2RidXNfcHJveHkuaA0KPiArKysrIGxpYm5paC0xLjAuMy9uaWgt
+ZGJ1cy9kYnVzX3Byb3h5LmgNCj4gK0BAIC0xNDYsMTQgKzE0NiwxNCBAQA0K
+PiArIAkJCQkJICAgIGNvbnN0IGNoYXIgKm5hbWUsIGNvbnN0IGNoYXIgKnBh
+dGgsDQo+ICsgCQkJCQkgICAgTmloREJ1c0xvc3RIYW5kbGVyIGxvc3RfaGFu
+ZGxlciwNCj4gKyAJCQkJCSAgICB2b2lkICpkYXRhKQ0KPiArLQlfX2F0dHJp
+YnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2MpKTsNCj4gKysJ
+X19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0KPiArIA0K
+PiArIE5paERCdXNQcm94eVNpZ25hbCAqbmloX2RidXNfcHJveHlfY29ubmVj
+dCAoTmloREJ1c1Byb3h5ICpwcm94eSwNCj4gKyAJCQkJCSAgICBjb25zdCBO
+aWhEQnVzSW50ZXJmYWNlICppbnRlcmZhY2UsDQo+ICsgCQkJCQkgICAgY29u
+c3QgY2hhciAqbmFtZSwNCj4gKyAJCQkJCSAgICBOaWhEQnVzU2lnbmFsSGFu
+ZGxlciBoYW5kbGVyLA0KPiArIAkJCQkJICAgIHZvaWQgKmRhdGEpDQo+ICst
+CV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykp
+Ow0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7
+DQo+ICsgDQo+ICsgTklIX0VORF9FWFRFUk4NCj4gKyANCj4gKy0tLSBsaWJu
+aWgtMS4wLjMub3JpZy9uaWgtZGJ1cy9kYnVzX29iamVjdC5oDQo+ICsrKysg
+bGlibmloLTEuMC4zL25paC1kYnVzL2RidXNfb2JqZWN0LmgNCj4gK0BAIC02
+MSw4ICs2MSw3IEBADQo+ICsgCQkJCSAgICBEQnVzQ29ubmVjdGlvbiAqY29u
+bmVjdGlvbiwNCj4gKyAJCQkJICAgIGNvbnN0IGNoYXIgKnBhdGgsDQo+ICsg
+CQkJCSAgICBjb25zdCBOaWhEQnVzSW50ZXJmYWNlICoqaW50ZXJmYWNlcywN
+Cj4gKy0JCQkJICAgIHZvaWQgKmRhdGEpDQo+ICstCV9fYXR0cmlidXRlX18g
+KChtYWxsb2MpKTsNCj4gKysJCQkJICAgIHZvaWQgKmRhdGEpOw0KPiArIA0K
+PiArIE5JSF9FTkRfRVhURVJODQo+ICsgDQo+ICstLS0gbGlibmloLTEuMC4z
+Lm9yaWcvbmloLWRidXMvZGJ1c191dGlsLmgNCj4gKysrKyBsaWJuaWgtMS4w
+LjMvbmloLWRidXMvZGJ1c191dGlsLmgNCj4gK0BAIC0yNiw3ICsyNiw3IEBA
+DQo+ICsgTklIX0JFR0lOX0VYVEVSTg0KPiArIA0KPiArIGNoYXIgKm5paF9k
+YnVzX3BhdGggKGNvbnN0IHZvaWQgKnBhcmVudCwgY29uc3QgY2hhciAqcm9v
+dCwgLi4uKQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgoc2VudGluZWwsIHdhcm5f
+dW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18g
+KChzZW50aW5lbCwgd2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgDQo+ICsg
+TklIX0VORF9FWFRFUk4NCj4gKyANCj4gKy0tLSBsaWJuaWgtMS4wLjMub3Jp
+Zy9uaWgtZGJ1cy9kYnVzX3BlbmRpbmdfZGF0YS5oDQo+ICsrKysgbGlibmlo
+LTEuMC4zL25paC1kYnVzL2RidXNfcGVuZGluZ19kYXRhLmgNCj4gK0BAIC0x
+MDQsNyArMTA0LDcgQEANCj4gKyAJCQkJCSAgICAgICBOaWhEQnVzUmVwbHlI
+YW5kbGVyIGhhbmRsZXIsDQo+ICsgCQkJCQkgICAgICAgTmloREJ1c0Vycm9y
+SGFuZGxlciBlcnJvcl9oYW5kbGVyLA0KPiArIAkJCQkJICAgICAgIHZvaWQg
+KmRhdGEpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1
+bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVz
+ZWRfcmVzdWx0KSk7DQo+ICsgDQo+ICsgTklIX0VORF9FWFRFUk4NCj4gKyAN
+Cj4gKy0tLSBsaWJuaWgtMS4wLjMub3JpZy9uaWgtZGJ1cy9kYnVzX3Byb3h5
+LmMNCj4gKysrKyBsaWJuaWgtMS4wLjMvbmloLWRidXMvZGJ1c19wcm94eS5j
+DQo+ICtAQCAtNDYsMTEgKzQ2LDExIEBADQo+ICsgCV9fYXR0cmlidXRlX18g
+KCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyBzdGF0aWMgY2hhciAqbmlo
+X2RidXNfcHJveHlfbmFtZV9ydWxlICAgICAgICAgKGNvbnN0IHZvaWQgKnBh
+cmVudCwNCj4gKyAJCQkJCSAgICAgICBOaWhEQnVzUHJveHkgKnByb3h5KQ0K
+PiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxs
+b2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3Vs
+dCkpOw0KPiArIHN0YXRpYyBpbnQgICBuaWhfZGJ1c19wcm94eV9zaWduYWxf
+ZGVzdHJveSAgICAoTmloREJ1c1Byb3h5U2lnbmFsICpwcm94aWVkKTsNCj4g
+KyBzdGF0aWMgY2hhciAqbmloX2RidXNfcHJveHlfc2lnbmFsX3J1bGUgICAg
+ICAgKGNvbnN0IHZvaWQgKnBhcmVudCwNCj4gKyAJCQkJCSAgICAgICBOaWhE
+QnVzUHJveHlTaWduYWwgKnByb3hpZWQpDQo+ICstCV9fYXR0cmlidXRlX18g
+KCh3YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJp
+YnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgDQo+ICsgLyog
+UHJvdG90eXBlcyBmb3IgaGFuZGxlciBmdW5jdGlvbnMgKi8NCj4gKyBzdGF0
+aWMgREJ1c0hhbmRsZXJSZXN1bHQgbmloX2RidXNfcHJveHlfbmFtZV9vd25l
+cl9jaGFuZ2VkIChEQnVzQ29ubmVjdGlvbiAqY29ubmVjdGlvbiwNCj4gKy0t
+LSBsaWJuaWgtMS4wLjMub3JpZy9uaWgtZGJ1cy10b29sL3N5bWJvbC5jDQo+
+ICsrKysgbGlibmloLTEuMC4zL25paC1kYnVzLXRvb2wvc3ltYm9sLmMNCj4g
+K0BAIC00MCwxMCArNDAsMTAgQEANCj4gKyAvKiBQcm90b3R5cGVzIGZvciBz
+dGF0aWMgZnVuY3Rpb25zICovDQo+ICsgc3RhdGljIGNoYXIgKnN5bWJvbF9z
+dHJjYXRfaW50ZXJmYWNlIChjaGFyICoqc3RyLCBjb25zdCB2b2lkICpwYXJl
+bnQsDQo+ICsgCQkJCSAgICAgIGNvbnN0IGNoYXIgKmZvcm1hdCwgLi4uKQ0K
+PiArLQlfX2F0dHJpYnV0ZV9fICgoZm9ybWF0IChwcmludGYsIDMsIDQpLCB3
+YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0
+ZV9fICgoZm9ybWF0IChwcmludGYsIDMsIDQpLCB3YXJuX3VudXNlZF9yZXN1
+bHQpKTsNCj4gKyBzdGF0aWMgY2hhciAqc3ltYm9sX3N0cmNhdF90aXRsZSAg
+ICAgKGNoYXIgKipzdHIsIGNvbnN0IHZvaWQgKnBhcmVudCwNCj4gKyAJCQkJ
+ICAgICAgY29uc3QgY2hhciAqZm9ybWF0LCAuLi4pDQo+ICstCV9fYXR0cmli
+dXRlX18gKChmb3JtYXQgKHByaW50ZiwgMywgNCksIHdhcm5fdW51c2VkX3Jl
+c3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKChmb3JtYXQg
+KHByaW50ZiwgMywgNCksIHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0KPiArIA0K
+PiArIA0KPiArIC8qKg0KPiArLS0tIGxpYm5paC0xLjAuMy5vcmlnL25paC1k
+YnVzLXRvb2wvZGVtYXJzaGFsLmgNCj4gKysrKyBsaWJuaWgtMS4wLjMvbmlo
+LWRidXMtdG9vbC9kZW1hcnNoYWwuaA0KPiArQEAgLTM3LDcgKzM3LDcgQEAN
+Cj4gKyAJCSBjb25zdCBjaGFyICpwcmVmaXgsIGNvbnN0IGNoYXIgKmludGVy
+ZmFjZV9zeW1ib2wsDQo+ICsgCQkgY29uc3QgY2hhciAqbWVtYmVyX3N5bWJv
+bCwgY29uc3QgY2hhciAqc3ltYm9sLA0KPiArIAkJIE5paExpc3QgKnN0cnVj
+dHMpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQs
+IG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRf
+cmVzdWx0KSk7DQo+ICsgDQo+ICsgTklIX0VORF9FWFRFUk4NCj4gKyANCj4g
+Ky0tLSBsaWJuaWgtMS4wLjMub3JpZy9uaWgtZGJ1cy10b29sL3N5bWJvbC5o
+DQo+ICsrKysgbGlibmloLTEuMC4zL25paC1kYnVzLXRvb2wvc3ltYm9sLmgN
+Cj4gK0BAIC0yOCwyMiArMjgsMjIgQEANCj4gKyBpbnQgICBzeW1ib2xfdmFs
+aWQgICAgIChjb25zdCBjaGFyICpzeW1ib2wpOw0KPiArIA0KPiArIGNoYXIg
+KnN5bWJvbF9mcm9tX25hbWUgKGNvbnN0IHZvaWQgKnBhcmVudCwgY29uc3Qg
+Y2hhciAqbmFtZSkNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2Vk
+X3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJu
+X3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4gKyBjaGFyICpzeW1ib2xfaW1w
+bCAgICAgIChjb25zdCB2b2lkICpwYXJlbnQsIGNvbnN0IGNoYXIgKnByZWZp
+eCwNCj4gKyAJCQljb25zdCBjaGFyICppbnRlcmZhY2VfbmFtZSwgY29uc3Qg
+Y2hhciAqbmFtZSwNCj4gKyAJCQljb25zdCBjaGFyICpwb3N0Zml4KQ0KPiAr
+LQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2Mp
+KTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkp
+Ow0KPiArIA0KPiArIGNoYXIgKnN5bWJvbF9leHRlcm4gICAgKGNvbnN0IHZv
+aWQgKnBhcmVudCwgY29uc3QgY2hhciAqcHJlZml4LA0KPiArIAkJCWNvbnN0
+IGNoYXIgKmludGVyZmFjZV9zeW1ib2wsIGNvbnN0IGNoYXIgKm1pZGZpeCwN
+Cj4gKyAJCQljb25zdCBjaGFyICpzeW1ib2wsIGNvbnN0IGNoYXIgKnBvc3Rm
+aXgpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQs
+IG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRf
+cmVzdWx0KSk7DQo+ICsgDQo+ICsgY2hhciAqc3ltYm9sX3R5cGVkZWYgICAo
+Y29uc3Qgdm9pZCAqcGFyZW50LCBjb25zdCBjaGFyICpwcmVmaXgsDQo+ICsg
+CQkJY29uc3QgY2hhciAqaW50ZXJmYWNlX3N5bWJvbCwgY29uc3QgY2hhciAq
+bWlkZml4LA0KPiArIAkJCWNvbnN0IGNoYXIgKnN5bWJvbCwgY29uc3QgY2hh
+ciAqcG9zdGZpeCkNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2Vk
+X3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJu
+X3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4gKyBOSUhfRU5EX0VYVEVSTg0K
+PiArIA0KPiArLS0tIGxpYm5paC0xLjAuMy5vcmlnL25paC1kYnVzLXRvb2wv
+b3V0cHV0LmgNCj4gKysrKyBsaWJuaWgtMS4wLjMvbmloLWRidXMtdG9vbC9v
+dXRwdXQuaA0KPiArQEAgLTM1LDkgKzM1LDkgQEANCj4gKyAJX19hdHRyaWJ1
+dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0KPiArIA0KPiArIGNoYXIg
+Km91dHB1dF9wcmVhbWJsZSAoY29uc3Qgdm9pZCAqcGFyZW50LCBjb25zdCBj
+aGFyICpwYXRoKQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRf
+cmVzdWx0LCBtYWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5f
+dW51c2VkX3Jlc3VsdCkpOw0KPiArIGNoYXIgKm91dHB1dF9zZW50aW5lbCAo
+Y29uc3Qgdm9pZCAqcGFyZW50LCBjb25zdCBjaGFyICpwYXRoKQ0KPiArLQlf
+X2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2MpKTsN
+Cj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0K
+PiArIA0KPiArIE5JSF9FTkRfRVhURVJODQo+ICsgDQo+ICstLS0gbGlibmlo
+LTEuMC4zLm9yaWcvbmloLWRidXMtdG9vbC9wYXJzZS5oDQo+ICsrKysgbGli
+bmloLTEuMC4zL25paC1kYnVzLXRvb2wvcGFyc2UuaA0KPiArQEAgLTk1LDcg
+Kzk1LDcgQEANCj4gKyANCj4gKyBQYXJzZVN0YWNrICpwYXJzZV9zdGFja19w
+dXNoIChjb25zdCB2b2lkICpwYXJlbnQsIE5paExpc3QgKnN0YWNrLA0KPiAr
+IAkJCSAgICAgIFBhcnNlU3RhY2tUeXBlIHR5cGUsIHZvaWQgKmRhdGEpDQo+
+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxv
+YykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0
+KSk7DQo+ICsgUGFyc2VTdGFjayAqcGFyc2Vfc3RhY2tfdG9wICAoTmloTGlz
+dCAqc3RhY2spOw0KPiArIA0KPiArIHZvaWQgICAgICAgIHBhcnNlX3N0YXJ0
+X3RhZyAgKFhNTF9QYXJzZXIgeG1scCwgY29uc3QgY2hhciAqdGFnLA0KPiAr
+QEAgLTEwMyw3ICsxMDMsNyBAQA0KPiArIHZvaWQgICAgICAgIHBhcnNlX2Vu
+ZF90YWcgICAgKFhNTF9QYXJzZXIgeG1scCwgY29uc3QgY2hhciAqdGFnKTsN
+Cj4gKyANCj4gKyBOb2RlICogICAgICBwYXJzZV94bWwgICAgICAgIChjb25z
+dCB2b2lkICpwYXJlbnQsIGludCBmZCwgY29uc3QgY2hhciAqZmlsZW5hbWUp
+DQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQsIG1h
+bGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVz
+dWx0KSk7DQo+ICsgDQo+ICsgTklIX0VORF9FWFRFUk4NCj4gKyANCj4gKy0t
+LSBsaWJuaWgtMS4wLjMub3JpZy9uaWgtZGJ1cy10b29sL3R5cGUuaA0KPiAr
+KysrIGxpYm5paC0xLjAuMy9uaWgtZGJ1cy10b29sL3R5cGUuaA0KPiArQEAg
+LTk0LDQzICs5NCw0MyBAQA0KPiArIA0KPiArIGNoYXIgKiAgICAgIHR5cGVf
+b2YgICAgICAgICAgICAgICAoY29uc3Qgdm9pZCAqIHBhcmVudCwNCj4gKyAJ
+CQkJICAgREJ1c1NpZ25hdHVyZUl0ZXIgKml0ZXIpDQo+ICstCV9fYXR0cmli
+dXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlf
+X2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgDQo+
+ICsgVHlwZVZhciAqICAgdHlwZV92YXJfbmV3ICAgICAgICAgIChjb25zdCB2
+b2lkICpwYXJlbnQsIGNvbnN0IGNoYXIgKnR5cGUsDQo+ICsgCQkJCSAgIGNv
+bnN0IGNoYXIgKm5hbWUpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3Vu
+dXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgo
+d2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgY2hhciAqICAgICAgdHlwZV92
+YXJfdG9fc3RyaW5nICAgIChjb25zdCB2b2lkICpwYXJlbnQsIFR5cGVWYXIg
+KnZhcikNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3Vs
+dCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNl
+ZF9yZXN1bHQpKTsNCj4gKyBjaGFyICogICAgICB0eXBlX3Zhcl9sYXlvdXQg
+ICAgICAgKGNvbnN0IHZvaWQgKnBhcmVudCwgTmloTGlzdCAqdmFycykNCj4g
+Ky0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9j
+KSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQp
+KTsNCj4gKyANCj4gKyBUeXBlRnVuYyAqICB0eXBlX2Z1bmNfbmV3ICAgICAg
+ICAgKGNvbnN0IHZvaWQgKnBhcmVudCwgY29uc3QgY2hhciAqdHlwZSwNCj4g
+KyAJCQkJICAgY29uc3QgY2hhciAqbmFtZSkNCj4gKy0JX19hdHRyaWJ1dGVf
+XyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0
+cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyBjaGFyICog
+ICAgICB0eXBlX2Z1bmNfdG9fc3RyaW5nICAgKGNvbnN0IHZvaWQgKnBhcmVu
+dCwgVHlwZUZ1bmMgKmZ1bmMpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJu
+X3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9f
+ICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgY2hhciAqICAgICAgdHlw
+ZV9mdW5jX3RvX3R5cGVkZWYgIChjb25zdCB2b2lkICpwYXJlbnQsIFR5cGVG
+dW5jICpmdW5jKQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRf
+cmVzdWx0LCBtYWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5f
+dW51c2VkX3Jlc3VsdCkpOw0KPiArIGNoYXIgKiAgICAgIHR5cGVfZnVuY19s
+YXlvdXQgICAgICAoY29uc3Qgdm9pZCAqcGFyZW50LCBOaWhMaXN0ICpmdW5j
+cykNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwg
+bWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9y
+ZXN1bHQpKTsNCj4gKyANCj4gKyBUeXBlU3RydWN0ICp0eXBlX3N0cnVjdF9u
+ZXcgICAgICAgKGNvbnN0IHZvaWQgKnBhcmVudCwgY29uc3QgY2hhciAqbmFt
+ZSkNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwg
+bWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9y
+ZXN1bHQpKTsNCj4gKyBjaGFyICogICAgICB0eXBlX3N0cnVjdF90b19zdHJp
+bmcgKGNvbnN0IHZvaWQgKnBhcmVudCwgVHlwZVN0cnVjdCAqc3RydWN0dXJl
+KQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBt
+YWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jl
+c3VsdCkpOw0KPiArIA0KPiArIGNoYXIgKiAgICAgIHR5cGVfdG9fY29uc3Qg
+ICAgICAgICAoY2hhciAqKnR5cGUsIGNvbnN0IHZvaWQgKnBhcmVudCkNCj4g
+Ky0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9j
+KSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQp
+KTsNCj4gKyBjaGFyICogICAgICB0eXBlX3RvX3BvaW50ZXIgICAgICAgKGNo
+YXIgKip0eXBlLCBjb25zdCB2b2lkICpwYXJlbnQpDQo+ICstCV9fYXR0cmli
+dXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlf
+X2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgY2hh
+ciAqICAgICAgdHlwZV90b19zdGF0aWMgICAgICAgIChjaGFyICoqdHlwZSwg
+Y29uc3Qgdm9pZCAqcGFyZW50KQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fy
+bl91bnVzZWRfcmVzdWx0LCBtYWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVf
+XyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0KPiArIGNoYXIgKiAgICAgIHR5
+cGVfdG9fZXh0ZXJuICAgICAgICAoY2hhciAqKnR5cGUsIGNvbnN0IHZvaWQg
+KnBhcmVudCkNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jl
+c3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3Vu
+dXNlZF9yZXN1bHQpKTsNCj4gKyANCj4gKyBjaGFyICogICAgICB0eXBlX3N0
+cmNhdF9hc3NlcnQgICAgKGNoYXIgKipibG9jaywgY29uc3Qgdm9pZCAqcGFy
+ZW50LA0KPiArIAkJCQkgICBUeXBlVmFyICp2YXIsIFR5cGVWYXIgKnByZXYs
+IFR5cGVWYXIgKm5leHQpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3Vu
+dXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgo
+d2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgDQo+ICsgTklIX0VORF9FWFRF
+Uk4NCj4gKyANCj4gKy0tLSBsaWJuaWgtMS4wLjMub3JpZy9uaWgtZGJ1cy10
+b29sL2FyZ3VtZW50LmgNCj4gKysrKyBsaWJuaWgtMS4wLjMvbmloLWRidXMt
+dG9vbC9hcmd1bWVudC5oDQo+ICtAQCAtNjEsNyArNjEsNyBAQA0KPiArIA0K
+PiArIEFyZ3VtZW50ICphcmd1bWVudF9uZXcgICAgICAgIChjb25zdCB2b2lk
+ICpwYXJlbnQsIGNvbnN0IGNoYXIgKm5hbWUsDQo+ICsgCQkJICAgICAgIGNv
+bnN0IGNoYXIgKnR5cGUsIE5paERCdXNBcmdEaXIgZGlyZWN0aW9uKQ0KPiAr
+LQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2Mp
+KTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkp
+Ow0KPiArIA0KPiArIGludCAgICAgICBhcmd1bWVudF9zdGFydF90YWcgIChY
+TUxfUGFyc2VyIHhtbHAsIGNvbnN0IGNoYXIgKnRhZywNCj4gKyAJCQkgICAg
+ICAgY2hhciAqIGNvbnN0ICphdHRyKQ0KPiArLS0tIGxpYm5paC0xLjAuMy5v
+cmlnL25paC1kYnVzLXRvb2wvaW5kZW50LmgNCj4gKysrKyBsaWJuaWgtMS4w
+LjMvbmloLWRidXMtdG9vbC9pbmRlbnQuaA0KPiArQEAgLTI2LDkgKzI2LDkg
+QEANCj4gKyBOSUhfQkVHSU5fRVhURVJODQo+ICsgDQo+ICsgY2hhciAqaW5k
+ZW50ICAoY2hhciAqKnN0ciwgY29uc3Qgdm9pZCAqcGFyZW50LCBpbnQgbGV2
+ZWwpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQs
+IG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRf
+cmVzdWx0KSk7DQo+ICsgY2hhciAqY29tbWVudCAoY2hhciAqKnN0ciwgY29u
+c3Qgdm9pZCAqcGFyZW50KQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91
+bnVzZWRfcmVzdWx0LCBtYWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAo
+KHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0KPiArIA0KPiArIE5JSF9FTkRfRVhU
+RVJODQo+ICsgDQo+ICstLS0gbGlibmloLTEuMC4zLm9yaWcvbmloLWRidXMt
+dG9vbC9tYWluLmMNCj4gKysrKyBsaWJuaWgtMS4wLjMvbmloLWRidXMtdG9v
+bC9tYWluLmMNCj4gK0BAIC01MiwxMCArNTIsMTAgQEANCj4gKyAvKiBQcm90
+b3R5cGVzIGZvciBsb2NhbCBmdW5jdGlvbnMgKi8NCj4gKyBjaGFyICpzb3Vy
+Y2VfZmlsZV9wYXRoIChjb25zdCB2b2lkICpwYXJlbnQsIGNvbnN0IGNoYXIg
+Km91dHB1dF9wYXRoLA0KPiArIAkJCWNvbnN0IGNoYXIgKmZpbGVuYW1lKQ0K
+PiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxs
+b2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3Vs
+dCkpOw0KPiArIGNoYXIgKmhlYWRlcl9maWxlX3BhdGggKGNvbnN0IHZvaWQg
+KnBhcmVudCwgY29uc3QgY2hhciAqb3V0cHV0X3BhdGgsDQo+ICsgCQkJY29u
+c3QgY2hhciAqZmlsZW5hbWUpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJu
+X3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9f
+ICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgDQo+ICsgDQo+ICsgLyoq
+DQo+ICstLS0gbGlibmloLTEuMC4zLm9yaWcvbmloLWRidXMtdG9vbC9zaWdu
+YWwuaA0KPiArKysrIGxpYm5paC0xLjAuMy9uaWgtZGJ1cy10b29sL3NpZ25h
+bC5oDQo+ICtAQCAtNTgsNyArNTgsNyBAQA0KPiArIGludCAgICAgICBzaWdu
+YWxfbmFtZV92YWxpZCAgICAgIChjb25zdCBjaGFyICpuYW1lKTsNCj4gKyAN
+Cj4gKyBTaWduYWwgKiAgc2lnbmFsX25ldyAgICAgICAgICAgICAoY29uc3Qg
+dm9pZCAqcGFyZW50LCBjb25zdCBjaGFyICpuYW1lKQ0KPiArLQlfX2F0dHJp
+YnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2MpKTsNCj4gKysJ
+X19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0KPiArIA0K
+PiArIGludCAgICAgICBzaWduYWxfc3RhcnRfdGFnICAgICAgIChYTUxfUGFy
+c2VyIHhtbHAsIGNvbnN0IGNoYXIgKnRhZywNCj4gKyAJCQkJICBjaGFyICog
+Y29uc3QgKmF0dHIpDQo+ICtAQCAtNzYsMTggKzc2LDE4IEBADQo+ICsgY2hh
+ciAqICAgIHNpZ25hbF9vYmplY3RfZnVuY3Rpb24gKGNvbnN0IHZvaWQgKnBh
+cmVudCwgY29uc3QgY2hhciAqcHJlZml4LA0KPiArIAkJCQkgIEludGVyZmFj
+ZSAqaW50ZXJmYWNlLCBTaWduYWwgKnNpZ25hbCwNCj4gKyAJCQkJICBOaWhM
+aXN0ICpwcm90b3R5cGVzLCBOaWhMaXN0ICpzdHJ1Y3RzKQ0KPiArLQlfX2F0
+dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2MpKTsNCj4g
+KysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0KPiAr
+IA0KPiArIGNoYXIgKiAgICBzaWduYWxfcHJveHlfZnVuY3Rpb24gIChjb25z
+dCB2b2lkICpwYXJlbnQsIGNvbnN0IGNoYXIgKnByZWZpeCwNCj4gKyAJCQkJ
+ICBJbnRlcmZhY2UgKmludGVyZmFjZSwgU2lnbmFsICpzaWduYWwsDQo+ICsg
+CQkJCSAgTmloTGlzdCAqcHJvdG90eXBlcywgTmloTGlzdCAqdHlwZWRlZnMs
+DQo+ICsgCQkJCSAgTmloTGlzdCAqc3RydWN0cykNCj4gKy0JX19hdHRyaWJ1
+dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9f
+YXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4g
+KyBjaGFyICogICAgc2lnbmFsX2FyZ3NfYXJyYXkgICAgICAoY29uc3Qgdm9p
+ZCAqcGFyZW50LCBjb25zdCBjaGFyICpwcmVmaXgsDQo+ICsgCQkJCSAgSW50
+ZXJmYWNlICppbnRlcmZhY2UsIFNpZ25hbCAqc2lnbmFsLA0KPiArIAkJCQkg
+IE5paExpc3QgKnByb3RvdHlwZXMpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3
+YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0
+ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgDQo+ICsgTklIX0VO
+RF9FWFRFUk4NCj4gKyANCj4gKy0tLSBsaWJuaWgtMS4wLjMub3JpZy9uaWgt
+ZGJ1cy10b29sL21hcnNoYWwuYw0KPiArKysrIGxpYm5paC0xLjAuMy9uaWgt
+ZGJ1cy10b29sL21hcnNoYWwuYw0KPiArQEAgLTQ5LDcgKzQ5LDcgQEANCj4g
+KyAJCQkgICAgIGNvbnN0IGNoYXIgKnByZWZpeCwgY29uc3QgY2hhciAqaW50
+ZXJmYWNlX3N5bWJvbCwNCj4gKyAJCQkgICAgIGNvbnN0IGNoYXIgKm1lbWJl
+cl9zeW1ib2wsIGNvbnN0IGNoYXIgKnN5bWJvbCwNCj4gKyAJCQkgICAgIE5p
+aExpc3QgKnN0cnVjdHMpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3Vu
+dXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgo
+d2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgc3RhdGljIGNoYXIgKm1hcnNo
+YWxfYXJyYXkgIChjb25zdCB2b2lkICpwYXJlbnQsDQo+ICsgCQkJICAgICBE
+QnVzU2lnbmF0dXJlSXRlciAqaXRlciwNCj4gKyAJCQkgICAgIGNvbnN0IGNo
+YXIgKml0ZXJfbmFtZSwgY29uc3QgY2hhciAqbmFtZSwNCj4gK0BAIC01OCw3
+ICs1OCw3IEBADQo+ICsgCQkJICAgICBjb25zdCBjaGFyICpwcmVmaXgsIGNv
+bnN0IGNoYXIgKmludGVyZmFjZV9zeW1ib2wsDQo+ICsgCQkJICAgICBjb25z
+dCBjaGFyICptZW1iZXJfc3ltYm9sLCBjb25zdCBjaGFyICpzeW1ib2wsDQo+
+ICsgCQkJICAgICBOaWhMaXN0ICpzdHJ1Y3RzKQ0KPiArLQlfX2F0dHJpYnV0
+ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2MpKTsNCj4gKysJX19h
+dHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0KPiArIHN0YXRp
+YyBjaGFyICptYXJzaGFsX3N0cnVjdCAoY29uc3Qgdm9pZCAqcGFyZW50LA0K
+PiArIAkJCSAgICAgREJ1c1NpZ25hdHVyZUl0ZXIgKml0ZXIsDQo+ICsgCQkJ
+ICAgICBjb25zdCBjaGFyICppdGVyX25hbWUsIGNvbnN0IGNoYXIgKm5hbWUs
+DQo+ICtAQCAtNjcsNyArNjcsNyBAQA0KPiArIAkJCSAgICAgY29uc3QgY2hh
+ciAqcHJlZml4LCBjb25zdCBjaGFyICppbnRlcmZhY2Vfc3ltYm9sLA0KPiAr
+IAkJCSAgICAgY29uc3QgY2hhciAqbWVtYmVyX3N5bWJvbCwgY29uc3QgY2hh
+ciAqc3ltYm9sLA0KPiArIAkJCSAgICAgTmloTGlzdCAqc3RydWN0cykNCj4g
+Ky0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9j
+KSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQp
+KTsNCj4gKyANCj4gKyANCj4gKyAvKioNCj4gK0BAIC0zNjQsNiArMzY0LDcg
+QEANCj4gKyAJbmloX2xvY2FsIFR5cGVWYXIgKmVsZW1lbnRfbGVuX3ZhciA9
+IE5VTEw7DQo+ICsgCW5paF9sb2NhbCBjaGFyICogICBibG9jayA9IE5VTEw7
+DQo+ICsgCW5paF9sb2NhbCBjaGFyICogICB2YXJzX2Jsb2NrID0gTlVMTDsN
+Cj4gKysJbmloX2xvY2FsIGNoYXIgKiAgIGxvb3BfYmxvY2sgPSBOVUxMOw0K
+PiArIA0KPiArIAluaWhfYXNzZXJ0IChpdGVyICE9IE5VTEwpOw0KPiArIAlu
+aWhfYXNzZXJ0IChpdGVyX25hbWUgIT0gTlVMTCk7DQo+ICtAQCAtNDQ4LDcg
+KzQ0OSw3IEBADQo+ICsgCW5paF9saXN0X2FkZCAobG9jYWxzLCAmYXJyYXlf
+aXRlcl92YXItPmVudHJ5KTsNCj4gKyANCj4gKyAJaWYgKGRidXNfdHlwZV9p
+c19maXhlZCAoZWxlbWVudF90eXBlKSkgew0KPiArLQkJaWYgKCEgbmloX3N0
+cmNhdF9zcHJpbnRmICgmY29kZSwgcGFyZW50LA0KPiArKwkJaWYgKCEgbmlo
+X3N0cmNhdF9zcHJpbnRmICgmbG9vcF9ibG9jaywgcGFyZW50LA0KPiArIAkJ
+CQkJICAiZm9yIChzaXplX3QgJXMgPSAwOyAlcyA8ICVzOyAlcysrKSB7XG4i
+LA0KPiArIAkJCQkJICBsb29wX25hbWUsIGxvb3BfbmFtZSwgbGVuX25hbWUs
+IGxvb3BfbmFtZSkpIHsNCj4gKyAJCQluaWhfZnJlZSAoY29kZSk7DQo+ICtA
+QCAtNDU2LDYgKzQ1NywxMiBAQA0KPiArIAkJfQ0KPiArIAl9IGVsc2Ugew0K
+PiArIAkJaWYgKCEgbmloX3N0cmNhdF9zcHJpbnRmICgmY29kZSwgcGFyZW50
+LA0KPiArKwkJCQkJICAiaWYgKCVzKSB7XG4iLA0KPiArKwkJCQkJICBuYW1l
+KSkgew0KPiArKwkJCW5paF9mcmVlIChjb2RlKTsNCj4gKysJCQlyZXR1cm4g
+TlVMTDsNCj4gKysJCX0NCj4gKysJCWlmICghIG5paF9zdHJjYXRfc3ByaW50
+ZiAoJmxvb3BfYmxvY2ssIHBhcmVudCwNCj4gKyAJCQkJCSAgImZvciAoc2l6
+ZV90ICVzID0gMDsgJXNbJXNdOyAlcysrKSB7XG4iLA0KPiArIAkJCQkJICBs
+b29wX25hbWUsIG5hbWUsIGxvb3BfbmFtZSwgbG9vcF9uYW1lKSkgew0KPiAr
+IAkJCW5paF9mcmVlIChjb2RlKTsNCj4gK0BAIC01NzYsNyArNTgzLDcgQEAN
+Cj4gKyAJfQ0KPiArIA0KPiArIA0KPiArLQlpZiAoISBuaWhfc3RyY2F0X3Nw
+cmludGYgKCZjb2RlLCBwYXJlbnQsDQo+ICsrCWlmICghIG5paF9zdHJjYXRf
+c3ByaW50ZiAoJmxvb3BfYmxvY2ssIHBhcmVudCwNCj4gKyAJCQkgICAiJXMi
+DQo+ICsgCQkJICAgIlxuIg0KPiArIAkJCSAgICIlcyINCj4gK0BAIC01OTAs
+OSArNTk3LDM0IEBADQo+ICsgCX0NCj4gKyANCj4gKyAJLyogQ2xvc2UgdGhl
+IGNvbnRhaW5lciBhZ2FpbiAqLw0KPiArKwlpZiAoISBuaWhfc3RyY2F0X3Nw
+cmludGYgKCZsb29wX2Jsb2NrLCBwYXJlbnQsDQo+ICsrCQkJCSAgIn1cbiIp
+KSB7DQo+ICsrCQluaWhfZnJlZSAoY29kZSk7DQo+ICsrCQlyZXR1cm4gTlVM
+TDsNCj4gKysJfQ0KPiArKw0KPiArKwlpZiAoZGJ1c190eXBlX2lzX2ZpeGVk
+IChlbGVtZW50X3R5cGUpKSB7DQo+ICsrCQlpZiAoISBuaWhfc3RyY2F0X3Nw
+cmludGYgKCZjb2RlLCBwYXJlbnQsDQo+ICsrCQkJCSAiJXNcbiIsIGxvb3Bf
+YmxvY2spKSB7DQo+ICsrCQkJbmloX2ZyZWUgKGNvZGUpOw0KPiArKwkJCXJl
+dHVybiBOVUxMOw0KPiArKwkJfQ0KPiArKwl9DQo+ICsrCWVsc2Ugew0KPiAr
+KwkJaWYgKCEgaW5kZW50ICgmbG9vcF9ibG9jaywgTlVMTCwgMSkpIHsNCj4g
+KysJCQluaWhfZnJlZSAoY29kZSk7DQo+ICsrCQkJcmV0dXJuIE5VTEw7DQo+
+ICsrCQl9DQo+ICsrDQo+ICsrCQlpZiAoISBuaWhfc3RyY2F0X3NwcmludGYg
+KCZjb2RlLCBwYXJlbnQsDQo+ICsrCQkJCSAiJXMiDQo+ICsrCQkJCSAifVxu
+XG4iLCBsb29wX2Jsb2NrKSkgew0KPiArKwkJCW5paF9mcmVlIChjb2RlKTsN
+Cj4gKysJCQlyZXR1cm4gTlVMTDsNCj4gKysJCX0NCj4gKysJfQ0KPiArKw0K
+PiArIAlpZiAoISBuaWhfc3RyY2F0X3NwcmludGYgKCZjb2RlLCBwYXJlbnQs
+DQo+ICstCQkJCSAgIn1cbiINCj4gKy0JCQkJICAiXG4iDQo+ICsgCQkJCSAg
+ImlmICghIGRidXNfbWVzc2FnZV9pdGVyX2Nsb3NlX2NvbnRhaW5lciAoJiVz
+LCAmJXMpKSB7XG4iDQo+ICsgCQkJCSAgIiVzIg0KPiArIAkJCQkgICJ9XG4i
+LA0KPiArLS0tIGxpYm5paC0xLjAuMy5vcmlnL25paC1kYnVzLXRvb2wvZGVt
+YXJzaGFsLmMNCj4gKysrKyBsaWJuaWgtMS4wLjMvbmloLWRidXMtdG9vbC9k
+ZW1hcnNoYWwuYw0KPiArQEAgLTUxLDcgKzUxLDcgQEANCj4gKyAJCQkgICAg
+ICAgY29uc3QgY2hhciAqcHJlZml4LCBjb25zdCBjaGFyICppbnRlcmZhY2Vf
+c3ltYm9sLA0KPiArIAkJCSAgICAgICBjb25zdCBjaGFyICptZW1iZXJfc3lt
+Ym9sLCBjb25zdCBjaGFyICpzeW1ib2wsDQo+ICsgCQkJICAgICAgIE5paExp
+c3QgKnN0cnVjdHMpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNl
+ZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fy
+bl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgc3RhdGljIGNoYXIgKmRlbWFyc2hh
+bF9hcnJheSAgKGNvbnN0IHZvaWQgKnBhcmVudCwNCj4gKyAJCQkgICAgICAg
+REJ1c1NpZ25hdHVyZUl0ZXIgKml0ZXIsDQo+ICsgCQkJICAgICAgIGNvbnN0
+IGNoYXIgKnBhcmVudF9uYW1lLA0KPiArQEAgLTYyLDcgKzYyLDcgQEANCj4g
+KyAJCQkgICAgICAgY29uc3QgY2hhciAqcHJlZml4LCBjb25zdCBjaGFyICpp
+bnRlcmZhY2Vfc3ltYm9sLA0KPiArIAkJCSAgICAgICBjb25zdCBjaGFyICpt
+ZW1iZXJfc3ltYm9sLCBjb25zdCBjaGFyICpzeW1ib2wsDQo+ICsgCQkJICAg
+ICAgIE5paExpc3QgKnN0cnVjdHMpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3
+YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0
+ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgc3RhdGljIGNoYXIg
+KmRlbWFyc2hhbF9zdHJ1Y3QgKGNvbnN0IHZvaWQgKnBhcmVudCwNCj4gKyAJ
+CQkgICAgICAgREJ1c1NpZ25hdHVyZUl0ZXIgKml0ZXIsDQo+ICsgCQkJICAg
+ICAgIGNvbnN0IGNoYXIgKnBhcmVudF9uYW1lLA0KPiArQEAgLTczLDcgKzcz
+LDcgQEANCj4gKyAJCQkgICAgICAgY29uc3QgY2hhciAqcHJlZml4LCBjb25z
+dCBjaGFyICppbnRlcmZhY2Vfc3ltYm9sLA0KPiArIAkJCSAgICAgICBjb25z
+dCBjaGFyICptZW1iZXJfc3ltYm9sLCBjb25zdCBjaGFyICpzeW1ib2wsDQo+
+ICsgCQkJICAgICAgIE5paExpc3QgKnN0cnVjdHMpDQo+ICstCV9fYXR0cmli
+dXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlf
+X2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgDQo+
+ICsgDQo+ICsgLyoqDQo+ICstLS0gbGlibmloLTEuMC4zLm9yaWcvbmloLWRi
+dXMtdG9vbC9pbnRlcmZhY2UuaA0KPiArKysrIGxpYm5paC0xLjAuMy9uaWgt
+ZGJ1cy10b29sL2ludGVyZmFjZS5oDQo+ICtAQCAtNjEsNyArNjEsNyBAQA0K
+PiArIA0KPiArIEludGVyZmFjZSAqaW50ZXJmYWNlX25ldyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIChjb25zdCB2b2lkICpwYXJlbnQsDQo+ICsgCQkJ
+CQkJICAgIGNvbnN0IGNoYXIgKm5hbWUpDQo+ICstCV9fYXR0cmlidXRlX18g
+KCh3YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJp
+YnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgDQo+ICsgaW50
+ICAgICAgICBpbnRlcmZhY2Vfc3RhcnRfdGFnICAgICAgICAgICAgICAgICAg
+ICAgKFhNTF9QYXJzZXIgeG1scCwNCj4gKyAJCQkJCQkgICAgY29uc3QgY2hh
+ciAqdGFnLA0KPiArQEAgLTgxLDI2ICs4MSwyNiBAQA0KPiArIAkJCQkJCSAg
+ICBJbnRlcmZhY2UgKmludGVyZmFjZSwNCj4gKyAJCQkJCQkgICAgaW50IHdp
+dGhfaGFuZGxlcnMsDQo+ICsgCQkJCQkJICAgIE5paExpc3QgKnByb3RvdHlw
+ZXMpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQs
+IG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRf
+cmVzdWx0KSk7DQo+ICsgY2hhciAqICAgICBpbnRlcmZhY2Vfc2lnbmFsc19h
+cnJheSAgICAgICAgICAgICAgICAgKGNvbnN0IHZvaWQgKnBhcmVudCwNCj4g
+KyAJCQkJCQkgICAgY29uc3QgY2hhciAqcHJlZml4LA0KPiArIAkJCQkJCSAg
+ICBJbnRlcmZhY2UgKmludGVyZmFjZSwNCj4gKyAJCQkJCQkgICAgaW50IHdp
+dGhfZmlsdGVycywNCj4gKyAJCQkJCQkgICAgTmloTGlzdCAqcHJvdG90eXBl
+cykNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwg
+bWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9y
+ZXN1bHQpKTsNCj4gKyBjaGFyICogICAgIGludGVyZmFjZV9wcm9wZXJ0aWVz
+X2FycmF5ICAgICAgICAgICAgICAoY29uc3Qgdm9pZCAqcGFyZW50LA0KPiAr
+IAkJCQkJCSAgICBjb25zdCBjaGFyICpwcmVmaXgsDQo+ICsgCQkJCQkJICAg
+IEludGVyZmFjZSAqaW50ZXJmYWNlLA0KPiArIAkJCQkJCSAgICBpbnQgd2l0
+aF9oYW5kbGVycywNCj4gKyAJCQkJCQkgICAgTmloTGlzdCAqcHJvdG90eXBl
+cykNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwg
+bWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9y
+ZXN1bHQpKTsNCj4gKyANCj4gKyBjaGFyICogICAgIGludGVyZmFjZV9zdHJ1
+Y3QgICAgICAgICAgICAgICAgICAgICAgICAoY29uc3Qgdm9pZCAqcGFyZW50
+LA0KPiArIAkJCQkJCSAgICBjb25zdCBjaGFyICpwcmVmaXgsDQo+ICsgCQkJ
+CQkJICAgIEludGVyZmFjZSAqaW50ZXJmYWNlLA0KPiArIAkJCQkJCSAgICBp
+bnQgb2JqZWN0LA0KPiArIAkJCQkJCSAgICBOaWhMaXN0ICpwcm90b3R5cGVz
+KQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBt
+YWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jl
+c3VsdCkpOw0KPiArIA0KPiArIA0KPiArIGNoYXIgKiAgICAgaW50ZXJmYWNl
+X3Byb3h5X2dldF9hbGxfZnVuY3Rpb24gICAgICAgIChjb25zdCB2b2lkICpw
+YXJlbnQsDQo+ICtAQCAtMTA4LDcgKzEwOCw3IEBADQo+ICsgCQkJCQkJICAg
+IEludGVyZmFjZSAqaW50ZXJmYWNlLA0KPiArIAkJCQkJCSAgICBOaWhMaXN0
+ICpwcm90b3R5cGVzLA0KPiArIAkJCQkJCSAgICBOaWhMaXN0ICpzdHJ1Y3Rz
+KQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBt
+YWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jl
+c3VsdCkpOw0KPiArIA0KPiArIGNoYXIgKiAgICAgaW50ZXJmYWNlX3Byb3h5
+X2dldF9hbGxfbm90aWZ5X2Z1bmN0aW9uIChjb25zdCB2b2lkICpwYXJlbnQs
+DQo+ICsgCQkJCQkJICAgIGNvbnN0IGNoYXIgKnByZWZpeCwNCj4gK0BAIC0x
+MTYsMTQgKzExNiwxNCBAQA0KPiArIAkJCQkJCSAgICBOaWhMaXN0ICpwcm90
+b3R5cGVzLA0KPiArIAkJCQkJCSAgICBOaWhMaXN0ICp0eXBlZGVmcywNCj4g
+KyAJCQkJCQkgICAgTmloTGlzdCAqc3RydWN0cykNCj4gKy0JX19hdHRyaWJ1
+dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9f
+YXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4g
+KyBjaGFyICogICAgIGludGVyZmFjZV9wcm94eV9nZXRfYWxsX3N5bmNfZnVu
+Y3Rpb24gICAoY29uc3Qgdm9pZCAqcGFyZW50LA0KPiArIAkJCQkJCSAgICBj
+b25zdCBjaGFyICpwcmVmaXgsDQo+ICsgCQkJCQkJICAgIEludGVyZmFjZSAq
+aW50ZXJmYWNlLA0KPiArIAkJCQkJCSAgICBOaWhMaXN0ICpwcm90b3R5cGVz
+LA0KPiArIAkJCQkJCSAgICBOaWhMaXN0ICpzdHJ1Y3RzKQ0KPiArLQlfX2F0
+dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2MpKTsNCj4g
+KysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0KPiAr
+IA0KPiArIE5JSF9FTkRfRVhURVJODQo+ICsgDQo+ICstLS0gbGlibmloLTEu
+MC4zLm9yaWcvbmloLWRidXMtdG9vbC9tZXRob2QuaA0KPiArKysrIGxpYm5p
+aC0xLjAuMy9uaWgtZGJ1cy10b29sL21ldGhvZC5oDQo+ICtAQCAtNjIsNyAr
+NjIsNyBAQA0KPiArIGludCAgICAgICBtZXRob2RfbmFtZV92YWxpZCAgICAg
+ICAgICAgIChjb25zdCBjaGFyICpuYW1lKTsNCj4gKyANCj4gKyBNZXRob2Qg
+KiAgbWV0aG9kX25ldyAgICAgICAgICAgICAgICAgICAoY29uc3Qgdm9pZCAq
+cGFyZW50LCBjb25zdCBjaGFyICpuYW1lKQ0KPiArLQlfX2F0dHJpYnV0ZV9f
+ICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2MpKTsNCj4gKysJX19hdHRy
+aWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0KPiArIA0KPiArIGlu
+dCAgICAgICBtZXRob2Rfc3RhcnRfdGFnICAgICAgICAgICAgIChYTUxfUGFy
+c2VyIHhtbHAsIGNvbnN0IGNoYXIgKnRhZywNCj4gKyAJCQkJCWNoYXIgKiBj
+b25zdCAqYXR0cikNCj4gK0BAIC04MiwzMyArODIsMzMgQEANCj4gKyAJCQkJ
+CUludGVyZmFjZSAqaW50ZXJmYWNlLCBNZXRob2QgKm1ldGhvZCwNCj4gKyAJ
+CQkJCU5paExpc3QgKnByb3RvdHlwZXMsIE5paExpc3QgKmhhbmRsZXJzLA0K
+PiArIAkJCQkJTmloTGlzdCAqc3RydWN0cykNCj4gKy0JX19hdHRyaWJ1dGVf
+XyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0
+cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4gKyBj
+aGFyICogICAgbWV0aG9kX3JlcGx5X2Z1bmN0aW9uICAgICAgICAoY29uc3Qg
+dm9pZCAqcGFyZW50LCBjb25zdCBjaGFyICpwcmVmaXgsDQo+ICsgCQkJCQlJ
+bnRlcmZhY2UgKmludGVyZmFjZSwgTWV0aG9kICptZXRob2QsDQo+ICsgCQkJ
+CQlOaWhMaXN0ICpwcm90b3R5cGVzLCBOaWhMaXN0ICpzdHJ1Y3RzKQ0KPiAr
+LQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2Mp
+KTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkp
+Ow0KPiArIA0KPiArIGNoYXIgKiAgICBtZXRob2RfcHJveHlfZnVuY3Rpb24g
+ICAgICAgIChjb25zdCB2b2lkICpwYXJlbnQsIGNvbnN0IGNoYXIgKnByZWZp
+eCwNCj4gKyAJCQkJCUludGVyZmFjZSAqaW50ZXJmYWNlLCBNZXRob2QgKm1l
+dGhvZCwNCj4gKyAJCQkJCU5paExpc3QgKnByb3RvdHlwZXMsIE5paExpc3Qg
+KnN0cnVjdHMpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9y
+ZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91
+bnVzZWRfcmVzdWx0KSk7DQo+ICsgDQo+ICsgY2hhciAqICAgIG1ldGhvZF9w
+cm94eV9ub3RpZnlfZnVuY3Rpb24gKGNvbnN0IHZvaWQgKnBhcmVudCwgY29u
+c3QgY2hhciAqcHJlZml4LA0KPiArIAkJCQkJSW50ZXJmYWNlICppbnRlcmZh
+Y2UsIE1ldGhvZCAqbWV0aG9kLA0KPiArIAkJCQkJTmloTGlzdCAqcHJvdG90
+eXBlcywgTmloTGlzdCAqdHlwZWRlZnMsDQo+ICsgCQkJCQlOaWhMaXN0ICpz
+dHJ1Y3RzKQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVz
+dWx0LCBtYWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51
+c2VkX3Jlc3VsdCkpOw0KPiArIA0KPiArIGNoYXIgKiAgICBtZXRob2RfcHJv
+eHlfc3luY19mdW5jdGlvbiAgIChjb25zdCB2b2lkICpwYXJlbnQsIGNvbnN0
+IGNoYXIgKnByZWZpeCwNCj4gKyAJCQkJCUludGVyZmFjZSAqaW50ZXJmYWNl
+LCBNZXRob2QgKm1ldGhvZCwNCj4gKyAJCQkJCU5paExpc3QgKnByb3RvdHlw
+ZXMsIE5paExpc3QgKnN0cnVjdHMpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3
+YXJuX3VudXNlZF9yZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0
+ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0KSk7DQo+ICsgDQo+ICsgY2hhciAq
+ICAgIG1ldGhvZF9hcmdzX2FycmF5ICAgICAgICAgICAgKGNvbnN0IHZvaWQg
+KnBhcmVudCwgY29uc3QgY2hhciAqcHJlZml4LA0KPiArIAkJCQkJSW50ZXJm
+YWNlICppbnRlcmZhY2UsIE1ldGhvZCAqbWV0aG9kLA0KPiArIAkJCQkJTmlo
+TGlzdCAqcHJvdG90eXBlcykNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5f
+dW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18g
+KCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4gKyBOSUhfRU5EX0VY
+VEVSTg0KPiArIA0KPiArLS0tIGxpYm5paC0xLjAuMy5vcmlnL25paC1kYnVz
+LXRvb2wvbm9kZS5oDQo+ICsrKysgbGlibmloLTEuMC4zL25paC1kYnVzLXRv
+b2wvbm9kZS5oDQo+ICtAQCAtNDcsNyArNDcsNyBAQA0KPiArIGludCAgICAg
+ICAgbm9kZV9wYXRoX3ZhbGlkICAgICAgIChjb25zdCBjaGFyICpuYW1lKTsN
+Cj4gKyANCj4gKyBOb2RlICogICAgIG5vZGVfbmV3ICAgICAgICAgICAgICAo
+Y29uc3Qgdm9pZCAqcGFyZW50LCBjb25zdCBjaGFyICpwYXRoKQ0KPiArLQlf
+X2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVzdWx0LCBtYWxsb2MpKTsN
+Cj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0K
+PiArIA0KPiArIGludCAgICAgICAgbm9kZV9zdGFydF90YWcgICAgICAgIChY
+TUxfUGFyc2VyIHhtbHAsIGNvbnN0IGNoYXIgKnRhZywNCj4gKyAJCQkJICBj
+aGFyICogY29uc3QgKmF0dHIpDQo+ICtAQCAtNTksMTggKzU5LDE4IEBADQo+
+ICsgDQo+ICsgY2hhciAqICAgICBub2RlX2ludGVyZmFjZXNfYXJyYXkgKGNv
+bnN0IHZvaWQgKnBhcmVudCwgY29uc3QgY2hhciAqcHJlZml4LA0KPiArIAkJ
+CQkgIE5vZGUgKm5vZGUsIGludCBvYmplY3QsIE5paExpc3QgKnByb3RvdHlw
+ZXMpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQs
+IG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRf
+cmVzdWx0KSk7DQo+ICsgDQo+ICsgY2hhciAqICAgICBub2RlX29iamVjdF9m
+dW5jdGlvbnMgKGNvbnN0IHZvaWQgKnBhcmVudCwgY29uc3QgY2hhciAqcHJl
+Zml4LA0KPiArIAkJCQkgIE5vZGUgKm5vZGUsDQo+ICsgCQkJCSAgTmloTGlz
+dCAqcHJvdG90eXBlcywgTmloTGlzdCAqaGFuZGxlcnMsDQo+ICsgCQkJCSAg
+TmloTGlzdCAqc3RydWN0cywgTmloTGlzdCAqZXh0ZXJucykNCj4gKy0JX19h
+dHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+
+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4g
+KyBjaGFyICogICAgIG5vZGVfcHJveHlfZnVuY3Rpb25zICAoY29uc3Qgdm9p
+ZCAqcGFyZW50LCBjb25zdCBjaGFyICpwcmVmaXgsDQo+ICsgCQkJCSAgTm9k
+ZSAqbm9kZSwNCj4gKyAJCQkJICBOaWhMaXN0ICpwcm90b3R5cGVzLCBOaWhM
+aXN0ICpzdHJ1Y3RzLA0KPiArIAkJCQkgIE5paExpc3QgKnR5cGVkZWZzLCBO
+aWhMaXN0ICpleHRlcm5zKQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91
+bnVzZWRfcmVzdWx0LCBtYWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAo
+KHdhcm5fdW51c2VkX3Jlc3VsdCkpOw0KPiArIA0KPiArIE5JSF9FTkRfRVhU
+RVJODQo+ICsgDQo+ICstLS0gbGlibmloLTEuMC4zLm9yaWcvbmloLWRidXMt
+dG9vbC9tYXJzaGFsLmgNCj4gKysrKyBsaWJuaWgtMS4wLjMvbmloLWRidXMt
+dG9vbC9tYXJzaGFsLmgNCj4gK0BAIC0zNSw3ICszNSw3IEBADQo+ICsgCSAg
+ICAgICBjb25zdCBjaGFyICpwcmVmaXgsIGNvbnN0IGNoYXIgKmludGVyZmFj
+ZV9zeW1ib2wsDQo+ICsgCSAgICAgICBjb25zdCBjaGFyICptZW1iZXJfc3lt
+Ym9sLCBjb25zdCBjaGFyICpzeW1ib2wsDQo+ICsgCSAgICAgICBOaWhMaXN0
+ICpzdHJ1Y3RzKQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRf
+cmVzdWx0LCBtYWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5f
+dW51c2VkX3Jlc3VsdCkpOw0KPiArIA0KPiArIE5JSF9FTkRfRVhURVJODQo+
+ICsgDQo+ICstLS0gbGlibmloLTEuMC4zLm9yaWcvbmloLWRidXMtdG9vbC90
+eXBlLmMNCj4gKysrKyBsaWJuaWgtMS4wLjMvbmloLWRidXMtdG9vbC90eXBl
+LmMNCj4gK0BAIC0xMTAxLDcgKzExMDEsNyBAQA0KPiArIAluaWhfYXNzZXJ0
+IChibG9jayAhPSBOVUxMKTsNCj4gKyAJbmloX2Fzc2VydCAodmFyICE9IE5V
+TEwpOw0KPiArIA0KPiArLQlpZiAoISBzdHJjaHIgKHZhci0+dHlwZSwgJyon
+KSkNCj4gKysJaWYgKCEgc3RyY2hyICh2YXItPnR5cGUsICcqJykgfHwgISBz
+dHJjbXAgKHZhci0+dHlwZSwgImNoYXIgKiBjb25zdCAqIikpDQo+ICsgCQly
+ZXR1cm4gKmJsb2NrOw0KPiArIA0KPiArIAlpZiAobmV4dCAmJiAoISBzdHJj
+bXAgKG5leHQtPnR5cGUsICJzaXplX3QiKSkpIHsNCj4gKy0tLSBsaWJuaWgt
+MS4wLjMub3JpZy9uaWgtZGJ1cy10b29sL3Byb3BlcnR5LmgNCj4gKysrKyBs
+aWJuaWgtMS4wLjMvbmloLWRidXMtdG9vbC9wcm9wZXJ0eS5oDQo+ICtAQCAt
+NjUsNyArNjUsNyBAQA0KPiArIAkJCQkJICAgICAgY29uc3QgY2hhciAqbmFt
+ZSwNCj4gKyAJCQkJCSAgICAgIGNvbnN0IGNoYXIgKnR5cGUsDQo+ICsgCQkJ
+CQkgICAgICBOaWhEQnVzQWNjZXNzIGFjY2VzcykNCj4gKy0JX19hdHRyaWJ1
+dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9f
+YXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4g
+KyBpbnQgICAgICAgcHJvcGVydHlfc3RhcnRfdGFnICAgICAgICAgICAgICAg
+ICAoWE1MX1BhcnNlciB4bWxwLCBjb25zdCBjaGFyICp0YWcsDQo+ICsgCQkJ
+CQkgICAgICBjaGFyICogY29uc3QgKmF0dHIpDQo+ICtAQCAtODgsNyArODgs
+NyBAQA0KPiArIAkJCQkJICAgICAgTmloTGlzdCAqcHJvdG90eXBlcywNCj4g
+KyAJCQkJCSAgICAgIE5paExpc3QgKmhhbmRsZXJzLA0KPiArIAkJCQkJICAg
+ICAgTmloTGlzdCAqc3RydWN0cykNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdh
+cm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRl
+X18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyBjaGFyICogICAgcHJv
+cGVydHlfb2JqZWN0X3NldF9mdW5jdGlvbiAgICAgICAoY29uc3Qgdm9pZCAq
+cGFyZW50LA0KPiArIAkJCQkJICAgICAgY29uc3QgY2hhciAqcHJlZml4LA0K
+PiArIAkJCQkJICAgICAgSW50ZXJmYWNlICppbnRlcmZhY2UsDQo+ICtAQCAt
+OTYsNyArOTYsNyBAQA0KPiArIAkJCQkJICAgICAgTmloTGlzdCAqcHJvdG90
+eXBlcywNCj4gKyAJCQkJCSAgICAgIE5paExpc3QgKmhhbmRsZXJzLA0KPiAr
+IAkJCQkJICAgICAgTmloTGlzdCAqc3RydWN0cykNCj4gKy0JX19hdHRyaWJ1
+dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9f
+YXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4g
+KyBjaGFyICogICAgcHJvcGVydHlfcHJveHlfZ2V0X2Z1bmN0aW9uICAgICAg
+ICAoY29uc3Qgdm9pZCAqcGFyZW50LA0KPiArIAkJCQkJICAgICAgY29uc3Qg
+Y2hhciAqcHJlZml4LA0KPiArQEAgLTEwNCw3ICsxMDQsNyBAQA0KPiArIAkJ
+CQkJICAgICAgUHJvcGVydHkgKnByb3BlcnR5LA0KPiArIAkJCQkJICAgICAg
+TmloTGlzdCAqcHJvdG90eXBlcywNCj4gKyAJCQkJCSAgICAgIE5paExpc3Qg
+KnN0cnVjdHMpDQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9y
+ZXN1bHQsIG1hbGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91
+bnVzZWRfcmVzdWx0KSk7DQo+ICsgY2hhciAqICAgIHByb3BlcnR5X3Byb3h5
+X2dldF9ub3RpZnlfZnVuY3Rpb24gKGNvbnN0IHZvaWQgKnBhcmVudCwNCj4g
+KyAJCQkJCSAgICAgIGNvbnN0IGNoYXIgKnByZWZpeCwNCj4gKyAJCQkJCSAg
+ICAgIEludGVyZmFjZSAqaW50ZXJmYWNlLA0KPiArQEAgLTExMiw3ICsxMTIs
+NyBAQA0KPiArIAkJCQkJICAgICAgTmloTGlzdCAqcHJvdG90eXBlcywNCj4g
+KyAJCQkJCSAgICAgIE5paExpc3QgKnR5cGVkZWZzLA0KPiArIAkJCQkJICAg
+ICAgTmloTGlzdCAqc3RydWN0cykNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdh
+cm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRl
+X18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4gKyBjaGFyICog
+ICAgcHJvcGVydHlfcHJveHlfc2V0X2Z1bmN0aW9uICAgICAgICAoY29uc3Qg
+dm9pZCAqcGFyZW50LA0KPiArIAkJCQkJICAgICAgY29uc3QgY2hhciAqcHJl
+Zml4LA0KPiArQEAgLTEyMCw3ICsxMjAsNyBAQA0KPiArIAkJCQkJICAgICAg
+UHJvcGVydHkgKnByb3BlcnR5LA0KPiArIAkJCQkJICAgICAgTmloTGlzdCAq
+cHJvdG90eXBlcywNCj4gKyAJCQkJCSAgICAgIE5paExpc3QgKnN0cnVjdHMp
+DQo+ICstCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQsIG1h
+bGxvYykpOw0KPiArKwlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRfcmVz
+dWx0KSk7DQo+ICsgY2hhciAqICAgIHByb3BlcnR5X3Byb3h5X3NldF9ub3Rp
+ZnlfZnVuY3Rpb24gKGNvbnN0IHZvaWQgKnBhcmVudCwNCj4gKyAJCQkJCSAg
+ICAgIGNvbnN0IGNoYXIgKnByZWZpeCwNCj4gKyAJCQkJCSAgICAgIEludGVy
+ZmFjZSAqaW50ZXJmYWNlLA0KPiArQEAgLTEyOCw3ICsxMjgsNyBAQA0KPiAr
+IAkJCQkJICAgICAgTmloTGlzdCAqcHJvdG90eXBlcywNCj4gKyAJCQkJCSAg
+ICAgIE5paExpc3QgKnR5cGVkZWZzLA0KPiArIAkJCQkJICAgICAgTmloTGlz
+dCAqc3RydWN0cykNCj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2Vk
+X3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJu
+X3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4gKyBjaGFyICogICAgcHJvcGVy
+dHlfcHJveHlfZ2V0X3N5bmNfZnVuY3Rpb24gICAoY29uc3Qgdm9pZCAqcGFy
+ZW50LA0KPiArIAkJCQkJICAgICAgY29uc3QgY2hhciAqcHJlZml4LA0KPiAr
+QEAgLTEzNiwxNCArMTM2LDE0IEBADQo+ICsgCQkJCQkgICAgICBQcm9wZXJ0
+eSAqcHJvcGVydHksDQo+ICsgCQkJCQkgICAgICBOaWhMaXN0ICpwcm90b3R5
+cGVzLA0KPiArIAkJCQkJICAgICAgTmloTGlzdCAqc3RydWN0cykNCj4gKy0J
+X19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7
+DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsN
+Cj4gKyBjaGFyICogICAgcHJvcGVydHlfcHJveHlfc2V0X3N5bmNfZnVuY3Rp
+b24gICAoY29uc3Qgdm9pZCAqcGFyZW50LA0KPiArIAkJCQkJICAgICAgY29u
+c3QgY2hhciAqcHJlZml4LA0KPiArIAkJCQkJICAgICAgSW50ZXJmYWNlICpp
+bnRlcmZhY2UsDQo+ICsgCQkJCQkgICAgICBQcm9wZXJ0eSAqcHJvcGVydHks
+DQo+ICsgCQkJCQkgICAgICBOaWhMaXN0ICpwcm90b3R5cGVzLA0KPiArIAkJ
+CQkJICAgICAgTmloTGlzdCAqc3RydWN0cykNCj4gKy0JX19hdHRyaWJ1dGVf
+XyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFsbG9jKSk7DQo+ICsrCV9fYXR0
+cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1bHQpKTsNCj4gKyANCj4gKyBO
+SUhfRU5EX0VYVEVSTg0KPiArIA0KPiArLS0tIGxpYm5paC0xLjAuMy5vcmln
+L25paC1kYnVzLXRvb2wvdGVzdHMvdGVzdF9tYWluLmMNCj4gKysrKyBsaWJu
+aWgtMS4wLjMvbmloLWRidXMtdG9vbC90ZXN0cy90ZXN0X21haW4uYw0KPiAr
+QEAgLTEwMCwxMCArMTAwLDEwIEBADQo+ICsgDQo+ICsgZXh0ZXJuIGNoYXIg
+KnNvdXJjZV9maWxlX3BhdGggKGNvbnN0IHZvaWQgKnBhcmVudCwgY29uc3Qg
+Y2hhciAqb3V0cHV0X3BhdGgsDQo+ICsgCQkJICAgICAgIGNvbnN0IGNoYXIg
+KmZpbGVuYW1lKQ0KPiArLQlfX2F0dHJpYnV0ZV9fICgod2Fybl91bnVzZWRf
+cmVzdWx0LCBtYWxsb2MpKTsNCj4gKysJX19hdHRyaWJ1dGVfXyAoKHdhcm5f
+dW51c2VkX3Jlc3VsdCkpOw0KPiArIGV4dGVybiBjaGFyICpoZWFkZXJfZmls
+ZV9wYXRoIChjb25zdCB2b2lkICpwYXJlbnQsIGNvbnN0IGNoYXIgKm91dHB1
+dF9wYXRoLA0KPiArIAkJCSAgICAgICBjb25zdCBjaGFyICpmaWxlbmFtZSkN
+Cj4gKy0JX19hdHRyaWJ1dGVfXyAoKHdhcm5fdW51c2VkX3Jlc3VsdCwgbWFs
+bG9jKSk7DQo+ICsrCV9fYXR0cmlidXRlX18gKCh3YXJuX3VudXNlZF9yZXN1
+bHQpKTsNCj4gKyANCj4gKyB2b2lkDQo+ICsgdGVzdF9zb3VyY2VfZmlsZV9w
+YXRoICh2b2lkKQ0KPiArLS0tIGxpYm5paC0xLjAuMy5vcmlnL25paC1kYnVz
+LXRvb2wvdGVzdHMvdGVzdF9jb20ubmV0c3BsaXQuTmloLlRlc3Rfb2JqZWN0
+LmMNCj4gKysrKyBsaWJuaWgtMS4wLjMvbmloLWRidXMtdG9vbC90ZXN0cy90
+ZXN0X2NvbS5uZXRzcGxpdC5OaWguVGVzdF9vYmplY3QuYw0KPiArQEAgLTEy
+NTI0LDYgKzEyNTI0LDcgQEANCj4gKyAJCWRidXNfbWVzc2FnZV9pdGVyX2lu
+aXQgKHJlcGx5LCAmaXRlcik7DQo+ICsgDQo+ICsgCQlkYnVzX21lc3NhZ2Vf
+aXRlcl9nZXRfYmFzaWMgKCZpdGVyLCAmc3RyX3ZhbHVlKTsNCj4gKysJCVRF
+U1RfTkUgKHN0cl92YWx1ZVswXSwgJ1wwJyk7DQo+ICsgCQlURVNUX1RSVUUg
+KHN0cmNociAoIjAxMjM0NTY3ODkiLCBzdHJfdmFsdWVbMF0pKTsNCj4gKyAN
+Cj4gKyAJCWRidXNfbWVzc2FnZV91bnJlZiAocmVwbHkpOw0KPiArLS0tIGxp
+Ym5paC0xLjAuMy5vcmlnL25paC1kYnVzLXRvb2wvdGVzdHMvdGVzdF9tYXJz
+aGFsLmMNCj4gKysrKyBsaWJuaWgtMS4wLjMvbmloLWRidXMtdG9vbC90ZXN0
+cy90ZXN0X21hcnNoYWwuYw0KPiArQEAgLTE0NzksMzkgKzE0NzksNDEgQEAN
+Cj4gKyAJCQkJICAgIlx0cmV0dXJuIC0xO1xuIg0KPiArIAkJCQkgICAifVxu
+Ig0KPiArIAkJCQkgICAiXG4iDQo+ICstCQkJCSAgICJmb3IgKHNpemVfdCB2
+YWx1ZV9pID0gMDsgdmFsdWVbdmFsdWVfaV07IHZhbHVlX2krKykge1xuIg0K
+PiArLQkJCQkgICAiXHREQnVzTWVzc2FnZUl0ZXIgdmFsdWVfZWxlbWVudF9p
+dGVyO1xuIg0KPiArLQkJCQkgICAiXHRjb25zdCBpbnQxNl90ICogdmFsdWVf
+ZWxlbWVudDtcbiINCj4gKy0JCQkJICAgIlx0c2l6ZV90ICAgICAgICAgIHZh
+bHVlX2VsZW1lbnRfbGVuO1xuIg0KPiArKwkJCQkgICAiaWYgKHZhbHVlKSB7
+XG4iDQo+ICsrCQkJCSAgICJcdGZvciAoc2l6ZV90IHZhbHVlX2kgPSAwOyB2
+YWx1ZVt2YWx1ZV9pXTsgdmFsdWVfaSsrKSB7XG4iDQo+ICsrCQkJCSAgICJc
+dFx0REJ1c01lc3NhZ2VJdGVyIHZhbHVlX2VsZW1lbnRfaXRlcjtcbiINCj4g
+KysJCQkJICAgIlx0XHRjb25zdCBpbnQxNl90ICogdmFsdWVfZWxlbWVudDtc
+biINCj4gKysJCQkJICAgIlx0XHRzaXplX3QgICAgICAgICAgdmFsdWVfZWxl
+bWVudF9sZW47XG4iDQo+ICsgCQkJCSAgICJcbiINCj4gKy0JCQkJICAgIlx0
+dmFsdWVfZWxlbWVudCA9IHZhbHVlW3ZhbHVlX2ldO1xuIg0KPiArLQkJCQkg
+ICAiXHR2YWx1ZV9lbGVtZW50X2xlbiA9IHZhbHVlX2xlblt2YWx1ZV9pXTtc
+biINCj4gKysJCQkJICAgIlx0XHR2YWx1ZV9lbGVtZW50ID0gdmFsdWVbdmFs
+dWVfaV07XG4iDQo+ICsrCQkJCSAgICJcdFx0dmFsdWVfZWxlbWVudF9sZW4g
+PSB2YWx1ZV9sZW5bdmFsdWVfaV07XG4iDQo+ICsgCQkJCSAgICJcbiINCj4g
+KyANCj4gKy0JCQkJICAgIlx0LyogTWFyc2hhbCBhbiBhcnJheSBvbnRvIHRo
+ZSBtZXNzYWdlICovXG4iDQo+ICstCQkJCSAgICJcdGlmICghIGRidXNfbWVz
+c2FnZV9pdGVyX29wZW5fY29udGFpbmVyICgmdmFsdWVfaXRlciwgREJVU19U
+WVBFX0FSUkFZLCBcIm5cIiwgJnZhbHVlX2VsZW1lbnRfaXRlcikpIHtcbiIN
+Cj4gKy0JCQkJICAgIlx0XHRkYnVzX21lc3NhZ2VfaXRlcl9hYmFuZG9uX2Nv
+bnRhaW5lciAoJml0ZXIsICZ2YWx1ZV9pdGVyKTtcbiINCj4gKy0JCQkJICAg
+Ilx0XHRyZXR1cm4gLTE7XG4iDQo+ICstCQkJCSAgICJcdH1cbiINCj4gKysJ
+CQkJICAgIlx0XHQvKiBNYXJzaGFsIGFuIGFycmF5IG9udG8gdGhlIG1lc3Nh
+Z2UgKi9cbiINCj4gKysJCQkJICAgIlx0XHRpZiAoISBkYnVzX21lc3NhZ2Vf
+aXRlcl9vcGVuX2NvbnRhaW5lciAoJnZhbHVlX2l0ZXIsIERCVVNfVFlQRV9B
+UlJBWSwgXCJuXCIsICZ2YWx1ZV9lbGVtZW50X2l0ZXIpKSB7XG4iDQo+ICsr
+CQkJCSAgICJcdFx0XHRkYnVzX21lc3NhZ2VfaXRlcl9hYmFuZG9uX2NvbnRh
+aW5lciAoJml0ZXIsICZ2YWx1ZV9pdGVyKTtcbiINCj4gKysJCQkJICAgIlx0
+XHRcdHJldHVybiAtMTtcbiINCj4gKysJCQkJICAgIlx0XHR9XG4iDQo+ICsg
+CQkJCSAgICJcbiINCj4gKy0JCQkJICAgIlx0Zm9yIChzaXplX3QgdmFsdWVf
+ZWxlbWVudF9pID0gMDsgdmFsdWVfZWxlbWVudF9pIDwgdmFsdWVfZWxlbWVu
+dF9sZW47IHZhbHVlX2VsZW1lbnRfaSsrKSB7XG4iDQo+ICstCQkJCSAgICJc
+dFx0aW50MTZfdCB2YWx1ZV9lbGVtZW50X2VsZW1lbnQ7XG4iDQo+ICsrCQkJ
+CSAgICJcdFx0Zm9yIChzaXplX3QgdmFsdWVfZWxlbWVudF9pID0gMDsgdmFs
+dWVfZWxlbWVudF9pIDwgdmFsdWVfZWxlbWVudF9sZW47IHZhbHVlX2VsZW1l
+bnRfaSsrKSB7XG4iDQo+ICsrCQkJCSAgICJcdFx0XHRpbnQxNl90IHZhbHVl
+X2VsZW1lbnRfZWxlbWVudDtcbiINCj4gKyAJCQkJICAgIlxuIg0KPiArLQkJ
+CQkgICAiXHRcdHZhbHVlX2VsZW1lbnRfZWxlbWVudCA9IHZhbHVlX2VsZW1l
+bnRbdmFsdWVfZWxlbWVudF9pXTtcbiINCj4gKysJCQkJICAgIlx0XHRcdHZh
+bHVlX2VsZW1lbnRfZWxlbWVudCA9IHZhbHVlX2VsZW1lbnRbdmFsdWVfZWxl
+bWVudF9pXTtcbiINCj4gKyAJCQkJICAgIlxuIg0KPiArLQkJCQkgICAiXHRc
+dC8qIE1hcnNoYWwgYSBpbnQxNl90IG9udG8gdGhlIG1lc3NhZ2UgKi9cbiIN
+Cj4gKy0JCQkJICAgIlx0XHRpZiAoISBkYnVzX21lc3NhZ2VfaXRlcl9hcHBl
+bmRfYmFzaWMgKCZ2YWx1ZV9lbGVtZW50X2l0ZXIsIERCVVNfVFlQRV9JTlQx
+NiwgJnZhbHVlX2VsZW1lbnRfZWxlbWVudCkpIHtcbiINCj4gKy0JCQkJICAg
+Ilx0XHRcdGRidXNfbWVzc2FnZV9pdGVyX2FiYW5kb25fY29udGFpbmVyICgm
+dmFsdWVfaXRlciwgJnZhbHVlX2VsZW1lbnRfaXRlcik7XG4iDQo+ICsrCQkJ
+CSAgICJcdFx0XHQvKiBNYXJzaGFsIGEgaW50MTZfdCBvbnRvIHRoZSBtZXNz
+YWdlICovXG4iDQo+ICsrCQkJCSAgICJcdFx0XHRpZiAoISBkYnVzX21lc3Nh
+Z2VfaXRlcl9hcHBlbmRfYmFzaWMgKCZ2YWx1ZV9lbGVtZW50X2l0ZXIsIERC
+VVNfVFlQRV9JTlQxNiwgJnZhbHVlX2VsZW1lbnRfZWxlbWVudCkpIHtcbiIN
+Cj4gKysJCQkJICAgIlx0XHRcdFx0ZGJ1c19tZXNzYWdlX2l0ZXJfYWJhbmRv
+bl9jb250YWluZXIgKCZ2YWx1ZV9pdGVyLCAmdmFsdWVfZWxlbWVudF9pdGVy
+KTtcbiINCj4gKysJCQkJICAgIlx0XHRcdFx0ZGJ1c19tZXNzYWdlX2l0ZXJf
+YWJhbmRvbl9jb250YWluZXIgKCZpdGVyLCAmdmFsdWVfaXRlcik7XG4iDQo+
+ICsrCQkJCSAgICJcdFx0XHRcdHJldHVybiAtMTtcbiINCj4gKysJCQkJICAg
+Ilx0XHRcdH1cbiINCj4gKysJCQkJICAgIlx0XHR9XG4iDQo+ICsrCQkJCSAg
+ICJcbiINCj4gKysJCQkJICAgIlx0XHRpZiAoISBkYnVzX21lc3NhZ2VfaXRl
+cl9jbG9zZV9jb250YWluZXIgKCZ2YWx1ZV9pdGVyLCAmdmFsdWVfZWxlbWVu
+dF9pdGVyKSkge1xuIg0KPiArIAkJCQkgICAiXHRcdFx0ZGJ1c19tZXNzYWdl
+X2l0ZXJfYWJhbmRvbl9jb250YWluZXIgKCZpdGVyLCAmdmFsdWVfaXRlcik7
+XG4iDQo+ICsgCQkJCSAgICJcdFx0XHRyZXR1cm4gLTE7XG4iDQo+ICsgCQkJ
+CSAgICJcdFx0fVxuIg0KPiArLQkJCQkgICAiXHR9XG4iDQo+ICstCQkJCSAg
+ICJcbiINCj4gKy0JCQkJICAgIlx0aWYgKCEgZGJ1c19tZXNzYWdlX2l0ZXJf
+Y2xvc2VfY29udGFpbmVyICgmdmFsdWVfaXRlciwgJnZhbHVlX2VsZW1lbnRf
+aXRlcikpIHtcbiINCj4gKy0JCQkJICAgIlx0XHRkYnVzX21lc3NhZ2VfaXRl
+cl9hYmFuZG9uX2NvbnRhaW5lciAoJml0ZXIsICZ2YWx1ZV9pdGVyKTtcbiIN
+Cj4gKy0JCQkJICAgIlx0XHRyZXR1cm4gLTE7XG4iDQo+ICstCQkJCSAgICJc
+dH1cbiINCj4gKyANCj4gKysJCQkJICAgIlx0fVxuIg0KPiArIAkJCQkgICAi
+fVxuIg0KPiArIAkJCQkgICAiXG4iDQo+ICsgCQkJCSAgICJpZiAoISBkYnVz
+X21lc3NhZ2VfaXRlcl9jbG9zZV9jb250YWluZXIgKCZpdGVyLCAmdmFsdWVf
+aXRlcikpIHtcbiINCj4gK0BAIC0xNzY2LDE1ICsxNzY4LDE3IEBADQo+ICsg
+CQkJCSAgICJcdHJldHVybiAtMTtcbiINCj4gKyAJCQkJICAgIn1cbiINCj4g
+KyAJCQkJICAgIlxuIg0KPiArLQkJCQkgICAiZm9yIChzaXplX3QgdmFsdWVf
+aSA9IDA7IHZhbHVlW3ZhbHVlX2ldOyB2YWx1ZV9pKyspIHtcbiINCj4gKy0J
+CQkJICAgIlx0Y29uc3QgY2hhciAqdmFsdWVfZWxlbWVudDtcbiINCj4gKysJ
+CQkJICAgImlmICh2YWx1ZSkge1xuIg0KPiArKwkJCQkgICAiXHRmb3IgKHNp
+emVfdCB2YWx1ZV9pID0gMDsgdmFsdWVbdmFsdWVfaV07IHZhbHVlX2krKykg
+e1xuIg0KPiArKwkJCQkgICAiXHRcdGNvbnN0IGNoYXIgKnZhbHVlX2VsZW1l
+bnQ7XG4iDQo+ICsgCQkJCSAgICJcbiINCj4gKy0JCQkJICAgIlx0dmFsdWVf
+ZWxlbWVudCA9IHZhbHVlW3ZhbHVlX2ldO1xuIg0KPiArKwkJCQkgICAiXHRc
+dHZhbHVlX2VsZW1lbnQgPSB2YWx1ZVt2YWx1ZV9pXTtcbiINCj4gKyAJCQkJ
+ICAgIlxuIg0KPiArLQkJCQkgICAiXHQvKiBNYXJzaGFsIGEgY2hhciAqIG9u
+dG8gdGhlIG1lc3NhZ2UgKi9cbiINCj4gKy0JCQkJICAgIlx0aWYgKCEgZGJ1
+c19tZXNzYWdlX2l0ZXJfYXBwZW5kX2Jhc2ljICgmdmFsdWVfaXRlciwgREJV
+U19UWVBFX1NUUklORywgJnZhbHVlX2VsZW1lbnQpKSB7XG4iDQo+ICstCQkJ
+CSAgICJcdFx0ZGJ1c19tZXNzYWdlX2l0ZXJfYWJhbmRvbl9jb250YWluZXIg
+KCZpdGVyLCAmdmFsdWVfaXRlcik7XG4iDQo+ICstCQkJCSAgICJcdFx0cmV0
+dXJuIC0xO1xuIg0KPiArKwkJCQkgICAiXHRcdC8qIE1hcnNoYWwgYSBjaGFy
+ICogb250byB0aGUgbWVzc2FnZSAqL1xuIg0KPiArKwkJCQkgICAiXHRcdGlm
+ICghIGRidXNfbWVzc2FnZV9pdGVyX2FwcGVuZF9iYXNpYyAoJnZhbHVlX2l0
+ZXIsIERCVVNfVFlQRV9TVFJJTkcsICZ2YWx1ZV9lbGVtZW50KSkge1xuIg0K
+PiArKwkJCQkgICAiXHRcdFx0ZGJ1c19tZXNzYWdlX2l0ZXJfYWJhbmRvbl9j
+b250YWluZXIgKCZpdGVyLCAmdmFsdWVfaXRlcik7XG4iDQo+ICsrCQkJCSAg
+ICJcdFx0XHRyZXR1cm4gLTE7XG4iDQo+ICsrCQkJCSAgICJcdFx0fVxuIg0K
+PiArIAkJCQkgICAiXHR9XG4iDQo+ICsgCQkJCSAgICJ9XG4iDQo+ICsgCQkJ
+CSAgICJcbiINCj4gK0BAIC0xOTMzLDM1ICsxOTM3LDM5IEBADQo+ICsgCQkJ
+CSAgICJcdHJldHVybiAtMTtcbiINCj4gKyAJCQkJICAgIn1cbiINCj4gKyAJ
+CQkJICAgIlxuIg0KPiArLQkJCQkgICAiZm9yIChzaXplX3QgdmFsdWVfaSA9
+IDA7IHZhbHVlW3ZhbHVlX2ldOyB2YWx1ZV9pKyspIHtcbiINCj4gKy0JCQkJ
+ICAgIlx0REJ1c01lc3NhZ2VJdGVyIHZhbHVlX2VsZW1lbnRfaXRlcjtcbiIN
+Cj4gKy0JCQkJICAgIlx0Y2hhciAqIGNvbnN0ICogIHZhbHVlX2VsZW1lbnQ7
+XG4iDQo+ICsrCQkJCSAgICJpZiAodmFsdWUpIHtcbiINCj4gKysJCQkJICAg
+Ilx0Zm9yIChzaXplX3QgdmFsdWVfaSA9IDA7IHZhbHVlW3ZhbHVlX2ldOyB2
+YWx1ZV9pKyspIHtcbiINCj4gKysJCQkJICAgIlx0XHREQnVzTWVzc2FnZUl0
+ZXIgdmFsdWVfZWxlbWVudF9pdGVyO1xuIg0KPiArKwkJCQkgICAiXHRcdGNo
+YXIgKiBjb25zdCAqICB2YWx1ZV9lbGVtZW50O1xuIg0KPiArIAkJCQkgICAi
+XG4iDQo+ICstCQkJCSAgICJcdHZhbHVlX2VsZW1lbnQgPSB2YWx1ZVt2YWx1
+ZV9pXTtcbiINCj4gKysJCQkJICAgIlx0XHR2YWx1ZV9lbGVtZW50ID0gdmFs
+dWVbdmFsdWVfaV07XG4iDQo+ICsgCQkJCSAgICJcbiINCj4gKy0JCQkJICAg
+Ilx0LyogTWFyc2hhbCBhbiBhcnJheSBvbnRvIHRoZSBtZXNzYWdlICovXG4i
+DQo+ICstCQkJCSAgICJcdGlmICghIGRidXNfbWVzc2FnZV9pdGVyX29wZW5f
+Y29udGFpbmVyICgmdmFsdWVfaXRlciwgREJVU19UWVBFX0FSUkFZLCBcInNc
+IiwgJnZhbHVlX2VsZW1lbnRfaXRlcikpIHtcbiINCj4gKy0JCQkJICAgIlx0
+XHRkYnVzX21lc3NhZ2VfaXRlcl9hYmFuZG9uX2NvbnRhaW5lciAoJml0ZXIs
+ICZ2YWx1ZV9pdGVyKTtcbiINCj4gKy0JCQkJICAgIlx0XHRyZXR1cm4gLTE7
+XG4iDQo+ICstCQkJCSAgICJcdH1cbiINCj4gKy0JCQkJICAgIlxuIg0KPiAr
+LQkJCQkgICAiXHRmb3IgKHNpemVfdCB2YWx1ZV9lbGVtZW50X2kgPSAwOyB2
+YWx1ZV9lbGVtZW50W3ZhbHVlX2VsZW1lbnRfaV07IHZhbHVlX2VsZW1lbnRf
+aSsrKSB7XG4iDQo+ICstCQkJCSAgICJcdFx0Y29uc3QgY2hhciAqdmFsdWVf
+ZWxlbWVudF9lbGVtZW50O1xuIg0KPiArKwkJCQkgICAiXHRcdC8qIE1hcnNo
+YWwgYW4gYXJyYXkgb250byB0aGUgbWVzc2FnZSAqL1xuIg0KPiArKwkJCQkg
+ICAiXHRcdGlmICghIGRidXNfbWVzc2FnZV9pdGVyX29wZW5fY29udGFpbmVy
+ICgmdmFsdWVfaXRlciwgREJVU19UWVBFX0FSUkFZLCBcInNcIiwgJnZhbHVl
+X2VsZW1lbnRfaXRlcikpIHtcbiINCj4gKysJCQkJICAgIlx0XHRcdGRidXNf
+bWVzc2FnZV9pdGVyX2FiYW5kb25fY29udGFpbmVyICgmaXRlciwgJnZhbHVl
+X2l0ZXIpO1xuIg0KPiArKwkJCQkgICAiXHRcdFx0cmV0dXJuIC0xO1xuIg0K
+PiArKwkJCQkgICAiXHRcdH1cbiINCj4gKyAJCQkJICAgIlxuIg0KPiArLQkJ
+CQkgICAiXHRcdHZhbHVlX2VsZW1lbnRfZWxlbWVudCA9IHZhbHVlX2VsZW1l
+bnRbdmFsdWVfZWxlbWVudF9pXTtcbiINCj4gKysJCQkJICAgIlx0XHRpZiAo
+dmFsdWVfZWxlbWVudCkge1xuIg0KPiArKwkJCQkgICAiXHRcdFx0Zm9yIChz
+aXplX3QgdmFsdWVfZWxlbWVudF9pID0gMDsgdmFsdWVfZWxlbWVudFt2YWx1
+ZV9lbGVtZW50X2ldOyB2YWx1ZV9lbGVtZW50X2krKykge1xuIg0KPiArKwkJ
+CQkgICAiXHRcdFx0XHRjb25zdCBjaGFyICp2YWx1ZV9lbGVtZW50X2VsZW1l
+bnQ7XG4iDQo+ICsrCQkJCSAgICJcbiINCj4gKysJCQkJICAgIlx0XHRcdFx0
+dmFsdWVfZWxlbWVudF9lbGVtZW50ID0gdmFsdWVfZWxlbWVudFt2YWx1ZV9l
+bGVtZW50X2ldO1xuIg0KPiArKwkJCQkgICAiXG4iDQo+ICsrCQkJCSAgICJc
+dFx0XHRcdC8qIE1hcnNoYWwgYSBjaGFyICogb250byB0aGUgbWVzc2FnZSAq
+L1xuIg0KPiArKwkJCQkgICAiXHRcdFx0XHRpZiAoISBkYnVzX21lc3NhZ2Vf
+aXRlcl9hcHBlbmRfYmFzaWMgKCZ2YWx1ZV9lbGVtZW50X2l0ZXIsIERCVVNf
+VFlQRV9TVFJJTkcsICZ2YWx1ZV9lbGVtZW50X2VsZW1lbnQpKSB7XG4iDQo+
+ICsrCQkJCSAgICJcdFx0XHRcdFx0ZGJ1c19tZXNzYWdlX2l0ZXJfYWJhbmRv
+bl9jb250YWluZXIgKCZ2YWx1ZV9pdGVyLCAmdmFsdWVfZWxlbWVudF9pdGVy
+KTtcbiINCj4gKysJCQkJICAgIlx0XHRcdFx0XHRkYnVzX21lc3NhZ2VfaXRl
+cl9hYmFuZG9uX2NvbnRhaW5lciAoJml0ZXIsICZ2YWx1ZV9pdGVyKTtcbiIN
+Cj4gKysJCQkJICAgIlx0XHRcdFx0XHRyZXR1cm4gLTE7XG4iDQo+ICsrCQkJ
+CSAgICJcdFx0XHRcdH1cbiINCj4gKysJCQkJICAgIlx0XHRcdH1cbiINCj4g
+KysJCQkJICAgIlx0XHR9XG4iDQo+ICsgCQkJCSAgICJcbiINCj4gKy0JCQkJ
+ICAgIlx0XHQvKiBNYXJzaGFsIGEgY2hhciAqIG9udG8gdGhlIG1lc3NhZ2Ug
+Ki9cbiINCj4gKy0JCQkJICAgIlx0XHRpZiAoISBkYnVzX21lc3NhZ2VfaXRl
+cl9hcHBlbmRfYmFzaWMgKCZ2YWx1ZV9lbGVtZW50X2l0ZXIsIERCVVNfVFlQ
+RV9TVFJJTkcsICZ2YWx1ZV9lbGVtZW50X2VsZW1lbnQpKSB7XG4iDQo+ICst
+CQkJCSAgICJcdFx0XHRkYnVzX21lc3NhZ2VfaXRlcl9hYmFuZG9uX2NvbnRh
+aW5lciAoJnZhbHVlX2l0ZXIsICZ2YWx1ZV9lbGVtZW50X2l0ZXIpO1xuIg0K
+PiArKwkJCQkgICAiXHRcdGlmICghIGRidXNfbWVzc2FnZV9pdGVyX2Nsb3Nl
+X2NvbnRhaW5lciAoJnZhbHVlX2l0ZXIsICZ2YWx1ZV9lbGVtZW50X2l0ZXIp
+KSB7XG4iDQo+ICsgCQkJCSAgICJcdFx0XHRkYnVzX21lc3NhZ2VfaXRlcl9h
+YmFuZG9uX2NvbnRhaW5lciAoJml0ZXIsICZ2YWx1ZV9pdGVyKTtcbiINCj4g
+KyAJCQkJICAgIlx0XHRcdHJldHVybiAtMTtcbiINCj4gKyAJCQkJICAgIlx0
+XHR9XG4iDQo+ICsgCQkJCSAgICJcdH1cbiINCj4gKy0JCQkJICAgIlxuIg0K
+PiArLQkJCQkgICAiXHRpZiAoISBkYnVzX21lc3NhZ2VfaXRlcl9jbG9zZV9j
+b250YWluZXIgKCZ2YWx1ZV9pdGVyLCAmdmFsdWVfZWxlbWVudF9pdGVyKSkg
+e1xuIg0KPiArLQkJCQkgICAiXHRcdGRidXNfbWVzc2FnZV9pdGVyX2FiYW5k
+b25fY29udGFpbmVyICgmaXRlciwgJnZhbHVlX2l0ZXIpO1xuIg0KPiArLQkJ
+CQkgICAiXHRcdHJldHVybiAtMTtcbiINCj4gKy0JCQkJICAgIlx0fVxuIg0K
+PiArIAkJCQkgICAifVxuIg0KPiArIAkJCQkgICAiXG4iDQo+ICsgCQkJCSAg
+ICJpZiAoISBkYnVzX21lc3NhZ2VfaXRlcl9jbG9zZV9jb250YWluZXIgKCZp
+dGVyLCAmdmFsdWVfaXRlcikpIHtcbiINCj4gK0BAIC0yMTk0LDE2ICsyMjAy
+LDE4IEBADQo+ICsgCQkJCSAgICJcdHJldHVybiAtMTtcbiINCj4gKyAJCQkJ
+ICAgIn1cbiINCj4gKyAJCQkJICAgIlxuIg0KPiArLQkJCQkgICAiZm9yIChz
+aXplX3QgdmFsdWVfaXRlbTJfaSA9IDA7IHZhbHVlX2l0ZW0yW3ZhbHVlX2l0
+ZW0yX2ldOyB2YWx1ZV9pdGVtMl9pKyspIHtcbiINCj4gKy0JCQkJICAgIlx0
+Y29uc3QgY2hhciAqdmFsdWVfaXRlbTJfZWxlbWVudDtcbiINCj4gKysJCQkJ
+ICAgImlmICh2YWx1ZV9pdGVtMikge1xuIg0KPiArKwkJCQkgICAiXHRmb3Ig
+KHNpemVfdCB2YWx1ZV9pdGVtMl9pID0gMDsgdmFsdWVfaXRlbTJbdmFsdWVf
+aXRlbTJfaV07IHZhbHVlX2l0ZW0yX2krKykge1xuIg0KPiArKwkJCQkgICAi
+XHRcdGNvbnN0IGNoYXIgKnZhbHVlX2l0ZW0yX2VsZW1lbnQ7XG4iDQo+ICsg
+CQkJCSAgICJcbiINCj4gKy0JCQkJICAgIlx0dmFsdWVfaXRlbTJfZWxlbWVu
+dCA9IHZhbHVlX2l0ZW0yW3ZhbHVlX2l0ZW0yX2ldO1xuIg0KPiArKwkJCQkg
+ICAiXHRcdHZhbHVlX2l0ZW0yX2VsZW1lbnQgPSB2YWx1ZV9pdGVtMlt2YWx1
+ZV9pdGVtMl9pXTtcbiINCj4gKyAJCQkJICAgIlxuIg0KPiArLQkJCQkgICAi
+XHQvKiBNYXJzaGFsIGEgY2hhciAqIG9udG8gdGhlIG1lc3NhZ2UgKi9cbiIN
+Cj4gKy0JCQkJICAgIlx0aWYgKCEgZGJ1c19tZXNzYWdlX2l0ZXJfYXBwZW5k
+X2Jhc2ljICgmdmFsdWVfaXRlbTJfaXRlciwgREJVU19UWVBFX1NUUklORywg
+JnZhbHVlX2l0ZW0yX2VsZW1lbnQpKSB7XG4iDQo+ICstCQkJCSAgICJcdFx0
+ZGJ1c19tZXNzYWdlX2l0ZXJfYWJhbmRvbl9jb250YWluZXIgKCZ2YWx1ZV9p
+dGVyLCAmdmFsdWVfaXRlbTJfaXRlcik7XG4iDQo+ICstCQkJCSAgICJcdFx0
+ZGJ1c19tZXNzYWdlX2l0ZXJfYWJhbmRvbl9jb250YWluZXIgKCZpdGVyLCAm
+dmFsdWVfaXRlcik7XG4iDQo+ICstCQkJCSAgICJcdFx0cmV0dXJuIC0xO1xu
+Ig0KPiArKwkJCQkgICAiXHRcdC8qIE1hcnNoYWwgYSBjaGFyICogb250byB0
+aGUgbWVzc2FnZSAqL1xuIg0KPiArKwkJCQkgICAiXHRcdGlmICghIGRidXNf
+bWVzc2FnZV9pdGVyX2FwcGVuZF9iYXNpYyAoJnZhbHVlX2l0ZW0yX2l0ZXIs
+IERCVVNfVFlQRV9TVFJJTkcsICZ2YWx1ZV9pdGVtMl9lbGVtZW50KSkge1xu
+Ig0KPiArKwkJCQkgICAiXHRcdFx0ZGJ1c19tZXNzYWdlX2l0ZXJfYWJhbmRv
+bl9jb250YWluZXIgKCZ2YWx1ZV9pdGVyLCAmdmFsdWVfaXRlbTJfaXRlcik7
+XG4iDQo+ICsrCQkJCSAgICJcdFx0XHRkYnVzX21lc3NhZ2VfaXRlcl9hYmFu
+ZG9uX2NvbnRhaW5lciAoJml0ZXIsICZ2YWx1ZV9pdGVyKTtcbiINCj4gKysJ
+CQkJICAgIlx0XHRcdHJldHVybiAtMTtcbiINCj4gKysJCQkJICAgIlx0XHR9
+XG4iDQo+ICsgCQkJCSAgICJcdH1cbiINCj4gKyAJCQkJICAgIn1cbiINCj4g
+KyAJCQkJICAgIlxuIg0KPiArQEAgLTI2NDIsNDEgKzI2NTIsNDMgQEANCj4g
+KyAJCQkJICAgIlx0cmV0dXJuIC0xO1xuIg0KPiArIAkJCQkgICAifVxuIg0K
+PiArIAkJCQkgICAiXG4iDQo+ICstCQkJCSAgICJmb3IgKHNpemVfdCB2YWx1
+ZV9pID0gMDsgdmFsdWVbdmFsdWVfaV07IHZhbHVlX2krKykge1xuIg0KPiAr
+LQkJCQkgICAiXHREQnVzTWVzc2FnZUl0ZXIgICAgICAgICAgICAgICAgICB2
+YWx1ZV9lbGVtZW50X2l0ZXI7XG4iDQo+ICstCQkJCSAgICJcdGNvbnN0IGNo
+YXIgKiAgICAgICAgICAgICAgICAgICAgIHZhbHVlX2VsZW1lbnRfaXRlbTA7
+XG4iDQo+ICstCQkJCSAgICJcdHVpbnQzMl90ICAgICAgICAgICAgICAgICAg
+ICAgICAgIHZhbHVlX2VsZW1lbnRfaXRlbTE7XG4iDQo+ICstCQkJCSAgICJc
+dGNvbnN0IE15U3RydWN0QXJyYXlWYWx1ZUVsZW1lbnQgKnZhbHVlX2VsZW1l
+bnQ7XG4iDQo+ICsrCQkJCSAgICJpZiAodmFsdWUpIHtcbiINCj4gKysJCQkJ
+ICAgIlx0Zm9yIChzaXplX3QgdmFsdWVfaSA9IDA7IHZhbHVlW3ZhbHVlX2ld
+OyB2YWx1ZV9pKyspIHtcbiINCj4gKysJCQkJICAgIlx0XHREQnVzTWVzc2Fn
+ZUl0ZXIgICAgICAgICAgICAgICAgICB2YWx1ZV9lbGVtZW50X2l0ZXI7XG4i
+DQo+ICsrCQkJCSAgICJcdFx0Y29uc3QgY2hhciAqICAgICAgICAgICAgICAg
+ICAgICAgdmFsdWVfZWxlbWVudF9pdGVtMDtcbiINCj4gKysJCQkJICAgIlx0
+XHR1aW50MzJfdCAgICAgICAgICAgICAgICAgICAgICAgICB2YWx1ZV9lbGVt
+ZW50X2l0ZW0xO1xuIg0KPiArKwkJCQkgICAiXHRcdGNvbnN0IE15U3RydWN0
+QXJyYXlWYWx1ZUVsZW1lbnQgKnZhbHVlX2VsZW1lbnQ7XG4iDQo+ICsgCQkJ
+CSAgICJcbiINCj4gKy0JCQkJICAgIlx0dmFsdWVfZWxlbWVudCA9IHZhbHVl
+W3ZhbHVlX2ldO1xuIg0KPiArKwkJCQkgICAiXHRcdHZhbHVlX2VsZW1lbnQg
+PSB2YWx1ZVt2YWx1ZV9pXTtcbiINCj4gKyAJCQkJICAgIlxuIg0KPiArLQkJ
+CQkgICAiXHQvKiBNYXJzaGFsIGEgc3RydWN0dXJlIG9udG8gdGhlIG1lc3Nh
+Z2UgKi9cbiINCj4gKy0JCQkJICAgIlx0aWYgKCEgZGJ1c19tZXNzYWdlX2l0
+ZXJfb3Blbl9jb250YWluZXIgKCZ2YWx1ZV9pdGVyLCBEQlVTX1RZUEVfU1RS
+VUNULCBOVUxMLCAmdmFsdWVfZWxlbWVudF9pdGVyKSkge1xuIg0KPiArLQkJ
+CQkgICAiXHRcdGRidXNfbWVzc2FnZV9pdGVyX2FiYW5kb25fY29udGFpbmVy
+ICgmaXRlciwgJnZhbHVlX2l0ZXIpO1xuIg0KPiArLQkJCQkgICAiXHRcdHJl
+dHVybiAtMTtcbiINCj4gKy0JCQkJICAgIlx0fVxuIg0KPiArKwkJCQkgICAi
+XHRcdC8qIE1hcnNoYWwgYSBzdHJ1Y3R1cmUgb250byB0aGUgbWVzc2FnZSAq
+L1xuIg0KPiArKwkJCQkgICAiXHRcdGlmICghIGRidXNfbWVzc2FnZV9pdGVy
+X29wZW5fY29udGFpbmVyICgmdmFsdWVfaXRlciwgREJVU19UWVBFX1NUUlVD
+VCwgTlVMTCwgJnZhbHVlX2VsZW1lbnRfaXRlcikpIHtcbiINCj4gKysJCQkJ
+ICAgIlx0XHRcdGRidXNfbWVzc2FnZV9pdGVyX2FiYW5kb25fY29udGFpbmVy
+ICgmaXRlciwgJnZhbHVlX2l0ZXIpO1xuIg0KPiArKwkJCQkgICAiXHRcdFx0
+cmV0dXJuIC0xO1xuIg0KPiArKwkJCQkgICAiXHRcdH1cbiINCj4gKyAJCQkJ
+ICAgIlxuIg0KPiArLQkJCQkgICAiXHR2YWx1ZV9lbGVtZW50X2l0ZW0wID0g
+dmFsdWVfZWxlbWVudC0+aXRlbTA7XG4iDQo+ICsrCQkJCSAgICJcdFx0dmFs
+dWVfZWxlbWVudF9pdGVtMCA9IHZhbHVlX2VsZW1lbnQtPml0ZW0wO1xuIg0K
+PiArIAkJCQkgICAiXG4iDQo+ICstCQkJCSAgICJcdC8qIE1hcnNoYWwgYSBj
+aGFyICogb250byB0aGUgbWVzc2FnZSAqL1xuIg0KPiArLQkJCQkgICAiXHRp
+ZiAoISBkYnVzX21lc3NhZ2VfaXRlcl9hcHBlbmRfYmFzaWMgKCZ2YWx1ZV9l
+bGVtZW50X2l0ZXIsIERCVVNfVFlQRV9TVFJJTkcsICZ2YWx1ZV9lbGVtZW50
+X2l0ZW0wKSkge1xuIg0KPiArLQkJCQkgICAiXHRcdGRidXNfbWVzc2FnZV9p
+dGVyX2FiYW5kb25fY29udGFpbmVyICgmdmFsdWVfaXRlciwgJnZhbHVlX2Vs
+ZW1lbnRfaXRlcik7XG4iDQo+ICstCQkJCSAgICJcdFx0ZGJ1c19tZXNzYWdl
+X2l0ZXJfYWJhbmRvbl9jb250YWluZXIgKCZpdGVyLCAmdmFsdWVfaXRlcik7
+XG4iDQo+ICstCQkJCSAgICJcdFx0cmV0dXJuIC0xO1xuIg0KPiArLQkJCQkg
+ICAiXHR9XG4iDQo+ICsrCQkJCSAgICJcdFx0LyogTWFyc2hhbCBhIGNoYXIg
+KiBvbnRvIHRoZSBtZXNzYWdlICovXG4iDQo+ICsrCQkJCSAgICJcdFx0aWYg
+KCEgZGJ1c19tZXNzYWdlX2l0ZXJfYXBwZW5kX2Jhc2ljICgmdmFsdWVfZWxl
+bWVudF9pdGVyLCBEQlVTX1RZUEVfU1RSSU5HLCAmdmFsdWVfZWxlbWVudF9p
+dGVtMCkpIHtcbiINCj4gKysJCQkJICAgIlx0XHRcdGRidXNfbWVzc2FnZV9p
+dGVyX2FiYW5kb25fY29udGFpbmVyICgmdmFsdWVfaXRlciwgJnZhbHVlX2Vs
+ZW1lbnRfaXRlcik7XG4iDQo+ICsrCQkJCSAgICJcdFx0XHRkYnVzX21lc3Nh
+Z2VfaXRlcl9hYmFuZG9uX2NvbnRhaW5lciAoJml0ZXIsICZ2YWx1ZV9pdGVy
+KTtcbiINCj4gKysJCQkJICAgIlx0XHRcdHJldHVybiAtMTtcbiINCj4gKysJ
+CQkJICAgIlx0XHR9XG4iDQo+ICsgCQkJCSAgICJcbiINCj4gKy0JCQkJICAg
+Ilx0dmFsdWVfZWxlbWVudF9pdGVtMSA9IHZhbHVlX2VsZW1lbnQtPml0ZW0x
+O1xuIg0KPiArKwkJCQkgICAiXHRcdHZhbHVlX2VsZW1lbnRfaXRlbTEgPSB2
+YWx1ZV9lbGVtZW50LT5pdGVtMTtcbiINCj4gKyAJCQkJICAgIlxuIg0KPiAr
+LQkJCQkgICAiXHQvKiBNYXJzaGFsIGEgdWludDMyX3Qgb250byB0aGUgbWVz
+c2FnZSAqL1xuIg0KPiArLQkJCQkgICAiXHRpZiAoISBkYnVzX21lc3NhZ2Vf
+aXRlcl9hcHBlbmRfYmFzaWMgKCZ2YWx1ZV9lbGVtZW50X2l0ZXIsIERCVVNf
+VFlQRV9VSU5UMzIsICZ2YWx1ZV9lbGVtZW50X2l0ZW0xKSkge1xuIg0KPiAr
+LQkJCQkgICAiXHRcdGRidXNfbWVzc2FnZV9pdGVyX2FiYW5kb25fY29udGFp
+bmVyICgmdmFsdWVfaXRlciwgJnZhbHVlX2VsZW1lbnRfaXRlcik7XG4iDQo+
+ICstCQkJCSAgICJcdFx0ZGJ1c19tZXNzYWdlX2l0ZXJfYWJhbmRvbl9jb250
+YWluZXIgKCZpdGVyLCAmdmFsdWVfaXRlcik7XG4iDQo+ICstCQkJCSAgICJc
+dFx0cmV0dXJuIC0xO1xuIg0KPiArLQkJCQkgICAiXHR9XG4iDQo+ICsrCQkJ
+CSAgICJcdFx0LyogTWFyc2hhbCBhIHVpbnQzMl90IG9udG8gdGhlIG1lc3Nh
+Z2UgKi9cbiINCj4gKysJCQkJICAgIlx0XHRpZiAoISBkYnVzX21lc3NhZ2Vf
+aXRlcl9hcHBlbmRfYmFzaWMgKCZ2YWx1ZV9lbGVtZW50X2l0ZXIsIERCVVNf
+VFlQRV9VSU5UMzIsICZ2YWx1ZV9lbGVtZW50X2l0ZW0xKSkge1xuIg0KPiAr
+KwkJCQkgICAiXHRcdFx0ZGJ1c19tZXNzYWdlX2l0ZXJfYWJhbmRvbl9jb250
+YWluZXIgKCZ2YWx1ZV9pdGVyLCAmdmFsdWVfZWxlbWVudF9pdGVyKTtcbiIN
+Cj4gKysJCQkJICAgIlx0XHRcdGRidXNfbWVzc2FnZV9pdGVyX2FiYW5kb25f
+Y29udGFpbmVyICgmaXRlciwgJnZhbHVlX2l0ZXIpO1xuIg0KPiArKwkJCQkg
+ICAiXHRcdFx0cmV0dXJuIC0xO1xuIg0KPiArKwkJCQkgICAiXHRcdH1cbiIN
+Cj4gKyAJCQkJICAgIlxuIg0KPiArLQkJCQkgICAiXHRpZiAoISBkYnVzX21l
+c3NhZ2VfaXRlcl9jbG9zZV9jb250YWluZXIgKCZ2YWx1ZV9pdGVyLCAmdmFs
+dWVfZWxlbWVudF9pdGVyKSkge1xuIg0KPiArLQkJCQkgICAiXHRcdGRidXNf
+bWVzc2FnZV9pdGVyX2FiYW5kb25fY29udGFpbmVyICgmaXRlciwgJnZhbHVl
+X2l0ZXIpO1xuIg0KPiArLQkJCQkgICAiXHRcdHJldHVybiAtMTtcbiINCj4g
+KysJCQkJICAgIlx0XHRpZiAoISBkYnVzX21lc3NhZ2VfaXRlcl9jbG9zZV9j
+b250YWluZXIgKCZ2YWx1ZV9pdGVyLCAmdmFsdWVfZWxlbWVudF9pdGVyKSkg
+e1xuIg0KPiArKwkJCQkgICAiXHRcdFx0ZGJ1c19tZXNzYWdlX2l0ZXJfYWJh
+bmRvbl9jb250YWluZXIgKCZpdGVyLCAmdmFsdWVfaXRlcik7XG4iDQo+ICsr
+CQkJCSAgICJcdFx0XHRyZXR1cm4gLTE7XG4iDQo+ICsrCQkJCSAgICJcdFx0
+fVxuIg0KPiArIAkJCQkgICAiXHR9XG4iDQo+ICsgCQkJCSAgICJ9XG4iDQo+
+ICsgCQkJCSAgICJcbiINCj4gK0BAIC0yOTEyLDQxICsyOTI0LDQzIEBADQo+
+ICsgCQkJCSAgICJcdHJldHVybiAtMTtcbiINCj4gKyAJCQkJICAgIn1cbiIN
+Cj4gKyAJCQkJICAgIlxuIg0KPiArLQkJCQkgICAiZm9yIChzaXplX3QgdmFs
+dWVfaSA9IDA7IHZhbHVlW3ZhbHVlX2ldOyB2YWx1ZV9pKyspIHtcbiINCj4g
+Ky0JCQkJICAgIlx0REJ1c01lc3NhZ2VJdGVyICAgICAgICAgICAgICAgICAg
+ICAgdmFsdWVfZWxlbWVudF9pdGVyO1xuIg0KPiArLQkJCQkgICAiXHRjb25z
+dCBjaGFyICogICAgICAgICAgICAgICAgICAgICAgICB2YWx1ZV9lbGVtZW50
+X2l0ZW0wO1xuIg0KPiArLQkJCQkgICAiXHR1aW50MzJfdCAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICB2YWx1ZV9lbGVtZW50X2l0ZW0xO1xuIg0KPiAr
+LQkJCQkgICAiXHRjb25zdCBNeURpY3RFbnRyeUFycmF5VmFsdWVFbGVtZW50
+ICp2YWx1ZV9lbGVtZW50O1xuIg0KPiArKwkJCQkgICAiaWYgKHZhbHVlKSB7
+XG4iDQo+ICsrCQkJCSAgICJcdGZvciAoc2l6ZV90IHZhbHVlX2kgPSAwOyB2
+YWx1ZVt2YWx1ZV9pXTsgdmFsdWVfaSsrKSB7XG4iDQo+ICsrCQkJCSAgICJc
+dFx0REJ1c01lc3NhZ2VJdGVyICAgICAgICAgICAgICAgICAgICAgdmFsdWVf
+ZWxlbWVudF9pdGVyO1xuIg0KPiArKwkJCQkgICAiXHRcdGNvbnN0IGNoYXIg
+KiAgICAgICAgICAgICAgICAgICAgICAgIHZhbHVlX2VsZW1lbnRfaXRlbTA7
+XG4iDQo+ICsrCQkJCSAgICJcdFx0dWludDMyX3QgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgdmFsdWVfZWxlbWVudF9pdGVtMTtcbiINCj4gKysJCQkJ
+ICAgIlx0XHRjb25zdCBNeURpY3RFbnRyeUFycmF5VmFsdWVFbGVtZW50ICp2
+YWx1ZV9lbGVtZW50O1xuIg0KPiArIAkJCQkgICAiXG4iDQo+ICstCQkJCSAg
+ICJcdHZhbHVlX2VsZW1lbnQgPSB2YWx1ZVt2YWx1ZV9pXTtcbiINCj4gKysJ
+CQkJICAgIlx0XHR2YWx1ZV9lbGVtZW50ID0gdmFsdWVbdmFsdWVfaV07XG4i
+DQo+ICsgCQkJCSAgICJcbiINCj4gKy0JCQkJICAgIlx0LyogTWFyc2hhbCBh
+IHN0cnVjdHVyZSBvbnRvIHRoZSBtZXNzYWdlICovXG4iDQo+ICstCQkJCSAg
+ICJcdGlmICghIGRidXNfbWVzc2FnZV9pdGVyX29wZW5fY29udGFpbmVyICgm
+dmFsdWVfaXRlciwgREJVU19UWVBFX0RJQ1RfRU5UUlksIE5VTEwsICZ2YWx1
+ZV9lbGVtZW50X2l0ZXIpKSB7XG4iDQo+ICstCQkJCSAgICJcdFx0ZGJ1c19t
+ZXNzYWdlX2l0ZXJfYWJhbmRvbl9jb250YWluZXIgKCZpdGVyLCAmdmFsdWVf
+aXRlcik7XG4iDQo+ICstCQkJCSAgICJcdFx0cmV0dXJuIC0xO1xuIg0KPiAr
+LQkJCQkgICAiXHR9XG4iDQo+ICsrCQkJCSAgICJcdFx0LyogTWFyc2hhbCBh
+IHN0cnVjdHVyZSBvbnRvIHRoZSBtZXNzYWdlICovXG4iDQo+ICsrCQkJCSAg
+ICJcdFx0aWYgKCEgZGJ1c19tZXNzYWdlX2l0ZXJfb3Blbl9jb250YWluZXIg
+KCZ2YWx1ZV9pdGVyLCBEQlVTX1RZUEVfRElDVF9FTlRSWSwgTlVMTCwgJnZh
+bHVlX2VsZW1lbnRfaXRlcikpIHtcbiINCj4gKysJCQkJICAgIlx0XHRcdGRi
+dXNfbWVzc2FnZV9pdGVyX2FiYW5kb25fY29udGFpbmVyICgmaXRlciwgJnZh
+bHVlX2l0ZXIpO1xuIg0KPiArKwkJCQkgICAiXHRcdFx0cmV0dXJuIC0xO1xu
+Ig0KPiArKwkJCQkgICAiXHRcdH1cbiINCj4gKyAJCQkJICAgIlxuIg0KPiAr
+LQkJCQkgICAiXHR2YWx1ZV9lbGVtZW50X2l0ZW0wID0gdmFsdWVfZWxlbWVu
+dC0+aXRlbTA7XG4iDQo+ICsrCQkJCSAgICJcdFx0dmFsdWVfZWxlbWVudF9p
+dGVtMCA9IHZhbHVlX2VsZW1lbnQtPml0ZW0wO1xuIg0KPiArIAkJCQkgICAi
+XG4iDQo+ICstCQkJCSAgICJcdC8qIE1hcnNoYWwgYSBjaGFyICogb250byB0
+aGUgbWVzc2FnZSAqL1xuIg0KPiArLQkJCQkgICAiXHRpZiAoISBkYnVzX21l
+c3NhZ2VfaXRlcl9hcHBlbmRfYmFzaWMgKCZ2YWx1ZV9lbGVtZW50X2l0ZXIs
+IERCVVNfVFlQRV9TVFJJTkcsICZ2YWx1ZV9lbGVtZW50X2l0ZW0wKSkge1xu
+Ig0KPiArLQkJCQkgICAiXHRcdGRidXNfbWVzc2FnZV9pdGVyX2FiYW5kb25f
+Y29udGFpbmVyICgmdmFsdWVfaXRlciwgJnZhbHVlX2VsZW1lbnRfaXRlcik7
+XG4iDQo+ICstCQkJCSAgICJcdFx0ZGJ1c19tZXNzYWdlX2l0ZXJfYWJhbmRv
+bl9jb250YWluZXIgKCZpdGVyLCAmdmFsdWVfaXRlcik7XG4iDQo+ICstCQkJ
+CSAgICJcdFx0cmV0dXJuIC0xO1xuIg0KPiArLQkJCQkgICAiXHR9XG4iDQo+
+ICsrCQkJCSAgICJcdFx0LyogTWFyc2hhbCBhIGNoYXIgKiBvbnRvIHRoZSBt
+ZXNzYWdlICovXG4iDQo+ICsrCQkJCSAgICJcdFx0aWYgKCEgZGJ1c19tZXNz
+YWdlX2l0ZXJfYXBwZW5kX2Jhc2ljICgmdmFsdWVfZWxlbWVudF9pdGVyLCBE
+QlVTX1RZUEVfU1RSSU5HLCAmdmFsdWVfZWxlbWVudF9pdGVtMCkpIHtcbiIN
+Cj4gKysJCQkJICAgIlx0XHRcdGRidXNfbWVzc2FnZV9pdGVyX2FiYW5kb25f
+Y29udGFpbmVyICgmdmFsdWVfaXRlciwgJnZhbHVlX2VsZW1lbnRfaXRlcik7
+XG4iDQo+ICsrCQkJCSAgICJcdFx0XHRkYnVzX21lc3NhZ2VfaXRlcl9hYmFu
+ZG9uX2NvbnRhaW5lciAoJml0ZXIsICZ2YWx1ZV9pdGVyKTtcbiINCj4gKysJ
+CQkJICAgIlx0XHRcdHJldHVybiAtMTtcbiINCj4gKysJCQkJICAgIlx0XHR9
+XG4iDQo+ICsgCQkJCSAgICJcbiINCj4gKy0JCQkJICAgIlx0dmFsdWVfZWxl
+bWVudF9pdGVtMSA9IHZhbHVlX2VsZW1lbnQtPml0ZW0xO1xuIg0KPiArKwkJ
+CQkgICAiXHRcdHZhbHVlX2VsZW1lbnRfaXRlbTEgPSB2YWx1ZV9lbGVtZW50
+LT5pdGVtMTtcbiINCj4gKyAJCQkJICAgIlxuIg0KPiArLQkJCQkgICAiXHQv
+KiBNYXJzaGFsIGEgdWludDMyX3Qgb250byB0aGUgbWVzc2FnZSAqL1xuIg0K
+PiArLQkJCQkgICAiXHRpZiAoISBkYnVzX21lc3NhZ2VfaXRlcl9hcHBlbmRf
+YmFzaWMgKCZ2YWx1ZV9lbGVtZW50X2l0ZXIsIERCVVNfVFlQRV9VSU5UMzIs
+ICZ2YWx1ZV9lbGVtZW50X2l0ZW0xKSkge1xuIg0KPiArLQkJCQkgICAiXHRc
+dGRidXNfbWVzc2FnZV9pdGVyX2FiYW5kb25fY29udGFpbmVyICgmdmFsdWVf
+aXRlciwgJnZhbHVlX2VsZW1lbnRfaXRlcik7XG4iDQo+ICstCQkJCSAgICJc
+dFx0ZGJ1c19tZXNzYWdlX2l0ZXJfYWJhbmRvbl9jb250YWluZXIgKCZpdGVy
+LCAmdmFsdWVfaXRlcik7XG4iDQo+ICstCQkJCSAgICJcdFx0cmV0dXJuIC0x
+O1xuIg0KPiArLQkJCQkgICAiXHR9XG4iDQo+ICsrCQkJCSAgICJcdFx0Lyog
+TWFyc2hhbCBhIHVpbnQzMl90IG9udG8gdGhlIG1lc3NhZ2UgKi9cbiINCj4g
+KysJCQkJICAgIlx0XHRpZiAoISBkYnVzX21lc3NhZ2VfaXRlcl9hcHBlbmRf
+YmFzaWMgKCZ2YWx1ZV9lbGVtZW50X2l0ZXIsIERCVVNfVFlQRV9VSU5UMzIs
+ICZ2YWx1ZV9lbGVtZW50X2l0ZW0xKSkge1xuIg0KPiArKwkJCQkgICAiXHRc
+dFx0ZGJ1c19tZXNzYWdlX2l0ZXJfYWJhbmRvbl9jb250YWluZXIgKCZ2YWx1
+ZV9pdGVyLCAmdmFsdWVfZWxlbWVudF9pdGVyKTtcbiINCj4gKysJCQkJICAg
+Ilx0XHRcdGRidXNfbWVzc2FnZV9pdGVyX2FiYW5kb25fY29udGFpbmVyICgm
+aXRlciwgJnZhbHVlX2l0ZXIpO1xuIg0KPiArKwkJCQkgICAiXHRcdFx0cmV0
+dXJuIC0xO1xuIg0KPiArKwkJCQkgICAiXHRcdH1cbiINCj4gKyAJCQkJICAg
+IlxuIg0KPiArLQkJCQkgICAiXHRpZiAoISBkYnVzX21lc3NhZ2VfaXRlcl9j
+bG9zZV9jb250YWluZXIgKCZ2YWx1ZV9pdGVyLCAmdmFsdWVfZWxlbWVudF9p
+dGVyKSkge1xuIg0KPiArLQkJCQkgICAiXHRcdGRidXNfbWVzc2FnZV9pdGVy
+X2FiYW5kb25fY29udGFpbmVyICgmaXRlciwgJnZhbHVlX2l0ZXIpO1xuIg0K
+PiArLQkJCQkgICAiXHRcdHJldHVybiAtMTtcbiINCj4gKysJCQkJICAgIlx0
+XHRpZiAoISBkYnVzX21lc3NhZ2VfaXRlcl9jbG9zZV9jb250YWluZXIgKCZ2
+YWx1ZV9pdGVyLCAmdmFsdWVfZWxlbWVudF9pdGVyKSkge1xuIg0KPiArKwkJ
+CQkgICAiXHRcdFx0ZGJ1c19tZXNzYWdlX2l0ZXJfYWJhbmRvbl9jb250YWlu
+ZXIgKCZpdGVyLCAmdmFsdWVfaXRlcik7XG4iDQo+ICsrCQkJCSAgICJcdFx0
+XHRyZXR1cm4gLTE7XG4iDQo+ICsrCQkJCSAgICJcdFx0fVxuIg0KPiArIAkJ
+CQkgICAiXHR9XG4iDQo+ICsgCQkJCSAgICJ9XG4iDQo+ICsgCQkJCSAgICJc
+biINCj4gKy0tLSBsaWJuaWgtMS4wLjMub3JpZy9uaWgtZGJ1cy10b29sL3Rl
+c3RzL3Rlc3RfY29tLm5ldHNwbGl0Lk5paC5UZXN0X3Byb3h5LmMNCj4gKysr
+KyBsaWJuaWgtMS4wLjMvbmloLWRidXMtdG9vbC90ZXN0cy90ZXN0X2NvbS5u
+ZXRzcGxpdC5OaWguVGVzdF9wcm94eS5jDQo+ICtAQCAtMjczNTksNiArMjcz
+NTksNyBAQA0KPiArIAkJVEVTVF9UUlVFICh1bml4X2ZkX3RvX3N0cl9yZXBs
+aWVkKTsNCj4gKyANCj4gKyAJCVRFU1RfRVFfUCAobGFzdF9kYXRhLCBwYXJl
+bnQpOw0KPiArKwkJVEVTVF9ORSAobGFzdF9zdHJfdmFsdWVbMF0sICdcMCcp
+Ow0KPiArIAkJVEVTVF9UUlVFIChzdHJjaHIgKCIwMTIzNDU2Nzg5IiwgbGFz
+dF9zdHJfdmFsdWVbMF0pKTsNCj4gKyAJCVRFU1RfQUxMT0NfUEFSRU5UIChs
+YXN0X3N0cl92YWx1ZSwgcGFyZW50KTsNCj4gKyANCj4gK0BAIC0yNzY3Myw2
+ICsyNzY3NCw3IEBADQo+ICsgDQo+ICsgCQlURVNUX0VRIChyZXQsIDApOw0K
+PiArIA0KPiArKwkJVEVTVF9ORSAoc3RyX3ZhbHVlWzBdLCAnXDAnKTsNCj4g
+KyAJCVRFU1RfVFJVRSAoc3RyY2hyICgiMDEyMzQ1Njc4OSIsIHN0cl92YWx1
+ZVswXSkpOw0KPiArIAkJVEVTVF9BTExPQ19QQVJFTlQgKHN0cl92YWx1ZSwg
+cGFyZW50KTsNCj4gKyANCj4gKy0tLSBsaWJuaWgtMS4wLjMub3JpZy9uaWgt
+ZGJ1cy10b29sL3Rlc3RzL3Rlc3RfcHJvcGVydHkuYw0KPiArKysrIGxpYm5p
+aC0xLjAuMy9uaWgtZGJ1cy10b29sL3Rlc3RzL3Rlc3RfcHJvcGVydHkuYw0K
+PiArQEAgLTg3MzMsNyArODczMyw3IEBADQo+ICsgCVR5cGVWYXIgKiAgICAg
+ICB2YXI7DQo+ICsgCU5paExpc3RFbnRyeSAqICBhdHRyaWI7DQo+ICsgCU5p
+aERCdXNQcm94eSAqICBwcm94eSA9IE5VTEw7DQo+ICstCXZvaWQgKiAgICAg
+ICAgICBwYXJlbnQgPSBOVUxMOw0KPiArKwl2b2lkICogICAgICAgICAgcGFy
+ZW50IF9fYXR0cmlidXRlX18oKHVudXNlZCkpID0gTlVMTDsNCj4gKyAJcGlk
+X3QgICAgICAgICAgIHBpZCA9IC0xOw0KPiArIAlpbnQgICAgICAgICAgICAg
+c3RhdHVzOw0KPiArIAlEQnVzTWVzc2FnZSAqICAgbWV0aG9kX2NhbGw7DQo+
+ICstLS0gbGlibmloLTEuMC4zLm9yaWcvbmloLWRidXMtdG9vbC90ZXN0cy9l
+eHBlY3RlZC90ZXN0X21ldGhvZF9vYmplY3RfZnVuY3Rpb25fc3RhbmRhcmQu
+Yw0KPiArKysrIGxpYm5paC0xLjAuMy9uaWgtZGJ1cy10b29sL3Rlc3RzL2V4
+cGVjdGVkL3Rlc3RfbWV0aG9kX29iamVjdF9mdW5jdGlvbl9zdGFuZGFyZC5j
+DQo+ICtAQCAtMTM2LDE3ICsxMzYsMTkgQEANCj4gKyAJCQlnb3RvIGVub21l
+bTsNCj4gKyAJCX0NCj4gKyANCj4gKy0JCWZvciAoc2l6ZV90IG91dHB1dF9p
+ID0gMDsgb3V0cHV0W291dHB1dF9pXTsgb3V0cHV0X2krKykgew0KPiArLQkJ
+CWNvbnN0IGNoYXIgKm91dHB1dF9lbGVtZW50Ow0KPiArKwkJaWYgKG91dHB1
+dCkgew0KPiArKwkJCWZvciAoc2l6ZV90IG91dHB1dF9pID0gMDsgb3V0cHV0
+W291dHB1dF9pXTsgb3V0cHV0X2krKykgew0KPiArKwkJCQljb25zdCBjaGFy
+ICpvdXRwdXRfZWxlbWVudDsNCj4gKyANCj4gKy0JCQlvdXRwdXRfZWxlbWVu
+dCA9IG91dHB1dFtvdXRwdXRfaV07DQo+ICsrCQkJCW91dHB1dF9lbGVtZW50
+ID0gb3V0cHV0W291dHB1dF9pXTsNCj4gKyANCj4gKy0JCQkvKiBNYXJzaGFs
+IGEgY2hhciAqIG9udG8gdGhlIG1lc3NhZ2UgKi8NCj4gKy0JCQlpZiAoISBk
+YnVzX21lc3NhZ2VfaXRlcl9hcHBlbmRfYmFzaWMgKCZvdXRwdXRfaXRlciwg
+REJVU19UWVBFX1NUUklORywgJm91dHB1dF9lbGVtZW50KSkgew0KPiArLQkJ
+CQlkYnVzX21lc3NhZ2VfaXRlcl9hYmFuZG9uX2NvbnRhaW5lciAoJml0ZXIs
+ICZvdXRwdXRfaXRlcik7DQo+ICstCQkJCWRidXNfbWVzc2FnZV91bnJlZiAo
+cmVwbHkpOw0KPiArLQkJCQlyZXBseSA9IE5VTEw7DQo+ICstCQkJCWdvdG8g
+ZW5vbWVtOw0KPiArKwkJCQkvKiBNYXJzaGFsIGEgY2hhciAqIG9udG8gdGhl
+IG1lc3NhZ2UgKi8NCj4gKysJCQkJaWYgKCEgZGJ1c19tZXNzYWdlX2l0ZXJf
+YXBwZW5kX2Jhc2ljICgmb3V0cHV0X2l0ZXIsIERCVVNfVFlQRV9TVFJJTkcs
+ICZvdXRwdXRfZWxlbWVudCkpIHsNCj4gKysJCQkJCWRidXNfbWVzc2FnZV9p
+dGVyX2FiYW5kb25fY29udGFpbmVyICgmaXRlciwgJm91dHB1dF9pdGVyKTsN
+Cj4gKysJCQkJCWRidXNfbWVzc2FnZV91bnJlZiAocmVwbHkpOw0KPiArKwkJ
+CQkJcmVwbHkgPSBOVUxMOw0KPiArKwkJCQkJZ290byBlbm9tZW07DQo+ICsr
+CQkJCX0NCj4gKyAJCQl9DQo+ICsgCQl9DQo+ICsgDQo+ICstLS0gbGlibmlo
+LTEuMC4zLm9yaWcvbmloLWRidXMtdG9vbC90ZXN0cy9leHBlY3RlZC90ZXN0
+X21ldGhvZF9yZXBseV9mdW5jdGlvbl9zdGFuZGFyZC5jDQo+ICsrKysgbGli
+bmloLTEuMC4zL25paC1kYnVzLXRvb2wvdGVzdHMvZXhwZWN0ZWQvdGVzdF9t
+ZXRob2RfcmVwbHlfZnVuY3Rpb25fc3RhbmRhcmQuYw0KPiArQEAgLTcsNyAr
+Nyw2IEBADQo+ICsgCURCdXNNZXNzYWdlSXRlciBvdXRwdXRfaXRlcjsNCj4g
+KyANCj4gKyAJbmloX2Fzc2VydCAobWVzc2FnZSAhPSBOVUxMKTsNCj4gKy0J
+bmloX2Fzc2VydCAob3V0cHV0ICE9IE5VTEwpOw0KPiArIA0KPiArIAkvKiBJ
+ZiB0aGUgc2VuZGVyIGRvZXNuJ3QgY2FyZSBhYm91dCBhIHJlcGx5LCBkb24n
+dCBib3RoZXIgd2FzdGluZw0KPiArIAkgKiBlZmZvcnQgY29uc3RydWN0aW5n
+IGFuZCBzZW5kaW5nIG9uZS4NCj4gK0BAIC0yOCwxNiArMjcsMTggQEANCj4g
+KyAJCXJldHVybiAtMTsNCj4gKyAJfQ0KPiArIA0KPiArLQlmb3IgKHNpemVf
+dCBvdXRwdXRfaSA9IDA7IG91dHB1dFtvdXRwdXRfaV07IG91dHB1dF9pKysp
+IHsNCj4gKy0JCWNvbnN0IGNoYXIgKm91dHB1dF9lbGVtZW50Ow0KPiArLQ0K
+PiArLQkJb3V0cHV0X2VsZW1lbnQgPSBvdXRwdXRbb3V0cHV0X2ldOw0KPiAr
+LQ0KPiArLQkJLyogTWFyc2hhbCBhIGNoYXIgKiBvbnRvIHRoZSBtZXNzYWdl
+ICovDQo+ICstCQlpZiAoISBkYnVzX21lc3NhZ2VfaXRlcl9hcHBlbmRfYmFz
+aWMgKCZvdXRwdXRfaXRlciwgREJVU19UWVBFX1NUUklORywgJm91dHB1dF9l
+bGVtZW50KSkgew0KPiArLQkJCWRidXNfbWVzc2FnZV9pdGVyX2FiYW5kb25f
+Y29udGFpbmVyICgmaXRlciwgJm91dHB1dF9pdGVyKTsNCj4gKy0JCQlkYnVz
+X21lc3NhZ2VfdW5yZWYgKHJlcGx5KTsNCj4gKy0JCQlyZXR1cm4gLTE7DQo+
+ICsrCWlmIChvdXRwdXQpIHsNCj4gKysJCWZvciAoc2l6ZV90IG91dHB1dF9p
+ID0gMDsgb3V0cHV0W291dHB1dF9pXTsgb3V0cHV0X2krKykgew0KPiArKwkJ
+CWNvbnN0IGNoYXIgKm91dHB1dF9lbGVtZW50Ow0KPiArKw0KPiArKwkJCW91
+dHB1dF9lbGVtZW50ID0gb3V0cHV0W291dHB1dF9pXTsNCj4gKysNCj4gKysJ
+CQkvKiBNYXJzaGFsIGEgY2hhciAqIG9udG8gdGhlIG1lc3NhZ2UgKi8NCj4g
+KysJCQlpZiAoISBkYnVzX21lc3NhZ2VfaXRlcl9hcHBlbmRfYmFzaWMgKCZv
+dXRwdXRfaXRlciwgREJVU19UWVBFX1NUUklORywgJm91dHB1dF9lbGVtZW50
+KSkgew0KPiArKwkJCQlkYnVzX21lc3NhZ2VfaXRlcl9hYmFuZG9uX2NvbnRh
+aW5lciAoJml0ZXIsICZvdXRwdXRfaXRlcik7DQo+ICsrCQkJCWRidXNfbWVz
+c2FnZV91bnJlZiAocmVwbHkpOw0KPiArKwkJCQlyZXR1cm4gLTE7DQo+ICsr
+CQkJfQ0KPiArIAkJfQ0KPiArIAl9DQo+ICsgDQo+ICstLS0gbGlibmloLTEu
+MC4zLm9yaWcvbmloLWRidXMtdG9vbC90ZXN0cy9leHBlY3RlZC90ZXN0X21l
+dGhvZF9yZXBseV9mdW5jdGlvbl9kZXByZWNhdGVkLmMNCj4gKysrKyBsaWJu
+aWgtMS4wLjMvbmloLWRidXMtdG9vbC90ZXN0cy9leHBlY3RlZC90ZXN0X21l
+dGhvZF9yZXBseV9mdW5jdGlvbl9kZXByZWNhdGVkLmMNCj4gK0BAIC03LDcg
+KzcsNiBAQA0KPiArIAlEQnVzTWVzc2FnZUl0ZXIgb3V0cHV0X2l0ZXI7DQo+
+ICsgDQo+ICsgCW5paF9hc3NlcnQgKG1lc3NhZ2UgIT0gTlVMTCk7DQo+ICst
+CW5paF9hc3NlcnQgKG91dHB1dCAhPSBOVUxMKTsNCj4gKyANCj4gKyAJLyog
+SWYgdGhlIHNlbmRlciBkb2Vzbid0IGNhcmUgYWJvdXQgYSByZXBseSwgZG9u
+J3QgYm90aGVyIHdhc3RpbmcNCj4gKyAJICogZWZmb3J0IGNvbnN0cnVjdGlu
+ZyBhbmQgc2VuZGluZyBvbmUuDQo+ICtAQCAtMjgsMTYgKzI3LDE4IEBADQo+
+ICsgCQlyZXR1cm4gLTE7DQo+ICsgCX0NCj4gKyANCj4gKy0JZm9yIChzaXpl
+X3Qgb3V0cHV0X2kgPSAwOyBvdXRwdXRbb3V0cHV0X2ldOyBvdXRwdXRfaSsr
+KSB7DQo+ICstCQljb25zdCBjaGFyICpvdXRwdXRfZWxlbWVudDsNCj4gKy0N
+Cj4gKy0JCW91dHB1dF9lbGVtZW50ID0gb3V0cHV0W291dHB1dF9pXTsNCj4g
+Ky0NCj4gKy0JCS8qIE1hcnNoYWwgYSBjaGFyICogb250byB0aGUgbWVzc2Fn
+ZSAqLw0KPiArLQkJaWYgKCEgZGJ1c19tZXNzYWdlX2l0ZXJfYXBwZW5kX2Jh
+c2ljICgmb3V0cHV0X2l0ZXIsIERCVVNfVFlQRV9TVFJJTkcsICZvdXRwdXRf
+ZWxlbWVudCkpIHsNCj4gKy0JCQlkYnVzX21lc3NhZ2VfaXRlcl9hYmFuZG9u
+X2NvbnRhaW5lciAoJml0ZXIsICZvdXRwdXRfaXRlcik7DQo+ICstCQkJZGJ1
+c19tZXNzYWdlX3VucmVmIChyZXBseSk7DQo+ICstCQkJcmV0dXJuIC0xOw0K
+PiArKwlpZiAob3V0cHV0KSB7DQo+ICsrCQlmb3IgKHNpemVfdCBvdXRwdXRf
+aSA9IDA7IG91dHB1dFtvdXRwdXRfaV07IG91dHB1dF9pKyspIHsNCj4gKysJ
+CQljb25zdCBjaGFyICpvdXRwdXRfZWxlbWVudDsNCj4gKysNCj4gKysJCQlv
+dXRwdXRfZWxlbWVudCA9IG91dHB1dFtvdXRwdXRfaV07DQo+ICsrDQo+ICsr
+CQkJLyogTWFyc2hhbCBhIGNoYXIgKiBvbnRvIHRoZSBtZXNzYWdlICovDQo+
+ICsrCQkJaWYgKCEgZGJ1c19tZXNzYWdlX2l0ZXJfYXBwZW5kX2Jhc2ljICgm
+b3V0cHV0X2l0ZXIsIERCVVNfVFlQRV9TVFJJTkcsICZvdXRwdXRfZWxlbWVu
+dCkpIHsNCj4gKysJCQkJZGJ1c19tZXNzYWdlX2l0ZXJfYWJhbmRvbl9jb250
+YWluZXIgKCZpdGVyLCAmb3V0cHV0X2l0ZXIpOw0KPiArKwkJCQlkYnVzX21l
+c3NhZ2VfdW5yZWYgKHJlcGx5KTsNCj4gKysJCQkJcmV0dXJuIC0xOw0KPiAr
+KwkJCX0NCj4gKyAJCX0NCj4gKyAJfQ0KPiArIA0KPiArLS0tIGxpYm5paC0x
+LjAuMy5vcmlnL25paC1kYnVzLXRvb2wvdGVzdHMvZXhwZWN0ZWQvdGVzdF9t
+ZXRob2Rfb2JqZWN0X2Z1bmN0aW9uX25vX2lucHV0LmMNCj4gKysrKyBsaWJu
+aWgtMS4wLjMvbmloLWRidXMtdG9vbC90ZXN0cy9leHBlY3RlZC90ZXN0X21l
+dGhvZF9vYmplY3RfZnVuY3Rpb25fbm9faW5wdXQuYw0KPiArQEAgLTg4LDE3
+ICs4OCwxOSBAQA0KPiArIAkJCWdvdG8gZW5vbWVtOw0KPiArIAkJfQ0KPiAr
+IA0KPiArLQkJZm9yIChzaXplX3Qgb3V0cHV0X2kgPSAwOyBvdXRwdXRbb3V0
+cHV0X2ldOyBvdXRwdXRfaSsrKSB7DQo+ICstCQkJY29uc3QgY2hhciAqb3V0
+cHV0X2VsZW1lbnQ7DQo+ICsrCQlpZiAob3V0cHV0KSB7DQo+ICsrCQkJZm9y
+IChzaXplX3Qgb3V0cHV0X2kgPSAwOyBvdXRwdXRbb3V0cHV0X2ldOyBvdXRw
+dXRfaSsrKSB7DQo+ICsrCQkJCWNvbnN0IGNoYXIgKm91dHB1dF9lbGVtZW50
+Ow0KPiArIA0KPiArLQkJCW91dHB1dF9lbGVtZW50ID0gb3V0cHV0W291dHB1
+dF9pXTsNCj4gKysJCQkJb3V0cHV0X2VsZW1lbnQgPSBvdXRwdXRbb3V0cHV0
+X2ldOw0KPiArIA0KPiArLQkJCS8qIE1hcnNoYWwgYSBjaGFyICogb250byB0
+aGUgbWVzc2FnZSAqLw0KPiArLQkJCWlmICghIGRidXNfbWVzc2FnZV9pdGVy
+X2FwcGVuZF9iYXNpYyAoJm91dHB1dF9pdGVyLCBEQlVTX1RZUEVfU1RSSU5H
+LCAmb3V0cHV0X2VsZW1lbnQpKSB7DQo+ICstCQkJCWRidXNfbWVzc2FnZV9p
+dGVyX2FiYW5kb25fY29udGFpbmVyICgmaXRlciwgJm91dHB1dF9pdGVyKTsN
+Cj4gKy0JCQkJZGJ1c19tZXNzYWdlX3VucmVmIChyZXBseSk7DQo+ICstCQkJ
+CXJlcGx5ID0gTlVMTDsNCj4gKy0JCQkJZ290byBlbm9tZW07DQo+ICsrCQkJ
+CS8qIE1hcnNoYWwgYSBjaGFyICogb250byB0aGUgbWVzc2FnZSAqLw0KPiAr
+KwkJCQlpZiAoISBkYnVzX21lc3NhZ2VfaXRlcl9hcHBlbmRfYmFzaWMgKCZv
+dXRwdXRfaXRlciwgREJVU19UWVBFX1NUUklORywgJm91dHB1dF9lbGVtZW50
+KSkgew0KPiArKwkJCQkJZGJ1c19tZXNzYWdlX2l0ZXJfYWJhbmRvbl9jb250
+YWluZXIgKCZpdGVyLCAmb3V0cHV0X2l0ZXIpOw0KPiArKwkJCQkJZGJ1c19t
+ZXNzYWdlX3VucmVmIChyZXBseSk7DQo+ICsrCQkJCQlyZXBseSA9IE5VTEw7
+DQo+ICsrCQkJCQlnb3RvIGVub21lbTsNCj4gKysJCQkJfQ0KPiArIAkJCX0N
+Cj4gKyAJCX0NCj4gKyANCj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBl
+cy1zdXBwb3J0L2xpYm5paC9saWJuaWhfMS4wLjMuYmIgYi9tZXRhLW9lL3Jl
+Y2lwZXMtc3VwcG9ydC9saWJuaWgvbGlibmloXzEuMC4zLmJiDQo+IG5ldyBm
+aWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4IDAwMDAwMDAuLmI1ZTVlMTINCj4g
+LS0tIC9kZXYvbnVsbA0KPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9y
+dC9saWJuaWgvbGlibmloXzEuMC4zLmJiDQo+IEBAIC0wLDAgKzEsNDAgQEAN
+Cj4gKyMgQ29weXJpZ2h0IChjKSAyMDEzICBMRyBFbGVjdHJvbmljcywgSW5j
+Lg0KPiArDQo+ICtTVU1NQVJZID0gImxpYm5paCBsaWJyYXJ5Ig0KPiArREVT
+Q1JJUFRJT04gPSAibGlibmloIGlzIGEgc21hbGwgbGlicmFyeSBmb3IgQyBh
+cHBsaWNhdGlvbiBkZXZlbG9wbWVudCBcDQo+ICsgICAgY29udGFpbmluZyBm
+dW5jdGlvbnMgdGhhdCwgZGVzcGl0ZSBpdHMgbmFtZSwgYXJlIG5vdCBpbXBs
+ZW1lbnRlZCBcDQo+ICsgICAgZWxzZXdoZXJlIGluIHRoZSBzdGFuZGFyZCBs
+aWJyYXJ5IHNldC4gXA0KPiArICAgIFwNCj4gKyAgICBsaWJuaWggaXMgcm91
+Z2hseSBlcXVpdmFsZW50IHRvIG90aGVyIEMgbGlicmFyaWVzIHN1Y2ggYXMg
+Z2xpYiwgXA0KPiArICAgIGV4Y2VwdCB0aGF0IGl0cyBmb2N1cyBpcyBvbiBh
+IHNtYWxsIHNpemUgYW5kIGludGVuZGVkIGZvciBcDQo+ICsgICAgYXBwbGlj
+YXRpb25zIHRoYXQgc2l0IHZlcnkgbG93IGluIHRoZSBzb2Z0d2FyZSBzdGFj
+aywgZXNwZWNpYWxseSBcDQo+ICsgICAgb3V0c2lkZSBvZiAvdXNyLiBcDQo+
+ICsgICAgXA0KPiArICAgIEl0IGV4cHJlc3NseSBkb2VzIG5vdCByZWltcGxl
+bWVudCBmdW5jdGlvbnMgdGhhdCBhbHJlYWR5IGV4aXN0IGluIFwNCj4gKyAg
+ICBsaWJyYXJpZXMgb3JkaW5hcmlseSBzaGlwcGVkIGluIC9saWIgc3VjaCBs
+aWJjNiwgYW5kIGRvZXMgbm90IGRvIFwNCj4gKyAgICBmb29saXNoIHRoaW5n
+cyBsaWtlIGludmVudCBhcmJpdHJhcnkgdHlwZWRlZnMgZm9yIHBlcmZlY3Rs
+eSBnb29kIEMgdHlwZXMuIg0KPiArDQo+ICtTRUNUSU9OID0gImxpYnMiDQo+
+ICsNCj4gK0xJQ0VOU0UgPSAiR1BMLTIuMCINCj4gK0xJQ19GSUxFU19DSEtT
+VU0gPSAiZmlsZTovL0NPUFlJTkc7bWQ1PTc1MTQxOTI2MGFhOTU0NDk5Zjdh
+YmFhYmFhODgyYmJlIg0KPiArDQo+ICtERVBFTkRTID0gImRidXMgbGlibmlo
+LW5hdGl2ZSINCj4gK0RFUEVORFNfY2xhc3MtbmF0aXZlID0gImRidXMtbmF0
+aXZlIg0KPiArDQo+ICtQUiA9ICJyMCINCj4gKw0KPiArU1JDX1VSSSA9ICJo
+dHRwczovL2xhdW5jaHBhZC5uZXQvJHtCUE59LzEuMC8ke1BWfS8rZG93bmxv
+YWQvJHtCUH0udGFyLmd6O25hbWU9dGFyYmFsbCINCj4gK1NSQ19VUkkgKz0g
+ImZpbGU6Ly9saWJuaWhfMS4wLjMtNHVidW50dTE2LnBhdGNoO25hbWU9cGF0
+Y2giDQo+ICsNCj4gK1NSQ19VUklbdGFyYmFsbC5tZDVzdW1dID0gImRiNzk5
+MGNlNTVlMDFkYWZmZTE5MDA2NTI0YTFjY2IwIg0KPiArU1JDX1VSSVt0YXJi
+YWxsLnNoYTI1NnN1bV0gPSAiODk3NTcyZGY3NTY1YzBhOTBhODE1MzI2NzFl
+MjNjNjNmOTliNGVmZGUyZWVjYmJmMTFlNzg1N2ZiYzYxZjQwNSINCj4gKw0K
+PiArU1JDX1VSSVtwYXRjaC5tZDVzdW1dID0gIiINCj4gK1NSQ19VUklbcGF0
+Y2guc2hhMjU2c3VtXSA9ICIiDQo+ICsNCj4gK2luaGVyaXQgYXV0b3Rvb2xz
+DQo+ICtpbmhlcml0IGdldHRleHQNCj4gKw0KPiArIyB0YXJnZXQgbGlibmlo
+IHJlcXVpcmVzIG5hdGl2ZSBuaWgtZGJ1cy10b29sDQo+ICtCQkNMQVNTRVhU
+RU5EID0gIm5hdGl2ZSINCj4gLS0gDQo+IDEuOC40LjINCj4gDQo+IA0KPiAN
+Cg0KPiAtLSANCj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18NCj4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcg
+bGlzdA0KPiBPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVk
+Lm9yZw0KPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KDQoNCi0tIA0KTWFydGlu
+ICdKYU1hJyBKYW5zYSAgICAgamFiYmVyOiBNYXJ0aW4uSmFuc2FAZ21haWwu
+Y29tDQoKCg==
 
