@@ -1,29 +1,36 @@
-Return-Path: <mark.hatle@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 668A1606BF;
-	Wed, 27 Jul 2016 17:58:45 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u6RHwYAT010075
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Wed, 27 Jul 2016 10:58:35 -0700
-Received: from soho-mhatle-m.local (172.25.36.226) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Wed, 27 Jul 2016 10:58:34 -0700
-To: =?UTF-8?B?QW7DrWJhbCBMaW3Ds24=?= <anibal.limon@linux.intel.com>, Patches
-	and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, OpenEmbedded Devel List
-	<openembedded-devel@lists.openembedded.org>
-References: <5798ECAD.1060109@linux.intel.com>
-From: Mark Hatle <mark.hatle@windriver.com>
-Organization: Wind River Systems
-Message-ID: <69a74e8b-5c4f-27d2-6563-0307f9c74dae@windriver.com>
-Date: Wed, 27 Jul 2016 12:58:33 -0500
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:45.0)
-	Gecko/20100101 Thunderbird/45.1.1
-MIME-Version: 1.0
-In-Reply-To: <5798ECAD.1060109@linux.intel.com>
-Subject: Re: [OE-core] Busybox drop systemd support
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 3601 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 27 Jul 2016 20:42:07 UTC
+Received: from vms173023pub.verizon.net (vms173023pub.verizon.net
+	[206.46.173.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 82A2F606BF;
+	Wed, 27 Jul 2016 20:42:07 +0000 (UTC)
+Received: from vz-proxy-m007.mx.aol.com ([64.236.83.14])
+	by vms173023.mailsrvcs.net
+	(Oracle Communications Messaging Server 7.0.5.32.0 64bit (built Jul 16
+	2014))
+	with ESMTPA id <0OAZ005CNO1SS120@vms173023.mailsrvcs.net>; Wed,
+	27 Jul 2016 14:41:52 -0500 (CDT)
+X-CMAE-Score: 0
+X-CMAE-Analysis: v=2.1 cv=EdU1O6SC c=1 sm=1 tr=0	a=MJxOpqxZADbEbEImuSX/mw==:117
+	a=kj9zAlcOel0A:10 a=cAmyUtKerLwA:10	a=Q4-j1AaZAAAA:8
+	a=-sANZeLuJjCnSeQa-GEA:9 a=CjuIK1q_8ugA:10
+Received: by 100.15.86.14 with SMTP id 408d1c22; Wed, 27 Jul 2016 19:41:51 GMT
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0BABB1620C2; Wed,
+	27 Jul 2016 15:41:52 -0400 (EDT)
+Date: Wed, 27 Jul 2016 15:41:51 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-members@lists.openembedded.org
+Message-id: <20160727194151.GJ8521@denix.org>
+References: <4037473c-25e3-015d-25fb-be5cd3ece4bc@balister.org>
+MIME-version: 1.0
+In-reply-to: <4037473c-25e3-015d-25fb-be5cd3ece4bc@balister.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: Save the dates (OEDEM and Yocto Project Developer Day)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,54 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jul 2016 17:58:47 -0000
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 27 Jul 2016 20:42:09 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On 7/27/16 12:17 PM, Aníbal Limón wrote:
-> Hi folks,
+On Thu, Jul 14, 2016 at 01:03:39PM -0400, Philip Balister wrote:
+> ELCE is in Berlin this year on Oct 11-13 (Tuesday-Thursday). After
+> conversations with the Yocto Project, we've worked out that there will
+> be a Yocto Project developer day on Monday, Oct 10 and OEDEM
+> (OpenEmbedded developer meeting) on Friday, Oct 14.
 > 
-> I was working debugging an issue for missing /var/log/messages in
-> systemd/busybox images [1] and then i found that busybox drop support
-> for systemd from 1.25 version [2].
+> The Yocto Project developer day is basically a training class with
+> beginner and advanced topics.
 > 
-> This ends in a set of questions of what we need to do in systemd/busybox
-> images since the next version of busybox will not support systemd,
-> 
-> I have a couple of ideas,
-> 
-> - Remove the support of busybox in systemd images?, this is the hard
-> one, we need an sw alternative here may be toybox...
-> - Maintain the systemd support in busybox?, the patch [2] is small atm
-> but in the future may be this will cause problems for maintain it.
+> The OpenEmbedded developer meeting is a chance to talk with developers
+> about various project topics. We'll work out the agenda closer to ELCE.
 
-I know we've had customers who want a 'busybox free' system.  In YP 2.0 there
-were still a few items provided by busybox, so just disabling it (blacklist)
-wasn't easy.
+Wiki page for OEDEM 2016 has been created:
 
-This sounds like a good opportunity to make sure that you can make a system that
-works with and without busybox.
+http://openembedded.org/wiki/OEDEM_2016
 
-With that said, looking at [2] below.  I don't see that busybox ever really
-supported or not systemd (contrary to what it says.)
+If you already know you will be attending, please add yourself to the list. 
+Thanks.
 
-It just means if systemd is selected, and the user is using busybox -- you
-should not use syslogd out of busybox.  I think this is a reasonable requirement
--- and something that should be fairly easy to implement.  (With systemd, I'm
-not sure why you would want to use the busybox syslogd anyway.. it's too limited
-IMHO.)
-
---Mark
-
-> Best regards,
-> 	alimon
-> 
-> [1]
-> http://git.yoctoproject.org/cgit/cgit.cgi/poky-contrib/commit/?h=alimon/debug_times2&id=aa143dbe3cb233ee50944ebb62c541c823179a04
-> [2]
-> https://git.busybox.net/busybox/commit/?id=accd9eeb719916da974584b33b1aeced5f3bb346
-> 
-> 
-> 
-
+-- 
+Denys
 
