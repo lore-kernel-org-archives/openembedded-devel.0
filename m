@@ -1,51 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id C21A9606BF
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id A158F606BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jul 2016 14:41:01 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id q128so215550140wma.1
+	Wed, 27 Jul 2016 15:49:55 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id q128so7093727wma.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jul 2016 07:41:02 -0700 (PDT)
+	Wed, 27 Jul 2016 08:49:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=h5DD4IvIh8gPJ5m4jB7qUSrtSWPjK9S/sPbLO6d7ndM=;
-	b=LaEvplwPdqSu76S/S9iTY9xxEfmRxdIyA6uzGSVttxz1eIhKDpfaEv3MaGsDUGlmcq
-	YSgyH4dG0KPD2QRI87X/dlYVS6nocTgWhY6FgqSm86ZQpig2fJwCx73ojyw8AF+kjszq
-	OeW5E3XKLYfCcUqWkrRIWvgiN0O9gVWwrcn7lAfSpbFKvDHGekzQni9NGILG2cUlmW7q
-	2uDtThF5ziAuCYlVz2oqlegGWq6g1V1lf8vqeZgmxEezYQmaMbFZ6un7d7PxnKwX1hJh
-	eLphyFSFFOJv7Ci7ABKfnGXg3t3xSS1P8u/aPQjmOYK9MYw0vfxyg666G78/dfTLqxiW
-	Zmww==
+	h=from:to:cc:subject:date:message-id;
+	bh=VunsZitdSw+UbNu8Jg542CMP1sV+fMIkw5HPnnzSRbo=;
+	b=Jyr8uGc/6sWenC7bNwJ0t4hEMaqDC0EdOxhxULf1xl1FtE9g2hq2WxWA+uHK8NsWpO
+	fhaz2FjnP74jDKxPetMidj0pF5rzu3SiEecgtjv126rdlRD2i+1B4x2rCiBOLuB8i5wk
+	cHzwg6CoqX+vknO7BUe2ZDOJlznHepztdc60FevbTM2ipwdoK89GMXMZdrhtvZVK39wB
+	+7zu4jyKElmidGT5D5jU6MRBJcI1+mVlNqh/SkOF8Xx/lfPUc+NKvxI+NFTYwUyqlhaR
+	DhYYXk1C47sBHiOPSftFoBkbMWTl8YPtYmjXVxn0DPbId3HT+OXGJRyKHYfwaFnvbYuw
+	rRtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=h5DD4IvIh8gPJ5m4jB7qUSrtSWPjK9S/sPbLO6d7ndM=;
-	b=kWMfDOfSvS1xVhEl1B3do8G6RmvG9N8pNoAudww9QCH1FEcCa0B1tvqS+OsInCKzS9
-	Yc9577zygrI4hjPvx9w3j9EADfs9pCWzyZvJSBShCVOPOiPh9/TcXiPQHReghWYBDoFP
-	kIgh/rRkTo3ncfGnPJGea3/baLxLRtuMmfVIcRscUvb9MsOQLAq7IwPn0dAARVmJov13
-	uaD0v5gjCrlcof4ya24KbXgj4A0+RAetYgCpnr1XvkD6FiXjbb3dPWN7OyT8ONdF6Bd1
-	N2BOtRT6VaFmEYu7cdALOl96wcNF0npn5m4X+xh9aROZTse/Ord2ELS0kSfZyrYQ1yYv
-	7sCw==
-X-Gm-Message-State: AEkooutLw69Zb41dL/mQk4OP/JYVmtenW1Zi/coRdBiRcUPiDdwWK3AqTFY99BGvBvljxQ==
-X-Received: by 10.194.148.202 with SMTP id tu10mr28173245wjb.56.1469630459169; 
-	Wed, 27 Jul 2016 07:40:59 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=VunsZitdSw+UbNu8Jg542CMP1sV+fMIkw5HPnnzSRbo=;
+	b=KUabSbFHzyska/7xOaIrIYyyWSmTjY4IEMjLh00kxHARCpKs/o5czbNSNQ+LLsVlo2
+	9Pr6EbsrxJXME2cjG7j89NVkdBLNPzzsscZZXx269lJcQOFvtJVTR3swqyBoKzcSiwjF
+	OS8toFuhgCZDq6F+U/ZjxCTY1z7kZPxm29Re+THkJsF0Y81ma1A0jy+vrg8CV/mUeevh
+	+svrK8AceGjyW4plaaGAfM5vH7JTIk+QP2ODqXl5MQi7uc+a8TSg+Mm3Bv2PTkQWXNeU
+	7d8nN2dwnOctR7j/aD5cJHu54xKyb40uj0z41x3GQZqIayUtv9QlcvHEx5d4xB78mrXm
+	Ykmw==
+X-Gm-Message-State: AEkoouuUnah2TfxUipLSghJLO8/zQGzedaq1XUdiyv+yT80kD4uVp/nc3Cu9Di+uOGhfgg==
+X-Received: by 10.194.221.232 with SMTP id qh8mr28252824wjc.117.1469634593784; 
+	Wed, 27 Jul 2016 08:49:53 -0700 (PDT)
 Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
 	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	q137sm38695034wmd.19.2016.07.27.07.40.57
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 27 Jul 2016 07:40:57 -0700 (PDT)
+	c13sm7042473wjx.12.2016.07.27.08.49.52
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 27 Jul 2016 08:49:52 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 27 Jul 2016 16:41:00 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160727144100.3i5tigqyign3uogg@jama>
-References: <1461122644-42503-1-git-send-email-daicy.fnst@cn.fujitsu.com>
-MIME-Version: 1.0
-In-Reply-To: <1461122644-42503-1-git-send-email-daicy.fnst@cn.fujitsu.com>
-User-Agent: Mutt/1.6.2 (2016-06-11)
-Subject: Re: [meta-oe][PATCH] libnih: add new recipe to meta-oe
+Date: Wed, 27 Jul 2016 17:49:53 +0200
+Message-Id: <20160727154953.13918-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.9.2
+Subject: [meta-qt5][WIP][PATCH] qt5: upgrade to latest revisions in 5.7 branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,3948 +52,1287 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jul 2016 14:41:03 -0000
-X-Groupsio-MsgNum: 62361
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="vkz7ljn2e7vfev7n"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 27 Jul 2016 15:49:58 -0000
 
---vkz7ljn2e7vfev7n
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes-qt/qt5/nativesdk-qtbase_git.bb             |  9 ++++---
+ .../qt5/qt3d/0001-Allow-a-tools-only-build.patch   |  2 +-
+ recipes-qt/qt5/qt3d_git.bb                         |  4 +--
+ recipes-qt/qt5/qt5-git.inc                         |  2 +-
+ recipes-qt/qt5/qtbase-native_git.bb                |  8 +++---
+ .../qt5/qtbase/0001-Add-linux-oe-g-platform.patch  | 24 ++++++++---------
+ ...o-allow-to-set-qt.conf-from-the-outside-u.patch |  2 +-
+ .../0003-Add-external-hostbindir-option.patch      | 16 +++++------
+ ...le-Fix-pkgconfig-and-libtool-replacements.patch |  6 ++---
+ ...ump-path-length-from-256-to-512-character.patch |  6 ++---
+ .../0006-QOpenGLPaintDevice-sub-area-support.patch |  6 ++---
+ ...Invert-conditional-for-defining-QT_SOCKLE.patch |  2 +-
+ ...configure-paths-for-target-qmake-properly.patch | 12 ++++-----
+ ...GL-libraries-from-pkgconfig-and-defaults.patch} | 11 +++-----
+ ...wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch} |  6 +----
+ ...build-uic.patch => 0011-Always-build-uic.patch} |  6 ++---
+ ...xternal-hostbindir-option-for-native-sdk.patch} | 14 +++++-----
+ recipes-qt/qt5/qtbase_git.bb                       |  6 ++---
+ recipes-qt/qt5/qtcanvas3d_git.bb                   |  2 +-
+ recipes-qt/qt5/qtcharts_git.bb                     |  2 +-
+ recipes-qt/qt5/qtconnectivity_git.bb               |  2 +-
+ recipes-qt/qt5/qtdatavis3d_git.bb                  |  2 +-
+ .../0001-qmltestexample-fix-link.patch             |  4 +--
+ ...omparison-fix-QCoreApplication-has-not-be.patch |  2 +-
+ recipes-qt/qt5/qtdeclarative_git.bb                |  2 +-
+ recipes-qt/qt5/qtenginio_git.bb                    |  2 +-
+ recipes-qt/qt5/qtgraphicaleffects_git.bb           |  2 +-
+ ...ats.pro-Make-the-dependencies-determinist.patch |  2 +-
+ recipes-qt/qt5/qtimageformats_git.bb               |  2 +-
+ recipes-qt/qt5/qtlocation_git.bb                   |  2 +-
+ ...1-Initial-porting-effort-to-GStreamer-1.0.patch |  2 +-
+ recipes-qt/qt5/qtmultimedia_git.bb                 |  4 +--
+ ...etextinput-update-to-match-QWidgetLineCon.patch | 31 ----------------------
+ recipes-qt/qt5/qtquick1_git.bb                     |  4 +--
+ ...fix-invalid-use-of-incomplete-type-class-.patch | 10 +++----
+ recipes-qt/qt5/qtquickcontrols2_git.bb             |  2 +-
+ recipes-qt/qt5/qtquickcontrols_git.bb              |  2 +-
+ recipes-qt/qt5/qtscript_git.bb                     |  2 +-
+ recipes-qt/qt5/qtsensors_git.bb                    |  2 +-
+ recipes-qt/qt5/qtserialbus_git.bb                  |  2 +-
+ recipes-qt/qt5/qtserialport_git.bb                 |  2 +-
+ recipes-qt/qt5/qtsvg_git.bb                        |  2 +-
+ recipes-qt/qt5/qtsystems_git.bb                    |  2 +-
+ ...w-to-build-only-lrelease-lupdate-lconvert.patch |  2 +-
+ ...t-help-fix-linking-of-dependent-libraries.patch |  2 +-
+ .../0003-add-noqtwebkit-configuration.patch        |  2 +-
+ ...ols-cmake-allow-overriding-the-location-f.patch |  2 +-
+ recipes-qt/qt5/qttools_git.bb                      |  2 +-
+ recipes-qt/qt5/qttranslations_git.bb               |  2 +-
+ recipes-qt/qt5/qtvirtualkeyboard_git.bb            |  2 +-
+ recipes-qt/qt5/qtwayland-native_git.bb             |  2 +-
+ ...-qtwaylandscanner-tool-to-the-native-side.patch |  2 +-
+ ...yland-include-server-buffer-only-when-bui.patch |  6 ++---
+ recipes-qt/qt5/qtwayland_git.bb                    |  2 +-
+ recipes-qt/qt5/qtwebchannel_git.bb                 |  2 +-
+ ...se.gypi-include-atomicops_internals_x86_g.patch |  2 +-
+ ...rf-Don-t-match-QMAKE_EXT_CPP-or-QMAKE_EXT.patch |  4 +--
+ ...ange-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch |  4 +--
+ ...rf-Make-sure-we-only-use-the-file-name-to.patch |  4 +--
+ ...s.prf-allow-build-for-linux-oe-g-platform.patch |  4 +--
+ ...quickwebengineview_p_p.h-add-include-QCol.patch |  4 +--
+ ...-dependency-to-QCoreApplication-translate.patch |  2 +-
+ recipes-qt/qt5/qtwebengine_git.bb                  |  6 +++--
+ recipes-qt/qt5/qtwebkit_git.bb                     |  2 +-
+ recipes-qt/qt5/qtwebsockets_git.bb                 |  2 +-
+ recipes-qt/qt5/qtx11extras_git.bb                  |  2 +-
+ recipes-qt/qt5/qtxmlpatterns_git.bb                |  2 +-
+ 67 files changed, 134 insertions(+), 167 deletions(-)
+ rename recipes-qt/qt5/qtbase/{0011-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch => 0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch} (94%)
+ rename recipes-qt/qt5/qtbase/{0011-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch => 0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch} (96%)
+ rename recipes-qt/qt5/qtbase/{0009-Always-build-uic.patch => 0011-Always-build-uic.patch} (81%)
+ rename recipes-qt/qt5/qtbase/{0010-Add-external-hostbindir-option-for-native-sdk.patch => 0012-Add-external-hostbindir-option-for-native-sdk.patch} (93%)
+ delete mode 100644 recipes-qt/qt5/qtquick1/0001-qdeclarativetextinput-update-to-match-QWidgetLineCon.patch
 
-On Wed, Apr 20, 2016 at 06:24:02AM +0300, Dai Caiyun wrote:
-> meta-webos hasn't been maitained for about 2years.
-> So, how about add libnih into meta-oe.
->=20
-> Fix the error as foloowing:
-> invalid tag value("^[A-Za-z0-9+._]+$") Release: Release: r2-4ubuntu16.
->=20
-> Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
-> ---
->  .../libnih-1.0.3/libnih_1.0.3-4ubuntu16.patch      | 3593 ++++++++++++++=
-++++++
->  meta-oe/recipes-support/libnih/libnih_1.0.3.bb     |   40 +
->  2 files changed, 3633 insertions(+)
->  create mode 100644 meta-oe/recipes-support/libnih/libnih-1.0.3/libnih_1.=
-0.3-4ubuntu16.patch
->  create mode 100644 meta-oe/recipes-support/libnih/libnih_1.0.3.bb
->=20
-> diff --git a/meta-oe/recipes-support/libnih/libnih-1.0.3/libnih_1.0.3-4ub=
-untu16.patch b/meta-oe/recipes-support/libnih/libnih-1.0.3/libnih_1.0.3-4ub=
-untu16.patch
-> new file mode 100644
-> index 0000000..5d125c8
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libnih/libnih-1.0.3/libnih_1.0.3-4ubuntu16.=
-patch
-> @@ -0,0 +1,3593 @@
-> +--- libnih-1.0.3.orig/ChangeLog
-> ++++ libnih-1.0.3/ChangeLog
-> +@@ -1,3 +1,84 @@
-> ++2013-03-13  Steve Langasek  <steve.langasek@ubuntu.com>
-> ++
-> ++	* nih/watch.c (nih_watch_walk_filter): New NihFileFilter function
-> ++	passed to nih_dir_walk_scan() to ensure the nih_watch_new() filter
-> ++	function is passed the NihWatch data rather than the data passed to
-> ++	the nih_dir_walk() NihFileVisitor function (LP: #776532).
-> ++
-> ++	* nih/tests/test_watch.c (test_new): New test "with filter and data"
-> ++	to ensure filter is passed correct value.
-> ++
-> ++2013-02-28  James Hunt  <james.hunt@ubuntu.com>
-> ++
-> ++	* Removal of gcc 'malloc' function attribute resulting from
-> ++	  a clarification in its description which makes its use invalid.
-> ++	  (LP: #1123588).
-> ++
-> ++2013-02-05  James Hunt  <james.hunt@ubuntu.com>
-> ++
-> ++	* nih/logging.c: nih_log_abort_message(): Remove erroneous check
-> ++	  left over from use of __abort_msg weak symbol.
-> ++	* nih/tests/test_logging.c: Remove unecessary check on whether
-> ++	  __nih_abort_msg has an address.
-> ++
-> ++2012-12-13  St=C3=A9phane Graber  <stgraber@ubuntu.com>
-> ++
-> ++	* nih-dbus-tool/type.c, nih-dbus-tool/marshal.c: Update dbus code
-> ++	generator to allow for empty lists for type 'as'.  This drops the
-> ++	!=3D NULL check for NULL terminated arrays and moves the iteration
-> ++	loop inside an 'if' statement.
-> ++
-> ++2012-12-11  Dmitrijs Ledkovs  <dmitrijs.ledkovs@canonical.com>
-> ++
-> ++	* nih/file.c (nih_dir_walk_scan): Fallback to lstat, if the
-> ++	non-portable dirent.d_type is not available (LP: #672643) (Closes:
-> ++	#695604).
-> ++
-> ++2012-12-10  Petr Lautrbach  <plautrba@redhat.com>
-> ++
-> ++	* nih/tests/test_file.c: don't use dirent.d_type (not portable)
-> ++
-> ++2012-10-25  James Hunt  <james.hunt@ubuntu.com>
-> ++
-> ++	* nih/logging.c: Use our own __nih_abort_msg rather than the
-> ++	(e)glibc private symbol __abort_msg to avoid upgrade issues (LP: #9973=
-59).
-> ++	* nih/tests/test_logging.c: Update tests for __nih_abort_msg.
-> ++
-> ++2011-08-31  James Hunt  <james.hunt@ubuntu.com>
-> ++
-> ++	* nih-dbus-tool/tests/test_com.netsplit.Nih.Test_object.c
-> ++	(test_unix_fd_to_str): Sanity check value before invoking strchr in
-> ++	case it returns address of null (which would give a misleading test
-> ++	pass).
-> ++	* nih-dbus-tool/tests/test_com.netsplit.Nih.Test_proxy.c
-> ++	(test_unix_fd_to_str, test_unix_fd_to_str_sync): Sanity check value
-> ++	before invoking strchr in case it returns address of null (which would
-> ++	give a misleading test pass).
-> ++	* nih/config.c (): nih_config_block_end: Add check to ensure strchr()
-> ++	doesn't return address of null since this would result in a misleading
-> ++	return value of TRUE.
-> ++
-> ++	* nih/string.c (nih_str_split): Fixes to avoid over-running
-> ++	input string and also returning an empty string array entry
-> ++	when repeat is true (LP: #834813).
-> ++	* nih/tests/test_string.c (test_str_split): Added a lot of new
-> ++	tests for nih_str_split().
-> ++
-> ++2011-08-26  James Hunt  <james.hunt@ubuntu.com>
-> ++
-> ++	* nih/io.c (nih_io_select_fds): Ensure number of fds being managed
-> ++	is within limits.
-> ++
-> ++	* nih/config.c, nih/error.h, nih/io.c, nih/test_files.h: Correct
-> ++	typos in comments.
-> ++
-> ++2011-06-20  James Hunt  <james.hunt@ubuntu.com>
-> ++
-> ++	* nih/watch.c (nih_watch_handle): Handle non-directory watches;
-> ++	previously a file watch resulted in an invalid file path ending in
-> ++	a single slash (LP:#777097).
-> ++	* nih/tests/test_watch.c: Added explicit test for watch on a file.
-> ++
-> + 2010-12-23  Scott James Remnant  <scott@netsplit.com>
-> +=20
-> + 	* NEWS: Release 1.0.3
-> +--- libnih-1.0.3.orig/nih/watch.c
-> ++++ libnih-1.0.3/nih/watch.c
-> +@@ -2,8 +2,8 @@
-> +  *
-> +  * watch.c - watching of files and directories with inotify
-> +  *
-> +- * Copyright =C2=A9 2009 Scott James Remnant <scott@netsplit.com>.
-> +- * Copyright =C2=A9 2009 Canonical Ltd.
-> ++ * Copyright =C2=A9 2011 Scott James Remnant <scott@netsplit.com>.
-> ++ * Copyright =C2=A9 2011 Canonical Ltd.
-> +  *
-> +  * This program is free software; you can redistribute it and/or modify
-> +  * it under the terms of the GNU General Public License version 2, as
-> +@@ -71,6 +71,9 @@
-> + 					      uint32_t events, uint32_t cookie,
-> + 					      const char *name,
-> + 					      int *caught_free);
-> ++static int             nih_watch_walk_filter (void *data, const char *p=
-ath,
-> ++					      int is_dir)
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> +=20
-> + /**
-> +@@ -91,7 +94,7 @@
-> +  * sub-directories will be automatically watched.
-> +  *
-> +  * Additionally, the set of files and directories within @path can be
-> +- * limited by passing a @filter function which will recieve the paths a=
-nd
-> ++ * limited by passing a @filter function which will receive the paths a=
-nd
-> +  * may return TRUE to indicate that the path received should not be wat=
-ched.
-> +  *
-> +  * When a file is created within @path, or moved from outside this loca=
-tion
-> +@@ -104,7 +107,7 @@
-> +  * files that exist under @path when the watch is first added.  This on=
-ly
-> +  * occurs if the watch can be added.
-> +  *
-> +- * This is a very high level wrapped around the inotify API; lower leve=
-ls
-> ++ * This is a very high level wrapper around the inotify API; lower leve=
-ls
-> +  * can be obtained using the inotify API itself and some of the helper
-> +  * functions used by this one.
-> +  *
-> +@@ -185,6 +188,35 @@
-> + }
-> +=20
-> +=20
-> ++ /**
-> ++ * nih_watch_walk_filter:
-> ++ * @data: NihWatch,
-> ++ * @path: path to file,
-> ++ * @is_dir: TRUE if @path is a directory.
-> ++ *
-> ++ * Callback function for nih_dir_walk(), used by nih_watch_add() to wrap
-> ++ * the user-specified NihFileFilter (watch->filter) with a filter that =
-can
-> ++ * take watch itself as an argument.
-> ++ *
-> ++ * Returns: TRUE if the path should be ignored, FALSE otherwise.
-> ++ **/
-> ++static int
-> ++nih_watch_walk_filter (void *data, const char *path, int is_dir)
-> ++{
-> ++    NihWatch *watch;
-> ++
-> ++    watch =3D (NihWatch *)data;
-> ++
-> ++    nih_assert (watch);
-> ++
-> ++    /* No filter, so accept all files */
-> ++    if (! watch->filter)
-> ++           return FALSE;
-> ++
-> ++    return watch->filter (watch->data, path, is_dir);
-> ++}
-> ++
-> ++
-> + /**
-> +  * nih_watch_handle_by_wd:
-> +  * @watch: watch to search,
-> +@@ -295,7 +327,7 @@
-> + 	 * one; errors within the walk are warned automatically, so if this
-> + 	 * fails, it means we literally couldn't watch the top-level.
-> + 	 */
-> +-	if (subdirs && (nih_dir_walk (path, watch->filter,
-> ++	if (subdirs && (nih_dir_walk (path, nih_watch_walk_filter,
-> + 				      (NihFileVisitor)nih_watch_add_visitor,
-> + 				      NULL, watch) < 0)) {
-> + 		NihError *err;
-> +@@ -494,12 +526,21 @@
-> + 		return;
-> + 	}
-> +=20
-> ++	/* Every other event must come with a name */
-> ++	if (name && *name) {
-> +=20
-> +-	/* Every other event must come with a name. */
-> +-	if ((! name) || strchr (name, '/'))
-> +-		return;
-> ++		/* If name refers to a directory, there should be no associated
-> ++		 * path - just the name of the path element.
-> ++		 */
-> ++		if (strchr (name, '/'))
-> ++			return;
-> +=20
-> +-	path =3D NIH_MUST (nih_sprintf (NULL, "%s/%s", handle->path, name));
-> ++		/* Event occured for file within a watched directory */
-> ++		path =3D NIH_MUST (nih_sprintf (NULL, "%s/%s", handle->path, name));
-> ++	} else {
-> ++		/* File event occured */
-> ++		path =3D NIH_MUST (nih_strdup (NULL, handle->path));
-> ++	}
-> +=20
-> + 	/* Check the filter */
-> + 	if (watch->filter && watch->filter (watch->data, path,
-> +--- libnih-1.0.3.orig/nih/hash.h
-> ++++ libnih-1.0.3/nih/hash.h
-> +@@ -141,7 +141,7 @@
-> +  * @hash: hash table to iterate,
-> +  * @iter: name of iterator variable.
-> +  *
-> +- * Expans to nested for statements that iterate over each entry in each
-> ++ * Expands to nested for statements that iterate over each entry in each
-> +  * bin of @hash, except for the bin head pointer, setting @iter to each
-> +  * entry for the block within the loop.  A variable named _@iter_i is u=
-sed
-> +  * to iterate the hash bins.
-> +@@ -203,7 +203,7 @@
-> + 				   NihKeyFunction key_function,
-> + 				   NihHashFunction hash_function,
-> + 				   NihCmpFunction cmp_function)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NihList *   nih_hash_add          (NihHash *hash, NihList *entry);
-> + NihList *   nih_hash_add_unique   (NihHash *hash, NihList *entry);
-> +--- libnih-1.0.3.orig/nih/main.h
-> ++++ libnih-1.0.3/nih/main.h
-> +@@ -138,7 +138,7 @@
-> +=20
-> + NihMainLoopFunc *nih_main_loop_add_func  (const void *parent,
-> + 					  NihMainLoopCb callback, void *data)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + void             nih_main_term_signal    (void *data, NihSignal *signal=
-);
-> +=20
-> +--- libnih-1.0.3.orig/nih/command.h
-> ++++ libnih-1.0.3/nih/command.h
-> +@@ -123,7 +123,7 @@
-> +=20
-> + NihCommand *nih_command_join   (const void *parent,
-> + 				const NihCommand *a, const NihCommand *b)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih/config.h
-> ++++ libnih-1.0.3/nih/config.h
-> +@@ -140,10 +140,10 @@
-> + char *    nih_config_next_token      (const void *parent, const char *f=
-ile,
-> + 				      size_t len, size_t *pos, size_t *lineno,
-> + 				      const char *delim, int dequote)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *    nih_config_next_arg        (const void *parent, const char *f=
-ile,
-> + 				      size_t len, size_t *pos, size_t *lineno)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + void      nih_config_next_line       (const char *file, size_t len,
-> + 				      size_t *pos, size_t *lineno);
-> +=20
-> +@@ -155,15 +155,15 @@
-> +=20
-> + char **   nih_config_parse_args      (const void *parent, const char *f=
-ile,
-> + 				      size_t len, size_t *pos, size_t *lineno)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *    nih_config_parse_command   (const void *parent, const char *f=
-ile,
-> + 				      size_t len, size_t *pos, size_t *lineno)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *    nih_config_parse_block     (const void *parent, const char *f=
-ile,
-> + 				      size_t len, size_t *pos, size_t *lineno,
-> + 				      const char *type)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + int       nih_config_skip_block      (const char *file, size_t len,
-> + 				      size_t *lineno, size_t *pos,
-> + 				      const char *type, size_t *endpos)
-> +--- libnih-1.0.3.orig/nih/io.c
-> ++++ libnih-1.0.3/nih/io.c
-> +@@ -2,8 +2,8 @@
-> +  *
-> +  * io.c - file and socket input/output handling
-> +  *
-> +- * Copyright =C2=A9 2009 Scott James Remnant <scott@netsplit.com>.
-> +- * Copyright =C2=A9 2009 Canonical Ltd.
-> ++ * Copyright =C2=A9 2011 Scott James Remnant <scott@netsplit.com>.
-> ++ * Copyright =C2=A9 2011 Canonical Ltd.
-> +  *
-> +  * This program is free software; you can redistribute it and/or modify
-> +  * it under the terms of the GNU General Public License version 2, as
-> +@@ -165,6 +165,7 @@
-> + 	nih_assert (readfds !=3D NULL);
-> + 	nih_assert (writefds !=3D NULL);
-> + 	nih_assert (exceptfds !=3D NULL);
-> ++	nih_assert (*nfds <=3D FD_SETSIZE);
-> +=20
-> + 	nih_io_init ();
-> +=20
-> +@@ -186,6 +187,9 @@
-> + 			*nfds =3D nih_max (*nfds, watch->fd + 1);
-> + 		}
-> + 	}
-> ++
-> ++	/* Re-check in case we exceeded the limit in the loop */
-> ++	nih_assert (*nfds <=3D FD_SETSIZE);
-> + }
-> +=20
-> + /**
-> +@@ -901,7 +905,7 @@
-> +  * read and placed into the receive buffer or queue, and the reader fun=
-ction
-> +  * is called if set.
-> +  *
-> +- * Any data or messaages in the send buffer or queue are written out if=
- the
-> ++ * Any data or messages in the send buffer or queue are written out if =
-the
-> +  * @events includes NIH_IO_WRITE.
-> +  *
-> +  * Errors are handled when data is read, and result in the error handled
-> +@@ -1211,7 +1215,7 @@
-> +  * This function is called when the local end of a file descriptor being
-> +  * managed by NihIo should be closed.  Usually this is because the remo=
-te
-> +  * end has been closed (without error) but it can also be because no
-> +- * error handler was given
-> ++ * error handler was given.
-> +  *
-> +  * Normally this just calls the close handler, or if not available, it
-> +  * closes the file descriptor and frees the structure (which may be
-> +@@ -1291,7 +1295,7 @@
-> +  * @io: structure to be destroyed.
-> +  *
-> +  * Closes the file descriptor associated with an NihIo structure so that
-> +- * the structure can be freed.  IF an error is caught by closing the
-> ++ * the structure can be freed.  If an error is caught by closing the
-> +  * descriptor, the error handler is called instead of the error being r=
-aised;
-> +  * this allows you to group your error handling in one place rather than
-> +  * special-case close.
-> +--- libnih-1.0.3.orig/nih/watch.h
-> ++++ libnih-1.0.3/nih/watch.h
-> +@@ -156,7 +156,7 @@
-> + 			     NihCreateHandler create_handler,
-> + 			     NihModifyHandler modify_handler,
-> + 			     NihDeleteHandler delete_handler, void *data)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + int       nih_watch_add     (NihWatch *watch, const char *path, int sub=
-dirs)
-> + 	__attribute__ ((warn_unused_result));
-> +--- libnih-1.0.3.orig/nih/tree.h
-> ++++ libnih-1.0.3/nih/tree.h
-> +@@ -344,9 +344,9 @@
-> +=20
-> + void          nih_tree_init           (NihTree *tree);
-> + NihTree *     nih_tree_new            (const void *parent)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + NihTreeEntry *nih_tree_entry_new      (const void *parent)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NihTree *     nih_tree_add            (NihTree *tree, NihTree *node,
-> + 				       NihTreeWhere where);
-> +--- libnih-1.0.3.orig/nih/file.c
-> ++++ libnih-1.0.3/nih/file.c
-> +@@ -65,7 +65,7 @@
-> + /* Prototypes for static functions */
-> + static char **nih_dir_walk_scan  (const char *path, NihFileFilter filte=
-r,
-> + 				  void *data)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + static int    nih_dir_walk_visit (const char *dirname, NihList *dirs,
-> + 				  const char *path, NihFileFilter filter,
-> + 				  NihFileVisitor visitor,
-> +@@ -619,6 +619,8 @@
-> + 	struct dirent  *ent;
-> + 	char          **paths;
-> + 	size_t          npaths;
-> ++	int             isdir;
-> ++	struct stat     statbuf;
-> +=20
-> + 	nih_assert (path !=3D NULL);
-> +=20
-> +@@ -640,7 +642,15 @@
-> + 		subpath =3D NIH_MUST (nih_sprintf (NULL, "%s/%s",
-> + 						 path, ent->d_name));
-> +=20
-> +-		if (filter && filter (data, subpath, ent->d_type =3D=3D DT_DIR))
-> ++		if (ent->d_type =3D=3D DT_UNKNOWN) {
-> ++			if ( lstat (subpath, &statbuf))
-> ++				isdir =3D 0;
-> ++			else
-> ++				isdir =3D S_ISDIR(statbuf.st_mode);
-> ++		} else
-> ++			isdir =3D ent->d_type =3D=3D DT_DIR;
-> ++
-> ++		if (filter && filter (data, subpath, isdir))
-> + 			continue;
-> +=20
-> + 		NIH_MUST (nih_str_array_addp (&paths, NULL, &npaths, subpath));
-> +--- libnih-1.0.3.orig/nih/alloc.c
-> ++++ libnih-1.0.3/nih/alloc.c
-> +@@ -119,8 +119,7 @@
-> + static inline int          nih_alloc_context_free   (NihAllocCtx *ctx);
-> +=20
-> + static inline NihAllocRef *nih_alloc_ref_new        (NihAllocCtx *paren=
-t,
-> +-						     NihAllocCtx *child)
-> +-	__attribute__ ((malloc));
-> ++						     NihAllocCtx *child);
-> + static inline void         nih_alloc_ref_free       (NihAllocRef *ref);
-> + static inline NihAllocRef *nih_alloc_ref_lookup     (NihAllocCtx *paren=
-t,
-> + 						     NihAllocCtx *child);
-> +--- libnih-1.0.3.orig/nih/timer.h
-> ++++ libnih-1.0.3/nih/timer.h
-> +@@ -59,7 +59,7 @@
-> +  * @months: months (1-12),
-> +  * @wdays: days of week (0-7).
-> +  *
-> +- * Indidcates when scheduled timers should be run, each member is a bit
-> ++ * Indicates when scheduled timers should be run, each member is a bit
-> +  * field where the bit is 1 if the timer should be run for that value a=
-nd
-> +  * 0 if not.
-> +  **/
-> +@@ -117,14 +117,14 @@
-> +=20
-> + NihTimer *nih_timer_add_timeout   (const void *parent, time_t timeout,
-> + 				   NihTimerCb callback, void *data)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + NihTimer *nih_timer_add_periodic  (const void *parent, time_t period,
-> + 				   NihTimerCb callback, void *data)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + NihTimer *nih_timer_add_scheduled (const void *parent,
-> + 				   NihTimerSchedule *schedule,
-> + 				   NihTimerCb callback, void *data)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NihTimer *nih_timer_next_due       (void);
-> + void      nih_timer_poll           (void);
-> +--- libnih-1.0.3.orig/nih/config.c
-> ++++ libnih-1.0.3/nih/config.c
-> +@@ -2,8 +2,8 @@
-> +  *
-> +  * config.c - configuration file parsing
-> +  *
-> +- * Copyright =C2=A9 2009 Scott James Remnant <scott@netsplit.com>.
-> +- * Copyright =C2=A9 2009 Canonical Ltd.
-> ++ * Copyright =C2=A9 2011 Scott James Remnant <scott@netsplit.com>.
-> ++ * Copyright =C2=A9 2011 Canonical Ltd.
-> +  *
-> +  * This program is free software; you can redistribute it and/or modify
-> +  * it under the terms of the GNU General Public License version 2, as
-> +@@ -657,7 +657,7 @@
-> +  * of the returned string are freed, the returned string will also be
-> +  * freed.
-> +  *
-> +- * Returns: the command found or NULL on raised error.
-> ++ * Returns: the newly allocated command found or NULL on raised error.
-> +  **/
-> + char *
-> + nih_config_parse_command (const void *parent,
-> +@@ -714,7 +714,7 @@
-> +  * @lineno: line number,
-> +  * @type: block identifier.
-> +  *
-> +- * Extracts a block of text from @line, stopping when the pharse "end @=
-type"
-> ++ * Extracts a block of text from @line, stopping when the phrase "end @=
-type"
-> +  * is encountered without any quotes or blackslash escaping within it.
-> +  *
-> +  * @file may be a memory mapped file, in which case @pos should be given
-> +@@ -950,7 +950,7 @@
-> + 		return FALSE;
-> +=20
-> + 	/* Must be whitespace after */
-> +-	if (! strchr (NIH_CONFIG_WS, file[p + 3]))
-> ++	if (file[p + 3] && ! strchr (NIH_CONFIG_WS, file[p + 3]))
-> + 		return FALSE;
-> +=20
-> + 	/* Find the second word */
-> +--- libnih-1.0.3.orig/nih/option.h
-> ++++ libnih-1.0.3/nih/option.h
-> +@@ -124,11 +124,11 @@
-> + char **    nih_option_parser         (const void *parent,
-> + 				      int argc, char *argv[],
-> + 				      NihOption *options, int break_nonopt)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NihOption *nih_option_join           (const void *parent,
-> + 				      const NihOption *a, const NihOption *b)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + int        nih_option_count          (NihOption *option, const char *ar=
-g);
-> + int        nih_option_int            (NihOption *option, const char *ar=
-g);
-> +--- libnih-1.0.3.orig/nih/signal.h
-> ++++ libnih-1.0.3/nih/signal.h
-> +@@ -76,7 +76,7 @@
-> +=20
-> + NihSignal * nih_signal_add_handler (const void *parent, int signum,
-> + 				   NihSignalHandler handler, void *data)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + void        nih_signal_handler     (int signum);
-> + void        nih_signal_poll        (void);
-> +--- libnih-1.0.3.orig/nih/list.h
-> ++++ libnih-1.0.3/nih/list.h
-> +@@ -37,7 +37,7 @@
-> +  * after a known entry, and remove an entry from the list.
-> +  *
-> +  * List entries may be created in one of two ways.  The most common is =
-to
-> +- * embed the NihList structure as the frist member of your own structur=
-e,
-> ++ * embed the NihList structure as the first member of your own structur=
-e,
-> +  * and initialise it with nih_list_init() after allocating the structur=
-e.
-> +  * Alternatively you may create NihListEntry structures with
-> +  * nih_list_entry_new() and point at your own data from them.
-> +@@ -196,10 +196,10 @@
-> +=20
-> + void          nih_list_init      (NihList *entry);
-> + NihList *     nih_list_new       (const void *parent)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NihListEntry *nih_list_entry_new (const void *parent)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> +=20
-> + NihList *     nih_list_add       (NihList *list, NihList *entry);
-> +--- libnih-1.0.3.orig/nih/logging.c
-> ++++ libnih-1.0.3/nih/logging.c
-> +@@ -39,11 +39,11 @@
-> +=20
-> +=20
-> + /**
-> +- * __abort_msg:
-> ++ * __nih_abort_msg:
-> +  *
-> +- * A glibc variable that keeps the assertion message in the core dump.
-> ++ * A variable that keeps the assertion message in the core dump.
-> +  **/
-> +-extern char *__abort_msg __attribute__ ((weak));
-> ++char *__nih_abort_msg =3D NULL;
-> +=20
-> + /**
-> +  * logger:
-> +@@ -114,19 +114,16 @@
-> +  * nih_log_abort_message:
-> +  * @message: message to be logged.
-> +  *
-> +- * Save @message in the glibc __abort_msg variable so it can be retriev=
-ed
-> ++ * Save @message in the __nih_abort_msg variable so it can be retrieved
-> +  * by debuggers if we should crash at this point.
-> +  **/
-> + static void
-> + nih_log_abort_message (const char *message)
-> + {
-> +-	if (! &__abort_msg)
-> +-		return;
-> ++	if (__nih_abort_msg)
-> ++		nih_discard (__nih_abort_msg);
-> +=20
-> +-	if (__abort_msg)
-> +-		nih_discard (__abort_msg);
-> +-
-> +-	__abort_msg =3D NIH_MUST (nih_strdup (NULL, message));
-> ++	__nih_abort_msg =3D NIH_MUST (nih_strdup (NULL, message));
-> + }
-> +=20
-> + /**
-> +--- libnih-1.0.3.orig/nih/test_files.h
-> ++++ libnih-1.0.3/nih/test_files.h
-> +@@ -1,7 +1,7 @@
-> + /* libnih
-> +  *
-> +- * Copyright =C2=A9 2009 Scott James Remnant <scott@netsplit.com>.
-> +- * Copyright =C2=A9 2009 Canonical Ltd.
-> ++ * Copyright =C2=A9 2011 Scott James Remnant <scott@netsplit.com>.
-> ++ * Copyright =C2=A9 2011 Canonical Ltd.
-> +  *
-> +  * This program is free software; you can redistribute it and/or modify
-> +  * it under the terms of the GNU General Public License version 2, as
-> +@@ -39,7 +39,7 @@
-> +  * TEST_FILENAME:
-> +  * @_var: variable to store filename in.
-> +  *
-> +- * Generate a filename that may be used for testing, it's unlinked it if
-> ++ * Generate a filename that may be used for testing, it's unlinked if it
-> +  * exists and it's up to you to unlink it when done.  @_var should be at
-> +  * least PATH_MAX long.
-> +  **/
-> +--- libnih-1.0.3.orig/nih/test_process.h
-> ++++ libnih-1.0.3/nih/test_process.h
-> +@@ -36,7 +36,7 @@
-> +  * Spawn a child in which a test can be performed without affecting the
-> +  * main flow of the process.  The pid of the child is stored in @_pid.
-> +  *
-> +- * This macro ensures that the child has begun exectution before the
-> ++ * This macro ensures that the child has begun execution before the
-> +  * parent is allowed to continue through the usual use of a pipe.
-> +  *
-> +  * A block of code should follow this macro, which is the code that will
-> +--- libnih-1.0.3.orig/nih/child.h
-> ++++ libnih-1.0.3/nih/child.h
-> +@@ -98,7 +98,7 @@
-> + NihChildWatch *nih_child_add_watch (const void *parent, pid_t pid,
-> + 				    NihChildEvents events,
-> + 				    NihChildHandler handler, void *data)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + void           nih_child_poll      (void);
-> +=20
-> +--- libnih-1.0.3.orig/nih/alloc.h
-> ++++ libnih-1.0.3/nih/alloc.h
-> +@@ -299,7 +299,7 @@
-> +  * It is permissible to take references to foo within its scope, or by
-> +  * functions called, in which case it will not be freed.  Also it is
-> +  * generally nonsensical to allocate with a parent, since this too will
-> +- * prevent it from beign freed.
-> ++ * prevent it from being freed.
-> +  **/
-> + #define nih_local __attribute__ ((cleanup(_nih_discard_local)))
-> +=20
-> +@@ -307,11 +307,11 @@
-> + NIH_BEGIN_EXTERN
-> +=20
-> + void * nih_alloc                     (const void *parent, size_t size)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + void * nih_realloc                   (void *ptr, const void *parent,
-> + 				      size_t size)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + int    nih_free                      (void *ptr);
-> + int    nih_discard                   (void *ptr);
-> +--- libnih-1.0.3.orig/nih/io.h
-> ++++ libnih-1.0.3/nih/io.h
-> +@@ -269,7 +269,7 @@
-> + NihIoWatch *  nih_io_add_watch           (const void *parent, int fd,
-> + 					  NihIoEvents events,
-> + 					  NihIoWatcher watcher, void *data)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + void          nih_io_select_fds          (int *nfds, fd_set *readfds,
-> + 					  fd_set *writefds, fd_set *exceptfds);
-> +@@ -278,12 +278,12 @@
-> +=20
-> +=20
-> + NihIoBuffer * nih_io_buffer_new          (const void *parent)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + int           nih_io_buffer_resize       (NihIoBuffer *buffer, size_t g=
-row);
-> + char *        nih_io_buffer_pop          (const void *parent,
-> + 					  NihIoBuffer *buffer, size_t *len)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + void          nih_io_buffer_shrink       (NihIoBuffer *buffer, size_t l=
-en);
-> + int           nih_io_buffer_push         (NihIoBuffer *buffer,
-> + 					  const char *str, size_t len)
-> +@@ -291,7 +291,7 @@
-> +=20
-> +=20
-> + NihIoMessage *nih_io_message_new         (const void *parent)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + int           nih_io_message_add_control (NihIoMessage *message, int le=
-vel,
-> + 					  int type, socklen_t len,
-> +@@ -300,7 +300,7 @@
-> +=20
-> + NihIoMessage *nih_io_message_recv        (const void *parent, int fd,
-> + 					  size_t *len)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + ssize_t       nih_io_message_send        (NihIoMessage *message, int fd)
-> + 	__attribute__ ((warn_unused_result));
-> +=20
-> +@@ -310,7 +310,7 @@
-> + 					  NihIoCloseHandler close_handler,
-> + 					  NihIoErrorHandler error_handler,
-> + 					  void *data)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + void          nih_io_shutdown            (NihIo *io);
-> + int           nih_io_destroy             (NihIo *io);
-> +=20
-> +@@ -319,14 +319,14 @@
-> +=20
-> + char *        nih_io_read                (const void *parent, NihIo *io,
-> + 					  size_t *len)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + int           nih_io_write               (NihIo *io, const char *str,
-> + 					  size_t len)
-> + 	__attribute__ ((warn_unused_result));
-> +=20
-> + char *        nih_io_get                 (const void *parent, NihIo *io,
-> + 					  const char *delim)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + int           nih_io_printf              (NihIo *io, const char *format=
-, ...)
-> + 	__attribute__ ((warn_unused_result, format (printf, 2, 3)));
-> +--- libnih-1.0.3.orig/nih/test_output.h
-> ++++ libnih-1.0.3/nih/test_output.h
-> +@@ -61,10 +61,10 @@
-> +=20
-> + /**
-> +  * TEST_FEATURE:
-> +- * @_feat: name of function feature being tested.
-> ++ * @_feat: name of function or group feature being tested.
-> +  *
-> +- * Output a message indicating that a sub-test of a function is being
-> +- * performed, specifically the feature named _feat.
-> ++ * Output a message indicating that a sub-test of a function or
-> ++ * group is being performed, specifically the feature named _feat.
-> +  **/
-> + #define TEST_FEATURE(_feat) \
-> + 	printf ("...%s\n", _feat);
-> +--- libnih-1.0.3.orig/nih/error.h
-> ++++ libnih-1.0.3/nih/error.h
-> +@@ -1,7 +1,7 @@
-> + /* libnih
-> +  *
-> +- * Copyright =C2=A9 2009 Scott James Remnant <scott@netsplit.com>.
-> +- * Copyright =C2=A9 2009 Canonical Ltd.
-> ++ * Copyright =C2=A9 2011 Scott James Remnant <scott@netsplit.com>.
-> ++ * Copyright =C2=A9 2011 Canonical Ltd.
-> +  *
-> +  * This program is free software; you can redistribute it and/or modify
-> +  * it under the terms of the GNU General Public License version 2, as
-> +@@ -111,7 +111,7 @@
-> +  * @message: human-readable message.
-> +  *
-> +  * Raises an error with the given details in the current error context,
-> +- * if an unhandled error already exists then an error message is emmitt=
-ed
-> ++ * if an unhandled error already exists then an error message is emitted
-> +  * through the logging system; you should try to avoid this.
-> +  *
-> +  * @message should be a static string, as it will not be freed when the
-> +@@ -126,7 +126,7 @@
-> +  * @format: format string for human-readable message.
-> +  *
-> +  * Raises an error with the given details in the current error context,
-> +- * if an unhandled error already exists then an error message is emmitt=
-ed
-> ++ * if an unhandled error already exists then an error message is emitted
-> +  * through the logging system; you should try to avoid this.
-> +  *
-> +  * The human-readable message for the error is parsed according to @for=
-mat,
-> +@@ -140,7 +140,7 @@
-> +  * nih_error_raise_system:
-> +  *
-> +  * Raises an error with details taken from the current value of errno,
-> +- * if an unhandled error already exists then an error message is emmitt=
-ed
-> ++ * if an unhandled error already exists then an error message is emitted
-> +  * through the logging system; you should try to avoid this.
-> +  **/
-> + #define nih_error_raise_system() \
-> +@@ -162,7 +162,7 @@
-> +  * @error: existing object to raise.
-> +  *
-> +  * Raises the existing error object in the current error context,
-> +- * if an unhandled error already exists then an error message is emmitt=
-ed
-> ++ * if an unhandled error already exists then an error message is emitted
-> +  * through the logging system; you should try to avoid this.
-> +  *
-> +  * This is normally used to raise a taken error that has not been handl=
-ed,
-> +@@ -182,7 +182,7 @@
-> +  * @message: human-readable message.
-> +  *
-> +  * Raises an error with the given details in the current error context,
-> +- * if an unhandled error already exists then an error message is emmitt=
-ed
-> ++ * if an unhandled error already exists then an error message is emitted
-> +  * through the logging system; you should try to avoid this.
-> +  *
-> +  * Will return from the current function with @retval, which may be left
-> +@@ -199,7 +199,7 @@
-> +  * @retval: return value for function.
-> +  *
-> +  * Raises an error with details taken from the current value of errno,
-> +- * if an unhandled error already exists then an error message is emmitt=
-ed
-> ++ * if an unhandled error already exists then an error message is emitted
-> +  * through the logging system; you should try to avoid this.
-> +  *
-> +  * Will return from the current function with @retval, which may be left
-> +--- libnih-1.0.3.orig/nih/string.h
-> ++++ libnih-1.0.3/nih/string.h
-> +@@ -35,60 +35,60 @@
-> + NIH_BEGIN_EXTERN
-> +=20
-> + char * nih_sprintf          (const void *parent, const char *format, ..=
-=2E)
-> +-	__attribute__ ((format (printf, 2, 3), warn_unused_result, malloc));
-> ++	__attribute__ ((format (printf, 2, 3), warn_unused_result));
-> +=20
-> + char * nih_vsprintf         (const void *parent, const char *format,
-> + 			     va_list args)
-> +-	__attribute__ ((format (printf, 2, 0), warn_unused_result, malloc));
-> ++	__attribute__ ((format (printf, 2, 0), warn_unused_result));
-> +=20
-> + char * nih_strdup           (const void *parent, const char *str)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char * nih_strndup          (const void *parent, const char *str, size_=
-t len)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char * nih_strcat           (char **str, const void *parent, const char=
- *src)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char * nih_strncat          (char **str, const void *parent, const char=
- *src,
-> + 			     size_t len)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char * nih_strcat_sprintf   (char **str, const void *parent,
-> + 			     const char *format, ...)
-> +-	__attribute__ ((format (printf, 3, 4), warn_unused_result, malloc));
-> ++	__attribute__ ((format (printf, 3, 4), warn_unused_result));
-> + char * nih_strcat_vsprintf  (char **str, const void *parent,
-> + 			     const char *format, va_list args)
-> +-	__attribute__ ((format (printf, 3, 0), warn_unused_result, malloc));
-> ++	__attribute__ ((format (printf, 3, 0), warn_unused_result));
-> +=20
-> + char **nih_str_split        (const void *parent, const char *str,
-> + 			     const char *delim, int repeat)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char **nih_str_array_new    (const void *parent)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char **nih_str_array_add    (char ***array, const void *parent, size_t =
-*len,
-> + 			     const char *str)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char **nih_str_array_addn   (char ***array, const void *parent, size_t =
-*len,
-> + 			     const char *str, size_t strlen)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char **nih_str_array_addp   (char ***array, const void *parent, size_t =
-*len,
-> + 			     void *ptr)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char **nih_str_array_copy   (const void *parent, size_t *len,
-> + 			     char * const *array)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char **nih_str_array_append (char ***array, const void *parent, size_t =
-*len,
-> + 			     char * const *args)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char * nih_str_wrap         (const void *parent, const char *str, size_=
-t len,
-> + 		             size_t first_indent, size_t indent)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + size_t nih_str_screen_width (void);
-> + char * nih_str_screen_wrap  (const void *parent, const char *str,
-> + 			     size_t first_indent, size_t indent)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih/string.c
-> ++++ libnih-1.0.3/nih/string.c
-> +@@ -405,7 +405,7 @@
-> + 		const char  *ptr;
-> +=20
-> + 		/* Skip initial delimiters */
-> +-		while (repeat && strchr (delim, *str))
-> ++		while (repeat && *str && strchr (delim, *str))
-> + 			str++;
-> +=20
-> + 		/* Find the end of the token */
-> +@@ -413,6 +413,13 @@
-> + 		while (*str && (! strchr (delim, *str)))
-> + 			str++;
-> +=20
-> ++		/* Don't create an empty string array element in repeat
-> ++		 * mode if there is no token (as a result of a
-> ++		 * duplicated delimiter character).
-> ++		 */
-> ++		if (repeat && (str =3D=3D ptr))
-> ++			continue;
-> ++
-> + 		if (! nih_str_array_addn (&array, parent, &len,
-> + 					  ptr, str - ptr)) {
-> + 			nih_free (array);
-> +--- libnih-1.0.3.orig/nih/file.h
-> ++++ libnih-1.0.3/nih/file.h
-> +@@ -82,7 +82,7 @@
-> +=20
-> + char *nih_file_read         (const void *parent, const char *path,
-> + 			     size_t *length)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + void *nih_file_map          (const char *path, int flags, size_t *lengt=
-h)
-> + 	__attribute__ ((warn_unused_result));
-> +--- libnih-1.0.3.orig/nih/tests/test_option.c
-> ++++ libnih-1.0.3/nih/tests/test_option.c
-> +@@ -1574,7 +1574,7 @@
-> + 		output =3D tmpfile ();
-> + 		TEST_CHILD (pid) {
-> + 			TEST_DIVERT_STDOUT (output) {
-> +-				char **args;
-> ++				char **args __attribute__((unused));
-> +=20
-> + 				args =3D nih_option_parser (NULL, argc, argv,
-> + 							  options, FALSE);
-> +@@ -1652,7 +1652,7 @@
-> + 			unsetenv ("COLUMNS");
-> +=20
-> + 			TEST_DIVERT_STDOUT (output) {
-> +-				char **args;
-> ++				char **args __attribute__((unused));
-> +=20
-> + 				args =3D nih_option_parser (NULL, argc, argv,
-> + 							  options, FALSE);
-> +--- libnih-1.0.3.orig/nih/tests/test_logging.c
-> ++++ libnih-1.0.3/nih/tests/test_logging.c
-> +@@ -31,7 +31,7 @@
-> + #include <nih/main.h>
-> +=20
-> +=20
-> +-extern char *__abort_msg __attribute__ ((weak));
-> ++extern char *__nih_abort_msg;
-> +=20
-> + static NihLogLevel last_priority =3D NIH_LOG_UNKNOWN;
-> + static char *      last_message =3D NULL;
-> +@@ -156,68 +156,63 @@
-> + 	}
-> +=20
-> +=20
-> +-	/* Check that a fatal message is also stored in the glibc __abort_msg
-> ++	/* Check that a fatal message is also stored in the __nih_abort_msg
-> + 	 * variable.
-> + 	 */
-> +-	if (&__abort_msg) {
-> +-		TEST_FEATURE ("with fatal message");
-> +-		TEST_ALLOC_FAIL {
-> +-			__abort_msg =3D NULL;
-> +-			last_priority =3D NIH_LOG_UNKNOWN;
-> +-			last_message =3D NULL;
-> +-
-> +-			ret =3D nih_log_message (NIH_LOG_FATAL,
-> +-					       "message with %s %d formatting",
-> +-					       "some", 20);
-> +-
-> +-			TEST_EQ (ret, 0);
-> +-			TEST_EQ (last_priority, NIH_LOG_FATAL);
-> +-			TEST_EQ_STR (last_message, "message with some 20 formatting");
-> +-
-> +-			TEST_NE_P (__abort_msg, NULL);
-> +-			TEST_ALLOC_PARENT (__abort_msg, NULL);
-> +-			TEST_EQ_STR (__abort_msg, "message with some 20 formatting");
-> ++	TEST_FEATURE ("with fatal message");
-> ++	TEST_ALLOC_FAIL {
-> ++		__nih_abort_msg =3D NULL;
-> ++		last_priority =3D NIH_LOG_UNKNOWN;
-> ++		last_message =3D NULL;
-> +=20
-> +-			free (last_message);
-> +-		}
-> ++		ret =3D nih_log_message (NIH_LOG_FATAL,
-> ++				"message with %s %d formatting",
-> ++				"some", 20);
-> +=20
-> ++		TEST_EQ (ret, 0);
-> ++		TEST_EQ (last_priority, NIH_LOG_FATAL);
-> ++		TEST_EQ_STR (last_message, "message with some 20 formatting");
-> +=20
-> +-		/* Check that a fatal message can safely overwrite one already stored
-> +-		 * in the glibc __abort_msg variable.
-> +-		 */
-> +-		TEST_FEATURE ("with second fatal message");
-> +-		TEST_ALLOC_FAIL {
-> +-			TEST_ALLOC_SAFE {
-> +-				msg =3D nih_strdup (NULL, "test");
-> +-			}
-> +-
-> +-			__abort_msg =3D msg;
-> +-			TEST_FREE_TAG (msg);
-> +-
-> +-			last_priority =3D NIH_LOG_UNKNOWN;
-> +-			last_message =3D NULL;
-> +-
-> +-			ret =3D nih_log_message (NIH_LOG_FATAL,
-> +-					       "message with %s %d formatting",
-> +-					       "some", 20);
-> +-
-> +-			TEST_EQ (ret, 0);
-> +-			TEST_EQ (last_priority, NIH_LOG_FATAL);
-> +-			TEST_EQ_STR (last_message, "message with some 20 formatting");
-> +-
-> +-			TEST_FREE (msg);
-> +-
-> +-			TEST_NE_P (__abort_msg, NULL);
-> +-			TEST_ALLOC_PARENT (__abort_msg, NULL);
-> +-			TEST_EQ_STR (__abort_msg, "message with some 20 formatting");
-> ++		TEST_NE_P (__nih_abort_msg, NULL);
-> ++		TEST_ALLOC_PARENT (__nih_abort_msg, NULL);
-> ++		TEST_EQ_STR (__nih_abort_msg, "message with some 20 formatting");
-> +=20
-> +-			free (last_message);
-> +-		}
-> +-	} else {
-> +-		printf ("SKIP: __abort_msg not available\n");
-> ++		free (last_message);
-> + 	}
-> +=20
-> +=20
-> ++	/* Check that a fatal message can safely overwrite one already stored
-> ++	 * in the __nih_abort_msg variable.
-> ++	 */
-> ++	TEST_FEATURE ("with second fatal message");
-> ++	TEST_ALLOC_FAIL {
-> ++		TEST_ALLOC_SAFE {
-> ++			msg =3D nih_strdup (NULL, "test");
-> ++		}
-> ++
-> ++		__nih_abort_msg =3D msg;
-> ++		TEST_FREE_TAG (msg);
-> ++
-> ++		last_priority =3D NIH_LOG_UNKNOWN;
-> ++		last_message =3D NULL;
-> ++
-> ++		ret =3D nih_log_message (NIH_LOG_FATAL,
-> ++				"message with %s %d formatting",
-> ++				"some", 20);
-> ++
-> ++		TEST_EQ (ret, 0);
-> ++		TEST_EQ (last_priority, NIH_LOG_FATAL);
-> ++		TEST_EQ_STR (last_message, "message with some 20 formatting");
-> ++
-> ++		TEST_FREE (msg);
-> ++
-> ++		TEST_NE_P (__nih_abort_msg, NULL);
-> ++		TEST_ALLOC_PARENT (__nih_abort_msg, NULL);
-> ++		TEST_EQ_STR (__nih_abort_msg, "message with some 20 formatting");
-> ++
-> ++		free (last_message);
-> ++	}
-> ++
-> + 	/* Check that the nih_debug macro wraps the call properly and
-> + 	 * includes the function in which the message occurred.
-> + 	 */
-> +--- libnih-1.0.3.orig/nih/tests/test_hash.c
-> ++++ libnih-1.0.3/nih/tests/test_hash.c
-> +@@ -470,7 +470,8 @@
-> + test_lookup (void)
-> + {
-> + 	NihHash *hash;
-> +-	NihList *entry1, *entry2, *entry3, *ptr;
-> ++	NihList *entry1, *entry2, *ptr;
-> ++	NihList *entry3 __attribute__((unused));
-> +=20
-> + 	TEST_FUNCTION ("nih_hash_lookup");
-> + 	hash =3D nih_hash_string_new (NULL, 0);
-> +--- libnih-1.0.3.orig/nih/tests/test_main.c
-> ++++ libnih-1.0.3/nih/tests/test_main.c
-> +@@ -457,7 +457,7 @@
-> + test_main_loop (void)
-> + {
-> + 	NihMainLoopFunc *func;
-> +-	NihTimer        *timer;
-> ++	NihTimer        *timer __attribute__((unused));
-> + 	int              ret;
-> +=20
-> + 	/* Check that we can run through the main loop, and that the
-> +--- libnih-1.0.3.orig/nih/tests/test_watch.c
-> ++++ libnih-1.0.3/nih/tests/test_watch.c
-> +@@ -2,8 +2,8 @@
-> +  *
-> +  * test_watch.c - test suite for nih/watch.c
-> +  *
-> +- * Copyright =C2=A9 2009 Scott James Remnant <scott@netsplit.com>.
-> +- * Copyright =C2=A9 2009 Canonical Ltd.
-> ++ * Copyright =C2=A9 2011 Scott James Remnant <scott@netsplit.com>.
-> ++ * Copyright =C2=A9 2011 Canonical Ltd.
-> +  *
-> +  * This program is free software; you can redistribute it and/or modify
-> +  * it under the terms of the GNU General Public License version 2, as
-> +@@ -39,6 +39,8 @@
-> + #include <nih/error.h>
-> + #include <nih/logging.h>
-> +=20
-> ++/* Read "The Hitchhikers Guide to the Galaxy" */
-> ++#define FILTER_VALUE 42
-> +=20
-> + static int
-> + my_filter (void       *data,
-> +@@ -54,6 +56,26 @@
-> + 	return FALSE;
-> + }
-> +=20
-> ++/* Set by my_filter2 () so it knows if it has already been called */
-> ++static int my_filter2_called =3D 0;
-> ++
-> ++static int
-> ++my_filter2 (int       *value,
-> ++	   const char *path,
-> ++	   int         is_dir)
-> ++{
-> ++	/* we only want to toggle the value once */
-> ++	if (my_filter2_called)
-> ++		return TRUE;
-> ++
-> ++	my_filter2_called =3D 1;
-> ++
-> ++	nih_assert (value && *value =3D=3D FILTER_VALUE);
-> ++	*value =3D 0;
-> ++
-> ++	return FALSE;
-> ++}
-> ++
-> + static int create_called =3D 0;
-> + static int modify_called =3D 0;
-> + static int delete_called =3D 0;
-> +@@ -553,6 +575,44 @@
-> + 		nih_free (watch);
-> + 	}
-> +=20
-> ++	/* Ensure the file filter gets passed the correct data pointer.
-> ++	 */
-> ++	TEST_FEATURE ("with filter and data");
-> ++
-> ++	/* Ensure we have a new directory */
-> ++	TEST_FILENAME (dirname);
-> ++	mkdir (dirname, 0755);
-> ++
-> ++	/* Create a single file */
-> ++	strcpy (filename, dirname);
-> ++	strcat (filename, "/foo");
-> ++
-> ++	fd =3D fopen (filename, "w");
-> ++	fprintf (fd, "test\n");
-> ++	fclose (fd);
-> ++
-> ++	TEST_ALLOC_FAIL {
-> ++		int watch_data =3D FILTER_VALUE;
-> ++
-> ++		/* Reset required to appease TEST_ALLOC_FAIL */
-> ++		my_filter2_called =3D 0;
-> ++
-> ++		watch =3D nih_watch_new (NULL, dirname,
-> ++				TRUE, TRUE,
-> ++				(NihFileFilter)my_filter2,
-> ++				NULL, NULL, NULL,
-> ++				&watch_data);
-> ++
-> ++		TEST_NE_P (watch, NULL);
-> ++
-> ++		/* Ensure the filter was called and changed the value */
-> ++
-> ++		TEST_NE (my_filter2_called, 0);
-> ++		TEST_EQ (watch_data, 0);
-> ++
-> ++		nih_free (watch);
-> ++	}
-> ++
-> + 	strcpy (filename, dirname);
-> + 	strcat (filename, "/bar");
-> + 	chmod (filename, 0755);
-> +@@ -946,13 +1006,82 @@
-> + 	nih_error_init ();
-> +=20
-> + 	TEST_FILENAME (dirname);
-> +-	mkdir (dirname, 0755);
-> ++	TEST_EQ (mkdir (dirname, 0755), 0);
-> +=20
-> +-	watch =3D nih_watch_new (NULL, dirname, TRUE, TRUE, my_filter,
-> +-			       my_create_handler, my_modify_handler,
-> ++	TEST_FEATURE ("with watched file");
-> ++	strcpy (filename, dirname);
-> ++	strcat (filename, "/foo");
-> ++
-> ++	/* Create file first since we don't set a create handler on the
-> ++	 * watch.
-> ++	 */
-> ++	fd =3D fopen (filename, "w");
-> ++	fprintf (fd, "bar\n");
-> ++	fclose (fd);
-> ++
-> ++	create_called =3D 0;
-> ++	modify_called =3D 0;
-> ++	delete_called =3D 0;
-> ++	logger_called =3D 0;
-> ++	last_path  =3D NULL;
-> ++	last_watch =3D NULL;
-> ++	last_data  =3D NULL;
-> ++
-> ++	watch =3D nih_watch_new (NULL, filename, FALSE, FALSE, NULL,
-> ++			       NULL, my_modify_handler,
-> + 			       my_delete_handler, &watch);
-> ++	TEST_NE_P (watch, NULL);
-> ++
-> ++	/* Now, modify the existing file to trigger the modify handler. */
-> ++	fd =3D fopen (filename, "a+");
-> ++	fprintf (fd, "baz\n");
-> ++	fclose (fd);
-> ++
-> ++	nfds =3D 0;
-> ++	FD_ZERO (&readfds);
-> ++	FD_ZERO (&writefds);
-> ++	FD_ZERO (&exceptfds);
-> ++
-> ++	nih_io_select_fds (&nfds, &readfds, &writefds, &exceptfds);
-> ++	select (nfds, &readfds, &writefds, &exceptfds, NULL);
-> ++	nih_io_handle_fds (&readfds, &writefds, &exceptfds);
-> ++
-> ++	TEST_EQ_STR (watch->path, filename);
-> ++
-> ++	/* Ensure no regression to old behaviour (LP:#777097) */
-> ++	TEST_NE (last_path[ strlen(last_path) - 1 ], '/');
-> ++
-> ++	TEST_EQ_STR (last_path, filename);
-> ++	TEST_EQ (modify_called, 1);
-> ++
-> ++	unlink (filename);
-> ++
-> ++	nfds =3D 0;
-> ++	FD_ZERO (&readfds);
-> ++	FD_ZERO (&writefds);
-> ++	FD_ZERO (&exceptfds);
-> ++
-> ++	nih_io_select_fds (&nfds, &readfds, &writefds, &exceptfds);
-> ++	select (nfds, &readfds, &writefds, &exceptfds, NULL);
-> ++	nih_io_handle_fds (&readfds, &writefds, &exceptfds);
-> +=20
-> ++	TEST_EQ (delete_called, 1);
-> +=20
-> ++	rmdir (filename);
-> ++	nih_free (last_path);
-> ++
-> ++	create_called =3D 0;
-> ++	modify_called =3D 0;
-> ++	delete_called =3D 0;
-> ++	logger_called =3D 0;
-> ++	last_path  =3D NULL;
-> ++	last_watch =3D NULL;
-> ++	last_data  =3D NULL;
-> ++
-> ++
-> ++	watch =3D nih_watch_new (NULL, dirname, TRUE, TRUE, my_filter,
-> ++			       my_create_handler, my_modify_handler,
-> ++			       my_delete_handler, &watch);
-> + 	/* Check that creating a file within the directory being watched
-> + 	 * results in the create handler being called, and passed the full
-> + 	 * path of the created file to it.
-> +--- libnih-1.0.3.orig/nih/tests/test_string.c
-> ++++ libnih-1.0.3/nih/tests/test_string.c
-> +@@ -619,6 +619,215 @@
-> + 		nih_free (array);
-> + 	}
-> +=20
-> ++	TEST_FEATURE ("with no repeat and multiple identical delimiter "
-> ++			"characters at string start");
-> ++	TEST_ALLOC_FAIL {
-> ++		array =3D nih_str_split (NULL, "\t\tthis is a test", " \t", FALSE);
-> ++
-> ++		if (test_alloc_failed) {
-> ++			TEST_EQ_P (array, NULL);
-> ++			continue;
-> ++		}
-> ++
-> ++		TEST_ALLOC_SIZE (array, sizeof (char *) * 7);
-> ++		for (i =3D 0; i < 6; i++)
-> ++			TEST_ALLOC_PARENT (array[i], array);
-> ++
-> ++		TEST_EQ_STR (array[0], "");
-> ++		TEST_EQ_STR (array[1], "");
-> ++		TEST_EQ_STR (array[2], "this");
-> ++		TEST_EQ_STR (array[3], "is");
-> ++		TEST_EQ_STR (array[4], "a");
-> ++		TEST_EQ_STR (array[5], "test");
-> ++		TEST_EQ_P (array[6], NULL);
-> ++
-> ++		nih_free (array);
-> ++	}
-> ++
-> ++	TEST_FEATURE ("with no repeat and multiple different delimiter "
-> ++			"characters at string start");
-> ++	TEST_ALLOC_FAIL {
-> ++		array =3D nih_str_split (NULL, " \tthis is a test", " \t", FALSE);
-> ++
-> ++		if (test_alloc_failed) {
-> ++			TEST_EQ_P (array, NULL);
-> ++			continue;
-> ++		}
-> ++
-> ++		TEST_ALLOC_SIZE (array, sizeof (char *) * 7);
-> ++		for (i =3D 0; i < 6; i++)
-> ++			TEST_ALLOC_PARENT (array[i], array);
-> ++
-> ++		TEST_EQ_STR (array[0], "");
-> ++		TEST_EQ_STR (array[1], "");
-> ++		TEST_EQ_STR (array[2], "this");
-> ++		TEST_EQ_STR (array[3], "is");
-> ++		TEST_EQ_STR (array[4], "a");
-> ++		TEST_EQ_STR (array[5], "test");
-> ++		TEST_EQ_P (array[6], NULL);
-> ++
-> ++		nih_free (array);
-> ++	}
-> ++
-> ++	TEST_FEATURE ("with no repeat and multiple identical delimiter "
-> ++			"characters within string");
-> ++	TEST_ALLOC_FAIL {
-> ++		array =3D nih_str_split (NULL, "this is   a\t\ttest", " \t", FALSE);
-> ++
-> ++		if (test_alloc_failed) {
-> ++			TEST_EQ_P (array, NULL);
-> ++			continue;
-> ++		}
-> ++
-> ++		TEST_ALLOC_SIZE (array, sizeof (char *) * 8);
-> ++		for (i =3D 0; i < 7; i++)
-> ++			TEST_ALLOC_PARENT (array[i], array);
-> ++
-> ++		TEST_EQ_STR (array[0], "this");
-> ++		TEST_EQ_STR (array[1], "is");
-> ++		TEST_EQ_STR (array[2], "");
-> ++		TEST_EQ_STR (array[3], "");
-> ++		TEST_EQ_STR (array[4], "a");
-> ++		TEST_EQ_STR (array[5], "");
-> ++		TEST_EQ_STR (array[6], "test");
-> ++		TEST_EQ_P (array[7], NULL);
-> ++
-> ++		nih_free (array);
-> ++	}
-> ++
-> ++	TEST_FEATURE ("with no repeat and multiple different delimiter "
-> ++			"characters within string");
-> ++	TEST_ALLOC_FAIL {
-> ++		array =3D nih_str_split (NULL, "this is \n\ta\ttest", " \t\n", FALSE);
-> ++
-> ++		if (test_alloc_failed) {
-> ++			TEST_EQ_P (array, NULL);
-> ++			continue;
-> ++		}
-> ++
-> ++		TEST_ALLOC_SIZE (array, sizeof (char *) * 7);
-> ++		for (i =3D 0; i < 6; i++)
-> ++			TEST_ALLOC_PARENT (array[i], array);
-> ++
-> ++		TEST_EQ_STR (array[0], "this");
-> ++		TEST_EQ_STR (array[1], "is");
-> ++		TEST_EQ_STR (array[2], "");
-> ++		TEST_EQ_STR (array[3], "");
-> ++		TEST_EQ_STR (array[4], "a");
-> ++		TEST_EQ_STR (array[5], "test");
-> ++		TEST_EQ_P (array[6], NULL);
-> ++
-> ++		nih_free (array);
-> ++	}
-> ++
-> ++	TEST_FEATURE ("with no repeat and multiple identical delimiter "
-> ++			"characters at string end");
-> ++	TEST_ALLOC_FAIL {
-> ++		array =3D nih_str_split (NULL, "this is a test  ", " \t", FALSE);
-> ++
-> ++		if (test_alloc_failed) {
-> ++			TEST_EQ_P (array, NULL);
-> ++			continue;
-> ++		}
-> ++
-> ++		TEST_ALLOC_SIZE (array, sizeof (char *) * 6);
-> ++		for (i =3D 0; i < 5; i++)
-> ++			TEST_ALLOC_PARENT (array[i], array);
-> ++
-> ++		TEST_EQ_STR (array[0], "this");
-> ++		TEST_EQ_STR (array[1], "is");
-> ++		TEST_EQ_STR (array[2], "a");
-> ++		TEST_EQ_STR (array[3], "test");
-> ++		TEST_EQ_STR (array[4], "");
-> ++		TEST_EQ_P (array[5], NULL);
-> ++
-> ++		nih_free (array);
-> ++	}
-> ++
-> ++	TEST_FEATURE ("with no repeat and multiple different delimiter "
-> ++			"characters at string end");
-> ++	TEST_ALLOC_FAIL {
-> ++		array =3D nih_str_split (NULL, "this is a test \t", " \t", FALSE);
-> ++
-> ++		if (test_alloc_failed) {
-> ++			TEST_EQ_P (array, NULL);
-> ++			continue;
-> ++		}
-> ++
-> ++		TEST_ALLOC_SIZE (array, sizeof (char *) * 6);
-> ++		for (i =3D 0; i < 5; i++)
-> ++			TEST_ALLOC_PARENT (array[i], array);
-> ++
-> ++		TEST_EQ_STR (array[0], "this");
-> ++		TEST_EQ_STR (array[1], "is");
-> ++		TEST_EQ_STR (array[2], "a");
-> ++		TEST_EQ_STR (array[3], "test");
-> ++		TEST_EQ_STR (array[4], "");
-> ++		TEST_EQ_P (array[5], NULL);
-> ++
-> ++		nih_free (array);
-> ++	}
-> ++
-> ++	TEST_FEATURE ("with no repeat and multiple identical delimiter "
-> ++			"characters at beginning, middle and end of string");
-> ++	TEST_ALLOC_FAIL {
-> ++		array =3D nih_str_split (NULL, "   this is\n\n\na test\t\t\t", " \t\n=
-", FALSE);
-> ++
-> ++		if (test_alloc_failed) {
-> ++			TEST_EQ_P (array, NULL);
-> ++			continue;
-> ++		}
-> ++
-> ++		TEST_ALLOC_SIZE (array, sizeof (char *) * 12);
-> ++		for (i =3D 0; i < 11; i++)
-> ++			TEST_ALLOC_PARENT (array[i], array);
-> ++
-> ++		TEST_EQ_STR (array[0], "");
-> ++		TEST_EQ_STR (array[1], "");
-> ++		TEST_EQ_STR (array[2], "");
-> ++		TEST_EQ_STR (array[3], "this");
-> ++		TEST_EQ_STR (array[4], "is");
-> ++		TEST_EQ_STR (array[5], "");
-> ++		TEST_EQ_STR (array[6], "");
-> ++		TEST_EQ_STR (array[7], "a");
-> ++		TEST_EQ_STR (array[8], "test");
-> ++		TEST_EQ_STR (array[9], "");
-> ++		TEST_EQ_STR (array[10], "");
-> ++		TEST_EQ_P (array[11], NULL);
-> ++
-> ++		nih_free (array);
-> ++	}
-> ++
-> ++	TEST_FEATURE ("with no repeat and multiple different delimiter "
-> ++			"characters at beginning, middle and end of string");
-> ++	TEST_ALLOC_FAIL {
-> ++		array =3D nih_str_split (NULL, ": \nthis is\t \n:a test:\n ", "\n :\t=
-", FALSE);
-> ++
-> ++		if (test_alloc_failed) {
-> ++			TEST_EQ_P (array, NULL);
-> ++			continue;
-> ++		}
-> ++
-> ++		TEST_ALLOC_SIZE (array, sizeof (char *) * 13);
-> ++		for (i =3D 0; i < 12; i++)
-> ++			TEST_ALLOC_PARENT (array[i], array);
-> ++
-> ++		TEST_EQ_STR (array[0], "");
-> ++		TEST_EQ_STR (array[1], "");
-> ++		TEST_EQ_STR (array[2], "");
-> ++		TEST_EQ_STR (array[3], "this");
-> ++		TEST_EQ_STR (array[4], "is");
-> ++		TEST_EQ_STR (array[5], "");
-> ++		TEST_EQ_STR (array[6], "");
-> ++		TEST_EQ_STR (array[7], "");
-> ++		TEST_EQ_STR (array[8], "a");
-> ++		TEST_EQ_STR (array[9], "test");
-> ++		TEST_EQ_STR (array[10], "");
-> ++		TEST_EQ_STR (array[11], "");
-> ++		TEST_EQ_P (array[12], NULL);
-> ++
-> ++		nih_free (array);
-> ++	}
-> +=20
-> + 	/* Check that we can split a string treating multiple consecutive
-> + 	 * matching characters as a single separator to be skipped.
-> +@@ -645,6 +854,177 @@
-> + 		nih_free (array);
-> + 	}
-> +=20
-> ++	/* Check that we can split a string containing multiple
-> ++	 * occurences of one of the delimiter characters at the
-> ++	 * beginning of the string.
-> ++	 */
-> ++	TEST_FEATURE ("with repeat and multiple identical adjacent delimiter c=
-haracters at string start");
-> ++	TEST_ALLOC_FAIL {
-> ++		array =3D nih_str_split (NULL, "\n\nhello", " \t\r\n", TRUE);
-> ++
-> ++		if (test_alloc_failed) {
-> ++			TEST_EQ_P (array, NULL);
-> ++			continue;
-> ++		}
-> ++
-> ++		TEST_ALLOC_SIZE (array, sizeof (char *) * 2);
-> ++		for (i =3D 0; i < 1; i++)
-> ++			TEST_ALLOC_PARENT (array[i], array);
-> ++
-> ++		TEST_EQ_STR (array[0], "hello");
-> ++		TEST_EQ_P (array[1], NULL);
-> ++
-> ++		nih_free (array);
-> ++	}
-> ++
-> ++	TEST_FEATURE ("with repeat and multiple different adjacent delimiter c=
-haracters at string start");
-> ++	TEST_ALLOC_FAIL {
-> ++		array =3D nih_str_split (NULL, "\n\r hello", " \t\r\n", TRUE);
-> ++
-> ++		if (test_alloc_failed) {
-> ++			TEST_EQ_P (array, NULL);
-> ++			continue;
-> ++		}
-> ++
-> ++		TEST_ALLOC_SIZE (array, sizeof (char *) * 2);
-> ++		for (i =3D 0; i < 1; i++)
-> ++			TEST_ALLOC_PARENT (array[i], array);
-> ++
-> ++		TEST_EQ_STR (array[0], "hello");
-> ++		TEST_EQ_P (array[1], NULL);
-> ++
-> ++		nih_free (array);
-> ++	}
-> ++
-> ++	TEST_FEATURE ("with repeat and multiple identical adjacent delimiter "
-> ++			"characters within string");
-> ++	TEST_ALLOC_FAIL {
-> ++		array =3D nih_str_split (NULL, "hello\n\rworld", " \t\n\r", TRUE);
-> ++
-> ++		if (test_alloc_failed) {
-> ++			TEST_EQ_P (array, NULL);
-> ++			continue;
-> ++		}
-> ++
-> ++		TEST_ALLOC_SIZE (array, sizeof (char *) * 3);
-> ++		for (i =3D 0; i < 2; i++)
-> ++			TEST_ALLOC_PARENT (array[i], array);
-> ++
-> ++		TEST_EQ_STR (array[0], "hello");
-> ++		TEST_EQ_STR (array[1], "world");
-> ++		TEST_EQ_P (array[2], NULL);
-> ++
-> ++		nih_free (array);
-> ++	}
-> ++
-> ++	TEST_FEATURE ("with repeat and multiple different adjacent delimiter "
-> ++			"characters within string");
-> ++	TEST_ALLOC_FAIL {
-> ++		array =3D nih_str_split (NULL, "hello\n\r\tworld", " \t\n\r", TRUE);
-> ++
-> ++		if (test_alloc_failed) {
-> ++			TEST_EQ_P (array, NULL);
-> ++			continue;
-> ++		}
-> ++
-> ++		TEST_ALLOC_SIZE (array, sizeof (char *) * 3);
-> ++		for (i =3D 0; i < 2; i++)
-> ++			TEST_ALLOC_PARENT (array[i], array);
-> ++
-> ++		TEST_EQ_STR (array[0], "hello");
-> ++		TEST_EQ_STR (array[1], "world");
-> ++		TEST_EQ_P (array[2], NULL);
-> ++
-> ++		nih_free (array);
-> ++	}
-> ++
-> ++	TEST_FEATURE ("with repeat and multiple identical adjacent delimiter "
-> ++			"characters at string end");
-> ++	TEST_ALLOC_FAIL {
-> ++		array =3D nih_str_split (NULL, "hello\n\n\n\n\n\n\n", " \t\r\n", TRUE=
-);
-> ++
-> ++		if (test_alloc_failed) {
-> ++			TEST_EQ_P (array, NULL);
-> ++			continue;
-> ++		}
-> ++
-> ++		TEST_ALLOC_SIZE (array, sizeof (char *) * 2);
-> ++		for (i =3D 0; i < 1; i++)
-> ++			TEST_ALLOC_PARENT (array[i], array);
-> ++
-> ++		TEST_EQ_STR (array[0], "hello");
-> ++		TEST_EQ_P (array[1], NULL);
-> ++
-> ++		nih_free (array);
-> ++	}
-> ++
-> ++	TEST_FEATURE ("with repeat and multiple different adjacent delimiter "
-> ++			"characters at string end");
-> ++	TEST_ALLOC_FAIL {
-> ++		array =3D nih_str_split (NULL, "hello \r\t\r\t\n ", " \t\r\n", TRUE);
-> ++
-> ++		if (test_alloc_failed) {
-> ++			TEST_EQ_P (array, NULL);
-> ++			continue;
-> ++		}
-> ++
-> ++		TEST_ALLOC_SIZE (array, sizeof (char *) * 2);
-> ++		for (i =3D 0; i < 1; i++)
-> ++			TEST_ALLOC_PARENT (array[i], array);
-> ++
-> ++		TEST_EQ_STR (array[0], "hello");
-> ++		TEST_EQ_P (array[1], NULL);
-> ++
-> ++		nih_free (array);
-> ++	}
-> ++
-> ++	TEST_FEATURE ("with repeat and multiple identical adjacent delimiter "
-> ++			"characters at beginning, middle and end of string");
-> ++	TEST_ALLOC_FAIL {
-> ++		array =3D nih_str_split (NULL,
-> ++				"        hello\n\n\n,  world\n\n\n",
-> ++				"\r\t\n ", TRUE);
-> ++
-> ++		if (test_alloc_failed) {
-> ++			TEST_EQ_P (array, NULL);
-> ++			continue;
-> ++		}
-> ++
-> ++		TEST_ALLOC_SIZE (array, sizeof (char *) * 4);
-> ++		for (i =3D 0; i < 3; i++)
-> ++			TEST_ALLOC_PARENT (array[i], array);
-> ++
-> ++		TEST_EQ_STR (array[0], "hello");
-> ++		TEST_EQ_STR (array[1], ",");
-> ++		TEST_EQ_STR (array[2], "world");
-> ++		TEST_EQ_P (array[3], NULL);
-> ++
-> ++		nih_free (array);
-> ++	}
-> ++
-> ++	TEST_FEATURE ("with repeat and multiple different adjacent delimiter "
-> ++			"characters at beginning, middle and end of string");
-> ++	TEST_ALLOC_FAIL {
-> ++		array =3D nih_str_split (NULL,
-> ++				"\n    \r\thello\n\n\r , \n\t\rworld\t \r\n \n",
-> ++				" \t\n\r", TRUE);
-> ++
-> ++		if (test_alloc_failed) {
-> ++			TEST_EQ_P (array, NULL);
-> ++			continue;
-> ++		}
-> ++
-> ++		TEST_ALLOC_SIZE (array, sizeof (char *) * 4);
-> ++		for (i =3D 0; i < 3; i++)
-> ++			TEST_ALLOC_PARENT (array[i], array);
-> ++
-> ++		TEST_EQ_STR (array[0], "hello");
-> ++		TEST_EQ_STR (array[1], ",");
-> ++		TEST_EQ_STR (array[2], "world");
-> ++		TEST_EQ_P (array[3], NULL);
-> ++
-> ++		nih_free (array);
-> ++	}
-> +=20
-> + 	/* Check that we can give an empty string, and end up with a
-> + 	 * one-element array that only contains a NULL pointer.
-> +--- libnih-1.0.3.orig/nih/tests/test_file.c
-> ++++ libnih-1.0.3/nih/tests/test_file.c
-> +@@ -724,6 +724,25 @@
-> + 	return FALSE;
-> + }
-> +=20
-> ++/* find only frodo files */
-> ++static int
-> ++my_filter_frodo_file (void       *data,
-> ++	   const char *path,
-> ++	   int         is_dir)
-> ++{
-> ++	char *slash;
-> ++
-> ++	if (is_dir)
-> ++		return FALSE;
-> ++
-> ++	slash =3D strrchr (path, '/');
-> ++	if (strcmp (slash, "/frodo"))
-> ++		return TRUE;
-> ++
-> ++	return FALSE;
-> ++}
-> ++
-> ++
-> + static int logger_called =3D 0;
-> +=20
-> + static int
-> +@@ -905,6 +924,48 @@
-> + 		TEST_EQ_STR (v->path, filename);
-> +=20
-> + 		nih_free (visited);
-> ++
-> ++				/* Try also inverse filter */
-> ++		TEST_ALLOC_SAFE {
-> ++			visitor_called =3D 0;
-> ++			visited =3D nih_list_new (NULL);
-> ++		}
-> ++
-> ++		ret =3D nih_dir_walk (dirname, my_filter_frodo_file,
-> ++				    my_visitor, NULL, &ret);
-> ++
-> ++		TEST_EQ (ret, 0);
-> ++		TEST_EQ (visitor_called, 4);
-> ++
-> ++		v =3D (Visited *)visited->next;
-> ++		TEST_EQ (v->data, &ret);
-> ++		TEST_EQ_STR (v->dirname, dirname);
-> ++		strcpy (filename, dirname);
-> ++		strcat (filename, "/bar");
-> ++		TEST_EQ_STR (v->path, filename);
-> ++
-> ++		v =3D (Visited *)v->entry.next;
-> ++		TEST_EQ (v->data, &ret);
-> ++		TEST_EQ_STR (v->dirname, dirname);
-> ++		strcpy (filename, dirname);
-> ++		strcat (filename, "/bar/frodo");
-> ++		TEST_EQ_STR (v->path, filename);
-> ++
-> ++		v =3D (Visited *)v->entry.next;
-> ++		TEST_EQ (v->data, &ret);
-> ++		TEST_EQ_STR (v->dirname, dirname);
-> ++		strcpy (filename, dirname);
-> ++		strcat (filename, "/baz");
-> ++		TEST_EQ_STR (v->path, filename);
-> ++
-> ++		v =3D (Visited *)v->entry.next;
-> ++		TEST_EQ (v->data, &ret);
-> ++		TEST_EQ_STR (v->dirname, dirname);
-> ++		strcpy (filename, dirname);
-> ++		strcat (filename, "/frodo");
-> ++		TEST_EQ_STR (v->path, filename);
-> ++
-> ++		nih_free (visited);
-> + 	}
-> +=20
-> +=20
-> +--- libnih-1.0.3.orig/debian/control
-> ++++ libnih-1.0.3/debian/control
-> +@@ -0,0 +1,81 @@
-> ++Source: libnih
-> ++Section: libs
-> ++Priority: required
-> ++Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-> ++XSBC-Original-Maintainer: Scott James Remnant <scott@netsplit.com>
-> ++Standards-Version: 3.9.4
-> ++Build-Depends: debhelper (>=3D 9), pkg-config (>=3D 0.22), libdbus-1-de=
-v (>=3D 1.4), libexpat1-dev (>=3D 2.0.0), dbus (>=3D 1.4), libc6-dev (>=3D =
-2.15~) | libc6.1-dev (>=3D 2.15~),
-> ++               dh-autoreconf, autopoint, dpkg-dev (>=3D 1.16.1~)
-> ++# To cross build this package also needs: libdbus-1-dev:native (>=3D 1.=
-4), libexpat1-dev:native (>=3D 2.0.0)
-> ++# But :native build-deps are not supported yet, so instead one can do
-> ++# $ apt-get build-dep libnih
-> ++# $ apt-get build-dep libnih -aarmhf
-> ++# instead to get all required build-deps
-> ++Vcs-Bzr: lp:ubuntu/libnih
-> ++XSC-Debian-Vcs-Git: git://git.debian.org/git/collab-maint/libnih.git
-> ++XSC-Debian-Vcs-Browser: http://git.debian.org/?p=3Dcollab-maint/libnih.=
-git;a=3Dsummary
-> ++Homepage: https://launchpad.net/libnih
-> ++
-> ++Package: libnih1
-> ++Architecture: any
-> ++Pre-Depends: ${misc:Pre-Depends}, ${shlibs:Depends}, ${misc:Depends}
-> ++Multi-Arch: same
-> ++Description: NIH Utility Library
-> ++ libnih is a light-weight "standard library" of C functions to ease the
-> ++ development of other libraries and applications, especially those
-> ++ normally found in /lib.
-> ++ .
-> ++ This package contains the shared library.
-> ++
-> ++Package: libnih-dev
-> ++Priority: optional
-> ++Section: libdevel
-> ++Architecture: any
-> ++Multi-Arch: same
-> ++Depends: libnih1 (=3D ${binary:Version}), ${shlibs:Depends}, ${misc:Dep=
-ends}
-> ++Description: NIH Utility Library (development files)
-> ++ libnih is a light-weight "standard library" of C functions to ease the
-> ++ development of other libraries and applications, especially those
-> ++ normally found in /lib.
-> ++ .
-> ++ This package contains the static library and C header files which are
-> ++ needed for developing software using libnih.
-> ++
-> ++Package: libnih-dbus1
-> ++Architecture: any
-> ++Pre-Depends: ${misc:Pre-Depends}
-> ++Depends: libnih1 (=3D ${binary:Version}), ${shlibs:Depends}, ${misc:Dep=
-ends}
-> ++Multi-Arch: same
-> ++Description: NIH D-Bus Bindings Library
-> ++ libnih-dbus is a D-Bus bindings library that integrates with the main
-> ++ loop provided by libnih.
-> ++ .
-> ++ This package contains the shared library.
-> ++
-> ++Package: libnih-dbus-dev
-> ++Priority: optional
-> ++Section: libdevel
-> ++Architecture: any
-> ++Multi-Arch: same
-> ++Depends: libnih-dbus1 (=3D ${binary:Version}), libnih-dev (=3D ${binary=
-:Version}), ${shlibs:Depends}, ${misc:Depends}
-> ++Recommends: nih-dbus-tool (=3D ${binary:Version})
-> ++Description: NIH D-Bus Bindings Library (development files)
-> ++ libnih-dbus is a D-Bus bindings library that integrates with the main
-> ++ loop provided by libnih.
-> ++ .
-> ++ This package contains the static library and C header files which are
-> ++ needed for developing software using libnih-dbus.
-> ++
-> ++Package: nih-dbus-tool
-> ++Section: devel
-> ++Architecture: any
-> ++Multi-Arch: foreign
-> ++Depends: ${shlibs:Depends}, ${misc:Depends}
-> ++Recommends: libnih-dbus-dev (=3D ${binary:Version})
-> ++Description: NIH D-Bus Binding Tool
-> ++ nih-dbus-tool generates C source code from the D-Bus Introspection XML
-> ++ data provided by most services; either to make implementing the
-> ++ described objects in C programs or to make proxying to the described
-> ++ remote objects easier.
-> ++ .
-> ++ The generated code requires libnih-dbus-dev to be compiled.
-> +--- libnih-1.0.3.orig/debian/libnih-dev.install
-> ++++ libnih-1.0.3/debian/libnih-dev.install
-> +@@ -0,0 +1,6 @@
-> ++lib/*/libnih.a
-> ++lib/*/libnih.so
-> ++usr/include/libnih.h
-> ++usr/include/nih
-> ++usr/lib/*/pkgconfig/libnih.pc
-> ++usr/share/aclocal/libnih.m4
-> +--- libnih-1.0.3.orig/debian/libnih1.docs
-> ++++ libnih-1.0.3/debian/libnih1.docs
-> +@@ -0,0 +1,3 @@
-> ++AUTHORS
-> ++NEWS
-> ++README
-> +--- libnih-1.0.3.orig/debian/libnih-dbus1.install
-> ++++ libnih-1.0.3/debian/libnih-dbus1.install
-> +@@ -0,0 +1 @@
-> ++lib/*/libnih-dbus.so.*
-> +--- libnih-1.0.3.orig/debian/libnih1.install
-> ++++ libnih-1.0.3/debian/libnih1.install
-> +@@ -0,0 +1 @@
-> ++lib/*/libnih.so.*
-> +--- libnih-1.0.3.orig/debian/rules
-> ++++ libnih-1.0.3/debian/rules
-> +@@ -0,0 +1,54 @@
-> ++#!/usr/bin/make -f
-> ++
-> ++include /usr/share/dpkg/architecture.mk
-> ++
-> ++%:
-> ++	dh $@ --with autoreconf
-> ++
-> ++
-> ++CFLAGS :=3D -Wall -fstack-protector -fPIE $(shell dpkg-buildflags --get=
- CFLAGS)
-> ++LDFLAGS :=3D -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -pie $(shell dpkg-=
-buildflags --get LDFLAGS)
-> ++
-> ++override_dh_auto_configure:
-> ++ifeq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
-> ++	dh_auto_configure -- CFLAGS=3D"$(CFLAGS)" LDFLAGS=3D"$(LDFLAGS)" \
-> ++		--libdir=3D/lib/$(DEB_HOST_MULTIARCH)
-> ++else
-> ++	dh_auto_configure -B build-dbus-tool/ -- CFLAGS=3D"$(CFLAGS)" LDFLAGS=
-=3D"$(LDFLAGS)" \
-> ++		--libdir=3D/lib/$(DEB_BUILD_MULTIARCH) \
-> ++		--host=3D$(DEB_BUILD_GNU_TYPE)
-> ++	dh_auto_build -B build-dbus-tool/ --parallel
-> ++	dh_auto_configure -- CFLAGS=3D"$(CFLAGS)" LDFLAGS=3D"$(LDFLAGS)" \
-> ++		NIH_DBUS_TOOL=3D$(CURDIR)/build-dbus-tool/nih-dbus-tool/nih-dbus-tool=
- \
-> ++		--libdir=3D/lib/$(DEB_HOST_MULTIARCH)
-> ++endif
-> ++
-> ++override_dh_auto_build:
-> ++	dh_auto_build --parallel
-> ++
-> ++override_dh_auto_test:
-> ++ifeq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
-> ++	dh_auto_test --parallel
-> ++endif
-> ++
-> ++override_dh_auto_install:
-> ++	dh_auto_install -- pkgconfigdir=3D\$${prefix}/lib/$(DEB_HOST_MULTIARCH=
-)/pkgconfig
-> ++
-> ++override_dh_makeshlibs:
-> ++	dh_makeshlibs -plibnih1 -V 'libnih1 (>=3D 1.0.0)'
-> ++	dh_makeshlibs -plibnih-dbus1 -V 'libnih-dbus1 (>=3D 1.0.0)'
-> ++	dh_makeshlibs -Nlibnih1 -Nlibnih-dbus1
-> ++
-> ++override_dh_shlibdeps:
-> ++	dh_shlibdeps
-> ++	sed -i 's/2\.14/2.15/' debian/*.substvars
-> ++	sed -i 's/>=3D 2.15)/>=3D 2.15~)/g' debian/*.substvars
-> ++
-> ++
-> ++# Symlink /usr/share/doc directories together
-> ++override_dh_installdocs:
-> ++	dh_installdocs --link-doc=3Dlibnih1
-> ++
-> ++override_dh_clean:
-> ++	rm -rf build-dbus-tool/
-> ++	dh_clean
-> +--- libnih-1.0.3.orig/debian/compat
-> ++++ libnih-1.0.3/debian/compat
-> +@@ -0,0 +1 @@
-> ++9
-> +--- libnih-1.0.3.orig/debian/nih-dbus-tool.install
-> ++++ libnih-1.0.3/debian/nih-dbus-tool.install
-> +@@ -0,0 +1,2 @@
-> ++usr/bin/nih-dbus-tool
-> ++usr/share/man/man1/nih-dbus-tool.1
-> +--- libnih-1.0.3.orig/debian/copyright
-> ++++ libnih-1.0.3/debian/copyright
-> +@@ -0,0 +1,18 @@
-> ++This is the Ubuntu package of libnih, the NIH Utility Library.
-> ++
-> ++Copyright =C2=A9 2009 Canonical Ltd.
-> ++Copyright =C2=A9 2009 Scott James Remnant <scott@netsplit.com>
-> ++
-> ++Licence:
-> ++
-> ++This program is free software; you can redistribute it and/or modify
-> ++it under the terms of the GNU General Public License version 2, as
-> ++published by the Free Software Foundation.
-> ++
-> ++This program is distributed in the hope that it will be useful, but
-> ++WITHOUT ANY WARRANTY; without even the implied warranty of
-> ++MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-> ++General Public License for more details.
-> ++
-> ++On Ubuntu systems, the complete text of the GNU General Public License
-> ++can be found in =E2=80=98/usr/share/common-licenses/GPL-2=E2=80=99.
-> +--- libnih-1.0.3.orig/debian/libnih-dbus1.postinst
-> ++++ libnih-1.0.3/debian/libnih-dbus1.postinst
-> +@@ -0,0 +1,53 @@
-> ++#!/bin/sh
-> ++
-> ++set -e
-> ++
-> ++if [ "$1" =3D configure ]; then
-> ++    # A dependent library of Upstart has changed, so restart Upstart
-> ++    # such that it can safely unmount the root filesystem (LP: #740390)
-> ++
-> ++    # Query running version of Upstart, but only when we know
-> ++    # that initctl will work.
-> ++    #
-> ++    # The calculated version string may be the null string if
-> ++    # Upstart is not running (where for example an alternative
-> ++    # init is running outside a chroot environment) or if the
-> ++    # query failed for some reason. However, the version check
-> ++    # below handles a null version string correctly.
-> ++    UPSTART_VERSION_RUNNING=3D$(initctl version 2>/dev/null |\
-> ++        awk '{print $3}'|tr -d ')' || :)
-> ++
-> ++    if ischroot; then
-> ++        # Do not honour re-exec when requested from within a
-> ++        # chroot since:
-> ++        #
-> ++        # (a) The version of Upstart outside might not support it.
-> ++        # (b) An isolated environment such as a chroot should
-> ++        #     not be able to modify its containing environment.
-> ++        #
-> ++        # A sufficiently new Upstart will actually handle a re-exec
-> ++        # request coming from telinit within a chroot correctly (by
-> ++        # doing nothing) but it's simple enough to perform the check
-> ++        # here and save Upstart the effort.
-> ++        :
-> ++    elif dpkg --compare-versions "$UPSTART_VERSION_RUNNING" ge 1.6.1; t=
-hen
-> ++        # We are not running inside a chroot and the running version
-> ++        # of Upstart supports stateful re-exec, so we can
-> ++        # restart immediately.
-> ++        #
-> ++        # XXX: Note that the check on the running version must
-> ++        # remain *indefinitely* since it's the only safe way to
-> ++        # know if stateful re-exec is supported: simply checking
-> ++        # packaged version numbers is not sufficient since
-> ++        # the package could be upgraded multiple times without a
-> ++        # reboot.
-> ++        telinit u || :
-> ++    else
-> ++        # Before we shutdown or reboot, we need to re-exec so that we
-> ++        # can safely remount the root filesystem; we can't just do that
-> ++        # here because we lose state.
-> ++        touch /var/run/init.upgraded || :
-> ++    fi
-> ++fi
-> ++
-> ++#DEBHELPER#
-> +--- libnih-1.0.3.orig/debian/changelog.DEBIAN
-> ++++ libnih-1.0.3/debian/changelog.DEBIAN
-> +@@ -0,0 +1,118 @@
-> ++libnih (1.0.3-4) unstable; urgency=3Dlow
-> ++
-> ++  * Rebuild for new libc to update versioned dependency; this comes from
-> ++    the __abort_msg dependency, dpkg-shlibs needs overriding since this=
- is
-> ++    actually a weak link, but this rebuild fixes things for now.
-> ++    Closes: #625257.
-> ++
-> ++ -- Scott James Remnant <scott@netsplit.com>  Mon, 02 May 2011 15:08:33=
- -0700
-> ++
-> ++libnih (1.0.3-3) unstable; urgency=3Dlow
-> ++
-> ++  * New maintainer.  Closes: #624442.
-> ++
-> ++ -- Scott James Remnant <scott@netsplit.com>  Thu, 28 Apr 2011 14:26:05=
- -0700
-> ++
-> ++libnih (1.0.3-2) unstable; urgency=3Dlow
-> ++
-> ++  * Bump build dependency on libdbus-1-dev and dbus to (>=3D 1.4) for U=
-nix file
-> ++    descriptor passing support.
-> ++
-> ++ -- Michael Biebl <biebl@debian.org>  Thu, 10 Feb 2011 20:25:18 +0100
-> ++
-> ++libnih (1.0.3-1ubuntu1) natty; urgency=3Dlow
-> ++
-> ++  * Rebuild with libc6-dev (>=3D 2.13~).
-> ++
-> ++ -- Matthias Klose <doko@ubuntu.com>  Fri, 18 Feb 2011 12:09:29 +0100
-> ++
-> ++libnih (1.0.3-1) unstable; urgency=3Dlow
-> ++
-> ++  * New upstream release.
-> ++  * Bump debhelper compatibility level to 8 and update build dependency
-> ++    accordingly.
-> ++
-> ++ -- Michael Biebl <biebl@debian.org>  Mon, 07 Feb 2011 22:19:13 +0100
-> ++
-> ++libnih (1.0.2-2) unstable; urgency=3Dlow
-> ++
-> ++  * Install library development files to /usr/lib and not /lib.
-> ++  * Remove libtool *.la files as there are no reverse dependencies refe=
-rencing
-> ++    them.
-> ++  * Bump Standards-Version to 3.9.1. No further changes.
-> ++
-> ++ -- Michael Biebl <biebl@debian.org>  Sun, 02 Jan 2011 21:09:40 +0100
-> ++
-> ++libnih (1.0.2-1ubuntu3) natty; urgency=3Dlow
-> ++
-> ++  * Disable some tests on ppc64 to build an initial package.
-> ++
-> ++ -- Matthias Klose <doko@ubuntu.com>  Thu, 18 Nov 2010 10:59:38 +0100
-> ++
-> ++libnih (1.0.2-1ubuntu2) maverick; urgency=3Dlow
-> ++
-> ++  * Re-add -fPIE to the testsuite on armel, removing all armel-specific=
- tests;
-> ++    current gcc-4.4 don't seem affected by the ICE anymore (see LP #398=
-403).
-> ++
-> ++ -- Lo=C3=AFc Minier <loic.minier@linaro.org>  Mon, 23 Aug 2010 10:25:3=
-1 +0200
-> ++
-> ++libnih (1.0.2-1ubuntu1) maverick; urgency=3Dlow
-> ++
-> ++  * Rebuild with libc6-dev (>=3D 2.12~), after checking that
-> ++    __abort_msg is available with the same signature in eglibc 2.12.
-> ++  * Don't build the testsuite with -fPIE on armel; LP: #398403.
-> ++
-> ++ -- Matthias Klose <doko@ubuntu.com>  Sun, 30 May 2010 02:54:56 +0200
-> ++
-> ++libnih (1.0.2-1) unstable; urgency=3Dlow
-> ++
-> ++  * Initial upload to Debian. Closes: #585071
-> ++  * Based on the Ubuntu package for Lucid done by Scott James Remnant w=
-ith the
-> ++    following changes:
-> ++    - Switch packages to priority optional.
-> ++    - Use binary:Version instead of Source-Version.
-> ++    - Bump Standards-Version to 3.8.4.
-> ++    - Add Homepage and Vcs-* fields.
-> ++    - Don't symlink /usr/share/doc directories.
-> ++    - Refer to versioned /usr/share/common-licenses/GPL-2 file in
-> ++      debian/copyright.
-> ++    - List all symbols explicitly instead of using a wildcard and add s=
-ymbols
-> ++      introduced in 1.0.1.
-> ++    - Use the symbols files to create the correct version info instead =
-of
-> ++      specifying it manually via shlibs.
-> ++    - Switch to source format 3.0 (quilt).
-> ++    - Add watch file to track new upstream releases.
-> ++
-> ++ -- Michael Biebl <biebl@debian.org>  Sun, 13 Jun 2010 23:36:52 +0200
-> ++
-> ++libnih (1.0.1-1) lucid; urgency=3Dlow
-> ++
-> ++  * New upstream release:
-> ++    - Add missing __nih_* symbols to linker version script so that we
-> ++      can link Upstart's test suite.
-> ++    - Glibc __abort_msg symbol now only linked as a weak symbol.
-> ++
-> ++ -- Scott James Remnant <scott@ubuntu.com>  Thu, 04 Feb 2010 14:53:26 -=
-0800
-> ++
-> ++libnih (1.0.0-2build1) lucid; urgency=3Dlow
-> ++
-> ++  * Rebuild to pick up relaxed dependency on libc6, after checking that
-> ++    __abort_msg is available with the same signature in eglibc 2.11.
-> ++    LP: #508702.
-> ++
-> ++ -- Matthias Klose <doko@ubuntu.com>  Mon, 18 Jan 2010 16:09:13 +0100
-> ++
-> ++libnih (1.0.0-2) lucid; urgency=3Dlow
-> ++
-> ++  * debian/control: Add build-dependency on dbus so the test suite can
-> ++    pass on the buildds.
-> ++
-> ++ -- Scott James Remnant <scott@ubuntu.com>  Sat, 28 Nov 2009 23:28:27 +=
-0000
-> ++
-> ++libnih (1.0.0-1) lucid; urgency=3Dlow
-> ++
-> ++  * First upstream release.  Previously this code was included in the
-> ++    upstart, mountall and ureadahead source packages.
-> ++
-> ++ -- Scott James Remnant <scott@ubuntu.com>  Sat, 28 Nov 2009 21:14:00 +=
-0000
-> ++
-> +--- libnih-1.0.3.orig/debian/libnih1.symbols
-> ++++ libnih-1.0.3/debian/libnih1.symbols
-> +@@ -0,0 +1,2 @@
-> ++libnih.so.1 libnih1 #MINVER#
-> ++ *@LIBNIH_1_0 1.0.0
-> +--- libnih-1.0.3.orig/debian/libnih-dbus-dev.install
-> ++++ libnih-1.0.3/debian/libnih-dbus-dev.install
-> +@@ -0,0 +1,5 @@
-> ++lib/*/libnih-dbus.a
-> ++lib/*/libnih-dbus.so
-> ++usr/include/libnih-dbus.h
-> ++usr/include/nih-dbus
-> ++usr/lib/*/pkgconfig/libnih-dbus.pc
-> +--- libnih-1.0.3.orig/debian/libnih1.postinst
-> ++++ libnih-1.0.3/debian/libnih1.postinst
-> +@@ -0,0 +1,53 @@
-> ++#!/bin/sh
-> ++
-> ++set -e
-> ++
-> ++if [ "$1" =3D configure ]; then
-> ++    # A dependent library of Upstart has changed, so restart Upstart
-> ++    # such that it can safely unmount the root filesystem (LP: #740390)
-> ++
-> ++    # Query running version of Upstart, but only when we know
-> ++    # that initctl will work.
-> ++    #
-> ++    # The calculated version string may be the null string if
-> ++    # Upstart is not running (where for example an alternative
-> ++    # init is running outside a chroot environment) or if the
-> ++    # query failed for some reason. However, the version check
-> ++    # below handles a null version string correctly.
-> ++    UPSTART_VERSION_RUNNING=3D$(initctl version 2>/dev/null |\
-> ++        awk '{print $3}'|tr -d ')' || :)
-> ++
-> ++    if ischroot; then
-> ++        # Do not honour re-exec when requested from within a
-> ++        # chroot since:
-> ++        #
-> ++        # (a) The version of Upstart outside might not support it.
-> ++        # (b) An isolated environment such as a chroot should
-> ++        #     not be able to modify its containing environment.
-> ++        #
-> ++        # A sufficiently new Upstart will actually handle a re-exec
-> ++        # request coming from telinit within a chroot correctly (by
-> ++        # doing nothing) but it's simple enough to perform the check
-> ++        # here and save Upstart the effort.
-> ++        :
-> ++    elif dpkg --compare-versions "$UPSTART_VERSION_RUNNING" ge 1.6.1; t=
-hen
-> ++        # We are not running inside a chroot and the running version
-> ++        # of Upstart supports stateful re-exec, so we can
-> ++        # restart immediately.
-> ++        #
-> ++        # XXX: Note that the check on the running version must
-> ++        # remain *indefinitely* since it's the only safe way to
-> ++        # know if stateful re-exec is supported: simply checking
-> ++        # packaged version numbers is not sufficient since
-> ++        # the package could be upgraded multiple times without a
-> ++        # reboot.
-> ++        telinit u || :
-> ++    else
-> ++        # Before we shutdown or reboot, we need to re-exec so that we
-> ++        # can safely remount the root filesystem; we can't just do that
-> ++        # here because we lose state.
-> ++        touch /var/run/init.upgraded || :
-> ++    fi
-> ++fi
-> ++
-> ++#DEBHELPER#
-> +--- libnih-1.0.3.orig/debian/libnih-dbus1.symbols
-> ++++ libnih-1.0.3/debian/libnih-dbus1.symbols
-> +@@ -0,0 +1,2 @@
-> ++libnih-dbus.so.1 libnih-dbus1 #MINVER#
-> ++ *@LIBNIH_DBUS_1_0 1.0.0
-> +--- libnih-1.0.3.orig/debian/changelog
-> ++++ libnih-1.0.3/debian/changelog
-> +@@ -0,0 +1,213 @@
-> ++libnih (1.0.3-4ubuntu16) raring; urgency=3Dlow
-> ++
-> ++  * debian/{libnih1.postinst,libnih-dbus1.postinst}: Force an upgrade to
-> ++    restart Upstart (to pick up new package version) if the running
-> ++    instance supports it.
-> ++  * Merge of important fixes from lp:~upstart-devel/libnih/nih
-> ++    (LP: #776532, LP: #777097, LP: #834813, LP: #1123588).
-> ++
-> ++ -- James Hunt <james.hunt@ubuntu.com>  Thu, 14 Mar 2013 09:14:22 +0000
-> ++
-> ++libnih (1.0.3-4ubuntu15) raring; urgency=3Dlow
-> ++
-> ++  * Enable cross-building, sans adding :native build-dependencies.
-> ++    See comments in debian/control.
-> ++  * Lintian fixes.
-> ++
-> ++ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Tue, 08 Jan 2013 15:3=
-8:58 +0000
-> ++
-> ++libnih (1.0.3-4ubuntu14) raring; urgency=3Dlow
-> ++
-> ++  * Update dbus code generator to allow for empty lists for type 'as'.
-> ++    This drops the !=3D NULL check for NULL terminated arrays and moves=
- the
-> ++    iteration loop inside an 'if' statement.
-> ++
-> ++ -- St=C3=A9phane Graber <stgraber@ubuntu.com>  Thu, 13 Dec 2012 10:00:=
-27 -0500
-> ++
-> ++libnih (1.0.3-4ubuntu13) raring; urgency=3Dlow
-> ++
-> ++  [ Petr Lautrbach <plautrba@redhat.com>, Dmitrijs Ledkovs ]
-> ++  * Fallback to lstat, if dirent.d_type is not available (not portable)
-> ++    (LP: #672643) (Closes: #695604)
-> ++
-> ++ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Tue, 11 Dec 2012 17:2=
-6:52 +0000
-> ++
-> ++libnih (1.0.3-4ubuntu12) raring; urgency=3Dlow
-> ++
-> ++  * nih/logging.c: Use our own __nih_abort_msg rather than the (e)glibc
-> ++    private symbol __abort_msg to avoid upgrade issues (LP: #997359).
-> ++  * nih/tests/test_logging.c: Update tests for __nih_abort_msg.
-> ++
-> ++ -- James Hunt <james.hunt@ubuntu.com>  Thu, 25 Oct 2012 10:57:30 +0100
-> ++
-> ++libnih (1.0.3-4ubuntu11) quantal; urgency=3Dlow
-> ++
-> ++  * Addition of debian/libnih-dbus1.postinst and
-> ++    debian/libnih1.postinst to force Upstart re-exec on shutdown
-> ++    to avoid unmounting disks uncleanly (LP: #740390).
-> ++
-> ++ -- James Hunt <james.hunt@ubuntu.com>  Wed, 03 Oct 2012 16:49:40 +0100
-> ++
-> ++libnih (1.0.3-4ubuntu10) quantal; urgency=3Dlow
-> ++
-> ++  * Update config.guess,sub for aarch64
-> ++
-> ++ -- Wookey <wookey@wookware.org>  Mon, 01 Oct 2012 12:57:05 +0100
-> ++
-> ++libnih (1.0.3-4ubuntu9) precise; urgency=3Dlow
-> ++
-> ++  * Mark the nih-dbus-tool package Multi-Arch: foreign so it can be use=
-d as
-> ++    a build-dependency of upstart when cross-building.
-> ++
-> ++ -- Steve Langasek <steve.langasek@ubuntu.com>  Wed, 15 Feb 2012 22:57:=
-50 -0800
-> ++
-> ++libnih (1.0.3-4ubuntu8) precise; urgency=3Dlow
-> ++
-> ++  * libnih1 needs a versioned Pre-Depend on libc6 instead of just a Dep=
-end,
-> ++    because libc6 itself uses runlevel from the upstart package in its
-> ++    preinst, which in turn uses libnih1, which needs to be loadable (i.=
-e.,
-> ++    its symbol references resolve).  We therefore need to ensure that
-> ++    libnih1's dependencies are always unpacked before libnih1 itself is
-> ++    unpacked.  While having something further up the stack (such as ups=
-tart,
-> ++    or something on top of upstart) being marked Essential: yes and wit=
-h the
-> ++    necessary pre-depends would let apt handle this for us with its
-> ++    "immediate configuration" support, but for various reasons we don't=
- want
-> ++    to make upstart essential.  LP: #508083.
-> ++
-> ++ -- Steve Langasek <steve.langasek@ubuntu.com>  Fri, 10 Feb 2012 12:13:=
-25 -0800
-> ++
-> ++libnih (1.0.3-4ubuntu7) precise; urgency=3Dlow
-> ++
-> ++  * Relax dependency on libc6.
-> ++
-> ++ -- Matthias Klose <doko@ubuntu.com>  Wed, 08 Feb 2012 23:43:21 +0100
-> ++
-> ++libnih (1.0.3-4ubuntu6) precise; urgency=3Dlow
-> ++
-> ++  * Rebuild with libc6-dev (>=3D 2.15~).
-> ++
-> ++ -- Matthias Klose <doko@ubuntu.com>  Wed, 08 Feb 2012 21:48:57 +0100
-> ++
-> ++libnih (1.0.3-4ubuntu5) precise; urgency=3Dlow
-> ++
-> ++  * Mark libnih-dev and libnih-dbus-dev Multi-Arch: same as well.
-> ++
-> ++ -- Steve Langasek <steve.langasek@ubuntu.com>  Sun, 06 Nov 2011 14:45:=
-07 -0800
-> ++
-> ++libnih (1.0.3-4ubuntu4) precise; urgency=3Dlow
-> ++
-> ++  * Make libnih1 and libnih-dbus1 installable using multi-arch.
-> ++
-> ++ -- James Hunt <james.hunt@ubuntu.com>  Tue, 01 Nov 2011 14:25:09 -0400
-> ++
-> ++libnih (1.0.3-4ubuntu3) precise; urgency=3Dlow
-> ++
-> ++  * Build to install with eglibc-2.15.
-> ++
-> ++ -- Matthias Klose <doko@ubuntu.com>  Fri, 14 Oct 2011 14:05:03 +0200
-> ++
-> ++libnih (1.0.3-4ubuntu2) oneiric; urgency=3Dlow
-> ++
-> ++  * Use dpkg-buildflags to get the build flags.
-> ++  * Build with the default build flags, don't hard-code -Os. LP: #79131=
-5.
-> ++
-> ++ -- Matthias Klose <doko@ubuntu.com>  Wed, 15 Jun 2011 16:45:42 +0200
-> ++
-> ++libnih (1.0.3-4ubuntu1) oneiric; urgency=3Dlow
-> ++
-> ++  * Merge from debian unstable. Retained Ubuntu Build-Depends and Prior=
-ity.
-> ++
-> ++ -- James Hunt <james.hunt@ubuntu.com>  Mon, 23 May 2011 19:28:19 +0100
-> ++
-> ++libnih (1.0.3-1ubuntu1) natty; urgency=3Dlow
-> ++
-> ++  * Rebuild with libc6-dev (>=3D 2.13~).
-> ++
-> ++ -- Matthias Klose <doko@ubuntu.com>  Fri, 18 Feb 2011 12:09:29 +0100
-> ++
-> ++libnih (1.0.3-1) natty; urgency=3Dlow
-> ++
-> ++  * New upstream release:
-> ++    - Added support for passing file descriptors over D-Bus to nih-dbus=
--tool
-> ++
-> ++ -- Scott James Remnant <scott@ubuntu.com>  Thu, 23 Dec 2010 22:28:24 +=
-0000
-> ++
-> ++libnih (1.0.2-2) natty; urgency=3Dlow
-> ++
-> ++  * Revert the previous upload.  It is never acceptable to simply disab=
-le
-> ++    tests, especially when it turns out that the test that was disabled
-> ++    was failing because there was a serious bug that could cause kernel
-> ++    panics for people on boot.
-> ++
-> ++    Test suites are here for a reason.
-> ++
-> ++  * Bumped libdbus Build-Dependency to the version with the bug fix that
-> ++    caused the test suite to fail.
-> ++
-> ++ -- Scott James Remnant <scott@ubuntu.com>  Wed, 08 Dec 2010 19:40:15 +=
-0000
-> ++
-> ++libnih (1.0.2-1ubuntu3) natty; urgency=3Dlow
-> ++
-> ++  * Disable some tests on ppc64 to build an initial package.
-> ++
-> ++ -- Matthias Klose <doko@ubuntu.com>  Thu, 18 Nov 2010 10:59:38 +0100
-> ++
-> ++libnih (1.0.2-1ubuntu2) maverick; urgency=3Dlow
-> ++
-> ++  * Re-add -fPIE to the testsuite on armel, removing all armel-specific=
- tests;
-> ++    current gcc-4.4 don't seem affected by the ICE anymore (see LP #398=
-403).
-> ++
-> ++ -- Lo=C3=AFc Minier <loic.minier@linaro.org>  Mon, 23 Aug 2010 10:25:3=
-1 +0200
-> ++
-> ++libnih (1.0.2-1ubuntu1) maverick; urgency=3Dlow
-> ++
-> ++  * Rebuild with libc6-dev (>=3D 2.12~), after checking that
-> ++    __abort_msg is available with the same signature in eglibc 2.12.
-> ++  * Don't build the testsuite with -fPIE on armel; LP: #398403.
-> ++
-> ++ -- Matthias Klose <doko@ubuntu.com>  Sun, 30 May 2010 02:54:56 +0200
-> ++
-> ++libnih (1.0.2-1) maverick; urgency=3Dlow
-> ++
-> ++  * New upstream release:
-> ++    - Rename AC_COPYRIGHT to NIH_COPYRIGHT to avoid conflict with other
-> ++      packages.
-> ++    - Add serial to libnih.m4
-> ++    - Add NIH_WITH_LOCAL_LIBNIH macro.
-> ++
-> ++  * Fix use of ${Source-Version} to be ${binary:Version}
-> ++  * Add debian/source/format with "1.0" to be future compatible.
-> ++  * Bump standards version.
-> ++
-> ++ -- Scott James Remnant <scott@ubuntu.com>  Tue, 27 Apr 2010 10:49:55 -=
-0700
-> ++
-> ++libnih (1.0.1-1) lucid; urgency=3Dlow
-> ++
-> ++  * New upstream release:
-> ++    - Add missing __nih_* symbols to linker version script so that we
-> ++      can link Upstart's test suite.
-> ++    - Glibc __abort_msg symbol now only linked as a weak symbol.
-> ++
-> ++ -- Scott James Remnant <scott@ubuntu.com>  Thu, 04 Feb 2010 14:53:26 -=
-0800
-> ++
-> ++libnih (1.0.0-2build1) lucid; urgency=3Dlow
-> ++
-> ++  * Rebuild to pick up relaxed dependency on libc6, after checking that
-> ++    __abort_msg is available with the same signature in eglibc 2.11.
-> ++    LP: #508702.
-> ++
-> ++ -- Matthias Klose <doko@ubuntu.com>  Mon, 18 Jan 2010 16:09:13 +0100
-> ++
-> ++libnih (1.0.0-2) lucid; urgency=3Dlow
-> ++
-> ++  * debian/control: Add build-dependency on dbus so the test suite can
-> ++    pass on the buildds.
-> ++
-> ++ -- Scott James Remnant <scott@ubuntu.com>  Sat, 28 Nov 2009 23:28:27 +=
-0000
-> ++
-> ++libnih (1.0.0-1) lucid; urgency=3Dlow
-> ++
-> ++  * First upstream release.  Previously this code was included in the
-> ++    upstart, mountall and ureadahead source packages.
-> ++
-> ++ -- Scott James Remnant <scott@ubuntu.com>  Sat, 28 Nov 2009 21:14:00 +=
-0000
-> +--- libnih-1.0.3.orig/debian/source/format
-> ++++ libnih-1.0.3/debian/source/format
-> +@@ -0,0 +1 @@
-> ++1.0
-> +--- libnih-1.0.3.orig/nih-dbus/dbus_proxy.h
-> ++++ libnih-1.0.3/nih-dbus/dbus_proxy.h
-> +@@ -146,14 +146,14 @@
-> + 					    const char *name, const char *path,
-> + 					    NihDBusLostHandler lost_handler,
-> + 					    void *data)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NihDBusProxySignal *nih_dbus_proxy_connect (NihDBusProxy *proxy,
-> + 					    const NihDBusInterface *interface,
-> + 					    const char *name,
-> + 					    NihDBusSignalHandler handler,
-> + 					    void *data)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus/dbus_object.h
-> ++++ libnih-1.0.3/nih-dbus/dbus_object.h
-> +@@ -61,8 +61,7 @@
-> + 				    DBusConnection *connection,
-> + 				    const char *path,
-> + 				    const NihDBusInterface **interfaces,
-> +-				    void *data)
-> +-	__attribute__ ((malloc));
-> ++				    void *data);
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus/dbus_util.h
-> ++++ libnih-1.0.3/nih-dbus/dbus_util.h
-> +@@ -26,7 +26,7 @@
-> + NIH_BEGIN_EXTERN
-> +=20
-> + char *nih_dbus_path (const void *parent, const char *root, ...)
-> +-	__attribute__ ((sentinel, warn_unused_result, malloc));
-> ++	__attribute__ ((sentinel, warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus/dbus_pending_data.h
-> ++++ libnih-1.0.3/nih-dbus/dbus_pending_data.h
-> +@@ -104,7 +104,7 @@
-> + 					       NihDBusReplyHandler handler,
-> + 					       NihDBusErrorHandler error_handler,
-> + 					       void *data)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus/dbus_proxy.c
-> ++++ libnih-1.0.3/nih-dbus/dbus_proxy.c
-> +@@ -46,11 +46,11 @@
-> + 	__attribute__ ((warn_unused_result));
-> + static char *nih_dbus_proxy_name_rule         (const void *parent,
-> + 					       NihDBusProxy *proxy)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + static int   nih_dbus_proxy_signal_destroy    (NihDBusProxySignal *prox=
-ied);
-> + static char *nih_dbus_proxy_signal_rule       (const void *parent,
-> + 					       NihDBusProxySignal *proxied)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + /* Prototypes for handler functions */
-> + static DBusHandlerResult nih_dbus_proxy_name_owner_changed (DBusConnect=
-ion *connection,
-> +--- libnih-1.0.3.orig/nih-dbus-tool/symbol.c
-> ++++ libnih-1.0.3/nih-dbus-tool/symbol.c
-> +@@ -40,10 +40,10 @@
-> + /* Prototypes for static functions */
-> + static char *symbol_strcat_interface (char **str, const void *parent,
-> + 				      const char *format, ...)
-> +-	__attribute__ ((format (printf, 3, 4), warn_unused_result, malloc));
-> ++	__attribute__ ((format (printf, 3, 4), warn_unused_result));
-> + static char *symbol_strcat_title     (char **str, const void *parent,
-> + 				      const char *format, ...)
-> +-	__attribute__ ((format (printf, 3, 4), warn_unused_result, malloc));
-> ++	__attribute__ ((format (printf, 3, 4), warn_unused_result));
-> +=20
-> +=20
-> + /**
-> +--- libnih-1.0.3.orig/nih-dbus-tool/demarshal.h
-> ++++ libnih-1.0.3/nih-dbus-tool/demarshal.h
-> +@@ -37,7 +37,7 @@
-> + 		 const char *prefix, const char *interface_symbol,
-> + 		 const char *member_symbol, const char *symbol,
-> + 		 NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus-tool/symbol.h
-> ++++ libnih-1.0.3/nih-dbus-tool/symbol.h
-> +@@ -28,22 +28,22 @@
-> + int   symbol_valid     (const char *symbol);
-> +=20
-> + char *symbol_from_name (const void *parent, const char *name)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *symbol_impl      (const void *parent, const char *prefix,
-> + 			const char *interface_name, const char *name,
-> + 			const char *postfix)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *symbol_extern    (const void *parent, const char *prefix,
-> + 			const char *interface_symbol, const char *midfix,
-> + 			const char *symbol, const char *postfix)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *symbol_typedef   (const void *parent, const char *prefix,
-> + 			const char *interface_symbol, const char *midfix,
-> + 			const char *symbol, const char *postfix)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus-tool/output.h
-> ++++ libnih-1.0.3/nih-dbus-tool/output.h
-> +@@ -35,9 +35,9 @@
-> + 	__attribute__ ((warn_unused_result));
-> +=20
-> + char *output_preamble (const void *parent, const char *path)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *output_sentinel (const void *parent, const char *path)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus-tool/parse.h
-> ++++ libnih-1.0.3/nih-dbus-tool/parse.h
-> +@@ -95,7 +95,7 @@
-> +=20
-> + ParseStack *parse_stack_push (const void *parent, NihList *stack,
-> + 			      ParseStackType type, void *data)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + ParseStack *parse_stack_top  (NihList *stack);
-> +=20
-> + void        parse_start_tag  (XML_Parser xmlp, const char *tag,
-> +@@ -103,7 +103,7 @@
-> + void        parse_end_tag    (XML_Parser xmlp, const char *tag);
-> +=20
-> + Node *      parse_xml        (const void *parent, int fd, const char *f=
-ilename)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus-tool/type.h
-> ++++ libnih-1.0.3/nih-dbus-tool/type.h
-> +@@ -94,43 +94,43 @@
-> +=20
-> + char *      type_of               (const void * parent,
-> + 				   DBusSignatureIter *iter)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + TypeVar *   type_var_new          (const void *parent, const char *type,
-> + 				   const char *name)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *      type_var_to_string    (const void *parent, TypeVar *var)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *      type_var_layout       (const void *parent, NihList *vars)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + TypeFunc *  type_func_new         (const void *parent, const char *type,
-> + 				   const char *name)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *      type_func_to_string   (const void *parent, TypeFunc *func)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *      type_func_to_typedef  (const void *parent, TypeFunc *func)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *      type_func_layout      (const void *parent, NihList *funcs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + TypeStruct *type_struct_new       (const void *parent, const char *name)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *      type_struct_to_string (const void *parent, TypeStruct *stru=
-cture)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *      type_to_const         (char **type, const void *parent)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *      type_to_pointer       (char **type, const void *parent)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *      type_to_static        (char **type, const void *parent)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *      type_to_extern        (char **type, const void *parent)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *      type_strcat_assert    (char **block, const void *parent,
-> + 				   TypeVar *var, TypeVar *prev, TypeVar *next)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus-tool/argument.h
-> ++++ libnih-1.0.3/nih-dbus-tool/argument.h
-> +@@ -61,7 +61,7 @@
-> +=20
-> + Argument *argument_new        (const void *parent, const char *name,
-> + 			       const char *type, NihDBusArgDir direction)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + int       argument_start_tag  (XML_Parser xmlp, const char *tag,
-> + 			       char * const *attr)
-> +--- libnih-1.0.3.orig/nih-dbus-tool/indent.h
-> ++++ libnih-1.0.3/nih-dbus-tool/indent.h
-> +@@ -26,9 +26,9 @@
-> + NIH_BEGIN_EXTERN
-> +=20
-> + char *indent  (char **str, const void *parent, int level)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *comment (char **str, const void *parent)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus-tool/main.c
-> ++++ libnih-1.0.3/nih-dbus-tool/main.c
-> +@@ -52,10 +52,10 @@
-> + /* Prototypes for local functions */
-> + char *source_file_path (const void *parent, const char *output_path,
-> + 			const char *filename)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *header_file_path (const void *parent, const char *output_path,
-> + 			const char *filename)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> +=20
-> + /**
-> +--- libnih-1.0.3.orig/nih-dbus-tool/signal.h
-> ++++ libnih-1.0.3/nih-dbus-tool/signal.h
-> +@@ -58,7 +58,7 @@
-> + int       signal_name_valid      (const char *name);
-> +=20
-> + Signal *  signal_new             (const void *parent, const char *name)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + int       signal_start_tag       (XML_Parser xmlp, const char *tag,
-> + 				  char * const *attr)
-> +@@ -76,18 +76,18 @@
-> + char *    signal_object_function (const void *parent, const char *prefi=
-x,
-> + 				  Interface *interface, Signal *signal,
-> + 				  NihList *prototypes, NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *    signal_proxy_function  (const void *parent, const char *prefi=
-x,
-> + 				  Interface *interface, Signal *signal,
-> + 				  NihList *prototypes, NihList *typedefs,
-> + 				  NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *    signal_args_array      (const void *parent, const char *prefi=
-x,
-> + 				  Interface *interface, Signal *signal,
-> + 				  NihList *prototypes)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus-tool/marshal.c
-> ++++ libnih-1.0.3/nih-dbus-tool/marshal.c
-> +@@ -49,7 +49,7 @@
-> + 			     const char *prefix, const char *interface_symbol,
-> + 			     const char *member_symbol, const char *symbol,
-> + 			     NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + static char *marshal_array  (const void *parent,
-> + 			     DBusSignatureIter *iter,
-> + 			     const char *iter_name, const char *name,
-> +@@ -58,7 +58,7 @@
-> + 			     const char *prefix, const char *interface_symbol,
-> + 			     const char *member_symbol, const char *symbol,
-> + 			     NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + static char *marshal_struct (const void *parent,
-> + 			     DBusSignatureIter *iter,
-> + 			     const char *iter_name, const char *name,
-> +@@ -67,7 +67,7 @@
-> + 			     const char *prefix, const char *interface_symbol,
-> + 			     const char *member_symbol, const char *symbol,
-> + 			     NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> +=20
-> + /**
-> +@@ -364,6 +364,7 @@
-> + 	nih_local TypeVar *element_len_var =3D NULL;
-> + 	nih_local char *   block =3D NULL;
-> + 	nih_local char *   vars_block =3D NULL;
-> ++	nih_local char *   loop_block =3D NULL;
-> +=20
-> + 	nih_assert (iter !=3D NULL);
-> + 	nih_assert (iter_name !=3D NULL);
-> +@@ -448,7 +449,7 @@
-> + 	nih_list_add (locals, &array_iter_var->entry);
-> +=20
-> + 	if (dbus_type_is_fixed (element_type)) {
-> +-		if (! nih_strcat_sprintf (&code, parent,
-> ++		if (! nih_strcat_sprintf (&loop_block, parent,
-> + 					  "for (size_t %s =3D 0; %s < %s; %s++) {\n",
-> + 					  loop_name, loop_name, len_name, loop_name)) {
-> + 			nih_free (code);
-> +@@ -456,6 +457,12 @@
-> + 		}
-> + 	} else {
-> + 		if (! nih_strcat_sprintf (&code, parent,
-> ++					  "if (%s) {\n",
-> ++					  name)) {
-> ++			nih_free (code);
-> ++			return NULL;
-> ++		}
-> ++		if (! nih_strcat_sprintf (&loop_block, parent,
-> + 					  "for (size_t %s =3D 0; %s[%s]; %s++) {\n",
-> + 					  loop_name, name, loop_name, loop_name)) {
-> + 			nih_free (code);
-> +@@ -576,7 +583,7 @@
-> + 	}
-> +=20
-> +=20
-> +-	if (! nih_strcat_sprintf (&code, parent,
-> ++	if (! nih_strcat_sprintf (&loop_block, parent,
-> + 			   "%s"
-> + 			   "\n"
-> + 			   "%s"
-> +@@ -590,9 +597,34 @@
-> + 	}
-> +=20
-> + 	/* Close the container again */
-> ++	if (! nih_strcat_sprintf (&loop_block, parent,
-> ++				  "}\n")) {
-> ++		nih_free (code);
-> ++		return NULL;
-> ++	}
-> ++
-> ++	if (dbus_type_is_fixed (element_type)) {
-> ++		if (! nih_strcat_sprintf (&code, parent,
-> ++				 "%s\n", loop_block)) {
-> ++			nih_free (code);
-> ++			return NULL;
-> ++		}
-> ++	}
-> ++	else {
-> ++		if (! indent (&loop_block, NULL, 1)) {
-> ++			nih_free (code);
-> ++			return NULL;
-> ++		}
-> ++
-> ++		if (! nih_strcat_sprintf (&code, parent,
-> ++				 "%s"
-> ++				 "}\n\n", loop_block)) {
-> ++			nih_free (code);
-> ++			return NULL;
-> ++		}
-> ++	}
-> ++
-> + 	if (! nih_strcat_sprintf (&code, parent,
-> +-				  "}\n"
-> +-				  "\n"
-> + 				  "if (! dbus_message_iter_close_container (&%s, &%s)) {\n"
-> + 				  "%s"
-> + 				  "}\n",
-> +--- libnih-1.0.3.orig/nih-dbus-tool/demarshal.c
-> ++++ libnih-1.0.3/nih-dbus-tool/demarshal.c
-> +@@ -51,7 +51,7 @@
-> + 			       const char *prefix, const char *interface_symbol,
-> + 			       const char *member_symbol, const char *symbol,
-> + 			       NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + static char *demarshal_array  (const void *parent,
-> + 			       DBusSignatureIter *iter,
-> + 			       const char *parent_name,
-> +@@ -62,7 +62,7 @@
-> + 			       const char *prefix, const char *interface_symbol,
-> + 			       const char *member_symbol, const char *symbol,
-> + 			       NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + static char *demarshal_struct (const void *parent,
-> + 			       DBusSignatureIter *iter,
-> + 			       const char *parent_name,
-> +@@ -73,7 +73,7 @@
-> + 			       const char *prefix, const char *interface_symbol,
-> + 			       const char *member_symbol, const char *symbol,
-> + 			       NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> +=20
-> + /**
-> +--- libnih-1.0.3.orig/nih-dbus-tool/interface.h
-> ++++ libnih-1.0.3/nih-dbus-tool/interface.h
-> +@@ -61,7 +61,7 @@
-> +=20
-> + Interface *interface_new                           (const void *parent,
-> + 						    const char *name)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + int        interface_start_tag                     (XML_Parser xmlp,
-> + 						    const char *tag,
-> +@@ -81,26 +81,26 @@
-> + 						    Interface *interface,
-> + 						    int with_handlers,
-> + 						    NihList *prototypes)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *     interface_signals_array                 (const void *parent,
-> + 						    const char *prefix,
-> + 						    Interface *interface,
-> + 						    int with_filters,
-> + 						    NihList *prototypes)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *     interface_properties_array              (const void *parent,
-> + 						    const char *prefix,
-> + 						    Interface *interface,
-> + 						    int with_handlers,
-> + 						    NihList *prototypes)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *     interface_struct                        (const void *parent,
-> + 						    const char *prefix,
-> + 						    Interface *interface,
-> + 						    int object,
-> + 						    NihList *prototypes)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> +=20
-> + char *     interface_proxy_get_all_function        (const void *parent,
-> +@@ -108,7 +108,7 @@
-> + 						    Interface *interface,
-> + 						    NihList *prototypes,
-> + 						    NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *     interface_proxy_get_all_notify_function (const void *parent,
-> + 						    const char *prefix,
-> +@@ -116,14 +116,14 @@
-> + 						    NihList *prototypes,
-> + 						    NihList *typedefs,
-> + 						    NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *     interface_proxy_get_all_sync_function   (const void *parent,
-> + 						    const char *prefix,
-> + 						    Interface *interface,
-> + 						    NihList *prototypes,
-> + 						    NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus-tool/method.h
-> ++++ libnih-1.0.3/nih-dbus-tool/method.h
-> +@@ -62,7 +62,7 @@
-> + int       method_name_valid            (const char *name);
-> +=20
-> + Method *  method_new                   (const void *parent, const char =
-*name)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + int       method_start_tag             (XML_Parser xmlp, const char *ta=
-g,
-> + 					char * const *attr)
-> +@@ -82,33 +82,33 @@
-> + 					Interface *interface, Method *method,
-> + 					NihList *prototypes, NihList *handlers,
-> + 					NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *    method_reply_function        (const void *parent, const char =
-*prefix,
-> + 					Interface *interface, Method *method,
-> + 					NihList *prototypes, NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *    method_proxy_function        (const void *parent, const char =
-*prefix,
-> + 					Interface *interface, Method *method,
-> + 					NihList *prototypes, NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *    method_proxy_notify_function (const void *parent, const char =
-*prefix,
-> + 					Interface *interface, Method *method,
-> + 					NihList *prototypes, NihList *typedefs,
-> + 					NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *    method_proxy_sync_function   (const void *parent, const char =
-*prefix,
-> + 					Interface *interface, Method *method,
-> + 					NihList *prototypes, NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *    method_args_array            (const void *parent, const char =
-*prefix,
-> + 					Interface *interface, Method *method,
-> + 					NihList *prototypes)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus-tool/node.h
-> ++++ libnih-1.0.3/nih-dbus-tool/node.h
-> +@@ -47,7 +47,7 @@
-> + int        node_path_valid       (const char *name);
-> +=20
-> + Node *     node_new              (const void *parent, const char *path)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + int        node_start_tag        (XML_Parser xmlp, const char *tag,
-> + 				  char * const *attr)
-> +@@ -59,18 +59,18 @@
-> +=20
-> + char *     node_interfaces_array (const void *parent, const char *prefi=
-x,
-> + 				  Node *node, int object, NihList *prototypes)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *     node_object_functions (const void *parent, const char *prefi=
-x,
-> + 				  Node *node,
-> + 				  NihList *prototypes, NihList *handlers,
-> + 				  NihList *structs, NihList *externs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *     node_proxy_functions  (const void *parent, const char *prefi=
-x,
-> + 				  Node *node,
-> + 				  NihList *prototypes, NihList *structs,
-> + 				  NihList *typedefs, NihList *externs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus-tool/marshal.h
-> ++++ libnih-1.0.3/nih-dbus-tool/marshal.h
-> +@@ -35,7 +35,7 @@
-> + 	       const char *prefix, const char *interface_symbol,
-> + 	       const char *member_symbol, const char *symbol,
-> + 	       NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus-tool/type.c
-> ++++ libnih-1.0.3/nih-dbus-tool/type.c
-> +@@ -1101,7 +1101,7 @@
-> + 	nih_assert (block !=3D NULL);
-> + 	nih_assert (var !=3D NULL);
-> +=20
-> +-	if (! strchr (var->type, '*'))
-> ++	if (! strchr (var->type, '*') || ! strcmp (var->type, "char * const *"=
-))
-> + 		return *block;
-> +=20
-> + 	if (next && (! strcmp (next->type, "size_t"))) {
-> +--- libnih-1.0.3.orig/nih-dbus-tool/property.h
-> ++++ libnih-1.0.3/nih-dbus-tool/property.h
-> +@@ -65,7 +65,7 @@
-> + 					      const char *name,
-> + 					      const char *type,
-> + 					      NihDBusAccess access)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + int       property_start_tag                 (XML_Parser xmlp, const ch=
-ar *tag,
-> + 					      char * const *attr)
-> +@@ -88,7 +88,7 @@
-> + 					      NihList *prototypes,
-> + 					      NihList *handlers,
-> + 					      NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *    property_object_set_function       (const void *parent,
-> + 					      const char *prefix,
-> + 					      Interface *interface,
-> +@@ -96,7 +96,7 @@
-> + 					      NihList *prototypes,
-> + 					      NihList *handlers,
-> + 					      NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *    property_proxy_get_function        (const void *parent,
-> + 					      const char *prefix,
-> +@@ -104,7 +104,7 @@
-> + 					      Property *property,
-> + 					      NihList *prototypes,
-> + 					      NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *    property_proxy_get_notify_function (const void *parent,
-> + 					      const char *prefix,
-> + 					      Interface *interface,
-> +@@ -112,7 +112,7 @@
-> + 					      NihList *prototypes,
-> + 					      NihList *typedefs,
-> + 					      NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *    property_proxy_set_function        (const void *parent,
-> + 					      const char *prefix,
-> +@@ -120,7 +120,7 @@
-> + 					      Property *property,
-> + 					      NihList *prototypes,
-> + 					      NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *    property_proxy_set_notify_function (const void *parent,
-> + 					      const char *prefix,
-> + 					      Interface *interface,
-> +@@ -128,7 +128,7 @@
-> + 					      NihList *prototypes,
-> + 					      NihList *typedefs,
-> + 					      NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + char *    property_proxy_get_sync_function   (const void *parent,
-> + 					      const char *prefix,
-> +@@ -136,14 +136,14 @@
-> + 					      Property *property,
-> + 					      NihList *prototypes,
-> + 					      NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + char *    property_proxy_set_sync_function   (const void *parent,
-> + 					      const char *prefix,
-> + 					      Interface *interface,
-> + 					      Property *property,
-> + 					      NihList *prototypes,
-> + 					      NihList *structs)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + NIH_END_EXTERN
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus-tool/tests/test_main.c
-> ++++ libnih-1.0.3/nih-dbus-tool/tests/test_main.c
-> +@@ -100,10 +100,10 @@
-> +=20
-> + extern char *source_file_path (const void *parent, const char *output_p=
-ath,
-> + 			       const char *filename)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> + extern char *header_file_path (const void *parent, const char *output_p=
-ath,
-> + 			       const char *filename)
-> +-	__attribute__ ((warn_unused_result, malloc));
-> ++	__attribute__ ((warn_unused_result));
-> +=20
-> + void
-> + test_source_file_path (void)
-> +--- libnih-1.0.3.orig/nih-dbus-tool/tests/test_com.netsplit.Nih.Test_obj=
-ect.c
-> ++++ libnih-1.0.3/nih-dbus-tool/tests/test_com.netsplit.Nih.Test_object.c
-> +@@ -12524,6 +12524,7 @@
-> + 		dbus_message_iter_init (reply, &iter);
-> +=20
-> + 		dbus_message_iter_get_basic (&iter, &str_value);
-> ++		TEST_NE (str_value[0], '\0');
-> + 		TEST_TRUE (strchr ("0123456789", str_value[0]));
-> +=20
-> + 		dbus_message_unref (reply);
-> +--- libnih-1.0.3.orig/nih-dbus-tool/tests/test_marshal.c
-> ++++ libnih-1.0.3/nih-dbus-tool/tests/test_marshal.c
-> +@@ -1479,39 +1479,41 @@
-> + 				   "\treturn -1;\n"
-> + 				   "}\n"
-> + 				   "\n"
-> +-				   "for (size_t value_i =3D 0; value[value_i]; value_i++) {\n"
-> +-				   "\tDBusMessageIter value_element_iter;\n"
-> +-				   "\tconst int16_t * value_element;\n"
-> +-				   "\tsize_t          value_element_len;\n"
-> ++				   "if (value) {\n"
-> ++				   "\tfor (size_t value_i =3D 0; value[value_i]; value_i++) {\n"
-> ++				   "\t\tDBusMessageIter value_element_iter;\n"
-> ++				   "\t\tconst int16_t * value_element;\n"
-> ++				   "\t\tsize_t          value_element_len;\n"
-> + 				   "\n"
-> +-				   "\tvalue_element =3D value[value_i];\n"
-> +-				   "\tvalue_element_len =3D value_len[value_i];\n"
-> ++				   "\t\tvalue_element =3D value[value_i];\n"
-> ++				   "\t\tvalue_element_len =3D value_len[value_i];\n"
-> + 				   "\n"
-> +=20
-> +-				   "\t/* Marshal an array onto the message */\n"
-> +-				   "\tif (! dbus_message_iter_open_container (&value_iter, DBUS_TYP=
-E_ARRAY, \"n\", &value_element_iter)) {\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-> +-				   "\t\treturn -1;\n"
-> +-				   "\t}\n"
-> ++				   "\t\t/* Marshal an array onto the message */\n"
-> ++				   "\t\tif (! dbus_message_iter_open_container (&value_iter, DBUS_T=
-YPE_ARRAY, \"n\", &value_element_iter)) {\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);=
-\n"
-> ++				   "\t\t\treturn -1;\n"
-> ++				   "\t\t}\n"
-> + 				   "\n"
-> +-				   "\tfor (size_t value_element_i =3D 0; value_element_i < value_el=
-ement_len; value_element_i++) {\n"
-> +-				   "\t\tint16_t value_element_element;\n"
-> ++				   "\t\tfor (size_t value_element_i =3D 0; value_element_i < value_=
-element_len; value_element_i++) {\n"
-> ++				   "\t\t\tint16_t value_element_element;\n"
-> + 				   "\n"
-> +-				   "\t\tvalue_element_element =3D value_element[value_element_i];\n"
-> ++				   "\t\t\tvalue_element_element =3D value_element[value_element_i];=
-\n"
-> + 				   "\n"
-> +-				   "\t\t/* Marshal a int16_t onto the message */\n"
-> +-				   "\t\tif (! dbus_message_iter_append_basic (&value_element_iter, =
-DBUS_TYPE_INT16, &value_element_element)) {\n"
-> +-				   "\t\t\tdbus_message_iter_abandon_container (&value_iter, &value_=
-element_iter);\n"
-> ++				   "\t\t\t/* Marshal a int16_t onto the message */\n"
-> ++				   "\t\t\tif (! dbus_message_iter_append_basic (&value_element_iter=
-, DBUS_TYPE_INT16, &value_element_element)) {\n"
-> ++				   "\t\t\t\tdbus_message_iter_abandon_container (&value_iter, &valu=
-e_element_iter);\n"
-> ++				   "\t\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter=
-);\n"
-> ++				   "\t\t\t\treturn -1;\n"
-> ++				   "\t\t\t}\n"
-> ++				   "\t\t}\n"
-> ++				   "\n"
-> ++				   "\t\tif (! dbus_message_iter_close_container (&value_iter, &valu=
-e_element_iter)) {\n"
-> + 				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);=
-\n"
-> + 				   "\t\t\treturn -1;\n"
-> + 				   "\t\t}\n"
-> +-				   "\t}\n"
-> +-				   "\n"
-> +-				   "\tif (! dbus_message_iter_close_container (&value_iter, &value_=
-element_iter)) {\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-> +-				   "\t\treturn -1;\n"
-> +-				   "\t}\n"
-> +=20
-> ++				   "\t}\n"
-> + 				   "}\n"
-> + 				   "\n"
-> + 				   "if (! dbus_message_iter_close_container (&iter, &value_iter)) {=
-\n"
-> +@@ -1766,15 +1768,17 @@
-> + 				   "\treturn -1;\n"
-> + 				   "}\n"
-> + 				   "\n"
-> +-				   "for (size_t value_i =3D 0; value[value_i]; value_i++) {\n"
-> +-				   "\tconst char *value_element;\n"
-> ++				   "if (value) {\n"
-> ++				   "\tfor (size_t value_i =3D 0; value[value_i]; value_i++) {\n"
-> ++				   "\t\tconst char *value_element;\n"
-> + 				   "\n"
-> +-				   "\tvalue_element =3D value[value_i];\n"
-> ++				   "\t\tvalue_element =3D value[value_i];\n"
-> + 				   "\n"
-> +-				   "\t/* Marshal a char * onto the message */\n"
-> +-				   "\tif (! dbus_message_iter_append_basic (&value_iter, DBUS_TYPE_=
-STRING, &value_element)) {\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-> +-				   "\t\treturn -1;\n"
-> ++				   "\t\t/* Marshal a char * onto the message */\n"
-> ++				   "\t\tif (! dbus_message_iter_append_basic (&value_iter, DBUS_TYP=
-E_STRING, &value_element)) {\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);=
-\n"
-> ++				   "\t\t\treturn -1;\n"
-> ++				   "\t\t}\n"
-> + 				   "\t}\n"
-> + 				   "}\n"
-> + 				   "\n"
-> +@@ -1933,35 +1937,39 @@
-> + 				   "\treturn -1;\n"
-> + 				   "}\n"
-> + 				   "\n"
-> +-				   "for (size_t value_i =3D 0; value[value_i]; value_i++) {\n"
-> +-				   "\tDBusMessageIter value_element_iter;\n"
-> +-				   "\tchar * const *  value_element;\n"
-> ++				   "if (value) {\n"
-> ++				   "\tfor (size_t value_i =3D 0; value[value_i]; value_i++) {\n"
-> ++				   "\t\tDBusMessageIter value_element_iter;\n"
-> ++				   "\t\tchar * const *  value_element;\n"
-> + 				   "\n"
-> +-				   "\tvalue_element =3D value[value_i];\n"
-> ++				   "\t\tvalue_element =3D value[value_i];\n"
-> + 				   "\n"
-> +-				   "\t/* Marshal an array onto the message */\n"
-> +-				   "\tif (! dbus_message_iter_open_container (&value_iter, DBUS_TYP=
-E_ARRAY, \"s\", &value_element_iter)) {\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-> +-				   "\t\treturn -1;\n"
-> +-				   "\t}\n"
-> +-				   "\n"
-> +-				   "\tfor (size_t value_element_i =3D 0; value_element[value_elemen=
-t_i]; value_element_i++) {\n"
-> +-				   "\t\tconst char *value_element_element;\n"
-> ++				   "\t\t/* Marshal an array onto the message */\n"
-> ++				   "\t\tif (! dbus_message_iter_open_container (&value_iter, DBUS_T=
-YPE_ARRAY, \"s\", &value_element_iter)) {\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);=
-\n"
-> ++				   "\t\t\treturn -1;\n"
-> ++				   "\t\t}\n"
-> + 				   "\n"
-> +-				   "\t\tvalue_element_element =3D value_element[value_element_i];\n"
-> ++				   "\t\tif (value_element) {\n"
-> ++				   "\t\t\tfor (size_t value_element_i =3D 0; value_element[value_el=
-ement_i]; value_element_i++) {\n"
-> ++				   "\t\t\t\tconst char *value_element_element;\n"
-> ++				   "\n"
-> ++				   "\t\t\t\tvalue_element_element =3D value_element[value_element_i=
-];\n"
-> ++				   "\n"
-> ++				   "\t\t\t\t/* Marshal a char * onto the message */\n"
-> ++				   "\t\t\t\tif (! dbus_message_iter_append_basic (&value_element_it=
-er, DBUS_TYPE_STRING, &value_element_element)) {\n"
-> ++				   "\t\t\t\t\tdbus_message_iter_abandon_container (&value_iter, &va=
-lue_element_iter);\n"
-> ++				   "\t\t\t\t\tdbus_message_iter_abandon_container (&iter, &value_it=
-er);\n"
-> ++				   "\t\t\t\t\treturn -1;\n"
-> ++				   "\t\t\t\t}\n"
-> ++				   "\t\t\t}\n"
-> ++				   "\t\t}\n"
-> + 				   "\n"
-> +-				   "\t\t/* Marshal a char * onto the message */\n"
-> +-				   "\t\tif (! dbus_message_iter_append_basic (&value_element_iter, =
-DBUS_TYPE_STRING, &value_element_element)) {\n"
-> +-				   "\t\t\tdbus_message_iter_abandon_container (&value_iter, &value_=
-element_iter);\n"
-> ++				   "\t\tif (! dbus_message_iter_close_container (&value_iter, &valu=
-e_element_iter)) {\n"
-> + 				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);=
-\n"
-> + 				   "\t\t\treturn -1;\n"
-> + 				   "\t\t}\n"
-> + 				   "\t}\n"
-> +-				   "\n"
-> +-				   "\tif (! dbus_message_iter_close_container (&value_iter, &value_=
-element_iter)) {\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-> +-				   "\t\treturn -1;\n"
-> +-				   "\t}\n"
-> + 				   "}\n"
-> + 				   "\n"
-> + 				   "if (! dbus_message_iter_close_container (&iter, &value_iter)) {=
-\n"
-> +@@ -2194,16 +2202,18 @@
-> + 				   "\treturn -1;\n"
-> + 				   "}\n"
-> + 				   "\n"
-> +-				   "for (size_t value_item2_i =3D 0; value_item2[value_item2_i]; va=
-lue_item2_i++) {\n"
-> +-				   "\tconst char *value_item2_element;\n"
-> ++				   "if (value_item2) {\n"
-> ++				   "\tfor (size_t value_item2_i =3D 0; value_item2[value_item2_i]; =
-value_item2_i++) {\n"
-> ++				   "\t\tconst char *value_item2_element;\n"
-> + 				   "\n"
-> +-				   "\tvalue_item2_element =3D value_item2[value_item2_i];\n"
-> ++				   "\t\tvalue_item2_element =3D value_item2[value_item2_i];\n"
-> + 				   "\n"
-> +-				   "\t/* Marshal a char * onto the message */\n"
-> +-				   "\tif (! dbus_message_iter_append_basic (&value_item2_iter, DBUS=
-_TYPE_STRING, &value_item2_element)) {\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&value_iter, &value_it=
-em2_iter);\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-> +-				   "\t\treturn -1;\n"
-> ++				   "\t\t/* Marshal a char * onto the message */\n"
-> ++				   "\t\tif (! dbus_message_iter_append_basic (&value_item2_iter, DB=
-US_TYPE_STRING, &value_item2_element)) {\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&value_iter, &value_=
-item2_iter);\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);=
-\n"
-> ++				   "\t\t\treturn -1;\n"
-> ++				   "\t\t}\n"
-> + 				   "\t}\n"
-> + 				   "}\n"
-> + 				   "\n"
-> +@@ -2642,41 +2652,43 @@
-> + 				   "\treturn -1;\n"
-> + 				   "}\n"
-> + 				   "\n"
-> +-				   "for (size_t value_i =3D 0; value[value_i]; value_i++) {\n"
-> +-				   "\tDBusMessageIter                  value_element_iter;\n"
-> +-				   "\tconst char *                     value_element_item0;\n"
-> +-				   "\tuint32_t                         value_element_item1;\n"
-> +-				   "\tconst MyStructArrayValueElement *value_element;\n"
-> ++				   "if (value) {\n"
-> ++				   "\tfor (size_t value_i =3D 0; value[value_i]; value_i++) {\n"
-> ++				   "\t\tDBusMessageIter                  value_element_iter;\n"
-> ++				   "\t\tconst char *                     value_element_item0;\n"
-> ++				   "\t\tuint32_t                         value_element_item1;\n"
-> ++				   "\t\tconst MyStructArrayValueElement *value_element;\n"
-> + 				   "\n"
-> +-				   "\tvalue_element =3D value[value_i];\n"
-> ++				   "\t\tvalue_element =3D value[value_i];\n"
-> + 				   "\n"
-> +-				   "\t/* Marshal a structure onto the message */\n"
-> +-				   "\tif (! dbus_message_iter_open_container (&value_iter, DBUS_TYP=
-E_STRUCT, NULL, &value_element_iter)) {\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-> +-				   "\t\treturn -1;\n"
-> +-				   "\t}\n"
-> ++				   "\t\t/* Marshal a structure onto the message */\n"
-> ++				   "\t\tif (! dbus_message_iter_open_container (&value_iter, DBUS_T=
-YPE_STRUCT, NULL, &value_element_iter)) {\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);=
-\n"
-> ++				   "\t\t\treturn -1;\n"
-> ++				   "\t\t}\n"
-> + 				   "\n"
-> +-				   "\tvalue_element_item0 =3D value_element->item0;\n"
-> ++				   "\t\tvalue_element_item0 =3D value_element->item0;\n"
-> + 				   "\n"
-> +-				   "\t/* Marshal a char * onto the message */\n"
-> +-				   "\tif (! dbus_message_iter_append_basic (&value_element_iter, DB=
-US_TYPE_STRING, &value_element_item0)) {\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&value_iter, &value_el=
-ement_iter);\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-> +-				   "\t\treturn -1;\n"
-> +-				   "\t}\n"
-> ++				   "\t\t/* Marshal a char * onto the message */\n"
-> ++				   "\t\tif (! dbus_message_iter_append_basic (&value_element_iter, =
-DBUS_TYPE_STRING, &value_element_item0)) {\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&value_iter, &value_=
-element_iter);\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);=
-\n"
-> ++				   "\t\t\treturn -1;\n"
-> ++				   "\t\t}\n"
-> + 				   "\n"
-> +-				   "\tvalue_element_item1 =3D value_element->item1;\n"
-> ++				   "\t\tvalue_element_item1 =3D value_element->item1;\n"
-> + 				   "\n"
-> +-				   "\t/* Marshal a uint32_t onto the message */\n"
-> +-				   "\tif (! dbus_message_iter_append_basic (&value_element_iter, DB=
-US_TYPE_UINT32, &value_element_item1)) {\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&value_iter, &value_el=
-ement_iter);\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-> +-				   "\t\treturn -1;\n"
-> +-				   "\t}\n"
-> ++				   "\t\t/* Marshal a uint32_t onto the message */\n"
-> ++				   "\t\tif (! dbus_message_iter_append_basic (&value_element_iter, =
-DBUS_TYPE_UINT32, &value_element_item1)) {\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&value_iter, &value_=
-element_iter);\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);=
-\n"
-> ++				   "\t\t\treturn -1;\n"
-> ++				   "\t\t}\n"
-> + 				   "\n"
-> +-				   "\tif (! dbus_message_iter_close_container (&value_iter, &value_=
-element_iter)) {\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-> +-				   "\t\treturn -1;\n"
-> ++				   "\t\tif (! dbus_message_iter_close_container (&value_iter, &valu=
-e_element_iter)) {\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);=
-\n"
-> ++				   "\t\t\treturn -1;\n"
-> ++				   "\t\t}\n"
-> + 				   "\t}\n"
-> + 				   "}\n"
-> + 				   "\n"
-> +@@ -2912,41 +2924,43 @@
-> + 				   "\treturn -1;\n"
-> + 				   "}\n"
-> + 				   "\n"
-> +-				   "for (size_t value_i =3D 0; value[value_i]; value_i++) {\n"
-> +-				   "\tDBusMessageIter                     value_element_iter;\n"
-> +-				   "\tconst char *                        value_element_item0;\n"
-> +-				   "\tuint32_t                            value_element_item1;\n"
-> +-				   "\tconst MyDictEntryArrayValueElement *value_element;\n"
-> ++				   "if (value) {\n"
-> ++				   "\tfor (size_t value_i =3D 0; value[value_i]; value_i++) {\n"
-> ++				   "\t\tDBusMessageIter                     value_element_iter;\n"
-> ++				   "\t\tconst char *                        value_element_item0;\n"
-> ++				   "\t\tuint32_t                            value_element_item1;\n"
-> ++				   "\t\tconst MyDictEntryArrayValueElement *value_element;\n"
-> + 				   "\n"
-> +-				   "\tvalue_element =3D value[value_i];\n"
-> ++				   "\t\tvalue_element =3D value[value_i];\n"
-> + 				   "\n"
-> +-				   "\t/* Marshal a structure onto the message */\n"
-> +-				   "\tif (! dbus_message_iter_open_container (&value_iter, DBUS_TYP=
-E_DICT_ENTRY, NULL, &value_element_iter)) {\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-> +-				   "\t\treturn -1;\n"
-> +-				   "\t}\n"
-> ++				   "\t\t/* Marshal a structure onto the message */\n"
-> ++				   "\t\tif (! dbus_message_iter_open_container (&value_iter, DBUS_T=
-YPE_DICT_ENTRY, NULL, &value_element_iter)) {\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);=
-\n"
-> ++				   "\t\t\treturn -1;\n"
-> ++				   "\t\t}\n"
-> + 				   "\n"
-> +-				   "\tvalue_element_item0 =3D value_element->item0;\n"
-> ++				   "\t\tvalue_element_item0 =3D value_element->item0;\n"
-> + 				   "\n"
-> +-				   "\t/* Marshal a char * onto the message */\n"
-> +-				   "\tif (! dbus_message_iter_append_basic (&value_element_iter, DB=
-US_TYPE_STRING, &value_element_item0)) {\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&value_iter, &value_el=
-ement_iter);\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-> +-				   "\t\treturn -1;\n"
-> +-				   "\t}\n"
-> ++				   "\t\t/* Marshal a char * onto the message */\n"
-> ++				   "\t\tif (! dbus_message_iter_append_basic (&value_element_iter, =
-DBUS_TYPE_STRING, &value_element_item0)) {\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&value_iter, &value_=
-element_iter);\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);=
-\n"
-> ++				   "\t\t\treturn -1;\n"
-> ++				   "\t\t}\n"
-> + 				   "\n"
-> +-				   "\tvalue_element_item1 =3D value_element->item1;\n"
-> ++				   "\t\tvalue_element_item1 =3D value_element->item1;\n"
-> + 				   "\n"
-> +-				   "\t/* Marshal a uint32_t onto the message */\n"
-> +-				   "\tif (! dbus_message_iter_append_basic (&value_element_iter, DB=
-US_TYPE_UINT32, &value_element_item1)) {\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&value_iter, &value_el=
-ement_iter);\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-> +-				   "\t\treturn -1;\n"
-> +-				   "\t}\n"
-> ++				   "\t\t/* Marshal a uint32_t onto the message */\n"
-> ++				   "\t\tif (! dbus_message_iter_append_basic (&value_element_iter, =
-DBUS_TYPE_UINT32, &value_element_item1)) {\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&value_iter, &value_=
-element_iter);\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);=
-\n"
-> ++				   "\t\t\treturn -1;\n"
-> ++				   "\t\t}\n"
-> + 				   "\n"
-> +-				   "\tif (! dbus_message_iter_close_container (&value_iter, &value_=
-element_iter)) {\n"
-> +-				   "\t\tdbus_message_iter_abandon_container (&iter, &value_iter);\n"
-> +-				   "\t\treturn -1;\n"
-> ++				   "\t\tif (! dbus_message_iter_close_container (&value_iter, &valu=
-e_element_iter)) {\n"
-> ++				   "\t\t\tdbus_message_iter_abandon_container (&iter, &value_iter);=
-\n"
-> ++				   "\t\t\treturn -1;\n"
-> ++				   "\t\t}\n"
-> + 				   "\t}\n"
-> + 				   "}\n"
-> + 				   "\n"
-> +--- libnih-1.0.3.orig/nih-dbus-tool/tests/test_com.netsplit.Nih.Test_pro=
-xy.c
-> ++++ libnih-1.0.3/nih-dbus-tool/tests/test_com.netsplit.Nih.Test_proxy.c
-> +@@ -27359,6 +27359,7 @@
-> + 		TEST_TRUE (unix_fd_to_str_replied);
-> +=20
-> + 		TEST_EQ_P (last_data, parent);
-> ++		TEST_NE (last_str_value[0], '\0');
-> + 		TEST_TRUE (strchr ("0123456789", last_str_value[0]));
-> + 		TEST_ALLOC_PARENT (last_str_value, parent);
-> +=20
-> +@@ -27673,6 +27674,7 @@
-> +=20
-> + 		TEST_EQ (ret, 0);
-> +=20
-> ++		TEST_NE (str_value[0], '\0');
-> + 		TEST_TRUE (strchr ("0123456789", str_value[0]));
-> + 		TEST_ALLOC_PARENT (str_value, parent);
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus-tool/tests/test_property.c
-> ++++ libnih-1.0.3/nih-dbus-tool/tests/test_property.c
-> +@@ -8733,7 +8733,7 @@
-> + 	TypeVar *       var;
-> + 	NihListEntry *  attrib;
-> + 	NihDBusProxy *  proxy =3D NULL;
-> +-	void *          parent =3D NULL;
-> ++	void *          parent __attribute__((unused)) =3D NULL;
-> + 	pid_t           pid =3D -1;
-> + 	int             status;
-> + 	DBusMessage *   method_call;
-> +--- libnih-1.0.3.orig/nih-dbus-tool/tests/expected/test_method_object_fu=
-nction_standard.c
-> ++++ libnih-1.0.3/nih-dbus-tool/tests/expected/test_method_object_functio=
-n_standard.c
-> +@@ -136,17 +136,19 @@
-> + 			goto enomem;
-> + 		}
-> +=20
-> +-		for (size_t output_i =3D 0; output[output_i]; output_i++) {
-> +-			const char *output_element;
-> ++		if (output) {
-> ++			for (size_t output_i =3D 0; output[output_i]; output_i++) {
-> ++				const char *output_element;
-> +=20
-> +-			output_element =3D output[output_i];
-> ++				output_element =3D output[output_i];
-> +=20
-> +-			/* Marshal a char * onto the message */
-> +-			if (! dbus_message_iter_append_basic (&output_iter, DBUS_TYPE_STRING=
-, &output_element)) {
-> +-				dbus_message_iter_abandon_container (&iter, &output_iter);
-> +-				dbus_message_unref (reply);
-> +-				reply =3D NULL;
-> +-				goto enomem;
-> ++				/* Marshal a char * onto the message */
-> ++				if (! dbus_message_iter_append_basic (&output_iter, DBUS_TYPE_STRIN=
-G, &output_element)) {
-> ++					dbus_message_iter_abandon_container (&iter, &output_iter);
-> ++					dbus_message_unref (reply);
-> ++					reply =3D NULL;
-> ++					goto enomem;
-> ++				}
-> + 			}
-> + 		}
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus-tool/tests/expected/test_method_reply_fun=
-ction_standard.c
-> ++++ libnih-1.0.3/nih-dbus-tool/tests/expected/test_method_reply_function=
-_standard.c
-> +@@ -7,7 +7,6 @@
-> + 	DBusMessageIter output_iter;
-> +=20
-> + 	nih_assert (message !=3D NULL);
-> +-	nih_assert (output !=3D NULL);
-> +=20
-> + 	/* If the sender doesn't care about a reply, don't bother wasting
-> + 	 * effort constructing and sending one.
-> +@@ -28,16 +27,18 @@
-> + 		return -1;
-> + 	}
-> +=20
-> +-	for (size_t output_i =3D 0; output[output_i]; output_i++) {
-> +-		const char *output_element;
-> +-
-> +-		output_element =3D output[output_i];
-> +-
-> +-		/* Marshal a char * onto the message */
-> +-		if (! dbus_message_iter_append_basic (&output_iter, DBUS_TYPE_STRING,=
- &output_element)) {
-> +-			dbus_message_iter_abandon_container (&iter, &output_iter);
-> +-			dbus_message_unref (reply);
-> +-			return -1;
-> ++	if (output) {
-> ++		for (size_t output_i =3D 0; output[output_i]; output_i++) {
-> ++			const char *output_element;
-> ++
-> ++			output_element =3D output[output_i];
-> ++
-> ++			/* Marshal a char * onto the message */
-> ++			if (! dbus_message_iter_append_basic (&output_iter, DBUS_TYPE_STRING=
-, &output_element)) {
-> ++				dbus_message_iter_abandon_container (&iter, &output_iter);
-> ++				dbus_message_unref (reply);
-> ++				return -1;
-> ++			}
-> + 		}
-> + 	}
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus-tool/tests/expected/test_method_reply_fun=
-ction_deprecated.c
-> ++++ libnih-1.0.3/nih-dbus-tool/tests/expected/test_method_reply_function=
-_deprecated.c
-> +@@ -7,7 +7,6 @@
-> + 	DBusMessageIter output_iter;
-> +=20
-> + 	nih_assert (message !=3D NULL);
-> +-	nih_assert (output !=3D NULL);
-> +=20
-> + 	/* If the sender doesn't care about a reply, don't bother wasting
-> + 	 * effort constructing and sending one.
-> +@@ -28,16 +27,18 @@
-> + 		return -1;
-> + 	}
-> +=20
-> +-	for (size_t output_i =3D 0; output[output_i]; output_i++) {
-> +-		const char *output_element;
-> +-
-> +-		output_element =3D output[output_i];
-> +-
-> +-		/* Marshal a char * onto the message */
-> +-		if (! dbus_message_iter_append_basic (&output_iter, DBUS_TYPE_STRING,=
- &output_element)) {
-> +-			dbus_message_iter_abandon_container (&iter, &output_iter);
-> +-			dbus_message_unref (reply);
-> +-			return -1;
-> ++	if (output) {
-> ++		for (size_t output_i =3D 0; output[output_i]; output_i++) {
-> ++			const char *output_element;
-> ++
-> ++			output_element =3D output[output_i];
-> ++
-> ++			/* Marshal a char * onto the message */
-> ++			if (! dbus_message_iter_append_basic (&output_iter, DBUS_TYPE_STRING=
-, &output_element)) {
-> ++				dbus_message_iter_abandon_container (&iter, &output_iter);
-> ++				dbus_message_unref (reply);
-> ++				return -1;
-> ++			}
-> + 		}
-> + 	}
-> +=20
-> +--- libnih-1.0.3.orig/nih-dbus-tool/tests/expected/test_method_object_fu=
-nction_no_input.c
-> ++++ libnih-1.0.3/nih-dbus-tool/tests/expected/test_method_object_functio=
-n_no_input.c
-> +@@ -88,17 +88,19 @@
-> + 			goto enomem;
-> + 		}
-> +=20
-> +-		for (size_t output_i =3D 0; output[output_i]; output_i++) {
-> +-			const char *output_element;
-> ++		if (output) {
-> ++			for (size_t output_i =3D 0; output[output_i]; output_i++) {
-> ++				const char *output_element;
-> +=20
-> +-			output_element =3D output[output_i];
-> ++				output_element =3D output[output_i];
-> +=20
-> +-			/* Marshal a char * onto the message */
-> +-			if (! dbus_message_iter_append_basic (&output_iter, DBUS_TYPE_STRING=
-, &output_element)) {
-> +-				dbus_message_iter_abandon_container (&iter, &output_iter);
-> +-				dbus_message_unref (reply);
-> +-				reply =3D NULL;
-> +-				goto enomem;
-> ++				/* Marshal a char * onto the message */
-> ++				if (! dbus_message_iter_append_basic (&output_iter, DBUS_TYPE_STRIN=
-G, &output_element)) {
-> ++					dbus_message_iter_abandon_container (&iter, &output_iter);
-> ++					dbus_message_unref (reply);
-> ++					reply =3D NULL;
-> ++					goto enomem;
-> ++				}
-> + 			}
-> + 		}
-> +=20
-> diff --git a/meta-oe/recipes-support/libnih/libnih_1.0.3.bb b/meta-oe/rec=
-ipes-support/libnih/libnih_1.0.3.bb
-> new file mode 100644
-> index 0000000..b5e5e12
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libnih/libnih_1.0.3.bb
-> @@ -0,0 +1,40 @@
-> +# Copyright (c) 2013  LG Electronics, Inc.
-> +
-> +SUMMARY =3D "libnih library"
-> +DESCRIPTION =3D "libnih is a small library for C application development=
- \
-> +    containing functions that, despite its name, are not implemented \
-> +    elsewhere in the standard library set. \
-> +    \
-> +    libnih is roughly equivalent to other C libraries such as glib, \
-> +    except that its focus is on a small size and intended for \
-> +    applications that sit very low in the software stack, especially \
-> +    outside of /usr. \
-> +    \
-> +    It expressly does not reimplement functions that already exist in \
-> +    libraries ordinarily shipped in /lib such libc6, and does not do \
-> +    foolish things like invent arbitrary typedefs for perfectly good C t=
-ypes."
-> +
-> +SECTION =3D "libs"
-> +
-> +LICENSE =3D "GPL-2.0"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
-bbe"
-> +
-> +DEPENDS =3D "dbus libnih-native"
-> +DEPENDS_class-native =3D "dbus-native"
-> +
-> +PR =3D "r0"
-> +
-> +SRC_URI =3D "https://launchpad.net/${BPN}/1.0/${PV}/+download/${BP}.tar.=
-gz;name=3Dtarball"
-> +SRC_URI +=3D "file://libnih_1.0.3-4ubuntu16.patch;name=3Dpatch"
+diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+index b66c8a5..fe75ce4 100644
+--- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
++++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+@@ -30,12 +30,15 @@ SRC_URI += "\
+     file://0005-configure-bump-path-length-from-256-to-512-character.patch \
+     file://0006-QOpenGLPaintDevice-sub-area-support.patch \
+     file://0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch \
++    file://0008-configure-paths-for-target-qmake-properly.patch \
++    file://0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch \
++    file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
+ "
+ 
+ # common for qtbase-native and nativesdk-qtbase
+ SRC_URI += " \
+-    file://0009-Always-build-uic.patch \
+-    file://0010-Add-external-hostbindir-option-for-native-sdk.patch \
++    file://0011-Always-build-uic.patch \
++    file://0012-Add-external-hostbindir-option-for-native-sdk.patch \
+ "
+ 
+ # CMake's toolchain configuration of nativesdk-qtbase
+@@ -257,4 +260,4 @@ fakeroot do_generate_qt_environment_file() {
+ 
+ addtask generate_qt_environment_file after do_install before do_package
+ 
+-SRCREV = "84330007e12122bf1b690a4e68b5ef8e973c7882"
++SRCREV = "69b43e74d78e050cf5e40197acafa4bc9f90c0bd"
+diff --git a/recipes-qt/qt5/qt3d/0001-Allow-a-tools-only-build.patch b/recipes-qt/qt5/qt3d/0001-Allow-a-tools-only-build.patch
+index 8d69ca3..bb337fd 100644
+--- a/recipes-qt/qt5/qt3d/0001-Allow-a-tools-only-build.patch
++++ b/recipes-qt/qt5/qt3d/0001-Allow-a-tools-only-build.patch
+@@ -1,4 +1,4 @@
+-From 16a6bfc8f93f8d4e0d4a6e09cdfb0c4a8412e38f Mon Sep 17 00:00:00 2001
++From befe1fd63c485b8d10d1b9f1eca3368f3ee0042b Mon Sep 17 00:00:00 2001
+ From: Samuli Piippo <samuli.piippo@theqtcompany.com>
+ Date: Wed, 10 Feb 2016 09:02:09 +0200
+ Subject: [PATCH] Allow a tools-only build
+diff --git a/recipes-qt/qt5/qt3d_git.bb b/recipes-qt/qt5/qt3d_git.bb
+index c3a5bc5..9708ec9 100644
+--- a/recipes-qt/qt5/qt3d_git.bb
++++ b/recipes-qt/qt5/qt3d_git.bb
+@@ -13,7 +13,7 @@ DEPENDS_class-target += "qtdeclarative qt3d-native"
+ 
+ SRC_URI += " \
+     file://0001-Allow-a-tools-only-build.patch \
+-    "
++"
+ 
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG_class-native ??= "tools-only"
+@@ -27,6 +27,6 @@ FILES_${PN}-qmlplugins += " \
+     ${OE_QMAKE_PATH_QML}/*/*/*.obj \
+ "
+ 
+-SRCREV = "be29a39ede4355a5aa18e93c27a75a1c3f81bde4"
++SRCREV = "c3fdb888fbd94de0f6b7b1a6859cba8132ecc93d"
+ 
+ BBCLASSEXTEND += "native nativesdk"
+diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
+index ad0abe8..e1e25ba 100644
+--- a/recipes-qt/qt5/qt5-git.inc
++++ b/recipes-qt/qt5/qt5-git.inc
+@@ -12,4 +12,4 @@ SRC_URI = " \
+ 
+ S = "${WORKDIR}/git"
+ 
+-PV = "5.6.99+5.7.0-beta+git${SRCPV}"
++PV = "5.7.0+git${SRCPV}"
+diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
+index 426e0ae..6b94f48 100644
+--- a/recipes-qt/qt5/qtbase-native_git.bb
++++ b/recipes-qt/qt5/qtbase-native_git.bb
+@@ -24,12 +24,14 @@ SRC_URI += "\
+     file://0006-QOpenGLPaintDevice-sub-area-support.patch \
+     file://0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch \
+     file://0008-configure-paths-for-target-qmake-properly.patch \
++    file://0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch \
++    file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
+ "
+ 
+ # common for qtbase-native and nativesdk-qtbase
+ SRC_URI += " \
+-    file://0009-Always-build-uic.patch \
+-    file://0010-Add-external-hostbindir-option-for-native-sdk.patch \
++    file://0011-Always-build-uic.patch \
++    file://0012-Add-external-hostbindir-option-for-native-sdk.patch \
+ "
+ 
+ CLEANBROKEN = "1"
+@@ -117,4 +119,4 @@ do_install() {
+     ln -sf syncqt.pl ${D}${OE_QMAKE_PATH_QT_BINS}/syncqt
+ }
+ 
+-SRCREV = "84330007e12122bf1b690a4e68b5ef8e973c7882"
++SRCREV = "69b43e74d78e050cf5e40197acafa4bc9f90c0bd"
+diff --git a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch b/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
+index af85fe9..b28ca8b 100644
+--- a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
++++ b/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
+@@ -1,4 +1,4 @@
+-From 79f881eaa0a4a980963ce4ea1bc4c5e26c640c9a Mon Sep 17 00:00:00 2001
++From d6c75f788e15fb552eacb08359698a1342a97f20 Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Mon, 15 Apr 2013 04:29:32 +0200
+ Subject: [PATCH] Add linux-oe-g++ platform
+@@ -56,10 +56,10 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+  create mode 100644 mkspecs/linux-oe-g++/qplatformdefs.h
+ 
+ diff --git a/configure b/configure
+-index b65c564..ffe6931 100755
++index 0ba0c31..052872e 100755
+ --- a/configure
+ +++ b/configure
+-@@ -339,6 +339,16 @@ getQMakeConf()
++@@ -333,6 +333,16 @@ getQMakeConf()
+      getSingleQMakeVariable "$1" "$specvals"
+  }
+  
+@@ -76,8 +76,8 @@ index b65c564..ffe6931 100755
+  getXQMakeConf()
+  {
+      if [ -z "$xspecvals" ]; then
+-@@ -348,6 +358,16 @@ getXQMakeConf()
+-     getSingleQMakeVariable "$1" "$xspecvals"
++@@ -357,6 +367,16 @@ testXConfig()
++     esac
+  }
+  
+ +# OE qmake.conf is reading some variables from shell env
+@@ -93,7 +93,7 @@ index b65c564..ffe6931 100755
+  compilerSupportsFlag()
+  {
+      cat >conftest.cpp <<EOF
+-@@ -569,24 +589,14 @@ fi
++@@ -578,24 +598,14 @@ fi
+  # initalize variables
+  #-------------------------------------------------------------------------------
+  
+@@ -124,7 +124,7 @@ index b65c564..ffe6931 100755
+  fi'`
+      eval "$cmd"
+  done
+-@@ -3428,7 +3438,7 @@ if [ "$XPLATFORM_MAC" = "yes" ]; then
++@@ -3443,7 +3453,7 @@ if [ "$XPLATFORM_MAC" = "yes" ]; then
+      [ "$CFG_GTK" = "auto" ] && CFG_GTK=no
+  fi
+  
+@@ -133,7 +133,7 @@ index b65c564..ffe6931 100755
+  
+  TEST_COMPILER=$QMAKE_CONF_COMPILER
+  
+-@@ -3479,7 +3489,7 @@ if [ "$XPLATFORM_ANDROID" = "yes" ] ; then
++@@ -3494,7 +3504,7 @@ if [ "$XPLATFORM_ANDROID" = "yes" ] ; then
+      fi
+  fi
+  
+@@ -142,7 +142,7 @@ index b65c564..ffe6931 100755
+  
+  GCC_MACHINE_DUMP=
+  case "$TEST_COMPILER" in *g++) GCC_MACHINE_DUMP=$($TEST_COMPILER -dumpmachine);; esac
+-@@ -3878,6 +3888,14 @@ setBootstrapVariable()
++@@ -3893,6 +3903,14 @@ setBootstrapVariable()
+      getQMakeConf "$1" | echo ${2-$1} = `if [ -n "$3" ]; then sed "$3"; else cat; fi` >> "$mkfile"
+  }
+  
+@@ -157,7 +157,7 @@ index b65c564..ffe6931 100755
+  # build qmake
+  if true; then ###[ '!' -f "$outpath/bin/qmake" ];
+      echo "Creating qmake..."
+-@@ -3977,6 +3995,7 @@ if true; then ###[ '!' -f "$outpath/bin/qmake" ];
++@@ -3986,6 +4004,7 @@ if true; then ###[ '!' -f "$outpath/bin/qmake" ];
+              EXEEXT=
+              ;;
+          esac
+@@ -166,10 +166,10 @@ index b65c564..ffe6931 100755
+              echo "COCOA_LFLAGS =-framework Foundation -framework CoreServices" >>"$mkfile"
+              echo "CARBON_LFLAGS =-framework ApplicationServices" >>"$mkfile"
+ diff --git a/mkspecs/features/configure.prf b/mkspecs/features/configure.prf
+-index 92c288c..f3019e0 100644
++index a890c7f..151630c 100644
+ --- a/mkspecs/features/configure.prf
+ +++ b/mkspecs/features/configure.prf
+-@@ -63,14 +63,14 @@ defineTest(qtCompileTest) {
++@@ -71,14 +71,14 @@ defineTest(qtCompileTest) {
+      }
+  
+      # Clean up after previous run
+diff --git a/recipes-qt/qt5/qtbase/0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch b/recipes-qt/qt5/qtbase/0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch
+index 54895df..699e385 100644
+--- a/recipes-qt/qt5/qtbase/0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch
++++ b/recipes-qt/qt5/qtbase/0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch
+@@ -1,4 +1,4 @@
+-From aaa1675d3c9f0d100f596ca4e2ddf3bd25fae5b6 Mon Sep 17 00:00:00 2001
++From e5f8607cfa1d2bcc798686cdf7c87ea0c6577d30 Mon Sep 17 00:00:00 2001
+ From: Holger Freyther <zecke@selfish.org>
+ Date: Wed, 26 Sep 2012 17:22:30 +0200
+ Subject: [PATCH] qlibraryinfo: allow to set qt.conf from the outside using the
+diff --git a/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch b/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch
+index 11cd97b..381cde2 100644
+--- a/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch
++++ b/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch
+@@ -1,4 +1,4 @@
+-From 502b95b840a5f79e5a68e9bd5b10dbdc92485f1f Mon Sep 17 00:00:00 2001
++From c1dc6165d6a085f162ed32ef5697f645019f9ee0 Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Sat, 6 Apr 2013 13:15:07 +0200
+ Subject: [PATCH] Add -external-hostbindir option
+@@ -39,10 +39,10 @@ Change-Id: Iacaa1c5531cd6dcc094891610c351673db55d7b2
+  7 files changed, 44 insertions(+), 8 deletions(-)
+ 
+ diff --git a/configure b/configure
+-index ffe6931..5aa87b4 100755
++index 052872e..1fcbb3a 100755
+ --- a/configure
+ +++ b/configure
+-@@ -825,6 +825,7 @@ QT_HOST_BINS=
++@@ -834,6 +834,7 @@ QT_HOST_BINS=
+  QT_HOST_LIBS=
+  QT_HOST_DATA=
+  QT_EXT_PREFIX=
+@@ -50,7 +50,7 @@ index ffe6931..5aa87b4 100755
+  
+  #flags for SQL drivers
+  QT_CFLAGS_PSQL=
+-@@ -944,6 +945,7 @@ while [ "$#" -gt 0 ]; do
++@@ -953,6 +954,7 @@ while [ "$#" -gt 0 ]; do
+      -testsdir| \
+      -hostdatadir| \
+      -hostbindir| \
+@@ -58,7 +58,7 @@ index ffe6931..5aa87b4 100755
+      -hostlibdir| \
+      -extprefix| \
+      -sysroot| \
+-@@ -1176,6 +1178,9 @@ while [ "$#" -gt 0 ]; do
++@@ -1185,6 +1187,9 @@ while [ "$#" -gt 0 ]; do
+      extprefix)
+          QT_EXT_PREFIX="$VAL"
+          ;;
+@@ -68,7 +68,7 @@ index ffe6931..5aa87b4 100755
+      pkg-config)
+          if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
+              CFG_PKGCONFIG="$VAL"
+-@@ -2438,6 +2443,10 @@ Installation options:
++@@ -2447,6 +2452,10 @@ Installation options:
+      -hostdatadir <dir> . Data used by qmake will be installed to <dir>
+                           (default HOSTPREFIX)
+  
+@@ -79,7 +79,7 @@ index ffe6931..5aa87b4 100755
+  Configure options:
+  
+   The defaults (*) are usually acceptable. A plus (+) denotes a default value
+-@@ -3196,6 +3205,11 @@ fi
++@@ -3209,6 +3218,11 @@ fi
+  # command line and environment validation
+  #-------------------------------------------------------------------------------
+  
+@@ -92,7 +92,7 @@ index ffe6931..5aa87b4 100755
+  CFG_QCONFIG_PATH=$relpath/src/corelib/global/qconfig-${CFG_QCONFIG}.h
+  case "$CFG_QCONFIG" in
+ diff --git a/mkspecs/features/qt_functions.prf b/mkspecs/features/qt_functions.prf
+-index cfac583..41ca7f1 100644
++index 54641ce..7d7baa4 100644
+ --- a/mkspecs/features/qt_functions.prf
+ +++ b/mkspecs/features/qt_functions.prf
+ @@ -71,7 +71,11 @@ defineTest(qtHaveModule) {
+diff --git a/recipes-qt/qt5/qtbase/0004-qt_module-Fix-pkgconfig-and-libtool-replacements.patch b/recipes-qt/qt5/qtbase/0004-qt_module-Fix-pkgconfig-and-libtool-replacements.patch
+index b3677eb..e24d475 100644
+--- a/recipes-qt/qt5/qtbase/0004-qt_module-Fix-pkgconfig-and-libtool-replacements.patch
++++ b/recipes-qt/qt5/qtbase/0004-qt_module-Fix-pkgconfig-and-libtool-replacements.patch
+@@ -1,4 +1,4 @@
+-From ac2f94a42878c1500e1ab6bbbec7834d9e5edfbb Mon Sep 17 00:00:00 2001
++From d83234c35de8f52ce3bf6eb262ad8e6af467ac34 Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Sat, 27 Apr 2013 23:15:37 +0200
+ Subject: [PATCH] qt_module: Fix pkgconfig and libtool replacements
+@@ -68,7 +68,7 @@ Signed-off-by: Jonathan Liu <net147@gmail.com>
+  2 files changed, 14 insertions(+), 1 deletion(-)
+ 
+ diff --git a/mkspecs/features/qt.prf b/mkspecs/features/qt.prf
+-index 03ec36a..2ab192b 100644
++index 71e96b4..0d7535c 100644
+ --- a/mkspecs/features/qt.prf
+ +++ b/mkspecs/features/qt.prf
+ @@ -317,6 +317,19 @@ contains(TEMPLATE, .*app) {
+@@ -92,7 +92,7 @@ index 03ec36a..2ab192b 100644
+  contains(QT_CONFIG, static) {
+      QT_PLUGIN_VERIFY += QTPLUGIN
+ diff --git a/mkspecs/features/qt_common.prf b/mkspecs/features/qt_common.prf
+-index c1c668a..67d916d 100644
++index b367bc1..209cc43 100644
+ --- a/mkspecs/features/qt_common.prf
+ +++ b/mkspecs/features/qt_common.prf
+ @@ -38,7 +38,7 @@ contains(TEMPLATE, .*lib) {
+diff --git a/recipes-qt/qt5/qtbase/0005-configure-bump-path-length-from-256-to-512-character.patch b/recipes-qt/qt5/qtbase/0005-configure-bump-path-length-from-256-to-512-character.patch
+index 404c068..d455d2c 100644
+--- a/recipes-qt/qt5/qtbase/0005-configure-bump-path-length-from-256-to-512-character.patch
++++ b/recipes-qt/qt5/qtbase/0005-configure-bump-path-length-from-256-to-512-character.patch
+@@ -1,4 +1,4 @@
+-From d108da324156b9d709c106c1698bd7466cb26f69 Mon Sep 17 00:00:00 2001
++From 60f490b57faf979a912074506a75c74767a27d3b Mon Sep 17 00:00:00 2001
+ From: Denys Dmytriyenko <denys@ti.com>
+ Date: Tue, 25 Aug 2015 10:05:15 -0400
+ Subject: [PATCH] configure: bump path length from 256 to 512 characters
+@@ -14,10 +14,10 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+  1 file changed, 3 insertions(+), 3 deletions(-)
+ 
+ diff --git a/configure b/configure
+-index 5aa87b4..17bca95 100755
++index 1fcbb3a..f49a674 100755
+ --- a/configure
+ +++ b/configure
+-@@ -3832,10 +3832,10 @@ static const char qt_configure_licensed_products_str [256 + 12] = "qt_lcnsprod=$
++@@ -3847,10 +3847,10 @@ static const char qt_configure_licensed_products_str [256 + 12] = "qt_lcnsprod=$
+  static const char qt_configure_installation          [12+11]    = "qt_instdate=2012-12-20";
+  
+  /* Installation Info */
+diff --git a/recipes-qt/qt5/qtbase/0006-QOpenGLPaintDevice-sub-area-support.patch b/recipes-qt/qt5/qtbase/0006-QOpenGLPaintDevice-sub-area-support.patch
+index 92ecb13..c58b1d9 100644
+--- a/recipes-qt/qt5/qtbase/0006-QOpenGLPaintDevice-sub-area-support.patch
++++ b/recipes-qt/qt5/qtbase/0006-QOpenGLPaintDevice-sub-area-support.patch
+@@ -1,4 +1,4 @@
+-From 17450df40d6c163c85b66c1cc485317fd6f9a9c9 Mon Sep 17 00:00:00 2001
++From f207997b59f1381cf3523521209cb435b1a73f25 Mon Sep 17 00:00:00 2001
+ From: Jani Hautakangas <jani.hautakangas@ixonos.com>
+ Date: Thu, 16 May 2013 09:52:07 +0300
+ Subject: [PATCH] QOpenGLPaintDevice sub-area support
+@@ -140,10 +140,10 @@ index c9f3282..7c0616b 100644
+      QOpenGLContext *ctx;
+      EngineMode mode;
+ diff --git a/src/gui/opengl/qopengltextureglyphcache.cpp b/src/gui/opengl/qopengltextureglyphcache.cpp
+-index 8f69095..cf82ee7 100644
++index 9a7b1eb..6f301f8 100644
+ --- a/src/gui/opengl/qopengltextureglyphcache.cpp
+ +++ b/src/gui/opengl/qopengltextureglyphcache.cpp
+-@@ -316,7 +316,7 @@ void QOpenGLTextureGlyphCache::resizeTextureData(int width, int height)
++@@ -403,7 +403,7 @@ void QOpenGLTextureGlyphCache::resizeTextureData(int width, int height)
+      funcs->glBindFramebuffer(GL_FRAMEBUFFER, (GLuint)oldFbo);
+  
+      if (pex != 0) {
+diff --git a/recipes-qt/qt5/qtbase/0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch b/recipes-qt/qt5/qtbase/0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch
+index 4cc8ce6..4ea4061 100644
+--- a/recipes-qt/qt5/qtbase/0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch
++++ b/recipes-qt/qt5/qtbase/0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch
+@@ -1,4 +1,4 @@
+-From edb00662de57d0b6ddb39f80800cf3d20c6c07fd Mon Sep 17 00:00:00 2001
++From 7ab6ff7ba20a3173c10a76814d3c9ed312c80627 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Mon, 8 Jun 2015 13:59:25 -0700
+ Subject: [PATCH] linux-oe-g++: Invert conditional for defining QT_SOCKLEN_T
+diff --git a/recipes-qt/qt5/qtbase/0008-configure-paths-for-target-qmake-properly.patch b/recipes-qt/qt5/qtbase/0008-configure-paths-for-target-qmake-properly.patch
+index 106486f..bac1841 100644
+--- a/recipes-qt/qt5/qtbase/0008-configure-paths-for-target-qmake-properly.patch
++++ b/recipes-qt/qt5/qtbase/0008-configure-paths-for-target-qmake-properly.patch
+@@ -1,4 +1,4 @@
+-From e1bc7a14ae9e433112006b1b6944f8b0e3f619ab Mon Sep 17 00:00:00 2001
++From 0f4ab3e27938002134e8f3f9eb12cf9c50b2ab95 Mon Sep 17 00:00:00 2001
+ From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+ Date: Fri, 13 Nov 2015 12:36:11 +0100
+ Subject: [PATCH] configure paths for target qmake properly
+@@ -19,10 +19,10 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+  1 file changed, 19 insertions(+), 4 deletions(-)
+ 
+ diff --git a/configure b/configure
+-index 17bca95..6abdd6b 100755
++index f49a674..d30d0ca 100755
+ --- a/configure
+ +++ b/configure
+-@@ -3777,8 +3777,13 @@ if [ "$CFG_COMPILE_EXAMPLES" = "yes" ]; then
++@@ -3792,8 +3792,13 @@ if [ "$CFG_COMPILE_EXAMPLES" = "yes" ]; then
+      QMAKE_CONFIG="$QMAKE_CONFIG compile_examples"
+  fi
+  
+@@ -38,7 +38,7 @@ index 17bca95..6abdd6b 100755
+  
+  QT_CONFIGURE_STR_OFF=0
+  
+-@@ -3811,7 +3816,11 @@ QT_CONFIGURE_STRS_ALL=$QT_CONFIGURE_STRS
++@@ -3826,7 +3831,11 @@ QT_CONFIGURE_STRS_ALL=$QT_CONFIGURE_STRS
+  
+  QT_CONFIGURE_STR_OFFSETS=
+  QT_CONFIGURE_STRS=
+@@ -51,7 +51,7 @@ index 17bca95..6abdd6b 100755
+  addConfStr "$QT_REL_HOST_BINS"
+  addConfStr "$QT_REL_HOST_LIBS"
+  addConfStr "$QT_REL_HOST_DATA"
+-@@ -3823,6 +3832,12 @@ addConfStr "$shortspec"
++@@ -3838,6 +3847,12 @@ addConfStr "$shortspec"
+  #-------------------------------------------------------------------------------
+  [ -d "$outpath/src/corelib/global" ] || mkdir -p "$outpath/src/corelib/global"
+  
+@@ -64,7 +64,7 @@ index 17bca95..6abdd6b 100755
+  cat > "$outpath/src/corelib/global/qconfig.cpp.new" <<EOF
+  /* License Info */
+  static const char qt_configure_licensee_str          [256 + 12] = "qt_lcnsuser=$Licensee";
+-@@ -3835,7 +3850,7 @@ static const char qt_configure_installation          [12+11]    = "qt_instdate=2
++@@ -3850,7 +3865,7 @@ static const char qt_configure_installation          [12+11]    = "qt_instdate=2
+  static const char qt_configure_prefix_path_str       [512 + 12] = "qt_prfxpath=$QT_INSTALL_PREFIX";
+  #ifdef QT_BUILD_QMAKE
+  static const char qt_configure_ext_prefix_path_str   [512 + 12] = "qt_epfxpath=$QT_EXT_PREFIX";
+diff --git a/recipes-qt/qt5/qtbase/0011-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch b/recipes-qt/qt5/qtbase/0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch
+similarity index 94%
+rename from recipes-qt/qt5/qtbase/0011-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch
+rename to recipes-qt/qt5/qtbase/0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch
+index 3c0b9e6..23d0ab3 100644
+--- a/recipes-qt/qt5/qtbase/0011-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch
++++ b/recipes-qt/qt5/qtbase/0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch
+@@ -1,4 +1,4 @@
+-From d623d2c2ed49c4dc57fb0dde1faab20976dfc3dc Mon Sep 17 00:00:00 2001
++From 91b87aed0a2a96b0d6b54757ea13c75ee648a9b0 Mon Sep 17 00:00:00 2001
+ From: Julien Gueytat <contact@jgueytat.fr>
+ Date: Wed, 27 Apr 2016 19:24:39 +0200
+ Subject: [PATCH] Reorder EGL libraries from pkgconfig and defaults:
+@@ -59,10 +59,10 @@ index d8b1c3e..06f7241 100644
+ +
+ +CONFIG -= qt
+ diff --git a/configure b/configure
+-index 2e99d39..072838b 100755
++index d30d0ca..14f348c 100755
+ --- a/configure
+ +++ b/configure
+-@@ -5803,7 +5803,9 @@ if [ "$CFG_EGL" != "no" ]; then
++@@ -5891,7 +5891,9 @@ if [ "$CFG_EGL" != "no" ]; then
+          QMakeVar set QMAKE_INCDIR_EGL "$QMAKE_INCDIR_EGL"
+          QMakeVar set QMAKE_LIBS_EGL "$QMAKE_LIBS_EGL"
+          QMakeVar set QMAKE_CFLAGS_EGL "`echo " $QMAKE_CFLAGS_EGL " | sed -e 's, -I[^ ]* , ,g;s,^ ,,;s, $,,'`"
+@@ -73,7 +73,7 @@ index 2e99d39..072838b 100755
+      if compileTest qpa/egl "EGL" $QMAKE_CFLAGS_EGL $QMAKE_LIBS_EGL; then
+          CFG_EGL=yes
+          if compileTest qpa/egl-x11 "EGL-X11" $QMAKE_CFLAGS_EGL $QMAKE_LIBS_EGL; then
+-@@ -5826,8 +5828,18 @@ fi
++@@ -5914,8 +5916,18 @@ fi
+  if [ "$CFG_EGLFS" != "no" ]; then
+      if [ "$XPLATFORM_QNX" = "no" ] && [ "$CFG_OPENGL" != "no" ]; then
+          CFG_EGLFS="$CFG_EGL"
+@@ -93,6 +93,3 @@ index 2e99d39..072838b 100755
+              CFG_EGLFS_BRCM=yes
+          else
+              CFG_EGLFS_BRCM=no
+--- 
+-1.9.1
+-
+diff --git a/recipes-qt/qt5/qtbase/0011-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch b/recipes-qt/qt5/qtbase/0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
+similarity index 96%
+rename from recipes-qt/qt5/qtbase/0011-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
+rename to recipes-qt/qt5/qtbase/0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
+index 7a24459..1d0ea3e 100644
+--- a/recipes-qt/qt5/qtbase/0011-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
++++ b/recipes-qt/qt5/qtbase/0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
+@@ -1,4 +1,4 @@
+-From f5a949e17aa8b37491fbc414c38557c9920fa1e5 Mon Sep 17 00:00:00 2001
++From b397a71531e31383ee86135e21072d033480f5bc Mon Sep 17 00:00:00 2001
+ From: Pascal Bach <pascal.bach@siemens.com>
+ Date: Wed, 11 May 2016 15:20:41 +0200
+ Subject: [PATCH] Pretend Qt5 wasn't found if OE_QMAKE_PATH_EXTERNAL_HOST_BINS
+@@ -24,7 +24,6 @@ Upstream-Status: Pending
+     - 0010-Add-external-hostbindir-option-for-native-sdk.patch
+ 
+ Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+-
+ ---
+  mkspecs/features/data/cmake/Qt5BasicConfig.cmake.in | 5 +++++
+  src/corelib/Qt5Config.cmake.in                      | 5 +++++
+@@ -62,6 +61,3 @@ index a872d0e..233d663 100644
+  if (NOT Qt5_FIND_COMPONENTS)
+      set(Qt5_NOT_FOUND_MESSAGE \"The Qt5 package requires at least one component\")
+      set(Qt5_FOUND False)
+--- 
+-2.1.4
+-
+diff --git a/recipes-qt/qt5/qtbase/0009-Always-build-uic.patch b/recipes-qt/qt5/qtbase/0011-Always-build-uic.patch
+similarity index 81%
+rename from recipes-qt/qt5/qtbase/0009-Always-build-uic.patch
+rename to recipes-qt/qt5/qtbase/0011-Always-build-uic.patch
+index bee10d5..fb3d316 100644
+--- a/recipes-qt/qt5/qtbase/0009-Always-build-uic.patch
++++ b/recipes-qt/qt5/qtbase/0011-Always-build-uic.patch
+@@ -1,4 +1,4 @@
+-From 14b037afc3fa6992733891205a46b44991402afb Mon Sep 17 00:00:00 2001
++From 1b94b0f2579edcf870bc953f820af8fb2ec4376f Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Sat, 16 Nov 2013 00:32:30 +0100
+ Subject: [PATCH] Always build uic
+@@ -14,10 +14,10 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/src/src.pro b/src/src.pro
+-index 4a165a2..0f84791 100644
++index 3d18540..d128b3a 100644
+ --- a/src/src.pro
+ +++ b/src/src.pro
+-@@ -180,7 +180,7 @@ contains(QT_CONFIG, concurrent):SUBDIRS += src_concurrent
++@@ -195,7 +195,7 @@ contains(QT_CONFIG, concurrent):SUBDIRS += src_concurrent
+          }
+      }
+  }
+diff --git a/recipes-qt/qt5/qtbase/0010-Add-external-hostbindir-option-for-native-sdk.patch b/recipes-qt/qt5/qtbase/0012-Add-external-hostbindir-option-for-native-sdk.patch
+similarity index 93%
+rename from recipes-qt/qt5/qtbase/0010-Add-external-hostbindir-option-for-native-sdk.patch
+rename to recipes-qt/qt5/qtbase/0012-Add-external-hostbindir-option-for-native-sdk.patch
+index 949b323..1ab8abe 100644
+--- a/recipes-qt/qt5/qtbase/0010-Add-external-hostbindir-option-for-native-sdk.patch
++++ b/recipes-qt/qt5/qtbase/0012-Add-external-hostbindir-option-for-native-sdk.patch
+@@ -1,4 +1,4 @@
+-From 6df8d620081bd78319fc97846e52b1a83042401a Mon Sep 17 00:00:00 2001
++From cb66a3193b1b1b8b402548b615c3675c4adcf13a Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Sat, 6 Apr 2013 13:15:07 +0200
+ Subject: [PATCH] Add -external-hostbindir option for native(sdk)
+@@ -37,10 +37,10 @@ Conflicts:
+  5 files changed, 16 insertions(+), 1 deletion(-)
+ 
+ diff --git a/configure b/configure
+-index 6abdd6b..7c5a066 100755
++index 14f348c..61f22e8 100755
+ --- a/configure
+ +++ b/configure
+-@@ -3824,6 +3824,7 @@ fi
++@@ -3839,6 +3839,7 @@ fi
+  addConfStr "$QT_REL_HOST_BINS"
+  addConfStr "$QT_REL_HOST_LIBS"
+  addConfStr "$QT_REL_HOST_DATA"
+@@ -94,10 +94,10 @@ index 362d47d..a2326e2 100644
+          HostSpecPath,
+          HostPrefixPath,
+ diff --git a/tools/configure/configureapp.cpp b/tools/configure/configureapp.cpp
+-index 7fd0b98..47fa6c3 100644
++index 0fa205b..2921e2b 100644
+ --- a/tools/configure/configureapp.cpp
+ +++ b/tools/configure/configureapp.cpp
+-@@ -1202,6 +1202,13 @@ void Configure::parseCmdLine()
++@@ -1219,6 +1219,13 @@ void Configure::parseCmdLine()
+              dictionary[ "QT_EXT_PREFIX" ] = configCmdLine.at(i);
+          }
+  
+@@ -111,7 +111,7 @@ index 7fd0b98..47fa6c3 100644
+          else if (configCmdLine.at(i) == "-make-tool") {
+              ++i;
+              if (i == argCount)
+-@@ -4121,6 +4128,9 @@ void Configure::generateQConfigCpp()
++@@ -4171,6 +4178,9 @@ void Configure::generateQConfigCpp()
+  
+      if (dictionary["QT_REL_HOST_DATA"].isEmpty())
+          dictionary["QT_REL_HOST_DATA"] = haveHpx ? "." : dictionary["QT_REL_INSTALL_ARCHDATA"];
+@@ -121,7 +121,7 @@ index 7fd0b98..47fa6c3 100644
+  
+      confStringOff = 0;
+      addConfStr(0, dictionary["QT_REL_INSTALL_DOCS"]);
+-@@ -4140,6 +4150,7 @@ void Configure::generateQConfigCpp()
++@@ -4190,6 +4200,7 @@ void Configure::generateQConfigCpp()
+      addConfStr(1, dictionary["QT_REL_HOST_BINS"]);
+      addConfStr(1, dictionary["QT_REL_HOST_LIBS"]);
+      addConfStr(1, dictionary["QT_REL_HOST_DATA"]);
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index a2a865d..8190456 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -20,8 +20,8 @@ SRC_URI += "\
+     file://0006-QOpenGLPaintDevice-sub-area-support.patch \
+     file://0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch \
+     file://0008-configure-paths-for-target-qmake-properly.patch \
+-    file://0011-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch \
+-    file://0011-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
++    file://0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch \
++    file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
+ "
+ 
+ DEPENDS += "qtbase-native"
+@@ -221,4 +221,4 @@ do_install_append() {
+ 
+ RRECOMMENDS_${PN}-plugins += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libx11-locale', '', d)}"
+ 
+-SRCREV = "84330007e12122bf1b690a4e68b5ef8e973c7882"
++SRCREV = "69b43e74d78e050cf5e40197acafa4bc9f90c0bd"
+diff --git a/recipes-qt/qt5/qtcanvas3d_git.bb b/recipes-qt/qt5/qtcanvas3d_git.bb
+index a1c8f7f..8cf316b 100644
+--- a/recipes-qt/qt5/qtcanvas3d_git.bb
++++ b/recipes-qt/qt5/qtcanvas3d_git.bb
+@@ -10,4 +10,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS = "qtdeclarative"
+ 
+-SRCREV = "32404e27101c5ec81b4ab965faf38263429bbc5a"
++SRCREV = "1568c60d2a0d1758acfeec9f002af7ff5b4d28ee"
+diff --git a/recipes-qt/qt5/qtcharts_git.bb b/recipes-qt/qt5/qtcharts_git.bb
+index 99d1471..21f6f13 100644
+--- a/recipes-qt/qt5/qtcharts_git.bb
++++ b/recipes-qt/qt5/qtcharts_git.bb
+@@ -8,4 +8,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtbase qtdeclarative qtmultimedia"
+ 
+-SRCREV = "8a781841812a42ed728a76c0dcdcaa6196eac44e"
++SRCREV = "03a6177a3223f928a5f329c8b1fc4d5fe376deed"
+diff --git a/recipes-qt/qt5/qtconnectivity_git.bb b/recipes-qt/qt5/qtconnectivity_git.bb
+index b84ad04..2920dda 100644
+--- a/recipes-qt/qt5/qtconnectivity_git.bb
++++ b/recipes-qt/qt5/qtconnectivity_git.bb
+@@ -25,4 +25,4 @@ do_configure_prepend() {
+     sed -i 's/^qtCompileTest(bluez)/OE_BLUEZ_ENABLED:qtCompileTest(bluez)/g' ${S}/qtconnectivity.pro
+ }
+ 
+-SRCREV = "f8759f683cfc433c432059e1160d2ab657baaec6"
++SRCREV = "8755a1f2460fa523782e27b6ca7a430a0176ac61"
+diff --git a/recipes-qt/qt5/qtdatavis3d_git.bb b/recipes-qt/qt5/qtdatavis3d_git.bb
+index ccdd1b3..50a0bcc 100644
+--- a/recipes-qt/qt5/qtdatavis3d_git.bb
++++ b/recipes-qt/qt5/qtdatavis3d_git.bb
+@@ -8,4 +8,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtbase qtdeclarative qtmultimedia qtxmlpatterns"
+ 
+-SRCREV = "2f6074fde0ec050c77f881e0d2ce265fa93a0fcc"
++SRCREV = "d6a8da66dc3c141621c9be4b7509a6e43c60e15c"
+diff --git a/recipes-qt/qt5/qtdeclarative/0001-qmltestexample-fix-link.patch b/recipes-qt/qt5/qtdeclarative/0001-qmltestexample-fix-link.patch
+index 1a8a5f0..b71e3a4 100644
+--- a/recipes-qt/qt5/qtdeclarative/0001-qmltestexample-fix-link.patch
++++ b/recipes-qt/qt5/qtdeclarative/0001-qmltestexample-fix-link.patch
+@@ -1,4 +1,4 @@
+-From c978b2ed0e1ce48b2d4a4a6eb660927bc88aed57 Mon Sep 17 00:00:00 2001
++From 0d742f34ef91fb4e35c68b1274f68daef594f0c3 Mon Sep 17 00:00:00 2001
+ From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+ Date: Sun, 26 May 2013 14:26:19 +0200
+ Subject: [PATCH] qmltestexample: fix link
+@@ -47,7 +47,7 @@ index c9d78e2..5861613 100644
+  SOURCES += tst_qjsengine.cpp
+  RESOURCES += qjsengine.qrc
+ diff --git a/tests/auto/qmltest/qmltest.pro b/tests/auto/qmltest/qmltest.pro
+-index 54db7a7..8c6986c 100644
++index 52fd6bf..843cae6 100644
+ --- a/tests/auto/qmltest/qmltest.pro
+ +++ b/tests/auto/qmltest/qmltest.pro
+ @@ -4,6 +4,7 @@ CONFIG += qmltestcase
+diff --git a/recipes-qt/qt5/qtdeclarative/0002-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch b/recipes-qt/qt5/qtdeclarative/0002-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
+index dc707ab..d0d0f8e 100644
+--- a/recipes-qt/qt5/qtdeclarative/0002-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
++++ b/recipes-qt/qt5/qtdeclarative/0002-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
+@@ -1,4 +1,4 @@
+-From 493e91c9c3527d577f7051de9a582a178ca43fcf Mon Sep 17 00:00:00 2001
++From 6b1cef42f828cd2374739aa7e3b3800d579315d6 Mon Sep 17 00:00:00 2001
+ From: Denys Dmytriyenko <denys@ti.com>
+ Date: Thu, 31 Mar 2016 19:38:58 -0400
+ Subject: [PATCH] qquickviewcomparison: fix QCoreApplication has not been
+diff --git a/recipes-qt/qt5/qtdeclarative_git.bb b/recipes-qt/qt5/qtdeclarative_git.bb
+index 5e96633..a0f4ced 100644
+--- a/recipes-qt/qt5/qtdeclarative_git.bb
++++ b/recipes-qt/qt5/qtdeclarative_git.bb
+@@ -34,6 +34,6 @@ do_configure_prepend() {
+ 
+ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'qtxmlpatterns', 'CONFIG+=OE_QTXMLPATTERNS_ENABLED', '', d)}"
+ 
+-SRCREV = "31ef2e858c2a0835c040b3199c9557f0f6c66808"
++SRCREV = "d48b397cc79265e80c8437888f9ded0b0364e418"
+ 
+ BBCLASSEXTEND =+ "native nativesdk"
+diff --git a/recipes-qt/qt5/qtenginio_git.bb b/recipes-qt/qt5/qtenginio_git.bb
+index d5e8dfa..6088c4d 100644
+--- a/recipes-qt/qt5/qtenginio_git.bb
++++ b/recipes-qt/qt5/qtenginio_git.bb
+@@ -11,4 +11,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtbase qtdeclarative qtxmlpatterns"
+ 
+-SRCREV = "0f6e294fb8534f677a5ec75113679cfe24f559c1"
++SRCREV = "cedca298f081e1c1cdac615eed6171fe687f35e2"
+diff --git a/recipes-qt/qt5/qtgraphicaleffects_git.bb b/recipes-qt/qt5/qtgraphicaleffects_git.bb
+index 1ecc4f7..5780d7f 100644
+--- a/recipes-qt/qt5/qtgraphicaleffects_git.bb
++++ b/recipes-qt/qt5/qtgraphicaleffects_git.bb
+@@ -17,4 +17,4 @@ DEPENDS += "qtdeclarative"
+ 
+ RDEPENDS_${PN}-dev = ""
+ 
+-SRCREV = "d85fd81f338f9c6f2e95b92b2cb9ccd4f9889c6b"
++SRCREV = "d3023be0d839440ac046adf2af75d9e4306dd5ef"
+diff --git a/recipes-qt/qt5/qtimageformats/0001-qtimageformats.pro-Make-the-dependencies-determinist.patch b/recipes-qt/qt5/qtimageformats/0001-qtimageformats.pro-Make-the-dependencies-determinist.patch
+index 11a9726..03432c9 100644
+--- a/recipes-qt/qt5/qtimageformats/0001-qtimageformats.pro-Make-the-dependencies-determinist.patch
++++ b/recipes-qt/qt5/qtimageformats/0001-qtimageformats.pro-Make-the-dependencies-determinist.patch
+@@ -1,4 +1,4 @@
+-From 6f01ba8602a4efdb31bf01bf58aa4cb23552e9ac Mon Sep 17 00:00:00 2001
++From 7eb3fddc70871048f170211a88194c8cdeeca4dd Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Mon, 4 Aug 2014 19:19:05 +0200
+ Subject: [PATCH] qtimageformats.pro: Make the dependencies deterministic
+diff --git a/recipes-qt/qt5/qtimageformats_git.bb b/recipes-qt/qt5/qtimageformats_git.bb
+index 6c983c2..76bceda 100644
+--- a/recipes-qt/qt5/qtimageformats_git.bb
++++ b/recipes-qt/qt5/qtimageformats_git.bb
+@@ -28,4 +28,4 @@ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'jasper', 'CONFIG+
+ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'libtiff', 'CONFIG+=OE_LIBTIFF_ENABLED', '', d)}"
+ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'libwebp', 'CONFIG+=OE_LIBWEBP_ENABLED', '', d)}"
+ 
+-SRCREV = "42b07b2ddf443d3eafd18e169f2e5ab5e36604a5"
++SRCREV = "d4401c9f519dfe82c38fe9ded674e454655f1866"
+diff --git a/recipes-qt/qt5/qtlocation_git.bb b/recipes-qt/qt5/qtlocation_git.bb
+index ce240c5..7a9ecb4 100644
+--- a/recipes-qt/qt5/qtlocation_git.bb
++++ b/recipes-qt/qt5/qtlocation_git.bb
+@@ -29,4 +29,4 @@ do_configure_prepend() {
+ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'geoclue', 'CONFIG+=OE_GEOCLUE_ENABLED', '', d)}"
+ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'gypsy', 'CONFIG+=OE_GYPSY_ENABLED', '', d)}"
+ 
+-SRCREV = "e41c3a9b345536ccee0840ac6f049173aa6a0785"
++SRCREV = "4e1008b4ac1eea776585ca41a6a3db127cf500ff"
+diff --git a/recipes-qt/qt5/qtmultimedia/0001-Initial-porting-effort-to-GStreamer-1.0.patch b/recipes-qt/qt5/qtmultimedia/0001-Initial-porting-effort-to-GStreamer-1.0.patch
+index 81fcd39..fa6b585 100644
+--- a/recipes-qt/qt5/qtmultimedia/0001-Initial-porting-effort-to-GStreamer-1.0.patch
++++ b/recipes-qt/qt5/qtmultimedia/0001-Initial-porting-effort-to-GStreamer-1.0.patch
+@@ -1,4 +1,4 @@
+-From df587e2a3bb2aa297088bd3ada4309c4b9a85195 Mon Sep 17 00:00:00 2001
++From 26fd6cf787a7a413d54205b8b42d16a63ed5d36a Mon Sep 17 00:00:00 2001
+ From: Yoann Lopes <yoann.lopes@digia.com>
+ Date: Thu, 31 Oct 2013 15:06:30 +0100
+ Subject: [PATCH] Initial porting effort to GStreamer 1.0.
+diff --git a/recipes-qt/qt5/qtmultimedia_git.bb b/recipes-qt/qt5/qtmultimedia_git.bb
+index 5c72337..746a1b1 100644
+--- a/recipes-qt/qt5/qtmultimedia_git.bb
++++ b/recipes-qt/qt5/qtmultimedia_git.bb
+@@ -32,7 +32,7 @@ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'gstreamer010', 'G
+ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains_any('PACKAGECONFIG', 'gstreamer gstreamer010', '', 'CONFIG+=done_config_gstreamer', d)}"
+ 
+ SRC_URI += "\
+-     file://0001-Initial-porting-effort-to-GStreamer-1.0.patch \
++    file://0001-Initial-porting-effort-to-GStreamer-1.0.patch \
+ "
+ 
+-SRCREV = "c85fd6df07935b9c0fa08f881271cd94ad100003"
++SRCREV = "1be4f74843b41f8bc1d1d64e83485f4eb864e8b4"
+diff --git a/recipes-qt/qt5/qtquick1/0001-qdeclarativetextinput-update-to-match-QWidgetLineCon.patch b/recipes-qt/qt5/qtquick1/0001-qdeclarativetextinput-update-to-match-QWidgetLineCon.patch
+deleted file mode 100644
+index 27a2140..0000000
+--- a/recipes-qt/qt5/qtquick1/0001-qdeclarativetextinput-update-to-match-QWidgetLineCon.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From 450d5dee6cc4f35a7475af507b90ba67327ad724 Mon Sep 17 00:00:00 2001
+-From: Martin Jansa <Martin.Jansa@gmail.com>
+-Date: Tue, 26 Apr 2016 17:48:18 +0200
+-Subject: [PATCH] qdeclarativetextinput: update to match QWidgetLineControl API
+- change
+-
+-* setCursorBlinkPeriod was replaced with setBlinkingCursorEnabled &
+-  updateCursorBlinking in qtbase commit:
+-  commit 1b5bc9723c0b23ca5197097c3087df6bbe024a2a
+-  Author: Richard Moe Gustavsen <richard.gustavsen@theqtcompany.com>
+-  Date:   Tue Apr 19 10:15:54 2016 +0200
+-  Subject: QWidgetLineControl: respect run-time changes to cursorFlashTime
+-
+-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+----
+- src/declarative/graphicsitems/qdeclarativetextinput.cpp | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/declarative/graphicsitems/qdeclarativetextinput.cpp b/src/declarative/graphicsitems/qdeclarativetextinput.cpp
+-index 3ff75fd..e39d1af 100644
+---- a/src/declarative/graphicsitems/qdeclarativetextinput.cpp
+-+++ b/src/declarative/graphicsitems/qdeclarativetextinput.cpp
+-@@ -514,7 +514,7 @@ void QDeclarativeTextInput::setCursorVisible(bool on)
+-     if (d->cursorVisible == on)
+-         return;
+-     d->cursorVisible = on;
+--    d->control->setCursorBlinkPeriod(on?QApplication::cursorFlashTime():0);
+-+    d->control->setBlinkingCursorEnabled(on);
+-     QRect r = d->control->cursorRect();
+-     if (d->control->inputMask().isEmpty())
+-         updateRect(r);
+diff --git a/recipes-qt/qt5/qtquick1_git.bb b/recipes-qt/qt5/qtquick1_git.bb
+index e34cc22..9e2ec02 100644
+--- a/recipes-qt/qt5/qtquick1_git.bb
++++ b/recipes-qt/qt5/qtquick1_git.bb
+@@ -16,8 +16,6 @@ LIC_FILES_CHKSUM = " \
+ DEPENDS += "qtscript qtsvg qtxmlpatterns"
+ # qttools
+ 
+-SRC_URI += "file://0001-qdeclarativetextinput-update-to-match-QWidgetLineCon.patch"
+-
+ PACKAGECONFIG ??= "webkit"
+ PACKAGECONFIG[webkit] = "CONFIG+=enable-webkit,CONFIG-=enable-webkit,qtwebkit"
+ 
+@@ -25,4 +23,4 @@ do_configure_prepend() {
+     sed -i 's#^qtHaveModule(webkitwidgets):#enable-webkit:qtHaveModule(webkitwidgets):#g' ${S}/src/imports/imports.pro
+ }
+ 
+-SRCREV = "5e3bd5cb28e7af95b289a617ca2f7a8892498225"
++SRCREV = "857fc5ec4644a6111ba8725e4e1a84dd5ea6bfca"
+diff --git a/recipes-qt/qt5/qtquickcontrols/0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch b/recipes-qt/qt5/qtquickcontrols/0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch
+index ad2b489..85fcc15 100644
+--- a/recipes-qt/qt5/qtquickcontrols/0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch
++++ b/recipes-qt/qt5/qtquickcontrols/0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch
+@@ -1,4 +1,4 @@
+-From 00bb7694b9287f23d4d059ae134e9409db69673e Mon Sep 17 00:00:00 2001
++From fca6212d5ebc5851f28e820e4ff0ebe04a9d44d7 Mon Sep 17 00:00:00 2001
+ From: Denys Dmytriyenko <denys@ti.com>
+ Date: Thu, 31 Mar 2016 19:57:01 -0400
+ Subject: [PATCH] texteditor: fix invalid use of incomplete type 'class QDebug'
+@@ -7,13 +7,13 @@ Upstream-Status: Pending
+ 
+ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+ ---
+- examples/quick/controls/texteditor/src/documenthandler.cpp | 1 +
++ examples/quickcontrols/controls/texteditor/src/documenthandler.cpp | 1 +
+  1 file changed, 1 insertion(+)
+ 
+-diff --git a/examples/quick/controls/texteditor/src/documenthandler.cpp b/examples/quick/controls/texteditor/src/documenthandler.cpp
++diff --git a/examples/quickcontrols/controls/texteditor/src/documenthandler.cpp b/examples/quickcontrols/controls/texteditor/src/documenthandler.cpp
+ index bdecf5b..811a761 100644
+---- a/examples/quick/controls/texteditor/src/documenthandler.cpp
+-+++ b/examples/quick/controls/texteditor/src/documenthandler.cpp
++--- a/examples/quickcontrols/controls/texteditor/src/documenthandler.cpp
+++++ b/examples/quickcontrols/controls/texteditor/src/documenthandler.cpp
+ @@ -54,6 +54,7 @@
+  #include <QtGui/QTextCursor>
+  #include <QtGui/QFontDatabase>
+diff --git a/recipes-qt/qt5/qtquickcontrols2_git.bb b/recipes-qt/qt5/qtquickcontrols2_git.bb
+index 00fe4fc..7271a19 100644
+--- a/recipes-qt/qt5/qtquickcontrols2_git.bb
++++ b/recipes-qt/qt5/qtquickcontrols2_git.bb
+@@ -10,4 +10,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtdeclarative"
+ 
+-SRCREV = "2a5c64a1ddf5b6fdb9104faf99260925a327b2f4"
++SRCREV = "cc0ee8e4f3345023f1b85fc815739c0a75ea5686"
+diff --git a/recipes-qt/qt5/qtquickcontrols_git.bb b/recipes-qt/qt5/qtquickcontrols_git.bb
+index 9231a79..ed1947e 100644
+--- a/recipes-qt/qt5/qtquickcontrols_git.bb
++++ b/recipes-qt/qt5/qtquickcontrols_git.bb
+@@ -17,4 +17,4 @@ SRC_URI += " \
+     file://0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch \
+ "
+ 
+-SRCREV = "3411c3579fb9e767c819c0c8d9f35c52c9964b06"
++SRCREV = "37f8b753be1b16975220c8b611b17a428eafb9e9"
+diff --git a/recipes-qt/qt5/qtscript_git.bb b/recipes-qt/qt5/qtscript_git.bb
+index 7859ec5..63d9b63 100644
+--- a/recipes-qt/qt5/qtscript_git.bb
++++ b/recipes-qt/qt5/qtscript_git.bb
+@@ -27,4 +27,4 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
+ 
+ DEPENDS += "qtbase"
+ 
+-SRCREV = "b49bfdaad11be1de632f907d43485a7ac701ddc5"
++SRCREV = "b8845794b95376e8be39dbdafca2c85b5ec4c195"
+diff --git a/recipes-qt/qt5/qtsensors_git.bb b/recipes-qt/qt5/qtsensors_git.bb
+index 1098f25..1d7e134 100644
+--- a/recipes-qt/qt5/qtsensors_git.bb
++++ b/recipes-qt/qt5/qtsensors_git.bb
+@@ -15,4 +15,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtbase qtdeclarative"
+ 
+-SRCREV = "33d15b76dfdb95da5970b8e0294bbb87ea1eb9a8"
++SRCREV = "e03c37077ea4841b9e0b591d29a34737d7d8dd32"
+diff --git a/recipes-qt/qt5/qtserialbus_git.bb b/recipes-qt/qt5/qtserialbus_git.bb
+index 731bd48..3cde771 100644
+--- a/recipes-qt/qt5/qtserialbus_git.bb
++++ b/recipes-qt/qt5/qtserialbus_git.bb
+@@ -10,4 +10,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtbase qtserialport"
+ 
+-SRCREV = "f9201ca7bad9220149fb39b89914e83a4a14dffc"
++SRCREV = "88554d068d287870740b842864a50604f53e8509"
+diff --git a/recipes-qt/qt5/qtserialport_git.bb b/recipes-qt/qt5/qtserialport_git.bb
+index b16978b..d5f37d5 100644
+--- a/recipes-qt/qt5/qtserialport_git.bb
++++ b/recipes-qt/qt5/qtserialport_git.bb
+@@ -15,4 +15,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtbase"
+ 
+-SRCREV = "84feab670cce8414ad54f4d19b46291c7fdb14cf"
++SRCREV = "7346857f4f675f57572d54f15cfad9111af2abde"
+diff --git a/recipes-qt/qt5/qtsvg_git.bb b/recipes-qt/qt5/qtsvg_git.bb
+index 09fef6c..6f5d7ab 100644
+--- a/recipes-qt/qt5/qtsvg_git.bb
++++ b/recipes-qt/qt5/qtsvg_git.bb
+@@ -13,4 +13,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtbase"
+ 
+-SRCREV = "612c3041475550837dee7149b9f5e9e4f55c17a0"
++SRCREV = "64ca369c7e3d61f0416bc1fd6a102f0c62924433"
+diff --git a/recipes-qt/qt5/qtsystems_git.bb b/recipes-qt/qt5/qtsystems_git.bb
+index a467f99..7c155a2 100644
+--- a/recipes-qt/qt5/qtsystems_git.bb
++++ b/recipes-qt/qt5/qtsystems_git.bb
+@@ -30,4 +30,4 @@ do_install_append() {
+ 
+ QT_MODULE_BRANCH = "dev"
+ 
+-SRCREV = "236b6b544fd2049eb46e8f79d13bb7aa35ba002f"
++SRCREV = "434af789f0d56ca7a521ca2d9ec8cf3b1057fd37"
+diff --git a/recipes-qt/qt5/qttools/0001-Allow-to-build-only-lrelease-lupdate-lconvert.patch b/recipes-qt/qt5/qttools/0001-Allow-to-build-only-lrelease-lupdate-lconvert.patch
+index 8cf6ada..94cd048 100644
+--- a/recipes-qt/qt5/qttools/0001-Allow-to-build-only-lrelease-lupdate-lconvert.patch
++++ b/recipes-qt/qt5/qttools/0001-Allow-to-build-only-lrelease-lupdate-lconvert.patch
+@@ -1,4 +1,4 @@
+-From e80743f15443212823e95d2be82073980a4700bc Mon Sep 17 00:00:00 2001
++From 68ecc4f25789321fc29ec9e4981fcfa27e706f1c Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.jansa@gmail.com>
+ Date: Wed, 11 Sep 2013 18:30:08 +0200
+ Subject: [PATCH] Allow to build only lrelease + lupdate + lconvert
+diff --git a/recipes-qt/qt5/qttools/0002-assistant-help-fix-linking-of-dependent-libraries.patch b/recipes-qt/qt5/qttools/0002-assistant-help-fix-linking-of-dependent-libraries.patch
+index fe8fe3d..17d5d51 100644
+--- a/recipes-qt/qt5/qttools/0002-assistant-help-fix-linking-of-dependent-libraries.patch
++++ b/recipes-qt/qt5/qttools/0002-assistant-help-fix-linking-of-dependent-libraries.patch
+@@ -1,4 +1,4 @@
+-From d7943b08bdb858bd2501c93a428ebc13bc9f3cfc Mon Sep 17 00:00:00 2001
++From 95a418157ce5f49052ec1c349581d1811a79c9eb Mon Sep 17 00:00:00 2001
+ From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+ Date: Fri, 17 Jan 2014 14:33:19 +0100
+ Subject: [PATCH] assistant/help: fix linking of dependent libraries
+diff --git a/recipes-qt/qt5/qttools/0003-add-noqtwebkit-configuration.patch b/recipes-qt/qt5/qttools/0003-add-noqtwebkit-configuration.patch
+index aca2fbc..88c39c7 100644
+--- a/recipes-qt/qt5/qttools/0003-add-noqtwebkit-configuration.patch
++++ b/recipes-qt/qt5/qttools/0003-add-noqtwebkit-configuration.patch
+@@ -1,4 +1,4 @@
+-From 6c5bbd423c3c8f87d00c18384460ab418dccea95 Mon Sep 17 00:00:00 2001
++From a798e469e69e31248610a3b5f29c63c5d12cda26 Mon Sep 17 00:00:00 2001
+ From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+ Date: Wed, 4 Jun 2014 11:28:16 +0200
+ Subject: [PATCH] add noqtwebkit configuration
+diff --git a/recipes-qt/qt5/qttools/0004-linguist-tools-cmake-allow-overriding-the-location-f.patch b/recipes-qt/qt5/qttools/0004-linguist-tools-cmake-allow-overriding-the-location-f.patch
+index 4f59980..1a201de 100644
+--- a/recipes-qt/qt5/qttools/0004-linguist-tools-cmake-allow-overriding-the-location-f.patch
++++ b/recipes-qt/qt5/qttools/0004-linguist-tools-cmake-allow-overriding-the-location-f.patch
+@@ -1,4 +1,4 @@
+-From 3dfe38ac9b83ee94c8abfe1bb78b14050b0c9a6f Mon Sep 17 00:00:00 2001
++From f805a2bf4a0d35a01726d214279ba1caa81b278f Mon Sep 17 00:00:00 2001
+ From: Cody P Schafer <dev@codyps.com>
+ Date: Thu, 9 Jul 2015 11:28:19 -0400
+ Subject: [PATCH] linguist-tools cmake: allow overriding the location for
+diff --git a/recipes-qt/qt5/qttools_git.bb b/recipes-qt/qt5/qttools_git.bb
+index fbc5a38..6982377 100644
+--- a/recipes-qt/qt5/qttools_git.bb
++++ b/recipes-qt/qt5/qttools_git.bb
+@@ -31,6 +31,6 @@ PACKAGECONFIG[qtwebkit] = ",,qtwebkit"
+ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'qtwebkit', '', 'CONFIG+=noqtwebkit', d)}"
+ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'linguistonly', 'CONFIG+=linguistonly', '', d)}"
+ 
+-SRCREV = "d36d2c3026cae67c119384f47cb2680552c81aaf"
++SRCREV = "0597b535f82d3458a1db1828c5e5f725bbcf59fd"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/recipes-qt/qt5/qttranslations_git.bb b/recipes-qt/qt5/qttranslations_git.bb
+index 70f57bf..0c4025a 100644
+--- a/recipes-qt/qt5/qttranslations_git.bb
++++ b/recipes-qt/qt5/qttranslations_git.bb
+@@ -114,4 +114,4 @@ FILES_${PN}-qt = " \
+     ${OE_QMAKE_PATH_TRANSLATIONS}/qt_*.qm \
+ "
+ 
+-SRCREV = "745f8d5329d0d6d98a8577a254d2ee3e7174634e"
++SRCREV = "2209b3fd6a56bfc44da5369c4fbd345bbca31777"
+diff --git a/recipes-qt/qt5/qtvirtualkeyboard_git.bb b/recipes-qt/qt5/qtvirtualkeyboard_git.bb
+index a8fcb9c..ff478f3 100644
+--- a/recipes-qt/qt5/qtvirtualkeyboard_git.bb
++++ b/recipes-qt/qt5/qtvirtualkeyboard_git.bb
+@@ -8,4 +8,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtbase qtdeclarative qtmultimedia qtquickcontrols qtsvg qtxmlpatterns"
+ 
+-SRCREV = "42344a4b21b95bce913d60267d554ac17e120af1"
++SRCREV = "626e78c9660cff063e1f9370538b5a424631571c"
+diff --git a/recipes-qt/qt5/qtwayland-native_git.bb b/recipes-qt/qt5/qtwayland-native_git.bb
+index 505f19b..c8844fb 100644
+--- a/recipes-qt/qt5/qtwayland-native_git.bb
++++ b/recipes-qt/qt5/qtwayland-native_git.bb
+@@ -25,4 +25,4 @@ do_install() {
+     oe_runmake install INSTALL_ROOT=${D}
+ }
+ 
+-SRCREV = "bfa66ccb29f747e2cb07a4f2e561b165be9f211d"
++SRCREV = "a172672484b9496819e588b51ac2ff9fb4a21941"
+diff --git a/recipes-qt/qt5/qtwayland/0001-Install-the-qtwaylandscanner-tool-to-the-native-side.patch b/recipes-qt/qt5/qtwayland/0001-Install-the-qtwaylandscanner-tool-to-the-native-side.patch
+index c199f71..847ba06 100644
+--- a/recipes-qt/qt5/qtwayland/0001-Install-the-qtwaylandscanner-tool-to-the-native-side.patch
++++ b/recipes-qt/qt5/qtwayland/0001-Install-the-qtwaylandscanner-tool-to-the-native-side.patch
+@@ -1,4 +1,4 @@
+-From 4334643f02fc333fa8b633ff614fa4ceecf4a8e6 Mon Sep 17 00:00:00 2001
++From 47457635603ddb484a479834a052699cce5b34a3 Mon Sep 17 00:00:00 2001
+ From: Simon Busch <morphis@gravedo.de>
+ Date: Fri, 19 Jul 2013 13:35:14 +0000
+ Subject: [PATCH] Install the qtwaylandscanner tool to the native side
+diff --git a/recipes-qt/qt5/qtwayland/0001-examples-wayland-include-server-buffer-only-when-bui.patch b/recipes-qt/qt5/qtwayland/0001-examples-wayland-include-server-buffer-only-when-bui.patch
+index 72f2953..a21c109 100644
+--- a/recipes-qt/qt5/qtwayland/0001-examples-wayland-include-server-buffer-only-when-bui.patch
++++ b/recipes-qt/qt5/qtwayland/0001-examples-wayland-include-server-buffer-only-when-bui.patch
+@@ -1,4 +1,4 @@
+-From 3c5c13f2f991cc79363969fb3873d553dd985e7b Mon Sep 17 00:00:00 2001
++From 733a85c14cb4ade510a0c78b32cd12cb2d70dbbd Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Sat, 22 Feb 2014 17:47:44 +0100
+ Subject: [PATCH] examples/wayland: include server-buffer only when building
+@@ -14,10 +14,10 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+  1 file changed, 3 insertions(+), 1 deletion(-)
+ 
+ diff --git a/examples/wayland/wayland.pro b/examples/wayland/wayland.pro
+-index b67d12e..c5daad0 100644
++index 503190c..9943c52 100644
+ --- a/examples/wayland/wayland.pro
+ +++ b/examples/wayland/wayland.pro
+-@@ -9,4 +9,6 @@ qtHaveModule(quick) {
++@@ -10,4 +10,6 @@ qtHaveModule(quick) {
+      SUBDIRS += custom-extension
+  }
+  
+diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
+index df42f30..d0238c1 100644
+--- a/recipes-qt/qt5/qtwayland_git.bb
++++ b/recipes-qt/qt5/qtwayland_git.bb
+@@ -45,4 +45,4 @@ SRC_URI += " \
+     file://0001-examples-wayland-include-server-buffer-only-when-bui.patch \
+ "
+ 
+-SRCREV = "bfa66ccb29f747e2cb07a4f2e561b165be9f211d"
++SRCREV = "a172672484b9496819e588b51ac2ff9fb4a21941"
+diff --git a/recipes-qt/qt5/qtwebchannel_git.bb b/recipes-qt/qt5/qtwebchannel_git.bb
+index 869851b..01b098b 100644
+--- a/recipes-qt/qt5/qtwebchannel_git.bb
++++ b/recipes-qt/qt5/qtwebchannel_git.bb
+@@ -15,4 +15,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtdeclarative qtwebsockets"
+ 
+-SRCREV = "a2c3b32d08ed24279609a8c01b09c1147a9ff6b9"
++SRCREV = "3836fd7d12777fc53836a72d6542d2fbf2f20ac9"
+diff --git a/recipes-qt/qt5/qtwebengine/0001-chromium-base.gypi-include-atomicops_internals_x86_g.patch b/recipes-qt/qt5/qtwebengine/0001-chromium-base.gypi-include-atomicops_internals_x86_g.patch
+index 5fd3f06..ccd43e2 100644
+--- a/recipes-qt/qt5/qtwebengine/0001-chromium-base.gypi-include-atomicops_internals_x86_g.patch
++++ b/recipes-qt/qt5/qtwebengine/0001-chromium-base.gypi-include-atomicops_internals_x86_g.patch
+@@ -1,4 +1,4 @@
+-From 66af547c2b3ed473b81421aa239d931d364f644d Mon Sep 17 00:00:00 2001
++From db56cd0fd185a9f3858f5aa6e95b24e63dee119f Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Fri, 3 Oct 2014 03:52:11 +0200
+ Subject: [PATCH] <chromium> base.gypi: include atomicops_internals_x86_gcc.cc
+diff --git a/recipes-qt/qt5/qtwebengine/0001-functions.prf-Don-t-match-QMAKE_EXT_CPP-or-QMAKE_EXT.patch b/recipes-qt/qt5/qtwebengine/0001-functions.prf-Don-t-match-QMAKE_EXT_CPP-or-QMAKE_EXT.patch
+index 287bf2b..b7bd5a4 100644
+--- a/recipes-qt/qt5/qtwebengine/0001-functions.prf-Don-t-match-QMAKE_EXT_CPP-or-QMAKE_EXT.patch
++++ b/recipes-qt/qt5/qtwebengine/0001-functions.prf-Don-t-match-QMAKE_EXT_CPP-or-QMAKE_EXT.patch
+@@ -1,4 +1,4 @@
+-From d28e6ef9c684a7f8f59995995b5cb5a0b1791ee1 Mon Sep 17 00:00:00 2001
++From 793db05d66b7a92ebe069dc76093487489dd8b69 Mon Sep 17 00:00:00 2001
+ From: Martin Jansa <Martin.Jansa@gmail.com>
+ Date: Mon, 30 Jun 2014 20:08:17 +0200
+ Subject: [PATCH] functions.prf: Don't match QMAKE_EXT_CPP or QMAKE_EXT_H
+@@ -10,7 +10,7 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+  1 file changed, 2 insertions(+), 2 deletions(-)
+ 
+ diff --git a/tools/qmake/mkspecs/features/functions.prf b/tools/qmake/mkspecs/features/functions.prf
+-index 26db26f..277bf98 100644
++index 20fb278..7aa0b4a 100644
+ --- a/tools/qmake/mkspecs/features/functions.prf
+ +++ b/tools/qmake/mkspecs/features/functions.prf
+ @@ -168,9 +168,9 @@ defineReplace(mocOutput) {
+diff --git a/recipes-qt/qt5/qtwebengine/0002-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch b/recipes-qt/qt5/qtwebengine/0002-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch
+index d5ed1ab..34f58de 100644
+--- a/recipes-qt/qt5/qtwebengine/0002-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch
++++ b/recipes-qt/qt5/qtwebengine/0002-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch
+@@ -1,4 +1,4 @@
+-From e40a18da9631fa21202836caf69b3343e8bae973 Mon Sep 17 00:00:00 2001
++From de6311b4d556abbe131462a3cd962ae87da59522 Mon Sep 17 00:00:00 2001
+ From: Cleiton Bueno <cleitonrbueno@gmail.com>
+ Date: Thu, 24 Dec 2015 12:46:58 -0200
+ Subject: [PATCH] chromium: Change false to FALSE and 1 to TRUE, FIX
+@@ -7,7 +7,7 @@ Subject: [PATCH] chromium: Change false to FALSE and 1 to TRUE, FIX
+ Signed-off-by: Cleiton Bueno <cleitonrbueno@gmail.com>
+ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+ ---
+- src/3rdparty/chromium/ui/gfx/codec/jpeg_codec.cc | 12 ++++++------
++ chromium/ui/gfx/codec/jpeg_codec.cc | 12 ++++++------
+  1 file changed, 6 insertions(+), 6 deletions(-)
+ 
+ diff --git a/src/3rdparty/chromium/ui/gfx/codec/jpeg_codec.cc b/src/3rdparty/chromium/ui/gfx/codec/jpeg_codec.cc
+diff --git a/recipes-qt/qt5/qtwebengine/0002-functions.prf-Make-sure-we-only-use-the-file-name-to.patch b/recipes-qt/qt5/qtwebengine/0002-functions.prf-Make-sure-we-only-use-the-file-name-to.patch
+index 38e97d1..e487c6a 100644
+--- a/recipes-qt/qt5/qtwebengine/0002-functions.prf-Make-sure-we-only-use-the-file-name-to.patch
++++ b/recipes-qt/qt5/qtwebengine/0002-functions.prf-Make-sure-we-only-use-the-file-name-to.patch
+@@ -1,4 +1,4 @@
+-From 9f314e95248795bcce787f88bce77ba6058b34c7 Mon Sep 17 00:00:00 2001
++From aa5bb11072bc0e441dc6533f53ed5359c5000088 Mon Sep 17 00:00:00 2001
+ From: Simon Busch <morphis@gravedo.de>
+ Date: Tue, 18 Nov 2014 10:38:18 +0100
+ Subject: [PATCH] functions.prf: Make sure we only use the file name to
+@@ -11,7 +11,7 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+  1 file changed, 2 insertions(+), 1 deletion(-)
+ 
+ diff --git a/tools/qmake/mkspecs/features/functions.prf b/tools/qmake/mkspecs/features/functions.prf
+-index 277bf98..d263be4 100644
++index 7aa0b4a..9b3a639 100644
+ --- a/tools/qmake/mkspecs/features/functions.prf
+ +++ b/tools/qmake/mkspecs/features/functions.prf
+ @@ -165,7 +165,8 @@ defineReplace(findIncludedMocFiles) {
+diff --git a/recipes-qt/qt5/qtwebengine/0003-functions.prf-allow-build-for-linux-oe-g-platform.patch b/recipes-qt/qt5/qtwebengine/0003-functions.prf-allow-build-for-linux-oe-g-platform.patch
+index e041063..786a383 100644
+--- a/recipes-qt/qt5/qtwebengine/0003-functions.prf-allow-build-for-linux-oe-g-platform.patch
++++ b/recipes-qt/qt5/qtwebengine/0003-functions.prf-allow-build-for-linux-oe-g-platform.patch
+@@ -1,4 +1,4 @@
+-From 617028757a9afd334a0938e617429cca78363d69 Mon Sep 17 00:00:00 2001
++From 6918d25c54ec4bc17a9b612c0d24b0f01be3aca1 Mon Sep 17 00:00:00 2001
+ From: Frieder Schrempf <frieder.schrempf@online.de>
+ Date: Mon, 1 Dec 2014 14:34:40 +0000
+ Subject: [PATCH] functions.prf: allow build for linux-oe-g++ platform
+@@ -12,7 +12,7 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+  1 file changed, 6 insertions(+)
+ 
+ diff --git a/tools/qmake/mkspecs/features/functions.prf b/tools/qmake/mkspecs/features/functions.prf
+-index d263be4..879287a 100644
++index 9b3a639..dc5ed1c 100644
+ --- a/tools/qmake/mkspecs/features/functions.prf
+ +++ b/tools/qmake/mkspecs/features/functions.prf
+ @@ -5,6 +5,12 @@ defineTest(isPlatformSupported) {
+diff --git a/recipes-qt/qt5/qtwebengine/0004-WebEngine-qquickwebengineview_p_p.h-add-include-QCol.patch b/recipes-qt/qt5/qtwebengine/0004-WebEngine-qquickwebengineview_p_p.h-add-include-QCol.patch
+index 0a708af..d10ddf7 100644
+--- a/recipes-qt/qt5/qtwebengine/0004-WebEngine-qquickwebengineview_p_p.h-add-include-QCol.patch
++++ b/recipes-qt/qt5/qtwebengine/0004-WebEngine-qquickwebengineview_p_p.h-add-include-QCol.patch
+@@ -1,4 +1,4 @@
+-From d084661f50dbdc6a4014f9a2181462bba770437f Mon Sep 17 00:00:00 2001
++From 6ed60f35761ab268004727be544e9ccf70594211 Mon Sep 17 00:00:00 2001
+ From: Cleiton Bueno <cleitonrbueno@gmail.com>
+ Date: Fri, 25 Dec 2015 18:16:05 -0200
+ Subject: [PATCH] WebEngine qquickwebengineview_p_p.h add include QColor
+@@ -9,7 +9,7 @@ Signed-off-by: Cleiton Bueno <cleitonrbueno@gmail.com>
+  1 file changed, 2 insertions(+)
+ 
+ diff --git a/src/webengine/api/qquickwebengineview_p_p.h b/src/webengine/api/qquickwebengineview_p_p.h
+-index 892e99c..a4429d5 100644
++index f13bfd0..0e12244 100644
+ --- a/src/webengine/api/qquickwebengineview_p_p.h
+ +++ b/src/webengine/api/qquickwebengineview_p_p.h
+ @@ -60,6 +60,8 @@
+diff --git a/recipes-qt/qt5/qtwebengine/0005-Include-dependency-to-QCoreApplication-translate.patch b/recipes-qt/qt5/qtwebengine/0005-Include-dependency-to-QCoreApplication-translate.patch
+index 3a97a4a..27bd141 100644
+--- a/recipes-qt/qt5/qtwebengine/0005-Include-dependency-to-QCoreApplication-translate.patch
++++ b/recipes-qt/qt5/qtwebengine/0005-Include-dependency-to-QCoreApplication-translate.patch
+@@ -1,4 +1,4 @@
+-From 0999fbfe32480e737f23ed8fce8f35897b97c20a Mon Sep 17 00:00:00 2001
++From 4105c12d6f91171934f60b4dbb74b1ca7a9a3eb2 Mon Sep 17 00:00:00 2001
+ From: Cleiton Bueno <cleitonrbueno@gmail.com>
+ Date: Thu, 24 Dec 2015 15:59:51 -0200
+ Subject: [PATCH] Include dependency to QCoreApplication::translate()
+diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
+index 48c955c..ee6993a 100644
+--- a/recipes-qt/qt5/qtwebengine_git.bb
++++ b/recipes-qt/qt5/qtwebengine_git.bb
+@@ -122,8 +122,10 @@ SRC_URI += " \
+     file://0002-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch \
+ "
+ 
+-SRCREV_qtwebengine = "63cf26268996ae5580c77095a252696fa549b593"
+-SRCREV_chromium = "ba40ed24a6d23e606397b650a7982b0998dbeaf4"
++SRCREV_qtwebengine = "dbf7dd27428ff755444eac5e975cb69802ac9771"
++# This is in git submodule, but we're using the latest in 49-based
++# SRCREV_chromium = "c109a95a067af783e48f93d1cdeca870cda98878"
++SRCREV_chromium = "29c16917b33c26ad32893fa05af971c6c6f50297"
+ SRCREV = "${SRCREV_qtwebengine}"
+ 
+ SRCREV_FORMAT = "qtwebengine_chromium"
+diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
+index 58b86c8..78ca1f5 100644
+--- a/recipes-qt/qt5/qtwebkit_git.bb
++++ b/recipes-qt/qt5/qtwebkit_git.bb
+@@ -83,4 +83,4 @@ PACKAGES_remove = "${PN}-examples-dev ${PN}-examples-staticdev ${PN}-examples-db
+ RUBY_SYS = "${@ '${BUILD_SYS}'.replace('i486', 'i386').replace('i586', 'i386').replace('i686', 'i386') }"
+ export RUBYLIB="${STAGING_DATADIR_NATIVE}/rubygems:${STAGING_LIBDIR_NATIVE}/ruby:${STAGING_LIBDIR_NATIVE}/ruby/${RUBY_SYS}"
+ 
+-SRCREV = "2e8517924b70a778463e463873eb3d8d0b623eed"
++SRCREV = "76e2732f013732461c09a1d6c6b4c77fcab1c0d0"
+diff --git a/recipes-qt/qt5/qtwebsockets_git.bb b/recipes-qt/qt5/qtwebsockets_git.bb
+index 282ae98..8c238db 100644
+--- a/recipes-qt/qt5/qtwebsockets_git.bb
++++ b/recipes-qt/qt5/qtwebsockets_git.bb
+@@ -11,4 +11,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtbase qtdeclarative"
+ 
+-SRCREV = "00156d63eea2fb7681a8a00a3144392d6325e5cb"
++SRCREV = "8d17ddfc2f62df56ac067bd0f9736c6e8d37aa97"
+diff --git a/recipes-qt/qt5/qtx11extras_git.bb b/recipes-qt/qt5/qtx11extras_git.bb
+index e422817..9a4d6d7 100644
+--- a/recipes-qt/qt5/qtx11extras_git.bb
++++ b/recipes-qt/qt5/qtx11extras_git.bb
+@@ -13,4 +13,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtbase"
+ 
+-SRCREV = "b414120c60ef8c3cc2aad7dca41092647d741a36"
++SRCREV = "bae8bfc7a811af2bf51b227cbf8467e50a2a149a"
+diff --git a/recipes-qt/qt5/qtxmlpatterns_git.bb b/recipes-qt/qt5/qtxmlpatterns_git.bb
+index 33cedd6..92ef7e4 100644
+--- a/recipes-qt/qt5/qtxmlpatterns_git.bb
++++ b/recipes-qt/qt5/qtxmlpatterns_git.bb
+@@ -13,6 +13,6 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtbase"
+ 
+-SRCREV = "fb1dc19bf195c530b7f44d18cc927472b9866a46"
++SRCREV = "574d92a43e1fc5480a7f5f79cc6baf566a53349f"
+ 
+ BBCLASSEXTEND =+ "native nativesdk"
+-- 
+2.9.2
 
-I've dropped ";name=3Dpatch"
 
-> +
-> +SRC_URI[tarball.md5sum] =3D "db7990ce55e01daffe19006524a1ccb0"
-> +SRC_URI[tarball.sha256sum] =3D "897572df7565c0a90a81532671e23c63f99b4efd=
-e2eecbbf11e7857fbc61f405"
-> +
-> +SRC_URI[patch.md5sum] =3D ""
-> +SRC_URI[patch.sha256sum] =3D ""
-
-And dropped this when cherry-picking to master-next.
-
-Fix the date and time on your host system, it's not April anymore.
-
-> +
-> +inherit autotools
-> +inherit gettext
-> +
-> +# target libnih requires native nih-dbus-tool
-> +BBCLASSEXTEND =3D "native"
-> --=20
-> 1.8.4.2
->=20
->=20
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---vkz7ljn2e7vfev7n
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAleYx/wACgkQN1Ujt2V2gByyugCePNs4QrhmYSsaNjdWluZn+rPQ
-G8gAn3v8MI7Zt8qUQOpuslL//0WRyfyh
-=nQZi
------END PGP SIGNATURE-----
-
---vkz7ljn2e7vfev7n--
