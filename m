@@ -1,24 +1,29 @@
-Return-Path: <Jackie.Huang@windriver.com>
+Return-Path: <Kai.Kang@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9CDD960722
+	by mail.openembedded.org (Postfix) with ESMTP id 39B0160722
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jul 2016 05:24:50 +0000 (UTC)
+	Thu, 28 Jul 2016 05:49:01 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u6S5OnbV026672
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jul 2016 22:24:50 -0700
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Wed, 27 Jul 2016 22:24:48 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 28 Jul 2016 01:24:47 -0400
-Message-ID: <1469683487-166640-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u6S5mxIM027116
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Wed, 27 Jul 2016 22:48:59 -0700
+Received: from [128.224.162.231] (128.224.162.231) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Wed, 27 Jul 2016 22:48:58 -0700
+To: <openembedded-devel@lists.openembedded.org>, Martin Jansa
+	<martin.jansa@gmail.com>
+References: <20160726092312.16134-1-kai.kang@windriver.com>
+	<CA+chaQdZE=VDh7w61d0OHi15id+oRwhj1LudsRj1B_Z0MGC7nA@mail.gmail.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <57999CC9.7080504@windriver.com>
+Date: Thu, 28 Jul 2016 13:48:57 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.6.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mercurial-native: upgrade to 3.8.4
+In-Reply-To: <CA+chaQdZE=VDh7w61d0OHi15id+oRwhj1LudsRj1B_Z0MGC7nA@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH] mariadb: upgrade to 5.5.50
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,49 +36,139 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jul 2016 05:24:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 28 Jul 2016 05:49:04 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-From: Jackie Huang <jackie.huang@windriver.com>
+On 2016年07月27日 17:50, Martin Jansa wrote:
+> Can you please double check the checksums? Doesn't work for me:
 
-* Upgrade to the latest release to fix some CVEs:
-  - CVE-2016-3068: arbitrary code execution with Git subrepos
-  - CVE-2016-3069: arbitrary code execution when converting Git repos
-  - CVE-2016-3630: remote code execution in binary delta decoding
-  - CVE-2016-3105: arbitrary code execution when converting Git repos
+Hi Martin,
 
-* For other changes please see:
-  https://www.mercurial-scm.org/wiki/WhatsNew
+The checksums are right. Please see:
 
-* Update SRC_URI with the new download link
+http://archive.mariadb.org/mariadb-5.5.50/source/md5sums.txt
+5cfb169934170a429589e05f0f5aba9c ./mariadb-5.5.50.tar.gz
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- .../{mercurial-native_3.4.1.bb => mercurial-native_3.8.4.bb}        | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/mercurial/{mercurial-native_3.4.1.bb => mercurial-native_3.8.4.bb} (73%)
+http://archive.mariadb.org/mariadb-5.5.50/source/sha256sums.txt
+030b60a787333bf20ec0ee02b02da52474772c069954dc914f894a7703989b76 
+./mariadb-5.5.50.tar.gz
 
-diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_3.4.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_3.8.4.bb
-similarity index 73%
-rename from meta-oe/recipes-devtools/mercurial/mercurial-native_3.4.1.bb
-rename to meta-oe/recipes-devtools/mercurial/mercurial-native_3.8.4.bb
-index aeec195..0526fc2 100644
---- a/meta-oe/recipes-devtools/mercurial/mercurial-native_3.4.1.bb
-+++ b/meta-oe/recipes-devtools/mercurial/mercurial-native_3.8.4.bb
-@@ -5,9 +5,9 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- DEPENDS = "python-native"
- 
--SRC_URI = "http://mercurial.selenic.com/release/mercurial-${PV}.tar.gz"
--SRC_URI[md5sum] = "65783a60aefb46a11296b587e9403537"
--SRC_URI[sha256sum] = "7a8acf7329beda38ceea29c689212574d9a6bfffe24cf565015ea0066f7cee3f"
-+SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz"
-+SRC_URI[md5sum] = "cec2c3db688cb87142809089c6ae13e9"
-+SRC_URI[sha256sum] = "4b2e3ef19d34fa1d781cb7425506a05d4b6b1172bab69d6ea78874175fdf3da6"
- 
- S = "${WORKDIR}/mercurial-${PV}"
- 
+
+Please clean the source and try it again.
+
+Thanks.
+
+--Kai
+
+>
+> ERROR: mariadb-native-5.5.50-r0 do_fetch: Fetcher failure for URL:
+> 'http://archive.mariadb.org/mariadb-5.5.50/source/mariadb-5.5.50.tar.gz'.
+> Checksum mismatch!
+> File: '/home/jenkins/oe/world/shr-core/downloads/mariadb-5.5.50.tar.gz'
+> has md5 checksum 13cc3e0dfbc64698fd7838990ecae828 when
+> 5cfb169934170a429589e05f0f5aba9c was expected
+> File: '/home/jenkins/oe/world/shr-core/downloads/mariadb-5.5.50.tar.gz'
+> has sha256 checksum
+> 01227fd2954e02139e31ff16161754d82d9d9568746e7ebdb2cd49eb94ec849a when
+> 030b60a787333bf20ec0ee02b02da52474772c069954dc914f894a7703989b76 was
+> expected
+> If this change is expected (e.g. you have upgraded to a new version
+> without updating the checksums) then you can use these lines within
+> the recipe:
+> SRC_URI[md5sum] = "13cc3e0dfbc64698fd7838990ecae828"
+> SRC_URI[sha256sum] =
+> "01227fd2954e02139e31ff16161754d82d9d9568746e7ebdb2cd49eb94ec849a"
+> Otherwise you should retry the download and/or check with upstream to
+> determine if the file has become corrupted or otherwise unexpectedly
+> modified.
+>
+> ERROR: mariadb-native-5.5.50-r0 do_fetch: Function failed: Fetcher
+> failure for URL:
+> 'http://archive.mariadb.org/mariadb-5.5.50/source/mariadb-5.5.50.tar.gz'.
+> Unable to fetch URL from any source.
+> ERROR: Logfile of failure stored in:
+> /home/jenkins/oe/world/shr-core/tmp-glibc/work/x86_64-linux/mariadb-native/5.5.50-r0/temp/log.do_fetch.31301
+> NOTE: recipe mariadb-native-5.5.50-r0: task do_fetch: Failed
+> ERROR: Task /home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-support/mysql/mariadb-native_5.5.50.bb:do_fetch
+> (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-support/mysql/mariadb-native_5.5.50.bb:do_fetch)
+> failed with exit code '1'
+>
+>
+> On Tue, Jul 26, 2016 at 11:23 AM, <kai.kang@windriver.com> wrote:
+>
+>> From: Kai Kang <kai.kang@windriver.com>
+>>
+>> Upgrade mariadb from 5.5.46 to 5.5.50.
+>>
+>> * update runtime dependency of mariadb-setupdb which requires command
+>> install
+>>
+>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>> ---
+>>   .../mysql/{mariadb-native_5.5.46.bb => mariadb-native_5.5.50.bb}     | 0
+>>   meta-oe/recipes-support/mysql/mariadb.inc                            | 5
+>> +++--
+>>   .../recipes-support/mysql/{mariadb_5.5.46.bb => mariadb_5.5.50.bb}   | 0
+>>   3 files changed, 3 insertions(+), 2 deletions(-)
+>>   rename meta-oe/recipes-support/mysql/{mariadb-native_5.5.46.bb =>
+>> mariadb-native_5.5.50.bb} (100%)
+>>   rename meta-oe/recipes-support/mysql/{mariadb_5.5.46.bb =>
+>> mariadb_5.5.50.bb} (100%)
+>>
+>> diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.5.46.bb
+>> b/meta-oe/recipes-support/mysql/mariadb-native_5.5.50.bb
+>> similarity index 100%
+>> rename from meta-oe/recipes-support/mysql/mariadb-native_5.5.46.bb
+>> rename to meta-oe/recipes-support/mysql/mariadb-native_5.5.50.bb
+>> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc
+>> b/meta-oe/recipes-support/mysql/mariadb.inc
+>> index 4801ffe..9c3d234 100644
+>> --- a/meta-oe/recipes-support/mysql/mariadb.inc
+>> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
+>> @@ -17,8 +17,8 @@ SRC_URI = "
+>> http://archive.mariadb.org/mariadb-${PV}/source/mariadb-${PV}.tar.gz
+>>              file://fix-a-building-failure.patch \
+>>             "
+>>
+>> -SRC_URI[md5sum] = "92f682b00eb137af01e59ea93f7e31f7"
+>> -SRC_URI[sha256sum] =
+>> "45b66b7adc87cad32e553df1d5211e5b6426b78a3bc318a5ccde088bf93e6e10"
+>> +SRC_URI[md5sum] = "5cfb169934170a429589e05f0f5aba9c"
+>> +SRC_URI[sha256sum] =
+>> "030b60a787333bf20ec0ee02b02da52474772c069954dc914f894a7703989b76"
+>>
+>>   S = "${WORKDIR}/mariadb-${PV}"
+>>
+>> @@ -176,6 +176,7 @@ RDEPENDS_${PN}-leftovers = "perl perl-module-cwd
+>> perl-module-benchmark perl-modu
+>>       perl-module-file-spec perl-module-file-find perl-module-file-basename
+>> perl-module-file-path \
+>>       perl-module-constant perl-module-lib perl-module-file-temp
+>> perl-module-file-spec-functions \
+>>       perl-module-io-socket-inet perl-module-io-select"
+>> +RDEPENDS_${PN}-setupdb = "coreutils"
+>>
+>>   # Allow old code to link to the backward compatible library
+>>   RDEPENDS_libmysqlclient-dev = "libmysqlclient-r-dev"
+>> diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.46.bb
+>> b/meta-oe/recipes-support/mysql/mariadb_5.5.50.bb
+>> similarity index 100%
+>> rename from meta-oe/recipes-support/mysql/mariadb_5.5.46.bb
+>> rename to meta-oe/recipes-support/mysql/mariadb_5.5.50.bb
+>> --
+>> 2.9.2.368.g08bb350
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+
+
 -- 
-2.8.1
+Regards,
+Neil | Kai Kang
 
 
