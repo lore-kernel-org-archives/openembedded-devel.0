@@ -1,24 +1,39 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C56160853
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C43B607A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jul 2016 09:03:15 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u6T93G6v029902
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 29 Jul 2016 14:25:27 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id s186so955206qkb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jul 2016 02:03:16 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Fri, 29 Jul 2016 02:03:15 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 29 Jul 2016 17:00:08 +0800
-Message-ID: <1469782808-25456-1-git-send-email-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.8.1
-MIME-Version: 1.0
-Subject: [meta-python][PATCH] python-mccabe: Remove unnecessary setup_requires pytest-runner
+	Fri, 29 Jul 2016 07:25:29 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=46Q1Naqx+E7mf0AaOazcFI5580p6f0NmqPTLAjJcEIY=;
+	b=kwdkev7DvYYH2cyhshUS2PBTCqG7DZp17Z+t8Th6xZzORH9pPClqe4MaYhMuowBhor
+	4PQrawAiylaM49GcWEvTNFQJEOoipWCrfmOBo4OpHKNFQzs0Zv9D83aDJGI01boyZVOh
+	hdhefIEa2CV4dsbpRzBjL2+mHTz9su5p2XVw09sZ7Io7vCSLNTXRBnq9ymX3OGC7hAya
+	Ksiwz6hCgpZgPGt8OUZiL8hQgolgaTPwU/seDTwimjoDL9KT4gK1+EQJUNNaEZvJJup2
+	1NKFCNPJU9xANpfhlEZ5YvwreNDloQ54LQXkfFRNFAUBf7338iv0x8HDAwTh49ubLmdr
+	wDKA==
+X-Gm-Message-State: AEkoouunRWWYMd02JqR38VMK2/BJ0FOq2c+4BUpfFq4/X7A2UNfz9ynD7ACB9p6A6ZROfA==
+X-Received: by 10.55.150.195 with SMTP id y186mr48184619qkd.7.1469802328669;
+	Fri, 29 Jul 2016 07:25:28 -0700 (PDT)
+Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
+	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
+	l89sm10109559qte.41.2016.07.29.07.25.27
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 29 Jul 2016 07:25:28 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 29 Jul 2016 10:25:08 -0400
+Message-Id: <1469802308-23540-2-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1469802308-23540-1-git-send-email-derek@asterius.io>
+References: <1469802308-23540-1-git-send-email-derek@asterius.io>
+Subject: [meta-webserver][PATCH 2/2] nostromo: add dependency for nroff used during compile phase
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,84 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jul 2016 09:03:16 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 29 Jul 2016 14:25:29 -0000
 
-* Remove setup_requires pytest-runner as the
-  setup_requires pytest-runner actually is not
-  used for pytest which only in do_compile phase
-  via setup.py build
-
-Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- ...be-remove-unnecessary-setup_requires-pyte.patch | 33 ++++++++++++++++++++++
- .../recipes-devtools/python/python-mccabe_0.4.0.bb |  7 +++--
- 2 files changed, 37 insertions(+), 3 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-mccabe/0001-python-mccabe-remove-unnecessary-setup_requires-pyte.patch
+ meta-webserver/recipes-httpd/nostromo/nostromo_1.9.6.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-mccabe/0001-python-mccabe-remove-unnecessary-setup_requires-pyte.patch b/meta-python/recipes-devtools/python/python-mccabe/0001-python-mccabe-remove-unnecessary-setup_requires-pyte.patch
-new file mode 100644
-index 0000000..941bed3
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-mccabe/0001-python-mccabe-remove-unnecessary-setup_requires-pyte.patch
-@@ -0,0 +1,33 @@
-+From 3484bdfa7adbaebcf8bb8e7d4820f64b12717932 Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <mingli.yu@windriver.com>
-+Date: Fri, 29 Jul 2016 15:37:18 +0800
-+Subject: [PATCH] python-mccabe: remove unnecessary setup_requires
-+ pytest-runner
-+
-+* Remove setup_requires pytest-runner as the
-+  setup_requires pytest-runner actually is not
-+  used for pytest which only in do_compile phase
-+  via setup.py build
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-+---
-+ setup.py | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/setup.py b/setup.py
-+index e59903d..bf2aaba 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -33,7 +33,6 @@ setup(
-+     license='Expat license',
-+     py_modules=['mccabe'],
-+     zip_safe=False,
-+-    setup_requires=['pytest-runner'],
-+     tests_require=['pytest'],
-+     entry_points={
-+         'flake8.extension': [
-+-- 
-+2.8.1
-+
-diff --git a/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb b/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
-index ba966eb..a86d158 100644
---- a/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python-mccabe_0.4.0.bb
-@@ -3,14 +3,15 @@ HOMEPAGE = "https://github.com/dreamhost/cliff"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://README.rst;md5=f8b50fba1711ecac6bcdb6324f85a66d"
+diff --git a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.6.bb b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.6.bb
+index 7d660ce..5493c12 100644
+--- a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.6.bb
++++ b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.6.bb
+@@ -16,7 +16,7 @@ SRC_URI[sha256sum] = "541494ecfeafec58c0876ccc90cc23b06e0144f6f42029af44c7cdb1f4
  
-+SRC_URI += " \
-+           file://0001-python-mccabe-remove-unnecessary-setup_requires-pyte.patch \
-+"
-+
- SRC_URI[md5sum] = "8c425db05f310adcd4bb174b991f26f5"
- SRC_URI[sha256sum] = "9a2b12ebd876e77c72e41ebf401cc2e7c5b566649d50105ca49822688642207b"
+ TARGET_CC_ARCH += "${LDFLAGS}"
  
- inherit pypi setuptools
+-DEPENDS = "openssl"
++DEPENDS = "openssl groff-native"
  
--DEPENDS += " \
--    python-pytest-runner"
--
- RDEPENDS_${PN} += " \
-     python-prettytable \
-     python-cmd2 \
+ inherit update-rc.d
+ 
 -- 
-2.8.1
+1.9.1
 
 
