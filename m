@@ -1,36 +1,46 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id D95D86FF0E
+Return-Path: <cynthia.ms.chiu@gmail.com>
+Received: from mail-oi0-f68.google.com (mail-oi0-f68.google.com
+	[209.85.218.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F531607A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jul 2016 14:25:27 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id q8so7136318qke.3
+	Fri, 29 Jul 2016 20:02:21 +0000 (UTC)
+Received: by mail-oi0-f68.google.com with SMTP id d204so8539458oig.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jul 2016 07:25:28 -0700 (PDT)
+	Fri, 29 Jul 2016 13:02:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=q01BBIzGNk5k2VQJ8SaPwUZTpCUIF8yKaDfBPaOvlhE=;
+	b=szuSCjWqQ6BGYWjIB8PVEnl248fuz26YbqmwfeYWsMH/jvkFs4rdp6MlMPFYjWhjNQ
+	VJq3McSjlDZ52oMqISy9StpFYTIp4tekZzyqO/CNt1j4jyssOFzFza0E1hPSioEUQs/Y
+	amJ7K8niVbJfpLFFdd01zCIMVMC4JVtI5qJLjntYG1vcIW1kddsEH9kdLAkZqCZD7Gh2
+	FevEpDGy58S3uiivfBLKZFtl9vynpagAz/OHtK+QDeLW5koWilNoaCXv0orY38GBMs4Q
+	7BlZA2mA/QGjQO4ogXzjETSxeT1Yo2VRpkKkjoR/2JKcNNCLzy/ei5wQ+r7ibBB5O7fv
+	R0sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=FQyvtgj5qKxtHwc2yEvUOJEgkWSk6Bqu5+ZRpCl0ow8=;
-	b=KtLWoM8u7a7SkmpnHHmjyWBiJ7RMD5giwelOohD+0oOM4SDK6QMm18uaKE1XfjCBn4
-	JC4XjRY8QoLJYyCZnEWDdtGgDmFEyuGY4DS+DhQCT41x6B2rfic9kBM5Sd5V360tgVFv
-	8IE4oazFAnUhGuRA/fvFZ/B8CjI30oaIf37B0YDCfn5ZSJNtFXZH6SpBQaolwx+gTi62
-	eFusT5R8/UTJa0DIbU/RLQhxxj9XSm3BHOEhQIp6+sDwfF9fu+U3jXSVOAJ1uSYUn9l9
-	Y8jFMrKhkyqL9T2jzulXK4KCvFjcXzehEYPUotlIFJJyqs98KaFM7NmN4l8N3XJ0MFAX
-	ZxRQ==
-X-Gm-Message-State: AEkoouuSajgGAM1X+iCHPGFBGBp6smm0JgSvpgr1TEhk2sAoR46s3eDVCAkDa/r8HD7EQQ==
-X-Received: by 10.55.181.193 with SMTP id e184mr48042727qkf.181.1469802327903; 
-	Fri, 29 Jul 2016 07:25:27 -0700 (PDT)
-Received: from lnx-desktop.minotaur.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	l89sm10109559qte.41.2016.07.29.07.25.27
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 29 Jul 2016 07:25:27 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=q01BBIzGNk5k2VQJ8SaPwUZTpCUIF8yKaDfBPaOvlhE=;
+	b=dZJ6N/uDHMjiYSyNpuj6D7D2Tu0+gCTmYoH1K+sienxBw973Ag6biNqkU2Nd94kZgA
+	ffkt5iMrP+nSwtrdvnfsNRVZGoJVmve2y0qBlmSUm44YgBqJY7E29AFAm7m0JzJN+MSp
+	wiSYZ4lMzbo178is4yy0eivwg2xFxyDeb8mGNu328vtld/vS5Wyfaa+Vrp6tHYtHeweF
+	/V2KTWxEXtk5Fhjl+NcDlqnWlX36SMYF+TNbJSeEZ4ivofK8UbZG+mqWghmcJ9YyuPho
+	8PFRSFlWz6ZjB8Yyh1yA7SOUWrN5yFms2ThhP0WtTvVTaj43OnLTXQ1hn+2Qwjs96j7p
+	mvVg==
+X-Gm-Message-State: AEkoous6WAgdx64ZQe/FRv52dI/thETctBuLGD7INVrT6Jm3aMNy8++WlRLmTXPckgcNt8EIkOXOLh2Wel9M9Q==
+X-Received: by 10.157.35.194 with SMTP id t60mr23929606otb.81.1469822541800;
+	Fri, 29 Jul 2016 13:02:21 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.202.171.7 with HTTP; Fri, 29 Jul 2016 13:02:21 -0700 (PDT)
+In-Reply-To: <20160727125539.5p7zs2kaxf2nxbms@jama>
+References: <1469035439-23466-1-git-send-email-cynthia.ms.chiu@gmail.com>
+	<20160727125539.5p7zs2kaxf2nxbms@jama>
+From: Cynthia Chiu <cynthia.ms.chiu@gmail.com>
+Date: Fri, 29 Jul 2016 14:02:21 -0600
+Message-ID: <CAFn+KXByikEDEQLaFKdmh=73kHiSr_YBK_p-v9-V=ZumxAyv_Q@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Jul 2016 10:25:07 -0400
-Message-Id: <1469802308-23540-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-webserver][PATCH 1/2] nostromo: remove useradd of a user already provided by base-passwd
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH v3] Pointing the LIC_FILES_CHKSUM to a valid file.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,39 +53,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jul 2016 14:25:30 -0000
+X-List-Received-Date: Fri, 29 Jul 2016 20:02:22 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-webserver/recipes-httpd/nostromo/nostromo_1.9.6.bb | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
+Hi,
 
-diff --git a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.6.bb b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.6.bb
-index e06a696..7d660ce 100644
---- a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.6.bb
-+++ b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.6.bb
-@@ -18,7 +18,7 @@ TARGET_CC_ARCH += "${LDFLAGS}"
- 
- DEPENDS = "openssl"
- 
--inherit update-rc.d useradd
-+inherit update-rc.d
- 
- INITSCRIPT_NAME = "nostromo"
- INITSCRIPT_PARAMS = "defaults 70"
-@@ -27,11 +27,6 @@ do_compile() {
-     oe_runmake
- }
- 
--# we need user/group www-data to exist when we install
--#
--USERADD_PACKAGES = "${PN}"
--USERADD_PARAM_${PN} = "--system -g www-data www-data"
--
- do_install() {
-     install -d ${D}/${sbindir}
-     install -m 0755 src/nhttpd/nhttpd ${D}/${sbindir}/nhttpd
--- 
-1.9.1
+Thanks for your feedback. I apologize for the confusion. I have changed the
+recipe to use: LIC_FILES_CHKSUM =
+"file://${COMMON_LICENSE_DIR}/BSD;md5=3775480a712fc46a69647678acb234cb"
+I have tested this and it works.
 
+I just wanted to confirm that using ${COMMON_LICENSE_DIR} is an acceptable
+convention before I apply another patch.
+
+
+Regards,
+Cynthia Chiu
+
+On Wed, Jul 27, 2016 at 6:55 AM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
+
+> On Wed, Jul 20, 2016 at 11:23:59AM -0600, cynthiachiu wrote:
+> > Signed-off-by: cynthiachiu <cynthia.ms.chiu@gmail.com>
+> > ---
+> >  meta-oe/recipes-extended/canopennode/canopensocket_git.bb | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
+> b/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
+> > index 7c58a26..1e0f7d0 100644
+> > --- a/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
+> > +++ b/meta-oe/recipes-extended/canopennode/canopensocket_git.bb
+> > @@ -1,7 +1,7 @@
+> >  SUMMARY = "Linux CANOpen tools"
+> >  DESCRIPTION = "Linux CANOpen Protocol Stack Tools"
+> >  LICENSE = "GPLv2"
+> > -LIC_FILES_CHKSUM =
+> "file://gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> > +LIC_FILES_CHKSUM =
+> "file://LICENSE.GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>
+> LICENSE.GPL also doesn't exist, FFW test your patches before sending
+> them.
+>
+> Dropped from master-next until someone sends *tested* version.
+>
+> >  SRC_URI = "gitsm://github.com/CANopenNode/CANopenSocket.git"
+> >  SRCREV = "7777653da3a630b0dc02b3fa5ff029d9bc57cd26"
+> > --
+> > 1.9.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
