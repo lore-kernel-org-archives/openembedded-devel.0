@@ -1,51 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
 Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id DA73260132
+	by mail.openembedded.org (Postfix) with ESMTP id 6470160132
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Jul 2016 02:15:28 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id x83so21109795wma.3
+	Sun, 31 Jul 2016 02:15:29 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id x83so21109811wma.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Jul 2016 19:15:29 -0700 (PDT)
+	Sat, 30 Jul 2016 19:15:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=4f787TV+WaThkJzinW8V626GwkOYZm7NRYClKDrMsx4=;
-	b=Q0kgpf4Yj3dBJzAxoWCtSActP0O/tSKbyxxwnhxzcAL67TW6I7R8ARMjfFTrEbHy3q
-	VFTJN3boGUxBxxZgGe/nHGbD07+mM/04hhqpoX9f/fNuB1TRufKnYOl1CDMOpymtDCzx
-	AE3kXpWjtb2W3PhAaVMKNisPLt3ycfDtmLZZYtt3R2ZAeXtANd2erSQgdcrsGEnBhdY7
-	cO1wdXZTt6Hm2Y1EpXzS+bJcltUswPm1q7TWuG+0Ezg/pyZhx4f7DGYb7n/WSwEDFqKg
-	jBtVmdoEoXStYvbu+l/ZCCpDut1CQSohGEXWjDFFxNFYiYPwhuxBs78GR4styTQiLG2c
-	QPGQ==
+	bh=AhaVEaMvmHW81Euak9vTstX+POvLbWg5HSWJYWcQOYI=;
+	b=yBGvUjJZnE3cZBxg9sdb69G84I+X4wtKaGhUoz1cUK6gF3gqnqx1U7r61VOcFHxS74
+	Dtng0GHX8Xm2DSxtoCOXfYTrdu01WYKOkZ6hGmXc+uFWALcQMTw1hsuUEkaOEJNmcOPX
+	WHGraYyseFwPOdf18Fbe0tABWWKePPVEj3gMcNw6/aQ9/jWnoCzKAfoZtLT5dzZmXpDb
+	yc+1mYRpAc1bsHJYO1qkBXA7d42GxJ3av/fXVxkRq54TOX9+oFh8VsRMTT+ZRB6+4ows
+	XJe6dmqeOq1ykWeHGBoP2hK304XiCltP19v1ukmaOVFQl5BfOtL8iwGGSY3YsIZBwYSr
+	Pbew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=4f787TV+WaThkJzinW8V626GwkOYZm7NRYClKDrMsx4=;
-	b=V0ycOxRGINOQqTwCtcbE354ea2r3RDdTXBxHE5b2ZQO342DHEeDdhw7Cnp2j+f+e66
-	DseayRlkgvymFvvsRv5L2A8cXrubhcIVK64W/KknldNm1qxMzxl9sCqsLf1XRlIyTgpI
-	zREqUMAz5/6RWIXtG4DrBW5+fxYzZ35/Fd12Hl5KnBhqwUd0BvclABESesStclIuqoU9
-	hqOtCTpdraAmvfYL2dbtsXNPHF+cxQL7jJ08lj7W1r8BLYYEWhKvOuLRdqQ4/KmLd1mO
-	/epSWpOELr/5Icf/B/7ftcLJ8ujP7YBEAKnRo1y+PDn5ENLyjMcp+8uRHiCJEXpCeqkl
-	yOzg==
-X-Gm-Message-State: AEkoouvoInsvsDEaimYy1meMLEE+4ZlOmwofZIglO7jRz4YtPdZyKLDLZ2KR3us8y4LfBg==
-X-Received: by 10.28.51.210 with SMTP id z201mr7573912wmz.98.1469931328675;
-	Sat, 30 Jul 2016 19:15:28 -0700 (PDT)
+	bh=AhaVEaMvmHW81Euak9vTstX+POvLbWg5HSWJYWcQOYI=;
+	b=JHxElwP8FDf6/3IhBgmswQjnI3+pSVYvBKjfMOU4BXiQKKOUk7TDvOlmYHzYGKHcLR
+	J6s+vdFEtkhFlO2Kl0qOijNL7jax7Zn7in+HzsOOaqkM3elN1nFxnC4eLYAHagFQ3/dK
+	D0vWkhQ4+8MHeUZgwOOyXXiPZv8G5jHJlYo+O/f5K7d+rGj1fWfjfBtpyXEWUhY4JPUJ
+	WF28Ich/OXIPnr90mWYq4tCHvvI8+61uqa1BY3SIMY5mWDhtTFpPq+vs9KWgst8i7RA7
+	9YnZjXhmp2MspJ+2uTKTRGVu4yrmFZSA1kHSocZXZE3ffJbdfFeWncTZJqwKPO1SVQro
+	UTIg==
+X-Gm-Message-State: AEkooutUw1HpLyieDPqS+v/FL7VFiJgWCy7MAAFDqIyZoM9hHNO5vY3aK/X2Ol32wW2Xvw==
+X-Received: by 10.28.46.204 with SMTP id u195mr7128840wmu.57.1469931329493;
+	Sat, 30 Jul 2016 19:15:29 -0700 (PDT)
 Received: from localhost.localdomain (p5B0A0B1C.dip0.t-ipconnect.de.
 	[91.10.11.28]) by smtp.googlemail.com with ESMTPSA id
-	r16sm10078788wme.16.2016.07.30.19.15.27
+	r16sm10078788wme.16.2016.07.30.19.15.28
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Sat, 30 Jul 2016 19:15:28 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 31 Jul 2016 04:15:03 +0200
-Message-Id: <1469931304-13906-4-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun, 31 Jul 2016 04:15:04 +0200
+Message-Id: <1469931304-13906-5-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
 In-Reply-To: <1469931304-13906-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1469931304-13906-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 4/5] modemmanager: update to 1.6.0 and unblacklist - libqmi was fixed
+Subject: [PATCH 5/5] gedit: remove blacklist caused by gtksourceview2 / fix/cleanup build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,40 +64,85 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../{modemmanager_1.4.12.bb => modemmanager_1.6.0.bb}          | 10 ++++------
- 1 file changed, 4 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.4.12.bb => modemmanager_1.6.0.bb} (83%)
+ ...ring-format-literal-warning-to-fix-build-.patch | 38 ++++++++++++++++++++++
+ meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb     | 11 ++++---
+ 2 files changed, 44 insertions(+), 5 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/gedit/files/0002-suppress-string-format-literal-warning-to-fix-build-.patch
 
-diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.12.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.6.0.bb
-similarity index 83%
-rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.12.bb
-rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.6.0.bb
-index 00b85ff..e26c227 100644
---- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.4.12.bb
-+++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.6.0.bb
-@@ -7,18 +7,16 @@ LIC_FILES_CHKSUM = " \
-     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
- "
+diff --git a/meta-gnome/recipes-gnome/gedit/files/0002-suppress-string-format-literal-warning-to-fix-build-.patch b/meta-gnome/recipes-gnome/gedit/files/0002-suppress-string-format-literal-warning-to-fix-build-.patch
+new file mode 100644
+index 0000000..a5d2310
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gedit/files/0002-suppress-string-format-literal-warning-to-fix-build-.patch
+@@ -0,0 +1,38 @@
++From 4ebdf8023f763f75a7e1b548894de2e8b784f4a8 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Fri, 29 Jul 2016 23:19:40 +0200
++Subject: [PATCH] suppress string format literal warning to fix build with gcc6
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Upstream-Status: Pending
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++---
++ plugins/time/gedit-time-plugin.c | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/plugins/time/gedit-time-plugin.c b/plugins/time/gedit-time-plugin.c
++index d2ffdb9..441d9f9 100644
++--- a/plugins/time/gedit-time-plugin.c
+++++ b/plugins/time/gedit-time-plugin.c
++@@ -473,12 +473,15 @@ get_time (const gchar* format)
++   	clock = time (NULL);
++   	now = localtime (&clock);
++ 
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wformat-nonliteral"
++ 	do
++ 	{
++ 		out_length += 255;
++ 		out = g_realloc (out, out_length);
++ 	}
++   	while (strftime (out, out_length, locale_format, now) == 0);
+++#pragma GCC diagnostic pop
++ 
++ 	g_free (locale_format);
++ 
++-- 
++2.5.5
++
+diff --git a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
+index 7e6b343..a6c68d3 100644
+--- a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
++++ b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
+@@ -3,13 +3,16 @@ SECTION = "x11/gnome"
+ LICENSE = "GPLv2+"
+ PR = "r2"
  
--inherit gnomebase gettext systemd vala gobject-introspection
-+inherit gnomebase gettext systemd vala gobject-introspection bash-completion
+-DEPENDS = "gvfs enchant gconf gnome-doc-utils glib-2.0 gtk+ gtksourceview2 iso-codes"
++DEPENDS = "gvfs enchant gconf gnome-doc-utils glib-2.0 gtk+ gtksourceview2 iso-codes intltool-native"
  
--DEPENDS = "glib-2.0 libgudev dbus-glib"
-+DEPENDS = "glib-2.0 libgudev dbus-glib intltool-native"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
- SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz"
--SRC_URI[md5sum] = "66cc7266b15525cb366253e6639fc564"
--SRC_URI[sha256sum] = "7ef5035375a953b285a742591df0a65fd442f4641ce4d8f4392a41d6d6bc70b3"
-+SRC_URI[md5sum] = "d9d93d2961ee35b4cd8a75a6a8631cb4"
-+SRC_URI[sha256sum] = "a94f4657a8fa6835e2734fcc6edf20aa8c8d452f62299d7748541021c3eb2445"
+ inherit gnome gettext pythonnative
+-SRC_URI+= "file://0001-workaround-void-pointer-arithmetic.patch \
+-           file://0001-Remove-help-directory-from-build.patch"
++SRC_URI+= " \
++    file://0001-workaround-void-pointer-arithmetic.patch \
++    file://0001-Remove-help-directory-from-build.patch \
++    file://0002-suppress-string-format-literal-warning-to-fix-build-.patch \
++"
+ SRC_URI[archive.md5sum] = "e1eecb0a92a1a363b3d375ec5ac0fb3b"
+ SRC_URI[archive.sha256sum] = "a561fe3dd1d199baede1bd07c4ee65f06fc7c494dd4d3327117f04149a608e3c"
+ GNOME_COMPRESS_TYPE="bz2"
+@@ -19,5 +22,3 @@ EXTRA_OECONF = "--disable-scrollkeeper \
  
- S = "${WORKDIR}/ModemManager-${PV}"
- 
--PNBLACKLIST[modemmanager] ?= "Depends on broken libqmi"
+ FILES_${PN} += "${libdir}/gedit-2/plugin* ${datadir}/gedit-2"
+ FILES_${PN}-dbg += "${libdir}/gedit-2/plugin-loaders/.debug ${libdir}/gedit-2/plugins/.debug"
 -
- PACKAGECONFIG ??= "mbim qmi polkit \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
- "
+-PNBLACKLIST[gedit] ?= "Depends on broken gtksourceview2"
 -- 
 2.5.5
 
