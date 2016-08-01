@@ -1,37 +1,23 @@
-Return-Path: <fan.xin@jp.fujitsu.com>
-X-Greylist: delayed 669 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 01 Aug 2016 09:57:14 UTC
-Received: from mgwym02.jp.fujitsu.com (mgwym02.jp.fujitsu.com [211.128.242.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 37F686E64A
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 151C2731E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Aug 2016 09:57:14 +0000 (UTC)
-Received: from yt-mxq.gw.nic.fujitsu.com (unknown [192.168.229.66]) by
-	mgwym02.jp.fujitsu.com with smtp
-	id 1fe9_4370_8cfb5338_33c2_488a_be66_64afa93212c0;
-	Mon, 01 Aug 2016 18:46:00 +0900
-Received: from g01jpfmpwkw01.exch.g01.fujitsu.local
-	(g01jpfmpwkw01.exch.g01.fujitsu.local [10.0.193.38])
-	by yt-mxq.gw.nic.fujitsu.com (Postfix) with ESMTP id 73581AC00F9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Aug 2016 18:45:59 +0900 (JST)
-Received: from G01JPEXCHKW15.g01.fujitsu.local
-	(G01JPEXCHKW15.g01.fujitsu.local [10.0.194.54])
-	by g01jpfmpwkw01.exch.g01.fujitsu.local (Postfix) with ESMTP id
-	B910E692515 for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Aug 2016 18:45:58 +0900 (JST)
-Received: from localhost.localdomain (10.24.19.99) by
-	G01JPEXCHKW15.g01.fujitsu.local (10.0.194.54) with Microsoft SMTP
-	Server id 14.3.266.1; Mon, 1 Aug 2016 18:45:59 +0900
-From: Fan Xin <fan.xin@jp.fujitsu.com>
+	Mon,  1 Aug 2016 09:57:20 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u719vJiB026930
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 1 Aug 2016 02:57:19 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
+	Mon, 1 Aug 2016 02:57:19 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 1 Aug 2016 18:46:35 +0900
-Message-ID: <1470044795-785-1-git-send-email-fan.xin@jp.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+Date: Mon, 1 Aug 2016 05:57:17 -0400
+Message-ID: <1470045437-191645-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-X-SecurityPolicyCheck-GC: OK by FENCE-Mail
-X-TM-AS-MML: disable
-Cc: Fan Xin <fan.xin@jp.fujitsu.com>
-Subject: [PATCH] qpdf: add new recipe
+Subject: [meta-gnome][PATCH] network-manager-applet: addmissing intltool-native dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,51 +30,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Aug 2016 09:57:16 -0000
+X-List-Received-Date: Mon, 01 Aug 2016 09:57:21 -0000
 Content-Type: text/plain
 
-QPDF is a command-line program that does structural,
-content-preserving transformation on PDF files.
+Recipes that use intltool need to depend on intltool-native.
+...
+|WARNING: network-manager-applet-1.0.10-r0 do_configure: Missing DEPENDS
+on intltool-native
+...
 
-Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb
+ .../network-manager-applet/network-manager-applet_1.0.10.bb          | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb b/meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb
-new file mode 100644
-index 0000000..d5645d7
---- /dev/null
-+++ b/meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "QPDF is a command-line program that does structural, content-preserving transformations on PDF files"
-+DESCRIPTION = "QPDF is capable of creating linearized files and encrypted files. It is also capable of \
-+converting PDF files with object streams to files with no compressed objects or to generate object streams \
-+from files that don't have them. QPDF also supports a special mode designed to allow you to edit the content \
-+of PDF files in a text editor."
-+HOMEPAGE = "http://qpdf.sourceforge.net/"
-+
-+PR = "r0"
-+
-+RDEPENDS_${PN} = "libpcre zlib"
-+
-+LICENSE = "Artistic-2.0"
-+LIC_FILES_CHKSUM = "file://${WORKDIR}/qpdf-${PV}/Artistic-2.0;md5=7806296b9fae874361e6fb10072b7ee3"
-+
-+SRC_URI = "http://nchc.dl.sourceforge.net/project/qpdf/qpdf/${PV}/qpdf-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "e014bd3ecf1c4d1a520bbc14d84ac20e"
-+SRC_URI[sha256sum] = "a9fdc7e94d38fcd3831f37b6e0fe36492bf79aa6d54f8f66062cf7f9c4155233"
-+
-+inherit autotools-brokensep pkgconfig
-+
-+EXTRA_OECONF += "--with-random=/dev/urandom"
-+
-+do_configure_prepend() {
-+      sh autogen.sh
-+}
+diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.0.10.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.0.10.bb
+index d3e08ca..9803a83 100644
+--- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.0.10.bb
++++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.0.10.bb
+@@ -2,7 +2,10 @@ SUMMARY = "GTK+ applet for NetworkManager"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ 
+-DEPENDS = "gtk+3 libnotify libsecret networkmanager dbus-glib gconf libgnome-keyring iso-codes nss"
++DEPENDS = "gtk+3 libnotify libsecret networkmanager dbus-glib \
++           gconf libgnome-keyring iso-codes nss \
++           intltool-native \
++"
+ 
+ inherit gnomebase gsettings gtk-icon-cache gobject-introspection
+ 
 -- 
-2.7.4
+2.8.1
 
 
