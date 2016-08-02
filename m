@@ -1,24 +1,45 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E63FE6AC00
+Return-Path: <ross.burton@intel.com>
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 946F26080F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Aug 2016 06:54:13 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u726sBTZ016538
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue,  2 Aug 2016 08:00:20 +0000 (UTC)
+Received: by mail-wm0-f43.google.com with SMTP id p129so57593888wmp.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 1 Aug 2016 23:54:14 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
-	Mon, 1 Aug 2016 23:54:11 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 2 Aug 2016 02:54:10 -0400
-Message-ID: <1470120850-43591-1-git-send-email-jackie.huang@windriver.com>
+	Tue, 02 Aug 2016 01:00:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id;
+	bh=7Be+ZCndwWSqXPkElRggZ28yc2iahg6f2PN5VP2OdRk=;
+	b=uQy0PDDu3utAWCW1rGoA53iCooMvUS50c4vEgmdSFxLxQSEXqhi/MLdxemPkhgorjK
+	Fcb7BcTpbtVY24hbE58I1pt0jdwXi+E7U7XWvRMkxQ5almJz9n4ZVLrBgyYro2INXnFQ
+	8U/59j61ZZKoh3MO64cbCOmMRGGIxAWbWgcuBYV/u0Ub01754NHkS2xsl7JNb5h872I1
+	8y9aT9Axfz3+xHK+izJO5E4dD5Qf0unM1rWhP7HHGQHrK2/cilrUOGULmQXzBfRsjANN
+	fDV4RxQm/hpizyxDg95HLqSAE9WtGUZcrFxTM3RcQTwDpCmO4sC4UbhhaVcDxWmTCvAi
+	bB2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=7Be+ZCndwWSqXPkElRggZ28yc2iahg6f2PN5VP2OdRk=;
+	b=LH3217fxU+m2HUFDlOkENAiQbQ8w7hMTJlXVUkI+l+5qJljELB4PxDLxFfpHRKFLLt
+	4PNEZZPKuvUkPh53jIIa5sf0l9bbzOd2xLM4jhEOE4rw1uFANqdn1t6cnmTYoi6W45JL
+	wATAqBIPWiIWPL83bxbdQo5L0qle8278N59oRCMEFTwcaAvJ/ziDBCkcoPm+9B04eImZ
+	l2ZJHyjntPDNb1MT25qkBkdafMq7pqiAw+WVFf3GVUnNPlwZxLEtVaBfPrtm+GBJPb0g
+	lOECHbM7S9xeesmOpvVkGNstHXo9qDXZTVr4yns/5kBOrsRNdjB9DszMUMwLrVNOE8/X
+	dV2g==
+X-Gm-Message-State: AEkoout1y8dUeptI8vrSdk8WjUha7ylCSSX6c1FA9ZgCCQJmJOuE25mDDo05wEuPMh+a0Xfm
+X-Received: by 10.28.168.150 with SMTP id r144mr56159333wme.66.1470124819880; 
+	Tue, 02 Aug 2016 01:00:19 -0700 (PDT)
+Received: from flashheart.burtonini.com (home.burtonini.com. [81.2.106.35])
+	by smtp.gmail.com with ESMTPSA id p1sm1270517wjd.37.2016.08.02.01.00.18
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 02 Aug 2016 01:00:19 -0700 (PDT)
+From: Ross Burton <ross.burton@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  2 Aug 2016 09:00:15 +0100
+Message-Id: <1470124815-13360-1-git-send-email-ross.burton@intel.com>
 X-Mailer: git-send-email 2.8.1
-MIME-Version: 1.0
-Subject: [meta-perl][PATCH] adduser: upgrade to 3.115
+Subject: [RFC][PATCH][meta-oe] ninja: support target builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,42 +52,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Aug 2016 06:54:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 02 Aug 2016 08:00:22 -0000
 
-From: Jackie Huang <jackie.huang@windriver.com>
+Extend the recipe so that it supports target builds.
 
-Update the checksums and the S directory.
+Signed-off-by: Ross Burton <ross.burton@intel.com>
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../recipes-perl/adduser/{adduser_3.114.bb => adduser_3.115.bb}     | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-perl/recipes-perl/adduser/{adduser_3.114.bb => adduser_3.115.bb} (90%)
 
-diff --git a/meta-perl/recipes-perl/adduser/adduser_3.114.bb b/meta-perl/recipes-perl/adduser/adduser_3.115.bb
-similarity index 90%
-rename from meta-perl/recipes-perl/adduser/adduser_3.114.bb
-rename to meta-perl/recipes-perl/adduser/adduser_3.115.bb
-index fb4c0c4..312bad8 100644
---- a/meta-perl/recipes-perl/adduser/adduser_3.114.bb
-+++ b/meta-perl/recipes-perl/adduser/adduser_3.115.bb
-@@ -10,12 +10,12 @@ SRC_URI = "http://ftp.de.debian.org/debian/pool/main/a/${BPN}/${BPN}_${PV}.tar.x
-            file://adduser-add-M-option-for-useradd-when-no-create-home.patch \
- "
+RFC as I've not actually tested that this works on target, I just did it
+to silence my world builds. :)
+
+ .../ninja/{ninja-native_1.6.0.bb => ninja_1.6.0.bb}     | 17 +++++++++++------
+ 1 file changed, 11 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-devtools/ninja/{ninja-native_1.6.0.bb => ninja_1.6.0.bb} (64%)
+
+diff --git a/meta-oe/recipes-devtools/ninja/ninja-native_1.6.0.bb b/meta-oe/recipes-devtools/ninja/ninja_1.6.0.bb
+similarity index 64%
+rename from meta-oe/recipes-devtools/ninja/ninja-native_1.6.0.bb
+rename to meta-oe/recipes-devtools/ninja/ninja_1.6.0.bb
+index c00710a..4d6c47e 100644
+--- a/meta-oe/recipes-devtools/ninja/ninja-native_1.6.0.bb
++++ b/meta-oe/recipes-devtools/ninja/ninja_1.6.0.bb
+@@ -3,23 +3,28 @@ HOMEPAGE = "http://martine.github.com/ninja/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a81586a64ad4e476c791cda7e2f2c52e"
  
--SRC_URI[md5sum] = "3a079dd4e41d5a1fbaccaab03aacd881"
--SRC_URI[sha256sum] = "693b45bb0d27938fff2ecee5442ea2ac1b8804472ff0bb8faffd39616e58211f"
-+SRC_URI[md5sum] = "6bb6d93922d281f1b56393a53f8ce5fd"
-+SRC_URI[sha256sum] = "e7288281d4d1eec2948ba3687452ca33a8224d40c98d321bc3fbaefcf6d4c0db"
+-DEPENDS = "re2c-native"
++DEPENDS = "re2c-native ninja-native"
  
- inherit cpan-base update-alternatives
+-inherit native
+-
+-SRCREV="484c16336f19bd8970bb6e75322d61b92a229899"
++SRCREV = "484c16336f19bd8970bb6e75322d61b92a229899"
  
--S = "${WORKDIR}/${BPN}-3.113+nmu4"
-+S = "${WORKDIR}/${BPN}"
+ SRC_URI = "git://github.com/martine/ninja.git;branch=release"
+ 
+-S="${WORKDIR}/git"
++S = "${WORKDIR}/git"
+ 
+ do_configure[noexec] = "1"
+ 
++do_compile_class-native() {
++    ./configure.py --bootstrap
++}
++
+ do_compile() {
+-    python ${S}/configure.py --bootstrap
++    ./configure.py
++    ninja
+ }
  
  do_install() {
-     install -d ${D}${sbindir}
+     install -d ${D}${bindir}
+     install -m 0755 ${S}/ninja ${D}${bindir}/
+ }
++
++BBCLASSEXTEND = "native"
 -- 
 2.8.1
 
