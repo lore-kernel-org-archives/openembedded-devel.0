@@ -1,44 +1,45 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
-	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id B38B66E660
+Return-Path: <jussi.kukkonen@intel.com>
+Received: from mail-oi0-f45.google.com (mail-oi0-f45.google.com
+	[209.85.218.45])
+	by mail.openembedded.org (Postfix) with ESMTP id D59556AC37
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Aug 2016 08:24:17 +0000 (UTC)
-Received: by mail-io0-f171.google.com with SMTP id m101so205792299ioi.2
+	Tue,  2 Aug 2016 10:04:37 +0000 (UTC)
+Received: by mail-oi0-f45.google.com with SMTP id j185so229057079oih.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Aug 2016 01:24:19 -0700 (PDT)
+	Tue, 02 Aug 2016 03:04:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=8IxYEA2Xngwo5121q/CEs+GA3kR+k9YZM97cnD/g8OM=;
-	b=ywuepxLESd3216t8h02ZbOukRN5Fp78YjCbn7BeuDgKS3guDFGE54+nDCG9oz+7ut2
-	zrBdX21TjuauLL5XiNX1+TuVap7AZ3aJjd1BNwxJ9TjZFy5b9lCego4rCYm2M/cuDq0j
-	ErLas/Vzk6pmjjCrteNnHn4yg+mlveZI0XSJuDHYbihMKUvmLphZQ8RkP/BwGbjdL+oF
-	UimlyHwnAPlZ+LfrLIsIcdtklMS+vPXRw5KCCWqBJm3Y6lHINv2RyOzsrbfqW7RohxkX
-	0ysB9Zf2k5hA0idGw9FbIN0RPTHdCcmDRRWxdTOpe3+FO3SZ9b1u+IvAzw1VNFT5UEKW
-	V9lw==
+	:cc; bh=UI+DWvUE2r6cf25tAxq/RMk7S3vrOKsxd/bJA8jS7+M=;
+	b=JMJob8dAju7rqrVTTsaIFdGWHXg5GYZoVuY+v3QI5cts3agb3O4Xm4LdCi/oRY+3M2
+	LLDDyIN5zkxiuGtY6KaKTYtYnKvBNPx9b55fasp28Mu7H417luGvn6eZoADTlQ1qsc8H
+	AX0N83yGtccXb6ptawfv7MQIDvYcSbLxE99jJyjXhlMMoa3Qz4YdJw/9vXw9Hey0SIZ5
+	Rr1qTMel3tw+L0B5pkWUp0gz2X7ykiICdmvljPegPaRGAeXk9ZTK6iCU0KvTJx8Iz3Ij
+	fVmqSysqo+MkP0I+iO0WQwB8gR8CEIKoQ6xnuPW9q239upFzi8zVoNLvzRMio5A5On5E
+	R9eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=8IxYEA2Xngwo5121q/CEs+GA3kR+k9YZM97cnD/g8OM=;
-	b=mBF3r/2dTCTjkPQFxXRhDoQiluGrRBJeX0zAmLVOKYD7AagCNJVdCwcApYit65V6eB
-	xd0ea6dd+RmEu65R+bmLKeFMy6zL7xMYDClClcGf8Q3SXE6NSAn/PmKBoPK9j7mjfhrq
-	eJX81GkmKM+Nx/kNrxrwsM+eYlUJetpEk4AZ2uCqk9agg2etr+cXdE4XFcQa2A5BVpVe
-	2XQ9BSKdl1mNi4Ujb+/ehcwqOCo078cG7emPFOAtoxzLb6QYveJuDAwK5Ong2Nr5w3hJ
-	GKAN6j2THY8/Osl2JASeo0ncOWWJ18SsDKCSQgB0iUL3Rvxxp5yZKdhrB7xQYQbR1xPu
-	uYpQ==
-X-Gm-Message-State: AEkoousz27uCA/iebjjszzwkBUC2R0IweS0RKYRDbE5qZ7/7ELAEkynjePYH01N3DClfsu8yH4Rs5MfvdNpQvci4
-X-Received: by 10.107.135.142 with SMTP id r14mr67163777ioi.133.1470126258803; 
-	Tue, 02 Aug 2016 01:24:18 -0700 (PDT)
+	bh=UI+DWvUE2r6cf25tAxq/RMk7S3vrOKsxd/bJA8jS7+M=;
+	b=GjtvJVr6OdgqTMmuPmmfO4WP4SKv9ZUGn44+nOEhcR8f2gU7/IjaqqNKnZxk1mwFnC
+	UNeHcVgR1I57H8ERxiDZFZv8ezYbuaFRX5CwX5tVeW/Tj7dG5mGPsIRvrmr2w9SNLNXH
+	wqhhcBvroimv6/BzSvLq2U1ljO53OHqT+HBjzDmBOGngs4VIcRR0OYjbMiUCuv5wUS5v
+	jK3S+8I68Jh3ZfUi8VR8mpTnvisIVctwjVYfJHLwedPSjv33sBbtwNpyEMGDLsNsYigB
+	WO97EVpm6aFi8zS2Qa1aanKoHhXTh9+nSpa9a2aE+7FDK9Jyx0PJISxiUGIXtu2oTdZG
+	91dA==
+X-Gm-Message-State: AEkooutYmT4o+2OcwDoFVOooL+pL6RhgIJhFLkO7fv3Fu4BEaUv2l76/kOf2cOMbJNDAkaXTGRT4UsaGBouQmoyI
+X-Received: by 10.157.35.136 with SMTP id t8mr27011524otb.127.1470132277816;
+	Tue, 02 Aug 2016 03:04:37 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.107.18.17 with HTTP; Tue, 2 Aug 2016 01:23:58 -0700 (PDT)
-In-Reply-To: <CAHiDW_Hu7dZYxLD0cCEbV_M=-VtQF0s7O_8aZxZrXof2LXa5gw@mail.gmail.com>
+Received: by 10.202.241.11 with HTTP; Tue, 2 Aug 2016 03:04:07 -0700 (PDT)
+In-Reply-To: <CAJTo0LbZbk_w+=G=EeG1O8U-9-hLH5B2N=MwEczyHcpzuaThxw@mail.gmail.com>
 References: <CAHiDW_Hu7dZYxLD0cCEbV_M=-VtQF0s7O_8aZxZrXof2LXa5gw@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 2 Aug 2016 09:23:58 +0100
-Message-ID: <CAJTo0LbZbk_w+=G=EeG1O8U-9-hLH5B2N=MwEczyHcpzuaThxw@mail.gmail.com>
-To: Jussi Kukkonen <jussi.kukkonen@intel.com>
+	<CAJTo0LbZbk_w+=G=EeG1O8U-9-hLH5B2N=MwEczyHcpzuaThxw@mail.gmail.com>
+From: Jussi Kukkonen <jussi.kukkonen@intel.com>
+Date: Tue, 2 Aug 2016 13:04:07 +0300
+Message-ID: <CAHiDW_Ev_wP_R=Kp=ADJ_zsk2LsYdQT4rsySxGL4rFWUdHu=yA@mail.gmail.com>
+To: "Burton, Ross" <ross.burton@intel.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
 	Patches and discussions about the oe-core layer
@@ -56,19 +57,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Aug 2016 08:24:19 -0000
+X-List-Received-Date: Tue, 02 Aug 2016 10:04:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On 13 May 2016 at 08:15, Jussi Kukkonen <jussi.kukkonen@intel.com> wrote:
+On 2 August 2016 at 11:23, Burton, Ross <ross.burton@intel.com> wrote:
 
-> I'm considering removing the augeas recipe from oe-core: it has not
-> really been depended on by anything since Danny (rpm has a non-default
-> PACKAGECONFIG but even that is accompanied by comments about no
-> testing) and we have nothing testing its functionality. Please speak
-> up now if you think augeas should stay in oe-core.
+>
+> On 13 May 2016 at 08:15, Jussi Kukkonen <jussi.kukkonen@intel.com> wrote:
+>
+>> I'm considering removing the augeas recipe from oe-core: it has not
+>> really been depended on by anything since Danny (rpm has a non-default
+>> PACKAGECONFIG but even that is accompanied by comments about no
+>> testing) and we have nothing testing its functionality. Please speak
+>> up now if you think augeas should stay in oe-core.
+>>
+>
+> I think that it really should go and will likely be doing this shortly.
+>
+> Ross
 >
 
-I think that it really should go and will likely be doing this shortly.
+Feel free, my commit to move it to meta-oe just showed up in
+meta-openembedded master.
 
-Ross
+Jussi
 
