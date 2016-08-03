@@ -1,39 +1,27 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B8FD6FF78
+Return-Path: <maxin.john@intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id EFA3C60853
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Aug 2016 12:05:08 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208,217";a="9492161"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 03 Aug 2016 20:04:51 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 1854342CA541;
-	Wed,  3 Aug 2016 20:04:49 +0800 (CST)
-Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0279.002; Wed, 3 Aug 2016 20:04:48 +0800
-From: "Huang, Qiyu" <huangqy.fnst@cn.fujitsu.com>
-To: "Burton, Ross" <ross.burton@intel.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH] cronie: 1.5.0 -> 1.5.1
-Thread-Index: AQHR7Ja8QghfO4kVZUCNL5rHTHzhKaA3IJag
-Date: Wed, 3 Aug 2016 12:04:48 +0000
-Message-ID: <97F7C8E70D26E94FA7E05578493F65C6D50E17@G08CNEXMBPEKD03.g08.fujitsu.local>
-References: <1470148001-61634-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-	<CAJTo0Lb87euCxRhLR+LgqB2YUsfZoTsmdkD+4tCRmUzA0BxrBw@mail.gmail.com>
-In-Reply-To: <CAJTo0Lb87euCxRhLR+LgqB2YUsfZoTsmdkD+4tCRmUzA0BxrBw@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.27]
-MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 1854342CA541.A718E
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: =?UTF-8?B?562U5aSNOiBbUEFUQ0hdIGNyb25pZTogMS41LjAgLT4gMS41LjE=?=
+	Wed,  3 Aug 2016 12:10:50 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 03 Aug 2016 05:10:51 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.28,465,1464678000"; d="scan'208";a="1018886347"
+Received: from linux.intel.com ([10.54.29.200])
+	by fmsmga001.fm.intel.com with ESMTP; 03 Aug 2016 05:10:51 -0700
+Received: from mbabyjoh-desk.fi.intel.com (mbabyjoh-desk.fi.intel.com
+	[10.237.72.71])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by linux.intel.com (Postfix) with ESMTP id 75A776A4006
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Aug 2016 05:10:37 -0700 (PDT)
+From: "Maxin B. John" <maxin.john@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  3 Aug 2016 15:10:24 +0300
+Message-Id: <1470226224-13589-1-git-send-email-maxin.john@intel.com>
+X-Mailer: git-send-email 2.4.0
+Subject: [PATCH] pointercal: move recipe to meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,27 +34,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Aug 2016 12:05:14 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 03 Aug 2016 12:10:51 -0000
 
-VGhhbmtzIGZvciB5b3VyIGZlZWRiYWNrLiBJIGFwb2xvZ2l6ZSBmb3IgdGhl
-IGNvbmZ1c2lvbi4gSXQgd2FzIGFscmVhZHkgcG9zdGVkIGxhc3Qgd2Vlaywg
-SSB3aWxsIG5vdCB1cGdyYWRlIGl0Lg0KDQpSZWdhcmRzLA0KSHVhbmcgUWl5
-dQ0KDQoNCuWPkeS7tuS6ujogQnVydG9uLCBSb3NzIFttYWlsdG86cm9zcy5i
-dXJ0b25AaW50ZWwuY29tXQ0K5Y+R6YCB5pe26Ze0OiAyMDE25bm0OOaciDLm
-l6UgMTY6MjANCuaUtuS7tuS6ujogT3BlbkVtYmVkZGVkIERldmVsIExpc3Qg
-PG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPg0K
-5oqE6YCBOiBIdWFuZywgUWl5dS/pu4Qg55Cm5a6HIDxodWFuZ3F5LmZuc3RA
-Y24uZnVqaXRzdS5jb20+DQrkuLvpopg6IFJlOiBbb2VdIFtQQVRDSF0gY3Jv
-bmllOiAxLjUuMCAtPiAxLjUuMQ0KDQoNCk9uIDIgQXVndXN0IDIwMTYgYXQg
-MTU6MjYsIEh1YW5nIFFpeXUgPGh1YW5ncXkuZm5zdEBjbi5mdWppdHN1LmNv
-bTxtYWlsdG86aHVhbmdxeS5mbnN0QGNuLmZ1aml0c3UuY29tPj4gd3JvdGU6
-DQpVcGRhdGUgY3JvbmllIGZyb20gMS41LjAgdG8gMS41LjENCg0KVGhpcyBz
-aG91bGQgYmUgb24gdGhlIG9wZW5lbWJlZGRlZC1jb3JlIGxpc3QsIHdhcyBh
-bHJlYWR5IHBvc3RlZCBsYXN0IHdlZWssIGFuZCB5b3UgbWFkZSB0aGUgc2Ft
-ZSBtaXN0YWtlIHRoYXQgdGhlIHByZXZpb3VzIHBhdGNoIGRpZCBieSBub3Qg
-dGVzdGluZyB0aGUgUEFNLXNwZWNpZmljIHBhdGNoZXMgKHdoaWNoIGZhaWwg
-dG8gYXBwbHkpLg0KDQpSb3NzDQoKCg==
+xtscal is being replaced with xinput-calibrator in oe-core
+and that made pointercal redundant. So, move it from oe-core to
+meta-oe.
+
+Signed-off-by: Maxin B. John <maxin.john@intel.com>
+---
+ .../recipes-graphics/pointercal/pointercal/COPYING |   2 ++
+ .../pointercal/pointercal/pointercal               |   0
+ .../pointercal/pointercal/qemuarm/pointercal       |   1 +
+ .../pointercal/pointercal/qemuarmv6/pointercal     |   1 +
+ .../pointercal/pointercal/qemuarmv7/pointercal     |   1 +
+ .../pointercal/pointercal/qemumips/pointercal      |   1 +
+ .../pointercal/pointercal/qemuppc/pointercal       | Bin 0 -> 36 bytes
+ .../pointercal/pointercal/qemux86-64/pointercal    |   1 +
+ .../pointercal/pointercal/qemux86/pointercal       |   1 +
+ .../recipes-graphics/pointercal/pointercal_0.0.bb  |  22 +++++++++++++++++++++
+ 10 files changed, 30 insertions(+)
+ create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/COPYING
+ create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/pointercal
+ create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/qemuarm/pointercal
+ create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/qemuarmv6/pointercal
+ create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/qemuarmv7/pointercal
+ create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/qemumips/pointercal
+ create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/qemuppc/pointercal
+ create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/qemux86-64/pointercal
+ create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/qemux86/pointercal
+ create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal_0.0.bb
+
+diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/COPYING b/meta-gpe/recipes-graphics/pointercal/pointercal/COPYING
+new file mode 100644
+index 0000000..63f5293
+--- /dev/null
++++ b/meta-gpe/recipes-graphics/pointercal/pointercal/COPYING
+@@ -0,0 +1,2 @@
++This is a blank COPYING file, and should be filled in by original author in future.
++
+diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/pointercal b/meta-gpe/recipes-graphics/pointercal/pointercal/pointercal
+new file mode 100644
+index 0000000..e69de29
+diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarm/pointercal b/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarm/pointercal
+new file mode 100644
+index 0000000..abd84ca
+--- /dev/null
++++ b/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarm/pointercal
+@@ -0,0 +1 @@
++8313 4 -8526 7 8334 -82604 65536
+diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarmv6/pointercal b/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarmv6/pointercal
+new file mode 100644
+index 0000000..abd84ca
+--- /dev/null
++++ b/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarmv6/pointercal
+@@ -0,0 +1 @@
++8313 4 -8526 7 8334 -82604 65536
+diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarmv7/pointercal b/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarmv7/pointercal
+new file mode 100644
+index 0000000..abd84ca
+--- /dev/null
++++ b/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarmv7/pointercal
+@@ -0,0 +1 @@
++8313 4 -8526 7 8334 -82604 65536
+diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/qemumips/pointercal b/meta-gpe/recipes-graphics/pointercal/pointercal/qemumips/pointercal
+new file mode 100644
+index 0000000..abd84ca
+--- /dev/null
++++ b/meta-gpe/recipes-graphics/pointercal/pointercal/qemumips/pointercal
+@@ -0,0 +1 @@
++8313 4 -8526 7 8334 -82604 65536
+diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/qemuppc/pointercal b/meta-gpe/recipes-graphics/pointercal/pointercal/qemuppc/pointercal
+new file mode 100644
+index 0000000000000000000000000000000000000000..c2d6e37bf0c0d956ba17ba9955613c4cee5a147a
+GIT binary patch
+literal 36
+mcmXpsFt#*Q&;=n=3lPgl!O+0i%uK=9!qiZ~%+%D_i~#_8+XjmO
+
+literal 0
+HcmV?d00001
+
+diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/qemux86-64/pointercal b/meta-gpe/recipes-graphics/pointercal/pointercal/qemux86-64/pointercal
+new file mode 100644
+index 0000000..640053d
+--- /dev/null
++++ b/meta-gpe/recipes-graphics/pointercal/pointercal/qemux86-64/pointercal
+@@ -0,0 +1 @@
++1280 0 1002 0 960 328 65536
+diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/qemux86/pointercal b/meta-gpe/recipes-graphics/pointercal/pointercal/qemux86/pointercal
+new file mode 100644
+index 0000000..640053d
+--- /dev/null
++++ b/meta-gpe/recipes-graphics/pointercal/pointercal/qemux86/pointercal
+@@ -0,0 +1 @@
++1280 0 1002 0 960 328 65536
+diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal_0.0.bb b/meta-gpe/recipes-graphics/pointercal/pointercal_0.0.bb
+new file mode 100644
+index 0000000..df735a5
+--- /dev/null
++++ b/meta-gpe/recipes-graphics/pointercal/pointercal_0.0.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "Touchscreen calibration data"
++SECTION = "base"
++PR = "r11"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4b5fcfc87fb615860d398b5e38685edf"
++
++SRC_URI = "file://pointercal \
++           file://COPYING"
++
++S = "${WORKDIR}"
++
++do_install() {
++	# Only install file if it has a contents
++	if [ -s ${S}/pointercal ]; then
++	        install -d ${D}${sysconfdir}/
++	        install -m 0644 ${S}/pointercal ${D}${sysconfdir}/
++	fi
++}
++
++ALLOW_EMPTY_${PN} = "1"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++INHIBIT_DEFAULT_DEPS = "1"
+-- 
+2.4.0
+
 
