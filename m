@@ -1,27 +1,51 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id EFA3C60853
+Return-Path: <twoerner@gmail.com>
+Received: from mail-it0-f67.google.com (mail-it0-f67.google.com
+	[209.85.214.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 055EB607A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Aug 2016 12:10:50 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga101.fm.intel.com with ESMTP; 03 Aug 2016 05:10:51 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.28,465,1464678000"; d="scan'208";a="1018886347"
-Received: from linux.intel.com ([10.54.29.200])
-	by fmsmga001.fm.intel.com with ESMTP; 03 Aug 2016 05:10:51 -0700
-Received: from mbabyjoh-desk.fi.intel.com (mbabyjoh-desk.fi.intel.com
-	[10.237.72.71])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by linux.intel.com (Postfix) with ESMTP id 75A776A4006
+	Wed,  3 Aug 2016 12:33:05 +0000 (UTC)
+Received: by mail-it0-f67.google.com with SMTP id u186so15978067ita.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Aug 2016 05:10:37 -0700 (PDT)
-From: "Maxin B. John" <maxin.john@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  3 Aug 2016 15:10:24 +0300
-Message-Id: <1470226224-13589-1-git-send-email-maxin.john@intel.com>
-X-Mailer: git-send-email 2.4.0
-Subject: [PATCH] pointercal: move recipe to meta-oe
+	Wed, 03 Aug 2016 05:33:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=LIOV14bGrtRZ0zZp1rUvz+0qkGRa0uUqKfEAqvrB6Mc=;
+	b=k4cHvuyKH30OvL4217YvPX4fkH9TfkfRhOPFEBAlLJOba5+CQ4Q9y99WbH6Z0cBNz+
+	R6FT3mf7+TdbTl6kpLfXRyyVh9gQ3W5fup7zuXXn6xJWuviUoVGB8IJrEljFdBbQUzkF
+	McU+aFAsOAJcaIrCxeOZaHft+Ir6yt22pLaXAe7eRjVXpipB9vvhY+VJTtKJvsYGUwmi
+	7RdOJtgtQqElvpNJnGuOLoBX5LvJJjr5Ry1+mcYb+1njw1UlwLhwD8rEApw6t+5zAIir
+	HsNaNgyk4Z+dr8rl8Q54CBUBPVcUZuEIOtwwu3CLTZGwlvzMR5au/fnrOwKaSzuY1SkC
+	8DSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=LIOV14bGrtRZ0zZp1rUvz+0qkGRa0uUqKfEAqvrB6Mc=;
+	b=WbHjDFGx13EUDHxVRG0hv/rzL/0xYMQ9gtnEhPvsqNce+2G4ReZc1KZaX44zuR86ng
+	uWgWlsCOVFz+G3o304GFxxHnjAHsyo9sQ8pbIhtH11yqW7v2S2vG3tX97sXARFBsXP+f
+	FyOK45hTUxk63zabVUNS31fFZt9qQzHeRhC39KE4778hMZcjRq+lVQXKmL9Qpql5Fyxk
+	lSM2YR1KjECsTLaZ2EBCwpQ8iOdpGHKcX7D8WmmLT8XFj5ckYnY+S48Eq/r4WvqlxGuP
+	jY/ApdZ+qEzgDn8EJ4L4RwoszuWd3yYRP1GdzHJ70VMQNJYEWbPP2WIDRR79arKlRvFZ
+	4mTw==
+X-Gm-Message-State: AEkoouvFvSky/kbt3FcCBAzNO87xEbQE6jukhQiVx+rHeKO2WJw5j2oVPkhsa8lofYXNHg==
+X-Received: by 10.36.124.67 with SMTP id a64mr23873407itd.21.1470227586202;
+	Wed, 03 Aug 2016 05:33:06 -0700 (PDT)
+Received: from openSUSE-i7.site (dsl-67-55-28-109.acanac.net. [67.55.28.109])
+	by smtp.gmail.com with ESMTPSA id
+	o15sm16544398ith.2.2016.08.03.05.33.05
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 03 Aug 2016 05:33:05 -0700 (PDT)
+Date: Wed, 3 Aug 2016 08:33:03 -0400
+From: Trevor Woerner <twoerner@gmail.com>
+To: openembedded-devel@lists.openembedded.org, eric@eukrea.com,
+	denis@eukrea.com, otavio@ossystems.com.br
+Message-ID: <20160803123303.GA22401@openSUSE-i7.site>
+References: <20160721042134.14806-1-twoerner@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <20160721042134.14806-1-twoerner@gmail.com>
+User-Agent: Mutt/1.6.0 (2016-04-01)
+Subject: Re: [meta-browser][PATCH v2 0/4] chromium updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,128 +58,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Aug 2016 12:10:51 -0000
+X-List-Received-Date: Wed, 03 Aug 2016 12:33:06 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-xtscal is being replaced with xinput-calibrator in oe-core
-and that made pointercal redundant. So, move it from oe-core to
-meta-oe.
+ping :-)
 
-Signed-off-by: Maxin B. John <maxin.john@intel.com>
----
- .../recipes-graphics/pointercal/pointercal/COPYING |   2 ++
- .../pointercal/pointercal/pointercal               |   0
- .../pointercal/pointercal/qemuarm/pointercal       |   1 +
- .../pointercal/pointercal/qemuarmv6/pointercal     |   1 +
- .../pointercal/pointercal/qemuarmv7/pointercal     |   1 +
- .../pointercal/pointercal/qemumips/pointercal      |   1 +
- .../pointercal/pointercal/qemuppc/pointercal       | Bin 0 -> 36 bytes
- .../pointercal/pointercal/qemux86-64/pointercal    |   1 +
- .../pointercal/pointercal/qemux86/pointercal       |   1 +
- .../recipes-graphics/pointercal/pointercal_0.0.bb  |  22 +++++++++++++++++++++
- 10 files changed, 30 insertions(+)
- create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/COPYING
- create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/pointercal
- create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/qemuarm/pointercal
- create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/qemuarmv6/pointercal
- create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/qemuarmv7/pointercal
- create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/qemumips/pointercal
- create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/qemuppc/pointercal
- create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/qemux86-64/pointercal
- create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal/qemux86/pointercal
- create mode 100644 meta-gpe/recipes-graphics/pointercal/pointercal_0.0.bb
+Is it possible to get an update on whether this patch is being considered or
+not?
 
-diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/COPYING b/meta-gpe/recipes-graphics/pointercal/pointercal/COPYING
-new file mode 100644
-index 0000000..63f5293
---- /dev/null
-+++ b/meta-gpe/recipes-graphics/pointercal/pointercal/COPYING
-@@ -0,0 +1,2 @@
-+This is a blank COPYING file, and should be filled in by original author in future.
-+
-diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/pointercal b/meta-gpe/recipes-graphics/pointercal/pointercal/pointercal
-new file mode 100644
-index 0000000..e69de29
-diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarm/pointercal b/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarm/pointercal
-new file mode 100644
-index 0000000..abd84ca
---- /dev/null
-+++ b/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarm/pointercal
-@@ -0,0 +1 @@
-+8313 4 -8526 7 8334 -82604 65536
-diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarmv6/pointercal b/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarmv6/pointercal
-new file mode 100644
-index 0000000..abd84ca
---- /dev/null
-+++ b/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarmv6/pointercal
-@@ -0,0 +1 @@
-+8313 4 -8526 7 8334 -82604 65536
-diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarmv7/pointercal b/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarmv7/pointercal
-new file mode 100644
-index 0000000..abd84ca
---- /dev/null
-+++ b/meta-gpe/recipes-graphics/pointercal/pointercal/qemuarmv7/pointercal
-@@ -0,0 +1 @@
-+8313 4 -8526 7 8334 -82604 65536
-diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/qemumips/pointercal b/meta-gpe/recipes-graphics/pointercal/pointercal/qemumips/pointercal
-new file mode 100644
-index 0000000..abd84ca
---- /dev/null
-+++ b/meta-gpe/recipes-graphics/pointercal/pointercal/qemumips/pointercal
-@@ -0,0 +1 @@
-+8313 4 -8526 7 8334 -82604 65536
-diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/qemuppc/pointercal b/meta-gpe/recipes-graphics/pointercal/pointercal/qemuppc/pointercal
-new file mode 100644
-index 0000000000000000000000000000000000000000..c2d6e37bf0c0d956ba17ba9955613c4cee5a147a
-GIT binary patch
-literal 36
-mcmXpsFt#*Q&;=n=3lPgl!O+0i%uK=9!qiZ~%+%D_i~#_8+XjmO
-
-literal 0
-HcmV?d00001
-
-diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/qemux86-64/pointercal b/meta-gpe/recipes-graphics/pointercal/pointercal/qemux86-64/pointercal
-new file mode 100644
-index 0000000..640053d
---- /dev/null
-+++ b/meta-gpe/recipes-graphics/pointercal/pointercal/qemux86-64/pointercal
-@@ -0,0 +1 @@
-+1280 0 1002 0 960 328 65536
-diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal/qemux86/pointercal b/meta-gpe/recipes-graphics/pointercal/pointercal/qemux86/pointercal
-new file mode 100644
-index 0000000..640053d
---- /dev/null
-+++ b/meta-gpe/recipes-graphics/pointercal/pointercal/qemux86/pointercal
-@@ -0,0 +1 @@
-+1280 0 1002 0 960 328 65536
-diff --git a/meta-gpe/recipes-graphics/pointercal/pointercal_0.0.bb b/meta-gpe/recipes-graphics/pointercal/pointercal_0.0.bb
-new file mode 100644
-index 0000000..df735a5
---- /dev/null
-+++ b/meta-gpe/recipes-graphics/pointercal/pointercal_0.0.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "Touchscreen calibration data"
-+SECTION = "base"
-+PR = "r11"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4b5fcfc87fb615860d398b5e38685edf"
-+
-+SRC_URI = "file://pointercal \
-+           file://COPYING"
-+
-+S = "${WORKDIR}"
-+
-+do_install() {
-+	# Only install file if it has a contents
-+	if [ -s ${S}/pointercal ]; then
-+	        install -d ${D}${sysconfdir}/
-+	        install -m 0644 ${S}/pointercal ${D}${sysconfdir}/
-+	fi
-+}
-+
-+ALLOW_EMPTY_${PN} = "1"
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+INHIBIT_DEFAULT_DEPS = "1"
--- 
-2.4.0
-
+There's also an earlier patch from July 15th which hasn't been added yet
+either.
 
