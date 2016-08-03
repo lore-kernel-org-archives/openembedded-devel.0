@@ -1,35 +1,24 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 63E676010B
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EE3126E5CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Aug 2016 18:21:36 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id u25so9885365qtb.3
+	Wed,  3 Aug 2016 02:23:55 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u732NuD8026523
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Aug 2016 11:21:37 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=dp//DMpmSKQOQOrHhtTLu9UG+9K1EjPjp8fEFkaj8U8=;
-	b=WdseCn/HF05fnnVU2CH+3BrduSpE14APZGUDlq58qC6Z4F22lSJMp7/y+waKctmebP
-	1dr2R7BJNFHH3Xo+RQqHJEzCrsEN6UdeQUESxp3Q9Bany0HkrL8lSs6GRt97bCd2Khr9
-	Eb6Mq4yZb1/Da5Biu+JqdDPzrDB9XJSLsK7bBctjEVxvtCS7B2pCwqAqDFiXZcjY62dh
-	jBcQSMSzS04lgh+R2hISjEypWIm7L5/S2Q8VshOlq9BhzQmzK3zU7a80rG1HAu6wTMbS
-	BHQ4YgcRydxrPv8Z9MQoQMZiFHTn9rxKbgZf/nGNpOY0xs0wFtasIoEpMTUQ/7551Lxc
-	twkA==
-X-Gm-Message-State: AEkoouv1DGIguOiPUSHQnmxCYegFDuyMkZsNOb70NU2vCG+hhhP5Rxlj/gnbD+udFsAKvA==
-X-Received: by 10.200.56.155 with SMTP id f27mr100732138qtc.26.1470162097431; 
-	Tue, 02 Aug 2016 11:21:37 -0700 (PDT)
-Received: from localhost.localdomain ([96.91.222.230])
-	by smtp.gmail.com with ESMTPSA id z1sm1946293qkc.40.2016.08.02.11.21.36
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 02 Aug 2016 11:21:36 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 Aug 2016 14:21:27 -0400
-Message-Id: <1470162087-5919-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] libgit2: add a recipe for libgit2 version 0.24.1
+	Tue, 2 Aug 2016 19:23:56 -0700
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
+	Tue, 2 Aug 2016 19:23:55 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 2 Aug 2016 22:23:49 -0400
+Message-ID: <1470191029-19137-1-git-send-email-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.8.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] xerces-c: upgrade to 3.1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,45 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Aug 2016 18:21:38 -0000
+X-List-Received-Date: Wed, 03 Aug 2016 02:23:59 -0000
+Content-Type: text/plain
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+From: Jackie Huang <jackie.huang@windriver.com>
+
+upgrade to version 3.1.4 to fix two CVEs:
+https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-4463
+https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-2099
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-oe/recipes-support/libgit2/libgit2_0.24.1.bb | 24 +++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
- create mode 100644 meta-oe/recipes-support/libgit2/libgit2_0.24.1.bb
+ .../xerces-c/{xerces-c_3.1.3.bb => xerces-c_3.1.4.bb}                 | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/xerces-c/{xerces-c_3.1.3.bb => xerces-c_3.1.4.bb} (91%)
 
-diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.24.1.bb b/meta-oe/recipes-support/libgit2/libgit2_0.24.1.bb
-new file mode 100644
-index 0000000..e580308
---- /dev/null
-+++ b/meta-oe/recipes-support/libgit2/libgit2_0.24.1.bb
-@@ -0,0 +1,24 @@
-+SUMMARY = "the Git linkable library"
-+HOMEPAGE = "http://libgit2.github.com/"
-+LICENSE = "GPL-2.0-with-GCC-exception"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=34197a479f637beb9e09e56893f48bc2"
-+
-+DEPENDS = "openssl zlib"
-+
-+SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.24"
-+SRCREV = "211e117a0590583a720c53172406f34186c543bd"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake
-+
-+EXTRA_OECMAKE = "\
-+	-DTHREADSAFE=ON \
-+	-DBUILD_CLAR=OFF \
-+	-DSHA1_TYPE="builtin" \
-+	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
-+	-DBUILD_SHARED_LIBS=OFF \
-+	-DBUILD_EXAMPLES=OFF \
-+"
-+
-+BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.3.bb b/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
+similarity index 91%
+rename from meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.3.bb
+rename to meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
+index 2355c9d..40612e5 100644
+--- a/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.3.bb
++++ b/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
+@@ -10,8 +10,8 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ 
+ SRC_URI = "http://apache.lauf-forum.at/xerces/c/3/sources/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "5e333b55cb43e6b025ddf0e5d0f0fb0d"
+-SRC_URI[sha256sum] = "fc5e5e0247b108b8d64d75aeb124cabdee9b7fcd725a89fe2242b4637b25c1fa"
++SRC_URI[md5sum] = "d04ae9d8b2dee2157c6db95fa908abfd"
++SRC_URI[sha256sum] = "9408f12c1628ecf80730bedbe8b2caad810edd01bb4c66f77b60c873e8cc6891"
+ 
+ inherit autotools
+ 
 -- 
-1.9.1
+2.8.1
 
 
