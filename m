@@ -1,48 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D882731D8
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 98E24766A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Aug 2016 09:37:14 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id o80so42136490wme.0
+	Thu,  4 Aug 2016 09:38:09 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id o80so42145179wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Aug 2016 02:37:16 -0700 (PDT)
+	Thu, 04 Aug 2016 02:38:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=fJD3xz7/Grda8ekoHU5Sehw3TnR5CHCNm2UUb9X8Big=;
-	b=XAFTvsyU30G9S+MiqmK3e29XLwKNlDO32HxrySnUh/SQmWe2zEK9P2VVE8BNzGvs7q
-	UoJMfoq5DpxbJyc0jmEP2QVe8pyB8HdPG0OKUDXre+22J762tUT4EANpIatd9tMJMkjt
-	9evv2BEqZqNbIQA/ZZWthjfvRsXSjugXZsqGdv5XJe2NDlRkr2IWu98xzq8CbDcaZ52T
-	TcvOumMAaVpD/5d6ULq1HGySjzH8hPNeCKsqjmrP5mFVuR7E3o2uuLAAqCL9iIPYhMKI
-	2Q9ErMkfrTXTBw+AF6CuQd4EzJBQrScWN3nOWBV2XKOuT8pLwztef1VNSYv5kE0fsDEA
-	ZtPQ==
+	bh=xIEKXLMQqiJJtFMdtSDlmSCy0kRnJXuYQkq/i0UwCZM=;
+	b=vv8K02/J3TqUUbxoQSHsSGetj415NG3FnvVso5UB3NbNbtxmnvOEFDDml+uCXUVSrt
+	Fa6aWbhy+3rOqS+0P6D7i2YRkDVuT7VcTTq5iqleGRxAKwg5awwftp6lPzEwiW/FSLOR
+	8imRkK/5zjZhBpL05u4uYKJXsAbdHZ4PofZVyTj48CXFwpKKM4tGmykY1SPtkThQDyVz
+	sSRo8wqKrdn24CexgRx3xF6SXNlLivFLp6iG/oJew4ScMF9vsdBOcx9bkP9vZA10u8CS
+	0iHbSeuICvc8Kk1YoL92Ns8g/oLN6TiShtYcHGKkiP/zDfpVIMfZIxWoskdMgfW1n/r6
+	sOug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=fJD3xz7/Grda8ekoHU5Sehw3TnR5CHCNm2UUb9X8Big=;
-	b=KaqF4cUTcmll1un7J8ydYK1Bkv0WlPKHy6nLUHwB+QvAjxQ5EuMz0efbxLe7xpayfM
-	pMSL4BlPhsltPeaSI/odSWjZl3TNnLmFYzNRthhe/2xLwDGB6SUX26GBg9tmyy0Ss+Ba
-	Tt779Dv9SJvMG8q/fkxXN5fFCbYV+cflzFKrGQKRDXVddzaq9XMsca5qf3bi5UpNitgZ
-	paA+T5uCbWb1AjfBVJbmgzluyedSar47JacPFECHZoWyzc3IgUzGpK7oWFfhtSuHOUCv
-	xpCLMVmx6XdMfiIBEdlR67H4DDJPFVvPtUobGqnVR2mOzJxq/vR4kep9W5H4iRqz2Rh/
-	Z7WQ==
-X-Gm-Message-State: AEkoouvmUG190zh7leE+fwxYowM/vJ4K5cqwEv5aipNlu2Lng9D17rX7gTwqIdzyOI0S9A==
-X-Received: by 10.28.216.75 with SMTP id p72mr30160870wmg.67.1470303434515;
-	Thu, 04 Aug 2016 02:37:14 -0700 (PDT)
+	bh=xIEKXLMQqiJJtFMdtSDlmSCy0kRnJXuYQkq/i0UwCZM=;
+	b=LIW97oTuqb+CQ7YBLfoMKmdu1Hx0MdOF5Qek4/o0z0h2CFYwA9n2pTPOpaIXNiA6tS
+	PbJrLovOABv3RI5RhKXc1yNj3ZXWlehb4SaaWt+CX3C71I16jGgUzrx5d7Q3J6ccBW+U
+	r+yZFSk42V7QRq/eTdvzMXO9f9yXqFdNBBwHKufLUGGZQI9i/yfvVflmC2jWo8oqUFIJ
+	OBiaxaZ4Ww0yw4VwwsqJHSxsLWhQ2tLqydK09/m3OXEiaZ7eNUa7Uyau2Ka0DxII6TMi
+	a6T+17PBu6e2KdnlC3aHOvgB4FFWcooxT8XPsRGdotZJRNIabvz7UEmSNTEDJzuF1Qvf
+	Mrnw==
+X-Gm-Message-State: AEkoouvdPZQqo7xpFZ9q2rUlZlrXF82t0CPtK6dmZylh9gNoReGymsNaXAXh5vMDmJWLRA==
+X-Received: by 10.28.152.66 with SMTP id a63mr29786527wme.66.1470303489391;
+	Thu, 04 Aug 2016 02:38:09 -0700 (PDT)
 Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
 	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	e10sm11921576wjc.21.2016.08.04.02.37.13
+	ub8sm11926848wjc.39.2016.08.04.02.38.08
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 04 Aug 2016 02:37:13 -0700 (PDT)
+	Thu, 04 Aug 2016 02:38:08 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Aug 2016 11:37:19 +0200
-Message-Id: <20160804093719.4825-1-Martin.Jansa@gmail.com>
+Date: Thu,  4 Aug 2016 11:38:15 +0200
+Message-Id: <20160804093815.5353-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.9.2
-In-Reply-To: <20160727161536.25139-1-Martin.Jansa@gmail.com>
-References: <20160727161536.25139-1-Martin.Jansa@gmail.com>
-Subject: [meta-qt5][krogoth][PATCH] qt5: upgrade to latest revisions in 5.6 branch
+In-Reply-To: <20160727154953.13918-1-Martin.Jansa@gmail.com>
+References: <20160727154953.13918-1-Martin.Jansa@gmail.com>
+Subject: [meta-qt5][PATCH] qt5: upgrade to latest revisions in 5.7 branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,7 +55,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Aug 2016 09:37:17 -0000
+X-List-Received-Date: Thu, 04 Aug 2016 09:38:12 -0000
 
 * LIC_FILES_CHKSUM were changed because of this small change:
     commit 4343c4e731c3268614fc79c9c42b4e5e4d59d7e6
@@ -83,112 +83,199 @@ X-List-Received-Date: Thu, 04 Aug 2016 09:37:17 -0000
   and then it fails to build, because libdrm could be removed from sysroot
   and drm.h is missing.
 
+* recipes-qt/qt5/qtquick1/0001-qdeclarativetextinput-update-to-match-QWidgetLineCon.patch
+  was resolved in upstream commit:
+    commit 26229cfa0b729313893af5674d604e8692dbb946
+    Author: Richard Moe Gustavsen <richard.gustavsen@theqtcompany.com>
+    Date:   Tue Apr 26 15:08:34 2016 +0200
+
+        QDeclarativeTextInput: update API to use setBlinkingCursorEnabled
+
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-qt/qt5/nativesdk-qtbase_git.bb             | 15 ++++++------
- .../qt5/qt3d/0001-Allow-a-tools-only-build.patch   |  7 ++----
- recipes-qt/qt5/qt3d_git.bb                         | 12 +++++-----
+ classes/qmake5_base.bbclass                        |  9 +++++++
+ licenses/The-Qt-Company-Commercial                 | 20 ++++++++++++++
+ recipes-qt/qt5/nativesdk-qtbase_git.bb             | 23 +++++++++-------
+ .../qt5/qt3d/0001-Allow-a-tools-only-build.patch   |  2 +-
+ recipes-qt/qt5/qt3d_git.bb                         |  4 +--
  recipes-qt/qt5/qt5-git.inc                         |  2 +-
- recipes-qt/qt5/qtbase-native_git.bb                | 14 +++++------
- .../qt5/qtbase/0001-Add-linux-oe-g-platform.patch  | 28 +++++++++++-----------
+ recipes-qt/qt5/qtbase-native_git.bb                | 22 +++++++++------
+ .../qt5/qtbase/0001-Add-linux-oe-g-platform.patch  | 24 ++++++++---------
  ...o-allow-to-set-qt.conf-from-the-outside-u.patch |  2 +-
- .../0003-Add-external-hostbindir-option.patch      | 16 ++++++-------
+ .../0003-Add-external-hostbindir-option.patch      | 16 +++++------
  ...le-Fix-pkgconfig-and-libtool-replacements.patch |  6 ++---
  ...ump-path-length-from-256-to-512-character.patch |  6 ++---
- .../0006-QOpenGLPaintDevice-sub-area-support.patch |  2 +-
+ .../0006-QOpenGLPaintDevice-sub-area-support.patch |  6 ++---
  ...Invert-conditional-for-defining-QT_SOCKLE.patch |  2 +-
- ...configure-paths-for-target-qmake-properly.patch | 12 +++++-----
+ ...configure-paths-for-target-qmake-properly.patch | 12 ++++-----
+ ...GL-libraries-from-pkgconfig-and-defaults.patch} | 11 +++-----
  ...wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch} |  6 +----
- ...build-uic.patch => 0010-Always-build-uic.patch} |  6 ++---
- ...xternal-hostbindir-option-for-native-sdk.patch} | 14 +++++------
- recipes-qt/qt5/qtbase_git.bb                       | 16 ++++++-------
- recipes-qt/qt5/qtcanvas3d_git.bb                   |  8 +++----
- recipes-qt/qt5/qtconnectivity_git.bb               | 10 ++++----
- .../0001-qmltestexample-fix-link.patch             |  4 ++--
+ ...build-uic.patch => 0011-Always-build-uic.patch} |  6 ++---
+ ...xternal-hostbindir-option-for-native-sdk.patch} | 14 +++++-----
+ recipes-qt/qt5/qtbase_git.bb                       | 24 ++++++++++-------
+ recipes-qt/qt5/qtcanvas3d_git.bb                   |  2 +-
+ recipes-qt/qt5/qtcharts_git.bb                     |  2 +-
+ recipes-qt/qt5/qtconnectivity_git.bb               | 15 ++++++-----
+ recipes-qt/qt5/qtdatavis3d_git.bb                  |  2 +-
+ .../0001-qmltestexample-fix-link.patch             |  4 +--
  ...omparison-fix-QCoreApplication-has-not-be.patch |  2 +-
- recipes-qt/qt5/qtdeclarative_git.bb                |  8 +++----
- recipes-qt/qt5/qtenginio_git.bb                    |  9 +++----
- recipes-qt/qt5/qtgraphicaleffects_git.bb           | 10 ++++----
+ recipes-qt/qt5/qtdeclarative_git.bb                | 15 ++++++-----
+ recipes-qt/qt5/qtenginio_git.bb                    | 11 ++++----
+ recipes-qt/qt5/qtgraphicaleffects_git.bb           | 17 ++++++------
  ...ats.pro-Make-the-dependencies-determinist.patch |  2 +-
- recipes-qt/qt5/qtimageformats_git.bb               | 10 ++++----
+ recipes-qt/qt5/qtimageformats_git.bb               | 15 ++++++-----
  recipes-qt/qt5/qtlocation_git.bb                   |  2 +-
- recipes-qt/qt5/qtmultimedia_git.bb                 |  8 +++----
- recipes-qt/qt5/qtquick1_git.bb                     |  9 +++----
- ...fix-invalid-use-of-incomplete-type-class-.patch | 10 ++++----
- recipes-qt/qt5/qtquickcontrols2_git.bb             |  6 ++---
- recipes-qt/qt5/qtquickcontrols_git.bb              |  8 +++----
- recipes-qt/qt5/qtscript_git.bb                     |  8 +++----
- recipes-qt/qt5/qtsensors_git.bb                    |  9 ++++---
- recipes-qt/qt5/qtserialport_git.bb                 | 10 ++++----
- recipes-qt/qt5/qtsvg_git.bb                        |  8 +++----
+ ...1-Initial-porting-effort-to-GStreamer-1.0.patch |  2 +-
+ recipes-qt/qt5/qtmultimedia_git.bb                 | 17 +++++++-----
+ ...etextinput-update-to-match-QWidgetLineCon.patch | 31 ----------------------
+ recipes-qt/qt5/qtquick1_git.bb                     | 16 +++++------
+ ...fix-invalid-use-of-incomplete-type-class-.patch | 10 +++----
+ recipes-qt/qt5/qtquickcontrols2_git.bb             |  2 +-
+ recipes-qt/qt5/qtquickcontrols_git.bb              | 12 ++++++---
+ recipes-qt/qt5/qtscript_git.bb                     | 16 ++++++-----
+ recipes-qt/qt5/qtsensors_git.bb                    |  2 +-
+ recipes-qt/qt5/qtserialbus_git.bb                  |  2 +-
+ recipes-qt/qt5/qtserialport_git.bb                 |  2 +-
+ recipes-qt/qt5/qtsvg_git.bb                        |  2 +-
  recipes-qt/qt5/qtsystems_git.bb                    |  2 +-
  ...w-to-build-only-lrelease-lupdate-lconvert.patch |  2 +-
  ...t-help-fix-linking-of-dependent-libraries.patch |  2 +-
  .../0003-add-noqtwebkit-configuration.patch        |  2 +-
  ...ols-cmake-allow-overriding-the-location-f.patch |  2 +-
- recipes-qt/qt5/qttools_git.bb                      |  8 +++----
- recipes-qt/qt5/qttranslations_git.bb               |  8 +++----
- recipes-qt/qt5/qtwayland-native_git.bb             |  8 +++----
+ recipes-qt/qt5/qttools_git.bb                      | 14 ++++++----
+ recipes-qt/qt5/qttranslations_git.bb               | 10 +++----
+ recipes-qt/qt5/qtvirtualkeyboard_git.bb            |  2 +-
+ recipes-qt/qt5/qtwayland-native_git.bb             |  2 +-
  ...-qtwaylandscanner-tool-to-the-native-side.patch |  2 +-
- ...yland-include-server-buffer-only-when-bui.patch |  2 +-
- recipes-qt/qt5/qtwayland_git.bb                    |  8 +++----
- recipes-qt/qt5/qtwebchannel_git.bb                 | 10 ++++----
- ...se.gypi-include-atomicops_internals_x86_g.patch |  4 ++--
- ...rf-Don-t-match-QMAKE_EXT_CPP-or-QMAKE_EXT.patch |  6 ++---
- ...ange-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch |  4 ++--
- ...rf-Make-sure-we-only-use-the-file-name-to.patch |  6 ++---
- ...s.prf-allow-build-for-linux-oe-g-platform.patch |  4 ++--
- ...quickwebengineview_p_p.h-add-include-QCol.patch |  4 ++--
+ ...yland-include-server-buffer-only-when-bui.patch |  6 ++---
+ recipes-qt/qt5/qtwayland_git.bb                    | 15 ++++++-----
+ recipes-qt/qt5/qtwebchannel_git.bb                 |  2 +-
+ ...se.gypi-include-atomicops_internals_x86_g.patch |  2 +-
+ ...rf-Don-t-match-QMAKE_EXT_CPP-or-QMAKE_EXT.patch |  4 +--
+ ...ange-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch |  4 +--
+ ...rf-Make-sure-we-only-use-the-file-name-to.patch |  4 +--
+ ...s.prf-allow-build-for-linux-oe-g-platform.patch |  4 +--
+ ...quickwebengineview_p_p.h-add-include-QCol.patch |  4 +--
  ...-dependency-to-QCoreApplication-translate.patch |  2 +-
- recipes-qt/qt5/qtwebengine_git.bb                  | 12 ++++++----
- recipes-qt/qt5/qtwebkit-examples_git.bb            |  2 +-
- .../0001-qtwebkit-fix-QA-issue-bad-RPATH.patch     |  2 +-
- .../qtwebkit/0002-Remove-TEXTREL-tag-in-x86.patch  |  2 +-
- ...ude-backtrace-API-for-non-glibc-libraries.patch |  2 +-
+ recipes-qt/qt5/qtwebengine_git.bb                  | 10 ++++---
  recipes-qt/qt5/qtwebkit_git.bb                     |  2 +-
- recipes-qt/qt5/qtwebsockets_git.bb                 |  8 +++----
- recipes-qt/qt5/qtx11extras_git.bb                  | 10 ++++----
- recipes-qt/qt5/qtxmlpatterns_git.bb                |  8 +++----
- 64 files changed, 219 insertions(+), 222 deletions(-)
- rename recipes-qt/qt5/qtbase/{0011-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch => 0009-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch} (96%)
- rename recipes-qt/qt5/qtbase/{0009-Always-build-uic.patch => 0010-Always-build-uic.patch} (81%)
- rename recipes-qt/qt5/qtbase/{0010-Add-external-hostbindir-option-for-native-sdk.patch => 0011-Add-external-hostbindir-option-for-native-sdk.patch} (93%)
+ recipes-qt/qt5/qtwebsockets_git.bb                 |  2 +-
+ recipes-qt/qt5/qtx11extras_git.bb                  |  2 +-
+ recipes-qt/qt5/qtxmlpatterns_git.bb                | 15 ++++++-----
+ 69 files changed, 286 insertions(+), 252 deletions(-)
+ create mode 100644 licenses/The-Qt-Company-Commercial
+ rename recipes-qt/qt5/qtbase/{0011-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch => 0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch} (94%)
+ rename recipes-qt/qt5/qtbase/{0011-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch => 0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch} (96%)
+ rename recipes-qt/qt5/qtbase/{0009-Always-build-uic.patch => 0011-Always-build-uic.patch} (81%)
+ rename recipes-qt/qt5/qtbase/{0010-Add-external-hostbindir-option-for-native-sdk.patch => 0012-Add-external-hostbindir-option-for-native-sdk.patch} (93%)
+ delete mode 100644 recipes-qt/qt5/qtquick1/0001-qdeclarativetextinput-update-to-match-QWidgetLineCon.patch
 
+diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+index c2a8498..a4b7d1b 100644
+--- a/classes/qmake5_base.bbclass
++++ b/classes/qmake5_base.bbclass
+@@ -161,6 +161,9 @@ qmake5_base_do_configure () {
+ qmake5_base_native_do_install() {
+     oe_runmake install INSTALL_ROOT=${D}
+     find "${D}" -ignore_readdir_race -name "*.la" -delete
++    if ls ${D}${libdir}/pkgconfig/Qt5*.pc >/dev/null 2>/dev/null; then
++        sed -i "s@-L${STAGING_LIBDIR}@-L\${libdir}@g" ${D}${libdir}/pkgconfig/Qt5*.pc
++    fi
+ }
+ 
+ qmake5_base_nativesdk_do_install() {
+@@ -168,6 +171,9 @@ qmake5_base_nativesdk_do_install() {
+     find . -name "Makefile*" | xargs -r sed -i "s,(INSTALL_ROOT)${STAGING_DIR_HOST},(INSTALL_ROOT),g"
+ 
+     oe_runmake install INSTALL_ROOT=${D}
++    if ls ${D}${libdir}/pkgconfig/Qt5*.pc >/dev/null 2>/dev/null; then
++        sed -i "s@-L${STAGING_LIBDIR}@-L\${libdir}@g" ${D}${libdir}/pkgconfig/Qt5*.pc
++    fi
+ }
+ 
+ qmake5_base_do_install() {
+@@ -191,4 +197,7 @@ qmake5_base_do_install() {
+             TMP=`dirname ${TMP}`;
+         done
+     fi
++    if ls ${D}${libdir}/pkgconfig/Qt5*.pc >/dev/null 2>/dev/null; then
++        sed -i "s@-L${STAGING_LIBDIR}@-L\${libdir}@g" ${D}${libdir}/pkgconfig/Qt5*.pc
++    fi
+ }
+diff --git a/licenses/The-Qt-Company-Commercial b/licenses/The-Qt-Company-Commercial
+new file mode 100644
+index 0000000..1c8cb00
+--- /dev/null
++++ b/licenses/The-Qt-Company-Commercial
+@@ -0,0 +1,20 @@
++/******************************************************************************
++**
++** Copyright (C) 2015 The Qt Company Ltd.
++** Contact: http://www.qt.io/licensing/
++**
++** This file is part of the <Fill> module.
++**
++** $QT_BEGIN_LICENSE:COMM$
++**
++** Commercial License Usage
++** Licensees holding valid commercial Qt licenses may use this file in
++** accordance with the commercial license agreement provided with the
++** Software or, alternatively, in accordance with the terms contained in
++** a written agreement between you and The Qt Company. For licensing terms
++** and conditions see http://www.qt.io/terms-conditions. For further
++** information use the contact form at http://www.qt.io/contact-us.
++**
++** $QT_END_LICENSE$
++**
++******************************************************************************/
 diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-index 4e55141..ee65b07 100644
+index b66c8a5..7452648 100644
 --- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
 +++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-@@ -5,9 +5,9 @@ HOMEPAGE = "http://qt-project.org"
+@@ -3,16 +3,19 @@ DEPENDS = "nativesdk-zlib qtbase-native"
+ SECTION = "libs"
+ HOMEPAGE = "http://qt-project.org"
  
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+-LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
  LIC_FILES_CHKSUM = " \
 -    file://LICENSE.LGPLv21;md5=d3bb688e8d381a9fa5ee9063114b366d \
 -    file://LICENSE.LGPLv3;md5=3fd06ee442011942b532cc6dedb0b39c \
 -    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
++    file://LICENSE.LGPL3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 +    file://LICENSE.LGPLv21;md5=fb91571854638f10b2e5f36562661a5a \
 +    file://LICENSE.LGPLv3;md5=a909b94c1c9674b2aa15ff03a86f518a \
++    file://LICENSE.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++    file://LICENSE.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LICENSE.GPL3-EXCEPT;md5=763d8c535a234d9a3fb682c7ecb6c073 \
 +    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
      file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
      file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
  "
-@@ -30,12 +30,14 @@ SRC_URI += "\
+ 
+-
+ QT_MODULE = "qtbase"
+ 
+ require nativesdk-qt5.inc
+@@ -30,12 +33,15 @@ SRC_URI += "\
      file://0005-configure-bump-path-length-from-256-to-512-character.patch \
      file://0006-QOpenGLPaintDevice-sub-area-support.patch \
      file://0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch \
 +    file://0008-configure-paths-for-target-qmake-properly.patch \
-+    file://0009-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
++    file://0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch \
++    file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
  "
  
  # common for qtbase-native and nativesdk-qtbase
  SRC_URI += " \
 -    file://0009-Always-build-uic.patch \
 -    file://0010-Add-external-hostbindir-option-for-native-sdk.patch \
-+    file://0010-Always-build-uic.patch \
-+    file://0011-Add-external-hostbindir-option-for-native-sdk.patch \
++    file://0011-Always-build-uic.patch \
++    file://0012-Add-external-hostbindir-option-for-native-sdk.patch \
  "
  
  # CMake's toolchain configuration of nativesdk-qtbase
-@@ -162,7 +164,6 @@ do_configure() {
+@@ -162,7 +168,6 @@ do_configure() {
          -no-gif \
          -no-accessibility \
          -no-cups \
@@ -196,58 +283,26 @@ index 4e55141..ee65b07 100644
          -no-gui \
          -no-qml-debug \
          -no-sql-mysql \
-@@ -257,4 +258,4 @@ fakeroot do_generate_qt_environment_file() {
+@@ -257,4 +262,4 @@ fakeroot do_generate_qt_environment_file() {
  
  addtask generate_qt_environment_file after do_install before do_package
  
--SRCREV = "cec15a89d058424794978910cc8da65b43d71606"
-+SRCREV = "7bf002c3b3f8009138fca217c7fa0c234aed21bd"
+-SRCREV = "84330007e12122bf1b690a4e68b5ef8e973c7882"
++SRCREV = "69b43e74d78e050cf5e40197acafa4bc9f90c0bd"
 diff --git a/recipes-qt/qt5/qt3d/0001-Allow-a-tools-only-build.patch b/recipes-qt/qt5/qt3d/0001-Allow-a-tools-only-build.patch
-index c9d2223..8ff47a4 100644
+index 8d69ca3..bb337fd 100644
 --- a/recipes-qt/qt5/qt3d/0001-Allow-a-tools-only-build.patch
 +++ b/recipes-qt/qt5/qt3d/0001-Allow-a-tools-only-build.patch
 @@ -1,4 +1,4 @@
--From 778d0c4515bae5bdeb650fb3e6b3e32a73722b51 Mon Sep 17 00:00:00 2001
-+From 339e527e5ca0e1b7839d28e9f140630af634b569 Mon Sep 17 00:00:00 2001
+-From 16a6bfc8f93f8d4e0d4a6e09cdfb0c4a8412e38f Mon Sep 17 00:00:00 2001
++From befe1fd63c485b8d10d1b9f1eca3368f3ee0042b Mon Sep 17 00:00:00 2001
  From: Samuli Piippo <samuli.piippo@theqtcompany.com>
  Date: Wed, 10 Feb 2016 09:02:09 +0200
  Subject: [PATCH] Allow a tools-only build
-@@ -8,7 +8,7 @@ Subject: [PATCH] Allow a tools-only build
-  1 file changed, 6 insertions(+), 1 deletion(-)
- 
- diff --git a/qt3d.pro b/qt3d.pro
--index a26e76d..263e3c4 100644
-+index a26e76d..016fb30 100644
- --- a/qt3d.pro
- +++ b/qt3d.pro
- @@ -1,4 +1,4 @@
-@@ -26,6 +26,3 @@ index a26e76d..263e3c4 100644
- +    sub_tools.depends -= sub_src
- +    SUBDIRS = sub_tools
- +}
---- 
--1.9.1
--
 diff --git a/recipes-qt/qt5/qt3d_git.bb b/recipes-qt/qt5/qt3d_git.bb
-index a96b06c..1b48caf 100644
+index c3a5bc5..9708ec9 100644
 --- a/recipes-qt/qt5/qt3d_git.bb
 +++ b/recipes-qt/qt5/qt3d_git.bb
-@@ -1,11 +1,11 @@
- require qt5.inc
- require qt5-git.inc
- 
--LICENSE = "LGPL-3.0 | GPL-2.0"
-+LICENSE = "LGPL-3.0 | GPL-2.0+"
- LIC_FILES_CHKSUM = " \
--    file://LICENSE.LGPLv3;md5=3dcffeed712d3c916f9a2d9135703aff \
--    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
--    file://LICENSE.GPL;md5=05832301944453ec79e40ba3c3cfceec \
-+    file://LICENSE.LGPLv3;md5=8211fde12cc8a4e2477602f5953f5b71 \
-+    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
-+    file://LICENSE.GPL;md5=c96076271561b0e3785dad260634eaa8 \
- "
- 
- DEPENDS += "qtbase"
 @@ -13,7 +13,7 @@ DEPENDS_class-target += "qtdeclarative qt3d-native"
  
  SRC_URI += " \
@@ -261,54 +316,63 @@ index a96b06c..1b48caf 100644
      ${OE_QMAKE_PATH_QML}/*/*/*.obj \
  "
  
--SRCREV = "7a208d76ed96bb506899becfe680df06f95451c7"
-+SRCREV = "7fab1fa65675dfd62b1ddf6fed3226e465b37b67"
+-SRCREV = "be29a39ede4355a5aa18e93c27a75a1c3f81bde4"
++SRCREV = "c3fdb888fbd94de0f6b7b1a6859cba8132ecc93d"
  
  BBCLASSEXTEND += "native nativesdk"
 diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
-index 8a6d93e..30c534e 100644
+index ad0abe8..e1e25ba 100644
 --- a/recipes-qt/qt5/qt5-git.inc
 +++ b/recipes-qt/qt5/qt5-git.inc
-@@ -11,4 +11,4 @@ SRC_URI = " \
+@@ -12,4 +12,4 @@ SRC_URI = " \
  
  S = "${WORKDIR}/git"
  
--PV = "5.6.0+git${SRCPV}"
-+PV = "5.6.1+git${SRCPV}"
+-PV = "5.6.99+5.7.0-beta+git${SRCPV}"
++PV = "5.7.0+git${SRCPV}"
 diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
-index 73900af..23fe64a 100644
+index 426e0ae..4da5640 100644
 --- a/recipes-qt/qt5/qtbase-native_git.bb
 +++ b/recipes-qt/qt5/qtbase-native_git.bb
-@@ -4,9 +4,9 @@ SECTION = "libs"
+@@ -2,11 +2,16 @@ DESCRIPTION = "Native version of Qt/[X11|Mac|Embedded]"
+ DEPENDS = "zlib-native dbus-native"
+ SECTION = "libs"
  HOMEPAGE = "http://qt-project.org"
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+-LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++
++LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
  LIC_FILES_CHKSUM = " \
 -    file://LICENSE.LGPLv21;md5=d3bb688e8d381a9fa5ee9063114b366d \
 -    file://LICENSE.LGPLv3;md5=3fd06ee442011942b532cc6dedb0b39c \
 -    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
++    file://LICENSE.LGPL3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 +    file://LICENSE.LGPLv21;md5=fb91571854638f10b2e5f36562661a5a \
 +    file://LICENSE.LGPLv3;md5=a909b94c1c9674b2aa15ff03a86f518a \
++    file://LICENSE.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++    file://LICENSE.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LICENSE.GPL3-EXCEPT;md5=763d8c535a234d9a3fb682c7ecb6c073 \
 +    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
      file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
      file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
  "
-@@ -24,12 +24,13 @@ SRC_URI += "\
+@@ -24,12 +29,14 @@ SRC_URI += "\
      file://0006-QOpenGLPaintDevice-sub-area-support.patch \
      file://0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch \
      file://0008-configure-paths-for-target-qmake-properly.patch \
-+    file://0009-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
++    file://0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch \
++    file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
  "
  
  # common for qtbase-native and nativesdk-qtbase
  SRC_URI += " \
 -    file://0009-Always-build-uic.patch \
 -    file://0010-Add-external-hostbindir-option-for-native-sdk.patch \
-+    file://0010-Always-build-uic.patch \
-+    file://0011-Add-external-hostbindir-option-for-native-sdk.patch \
++    file://0011-Always-build-uic.patch \
++    file://0012-Add-external-hostbindir-option-for-native-sdk.patch \
  "
  
  CLEANBROKEN = "1"
-@@ -50,7 +51,6 @@ PACKAGECONFIG_CONFARGS = " \
+@@ -50,7 +57,6 @@ PACKAGECONFIG_CONFARGS = " \
      -no-gif \
      -no-accessibility \
      -no-cups \
@@ -316,19 +380,19 @@ index 73900af..23fe64a 100644
      -no-gui \
      -no-qml-debug \
      -no-sql-mysql \
-@@ -117,4 +117,4 @@ do_install() {
+@@ -117,4 +123,4 @@ do_install() {
      ln -sf syncqt.pl ${D}${OE_QMAKE_PATH_QT_BINS}/syncqt
  }
  
--SRCREV = "cec15a89d058424794978910cc8da65b43d71606"
-+SRCREV = "7bf002c3b3f8009138fca217c7fa0c234aed21bd"
+-SRCREV = "84330007e12122bf1b690a4e68b5ef8e973c7882"
++SRCREV = "69b43e74d78e050cf5e40197acafa4bc9f90c0bd"
 diff --git a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch b/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
-index 522afcd..e606cdb 100644
+index af85fe9..b28ca8b 100644
 --- a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
 +++ b/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
 @@ -1,4 +1,4 @@
--From cabe9683b82493e2547e87ae0057f44f71efe519 Mon Sep 17 00:00:00 2001
-+From 46260d1a93e10a6a6f47f38d0b4355b4b63a4682 Mon Sep 17 00:00:00 2001
+-From 79f881eaa0a4a980963ce4ea1bc4c5e26c640c9a Mon Sep 17 00:00:00 2001
++From d6c75f788e15fb552eacb08359698a1342a97f20 Mon Sep 17 00:00:00 2001
  From: Martin Jansa <Martin.Jansa@gmail.com>
  Date: Mon, 15 Apr 2013 04:29:32 +0200
  Subject: [PATCH] Add linux-oe-g++ platform
@@ -336,181 +400,169 @@ index 522afcd..e606cdb 100644
   create mode 100644 mkspecs/linux-oe-g++/qplatformdefs.h
  
  diff --git a/configure b/configure
--index 3e97c98..88a308d 100755
-+index f4c7813..9ab6a9d 100755
+-index b65c564..ffe6931 100755
++index 0ba0c31..052872e 100755
  --- a/configure
  +++ b/configure
--@@ -342,6 +342,16 @@ getQMakeConf()
-+@@ -343,6 +343,16 @@ getQMakeConf()
+-@@ -339,6 +339,16 @@ getQMakeConf()
++@@ -333,6 +333,16 @@ getQMakeConf()
       getSingleQMakeVariable "$1" "$specvals"
   }
   
-@@ -76,8 +76,8 @@ index 3e97c98..88a308d 100755
+@@ -76,8 +76,8 @@ index b65c564..ffe6931 100755
   getXQMakeConf()
   {
       if [ -z "$xspecvals" ]; then
--@@ -351,6 +361,16 @@ getXQMakeConf()
+-@@ -348,6 +358,16 @@ getXQMakeConf()
 -     getSingleQMakeVariable "$1" "$xspecvals"
-+@@ -367,6 +377,16 @@ testXConfig()
++@@ -357,6 +367,16 @@ testXConfig()
 +     esac
   }
   
  +# OE qmake.conf is reading some variables from shell env
-@@ -93,7 +93,7 @@ index 3e97c98..88a308d 100755
+@@ -93,7 +93,7 @@ index b65c564..ffe6931 100755
   compilerSupportsFlag()
   {
       cat >conftest.cpp <<EOF
--@@ -557,24 +577,14 @@ fi
-+@@ -573,24 +593,14 @@ fi
+-@@ -569,24 +589,14 @@ fi
++@@ -578,24 +598,14 @@ fi
   # initalize variables
   #-------------------------------------------------------------------------------
   
-@@ -124,7 +124,7 @@ index 3e97c98..88a308d 100755
+@@ -124,7 +124,7 @@ index b65c564..ffe6931 100755
   fi'`
       eval "$cmd"
   done
--@@ -3418,7 +3428,7 @@ if [ "$XPLATFORM_MAC" = "yes" ]; then
+-@@ -3428,7 +3438,7 @@ if [ "$XPLATFORM_MAC" = "yes" ]; then
 +@@ -3443,7 +3453,7 @@ if [ "$XPLATFORM_MAC" = "yes" ]; then
-      [ "$CFG_QGTKSTYLE" = "auto" ] && CFG_QGTKSTYLE=no
+      [ "$CFG_GTK" = "auto" ] && CFG_GTK=no
   fi
   
-@@ -133,7 +133,7 @@ index 3e97c98..88a308d 100755
+@@ -133,7 +133,7 @@ index b65c564..ffe6931 100755
   
   TEST_COMPILER=$QMAKE_CONF_COMPILER
   
--@@ -3475,7 +3485,7 @@ if [ "$XPLATFORM_SYMBIAN_SBSV2" = "no" ]; then
-+@@ -3504,7 +3514,7 @@ if [ "$XPLATFORM_SYMBIAN_SBSV2" = "no" ]; then
-          exit 1
+-@@ -3479,7 +3489,7 @@ if [ "$XPLATFORM_ANDROID" = "yes" ] ; then
++@@ -3494,7 +3504,7 @@ if [ "$XPLATFORM_ANDROID" = "yes" ] ; then
       fi
   fi
-@@ -142,7 +142,7 @@ index 3e97c98..88a308d 100755
+  
+@@ -142,7 +142,7 @@ index b65c564..ffe6931 100755
   
   GCC_MACHINE_DUMP=
   case "$TEST_COMPILER" in *g++) GCC_MACHINE_DUMP=$($TEST_COMPILER -dumpmachine);; esac
--@@ -3976,6 +3986,14 @@ setBootstrapVariable()
-+@@ -4005,6 +4015,14 @@ setBootstrapVariable()
+-@@ -3878,6 +3888,14 @@ setBootstrapVariable()
++@@ -3893,6 +3903,14 @@ setBootstrapVariable()
       getQMakeConf "$1" | echo ${2-$1} = `if [ -n "$3" ]; then sed "$3"; else cat; fi` >> "$mkfile"
   }
   
-@@ -157,7 +157,7 @@ index 3e97c98..88a308d 100755
+@@ -157,7 +157,7 @@ index b65c564..ffe6931 100755
   # build qmake
   if true; then ###[ '!' -f "$outpath/bin/qmake" ];
       echo "Creating qmake..."
--@@ -4014,14 +4032,14 @@ if true; then ###[ '!' -f "$outpath/bin/qmake" ];
-+@@ -4043,14 +4061,14 @@ if true; then ###[ '!' -f "$outpath/bin/qmake" ];
-          fi
-  
-          [ "$CFG_SILENT" = "yes" ] && CC_TRANSFORM='s,^,\@,' || CC_TRANSFORM=
-@@ -178,9 +178,9 @@ index 3e97c98..88a308d 100755
- +        setBootstrapEvalVariable QMAKE_LFLAGS
- +        setBootstrapEvalVariable QMAKE_LFLAGS_GCSECTIONS
-  
--         if [ "$CFG_RELEASE_TOOLS" = "yes" ]; then
-+         if [ "$CFG_DEBUG" = "no" ] || [ "$CFG_RELEASE_TOOLS" = "yes" ]; then
-              setBootstrapVariable QMAKE_CFLAGS_RELEASE
--@@ -4070,6 +4088,7 @@ if true; then ###[ '!' -f "$outpath/bin/qmake" ];
-+@@ -4093,6 +4111,7 @@ if true; then ###[ '!' -f "$outpath/bin/qmake" ];
-                          \"\$(SOURCE_PATH)/src/corelib/io/qfsfileengine_unix.cpp\" \
-                          \"\$(SOURCE_PATH)/src/corelib/tools/qlocale_unix.cpp\""
+-@@ -3977,6 +3995,7 @@ if true; then ###[ '!' -f "$outpath/bin/qmake" ];
++@@ -3986,6 +4004,7 @@ if true; then ###[ '!' -f "$outpath/bin/qmake" ];
               EXEEXT=
-@@ -189,10 +189,10 @@ index 3e97c98..88a308d 100755
-          if [ "$BUILD_ON_MAC" = "yes" ]; then
+              ;;
+          esac
+@@ -166,10 +166,10 @@ index b65c564..ffe6931 100755
               echo "COCOA_LFLAGS =-framework Foundation -framework CoreServices" >>"$mkfile"
+              echo "CARBON_LFLAGS =-framework ApplicationServices" >>"$mkfile"
  diff --git a/mkspecs/features/configure.prf b/mkspecs/features/configure.prf
--index 6b37a04..dcf6025 100644
-+index a3ec227..eef6006 100644
+-index 92c288c..f3019e0 100644
++index a890c7f..151630c 100644
  --- a/mkspecs/features/configure.prf
  +++ b/mkspecs/features/configure.prf
--@@ -63,12 +63,12 @@ defineTest(qtCompileTest) {
-+@@ -71,12 +71,12 @@ defineTest(qtCompileTest) {
+-@@ -63,14 +63,14 @@ defineTest(qtCompileTest) {
++@@ -71,14 +71,14 @@ defineTest(qtCompileTest) {
       }
   
       # Clean up after previous run
 diff --git a/recipes-qt/qt5/qtbase/0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch b/recipes-qt/qt5/qtbase/0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch
-index 0b0650d..41d10ea 100644
+index 54895df..699e385 100644
 --- a/recipes-qt/qt5/qtbase/0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch
 +++ b/recipes-qt/qt5/qtbase/0002-qlibraryinfo-allow-to-set-qt.conf-from-the-outside-u.patch
 @@ -1,4 +1,4 @@
--From 1edd17d452a7e9eeb2931b3c5697a4fc0ec4e6bc Mon Sep 17 00:00:00 2001
-+From 03824427f227ff16c6d23d08c73708b0faf98e06 Mon Sep 17 00:00:00 2001
+-From aaa1675d3c9f0d100f596ca4e2ddf3bd25fae5b6 Mon Sep 17 00:00:00 2001
++From e5f8607cfa1d2bcc798686cdf7c87ea0c6577d30 Mon Sep 17 00:00:00 2001
  From: Holger Freyther <zecke@selfish.org>
  Date: Wed, 26 Sep 2012 17:22:30 +0200
  Subject: [PATCH] qlibraryinfo: allow to set qt.conf from the outside using the
 diff --git a/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch b/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch
-index ca271e6..f706637 100644
+index 11cd97b..381cde2 100644
 --- a/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch
 +++ b/recipes-qt/qt5/qtbase/0003-Add-external-hostbindir-option.patch
 @@ -1,4 +1,4 @@
--From 3ecdcb6a10d125f1440c42ad9c79f04d43c257e0 Mon Sep 17 00:00:00 2001
-+From 7421a689c695a09fff2d5ffbdbe56e34d73f771d Mon Sep 17 00:00:00 2001
+-From 502b95b840a5f79e5a68e9bd5b10dbdc92485f1f Mon Sep 17 00:00:00 2001
++From c1dc6165d6a085f162ed32ef5697f645019f9ee0 Mon Sep 17 00:00:00 2001
  From: Martin Jansa <Martin.Jansa@gmail.com>
  Date: Sat, 6 Apr 2013 13:15:07 +0200
  Subject: [PATCH] Add -external-hostbindir option
-@@ -37,10 +37,10 @@ Conflicts:
-  7 files changed, 38 insertions(+), 12 deletions(-)
+@@ -39,10 +39,10 @@ Change-Id: Iacaa1c5531cd6dcc094891610c351673db55d7b2
+  7 files changed, 44 insertions(+), 8 deletions(-)
  
  diff --git a/configure b/configure
--index 88a308d..f2611ed 100755
-+index 9ab6a9d..225b9f3 100755
+-index ffe6931..5aa87b4 100755
++index 052872e..1fcbb3a 100755
  --- a/configure
  +++ b/configure
--@@ -810,6 +810,7 @@ QT_HOST_BINS=
-+@@ -826,6 +826,7 @@ QT_HOST_BINS=
+-@@ -825,6 +825,7 @@ QT_HOST_BINS=
++@@ -834,6 +834,7 @@ QT_HOST_BINS=
   QT_HOST_LIBS=
   QT_HOST_DATA=
   QT_EXT_PREFIX=
-@@ -48,7 +48,7 @@ index 88a308d..f2611ed 100755
+@@ -50,7 +50,7 @@ index ffe6931..5aa87b4 100755
   
   #flags for SQL drivers
   QT_CFLAGS_PSQL=
--@@ -929,6 +930,7 @@ while [ "$#" -gt 0 ]; do
-+@@ -945,6 +946,7 @@ while [ "$#" -gt 0 ]; do
+-@@ -944,6 +945,7 @@ while [ "$#" -gt 0 ]; do
++@@ -953,6 +954,7 @@ while [ "$#" -gt 0 ]; do
       -testsdir| \
       -hostdatadir| \
       -hostbindir| \
-@@ -56,7 +56,7 @@ index 88a308d..f2611ed 100755
+@@ -58,7 +58,7 @@ index ffe6931..5aa87b4 100755
       -hostlibdir| \
       -extprefix| \
       -sysroot| \
--@@ -1159,6 +1161,9 @@ while [ "$#" -gt 0 ]; do
-+@@ -1175,6 +1177,9 @@ while [ "$#" -gt 0 ]; do
+-@@ -1176,6 +1178,9 @@ while [ "$#" -gt 0 ]; do
++@@ -1185,6 +1187,9 @@ while [ "$#" -gt 0 ]; do
       extprefix)
           QT_EXT_PREFIX="$VAL"
           ;;
-@@ -66,7 +66,7 @@ index 88a308d..f2611ed 100755
+@@ -68,7 +68,7 @@ index ffe6931..5aa87b4 100755
       pkg-config)
           if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
               CFG_PKGCONFIG="$VAL"
--@@ -2428,6 +2433,10 @@ Installation options:
-+@@ -2444,6 +2449,10 @@ Installation options:
+-@@ -2438,6 +2443,10 @@ Installation options:
++@@ -2447,6 +2452,10 @@ Installation options:
       -hostdatadir <dir> . Data used by qmake will be installed to <dir>
                            (default HOSTPREFIX)
   
-@@ -77,7 +77,7 @@ index 88a308d..f2611ed 100755
+@@ -79,7 +79,7 @@ index ffe6931..5aa87b4 100755
   Configure options:
   
    The defaults (*) are usually acceptable. A plus (+) denotes a default value
--@@ -3172,6 +3181,11 @@ fi
-+@@ -3195,6 +3204,11 @@ fi
+-@@ -3196,6 +3205,11 @@ fi
++@@ -3209,6 +3218,11 @@ fi
   # command line and environment validation
   #-------------------------------------------------------------------------------
   
-@@ -90,7 +90,7 @@ index 88a308d..f2611ed 100755
+@@ -92,7 +92,7 @@ index ffe6931..5aa87b4 100755
   CFG_QCONFIG_PATH=$relpath/src/corelib/global/qconfig-${CFG_QCONFIG}.h
   case "$CFG_QCONFIG" in
  diff --git a/mkspecs/features/qt_functions.prf b/mkspecs/features/qt_functions.prf
--index 8639695..d89d948 100644
-+index 4a1d265..a2bdd29 100644
+-index cfac583..41ca7f1 100644
++index 54641ce..7d7baa4 100644
  --- a/mkspecs/features/qt_functions.prf
  +++ b/mkspecs/features/qt_functions.prf
- @@ -70,7 +70,11 @@ defineTest(qtHaveModule) {
+ @@ -71,7 +71,11 @@ defineTest(qtHaveModule) {
 diff --git a/recipes-qt/qt5/qtbase/0004-qt_module-Fix-pkgconfig-and-libtool-replacements.patch b/recipes-qt/qt5/qtbase/0004-qt_module-Fix-pkgconfig-and-libtool-replacements.patch
-index a35b6a2..233a9c5 100644
+index b3677eb..e24d475 100644
 --- a/recipes-qt/qt5/qtbase/0004-qt_module-Fix-pkgconfig-and-libtool-replacements.patch
 +++ b/recipes-qt/qt5/qtbase/0004-qt_module-Fix-pkgconfig-and-libtool-replacements.patch
 @@ -1,4 +1,4 @@
--From 7e5713e7f4807e204cd4a9f874cb1ca2985fc630 Mon Sep 17 00:00:00 2001
-+From 156a2e3f61258de4127d582895376a1c674e30a6 Mon Sep 17 00:00:00 2001
+-From ac2f94a42878c1500e1ab6bbbec7834d9e5edfbb Mon Sep 17 00:00:00 2001
++From d83234c35de8f52ce3bf6eb262ad8e6af467ac34 Mon Sep 17 00:00:00 2001
  From: Martin Jansa <Martin.Jansa@gmail.com>
  Date: Sat, 27 Apr 2013 23:15:37 +0200
  Subject: [PATCH] qt_module: Fix pkgconfig and libtool replacements
@@ -518,27 +570,27 @@ index a35b6a2..233a9c5 100644
   2 files changed, 14 insertions(+), 1 deletion(-)
  
  diff --git a/mkspecs/features/qt.prf b/mkspecs/features/qt.prf
--index 75b84ff..ab36fa6 100644
-+index be08a2a..0310cbb 100644
+-index 03ec36a..2ab192b 100644
++index 71e96b4..0d7535c 100644
  --- a/mkspecs/features/qt.prf
  +++ b/mkspecs/features/qt.prf
  @@ -317,6 +317,19 @@ contains(TEMPLATE, .*app) {
-@@ -92,7 +92,7 @@ index 75b84ff..ab36fa6 100644
+@@ -92,7 +92,7 @@ index 03ec36a..2ab192b 100644
   contains(QT_CONFIG, static) {
       QT_PLUGIN_VERIFY += QTPLUGIN
  diff --git a/mkspecs/features/qt_common.prf b/mkspecs/features/qt_common.prf
--index cc8ed87..b7d4be2 100644
-+index de9ba9d..e59c5e5 100644
+-index c1c668a..67d916d 100644
++index b367bc1..209cc43 100644
  --- a/mkspecs/features/qt_common.prf
  +++ b/mkspecs/features/qt_common.prf
  @@ -38,7 +38,7 @@ contains(TEMPLATE, .*lib) {
 diff --git a/recipes-qt/qt5/qtbase/0005-configure-bump-path-length-from-256-to-512-character.patch b/recipes-qt/qt5/qtbase/0005-configure-bump-path-length-from-256-to-512-character.patch
-index e21b36d..275bd71 100644
+index 404c068..d455d2c 100644
 --- a/recipes-qt/qt5/qtbase/0005-configure-bump-path-length-from-256-to-512-character.patch
 +++ b/recipes-qt/qt5/qtbase/0005-configure-bump-path-length-from-256-to-512-character.patch
 @@ -1,4 +1,4 @@
--From e6ed023b0210375e594b7b61dfb620deb486ee8c Mon Sep 17 00:00:00 2001
-+From 4316f6b00153765fd39a0054896910049c607169 Mon Sep 17 00:00:00 2001
+-From d108da324156b9d709c106c1698bd7466cb26f69 Mon Sep 17 00:00:00 2001
++From 60f490b57faf979a912074506a75c74767a27d3b Mon Sep 17 00:00:00 2001
  From: Denys Dmytriyenko <denys@ti.com>
  Date: Tue, 25 Aug 2015 10:05:15 -0400
  Subject: [PATCH] configure: bump path length from 256 to 512 characters
@@ -546,42 +598,55 @@ index e21b36d..275bd71 100644
   1 file changed, 3 insertions(+), 3 deletions(-)
  
  diff --git a/configure b/configure
--index f2611ed..24a61db 100755
-+index 225b9f3..746a088 100755
+-index 5aa87b4..17bca95 100755
++index 1fcbb3a..f49a674 100755
  --- a/configure
  +++ b/configure
--@@ -3930,10 +3930,10 @@ static const char qt_configure_licensed_products_str [256 + 12] = "qt_lcnsprod=$
-+@@ -3959,10 +3959,10 @@ static const char qt_configure_licensed_products_str [256 + 12] = "qt_lcnsprod=$
+-@@ -3832,10 +3832,10 @@ static const char qt_configure_licensed_products_str [256 + 12] = "qt_lcnsprod=$
++@@ -3847,10 +3847,10 @@ static const char qt_configure_licensed_products_str [256 + 12] = "qt_lcnsprod=$
   static const char qt_configure_installation          [12+11]    = "qt_instdate=2012-12-20";
   
   /* Installation Info */
 diff --git a/recipes-qt/qt5/qtbase/0006-QOpenGLPaintDevice-sub-area-support.patch b/recipes-qt/qt5/qtbase/0006-QOpenGLPaintDevice-sub-area-support.patch
-index b675805..be1a6c3 100644
+index 92ecb13..c58b1d9 100644
 --- a/recipes-qt/qt5/qtbase/0006-QOpenGLPaintDevice-sub-area-support.patch
 +++ b/recipes-qt/qt5/qtbase/0006-QOpenGLPaintDevice-sub-area-support.patch
 @@ -1,4 +1,4 @@
--From 05a3901af7a467f9ea5fa9e6f63a574d8d2a9f77 Mon Sep 17 00:00:00 2001
-+From af6fed015c4d685e922ed6761262610910ea2219 Mon Sep 17 00:00:00 2001
+-From 17450df40d6c163c85b66c1cc485317fd6f9a9c9 Mon Sep 17 00:00:00 2001
++From f207997b59f1381cf3523521209cb435b1a73f25 Mon Sep 17 00:00:00 2001
  From: Jani Hautakangas <jani.hautakangas@ixonos.com>
  Date: Thu, 16 May 2013 09:52:07 +0300
  Subject: [PATCH] QOpenGLPaintDevice sub-area support
+@@ -140,10 +140,10 @@ index c9f3282..7c0616b 100644
+      QOpenGLContext *ctx;
+      EngineMode mode;
+ diff --git a/src/gui/opengl/qopengltextureglyphcache.cpp b/src/gui/opengl/qopengltextureglyphcache.cpp
+-index 8f69095..cf82ee7 100644
++index 9a7b1eb..6f301f8 100644
+ --- a/src/gui/opengl/qopengltextureglyphcache.cpp
+ +++ b/src/gui/opengl/qopengltextureglyphcache.cpp
+-@@ -316,7 +316,7 @@ void QOpenGLTextureGlyphCache::resizeTextureData(int width, int height)
++@@ -403,7 +403,7 @@ void QOpenGLTextureGlyphCache::resizeTextureData(int width, int height)
+      funcs->glBindFramebuffer(GL_FRAMEBUFFER, (GLuint)oldFbo);
+  
+      if (pex != 0) {
 diff --git a/recipes-qt/qt5/qtbase/0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch b/recipes-qt/qt5/qtbase/0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch
-index 2fab888..ad9aef6 100644
+index 4cc8ce6..4ea4061 100644
 --- a/recipes-qt/qt5/qtbase/0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch
 +++ b/recipes-qt/qt5/qtbase/0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch
 @@ -1,4 +1,4 @@
--From 6a0d4af2083dbacddb98245c0b4b83c6e014a1ae Mon Sep 17 00:00:00 2001
-+From 92eafaf0f5902916ca87b8e3bd63040602ff18bf Mon Sep 17 00:00:00 2001
+-From edb00662de57d0b6ddb39f80800cf3d20c6c07fd Mon Sep 17 00:00:00 2001
++From 7ab6ff7ba20a3173c10a76814d3c9ed312c80627 Mon Sep 17 00:00:00 2001
  From: Khem Raj <raj.khem@gmail.com>
  Date: Mon, 8 Jun 2015 13:59:25 -0700
  Subject: [PATCH] linux-oe-g++: Invert conditional for defining QT_SOCKLEN_T
 diff --git a/recipes-qt/qt5/qtbase/0008-configure-paths-for-target-qmake-properly.patch b/recipes-qt/qt5/qtbase/0008-configure-paths-for-target-qmake-properly.patch
-index 7ca1913..85ec8e8 100644
+index 106486f..bac1841 100644
 --- a/recipes-qt/qt5/qtbase/0008-configure-paths-for-target-qmake-properly.patch
 +++ b/recipes-qt/qt5/qtbase/0008-configure-paths-for-target-qmake-properly.patch
 @@ -1,4 +1,4 @@
--From b5c826a39760519010884547d6981c3af031d9c8 Mon Sep 17 00:00:00 2001
-+From 92b13af05077dec0d194d4018e36568146d41232 Mon Sep 17 00:00:00 2001
+-From e1bc7a14ae9e433112006b1b6944f8b0e3f619ab Mon Sep 17 00:00:00 2001
++From 0f4ab3e27938002134e8f3f9eb12cf9c50b2ab95 Mon Sep 17 00:00:00 2001
  From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
  Date: Fri, 13 Nov 2015 12:36:11 +0100
  Subject: [PATCH] configure paths for target qmake properly
@@ -589,52 +654,94 @@ index 7ca1913..85ec8e8 100644
   1 file changed, 19 insertions(+), 4 deletions(-)
  
  diff --git a/configure b/configure
--index 24a61db..2e99d39 100755
-+index 746a088..d98ea53 100755
+-index 17bca95..6abdd6b 100755
++index f49a674..d30d0ca 100755
  --- a/configure
  +++ b/configure
--@@ -3875,8 +3875,13 @@ if [ "$CFG_COMPILE_EXAMPLES" = "yes" ]; then
-+@@ -3904,8 +3904,13 @@ if [ "$CFG_COMPILE_EXAMPLES" = "yes" ]; then
+-@@ -3777,8 +3777,13 @@ if [ "$CFG_COMPILE_EXAMPLES" = "yes" ]; then
++@@ -3792,8 +3792,13 @@ if [ "$CFG_COMPILE_EXAMPLES" = "yes" ]; then
       QMAKE_CONFIG="$QMAKE_CONFIG compile_examples"
   fi
   
-@@ -38,7 +38,7 @@ index 24a61db..2e99d39 100755
+@@ -38,7 +38,7 @@ index 17bca95..6abdd6b 100755
   
   QT_CONFIGURE_STR_OFF=0
   
--@@ -3909,7 +3914,11 @@ QT_CONFIGURE_STRS_ALL=$QT_CONFIGURE_STRS
-+@@ -3938,7 +3943,11 @@ QT_CONFIGURE_STRS_ALL=$QT_CONFIGURE_STRS
+-@@ -3811,7 +3816,11 @@ QT_CONFIGURE_STRS_ALL=$QT_CONFIGURE_STRS
++@@ -3826,7 +3831,11 @@ QT_CONFIGURE_STRS_ALL=$QT_CONFIGURE_STRS
   
   QT_CONFIGURE_STR_OFFSETS=
   QT_CONFIGURE_STRS=
-@@ -51,7 +51,7 @@ index 24a61db..2e99d39 100755
+@@ -51,7 +51,7 @@ index 17bca95..6abdd6b 100755
   addConfStr "$QT_REL_HOST_BINS"
   addConfStr "$QT_REL_HOST_LIBS"
   addConfStr "$QT_REL_HOST_DATA"
--@@ -3921,6 +3930,12 @@ addConfStr "$shortspec"
-+@@ -3950,6 +3959,12 @@ addConfStr "$shortspec"
+-@@ -3823,6 +3832,12 @@ addConfStr "$shortspec"
++@@ -3838,6 +3847,12 @@ addConfStr "$shortspec"
   #-------------------------------------------------------------------------------
   [ -d "$outpath/src/corelib/global" ] || mkdir -p "$outpath/src/corelib/global"
   
-@@ -64,7 +64,7 @@ index 24a61db..2e99d39 100755
+@@ -64,7 +64,7 @@ index 17bca95..6abdd6b 100755
   cat > "$outpath/src/corelib/global/qconfig.cpp.new" <<EOF
   /* License Info */
   static const char qt_configure_licensee_str          [256 + 12] = "qt_lcnsuser=$Licensee";
--@@ -3933,7 +3948,7 @@ static const char qt_configure_installation          [12+11]    = "qt_instdate=2
-+@@ -3962,7 +3977,7 @@ static const char qt_configure_installation          [12+11]    = "qt_instdate=2
+-@@ -3835,7 +3850,7 @@ static const char qt_configure_installation          [12+11]    = "qt_instdate=2
++@@ -3850,7 +3865,7 @@ static const char qt_configure_installation          [12+11]    = "qt_instdate=2
   static const char qt_configure_prefix_path_str       [512 + 12] = "qt_prfxpath=$QT_INSTALL_PREFIX";
   #ifdef QT_BUILD_QMAKE
   static const char qt_configure_ext_prefix_path_str   [512 + 12] = "qt_epfxpath=$QT_EXT_PREFIX";
-diff --git a/recipes-qt/qt5/qtbase/0011-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch b/recipes-qt/qt5/qtbase/0009-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
+diff --git a/recipes-qt/qt5/qtbase/0011-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch b/recipes-qt/qt5/qtbase/0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch
+similarity index 94%
+rename from recipes-qt/qt5/qtbase/0011-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch
+rename to recipes-qt/qt5/qtbase/0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch
+index 3c0b9e6..23d0ab3 100644
+--- a/recipes-qt/qt5/qtbase/0011-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch
++++ b/recipes-qt/qt5/qtbase/0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch
+@@ -1,4 +1,4 @@
+-From d623d2c2ed49c4dc57fb0dde1faab20976dfc3dc Mon Sep 17 00:00:00 2001
++From 91b87aed0a2a96b0d6b54757ea13c75ee648a9b0 Mon Sep 17 00:00:00 2001
+ From: Julien Gueytat <contact@jgueytat.fr>
+ Date: Wed, 27 Apr 2016 19:24:39 +0200
+ Subject: [PATCH] Reorder EGL libraries from pkgconfig and defaults:
+@@ -59,10 +59,10 @@ index d8b1c3e..06f7241 100644
+ +
+ +CONFIG -= qt
+ diff --git a/configure b/configure
+-index 2e99d39..072838b 100755
++index d30d0ca..14f348c 100755
+ --- a/configure
+ +++ b/configure
+-@@ -5803,7 +5803,9 @@ if [ "$CFG_EGL" != "no" ]; then
++@@ -5891,7 +5891,9 @@ if [ "$CFG_EGL" != "no" ]; then
+          QMakeVar set QMAKE_INCDIR_EGL "$QMAKE_INCDIR_EGL"
+          QMakeVar set QMAKE_LIBS_EGL "$QMAKE_LIBS_EGL"
+          QMakeVar set QMAKE_CFLAGS_EGL "`echo " $QMAKE_CFLAGS_EGL " | sed -e 's, -I[^ ]* , ,g;s,^ ,,;s, $,,'`"
+@@ -73,7 +73,7 @@ index 2e99d39..072838b 100755
+      if compileTest qpa/egl "EGL" $QMAKE_CFLAGS_EGL $QMAKE_LIBS_EGL; then
+          CFG_EGL=yes
+          if compileTest qpa/egl-x11 "EGL-X11" $QMAKE_CFLAGS_EGL $QMAKE_LIBS_EGL; then
+-@@ -5826,8 +5828,18 @@ fi
++@@ -5914,8 +5916,18 @@ fi
+  if [ "$CFG_EGLFS" != "no" ]; then
+      if [ "$XPLATFORM_QNX" = "no" ] && [ "$CFG_OPENGL" != "no" ]; then
+          CFG_EGLFS="$CFG_EGL"
+@@ -93,6 +93,3 @@ index 2e99d39..072838b 100755
+              CFG_EGLFS_BRCM=yes
+          else
+              CFG_EGLFS_BRCM=no
+--- 
+-1.9.1
+-
+diff --git a/recipes-qt/qt5/qtbase/0011-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch b/recipes-qt/qt5/qtbase/0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
 similarity index 96%
 rename from recipes-qt/qt5/qtbase/0011-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
-rename to recipes-qt/qt5/qtbase/0009-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
-index 7a24459..1825ac2 100644
+rename to recipes-qt/qt5/qtbase/0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
+index 7a24459..1d0ea3e 100644
 --- a/recipes-qt/qt5/qtbase/0011-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
-+++ b/recipes-qt/qt5/qtbase/0009-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
++++ b/recipes-qt/qt5/qtbase/0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
 @@ -1,4 +1,4 @@
 -From f5a949e17aa8b37491fbc414c38557c9920fa1e5 Mon Sep 17 00:00:00 2001
-+From e70b35ba680f2138f0a7ff65852e76248462d459 Mon Sep 17 00:00:00 2001
++From b397a71531e31383ee86135e21072d033480f5bc Mon Sep 17 00:00:00 2001
  From: Pascal Bach <pascal.bach@siemens.com>
  Date: Wed, 11 May 2016 15:20:41 +0200
  Subject: [PATCH] Pretend Qt5 wasn't found if OE_QMAKE_PATH_EXTERNAL_HOST_BINS
@@ -653,16 +760,16 @@ index 7a24459..1825ac2 100644
 --- 
 -2.1.4
 -
-diff --git a/recipes-qt/qt5/qtbase/0009-Always-build-uic.patch b/recipes-qt/qt5/qtbase/0010-Always-build-uic.patch
+diff --git a/recipes-qt/qt5/qtbase/0009-Always-build-uic.patch b/recipes-qt/qt5/qtbase/0011-Always-build-uic.patch
 similarity index 81%
 rename from recipes-qt/qt5/qtbase/0009-Always-build-uic.patch
-rename to recipes-qt/qt5/qtbase/0010-Always-build-uic.patch
-index 230c966..a5915e9 100644
+rename to recipes-qt/qt5/qtbase/0011-Always-build-uic.patch
+index bee10d5..fb3d316 100644
 --- a/recipes-qt/qt5/qtbase/0009-Always-build-uic.patch
-+++ b/recipes-qt/qt5/qtbase/0010-Always-build-uic.patch
++++ b/recipes-qt/qt5/qtbase/0011-Always-build-uic.patch
 @@ -1,4 +1,4 @@
--From 49b2100ff86ab5b4977608903b30cb71075592c6 Mon Sep 17 00:00:00 2001
-+From 609d853b42509e8c7da4409e2c97dc44834db564 Mon Sep 17 00:00:00 2001
+-From 14b037afc3fa6992733891205a46b44991402afb Mon Sep 17 00:00:00 2001
++From 1b94b0f2579edcf870bc953f820af8fb2ec4376f Mon Sep 17 00:00:00 2001
  From: Martin Jansa <Martin.Jansa@gmail.com>
  Date: Sat, 16 Nov 2013 00:32:30 +0100
  Subject: [PATCH] Always build uic
@@ -670,25 +777,25 @@ index 230c966..a5915e9 100644
   1 file changed, 1 insertion(+), 1 deletion(-)
  
  diff --git a/src/src.pro b/src/src.pro
--index 1671338..83de483 100644
-+index ed752c3..dbb0b56 100644
+-index 4a165a2..0f84791 100644
++index 3d18540..d128b3a 100644
  --- a/src/src.pro
  +++ b/src/src.pro
 -@@ -180,7 +180,7 @@ contains(QT_CONFIG, concurrent):SUBDIRS += src_concurrent
-+@@ -186,7 +186,7 @@ contains(QT_CONFIG, concurrent):SUBDIRS += src_concurrent
++@@ -195,7 +195,7 @@ contains(QT_CONFIG, concurrent):SUBDIRS += src_concurrent
           }
       }
   }
-diff --git a/recipes-qt/qt5/qtbase/0010-Add-external-hostbindir-option-for-native-sdk.patch b/recipes-qt/qt5/qtbase/0011-Add-external-hostbindir-option-for-native-sdk.patch
+diff --git a/recipes-qt/qt5/qtbase/0010-Add-external-hostbindir-option-for-native-sdk.patch b/recipes-qt/qt5/qtbase/0012-Add-external-hostbindir-option-for-native-sdk.patch
 similarity index 93%
 rename from recipes-qt/qt5/qtbase/0010-Add-external-hostbindir-option-for-native-sdk.patch
-rename to recipes-qt/qt5/qtbase/0011-Add-external-hostbindir-option-for-native-sdk.patch
-index 5bb73e7..d257d3f 100644
+rename to recipes-qt/qt5/qtbase/0012-Add-external-hostbindir-option-for-native-sdk.patch
+index 949b323..1ab8abe 100644
 --- a/recipes-qt/qt5/qtbase/0010-Add-external-hostbindir-option-for-native-sdk.patch
-+++ b/recipes-qt/qt5/qtbase/0011-Add-external-hostbindir-option-for-native-sdk.patch
++++ b/recipes-qt/qt5/qtbase/0012-Add-external-hostbindir-option-for-native-sdk.patch
 @@ -1,4 +1,4 @@
--From 5b4ae15a19a9135d3dc8a35aa2d109ba8d29868a Mon Sep 17 00:00:00 2001
-+From 2aa52f19cab8eafff84d1828367d1e38cb34315d Mon Sep 17 00:00:00 2001
+-From 6df8d620081bd78319fc97846e52b1a83042401a Mon Sep 17 00:00:00 2001
++From cb66a3193b1b1b8b402548b615c3675c4adcf13a Mon Sep 17 00:00:00 2001
  From: Martin Jansa <Martin.Jansa@gmail.com>
  Date: Sat, 6 Apr 2013 13:15:07 +0200
  Subject: [PATCH] Add -external-hostbindir option for native(sdk)
@@ -696,73 +803,82 @@ index 5bb73e7..d257d3f 100644
   5 files changed, 16 insertions(+), 1 deletion(-)
  
  diff --git a/configure b/configure
--index 2e99d39..a0641d2 100755
-+index d98ea53..f42abe6 100755
+-index 6abdd6b..7c5a066 100755
++index 14f348c..61f22e8 100755
  --- a/configure
  +++ b/configure
--@@ -3922,6 +3922,7 @@ fi
-+@@ -3951,6 +3951,7 @@ fi
+-@@ -3824,6 +3824,7 @@ fi
++@@ -3839,6 +3839,7 @@ fi
   addConfStr "$QT_REL_HOST_BINS"
   addConfStr "$QT_REL_HOST_LIBS"
   addConfStr "$QT_REL_HOST_DATA"
-@@ -94,10 +94,10 @@ index 1ad7637..5a8b127 100644
+@@ -94,10 +94,10 @@ index 362d47d..a2326e2 100644
           HostSpecPath,
           HostPrefixPath,
  diff --git a/tools/configure/configureapp.cpp b/tools/configure/configureapp.cpp
--index 6f1e2b7..ae03143 100644
-+index f2b54f5..d973c11 100644
+-index 7fd0b98..47fa6c3 100644
++index 0fa205b..2921e2b 100644
  --- a/tools/configure/configureapp.cpp
  +++ b/tools/configure/configureapp.cpp
--@@ -1256,6 +1256,13 @@ void Configure::parseCmdLine()
-+@@ -1261,6 +1261,13 @@ void Configure::parseCmdLine()
+-@@ -1202,6 +1202,13 @@ void Configure::parseCmdLine()
++@@ -1219,6 +1219,13 @@ void Configure::parseCmdLine()
               dictionary[ "QT_EXT_PREFIX" ] = configCmdLine.at(i);
           }
   
-@@ -111,7 +111,7 @@ index 6f1e2b7..ae03143 100644
+@@ -111,7 +111,7 @@ index 7fd0b98..47fa6c3 100644
           else if (configCmdLine.at(i) == "-make-tool") {
               ++i;
               if (i == argCount)
--@@ -4232,6 +4239,9 @@ void Configure::generateQConfigCpp()
-+@@ -4258,6 +4265,9 @@ void Configure::generateQConfigCpp()
+-@@ -4121,6 +4128,9 @@ void Configure::generateQConfigCpp()
++@@ -4171,6 +4178,9 @@ void Configure::generateQConfigCpp()
   
       if (dictionary["QT_REL_HOST_DATA"].isEmpty())
           dictionary["QT_REL_HOST_DATA"] = haveHpx ? "." : dictionary["QT_REL_INSTALL_ARCHDATA"];
-@@ -121,7 +121,7 @@ index 6f1e2b7..ae03143 100644
+@@ -121,7 +121,7 @@ index 7fd0b98..47fa6c3 100644
   
       confStringOff = 0;
       addConfStr(0, dictionary["QT_REL_INSTALL_DOCS"]);
--@@ -4251,6 +4261,7 @@ void Configure::generateQConfigCpp()
-+@@ -4277,6 +4287,7 @@ void Configure::generateQConfigCpp()
+-@@ -4140,6 +4150,7 @@ void Configure::generateQConfigCpp()
++@@ -4190,6 +4200,7 @@ void Configure::generateQConfigCpp()
       addConfStr(1, dictionary["QT_REL_HOST_BINS"]);
       addConfStr(1, dictionary["QT_REL_HOST_LIBS"]);
       addConfStr(1, dictionary["QT_REL_HOST_DATA"]);
 diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index 1ce8cd6..a46a91f 100644
+index a2a865d..fcaa322 100644
 --- a/recipes-qt/qt5/qtbase_git.bb
 +++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -3,9 +3,9 @@ require qt5-git.inc
+@@ -1,11 +1,15 @@
+ require qt5.inc
+ require qt5-git.inc
  
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+-LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
  LIC_FILES_CHKSUM = " \
 -    file://LICENSE.LGPLv21;md5=d3bb688e8d381a9fa5ee9063114b366d \
 -    file://LICENSE.LGPLv3;md5=3fd06ee442011942b532cc6dedb0b39c \
 -    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
++    file://LICENSE.LGPL3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 +    file://LICENSE.LGPLv21;md5=fb91571854638f10b2e5f36562661a5a \
 +    file://LICENSE.LGPLv3;md5=a909b94c1c9674b2aa15ff03a86f518a \
++    file://LICENSE.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++    file://LICENSE.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LICENSE.GPL3-EXCEPT;md5=763d8c535a234d9a3fb682c7ecb6c073 \
 +    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
      file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
      file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
  "
-@@ -20,7 +20,7 @@ SRC_URI += "\
+@@ -20,8 +24,8 @@ SRC_URI += "\
      file://0006-QOpenGLPaintDevice-sub-area-support.patch \
      file://0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.patch \
      file://0008-configure-paths-for-target-qmake-properly.patch \
+-    file://0011-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch \
 -    file://0011-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
-+    file://0009-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
++    file://0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch \
++    file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
  "
  
  DEPENDS += "qtbase-native"
-@@ -81,8 +81,9 @@ PACKAGECONFIG[jpeg] = "-system-libjpeg,-no-libjpeg,jpeg"
+@@ -82,8 +86,9 @@ PACKAGECONFIG[jpeg] = "-system-libjpeg,-no-libjpeg,jpeg"
  PACKAGECONFIG[libpng] = "-system-libpng,-no-libpng,libpng"
  PACKAGECONFIG[zlib] = "-system-zlib,-qt-zlib,zlib"
  PACKAGECONFIG[pcre] = "-system-pcre,-qt-pcre,pcre"
@@ -774,7 +890,7 @@ index 1ce8cd6..a46a91f 100644
  PACKAGECONFIG[tslib] = "-tslib,-no-tslib,tslib"
  PACKAGECONFIG[cups] = "-cups,-no-cups,cups"
  PACKAGECONFIG[dbus] = "-dbus,-no-dbus,dbus"
-@@ -125,7 +126,6 @@ PACKAGECONFIG[udev] = "-libudev,-no-libudev,udev"
+@@ -123,7 +128,6 @@ PACKAGECONFIG[udev] = "-libudev,-no-libudev,udev"
  PACKAGECONFIG[openssl] = "-openssl,-no-openssl,openssl,libssl"
  PACKAGECONFIG[alsa] = "-alsa,-no-alsa,alsa-lib"
  PACKAGECONFIG[pulseaudio] = "-pulseaudio,-no-pulseaudio,pulseaudio"
@@ -782,120 +898,147 @@ index 1ce8cd6..a46a91f 100644
  PACKAGECONFIG[widgets] = "-widgets,-no-widgets"
  PACKAGECONFIG[libproxy] = "-libproxy,-no-libproxy,libproxy"
  PACKAGECONFIG[libinput] = "-libinput,-no-libinput,libinput"
-@@ -262,4 +262,4 @@ sysroot_stage_dirs_append() {
-     rm -rf $to${OE_QMAKE_PATH_QT_FONTS}
- }
+@@ -221,4 +225,4 @@ do_install_append() {
  
--SRCREV = "cec15a89d058424794978910cc8da65b43d71606"
-+SRCREV = "7bf002c3b3f8009138fca217c7fa0c234aed21bd"
+ RRECOMMENDS_${PN}-plugins += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libx11-locale', '', d)}"
+ 
+-SRCREV = "84330007e12122bf1b690a4e68b5ef8e973c7882"
++SRCREV = "69b43e74d78e050cf5e40197acafa4bc9f90c0bd"
 diff --git a/recipes-qt/qt5/qtcanvas3d_git.bb b/recipes-qt/qt5/qtcanvas3d_git.bb
-index 5b12d1a..c7ec72a 100644
+index a1c8f7f..8cf316b 100644
 --- a/recipes-qt/qt5/qtcanvas3d_git.bb
 +++ b/recipes-qt/qt5/qtcanvas3d_git.bb
-@@ -3,11 +3,11 @@ require qt5-git.inc
- 
- LICENSE = "LGPL-3.0 | GPL-3.0"
- LIC_FILES_CHKSUM = " \
--    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
--    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
--    file://LICENSE.GPLv2;md5=05832301944453ec79e40ba3c3cfceec \
-+    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
-+    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
-+    file://LICENSE.GPLv2;md5=c96076271561b0e3785dad260634eaa8 \
- "
+@@ -10,4 +10,4 @@ LIC_FILES_CHKSUM = " \
  
  DEPENDS = "qtdeclarative"
  
--SRCREV = "791ddce7d41b126ba4744a6701597f49dbf99f3b"
-+SRCREV = "95884805facd1721eea025467afd85ed64a70504"
+-SRCREV = "32404e27101c5ec81b4ab965faf38263429bbc5a"
++SRCREV = "1568c60d2a0d1758acfeec9f002af7ff5b4d28ee"
+diff --git a/recipes-qt/qt5/qtcharts_git.bb b/recipes-qt/qt5/qtcharts_git.bb
+index 99d1471..21f6f13 100644
+--- a/recipes-qt/qt5/qtcharts_git.bb
++++ b/recipes-qt/qt5/qtcharts_git.bb
+@@ -8,4 +8,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtbase qtdeclarative qtmultimedia"
+ 
+-SRCREV = "8a781841812a42ed728a76c0dcdcaa6196eac44e"
++SRCREV = "03a6177a3223f928a5f329c8b1fc4d5fe376deed"
 diff --git a/recipes-qt/qt5/qtconnectivity_git.bb b/recipes-qt/qt5/qtconnectivity_git.bb
-index 03990d8..94c331b 100644
+index b84ad04..67f882a 100644
 --- a/recipes-qt/qt5/qtconnectivity_git.bb
 +++ b/recipes-qt/qt5/qtconnectivity_git.bb
-@@ -3,12 +3,12 @@ require qt5-git.inc
+@@ -1,14 +1,17 @@
+ require qt5.inc
+ require qt5-git.inc
  
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0"
+-LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0"
++LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
  LIC_FILES_CHKSUM = " \
 -    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
 -    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
 -    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
++    file://LICENSE.LGPL3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 +    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
 +    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
++    file://LICENSE.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++    file://LICENSE.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LICENSE.GPL3-EXCEPT;md5=763d8c535a234d9a3fb682c7ecb6c073 \
 +    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
      file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
      file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
 -    file://LICENSE.GPLv2;md5=05832301944453ec79e40ba3c3cfceec \
-+    file://LICENSE.GPLv2;md5=c96076271561b0e3785dad260634eaa8 \
  "
  
  DEPENDS += "qtbase qtdeclarative"
-@@ -25,4 +25,4 @@ do_configure_prepend() {
+@@ -25,4 +28,4 @@ do_configure_prepend() {
      sed -i 's/^qtCompileTest(bluez)/OE_BLUEZ_ENABLED:qtCompileTest(bluez)/g' ${S}/qtconnectivity.pro
  }
  
--SRCREV = "dedff12a896d51c469d2af82664b86a10f8fa7fe"
-+SRCREV = "71a0d199a29001cc31bfde15aabcc53cf88aae1e"
+-SRCREV = "f8759f683cfc433c432059e1160d2ab657baaec6"
++SRCREV = "8755a1f2460fa523782e27b6ca7a430a0176ac61"
+diff --git a/recipes-qt/qt5/qtdatavis3d_git.bb b/recipes-qt/qt5/qtdatavis3d_git.bb
+index ccdd1b3..50a0bcc 100644
+--- a/recipes-qt/qt5/qtdatavis3d_git.bb
++++ b/recipes-qt/qt5/qtdatavis3d_git.bb
+@@ -8,4 +8,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtbase qtdeclarative qtmultimedia qtxmlpatterns"
+ 
+-SRCREV = "2f6074fde0ec050c77f881e0d2ce265fa93a0fcc"
++SRCREV = "d6a8da66dc3c141621c9be4b7509a6e43c60e15c"
 diff --git a/recipes-qt/qt5/qtdeclarative/0001-qmltestexample-fix-link.patch b/recipes-qt/qt5/qtdeclarative/0001-qmltestexample-fix-link.patch
-index ee56820..b0e5fe8 100644
+index 1a8a5f0..b71e3a4 100644
 --- a/recipes-qt/qt5/qtdeclarative/0001-qmltestexample-fix-link.patch
 +++ b/recipes-qt/qt5/qtdeclarative/0001-qmltestexample-fix-link.patch
 @@ -1,4 +1,4 @@
--From d26a676827ef2d64b4627090690d3240e62f6565 Mon Sep 17 00:00:00 2001
-+From 8228a74e72ad130f8ab91dd3ebe1969c0acfd81b Mon Sep 17 00:00:00 2001
+-From c978b2ed0e1ce48b2d4a4a6eb660927bc88aed57 Mon Sep 17 00:00:00 2001
++From 0d742f34ef91fb4e35c68b1274f68daef594f0c3 Mon Sep 17 00:00:00 2001
  From: =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
  Date: Sun, 26 May 2013 14:26:19 +0200
  Subject: [PATCH] qmltestexample: fix link
-@@ -60,7 +60,7 @@ index c6d442e..3181dcd 100644
- +QT += core-private  qml-private testlib gui gui-private quick
-  DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0
+@@ -47,7 +47,7 @@ index c9d78e2..5861613 100644
+  SOURCES += tst_qjsengine.cpp
+  RESOURCES += qjsengine.qrc
  diff --git a/tests/auto/qmltest/qmltest.pro b/tests/auto/qmltest/qmltest.pro
--index 7662cb1..a8f8ae2 100644
-+index 175ed42..83e5d7d 100644
+-index 54db7a7..8c6986c 100644
++index 52fd6bf..843cae6 100644
  --- a/tests/auto/qmltest/qmltest.pro
  +++ b/tests/auto/qmltest/qmltest.pro
  @@ -4,6 +4,7 @@ CONFIG += qmltestcase
 diff --git a/recipes-qt/qt5/qtdeclarative/0002-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch b/recipes-qt/qt5/qtdeclarative/0002-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
-index 60c9685..915d924 100644
+index dc707ab..d0d0f8e 100644
 --- a/recipes-qt/qt5/qtdeclarative/0002-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
 +++ b/recipes-qt/qt5/qtdeclarative/0002-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch
 @@ -1,4 +1,4 @@
--From 9d39293e354120a9ec5e92c87b4cd695acdeb3f5 Mon Sep 17 00:00:00 2001
-+From b958ab5685384a4c612f13c8cb83fa6b87fee18e Mon Sep 17 00:00:00 2001
+-From 493e91c9c3527d577f7051de9a582a178ca43fcf Mon Sep 17 00:00:00 2001
++From 6b1cef42f828cd2374739aa7e3b3800d579315d6 Mon Sep 17 00:00:00 2001
  From: Denys Dmytriyenko <denys@ti.com>
  Date: Thu, 31 Mar 2016 19:38:58 -0400
  Subject: [PATCH] qquickviewcomparison: fix QCoreApplication has not been
 diff --git a/recipes-qt/qt5/qtdeclarative_git.bb b/recipes-qt/qt5/qtdeclarative_git.bb
-index 72b3d7b..195ec51 100644
+index 5e96633..4a690cb 100644
 --- a/recipes-qt/qt5/qtdeclarative_git.bb
 +++ b/recipes-qt/qt5/qtdeclarative_git.bb
-@@ -4,9 +4,9 @@ require qt5-git.inc
- # There are no LGPLv3-only licensed files in this component.
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+@@ -1,12 +1,15 @@
+ require qt5.inc
+ require qt5-git.inc
+ 
+-# There are no LGPLv3-only licensed files in this component.
+-LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
  LIC_FILES_CHKSUM = " \
 -    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
 -    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
 -    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
++    file://LICENSE.LGPL3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 +    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
 +    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
++    file://LICENSE.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++    file://LICENSE.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LICENSE.GPL3-EXCEPT;md5=763d8c535a234d9a3fb682c7ecb6c073 \
 +    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
      file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
      file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
  "
-@@ -34,6 +34,6 @@ do_configure_prepend() {
+@@ -34,6 +37,6 @@ do_configure_prepend() {
  
  EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'qtxmlpatterns', 'CONFIG+=OE_QTXMLPATTERNS_ENABLED', '', d)}"
  
--SRCREV = "26ff8f9029107877bfbfdc2f099f9b11861183ed"
-+SRCREV = "a05f59388e004160899d5d311884cfabe10c3b8c"
+-SRCREV = "31ef2e858c2a0835c040b3199c9557f0f6c66808"
++SRCREV = "d48b397cc79265e80c8437888f9ded0b0364e418"
  
  BBCLASSEXTEND =+ "native nativesdk"
 diff --git a/recipes-qt/qt5/qtenginio_git.bb b/recipes-qt/qt5/qtenginio_git.bb
-index 04f5a79..6135898 100644
+index d5e8dfa..5650048 100644
 --- a/recipes-qt/qt5/qtenginio_git.bb
 +++ b/recipes-qt/qt5/qtenginio_git.bb
-@@ -3,12 +3,13 @@ require qt5-git.inc
+@@ -1,14 +1,15 @@
+ require qt5.inc
+ require qt5-git.inc
  
- LICENSE = "BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+-LICENSE = "BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
  LIC_FILES_CHKSUM = " \
 -    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
 -    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
@@ -904,142 +1047,228 @@ index 04f5a79..6135898 100644
 +    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
 +    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
      file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
-+    file://LICENSE.FDL;md5=f70ee9a6c44ae8917586fea34dff0ab5 \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
  "
  
  DEPENDS += "qtbase qtdeclarative qtxmlpatterns"
  
--SRCREV = "cf717b99fdb1b7221dd556bf3be32feba0ed8afe"
-+SRCREV = "6c37300c667e3049178f049a5b86e7ea955c9671"
+-SRCREV = "0f6e294fb8534f677a5ec75113679cfe24f559c1"
++SRCREV = "cedca298f081e1c1cdac615eed6171fe687f35e2"
 diff --git a/recipes-qt/qt5/qtgraphicaleffects_git.bb b/recipes-qt/qt5/qtgraphicaleffects_git.bb
-index 606b873..24ae3e1 100644
+index 1ecc4f7..60e20f4 100644
 --- a/recipes-qt/qt5/qtgraphicaleffects_git.bb
 +++ b/recipes-qt/qt5/qtgraphicaleffects_git.bb
-@@ -5,16 +5,16 @@ require qt5-git.inc
- # There are no GPLv2 licensed files in this component.
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+@@ -1,20 +1,21 @@
+ require qt5.inc
+ require qt5-git.inc
+ 
+-# There are no LGPLv3-only licensed files in this component.
+-# There are no GPLv2 licensed files in this component.
+-LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
  LIC_FILES_CHKSUM = " \
 -    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
 -    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
 -    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
++    file://LICENSE.LGPL3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 +    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
 +    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
++    file://LICENSE.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++    file://LICENSE.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LICENSE.GPL3-EXCEPT;md5=763d8c535a234d9a3fb682c7ecb6c073 \
 +    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
      file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
      file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
 -    file://LICENSE.GPLv2;md5=05832301944453ec79e40ba3c3cfceec \
-+    file://LICENSE.GPLv2;md5=c96076271561b0e3785dad260634eaa8 \
  "
  
  DEPENDS += "qtdeclarative"
  
  RDEPENDS_${PN}-dev = ""
  
--SRCREV = "6523d7c4843e1d4176035c46e1514c39bdcfc3bf"
-+SRCREV = "0b68e91d68902c4d05d0bb8aa045ae76c4e8c9b5"
+-SRCREV = "d85fd81f338f9c6f2e95b92b2cb9ccd4f9889c6b"
++SRCREV = "d3023be0d839440ac046adf2af75d9e4306dd5ef"
 diff --git a/recipes-qt/qt5/qtimageformats/0001-qtimageformats.pro-Make-the-dependencies-determinist.patch b/recipes-qt/qt5/qtimageformats/0001-qtimageformats.pro-Make-the-dependencies-determinist.patch
-index 1211898..15b69f4 100644
+index 11a9726..03432c9 100644
 --- a/recipes-qt/qt5/qtimageformats/0001-qtimageformats.pro-Make-the-dependencies-determinist.patch
 +++ b/recipes-qt/qt5/qtimageformats/0001-qtimageformats.pro-Make-the-dependencies-determinist.patch
 @@ -1,4 +1,4 @@
--From c4c008c46291be290312b5674af1c1b9c446fa8e Mon Sep 17 00:00:00 2001
-+From ff035d111c39a0f3b1b5a93e99d266341878f573 Mon Sep 17 00:00:00 2001
+-From 6f01ba8602a4efdb31bf01bf58aa4cb23552e9ac Mon Sep 17 00:00:00 2001
++From 7eb3fddc70871048f170211a88194c8cdeeca4dd Mon Sep 17 00:00:00 2001
  From: Martin Jansa <Martin.Jansa@gmail.com>
  Date: Mon, 4 Aug 2014 19:19:05 +0200
  Subject: [PATCH] qtimageformats.pro: Make the dependencies deterministic
 diff --git a/recipes-qt/qt5/qtimageformats_git.bb b/recipes-qt/qt5/qtimageformats_git.bb
-index 573b330..37e1f40 100644
+index 6c983c2..8bfd7b4 100644
 --- a/recipes-qt/qt5/qtimageformats_git.bb
 +++ b/recipes-qt/qt5/qtimageformats_git.bb
-@@ -3,12 +3,12 @@ require qt5-git.inc
+@@ -1,14 +1,17 @@
+ require qt5.inc
+ require qt5-git.inc
  
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0"
+-LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & Digia-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0"
++LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
  LIC_FILES_CHKSUM = " \
 -    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
 -    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
 -    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
++    file://LICENSE.LGPL3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 +    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
 +    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
++    file://LICENSE.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++    file://LICENSE.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LICENSE.GPL3-EXCEPT;md5=763d8c535a234d9a3fb682c7ecb6c073 \
 +    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
      file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
      file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
 -    file://LICENSE.GPLv2;md5=05832301944453ec79e40ba3c3cfceec \
-+    file://LICENSE.GPLv2;md5=c96076271561b0e3785dad260634eaa8 \
  "
  
  DEPENDS += "qtbase"
-@@ -28,4 +28,4 @@ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'jasper', 'CONFIG+
+@@ -28,4 +31,4 @@ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'jasper', 'CONFIG+
  EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'libtiff', 'CONFIG+=OE_LIBTIFF_ENABLED', '', d)}"
  EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'libwebp', 'CONFIG+=OE_LIBWEBP_ENABLED', '', d)}"
  
--SRCREV = "bf5b49878d75d316f31225f76152e8381a3d5f0f"
-+SRCREV = "99f384ac2353df89a1522e47c96cae6a945749e1"
+-SRCREV = "42b07b2ddf443d3eafd18e169f2e5ab5e36604a5"
++SRCREV = "d4401c9f519dfe82c38fe9ded674e454655f1866"
 diff --git a/recipes-qt/qt5/qtlocation_git.bb b/recipes-qt/qt5/qtlocation_git.bb
-index 8a41551..378b1a0 100644
+index ce240c5..7a9ecb4 100644
 --- a/recipes-qt/qt5/qtlocation_git.bb
 +++ b/recipes-qt/qt5/qtlocation_git.bb
 @@ -29,4 +29,4 @@ do_configure_prepend() {
  EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'geoclue', 'CONFIG+=OE_GEOCLUE_ENABLED', '', d)}"
  EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'gypsy', 'CONFIG+=OE_GYPSY_ENABLED', '', d)}"
  
--SRCREV = "d1f66746ab0b77b4f3300cbeeaafe61d25d78e98"
-+SRCREV = "04762a9eecafc80ebeb90c06258de551d451497f"
+-SRCREV = "e41c3a9b345536ccee0840ac6f049173aa6a0785"
++SRCREV = "4e1008b4ac1eea776585ca41a6a3db127cf500ff"
+diff --git a/recipes-qt/qt5/qtmultimedia/0001-Initial-porting-effort-to-GStreamer-1.0.patch b/recipes-qt/qt5/qtmultimedia/0001-Initial-porting-effort-to-GStreamer-1.0.patch
+index 81fcd39..fa6b585 100644
+--- a/recipes-qt/qt5/qtmultimedia/0001-Initial-porting-effort-to-GStreamer-1.0.patch
++++ b/recipes-qt/qt5/qtmultimedia/0001-Initial-porting-effort-to-GStreamer-1.0.patch
+@@ -1,4 +1,4 @@
+-From df587e2a3bb2aa297088bd3ada4309c4b9a85195 Mon Sep 17 00:00:00 2001
++From 26fd6cf787a7a413d54205b8b42d16a63ed5d36a Mon Sep 17 00:00:00 2001
+ From: Yoann Lopes <yoann.lopes@digia.com>
+ Date: Thu, 31 Oct 2013 15:06:30 +0100
+ Subject: [PATCH] Initial porting effort to GStreamer 1.0.
 diff --git a/recipes-qt/qt5/qtmultimedia_git.bb b/recipes-qt/qt5/qtmultimedia_git.bb
-index 328fdd7..71e78ab 100644
+index 5c72337..3bbfb6e 100644
 --- a/recipes-qt/qt5/qtmultimedia_git.bb
 +++ b/recipes-qt/qt5/qtmultimedia_git.bb
-@@ -4,9 +4,9 @@ require qt5-git.inc
- # There are no LGPLv3-only licensed files in this component.
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+@@ -1,12 +1,15 @@
+ require qt5.inc
+ require qt5-git.inc
+ 
+-# There are no LGPLv3-only licensed files in this component.
+-LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
  LIC_FILES_CHKSUM = " \
 -    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
 -    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
 -    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
++    file://LICENSE.LGPL3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 +    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
 +    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
++    file://LICENSE.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++    file://LICENSE.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LICENSE.GPL3-EXCEPT;md5=763d8c535a234d9a3fb682c7ecb6c073 \
 +    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
      file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
      file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
  "
-@@ -35,4 +35,4 @@ SRC_URI += "\
-      file://0001-Initial-porting-effort-to-GStreamer-1.0.patch \
+@@ -32,7 +35,7 @@ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'gstreamer010', 'G
+ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains_any('PACKAGECONFIG', 'gstreamer gstreamer010', '', 'CONFIG+=done_config_gstreamer', d)}"
+ 
+ SRC_URI += "\
+-     file://0001-Initial-porting-effort-to-GStreamer-1.0.patch \
++    file://0001-Initial-porting-effort-to-GStreamer-1.0.patch \
  "
  
--SRCREV = "2170a3b0fcda613daf76a337fa45cb97e0714cdf"
-+SRCREV = "d7d31d63db5f0029a4a5e24d998601baee8bade0"
+-SRCREV = "c85fd6df07935b9c0fa08f881271cd94ad100003"
++SRCREV = "1be4f74843b41f8bc1d1d64e83485f4eb864e8b4"
+diff --git a/recipes-qt/qt5/qtquick1/0001-qdeclarativetextinput-update-to-match-QWidgetLineCon.patch b/recipes-qt/qt5/qtquick1/0001-qdeclarativetextinput-update-to-match-QWidgetLineCon.patch
+deleted file mode 100644
+index 27a2140..0000000
+--- a/recipes-qt/qt5/qtquick1/0001-qdeclarativetextinput-update-to-match-QWidgetLineCon.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From 450d5dee6cc4f35a7475af507b90ba67327ad724 Mon Sep 17 00:00:00 2001
+-From: Martin Jansa <Martin.Jansa@gmail.com>
+-Date: Tue, 26 Apr 2016 17:48:18 +0200
+-Subject: [PATCH] qdeclarativetextinput: update to match QWidgetLineControl API
+- change
+-
+-* setCursorBlinkPeriod was replaced with setBlinkingCursorEnabled &
+-  updateCursorBlinking in qtbase commit:
+-  commit 1b5bc9723c0b23ca5197097c3087df6bbe024a2a
+-  Author: Richard Moe Gustavsen <richard.gustavsen@theqtcompany.com>
+-  Date:   Tue Apr 19 10:15:54 2016 +0200
+-  Subject: QWidgetLineControl: respect run-time changes to cursorFlashTime
+-
+-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+----
+- src/declarative/graphicsitems/qdeclarativetextinput.cpp | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/declarative/graphicsitems/qdeclarativetextinput.cpp b/src/declarative/graphicsitems/qdeclarativetextinput.cpp
+-index 3ff75fd..e39d1af 100644
+---- a/src/declarative/graphicsitems/qdeclarativetextinput.cpp
+-+++ b/src/declarative/graphicsitems/qdeclarativetextinput.cpp
+-@@ -514,7 +514,7 @@ void QDeclarativeTextInput::setCursorVisible(bool on)
+-     if (d->cursorVisible == on)
+-         return;
+-     d->cursorVisible = on;
+--    d->control->setCursorBlinkPeriod(on?QApplication::cursorFlashTime():0);
+-+    d->control->setBlinkingCursorEnabled(on);
+-     QRect r = d->control->cursorRect();
+-     if (d->control->inputMask().isEmpty())
+-         updateRect(r);
 diff --git a/recipes-qt/qt5/qtquick1_git.bb b/recipes-qt/qt5/qtquick1_git.bb
-index 61b02a1..f826b54 100644
+index 55179fa..4107c3a 100644
 --- a/recipes-qt/qt5/qtquick1_git.bb
 +++ b/recipes-qt/qt5/qtquick1_git.bb
-@@ -6,11 +6,12 @@ require qt5-git.inc
- # Note that some files are LGPL-2.1 only without The-Qt-Company-Qt-LGPL-Exception-1.1.
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+@@ -1,23 +1,19 @@
+ require qt5.inc
+ require qt5-git.inc
+ 
+-# There are no LGPLv3-only licensed files in this component.
+-# There are no GPLv2 licensed files in this component.
+-# Note that some files are LGPL-2.1 only without The-Qt-Company-Qt-LGPL-Exception-1.1.
+-LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
  LIC_FILES_CHKSUM = " \
 -    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
--    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
+-    file://LICENSE.LGPLv3;md5=c4fe8c6de4eef597feec6e90ed62e962 \
 +    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
 +    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
++    file://LICENSE.GPLv2;md5=c96076271561b0e3785dad260634eaa8 \
 +    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
      file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
      file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
 -    file://LICENSE.GPLv2;md5=05832301944453ec79e40ba3c3cfceec \
-+    file://LICENSE.GPLv2;md5=c96076271561b0e3785dad260634eaa8 \
  "
  
  DEPENDS += "qtscript qtsvg qtxmlpatterns"
-@@ -23,4 +24,4 @@ do_configure_prepend() {
-     sed -i 's#^qtHaveModule(webkitwidgets):#enable-webkit:qtHaveModule(webkitwidgets):#g' ${S}/src/imports/imports.pro
+ # qttools
+ 
+-SRC_URI += "file://0001-qdeclarativetextinput-update-to-match-QWidgetLineCon.patch"
+-
+ PACKAGECONFIG ??= "webkit"
+ PACKAGECONFIG[webkit] = ",,qtwebkit"
+ 
+@@ -27,4 +23,4 @@ do_configure_prepend() {
+     sed -i 's#^qtHaveModule(webkitwidgets):#qtHaveModule(webkitwidgets):!contains(CONFIG, noqtwebkit):#g' ${S}/src/imports/imports.pro
  }
  
--SRCREV = "563ce3888f3c04abcc96ba236b20c7a822bc88e2"
-+SRCREV = "e90625f00a3727ca1c89a94407b7686327d03c19"
+-SRCREV = "5e3bd5cb28e7af95b289a617ca2f7a8892498225"
++SRCREV = "857fc5ec4644a6111ba8725e4e1a84dd5ea6bfca"
 diff --git a/recipes-qt/qt5/qtquickcontrols/0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch b/recipes-qt/qt5/qtquickcontrols/0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch
-index c57943d..fb7c5e1 100644
+index ad2b489..85fcc15 100644
 --- a/recipes-qt/qt5/qtquickcontrols/0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch
 +++ b/recipes-qt/qt5/qtquickcontrols/0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch
 @@ -1,4 +1,4 @@
--From d5faf29f8a41b0e28132fb23828cff8043174cb8 Mon Sep 17 00:00:00 2001
-+From 0dcc16dafac2fec76c178f3b3195f57bb2ac3d8e Mon Sep 17 00:00:00 2001
+-From 00bb7694b9287f23d4d059ae134e9409db69673e Mon Sep 17 00:00:00 2001
++From fca6212d5ebc5851f28e820e4ff0ebe04a9d44d7 Mon Sep 17 00:00:00 2001
  From: Denys Dmytriyenko <denys@ti.com>
  Date: Thu, 31 Mar 2016 19:57:01 -0400
  Subject: [PATCH] texteditor: fix invalid use of incomplete type 'class QDebug'
@@ -1053,232 +1282,218 @@ index c57943d..fb7c5e1 100644
  
 -diff --git a/examples/quick/controls/texteditor/src/documenthandler.cpp b/examples/quick/controls/texteditor/src/documenthandler.cpp
 +diff --git a/examples/quickcontrols/controls/texteditor/src/documenthandler.cpp b/examples/quickcontrols/controls/texteditor/src/documenthandler.cpp
- index 2e03f74..3d1b3c8 100644
+ index bdecf5b..811a761 100644
 ---- a/examples/quick/controls/texteditor/src/documenthandler.cpp
 -+++ b/examples/quick/controls/texteditor/src/documenthandler.cpp
 +--- a/examples/quickcontrols/controls/texteditor/src/documenthandler.cpp
 ++++ b/examples/quickcontrols/controls/texteditor/src/documenthandler.cpp
- @@ -44,6 +44,7 @@
+ @@ -54,6 +54,7 @@
   #include <QtGui/QTextCursor>
   #include <QtGui/QFontDatabase>
 diff --git a/recipes-qt/qt5/qtquickcontrols2_git.bb b/recipes-qt/qt5/qtquickcontrols2_git.bb
-index e3c580f..66ec15e 100644
+index 00fe4fc..7271a19 100644
 --- a/recipes-qt/qt5/qtquickcontrols2_git.bb
 +++ b/recipes-qt/qt5/qtquickcontrols2_git.bb
-@@ -4,12 +4,12 @@ require qt5-git.inc
- LICENSE = "GFDL-1.3 & BSD & LGPL-3.0 | GPL-3.0"
- LIC_FILES_CHKSUM = " \
-     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
--    file://LICENSE.LGPLv3;md5=8ba7f2099d17d636d5fcc8303bb17587 \
--    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
-+    file://LICENSE.LGPLv3;md5=a37e6cd7102174853307e03e6edc5f30 \
-+    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
- "
+@@ -10,4 +10,4 @@ LIC_FILES_CHKSUM = " \
  
  DEPENDS += "qtdeclarative"
  
- FILES_${PN}-qmlplugins += "${libdir}/qt5/qml/Qt"
- 
--SRCREV = "ac152bfcd37f94453e9705b57ca6520ad30bade0"
-+SRCREV = "eed9b9dd83f0db9cbfe794072d8f5147e3d1234a"
+-SRCREV = "2a5c64a1ddf5b6fdb9104faf99260925a327b2f4"
++SRCREV = "cc0ee8e4f3345023f1b85fc815739c0a75ea5686"
 diff --git a/recipes-qt/qt5/qtquickcontrols_git.bb b/recipes-qt/qt5/qtquickcontrols_git.bb
-index 7a5ca23..42d504e 100644
+index 9231a79..906ca0d 100644
 --- a/recipes-qt/qt5/qtquickcontrols_git.bb
 +++ b/recipes-qt/qt5/qtquickcontrols_git.bb
-@@ -3,10 +3,10 @@ require qt5-git.inc
+@@ -1,12 +1,16 @@
+ require qt5.inc
+ require qt5-git.inc
  
- LICENSE = "GFDL-1.3 & BSD & LGPL-3.0 | GPL-2.0"
+-LICENSE = "GFDL-1.3 & BSD & LGPL-3.0 | GPL-2.0"
++LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
  LIC_FILES_CHKSUM = " \
--    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
++    file://LICENSE.LGPL3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
+     file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
 -    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
-+    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
-+    file://LICENSE.GPLv2;md5=c96076271561b0e3785dad260634eaa8 \
+-    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
++    file://LICENSE.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++    file://LICENSE.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LICENSE.GPL3-EXCEPT;md5=763d8c535a234d9a3fb682c7ecb6c073 \
+     file://LICENSE.GPLv2;md5=05832301944453ec79e40ba3c3cfceec \
 +    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
-     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
--    file://LICENSE.GPLv2;md5=05832301944453ec79e40ba3c3cfceec \
++    file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
  "
  
  DEPENDS += "qtdeclarative"
-@@ -17,4 +17,4 @@ SRC_URI += " \
+@@ -17,4 +21,4 @@ SRC_URI += " \
      file://0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch \
  "
  
--SRCREV = "01e52200e2a76ec51c3bb9710617ac0c249a78bc"
-+SRCREV = "84a26f223b220a444dec2b43fffc71dab7e00d1d"
+-SRCREV = "3411c3579fb9e767c819c0c8d9f35c52c9964b06"
++SRCREV = "37f8b753be1b16975220c8b611b17a428eafb9e9"
 diff --git a/recipes-qt/qt5/qtscript_git.bb b/recipes-qt/qt5/qtscript_git.bb
-index 565ca84..21199f7 100644
+index 7859ec5..90981f3 100644
 --- a/recipes-qt/qt5/qtscript_git.bb
 +++ b/recipes-qt/qt5/qtscript_git.bb
-@@ -5,9 +5,9 @@ require qt5-git.inc
- # Note that some files are LGPL-2.1 only without The-Qt-Company-Qt-LGPL-Exception-1.1.
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+@@ -1,13 +1,15 @@
+ require qt5.inc
+ require qt5-git.inc
+ 
+-# There are no LGPLv3-only licensed files in this component.
+-# Note that some files are LGPL-2.1 only without The-Qt-Company-Qt-LGPL-Exception-1.1.
+-LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
  LIC_FILES_CHKSUM = " \
 -    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
 -    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
 -    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
++    file://LICENSE.LGPL3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 +    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
 +    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
++    file://LICENSE.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++    file://LICENSE.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LICENSE.GPL3-EXCEPT;md5=763d8c535a234d9a3fb682c7ecb6c073 \
 +    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
      file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
      file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
  "
-@@ -27,4 +27,4 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
+@@ -27,4 +29,4 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
  
  DEPENDS += "qtbase"
  
--SRCREV = "b16873afea798d08799d7a0b255b8d200337f35b"
-+SRCREV = "9dc78a2d847bca5ec7b1445356523383a030d7ce"
+-SRCREV = "b49bfdaad11be1de632f907d43485a7ac701ddc5"
++SRCREV = "b8845794b95376e8be39dbdafca2c85b5ec4c195"
 diff --git a/recipes-qt/qt5/qtsensors_git.bb b/recipes-qt/qt5/qtsensors_git.bb
-index 16c2095..e599617 100644
+index 1098f25..1d7e134 100644
 --- a/recipes-qt/qt5/qtsensors_git.bb
 +++ b/recipes-qt/qt5/qtsensors_git.bb
-@@ -5,14 +5,13 @@ require qt5-git.inc
- # There are no GPLv2 licensed files in this component.
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM = " \
--    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
--    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
--    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
-+    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
-+    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
-+    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
-     file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
-     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
--    file://LICENSE.GPLv2;md5=05832301944453ec79e40ba3c3cfceec \
- "
+@@ -15,4 +15,4 @@ LIC_FILES_CHKSUM = " \
  
  DEPENDS += "qtbase qtdeclarative"
  
--SRCREV = "0b00ee6f6c311a7f5c0b4f2441dad97a454d172e"
-+SRCREV = "8b79fc4ee1c0510c13dc6f1494f37727e3f8c0cf"
+-SRCREV = "33d15b76dfdb95da5970b8e0294bbb87ea1eb9a8"
++SRCREV = "e03c37077ea4841b9e0b591d29a34737d7d8dd32"
+diff --git a/recipes-qt/qt5/qtserialbus_git.bb b/recipes-qt/qt5/qtserialbus_git.bb
+index 731bd48..3cde771 100644
+--- a/recipes-qt/qt5/qtserialbus_git.bb
++++ b/recipes-qt/qt5/qtserialbus_git.bb
+@@ -10,4 +10,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtbase qtserialport"
+ 
+-SRCREV = "f9201ca7bad9220149fb39b89914e83a4a14dffc"
++SRCREV = "88554d068d287870740b842864a50604f53e8509"
 diff --git a/recipes-qt/qt5/qtserialport_git.bb b/recipes-qt/qt5/qtserialport_git.bb
-index 4139db1..10780be 100644
+index b16978b..d5f37d5 100644
 --- a/recipes-qt/qt5/qtserialport_git.bb
 +++ b/recipes-qt/qt5/qtserialport_git.bb
-@@ -5,14 +5,14 @@ require qt5-git.inc
- # other qt* components use :/
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM = " \
--    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
--    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
--    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
-+    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
-+    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
-+    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
-     file://LGPL_EXCEPTION.txt;md5=bb426f3367c4805d1e12fad05bd0b750 \
-     file://LICENSE.FDL;md5=3801d7932fdc07fd9efe89f9854a6caa \
--    file://LICENSE.GPLv2;md5=05832301944453ec79e40ba3c3cfceec \
-+    file://LICENSE.GPLv2;md5=c96076271561b0e3785dad260634eaa8 \
- "
+@@ -15,4 +15,4 @@ LIC_FILES_CHKSUM = " \
  
  DEPENDS += "qtbase"
  
--SRCREV = "9a70ee2389d3302f6a4262325f8a76e4d867b478"
-+SRCREV = "133dbd59fb04974149d2140b267fce91a7cfd4a2"
+-SRCREV = "84feab670cce8414ad54f4d19b46291c7fdb14cf"
++SRCREV = "7346857f4f675f57572d54f15cfad9111af2abde"
 diff --git a/recipes-qt/qt5/qtsvg_git.bb b/recipes-qt/qt5/qtsvg_git.bb
-index 6c300e5..145ac65 100644
+index 09fef6c..6f5d7ab 100644
 --- a/recipes-qt/qt5/qtsvg_git.bb
 +++ b/recipes-qt/qt5/qtsvg_git.bb
-@@ -4,13 +4,13 @@ require qt5-git.inc
- # There are no LGPLv3-only licensed files in this component.
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM = " \
--    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
--    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
--    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
-+    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
-+    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
-+    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
-     file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
-     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
- "
+@@ -13,4 +13,4 @@ LIC_FILES_CHKSUM = " \
  
  DEPENDS += "qtbase"
  
--SRCREV = "e02df9c098b4d304b34c0ff65806a0576e45ed1a"
-+SRCREV = "2d55b4996eaa26c973afdf15f6f703c0a1840a96"
+-SRCREV = "612c3041475550837dee7149b9f5e9e4f55c17a0"
++SRCREV = "64ca369c7e3d61f0416bc1fd6a102f0c62924433"
 diff --git a/recipes-qt/qt5/qtsystems_git.bb b/recipes-qt/qt5/qtsystems_git.bb
-index 8cbe0e0..de316a5 100644
+index a467f99..7c155a2 100644
 --- a/recipes-qt/qt5/qtsystems_git.bb
 +++ b/recipes-qt/qt5/qtsystems_git.bb
-@@ -33,4 +33,4 @@ QT_MODULE_BRANCH = "dev"
- # qtsystems wasn't released yet, last tag before this SRCREV is 5.0.0-beta1
- # qt5-git PV is only to indicate that this recipe is compatible with qt5 5.6
+@@ -30,4 +30,4 @@ do_install_append() {
+ 
+ QT_MODULE_BRANCH = "dev"
  
 -SRCREV = "236b6b544fd2049eb46e8f79d13bb7aa35ba002f"
 +SRCREV = "434af789f0d56ca7a521ca2d9ec8cf3b1057fd37"
 diff --git a/recipes-qt/qt5/qttools/0001-Allow-to-build-only-lrelease-lupdate-lconvert.patch b/recipes-qt/qt5/qttools/0001-Allow-to-build-only-lrelease-lupdate-lconvert.patch
-index dbb9438..25cf6fe 100644
+index 8cf6ada..94cd048 100644
 --- a/recipes-qt/qt5/qttools/0001-Allow-to-build-only-lrelease-lupdate-lconvert.patch
 +++ b/recipes-qt/qt5/qttools/0001-Allow-to-build-only-lrelease-lupdate-lconvert.patch
 @@ -1,4 +1,4 @@
--From c6d62fcf2e02b5a86c36b4afd78dfb7a3f29ad91 Mon Sep 17 00:00:00 2001
-+From 782bef8198cc5aacd7b11903a4e4739950d6b90c Mon Sep 17 00:00:00 2001
+-From e80743f15443212823e95d2be82073980a4700bc Mon Sep 17 00:00:00 2001
++From 68ecc4f25789321fc29ec9e4981fcfa27e706f1c Mon Sep 17 00:00:00 2001
  From: Martin Jansa <Martin.jansa@gmail.com>
  Date: Wed, 11 Sep 2013 18:30:08 +0200
  Subject: [PATCH] Allow to build only lrelease + lupdate + lconvert
 diff --git a/recipes-qt/qt5/qttools/0002-assistant-help-fix-linking-of-dependent-libraries.patch b/recipes-qt/qt5/qttools/0002-assistant-help-fix-linking-of-dependent-libraries.patch
-index b5e9293..b314513 100644
+index fe8fe3d..17d5d51 100644
 --- a/recipes-qt/qt5/qttools/0002-assistant-help-fix-linking-of-dependent-libraries.patch
 +++ b/recipes-qt/qt5/qttools/0002-assistant-help-fix-linking-of-dependent-libraries.patch
 @@ -1,4 +1,4 @@
--From 34f23c43f1c656ccd424528821a9ac65a98c5fec Mon Sep 17 00:00:00 2001
-+From b7e29ffe5f00847de7e87a183e0ff2ecf0cccb20 Mon Sep 17 00:00:00 2001
+-From d7943b08bdb858bd2501c93a428ebc13bc9f3cfc Mon Sep 17 00:00:00 2001
++From 95a418157ce5f49052ec1c349581d1811a79c9eb Mon Sep 17 00:00:00 2001
  From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
  Date: Fri, 17 Jan 2014 14:33:19 +0100
  Subject: [PATCH] assistant/help: fix linking of dependent libraries
 diff --git a/recipes-qt/qt5/qttools/0003-add-noqtwebkit-configuration.patch b/recipes-qt/qt5/qttools/0003-add-noqtwebkit-configuration.patch
-index f0f40b7..ea487c5 100644
+index aca2fbc..88c39c7 100644
 --- a/recipes-qt/qt5/qttools/0003-add-noqtwebkit-configuration.patch
 +++ b/recipes-qt/qt5/qttools/0003-add-noqtwebkit-configuration.patch
 @@ -1,4 +1,4 @@
--From b77f225e25360832074692681c5ff7c13862102d Mon Sep 17 00:00:00 2001
-+From 79a9f6a65355203fc49fa610f6bb9fe8ddd07cda Mon Sep 17 00:00:00 2001
+-From 6c5bbd423c3c8f87d00c18384460ab418dccea95 Mon Sep 17 00:00:00 2001
++From a798e469e69e31248610a3b5f29c63c5d12cda26 Mon Sep 17 00:00:00 2001
  From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
  Date: Wed, 4 Jun 2014 11:28:16 +0200
  Subject: [PATCH] add noqtwebkit configuration
 diff --git a/recipes-qt/qt5/qttools/0004-linguist-tools-cmake-allow-overriding-the-location-f.patch b/recipes-qt/qt5/qttools/0004-linguist-tools-cmake-allow-overriding-the-location-f.patch
-index 16ff71e..b9a68f8 100644
+index 4f59980..1a201de 100644
 --- a/recipes-qt/qt5/qttools/0004-linguist-tools-cmake-allow-overriding-the-location-f.patch
 +++ b/recipes-qt/qt5/qttools/0004-linguist-tools-cmake-allow-overriding-the-location-f.patch
 @@ -1,4 +1,4 @@
--From e65c5ea9f7ce6fade201ed15b44dcb4d82219b3f Mon Sep 17 00:00:00 2001
-+From a2d297031e08f986189761dafdac78a95db39de8 Mon Sep 17 00:00:00 2001
+-From 3dfe38ac9b83ee94c8abfe1bb78b14050b0c9a6f Mon Sep 17 00:00:00 2001
++From f805a2bf4a0d35a01726d214279ba1caa81b278f Mon Sep 17 00:00:00 2001
  From: Cody P Schafer <dev@codyps.com>
  Date: Thu, 9 Jul 2015 11:28:19 -0400
  Subject: [PATCH] linguist-tools cmake: allow overriding the location for
 diff --git a/recipes-qt/qt5/qttools_git.bb b/recipes-qt/qt5/qttools_git.bb
-index e0b23b4..87854af 100644
+index fbc5a38..0377eaf 100644
 --- a/recipes-qt/qt5/qttools_git.bb
 +++ b/recipes-qt/qt5/qttools_git.bb
-@@ -3,9 +3,9 @@ require qt5-git.inc
+@@ -1,11 +1,15 @@
+ require qt5.inc
+ require qt5-git.inc
  
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+-LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
  LIC_FILES_CHKSUM = " \
 -    file://LICENSE.LGPLv21;md5=d3bb688e8d381a9fa5ee9063114b366d \
 -    file://LICENSE.LGPLv3;md5=3fd06ee442011942b532cc6dedb0b39c \
 -    file://LICENSE.GPLv3;md5=a40e2bb02b1ac431f461afd03ff9d1d6 \
-+    file://LICENSE.LGPLv21;md5=fb91571854638f10b2e5f36562661a5a \
-+    file://LICENSE.LGPLv3;md5=a909b94c1c9674b2aa15ff03a86f518a \
-+    file://LICENSE.GPLv3;md5=bfdd8aa675169432d6d9b63d056de148 \
++    file://LICENSE.LGPL3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
++    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
++    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
++    file://LICENSE.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++    file://LICENSE.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LICENSE.GPL3-EXCEPT;md5=763d8c535a234d9a3fb682c7ecb6c073 \
++    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
      file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
      file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
  "
-@@ -31,6 +31,6 @@ PACKAGECONFIG[qtwebkit] = ",,qtwebkit"
+@@ -31,6 +35,6 @@ PACKAGECONFIG[qtwebkit] = ",,qtwebkit"
  EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'qtwebkit', '', 'CONFIG+=noqtwebkit', d)}"
  EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'linguistonly', 'CONFIG+=linguistonly', '', d)}"
  
--SRCREV = "e33532e048fa12ee32429ca83ee31aa8f065147d"
-+SRCREV = "bda7ece99a8162118a91e9f475c149be39846ecd"
+-SRCREV = "d36d2c3026cae67c119384f47cb2680552c81aaf"
++SRCREV = "0597b535f82d3458a1db1828c5e5f725bbcf59fd"
  
  BBCLASSEXTEND = "native nativesdk"
 diff --git a/recipes-qt/qt5/qttranslations_git.bb b/recipes-qt/qt5/qttranslations_git.bb
-index 93b147d..5e11d24 100644
+index 70f57bf..2a37d14 100644
 --- a/recipes-qt/qt5/qttranslations_git.bb
 +++ b/recipes-qt/qt5/qttranslations_git.bb
-@@ -3,9 +3,9 @@ require qt5-git.inc
+@@ -1,11 +1,11 @@
+ require qt5.inc
+ require qt5-git.inc
  
- LICENSE = "(LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+-LICENSE = "(LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
  LIC_FILES_CHKSUM = " \
 -    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
 -    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
@@ -1293,147 +1508,138 @@ index 93b147d..5e11d24 100644
      ${OE_QMAKE_PATH_TRANSLATIONS}/qt_*.qm \
  "
  
--SRCREV = "13f1f2f12ddfc9b84535361d77a5f0f0ec8c3e0f"
-+SRCREV = "4925f90e9ceb0b4081649d1fc1eec10beb65f722"
+-SRCREV = "745f8d5329d0d6d98a8577a254d2ee3e7174634e"
++SRCREV = "2209b3fd6a56bfc44da5369c4fbd345bbca31777"
+diff --git a/recipes-qt/qt5/qtvirtualkeyboard_git.bb b/recipes-qt/qt5/qtvirtualkeyboard_git.bb
+index a8fcb9c..ff478f3 100644
+--- a/recipes-qt/qt5/qtvirtualkeyboard_git.bb
++++ b/recipes-qt/qt5/qtvirtualkeyboard_git.bb
+@@ -8,4 +8,4 @@ LIC_FILES_CHKSUM = " \
+ 
+ DEPENDS += "qtbase qtdeclarative qtmultimedia qtquickcontrols qtsvg qtxmlpatterns"
+ 
+-SRCREV = "42344a4b21b95bce913d60267d554ac17e120af1"
++SRCREV = "626e78c9660cff063e1f9370538b5a424631571c"
 diff --git a/recipes-qt/qt5/qtwayland-native_git.bb b/recipes-qt/qt5/qtwayland-native_git.bb
-index ca47da8..8fc1862 100644
+index 505f19b..c8844fb 100644
 --- a/recipes-qt/qt5/qtwayland-native_git.bb
 +++ b/recipes-qt/qt5/qtwayland-native_git.bb
-@@ -4,9 +4,9 @@ require qt5-git.inc
- # There are no LGPLv3-only licensed files in this component.
- LICENSE = "BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM = " \
--    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
--    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
--    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
-+    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
-+    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
-+    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
-     file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
-     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
- "
 @@ -25,4 +25,4 @@ do_install() {
      oe_runmake install INSTALL_ROOT=${D}
  }
  
--SRCREV = "26e27845a43319d0ecad0c6392f05d1ed50da2a2"
-+SRCREV = "d8b4bef3ddff327598027c8f94a61e3d0b61a2dd"
+-SRCREV = "bfa66ccb29f747e2cb07a4f2e561b165be9f211d"
++SRCREV = "a172672484b9496819e588b51ac2ff9fb4a21941"
 diff --git a/recipes-qt/qt5/qtwayland/0001-Install-the-qtwaylandscanner-tool-to-the-native-side.patch b/recipes-qt/qt5/qtwayland/0001-Install-the-qtwaylandscanner-tool-to-the-native-side.patch
-index 45493cf..6c65e2a 100644
+index c199f71..847ba06 100644
 --- a/recipes-qt/qt5/qtwayland/0001-Install-the-qtwaylandscanner-tool-to-the-native-side.patch
 +++ b/recipes-qt/qt5/qtwayland/0001-Install-the-qtwaylandscanner-tool-to-the-native-side.patch
 @@ -1,4 +1,4 @@
--From cadcacf58301251629a63ecd2682d58e6bf24cb8 Mon Sep 17 00:00:00 2001
-+From 58cea434f7b4f0f2469ba6e8eb892a448e20f6a6 Mon Sep 17 00:00:00 2001
+-From 4334643f02fc333fa8b633ff614fa4ceecf4a8e6 Mon Sep 17 00:00:00 2001
++From 47457635603ddb484a479834a052699cce5b34a3 Mon Sep 17 00:00:00 2001
  From: Simon Busch <morphis@gravedo.de>
  Date: Fri, 19 Jul 2013 13:35:14 +0000
  Subject: [PATCH] Install the qtwaylandscanner tool to the native side
 diff --git a/recipes-qt/qt5/qtwayland/0001-examples-wayland-include-server-buffer-only-when-bui.patch b/recipes-qt/qt5/qtwayland/0001-examples-wayland-include-server-buffer-only-when-bui.patch
-index f39707c..6402710 100644
+index 72f2953..a21c109 100644
 --- a/recipes-qt/qt5/qtwayland/0001-examples-wayland-include-server-buffer-only-when-bui.patch
 +++ b/recipes-qt/qt5/qtwayland/0001-examples-wayland-include-server-buffer-only-when-bui.patch
 @@ -1,4 +1,4 @@
--From 52971db84e3b2c429e8777953c0532dcb88b8e6b Mon Sep 17 00:00:00 2001
-+From 2be2c512d07fb013022c9ccb7d81308295e71866 Mon Sep 17 00:00:00 2001
+-From 3c5c13f2f991cc79363969fb3873d553dd985e7b Mon Sep 17 00:00:00 2001
++From 733a85c14cb4ade510a0c78b32cd12cb2d70dbbd Mon Sep 17 00:00:00 2001
  From: Martin Jansa <Martin.Jansa@gmail.com>
  Date: Sat, 22 Feb 2014 17:47:44 +0100
  Subject: [PATCH] examples/wayland: include server-buffer only when building
+@@ -14,10 +14,10 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+  1 file changed, 3 insertions(+), 1 deletion(-)
+ 
+ diff --git a/examples/wayland/wayland.pro b/examples/wayland/wayland.pro
+-index b67d12e..c5daad0 100644
++index 503190c..9943c52 100644
+ --- a/examples/wayland/wayland.pro
+ +++ b/examples/wayland/wayland.pro
+-@@ -9,4 +9,6 @@ qtHaveModule(quick) {
++@@ -10,4 +10,6 @@ qtHaveModule(quick) {
+      SUBDIRS += custom-extension
+  }
+  
 diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
-index a1cee86..3153dc0 100644
+index df42f30..b208961 100644
 --- a/recipes-qt/qt5/qtwayland_git.bb
 +++ b/recipes-qt/qt5/qtwayland_git.bb
-@@ -4,9 +4,9 @@ require qt5-git.inc
- # There are no LGPLv3-only licensed files in this component.
- LICENSE = "BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+@@ -3,12 +3,15 @@ require qt5-git.inc
+ 
+ DEPENDS += "qtbase qtdeclarative wayland wayland-native qtwayland-native"
+ 
+-# There are no LGPLv3-only licensed files in this component.
+-LICENSE = "BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
  LIC_FILES_CHKSUM = " \
 -    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
 -    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
 -    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
++    file://LICENSE.LGPL3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 +    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
 +    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
++    file://LICENSE.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++    file://LICENSE.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LICENSE.GPL3-EXCEPT;md5=763d8c535a234d9a3fb682c7ecb6c073 \
 +    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
      file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
      file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
  "
-@@ -36,4 +36,4 @@ SRC_URI += " \
+@@ -45,4 +48,4 @@ SRC_URI += " \
      file://0001-examples-wayland-include-server-buffer-only-when-bui.patch \
  "
  
--SRCREV = "26e27845a43319d0ecad0c6392f05d1ed50da2a2"
-+SRCREV = "d8b4bef3ddff327598027c8f94a61e3d0b61a2dd"
+-SRCREV = "bfa66ccb29f747e2cb07a4f2e561b165be9f211d"
++SRCREV = "a172672484b9496819e588b51ac2ff9fb4a21941"
 diff --git a/recipes-qt/qt5/qtwebchannel_git.bb b/recipes-qt/qt5/qtwebchannel_git.bb
-index 79c6b23..55a1cb9 100644
+index 869851b..01b098b 100644
 --- a/recipes-qt/qt5/qtwebchannel_git.bb
 +++ b/recipes-qt/qt5/qtwebchannel_git.bb
-@@ -5,14 +5,14 @@ require qt5-git.inc
- # There are no GPLv2 licensed files in this component.
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM = " \
--    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
--    file://LICENSE.GPLv2;md5=05832301944453ec79e40ba3c3cfceec \
--    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
--    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
-+    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
-+    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
-+    file://LICENSE.GPLv2;md5=c96076271561b0e3785dad260634eaa8 \
-+    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
-     file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
-     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
- "
+@@ -15,4 +15,4 @@ LIC_FILES_CHKSUM = " \
  
  DEPENDS += "qtdeclarative qtwebsockets"
  
--SRCREV = "64a106da72796377bbff5cce0ecc5a379b105498"
-+SRCREV = "3b28a6956cb3cab087481312dc82a907b118e0de"
+-SRCREV = "a2c3b32d08ed24279609a8c01b09c1147a9ff6b9"
++SRCREV = "3836fd7d12777fc53836a72d6542d2fbf2f20ac9"
 diff --git a/recipes-qt/qt5/qtwebengine/0001-chromium-base.gypi-include-atomicops_internals_x86_g.patch b/recipes-qt/qt5/qtwebengine/0001-chromium-base.gypi-include-atomicops_internals_x86_g.patch
-index 75350c1..28e5540 100644
+index 5fd3f06..ccd43e2 100644
 --- a/recipes-qt/qt5/qtwebengine/0001-chromium-base.gypi-include-atomicops_internals_x86_g.patch
 +++ b/recipes-qt/qt5/qtwebengine/0001-chromium-base.gypi-include-atomicops_internals_x86_g.patch
 @@ -1,4 +1,4 @@
--From 04be78d20ecc23e289e171e907bb5daf9393619d Mon Sep 17 00:00:00 2001
-+From 092e3c94fbec392c6b2f29bc2999595a10d0e66f Mon Sep 17 00:00:00 2001
+-From 66af547c2b3ed473b81421aa239d931d364f644d Mon Sep 17 00:00:00 2001
++From db56cd0fd185a9f3858f5aa6e95b24e63dee119f Mon Sep 17 00:00:00 2001
  From: Martin Jansa <Martin.Jansa@gmail.com>
  Date: Fri, 3 Oct 2014 03:52:11 +0200
  Subject: [PATCH] <chromium> base.gypi: include atomicops_internals_x86_gcc.cc
-@@ -6,7 +6,7 @@ Subject: [PATCH] <chromium> base.gypi: include atomicops_internals_x86_gcc.cc
- 
- Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
- ---
-- src/3rdparty/chromium/base/base.gypi | 2 +-
-+ chromium/base/base.gypi | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/src/3rdparty/chromium/base/base.gypi b/src/3rdparty/chromium/base/base.gypi
 diff --git a/recipes-qt/qt5/qtwebengine/0001-functions.prf-Don-t-match-QMAKE_EXT_CPP-or-QMAKE_EXT.patch b/recipes-qt/qt5/qtwebengine/0001-functions.prf-Don-t-match-QMAKE_EXT_CPP-or-QMAKE_EXT.patch
-index c95fad0..fed7f11 100644
+index 287bf2b..b7bd5a4 100644
 --- a/recipes-qt/qt5/qtwebengine/0001-functions.prf-Don-t-match-QMAKE_EXT_CPP-or-QMAKE_EXT.patch
 +++ b/recipes-qt/qt5/qtwebengine/0001-functions.prf-Don-t-match-QMAKE_EXT_CPP-or-QMAKE_EXT.patch
 @@ -1,4 +1,4 @@
--From dde0edc1681bb49580584028c2d7b5757e177cd1 Mon Sep 17 00:00:00 2001
-+From 8d94528e14cc00934a0beaac53fa990567740596 Mon Sep 17 00:00:00 2001
+-From d28e6ef9c684a7f8f59995995b5cb5a0b1791ee1 Mon Sep 17 00:00:00 2001
++From 793db05d66b7a92ebe069dc76093487489dd8b69 Mon Sep 17 00:00:00 2001
  From: Martin Jansa <Martin.Jansa@gmail.com>
  Date: Mon, 30 Jun 2014 20:08:17 +0200
  Subject: [PATCH] functions.prf: Don't match QMAKE_EXT_CPP or QMAKE_EXT_H
-@@ -10,10 +10,10 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+@@ -10,7 +10,7 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
   1 file changed, 2 insertions(+), 2 deletions(-)
  
  diff --git a/tools/qmake/mkspecs/features/functions.prf b/tools/qmake/mkspecs/features/functions.prf
--index 2df689b..8d984c7 100644
-+index a4abf45..47311c6 100644
+-index 26db26f..277bf98 100644
++index 20fb278..7aa0b4a 100644
  --- a/tools/qmake/mkspecs/features/functions.prf
  +++ b/tools/qmake/mkspecs/features/functions.prf
--@@ -131,9 +131,9 @@ defineReplace(mocOutput) {
-+@@ -125,9 +125,9 @@ defineReplace(mocOutput) {
-    out = $$1
-    # The order is important, since the output of the second replace would end up accidentaly transformed by the first one
-    for(ext, $$list($${QMAKE_EXT_CPP})): \
+ @@ -168,9 +168,9 @@ defineReplace(mocOutput) {
 diff --git a/recipes-qt/qt5/qtwebengine/0002-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch b/recipes-qt/qt5/qtwebengine/0002-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch
-index 00432bc..ab6dbb6 100644
+index d5ed1ab..34f58de 100644
 --- a/recipes-qt/qt5/qtwebengine/0002-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch
 +++ b/recipes-qt/qt5/qtwebengine/0002-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch
 @@ -1,4 +1,4 @@
--From 3ae00f0217e4a0039f0855ea6cd945209b1734ee Mon Sep 17 00:00:00 2001
-+From eaaf8074a826137d3ad061f4c09bb36f449188a3 Mon Sep 17 00:00:00 2001
+-From e40a18da9631fa21202836caf69b3343e8bae973 Mon Sep 17 00:00:00 2001
++From de6311b4d556abbe131462a3cd962ae87da59522 Mon Sep 17 00:00:00 2001
  From: Cleiton Bueno <cleitonrbueno@gmail.com>
  Date: Thu, 24 Dec 2015 12:46:58 -0200
  Subject: [PATCH] chromium: Change false to FALSE and 1 to TRUE, FIX
@@ -1447,35 +1653,31 @@ index 00432bc..ab6dbb6 100644
  
  diff --git a/src/3rdparty/chromium/ui/gfx/codec/jpeg_codec.cc b/src/3rdparty/chromium/ui/gfx/codec/jpeg_codec.cc
 diff --git a/recipes-qt/qt5/qtwebengine/0002-functions.prf-Make-sure-we-only-use-the-file-name-to.patch b/recipes-qt/qt5/qtwebengine/0002-functions.prf-Make-sure-we-only-use-the-file-name-to.patch
-index 18f268c..822aefb 100644
+index 38e97d1..e487c6a 100644
 --- a/recipes-qt/qt5/qtwebengine/0002-functions.prf-Make-sure-we-only-use-the-file-name-to.patch
 +++ b/recipes-qt/qt5/qtwebengine/0002-functions.prf-Make-sure-we-only-use-the-file-name-to.patch
 @@ -1,4 +1,4 @@
--From 6576e3135b839b53c422befac0a233f6dd1966bf Mon Sep 17 00:00:00 2001
-+From 19f7088dd18c4966ec40501cd7e07a0ea16613ae Mon Sep 17 00:00:00 2001
+-From 9f314e95248795bcce787f88bce77ba6058b34c7 Mon Sep 17 00:00:00 2001
++From aa5bb11072bc0e441dc6533f53ed5359c5000088 Mon Sep 17 00:00:00 2001
  From: Simon Busch <morphis@gravedo.de>
  Date: Tue, 18 Nov 2014 10:38:18 +0100
  Subject: [PATCH] functions.prf: Make sure we only use the file name to
-@@ -11,10 +11,10 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+@@ -11,7 +11,7 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
   1 file changed, 2 insertions(+), 1 deletion(-)
  
  diff --git a/tools/qmake/mkspecs/features/functions.prf b/tools/qmake/mkspecs/features/functions.prf
--index 8d984c7..055e960 100644
-+index 47311c6..be2b2a5 100644
+-index 277bf98..d263be4 100644
++index 7aa0b4a..9b3a639 100644
  --- a/tools/qmake/mkspecs/features/functions.prf
  +++ b/tools/qmake/mkspecs/features/functions.prf
--@@ -128,7 +128,8 @@ defineReplace(findIncludedMocFiles) {
-+@@ -122,7 +122,8 @@ defineReplace(findIncludedMocFiles) {
-  }
-  
-  defineReplace(mocOutput) {
+ @@ -165,7 +165,8 @@ defineReplace(findIncludedMocFiles) {
 diff --git a/recipes-qt/qt5/qtwebengine/0003-functions.prf-allow-build-for-linux-oe-g-platform.patch b/recipes-qt/qt5/qtwebengine/0003-functions.prf-allow-build-for-linux-oe-g-platform.patch
-index 78cb3fc..609330d 100644
+index e041063..786a383 100644
 --- a/recipes-qt/qt5/qtwebengine/0003-functions.prf-allow-build-for-linux-oe-g-platform.patch
 +++ b/recipes-qt/qt5/qtwebengine/0003-functions.prf-allow-build-for-linux-oe-g-platform.patch
 @@ -1,4 +1,4 @@
--From f4c64fbabdcc30d46d9181401aa1c9d78fcb0b2f Mon Sep 17 00:00:00 2001
-+From 99e307a75a331e60cb9bcb6d75bc3e0afb8e1b24 Mon Sep 17 00:00:00 2001
+-From 617028757a9afd334a0938e617429cca78363d69 Mon Sep 17 00:00:00 2001
++From 6918d25c54ec4bc17a9b612c0d24b0f01be3aca1 Mon Sep 17 00:00:00 2001
  From: Frieder Schrempf <frieder.schrempf@online.de>
  Date: Mon, 1 Dec 2014 14:34:40 +0000
  Subject: [PATCH] functions.prf: allow build for linux-oe-g++ platform
@@ -1483,18 +1685,18 @@ index 78cb3fc..609330d 100644
   1 file changed, 6 insertions(+)
  
  diff --git a/tools/qmake/mkspecs/features/functions.prf b/tools/qmake/mkspecs/features/functions.prf
--index 055e960..379c9b5 100644
-+index be2b2a5..fb650c2 100644
+-index d263be4..879287a 100644
++index 9b3a639..dc5ed1c 100644
  --- a/tools/qmake/mkspecs/features/functions.prf
  +++ b/tools/qmake/mkspecs/features/functions.prf
  @@ -5,6 +5,12 @@ defineTest(isPlatformSupported) {
 diff --git a/recipes-qt/qt5/qtwebengine/0004-WebEngine-qquickwebengineview_p_p.h-add-include-QCol.patch b/recipes-qt/qt5/qtwebengine/0004-WebEngine-qquickwebengineview_p_p.h-add-include-QCol.patch
-index 901462c..d6069ae 100644
+index 0a708af..d10ddf7 100644
 --- a/recipes-qt/qt5/qtwebengine/0004-WebEngine-qquickwebengineview_p_p.h-add-include-QCol.patch
 +++ b/recipes-qt/qt5/qtwebengine/0004-WebEngine-qquickwebengineview_p_p.h-add-include-QCol.patch
 @@ -1,4 +1,4 @@
--From a2670f5ad67822b399e9dd7b3b87589be1da9749 Mon Sep 17 00:00:00 2001
-+From dd72b83e84d0c9f8034096ff2db3d826ba708eb6 Mon Sep 17 00:00:00 2001
+-From d084661f50dbdc6a4014f9a2181462bba770437f Mon Sep 17 00:00:00 2001
++From 6ed60f35761ab268004727be544e9ccf70594211 Mon Sep 17 00:00:00 2001
  From: Cleiton Bueno <cleitonrbueno@gmail.com>
  Date: Fri, 25 Dec 2015 18:16:05 -0200
  Subject: [PATCH] WebEngine qquickwebengineview_p_p.h add include QColor
@@ -1502,159 +1704,100 @@ index 901462c..d6069ae 100644
   1 file changed, 2 insertions(+)
  
  diff --git a/src/webengine/api/qquickwebengineview_p_p.h b/src/webengine/api/qquickwebengineview_p_p.h
--index 65bf25e..0447d07 100644
-+index 0fd187a..54b4b7f 100644
+-index 892e99c..a4429d5 100644
++index f13bfd0..0e12244 100644
  --- a/src/webengine/api/qquickwebengineview_p_p.h
  +++ b/src/webengine/api/qquickwebengineview_p_p.h
- @@ -56,6 +56,8 @@
+ @@ -60,6 +60,8 @@
 diff --git a/recipes-qt/qt5/qtwebengine/0005-Include-dependency-to-QCoreApplication-translate.patch b/recipes-qt/qt5/qtwebengine/0005-Include-dependency-to-QCoreApplication-translate.patch
-index fa3faf4..d420c33 100644
+index 3a97a4a..27bd141 100644
 --- a/recipes-qt/qt5/qtwebengine/0005-Include-dependency-to-QCoreApplication-translate.patch
 +++ b/recipes-qt/qt5/qtwebengine/0005-Include-dependency-to-QCoreApplication-translate.patch
 @@ -1,4 +1,4 @@
--From b523c4dd76f6205389d8f5771124f0451ec7183f Mon Sep 17 00:00:00 2001
-+From 149dd23e66b3e0ea64f090478ac974a51e0b6a42 Mon Sep 17 00:00:00 2001
+-From 0999fbfe32480e737f23ed8fce8f35897b97c20a Mon Sep 17 00:00:00 2001
++From 4105c12d6f91171934f60b4dbb74b1ca7a9a3eb2 Mon Sep 17 00:00:00 2001
  From: Cleiton Bueno <cleitonrbueno@gmail.com>
  Date: Thu, 24 Dec 2015 15:59:51 -0200
  Subject: [PATCH] Include dependency to QCoreApplication::translate()
 diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index 427cd95..28b9fe6 100644
+index 48c955c..aedd141 100644
 --- a/recipes-qt/qt5/qtwebengine_git.bb
 +++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -4,9 +4,9 @@ LICENSE = "LGPL-3.0 & BSD"
+@@ -5,8 +5,8 @@ LICENSE = "LGPL-3.0 & BSD & GPL-3.0 & The-Qt-Company-GPL-Exception-1.0"
  LIC_FILES_CHKSUM = " \
-     file://src/core/browser_context_qt.cpp;md5=5fe719c44250955a5d5f8fb15fc8b1da;beginline=1;endline=35 \
-     file://src/3rdparty/chromium/LICENSE;md5=537e0b52077bf0a616d0a0c8a79bc9d5 \
--    file://LICENSE.LGPLv3;md5=3dcffeed712d3c916f9a2d9135703aff \
+     file://src/core/browser_context_qt.cpp;md5=b5193b7d68699260f3b40b201365c8d2;beginline=1;endline=38 \
+     file://src/3rdparty/chromium/LICENSE;md5=0fca02217a5d49a14dfe2d11837bb34d \
+-    file://LICENSE.LGPL3;md5=3dcffeed712d3c916f9a2d9135703aff \
 -    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
--    file://LICENSE.GPLv2;md5=05832301944453ec79e40ba3c3cfceec \
-+    file://LICENSE.LGPLv3;md5=8211fde12cc8a4e2477602f5953f5b71 \
++    file://LICENSE.LGPL3;md5=8211fde12cc8a4e2477602f5953f5b71 \
 +    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
-+    file://LICENSE.GPLv2;md5=c96076271561b0e3785dad260634eaa8 \
- "
- 
- DEPENDS += " \
-@@ -119,8 +119,10 @@ SRC_URI += " \
+     file://LICENSE.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
+     file://LICENSE.GPL3-EXCEPT;md5=763d8c535a234d9a3fb682c7ecb6c073 \
+     file://LICENSE.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+@@ -122,8 +122,10 @@ SRC_URI += " \
      file://0002-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch \
  "
  
--SRCREV_qtwebengine = "643aa579fc94933eefa8eb20af6729e2140cf480"
--SRCREV_chromium = "8252b18aa3efa52138e91f9756945afb142a1c8c"
-+SRCREV_qtwebengine = "808ca6e6917cf17e4c30fcd3ac609164b36594cc"
-+# This is in git submodule, but we're using latest in 45-based
-+# SRCREV_chromium = "79930a541473b2e0f950d040c16ab6f22e4aeef3"
-+SRCREV_chromium = "9d6566ee193e8996fb867cf776dc13f697400f24"
+-SRCREV_qtwebengine = "63cf26268996ae5580c77095a252696fa549b593"
+-SRCREV_chromium = "ba40ed24a6d23e606397b650a7982b0998dbeaf4"
++SRCREV_qtwebengine = "dbf7dd27428ff755444eac5e975cb69802ac9771"
++# This is in git submodule, but we're using the latest in 49-based
++# SRCREV_chromium = "c109a95a067af783e48f93d1cdeca870cda98878"
++SRCREV_chromium = "29c16917b33c26ad32893fa05af971c6c6f50297"
  SRCREV = "${SRCREV_qtwebengine}"
  
  SRCREV_FORMAT = "qtwebengine_chromium"
-diff --git a/recipes-qt/qt5/qtwebkit-examples_git.bb b/recipes-qt/qt5/qtwebkit-examples_git.bb
-index 933220d..3f1ab50 100644
---- a/recipes-qt/qt5/qtwebkit-examples_git.bb
-+++ b/recipes-qt/qt5/qtwebkit-examples_git.bb
-@@ -19,4 +19,4 @@ DEPENDS += "qtwebkit qtxmlpatterns"
- RDEPENDS_${PN}-examples += "qtwebkit-qmlplugins"
- RDEPENDS_${PN}-examples += "${@bb.utils.contains('PACKAGECONFIG_OPENSSL', 'openssl', 'ca-certificates', '', d)}"
- 
--SRCREV = "1b9a0fc9d1ded4f4f11b04eb0bb7d1de82d6eb34"
-+SRCREV = "2a143bf81b2ffb3bd7a5f47cf719e6ed347bf383"
-diff --git a/recipes-qt/qt5/qtwebkit/0001-qtwebkit-fix-QA-issue-bad-RPATH.patch b/recipes-qt/qt5/qtwebkit/0001-qtwebkit-fix-QA-issue-bad-RPATH.patch
-index 1f3dd2a..2ed9558 100644
---- a/recipes-qt/qt5/qtwebkit/0001-qtwebkit-fix-QA-issue-bad-RPATH.patch
-+++ b/recipes-qt/qt5/qtwebkit/0001-qtwebkit-fix-QA-issue-bad-RPATH.patch
-@@ -1,4 +1,4 @@
--From 3e321803386278c52508d114f5096883e974a4bb Mon Sep 17 00:00:00 2001
-+From 24f843d4b73de923712c40335068f6f32ff65c7c Mon Sep 17 00:00:00 2001
- From: Trevor Woerner <trevor.woerner@linaro.org>
- Date: Fri, 7 Feb 2014 04:07:17 +0100
- Subject: [PATCH] qtwebkit: fix QA issue (bad RPATH)
-diff --git a/recipes-qt/qt5/qtwebkit/0002-Remove-TEXTREL-tag-in-x86.patch b/recipes-qt/qt5/qtwebkit/0002-Remove-TEXTREL-tag-in-x86.patch
-index 2114b42..ebed729 100644
---- a/recipes-qt/qt5/qtwebkit/0002-Remove-TEXTREL-tag-in-x86.patch
-+++ b/recipes-qt/qt5/qtwebkit/0002-Remove-TEXTREL-tag-in-x86.patch
-@@ -1,4 +1,4 @@
--From f1eb41ada1a9bb5f4073c8a48010555cbefeec34 Mon Sep 17 00:00:00 2001
-+From 63d1bab5741e08b91549a55ff039eeac36e745b8 Mon Sep 17 00:00:00 2001
- From: Magnus Granberg <zorry@gentoo.org>
- Date: Fri, 27 Feb 2015 11:55:09 +0100
- Subject: [PATCH] Remove TEXTREL tag in x86
-diff --git a/recipes-qt/qt5/qtwebkit/0003-Exclude-backtrace-API-for-non-glibc-libraries.patch b/recipes-qt/qt5/qtwebkit/0003-Exclude-backtrace-API-for-non-glibc-libraries.patch
-index 5edc939..32a05c1 100644
---- a/recipes-qt/qt5/qtwebkit/0003-Exclude-backtrace-API-for-non-glibc-libraries.patch
-+++ b/recipes-qt/qt5/qtwebkit/0003-Exclude-backtrace-API-for-non-glibc-libraries.patch
-@@ -1,4 +1,4 @@
--From 5e5545f49d91e1c40d85d2497e16495ee9e53c11 Mon Sep 17 00:00:00 2001
-+From cec1f02bcd1e484fe422e98562a093541c9c9011 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Fri, 5 Jun 2015 19:55:05 -0700
- Subject: [PATCH] Exclude backtrace() API for non-glibc libraries
 diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
-index eb05ce2..c71850a 100644
+index 58b86c8..78ca1f5 100644
 --- a/recipes-qt/qt5/qtwebkit_git.bb
 +++ b/recipes-qt/qt5/qtwebkit_git.bb
-@@ -71,4 +71,4 @@ PACKAGES_remove = "${PN}-examples-dev ${PN}-examples-staticdev ${PN}-examples-db
+@@ -83,4 +83,4 @@ PACKAGES_remove = "${PN}-examples-dev ${PN}-examples-staticdev ${PN}-examples-db
  RUBY_SYS = "${@ '${BUILD_SYS}'.replace('i486', 'i386').replace('i586', 'i386').replace('i686', 'i386') }"
  export RUBYLIB="${STAGING_DATADIR_NATIVE}/rubygems:${STAGING_LIBDIR_NATIVE}/ruby:${STAGING_LIBDIR_NATIVE}/ruby/${RUBY_SYS}"
  
--SRCREV = "71136c9621103522e85654c8e144d5f1c961de1c"
-+SRCREV = "a6c9dd667d534d3342bfba456f9d5c146a924de0"
+-SRCREV = "2e8517924b70a778463e463873eb3d8d0b623eed"
++SRCREV = "76e2732f013732461c09a1d6c6b4c77fcab1c0d0"
 diff --git a/recipes-qt/qt5/qtwebsockets_git.bb b/recipes-qt/qt5/qtwebsockets_git.bb
-index 66d9d74..04f762e 100644
+index 282ae98..8c238db 100644
 --- a/recipes-qt/qt5/qtwebsockets_git.bb
 +++ b/recipes-qt/qt5/qtwebsockets_git.bb
-@@ -3,12 +3,12 @@ require qt5-git.inc
- 
- LICENSE = "GFDL-1.3 & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
- LIC_FILES_CHKSUM = " \
--    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
--    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
--    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
-+    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
-+    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
-+    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
-     file://LGPL_EXCEPTION.txt;md5=bb426f3367c4805d1e12fad05bd0b750 \
- "
+@@ -11,4 +11,4 @@ LIC_FILES_CHKSUM = " \
  
  DEPENDS += "qtbase qtdeclarative"
  
--SRCREV = "ba9306ec5a1271275d79b2f48ceb227f79352f33"
-+SRCREV = "e66dcd51d0e5517e88cd59912fd08501522a2902"
+-SRCREV = "00156d63eea2fb7681a8a00a3144392d6325e5cb"
++SRCREV = "8d17ddfc2f62df56ac067bd0f9736c6e8d37aa97"
 diff --git a/recipes-qt/qt5/qtx11extras_git.bb b/recipes-qt/qt5/qtx11extras_git.bb
-index d8beb50..eaed56c 100644
+index e422817..9a4d6d7 100644
 --- a/recipes-qt/qt5/qtx11extras_git.bb
 +++ b/recipes-qt/qt5/qtx11extras_git.bb
-@@ -3,14 +3,14 @@ require qt5-git.inc
- 
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0) | GPL-2.0"
- LIC_FILES_CHKSUM = " \
--    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
--    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
--    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
-+    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
-+    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
-+    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
-     file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
-     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
--    file://LICENSE.GPLv2;md5=05832301944453ec79e40ba3c3cfceec \
-+    file://LICENSE.GPLv2;md5=c96076271561b0e3785dad260634eaa8 \
- "
+@@ -13,4 +13,4 @@ LIC_FILES_CHKSUM = " \
  
  DEPENDS += "qtbase"
  
--SRCREV = "f27489d66cc6d8263130451c26c7e4ae40acc6b4"
-+SRCREV = "df10edcfae328f397c99192b322268c9e96f6dab"
+-SRCREV = "b414120c60ef8c3cc2aad7dca41092647d741a36"
++SRCREV = "bae8bfc7a811af2bf51b227cbf8467e50a2a149a"
 diff --git a/recipes-qt/qt5/qtxmlpatterns_git.bb b/recipes-qt/qt5/qtxmlpatterns_git.bb
-index d78df14..e6962a6 100644
+index 33cedd6..e4c3d7f 100644
 --- a/recipes-qt/qt5/qtxmlpatterns_git.bb
 +++ b/recipes-qt/qt5/qtxmlpatterns_git.bb
-@@ -4,15 +4,15 @@ require qt5-git.inc
- # There are no LGPLv3-only licensed files in this component.
- LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
+@@ -1,18 +1,21 @@
+ require qt5.inc
+ require qt5-git.inc
+ 
+-# There are no LGPLv3-only licensed files in this component.
+-LICENSE = "GFDL-1.3 & BSD & (LGPL-2.1 & The-Qt-Company-Qt-LGPL-Exception-1.1 | LGPL-3.0)"
++LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
  LIC_FILES_CHKSUM = " \
 -    file://LICENSE.LGPLv21;md5=58a180e1cf84c756c29f782b3a485c29 \
 -    file://LICENSE.LGPLv3;md5=b8c75190712063cde04e1f41b6fdad98 \
 -    file://LICENSE.GPLv3;md5=40f9bf30e783ddc201497165dfb32afb \
++    file://LICENSE.LGPL3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 +    file://LICENSE.LGPLv21;md5=4bfd28363f541b10d9f024181b8df516 \
 +    file://LICENSE.LGPLv3;md5=e0459b45c5c4840b353141a8bbed91f0 \
++    file://LICENSE.GPL2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++    file://LICENSE.GPL3;md5=d32239bcb673463ab874e80d47fae504 \
++    file://LICENSE.GPL3-EXCEPT;md5=763d8c535a234d9a3fb682c7ecb6c073 \
 +    file://LICENSE.GPLv3;md5=88e2b9117e6be406b5ed6ee4ca99a705 \
      file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
      file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
@@ -1662,8 +1805,8 @@ index d78df14..e6962a6 100644
  
  DEPENDS += "qtbase"
  
--SRCREV = "5e6acdb2ea92add793835561e7a2d6b0ed8890f8"
-+SRCREV = "c0b6fbcadbefcc8a91e5db7fd98662dddcd7a0f8"
+-SRCREV = "fb1dc19bf195c530b7f44d18cc927472b9866a46"
++SRCREV = "574d92a43e1fc5480a7f5f79cc6baf566a53349f"
  
  BBCLASSEXTEND =+ "native nativesdk"
 -- 
