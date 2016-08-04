@@ -1,36 +1,53 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 0EAFF7321C
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 811A276802
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Aug 2016 18:39:33 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id x67so3699759qke.1
+	Thu,  4 Aug 2016 18:41:56 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id g202so18748210pfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Aug 2016 11:39:35 -0700 (PDT)
+	Thu, 04 Aug 2016 11:41:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=vm7YMlZMOBeoprImiteMWcDpUiEp5fm5IWeutcsyafU=;
+	b=LZwluQrsUhM35+RsiGyrmoLshSDwhlMqDgEQZ2H/ZSmR91/n2RAOFUKfMpohx4YID4
+	5f9eejI8aaeU5axzs1dMGmfIys2WsD4dw8ctDIiyIB/1gr0syFNK9kUsc1BcEr/Q1iwY
+	1pRmpNmNsWbBtyO4LhQOueyati07F1pu03i0RpxPVwoR4pCI89YcktdU2ajDAcPLD2LK
+	mkIo9VLZTifQ1J7Mcq8xjM7Nyg49fFJU3pHE1luxHt5EqnnIQTidUN3Q9PsQw6A5+jYk
+	JBpWhw677Yn+WVc29xP2b+kzhBTyyJd7BJ7e8SqMYN5hmXw5HcTPFdPsOGVCcxRiFALj
+	F0Hg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=byVlxZqK3f5K4yPag33LbgcTaJTNZujmPh4bT9uY1+0=;
-	b=VihI2jeVscSfpH9hfc59l0VgTD0Z503QZu0gjhFB2fJu9W6FnhdRRDRdxZnRso/0L3
-	i0NLeU3qB/GtkHIAeGLFcl96Cla0QRxGZX21bJvvsNPSi98tHpvieD+qGkjYE91h7oqI
-	L3c2zzucIHJ3DwRHX04j8fwW2VkjquIiCSX1N5sBmbRCZB3ftMS6ZgWLEMg8jzk5j25O
-	PsryS9On6lknQNklIsIGM01BBt/L2q0qf93uzWv3Y9NQHsqbgaLN7O1g4BJVdSF4iwqZ
-	K92fCXUTRl981AEDj7lC/bJuWmc8NeyZeF29YQEUV20YwlgDp6EnRBJpSMu7Gs17KYtl
-	uKlg==
-X-Gm-Message-State: AEkoous81Xax6Q74zGWHcAQQSm3nHFKJBVZQqE1V5qHuJVKygZ9Qu0ZLY+YxhxX+qLwVjw==
-X-Received: by 10.55.53.6 with SMTP id c6mr7882905qka.141.1470335974459;
-	Thu, 04 Aug 2016 11:39:34 -0700 (PDT)
-Received: from lnx-desktop.star.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	x42sm7582266qtc.29.2016.08.04.11.39.33
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 04 Aug 2016 11:39:33 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=vm7YMlZMOBeoprImiteMWcDpUiEp5fm5IWeutcsyafU=;
+	b=ZfqmhsqTZFiqK6jLQJ195NFORIFARdKjBWQB8OUPjQtxtlz/9Tgi1gwEQgk5Kvwya2
+	RNKDe9t9Fbtu5oA4o9DnavTPMpIHVz4Sr5PCXQGJmt9BJQazXacDQ3eFXkXeE2V68XP6
+	Hg3WP4IiokJ/eqpXG3rLtU3l3mXL93GdXCI4cNe7knwRCkiBfG6tpXmAjJADWAvvuKYe
+	AXrOMaYkeHr5SFsaMAjOBGdj9U50l82gd/X1/UDNYKoMq/H4ZOqrcTfceqfeX6RqPWEc
+	VYs7GF77z+7g/f+GRarwkwbMEQN0rmpqnf2MWheLb18oBcnp0Z/oNezzvxJzfMY7Fj/c
+	1jww==
+X-Gm-Message-State: AEkoouvGoZ2KsFv8lh0n7U/oXjS4iytQFyR+5gbiohnJ+QITueKiI8wMiWKrcm81AVPuEQ==
+X-Received: by 10.98.152.129 with SMTP id d1mr129284991pfk.126.1470336116462; 
+	Thu, 04 Aug 2016 11:41:56 -0700 (PDT)
+Received: from [10.43.100.29] ([50.233.148.156])
+	by smtp.googlemail.com with ESMTPSA id
+	9sm22057270pfo.74.2016.08.04.11.41.55
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 04 Aug 2016 11:41:55 -0700 (PDT)
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Aug 2016 14:39:23 -0400
-Message-Id: <1470335963-10625-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCHv2] libgit2: add a recipe for libgit2 version 0.24.1
+References: <cover.1470146419.git.akuster808@gmail.com>
+	<nnur0j$tp2$1@blaine.gmane.org>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <57A38C72.6040601@gmail.com>
+Date: Thu, 4 Aug 2016 11:41:54 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.8.0
+MIME-Version: 1.0
+In-Reply-To: <nnur0j$tp2$1@blaine.gmane.org>
+Subject: Re: [PATCH 00/64] Krogoth-next patches under consideration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,44 +60,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Aug 2016 18:39:35 -0000
+X-List-Received-Date: Thu, 04 Aug 2016 18:41:57 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-oe/recipes-support/libgit2/libgit2_0.24.1.bb | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-oe/recipes-support/libgit2/libgit2_0.24.1.bb
 
-diff --git a/meta-oe/recipes-support/libgit2/libgit2_0.24.1.bb b/meta-oe/recipes-support/libgit2/libgit2_0.24.1.bb
-new file mode 100644
-index 0000000..dbcbb7a
---- /dev/null
-+++ b/meta-oe/recipes-support/libgit2/libgit2_0.24.1.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "the Git linkable library"
-+HOMEPAGE = "http://libgit2.github.com/"
-+LICENSE = "GPL-2.0-with-GCC-exception"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=34197a479f637beb9e09e56893f48bc2"
-+
-+DEPENDS = "curl openssl zlib"
-+
-+SRC_URI = "git://github.com/libgit2/libgit2.git;branch=maint/v0.24"
-+SRCREV = "211e117a0590583a720c53172406f34186c543bd"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake
-+
-+EXTRA_OECMAKE = "\
-+        -DTHREADSAFE=ON \
-+        -DBUILD_CLAR=OFF \
-+        -DSHA1_TYPE="builtin" \
-+        -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-+        -DBUILD_EXAMPLES=OFF \
-+"
-+
-+BBCLASSEXTEND = "native"
--- 
-1.9.1
 
+On 08/04/2016 12:31 AM, Koen Kooi wrote:
+> Op 02-08-16 om 16:07 schreef Armin Kuster:
+>> Most GCC 6 fixed backported. A few packages where updated as they where mostly
+>> bug fixes and I noted addition reasons within the commits.
+>>
+>> I am running builds now. please comment if there is any feedback or missed something.. I hope to have a formal request out by this weekend.
+>>
+>>
+> 
+>>   tvheadend: add CFLAG to ignore misleading indentations
+>>   geis: add CFLAG to ignore misleading indentations
+>>   fwts: add CFLAG to ignore misleading indentations
+> 
+> Won't this break building with gcc 4.x and 5.x?
+
+Have not seen any issues with 5.x but let be double check. I would
+assume that would have broken in master too since it has gcc 5.3. Have
+not checked 4.x.
+
+thanks for reviewing.
+
+- armin
+> 
 
