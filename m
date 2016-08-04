@@ -1,24 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 333F77391A
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B76A87391A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Aug 2016 03:42:26 +0000 (UTC)
+	Thu,  4 Aug 2016 03:42:29 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u743gQA0030437
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u743gTNr004002
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 3 Aug 2016 20:42:26 -0700
+	Wed, 3 Aug 2016 20:42:30 -0700 (PDT)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.248.2;
-	Wed, 3 Aug 2016 20:42:25 -0700
+	Wed, 3 Aug 2016 20:42:29 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 3 Aug 2016 23:42:22 -0400
-Message-ID: <cover.1470281253.git.jackie.huang@windriver.com>
+Date: Wed, 3 Aug 2016 23:42:24 -0400
+Message-ID: <14408fdd8fdcb48e2c367ce04ffaf5abc18ad6f4.1470281253.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.8.1
+In-Reply-To: <cover.1470281253.git.jackie.huang@windriver.com>
+References: <cover.1470281253.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-gnome][PATCH 0/2] gnome-disk-utility: remove blacklist caused by avahi-ui
+Subject: [meta-gnome][PATCH 2/2] Revert "gnome-disk-utility: blacklist because of avahi-ui"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,66 +33,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Aug 2016 03:42:28 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 04 Aug 2016 03:42:29 -0000
+Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-gnome-disk-utility seems old and was only used by gvfs-gdu-volume-monitor which
-has been removed by:
+This reverts commit 5cdb839fa676ccc738c749e9f4c7679080ee9f2d.
 
-commit 52d0cb4348c2518af40d9019413ae046b9eb971b
-Author: Andreas Müller <schnitzeltony@googlemail.com>
-Date:   Sat Jan 9 22:47:20 2016 +0100
+The issue is fixed by the following commits:
+in oe-core: "71b3516 avahi-ui: use PACKAGECONFIG for gtk features"
+in meta-gnome: "0e19635 meta-gnome/layer.conf: enable gtk for avahi-ui"
 
-    gvfs: update to 1.24.2 to make access to windows shares work again
-
-    * Our very old and heavily patched version was broken for windows shares by
-      the update of samba to 4.x
-    * Update to latest gvfs version (1.26.2 currently) is not possible due to
-    | configure: error: Package requirements (glib-2.0 >= 2.45.7 gobject-2.0 gmodule-no-export-2.0 gio-unix-2.0 gio-2.0) were not met:
-    |
-    | Requested 'glib-2.0 >= 2.45.7' but version of GLib is 2.44.1
-    * Licence checksum changed by updating the address of the FSF [1]
-    * obexftp support was removed in [2]
-    * the gdu/circular dependency hack using very old gnome-disk-utility was solved
-      by using udisk2 volume monitor
-    * systemd-login detection was fixed
-    * some more PACKAGECONFIGs disabled by default (all set -except 'cdda'- was
-      build tested)
-
-    [1] https://git.gnome.org/browse/gvfs/commit/?id=1e9c89eafaac6b3a759115df9981526fe9083461
-    [2] https://git.gnome.org/browse/gvfs/commit/?id=606ef241fb8677528bd5d5526854658f0f298a2c
-
-    Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-
-
-This can fix the failure and return gnome-disk-utility back from blacklist,
-but if there is any plan to remove it or upgrade it to 3.x, please ignore.
-
-Thanks,
-Jackie
-
---
-The following changes since commit df5141af8dfd19c2b2dbfb65f58eda7a509fafd8:
-
-  libssh2: upgrade to 1.7.0 (2016-07-29 11:01:02 +0200)
-
-are available in the git repository at:
-
-  git://git.pokylinux.org/poky-contrib.git jhuang0/d_gnome-disk-utility_160803_0
-  http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/d_gnome-disk-utility_160803_0
-
-Jackie Huang (2):
-  meta-gnome/layer.conf: enable gtk for avahi-ui
-  Revert "gnome-disk-utility: blacklist because of avahi-ui"
-
- meta-gnome/conf/layer.conf                                             | 2 ++
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
  .../recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb      | 3 ---
- 2 files changed, 2 insertions(+), 3 deletions(-)
+ 1 file changed, 3 deletions(-)
 
+diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
+index b90fc3e..2f427e7 100644
+--- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
+@@ -35,6 +35,3 @@ FILES_${PN}-libs += "${libdir}/libgdu*.so.*"
+ FILES_${PN}-dev += "${libdir}/nautilus/extensions-2.0/*.la"
+ FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a"
+ FILES_${PN}-dbg += "${libdir}/nautilus/extensions-2.0/.debug"
+-
+-# http://errors.yoctoproject.org/Errors/Details/69555/
+-PNBLACKLIST[gnome-disk-utility] ?= "BROKEN: fails to find avahi-ui even when it's in depends"
 -- 
 2.8.1
 
