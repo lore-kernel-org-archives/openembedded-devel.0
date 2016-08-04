@@ -1,24 +1,22 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from blaine.gmane.org (unknown [195.159.176.226])
-	by mail.openembedded.org (Postfix) with ESMTP id 49C8860722
+Return-Path: <pascal.bach@siemens.com>
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+	by mail.openembedded.org (Postfix) with ESMTP id 73769760AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Aug 2016 07:31:39 +0000 (UTC)
-Received: from list by blaine.gmane.org with local (Exim 4.84_2)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1bVD7x-0002fu-Oq for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Aug 2016 09:31:37 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu,  4 Aug 2016 07:54:31 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id u747sUQo014325
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 4 Aug 2016 09:54:30 +0200
+Received: from dev.sbt.siemens.com (MD1FZU9C.ww002.siemens.net [139.16.77.234])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id u747sUlX030798;
+	Thu, 4 Aug 2016 09:54:30 +0200
+From: Pascal Bach <pascal.bach@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Thu, 4 Aug 2016 09:31:31 +0200
-Message-ID: <nnur0j$tp2$1@blaine.gmane.org>
-References: <cover.1470146419.git.akuster808@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@blaine.gmane.org
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
-	Gecko/20100101 Thunderbird/45.2.0
-In-Reply-To: <cover.1470146419.git.akuster808@gmail.com>
-Subject: Re: [PATCH 00/64] Krogoth-next patches under consideration
+Date: Thu,  4 Aug 2016 09:54:19 +0200
+Message-Id: <1470297259-25322-1-git-send-email-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-networking][PATCH] ntp: make ntp and alternative for ntpd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,22 +29,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Aug 2016 07:31:41 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 04 Aug 2016 07:54:32 -0000
 
-Op 02-08-16 om 16:07 schreef Armin Kuster:
-> Most GCC 6 fixed backported. A few packages where updated as they where mostly
-> bug fixes and I noted addition reasons within the commits.
-> 
-> I am running builds now. please comment if there is any feedback or missed something.. I hope to have a formal request out by this weekend.
-> 
-> 
+This way ntp can be used as an alternative to ntpd from busybox
 
->   tvheadend: add CFLAG to ignore misleading indentations
->   geis: add CFLAG to ignore misleading indentations
->   fwts: add CFLAG to ignore misleading indentations
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+---
+ meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-Won't this break building with gcc 4.x and 5.x?
+diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb
+index ff4ba64..63e7d60 100644
+--- a/meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb
++++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb
+@@ -125,7 +125,7 @@ RCONFLICTS_ntpdate += "ntpdate-systemd"
+ 
+ RSUGGESTS_${PN} = "iana-etc"
+ 
+-FILES_${PN} = "${sbindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${libdir} \
++FILES_${PN} = "${sbindir}/ntpd.ntp ${sysconfdir}/ntp.conf ${sysconfdir}/init.d/ntpd ${libdir} \
+     ${NTP_USER_HOME} \
+     ${systemd_unitdir}/ntp-units.d/60-ntpd.list ${libexecdir}\
+ "
+@@ -158,3 +158,9 @@ pkg_postinst_ntpdate() {
+     fi
+ }
+ 
++inherit update-alternatives
++
++ALTERNATIVE_PRIORITY = "100"
++
++ALTERNATIVE_${PN} = "ntpd"
++ALTERNATIVE_LINK_NAME[ntpd] = "${sbindir}/ntpd"
+-- 
+2.1.4
 
 
