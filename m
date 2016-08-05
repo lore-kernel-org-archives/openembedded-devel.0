@@ -1,51 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id BF613760AA
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
+	[209.85.213.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 92A6D7327F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Aug 2016 10:25:59 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id q128so3154592wma.1
+	Fri,  5 Aug 2016 11:22:08 +0000 (UTC)
+Received: by mail-vk0-f66.google.com with SMTP id x130so12197477vkc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Aug 2016 03:26:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=mFE6vjxWD3BjY/x4wo9ugohfVJkD+IQ8nme53CZVj+Q=;
-	b=V3SJs8e7mKckTeG+XB9GXz3yJo29CpvKRqjYaR3UWO/EO8gIqAHdyKHF6kIL4QK4TB
-	zR1I3jTwlHfj9/GFvpEaOJDSyL3uUqlysp+AiiFdu3MHXzsiR+eT5liNv3qSjpIIaQ9F
-	HJ3uaQNlE77EwX2QKjKriiZJl2ITORqaUh+eYtH+MUehyL5c2QzU28jjW8JDeeHZ0lqM
-	NhSmLIqPFRDKT5Mt3tuTTAGqGXiAnP8SV9FBU1HYCWq7/63wo+yzUZ/wV7yEXE0iT40j
-	+dLJ7y5m0WMTjTJfGNgULn7yNDKDTQOR7P7iFEQU0VszVPeJgTcerYHYmLOSzqGviQ5N
-	q4Cg==
+	Fri, 05 Aug 2016 04:22:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=DmnD9mt3bQc44M29jpmM9SMH9Y+qAl0YbpYE32Vzg5k=;
+	b=Y27udQopDaefyX70N1yRZKqRz5TdLVopuxwiyrKfMQwbO0HBGTNF/d2uieVdb+bUC0
+	PVx45N8jD1q9kdT2IYCgu8rr+YI9XI1rWC8Konc1mP19frDt/P7yNaDivI//yeCDMevN
+	irM+ju4u15pM81Zby7fH/MawPzx8M/46fO1b2eRg30UlhMWRcDCng9A3LulcFvevzVGL
+	Bduq43XIlLeqefir4Os46NdqzivWLC/mN7Q5kMVD/C6gulAZTULNWaa2IV+T4IWwGgp4
+	lrdm1n2DIUy5N3y+4B88eBOqbJg3CIqn7ygQAThYlk1iWALXf/ZLLPRI+R09HtMkTZ8O
+	IjLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=mFE6vjxWD3BjY/x4wo9ugohfVJkD+IQ8nme53CZVj+Q=;
-	b=bj9BgB7fDN8Ds7CsWct0G8NY/bShMSma8zlFMFya1sikx/UAy4EFVmN2XZxmCNlcwv
-	g51JmN/Hf+cZX4gGfl6Nkw22/6B6gmoWsmfN0297aiBSbWwP0cgUQ/Uec3C17xMmXrNT
-	rjJxwjaqHUQo1KyA/Mc89I/jjf6XEKhRjAuqlEkgVbwDe2/YdfKmHRZ8JD44sA3dLFAu
-	VCtlyQLUBPFtORXehnX6c5GzvHI9OnVWtnW5UuCq0vN5uLsSHETDBICiHAXDRT0xZ3M7
-	nXSSWkWqG6jLDjCiFibq52jXa6RcLK6gwDxugLRalAa2nNoBLgqUBSn+cYyRLFu9DTu1
-	VnmQ==
-X-Gm-Message-State: AEkooutXtB8VO7SLbs7TOCOoeoy1WoieCM/ojssi3o87bAAv2mY8WwJ/QOFiHfWFGymPnw==
-X-Received: by 10.194.23.39 with SMTP id j7mr71664752wjf.4.1470392759401;
-	Fri, 05 Aug 2016 03:25:59 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	vv2sm5828583wjc.29.2016.08.05.03.25.58
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 05 Aug 2016 03:25:58 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 5 Aug 2016 12:26:07 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160805102607.3vjn6rnrd4gpnllc@jama>
-References: <1470297259-25322-1-git-send-email-pascal.bach@siemens.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=DmnD9mt3bQc44M29jpmM9SMH9Y+qAl0YbpYE32Vzg5k=;
+	b=XdpBjPdBrX52WgQreq6T/desjpJhv9WsQ547DyfG0rs6kw5jfX5G1WCL0Psdao+hbV
+	0+pZu2FzCSPZpnIRxCnLwngeIIe/yLna8Hp6TnA/UkhqzV1mK3uwon98g0aJcFcaw6jv
+	RoXkGLLzVJBUKYFa8DGoQS5WKcFxV1BWxjBxB+CPW57CrsRclmkdZ7kaRLsRuV7CIqR4
+	Hi5uPdbSgiHpEs5x7aw5DXaMlOIcHEMEFY0qgnI/PX4vOwg7Xeke5CHzPA6Op4egN6ai
+	03/QUBaBpFvGhEhXv4HX+8WqGKtkyaX3VaGKHSaUsmYiqnFsP5Oi9YyY7IjFJwRkTcdq
+	okgg==
+X-Gm-Message-State: AEkoouv/paRo7i+Y7DzqO3aF23RUn7YaxzgDd9aaI80ZzjbGh5WFK8aGx6iWbFGAioIQAIHSQ+z6ALSs0D9VhQ==
+X-Received: by 10.31.56.73 with SMTP id f70mr39647244vka.135.1470396129335;
+	Fri, 05 Aug 2016 04:22:09 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1470297259-25322-1-git-send-email-pascal.bach@siemens.com>
-User-Agent: Mutt/1.6.2 (2016-06-11)
-Subject: Re: [meta-networking][PATCH] ntp: make ntp and alternative for ntpd
+Received: by 10.176.66.66 with HTTP; Fri, 5 Aug 2016 04:22:08 -0700 (PDT)
+In-Reply-To: <20160805102605.C658350173@opal.openembedded.org>
+References: <20160805102559.8258.90195@opal.openembedded.org>
+	<20160805102605.C658350173@opal.openembedded.org>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 5 Aug 2016 13:22:08 +0200
+Message-ID: <CALbNGRTU4aQO2A6Hwz5BSSA4XTk6FOGKgwrCiiOTYoiRtnWEcQ@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	"fan.xin" <fan.xin@jp.fujitsu.com>
+Subject: Re: [oe-commits] [meta-openembedded] 24/39: qpdf: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,86 +55,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Aug 2016 10:26:00 -0000
-X-Groupsio-MsgNum: 62443
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="vyisg2cfay6nquy6"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 05 Aug 2016 11:22:09 -0000
+Content-Type: text/plain; charset=UTF-8
 
---vyisg2cfay6nquy6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Aug 04, 2016 at 09:54:19AM +0200, Pascal Bach wrote:
-> This way ntp can be used as an alternative to ntpd from busybox
-
-It was upgraded to 4.2.8p8 almost 2 months ago, please rebase and
-test your changes on recent master branch before sending them!
-
-OE @ ~/meta-openembedded $ git show -1 --pretty=3Dfuller 13db3c6
-commit 13db3c65f525a6c87cd51961c3c1816e059478b9
-Author:     fan.xin <fan.xin@jp.fujitsu.com>
-AuthorDate: Tue Jun 7 18:18:26 2016 +0900
-Commit:     Joe MacDonald <joe_macdonald@mentor.com>
-CommitDate: Wed Jun 15 19:52:21 2016 -0400
-
-    ntp: Security fixes via Upgrade to 4.2.8p8
-
->=20
-> Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+On Fri, Aug 5, 2016 at 12:26 PM,  <git@git.openembedded.org> wrote:
+> martin_jansa pushed a commit to branch master-next
+> in repository meta-openembedded.
+>
+> commit 183ecb3a05823343525d7acc1a650d4b2a0e4183
+> Author: fan.xin <fan.xin@jp.fujitsu.com>
+> AuthorDate: Mon Aug 1 18:46:35 2016 +0900
+>
+>     qpdf: add new recipe
+>
+>     QPDF is a command-line program that does structural,
+>     content-preserving transformation on PDF files.
+>
+>     Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
+>     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 > ---
->  meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb | 8 +++++++-
->  1 file changed, 7 insertions(+), 1 deletion(-)
->=20
-> diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb b/meta-ne=
-tworking/recipes-support/ntp/ntp_4.2.8p7.bb
-> index ff4ba64..63e7d60 100644
-> --- a/meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb
-> +++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p7.bb
-> @@ -125,7 +125,7 @@ RCONFLICTS_ntpdate +=3D "ntpdate-systemd"
-> =20
->  RSUGGESTS_${PN} =3D "iana-etc"
-> =20
-> -FILES_${PN} =3D "${sbindir}/ntpd ${sysconfdir}/ntp.conf ${sysconfdir}/in=
-it.d/ntpd ${libdir} \
-> +FILES_${PN} =3D "${sbindir}/ntpd.ntp ${sysconfdir}/ntp.conf ${sysconfdir=
-}/init.d/ntpd ${libdir} \
->      ${NTP_USER_HOME} \
->      ${systemd_unitdir}/ntp-units.d/60-ntpd.list ${libexecdir}\
->  "
-> @@ -158,3 +158,9 @@ pkg_postinst_ntpdate() {
->      fi
->  }
-> =20
-> +inherit update-alternatives
+>  meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb | 26 ++++++++++++++++++++++++++
+>  1 file changed, 26 insertions(+)
+>
+> diff --git a/meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb b/meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb
+> new file mode 100644
+> index 0000000..d5645d7
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb
+> @@ -0,0 +1,26 @@
+> +SUMMARY = "QPDF is a command-line program that does structural, content-preserving transformations on PDF files"
+> +DESCRIPTION = "QPDF is capable of creating linearized files and encrypted files. It is also capable of \
+> +converting PDF files with object streams to files with no compressed objects or to generate object streams \
+> +from files that don't have them. QPDF also supports a special mode designed to allow you to edit the content \
+> +of PDF files in a text editor."
+> +HOMEPAGE = "http://qpdf.sourceforge.net/"
 > +
-> +ALTERNATIVE_PRIORITY =3D "100"
+> +PR = "r0"
+^ Nit
 > +
-> +ALTERNATIVE_${PN} =3D "ntpd"
-> +ALTERNATIVE_LINK_NAME[ntpd] =3D "${sbindir}/ntpd"
-> --=20
-> 2.1.4
->=20
-> --=20
+> +RDEPENDS_${PN} = "libpcre zlib"
+> +
+> +LICENSE = "Artistic-2.0"
+> +LIC_FILES_CHKSUM = "file://${WORKDIR}/qpdf-${PV}/Artistic-2.0;md5=7806296b9fae874361e6fb10072b7ee3"
+> +
+> +SRC_URI = "http://nchc.dl.sourceforge.net/project/qpdf/qpdf/${PV}/qpdf-${PV}.tar.gz"
+> +
+> +SRC_URI[md5sum] = "e014bd3ecf1c4d1a520bbc14d84ac20e"
+> +SRC_URI[sha256sum] = "a9fdc7e94d38fcd3831f37b6e0fe36492bf79aa6d54f8f66062cf7f9c4155233"
+> +
+> +inherit autotools-brokensep pkgconfig
+> +
+> +EXTRA_OECONF += "--with-random=/dev/urandom"
+> +
+> +do_configure_prepend() {
+> +      sh autogen.sh
+> +}
+>
+> --
+> To stop receiving notification emails like this one, please contact
+> the administrator of this repository.
+> --
 > _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---vyisg2cfay6nquy6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlekaWYACgkQN1Ujt2V2gBxvewCfer6IwRC32x+uQGhLdERE319O
-aYwAoIBzFLbEwgnScLrxtdd6vhgexTpM
-=bCD1
------END PGP SIGNATURE-----
-
---vyisg2cfay6nquy6--
