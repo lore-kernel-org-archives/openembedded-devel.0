@@ -1,44 +1,45 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A4837713E
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id A1A34770E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Aug 2016 16:52:44 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id i5so45324673wmg.0
+	Fri,  5 Aug 2016 16:54:39 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id f65so38437806wmi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Aug 2016 09:52:45 -0700 (PDT)
+	Fri, 05 Aug 2016 09:54:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=Csxxh8c6lVdVfFZHr3WBblPeK03qaAFi3CjdrcpvMfw=;
-	b=f8xrH4gjiIivfdGl7jwn3SMN6CW9P2APxIA5zMP47AshMxW4RBZItDiBI0c3FymUqm
-	FIxeVJ7l6rWgEzUm3dqzjshA8fZ/X9CTEfcdB1aBQuqZwkmUBTh99pw29b6hH+tjNd7K
-	X4U0+3hTk0wndy1WapopCNJwyzrml7/kCLyJTEHtNBIjlz/513q8JjRYSW2RI419AMN8
-	PFV7KAlDpjcGuQAjGCc7XzxAN1oEBPIGCCIE4BUclMxTOyTR6qRkY6P0viAgdMIday1h
-	XOOrg7+VsZLImIB4QUX7wnEq57169keCF4Xlct2+csHDwppXR2Dm/57YOT/zcZNEcWn1
-	o8kw==
+	:cc; bh=XU347zPbT6GEIAtdL+iYz3rWcebMTPLkHnSxqF94Axo=;
+	b=QZR+thqhU+7q51IEXSBKhDqrHYKAEwFXJxx7nAjYBX4nL/TPAKsp5ZxNouZN0zjC2H
+	uXx5SiEeGRzuV3Bm4ontp/JFxpeVBBfaO1D8kOg5XZleacLW19QmJP6Bvz7WKDgyRxHh
+	ErP+5Zm2WJ14Dx7TfDH9wvmRC5zYoe8ynKh2H3av2nGYoO9ogaV7ehkakYGo4j7pizTl
+	prUeBh5oKd5ZJj/BH5kAcfQzpEY0Jg3yucsx7NcZvBOCalk1pZ3TsjYvxtVfzkQINUBO
+	AAOazIM1zuAy+u5c6Oe571mPEz/CXY/UfROaYiIioFmh2YcVQbCuqLcVgEcrmIRbnurk
+	rE4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=Csxxh8c6lVdVfFZHr3WBblPeK03qaAFi3CjdrcpvMfw=;
-	b=D7FO9jGtlNdweXhcGpchtkKhFPKShMj0tGvZDnRXecYRVLjW2Jdc08lB4Ez7IqSuZ+
-	pnWjt9j5ha2PsETcYwjGzFL+1CTqw9PlwCAEaLpw8afWdY6b5cOCMxv7uFmk48JqzFqn
-	Z2KHYO2CCPBk7ngEiVLR20VPFP3trwZiafA51Rexo0XHzisaNRJnYQMx0IhPI+pSTnc+
-	5qyuNzLfmduKR0aVIxfaTuYehQQ/Q66NatdOzES1ph6xDtx8o+ooMuXe9kK5FcLBd/Db
-	nB4k4nV7LJ2UFO1teqVKaZ4a/Qt/LaaYEQbtjEO3ZnNDqGaUjIXTfsUzmgSyySmR7bt5
-	pa8A==
-X-Gm-Message-State: AEkooutpWeTUEs07BwJsREIidGq0OUP5Pjb6QrrscTsjIxAOkehq5kPz1PKe5SG3VTPqALduEeKIOjYAXhvtIw==
-X-Received: by 10.194.39.3 with SMTP id l3mr83265917wjk.133.1470415965133;
-	Fri, 05 Aug 2016 09:52:45 -0700 (PDT)
+	bh=XU347zPbT6GEIAtdL+iYz3rWcebMTPLkHnSxqF94Axo=;
+	b=m0bdnwbp5zoQezC4gRzWbx+9ex5goersmGeUtPcXvo89N9q7qDEKAcuxLIa+90fpiy
+	3faX7SQtHuFnGdF+OKXEKY/gDkaSlrP1SQpyzwaHBS5LqbikdiUZ/IW/J/yWYyugggPs
+	deafaaSj/ZXREIkRTK/DqUvbdJ/K8Bg+HqqzaKhUf05uLVKkzmX6k8iH5U+ZVQqBT5HL
+	Wz51JcmWcxHTPko1h1uEzfN98UfKARV+Ga8wHFwwH+gOBLsJXwgpPrYKkde7MhjmdFGq
+	EoCWJf/Gply9CWxE46BC/yyi9cbTJNQrNFAAor8rjMA8Jwtq/V1EeV4RVpQge2Jl+8qd
+	sRLQ==
+X-Gm-Message-State: AEkoouujYvfZcbX1z3L6/hXwvZJMScRz6Qav+quBMfDY87yU38Siceh0Kyz5lKnh5ofOLdNhvkKiQoQ3ErpQ4Q==
+X-Received: by 10.28.163.199 with SMTP id m190mr4551146wme.5.1470416079624;
+	Fri, 05 Aug 2016 09:54:39 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.28.139.148 with HTTP; Fri, 5 Aug 2016 09:52:24 -0700 (PDT)
-In-Reply-To: <CAP9ODKpOJY8Nq73idC0g+dN_BK=+Yk5=Tm15hYtuCgbE5sz_nA@mail.gmail.com>
+Received: by 10.28.139.148 with HTTP; Fri, 5 Aug 2016 09:54:19 -0700 (PDT)
+In-Reply-To: <A052AFE4-6611-45D2-B559-73E38E398FCF@gmail.com>
 References: <1470415127-13908-1-git-send-email-ricardo.ribalda@gmail.com>
-	<CAP9ODKpOJY8Nq73idC0g+dN_BK=+Yk5=Tm15hYtuCgbE5sz_nA@mail.gmail.com>
+	<A052AFE4-6611-45D2-B559-73E38E398FCF@gmail.com>
 From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Fri, 5 Aug 2016 18:52:24 +0200
-Message-ID: <CAPybu_1d7pyz+TTrWJP+ajXHUM8h2e=z=d+h+BOZsnVbVu9P0g@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: Otavio Salvador <otavio@ossystems.com.br>
+Date: Fri, 5 Aug 2016 18:54:19 +0200
+Message-ID: <CAPybu_2JrgNVwE2bp8Rg=HpJ+hWZxWgFhJQvvgydsXN526uVNg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>
 Subject: Re: [meta-oe][PATCH] opencv: Fix build with gcc 6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -52,26 +53,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Aug 2016 16:52:45 -0000
+X-List-Received-Date: Fri, 05 Aug 2016 16:54:39 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hi Otavio
+Hi Raj
 
-On Fri, Aug 5, 2016 at 6:44 PM, Otavio Salvador
-<otavio.salvador@ossystems.com.br> wrote:
-> On Fri, Aug 5, 2016 at 1:38 PM, Ricardo Ribalda Delgado
-> <ricardo.ribalda@gmail.com> wrote:
->> It seems like gcc 6.0 does not have the same behaviour as previous 5.x
->> with regards isystem flag.
->>
->> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+On Fri, Aug 5, 2016 at 6:44 PM, Khem Raj <raj.khem@gmail.com> wrote:
 >
-> Did you check if there is a new release? it may fix this error as well.
+>> +
+>> +diff --git a/cmake/OpenCVUtils.cmake b/cmake/OpenCVUtils.cmake
+>> +index 3a23cd73633d..1fea1578b1d9 100644
+>> +--- a/cmake/OpenCVUtils.cmake
+>> ++++ b/cmake/OpenCVUtils.cmake
+>> +@@ -76,7 +76,11 @@ function(ocv_include_directories)
+>> +     if("${__abs_dir}" MATCHES "^${OpenCV_SOURCE_DIR}" OR "${__abs_dir}" MATCHES "^${OpenCV_BINARY_DIR}")
+>> +       list(APPEND __add_before "${dir}")
+>> +     else()
+>> +-      include_directories(AFTER SYSTEM "${dir}")
+>> ++        if (gcc_compiler_version VERSION_LESS "6.0.0")
+>> ++                include_directories(AFTER SYSTEM "${dir}")
+>> ++        else()
+>> ++                include_directories(AFTER "${dir}")
+>> ++        endif()
+>
+> I would rather prefer to see if need for -isystem can be completely removed.
 
-There is no new release, 3.1 is still the latest version.
+I googled a bit, and they use -isystem to avoid that warnings from
+system files scalate into build errors :S.
+I prefer only modify the build with the compilers that crashes and for
+the others keep the upstream behaviour.
 
-The master branch from their github also fails to build and has a
-patch that fixes  the OpenCVPCHSupport.cmake file but not the other.
 
 Regards!
 
