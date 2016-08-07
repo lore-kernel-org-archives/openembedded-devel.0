@@ -1,48 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f66.google.com (mail-pa0-f66.google.com
-	[209.85.220.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D95A77112;
-	Sun,  7 Aug 2016 08:39:19 +0000 (UTC)
-Received: by mail-pa0-f66.google.com with SMTP id hh10so22071016pac.1;
-	Sun, 07 Aug 2016 01:39:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:subject:date:message-id:to:mime-version;
-	bh=xj2ZZSkQTH7jPcoNcbb1L9Xo0PHUIK/DVblgNOtlA7M=;
-	b=I87eRIY1iiCLbQijcj4NwWsszDUhXZphZ5ztEyfCK0tdN3N0rd9iXnX1V5QPrtaVOS
-	bvdjbXmMTDfwAnywNrS+DZSJC3Xffm7LwhhDN47MbF2xA1XLM2hqM/OlAgWhwsX7oWUD
-	8EO2YrJTJZD6aI5maZPSbgNN6+bjNLOa6zxO+i8VCucsx0P7ohmNy4ud0Fb4RjvqVayp
-	te2fvdBAVkMn6Ir60oB1RpX1zrXoTbd4WkwXxJQkjVsTvkZCOgXc6qDL+lt4O3WUTPW2
-	QrV/1qW7ZwWUsyJ12k2MWBlAkoX0Hr3h433sX2UQznqUQsVe+76o2yLm741N5UHp4aM3
-	G3fg==
+Return-Path: <iwamatsu@nigauri.org>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id B4105738AE
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  7 Aug 2016 15:02:46 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id h186so23302780pfg.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 07 Aug 2016 08:02:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=nigauri-org.20150623.gappssmtp.com; s=20150623;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=jiTtqOQ2X6Om4F82VeUrDGyMZXxftusgN2Y+bxNlPZo=;
+	b=04akkMnjTx5zdSHlDSfGi/z2RDiXu0heNA90rhivuHMDfM5p1VCR5tV7yZHAmUrozJ
+	2S4cmdnzJZ/UT5rMwi7XtwsJHBEjWHOBonq/qVcSr1bSaGfMLD1MI6/49yB+2PjpdZxl
+	Bti7nojooZpxZKqOxrbzSlQ0vzULNg31tVgLDxoAUzEcGuD0DkqZ/3Ax+F1JiTHFGdmG
+	Nag8fCMDqspeawFWdIKS0W8jAXPSr333gJ8SkmvrhDIiANbDGfag/UBVd2K1QnLUElf0
+	Dhcvs5ittp/xLw8luKMqwTDHgz5pz3NrUNktgPl2JRqdIgJYQBIIqrb+FrEtP0EtQEq6
+	hl9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:subject:date:message-id:to:mime-version;
-	bh=xj2ZZSkQTH7jPcoNcbb1L9Xo0PHUIK/DVblgNOtlA7M=;
-	b=hVhZEem0iTHTzNWshyZUV1xFrJD5EsbbqBMfpnRNYUU6R7GkSKnKCHn1qE6+dQzKQO
-	ZWvdyNyVQsBN4z+JlUNyEQdOF8fy6yE277/Qxph0tBQ1Z03LAgkkv81D11snb66Dr++1
-	wHrxNzxkG+RVs31gHDqqMUYHgLX9gFg0HQi8Y5lneDdfBLRg7pQAY74t/ViAHVknNpgQ
-	3XY10bkxf+8QTWQDx+agg2dQHhxxZ13gxejJS7frcgOxHRuwH5BF+DPFfYpPRxtxm4lk
-	/U8AvIwI+2hli53kCr7Pw4nHxmpzlvw9WztBn//OuV0BHjZ3VSBjFHaMrGMIDtfea1eN
-	1hIQ==
-X-Gm-Message-State: AEkoouvGQH7UsQiBSwaiK1byEewh0O3aG6h29C2AQ0jHEyTlSatWPbrQp6LQjKgYVHJKOw==
-X-Received: by 10.66.135.40 with SMTP id pp8mr152972552pab.113.1470559160225; 
-	Sun, 07 Aug 2016 01:39:20 -0700 (PDT)
-Received: from ?IPv6:2601:646:8882:b8c:a4e6:3f8b:d48:8537?
-	([2601:646:8882:b8c:a4e6:3f8b:d48:8537])
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=jiTtqOQ2X6Om4F82VeUrDGyMZXxftusgN2Y+bxNlPZo=;
+	b=DTSCjqIML0XBmi1EmXQPt+s/xs8XRdoyAhjDzqYKaIpojzby6dZUpZ6HH+JgvmC6Kb
+	fvWHEyCA+mrDj64gWbMLJTZOynWkfM3ZTc0Lw54M+obAr6iNJl81CkcW2OHC/10LnVNe
+	zF6qZISBHCPMATRwq6RmSDTiKESzyGO+XDXVJhPDV4StbZa+8qwEoi40LNsO168BbefX
+	4qshOIVp3NkVd+Q81lrJMPvEt2PASQxFDAEQW9rC0KjiizpOuEobWFiFzQeRQIlZGsx2
+	OM98kmGOo+1AQqZ/7sKmiV7FRf3J9CS7reCv5iiSbTHeCZvhQZP84yExSCA/2SGAE8vg
+	huOQ==
+X-Gm-Message-State: AEkoousI63Bn5IYjIV6m+z7hFwK9SVE1zuRRI8YqOZr0DiDp7w19+wvH2V/ot8NQYXf2Cg==
+X-Received: by 10.98.26.133 with SMTP id a127mr152021127pfa.46.1470582167782; 
+	Sun, 07 Aug 2016 08:02:47 -0700 (PDT)
+Received: from guhya (w203126.dynamic.ppp.asahi-net.or.jp. [121.1.203.126])
 	by smtp.gmail.com with ESMTPSA id
-	q4sm39536146pfb.18.2016.08.07.01.39.19
-	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 07 Aug 2016 01:39:19 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-X-Pgp-Agent: GPGMail
-Date: Sun, 7 Aug 2016 01:39:43 -0700
-Message-Id: <CC61EFE1-5F39-4848-AD71-8E9C8DEC43C8@gmail.com>
-To: OE-core <openembedded-core@lists.openembedded.org>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Yocto Discussion Mailing List <yocto@yoctoproject.org>
-Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
-X-Mailer: Apple Mail (2.3124)
-Subject: [RFT] binutils 2.27
+	i137sm41322410pfe.64.2016.08.07.08.02.46
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sun, 07 Aug 2016 08:02:47 -0700 (PDT)
+Sender: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Received: from iwamatsu by guhya with local (Exim 4.87)
+	(envelope-from <iwamatsu@localhost>)
+	id 1bWPbA-0008pI-T6; Mon, 08 Aug 2016 00:02:44 +0900
+From: Nobuhiro Iwamatsu <iwamatsu@debian.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  8 Aug 2016 00:02:41 +0900
+Message-Id: <1470582161-33891-1-git-send-email-iwamatsu@debian.org>
+X-Mailer: git-send-email 2.8.1
+Cc: Joe Slater <jslater@windriver.com>
+Subject: [PATCH] libmodbus: update to upstream develop version 3.1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,49 +58,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Aug 2016 08:39:19 -0000
-X-Groupsio-MsgNum: 62458
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_D927C18B-EE77-4A58-B130-CA3F59AB55C7";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Sun, 07 Aug 2016 15:02:48 -0000
 
---Apple-Mail=_D927C18B-EE77-4A58-B130-CA3F59AB55C7
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+From: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 
-Hi All
+Rename recipe then change md5sum and sha256sum.
 
-I have put together upgrade for binutils 2.27 here ( kraj/master branch =
-)
+Signed-off-by: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+---
+ meta-oe/recipes-extended/libmodbus/libmodbus_3.1.2.bb | 7 -------
+ meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb | 7 +++++++
+ 2 files changed, 7 insertions(+), 7 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus_3.1.2.bb
+ create mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb
 
-=
-https://github.com/kraj/openembedded-core/commit/b98f5761d2285ffd773ec6ecb=
-901b799302ebd6b
+diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.2.bb b/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.2.bb
+deleted file mode 100644
+index 6fcfc3a..0000000
+--- a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.2.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-require libmodbus.inc
+-
+-# Use the stable branch by default
+-DEFAULT_PREFERENCE = "-1"
+-
+-SRC_URI[md5sum] = "dd4262f87ed835c4d1e560f8321a222c"
+-SRC_URI[sha256sum] = "661e14f9dc904f3f1b034464ddaa5fd4b8472f8f5d1ea10a1148af85591b7ee9"
+diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb b/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb
+new file mode 100644
+index 0000000..d438a0a
+--- /dev/null
++++ b/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb
+@@ -0,0 +1,7 @@
++require libmodbus.inc
++
++# Use the stable branch by default
++DEFAULT_PREFERENCE = "-1"
++
++SRC_URI[md5sum] = "b1a8fd3a40d2db4de51fb0cbcb201806"
++SRC_URI[sha256sum] = "c8c862b0e9a7ba699a49bc98f62bdffdfafd53a5716c0e162696b4bf108d3637"
+-- 
+2.8.1
 
-I have started bunch of test builds. but I would appreciate any help in =
-testing it out in your
-environments and report any issues you see.
 
-Thanks
-
--Khem
-
-
---Apple-Mail=_D927C18B-EE77-4A58-B130-CA3F59AB55C7
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlem89MACgkQuwUzVZGdMxRBigCdHGzu5yt+9LlYgh0ajTioHRVZ
-FIkAmwZFlOHaEWdr22vC8D7XaTzs1yhi
-=Vdfw
------END PGP SIGNATURE-----
-
---Apple-Mail=_D927C18B-EE77-4A58-B130-CA3F59AB55C7--
