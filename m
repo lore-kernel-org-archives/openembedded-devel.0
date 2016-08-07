@@ -1,46 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
-	[209.85.215.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 43709770A6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  6 Aug 2016 17:16:41 +0000 (UTC)
-Received: by mail-lf0-f67.google.com with SMTP id f93so18223702lfi.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Aug 2016 10:16:42 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f66.google.com (mail-pa0-f66.google.com
+	[209.85.220.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D95A77112;
+	Sun,  7 Aug 2016 08:39:19 +0000 (UTC)
+Received: by mail-pa0-f66.google.com with SMTP id hh10so22071016pac.1;
+	Sun, 07 Aug 2016 01:39:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=+4YL39dU5U9N8FfdkmqIN3v/3brqbs/xd9lSt/KIs0I=;
-	b=zGBc0Z1LdhxntODhusa8cN007eL6zQkMTjZEQmHpHOAequwkuw4AhLb7rxHY7bpU93
-	u+y6eWg6blQVxPFytx8XgB+brmPbvF2TG6QBkRcRGFy6INj+O3LaNjvvYYTqDN3RK1/M
-	y1m1bJ6UYJzuSF46xxLspXzEjCAwzt2QF8hdaaj9qCTV6Q3gE7dYmavLbheqmUHtD6GA
-	Lfd3cO9W8xZQrnRA9NqjTaVhZ3Viry7SWvv5QKYUamVQo8UdeElK+KqQzQ2Ly1sIBWiQ
-	TpHFuhKa65SYZYCP0hghddPnWHMmeUCiW4UvE3dmrkdn+awRI/9w7qMlFl1xWPRVTrnP
-	T2sQ==
+	h=from:subject:date:message-id:to:mime-version;
+	bh=xj2ZZSkQTH7jPcoNcbb1L9Xo0PHUIK/DVblgNOtlA7M=;
+	b=I87eRIY1iiCLbQijcj4NwWsszDUhXZphZ5ztEyfCK0tdN3N0rd9iXnX1V5QPrtaVOS
+	bvdjbXmMTDfwAnywNrS+DZSJC3Xffm7LwhhDN47MbF2xA1XLM2hqM/OlAgWhwsX7oWUD
+	8EO2YrJTJZD6aI5maZPSbgNN6+bjNLOa6zxO+i8VCucsx0P7ohmNy4ud0Fb4RjvqVayp
+	te2fvdBAVkMn6Ir60oB1RpX1zrXoTbd4WkwXxJQkjVsTvkZCOgXc6qDL+lt4O3WUTPW2
+	QrV/1qW7ZwWUsyJ12k2MWBlAkoX0Hr3h433sX2UQznqUQsVe+76o2yLm741N5UHp4aM3
+	G3fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=+4YL39dU5U9N8FfdkmqIN3v/3brqbs/xd9lSt/KIs0I=;
-	b=bycE1NtZNuDEYBeeSYxGut7jLXvnFv96zIVnobazZumLCbIqNrsjCrOCx3p8k6xgjp
-	+dhzRwNAjK6X1NPSck6ULRBF/VkBUYdxBLWo0ifFhSvtQCZqOkXugCnhfqt63rD+ikTa
-	7M/oAFwY96GJBM+bM9qixK54VCfj9jmVBezgy8BZFxeCznYPxPFipwDNirHZ6O3d51w+
-	gfxLFzd9TFaqNnhU5NjS9x+xqsU+0kU4AWhYS7ztLEAfrqBL0fjzecaMwe2SkjmJhP8+
-	y/5lcEkWc07b4IAWBZpISDYdci9ELa+lDz+mt26UbEhNhF253po/RIdvbizGRsZCuNAL
-	vy4Q==
-X-Gm-Message-State: AEkoousjdpV7Cp2UnY1t6NsfFSZuL6lGPkF/cexLB2eU0NOczXhRFXIa44DbTt5BNiursv85VJkB6ACTPPOPZw==
-X-Received: by 10.25.228.205 with SMTP id x74mr480067lfi.10.1470503801949;
-	Sat, 06 Aug 2016 10:16:41 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.25.87.12 with HTTP; Sat, 6 Aug 2016 10:16:41 -0700 (PDT)
-In-Reply-To: <1470498772-18435-1-git-send-email-alexandre.belloni@free-electrons.com>
-References: <1470498772-18435-1-git-send-email-alexandre.belloni@free-electrons.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 6 Aug 2016 19:16:41 +0200
-Message-ID: <CA+chaQfAeAmNb3Dh2YwVgj5nr1p8FBN8_fWBJF3KLp5=QOaDUQ@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Nicolas Ferre <nicolas.ferre@atmel.com>
-Subject: Re: [PATCH] dpkg: Avoid automatic target architecture detection
+	h=x-gm-message-state:from:subject:date:message-id:to:mime-version;
+	bh=xj2ZZSkQTH7jPcoNcbb1L9Xo0PHUIK/DVblgNOtlA7M=;
+	b=hVhZEem0iTHTzNWshyZUV1xFrJD5EsbbqBMfpnRNYUU6R7GkSKnKCHn1qE6+dQzKQO
+	ZWvdyNyVQsBN4z+JlUNyEQdOF8fy6yE277/Qxph0tBQ1Z03LAgkkv81D11snb66Dr++1
+	wHrxNzxkG+RVs31gHDqqMUYHgLX9gFg0HQi8Y5lneDdfBLRg7pQAY74t/ViAHVknNpgQ
+	3XY10bkxf+8QTWQDx+agg2dQHhxxZ13gxejJS7frcgOxHRuwH5BF+DPFfYpPRxtxm4lk
+	/U8AvIwI+2hli53kCr7Pw4nHxmpzlvw9WztBn//OuV0BHjZ3VSBjFHaMrGMIDtfea1eN
+	1hIQ==
+X-Gm-Message-State: AEkoouvGQH7UsQiBSwaiK1byEewh0O3aG6h29C2AQ0jHEyTlSatWPbrQp6LQjKgYVHJKOw==
+X-Received: by 10.66.135.40 with SMTP id pp8mr152972552pab.113.1470559160225; 
+	Sun, 07 Aug 2016 01:39:20 -0700 (PDT)
+Received: from ?IPv6:2601:646:8882:b8c:a4e6:3f8b:d48:8537?
+	([2601:646:8882:b8c:a4e6:3f8b:d48:8537])
+	by smtp.gmail.com with ESMTPSA id
+	q4sm39536146pfb.18.2016.08.07.01.39.19
+	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 07 Aug 2016 01:39:19 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+X-Pgp-Agent: GPGMail
+Date: Sun, 7 Aug 2016 01:39:43 -0700
+Message-Id: <CC61EFE1-5F39-4848-AD71-8E9C8DEC43C8@gmail.com>
+To: OE-core <openembedded-core@lists.openembedded.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Yocto Discussion Mailing List <yocto@yoctoproject.org>
+Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
+X-Mailer: Apple Mail (2.3124)
+Subject: [RFT] binutils 2.27
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,53 +55,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Aug 2016 17:16:43 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 07 Aug 2016 08:39:19 -0000
+X-Groupsio-MsgNum: 62458
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_D927C18B-EE77-4A58-B130-CA3F59AB55C7";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-Wrong ML, send it to openembedded-core ML.
+--Apple-Mail=_D927C18B-EE77-4A58-B130-CA3F59AB55C7
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-On Sat, Aug 6, 2016 at 5:52 PM, Alexandre Belloni <
-alexandre.belloni@free-electrons.com> wrote:
+Hi All
 
-> dpkg is using a script (dpkg-architecture.pl) to detect the target
-> architecture automatically.
-> Unfortunately, it is using the cross compiler prefix to do the detection
-> and for ARM, oe-core is using <vendor>-linux-gnueabi for toolchains with
-> and without call-convention hard. The script then always detects
-> 'armel' and never gets 'armhf' for call-convention hard.
->
-> This solves:
-> dpkg: error processing archive evtest_1.32+0+b8343ec112-r0_armhf.deb
-> (--install):
->  package architecture (armhf) does not match system (armel)
->  Errors were encountered while processing:
->  evtest_1.32+0+b8343ec112-r0_armhf.deb
->
-> Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>
-> ---
->  meta/recipes-devtools/dpkg/dpkg.inc | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta/recipes-devtools/dpkg/dpkg.inc
-> b/meta/recipes-devtools/dpkg/dpkg.inc
-> index 440a500..1f29113 100644
-> --- a/meta/recipes-devtools/dpkg/dpkg.inc
-> +++ b/meta/recipes-devtools/dpkg/dpkg.inc
-> @@ -35,6 +35,7 @@ EXTRA_OECONF = "\
->                 "
->
->  EXTRA_OECONF += "TAR=tar"
-> +EXTRA_OECONF += "DEB_HOST_ARCH=${DPKG_ARCH}"
->
->  do_configure () {
->      echo >> ${S}/m4/compiler.m4
-> --
-> 1.9.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+I have put together upgrade for binutils 2.27 here ( kraj/master branch =
+)
 
+=
+https://github.com/kraj/openembedded-core/commit/b98f5761d2285ffd773ec6ecb=
+901b799302ebd6b
+
+I have started bunch of test builds. but I would appreciate any help in =
+testing it out in your
+environments and report any issues you see.
+
+Thanks
+
+-Khem
+
+
+--Apple-Mail=_D927C18B-EE77-4A58-B130-CA3F59AB55C7
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlem89MACgkQuwUzVZGdMxRBigCdHGzu5yt+9LlYgh0ajTioHRVZ
+FIkAmwZFlOHaEWdr22vC8D7XaTzs1yhi
+=Vdfw
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_D927C18B-EE77-4A58-B130-CA3F59AB55C7--
