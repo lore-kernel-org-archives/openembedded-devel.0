@@ -1,51 +1,30 @@
-Return-Path: <iwamatsu@nigauri.org>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id B4105738AE
+Return-Path: <alexandre.belloni@free-electrons.com>
+Received: from mail.free-electrons.com (down.free-electrons.com
+	[37.187.137.238])
+	by mail.openembedded.org (Postfix) with ESMTP id A1B3B77103
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  7 Aug 2016 15:02:46 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id h186so23302780pfg.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Aug 2016 08:02:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=nigauri-org.20150623.gappssmtp.com; s=20150623;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=jiTtqOQ2X6Om4F82VeUrDGyMZXxftusgN2Y+bxNlPZo=;
-	b=04akkMnjTx5zdSHlDSfGi/z2RDiXu0heNA90rhivuHMDfM5p1VCR5tV7yZHAmUrozJ
-	2S4cmdnzJZ/UT5rMwi7XtwsJHBEjWHOBonq/qVcSr1bSaGfMLD1MI6/49yB+2PjpdZxl
-	Bti7nojooZpxZKqOxrbzSlQ0vzULNg31tVgLDxoAUzEcGuD0DkqZ/3Ax+F1JiTHFGdmG
-	Nag8fCMDqspeawFWdIKS0W8jAXPSr333gJ8SkmvrhDIiANbDGfag/UBVd2K1QnLUElf0
-	Dhcvs5ittp/xLw8luKMqwTDHgz5pz3NrUNktgPl2JRqdIgJYQBIIqrb+FrEtP0EtQEq6
-	hl9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=jiTtqOQ2X6Om4F82VeUrDGyMZXxftusgN2Y+bxNlPZo=;
-	b=DTSCjqIML0XBmi1EmXQPt+s/xs8XRdoyAhjDzqYKaIpojzby6dZUpZ6HH+JgvmC6Kb
-	fvWHEyCA+mrDj64gWbMLJTZOynWkfM3ZTc0Lw54M+obAr6iNJl81CkcW2OHC/10LnVNe
-	zF6qZISBHCPMATRwq6RmSDTiKESzyGO+XDXVJhPDV4StbZa+8qwEoi40LNsO168BbefX
-	4qshOIVp3NkVd+Q81lrJMPvEt2PASQxFDAEQW9rC0KjiizpOuEobWFiFzQeRQIlZGsx2
-	OM98kmGOo+1AQqZ/7sKmiV7FRf3J9CS7reCv5iiSbTHeCZvhQZP84yExSCA/2SGAE8vg
-	huOQ==
-X-Gm-Message-State: AEkoousI63Bn5IYjIV6m+z7hFwK9SVE1zuRRI8YqOZr0DiDp7w19+wvH2V/ot8NQYXf2Cg==
-X-Received: by 10.98.26.133 with SMTP id a127mr152021127pfa.46.1470582167782; 
-	Sun, 07 Aug 2016 08:02:47 -0700 (PDT)
-Received: from guhya (w203126.dynamic.ppp.asahi-net.or.jp. [121.1.203.126])
-	by smtp.gmail.com with ESMTPSA id
-	i137sm41322410pfe.64.2016.08.07.08.02.46
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 07 Aug 2016 08:02:47 -0700 (PDT)
-Sender: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Received: from iwamatsu by guhya with local (Exim 4.87)
-	(envelope-from <iwamatsu@localhost>)
-	id 1bWPbA-0008pI-T6; Mon, 08 Aug 2016 00:02:44 +0900
-From: Nobuhiro Iwamatsu <iwamatsu@debian.org>
+	Sun,  7 Aug 2016 20:10:07 +0000 (UTC)
+Received: by mail.free-electrons.com (Postfix, from userid 110)
+	id EE4882BD; Sun,  7 Aug 2016 22:10:06 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	mail.free-electrons.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED,SHORTCIRCUIT,
+	URIBL_BLOCKED shortcircuit=ham autolearn=disabled version=3.4.0
+Received: from localhost (unknown [88.191.26.124])
+	by mail.free-electrons.com (Postfix) with ESMTPSA id BE3D820C;
+	Sun,  7 Aug 2016 22:10:06 +0200 (CEST)
+Date: Sun, 7 Aug 2016 22:10:06 +0200
+From: Alexandre Belloni <alexandre.belloni@free-electrons.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Aug 2016 00:02:41 +0900
-Message-Id: <1470582161-33891-1-git-send-email-iwamatsu@debian.org>
-X-Mailer: git-send-email 2.8.1
-Cc: Joe Slater <jslater@windriver.com>
-Subject: [PATCH] libmodbus: update to upstream develop version 3.1.4
+Message-ID: <20160807201006.GF8132@piout.net>
+References: <1470498772-18435-1-git-send-email-alexandre.belloni@free-electrons.com>
+	<CA+chaQfAeAmNb3Dh2YwVgj5nr1p8FBN8_fWBJF3KLp5=QOaDUQ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQfAeAmNb3Dh2YwVgj5nr1p8FBN8_fWBJF3KLp5=QOaDUQ@mail.gmail.com>
+User-Agent: Mutt/1.6.0 (2016-04-01)
+Cc: Nicolas Ferre <nicolas.ferre@atmel.com>
+Subject: Re: [PATCH] dpkg: Avoid automatic target architecture detection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,47 +37,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Aug 2016 15:02:48 -0000
+X-List-Received-Date: Sun, 07 Aug 2016 20:10:08 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+On 06/08/2016 at 19:16:41 +0200, Martin Jansa wrote :
+> Wrong ML, send it to openembedded-core ML.
+> 
 
-Rename recipe then change md5sum and sha256sum.
+Indeed, I'll do that.
 
-Signed-off-by: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
----
- meta-oe/recipes-extended/libmodbus/libmodbus_3.1.2.bb | 7 -------
- meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb | 7 +++++++
- 2 files changed, 7 insertions(+), 7 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus_3.1.2.bb
- create mode 100644 meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb
+> On Sat, Aug 6, 2016 at 5:52 PM, Alexandre Belloni <
+> alexandre.belloni@free-electrons.com> wrote:
+> 
+> > dpkg is using a script (dpkg-architecture.pl) to detect the target
+> > architecture automatically.
+> > Unfortunately, it is using the cross compiler prefix to do the detection
+> > and for ARM, oe-core is using <vendor>-linux-gnueabi for toolchains with
+> > and without call-convention hard. The script then always detects
+> > 'armel' and never gets 'armhf' for call-convention hard.
+> >
+> > This solves:
+> > dpkg: error processing archive evtest_1.32+0+b8343ec112-r0_armhf.deb
+> > (--install):
+> >  package architecture (armhf) does not match system (armel)
+> >  Errors were encountered while processing:
+> >  evtest_1.32+0+b8343ec112-r0_armhf.deb
+> >
+> > Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>
+> > ---
+> >  meta/recipes-devtools/dpkg/dpkg.inc | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/meta/recipes-devtools/dpkg/dpkg.inc
+> > b/meta/recipes-devtools/dpkg/dpkg.inc
+> > index 440a500..1f29113 100644
+> > --- a/meta/recipes-devtools/dpkg/dpkg.inc
+> > +++ b/meta/recipes-devtools/dpkg/dpkg.inc
+> > @@ -35,6 +35,7 @@ EXTRA_OECONF = "\
+> >                 "
+> >
+> >  EXTRA_OECONF += "TAR=tar"
+> > +EXTRA_OECONF += "DEB_HOST_ARCH=${DPKG_ARCH}"
+> >
+> >  do_configure () {
+> >      echo >> ${S}/m4/compiler.m4
+> > --
+> > 1.9.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.2.bb b/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.2.bb
-deleted file mode 100644
-index 6fcfc3a..0000000
---- a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.2.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--require libmodbus.inc
--
--# Use the stable branch by default
--DEFAULT_PREFERENCE = "-1"
--
--SRC_URI[md5sum] = "dd4262f87ed835c4d1e560f8321a222c"
--SRC_URI[sha256sum] = "661e14f9dc904f3f1b034464ddaa5fd4b8472f8f5d1ea10a1148af85591b7ee9"
-diff --git a/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb b/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb
-new file mode 100644
-index 0000000..d438a0a
---- /dev/null
-+++ b/meta-oe/recipes-extended/libmodbus/libmodbus_3.1.4.bb
-@@ -0,0 +1,7 @@
-+require libmodbus.inc
-+
-+# Use the stable branch by default
-+DEFAULT_PREFERENCE = "-1"
-+
-+SRC_URI[md5sum] = "b1a8fd3a40d2db4de51fb0cbcb201806"
-+SRC_URI[sha256sum] = "c8c862b0e9a7ba699a49bc98f62bdffdfafd53a5716c0e162696b4bf108d3637"
 -- 
-2.8.1
-
+Alexandre Belloni, Free Electrons
+Embedded Linux and Kernel engineering
+http://free-electrons.com
 
