@@ -1,43 +1,51 @@
-Return-Path: <andre.draszik@gmail.com>
+Return-Path: <martin.jansa@gmail.com>
 Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 85F5D77123;
-	Mon,  8 Aug 2016 09:15:55 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id x83so14164008wma.3;
-	Mon, 08 Aug 2016 02:15:56 -0700 (PDT)
+	by mail.openembedded.org (Postfix) with ESMTP id 3297277199
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  8 Aug 2016 11:23:31 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id i5so14813188wmg.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 08 Aug 2016 04:23:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=+IoAbJV9v2JQqmzxrHtIyeZU6qCqlsseiWYQIJtOKQQ=;
+	b=r59aDHRMsVmlvfnUk8f2vqkYoU/EWJRBaf8pdzBaTlepouZUNiB5ByhB/7Sj1OLPS2
+	jy62UVlr31tcD+TF5BMmv42yrh5EjWNjvA4r1vfiH9gHLU+ncyxBH8vTTz1Bt9kOqhd9
+	5EVM26gTMTHA961SoyfmaKvfK+a+vOhYCSht5G5D2BNCTWlYIPw0NFTnCkFM88pc9h8y
+	R0HHPtvQGVLouMqYoFCK3rLbcFQedrfsKWUJWxauPeZgT7gKkJLlzUot1MvyveZmLtYG
+	QsCstWwl7gD2Y1LJ3huhQVFTplHV/vhjNImcQdgEJt4gOGNJDEqHvWd7//yrMUrZX9pi
+	GgpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=ja9PqtSnsGTJp1Kn7ks02qBujTWWYqMItyUKXUR9SRA=;
-	b=AdtczZk4XUlzaz2VwcGdPLqmj03N/wgAQlhtDkkGhofWSpeKHdczx9q2GkpwiSW88F
-	akSTf3pKkHSH4BKrMUXH9xyYikj5hDFmWUCf65Js3tsFEBmX2OJnZYTc14GIWUwA4R9r
-	Tbe5y0tobsyQ+/LEhQYLkQcC3hBspPk3v+7r9Bki5z+Qi8V68MJpBlogHkQ3CCMZaBwT
-	UI0rBexE04vD9WLsramgtQxMuIxhjYG9onAGdHLce+v19IXNwz9UlKGq73ctjBOkba0S
-	6GGrjQ46MdhKrcXnmhBE+hWBlQFahV6ZMvL22ePi8Y843yzCCz8gJ24jfaI3j6nFROV0
-	5YAw==
-X-Gm-Message-State: AEkoouuzbrVGKzxvZ+hdPLY4/qc2opq2gYpONBFySZ/RQ1WDRIoDhY8MTS6C+XL1UTylWQ==
-X-Received: by 10.28.57.131 with SMTP id g125mr14092936wma.31.1470647756001;
-	Mon, 08 Aug 2016 02:15:56 -0700 (PDT)
-Received: from localhost ([185.46.212.59]) by smtp.gmail.com with ESMTPSA id
-	p83sm22642281wma.18.2016.08.08.02.15.54
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=+IoAbJV9v2JQqmzxrHtIyeZU6qCqlsseiWYQIJtOKQQ=;
+	b=GpTkcwvwR+Kd1E2qRzdNLGkYCnUXFShYLCyd/nHjUfU6btw9Zq9NCV686uOUr0g7Yv
+	gsGBrYyGi2WK4fMgRnHWN/3NJ3A8UXJPNgoZRxSsgtaqx6hCy9fv7RD01kQlwUzokqZy
+	bRF5zrzZOkKLdl5jNfF8K29rUeCuQQezY0nUGWusg3WV8Oa2Z6b28RTvLuGJsk6ugMIw
+	R+pGZrslUk+ztfFdS5CBI2wz6vbVs7fdnyybjd5B/Hwd6LlZ07Vho0i+zFs24lbjIZXs
+	qEBnuyXJEiFBGMHf9Pr//vMvrVbjiq1hAITAXsFA6baALnuK9o2jYch1L/X6Teoye17b
+	/H7g==
+X-Gm-Message-State: AEkoouujiWgh7ytueUZBdQZBGkpEy+20Jwy0uCkUoJsQxiKcjX7exSj2bmPKvs0oybp3Kg==
+X-Received: by 10.28.51.210 with SMTP id z201mr15687789wmz.98.1470655412261;
+	Mon, 08 Aug 2016 04:23:32 -0700 (PDT)
+Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
+	[89.176.104.169])
+	by smtp.gmail.com with ESMTPSA id l1sm5148632wjk.45.2016.08.08.04.23.29
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 08 Aug 2016 02:15:54 -0700 (PDT)
-Message-ID: <1470647765.4581.23.camel@andred.net>
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
-To: Richard Purdie <rpurdie@rpsys.net>, Khem Raj <raj.khem@gmail.com>
-Date: Mon, 08 Aug 2016 10:16:05 +0100
-In-Reply-To: <1470646210.8166.38.camel@rpsys.net>
-References: <CC61EFE1-5F39-4848-AD71-8E9C8DEC43C8@gmail.com>
-	<1470637705.8166.29.camel@linuxfoundation.org>
-	<8C207C42-3D61-4C3F-A1DE-F305AA6617BA@gmail.com>
-	<1470644094.8166.37.camel@linuxfoundation.org>
-	<1470646210.8166.38.camel@rpsys.net>
-X-Mailer: Evolution 3.20.4-1 
-Mime-Version: 1.0
-Cc: Yocto Discussion Mailing List <yocto@yoctoproject.org>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFT] binutils 2.27
+	Mon, 08 Aug 2016 04:23:29 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 8 Aug 2016 13:23:31 +0200
+To: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <20160808112331.prpy25zdlair3onu@jama>
+References: <cover.1470640304.git.hongxu.jia@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <cover.1470640304.git.hongxu.jia@windriver.com>
+User-Agent: Mutt/1.6.2 (2016-06-11)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 0/4]add ttf-fonts packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,80 +58,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Aug 2016 09:15:57 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 08 Aug 2016 11:23:33 -0000
+X-Groupsio-MsgNum: 62472
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="nr7bswrmtrvzlnty"
+Content-Disposition: inline
 
-On Mon, 2016-08-08 at 09:50 +0100, Richard Purdie wrote:
-> On Mon, 2016-08-08 at 09:14 +0100, Richard Purdie wrote:
-> > 
-> > On Mon, 2016-08-08 at 00:24 -0700, Khem Raj wrote:
-> > > 
-> > > > 
-> > > > On Aug 7, 2016, at 11:28 PM, Richard Purdie <
-> > > > richard.purdie@linuxfoundation.org> wrote:
-> > > > 
-> > > > On Sun, 2016-08-07 at 01:39 -0700, Khem Raj wrote:
-> > > > > 
-> > > > > I have put together upgrade for binutils 2.27 here (
-> > > > > kraj/master
-> > > > > branch )
-> > > > > 
-> > > > > https://github.com/kraj/openembedded-core/commit/b98f5761d2285f
-> > > > > fd
-> > > > > 773e
-> > > > > c6ecb901b799302ebd6b
-> > > > > 
-> > > > > I have started bunch of test builds. but I would appreciate any
-> > > > > help
-> > > > > in testing it out in your
-> > > > > environments and report any issues you see.
-> > > > 
-> > > > I ran this through the autobuilder:
-> > > > 
-> > > > bitbake world shows issues in libunwind (from gold?):
-> > > > 
-> > > 
-> > > yes, however, use of gold for libunwind in OE was an escape route
-> > > where we were relying upon gold’s inability to detect this issue
-> > > while BFD linker
-> > > was detecting it earlier. Now in 2.27 gold has caught up as well.
-> > > 
-> > > see
-> > > https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git;h=6eeb0170
-> > > bb
-> > > b43ffb73e8f01b8b481adde8194c21
-> > > 
-> > > so now we have to get to nub of this issue to resolve it.
-> > 
-> > Ok. I think we also have:
-> > 
-> > https://autobuilder.yoctoproject.org/main/builders/nightly-ppc/builds
-> > /8
-> > 96
-> > https://autobuilder.yoctoproject.org/main/builders/nightly-ppc/builds
-> > /8
-> > 96
-> > 
-> > in that "connmand --help" is segfaulting on ppc. I've not 100%
-> > confirmed its the binutils patch but its seeming likely at this
-> > point.
-> 
-> Its also sefgaulting on all mips builds:
-> 
-> https://autobuilder.yoctoproject.org/main/builders/nightly-mips/builds/883
-> https://autobuilder.yoctoproject.org/main/builders/nightly-mips-lsb/builds
-> /863
-> https://autobuilder.yoctoproject.org/main/builders/nightly-mips64/builds/5
-> 28
-> 
-> :(
+--nr7bswrmtrvzlnty
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-binutils 2.27 brings GOLD to mips, but debian has disabled GOLD on all MIPS
-for now due to segfaulting... Maybe the same issue...
+On Mon, Aug 08, 2016 at 03:13:10AM -0400, Hongxu Jia wrote:
+> The following changes since commit da81d9ef8d052c1884abd8dc0d5354f2e9a23c=
+c4:
+>=20
+>   proftpd: return stderr to syslog (2016-08-05 09:34:51 -0400)
+>=20
+> are available in the git repository at:
+>=20
+>   git://git.openembedded.org/openembedded-core-contrib hongxu/fonts
+>   http://cgit.openembedded.org/cgit.cgi/openembedded-core-contrib/log/?h=
+=3Dhongxu/fonts
 
+NAK, missing changes in layer.conf.
 
-A.
+Don't use TABS in meta-oe layers.
 
+> Hongxu Jia (4):
+>   ttf-abyssinica: add version 1.500 to support Amharic language
+>   fontforge-native: support python module
+>   ttf-lohit: add version 2 to support Indian languages
+>   ttf-lklug: add version 0.6-14.20090803cvs.fc24 to support sinhala
+>     language
+>=20
+>  .../fontforge/fontforge_20150824.bb                |  2 +-
+>  .../ttf-fonts/ttf-abyssinica_1.500.bb              | 17 +++++++++++++++
+>  .../ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb | 24 ++++++++++++++++=
+++++++
+>  meta-oe/recipes-graphics/ttf-fonts/ttf-lohit_2.bb  | 23 ++++++++++++++++=
++++++
+>  4 files changed, 65 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-abyssinica_1.5=
+00.bb
+>  create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.2=
+0090803cvs.fc24.bb
+>  create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-lohit_2.bb
+>=20
+> --=20
+> 2.8.1
+>=20
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--nr7bswrmtrvzlnty
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iEYEARECAAYFAleoa7IACgkQN1Ujt2V2gBymogCdELUnuo5cbqNmheyRgC57WqEj
+E3UAn0Oa7Euvz+e+GHXh++aXb+IgIbTv
+=hjGT
+-----END PGP SIGNATURE-----
+
+--nr7bswrmtrvzlnty--
