@@ -1,51 +1,53 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 234E477133
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 34B1E77133
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Aug 2016 11:45:17 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id q128so14916290wma.1
+	Mon,  8 Aug 2016 11:51:10 +0000 (UTC)
+Received: by mail-wm0-f46.google.com with SMTP id q128so19590330wma.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Aug 2016 04:45:18 -0700 (PDT)
+	Mon, 08 Aug 2016 04:51:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=KmnjrOpv7FUGcb88gOEeurWON8jrmC87IvV//hV00k0=;
-	b=btqy684kT+WQC0jpXMG3FSwGZVHcXcdxJ3qzPnaNuILc6g4p5YYBkRDl2ll0pfc4dW
-	AY5eGs9h7INXCLQEvXEmDFPBI3bk3ACQmoiKTy0pKvmHVQtJentcgvDu1HZ/vTa2zdh+
-	lPMgsoI6BSIEgZRBRBgmMdQ0xeYEva0TR9NSvolBxV7BaM1f0c6uwiimdov/fUHGP7Fc
-	Zb68kNXzdQQhi9Ye7HCwWX7oDJKSbPeWMVv/rCjSt9vZQysRb1HGkHHtMOSR+DfvopNp
-	feLpvqhbqYSmsZOst3uff6GyNuUrqAkmEAy74tYpsFzuVYJqJzoi+TJaJvDjYUxgDymb
-	K4pg==
+	bh=j77eZbnwTW+Ngnl3Z767k68HCnMZq37JpuXTYmEeVns=;
+	b=RHQeOaD2rcWMWCbYef5iHvVoJbArpZoo7FlSS95fV6VG0k2uoQoPErmql1aQoV+siN
+	MzIsA14QNks0EOht0yWF0+tLMFmjSXr2XRTj7DIOe86ABPdlHdjRAwpl1AcTkUVjTK7E
+	AWzmeMGS++h3Ygzdk05veMVlzxRwK/oefB0ukL3LgHbRYvBnBHn41Za6nc2+Fml+0Dfq
+	kECLgS+z6odfgMKIJqU8nbrDKdb++HbF2vMCDVCR53y2prKaB3XmvlhpQqJen1utRuDV
+	zCMQxGP+tI4Of6HzfS0Z2vvCbIBRSBeRuxRFwYcRHj2Aojkhd50Oj6L0ZwqKyrgYaM/p
+	VBCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=KmnjrOpv7FUGcb88gOEeurWON8jrmC87IvV//hV00k0=;
-	b=mjr5FqIDQteD04rPfl8Ll9S6TJaDsjDXJAC8ku9rXrsUWVuU0LDCtpbrjFhgnRgEDJ
-	C0JdJq5ESj6zwEdr0T4cPN6/0UK66rvq471ZbZ5cI6kcZqV9eGyCOPJ9GsvmVZVMScza
-	17btoztcsnekSLFVZO+741ELn4scN3h6c0O06LOyzc+ptYPwml/5hoSWWlaT/o+OLYjx
-	3gt1tFDsecsQ7TReBLvWH6nmTVI7qTo1kTcsFoIBwJn1vImTBOyWKRbfk30DAn2VFsLf
-	YE31ecVi6CUY6NdgaJXMa2UnS2AUUmJ/u6QOO+TvvcjuyaZ2tNsXfyKvis+G9YWRN1Nm
-	zNIQ==
-X-Gm-Message-State: AEkoouvQGMKTrKC8bW4w15usIQOYYGveagghcWAfGfDukQC8ykYYTuvXXCARmASHZI9iGg==
-X-Received: by 10.28.209.134 with SMTP id i128mr14913643wmg.97.1470656717616; 
-	Mon, 08 Aug 2016 04:45:17 -0700 (PDT)
+	bh=j77eZbnwTW+Ngnl3Z767k68HCnMZq37JpuXTYmEeVns=;
+	b=AIY8rwX6dEAoJevznJCOXIo6G49YenolAPsxogNOSyROyAwr7uX/gNc3TkdlXyVkQ7
+	MJeuqCna52IQ7RtjJUhyWGnp+cjTbNhWxsYxBYAUn4+w6XMvmayfypwtCYuTQGwAn7ir
+	XfeJtGsHEeq+0O2FRY6GDJQbP+MqscSVG8/rZpOq/liVG7OjdyWYHc/CHhwYsM2UsnpF
+	qvDcvuesBtN43mzbxaed8WKUGN2Wylpkbr011FWvINIYGzbVu2PeSO/STvobUsIh9IBy
+	bE3WgdYzoL2pBCPQWen9FMEPHA8EC99jPC2WS+9tV98tpGSDMMQb/7dX3UBTrl3hRHrc
+	avpw==
+X-Gm-Message-State: AEkoousCgbNAu8x2TmACLPI8ycffNEs0xAZQhbmAgpkkh4Mrbqd+hFi52aHCj6SjyttJTw==
+X-Received: by 10.28.168.83 with SMTP id r80mr14932547wme.44.1470657071051;
+	Mon, 08 Aug 2016 04:51:11 -0700 (PDT)
 Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
 	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	i66sm23354970wmg.9.2016.08.08.04.45.16
-	for <openembedded-devel@lists.openembedded.org>
+	ly9sm32493268wjb.44.2016.08.08.04.51.09
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 08 Aug 2016 04:45:16 -0700 (PDT)
+	Mon, 08 Aug 2016 04:51:10 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 8 Aug 2016 13:45:18 +0200
+Date: Mon, 8 Aug 2016 13:51:12 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160808114518.nyymtyx53w5upadu@jama>
-References: <1461826934-3369-1-git-send-email-daicy.fnst@cn.fujitsu.com>
+Message-ID: <20160808115112.jhhfu6wqmwbv5qzh@jama>
+References: <20160805102559.8258.90195@opal.openembedded.org>
+	<20160805102605.C658350173@opal.openembedded.org>
+	<CALbNGRTU4aQO2A6Hwz5BSSA4XTk6FOGKgwrCiiOTYoiRtnWEcQ@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1461826934-3369-1-git-send-email-daicy.fnst@cn.fujitsu.com>
+In-Reply-To: <CALbNGRTU4aQO2A6Hwz5BSSA4XTk6FOGKgwrCiiOTYoiRtnWEcQ@mail.gmail.com>
 User-Agent: Mutt/1.6.2 (2016-06-11)
-Subject: Re: [meta-oe][PATCH] uim: add support for anthy
+Cc: "fan.xin" <fan.xin@jp.fujitsu.com>
+Subject: Re: [oe-commits] [meta-openembedded] 24/39: qpdf: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,197 +60,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Aug 2016 11:45:19 -0000
-X-Groupsio-MsgNum: 62474
+X-List-Received-Date: Mon, 08 Aug 2016 11:51:12 -0000
+X-Groupsio-MsgNum: 62475
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="xaj3qg43xbt6ujnd"
+	protocol="application/pgp-signature"; boundary="glxtuz3fmnt45rff"
 Content-Disposition: inline
 
---xaj3qg43xbt6ujnd
-Content-Type: text/plain; charset=us-ascii
+--glxtuz3fmnt45rff
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 28, 2016 at 10:02:14AM +0300, Dai Caiyun wrote:
-> make uim support anthy.
->=20
-> Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
-> ---
->  .../uim/uim/0001-configure.ac-Error-Fix.patch      | 29 ++++++++++++++++=
+On Fri, Aug 05, 2016 at 01:22:08PM +0200, Andreas M=FCller wrote:
+> On Fri, Aug 5, 2016 at 12:26 PM,  <git@git.openembedded.org> wrote:
+> > martin_jansa pushed a commit to branch master-next
+> > in repository meta-openembedded.
+> >
+> > commit 183ecb3a05823343525d7acc1a650d4b2a0e4183
+> > Author: fan.xin <fan.xin@jp.fujitsu.com>
+> > AuthorDate: Mon Aug 1 18:46:35 2016 +0900
+> >
+> >     qpdf: add new recipe
+> >
+> >     QPDF is a command-line program that does structural,
+> >     content-preserving transformation on PDF files.
+> >
+> >     Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
+> >     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > ---
+> >  meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb | 26 +++++++++++++++++++++=
 +++++
->  .../uim/uim/0001-fep-uim-fep.c-Error-Fix.patch     | 30 ++++++++++++++++=
-++++++
->  meta-oe/recipes-support/uim/uim_1.8.6.bb           | 11 +++++++-
->  3 files changed, 69 insertions(+), 1 deletion(-)
->  create mode 100644 meta-oe/recipes-support/uim/uim/0001-configure.ac-Err=
-or-Fix.patch
->  create mode 100644 meta-oe/recipes-support/uim/uim/0001-fep-uim-fep.c-Er=
-ror-Fix.patch
->=20
-> diff --git a/meta-oe/recipes-support/uim/uim/0001-configure.ac-Error-Fix.=
-patch b/meta-oe/recipes-support/uim/uim/0001-configure.ac-Error-Fix.patch
-> new file mode 100644
-> index 0000000..1e992d9
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/uim/uim/0001-configure.ac-Error-Fix.patch
-> @@ -0,0 +1,29 @@
-> +From 843155bb61729d5fa0513b0cc967f5ed34124848 Mon Sep 17 00:00:00 2001
-> +From: Li Xin <lixin.fnst@cn.fujitsu.com>
-> +Date: Fri, 26 Feb 2016 15:14:30 +0900
-> +Subject: [PATCH] configure.ac: Error Fix
-> +
-> +ERROR: QA Issue: uim: The compile log indicates that host
-> +include and/or library paths were used.
-> +
-> +Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> +---
-> + configure.ac | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/configure.ac b/configure.ac
-> +index 9249bfd..be03d74 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -1216,7 +1216,7 @@ if test "x$use_libedit" !=3D "xno"; then
-> +             use_libedit=3D"no")])
-> +     if test "x$use_libedit" !=3D "xno"; then
-> +         AC_CHECK_LIB(edit, el_init,
-> +-            [LIBEDIT_LIBS=3D"-ledit $LIBEDIT_LIBS -L$libedit_path/lib"
-> ++            [LIBEDIT_LIBS=3D"-ledit $LIBEDIT_LIBS"
-> +                 AC_SUBST(LIBEDIT_LIBS)],
-> +             [AC_MSG_WARN("libedit not found. Disabled...")
-> +                 use_libedit=3D"no"])
-> +--=20
-> +1.8.4.2
-> +
-> diff --git a/meta-oe/recipes-support/uim/uim/0001-fep-uim-fep.c-Error-Fix=
-=2Epatch b/meta-oe/recipes-support/uim/uim/0001-fep-uim-fep.c-Error-Fix.pat=
-ch
-> new file mode 100644
-> index 0000000..2ca21b0
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/uim/uim/0001-fep-uim-fep.c-Error-Fix.patch
-> @@ -0,0 +1,30 @@
-> +From db57f34cf8e6483866ff7df7e65bc015a86cc71c Mon Sep 17 00:00:00 2001
-> +From: Li Xin <lixin.fnst@cn.fujitsu.com>
-> +Date: Thu, 3 Mar 2016 15:23:59 +0900
-> +Subject: [PATCH] fep/uim-fep.c: Error Fix
-> +
-> +uim-1.8.6/fep/uim-fep.c:93:21: error: stropts.h: No such file or directo=
-ry
-> +
-> +Upstream-Status: pending
-> +
-> +Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-> +---
-> + fep/uim-fep.c | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/fep/uim-fep.c b/fep/uim-fep.c
-> +index 55dbf7c..3fb62bf 100644
-> +--- a/fep/uim-fep.c
-> ++++ b/fep/uim-fep.c
-> +@@ -90,7 +90,7 @@
-> + #include <sys/time.h>
-> + #endif
-> + #ifdef HAVE_STROPTS_H
-> +-#include <stropts.h>
-> ++//#include <stropts.h>
-> + #endif
-> + #ifdef HAVE_SYS_PARAM_H
-> + #include <sys/param.h>
-> +--=20
-> +1.8.4.2
-> +
-> diff --git a/meta-oe/recipes-support/uim/uim_1.8.6.bb b/meta-oe/recipes-s=
-upport/uim/uim_1.8.6.bb
-> index ae193b2..acb9443 100644
-> --- a/meta-oe/recipes-support/uim/uim_1.8.6.bb
-> +++ b/meta-oe/recipes-support/uim/uim_1.8.6.bb
-> @@ -3,11 +3,15 @@ HOMEPAGE =3D "http://uim.freedesktop.org/"
->  LICENSE =3D "BSD-3-Clause & LGPLv2+"
->  SECTION =3D "inputmethods"
-> =20
-> +PARALLEL_MAKEINST =3D ""
-> +
->  SRC_URI =3D "http://uim.googlecode.com/files/uim-${PV}.tar.bz2 \
->            "
-> =20
->  SRC_URI_append_class-target =3D "file://uim-module-manager.patch \
-> -                               file://0001-fix-bug-for-cross-compile.pat=
-ch"
-> +                               file://0001-fix-bug-for-cross-compile.pat=
-ch \
-> +			        file://0001-configure.ac-Error-Fix.patch"
-> +SRC_URI_append_class-native =3D "file://0001-fep-uim-fep.c-Error-Fix.pat=
-ch"
-> =20
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D32463fd29aa303fb2360faeeae172=
-56b"
->  SRC_URI[md5sum] =3D "ecea4c597bab1fd4ba98ea84edcece59"
-> @@ -19,6 +23,8 @@ DEPENDS_class-target +=3D "intltool-native gtk+ gtk+3 u=
-im-native takao-fonts"
->  RDEPENDS_uim =3D "libuim0 libedit"
->  RDEPENDS_uim-anthy =3D "takao-fonts anthy libanthy0"
-> =20
-> +do_configure[depends] +=3D "anthy:do_populate_sysroot"
+> >  1 file changed, 26 insertions(+)
+> >
+> > diff --git a/meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb b/meta-oe/reci=
+pes-extended/qpdf/qpdf_6.0.0.bb
+> > new file mode 100644
+> > index 0000000..d5645d7
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb
+> > @@ -0,0 +1,26 @@
+> > +SUMMARY =3D "QPDF is a command-line program that does structural, cont=
+ent-preserving transformations on PDF files"
+> > +DESCRIPTION =3D "QPDF is capable of creating linearized files and encr=
+ypted files. It is also capable of \
+> > +converting PDF files with object streams to files with no compressed o=
+bjects or to generate object streams \
+> > +from files that don't have them. QPDF also supports a special mode des=
+igned to allow you to edit the content \
+> > +of PDF files in a text editor."
+> > +HOMEPAGE =3D "http://qpdf.sourceforge.net/"
+> > +
+> > +PR =3D "r0"
+> ^ Nit
 
-NAK, how this differs from having anthy in DEPENDS?
+All 4 changes done in master-next.
 
-Using this strange construct also causes native uim to depends on target
-anthy as reported in last status e-mail:
+> > +
+> > +RDEPENDS_${PN} =3D "libpcre zlib"
+> > +
+> > +LICENSE =3D "Artistic-2.0"
+> > +LIC_FILES_CHKSUM =3D "file://${WORKDIR}/qpdf-${PV}/Artistic-2.0;md5=3D=
+7806296b9fae874361e6fb10072b7ee3"
 
-http://lists.openembedded.org/pipermail/openembedded-core/2016-August/12484=
-6.html
+Dropped ${S} - "${WORKDIR}/qpdf-${PV}"
 
-=3D=3D Incorrect PACKAGE_ARCH or sstate signatures (2) =3D=3D=3D
+> > +
+> > +SRC_URI =3D "http://nchc.dl.sourceforge.net/project/qpdf/qpdf/${PV}/qp=
+df-${PV}.tar.gz"
 
-Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/log.signatures=
-=2E20160806_024813.log/
-    * ERROR: 2 issues were found in these recipes: uim-native
+SRC_URI =3D "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}/${PV}/${BP}.tar.gz"
 
-    * ERROR: 1 errors found in signatures.qemuarm.do_configure.sigdata.log
-    * ERROR: 1 errors found in signatures.qemuarm.do_populate_sysroot.sigda=
-ta.log
+> > +
+> > +SRC_URI[md5sum] =3D "e014bd3ecf1c4d1a520bbc14d84ac20e"
+> > +SRC_URI[sha256sum] =3D "a9fdc7e94d38fcd3831f37b6e0fe36492bf79aa6d54f8f=
+66062cf7f9c4155233"
+> > +
+> > +inherit autotools-brokensep pkgconfig
+> > +
+> > +EXTRA_OECONF +=3D "--with-random=3D/dev/urandom"
+> > +
+> > +do_configure_prepend() {
+> > +      sh autogen.sh
 
-    * ERROR: uim-native different signature for task do_configure.sigdata b=
-etween qemux86copy and qemuarm
-    * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-glibc/ss=
-tate-diff/1470487693/signatures.qemuarm.do_configure.sigdata.log
-    * ERROR: uim-native different signature for task do_populate_sysroot.si=
-gdata between qemux86copy and qemuarm
-    * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-glibc/ss=
-tate-diff/1470487693/signatures.qemuarm.do_populate_sysroot.sigdata.log
-    * ERROR: 2 issues were found in these recipes: uim-native
+4 spaces for indentation
 
-> +
->  LEAD_SONAME =3D "libuim.so.1"
-> =20
->  inherit autotools pkgconfig gettext
-> @@ -31,6 +37,8 @@ EXTRA_OECONF +=3D "--disable-emacs \
->                   --without-mana \
->                   --without-eb"
-> =20
-> +EXTRA_OECONF_append_class-target =3D " --with-anthy"
-> +
->  CONFIGUREOPTS_remove_class-target =3D "--disable-silent-rules"
-> =20
->  #Because m4 file's find maxdepth=3D2, so copy the m4 files of the deep d=
-epth.
-> @@ -40,6 +48,7 @@ do_configure_prepend () {
-> =20
->  do_install_append() {
->      rm -rf ${D}/${datadir}/applications
-> +    rm -f ${D}${datadir}/uim/elatin-rules.scm
->  }
-> =20
->  PACKAGES +=3D "uim-xim uim-utils uim-skk uim-gtk2.0 uim-gtk3 uim-fep uim=
--common uim-anthy libuim0 libuim-dev"
-> --=20
-> 2.7.4
->=20
->=20
->=20
+Isn't this the only reason for brokensep? Would it work with sh ${S}/autoge=
+n.sh?
+
+> > +}
+> >
+> > --
+> > To stop receiving notification emails like this one, please contact
+> > the administrator of this repository.
+> > --
+> > _______________________________________________
+> > Openembedded-commits mailing list
+> > Openembedded-commits@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-commits
 > --=20
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -258,16 +166,16 @@ epth.
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---xaj3qg43xbt6ujnd
+--glxtuz3fmnt45rff
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAleocMEACgkQN1Ujt2V2gByMOACeLcAiviLJ+d+8tNpPoHPJ6/LV
-PkYAnA2Y1dB5jBKfhmHzNO3RCcTWfjvM
-=eqQq
+iEYEARECAAYFAleoci8ACgkQN1Ujt2V2gBz7mwCePkicI1Fcr96ZQpXwzy7lOZ2m
+x00An1d5i9I5cedTMqyYwYrpgj+wm0DI
+=8UGG
 -----END PGP SIGNATURE-----
 
---xaj3qg43xbt6ujnd--
+--glxtuz3fmnt45rff--
