@@ -1,26 +1,32 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id AA5AB76312
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Aug 2016 08:04:36 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u7884bKQ015518
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 8 Aug 2016 01:04:37 -0700 (PDT)
-Received: from localhost (128.224.162.178) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
-	Mon, 8 Aug 2016 01:04:36 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 8 Aug 2016 16:04:33 +0800
-Message-ID: <1470643473-17129-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-X-Originating-IP: [128.224.162.178]
-Cc: yue.tao@windriver.com
-Subject: [meta-networking][PATCH] squid: fix configure host contamination
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 31B307706E;
+	Mon,  8 Aug 2016 08:14:59 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	u788EwPb022968; Mon, 8 Aug 2016 09:14:58 +0100
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id HKZK09OmUz2q; Mon,  8 Aug 2016 09:14:58 +0100 (BST)
+Received: from hex ([192.168.3.34]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	u788EshJ022964
+	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
+	Mon, 8 Aug 2016 09:14:55 +0100
+Message-ID: <1470644094.8166.37.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 08 Aug 2016 09:14:54 +0100
+In-Reply-To: <8C207C42-3D61-4C3F-A1DE-F305AA6617BA@gmail.com>
+References: <CC61EFE1-5F39-4848-AD71-8E9C8DEC43C8@gmail.com>
+	<1470637705.8166.29.camel@linuxfoundation.org>
+	<8C207C42-3D61-4C3F-A1DE-F305AA6617BA@gmail.com>
+X-Mailer: Evolution 3.16.5-1ubuntu3.1 
+Mime-Version: 1.0
+Cc: Yocto Discussion Mailing List <yocto@yoctoproject.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [RFT] binutils 2.27
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,91 +39,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Aug 2016 08:04:36 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 08 Aug 2016 08:15:00 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-From: Yue Tao <yue.tao@windriver.com>
+On Mon, 2016-08-08 at 00:24 -0700, Khem Raj wrote:
+> > On Aug 7, 2016, at 11:28 PM, Richard Purdie <
+> > richard.purdie@linuxfoundation.org> wrote:
+> > 
+> > On Sun, 2016-08-07 at 01:39 -0700, Khem Raj wrote:
+> > > I have put together upgrade for binutils 2.27 here ( kraj/master
+> > > branch )
+> > > 
+> > > https://github.com/kraj/openembedded-core/commit/b98f5761d2285ffd
+> > > 773e
+> > > c6ecb901b799302ebd6b
+> > > 
+> > > I have started bunch of test builds. but I would appreciate any
+> > > help
+> > > in testing it out in your
+> > > environments and report any issues you see.
+> > 
+> > I ran this through the autobuilder:
+> > 
+> > bitbake world shows issues in libunwind (from gold?):
+> > 
+> 
+> yes, however, use of gold for libunwind in OE was an escape route
+> where we were relying upon gold’s inability to detect this issue
+> while BFD linker
+> was detecting it earlier. Now in 2.27 gold has caught up as well.
+> 
+> see
+> https://sourceware.org/git/gitweb.cgi?p=binutils-gdb.git;h=6eeb0170bb
+> b43ffb73e8f01b8b481adde8194c21
+> 
+> so now we have to get to nub of this issue to resolve it.
 
-When configuring squid with --enable-esi option,
-the following error was observed:
-[snip]
-checking libxml/parser.h usability... no
-checking libxml/parser.h presence... no
-checking for libxml/parser.h... no
-configure: Failed to find libxml2 header file libxml/parser.h
-[snip]
-ERROR: This autoconf log indicates errors, it looked at host include
-and/or library paths while determining system capabilities.
-[snip]
+Ok. I think we also have:
 
-It tried to search libxml header file in host path. Set the SYSROOT
-to avoid this host contamination.
+https://autobuilder.yoctoproject.org/main/builders/nightly-ppc/builds/8
+96
+https://autobuilder.yoctoproject.org/main/builders/nightly-ppc/builds/8
+96
 
-Signed-off-by: Yue Tao <yue.tao@windriver.com>
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- .../squid/files/set_sysroot_patch.patch            | 26 ++++++++++++++++++++++
- .../recipes-daemons/squid/squid_3.5.20.bb          |  6 +++++
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/squid/files/set_sysroot_patch.patch
+in that "connmand --help" is segfaulting on ppc. I've not 100%
+confirmed its the binutils patch but its seeming likely at this point.
 
-diff --git a/meta-networking/recipes-daemons/squid/files/set_sysroot_patch.patch b/meta-networking/recipes-daemons/squid/files/set_sysroot_patch.patch
-new file mode 100644
-index 0000000..68733f9
---- /dev/null
-+++ b/meta-networking/recipes-daemons/squid/files/set_sysroot_patch.patch
-@@ -0,0 +1,26 @@
-+diff --git a/configure.ac.old b/configure.ac
-+index 54eda73..874f48e 100644
-+--- a/configure.ac.old
-++++ b/configure.ac
-+@@ -964,15 +964,15 @@ if test "x$squid_opt_use_esi" = "xyes" -a "x$with_libxml2" != "xno" ; then
-+   dnl Find the main header and include path...
-+   AC_CACHE_CHECK([location of libxml2 include files], [ac_cv_libxml2_include], [
-+     AC_CHECK_HEADERS([libxml/parser.h], [], [
-+-      AC_MSG_NOTICE([Testing in /usr/include/libxml2])
-++      AC_MSG_NOTICE([Testing in $SYSROOT/usr/include/libxml2])
-+       SAVED_CPPFLAGS="$CPPFLAGS"
-+-      CPPFLAGS="-I/usr/include/libxml2 $CPPFLAGS"
-++      CPPFLAGS="-I$SYSROOT/usr/include/libxml2 $CPPFLAGS"
-+       unset ac_cv_header_libxml_parser_h
-+-      AC_CHECK_HEADERS([libxml/parser.h], [ac_cv_libxml2_include="-I/usr/include/libxml2"], [
-+-        AC_MSG_NOTICE([Testing in /usr/local/include/libxml2])
-+-        CPPFLAGS="-I/usr/local/include/libxml2 $SAVED_CPPFLAGS"
-++      AC_CHECK_HEADERS([libxml/parser.h], [ac_cv_libxml2_include="-I$SYSROOT/usr/include/libxml2"], [
-++        AC_MSG_NOTICE([Testing in $SYSROOT/usr/local/include/libxml2])
-++        CPPFLAGS="-I$SYSROOT/usr/local/include/libxml2 $SAVED_CPPFLAGS"
-+         unset ac_cv_header_libxml_parser_h
-+-        AC_CHECK_HEADERS([libxml/parser.h], [ac_cv_libxml2_include="-I/usr/local/include/libxml2"], [
-++        AC_CHECK_HEADERS([libxml/parser.h], [ac_cv_libxml2_include="-I$SYSROOT/usr/local/include/libxml2"], [
-+           AC_MSG_NOTICE([Failed to find libxml2 header file libxml/parser.h])
-+         ])
-+       ])
-diff --git a/meta-networking/recipes-daemons/squid/squid_3.5.20.bb b/meta-networking/recipes-daemons/squid/squid_3.5.20.bb
-index f26aebe..3ce195a 100644
---- a/meta-networking/recipes-daemons/squid/squid_3.5.20.bb
-+++ b/meta-networking/recipes-daemons/squid/squid_3.5.20.bb
-@@ -19,6 +19,7 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
-            file://squid-use-serial-tests-config-needed-by-ptest.patch \
-            file://run-ptest \
-            file://volatiles.03_squid \
-+           file://set_sysroot_patch.patch \
- "
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
-@@ -48,6 +49,11 @@ EXTRA_OECONF += "--with-default-user=squid --enable-auth-basic='${BASIC_AUTH}'"
- export BUILDCXXFLAGS="${BUILD_CXXFLAGS}"
- 
- TESTDIR = "test-suite"
-+
-+do_configure_prepend() {
-+    export SYSROOT=$PKG_CONFIG_SYSROOT_DIR
-+}
-+
- do_compile_ptest() {
-     oe_runmake -C ${TESTDIR} buildtest-TESTS
- }
--- 
-2.7.4
+Cheers,
 
+Richard
 
