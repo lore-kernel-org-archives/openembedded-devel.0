@@ -1,56 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 43C62731CB;
-	Mon,  8 Aug 2016 15:21:04 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id g202so25254391pfb.1;
-	Mon, 08 Aug 2016 08:21:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:from:in-reply-to:date:cc:message-id:references
-	:to; bh=ljOUMyw3w+Pn8CAqlTkTpeS5VuJMm7JZMe3oQBsPvZM=;
-	b=aUBrqz41/ZMrOiO7nU2tJort5pr9lCS2FvUVQKHWtfaOjsqyokzeh1TrBlZVGzNMWL
-	xtLLiWuRowUB3JafIa6ntGqVAaVHQnIfdSwFm/vafETk8DNU0tJheMpHHg15bmNBBDT0
-	0PRBU6fd8Eg+pgErW0BPQk7VPhkYAwIKN7a9yiy+9SlE2u1VsAAyXNlxwt4t+fMOhBQg
-	CN8JZokoXge1HX+nWdrYTiSxM072y73gBSKDh0Vm3giD0rkOAs/6cQ3SkyFAzEMkKBC1
-	QGYEYAJv9WBnpVjeJv9T+t54UhiiUkBwc3oI8yAJSObjf0maoiFbdgP7xyigsCqDVqPu
-	VAMg==
+Return-Path: <ross.burton@intel.com>
+Received: from mail-it0-f45.google.com (mail-it0-f45.google.com
+	[209.85.214.45])
+	by mail.openembedded.org (Postfix) with ESMTP id C9EB87716E
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  8 Aug 2016 15:21:34 +0000 (UTC)
+Received: by mail-it0-f45.google.com with SMTP id f6so85130633ith.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 08 Aug 2016 08:21:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=GqrGkKdLZ8kniIzxrMacUvFWi0eq5FuYjRQvXP49VXQ=;
+	b=mSFyBP1y84TBvpsQwF7SsFva1b+4fFRZuvdpS2g6FwoZzWE/A5JUUljE2t4rhLPxuI
+	RwcIxkKbapgzHePd07BsTCdyjC4ObV0QcXnyLpO3m8rCYdbFgjMK+L4AIhBh2J86uulw
+	SAfeO5zzFkUkqfvXnih4OQ92n/yegYbv74qbpW43msVvGpra/mvfi5JRk0zYzzwIB+0m
+	nkplk1KLfD5L4SqVHvjHQM7JAwdBh7Aikh3IGeNZ3prqs1ueAkSu4YFw37EK/NVAcu6l
+	V3/lUcIJPCR5BVBxDMsCXupUVdRUrP7wAOsX9wygrZqxByGsyJfsQWUuiLGPi2w8H3fj
+	0SRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:mime-version:from:in-reply-to:date:cc
-	:message-id:references:to;
-	bh=ljOUMyw3w+Pn8CAqlTkTpeS5VuJMm7JZMe3oQBsPvZM=;
-	b=GSnDKbX2dxs0PXHA0bj9Fg+2BVf7q/HIE8bvJq0CFrNEv0rDy+FqMljJwCj7CqMPI3
-	RUhpHSS2sVOolzirZoPvRsvpV0LSWIPfJDK/lj3/9AWDUA9rUfZaGKsQTj/KCiqLUaOS
-	sDXihkD4WgN7mnr2Et1un7OEn0kvqKg+FrW4j9WOURbuaXS5XpKYc3G/aCfDNxENb8zC
-	Y6YueE8A5U/o8YKeKOrIIM7xDV5HVuL1XT5iRpbhd3QzpZ5dZF+fZNOGMA5+MELzMvmE
-	Tlos2pQSrhKl1e/qscPzwmDwI/ZYZ7hF0bxl4CHwGbbBKfxmWiCRHWA8Plg1Xfic77uv
-	dZnw==
-X-Gm-Message-State: AEkooutAdQqJEsRbEqbXxnf8AiU6kI4R206qdbV8ajqIZB73NtBacFoFWJyJJvi8rr+qCQ==
-X-Received: by 10.98.79.27 with SMTP id d27mr163447748pfb.127.1470669665501;
-	Mon, 08 Aug 2016 08:21:05 -0700 (PDT)
-Received: from ?IPv6:2601:646:8882:b8c:ddaa:6f66:32b4:378?
-	([2601:646:8882:b8c:ddaa:6f66:32b4:378])
-	by smtp.gmail.com with ESMTPSA id 6sm39845373pab.11.2016.08.08.08.21.02
-	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 08 Aug 2016 08:21:02 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
-X-Pgp-Agent: GPGMail
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1470647765.4581.23.camel@andred.net>
-Date: Mon, 8 Aug 2016 08:21:32 -0700
-Message-Id: <ACB9AEF7-A7DF-4A88-9762-7569D91AD12D@gmail.com>
-References: <CC61EFE1-5F39-4848-AD71-8E9C8DEC43C8@gmail.com>
-	<1470637705.8166.29.camel@linuxfoundation.org>
-	<8C207C42-3D61-4C3F-A1DE-F305AA6617BA@gmail.com>
-	<1470644094.8166.37.camel@linuxfoundation.org>
-	<1470646210.8166.38.camel@rpsys.net>
-	<1470647765.4581.23.camel@andred.net>
-To: =?utf-8?Q?Andr=C3=A9_Draszik?= <git@andred.net>
-X-Mailer: Apple Mail (2.3124)
-Cc: Yocto Discussion Mailing List <yocto@yoctoproject.org>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFT] binutils 2.27
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=GqrGkKdLZ8kniIzxrMacUvFWi0eq5FuYjRQvXP49VXQ=;
+	b=nFUZlZRUKf2vpcKugSCnETaJl78Ng4t+DeJHfxM42XiKSve4xM7d8Kkr5hcUBpoMzB
+	hGDdYzSgwnXW+7dMsRVr6g/K2CjR0tqTLDF3g/TGoPg4fspn5QG8rfmICdphDwyz+NVS
+	RlLtUeyYZr6oUmpOgI84dX3KKlXBaGtozrDrIcBzefu7QVATQoTr8u2an9ju5+X3SMP9
+	Wi7SCNy3CEhNnqNJgfIrhVdF1djadrmAm9bNTOxn/psl+XD782/Xg5JinHktidYZJDKz
+	kAmKXv9niaYQ0Zpdq5vG6Jnf+E8L+4JM/kymTsVOeRXuHKJPWAftp9NXpOIFKU372/t5
+	K3ZA==
+X-Gm-Message-State: AEkoouv7oQLwyb5sISsoJtYu/PG90c9QWyL4rUu5NziTTcPjZBzAzbpZCVuRIK4DTzamfBqG0h+3Uz+GvMNqQFus
+X-Received: by 10.36.19.75 with SMTP id 72mr18146914itz.83.1470669695020; Mon,
+	08 Aug 2016 08:21:35 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.107.18.17 with HTTP; Mon, 8 Aug 2016 08:21:14 -0700 (PDT)
+In-Reply-To: <20160808120310.22277-1-Martin.Jansa@gmail.com>
+References: <20160808115112.jhhfu6wqmwbv5qzh@jama>
+	<20160808120310.22277-1-Martin.Jansa@gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 8 Aug 2016 16:21:14 +0100
+Message-ID: <CAJTo0LbHi5+jwgKMV1-G4SvzkWKvGaEO5t8zTEfi9VSpeN2teQ@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "fan.xin" <fan.xin@jp.fujitsu.com>
+Subject: Re: [meta-oe][PATCH] qpdf: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,123 +55,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Aug 2016 15:21:06 -0000
-X-Groupsio-MsgNum: 62477
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_1D7B7889-4F56-4E84-B8CA-955F4BE9C89C";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Mon, 08 Aug 2016 15:21:35 -0000
+Content-Type: text/plain; charset=UTF-8
 
---Apple-Mail=_1D7B7889-4F56-4E84-B8CA-955F4BE9C89C
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
+On 8 August 2016 at 13:03, Martin Jansa <martin.jansa@gmail.com> wrote:
 
+> +do_configure_prepend() {
+> +    sh ${S}/autogen.sh
+> +}
+>
 
-> On Aug 8, 2016, at 2:16 AM, Andr=C3=A9 Draszik <git@andred.net> wrote:
->=20
-> On Mon, 2016-08-08 at 09:50 +0100, Richard Purdie wrote:
->> On Mon, 2016-08-08 at 09:14 +0100, Richard Purdie wrote:
->>>=20
->>> On Mon, 2016-08-08 at 00:24 -0700, Khem Raj wrote:
->>>>=20
->>>>>=20
->>>>> On Aug 7, 2016, at 11:28 PM, Richard Purdie <
->>>>> richard.purdie@linuxfoundation.org> wrote:
->>>>>=20
->>>>> On Sun, 2016-08-07 at 01:39 -0700, Khem Raj wrote:
->>>>>>=20
->>>>>> I have put together upgrade for binutils 2.27 here (
->>>>>> kraj/master
->>>>>> branch )
->>>>>>=20
->>>>>> https://github.com/kraj/openembedded-core/commit/b98f5761d2285f
->>>>>> fd
->>>>>> 773e
->>>>>> c6ecb901b799302ebd6b
->>>>>>=20
->>>>>> I have started bunch of test builds. but I would appreciate any
->>>>>> help
->>>>>> in testing it out in your
->>>>>> environments and report any issues you see.
->>>>>=20
->>>>> I ran this through the autobuilder:
->>>>>=20
->>>>> bitbake world shows issues in libunwind (from gold?):
->>>>>=20
->>>>=20
->>>> yes, however, use of gold for libunwind in OE was an escape route
->>>> where we were relying upon gold=E2=80=99s inability to detect this =
-issue
->>>> while BFD linker
->>>> was detecting it earlier. Now in 2.27 gold has caught up as well.
->>>>=20
->>>> see
->>>> https://sourceware.org/git/gitweb.cgi?p=3Dbinutils-gdb.git;h=3D6eeb01=
-70
->>>> bb
->>>> b43ffb73e8f01b8b481adde8194c21
->>>>=20
->>>> so now we have to get to nub of this issue to resolve it.
->>>=20
->>> Ok. I think we also have:
->>>=20
->>> =
-https://autobuilder.yoctoproject.org/main/builders/nightly-ppc/builds
->>> /8
->>> 96
->>> =
-https://autobuilder.yoctoproject.org/main/builders/nightly-ppc/builds
->>> /8
->>> 96
->>>=20
->>> in that "connmand --help" is segfaulting on ppc. I've not 100%
->>> confirmed its the binutils patch but its seeming likely at this
->>> point.
->>=20
->> Its also sefgaulting on all mips builds:
->>=20
->> =
-https://autobuilder.yoctoproject.org/main/builders/nightly-mips/builds/883=
+https://github.com/qpdf/qpdf/blob/master/autogen.sh says that this is just
 
->> =
-https://autobuilder.yoctoproject.org/main/builders/nightly-mips-lsb/builds=
+aclocal -I m4
+autoheader
+autoconf
 
->> /863
->> =
-https://autobuilder.yoctoproject.org/main/builders/nightly-mips64/builds/5=
+So I don't see what this achieves as we're about to run this again anyway
+via autoreconf.
 
->> 28
->>=20
->> :(
->=20
-> binutils 2.27 brings GOLD to mips, but debian has disabled GOLD on all =
-MIPS
-> for now due to segfaulting... Maybe the same issue=E2=80=A6
+Ross
 
-They are different issues. for OE ppc also shows same errors with =
-libunwind.
-
->=20
->=20
-> A.
->=20
->=20
-
-
---Apple-Mail=_1D7B7889-4F56-4E84-B8CA-955F4BE9C89C
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAleoo4EACgkQuwUzVZGdMxTCUwCdH4BNyk+k073SzKYQyvyw2nK7
-E+oAnjRU1QEo/OQLZa4TFWiOrgtgzuC6
-=cd+s
------END PGP SIGNATURE-----
-
---Apple-Mail=_1D7B7889-4F56-4E84-B8CA-955F4BE9C89C--
