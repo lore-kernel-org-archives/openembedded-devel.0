@@ -1,30 +1,23 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A81F77187;
-	Mon,  8 Aug 2016 06:28:32 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	u786STX7018968; Mon, 8 Aug 2016 07:28:29 +0100
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id 9kyqI4jYGk4J; Mon,  8 Aug 2016 07:28:29 +0100 (BST)
-Received: from hex ([192.168.3.34]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
-	u786SPFw018965
-	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
-	Mon, 8 Aug 2016 07:28:26 +0100
-Message-ID: <1470637705.8166.29.camel@linuxfoundation.org>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Khem Raj <raj.khem@gmail.com>, OE-core
-	<openembedded-core@lists.openembedded.org>, OpenEmbedded Devel List
-	<openembedded-devel@lists.openembedded.org>, Yocto Discussion Mailing List
-	<yocto@yoctoproject.org>
-Date: Mon, 08 Aug 2016 07:28:25 +0100
-In-Reply-To: <CC61EFE1-5F39-4848-AD71-8E9C8DEC43C8@gmail.com>
-References: <CC61EFE1-5F39-4848-AD71-8E9C8DEC43C8@gmail.com>
-X-Mailer: Evolution 3.16.5-1ubuntu3.1 
-Mime-Version: 1.0
-Subject: Re: [OE-core] [RFT] binutils 2.27
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D3A7C77183
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  8 Aug 2016 07:13:17 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u787DHZY016352
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 8 Aug 2016 00:13:17 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
+	Mon, 8 Aug 2016 00:13:16 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 8 Aug 2016 03:13:10 -0400
+Message-ID: <cover.1470640304.git.hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH 0/4]add ttf-fonts packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,38 +30,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Aug 2016 06:28:34 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 08 Aug 2016 07:13:18 -0000
+Content-Type: text/plain
 
-On Sun, 2016-08-07 at 01:39 -0700, Khem Raj wrote:
-> I have put together upgrade for binutils 2.27 here ( kraj/master
-> branch )
-> 
-> https://github.com/kraj/openembedded-core/commit/b98f5761d2285ffd773e
-> c6ecb901b799302ebd6b
-> 
-> I have started bunch of test builds. but I would appreciate any help
-> in testing it out in your
-> environments and report any issues you see.
+The following changes since commit da81d9ef8d052c1884abd8dc0d5354f2e9a23cc4:
 
-I ran this through the autobuilder:
+  proftpd: return stderr to syslog (2016-08-05 09:34:51 -0400)
 
-bitbake world shows issues in libunwind (from gold?):
+are available in the git repository at:
 
-https://autobuilder.yoctoproject.org/main/builders/nightly-world/builds
-/889/steps/BuildImages/logs/stdio
+  git://git.openembedded.org/openembedded-core-contrib hongxu/fonts
+  http://cgit.openembedded.org/cgit.cgi/openembedded-core-contrib/log/?h=hongxu/fonts
 
-bitbake world with no x11 also shows it:
+Hongxu Jia (4):
+  ttf-abyssinica: add version 1.500 to support Amharic language
+  fontforge-native: support python module
+  ttf-lohit: add version 2 to support Indian languages
+  ttf-lklug: add version 0.6-14.20090803cvs.fc24 to support sinhala
+    language
 
-https://autobuilder.yoctoproject.org/main/builders/nightly-no-x11/build
-s/231/steps/BuildImages/logs/stdio
+ .../fontforge/fontforge_20150824.bb                |  2 +-
+ .../ttf-fonts/ttf-abyssinica_1.500.bb              | 17 +++++++++++++++
+ .../ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb | 24 ++++++++++++++++++++++
+ meta-oe/recipes-graphics/ttf-fonts/ttf-lohit_2.bb  | 23 +++++++++++++++++++++
+ 4 files changed, 65 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-abyssinica_1.500.bb
+ create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb
+ create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-lohit_2.bb
 
-Other than that, things don't seem too bad though.
-
-Cheers,
-
-Richard
-
+-- 
+2.8.1
 
 
