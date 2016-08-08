@@ -1,49 +1,56 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 24DAA770D8
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Aug 2016 12:03:14 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id x83so14966808wma.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Aug 2016 05:03:15 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 43C62731CB;
+	Mon,  8 Aug 2016 15:21:04 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id g202so25254391pfb.1;
+	Mon, 08 Aug 2016 08:21:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=ij307Wqfl0AFa39IWsEkfRBG3gK701AmcbGbZlIU970=;
-	b=zpm+jcp89KuwiDRA+BQep9bmHSSICuVvNYEOwsdh91CDDRJ56RDMUTX4mX73BV5Ewv
-	GJcwIV0Zu93nbMbUwFsRGhChWQLUaoGX9vcN/Y8TyWsBXoMbwEAGjZHtH3ANyHI5p1B2
-	nU5tmdCNS6Xx4It8uRZKvQG7oMawSv6GiPCAgruCsowcu/umJo/mrnd8bGv82H73lwee
-	/ay7LfhJhNyjppM3jgK/nctzNkS4jn12nmoKcMXaWbdylG6k1K5MZk5vbtqcgBxAXQl/
-	6uikvRxLue73u9VKprO3cr8CkBoSf2P1AfWre7e1kwLzAkt+S6hc1vneFsnMvQ/C/YDM
-	nmCg==
+	h=subject:mime-version:from:in-reply-to:date:cc:message-id:references
+	:to; bh=ljOUMyw3w+Pn8CAqlTkTpeS5VuJMm7JZMe3oQBsPvZM=;
+	b=aUBrqz41/ZMrOiO7nU2tJort5pr9lCS2FvUVQKHWtfaOjsqyokzeh1TrBlZVGzNMWL
+	xtLLiWuRowUB3JafIa6ntGqVAaVHQnIfdSwFm/vafETk8DNU0tJheMpHHg15bmNBBDT0
+	0PRBU6fd8Eg+pgErW0BPQk7VPhkYAwIKN7a9yiy+9SlE2u1VsAAyXNlxwt4t+fMOhBQg
+	CN8JZokoXge1HX+nWdrYTiSxM072y73gBSKDh0Vm3giD0rkOAs/6cQ3SkyFAzEMkKBC1
+	QGYEYAJv9WBnpVjeJv9T+t54UhiiUkBwc3oI8yAJSObjf0maoiFbdgP7xyigsCqDVqPu
+	VAMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=ij307Wqfl0AFa39IWsEkfRBG3gK701AmcbGbZlIU970=;
-	b=Qw3mADVxmRfBXkbMRJX2TKPoknMRveB8+g566H/7TJPoV0z0ezmB0UiR3NhzsxnSOy
-	plk5NpZa1F5UsN9cE0XbZAyiNOZt7FKyloC2Cfh04MATPKrkIM6llBnRDzDmcSRLhoJN
-	1PfRz6OzmQGq+iwKa+QLyKnpiH61MZY0lSx6R3ZcLus+dgplO5ACRgDyKQTM0nwKLNF2
-	4QueLkd+I+pmyem37Rq4JjXMSov+XU07tZPyyLUAPfIkpCoTVzLIwUM2WUDHmdLhUJi7
-	lXMwILrYbz0f8VLvF28XO5N9haweLvUSKWh66Qd19lprtHneWxqld5T/+G5Nwk6/cIwM
-	Gjsw==
-X-Gm-Message-State: AEkooutrxM+O0PEV3BZt09tbpPDKWUNfiulE85+eXVN7IoRADcTPYCCZgAs4SVrBqut6yg==
-X-Received: by 10.194.15.130 with SMTP id x2mr84090627wjc.122.1470657795073;
-	Mon, 08 Aug 2016 05:03:15 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	w129sm23396640wmd.9.2016.08.08.05.03.13
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 08 Aug 2016 05:03:13 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Aug 2016 14:03:10 +0200
-Message-Id: <20160808120310.22277-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.9.2
-In-Reply-To: <20160808115112.jhhfu6wqmwbv5qzh@jama>
-References: <20160808115112.jhhfu6wqmwbv5qzh@jama>
-Cc: "fan.xin" <fan.xin@jp.fujitsu.com>
-Subject: [meta-oe][PATCH] qpdf: add new recipe
+	h=x-gm-message-state:subject:mime-version:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=ljOUMyw3w+Pn8CAqlTkTpeS5VuJMm7JZMe3oQBsPvZM=;
+	b=GSnDKbX2dxs0PXHA0bj9Fg+2BVf7q/HIE8bvJq0CFrNEv0rDy+FqMljJwCj7CqMPI3
+	RUhpHSS2sVOolzirZoPvRsvpV0LSWIPfJDK/lj3/9AWDUA9rUfZaGKsQTj/KCiqLUaOS
+	sDXihkD4WgN7mnr2Et1un7OEn0kvqKg+FrW4j9WOURbuaXS5XpKYc3G/aCfDNxENb8zC
+	Y6YueE8A5U/o8YKeKOrIIM7xDV5HVuL1XT5iRpbhd3QzpZ5dZF+fZNOGMA5+MELzMvmE
+	Tlos2pQSrhKl1e/qscPzwmDwI/ZYZ7hF0bxl4CHwGbbBKfxmWiCRHWA8Plg1Xfic77uv
+	dZnw==
+X-Gm-Message-State: AEkooutAdQqJEsRbEqbXxnf8AiU6kI4R206qdbV8ajqIZB73NtBacFoFWJyJJvi8rr+qCQ==
+X-Received: by 10.98.79.27 with SMTP id d27mr163447748pfb.127.1470669665501;
+	Mon, 08 Aug 2016 08:21:05 -0700 (PDT)
+Received: from ?IPv6:2601:646:8882:b8c:ddaa:6f66:32b4:378?
+	([2601:646:8882:b8c:ddaa:6f66:32b4:378])
+	by smtp.gmail.com with ESMTPSA id 6sm39845373pab.11.2016.08.08.08.21.02
+	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 08 Aug 2016 08:21:02 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
+X-Pgp-Agent: GPGMail
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <1470647765.4581.23.camel@andred.net>
+Date: Mon, 8 Aug 2016 08:21:32 -0700
+Message-Id: <ACB9AEF7-A7DF-4A88-9762-7569D91AD12D@gmail.com>
+References: <CC61EFE1-5F39-4848-AD71-8E9C8DEC43C8@gmail.com>
+	<1470637705.8166.29.camel@linuxfoundation.org>
+	<8C207C42-3D61-4C3F-A1DE-F305AA6617BA@gmail.com>
+	<1470644094.8166.37.camel@linuxfoundation.org>
+	<1470646210.8166.38.camel@rpsys.net>
+	<1470647765.4581.23.camel@andred.net>
+To: =?utf-8?Q?Andr=C3=A9_Draszik?= <git@andred.net>
+X-Mailer: Apple Mail (2.3124)
+Cc: Yocto Discussion Mailing List <yocto@yoctoproject.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [RFT] binutils 2.27
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,50 +63,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Aug 2016 12:03:15 -0000
+X-List-Received-Date: Mon, 08 Aug 2016 15:21:06 -0000
+X-Groupsio-MsgNum: 62477
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_1D7B7889-4F56-4E84-B8CA-955F4BE9C89C";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-From: "fan.xin" <fan.xin@jp.fujitsu.com>
-
-QPDF is a command-line program that does structural,
-content-preserving transformation on PDF files.
-
-Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb
-
-diff --git a/meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb b/meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb
-new file mode 100644
-index 0000000..cec1d5c
---- /dev/null
-+++ b/meta-oe/recipes-extended/qpdf/qpdf_6.0.0.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "CLI for structural, content-preserving transformations on PDF files"
-+DESCRIPTION = "QPDF is capable of creating linearized files and encrypted files. It is also capable of \
-+converting PDF files with object streams to files with no compressed objects or to generate object streams \
-+from files that don't have them. QPDF also supports a special mode designed to allow you to edit the content \
-+of PDF files in a text editor."
-+HOMEPAGE = "http://qpdf.sourceforge.net/"
-+
-+DEPENDS = "libpcre zlib"
-+
-+LICENSE = "Artistic-2.0"
-+LIC_FILES_CHKSUM = "file://Artistic-2.0;md5=7806296b9fae874361e6fb10072b7ee3"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}/${PV}/${BP}.tar.gz"
-+SRC_URI[md5sum] = "e014bd3ecf1c4d1a520bbc14d84ac20e"
-+SRC_URI[sha256sum] = "a9fdc7e94d38fcd3831f37b6e0fe36492bf79aa6d54f8f66062cf7f9c4155233"
-+
-+inherit autotools pkgconfig
-+
-+EXTRA_OECONF += "--with-random=/dev/urandom"
-+
-+do_configure_prepend() {
-+    sh ${S}/autogen.sh
-+}
--- 
-2.9.2
+--Apple-Mail=_1D7B7889-4F56-4E84-B8CA-955F4BE9C89C
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
 
 
+> On Aug 8, 2016, at 2:16 AM, Andr=C3=A9 Draszik <git@andred.net> wrote:
+>=20
+> On Mon, 2016-08-08 at 09:50 +0100, Richard Purdie wrote:
+>> On Mon, 2016-08-08 at 09:14 +0100, Richard Purdie wrote:
+>>>=20
+>>> On Mon, 2016-08-08 at 00:24 -0700, Khem Raj wrote:
+>>>>=20
+>>>>>=20
+>>>>> On Aug 7, 2016, at 11:28 PM, Richard Purdie <
+>>>>> richard.purdie@linuxfoundation.org> wrote:
+>>>>>=20
+>>>>> On Sun, 2016-08-07 at 01:39 -0700, Khem Raj wrote:
+>>>>>>=20
+>>>>>> I have put together upgrade for binutils 2.27 here (
+>>>>>> kraj/master
+>>>>>> branch )
+>>>>>>=20
+>>>>>> https://github.com/kraj/openembedded-core/commit/b98f5761d2285f
+>>>>>> fd
+>>>>>> 773e
+>>>>>> c6ecb901b799302ebd6b
+>>>>>>=20
+>>>>>> I have started bunch of test builds. but I would appreciate any
+>>>>>> help
+>>>>>> in testing it out in your
+>>>>>> environments and report any issues you see.
+>>>>>=20
+>>>>> I ran this through the autobuilder:
+>>>>>=20
+>>>>> bitbake world shows issues in libunwind (from gold?):
+>>>>>=20
+>>>>=20
+>>>> yes, however, use of gold for libunwind in OE was an escape route
+>>>> where we were relying upon gold=E2=80=99s inability to detect this =
+issue
+>>>> while BFD linker
+>>>> was detecting it earlier. Now in 2.27 gold has caught up as well.
+>>>>=20
+>>>> see
+>>>> https://sourceware.org/git/gitweb.cgi?p=3Dbinutils-gdb.git;h=3D6eeb01=
+70
+>>>> bb
+>>>> b43ffb73e8f01b8b481adde8194c21
+>>>>=20
+>>>> so now we have to get to nub of this issue to resolve it.
+>>>=20
+>>> Ok. I think we also have:
+>>>=20
+>>> =
+https://autobuilder.yoctoproject.org/main/builders/nightly-ppc/builds
+>>> /8
+>>> 96
+>>> =
+https://autobuilder.yoctoproject.org/main/builders/nightly-ppc/builds
+>>> /8
+>>> 96
+>>>=20
+>>> in that "connmand --help" is segfaulting on ppc. I've not 100%
+>>> confirmed its the binutils patch but its seeming likely at this
+>>> point.
+>>=20
+>> Its also sefgaulting on all mips builds:
+>>=20
+>> =
+https://autobuilder.yoctoproject.org/main/builders/nightly-mips/builds/883=
+
+>> =
+https://autobuilder.yoctoproject.org/main/builders/nightly-mips-lsb/builds=
+
+>> /863
+>> =
+https://autobuilder.yoctoproject.org/main/builders/nightly-mips64/builds/5=
+
+>> 28
+>>=20
+>> :(
+>=20
+> binutils 2.27 brings GOLD to mips, but debian has disabled GOLD on all =
+MIPS
+> for now due to segfaulting... Maybe the same issue=E2=80=A6
+
+They are different issues. for OE ppc also shows same errors with =
+libunwind.
+
+>=20
+>=20
+> A.
+>=20
+>=20
+
+
+--Apple-Mail=_1D7B7889-4F56-4E84-B8CA-955F4BE9C89C
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAleoo4EACgkQuwUzVZGdMxTCUwCdH4BNyk+k073SzKYQyvyw2nK7
+E+oAnjRU1QEo/OQLZa4TFWiOrgtgzuC6
+=cd+s
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_1D7B7889-4F56-4E84-B8CA-955F4BE9C89C--
