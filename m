@@ -1,36 +1,50 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F3B0771DB
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
+	[209.85.217.196])
+	by mail.openembedded.org (Postfix) with ESMTP id E848A771AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Aug 2016 21:52:38 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id x67so2029046qke.1
+	Tue,  9 Aug 2016 22:23:39 +0000 (UTC)
+Received: by mail-ua0-f196.google.com with SMTP id 109so2129395uat.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Aug 2016 14:52:39 -0700 (PDT)
+	Tue, 09 Aug 2016 15:23:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=tf9DL4FLg999Co95KKGO2sVZDNf1TEOt7ZN6hPJOA4c=;
+	b=jftnNEfg9L4qZPiBuD7aX2+zCQ+ijkY8ILmBCNy1zsSIS/pMTbuZIHeN++BhB1+ukI
+	LJeTAmGkyGnVR6BkZyUy5OTJH5GNB7y1lRLqCvgSr2rTLiTOTF7P4UaplLuxrzh53mmu
+	OWFCj8zBpa9iZhPkBMcxERK09Sb7dnlXmVkLICiqyu0hH2kcvslFwzpaVDNpKd+6W5zk
+	zkXIm2aQvQN5yNFMqjAPxxQdNYaMAJ3woakG6Nb0r82Vg6LE4KZfK7HtTcQ+Dlv0UHO3
+	iBmqup7WlqwGeldpna26Xln2v5Dm2ad7dwVjnb7GECSHvUNfoJVZpITMPolMETlze+0f
+	Updw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=KosiN95/vRlkS7dbctuGt6kmurAAZ6oHV+Lket7dxuQ=;
-	b=jCwO4dM8lc/pZa5t5NlAGfJgftWzCgKZG9QcOleNUqGIT9rCckWnTvmEgsM6TTjyxM
-	SWRlstQ/5BSS1PHIO0pR6hBQDqINaS04EfZcIz2Cu4BJbW4WAJKi5LGSDYDakXbgomP8
-	WJQjz9lt8fctI1/6m6rm5wi4LXjVfHZPgSPgrlXMhXZ7yo1NNlICxzLx0IB+OmkBksgI
-	J8K0PeVfs4WGJbNc6j+mXr5Xe8iblbg6Sg3o1Ehiw58VsP3qYlNDt0/PyW48NZCDwAtp
-	MmKzmA205fgyyycPWHiI5hopsLKvhlU8lQFrF5ZUSXyd4TUjh9ZQ0VICjN+RW7RZVmzy
-	dI9A==
-X-Gm-Message-State: AEkooutKXHjxWcjbQvo4/pEuURgaNbHHPRtgC8OCZrEIsskZVYaXka32MjbHc+Nzx0ZOFw==
-X-Received: by 10.55.154.22 with SMTP id c22mr752317qke.36.1470779559074;
-	Tue, 09 Aug 2016 14:52:39 -0700 (PDT)
-Received: from lnx-desktop.star.lab (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	w10sm21543967qtc.28.2016.08.09.14.52.38
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 09 Aug 2016 14:52:38 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Aug 2016 17:52:26 -0400
-Message-Id: <1470779546-5584-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] daemonize: update to version 1.7.7
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=tf9DL4FLg999Co95KKGO2sVZDNf1TEOt7ZN6hPJOA4c=;
+	b=aMJpA4zHKIn6JZbec6YVtd3Ly/Akm3pSC9eCJZSKd9ebxUcka8DinoaWWeyoQDXCjs
+	lZAyuUwc9BjCMWS6E43q8zQyXFuBe5A0/F8C/B4KetdjERuyBjWO+N0yG/hX5MU3lKPc
+	zGg924gwTgdhz7Nu5vmPtvUAjHd7nANuZ+w38g1bWf6QOjzXNEzF0DmhQE1FfJLbQfQW
+	5hGORZU9Utx8xMXkAC42i5d9M1gRUYjYTQGnbEzxPxrC90dqaN1POAmMEzaN4iEWR2vJ
+	w5v0ElafKQRpQbTJZ+83RBYvWejsGu4D1Cq9AC6GQyLrx4lwd5yIPuPR1VznkHzm8XGj
+	jp/A==
+X-Gm-Message-State: AEkooutlKOC/RmaYhH1O5aq+QvHDJzW+NjkRRwlPQB4efwoosxGJtSpuSrkGxmeHlAYRCUFsRreXQRFEaZB54g==
+X-Received: by 10.176.68.102 with SMTP id m93mr387856uam.111.1470781419991;
+	Tue, 09 Aug 2016 15:23:39 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.176.66.66 with HTTP; Tue, 9 Aug 2016 15:23:39 -0700 (PDT)
+In-Reply-To: <CADNbA1qOkceqffLgwE+xZEWafxg+wr8VsLuZGFr9fgr3EPFrQA@mail.gmail.com>
+References: <1469931304-13906-1-git-send-email-schnitzeltony@googlemail.com>
+	<1469931304-13906-3-git-send-email-schnitzeltony@googlemail.com>
+	<CA+chaQeTP0PgC1bSucTyQkt0=tAC0KcEmYA1mRL0Uu+xmu4zRA@mail.gmail.com>
+	<CALbNGRSU0OHifH7801P_k0ig+QokGA_9=Ck=UZ2JGeSAWrdKag@mail.gmail.com>
+	<CADNbA1qOkceqffLgwE+xZEWafxg+wr8VsLuZGFr9fgr3EPFrQA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 10 Aug 2016 00:23:39 +0200
+Message-ID: <CALbNGRTzhUkgK71C5E1Fw6t20R4G45vz69sc7g0pRCAuAq=bhA@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 3/5] libmbim: update to 1.14.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,66 +57,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Aug 2016 21:52:39 -0000
+X-List-Received-Date: Tue, 09 Aug 2016 22:23:40 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-oe/recipes-support/daemonize/daemonize_git.bb |  7 ++++---
- .../daemonize/files/fix-ldflags-for-gnuhash.patch  | 23 ++++++++++++++++++++++
- 2 files changed, 27 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-support/daemonize/files/fix-ldflags-for-gnuhash.patch
+On Tue, Aug 9, 2016 at 11:47 PM, Derek Straka <derek@asterius.io> wrote:
+> All it takes to fix it is add an inherit for bash-completion.  I can submit
+> a patch to fix it if you'd like.
+>
+Would appreciate if you could test / send patch - thanks
 
-diff --git a/meta-oe/recipes-support/daemonize/daemonize_git.bb b/meta-oe/recipes-support/daemonize/daemonize_git.bb
-index 8b1591c..4790883 100644
---- a/meta-oe/recipes-support/daemonize/daemonize_git.bb
-+++ b/meta-oe/recipes-support/daemonize/daemonize_git.bb
-@@ -2,12 +2,13 @@ SUMMARY = "A tool to run a command as a daemon"
- HOMEPAGE = "http://software.clapper.org/daemonize/"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=3cf9084faa88bc8554a9139d8d7dd35f"
--PV = "1.7.3+git${SRCPV}"
-+PV = "1.7.7+git${SRCPV}"
- 
- inherit autotools
- 
--SRCREV = "a4ac64a243af91dc434b7a3915f43482d528a2b1"
--SRC_URI = "git://github.com/bmc/daemonize.git"
-+SRCREV = "6b10308b13c13e7b911e75e27bf7e65c30d58799"
-+SRC_URI = "git://github.com/bmc/daemonize.git \
-+           file://fix-ldflags-for-gnuhash.patch"
- 
- S = "${WORKDIR}/git"
- 
-diff --git a/meta-oe/recipes-support/daemonize/files/fix-ldflags-for-gnuhash.patch b/meta-oe/recipes-support/daemonize/files/fix-ldflags-for-gnuhash.patch
-new file mode 100644
-index 0000000..4fa2ee1
---- /dev/null
-+++ b/meta-oe/recipes-support/daemonize/files/fix-ldflags-for-gnuhash.patch
-@@ -0,0 +1,23 @@
-+Add the LDFLAGS to the final link to avoid errors with missing GNU_HASH
-+
-+Upstream-Status: Submitted [https://github.com/bmc/daemonize/pull/22]
-+
-+Signed-off-by: Derek Straka <derek@asterius.io>
-+
-+diff --git a/Makefile.in b/Makefile.in
-+index 8a4d078..40d3dee 100644
-+--- a/Makefile.in
-++++ b/Makefile.in
-+@@ -24,10 +24,10 @@ LDFLAGS		= @LDFLAGS@
-+ all: daemonize 
-+ 
-+ daemonize: daemonize.o getopt.o $(MISSING_OBJECTS)
-+-	$(CC) $(CFLAGS) -o $@ $^
-++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
-+ 
-+ testdaemon: testdaemon.o
-+-	$(CC) $(CFLAGS) -o $@ $^
-++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
-+  
-+ psman: daemonize.ps
-+ 
--- 
-1.9.1
-
+Andreas
 
