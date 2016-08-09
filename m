@@ -1,49 +1,62 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f194.google.com (mail-ua0-f194.google.com
-	[209.85.217.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A198771C6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Aug 2016 14:04:44 +0000 (UTC)
-Received: by mail-ua0-f194.google.com with SMTP id d97so1052782uad.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Aug 2016 07:04:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=eGevNY0+nelT86UcFy1Zw3+FXgkMifxeQoNY8hDfcDU=;
-	b=RdXZgyzP7Fi9Rl8bWLuPmOHt3C5o34T3bBusnOlPaHPMdTKHbwC2kco/7uWyIrWpab
-	tr9OdvFLxFWCxqGEyIsXlNRuH1RAjQQHI0xVG32sWG5ZXKM8ZA6W6kzyumFlznAavKEp
-	kmFNC7biEfwBxyJgKXHTN4jX3Kg+vT/NsBLZRAJlvlENGCs4aoWotiKkmbavWUAYRnKO
-	P8/iC5xkSdno6/uUFxbGEbI4UV1TgyLgAOMjxoUAx9P05NiOkRFarPe5cAcQ8EbKQYVV
-	3LhkKwhlDhmVyKEkEG7Ctn/F1eLaoLJ+rT3xdkzzUQX6+dMIRQDYLudhw60J9yUqyycU
-	6TIQ==
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f44.google.com (mail-pa0-f44.google.com
+	[209.85.220.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B4EC7720E;
+	Tue,  9 Aug 2016 14:41:36 +0000 (UTC)
+Received: by mail-pa0-f44.google.com with SMTP id ti13so6076209pac.0;
+	Tue, 09 Aug 2016 07:41:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:mime-version:from:in-reply-to:date:cc:message-id:references
+	:to; bh=TLsJC3pAdesMRpCH0XBow2tJt4ByA02EnY1KpwOXhKA=;
+	b=g9q7gVgrgZ/jc2RN6G0WDZ6HyYvtern3G2W0S7IwK/ZEl5PhBVfctjgL2pojjQJyfY
+	P+2BnsKLFsk4oz7V+bW+HnKwDTjdAbuA19k0cvCd/umn2+wQUdsiL5/18uwlnmIPnnGk
+	4t9RDiKDdm75nzwGOuyyCt0F7WiAwoeNIVGoF2NBhwvAEOT3joN6CVoAHOdqA1Og8Yw5
+	Sp1qZ/9OBA7IKthghVP7CoudXI2Kfw0PJEa4JC/FtZ1fmF70oTQiiD+q3a8P1Q8SLhrj
+	91GuBUyavntCBwKWhmeliBMMTwNIZM2MagJxYzHSyvs+GEx9la3M80sCYYwXFyiqCMpj
+	hmnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=eGevNY0+nelT86UcFy1Zw3+FXgkMifxeQoNY8hDfcDU=;
-	b=H2huPi9AowVDe+PCDt9tCcvEj95eupzs1VPXodHvFmIPeUQRG4ubm70fP0LWbf6qdg
-	lnWAn5OlLjnVcVG8VAMbmqbJPTSWPN3wNp+4aROpZb3mJ46Ma6mnbXaxlnkOuaqjHw2Q
-	s84bBSZhSq3FrXKOJXpvJY2WaWAcQS2+fFg63PQt4ZqcLyf/l8YYf/R2ab9gByRtE8x1
-	YLQuW+399STbkrxggB4oNUiwEKZGroj9lQkW/m2zsbocxna+xqKSXKjZr+x3tFrsUgGr
-	hZEdhfC0XC6WR6zrxecs1v2hI7StKMX+QnY5hzrVH3n97wmQc+CympTGpQDdN0BPoA69
-	mMrg==
-X-Gm-Message-State: AEkoousoDnV4anWEFmBPP3QzfBLdvfufoGetWV789+4CTntP0tUpnL1HJSsz+q1na06FRa3+wtL5D0+MVzDxgQ==
-X-Received: by 10.31.95.137 with SMTP id t131mr15425550vkb.67.1470751484485;
-	Tue, 09 Aug 2016 07:04:44 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.176.66.66 with HTTP; Tue, 9 Aug 2016 07:04:43 -0700 (PDT)
-In-Reply-To: <CA+chaQeTP0PgC1bSucTyQkt0=tAC0KcEmYA1mRL0Uu+xmu4zRA@mail.gmail.com>
-References: <1469931304-13906-1-git-send-email-schnitzeltony@googlemail.com>
-	<1469931304-13906-3-git-send-email-schnitzeltony@googlemail.com>
-	<CA+chaQeTP0PgC1bSucTyQkt0=tAC0KcEmYA1mRL0Uu+xmu4zRA@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Tue, 9 Aug 2016 16:04:43 +0200
-Message-ID: <CALbNGRSU0OHifH7801P_k0ig+QokGA_9=Ck=UZ2JGeSAWrdKag@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 3/5] libmbim: update to 1.14.0
+	h=x-gm-message-state:subject:mime-version:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=TLsJC3pAdesMRpCH0XBow2tJt4ByA02EnY1KpwOXhKA=;
+	b=Q1MjSHWHZ8aWuMlnrZYEaakiQvRJ5Eg1eoFLYCPq+QUtJu+KSuAehdpZZBovYeM3zx
+	23JkhueuQA1Tn7Zksv0R1FDk2UEkvP25C1LMs/1hzsa7aevG4D3xwLCSDkwUjJYZr1Dq
+	E7ZMQNMWJv3c0pY63+lftABbDgzVTMEsp+AxDKq1CIenwuAkToZw6AHptfw18ur798C+
+	ucQXSl1lvqZPkMgdT8KwPy0C8YzGx0DTcSAr08UxytxEd+NWn/AiSewzRapQh+BxVWp4
+	h1BG5OfX0Xiv4R6cEw7Wp+SdIrFouxurAHhjWVBHOM/+WsOuXbS5mj0/iYDxqopnjxj0
+	0DTQ==
+X-Gm-Message-State: AEkooutSEO+vTvD9dCrWvWKUJ913wbwbsQHGGbzr4LK/fo7tZdAIAl9FWYuJNHvEX14zQA==
+X-Received: by 10.66.164.70 with SMTP id yo6mr70129104pab.47.1470753697159;
+	Tue, 09 Aug 2016 07:41:37 -0700 (PDT)
+Received: from ?IPv6:2601:646:8882:b8c:29dc:cb12:3198:ca66?
+	([2601:646:8882:b8c:29dc:cb12:3198:ca66])
+	by smtp.gmail.com with ESMTPSA id
+	p64sm56665896pfd.11.2016.08.09.07.41.35
+	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 09 Aug 2016 07:41:36 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
+X-Pgp-Agent: GPGMail
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <CAJTo0LY-MVSANSLRBzBGTL2ZJ=Ga=Xijps6jwAGosLK3aE4QLg@mail.gmail.com>
+Date: Tue, 9 Aug 2016 07:42:10 -0700
+Message-Id: <DC67B803-475F-4992-8DFD-B8F5FA7B1D15@gmail.com>
+References: <CC61EFE1-5F39-4848-AD71-8E9C8DEC43C8@gmail.com>
+	<1470637705.8166.29.camel@linuxfoundation.org>
+	<8C207C42-3D61-4C3F-A1DE-F305AA6617BA@gmail.com>
+	<1470644094.8166.37.camel@linuxfoundation.org>
+	<1470646210.8166.38.camel@rpsys.net>
+	<1470647765.4581.23.camel@andred.net>
+	<ACB9AEF7-A7DF-4A88-9762-7569D91AD12D@gmail.com>
+	<1470671991.8166.44.camel@linuxfoundation.org>
+	<CAJTo0LY-MVSANSLRBzBGTL2ZJ=Ga=Xijps6jwAGosLK3aE4QLg@mail.gmail.com>
+To: "Burton, Ross" <ross.burton@intel.com>
+X-Mailer: Apple Mail (2.3124)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OE-core <openembedded-core@lists.openembedded.org>,
+	Richard Purdie <richard.purdie@linuxfoundation.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Yocto Discussion Mailing List <yocto@yoctoproject.org>
+Subject: Re: [OE-core] [RFT] binutils 2.27
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,55 +69,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Aug 2016 14:04:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 09 Aug 2016 14:41:37 -0000
+X-Groupsio-MsgNum: 62499
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_4F342F10-D6A3-474D-B1AE-D40F130716F6";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+
+--Apple-Mail=_4F342F10-D6A3-474D-B1AE-D40F130716F6
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-On Sat, Aug 6, 2016 at 9:23 AM, Martin Jansa <martin.jansa@gmail.com> wrote=
-:
-> ERROR: libmbim-1.14.0-r0 do_package: QA Issue: libmbim:
-> Files/directories were installed but not shipped in any package:
->   /usr/share/bash-completion
->   /usr/share/bash-completion/completions
->   /usr/share/bash-completion/completions/mbimcli
->
->
-> On Sun, Jul 31, 2016 at 4:15 AM, Andreas M=C3=BCller <
-> schnitzeltony@googlemail.com> wrote:
->
->> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->> ---
->>  .../libmbim/{libmbim_1.12.2.bb =3D> libmbim_1.14.0.bb}                 =
- |
->> 4 ++--
->>  1 file changed, 2 insertions(+), 2 deletions(-)
->>  rename meta-oe/recipes-connectivity/libmbim/{libmbim_1.12.2.bb =3D>
->> libmbim_1.14.0.bb} (80%)
->>
->> diff --git a/meta-oe/recipes-connectivity/libmbim/libmbim_1.12.2.bb
->> b/meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb
->> similarity index 80%
->> rename from meta-oe/recipes-connectivity/libmbim/libmbim_1.12.2.bb
->> rename to meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb
->> index f1ecce5..f2b8df6 100644
->> --- a/meta-oe/recipes-connectivity/libmbim/libmbim_1.12.2.bb
->> +++ b/meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb
->> @@ -12,5 +12,5 @@ DEPENDS =3D "glib-2.0 libgudev"
->>  inherit autotools pkgconfig
->>
->>  SRC_URI =3D "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.ta=
-r.xz
->> "
->> -SRC_URI[md5sum] =3D "921fb5ab3f13f1e00833e009d8f3b4f6"
->> -SRC_URI[sha256sum] =3D "949351d3e3d69b81e40a49f1d18794
->> 4c26149e0647a415f0227ccdc112047b29"
->> +SRC_URI[md5sum] =3D "2ed809e65c85353d3ab59e372890e549"
->> +SRC_URI[sha256sum] =3D "ca8d52a95a18cbabae8f15f83f1572
->> 316e888b6504f946e6645d24405127ab5b"
->> --
->> 2.5.5
->>
-Cannot take care currently - it is added to my TODO stack.
 
-Andreas
+> On Aug 8, 2016, at 4:16 PM, Burton, Ross <ross.burton@intel.com> =
+wrote:
+>=20
+>=20
+> On 8 August 2016 at 16:59, Richard Purdie =
+<richard.purdie@linuxfoundation.org =
+<mailto:richard.purdie@linuxfoundation.org>> wrote:
+> FWIW, I think the connmand segfault on mips and powerpc is hinted at
+> with this bug:
+>=20
+> https://bugs.launchpad.net/ubuntu/+source/lua5.3/+bug/1570055 =
+<https://bugs.launchpad.net/ubuntu/+source/lua5.3/+bug/1570055>
+>=20
+> connmand is a binary linked with a linker version-script. If I build
+> connmand without that option, it doesn't segfault, at least on mips.
+>=20
+> The binutils manuals say you shouldn't build binaries with version
+> scripts:
+>=20
+> http://ftp.gnu.org/old-gnu/Manuals/ld-2.9.1/html_node/ld_25.html =
+<http://ftp.gnu.org/old-gnu/Manuals/ld-2.9.1/html_node/ld_25.html>
+>=20
+> Its suspected connman might do this to limit the function exposure to
+> its plugins.
+>=20
+> Now sure exactly what needs to happen here without more research but =
+it
+> certainly hits at where the problem is. I suspect its the same issue =
+on
+> ppc.
+>=20
+> I've verified that with binutils 2.26 on x86-64, a minimal test case =
+for an executable using a version script to limit exported symbols to =
+dlopen()d modules does in fact work.  A toolchain is building now to see =
+what happens in different environments.
 
+I could also see it on ppc. backtrace, shows the segfault is in exit =
+path and happens in libc
+at this point, I think the problem is how libc is compiled with binutils =
+2.27, connman itself
+is ok.
+
+>=20
+> Ross
+
+
+--Apple-Mail=_4F342F10-D6A3-474D-B1AE-D40F130716F6
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlep68YACgkQuwUzVZGdMxRbGACbBFTHTJjM6FUXx74dA5CqqLcw
+BWgAn32xx8eY09ajbzeY/DwiX60N2SZV
+=PtDM
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_4F342F10-D6A3-474D-B1AE-D40F130716F6--
