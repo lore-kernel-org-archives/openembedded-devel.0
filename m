@@ -1,49 +1,49 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 0AD9A7721A
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id D6A367721C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Aug 2016 15:40:54 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id i6so1077350pfe.0
+	Tue,  9 Aug 2016 15:40:55 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id g202so1081192pfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Aug 2016 08:40:55 -0700 (PDT)
+	Tue, 09 Aug 2016 08:40:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=sGp/GHKTMIPQCRRaqAdb87hmHuP4qp8aYdlKMCXjt3Y=;
-	b=E0zKYGO8+3jsDOOibnjFptcZ2JH1cTTFmzMB1zc2bILlMptWgdy72A3JiE746zfWgo
-	ba8p1cW7B8XkFHPhovcMI6wdX8izq0xXkzCtvGp2PX1zAp497i40ZnZcKZ4qw0A2APX1
-	4PE29GcKeG4pRUrCzmC2+cAhj+qKTdOFzJ+ELQlUu9ZzZtkY4Wl1yl/fgBPQKLb+sLTv
-	HU9si7etNWKR5zfvvR4u+mI2yCGDsMomeDo2YGJB3vcLxMjy/aaNbc+nVNGD46oWZ83K
-	bEKS5Uty4la8NFe4mZErMTXa8McItwjChYL+6F9Ij8P6Wc8ntDnzxxi1NcSxLkotr/Jf
-	hD+w==
+	bh=fgJlhXUQ/FLdXvw0TaSKJezxJfEEFpz9cIowi3AKE7c=;
+	b=UB+MuWchK1BH+1/X5p8EWYfSDylPoCUvWLm1AwpperG/d6rvyRaqmb3xF1OAaC8/P3
+	hpMdF/xiZ7MyZBNltG0XQFloNyFPr0SvmE9tqQ/kAy1RKGrya88d1rwWlAwYg1qQbl7e
+	pg3amBcpzJz0hEvGgyFnno9WJgIc5XX3tp85LM0uZGefT4aXbZwHH6M3TJ/nEzPJOnbN
+	1hsvrWhj+eHrFVJqdkWvPioJ4046WDEBit8K+WPNQDDl922ojRNWU2lLBQqGOh1qGIAU
+	8tNQzUpbhqCrygkS5/m0fpJSBt34eeXp3I6AWo4UHsbxgw6bsDSOq0gaglnwa3oA6i8u
+	t7Gg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=sGp/GHKTMIPQCRRaqAdb87hmHuP4qp8aYdlKMCXjt3Y=;
-	b=ajXhM4pqNqnAlsNhKNFLY1g1AKTZI/FUm3CFvkN4EaQi6ZpJfXRcoptf+LcZy/Zz9r
-	uEV1rpciJYJGzg54i/S8pWLy3lbS7SUU4xsFuXx4aOMOh/Uj6NreihmU/pT8wdTl9Gun
-	dbw5f5lTcbDwJ2G/UXyvJRiHxKUDIXxPjz0DCVj0kNZ3fCTce5pPWv1zDlFQ9Txpfi27
-	RDxbCGoCLeIZjDaKukp1LxiC4t8JJS5eqx/2RmLbbfkgUi5UXIbgBtiWczS0onFazjOJ
-	LdemIpDiom3XBZLT7iJ3FDAjMy9WdNb2AvBNLftEaKiDAQfTY+QDEffG4rORKNmp2npP
-	8Ebw==
-X-Gm-Message-State: AEkoouujHlSOA3u1NWjFxhAjt/NEYg7vYNkY+aPE5KF6bvw/XcEwBJEoushtmOKIkrAmzQ==
-X-Received: by 10.98.95.129 with SMTP id t123mr68250323pfb.148.1470757254628; 
-	Tue, 09 Aug 2016 08:40:54 -0700 (PDT)
+	bh=fgJlhXUQ/FLdXvw0TaSKJezxJfEEFpz9cIowi3AKE7c=;
+	b=i5aUaVuFEcYP56FL+UO2G/DpuNU+iaEqqTg0Z5UIU6ssvnEBm5hrCPaV9uZTai2o+8
+	PVQqeDAekHYoPX1PKBZEcfBilMMhQAl6YvT7tpYr30LSmDbfFM9y1e4bz2JQaqPjqj30
+	7dJy29reA9Zx7s5kNg8msSND8prUxWKfyinZkG9ldoG23zg5vGqER/dBlj1iVi42WsAC
+	OSBnbToWD3kCH/9Vfr7VbnlAcXZRqLlAFMhmycYEC3fug2GZFUIg54XUTMVYBqWhlrWu
+	mR6bspdUF3OYMRXJ+Q3mEzl7JkxTKBFcRnod+gdv1trYLC13j70QNR0NdIDiyxawj63c
+	c1ig==
+X-Gm-Message-State: AEkoouswg/IF5j7oT7bzGRsMMlgIolpfoee3lRUUzyYnp8pxXcs3J1qtNls6Zc2AoHkauw==
+X-Received: by 10.98.80.220 with SMTP id g89mr173922303pfj.12.1470757256268;
+	Tue, 09 Aug 2016 08:40:56 -0700 (PDT)
 Received: from Pahoa2.mvista.com (c-76-20-92-207.hsd1.ca.comcast.net.
 	[76.20.92.207]) by smtp.gmail.com with ESMTPSA id
-	k9sm56963914pfj.63.2016.08.09.08.40.52
+	k9sm56963914pfj.63.2016.08.09.08.40.54
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 09 Aug 2016 08:40:53 -0700 (PDT)
+	Tue, 09 Aug 2016 08:40:55 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	akuster@mvista.com
-Date: Tue,  9 Aug 2016 08:40:39 -0700
-Message-Id: <1470757240-9091-5-git-send-email-akuster808@gmail.com>
+Date: Tue,  9 Aug 2016 08:40:40 -0700
+Message-Id: <1470757240-9091-6-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.3.5
 In-Reply-To: <1470757240-9091-1-git-send-email-akuster808@gmail.com>
 References: <1470757240-9091-1-git-send-email-akuster808@gmail.com>
-Subject: [PATCH][master][krogoth 5/6] mongodb: failes to build on ppc
+Subject: [PATCH][master][krogoth 6/6] breakpad: disable ppc from being built.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,30 +56,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Aug 2016 15:40:54 -0000
+X-List-Received-Date: Tue, 09 Aug 2016 15:40:57 -0000
 
- Checking if C compiler "powerpc-poky-linux-gcc  -m32 -mhard-float -mcpu=7400 -mno-spe --sysroot=/home/..../poky/build/tmp/sysroots/qemuppc" is GCC... yes
- | KeyError: 'powerpc':
-
-add powerpc to COMPATIBLE_MACHINE.
+ ../trunk/src/client/linux/dump_writer_common/raw_context_cpu.h:48:2: error: #error "This code has not been ported to your platform yet."
+ |  #error "This code has not been ported to your platform yet."
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-support/mongodb/mongodb_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-devtools/breakpad/breakpad_svn.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/mongodb/mongodb_git.bb b/meta-oe/recipes-support/mongodb/mongodb_git.bb
-index 6522a67..cb6c1b3 100644
---- a/meta-oe/recipes-support/mongodb/mongodb_git.bb
-+++ b/meta-oe/recipes-support/mongodb/mongodb_git.bb
-@@ -27,6 +27,7 @@ PACKAGECONFIG_remove_armv6 = "tcmalloc"
- COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
- COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
- COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
-+COMPATIBLE_MACHINE_powerpc = "(!.*ppc).*"
+diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb b/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
+index 7ada3a3..b573ea5 100644
+--- a/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
++++ b/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
+@@ -17,6 +17,8 @@ SRCREV = "r1435"
+ SRC_URI = "svn://google-breakpad.googlecode.com/svn;module=trunk;protocol=http"
+ S = "${WORKDIR}/trunk"
  
- PACKAGECONFIG[tcmalloc] = "--use-system-tcmalloc,--allocator=system,gperftools,"
- PACKAGECONFIG[wiredtiger] = "--wiredtiger=on,--wiredtiger=off,,"
++COMPATIBLE_MACHINE_powerpc = "(!.*ppc).*"
++
+ do_install_append() {
+         install -d ${D}${includedir}
+         install -d ${D}${includedir}/breakpad
 -- 
 2.3.5
 
