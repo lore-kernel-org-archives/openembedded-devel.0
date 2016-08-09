@@ -1,25 +1,42 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 0018F771DA
+Return-Path: <ankur.tyagi85@gmail.com>
+Received: from mail-qk0-f180.google.com (mail-qk0-f180.google.com
+	[209.85.220.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B65776A51
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Aug 2016 01:42:51 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u791gq8J029398
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 8 Aug 2016 18:42:52 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Mon, 8 Aug 2016 18:42:51 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 8 Aug 2016 21:42:42 -0400
-Message-ID: <fcedfe11ab428ce82b38e0c7472278a66e696618.1470706569.git.hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.8.1
-In-Reply-To: <cover.1470706568.git.hongxu.jia@windriver.com>
-References: <cover.1470706568.git.hongxu.jia@windriver.com>
+	Tue,  9 Aug 2016 06:59:08 +0000 (UTC)
+Received: by mail-qk0-f180.google.com with SMTP id t7so4656104qkh.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 08 Aug 2016 23:59:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=g5mK+rRbvCkvsXK70hsYk3A2FS8jodTp8g5GeKFdjgk=;
+	b=SpWOqD6vrCNX06DZtMvr/XpOTTCAHuqaJ7eqMiSs2c0oRqo3GU3N/2x7MgRJnoo84/
+	nkmJipG5R3rZNqQiCCg+KPOJYFmGbHUIn3GTTTR9KB+QyWFtTOpRdkFMlTmotBjLlQnN
+	nEL+jpss7Dfj2+cSV/wRNsXcqkXZf2Kp2AhnSPztZJMPPb7MlRKl0fg6eiGMbJB0kbp1
+	G+iyrC6dvEEZvP6IF+UXZa+efT/HC0i15iHr3fq4eaOwir/nd79DL4LLnHZfU8zgzFwr
+	S7zhDVW4eaiHGBh1s70gS2jVT4E0QZDw2JRe9IF2Tn7X7J6wkEN2pjwVhbq51h+XkOXp
+	Bs9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=g5mK+rRbvCkvsXK70hsYk3A2FS8jodTp8g5GeKFdjgk=;
+	b=CsS3k/7dj5Wm7B86IaTrPzoFwUrLykE69/xfdPGIXAB3lxfxrYJbkDhtV66LVDswuo
+	gix+bSwoDysbxjO4HReK5BJ39S5+/hf9aRvhE9YD19ObcbKP2bKMo/pDZe9H/3D5wQhP
+	AlQR3l63UgXp6Fs9cuSEbmC7W6lw5VmGt8a7c7Ezlbhy8fjaRK5vKy6l/G36Fd6X9DHC
+	Yum6s6q4iNDESw6a82a3MXrTyOjnaUKkWEEp/8j79lemflXHH9FGLuueiMqBxhA7qDSv
+	V5qQbQBklSti7Ir8N1uegzth5JyGn+XzU1YLkivTJ2IzXJuLmNKVnq+A+hqtpv3NYFq4
+	4HMg==
+X-Gm-Message-State: AEkoouu0ya/LjzyidSlincQpw9+i92wME8xfewF3Rw0L/J/LYvcbMecIwNC2VX6m9yasWmjoudKkOn/eRL0ilA==
+X-Received: by 10.55.72.2 with SMTP id v2mr4045436qka.68.1470725948731; Mon,
+	08 Aug 2016 23:59:08 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH 4/4] ttf-lklug: add version 0.6-14.20090803cvs.fc24 to support Sinhala language
+Received: by 10.200.47.198 with HTTP; Mon, 8 Aug 2016 23:58:48 -0700 (PDT)
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Tue, 9 Aug 2016 18:58:48 +1200
+Message-ID: <CADySD0Ej3QWux8YV6dAys8q1TYQF9mgCJ9-PciJzKTxMJBQ81Q@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Splashscreen goes away when login prompt comes on serial console
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,59 +49,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Aug 2016 01:42:52 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 09 Aug 2016 06:59:10 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- meta-oe/conf/layer.conf                            |  1 +
- .../ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb | 24 ++++++++++++++++++++++
- 2 files changed, 25 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb
+Hi,
 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index edcafdf..eba8ccd 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -59,6 +59,7 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
-   ttf-inconsolata->fontconfig \
-   ttf-liberation->fontconfig \
-   ttf-liberation-sans-narrow->fontconfig \
-+  ttf-lklug->fontconfig \
-   ttf-lohit->fontconfig \
-   ttf-pt-sans->fontconfig \
-   ttf-mplus->fontconfig \
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb
-new file mode 100644
-index 0000000..fd235bd
---- /dev/null
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb
-@@ -0,0 +1,24 @@
-+require ttf.inc
-+
-+SUMMARY = "Fonts for Sinhala language - TTF Edition"
-+HOMEPAGE = "http://rpms.famillecollet.com/rpmphp/zoom.php?rpm=lklug-fonts"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+
-+SRC_URI = "http://dl.fedoraproject.org/pub/fedora/linux/development/25/Everything/source/tree/Packages/l/lklug-fonts-0.6-14.20090803cvs.fc24.src.rpm;extract=lklug-20090803.tar.gz"
-+SRC_URI[md5sum] = "3341dfb997043d234ab3f6e5a965e759"
-+SRC_URI[sha256sum] = "f54c1f3b4df08995982657fed290b562556191fee2a0386afd9e8bf228f72b1a"
-+
-+DEPENDS = "fontforge-native"
-+
-+S = "${WORKDIR}"
-+FONT_PACKAGES = "${PN}"
-+FILES_${PN} = "${datadir}"
-+
-+do_compile() {
-+    fontforge ${S}/convert.ff lklug
-+}
-+
-+do_install() {
-+    make install DESTDIR=${D}
-+}
--- 
-2.8.1
+I have created a custom splash screen using psplash for an embedded device
+having touchscreen
+=E2=80=8B.=E2=80=8B
 
+
+But when the boot process is finished and login prompt comes, my screen
+goes blank.
+
+My question is how can I make splash screen visible until my application
+starts ?
+
+I have modified my /etc/inittab to disable getty on virtual terminal
+(touchscreen)
+=E2=80=8B,
+
+getty is only enabled for serial console.
+
+Thanks
+Ankur
 
