@@ -1,56 +1,28 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-it0-f42.google.com (mail-it0-f42.google.com
-	[209.85.214.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 4ED7B771D4
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id A1B6377158
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Aug 2016 23:16:24 +0000 (UTC)
-Received: by mail-it0-f42.google.com with SMTP id x130so1031518ite.1
+	Tue,  9 Aug 2016 01:01:44 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u7911iPl018029
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Aug 2016 16:16:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=su0tfLLVT97z5vkG5MINEll7u/mRR+3LU8XTK/kcYnk=;
-	b=m+9MzFc/r7eVznFFTvAtZBKhfNCjeAZpNpLUldGFrkxFjg+L+7UJDDPsNVaUHFzP8q
-	HbHnT6W+IRmFcVEbV0q88OLnXLrNRHeIqE3ij3eul2f4x6wiV6+Ri11Bb8RSWe0AKzfQ
-	8Pxo2ymvJaz5fIQ1eawtULZkGi4V0/nZmivTPgYrIxmNMNDXNHNs3++kO2zGt3/QUAI5
-	kzkHwZdFVHg7c5PStTZ+nucYoPnhDrqThxTgBhXcVs/8W6C7BHSbNlw2r7sT5OeEM7FI
-	zV7YaAkgjX6BCypJZ+5fU+4i+/lF24igsMYo12wSmWZORZI/+GrszKF+c5b3fP0o8Iad
-	wbEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=su0tfLLVT97z5vkG5MINEll7u/mRR+3LU8XTK/kcYnk=;
-	b=h2fI4TRFYOM60cHVGdJbBvOA/8NzlGYIMg6GklOE+pmGQY9hxCB5pOBUhuIn3J3o+r
-	WtTp4p2wLqeN+/5ivXfH4JmuVAO92+GYauHvHzrDhzrs/QVXRfr2wy9ORT9nWFOMnB9G
-	kYC0CD/0gsI9KJPUj+yYfEt0W17G6/hYZph7uXvWYFIn2B2s1X8Wkh41XrM1ZluJiSjZ
-	HYrl/BPOr2EPWJqoURXcqfcZx2P1IXJ2/TaBjczJXbM9HA5ATR6aqNfY5cePBZ3kQdwM
-	Syjrzuna/q1WtacDrT/AufVP3lMaYArBiTMxsENZn8C6pbr+5fVEfltj0eAoxyS+BPW/
-	qS6A==
-X-Gm-Message-State: AEkoouvgaEJr56FgGHHt+azcgq8jy586AXb2IILxcC5TbAQMluwdPUH7LBooQTAlzrWP61oJ2o3nyvyXVB/lHRBt
-X-Received: by 10.36.20.75 with SMTP id 72mr20546865itg.83.1470698185183; Mon,
-	08 Aug 2016 16:16:25 -0700 (PDT)
+	Mon, 8 Aug 2016 18:01:44 -0700 (PDT)
+Received: from [172.25.44.4] (172.25.44.4) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
+	Mon, 8 Aug 2016 18:01:43 -0700
+To: <openembedded-devel@lists.openembedded.org>
+References: <1470692494-32623-1-git-send-email-Randy.MacLeod@windriver.com>
+From: Randy MacLeod <randy.macleod@windriver.com>
+Message-ID: <2b0b792c-e182-e00a-6f77-c985f0bc81be@windriver.com>
+Date: Mon, 8 Aug 2016 21:01:42 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.2.0
 MIME-Version: 1.0
-Received: by 10.107.18.17 with HTTP; Mon, 8 Aug 2016 16:16:04 -0700 (PDT)
-In-Reply-To: <1470671991.8166.44.camel@linuxfoundation.org>
-References: <CC61EFE1-5F39-4848-AD71-8E9C8DEC43C8@gmail.com>
-	<1470637705.8166.29.camel@linuxfoundation.org>
-	<8C207C42-3D61-4C3F-A1DE-F305AA6617BA@gmail.com>
-	<1470644094.8166.37.camel@linuxfoundation.org>
-	<1470646210.8166.38.camel@rpsys.net>
-	<1470647765.4581.23.camel@andred.net>
-	<ACB9AEF7-A7DF-4A88-9762-7569D91AD12D@gmail.com>
-	<1470671991.8166.44.camel@linuxfoundation.org>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 9 Aug 2016 00:16:04 +0100
-Message-ID: <CAJTo0LY-MVSANSLRBzBGTL2ZJ=Ga=Xijps6jwAGosLK3aE4QLg@mail.gmail.com>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>,
-	Yocto Discussion Mailing List <yocto@yoctoproject.org>
-Subject: Re: [OE-core] [RFT] binutils 2.27
+In-Reply-To: <1470692494-32623-1-git-send-email-Randy.MacLeod@windriver.com>
+X-Originating-IP: [172.25.44.4]
+Subject: Re: [PATCH] imagemagick: upgrade from 6.9.2 to 7.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,37 +35,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Aug 2016 23:16:26 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 09 Aug 2016 01:01:44 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 8 August 2016 at 16:59, Richard Purdie <
-richard.purdie@linuxfoundation.org> wrote:
+On 2016-08-08 05:41 PM, Randy MacLeod wrote:
+> The copyright end year update made the LICENSE file checksum change.
+> That line is in the middle of the file so the license checksum
+> has been updated rather than specifying two ranges of lines.
+>
+> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+> ---
+>  .../imagemagick/{imagemagick_6.9.2.bb => imagemagick_7.0.2.bb}    | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>  rename meta-oe/recipes-support/imagemagick/{imagemagick_6.9.2.bb => imagemagick_7.0.2.bb} (94%)
+>
+> diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.9.2.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
+> similarity index 94%
+> rename from meta-oe/recipes-support/imagemagick/imagemagick_6.9.2.bb
+> rename to meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
+> index a9f0134..a5a239c 100644
+> --- a/meta-oe/recipes-support/imagemagick/imagemagick_6.9.2.bb
+> +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
+> @@ -1,18 +1,18 @@
+>  SUMMARY = "ImageMagick is an image convertion tools"
+>  SECTION = "console/utils"
+>  LICENSE = "ImageMagick"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=0887b670be7ef0c3cb37092b64d57514"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=22d47a47bf252ca3ed7f71273b53612e"
+>  # FIXME: There are many more checked libraries. All should be added or explicitly disabled to get consistent results.
+>  DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freetype"
+>
+>  # Important note: tarballs for all patchsets within a version are deleted when
+>  # a new pachset is created. To avoid multiple patches for each patchset, try to
+>  # update to the last pachset of a version
+> -PATCHSET = "0"
+> +PATCHSET = "7"
+>  SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.xz \
+>  "
+> -SRC_URI[md5sum] = "99471c8c3f38c9264faf5c4ca7a31287"
+> -SRC_URI[sha256sum] = "07a2de28f7f9ab888ef47c02eb7e10cc3e0dd0e9797c5d71d6e71d19f842399e"
+> +SRC_URI[md5sum] = "bd66b19bd6fc3d320bd8d51869c874f9"
+> +SRC_URI[sha256sum] = "1168f44cfcd1243acda6bb9663f5d9b3a4bca2acd372e979b97b58ecf5c713e2"
+>
+>  S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
+>
+>
 
-> FWIW, I think the connmand segfault on mips and powerpc is hinted at
-> with this bug:
->
-> https://bugs.launchpad.net/ubuntu/+source/lua5.3/+bug/1570055
->
-> connmand is a binary linked with a linker version-script. If I build
-> connmand without that option, it doesn't segfault, at least on mips.
->
-> The binutils manuals say you shouldn't build binaries with version
-> scripts:
->
-> http://ftp.gnu.org/old-gnu/Manuals/ld-2.9.1/html_node/ld_25.html
->
-> Its suspected connman might do this to limit the function exposure to
-> its plugins.
->
-> Now sure exactly what needs to happen here without more research but it
-> certainly hits at where the problem is. I suspect its the same issue on
-> ppc.
->
+This builds for all qemu targets and basic functionality is okay:
+root@qemu0:~# convert logo: logo.gif
+root@qemu0:~# identify logo.gif
+logo.gif GIF 640x480 640x480+0+0 8-bit sRGB 256c 28.6KB 0.020u 0:00.020
+root@qemu0:~# arch
+aarch64
+root@qemu0:~# identify -list format | wc -l
+252
 
-I've verified that with binutils 2.26 on x86-64, a minimal test case for an
-executable using a version script to limit exported symbols to dlopen()d
-modules does in fact work.  A toolchain is building now to see what happens
-in different environments.
+but there's a problem with a missing configure.xml file:
 
-Ross
+root@qemu0:~# identify -list configure
+
+Path: [built-in]
+
+Name           Value
+-------------------------------------------------------------------------------
+FEATURES
+NAME           ImageMagick
+QuantumDepth   16
+identify: UnableToOpenConfigureFile `configure.xml' @ 
+warning/configure.c/GetConfigureOptions/715.
+
+
+That's probably not critical and I'll work on it tomorrow.
+Merge if you like or wait for a fix.
+
+-- 
+# Randy MacLeod. SMTS, Linux, Wind River
+Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON, 
+Canada, K2K 2W5
 
