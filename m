@@ -1,39 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 791D376E70
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 53A9476E70
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Aug 2016 22:42:43 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id o1so2120684qkd.2
+	Tue,  9 Aug 2016 22:42:42 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id x185so2112848qkc.3
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 09 Aug 2016 15:42:44 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=lo1V10g7TCvPmTT7Plx0fdzs+9T/xRJd+053X3KWWpg=;
-	b=Ub4/oPJn8fAHWGm5WzcAKkLL+GQ4e2Sm62Fh8nw8wZFH4OOMmTFkh55bGRCRvRziHC
-	fcbPYL2+NEEIUOv1XSrWMZ42dtncDYz6Lput5KlklRGkfqjNvNsUm68A4Jaht8AHQHkN
-	BgQSiWBVr17qtmG5X6QvuYKiG2kLIo20t2beShoCZwiilnc8sURsVbPqHIP5ry4jVhqA
-	6H70fuVxE4qNcw/oEoVvWu+15A/dqG9WyV4miPaXSUgygnWNVuoLpAZW7KyJ++1yEi/B
-	3VcqPa8raH7T96izR+j7h1DF9ljoUWiTVg/ExpLtGlONu4vWT+pL7mA/AG6BxjFPIOgp
-	PK7w==
-X-Gm-Message-State: AEkoousoNCDzSkdGE/MPvH6utG4RmIZyYsDloqSd8U16GVezTEG3FfoDLbSsoJKxT5utAA==
-X-Received: by 10.55.79.139 with SMTP id d133mr860317qkb.99.1470782564273;
-	Tue, 09 Aug 2016 15:42:44 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=HHlLvRs5HJCIUnpoHI5Q5VzqhRLHPptSFlbAG79blzo=;
+	b=HeL4EPsA6qjp69abjrzimGgWOIiS6WuS0ah4BE7fJyZFR+skQdQHiP9Vo/KMFxhjFJ
+	nWg29l/t+MeR7i1iZT21sMjqyFFd0NX7Oy49+nSKA7lUckMIs32wWwRlU0qKbM30Ov0P
+	Vm6yfbTfypYokNKCMWqp/4hKPq2u5KY71jpJDFxIHKvEDLKACCV/Hk8mpSo0zXRuqqjz
+	vsrd6hrQk6dWq81MLXM3qi0T3FjBMyDJRQhyLfRZRU0+xoA+CTrvcVLudDq5En2fsGKF
+	ik0FVdRNj42pWglAYZf3+wQjQ7kgepfvEfZqptMxUYeQBkLpzVKV3Tl1tSrTBqFEMYMG
+	LEvA==
+X-Gm-Message-State: AEkooutFQsjK/bzw+yEr+f1I1Uu9+iEiFf8iBHD1MRql5zz+KG5Yv7S3ELFRtfi+bVuymQ==
+X-Received: by 10.55.19.23 with SMTP id d23mr999451qkh.230.1470782563689;
+	Tue, 09 Aug 2016 15:42:43 -0700 (PDT)
 Received: from lnx-desktop.star.lab (c-73-172-178-168.hsd1.md.comcast.net.
 	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	m10sm21663492qta.31.2016.08.09.15.42.43
+	m10sm21663492qta.31.2016.08.09.15.42.42
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
 	Tue, 09 Aug 2016 15:42:43 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Aug 2016 18:42:32 -0400
-Message-Id: <1470782552-5625-2-git-send-email-derek@asterius.io>
+Date: Tue,  9 Aug 2016 18:42:31 -0400
+Message-Id: <1470782552-5625-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1470782552-5625-1-git-send-email-derek@asterius.io>
-References: <1470782552-5625-1-git-send-email-derek@asterius.io>
-Subject: [meta-oe][PATCH 2/2] upower: update to version 0.99.4
+Subject: [meta-oe][PATCH 1/2] devicekit-power: remove obsolete package that was migrated to upower in 2010
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,42 +47,46 @@ X-List-Received-Date: Tue, 09 Aug 2016 22:42:46 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-support/upower/{upower_0.9.14.bb => upower_0.99.4.bb} | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-support/upower/{upower_0.9.14.bb => upower_0.99.4.bb} (84%)
+ .../devicekit/devicekit-power_014.bb               | 30 ----------------------
+ 1 file changed, 30 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/devicekit/devicekit-power_014.bb
 
-diff --git a/meta-oe/recipes-support/upower/upower_0.9.14.bb b/meta-oe/recipes-support/upower/upower_0.99.4.bb
-similarity index 84%
-rename from meta-oe/recipes-support/upower/upower_0.9.14.bb
-rename to meta-oe/recipes-support/upower/upower_0.99.4.bb
-index d2c5943..861f17c 100644
---- a/meta-oe/recipes-support/upower/upower_0.9.14.bb
-+++ b/meta-oe/recipes-support/upower/upower_0.99.4.bb
-@@ -2,13 +2,11 @@ DESCRIPTION = "UPower is an abstraction for enumerating power devices, listening
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0de8fbf1d97a140d1d93b9f14dcfbf08"
- 
--PR = "r2"
+diff --git a/meta-oe/recipes-support/devicekit/devicekit-power_014.bb b/meta-oe/recipes-support/devicekit/devicekit-power_014.bb
+deleted file mode 100644
+index c2b7e66..0000000
+--- a/meta-oe/recipes-support/devicekit/devicekit-power_014.bb
++++ /dev/null
+@@ -1,30 +0,0 @@
+-SUMMARY = "Devicekit power"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=756cf97871f77233638937da21b025d3"
 -
- DEPENDS = "intltool-native libusb1 libgudev glib-2.0 dbus-glib polkit"
- 
- SRC_URI = "http://upower.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
--SRC_URI[md5sum] = "18803f82102d56aac90949d1e4251645"
--SRC_URI[sha256sum] = "81eb44c0453b264a737d32f763a31d5b1776f050a47d5be85fc5e9caf874a4c5"
-+SRC_URI[md5sum] = "78800e1ac7f92b24aabdf433e38f75d2"
-+SRC_URI[sha256sum] = "9ca325a6ccef505529b268ebbbd9becd0ce65a65f6ac7ee31e2e5b17648037b0"
- 
- inherit autotools pkgconfig gettext gobject-introspection
- 
-@@ -22,7 +20,7 @@ do_configure_prepend() {
-     sed -i -e 's: doc : :g' ${S}/Makefile.am
- }    
- 
+-DEPENDS = "libusb-compat libusb1 udev glib-2.0 dbus-glib polkit intltool-native libgudev"
 -
-+RDEPENDS_${PN} += "dbus"
- RRECOMMENDS_${PN} += "pm-utils"
- FILES_${PN} += "${datadir}/dbus-1/ \
-                 ${datadir}/polkit-1/ \
+-SRC_URI = "http://upower.freedesktop.org/releases/DeviceKit-power-${PV}.tar.gz;name=archive"
+-SRC_URI[archive.md5sum] = "935d37f1e14b3c8a1d6dabcd9a38d3ca"
+-SRC_URI[archive.sha256sum] = "ad3e9a8bd9525d66fadc7fa53ef99e0632aa8cca8fd5bc27483956261153b373"
+-
+-S = "${WORKDIR}/DeviceKit-power-${PV}"
+-
+-inherit autotools pkgconfig
+-
+-EXTRA_OECONF = " --with-backend=linux"
+-
+-do_configure_prepend() {
+-    sed -i -e s:-nonet:\:g ${S}/doc/man/Makefile.am
+-    sed -i -e 's: doc : :g' ${S}/Makefile.am
+-}    
+-
+-FILES_${PN} += "${datadir}/dbus-1/ \
+-                ${datadir}/polkit-1/ \
+-                ${base_libdir}/udev/* \
+-"
+-
+-FILES_${PN}-dbg += "${base_libdir}/udev/.debug"
+-
+-
+-
 -- 
 1.9.1
 
