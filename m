@@ -1,25 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C13D771E7
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0018F771DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Aug 2016 01:42:50 +0000 (UTC)
+	Tue,  9 Aug 2016 01:42:51 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u791go1d029130
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Mon, 8 Aug 2016 18:42:50 -0700
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u791gq8J029398
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 8 Aug 2016 18:42:52 -0700 (PDT)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Mon, 8 Aug 2016 18:42:49 -0700
+	Mon, 8 Aug 2016 18:42:51 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 8 Aug 2016 21:42:41 -0400
-Message-ID: <e2fd6ebf3f0aba8f0b02c2b6202ee9f228845e05.1470706569.git.hongxu.jia@windriver.com>
+Date: Mon, 8 Aug 2016 21:42:42 -0400
+Message-ID: <fcedfe11ab428ce82b38e0c7472278a66e696618.1470706569.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.8.1
 In-Reply-To: <cover.1470706568.git.hongxu.jia@windriver.com>
 References: <cover.1470706568.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 3/4] ttf-lohit: add version 2 to support Indian languages
+Subject: [PATCH 4/4] ttf-lklug: add version 0.6-14.20090803cvs.fc24 to support Sinhala language
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,62 +32,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Aug 2016 01:42:50 -0000
+X-List-Received-Date: Tue, 09 Aug 2016 01:42:52 -0000
 Content-Type: text/plain
-
-The font family supports 21 Indian languages: Assamese, Bengali,
-Devanagari (Hindi, Kashmiri, Konkani, Maithili, Marathi, Nepali,
-Sindhi, Santali, Bodo, Dogri), Gujarati, Kannada, Malayalam,
-Manipuri, Oriya, Punjabi, Tamil, and Telugu.
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-oe/conf/layer.conf                           |  1 +
- meta-oe/recipes-graphics/ttf-fonts/ttf-lohit_2.bb | 23 +++++++++++++++++++++++
- 2 files changed, 24 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-lohit_2.bb
+ meta-oe/conf/layer.conf                            |  1 +
+ .../ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb | 24 ++++++++++++++++++++++
+ 2 files changed, 25 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb
 
 diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index 71ee2fb..edcafdf 100644
+index edcafdf..eba8ccd 100644
 --- a/meta-oe/conf/layer.conf
 +++ b/meta-oe/conf/layer.conf
 @@ -59,6 +59,7 @@ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
    ttf-inconsolata->fontconfig \
    ttf-liberation->fontconfig \
    ttf-liberation-sans-narrow->fontconfig \
-+  ttf-lohit->fontconfig \
++  ttf-lklug->fontconfig \
+   ttf-lohit->fontconfig \
    ttf-pt-sans->fontconfig \
    ttf-mplus->fontconfig \
-   ttf-sazanami->fontconfig \
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-lohit_2.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-lohit_2.bb
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb
 new file mode 100644
-index 0000000..f9679d6
+index 0000000..fd235bd
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-lohit_2.bb
-@@ -0,0 +1,23 @@
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-lklug_0.6-14.20090803cvs.fc24.bb
+@@ -0,0 +1,24 @@
 +require ttf.inc
 +
-+SUMMARY = "The project goal is to improve existing offerings of the fonts \
-+- making sure the Lohit fonts deliver the best available quality and functions \
-+to the community."
-+HOMEPAGE = "https://fedorahosted.org/lohit"
-+LICENSE = "OFL-1.1"
-+LIC_FILES_CHKSUM = "file://OFL.txt;md5=7dfa0a236dc535ad2d2548e6170c4402"
++SUMMARY = "Fonts for Sinhala language - TTF Edition"
++HOMEPAGE = "http://rpms.famillecollet.com/rpmphp/zoom.php?rpm=lklug-fonts"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 +
-+SRCREV = "d678f1b1807ea5602586279e90b5db6d62ed475e"
-+SRC_URI = "git://github.com/pravins/lohit.git;branch=master"
++SRC_URI = "http://dl.fedoraproject.org/pub/fedora/linux/development/25/Everything/source/tree/Packages/l/lklug-fonts-0.6-14.20090803cvs.fc24.src.rpm;extract=lklug-20090803.tar.gz"
++SRC_URI[md5sum] = "3341dfb997043d234ab3f6e5a965e759"
++SRC_URI[sha256sum] = "f54c1f3b4df08995982657fed290b562556191fee2a0386afd9e8bf228f72b1a"
 +
 +DEPENDS = "fontforge-native"
-+S = "${WORKDIR}/git"
++
++S = "${WORKDIR}"
 +FONT_PACKAGES = "${PN}"
 +FILES_${PN} = "${datadir}"
 +
-+inherit pythonnative
-+
 +do_compile() {
-+    cd ${S}; make ttf;
++    fontforge ${S}/convert.ff lklug
 +}
 +
++do_install() {
++    make install DESTDIR=${D}
++}
 -- 
 2.8.1
 
