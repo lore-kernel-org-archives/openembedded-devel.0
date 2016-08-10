@@ -1,45 +1,44 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 66B8C771E9
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C11F771DB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Aug 2016 11:14:27 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id i5so8865650wmg.2
+	Wed, 10 Aug 2016 11:14:44 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id q128so8864124wma.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Aug 2016 04:14:29 -0700 (PDT)
+	Wed, 10 Aug 2016 04:14:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=LLlDqPlfrLWwSSGFRroZqqwyj0bGNHNFGXyo904m34o=;
-	b=qMrpd2N4NSIZXVzPi1To1E84d0OPp+h0jvv+2vRMjT2OSvRCjHUaJJRH8v7UpKGYc4
-	vTwZf639baaZF/oqS12kYdfzqbqNkR6/PSCppQEh7CiJMYfKUqjzdUpRyFgizUgZhQ6P
-	5uZfbuY28EfMchGDXUl04j/6yQ5UI9M6BsrUkwXTOlWbGgv3HdW7yvz2fwX5zUCe5d/9
-	w8/F6Rung36L2kuppZVt0al31nPFPxmZY88UTOT9cahZPqjPT29wOUiqb1hZHniLDWy2
-	HVnULqucQ+/hymSvM0s2vTXCwoXsLUa6PZqx/Jf+qd885kpLk+dA0mcGeAHyPnmaled4
-	xKzA==
+	bh=KMuF7bT+bC0Vw+/e924w7WxRK9w0JzT13P8D6anM+5k=;
+	b=AIEXLNhVFxIdFbUv3aTdD0G3fNSKFgkvUXOpW69Yx0DZW2uiAM0+QtRYp5z+XRN4Pe
+	kSglXXGzRjvsUxyuhg3y5Qb5fT39oWFyClpDclstZnsOT6xVOkl0/53El2eph/fD6pmD
+	zfLTCv6B3w5OFDE61T2Jt7HLcFn8JTktkRDl949uWfGpCg2/Q704FllGUvpK5+FaPP1h
+	Tz5LR9scvJXzl6mSscXSkT5/9dKyeblAUD8TXAcJwGwYUZIYHqmqtbptm/KoaeDPuaKr
+	02PZBRcqBBQRnx7a57s3HprtieoVO5rwscwsKMGyUA0fCYEOkEfZE0V1SuDDJ9l4X8NM
+	BHQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=LLlDqPlfrLWwSSGFRroZqqwyj0bGNHNFGXyo904m34o=;
-	b=gcGNnkZcW8KmAvT4aI7iKFbsOPMmqSHpnxOKpGvFjWpOORhJIQWrejBQii48ZaWLFs
-	l8npo6L86oV/fEfR/S4G6NENF7s9HDLO1Ix+SyZrkB54pf5VKL6QrcZqfQYRC3N1pQ7Y
-	wQ4hoeKZcplKjyDZscANv+9X7rzNOWbTHA6jW8ig/yTzskLRq+KSg0Kfc2FXo9SxOo11
-	YRTSZuu3uV2TwMjHg2/r77rPl1z6fS2+YaXWLB3KO51dgMMNyR91BRFf1Nw+s+AvfCeM
-	CLtxfL9ayXKOYWSf8P2zxMPg9Lm+GaJXYkixe15s0iTRmTU5STp+H+ovfi2T0J38AQQN
-	m9Lw==
-X-Gm-Message-State: AEkoouvxykwb53JlPD6m7M3YIHmAvoTVf2kGzcmbe1wFh7Jg1CHNwqyseLPmM11fyizUwg==
-X-Received: by 10.46.71.144 with SMTP id u138mr567699lja.20.1470827668223;
-	Wed, 10 Aug 2016 04:14:28 -0700 (PDT)
+	bh=KMuF7bT+bC0Vw+/e924w7WxRK9w0JzT13P8D6anM+5k=;
+	b=XJGwwCfJy/L+32Z7MPTZH3ITRHGMgzMxUh7eENddqfKb7NzgZ75CXbjezPZYPNUnRx
+	HhwBan/aa6V0YWuNq9jIln5EjUpWcUH0aJQ9kJO5c2YWP+4YsomiXt4kmrZFn5be5v11
+	S6bwimAB2e+XvNNlnXo2WaD7oiRh7HF4bEKuVKirsrghqCCSL5cnLyrgShVfZOb1JwrS
+	Dek5tahdgo6BMi2UDjgVkmqD3KZicwpWDQpDxRXFfuSg6R5CahogDvfjJpcDV5KCHCzg
+	QgSk3oeO1bH3wEcPctXp9QXmC03VIaDA7fHMEgc2qIAVTVSFwF+LhMv/GDGh+rgYToLk
+	mX3A==
+X-Gm-Message-State: AEkoouvIjgFIF7xRDcmk8O+XTH3aOnIIUM15FMKSTaApThtuDG4PVEmB2DpDZJLhXcs0Jw==
+X-Received: by 10.25.157.19 with SMTP id g19mr620148lfe.216.1470827683406;
+	Wed, 10 Aug 2016 04:14:43 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id
-	o10sm7393650lfo.47.2016.08.10.04.14.26
+	by smtp.gmail.com with ESMTPSA id g3sm7548638lfe.14.2016.08.10.04.14.42
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 10 Aug 2016 04:14:26 -0700 (PDT)
+	Wed, 10 Aug 2016 04:14:42 -0700 (PDT)
 From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Aug 2016 13:14:24 +0200
-Message-Id: <1470827664-19568-1-git-send-email-ricardo.ribalda@gmail.com>
+Date: Wed, 10 Aug 2016 13:14:37 +0200
+Message-Id: <1470827677-19644-1-git-send-email-ricardo.ribalda@gmail.com>
 X-Mailer: git-send-email 2.8.1
-Subject: [meta-oe][PATCH] imagemagick: Add missing dependency
+Subject: [meta-oe][PATCH] glog: Add missing dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,30 +51,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Aug 2016 11:14:30 -0000
+X-List-Received-Date: Wed, 10 Aug 2016 11:14:44 -0000
 
-graphviz is an optional library, but I did not find the correspondent
-with/without configure option. Instead I think that it is safer to add
-is as a DEPEND.
+Fixes:
+
+WARNING: glog-0.3.3-r0 do_package_qa: QA Issue:
+/usr/lib/libglog.so.0.0.0 contained in package glog requires
+libgflags.so.2()(64bit), but no providers found in RDEPENDS_glog?
+[file-rdeps]
 
 Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 ---
- meta-oe/recipes-support/imagemagick/imagemagick_6.9.2.bb | 2 +-
+ meta-oe/recipes-support/glog/glog.inc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.9.2.bb b/meta-oe/recipes-support/imagemagick/imagemagick_6.9.2.bb
-index a9f01344a9ff..3dc48ad425c6 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_6.9.2.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_6.9.2.bb
-@@ -3,7 +3,7 @@ SECTION = "console/utils"
- LICENSE = "ImageMagick"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0887b670be7ef0c3cb37092b64d57514"
- # FIXME: There are many more checked libraries. All should be added or explicitly disabled to get consistent results.
--DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freetype"
-+DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freetype graphviz"
+diff --git a/meta-oe/recipes-support/glog/glog.inc b/meta-oe/recipes-support/glog/glog.inc
+index 8a1fb4250bbb..503904164312 100644
+--- a/meta-oe/recipes-support/glog/glog.inc
++++ b/meta-oe/recipes-support/glog/glog.inc
+@@ -6,6 +6,6 @@ HOMEPAGE = "https://code.google.com/p/google-glog/"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=dc9db360e0bbd4e46672f3fd91dd6c4b"
  
- # Important note: tarballs for all patchsets within a version are deleted when
- # a new pachset is created. To avoid multiple patches for each patchset, try to
+-DEPENDS = "libunwind"
++DEPENDS = "libunwind gflags"
+ 
+ inherit autotools pkgconfig
 -- 
 2.8.1
 
