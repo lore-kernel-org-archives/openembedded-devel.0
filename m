@@ -1,36 +1,44 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id BAAA6771D2
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DC8E771CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Aug 2016 19:32:41 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id x67so4185335qke.1
+	Wed, 10 Aug 2016 19:59:20 +0000 (UTC)
+Received: by mail-wm0-f47.google.com with SMTP id i5so127198970wmg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Aug 2016 12:32:42 -0700 (PDT)
+	Wed, 10 Aug 2016 12:59:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=/OTiJflgt/HJzRGSeehoH4uWb6ZWI9Nt8ZeSS1FuzqI=;
+	b=GUPf9z+jwJp5c6bDrXumMqd5ziSKzxxzpDSn3II82u4a8cOZk2mLJiFO0li/iJIM2M
+	L/rpKcDksszXb9y5NRvVfImvYB7pv7+WLeM9A66onvAHATaQZi//z9tkd1KWQl492klz
+	opKj2HKDOqUsdkaMWcZhUNoWmgAfrXFbYopwDTuGH354qIQPVWsRmqThWDIuj4NNWLuV
+	5TfqFsc8LSXlssFRu1H1hiqzO5NBHmmWSx3YOA8Jjk2TnbEygkDdwZq9TALkQUh/mJr9
+	lQ0ggJJ0E7Hpj88ggbAVsPE8TZfU/TwBb3TuHGy4Oma5lCU+tHqDJK+lXyeeOpO4VvMG
+	4dmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=57KU0B+EtDdciEMwFE0E2k6/oX/4o+skasj3BJzpfkE=;
-	b=P4u4IKA62HqTv31TdRPTXVoBNhp8fxfndgeZNscZWki6+TcEcdYgZCu7KJWZlAZ4CS
-	crViSOuVNH/pV9S31e7eAf+dO3JJMkoZ2uayHHuvTLVjRmdsm6ui8SRz8C6/oJmXyz1L
-	urqJ3BOGmcATFhE67XKKri6zTYARe0QdqsjENUjROYf8xj7TExMTVLaOl0ZGwMpldQ8i
-	YDjgZ3q+HXLT3WlqBx+gMzF05dh7FskbuS5bBTWgIgQ0KIZzXpO/Bh7LAdbD2MA7wxJ2
-	Aac4qvqcboPp1vHfoSaipGc5qxqS6cKDjzpEpxHmK05sDyaEL9Ng46U7sjE7CZ0h6yiF
-	s2Sw==
-X-Gm-Message-State: AEkoousWADfRRGSsrdScmByVKNxzSL+11voi0pmNCxyTRTw6RT+/RDf+bEXAUO1JdQdKFw==
-X-Received: by 10.55.100.21 with SMTP id y21mr6271689qkb.281.1470857561894;
-	Wed, 10 Aug 2016 12:32:41 -0700 (PDT)
-Received: from localhost.localdomain ([96.91.222.230])
-	by smtp.gmail.com with ESMTPSA id
-	g29sm24107544qtg.12.2016.08.10.12.32.41
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 10 Aug 2016 12:32:41 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Aug 2016 15:32:31 -0400
-Message-Id: <1470857551-20244-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] python-pygobject: update to version 3.20.1
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=/OTiJflgt/HJzRGSeehoH4uWb6ZWI9Nt8ZeSS1FuzqI=;
+	b=PDfZUUAz+h7F4WnwbR3KcPyDy1nX9wGjj8gBHiiBDU4yRtR0xfKXu3ILXncHrJyeiZ
+	ci9Ub/8bMvTnSXV1HLDcK7BOvDndkrFhc0SW4OXviikMfrihAUNPTlEklbelr6AoE8kS
+	HdHnvEWkS3VXJNvsUYVAvD+sDMRdSajR9VugzgvuLpq+5+C9Mnx2DpVKjc7B2RHfw27e
+	zN5HGfpnPZHy9YAA+P1J67pfojJWuMVQkpgOJvPfSP8cJ/5+h0SuMemZcSAvNp+RxYYJ
+	B68cLRUeGjIHJOyBt9neukNsCFHIys7snRaD5FlXf7ET0o/EvZCFDsE8XQXL05O3yitV
+	RG3g==
+X-Gm-Message-State: AEkoouuab22P7N5jE5/kTPwyhpZoNIYRJmDm02ijbg2PcnyP7JYco1ihNHCki8DEAKL1nprl2NwvhCDMhub8CA==
+X-Received: by 10.25.21.16 with SMTP id l16mr937830lfi.229.1470859160919; Wed,
+	10 Aug 2016 12:59:20 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.25.87.12 with HTTP; Wed, 10 Aug 2016 12:59:20 -0700 (PDT)
+In-Reply-To: <1470827677-19644-1-git-send-email-ricardo.ribalda@gmail.com>
+References: <1470827677-19644-1-git-send-email-ricardo.ribalda@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 10 Aug 2016 21:59:20 +0200
+Message-ID: <CA+chaQdBBR9fys5njeqfsPSz9KoykhBDJT21sm0thtdoMKDZTg@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH] glog: Add missing dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,33 +51,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Aug 2016 19:32:42 -0000
+X-List-Received-Date: Wed, 10 Aug 2016 19:59:23 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../python/{python-pygobject_3.18.2.bb => python-pygobject_3.20.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/python/{python-pygobject_3.18.2.bb => python-pygobject_3.20.1.bb} (86%)
+Which layer provides gflags?
 
-diff --git a/meta-oe/recipes-devtools/python/python-pygobject_3.18.2.bb b/meta-oe/recipes-devtools/python/python-pygobject_3.20.1.bb
-similarity index 86%
-rename from meta-oe/recipes-devtools/python/python-pygobject_3.18.2.bb
-rename to meta-oe/recipes-devtools/python/python-pygobject_3.20.1.bb
-index 52ef425..77416d4 100644
---- a/meta-oe/recipes-devtools/python/python-pygobject_3.18.2.bb
-+++ b/meta-oe/recipes-devtools/python/python-pygobject_3.20.1.bb
-@@ -16,8 +16,8 @@ SRC_URI = " \
-     file://0001-configure.ac-add-sysroot-path-to-GI_DATADIR-don-t-se.patch \
- "
- 
--SRC_URI[md5sum] = "0a956f3e785e23b0f136832f2e57a862"
--SRC_URI[sha256sum] = "2a3cad1517916b74e131e6002c3824361aee0671ffb0d55ded119477fc1c2c5f"
-+SRC_URI[md5sum] = "4354c6283b135f859563b72457f6a321"
-+SRC_URI[sha256sum] = "3d261005d6fed6a92ac4c25f283792552f7dad865d1b7e0c03c2b84c04dbd745"
- 
- S = "${WORKDIR}/${SRCNAME}-${PV}"
- 
--- 
-1.9.1
+You'll probably need to add PACKAGECONFIG for it and let it disabled by
+default, because there isn't gflags in meta-oe.
 
+On Wed, Aug 10, 2016 at 1:14 PM, Ricardo Ribalda Delgado <
+ricardo.ribalda@gmail.com> wrote:
+
+> Fixes:
+>
+> WARNING: glog-0.3.3-r0 do_package_qa: QA Issue:
+> /usr/lib/libglog.so.0.0.0 contained in package glog requires
+> libgflags.so.2()(64bit), but no providers found in RDEPENDS_glog?
+> [file-rdeps]
+>
+> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+> ---
+>  meta-oe/recipes-support/glog/glog.inc | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-support/glog/glog.inc
+> b/meta-oe/recipes-support/glog/glog.inc
+> index 8a1fb4250bbb..503904164312 100644
+> --- a/meta-oe/recipes-support/glog/glog.inc
+> +++ b/meta-oe/recipes-support/glog/glog.inc
+> @@ -6,6 +6,6 @@ HOMEPAGE = "https://code.google.com/p/google-glog/"
+>  LICENSE = "BSD"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=dc9db360e0bbd4e46672f3fd91dd6c4b"
+>
+> -DEPENDS = "libunwind"
+> +DEPENDS = "libunwind gflags"
+>
+>  inherit autotools pkgconfig
+> --
+> 2.8.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
