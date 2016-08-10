@@ -1,36 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 19C0773190
+Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
+	[209.85.220.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 33DC3771DB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Aug 2016 00:39:06 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id x67so2302300qke.1
+	Wed, 10 Aug 2016 00:39:07 +0000 (UTC)
+Received: by mail-qk0-f193.google.com with SMTP id o1so2303069qkd.2
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 09 Aug 2016 17:39:08 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=VN58quUDoKFbEK/GllObsjEowW4X2KhkfjXOsT/Rqk4=;
-	b=GyJrV8RF3/eVTr4A2PJk8wE4EBktOZMgHyLUR67LZGIvbv/lGsRcfkU0meINycwqjZ
-	hVEiW7Ul/qq/2xRwfCyde1bjzBnvmKkId2vRrHs1x+TIrZ9iXtNUInk/5V0WBql4WYvs
-	w0l9oikWon4ZN9gPLG5C0+F3+k5Ev30tUPAaGGsUirzLppc+wRhMdmRpN3eRgWCHmBP/
-	qyRhwR/qaAH81U9X7KE1l6YKl2RxQDuSgUSLpA67DW9/cLHZ8lguErRN45kgGYlNNZwn
-	AwKNes40dcd3eE/5qSopxEeT2wYs4JWTX71CLbECFfBYJQepZhRX0nfYaKwjvgs5QGMN
-	JI8w==
-X-Gm-Message-State: AEkooutClVGFCrUDIm1r9X1SkLi1OYnabfDogqqJSA5SoHqUrZuooISEDDrHTzzWquQf3A==
-X-Received: by 10.55.162.67 with SMTP id l64mr1492176qke.14.1470789547525;
-	Tue, 09 Aug 2016 17:39:07 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=RBBaYLmQQE2Dzu5j+w8ddBrjUM5N5N4kRj+tZvBQQGc=;
+	b=H4eSIGEMEq+G1sCgwid0/I4kIpr7x71hvKHNJgrwlm11DbYQLwGDMJuIKLwvtJDutv
+	Iqc2GIP0lRajw087iU5dmTCN19P4ITOpn7JmuazhYKE+C2WEu04HrrAXqsXDAksG3CTm
+	Sx8bYvnqiqy66/dnWTCTDaQTsAWPDO0Pv4xhbAlcO3C+Lbm5rQUx8KhBIBEMkrBEP+uX
+	iXAUVsiZvb7JxepvPeSAzhv9GGB+jBhxsFEhXZomTvztBR/uIOkOmWtWGoXaTkFkq4tt
+	wfMrv77FFqBVEBCDLdpPowf6BovAiZzKB2u8vub71yTFjTYHehUlvZGB/V/jL8xwzFUb
+	6KnA==
+X-Gm-Message-State: AEkooutMe5LecKAk4Lw9nlzGzuSpwbbWZjGnxFRLPmlA6LvOJcMTGQbAj1Mmkf7IIm3fvw==
+X-Received: by 10.55.195.139 with SMTP id r11mr1415935qkl.113.1470789548194;
+	Tue, 09 Aug 2016 17:39:08 -0700 (PDT)
 Received: from lnx-desktop.star.lab (c-73-172-178-168.hsd1.md.comcast.net.
 	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	o131sm4898084qke.20.2016.08.09.17.39.06
+	o131sm4898084qke.20.2016.08.09.17.39.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 09 Aug 2016 17:39:06 -0700 (PDT)
+	Tue, 09 Aug 2016 17:39:07 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Aug 2016 20:38:52 -0400
-Message-Id: <1470789534-602-1-git-send-email-derek@asterius.io>
+Date: Tue,  9 Aug 2016 20:38:53 -0400
+Message-Id: <1470789534-602-2-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH 1/3] engine-pkcs11: update to version 0.2.2
+In-Reply-To: <1470789534-602-1-git-send-email-derek@asterius.io>
+References: <1470789534-602-1-git-send-email-derek@asterius.io>
+Subject: [meta-oe][PATCH 2/3] libp11: update to version 0.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,45 +50,33 @@ X-List-Received-Date: Wed, 10 Aug 2016 00:39:08 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../{engine-pkcs11_0.2.0.bb => engine-pkcs11_0.2.2.bb}       | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-support/engine-pkcs11/{engine-pkcs11_0.2.0.bb => engine-pkcs11_0.2.2.bb} (72%)
+ meta-oe/recipes-support/libp11/{libp11_0.3.0.bb => libp11_0.4.0.bb} | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libp11/{libp11_0.3.0.bb => libp11_0.4.0.bb} (81%)
 
-diff --git a/meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.0.bb b/meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.2.bb
-similarity index 72%
-rename from meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.0.bb
-rename to meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.2.bb
-index f2a2258..c391c4f 100644
---- a/meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.0.bb
-+++ b/meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.2.bb
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://src/engine_pkcs11.h;startline=1;endline=26;md5=973a19
- DEPENDS = "openssl libp11"
+diff --git a/meta-oe/recipes-support/libp11/libp11_0.3.0.bb b/meta-oe/recipes-support/libp11/libp11_0.4.0.bb
+similarity index 81%
+rename from meta-oe/recipes-support/libp11/libp11_0.3.0.bb
+rename to meta-oe/recipes-support/libp11/libp11_0.4.0.bb
+index d97bfc6..a7e43be 100644
+--- a/meta-oe/recipes-support/libp11/libp11_0.3.0.bb
++++ b/meta-oe/recipes-support/libp11/libp11_0.4.0.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fad9b3332be894bab9bc501572864b29"
+ DEPENDS = "libtool openssl"
  
- SRC_URI = "git://github.com/OpenSC/engine_pkcs11.git;protocol=http"
--SRCREV = "6909d6761c8820e1750fa0bf4fa8532c82f34e35"
-+SRCREV = "132fcf2c8b319f9f4b2ebdc8dcb54ff496dc0519"
+ SRC_URI = "git://github.com/OpenSC/libp11.git;protocol=http"
+-SRCREV = "6f71240991aa831f6fc2cc5431faf6ebec627ed2"
++SRCREV = "22de793340ab73cafc92f8238afb51a06d8411c3"
  
  S = "${WORKDIR}/git"
  
-@@ -18,12 +18,14 @@ inherit autotools pkgconfig
- 
- EXTRA_OECONF = "\
-     --disable-static \
--    --libdir ${libdir}/openssl \
-+    --libdir ${libdir}/engines \
- "
- 
- do_install_append () {
--    rm -f ${D}${libdir}/openssl/engines/libpkcs11.la
-+    rm -f ${D}${libdir}/engines/libpkcs11.la
+@@ -21,3 +21,6 @@ do_install_append () {
+     rm -rf ${D}${libdir}/*.la
+     rm -rf ${D}${docdir}/${BPN}
  }
- 
--FILES_${PN} += "${libdir}/openssl/engines/libpkcs11.so*"
--FILES_${PN}-dbg += "${libdir}/openssl/engines/.debug/*"
-+FILES_${PN} += "${libdir}/engines/libpkcs11.so*"
-+FILES_${PN}-dbg += "${libdir}/engines/.debug/*"
 +
-+RDEPENDS_${PN} += "openssl libp11 opensc"
++FILES_${PN} += "${libdir}/pkcs11.so.0*"
++FILES_${PN}-dev += "${libdir}/pkcs11.so"
 -- 
 1.9.1
 
