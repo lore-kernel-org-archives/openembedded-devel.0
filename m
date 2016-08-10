@@ -1,39 +1,36 @@
-Return-Path: <prvs=00301c56f3=michael.davis@essvote.com>
-Received: from mail1.essvote.com (mail1.essvote.com [66.37.226.19])
-	by mail.openembedded.org (Postfix) with ESMTP id 05AC8771CC
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
+	[209.85.220.193])
+	by mail.openembedded.org (Postfix) with ESMTP id BAAA6771D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Aug 2016 19:32:10 +0000 (UTC)
-X-AuditID: 0a000213-f79d76d0000013de-a5-57ab813772fa
-Received: from ESS-EX01.essvote.corp.local (Unknown_Domain [172.16.110.40])
-	by mail1.essvote.com (Symantec Messaging Gateway) with SMTP id
-	0F.0B.05086.8318BA75; Wed, 10 Aug 2016 14:32:08 -0500 (CDT)
-Received: from ESS-EX01.essvote.corp.local ([::1]) by
-	ESS-EX01.essvote.corp.local ([::1]) with mapi id 14.03.0301.000;
-	Wed, 10 Aug 2016 14:32:07 -0500
-From: "Davis, Michael" <michael.davis@essvote.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-oe][PATCH] pcsc-lite: Seperate GPLV3 portions from BSD
-Thread-Index: AQHR8z3hQUMsTlUi3kST4/5fQwFJIA==
-Date: Wed, 10 Aug 2016 19:32:07 +0000
-Message-ID: <1470857496-24658-1-git-send-email-michael.davis@essvote.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.8.93]
-MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrMLMWRmVeSWpSXmKPExsWyRiBPQ9eicXW4wYLtEhYXDy9ldmD0OLdx
-	BWMAYxS3TVJiSVlwZnqevl0Cd8blp68YC97zVKy4V9LA2MndxcjJISFgInFryx8WCFtM4sK9
-	9WxdjFwcQgInGCXe9/SxQzizGCUuTTsOVsUmYCRx7vomRhBbRCBWYt6mmUwgNrOAgcS7zRtZ
-	QWxhAVeJ+X+XMEHUeElcO/SfGcLWk/iwo5UdxGYRUJWY/+Y6WJxXwFPiyZNmsPmMQFd8P7UG
-	aqa4xK0n85kgrhOQWLLnPDOELSrx8vE/VghbVuLbjiksEPV6EjemTmGDsLUlli18DTVfUOLk
-	zCcsExhFZiEZOwtJyywkLbOQtCxgZFnFKJibmJljqJdaXFyWX5Kql5yfu4kRGPRcDEzCOxjn
-	TLE9xCjAwajEwxvgsipciDWxrLgy9xCjNAeLkjivipBSuJBAemJJanZqakFqUXxRaU5q8SFG
-	Jg7OQ4wSHFxSIsWpeSmpRYmlJRnxoNiKLwZGl1QDI4fbY96j3eFTs1YIMWvOmaqfdfDRQgfh
-	KrHm2xMO+RgpZD4+wef2QSNAYoFB1JTklSpN1RVhyyddeLHme1HOv/w4a+PsV685y5b51L7K
-	mC8cMc3hs9nrDOM3P/+X8LHsOOjv8/TUY5NpGby+J2ZnRxYdUvBe9NxDqMXpbOauh2czUoNm
-	9y41U2Ipzkg01GIuKk4EAHKiXgF2AgAA
-Subject: [meta-oe][PATCH] pcsc-lite: Seperate GPLV3 portions from BSD
+	Wed, 10 Aug 2016 19:32:41 +0000 (UTC)
+Received: by mail-qk0-f193.google.com with SMTP id x67so4185335qke.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Aug 2016 12:32:42 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=57KU0B+EtDdciEMwFE0E2k6/oX/4o+skasj3BJzpfkE=;
+	b=P4u4IKA62HqTv31TdRPTXVoBNhp8fxfndgeZNscZWki6+TcEcdYgZCu7KJWZlAZ4CS
+	crViSOuVNH/pV9S31e7eAf+dO3JJMkoZ2uayHHuvTLVjRmdsm6ui8SRz8C6/oJmXyz1L
+	urqJ3BOGmcATFhE67XKKri6zTYARe0QdqsjENUjROYf8xj7TExMTVLaOl0ZGwMpldQ8i
+	YDjgZ3q+HXLT3WlqBx+gMzF05dh7FskbuS5bBTWgIgQ0KIZzXpO/Bh7LAdbD2MA7wxJ2
+	Aac4qvqcboPp1vHfoSaipGc5qxqS6cKDjzpEpxHmK05sDyaEL9Ng46U7sjE7CZ0h6yiF
+	s2Sw==
+X-Gm-Message-State: AEkoousWADfRRGSsrdScmByVKNxzSL+11voi0pmNCxyTRTw6RT+/RDf+bEXAUO1JdQdKFw==
+X-Received: by 10.55.100.21 with SMTP id y21mr6271689qkb.281.1470857561894;
+	Wed, 10 Aug 2016 12:32:41 -0700 (PDT)
+Received: from localhost.localdomain ([96.91.222.230])
+	by smtp.gmail.com with ESMTPSA id
+	g29sm24107544qtg.12.2016.08.10.12.32.41
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 10 Aug 2016 12:32:41 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 10 Aug 2016 15:32:31 -0400
+Message-Id: <1470857551-20244-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] python-pygobject: update to version 3.20.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,55 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Aug 2016 19:32:12 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 10 Aug 2016 19:32:42 -0000
 
-GPLV3 and BSD portions were originally placed in the same package.
-The GPLv3 portion has been seperated into pcsc-lite-spy so the package can =
-be used with GPLv3 blacklisted.
-
-Signed-off-by: Michael Davis <michael.davis@essvote.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ .../python/{python-pygobject_3.18.2.bb => python-pygobject_3.20.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/python/{python-pygobject_3.18.2.bb => python-pygobject_3.20.1.bb} (86%)
 
-diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb b/meta-o=
-e/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
-index cc72549..e1d405b 100644
---- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
-+++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
-@@ -1,6 +1,7 @@
- SUMMARY =3D "PC/SC Lite smart card framework and applications"
- HOMEPAGE =3D "http://pcsclite.alioth.debian.org/"
--LICENSE =3D "BSD & GPLv3+"
-+LICENSE =3D "BSD"=20
-+LICENSE_${PN}-spy =3D "GPLv3+"
- LICENSE_${PN}-dev =3D "GPLv3+"
- LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dbcfbd85230ac3c586fb294c8b627cf3=
-2"
- DEPENDS =3D "udev"
-@@ -20,14 +21,16 @@ EXTRA_OECONF =3D " \
-=20
- S =3D "${WORKDIR}/pcsc-lite-${PV}"
-=20
--PACKAGES =3D+ "${PN}-lib"
-+PACKAGES =3D+ "${PN}-lib ${PN}-spy"
-=20
- RRECOMMENDS_${PN} =3D "ccid"
-=20
--FILES_${PN}-lib =3D "${libdir}/lib*${SOLIBS}"
-+FILES_${PN}-spy +=3D "${bindir}/pcsc-spy \
-+                    ${libdir}/libpcscspy*${SOLIBS}"
-+FILES_${PN}-lib =3D "${libdir}/libpcsclite*${SOLIBS}"
-=20
- RPROVIDES_${PN} +=3D "${PN}-systemd"
- RREPLACES_${PN} +=3D "${PN}-systemd"
- RCONFLICTS_${PN} +=3D "${PN}-systemd"
- SYSTEMD_SERVICE_${PN} =3D "pcscd.socket"
--RDEPENDS_${PN} +=3D"python"
-+RDEPENDS_${PN}-spy +=3D"python"
---=20
-2.5.5
+diff --git a/meta-oe/recipes-devtools/python/python-pygobject_3.18.2.bb b/meta-oe/recipes-devtools/python/python-pygobject_3.20.1.bb
+similarity index 86%
+rename from meta-oe/recipes-devtools/python/python-pygobject_3.18.2.bb
+rename to meta-oe/recipes-devtools/python/python-pygobject_3.20.1.bb
+index 52ef425..77416d4 100644
+--- a/meta-oe/recipes-devtools/python/python-pygobject_3.18.2.bb
++++ b/meta-oe/recipes-devtools/python/python-pygobject_3.20.1.bb
+@@ -16,8 +16,8 @@ SRC_URI = " \
+     file://0001-configure.ac-add-sysroot-path-to-GI_DATADIR-don-t-se.patch \
+ "
+ 
+-SRC_URI[md5sum] = "0a956f3e785e23b0f136832f2e57a862"
+-SRC_URI[sha256sum] = "2a3cad1517916b74e131e6002c3824361aee0671ffb0d55ded119477fc1c2c5f"
++SRC_URI[md5sum] = "4354c6283b135f859563b72457f6a321"
++SRC_URI[sha256sum] = "3d261005d6fed6a92ac4c25f283792552f7dad865d1b7e0c03c2b84c04dbd745"
+ 
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
+ 
+-- 
+1.9.1
+
 
