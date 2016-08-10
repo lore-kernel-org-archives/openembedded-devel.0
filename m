@@ -1,44 +1,47 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C11F771DB
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mgsend.net (mail4.static.mgsend.net
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id E526D77040
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Aug 2016 11:14:44 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id q128so8864124wma.1
+	Wed, 10 Aug 2016 13:32:08 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1470835928; h=Content-Type: To: Subject: Message-ID: Date:
+	From: References: In-Reply-To: MIME-Version: Sender;
+	bh=xDdKMhL1FL3vUc5CJhLMtid7uytKdZp43kdPK/W4hms=;
+	b=DdKw+wfFaZmyd9jMOhYKyHH7nq122hgsinDkOzm4rV2op+5KG6cEsjOG48wwRDYI8MDMT2qX
+	FJ6IYNxHaf0M9dL4ZohQpUdIACzXJCRFoUMhcLkNnQNGILmawy82g8yMSSK0cttO1BbN5IHL
+	7/Jr0pEfBIHIjjzGAkNFvhQoHb8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
+	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
+	Message-ID: Subject: To: Content-Type;
+	b=Rtwy1E99SFtVutSJLBgYOaWNEEW7E0ydIxJPEPFkCcPV+Q7sc1wtLd/GqXn5ql3bwtKOan
+	E1VrlGBJ5xepHCWuNGq+7DqO23CGLvXLYvawkogDv9COi/NZUYfarrZCy7wd0AF/prFQTzg5
+	4mYDbG/tqO0WV/xbyejxA9Ff8feLQ=
+Sender: derek@asterius.io
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Received: from mail-it0-f41.google.com (mail-it0-f41.google.com
+	[209.85.214.41])
+	by mxa.mailgun.org with ESMTP id 57ab2cd8.7fecf8756eb0-in07;
+	Wed, 10 Aug 2016 13:32:08 -0000 (UTC)
+Received: by mail-it0-f41.google.com with SMTP id u186so38372350ita.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Aug 2016 04:14:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=KMuF7bT+bC0Vw+/e924w7WxRK9w0JzT13P8D6anM+5k=;
-	b=AIEXLNhVFxIdFbUv3aTdD0G3fNSKFgkvUXOpW69Yx0DZW2uiAM0+QtRYp5z+XRN4Pe
-	kSglXXGzRjvsUxyuhg3y5Qb5fT39oWFyClpDclstZnsOT6xVOkl0/53El2eph/fD6pmD
-	zfLTCv6B3w5OFDE61T2Jt7HLcFn8JTktkRDl949uWfGpCg2/Q704FllGUvpK5+FaPP1h
-	Tz5LR9scvJXzl6mSscXSkT5/9dKyeblAUD8TXAcJwGwYUZIYHqmqtbptm/KoaeDPuaKr
-	02PZBRcqBBQRnx7a57s3HprtieoVO5rwscwsKMGyUA0fCYEOkEfZE0V1SuDDJ9l4X8NM
-	BHQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=KMuF7bT+bC0Vw+/e924w7WxRK9w0JzT13P8D6anM+5k=;
-	b=XJGwwCfJy/L+32Z7MPTZH3ITRHGMgzMxUh7eENddqfKb7NzgZ75CXbjezPZYPNUnRx
-	HhwBan/aa6V0YWuNq9jIln5EjUpWcUH0aJQ9kJO5c2YWP+4YsomiXt4kmrZFn5be5v11
-	S6bwimAB2e+XvNNlnXo2WaD7oiRh7HF4bEKuVKirsrghqCCSL5cnLyrgShVfZOb1JwrS
-	Dek5tahdgo6BMi2UDjgVkmqD3KZicwpWDQpDxRXFfuSg6R5CahogDvfjJpcDV5KCHCzg
-	QgSk3oeO1bH3wEcPctXp9QXmC03VIaDA7fHMEgc2qIAVTVSFwF+LhMv/GDGh+rgYToLk
-	mX3A==
-X-Gm-Message-State: AEkoouvIjgFIF7xRDcmk8O+XTH3aOnIIUM15FMKSTaApThtuDG4PVEmB2DpDZJLhXcs0Jw==
-X-Received: by 10.25.157.19 with SMTP id g19mr620148lfe.216.1470827683406;
-	Wed, 10 Aug 2016 04:14:43 -0700 (PDT)
-Received: from neopili.qtec.com
-	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id g3sm7548638lfe.14.2016.08.10.04.14.42
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 10 Aug 2016 04:14:42 -0700 (PDT)
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Aug 2016 13:14:37 +0200
-Message-Id: <1470827677-19644-1-git-send-email-ricardo.ribalda@gmail.com>
-X-Mailer: git-send-email 2.8.1
-Subject: [meta-oe][PATCH] glog: Add missing dependency
+	Wed, 10 Aug 2016 06:32:08 -0700 (PDT)
+X-Gm-Message-State: AEkoout/wNTKLl7jYiFhPPORvYytucheFYpbLSnWL0k/B5Iy/3eInjWc8oLyB2lHjndAihrb4x0XytFF4+J3kA==
+X-Received: by 10.36.26.216 with SMTP id 207mr3152691iti.96.1470835928348;
+	Wed, 10 Aug 2016 06:32:08 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.107.155.213 with HTTP; Wed, 10 Aug 2016 06:32:07 -0700 (PDT)
+In-Reply-To: <20160810074526.giu3dvpnuyz6jo22@jama>
+References: <1470789534-602-1-git-send-email-derek@asterius.io>
+	<1470789534-602-2-git-send-email-derek@asterius.io>
+	<20160810074526.giu3dvpnuyz6jo22@jama>
+From: Derek Straka <derek@asterius.io>
+Date: Wed, 10 Aug 2016 09:32:07 -0400
+X-Gmail-Original-Message-ID: <CADNbA1oa_g158axrUwT=H3_sZkpF59MdnhC-2rQb3_zuL+sH8Q@mail.gmail.com>
+Message-ID: <CADNbA1oa_g158axrUwT=H3_sZkpF59MdnhC-2rQb3_zuL+sH8Q@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH 2/3] libp11: update to version 0.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,33 +54,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Aug 2016 11:14:44 -0000
+X-List-Received-Date: Wed, 10 Aug 2016 13:32:12 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Fixes:
+Ah, excellent.  Thanks for the hint.
 
-WARNING: glog-0.3.3-r0 do_package_qa: QA Issue:
-/usr/lib/libglog.so.0.0.0 contained in package glog requires
-libgflags.so.2()(64bit), but no providers found in RDEPENDS_glog?
-[file-rdeps]
+-Derek
 
-Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
----
- meta-oe/recipes-support/glog/glog.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Wed, Aug 10, 2016 at 3:45 AM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
 
-diff --git a/meta-oe/recipes-support/glog/glog.inc b/meta-oe/recipes-support/glog/glog.inc
-index 8a1fb4250bbb..503904164312 100644
---- a/meta-oe/recipes-support/glog/glog.inc
-+++ b/meta-oe/recipes-support/glog/glog.inc
-@@ -6,6 +6,6 @@ HOMEPAGE = "https://code.google.com/p/google-glog/"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=dc9db360e0bbd4e46672f3fd91dd6c4b"
- 
--DEPENDS = "libunwind"
-+DEPENDS = "libunwind gflags"
- 
- inherit autotools pkgconfig
--- 
-2.8.1
-
+> On Tue, Aug 09, 2016 at 08:38:53PM -0400, Derek Straka wrote:
+> > Signed-off-by: Derek Straka <derek@asterius.io>
+> > ---
+> >  meta-oe/recipes-support/libp11/{libp11_0.3.0.bb => libp11_0.4.0.bb} |
+> 5 ++++-
+> >  1 file changed, 4 insertions(+), 1 deletion(-)
+> >  rename meta-oe/recipes-support/libp11/{libp11_0.3.0.bb =>
+> libp11_0.4.0.bb} (81%)
+> >
+> > diff --git a/meta-oe/recipes-support/libp11/libp11_0.3.0.bb
+> b/meta-oe/recipes-support/libp11/libp11_0.4.0.bb
+> > similarity index 81%
+> > rename from meta-oe/recipes-support/libp11/libp11_0.3.0.bb
+> > rename to meta-oe/recipes-support/libp11/libp11_0.4.0.bb
+> > index d97bfc6..a7e43be 100644
+> > --- a/meta-oe/recipes-support/libp11/libp11_0.3.0.bb
+> > +++ b/meta-oe/recipes-support/libp11/libp11_0.4.0.bb
+> > @@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=
+> fad9b3332be894bab9bc501572864b29"
+> >  DEPENDS = "libtool openssl"
+> >
+> >  SRC_URI = "git://github.com/OpenSC/libp11.git;protocol=http"
+> > -SRCREV = "6f71240991aa831f6fc2cc5431faf6ebec627ed2"
+> > +SRCREV = "22de793340ab73cafc92f8238afb51a06d8411c3"
+> >
+> >  S = "${WORKDIR}/git"
+> >
+> > @@ -21,3 +21,6 @@ do_install_append () {
+> >      rm -rf ${D}${libdir}/*.la
+> >      rm -rf ${D}${docdir}/${BPN}
+> >  }
+> > +
+> > +FILES_${PN} += "${libdir}/pkcs11.so.0*"
+> > +FILES_${PN}-dev += "${libdir}/pkcs11.so"
+>
+> You can use following variables here:
+>
+> SOLIBS = ".so.*"
+> SOLIBS_darwin = ".dylib"
+>
+> SOLIBSDEV = ".so"
+> # Due to the ordering of PACKAGES and the naming of the dev symlinks on
+> # darwin,
+> # we can't make the symlinks end up in the -dev packages easily at this
+> # point. This hack
+> # at least means builds aren't completely broken and symlinks don't take
+> # up much space.
+> SOLIBSDEV_darwin = ".dylibbroken"
+>
+> If I don't forget I'll update it when cherry-picking to master-next (if
+> you don't send v2 before that).
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
