@@ -1,41 +1,54 @@
-Return-Path: <johannes.pointner@br-automation.com>
-X-Greylist: delayed 902 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 10 Aug 2016 15:05:55 UTC
-Received: from mail2.br-automation.com (mail2.br-automation.com
-	[213.33.116.61])
-	by mail.openembedded.org (Postfix) with ESMTP id 771E774197
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Aug 2016 15:05:55 +0000 (UTC)
-X-AuditID: c0a80110-96fff700000033ed-5e-57ab3f4bb7f6
-Received: from brsmtp01.br-automation.com (Unknown_Domain [192.168.1.60])
-	by  () with SMTP id A3.1F.13293.B4F3BA75;
-	Wed, 10 Aug 2016 16:50:52 +0200 (CEST)
-From: Johannes Pointner <johannes.pointner@br-automation.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Aug 2016 16:50:37 +0200
-Message-Id: <20160810145037.27172-1-johannes.pointner@br-automation.com>
-X-Mailer: git-send-email 2.9.2
-X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Release
-	9.0.1FP5|November 22, 2015) at 10/08/2016 16:51:26,
-	Serialize by Router on BRSMTPINTERN2/InternSMTP(Release
-	9.0.1FP5|November 22, 2015) at 10/08/2016 16:51:31,
-	Serialize complete at 10/08/2016 16:51:31,
-	Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release
-	9.0.1FP5|November 22, 2015) at 10.08.2016 16:50:50,
-	Serialize by Router on BRSMTP01/Eggelsberg/AT/B&R(Release
-	9.0.1FP5|November 22, 2015) at 10.08.2016 16:50:50,
-	Serialize complete at 10.08.2016 16:50:50
-X-TNEFEvaluated: 1
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrNJMWRmVeSWpSXmKPExsVyYAWjja6v/epwg01iFhcPL2V2YPQ4t3EF
-	YwBjFJdNSmpOZllqkb5dAlfGnLavrAWbhCpO3nnO1sD4k7+LkZNDQsBEYm/bXCYQW0hgDqPE
-	y40GIDabgK3EkQlfWUBsEQFdiY8f5jKC2MwC1hLvly9gBbGFBewkdv1sArNZBFQl3rVfAqvn
-	FfCQeLF6FRvEfDmJl69/MncxcgHZG1kkNkx7xA6REJI4vfgs8wRG7gWMDKsYxXMTM3OM9JKK
-	dBNLS/JzE0sy8/P0kvNzNzFCvCiwg3H3G+1DjAIcjEo8vB+sVocLsSaWFVfmHmKU4GBWEuF1
-	swEK8aYkVlalFuXHF5XmpBYfYpTmYFES532huCRcSCA9sSQ1OzW1ILUIJsvEwSnVwOhxt7qL
-	b/Gk979PSgjOV7UI4f7dXlB0e079DheFnJYNb5vSze/M3jD5woSXL338Dpu+Oc+x4P62Hxyv
-	5HvYpjUsOi1w9UeNsfgx7x0rJi6yr5fu71fhsXfXeN39N8zT00S/Qp03/89XqeKQAIEZIvMV
-	TjwK4I0NaJtpxdxk49fLacpzjzO3SomlOCPRUIu5qDgRAPwF17DeAQAA
-Subject: [meta-qt5][PATCH] qtbase: Fix build with QT_NO_OPENGL
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id C16D574197;
+	Wed, 10 Aug 2016 15:25:57 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id o80so10244253wme.0;
+	Wed, 10 Aug 2016 08:25:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=6F80sa9l46olzkGuusT+Qd0ozR9JV5NhG2URXZhbVlY=;
+	b=sQLWgMJ2BMLkf0UVashTWKd5mQI03o7I8DPJ3RBAOO06npdflbv2pQx9EHSlRv2gYs
+	zdVyZQxHb3RTYQLCVvRYFpeWuIjTmxFeue8+rGuPwl1LOFvd+R8depYNc/c3qkZz+QNq
+	+PbhDHAV6nwVbXHhQH9Fl7vl6W6wcPn8oYVEzFiXwHpBRL40hOhzqQvCCzC0yYyZC19z
+	heO2jKf38HBStGBfc1Ffw+xqXT19O3H0v1dCbXBn/vtN0uBT7diqrWlQ8/zfu9eo4bUx
+	ngvAn7QRJLY+n1IXhfzHa/uAuMVfHoTzEjPqofdBrFvgLMrg09EhhaWLM9sx1oHC2Hzu
+	1QWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=6F80sa9l46olzkGuusT+Qd0ozR9JV5NhG2URXZhbVlY=;
+	b=AC0+LX5V3moTKi0XnOSBwigSp2rWB399wv5V7uF6E9ug5R5oCTXUCsWRnWbFO6c9+N
+	RF8sLp9HTPDTdwkxniTz60KUSS1SYJpy8EQi0Xu3jTUgzpqVsost352ZN+xc865AKfWD
+	PIvN0p0FAvEoFmHK0APy08ufwbuSmQbXZOCd/5wFR1jYzf6qlC/hgbo6nJSJVhtsOyT8
+	FYFWFhdX+rTra5mXaWK4GHQ1H9i7d0GLgRqBEceWW/T9cXy6MaHQuX4A+wTSfSRFD2A2
+	LZZzpSH+6EbQG0jssUWQrBXmLlRzDQShm3Oh5LrUwwPVxEKq7znPNXl/WvgSIhRq24yq
+	u7PQ==
+X-Gm-Message-State: AEkoousqODlt5SqGOWRo8kvt1FtoOScox7m6MXBDqZ/Sxfd5IMyCyZSd1yuCHNW6c3SDtJ6yDq5chebGpepADw==
+X-Received: by 10.25.215.82 with SMTP id o79mr714563lfg.132.1470842757775;
+	Wed, 10 Aug 2016 08:25:57 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.25.87.12 with HTTP; Wed, 10 Aug 2016 08:25:56 -0700 (PDT)
+In-Reply-To: <1470756255.8166.51.camel@linuxfoundation.org>
+References: <CC61EFE1-5F39-4848-AD71-8E9C8DEC43C8@gmail.com>
+	<1470637705.8166.29.camel@linuxfoundation.org>
+	<8C207C42-3D61-4C3F-A1DE-F305AA6617BA@gmail.com>
+	<1470644094.8166.37.camel@linuxfoundation.org>
+	<1470646210.8166.38.camel@rpsys.net>
+	<1470647765.4581.23.camel@andred.net>
+	<ACB9AEF7-A7DF-4A88-9762-7569D91AD12D@gmail.com>
+	<1470671991.8166.44.camel@linuxfoundation.org>
+	<CAJTo0LY-MVSANSLRBzBGTL2ZJ=Ga=Xijps6jwAGosLK3aE4QLg@mail.gmail.com>
+	<DC67B803-475F-4992-8DFD-B8F5FA7B1D15@gmail.com>
+	<1470756255.8166.51.camel@linuxfoundation.org>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 10 Aug 2016 17:25:56 +0200
+Message-ID: <CA+chaQcUkSHn6kkNHeo=5cDLhY3mc=Ob6zKs8EGrA2+b59FHtQ@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Yocto Discussion Mailing List <yocto@yoctoproject.org>,
+	OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [RFT] binutils 2.27
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,69 +61,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Aug 2016 15:05:58 -0000
+X-List-Received-Date: Wed, 10 Aug 2016 15:25:59 -0000
+Content-Type: text/plain; charset=UTF-8
 
-This fixes the build of qtbase without opengl support
+I'm not sure if it's caused by this binutils upgrade (because openssl in
+oe-core is also using version script, imported from debian) or some change
+in cmake/openssl, but today all recipes using cmake are failing with:
 
-Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com>
----
- .../qtbase/0013-Fix-build-with-QT_NO_OPENGL.patch  | 33 ++++++++++++++++++++++
- recipes-qt/qt5/qtbase_git.bb                       |  1 +
- 2 files changed, 34 insertions(+)
- create mode 100644 recipes-qt/qt5/qtbase/0013-Fix-build-with-QT_NO_OPENGL.patch
+| DEBUG: Executing shell function do_configure
+| cmake: sysroots/x86_64-linux/usr/bin/../lib/libcrypto.so.1.0.0: version
+`OPENSSL_1.0.0' not found (required by cmake)
+| cmake: sysroots/x86_64-linux/usr/bin/../lib/libssl.so.1.0.0: version
+`OPENSSL_1.0.1' not found (required by cmake)
+| cmake: sysroots/x86_64-linux/usr/bin/../lib/libssl.so.1.0.0: version
+`OPENSSL_1.0.0' not found (required by cmake)
+| WARNING: exit code 1 from a shell command.
 
-diff --git a/recipes-qt/qt5/qtbase/0013-Fix-build-with-QT_NO_OPENGL.patch b/recipes-qt/qt5/qtbase/0013-Fix-build-with-QT_NO_OPENGL.patch
-new file mode 100644
-index 0000000..7b681dc
---- /dev/null
-+++ b/recipes-qt/qt5/qtbase/0013-Fix-build-with-QT_NO_OPENGL.patch
-@@ -0,0 +1,33 @@
-+From 2e176e3d10535e4fdaa6ecc919538f66f4a2930d Mon Sep 17 00:00:00 2001
-+From: Andy Nichols <andy.nichols@qt.io>
-+Date: Mon, 11 Jul 2016 09:18:33 +0200
-+Subject: QWidgetBackingStore: Fix build with QT_NO_OPENGL
-+
-+A define moved out of the #ifndef QT_NO_OPENGL scope.
-+
-+Change-Id: I41c943b97f165b5171581e01f3a4b2d3fb25747e
-+Reviewed-by: Laszlo Agocs <laszlo.agocs@qt.io>
-+
-+Upstream-Status: Backport
-+Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com>
-+---
-+ src/widgets/kernel/qwidgetbackingstore.cpp | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/src/widgets/kernel/qwidgetbackingstore.cpp b/src/widgets/kernel/qwidgetbackingstore.cpp
-+index 32aabce..242e625 100644
-+--- a/src/widgets/kernel/qwidgetbackingstore.cpp
-++++ b/src/widgets/kernel/qwidgetbackingstore.cpp
-+@@ -67,7 +67,9 @@ QT_BEGIN_NAMESPACE
-+
-+ extern QRegion qt_dirtyRegion(QWidget *);
-+
-++#ifndef QT_NO_OPENGL
-+ Q_GLOBAL_STATIC(QPlatformTextureList, qt_dummy_platformTextureList)
-++#endif
-+
-+ /**
-+  * Flushes the contents of the \a backingStore into the screen area of \a widget.
-+--
-+cgit v1.0-4-g1e03
-+
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index f69c33c..c82195d 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -26,6 +26,7 @@ SRC_URI += "\
-     file://0008-configure-paths-for-target-qmake-properly.patch \
-     file://0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch \
-     file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
-+    file://0013-Fix-build-with-QT_NO_OPENGL.patch \
- "
- 
- DEPENDS += "qtbase-native"
--- 
-2.9.2
+Maybe it's another symptom of missing openssl-native dependency in
+cmake-native (just like libidn-native issue reported here
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=9639) - and cmake-native
+was originally linked against host's openssl which was built with version
+script and binutils-2.24 (Ubuntu-14.04), but then it's executed with libssl
+and libcrypto from native sysroot, where the version script didn't work:
 
+$ ldd sysroots/x86_64-linux/usr/bin/cmake
+sysroots/x86_64-linux/usr/bin/cmake:
+sysroots/x86_64-linux/usr/bin/../lib/libcrypto.so.1.0.0: version
+`OPENSSL_1.0.0' not found (required by sysroots/x86_64-linux/usr/bin/cmake)
+sysroots/x86_64-linux/usr/bin/cmake:
+sysroots/x86_64-linux/usr/bin/../lib/libssl.so.1.0.0: version
+`OPENSSL_1.0.1' not found (required by sysroots/x86_64-linux/usr/bin/cmake)
+sysroots/x86_64-linux/usr/bin/cmake:
+sysroots/x86_64-linux/usr/bin/../lib/libssl.so.1.0.0: version
+`OPENSSL_1.0.0' not found (required by sysroots/x86_64-linux/usr/bin/cmake)
+        linux-vdso.so.1 =>  (0x00007ffed2fce000)
+        libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fb631276000)
+        libssl.so.1.0.0 =>
+sysroots/x86_64-linux/usr/bin/../lib/libssl.so.1.0.0 (0x00007fb63100c000)
+        libcrypto.so.1.0.0 =>
+sysroots/x86_64-linux/usr/bin/../lib/libcrypto.so.1.0.0 (0x00007fb630bc1000)
+        libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+(0x00007fb6308bd000)
+        libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fb6305b7000)
+        libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1
+(0x00007fb6303a1000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fb62ffdc000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007fb63147a000)
+
+Which is sort of confirmed by removing libssl.so and libcrypto.so from
+native sysroot, I can execute cmake binary again.
+
+On Tue, Aug 9, 2016 at 5:24 PM, Richard Purdie <
+richard.purdie@linuxfoundation.org> wrote:
+
+> On Tue, 2016-08-09 at 07:42 -0700, Khem Raj wrote:
+> > I could also see it on ppc. backtrace, shows the segfault is in exit
+> > path and happens in libc
+> > at this point, I think the problem is how libc is compiled with
+> > binutils 2.27, connman itself
+> > is ok.
+>
+> Its the issue here:
+>
+> https://sourceware.org/ml/glibc-bugs/2015-01/msg00274.html
+> https://sourceware.org/bugzilla/show_bug.cgi?id=17908
+>
+> Basically, if you remove the global _IO_stdin_used symbol, it triggers
+> compatibility code which crashes.
+>
+> I've confirmed that if I add that symbol to the version-script in
+> connman, things work again.
+>
+> Any idea how we raise the priority of this issue. There are no comments
+> on the bug despite it having been posted a while ago :(.
+>
+> Cheers,
+>
+> Richard
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
