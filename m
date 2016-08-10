@@ -1,39 +1,39 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 45AFC771CB
+Return-Path: <prvs=00301c56f3=michael.davis@essvote.com>
+Received: from mail1.essvote.com (mail1.essvote.com [66.37.226.19])
+	by mail.openembedded.org (Postfix) with ESMTP id 05AC8771CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Aug 2016 17:59:03 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id q11so1950259qtb.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Aug 2016 10:59:04 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=fqwkmfwBVHZ63t4IcYd/lGYIu6uJ67Ilo60KTp6IEcM=;
-	b=En++aeAUPUsgeYZgVI49J5X8jK1oK0TDl9WsD+31bmBpaMWDGbgGA+EmtsKadbgsCb
-	RISpaWQP9RT4tkztMA30KpskKHFkWE196ozmsWmcj1eMCC6S2HBkyOABnQ7eQcANW/8j
-	8Z5UxEomGV7gHhKmzfCDUEtKNMmp7ZGHwxQCeDvGvvOO+6aFZ/N91SkkUTXhx/p9iYf3
-	fx1ZVycazT68TTPlW1ssWl9SLQTFk52YrOXBHbJw7TjWDa/Tk9VKc66B/plMTbxIkkPh
-	2JEQrFisUKcJWYKDFJA45vwVOWVrd0P95Mpx21FZM7nKQZCwGwpwHWAUjIFoAtHto1rq
-	b77Q==
-X-Gm-Message-State: AEkoouuTigx/VihSOzNevkMrO9HfqpAaR3OqiK3pQvKxdwxSQDosRaWDmOqDMXVCFE+vfQ==
-X-Received: by 10.237.39.34 with SMTP id n31mr6039612qtd.55.1470851943986;
-	Wed, 10 Aug 2016 10:59:03 -0700 (PDT)
-Received: from localhost.localdomain ([96.91.222.230])
-	by smtp.gmail.com with ESMTPSA id
-	j62sm23912493qtd.37.2016.08.10.10.59.03
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 10 Aug 2016 10:59:03 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Aug 2016 13:58:54 -0400
-Message-Id: <1470851934-20960-2-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1470851934-20960-1-git-send-email-derek@asterius.io>
-References: <1470851934-20960-1-git-send-email-derek@asterius.io>
-Subject: [meta-webserver][PATCH 2/2] hiawatha: update to version 10.3
+	Wed, 10 Aug 2016 19:32:10 +0000 (UTC)
+X-AuditID: 0a000213-f79d76d0000013de-a5-57ab813772fa
+Received: from ESS-EX01.essvote.corp.local (Unknown_Domain [172.16.110.40])
+	by mail1.essvote.com (Symantec Messaging Gateway) with SMTP id
+	0F.0B.05086.8318BA75; Wed, 10 Aug 2016 14:32:08 -0500 (CDT)
+Received: from ESS-EX01.essvote.corp.local ([::1]) by
+	ESS-EX01.essvote.corp.local ([::1]) with mapi id 14.03.0301.000;
+	Wed, 10 Aug 2016 14:32:07 -0500
+From: "Davis, Michael" <michael.davis@essvote.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-oe][PATCH] pcsc-lite: Seperate GPLV3 portions from BSD
+Thread-Index: AQHR8z3hQUMsTlUi3kST4/5fQwFJIA==
+Date: Wed, 10 Aug 2016 19:32:07 +0000
+Message-ID: <1470857496-24658-1-git-send-email-michael.davis@essvote.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.1.8.93]
+MIME-Version: 1.0
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrMLMWRmVeSWpSXmKPExsWyRiBPQ9eicXW4wYLtEhYXDy9ldmD0OLdx
+	BWMAYxS3TVJiSVlwZnqevl0Cd8blp68YC97zVKy4V9LA2MndxcjJISFgInFryx8WCFtM4sK9
+	9WxdjFwcQgInGCXe9/SxQzizGCUuTTsOVsUmYCRx7vomRhBbRCBWYt6mmUwgNrOAgcS7zRtZ
+	QWxhAVeJ+X+XMEHUeElcO/SfGcLWk/iwo5UdxGYRUJWY/+Y6WJxXwFPiyZNmsPmMQFd8P7UG
+	aqa4xK0n85kgrhOQWLLnPDOELSrx8vE/VghbVuLbjiksEPV6EjemTmGDsLUlli18DTVfUOLk
+	zCcsExhFZiEZOwtJyywkLbOQtCxgZFnFKJibmJljqJdaXFyWX5Kql5yfu4kRGPRcDEzCOxjn
+	TLE9xCjAwajEwxvgsipciDWxrLgy9xCjNAeLkjivipBSuJBAemJJanZqakFqUXxRaU5q8SFG
+	Jg7OQ4wSHFxSIsWpeSmpRYmlJRnxoNiKLwZGl1QDI4fbY96j3eFTs1YIMWvOmaqfdfDRQgfh
+	KrHm2xMO+RgpZD4+wef2QSNAYoFB1JTklSpN1RVhyyddeLHme1HOv/w4a+PsV685y5b51L7K
+	mC8cMc3hs9nrDOM3P/+X8LHsOOjv8/TUY5NpGby+J2ZnRxYdUvBe9NxDqMXpbOauh2czUoNm
+	9y41U2Ipzkg01GIuKk4EAHKiXgF2AgAA
+Subject: [meta-oe][PATCH] pcsc-lite: Seperate GPLV3 portions from BSD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,60 +46,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Aug 2016 17:59:04 -0000
+X-List-Received-Date: Wed, 10 Aug 2016 19:32:12 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+GPLV3 and BSD portions were originally placed in the same package.
+The GPLv3 portion has been seperated into pcsc-lite-spy so the package can =
+be used with GPLv3 blacklisted.
+
+Signed-off-by: Michael Davis <michael.davis@essvote.com>
 ---
- .../hiawatha/{hiawatha_9.2.bb => hiawatha_10.3.bb}          | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
- rename meta-webserver/recipes-httpd/hiawatha/{hiawatha_9.2.bb => hiawatha_10.3.bb} (84%)
+ meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
-diff --git a/meta-webserver/recipes-httpd/hiawatha/hiawatha_9.2.bb b/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.3.bb
-similarity index 84%
-rename from meta-webserver/recipes-httpd/hiawatha/hiawatha_9.2.bb
-rename to meta-webserver/recipes-httpd/hiawatha/hiawatha_10.3.bb
-index 7062174..7b6ab26 100644
---- a/meta-webserver/recipes-httpd/hiawatha/hiawatha_9.2.bb
-+++ b/meta-webserver/recipes-httpd/hiawatha/hiawatha_10.3.bb
-@@ -10,8 +10,8 @@ SRC_URI = "http://hiawatha-webserver.org/files/${BP}.tar.gz \
-            file://hiawatha-init \
-            file://hiawatha.service "
- 
--SRC_URI[md5sum] = "a77f044634884c4cc5d21dab44e822a3"
--SRC_URI[sha256sum] = "5d9cdec51c618bb3efab747030e593d9bd49dfaf3236254c8e0cb60715716dbf"
-+SRC_URI[md5sum] = "31567dfc18d435bd419be279f7970019"
-+SRC_URI[sha256sum] = "99d185fb16bb1ab706724494d3cac86464f1485ed4b0fff09a192eca6da5ff8e"
- 
- INITSCRIPT_NAME = "hiawatha"
- INITSCRIPT_PARAMS = "defaults 70"
-@@ -33,10 +33,7 @@ EXTRA_OECMAKE = " -DENABLE_IPV6=OFF \
-                   -DCMAKE_INSTALL_SBINDIR=${sbindir} \
-                   -DCMAKE_INSTALL_SYSCONFDIR=${sysconfdir} \
-                   -DCMAKE_INSTALL_LIBDIR=${libdir} \
--                  -DLOG_DIR=/var/log/hiawatha \
--                  -DPID_DIR=/var/run \
--                  -DWEBROOT_DIR=/var/www/hiawatha \
--                  -DWORK_DIR=/var/lib/hiawatha "
-+                  -DCMAKE_INSTALL_FULL_LOCALSTATEDIR=${localstatedir}"
- 
- do_install_append() {
-     # Copy over init script and sed in the correct sbin path
-@@ -53,7 +50,7 @@ do_install_append() {
-         install -m 644 ${WORKDIR}/hiawatha.service ${D}/${systemd_unitdir}/system
-     fi
- 
--    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
-+    rmdir --ignore-fail-on-non-empty "${D}${localstatedir}" "${D}${localstatedir}/run"
- }
- 
- CONFFILES_${PN} = " \
-@@ -63,3 +60,5 @@ CONFFILES_${PN} = " \
-     ${sysconfdir}/hiawatha/mimetype.conf \
-     ${sysconfdir}/hiawatha/php-fcgi.conf \
- "
-+
-+FILES_${PN}-dev = "${libdir}/hiawatha/*${SOLIBSDEV}"
--- 
-1.9.1
-
+diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb b/meta-o=
+e/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
+index cc72549..e1d405b 100644
+--- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
++++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
+@@ -1,6 +1,7 @@
+ SUMMARY =3D "PC/SC Lite smart card framework and applications"
+ HOMEPAGE =3D "http://pcsclite.alioth.debian.org/"
+-LICENSE =3D "BSD & GPLv3+"
++LICENSE =3D "BSD"=20
++LICENSE_${PN}-spy =3D "GPLv3+"
+ LICENSE_${PN}-dev =3D "GPLv3+"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dbcfbd85230ac3c586fb294c8b627cf3=
+2"
+ DEPENDS =3D "udev"
+@@ -20,14 +21,16 @@ EXTRA_OECONF =3D " \
+=20
+ S =3D "${WORKDIR}/pcsc-lite-${PV}"
+=20
+-PACKAGES =3D+ "${PN}-lib"
++PACKAGES =3D+ "${PN}-lib ${PN}-spy"
+=20
+ RRECOMMENDS_${PN} =3D "ccid"
+=20
+-FILES_${PN}-lib =3D "${libdir}/lib*${SOLIBS}"
++FILES_${PN}-spy +=3D "${bindir}/pcsc-spy \
++                    ${libdir}/libpcscspy*${SOLIBS}"
++FILES_${PN}-lib =3D "${libdir}/libpcsclite*${SOLIBS}"
+=20
+ RPROVIDES_${PN} +=3D "${PN}-systemd"
+ RREPLACES_${PN} +=3D "${PN}-systemd"
+ RCONFLICTS_${PN} +=3D "${PN}-systemd"
+ SYSTEMD_SERVICE_${PN} =3D "pcscd.socket"
+-RDEPENDS_${PN} +=3D"python"
++RDEPENDS_${PN}-spy +=3D"python"
+--=20
+2.5.5
 
