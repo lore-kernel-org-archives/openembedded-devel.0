@@ -1,36 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id A2B17771DA
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 19C0773190
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Aug 2016 23:13:48 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id q11so1039463qtb.2
+	Wed, 10 Aug 2016 00:39:06 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id x67so2302300qke.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Aug 2016 16:13:49 -0700 (PDT)
+	Tue, 09 Aug 2016 17:39:08 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=FppHkTNH//2CyH6gJq6TAMpyT0KDdfWgbWEiSgQGDD4=;
-	b=PfyKB/NatgIBVQQWG4k8MIjvHps+ohgSUCP5BwZHgMbZrxSZmmwzAJBPGUG6ogZMVC
-	73RB3O1D2/7PYkTciXTov5s01g9OaUgKbIvRydHNcRp7Sm48A8lgCSAVNEANM67ZWzu/
-	NeoqpS8Tom/nYo3TWbq5VC6Zlz66fm9HA+s6FrggECnRaFZIwITH+/Iaj+tfuwhVudU6
-	5f1N1TSc9NRjOXghRMyE8H8mgqpBGwyjK8+bZJBjLnac+Cjm0T6IxFPbjPmN9RHFHC1L
-	bY0tP4qb3llhIth7GZoW2Uu1Zsy+P1sc/AAzP/m1kQgH9ltYwsYX+M8OcisY4FDzNy+s
-	NlKw==
-X-Gm-Message-State: AEkoous10Rei5kzaz91NEKTvF2wyszcnFFEoEEHTqth7SnerQlT+oscBNIcX7A4H8+QPxw==
-X-Received: by 10.200.50.82 with SMTP id y18mr1065360qta.29.1470784428576;
-	Tue, 09 Aug 2016 16:13:48 -0700 (PDT)
+	bh=VN58quUDoKFbEK/GllObsjEowW4X2KhkfjXOsT/Rqk4=;
+	b=GyJrV8RF3/eVTr4A2PJk8wE4EBktOZMgHyLUR67LZGIvbv/lGsRcfkU0meINycwqjZ
+	hVEiW7Ul/qq/2xRwfCyde1bjzBnvmKkId2vRrHs1x+TIrZ9iXtNUInk/5V0WBql4WYvs
+	w0l9oikWon4ZN9gPLG5C0+F3+k5Ev30tUPAaGGsUirzLppc+wRhMdmRpN3eRgWCHmBP/
+	qyRhwR/qaAH81U9X7KE1l6YKl2RxQDuSgUSLpA67DW9/cLHZ8lguErRN45kgGYlNNZwn
+	AwKNes40dcd3eE/5qSopxEeT2wYs4JWTX71CLbECFfBYJQepZhRX0nfYaKwjvgs5QGMN
+	JI8w==
+X-Gm-Message-State: AEkooutClVGFCrUDIm1r9X1SkLi1OYnabfDogqqJSA5SoHqUrZuooISEDDrHTzzWquQf3A==
+X-Received: by 10.55.162.67 with SMTP id l64mr1492176qke.14.1470789547525;
+	Tue, 09 Aug 2016 17:39:07 -0700 (PDT)
 Received: from lnx-desktop.star.lab (c-73-172-178-168.hsd1.md.comcast.net.
 	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	133sm12135393qkf.33.2016.08.09.16.13.47
+	o131sm4898084qke.20.2016.08.09.17.39.06
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 09 Aug 2016 16:13:48 -0700 (PDT)
+	Tue, 09 Aug 2016 17:39:06 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Aug 2016 19:13:39 -0400
-Message-Id: <1470784419-24050-1-git-send-email-derek@asterius.io>
+Date: Tue,  9 Aug 2016 20:38:52 -0400
+Message-Id: <1470789534-602-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] dstat: update to version 0.7.3
+Subject: [meta-oe][PATCH 1/3] engine-pkcs11: update to version 0.2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,52 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Aug 2016 23:13:51 -0000
-
-  * License checksum updated for whitespace differences
-  * Add DEPENDS for asciidoc-native
-  * Add RDEPENDS for python
+X-List-Received-Date: Wed, 10 Aug 2016 00:39:08 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../dstat/{dstat_0.7.2.bb => dstat_0.7.3.bb}              | 15 +++++++--------
- 1 file changed, 7 insertions(+), 8 deletions(-)
- rename meta-oe/recipes-support/dstat/{dstat_0.7.2.bb => dstat_0.7.3.bb} (57%)
+ .../{engine-pkcs11_0.2.0.bb => engine-pkcs11_0.2.2.bb}       | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-support/engine-pkcs11/{engine-pkcs11_0.2.0.bb => engine-pkcs11_0.2.2.bb} (72%)
 
-diff --git a/meta-oe/recipes-support/dstat/dstat_0.7.2.bb b/meta-oe/recipes-support/dstat/dstat_0.7.3.bb
-similarity index 57%
-rename from meta-oe/recipes-support/dstat/dstat_0.7.2.bb
-rename to meta-oe/recipes-support/dstat/dstat_0.7.3.bb
-index 63f1812..1673b91 100644
---- a/meta-oe/recipes-support/dstat/dstat_0.7.2.bb
-+++ b/meta-oe/recipes-support/dstat/dstat_0.7.3.bb
-@@ -5,19 +5,18 @@ and flexibility. Dstat is handy for monitoring systems during performance tuning
- benchmarks or troubleshooting."
- HOMEPAGE = "http://dag.wiee.rs/home-made/dstat"
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+DEPENDS += "asciidoc-native"
-+
- SRC_URI = "git://github.com/dagwieers/dstat.git"
--SRC_URI[md5sum] = "798e050e2e024f08a272dd4b0e1eba41"
--SRC_URI[sha256sum] = "96d1e6ea2434e477fa97322d92778f68458d7e57bc55bc4f72e29467a52cffd1"
+diff --git a/meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.0.bb b/meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.2.bb
+similarity index 72%
+rename from meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.0.bb
+rename to meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.2.bb
+index f2a2258..c391c4f 100644
+--- a/meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.0.bb
++++ b/meta-oe/recipes-support/engine-pkcs11/engine-pkcs11_0.2.2.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://src/engine_pkcs11.h;startline=1;endline=26;md5=973a19
+ DEPENDS = "openssl libp11"
  
--SRCREV = "5251397eb8d3b284a90bfdfaec0c8e1210146e3f"
-+SRCREV = "ebace6d4177f8748f35cec87f7a49946046b0a20"
+ SRC_URI = "git://github.com/OpenSC/engine_pkcs11.git;protocol=http"
+-SRCREV = "6909d6761c8820e1750fa0bf4fa8532c82f34e35"
++SRCREV = "132fcf2c8b319f9f4b2ebdc8dcb54ff496dc0519"
  
  S = "${WORKDIR}/git"
  
--do_compile_prepend() {
--    #undo the step "make docs"
--    sed -i -e 's/$(MAKE) -C docs docs/# $(MAKE) -C docs docs/;' ${S}/Makefile
--}
- do_install() {
-     oe_runmake 'DESTDIR=${D}' install
+@@ -18,12 +18,14 @@ inherit autotools pkgconfig
+ 
+ EXTRA_OECONF = "\
+     --disable-static \
+-    --libdir ${libdir}/openssl \
++    --libdir ${libdir}/engines \
+ "
+ 
+ do_install_append () {
+-    rm -f ${D}${libdir}/openssl/engines/libpkcs11.la
++    rm -f ${D}${libdir}/engines/libpkcs11.la
  }
+ 
+-FILES_${PN} += "${libdir}/openssl/engines/libpkcs11.so*"
+-FILES_${PN}-dbg += "${libdir}/openssl/engines/.debug/*"
++FILES_${PN} += "${libdir}/engines/libpkcs11.so*"
++FILES_${PN}-dbg += "${libdir}/engines/.debug/*"
 +
-+RDEPENDS_${PN} += "python-core python-misc python-resource python-shell python-unixadmin"
++RDEPENDS_${PN} += "openssl libp11 opensc"
 -- 
 1.9.1
 
