@@ -1,22 +1,40 @@
-Return-Path: <ml@embed.me.uk>
-Received: from bmx2.eumx.net (bmx2.eumx.net [37.48.73.248])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D97B771F9
+Return-Path: <btv1==0311781b576==Terry.Boese@vecima.com>
+Received: from mx2.vecima.com (mx2.vecima.com [216.65.182.69])
+	by mail.openembedded.org (Postfix) with ESMTP id 9A701771D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 13:33:20 +0000 (UTC)
-Received: from owm.eumx.net (unknown [10.1.1.70])
-	by bmx2.eumx.net (Postfix) with ESMTPS id 90476DC8DF
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 13:33:20 +0000 (UTC)
-To: openembedded-devel@lists.openembedded.org
-References: <1470920876-22501-1-git-send-email-ricardo.ribalda@gmail.com>
-From: Jack Mitchell <ml@embed.me.uk>
-Message-ID: <38abad72-d252-100b-ece6-8b7774841b9d@embed.me.uk>
-Date: Thu, 11 Aug 2016 14:33:19 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.2.0
+	Thu, 11 Aug 2016 14:08:04 +0000 (UTC)
+X-ASG-Debug-ID: 1470924484-0359fc4292220d80001-aWHRdb
+Received: from ExchangeInt.corp.vcom.com (exchangeint.corp.vcom.com
+	[192.168.50.125]) by mx2.vecima.com with ESMTP id
+	sjLInRYflQqxmxhC for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Aug 2016 08:08:04 -0600 (CST)
+X-Barracuda-Envelope-From: Terry.Boese@vecima.com
+Received: from PC2170.corp.vcom.com (192.168.216.92) by
+	ExchangeInt.corp.vcom.com (192.168.50.125) with Microsoft SMTP Server
+	id 14.3.279.2; Thu, 11 Aug 2016 08:08:04 -0600
+From: Terry Boese <terry.boese@vecima.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 11 Aug 2016 08:07:59 -0600
+X-ASG-Orig-Subj: [meta-networking][PATCH v2] dnsmasq: update to version 2.76
+Message-ID: <1470924479-18304-1-git-send-email-terry.boese@vecima.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <1470920876-22501-1-git-send-email-ricardo.ribalda@gmail.com>
-Subject: Re: [meta-oe][PATCH v3 1/2] gflags: New recipe
+X-Originating-IP: [192.168.216.92]
+X-Barracuda-Connect: exchangeint.corp.vcom.com[192.168.50.125]
+X-Barracuda-Start-Time: 1470924484
+X-Barracuda-URL: https://192.168.99.189:443/cgi-mod/mark.cgi
+X-Barracuda-Scan-Msg-Size: 4144
+X-Virus-Scanned: by bsmtpd at vecima.com
+X-Barracuda-BRTS-Status: 1
+X-Barracuda-Spam-Score: 0.00
+X-Barracuda-Spam-Status: No, SCORE=0.00 using global scores of TAG_LEVEL=1000.0
+	QUARANTINE_LEVEL=1000.0 KILL_LEVEL=4.0 tests=
+X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.31933
+	Rule breakdown below
+	pts rule name              description
+	---- ----------------------
+	--------------------------------------------------
+Subject: [meta-networking][PATCH v2] dnsmasq: update to version 2.76
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,52 +47,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Aug 2016 13:33:23 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 11 Aug 2016 14:08:04 -0000
+Content-Type: text/plain
 
-On 11/08/16 14:07, Ricardo Ribalda Delgado wrote:
-> C++ library that implements commandline flags processing. It includes
-> built-in support for standard types such as string and the ability to
-> define flags in the source file in which they are used.
->
-> Used optionally by glog
->
-> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-> ---
->   meta-oe/recipes-support/gflags/gflags_2.1.2.bb | 19 +++++++++++++++++++
->   1 file changed, 19 insertions(+)
->   create mode 100644 meta-oe/recipes-support/gflags/gflags_2.1.2.bb
->
-> diff --git a/meta-oe/recipes-support/gflags/gflags_2.1.2.bb b/meta-oe/recipes-support/gflags/gflags_2.1.2.bb
-> new file mode 100644
-> index 000000000000..30fd5f85e253
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/gflags/gflags_2.1.2.bb
-> @@ -0,0 +1,19 @@
-> +DESCRIPTION = "The gflags package contains a C++ library that implements commandline flags processing. It includes built-in support for standard types such as string and the ability to define flags in the source file in which they are used"
-> +HOMEPAGE = "https://github.com/gflags/gflags"
-> +LICENSE = "BSD"
-> +LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
-> +
-> +SRCREV = "1a02f2851ee3d48d32d2c8f4d8f390a0bc25565c"
-> +SRC_URI = "git://github.com/gflags/gflags.git;branch=release"
-> +
-> +S = "${WORKDIR}/git/"
-> +
-> +inherit cmake
-> +
-> +EXTRA_OECMAKE="-DBUILD_SHARED_LIBS=ON"
-> +
-> +FILES_${PN}-dev += "${libdir}/cmake"
-> +
-> +PACKAGES =+ "${PN}-bash-completion"
-> +FILES_${PN}-bash-completion += "${bindir}/gflags_completions.sh"
-> +RDEPENDS_${PN}-bash-completion = "bash-completion"
+Change 'basecontains' to 'bb.utils.contain' to avoid warning.
+Correct do_compile_append(), as the location of the DHCP lease
+tools has changed.
 
-Looks good to me.
+Signed-off-by: Terry Boese <terry.boese@vecima.com>
+---
+ meta-networking/recipes-support/dnsmasq/dnsmasq.inc    | 18 +++++++++---------
+ .../dnsmasq/{dnsmasq_2.75.bb => dnsmasq_2.76.bb}       |  5 ++---
+ 2 files changed, 11 insertions(+), 12 deletions(-)
+ rename meta-networking/recipes-support/dnsmasq/{dnsmasq_2.75.bb => dnsmasq_2.76.bb} (27%)
 
-Acked-by: Jack Mitchell <jack@embed.me.uk>
-
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+index cc7f9e3..9ef54fe 100644
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+@@ -26,10 +26,10 @@ PACKAGECONFIG[conntrack] = ",,libnetfilter-conntrack"
+ PACKAGECONFIG[lua] = ",,lua"
+ PACKAGECONFIG[resolvconf] = ",,,resolvconf"
+ EXTRA_OEMAKE = "\
+-    'COPTS=${@base_contains('PACKAGECONFIG', 'dbus', '-DHAVE_DBUS', '', d)} \
+-           ${@base_contains('PACKAGECONFIG', 'idn', '-DHAVE_IDN', '', d)} \
+-           ${@base_contains('PACKAGECONFIG', 'conntrack', '-DHAVE_CONNTRACK', '', d)} \
+-           ${@base_contains('PACKAGECONFIG', 'lua', '-DHAVE_LUASCRIPT', '', d)}' \
++    'COPTS=${@bb.utils.contains('PACKAGECONFIG', 'dbus', '-DHAVE_DBUS', '', d)} \
++           ${@bb.utils.contains('PACKAGECONFIG', 'idn', '-DHAVE_IDN', '', d)} \
++           ${@bb.utils.contains('PACKAGECONFIG', 'conntrack', '-DHAVE_CONNTRACK', '', d)} \
++           ${@bb.utils.contains('PACKAGECONFIG', 'lua', '-DHAVE_LUASCRIPT', '', d)}' \
+     'CFLAGS=${CFLAGS}' \
+     'LDFLAGS=${LDFLAGS}' \
+ "
+@@ -38,7 +38,7 @@ SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'resolvconf', 'file://dnsmasq.
+ 
+ do_compile_append() {
+     # build dhcp_release
+-    cd ${S}/contrib/wrt
++    cd ${S}/contrib/lease-tools
+     oe_runmake
+ }
+ 
+@@ -53,19 +53,19 @@ do_install () {
+ 
+     install -d ${D}${systemd_unitdir}/system
+ 
+-    if [ "${@base_contains('PACKAGECONFIG', 'resolvconf', 'resolvconf', '', d)}" != "" ]; then
++    if [ "${@bb.utils.contains('PACKAGECONFIG', 'resolvconf', 'resolvconf', '', d)}" != "" ]; then
+         install -m 0644 ${WORKDIR}/dnsmasq-resolvconf.service ${D}${systemd_unitdir}/system/dnsmasq.service
+     else
+         install -m 0644 ${WORKDIR}/dnsmasq-noresolvconf.service ${D}${systemd_unitdir}/system/dnsmasq.service
+     fi
+ 
+-    install -m 0755 ${S}/contrib/wrt/dhcp_release ${D}${bindir}
++    install -m 0755 ${S}/contrib/lease-tools/dhcp_release ${D}${bindir}
+ 
+-    if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" != "" ]; then
++    if [ "${@bb.utils.contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" != "" ]; then
+         install -d ${D}${sysconfdir}/dbus-1/system.d
+         install -m 644 dbus/dnsmasq.conf ${D}${sysconfdir}/dbus-1/system.d/
+     fi
+-    if [ "${@base_contains('PACKAGECONFIG', 'resolvconf', 'resolvconf', '', d)}" != "" ]; then
++    if [ "${@bb.utils.contains('PACKAGECONFIG', 'resolvconf', 'resolvconf', '', d)}" != "" ]; then
+         install -d ${D}${sysconfdir}/resolvconf/update.d/
+         install -m 0755 ${WORKDIR}/dnsmasq.resolvconf ${D}${sysconfdir}/resolvconf/update.d/dnsmasq
+ 
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.76.bb
+similarity index 27%
+rename from meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb
+rename to meta-networking/recipes-support/dnsmasq/dnsmasq_2.76.bb
+index a11aabb..41573d9 100644
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.76.bb
+@@ -4,6 +4,5 @@ SRC_URI += "\
+     file://lua.patch \
+ "
+ 
+-SRC_URI[dnsmasq-2.75.md5sum] = "d99ac126d4fe910c679d88430559669b"
+-SRC_URI[dnsmasq-2.75.sha256sum] = "f8252c0a0ba162c2cd45f81140c7c17cc40a5fca2b869d1a420835b74acad294"
+-
++SRC_URI[dnsmasq-2.76.md5sum] = "6610f8233ca89b15a1bb47c788ffb84f"
++SRC_URI[dnsmasq-2.76.sha256sum] = "777c4762d2fee3738a0380401f2d087b47faa41db2317c60660d69ad10a76c32"
+-- 
+2.7.4
 
 
