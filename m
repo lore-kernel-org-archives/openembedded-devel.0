@@ -1,53 +1,44 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <ricardo.ribalda@gmail.com>
 Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 7283E7723C
+	by mail.openembedded.org (Postfix) with ESMTP id EDF1177236
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 12:56:09 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id q128so1238542wma.1
+	Thu, 11 Aug 2016 13:08:05 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id q128so1300536wma.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 05:56:11 -0700 (PDT)
+	Thu, 11 Aug 2016 06:08:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=eZvur74h320uDsFWhQEajc2XrncSt4MzuxOG4MkVww8=;
-	b=LjNRbjCNMuC/oJYHiswpgPPMZjvQ4PxXsC/M0Fyq4ff5xveXBeTPkHtmM7cXbWRn2d
-	8K5Fa1/s2dT4InKqsgoH1yxHqIkcLWWKif9xLMhw7n3ETvfRx+2+KFtYHq2J/FtF4Fdr
-	1znAp7nHG5Q4pEfe86ecswjfv4n1+LgGgaaS05plwBwKu64avIGXsGK/QXvOmiYiEROd
-	zE8Hu1w9zdvwILKf5XRk+6KNuDnpQWeqxTVBc5VJjl7jEE9waUgrdVtrQEvFPf/owJ6F
-	WRoYPqrMEH82T9nC88m/xof0/wuJTqu3oUnxQOp+h3CRwXAoMEukS8QHFZ1g5XL/KIhP
-	qY8A==
+	h=from:to:cc:subject:date:message-id;
+	bh=2LZOaNSx6vIPswJgCDOMKdh3KxtXTiJwC+UFLHhEkeE=;
+	b=aenn330MQaRYdcIA8UhgF+BP2S/dN1RH/kLs1HSzXgRHQgyMBKiVmHpQLuHhf84LSv
+	Ka03oOK6Yx0vAVIua/lgQrAVHLbIXZn8ayUhixkcad9GynRPNCYiYdWllXg/aiL3FdXV
+	76h0ye8CTIDtrzjylkB++rMAkdwscDc/OW43N7eoR6HvzSXr1Ct64hSf9T/79PnbA6+C
+	qnwajzOpLHGMa4PqgzeAWxCuvUMBLTR2emOgWY5riNCtVr2Egwi4koTk+Ee1/1HsyTI3
+	x8GfS6oACFPQEQS4zxNNDeiGP0DVyFpldqhjJCsfJ6YAw6KQGSli6P+6NuwjvOJNH4QS
+	N0/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=eZvur74h320uDsFWhQEajc2XrncSt4MzuxOG4MkVww8=;
-	b=aE5tDpIDqSKWmClzMJPIOrcbHxsZSiZ9yfwr3BTPGbN4EjFacNiRpNX3mfZESGtKbT
-	NF4ssR0aN25ZPSOk5ocRYof/jxXnF70WJMwxFHDYjgI0gO+iew6xSN0aIhMstsnFfbdn
-	ifdUUzdukI5WPTZDQKUCE0CpsEtr+OJ0Sw1tR99gef9VWUvUZeFBp/wD9t32ZjlTW0yf
-	9243WndTlbBV3hVYH2+z9LggsUE1MuP37IxI99sKkTBtsljxK+Qv0DNN5aTxQj8qHNEp
-	8zdKvFGXA89yoRcE2Iv3VXiDILzyPCzt8LfMExhmqM3c236LzpS2dtRg6qMO+uMdfZnS
-	G0qA==
-X-Gm-Message-State: AEkoousEf5ARDqOT4g22Y+gUAexwFoctRoW0AUEf5WFe9HbDjatF7rE/aAa79a++Wb+SNQ==
-X-Received: by 10.194.87.194 with SMTP id ba2mr10764043wjb.100.1470920170096; 
-	Thu, 11 Aug 2016 05:56:10 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169])
-	by smtp.gmail.com with ESMTPSA id n2sm2632972wjd.1.2016.08.11.05.56.08
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 11 Aug 2016 05:56:08 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 11 Aug 2016 14:56:09 +0200
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=2LZOaNSx6vIPswJgCDOMKdh3KxtXTiJwC+UFLHhEkeE=;
+	b=mJdl5dmUwlu850U7iRJC0bX7W7JnfDangmC7dxCEjYLkoE56OLgERa6ZxJePB/EJr+
+	kMNEY0wLY9Y331p4btOjSNWqwFWBz0FY7fOhSMNKqmG1H8EAJAxaV9vOujYpI8QJeNo8
+	Hy2nC94L9/7mf1a6FeWVHKDVQsBJXYJfn6cV/ckwpMFejZ33r2gR9v93CXJbDyzRfDcW
+	EJ6p9cLB4iqkecCyyXwBLfE6AeKakBpH8ZIG8jaW6hg3PxcPYZDgbnRQkml8kI9dM0qH
+	Iog/0aLO7UtA0jVdrlih7fCS3lHFPLHH3pxfIP4BVyxUIe7uYwMY5uVjeXIEf/ZL+S4U
+	pn+Q==
+X-Gm-Message-State: AEkooutV32RFCSz3F+KF41vX0N6Guf1JjzHXPmChCMjS0bgYY8i3jQTS1ZBopUA/NdweJw==
+X-Received: by 10.46.0.5 with SMTP id 5mr1605519lja.59.1470920885630;
+	Thu, 11 Aug 2016 06:08:05 -0700 (PDT)
+Received: from neopili.qtec.com
+	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
+	by smtp.gmail.com with ESMTPSA id f64sm106493lfi.36.2016.08.11.06.08.03
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 11 Aug 2016 06:08:03 -0700 (PDT)
+From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160811125609.ytopxjesfdaoxgla@jama>
-References: <1470914045-8059-1-git-send-email-ricardo.ribalda@gmail.com>
-	<20160811114602.moixzrw6p73hm2lo@jama>
-	<CAPybu_0MYrOyBT=fDcNCqZTYKZMq0fbZ_LVKEaEv-4HCxSY0GQ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAPybu_0MYrOyBT=fDcNCqZTYKZMq0fbZ_LVKEaEv-4HCxSY0GQ@mail.gmail.com>
-User-Agent: Mutt/1.6.2 (2016-06-11)
-Subject: Re: [meta-oe][PATCH v2] glog: Update to version 0.3.4
+Date: Thu, 11 Aug 2016 15:07:55 +0200
+Message-Id: <1470920876-22501-1-git-send-email-ricardo.ribalda@gmail.com>
+X-Mailer: git-send-email 2.8.1
+Subject: [meta-oe][PATCH v3 1/2] gflags: New recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,47 +51,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Aug 2016 12:56:11 -0000
-X-Groupsio-MsgNum: 62555
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="fmm7zn3e76nyfoxg"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 11 Aug 2016 13:08:06 -0000
 
---fmm7zn3e76nyfoxg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+C++ library that implements commandline flags processing. It includes
+built-in support for standard types such as string and the ability to
+define flags in the source file in which they are used.
 
-On Thu, Aug 11, 2016 at 02:50:44PM +0200, Ricardo Ribalda Delgado wrote:
-> Hi Martin
->=20
-> On Thu, Aug 11, 2016 at 1:46 PM, Martin Jansa <martin.jansa@gmail.com> wr=
-ote:
->  +        "
-> >
-> > Please see show we normally indent multiline variables (4 spaces,
-> > closing quote as first character on separate line.
-> >
-> > I'll update this for now, but next time please follow this.
->=20
-> Do you have a readme with this? Or something like checkpatch from the ker=
-nel?
+Used optionally by glog
 
-http://www.openembedded.org/wiki/Styleguide
+Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+---
+ meta-oe/recipes-support/gflags/gflags_2.1.2.bb | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-oe/recipes-support/gflags/gflags_2.1.2.bb
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/meta-oe/recipes-support/gflags/gflags_2.1.2.bb b/meta-oe/recipes-support/gflags/gflags_2.1.2.bb
+new file mode 100644
+index 000000000000..30fd5f85e253
+--- /dev/null
++++ b/meta-oe/recipes-support/gflags/gflags_2.1.2.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "The gflags package contains a C++ library that implements commandline flags processing. It includes built-in support for standard types such as string and the ability to define flags in the source file in which they are used"
++HOMEPAGE = "https://github.com/gflags/gflags"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
++
++SRCREV = "1a02f2851ee3d48d32d2c8f4d8f390a0bc25565c"
++SRC_URI = "git://github.com/gflags/gflags.git;branch=release"
++
++S = "${WORKDIR}/git/"
++
++inherit cmake
++
++EXTRA_OECMAKE="-DBUILD_SHARED_LIBS=ON"
++
++FILES_${PN}-dev += "${libdir}/cmake"
++
++PACKAGES =+ "${PN}-bash-completion"
++FILES_${PN}-bash-completion += "${bindir}/gflags_completions.sh"
++RDEPENDS_${PN}-bash-completion = "bash-completion"
+-- 
+2.8.1
 
---fmm7zn3e76nyfoxg
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAlesdekACgkQN1Ujt2V2gByGdwCfTJk8DVXOnS8qB+CBTWjWaLjo
-XCYAoJH67m4hmcz3IuDHJyVVSk1A7EHZ
-=a2AU
------END PGP SIGNATURE-----
-
---fmm7zn3e76nyfoxg--
