@@ -1,44 +1,44 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 309FC76E4A
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 9820477196
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 08:06:12 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id o80so1512933wme.0
+	Thu, 11 Aug 2016 10:10:55 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id i5so420694wmg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 01:06:13 -0700 (PDT)
+	Thu, 11 Aug 2016 03:10:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=TouK2JR/jkDRqknWxcSnd2N73pm+tx/v3nB26hQMNf0=;
-	b=LiNhOlJjYRaSeCG/87ERTj04WxvFzf7wthum7Fe6yZgEu0ztA7AFW1isxu9xJrGA/P
-	Hy//CokjoAW7q9sV3vUXaCMdj8+sfsOLRr9viHtnV8SqCsNaCXShuzNVeJwdQgk5IJXO
-	ULuSgAretDQT4cn354TcIXBjEg0JSIL775uTOf9lamGO/6Owt01tbJ7PYxHccYkpS8ya
-	xpBoYG9Hny3pC7DYbfswhv/fPIklfrM00QZW8EW0pP9aAp8j9CIYJ4yz90x0HYGnCjro
-	Ho/vNTzHnQchJ48ugdwywzwigtzB59RkiRFUvbf+j8gedwS2OPB8Iwka+1VatiDER33e
-	nXnw==
+	h=from:to:cc:subject:date:message-id;
+	bh=uDog6/4CowFknjmazxHiRFfks6BIbhZHJFvVpc6BRS0=;
+	b=YG/y7m2lIAyLILV5c55IQA3ycxQIB55a2gw9NoFYMl8bInkq+Qwvv/GX3EnsEIewqy
+	NR7Q8fOBAiTRieTDjQnl6qmgd4quqX4xaNgPhHAbV3h7qPprTfhgypyMwLJzotUaszCK
+	AwPS8uoJxjVh1zP9khzszw0xeI0kTt/LdHle1uqkE7rrXf2v2v2gBG/8XW3sJtT7PJ4q
+	f2jzjHmmP45vD5CwFEQXcpeWdrQGa3WbGAWdw7wZwnh7mPQHyPccpbXB4Wl9+bY5qtg5
+	kHXxdVJ4NvBlSvocIozMX/jD7Mw9CV7Bq1VdC9zyg/L4nX9Fj+fJ647dnaFkI2pzHJik
+	c5OA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=TouK2JR/jkDRqknWxcSnd2N73pm+tx/v3nB26hQMNf0=;
-	b=eI1kZvBon2BmCT5rUbNBPezIL36/TmGwaZK1t3ZgxI9Ue5v4EYv/WN4KE5Z5mcWyMm
-	fqesQHeZA/n1jNmla/ujFjA6DcdZ5nUxj4lHqhqm/uUkF49pPSyqFgiBNdb/ZuNhF3lZ
-	OZ8JFwfqUZ8jyDixOGgflMSx9vwlAo0nSmR4lx8+l7KbQT63vuI8w4SM4YpmXW8578Ua
-	r0FEKXS/JH1Hp5xAa25XSirW5MBCMNtmwhwLmmZKGE3CS/a86OeXPOLy7htVIfkFhgnI
-	rzVB+gPDNC0od5nl9eVBSAt9nRKOK5uMoiHAXPazHP2Z0ondJ5oWgW90lx5ksONGWNo4
-	rsgA==
-X-Gm-Message-State: AEkoouvHCYs2OCIkOZZB4l/lg6ka0eCwoxIQoNj9ZPZGQmyI23zqEMkX3vLfIhQKf4pIxMx+IzhXW/FqAgtjXg==
-X-Received: by 10.28.37.71 with SMTP id l68mr8124400wml.50.1470902772756; Thu,
-	11 Aug 2016 01:06:12 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.28.139.148 with HTTP; Thu, 11 Aug 2016 01:05:52 -0700 (PDT)
-In-Reply-To: <CA+chaQdBBR9fys5njeqfsPSz9KoykhBDJT21sm0thtdoMKDZTg@mail.gmail.com>
-References: <1470827677-19644-1-git-send-email-ricardo.ribalda@gmail.com>
-	<CA+chaQdBBR9fys5njeqfsPSz9KoykhBDJT21sm0thtdoMKDZTg@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=uDog6/4CowFknjmazxHiRFfks6BIbhZHJFvVpc6BRS0=;
+	b=ahEhF3etJcxi0qpTLOl4EwRXraFLDXU0A6+XT9WZGDYMvL6I55H3iXcHMyoQT4agTi
+	iDHTcncR8r5hOVHg6DpGg1oPdIa3TRiQM15ZvKtiHUMrAMmfedzeU/fvw/uflWGNQ3GV
+	f6g2JdEEXpIHfpuVJrNLrEVinu0nnHyXI2H4e9zOxaXQsFM4MSpnqAgqywwl+v2m1O6F
+	zbSbsNzQTuz1/TyJSr4Xsxrt5WAs1Vwt4Axsd0shmvbQGVkcJ9lfl0hJgJYnCVUuxAnR
+	o5zV4Gg7CMhVxPvtFEN7fkGowOE3CcJBRC6sBq2FY4J2pbg95/YZiXnNa1THI2QnkWLb
+	2NfA==
+X-Gm-Message-State: AEkoouv47yo51wPZXZFi8xHpSWNywKjdPx0KBrwrTeHsJOIOvtfp4LvpEokOwqnnXfxc9Q==
+X-Received: by 10.25.144.75 with SMTP id s72mr1317028lfd.232.1470910255399;
+	Thu, 11 Aug 2016 03:10:55 -0700 (PDT)
+Received: from neopili.qtec.com
+	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
+	by smtp.gmail.com with ESMTPSA id a15sm437793lfb.34.2016.08.11.03.10.54
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 11 Aug 2016 03:10:54 -0700 (PDT)
 From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Thu, 11 Aug 2016 10:05:52 +0200
-Message-ID: <CAPybu_2Vx8ZmbUMKwOzAs_K5fY-VYQZS7ia+2zcOz0KBSn1REA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] glog: Add missing dependency
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 11 Aug 2016 12:10:45 +0200
+Message-Id: <1470910246-952-1-git-send-email-ricardo.ribalda@gmail.com>
+X-Mailer: git-send-email 2.8.1
+Subject: [meta-oe][PATCH 1/2] gflags: New recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,68 +51,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Aug 2016 08:06:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 11 Aug 2016 10:10:56 -0000
 
-Hi Martin
+C++ library that implements commandline flags processing. It includes
+built-in support for standard types such as string and the ability to
+define flags in the source file in which they are used.
 
-My bad, it is on my layer. I send it right I away.
+Used optionally by glog
 
-Regards!
+Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+---
+ meta-oe/recipes-support/gflags/gflags_2.1.2.bb | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-oe/recipes-support/gflags/gflags_2.1.2.bb
 
-
-
-On Wed, Aug 10, 2016 at 9:59 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Which layer provides gflags?
->
-> You'll probably need to add PACKAGECONFIG for it and let it disabled by
-> default, because there isn't gflags in meta-oe.
->
-> On Wed, Aug 10, 2016 at 1:14 PM, Ricardo Ribalda Delgado <
-> ricardo.ribalda@gmail.com> wrote:
->
->> Fixes:
->>
->> WARNING: glog-0.3.3-r0 do_package_qa: QA Issue:
->> /usr/lib/libglog.so.0.0.0 contained in package glog requires
->> libgflags.so.2()(64bit), but no providers found in RDEPENDS_glog?
->> [file-rdeps]
->>
->> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
->> ---
->>  meta-oe/recipes-support/glog/glog.inc | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-oe/recipes-support/glog/glog.inc
->> b/meta-oe/recipes-support/glog/glog.inc
->> index 8a1fb4250bbb..503904164312 100644
->> --- a/meta-oe/recipes-support/glog/glog.inc
->> +++ b/meta-oe/recipes-support/glog/glog.inc
->> @@ -6,6 +6,6 @@ HOMEPAGE = "https://code.google.com/p/google-glog/"
->>  LICENSE = "BSD"
->>  LIC_FILES_CHKSUM = "file://COPYING;md5=dc9db360e0bbd4e46672f3fd91dd6c4b"
->>
->> -DEPENDS = "libunwind"
->> +DEPENDS = "libunwind gflags"
->>
->>  inherit autotools pkgconfig
->> --
->> 2.8.1
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
-
+diff --git a/meta-oe/recipes-support/gflags/gflags_2.1.2.bb b/meta-oe/recipes-support/gflags/gflags_2.1.2.bb
+new file mode 100644
+index 000000000000..ac8d2ceeaa8a
+--- /dev/null
++++ b/meta-oe/recipes-support/gflags/gflags_2.1.2.bb
+@@ -0,0 +1,18 @@
++DESCRIPTION = "The gflags package contains a C++ library that implements commandline flags processing. It includes built-in support for standard types such as string and the ability to define flags in the source file in which they are used"
++
++HOMEPAGE = "https://github.com/gflags/gflags"
++
++RDEPENDS_${PN} += "bash"
++
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
++
++SRC_URI = "git://github.com/gflags/gflags.git;;nobranch=1"
++SRCREV = "1a02f2851ee3d48d32d2c8f4d8f390a0bc25565c"
++S = "${WORKDIR}/git/"
++
++FILES_${PN}-dev += "${libdir}/cmake"
++
++inherit cmake
++
++EXTRA_OECMAKE="-DBUILD_SHARED_LIBS=ON"
 -- 
-Ricardo Ribalda
+2.8.1
+
 
