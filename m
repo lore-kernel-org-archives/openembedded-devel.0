@@ -1,47 +1,39 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 0138A77257
+Return-Path: <prvs=4031d53273=michael.davis@essvote.com>
+Received: from mail1.essvote.com (mail1.essvote.com [66.37.226.19])
+	by mail.openembedded.org (Postfix) with ESMTP id 96D98771F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 14:15:53 +0000 (UTC)
-Received: by mail-wm0-f54.google.com with SMTP id f65so2749352wmi.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 07:15:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=63WT1M/BnXvY39SG5etcusezJ5DOKzO8uhlCU2QBxJ0=;
-	b=cPEPDixd+J+vwuG/uNyTDWLTNe8JgaDVOi2wnv4jyUSANT6EHMiUP6zwXkx/XFGfb0
-	fwu1kFaPLmc5xKq2w4kNvGqkhGvJpppP0N5UAcpILFu95+ajkEv2mhkglU6IFwag+dt7
-	UC+qFpucGs6QNe27KYRuE4lDG2pZoF9QJXFZDoqPnkLtWQnA8NQyvwgxPdDIgPwe9VEg
-	t4K2LeRyYS2c5CHNioBOggs+cc2C/z/QcA+PILvDASX2+o1t8TbN7/b4iiXkca9l0/Ns
-	X6VbBD+/AiscTZGiQ5Kh8cQkh466kzhh9EZthwQGOchwv/Xzd0zgLQEmBWu1Rtb8GxJk
-	B8lA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=63WT1M/BnXvY39SG5etcusezJ5DOKzO8uhlCU2QBxJ0=;
-	b=KBUVRWLeyzJLBgW1lP4oEz3mcPE0n7wmAR9f+KnOGkD9eWgkhpZaQ976y+QMIhdzNc
-	nvrurHrHtmLyRscLFtwu9kW982Iw7iuTbCjEVQ54LyYdo6wbqtVQ4OTZw7LjUvnDfmgr
-	K6seLLRjpa3s/LEQi1aa9mDjhang2zYOeflM9NSEtcsTZh7lD6SmFsmLTjZOX3n6r5fr
-	8pKNdnNmRLUhEx7a8DXb7FOp//TaKxDksils8Rowdsi/yQQQGaoLbND7aVLH7xoLpzF2
-	Rr7Izz4hQyZ46ygpJsoFzVg3YbdAxu2n3IaJHHjbeTgkFrjCWk8PtwtYvWXe/uq1xmlQ
-	Zg+w==
-X-Gm-Message-State: AEkoouvQKw/JewpqAcnUsy6JweYS2AX+MhrcMVmJUtC4cljqrK2S0teearot8lcp6972HfWFP+XN7CBhccdSRA==
-X-Received: by 10.46.71.69 with SMTP id u66mr1645377lja.14.1470924952710; Thu,
-	11 Aug 2016 07:15:52 -0700 (PDT)
+	Thu, 11 Aug 2016 14:59:33 +0000 (UTC)
+X-AuditID: 0a000213-f79d76d0000013de-dc-57ac92d3a1bf
+Received: from ESS-EX01.essvote.corp.local (Unknown_Domain [172.16.110.40])
+	by mail1.essvote.com (Symantec Messaging Gateway) with SMTP id
+	79.1F.05086.3D29CA75; Thu, 11 Aug 2016 09:59:32 -0500 (CDT)
+Received: from ESS-EX01.essvote.corp.local ([::1]) by
+	ESS-EX01.essvote.corp.local ([::1]) with mapi id 14.03.0301.000;
+	Thu, 11 Aug 2016 09:59:31 -0500
+From: "Davis, Michael" <michael.davis@essvote.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-oe][PATCHv4] pcsc-lite: Seperate GPLV3 portions from BSD
+Thread-Index: AQHR8+D3G7JXcovQoUamfW7cSZhY3g==
+Date: Thu, 11 Aug 2016 14:59:31 +0000
+Message-ID: <1470927539-22469-1-git-send-email-michael.davis@essvote.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.1.8.93]
 MIME-Version: 1.0
-Received: by 10.25.87.12 with HTTP; Thu, 11 Aug 2016 07:15:51 -0700 (PDT)
-In-Reply-To: <CAJTo0LbHi5+jwgKMV1-G4SvzkWKvGaEO5t8zTEfi9VSpeN2teQ@mail.gmail.com>
-References: <20160808115112.jhhfu6wqmwbv5qzh@jama>
-	<20160808120310.22277-1-Martin.Jansa@gmail.com>
-	<CAJTo0LbHi5+jwgKMV1-G4SvzkWKvGaEO5t8zTEfi9VSpeN2teQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 11 Aug 2016 16:15:51 +0200
-Message-ID: <CA+chaQfwCVnYDEwuRV5TqHkeNfyafVQvjKmkSfDFyavfjND9-Q@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "fan.xin" <fan.xin@jp.fujitsu.com>
-Subject: Re: [meta-oe][PATCH] qpdf: add new recipe
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrMLMWRmVeSWpSXmKPExsWyRiBPQ/fKpDXhBp9+CFlcPLyU2YHR49zG
+	FYwBjFHcNkmJJWXBmel5+nYJ3BlnjzWwFXQJVsyYeIKlgbGHr4uRk0NCwETiztJuFghbTOLC
+	vfVsXYxcHEICJxglmr7vYodwZjFKbPyzjRGkik3ASOLc9U1gtohArMS8TTOZQGxmAQOJd5s3
+	soLYwgLuEnMufIaq8ZH4NamFFcLWk3i1/TtYPYuAqsTxrmtANRwcvAKeEud3B4CEGYGO+H5q
+	DdRIcYlbT+YzQRwnILFkz3lmCFtU4uXjf6wQtqzEtx1TWCDq9SRuTJ3CBmFrSyxb+BqsnldA
+	UOLkzCcsExhFZiEZOwtJyywkLbOQtCxgZFnFKJibmJljqJdaXFyWX5Kql5yfu4kRGPRcDEzC
+	OxjnTLE9xCjAwajEw3th6upwIdbEsuLK3EOM0hwsSuK8KkJK4UIC6YklqdmpqQWpRfFFpTmp
+	xYcYmTg4DzFKcHBJiRSn5qWkFiWWlmTEg2IrvhgYXVINjGLdrZekJ94ssbpo7hf42m/9GuvV
+	Xl0n5AVKHIPO6+c/Plec3dZ0vN4j6KGiwx7+Ocu5rrxbUc56dNuEKB3VB1P2n8rrfnPuzQn/
+	atWGWVy8THzsh94r/6gTUp7G8vXa/VfCnvuqV7lnMN65Ym1x4KFCHUOr4gnpiUwdx39OeFIx
+	76oQY11LhhJLcUaioRZzUXEiAOrr3xl2AgAA
+Subject: [meta-oe][PATCHv4] pcsc-lite: Seperate GPLV3 portions from BSD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,34 +46,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Aug 2016 14:15:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 11 Aug 2016 14:59:34 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-I'll leave that to original submitter to resolve, test and resend.
+GPLV3 and BSD portions were originally placed in the same package.
+The GPLv3 portion has been seperated into pcsc-lite-spy and
+pcsc-lite-spy-dev so the package can be used with GPLv3 blacklisted.
+---
+ .../recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb  | 24 ++++++++++++++++++=
+----
+ 1 file changed, 20 insertions(+), 4 deletions(-)
 
-On Mon, Aug 8, 2016 at 5:21 PM, Burton, Ross <ross.burton@intel.com> wrote:
-
-> On 8 August 2016 at 13:03, Martin Jansa <martin.jansa@gmail.com> wrote:
->
-> > +do_configure_prepend() {
-> > +    sh ${S}/autogen.sh
-> > +}
-> >
->
-> https://github.com/qpdf/qpdf/blob/master/autogen.sh says that this is just
->
-> aclocal -I m4
-> autoheader
-> autoconf
->
-> So I don't see what this achieves as we're about to run this again anyway
-> via autoreconf.
->
-> Ross
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb b/meta-o=
+e/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
+index cc72549..0d2cb33 100644
+--- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
++++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
+@@ -1,7 +1,13 @@
+ SUMMARY =3D "PC/SC Lite smart card framework and applications"
+ HOMEPAGE =3D "http://pcsclite.alioth.debian.org/"
+ LICENSE =3D "BSD & GPLv3+"
+-LICENSE_${PN}-dev =3D "GPLv3+"
++LICENSE_${PN} =3D "BSD"
++LICENSE_${PN}-lib =3D "BSD"
++LICENSE_${PN}-doc =3D "BSD"
++LICENSE_${PN}-dev =3D "BSD"
++LICENSE_${PN}-dbg =3D "BSD & GPLv3+"
++LICENSE_${PN}-spy =3D "GPLv3+"
++LICENSE_${PN}-spy-dev =3D "GPLv3+"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dbcfbd85230ac3c586fb294c8b627cf3=
+2"
+ DEPENDS =3D "udev"
+=20
+@@ -20,14 +26,24 @@ EXTRA_OECONF =3D " \
+=20
+ S =3D "${WORKDIR}/pcsc-lite-${PV}"
+=20
+-PACKAGES =3D+ "${PN}-lib"
++PACKAGES =3D "${PN} ${PN}-dbg ${PN}-dev ${PN}-lib ${PN}-doc ${PN}-spy ${PN=
+}-spy-dev"
+=20
+ RRECOMMENDS_${PN} =3D "ccid"
+=20
+-FILES_${PN}-lib =3D "${libdir}/lib*${SOLIBS}"
++FILES_${PN} =3D "${sbindir}/pcscd"
++FILES_${PN}-lib =3D "${libdir}/libpcsclite*${SOLIBS}"
++FILES_${PN}-dev =3D "${includedir} \
++                   ${libdir}/pkgconfig \
++                   ${libdir}/libpcsclite.la \
++                   ${libdir}/libpcsclite.so"
++                  =20
++FILES_${PN}-spy =3D "${bindir}/pcsc-spy \
++                   ${libdir}/libpcscspy*${SOLIBS}"
++FILES_${PN}-spy-dev =3D "${libdir}/libpcscspy.la \
++                       ${libdir}/libpcscspy.so "
+=20
+ RPROVIDES_${PN} +=3D "${PN}-systemd"
+ RREPLACES_${PN} +=3D "${PN}-systemd"
+ RCONFLICTS_${PN} +=3D "${PN}-systemd"
+ SYSTEMD_SERVICE_${PN} =3D "pcscd.socket"
+-RDEPENDS_${PN} +=3D"python"
++RDEPENDS_${PN}-spy +=3D"python"
+--=20
+2.5.5
 
