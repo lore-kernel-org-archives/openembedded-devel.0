@@ -1,44 +1,47 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id EDF1177236
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id B869277245
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 13:08:05 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id q128so1300536wma.1
+	Thu, 11 Aug 2016 13:08:06 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id o80so1306716wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 06:08:06 -0700 (PDT)
+	Thu, 11 Aug 2016 06:08:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=2LZOaNSx6vIPswJgCDOMKdh3KxtXTiJwC+UFLHhEkeE=;
-	b=aenn330MQaRYdcIA8UhgF+BP2S/dN1RH/kLs1HSzXgRHQgyMBKiVmHpQLuHhf84LSv
-	Ka03oOK6Yx0vAVIua/lgQrAVHLbIXZn8ayUhixkcad9GynRPNCYiYdWllXg/aiL3FdXV
-	76h0ye8CTIDtrzjylkB++rMAkdwscDc/OW43N7eoR6HvzSXr1Ct64hSf9T/79PnbA6+C
-	qnwajzOpLHGMa4PqgzeAWxCuvUMBLTR2emOgWY5riNCtVr2Egwi4koTk+Ee1/1HsyTI3
-	x8GfS6oACFPQEQS4zxNNDeiGP0DVyFpldqhjJCsfJ6YAw6KQGSli6P+6NuwjvOJNH4QS
-	N0/w==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=7QEvN1AjTNlK1fkjau0pRzPJSwKM6SQRDbBNwrETpv0=;
+	b=U5VU+L7PHzIIkz4t2fcUWoT7xHOs/MpahUtFBgYyNmtrSrIBDw6r7hpJk5ZDKiB71+
+	EqNYArTjxt0+OzVDxTQsQeDHr1pkEer04QKg8b5HyZU8RNcoeVqYdBMdySCNY87R8Pog
+	T6eMr3M+IuPLB8ym4h/GAj5gNmejO2L8apcMCtvfjqrJJ1d3l1PrVdfwBOs1yw218/4F
+	Drp/GuIltvmnsZk6t+krPRofL8aU2PVi0KxrkT46wIsX3xY5mZeE2M1lPUuT+9beEWjM
+	YwzlUzK0+UyIq5ezzd4jKTJies4X2i2SbEWSi9IaeGFuJLIW1OfBcyXK2pWqCoOEv97q
+	Noow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=2LZOaNSx6vIPswJgCDOMKdh3KxtXTiJwC+UFLHhEkeE=;
-	b=mJdl5dmUwlu850U7iRJC0bX7W7JnfDangmC7dxCEjYLkoE56OLgERa6ZxJePB/EJr+
-	kMNEY0wLY9Y331p4btOjSNWqwFWBz0FY7fOhSMNKqmG1H8EAJAxaV9vOujYpI8QJeNo8
-	Hy2nC94L9/7mf1a6FeWVHKDVQsBJXYJfn6cV/ckwpMFejZ33r2gR9v93CXJbDyzRfDcW
-	EJ6p9cLB4iqkecCyyXwBLfE6AeKakBpH8ZIG8jaW6hg3PxcPYZDgbnRQkml8kI9dM0qH
-	Iog/0aLO7UtA0jVdrlih7fCS3lHFPLHH3pxfIP4BVyxUIe7uYwMY5uVjeXIEf/ZL+S4U
-	pn+Q==
-X-Gm-Message-State: AEkooutV32RFCSz3F+KF41vX0N6Guf1JjzHXPmChCMjS0bgYY8i3jQTS1ZBopUA/NdweJw==
-X-Received: by 10.46.0.5 with SMTP id 5mr1605519lja.59.1470920885630;
-	Thu, 11 Aug 2016 06:08:05 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=7QEvN1AjTNlK1fkjau0pRzPJSwKM6SQRDbBNwrETpv0=;
+	b=cCHVzOtzeVuyccgz6dh/XasJXp1Sh7u8pp8cQo/7Xjyzouv5rgRfCzVkeXzQ1Z2A6m
+	MmETkwtdigIcIgXcAkn6EmNTNBhRNup8DDWpwQV+0Ster/jlLQePnhsKAKXxm+IyZjmU
+	Or6HeK742VrNXRprpyW5bTuhHlcU1KP7RXlD8C0xFzSctSSwK5roIz7wMa7uT32r4Ta6
+	quo3fXd7lVsyIHXbfleUV3270VYAGR6jykzC9Yd6GeQGOQoek53pizh3fz9V42tOb6c0
+	mZU5jsyS4+Az0I2MzA/790nbEAebS1jCXxJP+TfadS0QayVdlcjzkafM8Y4vSX9pEev1
+	nH2w==
+X-Gm-Message-State: AEkoout5LG3G14Xji/0u79BKBRdKl4km6o9VJlp/Yn+ktXI6/UBXeStb4RBU7BpqNpGi2A==
+X-Received: by 10.46.33.5 with SMTP id h5mr1613445ljh.43.1470920886747;
+	Thu, 11 Aug 2016 06:08:06 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id f64sm106493lfi.36.2016.08.11.06.08.03
+	by smtp.gmail.com with ESMTPSA id f64sm106493lfi.36.2016.08.11.06.08.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 11 Aug 2016 06:08:03 -0700 (PDT)
+	Thu, 11 Aug 2016 06:08:05 -0700 (PDT)
 From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 Aug 2016 15:07:55 +0200
-Message-Id: <1470920876-22501-1-git-send-email-ricardo.ribalda@gmail.com>
+Date: Thu, 11 Aug 2016 15:07:56 +0200
+Message-Id: <1470920876-22501-2-git-send-email-ricardo.ribalda@gmail.com>
 X-Mailer: git-send-email 2.8.1
-Subject: [meta-oe][PATCH v3 1/2] gflags: New recipe
+In-Reply-To: <1470920876-22501-1-git-send-email-ricardo.ribalda@gmail.com>
+References: <1470920876-22501-1-git-send-email-ricardo.ribalda@gmail.com>
+Subject: [meta-oe][PATCH v3 2/2] glog: Update to version 0.3.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,45 +54,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Aug 2016 13:08:06 -0000
+X-List-Received-Date: Thu, 11 Aug 2016 13:08:07 -0000
 
-C++ library that implements commandline flags processing. It includes
-built-in support for standard types such as string and the ability to
-define flags in the source file in which they are used.
-
-Used optionally by glog
+-The repository has been moved to github.
+-There is a new release 0.3.4
+-Add a user configurable dependency on gflag
+-Merge .inc file on the recipe
 
 Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 ---
- meta-oe/recipes-support/gflags/gflags_2.1.2.bb | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-support/gflags/gflags_2.1.2.bb
+ ...configure.ac-Allow-user-to-disable-gflags.patch | 35 ++++++++++++++++++++++
+ meta-oe/recipes-support/glog/glog_0.3.3.bb         |  6 ----
+ .../glog/{glog.inc => glog_0.3.4.bb}               | 15 ++++++++--
+ 3 files changed, 47 insertions(+), 9 deletions(-)
+ create mode 100644 meta-oe/recipes-support/glog/glog/0001-configure.ac-Allow-user-to-disable-gflags.patch
+ delete mode 100644 meta-oe/recipes-support/glog/glog_0.3.3.bb
+ rename meta-oe/recipes-support/glog/{glog.inc => glog_0.3.4.bb} (49%)
 
-diff --git a/meta-oe/recipes-support/gflags/gflags_2.1.2.bb b/meta-oe/recipes-support/gflags/gflags_2.1.2.bb
+diff --git a/meta-oe/recipes-support/glog/glog/0001-configure.ac-Allow-user-to-disable-gflags.patch b/meta-oe/recipes-support/glog/glog/0001-configure.ac-Allow-user-to-disable-gflags.patch
 new file mode 100644
-index 000000000000..30fd5f85e253
+index 000000000000..596281ff6842
 --- /dev/null
-+++ b/meta-oe/recipes-support/gflags/gflags_2.1.2.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "The gflags package contains a C++ library that implements commandline flags processing. It includes built-in support for standard types such as string and the ability to define flags in the source file in which they are used"
-+HOMEPAGE = "https://github.com/gflags/gflags"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
++++ b/meta-oe/recipes-support/glog/glog/0001-configure.ac-Allow-user-to-disable-gflags.patch
+@@ -0,0 +1,35 @@
++From 0fabde0515e180c53961c27346dd7a79cffa4c1f Mon Sep 17 00:00:00 2001
++From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
++Date: Thu, 11 Aug 2016 11:49:36 +0200
++Subject: [PATCH] configure.ac: Allow user to disable gflags
 +
-+SRCREV = "1a02f2851ee3d48d32d2c8f4d8f390a0bc25565c"
-+SRC_URI = "git://github.com/gflags/gflags.git;branch=release"
++Under some circumstances like cross-compilation, the user might not want
++to enable support for gflags.
 +
-+S = "${WORKDIR}/git/"
++This patch allows support for --without-gflags
 +
-+inherit cmake
++Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
++---
++ configure.ac | 6 +++++-
++ 1 file changed, 5 insertions(+), 1 deletion(-)
 +
-+EXTRA_OECMAKE="-DBUILD_SHARED_LIBS=ON"
++diff --git a/configure.ac b/configure.ac
++index 7b4d21e7ae8a..eba5e5cda1ea 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -136,7 +136,11 @@ AC_ARG_WITH(gflags, AS_HELP_STRING[--with-gflags=GFLAGS_DIR],
++   CFLAGS="$CFLAGS $GFLAGS_CFLAGS"
++   LIBS="$LIBS $GFLAGS_LIBS"
++ )
++-AC_CHECK_LIB(gflags, main, ac_cv_have_libgflags=1, ac_cv_have_libgflags=0)
+++if test x"$with_gflags" = x"no"; then
+++  ac_cv_have_libgflags=0
+++else
+++  AC_CHECK_LIB(gflags, main, ac_cv_have_libgflags=1, ac_cv_have_libgflags=0)
+++fi
++ if test x"$ac_cv_have_libgflags" = x"1"; then
++   AC_DEFINE(HAVE_LIB_GFLAGS, 1, [define if you have google gflags library])
++   if test x"$GFLAGS_LIBS" = x""; then
++-- 
++2.8.1
 +
-+FILES_${PN}-dev += "${libdir}/cmake"
+diff --git a/meta-oe/recipes-support/glog/glog_0.3.3.bb b/meta-oe/recipes-support/glog/glog_0.3.3.bb
+deleted file mode 100644
+index de3f0765dec9..000000000000
+--- a/meta-oe/recipes-support/glog/glog_0.3.3.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require glog.inc
+-
+-SRC_URI = "http://google-glog.googlecode.com/files/glog-${PV}.tar.gz"
+-
+-SRC_URI[md5sum] = "a6fd2c22f8996846e34c763422717c18"
+-SRC_URI[sha256sum] = "fbf90c2285ba0561db7a40f8a4eefb9aa963e7d399bd450363e959929fe849d0"
+diff --git a/meta-oe/recipes-support/glog/glog.inc b/meta-oe/recipes-support/glog/glog_0.3.4.bb
+similarity index 49%
+rename from meta-oe/recipes-support/glog/glog.inc
+rename to meta-oe/recipes-support/glog/glog_0.3.4.bb
+index 8a1fb4250bbb..27beef5f9a45 100644
+--- a/meta-oe/recipes-support/glog/glog.inc
++++ b/meta-oe/recipes-support/glog/glog_0.3.4.bb
+@@ -1,11 +1,20 @@
+ DESCRIPTION = "The glog library implements application-level logging. This \
+ library provides logging APIs based on C++-style streams and various helper \
+ macros."
+-HOMEPAGE = "https://code.google.com/p/google-glog/"
+-
++HOMEPAGE = "https://github.com/google/glog"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=dc9db360e0bbd4e46672f3fd91dd6c4b"
+-
+ DEPENDS = "libunwind"
+ 
++SRCREV = "d8cb47f77d1c31779f3ff890e1a5748483778d6a"
++SRC_URI = " \
++    git://github.com/google/glog.git \
++    file://0001-configure.ac-Allow-user-to-disable-gflags.patch \
++"
 +
-+PACKAGES =+ "${PN}-bash-completion"
-+FILES_${PN}-bash-completion += "${bindir}/gflags_completions.sh"
-+RDEPENDS_${PN}-bash-completion = "bash-completion"
++S = "${WORKDIR}/git"
++
+ inherit autotools pkgconfig
++
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[gflags] = ",--without-gflags,gflags,"
 -- 
 2.8.1
 
