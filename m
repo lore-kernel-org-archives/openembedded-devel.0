@@ -1,43 +1,23 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id BCB9A77206
+Return-Path: <jack.mitchell@eumx.net>
+X-Greylist: delayed 509 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 11 Aug 2016 12:31:02 UTC
+Received: from bmx2.eumx.net (bmx2.eumx.net [37.48.73.248])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D65A77224
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 11:46:57 +0000 (UTC)
-Received: by mail-wm0-f50.google.com with SMTP id o80so10330253wme.1
+	Thu, 11 Aug 2016 12:31:02 +0000 (UTC)
+Received: from owm.eumx.net (unknown [10.1.1.70])
+	by bmx2.eumx.net (Postfix) with ESMTPS id 6D26DDC8DF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 04:46:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=kJ5rGomhOe0SfCQJ88nNP29q2htHffx7LCwUwy/w8Oo=;
-	b=WQHeF5Iklo4tioNWw+LgBIpIztW39B4RxaE+gdjOGcTlYA/GPNIfWtQ/Uz9r2ueKEN
-	9XxRcqLX75frHb8lFo10qG4+zu8heq9UjG2+K4R6Qbmightu+9OgcsbfqoYwxi1UYJy/
-	pqXSPIVRSExJ9GZ+Dsj47VvVO85xDuniZkeQJZ/t3BUGWNIWx0Y2umlJZhY2HEH28tHX
-	RWhEEbo2OBMY6jFKJPU179Sr84jQvwW3xaokaTXDHJvPl33sHZcBf/YB2AMnO/bl/VOv
-	6ZKNc59x1Lc/TvOXKBpxbPI3Bw3zsdxLXjMrK7LeX4bZcqmS3Oj0RRMoZoBX67kTyhPi
-	pcRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=kJ5rGomhOe0SfCQJ88nNP29q2htHffx7LCwUwy/w8Oo=;
-	b=d4IetPk7XjIz/9yKDQmgAFXbLZGzJtezK22OYZ+OdB2wrPrBRv+jRoq2kdJIqShgni
-	iXTdSKGV5lwwYyzF9O09FGRXOuEQ8xmb0Q/osS/f43iCztITIubC0BYkUykZ1NEeDXXO
-	uian7fZRZNG4dh/08753QACUBvJuzLTHj48w8Do7u6ok+3k7JQ8TMUi9HlXV7Mf/v8hP
-	ohkuPlMRsl1etCCP4+daO6aXoLv/ro+970rShC5+CY7oCze5PWuv0QpDpJAWG/b5YXxi
-	8/XFgiwJ9xJWb1tErgDS2NtWf7SE3Uf5SXhZ05yjPcAYuPKfQXUQJ8AiiuM5O3Tgfar5
-	rLrA==
-X-Gm-Message-State: AEkoout9F9WDktTu7bPJzB7anFKhYSn0O1Y2qFbaSyzgDHzCrtrjZTRUrfLk7r8PDDMWGTKgFxc3X/2duK8b0Q==
-X-Received: by 10.194.185.116 with SMTP id fb20mr11047568wjc.32.1470916017461; 
-	Thu, 11 Aug 2016 04:46:57 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.28.139.148 with HTTP; Thu, 11 Aug 2016 04:46:36 -0700 (PDT)
-In-Reply-To: <20160811114455.7awdrth4kx43m24z@jama>
+	Thu, 11 Aug 2016 12:22:33 +0000 (UTC)
+To: openembedded-devel@lists.openembedded.org
 References: <1470910246-952-1-git-send-email-ricardo.ribalda@gmail.com>
-	<20160811114455.7awdrth4kx43m24z@jama>
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Thu, 11 Aug 2016 13:46:36 +0200
-Message-ID: <CAPybu_2rirHuw9W1Z3Fq5UJjJ+nCXQ3-RTZr=3fESt-d=JTfkA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+From: ml@embed.me.uk
+Message-ID: <e653ed48-a9d7-9bd7-1d12-0cf5b85e82b3@eumx.net>
+Date: Thu, 11 Aug 2016 13:22:32 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.2.0
+MIME-Version: 1.0
+In-Reply-To: <1470910246-952-1-git-send-email-ricardo.ribalda@gmail.com>
 Subject: Re: [meta-oe][PATCH 1/2] gflags: New recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -51,14 +31,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Aug 2016 11:46:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 11 Aug 2016 12:31:05 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Martin
-
-On Thu, Aug 11, 2016 at 1:44 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
->> +SRC_URI = "git://github.com/gflags/gflags.git;;nobranch=1"
+On 11/08/16 11:10, Ricardo Ribalda Delgado wrote:
+> C++ library that implements commandline flags processing. It includes
+> built-in support for standard types such as string and the ability to
+> define flags in the source file in which they are used.
 >
-> It's in "release" branch, so I'll replace ;;nobranch=1 with ;branch=release when cherry-picking.
-Thanks!
+> Used optionally by glog
+>
+> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+> ---
+>   meta-oe/recipes-support/gflags/gflags_2.1.2.bb | 18 ++++++++++++++++++
+>   1 file changed, 18 insertions(+)
+>   create mode 100644 meta-oe/recipes-support/gflags/gflags_2.1.2.bb
+>
+> diff --git a/meta-oe/recipes-support/gflags/gflags_2.1.2.bb b/meta-oe/recipes-support/gflags/gflags_2.1.2.bb
+> new file mode 100644
+> index 000000000000..ac8d2ceeaa8a
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/gflags/gflags_2.1.2.bb
+> @@ -0,0 +1,18 @@
+> +DESCRIPTION = "The gflags package contains a C++ library that implements commandline flags processing. It includes built-in support for standard types such as string and the ability to define flags in the source file in which they are used"
+> +
+> +HOMEPAGE = "https://github.com/gflags/gflags"
+> +
+> +RDEPENDS_${PN} += "bash"
+
+Where does this dependency come from, seems odd that a compiled library 
+should depend on bash?
+
+> +
+> +LICENSE = "BSD"
+> +LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
+> +
+> +SRC_URI = "git://github.com/gflags/gflags.git;;nobranch=1"
+> +SRCREV = "1a02f2851ee3d48d32d2c8f4d8f390a0bc25565c"
+> +S = "${WORKDIR}/git/"
+> +
+> +FILES_${PN}-dev += "${libdir}/cmake"
+> +
+> +inherit cmake
+> +
+> +EXTRA_OECMAKE="-DBUILD_SHARED_LIBS=ON"
+
 
