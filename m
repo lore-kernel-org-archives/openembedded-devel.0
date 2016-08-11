@@ -1,36 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 91C20601B8
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A1807721D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 19:09:13 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id o1so364864qkd.2
+	Thu, 11 Aug 2016 19:14:55 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id u25so189087qtb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 12:09:14 -0700 (PDT)
+	Thu, 11 Aug 2016 12:14:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=1bXCdnhdqSG6r4etkvDjID0jUgPpI3/DWz2GM8Dwuu8=;
-	b=LXTUfB0677IIRld3LXnjVwea9b3qKOC6tVfm8hL4YhZEh40qCCK0qnyE2fC2I+drfi
-	4W3lhFMxr6NWAz4qW2kSI0NDlpoQKne6X64Uv8RY8F0siq8hg2z1LoAvQ4HeCqDNgHfY
-	iw2umdY06zNiKPSKYcchL+CfiCSxioQVwQijtaXEoKB9dyhUfsyv2SZoCgViv2vqxCbp
-	hJkCQcHFLH6jgqlcX0YAJpfx1syuqEMl+3JNQwUYucVSpUu44NrARe39QDYHToM1klqk
-	QXhMIxf6nvhmoil+C+K0A6GGVSNACljtWJ/T9N57GJEfSwNBy/ldnMxP52PdAUREgFiM
-	AbTA==
-X-Gm-Message-State: AEkoouvuFTeyAp3fPzNuCVIQWMN6Z/hk663VJUIVZano3AMtc+1upwlQByhQbm/1jvcb7w==
-X-Received: by 10.55.165.78 with SMTP id o75mr13242388qke.163.1470942553622;
-	Thu, 11 Aug 2016 12:09:13 -0700 (PDT)
+	bh=zRzzdFPxeIV1x0nnFt1BLICq+IpIQzC015cXrTzdPsU=;
+	b=ZXzmQUmmQ+bKc/oNYEzV6QrSj/nYLTPjODwdid/1A/8iuh1NP1P1JPzQ4AktSCoufU
+	/PQPCcJe3cXMgg3fDjgUHBrMrx3EUGGNUTkiPzeBDaDRdY8SSVfZYD7J/9s6UPVKJTmm
+	g/YhXTB80TaliVhBPahcL/AB9CGsV0nd1EJ8L3HhlJV30waqqL37Tm/ANnoUOZVSVXce
+	ffg4wG0yzv6cX3IyGB0uouxIU+I/Yxl7O3/ljr2Nm9xDbhCnwmuGdtpfAsHw0DDTtpyW
+	ixpqVE27tINp98ZwhIFFeriWJZentG5WaNCDbTiASFwbT1oEOl+ZE89IQW9Mu697qF/6
+	+M2w==
+X-Gm-Message-State: AEkoouto+Ae//bhslD7XBXviB1dznSgvKbeJQjZ/hrjA4aWT/3uT4YBw7i1n0DWzHx6eLA==
+X-Received: by 10.200.49.100 with SMTP id h33mr12931307qtb.86.1470942895633;
+	Thu, 11 Aug 2016 12:14:55 -0700 (PDT)
 Received: from localhost.localdomain ([96.91.222.230])
 	by smtp.gmail.com with ESMTPSA id
-	i65sm2284413qtb.18.2016.08.11.12.09.12
+	t15sm2293987qtc.26.2016.08.11.12.14.54
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 11 Aug 2016 12:09:13 -0700 (PDT)
+	Thu, 11 Aug 2016 12:14:55 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 Aug 2016 15:09:04 -0400
-Message-Id: <1470942544-24655-1-git-send-email-derek@asterius.io>
+Date: Thu, 11 Aug 2016 15:14:39 -0400
+Message-Id: <1470942879-28353-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] ninja: update to version 1.7.1
+Subject: [meta-oe][PATCH] utouch-frame: fix build errors associated with xmllint
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,30 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Aug 2016 19:09:14 -0000
+X-List-Received-Date: Thu, 11 Aug 2016 19:14:59 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-devtools/ninja/{ninja_1.6.0.bb => ninja_1.7.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/ninja/{ninja_1.6.0.bb => ninja_1.7.1.bb} (91%)
+ meta-oe/recipes-support/utouch/utouch-frame_git.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/ninja/ninja_1.6.0.bb b/meta-oe/recipes-devtools/ninja/ninja_1.7.1.bb
-similarity index 91%
-rename from meta-oe/recipes-devtools/ninja/ninja_1.6.0.bb
-rename to meta-oe/recipes-devtools/ninja/ninja_1.7.1.bb
-index 4d6c47e..2a4b829 100644
---- a/meta-oe/recipes-devtools/ninja/ninja_1.6.0.bb
-+++ b/meta-oe/recipes-devtools/ninja/ninja_1.7.1.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a81586a64ad4e476c791cda7e2f2c52e"
+diff --git a/meta-oe/recipes-support/utouch/utouch-frame_git.bb b/meta-oe/recipes-support/utouch/utouch-frame_git.bb
+index 8fc8733..9bd18fc 100644
+--- a/meta-oe/recipes-support/utouch/utouch-frame_git.bb
++++ b/meta-oe/recipes-support/utouch/utouch-frame_git.bb
+@@ -16,5 +16,6 @@ PV = "1.1.2+git${SRCPV}"
  
- DEPENDS = "re2c-native ninja-native"
+ S = "${WORKDIR}/git/"
  
--SRCREV = "484c16336f19bd8970bb6e75322d61b92a229899"
-+SRCREV = "b49b0fc01bb052b6ac856b1e72be9391e962398e"
- 
- SRC_URI = "git://github.com/martine/ninja.git;branch=release"
- 
+-# http://errors.yoctoproject.org/Errors/Details/74486/
+-PNBLACKLIST[utouch-frame] ?= "BROKEN: Fails to execute xmllint"
++# Fix non-deterministic issue with a2x being found in the environment (asciidoc-native)
++# and failing to complete xmllint due to missing dtd files
++EXTRA_OECONF = "ASCIIDOC='/bin/false'"
 -- 
 1.9.1
 
