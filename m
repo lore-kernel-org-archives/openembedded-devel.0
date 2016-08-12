@@ -1,24 +1,33 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C8257719D
+Return-Path: <jeremy.rosen@smile.fr>
+Received: from idris.smile.fr (idris.smile.fr [91.216.209.19])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C4AF731C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Aug 2016 13:08:25 +0000 (UTC)
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga104.fm.intel.com with ESMTP; 12 Aug 2016 06:08:26 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.28,510,1464678000"; d="scan'208";a="864322826"
-Received: from mbabyjoh-desk.fi.intel.com (HELO
-	mbabyjoh-desk.ger.corp.intel.com) ([10.237.72.71])
-	by orsmga003.jf.intel.com with ESMTP; 12 Aug 2016 06:08:25 -0700
-Date: Fri, 12 Aug 2016 16:09:37 +0300
-From: "Maxin B. John" <maxin.john@intel.com>
+	Fri, 12 Aug 2016 13:38:59 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by idris.smile.fr (Postfix) with ESMTP id B1B041EE0501
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Aug 2016 15:38:59 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at smile.fr
+Received: from idris.smile.fr ([127.0.0.1])
+	by localhost (bluemind-mta.prod.vitry.intranet [127.0.0.1])
+	(amavisd-new, port 10024) with ESMTP id HxntCwOMQ9tz
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Aug 2016 15:38:59 +0200 (CEST)
+Received: from [10.9.18.224] (229.29.205.77.rev.sfr.net [77.205.29.229])
+	by idris.smile.fr (Postfix) with ESMTPSA id 385A11EE0A32
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Aug 2016 15:38:57 +0200 (CEST)
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160812130937.GB28597@mbabyjoh-desk.ger.corp.intel.com>
-References: <1470727937-18826-1-git-send-email-erkka.kaaria@intel.com>
+References: <bef7bc37-7691-5631-d232-80ffc0e29e26@smile.fr>
+	<CAJTo0LYzmcMhA22cdJX5mS1n30tN1G9XSD3LV+-CpEVOQC=OQA@mail.gmail.com>
+From: =?UTF-8?B?SsOpcsOpbXkgUm9zZW4=?= <jeremy.rosen@smile.fr>
+Message-ID: <57f8c9eb-057b-e2c0-df16-826a6662dcc8@smile.fr>
+Date: Fri, 12 Aug 2016 15:38:52 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Firefox/45.0 Icedove/45.2.0
 MIME-Version: 1.0
-In-Reply-To: <1470727937-18826-1-git-send-email-erkka.kaaria@intel.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-java][PATCH] openjdk-8: Upgrade from u72 to u102y
+In-Reply-To: <CAJTo0LYzmcMhA22cdJX5mS1n30tN1G9XSD3LV+-CpEVOQC=OQA@mail.gmail.com>
+Subject: Re: [Jethro] Can't compile gcc-cross when gcc-6 is the host compiler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,59 +40,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Aug 2016 13:08:26 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Fri, 12 Aug 2016 13:39:02 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Hi Erkka,
 
-On Tue, Aug 09, 2016 at 10:32:17AM +0300, Erkka K‰‰ri‰ wrote:
-> Openjdk is upgraded from u72 to u102. Two patches are dropped, as these
-> were backports and the fixes are present in the current version. One
-> patch was refreshed. One patch was backported from the upcoming u112 to
-> fix a zero mode crash.
-> 
-> Signed-off-by: Erkka K‰‰ri‰ <erkka.kaaria@intel.com>
-> ---
->  recipes-core/openjdk/openjdk-8-native_102b14.bb    |    2 +
->  recipes-core/openjdk/openjdk-8-native_72b05.bb     |    2 -
->  ...ease-72b05.inc => openjdk-8-release-102b14.inc} |   51 +-
->  .../{openjdk-8_72b05.bb => openjdk-8_102b14.bb}    |    4 +-
->  .../{openjre-8_72b05.bb => openjre-8_102b14.bb}    |    4 +-
->  .../openjdk8-avoid-early-ldflags-expansion.patch   |   53 -
->  .../openjdk8-fix-shark-stdc++11.patch              | 2623 ++++++++++----------
->  .../openjdk8-fix-zero-mode-crash.patch             |   49 +
->  ..._than_returning_address_of_local_variable.patch |   23 -
-<snip>
 
-openjdk-8 build fails with the following error now:
+On 11/08/2016 21:38, Burton, Ross wrote:
+> On 11 August 2016 at 13:40, J√©r√©my Rosen <jeremy.rosen@smile.fr> wrote:
+>
+>> This helped, and allowed me to go much further in my build, but the recipe
+>> gcc-cross-arm still failed. To be able to compile my build I had to add the
+>> following to my local.conf
+>>
+>> CC_pn-gcc-cross-arm= "${BUILD_CC}"
+>> CXX_pn-gcc-cross-arm= "${BUILD_CXX}"
+>> CC_pn-gcc-crosssdk-x86_64= "${BUILD_CC}"
+>> CXX_pn-gcc-crosssdk-x86_64= "${BUILD_CXX}"
+>>
+>>
+>> So apparently, gcc still has some reference to $CC and $CXX hardcoded
+>> somewhere (I think it's in do_configure)
+>>
+>> It seems to set $CC in the do_compile correctly, but not in do_configure.
+>> And it never sets $CXX
+>>
+>> I tried to understand what the GCC recipe was doing wrong, but I couldn't
+>> find out on first look and it's a really complicated recipe
+>>
+> Could you try adding a do_configure_prepend to gcc-cross.inc that sets
+> exports those (and extend the do_compile exports) to see if that solves it?
 
-| /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/os/linux/vm/os_linux.inline.hpp:127:42: error: 'int readdir_r(DIR*, dirent*, dirent**)' is deprecated [-Werror=deprecated-declarations]
-|    if((status = ::readdir_r(dirp, dbuf, &p)) != 0) {
-|                                           ^
-| In file included from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/os/linux/vm/jvm_linux.h:44:0,
-|                  from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/share/vm/prims/jvm.h:30,
-|                  from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/share/vm/utilities/debug.hpp:29,
-|                  from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/share/vm/runtime/globals.hpp:28,
-|                  from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/share/vm/memory/allocation.hpp:28,
-|                  from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/share/vm/memory/iterator.hpp:28,
-|                  from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/share/vm/memory/genOopClosures.hpp:28,
-|                  from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/share/vm/oops/klass.hpp:28,
-|                  from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/share/vm/runtime/handles.hpp:28,
-|                  from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/share/vm/memory/universe.hpp:28,
-|                  from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/share/vm/code/oopRecorder.hpp:28,
-|                  from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/share/vm/asm/codeBuffer.hpp:28,
-|                  from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/share/vm/code/codeBlob.hpp:28,
-|                  from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/share/vm/code/nmethod.hpp:28,
-|                  from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/share/vm/runtime/simpleThresholdPolicy.hpp:28,
-|                  from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/share/vm/runtime/advancedThresholdPolicy.hpp:28,
-|                  from /media/poky/build/tmp/work/core2-64-poky-linux/openjdk-8/102b14-r0/jdk8u-bf0932d3e0f8/hotspot/src/share/vm/runtime/advancedThresholdPolicy.cpp:26:
-| /media/poky/build/tmp/sysroots/qemux86-64/usr/include/dirent.h:183:12: note: declared here
-|  extern int readdir_r (DIR *__restrict __dirp,
-|             ^~~~~~~~~
-| cc1plus: all warnings being treated as errors
+I did the following
 
-Best Regards,
-Maxin
+diff --git a/meta/recipes-devtools/gcc/gcc-cross.inc 
+b/meta/recipes-devtools/gcc/gcc-cross.inc
+index aa10633..9a2e06f 100644
+--- a/meta/recipes-devtools/gcc/gcc-cross.inc
++++ b/meta/recipes-devtools/gcc/gcc-cross.inc
+@@ -36,8 +36,14 @@ EXTRA_OECONF_PATHS = "\
+
+  ARCH_FLAGS_FOR_TARGET += 
+"-isystem${STAGING_DIR_TARGET}${target_includedir}"
+
++do_configure_prepend () {
++    export CC="${BUILD_CC}"
++    export CXX="${BUILD_CXX}"
++}
++
+  do_compile () {
+      export CC="${BUILD_CC}"
++    export CXX="${BUILD_CXX}"
+      export AR_FOR_TARGET="${TARGET_SYS}-ar"
+      export RANLIB_FOR_TARGET="${TARGET_SYS}-ranlib"
+      export LD_FOR_TARGET="${TARGET_SYS}-ld"
+
+
+(which I think is what you meant) and it did indeed solve the problem.
+
+> Ross
+
 
