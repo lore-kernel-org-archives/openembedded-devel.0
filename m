@@ -1,38 +1,36 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 1027977223
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id D9C797680A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 21:03:00 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id i5so1496201wmg.2
+	Fri, 12 Aug 2016 01:27:25 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id c52so494112qte.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 14:03:01 -0700 (PDT)
+	Thu, 11 Aug 2016 18:27:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=jxOzEhe8c1idhE7otVzq6wi0TzLlhnnlJpz9q+9hvMY=;
-	b=gtGP7tsqQpaZHuxU8XlDk1Q4jTs94dXYi5n6jY8tayuibm+DtumjWht+9taUYvPDVn
-	t8btZc0cPrJ2QBoik+TLeBUCjw2FtVsK1fsl420QGOs3jRzz7wi417SWqzXunZJ08o9I
-	fJLYYFD9KMIt8nU0dAYk46Z1GKq33LA7tUBtYVBG37SrYIpgauxYR9DgzJ0k84tDah0x
-	73tFBXPQtyWQUTseX+b2ORGJW0EftoML+p3Xpv59EFR8E6QZqgfbt3mYgofkqviipadh
-	9Si97w4p4VBZ3qvENmGe8OM4mCZ5fA9CRoqOCc/C5BMHO0AFEkHJ7orzlTo2xpe81A09
-	13lA==
-X-Gm-Message-State: AEkoousJl2bQKXlLavhorQOfq0LZBcwLbK17yxBGaqF+ephkse8+w7mDXx1Y3N/JoyLe0w==
-X-Received: by 10.28.139.144 with SMTP id n138mr11770538wmd.71.1470949380400; 
-	Thu, 11 Aug 2016 14:03:00 -0700 (PDT)
-Received: from tfsielt31850.fritz.box (31-187-15-27.dynamic.upc.ie.
-	[31.187.15.27])
-	by smtp.gmail.com with ESMTPSA id 3sm1532052wms.1.2016.08.11.14.02.59
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 11 Aug 2016 14:02:59 -0700 (PDT)
-From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=xFGmx93l0yiJUA2Mech8ri96bTTMkyxa1G+a5EDySkg=;
+	b=Y6cHvwFniIa8XE8ptKQc/h8Gyyy8Z3U5BidR5f4Z2DMGS9Hdp6TTGhMvvYUP3o4E2t
+	ZDqgAx6Pdpvx0Rknd0o5ofaHYL1LpBqF7QDYWGD7dkN0Warng0U9LA9ZTp5w7Pcxs+fb
+	Jeib76iWc477L10CXLlCdlrKTDKKwJNx4R58dP3FyLjWgas5L+KqHryyz27S6Bb/T7Fh
+	e2jUu1dFhmvwPE43PGUDivriP7/E1wo9Myp2ZuxwCUGjeF865kjfjJXpwRVD2jwnOoZn
+	HzoPo71V85bSfYr4Nq3qtDlQDtx2aZbCrkBXJfSP3S7NXAz/amA3+oZyRILpg2xaeOie
+	Hlxw==
+X-Gm-Message-State: AEkoouvAevb3tilELSFpGsMbr6Cbd6fqXgDT+X/NRWf1qQ8GoMk4DeZX/H4BtP3dwypmCA==
+X-Received: by 10.200.48.146 with SMTP id v18mr14670076qta.107.1470965245612; 
+	Thu, 11 Aug 2016 18:27:25 -0700 (PDT)
+Received: from lnx-dereks-laptop.minotaur.lab
+	(c-73-172-178-168.hsd1.md.comcast.net. [73.172.178.168])
+	by smtp.gmail.com with ESMTPSA id 73sm3091353qtc.16.2016.08.11.18.27.24
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 11 Aug 2016 18:27:25 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 Aug 2016 22:03:09 +0100
-Message-Id: <1470949390-21988-1-git-send-email-git@andred.net>
-X-Mailer: git-send-email 2.8.1
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/2] crda: split wireless-regdb out into own recipe
+Date: Thu, 11 Aug 2016 21:27:17 -0400
+Message-Id: <1470965237-22663-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-python][PATCH] gateone: remote custom prefix for /var
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,93 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Aug 2016 21:03:03 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 12 Aug 2016 01:27:26 -0000
 
-This allows for independent updates of the regulatory database.
-
-Signed-off-by: André Draszik <git@andred.net>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-connectivity/crda/crda_3.18.bb         | 25 ++++++----------------
- .../wireless-regdb/wireless-regdb_2014.11.18.bb    | 18 ++++++++++++++++
- 2 files changed, 24 insertions(+), 19 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2014.11.18.bb
+ meta-python/recipes-connectivity/gateone/gateone_git.bb | 4 ----
+ 1 file changed, 4 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/crda/crda_3.18.bb b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-index 7e13d7b..4a93930 100644
---- a/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-+++ b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-@@ -1,23 +1,18 @@
- SUMMARY = "Wireless Central Regulatory Domain Agent"
- HOMEPAGE = "http://wireless.kernel.org/en/developers/Regulatory/CRDA"
- SECTION = "net"
--LICENSE = "copyleft-next-0.3.0 & ISC"
--LIC_FILES_CHKSUM = "file://copyleft-next-0.3.0;md5=8743a2c359037d4d329a31e79eabeffe \
--                    file://${WORKDIR}/wireless-regdb-2014.11.18/LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
-+LICENSE = "copyleft-next-0.3.0"
-+LIC_FILES_CHKSUM = "file://copyleft-next-0.3.0;md5=8743a2c359037d4d329a31e79eabeffe"
+diff --git a/meta-python/recipes-connectivity/gateone/gateone_git.bb b/meta-python/recipes-connectivity/gateone/gateone_git.bb
+index 44df604..6a93f83 100644
+--- a/meta-python/recipes-connectivity/gateone/gateone_git.bb
++++ b/meta-python/recipes-connectivity/gateone/gateone_git.bb
+@@ -15,7 +15,6 @@ SRC_URI = "git://github.com/liftoff/GateOne.git;branch=master \
+ S = "${WORKDIR}/git"
  
- DEPENDS = "python-m2crypto-native python-native libgcrypt libnl"
+ inherit distutils python-dir systemd update-rc.d
+-export prefix = "${localstatedir}"
  
--SRC_URI = "https://www.kernel.org/pub/software/network/crda/${BP}.tar.xz;name=crda \
--           https://www.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2014.11.18.tar.xz;name=bin \
-+SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz \
-            file://do-not-run-ldconfig-if-destdir-is-set.patch \
-            file://fix-linking-of-libraries-used-by-reglib.patch \
-            file://fix-gcc-6-unused-variables.patch \
- "
--SRC_URI[crda.md5sum] = "0431fef3067bf503dfb464069f06163a"
--SRC_URI[crda.sha256sum] = "43fcb9679f8b75ed87ad10944a506292def13e4afb194afa7aa921b01e8ecdbf"
+ DISTUTILS_INSTALL_ARGS = "--root=${D} \
+     --prefix=${prefix} \
+@@ -87,6 +86,3 @@ RDEPENDS_${PN} = "mime-support \
+ 
+ SYSTEMD_SERVICE_${PN} = "gateone.service"
+ INITSCRIPT_NAME = "gateone"
 -
--SRC_URI[bin.md5sum] = "d750c402c5510add7380edcb1d9b75b2"
--SRC_URI[bin.sha256sum] = "eab6b50f30748a8b0065ba38cf3df05aac161a5861ae0a6c3cfd01d38a71c9dd"
-+SRC_URI[md5sum] = "0431fef3067bf503dfb464069f06163a"
-+SRC_URI[sha256sum] = "43fcb9679f8b75ed87ad10944a506292def13e4afb194afa7aa921b01e8ecdbf"
- 
- inherit python-dir pythonnative
- # Recursive make problem
-@@ -29,14 +24,6 @@ do_compile() {
- 
- do_install() {
-     oe_runmake SBINDIR=${sbindir}/ install
--
--    install -d ${D}${libdir}/crda/
--
--    install -m 0644 ${WORKDIR}/wireless-regdb-2014.11.18/regulatory.bin ${D}${libdir}/crda/regulatory.bin
- }
- 
--
--RDEPENDS_${PN} = "udev"
--FILES_${PN} += "${libdir}crda/regulatory.bin \
--                ${base_libdir}/udev/rules.d/85-regulatory.rules \
--"
-+RDEPENDS_${PN} = "udev wireless-regdb"
-diff --git a/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2014.11.18.bb b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2014.11.18.bb
-new file mode 100644
-index 0000000..b3d82ba
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/wireless-regdb/wireless-regdb_2014.11.18.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "Wireless Central Regulatory Domain Database"
-+HOMEPAGE = "http://wireless.kernel.org/en/developers/Regulatory/CRDA"
-+SECTION = "net"
-+LICENSE = "ISC"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
-+
-+SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz"
-+SRC_URI[md5sum] = "d750c402c5510add7380edcb1d9b75b2"
-+SRC_URI[sha256sum] = "eab6b50f30748a8b0065ba38cf3df05aac161a5861ae0a6c3cfd01d38a71c9dd"
-+
-+inherit bin_package
-+
-+do_install() {
-+    install -d -m0755 ${D}${libdir}/crda
-+    install -m 0644 regulatory.bin ${D}${libdir}/crda/regulatory.bin
-+}
-+
-+RSUGGESTS_${PN} = "crda"
+-# http://errors.yoctoproject.org/Errors/Details/74489/
+-PNBLACKLIST[gateone] ?= "BROKEN: Fails to detect python's Makefile"
 -- 
-2.8.1
+1.9.1
 
 
