@@ -1,45 +1,24 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E58173259
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 37CDC6FEFA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Aug 2016 06:37:41 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id o80so1117467wme.0
+	Fri, 12 Aug 2016 07:21:17 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u7C7KWKj001636
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Aug 2016 23:37:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=+SGDiRDMM6RvOUIGd8e4SnGP0DhZsx1ZpdoFaH/37rY=;
-	b=W5wQj4ze2d9QGuRbh0GZiyzEeQ5Tp+um/xi5Lbrb2XYRQoJR+3wQjC/W8K2qowSPS1
-	87otSpz3DKyI3jN8bENp6rasYyJkbSzNaZSCmNrFdDvUeHnO1xHFhQGKHFrO9YF6uwV1
-	U2kmrLE3OzH7gX+THvZlH4sySxNaH87I72iytPLRE5P172UYfFJ3mF/RyoSVoEb2pD3c
-	R+rCi3ihhnLgTdvpzfjA9H25I5LwQ7bnIOSeNZkQWM1iDN5rWpD/8JKYHB2qq41FLITb
-	lAkM9IZhGbN3G6798Gf+aZd+AT2OhVg1gAKiYgE3AfFakKMvuBYcRJLnvhRAFJrgRrmG
-	vMfQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=+SGDiRDMM6RvOUIGd8e4SnGP0DhZsx1ZpdoFaH/37rY=;
-	b=FRTlEneQe2/iF6gAbRVYQwodyqAVVsXxKywUAZQ2G6/yVERX+fb5EfBLqDgM6KWxko
-	hY/s7Kn1PjmAHruIGxrUQFnyvB7Q+UZJZspr0kKrVkkcrEf9hkp8bM4n02zITAaNwGlS
-	o1SmcC96Fp/MCNy0h3bzJ6XVWv7WHaCIO9UJqJ8LK7OpZK1GZ9O9lP/LWCsSo3u2cA82
-	aTTh4jBXjFlLoOtj425wITPu3AwbQO1TTYYZmTyYQLj87wx4L8JmWm3lZXCEhhJgNz/A
-	0aXbKFMF9UgkoGxcs5xV4CGcFlqhVGat8Os0I2mac5h1muqxRlayS3bwv9NiNs8LbqVz
-	8cUw==
-X-Gm-Message-State: AEkoousVUESzL3FvPzC4hDEno+yGpIUJEHoIqzqqdfY/gpRcWgkZdQCKj3vMfiL56yLjv9h1zM+rHGT6s1g9jA==
-X-Received: by 10.28.37.71 with SMTP id l68mr1313663wml.50.1470983862110; Thu,
-	11 Aug 2016 23:37:42 -0700 (PDT)
+	Fri, 12 Aug 2016 00:21:18 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Fri, 12 Aug 2016 00:20:31 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 12 Aug 2016 15:19:56 +0800
+Message-ID: <1470986396-17983-1-git-send-email-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Received: by 10.28.139.148 with HTTP; Thu, 11 Aug 2016 23:37:21 -0700 (PDT)
-In-Reply-To: <D01FFBA5-7B48-4F0F-B1E0-3D96FE48044F@gmail.com>
-References: <1470920876-22501-1-git-send-email-ricardo.ribalda@gmail.com>
-	<D01FFBA5-7B48-4F0F-B1E0-3D96FE48044F@gmail.com>
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Fri, 12 Aug 2016 08:37:21 +0200
-Message-ID: <CAPybu_35+Ug0CpasvpVg=WfC2N3F_6hmcSbN7CJ7tquhGr7C8A@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v3 1/2] gflags: New recipe
+Subject: [meta-networking][PATCH] proftpd: fix system account login failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,30 +31,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Aug 2016 06:37:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 12 Aug 2016 07:21:18 -0000
+Content-Type: text/plain
 
-Hi Khem
+From: Mingli Yu <Mingli.Yu@windriver.com>
 
-On Fri, Aug 12, 2016 at 7:36 AM, Khem Raj <raj.khem@gmail.com> wrote:
+When pam is enabled,
+  1, Customize the proftpd.conf to use pam to authenticate
+  2, Add proftpd pam configuration file /etc/pam.d/proftpd
 
->> +DESCRIPTION =3D "The gflags package contains a C++ library that impleme=
-nts commandline flags processing. It includes built-in support for standard=
- types such as string and the ability to define flags in the source file in=
- which they are used"
->> +HOMEPAGE =3D "https://github.com/gflags/gflags"
->> +LICENSE =3D =E2=80=9CBSD"
->
-> which Clause ?
+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+---
+ meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-I have no idea,
-I has the same License file as glog:
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb
+index b6fd4b2..2332ef8 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb
+@@ -92,6 +92,15 @@ do_install () {
+     # create the pub directory
+     mkdir -p ${D}/home/${FTPUSER}/pub/
+     chown -R ${FTPUSER}:${FTPGROUP} ${D}/home/${FTPUSER}/pub
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
++        # install proftpd pam configuration
++        install -d ${D}${sysconfdir}/pam.d
++        install -m 644 ${S}/contrib/dist/rpm/ftp.pamd ${D}${sysconfdir}/pam.d/proftpd
++        sed -i '/ftpusers/d' ${D}${sysconfdir}/pam.d/proftpd
++        # specify the user Authentication config
++        sed -i '/^MaxInstances/a\AuthPAM                         on\nAuthPAMConfig                   proftpd' \
++            ${D}${sysconfdir}/proftpd.conf
++    fi
+ 
+     install -d ${D}/${systemd_unitdir}/system
+     install -m 644 ${WORKDIR}/proftpd.service ${D}/${systemd_unitdir}/system
+-- 
+2.8.1
 
-https://github.com/gflags/gflags/blob/master/COPYING.txt
-https://github.com/google/glog/blob/master/COPYING
-
-That is why I choose BSD.
-
-Regards!
 
