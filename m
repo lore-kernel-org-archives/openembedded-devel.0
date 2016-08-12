@@ -1,24 +1,47 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 37CDC6FEFA
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id B294F7723E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Aug 2016 07:21:17 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u7C7KWKj001636
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 12 Aug 2016 07:27:07 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id x189so1452870qkd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Aug 2016 00:21:18 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Fri, 12 Aug 2016 00:20:31 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 12 Aug 2016 15:19:56 +0800
-Message-ID: <1470986396-17983-1-git-send-email-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Fri, 12 Aug 2016 00:27:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=9bmG5652F5XFXayOITsfTEaOK52wL4soWPdulqSRJoc=;
+	b=wx3qRCcagau4sTqRZAWSMcJZAogquVaAARG+NUsyF/YVNukXh6+1D4VoKQv0YAEoq/
+	aciOl18TbImH1ZaU1W3CkWLghNZrJew4A7OHPsqlJt7Ch9l33jpsReB05sZBxM2Z4d0c
+	eyd2ix23/vIdAiXRcVRzau/nHKUnsvCJySvtUaipkY1NZTeDQoHCv2fS94M9DkhEQqE6
+	PpKkomavn472o8B1PqM9xYodRkWEoYN1ZtMi2mr+GnIAmdTNzydyxloV/c02+AfzJww1
+	kRZmST+8VbFHTXep61A561wPLJ63swxsD0lMwNdKMffhUJGt9geXgamdo+/726ZiUXQq
+	7v8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-transfer-encoding;
+	bh=9bmG5652F5XFXayOITsfTEaOK52wL4soWPdulqSRJoc=;
+	b=ETePwpBmpzKcGFlJe+2Y+u7i7FsdCcwjpdesZ5O2kb7pQDN2XTjfnRAJTM7LD7+wsI
+	kp4GsSS9hzBO958shzyqkI4f6s2SKKL9RocDqSjhqA/EpYNItigSlzi4lmtplKvC6WIY
+	4lXVz52bVOkG5n96tVqeQ4Vrz51s6uLj3E27KRsGQG1339QihRhX/dyr/vjRV66ghUPQ
+	kFBzQYPTHw+JZT+0e4OAXWsoKl0770LtNRbKBQIAPVMP3k9d/3/zXj93GNW1Mb9VQwAj
+	l7Rnb9qwXU7+iKF9+FnATOh9Dluc5sUMOmCMMu7vxzmQS0QLPCk8/VJs7F7V5CPdSbyV
+	LY6w==
+X-Gm-Message-State: AEkooutQonLICr0bKO3QXnN3XZ1SS0zDdtrQ9/XuVXQ0BIhpbgisfSxAGmL4OCUwD0u8bDCcnxAJ+o/0KhBMRw==
+X-Received: by 10.55.170.1 with SMTP id t1mr16007454qke.42.1470986827877; Fri,
+	12 Aug 2016 00:27:07 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] proftpd: fix system account login failure
+Received: by 10.55.215.13 with HTTP; Fri, 12 Aug 2016 00:26:37 -0700 (PDT)
+In-Reply-To: <CAPybu_35+Ug0CpasvpVg=WfC2N3F_6hmcSbN7CJ7tquhGr7C8A@mail.gmail.com>
+References: <1470920876-22501-1-git-send-email-ricardo.ribalda@gmail.com>
+	<D01FFBA5-7B48-4F0F-B1E0-3D96FE48044F@gmail.com>
+	<CAPybu_35+Ug0CpasvpVg=WfC2N3F_6hmcSbN7CJ7tquhGr7C8A@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 12 Aug 2016 00:26:37 -0700
+Message-ID: <CAMKF1sqhKAKN8EJVHTm50F6N0Ons3hqJrkc3ERujrwj90m94JA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v3 1/2] gflags: New recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,41 +54,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Aug 2016 07:21:18 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 12 Aug 2016 07:27:08 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Mingli Yu <Mingli.Yu@windriver.com>
+On Thu, Aug 11, 2016 at 11:37 PM, Ricardo Ribalda Delgado
+<ricardo.ribalda@gmail.com> wrote:
+> Hi Khem
+>
+> On Fri, Aug 12, 2016 at 7:36 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>
+>>> +DESCRIPTION =3D "The gflags package contains a C++ library that implem=
+ents commandline flags processing. It includes built-in support for standar=
+d types such as string and the ability to define flags in the source file i=
+n which they are used"
+>>> +HOMEPAGE =3D "https://github.com/gflags/gflags"
+>>> +LICENSE =3D =E2=80=9CBSD"
+>>
+>> which Clause ?
+>
+> I have no idea,
+> I has the same License file as glog:
+>
+> https://github.com/gflags/gflags/blob/master/COPYING.txt
+> https://github.com/google/glog/blob/master/COPYING
+>
+> That is why I choose BSD.
 
-When pam is enabled,
-  1, Customize the proftpd.conf to use pam to authenticate
-  2, Add proftpd pam configuration file /etc/pam.d/proftpd
+So it seems its BSD-3-Clause
 
-Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
----
- meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb | 9 +++++++++
- 1 file changed, 9 insertions(+)
-
-diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb
-index b6fd4b2..2332ef8 100644
---- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb
-+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5a.bb
-@@ -92,6 +92,15 @@ do_install () {
-     # create the pub directory
-     mkdir -p ${D}/home/${FTPUSER}/pub/
-     chown -R ${FTPUSER}:${FTPGROUP} ${D}/home/${FTPUSER}/pub
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'true', 'false', d)}; then
-+        # install proftpd pam configuration
-+        install -d ${D}${sysconfdir}/pam.d
-+        install -m 644 ${S}/contrib/dist/rpm/ftp.pamd ${D}${sysconfdir}/pam.d/proftpd
-+        sed -i '/ftpusers/d' ${D}${sysconfdir}/pam.d/proftpd
-+        # specify the user Authentication config
-+        sed -i '/^MaxInstances/a\AuthPAM                         on\nAuthPAMConfig                   proftpd' \
-+            ${D}${sysconfdir}/proftpd.conf
-+    fi
- 
-     install -d ${D}/${systemd_unitdir}/system
-     install -m 644 ${WORKDIR}/proftpd.service ${D}/${systemd_unitdir}/system
--- 
-2.8.1
-
+>
+> Regards!
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
