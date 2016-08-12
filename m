@@ -1,36 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 4527573211
+Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
+	[209.85.220.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 512AE770D8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Aug 2016 15:31:37 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id u25so1090323qtb.3
+	Fri, 12 Aug 2016 15:45:35 +0000 (UTC)
+Received: by mail-qk0-f193.google.com with SMTP id v123so2201343qkh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Aug 2016 08:31:38 -0700 (PDT)
+	Fri, 12 Aug 2016 08:45:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=oDjh80TnK7DpEeeY7VgnFQhqU4oJ1RBk5NOcNGSTA2w=;
-	b=mk68ae74kquueqF1ZNmt1NSJAPFe6S72Qj18WwwVtQawGLyr1H63lA9hzTUvyG2iCO
-	TaKfZswC2ZkfIkHMnFKTBxqejOZXAVRoQh+VRx/kw7JtncaPVgY35swJ+BDCD3tb+K3n
-	5eIHFgxdznilJLoZua5YTnTDtVJeh6Olv9q3xapj7Ww9tk4f7VZs9JMSM9EmeHhQjZ0z
-	nXHO0E+99Xl8VK7Msw0emxz4hoLcV9TdTetAuqsKM3RcYjOSFTCwNk+9DTwhQyRYKael
-	5b34tNy9aHEA7pJ5v6gyhkzXiCO61cA9p5hQUe/G98y1IJzjIWCs9Wknk1kdMDAAEwaZ
-	19RA==
-X-Gm-Message-State: AEkoouv9PccOONNopBlQlexXQ39ZUV0hX8rY6ecPzpENA7UMvi56m07r3tMRXorjRaJgWA==
-X-Received: by 10.200.54.28 with SMTP id m28mr17770069qtb.87.1471015898025;
-	Fri, 12 Aug 2016 08:31:38 -0700 (PDT)
+	bh=Rn7B+cQ83KvMuTywUbbdtEGjm5x5HnmlS9mVYUrIAF0=;
+	b=miL009D/fJOuzF3+7B2FfEY0GM9UbkBQoUQxyeDbUu3m0lEdmUU05Iedg+rPiRuthj
+	FZ34glAO64ouX6yldZAi2Md06ohZFOhATmDWtzMyuvj17+Ekm8BpR1Iibsb7htwWUnJj
+	3aC8XPJjNLHDF2HILmAZSF67M8YS/nKOpWG5QtCVF64cJT5Hrs1sZGcBcA3j6whAzSol
+	zJhHvHZcVhAet3RRZqixaGgIKW0zaAzbpBTxpQJObu7uCyjwadoKXvlDz/vrrBfAvavs
+	wk6XDL13WwEVv7nGpIz8BvP776WqxIQs8qP4NoWPu0y1Zrs54U0/ISJvZXGlPSPuKi2D
+	s5xQ==
+X-Gm-Message-State: AEkooutAM4YpQRWx94mioMRCqKAPSCugaMWWD/llZRjwBU6RqKMcKGc7FNdpBZTO30a/RQ==
+X-Received: by 10.55.212.200 with SMTP id s69mr13182892qks.166.1471016735755; 
+	Fri, 12 Aug 2016 08:45:35 -0700 (PDT)
 Received: from argos.minotaurinc.com (c-73-172-178-168.hsd1.md.comcast.net.
-	[73.172.178.168]) by smtp.gmail.com with ESMTPSA id
-	g29sm4673102qtg.12.2016.08.12.08.31.37
+	[73.172.178.168])
+	by smtp.gmail.com with ESMTPSA id d2sm4687139qtd.44.2016.08.12.08.45.34
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 12 Aug 2016 08:31:37 -0700 (PDT)
+	Fri, 12 Aug 2016 08:45:35 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 12 Aug 2016 11:30:38 -0400
-Message-Id: <1471015838-10111-1-git-send-email-derek@asterius.io>
+Date: Fri, 12 Aug 2016 11:44:35 -0400
+Message-Id: <1471016675-17996-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCHv2] gd: update to version 2.2.3
+Subject: [meta-python][PATCH] python-certifi: update to version 2016.8.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,104 +43,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Aug 2016 15:31:41 -0000
-
-    * Upstream removed vpx support in favor of webp
-    * Explicity disable webp support
+X-List-Received-Date: Fri, 12 Aug 2016 15:45:37 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../gd/files/fix-gcc-unused-functions.patch        | 43 ++++++++++++++++++++++
- .../gd/{gd_2.1.1.bb => gd_2.2.3.bb}                | 12 +++---
- 2 files changed, 49 insertions(+), 6 deletions(-)
- create mode 100644 meta-oe/recipes-support/gd/files/fix-gcc-unused-functions.patch
- rename meta-oe/recipes-support/gd/{gd_2.1.1.bb => gd_2.2.3.bb} (82%)
+ meta-python/recipes-devtools/python/python-certifi.inc                | 4 ++--
+ .../{python-certifi_2016.2.28.bb => python-certifi_2016.8.8.bb}       | 0
+ .../{python3-certifi_2016.2.28.bb => python3-certifi_2016.8.8.bb}     | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-certifi_2016.2.28.bb => python-certifi_2016.8.8.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-certifi_2016.2.28.bb => python3-certifi_2016.8.8.bb} (100%)
 
-diff --git a/meta-oe/recipes-support/gd/files/fix-gcc-unused-functions.patch b/meta-oe/recipes-support/gd/files/fix-gcc-unused-functions.patch
-new file mode 100644
-index 0000000..02cb5ad
---- /dev/null
-+++ b/meta-oe/recipes-support/gd/files/fix-gcc-unused-functions.patch
-@@ -0,0 +1,43 @@
-+gdft.c: remove functions that cause warnings about being unused
-+
-+Upstream-Status: Backport (Fixed in master branch)
-+
-+Signed-off-by: Derek Straka <derek@asterius.io>
-+--- git/src/gdft.c.orig	2016-08-12 10:20:41.418440091 -0400
-++++ git/src/gdft.c	2016-08-12 10:22:34.226442987 -0400
-+@@ -139,16 +139,6 @@
-+ }
-+ #else
-+ 
-+-#ifndef HAVE_LIBFONTCONFIG
-+-static char * font_pattern(char **fontpath, char *fontpattern)
-+-{
-+-	(void)fontpath;
-+-	(void)fontpattern;
-+-
-+-	return "libgd was not built with FontConfig support\n";
-+-}
-+-#endif /* HAVE_LIBFONTCONFIG */
-+-
-+ #include "gdcache.h"
-+ /* 2.0.16 Christophe Thomas: starting with FreeType 2.1.6, this is
-+   mandatory, and it has been supported for a long while. */
-+@@ -446,16 +436,15 @@
-+ 	return (strcmp (a->fontlist, b->fontlist) == 0 && a->flags == b->flags);
-+ }
-+ 
-++#ifdef HAVE_LIBFONTCONFIG
-+ static int useFontConfig(int flag)
-+ {
-+-#ifdef HAVE_LIBFONTCONFIG
-+ 	if (fontConfigFlag) {
-+ 		return (!(flag & gdFTEX_FONTPATHNAME));
-+ 	}
-+-#endif
-+ 	return flag & gdFTEX_FONTCONFIG;
-+ }
-+-
-++#endif
-+ static void *
-+ fontFetch (char **error, void *key)
-+ {
-diff --git a/meta-oe/recipes-support/gd/gd_2.1.1.bb b/meta-oe/recipes-support/gd/gd_2.2.3.bb
-similarity index 82%
-rename from meta-oe/recipes-support/gd/gd_2.1.1.bb
-rename to meta-oe/recipes-support/gd/gd_2.2.3.bb
-index 85c7e6a..80d66c9 100644
---- a/meta-oe/recipes-support/gd/gd_2.1.1.bb
-+++ b/meta-oe/recipes-support/gd/gd_2.2.3.bb
-@@ -12,12 +12,12 @@ LICENSE = "GD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c97638cafd3581eb87abd37332137669"
- DEPENDS = "freetype libpng jpeg zlib tiff"
+diff --git a/meta-python/recipes-devtools/python/python-certifi.inc b/meta-python/recipes-devtools/python/python-certifi.inc
+index 0fe8b15..8c4579a 100644
+--- a/meta-python/recipes-devtools/python/python-certifi.inc
++++ b/meta-python/recipes-devtools/python/python-certifi.inc
+@@ -7,5 +7,5 @@ HOMEPAGE = " http://certifi.io/"
+ LICENSE = "ISC"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f77f61d14ee6feac4228d3ebd26cc1f1"
  
--SRC_URI = "https://bitbucket.org/libgd/gd-libgd/downloads/libgd-${PV}.tar.bz2 \
--"
--SRC_URI[md5sum] = "d3f1a992ac9c550ebc6da89c147f89af"
--SRC_URI[sha256sum] = "895ea9c6fcab187b0a908ae3e9e6b06423756f8a643d362349b0caab4014bd0d"
-+SRC_URI = "git://github.com/libgd/libgd.git;branch=GD-2.2 \
-+           file://fix-gcc-unused-functions.patch"
- 
--S = "${WORKDIR}/libgd-${PV}"
-+SRCREV = "46ceef5970bf3a847ff61d1bdde7501d66c11d0c"
-+
-+S = "${WORKDIR}/git"
- 
- inherit autotools binconfig gettext pkgconfig
- 
-@@ -25,9 +25,9 @@ EXTRA_OECONF += " --disable-rpath \
-                   --with-jpeg=${STAGING_LIBDIR}/.. \
-                   --with-freetype=yes \
-                   --without-fontconfig \
-+                  --without-webp \
-                   --without-xpm \
-                   --without-x \
--                  --without-vpx \
-                 "
- 
- EXTRA_OEMAKE = 'LDFLAGS="${LDFLAGS}"'
+-SRC_URI[md5sum] = "5d672aa766e1f773c75cfeccd02d3650"
+-SRC_URI[sha256sum] = "5e8eccf95924658c97b990b50552addb64f55e1e3dfe4880456ac1f287dc79d0"
++SRC_URI[md5sum] = "b57513f7670482da45bb350b792f659e"
++SRC_URI[sha256sum] = "99864ed602d8a9d212e339b15ffa438895002eda7b7db20dca5309dac9605ae9"
+diff --git a/meta-python/recipes-devtools/python/python-certifi_2016.2.28.bb b/meta-python/recipes-devtools/python/python-certifi_2016.8.8.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-certifi_2016.2.28.bb
+rename to meta-python/recipes-devtools/python/python-certifi_2016.8.8.bb
+diff --git a/meta-python/recipes-devtools/python/python3-certifi_2016.2.28.bb b/meta-python/recipes-devtools/python/python3-certifi_2016.8.8.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-certifi_2016.2.28.bb
+rename to meta-python/recipes-devtools/python/python3-certifi_2016.8.8.bb
 -- 
 1.9.1
 
