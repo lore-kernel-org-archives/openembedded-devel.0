@@ -1,55 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 9160A76806
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id B69846014F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Aug 2016 08:56:46 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id q128so1670401wma.1
+	Fri, 12 Aug 2016 12:08:20 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id i138so2480808wmf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Aug 2016 01:56:47 -0700 (PDT)
+	Fri, 12 Aug 2016 05:08:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=mdLydS7/+1dvaKp5iiPZ+eZKl5GFXJTSYPtQnmE7Qk0=;
-	b=WfsbqtTS7ieyhOdsLSP05qP0HKyzZrvzrIyFd91kN2qR++j9Tv2e5+Gd0Yf4wLiVw7
-	CAyw4CL535hRx+BCEH1gIzl4JfYWpxK/mmhHJHfgLctGA3jlwdXw45Zj/8PuLD/awaaW
-	L1cr3h4BcgB3SMQwhN3h0xMIb871Hl0rHfkgetvqRYZtcTMT/NnVo8oBYgrYaoKM0W1E
-	GTFsB0XRdRvvYWBoDGYkwdJscvDo1ahuQhmVU4L2PXFkFexigsmwXL2ZxJyzPkQ9Ni3Y
-	SKnUOTPBnZPvRchhluauGZISn6ONcE6tZutfWUdl+f71MYJEadoq+OA+pHQrIhciw/dz
-	jehg==
+	bh=32CjWf+OBJNXeiAEUAOWCe/CvuQuyGmOghfFIyFNkxA=;
+	b=KQXES/8CzQynq2yZF6LYeS7YyFMAgbwCv7Q8pyytYo7Fa8g6+UWlKcVt/m8jm4bxpE
+	jPM8jiObbhObT4H8pOYDmUTxmXzwEBBGl7i+7P4RoDFWar/DwVzs3UylNiEUN8OOsoHj
+	iCq69Qjp1FcydEiJI0PHHcMIliaxRFyWrQp9f2uklqiC8dPutlmDlTBvl0AEtzrhjlp9
+	uawhcWVxPF+0Iw+cnYWZjpt47Mk6+v0fgjqstGV2MsIRVuydOxQ6cDX3jxsq1kBTOD2p
+	bmyxKdv1FhltFOvllB/o4y1Lb0yPIgpLt4vvG9VqBsFUuZHHRbQs50huQv6cxZ+8wISx
+	xMVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:date:to:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=mdLydS7/+1dvaKp5iiPZ+eZKl5GFXJTSYPtQnmE7Qk0=;
-	b=UfTayrWt4GJSqS6B1FL8AYVzESUOQys6B5JDYQTCyJC160XV6uOgF4lKVz1oEsAV3S
-	2dhSSfo/wsu+MJLl4cFQcz/G+aBEdysAaHfHq4fma8BygY/0BGxUAggB1s4HJ6VN+2Tf
-	ti8U6OY085ajSBEXW36sW29O+EoRhBsm7jBjblZ2Yqv37t9tB/K8/TwW9vUdnkkvR69o
-	gwWjVeMBS9Md02F1OkWTxcY/8Qpk4P0P8tyypCx/Z4xWS6c9zcMML/0k1CWwhZ8tSIZq
-	dwGqjfETSjjyEtCMl9KIlRDX3ez17ayeABwqaRTPPaBhdU6scmd04CuEp2n0eo0OHP7i
-	JTnA==
-X-Gm-Message-State: AEkoouvgzU9OE8LXny//mfbedHdsl01Z9AFjCSaDZG+g6BLhxMvQFCYT6/ju6iSm90ui2Q==
-X-Received: by 10.194.114.135 with SMTP id jg7mr14097488wjb.166.1470992206356; 
-	Fri, 12 Aug 2016 01:56:46 -0700 (PDT)
+	bh=32CjWf+OBJNXeiAEUAOWCe/CvuQuyGmOghfFIyFNkxA=;
+	b=dwDQNkVlCrL4HM6qJeAa8leTurFApmsV5/2ev0Yy5yz7McoGje+g2X60sUyDi822Xz
+	erUDMsjrSVOe73noO6gSRbYqeBvLfKMQAAF364dGMpB9QAPQVlOT9licxGUwtjm1Gi44
+	Hdrj6PndoX01BDk3Rf6xzzu8giDxHk5+/E00TmUW84/3fs4DjMt7LSHv4bRcWohtcuG7
+	DcVkcvp5yUKtc1Jg9WdW7KyeplAtAzuH9UvzGn1Eorq5ywyJVu/WD88JmXPlD/A5LNze
+	tMhPXzavgkC3wZELD/84lOWOqm1CdEzM65c68XrNkBeYnbXCjlc6k1ZylHKAj3KzP0Jn
+	IFQA==
+X-Gm-Message-State: AEkooutX3Yxjo4y73pbaMj04gALoKuLDXRFQRfEUwIHle9GOcNRYZbEY3Yf2csmeve8VNQ==
+X-Received: by 10.194.98.139 with SMTP id ei11mr14805362wjb.19.1471003700676; 
+	Fri, 12 Aug 2016 05:08:20 -0700 (PDT)
 Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	jq5sm6525534wjc.20.2016.08.12.01.56.45
+	[89.176.104.169])
+	by smtp.gmail.com with ESMTPSA id e65sm2311913wmg.3.2016.08.12.05.08.19
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 12 Aug 2016 01:56:45 -0700 (PDT)
+	Fri, 12 Aug 2016 05:08:19 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 12 Aug 2016 10:56:47 +0200
+Date: Fri, 12 Aug 2016 14:08:21 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160812085647.mlrnbt7deezzgucm@jama>
-References: <1470920876-22501-1-git-send-email-ricardo.ribalda@gmail.com>
-	<D01FFBA5-7B48-4F0F-B1E0-3D96FE48044F@gmail.com>
-	<CAPybu_35+Ug0CpasvpVg=WfC2N3F_6hmcSbN7CJ7tquhGr7C8A@mail.gmail.com>
-	<CAMKF1sqhKAKN8EJVHTm50F6N0Ons3hqJrkc3ERujrwj90m94JA@mail.gmail.com>
-	<CAPybu_2dSbwx3FbGzf9OuWyz9p6xDr6rAfiSnB+t1oNu2ZvrMg@mail.gmail.com>
+Message-ID: <20160812120821.benxeb6zhtyiyiom@jama>
+References: <1470924479-18304-1-git-send-email-terry.boese@vecima.com>
 MIME-Version: 1.0
-In-Reply-To: <CAPybu_2dSbwx3FbGzf9OuWyz9p6xDr6rAfiSnB+t1oNu2ZvrMg@mail.gmail.com>
+In-Reply-To: <1470924479-18304-1-git-send-email-terry.boese@vecima.com>
 User-Agent: Mutt/1.6.2 (2016-06-11)
-Subject: Re: [meta-oe][PATCH v3 1/2] gflags: New recipe
+Subject: Re: [meta-networking][PATCH v2] dnsmasq: update to version 2.76
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,29 +58,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Aug 2016 08:56:46 -0000
-X-Groupsio-MsgNum: 62577
+X-List-Received-Date: Fri, 12 Aug 2016 12:08:22 -0000
+X-Groupsio-MsgNum: 62578
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="tsdygvrluckyn435"
+	protocol="application/pgp-signature"; boundary="pn5nn6tazaz3suwo"
 Content-Disposition: inline
 
---tsdygvrluckyn435
+--pn5nn6tazaz3suwo
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 12, 2016 at 10:06:44AM +0200, Ricardo Ribalda Delgado wrote:
-> Hi Kehm
->=20
-> On Fri, Aug 12, 2016 at 9:26 AM, Khem Raj <raj.khem@gmail.com> wrote:
->=20
-> > So it seems its BSD-3-Clause
-> >
->=20
-> Shall I produce a patch for glog and gflags?
+On Thu, Aug 11, 2016 at 08:07:59AM -0600, Terry Boese wrote:
+> Change 'basecontains' to 'bb.utils.contain' to avoid warning.
 
-I'll update it in master-next, you don't need to resend.
+That was already changed 4 months ago, please rebase and test in recent
+master before sending.
 
+> Correct do_compile_append(), as the location of the DHCP lease
+> tools has changed.
+>=20
+> Signed-off-by: Terry Boese <terry.boese@vecima.com>
+> ---
+>  meta-networking/recipes-support/dnsmasq/dnsmasq.inc    | 18 +++++++++---=
+------
+>  .../dnsmasq/{dnsmasq_2.75.bb =3D> dnsmasq_2.76.bb}       |  5 ++---
+>  2 files changed, 11 insertions(+), 12 deletions(-)
+>  rename meta-networking/recipes-support/dnsmasq/{dnsmasq_2.75.bb =3D> dns=
+masq_2.76.bb} (27%)
+>=20
+> diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc b/meta-n=
+etworking/recipes-support/dnsmasq/dnsmasq.inc
+> index cc7f9e3..9ef54fe 100644
+> --- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+> +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+> @@ -26,10 +26,10 @@ PACKAGECONFIG[conntrack] =3D ",,libnetfilter-conntrac=
+k"
+>  PACKAGECONFIG[lua] =3D ",,lua"
+>  PACKAGECONFIG[resolvconf] =3D ",,,resolvconf"
+>  EXTRA_OEMAKE =3D "\
+> -    'COPTS=3D${@base_contains('PACKAGECONFIG', 'dbus', '-DHAVE_DBUS', ''=
+, d)} \
+> -           ${@base_contains('PACKAGECONFIG', 'idn', '-DHAVE_IDN', '', d)=
+} \
+> -           ${@base_contains('PACKAGECONFIG', 'conntrack', '-DHAVE_CONNTR=
+ACK', '', d)} \
+> -           ${@base_contains('PACKAGECONFIG', 'lua', '-DHAVE_LUASCRIPT', =
+'', d)}' \
+> +    'COPTS=3D${@bb.utils.contains('PACKAGECONFIG', 'dbus', '-DHAVE_DBUS'=
+, '', d)} \
+> +           ${@bb.utils.contains('PACKAGECONFIG', 'idn', '-DHAVE_IDN', ''=
+, d)} \
+> +           ${@bb.utils.contains('PACKAGECONFIG', 'conntrack', '-DHAVE_CO=
+NNTRACK', '', d)} \
+> +           ${@bb.utils.contains('PACKAGECONFIG', 'lua', '-DHAVE_LUASCRIP=
+T', '', d)}' \
+>      'CFLAGS=3D${CFLAGS}' \
+>      'LDFLAGS=3D${LDFLAGS}' \
+>  "
+> @@ -38,7 +38,7 @@ SRC_URI +=3D "${@bb.utils.contains('PACKAGECONFIG', 're=
+solvconf', 'file://dnsmasq.
+> =20
+>  do_compile_append() {
+>      # build dhcp_release
+> -    cd ${S}/contrib/wrt
+> +    cd ${S}/contrib/lease-tools
+>      oe_runmake
+>  }
+> =20
+> @@ -53,19 +53,19 @@ do_install () {
+> =20
+>      install -d ${D}${systemd_unitdir}/system
+> =20
+> -    if [ "${@base_contains('PACKAGECONFIG', 'resolvconf', 'resolvconf', =
+'', d)}" !=3D "" ]; then
+> +    if [ "${@bb.utils.contains('PACKAGECONFIG', 'resolvconf', 'resolvcon=
+f', '', d)}" !=3D "" ]; then
+>          install -m 0644 ${WORKDIR}/dnsmasq-resolvconf.service ${D}${syst=
+emd_unitdir}/system/dnsmasq.service
+>      else
+>          install -m 0644 ${WORKDIR}/dnsmasq-noresolvconf.service ${D}${sy=
+stemd_unitdir}/system/dnsmasq.service
+>      fi
+> =20
+> -    install -m 0755 ${S}/contrib/wrt/dhcp_release ${D}${bindir}
+> +    install -m 0755 ${S}/contrib/lease-tools/dhcp_release ${D}${bindir}
+> =20
+> -    if [ "${@base_contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" !=
+=3D "" ]; then
+> +    if [ "${@bb.utils.contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}"=
+ !=3D "" ]; then
+>          install -d ${D}${sysconfdir}/dbus-1/system.d
+>          install -m 644 dbus/dnsmasq.conf ${D}${sysconfdir}/dbus-1/system=
+=2Ed/
+>      fi
+> -    if [ "${@base_contains('PACKAGECONFIG', 'resolvconf', 'resolvconf', =
+'', d)}" !=3D "" ]; then
+> +    if [ "${@bb.utils.contains('PACKAGECONFIG', 'resolvconf', 'resolvcon=
+f', '', d)}" !=3D "" ]; then
+>          install -d ${D}${sysconfdir}/resolvconf/update.d/
+>          install -m 0755 ${WORKDIR}/dnsmasq.resolvconf ${D}${sysconfdir}/=
+resolvconf/update.d/dnsmasq
+> =20
+> diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb b/me=
+ta-networking/recipes-support/dnsmasq/dnsmasq_2.76.bb
+> similarity index 27%
+> rename from meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb
+> rename to meta-networking/recipes-support/dnsmasq/dnsmasq_2.76.bb
+> index a11aabb..41573d9 100644
+> --- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb
+> +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.76.bb
+> @@ -4,6 +4,5 @@ SRC_URI +=3D "\
+>      file://lua.patch \
+>  "
+> =20
+> -SRC_URI[dnsmasq-2.75.md5sum] =3D "d99ac126d4fe910c679d88430559669b"
+> -SRC_URI[dnsmasq-2.75.sha256sum] =3D "f8252c0a0ba162c2cd45f81140c7c17cc40=
+a5fca2b869d1a420835b74acad294"
+> -
+> +SRC_URI[dnsmasq-2.76.md5sum] =3D "6610f8233ca89b15a1bb47c788ffb84f"
+> +SRC_URI[dnsmasq-2.76.sha256sum] =3D "777c4762d2fee3738a0380401f2d087b47f=
+aa41db2317c60660d69ad10a76c32"
+> --=20
+> 2.7.4
+>=20
 > --=20
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -94,16 +191,16 @@ I'll update it in master-next, you don't need to resend.
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---tsdygvrluckyn435
+--pn5nn6tazaz3suwo
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2
 
-iEYEARECAAYFAletj04ACgkQN1Ujt2V2gByxdQCgl1oBGxRnyAQwFN2s8ueUkZy4
-R/cAn1N15EDdj9QWFXlLZeH82VSeuXN7
-=YYS4
+iEYEARECAAYFAletvDAACgkQN1Ujt2V2gBw4NQCcDeFmTBiFpGnSYS7jwk/Yoh8u
+oH0Anis050gTmTFWiSYhC/Qf1H/tBdcX
+=9IdT
 -----END PGP SIGNATURE-----
 
---tsdygvrluckyn435--
+--pn5nn6tazaz3suwo--
