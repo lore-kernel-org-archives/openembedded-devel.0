@@ -1,52 +1,54 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 0988777268
+Received: from mail-pa0-f68.google.com (mail-pa0-f68.google.com
+	[209.85.220.68])
+	by mail.openembedded.org (Postfix) with ESMTP id B12F67320F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Aug 2016 03:04:40 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id i6so271170pfe.0
+	Sat, 13 Aug 2016 03:13:53 +0000 (UTC)
+Received: by mail-pa0-f68.google.com with SMTP id cf3so263415pad.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Aug 2016 20:04:41 -0700 (PDT)
+	Fri, 12 Aug 2016 20:13:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=date:from:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=LxSKqtt2HY6xiigTf91vawsLhj8lp1KthiyTBfRO3So=;
-	b=uq8B+z8v35s9YlSXjMaIxhfUpHDEdRORGPkfySoANy3shq+Cn6ktNf4DVwg1y29Orh
-	0TAy/QcyGIQewtxP16doo4ID0CgPV58l1njy+2LsAChJSgAoHnvUX/B+XySqqQWfgqSG
-	QXepgFYux56ym9/gU1ekFRbayaJR31koLK251OqTILtKJAkTcJJwMvxPvA8s8nHsyh9a
-	4Z9hxlqeniHKocV88y5bxknAHKMPyZJR5FHU7iz7tEHcrQCqkpzDk6WE7DfHItNeexo9
-	ECUE/ogwU4zArn0U9ZSNXN/+y149lCASZ5g8vxGpC7DAh9rU4D7U4EzoWF8oSqXORHQh
-	Nf3Q==
+	:content-disposition:content-transfer-encoding:in-reply-to
+	:user-agent; bh=/Hgj4PxaxlVYwm07cOiQi+Zv+tCUvN+5QUdgJHP6hYQ=;
+	b=VwkWF1A54vOCYbXHcXG8YwFmirt1CeNzbWh+FsLZ4qH2owynjcFjV4GTbV/ZKBYZ2c
+	Nnqfr64DVaDC/l3Vfkl6sEU2Zw5XcgPQWnZbHeVFdbq2rf4wCqBYGVsq52VglROm+xp6
+	PXrhoEABmd7WnNDZl4EkxqYwqdfYSd+lnJ8jYxGlj51XUgx1lwc2EoNZFH6T+JJz9f4s
+	4LvG2AEgvuZ75kvfEwsRlRABn4jidacn5n8IChfjGO6b2mkLbOOH+OzXftdIG/HJPNn9
+	P4F2WCbuDs7Q3Dq9V9AwTPn+OKnIsnLFeRAwWPTMU/pKh3NaOSCPhDFI70zVhpUeNAuy
+	DwwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:date:from:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=LxSKqtt2HY6xiigTf91vawsLhj8lp1KthiyTBfRO3So=;
-	b=LPJE4H5kXgi6OA2EOrrDCJzsM6t7luDe3n8As+ChOonj0cSTrc95LHdGJX6e6M1epl
-	oIYKB6cwJbnnd6Z7h1577Sxh5iGMNuetB/Riya1Rc86d7aw4MLAfLtYFiH2u0rY7rfDr
-	NzROCCVGcyE9oZ0VnWBxtV47B42r4eRkUPcp82zh0bGuQCXum1Yr1KA5zJ5X4cMsm48/
-	CPl5vlSFltnSZiSWf1A96GK6iJoyLt3+K3oExy24n6HniMHlskNE/+xV89H0SJJP8muY
-	0+EkvBIWJwk5uMX/wW2LnEAFOK0GPIsXWUGL8Dd4p6TLnqJLT1Hr1F5GRZdiMeVg+jem
-	xVRw==
-X-Gm-Message-State: AEkoouudW8u/yQGcmftueFhTVagyJ+ZFgnQL40Y5RlZLnMk0Ce5qH1hPQ9XCfbYw0WIBHg==
-X-Received: by 10.98.105.135 with SMTP id e129mr32768228pfc.59.1471057480866; 
-	Fri, 12 Aug 2016 20:04:40 -0700 (PDT)
+	:mime-version:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	bh=/Hgj4PxaxlVYwm07cOiQi+Zv+tCUvN+5QUdgJHP6hYQ=;
+	b=G5LAQZuDFb0B7UVjHUe7fpFIfPRXpX35xXc9Y9FGDZx9VRmBPIDHqg5CRL5cC+fu/H
+	+ZGJ5JopDlku60gRe4jG23Rs1W3e6xgQUwrmPRAhgsiG0CSIeevxnqdQgmKGDg9UxKbl
+	qDixRMciIB6+4JGKDmvITlEr+WkxIyzthvo5jtKFzj/JXyC4w7VK03Y46oziCg5n1LIu
+	Thk4dv3z8wlECOui+YChIGKHuQAtNOnHdLspEi6uWabDkX1UaQW/lWCZOL8wc6HX10A6
+	IQO5NeSCkIBn9VSTty8FtEiYyrn6VuoZBI5leZEOaBwa2hYvX7sByr3MxrxmHu64MNYD
+	8L7Q==
+X-Gm-Message-State: AEkoouv9zx2FyvBAli2bxJqfguQdF+VuCKbz1IZR2G1ysznZi+gC8/n80daHrLKptVfWnQ==
+X-Received: by 10.66.235.100 with SMTP id ul4mr32861959pac.50.1471058034561;
+	Fri, 12 Aug 2016 20:13:54 -0700 (PDT)
 Received: from haswell (c-76-102-32-192.hsd1.ca.comcast.net. [76.102.32.192])
 	by smtp.gmail.com with ESMTPSA id
-	xv9sm16139207pab.36.2016.08.12.20.04.40
+	c125sm16175227pfc.40.2016.08.12.20.13.53
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 12 Aug 2016 20:04:40 -0700 (PDT)
-Date: Fri, 12 Aug 2016 20:04:38 -0700
+	Fri, 12 Aug 2016 20:13:53 -0700 (PDT)
+Date: Fri, 12 Aug 2016 20:13:51 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160813030438.GB23947@haswell>
-References: <1470989266-6267-1-git-send-email-richard.leitner@skidata.com>
-	<20160812130632.GA28597@mbabyjoh-desk.ger.corp.intel.com>
+Message-ID: <20160813031351.GC23947@haswell>
+References: <bef7bc37-7691-5631-d232-80ffc0e29e26@smile.fr>
+	<CAJTo0LYzmcMhA22cdJX5mS1n30tN1G9XSD3LV+-CpEVOQC=OQA@mail.gmail.com>
+	<57f8c9eb-057b-e2c0-df16-826a6662dcc8@smile.fr>
 MIME-Version: 1.0
-In-Reply-To: <20160812130632.GA28597@mbabyjoh-desk.ger.corp.intel.com>
+In-Reply-To: <57f8c9eb-057b-e2c0-df16-826a6662dcc8@smile.fr>
 User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-java][PATCH] README: fix branches of openembedded layers we depend on
+Subject: Re: [Jethro] Can't compile gcc-cross when gcc-6 is the host compiler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,59 +61,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Aug 2016 03:04:42 -0000
+X-List-Received-Date: Sat, 13 Aug 2016 03:13:56 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On 16-08-12 16:06:33, Maxin B. John wrote:
-> Hi,
+On 16-08-12 15:38:52, Jérémy Rosen wrote:
 > 
-> On Fri, Aug 12, 2016 at 10:07:46AM +0200, Richard Leitner wrote:
-> > Since 33fbcd43 (rxtx: Add remove-libtool class to remove all .la files)
-> > rxtx requires the remove-libtool class. This class was introduced
-> > in the krogoth branch of openembedded-core and not backported.
-> > 
-> > Therefore update the branch names in the README to "krogoth".
-> > 
-> > Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-> > ---
-> >  README | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > 
-> > diff --git a/README b/README
-> > index 259fa75..f766869 100644
-> > --- a/README
-> > +++ b/README
-> > @@ -7,11 +7,11 @@ Yocto Project build systems.
-> >  This layer depends on:
-> >  
-> >  URI: git://git.openembedded.org/openembedded-core
-> > -branch: daisy
-> > +branch: krogoth
-> >  revision: HEAD
-> >  
-> >  URI: git://git.openembedded.org/meta-openembedded
-> > -branch: daisy
-> > +branch: krogoth
-> >  revision: HEAD
-> >  
-> >  Contributing
-> > -- 
-> > 2.1.4
 > 
-> README was a bit outdated. Thanks for updating it.
+> On 11/08/2016 21:38, Burton, Ross wrote:
+> >On 11 August 2016 at 13:40, Jérémy Rosen <jeremy.rosen@smile.fr> wrote:
+> >
+> >>This helped, and allowed me to go much further in my build, but the recipe
+> >>gcc-cross-arm still failed. To be able to compile my build I had to add the
+> >>following to my local.conf
+> >>
+> >>CC_pn-gcc-cross-arm= "${BUILD_CC}"
+> >>CXX_pn-gcc-cross-arm= "${BUILD_CXX}"
+> >>CC_pn-gcc-crosssdk-x86_64= "${BUILD_CC}"
+> >>CXX_pn-gcc-crosssdk-x86_64= "${BUILD_CXX}"
+> >>
+> >>
+> >>So apparently, gcc still has some reference to $CC and $CXX hardcoded
+> >>somewhere (I think it's in do_configure)
+> >>
+> >>It seems to set $CC in the do_compile correctly, but not in do_configure.
+> >>And it never sets $CXX
+> >>
+> >>I tried to understand what the GCC recipe was doing wrong, but I couldn't
+> >>find out on first look and it's a really complicated recipe
+> >>
+> >Could you try adding a do_configure_prepend to gcc-cross.inc that sets
+> >exports those (and extend the do_compile exports) to see if that solves it?
 > 
-> Pushed to master.
+> I did the following
+> 
+> diff --git a/meta/recipes-devtools/gcc/gcc-cross.inc
+> b/meta/recipes-devtools/gcc/gcc-cross.inc
+> index aa10633..9a2e06f 100644
+> --- a/meta/recipes-devtools/gcc/gcc-cross.inc
+> +++ b/meta/recipes-devtools/gcc/gcc-cross.inc
+> @@ -36,8 +36,14 @@ EXTRA_OECONF_PATHS = "\
+> 
+>  ARCH_FLAGS_FOR_TARGET +=
+> "-isystem${STAGING_DIR_TARGET}${target_includedir}"
+> 
+> +do_configure_prepend () {
+> +    export CC="${BUILD_CC}"
+> +    export CXX="${BUILD_CXX}"
+> +}
+> +
+>  do_compile () {
+>      export CC="${BUILD_CC}"
+> +    export CXX="${BUILD_CXX}"
+>      export AR_FOR_TARGET="${TARGET_SYS}-ar"
+>      export RANLIB_FOR_TARGET="${TARGET_SYS}-ranlib"
+>      export LD_FOR_TARGET="${TARGET_SYS}-ld"
+> 
+> 
+> (which I think is what you meant) and it did indeed solve the problem.
 
-This should also reflect the fact that it also works
-with master branches of respective layers
+this looks ok.
 
-> 
-> Best Regards,
-> Maxin
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
