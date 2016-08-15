@@ -1,51 +1,53 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 75EF8770E3
+Return-Path: <gordan.markus@pelagicore.com>
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D1F077156
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 10:28:33 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id i5so10376618wmg.2
+	Mon, 15 Aug 2016 10:52:39 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id f65so83276058wmi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 03:28:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=wrCOLncblrV96hmKEMv75Hws2v6YCxx33v6kAtm6bF0=;
-	b=vH7K/6+1Zouazz8GkVzUFWzehIuYLTge/SJrcf1q0XEWwais6y4a61z9em3P+Rrp8m
-	HZkkUtDX8PYaujn1/kJAUy4dOn85BK0wJDbbe4RUoYDIMq0BvAfu2VDyG9QBRxwcu/4+
-	U3hsiLOoR2ei0Qg4kKv9hYlneKzp5IEPMNRbBIoFY1FmvH4YjZb46xYBf7uhGnsfcneL
-	CmaMfRAjBZzmyZjz7nlz+7NJm2KqDHNawJPSQh9h7M3kpwV0A/ZOBnjRf5KmmGiFc4KZ
-	X5k/XDRRTZ+4dC0XF7eHgWrSsFpJkXPsBnxt5uuEQldLMb5mTLgvCWAChJOw9S6zr7jt
-	TSgw==
+	Mon, 15 Aug 2016 03:52:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=4aXk1ZgGvYLLmcef4kcXKmB2ujf2LWWsjtsQj8l4AlA=;
+	b=L4geGFxwpjS435RVbyyu7t2GGbu1B0XlUU4HPlDVAGbdTcwepGN4yjDhkmOjm/2o+Y
+	1lC4kBt9CMnpERME7kS8A1wYfvBDjxttOvJ5bgMvrpBba+J0dlctAtwnF/Wej0OcGlnw
+	yQJ5M3e9OX32Eb7KO8ArZmwfJRCtzS6py/Ml+zVK0RHLt8p8sE8Awam3wkJ8jxVrTN7J
+	lvhZoo1B3EmPdMdQs10dWxFiM2JuAp2rF6IcStQm/kCSN5pSdWCaKH0GQM2vZRluZHzy
+	+0uwZmmGqzKFZ9wsDCOKzhjsNStHlfTAV64deWoKrssatFBZop648hQfM+lSuK8CQBeS
+	XJQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=wrCOLncblrV96hmKEMv75Hws2v6YCxx33v6kAtm6bF0=;
-	b=SXZKXx4FFYnYN7wcraI7/b+SlcTO/j2JDmczr9DqF3RHbfHnRAJ/IXp1y45sunyHxl
-	l92z3K3bpGiBFEtJz5PJRI1ZmKtoSUC3q1Z+pD9DuYPKDbGXgqRubxXSqUmgBfRzJXJx
-	HoTM8RSSduEYj+NoUBtRH4rHg1KjFEaGOKz0KrUbOpXwePiQI++4dBWWv98y+/wlGu7u
-	MCd5Qcw9YyjWoW4boZK6lxQW2DdtUFe0pNWEM9Evv5F0ElFKMQovxVFHXOLdhKBNahUL
-	SUS5GIgOpioiJvueQa/xfPScs8nPuu2xLUx8sEQVZnxc0dMmvBWohoF80Uf+QygVJO0f
-	wetw==
-X-Gm-Message-State: AEkoouvbEPE//N8QsNkKIYQkXx3HBK3jNtQKfQaghhGbFLnr9OGFcg4SAQrkuHgF0Lie1w==
-X-Received: by 10.194.118.70 with SMTP id kk6mr29512735wjb.180.1471256913145; 
-	Mon, 15 Aug 2016 03:28:33 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	gg10sm20798888wjd.4.2016.08.15.03.28.31
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=4aXk1ZgGvYLLmcef4kcXKmB2ujf2LWWsjtsQj8l4AlA=;
+	b=gKSIyDPdrRVEcHM9D1NzyRTl5ZjMjRM35/tXoF4p51YDuDz0zERJBV3Wzq7CuWeR5l
+	bJUGlXwQJXuRO2dTg/WgPZYpjDVa47yWKECTo++ptiLnjccOzh8gBu7bHNeElgnlFYO7
+	n/mXQQ5Uc8D7RkithrP7xHtARPJ3+XNCdGZoqlvMxwZQZWcKbv/GDwbN+g37UUgcQVte
+	GywNrtENeaWOr/m8fmDBZi6hpWBV0gtvvy6d17+5H4tuhBef72pxlwgnYJzHhHidYRDQ
+	NurfX72N/SxHdEI8h+XTiDPYHCHa5XYyjnn3fQMurQF9OQawlt3Cdvip2bKSBE2+ouFz
+	/tTg==
+X-Gm-Message-State: AEkoousNqJCuzW3athQVMj+YnCj5223IGgnMwi8ZZyDY43r4LUdukxaXVQKumcsZ72QQTiC4
+X-Received: by 10.25.42.82 with SMTP id q79mr5015537lfq.102.1471258359068;
+	Mon, 15 Aug 2016 03:52:39 -0700 (PDT)
+Received: from [192.168.70.35] ([212.247.53.108])
+	by smtp.gmail.com with ESMTPSA id
+	h62sm3757169lji.28.2016.08.15.03.52.37
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 15 Aug 2016 03:28:32 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 15 Aug 2016 12:28:35 +0200
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 15 Aug 2016 03:52:38 -0700 (PDT)
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160815102835.frrnyyh4kldfslg3@jama>
-References: <1470692494-32623-1-git-send-email-Randy.MacLeod@windriver.com>
+References: <1469014819-17231-1-git-send-email-gordan.markus@pelagicore.com>
+	<CAP9ODKqggtFoq0N9NdrL+0-yFk6PtbyOD6ozZJHrGeKHO_NyXA@mail.gmail.com>
+From: =?UTF-8?Q?Gordan_Marku=c5=a1?= <gordan.markus@pelagicore.com>
+Message-ID: <31249664-2de3-b68c-1cf5-e5755a9944ae@pelagicore.com>
+Date: Mon, 15 Aug 2016 12:52:37 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.2.0
 MIME-Version: 1.0
-In-Reply-To: <1470692494-32623-1-git-send-email-Randy.MacLeod@windriver.com>
-User-Agent: Mutt/1.6.2 (2016-06-11)
-Subject: Re: [PATCH] imagemagick: upgrade from 6.9.2 to 7.0.2
+In-Reply-To: <CAP9ODKqggtFoq0N9NdrL+0-yFk6PtbyOD6ozZJHrGeKHO_NyXA@mail.gmail.com>
+Subject: Re: [meta-qt5][PATCH] qt5: update the recipes to the latest LTS stable Qt 5.6.1-1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,106 +60,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Aug 2016 10:28:34 -0000
-X-Groupsio-MsgNum: 62628
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="qve5tplxfkhz2qyj"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 15 Aug 2016 10:52:40 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
---qve5tplxfkhz2qyj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Otavio,
+Unfortunately, I was on vacation.
+Though, I see that Martin has already updated the Qt 5.6 version with 
+the following commit "[oe] [meta-qt5][krogoth][PATCH] qt5: upgrade to 
+latest revisions in 5.6 branch".
+Thanks for the reply!
 
-On Mon, Aug 08, 2016 at 05:41:34PM -0400, Randy MacLeod wrote:
-> The copyright end year update made the LICENSE file checksum change.
-> That line is in the middle of the file so the license checksum
-> has been updated rather than specifying two ranges of lines.
+On 2016-07-22 21:29, Otavio Salvador wrote:
+> On Wed, Jul 20, 2016 at 8:40 AM, Gordan Markuš
+> <gordan.markus@pelagicore.com> wrote:
+>> * The Qt 5.6 release featured a severe bug where the
+>> Qt Quick applications would crash after some time (QTBUG-53761)
+>>
+>> * qtdeclarative: Fix crashes when incubating objects asynchronously
+>> with initial properties
+>> * qtdeclarative: QML: Only release types if they aren't referenced anymore
+> Missing the Signed-off-by. Please send a new patch revision and I can apply it.
+>
+>
 
-You forgot to update FILES variable, I did that in master-next, but
-next time please test your changes for QA issues before sending them.
+-- 
 
-WARNING: imagemagick-7.0.2-r0 do_package: QA Issue: imagemagick: Files/dire=
-ctories were installed but not shipped in any package:
-  /usr/lib/ImageMagick-7.0.2
-  /usr/lib/ImageMagick-7.0.2/config-Q16HDRI
-  /usr/lib/ImageMagick-7.0.2/config-Q16HDRI/configure.xml
-  /usr/share/ImageMagick-7
-  /usr/share/ImageMagick-7/english.xml
-  /usr/share/ImageMagick-7/francais.xml
-  /usr/share/ImageMagick-7/locale.xml
+Gordan Markuš
+Embedded Linux Software Developer
 
->=20
-> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
-> ---
->  .../imagemagick/{imagemagick_6.9.2.bb =3D> imagemagick_7.0.2.bb}    | 8 =
-++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
->  rename meta-oe/recipes-support/imagemagick/{imagemagick_6.9.2.bb =3D> im=
-agemagick_7.0.2.bb} (94%)
->=20
-> diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_6.9.2.bb b/m=
-eta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
-> similarity index 94%
-> rename from meta-oe/recipes-support/imagemagick/imagemagick_6.9.2.bb
-> rename to meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
-> index a9f0134..a5a239c 100644
-> --- a/meta-oe/recipes-support/imagemagick/imagemagick_6.9.2.bb
-> +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
-> @@ -1,18 +1,18 @@
->  SUMMARY =3D "ImageMagick is an image convertion tools"
->  SECTION =3D "console/utils"
->  LICENSE =3D "ImageMagick"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D0887b670be7ef0c3cb37092b64d57=
-514"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D22d47a47bf252ca3ed7f71273b536=
-12e"
->  # FIXME: There are many more checked libraries. All should be added or e=
-xplicitly disabled to get consistent results.
->  DEPENDS =3D "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freet=
-ype"
-> =20
->  # Important note: tarballs for all patchsets within a version are delete=
-d when
->  # a new pachset is created. To avoid multiple patches for each patchset,=
- try to
->  # update to the last pachset of a version
-> -PATCHSET =3D "0"
-> +PATCHSET =3D "7"
->  SRC_URI =3D "http://www.imagemagick.org/download/releases/ImageMagick-${=
-PV}-${PATCHSET}.tar.xz \
->  "
-> -SRC_URI[md5sum] =3D "99471c8c3f38c9264faf5c4ca7a31287"
-> -SRC_URI[sha256sum] =3D "07a2de28f7f9ab888ef47c02eb7e10cc3e0dd0e9797c5d71=
-d6e71d19f842399e"
-> +SRC_URI[md5sum] =3D "bd66b19bd6fc3d320bd8d51869c874f9"
-> +SRC_URI[sha256sum] =3D "1168f44cfcd1243acda6bb9663f5d9b3a4bca2acd372e979=
-b97b58ecf5c713e2"
-> =20
->  S =3D "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
-> =20
-> --=20
-> 2.7.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Pelagicore AB
+Ekelundsgatan 4, 6tr, SE-411 18 Gothenburg, Sweden
++46 (0)7333 04579
+gordan.markus@pelagicore.com
+www.pelagicore.com
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Registered Office Gothenburg, Sweden
+Registration No. 556780-4199
 
---qve5tplxfkhz2qyj
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
 
-iEYEARECAAYFAlexmVIACgkQN1Ujt2V2gBxYLgCguARJD6rU87pvigljOnQOAm/+
-5d8An1L5uLApmTc+5Aq0xaFNA40SBeoD
-=efY9
------END PGP SIGNATURE-----
-
---qve5tplxfkhz2qyj--
