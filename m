@@ -1,36 +1,42 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A2AB77117
+Return-Path: <btv1==03598fe66be==Terry.Boese@vecima.com>
+X-Greylist: delayed 802 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 15 Aug 2016 17:14:14 UTC
+Received: from mx1.vecima.com (mx1.vecima.com [216.65.182.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 342EA74197
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 14:09:44 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id n66so2289899qkf.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 07:09:45 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=jjXqSavv6UQSb53xa7kaMPZOmxfWKvfD4FIDk2iMFOI=;
-	b=LnZd3ZLxJQUT1t4OxWYp5ao2fB7AQSbDIWqbUXShSNLFMRMmrx/e0a0Kut2geR9WHS
-	qkOketXAa09pbDEm72bfl9qAmgue0eZU7UQBJGGQEydXMVFZXa441x8OUP+zcidVWUi3
-	3+cWlehIAr+PFa6qxsttUZ96lmEDay6F6Aq4tchLNYwUb7NqPJJipWNaN3cpUryZNLSz
-	LI/nrO3efIw7Vdmv7yZE0KzJx8n9AgDhl59jcLmh0hGD3fWxfJp52acu7qRuOMh3FoXV
-	MyCBxndYOkM+TjCyTx8yt2Fbj0GqpwjMbDRPmp3bPmPFCCA1mYRXalmM7Dwrfu5vpVyd
-	RQiA==
-X-Gm-Message-State: AEkoouuONII5anPfGelEBfnFhaLJ5sWXw2BdKnPARy0K6GoGCYNaS3X/TUjl/17Ixq1GOw==
-X-Received: by 10.55.145.197 with SMTP id t188mr18074051qkd.172.1471270185098; 
-	Mon, 15 Aug 2016 07:09:45 -0700 (PDT)
-Received: from localhost.localdomain ([96.91.222.230])
-	by smtp.gmail.com with ESMTPSA id
-	i65sm12424856qtb.18.2016.08.15.07.09.44
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 15 Aug 2016 07:09:44 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Aug 2016 10:09:24 -0400
-Message-Id: <1471270165-3098-1-git-send-email-derek@asterius.io>
+	Mon, 15 Aug 2016 17:14:14 +0000 (UTC)
+X-ASG-Debug-ID: 1471280449-0347d858c5265ce0001-aWHRdb
+Received: from ExchangeInt.corp.vcom.com (exchangeint.corp.vcom.com
+	[192.168.50.125]) by mx1.vecima.com with ESMTP id
+	dKE3RfDr4mggKGop for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Aug 2016 11:00:49 -0600 (CST)
+X-Barracuda-Envelope-From: Terry.Boese@vecima.com
+Received: from PC2170.corp.vcom.com (192.168.216.92) by
+	ExchangeInt.corp.vcom.com (192.168.50.125) with Microsoft SMTP Server
+	id 14.3.279.2; Mon, 15 Aug 2016 11:00:49 -0600
+From: Terry Boese <terry.boese@vecima.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 15 Aug 2016 11:00:36 -0600
+X-ASG-Orig-Subj: [meta-networking][PATCH v3] dnsmasq: update to version 2.76
+Message-ID: <1471280436-3588-1-git-send-email-terry.boese@vecima.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCHv2 1/2] utouch-frame: fix build errors associated with xmllint
+MIME-Version: 1.0
+X-Originating-IP: [192.168.216.92]
+X-Barracuda-Connect: exchangeint.corp.vcom.com[192.168.50.125]
+X-Barracuda-Start-Time: 1471280449
+X-Barracuda-URL: https://192.168.99.189:443/cgi-mod/mark.cgi
+X-Barracuda-Scan-Msg-Size: 2285
+X-Virus-Scanned: by bsmtpd at vecima.com
+X-Barracuda-BRTS-Status: 1
+X-Barracuda-Spam-Score: 0.00
+X-Barracuda-Spam-Status: No, SCORE=0.00 using global scores of TAG_LEVEL=1000.0
+	QUARANTINE_LEVEL=1000.0 KILL_LEVEL=4.0 tests=
+X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.32028
+	Rule breakdown below
+	pts rule name              description
+	---- ----------------------
+	--------------------------------------------------
+Subject: [meta-networking][PATCH v3] dnsmasq: update to version 2.76
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,56 +49,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Aug 2016 14:09:46 -0000
+X-List-Received-Date: Mon, 15 Aug 2016 17:14:15 -0000
+Content-Type: text/plain
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Correct do_compile_append() and do_install(), as the location of
+the DHCP lease tools has changed.
+
+Signed-off-by: Terry Boese <terry.boese@vecima.com>
 ---
- .../utouch/files/remove-man-page-creation.patch          | 16 ++++++++++++++++
- meta-oe/recipes-support/utouch/utouch-frame_git.bb       |  6 ++----
- 2 files changed, 18 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-support/utouch/files/remove-man-page-creation.patch
+ meta-networking/recipes-support/dnsmasq/dnsmasq.inc                  | 4 ++--
+ .../recipes-support/dnsmasq/{dnsmasq_2.75.bb => dnsmasq_2.76.bb}     | 5 ++---
+ 2 files changed, 4 insertions(+), 5 deletions(-)
+ rename meta-networking/recipes-support/dnsmasq/{dnsmasq_2.75.bb => dnsmasq_2.76.bb} (27%)
 
-diff --git a/meta-oe/recipes-support/utouch/files/remove-man-page-creation.patch b/meta-oe/recipes-support/utouch/files/remove-man-page-creation.patch
-new file mode 100644
-index 0000000..8706d91
---- /dev/null
-+++ b/meta-oe/recipes-support/utouch/files/remove-man-page-creation.patch
-@@ -0,0 +1,16 @@
-+configure.ac: never generate the docs even if a2x is found as xmllint will fail finding custom dtd files
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Signed-off-by: Derek Straka <derek@asterius.io>
-+--- git/configure.ac.orig	2016-08-15 09:53:46.787003658 -0400
-++++ git/configure.ac	2016-08-15 09:53:51.698972432 -0400
-+@@ -37,7 +37,7 @@
-+ ])
-+  
-+ AC_CHECK_PROG([ASCIIDOC], [a2x], [a2x])
-+-AM_CONDITIONAL([HAVE_DOCTOOLS], [test "x$ASCIIDOC" != "x"])
-++AM_CONDITIONAL([HAVE_DOCTOOLS], [false])
-+ AS_IF([test "x$ASCIIDOC" = "x"],
-+       [AC_MSG_WARN([asciidoc not installed, man pages will not be created])])
-+ 
-diff --git a/meta-oe/recipes-support/utouch/utouch-frame_git.bb b/meta-oe/recipes-support/utouch/utouch-frame_git.bb
-index 8fc8733..6ec566d 100644
---- a/meta-oe/recipes-support/utouch/utouch-frame_git.bb
-+++ b/meta-oe/recipes-support/utouch/utouch-frame_git.bb
-@@ -9,12 +9,10 @@ DEPENDS += "mtdev utouch-evemu"
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+index 793c106..9ef54fe 100644
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
+@@ -38,7 +38,7 @@ SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'resolvconf', 'file://dnsmasq.
  
- inherit autotools pkgconfig
+ do_compile_append() {
+     # build dhcp_release
+-    cd ${S}/contrib/wrt
++    cd ${S}/contrib/lease-tools
+     oe_runmake
+ }
  
--SRC_URI = "git://bitmath.org/git/frame.git;protocol=http"
-+SRC_URI = "git://bitmath.org/git/frame.git;protocol=http \
-+           file://remove-man-page-creation.patch"
- SRCREV = "95363d5a1f7394d71144bf3b408ef4e6db4350fc"
+@@ -59,7 +59,7 @@ do_install () {
+         install -m 0644 ${WORKDIR}/dnsmasq-noresolvconf.service ${D}${systemd_unitdir}/system/dnsmasq.service
+     fi
  
- PV = "1.1.2+git${SRCPV}"
+-    install -m 0755 ${S}/contrib/wrt/dhcp_release ${D}${bindir}
++    install -m 0755 ${S}/contrib/lease-tools/dhcp_release ${D}${bindir}
  
- S = "${WORKDIR}/git/"
+     if [ "${@bb.utils.contains('PACKAGECONFIG', 'dbus', 'dbus', '', d)}" != "" ]; then
+         install -d ${D}${sysconfdir}/dbus-1/system.d
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.76.bb
+similarity index 27%
+rename from meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb
+rename to meta-networking/recipes-support/dnsmasq/dnsmasq_2.76.bb
+index a11aabb..41573d9 100644
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.75.bb
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.76.bb
+@@ -4,6 +4,5 @@ SRC_URI += "\
+     file://lua.patch \
+ "
+ 
+-SRC_URI[dnsmasq-2.75.md5sum] = "d99ac126d4fe910c679d88430559669b"
+-SRC_URI[dnsmasq-2.75.sha256sum] = "f8252c0a0ba162c2cd45f81140c7c17cc40a5fca2b869d1a420835b74acad294"
 -
--# http://errors.yoctoproject.org/Errors/Details/74486/
--PNBLACKLIST[utouch-frame] ?= "BROKEN: Fails to execute xmllint"
++SRC_URI[dnsmasq-2.76.md5sum] = "6610f8233ca89b15a1bb47c788ffb84f"
++SRC_URI[dnsmasq-2.76.sha256sum] = "777c4762d2fee3738a0380401f2d087b47faa41db2317c60660d69ad10a76c32"
 -- 
 2.7.4
 
