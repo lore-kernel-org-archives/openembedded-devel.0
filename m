@@ -1,47 +1,47 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 8AF2077199
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 676C47719D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 10:21:02 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id i5so10344485wmg.2
+	Mon, 15 Aug 2016 10:21:04 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id i138so10291305wmf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 03:21:03 -0700 (PDT)
+	Mon, 15 Aug 2016 03:21:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=bqSaJAT+ePVFtGEi3QSoHgvsfgkEj2KqgYpIUQMF4+M=;
-	b=nuY+Alx869PKqNrORcNDaxLq6roJZzYZsoboYqmQbC2aEP3huPeLHpmknf+4Kwd3nu
-	wBL1qIj/s0qq3DSAqhaXM/cZsbWyXEeq/ukpM7tDqHwNO6RMGjIaqvO8RQIKd3BuqO/O
-	o6cgSd3dYb5y0s03bmaFB9YkDQuwHd+qmlsh/yZBAD7p/F4WieTOm2t9Gx//87mARonO
-	SuIYYngtTv0DzBHcQJy2ZttMLlqj6EJzGqT4W0f09ftLNDA6mgAYyPV6y0pNvIjbbBKr
-	MHbyaHPB5agI3R5I7FZFCUq2Q+QgFfuguEtCMl1aiBuJ2MsDN8M9MK1pFBMYZIC83GaQ
-	nDWQ==
+	bh=hhqvHmsvrHFkTX6jA6ObxAZCJ92BPUpKgzEnbi0lW1k=;
+	b=SF7rNXTEZHIB55ED9JbqMQJsmgtDCRJaP+wwnRI4BWMrqVcdgLQ992PMUeQcHVpwEc
+	QlcSyAtNyAFma+GKZ65K/3ZLaxkm6hU4Dfpku2nN1y573JtiNzXrC/ELHWwS0ITMkrx/
+	7itf713hn9UAyhUOkp2HsDUJW5F01t5ryYPekmgwHjRQ3CMsENAVzHELUM0BMuc8GfhF
+	lzhOkqh9BSM7GHGyoFMMsZd7dWctN2WP/yVOSxyK1+kXEipsq9WOAhEsZxnN7DBPj7lc
+	oMp7XaxxjCvHc0dHOMSIEjbAd7dA34q392HLIGrC0EfYfKtJcZVwKA5y3+aVq/fyQc7q
+	UHKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=bqSaJAT+ePVFtGEi3QSoHgvsfgkEj2KqgYpIUQMF4+M=;
-	b=IKqdpX9EXjMBFLGnLzuHZF7wzJfcCHYStWdM5atFf+mZpKWnX5BLmVnxmd9Cnvbq5K
-	8HkADNB4JoHA/+rqCAxXjM5dWse7FbnDqV/FMpJC4V3I4IyJeeVP94soJF/MqRtIFTcD
-	Bs6VNIpODyYcBrcYHZg1vFnbYiTjVi+xI1nYxdHTxdHwtzDk320/oNaYXCwxefgDxVd3
-	IIL7clQpdUAuQCOKR4d1YFp4MZKG6oXAhhmgP4Q8dXLFz04IbhfLFYx5jjno01rl49+x
-	pDyT3Xl19uWBJlMYG4g9y2hJexsgexemnNVQK0aAwGMyFEG/uS3UyNCsbAHQwAjj89xA
-	umKA==
-X-Gm-Message-State: AEkoouvN52fN4zXXbuBIA4rU6ySQf1Saynof6rBZWgy5HsXHj/KLTGi+YRiDpH4xRkg8BQ==
-X-Received: by 10.28.27.143 with SMTP id b137mr15204076wmb.12.1471256462946;
-	Mon, 15 Aug 2016 03:21:02 -0700 (PDT)
+	bh=hhqvHmsvrHFkTX6jA6ObxAZCJ92BPUpKgzEnbi0lW1k=;
+	b=i/mUgWWlx5ez6t2imS7pg+wbg45nV3xxHtCmMlXpx+nA5lyITlKh5ipLRP2AhVNn63
+	BeKEhu8lu1QpnsUPF2ts5Q5Jd/BbEyqiCaCPfVPgY2nKk5W4GVnyDFlKQOGNL7bplsgs
+	zqU5gpMUOFeQgFvGqf6zfgfKbPGAdUbcEYvvPz6mNDcPv6dLu22oRfc/Fqbkk2MZWO6g
+	TqkTH/Zyp8zoOwd6DYVolDvm5G9pPEB6mNsF8kHrEskrYj5RnUKBSNnJneezPUopW74L
+	YezvX5St/UdVHsbzbylExHRThGCMKIiJz6IKZPA0KnRxVA87zvZPGuCDlFQSiLGqgpSg
+	gfew==
+X-Gm-Message-State: AEkoous4hh8/jbXXFhZxj5bfgNpYvtMNjUAI6Gw4B/z5GPuLP2nluB5yJNI2KHOEAltGCQ==
+X-Received: by 10.194.144.161 with SMTP id sn1mr36275611wjb.29.1471256464586; 
+	Mon, 15 Aug 2016 03:21:04 -0700 (PDT)
 Received: from localhost ([89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	z18sm15789204wmz.6.2016.08.15.03.21.01
+	a203sm18337204wma.0.2016.08.15.03.21.03
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 15 Aug 2016 03:21:01 -0700 (PDT)
+	Mon, 15 Aug 2016 03:21:03 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Aug 2016 12:20:46 +0200
-Message-Id: <20160815102049.3291-8-Martin.Jansa@gmail.com>
+Date: Mon, 15 Aug 2016 12:20:47 +0200
+Message-Id: <20160815102049.3291-9-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.9.2
 In-Reply-To: <20160815102049.3291-1-Martin.Jansa@gmail.com>
 References: <20160815102049.3291-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 08/11] networkmanager-openvpn: add intltool-native dependency
+Subject: [meta-oe][PATCH 09/11] libgxim: add intltool-native dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,30 +54,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Aug 2016 10:21:03 -0000
+X-List-Received-Date: Mon, 15 Aug 2016 10:21:04 -0000
 
 * fixes:
-  | ../NetworkManager-openvpn-1.0.8/configure: line 12468: syntax error near unexpected token `0.35'
-  | ../NetworkManager-openvpn-1.0.8/configure: line 12468: `IT_PROG_INTLTOOL(0.35)'
+  | configure.ac:18: error: possibly undefined macro: AC_PROG_INTLTOOL
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-connectivity/networkmanager/networkmanager-openvpn_1.0.8.bb | 2 +-
+ meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager-openvpn_1.0.8.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager-openvpn_1.0.8.bb
-index 258ee68..fe1d601 100644
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager-openvpn_1.0.8.bb
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager-openvpn_1.0.8.bb
-@@ -4,7 +4,7 @@ SECTION = "net/misc"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=100d5a599bead70ddcd70dcd73f2e29c"
+diff --git a/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb b/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
+index 768bdaa..772babf 100644
+--- a/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
++++ b/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
+@@ -20,6 +20,6 @@ LIC_FILES_CHKSUM = "\
+ file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
  
--DEPENDS = "dbus dbus-glib networkmanager openvpn"
-+DEPENDS = "dbus dbus-glib networkmanager openvpn intltool-native"
+ EXTRA_OECONF = " --disable-static --disable-rebuilds"
+-DEPENDS += "gtk+ glib-2.0 ruby-native"
++DEPENDS += "gtk+ glib-2.0 ruby-native intltool-native"
  
- inherit gnomebase useradd gettext systemd
- 
+ inherit autotools pkgconfig gettext
 -- 
 2.9.2
 
