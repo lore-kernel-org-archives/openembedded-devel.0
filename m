@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pa0-f68.google.com (mail-pa0-f68.google.com
 	[209.85.220.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E507277042
+	by mail.openembedded.org (Postfix) with ESMTP id E622C770FF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 05:04:44 +0000 (UTC)
-Received: by mail-pa0-f68.google.com with SMTP id ez1so3030160pab.3
+	Mon, 15 Aug 2016 05:04:45 +0000 (UTC)
+Received: by mail-pa0-f68.google.com with SMTP id vy10so3021022pac.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Aug 2016 22:04:45 -0700 (PDT)
+	Sun, 14 Aug 2016 22:04:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=oov57M5vQaUige8juZQ5D0aFQjnnrEiuNVTqlLggF20=;
-	b=gB97RjL3YumAU+h6G8EhourEPTTgAilnkzWAMjP1P5jPIPrtJM8hC/giQNVCGQ6TpB
-	OrizOvPer9DX1WKOw4hgjJsfT3Z+7xK4CZj8x6BI0Tn9W0/oGu7fGwOm7hR5VyRGVHS/
-	GDze7jXJo0rymF2kMqyQ4QP/wblxFhsYJvVEyPn7YOZ7HJ613celKgQE1cVGM4TBiRzC
-	K/5pKv/p/8l5wsoJ9y8UpkA6jCDpPgRO1O7APps0iTyJgHCG/P8AlcTAwzEVR9bV/4aY
-	gCzdllwwWuezsFmPyvzJLK5FiTepLG6skTlHYv+r5EpjrDJwmwIa22Ol7MMjHHNbGr23
-	8m5g==
+	bh=RFp5LnUe5bSuiEW6/9kgvHNcKkAR1ZH1HTaMvbHYP6Y=;
+	b=tWFgSXgcZyT5MCsXw1HuAzmwDe3kHKPqzZWCAFEZ+WNOzHFdIB/aeK9uKnEvxF/msR
+	mZohrVWMc58C23XM57PhO/hEPp6VA/eLcIrT/grYB7Vhc1uVUg1pq/FvC3GtqNrnipYh
+	WR+PuyJz68dlYAxORvg5frtw4nuCxSS7NgJ+4n+TTVtoHgwbaBval76bZmvsJ2X1fndf
+	BgOhKDvd4VktCrL78IDLk3WPYkjAE1/GBJuNJ342062YnM+uBR4gEhoeGVbWzqURV46g
+	qOnCZgXC7pu7L4pCNN2ghjmnlg4rrUPXbiWszao2tJPduIdYb2ssXY6vBdlocp47HdRI
+	2xFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=oov57M5vQaUige8juZQ5D0aFQjnnrEiuNVTqlLggF20=;
-	b=EF6uKKabR3T7hDIKphemmguxFheoGMSrGRqGbRTTCl442NvTqvEetTMgCBGGniJhlR
-	YXjsVz2tMkK3ykuw1qU2Sup/Ycj2CIWNyUApYepURE0HgoxmEIsSRcPKK/2Qdf1/pFad
-	sZ6rB3gutv3zj5fV1VGEzxBQqB/XhfKKJS0rpH4RPi0zHMkYVd3KI9mD7MXKLGAIOEKP
-	7k/9rh6toZSUAbJvJbwe+VS4dNSKp9sYMoNRgScutseSpHruAR0qh0zEKLVxnafg84Ca
-	+17IVbLpE3Hyc/iZ6kxfqPohD15VMWhiaa7KAyE9HOOtv2lmSCTfsS/V+YuBoDO15tzA
-	jYPQ==
-X-Gm-Message-State: AEkooushUtVyepvQiU16cfcN58X2E1R9SyRyx7QZbJayCV1mqEm5fK602aMi9kD/jV5IYA==
-X-Received: by 10.66.161.225 with SMTP id xv1mr50613776pab.20.1471237485209;
-	Sun, 14 Aug 2016 22:04:45 -0700 (PDT)
+	bh=RFp5LnUe5bSuiEW6/9kgvHNcKkAR1ZH1HTaMvbHYP6Y=;
+	b=CqW2/Yl/hpZtsOgAkdPjT/jAAqchK5heCcLEQmz4LPsu87Seio+RgDeSrf3mfSaw1X
+	Ac9THdXErOivAiUxqtoeNVkUu4Mn499EiTk2CGlFPo6aILlT7gQrDhneECrQYxHLUihy
+	y7sOQNKIPSYTjq0CAzi0uHDQtWLToCLECFe6YPI09KE3Nl1/96jheWPEC2FUgwXbKKKG
+	rx/vMCGqykFQUAT2TQbDFvNSlOfojeAi5ikn2QVmaSETFXpMqJgW14mx1Rxmb4BXmCb3
+	SdE6bK2MnPB9rZWVJf8Tv1kUH/ZxKLo4Qikzw6Itq2+8GCWzMt5Rl6Yoiu0wwU7os0aK
+	5hqQ==
+X-Gm-Message-State: AEkoouumHQOPUdlGkvB9N/knG3oDh9FGZOqAThMjm7kejdc3+iKbemahz9FyeleuqDnPXA==
+X-Received: by 10.66.160.165 with SMTP id xl5mr5040192pab.63.1471237486081;
+	Sun, 14 Aug 2016 22:04:46 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	ty6sm29178421pac.18.2016.08.14.22.04.44
+	ty6sm29178421pac.18.2016.08.14.22.04.45
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 14 Aug 2016 22:04:44 -0700 (PDT)
+	Sun, 14 Aug 2016 22:04:45 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 14 Aug 2016 22:04:33 -0700
-Message-Id: <20160815050434.20974-2-raj.khem@gmail.com>
+Date: Sun, 14 Aug 2016 22:04:34 -0700
+Message-Id: <20160815050434.20974-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.9.3
 In-Reply-To: <20160815050434.20974-1-raj.khem@gmail.com>
 References: <20160815050434.20974-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/3] udisks2: Update to 2.1.7
+Subject: [meta-xfce][PATCH 3/3] thunar-volman: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,72 +57,60 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 15 Aug 2016 05:04:46 -0000
 
-Fix below  build with musl while here
-
-| ../../udisks-2.1.7/udisks/udisksclient.c:2004:6: warning: '__GNUC_PREREQ' is not defined, evaluates to 0 [-Wundef]
-| # if __GNUC_PREREQ(4,6) || __clang__
+clang poins a void return for a boolean function
+| ../../thunar-volman-0.8.1/thunar-volman/tvm-block-device.c:717:3: error: non-void function 'tvm_block_device_mount' should return a value [-Wreturn-type]
+|   g_return_if_fail (context != NULL);
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../udisks/udisks2/non-gnu-libc.patch              | 26 ++++++++++++++++++++++
- .../udisks/{udisks2_2.1.5.bb => udisks2_2.1.7.bb}  |  8 ++++---
- 2 files changed, 31 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-support/udisks/udisks2/non-gnu-libc.patch
- rename meta-oe/recipes-support/udisks/{udisks2_2.1.5.bb => udisks2_2.1.7.bb} (84%)
+ ...with-no-value-in-function-returning-non-v.patch | 26 ++++++++++++++++++++++
+ .../thunar-volman/thunar-volman_0.8.1.bb           |  1 +
+ 2 files changed, 27 insertions(+)
+ create mode 100644 meta-xfce/recipes-xfce/thunar-volman/thunar-volman/0001-Fix-return-with-no-value-in-function-returning-non-v.patch
 
-diff --git a/meta-oe/recipes-support/udisks/udisks2/non-gnu-libc.patch b/meta-oe/recipes-support/udisks/udisks2/non-gnu-libc.patch
+diff --git a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman/0001-Fix-return-with-no-value-in-function-returning-non-v.patch b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman/0001-Fix-return-with-no-value-in-function-returning-non-v.patch
 new file mode 100644
-index 0000000..98e6c75
+index 0000000..7233ea7
 --- /dev/null
-+++ b/meta-oe/recipes-support/udisks/udisks2/non-gnu-libc.patch
++++ b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman/0001-Fix-return-with-no-value-in-function-returning-non-v.patch
 @@ -0,0 +1,26 @@
-+musl does not define __GNUC_PREREQ therefore check for C library being glibc
-+if not then define the macro
++From 2e295e9ce8f7f60a271adf004588b0d8db88db09 Mon Sep 17 00:00:00 2001
++From: Matt Thirtytwo <matt.59491@gmail.com>
++Date: Sat, 7 Mar 2015 22:50:32 +0100
++Subject: [PATCH] Fix return with no value in function returning non-void (bug
++ #11656)
 +
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Index: udisks-2.1.7/udisks/udisksclient.c
-+===================================================================
-+--- udisks-2.1.7.orig/udisks/udisksclient.c
-++++ udisks-2.1.7/udisks/udisksclient.c
-+@@ -27,8 +27,15 @@
-+ #include "udisksobjectinfo.h"
++---
++ thunar-volman/tvm-block-device.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/thunar-volman/tvm-block-device.c b/thunar-volman/tvm-block-device.c
++index da31efa..edb6cad 100644
++--- a/thunar-volman/tvm-block-device.c
+++++ b/thunar-volman/tvm-block-device.c
++@@ -714,7 +714,7 @@ tvm_block_device_mount (TvmContext *context)
++   GMountOperation *mount_operation;
++   GVolume         *volume;
 + 
-+ /* For __GNUC_PREREQ usage below */
-+-#ifdef __GNUC__
-++#ifdef __GLIBC__
-+ # include <features.h>
-++#else
-++#if defined(__GNUC__)
-++#define	__GNUC_PREREQ(__maj, __min)	\
-++	(__GNUC__ > (__maj) || __GNUC__ == (__maj) && __GNUC_MINOR__ >= (__min))
-++#else
-++#define	__GNUC_PREREQ(__maj, __min) 0
-++#endif
-+ #endif
++-  g_return_if_fail (context != NULL);
+++  g_return_val_if_fail ((context != NULL), FALSE);
 + 
-+ /**
-diff --git a/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb b/meta-oe/recipes-support/udisks/udisks2_2.1.7.bb
-similarity index 84%
-rename from meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
-rename to meta-oe/recipes-support/udisks/udisks2_2.1.7.bb
-index f365cfa..34762dd 100644
---- a/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
-+++ b/meta-oe/recipes-support/udisks/udisks2_2.1.7.bb
-@@ -7,9 +7,11 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)
++   /* determine the GVolume corresponding to the udev device */
++   volume = 
++-- 
++1.9.0
++
+diff --git a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.8.1.bb b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.8.1.bb
+index 08e6f5b..44e3777 100644
+--- a/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.8.1.bb
++++ b/meta-xfce/recipes-xfce/thunar-volman/thunar-volman_0.8.1.bb
+@@ -6,6 +6,7 @@ DEPENDS = "exo glib-2.0 gtk+ libxfce4ui libxfce4util xfconf libnotify libgudev"
  
- RDEPENDS_${PN} = "acl"
+ inherit xfce
  
--SRC_URI = "http://udisks.freedesktop.org/releases/udisks-${PV}.tar.bz2"
--SRC_URI[md5sum] = "73632501002e6de8244f831e38b2b98e"
--SRC_URI[sha256sum] = "2cfcf560447ea44cba2a683342c7062aaaf35e4eb554bed64ac2dd55a70a5fb6"
-+SRC_URI = "http://udisks.freedesktop.org/releases/udisks-${PV}.tar.bz2 \
-+           file://non-gnu-libc.patch \
-+"
-+SRC_URI[md5sum] = "8bccd36573b75286538bd5bd2c424f45"
-+SRC_URI[sha256sum] = "abae2bb3bdc691ca13c1e4c244630b8c881c4f3b35c207299f1b39b7bec83785"
- 
- inherit autotools systemd gtk-doc gobject-introspection
++SRC_URI += "file://0001-Fix-return-with-no-value-in-function-returning-non-v.patch"
+ SRC_URI[md5sum] = "65ab6e05b2e808d1dcc8d36683a59b7e"
+ SRC_URI[sha256sum] = "5a08bb5ce32c296a64dfbdb2406d4e45a208b2c91e4efa831dc28f1d6c2ac2bd"
  
 -- 
 2.9.3
