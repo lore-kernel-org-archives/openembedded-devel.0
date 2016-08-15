@@ -1,45 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 430CA77042
+Received: from mail-pa0-f68.google.com (mail-pa0-f68.google.com
+	[209.85.220.68])
+	by mail.openembedded.org (Postfix) with ESMTP id E507277042
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 05:04:43 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id g202so3156201pfb.1
+	Mon, 15 Aug 2016 05:04:44 +0000 (UTC)
+Received: by mail-pa0-f68.google.com with SMTP id ez1so3030160pab.3
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 14 Aug 2016 22:04:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=nLC4ILdtkIhzCqmpIeu1wXcOudGe8Fu0byupYT/50B4=;
-	b=KuXBOaz4N6WOP8AN5G79Z0QBCLQm3RQdu3dbYU7cPtfWyXkKxHD9TTkPE+hQw4b+NB
-	KUQEFEl2y31PF0Tcy4gRnSJmAx2a7r8AtL9037lcDNVh/i6qiDc5+o9iWaXa1GZ4rJkk
-	BOFarcCgck3xQhDfF13HzB0o8/e795COlIH6yrmSaZ7mmUR/zN9RJZRtgD+AGTN3BF8d
-	B6H+qnbocpQ8z3WCaaTJPVZMSvrBqrAwjvxf11NuKu/iEiVUpeLJATx4OpFzIYRrF7NR
-	vEqc+BwXME9mmqtTIBFk1z2pbWEYvCtPTog0hRxAarzCFwEx16WVmnFY3V1ZEex9slw0
-	nNWw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=oov57M5vQaUige8juZQ5D0aFQjnnrEiuNVTqlLggF20=;
+	b=gB97RjL3YumAU+h6G8EhourEPTTgAilnkzWAMjP1P5jPIPrtJM8hC/giQNVCGQ6TpB
+	OrizOvPer9DX1WKOw4hgjJsfT3Z+7xK4CZj8x6BI0Tn9W0/oGu7fGwOm7hR5VyRGVHS/
+	GDze7jXJo0rymF2kMqyQ4QP/wblxFhsYJvVEyPn7YOZ7HJ613celKgQE1cVGM4TBiRzC
+	K/5pKv/p/8l5wsoJ9y8UpkA6jCDpPgRO1O7APps0iTyJgHCG/P8AlcTAwzEVR9bV/4aY
+	gCzdllwwWuezsFmPyvzJLK5FiTepLG6skTlHYv+r5EpjrDJwmwIa22Ol7MMjHHNbGr23
+	8m5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=nLC4ILdtkIhzCqmpIeu1wXcOudGe8Fu0byupYT/50B4=;
-	b=Mq1Gw6JJSE9NWFJmMHvIIhnX/uagzcTRNnEG4IZrcI13KdGpX1Cu+KcN8GnGuJtphL
-	CBJV6IypmfBkIkTgPrUdZPqFKKGRVKoHRE/SM1mHRvYZxBP9QO+uFldsPiGhh6OMhD+u
-	xeydlA4i3K8SiUk/1SGOYeTLo5h2TgANkn1A6HiOQiyTadGnaBpySbAP/jYT1UA8m8bp
-	PwCGqvGKkEWQxCsprb4UoS4Jsi1d6AhWsjgxt1H8zdVMSaFozzVO71ocZ2ecEZO6bkC3
-	u4JdFLV5/HccnXwdsgpcKF+qj5Ox41EUufOkDh6mPcU/7Fx2bUl7DJtVrKLzBvk2zsul
-	3BFA==
-X-Gm-Message-State: AEkoouuhYaZjLozX5dzpmwofuYLKW5xuZo1yLnkKwcg1sT4Kxdsg6uQ0lbk+MrbAzuF/oA==
-X-Received: by 10.98.98.193 with SMTP id w184mr50543375pfb.120.1471237484324; 
-	Sun, 14 Aug 2016 22:04:44 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=oov57M5vQaUige8juZQ5D0aFQjnnrEiuNVTqlLggF20=;
+	b=EF6uKKabR3T7hDIKphemmguxFheoGMSrGRqGbRTTCl442NvTqvEetTMgCBGGniJhlR
+	YXjsVz2tMkK3ykuw1qU2Sup/Ycj2CIWNyUApYepURE0HgoxmEIsSRcPKK/2Qdf1/pFad
+	sZ6rB3gutv3zj5fV1VGEzxBQqB/XhfKKJS0rpH4RPi0zHMkYVd3KI9mD7MXKLGAIOEKP
+	7k/9rh6toZSUAbJvJbwe+VS4dNSKp9sYMoNRgScutseSpHruAR0qh0zEKLVxnafg84Ca
+	+17IVbLpE3Hyc/iZ6kxfqPohD15VMWhiaa7KAyE9HOOtv2lmSCTfsS/V+YuBoDO15tzA
+	jYPQ==
+X-Gm-Message-State: AEkooushUtVyepvQiU16cfcN58X2E1R9SyRyx7QZbJayCV1mqEm5fK602aMi9kD/jV5IYA==
+X-Received: by 10.66.161.225 with SMTP id xv1mr50613776pab.20.1471237485209;
+	Sun, 14 Aug 2016 22:04:45 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	ty6sm29178421pac.18.2016.08.14.22.04.42
+	ty6sm29178421pac.18.2016.08.14.22.04.44
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 14 Aug 2016 22:04:43 -0700 (PDT)
+	Sun, 14 Aug 2016 22:04:44 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 14 Aug 2016 22:04:32 -0700
-Message-Id: <20160815050434.20974-1-raj.khem@gmail.com>
+Date: Sun, 14 Aug 2016 22:04:33 -0700
+Message-Id: <20160815050434.20974-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.9.3
-Subject: [meta-oe][PATCH 1/3] libgphoto2: Fix build when security flags are enabled with clang
+In-Reply-To: <20160815050434.20974-1-raj.khem@gmail.com>
+References: <20160815050434.20974-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/3] udisks2: Update to 2.1.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,175 +55,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Aug 2016 05:04:44 -0000
+X-List-Received-Date: Mon, 15 Aug 2016 05:04:46 -0000
 
-clang is more pedantic and throws below errors
+Fix below  build with musl while here
 
-../../libgphoto2-2.5.8/camlibs/ptp2/chdk.c:1131:14: error: format string is not a string literal (potentially insecure) [-Werror,-Wformat-security]
-        sprintf(lua,luascript); /* This expands the %q inside the string too ... do not optimize away. */
-                    ^~~~~~~~~
-
-Backport a patch to silence the warnings where it avoids
-the use of sprintf all the way
+| ../../udisks-2.1.7/udisks/udisksclient.c:2004:6: warning: '__GNUC_PREREQ' is not defined, evaluates to 0 [-Wundef]
+| # if __GNUC_PREREQ(4,6) || __clang__
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../libgphoto2-2.5.8/avoid_using_sprintf.patch     | 133 +++++++++++++++++++++
- .../recipes-graphics/gphoto2/libgphoto2_2.5.8.bb   |   1 +
- 2 files changed, 134 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/avoid_using_sprintf.patch
+ .../udisks/udisks2/non-gnu-libc.patch              | 26 ++++++++++++++++++++++
+ .../udisks/{udisks2_2.1.5.bb => udisks2_2.1.7.bb}  |  8 ++++---
+ 2 files changed, 31 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-support/udisks/udisks2/non-gnu-libc.patch
+ rename meta-oe/recipes-support/udisks/{udisks2_2.1.5.bb => udisks2_2.1.7.bb} (84%)
 
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/avoid_using_sprintf.patch b/meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/avoid_using_sprintf.patch
+diff --git a/meta-oe/recipes-support/udisks/udisks2/non-gnu-libc.patch b/meta-oe/recipes-support/udisks/udisks2/non-gnu-libc.patch
 new file mode 100644
-index 0000000..fba4c69
+index 0000000..98e6c75
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/avoid_using_sprintf.patch
-@@ -0,0 +1,133 @@
-+From 4adfe5a6c9db07537df302f3c17713515bf23a2e Mon Sep 17 00:00:00 2001
-+From: Marcus Meissner <marcus@jet.franken.de>
-+Date: Sat, 11 Jul 2015 09:38:13 +0000
-+Subject: [PATCH] avoid use of sprintf to convert %% to %, duplicate the macro
++++ b/meta-oe/recipes-support/udisks/udisks2/non-gnu-libc.patch
+@@ -0,0 +1,26 @@
++musl does not define __GNUC_PREREQ therefore check for C library being glibc
++if not then define the macro
 +
-+git-svn-id: https://svn.code.sf.net/p/gphoto/code/trunk/libgphoto2@15490 67ed7778-7388-44ab-90cf-0a291f65f57c
-+---
-+ camlibs/ptp2/chdk.c     |  8 ++---
-+ camlibs/ptp2/chdk_ptp.h | 82 +++++++++++++++++++++++++++++++++++++++++++++++++
-+ 2 files changed, 84 insertions(+), 6 deletions(-)
-+
-+diff --git a/camlibs/ptp2/chdk.c b/camlibs/ptp2/chdk.c
-+index 5fb84ea..3b8a995 100644
-+--- a/camlibs/ptp2/chdk.c
-++++ b/camlibs/ptp2/chdk.c
-+@@ -1119,18 +1119,14 @@ chdk_camera_capture (Camera *camera, CameraCaptureType type, CameraFilePath *pat
-+ 	int		ret, retint;
-+ 	char		*table, *s;
-+ 	PTPParams	*params = &camera->pl->params;
-+-	char		*lua;
-+-	const char	*luascript =	PTP_CHDK_LUA_SERIALIZE_MSGS \
-++	const char	*luascript = PTP_CHDK_LUA_SERIALIZE_MSGS_SIMPLEQUOTE \
-+ 				PTP_CHDK_LUA_RLIB_SHOOT	\
-+ 				"return rlib_shoot({info=true});\n";
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Index: udisks-2.1.7/udisks/udisksclient.c
++===================================================================
++--- udisks-2.1.7.orig/udisks/udisksclient.c
+++++ udisks-2.1.7/udisks/udisksclient.c
++@@ -27,8 +27,15 @@
++ #include "udisksobjectinfo.h"
 + 
-+ 	ret =  camera_prepare_chdk_capture(camera, context);
-+ 	if (ret != GP_OK) return ret;
++ /* For __GNUC_PREREQ usage below */
++-#ifdef __GNUC__
+++#ifdef __GLIBC__
++ # include <features.h>
+++#else
+++#if defined(__GNUC__)
+++#define	__GNUC_PREREQ(__maj, __min)	\
+++	(__GNUC__ > (__maj) || __GNUC__ == (__maj) && __GNUC_MINOR__ >= (__min))
+++#else
+++#define	__GNUC_PREREQ(__maj, __min) 0
+++#endif
++ #endif
 + 
-+-	lua = malloc(strlen(luascript)+1);
-+-	sprintf(lua,luascript); /* This expands the %q inside the string too ... do not optimize away. */
-+-	ret = chdk_generic_script_run (params, lua, &table, &retint, context);
-+-	free (lua);
-++	ret = chdk_generic_script_run (params, luascript, &table, &retint, context);
-+ 	GP_LOG_D("rlib_shoot returned table %s, retint %d\n", table, retint);
-+ 	s = strstr(table, "exp=");
-+ 	if (s) {
-+diff --git a/camlibs/ptp2/chdk_ptp.h b/camlibs/ptp2/chdk_ptp.h
-+index d11e0b7..65dcfd7 100644
-+--- a/camlibs/ptp2/chdk_ptp.h
-++++ b/camlibs/ptp2/chdk_ptp.h
-+@@ -198,10 +198,92 @@ function serialize(v,opts)\n\
-+ 	return table.concat(r)\n\
-+ end\n"
-+ 
-++#define PTP_CHDK_LUA_SERIALIZE_SIMPLEQUOTE "\n\
-++serialize_r = function(v,opts,r,seen,depth)\n\
-++	local vt = type(v)\n\
-++	if vt == 'nil' or  vt == 'boolean' or vt == 'number' then\n\
-++		table.insert(r,tostring(v))\n\
-++		return\n\
-++	end\n\
-++	if vt == 'string' then\n\
-++		table.insert(r,string.format('%q',v))\n\
-++		return\n\
-++	end\n\
-++	if vt == 'table' then\n\
-++		if not depth then\n\
-++			depth = 1\n\
-++		end\n\
-++		if depth >= opts.maxdepth then\n\
-++			error('serialize: max depth')\n\
-++		end\n\
-++		if not seen then\n\
-++			seen={}\n\
-++		elseif seen[v] then\n\
-++			if opts.err_cycle then\n\
-++				error('serialize: cycle')\n\
-++			else\n\
-++				table.insert(r,'\"cycle:'..tostring(v)..'\"')\n\
-++				return\n\
-++			end\n\
-++		end\n\
-++		seen[v] = true;\n\
-++		table.insert(r,'{')\n\
-++		for k,v1 in pairs(v) do\n\
-++			if opts.pretty then\n\
-++				table.insert(r,'\\n'..string.rep(' ',depth))\n\
-++			end\n\
-++			if type(k) == 'string' and string.match(k,'^[_%a][%a%d_]*$') then\n\
-++				table.insert(r,k)\n\
-++			else\n\
-++				table.insert(r,'[')\n\
-++				serialize_r(k,opts,r,seen,depth+1)\n\
-++				table.insert(r,']')\n\
-++			end\n\
-++			table.insert(r,'=')\n\
-++			serialize_r(v1,opts,r,seen,depth+1)\n\
-++			table.insert(r,',')\n\
-++		end\n\
-++		if opts.pretty then\n\
-++			table.insert(r,'\\n'..string.rep(' ',depth-1))\n\
-++		end\n\
-++		table.insert(r,'}')\n\
-++		return\n\
-++	end\n\
-++	if opts.err_type then\n\
-++		error('serialize: unsupported type ' .. vt, 2)\n\
-++	else\n\
-++		table.insert(r,'\"'..tostring(v)..'\"')\n\
-++	end\n\
-++end\n\
-++serialize_defaults = {\n\
-++	maxdepth=10,\n\
-++	err_type=true,\n\
-++	err_cycle=true,\n\
-++	pretty=false,\n\
-++}\n\
-++function serialize(v,opts)\n\
-++	if opts then\n\
-++		for k,v in pairs(serialize_defaults) do\n\
-++			if not opts[k] then\n\
-++				opts[k]=v\n\
-++			end\n\
-++		end\n\
-++	else\n\
-++		opts=serialize_defaults\n\
-++	end\n\
-++	local r={}\n\
-++	serialize_r(v,opts,r)\n\
-++	return table.concat(r)\n\
-++end\n"
-++
-+ #define PTP_CHDK_LUA_SERIALIZE_MSGS \
-+ PTP_CHDK_LUA_SERIALIZE\
-+ "usb_msg_table_to_string=serialize\n"
-+ 
-++#define PTP_CHDK_LUA_SERIALIZE_MSGS_SIMPLEQUOTE \
-++PTP_CHDK_LUA_SERIALIZE_SIMPLEQUOTE\
-++"usb_msg_table_to_string=serialize\n"
-++
-+ #define PTP_CHDK_LUA_EXTEND_TABLE \
-+ "function extend_table(target,source,deep)\n\
-+ 	if type(target) ~= 'table' then\n\
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb
-index dde14ad..098da79 100644
---- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb
-+++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb
-@@ -15,6 +15,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2
-            file://40-libgphoto2.rules \
-            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
-            file://0002-correct-jpeg-memsrcdest-support.patch \
-+           file://avoid_using_sprintf.patch \
- "
++ /**
+diff --git a/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb b/meta-oe/recipes-support/udisks/udisks2_2.1.7.bb
+similarity index 84%
+rename from meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
+rename to meta-oe/recipes-support/udisks/udisks2_2.1.7.bb
+index f365cfa..34762dd 100644
+--- a/meta-oe/recipes-support/udisks/udisks2_2.1.5.bb
++++ b/meta-oe/recipes-support/udisks/udisks2_2.1.7.bb
+@@ -7,9 +7,11 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)
  
- SRC_URI[libgphoto2.md5sum] = "873ab01aced49c6b92a98e515db5dcef"
+ RDEPENDS_${PN} = "acl"
+ 
+-SRC_URI = "http://udisks.freedesktop.org/releases/udisks-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "73632501002e6de8244f831e38b2b98e"
+-SRC_URI[sha256sum] = "2cfcf560447ea44cba2a683342c7062aaaf35e4eb554bed64ac2dd55a70a5fb6"
++SRC_URI = "http://udisks.freedesktop.org/releases/udisks-${PV}.tar.bz2 \
++           file://non-gnu-libc.patch \
++"
++SRC_URI[md5sum] = "8bccd36573b75286538bd5bd2c424f45"
++SRC_URI[sha256sum] = "abae2bb3bdc691ca13c1e4c244630b8c881c4f3b35c207299f1b39b7bec83785"
+ 
+ inherit autotools systemd gtk-doc gobject-introspection
+ 
 -- 
 2.9.3
 
