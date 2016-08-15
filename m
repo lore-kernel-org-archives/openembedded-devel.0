@@ -1,50 +1,39 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mgsend.net (mail4.static.mgsend.net
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 125917321C
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 426AB7713C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 18:16:59 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1471285019; h=Content-Type: To: Subject: Message-ID: Date:
-	From: References: In-Reply-To: MIME-Version: Sender;
-	bh=EGC4HspL67p5KFbI45oN6ns76v8J9d4NIKqcIo1NuL8=;
-	b=GHRZVYlCM8T3oSP85drb3z/Z3loIW6dzGwE3ypgTFXFK6RhzU9U8fWoo3tNLFpbo9ODDUuBY
-	TkNEWTQlgnjSKKcGQz4hgnaVrjgQLltVKGD+7sxxm6TKvsc0pqjBeABG271ZL7cafsHN8UKK
-	E2t3iGrzlSn/GA83VGo4Z44G9wU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
-	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
-	Message-ID: Subject: To: Content-Type;
-	b=mGgQ7ne30gT3OwuoR+i147nnncMEl32Z5QlFdiwkmy4A/1G0sBq2rxI2eyAAR4a6GGsOVH
-	sQKgdjcfyfv6QCCZh6mqGHvQuwV4B7352ZgCFRrHHAmDt8l4EzYpsCTh30ls0DFjJntUYo6t
-	4JFg/YwI2CfgLBETnTh1dBsj4jR3E=
-Sender: derek@asterius.io
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Received: from mail-io0-f169.google.com (mail-io0-f169.google.com
-	[209.85.223.169])
-	by mxa.mailgun.org with ESMTP id 57b2071b.7f7a3f6c0670-in2;
-	Mon, 15 Aug 2016 18:16:59 -0000 (UTC)
-Received: by mail-io0-f169.google.com with SMTP id m101so86477609ioi.2
+	Mon, 15 Aug 2016 19:04:56 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id q11so2417763qtb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 11:16:59 -0700 (PDT)
-X-Gm-Message-State: AEkoousBjDxExc5617En53euSmgdCRI/d2Pz1daiDvfL0ZQztMhmnxz2fr+lcYQhfkCM6RQYXlPTFelUrnS6iw==
-X-Received: by 10.107.62.4 with SMTP id l4mr329350ioa.185.1471285019065; Mon,
-	15 Aug 2016 11:16:59 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.107.155.213 with HTTP; Mon, 15 Aug 2016 11:16:58 -0700 (PDT)
-In-Reply-To: <20160815110307.iezdfp7u4zh2mr6c@jama>
-References: <1470789534-602-1-git-send-email-derek@asterius.io>
-	<1470789534-602-2-git-send-email-derek@asterius.io>
-	<20160810074526.giu3dvpnuyz6jo22@jama>
-	<CADNbA1oa_g158axrUwT=H3_sZkpF59MdnhC-2rQb3_zuL+sH8Q@mail.gmail.com>
-	<CA+chaQdNCbSVUaZC=OCJ-oyG+n9sJsRnFcj9gqA3eC770VzK4A@mail.gmail.com>
-	<20160815110307.iezdfp7u4zh2mr6c@jama>
+	Mon, 15 Aug 2016 12:04:58 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=4EHTBaX+j5/4rT1w81l3Tym2JaxnQIoxQ9+SkQ3rm9M=;
+	b=NRin4YfCi2YVwybLwPfxGJz62UmnhUzz+XH+nsjMvrDFrx4Tktr6XhMUfwnAsr2BJ5
+	ZQhKAtAkS++91a+NHYZlzZ13EqPVq0/SydLdO26xIvSOjDgQtPLEJAdyW0t+Vo0nx+hn
+	xdnuGkXrej2RuQ4xfz6Vomr51zMMXwNO+8caf87KwIdvByWrEC7rn7mwJBBvA4qg5FHv
+	N9bdZR4rS8W88vVckxx0lS2HCFZ4DYcqS4li5LuqIVoEixt27dKuRrqODb7B6T5LHxlG
+	J8AHeY686Mo6EI1GPrycCdbse9SVfwbSlYtHzM1Yak7A9WM0N/h4mWCnWGEA/m8jYz44
+	YAaQ==
+X-Gm-Message-State: AEkooutUGwKmOCj1OSR1z/G0/j4MB/thfVqNwVDDpysJqVyLPCq3E8D1xYEbSgfWmsC6Vg==
+X-Received: by 10.200.51.173 with SMTP id c42mr32945671qtb.14.1471287897438;
+	Mon, 15 Aug 2016 12:04:57 -0700 (PDT)
+Received: from localhost.localdomain ([96.91.222.230])
+	by smtp.gmail.com with ESMTPSA id
+	j38sm13133088qtj.35.2016.08.15.12.04.56
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 15 Aug 2016 12:04:56 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
-Date: Mon, 15 Aug 2016 14:16:58 -0400
-X-Gmail-Original-Message-ID: <CADNbA1oGQ0ua6WqBkYM=7VaHp8Dnm9a5v8tGD9Pge-sUetinyQ@mail.gmail.com>
-Message-ID: <CADNbA1oGQ0ua6WqBkYM=7VaHp8Dnm9a5v8tGD9Pge-sUetinyQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH 2/3] libp11: update to version 0.4.0
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 15 Aug 2016 15:04:31 -0400
+Message-Id: <1471287872-24274-2-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1471287872-24274-1-git-send-email-derek@asterius.io>
+References: <1471287872-24274-1-git-send-email-derek@asterius.io>
+Subject: [meta-oe][PATCHv2 2/3] libp11: update to version 0.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,125 +46,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Aug 2016 18:17:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 15 Aug 2016 19:04:57 -0000
 
-Interesting.  I didn't see that until I cranked up the number of bitbake
-threads to match your build slave's count.  I'll take a quick peek at the
-Makefile dependencies; otherwise, I will just set PARALLEL_MAKE
-accordingly.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../libp11/{libp11_0.3.0.bb => libp11_0.4.0.bb}               | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/libp11/{libp11_0.3.0.bb => libp11_0.4.0.bb} (57%)
 
--Derek
+diff --git a/meta-oe/recipes-support/libp11/libp11_0.3.0.bb b/meta-oe/recipes-support/libp11/libp11_0.4.0.bb
+similarity index 57%
+rename from meta-oe/recipes-support/libp11/libp11_0.3.0.bb
+rename to meta-oe/recipes-support/libp11/libp11_0.4.0.bb
+index d97bfc6..d88006c 100644
+--- a/meta-oe/recipes-support/libp11/libp11_0.3.0.bb
++++ b/meta-oe/recipes-support/libp11/libp11_0.4.0.bb
+@@ -8,16 +8,23 @@ LICENSE = "LGPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fad9b3332be894bab9bc501572864b29"
+ DEPENDS = "libtool openssl"
+ 
+-SRC_URI = "git://github.com/OpenSC/libp11.git;protocol=http"
+-SRCREV = "6f71240991aa831f6fc2cc5431faf6ebec627ed2"
++SRC_URI = "git://github.com/OpenSC/libp11.git"
++SRCREV = "22de793340ab73cafc92f8238afb51a06d8411c3"
+ 
+ S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
++# Currently, Makefile dependencies are incorrectly defined which causes build errors
++# The number of jobs is high
++# See https://github.com/OpenSC/libp11/issues/94
++PARALLEL_MAKE = ""
+ EXTRA_OECONF = "--disable-static"
+ 
+ do_install_append () {
+     rm -rf ${D}${libdir}/*.la
+     rm -rf ${D}${docdir}/${BPN}
+ }
++
++FILES_${PN} += "${libdir}/pkcs11${SOLIBS}"
++FILES_${PN}-dev += "${libdir}/pkcs11${SOLIBSDEV}"
+-- 
+2.7.4
 
-On Mon, Aug 15, 2016 at 7:03 AM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
-
-> On Wed, Aug 10, 2016 at 03:57:07PM +0200, Martin Jansa wrote:
-> > I've updated it also in engine-pkcs change, while resolving conflicts
-> from
-> > those SRC_URI changes for krogoth and master.
->
-> There is one more issue:
-> cd .libs && ln -s -f pkcs11.so libpkcs11.so
-> /bin/bash: line 0: cd: .libs: No such file or directory
-> make[2]: *** [all-local] Error 1
->
-> http://errors.yoctoproject.org/Errors/Details/75462/
->
-> So keeping this in master-next with other 3 changes, until this is
-> resolved.
->
-> > On Wed, Aug 10, 2016 at 3:32 PM, Derek Straka <derek@asterius.io> wrote:
-> >
-> > > Ah, excellent.  Thanks for the hint.
-> > >
-> > > -Derek
-> > >
-> > > On Wed, Aug 10, 2016 at 3:45 AM, Martin Jansa <martin.jansa@gmail.com>
-> > > wrote:
-> > >
-> > > > On Tue, Aug 09, 2016 at 08:38:53PM -0400, Derek Straka wrote:
-> > > > > Signed-off-by: Derek Straka <derek@asterius.io>
-> > > > > ---
-> > > > >  meta-oe/recipes-support/libp11/{libp11_0.3.0.bb =>
-> libp11_0.4.0.bb} |
-> > > > 5 ++++-
-> > > > >  1 file changed, 4 insertions(+), 1 deletion(-)
-> > > > >  rename meta-oe/recipes-support/libp11/{libp11_0.3.0.bb =>
-> > > > libp11_0.4.0.bb} (81%)
-> > > > >
-> > > > > diff --git a/meta-oe/recipes-support/libp11/libp11_0.3.0.bb
-> > > > b/meta-oe/recipes-support/libp11/libp11_0.4.0.bb
-> > > > > similarity index 81%
-> > > > > rename from meta-oe/recipes-support/libp11/libp11_0.3.0.bb
-> > > > > rename to meta-oe/recipes-support/libp11/libp11_0.4.0.bb
-> > > > > index d97bfc6..a7e43be 100644
-> > > > > --- a/meta-oe/recipes-support/libp11/libp11_0.3.0.bb
-> > > > > +++ b/meta-oe/recipes-support/libp11/libp11_0.4.0.bb
-> > > > > @@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=
-> > > > fad9b3332be894bab9bc501572864b29"
-> > > > >  DEPENDS = "libtool openssl"
-> > > > >
-> > > > >  SRC_URI = "git://github.com/OpenSC/libp11.git;protocol=http"
-> > > > > -SRCREV = "6f71240991aa831f6fc2cc5431faf6ebec627ed2"
-> > > > > +SRCREV = "22de793340ab73cafc92f8238afb51a06d8411c3"
-> > > > >
-> > > > >  S = "${WORKDIR}/git"
-> > > > >
-> > > > > @@ -21,3 +21,6 @@ do_install_append () {
-> > > > >      rm -rf ${D}${libdir}/*.la
-> > > > >      rm -rf ${D}${docdir}/${BPN}
-> > > > >  }
-> > > > > +
-> > > > > +FILES_${PN} += "${libdir}/pkcs11.so.0*"
-> > > > > +FILES_${PN}-dev += "${libdir}/pkcs11.so"
-> > > >
-> > > > You can use following variables here:
-> > > >
-> > > > SOLIBS = ".so.*"
-> > > > SOLIBS_darwin = ".dylib"
-> > > >
-> > > > SOLIBSDEV = ".so"
-> > > > # Due to the ordering of PACKAGES and the naming of the dev symlinks
-> on
-> > > > # darwin,
-> > > > # we can't make the symlinks end up in the -dev packages easily at
-> this
-> > > > # point. This hack
-> > > > # at least means builds aren't completely broken and symlinks don't
-> take
-> > > > # up much space.
-> > > > SOLIBSDEV_darwin = ".dylibbroken"
-> > > >
-> > > > If I don't forget I'll update it when cherry-picking to master-next
-> (if
-> > > > you don't send v2 before that).
-> > > >
-> > > > --
-> > > > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> > > >
-> > > > --
-> > > > _______________________________________________
-> > > > Openembedded-devel mailing list
-> > > > Openembedded-devel@lists.openembedded.org
-> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > > >
-> > > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > >
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
 
