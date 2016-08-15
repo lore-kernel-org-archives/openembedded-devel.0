@@ -1,24 +1,45 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B691B60119
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 430CA77042
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 03:24:06 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u7F3O6ic006525
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Mon, 15 Aug 2016 05:04:43 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id g202so3156201pfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Aug 2016 20:24:06 -0700
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Sun, 14 Aug 2016 20:24:05 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Aug 2016 11:23:14 +0800
-Message-ID: <20160815032314.18573-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.9.2.368.g08bb350
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] quagga: 0.99.24.1 -> 1.0.20160315
+	Sun, 14 Aug 2016 22:04:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=nLC4ILdtkIhzCqmpIeu1wXcOudGe8Fu0byupYT/50B4=;
+	b=KuXBOaz4N6WOP8AN5G79Z0QBCLQm3RQdu3dbYU7cPtfWyXkKxHD9TTkPE+hQw4b+NB
+	KUQEFEl2y31PF0Tcy4gRnSJmAx2a7r8AtL9037lcDNVh/i6qiDc5+o9iWaXa1GZ4rJkk
+	BOFarcCgck3xQhDfF13HzB0o8/e795COlIH6yrmSaZ7mmUR/zN9RJZRtgD+AGTN3BF8d
+	B6H+qnbocpQ8z3WCaaTJPVZMSvrBqrAwjvxf11NuKu/iEiVUpeLJATx4OpFzIYRrF7NR
+	vEqc+BwXME9mmqtTIBFk1z2pbWEYvCtPTog0hRxAarzCFwEx16WVmnFY3V1ZEex9slw0
+	nNWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=nLC4ILdtkIhzCqmpIeu1wXcOudGe8Fu0byupYT/50B4=;
+	b=Mq1Gw6JJSE9NWFJmMHvIIhnX/uagzcTRNnEG4IZrcI13KdGpX1Cu+KcN8GnGuJtphL
+	CBJV6IypmfBkIkTgPrUdZPqFKKGRVKoHRE/SM1mHRvYZxBP9QO+uFldsPiGhh6OMhD+u
+	xeydlA4i3K8SiUk/1SGOYeTLo5h2TgANkn1A6HiOQiyTadGnaBpySbAP/jYT1UA8m8bp
+	PwCGqvGKkEWQxCsprb4UoS4Jsi1d6AhWsjgxt1H8zdVMSaFozzVO71ocZ2ecEZO6bkC3
+	u4JdFLV5/HccnXwdsgpcKF+qj5Ox41EUufOkDh6mPcU/7Fx2bUl7DJtVrKLzBvk2zsul
+	3BFA==
+X-Gm-Message-State: AEkoouuhYaZjLozX5dzpmwofuYLKW5xuZo1yLnkKwcg1sT4Kxdsg6uQ0lbk+MrbAzuF/oA==
+X-Received: by 10.98.98.193 with SMTP id w184mr50543375pfb.120.1471237484324; 
+	Sun, 14 Aug 2016 22:04:44 -0700 (PDT)
+Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
+	ty6sm29178421pac.18.2016.08.14.22.04.42
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 14 Aug 2016 22:04:43 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 14 Aug 2016 22:04:32 -0700
+Message-Id: <20160815050434.20974-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.9.3
+Subject: [meta-oe][PATCH 1/3] libgphoto2: Fix build when security flags are enabled with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,298 +52,176 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Aug 2016 03:24:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 15 Aug 2016 05:04:44 -0000
 
-From: Kai Kang <kai.kang@windriver.com>
+clang is more pedantic and throws below errors
 
-Upgrade quagga from 0.99.24.1 to 1.0.20160315.
+../../libgphoto2-2.5.8/camlibs/ptp2/chdk.c:1131:14: error: format string is not a string literal (potentially insecure) [-Werror,-Wformat-security]
+        sprintf(lua,luascript); /* This expands the %q inside the string too ... do not optimize away. */
+                    ^~~~~~~~~
 
-* babeld was removed from quagga, so remove babeld related code, service
-  file and patch and from recipe
-* remove Zebra-sync-zebra-routing-table-with-the-kernel-one.patch which
-  is obsoleted that quagga update the logic, see
-  https://github.com/Quagga/quagga/commit/0abf6796c3d8ae8f5ea8624668424bc1554de25e
-* remove configure options '--enable-ospf-te' and '--enable-opaque-lsa'
-  which are set by default and removed from configure.ac already
+Backport a patch to silence the warnings where it avoids
+the use of sprintf all the way
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...c-zebra-routing-table-with-the-kernel-one.patch | 48 ---------------------
- ...ose-the-stdout-stderr-as-in-other-daemons.patch | 50 ----------------------
- .../recipes-protocols/quagga/files/babeld.service  | 14 ------
- .../recipes-protocols/quagga/quagga.inc            | 23 +++-------
- .../recipes-protocols/quagga/quagga_0.99.24.1.bb   | 10 -----
- .../quagga/quagga_1.0.20160315.bb                  | 10 +++++
- 6 files changed, 16 insertions(+), 139 deletions(-)
- delete mode 100644 meta-networking/recipes-protocols/quagga/files/Zebra-sync-zebra-routing-table-with-the-kernel-one.patch
- delete mode 100644 meta-networking/recipes-protocols/quagga/files/babel-close-the-stdout-stderr-as-in-other-daemons.patch
- delete mode 100644 meta-networking/recipes-protocols/quagga/files/babeld.service
- delete mode 100644 meta-networking/recipes-protocols/quagga/quagga_0.99.24.1.bb
- create mode 100644 meta-networking/recipes-protocols/quagga/quagga_1.0.20160315.bb
+ .../libgphoto2-2.5.8/avoid_using_sprintf.patch     | 133 +++++++++++++++++++++
+ .../recipes-graphics/gphoto2/libgphoto2_2.5.8.bb   |   1 +
+ 2 files changed, 134 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/avoid_using_sprintf.patch
 
-diff --git a/meta-networking/recipes-protocols/quagga/files/Zebra-sync-zebra-routing-table-with-the-kernel-one.patch b/meta-networking/recipes-protocols/quagga/files/Zebra-sync-zebra-routing-table-with-the-kernel-one.patch
-deleted file mode 100644
-index 35f4637..0000000
---- a/meta-networking/recipes-protocols/quagga/files/Zebra-sync-zebra-routing-table-with-the-kernel-one.patch
-+++ /dev/null
-@@ -1,48 +0,0 @@
--sync zebra routing table with the kernel one when interface is down
--
--Add router to kernel main router table with "ip", then you can see 
--a router item in kernel main router table. Also can see this router
--item in zebra router table. If down the interface, this router item
--will be deleted from kernel main router table, but it will not be 
--deleted from zebra router table, just set as inactive.
--
--This patch is adopted from [1].
--[1] http://www.gossamer-threads.com/lists/quagga/dev/22609
--
--Upstream-Status: Pending
--
--Signed-of-by: Aws Ismail <aws.ismail@windriver.com>
--Signed-of-by: Roy.Li <rongqing.li@windriver.com>
--
-----
-- zebra/zebra_rib.c |    7 +++++++
-- 1 files changed, 7 insertions(+), 0 deletions(-)
--
--diff --git a/zebra/zebra_rib.c b/zebra/zebra_rib.c
--index 154e8d5..63434d0 100644
----- a/zebra/zebra_rib.c
--+++ b/zebra/zebra_rib.c
--@@ -765,6 +765,9 @@ rib_match_ipv6 (struct in6_addr *addr)
-- #define RIB_SYSTEM_ROUTE(R) \
--         ((R)->type == ZEBRA_ROUTE_KERNEL || (R)->type == ZEBRA_ROUTE_CONNECT)
-- 
--+#define RIB_KERNEL_ROUTE(R) \
--+	((R)->type == ZEBRA_ROUTE_KERNEL)
--+
-- /* This function verifies reachability of one given nexthop, which can be
--  * numbered or unnumbered, IPv4 or IPv6. The result is unconditionally stored
--  * in nexthop->flags field. If the 4th parameter, 'set', is non-zero,
--@@ -1135,6 +1138,10 @@ rib_process (struct route_node *rn)
--       redistribute_delete (&rn->p, fib);
--       if (! RIB_SYSTEM_ROUTE (fib))
-- 	rib_uninstall_kernel (rn, fib);
--+#ifdef GNU_LINUX
--+      else if(RIB_KERNEL_ROUTE (fib) && !if_is_up(if_lookup_by_index(fib->nexthop->ifindex)))
--+	del=fib;
--+#endif
--       UNSET_FLAG (fib->flags, ZEBRA_FLAG_SELECTED);
-- 
--       /* Set real nexthop. */
---- 
--1.7.4.1
--
-diff --git a/meta-networking/recipes-protocols/quagga/files/babel-close-the-stdout-stderr-as-in-other-daemons.patch b/meta-networking/recipes-protocols/quagga/files/babel-close-the-stdout-stderr-as-in-other-daemons.patch
-deleted file mode 100644
-index c2757a2..0000000
---- a/meta-networking/recipes-protocols/quagga/files/babel-close-the-stdout-stderr-as-in-other-daemons.patch
-+++ /dev/null
-@@ -1,50 +0,0 @@
--From ba71f768e6dbb1f2ac72ed3bd880bff75a48d345 Mon Sep 17 00:00:00 2001
--From: Roy Li <rongqing.li@windriver.com>
--Date: Wed, 19 Feb 2014 14:13:40 +0800
--Subject: [PATCH] babeld: close stdout once the background daemon is created
--
--Upstream-Status: pending
--
--Once babald becomes a background daemon, it should not output information to
--stdout, so need to close stdout.
--
--In fact, other daemons close their stdout when they run into background, like
--ospfd, isisd and bgpd, by calling daemon() which is in lib/daemon.c
--
--Closing the stdout can fix a tee hang issue { #/usr/sbin/babeld -d |tee tmp }
--
--Signed-off-by: Roy Li <rongqing.li@windriver.com>
-----
-- babeld/util.c |   10 +++++++++-
-- 1 file changed, 9 insertions(+), 1 deletion(-)
--
--diff --git a/babeld/util.c b/babeld/util.c
--index 011f382..76203bc 100644
----- a/babeld/util.c
--+++ b/babeld/util.c
--@@ -425,7 +425,7 @@ uchar_to_in6addr(struct in6_addr *dest, const unsigned char *src)
-- int
-- daemonise()
-- {
---    int rc;
--+    int rc, fd;
-- 
--     fflush(stdout);
--     fflush(stderr);
--@@ -441,5 +441,13 @@ daemonise()
--     if(rc < 0)
--         return -1;
-- 
--+    fd = open("/dev/null", O_RDWR, 0);
--+    if (fd != -1)
--+    {
--+        dup2(fd, STDOUT_FILENO);
--+        if (fd > 2)
--+            close(fd);
--+    }
--+
--     return 1;
-- }
---- 
--1.7.10.4
--
-diff --git a/meta-networking/recipes-protocols/quagga/files/babeld.service b/meta-networking/recipes-protocols/quagga/files/babeld.service
-deleted file mode 100644
-index dd344b0..0000000
---- a/meta-networking/recipes-protocols/quagga/files/babeld.service
-+++ /dev/null
-@@ -1,14 +0,0 @@
--[Unit]
--Description=Babel routing daemon
--BindTo=zebra.service
--After=zebra.service
--ConditionPathExists=@SYSCONFDIR@/quagga/babeld.conf
--
--[Service]
--Type=forking
--EnvironmentFile=-@SYSCONFDIR@/default/quagga
--ExecStart=@SBINDIR@/babeld -d $babeld_options -f /etc/quagga/babeld.conf
--Restart=on-abort
--
--[Install]
--WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
-index 4244fdf..dc5f017 100644
---- a/meta-networking/recipes-protocols/quagga/quagga.inc
-+++ b/meta-networking/recipes-protocols/quagga/quagga.inc
-@@ -22,7 +22,6 @@ QUAGGASUBDIR = ""
- # ${QUAGGASUBDIR} is deal with old versions. Set to "/attic" for old
- # versions and leave it empty for recent versions.
- SRC_URI = "${SAVANNAH_GNU_MIRROR}/quagga${QUAGGASUBDIR}/quagga-${PV}.tar.gz; \
--           file://Zebra-sync-zebra-routing-table-with-the-kernel-one.patch \
-            file://quagga.init \
-            file://quagga.default \
-            file://watchquagga.init \
-@@ -31,7 +30,6 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/quagga${QUAGGASUBDIR}/quagga-${PV}.tar.gz; \
-            file://quagga.pam \
-            file://ripd-fix-two-bugs-after-received-SIGHUP.patch \
-            file://quagga-Avoid-duplicate-connected-address.patch \
--           file://babeld.service \
-            file://bgpd.service \
-            file://isisd.service \
-            file://ospf6d.service \
-@@ -47,8 +45,7 @@ PACKAGECONFIG[pam] = "--with-libpam, --without-libpam, libpam"
- 
- inherit autotools update-rc.d useradd systemd
- 
--SYSTEMD_PACKAGES = "${PN} ${PN}-babeld ${PN}-bgpd ${PN}-isisd ${PN}-ospf6d ${PN}-ospfd ${PN}-ripd ${PN}-ripngd"
--SYSTEMD_SERVICE_${PN}-babeld = "babeld.service"
-+SYSTEMD_PACKAGES = "${PN} ${PN}-bgpd ${PN}-isisd ${PN}-ospf6d ${PN}-ospfd ${PN}-ripd ${PN}-ripngd"
- SYSTEMD_SERVICE_${PN}-bgpd = "bgpd.service"
- SYSTEMD_SERVICE_${PN}-isisd = "isisd.service"
- SYSTEMD_SERVICE_${PN}-ospf6d = "ospf6d.service"
-@@ -63,8 +60,6 @@ EXTRA_OECONF = "--sysconfdir=${sysconfdir}/quagga \
-                 --enable-vtysh \
-                 --enable-isisd \
-                 ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '--enable-watchquagga', '--disable-watchquagga', d)} \
--                --enable-ospf-te \
--                --enable-opaque-lsa \
-                 --enable-ospfclient=yes \
-                 --enable-multipath=64 \
-                 --enable-user=quagga \
-@@ -88,11 +83,11 @@ do_install () {
-     install -m 0644 ${WORKDIR}/volatiles.03_quagga  ${D}${sysconfdir}/default/volatiles/volatiles.03_quagga
- 
-     # Install sample configurations for the daemons
--    for f in bgpd vtysh babeld isisd ospfd ripngd zebra ripd ospf6d; do
-+    for f in bgpd vtysh isisd ospfd ripngd zebra ripd ospf6d; do
-         install -m 0640 ${S}/$f/$f.conf.sample ${D}${sysconfdir}/quagga/$f.conf.sample
-     done
- 
--    for f in bgpd vtysh babeld isisd ospfd ripngd zebra ripd ospf6d; do
-+    for f in bgpd vtysh isisd ospfd ripngd zebra ripd ospf6d; do
- 	touch ${D}${sysconfdir}/quagga/$f.conf
-     done
-     chown quagga:quaggavty ${D}${sysconfdir}/quagga
-@@ -138,7 +133,7 @@ do_install () {
-     fi
- 
-     install -d ${D}${systemd_unitdir}/system
--    for i in babeld bgpd isisd ospf6d ospfd ripd ripngd zebra; do
-+    for i in bgpd isisd ospf6d ospfd ripd ripngd zebra; do
-         install -m 0644 ${WORKDIR}/$i.service ${D}${systemd_unitdir}/system
-     done
-     sed -e 's,@BASE_SBINDIR@,${base_sbindir},g' \
-@@ -160,15 +155,14 @@ pkg_postinst_${PN} () {
- }
- 
- # Split into a main package and separate per-protocol packages
--PACKAGE_BEFORE_PN = "${PN}-ospfd ${PN}-ospf6d ${PN}-babeld ${PN}-bgpd \
-+PACKAGE_BEFORE_PN = "${PN}-ospfd ${PN}-ospf6d ${PN}-bgpd \
-                      ${PN}-ripd ${PN}-ripngd ${PN}-isisd \
-                      ${PN}-ospfclient ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${PN}-watchquagga', '', d)}"
- 
--RDEPENDS_${PN} += "${PN}-babeld ${PN}-bgpd ${PN}-isisd ${PN}-ospf6d ${PN}-ospfd ${PN}-ripd ${PN}-ripngd"
-+RDEPENDS_${PN} += "${PN}-bgpd ${PN}-isisd ${PN}-ospf6d ${PN}-ospfd ${PN}-ripd ${PN}-ripngd"
- 
- FILES_${PN}-ospfd       = "${sbindir}/ospfd ${libdir}/libospf.so.*"
- FILES_${PN}-ospf6d      = "${sbindir}/ospf6d"
--FILES_${PN}-babeld      = "${sbindir}/babeld"
- FILES_${PN}-bgpd        = "${sbindir}/bgpd"
- FILES_${PN}-ripd        = "${sbindir}/ripd"
- FILES_${PN}-ripngd      = "${sbindir}/ripngd"
-@@ -181,7 +175,6 @@ FILES_${PN}-watchquagga = "${sbindir}/watchquagga ${sysconfdir}/default/watchqua
- CONFFILES_${PN} = "${sysconfdir}/default/quagga \
-                    ${sysconfdir}/quagga/bgpd.conf \
-                    ${sysconfdir}/quagga/vtysh.conf \
--                   ${sysconfdir}/quagga/babeld.conf \
-                    ${sysconfdir}/quagga/isisd.conf \
-                    ${sysconfdir}/quagga/ospfd.conf \
-                    ${sysconfdir}/quagga/ripngd.conf \
-@@ -230,10 +223,6 @@ pkg_prerm_${PN}-ospf6d () {
-     ${sysconfdir}/init.d/quagga stop ospf6d
- }
- 
--pkg_prerm_${PN}-babeld () {
--    ${sysconfdir}/init.d/quagga stop babeld
--}
--
- pkg_prerm_${PN}-bgpd () {
-     ${sysconfdir}/init.d/quagga stop bgpd
- }
-diff --git a/meta-networking/recipes-protocols/quagga/quagga_0.99.24.1.bb b/meta-networking/recipes-protocols/quagga/quagga_0.99.24.1.bb
-deleted file mode 100644
-index cecf438..0000000
---- a/meta-networking/recipes-protocols/quagga/quagga_0.99.24.1.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require quagga.inc
--
--SRC_URI += "file://babel-close-the-stdout-stderr-as-in-other-daemons.patch \
--            file://0001-ospf6d-check-ospf6-before-using-it-in-ospf6_clean.patch \
--"
--
--SRC_URI[md5sum] = "7986bdc2fe6027d4c9216f7f5791e718"
--SRC_URI[sha256sum] = "84ae1a47df085119a8fcab6c43ccea9efb9bc3112388b1dece5a9f0a0262754f"
--
--QUAGGASUBDIR = ""
-diff --git a/meta-networking/recipes-protocols/quagga/quagga_1.0.20160315.bb b/meta-networking/recipes-protocols/quagga/quagga_1.0.20160315.bb
+diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/avoid_using_sprintf.patch b/meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/avoid_using_sprintf.patch
 new file mode 100644
-index 0000000..d165781
+index 0000000..fba4c69
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/quagga/quagga_1.0.20160315.bb
-@@ -0,0 +1,10 @@
-+require quagga.inc
++++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/avoid_using_sprintf.patch
+@@ -0,0 +1,133 @@
++From 4adfe5a6c9db07537df302f3c17713515bf23a2e Mon Sep 17 00:00:00 2001
++From: Marcus Meissner <marcus@jet.franken.de>
++Date: Sat, 11 Jul 2015 09:38:13 +0000
++Subject: [PATCH] avoid use of sprintf to convert %% to %, duplicate the macro
 +
-+SRC_URI += " \
-+            file://0001-ospf6d-check-ospf6-before-using-it-in-ospf6_clean.patch \
-+"
++git-svn-id: https://svn.code.sf.net/p/gphoto/code/trunk/libgphoto2@15490 67ed7778-7388-44ab-90cf-0a291f65f57c
++---
++ camlibs/ptp2/chdk.c     |  8 ++---
++ camlibs/ptp2/chdk_ptp.h | 82 +++++++++++++++++++++++++++++++++++++++++++++++++
++ 2 files changed, 84 insertions(+), 6 deletions(-)
 +
-+SRC_URI[md5sum] = "e73d6e527fb80240f180de420cfe8042"
-+SRC_URI[sha256sum] = "21ffb7bad0ef5f130f18dd299d219ea1cb4f5c03d473b6b32c83c340cd853263"
-+
-+QUAGGASUBDIR = ""
++diff --git a/camlibs/ptp2/chdk.c b/camlibs/ptp2/chdk.c
++index 5fb84ea..3b8a995 100644
++--- a/camlibs/ptp2/chdk.c
+++++ b/camlibs/ptp2/chdk.c
++@@ -1119,18 +1119,14 @@ chdk_camera_capture (Camera *camera, CameraCaptureType type, CameraFilePath *pat
++ 	int		ret, retint;
++ 	char		*table, *s;
++ 	PTPParams	*params = &camera->pl->params;
++-	char		*lua;
++-	const char	*luascript =	PTP_CHDK_LUA_SERIALIZE_MSGS \
+++	const char	*luascript = PTP_CHDK_LUA_SERIALIZE_MSGS_SIMPLEQUOTE \
++ 				PTP_CHDK_LUA_RLIB_SHOOT	\
++ 				"return rlib_shoot({info=true});\n";
++ 
++ 	ret =  camera_prepare_chdk_capture(camera, context);
++ 	if (ret != GP_OK) return ret;
++ 
++-	lua = malloc(strlen(luascript)+1);
++-	sprintf(lua,luascript); /* This expands the %q inside the string too ... do not optimize away. */
++-	ret = chdk_generic_script_run (params, lua, &table, &retint, context);
++-	free (lua);
+++	ret = chdk_generic_script_run (params, luascript, &table, &retint, context);
++ 	GP_LOG_D("rlib_shoot returned table %s, retint %d\n", table, retint);
++ 	s = strstr(table, "exp=");
++ 	if (s) {
++diff --git a/camlibs/ptp2/chdk_ptp.h b/camlibs/ptp2/chdk_ptp.h
++index d11e0b7..65dcfd7 100644
++--- a/camlibs/ptp2/chdk_ptp.h
+++++ b/camlibs/ptp2/chdk_ptp.h
++@@ -198,10 +198,92 @@ function serialize(v,opts)\n\
++ 	return table.concat(r)\n\
++ end\n"
++ 
+++#define PTP_CHDK_LUA_SERIALIZE_SIMPLEQUOTE "\n\
+++serialize_r = function(v,opts,r,seen,depth)\n\
+++	local vt = type(v)\n\
+++	if vt == 'nil' or  vt == 'boolean' or vt == 'number' then\n\
+++		table.insert(r,tostring(v))\n\
+++		return\n\
+++	end\n\
+++	if vt == 'string' then\n\
+++		table.insert(r,string.format('%q',v))\n\
+++		return\n\
+++	end\n\
+++	if vt == 'table' then\n\
+++		if not depth then\n\
+++			depth = 1\n\
+++		end\n\
+++		if depth >= opts.maxdepth then\n\
+++			error('serialize: max depth')\n\
+++		end\n\
+++		if not seen then\n\
+++			seen={}\n\
+++		elseif seen[v] then\n\
+++			if opts.err_cycle then\n\
+++				error('serialize: cycle')\n\
+++			else\n\
+++				table.insert(r,'\"cycle:'..tostring(v)..'\"')\n\
+++				return\n\
+++			end\n\
+++		end\n\
+++		seen[v] = true;\n\
+++		table.insert(r,'{')\n\
+++		for k,v1 in pairs(v) do\n\
+++			if opts.pretty then\n\
+++				table.insert(r,'\\n'..string.rep(' ',depth))\n\
+++			end\n\
+++			if type(k) == 'string' and string.match(k,'^[_%a][%a%d_]*$') then\n\
+++				table.insert(r,k)\n\
+++			else\n\
+++				table.insert(r,'[')\n\
+++				serialize_r(k,opts,r,seen,depth+1)\n\
+++				table.insert(r,']')\n\
+++			end\n\
+++			table.insert(r,'=')\n\
+++			serialize_r(v1,opts,r,seen,depth+1)\n\
+++			table.insert(r,',')\n\
+++		end\n\
+++		if opts.pretty then\n\
+++			table.insert(r,'\\n'..string.rep(' ',depth-1))\n\
+++		end\n\
+++		table.insert(r,'}')\n\
+++		return\n\
+++	end\n\
+++	if opts.err_type then\n\
+++		error('serialize: unsupported type ' .. vt, 2)\n\
+++	else\n\
+++		table.insert(r,'\"'..tostring(v)..'\"')\n\
+++	end\n\
+++end\n\
+++serialize_defaults = {\n\
+++	maxdepth=10,\n\
+++	err_type=true,\n\
+++	err_cycle=true,\n\
+++	pretty=false,\n\
+++}\n\
+++function serialize(v,opts)\n\
+++	if opts then\n\
+++		for k,v in pairs(serialize_defaults) do\n\
+++			if not opts[k] then\n\
+++				opts[k]=v\n\
+++			end\n\
+++		end\n\
+++	else\n\
+++		opts=serialize_defaults\n\
+++	end\n\
+++	local r={}\n\
+++	serialize_r(v,opts,r)\n\
+++	return table.concat(r)\n\
+++end\n"
+++
++ #define PTP_CHDK_LUA_SERIALIZE_MSGS \
++ PTP_CHDK_LUA_SERIALIZE\
++ "usb_msg_table_to_string=serialize\n"
++ 
+++#define PTP_CHDK_LUA_SERIALIZE_MSGS_SIMPLEQUOTE \
+++PTP_CHDK_LUA_SERIALIZE_SIMPLEQUOTE\
+++"usb_msg_table_to_string=serialize\n"
+++
++ #define PTP_CHDK_LUA_EXTEND_TABLE \
++ "function extend_table(target,source,deep)\n\
++ 	if type(target) ~= 'table' then\n\
+diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb
+index dde14ad..098da79 100644
+--- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb
++++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb
+@@ -15,6 +15,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2
+            file://40-libgphoto2.rules \
+            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
+            file://0002-correct-jpeg-memsrcdest-support.patch \
++           file://avoid_using_sprintf.patch \
+ "
+ 
+ SRC_URI[libgphoto2.md5sum] = "873ab01aced49c6b92a98e515db5dcef"
 -- 
-2.9.2.368.g08bb350
+2.9.3
 
 
