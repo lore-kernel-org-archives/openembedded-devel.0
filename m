@@ -1,47 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id A2EBB7718B
+	by mail.openembedded.org (Postfix) with ESMTP id 9CD277718A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 10:21:00 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id i5so10344336wmg.2
+	Mon, 15 Aug 2016 10:20:59 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id i5so10344249wmg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 03:21:01 -0700 (PDT)
+	Mon, 15 Aug 2016 03:21:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=3/xHEORJTH9526KYsM0+U4Y3vHEmOx/nJO34Ytjzkgs=;
-	b=e1PJQPgUwc22KuS8zzUVi3YZ98N/CngHJhoWhYUjFEFMfJLMqFerA9MNGiQFOxGCiX
-	E2ebz5kxEpA/ec+FsN7aDa911lBKe+2tYcT5aGF8SOysBEQoI66zB+tuZLOwyShfokuM
-	vuxafErQ+Qx9x0VST3x93AqOrf42cTPsL/CW/cLrqoU9Hjx0QuTju3W/RDzbuaZGEobI
-	lNVXTB/8oenIIOF+VN4MsYrSQak5D8C89EV/FaVYfNrFgcs7uAW9BUju8rzcn0sMf7uf
-	2AO4pZLTvmZluCYzGakykHm5yXxO53EXflPb6yV7LI0amxv/H7pNOqFPcBMJc2QPlouG
-	88kQ==
+	bh=B/dTQ25XiTpjA4TNjVplFhYgDm7hgImvnpUPlhhRSnQ=;
+	b=a0VPrH0sA78pRA11fXboz6Cqxp62vOhW9qylR8b75fRw2MHqxlCensTpx1GEUXm8de
+	ebNuBAiIt2VGrNIV4I8caS0aMfaqjT9lgIZu8oMjrgwmEP6n4CYowInuViwq8kBoUo4z
+	gEPdOtKOz3FMg2rxwC6owVcxzs60MmmKReF8+EavdfNRJZM1DMfSRWzZAzoGswhYWIG/
+	d2H72qdIO9PjdWwT9J94AolENbrHsLkZjenAGjowxe64W7p5qmBFriGGEta1rcmkgxNB
+	2dKeyg1t5FfXKuufAt2TXCtpVApL9i0iExGLU6SBfYxen2EsZmq6pvrwFwOX1O7gfgQ1
+	359g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=3/xHEORJTH9526KYsM0+U4Y3vHEmOx/nJO34Ytjzkgs=;
-	b=D70mSeE0tLxm7cGmgY0kDc+l1j3VHkL4BB7T8pIsOoHGZvz6EApOh69xmd7yXq4tpm
-	+JbMi8/viPDvUKqE36kvfMhMmMcOtvqSxHboQ6PrLLCfK58o7JiYx2+weccJHNVwyKDW
-	d8JgKsNn5rqsPXlY6dGujDRlQ03H56MJl53S1yrkgcY3o+mhqri5RBJVPyGM4F3xkFFI
-	uVC/+eBOpj8HJeT73ksCnugabQNoZ+hmI5HpShTXyetZWnTn1+UhuHStWrOh2zW/Dype
-	NtFWLdXL9muabbjc+AioUmdQLMDERUvbGdBQ4fJ/T5mnaQjp0zzv35Lh2URubOMgqc0e
-	BF1g==
-X-Gm-Message-State: AEkoouv8q4BGtFi8ge//16PV4mo52IOEfuh7SXDtzD5EfPjMyG4+164f4qdTGT3iTp5q7A==
-X-Received: by 10.28.153.70 with SMTP id b67mr14786959wme.84.1471256460972;
-	Mon, 15 Aug 2016 03:21:00 -0700 (PDT)
-Received: from localhost ([89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	x203sm15801211wmg.0.2016.08.15.03.20.59
+	bh=B/dTQ25XiTpjA4TNjVplFhYgDm7hgImvnpUPlhhRSnQ=;
+	b=QUyurpYAz49MLqFteXPx2+ImjCFAhmqB6VYSHT37/8ep+vWjraGMbkUDzaObP3HmEq
+	+3x3Ush2UtpowCwyJclMlUFv3QBByEjP56vr7FRUg93TnxKMzKVeL6rP9WNXewf28soe
+	jKq09oQaWjbP2fHqGYIBLo/Hv/fHkC2eR+VfmOMDm8ZVHHEb9b94lFGE/ML4kQhevCQh
+	1iXlkVDPFLeFzSPh1ymqrBWv4Dy3LWgrRkP+CylC5Gn0L+NuQCBFVsEQk6sB5/i21U85
+	KWG2qH1CQe9+yzvUUn0Pq1Uzl7LVyAzoL/mQ/MnHNWI/oLSnHEWWlHDVTwDava58z8Ik
+	Ba+Q==
+X-Gm-Message-State: AEkoouuPCoOH0oVBwe3rWnmv3+B54xJ7pzJzIh4Q2zL4gXe38j7DeGe5uTYoLiJnJn2DpQ==
+X-Received: by 10.28.153.202 with SMTP id b193mr14887652wme.62.1471256459378; 
+	Mon, 15 Aug 2016 03:20:59 -0700 (PDT)
+Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
+	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
+	bj8sm20722675wjc.49.2016.08.15.03.20.58
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 15 Aug 2016 03:21:00 -0700 (PDT)
+	Mon, 15 Aug 2016 03:20:58 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Aug 2016 12:20:45 +0200
-Message-Id: <20160815102049.3291-7-Martin.Jansa@gmail.com>
+Date: Mon, 15 Aug 2016 12:20:44 +0200
+Message-Id: <20160815102049.3291-6-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.9.2
 In-Reply-To: <20160815102049.3291-1-Martin.Jansa@gmail.com>
 References: <20160815102049.3291-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 07/11] gnome-bluetooth: add intltool-native dependency
+Subject: [meta-oe][PATCH 06/11] dconf: add intltool-native dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,29 +58,26 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Mon, 15 Aug 2016 10:21:01 -0000
 
 * fixes:
-  | ../gnome-bluetooth-3.18.2/configure: line 12094: syntax error near unexpected token `0.40.0'
-  | ../gnome-bluetooth-3.18.2/configure: line 12094: `IT_PROG_INTLTOOL(0.40.0)'
+  | ../dconf-0.18.0/configure: line 6430: syntax error near unexpected token `0.50.0'
+  | ../dconf-0.18.0/configure: line 6430: `IT_PROG_INTLTOOL(0.50.0)'
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
-index 7b064c3..fe3e572 100644
---- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
-@@ -6,8 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
+diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
+index 2b6f15e..c3fae1d 100644
+--- a/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
++++ b/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
+@@ -9,7 +9,7 @@ SRC_URI[archive.md5sum] = "69a12ed68893f2e1e81ac4e531bc1515"
+ SRC_URI[archive.sha256sum] = "109b1bc6078690af1ed88cb144ef5c5aee7304769d8bdc82ed48c3696f10c955"
+ GNOME_COMPRESS_TYPE = "xz"
  
- SECTION = "x11/gnome"
+-DEPENDS = "glib-2.0 gtk+3 libxml2"
++DEPENDS = "glib-2.0 gtk+3 libxml2 intltool-native"
  
--DEPENDS = "udev gtk+3 libnotify libcanberra"
--DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES','bluez5','bluez5','bluez4',d)}"
-+DEPENDS = "udev gtk+3 libnotify libcanberra intltool-native \
-+    ${@bb.utils.contains('DISTRO_FEATURES','bluez5','bluez5','bluez4',d)} \
-+"
- 
- inherit gnomebase gtk-icon-cache gobject-introspection
+ inherit vala gtk-doc
  
 -- 
 2.9.2
