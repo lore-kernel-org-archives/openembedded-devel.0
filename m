@@ -1,47 +1,47 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F0CE770EF
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 3D18577184
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 10:21:05 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id o80so10368409wme.0
+	Mon, 15 Aug 2016 10:21:08 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id i138so10291664wmf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 03:21:06 -0700 (PDT)
+	Mon, 15 Aug 2016 03:21:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=IRYRQCqfUoLNhMRkswxgB/wuq8ViFBZ4UXCvqhfIEbw=;
-	b=VbYvR6KRNkHqdKSdnqxn7P0WVNucU2/NX0XZpqCJz/6h2kY+hVNbx5o5O7uZiUwTr1
-	vRJT+6myuGH6mUkbTTv0IkLdWGyJMpiUl8LoWMfaphV7nRJQ0ckxG7wWQWEmLlIhHTxO
-	y6DKzDPA/LUKYM4eFtd8V2usb2TlPUJOMzo43YroheVWuYjzqe1L0bSnG5HpD5wXeBjg
-	H/bWiGkj/15l3bltFAV+h9FakK9kPjk3VoAc+5uWao0k9AoChb3plPTI2/8deXHY2+Na
-	X85twafsT8mYKBgU98AQyi6Ut02NeoP5z1s6ge7euthvAeFIxz3dqGV0B2BB9K4sZcHY
-	125Q==
+	bh=yZ//3DPUYAXrjDhchknQZ/zDuVKt//F/zXjW+bZFdrI=;
+	b=MXkHDnySt5FzFQjob+ut3RQYjt93Un5UCaRdMf5qYoPqKQqByq28743ajU7dywHNuz
+	WgS+C3vsYN+aPy7CR3WzegV/gxDIpnx319pvmLca+L6D+zsR0W6/GCB2jY8UZC/uDEeS
+	uTImBZMVWE5nnwx37V3sg6wZGdKjmAxk8UHAMwTUIRXliUDqzhHbS9ytAiDdxgE63PWL
+	vt+X0rLBfxokecvqNCYtcQ6zb52KRt9XEWaCinvN9vG+xz16ic+tN9WOvlT2DaM4j8Dx
+	l/wwgIsCSpnfcA+hPuJDe2/Wses/Fs3yastTPXhIFABVEnVnUbS7Dqb0G48zeyv6xUG6
+	L1WA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=IRYRQCqfUoLNhMRkswxgB/wuq8ViFBZ4UXCvqhfIEbw=;
-	b=Voh5bt7q/EoJok78mCH4RqwO3IXj2Ed4/OTz+YUtKrMq37l5MY9nPyCJRfjnkt8C/K
-	bvEwud/0VBxPgxNSmbknJnY55JPnEFcvO815zoV7qu1qn9MS/582qTTIISmN/iUoBORF
-	zxDPryTpk/Z2wizjqAWAwDWchPDxVq99ptQqDe1GeIbLiO7PIBm7vHz6gVxzbXO3u+78
-	CluDO3vDG6WdI279Gqf5eebSdDbhLdiWlpXw12qPvidYqERaWD+9Igtg12xvKj9J4LCy
-	GHPqtnx8C7IX/+zoE5sSeBPFysPR8u2HS/JrqyEVbGej2BiTNTIu+PL+EAPzExLvfRMg
-	k6Dg==
-X-Gm-Message-State: AEkoous+HHglWKwPKGHTemmxrSjDzMdE6QRU+OR1ZQJmZo707TOscXB7SwPrEeoP0tRHCw==
-X-Received: by 10.28.167.135 with SMTP id q129mr14468820wme.82.1471256466136; 
-	Mon, 15 Aug 2016 03:21:06 -0700 (PDT)
+	bh=yZ//3DPUYAXrjDhchknQZ/zDuVKt//F/zXjW+bZFdrI=;
+	b=C8nC/Vuz4/zCKWEFk/qlHwwi6ZZ1w5WGQwdxAizwazDPa5ETRSZeCirELPU15SGZJC
+	ei02QX0QLSCA1yoeiQy9JvXraQA0dzw0QSgHl2NzN6eHP0QalxRzmlTfAQCEQYlerf7B
+	q4dPWx35qK6QICWaIklHsykBmp7+3HF0GDbhVklLZZAkuVYLQVm+2vtqCRIsCeD7W5HZ
+	PdCthF7LIJy2GQzvjdTDjiL29gf70m7gdDY0WEHThU9n9yn9TZWP43gMW/b2gOiL++JB
+	0dATuk7bZPceQTObYPx5DiDjpBQWSZv7tvGP98hpfTd84IV2lkPSaufJRe1XZMLGGTG9
+	un4Q==
+X-Gm-Message-State: AEkoousaqjQAWyqaPcXMoFmG2GNxcS89108SfBkULVvTyeq5y5TkcDrx5QHBb1tLD/r07g==
+X-Received: by 10.28.113.135 with SMTP id d7mr13444088wmi.43.1471256468724;
+	Mon, 15 Aug 2016 03:21:08 -0700 (PDT)
 Received: from localhost ([89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	v134sm15831811wmf.10.2016.08.15.03.21.05
+	w129sm15819721wmd.9.2016.08.15.03.21.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 15 Aug 2016 03:21:05 -0700 (PDT)
+	Mon, 15 Aug 2016 03:21:07 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Aug 2016 12:20:48 +0200
-Message-Id: <20160815102049.3291-10-Martin.Jansa@gmail.com>
+Date: Mon, 15 Aug 2016 12:20:49 +0200
+Message-Id: <20160815102049.3291-11-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.9.2
 In-Reply-To: <20160815102049.3291-1-Martin.Jansa@gmail.com>
 References: <20160815102049.3291-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 10/11] gparted: add intltool-native dependency
+Subject: [meta-oe][PATCH 11/11] rygel: add intltool-native dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,30 +54,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Aug 2016 10:21:05 -0000
+X-List-Received-Date: Mon, 15 Aug 2016 10:21:08 -0000
 
 * fixes:
-  | ../gparted-0.24.0/configure: line 16730: syntax error near unexpected token `0.35.5'
-  | ../gparted-0.24.0/configure: line 16730: `IT_PROG_INTLTOOL(0.35.5)'
+  | ../rygel-0.28.2/configure: line 18228: syntax error near unexpected token `0.40.0'
+  | ../rygel-0.28.2/configure: line 18228: `IT_PROG_INTLTOOL(0.40.0)'
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-gnome/recipes-extended/gparted/gparted_0.24.0.bb | 2 +-
+ meta-multimedia/recipes-connectivity/rygel/rygel_0.28.2.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-extended/gparted/gparted_0.24.0.bb b/meta-gnome/recipes-extended/gparted/gparted_0.24.0.bb
-index c1666a3..73a15db 100644
---- a/meta-gnome/recipes-extended/gparted/gparted_0.24.0.bb
-+++ b/meta-gnome/recipes-extended/gparted/gparted_0.24.0.bb
-@@ -13,7 +13,7 @@ SRC_URI = " \
- SRC_URI[md5sum] = "b8480274c68876acff5965d4346710e7"
- SRC_URI[sha256sum] = "02398ab33894a59b0bd8707e598c46d8bb56f1413cd54de48eed61e2920ecd60"
+diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_0.28.2.bb b/meta-multimedia/recipes-connectivity/rygel/rygel_0.28.2.bb
+index 5cb7d43..79ff6e2 100644
+--- a/meta-multimedia/recipes-connectivity/rygel/rygel_0.28.2.bb
++++ b/meta-multimedia/recipes-connectivity/rygel/rygel_0.28.2.bb
+@@ -9,7 +9,7 @@ LICENSE = "LGPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
+                     file://src/rygel/rygel-main.vala;endline=27;md5=99324118da4c012d25edae2f779ae9b3"
  
--DEPENDS = "glib-2.0 gtkmm parted gnome-doc-utils"
-+DEPENDS = "glib-2.0 gtkmm parted gnome-doc-utils intltool-native"
+-DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 gstreamer1.0-plugins-base ossp-uuid libgee libsoup-2.4 libmediaart-2.0 libunistring sqlite3"
++DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 gstreamer1.0-plugins-base ossp-uuid libgee libsoup-2.4 libmediaart-2.0 libunistring sqlite3 intltool-native"
+ RDEPENDS_${PN} = "gstreamer1.0-plugins-base-playback shared-mime-info"
+ RRECOMMENDS_${PN} = "rygel-plugin-media-export"
  
- do_install_append() {
-     # Add a script which checks if polkit is installed.
 -- 
 2.9.2
 
