@@ -1,24 +1,27 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id A2A587320F
+Return-Path: <jeremy.rosen@smile.fr>
+Received: from idris.smile.fr (idris.smile.fr [91.216.209.19])
+	by mail.openembedded.org (Postfix) with ESMTP id 86E6E73232
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2016 09:32:56 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u7G9WuKN018472
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2016 02:32:57 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Tue, 16 Aug 2016 02:32:55 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 16 Aug 2016 17:32:03 +0800
-Message-ID: <1471339923-30097-1-git-send-email-mingli.yu@windriver.com>
+	Tue, 16 Aug 2016 10:31:57 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by idris.smile.fr (Postfix) with ESMTP id A43C41EE08AA;
+	Tue, 16 Aug 2016 12:31:57 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at smile.fr
+Received: from idris.smile.fr ([127.0.0.1])
+	by localhost (bluemind-mta.prod.vitry.intranet [127.0.0.1])
+	(amavisd-new, port 10024)
+	with ESMTP id mXzWK4y9j5P1; Tue, 16 Aug 2016 12:31:57 +0200 (CEST)
+Received: from pcrosen.dhcp.idf.intranet (gre92-5-82-237-199-7.fbx.proxad.net
+	[82.237.199.7])
+	by idris.smile.fr (Postfix) with ESMTPA id 797681EE089D;
+	Tue, 16 Aug 2016 12:31:57 +0200 (CEST)
+From: =?UTF-8?q?J=C3=A9r=C3=A9my=20Rosen?= <jeremy.rosen@smile.fr>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 16 Aug 2016 12:31:56 +0200
+Message-Id: <1471343516-6946-1-git-send-email-jeremy.rosen@smile.fr>
 X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] tnftp: tnftp20130505 -> tnftp20151004
+Subject: [PATCH] [jethro] fix gcc-cross when BUILD_* are set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,37 +34,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2016 09:32:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 16 Aug 2016 10:31:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Mingli Yu <Mingli.Yu@windriver.com>
+When building with a compiler which is not gcc the gcc-croos will still
+use the $CC and $CXX variables
 
-Upgrade tnftp from tnftp20130505 to tnftp20151004
+These variables are not set properly to BUILD_CC and BUILD_CXX by the
+recipe.
 
-Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+This is problematic now for jethro because gcc-6 is the default compiler
+for some distros (debian testing) which can't build jethro anymore
+
+
+Signed-off-by: Jérémy Rosen <jeremy.rosen@smile.fr>
 ---
- .../recipes-support/tnftp/{tnftp_20130505.bb => tnftp_20151004.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/tnftp/{tnftp_20130505.bb => tnftp_20151004.bb} (89%)
+ meta/recipes-devtools/gcc/gcc-cross.inc | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-networking/recipes-support/tnftp/tnftp_20130505.bb b/meta-networking/recipes-support/tnftp/tnftp_20151004.bb
-similarity index 89%
-rename from meta-networking/recipes-support/tnftp/tnftp_20130505.bb
-rename to meta-networking/recipes-support/tnftp/tnftp_20151004.bb
-index 7d1c515..4516345 100644
---- a/meta-networking/recipes-support/tnftp/tnftp_20130505.bb
-+++ b/meta-networking/recipes-support/tnftp/tnftp_20151004.bb
-@@ -29,8 +29,8 @@ ALTERNATIVE_TARGET_${PN}  = "${bindir}/tnftp"
- FILES_${PN} = "${bindir}/tnftp"
+diff --git a/meta/recipes-devtools/gcc/gcc-cross.inc b/meta/recipes-devtools/gcc/gcc-cross.inc
+index aa10633..9a2e06f 100644
+--- a/meta/recipes-devtools/gcc/gcc-cross.inc
++++ b/meta/recipes-devtools/gcc/gcc-cross.inc
+@@ -36,8 +36,14 @@ EXTRA_OECONF_PATHS = "\
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=6d6796cb166a9bb050958241dad9479e"
--SRC_URI[md5sum] = "66e218d02ec7d9fc39ab70ba2900305a"
--SRC_URI[sha256sum] = "6f650e25f6fd51538f677b789b49379f367ae9f1dee74c94cfe24d92abc2cffb"
-+SRC_URI[md5sum] = "a49fbe752318d5a7893f900046ea00d5"
-+SRC_URI[sha256sum] = "c94a8a49d3f4aec1965feea831d4d5bf6f90c65fd8381ee0863d11a5029a43a0"
+ ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_DIR_TARGET}${target_includedir}"
  
- PACKAGECONFIG ?= "openssl"
- PACKAGECONFIG[openssl] = "--enable-ssl, --disable-ssl --with-ssl=no, openssl"
++do_configure_prepend () {
++	export CC="${BUILD_CC}"
++	export CXX="${BUILD_CXX}"
++}
++
+ do_compile () {
+ 	export CC="${BUILD_CC}"
++	export CXX="${BUILD_CXX}"
+ 	export AR_FOR_TARGET="${TARGET_SYS}-ar"
+ 	export RANLIB_FOR_TARGET="${TARGET_SYS}-ranlib"
+ 	export LD_FOR_TARGET="${TARGET_SYS}-ld"
 -- 
 2.8.1
 
