@@ -1,21 +1,54 @@
-Return-Path: <prvs=02916f861=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 61DD97326D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 5F2DD6E667
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2016 14:51:34 +0000 (UTC)
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: A2DgAgBwJ7NX/0oKEKxEGoQbfAekfooYgjeFZIIPgX0mhXeCDRQCAQEBAQEBAYEFhTABLSiBFg4FiD8tsxQBimYBAQEBBieCJYQFi1YLgwcFiCqRF4FihDyIfYFpToc0hViGZYVTg3gegkkbgU5sAYYXfwEBAQ
-X-IPAS-Result: A2DgAgBwJ7NX/0oKEKxEGoQbfAekfooYgjeFZIIPgX0mhXeCDRQCAQEBAQEBAYEFhTABLSiBFg4FiD8tsxQBimYBAQEBBieCJYQFi1YLgwcFiCqRF4FihDyIfYFpToc0hViGZYVTg3gegkkbgU5sAYYXfwEBAQ
-From: Richard Leitner <richard.leitner@skidata.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 16 Aug 2016 16:51:28 +0200
-Message-ID: <1471359088-5183-1-git-send-email-richard.leitner@skidata.com>
-X-Mailer: git-send-email 2.1.4
-MIME-Version: 1.0
-X-Originating-IP: [172.16.60.30]
-X-ClientProxiedBy: sdex1srv.skidata.net (172.16.10.92) To sdex2srv.skidata.net
-	(172.16.10.93)
-Subject: [meta-java][PATCH] openjdk-7: update to IcedTea 2.6.5 OpenJDK 7u99b00
+	Tue, 16 Aug 2016 16:07:38 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id h186so5688679pfg.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Aug 2016 09:07:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:subject:from:in-reply-to:date:message-id:references:to; 
+	bh=uwdXIgJmuHD8KgFPNfIxCZIH0JNAPXy7UWSd0BvtPKo=;
+	b=DNq1NfcGLA298iFbsh7dP5R59wnysea/hhX0lM0lbxqhLuly5qnZfVdh8J/bnLl7Di
+	n3WO6X31vfzaUdWE1jBMhMHz+jsdZRg6AW6AT3Q/dk/+bvpNkLojEBjEaZrHMl8cT6hU
+	B5jpUBrBAhv1cPMij81bd8phGaABHDKrQDtimRe+oSZq9N/bnq1lCw1UuQnNIzOj5sZt
+	pZpYWegNdpiakPmivO86XYApBoP4finqkJTSmNMnNCCj45SvOSMJwHI1sTGvPnYnsIl+
+	Nz8hgDPHPNhUxU5KNSoEaJ2nNK5sv25hv2i4Xw1p83LSxKNu/L15zro7+Ax6rI7KLH/I
+	C9JQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date
+	:message-id:references:to;
+	bh=uwdXIgJmuHD8KgFPNfIxCZIH0JNAPXy7UWSd0BvtPKo=;
+	b=O9cghdAAhTF95LECXLLjuG5Bfn3x+x2dSVT4rIpeiLhUb2GJMb++t//SewgDzaxCMw
+	NtwxlQu2QjPfcQ9fZq4+ZGfcB1yMuQyfvzBeYVD1t/yMHUH8t7eU+d48ZgjWTsbcM0Zl
+	VencT+RHt1iBxvhH7BBpYG+xKR+FuCTZRWGBhJf0Fjt6vgizxx4WA/rF+0+uCXL/+nEU
+	HvZDCzdiSzaMNumKtwlhw58orHuq33GcNiT6dbSgaZQNMc/Lte4rAtIEhC/LJhQOrYoK
+	GG/qmnexjjDQ59C8y6VP95R6UOLEQZ4TTEA+XdAAIXAsRa+TNfdt1Mek+HgUUxLsgqBX
+	9egw==
+X-Gm-Message-State: AEkooutHSCWNravtF1kNRPa6vYuz+IDrs4+uY5HCCyuqUjKpzfOV5Fn4oYKfyXUZpfH5Tg==
+X-Received: by 10.98.32.138 with SMTP id m10mr65739128pfj.146.1471363659329;
+	Tue, 16 Aug 2016 09:07:39 -0700 (PDT)
+Received: from ?IPv6:2601:647:4c00:3edf:8111:5203:81eb:cf56?
+	([2601:647:4c00:3edf:8111:5203:81eb:cf56])
+	by smtp.gmail.com with ESMTPSA id
+	g21sm40384250pfj.88.2016.08.16.09.07.38
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 16 Aug 2016 09:07:38 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
+X-Pgp-Agent: GPGMail
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <fa2fc853-b871-1ad1-a1cc-408fed9967bf@smile.fr>
+Date: Tue, 16 Aug 2016 09:07:33 -0700
+Message-Id: <8C2AB8DB-2C87-4D7A-9762-5F9720E56397@gmail.com>
+References: <1471343516-6946-1-git-send-email-jeremy.rosen@smile.fr>
+	<CAJTo0LYKYph9e_JaLVbFbByCCwk9a2zmHVLAMEoed7h5rGeArQ@mail.gmail.com>
+	<fa2fc853-b871-1ad1-a1cc-408fed9967bf@smile.fr>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Mailer: Apple Mail (2.3124)
+Subject: Re: [PATCH] [jethro] fix gcc-cross when BUILD_* are set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,86 +61,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2016 14:51:36 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 16 Aug 2016 16:07:39 -0000
+X-Groupsio-MsgNum: 62671
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_23C1B093-1325-4AF7-B798-AC217BFC49DB";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-OpenJDK 7 is updated from from 91b01 (IcedTea 2.6.2) to 99b00 (IcedTea
-2.6.5). This update introduces following security updates:
- * Mar 2016 (IcedTea 2.6.5, OpenJDK 7 u99)  [1]
- * Jan 2016 (IcedTea 2.6.4, OpenJDK 7 u95)  [2]
- * Oct 2015 (IcedTea 2.6.3, OpenJDK 7 u91)  [3]
-
-Due to the fact some "byte behavior improvements" were not ported to
-the ARM32-JIT in IcedTea 2.6.6 yet [6], [7]  we need to stick IcedTea
-2.6.5 for now.
-
-[1]http://blog.fuseyism.com/index.php/2016/03/25/security-icedtea-2-6-5-for-openjdk-7-released/
-[2]http://blog.fuseyism.com/index.php/2016/01/21/security-icedtea-2-6-4-for-openjdk-7-released/
-[3]http://blog.fuseyism.com/index.php/2015/11/17/security-icedtea-2-6-3-for-openjdk-7-released/
-[6]http://icedtea.classpath.org/bugzilla/show_bug.cgi?id=2942
-[7]http://icedtea.classpath.org/hg/release/icedtea7-forest-2.6/hotspot/rev/1c5c4564204e
-
-Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
----
- ...k-7_91b01-2.6.2.bb => openjdk-7_99b00-2.6.5.bb} | 32 +++++++++++-----------
- 1 file changed, 16 insertions(+), 16 deletions(-)
- rename recipes-core/openjdk/{openjdk-7_91b01-2.6.2.bb => openjdk-7_99b00-2.6.5.bb} (51%)
-
-diff --git a/recipes-core/openjdk/openjdk-7_91b01-2.6.2.bb b/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
-similarity index 51%
-rename from recipes-core/openjdk/openjdk-7_91b01-2.6.2.bb
-rename to recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
-index b2b01c7..711f572 100644
---- a/recipes-core/openjdk/openjdk-7_91b01-2.6.2.bb
-+++ b/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
-@@ -10,30 +10,30 @@ REQUIRED_DISTRO_FEATURES = "x11"
- 
- PR = "${INC_PR}.1"
- 
--SRC_URI[iced.md5sum] = "a16b3e800030db9d9b35f80dfd11883a"
--SRC_URI[iced.sha256sum] = "c19eafacd23c81179934acab123511c424cd07c094739fa33778bf7cc80e14d0"
-+SRC_URI[iced.md5sum] = "cb66b595860c3d99a87c3a853667c145"
-+SRC_URI[iced.sha256sum] = "d8bce93bd33b299a52236f03fb57d42ae9de808c8337e6185930799dbfc78795"
- 
--SRC_URI[corba.md5sum] = "500547dc50acde20fad18d0645be89c4"
--SRC_URI[corba.sha256sum] = "92fa1e73dc0eb463bccd9ce3636643f492b8935cb7a23b91c5d855f4641382af"
-+SRC_URI[corba.md5sum] = "3345d1939663d1ef94459cf215b76b3f"
-+SRC_URI[corba.sha256sum] = "427969fdd78513a11ddd9d5131a068e0b26ca2c8f14951bf8b161fecd07fe77f"
- 
--SRC_URI[jaxp.md5sum] = "793fb78b5f51323e31785bb89292182f"
--SRC_URI[jaxp.sha256sum] = "94cda3ba29ab3cd36d50f2e6c98a5e250eb6372379e171288b3022b978136fc0"
-+SRC_URI[jaxp.md5sum] = "872a458cde954124eee9913e6ea906b0"
-+SRC_URI[jaxp.sha256sum] = "7bb5e1bc9f0807061e157aeb356dd0e3b9fa019fb316beee3aa0181a335ba37a"
- 
--SRC_URI[jaxws.md5sum] = "131e2f619455e37cea74ca710e6ada6d"
--SRC_URI[jaxws.sha256sum] = "14467736097197a199b483f24f8111e9c76252a2ad2a5f166c97585c0a3930d4"
-+SRC_URI[jaxws.md5sum] = "d0d559ca0d797c5dc9640bfa277a23c5"
-+SRC_URI[jaxws.sha256sum] = "4e759ade7e47713f6f26afc1ffcd02f2edf967582fae2ec6b4d73dc81be926d0"
- 
--SRC_URI[jdk.md5sum] = "6e8061b2b7c22163ab149fb66553eda8"
--SRC_URI[jdk.sha256sum] = "7ad801d5f6b61818c78f2f39931df24d8c6f6a1c821180c998975ac884eb8af1"
-+SRC_URI[jdk.md5sum] = "13fa99cc310f27818867e8a9d0841892"
-+SRC_URI[jdk.sha256sum] = "cd3810553b1066c21f2fe08a73de72e38ba7e72295cd32dec70db481a24421ba"
- 
--SRC_URI[langtools.md5sum] = "1cebffc6b56e9efdbe08eff018801cb1"
--SRC_URI[langtools.sha256sum] = "a53fe8912b8190d82615778cf8bfb77202a55adcdc5bacc56ce7738b6a654335"
-+SRC_URI[langtools.md5sum] = "2e951b311d0cfbd7ebc6e9fbb75de891"
-+SRC_URI[langtools.sha256sum] = "6c6c676c60af61638a0c3176f0312fcc0abad16d1d3cdbe11aeefcc3357a78d9"
- 
--SRC_URI[openjdk.md5sum] = "d63c5b401aaa9ef76d1dbd87943aa387"
--SRC_URI[openjdk.sha256sum] = "4911adb6d7877b014777b6db6d90f1d1626314bd0c6a2c9cf9911d1e11eb4b49"
-+SRC_URI[openjdk.md5sum] = "48d9f0e76f92d18aff1b9379b052b0cb"
-+SRC_URI[openjdk.sha256sum] = "c66f56a91a6fa9e3c889bbbc5432a4e082b7d3735188fb508fa7ec70c142abdb"
- 
- # hotspot changeset taken from hotspot/tags
--SRC_URI[hotspot.md5sum] = "5ffb731931226fbff870b80a377f6258"
--SRC_URI[hotspot.sha256sum] = "984918bcb571fecebd490160935bb282c60eb9e17b4fc8fc77733d8da164c33a"
-+SRC_URI[hotspot.md5sum] = "7e1bdaf4385c3b7e77d3599c52151485"
-+SRC_URI[hotspot.sha256sum] = "43983232fb10abeac99478e7045c04a93fef86185e2b9ee9c7b46f2903441cfc"
- 
- ###############################################################################
- # PATCHES - split up to allow overriding them separately
--- 
-2.1.4
+--Apple-Mail=_23C1B093-1325-4AF7-B798-AC217BFC49DB
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
 
 
+> On Aug 16, 2016, at 6:13 AM, J=C3=A9r=C3=A9my Rosen =
+<jeremy.rosen@smile.fr> wrote:
+>=20
+>=20
+>=20
+> On 16/08/2016 12:40, Burton, Ross wrote:
+>> On 16 August 2016 at 11:31, J=C3=A9r=C3=A9my Rosen =
+<jeremy.rosen@smile.fr> wrote:
+>>=20
+>>> When building with a compiler which is not gcc the gcc-croos will =
+still
+>>> use the $CC and $CXX variables
+>>>=20
+>>> These variables are not set properly to BUILD_CC and BUILD_CXX by =
+the
+>>> recipe.
+>>>=20
+>>> This is problematic now for jethro because gcc-6 is the default =
+compiler
+>>> for some distros (debian testing) which can't build jethro anymore
+>>>=20
+>> Needs to go to openembedded-core@, and needs to be for/tested with =
+master
+>> before hitting the stable branches.
+> I'll try, but testing on master is tricky.
+> Master build correctly with gcc-6 and doesn't trigger the bug. i'll =
+try to trick my debian to trigger the bug=E2=80=A6
+
+may be a centos6 VM ?
+
+>=20
+>> Ross
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+--Apple-Mail=_23C1B093-1325-4AF7-B798-AC217BFC49DB
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlezOkoACgkQuwUzVZGdMxRTuwCeMplftOQpodpOLmZBRkT63NoS
+DeIAn0ANYb5hQkkTNMtEPf1hLpPDGFCZ
+=ZntU
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_23C1B093-1325-4AF7-B798-AC217BFC49DB--
