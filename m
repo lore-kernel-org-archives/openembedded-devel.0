@@ -1,34 +1,32 @@
-Return-Path: <jeremy.rosen@smile.fr>
-Received: from idris.smile.fr (idris.smile.fr [91.216.209.19])
-	by mail.openembedded.org (Postfix) with ESMTP id DC6EE736B6
+Return-Path: <rpjday@crashcourse.ca>
+X-Greylist: delayed 630 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 16 Aug 2016 14:00:42 UTC
+Received: from smtp486.redcondor.net (smtp486.redcondor.net [208.80.204.86])
+	by mail.openembedded.org (Postfix) with ESMTP id 929457327F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2016 13:13:15 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by idris.smile.fr (Postfix) with ESMTP id BFFE81EE0875
+	Tue, 16 Aug 2016 14:00:42 +0000 (UTC)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
+	by smtp486.redcondor.net ({6695537a-536a-45f9-a249-877c85428649})
+	via TCP (outbound) with ESMTPS id 20160816135011512_0486
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2016 15:13:10 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at smile.fr
-Received: from idris.smile.fr ([127.0.0.1])
-	by localhost (bluemind-mta.prod.vitry.intranet [127.0.0.1])
-	(amavisd-new, port 10024) with ESMTP id 5xCm94k6Ud5N
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2016 15:13:10 +0200 (CEST)
-Received: from [10.1.8.214] (gre92-5-82-237-199-7.fbx.proxad.net
-	[82.237.199.7])
-	by idris.smile.fr (Postfix) with ESMTPSA id A08CC1EE051D
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2016 15:13:10 +0200 (CEST)
-To: openembedded-devel@lists.openembedded.org
-References: <1471343516-6946-1-git-send-email-jeremy.rosen@smile.fr>
-	<CAJTo0LYKYph9e_JaLVbFbByCCwk9a2zmHVLAMEoed7h5rGeArQ@mail.gmail.com>
-From: =?UTF-8?B?SsOpcsOpbXkgUm9zZW4=?= <jeremy.rosen@smile.fr>
-Message-ID: <fa2fc853-b871-1ad1-a1cc-408fed9967bf@smile.fr>
-Date: Tue, 16 Aug 2016 15:13:10 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Firefox/45.0 Icedove/45.2.0
+	Tue, 16 Aug 2016 13:50:11 +0000
+X-RC-FROM: <rpjday@crashcourse.ca>
+X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
+Received: from [216.191.234.70] (port=59095 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1bZemj-0001Ui-Nn for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Aug 2016 09:52:05 -0400
+Date: Tue, 16 Aug 2016 09:50:01 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@ca624034.mitel.com
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.20.1608160948160.7531@ca624034.mitel.com>
+User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
 MIME-Version: 1.0
-In-Reply-To: <CAJTo0LYKYph9e_JaLVbFbByCCwk9a2zmHVLAMEoed7h5rGeArQ@mail.gmail.com>
-Subject: Re: [PATCH] [jethro] fix gcc-cross when BUILD_* are set
+X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
+Subject: [PATCH] toscoterm: In presence of "_append", convert "+=" to "="
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,30 +39,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2016 13:13:19 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 16 Aug 2016 14:00:44 -0000
+Content-Type: text/plain; charset=US-ASCII
 
 
+Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
 
-On 16/08/2016 12:40, Burton, Ross wrote:
-> On 16 August 2016 at 11:31, Jérémy Rosen <jeremy.rosen@smile.fr> wrote:
->
->> When building with a compiler which is not gcc the gcc-croos will still
->> use the $CC and $CXX variables
->>
->> These variables are not set properly to BUILD_CC and BUILD_CXX by the
->> recipe.
->>
->> This is problematic now for jethro because gcc-6 is the default compiler
->> for some distros (debian testing) which can't build jethro anymore
->>
-> Needs to go to openembedded-core@, and needs to be for/tested with master
-> before hitting the stable branches.
-I'll try, but testing on master is tricky.
-Master build correctly with gcc-6 and doesn't trigger the bug. i'll try 
-to trick my debian to trigger the bug...
+---
 
-> Ross
+diff --git a/meta-oe/recipes-support/toscoterm/toscoterm_git.bb b/meta-oe/recipes-support/toscoterm/toscoterm_git.bb
+index 6b31fd6..7593a65 100644
+--- a/meta-oe/recipes-support/toscoterm/toscoterm_git.bb
++++ b/meta-oe/recipes-support/toscoterm/toscoterm_git.bb
+@@ -24,4 +24,4 @@ do_install() {
+     oe_runmake PREFIX="${prefix}" DESTDIR="${D}" install
+ }
+
+-RDEPENDS_${PN}_append_libc-glibc += "glibc-gconv-ibm437"
++RDEPENDS_${PN}_append_libc-glibc = "glibc-gconv-ibm437"
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
 
