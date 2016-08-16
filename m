@@ -1,27 +1,46 @@
-Return-Path: <jeremy.rosen@smile.fr>
-Received: from idris.smile.fr (idris.smile.fr [91.216.209.19])
-	by mail.openembedded.org (Postfix) with ESMTP id 86E6E73232
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f170.google.com (mail-io0-f170.google.com
+	[209.85.223.170])
+	by mail.openembedded.org (Postfix) with ESMTP id D61C075C60
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Aug 2016 10:31:57 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by idris.smile.fr (Postfix) with ESMTP id A43C41EE08AA;
-	Tue, 16 Aug 2016 12:31:57 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at smile.fr
-Received: from idris.smile.fr ([127.0.0.1])
-	by localhost (bluemind-mta.prod.vitry.intranet [127.0.0.1])
-	(amavisd-new, port 10024)
-	with ESMTP id mXzWK4y9j5P1; Tue, 16 Aug 2016 12:31:57 +0200 (CEST)
-Received: from pcrosen.dhcp.idf.intranet (gre92-5-82-237-199-7.fbx.proxad.net
-	[82.237.199.7])
-	by idris.smile.fr (Postfix) with ESMTPA id 797681EE089D;
-	Tue, 16 Aug 2016 12:31:57 +0200 (CEST)
-From: =?UTF-8?q?J=C3=A9r=C3=A9my=20Rosen?= <jeremy.rosen@smile.fr>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Aug 2016 12:31:56 +0200
-Message-Id: <1471343516-6946-1-git-send-email-jeremy.rosen@smile.fr>
-X-Mailer: git-send-email 2.8.1
+	Tue, 16 Aug 2016 10:40:26 +0000 (UTC)
+Received: by mail-io0-f170.google.com with SMTP id q83so103406457iod.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Aug 2016 03:40:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=y7kmr83vc5zVmlOoz5JuE3xHcOg3Y+qKT5gCxMa6mpY=;
+	b=EQdrRuPL3hiRHZvGuw1/WZUcr8OmSJn/zOmurQkaCnfk0BfzQRCPH5uDylmOJdh4L9
+	EPx03u8IX9UbpcspuA/PxwADEfK8zHPc7a099UfqZS96yUvuDnA2xXoWuv+i2BtaGceN
+	cRq5CH1MyOXDumwjSeYR/WO0NsblTur8XlUFs9ODsCDOv4nqxbk5rFl/Pxfeqm34Bk82
+	lpdqBxC73QuvqiPrzVxotGnUh2ftDQauZABPfRipv6Ae/f2ykPZ47N3fwQ8GG8gHUT+4
+	PT87XJipu7oG9EwL3uPGcF3jSbW6voe8WAEvP3A0cGRApO0D0fxzzENxAvvFRf9V49hF
+	+fSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=y7kmr83vc5zVmlOoz5JuE3xHcOg3Y+qKT5gCxMa6mpY=;
+	b=XJDIOXwJLTK+YSsg2Hc4rZfW2c/hvFczOj1p3Eez2BKmFQ6og7mvhqeaeoczfAZAON
+	PL9UJrzQA8J3e2x87tdITLYkFIqp9ENeVJprbFJrb6ytISlPgsEES32L/jKGryMH++Bc
+	c+xR8lSpMKXkeetQrTCc2cG2Tbft65/HyE02RjAMjB3i52OOMk7pi1f11umN4HVfPD3v
+	AsNBU4ary58mtAafrFnFJolFJ6Gz5oqmzgnO7PrN9tFiGRU4rIAuWYWo3c2BS1ACOCqA
+	55iEK0BLeucocKm6OelH3404fTIU0EALHLNejRNaDmFrPJLuU2odB+sWcM5pR4R74YUo
+	/Teg==
+X-Gm-Message-State: AEkooutdM22kePohE7HsBL0z3vAucBZorca6oINDwGVlIKXiI/HIZ3my+uyBMjmLfP7qbP9k7j4Yrq2Hi6D5LWTV
+X-Received: by 10.107.135.142 with SMTP id r14mr42576584ioi.133.1471344027098; 
+	Tue, 16 Aug 2016 03:40:27 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH] [jethro] fix gcc-cross when BUILD_* are set
+Received: by 10.107.18.17 with HTTP; Tue, 16 Aug 2016 03:40:06 -0700 (PDT)
+In-Reply-To: <1471343516-6946-1-git-send-email-jeremy.rosen@smile.fr>
+References: <1471343516-6946-1-git-send-email-jeremy.rosen@smile.fr>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 16 Aug 2016 11:40:06 +0100
+Message-ID: <CAJTo0LYKYph9e_JaLVbFbByCCwk9a2zmHVLAMEoed7h5rGeArQ@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH] [jethro] fix gcc-cross when BUILD_* are set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,45 +53,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Aug 2016 10:31:59 -0000
+X-List-Received-Date: Tue, 16 Aug 2016 10:40:27 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-When building with a compiler which is not gcc the gcc-croos will still
-use the $CC and $CXX variables
+On 16 August 2016 at 11:31, J=C3=A9r=C3=A9my Rosen <jeremy.rosen@smile.fr> =
+wrote:
 
-These variables are not set properly to BUILD_CC and BUILD_CXX by the
-recipe.
+> When building with a compiler which is not gcc the gcc-croos will still
+> use the $CC and $CXX variables
+>
+> These variables are not set properly to BUILD_CC and BUILD_CXX by the
+> recipe.
+>
+> This is problematic now for jethro because gcc-6 is the default compiler
+> for some distros (debian testing) which can't build jethro anymore
+>
 
-This is problematic now for jethro because gcc-6 is the default compiler
-for some distros (debian testing) which can't build jethro anymore
+Needs to go to openembedded-core@, and needs to be for/tested with master
+before hitting the stable branches.
 
-
-Signed-off-by: Jérémy Rosen <jeremy.rosen@smile.fr>
----
- meta/recipes-devtools/gcc/gcc-cross.inc | 6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/meta/recipes-devtools/gcc/gcc-cross.inc b/meta/recipes-devtools/gcc/gcc-cross.inc
-index aa10633..9a2e06f 100644
---- a/meta/recipes-devtools/gcc/gcc-cross.inc
-+++ b/meta/recipes-devtools/gcc/gcc-cross.inc
-@@ -36,8 +36,14 @@ EXTRA_OECONF_PATHS = "\
- 
- ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_DIR_TARGET}${target_includedir}"
- 
-+do_configure_prepend () {
-+	export CC="${BUILD_CC}"
-+	export CXX="${BUILD_CXX}"
-+}
-+
- do_compile () {
- 	export CC="${BUILD_CC}"
-+	export CXX="${BUILD_CXX}"
- 	export AR_FOR_TARGET="${TARGET_SYS}-ar"
- 	export RANLIB_FOR_TARGET="${TARGET_SYS}-ranlib"
- 	export LD_FOR_TARGET="${TARGET_SYS}-ld"
--- 
-2.8.1
-
+Ross
 
