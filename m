@@ -1,36 +1,39 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id E361277117
+Return-Path: <wangxin2015.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 1DD906FF78
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 20:02:26 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id c52so2478067qte.1
+	Tue, 16 Aug 2016 01:13:45 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; 
+   d="scan'208";a="9951750"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 16 Aug 2016 09:13:37 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 54FCD42BC501
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Aug 2016 13:02:28 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=znOjDwXXOWlS6erYNFcp6TvGQCH7rTI8CDILxNP9JQQ=;
-	b=meC6nxBIKX83fQ9JGKtTYIv9/sr0BmhOtYMeNKwM7HWkB3/M0t7ydpb3bMk024YRcm
-	XrdwIX8DG532pvLbMe2LIkbEqcFf91VGT5VqmyR+B9THFi68jR9w+4x9+tASCrG9FA06
-	5VSw5E/A05arhSaT/o+ZAeuNnr/se8LJ26zDv9ph4MskV+IP80pJOUeJ6Ov9LJfkBzPl
-	A5nBSNgGij/lSqfMR5YaEwzdQIdofE3wG8jh17AUU5QcpTfkBTUOv2PsqO5vy72R0DoW
-	ELzTgsF0EI2K5Wt5Ydu55zCpHKJzpK/cuGrXz/Wln7tVfR2KVeReYHFISjigFzvDylS3
-	0puQ==
-X-Gm-Message-State: AEkoouuYKV4tcRoMilXczOL1wH/G6rJUvSqGffD56gKOf6tJbsRcXJPgNLPVD8vkyD9JQA==
-X-Received: by 10.200.55.137 with SMTP id d9mr34506440qtc.46.1471291347303;
-	Mon, 15 Aug 2016 13:02:27 -0700 (PDT)
-Received: from localhost.localdomain ([96.91.222.230])
-	by smtp.gmail.com with ESMTPSA id
-	t15sm13213454qtc.26.2016.08.15.13.02.26
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 15 Aug 2016 13:02:26 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Aug 2016 16:02:19 -0400
-Message-Id: <1471291339-23654-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-requests: update to version 2.11.0
+	Tue, 16 Aug 2016 09:13:36 +0800 (CST)
+Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
+	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
+	14.03.0279.002; Tue, 16 Aug 2016 09:13:35 +0800
+From: "Wang, Xin" <wangxin2015.fnst@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH] dstat: 0.7.2 -> 0.7.3
+Thread-Index: AQHR9uObO4wy571MsESXK/IL9SVUlKBKyNrA
+Date: Tue, 16 Aug 2016 01:13:34 +0000
+Message-ID: <C43D7C6FFC265C429F44FEB1C68F1B25633DB117@G08CNEXMBPEKD03.g08.fujitsu.local>
+References: <1471250746-1965-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
+	<20160815105542.rc622shiwx3qio4s@jama>
+In-Reply-To: <20160815105542.rc622shiwx3qio4s@jama>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.120]
+MIME-Version: 1.0
+X-yoursite-MailScanner-ID: 54FCD42BC501.ABFCA
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangxin2015.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: =?UTF-8?B?562U5aSNOiBbbWV0YS1vZV1bUEFUQ0hdIGRzdGF0OiAwLjcuMiAtPiAwLjcuMw==?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,60 +46,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Aug 2016 20:02:28 -0000
+X-List-Received-Date: Tue, 16 Aug 2016 01:13:49 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 
-  * Bug fix release
-  * Update RDEPENDS
-
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-requests.inc              | 4 ++--
- .../python/{python-requests_2.10.0.bb => python-requests_2.11.0.bb}  | 0
- meta-python/recipes-devtools/python/python3-requests_2.10.0.bb       | 2 --
- meta-python/recipes-devtools/python/python3-requests_2.11.0.bb       | 5 +++++
- 4 files changed, 7 insertions(+), 4 deletions(-)
- rename meta-python/recipes-devtools/python/{python-requests_2.10.0.bb => python-requests_2.11.0.bb} (100%)
- delete mode 100644 meta-python/recipes-devtools/python/python3-requests_2.10.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-requests_2.11.0.bb
-
-diff --git a/meta-python/recipes-devtools/python/python-requests.inc b/meta-python/recipes-devtools/python/python-requests.inc
-index e00b257..7ce193c 100644
---- a/meta-python/recipes-devtools/python/python-requests.inc
-+++ b/meta-python/recipes-devtools/python/python-requests.inc
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://python-requests.org"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d9bb3515869c0f426cb8441c899ae7f5"
- 
--SRC_URI[md5sum] = "a36f7a64600f1bfec4d55ae021d232ae"
--SRC_URI[sha256sum] = "63f1815788157130cee16a933b2ee184038e975f0017306d723ac326b5525b54"
-+SRC_URI[md5sum] = "147afc07d8967cf46359701551a6cb69"
-+SRC_URI[sha256sum] = "b2ff053e93ef11ea08b0e596a1618487c4e4c5f1006d7a1706e3671c57dea385"
- 
- RDEPENDS_${PN} = "${PYTHON_PN}-email ${PYTHON_PN}-json ${PYTHON_PN}-netserver"
-diff --git a/meta-python/recipes-devtools/python/python-requests_2.10.0.bb b/meta-python/recipes-devtools/python/python-requests_2.11.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-requests_2.10.0.bb
-rename to meta-python/recipes-devtools/python/python-requests_2.11.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-requests_2.10.0.bb b/meta-python/recipes-devtools/python/python3-requests_2.10.0.bb
-deleted file mode 100644
-index e5220fa..0000000
---- a/meta-python/recipes-devtools/python/python3-requests_2.10.0.bb
-+++ /dev/null
-@@ -1,2 +0,0 @@
--inherit pypi setuptools3
--require python-requests.inc
-diff --git a/meta-python/recipes-devtools/python/python3-requests_2.11.0.bb b/meta-python/recipes-devtools/python/python3-requests_2.11.0.bb
-new file mode 100644
-index 0000000..5e869b7
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-requests_2.11.0.bb
-@@ -0,0 +1,5 @@
-+inherit pypi setuptools3
-+require python-requests.inc
-+
-+# Add the runtime depends for selectors.py
-+RDEPENDS_${PN} += "${PYTHON_PN}-misc"
--- 
-2.7.4
-
+U29ycnksIEkgZm9yZ2V0IHRvIGNoZWNrIGl0Lg0KDQotLS0tLdPKvP7Urbz+
+LS0tLS0NCreivP7Iyzogb3BlbmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlz
+dHMub3BlbmVtYmVkZGVkLm9yZyBbbWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZl
+bC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmddILT6se0gTWFydGlu
+IEphbnNhDQq3osvNyrG85DogMjAxNsTqONTCMTXI1SAxODo1Ng0KytW8/sjL
+OiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0K
+1vfM4jogUmU6IFtvZV0gW21ldGEtb2VdW1BBVENIXSBkc3RhdDogMC43LjIg
+LT4gMC43LjMNCg0KT24gTW9uLCBBdWcgMTUsIDIwMTYgYXQgMDQ6NDU6NDZB
+TSAtMDQwMCwgV2FuZyBYaW4gd3JvdGU6DQo+IFVwZ3JhZGUgZHN0YXQgZnJv
+bSAwLjcuMiB0byAwLjcuMy4NCg0KQmV0dGVyIGNoYW5nZSB3YXMgYWxyZWFk
+eSBzZW50IGxhc3Qgd2VlazoNCmh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQu
+b3JnL3BpcGVybWFpbC9vcGVuZW1iZWRkZWQtZGV2ZWwvMjAxNi1BdWd1c3Qv
+MTA4NTI0Lmh0bWwNCg0KPiANCj4gU2lnbmVkLW9mZi1ieTogV2FuZyBYaW4g
+PHdhbmd4aW4yMDE1LmZuc3RAY24uZnVqaXRzdS5jb20+DQo+IC0tLQ0KPiAg
+bWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvZHN0YXQve2RzdGF0XzAuNy4yLmJi
+ID0+IGRzdGF0XzAuNy4zLmJifSB8IDYgDQo+ICsrLS0tLQ0KPiAgMSBmaWxl
+IGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgNCBkZWxldGlvbnMoLSkgIHJl
+bmFtZSANCj4gbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvZHN0YXQve2RzdGF0
+XzAuNy4yLmJiID0+IGRzdGF0XzAuNy4zLmJifSAoNzElKQ0KPiANCj4gZGlm
+ZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2RzdGF0L2RzdGF0
+XzAuNy4yLmJiIA0KPiBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2RzdGF0
+L2RzdGF0XzAuNy4zLmJiDQo+IHNpbWlsYXJpdHkgaW5kZXggNzElDQo+IHJl
+bmFtZSBmcm9tIG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2RzdGF0L2RzdGF0
+XzAuNy4yLmJiDQo+IHJlbmFtZSB0byBtZXRhLW9lL3JlY2lwZXMtc3VwcG9y
+dC9kc3RhdC9kc3RhdF8wLjcuMy5iYg0KPiBpbmRleCA2M2YxODEyLi4xZTM5
+YWVhIDEwMDY0NA0KPiAtLS0gYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9k
+c3RhdC9kc3RhdF8wLjcuMi5iYg0KPiArKysgYi9tZXRhLW9lL3JlY2lwZXMt
+c3VwcG9ydC9kc3RhdC9kc3RhdF8wLjcuMy5iYg0KPiBAQCAtNSwxMiArNSwx
+MCBAQCBhbmQgZmxleGliaWxpdHkuIERzdGF0IGlzIGhhbmR5IGZvciBtb25p
+dG9yaW5nIA0KPiBzeXN0ZW1zIGR1cmluZyBwZXJmb3JtYW5jZSB0dW5pbmcg
+IGJlbmNobWFya3Mgb3IgdHJvdWJsZXNob290aW5nLiINCj4gIEhPTUVQQUdF
+ID0gImh0dHA6Ly9kYWcud2llZS5ycy9ob21lLW1hZGUvZHN0YXQiDQo+ICBM
+SUNFTlNFID0gIkdQTHYyIg0KPiAtTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxl
+Oi8vQ09QWUlORzttZDU9OTRkNTVkNTEyYTliYTM2Y2FhOWI3ZGYwNzliYWUx
+OWYiDQo+ICtMSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9DT1BZSU5HO21k
+NT1iMjM0ZWU0ZDY5ZjVmY2U0NDg2YTgwZmRhZjRhNDI2MyINCj4gIFNSQ19V
+UkkgPSAiZ2l0Oi8vZ2l0aHViLmNvbS9kYWd3aWVlcnMvZHN0YXQuZ2l0Ig0K
+PiAtU1JDX1VSSVttZDVzdW1dID0gIjc5OGUwNTBlMmUwMjRmMDhhMjcyZGQ0
+YjBlMWViYTQxIg0KPiAtU1JDX1VSSVtzaGEyNTZzdW1dID0gIjk2ZDFlNmVh
+MjQzNGU0NzdmYTk3MzIyZDkyNzc4ZjY4NDU4ZDdlNTdiYzU1YmM0ZjcyZTI5
+NDY3YTUyY2ZmZDEiDQo+ICANCj4gLVNSQ1JFViA9ICI1MjUxMzk3ZWI4ZDNi
+Mjg0YTkwYmZkZmFlYzBjOGUxMjEwMTQ2ZTNmIg0KPiArU1JDUkVWID0gImVi
+YWNlNmQ0MTc3Zjg3NDhmMzVjZWM4N2Y3YTQ5OTQ2MDQ2YjBhMjAiDQo+ICAN
+Cj4gIFMgPSAiJHtXT1JLRElSfS9naXQiDQo+ICANCj4gLS0NCj4gMi43LjQN
+Cj4gDQo+IA0KPiANCj4gLS0NCj4gX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18NCj4gT3BlbmVtYmVkZGVkLWRldmVs
+IG1haWxpbmcgbGlzdA0KPiBPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3Bl
+bmVtYmVkZGVkLm9yZw0KPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KDQotLSAN
+Ck1hcnRpbiAnSmFNYScgSmFuc2EgICAgIGphYmJlcjogTWFydGluLkphbnNh
+QGdtYWlsLmNvbQ0KCgo=
 
