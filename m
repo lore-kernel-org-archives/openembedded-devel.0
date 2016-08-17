@@ -1,24 +1,48 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 6CD716E5CB
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 348CD73174
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Aug 2016 09:52:35 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u7H9qaNO001503
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 17 Aug 2016 13:18:25 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id n66so7405824qkf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Aug 2016 02:52:36 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 17 Aug 2016 02:52:36 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 17 Aug 2016 17:51:35 +0800
-Message-ID: <20160817095135.12043-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.9.3
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] ifenslave: upgrade to 2.7
+	Wed, 17 Aug 2016 06:18:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:organization;
+	bh=yyZWBhMseetjD4DOYjwNxVKwJhQY1y5232KzqVIjo7E=;
+	b=d1jFuinoQ3dSn8IaUwpcnrIDg8l68im01xXgsyPwcqG4vtO7aEP9J6pBYZbH9tS0O0
+	4XEWfETp8P2ymxE95qb87iVix1zJqrWy5fGQwS5Vfg1NMxsviUNxTZ0pptGfGpWpdxDq
+	PY5OGUDuyq/Dty0o4ss0AxbkRgTt7cjljULN5GZDe0SJLTT+b/5EAGrAc9lpC57/NDJ0
+	WEjqUOY1kC2B2vIVTq7s0KftYGNuRDGFLMQX9ROJzVdYln0gFxXhXDRhMqM1+80u4z5M
+	RiT3JdZELfvjcDwQE58rPdjfhQuwO43CA0PPHSZipII259Z57fMfKIYJ1B71xJfWJTSa
+	Z5ZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=yyZWBhMseetjD4DOYjwNxVKwJhQY1y5232KzqVIjo7E=;
+	b=QtlhDZudGta8xEVWfYR2EGTh91neViOarSU6XZsG8Gqj4sXfe5u8VBxc1cOny+LIR1
+	vt9hnfBJQMINWKCx1IOrFvgAnII5dfoAMfvX8oLXtpI/XMXJeZQgPntClO8wyHjNum7I
+	atITA++AXzZ4pq3MdjrSHx/jB7m/tlRlfqvk48UbNEwH0v51sRCaNvJESrX1vvE7Mlr3
+	guargiaMJpedwG/RQgeyrEyGxHYYlpJcUvf7BuvMJtdIHY4OFJCi1zrRXc7yZsEwXDn+
+	lTN6gM+/aQxE3L5YI1WJlrUZ9DQbYOCEwQmHm+mgJXWHWmpyA6C+racQuX2zOmpvtvWL
+	LiHg==
+X-Gm-Message-State: AEkoouuw0XQgyrP9uCu5dKd6zJ0LMad3lcAwD763pi0CncB1TjxIkoioVPISH+ZDTaXa2w==
+X-Received: by 10.55.160.129 with SMTP id j123mr47906855qke.184.1471439905386; 
+	Wed, 17 Aug 2016 06:18:25 -0700 (PDT)
+Received: from monster.lab.ossystems.com.br ([177.127.4.56])
+	by smtp.gmail.com with ESMTPSA id
+	r187sm14680639qkc.49.2016.08.17.06.18.22
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 17 Aug 2016 06:18:24 -0700 (PDT)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 17 Aug 2016 10:17:41 -0300
+Message-Id: <1471439868-10118-1-git-send-email-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.1.4
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-python][PATCH 1/8] python-progress, python3-progress: Add recipe for version 1.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,62 +55,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Aug 2016 09:52:36 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 17 Aug 2016 13:18:26 -0000
 
-From: Kai Kang <kai.kang@windriver.com>
-
-The current version of ifenslave is 2.6_1.1.0 actually, then update to
-2.7 and change the version to 2.7 too.
-
-* update to SRC_URI to the debian git repo
-* the license is changed from GPLv2 to GPLv3
-* the program is rewrote with shell script
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- .../{ifenslave_1.1.0.bb => ifenslave_2.7.bb}       | 22 ++++++++++++----------
- 1 file changed, 12 insertions(+), 10 deletions(-)
- rename meta-networking/recipes-support/ifenslave/{ifenslave_1.1.0.bb => ifenslave_2.7.bb} (22%)
+ meta-python/recipes-devtools/python/python-progress.inc     | 9 +++++++++
+ meta-python/recipes-devtools/python/python-progress_1.2.bb  | 2 ++
+ meta-python/recipes-devtools/python/python3-progress_1.2.bb | 2 ++
+ 3 files changed, 13 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-progress.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-progress_1.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-progress_1.2.bb
 
-diff --git a/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb b/meta-networking/recipes-support/ifenslave/ifenslave_2.7.bb
-similarity index 22%
-rename from meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
-rename to meta-networking/recipes-support/ifenslave/ifenslave_2.7.bb
-index acc0864..7473b0d 100644
---- a/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
-+++ b/meta-networking/recipes-support/ifenslave/ifenslave_2.7.bb
-@@ -2,17 +2,19 @@ SUMMARY = "Configure network interfaces for parallel routing"
- HOMEPAGE = "http://www.linuxfoundation.org/collaborate/workgroups/networking/bonding"
- SECTION = "net"
- 
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://ifenslave.c;beginline=8;endline=12;md5=a9f0bd2324cdc1b36d1f44f0e643a62a"
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://debian/copyright;md5=6807ba81c0744ab50d735c94628c3f64"
- 
--SRC_URI = "http://ftp.debian.org/debian/pool/main/i/${BPN}-2.6/${BPN}-2.6_${PV}.orig.tar.gz"
--SRC_URI[md5sum] = "56126cd1013cefe0ce6f81613e677bdd"
--SRC_URI[sha256sum] = "7917bf34de80a2492eb225adf9168c83a4854ac8a008ed0fd5b3fd147ccd3041"
-+SRCREV = "400c490d52acb31f1064e1bf4fc9fcaf3791888f"
-+SRC_URI = "git://anonscm.debian.org/collab-maint/ifenslave.git"
+diff --git a/meta-python/recipes-devtools/python/python-progress.inc b/meta-python/recipes-devtools/python/python-progress.inc
+new file mode 100644
+index 0000000..80d0a58
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-progress.inc
+@@ -0,0 +1,9 @@
++SUMMARY = "Easy progress reporting for Python"
++HOMEPAGE = "http://github.com/verigak/progress/"
++LICENSE = "ISC"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=aef5566ac4fede9815eccf124c281317"
 +
-+S = "${WORKDIR}/git"
- 
--do_compile() {
--    ${CC} ifenslave.c -o ifenslave
--}
- do_install() {
--    install -d "${D}${sbindir}"
--    install -m 755 "${S}/ifenslave" "${D}${sbindir}/"
-+    install -d ${D}${sbindir}
-+    install -m 0755 ${S}/ifenslave ${D}${sbindir}/
++SRC_URI[md5sum] = "c1dbf49a41e80408d3874d976ba894cc"
++SRC_URI[sha256sum] = "5b6a50f9ac76820f619d7789b5354881c8c10060a64047e415868d8f503cc2eb"
 +
-+    install -m 0755 -D ${S}/debian/ifenslave.if-pre-up ${D}${sysconfdir}/network/if-pre-up.d/ifenslave
-+    install -m 0755 -D ${S}/debian/ifenslave.if-post-down ${D}${sysconfdir}/network/if-post-down.d/ifenslave
-+    install -m 0755 -D ${S}/debian/ifenslave.if-up ${D}${sysconfdir}/network/if-up.d/ifenslave
- }
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-progress_1.2.bb b/meta-python/recipes-devtools/python/python-progress_1.2.bb
+new file mode 100644
+index 0000000..8060862
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-progress_1.2.bb
+@@ -0,0 +1,2 @@
++inherit pypi setuptools
++require python-progress.inc
+diff --git a/meta-python/recipes-devtools/python/python3-progress_1.2.bb b/meta-python/recipes-devtools/python/python3-progress_1.2.bb
+new file mode 100644
+index 0000000..45e2642
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-progress_1.2.bb
+@@ -0,0 +1,2 @@
++inherit pypi setuptools3
++require python-progress.inc
 -- 
-2.9.3
+2.1.4
 
 
