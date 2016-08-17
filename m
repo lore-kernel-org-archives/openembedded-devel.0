@@ -1,24 +1,24 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 20DE0731FA
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 6CD716E5CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Aug 2016 08:32:05 +0000 (UTC)
+	Wed, 17 Aug 2016 09:52:35 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u7H8W6j4017442
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u7H9qaNO001503
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Aug 2016 01:32:06 -0700
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	Wed, 17 Aug 2016 02:52:36 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 17 Aug 2016 01:32:05 -0700
-From: Chen Qi <Qi.Chen@windriver.com>
+	14.3.248.2; Wed, 17 Aug 2016 02:52:36 -0700
+From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 17 Aug 2016 16:17:17 +0800
-Message-ID: <20160817081717.3193-1-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 2.8.3
+Date: Wed, 17 Aug 2016 17:51:35 +0800
+Message-ID: <20160817095135.12043-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.9.3
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] gperftools: upgrade to 2.5
+Subject: [meta-networking][PATCH] ifenslave: upgrade to 2.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,63 +31,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Aug 2016 08:32:06 -0000
+X-List-Received-Date: Wed, 17 Aug 2016 09:52:36 -0000
 Content-Type: text/plain
 
-Upgrade gperftools and set COMPATIBLE_HOST according to testing results
-for this version.
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+The current version of ifenslave is 2.6_1.1.0 actually, then update to
+2.7 and change the version to 2.7 too.
+
+* update to SRC_URI to the debian git repo
+* the license is changed from GPLv2 to GPLv3
+* the program is rewrote with shell script
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-oe/recipes-support/gperftools/gperftools_2.4.bb | 12 ------------
- meta-oe/recipes-support/gperftools/gperftools_2.5.bb | 18 ++++++++++++++++++
- 2 files changed, 18 insertions(+), 12 deletions(-)
- delete mode 100644 meta-oe/recipes-support/gperftools/gperftools_2.4.bb
- create mode 100644 meta-oe/recipes-support/gperftools/gperftools_2.5.bb
+ .../{ifenslave_1.1.0.bb => ifenslave_2.7.bb}       | 22 ++++++++++++----------
+ 1 file changed, 12 insertions(+), 10 deletions(-)
+ rename meta-networking/recipes-support/ifenslave/{ifenslave_1.1.0.bb => ifenslave_2.7.bb} (22%)
 
-diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.4.bb b/meta-oe/recipes-support/gperftools/gperftools_2.4.bb
-deleted file mode 100644
-index 3d8e2a9..0000000
---- a/meta-oe/recipes-support/gperftools/gperftools_2.4.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--SUMMARY = "Fast, multi-threaded malloc() and nifty performance analysis tools"
--HOMEPAGE = "http://code.google.com/p/gperftools/"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
--DEPENDS = "libunwind"
--
--SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/gperftools/gperftools-2.4.tar.gz/2171cea3bbe053036fb5d5d25176a160/gperftools-2.4.tar.gz"
--
--SRC_URI[md5sum] = "2171cea3bbe053036fb5d5d25176a160"
--SRC_URI[sha256sum] = "982a37226eb42f40714e26b8076815d5ea677a422fb52ff8bfca3704d9c30a2d"
--
--inherit autotools
-diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.5.bb b/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
-new file mode 100644
-index 0000000..1572d4c
---- /dev/null
-+++ b/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "Fast, multi-threaded malloc() and nifty performance analysis tools"
-+HOMEPAGE = "http://code.google.com/p/gperftools/"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
-+DEPENDS = "libunwind"
+diff --git a/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb b/meta-networking/recipes-support/ifenslave/ifenslave_2.7.bb
+similarity index 22%
+rename from meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
+rename to meta-networking/recipes-support/ifenslave/ifenslave_2.7.bb
+index acc0864..7473b0d 100644
+--- a/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
++++ b/meta-networking/recipes-support/ifenslave/ifenslave_2.7.bb
+@@ -2,17 +2,19 @@ SUMMARY = "Configure network interfaces for parallel routing"
+ HOMEPAGE = "http://www.linuxfoundation.org/collaborate/workgroups/networking/bonding"
+ SECTION = "net"
+ 
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://ifenslave.c;beginline=8;endline=12;md5=a9f0bd2324cdc1b36d1f44f0e643a62a"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://debian/copyright;md5=6807ba81c0744ab50d735c94628c3f64"
+ 
+-SRC_URI = "http://ftp.debian.org/debian/pool/main/i/${BPN}-2.6/${BPN}-2.6_${PV}.orig.tar.gz"
+-SRC_URI[md5sum] = "56126cd1013cefe0ce6f81613e677bdd"
+-SRC_URI[sha256sum] = "7917bf34de80a2492eb225adf9168c83a4854ac8a008ed0fd5b3fd147ccd3041"
++SRCREV = "400c490d52acb31f1064e1bf4fc9fcaf3791888f"
++SRC_URI = "git://anonscm.debian.org/collab-maint/ifenslave.git"
 +
-+SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/gperftools/gperftools-2.5.tar.gz/aa1eaf95dbe2c9828d0bd3a00f770f50/gperftools-2.5.tar.gz"
++S = "${WORKDIR}/git"
+ 
+-do_compile() {
+-    ${CC} ifenslave.c -o ifenslave
+-}
+ do_install() {
+-    install -d "${D}${sbindir}"
+-    install -m 755 "${S}/ifenslave" "${D}${sbindir}/"
++    install -d ${D}${sbindir}
++    install -m 0755 ${S}/ifenslave ${D}${sbindir}/
 +
-+SRC_URI[md5sum] = "aa1eaf95dbe2c9828d0bd3a00f770f50"
-+SRC_URI[sha256sum] = "6fa2748f1acdf44d750253e160cf6e2e72571329b42e563b455bde09e9e85173"
-+
-+inherit autotools
-+
-+# On mips, we have the following error.
-+#   do_page_fault(): sending SIGSEGV to ls for invalid read access from 00000008
-+#   Segmentation fault (core dumped)
-+# On aarch64, system hangs when using libtcmalloc.so.
-+COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64|arm).*-linux*"
++    install -m 0755 -D ${S}/debian/ifenslave.if-pre-up ${D}${sysconfdir}/network/if-pre-up.d/ifenslave
++    install -m 0755 -D ${S}/debian/ifenslave.if-post-down ${D}${sysconfdir}/network/if-post-down.d/ifenslave
++    install -m 0755 -D ${S}/debian/ifenslave.if-up ${D}${sysconfdir}/network/if-up.d/ifenslave
+ }
 -- 
-2.8.3
+2.9.3
 
 
