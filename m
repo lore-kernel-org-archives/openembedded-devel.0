@@ -1,35 +1,24 @@
-Return-Path: <jeremy.rosen@smile.fr>
-Received: from idris.smile.fr (idris.smile.fr [91.216.209.19])
-	by mail.openembedded.org (Postfix) with ESMTP id 65AD26013D
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 20DE0731FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Aug 2016 07:33:42 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by idris.smile.fr (Postfix) with ESMTP id 099AB1EE0854
+	Wed, 17 Aug 2016 08:32:05 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u7H8W6j4017442
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Aug 2016 09:33:43 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at smile.fr
-Received: from idris.smile.fr ([127.0.0.1])
-	by localhost (bluemind-mta.prod.vitry.intranet [127.0.0.1])
-	(amavisd-new, port 10024) with ESMTP id 7poKQz8zhnFr
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Aug 2016 09:33:42 +0200 (CEST)
-Received: from [10.9.18.224] (229.29.205.77.rev.sfr.net [77.205.29.229])
-	by idris.smile.fr (Postfix) with ESMTPSA id C7B3F1EE0761
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Aug 2016 09:33:42 +0200 (CEST)
-To: openembedded-devel@lists.openembedded.org
-References: <1471343516-6946-1-git-send-email-jeremy.rosen@smile.fr>
-	<CAJTo0LYKYph9e_JaLVbFbByCCwk9a2zmHVLAMEoed7h5rGeArQ@mail.gmail.com>
-	<fa2fc853-b871-1ad1-a1cc-408fed9967bf@smile.fr>
-	<CAJTo0LYFf-UaFB4VyCRv-0JPb+aBA_ZzVk+UCEB_GG65h3sqkw@mail.gmail.com>
-From: =?UTF-8?B?SsOpcsOpbXkgUm9zZW4=?= <jeremy.rosen@smile.fr>
-Message-ID: <5bbf16c7-38e1-0478-d0f4-e6457783e2a8@smile.fr>
-Date: Wed, 17 Aug 2016 09:33:42 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Firefox/45.0 Icedove/45.2.0
+	Wed, 17 Aug 2016 01:32:06 -0700
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 17 Aug 2016 01:32:05 -0700
+From: Chen Qi <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 17 Aug 2016 16:17:17 +0800
+Message-ID: <20160817081717.3193-1-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.8.3
 MIME-Version: 1.0
-In-Reply-To: <CAJTo0LYFf-UaFB4VyCRv-0JPb+aBA_ZzVk+UCEB_GG65h3sqkw@mail.gmail.com>
-Subject: Re: [PATCH] [jethro] fix gcc-cross when BUILD_* are set
+Subject: [meta-oe][PATCH] gperftools: upgrade to 2.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,27 +31,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Aug 2016 07:33:44 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 17 Aug 2016 08:32:06 -0000
+Content-Type: text/plain
 
-yeah, I added a directory at the beginning of my PATH and had a link 
-gcc->/bin/false and mygcc -> /usr/bin/gcc there... that triggered some 
-more cases that I hadn't seen
+Upgrade gperftools and set COMPATIBLE_HOST according to testing results
+for this version.
 
-expect a patch serie at some point in the future
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ meta-oe/recipes-support/gperftools/gperftools_2.4.bb | 12 ------------
+ meta-oe/recipes-support/gperftools/gperftools_2.5.bb | 18 ++++++++++++++++++
+ 2 files changed, 18 insertions(+), 12 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/gperftools/gperftools_2.4.bb
+ create mode 100644 meta-oe/recipes-support/gperftools/gperftools_2.5.bb
 
-
-On 16/08/2016 18:40, Burton, Ross wrote:
-> On 16 August 2016 at 14:13, Jérémy Rosen <jeremy.rosen@smile.fr> wrote:
->
->> Master build correctly with gcc-6 and doesn't trigger the bug. i'll try to
->> trick my debian to trigger the bug...
->>
-> I almost did this on Friday but had some more important builds to run:
-> basically chmod -x /usr/bin/gcc /usr/bin/g++ /usr/bin/cpp and anything that
-> doesn't respect BUILD_* will fail fairly obviously. :)
->
-> Ross
+diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.4.bb b/meta-oe/recipes-support/gperftools/gperftools_2.4.bb
+deleted file mode 100644
+index 3d8e2a9..0000000
+--- a/meta-oe/recipes-support/gperftools/gperftools_2.4.bb
++++ /dev/null
+@@ -1,12 +0,0 @@
+-SUMMARY = "Fast, multi-threaded malloc() and nifty performance analysis tools"
+-HOMEPAGE = "http://code.google.com/p/gperftools/"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
+-DEPENDS = "libunwind"
+-
+-SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/gperftools/gperftools-2.4.tar.gz/2171cea3bbe053036fb5d5d25176a160/gperftools-2.4.tar.gz"
+-
+-SRC_URI[md5sum] = "2171cea3bbe053036fb5d5d25176a160"
+-SRC_URI[sha256sum] = "982a37226eb42f40714e26b8076815d5ea677a422fb52ff8bfca3704d9c30a2d"
+-
+-inherit autotools
+diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.5.bb b/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
+new file mode 100644
+index 0000000..1572d4c
+--- /dev/null
++++ b/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Fast, multi-threaded malloc() and nifty performance analysis tools"
++HOMEPAGE = "http://code.google.com/p/gperftools/"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
++DEPENDS = "libunwind"
++
++SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/gperftools/gperftools-2.5.tar.gz/aa1eaf95dbe2c9828d0bd3a00f770f50/gperftools-2.5.tar.gz"
++
++SRC_URI[md5sum] = "aa1eaf95dbe2c9828d0bd3a00f770f50"
++SRC_URI[sha256sum] = "6fa2748f1acdf44d750253e160cf6e2e72571329b42e563b455bde09e9e85173"
++
++inherit autotools
++
++# On mips, we have the following error.
++#   do_page_fault(): sending SIGSEGV to ls for invalid read access from 00000008
++#   Segmentation fault (core dumped)
++# On aarch64, system hangs when using libtcmalloc.so.
++COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64|arm).*-linux*"
+-- 
+2.8.3
 
 
