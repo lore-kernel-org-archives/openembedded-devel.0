@@ -1,51 +1,51 @@
 Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C68C73285
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id E5B3B73281
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Aug 2016 13:18:45 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id n66so7408131qkf.1
+	Wed, 17 Aug 2016 13:18:48 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id x189so9444809qkd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Aug 2016 06:18:46 -0700 (PDT)
+	Wed, 17 Aug 2016 06:18:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:organization; bh=cUdSR6eUYE3fnRQ6f+1NC/kj+rgdZI6vtwDTuIAeYDs=;
-	b=sWXSfYvElZgOtHkej8rFL/vVEHp8F2PVcmS9hJtGwD3OAX4Z32h/4nouCPu1T9R1Ag
-	IDnU0HYdOvEmpXvhcOd2UkJV9eMIx5XLIBknYeObE8d5FQzKpCENd4Y3luK5KFofj91p
-	GZMzFS8HcsOAIcsX6anFjIk5dP2cfV7Ot9AU5aop9X+j3XkSCXles/5juUZ+WvJjF5EK
-	njfY/PWUNVcQSNTGSoFTlOIuEeQyrUbmfY+nGkRrBrmz4ZkbX/PG4p6M9don16G/orEa
-	+7jfk7BDWLxO8AJ//lWvMmNXH+SBZzHB9T+9mHHZdg1tVAx1jXVxKF9zAcihnZeEmSSR
-	d6dA==
+	:organization; bh=LzMnfyguEwpcd3i1A2XBFcGrZauwbwPL5oD0wTYcixk=;
+	b=KyvwYFYGe6uSHf9ur9Do2CooPhJyIRbOGL0bKUfhix0gKe4yP1aQiSXZIcBR/1Dc46
+	wNIr2gmBfC87yHInNSS0GPXciWFZck1EOoLelmrnabZQGk2jIZV+yG/N+J9kltM1Ohda
+	I0iViuWDwFoPzlD6rPbaAt13Kl3VqBmVocgeYTLk+8Q0Ouu2uSAuGtVz98tzftGKPHcx
+	MafLqm/RiAvPkYIgROPR+Mj6GFSPHX7CzdTxGBTepjIY57l3yXUy9nClTe/HQp5Z/N+2
+	0XydObuBEZjDlTbdYgHT8qh4C6SPHi6xYZIlZRx2ilbzaGRuw/9PkWN216U4Bz+lCcwb
+	gIGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:organization;
-	bh=cUdSR6eUYE3fnRQ6f+1NC/kj+rgdZI6vtwDTuIAeYDs=;
-	b=XlKLl0VWgxXEfX25y8d8C5P6e4+sddSnYjth+DOIbgYKZoifXmmwQ+PRS0ItbFPo/B
-	cF0jQdrYpvHDZP8aeobVGhGI2F6ehvtCCz4TJyvQe3Z4ZdN7FJHZ71MjgjPkLqMJL2W8
-	EI5KX8WjbMLmmCL/jf0mo64rR5jvPwtBSsumqZ+4hUA1MZi0aXUCzqDY+Rwq/RvclE8I
-	Qu1DZoe4DvG5Fo5nRS01s6qJcDwjnUpEAdIdaxIXTqNKUAmQk1FnEdP9MSr5ObaCUj0X
-	wBxErQpMcBI6kr6ipYFaGvEa+v/+/+OoZOHhYcdVMHJobnhWNcZ2R+Rx1yo5Evt/4HxX
-	P1yw==
-X-Gm-Message-State: AEkoouvqu+22BIk5FJLylfzHvWtCQEYcup87PDOS9V4Tz1BcOEAlQkmcfVVZLZR11At8WA==
-X-Received: by 10.55.53.6 with SMTP id c6mr2204377qka.141.1471439926283;
-	Wed, 17 Aug 2016 06:18:46 -0700 (PDT)
+	bh=LzMnfyguEwpcd3i1A2XBFcGrZauwbwPL5oD0wTYcixk=;
+	b=F2VuG8fXdZOyyyn2xrxQ7qt7Ls2nYjaNe/GGQCmLZXyRPPhYqSwEEGUNNprtBGMv8A
+	7O/mNKtGXLbI+DSWPUTy81ubC2cE9Av4UOEEPTyBZiaFd8LFuEskZBNOUmtc7amQjYdf
+	IQKP6k1X95KrIlj2QQZ3Ms0LThit0HT53bNPVde6CZJ/hmZvZFaox5P2I0TW+qDH08qg
+	UHxZu2ivIMXwQccpylPVLtjRPI8fqSeAH/JxtzjtKhXQbm2J+muKo5Sv4zAORkotn2a1
+	HHpCb8nq5KIDFiHyNZuK4ktRFNBeUKGLh1UEW9wgLBIHi6Dgiekz9x50bh+FYtiXwFf6
+	uvBA==
+X-Gm-Message-State: AEkoout1rl/Xz86qg+Lm5rBRxCAUjEKs+KjxP22vIL9sFI31oIf93ZpEqS7AQeNF9NDaTw==
+X-Received: by 10.55.45.131 with SMTP id t125mr46050315qkh.179.1471439929457; 
+	Wed, 17 Aug 2016 06:18:49 -0700 (PDT)
 Received: from monster.lab.ossystems.com.br ([177.127.4.56])
 	by smtp.gmail.com with ESMTPSA id
-	r187sm14680639qkc.49.2016.08.17.06.18.43
+	r187sm14680639qkc.49.2016.08.17.06.18.46
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 17 Aug 2016 06:18:45 -0700 (PDT)
+	Wed, 17 Aug 2016 06:18:48 -0700 (PDT)
 From: Fabio Berton <fabio.berton@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Aug 2016 10:17:47 -0300
-Message-Id: <1471439868-10118-7-git-send-email-fabio.berton@ossystems.com.br>
+Date: Wed, 17 Aug 2016 10:17:48 -0300
+Message-Id: <1471439868-10118-8-git-send-email-fabio.berton@ossystems.com.br>
 X-Mailer: git-send-email 2.1.4
 In-Reply-To: <1471439868-10118-1-git-send-email-fabio.berton@ossystems.com.br>
 References: <1471439868-10118-1-git-send-email-fabio.berton@ossystems.com.br>
 Organization: O.S. Systems Software LTDA.
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-python][PATCH 7/8] python-strict-rfc3339, python3-strict-rfc3339: Add recipe for version 0.7
+Subject: [meta-python][PATCH 8/8] python-jsonschema, python3-jsonschema: Add recipe for version 2.5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,49 +58,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Aug 2016 13:18:45 -0000
+X-List-Received-Date: Wed, 17 Aug 2016 13:18:50 -0000
 
 Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- meta-python/recipes-devtools/python/python-strict-rfc3339.inc     | 8 ++++++++
- meta-python/recipes-devtools/python/python-strict-rfc3339_0.7.bb  | 2 ++
- meta-python/recipes-devtools/python/python3-strict-rfc3339_0.7.bb | 2 ++
- 3 files changed, 12 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-strict-rfc3339.inc
- create mode 100644 meta-python/recipes-devtools/python/python-strict-rfc3339_0.7.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-strict-rfc3339_0.7.bb
+ .../recipes-devtools/python/python-jsonschema.inc  | 26 ++++++++++++++++++++++
+ .../python/python-jsonschema_2.5.1.bb              |  8 +++++++
+ .../python/python3-jsonschema_2.5.1.bb             |  6 +++++
+ 3 files changed, 40 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-jsonschema.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-jsonschema_2.5.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-jsonschema_2.5.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-strict-rfc3339.inc b/meta-python/recipes-devtools/python/python-strict-rfc3339.inc
+diff --git a/meta-python/recipes-devtools/python/python-jsonschema.inc b/meta-python/recipes-devtools/python/python-jsonschema.inc
 new file mode 100644
-index 0000000..dca9ea9
+index 0000000..3466457
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-strict-rfc3339.inc
-@@ -0,0 +1,8 @@
-+SUMMARY = "Strict, simple, lightweight RFC3339 function.s"
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8f0e2cd40e05189ec81232da84bd6e1a"
++++ b/meta-python/recipes-devtools/python/python-jsonschema.inc
+@@ -0,0 +1,26 @@
++SUMMARY = "An implementation of JSON Schema validation for Python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=7a60a81c146ec25599a3e1dabb8610a8"
 +
-+SRC_URI[md5sum] = "4d9b635b4df885bc37bc1189d66c9abc"
-+SRC_URI[sha256sum] = "5cad17bedfc3af57b399db0fed32771f18fc54bbd917e85546088607ac5e1277"
++SRC_URI[md5sum] = "374e848fdb69a3ce8b7e778b47c30640"
++SRC_URI[sha256sum] = "36673ac378feed3daa5956276a829699056523d7961027911f064b52255ead41"
++
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-core \
++    ${PYTHON_PN}-io \
++    ${PYTHON_PN}-json \
++    ${PYTHON_PN}-lang \
++    ${PYTHON_PN}-netclient \
++    ${PYTHON_PN}-numbers \
++    ${PYTHON_PN}-pkgutil \
++    ${PYTHON_PN}-pprint \
++    ${PYTHON_PN}-re \
++    ${PYTHON_PN}-rfc3987 \
++    ${PYTHON_PN}-shell \
++    ${PYTHON_PN}-strict-rfc3339 \
++    ${PYTHON_PN}-subprocess \
++    ${PYTHON_PN}-textutils \
++    ${PYTHON_PN}-unittest \
++"
 +
 +BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-strict-rfc3339_0.7.bb b/meta-python/recipes-devtools/python/python-strict-rfc3339_0.7.bb
+diff --git a/meta-python/recipes-devtools/python/python-jsonschema_2.5.1.bb b/meta-python/recipes-devtools/python/python-jsonschema_2.5.1.bb
 new file mode 100644
-index 0000000..b01ea99
+index 0000000..3bb5220
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-strict-rfc3339_0.7.bb
-@@ -0,0 +1,2 @@
++++ b/meta-python/recipes-devtools/python/python-jsonschema_2.5.1.bb
+@@ -0,0 +1,8 @@
 +inherit pypi setuptools
-+require python-strict-rfc3339.inc
-diff --git a/meta-python/recipes-devtools/python/python3-strict-rfc3339_0.7.bb b/meta-python/recipes-devtools/python/python3-strict-rfc3339_0.7.bb
++require python-jsonschema.inc
++
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-argparse \
++    ${PYTHON_PN}-contextlib \
++    ${PYTHON_PN}-functools32 \
++"
+diff --git a/meta-python/recipes-devtools/python/python3-jsonschema_2.5.1.bb b/meta-python/recipes-devtools/python/python3-jsonschema_2.5.1.bb
 new file mode 100644
-index 0000000..9e37052
+index 0000000..5aaee68
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-strict-rfc3339_0.7.bb
-@@ -0,0 +1,2 @@
++++ b/meta-python/recipes-devtools/python/python3-jsonschema_2.5.1.bb
+@@ -0,0 +1,6 @@
 +inherit pypi setuptools3
-+require python-strict-rfc3339.inc
++require python-jsonschema.inc
++
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-misc \
++"
 -- 
 2.1.4
 
