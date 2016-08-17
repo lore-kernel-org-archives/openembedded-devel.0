@@ -1,51 +1,31 @@
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id E5B3B73281
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 4EC8E75CF1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Aug 2016 13:18:48 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id x189so9444809qkd.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Aug 2016 06:18:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:organization; bh=LzMnfyguEwpcd3i1A2XBFcGrZauwbwPL5oD0wTYcixk=;
-	b=KyvwYFYGe6uSHf9ur9Do2CooPhJyIRbOGL0bKUfhix0gKe4yP1aQiSXZIcBR/1Dc46
-	wNIr2gmBfC87yHInNSS0GPXciWFZck1EOoLelmrnabZQGk2jIZV+yG/N+J9kltM1Ohda
-	I0iViuWDwFoPzlD6rPbaAt13Kl3VqBmVocgeYTLk+8Q0Ouu2uSAuGtVz98tzftGKPHcx
-	MafLqm/RiAvPkYIgROPR+Mj6GFSPHX7CzdTxGBTepjIY57l3yXUy9nClTe/HQp5Z/N+2
-	0XydObuBEZjDlTbdYgHT8qh4C6SPHi6xYZIlZRx2ilbzaGRuw/9PkWN216U4Bz+lCcwb
-	gIGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:organization;
-	bh=LzMnfyguEwpcd3i1A2XBFcGrZauwbwPL5oD0wTYcixk=;
-	b=F2VuG8fXdZOyyyn2xrxQ7qt7Ls2nYjaNe/GGQCmLZXyRPPhYqSwEEGUNNprtBGMv8A
-	7O/mNKtGXLbI+DSWPUTy81ubC2cE9Av4UOEEPTyBZiaFd8LFuEskZBNOUmtc7amQjYdf
-	IQKP6k1X95KrIlj2QQZ3Ms0LThit0HT53bNPVde6CZJ/hmZvZFaox5P2I0TW+qDH08qg
-	UHxZu2ivIMXwQccpylPVLtjRPI8fqSeAH/JxtzjtKhXQbm2J+muKo5Sv4zAORkotn2a1
-	HHpCb8nq5KIDFiHyNZuK4ktRFNBeUKGLh1UEW9wgLBIHi6Dgiekz9x50bh+FYtiXwFf6
-	uvBA==
-X-Gm-Message-State: AEkoout1rl/Xz86qg+Lm5rBRxCAUjEKs+KjxP22vIL9sFI31oIf93ZpEqS7AQeNF9NDaTw==
-X-Received: by 10.55.45.131 with SMTP id t125mr46050315qkh.179.1471439929457; 
-	Wed, 17 Aug 2016 06:18:49 -0700 (PDT)
-Received: from monster.lab.ossystems.com.br ([177.127.4.56])
-	by smtp.gmail.com with ESMTPSA id
-	r187sm14680639qkc.49.2016.08.17.06.18.46
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 17 Aug 2016 06:18:48 -0700 (PDT)
-From: Fabio Berton <fabio.berton@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Aug 2016 10:17:48 -0300
-Message-Id: <1471439868-10118-8-git-send-email-fabio.berton@ossystems.com.br>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1471439868-10118-1-git-send-email-fabio.berton@ossystems.com.br>
-References: <1471439868-10118-1-git-send-email-fabio.berton@ossystems.com.br>
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-python][PATCH 8/8] python-jsonschema, python3-jsonschema: Add recipe for version 2.5.1
+	Wed, 17 Aug 2016 13:54:23 +0000 (UTC)
+Received: from svr-orw-fem-02x.mgc.mentorg.com ([147.34.96.206]
+	helo=SVR-ORW-FEM-02.mgc.mentorg.com)
+	by relay1.mentorg.com with esmtp 
+	id 1ba1IV-000514-6R from Joe_MacDonald@mentor.com ;
+	Wed, 17 Aug 2016 06:54:23 -0700
+Received: from burninator (147.34.91.1) by svr-orw-fem-02.mgc.mentorg.com
+	(147.34.96.168) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 17 Aug 2016 06:54:23 -0700
+Received: by burninator (Postfix, from userid 1000)	id 0146B580578; Wed, 17
+	Aug 2016 09:54:20 -0400 (EDT)
+Date: Wed, 17 Aug 2016 09:54:20 -0400
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: <yue.tao@windriver.com>, <yi.zhao@windriver.com>
+Message-ID: <20160817135419.GA21469@mentor.com>
+References: <1470643473-17129-1-git-send-email-yi.zhao@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <1470643473-17129-1-git-send-email-yi.zhao@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] squid: fix configure host contamination
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,78 +38,152 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Aug 2016 13:18:50 -0000
+X-List-Received-Date: Wed, 17 Aug 2016 13:54:23 -0000
+X-Groupsio-MsgNum: 62690
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="7AUc2qLy4jB3hD7Z"
+Content-Disposition: inline
 
-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
- .../recipes-devtools/python/python-jsonschema.inc  | 26 ++++++++++++++++++++++
- .../python/python-jsonschema_2.5.1.bb              |  8 +++++++
- .../python/python3-jsonschema_2.5.1.bb             |  6 +++++
- 3 files changed, 40 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-jsonschema.inc
- create mode 100644 meta-python/recipes-devtools/python/python-jsonschema_2.5.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-jsonschema_2.5.1.bb
+--7AUc2qLy4jB3hD7Z
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-python/recipes-devtools/python/python-jsonschema.inc b/meta-python/recipes-devtools/python/python-jsonschema.inc
-new file mode 100644
-index 0000000..3466457
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-jsonschema.inc
-@@ -0,0 +1,26 @@
-+SUMMARY = "An implementation of JSON Schema validation for Python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=7a60a81c146ec25599a3e1dabb8610a8"
-+
-+SRC_URI[md5sum] = "374e848fdb69a3ce8b7e778b47c30640"
-+SRC_URI[sha256sum] = "36673ac378feed3daa5956276a829699056523d7961027911f064b52255ead41"
-+
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-core \
-+    ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-json \
-+    ${PYTHON_PN}-lang \
-+    ${PYTHON_PN}-netclient \
-+    ${PYTHON_PN}-numbers \
-+    ${PYTHON_PN}-pkgutil \
-+    ${PYTHON_PN}-pprint \
-+    ${PYTHON_PN}-re \
-+    ${PYTHON_PN}-rfc3987 \
-+    ${PYTHON_PN}-shell \
-+    ${PYTHON_PN}-strict-rfc3339 \
-+    ${PYTHON_PN}-subprocess \
-+    ${PYTHON_PN}-textutils \
-+    ${PYTHON_PN}-unittest \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-jsonschema_2.5.1.bb b/meta-python/recipes-devtools/python/python-jsonschema_2.5.1.bb
-new file mode 100644
-index 0000000..3bb5220
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-jsonschema_2.5.1.bb
-@@ -0,0 +1,8 @@
-+inherit pypi setuptools
-+require python-jsonschema.inc
-+
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-argparse \
-+    ${PYTHON_PN}-contextlib \
-+    ${PYTHON_PN}-functools32 \
-+"
-diff --git a/meta-python/recipes-devtools/python/python3-jsonschema_2.5.1.bb b/meta-python/recipes-devtools/python/python3-jsonschema_2.5.1.bb
-new file mode 100644
-index 0000000..5aaee68
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-jsonschema_2.5.1.bb
-@@ -0,0 +1,6 @@
-+inherit pypi setuptools3
-+require python-jsonschema.inc
-+
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-misc \
-+"
--- 
-2.1.4
+Hi Yi,
 
+Please include a signed-off-by and upstream-status line for patches you
+contribute.
 
+http://openembedded.org/wiki/Commit_Patch_Message_Guidelines#Patch_Header_R=
+ecommendations
+
+This patch seems like it's probably suitable for submitting upstream,
+but I'd be content to call it inappropriate-embedded specific, if you
+don't want to send it upstream.
+
+-J.
+
+[[oe] [meta-networking][PATCH] squid: fix configure host contamination] On =
+16.08.08 (Mon 16:04) Yi Zhao wrote:
+
+> From: Yue Tao <yue.tao@windriver.com>
+>=20
+> When configuring squid with --enable-esi option,
+> the following error was observed:
+> [snip]
+> checking libxml/parser.h usability... no
+> checking libxml/parser.h presence... no
+> checking for libxml/parser.h... no
+> configure: Failed to find libxml2 header file libxml/parser.h
+> [snip]
+> ERROR: This autoconf log indicates errors, it looked at host include
+> and/or library paths while determining system capabilities.
+> [snip]
+>=20
+> It tried to search libxml header file in host path. Set the SYSROOT
+> to avoid this host contamination.
+>=20
+> Signed-off-by: Yue Tao <yue.tao@windriver.com>
+> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+> ---
+>  .../squid/files/set_sysroot_patch.patch            | 26 ++++++++++++++++=
+++++++
+>  .../recipes-daemons/squid/squid_3.5.20.bb          |  6 +++++
+>  2 files changed, 32 insertions(+)
+>  create mode 100644 meta-networking/recipes-daemons/squid/files/set_sysro=
+ot_patch.patch
+>=20
+> diff --git a/meta-networking/recipes-daemons/squid/files/set_sysroot_patc=
+h.patch b/meta-networking/recipes-daemons/squid/files/set_sysroot_patch.pat=
+ch
+> new file mode 100644
+> index 0000000..68733f9
+> --- /dev/null
+> +++ b/meta-networking/recipes-daemons/squid/files/set_sysroot_patch.patch
+> @@ -0,0 +1,26 @@
+> +diff --git a/configure.ac.old b/configure.ac
+> +index 54eda73..874f48e 100644
+> +--- a/configure.ac.old
+> ++++ b/configure.ac
+> +@@ -964,15 +964,15 @@ if test "x$squid_opt_use_esi" =3D "xyes" -a "x$wit=
+h_libxml2" !=3D "xno" ; then
+> +   dnl Find the main header and include path...
+> +   AC_CACHE_CHECK([location of libxml2 include files], [ac_cv_libxml2_in=
+clude], [
+> +     AC_CHECK_HEADERS([libxml/parser.h], [], [
+> +-      AC_MSG_NOTICE([Testing in /usr/include/libxml2])
+> ++      AC_MSG_NOTICE([Testing in $SYSROOT/usr/include/libxml2])
+> +       SAVED_CPPFLAGS=3D"$CPPFLAGS"
+> +-      CPPFLAGS=3D"-I/usr/include/libxml2 $CPPFLAGS"
+> ++      CPPFLAGS=3D"-I$SYSROOT/usr/include/libxml2 $CPPFLAGS"
+> +       unset ac_cv_header_libxml_parser_h
+> +-      AC_CHECK_HEADERS([libxml/parser.h], [ac_cv_libxml2_include=3D"-I/=
+usr/include/libxml2"], [
+> +-        AC_MSG_NOTICE([Testing in /usr/local/include/libxml2])
+> +-        CPPFLAGS=3D"-I/usr/local/include/libxml2 $SAVED_CPPFLAGS"
+> ++      AC_CHECK_HEADERS([libxml/parser.h], [ac_cv_libxml2_include=3D"-I$=
+SYSROOT/usr/include/libxml2"], [
+> ++        AC_MSG_NOTICE([Testing in $SYSROOT/usr/local/include/libxml2])
+> ++        CPPFLAGS=3D"-I$SYSROOT/usr/local/include/libxml2 $SAVED_CPPFLAG=
+S"
+> +         unset ac_cv_header_libxml_parser_h
+> +-        AC_CHECK_HEADERS([libxml/parser.h], [ac_cv_libxml2_include=3D"-=
+I/usr/local/include/libxml2"], [
+> ++        AC_CHECK_HEADERS([libxml/parser.h], [ac_cv_libxml2_include=3D"-=
+I$SYSROOT/usr/local/include/libxml2"], [
+> +           AC_MSG_NOTICE([Failed to find libxml2 header file libxml/pars=
+er.h])
+> +         ])
+> +       ])
+> diff --git a/meta-networking/recipes-daemons/squid/squid_3.5.20.bb b/meta=
+-networking/recipes-daemons/squid/squid_3.5.20.bb
+> index f26aebe..3ce195a 100644
+> --- a/meta-networking/recipes-daemons/squid/squid_3.5.20.bb
+> +++ b/meta-networking/recipes-daemons/squid/squid_3.5.20.bb
+> @@ -19,6 +19,7 @@ SRC_URI =3D "http://www.squid-cache.org/Versions/v${MAJ=
+_VER}/${MIN_VER}/${BPN}-${P
+>             file://squid-use-serial-tests-config-needed-by-ptest.patch \
+>             file://run-ptest \
+>             file://volatiles.03_squid \
+> +           file://set_sysroot_patch.patch \
+>  "
+> =20
+>  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dc492e2d6d32ec5c1aad0e0609a141=
+ce9 \
+> @@ -48,6 +49,11 @@ EXTRA_OECONF +=3D "--with-default-user=3Dsquid --enabl=
+e-auth-basic=3D'${BASIC_AUTH}'"
+>  export BUILDCXXFLAGS=3D"${BUILD_CXXFLAGS}"
+> =20
+>  TESTDIR =3D "test-suite"
+> +
+> +do_configure_prepend() {
+> +    export SYSROOT=3D$PKG_CONFIG_SYSROOT_DIR
+> +}
+> +
+>  do_compile_ptest() {
+>      oe_runmake -C ${TESTDIR} buildtest-TESTS
+>  }
+> --=20
+> 2.7.4
+>=20
+--=20
+-Joe MacDonald.
+:wq
+
+--7AUc2qLy4jB3hD7Z
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJXtGyIAAoJEEn8ffcsOfaWaokH/1/IsoppCHyNvlS/gvy0fJIE
+lnoPMqWXWQ6YMvBlSYo3En8UsuctMBkwLwty9bqRPRzvXwHU+/8/Vt0lFumdZ7Ux
+saPhQ1MiIEvTDReg8Wk+ksrWQdGMRn9+umws7+dLmhFJd0oul20Ss/KEwRfZ42jL
+Zz1mppJYBb8Gto1fJ0an6F9Qqp9LXIK/F7Sw/wOzedYh2OCyTPVDe4RcVfV8d29u
+dcKQCYXa5X6lKwdZlZM/0jogXWS19zJN7FJ/qYz/fmDK9Rgi0xkT/EUfcFcAZVRt
+yt3GW1tUA9T6QPJAD+47yEb0cjoZ3bYmeJAbRv+yXfCUdmBgwEg27lsklC+e6+A=
+=uykF
+-----END PGP SIGNATURE-----
+
+--7AUc2qLy4jB3hD7Z--
