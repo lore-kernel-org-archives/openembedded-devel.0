@@ -1,25 +1,46 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id D59C4760AC
+Return-Path: <fahad.usman@gmail.com>
+Received: from mail-yw0-f195.google.com (mail-yw0-f195.google.com
+	[209.85.161.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 7227B6FFEF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 12:25:33 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga101.jf.intel.com with ESMTP; 18 Aug 2016 05:25:34 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.28,539,1464678000"; d="scan'208";a="750410772"
-Received: from mbabyjoh-desk.fi.intel.com (HELO
-	mbabyjoh-desk.ger.corp.intel.com) ([10.237.72.71])
-	by FMSMGA003.fm.intel.com with ESMTP; 18 Aug 2016 05:25:32 -0700
-Date: Thu, 18 Aug 2016 15:26:55 +0300
-From: "Maxin B. John" <maxin.john@intel.com>
+	Thu, 18 Aug 2016 13:06:54 +0000 (UTC)
+Received: by mail-yw0-f195.google.com with SMTP id j12so1389921ywb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Aug 2016 06:06:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=TX3qdOfm3+wAWuM9tCvtqSPZS/RGKTkZVKuQFiAnWgU=;
+	b=ONT48H31yO+eQcUkfeMeCSfDz9Lk1pX1WgOPF3SmcBwbGHFVcZWAMefEHZStzkdTeb
+	i/wSPwIW0CdM8+dBhBJ1C+ghmOo/LkcVUu1FTFnG405jV8d3yiemn+RzxGoHI2olKjZd
+	xIv15FDhsy/E8b//DfDeWVMidATZrNtnFxiUN0gyG065ZHMaaVc8WHYSYUeeCtHu6688
+	OX16hGqCeqohYkoNjxqQ3uU9TmvnAxE2DTVtmYGzoyenWqLTgk8GXeUsET5WRxWgKWSD
+	EGe6uTqh0raue+6ycakDvi18Y4+HYbFk1+Xz8S445a07MXuV3kklmHo+XqRYrRA7IcbO
+	WgCw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=TX3qdOfm3+wAWuM9tCvtqSPZS/RGKTkZVKuQFiAnWgU=;
+	b=SW8TH4dx+VtonXDV/GcUjjYRKs6zr0XwDwJmRKqWhigCKxJg9jr9hiH+pEupX5W29T
+	rZg/vno/sGHldd9qGMTXhX/17cKHxH+k7wq8LkiNFXsc/Ednm0+IRfH5dssyyo31DYmk
+	eK5EdhiqBytc7+KIQUhuYHLEprciv55X1uVTjqU4kj1EkioXOMjn9yCipTGrIQDWSY5d
+	NmoXAtAMHzn7+7WVB4p5Cm0SIUKch2AFw0uO6I1w24tse9D8SsCZHAcK6+PzyvSfaRhw
+	gMT6KSeLQJm+CVrWjK8ZMqMCruAzNqmiOHZLSWqumN6SzSpDTn2AlFE7Vu2r/wgbFLFv
+	G1JA==
+X-Gm-Message-State: AEkoout/JM6kQzatz5pN2kCX/YbwqclE2hBm7qI0ZJiWAG7qoYl5JrXGq8+eqjYfUD2CjA==
+X-Received: by 10.129.84.212 with SMTP id i203mr1609550ywb.201.1471525615334; 
+	Thu, 18 Aug 2016 06:06:55 -0700 (PDT)
+Received: from svr-pkl-eng-06.pkl.mentorg.com ([110.93.212.98])
+	by smtp.gmail.com with ESMTPSA id
+	s126sm876816yws.13.2016.08.18.06.06.52
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 18 Aug 2016 06:06:53 -0700 (PDT)
+Sender: Fahad Usman <fahad.usman@gmail.com>
+From: Fahad Usman <fahad_usman@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160818122655.GB16863@mbabyjoh-desk.ger.corp.intel.com>
-References: <1471253780-28526-1-git-send-email-erkka.kaaria@intel.com>
-	<1471253780-28526-2-git-send-email-erkka.kaaria@intel.com>
-MIME-Version: 1.0
-In-Reply-To: <1471253780-28526-2-git-send-email-erkka.kaaria@intel.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Re: [meta-java][PATCH v2 2/2] openjdk-8-release-102b14.inc: Ignore deprecation
+Date: Thu, 18 Aug 2016 18:05:56 +0500
+Message-Id: <1471525556-47918-1-git-send-email-fahad_usman@mentor.com>
+X-Mailer: git-send-email 2.8.1
+Subject: [meta-oe][PATCH] testfloat: Fix No GNU_HASH in the elf binary warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,35 +53,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2016 12:25:37 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 18 Aug 2016 13:06:55 -0000
 
-Hi Erkka,
+These warnings are observed when testfloat is built with certain
+external toolchains.
 
-On Mon, Aug 15, 2016 at 12:36:20PM +0300, Erkka Kääriä wrote:
-> readdir_r has been deprecated since glibc 2.24. As openjdk uses this
-> function, a warning is generated during build that gets turned into
-> an error when -Werror is used.
+Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+---
+ meta-oe/recipes-extended/testfloat/testfloat_3a.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Yes, this fixes the build error that we got with the first version. Thank you!
+diff --git a/meta-oe/recipes-extended/testfloat/testfloat_3a.bb b/meta-oe/recipes-extended/testfloat/testfloat_3a.bb
+index 28e9677..bb6e2ae 100644
+--- a/meta-oe/recipes-extended/testfloat/testfloat_3a.bb
++++ b/meta-oe/recipes-extended/testfloat/testfloat_3a.bb
+@@ -20,6 +20,8 @@ SRC_URI[SoftFloat.sha256sum] = "946fd23180559d60eb6683dda1cf8b142f5426dedfefb97b
+ 
+ S = "${WORKDIR}"
+ 
++TARGET_CC_ARCH += "${LDFLAGS}"
++
+ do_compile(){
+     oe_runmake -C SoftFloat-${PV}/build/Linux-Cross-Compile/
+     oe_runmake -C TestFloat-${PV}/build/Linux-Cross-Compile/
+-- 
+2.8.1
 
-However,we are getting another QA Error with the build:
-
-ERROR: openjre-8-102b14-r0 do_package_qa: QA Issue: No GNU_HASH in the elf binary: '/media/poky/build/tmp/work/core2-64-poky-linux/openjre-8/102b14-r0/packages-split/openjre-8/usr/lib/jvm/openjre-8/lib/amd64/libjsig.so'
-No GNU_HASH in the elf binary: '/media/poky/build/tmp/work/core2-64-poky-linux/openjre-8/102b14-r0/packages-split/openjre-8/usr/lib/jvm/openjre-8/lib/amd64/server/libjvm.so' [ldflags]
-ERROR: openjre-8-102b14-r0 do_package_qa: QA run found fatal errors. Please consider fixing them.
-ERROR: openjre-8-102b14-r0 do_package_qa: Function failed: do_package_qa
-ERROR: Logfile of failure stored in: /media/poky/build/tmp/work/core2-64-poky-linux/openjre-8/102b14-r0/temp/log.do_package_qa.22839
-ERROR: Task /home/maxin/clone/meta-java/recipes-core/openjdk/openjre-8_102b14.bb:do_package_qa (/home/maxin/clone/meta-java/recipes-core/openjdk/openjre-8_102b14.bb:do_package_qa) failed with exit code '1'
-NOTE: Tasks Summary: Attempted 1344 tasks of which 1332 didn't need to be rerun and 1 failed.
-NOTE: Writing buildhistory
-
-<snip>
-
-Could you please look into this ?
-
-Best Regards,
-Maxin
 
