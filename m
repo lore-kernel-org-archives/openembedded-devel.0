@@ -1,27 +1,33 @@
-Return-Path: <gyurco@freemail.hu>
-Received: from mail-outd.mail.t-online.hu (mail-outd.mail.t-online.hu
-	[195.228.240.69])
-	by mail.openembedded.org (Postfix) with ESMTP id 581EF76EBF
+Return-Path: <joe.slater@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E6387318D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 16:41:53 +0000 (UTC)
-Received: from fsmeopfe.local (51B6146C.dsl.pool.telekom.hu [81.182.20.108])
-	(using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail00k.mail.t-online.hu (Postfix) with ESMTPSA id 3sFX1X6G4szDl9;
-	Thu, 18 Aug 2016 18:41:52 +0200 (CEST)
-From: Szombathelyi =?ISO-8859-1?Q?Gy=F6rgy?= <gyurco@freemail.hu>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 18 Aug 2016 18:41:52 +0200
-Message-ID: <86563065.BT55Dkadr2@gyurco.localdomain>
-User-Agent: KMail/5.2.3 (Linux/4.6.6-300.fc24.x86_64; KDE/5.25.0; x86_64; ; )
-In-Reply-To: <20160818160939.4390-1-Martin.Jansa@gmail.com>
-References: <20160818160002.ydacjrbdyknjmcwa@jama>
-	<20160818160939.4390-1-Martin.Jansa@gmail.com>
+	Thu, 18 Aug 2016 16:52:35 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u7IGqZb5029583
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Aug 2016 09:52:35 -0700 (PDT)
+Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.25]) by
+	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0248.002;
+	Thu, 18 Aug 2016 09:52:35 -0700
+From: "Slater, Joseph" <joe.slater@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-networking][PATCH 1/1] yp-tools: fix compile errors
+Thread-Index: AQHR+MULCUvDIt6A5E60OFRhAoWToaBOP3iAgACvBbA=
+Date: Thu, 18 Aug 2016 16:52:34 +0000
+Message-ID: <007BD92917A2324FA403BCF9A464CF84B62087B0@ALA-MBA.corp.ad.wrs.com>
+References: <1471465334-32622-1-git-send-email-jslater@windriver.com>
+	<69F4079B-660E-417C-827B-8D7458865C6E@gmail.com>
+In-Reply-To: <69F4079B-660E-417C-827B-8D7458865C6E@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [147.11.216.160]
 MIME-Version: 1.0
-X-DCC--Metrics: mail00k.mail.t-online.hu 1308; Body=2 Fuz1=2 Fuz2=2
-X-Spam-Probability: 5.55111512313e-17
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-webserver][PATCHv2 1/2] nginx: optimize systemd unit file
+Subject: Re: [meta-networking][PATCH 1/1] yp-tools: fix compile errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,89 +40,165 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2016 16:41:56 -0000
+X-List-Received-Date: Thu, 18 Aug 2016 16:52:36 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
 
-Hi,
 
-Sorry for the wrong patch, but this has also some problems (inlined):
 
-On Thursday, August 18, 2016 6:09:38 PM CEST Martin Jansa wrote:
-> From: Szombathelyi Gy=F6rgy <gyurco@freemail.hu>
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Khem Raj
+> Sent: Wednesday, August 17, 2016 4:20 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-networking][PATCH 1/1] yp-tools: fix compile erro=
+rs
 >=20
-> - Call the nginx binary directly, no need to wrap the SysV init file.
-> - Create /var/log/nginx with tmpfiles, like volatiles without systemd.
-> - Run nginx with ${NGINX_USER} (user ${NGINX_USER} in nginx.conf)
 >=20
-> Signed-off-by: Gyorgy Szombathelyi <gyurco@freemail.hu>
-> ---
->  meta-webserver/recipes-httpd/nginx/files/nginx.service | 9 ++++-----
->  meta-webserver/recipes-httpd/nginx/nginx.inc           | 5 +++--
->  2 files changed, 7 insertions(+), 7 deletions(-)
+> > On Aug 17, 2016, at 1:22 PM, Joe Slater <jslater@windriver.com> wrote:
+> >
+> > Fix two fatal warnings.  The cast error only
+> > occurs for some architectures.
+> >
+> > Signed-off-by: Joe Slater <jslater@windriver.com>
+> > ---
+> > .../nis/yp-tools/alignment-cheat.patch             |   58 +++++++++++++=
++++++++
+> > .../recipes-support/nis/yp-tools_3.3.bb            |    3 +-
+> > 2 files changed, 59 insertions(+), 2 deletions(-)
+> > create mode 100644 meta-networking/recipes-support/nis/yp-tools/alignme=
+nt-cheat.patch
+> >
+> > diff --git a/meta-networking/recipes-support/nis/yp-tools/alignment-che=
+at.patch b/meta-
+> networking/recipes-support/nis/yp-tools/alignment-cheat.patch
+> > new file mode 100644
+> > index 0000000..856e42e
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-support/nis/yp-tools/alignment-cheat.patc=
+h
+> > @@ -0,0 +1,58 @@
+> > +yp-tools: avoid fatal cast warning
+> > +
+> > +The way casting is done, we will get a fatal alignment warning on some
+> > +architectures.  This patch cheats our way around this.
+> > +
 >=20
-> diff --git a/meta-webserver/recipes-httpd/nginx/files/nginx.service
-> b/meta-webserver/recipes-httpd/nginx/files/nginx.service index
-> 9926a4b..ce99061 100644
-> --- a/meta-webserver/recipes-httpd/nginx/files/nginx.service
-> +++ b/meta-webserver/recipes-httpd/nginx/files/nginx.service
-> @@ -3,10 +3,9 @@ Description=3DNginx Server
->  After=3Dnetwork.target
->  [Service]
->  Type=3Dforking
-> -PIDFile=3D@SYSCONFDIR@/nginx/run/nginx.pid
-> -ExecStartPre=3D@BASEBINDIR@/mkdir -p @LOCALSTATEDIR@/log/nginx
-> -ExecStart=3D@SYSCONFDIR@/init.d/nginx start
-> -ExecStop=3D@SYSCONFDIR@/init.d/nginx stop
-> +PIDFile=3D/run/nginx/nginx.pid
-> +ExecStart=3D@SBINDIR@/nginx
-> +ExecStop=3D@SBINDIR@/nginx -s stop
-> +ExecReload=3D@SBINDIR@/nginx -s reload
->  [Install]
->  WantedBy=3Dmulti-user.target
-> -
-> diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> b/meta-webserver/recipes-httpd/nginx/nginx.inc index fe51ca0..334a6d8
-> 100644
-> --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> @@ -73,8 +73,8 @@ do_install () {
->  	rm -fr ${D}${localstatedir}/run ${D}/run
->  	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false',
-> d)}; then install -d ${D}${sysconfdir}/tmpfiles.d
-> -		echo "d /run/${BPN} - - - -" \
-> -		     > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
-Don't remove the /run/nginx directory, please
+> These changes look fine, however you should run it by the upstream.
 
-> +		echo "d /${localstatedir}/log/${BPN} 0755 root root -" \
-> +			>> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
->  	fi
->  	install -d ${D}${sysconfdir}/${BPN}
->  	ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
-> @@ -90,6 +90,7 @@ do_install () {
->  	install -d ${D}${sysconfdir}/nginx
->  	install -m 0644 ${WORKDIR}/nginx.conf ${D}${sysconfdir}/nginx/nginx.conf
->  	sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/nginx/nginx.conf
-> +	sed -i 's/^user.*/user ${NGINX_USER};/g'
-> ${D}${sysconfdir}/nginx/nginx.conf install -d
-> ${D}${sysconfdir}/nginx/sites-enabled
+Version 4.2 of the tools seems to bear little resemblance to 3.3.  The code=
+ and
+structures patched here no longer exist.
+
 >=20
->  	install -d ${D}${sysconfdir}/default/volatiles
-This is missing from the end, since the unit file refers to SBINDIR now, an=
-d=20
-no BASE_SBINDIR.
+> > +We also eliminate an unused constant which causes a fatal warning.
+> > +
+> > +Upstream-status: Pending
+> > +
+> > +Signed-off-by: Joe Slater <jslater@windriver.com>
+> > +
+> > +
+> > +--- a/lib/do_ypcall.c
+> > ++++ b/lib/do_ypcall.c
+> > +@@ -44,7 +44,9 @@ struct dom_binding
+> > + typedef struct dom_binding dom_binding;
+> > +
+> > + static const struct timeval RPCTIMEOUT =3D {25, 0};
+> > ++#if 0
+> > + static const struct timeval UDPTIMEOUT =3D {5, 0};
+> > ++#endif
+>=20
+> perhaps its better to remove the unused code instead of making preprocess=
+or
+> work even more.
 
-@@ -101,7 +104,7 @@ do_install () {
-             install -m 0644 ${WORKDIR}/nginx.service ${D}${systemd_unitdir=
-}/
-system/
-             sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
-                     -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
-=2D                    -e 's,@BASEBINDIR@,${base_bindir},g' \
-+                    -e 's,@SBINDIR@,${sbindir},g' \
-                     ${D}${systemd_unitdir}/system/nginx.service
-         fi
- }
+Probably.  I think RPCTIMEOUT made it to 4.2, but UDPTIMEOUT did not.
 
+>=20
+> > + static int const MAXTRIES =3D 2;
+> > + static pthread_mutex_t ypbindlist_lock =3D PTHREAD_MUTEX_INITIALIZER;
+> > + static dom_binding *ypbindlist =3D NULL;
+> > +@@ -381,7 +383,7 @@ __ypclnt_call (u_long prog, xdrproc_t xa
+> > +
+> > + int
+> > + do_ypcall (const char *domain, u_long prog, xdrproc_t xargs,
+> > +-	   caddr_t req, xdrproc_t xres, caddr_t resp)
+> > ++	   caddr_t req, xdrproc_t xres, void *resp)
+> > + {
+> > +   dom_binding *ydb;
+> > +   int status;
+> > +@@ -450,9 +452,9 @@ do_ypcall (const char *domain, u_long pr
+> > + /* Like do_ypcall, but translate the status value if necessary.  */
+> > + int
+> > + do_ypcall_tr (const char *domain, u_long prog, xdrproc_t xargs,
+> > +-	      caddr_t req, xdrproc_t xres, caddr_t resp)
+> > ++	      caddr_t req, xdrproc_t xres, void *resp)
+> > + {
+> > +-  int status =3D do_ypcall (domain, prog, xargs, req, xres, resp);
+> > ++  int status =3D do_ypcall (domain, prog, xargs, req, xres, (void *) =
+resp);
+>=20
+> resp is already a void pointer why is this typecast needed ?
+
+I put it in someplace along the line in trying to fix the problem and forgo=
+t
+to take it out.
+
+V2 or leave it?  This code does not look like it's going anywhere beyond he=
+re.
+
+Joe
+
+
+>=20
+> > +   if (status =3D=3D YPERR_SUCCESS)
+> > +     /* We cast to ypresp_val although the pointer could also be of
+> > +        type ypresp_key_val or ypresp_master or ypresp_order or
+> > +--- a/lib/internal.h
+> > ++++ b/lib/internal.h
+> > +@@ -17,8 +17,8 @@
+> > + #define _INTERNAL_H_
+> > +
+> > + extern int do_ypcall (const char *domain, u_long prog, xdrproc_t xarg=
+s,
+> > +-		      caddr_t req, xdrproc_t xres, caddr_t resp);
+> > ++		      caddr_t req, xdrproc_t xres, void *resp);
+> > + extern int do_ypcall_tr (const char *domain, u_long prog, xdrproc_t x=
+args,
+> > +-			 caddr_t req, xdrproc_t xres, caddr_t resp);
+> > ++			 caddr_t req, xdrproc_t xres, void *resp);
+> > + extern int yp_maplist (const char *, struct ypmaplist **);
+> > + #endif
+> > diff --git a/meta-networking/recipes-support/nis/yp-tools_3.3.bb b/meta=
+-
+> networking/recipes-support/nis/yp-tools_3.3.bb
+> > index b89f0b8..69217fa 100644
+> > --- a/meta-networking/recipes-support/nis/yp-tools_3.3.bb
+> > +++ b/meta-networking/recipes-support/nis/yp-tools_3.3.bb
+> > @@ -11,11 +11,10 @@ ypwhich, yppasswd, domainname, nisdomainname \
+> > and ypdomainname. \
+> > "
+> >
+> > -PNBLACKLIST[yp-tools] ?=3D "BROKEN: fails to build for qemuarm."
+> > -
+> > SRC_URI =3D "http://www.linux-nis.org/download/yp-tools/${BP}.tar.bz2 \
+> >            file://domainname.service \
+> >            file://yp-tools-ipv4-ipv6-Provide-an-in-place-version-of-map=
+v4v6addr.patch \
+> > +           file://alignment-cheat.patch \
+> > "
+> > SRC_URI[md5sum] =3D "acebeecc11a73fb8097503670344834c"
+> > SRC_URI[sha256sum] =3D "812be817df3d4c25813552be336c6c6ad5aedaf65611b81=
+af3ad9f98fb3c2e50"
+> > --
+> > 1.7.9.5
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
