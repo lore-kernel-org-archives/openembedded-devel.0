@@ -1,27 +1,27 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5401576B7C
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B49E776B7C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 09:37:50 +0000 (UTC)
+	Thu, 18 Aug 2016 09:37:54 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u7I9bpV9021365
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u7I9bt06023089
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 02:37:51 -0700
+	Thu, 18 Aug 2016 02:37:55 -0700 (PDT)
 Received: from localhost (128.224.162.178) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
-	Thu, 18 Aug 2016 02:37:50 -0700
+	Thu, 18 Aug 2016 02:37:54 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 18 Aug 2016 17:37:39 +0800
-Message-ID: <25bd02a0ea897f2c5a661fde0b88c0b8729f8a5d.1471512743.git.yi.zhao@windriver.com>
+Date: Thu, 18 Aug 2016 17:37:40 +0800
+Message-ID: <7850a4a770dfa81c4c2fbe500a49061a3baf5594.1471512743.git.yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1471512743.git.yi.zhao@windriver.com>
 References: <cover.1471512743.git.yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.162.178]
-Subject: [meta-oe][PATCH 1/2] libx86-1: fix QA warning for GNU_HASH
+Subject: [meta-oe][PATCH 2/2] wipe: fix QA warning for GNU_HASH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,7 +34,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2016 09:37:51 -0000
+X-List-Received-Date: Thu, 18 Aug 2016 09:37:54 -0000
 Content-Type: text/plain
 
 Add LDFLAGS variable to Makefile so that extra linker flags can be sent
@@ -42,46 +42,46 @@ via this variable.
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../libx86-1/libx86-1.1/makefile-add-ldflags.patch      | 17 +++++++++++++++++
- meta-oe/recipes-extended/libx86-1/libx86-1_1.1.bb       |  1 +
+ .../wipe/files/makefile-add-ldflags.patch               | 17 +++++++++++++++++
+ meta-oe/recipes-extended/wipe/wipe_git.bb               |  1 +
  2 files changed, 18 insertions(+)
- create mode 100644 meta-oe/recipes-extended/libx86-1/libx86-1.1/makefile-add-ldflags.patch
+ create mode 100644 meta-oe/recipes-extended/wipe/files/makefile-add-ldflags.patch
 
-diff --git a/meta-oe/recipes-extended/libx86-1/libx86-1.1/makefile-add-ldflags.patch b/meta-oe/recipes-extended/libx86-1/libx86-1.1/makefile-add-ldflags.patch
+diff --git a/meta-oe/recipes-extended/wipe/files/makefile-add-ldflags.patch b/meta-oe/recipes-extended/wipe/files/makefile-add-ldflags.patch
 new file mode 100644
-index 0000000..821ab37
+index 0000000..fac1b31
 --- /dev/null
-+++ b/meta-oe/recipes-extended/libx86-1/libx86-1.1/makefile-add-ldflags.patch
++++ b/meta-oe/recipes-extended/wipe/files/makefile-add-ldflags.patch
 @@ -0,0 +1,17 @@
 +Upstream-Status: Pending
 +
 +Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 +
 +diff --git a/Makefile b/Makefile
-+index 951b617..6d9b73d 100644
++index 9e74cdf..cad8109 100644
 +--- a/Makefile
 ++++ b/Makefile
-+@@ -22,7 +22,7 @@ static: $(OBJECTS)
-+ 	$(AR) cru libx86.a $(OBJECTS)
++@@ -151,7 +151,7 @@ generic	:
++ 		$(MAKE) $(TARGETS) "CC=$(CC_GENERIC)" "CCO=$(CCO_GENERIC)" "CCOC=$(CCOC_GENERIC)"
 + 
-+ shared: $(OBJECTS)
-+-	$(CC) $(CFLAGS) -o libx86.so.1 -shared -Wl,-soname,libx86.so.1 $(OBJECTS)
-++	$(CC) $(CFLAGS) $(LDFLAGS) -o libx86.so.1 -shared -Wl,-soname,libx86.so.1 $(OBJECTS)
++ wipe	:	$(OBJECTS)
++-		$(CC) $(CCO) $(OBJECTS) -o wipe
+++		$(CC) $(CCO) $(LDFLAGS) $(OBJECTS) -o wipe
 + 
-+ objclean:
-+ 	$(MAKE) -C x86emu clean
-diff --git a/meta-oe/recipes-extended/libx86-1/libx86-1_1.1.bb b/meta-oe/recipes-extended/libx86-1/libx86-1_1.1.bb
-index 20c152c..d303147 100644
---- a/meta-oe/recipes-extended/libx86-1/libx86-1_1.1.bb
-+++ b/meta-oe/recipes-extended/libx86-1/libx86-1_1.1.bb
-@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=633af6c02e6f624d4c472d970a2aca53"
- SRC_URI = "http://www.codon.org.uk/~mjg59/libx86/downloads/${BPN}-${PV}.tar.gz \
-            file://libx86-mmap-offset.patch \
-            file://0001-assume-zero-is-valid-address.patch \
-+           file://makefile-add-ldflags.patch \
- "
++ wipe.o	:	wipe.c random.h misc.h version.h
++ 		$(CC) $(CCO) $(CCOC) wipe.c -o wipe.o
+diff --git a/meta-oe/recipes-extended/wipe/wipe_git.bb b/meta-oe/recipes-extended/wipe/wipe_git.bb
+index 70229f0..dd49958 100644
+--- a/meta-oe/recipes-extended/wipe/wipe_git.bb
++++ b/meta-oe/recipes-extended/wipe/wipe_git.bb
+@@ -11,6 +11,7 @@ LIC_FILES_CHKSUM = "file://GPL;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
- SRC_URI[md5sum] = "41bee1f8e22b82d82b5f7d7ba51abc2a"
+ SRC_URI = "git://github.com/berke/wipe.git;branch=master \
+            file://support-cross-compile-for-linux.patch \
++           file://makefile-add-ldflags.patch \
+           "
+ SRCREV = "d9c100c9cd0b1cbbe4359e4d6c9a035d11e7597c"
+ PV = "0.23+git${SRCPV}"
 -- 
 2.7.4
 
