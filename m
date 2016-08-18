@@ -1,45 +1,46 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 0295676420
+Return-Path: <texier.pj2@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E47F731DB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 14:06:41 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id i138so5729196wmf.3
+	Thu, 18 Aug 2016 14:47:20 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id q128so5915930wma.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 07:06:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=dominion-thruhere-net.20150623.gappssmtp.com; s=20150623;
+	Thu, 18 Aug 2016 07:47:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=2+mek3CdeDxt3pPY74x9NJOdL6SoGH835RMM2FwPMBY=;
-	b=SO9+B3pqPl3CK8mcdeQTly6BERYcCLUmC1iamz5GINzVhP9Nw6imubxNTW68Iv+R0n
-	qTVEbXiHCni+M5mgicx55COTsQ/vtIiNvYzxIFC41Isae5ulJbtMiu37CO9YARDrHsRT
-	86Jv+WFg9LckSoEHGQeSWOLNm2nWYhFC1D1J7H0KAbYVFU0kNii7TKk70Cv2ePrsTrCU
-	j13wDqHImyScMRQurhVMw6vUEvQ7e6z0zpySe2Bc1ioo2fde504jv9Rx5SWAxUhLhDuZ
-	BxVKCUlMcnE4WFLsLBWkKJaHvUKTEF7Fq05T+Cy3ycIiNmczpgLG9X0gpWFStIbLJgok
-	R/gw==
+	bh=cT6ORNthBPS3DJT14yb3LzsgxVnIZYdZSAxqj+W+2+Y=;
+	b=Pt4iTQTGztEyuQ8OEeHMzKmUkzTsbeKBIUFBBf5LVmN1YgUFMFEZ46KosuSJl4au8t
+	R3kar+WxXdoKtxn879S6qciGw7UKDA+Lm1apiIoNvxfQGEOyTw7gAxXP0YjyxGqX9gXX
+	dTY75D6tCPC/ULeL1PevUsFSzPcuDqpqK+q+1aJ/5zLDwn22RTRVCa6UTFieSn3tWX3l
+	gOTFLvuflo1sxzDf3EXnXmb511QEOlS30Q1fwXqmT251X5cRT75C8t+ANt2vDX4LcKIW
+	HI+QSdfkAlpqPAAG8G30F3wpzVowAUjsTucouUN4RL9iyoTSqjtilfLid0fYs8YYTwdO
+	Bk7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=2+mek3CdeDxt3pPY74x9NJOdL6SoGH835RMM2FwPMBY=;
-	b=XEZY0AE6FgzZfDyCPJISce7sf1dZDg8qacFvbxVGtAd4aAlM/nDwOX6f8UZaMMuTDA
-	xNvEfyVLxzuD7AfHhnH35G3kxi+qkPJ+NMcCP+HpbY1JqzYkGySzYyz1mq2PQ6PfLUcs
-	QEF7XNa4Xhs3G8fGulzy/319BH7xEdlPUP838GoeV1p5wmH+u7CwbsNeynEtxQoB8mJs
-	QaMbCk3psGsJBGs95cAIyGCpL+64NjXcg3vnK5ZLb2YB9Ec8KmZ7ABh3f1ZkMnXqbsaR
-	mJ7BGqGYxHNrgQZVdKlJx1f7fLToMUMQv23bWMW4zEnZEYRpTFMZAXdhqhVnX9RWKPxg
-	SXxg==
-X-Gm-Message-State: AEkoouuXAp+NCx2mieAABHKDYMTFl3+6Kqde0+ZM82T2lPL0DfwVSu0hm9j193m13WjW+A==
-X-Received: by 10.194.29.102 with SMTP id j6mr2194170wjh.99.1471529202378;
-	Thu, 18 Aug 2016 07:06:42 -0700 (PDT)
-Received: from localhost (ip4da29576.direct-adsl.nl. [77.162.149.118])
-	by smtp.gmail.com with ESMTPSA id i1sm2447837wjl.9.2016.08.18.07.06.41
-	(version=TLS1_2 cipher=AES128-SHA bits=128/128);
-	Thu, 18 Aug 2016 07:06:41 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
+	bh=cT6ORNthBPS3DJT14yb3LzsgxVnIZYdZSAxqj+W+2+Y=;
+	b=Lj1wLVVdxhNFuMJfe77s/4nUOu6UsG1JBFr1raahj0DClGGy9Adog1u3RC/7xUIh2l
+	e0Oqk2QrZ0/ejZ51AGllep9FBHlJSgli7O4ZzF8elJxhKwtt5Gllxym+QIUcz8jc2/qE
+	Ew4NLvz/L11VUJd4oPSKHhnCeTinKAi1b2G7uSWBwJxjSwFqNjV2sdz7KuTB8r1rg4Ti
+	19ddvKCPMgYJbau60LQstC2Ryxvtv5/dMSkRW4ocrWEQk/obNgXVNJyFNdY5GtHqbyZ2
+	U6azVdhNYD6G1AgXwu7XiJuuIUZPT5c1ymn7nLW329dKUvnlODt2Vk+JzIlnOIOVglv5
+	ngoQ==
+X-Gm-Message-State: AEkoousl/QzlkNYHGk5yS219327hzhlV6+qZgnJKj7erqnJfNFHsjVAUvYPeTD0UX+VN4A==
+X-Received: by 10.28.197.143 with SMTP id v137mr30962307wmf.26.1471531641144; 
+	Thu, 18 Aug 2016 07:47:21 -0700 (PDT)
+Received: from amplitude.amplitude.local ([46.20.167.230])
+	by smtp.googlemail.com with ESMTPSA id
+	q137sm31993217wmd.19.2016.08.18.07.47.20
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 18 Aug 2016 07:47:20 -0700 (PDT)
+From: Pierre-Jean TEXIER <texier.pj2@gmail.com>
+X-Google-Original-From: Pierre-Jean TEXIER <pjtexier@amplitude-systemes.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Aug 2016 16:06:38 +0200
-Message-Id: <1471529198-24404-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 2.0.1
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] collectd: make /etc/collectd.conf a CONFFILE
+Date: Thu, 18 Aug 2016 16:47:15 +0200
+Message-Id: <1471531635-27346-1-git-send-email-pjtexier@amplitude-systemes.com>
+X-Mailer: git-send-email 1.9.1
+Cc: Pierre-Jean TEXIER <pjtexier@amplitude-systemes.com>
+Subject: [meta-oe][PATCH] spitools: bump git revision (SRCREV)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,30 +53,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2016 14:06:43 -0000
+X-List-Received-Date: Thu, 18 Aug 2016 14:47:22 -0000
 
-Getting your config nuked everytime you update collectd is annoying, so
-properly tag it as CONFFILES.
+The new revision fix the build of spitools with the musl C library.
 
-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Pierre-Jean TEXIER <texier.pj2@gmail.com>
 ---
- meta-oe/recipes-extended/collectd/collectd_5.5.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-support/spitools/spitools_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb b/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
-index 9ec76c8..d7ba5b7 100644
---- a/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
-+++ b/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
-@@ -77,6 +77,8 @@ do_install_append() {
-         ${D}${systemd_unitdir}/system/collectd.service
- }
+diff --git a/meta-oe/recipes-support/spitools/spitools_git.bb b/meta-oe/recipes-support/spitools/spitools_git.bb
+index adb67cd..a308e42 100644
+--- a/meta-oe/recipes-support/spitools/spitools_git.bb
++++ b/meta-oe/recipes-support/spitools/spitools_git.bb
+@@ -8,7 +8,7 @@ S = "${WORKDIR}/git"
  
-+CONFFILES_${PN} = "${sysconfdir}/collectd.conf"
-+
- INITSCRIPT_NAME = "collectd"
- INITSCRIPT_PARAMS = "defaults"
+ SRC_URI = "git://github.com/cpb-/spi-tools.git;protocol=git"
+ 
+-SRCREV = "cc6a41fdcec60610703ba6db488c621c64952898"
+-
++SRCREV = "03405ab45884e4264dfa0371c032b2baaeeaaa98"
++          
+ inherit autotools
  
 -- 
-2.0.1
+1.9.1
 
 
