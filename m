@@ -1,30 +1,27 @@
-Return-Path: <Fahad_Usman@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id A33127318D
+Return-Path: <gyurco@freemail.hu>
+X-Greylist: delayed 581 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 18 Aug 2016 18:30:33 UTC
+Received: from primary.intra.htm-hungary.hu (mail.htm-hungary.hu [80.98.98.89])
+	by mail.openembedded.org (Postfix) with ESMTP id AC16D7318D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 18:26:00 +0000 (UTC)
-Received: from nat-ies.mentorg.com ([192.94.31.2]
-	helo=SVR-IES-FEM-01.mgc.mentorg.com)
-	by relay1.mentorg.com with esmtp 
-	id 1baS0u-0001g6-UM from Fahad_Usman@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Aug 2016 11:26:01 -0700
-Received: from [172.30.7.226] (137.202.0.76) by SVR-IES-FEM-01.mgc.mentorg.com
-	(137.202.0.104) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Thu, 18 Aug 2016 19:25:59 +0100
-To: <openembedded-devel@lists.openembedded.org>
-References: <1471525556-47918-1-git-send-email-fahad_usman@mentor.com>
-	<114FD618-198C-43A4-BD65-30170BCE0965@gmail.com>
-From: "Usman, Fahad" <Fahad_Usman@mentor.com>
-Message-ID: <737a90c6-d346-ba88-9cb5-39b8f4ff6a07@mentor.com>
-Date: Thu, 18 Aug 2016 23:25:50 +0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.2.0
-MIME-Version: 1.0
-In-Reply-To: <114FD618-198C-43A4-BD65-30170BCE0965@gmail.com>
-X-Originating-IP: [137.202.0.76]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] testfloat: Fix No GNU_HASH in the elf binary warnings
+	Thu, 18 Aug 2016 18:30:33 +0000 (UTC)
+Received: from localhost (primary [127.0.0.1])
+	by primary.intra.htm-hungary.hu (Postfix) with ESMTP id 347548055E;
+	Thu, 18 Aug 2016 20:20:52 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at htm-hungary.com
+Received: from primary.intra.htm-hungary.hu ([127.0.0.1])
+	by localhost (primary.intra.htm-hungary.hu [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id XFl66xrE3g20; Thu, 18 Aug 2016 20:20:51 +0200 (CEST)
+Received: from gyurco.lan (unknown [10.8.0.14])
+	by primary.intra.htm-hungary.hu (Postfix) with ESMTPA id 501EB8055D;
+	Thu, 18 Aug 2016 20:20:51 +0200 (CEST)
+From: Gyorgy Szombathelyi <gyurco@freemail.hu>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 18 Aug 2016 20:20:16 +0200
+Message-Id: <1471544416-4500-1-git-send-email-gyurco@freemail.hu>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-webserver][PATCHv3 1/2] nginx: optimize systemd unit file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,50 +34,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2016 18:26:01 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 18 Aug 2016 18:30:35 -0000
 
-On 08/18/2016 10:42 PM, Khem Raj wrote:
->> On Aug 18, 2016, at 6:05 AM, Fahad Usman <fahad_usman@mentor.com> wrote:
->>
->> These warnings are observed when testfloat is built with certain
->> external toolchains.
->>
->> Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
->> ---
->> meta-oe/recipes-extended/testfloat/testfloat_3a.bb | 2 ++
->> 1 file changed, 2 insertions(+)
->>
->> diff --git a/meta-oe/recipes-extended/testfloat/testfloat_3a.bb b/meta-oe/recipes-extended/testfloat/testfloat_3a.bb
->> index 28e9677..bb6e2ae 100644
->> --- a/meta-oe/recipes-extended/testfloat/testfloat_3a.bb
->> +++ b/meta-oe/recipes-extended/testfloat/testfloat_3a.bb
->> @@ -20,6 +20,8 @@ SRC_URI[SoftFloat.sha256sum] = "946fd23180559d60eb6683dda1cf8b142f5426dedfefb97b
->>
->> S = "${WORKDIR}"
->>
->> +TARGET_CC_ARCH += "${LDFLAGS}”
-> it probably is not using LDFLAGS for linking cmline in makefile
-> I think that will be an upstreamable fix.
-Yes, it doesn't use LDFLAGS in the LINK command in Makefile, I'll make a 
-patch for Makefile.
+- Call the nginx binary directly, no need to wrap the SysV init file.
+- Create /var/log/nginx with tmpfiles, like volatiles without systemd.
+- Run nginx with ${NGINX_USER} (user ${NGINX_USER} in nginx.conf)
 
-Thanks.
->
->> +
->> do_compile(){
->>      oe_runmake -C SoftFloat-${PV}/build/Linux-Cross-Compile/
->>      oe_runmake -C TestFloat-${PV}/build/Linux-Cross-Compile/
->> --
->> 2.8.1
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
+Signed-off-by: Gyorgy Szombathelyi <gyurco@freemail.hu>
+---
+ meta-webserver/recipes-httpd/nginx/files/nginx.service | 9 ++++-----
+ meta-webserver/recipes-httpd/nginx/nginx.inc           | 5 ++++-
+ 2 files changed, 8 insertions(+), 6 deletions(-)
+
+diff --git a/meta-webserver/recipes-httpd/nginx/files/nginx.service b/meta-webserver/recipes-httpd/nginx/files/nginx.service
+index 9926a4b..ce99061 100644
+--- a/meta-webserver/recipes-httpd/nginx/files/nginx.service
++++ b/meta-webserver/recipes-httpd/nginx/files/nginx.service
+@@ -3,10 +3,9 @@ Description=Nginx Server
+ After=network.target
+ [Service]
+ Type=forking
+-PIDFile=@SYSCONFDIR@/nginx/run/nginx.pid
+-ExecStartPre=@BASEBINDIR@/mkdir -p @LOCALSTATEDIR@/log/nginx
+-ExecStart=@SYSCONFDIR@/init.d/nginx start
+-ExecStop=@SYSCONFDIR@/init.d/nginx stop
++PIDFile=/run/nginx/nginx.pid
++ExecStart=@SBINDIR@/nginx
++ExecStop=@SBINDIR@/nginx -s stop
++ExecReload=@SBINDIR@/nginx -s reload
+ [Install]
+ WantedBy=multi-user.target
+-
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
+index fe51ca0..7698c90 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx.inc
++++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+@@ -75,6 +75,8 @@ do_install () {
+ 		install -d ${D}${sysconfdir}/tmpfiles.d
+ 		echo "d /run/${BPN} - - - -" \
+ 		     > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
++                echo "d /${localstatedir}/log/${BPN} 0755 root root -" \
++                     >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+ 	fi
+ 	install -d ${D}${sysconfdir}/${BPN}
+ 	ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
+@@ -90,6 +92,7 @@ do_install () {
+ 	install -d ${D}${sysconfdir}/nginx
+ 	install -m 0644 ${WORKDIR}/nginx.conf ${D}${sysconfdir}/nginx/nginx.conf
+ 	sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/nginx/nginx.conf
++	sed -i 's/^user.*/user ${NGINX_USER};/g' ${D}${sysconfdir}/nginx/nginx.conf
+ 	install -d ${D}${sysconfdir}/nginx/sites-enabled
+ 
+ 	install -d ${D}${sysconfdir}/default/volatiles
+@@ -101,7 +104,7 @@ do_install () {
+             install -m 0644 ${WORKDIR}/nginx.service ${D}${systemd_unitdir}/system/
+             sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+                     -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
+-                    -e 's,@BASEBINDIR@,${base_bindir},g' \
++                    -e 's,@SBINDIR@,${sbindir},g' \
+                     ${D}${systemd_unitdir}/system/nginx.service
+         fi
+ }
+-- 
+2.7.4
 
 
