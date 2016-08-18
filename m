@@ -1,30 +1,25 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from smtp484.redcondor.net (smtp484.redcondor.net [208.80.204.84])
-	by mail.openembedded.org (Postfix) with ESMTP id C48E560722
+Return-Path: <maxin.john@intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id D59C4760AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 09:45:05 +0000 (UTC)
-Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by smtp484.redcondor.net ({c48374e7-08df-40d9-a0de-96cc9883a037})
-	via TCP (outbound) with ESMTPS id 20160818094504914_0484
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 09:45:04 +0000
-X-RC-FROM: <rpjday@crashcourse.ca>
-X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
-Received: from [216.191.234.70] (port=11096 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1baJud-0004wT-Kc for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Aug 2016 05:46:59 -0400
-Date: Thu, 18 Aug 2016 05:44:55 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@ca624034.mitel.com
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.20.1608180543350.17120@ca624034.mitel.com>
-User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
+	Thu, 18 Aug 2016 12:25:33 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by orsmga101.jf.intel.com with ESMTP; 18 Aug 2016 05:25:34 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.28,539,1464678000"; d="scan'208";a="750410772"
+Received: from mbabyjoh-desk.fi.intel.com (HELO
+	mbabyjoh-desk.ger.corp.intel.com) ([10.237.72.71])
+	by FMSMGA003.fm.intel.com with ESMTP; 18 Aug 2016 05:25:32 -0700
+Date: Thu, 18 Aug 2016 15:26:55 +0300
+From: "Maxin B. John" <maxin.john@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160818122655.GB16863@mbabyjoh-desk.ger.corp.intel.com>
+References: <1471253780-28526-1-git-send-email-erkka.kaaria@intel.com>
+	<1471253780-28526-2-git-send-email-erkka.kaaria@intel.com>
 MIME-Version: 1.0
-X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
-Subject: [PATCH] meta-oe: toscoterm, given "_append", convert "+=" to "=", add space
+In-Reply-To: <1471253780-28526-2-git-send-email-erkka.kaaria@intel.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-java][PATCH v2 2/2] openjdk-8-release-102b14.inc: Ignore deprecation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,35 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2016 09:45:06 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Thu, 18 Aug 2016 12:25:37 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
+Hi Erkka,
 
-Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+On Mon, Aug 15, 2016 at 12:36:20PM +0300, Erkka Kääriä wrote:
+> readdir_r has been deprecated since glibc 2.24. As openjdk uses this
+> function, a warning is generated during build that gets turned into
+> an error when -Werror is used.
 
----
+Yes, this fixes the build error that we got with the first version. Thank you!
 
-  and that should do it for all of meta-openembedded.
+However,we are getting another QA Error with the build:
 
-diff --git a/meta-oe/recipes-support/toscoterm/toscoterm_git.bb b/meta-oe/recipes-support/toscoterm/toscoterm_git.bb
-index 6b31fd6..aa031fe 100644
---- a/meta-oe/recipes-support/toscoterm/toscoterm_git.bb
-+++ b/meta-oe/recipes-support/toscoterm/toscoterm_git.bb
-@@ -24,4 +24,4 @@ do_install() {
-     oe_runmake PREFIX="${prefix}" DESTDIR="${D}" install
- }
+ERROR: openjre-8-102b14-r0 do_package_qa: QA Issue: No GNU_HASH in the elf binary: '/media/poky/build/tmp/work/core2-64-poky-linux/openjre-8/102b14-r0/packages-split/openjre-8/usr/lib/jvm/openjre-8/lib/amd64/libjsig.so'
+No GNU_HASH in the elf binary: '/media/poky/build/tmp/work/core2-64-poky-linux/openjre-8/102b14-r0/packages-split/openjre-8/usr/lib/jvm/openjre-8/lib/amd64/server/libjvm.so' [ldflags]
+ERROR: openjre-8-102b14-r0 do_package_qa: QA run found fatal errors. Please consider fixing them.
+ERROR: openjre-8-102b14-r0 do_package_qa: Function failed: do_package_qa
+ERROR: Logfile of failure stored in: /media/poky/build/tmp/work/core2-64-poky-linux/openjre-8/102b14-r0/temp/log.do_package_qa.22839
+ERROR: Task /home/maxin/clone/meta-java/recipes-core/openjdk/openjre-8_102b14.bb:do_package_qa (/home/maxin/clone/meta-java/recipes-core/openjdk/openjre-8_102b14.bb:do_package_qa) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 1344 tasks of which 1332 didn't need to be rerun and 1 failed.
+NOTE: Writing buildhistory
 
--RDEPENDS_${PN}_append_libc-glibc += "glibc-gconv-ibm437"
-+RDEPENDS_${PN}_append_libc-glibc = " glibc-gconv-ibm437"
+<snip>
 
--- 
+Could you please look into this ?
 
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
-
+Best Regards,
+Maxin
 
