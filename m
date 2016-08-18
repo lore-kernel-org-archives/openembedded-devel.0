@@ -1,51 +1,50 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D2296E5CB
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 887F273216
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 16:00:03 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id i138so214140wmf.3
+	Thu, 18 Aug 2016 16:09:45 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id o80so262726wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 09:00:04 -0700 (PDT)
+	Thu, 18 Aug 2016 09:09:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=l7hpav7VW3RCLbBYj4EhhWawG56XgxwbPXsExcJbsd0=;
-	b=GIytMD6rEkkYPaWqq/NiKamqe46j36xkrffRU76sb5smC0jVq5bVmdetIwJcZ8Qjbu
-	XwsUK5tdoWczonO0E3UuGxzHtU2omFjGSardwpp+JLYr5IPlkhHzfoXu8AEtEY8FMZTC
-	wjKtehgdmlETINcAj/7TmaqgIRmbEjj3KgFQ44Ni8K2dNX3wC3MBECaDUru7H7XGM/sy
-	Qx8VnCyVWpcjATh63ombBVPAL3/pEw+ITJIUb4J4WzK4o+DwR2naHCV7I+GptExivck4
-	A6EqTcYUA/8OW0peTyFCQbYba1FT17HxkvOdH7W1KSCXxlRAPnStATejjP+8fEn6vpY1
-	OVng==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=O8R/g/0UGO7jqrHBZwY8Dr4lEbUS5iGn6lnA907yYXo=;
+	b=qo0ulc1MwZfDa7nyxZIQzqafLRpaIlec5X+aQ2uidbB5/A0qpb4dCb6hxRRgxPGwJ2
+	I6oPvzzALgV0h3vVzDJRccyBkR9tN040IjfZCYGAqNuprDoujIUW/Ufw7yaCml/g7+WQ
+	uE9fsmMBZDNMWEkF+bUXh94OeiuHszv63bk8PubNPmEVa3Z/P+IZy2AZf/Y+erZ+CY7u
+	4VqL8+CTThVwOggbSV1XBA9XRAXJ6jceAnrfSnTXlH8YiAfWwUiq2aieXi4xxEFI4SdT
+	//BXGEXwDUxmquJ1vYN7FIwa5xk7OFiLIiFkzvBLEeblqls2ke9wUO1oUKWteVx2oGVU
+	p3ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=l7hpav7VW3RCLbBYj4EhhWawG56XgxwbPXsExcJbsd0=;
-	b=JooqL5Nj4DxNfJ2aYo4pXfV/mABWfFYh4p+jBQr98yGBamUonB0ODuiv4UqlY5HEYB
-	m1YLvRZ8YLlqvxwU91l3Frwz98YiXjc/xNy7kGNQpJZlnkjOa66U9m8gyXHR00DMWb5b
-	l8HH4+TRay2pWgvjGo93bZWwm6uTX3rCGIkyu4zFzh32wdnqhDjQXFTZhLccUReBsVyh
-	lCmV/Z8XnS8fDI0ZX9xKWwHjOzhCxcFnJMqDzQZhQ8ICDzeDEDFAl69BH8gwW0DT2pyP
-	CWbCOdtVGEfdzSGxyOOUBeKqKJxPsME6i0j6MIWXGk1zPnieWohyQxkXkPeyknpI3NmL
-	cw4g==
-X-Gm-Message-State: AEkoousIIM2V7urKLUn6QDryyitDRHkNTlBrsWL01+zpHUzZ5gTEyLftEIoo8LoxCOfBxw==
-X-Received: by 10.28.69.203 with SMTP id l72mr201459wmi.51.1471536003385;
-	Thu, 18 Aug 2016 09:00:03 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=O8R/g/0UGO7jqrHBZwY8Dr4lEbUS5iGn6lnA907yYXo=;
+	b=mHorNB+jF38zlH8OVvaFXaCxRXWsj7lPvBiqEP7AogrVSWrUHdLTdwsz9CsIQJWVJw
+	HUulzFGzPtGrR2ISB7s4uxXEJfCUo6PgtttYcNFBJUSf7j+1EE3SWh5E4Gp/ETqC6nIb
+	NoHYM9cX72aCmXRCTEpmrT4ILhogqKUss91HUnFJ0DesRDpn7hjNr1bSmbexxmJsgEFC
+	/2gIU3KkiVs3ez4hahXB5n2x2rAtr/XXo4UhTGQrcAiadmg641SxNH7dpt2VxKRPniL1
+	LW89pyWrpUagnPsnrhBrI+o+K9mcRO79MCe4l3BWjiOjoN9mPtOHk5Y+CjJsTdy2bG63
+	aysA==
+X-Gm-Message-State: AEkoouut0XHFP86ft891s243EF2CuppZy1MuvB3SxFtDBpeLxAPsZXulLadlD6Ems79bLQ==
+X-Received: by 10.194.222.168 with SMTP id qn8mr2653269wjc.172.1471536585399; 
+	Thu, 18 Aug 2016 09:09:45 -0700 (PDT)
 Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
 	[89.176.104.169])
-	by smtp.gmail.com with ESMTPSA id g1sm2879105wjy.5.2016.08.18.09.00.02
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 18 Aug 2016 09:00:02 -0700 (PDT)
+	by smtp.gmail.com with ESMTPSA id d64sm223388wmc.22.2016.08.18.09.09.43
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 18 Aug 2016 09:09:44 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 18 Aug 2016 18:00:02 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160818160002.ydacjrbdyknjmcwa@jama>
-References: <1561177.QVzWruQ2fm@gyurco.localdomain>
+Date: Thu, 18 Aug 2016 18:09:38 +0200
+Message-Id: <20160818160939.4390-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.9.2
+In-Reply-To: <20160818160002.ydacjrbdyknjmcwa@jama>
+References: <20160818160002.ydacjrbdyknjmcwa@jama>
 MIME-Version: 1.0
-In-Reply-To: <1561177.QVzWruQ2fm@gyurco.localdomain>
-User-Agent: Mutt/1.6.2 (2016-06-11)
-Subject: Re: [meta-webserver][PATCH]nginx: optimize systemd unit file
+Subject: [meta-webserver][PATCHv2 1/2] nginx: optimize systemd unit file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,120 +57,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2016 16:00:04 -0000
-X-Groupsio-MsgNum: 62715
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="xhmfgtw3puva4jtd"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 18 Aug 2016 16:09:47 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---xhmfgtw3puva4jtd
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Szombathelyi György <gyurco@freemail.hu>
 
-On Thu, Aug 18, 2016 at 03:58:34PM +0200, Szombathelyi Gy=F6rgy wrote:
->     =20
->     - Call the nginx binary directly, no need to
->       wrap the SysV init file.
->     - Create /var/log/nginx with tmpfiles, like volatiles without systemd.
->     - Run nginx with ${NGINX_USER} (user ${NGINX_USER} in nginx.conf)
->    =20
->     Signed-off-by: Gyorgy Szombathelyi <gyurco@freemail.hu>
->=20
-> diff --git a/meta-webserver/recipes-httpd/nginx/files/nginx.service b/met=
-a-
-> webserver/recipes-httpd/nginx/files/nginx.service
-> index 9926a4b..ce99061 100644
-> --- a/meta-webserver/recipes-httpd/nginx/files/nginx.service
-> +++ b/meta-webserver/recipes-httpd/nginx/files/nginx.service
-> @@ -3,10 +3,9 @@ Description=3DNginx Server
->  After=3Dnetwork.target
->  [Service]
->  Type=3Dforking
-> -PIDFile=3D@SYSCONFDIR@/nginx/run/nginx.pid
-> -ExecStartPre=3D@BASEBINDIR@/mkdir -p @LOCALSTATEDIR@/log/nginx
-> -ExecStart=3D@SYSCONFDIR@/init.d/nginx start
-> -ExecStop=3D@SYSCONFDIR@/init.d/nginx stop
-> +PIDFile=3D/run/nginx/nginx.pid
-> +ExecStart=3D@SBINDIR@/nginx
-> +ExecStop=3D@SBINDIR@/nginx -s stop
-> +ExecReload=3D@SBINDIR@/nginx -s reload
->  [Install]
->  WantedBy=3Dmulti-user.target
-> -
-> diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserve=
-r/
-> recipes-httpd/nginx/nginx.inc
-> index fe51ca0..25ac7a4 100644
-> --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> @@ -75,6 +75,9 @@ do_install () {
->                 install -d ${D}${sysconfdir}/tmpfiles.d
->                 echo "d /run/${BPN} - - - -" \
->                      > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
-> +                echo "d /${localstatedir}/log/${BPN} 0755 root root -" \
-> +                     >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
-> +
->         fi
->         install -d ${D}${sysconfdir}/${BPN}
->         ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
-> @@ -90,6 +93,7 @@ do_install () {
->         install -d ${D}${sysconfdir}/nginx
->         install -m 0644 ${WORKDIR}/nginx.conf ${D}${sysconfdir}/nginx/
-> nginx.conf
->         sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/nginx/
-> nginx.conf
-> +       sed -i 's/^user.*/user ${NGINX_USER};/g' ${D}${sysconfdir}/nginx/
-> nginx.conf
->         install -d ${D}${sysconfdir}/nginx/sites-enabled
+- Call the nginx binary directly, no need to wrap the SysV init file.
+- Create /var/log/nginx with tmpfiles, like volatiles without systemd.
+- Run nginx with ${NGINX_USER} (user ${NGINX_USER} in nginx.conf)
 
-Please fix your sender to stop wrapping long lines.
+Signed-off-by: Gyorgy Szombathelyi <gyurco@freemail.hu>
+---
+ meta-webserver/recipes-httpd/nginx/files/nginx.service | 9 ++++-----
+ meta-webserver/recipes-httpd/nginx/nginx.inc           | 5 +++--
+ 2 files changed, 7 insertions(+), 7 deletions(-)
 
-OE @ ~/meta-openembedded $ pwam 129537
-2016-08-18 17:58:48
-URL:https://patchwork.openembedded.org/patch/129537/mbox/ [3015] ->
-"pw-am-129537.patch" [1]
-Applying: nginx: optimize systemd unit file
-fatal: corrupt patch at line 41
-Patch failed at 0001 nginx: optimize systemd unit file
-The copy of the patch that failed is found in: .git/rebase-apply/patch
-When you have resolved this problem, run "git am --continue".
-If you prefer to skip this patch, run "git am --skip" instead.
-To restore the original branch and stop patching, run "git am --abort".
+diff --git a/meta-webserver/recipes-httpd/nginx/files/nginx.service b/meta-webserver/recipes-httpd/nginx/files/nginx.service
+index 9926a4b..ce99061 100644
+--- a/meta-webserver/recipes-httpd/nginx/files/nginx.service
++++ b/meta-webserver/recipes-httpd/nginx/files/nginx.service
+@@ -3,10 +3,9 @@ Description=Nginx Server
+ After=network.target
+ [Service]
+ Type=forking
+-PIDFile=@SYSCONFDIR@/nginx/run/nginx.pid
+-ExecStartPre=@BASEBINDIR@/mkdir -p @LOCALSTATEDIR@/log/nginx
+-ExecStart=@SYSCONFDIR@/init.d/nginx start
+-ExecStop=@SYSCONFDIR@/init.d/nginx stop
++PIDFile=/run/nginx/nginx.pid
++ExecStart=@SBINDIR@/nginx
++ExecStop=@SBINDIR@/nginx -s stop
++ExecReload=@SBINDIR@/nginx -s reload
+ [Install]
+ WantedBy=multi-user.target
+-
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
+index fe51ca0..334a6d8 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx.inc
++++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+@@ -73,8 +73,8 @@ do_install () {
+ 	rm -fr ${D}${localstatedir}/run ${D}/run
+ 	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+ 		install -d ${D}${sysconfdir}/tmpfiles.d
+-		echo "d /run/${BPN} - - - -" \
+-		     > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
++		echo "d /${localstatedir}/log/${BPN} 0755 root root -" \
++			>> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+ 	fi
+ 	install -d ${D}${sysconfdir}/${BPN}
+ 	ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
+@@ -90,6 +90,7 @@ do_install () {
+ 	install -d ${D}${sysconfdir}/nginx
+ 	install -m 0644 ${WORKDIR}/nginx.conf ${D}${sysconfdir}/nginx/nginx.conf
+ 	sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/nginx/nginx.conf
++	sed -i 's/^user.*/user ${NGINX_USER};/g' ${D}${sysconfdir}/nginx/nginx.conf
+ 	install -d ${D}${sysconfdir}/nginx/sites-enabled
+ 
+ 	install -d ${D}${sysconfdir}/default/volatiles
+-- 
+2.9.2
 
 
->         install -d ${D}${sysconfdir}/default/volatiles
-> @@ -101,7 +105,7 @@ do_install () {
->              install -m 0644 ${WORKDIR}/nginx.service ${D}${systemd_unitd=
-ir}/
-> system/
->              sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
->                      -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
-> -                    -e 's,@BASEBINDIR@,${base_bindir},g' \
-> +                    -e 's,@SBINDIR@,${sbindir},g' \
->                      ${D}${systemd_unitdir}/system/nginx.service
->          fi
->  }
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---xhmfgtw3puva4jtd
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iEYEARECAAYFAle124EACgkQN1Ujt2V2gBwzrACgpMqh/225V9o21yfCCHsVxJFY
-Zi0An2G9X8wWbMuNzDj5nA/3jkEyWEwg
-=lsIl
------END PGP SIGNATURE-----
-
---xhmfgtw3puva4jtd--
