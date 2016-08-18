@@ -1,30 +1,25 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from smtp485.redcondor.net (smtp485.redcondor.net [208.80.204.85])
-	by mail.openembedded.org (Postfix) with ESMTP id 143E760722
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 66AD6769F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 09:37:16 +0000 (UTC)
-Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by smtp485.redcondor.net ({3be039ea-4351-44b0-a8af-642c38b25916})
-	via TCP (outbound) with ESMTPS id 20160818093715495_0485
+	Thu, 18 Aug 2016 09:37:44 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u7I9bi4B014069
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 09:37:15 +0000
-X-RC-FROM: <rpjday@crashcourse.ca>
-X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
-Received: from [216.191.234.70] (port=49946 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1baJn3-0004Jj-EV for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Aug 2016 05:39:09 -0400
-Date: Thu, 18 Aug 2016 05:37:04 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@ca624034.mitel.com
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.20.1608180535210.16814@ca624034.mitel.com>
-User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
+	Thu, 18 Aug 2016 02:37:44 -0700 (PDT)
+Received: from localhost (128.224.162.178) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
+	Thu, 18 Aug 2016 02:37:43 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 18 Aug 2016 17:37:38 +0800
+Message-ID: <cover.1471512743.git.yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
-Subject: [PATCH] meta-oe: php, given "_append", remove superfluous "+="
+X-Originating-IP: [128.224.162.178]
+Subject: [meta-oe][PATCH 0/2] fix GNU_HASH QA warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,38 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2016 09:37:16 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Thu, 18 Aug 2016 09:37:44 -0000
+Content-Type: text/plain
 
 
-Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+The following changes since commit 02a390b79bdc089eb583e443ee04f60bffd409eb:
 
----
+  tnftp: tnftp20130505 -> tnftp20151004 (2016-08-16 21:26:15 -0400)
 
-  again, not compile-tested since it seems obvious
+are available in the git repository at:
 
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index ee7a143..23de2b1 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -15,7 +15,7 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
-            file://0001-acinclude-use-pkgconfig-for-libxml2-config.patch \
-           "
+  git://git.openembedded.org/meta-openembedded-contrib yzhao/hash-fix
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=yzhao/hash-fix
 
--SRC_URI_append_class-target += " \
-+SRC_URI_append_class-target = " \
-             file://iconv.patch \
-             file://imap-fix-autofoo.patch \
-             file://pear-makefile.patch \
+Yi Zhao (2):
+  libx86-1: fix QA warning for GNU_HASH
+  wipe: fix QA warning for GNU_HASH
+
+ .../libx86-1/libx86-1.1/makefile-add-ldflags.patch      | 17 +++++++++++++++++
+ meta-oe/recipes-extended/libx86-1/libx86-1_1.1.bb       |  1 +
+ .../wipe/files/makefile-add-ldflags.patch               | 17 +++++++++++++++++
+ meta-oe/recipes-extended/wipe/wipe_git.bb               |  1 +
+ 4 files changed, 36 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/libx86-1/libx86-1.1/makefile-add-ldflags.patch
+ create mode 100644 meta-oe/recipes-extended/wipe/files/makefile-add-ldflags.patch
 
 -- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+2.7.4
 
 
