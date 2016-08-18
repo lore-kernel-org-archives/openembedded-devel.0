@@ -1,24 +1,30 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E57E273199
+Return-Path: <rpjday@crashcourse.ca>
+Received: from smtp485.redcondor.net (smtp485.redcondor.net [208.80.204.85])
+	by mail.openembedded.org (Postfix) with ESMTP id DE5B960722
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 09:06:20 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u7I96KBu020419
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Thu, 18 Aug 2016 02:06:20 -0700
-Received: from localhost (128.224.162.178) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
-	Thu, 18 Aug 2016 02:06:19 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <Joe_MacDonald@mentor.com>
-Date: Thu, 18 Aug 2016 17:06:17 +0800
-Message-ID: <1471511177-12589-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Thu, 18 Aug 2016 09:33:22 +0000 (UTC)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
+	by smtp485.redcondor.net ({3be039ea-4351-44b0-a8af-642c38b25916})
+	via TCP (outbound) with ESMTPS id 20160818093320096_0485
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Aug 2016 09:33:20 +0000
+X-RC-FROM: <rpjday@crashcourse.ca>
+X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
+Received: from [216.191.234.70] (port=44365 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1baJj5-000424-Qo for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Aug 2016 05:35:03 -0400
+Date: Thu, 18 Aug 2016 05:32:59 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@ca624034.mitel.com
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.20.1608180530180.16639@ca624034.mitel.com>
+User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.178]
-Subject: [meta-networking][PATCH] squid: add missing patch header
+X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
+Subject: [PATCH] meta-oe: Standardize use of "_append" versus use of "+="
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,34 +37,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2016 09:06:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 18 Aug 2016 09:33:24 -0000
+Content-Type: text/plain; charset=US-ASCII
 
-Add upstream-status and signed-off-by line to the patch to obey the
-recommendations:
-http://openembedded.org/wiki/Commit_Patch_Message_Guidelines#Patch_Header_Recommendations
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Remove superfluous "+=", then manually add necessary leading space.
+
+Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+
 ---
- .../recipes-daemons/squid/files/set_sysroot_patch.patch            | 7 +++++++
- 1 file changed, 7 insertions(+)
 
-diff --git a/meta-networking/recipes-daemons/squid/files/set_sysroot_patch.patch b/meta-networking/recipes-daemons/squid/files/set_sysroot_patch.patch
-index 68733f9..fdcd174 100644
---- a/meta-networking/recipes-daemons/squid/files/set_sysroot_patch.patch
-+++ b/meta-networking/recipes-daemons/squid/files/set_sysroot_patch.patch
-@@ -1,3 +1,10 @@
-+Set the SYSROOT for libxml2 header file to avoid host contamination.
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Signed-off-by: Yue Tao <yue.tao@windriver.com>
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+
- diff --git a/configure.ac.old b/configure.ac
- index 54eda73..874f48e 100644
- --- a/configure.ac.old
+  not build-tested, but looks pretty straightforward.
+
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
+index 500e194..3a3886b 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
+@@ -57,8 +57,8 @@ CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regc
+                   ac_cv_printf_positional=yes ac_cv_file__etc_environment=yes \
+                   ac_cv_file__etc_TIMEZONE=no"
+
+-CFLAGS_append += "-DDESTRUCTOR_ATTR_WORKS=1 -I${STAGING_INCDIR}/et"
+-LDFLAGS_append += "-lpthread"
++CFLAGS_append = " -DDESTRUCTOR_ATTR_WORKS=1 -I${STAGING_INCDIR}/et"
++LDFLAGS_append = " -lpthread"
+
+ FILES_${PN} += "${datadir}/gnats"
+ FILES_${PN}-doc += "${datadir}/examples"
+diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_2.4.7.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_2.4.7.bb
+index c2c4eae..03bad31 100644
+--- a/meta-oe/recipes-connectivity/zabbix/zabbix_2.4.7.bb
++++ b/meta-oe/recipes-connectivity/zabbix/zabbix_2.4.7.bb
+@@ -53,7 +53,7 @@ EXTRA_OECONF = '--enable-dependency-tracking \
+ 	        --with-ssh2 \
+ 	        --with-sqlite3 \
+ 	        '
+-CFLAGS_append += "-lldap -llber"
++CFLAGS_append = " -lldap -llber"
+
+ do_configure_prepend() {
+     export KERNEL_VERSION="${KERNEL_VERSION}"
+diff --git a/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.5.bb b/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.5.bb
+index 3fa5724..34749d0 100644
+--- a/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.5.bb
++++ b/meta-oe/recipes-connectivity/zeromq/zeromq_4.1.5.bb
+@@ -16,8 +16,8 @@ S = "${WORKDIR}/zeromq-${PV}"
+
+ #Uncomment to choose polling system manually. valid values are kqueue, epoll, devpoll, poll or select
+ #EXTRA_OECONF += "--with-poller=kqueue"
+-#CFLAGS_append += "-O0"
+-#CXXFLAGS_append += "-O0"
++#CFLAGS_append = " -O0"
++#CXXFLAGS_append = " -O0"
+
+ inherit autotools ptest pkgconfig
+
+
 -- 
-2.7.4
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
 
