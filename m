@@ -1,26 +1,28 @@
 Return-Path: <rpjday@crashcourse.ca>
-Received: from smtp486.redcondor.net (smtp486.redcondor.net [208.80.204.86])
-	by mail.openembedded.org (Postfix) with ESMTP id E85AA77028
+X-Greylist: delayed 607 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 18 Aug 2016 18:18:27 UTC
+Received: from smtp685.redcondor.net (smtp685.redcondor.net [208.80.206.85])
+	by mail.openembedded.org (Postfix) with ESMTP id CD6BE77026
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 18:09:09 +0000 (UTC)
+	Thu, 18 Aug 2016 18:18:26 +0000 (UTC)
 Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by smtp486.redcondor.net ({6695537a-536a-45f9-a249-877c85428649})
-	via TCP (outbound) with ESMTPS id 20160818180908784_0486
+	by smtp685.redcondor.net ({20c8e40f-6b6c-4c9e-abff-1640ea7bf404})
+	via TCP (outbound) with ESMTPS id 20160818180819466_0685
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 18:09:08 +0000
+	Thu, 18 Aug 2016 11:08:19 -0700
 X-RC-FROM: <rpjday@crashcourse.ca>
 X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
-Received: from [174.114.62.25] (port=45348 helo=crashcourse.ca)
+Received: from [174.114.62.25] (port=45346 helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1baRmR-00051h-IQ for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Aug 2016 14:11:03 -0400
-Date: Thu, 18 Aug 2016 14:09:00 -0400 (EDT)
+	id 1baRld-0004o0-KW for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Aug 2016 14:10:13 -0400
+Date: Thu, 18 Aug 2016 14:08:06 -0400 (EDT)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@localhost.localdomain
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <10C3DF54-CD57-4E94-B989-E87C3122127D@gmail.com>
-Message-ID: <alpine.LFD.2.20.1608181408250.25743@localhost.localdomain>
+Message-ID: <alpine.LFD.2.20.1608181407420.25743@localhost.localdomain>
 References: <alpine.LFD.2.20.1608180535210.16814@ca624034.mitel.com>
 	<10C3DF54-CD57-4E94-B989-E87C3122127D@gmail.com>
 User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
@@ -39,10 +41,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2016 18:09:10 -0000
-Content-Type: multipart/mixed; BOUNDARY="8323328-337258838-1471543741=:25743"
+X-List-Received-Date: Thu, 18 Aug 2016 18:18:28 -0000
+Content-Type: multipart/mixed; BOUNDARY="8323328-794133172-1471543691=:25743"
 
---8323328-337258838-1471543741=:25743
+--8323328-794133172-1471543691=:25743
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8BIT
 
@@ -70,9 +72,13 @@ On Thu, 18 Aug 2016, Khem Raj wrote:
 > > +SRC_URI_append_class-target = “ \
 >
 > nitpick: You do not need a space here since its already added after newline
+>
+> >             file://iconv.patch \
+> >             file://imap-fix-autofoo.patch \
+> >             file://pear-makefile.patch \
+> >
 
-  since i did that more than once, i'll resubmit those patches. if i'm
-going to be annoyingly nitpicky, i might as well do it correctly.
+  ah, quite so.
 
 rday
 
@@ -86,4 +92,4 @@ Twitter:                                       http://twitter.com/rpjday
 LinkedIn:                               http://ca.linkedin.com/in/rpjday
 ========================================================================
 
---8323328-337258838-1471543741=:25743--
+--8323328-794133172-1471543691=:25743--
