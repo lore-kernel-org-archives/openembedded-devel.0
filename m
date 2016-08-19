@@ -1,25 +1,45 @@
-Return-Path: <gyurco@freemail.hu>
-Received: from primary.intra.htm-hungary.hu (mail.htm-hungary.hu [80.98.98.89])
-	by mail.openembedded.org (Postfix) with ESMTP id E18BC760B0
+Return-Path: <bkylerussell@gmail.com>
+Received: from mail-it0-f68.google.com (mail-it0-f68.google.com
+	[209.85.214.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 253EE7017B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2016 21:01:00 +0000 (UTC)
-Received: from localhost (primary [127.0.0.1])
-	by primary.intra.htm-hungary.hu (Postfix) with ESMTP id 21874800E6;
-	Fri, 19 Aug 2016 23:00:59 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at htm-hungary.com
-Received: from primary.intra.htm-hungary.hu ([127.0.0.1])
-	by localhost (primary.intra.htm-hungary.hu [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id JOUpc93hF1i1; Fri, 19 Aug 2016 23:00:57 +0200 (CEST)
-Received: from gyurco.lan (unknown [10.8.0.14])
-	by primary.intra.htm-hungary.hu (Postfix) with ESMTPA id 3D0A1800CA;
-	Fri, 19 Aug 2016 23:00:57 +0200 (CEST)
-From: Gyorgy Szombathelyi <gyurco@freemail.hu>
+	Fri, 19 Aug 2016 21:58:10 +0000 (UTC)
+Received: by mail-it0-f68.google.com with SMTP id d65so2029370ith.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Aug 2016 14:58:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=7oXa5oW23h835apRg/zuwnLTSqXPCulR0oKaSIe90vo=;
+	b=m6MACEANKyw/VHJevGsB5rvGYhZQ4KykcZXJIZlAdSA9iB3dK/CB/LnEf+DCRoEm6K
+	FRZ6wg0rAxmudrntNI07BpzmF8FEIVWNbhDIAcERZ+xWHeEV+t8VnGY7oP2mwRziwKJy
+	KxnO50ji5jOcOxjGn9/s1T5Nt2fIGgKDvAfw7LBDMNoXCjWDjPmQPuExvWz+TxMFD2Lv
+	G0mThtb+z3/jgIxy1l9pggB5aHb0RDGUJg1JGEZHFeruWSenayF7OvOw2mz/Bfs5TGWZ
+	QlGdh/uRcbSXwiieXhWdzXJuM6Eq/liXgfAEobxaVu6IeeJBSsBAeKeS+oOiJORwhFac
+	H6Hw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=7oXa5oW23h835apRg/zuwnLTSqXPCulR0oKaSIe90vo=;
+	b=QXNdNCZfm9ieCVZvkUCs7mROszDOQQm+AL6kJBKSR09Bb4V/TfW84EBv3srezNWlLC
+	HH+ukZt6b4QVrrM4RfX37+GuCFDaMH04CIDtfN7SLA0o/O0QwWPGya62Ozdb8xsykWa5
+	VVhKxp52c+Lpf9srcN4eEqlWgLjYTNOSHb5fmveiXEnjcyBU9NcTWN9xlzyfpaWFfEJj
+	W+y9GCQBDsQhYjnBSHnwHBLIakd/m/CVi6pSuSCXftg4Hgdou0iTaCM5AhN5ehdNfhGW
+	ajrjjfKpgaXPGAzKQFlS01z/+v6LB/S7JH0a6BlJrPGbyTlDS6e3MvMtijeP+/oSwKI3
+	UFQQ==
+X-Gm-Message-State: AEkoousqH0DE7L07G3EGO55JkwE2DiE9rTKrQGeSrssKm89pIgOduOEftcyN46qNuZKQ9A==
+X-Received: by 10.36.125.137 with SMTP id b131mr8837661itc.55.1471643891308;
+	Fri, 19 Aug 2016 14:58:11 -0700 (PDT)
+Received: from brrussell-Latitude-E6530.natcky.rr.com
+	([2605:a000:1707:fb:9d01:5959:8426:336])
+	by smtp.gmail.com with ESMTPSA id 16sm4207616iol.23.2016.08.19.14.58.09
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 19 Aug 2016 14:58:10 -0700 (PDT)
+From: Kyle Russell <bkylerussell@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Aug 2016 23:00:36 +0200
-Message-Id: <1471640436-11211-1-git-send-email-gyurco@freemail.hu>
+Date: Fri, 19 Aug 2016 17:58:01 -0400
+Message-Id: <1471643882-14235-1-git-send-email-bkylerussell@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-webserver][PATCHv3 2/2] nginx.inc: use 4 spaces for indentation
+Subject: [meta-java][PATCH 1/2] rhino-native should depend on classpath-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,238 +52,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2016 21:01:01 -0000
+X-List-Received-Date: Fri, 19 Aug 2016 21:58:11 -0000
 
-From: Martin Jansa <Martin.Jansa@gmail.com>
+rhino's do_compile task passes
+${STAGING_DATADIR_NATIVE}/classpath/glibj.zip to javac.  This glibj.zip
+archive comes from the classpath-native package.
 
-* like any other sane recipes do
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Gyorgy Szombathelyi <gyurco@freemail.hu>
+Signed-off-by: Kyle Russell <bkylerussell@gmail.com>
 ---
- meta-webserver/recipes-httpd/nginx/nginx.inc | 194 ++++++++++++++-------------
- 1 file changed, 98 insertions(+), 96 deletions(-)
+ recipes-core/rhino/rhino_1.7r4.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index 7698c90..f3660af 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -12,12 +12,12 @@ SECTION = "net"
- DEPENDS = "libpcre gzip openssl"
+diff --git a/recipes-core/rhino/rhino_1.7r4.bb b/recipes-core/rhino/rhino_1.7r4.bb
+index 7898d23..30d5a62 100644
+--- a/recipes-core/rhino/rhino_1.7r4.bb
++++ b/recipes-core/rhino/rhino_1.7r4.bb
+@@ -2,6 +2,8 @@ DESCRIPTION = "Lexical analyzer generator for Java"
+ LICENSE = "MPL-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=8e2372bdbf22c99279ae4599a13cc458"
  
- SRC_URI = " \
--	http://nginx.org/download/nginx-${PV}.tar.gz \
--	file://nginx-cross.patch \
--	file://nginx.conf \
--	file://nginx.init \
--	file://nginx-volatile.conf \
--	file://nginx.service \
-+    http://nginx.org/download/nginx-${PV}.tar.gz \
-+    file://nginx-cross.patch \
-+    file://nginx.conf \
-+    file://nginx.init \
-+    file://nginx-volatile.conf \
-+    file://nginx.service \
- "
++DEPENDS_class-native += "classpath-native"
++
+ BBCLASSEXTEND = "native"
  
- inherit update-rc.d useradd
-@@ -34,104 +34,106 @@ DISABLE_STATIC = ""
- PACKAGECONFIG[http2] = "--with-http_v2_module,,"
- 
- do_configure () {
--	if [ "${SITEINFO_BITS}" = "64" ]; then
--		PTRSIZE=8
--	else
--		PTRSIZE=4
--	fi
--
--	echo $CFLAGS
--	echo $LDFLAGS
--
--	# Add the LDFLAGS to the main nginx link to avoid issues with missing GNU_HASH
--	echo "MAIN_LINK=\"\${MAIN_LINK} ${LDFLAGS}\"" >> auto/cc/conf
--
--	./configure \
--	--crossbuild=Linux:${TUNE_ARCH} \
--	--with-endian=${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
--	--with-int=4 \
--	--with-long=${PTRSIZE} \
--	--with-long-long=8 \
--	--with-ptr-size=${PTRSIZE} \
--	--with-sig-atomic-t=${PTRSIZE} \
--	--with-size-t=${PTRSIZE} \
--	--with-off-t=${PTRSIZE} \
--	--with-time-t=${PTRSIZE} \
--	--with-sys-nerr=132 \
--	--conf-path=${sysconfdir}/nginx/nginx.conf \
--	--http-log-path=${localstatedir}/log/nginx/access.log \
--	--error-log-path=${localstatedir}/log/nginx/error.log \
--	--pid-path=/run/nginx/nginx.pid \
--	--prefix=${prefix} \
--	--with-http_ssl_module \
--	--with-http_gzip_static_module \
--	${EXTRA_OECONF}
-+    if [ "${SITEINFO_BITS}" = "64" ]; then
-+        PTRSIZE=8
-+    else
-+        PTRSIZE=4
-+    fi
-+
-+    echo $CFLAGS
-+    echo $LDFLAGS
-+
-+    # Add the LDFLAGS to the main nginx link to avoid issues with missing GNU_HASH
-+    echo "MAIN_LINK=\"\${MAIN_LINK} ${LDFLAGS}\"" >> auto/cc/conf
-+
-+    ./configure \
-+    --crossbuild=Linux:${TUNE_ARCH} \
-+    --with-endian=${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
-+    --with-int=4 \
-+    --with-long=${PTRSIZE} \
-+    --with-long-long=8 \
-+    --with-ptr-size=${PTRSIZE} \
-+    --with-sig-atomic-t=${PTRSIZE} \
-+    --with-size-t=${PTRSIZE} \
-+    --with-off-t=${PTRSIZE} \
-+    --with-time-t=${PTRSIZE} \
-+    --with-sys-nerr=132 \
-+    --conf-path=${sysconfdir}/nginx/nginx.conf \
-+    --http-log-path=${localstatedir}/log/nginx/access.log \
-+    --error-log-path=${localstatedir}/log/nginx/error.log \
-+    --pid-path=/run/nginx/nginx.pid \
-+    --prefix=${prefix} \
-+    --with-http_ssl_module \
-+    --with-http_gzip_static_module \
-+    ${EXTRA_OECONF}
- }
- 
- do_install () {
--	oe_runmake 'DESTDIR=${D}' install
--	rm -fr ${D}${localstatedir}/run ${D}/run
--	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
--		install -d ${D}${sysconfdir}/tmpfiles.d
--		echo "d /run/${BPN} - - - -" \
--		     > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
--                echo "d /${localstatedir}/log/${BPN} 0755 root root -" \
--                     >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
--	fi
--	install -d ${D}${sysconfdir}/${BPN}
--	ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
--	install -d ${D}${NGINX_WWWDIR}
--	mv ${D}/usr/html ${D}${NGINX_WWWDIR}/
--	chown ${NGINX_USER}:www-data -R ${D}${NGINX_WWWDIR}
--
--	install -d ${D}${sysconfdir}/init.d
--	install -m 0755 ${WORKDIR}/nginx.init ${D}${sysconfdir}/init.d/nginx
--	sed -i 's,/usr/sbin/,${sbindir}/,g' ${D}${sysconfdir}/init.d/nginx
--	sed -i 's,/etc/,${sysconfdir}/,g'  ${D}${sysconfdir}/init.d/nginx
--
--	install -d ${D}${sysconfdir}/nginx
--	install -m 0644 ${WORKDIR}/nginx.conf ${D}${sysconfdir}/nginx/nginx.conf
--	sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/nginx/nginx.conf
--	sed -i 's/^user.*/user ${NGINX_USER};/g' ${D}${sysconfdir}/nginx/nginx.conf
--	install -d ${D}${sysconfdir}/nginx/sites-enabled
--
--	install -d ${D}${sysconfdir}/default/volatiles
--	install -m 0644 ${WORKDIR}/nginx-volatile.conf ${D}${sysconfdir}/default/volatiles/99_nginx
--	sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/default/volatiles/99_nginx
--
--        if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)};then
--            install -d ${D}${systemd_unitdir}/system
--            install -m 0644 ${WORKDIR}/nginx.service ${D}${systemd_unitdir}/system/
--            sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
--                    -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
--                    -e 's,@SBINDIR@,${sbindir},g' \
--                    ${D}${systemd_unitdir}/system/nginx.service
--        fi
-+    oe_runmake 'DESTDIR=${D}' install
-+    rm -fr ${D}${localstatedir}/run ${D}/run
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-+        install -d ${D}${sysconfdir}/tmpfiles.d
-+        echo "d /run/${BPN} - - - -" \
-+            > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
-+        echo "d /${localstatedir}/log/${BPN} 0755 root root -" \
-+            >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
-+    fi
-+    install -d ${D}${sysconfdir}/${BPN}
-+    ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
-+    install -d ${D}${NGINX_WWWDIR}
-+    mv ${D}/usr/html ${D}${NGINX_WWWDIR}/
-+    chown ${NGINX_USER}:www-data -R ${D}${NGINX_WWWDIR}
-+
-+    install -d ${D}${sysconfdir}/init.d
-+    install -m 0755 ${WORKDIR}/nginx.init ${D}${sysconfdir}/init.d/nginx
-+    sed -i 's,/usr/sbin/,${sbindir}/,g' ${D}${sysconfdir}/init.d/nginx
-+    sed -i 's,/etc/,${sysconfdir}/,g'  ${D}${sysconfdir}/init.d/nginx
-+
-+    install -d ${D}${sysconfdir}/nginx
-+    install -m 0644 ${WORKDIR}/nginx.conf ${D}${sysconfdir}/nginx/nginx.conf
-+    sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/nginx/nginx.conf
-+    sed -i 's/^user.*/user ${NGINX_USER};/g' ${D}${sysconfdir}/nginx/nginx.conf
-+    install -d ${D}${sysconfdir}/nginx/sites-enabled
-+
-+    install -d ${D}${sysconfdir}/default/volatiles
-+    install -m 0644 ${WORKDIR}/nginx-volatile.conf ${D}${sysconfdir}/default/volatiles/99_nginx
-+    sed -i 's,/var/,${localstatedir}/,g' ${D}${sysconfdir}/default/volatiles/99_nginx
-+
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)};then
-+        install -d ${D}${systemd_unitdir}/system
-+        install -m 0644 ${WORKDIR}/nginx.service ${D}${systemd_unitdir}/system/
-+        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
-+                -e 's,@LOCALSTATEDIR@,${localstatedir},g' \
-+                -e 's,@SBINDIR@,${sbindir},g' \
-+                ${D}${systemd_unitdir}/system/nginx.service
-+    fi
- }
- 
- pkg_postinst_${PN} () {
--	if [ -z "$D" ]; then
--		if type systemd-tmpfiles >/dev/null; then
--			systemd-tmpfiles --create
--		elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
--			${sysconfdir}/init.d/populate-volatile.sh update
--		fi
--	fi
-+    if [ -z "$D" ]; then
-+        if type systemd-tmpfiles >/dev/null; then
-+            systemd-tmpfiles --create
-+        elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
-+            ${sysconfdir}/init.d/populate-volatile.sh update
-+        fi
-+    fi
- }
- 
--FILES_${PN} += "${localstatedir}/ \
--                ${systemd_unitdir}/system/nginx.service \
--                "
--
--CONFFILES_${PN} = "${sysconfdir}/nginx/nginx.conf \
--		${sysconfdir}/nginx/fastcgi.conf\
--		${sysconfdir}/nginx/fastcgi_params \
--		${sysconfdir}/nginx/koi-utf \
--		${sysconfdir}/nginx/koi-win \
--		${sysconfdir}/nginx/mime.types \
--		${sysconfdir}/nginx/scgi_params \
--		${sysconfdir}/nginx/uwsgi_params \
--		${sysconfdir}/nginx/win-utf \
-+FILES_${PN} += " \
-+    ${localstatedir}/ \
-+    ${systemd_unitdir}/system/nginx.service \
-+"
-+
-+CONFFILES_${PN} = " \
-+    ${sysconfdir}/nginx/nginx.conf \
-+    ${sysconfdir}/nginx/fastcgi.conf \
-+    ${sysconfdir}/nginx/fastcgi_params \
-+    ${sysconfdir}/nginx/koi-utf \
-+    ${sysconfdir}/nginx/koi-win \
-+    ${sysconfdir}/nginx/mime.types \
-+    ${sysconfdir}/nginx/scgi_params \
-+    ${sysconfdir}/nginx/uwsgi_params \
-+    ${sysconfdir}/nginx/win-utf \
- "
- 
- INITSCRIPT_NAME = "nginx"
+ inherit java-library
 -- 
 2.7.4
 
