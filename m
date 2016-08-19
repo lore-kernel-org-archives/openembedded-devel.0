@@ -1,59 +1,54 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-ua0-f193.google.com (mail-ua0-f193.google.com
-	[209.85.217.193])
-	by mail.openembedded.org (Postfix) with ESMTP id D1A1976806
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f65.google.com (mail-pa0-f65.google.com
+	[209.85.220.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 90C2A76EBF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2016 15:11:49 +0000 (UTC)
-Received: by mail-ua0-f193.google.com with SMTP id u13so5793098uau.0
+	Fri, 19 Aug 2016 16:45:16 +0000 (UTC)
+Received: by mail-pa0-f65.google.com with SMTP id cf3so3646713pad.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2016 08:11:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=SM/Jm5lPnf41tHbVT3S8Ug6LwlQT7+GhmDx0n/Kafwo=;
-	b=nwVPqmGiVR7ViZofrVuCAOtVpbhfLWsf5ZGRivmML8HFhsJn72zrg8wkg59xODF56j
-	kC8IzswkIbggoE/4UHJeHlgLrP8Dv1rbZ+LVUyI11XYbKrswnpRWR5oQvqrn1DhtLMYH
-	//35U6TKTBk9RZjZIeiAmBV+7jFzZcU4Mcz7MS/rTSQBnvwTRcFfaXRQ6tae+DLHw0lj
-	3+wGE38ZWfENMFBjuS4cDUNFItd/gW/BPZquibGyKs+uNs6QS3UYFflPxGsASnw4FwNT
-	JiM2p9Yu0oHTSB9x81NI3tF96SCL0SGJ6p0I6QaKPGNir5Cxbun0MyoUpLQ/GGp7hNtA
-	kuBA==
+	Fri, 19 Aug 2016 09:45:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:subject:from:in-reply-to:date:message-id:references:to; 
+	bh=keO8ZSDdfI9NSg0swlNzZ2ZDI0UBlYdilnjJoZFJg2Q=;
+	b=vZFfhWt+QTCyrjK5rj0INTue3xmSDf6Pvtbs1pMeyJdJ3hJAavDH7MP33qSz6INMLU
+	6h+wwemEeMShyxri6IP3aONWQ+OzKuL+i9WSGoPRXexvfPgXeR0d7FPRtHQGh9BqLXXF
+	6zFnD+fpvWBJ6BOAqobnsT0RG1uOFVLRMIjus+3LdHiiqA4AlUrKYISWyluBlkCVH6NE
+	/PQOksdjGV0zCBj6EVBRSjxTHrlO3ZCA9Ue8WcHhCESH3Tl4ZndCNt8VjGAbABih6csX
+	evnDb9toL9adUmFDjShyKMiFAkZk25W8IMaTS6TDWSGg8IXL4mlzZDgyjy7L5Oq0hNr3
+	7Rbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=SM/Jm5lPnf41tHbVT3S8Ug6LwlQT7+GhmDx0n/Kafwo=;
-	b=ifNZD8NyLFu8maac9w1aFA9gpq8lHT/vxAbJG816dSFKELMTajdwrhGCW3C4nUgWsA
-	z7UJTFbbD6Y30gYjBj1vW8aYigGaRaEe7kBctgNpuWsQOD5x9w/d4jDvzUcMXb8/CioS
-	E3ZqKTuhBEXe4fyPZJC1LzkYIlAXow+NzlICZ4ipz6ZnbtoOJVLtMUIDx2qTdRHoe4kS
-	KBQ55Qldbk8YTgu/bIUZE2eakedtsoGXEz+jbLH17vrAydVLw3MxH1qhUJnbbqY+IUvv
-	qERAxAJef9dQdTWFtxxHwC9B1A9Jo1Mfa8C2kqR3oui/3/gHphC4/132mk/WYC01Jkj0
-	RW0Q==
-X-Gm-Message-State: AEkoouvMO7IjktBnfdpcD6dwlSt0wBWRXVuvpd7uaClQOhGFIF7TqQwyGHHJAXOBjjejLg==
-X-Received: by 10.176.65.40 with SMTP id j37mr3562692uad.116.1471619509426;
-	Fri, 19 Aug 2016 08:11:49 -0700 (PDT)
-Received: from mail-ua0-f179.google.com (mail-ua0-f179.google.com.
-	[209.85.217.179]) by smtp.gmail.com with ESMTPSA id
-	c194sm1399570vkf.24.2016.08.19.08.11.47
+	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date
+	:message-id:references:to;
+	bh=keO8ZSDdfI9NSg0swlNzZ2ZDI0UBlYdilnjJoZFJg2Q=;
+	b=UNzPrYzENmsPIkcHjezDohQaebxpVe/FWSP1pamT4ZHAC9NPYgo9gQVNG9SY7aW/fz
+	CW7DOoKRrOLKaJzpJSfqqH+e4srzBMV0UrjsEc8hu4HCV6ezn4tgIvDh7OtKvqtUyOKH
+	iJ08jHO8tBJwyNQRjmEtF8Vbt6gYFW4WKscFW7xhwksAhpFbXhLeE9Iivy66oMvBz62d
+	1Vqwzd5J+gcQ7g5cgBgbHTM4Kk9dDEixvkFn04ME7ezGf1VHlYNJjKyZ7JtRGPr51FeD
+	tZVrCST3psK+/y6pPyLRQOgfqAceNdn5DIa4TeaLq9GHk7v0eKPgsOuE96hmKsbllwJP
+	3NNQ==
+X-Gm-Message-State: AEkooutrS7Xbu8OcLSBC0AAGn8lRHIhvhuOQoftTS37E+wMJYEQdzCGY+A/2e6+L3omUcA==
+X-Received: by 10.66.81.200 with SMTP id c8mr15543669pay.70.1471625116722;
+	Fri, 19 Aug 2016 09:45:16 -0700 (PDT)
+Received: from ?IPv6:2601:647:4c00:3edf:8c96:6cf1:33a0:ccf4?
+	([2601:647:4c00:3edf:8c96:6cf1:33a0:ccf4])
+	by smtp.gmail.com with ESMTPSA id
+	r10sm7787741pfk.84.2016.08.19.09.45.14
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 19 Aug 2016 08:11:48 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-ua0-f179.google.com with SMTP id 97so84748168uav.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2016 08:11:47 -0700 (PDT)
-X-Received: by 10.31.161.137 with SMTP id k131mr4278102vke.122.1471619507494; 
-	Fri, 19 Aug 2016 08:11:47 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.31.138.78 with HTTP; Fri, 19 Aug 2016 08:11:46 -0700 (PDT)
-In-Reply-To: <1471613076-15965-1-git-send-email-erkka.kaaria@intel.com>
-References: <1471613076-15965-1-git-send-email-erkka.kaaria@intel.com>
-Date: Fri, 19 Aug 2016 12:11:46 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKrRrS01jGAZu_sKHxM3P_hTf05bgHfCbTU6ti_m4aVGFg@mail.gmail.com>
-Message-ID: <CAP9ODKrRrS01jGAZu_sKHxM3P_hTf05bgHfCbTU6ti_m4aVGFg@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java][PATCH] openjdk-8-cross.inc: Fix QA error caused by missing hash
+	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 19 Aug 2016 09:45:15 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
+X-Pgp-Agent: GPGMail
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <1471601356.24738.2.camel@andred.net>
+Date: Fri, 19 Aug 2016 09:45:13 -0700
+Message-Id: <6D158A0E-2985-4E77-884E-6DE51CA554D0@gmail.com>
+References: <cover.1471600808.git.yi.zhao@windriver.com>
+	<0159b82ac947ad69460adcec9d79ee83b76d2a7b.1471600808.git.yi.zhao@windriver.com>
+	<1471601356.24738.2.camel@andred.net>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.3124)
+Subject: Re: [meta-networking][PATCH 1/3] ifenslave: fix QA warning for GNU_HASH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,75 +61,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2016 15:11:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 19 Aug 2016 16:45:16 -0000
+X-Groupsio-MsgNum: 62757
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_DA6B7709-CB73-4FDA-8204-580706059209";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+
+--Apple-Mail=_DA6B7709-CB73-4FDA-8204-580706059209
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
 
-On Fri, Aug 19, 2016 at 10:24 AM, Erkka K=C3=A4=C3=A4ri=C3=A4 <erkka.kaaria=
-@intel.com> wrote:
-> Some openjdk makefiles (e.g. vm.make) only use CFLAGS as their linker
-> flags. This means that the oe-specific linker flags are lost. This in
-> particular causes issues with the recent oe-core commit a98a81808, which
-> intentionally poisons the linker hash style, so that any recipes that do
-> not use the oe LDFLAGS fail to build.
->
-> Signed-off-by: Erkka K=C3=A4=C3=A4ri=C3=A4 <erkka.kaaria@intel.com>
-> ---
->  recipes-core/openjdk/openjdk-8-cross.inc | 10 ++++++----
->  1 file changed, 6 insertions(+), 4 deletions(-)
->
-> diff --git a/recipes-core/openjdk/openjdk-8-cross.inc b/recipes-core/open=
-jdk/openjdk-8-cross.inc
-> index 11e94ce..6097afc 100644
-> --- a/recipes-core/openjdk/openjdk-8-cross.inc
-> +++ b/recipes-core/openjdk/openjdk-8-cross.inc
-> @@ -39,21 +39,23 @@ SRC_URI_append =3D "\
->      file://jvm.cfg \
->  "
->
-> +# Some makefiles pick the linker flags from the CFLAGS variable, so add
-> +# the LDFLAGS to CFLAGS
-> +CFLAGS_append =3D " \
-> +  ${LDFLAGS} \
-> +"
-> +
 
-Fine.
+> On Aug 19, 2016, at 3:09 AM, Andr=C3=A9 Draszik <git@andred.net> =
+wrote:
+>=20
+> On Fr, 2016-08-19 at 18:04 +0800, Yi Zhao wrote:
+>> Set LDFLAGS explicitly for do_compile
+>>=20
+>> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+>> ---
+>>  meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>=20
+>> diff --git =
+a/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
+>> b/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
+>> index acc0864..385bc80 100644
+>> --- a/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
+>> +++ b/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
+>> @@ -10,7 +10,7 @@ SRC_URI[md5sum] =3D =
+"56126cd1013cefe0ce6f81613e677bdd"
+>>  SRC_URI[sha256sum] =3D
+>> "7917bf34de80a2492eb225adf9168c83a4854ac8a008ed0fd5b3fd147ccd3041"
+>>=20
+>>  do_compile() {
+>> -    ${CC} ifenslave.c -o ifenslave
+>> +    ${CC} ${LDFLAGS} ifenslave.c -o ifenslave
+>=20
+> While you're fixing the gcc invocation here, wouldn't it make sense to =
+add
+> CFLAGS as well? (Maybe in a separate patch).
+>=20
 
->  EXTRA_OECONF_append =3D "\
->      --with-jobs=3D${@get_jdk8_native_jobs(d)} \
-> -    \
->      --with-sys-root=3D${STAGING_DIR} \
->      --with-tools-dir=3D${STAGING_DIR_NATIVE} \
->      --with-boot-jdk=3D${STAGING_LIBDIR_NATIVE}/jvm/openjdk-8-native \
->      --with-cacerts-file=3D${STAGING_LIBDIR_NATIVE}/jvm/openjdk-8-native/=
-jre/lib/security/cacerts \
-> -    \
->      --disable-precompiled-headers \
->      --disable-zip-debug-info \
-> -    \
->      --with-extra-cflags=3D'${CFLAGS}' \
->      --with-extra-cxxflags=3D'${CXXFLAGS}' \
->      --with-extra-ldflags=3D'${LDFLAGS}' \
-> -    \
->      ${@jdk_configure_options(d)} \
->  "
+yeah or into two distinct steps of compile and link.
 
-Not related, please drop this change.
-
-> --
-> 2.7.4
->
-> ---------------------------------------------------------------------
-> Intel Finland Oy
-> Registered Address: PL 281, 00181 Helsinki
-> Business Identity Code: 0357606 - 4
-> Domiciled in Helsinki
->
-> This e-mail and any attachments may contain confidential material for
-> the sole use of the intended recipient(s). Any review or distribution
-> by others is strictly prohibited. If you are not the intended
-> recipient, please contact the sender and delete all copies.
+>=20
+> Cheers,
+> Andre'
+>=20
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -142,9 +117,20 @@ Not related, please drop this change.
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
+--Apple-Mail=_DA6B7709-CB73-4FDA-8204-580706059209
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
 
---=20
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
 
+iEYEARECAAYFAle3N50ACgkQuwUzVZGdMxQmJQCfUXCoS9Dh67wcGoM/jTm3xd24
+OkwAn2iV61+F/GnR1uBdeOkyFjVCiAkL
+=Icce
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_DA6B7709-CB73-4FDA-8204-580706059209--
