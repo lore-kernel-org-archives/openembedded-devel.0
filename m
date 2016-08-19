@@ -1,25 +1,27 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id DBD0665CBF
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B3DC77081
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2016 10:04:19 +0000 (UTC)
+	Fri, 19 Aug 2016 10:04:24 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u7JA4Kl3024263
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u7JA4O74026421
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2016 03:04:20 -0700 (PDT)
+	Fri, 19 Aug 2016 03:04:25 -0700 (PDT)
 Received: from localhost (128.224.162.178) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
-	Fri, 19 Aug 2016 03:04:20 -0700
+	Fri, 19 Aug 2016 03:04:23 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 19 Aug 2016 18:04:14 +0800
-Message-ID: <cover.1471600808.git.yi.zhao@windriver.com>
+Date: Fri, 19 Aug 2016 18:04:15 +0800
+Message-ID: <0159b82ac947ad69460adcec9d79ee83b76d2a7b.1471600808.git.yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <cover.1471600808.git.yi.zhao@windriver.com>
+References: <cover.1471600808.git.yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.162.178]
-Subject: [meta-networking][PATCH 0/3] NO_GNU_HASH warning fixes
+Subject: [meta-networking][PATCH 1/3] ifenslave: fix QA warning for GNU_HASH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,31 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2016 10:04:23 -0000
+X-List-Received-Date: Fri, 19 Aug 2016 10:04:25 -0000
 Content-Type: text/plain
 
+Set LDFLAGS explicitly for do_compile
 
-The following changes since commit 02a390b79bdc089eb583e443ee04f60bffd409eb:
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-  tnftp: tnftp20130505 -> tnftp20151004 (2016-08-16 21:26:15 -0400)
-
-are available in the git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib yzhao/networking-hashfix
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=yzhao/networking-hashfix
-
-Yi Zhao (3):
-  ifenslave: fix QA warning for GNU_HASH
-  ipvsadm: fix QA warning for GNU_HASH
-  iscsitarget: fix QA warning for GNU_HASH
-
- .../iscsitarget/iscsitarget_1.4.20.3+svn502.bb        |  3 ++-
- .../recipes-support/ifenslave/ifenslave_1.1.0.bb      |  2 +-
- .../ipvsadm/ipvsadm/makefile-add-ldflags.patch        | 19 +++++++++++++++++++
- .../recipes-support/ipvsadm/ipvsadm_1.26.bb           |  1 +
- 4 files changed, 23 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm/makefile-add-ldflags.patch
-
+diff --git a/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb b/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
+index acc0864..385bc80 100644
+--- a/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
++++ b/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
+@@ -10,7 +10,7 @@ SRC_URI[md5sum] = "56126cd1013cefe0ce6f81613e677bdd"
+ SRC_URI[sha256sum] = "7917bf34de80a2492eb225adf9168c83a4854ac8a008ed0fd5b3fd147ccd3041"
+ 
+ do_compile() {
+-    ${CC} ifenslave.c -o ifenslave
++    ${CC} ${LDFLAGS} ifenslave.c -o ifenslave
+ }
+ do_install() {
+     install -d "${D}${sbindir}"
 -- 
 2.7.4
 
