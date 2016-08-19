@@ -1,52 +1,59 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f65.google.com (mail-pa0-f65.google.com
-	[209.85.220.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 9547F75C61;
-	Fri, 19 Aug 2016 13:40:40 +0000 (UTC)
-Received: by mail-pa0-f65.google.com with SMTP id ez1so3474226pab.3;
-	Fri, 19 Aug 2016 06:40:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:from:in-reply-to:date:cc:message-id:references
-	:to; bh=fCfadcT7KASyZ2ZqNkVB0SMEj30C2uWP7IGMUQlMRsg=;
-	b=b+eeyd7Mldq1S+O5mM+a6jtsgDf8+m/WMKgMAtfIHYi+RHPE6AFLbrXS2cWTwNMWfL
-	KVRHhLd/5Cq0imdrhJ80e8QQkJxeHQNXsTWjNUg41zH3dx3FXd7aHJoErJz0nuzC9I+c
-	zc1gktOcnFT3oIQ53lA+UMoC0zEF6BbEZlPTOxQWUr5hIrZGYSyptgJKGV8mnkX4YRAf
-	wlKJo1obXmdduFqDtFau2qTUd41MdITmC/5ydi9Su9jM0qAtPn0d13Zt8GAuXzuvMrHn
-	knKe8YvpP6T24joHj4oTzSrI0A9Pdd5Q8Z84bz7gvj53vwwfbgynFNkqNiX/+dICeCjA
-	6nBA==
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-ua0-f193.google.com (mail-ua0-f193.google.com
+	[209.85.217.193])
+	by mail.openembedded.org (Postfix) with ESMTP id D1A1976806
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Aug 2016 15:11:49 +0000 (UTC)
+Received: by mail-ua0-f193.google.com with SMTP id u13so5793098uau.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Aug 2016 08:11:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=SM/Jm5lPnf41tHbVT3S8Ug6LwlQT7+GhmDx0n/Kafwo=;
+	b=nwVPqmGiVR7ViZofrVuCAOtVpbhfLWsf5ZGRivmML8HFhsJn72zrg8wkg59xODF56j
+	kC8IzswkIbggoE/4UHJeHlgLrP8Dv1rbZ+LVUyI11XYbKrswnpRWR5oQvqrn1DhtLMYH
+	//35U6TKTBk9RZjZIeiAmBV+7jFzZcU4Mcz7MS/rTSQBnvwTRcFfaXRQ6tae+DLHw0lj
+	3+wGE38ZWfENMFBjuS4cDUNFItd/gW/BPZquibGyKs+uNs6QS3UYFflPxGsASnw4FwNT
+	JiM2p9Yu0oHTSB9x81NI3tF96SCL0SGJ6p0I6QaKPGNir5Cxbun0MyoUpLQ/GGp7hNtA
+	kuBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:mime-version:from:in-reply-to:date:cc
-	:message-id:references:to;
-	bh=fCfadcT7KASyZ2ZqNkVB0SMEj30C2uWP7IGMUQlMRsg=;
-	b=Oi7uJEc60N5W7Y716GnUeDey44D/yl0lx5s/sDOudTmaTOB71Gcuc6qY2ODvZN8FuV
-	gbf4I3crND+X64xpo2dPRY5AHBptw8aBEIXPUEWhT+yasBMTWSTCortQFUttBHJd0AAE
-	WU9jogjPrZSxOmIQmVkHEPyuTmSQhJF2zpOFYSb4wEgv2aXno4IFbXk7DfAMcpucXgjH
-	Yijpum8my42pKQgZfrDdxTK0lvpkqEelw3+KBzF99gDq7aH8yJmMm5pg0jhlvIUOw+9h
-	5s6zuBGvtbMGyNvfbQG/z5XnMszcgXwbc5a5R0cqK3TIwbLOd1V8Dkr/QYWSnVZI12HG
-	PjPA==
-X-Gm-Message-State: AEkoout/Go6LW2rhxW/9IrJ5xvbGfmIwdfJxmfUj/7kg4X4ijryD8ZCPgm8LwwuFt0cXmg==
-X-Received: by 10.66.233.38 with SMTP id tt6mr13633235pac.99.1471614041057;
-	Fri, 19 Aug 2016 06:40:41 -0700 (PDT)
-Received: from [192.168.0.5] (c-76-102-32-192.hsd1.ca.comcast.net.
-	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	n69sm6843388pfa.77.2016.08.19.06.40.39
-	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 19 Aug 2016 06:40:39 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
-X-Pgp-Agent: GPGMail
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1471601644.16712.23.camel@linuxfoundation.org>
-Date: Fri, 19 Aug 2016 06:40:36 -0700
-Message-Id: <D00F6189-93E5-47F1-B2CB-E07F1F0C2B50@gmail.com>
-References: <888B09F3-F9A2-49C1-86E8-E33FA1FE6521@gmail.com>
-	<1471601644.16712.23.camel@linuxfoundation.org>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-X-Mailer: Apple Mail (2.3124)
-Cc: Yocto Discussion Mailing List <yocto@yoctoproject.org>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	OE Core mailing list <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] [RFT] gcc 6.2 RC1 update
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:content-transfer-encoding;
+	bh=SM/Jm5lPnf41tHbVT3S8Ug6LwlQT7+GhmDx0n/Kafwo=;
+	b=ifNZD8NyLFu8maac9w1aFA9gpq8lHT/vxAbJG816dSFKELMTajdwrhGCW3C4nUgWsA
+	z7UJTFbbD6Y30gYjBj1vW8aYigGaRaEe7kBctgNpuWsQOD5x9w/d4jDvzUcMXb8/CioS
+	E3ZqKTuhBEXe4fyPZJC1LzkYIlAXow+NzlICZ4ipz6ZnbtoOJVLtMUIDx2qTdRHoe4kS
+	KBQ55Qldbk8YTgu/bIUZE2eakedtsoGXEz+jbLH17vrAydVLw3MxH1qhUJnbbqY+IUvv
+	qERAxAJef9dQdTWFtxxHwC9B1A9Jo1Mfa8C2kqR3oui/3/gHphC4/132mk/WYC01Jkj0
+	RW0Q==
+X-Gm-Message-State: AEkoouvMO7IjktBnfdpcD6dwlSt0wBWRXVuvpd7uaClQOhGFIF7TqQwyGHHJAXOBjjejLg==
+X-Received: by 10.176.65.40 with SMTP id j37mr3562692uad.116.1471619509426;
+	Fri, 19 Aug 2016 08:11:49 -0700 (PDT)
+Received: from mail-ua0-f179.google.com (mail-ua0-f179.google.com.
+	[209.85.217.179]) by smtp.gmail.com with ESMTPSA id
+	c194sm1399570vkf.24.2016.08.19.08.11.47
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 19 Aug 2016 08:11:48 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-ua0-f179.google.com with SMTP id 97so84748168uav.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Aug 2016 08:11:47 -0700 (PDT)
+X-Received: by 10.31.161.137 with SMTP id k131mr4278102vke.122.1471619507494; 
+	Fri, 19 Aug 2016 08:11:47 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.31.138.78 with HTTP; Fri, 19 Aug 2016 08:11:46 -0700 (PDT)
+In-Reply-To: <1471613076-15965-1-git-send-email-erkka.kaaria@intel.com>
+References: <1471613076-15965-1-git-send-email-erkka.kaaria@intel.com>
+Date: Fri, 19 Aug 2016 12:11:46 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKrRrS01jGAZu_sKHxM3P_hTf05bgHfCbTU6ti_m4aVGFg@mail.gmail.com>
+Message-ID: <CAP9ODKrRrS01jGAZu_sKHxM3P_hTf05bgHfCbTU6ti_m4aVGFg@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java][PATCH] openjdk-8-cross.inc: Fix QA error caused by missing hash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,70 +66,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2016 13:40:44 -0000
-X-Groupsio-MsgNum: 62755
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_98E4BD7B-A531-41FA-9898-13E82B9EB779";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-
---Apple-Mail=_98E4BD7B-A531-41FA-9898-13E82B9EB779
+X-List-Received-Date: Fri, 19 Aug 2016 15:11:50 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+
+On Fri, Aug 19, 2016 at 10:24 AM, Erkka K=C3=A4=C3=A4ri=C3=A4 <erkka.kaaria=
+@intel.com> wrote:
+> Some openjdk makefiles (e.g. vm.make) only use CFLAGS as their linker
+> flags. This means that the oe-specific linker flags are lost. This in
+> particular causes issues with the recent oe-core commit a98a81808, which
+> intentionally poisons the linker hash style, so that any recipes that do
+> not use the oe LDFLAGS fail to build.
+>
+> Signed-off-by: Erkka K=C3=A4=C3=A4ri=C3=A4 <erkka.kaaria@intel.com>
+> ---
+>  recipes-core/openjdk/openjdk-8-cross.inc | 10 ++++++----
+>  1 file changed, 6 insertions(+), 4 deletions(-)
+>
+> diff --git a/recipes-core/openjdk/openjdk-8-cross.inc b/recipes-core/open=
+jdk/openjdk-8-cross.inc
+> index 11e94ce..6097afc 100644
+> --- a/recipes-core/openjdk/openjdk-8-cross.inc
+> +++ b/recipes-core/openjdk/openjdk-8-cross.inc
+> @@ -39,21 +39,23 @@ SRC_URI_append =3D "\
+>      file://jvm.cfg \
+>  "
+>
+> +# Some makefiles pick the linker flags from the CFLAGS variable, so add
+> +# the LDFLAGS to CFLAGS
+> +CFLAGS_append =3D " \
+> +  ${LDFLAGS} \
+> +"
+> +
+
+Fine.
+
+>  EXTRA_OECONF_append =3D "\
+>      --with-jobs=3D${@get_jdk8_native_jobs(d)} \
+> -    \
+>      --with-sys-root=3D${STAGING_DIR} \
+>      --with-tools-dir=3D${STAGING_DIR_NATIVE} \
+>      --with-boot-jdk=3D${STAGING_LIBDIR_NATIVE}/jvm/openjdk-8-native \
+>      --with-cacerts-file=3D${STAGING_LIBDIR_NATIVE}/jvm/openjdk-8-native/=
+jre/lib/security/cacerts \
+> -    \
+>      --disable-precompiled-headers \
+>      --disable-zip-debug-info \
+> -    \
+>      --with-extra-cflags=3D'${CFLAGS}' \
+>      --with-extra-cxxflags=3D'${CXXFLAGS}' \
+>      --with-extra-ldflags=3D'${LDFLAGS}' \
+> -    \
+>      ${@jdk_configure_options(d)} \
+>  "
+
+Not related, please drop this change.
+
+> --
+> 2.7.4
+>
+> ---------------------------------------------------------------------
+> Intel Finland Oy
+> Registered Address: PL 281, 00181 Helsinki
+> Business Identity Code: 0357606 - 4
+> Domiciled in Helsinki
+>
+> This e-mail and any attachments may contain confidential material for
+> the sole use of the intended recipient(s). Any review or distribution
+> by others is strictly prohibited. If you are not the intended
+> recipient, please contact the sender and delete all copies.
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
-> On Aug 19, 2016, at 3:14 AM, Richard Purdie =
-<richard.purdie@linuxfoundation.org> wrote:
->=20
-> On Tue, 2016-08-16 at 11:55 -0700, Khem Raj wrote:
->> Hi All
->>=20
->> I have put together recipe upgrade for upcoming gcc 6.2 release now
->> that it entered RC phase. With gcc 6.2 the recipes are using tarballs
->> instead of git fetcher as promised :)
->> Please help testing it out in your setups and report any issues you
->> see.
->>=20
->> The commit you need to cherry-pick for OE-core is this one
->>=20
->> https://github.com/kraj/openembedded-core/commit/0319b603761a16e65d70
->> 4336112c3709a8bf771c
->>=20
->> Thank you for your help
->=20
-> I put this through the autobuilder and it passed so I've merged it. I
-> did this quickly as we're putting a "pre M3" build through a QA cycle
-> and I wanted to get some of the more invasive changes into that build
-> so we don't have a stampeding herd of patches breaking everything
-> coming up to the final feature freeze for 2.2.
->=20
-> In other news, we are now also testing musl world builds on the
-> autobuilder as part of regular testing.
 
-Fantastic !
+--=20
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
->=20
-> Cheers,
->=20
-> Richard
->=20
->=20
-
-
---Apple-Mail=_98E4BD7B-A531-41FA-9898-13E82B9EB779
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAle3DFkACgkQuwUzVZGdMxR4twCaA7Q1+zA2v8piVasrBZsoJH/X
-7ckAmwXHGX1swoOQxFU66nO+o3DaPA6i
-=YOP1
------END PGP SIGNATURE-----
-
---Apple-Mail=_98E4BD7B-A531-41FA-9898-13E82B9EB779--
