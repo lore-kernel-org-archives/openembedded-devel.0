@@ -1,42 +1,25 @@
-Return-Path: <ankur.tyagi85@gmail.com>
-Received: from mail-qk0-f177.google.com (mail-qk0-f177.google.com
-	[209.85.220.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 790146E630
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 42CD773211
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2016 04:41:01 +0000 (UTC)
-Received: by mail-qk0-f177.google.com with SMTP id v123so36462972qkh.2
+	Fri, 19 Aug 2016 09:27:38 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u7J9RdJr016411
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 21:41:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=Av5N9adR2WBjPypx/74vnl49BmJVU7+mXSvE9EzISnQ=;
-	b=Jj90Ki+ubh4iOmt1EpkX/Jt0up5g5+6M+oALxSCnC3MlskatWsH8g19V06wEdcDxa8
-	wToXdUkX6WamHOiwozeEWlxTUJZog6DAKkPBpGj712wS8rFji5tYpn7R6MJRlZgpCvrG
-	7bhsdrZODxdcYlc6QJoQyeRt+dYC21hjHqPRYZx15k/wDd99AxRdgRO8WXY3SoYTAW17
-	b9PXOdbCQ2pE/d2atYpXrWO0iGQ/WaN+LymGB7mkdwAZ1U4EUDM57k6I8yr1CRkDyPzH
-	ufofOk/qh9tGo5QOpVgQiCEhPc4srVVr7F+RGsZu4+r/chu64ZTKtgv6hYbA0U0r40VD
-	Xozg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=Av5N9adR2WBjPypx/74vnl49BmJVU7+mXSvE9EzISnQ=;
-	b=J0pbnzD8GYPPjWpmZrz5AjXnOLoUkcT1xo1P5KRBK0gWsNpg+TQgAxBkIhXkIkxaZ+
-	0NCwYnvdOmjH0SutPM7eKs7zUV4RxD4tFSF2FH3i0cWkfpq4Hy23Sf2auqbQtHX1F0i6
-	nd1QUyO8frdb6TmpO8B2EfK5tMj8kkVo0MvHsgHLb1oMWzWwOJeYuuuL7f0bPSlb6hgV
-	iJ4zlp5CsdeqiFpmDrUPsnchkk37ZfbZUBn+u/bCl3BZ9gluK/rdwJyUrObUwg7mZAUN
-	MZpP3+SfdJX/tBkiYxP0MNUH8FinQvnoknLJW+L/thGTeLBFUq4u503ORG/I8ws0bTb5
-	Gn3A==
-X-Gm-Message-State: AEkoouvcELCHjpZLRErVj9rgMFxjNaU9b0llNgqJ8H3GA0a8EvjjOZjGlH0gK7L/Q2jo985jghPa2Rc9MD8BjA==
-X-Received: by 10.55.33.193 with SMTP id f62mr4056771qki.270.1471581661880;
-	Thu, 18 Aug 2016 21:41:01 -0700 (PDT)
+	Fri, 19 Aug 2016 02:27:39 -0700 (PDT)
+Received: from localhost (128.224.162.178) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
+	Fri, 19 Aug 2016 02:27:38 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 19 Aug 2016 17:27:36 +0800
+Message-ID: <1471598856-6817-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Received: by 10.200.47.198 with HTTP; Thu, 18 Aug 2016 21:40:41 -0700 (PDT)
-From: Ankur Tyagi <ankur.tyagi85@gmail.com>
-Date: Fri, 19 Aug 2016 16:40:41 +1200
-Message-ID: <CADySD0G=my4X5aMsTbkruhsK3apvQrwaJMftjsAPgiQkBux-0w@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: How to keep splash screen until application starts
+X-Originating-IP: [128.224.162.178]
+Subject: [meta-filesystems][PATCH] yaffs2-utils: fix QA warning for GNU_HASH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,23 +32,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2016 04:41:02 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 19 Aug 2016 09:27:39 -0000
+Content-Type: text/plain
 
-Hi,
+Add LDFLAGS variable to Makefile so that extra linker flags can be sent
+via this variable.
 
-I have created a custom splash screen using psplash for am335x evm based
-device having touchscreen.
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../yaffs2/yaffs2-utils/makefile-add-ldflags.patch  | 21 +++++++++++++++++++++
+ .../recipes-filesystems/yaffs2/yaffs2-utils_git.bb  |  5 ++++-
+ 2 files changed, 25 insertions(+), 1 deletion(-)
+ create mode 100644 meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils/makefile-add-ldflags.patch
 
-Splash screen is displayed during boot process but when login prompt comes,
-my screen goes blank.
+diff --git a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils/makefile-add-ldflags.patch b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils/makefile-add-ldflags.patch
+new file mode 100644
+index 0000000..bb21899
+--- /dev/null
++++ b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils/makefile-add-ldflags.patch
+@@ -0,0 +1,21 @@
++Upstream-Status: Pending
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++
++diff --git a/utils/Makefile b/utils/Makefile
++index 710ebbf..6259893 100644
++--- a/utils/Makefile
+++++ b/utils/Makefile
++@@ -57,10 +57,10 @@ $(COMMONOBJS) $(MKYAFFSIMAGEOBJS) $(MKYAFFS2IMAGEOBJS) : %.o: %.c
++ 	$(CC) -c $(CFLAGS) $< -o $@
++ 
++ mkyaffsimage: $(MKYAFFSIMAGEOBJS) $(COMMONOBJS)
++-	$(CC) -o $@  $^
+++	$(CC) $(LDFLAGS) -o $@  $^
++ 
++ mkyaffs2image: $(MKYAFFS2IMAGEOBJS) $(COMMONOBJS)
++-	$(CC) -o $@ $^
+++	$(CC) $(LDFLAGS) -o $@ $^
++ 
++ 
++ clean:
+diff --git a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
+index 253ea62..e8d1873 100644
+--- a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
++++ b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
+@@ -12,7 +12,10 @@ PV = "0.0+git${SRCPV}"
+ DEPENDS = "mtd-utils"
+ 
+ # Source is the HEAD of master branch at the time of writing this recipe
+-SRC_URI = "git://www.aleph1.co.uk/yaffs2;protocol=git;branch=master"
++SRC_URI = "git://www.aleph1.co.uk/yaffs2;protocol=git;branch=master \
++           file://makefile-add-ldflags.patch \
++          "
++
+ SRCREV = "bc76682d93955cfb33051beb503ad9f8a5450578"
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.7.4
 
-My question is how can I make splash screen visible until my application
-starts ?
-
-I have modified my /etc/inittab to disable getty on virtual terminal
-(touchscreen), getty is only enabled for serial console.
-
-Thanks
-Ankur
 
