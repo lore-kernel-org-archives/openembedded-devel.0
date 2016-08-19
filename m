@@ -1,25 +1,60 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 42CD773211
+Return-Path: <andrew.goodbody@cambrionix.com>
+X-Greylist: delayed 414 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 19 Aug 2016 09:44:36 UTC
+Received: from mail1.bemta6.messagelabs.com (mail1.bemta6.messagelabs.com
+	[193.109.254.106])
+	by mail.openembedded.org (Postfix) with ESMTP id ABB7965CBB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2016 09:27:38 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u7J9RdJr016411
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2016 02:27:39 -0700 (PDT)
-Received: from localhost (128.224.162.178) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
-	Fri, 19 Aug 2016 02:27:38 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 19 Aug 2016 17:27:36 +0800
-Message-ID: <1471598856-6817-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Fri, 19 Aug 2016 09:44:36 +0000 (UTC)
+Received: from [194.106.220.35] by server-2.bemta-6.messagelabs.com id
+	5B/AB-13744-563D6B75; Fri, 19 Aug 2016 09:37:41 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmleJIrShJLcpLzFFi42K5KdM1UTf18rZ
+	wg/3H5SwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oxde/eyFPxkqbj4ZBJjA+N35i5GLg4hgU2M
+	EgumzmKFcPYySky71M7UxcjJwSZgJrHr1Tp2EFtEIEZi6fnzbCC2sICpxP3bTawQcTOJ+R//Q
+	NlWEqt3nmAEsVkEVCXaL31iAbF5BVwlVuybATZTSKBcYs76VcwgNqeArcTqrdvAZjIKyEp8aV
+	wNFmcWEJe49WQ+WL2EgIDEkj3nmSFsUYmXj/+xQtgGEluX7mOBsBUkfvSegqqxlvj34C4TxBw
+	diQW7P7FB2NoSyxa+Zoa4R1Di5MwnLBMYRWchWTcLScssJC2zkLQsYGRZxahRnFpUllqka2Sq
+	l1SUmZ5RkpuYmaNraGCml5taXJyYnpqTmFSsl5yfu4kRGDEMQLCDcdWCwEOMkhxMSqK8v/S3h
+	QvxJeWnVGYkFmfEF5XmpBYfYpTh4FCS4C28BJQTLEpNT61Iy8wBxi5MWoKDR0mE1w4kzVtckJ
+	hbnJkOkTrFqMux4MfttUxCLHn5ealS4ryGIEUCIEUZpXlwI2Bp5BKjrJQwLyPQUUI8BalFuZk
+	lqPKvGMU5GJWEeTtBpvBk5pXAbXoFdAQT0BG8/FtAjihJREhJNTCWvOVVnPNg6sIozmjm6XP2
+	LFzMbZ0132LCsqcvLq44Uzbh/43SDVNXdATL7NnddoHrPdfFn68cD+3ccihuztXM3VqiHc2KP
+	37fu580L/TwLIW7F1PMt7Nc6dH5N+Phr3srX92Wtizelayx5zLjxIs/Ky5bfcx7nqq6+uaxTt
+	mv4bHirzLSb/omLlJiKc5INNRiLipOBACxHUsTHgMAAA==
+X-Env-Sender: andrew.goodbody@cambrionix.com
+X-Msg-Ref: server-12.tower-91.messagelabs.com!1471599461!41085134!1
+X-Originating-IP: [217.28.138.145]
+X-StarScan-Received: 
+X-StarScan-Version: 8.84; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 23957 invoked from network); 19 Aug 2016 09:37:41 -0000
+Received: from smtp.hs20.net (HELO outlook.hs20.net) (217.28.138.145)
+	by server-12.tower-91.messagelabs.com with AES256-SHA256 encrypted SMTP;
+	19 Aug 2016 09:37:41 -0000
+Received: from SEHSTE15D2BE2.hs20.net (172.18.251.29) by
+	SEHSTE15D2BE5.hs20.net (172.18.251.32) with Microsoft SMTP Server (TLS)
+	id 15.0.1178.4; Fri, 19 Aug 2016 10:37:40 +0100
+Received: from SEHSTE15D2BE2.hs20.net ([fe80::84cd:cdd2:84c4:a64a]) by
+	SEHSTE15D2BE2.hs20.net ([fe80::84cd:cdd2:84c4:a64a%21]) with mapi id
+	15.00.1178.000; Fri, 19 Aug 2016 10:37:40 +0100
+From: Andrew Goodbody <andrew.goodbody@cambrionix.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] Build of u-boot with gold is broken
+Thread-Index: AdH5VjLhAuTAF19QS3yoE/njm4xwfAAGcjSAACM8QjA=
+Date: Fri, 19 Aug 2016 09:37:39 +0000
+Message-ID: <3c98bc6242a346408819398fe3daa456@SEHSTE15D2BE2.hs20.net>
+References: <b1622999964348e68e651f38dca42d59@SEHSTE15D2BE2.hs20.net>
+	<530A67FF-CCDF-464A-AE0B-1BE124D4F560@gmail.com>
+In-Reply-To: <530A67FF-CCDF-464A-AE0B-1BE124D4F560@gmail.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [46.17.166.30]
+x-exclaimer-md-config: 266e7a57-cddd-49fd-bdea-19bca6d40303
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.178]
-Subject: [meta-filesystems][PATCH] yaffs2-utils: fix QA warning for GNU_HASH
+Subject: Re: Build of u-boot with gold is broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,63 +67,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2016 09:27:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 19 Aug 2016 09:44:41 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Add LDFLAGS variable to Makefile so that extra linker flags can be sent
-via this variable.
+> > On Aug 18, 2016, at 6:44 AM, Andrew Goodbody
+> <andrew.goodbody@cambrionix.com> wrote:
+> >
+> > Hi,
+> >
+> > It looks like the recent change to meta/recipes-bsp/u-boot/u-boot.inc t=
+o
+> enable out of tree builds for u-boot does not work with gold.
+> > The sed at line 70 fails as it is being executed in an empty build dire=
+ctory
+> and so there is no config.mk.
+> >
+>=20
+> Send this to OE-core list you might need to add cd ${B} at beginning of
+> do_compile
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- .../yaffs2/yaffs2-utils/makefile-add-ldflags.patch  | 21 +++++++++++++++++++++
- .../recipes-filesystems/yaffs2/yaffs2-utils_git.bb  |  5 ++++-
- 2 files changed, 25 insertions(+), 1 deletion(-)
- create mode 100644 meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils/makefile-add-ldflags.patch
+I wish it were that simple, but it does a cd ${B} before the call to do_com=
+pile, but ${B} is empty. Anyway I have resent this to oe-core, sorry for th=
+e noise.
 
-diff --git a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils/makefile-add-ldflags.patch b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils/makefile-add-ldflags.patch
-new file mode 100644
-index 0000000..bb21899
---- /dev/null
-+++ b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils/makefile-add-ldflags.patch
-@@ -0,0 +1,21 @@
-+Upstream-Status: Pending
-+
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+
-+diff --git a/utils/Makefile b/utils/Makefile
-+index 710ebbf..6259893 100644
-+--- a/utils/Makefile
-++++ b/utils/Makefile
-+@@ -57,10 +57,10 @@ $(COMMONOBJS) $(MKYAFFSIMAGEOBJS) $(MKYAFFS2IMAGEOBJS) : %.o: %.c
-+ 	$(CC) -c $(CFLAGS) $< -o $@
-+ 
-+ mkyaffsimage: $(MKYAFFSIMAGEOBJS) $(COMMONOBJS)
-+-	$(CC) -o $@  $^
-++	$(CC) $(LDFLAGS) -o $@  $^
-+ 
-+ mkyaffs2image: $(MKYAFFS2IMAGEOBJS) $(COMMONOBJS)
-+-	$(CC) -o $@ $^
-++	$(CC) $(LDFLAGS) -o $@ $^
-+ 
-+ 
-+ clean:
-diff --git a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
-index 253ea62..e8d1873 100644
---- a/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
-+++ b/meta-filesystems/recipes-filesystems/yaffs2/yaffs2-utils_git.bb
-@@ -12,7 +12,10 @@ PV = "0.0+git${SRCPV}"
- DEPENDS = "mtd-utils"
- 
- # Source is the HEAD of master branch at the time of writing this recipe
--SRC_URI = "git://www.aleph1.co.uk/yaffs2;protocol=git;branch=master"
-+SRC_URI = "git://www.aleph1.co.uk/yaffs2;protocol=git;branch=master \
-+           file://makefile-add-ldflags.patch \
-+          "
-+
- SRCREV = "bc76682d93955cfb33051beb503ad9f8a5450578"
- S = "${WORKDIR}/git"
- 
--- 
-2.7.4
-
+Andrew
 
