@@ -1,30 +1,25 @@
-Return-Path: <wangxin2015.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id D414065CBB
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id DBD0665CBF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2016 09:59:26 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="10080736"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 19 Aug 2016 17:59:22 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id EAD9642CD10F
+	Fri, 19 Aug 2016 10:04:19 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u7JA4Kl3024263
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2016 17:59:21 +0800 (CST)
-Received: from ubuntu.g08.fujitsu.local (10.167.226.120) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.279.2; Fri, 19 Aug 2016 17:59:21 +0800
-From: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+	Fri, 19 Aug 2016 03:04:20 -0700 (PDT)
+Received: from localhost (128.224.162.178) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
+	Fri, 19 Aug 2016 03:04:20 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 19 Aug 2016 05:59:18 -0400
-Message-ID: <1471600758-1620-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+Date: Fri, 19 Aug 2016 18:04:14 +0800
+Message-ID: <cover.1471600808.git.yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.120]
-X-yoursite-MailScanner-ID: EAD9642CD10F.A6AA9
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangxin2015.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] libqb: 0.17.1 -> 0.17.2
+X-Originating-IP: [128.224.162.178]
+Subject: [meta-networking][PATCH 0/3] NO_GNU_HASH warning fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,38 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2016 09:59:27 -0000
+X-List-Received-Date: Fri, 19 Aug 2016 10:04:23 -0000
 Content-Type: text/plain
 
-Upgrade libqb from 0.17.1 to 0.17.2.
 
-Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
----
- meta-oe/recipes-extended/libqb/{libqb_0.17.1.bb => libqb_0.17.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/libqb/{libqb_0.17.1.bb => libqb_0.17.2.bb} (80%)
+The following changes since commit 02a390b79bdc089eb583e443ee04f60bffd409eb:
 
-diff --git a/meta-oe/recipes-extended/libqb/libqb_0.17.1.bb b/meta-oe/recipes-extended/libqb/libqb_0.17.2.bb
-similarity index 80%
-rename from meta-oe/recipes-extended/libqb/libqb_0.17.1.bb
-rename to meta-oe/recipes-extended/libqb/libqb_0.17.2.bb
-index 77307fe..40d06f3 100644
---- a/meta-oe/recipes-extended/libqb/libqb_0.17.1.bb
-+++ b/meta-oe/recipes-extended/libqb/libqb_0.17.2.bb
-@@ -11,8 +11,8 @@ inherit autotools pkgconfig
- SRC_URI = "https://fedorahosted.org/releases/q/u/quarterback/${BP}.tar.xz \
-           "
- 
--SRC_URI[md5sum] = "5770b343baa4528f6fec90120ec55048"
--SRC_URI[sha256sum] = "7a2115f83bfe20eaa5f2e4ed235e8f2994235d3b87e3e5ca41ba47b320f12e29"
-+SRC_URI[md5sum] = "de1e5d38fa449b4d127940c10d117260"
-+SRC_URI[sha256sum] = "9a419c649ed51f275dc780da8a15babb8a5d33633567bd9e0cb6193b6e21f4fe"
- 
- LICENSE = "LGPL-2.1"
- 
+  tnftp: tnftp20130505 -> tnftp20151004 (2016-08-16 21:26:15 -0400)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib yzhao/networking-hashfix
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=yzhao/networking-hashfix
+
+Yi Zhao (3):
+  ifenslave: fix QA warning for GNU_HASH
+  ipvsadm: fix QA warning for GNU_HASH
+  iscsitarget: fix QA warning for GNU_HASH
+
+ .../iscsitarget/iscsitarget_1.4.20.3+svn502.bb        |  3 ++-
+ .../recipes-support/ifenslave/ifenslave_1.1.0.bb      |  2 +-
+ .../ipvsadm/ipvsadm/makefile-add-ldflags.patch        | 19 +++++++++++++++++++
+ .../recipes-support/ipvsadm/ipvsadm_1.26.bb           |  1 +
+ 4 files changed, 23 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-support/ipvsadm/ipvsadm/makefile-add-ldflags.patch
+
 -- 
 2.7.4
-
-
 
 
