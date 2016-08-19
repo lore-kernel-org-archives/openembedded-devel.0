@@ -1,40 +1,30 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 58B1D77058
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2016 10:09:20 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id i5so2806157wmg.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2016 03:09:21 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=EALRuJBZSnJmlrSICLYs5R0L4sfYu90D3L7sce9cbko=;
-	b=O2sz4OFXXaCg14Pq2LiqeIGDPGOaNzM3m3UMUdvHrtRUesuCG+94OXh+okoeiAGz+X
-	pIfulYXskn/U6X1RaXckLz9Lh9xrXU0leVgx3hFnZhj/LytFTRBz17Z2ZeZUpViabyOP
-	Uc4SlyP5z2Wo3KEAvGLIew4cIIes015bpd+lLSc1pYDSWNo9YjLGpLfNbd84Kqe3gClP
-	h484f47//lYYbIKiV5e5SjtENPVXjqf3h6rL5XZ7+UfyqGG9g4RnvQ1bNJ5sallxHncd
-	EgW8mbiCWDe7G+syFiSTqOFnQxzK6yny0kOewGuM7161HssJAqO1GJp2Wt9SuF/0VH5z
-	PdfA==
-X-Gm-Message-State: AEkoouuiU28JAfMRuj+D5yEXVOdRb/h8AyUovxxyBO9ROkWW2bpSOOWSXB7feH27aT8AvQ==
-X-Received: by 10.194.171.131 with SMTP id au3mr5721086wjc.125.1471601360725; 
-	Fri, 19 Aug 2016 03:09:20 -0700 (PDT)
-Received: from localhost ([185.46.212.59]) by smtp.gmail.com with ESMTPSA id
-	jq5sm6368000wjc.20.2016.08.19.03.09.19
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 19 Aug 2016 03:09:19 -0700 (PDT)
-Message-ID: <1471601356.24738.2.camel@andred.net>
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Aug 2016 11:09:16 +0100
-In-Reply-To: <0159b82ac947ad69460adcec9d79ee83b76d2a7b.1471600808.git.yi.zhao@windriver.com>
-References: <cover.1471600808.git.yi.zhao@windriver.com>
-	<0159b82ac947ad69460adcec9d79ee83b76d2a7b.1471600808.git.yi.zhao@windriver.com>
-X-Mailer: Evolution 3.20.4-1+b1 
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 50F6E7002B;
+	Fri, 19 Aug 2016 10:14:09 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	u7JAE9Na016936; Fri, 19 Aug 2016 11:14:09 +0100
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id 6xD-2N64YUPJ; Fri, 19 Aug 2016 11:14:09 +0100 (BST)
+Received: from hex ([192.168.3.34]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	u7JAE4XL016933
+	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
+	Fri, 19 Aug 2016 11:14:05 +0100
+Message-ID: <1471601644.16712.23.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Khem Raj <raj.khem@gmail.com>, OE Core mailing list
+	<openembedded-core@lists.openembedded.org>, Yocto Discussion Mailing List
+	<yocto@yoctoproject.org>, OpenEmbedded Devel List
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 19 Aug 2016 11:14:04 +0100
+In-Reply-To: <888B09F3-F9A2-49C1-86E8-E33FA1FE6521@gmail.com>
+References: <888B09F3-F9A2-49C1-86E8-E33FA1FE6521@gmail.com>
+X-Mailer: Evolution 3.16.5-1ubuntu3.1 
 Mime-Version: 1.0
-Subject: Re: [meta-networking][PATCH 1/3] ifenslave: fix QA warning for GNU_HASH
+Subject: Re: [OE-core] [RFT] gcc 6.2 RC1 update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,36 +37,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2016 10:09:21 -0000
+X-List-Received-Date: Fri, 19 Aug 2016 10:14:10 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On Fr, 2016-08-19 at 18:04 +0800, Yi Zhao wrote:
-> Set LDFLAGS explicitly for do_compile
+On Tue, 2016-08-16 at 11:55 -0700, Khem Raj wrote:
+> Hi All
 > 
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> ---
->  meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> I have put together recipe upgrade for upcoming gcc 6.2 release now
+> that it entered RC phase. With gcc 6.2 the recipes are using tarballs
+> instead of git fetcher as promised :)
+> Please help testing it out in your setups and report any issues you
+> see.
 > 
-> diff --git a/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
-> b/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
-> index acc0864..385bc80 100644
-> --- a/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
-> +++ b/meta-networking/recipes-support/ifenslave/ifenslave_1.1.0.bb
-> @@ -10,7 +10,7 @@ SRC_URI[md5sum] = "56126cd1013cefe0ce6f81613e677bdd"
->  SRC_URI[sha256sum] =
-> "7917bf34de80a2492eb225adf9168c83a4854ac8a008ed0fd5b3fd147ccd3041"
->  
->  do_compile() {
-> -    ${CC} ifenslave.c -o ifenslave
-> +    ${CC} ${LDFLAGS} ifenslave.c -o ifenslave
+> The commit you need to cherry-pick for OE-core is this one
+> 
+> https://github.com/kraj/openembedded-core/commit/0319b603761a16e65d70
+> 4336112c3709a8bf771c
+> 
+> Thank you for your help
 
-While you're fixing the gcc invocation here, wouldn't it make sense to add
-CFLAGS as well? (Maybe in a separate patch).
+I put this through the autobuilder and it passed so I've merged it. I
+did this quickly as we're putting a "pre M3" build through a QA cycle
+and I wanted to get some of the more invasive changes into that build
+so we don't have a stampeding herd of patches breaking everything
+coming up to the final feature freeze for 2.2.
 
+In other news, we are now also testing musl world builds on the
+autobuilder as part of regular testing.
 
 Cheers,
-Andre'
+
+Richard
+
 
 
