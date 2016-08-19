@@ -1,22 +1,22 @@
 Return-Path: <pascal.bach@siemens.com>
-Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
-	by mail.openembedded.org (Postfix) with ESMTP id E46D076809
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+	by mail.openembedded.org (Postfix) with ESMTP id CED5B77051
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2016 12:53:46 +0000 (UTC)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id u7JCrkdN014856
+	Fri, 19 Aug 2016 12:55:20 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id u7JCtKEi028194
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Aug 2016 14:53:46 +0200
+	Fri, 19 Aug 2016 14:55:20 +0200
 Received: from dev.sbt.siemens.com (MD1FZU9C.ww002.siemens.net [139.16.77.45])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id u7JCrk36021414;
-	Fri, 19 Aug 2016 14:53:46 +0200
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id u7JCtK73024614;
+	Fri, 19 Aug 2016 14:55:20 +0200
 From: Pascal Bach <pascal.bach@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Aug 2016 14:53:37 +0200
-Message-Id: <1471611217-28377-1-git-send-email-pascal.bach@siemens.com>
+Date: Fri, 19 Aug 2016 14:55:13 +0200
+Message-Id: <1471611313-1478-1-git-send-email-pascal.bach@siemens.com>
 X-Mailer: git-send-email 2.1.4
-Subject: [meta-oe][PATCH] nodejs: use shared zlib instead of bundled one
+Subject: [meta-oe][PATCH] nodejs, arm: map TUNE_FEATURES to --with-arm-fpu parameters
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,35 +29,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Aug 2016 12:53:47 -0000
+X-List-Received-Date: Fri, 19 Aug 2016 12:55:21 -0000
+
+The same code is used in the nodejs recipe from meta-nodejs
 
 Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
 ---
- meta-oe/recipes-devtools/nodejs/nodejs_4.4.7.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-devtools/nodejs/nodejs_4.4.7.bb | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_4.4.7.bb b/meta-oe/recipes-devtools/nodejs/nodejs_4.4.7.bb
-index 671d604..95a2048 100644
+index 95a2048..88b0e87 100644
 --- a/meta-oe/recipes-devtools/nodejs/nodejs_4.4.7.bb
 +++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.4.7.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://nodejs.org"
- LICENSE = "MIT & BSD & Artistic-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8e3c01094f0fcb889b13f0354e52f914"
+@@ -30,7 +30,11 @@ def map_nodejs_arch(a, d):
+     elif re.match('powerpc$', a): return 'ppc'
+     return a
  
--DEPENDS = "openssl"
-+DEPENDS = "openssl zlib"
+-ARCHFLAGS_arm = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--with-arm-float-abi=hard', '--with-arm-float-abi=softfp', d)}"
++ARCHFLAGS_arm = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '--with-arm-float-abi=hard', '--with-arm-float-abi=softfp', d)} \
++                 ${@bb.utils.contains('TUNE_FEATURES', 'neon', '--with-arm-fpu=neon', \
++                    bb.utils.contains('TUNE_FEATURES', 'vfpv3d16', '--with-arm-fpu=vfpv3-d16', \
++                    bb.utils.contains('TUNE_FEATURES', 'vfpv3', '--with-arm-fpu=vfpv3', \
++                    '--with-arm-fpu=vfp', d), d), d)}"
+ GYP_DEFINES_append_mipsel = " mips_arch_variant='r1' "
+ ARCHFLAGS ?= ""
  
- COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
- COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
-@@ -39,7 +39,7 @@ do_configure () {
-     export LD="${CXX}"
-     GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
-     # $TARGET_ARCH settings don't match --dest-cpu settings
--   ./configure --prefix=${prefix} --without-snapshot --shared-openssl \
-+   ./configure --prefix=${prefix} --without-snapshot --shared-openssl --shared-zlib \
-                --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH', True), d)}" \
-                --dest-os=linux \
-                ${ARCHFLAGS}
 -- 
 2.1.4
 
