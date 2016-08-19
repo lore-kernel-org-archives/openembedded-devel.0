@@ -1,24 +1,42 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E66867016E
+Return-Path: <ankur.tyagi85@gmail.com>
+Received: from mail-qk0-f177.google.com (mail-qk0-f177.google.com
+	[209.85.220.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 790146E630
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 21:56:06 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u7ILu6hn022301
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 19 Aug 2016 04:41:01 +0000 (UTC)
+Received: by mail-qk0-f177.google.com with SMTP id v123so36462972qkh.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Aug 2016 14:56:07 -0700 (PDT)
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 18 Aug 2016 14:56:06 -0700
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 18 Aug 2016 14:56:06 -0700
-Message-ID: <1471557366-7702-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
+	Thu, 18 Aug 2016 21:41:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=Av5N9adR2WBjPypx/74vnl49BmJVU7+mXSvE9EzISnQ=;
+	b=Jj90Ki+ubh4iOmt1EpkX/Jt0up5g5+6M+oALxSCnC3MlskatWsH8g19V06wEdcDxa8
+	wToXdUkX6WamHOiwozeEWlxTUJZog6DAKkPBpGj712wS8rFji5tYpn7R6MJRlZgpCvrG
+	7bhsdrZODxdcYlc6QJoQyeRt+dYC21hjHqPRYZx15k/wDd99AxRdgRO8WXY3SoYTAW17
+	b9PXOdbCQ2pE/d2atYpXrWO0iGQ/WaN+LymGB7mkdwAZ1U4EUDM57k6I8yr1CRkDyPzH
+	ufofOk/qh9tGo5QOpVgQiCEhPc4srVVr7F+RGsZu4+r/chu64ZTKtgv6hYbA0U0r40VD
+	Xozg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=Av5N9adR2WBjPypx/74vnl49BmJVU7+mXSvE9EzISnQ=;
+	b=J0pbnzD8GYPPjWpmZrz5AjXnOLoUkcT1xo1P5KRBK0gWsNpg+TQgAxBkIhXkIkxaZ+
+	0NCwYnvdOmjH0SutPM7eKs7zUV4RxD4tFSF2FH3i0cWkfpq4Hy23Sf2auqbQtHX1F0i6
+	nd1QUyO8frdb6TmpO8B2EfK5tMj8kkVo0MvHsgHLb1oMWzWwOJeYuuuL7f0bPSlb6hgV
+	iJ4zlp5CsdeqiFpmDrUPsnchkk37ZfbZUBn+u/bCl3BZ9gluK/rdwJyUrObUwg7mZAUN
+	MZpP3+SfdJX/tBkiYxP0MNUH8FinQvnoknLJW+L/thGTeLBFUq4u503ORG/I8ws0bTb5
+	Gn3A==
+X-Gm-Message-State: AEkoouvcELCHjpZLRErVj9rgMFxjNaU9b0llNgqJ8H3GA0a8EvjjOZjGlH0gK7L/Q2jo985jghPa2Rc9MD8BjA==
+X-Received: by 10.55.33.193 with SMTP id f62mr4056771qki.270.1471581661880;
+	Thu, 18 Aug 2016 21:41:01 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [V2][meta-networking][PATCH 1/1] yp-tools: fix compile errors
+Received: by 10.200.47.198 with HTTP; Thu, 18 Aug 2016 21:40:41 -0700 (PDT)
+From: Ankur Tyagi <ankur.tyagi85@gmail.com>
+Date: Fri, 19 Aug 2016 16:40:41 +1200
+Message-ID: <CADySD0G=my4X5aMsTbkruhsK3apvQrwaJMftjsAPgiQkBux-0w@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: How to keep splash screen until application starts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,97 +49,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Aug 2016 21:56:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 19 Aug 2016 04:41:02 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Fix two fatal warnings.  The cast error only
-occurs for some architectures.
+Hi,
 
-Not applicable to yp-tools-4.x.
+I have created a custom splash screen using psplash for am335x evm based
+device having touchscreen.
 
-Signed-off-by: Joe Slater <jslater@windriver.com>
----
- .../nis/yp-tools/alignment-cheat.patch             |   52 ++++++++++++++++++++
- .../recipes-support/nis/yp-tools_3.3.bb            |    3 +-
- 2 files changed, 53 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-support/nis/yp-tools/alignment-cheat.patch
+Splash screen is displayed during boot process but when login prompt comes,
+my screen goes blank.
 
-diff --git a/meta-networking/recipes-support/nis/yp-tools/alignment-cheat.patch b/meta-networking/recipes-support/nis/yp-tools/alignment-cheat.patch
-new file mode 100644
-index 0000000..be9b62b
---- /dev/null
-+++ b/meta-networking/recipes-support/nis/yp-tools/alignment-cheat.patch
-@@ -0,0 +1,52 @@
-+yp-tools: avoid fatal cast warning
-+
-+The way casting is done, we will get a fatal alignment warning on some
-+architectures.  This patch cheats our way around this.
-+
-+We also eliminate an unused constant which causes a fatal warning.
-+
-+Upstream-status: Inappropriate [code does not exist in version 4.x]
-+
-+Signed-off-by: Joe Slater <jslater@windriver.com>
-+
-+--- a/lib/do_ypcall.c
-++++ b/lib/do_ypcall.c
-+@@ -44,7 +44,6 @@ struct dom_binding
-+ typedef struct dom_binding dom_binding;
-+ 
-+ static const struct timeval RPCTIMEOUT = {25, 0};
-+-static const struct timeval UDPTIMEOUT = {5, 0};
-+ static int const MAXTRIES = 2;
-+ static pthread_mutex_t ypbindlist_lock = PTHREAD_MUTEX_INITIALIZER;
-+ static dom_binding *ypbindlist = NULL;
-+@@ -381,7 +380,7 @@ __ypclnt_call (u_long prog, xdrproc_t xa
-+ 
-+ int
-+ do_ypcall (const char *domain, u_long prog, xdrproc_t xargs,
-+-	   caddr_t req, xdrproc_t xres, caddr_t resp)
-++	   caddr_t req, xdrproc_t xres, void *resp)
-+ {
-+   dom_binding *ydb;
-+   int status;
-+@@ -450,7 +449,7 @@ do_ypcall (const char *domain, u_long pr
-+ /* Like do_ypcall, but translate the status value if necessary.  */
-+ int
-+ do_ypcall_tr (const char *domain, u_long prog, xdrproc_t xargs,
-+-	      caddr_t req, xdrproc_t xres, caddr_t resp)
-++	      caddr_t req, xdrproc_t xres, void *resp)
-+ {
-+   int status = do_ypcall (domain, prog, xargs, req, xres, resp);
-+   if (status == YPERR_SUCCESS)
-+--- a/lib/internal.h
-++++ b/lib/internal.h
-+@@ -17,8 +17,8 @@
-+ #define _INTERNAL_H_
-+ 
-+ extern int do_ypcall (const char *domain, u_long prog, xdrproc_t xargs,
-+-		      caddr_t req, xdrproc_t xres, caddr_t resp);
-++		      caddr_t req, xdrproc_t xres, void *resp);
-+ extern int do_ypcall_tr (const char *domain, u_long prog, xdrproc_t xargs,
-+-			 caddr_t req, xdrproc_t xres, caddr_t resp);
-++			 caddr_t req, xdrproc_t xres, void *resp);
-+ extern int yp_maplist (const char *, struct ypmaplist **);
-+ #endif
-diff --git a/meta-networking/recipes-support/nis/yp-tools_3.3.bb b/meta-networking/recipes-support/nis/yp-tools_3.3.bb
-index b89f0b8..69217fa 100644
---- a/meta-networking/recipes-support/nis/yp-tools_3.3.bb
-+++ b/meta-networking/recipes-support/nis/yp-tools_3.3.bb
-@@ -11,11 +11,10 @@ ypwhich, yppasswd, domainname, nisdomainname \
- and ypdomainname. \
- "
- 
--PNBLACKLIST[yp-tools] ?= "BROKEN: fails to build for qemuarm."
--
- SRC_URI = "http://www.linux-nis.org/download/yp-tools/${BP}.tar.bz2 \
-            file://domainname.service \
-            file://yp-tools-ipv4-ipv6-Provide-an-in-place-version-of-mapv4v6addr.patch \
-+           file://alignment-cheat.patch \
- "
- SRC_URI[md5sum] = "acebeecc11a73fb8097503670344834c"
- SRC_URI[sha256sum] = "812be817df3d4c25813552be336c6c6ad5aedaf65611b81af3ad9f98fb3c2e50"
--- 
-1.7.9.5
+My question is how can I make splash screen visible until my application
+starts ?
 
+I have modified my /etc/inittab to disable getty on virtual terminal
+(touchscreen), getty is only enabled for serial console.
+
+Thanks
+Ankur
 
