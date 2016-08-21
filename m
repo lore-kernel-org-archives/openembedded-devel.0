@@ -1,24 +1,30 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from blaine.gmane.org (unknown [195.159.176.226])
-	by mail.openembedded.org (Postfix) with ESMTP id BE5D66FFCD
+Return-Path: <rpjday@crashcourse.ca>
+Received: from smtp484.redcondor.net (smtp484.redcondor.net [208.80.204.84])
+	by mail.openembedded.org (Postfix) with ESMTP id 00DA56FF78
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Aug 2016 08:37:05 +0000 (UTC)
-Received: from list by blaine.gmane.org with local (Exim 4.84_2)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1bbOFb-00016W-KS for openembedded-devel@lists.openembedded.org;
-	Sun, 21 Aug 2016 10:37:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sun, 21 Aug 2016 10:36:58 +0200
-Message-ID: <npbp79$gm9$1@blaine.gmane.org>
-References: <1471640436-11211-1-git-send-email-gyurco@freemail.hu>
-Mime-Version: 1.0
-X-Complaints-To: usenet@blaine.gmane.org
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
-	Gecko/20100101 Thunderbird/45.2.0
-In-Reply-To: <1471640436-11211-1-git-send-email-gyurco@freemail.hu>
-Subject: Re: [meta-webserver][PATCHv3 2/2] nginx.inc: use 4 spaces for indentation
+	Sun, 21 Aug 2016 14:15:14 +0000 (UTC)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
+	by smtp484.redcondor.net ({c48374e7-08df-40d9-a0de-96cc9883a037})
+	via TCP (outbound) with ESMTPS id 20160821141514426_0484
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 21 Aug 2016 14:15:14 +0000
+X-RC-FROM: <rpjday@crashcourse.ca>
+X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
+Received: from [174.114.62.25] (port=37120 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1bbTYj-0000sq-BX for openembedded-devel@lists.openembedded.org;
+	Sun, 21 Aug 2016 10:17:09 -0400
+Date: Sun, 21 Aug 2016 10:15:01 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost.localdomain
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.20.1608211008240.19995@localhost.localdomain>
+User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
+MIME-Version: 1.0
+X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
+Subject: is there an ETA for a recipe for mariadb 10.x?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,17 +37,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Aug 2016 08:37:07 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 21 Aug 2016 14:15:19 -0000
+Content-Type: text/plain; charset=US-ASCII
 
-Op 19-08-16 om 23:00 schreef Gyorgy Szombathelyi:
-> From: Martin Jansa <Martin.Jansa@gmail.com>
-> 
-> * like any other sane recipes do
 
-Please don't touch indentation for variables (FILES*, SRC_URI, etc) and only
-fix the shell and python methods.
+  client wants to take advantage of features of mariadb 10.x in an OE
+build, but i see no official layer for it -- is it coming? or should
+one just hack up a recipe for it?
 
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
 
