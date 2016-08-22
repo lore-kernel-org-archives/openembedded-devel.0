@@ -1,50 +1,50 @@
 Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id E9BA5738AE
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 1A9BD762B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Aug 2016 19:03:20 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id v123so8957183qkh.3
+	Mon, 22 Aug 2016 19:03:21 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id q11so3080267qtb.2
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 22 Aug 2016 12:03:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:organization; bh=u2qzI9Nb0RPQSbhCXM70IL0RBI1ePz2SIZD7oxrEmJ8=;
-	b=FlKf+kJOH83Lt1MAclRN5tGDHlY3EXD+9+iqtwZmfvuKHiiNfqviybsBhYm2KqazPS
-	zoeK/TKg2qDmun0aQAmFbNfuVEZZtE/Rj4gOxsEHxNcnE73prG5vN4/dveRiuh/3GoT9
-	5ZiGilCIImJGkkaX5+tyYs6DO8bImMZFsmDDFpQDHiTyM9RpMMd5xclKMA0FVAAyDWV4
-	3uq5o9FSvGdHtpJQY19xP3p3o4LKBR7ZZWSVVlTf2XY7BlOJm0H0V1rRK1J8I3/DLmzf
-	w55P4HKjL4jeLwTfjHvprbK5O9ttY5rTKc6J4+3b3cNbecbPuMNA34XRu1C7njxsffdm
-	rL5Q==
+	:organization; bh=bfqewZbg+VRw5Lusp3F70QnO/YBIDi7PC6yFi5oQJSY=;
+	b=NmnyLbv6LZdgOJ0GXKeH+uoYks0VUZ9aR8LZxD9UVdfg4dDbTIMWA93ws/QMLvQZ5L
+	fvQoVoyR3zQVdnrDSKO5pmcJjtNY6/ap8P8XymQAjg/h6XNz1gPISnwLN64MQEezBo+x
+	vk6b9NtcbK6dGd5PUMCynZ5tTKfN6voRHdpsC2P51jAnr47+thzTubaUNklc8IsyBuRa
+	3qUgiqFge2IdZ5zIwIrpxRtn0huihjxRejgw5ayFL1vTCIjPRfwzLmp71c29s4ms6EnB
+	xroV5PlVedCbDZkRL9DCTmcn5R5oQoKQE7IsaYc8c3ybnYWj3U5/LzvZ3lTMhKc1b2jr
+	JoCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:organization;
-	bh=u2qzI9Nb0RPQSbhCXM70IL0RBI1ePz2SIZD7oxrEmJ8=;
-	b=gnYprJKYYQh9jq5tKyl/CLU+813PudasQ/QUav07j+MlA6Vpt6Tjo9SejwfFAEt/PT
-	NBhoKXLCxR5RIuWd1kPR+otJaVj8toaqaJOnXDb5VNLpIMpZjyzICD00Td7ArLo3AzGv
-	prmYHCgTb5PBniFLzaBMC7LKmDh4hq9/IntvyarFh6ZPYZKf09l4HR4IiYyadLBqP/LB
-	m4hlpzgX0/T23Hzs6MV76cxwIAp9bktmymUzHFoEIh24BwGSzF3+7Dt8asmcbxmLlvOl
-	93VUJqvXIiqGp2ObmDkDVLM/lh/mta/YGlu9VRedE8IaOpVa5SlyFjLDeVicVV0nofwy
-	8aew==
-X-Gm-Message-State: AEkooutT7+mcPlyTgLSEmQfqZA/dMVNe8oS+mV6IjytSrQsPQbFoVzQ0OGbjfUXkBdDqPw==
-X-Received: by 10.55.180.2 with SMTP id d2mr25658001qkf.175.1471892599603;
-	Mon, 22 Aug 2016 12:03:19 -0700 (PDT)
+	bh=bfqewZbg+VRw5Lusp3F70QnO/YBIDi7PC6yFi5oQJSY=;
+	b=IoZ5Es53XBgarjs2HhD6J53O3429ofrpnAjLDE7ccBipB5/U9L67vAOzGwRL7fslyZ
+	G0UGOBa3KBGMCAUtTo7zLidRdW/LDXtL0mQtV0C2ZzwtHF8lDToZ1/yiZUVRTsKI8mrC
+	0SXkrL9bYGPGdxsWgj0oBXvvQyXs5ACMpy3zKdSiTdFzgu5KKL5kAg51H0xHCjtv6vtK
+	53/GmoX94M29NjrTq4x2m6dOWblZPusBLo4Tc/3HrP5zIY3gjlrPkFA+Dz1EE0jOnUD7
+	Oxs100s4gLC8wR3agHFDu8NH+3+4DD7GZo/SiY8hZD6imuP0G4U+SaU5RgvfS2BTDz8j
+	i00A==
+X-Gm-Message-State: AEkoouvRswqHQNpw47lCdu8GySCiu4HxSkY8L8O6WSfHqYY89IGAEWK+RbSA/nIqM3Qdwg==
+X-Received: by 10.200.52.85 with SMTP id v21mr26099246qtb.21.1471892602411;
+	Mon, 22 Aug 2016 12:03:22 -0700 (PDT)
 Received: from monster.lab.ossystems.com.br ([177.127.4.56])
 	by smtp.gmail.com with ESMTPSA id
-	g29sm10452469qtg.12.2016.08.22.12.03.17
+	g29sm10452469qtg.12.2016.08.22.12.03.19
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 22 Aug 2016 12:03:18 -0700 (PDT)
+	Mon, 22 Aug 2016 12:03:21 -0700 (PDT)
 From: Fabio Berton <fabio.berton@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Aug 2016 16:01:24 -0300
-Message-Id: <1471892491-6177-10-git-send-email-fabio.berton@ossystems.com.br>
+Date: Mon, 22 Aug 2016 16:01:25 -0300
+Message-Id: <1471892491-6177-11-git-send-email-fabio.berton@ossystems.com.br>
 X-Mailer: git-send-email 2.1.4
 In-Reply-To: <1471892491-6177-1-git-send-email-fabio.berton@ossystems.com.br>
 References: <1471892491-6177-1-git-send-email-fabio.berton@ossystems.com.br>
 Organization: O.S. Systems Software LTDA.
-Subject: [meta-python][PATCH 10/17] python-pretend: Extend recipe to support Python 3
+Subject: [meta-python][PATCH 11/17] python-pytest: Extend support to python 3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,56 +57,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Aug 2016 19:03:21 -0000
+X-List-Received-Date: Mon, 22 Aug 2016 19:03:22 -0000
 
-  - Add Python 3 recipe
-  - Add native and nativesdk to BBCLASSEXTEND
+- Add Python 3 recipe
+- Add native and nativesdk to BBCLASSEXTEND
+- Change code style for RDEPENDS
 
 Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 ---
- meta-python/recipes-devtools/python/python-pretend.inc       | 8 ++++++++
- meta-python/recipes-devtools/python/python-pretend_1.0.8.bb  | 8 +-------
- meta-python/recipes-devtools/python/python3-pretend_1.0.8.bb | 2 ++
- 3 files changed, 11 insertions(+), 7 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-pretend.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-pretend_1.0.8.bb
+ meta-python/recipes-devtools/python/python-pytest.inc    | 16 ++++++++++++++++
+ .../recipes-devtools/python/python-pytest_2.9.1.bb       | 10 +---------
+ .../recipes-devtools/python/python3-pytest_2.9.1.bb      |  2 ++
+ 3 files changed, 19 insertions(+), 9 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-pytest.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-pytest_2.9.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-pretend.inc b/meta-python/recipes-devtools/python/python-pretend.inc
+diff --git a/meta-python/recipes-devtools/python/python-pytest.inc b/meta-python/recipes-devtools/python/python-pytest.inc
 new file mode 100644
-index 0000000..2d21cc4
+index 0000000..4877358
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pretend.inc
-@@ -0,0 +1,8 @@
-+SUMMARY = "A library for stubbing in Python"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=411780c0b7fa756753e94affeee5bc99"
++++ b/meta-python/recipes-devtools/python/python-pytest.inc
+@@ -0,0 +1,16 @@
++SUMMARY = "Simple powerful teting with python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d8a5609608d9a5a180705b0fa298ae01"
 +
-+SRC_URI[md5sum] = "7147050a95c9f494248557b42b58ad79"
-+SRC_URI[sha256sum] = "930f2c1e18503e8f8c403abe2e02166c4a881941745147e712cdd4f49f3fb964"
++SRC_URI[md5sum] = "05165740ea50928e4e971378630163ec"
++SRC_URI[sha256sum] = "0d48d27a127644fbe7c8158157e08b35f8255045d4476df694b91eb3a8147e65"
++
++RDEPENDS_${PN} = " \
++    ${PYTHON_PN}-argparse \
++    ${PYTHON_PN}-debugger \
++    ${PYTHON_PN}-json \
++    ${PYTHON_PN}-py \
++    ${PYTHON_PN}-setuptools \
++"
 +
 +BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-pretend_1.0.8.bb b/meta-python/recipes-devtools/python/python-pretend_1.0.8.bb
-index ddc7b62..73b8ed4 100644
---- a/meta-python/recipes-devtools/python/python-pretend_1.0.8.bb
-+++ b/meta-python/recipes-devtools/python/python-pretend_1.0.8.bb
-@@ -1,8 +1,2 @@
--SUMMARY = "A library for stubbing in Python"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=411780c0b7fa756753e94affeee5bc99"
+diff --git a/meta-python/recipes-devtools/python/python-pytest_2.9.1.bb b/meta-python/recipes-devtools/python/python-pytest_2.9.1.bb
+index e21c4f4..d322f09 100644
+--- a/meta-python/recipes-devtools/python/python-pytest_2.9.1.bb
++++ b/meta-python/recipes-devtools/python/python-pytest_2.9.1.bb
+@@ -1,10 +1,2 @@
+-SUMMARY = "Simple powerful teting with Python"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=d8a5609608d9a5a180705b0fa298ae01"
 -
--SRC_URI[md5sum] = "7147050a95c9f494248557b42b58ad79"
--SRC_URI[sha256sum] = "930f2c1e18503e8f8c403abe2e02166c4a881941745147e712cdd4f49f3fb964"
+-SRC_URI[md5sum] = "05165740ea50928e4e971378630163ec"
+-SRC_URI[sha256sum] = "0d48d27a127644fbe7c8158157e08b35f8255045d4476df694b91eb3a8147e65"
+-
+-RDEPENDS_${PN} = "python-py python-setuptools python-argparse python-debugger python-json"
 -
  inherit pypi setuptools
-+require python-pretend.inc
-diff --git a/meta-python/recipes-devtools/python/python3-pretend_1.0.8.bb b/meta-python/recipes-devtools/python/python3-pretend_1.0.8.bb
++require python-pytest.inc
+diff --git a/meta-python/recipes-devtools/python/python3-pytest_2.9.1.bb b/meta-python/recipes-devtools/python/python3-pytest_2.9.1.bb
 new file mode 100644
-index 0000000..9c5d8a8
+index 0000000..466cfa8
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pretend_1.0.8.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest_2.9.1.bb
 @@ -0,0 +1,2 @@
 +inherit pypi setuptools3
-+require python-pretend.inc
++require python-pytest.inc
 -- 
 2.1.4
 
