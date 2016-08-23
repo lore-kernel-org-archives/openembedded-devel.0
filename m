@@ -1,46 +1,23 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 555F073257
+Return-Path: <erkka.kaaria@intel.com>
+X-Greylist: delayed 618 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 23 Aug 2016 08:20:37 UTC
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+	by mail.openembedded.org (Postfix) with ESMTP id F221260125
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Aug 2016 08:16:00 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id h186so7824815pfg.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Aug 2016 01:16:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=v2ybXpuGTjNuqdDxBUn6aFLP/3nap0V0zot90kGMieg=;
-	b=O5oIbpcPToluQOZqthsYM6uWSAmfZnugbIDQsIdAk5aXYmV+/cnGiuh7tOO4qoyz9R
-	GO4w4ttZDTwzmZNL/ET4RJQ2Gx5aNakIGfH/3OqcF64lQkvxtmBSf59XY89byxk9Pxk0
-	iWZ73OR52F70Bc5O7rEmtg+6Pwpp1eSTKyKsiVhTryi3uSlKxkAtX4nFSxCovJvSp4yG
-	2higsVaVASa/fFmNuXaVUnG9yonWgk2xbjLlpXpmG1A+EXo1irYU5HvKnQfqlb9gF1bx
-	vgAQktu0/qe3N5yDwcP2Foh8J4BDA6+Wg4jdvuJs0xlalcNc83yWubqC69wS9I8069u9
-	9sQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=v2ybXpuGTjNuqdDxBUn6aFLP/3nap0V0zot90kGMieg=;
-	b=GEsVgdhULRkP5n1UtrmrSag5wsL93EybPZr4YBSAqtscz7QMePpd6fez0IssYYQYpG
-	7Xu8w6DwUJsGJxgTUx6N5CLixNe6GMdRUsUsmV1Lttmt5mPWM1JCNyErlOCF4NNWS2ZN
-	gOeN2jfenlmvopMu4nAeXxqpBKFQxgKzNk26oRdLDXzS4UrZ82Tl12C5y3xpQMt4jHyX
-	ryGAI0GlUYjqScNreZHZwADHWraFGd0VI0YqOmdFdZ7gQ5oXFhZdjuLSd8UItpTnqU26
-	TCwM1kXpBQU0ZHf3hvaw0pnjxg/2QMw18ROekIE3JH86GaXN73GbEJY0g0YHE/Vn0Rdu
-	4NTA==
-X-Gm-Message-State: AEkoout93RcJJO8KXL7qvuDinFcVTyhHvugRgJvzFVnb1r/To2xf5FT5LkORiwfBdlAhEQ==
-X-Received: by 10.98.56.207 with SMTP id f198mr50691878pfa.83.1471940161812;
-	Tue, 23 Aug 2016 01:16:01 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by smtp.gmail.com with ESMTPSA id
-	t126sm3297179pfd.28.2016.08.23.01.16.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 23 Aug 2016 01:16:01 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
+	Tue, 23 Aug 2016 08:20:37 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga105.jf.intel.com with ESMTP; 23 Aug 2016 01:10:19 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.28,565,1464678000"; d="scan'208";a="1040049498"
+Received: from ekaaria-xps-8300.fi.intel.com ([10.237.68.37])
+	by orsmga002.jf.intel.com with ESMTP; 23 Aug 2016 01:10:18 -0700
+From: =?UTF-8?q?Erkka=20K=C3=A4=C3=A4ri=C3=A4?= <erkka.kaaria@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Aug 2016 18:15:36 +1000
-Message-Id: <20160823081536.32366-1-net147@gmail.com>
-X-Mailer: git-send-email 2.9.3
-Subject: [meta-qt5][PATCH] qtbase: avoid QA warning if PACKAGECONFIG_RELEASE = "debug"
+Date: Tue, 23 Aug 2016 11:14:56 +0300
+Message-Id: <1471940096-12112-1-git-send-email-erkka.kaaria@intel.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+Subject: [meta-java][PATCH v2] openjdk-8: Fix QA error caused by a missing hash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,29 +30,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Aug 2016 08:16:01 -0000
+X-List-Received-Date: Tue, 23 Aug 2016 08:20:38 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-If PACKAGECONFIG_RELEASE = "debug", an invalid PACKAGECONFIG QA
-warning is shown. To avoid this, we add dummy debug PACKAGECONFIG.
-
-Signed-off-by: Jonathan Liu <net147@gmail.com>
----
- recipes-qt/qt5/qtbase_git.bb | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index f69c33c..e633d01 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -67,6 +67,7 @@ PACKAGECONFIG ?= " \
- "
- 
- PACKAGECONFIG[release] = "-release,-debug"
-+PACKAGECONFIG[debug] = ""
- PACKAGECONFIG[developer] = "-developer-build"
- PACKAGECONFIG[sm] = "-sm,-no-sm"
- PACKAGECONFIG[tests] = "-make tests,-nomake tests"
--- 
-2.9.3
+RVhUUkFfTERGTEFHUyB3ZXJlIG5vdCB1c2VkIHdoZW4gYnVpbGRpbmcgY2VydGFpbiBzaGFyZWQg
+b2JqZWN0cy4gVGhpcwptZWFucyB0aGF0IHRoZSBZb2N0byBzcGVjaWZpYyBsaW5rZXIgZmxhZ3Mg
+d2VyZSBsb3N0LCB3aGljaCBjYXVzZWQgYnVpbGQKZmFpbHVyZXMgZHVlIHRvIGEgYmFkIGhhc2gg
+c3R5bGUgUUEgZXJyb3IuCgpTaWduZWQtb2ZmLWJ5OiBFcmtrYSBLw6TDpHJpw6QgPGVya2thLmth
+YXJpYUBpbnRlbC5jb20+Ci0tLQogcmVjaXBlcy1jb3JlL29wZW5qZGsvb3Blbmpkay04XzEwMmIx
+NC5iYiAgICAgICAgICAgfCAgMSArCiByZWNpcGVzLWNvcmUvb3Blbmpkay9vcGVuanJlLThfMTAy
+YjE0LmJiICAgICAgICAgICB8ICAxICsKIC4uLi9vcGVuamRrOC1hZGQtbWlzc2luZy1saW5rZXIt
+ZmxhZ3MucGF0Y2ggICAgICAgIHwgNTcgKysrKysrKysrKysrKysrKysrKysrKwogMyBmaWxlcyBj
+aGFuZ2VkLCA1OSBpbnNlcnRpb25zKCspCiBjcmVhdGUgbW9kZSAxMDA2NDQgcmVjaXBlcy1jb3Jl
+L29wZW5qZGsvcGF0Y2hlcy1vcGVuamRrLTgvb3BlbmpkazgtYWRkLW1pc3NpbmctbGlua2VyLWZs
+YWdzLnBhdGNoCgpkaWZmIC0tZ2l0IGEvcmVjaXBlcy1jb3JlL29wZW5qZGsvb3Blbmpkay04XzEw
+MmIxNC5iYiBiL3JlY2lwZXMtY29yZS9vcGVuamRrL29wZW5qZGstOF8xMDJiMTQuYmIKaW5kZXgg
+NzljNGNkYS4uMjEwYzg5NyAxMDA2NDQKLS0tIGEvcmVjaXBlcy1jb3JlL29wZW5qZGsvb3Blbmpk
+ay04XzEwMmIxNC5iYgorKysgYi9yZWNpcGVzLWNvcmUvb3Blbmpkay9vcGVuamRrLThfMTAyYjE0
+LmJiCkBAIC0xMiw2ICsxMiw3IEBAIFBBVENIRVNfVVJJX2FwcGVuZCA9ICJcCiAgICAgZmlsZTov
+L29wZW5qZGs4LWZpeC1hZGxjLWZsYWdzLnBhdGNoO2FwcGx5PW5vIFwKICAgICBmaWxlOi8vb3Bl
+bmpkazgtc2lsZW5jZS1kX2ZvcnRpZnlfc291cmNlLXdhcm5pbmcucGF0Y2g7YXBwbHk9bm8gXAog
+ICAgIGZpbGU6Ly9vcGVuamRrOC1maXgtemVyby1tb2RlLWNyYXNoLnBhdGNoO2FwcGx5PW5vIFwK
+KyAgICBmaWxlOi8vb3BlbmpkazgtYWRkLW1pc3NpbmctbGlua2VyLWZsYWdzLnBhdGNoO2FwcGx5
+PW5vIFwKICIKIAogZG9faW5zdGFsbCgpIHsKZGlmZiAtLWdpdCBhL3JlY2lwZXMtY29yZS9vcGVu
+amRrL29wZW5qcmUtOF8xMDJiMTQuYmIgYi9yZWNpcGVzLWNvcmUvb3Blbmpkay9vcGVuanJlLThf
+MTAyYjE0LmJiCmluZGV4IDczNjI2OWQuLjg4MTYwZTEgMTAwNjQ0Ci0tLSBhL3JlY2lwZXMtY29y
+ZS9vcGVuamRrL29wZW5qcmUtOF8xMDJiMTQuYmIKKysrIGIvcmVjaXBlcy1jb3JlL29wZW5qZGsv
+b3BlbmpyZS04XzEwMmIxNC5iYgpAQCAtMTIsNiArMTIsNyBAQCBQQVRDSEVTX1VSSV9hcHBlbmQg
+PSAiXAogICAgIGZpbGU6Ly9vcGVuamRrOC1maXgtYWRsYy1mbGFncy5wYXRjaDthcHBseT1ubyBc
+CiAgICAgZmlsZTovL29wZW5qZGs4LXNpbGVuY2UtZF9mb3J0aWZ5X3NvdXJjZS13YXJuaW5nLnBh
+dGNoO2FwcGx5PW5vIFwKICAgICBmaWxlOi8vb3BlbmpkazgtZml4LXplcm8tbW9kZS1jcmFzaC5w
+YXRjaDthcHBseT1ubyBcCisgICAgZmlsZTovL29wZW5qZGs4LWFkZC1taXNzaW5nLWxpbmtlci1m
+bGFncy5wYXRjaDthcHBseT1ubyBcCiAiCiAKIGRvX2luc3RhbGwoKSB7CmRpZmYgLS1naXQgYS9y
+ZWNpcGVzLWNvcmUvb3Blbmpkay9wYXRjaGVzLW9wZW5qZGstOC9vcGVuamRrOC1hZGQtbWlzc2lu
+Zy1saW5rZXItZmxhZ3MucGF0Y2ggYi9yZWNpcGVzLWNvcmUvb3Blbmpkay9wYXRjaGVzLW9wZW5q
+ZGstOC9vcGVuamRrOC1hZGQtbWlzc2luZy1saW5rZXItZmxhZ3MucGF0Y2gKbmV3IGZpbGUgbW9k
+ZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4uOTJmMjliMAotLS0gL2Rldi9udWxsCisrKyBiL3JlY2lw
+ZXMtY29yZS9vcGVuamRrL3BhdGNoZXMtb3Blbmpkay04L29wZW5qZGs4LWFkZC1taXNzaW5nLWxp
+bmtlci1mbGFncy5wYXRjaApAQCAtMCwwICsxLDU3IEBACittYWtlZmlsZXM6IEFkZCBtaXNzaW5n
+IEVYVFJBX0xERkxBR1MgdG8gY2VydGFpbiBmaWxlcworCitFWFRSQV9MREZMQUdTIHdlcmUgbm90
+IHVzZWQgd2hlbiBidWlsZGluZyBjZXJ0YWluIHNoYXJlZCBvYmplY3RzLiBUaGlzCittZWFucyB0
+aGF0IHRoZSBZb2N0byBzcGVjaWZpYyBsaW5rZXIgZmxhZ3Mgd2VyZSBsb3N0LCB3aGljaCBjYXVz
+ZWQgYnVpbGQKK2ZhaWx1cmVzIGR1ZSB0byBhIGJhZCBoYXNoIHN0eWxlLgorCitTaWduZWQtb2Zm
+LWJ5OiBFcmtrYSBLw6TDpHJpw6QgPGVya2thLmthYXJpYUBpbnRlbC5jb20+CisKK1Vwc3RyZWFt
+LVN0YXR1czogUGVuZGluZworLS0tCisgaG90c3BvdC9tYWtlL2xpbnV4L21ha2VmaWxlcy9qc2ln
+Lm1ha2UgICB8IDIgKy0KKyBob3RzcG90L21ha2UvbGludXgvbWFrZWZpbGVzL3NhcHJvYy5tYWtl
+IHwgMiArLQorIGhvdHNwb3QvbWFrZS9saW51eC9tYWtlZmlsZXMvdm0ubWFrZSAgICAgfCAyICst
+CisgMyBmaWxlcyBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCisKK2Rp
+ZmYgLS1naXQgaG90c3BvdC9tYWtlL2xpbnV4L21ha2VmaWxlcy9qc2lnLm1ha2UgaG90c3BvdC9t
+YWtlL2xpbnV4L21ha2VmaWxlcy9qc2lnLm1ha2UKK2luZGV4IGNlMjllYjEuLmUxZDZjMDcgMTAw
+NjQ0CistLS0gaG90c3BvdC9tYWtlL2xpbnV4L21ha2VmaWxlcy9qc2lnLmFtYWtlCisrKysgaG90
+c3BvdC9tYWtlL2xpbnV4L21ha2VmaWxlcy9qc2lnLm1ha2UKK0BAIC00NCw3ICs0NCw3IEBAIExJ
+QkpTSUdfTUFQRklMRSA9ICQoTUFLRUZJTEVTX0RJUikvbWFwZmlsZS12ZXJzLWpzaWcKKyAjIGNh
+dXNlIHByb2JsZW1zIHdpdGggaW50ZXJwb3NpbmcuIFNlZSBDUjogNjQ2NjY2NQorICMgTEZMQUdT
+X0pTSUcgKz0gJChNQVBGTEFHOkZJTEVOQU1FPSQoTElCSlNJR19NQVBGSUxFKSkKKworLUxGTEFH
+U19KU0lHICs9IC1EX0dOVV9TT1VSQ0UgLURfUkVFTlRSQU5UICQoTERGTEFHU19IQVNIX1NUWUxF
+KQorK0xGTEFHU19KU0lHICs9IC1EX0dOVV9TT1VSQ0UgLURfUkVFTlRSQU5UICQoTERGTEFHU19I
+QVNIX1NUWUxFKSAkKEVYVFJBX0xERkxBR1MpCisKKyAjIERFQlVHX0JJTkFSSUVTIG92ZXJyaWRl
+cyBldmVyeXRoaW5nLCB1c2UgZnVsbCAtZyBkZWJ1ZyBpbmZvcm1hdGlvbgorIGlmZXEgKCQoREVC
+VUdfQklOQVJJRVMpLCB0cnVlKQorZGlmZiAtLWdpdCBob3RzcG90L21ha2UvbGludXgvbWFrZWZp
+bGVzL3NhcHJvYy5tYWtlIGhvdHNwb3QvbWFrZS9saW51eC9tYWtlZmlsZXMvc2Fwcm9jLm1ha2UK
+K2luZGV4IDdjNmU0YTguLjM2OWEwYmEgMTAwNjQ0CistLS0gaG90c3BvdC9tYWtlL2xpbnV4L21h
+a2VmaWxlcy9zYXByb2MubWFrZQorKysrIGhvdHNwb3QvbWFrZS9saW51eC9tYWtlZmlsZXMvc2Fw
+cm9jLm1ha2UKK0BAIC03Myw3ICs3Myw3IEBAIEFMVF9TQUlOQ0RJUj0tSSQoQUxUX1NBU1JDRElS
+KSAtREFMVF9TQVNSQ0RJUgorIGVsc2UKKyBBTFRfU0FJTkNESVI9CisgZW5kaWYKKy1TQV9MRkxB
+R1MgPSAkKE1BUEZMQUc6RklMRU5BTUU9JChTQU1BUEZJTEUpKSAkKExERkxBR1NfSEFTSF9TVFlM
+RSkKKytTQV9MRkxBR1MgPSAkKE1BUEZMQUc6RklMRU5BTUU9JChTQU1BUEZJTEUpKSAkKExERkxB
+R1NfSEFTSF9TVFlMRSkgJChFWFRSQV9MREZMQUdTKQorCisgU0FBUkNIID89ICQoQlVJTERBUkNI
+KQorCitkaWZmIC0tZ2l0IGhvdHNwb3QvbWFrZS9saW51eC9tYWtlZmlsZXMvdm0ubWFrZSBob3Rz
+cG90L21ha2UvbGludXgvbWFrZWZpbGVzL3ZtLm1ha2UKK2luZGV4IDFhNDhkZjkuLjcyZjhkMTEg
+MTAwNjQ0CistLS0gaG90c3BvdC9tYWtlL2xpbnV4L21ha2VmaWxlcy92bS5tYWtlCisrKysgaG90
+c3BvdC9tYWtlL2xpbnV4L21ha2VmaWxlcy92bS5tYWtlCitAQCAtMTIyLDcgKzEyMiw3IEBAIENG
+TEFHUyArPSAkKENGTEFHUy9OT0VYKQorCisgIyBFeHRyYSBmbGFncyBmcm9tIGdudW1ha2UncyBp
+bnZvY2F0aW9uIG9yIGVudmlyb25tZW50CisgQ0ZMQUdTICs9ICQoRVhUUkFfQ0ZMQUdTKQorLUxG
+TEFHUyArPSAkKEVYVFJBX0NGTEFHUykKKytMRkxBR1MgKz0gJChFWFRSQV9DRkxBR1MpICQoRVhU
+UkFfTERGTEFHUykKKworICMgRG9uJ3Qgc2V0IGV4Y3V0YWJsZSBiaXQgb24gc3RhY2sgc2VnbWVu
+dAorICMgdGhlIHNhbWUgY291bGQgYmUgZG9uZSBieSBzZXBhcmF0ZSBleGVjc3RhY2sgY29tbWFu
+ZAorLS0KKzIuNy40CisKLS0gCjIuNy40CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KSW50ZWwgRmlubGFuZCBPeQpS
+ZWdpc3RlcmVkIEFkZHJlc3M6IFBMIDI4MSwgMDAxODEgSGVsc2lua2kgCkJ1c2luZXNzIElkZW50
+aXR5IENvZGU6IDAzNTc2MDYgLSA0IApEb21pY2lsZWQgaW4gSGVsc2lua2kgCgpUaGlzIGUtbWFp
+bCBhbmQgYW55IGF0dGFjaG1lbnRzIG1heSBjb250YWluIGNvbmZpZGVudGlhbCBtYXRlcmlhbCBm
+b3IKdGhlIHNvbGUgdXNlIG9mIHRoZSBpbnRlbmRlZCByZWNpcGllbnQocykuIEFueSByZXZpZXcg
+b3IgZGlzdHJpYnV0aW9uCmJ5IG90aGVycyBpcyBzdHJpY3RseSBwcm9oaWJpdGVkLiBJZiB5b3Ug
+YXJlIG5vdCB0aGUgaW50ZW5kZWQKcmVjaXBpZW50LCBwbGVhc2UgY29udGFjdCB0aGUgc2VuZGVy
+IGFuZCBkZWxldGUgYWxsIGNvcGllcy4K
 
 
