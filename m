@@ -1,22 +1,46 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id F1FD0731D6
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f68.google.com (mail-pa0-f68.google.com
+	[209.85.220.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 3018B60797
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2016 11:08:23 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga103.fm.intel.com with ESMTP; 24 Aug 2016 04:08:24 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.28,570,1464678000"; d="scan'208";a="1030527918"
-Received: from mbabyjoh-desk.fi.intel.com (HELO
-	mbabyjoh-desk.ger.corp.intel.com) ([10.237.72.71])
-	by fmsmga001.fm.intel.com with ESMTP; 24 Aug 2016 04:08:23 -0700
-Date: Wed, 24 Aug 2016 14:07:52 +0300
-From: "Maxin B. John" <maxin.john@intel.com>
+	Wed, 24 Aug 2016 12:22:10 +0000 (UTC)
+Received: by mail-pa0-f68.google.com with SMTP id ez1so1118480pab.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Aug 2016 05:22:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=1F2gXjEjRjgPidt6oYU9h6zcBsWdYkzgARtxZJvzc0Q=;
+	b=F5c4mGpDgBYSSI2zfizZPp0GC8iVE5NySM0GxaXcu5tyumvXOSmOD2eCtYuLe9PXyY
+	zVtWtxAScTqxsR43Hk6fALik0NQ28EUKWl3tf9T632SvMAHxubGY5ip38a6TXSysuG39
+	T8Ra9j9O3X5QY3LXc24Mp3pI2PutKr7bBqtHhogrGkwSRBkWMRBWOHwuduN1H1Pq8H2/
+	ABdD1hMh+9kHNnclDSq55Q05n8G9FsGASflTHbQ/Pdcb8TkWbuh+Q/SUiBYDNaPXnr0f
+	0ASqvb/9xY1jBlFgPqfF26qSR7ioDNHdt5BhVAeKrsvqulwpezfgxX3qaPRhq9efpm9t
+	dbvA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=1F2gXjEjRjgPidt6oYU9h6zcBsWdYkzgARtxZJvzc0Q=;
+	b=m+D0y3Fb6OEsavddeiqr2+P+pC6r9bQ6/9Kg+z+2UoHgcSjuiSjOxjDImlTDMYt+50
+	QevUaiBdRZrkxxybFkvxwfnMkVX1kEgnRjPNcayXHgVx7fYqog1P88ZJPiSIokBZfuUO
+	r9mDnWxuvEwt6I5BQmgsFjjh6K5FCR8ZvTK4/DaMDdSVgAU1ORRWblWjuMsF+Ocy4Zeu
+	3zaZNaxaKhc0AOpQ0zbaZGjdqe6yti6rUWk4m9xlxGik4J1YAwqoNYCQpfQpBXuB03VN
+	ZQdPGkK1ZprB+bgFRaABuI6W+NLD28HAzRzDBr3P07v/N7bTakBkcuFJ5jF3c+qWXPEX
+	iY4w==
+X-Gm-Message-State: AE9vXwMZWmb6yO9sFxdreYcAl2xf1FOKkAFfLeaKb+iR/68e1HwxfWEOMFzaZ0fmqQtcAA==
+X-Received: by 10.66.164.70 with SMTP id yo6mr5054720pab.47.1472041331366;
+	Wed, 24 Aug 2016 05:22:11 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by smtp.gmail.com with ESMTPSA id
+	k78sm13351328pfa.78.2016.08.24.05.22.10
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 24 Aug 2016 05:22:10 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160824110751.GA20458@mbabyjoh-desk.ger.corp.intel.com>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Updates to meta-java (master, master-next) in 2016-08-24
+Date: Wed, 24 Aug 2016 22:22:08 +1000
+Message-Id: <20160824122208.26537-1-net147@gmail.com>
+X-Mailer: git-send-email 2.9.3
+Subject: [meta-oe][PATCH] nodejs: update to 4.5.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,83 +53,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Aug 2016 11:08:24 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 24 Aug 2016 12:22:11 -0000
 
-Hi,
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ meta-oe/recipes-devtools/nodejs/{nodejs_4.4.7.bb => nodejs_4.5.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_4.4.7.bb => nodejs_4.5.0.bb} (96%)
 
-I merged the following commits to master and master-next branches:
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_4.4.7.bb b/meta-oe/recipes-devtools/nodejs/nodejs_4.5.0.bb
+similarity index 96%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_4.4.7.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_4.5.0.bb
+index 88b0e87..ceba2b8 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_4.4.7.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.5.0.bb
+@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
+ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+     file://no-registry.patch \
+ "
+-SRC_URI[md5sum] = "e4d118a3762a3e60b97a62cf83194efd"
+-SRC_URI[sha256sum] = "1ef900b9cb3ffb617c433a3247a9d67ff36c9455cbc9c34175bee24bdbfdf731"
++SRC_URI[md5sum] = "ac8e38c83f29e83d496d4bc4283487b0"
++SRC_URI[sha256sum] = "97b99d378c56802444208409568e2e66c46332897f06aead74d1ffbe733bd488"
+ 
+ S = "${WORKDIR}/node-v${PV}"
+ 
+-- 
+2.9.3
 
-commit 216481ba09c187d0b0fc8f864944af6ae026ff73
-Author: Erkka K‰‰ri‰ <erkka.kaaria@intel.com>
-Date:   Tue Aug 23 11:14:56 2016 +0300
-
-openjdk-8: Fix QA error caused by a missing hash
-        
-EXTRA_LDFLAGS were not used when building certain shared objects. This
-means that the Yocto specific linker flags were lost, which caused build
-failures due to a bad hash style QA error.
-                        
-Signed-off-by: Erkka K‰‰ri‰ <erkka.kaaria@intel.com>
-Signed-off-by: Maxin B. John <maxin.john@intel.com>
-
-commit 0f127a49696696ac48c394f84232e7f56b29fbe7
-Author: Erkka K‰‰ri‰ <erkka.kaaria@intel.com>
-Date:   Mon Aug 15 12:36:20 2016 +0300
-
-openjdk-8-release-102b14.inc: Ignore deprecation
-                                       
-readdir_r has been deprecated since glibc 2.24. As openjdk uses this
-function, a warning is generated during build that gets turned into
-an error when -Werror is used.
-                                                        
-While the readdir function is suggested as an replacement, it has
-slightly different API. The warning is ignored instead to prevent any
-unexpected breakage from patching the offending functions.
-                                                                        
-Signed-off-by: Erkka K‰‰ri‰ <erkka.kaaria@intel.com>
-Signed-off-by: Maxin B. John <maxin.john@intel.com>
-
-commit 0eeeb059751c00042bd0341d17f5cceddef3c502
-Author: Erkka K‰‰ri‰ <erkka.kaaria@intel.com>
-Date:   Tue Aug 9 10:32:17 2016 +0300
-
-openjdk-8: Upgrade from u72 to u102
-                                                                                        
-Openjdk is upgraded from u72 to u102. Two patches are dropped, as these
-were backports and the fixes are present in the current version. One
-patch was refreshed. One patch was backported from the upcoming u112 to
-fix a zero mode crash.
-                                                                                                            
-Signed-off-by: Erkka K‰‰ri‰ <erkka.kaaria@intel.com>
-Signed-off-by: Maxin B. John <maxin.john@intel.com>
-
-commit 0d58a4fb4236edeeeb3f23a66c0c14279066c8bb
-Author: Richard Leitner <richard.leitner@skidata.com>
-Date:   Tue Aug 16 14:49:00 2016 +0200
-
-openjdk-7: disable IcedTea's auto-downloading
-
-Pass "--enable-downloading=no" to IcedTea's make. This ensures
-IcedTea uses the versions and checksums we defined in the openjdk-7-jre
-recipe for its "sub-modules".
-
-Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-Signed-off-by: Maxin B. John <maxin.john@intel.com>
-
-commit d41d541b4a3c570f6920d1bf44ab8cb651cfd4b7
-Author: Maxin B. John <maxin.john@intel.com>
-Date:   Tue Aug 16 16:23:56 2016 +0300
-
-README: mention master in supported branches
-
-Along with krogoth, meta-java also works with master branches
-of respective layers.
-
-Signed-off-by: Maxin B. John <maxin.john@intel.com>
-
-Best Regards,
-Maxin
 
