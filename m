@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id DC2FD731E5
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 515E3731AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2016 09:22:25 +0000 (UTC)
+	Wed, 24 Aug 2016 09:22:27 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u7O9MQ3c019200
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u7O9MSlg023860
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2016 02:22:26 -0700 (PDT)
+	Wed, 24 Aug 2016 02:22:28 -0700
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 24 Aug 2016 02:22:25 -0700
+	14.3.248.2; Wed, 24 Aug 2016 02:22:27 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 24 Aug 2016 17:06:51 +0800
-Message-ID: <81f605dbb81ccc515770cb857e9c326e4484ec82.1472027350.git.jackie.huang@windriver.com>
+Date: Wed, 24 Aug 2016 17:06:52 +0800
+Message-ID: <78f89a5f45eadcc5e4f58c1af43fd0cc3020729d.1472027350.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.8.3
 In-Reply-To: <cover.1472027350.git.jackie.huang@windriver.com>
 References: <cover.1472027350.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 03/16] daq: control ipv6 support based on DISTRO_FEATURES
+Subject: [meta-networking][PATCH 04/16] mtr: control ipv6 support based on DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Aug 2016 09:22:26 -0000
+X-List-Received-Date: Wed, 24 Aug 2016 09:22:27 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
@@ -43,23 +43,19 @@ on DISTRO_FEATURES.
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-networking/recipes-connectivity/daq/daq_2.0.6.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-networking/recipes-support/mtr/mtr_0.86.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/daq/daq_2.0.6.bb b/meta-networking/recipes-connectivity/daq/daq_2.0.6.bb
-index 813c414..3ed3aab 100644
---- a/meta-networking/recipes-connectivity/daq/daq_2.0.6.bb
-+++ b/meta-networking/recipes-connectivity/daq/daq_2.0.6.bb
-@@ -20,6 +20,9 @@ SRC_URI = "http://fossies.org/linux/misc/daq-${PV}.tar.gz \
- EXTRA_OECONF = "--disable-nfq-module --disable-ipq-module --includedir=${includedir} \
-     --with-libpcap-includes=${STAGING_INCDIR} --with-dnet-includes=${STAGING_LIBDIR}"
+diff --git a/meta-networking/recipes-support/mtr/mtr_0.86.bb b/meta-networking/recipes-support/mtr/mtr_0.86.bb
+index 7b73791..1d8a2cf 100644
+--- a/meta-networking/recipes-support/mtr/mtr_0.86.bb
++++ b/meta-networking/recipes-support/mtr/mtr_0.86.bb
+@@ -17,3 +17,5 @@ inherit autotools
+ 
+ EXTRA_OECONF = "--without-gtk"
  
 +PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)}"
 +PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
-+
- SRC_URI[md5sum] = "2cd6da422a72c129c685fc4bb848c24c"
- SRC_URI[sha256sum] = "b40e1d1273e08aaeaa86e69d4f28d535b7e53bdb3898adf539266b63137be7cb"
- 
 -- 
 2.8.3
 
