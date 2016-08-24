@@ -1,24 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E11C56AC37
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5587B6AC37
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2016 09:22:21 +0000 (UTC)
+	Wed, 24 Aug 2016 09:22:22 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u7O9MLtP019195
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u7O9MNQ3023856
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2016 02:22:21 -0700 (PDT)
+	Wed, 24 Aug 2016 02:22:23 -0700
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 24 Aug 2016 02:22:21 -0700
+	14.3.248.2; Wed, 24 Aug 2016 02:22:22 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 24 Aug 2016 17:06:48 +0800
-Message-ID: <cover.1472027350.git.jackie.huang@windriver.com>
+Date: Wed, 24 Aug 2016 17:06:49 +0800
+Message-ID: <8644fdb6b081fa311359cb63617c8903858ad265.1472027350.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.8.3
+In-Reply-To: <cover.1472027350.git.jackie.huang@windriver.com>
+References: <cover.1472027350.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 00/16] control ipv6 support based on DISTRO_FEATURES
+Subject: [meta-networking][PATCH 01/16] chrony: control ipv6 support based on DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,58 +38,35 @@ Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-There is ipv6 configure option for these packages, and we need them
-to be controled by DISTRO_FEATURES.
+Add PACKAGECONFIG for ipv6 and control it based
+on DISTRO_FEATURES.
 
-Tested with and without ipv6 in DISTRO_FEATURES on qemux86-64 and qemuarm.
-
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
-The following changes since commit dc48e768f527cbed0cc3899f6a2ebb396cd9ada8:
+ meta-networking/recipes-support/chrony/chrony_2.4.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-  meta-oe: remove trailing spaces (2016-08-22 15:56:29 +0200)
-
-are available in the git repository at:
-
-  git://git.pokylinux.org/poky-contrib.git jhuang0/r_ipv6_160824-0
-  http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/r_ipv6_160824-0
-
-Jackie Huang (16):
-  chrony: control ipv6 support based on DISTRO_FEATURES
-  cyrus-sasl: control ipv6 support based on DISTRO_FEATURES
-  daq: control ipv6 support based on DISTRO_FEATURES
-  mtr: control ipv6 support based on DISTRO_FEATURES
-  ntp: control ipv6 support based on DISTRO_FEATURES
-  squid: control ipv6 support based on DISTRO_FEATURES
-  stunnel: control ipv6 support based on DISTRO_FEATURES
-  tftp-hpa: control ipv6 support based on DISTRO_FEATURES
-  tnftp: control ipv6 support based on DISTRO_FEATURES
-  wolfssl: control ipv6 support based on DISTRO_FEATURES
-  znc: control ipv6 support based on DISTRO_FEATURES
-  iperf: control ipv6 support based on DISTRO_FEATURES
-  php: control ipv6 support based on DISTRO_FEATURES
-  cherokee: control ipv6 support based on DISTRO_FEATURES
-  xfce4-mailwatch-plugin: control ipv6 support based on DISTRO_FEATURES
-  inetutils: fixes for ipv6 feature
-
- .../recipes-connectivity/daq/daq_2.0.6.bb          |  3 ++
- .../inetutils/inetutils/fix-disable-ipv6.patch     | 43 +++++++++++++++++-----
- .../inetutils/inetutils_1.9.4.bb                   | 10 ++---
- .../recipes-connectivity/wolfssl/wolfssl_3.9.0.bb  |  2 +
- .../cyrus-sasl/cyrus-sasl_2.1.26.bb                |  2 +
- .../recipes-daemons/squid/squid_3.5.20.bb          |  2 +
- .../recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb       |  3 ++
- meta-networking/recipes-irc/znc/znc_git.bb         |  3 ++
- .../recipes-support/chrony/chrony_2.4.bb           |  5 ++-
- meta-networking/recipes-support/mtr/mtr_0.86.bb    |  2 +
- meta-networking/recipes-support/ntp/ntp_4.2.8p8.bb |  5 ++-
- .../recipes-support/stunnel/stunnel_5.28.bb        |  5 ++-
- .../recipes-support/tnftp/tnftp_20151004.bb        |  5 ++-
- meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb     |  3 ++
- meta-oe/recipes-devtools/php/php.inc               |  5 ++-
- .../recipes-httpd/cherokee/cherokee_1.2.98.bb      |  3 +-
- .../mailwatch/xfce4-mailwatch-plugin_1.2.0.bb      |  3 ++
- 17 files changed, 83 insertions(+), 21 deletions(-)
-
+diff --git a/meta-networking/recipes-support/chrony/chrony_2.4.bb b/meta-networking/recipes-support/chrony/chrony_2.4.bb
+index 9698ae4..4bc4ce0 100644
+--- a/meta-networking/recipes-support/chrony/chrony_2.4.bb
++++ b/meta-networking/recipes-support/chrony/chrony_2.4.bb
+@@ -58,12 +58,15 @@ inherit update-rc.d systemd
+ #     chrony.conf and init script.
+ #   - 'scfilter' enables support for system call filtering, but requires the
+ #     kernel to have CONFIG_SECCOMP enabled.
+-PACKAGECONFIG ??= "editline scfilter"
++PACKAGECONFIG ??= "editline scfilter \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
++"
+ PACKAGECONFIG[readline] = "--without-editline,--without-readline,readline"
+ PACKAGECONFIG[editline] = ",--without-editline,libedit"
+ PACKAGECONFIG[sechash] = "--without-tomcrypt,--disable-sechash,nss"
+ PACKAGECONFIG[privdrop] = ",--disable-privdrop,libcap"
+ PACKAGECONFIG[scfilter] = "--enable-scfilter,--without-seccomp"
++PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+ 
+ # --disable-static isn't supported by chrony's configure script.
+ DISABLE_STATIC = ""
 -- 
 2.8.3
 
