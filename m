@@ -1,46 +1,30 @@
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D0AC6067D
+Return-Path: <wangxin2015.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 163DC7318A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Aug 2016 19:15:39 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id v123so11081349qkh.3
+	Wed, 24 Aug 2016 07:50:38 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="10229209"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 24 Aug 2016 15:50:37 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 442C9430CD06
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Aug 2016 12:15:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:organization;
-	bh=OxxBP0hFnbDlrTcADWyErDTUwjiyzhJLdaVH2odnIGA=;
-	b=2B4yAJM+i419cuSMlIms7wAy0oP099VLaZW+YZqE4qLK+e6zA2p7Np7KhdvA9Bl2lK
-	3BkuuNVi/leVmdkBMPIcPioKiNHmHDW2HmFftuH2L50zHXrPvTc7lUGwK039Euif9Sat
-	cbTzc0GJoGSHxqMcW8WeutvMbTpp1tHx1ZWjf91pFBCMUyG52pZ6BgQIcIfYscnxXJ02
-	sjBYzs6GGpWu2nZqHC4YyEfRjFzERGKLCEpQQUAqpL6UlkOXJSYQVJx8bxfpcr1kBNXS
-	AM8kUknkRsIlAqqEc2avSTy1KIqNvuV1rItiP4kS8Zn/ptBfqkx8Vcj/594PHL70FXB8
-	rsrg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
-	bh=OxxBP0hFnbDlrTcADWyErDTUwjiyzhJLdaVH2odnIGA=;
-	b=SO1CweDWMRvBXOGRQYSC5TzjEuQO4HShpZOwr7RNIwPLYEzLLPjv5WhRnY4z5tmuYu
-	+iFVLxiYAJha2YcOAdb9J1bdGy9erszhYo5KVgikpQ6dO+vfkArviKoGZauNuRhTXNi4
-	6J8fc/GF27B3ym5sCBGUNXwlktMMF8yu5rafpBWXMKxywyQF5KZJ+gGQjbnY/EpsbkNK
-	QFCV9xTpKhX+k8OrefVZl/JzLOaxE1q/oKCAeumG+3WBjyTDmacnypElNzznuodKc1+T
-	AFvE7Cy1+vEsuILmRwjs4GFNd3RBIrtaP4HPU5lWuWfwPWrqQi9BftJrYGXYn5BiJbph
-	4nRQ==
-X-Gm-Message-State: AEkoousS5SeHzHUVaWz1FzBTs4s/mEq9gbw0QSiO8u5iWYbncVTuxUBvWTuLg5l0w/FEug==
-X-Received: by 10.55.162.67 with SMTP id l64mr30856150qke.277.1471979740518;
-	Tue, 23 Aug 2016 12:15:40 -0700 (PDT)
-Received: from berton.lab.ossystems.com.br ([177.127.4.56])
-	by smtp.gmail.com with ESMTPSA id l6sm1900844qkd.10.2016.08.23.12.15.37
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 23 Aug 2016 12:15:39 -0700 (PDT)
-From: Fabio Berton <fabio.berton@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Aug 2016 16:15:20 -0300
-Message-Id: <1471979720-10313-1-git-send-email-fabio.berton@ossystems.com.br>
-X-Mailer: git-send-email 2.1.4
-Organization: O.S. Systems Software LTDA.
-Subject: [meta-oe][PATCH] geis: Add python3-argparse module to RDEPENDS
+	Wed, 24 Aug 2016 15:50:35 +0800 (CST)
+Received: from ubuntu.g08.fujitsu.local (10.167.226.120) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.279.2; Wed, 24 Aug 2016 15:50:34 +0800
+From: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 24 Aug 2016 03:50:30 -0400
+Message-ID: <1472025030-1519-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.120]
+X-yoursite-MailScanner-ID: 442C9430CD06.A46BC
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangxin2015.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] lua: 5.3.2 -> 5.3.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,29 +37,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Aug 2016 19:15:40 -0000
+X-List-Received-Date: Wed, 24 Aug 2016 07:50:40 -0000
+Content-Type: text/plain
 
-Python module argparse was removed from python3-misc package, so we
-need to add new python3-argparse package to RDEPENDS.
+1) Upgrade lua from 5.3.2 to 5.3.3.
+2) Modify LIC_FILES_CHKSUM, since the date in it has been changed, But the LICENSE has not been changed.
 
-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-devtools/lua/{lua_5.3.2.bb => lua_5.3.3.bb} | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-devtools/lua/{lua_5.3.2.bb => lua_5.3.3.bb} (82%)
 
-diff --git a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-index f71d324..281dc3d 100644
---- a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-+++ b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
-@@ -29,6 +29,7 @@ EXTRA_OECONF = "--disable-integration-tests"
+diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.2.bb b/meta-oe/recipes-devtools/lua/lua_5.3.3.bb
+similarity index 82%
+rename from meta-oe/recipes-devtools/lua/lua_5.3.2.bb
+rename to meta-oe/recipes-devtools/lua/lua_5.3.3.bb
+index 07a1a43..a57f7e9 100644
+--- a/meta-oe/recipes-devtools/lua/lua_5.3.2.bb
++++ b/meta-oe/recipes-devtools/lua/lua_5.3.3.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Lua is a powerful light-weight programming language designed \
+ for extending applications."
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=68fc2aa2b751a37ff265524ddf026d7f"
++LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=10ffd57d574c60d5b4d6189544e205a9"
+ HOMEPAGE = "http://www.lua.org/"
  
- FILES_${PN}-bin = "${bindir}"
- RDEPENDS_${PN}-bin = " \
-+    python3-argparse \
-     python3-compression \
-     python3-core \
-     python3-crypt \
+ PR = "r0"
+@@ -15,10 +15,10 @@ SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
+             file://run-ptest \
+            ', '', d)}"
+ 
+-SRC_URI[tarballsrc.md5sum] = "33278c2ab5ee3c1a875be8d55c1ca2a1"
+-SRC_URI[tarballsrc.sha256sum] = "c740c7bb23a936944e1cc63b7c3c5351a8976d7867c5252c8854f7b2af9da68f"
+-SRC_URI[tarballtest.md5sum] = "a2b7ab1b8ff82a0145376e233ef30a4a"
+-SRC_URI[tarballtest.sha256sum] = "56909863a3713dee3709b3dbd0c868237e4f5c9ea1744f5bf0ba8bafa6c4ed32"
++SRC_URI[tarballsrc.md5sum] = "703f75caa4fdf4a911c1a72e67a27498"
++SRC_URI[tarballsrc.sha256sum] = "5113c06884f7de453ce57702abaac1d618307f33f6789fa870e87a59d772aca2"
++SRC_URI[tarballtest.md5sum] = "76f4fb07f2a4970d554645ac26df86df"
++SRC_URI[tarballtest.sha256sum] = "13154abc20976196119db531b4169ce1ce511755879d40b4192e4173291287e5"
+ 
+ inherit pkgconfig binconfig ptest
+ 
 -- 
-2.1.4
+2.7.4
+
+
 
 
