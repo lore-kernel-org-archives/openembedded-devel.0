@@ -1,31 +1,25 @@
-Return-Path: <clemens.lang@bmw-carit.de>
-Received: from cit-hm8-gw01.bmw-carit.de (cit-hm8-mail01.bmw-carit.de
-	[212.118.206.84])
-	by mail.openembedded.org (Postfix) with ESMTP id DB6847321C
+Return-Path: <maxin.john@intel.com>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id F2CBB60620
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2016 12:23:09 +0000 (UTC)
-Received: from [10.40.100.13] (port=49893 helo=cit-hm8-mail01.bmw-carit.de)
-	by cit-hm8-gw01.bmw-carit.de with esmtps (TLSv1.2:AES256-SHA:256)
-	(Exim 4.82_1-5b7a7c0-XX) (envelope-from <Clemens.Lang@bmw-carit.de>)
-	id 1bcXD2-0002tp-0L; Wed, 24 Aug 2016 14:23:08 +0200
-Received: from clang-buildbox.bmw-carit.intra (172.20.20.251) by
-	CIT-HM8-EX01.bmw-carit.intra (10.40.100.13) with Microsoft SMTP Server
-	(TLS) id 15.0.1178.4; Wed, 24 Aug 2016 14:23:06 +0200
-X-CTCH-RefID: str=0001.0A0C0203.57BD91AC.0049, ss=1, re=0.000, recu=0.000,
-	reip=0.000, cl=1, cld=1, fgs=0
-From: Clemens Lang <clemens.lang@bmw-carit.de>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 24 Aug 2016 14:22:33 +0200
-Message-ID: <20160824122233.19616-2-clemens.lang@bmw-carit.de>
-X-Mailer: git-send-email 2.9.3
-In-Reply-To: <20160824122233.19616-1-clemens.lang@bmw-carit.de>
-References: <20160824122233.19616-1-clemens.lang@bmw-carit.de>
+	Wed, 24 Aug 2016 12:58:01 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by orsmga103.jf.intel.com with ESMTP; 24 Aug 2016 05:58:02 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.28,570,1464678000"; d="scan'208";a="870423396"
+Received: from mbabyjoh-desk.fi.intel.com (HELO
+	mbabyjoh-desk.ger.corp.intel.com) ([10.237.72.71])
+	by orsmga003.jf.intel.com with ESMTP; 24 Aug 2016 05:58:00 -0700
+Date: Wed, 24 Aug 2016 15:57:29 +0300
+From: "Maxin B. John" <maxin.john@intel.com>
+To: Kyle Russell <bkylerussell@gmail.com>
+Message-ID: <20160824125729.GB13684@mbabyjoh-desk.ger.corp.intel.com>
+References: <1471643882-14235-1-git-send-email-bkylerussell@gmail.com>
 MIME-Version: 1.0
-X-Originating-IP: [172.20.20.251]
-X-ClientProxiedBy: CIT-HM8-EX01.bmw-carit.intra (10.40.100.13) To
-	CIT-HM8-EX01.bmw-carit.intra (10.40.100.13)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-oe][PATCH] gitpkgv: Fix $GITPKV for a single named git source
+In-Reply-To: <1471643882-14235-1-git-send-email-bkylerussell@gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-java][PATCH 1/2] rhino-native should depend on classpath-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,45 +32,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Aug 2016 12:23:10 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 24 Aug 2016 12:58:02 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Recipes that fetch from a single git source, assign a name to this
-source and do not set SRCREV_FORMAT to this name will always get
-a GITPKGV value of "default", which causes version-going-backwards QA
-errors.
+Hi Kyle,
 
-Fix this by automatically determining a suitable SRCREV_FORMAT from the
-SRC_URI if none is set explicitly. This code does not run for multiple
-git sources, because bitbake's fetcher enforces setting SRCREV_FORMAT
-when multiple version-controlled sources are used.
+On Fri, Aug 19, 2016 at 05:58:01PM -0400, Kyle Russell wrote:
+> rhino's do_compile task passes
+> ${STAGING_DATADIR_NATIVE}/classpath/glibj.zip to javac.  This glibj.zip
+> archive comes from the classpath-native package.
+> 
+> Signed-off-by: Kyle Russell <bkylerussell@gmail.com>
+> ---
+>  recipes-core/rhino/rhino_1.7r4.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/recipes-core/rhino/rhino_1.7r4.bb b/recipes-core/rhino/rhino_1.7r4.bb
+> index 7898d23..30d5a62 100644
+> --- a/recipes-core/rhino/rhino_1.7r4.bb
+> +++ b/recipes-core/rhino/rhino_1.7r4.bb
+> @@ -2,6 +2,8 @@ DESCRIPTION = "Lexical analyzer generator for Java"
+>  LICENSE = "MPL-2.0"
+>  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=8e2372bdbf22c99279ae4599a13cc458"
+>  
+> +DEPENDS_class-native += "classpath-native"
+> +
+>  BBCLASSEXTEND = "native"
+>  
+>  inherit java-library
 
-Signed-off-by: Clemens Lang <clemens.lang@bmw-carit.de>
----
- meta-oe/classes/gitpkgv.bbclass | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+Pushed to master-next. Thanks.
 
-diff --git a/meta-oe/classes/gitpkgv.bbclass b/meta-oe/classes/gitpkgv.bbclass
-index 4866fac..8cd4bfd 100644
---- a/meta-oe/classes/gitpkgv.bbclass
-+++ b/meta-oe/classes/gitpkgv.bbclass
-@@ -61,7 +61,14 @@ def get_git_pkgv(d, use_tags):
-     #
-     format = d.getVar('SRCREV_FORMAT', True)
-     if not format:
--        format = 'default'
-+        names = []
-+        for url in ud.values():
-+            if url.type == 'git' or url.type == 'gitsm':
-+                names.extend(url.revisions.keys())
-+        if len(names) > 0:
-+            format = '_'.join(names)
-+        else:
-+            format = 'default'
- 
-     found = False
-     for url in ud.values():
--- 
-2.9.3
-
+Best Regards,
+Maxin
 
