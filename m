@@ -1,46 +1,45 @@
-Return-Path: <philip.balister@gmail.com>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 17BB76FFEF
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C39E6612D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2016 18:08:02 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id r128so1750681qkc.1
+	Wed, 24 Aug 2016 18:29:58 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id j37so892822qta.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2016 11:08:03 -0700 (PDT)
+	Wed, 24 Aug 2016 11:29:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=bbvCY9eNac1LDg4WAO9STdKYnOWx61G12iP2OdRPJNY=;
-	b=cgnMR4JtD5KIYw+sVCVWUTpSo/0it9yfbjfvJ12WXwZIz6OFe1ewCNa71oMkMiZJuf
-	XZGec0FQFrmo6+g6L1psHq/2N1Sc/0WTbZUm4yY5FuA0OyS6VqVDeZz2uB/0I/4MnX3p
-	TQIrVOWZzJKf6o6EXfMyHQFWT0sLDh3BF053SAYw4nOZvisrYJPKvAk9NpW6yYcTUF0y
-	i/NYBfULczP5N0/lNbDGqDYJqs+vsgyNriqbDORbmZmnNfLFD9Q00z4RA0FEJBJn5e7r
-	Q3cx987HECiivQ+3y5bVoyrgfcJV5TM+GezmMSbkU/UzY6QoyhFRzyz4fmkbh7M8NJlV
-	N+EA==
+	h=from:to:cc:subject:date:message-id;
+	bh=z2wb2VEW4NOaCMvYKqRKqWhva73KDFCwQaBp+aYAAQc=;
+	b=yJi5rXTiuqKThUsGqiwZnhSQ4CD1tR4nkgg74qYMGFZ59DRj8WWxpSz3F/vRXwSn6v
+	hp9652dbKt6eJtb3GUMfmGur/HbJEvir53C/NtzsRsPsWuqbmrU/zwqMz3XBk3ghZghM
+	Fi86Spr6qBKslFI5pycVcCLGbDphrkCMmV2RPKdSAGyYOln8+nN1z5jgwXUbRs0c/89U
+	TLyBlJMxlQELZL2CFI3C9jyiS6nS4yR1MmjrGdVkp8fPKdxbK+F8eZosHq/YSab7cfSn
+	zdDgBPahQPs/paHaKqtz+MqryxdJBRA4tNGXpWH0Rq1P2k0lxKaSRUZm6y7QNTwHwzxY
+	+Ipw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=bbvCY9eNac1LDg4WAO9STdKYnOWx61G12iP2OdRPJNY=;
-	b=G11rR+LTwSiLYDj6miKmfYZ91Kw7JWeC7iKr5L5BqHE3OOZneYF0dSc9mci8C0k7RL
-	FH99jnuY/GBDRpQbBITCdZdO4gNeONMVolmDkX7cQm9RlVqnTyGMIpxklc3Wd9g34b25
-	ZOyRL0hb3zNWRbysWXXJYLKD7AaoAFg/TLM05lZ6suPSMRxzqEZIZCkV2reDaJNBC2z3
-	BtMbcDAueVcdvDTnxEDD0zefGb6qZjm31d3idyo3L7YMIPLrPNTMp1KvTbJ47IP2oU99
-	wXslKruuevzBk6+wNzhsmFHy11Z5LHud+Pc86Hb6XxPIAxIp1GLXqIa0nl4C1PbAZvlj
-	1lDw==
-X-Gm-Message-State: AE9vXwMYxLunKijgJEAnmjm9z6Kgg1n7MmcXhxA3ApIuOCtRERu5273xn7htwJovPxnjbQ==
-X-Received: by 10.55.96.7 with SMTP id u7mr5265009qkb.143.1472062083469;
-	Wed, 24 Aug 2016 11:08:03 -0700 (PDT)
-Received: from thuvia.localdomain (pool-71-171-12-218.nwrknj.east.verizon.net.
-	[71.171.12.218])
-	by smtp.gmail.com with ESMTPSA id y4sm5282645qtb.33.2016.08.24.11.08.01
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 24 Aug 2016 11:08:02 -0700 (PDT)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=z2wb2VEW4NOaCMvYKqRKqWhva73KDFCwQaBp+aYAAQc=;
+	b=czfe6co6rhiWskL3w9dtcDTXzPQhQPUKkjwD7123EhbjkGr//OgQnpA1JVFPHtcn9a
+	VcXjdCQWCwH7xokiNL/xFngxf/flRI3aVNvZ8na/dZ6jBo+R+R+nE2lP059H8Oyp2XcF
+	G7goalltSf9ajf1HRpyT/mTyOKtWbwPU0QIV5JRmHxs/hYZlyEGL8/Fvh+Z5QMHYeUOC
+	HbDOYk7t78AdTPIgoDU4YCFafFEGGE4l4K24HdwarQOx/40pUE2A+L2/BBnrz9X5fXxg
+	NaujJ/Li2mjhDvjr4EdiNv4ELYgmrSEtBnZ9wOfxgkekGHql1FiKIPXVs78xl6ajJVTU
+	B0HA==
+X-Gm-Message-State: AE9vXwM1CI2sIy09geHz16ZmvZQ/wVantOcM3o8j9FV5O3kidfJHH4G56it445OjDNod4w==
+X-Received: by 10.200.54.28 with SMTP id m28mr5143442qtb.87.1472063399083;
+	Wed, 24 Aug 2016 11:29:59 -0700 (PDT)
+Received: from eos.sys.comcast.net (a-96-118-179-133.sys.comcast.net.
+	[96.118.179.133]) by smtp.gmail.com with ESMTPSA id
+	o65sm3240639qkc.48.2016.08.24.11.29.57
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 24 Aug 2016 11:29:57 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Aug 2016 14:07:55 -0400
-Message-Id: <1472062075-18352-1-git-send-email-philip@balister.org>
-X-Mailer: git-send-email 2.5.5
-Subject: [meta-oe][PATCH] qwt: Use ${libdir} to install libraries.
+Date: Wed, 24 Aug 2016 18:29:52 +0000
+Message-Id: <1472063392-11490-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] imagemagick: Upgrade 7.0.3 release to patch level 9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,28 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Aug 2016 18:08:05 -0000
+X-List-Received-Date: Wed, 24 Aug 2016 18:30:01 -0000
 
-This lets qwt build and package for systems that use lib64.
-
-Signed-off-by: Philip Balister <philip@balister.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-qt/qwt/qwt.inc | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-qt/qwt/qwt.inc b/meta-oe/recipes-qt/qwt/qwt.inc
-index d3c4ed1..e1b260c 100644
---- a/meta-oe/recipes-qt/qwt/qwt.inc
-+++ b/meta-oe/recipes-qt/qwt/qwt.inc
-@@ -16,6 +16,7 @@ do_configure_prepend() {
-     sed -i -e 's:qtAddLibrary(qwt:qtAddLibrary(qwt)${QT_LIBINFIX}:g' *.prf
-     sed -e 's/# QWT_CONFIG     += QwtExamples/QWT_CONFIG     += QwtExamples/g' -i qwtconfig.pri
-     sed -i -e 's:/usr/local/qwt-$$QWT_VERSION:${D}${prefix}:g' ${S}/*.pri
-+    sed -i -e 's:$${QWT_INSTALL_PREFIX}/lib:${D}${libdir}:g' ${S}/*.pri
- }
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
+index 472e42d..604a848 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
+@@ -8,11 +8,11 @@ DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freetype"
+ # Important note: tarballs for all patchsets within a version are deleted when
+ # a new pachset is created. To avoid multiple patches for each patchset, try to
+ # update to the last pachset of a version
+-PATCHSET = "7"
++PATCHSET = "9"
+ SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.xz \
+ "
+-SRC_URI[md5sum] = "bd66b19bd6fc3d320bd8d51869c874f9"
+-SRC_URI[sha256sum] = "1168f44cfcd1243acda6bb9663f5d9b3a4bca2acd372e979b97b58ecf5c713e2"
++SRC_URI[md5sum] = "2720ab8c480019f79e717b0237570311"
++SRC_URI[sha256sum] = "22df4f197985f36f77b7b0d44de92ff44415885045f0191b3319540bdc82ff53"
  
- do_install() {
+ S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
+ 
 -- 
-2.5.5
+1.9.1
 
 
