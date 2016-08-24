@@ -1,30 +1,24 @@
-Return-Path: <wangxin2015.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 163DC7318A
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id E11C56AC37
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2016 07:50:38 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="10229209"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 24 Aug 2016 15:50:37 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 442C9430CD06
+	Wed, 24 Aug 2016 09:22:21 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u7O9MLtP019195
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2016 15:50:35 +0800 (CST)
-Received: from ubuntu.g08.fujitsu.local (10.167.226.120) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.279.2; Wed, 24 Aug 2016 15:50:34 +0800
-From: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+	Wed, 24 Aug 2016 02:22:21 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 24 Aug 2016 02:22:21 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 24 Aug 2016 03:50:30 -0400
-Message-ID: <1472025030-1519-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+Date: Wed, 24 Aug 2016 17:06:48 +0800
+Message-ID: <cover.1472027350.git.jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.8.3
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.120]
-X-yoursite-MailScanner-ID: 442C9430CD06.A46BC
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangxin2015.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] lua: 5.3.2 -> 5.3.3
+Subject: [PATCH 00/16] control ipv6 support based on DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,52 +31,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Aug 2016 07:50:40 -0000
+X-List-Received-Date: Wed, 24 Aug 2016 09:22:24 -0000
 Content-Type: text/plain
 
-1) Upgrade lua from 5.3.2 to 5.3.3.
-2) Modify LIC_FILES_CHKSUM, since the date in it has been changed, But the LICENSE has not been changed.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+There is ipv6 configure option for these packages, and we need them
+to be controled by DISTRO_FEATURES.
+
+Tested with and without ipv6 in DISTRO_FEATURES on qemux86-64 and qemuarm.
+
 ---
- meta-oe/recipes-devtools/lua/{lua_5.3.2.bb => lua_5.3.3.bb} | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-devtools/lua/{lua_5.3.2.bb => lua_5.3.3.bb} (82%)
+The following changes since commit dc48e768f527cbed0cc3899f6a2ebb396cd9ada8:
 
-diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.2.bb b/meta-oe/recipes-devtools/lua/lua_5.3.3.bb
-similarity index 82%
-rename from meta-oe/recipes-devtools/lua/lua_5.3.2.bb
-rename to meta-oe/recipes-devtools/lua/lua_5.3.3.bb
-index 07a1a43..a57f7e9 100644
---- a/meta-oe/recipes-devtools/lua/lua_5.3.2.bb
-+++ b/meta-oe/recipes-devtools/lua/lua_5.3.3.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Lua is a powerful light-weight programming language designed \
- for extending applications."
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=68fc2aa2b751a37ff265524ddf026d7f"
-+LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=10ffd57d574c60d5b4d6189544e205a9"
- HOMEPAGE = "http://www.lua.org/"
- 
- PR = "r0"
-@@ -15,10 +15,10 @@ SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
-             file://run-ptest \
-            ', '', d)}"
- 
--SRC_URI[tarballsrc.md5sum] = "33278c2ab5ee3c1a875be8d55c1ca2a1"
--SRC_URI[tarballsrc.sha256sum] = "c740c7bb23a936944e1cc63b7c3c5351a8976d7867c5252c8854f7b2af9da68f"
--SRC_URI[tarballtest.md5sum] = "a2b7ab1b8ff82a0145376e233ef30a4a"
--SRC_URI[tarballtest.sha256sum] = "56909863a3713dee3709b3dbd0c868237e4f5c9ea1744f5bf0ba8bafa6c4ed32"
-+SRC_URI[tarballsrc.md5sum] = "703f75caa4fdf4a911c1a72e67a27498"
-+SRC_URI[tarballsrc.sha256sum] = "5113c06884f7de453ce57702abaac1d618307f33f6789fa870e87a59d772aca2"
-+SRC_URI[tarballtest.md5sum] = "76f4fb07f2a4970d554645ac26df86df"
-+SRC_URI[tarballtest.sha256sum] = "13154abc20976196119db531b4169ce1ce511755879d40b4192e4173291287e5"
- 
- inherit pkgconfig binconfig ptest
- 
+  meta-oe: remove trailing spaces (2016-08-22 15:56:29 +0200)
+
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib.git jhuang0/r_ipv6_160824-0
+  http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/r_ipv6_160824-0
+
+Jackie Huang (16):
+  chrony: control ipv6 support based on DISTRO_FEATURES
+  cyrus-sasl: control ipv6 support based on DISTRO_FEATURES
+  daq: control ipv6 support based on DISTRO_FEATURES
+  mtr: control ipv6 support based on DISTRO_FEATURES
+  ntp: control ipv6 support based on DISTRO_FEATURES
+  squid: control ipv6 support based on DISTRO_FEATURES
+  stunnel: control ipv6 support based on DISTRO_FEATURES
+  tftp-hpa: control ipv6 support based on DISTRO_FEATURES
+  tnftp: control ipv6 support based on DISTRO_FEATURES
+  wolfssl: control ipv6 support based on DISTRO_FEATURES
+  znc: control ipv6 support based on DISTRO_FEATURES
+  iperf: control ipv6 support based on DISTRO_FEATURES
+  php: control ipv6 support based on DISTRO_FEATURES
+  cherokee: control ipv6 support based on DISTRO_FEATURES
+  xfce4-mailwatch-plugin: control ipv6 support based on DISTRO_FEATURES
+  inetutils: fixes for ipv6 feature
+
+ .../recipes-connectivity/daq/daq_2.0.6.bb          |  3 ++
+ .../inetutils/inetutils/fix-disable-ipv6.patch     | 43 +++++++++++++++++-----
+ .../inetutils/inetutils_1.9.4.bb                   | 10 ++---
+ .../recipes-connectivity/wolfssl/wolfssl_3.9.0.bb  |  2 +
+ .../cyrus-sasl/cyrus-sasl_2.1.26.bb                |  2 +
+ .../recipes-daemons/squid/squid_3.5.20.bb          |  2 +
+ .../recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb       |  3 ++
+ meta-networking/recipes-irc/znc/znc_git.bb         |  3 ++
+ .../recipes-support/chrony/chrony_2.4.bb           |  5 ++-
+ meta-networking/recipes-support/mtr/mtr_0.86.bb    |  2 +
+ meta-networking/recipes-support/ntp/ntp_4.2.8p8.bb |  5 ++-
+ .../recipes-support/stunnel/stunnel_5.28.bb        |  5 ++-
+ .../recipes-support/tnftp/tnftp_20151004.bb        |  5 ++-
+ meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb     |  3 ++
+ meta-oe/recipes-devtools/php/php.inc               |  5 ++-
+ .../recipes-httpd/cherokee/cherokee_1.2.98.bb      |  3 +-
+ .../mailwatch/xfce4-mailwatch-plugin_1.2.0.bb      |  3 ++
+ 17 files changed, 83 insertions(+), 21 deletions(-)
+
 -- 
-2.7.4
-
-
+2.8.3
 
 
