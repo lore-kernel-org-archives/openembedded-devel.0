@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 20265731D1
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C61F0731C6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2016 09:22:30 +0000 (UTC)
+	Wed, 24 Aug 2016 09:22:31 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u7O9MVmV019203
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u7O9MWv0023863
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Aug 2016 02:22:31 -0700 (PDT)
+	Wed, 24 Aug 2016 02:22:32 -0700
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 24 Aug 2016 02:22:30 -0700
+	14.3.248.2; Wed, 24 Aug 2016 02:22:31 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 24 Aug 2016 17:06:54 +0800
-Message-ID: <f759a070389bd0ba265ee8554e1bc33cb7be1218.1472027350.git.jackie.huang@windriver.com>
+Date: Wed, 24 Aug 2016 17:06:55 +0800
+Message-ID: <811471a1a6969bc08d476f5ac2503bc6ecf898a7.1472027350.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.8.3
 In-Reply-To: <cover.1472027350.git.jackie.huang@windriver.com>
 References: <cover.1472027350.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 06/16] squid: control ipv6 support based on DISTRO_FEATURES
+Subject: [meta-networking][PATCH 07/16] stunnel: control ipv6 support based on DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Aug 2016 09:22:30 -0000
+X-List-Received-Date: Wed, 24 Aug 2016 09:22:31 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
@@ -43,25 +43,23 @@ on DISTRO_FEATURES.
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-networking/recipes-daemons/squid/squid_3.5.20.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-networking/recipes-support/stunnel/stunnel_5.28.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-daemons/squid/squid_3.5.20.bb b/meta-networking/recipes-daemons/squid/squid_3.5.20.bb
-index 5595bdf..760eca8 100644
---- a/meta-networking/recipes-daemons/squid/squid_3.5.20.bb
-+++ b/meta-networking/recipes-daemons/squid/squid_3.5.20.bb
-@@ -37,9 +37,11 @@ USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --she
+diff --git a/meta-networking/recipes-support/stunnel/stunnel_5.28.bb b/meta-networking/recipes-support/stunnel/stunnel_5.28.bb
+index 61be932..9891305 100644
+--- a/meta-networking/recipes-support/stunnel/stunnel_5.28.bb
++++ b/meta-networking/recipes-support/stunnel/stunnel_5.28.bb
+@@ -16,5 +16,8 @@ inherit autotools
  
- PACKAGECONFIG ??= "${@bb.utils.contains('TARGET_ARCH', 'powerpc', 'noatomics', '', d)} \
-                    ${@bb.utils.contains('TARGET_ARCH', 'mips', 'noatomics', '', d)} \
+ EXTRA_OECONF += "--with-ssl='${STAGING_EXECPREFIXDIR}' --disable-fips"
+ 
+-PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)}"
++PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES','systemd','systemd','',d)} \
 +                   ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
-                   "
- PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
- PACKAGECONFIG[noatomics] = "squid_cv_gnu_atomics=no,squid_cv_gnu_atomics=yes,,"
++"
+ PACKAGECONFIG[systemd] = "--enable-systemd,--disable-systemd,systemd"
 +PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
- 
- BASIC_AUTH = "DB SASL LDAP NIS"
- DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 -- 
 2.8.3
 
