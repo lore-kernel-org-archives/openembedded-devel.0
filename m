@@ -1,30 +1,22 @@
-Return-Path: <wangxin2015.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 418E265CBF
+Return-Path: <ml@embed.me.uk>
+Received: from bmx2.eumx.net (bmx2.eumx.net [37.48.73.248])
+	by mail.openembedded.org (Postfix) with ESMTP id 80C767017B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Aug 2016 02:15:28 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="10256946"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 25 Aug 2016 10:15:23 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id F2B3F42EB206
+	Thu, 25 Aug 2016 09:04:04 +0000 (UTC)
+Received: from owm.eumx.net (unknown [10.1.1.70])
+	by bmx2.eumx.net (Postfix) with ESMTPS id C7289DC8F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Aug 2016 10:15:20 +0800 (CST)
-Received: from ubuntu.g08.fujitsu.local (10.167.226.120) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.279.2; Thu, 25 Aug 2016 10:15:20 +0800
-From: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 24 Aug 2016 22:15:16 -0400
-Message-ID: <1472091316-2026-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+	Thu, 25 Aug 2016 09:04:03 +0000 (UTC)
+To: openembedded-devel@lists.openembedded.org
+References: <1472063392-11490-1-git-send-email-raj.khem@gmail.com>
+From: Jack Mitchell <ml@embed.me.uk>
+Message-ID: <e6c87ae1-ca1d-895c-adb3-6c2b75abaaa9@embed.me.uk>
+Date: Thu, 25 Aug 2016 10:03:54 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.2.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.120]
-X-yoursite-MailScanner-ID: F2B3F42EB206.A6F61
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangxin2015.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] openldap: 2.4.43 -> 2.4.44
+In-Reply-To: <1472063392-11490-1-git-send-email-raj.khem@gmail.com>
+Subject: Re: [meta-oe][PATCH] imagemagick: Upgrade 7.0.3 release to patch level 9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,48 +29,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Aug 2016 02:15:29 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 25 Aug 2016 09:04:04 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-1)Upgrade openldap from 2.4.43 to 2.4.44.
-2)Modify LIC_FILES_CHKSUM, since the date in it has been changed, But the LICENSE has not been changed.
+On 24/08/16 19:29, Khem Raj wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>   meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
 
-Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
----
- .../openldap/{openldap_2.4.43.bb => openldap_2.4.44.bb}             | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/openldap/{openldap_2.4.43.bb => openldap_2.4.44.bb} (97%)
+7.0.3?
 
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.43.bb b/meta-oe/recipes-support/openldap/openldap_2.4.44.bb
-similarity index 97%
-rename from meta-oe/recipes-support/openldap/openldap_2.4.43.bb
-rename to meta-oe/recipes-support/openldap/openldap_2.4.44.bb
-index 8618365..d33b010 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.43.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.44.bb
-@@ -9,7 +9,7 @@ HOMEPAGE = "http://www.OpenLDAP.org/license.html"
- # basically BSD.  opensource.org does not record this license
- # at present (so it is apparently not OSI certified).
- LICENSE = "OpenLDAP"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=9d845a25aef97da753144f1dacbf680c \
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=c933fba6d89fda89f58df1e086e3f2e7 \
-                     file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972 \
- "
- SECTION = "libs"
-@@ -26,8 +26,8 @@ SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
-     file://thread_stub.patch \
- "
- 
--SRC_URI[md5sum] = "49ca65e27891fcf977d78c10f073c705"
--SRC_URI[sha256sum] = "34d78e5598a2b0360d26a9050fcdbbe198c65493b013bb607839d5598b6978c8"
-+SRC_URI[md5sum] = "693ac26de86231f8dcae2b4e9d768e51"
-+SRC_URI[sha256sum] = "d7de6bf3c67009c95525dde3a0212cc110d0a70b92af2af8e3ee800e81b88400"
- 
- DEPENDS = "util-linux groff-native"
- 
--- 
-2.7.4
-
-
+>
+> diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
+> index 472e42d..604a848 100644
+> --- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
+> +++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
+> @@ -8,11 +8,11 @@ DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freetype"
+>   # Important note: tarballs for all patchsets within a version are deleted when
+>   # a new pachset is created. To avoid multiple patches for each patchset, try to
+>   # update to the last pachset of a version
+> -PATCHSET = "7"
+> +PATCHSET = "9"
+>   SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.xz \
+>   "
+> -SRC_URI[md5sum] = "bd66b19bd6fc3d320bd8d51869c874f9"
+> -SRC_URI[sha256sum] = "1168f44cfcd1243acda6bb9663f5d9b3a4bca2acd372e979b97b58ecf5c713e2"
+> +SRC_URI[md5sum] = "2720ab8c480019f79e717b0237570311"
+> +SRC_URI[sha256sum] = "22df4f197985f36f77b7b0d44de92ff44415885045f0191b3319540bdc82ff53"
+>   
+>   S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
+>   
 
 
