@@ -1,24 +1,26 @@
 Return-Path: <Alexandru.Moise@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id AAAC773219
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id A965175E2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Aug 2016 09:23:02 +0000 (UTC)
+	Fri, 26 Aug 2016 09:23:05 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u7Q9N3cB008213
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u7Q9N5Oj015916
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Aug 2016 02:23:03 -0700 (PDT)
+	Fri, 26 Aug 2016 02:23:05 -0700 (PDT)
 Received: from obsrwr.corp.ad.wrs.com (128.224.19.94) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Fri, 26 Aug 2016 02:23:02 -0700
+	14.3.248.2; Fri, 26 Aug 2016 02:23:04 -0700
 From: Alexandru Moise <alexandru.moise@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 26 Aug 2016 12:22:56 +0300
-Message-ID: <1472203377-13111-1-git-send-email-alexandru.moise@windriver.com>
+Date: Fri, 26 Aug 2016 12:22:57 +0300
+Message-ID: <1472203377-13111-2-git-send-email-alexandru.moise@windriver.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1472203377-13111-1-git-send-email-alexandru.moise@windriver.com>
+References: <1472203377-13111-1-git-send-email-alexandru.moise@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/2] vim: split tools directory into vim-tools package
+Subject: [PATCH 2/2] krb5: Fix S4U2Self KDC crash when anon is restricted
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,50 +33,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Aug 2016 09:23:03 -0000
+X-List-Received-Date: Fri, 26 Aug 2016 09:23:05 -0000
 Content-Type: text/plain
 
-Normal install of vim packs with it also the /usr/share/vim/vim*/tools
-directory that consist of a bunch of scripts such as "vim132" that
-just starts up vim in 132 column mode for VT-100 terminals and
-lookalikes.
+This is CVE-2016-3120
 
-Created the vim-tools separate package for the tools directory. If
-anyone needs these scripts they can be added to the fs image together
-with their dependencies.
+The validate_as_request function in kdc_util.c in the Key Distribution
+Center (KDC) in MIT Kerberos 5 (aka krb5) before 1.13.6 and 1.4.x before
+1.14.3, when restrict_anonymous_to_tgt is enabled, uses an incorrect
+client data structure, which allows remote authenticated users to cause
+a denial of service (NULL pointer dereference and daemon crash) via an
+S4U2Self request.
 
 Signed-off-by: Alexandru Moise <alexandru.moise@windriver.com>
 ---
- meta-oe/recipes-support/vim/vim_7.4.1689.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../krb5/krb5/krb5-CVE-2016-3120.patch             | 63 ++++++++++++++++++++++
+ meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb   |  1 +
+ 2 files changed, 64 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/krb5-CVE-2016-3120.patch
 
-diff --git a/meta-oe/recipes-support/vim/vim_7.4.1689.bb b/meta-oe/recipes-support/vim/vim_7.4.1689.bb
-index 5e6282b..f94a497 100644
---- a/meta-oe/recipes-support/vim/vim_7.4.1689.bb
-+++ b/meta-oe/recipes-support/vim/vim_7.4.1689.bb
-@@ -78,12 +78,13 @@ do_install() {
- 
- PARALLEL_MAKEINST = ""
- 
--PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc"
-+PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-tools"
- FILES_${PN}-syntax = "${datadir}/${BPN}/${VIMDIR}/syntax"
- FILES_${PN}-help = "${datadir}/${BPN}/${VIMDIR}/doc"
- FILES_${PN}-tutor = "${datadir}/${BPN}/${VIMDIR}/tutor ${bindir}/${BPN}tutor"
- FILES_${PN}-vimrc = "${datadir}/${BPN}/vimrc"
- FILES_${PN}-data = "${datadir}/${BPN}"
-+FILES_${PN}-tools = "${datadir}/${BPN}/${VIMDIR}/tools"
- FILES_${PN}-common = " \
-     ${datadir}/${BPN}/${VIMDIR}/*.vim \
-     ${datadir}/${BPN}/${VIMDIR}/autoload \
-@@ -97,7 +98,6 @@ FILES_${PN}-common = " \
-     ${datadir}/${BPN}/${VIMDIR}/plugin \
-     ${datadir}/${BPN}/${VIMDIR}/print \
-     ${datadir}/${BPN}/${VIMDIR}/spell \
--    ${datadir}/${BPN}/${VIMDIR}/tools \
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5/krb5-CVE-2016-3120.patch b/meta-oe/recipes-connectivity/krb5/krb5/krb5-CVE-2016-3120.patch
+new file mode 100644
+index 0000000..dbc46bb
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/krb5/krb5/krb5-CVE-2016-3120.patch
+@@ -0,0 +1,63 @@
++From 5b9b82d0696f1ffd4e693c1f8eafc0915b15e85b Mon Sep 17 00:00:00 2001
++From: Greg Hudson <ghudson@mit.edu>
++Date: Tue, 19 Jul 2016 11:00:28 -0400
++Subject: [PATCH] Fix S4U2Self KDC crash when anon is restricted
++
++cherry-picked from 93b4a6306a0026cf1cc31ac4bd8a49ba5d034ba7 upstream
++
++In validate_as_request(), when enforcing restrict_anonymous_to_tgt,
++use client.princ instead of request->client; the latter is NULL when
++validating S4U2Self requests.
++
++CVE-2016-3120:
++
++In MIT krb5 1.9 and later, an authenticated attacker can cause krb5kdc
++to dereference a null pointer if the restrict_anonymous_to_tgt option
++is set to true, by making an S4U2Self request.
++
++  CVSSv2 Vector: AV:N/AC:H/Au:S/C:N/I:N/A:C/E:H/RL:OF/RC:C
++
++ticket: 8458 (new)
++target_version: 1.14-next
++target_version: 1.13-next
++
++Upstream-Status: Backport
++
++Signed-off-by: Alexandru Moise <alexandru.moise@windriver.com>
++---
++ src/kdc/kdc_util.c    | 2 +-
++ src/tests/t_pkinit.py | 5 +++++
++ 2 files changed, 6 insertions(+), 1 deletion(-)
++
++diff --git a/src/kdc/kdc_util.c b/src/kdc/kdc_util.c
++index 48be1ae..10daec4 100644
++--- a/src/kdc/kdc_util.c
+++++ b/src/kdc/kdc_util.c
++@@ -700,7 +700,7 @@ validate_as_request(kdc_realm_t *kdc_active_realm,
++         return(KDC_ERR_MUST_USE_USER2USER);
++     }
++ 
++-    if (check_anon(kdc_active_realm, request->client, request->server) != 0) {
+++    if (check_anon(kdc_active_realm, client.princ, request->server) != 0) {
++         *status = "ANONYMOUS NOT ALLOWED";
++         return(KDC_ERR_POLICY);
++     }
++diff --git a/src/tests/t_pkinit.py b/src/tests/t_pkinit.py
++index 762e322..d27d05b 100644
++--- a/src/tests/t_pkinit.py
+++++ b/src/tests/t_pkinit.py
++@@ -94,6 +94,11 @@ out = realm.run([kvno, realm.host_princ], expected_code=1)
++ if 'KDC policy rejects request' not in out:
++     fail('Wrong error for restricted anonymous PKINIT')
++ 
+++# Regression test for #8458: S4U2Self requests crash the KDC if
+++# anonymous is restricted.
+++realm.kinit(realm.host_princ, flags=['-k'])
+++realm.run([kvno, '-U', 'user', realm.host_princ])
+++
++ # Go back to a normal KDC and disable anonymous PKINIT.
++ realm.stop_kdc()
++ realm.start_kdc()
++-- 
++2.5.0
++
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
+index 3a3886b..12d3531 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
+@@ -36,6 +36,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}-signed.tar
+            file://krb5-admin-server.service \
+            file://krb5-CVE-2016-3119.patch;striplevel=2 \
+            file://0001-Work-around-uninitialized-warning-in-cc_kcm.c.patch;striplevel=2 \
++	   file://krb5-CVE-2016-3120.patch;striplevel=2 \
  "
- 
- RDEPENDS_${PN} = "ncurses-terminfo-base"
+ SRC_URI[md5sum] = "f7ebfa6c99c10b16979ebf9a98343189"
+ SRC_URI[sha256sum] = "e528c30b0209c741f6f320cb83122ded92f291802b6a1a1dc1a01dcdb3ff6de1"
 -- 
 1.9.1
 
