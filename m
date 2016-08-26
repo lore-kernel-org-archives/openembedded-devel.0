@@ -1,52 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f43.google.com (mail-pa0-f43.google.com
-	[209.85.220.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F27C60119
+Return-Path: <wangxin2015.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 0625B60797
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Aug 2016 17:00:03 +0000 (UTC)
-Received: by mail-pa0-f43.google.com with SMTP id hb8so18539614pac.2
+	Fri, 26 Aug 2016 03:13:27 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="10308410"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 26 Aug 2016 11:13:28 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 38FFD4334C80
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Aug 2016 10:00:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:subject:from:in-reply-to:date:message-id:references:to; 
-	bh=E0blKEu9VuMr2FSw/S9OlzP56Q74CsRs1aoTr46poWI=;
-	b=gTg0IJLJPa4BjM/K/nhSzLqL9r6aq3cxyj3Pl3yHmJwVoGal0/cezc6exhk2iZlfcC
-	0MdVqWkM+lL+OZa+jd6G0rACMvc3N5KBqgtEsDXQd7YIP2+S9vLq2c+KSMmK7WiLHiRj
-	3pt6LP49dIlSfPrG0zyzYncekIrKyeCn3V8MhTHvxVWRup61oxJWjRdDW43XefMA3yBz
-	qhjgG4EH+SxcjbzwCzpuX68GqJajLusMxyewDV7Izt0jlx71gzhMsDtlvK+HIyPFxfJM
-	KbYEPkeT9iveAPLQ0oLaLE5kwenMJsv7uSDAPbjcFbB+omPgKIign7plnt/DJbvEHC/d
-	+cxQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date
-	:message-id:references:to;
-	bh=E0blKEu9VuMr2FSw/S9OlzP56Q74CsRs1aoTr46poWI=;
-	b=O5X+QsY4Xz8/7qYURjfHIyodRbe/d9xqvhyJCm/01FFuYDqFcoHbgRaAppXLuEmJIl
-	CwzF7wkXipKQ6s/asrgVdm/xUxn+SICgl9aXDuPHzzVUXeTPPfuOjX2KS7bhVncDXsrM
-	X/F13cjaB/6Hbfn6SDDCjmcwL20KNS0Bzda25SoSTZ2l7Ms/r2mBT3p4t+za2fc7s8wA
-	ZASv2RZZgDgSjTLXFYRHy+MaBzw7CLfzP4RjOssdB9u8G7egbC2PEPL7+EfbpO+upTnI
-	XKFHS4iLHbFPqba5VD+40vNQ9q7ZHPeSSmI8MVQnGEFgtbfoiwrcUalRSpMIeq8ivIXb
-	+HUQ==
-X-Gm-Message-State: AE9vXwPG5jOVXzUW4AZkLoewUdT/Hukle33j4KsgHWy4E50j118sPQ+FRzUokCx2l4hXsg==
-X-Received: by 10.66.193.7 with SMTP id hk7mr18129549pac.78.1472144404793;
-	Thu, 25 Aug 2016 10:00:04 -0700 (PDT)
-Received: from ?IPv6:2601:647:4c00:3edf:157a:f659:3403:a165?
-	([2601:647:4c00:3edf:157a:f659:3403:a165])
-	by smtp.gmail.com with ESMTPSA id
-	uz4sm22229895pac.13.2016.08.25.10.00.03
-	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 25 Aug 2016 10:00:04 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
-X-Pgp-Agent: GPGMail
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <CADwFkYehX7aM8Oqiu+jv85iOe54J6wUFbKUs7OdENoUsF_rUfA@mail.gmail.com>
-Date: Thu, 25 Aug 2016 10:00:34 -0700
-Message-Id: <6715E3FE-34D2-4C89-B54E-76B481EAAF06@gmail.com>
-References: <CADwFkYehX7aM8Oqiu+jv85iOe54J6wUFbKUs7OdENoUsF_rUfA@mail.gmail.com>
-To: Yi Qingliang <niqingliang2003@gmail.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.3124)
-Subject: Re: [meta-qt5] the QV4 engine will crash result in SIGSEGV
+	Fri, 26 Aug 2016 11:13:26 +0800 (CST)
+Received: from ubuntu.g08.fujitsu.local (10.167.226.120) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.279.2; Fri, 26 Aug 2016 11:13:26 +0800
+From: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 25 Aug 2016 23:13:21 -0400
+Message-ID: <1472181201-1921-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.120]
+X-yoursite-MailScanner-ID: 38FFD4334C80.A4469
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangxin2015.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-networking][PATCH] openvpn: 2.3.8 -> 2.3.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,55 +37,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Aug 2016 17:00:04 -0000
-X-Groupsio-MsgNum: 62840
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_16A2F46A-4BAA-443F-A747-48D3C582D2A2";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Fri, 26 Aug 2016 03:13:29 -0000
+Content-Type: text/plain
 
---Apple-Mail=_16A2F46A-4BAA-443F-A747-48D3C582D2A2
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+1) Upgrade openvpn from 2.3.8 to 2.3.9.
+2) Modify EXTRA_OECONF, Since the Changelog in the new version shows: 
+    Remove --enable-password-save option
+    Reflect enable-password-save change in documentation
+    Also remove second instance of enable-password-save in the man page
+3) Fix the Warning:
+    WARNING: openvpn-2.3.9-r0 do_configure: QA Issue: openvpn: configure was passed unrecognised options: --enable-password-save [unknown-configure-option]
+
+Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+---
+ .../recipes-support/openvpn/{openvpn_2.3.8.bb => openvpn_2.3.9.bb}  | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-support/openvpn/{openvpn_2.3.8.bb => openvpn_2.3.9.bb} (93%)
+
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.3.8.bb b/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb
+similarity index 93%
+rename from meta-networking/recipes-support/openvpn/openvpn_2.3.8.bb
+rename to meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb
+index de2348e..a3ef765 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.3.8.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb
+@@ -12,8 +12,8 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/openvpn-${PV}.tar.gz \
+            file://openvpn@.service \
+            file://openvpn-volatile.conf"
+ 
+-SRC_URI[md5sum] = "51d996f1f1fc30f501ae251a254effeb"
+-SRC_URI[sha256sum] = "532435eff61c14b44a583f27b72f93e7864e96c95fe51134ec0ad4b1b1107c51"
++SRC_URI[md5sum] = "265755044ae88f9249d509f6d061f7e5"
++SRC_URI[sha256sum] = "2c12fe9ea641ac1291e70322cc500641c84e5903dd4f40bf2eda7e9f209b2f9c"
+ 
+ SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
+@@ -21,7 +21,7 @@ SYSTEMD_AUTO_ENABLE = "disable"
+ CFLAGS += "-fno-inline"
+ 
+ # I want openvpn to be able to read password from file (hrw)
+-EXTRA_OECONF += "--enable-password-save --enable-iproute2"
++EXTRA_OECONF += "--enable-iproute2"
+ EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', '', '--disable-plugin-auth-pam', d)}"
+ 
+ # Explicitly specify IPROUTE to bypass the configure-time check for /sbin/ip on the host.
+-- 
+2.7.4
 
 
-> On Aug 25, 2016, at 12:45 AM, Yi Qingliang <niqingliang2003@gmail.com> =
-wrote:
->=20
-> bug detail:
-> https://bugs.archlinux.org/task/49723
->=20
-> patch:
-> =
-https://git.archlinux.org/svntogit/packages.git/tree/trunk/qt5-declarative=
--gcc6.patch?h=3Dpackages/qt5-declarative
->=20
-
-Thanks for report. Would it be possible for you to cook up a patch for =
-meta-qt5 layer for this ?
-
-> Yi Qingliang
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
 
---Apple-Mail=_16A2F46A-4BAA-443F-A747-48D3C582D2A2
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAle/JDIACgkQuwUzVZGdMxRM7wCdGNpSuhrjoSWO7R4pcw6xKGiM
-Rr0An3PBfRG9r9Jb5GnJQZNXaraecXKu
-=9BtP
------END PGP SIGNATURE-----
-
---Apple-Mail=_16A2F46A-4BAA-443F-A747-48D3C582D2A2--
