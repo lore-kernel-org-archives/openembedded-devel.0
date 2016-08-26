@@ -1,29 +1,24 @@
-Return-Path: <daicy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D57870030
+Return-Path: <Alexandru.Moise@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id AAAC773219
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Aug 2016 08:02:53 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="10320380"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 26 Aug 2016 16:02:49 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id C7E1F42EB260
+	Fri, 26 Aug 2016 09:23:02 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u7Q9N3cB008213
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Aug 2016 16:02:46 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.90) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.279.2; Fri, 26 Aug 2016 16:02:46 +0800
-From: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
+	Fri, 26 Aug 2016 02:23:03 -0700 (PDT)
+Received: from obsrwr.corp.ad.wrs.com (128.224.19.94) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Fri, 26 Aug 2016 02:23:02 -0700
+From: Alexandru Moise <alexandru.moise@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <1465103229-8927-1-git-send-email-daicy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.7.9.5
+Date: Fri, 26 Aug 2016 12:22:56 +0300
+Message-ID: <1472203377-13111-1-git-send-email-alexandru.moise@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.90]
-X-yoursite-MailScanner-ID: C7E1F42EB260.AFBCF
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: daicy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-networking][PATCH] postfix: 3.0.3 -> 3.0.5
+Subject: [PATCH 1/2] vim: split tools directory into vim-tools package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,45 +31,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-Date: Fri, 26 Aug 2016 08:02:55 -0000
-X-Original-Date: Sun, 5 Jun 2016 13:07:09 +0800
-X-List-Received-Date: Fri, 26 Aug 2016 08:02:55 -0000
+X-List-Received-Date: Fri, 26 Aug 2016 09:23:03 -0000
 Content-Type: text/plain
 
-Upgrade postfix from 3.0.3 to 3.0.5.
+Normal install of vim packs with it also the /usr/share/vim/vim*/tools
+directory that consist of a bunch of scripts such as "vim132" that
+just starts up vim in 132 column mode for VT-100 terminals and
+lookalikes.
 
-Signed-off-by: Dai Caiyun <daicy.fnst@cn.fujitsu.com>
+Created the vim-tools separate package for the tools directory. If
+anyone needs these scripts they can be added to the fs image together
+with their dependencies.
+
+Signed-off-by: Alexandru Moise <alexandru.moise@windriver.com>
 ---
- meta-networking/recipes-daemons/postfix/postfix_3.0.3.bb | 4 ----
- meta-networking/recipes-daemons/postfix/postfix_3.0.5.bb | 5 +++++
- 2 files changed, 5 insertions(+), 4 deletions(-)
- delete mode 100644 meta-networking/recipes-daemons/postfix/postfix_3.0.3.bb
- create mode 100644 meta-networking/recipes-daemons/postfix/postfix_3.0.5.bb
+ meta-oe/recipes-support/vim/vim_7.4.1689.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.0.3.bb b/meta-networking/recipes-daemons/postfix/postfix_3.0.3.bb
-deleted file mode 100644
-index 7104a9d..0000000
---- a/meta-networking/recipes-daemons/postfix/postfix_3.0.3.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--require postfix.inc
--
--SRC_URI[md5sum] = "61caffae689c11d09b4c972a394ae3b1"
--SRC_URI[sha256sum] = "401e46ec3450569dcce60d1d8ca22a19ab1f7f817b0cc730cdf4875ba608ac02"
-diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.0.5.bb b/meta-networking/recipes-daemons/postfix/postfix_3.0.5.bb
-new file mode 100644
-index 0000000..5bb6b21
---- /dev/null
-+++ b/meta-networking/recipes-daemons/postfix/postfix_3.0.5.bb
-@@ -0,0 +1,5 @@
-+require postfix.inc
-+
-+SRC_URI[md5sum] = "28a5c7a10d3238dded23c880d1f22871"
-+SRC_URI[sha256sum] = "dbe20d011a6fe79d28b5f7e6e86681dafd30f7ed8ad663bec244fc4694c87d1c"
-+
+diff --git a/meta-oe/recipes-support/vim/vim_7.4.1689.bb b/meta-oe/recipes-support/vim/vim_7.4.1689.bb
+index 5e6282b..f94a497 100644
+--- a/meta-oe/recipes-support/vim/vim_7.4.1689.bb
++++ b/meta-oe/recipes-support/vim/vim_7.4.1689.bb
+@@ -78,12 +78,13 @@ do_install() {
+ 
+ PARALLEL_MAKEINST = ""
+ 
+-PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc"
++PACKAGES =+ "${PN}-common ${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-tools"
+ FILES_${PN}-syntax = "${datadir}/${BPN}/${VIMDIR}/syntax"
+ FILES_${PN}-help = "${datadir}/${BPN}/${VIMDIR}/doc"
+ FILES_${PN}-tutor = "${datadir}/${BPN}/${VIMDIR}/tutor ${bindir}/${BPN}tutor"
+ FILES_${PN}-vimrc = "${datadir}/${BPN}/vimrc"
+ FILES_${PN}-data = "${datadir}/${BPN}"
++FILES_${PN}-tools = "${datadir}/${BPN}/${VIMDIR}/tools"
+ FILES_${PN}-common = " \
+     ${datadir}/${BPN}/${VIMDIR}/*.vim \
+     ${datadir}/${BPN}/${VIMDIR}/autoload \
+@@ -97,7 +98,6 @@ FILES_${PN}-common = " \
+     ${datadir}/${BPN}/${VIMDIR}/plugin \
+     ${datadir}/${BPN}/${VIMDIR}/print \
+     ${datadir}/${BPN}/${VIMDIR}/spell \
+-    ${datadir}/${BPN}/${VIMDIR}/tools \
+ "
+ 
+ RDEPENDS_${PN} = "ncurses-terminfo-base"
 -- 
-2.7.4
-
-
+1.9.1
 
 
