@@ -1,21 +1,23 @@
 Return-Path: <alexander.kanavin@linux.intel.com>
 Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id C953E6FF56
+	by mail.openembedded.org (Postfix) with ESMTP id D8ACA7705D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Aug 2016 15:39:30 +0000 (UTC)
+	Fri, 26 Aug 2016 15:39:31 +0000 (UTC)
 Received: from orsmga005.jf.intel.com ([10.7.209.41])
-	by orsmga103.jf.intel.com with ESMTP; 26 Aug 2016 08:39:29 -0700
+	by orsmga103.jf.intel.com with ESMTP; 26 Aug 2016 08:39:32 -0700
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="5.28,581,1464678000"; 
-   d="scan'208";a="1540575"
+   d="scan'208";a="1540599"
 Received: from kanavin-desktop.fi.intel.com ([10.237.68.49])
-	by orsmga005.jf.intel.com with ESMTP; 26 Aug 2016 08:39:27 -0700
+	by orsmga005.jf.intel.com with ESMTP; 26 Aug 2016 08:39:30 -0700
 From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Aug 2016 18:37:51 +0300
-Message-Id: <20160826153753.11755-1-alexander.kanavin@linux.intel.com>
+Date: Fri, 26 Aug 2016 18:37:53 +0300
+Message-Id: <20160826153753.11755-3-alexander.kanavin@linux.intel.com>
 X-Mailer: git-send-email 2.9.3
-Subject: [PATCH 1/3] libglade: add a recipe from oe-core
+In-Reply-To: <20160826153753.11755-1-alexander.kanavin@linux.intel.com>
+References: <20160826153753.11755-1-alexander.kanavin@linux.intel.com>
+Subject: [PATCH 3/3] gtk-doc: disable where necessary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,690 +32,135 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 26 Aug 2016 15:39:32 -0000
 
+Several recipes in meta-oe layers are so old that they don't work
+with modern gtk-doc (which was added and enabled by default in oe-core);
+disable that where it is necessary for the build to succeed.
+
 Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 ---
- .../libglade/libglade-2.6.4/glade-cruft.patch      | 102 +++++
- .../libglade/libglade-2.6.4/no-xml2.patch          | 501 +++++++++++++++++++++
- .../libglade-2.6.4/python_environment.patch        |  14 +
- meta-oe/recipes-gnome/libglade/libglade_2.6.4.bb   |  31 ++
- 4 files changed, 648 insertions(+)
- create mode 100644 meta-oe/recipes-gnome/libglade/libglade-2.6.4/glade-cruft.patch
- create mode 100644 meta-oe/recipes-gnome/libglade/libglade-2.6.4/no-xml2.patch
- create mode 100644 meta-oe/recipes-gnome/libglade/libglade-2.6.4/python_environment.patch
- create mode 100644 meta-oe/recipes-gnome/libglade/libglade_2.6.4.bb
+ meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb        | 2 +-
+ meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb             | 2 +-
+ meta-gpe/recipes-graphics/libgpewidget/libgpewidget_0.117.bb     | 2 +-
+ meta-multimedia/recipes-support/libmediaart/libmediaart_0.7.0.bb | 2 ++
+ meta-oe/recipes-gnome/libglade/libglade_2.6.4.bb                 | 2 +-
+ meta-oe/recipes-support/farsight/libnice_0.0.13.bb               | 2 ++
+ meta-oe/recipes-support/udisks/udisks2_2.1.7.bb                  | 2 +-
+ meta-xfce/recipes-multimedia/parole/parole_0.8.1.bb              | 2 ++
+ meta-xfce/recipes-xfce/garcon/garcon_0.4.0.bb                    | 2 ++
+ 9 files changed, 13 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-gnome/libglade/libglade-2.6.4/glade-cruft.patch b/meta-oe/recipes-gnome/libglade/libglade-2.6.4/glade-cruft.patch
-new file mode 100644
-index 0000000..c5d5864
---- /dev/null
-+++ b/meta-oe/recipes-gnome/libglade/libglade-2.6.4/glade-cruft.patch
-@@ -0,0 +1,102 @@
-+Upstream-Status: Pending
+diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb b/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
+index a5664b0..c31de0c 100644
+--- a/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
++++ b/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
+@@ -48,7 +48,7 @@ do_compile_prepend() {
+ 
+ EXTRA_OECONF = "--without-openldap \
+                 --with-libdb=${STAGING_DIR_HOST}${prefix} \
+-                --disable-nntp --disable-goa --disable-weather"
++                --disable-nntp --disable-goa --disable-weather --disable-gtk-doc"
+ 
+ PACKAGES =+ "libcamel libcamel-dev libebook libebook-dev libecal libecal-dev \
+              libedata-book libedata-book-dev libedata-cal libedata-cal-dev \
+diff --git a/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb b/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
+index 2a6f04b..6ec6d46 100644
+--- a/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
++++ b/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
+@@ -21,7 +21,7 @@ do_compile_prepend() {
+     export GIR_EXTRA_LIBS_PATH="${B}/gdata/.libs"
+ }
+ 
+-EXTRA_OECONF += "--disable-goa --disable-tests"
++EXTRA_OECONF += "--disable-goa --disable-tests --disable-gtk-doc"
+ 
+ SRC_URI[archive.md5sum] = "eb552a8a8482e4231a3d1baf7262e64d"
+ SRC_URI[archive.sha256sum] = "8740e071ecb2ae0d2a4b9f180d2ae5fdf9dc4c41e7ff9dc7e057f62442800827"
+diff --git a/meta-gpe/recipes-graphics/libgpewidget/libgpewidget_0.117.bb b/meta-gpe/recipes-graphics/libgpewidget/libgpewidget_0.117.bb
+index 88f69ff..87a3ed0 100644
+--- a/meta-gpe/recipes-graphics/libgpewidget/libgpewidget_0.117.bb
++++ b/meta-gpe/recipes-graphics/libgpewidget/libgpewidget_0.117.bb
+@@ -17,7 +17,7 @@ SRC_URI[sha256sum] = "f96d30c09b0395ea4e146730fd52d9ea303b619bb139051d9f12d3f868
+ 
+ GPE_TARBALL_SUFFIX = "bz2"
+ 
+-EXTRA_OECONF = "--enable-cairo"
++EXTRA_OECONF = "--enable-cairo --disable-gtk-doc"
+ LDFLAGS += " -L${STAGING_LIBDIR}"
+ 
+ PACKAGES =+ "${PN}-bin"
+diff --git a/meta-multimedia/recipes-support/libmediaart/libmediaart_0.7.0.bb b/meta-multimedia/recipes-support/libmediaart/libmediaart_0.7.0.bb
+index eb45974..ae95d4f 100644
+--- a/meta-multimedia/recipes-support/libmediaart/libmediaart_0.7.0.bb
++++ b/meta-multimedia/recipes-support/libmediaart/libmediaart_0.7.0.bb
+@@ -2,3 +2,5 @@ require libmediaart.inc
+ 
+ SRC_URI[archive.md5sum] = "1a44933d4cd0064e3c76d8d0ddacddc9"
+ SRC_URI[archive.sha256sum] = "3a9dffcad862aed7c0921579b93080d694b8a66f3676bfee8037867f653a1cd3"
 +
-+diff -ur libglade-2.4.0~/configure.in libglade-2.4.0/configure.in
-+--- libglade-2.4.0~/configure.in	2004-05-17 12:38:31.000000000 +0100
-++++ libglade-2.4.0/configure.in	2004-07-28 16:53:09.000000000 +0100
-+@@ -147,6 +147,18 @@
-+ AM_CONDITIONAL(HAVE_PYTHON, $have_python)
-+ AC_SUBST(PYTHON)
-+ 
-++AC_MSG_CHECKING([for cruft in libgtk])
-++AC_TRY_LINK([
-++#include <gtk/gtk.h>
-++#include <stdio.h>
-++],      [ gtk_tree_get_type (); return 0; ],
-++        [ AC_MSG_RESULT(yes)
-++          have_cruft=yes ],
-++        [ AC_MSG_RESULT(no)
-++	  AC_DEFINE(DISABLE_CRUFT,,[leave out support for old, broken widgets])
-++          have_cruft=no ])
-++AC_SUBST(DISABLE_CRUFT)
-++
-+ dnl add debugging options ...
-+ changequote(,)dnl
-+ if test "x$GCC" = xyes; then
-+Only in libglade-2.4.0: configure.in.orig
-+diff -ur libglade-2.4.0~/glade/glade-gtk.c libglade-2.4.0/glade/glade-gtk.c
-+--- libglade-2.4.0~/glade/glade-gtk.c	2004-03-13 13:47:35.000000000 +0000
-++++ libglade-2.4.0/glade/glade-gtk.c	2004-07-28 16:53:52.000000000 +0100
-+@@ -213,6 +213,8 @@
-+ 	gtk_clist_column_titles_hide (GTK_CLIST (w));
-+ }
-+ 
-++#ifndef DISABLE_CRUFT
-++
-+ static void
-+ tree_set_selection_mode (GladeXML *xml, GtkWidget *w,
-+ 			 const char *name, const char *value)
-+@@ -238,6 +240,8 @@
-+     gtk_tree_set_view_lines (GTK_TREE (w), BOOL (value));
-+ }
-+ 
-++#endif
-++
-+ static void
-+ list_set_selection_mode (GladeXML *xml, GtkWidget *w,
-+ 			 const char *name, const char *value)
-+@@ -254,6 +258,7 @@
-+     gtk_check_menu_item_set_show_toggle (GTK_CHECK_MENU_ITEM (w), BOOL (value));
-+ }
-+ 
-++#ifndef DISABLE_CRUFT
-+ static void
-+ text_set_text (GladeXML *xml, GtkWidget *w,
-+ 	       const char *name, const char *value)
-+@@ -262,6 +267,7 @@
-+ 
-+     gtk_editable_insert_text (GTK_EDITABLE (w), value, -1, &pos);
-+ }
-++#endif
-+ 
-+ static void
-+ radio_menu_item_set_group (GladeXML *xml, GtkWidget *w,
-+@@ -1125,13 +1131,17 @@
-+     glade_register_custom_prop (GTK_TYPE_CLIST, "selection_mode", clist_set_selection_mode);
-+     glade_register_custom_prop (GTK_TYPE_CLIST, "shadow_type", clist_set_shadow_type);
-+     glade_register_custom_prop (GTK_TYPE_CLIST, "show_titles", clist_set_show_titles);
-++#ifndef DISABLE_CRUFT
-+     glade_register_custom_prop (GTK_TYPE_TREE, "selection_mode", tree_set_selection_mode);
-+     glade_register_custom_prop (GTK_TYPE_TREE, "view_mode", tree_set_view_mode);
-+     glade_register_custom_prop (GTK_TYPE_TREE, "view_line", tree_set_view_line);
-++#endif
-+     glade_register_custom_prop (GTK_TYPE_LIST, "selection_mode", list_set_selection_mode);
-+     glade_register_custom_prop (GTK_TYPE_CHECK_MENU_ITEM, "always_show_toggle",
-+ 				check_menu_item_set_always_show_toggle);
-++#ifndef DISABLE_CRUFT
-+     glade_register_custom_prop (GTK_TYPE_TEXT, "text", text_set_text);
-++#endif
-+     glade_register_custom_prop (GTK_TYPE_RADIO_MENU_ITEM, "group",
-+ 				radio_menu_item_set_group);
-+     glade_register_custom_prop (GTK_TYPE_TOOLBAR, "tooltips", toolbar_set_tooltips);
-+@@ -1288,8 +1298,10 @@
-+ 			   glade_standard_build_children, NULL);
-+     glade_register_widget (GTK_TYPE_TEAROFF_MENU_ITEM, glade_standard_build_widget,
-+ 			   NULL, NULL);
-++#ifndef DISABLE_CRUFT
-+     glade_register_widget (GTK_TYPE_TEXT, glade_standard_build_widget,
-+ 			   NULL, NULL);
-++#endif
-+     glade_register_widget (GTK_TYPE_TEXT_VIEW, glade_standard_build_widget,
-+ 			   NULL, NULL);
-+     glade_register_widget (GTK_TYPE_TIPS_QUERY, glade_standard_build_widget,
-+@@ -1304,8 +1316,10 @@
-+ 			   glade_standard_build_children, NULL);
-+     glade_register_widget (GTK_TYPE_TOOL_BUTTON, glade_standard_build_widget,
-+ 			   NULL, NULL);
-++#ifndef DISABLE_CRUFT
-+     glade_register_widget (GTK_TYPE_TREE, glade_standard_build_widget,
-+ 			   NULL, NULL);
-++#endif
-+     glade_register_widget (GTK_TYPE_TREE_VIEW, glade_standard_build_widget,
-+ 			   NULL, NULL);
-+     glade_register_widget (GTK_TYPE_VBUTTON_BOX, glade_standard_build_widget,
-diff --git a/meta-oe/recipes-gnome/libglade/libglade-2.6.4/no-xml2.patch b/meta-oe/recipes-gnome/libglade/libglade-2.6.4/no-xml2.patch
-new file mode 100644
-index 0000000..dc4c092
---- /dev/null
-+++ b/meta-oe/recipes-gnome/libglade/libglade-2.6.4/no-xml2.patch
-@@ -0,0 +1,501 @@
-+Upstream-Status: Inappropriate [configuration]
-+
-+diff -urN libglade-2.4.2.orig/configure.in libglade-2.4.2/configure.in
-+--- libglade-2.4.2.orig/configure.in	2005-02-11 12:42:58.000000000 +0100
-++++ libglade-2.4.2/configure.in	2005-03-22 01:22:00.000000000 +0100
-+@@ -52,11 +52,33 @@
-+ AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
-+ 
-+ PKG_CHECK_MODULES(LIBGLADE, [dnl
-+-  libxml-2.0 >= required_libxml_version dnl
-+   atk >= required_atk_version dnl
-+   gtk+-2.0 >= required_gtk_version dnl
-+   glib-2.0 >= required_glib_version])
-+ 
-++disable_xml2=no
-++AC_ARG_WITH([libxml2],
-++  AC_HELP_STRING([--without-libxml2], [Don't use libxml2, use Glib's GMarkupParser instead]),
-++  [disable_xml2=yes],
-++  [disable_xml2=no])
-++
-++AC_MSG_CHECKING([if we are using libxml2])
-++if test "x$disable_xml2" == "xno"; then
-++  AC_MSG_RESULT(yes)
-++  PKG_CHECK_MODULES(XML2, libxml-2.0 >= 2.4.10)
-++  PKGCFG_REQUIRE_LIBXML2="libxml-2.0"
-++  LIBGLADE_CFLAGS="$LIBGLADE_CFLAGS $XML2_CFLAGS"
-++  LIBGLADE_LIBS="$LIBGLADE_LIBS $XML2_LIBS"
-++else
-++  LIBGLADE_CFLAGS="$LIBGLADE_CFLAGS -DUSE_GMARKUP_PARSER"
-++  PKGCFG_REQUIRE_LIBXML2=""
-++  AC_MSG_RESULT(no)
-++fi
-++
-++AC_SUBST(XML2_LIBS)
-++AC_SUBST(XML2_CFLAGS)
-++AC_SUBST(PKGCFG_REQUIRE_LIBXML2)
-++
-+ AC_MSG_CHECKING([for native Win32])
-+ case "$host" in
-+   *-*-mingw*)
-+@@ -116,6 +138,21 @@
-+   fi
-+ fi
-+ 
-++if test "x$disable_xml2" == "xyes"; then
-++  echo "*****************************************************"
-++  echo "  You chose to disable libxml2 and use Glib's"
-++  echo "  GMarkupParser instead." 
-++  echo  
-++  echo "  Please bear in mind that using libglade with"
-++  echo "  GMarkupParser is an experimental feature only."
-++  echo
-++  echo "  Please post problems or success stories to"
-++  echo "  the glade-devel mailing list. Thank you."
-++  echo "*****************************************************"
-++fi
-++
-++
-++
-+ GTK_DOC_CHECK(1.0)
-+ 
-+ dnl gettext stuff ... there is no message catalog for libglade -- libglade
-+diff -urN libglade-2.4.2.orig/glade/glade-parser.c libglade-2.4.2/glade/glade-parser.c
-+--- libglade-2.4.2.orig/glade/glade-parser.c	2004-11-11 11:56:13.000000000 +0100
-++++ libglade-2.4.2/glade/glade-parser.c	2005-03-22 01:20:00.000000000 +0100
-+@@ -34,7 +34,15 @@
-+ #  define dgettext(Domain, String) (String)
-+ #endif
-+ 
-+-#include <libxml/parser.h>
-++#ifdef USE_GMARKUP_PARSER
-++#  include <zlib.h>
-++#else
-++#  include <libxml/parser.h>
-++#endif
-++
-++#ifdef USE_GMARKUP_PARSER
-++#  define xmlChar gchar
-++#endif
-+ 
-+ #include "glade-parser.h"
-+ #include "glade-private.h"
-+@@ -508,7 +516,9 @@
-+     case PARSER_START:
-+ 	if (!strcmp(name, "glade-interface")) {
-+ 	    state->state = PARSER_GLADE_INTERFACE;
-+-#if 0
-++
-++#ifndef USE_GMARKUP_PARSER
-++ #if 0
-+ 	    /* check for correct XML namespace */
-+ 	    for (i = 0; attrs && attrs[i] != NULL; i += 2) {
-+ 		if (!strcmp(attrs[i], "xmlns") &&
-+@@ -518,7 +528,9 @@
-+ 		    g_warning("unknown attribute `%s' for <glade-interface>",
-+ 			      attrs[i]);
-+ 	    }
-++ #endif
-+ #endif
-++
-+ 	} else {
-+ 	    g_warning("Expected <glade-interface>.  Got <%s>.", name);
-+ 	    state->prev_state = state->state;
-+@@ -1063,12 +1075,18 @@
-+     }
-+ }
-+ 
-++#ifndef USE_GMARKUP_PARSER
-++
-+ static xmlEntityPtr
-+ glade_parser_get_entity(GladeParseState *state, const xmlChar *name)
-+ {
-+     return xmlGetPredefinedEntity(name);
-+ }
-+ 
-++#endif /* !defined(USE_GMARKUP_PARSER) */
-++
-++#ifndef USE_GMARKUP_PARSER
-++
-+ static void
-+ glade_parser_warning(GladeParseState *state, const char *msg, ...)
-+ {
-+@@ -1079,6 +1097,10 @@
-+     va_end(args);
-+ }
-+ 
-++#endif /* !defined(USE_GMARKUP_PARSER) */
-++
-++#ifndef USE_GMARKUP_PARSER
-++
-+ static void
-+ glade_parser_error(GladeParseState *state, const char *msg, ...)
-+ {
-+@@ -1089,6 +1111,10 @@
-+     va_end(args);
-+ }
-+ 
-++#endif /* !defined(USE_GMARKUP_PARSER) */
-++
-++#ifndef USE_GMARKUP_PARSER
-++
-+ static void
-+ glade_parser_fatal_error(GladeParseState *state, const char *msg, ...)
-+ {
-+@@ -1099,6 +1125,10 @@
-+     va_end(args);
-+ }
-+ 
-++#endif /* !defined(USE_GMARKUP_PARSER) */
-++
-++#ifndef USE_GMARKUP_PARSER
-++
-+ static xmlSAXHandler glade_parser = {
-+     (internalSubsetSAXFunc)NULL,                       /* internalSubset */
-+     (isStandaloneSAXFunc)NULL,                         /* isStandalone */
-+@@ -1126,6 +1156,82 @@
-+     (fatalErrorSAXFunc)glade_parser_fatal_error,       /* fatalError */
-+ };
-+ 
-++#else /* USE_GMARKUP_PARSER */
-++
-++static void
-++glade_parser_start_element_wrapper(GMarkupParseContext *context,
-++                                   const gchar         *name, 
-++                                   const gchar        **attr_names,
-++                                   const gchar        **attr_values,
-++                                   gpointer             state,
-++                                   GError             **error)
-++{
-++    guint i = 0;
-++
-++    /* Pack attribute names/values from two separate
-++     *  arrays (GMarkupParser style) into one single
-++     *  array (libxml SAXParser style). This is not
-++     *  very efficient, but we do it to make the
-++     *  GMarkupParser code as little invasive as
-++     *  possible. */
-++
-++    while (attr_names[i] != NULL) {
-++      ++i;
-++    }
-++
-++    if (1)
-++    {
-++        const gchar *attr[(i*2)+1];
-++        guint j, k;
-++       
-++        for (j=0, k=0;  k < i;  j += 2)
-++        {
-++            attr[j] = attr_names[k];
-++            attr[j+1] = attr_values[k];
-++            ++k;
-++        }
-++        attr[i*2] = NULL;
-++
-++        glade_parser_start_element((GladeParseState*)state, name, attr);
-++    }
-++}
-++
-++static void
-++glade_parser_end_element_wrapper(GMarkupParseContext *context, 
-++                                 const gchar         *name,
-++                                 gpointer             state,
-++                                 GError             **err)
-++{
-++    glade_parser_end_element((GladeParseState*)state, name);
-++}
-++
-++static void
-++glade_parser_characters_wrapper(GMarkupParseContext *context, 
-++                                const gchar         *chars, 
-++                                gsize                len,
-++                                gpointer             state,
-++                                GError             **err)
-++{
-++    glade_parser_characters((GladeParseState*)state, chars, (int) len);
-++}
-++
-++static void
-++glade_parser_error(GMarkupParseContext *context, GError *err, gpointer data)
-++{
-++    g_log("Glade-Parser", G_LOG_LEVEL_CRITICAL, "%s", err->message);
-++}
-++
-++static const GMarkupParser   glade_parser = {
-++    glade_parser_start_element_wrapper,  /* element open   */
-++    glade_parser_end_element_wrapper,    /* element close  */
-++    glade_parser_characters_wrapper,     /* text content   */
-++    NULL,                                /* passthrough    */
-++    glade_parser_error,                  /* parse error    */
-++};
-++
-++#endif /* USE_GMARKUP_PARSER */
-++
-++
-+ static void
-+ widget_info_free(GladeWidgetInfo *info)
-+ {
-+@@ -1191,6 +1297,9 @@
-+  *
-+  * Returns: the GladeInterface structure for the XML file.
-+  */
-++
-++#ifndef USE_GMARKUP_PARSER
-++
-+ GladeInterface *
-+ glade_parser_parse_file(const gchar *file, const gchar *domain)
-+ {
-+@@ -1222,6 +1331,31 @@
-+     return state.interface;
-+ }
-+ 
-++#else /* defined(USE_GMARKUP_PARSER) */
-++
-++GladeInterface *
-++glade_parser_parse_file(const gchar *file, const gchar *domain)
-++{
-++    GladeInterface  *interface;
-++    GError          *err     = NULL;
-++    gchar           *content = NULL;
-++    gsize            clen;
-++
-++    if (!g_file_get_contents(file, &content, &clen, &err)) {
-++        g_warning("could not load glade file: %s", err->message);
-++        g_error_free(err);
-++        return NULL;
-++    }
-++
-++    interface = glade_parser_parse_buffer(content, (gint) clen, domain);
-++
-++    g_free(content);
-++
-++    return interface;
-++}
-++
-++#endif /* USE_GMARKUP_PARSER */
-++
-+ /**
-+  * glade_parser_parse_buffer
-+  * @buffer: a buffer in memory containing XML data.
-+@@ -1237,6 +1371,9 @@
-+  *
-+  * Returns: the GladeInterface structure for the XML buffer.
-+  */
-++
-++#ifndef USE_GMARKUP_PARSER
-++
-+ GladeInterface *
-+ glade_parser_parse_buffer(const gchar *buffer, gint len, const gchar *domain)
-+ {
-+@@ -1263,6 +1400,161 @@
-+     return state.interface;
-+ }
-+ 
-++#else /* defined(USE_GMARKUP_PARSER) */
-++
-++
-++static GladeInterface *
-++glade_parser_parse_buffer_internal(const gchar *buffer, gint len, const gchar *domain)
-++{
-++	GMarkupParseContext  *context;
-++	GladeParseState       state = { 0 };
-++	GError               *err   = NULL;
-++
-++	state.interface = NULL;
-++	if (domain)
-++		state.domain = domain;
-++	else
-++		state.domain = textdomain(NULL);
-++
-++	/* FIXME: This strstr() is not safe, as it ignores the len
-++	 *        argument and assumes the buffer is NUL-terminated */
-++	if (strstr(buffer, "<?xml") == NULL) {
-++		g_warning("No XML header found in document!");
-++		return NULL;
-++	}
-++
-++	context = g_markup_parse_context_new(&glade_parser, (GMarkupParseFlags) 0, &state, NULL);
-++
-++	glade_parser_start_document(&state);
-++
-++	if (!g_markup_parse_context_parse(context, buffer, (gssize) len, &err)) {
-++		g_warning("document not well formed: %s", err->message);
-++		g_error_free(err);
-++		if (state.interface)
-++			glade_interface_destroy (state.interface);
-++		return NULL;
-++	}
-++
-++	glade_parser_end_document(&state);
-++
-++	if (state.state != PARSER_FINISH) {
-++		g_warning("did not finish in PARSER_FINISH state!");
-++
-++		if (state.interface)
-++			glade_interface_destroy(state.interface);
-++
-++		return NULL;
-++	}
-++
-++	return state.interface;
-++}
-++
-++struct _gzip_rfc1952_hdr
-++{
-++	guint8	id1, id2, cm, flags;
-++	guint32 mtime;
-++	guint8  xflags;
-++	guint8  os;
-++};
-++
-++static GladeInterface *
-++glade_parser_parse_gzipped_buffer(const gchar *buffer, gint len, const gchar *domain)
-++{
-++	struct _gzip_rfc1952_hdr *hdr = (struct _gzip_rfc1952_hdr*)buffer;
-++	struct z_stream_s         zstream;
-++	GladeInterface           *interface;
-++	const guint8             *cbuf;              /* start of compressed data */
-++	guint8                   *decompress_buf;
-++	gulong                    decompress_len = 0;
-++	gint                      ret;
-++
-++	g_assert(hdr != NULL && hdr->id1 == 0x1f && hdr->id2 == 0x8b);
-++
-++	if (hdr->cm != Z_DEFLATED) {
-++		g_warning("Unknown decompression method %u", (guint) hdr->cm);
-++		return NULL;
-++	}
-++
-++	/* Uncompressed size (modulo 2^32) is last
-++	 *  4 bytes of gzipped file, and little endian.
-++	 *  See RFC 1952 */
-++	decompress_len = GUINT32_FROM_LE(*((guint32*)(((guint8*)buffer) + len - 4)));
-++
-++	/* paranoid mode: glade files > 5MB are unlikely */
-++	g_return_val_if_fail(decompress_len < 5*1024*1024, NULL);
-++
-++	decompress_buf = g_malloc0(decompress_len + 1); /* +1 for NUL-terminator */
-++
-++	/* find start of compressed data, skipping header stuff */
-++	cbuf = (guint8*)buffer + 10;
-++	if (hdr->flags & 0x04) {
-++		guint16 xlen = GUINT16_FROM_LE(*((guint16*)cbuf));
-++		cbuf += xlen + 2;
-++	}
-++	if (hdr->flags & 0x08) {
-++		guint16 onamelen = strlen(cbuf);
-++		cbuf += onamelen + 1;
-++	}
-++	if (hdr->flags & 0x10) {
-++		guint16 commentlen = strlen(cbuf);
-++		cbuf += commentlen + 1;
-++	}
-++	if (hdr->flags & 0x02)
-++	{
-++		cbuf += 2; /* skip header CRC16 */
-++	}
-++
-++	zstream.next_in  = (void*)cbuf;
-++	zstream.avail_in = (uLongf) len - ((void*)cbuf-(void*)buffer) - 4 - 4 +1; 
-++	zstream.next_out = decompress_buf;
-++	zstream.avail_out= decompress_len;
-++	zstream.zalloc   = Z_NULL;
-++	zstream.zfree    = Z_NULL;
-++	zstream.opaque   = Z_NULL;
-++
-++	ret = inflateInit2(&zstream, -MAX_WBITS);
-++
-++	if (ret != Z_OK) {
-++		g_warning("inflateInit2() failed. zlib error code: %d", ret);
-++		g_free(decompress_buf);
-++		return NULL;
-++	}
-++
-++	ret = inflate(&zstream, Z_FINISH);
-++
-++	if (ret != Z_STREAM_END) {
-++		g_warning("zlib decompression failed. zlib error code: %d", ret);
-++		g_free(decompress_buf);
-++		return NULL;
-++	}
-++
-++	interface = glade_parser_parse_buffer_internal(decompress_buf, decompress_len, domain);
-++
-++	g_free(decompress_buf);
-++
-++	return interface;
-++}
-++
-++GladeInterface *
-++glade_parser_parse_buffer(const gchar *buffer, gint len, const gchar *domain)
-++{
-++	g_return_val_if_fail(buffer != NULL, NULL);
-++	g_return_val_if_fail(len > 0, NULL);
-++
-++	/* Check if buffer is gzipped */
-++	if (buffer[0] == 0x1f && buffer[1] == (gchar)0x8b) {
-++		return glade_parser_parse_gzipped_buffer(buffer, len, domain);
-++	}
-++
-++	/* Buffer is cleartext. */
-++	return glade_parser_parse_buffer_internal(buffer, len, domain);
-++}
-++
-++#endif /* USE_GMARKUP_PARSER */
-++
-++
-++#ifndef USE_GMARKUP_PARSER
-++
-+ static void
-+ dump_widget(xmlNode *parent, GladeWidgetInfo *info, gint indent)
-+ {
-+@@ -1382,6 +1674,8 @@
-+ 	xmlNodeAddContent(widget, "  ");
-+ }
-+ 
-++#endif /* !defined(USE_GMARKUP_PARSER) */
-++
-+ /**
-+  * glade_interface_dump
-+  * @interface: the GladeInterface
-+@@ -1390,6 +1684,9 @@
-+  * This function dumps the contents of a GladeInterface into a file as
-+  * XML.  It is intended mainly as a debugging tool.
-+  */
-++
-++#ifndef USE_GMARKUP_PARSER
-++
-+ void
-+ glade_interface_dump(GladeInterface *interface, const gchar *filename)
-+ {
-+@@ -1428,6 +1725,17 @@
-+     xmlFreeDoc(doc);
-+ }
-+ 
-++#else /* defined(USE_GMARKUP_PARSER) */
-++
-++void
-++glade_interface_dump(GladeInterface *interface, const gchar *filename)
-++{
-++    g_warning("glade_interface_dump() is only available with libxml2.");
-++}
-++
-++#endif /* USE_GMARKUP_PARSER */
-++
-++
-+ #if 0
-+ int
-+ main(int argc, char **argv) {
-+diff -urN libglade-2.4.2.orig/libglade-2.0.pc.in libglade-2.4.2/libglade-2.0.pc.in
-+--- libglade-2.4.2.orig/libglade-2.0.pc.in	2001-12-12 15:28:23.000000000 +0100
-++++ libglade-2.4.2/libglade-2.0.pc.in	2005-03-22 01:20:00.000000000 +0100
-+@@ -11,7 +11,7 @@
-+ Name: Libglade
-+ Description: a library for dynamically loading GLADE interface files
-+ Version: @VERSION@
-+-Requires: gtk+-2.0 libxml-2.0
-++Requires: gtk+-2.0 @PKGCFG_REQUIRE_LIBXML2@
-+ Libs: -L${libdir} -lglade-2.0
-+ Cflags: -I${includedir}/libglade-2.0
-+ 
-diff --git a/meta-oe/recipes-gnome/libglade/libglade-2.6.4/python_environment.patch b/meta-oe/recipes-gnome/libglade/libglade-2.6.4/python_environment.patch
-new file mode 100644
-index 0000000..b5b2ec4
---- /dev/null
-+++ b/meta-oe/recipes-gnome/libglade/libglade-2.6.4/python_environment.patch
-@@ -0,0 +1,14 @@
-+Using @PYTHON@ for this path would result in the build system python being 
-+referred to. Instead we want to locate python from the environment.
-+
-+Upstream-Status: Inappropriate [configuration]
-+
-+diff -ruN libglade-2.6.4-orig//libglade-convert.in libglade-2.6.4/libglade-convert.in
-+--- libglade-2.6.4-orig//libglade-convert.in	2011-09-22 10:18:28.991164003 +0800
-++++ libglade-2.6.4/libglade-convert.in	2011-09-22 10:18:55.431164003 +0800
-+@@ -1,4 +1,4 @@
-+-#!@PYTHON@
-++#!/usr/bin/env python
-+ # -*- mode: python -*-
-+ 
-+ # yes, this requires python 2.x and an XML parser module (eg. PyExpat)
++EXTRA_OECONF_append = " --disable-gtk-doc"
 diff --git a/meta-oe/recipes-gnome/libglade/libglade_2.6.4.bb b/meta-oe/recipes-gnome/libglade/libglade_2.6.4.bb
-new file mode 100644
-index 0000000..553e19c
---- /dev/null
+index 553e19c..8cd023a 100644
+--- a/meta-oe/recipes-gnome/libglade/libglade_2.6.4.bb
 +++ b/meta-oe/recipes-gnome/libglade/libglade_2.6.4.bb
-@@ -0,0 +1,31 @@
-+SUMMARY = "Runtime support for the GTK+ interface builder"
-+HOMEPAGE = "http://library.gnome.org/devel/libglade/"
-+BUGTRACKER = "https://bugzilla.gnome.org/"
+@@ -20,7 +20,7 @@ SRC_URI += "file://glade-cruft.patch file://no-xml2.patch file://python_environm
+ SRC_URI[archive.md5sum] = "d1776b40f4e166b5e9c107f1c8fe4139"
+ SRC_URI[archive.sha256sum] = "64361e7647839d36ed8336d992fd210d3e8139882269bed47dc4674980165dec"
+ 
+-EXTRA_OECONF += "--without-libxml2"
++EXTRA_OECONF += "--without-libxml2 --disable-gtk-doc"
+ 
+ CFLAGS += "-lz"
+ 
+diff --git a/meta-oe/recipes-support/farsight/libnice_0.0.13.bb b/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
+index 620ee1f..3c2a054 100644
+--- a/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
++++ b/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
+@@ -18,6 +18,8 @@ PACKAGECONFIG[gupnp] = "--enable-gupnp,--disable-gupnp,gupnp-igd"
+ 
+ inherit autotools pkgconfig gtk-doc
+ 
++EXTRA_OECONF = "--disable-gtk-doc"
 +
-+LICENSE = "LGPLv2 & LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=55ca817ccb7d5b5b66355690e9abc605 \
-+                    file://glade/glade.h;endline=22;md5=a04f461c964ba4b57a172d1fbcd8f8fc \
-+                    file://glade/glade-gtk.c;endline=22;md5=766f993433e2642fec87936d319990ff"
+ FILES_${PN} += "${libdir}/gstreamer-0.10/*.so"
+ FILES_${PN}-dev += "${libdir}/gstreamer-0.10/*.la"
+ FILES_${PN}-staticdev += "${libdir}/gstreamer-0.10/*.a"
+diff --git a/meta-oe/recipes-support/udisks/udisks2_2.1.7.bb b/meta-oe/recipes-support/udisks/udisks2_2.1.7.bb
+index 34762dd..fbf6701 100644
+--- a/meta-oe/recipes-support/udisks/udisks2_2.1.7.bb
++++ b/meta-oe/recipes-support/udisks/udisks2_2.1.7.bb
+@@ -17,7 +17,7 @@ inherit autotools systemd gtk-doc gobject-introspection
+ 
+ S = "${WORKDIR}/udisks-${PV}"
+ 
+-EXTRA_OECONF = "--disable-man"
++EXTRA_OECONF = "--disable-man --disable-gtk-doc"
+ 
+ FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
+                 ${datadir}/dbus-1/ \
+diff --git a/meta-xfce/recipes-multimedia/parole/parole_0.8.1.bb b/meta-xfce/recipes-multimedia/parole/parole_0.8.1.bb
+index f27396c..824611a 100644
+--- a/meta-xfce/recipes-multimedia/parole/parole_0.8.1.bb
++++ b/meta-xfce/recipes-multimedia/parole/parole_0.8.1.bb
+@@ -24,6 +24,8 @@ SRC_URI[sha256sum] = "4b216f5200490f8d2a9bf1b3fcd9a8b20834c95249bf13b9170c82e1fc
+ 
+ RDEPENDS_${PN} += "gstreamer1.0-plugins-good"
+ 
++EXTRA_OECONF = "--disable-gtk-doc"
 +
-+SECTION = "libs"
-+PR = "r5"
-+DEPENDS = "zlib gdk-pixbuf gtk+"
+ PACKAGECONFIG ??= "notify"
+ PACKAGECONFIG[clutter] = "--enable-clutter, --disable-clutter, clutter"
+ PACKAGECONFIG[notify] = "--enable-notify-plugin, --disable-notify-plugin, libnotify"
+diff --git a/meta-xfce/recipes-xfce/garcon/garcon_0.4.0.bb b/meta-xfce/recipes-xfce/garcon/garcon_0.4.0.bb
+index 81f6ce1..81143b5 100644
+--- a/meta-xfce/recipes-xfce/garcon/garcon_0.4.0.bb
++++ b/meta-xfce/recipes-xfce/garcon/garcon_0.4.0.bb
+@@ -10,4 +10,6 @@ SRC_URI += "file://0001-xfce-applications.menu-don-t-bloat-settings-menu-by-.pat
+ SRC_URI[md5sum] = "aba62b80787aac295083bf7afd419ffb"
+ SRC_URI[sha256sum] = "787dc859713b6518992d760d4b858fb02e8a30705e6f6e871d7a14cc97bca972"
+ 
++EXTRA_OECONF = "--disable-gtk-doc"
 +
-+inherit autotools pkgconfig gnomebase gtk-doc distro_features_check
-+ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
-+GNOME_COMPRESS_TYPE="bz2"
-+
-+SRC_URI += "file://glade-cruft.patch file://no-xml2.patch file://python_environment.patch"
-+
-+SRC_URI[archive.md5sum] = "d1776b40f4e166b5e9c107f1c8fe4139"
-+SRC_URI[archive.sha256sum] = "64361e7647839d36ed8336d992fd210d3e8139882269bed47dc4674980165dec"
-+
-+EXTRA_OECONF += "--without-libxml2"
-+
-+CFLAGS += "-lz"
-+
-+PACKAGES += " ${PN}-data"
-+FILES_${PN} = "${libdir}/lib*.so.*"
-+FILES_${PN}-data = "${datadir}/xml/libglade/glade-2.0.dtd"
-+FILES_${PN}-dev += "${bindir}/libglade-convert"
-+#RDEPENDS_${PN} = "${PN}-data"
+ FILES_${PN} += "${datadir}/desktop-directories"
 -- 
 2.9.3
 
