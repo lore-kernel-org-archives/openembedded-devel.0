@@ -1,30 +1,45 @@
-Return-Path: <wangxin2015.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 809B7601B8
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id C6DEC60620
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Aug 2016 10:09:15 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="10345933"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 27 Aug 2016 18:09:16 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 81B4242EB270
+	Sat, 27 Aug 2016 13:32:34 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id q128so3190491wma.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Aug 2016 18:09:13 +0800 (CST)
-Received: from ubuntu.g08.fujitsu.local (10.167.226.120) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.279.2; Sat, 27 Aug 2016 18:09:13 +0800
-From: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 27 Aug 2016 06:09:07 -0400
-Message-ID: <1472292547-1742-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.226.120]
-X-yoursite-MailScanner-ID: 81B4242EB270.A42C6
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangxin2015.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-networking][PATCH] radvd: 2.11 -> 2.14
+	Sat, 27 Aug 2016 06:32:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=Hia5VlQZGwmwTrP0378HbwLMy2nFWgCN6tvwK1wW7qU=;
+	b=MXbqe6kYARNLOjoC5GGbAsNtpaqTO4vSYPoIskVr266ex952qm+lswLq1VgmcnX7oG
+	y+iCKbZ43mDeap2Z3eeJgpHO54ps1n459oDp6zSca9ArSLARtU52DqpSX34/7DjAeqkq
+	/wquTPpjIld+cKFSd3FLQmSgZvN6wFvbyUPf6o2zJMajnNzzzWoC1hEIVaJgAFbwBHX3
+	WJz1dyw6fCsKngyz2pokeDso7jWm6xUSGlxN0Jd9NrRNiddC9ZCLav0Vw9pHMG09qyT2
+	4RVfXfLIQ/UwdEqzJq4vjCI/5elfa8AZZxxp6pVf4HS58kxxEIli7CQ6eJk7cuwQEG1k
+	5VFw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Hia5VlQZGwmwTrP0378HbwLMy2nFWgCN6tvwK1wW7qU=;
+	b=PnM0yDPKUXj108l9wTXsN8Y5YSvcdqXogK4vHik/3FqWvz9Mebri80f5pZjc/wr7GO
+	PPQx0h3XvncHx+pXEOnmrVCOT7+KcKdge6FJLbPFaqmJCEvkeNKMB7rIB8VZ1TZy7Lff
+	qeaLTWDtefxg5NQsG+E6HGb1VMuCpsMnte8QIVU3BuFVaCIs1EanFq59JZUmVMmmDFdl
+	3TLfC3puispjAUbby/IaeuDYFdhp4mSSu3RPeGcvrpW0bqOUTfq4cGn8Y7Cag+tLvf2N
+	L4hlprp95I43mT99YdHASBMN2pccjWFC6T06A/gNSljbb0lmV7w1kSYJ2Q8N4OnuXH5n
+	MqKw==
+X-Gm-Message-State: AE9vXwNOUTjDxmIoow2c9gn/wiXDVZwsdMXJVhfbI5FwIFikoUHD02n128yPkL8JvC+OiA==
+X-Received: by 10.28.15.3 with SMTP id 3mr3040187wmp.31.1472304754908;
+	Sat, 27 Aug 2016 06:32:34 -0700 (PDT)
+Received: from Saturn.local.all (212-41-122-61.adsl.solnet.ch. [212.41.122.61])
+	by smtp.gmail.com with ESMTPSA id z18sm3868546wmz.6.2016.08.27.06.32.33
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 27 Aug 2016 06:32:34 -0700 (PDT)
+From: Max Krummenacher <max.oss.09@gmail.com>
+X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 27 Aug 2016 15:32:24 +0200
+Message-Id: <1472304744-21421-1-git-send-email-max.krummenacher@toradex.com>
+X-Mailer: git-send-email 2.6.6
+Cc: Max Krummenacher <max.krummenacher@toradex.com>
+Subject: [meta-qt5][jethro][PATCH] qtbase: fix regression for missing libqt*.a libs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,44 +52,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Aug 2016 10:09:17 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 27 Aug 2016 13:32:38 -0000
 
-Upgrade radvd from 2.11 to 2.14.
+Deploy the following statically linked libraries:
+../build/lib/libqtfreetype.a  ../build/lib/libqtfreetype.prl
+../build/lib/libqtpcre.a  ../build/lib/libqtpcre.prl
 
-Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+Fixes build of qtwayland (which is required for meta-toolchain-qt5):
+| .../arm-angstrom-linux-gnueabi-ld.gold: error: cannot find -lqtfreetype
+regression introduced with d6aeedb7f27b8dd02fa7e6fa193ce9e2e969ecf6 which
+reverted the fix by Khem c44912563c4eadc288050f0b5e25981bc432d3f7
+
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
 ---
- meta-networking/recipes-daemons/radvd/radvd_2.11.bb | 5 -----
- meta-networking/recipes-daemons/radvd/radvd_2.14.bb | 5 +++++
- 2 files changed, 5 insertions(+), 5 deletions(-)
- delete mode 100644 meta-networking/recipes-daemons/radvd/radvd_2.11.bb
- create mode 100644 meta-networking/recipes-daemons/radvd/radvd_2.14.bb
 
-diff --git a/meta-networking/recipes-daemons/radvd/radvd_2.11.bb b/meta-networking/recipes-daemons/radvd/radvd_2.11.bb
-deleted file mode 100644
-index c0b7532..0000000
---- a/meta-networking/recipes-daemons/radvd/radvd_2.11.bb
-+++ /dev/null
-@@ -1,5 +0,0 @@
--
--require radvd.inc
--
--SRC_URI[md5sum] = "57fc6021f6a5e5472e455937685472a3"
--SRC_URI[sha256sum] = "80ad60b15689e9591a5af393a57a1d93304deeff2e46482f0fd98046c00622f8"
-diff --git a/meta-networking/recipes-daemons/radvd/radvd_2.14.bb b/meta-networking/recipes-daemons/radvd/radvd_2.14.bb
-new file mode 100644
-index 0000000..2525249
---- /dev/null
-+++ b/meta-networking/recipes-daemons/radvd/radvd_2.14.bb
-@@ -0,0 +1,5 @@
-+
-+require radvd.inc
-+
-+SRC_URI[md5sum] = "acd3883dece2c7888d15596b05c9fae4"
-+SRC_URI[sha256sum] = "46d31c05daea11c3d1e3dc092997d3631b3bc72b20a4f279b05304b83dbd7aa8"
+Note that the qtbase version used in krogoth does deploy libqtfreetype.a
+in its regular 'make install'.
+
+ recipes-qt/qt5/qtbase_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index 62c0ab5..7d1ab5e 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -232,7 +232,7 @@ do_install_append() {
+         cp -d ${S}/lib/fonts/* ${D}/${OE_QMAKE_PATH_QT_FONTS}
+         chown -R root:root ${D}/${OE_QMAKE_PATH_QT_FONTS}
+     fi
+-    cp -d ${B}/lib/libQt* ${D}${libdir}
++    cp -d ${B}/lib/libqt* ${D}${libdir}
+     # Remove example.pro file as it is useless
+     rm -f ${D}${OE_QMAKE_PATH_EXAMPLES}/examples.pro
+ 
 -- 
-2.7.4
-
-
+2.6.6
 
 
