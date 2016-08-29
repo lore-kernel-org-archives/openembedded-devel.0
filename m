@@ -1,45 +1,40 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id C6DEC60620
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id C90906011C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Aug 2016 13:32:34 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id q128so3190491wma.1
+	Mon, 29 Aug 2016 12:13:17 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id q128so9280945wma.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Aug 2016 06:32:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=Hia5VlQZGwmwTrP0378HbwLMy2nFWgCN6tvwK1wW7qU=;
-	b=MXbqe6kYARNLOjoC5GGbAsNtpaqTO4vSYPoIskVr266ex952qm+lswLq1VgmcnX7oG
-	y+iCKbZ43mDeap2Z3eeJgpHO54ps1n459oDp6zSca9ArSLARtU52DqpSX34/7DjAeqkq
-	/wquTPpjIld+cKFSd3FLQmSgZvN6wFvbyUPf6o2zJMajnNzzzWoC1hEIVaJgAFbwBHX3
-	WJz1dyw6fCsKngyz2pokeDso7jWm6xUSGlxN0Jd9NrRNiddC9ZCLav0Vw9pHMG09qyT2
-	4RVfXfLIQ/UwdEqzJq4vjCI/5elfa8AZZxxp6pVf4HS58kxxEIli7CQ6eJk7cuwQEG1k
-	5VFw==
+	Mon, 29 Aug 2016 05:13:18 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Hia5VlQZGwmwTrP0378HbwLMy2nFWgCN6tvwK1wW7qU=;
-	b=PnM0yDPKUXj108l9wTXsN8Y5YSvcdqXogK4vHik/3FqWvz9Mebri80f5pZjc/wr7GO
-	PPQx0h3XvncHx+pXEOnmrVCOT7+KcKdge6FJLbPFaqmJCEvkeNKMB7rIB8VZ1TZy7Lff
-	qeaLTWDtefxg5NQsG+E6HGb1VMuCpsMnte8QIVU3BuFVaCIs1EanFq59JZUmVMmmDFdl
-	3TLfC3puispjAUbby/IaeuDYFdhp4mSSu3RPeGcvrpW0bqOUTfq4cGn8Y7Cag+tLvf2N
-	L4hlprp95I43mT99YdHASBMN2pccjWFC6T06A/gNSljbb0lmV7w1kSYJ2Q8N4OnuXH5n
-	MqKw==
-X-Gm-Message-State: AE9vXwNOUTjDxmIoow2c9gn/wiXDVZwsdMXJVhfbI5FwIFikoUHD02n128yPkL8JvC+OiA==
-X-Received: by 10.28.15.3 with SMTP id 3mr3040187wmp.31.1472304754908;
-	Sat, 27 Aug 2016 06:32:34 -0700 (PDT)
-Received: from Saturn.local.all (212-41-122-61.adsl.solnet.ch. [212.41.122.61])
-	by smtp.gmail.com with ESMTPSA id z18sm3868546wmz.6.2016.08.27.06.32.33
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 27 Aug 2016 06:32:34 -0700 (PDT)
-From: Max Krummenacher <max.oss.09@gmail.com>
-X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=o31Fph3sR+DUDtOHW1fw0FSL7F+iCBdGPVet505iJ3U=;
+	b=DV1FJncU/L4tmJDVG5ju+qGsQb6Xcm2381eUiq4BeVVsM2+MGp00Oo8/9HeOXYzG35
+	6xHyNr7GfWYo1syLuxt5L7rd11OTRwxxfPBIGDYsRGJh4Xmv+2XM0eM0z+FlyShUGov7
+	7q4b1HrZUgC5CJH7ULfpOrXrFaPfoBkTAYkkUnqoD94Z4HRB3n/fAq7QocuXaZYRBwuN
+	Cdxj9rTzF90+oInH0fId5izDSdTw+Wr4R8KhiCQ/mFbnpFzzci2VoUxDULtL8OVJWztT
+	u9Kfr5zH2GmQykLeqOLgR4frLMRSNEwjTO+HQnugg1mIBVFoKt/Jd7+qVdwCwr+b3vZb
+	OIYA==
+X-Gm-Message-State: AE9vXwPA0HCXudVw9r5SlWuOYlSOyBisyO/Z9kLW8Wy6RZWhL38DnsVTDBSL9ZCiiNgYDg==
+X-Received: by 10.194.187.7 with SMTP id fo7mr15474668wjc.162.1472472797377;
+	Mon, 29 Aug 2016 05:13:17 -0700 (PDT)
+Received: from tfsielt31850.tycofs.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	qe2sm34136907wjc.28.2016.08.29.05.13.16
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 29 Aug 2016 05:13:16 -0700 (PDT)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 27 Aug 2016 15:32:24 +0200
-Message-Id: <1472304744-21421-1-git-send-email-max.krummenacher@toradex.com>
-X-Mailer: git-send-email 2.6.6
-Cc: Max Krummenacher <max.krummenacher@toradex.com>
-Subject: [meta-qt5][jethro][PATCH] qtbase: fix regression for missing libqt*.a libs
+Date: Mon, 29 Aug 2016 13:13:15 +0100
+Message-Id: <20160829121315.29491-1-git@andred.net>
+X-Mailer: git-send-email 2.9.3
+In-Reply-To: <20160826120926.18924-1-git@andred.net>
+References: <20160826120926.18924-1-git@andred.net>
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH v2] asio: fix musl compilation (strerror_r)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,40 +47,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Aug 2016 13:32:38 -0000
+X-List-Received-Date: Mon, 29 Aug 2016 12:13:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Deploy the following statically linked libraries:
-../build/lib/libqtfreetype.a  ../build/lib/libqtfreetype.prl
-../build/lib/libqtpcre.a  ../build/lib/libqtpcre.prl
+Cherry picked upstream commit
 
-Fixes build of qtwayland (which is required for meta-toolchain-qt5):
-| .../arm-angstrom-linux-gnueabi-ld.gold: error: cannot find -lqtfreetype
-regression introduced with d6aeedb7f27b8dd02fa7e6fa193ce9e2e969ecf6 which
-reverted the fix by Khem c44912563c4eadc288050f0b5e25981bc432d3f7
-
-Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+Signed-off-by: André Draszik <git@andred.net>
 ---
+ ...ly-handle-glibc-variant-of-strerror_r-wit.patch | 46 ++++++++++++++++++++++
+ meta-oe/recipes-support/asio/asio_1.10.6.bb        |  2 +
+ 2 files changed, 48 insertions(+)
+ create mode 100644 meta-oe/recipes-support/asio/asio/0001-Automatically-handle-glibc-variant-of-strerror_r-wit.patch
 
-Note that the qtbase version used in krogoth does deploy libqtfreetype.a
-in its regular 'make install'.
-
- recipes-qt/qt5/qtbase_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index 62c0ab5..7d1ab5e 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -232,7 +232,7 @@ do_install_append() {
-         cp -d ${S}/lib/fonts/* ${D}/${OE_QMAKE_PATH_QT_FONTS}
-         chown -R root:root ${D}/${OE_QMAKE_PATH_QT_FONTS}
-     fi
--    cp -d ${B}/lib/libQt* ${D}${libdir}
-+    cp -d ${B}/lib/libqt* ${D}${libdir}
-     # Remove example.pro file as it is useless
-     rm -f ${D}${OE_QMAKE_PATH_EXAMPLES}/examples.pro
+diff --git a/meta-oe/recipes-support/asio/asio/0001-Automatically-handle-glibc-variant-of-strerror_r-wit.patch b/meta-oe/recipes-support/asio/asio/0001-Automatically-handle-glibc-variant-of-strerror_r-wit.patch
+new file mode 100644
+index 0000000..4244b97
+--- /dev/null
++++ b/meta-oe/recipes-support/asio/asio/0001-Automatically-handle-glibc-variant-of-strerror_r-wit.patch
+@@ -0,0 +1,46 @@
++From 45c855400842fd40f200ae9b7abf9debf4ab5436 Mon Sep 17 00:00:00 2001
++From: Christopher Kohlhoff <chris@kohlhoff.com>
++Date: Sun, 28 Aug 2016 09:21:53 +1000
++Subject: [PATCH] Automatically handle glibc variant of strerror_r without
++ #ifdefs.
++
++---
++Upstream-Status: Backport https://github.com/chriskohlhoff/asio/commit/443bc17d13eb5e37de780ea6e23157493cf7b3b9
++ include/asio/impl/error_code.ipp | 16 +++++++---------
++ 1 file changed, 7 insertions(+), 9 deletions(-)
++
++diff --git a/include/asio/impl/error_code.ipp b/include/asio/impl/error_code.ipp
++index ccb70dd..a117658 100644
++--- a/include/asio/impl/error_code.ipp
+++++ b/include/asio/impl/error_code.ipp
++@@ -97,20 +97,18 @@ public:
++ #if defined(__sun) || defined(__QNX__) || defined(__SYMBIAN32__)
++     using namespace std;
++     return strerror(value);
++-#elif defined(__MACH__) && defined(__APPLE__) \
++-  || defined(__NetBSD__) || defined(__FreeBSD__) || defined(__OpenBSD__) \
++-  || defined(_AIX) || defined(__hpux) || defined(__osf__) \
++-  || defined(__ANDROID__)
++-    char buf[256] = "";
++-    using namespace std;
++-    strerror_r(value, buf, sizeof(buf));
++-    return buf;
++ #else
++     char buf[256] = "";
++-    return strerror_r(value, buf, sizeof(buf));
+++    using namespace std;
+++    return strerror_result(strerror_r(value, buf, sizeof(buf)), buf);
++ #endif
++ #endif // defined(ASIO_WINDOWS)
++   }
+++
+++private:
+++  // Helper function to adapt the result from glibc's variant of strerror_r.
+++  static const char* strerror_result(int, const char* s) { return s; }
+++  static const char* strerror_result(const char* s, const char*) { return s; }
++ };
++ 
++ } // namespace detail
++-- 
++2.9.3
++
+diff --git a/meta-oe/recipes-support/asio/asio_1.10.6.bb b/meta-oe/recipes-support/asio/asio_1.10.6.bb
+index db4ae80..d6f4ddd 100644
+--- a/meta-oe/recipes-support/asio/asio_1.10.6.bb
++++ b/meta-oe/recipes-support/asio/asio_1.10.6.bb
+@@ -4,3 +4,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fede5286a78559dd646e355ab0cc8f04"
  
+ SRC_URI[md5sum] = "85d014a356a6e004cd30ccd4c9b6a5c2"
+ SRC_URI[sha256sum] = "e0d71c40a7b1f6c1334008fb279e7361b32a063e020efd21e40d9d8ff037195e"
++
++SRC_URI += "file://0001-Automatically-handle-glibc-variant-of-strerror_r-wit.patch"
 -- 
-2.6.6
+2.9.3
 
 
