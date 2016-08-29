@@ -1,40 +1,46 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id C90906011C
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f41.google.com (mail-pa0-f41.google.com
+	[209.85.220.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 150A36014F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Aug 2016 12:13:17 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id q128so9280945wma.1
+	Mon, 29 Aug 2016 12:42:42 +0000 (UTC)
+Received: by mail-pa0-f41.google.com with SMTP id fi15so49427497pac.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Aug 2016 05:13:18 -0700 (PDT)
+	Mon, 29 Aug 2016 05:42:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=zYezwPoWHhJDYXcxM2v6Ju4g7+ggH3/Ix0AYwcdowvA=;
+	b=CfgOukG4o4ppb6opS8YvvLGFHzq0kRthGS/jil+mqCueDDeRKgherG62A26U3+gzHq
+	cvlxec45znVTHAICMez5H9ERhTpt3ChpGxmInpnrqIob1/khwxZMs9eR+Zzdb6sJXkCd
+	y7stTsVj4Fgd5dOYXy/O6GFZ9yvuL/rnl0bR2mF4sPsAZQAG6Iw4+40Xwy75ffMKOZzI
+	AsJvzasdtQ9nQiY/EVLovcLi+j5B39nSaWM86DYgUIgy65TjKz/xZID8N1HtkkttTPo0
+	QxJcTG2/3C4YItBBS53ufj9wPZ9+0TpqlWwAK4XayLwofosIGuacpD6EOCfvfAX5Ocyt
+	ViSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=o31Fph3sR+DUDtOHW1fw0FSL7F+iCBdGPVet505iJ3U=;
-	b=DV1FJncU/L4tmJDVG5ju+qGsQb6Xcm2381eUiq4BeVVsM2+MGp00Oo8/9HeOXYzG35
-	6xHyNr7GfWYo1syLuxt5L7rd11OTRwxxfPBIGDYsRGJh4Xmv+2XM0eM0z+FlyShUGov7
-	7q4b1HrZUgC5CJH7ULfpOrXrFaPfoBkTAYkkUnqoD94Z4HRB3n/fAq7QocuXaZYRBwuN
-	Cdxj9rTzF90+oInH0fId5izDSdTw+Wr4R8KhiCQ/mFbnpFzzci2VoUxDULtL8OVJWztT
-	u9Kfr5zH2GmQykLeqOLgR4frLMRSNEwjTO+HQnugg1mIBVFoKt/Jd7+qVdwCwr+b3vZb
-	OIYA==
-X-Gm-Message-State: AE9vXwPA0HCXudVw9r5SlWuOYlSOyBisyO/Z9kLW8Wy6RZWhL38DnsVTDBSL9ZCiiNgYDg==
-X-Received: by 10.194.187.7 with SMTP id fo7mr15474668wjc.162.1472472797377;
-	Mon, 29 Aug 2016 05:13:17 -0700 (PDT)
-Received: from tfsielt31850.tycofs.com ([77.107.218.170])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=zYezwPoWHhJDYXcxM2v6Ju4g7+ggH3/Ix0AYwcdowvA=;
+	b=aVkpXIS7PkFHKbWncshEq5Iy2g6OZXC/GedTJDSO0kS7Z0Dyy68pYfvUIK/etGbcmU
+	pcNVC3JBPlhCBsKeNVi73wp6f6XEeAdzIYdX4eEtxIEJsmle2nDBnL/W96b4h70yOsMD
+	TL5LWQ5sOuAicdjGzUVjKYVhCrMhjR9blUDEaVuYGWKARo1rXIauRDGcE9cUbZ8cmB9E
+	V2w7BsVFJy9XojYbQMdon6hbiPRzSrjk9hzxLtrJWEwyCxpy+JhbpdmvHHR6ICwgvDBL
+	0zQV+ZnFW34Rz+RkpVqOI7A2ZjFz5KgFIu+R67Dfj9y4l1SCa56NlFegMQA3fL77Ptau
+	6aJw==
+X-Gm-Message-State: AE9vXwMKqyRMfVEbn0esy3HEJ2XwfVQBrJgNkFKutV3uzoukA2PhPdE+HG/xDxstaUPS4A==
+X-Received: by 10.66.2.135 with SMTP id 7mr32228525pau.136.1472474563361;
+	Mon, 29 Aug 2016 05:42:43 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
 	by smtp.gmail.com with ESMTPSA id
-	qe2sm34136907wjc.28.2016.08.29.05.13.16
-	for <openembedded-devel@lists.openembedded.org>
+	s89sm49148716pfi.83.2016.08.29.05.42.42
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 29 Aug 2016 05:13:16 -0700 (PDT)
-From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+	Mon, 29 Aug 2016 05:42:42 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Aug 2016 13:13:15 +0100
-Message-Id: <20160829121315.29491-1-git@andred.net>
+Date: Mon, 29 Aug 2016 22:42:36 +1000
+Message-Id: <20160829124236.23594-1-net147@gmail.com>
 X-Mailer: git-send-email 2.9.3
-In-Reply-To: <20160826120926.18924-1-git@andred.net>
-References: <20160826120926.18924-1-git@andred.net>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2] asio: fix musl compilation (strerror_r)
+Subject: [meta-qt5][PATCH] qtdeclarative: add upstream patch to fix QtQml crash with GCC 6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,81 +53,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Aug 2016 12:13:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 29 Aug 2016 12:42:44 -0000
 
-Cherry picked upstream commit
-
-Signed-off-by: André Draszik <git@andred.net>
+Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- ...ly-handle-glibc-variant-of-strerror_r-wit.patch | 46 ++++++++++++++++++++++
- meta-oe/recipes-support/asio/asio_1.10.6.bb        |  2 +
- 2 files changed, 48 insertions(+)
- create mode 100644 meta-oe/recipes-support/asio/asio/0001-Automatically-handle-glibc-variant-of-strerror_r-wit.patch
+ ...crashes-in-QtQml-code-related-to-dead-sto.patch | 44 ++++++++++++++++++++++
+ recipes-qt/qt5/qtdeclarative_git.bb                |  1 +
+ 2 files changed, 45 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtdeclarative/0003-Workaround-crashes-in-QtQml-code-related-to-dead-sto.patch
 
-diff --git a/meta-oe/recipes-support/asio/asio/0001-Automatically-handle-glibc-variant-of-strerror_r-wit.patch b/meta-oe/recipes-support/asio/asio/0001-Automatically-handle-glibc-variant-of-strerror_r-wit.patch
+diff --git a/recipes-qt/qt5/qtdeclarative/0003-Workaround-crashes-in-QtQml-code-related-to-dead-sto.patch b/recipes-qt/qt5/qtdeclarative/0003-Workaround-crashes-in-QtQml-code-related-to-dead-sto.patch
 new file mode 100644
-index 0000000..4244b97
+index 0000000..d3ee42e
 --- /dev/null
-+++ b/meta-oe/recipes-support/asio/asio/0001-Automatically-handle-glibc-variant-of-strerror_r-wit.patch
-@@ -0,0 +1,46 @@
-+From 45c855400842fd40f200ae9b7abf9debf4ab5436 Mon Sep 17 00:00:00 2001
-+From: Christopher Kohlhoff <chris@kohlhoff.com>
-+Date: Sun, 28 Aug 2016 09:21:53 +1000
-+Subject: [PATCH] Automatically handle glibc variant of strerror_r without
-+ #ifdefs.
++++ b/recipes-qt/qt5/qtdeclarative/0003-Workaround-crashes-in-QtQml-code-related-to-dead-sto.patch
+@@ -0,0 +1,44 @@
++From fcc2c95421710f98c7b2dec73e2c8b0d9164bc9b Mon Sep 17 00:00:00 2001
++From: Jonathan Liu <net147@gmail.com>
++Date: Wed, 24 Aug 2016 11:18:37 +1000
++Subject: [PATCH] Workaround crashes in QtQml code related to dead-store
++ elimination
 +
++When compiled in release mode with GCC 6, QtQml may crash.
++This is because the C++ compiler is more aggressive about dead-store
++elimination in situations where a memory store to a location precedes
++the construction of an object at that memory location.
++
++The QV4::MemoryManager::allocate{Managed,Object} functions allocate
++memory and write to it before the caller does a placement new to
++construct an object in the same memory. The compiler considers these
++writes before the constructor as "dead stores" and eliminates them.
++
++The -fno-lifetime-dse compiler flag is added to disable this more
++aggressive dead-store eliminiation optimization.
++
++This is a temporary workaround until a proper solution is found.
++
++Upstream-Status: Accepted
++
++Task-number: QTBUG-55482
++Change-Id: I7dbae6e9e613e53ce5fb25957c449bc6657803b5
++Reviewed-by: Thiago Macieira <thiago.macieira@intel.com>
++Signed-off-by: Jonathan Liu <net147@gmail.com>
 +---
-+Upstream-Status: Backport https://github.com/chriskohlhoff/asio/commit/443bc17d13eb5e37de780ea6e23157493cf7b3b9
-+ include/asio/impl/error_code.ipp | 16 +++++++---------
-+ 1 file changed, 7 insertions(+), 9 deletions(-)
++ src/qml/qml.pro | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/include/asio/impl/error_code.ipp b/include/asio/impl/error_code.ipp
-+index ccb70dd..a117658 100644
-+--- a/include/asio/impl/error_code.ipp
-++++ b/include/asio/impl/error_code.ipp
-+@@ -97,20 +97,18 @@ public:
-+ #if defined(__sun) || defined(__QNX__) || defined(__SYMBIAN32__)
-+     using namespace std;
-+     return strerror(value);
-+-#elif defined(__MACH__) && defined(__APPLE__) \
-+-  || defined(__NetBSD__) || defined(__FreeBSD__) || defined(__OpenBSD__) \
-+-  || defined(_AIX) || defined(__hpux) || defined(__osf__) \
-+-  || defined(__ANDROID__)
-+-    char buf[256] = "";
-+-    using namespace std;
-+-    strerror_r(value, buf, sizeof(buf));
-+-    return buf;
-+ #else
-+     char buf[256] = "";
-+-    return strerror_r(value, buf, sizeof(buf));
-++    using namespace std;
-++    return strerror_result(strerror_r(value, buf, sizeof(buf)), buf);
-+ #endif
-+ #endif // defined(ASIO_WINDOWS)
-+   }
-++
-++private:
-++  // Helper function to adapt the result from glibc's variant of strerror_r.
-++  static const char* strerror_result(int, const char* s) { return s; }
-++  static const char* strerror_result(const char* s, const char*) { return s; }
-+ };
++diff --git a/src/qml/qml.pro b/src/qml/qml.pro
++index f4862a1..651afa6 100644
++--- a/src/qml/qml.pro
+++++ b/src/qml/qml.pro
++@@ -18,7 +18,7 @@ exists("qqml_enable_gcov") {
 + 
-+ } // namespace detail
-+-- 
-+2.9.3
-+
-diff --git a/meta-oe/recipes-support/asio/asio_1.10.6.bb b/meta-oe/recipes-support/asio/asio_1.10.6.bb
-index db4ae80..d6f4ddd 100644
---- a/meta-oe/recipes-support/asio/asio_1.10.6.bb
-+++ b/meta-oe/recipes-support/asio/asio_1.10.6.bb
-@@ -4,3 +4,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fede5286a78559dd646e355ab0cc8f04"
++ greaterThan(QT_GCC_MAJOR_VERSION, 5) {
++     # Our code is bad. Temporary workaround.
++-    QMAKE_CXXFLAGS += -fno-delete-null-pointer-checks
+++    QMAKE_CXXFLAGS += -fno-delete-null-pointer-checks -fno-lifetime-dse
++ }
++ 
++ QMAKE_DOCS = $$PWD/doc/qtqml.qdocconf
+diff --git a/recipes-qt/qt5/qtdeclarative_git.bb b/recipes-qt/qt5/qtdeclarative_git.bb
+index 4a690cb..5cc4caa 100644
+--- a/recipes-qt/qt5/qtdeclarative_git.bb
++++ b/recipes-qt/qt5/qtdeclarative_git.bb
+@@ -19,6 +19,7 @@ DEPENDS += "qtbase"
+ SRC_URI += " \
+     file://0001-qmltestexample-fix-link.patch \
+     file://0002-qquickviewcomparison-fix-QCoreApplication-has-not-be.patch \
++    file://0003-Workaround-crashes-in-QtQml-code-related-to-dead-sto.patch \
+ "
  
- SRC_URI[md5sum] = "85d014a356a6e004cd30ccd4c9b6a5c2"
- SRC_URI[sha256sum] = "e0d71c40a7b1f6c1334008fb279e7361b32a063e020efd21e40d9d8ff037195e"
-+
-+SRC_URI += "file://0001-Automatically-handle-glibc-variant-of-strerror_r-wit.patch"
+ EXTRA_OEMAKE += "QMAKE_SYNCQT=${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/syncqt"
 -- 
 2.9.3
 
