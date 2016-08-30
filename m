@@ -1,48 +1,26 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-lf0-f53.google.com (mail-lf0-f53.google.com
-	[209.85.215.53])
-	by mail.openembedded.org (Postfix) with ESMTP id B894E605B3
+Return-Path: <pascal.bach@siemens.com>
+Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
+	by mail.openembedded.org (Postfix) with ESMTP id 771A5605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2016 14:16:05 +0000 (UTC)
-Received: by mail-lf0-f53.google.com with SMTP id f93so14823946lfi.2
+	Tue, 30 Aug 2016 14:37:59 +0000 (UTC)
+Received: from mail2.sbs.de (mail2.sbs.de [192.129.41.66])
+	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id u7UEbrB0020050
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2016 07:16:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=bZWpw2A4z/g0LSVkqOyYp+rnlJpx1dObgLQjdmOuZ1s=;
-	b=S52Rb1M0LhzgyZT/KMWkmv7G5jkDPP3DE78Cx3pqKCETT7Zr37aXhkdtIOgxa6qLMH
-	+RMjxTOG4F3fNyWyARZwhEa91/QJNX2ugZzgAsjN95nUktM/LLHe0PQpSCAD3tsczq0f
-	VYMzMpT1UMJDrU7FzVKiv28Eh525yCHtxS0tPN9Bufo9T4n5c+C38sF7UyWbZQZ0Vjnl
-	5n1wiDBKJSQ0+5SRF4HZDp6QDj7JLqLP3KGQo1dkGJKc/j357sFelgGjgK4ctAddnrOB
-	kXR/hZ1wtILZMaYdj1Ptaue1CC3IntHioQIqzHJgUWrxzqvujOEwlqsQXiUvhAINJbf+
-	5YdA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=bZWpw2A4z/g0LSVkqOyYp+rnlJpx1dObgLQjdmOuZ1s=;
-	b=E0kgW0vXVdyNEcNfZhq32bCFgAsqOWHQWWXUlNZfQ/sy8dh3qP/OYHtEIxeLR9feZ2
-	lE5uscx0PK3I3kjw0h+2m0g4AHCGZviQlVUQ0sKK2p6bCHpoXpBSR4meG2hXDAiKNc8/
-	BF88z7pEXMLujWBwrmbABBuwGpWL7YDGqOFhkA12sxXgdwIHyRehJn3LPWlZy6z3cnGF
-	sB39Ahk5HaxW4RG4og0IKQirgubF5/EqbI3XUe4l5EBEh2AtpgF3gfYLQf7fO14qIbbE
-	StNQzbvAcvNOdbJ/Zld1TD/9ODitnpiiulYSTzXMwV1Ixf+4o3HG+5bpiGqKx+GzodrO
-	A/Ew==
-X-Gm-Message-State: AE9vXwNE/uqOFjKTWN6ryPjkvwDl4d0kCHXODG7IQiJmT0coucy04W4NCcpOqO/9AoMNdp8g7lmm7H341WLyDg==
-X-Received: by 10.46.9.9 with SMTP id 9mr1137267ljj.3.1472566564917; Tue, 30
-	Aug 2016 07:16:04 -0700 (PDT)
+	Tue, 30 Aug 2016 16:37:54 +0200
+Received: from [139.16.79.116] (MD1FZU9C.ww002.siemens.net [139.16.79.116])
+	by mail2.sbs.de (8.15.2/8.15.2) with ESMTPS id u7UEbrwn009070
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Aug 2016 16:37:53 +0200
+To: openembedded-devel@lists.openembedded.org
+From: Pascal Bach <pascal.bach@siemens.com>
+Message-ID: <9cb3a54e-58ef-9433-06d9-514238fb9443@siemens.com>
+Date: Tue, 30 Aug 2016 16:37:53 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
+	Thunderbird/45.2.0
 MIME-Version: 1.0
-Received: by 10.25.87.12 with HTTP; Tue, 30 Aug 2016 07:16:04 -0700 (PDT)
-In-Reply-To: <22beaaca-b392-3971-3125-1f579b79e186@windriver.com>
-References: <1472063392-11490-1-git-send-email-raj.khem@gmail.com>
-	<e6c87ae1-ca1d-895c-adb3-6c2b75abaaa9@embed.me.uk>
-	<CAMKF1spmR94=-VGMJD0LGTLASWeOyq-wt-KM4p0Ut-vowzYcDA@mail.gmail.com>
-	<22beaaca-b392-3971-3125-1f579b79e186@windriver.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 30 Aug 2016 16:16:04 +0200
-Message-ID: <CA+chaQfqE23N-s3HZ+W=qKSL2KJV+19+BY_wjSCWi7wL287WuA@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] imagemagick: Upgrade 7.0.3 release to patch level 9
+Subject: [meta-java] Unify virtual java providers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,53 +33,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2016 14:16:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 30 Aug 2016 14:38:01 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-It doesn't destroy the history, but regenerates the tarball from time to
-time with different checksum, so it sucks as well.
+Hello
 
-On Tue, Aug 30, 2016 at 4:12 PM, Randy MacLeod <randy.macleod@windriver.com>
-wrote:
 
-> On 2016-08-25 08:51 AM, Khem Raj wrote:
->
->> On Aug 25, 2016 2:04 AM, "Jack Mitchell" <ml@embed.me.uk> wrote:
->>
->>>
->>> On 24/08/16 19:29, Khem Raj wrote:
->>>
->>>>
->>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>>> ---
->>>>   meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb | 6 +++---
->>>>   1 file changed, 3 insertions(+), 3 deletions(-)
->>>>
->>>
->>>
->>> 7.0.3?
->>>
->>
->> Its a typo thanks
->>
->
-> patchlevel 9 is gone, replaced by 10! Whee!
->
-> I've asked about keeping a few patchlevel tarballs around:
->
-> https://www.imagemagick.org/discourse-server/viewtopic.php?
-> f=1&t=26962&p=137186#p137176
->
-> If the maintainers don't want to do that could we use
-> the github mirror since it doesn't destroy history...
->
-> ../Randy
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Because I'm experimenting with different java providers (OpenJDK, Oracle Java, Azul Zulu) and thus had a look at different java layers (meta-java, meta-oracle-java).
+
+I noticed that there are many different PROVIDES statements among these recipes, but nothing seems consistent.
+
+My proposal is thus to introduce a consistent naming for these provides so that recipes that depend on java can be written in a JRE/JDK independent way.
+The naming would be the following:
+
+- virtual/java => recipes providing a java runtime for the target (used in meta-oracle-java, replaces: java2-runtime, java2-vm)
+- virtual/java-native => provide a native java runtime (exists already)
+- virtual/javac => provide a jdk for the target (new, nothing like this exists, might never be used but should be defined)
+- virtual/javac-native => provide a jdk for native (exists already)
+
+It should be properly documented in the readme and the virtual packages should be the preferred way for users to depend on java/jre resp javac/jdk
+
+An alternative to the above would be:
+
+- virtual/jre
+- virtual/jre-native
+- virtual/jdk
+- virtual/jdk-native
+
+But this would deviate more from the current naming.
+
+Any feedback on this proposal?
+
+Pascal
+
 
