@@ -1,45 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 11013601D3
+Return-Path: <kergoth@gmail.com>
+Received: from mail-oi0-f49.google.com (mail-oi0-f49.google.com
+	[209.85.218.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 1E594601B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Aug 2016 20:52:53 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id i138so351484wmf.3
+	Tue, 30 Aug 2016 01:02:53 +0000 (UTC)
+Received: by mail-oi0-f49.google.com with SMTP id l203so6270832oib.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Aug 2016 13:52:54 -0700 (PDT)
+	Mon, 29 Aug 2016 18:02:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=2aJxYqcB7rZUcO+/Zx6wHbZ9nQndO6otjXGq5x6MqiA=;
-	b=iqQZrAkbyJWvDpyGGcWu24VoYJNnDAOdvVXIk/EJizca4kcpBQZC1MtWP+2g/7J7dd
-	jzH3itpG5dyEI7/+NQrk9oGRijbcYOWNf/Hjb7C2dGl/wRF9RchR9vofhkHB8Wq4shdE
-	sGkpXEbzR9K3LKRSAE8bDxVQV5nzEZt5cTggg4OkjPi05czO/3wKhPk66NQ/QPc9ShwT
-	NxbRz7nNtfMyg9PmydN4qEPNdfufzHPKZrRmgYjwMrcYH2ntsat6HPHiAuKrsSp5dYir
-	yQO4yp0WxR7J2zDw6ENXMZ2/Ebg7/+BrAEOuwivgfbjNOxlyeqVwGsRsnmm+lx4nWNRp
-	0Ikg==
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to; bh=BHji/WndoeWg4QKnwaxA7ysFmzJ3HcBAqtCY0LvIftg=;
+	b=foyqOQfxO+njKmAf/XateJfJoNupINHvh250Xmb9IG5bNyPF9mI4OKXvjQkaXK8QYc
+	XnmdXuZAhVCzugk5pYBoUZxfVsRBrIF1gHjaiVbbGQivml+icBdHYsbMNNuEzyc/JHKC
+	rh8WYzKT5aiSgcb5yL7DXA4oPkAXfRpgkoLDyNKLqTLSx5GzDJ9T+jZIBfF766j6D8Ei
+	ec/9slNeeL2IeWkWyl/2stk4wXYRK6OamE9/jRokZB5/ropxhnOVR9gxN5AsWNhRaSDG
+	CpJInWmrDVrwpLqhZlxiKkNyVnyuFdT7pDb+tzu9+T44tObtroH4GLQgEM95j41Z1VPZ
+	LGJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=2aJxYqcB7rZUcO+/Zx6wHbZ9nQndO6otjXGq5x6MqiA=;
-	b=bP3V6CQ6MUWyq2mrAsJHr2TCDd09dystl3CSI/H72vXXlvk7U0ZjQC9auXK7tMeiUC
-	pd7QZPgBsnlLwASwD13IaOtqZYBnIlXOHonXC2AQpiiwetAJTNsV4X1JVLPSs3A1NL7w
-	+lZnK1PQdl4ypeZ08lhTVV44/6RqXh0Voa+IZ8z+spwQRI9uAUN3fJCwv2hhHSvfJ7hT
-	HO1EPiZWUbM7090MlxYNCuH4SQ2y0KZ2GZ94wUQnCAfGJIELwrgV+EEFcYK4VX94Jl5Z
-	A5cdclhbTUyVIi9zqejODq0wVoLhIC+9NagvI2LDcG7OOp91JCbLmqfca8IIS0w32K4W
-	1XaA==
-X-Gm-Message-State: AE9vXwP9/Arl6e6fQ6TdsPc9+qiyN3K71BxYskP51Ur8Lwt7I9Y4N/oOhzKxcyCYgRPtug==
-X-Received: by 10.194.123.35 with SMTP id lx3mr18790792wjb.126.1472503974080; 
-	Mon, 29 Aug 2016 13:52:54 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	a2sm36069307wjg.46.2016.08.29.13.52.52
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 29 Aug 2016 13:52:52 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Aug 2016 22:52:53 +0200
-Message-Id: <20160829205253.17988-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.9.2
-Subject: [meta-oe][PATCH] geany-plugins: include GPLv3 in the main LICENSE
+	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
+	:date:message-id:subject:to;
+	bh=BHji/WndoeWg4QKnwaxA7ysFmzJ3HcBAqtCY0LvIftg=;
+	b=M89qu5DL4KleioVykcOw1wef1AG8HZzXwAIfcE03+8CSVjBDWEFInNZQM1smcJYJgk
+	EApQjMnyUGa72/Xlx4pDK2lK2EBH9FZlgOt0iidfAkY9J3OIEgtaq61FuZEDXgFNJHAE
+	SKQePmZghiaUWsRnolUntSNopm9zjxYCfxSx6g/OsXuUcujcV7oFjk85fU2TpXJIAX01
+	VKOpnAzytqe5/su/KJS+JVHSk2YzykXlIjqVLcFyA08CX4HnMmipxSZ8tlf+4uKEYK06
+	iiPXTNw0RujJwNCAz16CFWwzvMzxQaktnlL/tmS8BSuT3cr0QFM3AtMP3m6+L1ZuLeId
+	I+XA==
+X-Gm-Message-State: AE9vXwO6qXEnSKcEhKVKHsVcaO2Ly3Nws+85tBZqc8UDUPOAJu5vjVRcqIL9lZkCMXJa5TRhRgyhLnSB1LDwTQ==
+X-Received: by 10.202.84.195 with SMTP id i186mr871236oib.200.1472518974153;
+	Mon, 29 Aug 2016 18:02:54 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.157.44.7 with HTTP; Mon, 29 Aug 2016 18:02:33 -0700 (PDT)
+In-Reply-To: <20160829205253.17988-1-Martin.Jansa@gmail.com>
+References: <20160829205253.17988-1-Martin.Jansa@gmail.com>
+From: Christopher Larson <clarson@kergoth.com>
+Date: Mon, 29 Aug 2016 18:02:33 -0700
+X-Google-Sender-Auth: 0uDH0XX2erZRWkfBkp20OMn0MEY
+Message-ID: <CABcZAN=MKN8uaXcCecR9f7Rv2NAXzFutN3q9qsTKkOnjzjAQHQ@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH] geany-plugins: include GPLv3 in the main LICENSE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,35 +54,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Aug 2016 20:52:54 -0000
+X-List-Received-Date: Tue, 30 Aug 2016 01:02:54 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* since last changes in oe-core LICENSE variable needs to list all licenses used
-  by individual packages otherwise bitbake warning like this is shown:
-  WARNING: meta-openembedded/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb: LICENSE_geany-plugins-commander includes licenses (GPLv3) that are not listed in LICENSE
-  as possible improvement you can set LICENSE to GPLv2 to all plugins
-  which are GPLv2-only, because now they will "inherit" both GPLv2 &
-  GPLv3 which sucks as described here:
-  https://www.mail-archive.com/openembedded-core@lists.openembedded.org/msg81645.html
+On Mon, Aug 29, 2016 at 1:52 PM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> * since last changes in oe-core LICENSE variable needs to list all
+> licenses used
+>   by individual packages otherwise bitbake warning like this is shown:
+>   WARNING: meta-openembedded/meta-oe/recipes-devtools/geany/geany-
+> plugins_1.27.bb: LICENSE_geany-plugins-commander includes licenses
+> (GPLv3) that are not listed in LICENSE
+>   as possible improvement you can set LICENSE to GPLv2 to all plugins
+>   which are GPLv2-only, because now they will "inherit" both GPLv2 &
+>   GPLv3 which sucks as described here:
+>   https://www.mail-archive.com/openembedded-core@lists.
+> openembedded.org/msg81645.html
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>
 
-diff --git a/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb b/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
-index 9a39150..5e1e721 100644
---- a/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
-+++ b/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "A fast and lightweight IDE"
- HOMEPAGE = "http://plugins.geany.org/"
- # majority's default
--LICENSE = "GPLv2"
-+LICENSE = "GPLv2 & GPLv3"
- 
- DEPENDS = "geany lua libxml2 libsoup-2.4 vte enchant intltool-native libassuan gpgme"
- 
+Would be nice if we had a general way to change the inherited LICENSE as
+used by the binary packages. Adding a single indirection to package.bbclass
+to default to LICENSE_DEFAULT rather than LICENSE and defaulting
+LICENSE_DEFAULT to LICENSE would do (or similar), then this recipe could
+set LICENSE_DEFAULT to GPLv2.
+
+In the meantime..
+
+We have a bbappend in meta-mentor for this on a branch which handles it for
+this recipe reasonably, I think:
+https://github.com/MentorEmbedded/meta-mentor/pull/843/commits/d852857
 -- 
-2.9.2
-
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
