@@ -1,42 +1,58 @@
-Return-Path: <rtartler.desres@gmail.com>
-Received: from mail-it0-f41.google.com (mail-it0-f41.google.com
-	[209.85.214.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 8BF4D6E630
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-ua0-f179.google.com (mail-ua0-f179.google.com
+	[209.85.217.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 7045C60762
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2016 15:31:27 +0000 (UTC)
-Received: by mail-it0-f41.google.com with SMTP id n75so43976395ith.0
+	Tue, 30 Aug 2016 17:09:28 +0000 (UTC)
+Received: by mail-ua0-f179.google.com with SMTP id i32so44052654uai.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2016 08:31:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=pb+pM6cUhz36WriymPc9/YUvC5Xn4HalZFrStx/5144=;
-	b=oRb4SjdoIhYKY8KR1BP5PbFzLgQKJodMJ4ZQPDdcvVzkMToXzv29ls8mQ5cmnFYYLa
-	9Nrrxk2eiElGLcTQfasbZYPj7l11Jpm1gD7E63goQgH3503NRO68Itl+X+4rCsgkd/92
-	ctxRkK63/YC5xesX7l/HMCGxm7M0uN8w3B7kSJCq3omep2Z7lXIMXCYbEVX0IZARf5pV
-	UwzLo82eE3w501GpYSjhA2TeATiMtQBC1baGBb+FUfnL53/zJ8P55eYtfSkorUgo53HB
-	5ixf7H0nRhiAZJq8NnKLMS54EEYYp1bsiCFHan0hkpIb9ryVAlZh60PiC+ZjVb7MCoML
-	ztEw==
+	Tue, 30 Aug 2016 10:09:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to; 
+	bh=6erjXnwrhFZSl/PYk5cocJeBMVETwVRA/OccolSqR/s=;
+	b=pb0FKFjbnGI5yPAfdjiEyq/YIQcUD7Q0Wlk0oEdqvjvFtlaZuDctEItuWaBItCELJh
+	Ou7OArH75kLX7XvGgLEiPj1sJBmi2hoVa+pKGytupvmOyzn4paGlv0B7c83bxNt8iFvo
+	D3TqItYB/+F7aeWmhivotkcDHKbhQBWVoDyTO64msJYfTafqgSgJlG4Kt/tocMXANGe5
+	Fv/oeSl6rLJ3DAjN2yy0aWGfPI5GZMuHMSq8RrCL8ahO7q3eCJC511rW+KQCcU2poDtE
+	Giw83skQIYxZz6asHfCRFYYnVitFcymomCL7+ntgPfvIXRrRkMjGbjuwuE85Un/4POsz
+	Ilug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=pb+pM6cUhz36WriymPc9/YUvC5Xn4HalZFrStx/5144=;
-	b=G5FIewXGtQnLTOzQRxbcxk6npIrvRWy3AIJr2lzc6CrYRVMWgXsTeu8sK52yxgEM2o
-	5p5876+qH2yaz2ZACGCtmTlku4HJSuqFaKK+cJHA9tlDB4IYEyKTmiApRvEvzpHT7qhd
-	AvgczmaUjnhAXpaxfTKQbGx3vSCDsDA8rkBQovY+jpNoBrN6j7rHLsTFg5gHZmqUKObU
-	5Vir07qoYhdtxD/SgXXSGs2D+rxC7GTVG9Q9/YBMM/YaIFMBgajdc4pOmWpNZkTgMvrM
-	e3kxAsICK7g/eDBnRUUHrfillY0MQWHEf2RVMJljFF9ryuOlL74cxIQMQLr42CEKMVSM
-	WKow==
-X-Gm-Message-State: AE9vXwNMl523R4egQkPZyMTeTGZ+KKn2hxmxZhatkGvPQfS13NWVbX9/X0RrYN6bwhYho8+6IjEsuJeIVUq5/w==
-X-Received: by 10.36.219.65 with SMTP id c62mr23491309itg.44.1472571087008;
-	Tue, 30 Aug 2016 08:31:27 -0700 (PDT)
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to;
+	bh=6erjXnwrhFZSl/PYk5cocJeBMVETwVRA/OccolSqR/s=;
+	b=UFgLo5kiO4QWh7nqkYAO2yxVpQxP9vDiYI1N8um7tBf8O8LcXq1dxE6mc7Oh2apUNE
+	Zl1BoiQASZxxlFhpSFOe/BwEmNoRElsH/ZgHkSGL6SZs1aLvKq48CeVwC3CjLWem1mIA
+	Drjmy7y+NnPUyv3QVclOh7dTa3TDnRf70CQA+HOtShpjqDmxsfME3AwhEGRZenaRWlXn
+	20/ACAKNk4b8JMb+o7w2XqFa/frwjTGDf9A5t8wXnehi00AXaFw/1J1mAI21ncQ72N2k
+	NU2RLmesrTNPJdNyfZhwPlFccCtU4MYFPprWkxGGbUWXDSPmfOGEk1kkooV+DgHWaOvA
+	k/6Q==
+X-Gm-Message-State: AE9vXwMvcrLVSLKeEquzeKakAYlUze5IHV2gSi+os6LXSovMTOa60IiT3D92dslTED9wcg==
+X-Received: by 10.31.87.194 with SMTP id l185mr2875442vkb.32.1472576968374;
+	Tue, 30 Aug 2016 10:09:28 -0700 (PDT)
+Received: from mail-ua0-f177.google.com (mail-ua0-f177.google.com.
+	[209.85.217.177])
+	by smtp.gmail.com with ESMTPSA id 2sm8457193uay.14.2016.08.30.10.09.27
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 30 Aug 2016 10:09:27 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-ua0-f177.google.com with SMTP id k90so44189540uak.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Aug 2016 10:09:27 -0700 (PDT)
+X-Received: by 10.31.138.74 with SMTP id m71mr2778936vkd.4.1472576966773; Tue,
+	30 Aug 2016 10:09:26 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.36.254.202 with HTTP; Tue, 30 Aug 2016 08:31:26 -0700 (PDT)
-From: Reinhard Tartler <rtartler.desres@gmail.com>
-Date: Tue, 30 Aug 2016 11:31:26 -0400
-Message-ID: <CADNFeU6vcmB1LzunSQ10Ka1ahxLj9rG3hu5hmERCKs9wb=V-zQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [PATCH] package_manager.py: Restore FEED_DEPLOYDIR_BASE_URI functionality
+Received: by 10.31.154.68 with HTTP; Tue, 30 Aug 2016 10:09:26 -0700 (PDT)
+In-Reply-To: <9cb3a54e-58ef-9433-06d9-514238fb9443@siemens.com>
+References: <9cb3a54e-58ef-9433-06d9-514238fb9443@siemens.com>
+Date: Tue, 30 Aug 2016 14:09:26 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKoN2+tduK2qzYG5Mvj1fyZohL2mh0tLbULJD247Gs4rBA@mail.gmail.com>
+Message-ID: <CAP9ODKoN2+tduK2qzYG5Mvj1fyZohL2mh0tLbULJD247Gs4rBA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java] Unify virtual java providers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,130 +65,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2016 15:31:28 -0000
+X-List-Received-Date: Tue, 30 Aug 2016 17:09:29 -0000
 Content-Type: text/plain; charset=UTF-8
 
-According to the documentation, setting FEED_DEPLOYDIR_BASE_URI should
-be sufficient for setting up local feeds. This commit fixes the
-implementation to actually do that, even if BUILD_IMAGES_FROM_FEEDS is
-not set.
+On Tue, Aug 30, 2016 at 11:37 AM, Pascal Bach <pascal.bach@siemens.com> wrote:
+> Hello
+>
+>
+> Because I'm experimenting with different java providers (OpenJDK, Oracle Java, Azul Zulu) and thus had a look at different java layers (meta-java, meta-oracle-java).
+>
+> I noticed that there are many different PROVIDES statements among these recipes, but nothing seems consistent.
+>
+> My proposal is thus to introduce a consistent naming for these provides so that recipes that depend on java can be written in a JRE/JDK independent way.
+> The naming would be the following:
+>
+> - virtual/java => recipes providing a java runtime for the target (used in meta-oracle-java, replaces: java2-runtime, java2-vm)
+> - virtual/java-native => provide a native java runtime (exists already)
+> - virtual/javac => provide a jdk for the target (new, nothing like this exists, might never be used but should be defined)
+> - virtual/javac-native => provide a jdk for native (exists already)
+>
+> It should be properly documented in the readme and the virtual packages should be the preferred way for users to depend on java/jre resp javac/jdk
+>
+> An alternative to the above would be:
+>
+> - virtual/jre
+> - virtual/jre-native
+> - virtual/jdk
+> - virtual/jdk-native
+>
+> But this would deviate more from the current naming.
+>
+> Any feedback on this proposal?
 
-Also fix some bugs in the old implementation:
- - Fetch uncompressed Packages files, because
-   'bitbake package-index' does not appear to create Packages.gz files.
- - Add missing newline after the URI so that the options don't end up on
-   the same line.
- - Fix the check when local options are necessary.
+I prefer jre and jdk alternative; let's wait for others to comment.
 
-Signed-off-by: Reinhard Tartler <tartler@deshaw.com>
----
- meta/lib/oe/package_manager.py | 59 +++++++++++++++++++++++-------
-------------
- 1 file changed, 32 insertions(+), 27 deletions(-)
-diff --git a/meta/lib/oe/package_manager.py b/meta/lib/oe/package_manager.py
-index 2802254..e92bbbd 100644
---- a/meta/lib/oe/package_manager.py
-+++ b/meta/lib/oe/package_manager.py
-@@ -1649,33 +1649,36 @@ class OpkgPM(OpkgDpkgPM):
 
-                     config_file.write("src/gz %s %s\n" % (feed_name,
-feed_uri))
-
--            """
--            Allow to use package deploy directory contents as quick
-devel-testing
--            feed. This creates individual feed configs for each arch
-subdir of those
--            specified as compatible for the current machine.
--            NOTE: Development-helper feature, NOT a full-fledged feed.
--            """
--            if (self.d.getVar('FEED_DEPLOYDIR_BASE_URI', True) or "") !=
-"":
--                for arch in self.pkg_archs.split():
--                    cfg_file_name = os.path.join(self.target_rootfs,
--
-self.d.getVar("sysconfdir", True),
--                                                 "opkg",
--                                                 "local-%s-feed.conf" %
-arch)
--
--                    with open(cfg_file_name, "w+") as cfg_file:
--                        cfg_file.write("src/gz local-%s %s/%s" %
--                                       (arch,
--
-self.d.getVar('FEED_DEPLOYDIR_BASE_URI',
-True),
--                                        arch))
--
--                        if self.opkg_dir != '/var/lib/opkg':
--                            # There is no command line option for this
-anymore, we need to add
--                            # info_dir and status_file to config file, if
-OPKGLIBDIR doesn't have
--                            # the default value of "/var/lib" as defined
-in opkg:
--                            # libopkg/opkg_conf.h:#define
-OPKG_CONF_DEFAULT_INFO_DIR      "/var/lib/opkg/info"
--                            # libopkg/opkg_conf.h:#define
-OPKG_CONF_DEFAULT_STATUS_FILE   "/var/lib/opkg/status"
--                            cfg_file.write("option info_dir     %s\n" %
-os.path.join(self.d.getVar('OPKGLIBDIR', True), 'opkg', 'info'))
--                            cfg_file.write("option status_file  %s\n" %
-os.path.join(self.d.getVar('OPKGLIBDIR', True), 'opkg', 'status'))
-+        self._setup_devel_feeds()
-+
-+    def _setup_devel_feeds(self):
-+        """
-+        Allow to use package deploy directory contents as quick
-devel-testing
-+        feed. This creates individual feed configs for each arch subdir of
-those
-+        specified as compatible for the current machine.
-+        NOTE: Development-helper feature, NOT a full-fledged feed.
-+        """
-+
-+        if (self.d.getVar('FEED_DEPLOYDIR_BASE_URI', True) or "") != "":
-+            for arch in self.pkg_archs.split():
-+                cfg_file_name = os.path.join(self.target_rootfs +
-self.d.getVar("sysconfdir", True),
-+                                       "opkg", "local-%s-feed.conf" % arch)
-+
-+                bb.utils.mkdirhier(os.path.dirname(cfg_file_name))
-+                with open(cfg_file_name, "w+") as cfg_file:
-+                    cfg_file.write("src local-%s %s/%s\n" %
-+                                   (arch,
-+                                    self.d.getVar('FEED_DEPLOYDIR_BASE_URI',
-True),
-+                                    arch))
-+
-+                    if self.opkg_dir != self.target_rootfs +
-'/var/lib/opkg':
-+                        # There is no command line option for this
-anymore, we need to add
-+                        # info_dir and status_file to config file, if
-OPKGLIBDIR doesn't have
-+                        # the default value of "/var/lib" as defined in
-opkg:
-+                        # libopkg/opkg_conf.h:#define
-OPKG_CONF_DEFAULT_INFO_DIR      "/var/lib/opkg/info"
-+                        # libopkg/opkg_conf.h:#define
-OPKG_CONF_DEFAULT_STATUS_FILE   "/var/lib/opkg/status"
-+                        cfg_file.write("option info_dir     %s\n" %
-os.path.join(self.d.getVar('OPKGLIBDIR', True), 'opkg', 'info'))
-+                        cfg_file.write("option status_file  %s\n" %
-os.path.join(self.d.getVar('OPKGLIBDIR', True), 'opkg', 'status'))
-      def _create_config(self):
-@@ -1702,6 +1705,8 @@ class OpkgPM(OpkgDpkgPM):
-                 config_file.write("option info_dir     %s\n" %
-os.path.join(self.d.getVar('OPKGLIBDIR', True), 'opkg', 'info'))
-                 config_file.write("option status_file  %s\n" %
-os.path.join(self.d.getVar('OPKGLIBDIR', True), 'opkg', 'status'))
-
-+        self._setup_devel_feeds()
-+
-     def insert_feeds_uris(self):
-         if self.feed_uris == "":
-             return
 -- 
-2.7.1
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
