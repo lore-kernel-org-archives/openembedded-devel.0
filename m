@@ -1,46 +1,20 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-lf0-f49.google.com (mail-lf0-f49.google.com
-	[209.85.215.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 5022460107
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2016 08:28:43 +0000 (UTC)
-Received: by mail-lf0-f49.google.com with SMTP id l89so8171033lfi.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Aug 2016 01:28:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=TaVnKEw+mZHvQ+V0P6Cs3b1p/qgQRk83FaFZqV7Ukas=;
-	b=cs7O+yaowtqZeYO1Eu1Q3J8eWEPhSa9h15YCgZmxziTLVcgIP9A2Qd4+6DAqre/D2B
-	VLMlCNaFUXNYEwIFMWvvAEYt2a7sj9sMTdJaWhZBXqvCUo1/N1q/CE23IhM4w+qpTb3N
-	bJVb6LNGF0sOhDbx+gdxlYn9b0gHfpm+kOEZMahNyTnehBFL46X/T5b0+EBfhlO7ryKH
-	rf/Cjv4LetjvGadqzN7LW6RmqNGwNCJaldSulOTN3WnwSKRXphIlkhlyo3XRsiTHFB05
-	VC8YUdBvzHlYfwR2Cpy+c4nBFiWoXz4XLzWjELelWdr6DX1APtsgBHN72zu8OShlZ11+
-	PQcw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=TaVnKEw+mZHvQ+V0P6Cs3b1p/qgQRk83FaFZqV7Ukas=;
-	b=lSbv/YF5OmyzcTgPvYd5rn96kcVqHiwivuy+IYZh//V76OwU75X1zgvFwPFXfPwWER
-	55t+cZZ+20UMPVp+SH1kvFNHkzKsnwgaifIb/5B0u55HMlV4/ecjqRA2kwTTYhRovJmk
-	7f3k4g3TnzP5lDQJKWqtuUO+QOHc33Ijfx6GUUlXIaBmamFAJh2LhPSZP3ZpYkbnBaJz
-	RnKJc/KdR1wZCuDssaoYfEsnWuDNwwmwD0dcxv8Hrv6s8K6y4i9vEW2M80ekCRXBNEXM
-	PzcjTmaYHAq7NZI4v8ocQfjsmjKnHWbYeCQk/PBFMJm6bST6/YW7fb1+szDPVYZPmrin
-	Avfw==
-X-Gm-Message-State: AE9vXwNTJ2cZWMJkySSKdoyOXuMF0IvOUlqLzUMtNWYD1oK5yMWSBwd5JRiSv9ZKhydZRKHlWXfd704sp9pPNg==
-X-Received: by 10.25.1.213 with SMTP id 204mr704759lfb.114.1472545723073; Tue,
-	30 Aug 2016 01:28:43 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.25.87.12 with HTTP; Tue, 30 Aug 2016 01:28:42 -0700 (PDT)
-In-Reply-To: <CALbNGRQ=PeJhSCj7uGd2Lgkx6MPZ8numfrLezWxH12x_1fSkOQ@mail.gmail.com>
-References: <20160829205253.17988-1-Martin.Jansa@gmail.com>
-	<CALbNGRQ=PeJhSCj7uGd2Lgkx6MPZ8numfrLezWxH12x_1fSkOQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 30 Aug 2016 10:28:42 +0200
-Message-ID: <CA+chaQfp56r5TtypUDh3Kxhi6r3_BeV9WXqpeU1Y1dJb6QR9+g@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] geany-plugins: include GPLv3 in the main LICENSE
+Return-Path: <jussi.kukkonen@intel.com>
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+	by mail.openembedded.org (Postfix) with ESMTP id A513460107;
+	Tue, 30 Aug 2016 08:31:59 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by fmsmga105.fm.intel.com with ESMTP; 30 Aug 2016 01:32:00 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.30,255,1470726000"; d="scan'208";a="754969490"
+Received: from theory.fi.intel.com ([10.237.72.196])
+	by FMSMGA003.fm.intel.com with ESMTP; 30 Aug 2016 01:31:59 -0700
+From: Jussi Kukkonen <jussi.kukkonen@intel.com>
+To: openembedded-core@lists.openembedded.org
+Date: Tue, 30 Aug 2016 11:31:55 +0300
+Message-Id: <cover.1472467394.git.jussi.kukkonen@intel.com>
+X-Mailer: git-send-email 2.1.4
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 0/3] Clean up X init (oe-core vs meta-oe)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,64 +27,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Aug 2016 08:28:46 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 30 Aug 2016 08:32:00 -0000
 
-The warning is right in what it says.
+Goals:
+* Less confusing duplication between oe-core and meta-oe
+  (currently just adding meta-oe to BBLAYERS completely
+  changes X init because meta-oe provides another version of
+  xserver-nodm-init)
+* Make it easier to keep X init in sync between systemd and sysvinit
 
-The LICENSE variable now needs to contain all LICENSEs used in the recipe
-(all packages), see discussion on oe-core ML.
+The xserver-nodm-init patch merges in functionality from
+xserver-nodm-init-2.0 from meta-oe: The combined "Xserver" script
+deprecates the ones in x11-common (oe-core) and xserver-common
+(meta-oe), and should work with other parts of either x11-common
+or xserver-common. In particular these differences still exist:
+ * Xsession files are different
+ * xserver-common generates X binary name and arguments at runtime
 
-On Tue, Aug 30, 2016 at 10:24 AM, Andreas M=C3=BCller <
-schnitzeltony@googlemail.com> wrote:
+I believe the xserver-nodm-init-2.0 recipe can be removed after this
+patch with one caveat: The people who assume they will get
+xserver-common (meta-oe) without explicitly asking for it will be
+surprised. The x11 packagegroup has "VIRTUAL-RUNTIME_xserver_common"
+selection which will work but it does not seem to be commonly used.
 
-> On Mon, Aug 29, 2016 at 10:52 PM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
-> > * since last changes in oe-core LICENSE variable needs to list all
-> licenses used
-> >   by individual packages otherwise bitbake warning like this is shown:
-> >   WARNING: meta-openembedded/meta-oe/recipes-devtools/geany/geany-
-> plugins_1.27.bb: LICENSE_geany-plugins-commander includes licenses
-> (GPLv3) that are not listed in LICENSE
-> >   as possible improvement you can set LICENSE to GPLv2 to all plugins
-> >   which are GPLv2-only, because now they will "inherit" both GPLv2 &
-> >   GPLv3 which sucks as described here:
-> >   https://www.mail-archive.com/openembedded-core@lists.
-> openembedded.org/msg81645.html
-> >
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> >  meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
-> b/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
-> > index 9a39150..5e1e721 100644
-> > --- a/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
-> > +++ b/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
-> > @@ -1,7 +1,7 @@
-> >  DESCRIPTION =3D "A fast and lightweight IDE"
-> >  HOMEPAGE =3D "http://plugins.geany.org/"
-> >  # majority's default
-> > -LICENSE =3D "GPLv2"
-> > +LICENSE =3D "GPLv2 & GPLv3"
-> >
-> >  DEPENDS =3D "geany lua libxml2 libsoup-2.4 vte enchant intltool-native
-> libassuan gpgme"
-> >
-> > --
-> > 2.9.2
-> >
-> NAK: The warning is wrong see recipe below contains
->
-> LICENSE_${PN}-commander =3D "GPLv3"
->
-> Andreas
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+I'd be happy to take advice on how to minimize problems from the above as
+well as on how to handle the version problems: should I bump the recipe
+version above 2.0?
+
+Sorry about the timing wrt M3 freeze: This consumed much more time
+than planned. We can postpone if it looks too scary at this point.
+
+Jussi
+
+
+
+The following changes since commit 2fedd226c3385f1ac160b3aa0bfadbded85e288c:
+
+  ref-manual: Fixed small wording in PKGR in the glossary (2016-08-25 23:09:29 +0100)
+
+are available in the git repository at:
+
+  git://git.yoctoproject.org/poky-contrib jku/xserver-nodm
+  http://git.yoctoproject.org/cgit.cgi/poky-contrib/log/?h=jku/xserver-nodm
+
+Jussi Kukkonen (3):
+  base-files: Add shell test quoting
+  xserver-nodm-init: Deprecate /etc/X11/Xserver
+  x11-common: Remove Xserver script
+
+ meta/recipes-core/base-files/base-files/profile    |  2 +-
+ .../x11-common/x11-common/Xserver.in               | 12 ------
+ meta/recipes-graphics/x11-common/x11-common_0.1.bb | 10 +----
+ .../x11-common/xserver-nodm-init.bb                | 47 +++++++++++++---------
+ .../x11-common/xserver-nodm-init/Xserver           | 25 ++++++++++++
+ .../x11-common/xserver-nodm-init/Xusername         |  1 -
+ .../x11-common/xserver-nodm-init/xserver-nodm      | 10 +++--
+ .../x11-common/xserver-nodm-init/xserver-nodm.conf |  1 -
+ .../xserver-nodm-init/xserver-nodm.conf.in         |  7 ++++
+ ...server-nodm.service => xserver-nodm.service.in} |  4 +-
+ 10 files changed, 69 insertions(+), 50 deletions(-)
+ delete mode 100644 meta/recipes-graphics/x11-common/x11-common/Xserver.in
+ create mode 100644 meta/recipes-graphics/x11-common/xserver-nodm-init/Xserver
+ delete mode 100644 meta/recipes-graphics/x11-common/xserver-nodm-init/Xusername
+ delete mode 100644 meta/recipes-graphics/x11-common/xserver-nodm-init/xserver-nodm.conf
+ create mode 100644 meta/recipes-graphics/x11-common/xserver-nodm-init/xserver-nodm.conf.in
+ rename meta/recipes-graphics/x11-common/xserver-nodm-init/{xserver-nodm.service => xserver-nodm.service.in} (76%)
+
+-- 
+2.1.4
+
 
