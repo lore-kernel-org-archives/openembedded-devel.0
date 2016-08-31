@@ -1,22 +1,24 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id A13E560746
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9FA896FFD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 08:43:48 +0000 (UTC)
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga102.fm.intel.com with ESMTP; 31 Aug 2016 01:43:49 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.30,261,1470726000"; d="scan'208";a="872914056"
-Received: from mbabyjoh-desk.fi.intel.com (HELO
-	mbabyjoh-desk.ger.corp.intel.com) ([10.237.72.71])
-	by orsmga003.jf.intel.com with ESMTP; 31 Aug 2016 01:43:48 -0700
-Date: Wed, 31 Aug 2016 11:43:29 +0300
-From: "Maxin B. John" <maxin.john@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160831084329.GA27198@mbabyjoh-desk.ger.corp.intel.com>
+	Wed, 31 Aug 2016 09:10:05 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u7V9A3IW016382
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Aug 2016 02:10:03 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 31 Aug 2016 02:10:02 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 31 Aug 2016 16:54:17 +0800
+Message-ID: <20160831085417.14658-1-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.8.3
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: Updates to meta-java (master, master-next) in 2016-08-30
+Subject: [meta-oe][PATCH] php: update to 5.5.38 and 5.6.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,68 +31,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2016 08:43:53 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 31 Aug 2016 09:10:07 -0000
+Content-Type: text/plain
 
-Hi,
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Merged the following commits to master and master-next branches:
+These are security releases, several security
+bugs are included:
+http://php.net/ChangeLog-5.php#5.5.38
+http://php.net/ChangeLog-5.php#5.6.25
 
-commit 8c663efa4f8efccf50d094dbc61c7b78031b3b7d
-Author: Kyle Russell <bkylerussell@gmail.com>
-Date:   Wed Aug 24 09:28:40 2016 -0400
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ .../{php-5.6.23 => php-5.6.25}/change-AC_TRY_RUN-to-AC_TRY_LINK.patch | 0
+ meta-oe/recipes-devtools/php/{php_5.5.37.bb => php_5.5.38.bb}         | 4 ++--
+ meta-oe/recipes-devtools/php/{php_5.6.23.bb => php_5.6.25.bb}         | 4 ++--
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-devtools/php/{php-5.6.23 => php-5.6.25}/change-AC_TRY_RUN-to-AC_TRY_LINK.patch (100%)
+ rename meta-oe/recipes-devtools/php/{php_5.5.37.bb => php_5.5.38.bb} (39%)
+ rename meta-oe/recipes-devtools/php/{php_5.6.23.bb => php_5.6.25.bb} (51%)
 
-Reimplement helper method for parallelizing JDK builds
-        
-Simplifies duplicated implementation across multiple recipes that all
-inherited from java.bbclass.
-                    
-Previously implementation was not flexible in supporting other make
-job-limiting flags (like -l for load) that are typically passed in
-through PARALLEL_MAKE.  (OpenJDK doesn't know about these other flags
-that might have gotten tagged on after the value for -j.)
-                                        
-Signed-off-by: Kyle Russell <bkylerussell@gmail.com>
-Signed-off-by: Maxin B. John <maxin.john@intel.com>
+diff --git a/meta-oe/recipes-devtools/php/php-5.6.23/change-AC_TRY_RUN-to-AC_TRY_LINK.patch b/meta-oe/recipes-devtools/php/php-5.6.25/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+similarity index 100%
+rename from meta-oe/recipes-devtools/php/php-5.6.23/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+rename to meta-oe/recipes-devtools/php/php-5.6.25/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+diff --git a/meta-oe/recipes-devtools/php/php_5.5.37.bb b/meta-oe/recipes-devtools/php/php_5.5.38.bb
+similarity index 39%
+rename from meta-oe/recipes-devtools/php/php_5.5.37.bb
+rename to meta-oe/recipes-devtools/php/php_5.5.38.bb
+index c7655bc..26f35b1 100644
+--- a/meta-oe/recipes-devtools/php/php_5.5.37.bb
++++ b/meta-oe/recipes-devtools/php/php_5.5.38.bb
+@@ -2,5 +2,5 @@ require php.inc
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=464ca70af214d2407f6b7d4458158afd"
+ 
+-SRC_URI[md5sum] = "3a4b249bee5451a0982263a94a8a8c9d"
+-SRC_URI[sha256sum] = "d2380ebe46caf17f2c4cd055867d00a82e6702dc5f62dc29ce864a5742905d88"
++SRC_URI[md5sum] = "312244a0eecad602a1555ed2434e223f"
++SRC_URI[sha256sum] = "473c81ebb2e48ca468caee031762266651843d7227c18a824add9b07b9393e38"
+diff --git a/meta-oe/recipes-devtools/php/php_5.6.23.bb b/meta-oe/recipes-devtools/php/php_5.6.25.bb
+similarity index 51%
+rename from meta-oe/recipes-devtools/php/php_5.6.23.bb
+rename to meta-oe/recipes-devtools/php/php_5.6.25.bb
+index 002ca74..8620ee1 100644
+--- a/meta-oe/recipes-devtools/php/php_5.6.23.bb
++++ b/meta-oe/recipes-devtools/php/php_5.6.25.bb
+@@ -3,5 +3,5 @@ require php.inc
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b602636d46a61c0ac0432bbf5c078fe4"
+ 
+ SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch"
+-SRC_URI[md5sum] = "147734b7e0164ebdd2dc18474fcfb309"
+-SRC_URI[sha256sum] = "facd280896d277e6f7084b60839e693d4db68318bfc92085d3dc0251fd3558c7"
++SRC_URI[md5sum] = "f63b9956c25f1ae0433015a80b44224c"
++SRC_URI[sha256sum] = "58ce6032aced7f3e42ced492bd9820e5b3f2a3cd3ef71429aa92fd7b3eb18dde"
+-- 
+2.8.1
 
-commit b2827bf00734331fa6776909e2bfee8f94790fda
-Author: Kyle Russell <bkylerussell@gmail.com>
-Date:   Fri Aug 19 17:58:01 2016 -0400
-
-rhino-native should depend on classpath-native
-                                             
-rhino's do_compile task passes
-${STAGING_DATADIR_NATIVE}/classpath/glibj.zip to javac.  This glibj.zip
-archive comes from the classpath-native package.
-                                                                        
-Signed-off-by: Kyle Russell <bkylerussell@gmail.com>
-Signed-off-by: Maxin B. John <maxin.john@intel.com>
-
-commit 7d9264ca45076b0a0e52e9072989003c0687bda4
-Author: Richard Leitner <richard.leitner@skidata.com>
-Date:   Tue Aug 16 16:51:28 2016 +0200
-openjdk-7: update to IcedTea 2.6.5 OpenJDK 7u99b00
-                                                                                       
- OpenJDK 7 is updated from from 91b01 (IcedTea 2.6.2) to 99b00 (IcedTea
- 2.6.5). This update introduces following security updates:
- * Mar 2016 (IcedTea 2.6.5, OpenJDK 7 u99)  [1]
- * Jan 2016 (IcedTea 2.6.4, OpenJDK 7 u95)  [2]
- * Oct 2015 (IcedTea 2.6.3, OpenJDK 7 u91)  [3]
-                                                                                                                   
- Due to the fact some "byte behavior improvements" were not ported to
- the ARM32-JIT in IcedTea 2.6.6 yet [6], [7]  we need to stick IcedTea
- 2.6.5 for now.
-                                                                                                                      
- [1]http://blog.fuseyism.com/index.php/2016/03/25/security-icedtea-2-6-5-for-openjdk-7-released/
- [2]http://blog.fuseyism.com/index.php/2016/01/21/security-icedtea-2-6-4-for-openjdk-7-released/
- [3]http://blog.fuseyism.com/index.php/2015/11/17/security-icedtea-2-6-3-for-openjdk-7-released/
- [6]http://icedtea.classpath.org/bugzilla/show_bug.cgi?id=2942
- [7]http://icedtea.classpath.org/hg/release/icedtea7-forest-2.6/hotspot/rev/1c5c4564204e
-                                                                                                                                                          
- Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
- Signed-off-by: Maxin B. John <maxin.john@intel.com>
-
- Best Regards,
- Maxin
 
