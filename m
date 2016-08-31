@@ -1,51 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id DEB5873281
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id D866370022
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 17:02:12 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id w207so4272496wmw.0
+	Wed, 31 Aug 2016 17:04:06 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id i138so8455626wmf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 10:02:13 -0700 (PDT)
+	Wed, 31 Aug 2016 10:04:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=Vep5W+gfc5/yCKhCyejFm8WVfDcyULi96yxp/0x8GDU=;
-	b=TSvjSXYMhQn6R8l/tF0Vp7kYpPNCcxqDU7wf2tssMLyWQUNOxkrbZTpRiiD08izX+w
-	G3ohzuPELgJNbatOks7ybhldq/YCM2dt8mPLNWLEaYGf4XwJ+Gx8mkaVQ20uV0TmTfwK
-	i6gmzWzY7lwwvWlXro/Tp7BBdcVCjxZBnvwpbCMFqQDiN1fb88ki9/u6CPuKMb8zm90C
-	yYFFCJmgLbQaD8yPKronuW8teAAWMWakumwhAxemFEkgoa6HQCvvhWlikD7dGkkmW5Y3
-	5MGJ8/nIDK/ZAS84BGJsXLpFErRDiC3sVOpK9wmTGd94PF1+BPS9Bxy8EI3GVFqhXlM5
-	4Jfg==
+	bh=nKGAra52/DYjjMxrMBfOIhPgsQHs6ITWoy+cdMi+yPE=;
+	b=S+sSzMWqklsUCTnpTxxSeFTSCuRuG3CF7g+0tS/VYg39um2zdLatHFwd7dnSfXoLtW
+	TRmyrDf2JrxiAE/W4DNPKzlEnrUNbF2NXf7BFDRavmoCm+VuvX97knH88EyYtDXZQRrm
+	5oAkwGBMprJ6/Xwf+GXRtHKnde1E/VncivMaAnWRXua3plrL0fEphsF5q8SiIBOBeNhW
+	FXvqZMf6x/rTzI+crNJtZ0fRPM/Y2SFnaEQASm8T8b2hizg+hBRsBPkJT7tJ4HeJaort
+	wBNnLeFIwydV3UDRwdrdU6Cof5BWSuZWcoGmfqrxJygIBGsXKo3JaG1b3bIqFQGflOKo
+	6EBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:date:to:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=Vep5W+gfc5/yCKhCyejFm8WVfDcyULi96yxp/0x8GDU=;
-	b=mhYd2upsMQqh7QeKmp66HADFJvvr16Qy+YBpc/AA7zGqLScp9RH+pPVzahkAQ4wjyu
-	fNaQzdJMNFSiyzHuh6/2Fx/Qe020eeFE/WMU5YgoZcd6tXYCMeU9Bajy443FeoqD90Hb
-	5bJrvXsErinzl22joRODVniqHvXY7N6AIb42WdF/Io6y+9XyD+xvVs3LHuroXH9wD6QX
-	KbMcFRyG8RgcSNicY4JogH/+7GHTg5c+QndRahM45JDgIXmTHtF9H/SY5huR9l99qRIN
-	U9R6q0lSi2Zv8WwyhDu5/tuy0ESjX+/hZWIhAjnqW53XyjfMGHKmx2rkawMjSpyIABrg
-	xCeA==
-X-Gm-Message-State: AE9vXwM/mMS5gM+yElTyQAl9/GvK7fXesrBqtu0YvfU0ET4CpZk/SafuXKaYe4f9jqfkhw==
-X-Received: by 10.28.2.84 with SMTP id 81mr10309235wmc.72.1472662932498;
-	Wed, 31 Aug 2016 10:02:12 -0700 (PDT)
+	bh=nKGAra52/DYjjMxrMBfOIhPgsQHs6ITWoy+cdMi+yPE=;
+	b=KigYqwDZnp5B9fL24Up/+H6h689vI2DdxBfpS/NEPpA5k1y5X59nUbvPLg85jsg8Ra
+	LS1nNyG/ukQ8SheTDC08ynf3i3CPKO4aviB4hU92uDePqYjatgIHzuiK/li3vm6bR+GU
+	ICUdlseiA3X8TUARNVCR++kBwbcHvT/b8GZ/FOOm7mKETF3dOnVwO4tM+cO0GSwfr9cJ
+	ZYe+7X5Q3bBhMCVatxl0k80cV+ugYnBIPW1rzY2heF92VInirM3TnNTQw1zkJ2XsVezU
+	dTlyaYDL3cSOcHvecupFB6oaaTE8XZ2yaz4bFhGK7l9Gsg5/akUF6Bd7gU1Vs9Z/GL2Q
+	KKpw==
+X-Gm-Message-State: AE9vXwOvg5XzOERKyNc7UT7UL8AVIgYIMn5FrZpdTIiBxqCbyZ2DPAaU6HLZlxg13NQSXA==
+X-Received: by 10.194.139.236 with SMTP id rb12mr9893426wjb.101.1472663046600; 
+	Wed, 31 Aug 2016 10:04:06 -0700 (PDT)
 Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
 	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	d64sm9843753wmc.22.2016.08.31.10.02.11
+	207sm24553495wmb.7.2016.08.31.10.04.05
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 31 Aug 2016 10:02:11 -0700 (PDT)
+	Wed, 31 Aug 2016 10:04:05 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 31 Aug 2016 19:02:11 +0200
+Date: Wed, 31 Aug 2016 19:04:06 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160831170211.o2xcevfr27xmfn2f@jama>
-References: <1472182090-2031-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
+Message-ID: <20160831170406.awhqhpy5rcf5ixqi@jama>
+References: <1472062075-18352-1-git-send-email-philip@balister.org>
 MIME-Version: 1.0
-In-Reply-To: <1472182090-2031-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
+In-Reply-To: <1472062075-18352-1-git-send-email-philip@balister.org>
 User-Agent: Mutt/1.6.2 (2016-06-11)
-Subject: Re: [meta-oe][PATCH] openwsman: 2.6.2 -> 2.6.3
+Subject: Re: [meta-oe][PATCH] qwt: Use ${libdir} to install libraries.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,63 +58,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2016 17:02:13 -0000
-X-Groupsio-MsgNum: 62911
+X-List-Received-Date: Wed, 31 Aug 2016 17:04:09 -0000
+X-Groupsio-MsgNum: 62912
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="fmdpbvoghh5gococ"
+	protocol="application/pgp-signature"; boundary="rbysikttrpetriib"
 Content-Disposition: inline
 
---fmdpbvoghh5gococ
+--rbysikttrpetriib
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 25, 2016 at 11:28:10PM -0400, Wang Xin wrote:
-> Upgrade openwsman from 2.6.2 to 2.6.3.
->=20
-> Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
-> ---
->  .../openwsman/{openwsman_2.6.2.bb =3D> openwsman_2.6.3.bb}              =
-| 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-extended/openwsman/{openwsman_2.6.2.bb =3D> openw=
-sman_2.6.3.bb} (97%)
->=20
-> diff --git a/meta-oe/recipes-extended/openwsman/openwsman_2.6.2.bb b/meta=
--oe/recipes-extended/openwsman/openwsman_2.6.3.bb
-> similarity index 97%
-> rename from meta-oe/recipes-extended/openwsman/openwsman_2.6.2.bb
-> rename to meta-oe/recipes-extended/openwsman/openwsman_2.6.3.bb
-> index af9633d..cf32351 100644
-> --- a/meta-oe/recipes-extended/openwsman/openwsman_2.6.2.bb
-> +++ b/meta-oe/recipes-extended/openwsman/openwsman_2.6.3.bb
-> @@ -12,8 +12,8 @@ SECTION =3D "Applications/System"
-> =20
->  DEPENDS =3D "curl libxml2 openssl libpam"
-> =20
-> -SRCREV =3D "ed7a119e036c53078d70fd85936d94dc9b9b98be"
-> -PV =3D "2.6.2"
-> +SRCREV =3D "feb7ec9b004fcaea0dbe65ce8a1a79cc29dd994c"
-> +PV =3D "2.6.3"
-> =20
+On Wed, Aug 24, 2016 at 02:07:55PM -0400, Philip Balister wrote:
+> This lets qwt build and package for systems that use lib64.
 
-Doesn't apply because of this 16 days old change, please REBASE and test
-your changes before sending.
+Which branch you want to apply this?
 
-commit ff387178b350753ad5dc3c6aa090345434bc26a1
-Author:     Armin Kuster <akuster808@gmail.com>
-AuthorDate: Tue Aug 9 08:40:37 2016 -0700
+It was removed 7 months ago!
+
+commit 2bd11da4b50f401c9c49975aeedaaafa6a59d08b
+Author:     Martin Jansa <Martin.Jansa@gmail.com>
+AuthorDate: Thu Jan 7 15:57:45 2016 +0100
 Commit:     Martin Jansa <Martin.Jansa@gmail.com>
-CommitDate: Mon Aug 15 12:31:58 2016 +0200
+CommitDate: Thu Jan 14 11:30:15 2016 +0100
 
-    openwsman: fix fetch error.
+    recipes: remove recipes using or depending on qt4 bbclasses or recipes
 
->  SRC_URI =3D "git://github.com/Openwsman/openwsman.git;protocol=3Dhttp \
->             file://libssl-is-required-if-eventint-supported.patch \
+
+>=20
+> Signed-off-by: Philip Balister <philip@balister.org>
+> ---
+>  meta-oe/recipes-qt/qwt/qwt.inc | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/meta-oe/recipes-qt/qwt/qwt.inc b/meta-oe/recipes-qt/qwt/qwt.=
+inc
+> index d3c4ed1..e1b260c 100644
+> --- a/meta-oe/recipes-qt/qwt/qwt.inc
+> +++ b/meta-oe/recipes-qt/qwt/qwt.inc
+> @@ -16,6 +16,7 @@ do_configure_prepend() {
+>      sed -i -e 's:qtAddLibrary(qwt:qtAddLibrary(qwt)${QT_LIBINFIX}:g' *.p=
+rf
+>      sed -e 's/# QWT_CONFIG     +=3D QwtExamples/QWT_CONFIG     +=3D QwtE=
+xamples/g' -i qwtconfig.pri
+>      sed -i -e 's:/usr/local/qwt-$$QWT_VERSION:${D}${prefix}:g' ${S}/*.pri
+> +    sed -i -e 's:$${QWT_INSTALL_PREFIX}/lib:${D}${libdir}:g' ${S}/*.pri
+>  }
+> =20
+>  do_install() {
 > --=20
-> 2.7.4
->=20
->=20
+> 2.5.5
 >=20
 > --=20
 > _______________________________________________
@@ -125,15 +118,15 @@ CommitDate: Mon Aug 15 12:31:58 2016 +0200
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---fmdpbvoghh5gococ
+--rbysikttrpetriib
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iEYEARECAAYFAlfHDZMACgkQN1Ujt2V2gBykJQCfcIDyzpdSiJRwc8sPyJW5bLVa
-CfUAnRkcjOQd3/CxANPbQx2jl7hncX8Y
-=5QKb
+iEYEARECAAYFAlfHDgUACgkQN1Ujt2V2gBw8sgCfcjWlHO8tQcVx84x1UQIiQeF6
+85wAnA+otFycVzY4l0JahofV5T/nng/7
+=zW7R
 -----END PGP SIGNATURE-----
 
---fmdpbvoghh5gococ--
+--rbysikttrpetriib--
