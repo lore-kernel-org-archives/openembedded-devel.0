@@ -1,52 +1,46 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 87CCA6FF7B
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 15D36731BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 18:10:01 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id d196so4670162wmd.1
+	Wed, 31 Aug 2016 19:36:53 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id o1so4190537qkd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 11:10:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=uD+G88wggUyT7pZre7zuERgjXYyeskfgmBZl2JO9LQE=;
-	b=zffw/HFzkYrFtgKbRsN/sciK+qcf4BEH+q8+H+3eibZWpALBBc8OFzjrsQSJNYCvDC
-	xinMSp8w+G0Zw6qd9sMDoSADbXAG5AQ58/6m1iuhPRR2Y9BcDyW1L5FXcQmxHsQEQXG/
-	xgDut15ISQ0twa5ZLoO/5m88nc4mixi7znd8LfmuD8h1Jvpdg2a33Y8/HyMjGiFAUG/S
-	17Aaa40oHtsP6iSX2rOeeeWjDrt02dgaHLTuSv6tmTU4jgUEYKqsrFrLAHWwAu89Zu4+
-	izzqrvdqBnBawrP6L9ayrnwQIJj9O32B9MOQ6EKxRGFFlFVPhSSk1JQS0WrYzKsaOj+d
-	IVWw==
+	Wed, 31 Aug 2016 12:36:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:organization;
+	bh=CYOpIeGAAI1VCkkHLezIGZ4WyzDmRMfjkM2Uyq1Wxe4=;
+	b=jk080B0B61z23JinCgnnGXEdeaPj2jsNQ9VFCBsIdM466V8/hAfUDBQMMO1Hjndx3T
+	B4WaU5mPNpHDEdkPLC38Tdfx0I9fEtVAhEENDNh+iffuMZqSmiOzjS0YYCbvx6T3Vkyl
+	0ZxkPUAZOjw404N1hnE+VTMEHFiyNVJvULrWCLesRXrpERGhXthtE5HWVurKI5wz0P4F
+	s4c+TEyNA94GM6KIMXuai8IPEBx6Ak/NDFJAzqxx7JBCrg8HMSqrbXpCuqY2sfVCLcyJ
+	gTHPCKpHlcvOnd6hXLehFDU2Co8z2C+9u73z6x47VVHB37HQ9ZrzcmtWn9xnlYIDu5E1
+	ReuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=uD+G88wggUyT7pZre7zuERgjXYyeskfgmBZl2JO9LQE=;
-	b=hv6GnyRXQkZLdBRXE/bZDufn+LmljFklTFXzmJ9jwjX3Nrr3i+DJUPbijpTzPYQTSx
-	jdCp6YEQo14v2BLxjPPgVd9w30l7BLC0c9k9BR3ygcw1oSCGbqGKk2e8Ccxtnj9NETeK
-	5Ge4cUR7ZCzniaXIiIQY3KWbAqVWnr3mYENcRfzVZMYR2aBBrHcSikxFmOFx4Zs8i+Ca
-	WV2NkK4hTtS6zVSM6oNPSzzvYzNJhIIHLiHmWzFoVwPvfkm3uaSsIFsE7mxZCKOrfqOy
-	0YRGmD4X07DhB7H5SEOQgOoy0IthvyWWVpdYJxGExVHJsb+rNpqzsVUZqfVv4+JFt4tg
-	z88w==
-X-Gm-Message-State: AE9vXwOu9FI/wZDT6AoKJvBHcJCSZ7mh2EHMyGc9J7+cXaa4wOl922HsqQT/WvZNzLF4qA==
-X-Received: by 10.28.4.194 with SMTP id 185mr24006515wme.91.1472667001548;
-	Wed, 31 Aug 2016 11:10:01 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	wr2sm1046634wjb.12.2016.08.31.11.10.00
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 31 Aug 2016 11:10:00 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 31 Aug 2016 20:10:00 +0200
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=CYOpIeGAAI1VCkkHLezIGZ4WyzDmRMfjkM2Uyq1Wxe4=;
+	b=m46jvXfkM9vTc8zAX3RthntlL6VsL9/DTS/MOSqr5iWZ7WNsaztWFtjH0ryFFv9ynM
+	DtTP6rWqTdGEpEFf5giij8MeWFNx3zaGG+RbUu1/sWRj8tl1ZpmyDpVIhtp15nlFKSaL
+	jayq/71IerHsqlgSjDr5J+9xItVWVe1lfBfZX/GllFhwiMG3SzdqVK0kzyn+bknTIhrd
+	aBnSe4ZepnKMSgUuDNDaZIq6JQz3AmZ95xiVwiTdBtKdP9E8ersw/I4RlD0AKTRwxKPV
+	kDCZSYHcXrM0zBmOcKKdEhjX4zoeQgMaKll8vt22niBxKvsOk+Js36UwSBKUSHzLPtWy
+	XvhA==
+X-Gm-Message-State: AE9vXwMscqxARCT3enav5G1Q7Ws3GZFR86LVK7hXL+RF0hELoWrfbqGDNRYGavVTBleMjA==
+X-Received: by 10.55.123.197 with SMTP id w188mr12839125qkc.60.1472672213730; 
+	Wed, 31 Aug 2016 12:36:53 -0700 (PDT)
+Received: from monster.lab.ossystems.com.br ([177.100.224.8])
+	by smtp.gmail.com with ESMTPSA id 73sm815441qtc.16.2016.08.31.12.36.50
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 31 Aug 2016 12:36:52 -0700 (PDT)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160831181000.xdrlcpn4xw5zsll2@jama>
-References: <1471892491-6177-1-git-send-email-fabio.berton@ossystems.com.br>
-	<1471892491-6177-13-git-send-email-fabio.berton@ossystems.com.br>
-MIME-Version: 1.0
-In-Reply-To: <1471892491-6177-13-git-send-email-fabio.berton@ossystems.com.br>
-User-Agent: Mutt/1.6.2 (2016-06-11)
-Subject: Re: [meta-python][PATCH 13/17] python-requests, python3-requests: Update to version 2.11.1
+Date: Wed, 31 Aug 2016 16:36:12 -0300
+Message-Id: <1472672172-21517-1-git-send-email-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.1.4
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-python][PATCH v2] python-pyopenssl: Extend recipe to support Python 3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,114 +53,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2016 18:10:04 -0000
-X-Groupsio-MsgNum: 62913
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ytcxyrybugcsgo7z"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 31 Aug 2016 19:36:54 -0000
 
---ytcxyrybugcsgo7z
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+- Add Python 3 recipe
+- Add native and nativesdk to BBCLASSEXTEND
 
-On Mon, Aug 22, 2016 at 04:01:27PM -0300, Fabio Berton wrote:
-> This commit also change RDEPENDS code style and add python-urllib3
-> as runtime dependence.
->=20
-> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
-> ---
->  meta-python/recipes-devtools/python/python-requests.inc | 17 +++++++++++=
-+++---
->  ...hon-requests_2.10.0.bb =3D> python-requests_2.11.1.bb} |  0
->  ...n3-requests_2.10.0.bb =3D> python3-requests_2.11.1.bb} |  0
->  3 files changed, 14 insertions(+), 3 deletions(-)
->  rename meta-python/recipes-devtools/python/{python-requests_2.10.0.bb =
-=3D> python-requests_2.11.1.bb} (100%)
->  rename meta-python/recipes-devtools/python/{python3-requests_2.10.0.bb =
-=3D> python3-requests_2.11.1.bb} (100%)
->=20
-> diff --git a/meta-python/recipes-devtools/python/python-requests.inc b/me=
-ta-python/recipes-devtools/python/python-requests.inc
-> index e00b257..287078a 100644
-> --- a/meta-python/recipes-devtools/python/python-requests.inc
-> +++ b/meta-python/recipes-devtools/python/python-requests.inc
-> @@ -3,7 +3,18 @@ HOMEPAGE =3D "http://python-requests.org"
->  LICENSE =3D "Apache-2.0"
->  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dd9bb3515869c0f426cb8441c899ae=
-7f5"
-> =20
-> -SRC_URI[md5sum] =3D "a36f7a64600f1bfec4d55ae021d232ae"
-> -SRC_URI[sha256sum] =3D "63f1815788157130cee16a933b2ee184038e975f0017306d=
-723ac326b5525b54"
-> +SRC_URI[md5sum] =3D "ad5f9c47b5c5dfdb28363ad7546b0763"
-> +SRC_URI[sha256sum] =3D "5acf980358283faba0b897c73959cecf8b841205bb4b2ad3=
-ef545f46eae1a133"
-> =20
-> -RDEPENDS_${PN} =3D "${PYTHON_PN}-email ${PYTHON_PN}-json ${PYTHON_PN}-ne=
-tserver"
-> +RDEPENDS_${PN} +=3D " \
-> +    ${PYTHON_PN}-email \
-> +    ${PYTHON_PN}-json \
-> +    ${PYTHON_PN}-ndg-httpsclient \
-> +    ${PYTHON_PN}-netserver \
-> +    ${PYTHON_PN}-pyasn1 \
-> +    ${PYTHON_PN}-pyopenssl \
-> +    ${PYTHON_PN}-pysocks \
-> +    ${PYTHON_PN}-urllib3 \
-> +"
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-devtools/python/python-pyopenssl.inc   | 23 ++++++++++++++++++++++
+ .../python/python-pyopenssl_16.0.0.bb              | 17 +---------------
+ .../python/python3-pyopenssl_16.0.0.bb             |  2 ++
+ 3 files changed, 26 insertions(+), 16 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-pyopenssl.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyopenssl_16.0.0.bb
 
-There is already 2.11.0 version in master-next and this RDEPENDS
-additions break python3 version:
+diff --git a/meta-python/recipes-devtools/python/python-pyopenssl.inc b/meta-python/recipes-devtools/python/python-pyopenssl.inc
+new file mode 100644
+index 0000000..ce948e1
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pyopenssl.inc
+@@ -0,0 +1,23 @@
++SUMMARY = "Simple Python wrapper around the OpenSSL library"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
++
++DEPENDS = "openssl ${PYTHON_PN}-cryptography"
++
++SRC_URI[md5sum] = "9587d813dcf656e9f2760e41a3682dc3"
++SRC_URI[sha256sum] = "363d10ee43d062285facf4e465f4f5163f9f702f9134f0a5896f134cbb92d17d"
++
++PYPI_PACKAGE = "pyOpenSSL"
++
++PACKAGES =+ "${PN}-tests"
++FILES_${PN}-tests = "${libdir}/${PYTHON_DIR}/site-packages/OpenSSL/test"
++
++RDEPENDS_${PN} = " \
++    ${PYTHON_PN}-cryptography \
++    ${PYTHON_PN}-six \
++    ${PYTHON_PN}-threading \
++"
++
++RDEPENDS_${PN}-tests = "${PN}"
++
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-pyopenssl_16.0.0.bb b/meta-python/recipes-devtools/python/python-pyopenssl_16.0.0.bb
+index 8173858..d7177e2 100644
+--- a/meta-python/recipes-devtools/python/python-pyopenssl_16.0.0.bb
++++ b/meta-python/recipes-devtools/python/python-pyopenssl_16.0.0.bb
+@@ -1,17 +1,2 @@
+-SUMMARY = "Simple Python wrapper around the OpenSSL library"
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+-
+-DEPENDS = "openssl python-cryptography"
+-
+-SRC_URI[md5sum] = "9587d813dcf656e9f2760e41a3682dc3"
+-SRC_URI[sha256sum] = "363d10ee43d062285facf4e465f4f5163f9f702f9134f0a5896f134cbb92d17d"
+-
+-PYPI_PACKAGE = "pyOpenSSL"
+ inherit pypi setuptools
+-
+-PACKAGES =+ "${PN}-tests"
+-FILES_${PN}-tests = "${libdir}/${PYTHON_DIR}/site-packages/OpenSSL/test"
+-
+-RDEPENDS_${PN} = "python-threading python-six python-cryptography"
+-RDEPENDS_${PN}-tests = "${PN}"
++require python-pyopenssl.inc
+diff --git a/meta-python/recipes-devtools/python/python3-pyopenssl_16.0.0.bb b/meta-python/recipes-devtools/python/python3-pyopenssl_16.0.0.bb
+new file mode 100644
+index 0000000..0f0f83e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pyopenssl_16.0.0.bb
+@@ -0,0 +1,2 @@
++inherit pypi setuptools3
++require python-pyopenssl.inc
+-- 
+2.1.4
 
-ERROR: Nothing RPROVIDES 'python3-pysocks' (but /home/jenkins/oe/world/shr-=
-core/meta-openembedded/meta-python/recipes-devtools/python/python3-requests=
-_2.11.1.bb RDEPENDS on or otherwise requires it)
-NOTE: Runtime target 'python3-pysocks' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['python3-pysocks']
-NOTE: Runtime target 'python3-requests' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['python3-requests', 'python3-=
-pysocks']
-NOTE: Runtime target 'python3-pymisp' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['python3-pymisp', 'python3-re=
-quests', 'python3-pysocks']
-NOTE: Runtime target 'python3-pymisp-dev' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['python3-pymisp-dev', 'python=
-3-requests', 'python3-pysocks']
 
-> +
-> +BBCLASSEXTEND =3D "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python-requests_2.10.0.b=
-b b/meta-python/recipes-devtools/python/python-requests_2.11.1.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python-requests_2.10.0.bb
-> rename to meta-python/recipes-devtools/python/python-requests_2.11.1.bb
-> diff --git a/meta-python/recipes-devtools/python/python3-requests_2.10.0.=
-bb b/meta-python/recipes-devtools/python/python3-requests_2.11.1.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python3-requests_2.10.0.bb
-> rename to meta-python/recipes-devtools/python/python3-requests_2.11.1.bb
-> --=20
-> 2.1.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---ytcxyrybugcsgo7z
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAlfHHXgACgkQN1Ujt2V2gBxY2gCeOaygj7oTFbXVpYEd189EXOVC
-8HgAniYVdXYQrh+uO3OsX3abgQyKjt45
-=e8kZ
------END PGP SIGNATURE-----
-
---ytcxyrybugcsgo7z--
