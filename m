@@ -1,25 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id A3C0A6057A
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B3E1A731DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 07:26:20 +0000 (UTC)
+	Wed, 31 Aug 2016 07:26:19 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u7V7QKtv009648
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u7V7QJDL020111
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 31 Aug 2016 00:26:21 -0700 (PDT)
+	Wed, 31 Aug 2016 00:26:19 -0700 (PDT)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Wed, 31 Aug 2016 00:26:20 -0700
+	Wed, 31 Aug 2016 00:26:18 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 31 Aug 2016 03:26:14 -0400
-Message-ID: <482840c22cd42b3821dfc1cb96aab39cdadcef4b.1472628235.git.hongxu.jia@windriver.com>
+Date: Wed, 31 Aug 2016 03:26:13 -0400
+Message-ID: <24ab261599e8f219cee2e01070330071fa57e2b0.1472628235.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.8.1
 In-Reply-To: <cover.1472628235.git.hongxu.jia@windriver.com>
 References: <cover.1472628235.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/2] thin-provisioning-tools: add version 0.6.3
+Subject: [PATCH 1/2] lvm2: tweak MODPROBE_CMD for cross compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,100 +35,88 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Wed, 31 Aug 2016 07:26:20 -0000
 Content-Type: text/plain
 
-It is required by lvm2, since lvm2 could find modprobe correctly
+Lvm uses variable MODPROBE_CMD at runtime, so build time detection of modprobe
+is incorrect.
 ------
-|lvm lvchange -a y --config  devices { preferred_names=["^/dev/mapper/",
-"^/dev/md/", "^/dev/sd"] }  wrl/pool00
-|/usr/sbin/thin_check: execvp failed: No such file or directory
-| Check of pool wrl/pool00 failed (status:2). Manual repair required!
+|lvm lvcreate --thinpool wrl/pool00 --size 5556m --config  devices
+{ preferred_names=["^/dev/mapper/", "^/dev/md/", "^/dev/sd"]
+filter=["r|/loop1$|","r|/loop2$|","r|/loop3$|","r|/loop4$|","r|/loop5$|","r|/loop6$|","r|/loop7$|"] }
+|tmp/sysroots/x86_64-linux/usr/bin/modprobe: execvp failed: No such file or directory
+|tmp/sysroots/x86_64-linux/usr/bin/modprobe failed: 2
 ------
-
-The thin-provisioning-tools provides /usr/sbin/thin_check.
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-oe/recipes-support/lvm2/lvm2.inc              |  2 +-
- ...01-do-not-strip-pdata_tools-at-do_install.patch | 33 ++++++++++++++++++++++
- .../thin-provisioning-tools_0.6.3.bb               | 18 ++++++++++++
- 3 files changed, 52 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/thin-provisioning-tools/files/0001-do-not-strip-pdata_tools-at-do_install.patch
- create mode 100755 meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.6.3.bb
+ meta-oe/recipes-support/lvm2/lvm2.inc              |  3 ++
+ ...0005-tweak-MODPROBE_CMD-for-cross-compile.patch | 38 ++++++++++++++++++++++
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-oe/recipes-support/lvm2/lvm2/0005-tweak-MODPROBE_CMD-for-cross-compile.patch
 
 diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index e452f11..e2feeb3 100644
+index 3a5e1c4..e452f11 100644
 --- a/meta-oe/recipes-support/lvm2/lvm2.inc
 +++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -66,6 +66,6 @@ TARGET_CC_ARCH += "${LDFLAGS}"
- FILES_${PN} += "${libdir}/device-mapper/*.so ${base_libdir}/udev"
- FILES_${PN}-dbg += "${libdir}/device-mapper/.debug"
+@@ -11,6 +11,7 @@ SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
+            file://0002-use-PTHREAD_MUTEX_RECURSIVE-instead-of-PTHREAD_MUTEX.patch \
+            file://0003-Guard-use-of-mallinfo-with-__GLIBC__.patch \
+            file://0004-include-fcntl.h-for-O_-defines-and-fcntl-signature.patch \
++           file://0005-tweak-MODPROBE_CMD-for-cross-compile.patch \
+            "
  
--RDEPENDS_${PN} = "bash"
-+RDEPENDS_${PN} = "bash thin-provisioning-tools"
+ S = "${WORKDIR}/LVM2.${PV}"
+@@ -39,6 +40,8 @@ EXTRA_OECONF = "--with-user= \
+                 --with-systemdsystemunitdir=${systemd_system_unitdir} \
+ "
  
- CONFFILES_${PN} += "${sysconfdir}/lvm/lvm.conf"
-diff --git a/meta-oe/recipes-support/thin-provisioning-tools/files/0001-do-not-strip-pdata_tools-at-do_install.patch b/meta-oe/recipes-support/thin-provisioning-tools/files/0001-do-not-strip-pdata_tools-at-do_install.patch
-new file mode 100644
-index 0000000..b4cdda1
---- /dev/null
-+++ b/meta-oe/recipes-support/thin-provisioning-tools/files/0001-do-not-strip-pdata_tools-at-do_install.patch
-@@ -0,0 +1,33 @@
-+From e8be402e20cbdfbd8192a171ac9904d9362103bf Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Wed, 31 Aug 2016 01:35:40 -0400
-+Subject: [PATCH] do not strip pdata_tools at do_install
++CACHED_CONFIGUREVARS += "MODPROBE_CMD=${base_sbindir}/modprobe"
 +
-+It caused QA Issue:
-+--------------
-+|ERROR: QA Issue: File '/usr/sbin/pdata_tools' from thin-provisioning-tools
-+was already stripped, this will prevent future debugging! [already-stripped]
-+--------------
+ do_install_append() {
+     # Install machine specific configuration file
+     install -m 0644 ${WORKDIR}/lvm.conf ${D}${sysconfdir}/lvm/lvm.conf
+diff --git a/meta-oe/recipes-support/lvm2/lvm2/0005-tweak-MODPROBE_CMD-for-cross-compile.patch b/meta-oe/recipes-support/lvm2/lvm2/0005-tweak-MODPROBE_CMD-for-cross-compile.patch
+new file mode 100644
+index 0000000..8db320d
+--- /dev/null
++++ b/meta-oe/recipes-support/lvm2/lvm2/0005-tweak-MODPROBE_CMD-for-cross-compile.patch
+@@ -0,0 +1,38 @@
++From 72866782f83c8cf85b10017df461128af90cae6e Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Tue, 30 Aug 2016 22:33:47 -0400
++Subject: [PATCH] tweak MODPROBE_CMD for cross compile
++
++Lvm uses variable MODPROBE_CMD at runtime, so build time detection of modprobe
++is incorrect.
++------
++|lvm lvcreate --thinpool wrl/pool00 --size 5556m --config  devices
++{ preferred_names=["^/dev/mapper/", "^/dev/md/", "^/dev/sd"]
++filter=["r|/loop1$|","r|/loop2$|","r|/loop3$|","r|/loop4$|","r|/loop5$|","r|/loop6$|","r|/loop7$|"] }
++|tmp/sysroots/x86_64-linux/usr/bin/modprobe: execvp failed: No such file or directory
++|tmp/sysroots/x86_64-linux/usr/bin/modprobe failed: 2
++------
 +
 +Upstream-Status: Inappropriate [oe specific]
 +
 +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 +---
-+ Makefile.in | 1 -
-+ 1 file changed, 1 deletion(-)
++ configure.in | 2 --
++ 1 file changed, 2 deletions(-)
 +
-+diff --git a/Makefile.in b/Makefile.in
-+index 4264191..ac22042 100644
-+--- a/Makefile.in
-++++ b/Makefile.in
-+@@ -189,7 +189,6 @@ distclean: clean
-+ install: bin/pdata_tools
-+ 	$(INSTALL_DIR) $(BINDIR)
-+ 	$(INSTALL_PROGRAM) bin/pdata_tools $(BINDIR)
-+-	$(STRIP) $(BINDIR)/pdata_tools
-+ 	ln -s -f pdata_tools $(BINDIR)/cache_check
-+ 	ln -s -f pdata_tools $(BINDIR)/cache_dump
-+ 	ln -s -f pdata_tools $(BINDIR)/cache_metadata_size
++diff --git a/configure.in b/configure.in
++index 8e04782..77681b0 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -1779,8 +1779,6 @@ if test "$UDEV_SYNC" = yes; then
++ fi
++ 
++ ################################################################################
++-AC_PATH_TOOL(MODPROBE_CMD, modprobe)
++-
++ if test -n "$MODPROBE_CMD"; then
++ 	AC_DEFINE_UNQUOTED([MODPROBE_CMD], ["$MODPROBE_CMD"], [The path to 'modprobe', if available.])
++ fi
 +-- 
 +2.8.1
 +
-diff --git a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.6.3.bb b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.6.3.bb
-new file mode 100755
-index 0000000..c2ba95c
---- /dev/null
-+++ b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-tools_0.6.3.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "A suite of tools for manipulating the metadata of the dm-thin device-mapper target."
-+HOMEPAGE = "https://github.com/jthornber/thin-provisioning-tools"
-+LICENSE = "GPLv3"
-+SECTION = "devel"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-+S = "${WORKDIR}/git"
-+
-+SRC_URI = "git://github.com/jthornber/thin-provisioning-tools \
-+           file://0001-do-not-strip-pdata_tools-at-do_install.patch \
-+          "
-+
-+SRCREV = "49bfc12e9c7956c1ac134b24afbe1a6a602ce7d5"
-+
-+DEPENDS += "expat libaio boost"
-+
-+inherit autotools
-+B = "${S}"
 -- 
 2.8.1
 
