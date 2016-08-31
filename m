@@ -1,48 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 87193736B6
+	by mail.openembedded.org (Postfix) with ESMTP id 5E62473216
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 19:41:24 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id c133so291183wmd.2
+	Wed, 31 Aug 2016 19:41:26 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id c133so291330wmd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 12:41:25 -0700 (PDT)
+	Wed, 31 Aug 2016 12:41:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=ePGqQjRy+r1XRxgBLnm4Mj5ujIsxyzVhJoS6LAbjq6k=;
-	b=gggI9OS3UjVs14mdwn3Ei0x/hPqRM47hCbEzUZMWfk1f0Y2zK2dRb/7QRJ2h7980nR
-	y+U2eRQ50nOitq19N5bZbGXNmNy7Gdj8W7KCG6aVpTiCKyEdsjz6pSJvGxNH3iUH2Gz9
-	JoAxQOdKiHk8oIh4+DPsBjohGK5pW020zx81RJebommfnmtznVF908y+XktAWYQJSYT/
-	yTlj5jC5orEbwdVurmGlx+9HSHJmQXfT/ZDMQZbnK0sRfA5SQ5NV7cNsZNxNyxIGPumI
-	vpooks6v9X9HtX/tOTrHV/GOY2SD9D+8MAaYGdmBXhH6HgI7waMROmGr/YiSSkVn2jWq
-	WJow==
+	bh=VcO1GYV+5qWoMQKiB+TBfwRqwtdAEm8EgOYMJqfm2cM=;
+	b=DnNqLNX9ArfosPOHYt8tPl8USl2kpRmUrlzRFNy159TO0t9xNRNeYfDdfop176Kwmv
+	YdN7MnSFv5peujdejW89zth2PpPtEtTEmucAt0QGExDinQCnEAeaqhn7rm+vpJXedjxn
+	lr6cmAaQwhUhyXHX18eefz0F4DsMVd1rDy5VpSK2kQeeSD9cvh6KeJnUbrZHVMX6JDKp
+	XHdIzZq28cW0Cs5N9bFaEVjIiLmYValRZBsVnhd2CRIoNHTgOe6SKhIPndbYg9BMEL6u
+	SYBDOQizTSwGokiaIwL6qJL2FWKIa3qoMkyKAS45sDdkN+P+g5K915R0GCraTYbWyVgJ
+	8n/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=ePGqQjRy+r1XRxgBLnm4Mj5ujIsxyzVhJoS6LAbjq6k=;
-	b=lcy9YQGC0wfj5Qwaq6CD3ZtIHtoENcS9ld5CSFRv3Bxg9I0VU3dr7qJRPUo/Jbrcc7
-	PlQjSkMVlHSuSBJU/TnPsG7mvL2EeJpwFUDmsPUvYFTpW1LkGaTKQIgBFxJZU8gBb32x
-	BQlSQouTYl4rPFmMPe1u7lHqad8N5ivcTrS5BOsASqfveqY0moH0DyyBlsywfE8Zam7+
-	a+Knzc6tCQUZqlQpC7xbcY1YQJs97bwW8VCFqIUOEtYQGzFTo/CyW8cYYhI7EAnNpLf1
-	3pV80XbsDXdOzv3J4UzZ85ZDAGxviFtNFOh6OTw9Gnnl7f8WrGpUASj7LQveT+MGfr0y
-	GWZQ==
-X-Gm-Message-State: AE9vXwNpbdDwVrvXtaAzR1TT8MDJTlj8kW7e+WbeqNelhQlqPj9BLn4vjnsAy8xC3zRs/w==
-X-Received: by 10.194.82.99 with SMTP id h3mr10596192wjy.9.1472672484699;
-	Wed, 31 Aug 2016 12:41:24 -0700 (PDT)
+	bh=VcO1GYV+5qWoMQKiB+TBfwRqwtdAEm8EgOYMJqfm2cM=;
+	b=QOev2+D5RZgFKMJLhVQqXQkteJ5yA2kt691fUl2rBp+3GfeqkV9XW+0mMpalgNeklJ
+	N9QgNOYNYuBspOye3sbeWi8uKbNorTHj4kNyzp4r6zNmabI+Cfoy1i8Iqc2SAwpdWWFs
+	4Yx033X1pQWqF2raIhw7Bo7GmA5EPSjfhfb6ciRLhWZk9VksIyUQfnRImaYQ0zJKCBTL
+	+ISA+fQNvE3V5q6pEUu8DVyOI+ZgmBBg618d0deBdsaPCz6VByKHXFTxTjQ2EsFHWMpu
+	eIWgfCAD+ePHc7qgMWEJipiBhkKmcf1gzjlUGr3vWZPlwzwTl301MteFjAXZKcMRRCry
+	Uatg==
+X-Gm-Message-State: AE9vXwNOU68Zr7dr+JxRDD63La+MgfbU1IrTMIEku6+vuIYo259fmBo5w+nieaOzdFc22g==
+X-Received: by 10.28.100.215 with SMTP id y206mr10819800wmb.115.1472672486675; 
+	Wed, 31 Aug 2016 12:41:26 -0700 (PDT)
 Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
 	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	z18sm25175672wmz.6.2016.08.31.12.41.21
+	190sm10435463wmk.13.2016.08.31.12.41.25
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 31 Aug 2016 12:41:22 -0700 (PDT)
+	Wed, 31 Aug 2016 12:41:25 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 31 Aug 2016 21:41:02 +0200
-Message-Id: <20160831194106.14065-7-Martin.Jansa@gmail.com>
+Date: Wed, 31 Aug 2016 21:41:03 +0200
+Message-Id: <20160831194106.14065-8-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.9.2
 In-Reply-To: <20160831194106.14065-1-Martin.Jansa@gmail.com>
 References: <20160831194106.14065-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 07/11] samba: blacklist, fails to build with new binutils-2.27
+Subject: [meta-oe][PATCH 08/11] glmark2: blacklist, fails to build with gcc-6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,26 +55,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2016 19:41:24 -0000
+X-List-Received-Date: Wed, 31 Aug 2016 19:41:26 -0000
 
+* needs extra space after " in:
+  ../src/native-state-x11.cpp:63:33: error: invalid suffix on literal; C++11 requires a space between literal and string macro [-Werror=literal-suffix]
+       static const char *win_name("glmark2 "GLMARK_VERSION);
+                                   ^
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-oe/recipes-benchmark/glmark2/glmark2_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-index e35d527..042203e 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-@@ -317,3 +317,8 @@ FILES_${PN}-python-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.d
+diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+index 3a1c2e2..c6a4584 100644
+--- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
++++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+@@ -53,3 +53,5 @@ python __anonymous() {
+         d.appendVar("EXTRA_OECONF", " --with-flavors=%s" % ",".join(flavors))
+ }
  
- RDEPENDS_${PN}-pidl_append = " perl"
- FILES_${PN}-pidl = "${bindir}/pidl ${datadir}/perl5/Parse"
-+
-+# http://errors.yoctoproject.org/Errors/Details/81004/
-+# before this issue it was also failing in do_package and
-+# autodetecting libpam dependency
-+PNBLACKLIST[samba] ?= "BROKEN: fails to build with new binutils-2.27"
++# http://errors.yoctoproject.org/Errors/Details/81005/
++PNBLACKLIST[glmark2] ?= "BROKEN: fails to build with gcc-6"
 -- 
 2.9.2
 
