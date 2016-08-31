@@ -1,50 +1,52 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f181.google.com (mail-ua0-f181.google.com
-	[209.85.217.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 924D7731DF
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 14:59:47 +0000 (UTC)
-Received: by mail-ua0-f181.google.com with SMTP id l94so93256423ual.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 07:59:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=Ds3DmMeSjHszTnIQZsTVmvFTHwRLl2sf9VCAPglRc1k=;
-	b=Gs/kAi7D66sjyK2SBQKuD8EzQT9kY4VW5o00FmGkvIaS/ugjqsr6q+e+gPIvsFuykg
-	YpppyUOZo6sXdPVF9KpnH987gUBhRyZTOirZyWrfi7h2xh/L7wjNw042zMSOinA7zN3d
-	6Gr3V/CMsRVWbmo8iDEyDWWCn+IJTc4bh5pFAe9+I0F99aAz9cwmx11arqWIYbBVRzGv
-	PlRkRkIwFsEMehNAPGEkbhqYr53iILmZKMD8wLfmM70psffYMauLANncGNfV6XEoHiMx
-	ABazOidfcMzn8ayxdUwwMOmbEQTcTrk2IGnn63JfZ6J2z+f1J9csxuNwZ4gTZ1Sm0fQk
-	Xcbg==
+Return-Path: <twoerner@gmail.com>
+Received: from mail-it0-f41.google.com (mail-it0-f41.google.com
+	[209.85.214.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E94A7318D;
+	Wed, 31 Aug 2016 15:41:06 +0000 (UTC)
+Received: by mail-it0-f41.google.com with SMTP id i184so15857833itf.1;
+	Wed, 31 Aug 2016 08:41:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:content-transfer-encoding:in-reply-to
+	:user-agent; bh=YLISBAVk2isG2LCezqrqMA3FNc1m2eye3av5uJwIGqc=;
+	b=bmypQffwehIjuyFwBlU8b5C0rCtbA7Y1imH/5vI8kBB4p+ndRtw3KeJMLb9MaNy4FJ
+	ebLeCCFjIevfagsw/a9IwbauIWdi8yquQEB599gpSmDZXjI4G2VR2Lgl5/LdkMQ6Od/h
+	CjqLl1DiSkV8fBodJz9ap2S/n4AZp+QaOVhdM9zyGC4cu4+/q+pXCTgkKnQMuDV5FZSr
+	FVRfOqtdHJ2K9M+sIrSkhjMtglPqqM0JdArkz8ZfSRVE+bvqTfD75UuH3Bn3YfKGUM7u
+	AaBzzfTLKEk8ggf7EqUbDWIVGKXqCSzdaZxUMXRqONPoEjsb3YIytWAr9Z+Q/o1W+s9j
+	BdyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=Ds3DmMeSjHszTnIQZsTVmvFTHwRLl2sf9VCAPglRc1k=;
-	b=a//4Ox69TXWOVOsrbx3K1z6UUdCJIetpH/9VNCPrKd7LCfw34PSEz6C1PoIj+t7Q8U
-	Fsbet3R5UfN+Z4buF4JKlwla3LV9jjgF9eKy1RyDW3dq9twlm/wrkQLNzcX7NbnIxlnF
-	IfH3wsCNKUTHjLvx637rq/rXyjfdb+mpnoGu0SQ56RtZ0X4eTJpztHDZdwvfMXFfrrdf
-	kF5fuFc741eViYCioySmUNgoa85V+zJJ2NcSM58/92o0Js8sCvchhxpubXeolKaxIubL
-	BXewRbUJO21GlqwJEiO2oCjykyY8sQtP3tO690YjlQYYjJGBQZDw24CFsWAvAjPwzNKL
-	FKGA==
-X-Gm-Message-State: AE9vXwMjSxf7YE1pjWaUwIKJ1izcMH7iujulniRlHVk1eK9x0HCtCzCaF3N6JUypNsIpoPSXr1wQrR+SHoZnhA==
-X-Received: by 10.31.199.67 with SMTP id x64mr5757722vkf.124.1472655587276;
-	Wed, 31 Aug 2016 07:59:47 -0700 (PDT)
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	bh=YLISBAVk2isG2LCezqrqMA3FNc1m2eye3av5uJwIGqc=;
+	b=VxB0AFx5ofn7Bz4+swHoP0UgD7r3EvbaldPsDS2QNiZAnTgWqsi3FvPd0Mbu0EM4YR
+	S7pqnTxqfcRh64jBetJfT6G8QPVuNOccb0YmAZgnebRV8/XBbkSvMhTSOqJUCqEbvUJQ
+	1hKsk98OKHDTlxQw4zfMVhXhN631yKCpkAnEpO2AhvfCG5ZmGd2sMxN1W9kn+7YBosk2
+	xVOO0GRLSy95Pux9++8XUjyMKuxCicndElZD9Evi8nlPSatyextBVv81QF/OwzfMbFfO
+	5Fqp8hvAcSYAEjMdDadmJHFHsN1NM7zTSlKNgAevWTLjr9dniBRbByiid7ApSOIlDSin
+	8tXg==
+X-Gm-Message-State: AE9vXwP7gJ2xVuZTef9SWpyABTC6fkcxyzcfai3ox/wsu7vU5wa7zNhzVRSadGabeAkaNA==
+X-Received: by 10.107.147.8 with SMTP id v8mr6041845iod.148.1472658067072;
+	Wed, 31 Aug 2016 08:41:07 -0700 (PDT)
+Received: from openSUSE-i7.site ([45.72.199.207])
+	by smtp.gmail.com with ESMTPSA id
+	f65sm4536749ita.10.2016.08.31.08.40.58
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 31 Aug 2016 08:40:59 -0700 (PDT)
+Date: Wed, 31 Aug 2016 11:40:55 -0400
+From: Trevor Woerner <twoerner@gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20160831154055.GA26921@openSUSE-i7.site>
+References: <20160826155154.6fzokkxh5hsuvxld@jama>
+	<20160831094106.GA11085@openSUSE-i7.site>
 MIME-Version: 1.0
-Received: by 10.176.65.130 with HTTP; Wed, 31 Aug 2016 07:59:46 -0700 (PDT)
-In-Reply-To: <20160831143530.gy6guxm6rlbhhr6m@jama>
-References: <20160829205253.17988-1-Martin.Jansa@gmail.com>
-	<1472546366.8449.19.camel@andred.net>
-	<CALbNGRSJx4MD=SekttxB7H1PjEUTgaQfCnBtXu+t-YGX9BKVLw@mail.gmail.com>
-	<20160831143530.gy6guxm6rlbhhr6m@jama>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Wed, 31 Aug 2016 16:59:46 +0200
-Message-ID: <CALbNGRR1y9irePnmFUF9pE6Qk_X5T56YQTbOf16uQ4zG10jLpQ@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] geany-plugins: include GPLv3 in the main LICENSE
+In-Reply-To: <20160831094106.GA11085@openSUSE-i7.site>
+User-Agent: Mutt/1.6.0 (2016-04-01)
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [OE-core] State of bitbake world 2016-08-24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,91 +59,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2016 14:59:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 31 Aug 2016 15:41:07 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 31, 2016 at 4:35 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> On Tue, Aug 30, 2016 at 10:41:29AM +0200, Andreas M=C3=BCller wrote:
->> On Tue, Aug 30, 2016 at 10:39 AM, Andr=C3=A9 Draszik <git@andred.net> wr=
-ote:
->> > On Mo, 2016-08-29 at 22:52 +0200, Martin Jansa wrote:
->> >> * since last changes in oe-core LICENSE variable needs to list all
->> >> licenses used
->> >>   by individual packages otherwise bitbake warning like this is shown=
-:
->> >>   WARNING: meta-openembedded/meta-oe/recipes-devtools/geany/geany-
->> >> plugins_1.27.bb: LICENSE_geany-plugins-commander includes licenses (G=
-PLv3)
->> >> that are not listed in LICENSE
->> >>   as possible improvement you can set LICENSE to GPLv2 to all plugins
->> >>   which are GPLv2-only, because now they will "inherit" both GPLv2 &
->> >>   GPLv3 which sucks as described here:
->> >>   https://www.mail-archive.com/openembedded-core@lists.openembedded.o=
-rg/ms
->> >> g81645.html
->> >>
->> >> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->> >> ---
->> >>  meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb | 2 +-
->> >>  1 file changed, 1 insertion(+), 1 deletion(-)
->> >>
->> >> diff --git a/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb b/m=
-eta-
->> >> oe/recipes-devtools/geany/geany-plugins_1.27.bb
->> >> index 9a39150..5e1e721 100644
->> >> --- a/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
->> >> +++ b/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
->> >> @@ -1,7 +1,7 @@
->> >>  DESCRIPTION =3D "A fast and lightweight IDE"
->> >>  HOMEPAGE =3D "http://plugins.geany.org/"
->> >>  # majority's default
->> >
->> >      ^^^^^^^^^^
->> > To avoid confusion, it'd be good to remove this comment as well as it'=
-s not
->> > only the majority of licenses anymore
->> >
->> > Cheers,
->> > Andre'
->> >
->> >
->> >> -LICENSE =3D "GPLv2"
->> >> +LICENSE =3D "GPLv2 & GPLv3"
->> >>
->> >>  DEPENDS =3D "geany lua libxml2 libsoup-2.4 vte enchant intltool-nati=
-ve
->> >> libassuan gpgme"
->> >>
->> >> --
->> >> 2.9.2
->> >>
->> And probably a note that 90% of license information is wrong...
->
-> There are more issues in geany-plugins:
->
-> geany-plugins-1.27: geany-plugins: Files/directories were installed but n=
-ot shipped in any package:
->   /usr/lib/geany/git-changebar.so
-> Please set FILES such that these items are packaged. Alternatively if the=
-y are unneeded, avoid installing them or delete them within do_install.
-> geany-plugins: 1 installed and not shipped files. [installed-vs-shipped]
-> geany-plugins-1.27: geany-plugins-scope rdepends on libvte9, but it isn't=
- a build dependency, missing vte9 in DEPENDS or PACKAGECONFIG? [build-deps]
-> geany-plugins-1.27: geany-plugins-debugger rdepends on libvte9, but it is=
-n't a build dependency, missing vte9 in DEPENDS or PACKAGECONFIG? [build-de=
-ps]
-> geany-plugins-1.27: geany-plugins-multiterm rdepends on libvte9, but it i=
-sn't a build dependency, missing vte9 in DEPENDS or PACKAGECONFIG? [build-d=
-eps]
->
-> It would be nice if someone actually using it send some fixes.
->
-> If nobody does in next week, I'll add PNBLACKLIST.
->
-Heard :) I will fix it. Don't ask when - my master images are broken
-as never seen before thanks to gcc-6 and cmake modifications.
+I performed a verbose build on my build machine to see how it compares to
+yours.
 
-Andreas
+On Wed 2016-08-31 @ 05:41:06 AM, Trevor Woerner wrote:
+> On Fri 2016-08-26 @ 05:51:54 PM, Martin Jansa wrote:
+> | [2278/20239] CXX obj.host/third_party/icu/source/common/icuuc.servrbf.o
+> | FAILED: obj.host/third_party/icu/source/common/icuuc.servrbf.o
+> | g++  -MMD -MF obj.host/third_party/icu/source/common/icuuc.servrbf.o.d =
+-DU_USING_ICU_NAMESPACE=3D0 -DHAVE_DLOPEN=3D0 -DUCONFIG_ONLY_HTML_CONVERSIO=
+N=3D1 -DU_CHARSET_IS_UTF8=3D1 -DV8_DEPRECATION_WARNINGS -D_FILE_OFFSET_BITS=
+=3D64 -DDISABLE_NACL -DU_STATIC_IMPLEMENTATION -DCHROMIUM_BUILD -DUI_COMPOS=
+ITOR_IMAGE_TRANSPORT -DUSE_AURA=3D1 -DUSE_PANGO=3D1 -DUSE_CAIRO=3D1 -DUSE_D=
+EFAULT_RENDER_THEME=3D1 -DUSE_LIBJPEG_TURBO=3D1 -DUSE_X11=3D1 -DUSE_CLIPBOA=
+RD_AURAX11=3D1 -DENABLE_WEBRTC=3D1 -DENABLE_MEDIA_ROUTER=3D1 -DENABLE_PEPPE=
+R_CDMS -DENABLE_NOTIFICATIONS -DENABLE_TOPCHROME_MD=3D1 -DUSE_UDEV -DFIELDT=
+RIAL_TESTING_ENABLED -DENABLE_TASK_MANAGER=3D1 -DENABLE_EXTENSIONS=3D1 -DEN=
+ABLE_PDF=3D1 -DENABLE_PLUGINS=3D1 -DENABLE_SESSION_SERVICE=3D1 -DENABLE_THE=
+MES=3D1 -DENABLE_PRINTING=3D1 -DENABLE_BASIC_PRINTING=3D1 -DENABLE_PRINT_PR=
+EVIEW=3D1 -DENABLE_SPELLCHECK=3D1 -DENABLE_CAPTIVE_PORTAL_DETECTION=3D1 -DE=
+NABLE_SUPERVISED_USERS=3D1 -DENABLE_MDNS=3D1 -DENABLE_SERVICE_DISCOVERY=3D1=
+ -DFULL_SAFE_BROWSING -DSAFE_BROWSING_CSD -DSAFE_BROWSING_DB_LOCAL -DU_COMM=
+ON_IMPLEMENTATION -DU_ICUDATAENTRY_IN_COMMON -DU_ENABLE_DYLOAD=3D0 -DU_NOEX=
+CEPT=3D -DUSE_LIBPCI=3D1 -DUSE_GLIB=3D1 -DUSE_NSS_CERTS=3D1 -DNDEBUG -DNVAL=
+GRIND -DDYNAMIC_ANNOTATIONS_ENABLED=3D0 -I../../third_party/icu/source/comm=
+on -I../../third_party/icu/source/i18n -Igen -fstack-protector --param=3Dss=
+p-buffer-size=3D4  -pthread -fno-strict-aliasing -Wno-extra -Wno-unused-par=
+ameter -Wno-missing-field-initializers -fvisibility=3Dhidden -pipe -fPIC -W=
+no-unused-local-typedefs -Wno-deprecated-declarations -Wno-unused-function =
+-m32 -O2 -fno-ident -fdata-sections -ffunction-sections -funwind-tables -fn=
+o-exceptions -fno-rtti -fno-threadsafe-statics -fvisibility-inlines-hidden =
+-frtti -Wno-deprecated -std=3Dgnu++11 -Wno-narrowing  -c ../../third_party/=
+icu/source/common/servrbf.cpp -o obj.host/third_party/icu/source/common/icu=
+uc.servrbf.o
+
+Buried deep in all your compiler options is "-m32". On my machine all these
+options are exactly the same except for this one; in my case my build has
+"-m64".
+
+Are you doing your world builds on a 32-bit machine?
+
+Could this one change account for my build success and your build failure?
 
