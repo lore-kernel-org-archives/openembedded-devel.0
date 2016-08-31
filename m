@@ -1,25 +1,24 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B3E1A731DD
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id EB0706057A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 07:26:19 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u7V7QJDL020111
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 31 Aug 2016 00:26:19 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.248.2;
-	Wed, 31 Aug 2016 00:26:18 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
+	Wed, 31 Aug 2016 07:37:33 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u7V7bYhX009736
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Aug 2016 00:37:34 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 31 Aug 2016 00:37:33 -0700
+From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 31 Aug 2016 03:26:13 -0400
-Message-ID: <24ab261599e8f219cee2e01070330071fa57e2b0.1472628235.git.hongxu.jia@windriver.com>
+Date: Wed, 31 Aug 2016 15:35:37 +0800
+Message-ID: <1472628937-25864-1-git-send-email-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.8.1
-In-Reply-To: <cover.1472628235.git.hongxu.jia@windriver.com>
-References: <cover.1472628235.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/2] lvm2: tweak MODPROBE_CMD for cross compile
+Subject: [meta-networking][PATCH] samba: add samba-pidl to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,91 +31,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2016 07:26:20 -0000
+X-List-Received-Date: Wed, 31 Aug 2016 07:37:37 -0000
 Content-Type: text/plain
 
-Lvm uses variable MODPROBE_CMD at runtime, so build time detection of modprobe
-is incorrect.
-------
-|lvm lvcreate --thinpool wrl/pool00 --size 5556m --config  devices
-{ preferred_names=["^/dev/mapper/", "^/dev/md/", "^/dev/sd"]
-filter=["r|/loop1$|","r|/loop2$|","r|/loop3$|","r|/loop4$|","r|/loop5$|","r|/loop6$|","r|/loop7$|"] }
-|tmp/sysroots/x86_64-linux/usr/bin/modprobe: execvp failed: No such file or directory
-|tmp/sysroots/x86_64-linux/usr/bin/modprobe failed: 2
-------
+From: Mingli Yu <Mingli.Yu@windriver.com>
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Issue: LIN9-1464
+
+* Add samba-pidl to RDEPENDS for samba as pidl
+  provided by samba depends on Parse::Pidl module
+  provided by samba-pidl, otherwise comes below error
+
+  root@super_micro-1:~# pidl -h
+  Can't locate Parse/Pidl.pm in @INC (you may
+  need to install the Parse::Pidl module) (@INC
+  contains: /usr/share/perl5 /etc/perl
+  /usr/lib64/perl/site_perl/5.22.1/
+  /usr/lib64/perl/site_perl/5.22.1
+  /usr/lib64/perl/vendor_perl/5.22.1/
+  /usr/lib64/perl/vendor_perl/5.22.1
+  /usr/lib64/perl/5.22.1/ /usr/lib64/perl/5.22.1
+  /usr/local/lib/site_perl .) at /usr/bin/pidl line 409.
+  BEGIN failed--compilation aborted at /usr/bin/pidl line 409.
+
+(LOCAL REV: NOT UPSTREAM) -- Sent to meta-oe on 20160831
+
+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
 ---
- meta-oe/recipes-support/lvm2/lvm2.inc              |  3 ++
- ...0005-tweak-MODPROBE_CMD-for-cross-compile.patch | 38 ++++++++++++++++++++++
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-oe/recipes-support/lvm2/lvm2/0005-tweak-MODPROBE_CMD-for-cross-compile.patch
+ meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index 3a5e1c4..e452f11 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -11,6 +11,7 @@ SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
-            file://0002-use-PTHREAD_MUTEX_RECURSIVE-instead-of-PTHREAD_MUTEX.patch \
-            file://0003-Guard-use-of-mallinfo-with-__GLIBC__.patch \
-            file://0004-include-fcntl.h-for-O_-defines-and-fcntl-signature.patch \
-+           file://0005-tweak-MODPROBE_CMD-for-cross-compile.patch \
-            "
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+index e35d527..eebf71c 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+@@ -130,7 +130,7 @@ PACKAGES += "${PN}-python ${PN}-python-dbg ${PN}-pidl libwinbind libwinbind-dbg
+ PACKAGES =+ "libwbclient libnss-winbind winbind winbind-dbg libnetapi libsmbsharemodes \
+              libsmbclient libsmbclient-dev lib${PN}-base ${PN}-base ${PN}-ctdb-tests"
  
- S = "${WORKDIR}/LVM2.${PV}"
-@@ -39,6 +40,8 @@ EXTRA_OECONF = "--with-user= \
-                 --with-systemdsystemunitdir=${systemd_system_unitdir} \
- "
+-RDEPENDS_${PN} += "${PN}-base"
++RDEPENDS_${PN} += "${PN}-base ${PN}-pidl"
  
-+CACHED_CONFIGUREVARS += "MODPROBE_CMD=${base_sbindir}/modprobe"
-+
- do_install_append() {
-     # Install machine specific configuration file
-     install -m 0644 ${WORKDIR}/lvm.conf ${D}${sysconfdir}/lvm/lvm.conf
-diff --git a/meta-oe/recipes-support/lvm2/lvm2/0005-tweak-MODPROBE_CMD-for-cross-compile.patch b/meta-oe/recipes-support/lvm2/lvm2/0005-tweak-MODPROBE_CMD-for-cross-compile.patch
-new file mode 100644
-index 0000000..8db320d
---- /dev/null
-+++ b/meta-oe/recipes-support/lvm2/lvm2/0005-tweak-MODPROBE_CMD-for-cross-compile.patch
-@@ -0,0 +1,38 @@
-+From 72866782f83c8cf85b10017df461128af90cae6e Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Tue, 30 Aug 2016 22:33:47 -0400
-+Subject: [PATCH] tweak MODPROBE_CMD for cross compile
-+
-+Lvm uses variable MODPROBE_CMD at runtime, so build time detection of modprobe
-+is incorrect.
-+------
-+|lvm lvcreate --thinpool wrl/pool00 --size 5556m --config  devices
-+{ preferred_names=["^/dev/mapper/", "^/dev/md/", "^/dev/sd"]
-+filter=["r|/loop1$|","r|/loop2$|","r|/loop3$|","r|/loop4$|","r|/loop5$|","r|/loop6$|","r|/loop7$|"] }
-+|tmp/sysroots/x86_64-linux/usr/bin/modprobe: execvp failed: No such file or directory
-+|tmp/sysroots/x86_64-linux/usr/bin/modprobe failed: 2
-+------
-+
-+Upstream-Status: Inappropriate [oe specific]
-+
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ configure.in | 2 --
-+ 1 file changed, 2 deletions(-)
-+
-+diff --git a/configure.in b/configure.in
-+index 8e04782..77681b0 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -1779,8 +1779,6 @@ if test "$UDEV_SYNC" = yes; then
-+ fi
-+ 
-+ ################################################################################
-+-AC_PATH_TOOL(MODPROBE_CMD, modprobe)
-+-
-+ if test -n "$MODPROBE_CMD"; then
-+ 	AC_DEFINE_UNQUOTED([MODPROBE_CMD], ["$MODPROBE_CMD"], [The path to 'modprobe', if available.])
-+ fi
-+-- 
-+2.8.1
-+
+ FILES_${PN}-base = "${sbindir}/nmbd \
+                     ${sbindir}/smbd \
 -- 
 2.8.1
 
