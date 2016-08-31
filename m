@@ -1,26 +1,47 @@
-Return-Path: <philip@balister.org>
-X-Greylist: delayed 400 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 31 Aug 2016 19:55:55 UTC
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with SMTP id 4817673243
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ua0-f195.google.com (mail-ua0-f195.google.com
+	[209.85.217.195])
+	by mail.openembedded.org (Postfix) with ESMTP id AC43A73243
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 19:55:55 +0000 (UTC)
-Received: (qmail 22385 invoked by uid 1003); 31 Aug 2016 19:49:15 -0000
-Received: from unknown (HELO ?192.168.11.142?)
-	(philip@opensdr.com@71.171.12.218)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	31 Aug 2016 19:49:15 -0000
-To: openembedded-devel@lists.openembedded.org
-References: <1472062075-18352-1-git-send-email-philip@balister.org>
-	<20160831170406.awhqhpy5rcf5ixqi@jama>
-From: Philip Balister <philip@balister.org>
-Message-ID: <38750bc0-32a1-a577-d1f3-90181a5bd1d2@balister.org>
-Date: Wed, 31 Aug 2016 15:49:09 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.2.0
+	Wed, 31 Aug 2016 21:16:05 +0000 (UTC)
+Received: by mail-ua0-f195.google.com with SMTP id s91so4685869uas.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Aug 2016 14:16:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=z/58ujdVAFA5ldvUcqoWB8cLAESEpMcaz5gIbxH472o=;
+	b=lGkh64npMVBM3Dc94T2rABeHOcNpXi4fgk4u4z9hYcvR+wlBREZijIlWyyWyrnWjUr
+	fsNtsgzBnWaZ4qnjG8+/3rT3FDEi2CQnVrDhesYh0BlZjBcBrBbHsNqXyDC6uOf3tDxX
+	lYEikY6LgJqD+X+kyDsFNVotGUIUBcdn1hI4qvj4o5CggCtOb+lgUBfzZu7Dy3Yqet1J
+	YdKF6JW6yQ1Ip3yj3zj+Ag+5+g2rrtKJR12EAlVCPZAOuZoBGqyaFYylnXFGydi3P6qc
+	CaeCFamq5pKnLevdUOAew1jtC+QelPINHJFV/0OYPEGOCJMKqx4YQmi+bno14H8Pi+Cb
+	E+sQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=z/58ujdVAFA5ldvUcqoWB8cLAESEpMcaz5gIbxH472o=;
+	b=MbKeflNeSSXNFFl7w3y7aHbK8L/RHD1gUPrt/dpWu7aYv0EhLfOnJWDxRrEj4jseA/
+	6c++N+TSDTH1KV+KUvq1ZRKRbH/2vRLAm2nDFUZOOWIQw8cn7gJkyoN2VaqS8pwVSGuv
+	6LUqZPy+9YMDNEBkeJAUIobuATBFdPbUoXXuTCWLOCzON9ue/k4ik+YsaVsq0WtkspbU
+	b6hlUdGmNhTh+r6uJULy/+Grxh1tRcLhjsN1cL98W2EAg+f6IPWleSwppopIfAFwIXae
+	BB1eppsksXKX2zclXPwWtBndB8YsoUvM6N6ygwJV9tj6hyET3ogiPfYBh5M4EkxP6ceE
+	/LMg==
+X-Gm-Message-State: AE9vXwPytP5t/MgxQboLjCabNPwhkeG1ZcPFHucOceGv8XOJLB0OcD9BbnW8hjgja02dnZgeEKhrRxBvZhk7GQ==
+X-Received: by 10.176.4.134 with SMTP id 6mr7308150uaw.51.1472678165469; Wed,
+	31 Aug 2016 14:16:05 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20160831170406.awhqhpy5rcf5ixqi@jama>
-Subject: Re: [meta-oe][PATCH] qwt: Use ${libdir} to install libraries.
+Received: by 10.176.65.130 with HTTP; Wed, 31 Aug 2016 14:16:04 -0700 (PDT)
+In-Reply-To: <20160831194106.14065-10-Martin.Jansa@gmail.com>
+References: <20160831194106.14065-1-Martin.Jansa@gmail.com>
+	<20160831194106.14065-10-Martin.Jansa@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 31 Aug 2016 23:16:04 +0200
+Message-ID: <CALbNGRSYfGe6FNkrMHVLyfCwBht7keoG4JXYVeqPUyOER+uCGA@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 10/11] geany-plugins: blacklist because of QA issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,109 +54,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2016 19:55:56 -0000
-X-Groupsio-MsgNum: 62929
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="KwEVF7ggcdrkhMDTOcFEKrdr5A7KQqMj6"
+X-List-Received-Date: Wed, 31 Aug 2016 21:16:08 -0000
+Content-Type: text/plain; charset=UTF-8
 
---KwEVF7ggcdrkhMDTOcFEKrdr5A7KQqMj6
-Content-Type: multipart/mixed; boundary="BwnvNh1jW3Rt9gTj00DSckWDhITXW1W6B";
- protected-headers="v1"
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <38750bc0-32a1-a577-d1f3-90181a5bd1d2@balister.org>
-Subject: Re: [oe] [meta-oe][PATCH] qwt: Use ${libdir} to install libraries.
-References: <1472062075-18352-1-git-send-email-philip@balister.org>
- <20160831170406.awhqhpy5rcf5ixqi@jama>
-In-Reply-To: <20160831170406.awhqhpy5rcf5ixqi@jama>
+On Wed, Aug 31, 2016 at 9:41 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> geany-plugins_1.27.bb: LICENSE_geany-plugins-pairtaghighlighter includes licenses (BSD-2-Clause) that are not listed in LICENSE
+>
+> geany-plugins-1.27: geany-plugins: Files/directories were installed but not shipped in any package:
+>   /usr/lib/geany/git-changebar.so
+> Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+> geany-plugins: 1 installed and not shipped files. [installed-vs-shipped]
+>
+> geany-plugins-1.27: geany-plugins-scope rdepends on libvte9, but it isn't a build dependency, missing vte9 in DEPENDS or PACKAGECONFIG? [build-deps]
+> geany-plugins-1.27: geany-plugins-debugger rdepends on libvte9, but it isn't a build dependency, missing vte9 in DEPENDS or PACKAGECONFIG? [build-deps]
+> geany-plugins-1.27: geany-plugins-multiterm rdepends on libvte9, but it isn't a build dependency, missing vte9 in DEPENDS or PACKAGECONFIG? [build-deps]
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb b/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
+> index b56d8f4..0e333c7 100644
+> --- a/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
+> +++ b/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
+> @@ -218,3 +218,5 @@ RDEPENDS_${PN}-xmlsnippets = "${PN}"
+>  PACKAGES =+ "${PLUGINS}"
+>  RDEPENDS_${PN} = "${PLUGINS}"
+>  ALLOW_EMPTY_${PN} = "1"
+> +
+> +PNBLACKLIST[geany-plugins] ?= "Causes multiple QA errors and LICENSE warnings"
+> --
+> 2.9.2
+>
+Are we blacklisting for warnings now or am I missing something?
 
---BwnvNh1jW3Rt9gTj00DSckWDhITXW1W6B
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+Andreas
 
-On 08/31/2016 01:04 PM, Martin Jansa wrote:
-> On Wed, Aug 24, 2016 at 02:07:55PM -0400, Philip Balister wrote:
->> This lets qwt build and package for systems that use lib64.
->=20
-> Which branch you want to apply this?
-
-A pox on people living in the past.
-
-Clearly I need to move this to meta-qt4.
-
-Sorry for the noise.
-
-Philip
-
-
->=20
-> It was removed 7 months ago!
->=20
-> commit 2bd11da4b50f401c9c49975aeedaaafa6a59d08b
-> Author:     Martin Jansa <Martin.Jansa@gmail.com>
-> AuthorDate: Thu Jan 7 15:57:45 2016 +0100
-> Commit:     Martin Jansa <Martin.Jansa@gmail.com>
-> CommitDate: Thu Jan 14 11:30:15 2016 +0100
->=20
->     recipes: remove recipes using or depending on qt4 bbclasses or reci=
-pes
->=20
->=20
->>
->> Signed-off-by: Philip Balister <philip@balister.org>
->> ---
->>  meta-oe/recipes-qt/qwt/qwt.inc | 1 +
->>  1 file changed, 1 insertion(+)
->>
->> diff --git a/meta-oe/recipes-qt/qwt/qwt.inc b/meta-oe/recipes-qt/qwt/q=
-wt.inc
->> index d3c4ed1..e1b260c 100644
->> --- a/meta-oe/recipes-qt/qwt/qwt.inc
->> +++ b/meta-oe/recipes-qt/qwt/qwt.inc
->> @@ -16,6 +16,7 @@ do_configure_prepend() {
->>      sed -i -e 's:qtAddLibrary(qwt:qtAddLibrary(qwt)${QT_LIBINFIX}:g' =
-*.prf
->>      sed -e 's/# QWT_CONFIG     +=3D QwtExamples/QWT_CONFIG     +=3D Q=
-wtExamples/g' -i qwtconfig.pri
->>      sed -i -e 's:/usr/local/qwt-$$QWT_VERSION:${D}${prefix}:g' ${S}/*=
-=2Epri
->> +    sed -i -e 's:$${QWT_INSTALL_PREFIX}/lib:${D}${libdir}:g' ${S}/*.p=
-ri
->>  }
->> =20
->>  do_install() {
->> --=20
->> 2.5.5
->>
->> --=20
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
->=20
->=20
-
-
---BwnvNh1jW3Rt9gTj00DSckWDhITXW1W6B--
-
---KwEVF7ggcdrkhMDTOcFEKrdr5A7KQqMj6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iQExBAEBCAAbBQJXxzS6FBxwaGlsaXBAYmFsaXN0ZXIub3JnAAoJEMDJd4rr0mer
-ocsIAKBJ8Nbi9bGqt0c3TrfmutwQnSZaOtQg4azAxoFfH8fRhAHxYMoVb+k+XqFz
-UacPhiIOeEoTk7+OpzixnpZQYG6B8HgKTqmKQ8IzZ6pOP9X2ORyihtuZs77hXcru
-IqVQVpomrQuY4tjME/ss0yYuR3WqecmttejW2+05BjgQed7L5PU49kPhu5riQ4fi
-S/vt77nlP7ZMeANEOVtbG/U8lAZQnaAKTyFWZbv9EWLcdYeLyT7IQbjUgSP07d2t
-kWzuLledIurfvAY/IxKS9mVhCqwUZXE9ceUZC46Bp9Mw7Ifs8C4qkjLoyLBfIQ9r
-5PU6UFjzhwRcvL3ABWMXXgRnTjM=
-=gdYh
------END PGP SIGNATURE-----
-
---KwEVF7ggcdrkhMDTOcFEKrdr5A7KQqMj6--
