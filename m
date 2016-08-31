@@ -1,48 +1,46 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 2AA29760B0
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 067656B6EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 19:41:31 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id c133so291656wmd.2
+	Wed, 31 Aug 2016 19:51:37 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id r128so4222450qkc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 12:41:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=jyagGshVPeWSYrnpmfQCgMDD3nm75qUTykSwpeAtgIM=;
-	b=Cp23/Cc56976B4ZaS0DaqDsSJPe2Ok+oNpCpoudaA0aIh9N0OgYylfIQdjPuroKSu6
-	h6rfTIswgNZZjfjIRZ0DGk+rz3xNUJlOxrZ0fNDCjUVf4IYEsY6Phi5ZxYct2LzNGKAQ
-	f5qEJVPXyOcxQ1+ZOs2UMqRDFcNYMs/xXgQZBWLDywkPFZIWjBvFNgp6565EbmhlJcQM
-	MGVEXcd0Pv5W6i6T+Qo87aLN+S/pedhxVbYqlgnZ4e1UMFGzvrpgbEYNbLAdvx1IyolH
-	T+0lvaoG6PgyBfLwrQHuB9fv5GIQ6KD7cwtCacLR6IDtGPKX9eUyMnnqJV4aw+poRtJE
-	8e4A==
+	Wed, 31 Aug 2016 12:51:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:organization;
+	bh=dBK7nOINcYgKAPywEHqC9n9rvcaEbRJnwmpLH+kw9iI=;
+	b=qa/O7zxYj151gjKbav/JG02Fzv7VJ90j+QatIN8Tkva/4+VpboDrNb558giLY5sLi8
+	rL/suYzdxjHIMMo5yGUtpWyoXHduX9Pn6fn+FVKpUsp3lL132309nRxNL5+egKLIitEJ
+	DMvzuAtCtfpdfhwsO083ZIQW8w+/jXxkNnZY4tEqO1RHOJcf+Htn8xePxUz/Q9zgNmeC
+	Z5cqA7E7yr2iIyz6MIBd8t3liYUnB6t9XfWHwikRkVxrU20jvVBaSeI4oX1LPSSA+rgk
+	uOL9Q7jqf08QN4IOX2CUK5GRwnC5yNWIplCx2xeR4mEhGQ0+lgI5rUWjvZ4HQ5TYcAos
+	Jz+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=jyagGshVPeWSYrnpmfQCgMDD3nm75qUTykSwpeAtgIM=;
-	b=R987BUi2kiOxifp8FBYOU0YnanAZGF+t2UBrmhJunSarrH/uYb0So9SQg2oLgguSBu
-	l/7TN1fO4ezeJLgED7Jc758g/hQJJRq8FPI3pa9ff6CY0bPa6e7qIbXZceV2ie4J5HY7
-	7rdT/kPyHPLxZ9+xdD4hmhoWoaex3SjFOZ8ZND4FwGjreKeaBlijz+Joai0x6qupiIo+
-	HgCIdMTELZy5eZtJvFgN6zQRL/4KmPR3v9nFGKVO6jrvd/AliBifvey+NtnM6nJ30aUU
-	ILB0DKtcOv5ZZexMSFS4lU9tLl5idARqUHS7XFGO1hGoPXLAcIvscA3sPYd/Bl5rYECy
-	6/vA==
-X-Gm-Message-State: AE9vXwPAOrUylsfzhsLhPsU94dAqPugic6f2iX0EEp1kG8AeNA89VVmt3XsPmADWFm28zQ==
-X-Received: by 10.194.73.8 with SMTP id h8mr10230502wjv.96.1472672491659;
-	Wed, 31 Aug 2016 12:41:31 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169])
-	by smtp.gmail.com with ESMTPSA id jd4sm1400396wjb.6.2016.08.31.12.41.30
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 31 Aug 2016 12:41:30 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=dBK7nOINcYgKAPywEHqC9n9rvcaEbRJnwmpLH+kw9iI=;
+	b=bRz9/7WR/1qLd4xzJT5xK8lPwiHlXC4dZOilHr0FGiKt+8RG7L3osSgpiSRYL9PPJf
+	xpM03hVLzZM9pZg0ONDTPpN7SDi0DOEnNeGbOIur29IcXva64NAry7cFztls0ZrSc0K9
+	VcHMVzs2blSPjSm57Xoxp5c+mHR0uOPBnwf4DleIsOZ2ligUZc75IO4j+bNuzThrusFz
+	TaBoZyZ6fTqisscL2rJeHoc4qRZgQuLQwdCMMHK8Cb32IQgyax/5wU27CZI3ZMM2KQgN
+	V6AQ4CiI+kK0r1TlVOUZUosCHYPRSteNUnnoWpZXf/tqGOX92BwhfZ8poRoxFuX+lr8r
+	QvYw==
+X-Gm-Message-State: AE9vXwNLPARIqrP8Mz9ooztjx1yXL+c2iCFkOPoivtHUkx3b9XZoehHEYCji/9Tl6nBThA==
+X-Received: by 10.55.159.200 with SMTP id i191mr12708003qke.26.1472673097970; 
+	Wed, 31 Aug 2016 12:51:37 -0700 (PDT)
+Received: from monster.lab.ossystems.com.br ([177.100.224.8])
+	by smtp.gmail.com with ESMTPSA id d76sm838648qkc.19.2016.08.31.12.51.35
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 31 Aug 2016 12:51:36 -0700 (PDT)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 31 Aug 2016 21:41:06 +0200
-Message-Id: <20160831194106.14065-11-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.9.2
-In-Reply-To: <20160831194106.14065-1-Martin.Jansa@gmail.com>
-References: <20160831194106.14065-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 11/11] smbnetfs: blacklist, depends on broken samba
+Date: Wed, 31 Aug 2016 16:51:09 -0300
+Message-Id: <1472673070-9887-1-git-send-email-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.1.4
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-python][PATCH 1/2] python-certifi: Add native and nativesdk to BBCLASSEXTEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,24 +53,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2016 19:41:31 -0000
+X-List-Received-Date: Wed, 31 Aug 2016 19:51:39 -0000
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 ---
- meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-python/recipes-devtools/python/python-certifi.inc | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-index f1420fb..84a78fe 100644
---- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-+++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-@@ -24,3 +24,5 @@ PACKAGECONFIG ??= ""
- PACKAGECONFIG[gnome-keyring] = "--with-gnome-keyring=yes,--with-gnome-keyring=no,libgnome-keyring"
+diff --git a/meta-python/recipes-devtools/python/python-certifi.inc b/meta-python/recipes-devtools/python/python-certifi.inc
+index 8c4579a..77fa53b 100644
+--- a/meta-python/recipes-devtools/python/python-certifi.inc
++++ b/meta-python/recipes-devtools/python/python-certifi.inc
+@@ -9,3 +9,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f77f61d14ee6feac4228d3ebd26cc1f1"
  
- S = "${WORKDIR}/git"
+ SRC_URI[md5sum] = "b57513f7670482da45bb350b792f659e"
+ SRC_URI[sha256sum] = "99864ed602d8a9d212e339b15ffa438895002eda7b7db20dca5309dac9605ae9"
 +
-+PNBLACKLIST[smbnetfs] ?= "Depends on broken samba"
++BBCLASSEXTEND = "native nativesdk"
++
 -- 
-2.9.2
+2.1.4
 
 
