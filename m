@@ -1,52 +1,53 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id E82216FF56
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 8FA516FF56
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 14:29:36 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id w207so3718875wmw.0
+	Wed, 31 Aug 2016 14:35:31 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id d196so3870061wmd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 07:29:37 -0700 (PDT)
+	Wed, 31 Aug 2016 07:35:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=PEhby4jn+AE/RQCusJfoCatvxDKAdwNyS6fSrHGxycM=;
-	b=JE5IQfYlCFD0FQpMwetr+s2pGb/ofVg41errqGriUripBssJtzByffUBeljntymWKS
-	6hP7hN5dowmq7jkDWdyeqMI5WrBmHjPq1knmF849JnvkWUVQ3V9q9+ShaDfCQRBfKJ2g
-	baehM995giKDPv5a6qyx4gwFkCSKi6sbcDdLq76R/S6qCH12B0Q3d5ae5qOsCtS2cxHn
-	50aHSO/fxYin4fLQYo16aA8VZ19ASfpU+fsuOqgkI4z94AHLDax1Nb9q0y4GjOeZS3RC
-	elXov1OodAVBaNmjaUwtehZYJABLEX/v2Onc3pOHWYZuGEZqqlUK8Pc7ObDWFIOXUf8E
-	LGeQ==
+	bh=WsFnJhsLq9dXGYX+9bLV7En8yT1Klm8irntwteGEhbM=;
+	b=zazyocdNAvoND/1oqP9pPj0vKn7vybryXKKFHemD+Z+H8HCtS4oaZGXKzmw8ft/Oxj
+	fkwqPdrq8IjwhYSakLLN+OfHPjiWsR6GkKFE9ii4cQ1iCPCKdcDykfe2Vx+njc6kzMO4
+	TzVrp1mJu10OGpzhxAxsu6gEUQfLWw9HhLW6XIEmk7nkTnCH15PgudfiafXe4KFmKmb+
+	znVtGqYmNHhnkOKwaHKNz+Pe+/GbcwRqpgztTLSjkO+ZTbl84P34TZ+gpeIda2d1f2kS
+	CwZY9CsCji5YQCVtsLRIe7sJLiE0uPLJdZkzwkf/avAVaK2VLCAatphmpzgFnHYjPJnv
+	W46A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	h=x-gm-message-state:from:date:to:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=PEhby4jn+AE/RQCusJfoCatvxDKAdwNyS6fSrHGxycM=;
-	b=SPBWdsU0VPfBEMWILihvg1cXnsrXux3Xr3K/YQqtT94zW8iZ4UHQutzsWDKMeos9CQ
-	YKR2CXBxr3VL7Vc205aZMteiMoi8+wJTLDBGXTcZMts/PJkIfN/ekt23ggfy+Um9A2mC
-	svSwQzweLSBguVwWIxjCFs/6cRh/6hr+0AohMEOOTfnFRFjGUcmyKUi8E83oBNp5C9o/
-	VZt2XgypSidyuRGB6UlDKwUhpo72sk6S14OrYoSm/XXMAvK2BERGKBjxdJReKfVSzc2l
-	fGKpoaJ7cEiOlg1crAjyB01eXw3M9QOALgYw7Z+oQCcZtLDxZ3Ldzjz9Jm7WTXNuHBnj
-	LSgg==
-X-Gm-Message-State: AE9vXwPHDFXzNXrBA/Ha2kpiaoT3vcT2nuCuaaoo28+hnea2ga24oy2S4eHrcNkYuonWTw==
-X-Received: by 10.28.25.71 with SMTP id 68mr10525447wmz.91.1472653776650;
-	Wed, 31 Aug 2016 07:29:36 -0700 (PDT)
+	bh=WsFnJhsLq9dXGYX+9bLV7En8yT1Klm8irntwteGEhbM=;
+	b=crR+OcP6vIdVM9c+b/4hkNsA1d9e4t7c0myphdZMTkEJMM5dA3LuGHxnq4l8Ac/0mg
+	T/7DATtHStXdAqqfcyaI8DCYUzDiJI9aW2b+CSgAtdHIGCYYLRd7mHgyP9WogC3l90lx
+	X/3JUYTwnrpfJAe9X81QjTeObkDfsx33ciFFDkiWmP6RsrREfI1aXPt5DwlxjIr88tKY
+	aLrd8CFOPuq5wYu1ZEprwjrv3hGKAdNdRfXpVpQpwarC5ugcmiOIlS3VVmhEYoAsfLaW
+	wy/nH0EXytndnTVOmD5eS/WTZdsNCXIeGrgEYxpNUgs3GsBJOWCQ0zZH4tAvnvd417ji
+	eR8Q==
+X-Gm-Message-State: AE9vXwMky3g/hgRSPcQFbudllx35lcJ2ad+B793gWvz7j19tq4SgIF8sQpcHQMwiNU9M4Q==
+X-Received: by 10.194.77.142 with SMTP id s14mr8939383wjw.77.1472654131029;
+	Wed, 31 Aug 2016 07:35:31 -0700 (PDT)
 Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
 	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	q139sm23999106wmb.18.2016.08.31.07.29.35
+	d64sm9264552wmc.22.2016.08.31.07.35.29
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 31 Aug 2016 07:29:35 -0700 (PDT)
+	Wed, 31 Aug 2016 07:35:29 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 31 Aug 2016 16:29:36 +0200
-To: Hongxu Jia <hongxu.jia@windriver.com>
-Message-ID: <20160831142936.qstloalaqbvqgeat@jama>
-References: <cover.1472628235.git.hongxu.jia@windriver.com>
-	<482840c22cd42b3821dfc1cb96aab39cdadcef4b.1472628235.git.hongxu.jia@windriver.com>
+Date: Wed, 31 Aug 2016 16:35:30 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160831143530.gy6guxm6rlbhhr6m@jama>
+References: <20160829205253.17988-1-Martin.Jansa@gmail.com>
+	<1472546366.8449.19.camel@andred.net>
+	<CALbNGRSJx4MD=SekttxB7H1PjEUTgaQfCnBtXu+t-YGX9BKVLw@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <482840c22cd42b3821dfc1cb96aab39cdadcef4b.1472628235.git.hongxu.jia@windriver.com>
+In-Reply-To: <CALbNGRSJx4MD=SekttxB7H1PjEUTgaQfCnBtXu+t-YGX9BKVLw@mail.gmail.com>
 User-Agent: Mutt/1.6.2 (2016-06-11)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/2] thin-provisioning-tools: add version 0.6.3
+Subject: Re: [meta-oe][PATCH] geany-plugins: include GPLv3 in the main LICENSE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,150 +60,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2016 14:29:37 -0000
-X-Groupsio-MsgNum: 62899
+X-List-Received-Date: Wed, 31 Aug 2016 14:35:32 -0000
+X-Groupsio-MsgNum: 62900
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ma4nmdflcwyrljjp"
+	protocol="application/pgp-signature"; boundary="g6gyta6dpgpaa7yx"
 Content-Disposition: inline
 
---ma4nmdflcwyrljjp
-Content-Type: text/plain; charset=us-ascii
+--g6gyta6dpgpaa7yx
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 31, 2016 at 03:26:14AM -0400, Hongxu Jia wrote:
-> It is required by lvm2, since lvm2 could find modprobe correctly
-> ------
-> |lvm lvchange -a y --config  devices { preferred_names=3D["^/dev/mapper/",
-> "^/dev/md/", "^/dev/sd"] }  wrl/pool00
-> |/usr/sbin/thin_check: execvp failed: No such file or directory
-> | Check of pool wrl/pool00 failed (status:2). Manual repair required!
-> ------
->=20
-> The thin-provisioning-tools provides /usr/sbin/thin_check.
->=20
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> ---
->  meta-oe/recipes-support/lvm2/lvm2.inc              |  2 +-
->  ...01-do-not-strip-pdata_tools-at-do_install.patch | 33 ++++++++++++++++=
-++++++
->  .../thin-provisioning-tools_0.6.3.bb               | 18 ++++++++++++
->  3 files changed, 52 insertions(+), 1 deletion(-)
->  create mode 100644 meta-oe/recipes-support/thin-provisioning-tools/files=
-/0001-do-not-strip-pdata_tools-at-do_install.patch
->  create mode 100755 meta-oe/recipes-support/thin-provisioning-tools/thin-=
-provisioning-tools_0.6.3.bb
->=20
-> diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-supp=
-ort/lvm2/lvm2.inc
-> index e452f11..e2feeb3 100644
-> --- a/meta-oe/recipes-support/lvm2/lvm2.inc
-> +++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-> @@ -66,6 +66,6 @@ TARGET_CC_ARCH +=3D "${LDFLAGS}"
->  FILES_${PN} +=3D "${libdir}/device-mapper/*.so ${base_libdir}/udev"
->  FILES_${PN}-dbg +=3D "${libdir}/device-mapper/.debug"
-> =20
-> -RDEPENDS_${PN} =3D "bash"
-> +RDEPENDS_${PN} =3D "bash thin-provisioning-tools"
-> =20
->  CONFFILES_${PN} +=3D "${sysconfdir}/lvm/lvm.conf"
-> diff --git a/meta-oe/recipes-support/thin-provisioning-tools/files/0001-d=
-o-not-strip-pdata_tools-at-do_install.patch b/meta-oe/recipes-support/thin-=
-provisioning-tools/files/0001-do-not-strip-pdata_tools-at-do_install.patch
-> new file mode 100644
-> index 0000000..b4cdda1
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/thin-provisioning-tools/files/0001-do-not-s=
-trip-pdata_tools-at-do_install.patch
-> @@ -0,0 +1,33 @@
-> +From e8be402e20cbdfbd8192a171ac9904d9362103bf Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Wed, 31 Aug 2016 01:35:40 -0400
-> +Subject: [PATCH] do not strip pdata_tools at do_install
-> +
-> +It caused QA Issue:
-> +--------------
-> +|ERROR: QA Issue: File '/usr/sbin/pdata_tools' from thin-provisioning-to=
-ols
-> +was already stripped, this will prevent future debugging! [already-strip=
-ped]
-> +--------------
-> +
-> +Upstream-Status: Inappropriate [oe specific]
-> +
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + Makefile.in | 1 -
-> + 1 file changed, 1 deletion(-)
-> +
-> +diff --git a/Makefile.in b/Makefile.in
-> +index 4264191..ac22042 100644
-> +--- a/Makefile.in
-> ++++ b/Makefile.in
-> +@@ -189,7 +189,6 @@ distclean: clean
-> + install: bin/pdata_tools
-> + 	$(INSTALL_DIR) $(BINDIR)
-> + 	$(INSTALL_PROGRAM) bin/pdata_tools $(BINDIR)
-> +-	$(STRIP) $(BINDIR)/pdata_tools
-> + 	ln -s -f pdata_tools $(BINDIR)/cache_check
-> + 	ln -s -f pdata_tools $(BINDIR)/cache_dump
-> + 	ln -s -f pdata_tools $(BINDIR)/cache_metadata_size
-> +--=20
-> +2.8.1
-> +
-> diff --git a/meta-oe/recipes-support/thin-provisioning-tools/thin-provisi=
-oning-tools_0.6.3.bb b/meta-oe/recipes-support/thin-provisioning-tools/thin=
--provisioning-tools_0.6.3.bb
-> new file mode 100755
-> index 0000000..c2ba95c
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/thin-provisioning-tools/thin-provisioning-t=
-ools_0.6.3.bb
-> @@ -0,0 +1,18 @@
-> +SUMMARY =3D "A suite of tools for manipulating the metadata of the dm-th=
-in device-mapper target."
+On Tue, Aug 30, 2016 at 10:41:29AM +0200, Andreas M=FCller wrote:
+> On Tue, Aug 30, 2016 at 10:39 AM, Andr=E9 Draszik <git@andred.net> wrote:
+> > On Mo, 2016-08-29 at 22:52 +0200, Martin Jansa wrote:
+> >> * since last changes in oe-core LICENSE variable needs to list all
+> >> licenses used
+> >>   by individual packages otherwise bitbake warning like this is shown:
+> >>   WARNING: meta-openembedded/meta-oe/recipes-devtools/geany/geany-
+> >> plugins_1.27.bb: LICENSE_geany-plugins-commander includes licenses (GP=
+Lv3)
+> >> that are not listed in LICENSE
+> >>   as possible improvement you can set LICENSE to GPLv2 to all plugins
+> >>   which are GPLv2-only, because now they will "inherit" both GPLv2 &
+> >>   GPLv3 which sucks as described here:
+> >>   https://www.mail-archive.com/openembedded-core@lists.openembedded.or=
+g/ms
+> >> g81645.html
+> >>
+> >> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> >> ---
+> >>  meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb | 2 +-
+> >>  1 file changed, 1 insertion(+), 1 deletion(-)
+> >>
+> >> diff --git a/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb b/me=
+ta-
+> >> oe/recipes-devtools/geany/geany-plugins_1.27.bb
+> >> index 9a39150..5e1e721 100644
+> >> --- a/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
+> >> +++ b/meta-oe/recipes-devtools/geany/geany-plugins_1.27.bb
+> >> @@ -1,7 +1,7 @@
+> >>  DESCRIPTION =3D "A fast and lightweight IDE"
+> >>  HOMEPAGE =3D "http://plugins.geany.org/"
+> >>  # majority's default
+> >
+> >      ^^^^^^^^^^
+> > To avoid confusion, it'd be good to remove this comment as well as it's=
+ not
+> > only the majority of licenses anymore
+> >
+> > Cheers,
+> > Andre'
+> >
+> >
+> >> -LICENSE =3D "GPLv2"
+> >> +LICENSE =3D "GPLv2 & GPLv3"
+> >>
+> >>  DEPENDS =3D "geany lua libxml2 libsoup-2.4 vte enchant intltool-native
+> >> libassuan gpgme"
+> >>
+> >> --
+> >> 2.9.2
+> >>
+> And probably a note that 90% of license information is wrong...
 
-This looks too long for SUMMARY.
+There are more issues in geany-plugins:
 
-> +HOMEPAGE =3D "https://github.com/jthornber/thin-provisioning-tools"
-> +LICENSE =3D "GPLv3"
-> +SECTION =3D "devel"
-> +
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
-504"
-> +S =3D "${WORKDIR}/git"
-> +
-> +SRC_URI =3D "git://github.com/jthornber/thin-provisioning-tools \
-> +           file://0001-do-not-strip-pdata_tools-at-do_install.patch \
-> +          "
+geany-plugins-1.27: geany-plugins: Files/directories were installed but not=
+ shipped in any package:
+  /usr/lib/geany/git-changebar.so
+Please set FILES such that these items are packaged. Alternatively if they =
+are unneeded, avoid installing them or delete them within do_install.
+geany-plugins: 1 installed and not shipped files. [installed-vs-shipped]
+geany-plugins-1.27: geany-plugins-scope rdepends on libvte9, but it isn't a=
+ build dependency, missing vte9 in DEPENDS or PACKAGECONFIG? [build-deps]
+geany-plugins-1.27: geany-plugins-debugger rdepends on libvte9, but it isn'=
+t a build dependency, missing vte9 in DEPENDS or PACKAGECONFIG? [build-deps]
+geany-plugins-1.27: geany-plugins-multiterm rdepends on libvte9, but it isn=
+'t a build dependency, missing vte9 in DEPENDS or PACKAGECONFIG? [build-dep=
+s]
 
-Closing quote should be first character (without indentation).
+It would be nice if someone actually using it send some fixes.
 
-> +
-> +SRCREV =3D "49bfc12e9c7956c1ac134b24afbe1a6a602ce7d5"
-> +
-> +DEPENDS +=3D "expat libaio boost"
-> +
-> +inherit autotools
-> +B =3D "${S}"
-
-Why not autotools-brokensep?
-> --=20
-> 2.8.1
->=20
+If nobody does in next week, I'll add PNBLACKLIST.
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---ma4nmdflcwyrljjp
+--g6gyta6dpgpaa7yx
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iEYEARECAAYFAlfG6c8ACgkQN1Ujt2V2gBwriQCeN5SGSa8OUp1D5V/aq+nG+Kjk
-6D4An1AP5HiwI23rnouIQbhs8MjT7TeU
-=pb+2
+iEYEARECAAYFAlfG6zEACgkQN1Ujt2V2gBz4jACfTW1XHG8bCPAUoGbRLseONtvY
+TxEAoJCufIcV7rFOHDsj2FbObByPra+t
+=zgNS
 -----END PGP SIGNATURE-----
 
---ma4nmdflcwyrljjp--
+--g6gyta6dpgpaa7yx--
