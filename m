@@ -1,48 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E62473216
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D02873216
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 19:41:26 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id c133so291330wmd.2
+	Wed, 31 Aug 2016 19:41:28 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id c133so291458wmd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Aug 2016 12:41:27 -0700 (PDT)
+	Wed, 31 Aug 2016 12:41:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=VcO1GYV+5qWoMQKiB+TBfwRqwtdAEm8EgOYMJqfm2cM=;
-	b=DnNqLNX9ArfosPOHYt8tPl8USl2kpRmUrlzRFNy159TO0t9xNRNeYfDdfop176Kwmv
-	YdN7MnSFv5peujdejW89zth2PpPtEtTEmucAt0QGExDinQCnEAeaqhn7rm+vpJXedjxn
-	lr6cmAaQwhUhyXHX18eefz0F4DsMVd1rDy5VpSK2kQeeSD9cvh6KeJnUbrZHVMX6JDKp
-	XHdIzZq28cW0Cs5N9bFaEVjIiLmYValRZBsVnhd2CRIoNHTgOe6SKhIPndbYg9BMEL6u
-	SYBDOQizTSwGokiaIwL6qJL2FWKIa3qoMkyKAS45sDdkN+P+g5K915R0GCraTYbWyVgJ
-	8n/A==
+	bh=rlMdYgDScbiSKfWIUWFr1qCVecVBKfAEtDUSMvXAv5E=;
+	b=G5xA1ZcU/b4a/qM1Ncl8BDdBzpb57QGIMo/WpLJuKjoUIf2bSurADNUMjbrvDJbfSI
+	YusERoSUuojX6Y1nDGPc/KDmRat3Q/7i0HsuDEbKTiP5UkJ+Jgj3k8xiSDeM6xjOrQPO
+	fyn7QL6F3zYyhzInl/Kug6rxsbMrULodJ4KYyFX3pIyjLQssvFXuXeCc+dXywPuN9Hu/
+	H5IejhFpfDax/1RN3QX44mz+xGvPjB3o6qVbEkG7PBZ6Cf/8j5dIaHT7odm5n7nl9yke
+	RK2s9+5fl/adCFrMs5iqS/BxkAFoMVmY9KUD74anrgtFcTa+gXQA43FWIsSwqLpXaB36
+	SXCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=VcO1GYV+5qWoMQKiB+TBfwRqwtdAEm8EgOYMJqfm2cM=;
-	b=QOev2+D5RZgFKMJLhVQqXQkteJ5yA2kt691fUl2rBp+3GfeqkV9XW+0mMpalgNeklJ
-	N9QgNOYNYuBspOye3sbeWi8uKbNorTHj4kNyzp4r6zNmabI+Cfoy1i8Iqc2SAwpdWWFs
-	4Yx033X1pQWqF2raIhw7Bo7GmA5EPSjfhfb6ciRLhWZk9VksIyUQfnRImaYQ0zJKCBTL
-	+ISA+fQNvE3V5q6pEUu8DVyOI+ZgmBBg618d0deBdsaPCz6VByKHXFTxTjQ2EsFHWMpu
-	eIWgfCAD+ePHc7qgMWEJipiBhkKmcf1gzjlUGr3vWZPlwzwTl301MteFjAXZKcMRRCry
-	Uatg==
-X-Gm-Message-State: AE9vXwNOU68Zr7dr+JxRDD63La+MgfbU1IrTMIEku6+vuIYo259fmBo5w+nieaOzdFc22g==
-X-Received: by 10.28.100.215 with SMTP id y206mr10819800wmb.115.1472672486675; 
-	Wed, 31 Aug 2016 12:41:26 -0700 (PDT)
+	bh=rlMdYgDScbiSKfWIUWFr1qCVecVBKfAEtDUSMvXAv5E=;
+	b=JWV03iH7eePMkFmnylod84FCwvYHEnE+dNBF0RkO7KM0yK9MNENcMbkYa02XAkuf2e
+	biwlQfeowoX4apRyRcslnU8Od1FIT4W13xWAyKVZziKP05aeIvscou/BH8ivBAjDU0fw
+	nbRu2TUKtNZd2C9iCgjbSYUOXaRg3qmHUcCsau0+wEAugQfT3G+DFsH3ElHOsGjtVajK
+	wHZclkiH/5I5OJjnHg3fqtQprGDhwsLtg3RLJCUC0fbayunUMx9C8zAUuAvnzrveGq8z
+	XaoWtqT1XC/86dtEhRzXJW0CX5mpweJsWKH6NV9kbQBfxCTY6nBpmzpnsX4F4VaEUYgs
+	0CAA==
+X-Gm-Message-State: AE9vXwOF/AeWjSpUfKdu0vkmb0ItEflLv7i1D+uIyl5evcfAOMLA9mIwdLa9XLIfug7f9A==
+X-Received: by 10.28.58.7 with SMTP id h7mr23485521wma.35.1472672488512;
+	Wed, 31 Aug 2016 12:41:28 -0700 (PDT)
 Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	190sm10435463wmk.13.2016.08.31.12.41.25
+	[89.176.104.169])
+	by smtp.gmail.com with ESMTPSA id u2sm25197680wmf.5.2016.08.31.12.41.27
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 31 Aug 2016 12:41:25 -0700 (PDT)
+	Wed, 31 Aug 2016 12:41:27 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 31 Aug 2016 21:41:03 +0200
-Message-Id: <20160831194106.14065-8-Martin.Jansa@gmail.com>
+Date: Wed, 31 Aug 2016 21:41:04 +0200
+Message-Id: <20160831194106.14065-9-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.9.2
 In-Reply-To: <20160831194106.14065-1-Martin.Jansa@gmail.com>
 References: <20160831194106.14065-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 08/11] glmark2: blacklist, fails to build with gcc-6
+Subject: [meta-oe][PATCH 09/11] tracker: blacklist, fails to build with new binutils-2.27
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,27 +55,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Aug 2016 19:41:26 -0000
+X-List-Received-Date: Wed, 31 Aug 2016 19:41:29 -0000
 
-* needs extra space after " in:
-  ../src/native-state-x11.cpp:63:33: error: invalid suffix on literal; C++11 requires a space between literal and string macro [-Werror=literal-suffix]
-       static const char *win_name("glmark2 "GLMARK_VERSION);
-                                   ^
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-benchmark/glmark2/glmark2_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-gnome/recipes-support/tracker/tracker_0.14.2.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-index 3a1c2e2..c6a4584 100644
---- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-+++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-@@ -53,3 +53,5 @@ python __anonymous() {
-         d.appendVar("EXTRA_OECONF", " --with-flavors=%s" % ",".join(flavors))
- }
+diff --git a/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
+index ff53669..7025280 100644
+--- a/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
++++ b/meta-gnome/recipes-support/tracker/tracker_0.14.2.bb
+@@ -83,3 +83,6 @@ FILES_${PN}-nautilus-extension += "${libdir}/nautilus/extensions-2.0/*.so"
  
-+# http://errors.yoctoproject.org/Errors/Details/81005/
-+PNBLACKLIST[glmark2] ?= "BROKEN: fails to build with gcc-6"
+ SRC_URI[md5sum] = "f3a871beeebf86fd752863ebd22af9ac"
+ SRC_URI[sha256sum] = "9b59330aa2e9e09feee587ded895e9247f71fc25f46b023d616d9969314bc7f1"
++
++# http://errors.yoctoproject.org/Errors/Details/81007/
++PNBLACKLIST[tracker] ?= "BROKEN: fails to build with new binutils-2.27"
 -- 
 2.9.2
 
