@@ -1,27 +1,30 @@
 Return-Path: <maxin.john@intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 3659670034
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 91E967321C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Sep 2016 11:41:06 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by orsmga101.jf.intel.com with ESMTP; 01 Sep 2016 04:41:07 -0700
+	Thu,  1 Sep 2016 11:41:08 +0000 (UTC)
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+	by fmsmga101.fm.intel.com with ESMTP; 01 Sep 2016 04:41:10 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.30,267,1470726000"; d="scan'208";a="1050112963"
+X-IronPort-AV: E=Sophos;i="5.30,267,1470726000"; 
+   d="scan'208";a="3447960"
 Received: from linux.intel.com ([10.54.29.200])
-	by fmsmga002.fm.intel.com with ESMTP; 01 Sep 2016 04:41:06 -0700
+	by fmsmga005.fm.intel.com with ESMTP; 01 Sep 2016 04:41:08 -0700
 Received: from mbabyjoh-desk.fi.intel.com (mbabyjoh-desk.fi.intel.com
 	[10.237.72.71])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by linux.intel.com (Postfix) with ESMTP id 7D5B66A4080
+	by linux.intel.com (Postfix) with ESMTP id 9D9F56A4080
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Sep 2016 04:40:46 -0700 (PDT)
+	Thu,  1 Sep 2016 04:40:48 -0700 (PDT)
 From: "Maxin B. John" <maxin.john@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Sep 2016 14:40:39 +0300
-Message-Id: <1472730043-31245-1-git-send-email-maxin.john@intel.com>
+Date: Thu,  1 Sep 2016 14:40:40 +0300
+Message-Id: <1472730043-31245-2-git-send-email-maxin.john@intel.com>
 X-Mailer: git-send-email 2.4.0
-Subject: [PATCH 0/4] move tslib, pointercal and xtscal recipes from oe-core
+In-Reply-To: <1472730043-31245-1-git-send-email-maxin.john@intel.com>
+References: <1472730043-31245-1-git-send-email-maxin.john@intel.com>
+Subject: [PATCH 1/4] pointercal: move recipe from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,23 +37,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Sep 2016 11:41:07 -0000
+X-List-Received-Date: Thu, 01 Sep 2016 11:41:08 -0000
 
-Move tslib tslib, pointercal and xtscal recipes from oe-core. These recipes
-are already removed from oe-core with these commits:
+Move pointercal recipe from oe-core layer.
 
-1. xtscal: remove recipe : 5bcdb9f0995474635789cf0774aba9b774277c53
-2. tslib: remove recipe : d37f6b595fd9ce53c79ff9281f2e20df7fa0503d
-3. pointercal: remove recipe: d56dffe629dfc86a8d3c7a043c8c2893004f803e
-
-Maxin B. John (4):
-  pointercal: move recipe from oe-core
-  meta-gpe: add pointercal to layer.conf
-  xtscal: move recipe from oe-core
-  tslib: move recipe from oe-core
-
- meta-gpe/conf/layer.conf                           |   2 +
- meta-gpe/recipes-bsp/pointercal/pointercal/COPYING |   2 +
+Signed-off-by: Maxin B. John <maxin.john@intel.com>
+---
+ meta-gpe/recipes-bsp/pointercal/pointercal/COPYING |   2 ++
  .../recipes-bsp/pointercal/pointercal/pointercal   |   0
  .../pointercal/pointercal/qemuarm/pointercal       |   1 +
  .../pointercal/pointercal/qemuarmv6/pointercal     |   1 +
@@ -59,16 +52,8 @@ Maxin B. John (4):
  .../pointercal/pointercal/qemuppc/pointercal       | Bin 0 -> 36 bytes
  .../pointercal/pointercal/qemux86-64/pointercal    |   1 +
  .../pointercal/pointercal/qemux86/pointercal       |   1 +
- meta-gpe/recipes-bsp/pointercal/pointercal_0.0.bb  |  22 +
- meta-gpe/recipes-graphics/tslib/tslib/ts.conf      |  25 +
- meta-gpe/recipes-graphics/tslib/tslib/tslib.sh     |   8 +
- meta-gpe/recipes-graphics/tslib/tslib_1.1.bb       |  53 ++
- .../xtscal/xtscal/30xTs_Calibrate.sh               |  13 +
- .../xtscal/xtscal/change-cross.patch               |  18 +
- .../recipes-graphics/xtscal/xtscal/cleanup.patch   | 621 +++++++++++++++++++++
- .../xtscal/dso_linking_change_build_fix.patch      |  27 +
- meta-gpe/recipes-graphics/xtscal/xtscal_0.6.3.bb   |  33 ++
- 19 files changed, 830 insertions(+)
+ meta-gpe/recipes-bsp/pointercal/pointercal_0.0.bb  |  22 +++++++++++++++++++++
+ 10 files changed, 30 insertions(+)
  create mode 100644 meta-gpe/recipes-bsp/pointercal/pointercal/COPYING
  create mode 100644 meta-gpe/recipes-bsp/pointercal/pointercal/pointercal
  create mode 100644 meta-gpe/recipes-bsp/pointercal/pointercal/qemuarm/pointercal
@@ -79,15 +64,98 @@ Maxin B. John (4):
  create mode 100644 meta-gpe/recipes-bsp/pointercal/pointercal/qemux86-64/pointercal
  create mode 100644 meta-gpe/recipes-bsp/pointercal/pointercal/qemux86/pointercal
  create mode 100644 meta-gpe/recipes-bsp/pointercal/pointercal_0.0.bb
- create mode 100644 meta-gpe/recipes-graphics/tslib/tslib/ts.conf
- create mode 100644 meta-gpe/recipes-graphics/tslib/tslib/tslib.sh
- create mode 100644 meta-gpe/recipes-graphics/tslib/tslib_1.1.bb
- create mode 100644 meta-gpe/recipes-graphics/xtscal/xtscal/30xTs_Calibrate.sh
- create mode 100644 meta-gpe/recipes-graphics/xtscal/xtscal/change-cross.patch
- create mode 100644 meta-gpe/recipes-graphics/xtscal/xtscal/cleanup.patch
- create mode 100644 meta-gpe/recipes-graphics/xtscal/xtscal/dso_linking_change_build_fix.patch
- create mode 100644 meta-gpe/recipes-graphics/xtscal/xtscal_0.6.3.bb
 
+diff --git a/meta-gpe/recipes-bsp/pointercal/pointercal/COPYING b/meta-gpe/recipes-bsp/pointercal/pointercal/COPYING
+new file mode 100644
+index 0000000..63f5293
+--- /dev/null
++++ b/meta-gpe/recipes-bsp/pointercal/pointercal/COPYING
+@@ -0,0 +1,2 @@
++This is a blank COPYING file, and should be filled in by original author in future.
++
+diff --git a/meta-gpe/recipes-bsp/pointercal/pointercal/pointercal b/meta-gpe/recipes-bsp/pointercal/pointercal/pointercal
+new file mode 100644
+index 0000000..e69de29
+diff --git a/meta-gpe/recipes-bsp/pointercal/pointercal/qemuarm/pointercal b/meta-gpe/recipes-bsp/pointercal/pointercal/qemuarm/pointercal
+new file mode 100644
+index 0000000..abd84ca
+--- /dev/null
++++ b/meta-gpe/recipes-bsp/pointercal/pointercal/qemuarm/pointercal
+@@ -0,0 +1 @@
++8313 4 -8526 7 8334 -82604 65536
+diff --git a/meta-gpe/recipes-bsp/pointercal/pointercal/qemuarmv6/pointercal b/meta-gpe/recipes-bsp/pointercal/pointercal/qemuarmv6/pointercal
+new file mode 100644
+index 0000000..abd84ca
+--- /dev/null
++++ b/meta-gpe/recipes-bsp/pointercal/pointercal/qemuarmv6/pointercal
+@@ -0,0 +1 @@
++8313 4 -8526 7 8334 -82604 65536
+diff --git a/meta-gpe/recipes-bsp/pointercal/pointercal/qemuarmv7/pointercal b/meta-gpe/recipes-bsp/pointercal/pointercal/qemuarmv7/pointercal
+new file mode 100644
+index 0000000..abd84ca
+--- /dev/null
++++ b/meta-gpe/recipes-bsp/pointercal/pointercal/qemuarmv7/pointercal
+@@ -0,0 +1 @@
++8313 4 -8526 7 8334 -82604 65536
+diff --git a/meta-gpe/recipes-bsp/pointercal/pointercal/qemumips/pointercal b/meta-gpe/recipes-bsp/pointercal/pointercal/qemumips/pointercal
+new file mode 100644
+index 0000000..abd84ca
+--- /dev/null
++++ b/meta-gpe/recipes-bsp/pointercal/pointercal/qemumips/pointercal
+@@ -0,0 +1 @@
++8313 4 -8526 7 8334 -82604 65536
+diff --git a/meta-gpe/recipes-bsp/pointercal/pointercal/qemuppc/pointercal b/meta-gpe/recipes-bsp/pointercal/pointercal/qemuppc/pointercal
+new file mode 100644
+index 0000000000000000000000000000000000000000..c2d6e37bf0c0d956ba17ba9955613c4cee5a147a
+GIT binary patch
+literal 36
+mcmXpsFt#*Q&;=n=3lPgl!O+0i%uK=9!qiZ~%+%D_i~#_8+XjmO
+
+literal 0
+HcmV?d00001
+
+diff --git a/meta-gpe/recipes-bsp/pointercal/pointercal/qemux86-64/pointercal b/meta-gpe/recipes-bsp/pointercal/pointercal/qemux86-64/pointercal
+new file mode 100644
+index 0000000..640053d
+--- /dev/null
++++ b/meta-gpe/recipes-bsp/pointercal/pointercal/qemux86-64/pointercal
+@@ -0,0 +1 @@
++1280 0 1002 0 960 328 65536
+diff --git a/meta-gpe/recipes-bsp/pointercal/pointercal/qemux86/pointercal b/meta-gpe/recipes-bsp/pointercal/pointercal/qemux86/pointercal
+new file mode 100644
+index 0000000..640053d
+--- /dev/null
++++ b/meta-gpe/recipes-bsp/pointercal/pointercal/qemux86/pointercal
+@@ -0,0 +1 @@
++1280 0 1002 0 960 328 65536
+diff --git a/meta-gpe/recipes-bsp/pointercal/pointercal_0.0.bb b/meta-gpe/recipes-bsp/pointercal/pointercal_0.0.bb
+new file mode 100644
+index 0000000..df735a5
+--- /dev/null
++++ b/meta-gpe/recipes-bsp/pointercal/pointercal_0.0.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "Touchscreen calibration data"
++SECTION = "base"
++PR = "r11"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4b5fcfc87fb615860d398b5e38685edf"
++
++SRC_URI = "file://pointercal \
++           file://COPYING"
++
++S = "${WORKDIR}"
++
++do_install() {
++	# Only install file if it has a contents
++	if [ -s ${S}/pointercal ]; then
++	        install -d ${D}${sysconfdir}/
++	        install -m 0644 ${S}/pointercal ${D}${sysconfdir}/
++	fi
++}
++
++ALLOW_EMPTY_${PN} = "1"
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++INHIBIT_DEFAULT_DEPS = "1"
 -- 
 2.4.0
 
