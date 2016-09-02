@@ -1,31 +1,28 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
-	by mail.openembedded.org (Postfix) with ESMTP id 249087316B
+Return-Path: <s.mueller-klieser@phytec.de>
+Received: from root.phytec.de (mail.phytec.de [217.6.246.34])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C30A76312
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Sep 2016 09:41:08 +0000 (UTC)
-Received: from mail1.sbs.de (mail1.sbs.de [192.129.41.35])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id u829f1sa014808
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Fri,  2 Sep 2016 14:58:38 +0000 (UTC)
+Received: from idefix.phytec.de (idefix.phytec.de [172.16.0.10])
+	by root.phytec.de (Postfix) with ESMTP id C904EA002F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 2 Sep 2016 11:41:01 +0200
-Received: from [139.16.78.136] (MD1FZU9C.ww002.siemens.net [139.16.78.136])
-	by mail1.sbs.de (8.15.2/8.15.2) with ESMTPS id u829f0lr024377
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 2 Sep 2016 11:41:01 +0200
+	Fri,  2 Sep 2016 16:58:49 +0200 (CEST)
+Received: from lws-mklieser.phytec.de ([172.16.10.21])
+	by idefix.phytec.de (IBM Domino Release 9.0.1FP5 HF413)
+	with ESMTP id 2016090216583811-142824 ;
+	Fri, 2 Sep 2016 16:58:38 +0200 
+From: =?UTF-8?q?Stefan=20M=C3=BCller-Klieser?= <s.mueller-klieser@phytec.de>
 To: openembedded-devel@lists.openembedded.org
-References: <9cb3a54e-58ef-9433-06d9-514238fb9443@siemens.com>
-	<6dc69872-3f81-6078-48fb-b2a744133ca2@siemens.com>
-	<CANx9H-AXcoS=z=rFcFJKKrfea-KUfSkFgPz_WGrEe88JagScKw@mail.gmail.com>
-	<b278fd85-94db-b343-1a93-13d41cd5ad62@siemens.com>
-From: Pascal Bach <pascal.bach@siemens.com>
-Message-ID: <240fd13e-3c4b-1c59-e1b7-182f9c83ff81@siemens.com>
-Date: Fri, 2 Sep 2016 11:41:00 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
-	Thunderbird/45.2.0
+Date: Fri, 2 Sep 2016 16:58:37 +0200
+Message-Id: <1472828317-29130-1-git-send-email-s.mueller-klieser@phytec.de>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <b278fd85-94db-b343-1a93-13d41cd5ad62@siemens.com>
-Subject: Re: [meta-java] Unify virtual java providers
+X-MIMETrack: Itemize by SMTP Server on Idefix/Phytec(Release 9.0.1FP5
+	HF413|March 21, 2016) at 02.09.2016 16:58:38,
+	Serialize by Router on Idefix/Phytec(Release 9.0.1FP5 HF413|March 21,
+	2016) at 02.09.2016 16:58:38
+X-TNEFEvaluated: 1
+Subject: [meta-qt5][PATCH] qt5-opengles2-test: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,42 +35,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Sep 2016 09:41:09 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 02 Sep 2016 14:58:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
+This brings back the qt5-opengles2-test. I cloned the vanished
+repository, as it is a handy and small test application. We use it for
+our embedded boards.
 
->> This is a hint that you need to set PREFERRED_PROVIDER_foo in your
->> local.conf (or machine.conf or distro.conf or...)
->>
->> http://www.yoctoproject.org/docs/2.1/mega-manual/mega-manual.html#var-PREFERRED_PROVIDER
->>
->> You might also need to set PREFERRED_VERSION, depending on the situation.
->>
->> My idea would be to allow the user to select a default provider for
-> I think setting PREFERRED_VERSION is not the issue in my case.
->
-> The reason I see the issue is that I also tried to set: RPROVIDES_${PN} += "virtual/jre" in order to allow users to select "virtual/jre"
->  in an RDEPENDS which I believe is necessary in many cases.
->
-> However I don't know of a way to set a preferred RPROVIDER.
-Sorry I completely missed that one can set PREFERRED_RPROVIDER too (it's not in the documentation only PREFERRED_PROVIDER is).
+Signed-off-by: Stefan M=C3=BCller-Klieser <s.mueller-klieser@phytec.de>
+---
+ recipes-qt/examples/qt5-opengles2-test=5Fgit.bb | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 recipes-qt/examples/qt5-opengles2-test=5Fgit.bb
 
-However when I set PREFERRED_RPROVIDER_virtual/jre = "zulu-java" i'm still not able to install zulu-java, openjdk and oracle-java at the same time.
-I modified them all to RPROVIDE_${PN} += "virtual/jre" and added ALTERNATIVES for java vie updata-alternatives.
-But bitbake gives me the following error:
-
-ERROR: Nothing RPROVIDES 'oracle-java' (but /home/projects/image.bb RDEPENDS on or otherwise requires it)
-ERROR: oracle-java was skipped: PREFERRED_PROVIDER_virtual/jre set to zulu-java, not oracle-java
-
-So based on that I assume it's really not possible to have a preverd java REPROVIDER and still install others to be used via the alternatives system?
-
->
->>> "virtual/jre" but still allow to install an additional specific java
->>> provider if necessary.
->>> Is this even possible?
-> Based on what I found out above, don't think this is possible. Please correct me if I'm wrong.
->
-> Pascal
+diff --git a/recipes-qt/examples/qt5-opengles2-test=5Fgit.bb b/recipes-qt/e=
+xamples/qt5-opengles2-test=5Fgit.bb
+new file mode 100644
+index 0000000..5da25dc
+--- /dev/null
++++ b/recipes-qt/examples/qt5-opengles2-test=5Fgit.bb
+@@ -0,0 +1,19 @@
++SUMMARY =3D "Qt5 OpenGL ES 2.0 Test Application"
++DESCRIPTION =3D "This application is used to test OpenGL ES 2.0 rendering \
++in a simple QWindow, plus multi-touch input, window orientation, window \
++focus handling and some other game-related features."
++LICENSE =3D "MIT"
++LIC=5FFILES=5FCHKSUM =3D "file://${WORKDIR}/git/main.cpp;beginline=3D1;end=
+line=3D26;md5=3D93b83ece006c9e76b9fca80c3aecb169"
++
++PV =3D "1.0.4+gitr${SRCPV}"
++
++DEPENDS =3D "qtbase qtsensors"
++
++# Depends on gles2 enabled and that's not default configuration
++EXCLUDE=5FFROM=5FWORLD =3D "1"
++
++SRC=5FURI =3D "git://github.com/smk-embedded/qt5-opengles2-test.git"
++SRCREV =3D "938390507054ed1258345f70ed55770d2fe56176"
++S =3D "${WORKDIR}/git"
++
++inherit qmake5
+--=20
+1.9.1
 
 
