@@ -1,22 +1,31 @@
 Return-Path: <pascal.bach@siemens.com>
-Received: from david.siemens.de (david.siemens.de [192.35.17.14])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B48F73166
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+	by mail.openembedded.org (Postfix) with ESMTP id 249087316B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Sep 2016 09:01:05 +0000 (UTC)
-Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
-	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id u82915vV015579
+	Fri,  2 Sep 2016 09:41:08 +0000 (UTC)
+Received: from mail1.sbs.de (mail1.sbs.de [192.129.41.35])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id u829f1sa014808
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 2 Sep 2016 11:01:05 +0200
-Received: from dev.sbt.siemens.com (MD1FZU9C.ww002.siemens.net [139.16.78.136])
-	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id u82915EP009798;
-	Fri, 2 Sep 2016 11:01:05 +0200
-From: Pascal Bach <pascal.bach@siemens.com>
+	Fri, 2 Sep 2016 11:41:01 +0200
+Received: from [139.16.78.136] (MD1FZU9C.ww002.siemens.net [139.16.78.136])
+	by mail1.sbs.de (8.15.2/8.15.2) with ESMTPS id u829f0lr024377
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 2 Sep 2016 11:41:01 +0200
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Sep 2016 11:01:00 +0200
-Message-Id: <1472806860-24330-1-git-send-email-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-oe][PATCH] p7zip: update to version 16.02
+References: <9cb3a54e-58ef-9433-06d9-514238fb9443@siemens.com>
+	<6dc69872-3f81-6078-48fb-b2a744133ca2@siemens.com>
+	<CANx9H-AXcoS=z=rFcFJKKrfea-KUfSkFgPz_WGrEe88JagScKw@mail.gmail.com>
+	<b278fd85-94db-b343-1a93-13d41cd5ad62@siemens.com>
+From: Pascal Bach <pascal.bach@siemens.com>
+Message-ID: <240fd13e-3c4b-1c59-e1b7-182f9c83ff81@siemens.com>
+Date: Fri, 2 Sep 2016 11:41:00 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
+	Thunderbird/45.2.0
+MIME-Version: 1.0
+In-Reply-To: <b278fd85-94db-b343-1a93-13d41cd5ad62@siemens.com>
+Subject: Re: [meta-java] Unify virtual java providers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,34 +38,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Sep 2016 09:01:07 -0000
+X-List-Received-Date: Fri, 02 Sep 2016 09:41:09 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
----
- meta-oe/recipes-extended/p7zip/{p7zip_15.14.1.bb => p7zip_16.02.bb} | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/p7zip/{p7zip_15.14.1.bb => p7zip_16.02.bb} (89%)
 
-diff --git a/meta-oe/recipes-extended/p7zip/p7zip_15.14.1.bb b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
-similarity index 89%
-rename from meta-oe/recipes-extended/p7zip/p7zip_15.14.1.bb
-rename to meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
-index 8e2e241..12be02c 100644
---- a/meta-oe/recipes-extended/p7zip/p7zip_15.14.1.bb
-+++ b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
-@@ -7,8 +7,9 @@ LIC_FILES_CHKSUM = "file://DOC/copying.txt;md5=4fbd65380cdd255951079008b364516c
- 
- SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_all.tar.bz2 \
-           file://do_not_override_compiler_and_do_not_strip.patch"
--SRC_URI[md5sum] = "92cca093312b5a71a7be7dc7d1d32509"
--SRC_URI[sha256sum] = "699db4da3621904113e040703220abb1148dfef477b55305e2f14a4f1f8f25d4"
-+
-+SRC_URI[md5sum] = "a0128d661cfe7cc8c121e73519c54fbf"
-+SRC_URI[sha256sum] = "5eb20ac0e2944f6cb9c2d51dd6c4518941c185347d4089ea89087ffdd6e2341f"
- 
- S = "${WORKDIR}/${BPN}_${PV}"
- 
--- 
-2.1.4
+>> This is a hint that you need to set PREFERRED_PROVIDER_foo in your
+>> local.conf (or machine.conf or distro.conf or...)
+>>
+>> http://www.yoctoproject.org/docs/2.1/mega-manual/mega-manual.html#var-PREFERRED_PROVIDER
+>>
+>> You might also need to set PREFERRED_VERSION, depending on the situation.
+>>
+>> My idea would be to allow the user to select a default provider for
+> I think setting PREFERRED_VERSION is not the issue in my case.
+>
+> The reason I see the issue is that I also tried to set: RPROVIDES_${PN} += "virtual/jre" in order to allow users to select "virtual/jre"
+>  in an RDEPENDS which I believe is necessary in many cases.
+>
+> However I don't know of a way to set a preferred RPROVIDER.
+Sorry I completely missed that one can set PREFERRED_RPROVIDER too (it's not in the documentation only PREFERRED_PROVIDER is).
+
+However when I set PREFERRED_RPROVIDER_virtual/jre = "zulu-java" i'm still not able to install zulu-java, openjdk and oracle-java at the same time.
+I modified them all to RPROVIDE_${PN} += "virtual/jre" and added ALTERNATIVES for java vie updata-alternatives.
+But bitbake gives me the following error:
+
+ERROR: Nothing RPROVIDES 'oracle-java' (but /home/projects/image.bb RDEPENDS on or otherwise requires it)
+ERROR: oracle-java was skipped: PREFERRED_PROVIDER_virtual/jre set to zulu-java, not oracle-java
+
+So based on that I assume it's really not possible to have a preverd java REPROVIDER and still install others to be used via the alternatives system?
+
+>
+>>> "virtual/jre" but still allow to install an additional specific java
+>>> provider if necessary.
+>>> Is this even possible?
+> Based on what I found out above, don't think this is possible. Please correct me if I'm wrong.
+>
+> Pascal
 
 
