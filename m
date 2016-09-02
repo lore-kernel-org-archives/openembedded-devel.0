@@ -1,47 +1,46 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-vk0-f41.google.com (mail-vk0-f41.google.com
-	[209.85.213.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 24F5D75C51
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id A3B7676E5E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Sep 2016 21:36:57 +0000 (UTC)
-Received: by mail-vk0-f41.google.com with SMTP id f76so7436407vke.0
+	Fri,  2 Sep 2016 02:03:29 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id a143so1833210pfa.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Sep 2016 14:36:58 -0700 (PDT)
+	Thu, 01 Sep 2016 19:03:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=dapeZWkxMCvwNZPz81I0Nck9plKGkQTwqM6MtJQlCvk=;
-	b=jLtSRFpErimxN/ORgE8qgsTIVkK88q4kXD+cHgRNId3RUA08mgOtej6U/NF9yoHuJ4
-	UxvxJ5Gpe4OssWbReeAFC/aLtWkft4Q5ruN5ciym1ahw/BwTYsLoXSQfmt+rLXx3BNhZ
-	107Sd4fnqxi1rWHlgRh6Wy81Nqe8sbY8OtpFsW3SrG+PlCsTaZvahx6AaRNqNOrGW1zE
-	YpTzlLcvhc7EDkSRQBqRwlfB4jOgdVBwdRVB1mBAxzDm6lyOj7jzFrf3NBJ3jn/P60xN
-	av7C7cdlc0kB62aDGNNtyWwf5BjlKrlHBWGXmOuSCEY1GMdLq+NBClbQMjj6b5E2/iTP
-	yO7Q==
+	h=from:to:cc:subject:date:message-id;
+	bh=xQF8cVO7ouMWOqNlHPPKhBy6gnlb/YzmskvJ0M8KNkk=;
+	b=GbidWr92b8EEclo9dH4yCp7QIjtsCwaXl4agEjfLlYgC7v3W4cv6WFOTMYYcwNmNcm
+	zi8ec/pti4uLKjCLC0EAXOC5+gLMqH38N87O27obJlB+hGNxTpepN3YTs/CBISBajm3j
+	+4wWz7oXJIWQLqLqmzxHOkGzsUSitgZTgr7zy4o/ki4MfaEphUVkIKLsSBQEywDP0xoq
+	bDTDMtQetf0EpXKA1UsQs7JwPGQ4fUy3SCcpujxcQ5U6dA/6f4cGEm6LGzUxTskvoQLP
+	1b4imWzKxyO9EaqgjqIuz74x8YTpZIEmhSVd+Yiqw5Gc0Y+gmx9C+UnSsq1e1IbAArgG
+	dGkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=dapeZWkxMCvwNZPz81I0Nck9plKGkQTwqM6MtJQlCvk=;
-	b=fPDUwWXBilfqAzukh3FMsdYfGr8HhiC61rvZicFh+VV5t5i5acYiuNH0nWgfzdAbf9
-	36Fs76JTxBi4St4Y0/ZVlPcogjLY+dJsonfxVb80JSicP9omBOX1NwHege3V09CUMHR0
-	Caaz8GO1bwY4ejg7TMxBWLBUy/U5OcKSfrGbpXHvJeOyzIlcnIbk0VmuTbBsbbAsVuw/
-	69o0NBDFBTnmI5weUfvpanqo2NNGynorfr3vaecfE5VOc9gf0/s7qMrNn7ctj006Cb36
-	szzP8P1x9gAyZ5TFMzXIGGRwW6lxbnEYU6QD8s/gbU04tFmlYtrwdVs0ZiRLg/ynjZCp
-	UY8Q==
-X-Gm-Message-State: AE9vXwO0AIDOhPACZNjq2DyjqmN7MSdYDaQbwUxgY3xrbjQVScslZiZsD+vjZTIFxD5jCnPgrauGUaO/aQbPGA==
-X-Received: by 10.31.133.11 with SMTP id h11mr10709169vkd.64.1472765817799;
-	Thu, 01 Sep 2016 14:36:57 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.31.137.141 with HTTP; Thu, 1 Sep 2016 14:36:57 -0700 (PDT)
-In-Reply-To: <6dc69872-3f81-6078-48fb-b2a744133ca2@siemens.com>
-References: <9cb3a54e-58ef-9433-06d9-514238fb9443@siemens.com>
-	<6dc69872-3f81-6078-48fb-b2a744133ca2@siemens.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Thu, 1 Sep 2016 14:36:57 -0700
-Message-ID: <CANx9H-AXcoS=z=rFcFJKKrfea-KUfSkFgPz_WGrEe88JagScKw@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-java] Unify virtual java providers
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=xQF8cVO7ouMWOqNlHPPKhBy6gnlb/YzmskvJ0M8KNkk=;
+	b=mljI3DvPgalkEIZeRybnXuWmKg6uA9g2mpXN6LrBOrv4IyUI8yu82hQKu7uzdZn2Dl
+	+Mp5TTN+c4vIQyFsre/iSpEVxZ6WQgeTOG4jykDy55dRF/zbBjYivmza0dZGXFtrEczw
+	S0hcUtHofQ1f4HkbMOORYa7p2FMsrAp0m9d4+lzSX8CaLpsnb5XrsHFlZnWiqPnXKYJb
+	dRqnImMRXOloEbUk0xfhJZ2fA67FqkXcDHnwzqQpZJfPLNEvuhs4JRYtataRIMRa7enp
+	7PH9Cog3B2UBASoUHw3L6KBmYBTOILqaFbDKBoHfbSFsbapJXxSvpP99KmU107M2YKVH
+	dY7A==
+X-Gm-Message-State: AE9vXwPiUNbOAdJ/8EkdAZt4+Nscws88w+nhc0JnIW1mKHm5iCd0zfxsRTgnFY7uUk0KBg==
+X-Received: by 10.98.82.130 with SMTP id g124mr16738772pfb.157.1472781810017; 
+	Thu, 01 Sep 2016 19:03:30 -0700 (PDT)
+Received: from e6520.adbgroup.pl
+	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
+	by smtp.gmail.com with ESMTPSA id
+	a5sm10347024pfc.89.2016.09.01.19.03.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 01 Sep 2016 19:03:28 -0700 (PDT)
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  1 Sep 2016 19:03:18 -0700
+Message-Id: <1472781798-24946-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] rdfind: add initial recipe, rdfind 1.3.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,52 +53,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Sep 2016 21:37:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 02 Sep 2016 02:03:30 -0000
 
-On Thu, Sep 1, 2016 at 5:03 AM, Pascal Bach <pascal.bach@siemens.com> wrote:
+  https://rdfind.pauldreik.se/
 
-> Hi guys
-> > It should be properly documented in the readme and the virtual packages
-> should be the preferred way for users to depend on java/jre resp javac/jdk
-> >
-> > An alternative to the above would be:
-> >
-> > - virtual/jre
-> > - virtual/jre-native
-> > - virtual/jdk
-> > - virtual/jdk-native
-> >
-> > But this would deviate more from the current naming.
-> >
-> While testing the proposal above i ran into an issue.
-> When I add PROVIDES = "virtual/jre" to the java recipes and i want to
-> install multiple java versions via update-alternative I can't do that
-> because bitbake tells me:
->
-> "Multiple .bb files are due to be built which each provide virtual/jre:"
->
-> Now the question for me is if this two mechanism are not intended to work
-> together or if I'm doing something wrong.
->
->
-This is a hint that you need to set PREFERRED_PROVIDER_foo in your
-local.conf (or machine.conf or distro.conf or...)
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ .../rdfind/files/reproducible_build.patch          | 46 ++++++++++++++++++++++
+ meta-oe/recipes-support/rdfind/rdfind_1.3.4.bb     | 17 ++++++++
+ 2 files changed, 63 insertions(+)
+ create mode 100644 meta-oe/recipes-support/rdfind/files/reproducible_build.patch
+ create mode 100644 meta-oe/recipes-support/rdfind/rdfind_1.3.4.bb
 
-http://www.yoctoproject.org/docs/2.1/mega-manual/mega-manual.html#var-PREFERRED_PROVIDER
+diff --git a/meta-oe/recipes-support/rdfind/files/reproducible_build.patch b/meta-oe/recipes-support/rdfind/files/reproducible_build.patch
+new file mode 100644
+index 0000000..36728a7
+--- /dev/null
++++ b/meta-oe/recipes-support/rdfind/files/reproducible_build.patch
+@@ -0,0 +1,46 @@
++Description: sort the filelist when it is complete to get reproducible behaviour
++Author: Reiner Herrmann <reiner@reiner-h.de>
++Bug-Debian: https://bugs.debian.org/795790
++
++Upstream-Status: Pending
++
++Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
++
++Index: rdfind-1.3.4/Fileinfo.hh
++===================================================================
++--- rdfind-1.3.4.orig/Fileinfo.hh
+++++ rdfind-1.3.4/Fileinfo.hh
++@@ -189,6 +189,10 @@ public:
++   static bool compareondepth(const Fileinfo &a, const Fileinfo &b)
++   {return (a.depth() < b.depth());}
++ 
+++  //returns true if a has lower filename than b)
+++  static bool compareonfilename(const Fileinfo &a, const Fileinfo &b)
+++  {return (a.name().compare(b.name()) < 0);}
+++
++   //fills with bytes from the file. if lasttype is supplied,
++   //it is used to see if the file needs to be read again - useful if
++   //file is shorter than the length of the bytes field.
++@@ -235,6 +239,10 @@ public:
++   static bool equaldepth(const Fileinfo &a, const Fileinfo &b)
++   {return (a.depth()==b.depth());}
++ 
+++  //returns true if filenames are equal
+++  static bool equalfilename(const Fileinfo &a, const Fileinfo &b)
+++  {return (a.name()==b.name());}
+++
++   //returns true if file is a regular file. call readfileinfo first!
++   bool isRegularFile() {return m_info.is_file;}
++ 
++Index: rdfind-1.3.4/rdfind.cc
++===================================================================
++--- rdfind-1.3.4.orig/rdfind.cc
+++++ rdfind-1.3.4/rdfind.cc
++@@ -349,6 +349,7 @@ int main(int narg, char *argv[])
++   cout<<dryruntext<<"Now have "<<filelist1.size()<<" files in total."<<endl;
++   
++   
+++  gswd.sortlist(&Fileinfo::compareonfilename,&Fileinfo::equalfilename);
++ 
++   //mark files with a unique number
++   gswd.markitems();
+diff --git a/meta-oe/recipes-support/rdfind/rdfind_1.3.4.bb b/meta-oe/recipes-support/rdfind/rdfind_1.3.4.bb
+new file mode 100644
+index 0000000..4d984ee
+--- /dev/null
++++ b/meta-oe/recipes-support/rdfind/rdfind_1.3.4.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "Rdfind is a program that finds duplicate files"
++HOMEPAGE = "https://rdfind.pauldreik.se/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
++
++DEPENDS = "nettle"
++
++SRC_URI = "https://rdfind.pauldreik.se/${BP}.tar.gz \
++           file://reproducible_build.patch \
++"
++
++SRC_URI[md5sum] = "97c0cb35933588413583c61d3b5f9adf"
++SRC_URI[sha256sum] = "a5f0b3f72093d927b93898c993479b35682cccb47f7393fb72bd4803212fcc7d"
++
++inherit autotools
++
++BBCLASSEXTEND = "native"
+-- 
+1.9.1
 
-You might also need to set PREFERRED_VERSION, depending on the situation.
-
-My idea would be to allow the user to select a default provider for
-> "virtual/jre" but still allow to install an additional specific java
-> provider if necessary.
-> Is this even possible?
->
-> Pascal
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
