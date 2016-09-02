@@ -1,32 +1,22 @@
 Return-Path: <pascal.bach@siemens.com>
-X-Greylist: delayed 832 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 02 Sep 2016 08:46:40 UTC
-Received: from gecko.sbs.de (gecko.sbs.de [194.138.37.40])
-	by mail.openembedded.org (Postfix) with ESMTP id 5A99260621
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B48F73166
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Sep 2016 08:46:40 +0000 (UTC)
-Received: from mail2.sbs.de (mail2.sbs.de [192.129.41.66])
-	by gecko.sbs.de (8.15.2/8.15.2) with ESMTPS id u828Wj49016672
+	Fri,  2 Sep 2016 09:01:05 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id u82915vV015579
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 2 Sep 2016 10:32:45 +0200
-Received: from [139.16.78.136] (MD1FZU9C.ww002.siemens.net [139.16.78.136])
-	by mail2.sbs.de (8.15.2/8.15.2) with ESMTPS id u828WjCu006385
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 2 Sep 2016 10:32:45 +0200
-To: openembedded-devel@lists.openembedded.org
-References: <9cb3a54e-58ef-9433-06d9-514238fb9443@siemens.com>
-	<6dc69872-3f81-6078-48fb-b2a744133ca2@siemens.com>
-	<CANx9H-AXcoS=z=rFcFJKKrfea-KUfSkFgPz_WGrEe88JagScKw@mail.gmail.com>
+	Fri, 2 Sep 2016 11:01:05 +0200
+Received: from dev.sbt.siemens.com (MD1FZU9C.ww002.siemens.net [139.16.78.136])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id u82915EP009798;
+	Fri, 2 Sep 2016 11:01:05 +0200
 From: Pascal Bach <pascal.bach@siemens.com>
-Message-ID: <b278fd85-94db-b343-1a93-13d41cd5ad62@siemens.com>
-Date: Fri, 2 Sep 2016 10:32:44 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
-	Thunderbird/45.2.0
-MIME-Version: 1.0
-In-Reply-To: <CANx9H-AXcoS=z=rFcFJKKrfea-KUfSkFgPz_WGrEe88JagScKw@mail.gmail.com>
-Subject: Re: [meta-java] Unify virtual java providers
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  2 Sep 2016 11:01:00 +0200
+Message-Id: <1472806860-24330-1-git-send-email-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCH] p7zip: update to version 16.02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,41 +29,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Sep 2016 08:46:41 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 02 Sep 2016 09:01:07 -0000
 
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+---
+ meta-oe/recipes-extended/p7zip/{p7zip_15.14.1.bb => p7zip_16.02.bb} | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/p7zip/{p7zip_15.14.1.bb => p7zip_16.02.bb} (89%)
 
->> While testing the proposal above i ran into an issue.
->> When I add PROVIDES = "virtual/jre" to the java recipes and i want to
->> install multiple java versions via update-alternative I can't do that
->> because bitbake tells me:
->>
->> "Multiple .bb files are due to be built which each provide virtual/jre:"
->>
->> Now the question for me is if this two mechanism are not intended to work
->> together or if I'm doing something wrong.
->>
->>
-> This is a hint that you need to set PREFERRED_PROVIDER_foo in your
-> local.conf (or machine.conf or distro.conf or...)
->
-> http://www.yoctoproject.org/docs/2.1/mega-manual/mega-manual.html#var-PREFERRED_PROVIDER
->
-> You might also need to set PREFERRED_VERSION, depending on the situation.
->
-> My idea would be to allow the user to select a default provider for
-I think setting PREFERRED_VERSION is not the issue in my case.
+diff --git a/meta-oe/recipes-extended/p7zip/p7zip_15.14.1.bb b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
+similarity index 89%
+rename from meta-oe/recipes-extended/p7zip/p7zip_15.14.1.bb
+rename to meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
+index 8e2e241..12be02c 100644
+--- a/meta-oe/recipes-extended/p7zip/p7zip_15.14.1.bb
++++ b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
+@@ -7,8 +7,9 @@ LIC_FILES_CHKSUM = "file://DOC/copying.txt;md5=4fbd65380cdd255951079008b364516c
+ 
+ SRC_URI = "http://downloads.sourceforge.net/p7zip/p7zip/${PV}/p7zip_${PV}_src_all.tar.bz2 \
+           file://do_not_override_compiler_and_do_not_strip.patch"
+-SRC_URI[md5sum] = "92cca093312b5a71a7be7dc7d1d32509"
+-SRC_URI[sha256sum] = "699db4da3621904113e040703220abb1148dfef477b55305e2f14a4f1f8f25d4"
++
++SRC_URI[md5sum] = "a0128d661cfe7cc8c121e73519c54fbf"
++SRC_URI[sha256sum] = "5eb20ac0e2944f6cb9c2d51dd6c4518941c185347d4089ea89087ffdd6e2341f"
+ 
+ S = "${WORKDIR}/${BPN}_${PV}"
+ 
+-- 
+2.1.4
 
-The reason I see the issue is that I also tried to set: RPROVIDES_${PN} += "virtual/jre" in order to allow users to select "virtual/jre"
- in an RDEPENDS which I believe is necessary in many cases.
-
-However I don't know of a way to set a preferred RPROVIDER.
-
->> "virtual/jre" but still allow to install an additional specific java
->> provider if necessary.
->> Is this even possible?
-Based on what I found out above, don't think this is possible. Please correct me if I'm wrong.
-
-Pascal
 
