@@ -1,51 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id D3BEC77245
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 6051077245
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Sep 2016 20:15:36 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id c133so10457791wmd.2
+	Sun,  4 Sep 2016 20:15:38 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id c133so10457917wmd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Sep 2016 13:15:37 -0700 (PDT)
+	Sun, 04 Sep 2016 13:15:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=WUJg6TNIAby7E8LjYrC+4kzN9Wj0b3qrlIDjxqYy7Xs=;
-	b=vEnpwQ2NBJVoNos5ERaPa7RJSYJhhdQpwCdY5FDQQamAjS+idTQ5QLpOfBXSxW/GMq
-	vaID7a4zosTe+0/QPFnGaq3kjUFR4ZC/QuP7FDdrU8nFKCKNkq6dSlfEfgrM7jQSYEeR
-	eaL9XcVgPwSDLDDOtOwmR61LkBs7/QeW1etzkwv/5mI4d78eocHmvQdBmzzdEX1QAvit
-	vaqu0WyHmn5wq+Tz7R3b3G47BRGlKoI8+hYzUV2XFcUfumzZtRUn9ZP8LNC0E7L3DW9Y
-	TRhIiz5f+uaKOxron6Lur7j0uITzR8TEoyb8DebqTWo5pRmRLhoQE/t9UbVfWRBPY5E8
-	BWbA==
+	bh=OZzFpslGJoMCC13Fe6To4srWlZG3PF962tnZCW31d58=;
+	b=GNrRK5F8goXLywiHRF0gFM7sIXnUXHSOopoRX/7BnxwZCndtYRmcon0tPXrl11wKp6
+	8sPg33c6ro07vEyrrDpvmLIi5WX9N/GLwLVabRC+LgRlzzSxcVq2AKDWeEeVtjXOygWV
+	lEfJV1CxojEXXRoKuQ0L7mDEWFZ9EZ/gsKpHAMQXdTAnY/AjJHxaUtYe1TTS/0zpibjg
+	d+TJfvmCdgQNe1w+s1/aeeM6uAxlmtfGJss/6OnBKTSLKlIei8zJnRn2qLMl1rlZuNKh
+	53GFHDz4P0ssGPPsj/DziEwl68nQzQV4eOR2urxgjxt8c0FGElVsS/Iz207Isu3tAQgb
+	dg2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=WUJg6TNIAby7E8LjYrC+4kzN9Wj0b3qrlIDjxqYy7Xs=;
-	b=mHMC8/XVrbeH8MXlHmcyRAg0Xxzx5PjepBXccLw3N1oabmpOV2Do6xVjgTbS4CGO7Y
-	rMTzVbxvV1+Z5w+NtaZpnXmB4pty5gyO2jinivz9T03fZKofaMuNpCy7NCVi2AxaoVpG
-	fV7ncdnECujtrxNzzdHv1cQc/nyhyaG0IhzFvsLqV4Ku1a4vT1pUt6jSkA4U6MPHHeY3
-	7GE5O1BTzhwTcVGn7jlp5RdTUMz9N0mmipn0fGoZT1sJSbvw74kmrTP9mFIVsyhZbMuZ
-	fUDgIo+B6VtZGlRLIT9THhqxfbdo+WF2K3MBglUBJLgsdM3EsfqtCgc7c0NnnJ6r+JON
-	7oqA==
-X-Gm-Message-State: AE9vXwOpdDOydNQRQXsFskALKFEFVijrc3y48KnBX1RRnitEkb3gK/5Es64wJyKCwYo4Ow==
-X-Received: by 10.28.191.80 with SMTP id p77mr11483398wmf.117.1473020136288;
-	Sun, 04 Sep 2016 13:15:36 -0700 (PDT)
+	bh=OZzFpslGJoMCC13Fe6To4srWlZG3PF962tnZCW31d58=;
+	b=Jx2fgIHH+8N1Or5M0Mxxq10mL/uBaWu0KGcli8fOWLpugLJXjJlUMFCG2ZvVp+yz1K
+	oxFBpmchbRvIH7Wc+A80WOGMFMQ2gkffGQo7U35dQ/aTJAmr1vqJAF/UMd/g82wdr4X2
+	oi2RyrPvs89929pp2rr1GG7d9NFsJnXILcFTc6H6xN3HJfSjP3qNMv2bi1Pnl245MRBR
+	vmKTTOQB3e8memF4Msbr7ClSrwNMGeNEyOlbXChab+fXDxhQdhL2ZWMnYmyV8z8giENB
+	trVjQywqNLLXXDskLYbUUMSDj+Mhz58Bm+zQZbJsxF8v3QM1f3ZAwZ74OMXgsptvLbmp
+	jwxA==
+X-Gm-Message-State: AE9vXwNreuHLkjh3yATf+poC1NkePHjz7fjsvHxQjqyFmezNOo2blrYhWCeFo7D4zJC2fg==
+X-Received: by 10.194.95.36 with SMTP id dh4mr2490995wjb.156.1473020139245;
+	Sun, 04 Sep 2016 13:15:39 -0700 (PDT)
 Received: from localhost.localdomain (p5B0A3967.dip0.t-ipconnect.de.
 	[91.10.57.103]) by smtp.googlemail.com with ESMTPSA id
-	v137sm10708151wmf.3.2016.09.04.13.15.35
+	v137sm10708151wmf.3.2016.09.04.13.15.38
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 04 Sep 2016 13:15:35 -0700 (PDT)
+	Sun, 04 Sep 2016 13:15:38 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  4 Sep 2016 22:15:09 +0200
-Message-Id: <1473020112-25797-2-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun,  4 Sep 2016 22:15:12 +0200
+Message-Id: <1473020112-25797-5-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
 In-Reply-To: <1473020112-25797-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1473020112-25797-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/5] libgsf: add intltool-native to DEPENDS
+Subject: [PATCH 5/5] samba: fix build by linking with bfd instead of gold
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,28 +58,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Sep 2016 20:15:39 -0000
+X-List-Received-Date: Sun, 04 Sep 2016 20:15:42 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Use this workaround as long as there is no better (upstream) fix
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb | 2 +-
+ meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb
-index 57935c5..602d513 100644
---- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb
-+++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dc7371b50816c96e145fa0f8ade8e24d \
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+index e35d527..3205c5d 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+@@ -88,7 +88,7 @@ EXTRA_OECONF += "--enable-fhs \
+                 "
+ DISABLE_STATIC = ""
  
- SECTION = "libs"
+-LDFLAGS += "-Wl,-z,relro,-z,now"
++LDFLAGS += "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
  
--DEPENDS= "libxml2 bzip2 glib-2.0 zlib"
-+DEPENDS= "libxml2 bzip2 glib-2.0 zlib intltool-native"
- 
- inherit autotools pkgconfig gnome gconf gobject-introspection
- 
+ do_install_append() {
+     if ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'true', 'false', d)}; then
 -- 
 2.5.5
 
