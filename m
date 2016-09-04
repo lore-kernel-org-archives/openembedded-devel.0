@@ -1,28 +1,44 @@
-Return-Path: <s.mueller-klieser@phytec.de>
-Received: from root.phytec.de (mail.phytec.de [217.6.246.34])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C30A76312
+Return-Path: <net147@gmail.com>
+Received: from mail-it0-f66.google.com (mail-it0-f66.google.com
+	[209.85.214.66])
+	by mail.openembedded.org (Postfix) with ESMTP id CC5A67729E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Sep 2016 14:58:38 +0000 (UTC)
-Received: from idefix.phytec.de (idefix.phytec.de [172.16.0.10])
-	by root.phytec.de (Postfix) with ESMTP id C904EA002F6
+	Sun,  4 Sep 2016 04:03:33 +0000 (UTC)
+Received: by mail-it0-f66.google.com with SMTP id e124so5849682ith.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Sep 2016 16:58:49 +0200 (CEST)
-Received: from lws-mklieser.phytec.de ([172.16.10.21])
-	by idefix.phytec.de (IBM Domino Release 9.0.1FP5 HF413)
-	with ESMTP id 2016090216583811-142824 ;
-	Fri, 2 Sep 2016 16:58:38 +0200 
-From: =?UTF-8?q?Stefan=20M=C3=BCller-Klieser?= <s.mueller-klieser@phytec.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 2 Sep 2016 16:58:37 +0200
-Message-Id: <1472828317-29130-1-git-send-email-s.mueller-klieser@phytec.de>
-X-Mailer: git-send-email 1.9.1
+	Sat, 03 Sep 2016 21:03:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=XMnjU8nvz3A0J6H/aw5BEbJ1yLWdagGcS2dIR1xFR1s=;
+	b=lhylmXAv6QxTyo4etc1TwZ7gg09sb95kfO7tHDiCMx7CWA04aL+l1w9kIe/VitVtEF
+	bVuGx1CWIa6AFmxEFlKSPvhxE4KYo8yigJUgOtBt/PVGdH0tDoi8kBFiZpGtbY/0kkDP
+	vqxKw2DkEG2/YJVNcUaZhJcKuPfU8qxd7sXieML0thH5cpxxREOz3AR0ubUsmgUfN54U
+	NDwX+dzpBerOczf4o8oJkHhWud61fsnisvijus5ynvnJlnjk65m8OH/QMZ7IZGX8Z4q9
+	YHkLCdvFmo4o8oaULKg3O2unBdlpyc0AoVpjzcLiEUktJ2cv52L1QkcwQR9scST9S/vK
+	+j3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=XMnjU8nvz3A0J6H/aw5BEbJ1yLWdagGcS2dIR1xFR1s=;
+	b=URbIoDudujPNXX6bVCs0Oq6BstrGcYkLXGN5e5LHlgzVc+G5pSSkk0N+tbkweCZQS1
+	FSNi19N/o/zQW5vfvNrUWLU5GntOYQK+QLPbdO1LgYqdb9JfaIQv7ggBq0ZdnnDZL8qK
+	13mcOvqMJfjTupAhcgHJQBj0/ZXQrUafCRaX8vWqLJUucw9XRwtGMhg0kVJqiFn20N/B
+	51s+Edvo5VhEUD9kSMHG4j7lQOlugNLHcHR4JFWuhbYnejTvAUVpb8nHMHCXE6pw4ULl
+	DnI8GumWHqopLgydRs6f/90aZQkdgMDRfpde68EnPydNGrl9oR5YrJRKVZGQC9FKNxHA
+	xN/w==
+X-Gm-Message-State: AE9vXwO6nIj18dbJaX6qnILW9lVX3+Nmef4Sh2vhmEYVbpRR6yh5IlruaXCGJZVI6tt8sxgP2Xe0fcEI6DFYCA==
+X-Received: by 10.36.17.20 with SMTP id 20mr15109367itf.94.1472961813728; Sat,
+	03 Sep 2016 21:03:33 -0700 (PDT)
 MIME-Version: 1.0
-X-MIMETrack: Itemize by SMTP Server on Idefix/Phytec(Release 9.0.1FP5
-	HF413|March 21, 2016) at 02.09.2016 16:58:38,
-	Serialize by Router on Idefix/Phytec(Release 9.0.1FP5 HF413|March 21,
-	2016) at 02.09.2016 16:58:38
-X-TNEFEvaluated: 1
-Subject: [meta-qt5][PATCH] qt5-opengles2-test: Add recipe
+Received: by 10.36.60.73 with HTTP; Sat, 3 Sep 2016 21:03:33 -0700 (PDT)
+In-Reply-To: <20160831194106.14065-1-Martin.Jansa@gmail.com>
+References: <20160831194106.14065-1-Martin.Jansa@gmail.com>
+From: Jonathan Liu <net147@gmail.com>
+Date: Sun, 4 Sep 2016 14:03:33 +1000
+Message-ID: <CANwerB0gyDqWi+5d4hvLs3otSDCmZNb7BWQtaAJChbZvAM6q1Q@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 01/11] xf86-input-tslib: remove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,48 +51,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Sep 2016 14:58:39 -0000
+X-List-Received-Date: Sun, 04 Sep 2016 04:03:35 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-This brings back the qt5-opengles2-test. I cloned the vanished
-repository, as it is a handy and small test application. We use it for
-our embedded boards.
+Hi Martin,
 
-Signed-off-by: Stefan M=C3=BCller-Klieser <s.mueller-klieser@phytec.de>
----
- recipes-qt/examples/qt5-opengles2-test=5Fgit.bb | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 recipes-qt/examples/qt5-opengles2-test=5Fgit.bb
+On 1 September 2016 at 05:40, Martin Jansa <martin.jansa@gmail.com> wrote:
+> * tslib was removed from oe-core
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  .../xf86-input-tslib/10-x11-input-tslib.fdi        |  11 --
+>  .../xf86-input-tslib/99-xf86-input-tslib.rules     |   5 -
+>  .../xf86-input-tslib/double-free-crash.patch       |  20 ---
+>  ...f86-input-tslib-0.0.6-xf86XInputSetScreen.patch |  31 ----
+>  .../xf86-input-tslib-port-ABI-12-r48.patch         | 196 ---------------------
+>  .../xserver-174-XGetPointerControl.patch           |  34 ----
+>  .../xorg-driver/xf86-input-tslib_0.0.6.bb          |  35 ----
+>  7 files changed, 332 deletions(-)
+>  delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib/10-x11-input-tslib.fdi
+>  delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib/99-xf86-input-tslib.rules
+>  delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib/double-free-crash.patch
+>  delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib/xf86-input-tslib-0.0.6-xf86XInputSetScreen.patch
+>  delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib/xf86-input-tslib-port-ABI-12-r48.patch
+>  delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib/xserver-174-XGetPointerControl.patch
+>  delete mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb
 
-diff --git a/recipes-qt/examples/qt5-opengles2-test=5Fgit.bb b/recipes-qt/e=
-xamples/qt5-opengles2-test=5Fgit.bb
-new file mode 100644
-index 0000000..5da25dc
---- /dev/null
-+++ b/recipes-qt/examples/qt5-opengles2-test=5Fgit.bb
-@@ -0,0 +1,19 @@
-+SUMMARY =3D "Qt5 OpenGL ES 2.0 Test Application"
-+DESCRIPTION =3D "This application is used to test OpenGL ES 2.0 rendering \
-+in a simple QWindow, plus multi-touch input, window orientation, window \
-+focus handling and some other game-related features."
-+LICENSE =3D "MIT"
-+LIC=5FFILES=5FCHKSUM =3D "file://${WORKDIR}/git/main.cpp;beginline=3D1;end=
-line=3D26;md5=3D93b83ece006c9e76b9fca80c3aecb169"
-+
-+PV =3D "1.0.4+gitr${SRCPV}"
-+
-+DEPENDS =3D "qtbase qtsensors"
-+
-+# Depends on gles2 enabled and that's not default configuration
-+EXCLUDE=5FFROM=5FWORLD =3D "1"
-+
-+SRC=5FURI =3D "git://github.com/smk-embedded/qt5-opengles2-test.git"
-+SRCREV =3D "938390507054ed1258345f70ed55770d2fe56176"
-+S =3D "${WORKDIR}/git"
-+
-+inherit qmake5
---=20
-1.9.1
+tslib should be added to meta-openembedded instead. There is a
+patchset submitted to ML to add tslib and related recipes to
+meta-openembedded.
 
+Regards,
+Jonathan
 
