@@ -1,49 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 066EB77245
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 8027B77245
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Sep 2016 20:15:35 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id c133so10457754wmd.2
+	Sun,  4 Sep 2016 20:15:37 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id c133so10457836wmd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Sep 2016 13:15:36 -0700 (PDT)
+	Sun, 04 Sep 2016 13:15:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=SPHyY1tGEIc8/2UG8vFjg/Dvb9yk73/Ku3L8AKmj9HM=;
-	b=sVvNM0bPFBAUvCXjb/vn7Bz58gk7KO0YpP6KeP/uhlqUoUrmMF8zYkF0dWbdzLN6AF
-	iE0SNR9Pm/5JADYOUUcvLTKre+PFhB/nj7Gie+ROKaWbmH+0PjTmYQpPVtjU4nCnAAYl
-	PWWd/CPGYCyKH3vG7ALH533F+Lwa5Y2//qwJCQTxnbDF4psGk+npZ+6Jfv298A8u5Jyh
-	Aj0u9W1ySLx9EyeaCUCFPiMbPtGGLUU+Wmh4EwBcUML0TXwDqquYAALSqG8o1NfdxXsK
-	TXIF8oSFku0TW8QJ9prBIOLFJFLOLDB4NIkEg2qCyJ+dHTeU/SHKq6pwyn3fC9EAePYA
-	vfkA==
+	bh=SvhrzcrkdjP59sKC2Nf4YawkeryroMIBwbHYWFfVuEo=;
+	b=FK7ivafLDiHY3bGhV9YkXKDRNZQHrUx6bwAXVTFQPl7ouq/SNSVEt6MrnuedKsTtjM
+	NGSD/AIOaY11qezFP9UNKlTlh7QkRxzeV/V6RA4YStoBqQvUe8wSQKDOvemapkVtDSKT
+	LNKIjDRVa2sH6vMtx/0AG/ZiqKQJXmeKv97Bt87Oac646HfSXIv6UgWuUIqyMXnbe+jp
+	W/HgYkud+xaio4Jm9Ktigc8wi41DXMAeBNQheyLaeX+oR8l46l8eMlkesdUKbOASI6T8
+	kTM55SzQ+0xab9rKSmoVrd75hEFFBMs+UhDHo30Kvo47C8T00DKCBIo44zmIMneDAn0f
+	Qryw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=SPHyY1tGEIc8/2UG8vFjg/Dvb9yk73/Ku3L8AKmj9HM=;
-	b=EK9JLlRrrO87qEPk4zLyWugLELvSEXeYCBfUZErdEqPMmMFLEmH/nIADJClZjSg2SZ
-	rjBXqK2XXtEe5bFhxZ2f51vYmVmL08x4PKfX+TZYfCqvpXpLrYuyZ+gTZrQ/UVVg9Kvv
-	pKEnFkEVQSXF7T8VvbVloYqDfZwIp8MObOuzYXowzM7Qal3H9v80ggn+rS9CLhZJkrJ/
-	pNyeLqrubTPZEIPkk0BIV+EsogVxi7VnXkoJpyFsZOaMNVkBtM3tpOCJ7Zwr87d9K0wr
-	iBR+cmBPF3grexOw/1WHKECXsjsGhMALtvug7ldzJ9xaabQWkBr8sApWm+TOs7pOiAQx
-	sj2A==
-X-Gm-Message-State: AE9vXwPzthfygH8EjL2DWz82NLO6Uvknel1UBfgFEvwD6tJqdtEwTcbnE0p9JnYLifNj4A==
-X-Received: by 10.194.164.229 with SMTP id yt5mr27818861wjb.39.1473020135372; 
-	Sun, 04 Sep 2016 13:15:35 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=SvhrzcrkdjP59sKC2Nf4YawkeryroMIBwbHYWFfVuEo=;
+	b=KIrMmwblXYf5aFuxluhdGz+Yl5Wesn8AQPxKuY/RtkXXAoSb7l2R18khyIht8qf6Ky
+	Y5QqJZ7p7i132GWaEpQ/QUg2wQZtYHQkL7h2om5skVoAgFC5X9SBM4NDRKCZXd7RXy/I
+	ZCabie+wwhqwcnjb/jf12pMH5pU1TcXYVIjZ31oZqS1ZUUDbXvDPDpJ+48iXZPQbhcCd
+	CLYwdxvo+Qf57GOk6tKbM4gdVb8RXhHLgvzCO0lsBvJEU27IKx5wDNN/2ytoYiy4N0Cn
+	hbPMEMm9UZxQz86zeMA+LvlIPLdcn1UL6YWk8OeSkcP+LwHlbvySPjzfPh5ubrOKSbPq
+	fSag==
+X-Gm-Message-State: AE9vXwOBVOpdXfhyHCEkKuGqpP7kK2v5Eub9GYg07YqVRpL9iVN9W8doarUcljjBE5LE4w==
+X-Received: by 10.28.169.209 with SMTP id s200mr7290846wme.87.1473020137382;
+	Sun, 04 Sep 2016 13:15:37 -0700 (PDT)
 Received: from localhost.localdomain (p5B0A3967.dip0.t-ipconnect.de.
 	[91.10.57.103]) by smtp.googlemail.com with ESMTPSA id
-	v137sm10708151wmf.3.2016.09.04.13.15.34
+	v137sm10708151wmf.3.2016.09.04.13.15.36
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 04 Sep 2016 13:15:34 -0700 (PDT)
+	Sun, 04 Sep 2016 13:15:36 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  4 Sep 2016 22:15:08 +0200
-Message-Id: <1473020112-25797-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun,  4 Sep 2016 22:15:10 +0200
+Message-Id: <1473020112-25797-3-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
+In-Reply-To: <1473020112-25797-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1473020112-25797-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/5] pavucontrol: replace intltool by intltool-native in DEPENDS
+Subject: [PATCH 3/5] libgnome: add intltool-native to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,21 +64,21 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-multimedia/pulseaudio/pavucontrol_3.0.bb | 2 +-
+ meta-gnome/recipes-gnome/libgnome/libgnome_2.32.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_3.0.bb b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_3.0.bb
-index 84227b4..bdffb2a 100644
---- a/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_3.0.bb
-+++ b/meta-oe/recipes-multimedia/pulseaudio/pavucontrol_3.0.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "PulseAudio Volume Control (pavucontrol) is a simple GTK based vol
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=751419260aa954499f7abaabaa882bbe"
+diff --git a/meta-gnome/recipes-gnome/libgnome/libgnome_2.32.1.bb b/meta-gnome/recipes-gnome/libgnome/libgnome_2.32.1.bb
+index 27b8b9a..40caa7b 100644
+--- a/meta-gnome/recipes-gnome/libgnome/libgnome_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/libgnome/libgnome_2.32.1.bb
+@@ -12,7 +12,7 @@ SRC_URI[archive.sha256sum] = "b2c63916866485793b87398266dd7778548c1734923c272a94
+ SRC_URI += "file://0001-libgnome-Makefile.am-allow-deprecated-symbols.patch"
+ GNOME_COMPRESS_TYPE="bz2"
  
--DEPENDS = "intltool gtkmm libcanberra pulseaudio"
-+DEPENDS = "intltool-native gtkmm libcanberra pulseaudio"
+-DEPENDS += "libcanberra gconf-native gnome-vfs libbonobo esound"
++DEPENDS += "libcanberra gconf-native gnome-vfs libbonobo esound intltool-native"
  
- inherit gnome
+ EXTRA_OECONF += "--disable-gtk-doc"
  
 -- 
 2.5.5
