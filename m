@@ -1,29 +1,37 @@
-Return-Path: <Zhixiong.Chi@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B716C77245
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A34977241
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Sep 2016 04:27:52 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u854Rqwd001845
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon,  5 Sep 2016 09:05:14 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id w12so2741164wmf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 4 Sep 2016 21:27:52 -0700 (PDT)
-Received: from [128.224.162.239] (128.224.162.239) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.248.2;
-	Sun, 4 Sep 2016 21:27:51 -0700
-To: <openembedded-devel@lists.openembedded.org>
-References: <1471921830-2919-1-git-send-email-Zhixiong.Chi@windriver.com>
-	<20160901122045.gpuxub43upiiniyt@jama>
-From: Zhixiong Chi <zhixiong.chi@windriver.com>
-Message-ID: <57CCF446.4050703@windriver.com>
-Date: Mon, 5 Sep 2016 12:27:50 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.6.0
-MIME-Version: 1.0
-In-Reply-To: <20160901122045.gpuxub43upiiniyt@jama>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] mariadb: add libdbi-perl to the depends of mariadb-server
+	Mon, 05 Sep 2016 02:05:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:subject:from:to:date:mime-version
+	:content-transfer-encoding;
+	bh=AcwpqhVkEfp4Re1jYuXEBKA/0QLv1ZPHnPserJhBCk4=;
+	b=P3u/5gQhdvk/iE+3akaxSiLu9rZUju2RmN3uHQjJVMM4/CLZjsNwIhb9zg5JrWsT02
+	e3DfYYWvd+oTcS7iuX04m+5bn/dnppPp8/jMDABLR+EqERvN/5hl0Dk0LhiAoW5gPI4Z
+	0guq0eJAL83YIaVCdyrFD2CFSyUVMUtK1dOtl5fdTKXxraAc+ptY8JUsKHC1MEuuDYOW
+	/ZUhWuX14rgsaC1vR97JB7Pw8T0bytDMOsJpuCQd6n1KPVl6mB+sSjsosh3PYXYsrC6Y
+	R+Du4eslfq+l3wu5FaO85g/dJlqEuSyex8Rpadz/YPXT/ttb3g3nUD002bB3R5z+RKRV
+	QdHg==
+X-Gm-Message-State: AE9vXwPgbEC8WPbrnaoY+koXOl9/Bn4OgzQz8VQp3vyQhT1B3VlMsKoOeRzCqAhz1wqP/Q==
+X-Received: by 10.194.0.73 with SMTP id 9mr3860763wjc.123.1473066314796;
+	Mon, 05 Sep 2016 02:05:14 -0700 (PDT)
+Received: from localhost ([185.46.212.59])
+	by smtp.gmail.com with ESMTPSA id r9sm3191388wjp.15.2016.09.05.02.05.13
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Mon, 05 Sep 2016 02:05:13 -0700 (PDT)
+Message-ID: <1473066311.17211.5.camel@andred.net>
+From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 05 Sep 2016 10:05:11 +0100
+X-Mailer: Evolution 3.20.5-1 
+Mime-Version: 1.0
+Subject: persistent storage & RO rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,65 +44,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Sep 2016 04:27:56 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+X-List-Received-Date: Mon, 05 Sep 2016 09:05:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
+Hi,
+
+I want to use a read-only rootfs, but some packages will need persistent
+storage, which typically involves /var/lib/<package>
+
+Two solutions come to mind:
+- bbappend each involved recipe and set the --localstatedir ./configure
+  option as needed
+- symlink /var/lib/<package> to my persistent storage dir as needed
+
+Anything else? What is typically done in such a case?
 
 
-On 2016年09月01日 20:20, Martin Jansa wrote:
-> On Tue, Aug 23, 2016 at 11:10:30AM +0800, Zhixiong Chi wrote:
->> The commands(mysql_convert_table_format and mysql_setpermission) need
->> to the supported API provided by the libdbi-perl package.
->> So add the libdbi-perl to the variable RDEPENDS of mariabdb-server.
-> This isn't possible, libdbi-perl is in meta-perl and mariadb is in
-> meta-oe.
->
-> meta-oe doesn't depend (and cannot) on meta-perl.
-The script mysql_convert_table_format(line 50) and 
-mysql_convert_table_format
-(line 20) which located xxx/mariadb/scripts/ source path will call the 
-DBI function
-with the sentence "use DBI", and this DBI function is provided by the 
-libdbi-perl
-package.
-
-So the scripts will fail when start to work.
-
-Thanks.
->> Signed-off-by: Zhixiong Chi <Zhixiong.Chi@windriver.com>
->> ---
->>   meta-oe/recipes-support/mysql/mariadb.inc | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
->> index 73905b6..c2d2ecf 100644
->> --- a/meta-oe/recipes-support/mysql/mariadb.inc
->> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
->> @@ -169,7 +169,7 @@ RDEPENDS_${PN}-client = "perl perl-module-getopt-long perl-module-file-temp \
->>   RDEPENDS_${PN}-server = "perl perl-module-getopt-long perl-module-data-dumper \
->>       perl-module-file-basename perl-module-file-path perl-module-sys-hostname \
->>       perl-module-file-copy perl-module-file-temp perl-module-posix \
->> -    ${PN}-client"
->> +    ${PN}-client libdbi-perl"
->>   RDEPENDS_${PN}-leftovers = "perl perl-module-cwd perl-module-benchmark perl-module-getopt-long \
->>       perl-module-posix perl-module-data-dumper perl-module-sigtrap perl-module-threads \
->>       perl-module-threads-shared perl-module-io-socket perl-module-sys-hostname perl-module-file-copy \
->> -- 
->> 1.9.1
->>
->> -- 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
-
--- 
----------------------
-Thanks,
-Zhixiong Chi
-Tel: +86-10-8477-7036
+Cheers,
+Andre'
 
 
