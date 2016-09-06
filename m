@@ -1,33 +1,49 @@
-Return-Path: <drew_moseley@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id B0AA67765E
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 301E773219
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Sep 2016 21:39:31 +0000 (UTC)
-Received: from svr-orw-fem-04.mgc.mentorg.com ([147.34.97.41])
-	by relay1.mentorg.com with esmtp 
-	id 1bhO5b-0006Sl-SF from drew_moseley@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Sep 2016 14:39:31 -0700
-Received: from NA-MBX-03.mgc.mentorg.com ([fe80::9a:1569:df57:45b8]) by
-	SVR-ORW-FEM-04.mgc.mentorg.com ([147.34.97.41]) with mapi id
-	14.03.0224.002; Tue, 6 Sep 2016 14:39:31 -0700
-From: "Moseley, Drew" <drew_moseley@mentor.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] xpext: Allow the main package to be empty.
-Thread-Index: AQHSCG5paeT9itulIECs94uIMt013KBtaZYAgAAJMgA=
-Date: Tue, 6 Sep 2016 21:39:30 +0000
-Message-ID: <0600B56D-FD90-4397-9F8B-52F6FD26FA62@mentor.com>
-References: <20160906184155.23608-1-drew_moseley@mentor.com>
-	<20160906210636.GC2645@jama>
-In-Reply-To: <20160906210636.GC2645@jama>
-Accept-Language: en-US
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-x-originating-ip: [147.34.91.1]
+	Tue,  6 Sep 2016 22:06:30 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id l65so12986506wmf.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 06 Sep 2016 15:06:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=2EyOWBWN+nwlIrsjI0vIxKu6ocWvv2NCVwpkicaQP/4=;
+	b=Bgsz7i3Puo9s22/q/6nGyUzxwqG/Z+KU7s9guJNrWqY3yH0C0y39NmaPsypN+9lLQH
+	76YxmHsXut19d7VMHatmQYsxP+wQhX1Mk2zmTJFC8f7BsGl0SKfM5S72t32nnS2yv4RC
+	oElEa+frO0bs9PCRGpbNzwCYWiCJP9oPmKU8BU2xoQ/Nl51JMUbYt8rS+8rQhHIhHHzD
+	nptMNucHv415gnhf38NmupfQRe/1dy+S3Dr98K0zGHjaybHiE4x+313HM576fQDKqyr5
+	XFE0ufHUU9hTkArYPHUlhPc5OEIz0dBZXabm+Z7fUZ+47c508x/TEF/OXJlnDIT8Qd0c
+	R/qg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=2EyOWBWN+nwlIrsjI0vIxKu6ocWvv2NCVwpkicaQP/4=;
+	b=c5kCzT/hi1BVgbvnUL0NuMA4B0LjHFDTDmCabtt6ON9hyvCltwM57X/pjhb7FiNNFc
+	bACrb6Zwa3bNewyKg7XI5/aI/XOunggVdNO9zlVvHqO5VJAPRlu/Vx4VDjCH4znB/cUI
+	i71gDjfGgoiAS8+Ww9Jz3u6l/39Rafgly26LfYKUD9ctwyfx1kR9vHpecriK08dzRmgF
+	ea2RUGzVwKPUEZeVhxKEkAmuoDdXN85Rtd91fw3SENRVHG0rSYimBoFvMI+zH3HcTvaY
+	uhAIBr2r48/McrJf8mvKRbLe1b8YqHC3V6ufHUm1/nsunSQwEppckQBH/gGOAUYcji2y
+	qKSw==
+X-Gm-Message-State: AE9vXwOMzoAhNbXiTNOKpZW4y2PiBCgDvZDGev1tKmWHvQBuiRYH+CwEJzwn7CbACaAVjg==
+X-Received: by 10.28.0.132 with SMTP id 126mr771978wma.88.1473199591216;
+	Tue, 06 Sep 2016 15:06:31 -0700 (PDT)
+Received: from localhost.localdomain (p5B0A2A5F.dip0.t-ipconnect.de.
+	[91.10.42.95]) by smtp.googlemail.com with ESMTPSA id
+	vh6sm35439126wjb.0.2016.09.06.15.06.30
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 06 Sep 2016 15:06:30 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  7 Sep 2016 00:06:11 +0200
+Message-Id: <1473199571-5379-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.5
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] xpext: Allow the main package to be empty.
+Subject: [PATCH] glade: fix typo introduced in last patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,59 +56,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Sep 2016 21:39:34 -0000
-X-Groupsio-MsgNum: 62989
-Content-Language: en-US
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_C2ACCFEF-1F49-4B84-84DA-79F3BF9DD2F8";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Tue, 06 Sep 2016 22:06:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---Apple-Mail=_C2ACCFEF-1F49-4B84-84DA-79F3BF9DD2F8
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-oe/recipes-devtools/glade/files/0002-fix-gcc-6-build.patch | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-
-> On Sep 6, 2016, at 5:06 PM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
->=20
-> On Tue, Sep 06, 2016 at 02:41:55PM -0400, Drew Moseley wrote:
->> If xpext is included in a build (ie via dependency on mpv) then
->> builds of core-image-sato-sdk will fail with errors such as below.
->>=20
->> Allowing the package to be empty fixes this.
->>=20
->>     warning: Can't install mpv-dev-0.15.0-r0@i586: Can't install =
-xpext-dev-1.0+5-r0@i586: no package provides xpext =3D 1.0+5-r0
->=20
-> Isn't it better to disable this dependency from xpext-dev than to
-> install completely useless empty image into the image?
-
-Probably so.  Thanks for the suggestion.  Looks like:
-
-	=
-http://cgit.openembedded.org/meta-openembedded/commit/?h=3Dd523cc183903fd0=
-bc2e53af6af99a88ea1652e0d =
-<http://cgit.openembedded.org/meta-openembedded/commit/?h=3Dd523cc183903fd=
-0bc2e53af6af99a88ea1652e0d>
-
-is probably a similar solution.  I=E2=80=99ll submit an update.
-
-Drew
+diff --git a/meta-oe/recipes-devtools/glade/files/0002-fix-gcc-6-build.patch b/meta-oe/recipes-devtools/glade/files/0002-fix-gcc-6-build.patch
+index 5880ea5..f735ff8 100644
+--- a/meta-oe/recipes-devtools/glade/files/0002-fix-gcc-6-build.patch
++++ b/meta-oe/recipes-devtools/glade/files/0002-fix-gcc-6-build.patch
+@@ -6,7 +6,7 @@ MIME-Version: 1.0
+ Content-Type: text/plain; charset=UTF-8
+ Content-Transfer-Encoding: 8bit
+ 
+-Upstream-Status; Pending
++Upstream-Status: Pending
+ 
+ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+ ---
+-- 
+2.5.5
 
 
---Apple-Mail=_C2ACCFEF-1F49-4B84-84DA-79F3BF9DD2F8
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment; filename="signature.asc"
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - http://gpgtools.org
-
-iD8DBQFXzzeT++E4Rrql4XYRAmnvAKCrj9cbtt+dH/NZrwVoBSTzTG4AUgCfdrJh
-j2FY0QVlQPfX6hDr5Pvl45Y=
-=qceK
------END PGP SIGNATURE-----
-
---Apple-Mail=_C2ACCFEF-1F49-4B84-84DA-79F3BF9DD2F8--
