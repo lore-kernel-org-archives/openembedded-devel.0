@@ -1,43 +1,24 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f179.google.com (mail-ua0-f179.google.com
-	[209.85.217.179])
-	by mail.openembedded.org (Postfix) with ESMTP id B3704773A0
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from blaine.gmane.org (unknown [195.159.176.226])
+	by mail.openembedded.org (Postfix) with ESMTP id ED49A6FEF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Sep 2016 07:02:39 +0000 (UTC)
-Received: by mail-ua0-f179.google.com with SMTP id u68so22291512uau.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Sep 2016 00:02:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=WGR7aE3loFqhv6wiEg0F5ZvaoTlIXPQnQtA929QdnfU=;
-	b=mmSffCYphBi6LweRjPEKva0foeatAKIqEOprla0bZG/n3xrj+yMGSvQuJPwxstNkPI
-	+DM80ElhUA1wsCsyvT/6lsUFL/QPuD6ywFPozJlopGAZPhYjRiOiJgxWw9aEyQ5bBQ6X
-	8rxQhfRytdtyg1J+vJ/+nGSO2bQELR3JALbLZTRQprbUWDkFnFmfPa1LP7W5PHqV4Tkq
-	71te7uZTU7NBZu4/UWFFMO0tftlAOMeI29kbwEPZ9RvPfxXZeyRbd0DCTlT8cKw/l00v
-	GtcDuDps+TX6HQS7xUETNa0g3NJbir/F3gEu1+s+5adGXW724ReOSsyVaC+vUZOR+jL2
-	lW9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=WGR7aE3loFqhv6wiEg0F5ZvaoTlIXPQnQtA929QdnfU=;
-	b=bD+xIo21IO2vuHSf6yQwMQ3VGo5UH04x9uXrgPWrn5AJ5odl24CkFB3Qgw3nU9n56f
-	UfXSahAiyZAEsOTF5OofOiiawLeHS2uOv6wImCtSCOarnhO217JgkG2xHh8YCFiqFsr3
-	oxlgojeu38S09kOifFgAQ1DZm8cL7gThoVsFC34/ZDmdYAwn9Dnu6n6bEX0zDWSjikRH
-	wMeNgRbzfOZ1pmQ+SrXmgASMQRhBO37UNff5zEhCCPXLHj03RPPXkRnr8ipxIt6Eduv0
-	LD+7niZ1AAK3VX9ez/BP+oP2oSPvtIRH85uG5bh+RCf2OlzPBw8/SYWdjPRZM5vltUnV
-	3mNQ==
-X-Gm-Message-State: AE9vXwPxTBlZdzTZKdOvI149PCzppohY3A6c9Q9LxsvY6yZujNZRIplDmbDuZuezhjH/qySa9cAlIoydYNys4Q==
-X-Received: by 10.159.37.73 with SMTP id 67mr18562388uaz.5.1473145359596; Tue,
-	06 Sep 2016 00:02:39 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.176.65.130 with HTTP; Tue, 6 Sep 2016 00:02:39 -0700 (PDT)
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Tue, 6 Sep 2016 09:02:39 +0200
-Message-ID: <CALbNGRS8C7Cq0sND-gZNM9yFTcMsLW5n8dPhjqcvBatVwJXFKA@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: fftw recipes
+	Tue,  6 Sep 2016 07:55:45 +0000 (UTC)
+Received: from list by blaine.gmane.org with local (Exim 4.84_2)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1bhBEM-000807-CL for openembedded-devel@lists.openembedded.org;
+	Tue, 06 Sep 2016 09:55:42 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Tue, 6 Sep 2016 09:55:35 +0200
+Message-ID: <nqlspm$qbt$1@blaine.gmane.org>
+References: <CALbNGRS8C7Cq0sND-gZNM9yFTcMsLW5n8dPhjqcvBatVwJXFKA@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@blaine.gmane.org
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
+	Gecko/20100101 Thunderbird/45.2.0
+In-Reply-To: <CALbNGRS8C7Cq0sND-gZNM9yFTcMsLW5n8dPhjqcvBatVwJXFKA@mail.gmail.com>
+Subject: Re: fftw recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,24 +31,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Sep 2016 07:02:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 06 Sep 2016 07:55:46 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-Hi,
+Op 06-09-16 om 09:02 schreef Andreas Müller:
+> Hi,
+> 
+> is there a technical reason why we have multiple fftw recipes (fftw /
+> fftwl / fftwf)?
 
-is there a technical reason why we have multiple fftw recipes (fftw /
-fftwl / fftwf)?
+Yes, at the time of writing there was no easy way to generate the different
+libraries using one recipe. Worse, the headers conflict, even in the current
+situation :/
 
-or
+regards,
 
-before I start: Any complaints/comments if I
+Koen
 
-* merge all fftw's into one recipe named fftw splitting in multiple
-packages (fftw / fftwl / fftwf / fftwq?)
-* replace virtual/fftw by fftw
-* make oe-core's alsa-utils fftw PACKAGFCONFIG[fftw] depending in fftw
 
-Feedback welcome
+> 
+> or
+> 
+> before I start: Any complaints/comments if I
+> 
+> * merge all fftw's into one recipe named fftw splitting in multiple
+> packages (fftw / fftwl / fftwf / fftwq?)
+> * replace virtual/fftw by fftw
+> * make oe-core's alsa-utils fftw PACKAGFCONFIG[fftw] depending in fftw
+> 
+> Feedback welcome
+> 
+> Andreas
+> 
 
-Andreas
+
 
