@@ -1,51 +1,44 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <zeenix@gmail.com>
 Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 4134573191
+	by mail.openembedded.org (Postfix) with ESMTP id C31AF731FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Sep 2016 10:33:00 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id a6so2260860wmc.2
+	Wed,  7 Sep 2016 15:02:34 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id j136so1675313wmj.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Sep 2016 03:33:01 -0700 (PDT)
+	Wed, 07 Sep 2016 08:02:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=aJpE5FaNUP7138xyoVlVd4api7aEkq1adOjM5Zs+ATQ=;
-	b=jMd/RDV/VYj4Hn8u+IYMKMhYJlp5gjFRpbEgPoxGXfv/2ITFdUuUYWlQLmSK2Yy/Mf
-	ZpdGDspeCAmX4WFmw0EQyJSLAJumCTE7LaSo1yFzznDS32h/6cM+JRTqOfmLJFnG8zta
-	PpeXrGClTMf7MWrocsYmYiOOITx/6dfyfoPAzTgNfE7gF1eMgYmUPeGyjSqNembQjO8s
-	Ksz+JKVM4ThKUTBjXjp3iLO3iA4OPVdyUw1bt3RSGP7zBjNqaogW94eewgtRDZSTwqGI
-	UlMVuyqXm4c6SwByq3aOVo0zmKgINYCeeUCAmvf0a/XfJzNPeHad6NfzpX1K/H1+nSKl
-	o+tQ==
+	h=from:to:subject:date:message-id;
+	bh=/hinqNDhqHR5ljDYpS6VeuTUEsRYG/UnscNmiF7v3Rs=;
+	b=ZOnv2DKELcZ66iTtsvhe8ZoV0H31oDa2eMZT22SngqXIycZFIt1niugx2V349PkbcR
+	QynqRdZqY1g1kQuha1Ypk62e/OoBeXn5uapITStU7IKe4x8i6g3GyFgnF7fofPuWHc6U
+	5OYbgWlXk1WR+DZX9ui7q4tB5TDefHuYbPurDHiczx0oOb/vuWQaQkEnIt4tLpeIM69d
+	wlalI+KcwmRE+ToA6oPO26M0q3Ws44YZJblOhhuRmZLzgBi0OVPtfa2ks38kZu7D/jmM
+	E+LsmYk+oyVX7du2KFBhEF3XonVnTF8QSUuYXXwsod4CXoUVUM3iGsUnWdZDsqxuYkkG
+	qXiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=aJpE5FaNUP7138xyoVlVd4api7aEkq1adOjM5Zs+ATQ=;
-	b=OcuW8ekw5Tar7r39MRWtfcoQsJKQkiJlU3GctpwSEyDhDw3sxE3i4cvzQC6z7iNDVl
-	X47xc3F2lEBBnWJYTdhLsaWNje933y3NKrlC8pmuO6+SfOTbfUoTB9bYBWNH/c1+Lg7q
-	xynSC1hEuMbkfafcydCAkhXa3aRAmbrLUpJilcbwi2WDoQn+zxCn0eQe4y6w3BZZb6Bk
-	kD31KJR5xKgyPYRFm6AhaJG+8RffYpnNhzUDrXOL4HQm6OynZZ7crBoQOVqXUz8l7Yrg
-	VXjEBi64s90heEGhOXiSTn/qMN9++3wzmRRDlOGr1g61mygLAKz8WFBnAOtZGvbyJX6J
-	NAYQ==
-X-Gm-Message-State: AE9vXwNmbKk/e0EnCp4bDvDfUbCfK8TBMgtXFGZaCkyGo9GYbT/e1+V02rUe24ixa7uQag==
-X-Received: by 10.28.143.209 with SMTP id r200mr2633301wmd.5.1473244380861;
-	Wed, 07 Sep 2016 03:33:00 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	bc5sm31478630wjb.37.2016.09.07.03.32.56
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=/hinqNDhqHR5ljDYpS6VeuTUEsRYG/UnscNmiF7v3Rs=;
+	b=OJuGz0ckH1HpApXqAnkzpNzb1cAUNnZK1Z4NJ1KUjK+HGCYLJgIjLx+RQLSRpeqdMi
+	R46vYtGLe87FhoaiWiXd7wFTqUzn6AX3uce8yW+Wxct8fTAnmGYQNDV9e0EKLRois/U2
+	7JdYpuR8mtKmghfh8c/bUDYPAiawJY/J68so3RGcz24hT7bJNxSMkQt8mZa+quh7ton3
+	2ywE6WSZaGutbOLzs/I/0l2TLE1MhbQ+ctimCH0voKYlsl8DuFSgQpHpDfyZ+nH5OogE
+	hzQL631iweuOXQnZrtDKndd4XmJFjkur1m9jcBkLFs3kD9+4/gNhUJkz76JFheRDu1i9
+	ZoRg==
+X-Gm-Message-State: AE9vXwNxkgODwYMywJOshjJNvwG/JoB8VC4zX0Z43xShlZbretsjxKW0GmoQCCvUqI58tw==
+X-Received: by 10.194.119.100 with SMTP id kt4mr30409647wjb.122.1473260554445; 
+	Wed, 07 Sep 2016 08:02:34 -0700 (PDT)
+Received: from zeelaptop.office.pelagicore.net ([83.218.80.242])
+	by smtp.gmail.com with ESMTPSA id j1sm36045576wju.9.2016.09.07.08.02.33
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 07 Sep 2016 03:32:56 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 7 Sep 2016 12:32:56 +0200
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 07 Sep 2016 08:02:33 -0700 (PDT)
+From: Zeeshan Ali <zeenix@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160907103256.GF2645@jama>
-References: <1473240851-11368-1-git-send-email-alexandru.moise@windriver.com>
-MIME-Version: 1.0
-In-Reply-To: <1473240851-11368-1-git-send-email-alexandru.moise@windriver.com>
-User-Agent: Mutt/1.7.0 (2016-08-17)
-Subject: Re: [PATCH] Security Advisory - collectd - CVE-2016-6254
+Date: Wed,  7 Sep 2016 17:02:30 +0200
+Message-Id: <1473260550-22766-1-git-send-email-zeenix@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] Update Geoclue2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,135 +51,149 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Sep 2016 10:33:02 -0000
-X-Groupsio-MsgNum: 62998
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="udcq9yAoWb9A4FsZ"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 07 Sep 2016 15:02:35 -0000
 
---udcq9yAoWb9A4FsZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Zeeshan Ali <zeeshan.ali@pelagicore.com>
 
-On Wed, Sep 07, 2016 at 12:34:11PM +0300, Alexandru Moise wrote:
-> Heap-based buffer overflow in the parse_packet function in network.c in
-> collectd before 5.4.3 and 5.x before 5.5.2 allows remote attackers to
-> cause a denial of service (daemon crash) or possibly execute arbitrary
-> code via a crafted network packet.
+Also drop redundant and now unusable patch.
+---
+ .../geoclue/files/soup-session-fix.patch           | 30 --------------
+ .../recipes-navigation/geoclue/geoclue_2.0.0.bb    | 33 ---------------
+ .../recipes-navigation/geoclue/geoclue_2.4.4.bb    | 47 ++++++++++++++++++++++
+ 3 files changed, 47 insertions(+), 63 deletions(-)
+ delete mode 100644 meta-oe/recipes-navigation/geoclue/files/soup-session-fix.patch
+ delete mode 100644 meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb
+ create mode 100644 meta-oe/recipes-navigation/geoclue/geoclue_2.4.4.bb
 
-The summary should start with component name:
-http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
+diff --git a/meta-oe/recipes-navigation/geoclue/files/soup-session-fix.patch b/meta-oe/recipes-navigation/geoclue/files/soup-session-fix.patch
+deleted file mode 100644
+index 70fe3f5..0000000
+--- a/meta-oe/recipes-navigation/geoclue/files/soup-session-fix.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-Upstream-Status: Upstream-Status: Inappropriate [poky 9.0 has older libsoup]
+-
+-Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
+-
+-diff --git a/src/gclue-ipclient.c b/src/gclue-ipclient.c
+-index 09add30..1771d5c 100644
+---- a/src/gclue-ipclient.c
+-+++ b/src/gclue-ipclient.c
+-@@ -83,7 +83,7 @@ gclue_ipclient_init (GClueIpclient *ipclient)
+- {
+-         ipclient->priv = G_TYPE_INSTANCE_GET_PRIVATE ((ipclient), GCLUE_TYPE_IPCLIENT, GClueIpclientPrivate);
+- 
+--        ipclient->priv->soup_session = soup_session_new ();
+-+        ipclient->priv->soup_session = soup_session_sync_new ();
+- }
+- 
+- /**
+-diff --git a/src/geoip-server/geoip-update.c b/src/geoip-server/geoip-update.c
+-index 6cce7b2..ef672ba 100644
+---- a/src/geoip-server/geoip-update.c
+-+++ b/src/geoip-server/geoip-update.c
+-@@ -214,7 +214,7 @@ main (int argc, char **argv)
+-                         path = GEOIP_DATABASE_PATH;
+-         }
+- 
+--        session = soup_session_new ();
+-+        session = soup_session_sync_new ();
+- 
+-         for (i = 0; i < G_N_ELEMENTS (db_info_map); i++) {
+-                 SoupMessage *msg = NULL;
+diff --git a/meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb b/meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb
+deleted file mode 100644
+index 90e8533..0000000
+--- a/meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb
++++ /dev/null
+@@ -1,33 +0,0 @@
+-SUMMARY = "The Geolocation Service"
+-DESCRIPTION = "Geoclue is a D-Bus service that provides location information. \
+-The primary goal of the Geoclue project is to make creating location-aware applications \
+-as simple as possible, while the secondary goal is to ensure that no application \
+-can access location information without explicit permission from user."
+-LICENSE = "GPLv2.0+"
+-SECTION = "console/network"
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=8114b83a0435d8136b47bd70111ce5cd"
+-
+-DEPENDS = "glib-2.0 dbus dbus-glib json-glib libsoup-2.4 intltool-native"
+-
+-inherit autotools pkgconfig gtk-doc
+-
+-SRC_URI = " \
+-    http://www.freedesktop.org/software/geoclue/releases/2.0/geoclue-${PV}.tar.xz \
+-    file://soup-session-fix.patch \
+-"
+-
+-SRC_URI[md5sum] = "401ff99d530b177c62afacef0a33efd9"
+-SRC_URI[sha256sum] = "4a82f184e55a163d86e0ad69bbe1bba9960bb5094220fe1f01350bceda8c67a1"
+-
+-PACKAGECONFIG[geoip] = "--enable-geoip-server,--disable-geoip-server,geoip"
+-
+-EXTRA_OECONF += " \
+-    --with-dbus-service-user=root \
+-    --with-dbus-sys-dir=${sysconfdir}/dbus-1/system.d \
+-"
+-
+-FILES_${PN} += " \
+-    ${datadir}/dbus-1/system-services/org.freedesktop.GeoClue2.service \
+-    ${datadir}/geoclue-2.0/geoclue-interface.xml \
+-"
+diff --git a/meta-oe/recipes-navigation/geoclue/geoclue_2.4.4.bb b/meta-oe/recipes-navigation/geoclue/geoclue_2.4.4.bb
+new file mode 100644
+index 0000000..64f0546
+--- /dev/null
++++ b/meta-oe/recipes-navigation/geoclue/geoclue_2.4.4.bb
+@@ -0,0 +1,47 @@
++SUMMARY = "The Geolocation Service"
++DESCRIPTION = "Geoclue is a D-Bus service that provides location information. \
++The primary goal of the Geoclue project is to make creating location-aware applications \
++as simple as possible, while the secondary goal is to ensure that no application \
++can access location information without explicit permission from user."
++LICENSE = "GPLv2.0+"
++SECTION = "console/network"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=8114b83a0435d8136b47bd70111ce5cd"
++
++DEPENDS = "glib-2.0 dbus json-glib libsoup-2.4 intltool-native"
++
++inherit autotools pkgconfig gtk-doc
++
++SRC_URI = " \
++	http://www.freedesktop.org/software/geoclue/releases/2.4/geoclue-${PV}.tar.xz \
++"
++
++SRC_URI[md5sum] = "d2a5b05f4bad032673fe23afbce27926"
++SRC_URI[sha256sum] = "9c43fb9d0c12067ea64400500abb0640194947d4c2c55e38545afe5d9c5c315c"
++
++export BUILD_SYS
++export HOST_SYS
++export STAGING_INCDIR
++export STAGING_LIBDIR
++
++# Without this line, package is delcared a library and named libgeoclue*
++AUTO_LIBNAME_PKGS = ""
++
++PACKAGECONFIG ??= "3g modem-gps cdma nmea lib"
++PACKAGECONFIG[3g] = "--enable-3g-source,--disable-3g-source,modemmanager"
++PACKAGECONFIG[modem-gps] = "--enable-modem-gps-source,--disable-modem-gps-source,modemmanager"
++PACKAGECONFIG[cdma] = "--enable-cdma-source,--disable-cdma-source,modemmanager"
++PACKAGECONFIG[nmea] = "--enable-nmea-source,--disable-nmea-source,avahi"
++PACKAGECONFIG[lib] = "--enable-libgeoclue,--disable-libgeoclue,gobject-introspection"
++
++EXTRA_OECONF += " \
++    --with-dbus-service-user=root \
++    --with-dbus-sys-dir=${sysconfdir}/dbus-1/system.d \
++    --enable-demo-agent=no \
++"
++
++FILES_${PN} += " \
++    ${datadir}/dbus-1/system-services/org.freedesktop.GeoClue2.service \
++    ${datadir}/dbus-1/interfaces/org.freedesktop.GeoClue2.xml \
++    ${prefix}/libexec \
++"
+-- 
+2.7.4
 
->=20
-> Signed-off-by: Alexandru Moise <alexandru.moise@windriver.com>
-> ---
->  .../collectd/collectd/CVE-2016-6254.patch          | 55 ++++++++++++++++=
-++++++
->  .../recipes-extended/collectd/collectd_5.5.0.bb    |  1 +
->  2 files changed, 56 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/collectd/collectd/CVE-2016-6=
-254.patch
->=20
-> diff --git a/meta-oe/recipes-extended/collectd/collectd/CVE-2016-6254.pat=
-ch b/meta-oe/recipes-extended/collectd/collectd/CVE-2016-6254.patch
-> new file mode 100644
-> index 0000000..bc85b4c
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/collectd/collectd/CVE-2016-6254.patch
-> @@ -0,0 +1,55 @@
-> +From dd8483a4beb6f61521d8b32c726523bbea21cd92 Mon Sep 17 00:00:00 2001
-> +From: Florian Forster <octo@collectd.org>
-> +Date: Tue, 19 Jul 2016 10:00:37 +0200
-> +Subject: [PATCH] network plugin: Fix heap overflow in parse_packet().
-> +
-> +Emilien Gaspar has identified a heap overflow in parse_packet(), the
-> +function used by the network plugin to parse incoming network packets.
-> +
-> +This is a vulnerability in collectd, though the scope is not clear at
-> +this point. At the very least specially crafted network packets can be
-> +used to crash the daemon. We can't rule out a potential remote code
-> +execution though.
-> +
-> +Fixes: CVE-2016-6254
-> +
-> +cherry picked from upstream commit b589096f
-> +
-> +Upstream Status: Backport
-> +
-> +Signed-off-by: Alexandru Moise <alexandru.moise@windriver.com>
-> +---
-> + src/network.c | 3 +++
-> + 1 file changed, 3 insertions(+)
-> +
-> +diff --git a/src/network.c b/src/network.c
-> +index 551bd5c..cb979b2 100644
-> +--- a/src/network.c
-> ++++ b/src/network.c
-> +@@ -1444,6 +1444,7 @@ static int parse_packet (sockent_t *se, /* {{{ */
-> + 				printed_ignore_warning =3D 1;
-> + 			}
-> + 			buffer =3D ((char *) buffer) + pkg_length;
-> ++			buffer_size -=3D (size_t) pkg_length;
-> + 			continue;
-> + 		}
-> + #endif /* HAVE_LIBGCRYPT */
-> +@@ -1471,6 +1472,7 @@ static int parse_packet (sockent_t *se, /* {{{ */
-> + 				printed_ignore_warning =3D 1;
-> + 			}
-> + 			buffer =3D ((char *) buffer) + pkg_length;
-> ++			buffer_size -=3D (size_t) pkg_length;
-> + 			continue;
-> + 		}
-> + #endif /* HAVE_LIBGCRYPT */
-> +@@ -1612,6 +1614,7 @@ static int parse_packet (sockent_t *se, /* {{{ */
-> + 			DEBUG ("network plugin: parse_packet: Unknown part"
-> + 					" type: 0x%04hx", pkg_type);
-> + 			buffer =3D ((char *) buffer) + pkg_length;
-> ++			buffer_size -=3D (size_t) pkg_length;
-> + 		}
-> + 	} /* while (buffer_size > sizeof (part_header_t)) */
-> +=20
-> +--=20
-> +2.7.4
-> +
-> diff --git a/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb b/meta-o=
-e/recipes-extended/collectd/collectd_5.5.0.bb
-> index d7ba5b7..34edecf 100644
-> --- a/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
-> +++ b/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
-> @@ -13,6 +13,7 @@ SRC_URI =3D "http://collectd.org/files/collectd-${PV}.t=
-ar.bz2 \
->             file://collectd.service \
->             file://0001-conditionally-check-libvirt.patch \
->             file://0001-collectd-replace-deprecated-readdir_r-with-readdi=
-r.patch \
-> +           file://CVE-2016-6254.patch \
->  "
->  SRC_URI[md5sum] =3D "c39305ef5514b44238b0d31f77e29e6a"
->  SRC_URI[sha256sum] =3D "847684cf5c10de1dc34145078af3fcf6e0d168ba98c14f13=
-43b1062a4b569e88"
-> --=20
-> 2.7.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---udcq9yAoWb9A4FsZ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAlfP7NcACgkQN1Ujt2V2gBxGfACeJZiyN1s9m1QCP0k8UPc3ifUP
-uLYAoJlmZt2R4EWnwhZAeQUoURTSESGF
-=d8We
------END PGP SIGNATURE-----
-
---udcq9yAoWb9A4FsZ--
