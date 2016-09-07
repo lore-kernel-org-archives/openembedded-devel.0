@@ -1,25 +1,49 @@
-Return-Path: <Li.Zhou@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 13A4D77732
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 4654577713
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Sep 2016 01:47:09 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u871l9ZQ023433
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed,  7 Sep 2016 05:57:07 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id w207so1178930wmw.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 6 Sep 2016 18:47:10 -0700 (PDT)
-Received: from pek-lzhou2-d1.corp.ad.wrs.com (128.224.162.243) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server
-	(TLS) id 14.3.248.2; Tue, 6 Sep 2016 18:47:08 -0700
-From: Li Zhou <li.zhou@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 7 Sep 2016 09:46:29 +0800
-Message-ID: <20160907014629.24264-1-li.zhou@windriver.com>
-X-Mailer: git-send-email 2.9.0
+	Tue, 06 Sep 2016 22:57:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Zagpak69P5tw2bCmXaT8BXkwu2RXsKVx89QrfnM0FEo=;
+	b=KMVzDUSPpEjfTAalTxy62a9tL7SLRGX9X3cjcP73g/1P3rOX97PfyOyldPHGA6vcal
+	kaKVw+BBPwNpQJ3sDlbjiUQhQmPkzM9mC1wTTFQKPYGvHyO2tdkD+T0C3XeKKoc2x/eQ
+	lBCFhuhD88Dx8Erm8J/eJF1uX0e7BIpdCvbOJOgvTfiw+4LH1ZF2rKpR49Hvfjx+vgN9
+	n+hseIUfE8SIecddrGJLqW50BWWs2KyWcOR/8swlt9UJ9lIS0qHD/pk/EFhIATtqPlG/
+	Y5UYDGkiDe7k7wpHLG3QAS8lCg+uD0TKuNxiGI6eibRNkCuKAvK/SnlQZlLceUJYYcME
+	KXUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Zagpak69P5tw2bCmXaT8BXkwu2RXsKVx89QrfnM0FEo=;
+	b=i60LVozlFdumtSM4cwZgrESH9g2i9Op7tIWphNpOGkUTetTmbCVSTT2UkxwH4RUr+d
+	VHjdSycyVXmWrAxhj1e/Ud6CX4bDmNs3Sf1cNLVxgAbPH5a+HSLYuSf89H2Ws5pN3bPb
+	CbtKMlafKQeVi++4EXlvuN+uRs8xATh3EeYjg+lVRVXOflX3wJsjpke9M52MQC98YzJ5
+	EMg3kY0CMgozFvRjeNYq62nK6/9DQB2qaDEaKGDgzZhitLV7ExjI6a6/nT6Hh3b55GW6
+	qhTBcmcOGvU+QppXGYC+ti+7UYGT9bKfQO8xsNNZC2q/0JtBqrfFCitn4IKP2iG1MAcG
+	HlzQ==
+X-Gm-Message-State: AE9vXwPJHqIy8KYnD7GFvasOzR+e6JB6z0oV5WlroLi6VxD7ofD8pxVQ+9yOnQphR654Xw==
+X-Received: by 10.194.94.138 with SMTP id dc10mr44697499wjb.40.1473227827983; 
+	Tue, 06 Sep 2016 22:57:07 -0700 (PDT)
+Received: from localhost.localdomain (p5B0A28FA.dip0.t-ipconnect.de.
+	[91.10.40.250]) by smtp.googlemail.com with ESMTPSA id
+	p71sm2324552wmf.9.2016.09.06.22.57.07
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 06 Sep 2016 22:57:07 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  7 Sep 2016 07:56:55 +0200
+Message-Id: <1473227815-5512-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.5
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.243]
-Subject: [meta-oe][PATCH] lmsensors: sensors-detect: print a special message when there isn't enough cpu info
+Subject: [PATCH] libqmi: fix floating dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,81 +56,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Sep 2016 01:47:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 07 Sep 2016 05:57:10 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-When running sensors-detect, if there isn't enough information in
-/proc/cpuinfo for this arch (e.g. ppc64), "Use of uninitialized value
-in concatenation (.) or string at /usr/sbin/sensors-detect line 2867"
-and incomplete "# Processor: (//)" will be printed.
-Here print out a prompt for such a case.
+libgudev:
+* Is not configurable -> DEPENDS
+* fixes
+| WARNING: libqmi-1.16.0-r0 do_package_qa: QA Issue: libqmi rdepends on libgudev, but it isn't a build dependency, missing libgudev in DEPENDS or PACKAGECONFIG? [build-deps]
+| WARNING: libqmi-1.16.0-r0 do_package_qa: QA Issue: libqmi rdepends on libudev, but it isn't a build dependency, missing systemd in DEPENDS or PACKAGECONFIG? [build-deps]
+| WARNING: libqmi-1.16.0-r0 do_package_qa: QA Issue: libqmi rdepends on libcap, but it isn't a build dependency, missing libcap in DEPENDS or PACKAGECONFIG? [build-deps]
 
-Signed-off-by: Li Zhou <li.zhou@windriver.com>
+libmbim:
+* tested
+  PACKAGECONFIG ??= ""
+  PACKAGECONFIG[libmbim] = "--enable-mbim-qmux, --disable-mbim-qmux, libmbim"
+
+  configure reported correct "QMUX over MBIM:       no" but still
+  | WARNING: libqmi-1.16.0-r0 do_package_qa: QA Issue: libqmi rdepends on libmbim, but it isn't a build dependency, missing libmbim in DEPENDS or PACKAGECONFIG? [build-deps]
+  => libmbim -> DEPENDS
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...ensors-detect-print-a-special-message-whe.patch | 40 ++++++++++++++++++++++
- .../recipes-support/lm_sensors/lmsensors_3.4.0.bb  |  1 +
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-oe/recipes-support/lm_sensors/lmsensors/0001-lmsensors-sensors-detect-print-a-special-message-whe.patch
+ meta-oe/recipes-connectivity/libqmi/libqmi_1.16.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors/0001-lmsensors-sensors-detect-print-a-special-message-whe.patch b/meta-oe/recipes-support/lm_sensors/lmsensors/0001-lmsensors-sensors-detect-print-a-special-message-whe.patch
-new file mode 100644
-index 0000000..abf6e75
---- /dev/null
-+++ b/meta-oe/recipes-support/lm_sensors/lmsensors/0001-lmsensors-sensors-detect-print-a-special-message-whe.patch
-@@ -0,0 +1,40 @@
-+From c4428260e7685ebaf5c26c6ecaae5a56849853e8 Mon Sep 17 00:00:00 2001
-+From: Li Zhou <li.zhou@windriver.com>
-+Date: Tue, 6 Sep 2016 14:04:29 +0800
-+Subject: [PATCH] lmsensors: sensors-detect: print a special message when there
-+ isn't enough cpu info
-+
-+When running sensors-detect, if there isn't enough information in
-+/proc/cpuinfo for this arch (e.g. ppc64), "Use of uninitialized value
-+in concatenation (.) or string at /usr/sbin/sensors-detect line 2867"
-+and incomplete "# Processor: (//)" will be printed.
-+Here print out a prompt for such a case.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Li Zhou <li.zhou@windriver.com>
-+---
-+ prog/detect/sensors-detect | 7 ++++++-
-+ 1 file changed, 6 insertions(+), 1 deletion(-)
-+
-+diff --git a/prog/detect/sensors-detect b/prog/detect/sensors-detect
-+index 3c2b44f..5f62405 100755
-+--- a/prog/detect/sensors-detect
-++++ b/prog/detect/sensors-detect
-+@@ -2864,7 +2864,12 @@ sub initialize_cpu_list
-+ sub print_cpu_info
-+ {
-+ 	my $cpu = $cpu[0];
-+-	print "# Processor: $cpu->{'model name'} ($cpu->{'cpu family'}/$cpu->{model}/$cpu->{stepping})\n";
-++	if ( $cpu->{'model name'} && $cpu->{'cpu family'} && $cpu->{model} && $cpu->{stepping} ) {
-++		print "# Processor: $cpu->{'model name'} ($cpu->{'cpu family'}/$cpu->{model}/$cpu->{stepping})\n";
-++	}
-++	else {
-++		print "# Processor: There isn't enough cpu info for this arch!!!\n";
-++	}
-+ }
-+ 
-+ # @i2c_adapters is a list of references to hashes, one hash per I2C/SMBus
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
-index 857a57b..8215d90 100644
---- a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
-+++ b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
-@@ -10,6 +10,7 @@ DEPENDS = "sysfsutils virtual/libiconv bison-native flex-native rrdtool"
- SRC_URI = "http://dl.lm-sensors.org/lm-sensors/releases/lm_sensors-${PV}.tar.bz2 \
-            file://fancontrol.init \
-            file://sensord.init \
-+           file://0001-lmsensors-sensors-detect-print-a-special-message-whe.patch \
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.16.0.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.16.0.bb
+index 4e15c56..5ac889f 100644
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.16.0.bb
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.16.0.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
+     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
  "
- SRC_URI[md5sum] = "c03675ae9d43d60322110c679416901a"
- SRC_URI[sha256sum] = "e0579016081a262dd23eafe1d22b41ebde78921e73a1dcef71e05e424340061f"
+ 
+-DEPENDS = "glib-2.0"
++DEPENDS = "glib-2.0 libgudev libmbim"
+ 
+ inherit autotools pkgconfig bash-completion
+ 
 -- 
-2.9.0
+2.5.5
 
 
