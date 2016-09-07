@@ -1,21 +1,21 @@
 Return-Path: <leonardo.sandoval.gonzalez@linux.intel.com>
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id BD70377047
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 0624F77071
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Sep 2016 20:33:55 +0000 (UTC)
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
-	by fmsmga104.fm.intel.com with ESMTP; 07 Sep 2016 13:33:55 -0700
+	Wed,  7 Sep 2016 20:34:19 +0000 (UTC)
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+	by fmsmga101.fm.intel.com with ESMTP; 07 Sep 2016 13:34:20 -0700
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="5.30,297,1470726000"; 
-   d="scan'208";a="6126597"
+   d="scan'208";a="5839531"
 Received: from lsandov1-mobl2.zpn.intel.com ([10.219.5.38])
-	by orsmga004.jf.intel.com with ESMTP; 07 Sep 2016 13:33:46 -0700
+	by orsmga005.jf.intel.com with ESMTP; 07 Sep 2016 13:34:19 -0700
 From: leonardo.sandoval.gonzalez@linux.intel.com
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Sep 2016 15:37:03 -0500
-Message-Id: <1473280623-4410-1-git-send-email-leonardo.sandoval.gonzalez@linux.intel.com>
+Date: Wed,  7 Sep 2016 15:37:37 -0500
+Message-Id: <1473280657-4467-1-git-send-email-leonardo.sandoval.gonzalez@linux.intel.com>
 X-Mailer: git-send-email 2.1.4
-Subject: [meta-python][PATCH] python-unidiff: python module for parsing diff data
+Subject: [meta-python][PATCH] python-pylint: python source code analyzer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,33 +28,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Sep 2016 20:33:56 -0000
+X-List-Received-Date: Wed, 07 Sep 2016 20:34:21 -0000
 
 From: Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>
 
-The module takes diff data, from commands like diff or git-format-patch,
-parses it and creates python objects in the form of patch sets. More
-info is given on the recipe metadata.
+New recipe which defines the pylint python module: the static code
+analyzer for python files.
 
 Signed-off-by: Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>
 ---
- meta-python/recipes-devtools/python/python-unidiff_0.5.2.bb | 9 +++++++++
- 1 file changed, 9 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-unidiff_0.5.2.bb
+ .../recipes-devtools/python/python-pylint_1.6.4.bb | 27 ++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-pylint_1.6.4.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-unidiff_0.5.2.bb b/meta-python/recipes-devtools/python/python-unidiff_0.5.2.bb
+diff --git a/meta-python/recipes-devtools/python/python-pylint_1.6.4.bb b/meta-python/recipes-devtools/python/python-pylint_1.6.4.bb
 new file mode 100644
-index 0000000..3ee5bc2
+index 0000000..b9219dd
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-unidiff_0.5.2.bb
-@@ -0,0 +1,9 @@
-+SUMMARY = "Unified diff parsing/metadata extraction library"
-+HOMEPAGE = "http://github.com/matiasb/python-unidiff"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4c434b08ef42fea235bb019b5e5a97b3"
++++ b/meta-python/recipes-devtools/python/python-pylint_1.6.4.bb
+@@ -0,0 +1,27 @@
++SUMMARY="Pylint is a Python source code analyzer"
++HOMEPAGE= "http://www.pylint.org/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
 +
-+SRC_URI[md5sum] = "20dd70ba5a35bc95bf869322d6852227"
-+SRC_URI[sha256sum] = "344330ec3637e96b44dca77e086b205645b55648cf4d2b80fc673200f8a6a7e9"
++SRC_URI[md5sum] = "66ba9c27e067568bdabcdd7c21303903"
++SRC_URI[sha256sum] = "ef901a34b62ed7a734370ba5b162d890231ba8822abe88c6dda1268e2575f5f1"
++
++RDEPENDS_${PN} += "python-codecs \
++                   python-contextlib \
++                   python-core \
++                   python-distutils \
++                   python-io \
++                   python-lang \
++                   python-multiprocessing \
++                   python-netserver \
++                   python-numbers \
++                   python-pickle \
++                   python-re \
++                   python-shell \
++                   python-six \
++                   python-stringold \
++                   python-subprocess \
++                   python-textutils \
++                   python-unittest"
 +
 +inherit pypi setuptools
 -- 
