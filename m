@@ -1,24 +1,24 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B03C3731BE
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id C46C87720D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Sep 2016 02:28:22 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u882SMCc023303
+	Thu,  8 Sep 2016 05:27:06 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u885R57o007362
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 7 Sep 2016 19:28:22 -0700 (PDT)
-Received: from yow-rmacleod-lx3.wrs.com (128.224.56.85) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 7 Sep 2016 19:28:21 -0700
-From: Randy MacLeod <Randy.MacLeod@windriver.com>
+	Wed, 7 Sep 2016 22:27:06 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 7 Sep 2016 22:27:04 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 7 Sep 2016 22:25:34 -0400
-Message-ID: <1473301534-32004-1-git-send-email-Randy.MacLeod@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Thu, 8 Sep 2016 13:10:48 +0800
+Message-ID: <20160908051048.15948-1-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.8.3
 MIME-Version: 1.0
-Subject: [meta-oe] zile: uprev from 2.4.9 to 2.4.11 and add acl support
+Subject: [meta-networking][PATCH] waf-samba.bbclass: Append PACKAGECONFIG_CONFARGS to EXTRA_OECONF
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,42 +31,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2016 02:28:23 -0000
+X-List-Received-Date: Thu, 08 Sep 2016 05:27:08 -0000
 Content-Type: text/plain
 
-Add support for the acl DISTRO_FEATURE using PACKAGECONFIG
-Inherit pkgconfig since zile-2.4.11 uses that to find bdwgc (aka libgc).
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+Append PACKAGECONFIG_CONFARGS to EXTRA_OECONF for waf-samba.bbclass
+because the PACKAGECONFIG will not be handled for all recipes after
+the following commit in oe-core:
+
+commit c98fb5f5129e71829ffab4449b3d28082bc95ab4
+Author: Martin Jansa <martin.jansa@gmail.com>
+Date:   Tue Aug 30 16:19:58 2016 +0200
+
+    base, autotools: Append PACKAGECONFIG_CONFARGS to EXTRA_OECONF only in autotools.bbclass
+
+    * recipes which don't inherit autotools or cmake bbclass and want to
+      use the configure options from PACKAGECONFIG need to handle
+      PACKAGECONFIG_CONFARGS themselves.
+
+    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+    Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../recipes-support/zile/{zile_2.4.9.bb => zile_2.4.11.bb}    | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/zile/{zile_2.4.9.bb => zile_2.4.11.bb} (47%)
+ meta-networking/classes/waf-samba.bbclass | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/zile/zile_2.4.9.bb b/meta-oe/recipes-support/zile/zile_2.4.11.bb
-similarity index 47%
-rename from meta-oe/recipes-support/zile/zile_2.4.9.bb
-rename to meta-oe/recipes-support/zile/zile_2.4.11.bb
-index 2551a80..b3f1918 100644
---- a/meta-oe/recipes-support/zile/zile_2.4.9.bb
-+++ b/meta-oe/recipes-support/zile/zile_2.4.11.bb
-@@ -9,7 +9,12 @@ SRC_URI = "http://ftp.gnu.org/gnu/zile/${BP}.tar.gz \
-            file://remove-help2man.patch \
- "
+diff --git a/meta-networking/classes/waf-samba.bbclass b/meta-networking/classes/waf-samba.bbclass
+index 772bc75..a58ca2c 100644
+--- a/meta-networking/classes/waf-samba.bbclass
++++ b/meta-networking/classes/waf-samba.bbclass
+@@ -20,6 +20,8 @@ CONFIGUREOPTS = " --prefix=${prefix} \
+                   --mandir=${mandir} \
+                 "
  
--SRC_URI[md5sum] = "84a0af58fb4fbe3af16bde2ef2b8f5ae"
--SRC_URI[sha256sum] = "c71959c7aca02ac66be526ecccbc7954fb0ea7591ed3c13311a95e8f040b0049"
-+SRC_URI[md5sum] = "7a460ccec64e3bec2835697b2eae533c"
-+SRC_URI[sha256sum] = "1fd27bbddc61491b1fbb29a345d0d344734aa9e80cfa07b02892eedf831fa9cc"
- 
--inherit autotools
-+inherit autotools pkgconfig
++EXTRA_OECONF_append = " ${PACKAGECONFIG_CONFARGS}"
 +
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG += "${@bb.utils.contains('DISTRO_FEATURES', 'acl', 'acl', '', d)}"
-+
-+PACKAGECONFIG[acl] = "--enable-acl,--disable-acl,acl,"
+ # Three methods for waf cross compile:
+ # 1. answers:
+ #    Only --cross-answers - try the cross-answers file, and if
 -- 
-1.9.1
+2.7.4
 
 
