@@ -1,24 +1,51 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 968DC77087
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 7BAC465D00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Sep 2016 06:00:45 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u8860j6b007475
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu,  8 Sep 2016 08:40:14 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id b187so2729662wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 7 Sep 2016 23:00:45 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 7 Sep 2016 23:00:44 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 8 Sep 2016 13:58:15 +0800
-Message-ID: <1473314295-13816-1-git-send-email-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Thu, 08 Sep 2016 01:40:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=xmkg4vtUYaZ/0emsuMEO6Y1zMOu0XUVX+kb/4v1JBN0=;
+	b=f4kvLKgifwBM6rXfcUNMdPKjMFh9JTopdAkG4K3WZRAFD7lmMg11vTqUUKZvqT6Atl
+	h3q+yVmthdDFnIcw8/sDDEKYR7yjHNSiLfnfnA+xVVYB5D2gTah/Vw0YjF5RZxWPVcX4
+	S6SZMqMqdWaeH1T9vEfYyUyq7gqnyBHg1FOaiUgC7Ef2Q0KcJ5dP40PCpY6Q1L77eF5b
+	m2v+gjrp/PLF1hkneLzg5248n2VFRVxnta+ZqQKNWoqLweauWQGLOAegwgrcumPMOxG6
+	61dI+wcrjATEkf4I/fNYpQgzd9fQ8FAY9DyPoVYKjdhgnHGzdoTTKIgI9RURCifOVn/0
+	rBdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=xmkg4vtUYaZ/0emsuMEO6Y1zMOu0XUVX+kb/4v1JBN0=;
+	b=fG7RbwAJtowryShsD+qv2i5EaszVBJodlt1z9PuSG/+/Jh0m5Onyb7sdoUuac7luDD
+	o9HCP6qGQyB0Xvapt/JoHxgs9PLLx2ZTEN/O/JMCPX6BsHIfmTNtkv/E4QZtZD3wYwvq
+	uIY1tJTxcJW4Akt3ILdIwgpr7uqi2tv7ZXz33TZ+8e+acCp8sH0d0eWJnjEYaMoACeYO
+	Pe+tVy7y2qG6d6yf+tIBdb/KdX56fydBQZaI3IDzw/tuwsgW13QPYlnAxX1VBVwkg+nQ
+	5PwCKZ0wxU1MBZ7DSgdQai5eTBqsMUlVl/Y8rP7YaBRWRz3egVK/8Tt6cfTrhfXddfJ+
+	x1ZQ==
+X-Gm-Message-State: AE9vXwP9Qi0LXmT76Qng/mQSIYOehHF7+A1Z5PWBf0SOTLQCdd2kjybdO+l7tgvTL3V+zw==
+X-Received: by 10.28.39.134 with SMTP id n128mr7563744wmn.60.1473324014651;
+	Thu, 08 Sep 2016 01:40:14 -0700 (PDT)
+Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
+	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
+	uv6sm1105789wjc.31.2016.09.08.01.40.13
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 08 Sep 2016 01:40:13 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 8 Sep 2016 10:40:15 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20160908084015.GA2636@jama>
+References: <20160908051048.15948-1-jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] vsftpd: allow sysinfo() in the seccomp sandbox
+In-Reply-To: <20160908051048.15948-1-jackie.huang@windriver.com>
+User-Agent: Mutt/1.7.0 (2016-08-17)
+Subject: Re: [meta-networking][PATCH] waf-samba.bbclass: Append PACKAGECONFIG_CONFARGS to EXTRA_OECONF
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,141 +58,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2016 06:00:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 08 Sep 2016 08:40:15 -0000
+X-Groupsio-MsgNum: 63012
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="VS++wcV0S1rZb1Fb"
+Content-Disposition: inline
 
-From: Mingli Yu <Mingli.Yu@windriver.com>
+--VS++wcV0S1rZb1Fb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-* Allow sysinfo() in the seccomp sandbox otherwise
-  comes below OOPS: priv_sock_get_cmd as the syscall
-  sysinfo() not allowed
+On Thu, Sep 08, 2016 at 01:10:48PM +0800, jackie.huang@windriver.com wrote:
+> From: Jackie Huang <jackie.huang@windriver.com>
+>=20
+> Append PACKAGECONFIG_CONFARGS to EXTRA_OECONF for waf-samba.bbclass
+> because the PACKAGECONFIG will not be handled for all recipes after
+> the following commit in oe-core:
+>=20
+> commit c98fb5f5129e71829ffab4449b3d28082bc95ab4
+> Author: Martin Jansa <martin.jansa@gmail.com>
+> Date:   Tue Aug 30 16:19:58 2016 +0200
+>=20
+>     base, autotools: Append PACKAGECONFIG_CONFARGS to EXTRA_OECONF only i=
+n autotools.bbclass
+>=20
+>     * recipes which don't inherit autotools or cmake bbclass and want to
+>       use the configure options from PACKAGECONFIG need to handle
+>       PACKAGECONFIG_CONFARGS themselves.
+>=20
+>     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>     Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+>=20
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  meta-networking/classes/waf-samba.bbclass | 2 ++
+>  1 file changed, 2 insertions(+)
+>=20
+> diff --git a/meta-networking/classes/waf-samba.bbclass b/meta-networking/=
+classes/waf-samba.bbclass
+> index 772bc75..a58ca2c 100644
+> --- a/meta-networking/classes/waf-samba.bbclass
+> +++ b/meta-networking/classes/waf-samba.bbclass
+> @@ -20,6 +20,8 @@ CONFIGUREOPTS =3D " --prefix=3D${prefix} \
+>                    --mandir=3D${mandir} \
+>                  "
+> =20
+> +EXTRA_OECONF_append =3D " ${PACKAGECONFIG_CONFARGS}"
 
-tnftp 192.168.1.1
-Connected to 192.168.1.1.
-220 (vsFTPd 3.0.3)
-Name (192.168.1.1:root): anonymous
-331 Please specify the password.
-Password:
-230 Login successful.
-Remote system type is UNIX.
-Using binary mode to transfer files.
-ftp> prompt
-Interactive mode off.
-ftp> mget small*
-OOPS: priv_sock_get_cmd
+Cannot we append it to CONFIGUREOPTS and remove EXTRA_OECONF from this
+bbclass completely?
 
-* use "strace -ff /usr/sbin/vsftpd" to track in both
-  seccomp sandbox on and seccomp sandbox off (add
-  seccomp_sandbox=NO in /etc/vsftpd.conf) scenarios when
-  type the commands at ftp client as above, the ftp
-  connection at server side ends up each time with SIGSYS when
-  call sysinfo() syscall in seccomp sandbox on case,
-  so we need to add sysinfo() in the seccomp sandbox if
-  still use seccomp sandbox for vsftpd
+> +
+>  # Three methods for waf cross compile:
+>  # 1. answers:
+>  #    Only --cross-answers - try the cross-answers file, and if
+> --=20
+> 2.7.4
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-* The issue still exists in other distribution, Please
-  check https://bugzilla.redhat.com/show_bug.cgi?id=845980 for details
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-  And check ftp://195.220.108.108/linux/fedora/linux/updates/\
-  24/SRPMS/p/proftpd-1.3.5b-2.fc24.src.rpm for fedora, there
-  is even a patch vsftpd-3.0.2-seccomp.patch as below to turn off
-  seccomp sandbox for vsftpd by default which also means fedora
-  doesn't limit the syscall any more by default.
+--VS++wcV0S1rZb1Fb
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-  From dd86a1c28f11fa67b1263d5dc79fa9953629d30d Mon Sep 17 00:00:00 2001
-  From: Martin Sehnoutka <msehnout@redhat.com>
-  Date: Fri, 8 Apr 2016 15:03:16 +0200
-  Subject: [PATCH 1/7] vsftpd-3.0.2-seccomp
+-----BEGIN PGP SIGNATURE-----
 
-  ---
-  tunables.c | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
+iEYEARECAAYFAlfRI+4ACgkQN1Ujt2V2gBxIFgCguWGSYLweEImkiOr2fGLKSUWt
+RBUAn2H+DnFdtAViJsC/xXiw+r7OBIyI
+=NpYg
+-----END PGP SIGNATURE-----
 
-  diff --git a/tunables.c b/tunables.c
-  index 93f85b1..b024be4 100644
-  --- a/tunables.c
-  +++ b/tunables.c
-  @@ -232,7 +232,7 @@ tunables_load_defaults()
-    tunable_isolate_network = 1;
-    tunable_ftp_enable = 1;
-    tunable_http_enable = 0;
- -  tunable_seccomp_sandbox = 1;
- +  tunable_seccomp_sandbox = 0;
-    tunable_allow_writeable_chroot = 0;
-
-    tunable_accept_timeout = 60;
-
-Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
----
- ...ftpd-allow-sysinfo-in-the-seccomp-sandbox.patch | 45 ++++++++++++++++++++++
- .../recipes-daemons/vsftpd/vsftpd_3.0.3.bb         |  1 +
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/0001-vsftpd-allow-sysinfo-in-the-seccomp-sandbox.patch
-
-diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/0001-vsftpd-allow-sysinfo-in-the-seccomp-sandbox.patch b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/0001-vsftpd-allow-sysinfo-in-the-seccomp-sandbox.patch
-new file mode 100644
-index 0000000..7accbbc
---- /dev/null
-+++ b/meta-networking/recipes-daemons/vsftpd/vsftpd-3.0.3/0001-vsftpd-allow-sysinfo-in-the-seccomp-sandbox.patch
-@@ -0,0 +1,45 @@
-+From 37cc924363515c8c309944c455bcbba7ddcc8eda Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <Mingli.Yu@windriver.com>
-+Date: Tue, 6 Sep 2016 17:17:44 +0800
-+Subject: [PATCH] vsftpd: allow sysinfo() in the seccomp sandbox
-+
-+Upstream-Status: Pending
-+
-+* Allow sysinfo() in the seccomp sandbox otherwise
-+  comes below OOPS: priv_sock_get_cmd as the syscall
-+  sysinfo() not allowed
-+
-+tnftp 192.168.1.1
-+Connected to 192.168.1.1.
-+220 (vsFTPd 3.0.3)
-+Name (192.168.1.1:root): anonymous
-+331 Please specify the password.
-+Password:
-+230 Login successful.
-+Remote system type is UNIX.
-+Using binary mode to transfer files.
-+ftp> prompt
-+Interactive mode off.
-+ftp> mget small*
-+OOPS: priv_sock_get_cmd
-+
-+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
-+---
-+ seccompsandbox.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/seccompsandbox.c b/seccompsandbox.c
-+index 2c350a9..67d9ca5 100644
-+--- a/seccompsandbox.c
-++++ b/seccompsandbox.c
-+@@ -409,6 +409,7 @@ seccomp_sandbox_setup_postlogin(const struct vsf_session* p_sess)
-+   allow_nr(__NR_getcwd);
-+   allow_nr(__NR_chdir);
-+   allow_nr(__NR_getdents);
-++  allow_nr(__NR_sysinfo);
-+   /* Misc */
-+   allow_nr(__NR_umask);
-+ 
-+-- 
-+2.8.1
-+
-diff --git a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb
-index e398799..3eaaa30 100644
---- a/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb
-+++ b/meta-networking/recipes-daemons/vsftpd/vsftpd_3.0.3.bb
-@@ -18,6 +18,7 @@ SRC_URI = "https://security.appspot.com/downloads/vsftpd-${PV}.tar.gz \
-            file://volatiles.99_vsftpd \
-            file://vsftpd.service \
-            file://vsftpd-2.1.0-filter.patch \
-+           file://0001-vsftpd-allow-sysinfo-in-the-seccomp-sandbox.patch \
- "
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=a6067ad950b28336613aed9dd47b1271 \
--- 
-2.8.1
-
-
+--VS++wcV0S1rZb1Fb--
