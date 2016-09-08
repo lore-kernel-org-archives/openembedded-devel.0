@@ -1,59 +1,49 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-ua0-f182.google.com (mail-ua0-f182.google.com
-	[209.85.217.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 7DFF160111
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 6BD5C65CBA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Sep 2016 18:56:20 +0000 (UTC)
-Received: by mail-ua0-f182.google.com with SMTP id 95so24562460uaz.2
+	Thu,  8 Sep 2016 22:36:43 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id w12so212517wmf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Sep 2016 11:56:21 -0700 (PDT)
+	Thu, 08 Sep 2016 15:36:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=+Zlr5vOt03OmHIPv2bomMFOQrimR62Sd7U0OsXuP3Hc=;
-	b=1XsrYLO2ejZNVr9imusN1UMujzHif2Mdgsd87atvwPTR4whNASp+iTtgdpZpBL9Q5K
-	dkqmNY6wURdesqPkBKuFYMxfMA8W/ArfQTp9ph1Vp6IIKbIwAKTnfsuwG1vu/eqdpVs8
-	HCbZ7F0deRMpeGOypk3TayDsMypeFVRH6rVenl0PtDR8HP97EZXwInAIKNjhixrJWgQG
-	G2kDdaph0vTtkXnj0A27hpyYcQ6fFtERY371L6y96bCxvWKICKN/PZFfesjpsfcgxUQc
-	Huz83wk8c3OrjcTv4Khm4/mwdWCeM4HmSy8M9jyH9AFGpjOB0f0SP4tRxKgk7gpbkPnO
-	kuyw==
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=ReR3V/ykRxJLASrwIG4CWRYNdDnTF92eq7Td+aW6IKc=;
+	b=LLNWnap6A/E00lDIBfEvNi0hWNRXzMQBqqjwZelsJZdqm3tVM/733eKFtYpqclEmiX
+	keAY8gDcqE2ZEBIkFB1rhMDCjhhsdrgWvLFb+J3/FdixBwX3B07shipDUwTfE2MXFJ5i
+	gUzGuZcV+2AoBTjhO+RqB+5vMwAIqdGDlbAX9wMqX7gOx9XIz0IHxhQ+lSKF9qmk1A7q
+	r5S52AqDNkkvyb4UExG5PSgopn1WspVg0tr1yH6epNSYiMI3RBkxuKCguBRj/xZTt7ji
+	yZrUggJgZOJQytAme6Wvqt40Y0qzMiR2Y4/2ETHDDjh7hCYaZ8vYFPiG1+Mz7yHWWsWV
+	fjDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc;
-	bh=+Zlr5vOt03OmHIPv2bomMFOQrimR62Sd7U0OsXuP3Hc=;
-	b=fGfYy1h6b46KuZBlGOQhZTxuYKZy38RbeRF7jHmaDjEwpOU3e2Mvpi0nqkGUjS7z5n
-	VYo/uOlt5gfqz5ysuzPrUyLeDmoueVapMfbm+wHIuJdwOPE5EiScHNyIn5iao8mSqC64
-	I8VLIKx5D2jtxzHOf0ShLqy5BJ1OdyavhfgC9myKT9+TGkSFFFuRSsMgyODeKHPS/P8v
-	cIvuY+eSLTGIUj48Rwpt4mAcpD1KkjyhrENwWRu4SfDZKZFXU8XT5HuTOkSB9uBiKyGK
-	q6bMqH3TNFiTW55YOsYb9fqDPNGEjccCi7cxMIktKwzha1mCBrTJ52tIBM1QQU8s6/2Y
-	vVAA==
-X-Gm-Message-State: AE9vXwPmEvc2R0/O0tghzwytoMQO2a8+4kF7X7XDoTlEMVX8mxeHJHLbL23LJwCdIgSarA==
-X-Received: by 10.176.69.231 with SMTP id u94mr1011967uau.84.1473360980433;
-	Thu, 08 Sep 2016 11:56:20 -0700 (PDT)
-Received: from mail-ua0-f175.google.com (mail-ua0-f175.google.com.
-	[209.85.217.175])
-	by smtp.gmail.com with ESMTPSA id 73sm7157821uav.0.2016.09.08.11.56.17
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=ReR3V/ykRxJLASrwIG4CWRYNdDnTF92eq7Td+aW6IKc=;
+	b=lMu+v3mD9oJwDFIpvwbFBA23pICYq90sPq+19p15QI7hA1XrGYO1w2tFKOk53yI+uD
+	NUpx6WPF2c8cuzCMXIYEqIrmq+dmV7vV7jlrRDZ5Em1R5gR5ySOqMVeT56jTbf8ZwnAq
+	kEpR7c7aNZP7LYChgOVUBVCCovNfQW4W4ZYdZ9YbBTnFSZJdX3cJ09/WWXowtzVV5wQN
+	eUT2w3q+pnkpjCHAL0kVAM+1kcu0gDaQEosC01fOldw04NIqN2krIQkNBPT8YG7sirim
+	PcouETgvgIzvYbb3ONsYb8XtpPzbH/xtMF0QnZ4RyyMSVotgAEMTghYSJw4A3s0FtNFp
+	xnWw==
+X-Gm-Message-State: AE9vXwMkAIJUC+4ZbJVJfCbM/nE6iFqWb+Dtx89C7U0RSNwbEM66J6S/g8dO4YNAjYew6Q==
+X-Received: by 10.194.172.42 with SMTP id az10mr174613wjc.178.1473374203097;
+	Thu, 08 Sep 2016 15:36:43 -0700 (PDT)
+Received: from localhost.localdomain (p5B0A3574.dip0.t-ipconnect.de.
+	[91.10.53.116]) by smtp.googlemail.com with ESMTPSA id
+	d62sm267938wmd.7.2016.09.08.15.36.41
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 08 Sep 2016 11:56:18 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-ua0-f175.google.com with SMTP id u68so48962344uau.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Sep 2016 11:56:17 -0700 (PDT)
-X-Received: by 10.176.64.161 with SMTP id i30mr879829uad.107.1473360977353;
-	Thu, 08 Sep 2016 11:56:17 -0700 (PDT)
+	Thu, 08 Sep 2016 15:36:42 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  9 Sep 2016 00:36:21 +0200
+Message-Id: <1473374183-3022-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.5
 MIME-Version: 1.0
-Received: by 10.31.154.68 with HTTP; Thu, 8 Sep 2016 11:56:16 -0700 (PDT)
-In-Reply-To: <20160907095847.32480-1-fathi.boudra@linaro.org>
-References: <20160907095847.32480-1-fathi.boudra@linaro.org>
-Date: Thu, 8 Sep 2016 15:56:16 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKpxOryWFMRskktXRwG4Evo-B0RN0DznZ+Lo-7ZparNYcQ@mail.gmail.com>
-Message-ID: <CAP9ODKpxOryWFMRskktXRwG4Evo-B0RN0DznZ+Lo-7ZparNYcQ@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [PATCH 1/1] android-tools: add recipe from AOSP tag android-5.1.1_r37
+Subject: [PATCH 1/3] geany: update to 1.28
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,28 +56,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2016 18:56:22 -0000
+X-List-Received-Date: Thu, 08 Sep 2016 22:36:43 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, Sep 7, 2016 at 6:58 AM, Fathi Boudra <fathi.boudra@linaro.org> wrote:
-> Android tools offer filsystem tools for creating sparse images,
-> so package them in package of its own.
->
-> This recipe is re-worked and not a straight import from meta-shr.
->
-> It's built from AOSP source. I've dropped the ubuntu-ism which will
-> never be upstreamed.
->
-> The intent is to be closer to the upstream AOSP source code and be able
-> to update the recipe regularly.
->
-> Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-oe/recipes-devtools/geany/{geany_1.27.bb => geany_1.28.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/geany/{geany_1.27.bb => geany_1.28.bb} (76%)
 
-Please add nativesdk support; one commit improvement would be a small
-example of usage or an external link documenting its usage.
-
+diff --git a/meta-oe/recipes-devtools/geany/geany_1.27.bb b/meta-oe/recipes-devtools/geany/geany_1.28.bb
+similarity index 76%
+rename from meta-oe/recipes-devtools/geany/geany_1.27.bb
+rename to meta-oe/recipes-devtools/geany/geany_1.28.bb
+index 15b21da..da97090 100644
+--- a/meta-oe/recipes-devtools/geany/geany_1.27.bb
++++ b/meta-oe/recipes-devtools/geany/geany_1.28.bb
+@@ -10,8 +10,8 @@ SRC_URI = " \
+     http://download.geany.org/${BP}.tar.bz2 \
+     file://0001-configure.ac-remove-additional-c-test.patch \
+ "
+-SRC_URI[md5sum] = "7c23f835f45def89d10884c1343fa29e"
+-SRC_URI[sha256sum] = "846ff699a5944c5c3c068ae0199d4c13946a668bfc6d03f8c79765667c20cadf"
++SRC_URI[md5sum] = "39a29deb598e9e3503ee7d9d5fb51a34"
++SRC_URI[sha256sum] = "f73a3708f1a26e9bf72da564d5037d6f7fedca2e0d6175db0681c2b672100a5a"
+ 
+ FILES_${PN} += "${datadir}/icons"
+ 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+2.5.5
+
 
