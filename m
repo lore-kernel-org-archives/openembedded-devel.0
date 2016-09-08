@@ -1,24 +1,24 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id C46C87720D
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CF7747720C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Sep 2016 05:27:06 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u885R57o007362
+	Thu,  8 Sep 2016 05:51:54 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u885psxs017737
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 7 Sep 2016 22:27:06 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Wed, 7 Sep 2016 22:27:04 -0700
-From: <jackie.huang@windriver.com>
+	Wed, 7 Sep 2016 22:51:55 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Wed, 7 Sep 2016 22:51:53 -0700
+From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 8 Sep 2016 13:10:48 +0800
-Message-ID: <20160908051048.15948-1-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.8.3
+Date: Thu, 8 Sep 2016 13:49:24 +0800
+Message-ID: <1473313764-30806-1-git-send-email-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] waf-samba.bbclass: Append PACKAGECONFIG_CONFARGS to EXTRA_OECONF
+Subject: [meta-networking][PATCH] proftpd: remove the script ftpmail
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,47 +31,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2016 05:27:08 -0000
+X-List-Received-Date: Thu, 08 Sep 2016 05:51:55 -0000
 Content-Type: text/plain
 
-From: Jackie Huang <jackie.huang@windriver.com>
+From: Mingli Yu <Mingli.Yu@windriver.com>
 
-Append PACKAGECONFIG_CONFARGS to EXTRA_OECONF for waf-samba.bbclass
-because the PACKAGECONFIG will not be handled for all recipes after
-the following commit in oe-core:
+* Remove the ftpmail script to avoid confusion
+  about it fails to run because it lacks a dependency
+  on Mail/Sendmail.pm which is not shipped by default.
+  Also it has not been maintained for more than 10 years as
+  http://search.cpan.org/~mivkovic/Mail-Sendmail/Sendmail.pm.
 
-commit c98fb5f5129e71829ffab4449b3d28082bc95ab4
-Author: Martin Jansa <martin.jansa@gmail.com>
-Date:   Tue Aug 30 16:19:58 2016 +0200
+* And it's bad to add the dependency perl module
+  Mail/Sendmail.pm as it's too old and also send email to
+  Proftp-devel@lists.sourceforge.net to ask guidance about
+  ftpmail as below:
+    Q: In my environment, the ftpmail fails to run as
+       it lacks the dependency on Mail/Sendmail.pm which
+       is not shipped by default and also not maintained more
+       than 10 years as
+       http://search.cpan.org/~mivkovic/Mail-Sendmail/Sendmail.pm.
+    A: Patches for updates to the ftpmail script are highly
+       encouraged!  If the Mail-Sendmail package is not to
+       your preference, what would you suggest/prefer using
+       instead?
+  We don't plan to do more improvements about the perl module
+  Mail-Sendmail now since it's not something we, or other distros
+  apparently need as other distribution also not include the
+  ftpmail script.
 
-    base, autotools: Append PACKAGECONFIG_CONFARGS to EXTRA_OECONF only in autotools.bbclass
+* The ftpmail is initially added as a perl script to send an email
+  notification when upload proftpd log as below commit in
+  https://github.com/proftpd/proftpd.git:
 
-    * recipes which don't inherit autotools or cmake bbclass and want to
-      use the configure options from PACKAGECONFIG need to handle
-      PACKAGECONFIG_CONFARGS themselves.
+  commit 8d602d4bf01ef0c6464c7a16dbbe570a0322dc17
+  Author: castaglia <castaglia>
+  Date:   Thu Mar 6 03:06:14 2008 +0000
 
-    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-    Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+    Added ftpmail, a Perl script which reads a TransferLog FIFO and sends
+    automatic email notifications for uploads.
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
 ---
- meta-networking/classes/waf-samba.bbclass | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-networking/recipes-daemons/proftpd/proftpd_1.3.5b.bb | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/meta-networking/classes/waf-samba.bbclass b/meta-networking/classes/waf-samba.bbclass
-index 772bc75..a58ca2c 100644
---- a/meta-networking/classes/waf-samba.bbclass
-+++ b/meta-networking/classes/waf-samba.bbclass
-@@ -20,6 +20,8 @@ CONFIGUREOPTS = " --prefix=${prefix} \
-                   --mandir=${mandir} \
-                 "
- 
-+EXTRA_OECONF_append = " ${PACKAGECONFIG_CONFARGS}"
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5b.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5b.bb
+index 5a53d0d..c27a1cc 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5b.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5b.bb
+@@ -111,6 +111,15 @@ do_install () {
+         -e 's|${STAGING_DIR_NATIVE}||g' \
+         -e 's|-fdebug-prefix-map=[^ ]*||g' \
+         -i ${D}/${bindir}/prxs
 +
- # Three methods for waf cross compile:
- # 1. answers:
- #    Only --cross-answers - try the cross-answers file, and if
++    # ftpmail perl script, which reads the proftpd log file and sends
++    # automatic email notifications once an upload finishs,
++    # depends on an old perl Mail::Sendmail
++    # The Mail::Sendmail has not been maintained for almost 10 years
++    # Other distribution not ship with ftpmail, so do the same to
++    # avoid confusion about having it fails to run
++    rm -rf ${D}${bindir}/ftpmail
++    rm -rf ${D}${mandir}/man1/ftpmail.1
+ }
+ 
+ INITSCRIPT_NAME = "proftpd"
 -- 
-2.7.4
+2.8.1
 
 
