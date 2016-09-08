@@ -1,51 +1,25 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 7BAC465D00
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 11F2F73204
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Sep 2016 08:40:14 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id b187so2729662wme.0
+	Thu,  8 Sep 2016 09:11:23 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u889BN8J001025
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Sep 2016 01:40:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=xmkg4vtUYaZ/0emsuMEO6Y1zMOu0XUVX+kb/4v1JBN0=;
-	b=f4kvLKgifwBM6rXfcUNMdPKjMFh9JTopdAkG4K3WZRAFD7lmMg11vTqUUKZvqT6Atl
-	h3q+yVmthdDFnIcw8/sDDEKYR7yjHNSiLfnfnA+xVVYB5D2gTah/Vw0YjF5RZxWPVcX4
-	S6SZMqMqdWaeH1T9vEfYyUyq7gqnyBHg1FOaiUgC7Ef2Q0KcJ5dP40PCpY6Q1L77eF5b
-	m2v+gjrp/PLF1hkneLzg5248n2VFRVxnta+ZqQKNWoqLweauWQGLOAegwgrcumPMOxG6
-	61dI+wcrjATEkf4I/fNYpQgzd9fQ8FAY9DyPoVYKjdhgnHGzdoTTKIgI9RURCifOVn/0
-	rBdA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=xmkg4vtUYaZ/0emsuMEO6Y1zMOu0XUVX+kb/4v1JBN0=;
-	b=fG7RbwAJtowryShsD+qv2i5EaszVBJodlt1z9PuSG/+/Jh0m5Onyb7sdoUuac7luDD
-	o9HCP6qGQyB0Xvapt/JoHxgs9PLLx2ZTEN/O/JMCPX6BsHIfmTNtkv/E4QZtZD3wYwvq
-	uIY1tJTxcJW4Akt3ILdIwgpr7uqi2tv7ZXz33TZ+8e+acCp8sH0d0eWJnjEYaMoACeYO
-	Pe+tVy7y2qG6d6yf+tIBdb/KdX56fydBQZaI3IDzw/tuwsgW13QPYlnAxX1VBVwkg+nQ
-	5PwCKZ0wxU1MBZ7DSgdQai5eTBqsMUlVl/Y8rP7YaBRWRz3egVK/8Tt6cfTrhfXddfJ+
-	x1ZQ==
-X-Gm-Message-State: AE9vXwP9Qi0LXmT76Qng/mQSIYOehHF7+A1Z5PWBf0SOTLQCdd2kjybdO+l7tgvTL3V+zw==
-X-Received: by 10.28.39.134 with SMTP id n128mr7563744wmn.60.1473324014651;
-	Thu, 08 Sep 2016 01:40:14 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	uv6sm1105789wjc.31.2016.09.08.01.40.13
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 08 Sep 2016 01:40:13 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 8 Sep 2016 10:40:15 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20160908084015.GA2636@jama>
-References: <20160908051048.15948-1-jackie.huang@windriver.com>
+	Thu, 8 Sep 2016 02:11:24 -0700
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.248.2; Thu, 8 Sep 2016 02:11:23 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 8 Sep 2016 17:08:53 +0800
+Message-ID: <1473325733-21840-1-git-send-email-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-In-Reply-To: <20160908051048.15948-1-jackie.huang@windriver.com>
-User-Agent: Mutt/1.7.0 (2016-08-17)
-Subject: Re: [meta-networking][PATCH] waf-samba.bbclass: Append PACKAGECONFIG_CONFARGS to EXTRA_OECONF
+Cc: jslater@windriver.com
+Subject: [meta-networking][PATCH] tcpreplay: 3.4.4 -> 4.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,82 +32,266 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Sep 2016 08:40:15 -0000
-X-Groupsio-MsgNum: 63012
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="VS++wcV0S1rZb1Fb"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 08 Sep 2016 09:11:24 -0000
+Content-Type: text/plain
 
---VS++wcV0S1rZb1Fb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Mingli Yu <Mingli.Yu@windriver.com>
 
-On Thu, Sep 08, 2016 at 01:10:48PM +0800, jackie.huang@windriver.com wrote:
-> From: Jackie Huang <jackie.huang@windriver.com>
->=20
-> Append PACKAGECONFIG_CONFARGS to EXTRA_OECONF for waf-samba.bbclass
-> because the PACKAGECONFIG will not be handled for all recipes after
-> the following commit in oe-core:
->=20
-> commit c98fb5f5129e71829ffab4449b3d28082bc95ab4
-> Author: Martin Jansa <martin.jansa@gmail.com>
-> Date:   Tue Aug 30 16:19:58 2016 +0200
->=20
->     base, autotools: Append PACKAGECONFIG_CONFARGS to EXTRA_OECONF only i=
-n autotools.bbclass
->=20
->     * recipes which don't inherit autotools or cmake bbclass and want to
->       use the configure options from PACKAGECONFIG need to handle
->       PACKAGECONFIG_CONFARGS themselves.
->=20
->     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->     Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
->=20
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
->  meta-networking/classes/waf-samba.bbclass | 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/meta-networking/classes/waf-samba.bbclass b/meta-networking/=
-classes/waf-samba.bbclass
-> index 772bc75..a58ca2c 100644
-> --- a/meta-networking/classes/waf-samba.bbclass
-> +++ b/meta-networking/classes/waf-samba.bbclass
-> @@ -20,6 +20,8 @@ CONFIGUREOPTS =3D " --prefix=3D${prefix} \
->                    --mandir=3D${mandir} \
->                  "
-> =20
-> +EXTRA_OECONF_append =3D " ${PACKAGECONFIG_CONFARGS}"
+* Upgrade tcpreplay from 3.4.4 to 4.1.1
+* Remove the backport and unapplicable patches
+  - The logic for tcpreplay-3.4.4-cross-compile.patch
+    is covered by below commit:
+    commit f204c88d0d610c09b2b0249c447fed1e4813a8cb
+    Author: Aaron Turner <synfinatic@gmail.com>
+    Date:   Tue Oct 4 03:00:44 2011 +0000
 
-Cannot we append it to CONFIGUREOPTS and remove EXTRA_OECONF from this
-bbclass completely?
+      - mark as beta4
+      - fix autoconf quoting issues
+      - fix cross compile issue refs #489
 
-> +
->  # Three methods for waf cross compile:
->  # 1. answers:
->  #    Only --cross-answers - try the cross-answers file, and if
-> --=20
-> 2.7.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+  - The logic for tcpreplay-3.4.4-no-bfp-support.patch
+    is covered by below commit:
+    commit 8a3647813dcb7b89cd5e1fe064890a6e1d750f24
+    Author: Alexey Indeev <aindeev@appneta.com>
+    Date:   Fri Oct 10 15:04:43 2014 -0700
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+       #140 fixed bpf, netmap
 
---VS++wcV0S1rZb1Fb
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+  - The logic for both
+    tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch
+    and tcpreplay-3.4.4-improve-search-for-libpcap.patch are
+    covered by below commit:
+    commit e0cc16947b28cbb7040475c6fad123b8a739b34f
+    Author: Fred Klassen <fklassen@JTLM57.local>
+    Date:   Sun Dec 13 20:20:12 2015 -0800
 
------BEGIN PGP SIGNATURE-----
+       #203 many fixes to libpcap discovery
 
-iEYEARECAAYFAlfRI+4ACgkQN1Ujt2V2gBxIFgCguWGSYLweEImkiOr2fGLKSUWt
-RBUAn2H+DnFdtAViJsC/xXiw+r7OBIyI
-=NpYg
------END PGP SIGNATURE-----
+Reference https://github.com/appneta/tcpreplay.git
 
---VS++wcV0S1rZb1Fb--
+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+---
+ .../files/tcpreplay-3.4.4-cross-compile.patch      | 92 ----------------------
+ ...ay-3.4.4-fix-unable-to-link-libpcap-issue.patch | 17 ----
+ ...cpreplay-3.4.4-improve-search-for-libpcap.patch | 33 --------
+ .../files/tcpreplay-3.4.4-no-bfp-support.patch     | 15 ----
+ .../{tcpreplay_3.4.4.bb => tcpreplay_4.1.1.bb}     | 10 +--
+ 5 files changed, 3 insertions(+), 164 deletions(-)
+ delete mode 100755 meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-cross-compile.patch
+ delete mode 100644 meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch
+ delete mode 100644 meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-improve-search-for-libpcap.patch
+ delete mode 100644 meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-no-bfp-support.patch
+ rename meta-networking/recipes-support/tcpreplay/{tcpreplay_3.4.4.bb => tcpreplay_4.1.1.bb} (43%)
+
+diff --git a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-cross-compile.patch b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-cross-compile.patch
+deleted file mode 100755
+index a856b18..0000000
+--- a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-cross-compile.patch
++++ /dev/null
+@@ -1,92 +0,0 @@
+-Uptream-Status: Pending
+-
+-Signed-off-by: Zongchun Yu <Zongchun.Yu@freescale.com>
+-
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -402,7 +402,6 @@
+- 
+- dnl 0.9.6 (which is still thinks it is 0.9.5 due to a bug) introduces an important
+- dnl fix for OSX.  See: http://tcpreplay.synfin.net/trac/ticket/167
+--libpcap_version_096=no
+- AC_RUN_IFELSE(AC_LANG_PROGRAM([[
+- #include <string.h>
+- #include <stdlib.h>
+-@@ -419,11 +418,12 @@
+-             exit(0);
+- 
+-     exit(1);
+--]]), [
+--    libpcap_version_096=yes
+--])
+-+]]),
+-+ [libpcap_version_096=yes],
+-+ [libpcap_version_096=no],
+-+ [libpcap_version_096=yes]
+-+)
+- 
+--libpcap_ver8=no
+- AC_RUN_IFELSE(AC_LANG_PROGRAM([[
+- #include <string.h>
+- #include <stdlib.h>
+-@@ -444,13 +444,12 @@
+-         exit(0);
+- 
+-     exit(1);
+--]]), [
+--    libpcap_ver8=yes
+--], [
+--    libpcap_ver8=no
+--])
+-+]]),
+-+ [libpcap_ver8=yes],
+-+ [libpcap_ver8=no],
+-+ [libpcap_ver8=yes]
+-+)
+- 
+--libpcap_ver7=no
+- AC_RUN_IFELSE(AC_LANG_PROGRAM([[
+- #include <string.h>
+- #include <stdlib.h>
+-@@ -469,11 +468,11 @@
+-             exit(0);
+- 
+-     exit(1);
+--]]), [
+--    libpcap_ver7=yes
+--], [
+--    libpcap_ver7=no
+--])
+-+]]),
+-+ [libpcap_ver7=yes],
+-+ [libpcap_ver7=no],
+-+ [libpcap_ver7=yes]
+-+)
+- 
+- if test x$libpcap_ver8 = xyes ; then
+-     AC_MSG_RESULT(>= 0.8.0)
+-@@ -761,8 +760,8 @@
+- 
+- have_bpf=no
+- dnl Check for BSD's BPF
+--AC_MSG_CHECKING(for BPF device sending support)
+--AC_TRY_RUN([
+-+AC_CACHE_CHECK([for BPF device sending support], ac_cv_have_bpf,
+-+[AC_TRY_RUN([
+- #include <stdio.h>
+- #include <stdlib.h>
+- #include <sys/types.h>
+-@@ -796,8 +795,11 @@
+-             [Do we have BPF device support?])
+-     AC_MSG_RESULT(yes)
+-     have_bpf=yes
+--],[
+--    AC_MSG_RESULT(no)
+-+],
+-+[AC_MSG_RESULT(no)],
+-+[AC_MSG_ERROR([cross-compiling,
+-+  presetting ac_cv_have_bpf=(yes|no) will help])]
+-+)
+- ])
+- 
+- 
+diff --git a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch
+deleted file mode 100644
+index 5f36c68..0000000
+--- a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch
++++ /dev/null
+@@ -1,17 +0,0 @@
+-Uptream-Status: Pending
+-
+-Signed-off-by: Zongchun Yu <Zongchun.Yu@freescale.com>
+-
+-Index: tcpreplay-3.4.4/configure.ac
+-===================================================================
+---- tcpreplay-3.4.4.orig/configure.ac
+-+++ tcpreplay-3.4.4/configure.ac
+-@@ -389,7 +389,7 @@ CFLAGS="$CFLAGS -I$LPCAPINCDIR"
+- AC_SEARCH_LIBS([pcap_close], [pcap],
+-     LPCAPLIB="$LIBS",
+-     AC_ERROR([Unable to link libpcap in ${foundpcap}]),
+--    -lnl)
+-+    -lnl-3)
+- 
+- AC_SUBST(LPCAPINC)
+- AC_SUBST(LPCAPLIB)
+diff --git a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-improve-search-for-libpcap.patch b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-improve-search-for-libpcap.patch
+deleted file mode 100644
+index 50f024c..0000000
+--- a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-improve-search-for-libpcap.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-tcpreplay: improve search for libpcap
+-
+-Add a test which will find libpcap if $testdir/.. is a sysroot.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Joe Slater <joe.slater@windriver.com>
+-
+-
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -350,14 +350,20 @@ for testdir in $trypcapdir /usr/local /o
+-     if test -f "${testdir}/include/pcap.h" -a $foundpcap = no ; then
+-         LPCAPINC="${testdir}/include/pcap.h"
+-         LPCAPINCDIR="${testdir}/include"
+-+        # If testdir/.. is a sysroot, then sDir should point to where the libraries are.
+-+        sDir=$(readlink -m ${testdir}/../${libdir})
+-         if test $dynamic_link = yes; then
+--            if test -f "${testdir}/lib64/libpcap${shrext_cmds}" ; then
+-+            if test -f "${sDir}/libpcap${shrext_cmds}" ; then
+-+                LPCAPLIB="-L${sDir} -lpcap"
+-+            elif test -f "${testdir}/lib64/libpcap${shrext_cmds}" ; then
+-                 LPCAPLIB="-L${testdir}/lib64 -lpcap"
+-             elif test -f "${testdir}/lib/libpcap${shrext_cmds}" ; then
+-                 LPCAPLIB="-L${testdir}/lib -lpcap"
+-             else
+-                 AC_ERROR([Unable to find libpcap in ${testdir}])
+-             fi
+-+        elif test -f "${sDir}/libpcap.${libext}" ; then
+-+            LPCAPLIB="${sDir}/libpcap.${libext}"
+-         elif test -f "${testdir}/lib64/libpcap.${libext}" ; then
+-             LPCAPLIB="${testdir}/lib64/libpcap.${libext}"
+-         elif test -f "${testdir}/lib/libpcap.${libext}" ; then
+diff --git a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-no-bfp-support.patch b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-no-bfp-support.patch
+deleted file mode 100644
+index 3c11c92..0000000
+--- a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-no-bfp-support.patch
++++ /dev/null
+@@ -1,15 +0,0 @@
+-Uptream-Status: Pending
+-
+-Signed-off-by: Zongchun Yu <Zongchun.Yu@freescale.com>
+-
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -758,6 +758,8 @@
+-     AC_MSG_RESULT(no)
+- ])
+- 
+-+ac_cv_have_bpf=no
+-+
+- have_bpf=no
+- dnl Check for BSD's BPF
+- AC_CACHE_CHECK([for BPF device sending support], ac_cv_have_bpf,
+diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.1.1.bb
+similarity index 43%
+rename from meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
+rename to meta-networking/recipes-support/tcpreplay/tcpreplay_4.1.1.bb
+index ccbab9f..389d61b 100644
+--- a/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
++++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.1.1.bb
+@@ -4,16 +4,12 @@ HOMEPAGE = "http://tcpreplay.synfin.net/"
+ SECTION = "net"
+ 
+ LICENSE = "GPLv3"
+-LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=c33cccf72cc1603e8a72a84811ae3ac8"
++LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=890b830b22fd632e9ffd996df20338f8"
+ 
+ SRC_URI = "http://prdownloads.sourceforge.net/tcpreplay/${PV}/tcpreplay-${PV}.tar.gz \
+-           file://tcpreplay-3.4.4-cross-compile.patch \
+-           file://tcpreplay-3.4.4-no-bfp-support.patch \
+-           file://tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch \
+-           file://tcpreplay-3.4.4-improve-search-for-libpcap.patch \
+            "
+-SRC_URI[md5sum] = "22725feb9b2590809f9350308ec65180"
+-SRC_URI[sha256sum] = "7a809c58ddec86407fd6e5597ac883d7874a19bea81d716bb2b1c6e3b0e7b58f"
++SRC_URI[md5sum] = "80394c33fe697b53b69eac9bb0968ae9"
++SRC_URI[sha256sum] = "61b916ef91049cad2a9ddc8de6f5e3e3cc5d9998dbb644dc91cf3a798497ffe4"
+ 
+ DEPENDS = "libpcap"
+ 
+-- 
+2.8.1
+
+
