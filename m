@@ -1,24 +1,45 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F89060119
+Return-Path: <net147@gmail.com>
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 046AF6FF0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Sep 2016 02:57:37 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u892vbsO027161
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Thu, 8 Sep 2016 19:57:37 -0700
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.248.2; Thu, 8 Sep 2016 19:57:36 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <Joe_MacDonald@mentor.com>
-Date: Fri, 9 Sep 2016 10:55:03 +0800
-Message-ID: <1473389703-17992-1-git-send-email-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.8.1
-MIME-Version: 1.0
-Cc: jslater@windriver.com
-Subject: [meta-networking][PATCH v2] tcpreplay: upgrade to 4.1.1
+	Fri,  9 Sep 2016 06:11:40 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id n24so3515779pfb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 Sep 2016 23:11:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=DkGrRawkIb/Hhcqyu7tWNitlkf3usRjvoBhjR/wgsOQ=;
+	b=khu/ZVsvQHzv55Fdge/uJVeAs8iqZaCARd0urEm7fsoh+dU4pntczceEffgOhQvhm7
+	McDdlo71btSWTzNvgD1/CMOl77Ev0Hd8Y2MkT4aHEJ3G21WckRV4S2wTyHde0Qsdas3r
+	crDGd9+MlTCpAh6PIjZ63BbPt7J7pyGSxuzuhss4GKquiA/alUUPUL6L2GLW1nmmA9st
+	pu5QcziA/OxuOYuvJZ2/0YsAeXmjJP14G+xub56oxqARbm+RDNDz5Mi/AabdhPWnTfde
+	hduev0VZbDOc8e2vYKpRr5fjRXuHgBGgsw+hFUVMkZKgl1QxlFGjW1b+JoIB6wN4IgTD
+	NU0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=DkGrRawkIb/Hhcqyu7tWNitlkf3usRjvoBhjR/wgsOQ=;
+	b=kCd5UFesarP4aGthHYMVM5Bwb0H7WbHAxVJYrmb7aUm1Bz/EzIjNgIAM6O3UxQ3uKc
+	FoJDFq36PKF4kA0cfg//mZ9UvtDOx+k6uQxBkmjTiZzPfr1vgsQ69lxLoBXv58TCQqgz
+	Fy7VZCyFrB86vZip08SpMAM0jX6rHXfkcyqmQHEyrpcNY+SKRIYMwB4fhWfmNtmsxJg2
+	rfAa6lEk68ZF8BMQ/c2acba9dE2oKbKWg3FMoZhkLgY02yJAPx3RL/W7XetA5sbkECiB
+	LFAPvTNBhalXLn1okViiSCC18p7K1scbM4T+LfAqSgW8TdoTa5lTQc/LJyP2AzsxfVEj
+	Fo8g==
+X-Gm-Message-State: AE9vXwPR/ADP6G4BH0EvvtKu4a2StcvzWFQfgEoPnUnnNc+J/m/ISmgpZbKEHeAb/BQAbQ==
+X-Received: by 10.98.141.219 with SMTP id p88mr3399861pfk.153.1473401501323;
+	Thu, 08 Sep 2016 23:11:41 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by smtp.gmail.com with ESMTPSA id x9sm2035565pfd.70.2016.09.08.23.11.40
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 08 Sep 2016 23:11:40 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  9 Sep 2016 16:11:19 +1000
+Message-Id: <20160909061119.3402-1-net147@gmail.com>
+X-Mailer: git-send-email 2.9.3
+Subject: [meta-qt5][PATCH] qtbase: avoid qmake errors due to missing oe-device-extra.pri
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,243 +52,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Sep 2016 02:57:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 09 Sep 2016 06:11:42 -0000
 
-From: Mingli Yu <Mingli.Yu@windriver.com>
+An empty oe-extra-extra.pri file is created if it does not exist to
+suppress qmake errors.
 
-* Upgrade tcpreplay from 3.4.4 to 4.1.1
-* Update the LICENSE file checksum as the LICENSE
-  updated to implement GPLv3 license
-* Remove the backport and unapplicable patches
-  - tcpreplay-3.4.4-cross-compile.patch
-  - tcpreplay-3.4.4-no-bfp-support.patch
-  - tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch
-  - tcpreplay-3.4.4-improve-search-for-libpcap.patch are
-
-Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- .../files/tcpreplay-3.4.4-cross-compile.patch      | 92 ----------------------
- ...ay-3.4.4-fix-unable-to-link-libpcap-issue.patch | 17 ----
- ...cpreplay-3.4.4-improve-search-for-libpcap.patch | 33 --------
- .../files/tcpreplay-3.4.4-no-bfp-support.patch     | 15 ----
- .../{tcpreplay_3.4.4.bb => tcpreplay_4.1.1.bb}     | 10 +--
- 5 files changed, 3 insertions(+), 164 deletions(-)
- delete mode 100755 meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-cross-compile.patch
- delete mode 100644 meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch
- delete mode 100644 meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-improve-search-for-libpcap.patch
- delete mode 100644 meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-no-bfp-support.patch
- rename meta-networking/recipes-support/tcpreplay/{tcpreplay_3.4.4.bb => tcpreplay_4.1.1.bb} (43%)
+ recipes-qt/qt5/qtbase_git.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-cross-compile.patch b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-cross-compile.patch
-deleted file mode 100755
-index a856b18..0000000
---- a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-cross-compile.patch
-+++ /dev/null
-@@ -1,92 +0,0 @@
--Uptream-Status: Pending
--
--Signed-off-by: Zongchun Yu <Zongchun.Yu@freescale.com>
--
----- a/configure.ac
--+++ b/configure.ac
--@@ -402,7 +402,6 @@
-- 
-- dnl 0.9.6 (which is still thinks it is 0.9.5 due to a bug) introduces an important
-- dnl fix for OSX.  See: http://tcpreplay.synfin.net/trac/ticket/167
---libpcap_version_096=no
-- AC_RUN_IFELSE(AC_LANG_PROGRAM([[
-- #include <string.h>
-- #include <stdlib.h>
--@@ -419,11 +418,12 @@
--             exit(0);
-- 
--     exit(1);
---]]), [
---    libpcap_version_096=yes
---])
--+]]),
--+ [libpcap_version_096=yes],
--+ [libpcap_version_096=no],
--+ [libpcap_version_096=yes]
--+)
-- 
---libpcap_ver8=no
-- AC_RUN_IFELSE(AC_LANG_PROGRAM([[
-- #include <string.h>
-- #include <stdlib.h>
--@@ -444,13 +444,12 @@
--         exit(0);
-- 
--     exit(1);
---]]), [
---    libpcap_ver8=yes
---], [
---    libpcap_ver8=no
---])
--+]]),
--+ [libpcap_ver8=yes],
--+ [libpcap_ver8=no],
--+ [libpcap_ver8=yes]
--+)
-- 
---libpcap_ver7=no
-- AC_RUN_IFELSE(AC_LANG_PROGRAM([[
-- #include <string.h>
-- #include <stdlib.h>
--@@ -469,11 +468,11 @@
--             exit(0);
-- 
--     exit(1);
---]]), [
---    libpcap_ver7=yes
---], [
---    libpcap_ver7=no
---])
--+]]),
--+ [libpcap_ver7=yes],
--+ [libpcap_ver7=no],
--+ [libpcap_ver7=yes]
--+)
-- 
-- if test x$libpcap_ver8 = xyes ; then
--     AC_MSG_RESULT(>= 0.8.0)
--@@ -761,8 +760,8 @@
-- 
-- have_bpf=no
-- dnl Check for BSD's BPF
---AC_MSG_CHECKING(for BPF device sending support)
---AC_TRY_RUN([
--+AC_CACHE_CHECK([for BPF device sending support], ac_cv_have_bpf,
--+[AC_TRY_RUN([
-- #include <stdio.h>
-- #include <stdlib.h>
-- #include <sys/types.h>
--@@ -796,8 +795,11 @@
--             [Do we have BPF device support?])
--     AC_MSG_RESULT(yes)
--     have_bpf=yes
---],[
---    AC_MSG_RESULT(no)
--+],
--+[AC_MSG_RESULT(no)],
--+[AC_MSG_ERROR([cross-compiling,
--+  presetting ac_cv_have_bpf=(yes|no) will help])]
--+)
-- ])
-- 
-- 
-diff --git a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch
-deleted file mode 100644
-index 5f36c68..0000000
---- a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch
-+++ /dev/null
-@@ -1,17 +0,0 @@
--Uptream-Status: Pending
--
--Signed-off-by: Zongchun Yu <Zongchun.Yu@freescale.com>
--
--Index: tcpreplay-3.4.4/configure.ac
--===================================================================
----- tcpreplay-3.4.4.orig/configure.ac
--+++ tcpreplay-3.4.4/configure.ac
--@@ -389,7 +389,7 @@ CFLAGS="$CFLAGS -I$LPCAPINCDIR"
-- AC_SEARCH_LIBS([pcap_close], [pcap],
--     LPCAPLIB="$LIBS",
--     AC_ERROR([Unable to link libpcap in ${foundpcap}]),
---    -lnl)
--+    -lnl-3)
-- 
-- AC_SUBST(LPCAPINC)
-- AC_SUBST(LPCAPLIB)
-diff --git a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-improve-search-for-libpcap.patch b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-improve-search-for-libpcap.patch
-deleted file mode 100644
-index 50f024c..0000000
---- a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-improve-search-for-libpcap.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--tcpreplay: improve search for libpcap
--
--Add a test which will find libpcap if $testdir/.. is a sysroot.
--
--Upstream-Status: Pending
--
--Signed-off-by: Joe Slater <joe.slater@windriver.com>
--
--
----- a/configure.ac
--+++ b/configure.ac
--@@ -350,14 +350,20 @@ for testdir in $trypcapdir /usr/local /o
--     if test -f "${testdir}/include/pcap.h" -a $foundpcap = no ; then
--         LPCAPINC="${testdir}/include/pcap.h"
--         LPCAPINCDIR="${testdir}/include"
--+        # If testdir/.. is a sysroot, then sDir should point to where the libraries are.
--+        sDir=$(readlink -m ${testdir}/../${libdir})
--         if test $dynamic_link = yes; then
---            if test -f "${testdir}/lib64/libpcap${shrext_cmds}" ; then
--+            if test -f "${sDir}/libpcap${shrext_cmds}" ; then
--+                LPCAPLIB="-L${sDir} -lpcap"
--+            elif test -f "${testdir}/lib64/libpcap${shrext_cmds}" ; then
--                 LPCAPLIB="-L${testdir}/lib64 -lpcap"
--             elif test -f "${testdir}/lib/libpcap${shrext_cmds}" ; then
--                 LPCAPLIB="-L${testdir}/lib -lpcap"
--             else
--                 AC_ERROR([Unable to find libpcap in ${testdir}])
--             fi
--+        elif test -f "${sDir}/libpcap.${libext}" ; then
--+            LPCAPLIB="${sDir}/libpcap.${libext}"
--         elif test -f "${testdir}/lib64/libpcap.${libext}" ; then
--             LPCAPLIB="${testdir}/lib64/libpcap.${libext}"
--         elif test -f "${testdir}/lib/libpcap.${libext}" ; then
-diff --git a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-no-bfp-support.patch b/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-no-bfp-support.patch
-deleted file mode 100644
-index 3c11c92..0000000
---- a/meta-networking/recipes-support/tcpreplay/files/tcpreplay-3.4.4-no-bfp-support.patch
-+++ /dev/null
-@@ -1,15 +0,0 @@
--Uptream-Status: Pending
--
--Signed-off-by: Zongchun Yu <Zongchun.Yu@freescale.com>
--
----- a/configure.ac
--+++ b/configure.ac
--@@ -758,6 +758,8 @@
--     AC_MSG_RESULT(no)
-- ])
-- 
--+ac_cv_have_bpf=no
--+
-- have_bpf=no
-- dnl Check for BSD's BPF
-- AC_CACHE_CHECK([for BPF device sending support], ac_cv_have_bpf,
-diff --git a/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.1.1.bb
-similarity index 43%
-rename from meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
-rename to meta-networking/recipes-support/tcpreplay/tcpreplay_4.1.1.bb
-index ccbab9f..389d61b 100644
---- a/meta-networking/recipes-support/tcpreplay/tcpreplay_3.4.4.bb
-+++ b/meta-networking/recipes-support/tcpreplay/tcpreplay_4.1.1.bb
-@@ -4,16 +4,12 @@ HOMEPAGE = "http://tcpreplay.synfin.net/"
- SECTION = "net"
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index ee41db5..eda57ac 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -208,6 +208,9 @@ do_configure() {
+ }
  
- LICENSE = "GPLv3"
--LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=c33cccf72cc1603e8a72a84811ae3ac8"
-+LIC_FILES_CHKSUM = "file://docs/LICENSE;md5=890b830b22fd632e9ffd996df20338f8"
+ do_install_append() {
++    # Avoid qmake error "Cannot read [...]/usr/lib/qt5/mkspecs/oe-device-extra.pri: No such file or directory"
++    touch ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/oe-device-extra.pri
++
+     install -m 0755 ${B}/bin/qmake-target ${D}/${bindir}${QT_DIR_NAME}/qmake
  
- SRC_URI = "http://prdownloads.sourceforge.net/tcpreplay/${PV}/tcpreplay-${PV}.tar.gz \
--           file://tcpreplay-3.4.4-cross-compile.patch \
--           file://tcpreplay-3.4.4-no-bfp-support.patch \
--           file://tcpreplay-3.4.4-fix-unable-to-link-libpcap-issue.patch \
--           file://tcpreplay-3.4.4-improve-search-for-libpcap.patch \
-            "
--SRC_URI[md5sum] = "22725feb9b2590809f9350308ec65180"
--SRC_URI[sha256sum] = "7a809c58ddec86407fd6e5597ac883d7874a19bea81d716bb2b1c6e3b0e7b58f"
-+SRC_URI[md5sum] = "80394c33fe697b53b69eac9bb0968ae9"
-+SRC_URI[sha256sum] = "61b916ef91049cad2a9ddc8de6f5e3e3cc5d9998dbb644dc91cf3a798497ffe4"
- 
- DEPENDS = "libpcap"
- 
+     # Remove example.pro file as it is useless
 -- 
-2.8.1
+2.9.3
 
 
