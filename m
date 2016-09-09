@@ -1,47 +1,43 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 4322F6011F
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Sep 2016 14:07:34 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id 1so35157310wmz.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Sep 2016 07:07:36 -0700 (PDT)
+Return-Path: <jefro.net@gmail.com>
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id C68AB77155;
+	Fri,  9 Sep 2016 15:52:19 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id 1so40668291wmz.1;
+	Fri, 09 Sep 2016 08:52:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=dW8yztC1dXuvSQa1P/pLJYbiUSpPZS8dbtx/4dJTc+w=;
-	b=m39xs2btO2sQuLenovkgwQ7nJ9a2lawS9ywap1baULZiSiWhk+7X2GemMpMA8EsIQq
-	/Wv7K9UumApUUk8XpjSLAcy4ucyYKvHcflJKXR/UJU5hu0Id4c2yqPpxjjZaQzrPJBTC
-	5QXUCaCohwLlLZF4ETSW1IS4MiGu/kRd489eRrMC1KijU5/Xhj6qp3rKobfVoZRPBVI9
-	f/n2FTQurHfHExWrFsV4j6OgLxySamQJ4k8bzisHlEQEjwDfGqAl36mvEDnbXCvB/yXo
-	53snmdgt/t0rNy2A3S2yMMEA/3KyyMLFhxNxAHQ3KCJW+TfpRViZdHYGGFdbF4BLfvKX
-	5aZA==
+	h=mime-version:sender:from:date:message-id:subject:to;
+	bh=EpOXGEIw4YjKuV5gBAeA9jLRbzf3dGSsyXvOxJTR3Yk=;
+	b=hPW8WOku+Hirvj/U8acLMtPBWx8KDxml13kYnz9YnHBez9PD4Ybw/wA0eXzbDjQBvI
+	uaXOij4aG6PHcumEOUkzyx/TY4dXygi8cpTDH6IbTVJGe7dKekv+13TWYn6+/a0Ug63t
+	hNbOy7JBXYAbhIFAW8sMdAZwuq+g34LmM5M1SpJiFf0rGYA69laROBfN78f+DQIVJXcs
+	zN9ub32g9NQkavwn68Mcowh5WpraZdn9XZ5hH3mjgAg3dAJd4Tcx8kG5W+SGRQTdpiU5
+	/3kGGobXdS5tK0tMMEkaD2lWFdZdUtKOFd3XVmChtkDVaMawg3YuJwsuNgmwhSe1FiLK
+	Ps8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=dW8yztC1dXuvSQa1P/pLJYbiUSpPZS8dbtx/4dJTc+w=;
-	b=Nwt+yYVt3pS+hOGFEkrK+r0rZp3hbgYYTNrYlSuT8lsI/d9JYUgo6sMuU8e+PNKxkY
-	OAPtvh46+TiWyTN9ZzED8vEJtxUEdyGKSm6qOe0x+YXdgcnQIwP0hNyk+Fptr4xJIShb
-	IQdOjPhlz5QzFSzhV67SCt1PljNntv5KJyKjfGc6OJcE1NjUFzxM0vxWJFTX2/zIC3tG
-	rrwOpz8K2A1CVPO4mcXebxQxMoYaBTrOhoY1L/HC+SPsA3buJh/U40fOnMmtTeKXgfgX
-	vtMN1CacrrZzR0plhumk/+Gw4FtaHHIJtjfFmLWVs5iFNNfqd2/lysxTwbJru+xq5SfU
-	UXfw==
-X-Gm-Message-State: AE9vXwMeYXn2lqD95OEUN1OrEvcgU/KXJZK3dxAM9vC4jFbdDh38z+nWawQdadJ2av30S8pIhcoSOjGAdPivQw==
-X-Received: by 10.194.85.45 with SMTP id e13mr3284421wjz.5.1473430055253; Fri,
-	09 Sep 2016 07:07:35 -0700 (PDT)
+	h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
+	:to; bh=EpOXGEIw4YjKuV5gBAeA9jLRbzf3dGSsyXvOxJTR3Yk=;
+	b=RouE+BIg6HIGGfEc9WvfWZzx6cqpXMya+pD+6bvFUxNTBJMHN2Uxx5l+FImA9SanOO
+	8IBNTbtP4jOSWDv3wkpCBqFGrzBsEsc0d8tRqAvTYjRYHP0XrT+ErL5rg46x6uwHcLtB
+	7fJpk3KHzd391Uw3z848p6gYwtM//NlYbP0KBv9Ci78WAUMKhVyMyqhPITkVWLM+984o
+	BBFmuHwcbCVBLCLCKqoJrkf+cW6qWUi6aOK7GvQHptHztnU75JAzFwL2MIKfJ4kfUjdy
+	2divEFTOXnWN6UL+B/OkX85N71JRfgoqVhAZ6mCnbYjIT4nePuf5Ivtwg7oqNwZ29aNE
+	J2ag==
+X-Gm-Message-State: AE9vXwPsrjRsJHOjEDSRyGZeFZrOijsdhNLgScifGN7Uh6qzIlJ60fScX8+yH78Im1o817nr0VQvkkoPG3aaAg==
+X-Received: by 10.28.210.82 with SMTP id j79mr3595847wmg.10.1473436339743;
+	Fri, 09 Sep 2016 08:52:19 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.28.139.148 with HTTP; Fri, 9 Sep 2016 07:07:14 -0700 (PDT)
-In-Reply-To: <1473428952.20354.2.camel@intel.com>
-References: <1467977051.1401.9.camel@intel.com>
-	<CAPybu_1eaFHPHJTksdQZFqt3SGJmPKKrHsZYFPkYkRuybnu8yw@mail.gmail.com>
-	<1473428952.20354.2.camel@intel.com>
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Fri, 9 Sep 2016 16:07:14 +0200
-Message-ID: <CAPybu_2kKVZHoq6uC_pqo+bDx7bEfrXPNKB4_P2Hwag27tQs1g@mail.gmail.com>
-To: Patrick Ohly <patrick.ohly@intel.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Henning Heinold <heinold@inf.fu-berlin.de>
-Subject: Re: [meta-java] icedtea7-native - IOException constructor compile error
+Sender: jefro.net@gmail.com
+Received: by 10.80.151.3 with HTTP; Fri, 9 Sep 2016 08:51:59 -0700 (PDT)
+From: Jeff Osier-Mixon <jefro@jefro.net>
+Date: Fri, 9 Sep 2016 08:51:59 -0700
+X-Google-Sender-Auth: _iJVvli7RuiSow6apjrsf80cWRo
+Message-ID: <CA+YB3raLEFHAECfBVAspQni9fG0_X0oTPM-Z_F64FzV6PuNdUw@mail.gmail.com>
+To: Yocto Project <yocto@yoctoproject.org>, 
+	openembedded-core <openembedded-core@lists.openembedded.org>, 
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Subjects for YP Developer Day at ELCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,45 +50,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Sep 2016 14:07:36 -0000
+X-List-Received-Date: Fri, 09 Sep 2016 15:52:20 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Not very promising :)
+Hi all - we are in the planning stages for DevDay at ELCE right now,
+particularly the advanced track. This track changes every session,
+usually to cover the things we are working on hardest - for example,
+in San Diego we covered CROPS, devtool, the latest Toaster features,
+and much more.
 
-Could you share your
+Whether you are able to attend DevDay or not, we would be grateful to
+hear your suggestions for subjects to cover in the advanced track. We
+are currently planning talks about CROPS, devtool and the ESDK,
+Toaster, wic, smack, security, and a few other things. If you have a
+burning desire to hear about something specific, please let us know.
 
-build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/config.log
-?
-
-and the
-
-PREFERRED_PROVIDER
-
-
-
-Thanks!
-
-On Fri, Sep 9, 2016 at 3:49 PM, Patrick Ohly <patrick.ohly@intel.com> wrote:
-> On Fri, 2016-09-09 at 15:10 +0200, Ricardo Ribalda Delgado wrote:
->> I am struggling with te same issue. Did you manage to fix it on your side?
->
-> It hasn't happened again. So no, I haven't fixed anything, it just works
-> now. No-one was able to explain how the actual bootstrapping works, i.e.
-> which IOException.java is meant to be used when compiling openjdk-boot.
->
-> --
-> Best Regards, Patrick Ohly
->
-> The content of this message is my personal opinion only and although
-> I am an employee of Intel, the statements I make here in no way
-> represent Intel's position on the issue, nor am I authorized to speak
-> on behalf of Intel on this matter.
->
->
->
-
-
+Also, we'd love to see you at DevDay, here's the link:
 
 -- 
-Ricardo Ribalda
+Jeff Osier-Mixon - Open Source Community Engineer, Intel Corporation
 
