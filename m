@@ -1,44 +1,42 @@
-Return-Path: <jefro.net@gmail.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 724BB60722;
-	Fri,  9 Sep 2016 15:56:55 +0000 (UTC)
-Received: by mail-wm0-f43.google.com with SMTP id w12so13498138wmf.0;
-	Fri, 09 Sep 2016 08:56:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:from:date:message-id:subject:to;
-	bh=Gyfe+37oHBxIP2RkI69Y2LzC2gahKDmeOCw9Hv+Ifns=;
-	b=pGaYOurzBdmU1BO6yUkxwuuit3HTSOXfogVSGKqndnhL8hQqhp0YuQgnpneDf88k93
-	pGvl8il2E0RiuKjoWxh3mmx2BQkkjpj6Z+o3nEN8esyB4v969ysT3xcCZYi8b2qia42E
-	Aklt11OrX6LEGNGhjpP+TNWpPb+nuwJwz0xiPlyTVdHriVFzzj95GRKqURm6j6tuPvqO
-	EmWjF3PCygaWRIGhb4y1+36DBJWIlscX6DY9+Ircc7Dde2L33Iq/j6VcBkRNayvEls6z
-	z3cSoGrLidGqAVcO2ncYe1yYE3tMSXmY/fLkm3KOXxlAH3Zn+2v8v1aiW0A5CtvYdG8m
-	j+Zw==
+Return-Path: <dev@codyps.com>
+Received: from mail-oi0-f65.google.com (mail-oi0-f65.google.com
+	[209.85.218.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 3CA7A60851
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  9 Sep 2016 20:26:54 +0000 (UTC)
+Received: by mail-oi0-f65.google.com with SMTP id a144so3825906oii.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 09 Sep 2016 13:26:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codyps.com; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=i1b/4GGSVEAElWAfMtUnFgxDbf7T7FvQz7U1fktIN50=;
+	b=AN21XHh1YkbYObk89caGT/OS1H7nHdaV9kioSiVg03Fc6fxonRbBmxJQQfZoh0QmiF
+	fdbMAPR583P74oHh31JGQcHX7m0qzWCW7eH8HbLwThWs16ohFoNwdLBuGEONZWsFaRAK
+	+fdKhWB5cKb2qCkfwN6ddeHu+IZzw6K61Uwho=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
-	:to; bh=Gyfe+37oHBxIP2RkI69Y2LzC2gahKDmeOCw9Hv+Ifns=;
-	b=YsgCclUuTM9irY+L4z/YQDtPhp4xDomMPSyjSo0e/US2pSG/A8g85/I+Ncd5Wg7Mel
-	18i0C7L7BHsbRAdkrpOzdyYHMokQaMztNSr1VKwOvkNNSDnDnzHQO18/nQCNr4XQ4qEx
-	XHAahtUfQOxmDwxuBR3QrEDcUVTi1Rz43iA/U29gpX+9VFcVDWMU8X0vfYJYziMXyvmB
-	rr+yiZ+/vx3dgdySNrat1YsP5ZBalHVqzQ++8RStUjE9dtENYr2PFY6YvAk4rOpWNpks
-	ZTMhJVPtvow6ec63RbmwzAqpGtC+28SdgNSMPoI9HhX8u2n5vk7vD60BwQVRjgdmz3Co
-	yGGg==
-X-Gm-Message-State: AE9vXwNv7sjM+ry5qEifRPMmJSEZPg0JPpxfVXeTjnhi/dPqckbRcNXE7goNbGkktkQOPJJrwVdf9MgpiSl7YA==
-X-Received: by 10.194.176.2 with SMTP id ce2mr4129707wjc.189.1473436615481;
-	Fri, 09 Sep 2016 08:56:55 -0700 (PDT)
-MIME-Version: 1.0
-Sender: jefro.net@gmail.com
-Received: by 10.80.151.3 with HTTP; Fri, 9 Sep 2016 08:56:35 -0700 (PDT)
-From: Jeff Osier-Mixon <jefro@jefro.net>
-Date: Fri, 9 Sep 2016 08:56:35 -0700
-X-Google-Sender-Auth: e_O-dpaVLpjathoUYff8mZdiBEs
-Message-ID: <CA+YB3rZKcH5MabmTASKUMTS73NiQELBNybtbFJr=0cY=_F+2wQ@mail.gmail.com>
-To: "openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>, 
-	openembedded-core <openembedded-core@lists.openembedded.org>, 
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Topics & attendance for OEDEM
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=i1b/4GGSVEAElWAfMtUnFgxDbf7T7FvQz7U1fktIN50=;
+	b=hkKvduSNCHbrrTrMlaQcXjkbV7uj9ipKezD+A434bpXpSPspzf/OD9+CyA1MqhX7yK
+	XIaevIl/8CWVEUcDRHdB7TNxdY9OnYVMHIf8/8XN5KCzw1pmKkdmMzEmaPgdZRrd4bYX
+	CezrkpqrKtEh2k1gjRLFlKDg2LIDqVqmY2JA7uDP8lDU8rKkyoSMF1riEN0SoH2nJGGI
+	ccutDhNedIDla7RXGszRliTMucdpQcF1mTqvuexq86RE5biu4y6bUNOInvohGwlsTdtv
+	zJQS4qEL+Y4i8pG4WUMbBfm9T76BzCWYa2BDtUx08rBx1e8+aE8aQGDUGShtUcokwMks
+	zEMg==
+X-Gm-Message-State: AE9vXwPy+M/ngd6ntO+imeq7yDxeDB4SDqiCVKxWD7CrzGE0tM5Qbx+Ob0VZW4JKPUEAlA==
+X-Received: by 10.202.181.84 with SMTP id e81mr8244465oif.126.1473452815144;
+	Fri, 09 Sep 2016 13:26:55 -0700 (PDT)
+Received: from localhost (static-96-237-165-28.bstnma.fios.verizon.net.
+	[96.237.165.28]) by smtp.gmail.com with ESMTPSA id
+	u185sm2364058itc.3.2016.09.09.13.26.54
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 09 Sep 2016 13:26:54 -0700 (PDT)
+From: Cody P Schafer <dev@codyps.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  9 Sep 2016 16:26:45 -0400
+Message-Id: <20160909202645.23148-1-dev@codyps.com>
+X-Mailer: git-send-email 2.9.3
+Subject: [meta-oe][PATCH] meta-oe/thrift: fix build on gcc-6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,22 +49,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Sep 2016 15:56:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 09 Sep 2016 20:26:55 -0000
 
-This is a reminder about the OpenEmbedded General Assembly (GA) and
-Developer's European Meeting (OEDEM) coming up on October 14 in
-Berlin, following ELCE. If you are able to attend, please let us know
-ASAP so we can plan. You can sign up for this event on the wiki at
-this address:
+thrift build issues on gcc-6 were essentially 2 issues:
 
-GA: http://openembedded.org/wiki/Berlin,_2016
-DEM: http://openembedded.org/wiki/OEDEM_2016
+ - gcc-6 has stricter overflow checking on array declaration, and
+   thrift was using `char` when it should have used `signed char`
+ - gcc-6 is really picky about it's include paths (`-I`), and thrift
+   had a bad habbit of passing internal ones when it was cross compiled
+   due to how it was using `include_directories()`
 
-Note: these are on the same day. The GA will start at about 9am,
-developers portion immediately after but not likely before 10am. More
-details to come soon.
+This adds 2 patches (both variations of those submitted upstream, the
+ones included here are rebased onto thrift-0.9.3).
 
+	https://issues.apache.org/jira/browse/THRIFT-3831
+	https://issues.apache.org/jira/browse/THRIFT-3828
+
+Signed-off-by: Cody P Schafer <dev@codyps.com>
+---
+ meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
+index ce0b492..fdea7f1 100644
+--- a/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
++++ b/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
+@@ -10,6 +10,8 @@ DEPENDS = "thrift-native boost python libevent flex-native bison-native \
+ 
+ SRC_URI = "git://git-wip-us.apache.org/repos/asf/thrift.git;protocol=https \
+            file://0001-Forcibly-disable-check-for-Qt5.patch \
++           file://0001-THRIFT-3828-In-cmake-avoid-use-of-both-quoted-paths-.patch \
++           file://0002-THRIFT-3831-in-test-cpp-explicitly-use-signed-char.patch \
+ "
+ SRCREV = "61b8a29b0704ccd81b520f2300f5d1bb261fea3e"
+ S = "${WORKDIR}/git"
+@@ -32,6 +34,3 @@ EXTRA_OECMAKE_class-nativesdk = "-DWITH_QT4=OFF -DWITH_QT5=OFF \
+ do_install_append () {
+     ln -sf thrift ${D}/${bindir}/thrift-compiler
+ }
+-
+-# http://errors.yoctoproject.org/Errors/Details/68622/
+-PNBLACKLIST[thrift] ?= "BROKEN: fails to build with gcc-6"
 -- 
-Jeff Osier-Mixon - Open Source Community Engineer, Intel Corporation
+2.9.3
+
 
