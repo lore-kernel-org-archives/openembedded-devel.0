@@ -1,34 +1,25 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id F342060616
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B61AF6FFFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Sep 2016 01:18:26 +0000 (UTC)
+	Fri,  9 Sep 2016 01:21:27 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u891IQvd017745
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u891LQ5N018588
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 8 Sep 2016 18:18:27 -0700 (PDT)
-Received: from ALA-MBB.corp.ad.wrs.com ([169.254.1.206]) by
-	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0248.002;
-	Thu, 8 Sep 2016 18:18:26 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-networking][PATCH] waf-samba.bbclass: Append
-	PACKAGECONFIG_CONFARGS to EXTRA_OECONF
-Thread-Index: AQHSCazIjI9p9aeLXUCH72fJxaqh/6BwWc5g
-Date: Fri, 9 Sep 2016 01:18:25 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA0131074A68@ALA-MBB.corp.ad.wrs.com>
-References: <20160908051048.15948-1-jackie.huang@windriver.com>
-	<20160908084015.GA2636@jama>
-In-Reply-To: <20160908084015.GA2636@jama>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.137]
+	Thu, 8 Sep 2016 18:21:27 -0700 (PDT)
+Received: from localhost (128.224.162.178) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.248.2;
+	Thu, 8 Sep 2016 18:21:26 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 9 Sep 2016 09:21:23 +0800
+Message-ID: <1473384083-23345-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: Re: [meta-networking][PATCH] waf-samba.bbclass: Append PACKAGECONFIG_CONFARGS to EXTRA_OECONF
+X-Originating-IP: [128.224.162.178]
+Subject: [meta-networking][PATCH] dhcpcd: update to 6.11.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,91 +32,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Sep 2016 01:18:27 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 09 Sep 2016 01:21:30 -0000
+Content-Type: text/plain
 
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../dhcpcd/{dhcpcd_6.10.1.bb => dhcpcd_6.11.3.bb}                     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/dhcpcd/{dhcpcd_6.10.1.bb => dhcpcd_6.11.3.bb} (84%)
 
+diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.10.1.bb b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.11.3.bb
+similarity index 84%
+rename from meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.10.1.bb
+rename to meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.11.3.bb
+index cd80428..197dfb1 100644
+--- a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.10.1.bb
++++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_6.11.3.bb
+@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = "file://dhcpcd.c;endline=26;md5=77c40d671aff804ca91ea99556da8
+ 
+ SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz"
+ 
+-SRC_URI[md5sum] = "a7b83c57f47b62f48373905d3b4f7978"
+-SRC_URI[sha256sum] = "284abf8c3be0580bbac5eaca95359346ab0d78d4072317b6ce87cc68f2e8ae7b"
++SRC_URI[md5sum] = "d4f2f3ed4964197dee7767219c33a9df"
++SRC_URI[sha256sum] = "5abd12c4df2947d608f60a35227f9bf8ae8ab9de06ce975cdab1144d8f229b06"
+ 
+ inherit autotools-brokensep
+ 
+-- 
+2.7.4
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of Martin Jansa
-> Sent: Thursday, September 08, 2016 4:40 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-networking][PATCH] waf-samba.bbclass: Append
-> PACKAGECONFIG_CONFARGS to EXTRA_OECONF
->=20
-> On Thu, Sep 08, 2016 at 01:10:48PM +0800, jackie.huang@windriver.com wrot=
-e:
-> > From: Jackie Huang <jackie.huang@windriver.com>
-> >
-> > Append PACKAGECONFIG_CONFARGS to EXTRA_OECONF for waf-samba.bbclass
-> > because the PACKAGECONFIG will not be handled for all recipes after
-> > the following commit in oe-core:
-> >
-> > commit c98fb5f5129e71829ffab4449b3d28082bc95ab4
-> > Author: Martin Jansa <martin.jansa@gmail.com>
-> > Date:   Tue Aug 30 16:19:58 2016 +0200
-> >
-> >     base, autotools: Append PACKAGECONFIG_CONFARGS to EXTRA_OECONF only=
- in
-> autotools.bbclass
-> >
-> >     * recipes which don't inherit autotools or cmake bbclass and want t=
-o
-> >       use the configure options from PACKAGECONFIG need to handle
-> >       PACKAGECONFIG_CONFARGS themselves.
-> >
-> >     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> >     Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-> >
-> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> > ---
-> >  meta-networking/classes/waf-samba.bbclass | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/meta-networking/classes/waf-samba.bbclass b/meta-networkin=
-g/classes/waf-
-> samba.bbclass
-> > index 772bc75..a58ca2c 100644
-> > --- a/meta-networking/classes/waf-samba.bbclass
-> > +++ b/meta-networking/classes/waf-samba.bbclass
-> > @@ -20,6 +20,8 @@ CONFIGUREOPTS =3D " --prefix=3D${prefix} \
-> >                    --mandir=3D${mandir} \
-> >                  "
-> >
-> > +EXTRA_OECONF_append =3D " ${PACKAGECONFIG_CONFARGS}"
->=20
-> Cannot we append it to CONFIGUREOPTS and remove EXTRA_OECONF from this
-> bbclass completely?
-
-Yes, we can, but why do we need to remove EXTRA_OECONF from this bbclass
-completely? Is it going to be deprecated?
-
-And I see that EXTRA_OECONF  is used in several recipes that inherit waf-sa=
-mba,
-If it's remove from the bbclass, it's should also be removed from those rec=
-ipes, right?
-
-Thanks,
-Jackie
-
->=20
-> > +
-> >  # Three methods for waf cross compile:
-> >  # 1. answers:
-> >  #    Only --cross-answers - try the cross-answers file, and if
-> > --
-> > 2.7.4
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
