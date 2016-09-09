@@ -1,46 +1,24 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f65.google.com (mail-pa0-f65.google.com
-	[209.85.220.65])
-	by mail.openembedded.org (Postfix) with ESMTP id EB5D273189
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5111660123
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Sep 2016 02:11:53 +0000 (UTC)
-Received: by mail-pa0-f65.google.com with SMTP id pp5so3126717pac.2
+	Fri,  9 Sep 2016 02:51:17 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u892pHl2027069
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Sep 2016 19:11:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=72QXRFMYng3R7WmM3kX5pUaB/KfSJ4SXTA+X4M6pdFo=;
-	b=oMfKpJjzi6LJHZUYqhXOMhPHKr4fhNfrJTbXygSI8YwfOxXPRp710yPdrdpgwZkxqd
-	2sN3h8RaVqq0yUcBctdMMaH6tq+411f4vkG1R+gte4B1uOro4DrCSB5w9OJu0DaGdBbS
-	pbL2JrhUthB38YDvWBLLAGq+ZuLB8MW31GdkxeZKXIA+A1HRP8dcECP34dyiWyUothyN
-	Uuv1G/kvQEDTJP9RKpb3U+WqkPhLO6K/oqj+fOFQGaic1F1T/M76wdaosbCEx+UwkE0K
-	mFGbTs/wNVlRWJt9tbJxSc5o54+wJC3KHyMxakKz1dNcdJ+XZZNt9hUIdT7q4Sp5/ULW
-	P9QA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=72QXRFMYng3R7WmM3kX5pUaB/KfSJ4SXTA+X4M6pdFo=;
-	b=lzPkqH7EHNheoSXyakt4FctGzWGUP8ITJDrhG6dv/vB83HxMe/VkbzpUNxzMfTvFdS
-	/I6JZNerURUf7C5iiwR3jXMl+79gnel+5kcc0dJOAw1lGPTv/iPnny7S+VvP+Ehrn8RY
-	hy1LKBo6QgIJjUt7sSWu6SGEqasNzpGTbADnUzc7bm2crZ8Lf6JYmJiAHuxXhL3GxP4M
-	x3Epcv/UsLUkl15CxwMy8F5HfdHgyZMuZvh+Kun0SFuJ/fB/F68xv7wkCpd0em7lp0w9
-	vZ7ZaWC7Oag29T6XlRpsAwTGo5YMb3EwNUr2OTu13Q4kNgnb/k9DZWmaGFqZRJqMksDi
-	d/yA==
-X-Gm-Message-State: AE9vXwNbNUKNqOuNcTeTWLmSbAUa5AxVUv5qrOEiT2dL8b/b8glE9v6lHyiEUAA7FOG/zA==
-X-Received: by 10.66.1.8 with SMTP id 8mr1987216pai.109.1473387114064;
-	Thu, 08 Sep 2016 19:11:54 -0700 (PDT)
-Received: from akuster-ThinkPad-X240.mvista.com
-	([2601:202:4001:9ea0:2dc8:cbbe:221f:f498])
-	by smtp.gmail.com with ESMTPSA id i3sm720746pao.4.2016.09.08.19.11.52
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 08 Sep 2016 19:11:52 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org, joe_macdonald@mentor.com,
-	akuster@mvista.com
-Date: Thu,  8 Sep 2016 19:11:51 -0700
-Message-Id: <1473387111-23110-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] wireshark: update to 2.2
+	Thu, 8 Sep 2016 19:51:17 -0700
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.248.2; Thu, 8 Sep 2016 19:51:16 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 9 Sep 2016 10:34:54 +0800
+Message-ID: <cover.1473388166.git.jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.8.3
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH 0/2 v2] samba: fix waf-samba and restrict the blacklist to ARM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,82 +31,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Sep 2016 02:11:54 -0000
+X-List-Received-Date: Fri, 09 Sep 2016 02:51:20 -0000
+Content-Type: text/plain
 
-remove unused config params.
-Drop PE
-Drop do_configure_prepend
-update PACKAGECONFIG's for graphics
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../{wireshark_2.0.5.bb => wireshark_2.2.0.bb}     | 24 ++++++----------------
- 1 file changed, 6 insertions(+), 18 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_2.0.5.bb => wireshark_2.2.0.bb} (69%)
+--
+The following changes since commit 80b2d4de0ee2a5e6a3302a527e3fcfd2b99c3e37:
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.0.5.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.0.bb
-similarity index 69%
-rename from meta-networking/recipes-support/wireshark/wireshark_2.0.5.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_2.2.0.bb
-index 31ca4d2..dca3be6 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_2.0.5.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.0.bb
-@@ -8,21 +8,16 @@ DEPENDS = "pcre expat glib-2.0 sbc"
- 
- SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
- 
--SRC_URI[md5sum] = "627b5fc6cf0aeca196c75debd5e69b14"
--SRC_URI[sha256sum] = "0ce0241330828973f5b4efee422a3760cab8ce0b41e7721c4b9fd185be1bb10b"
--
--PE = "1"
-+SRC_URI[md5sum] = "c7de0997f74934f25b456846cf75cb81"
-+SRC_URI[sha256sum] = "a6847e741efcba6cb9d92d464d4219917bee3ad0b8f5b0f80d4388ad2f3f1104"
- 
- inherit autotools pkgconfig perlnative
- 
- ARM_INSTRUCTION_SET = "arm"
- 
--# Works with either gtk+ or gtk3.
--WHICH_GTK = "gtk+"
- 
- PACKAGECONFIG ?= "libpcap gnutls libnl libcap"
- PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk2 graphics", "", d)}"
--PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "ipv6", "ipv6", "", d)}"
- #PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "gtk3", "", d)}"
- 
- PACKAGECONFIG[libcap] = "--with-libcap=${STAGING_LIBDIR}, --with-libcap=no --enable-pcap-ng-default , libcap"
-@@ -30,10 +25,9 @@ PACKAGECONFIG[libpcap] = "--with-pcap=${STAGING_LIBDIR} --with-pcap-remote, --wi
- PACKAGECONFIG[libsmi] = "--with-libsmi=yes, --with-libsmi=no, libsmi"
- PACKAGECONFIG[libnl] = "--with-libnl=yes, --with-libnl=no, libnl"
- PACKAGECONFIG[portaudio] = "--with-portaudio=yes, --with-portaudio=no, portaudio-v19"
--PACKAGECONFIG[gtk2] = "--with-gtk2=yes, --with-gtk2=no, gtk+"
--PACKAGECONFIG[gtk3] = "--with-gtk3=yes, --with-gtk3=no, gtk+3"
--PACKAGECONFIG[graphics] = "--enable-wireshark, --disable-wireshark,"
--PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6,"
-+PACKAGECONFIG[gtk2] = "--with-gtk=2, , gtk+"
-+PACKAGECONFIG[gtk3] = "--with-gtk=3, , gtk+3"
-+PACKAGECONFIG[graphics] = "--enable-wireshark, --with-gtk=no --disable-wireshark,"
- PACKAGECONFIG[gnutls] = "--with-gnutls=yes, --with-gnutls=no, gnutls"
- PACKAGECONFIG[gcrypt] = "--with-gcrypt=yes, --with-gcrypt=no, libgcrypt"
- PACKAGECONFIG[ssl] = "--with-ssl=yes, --with-ssl=no, openssl"
-@@ -44,15 +38,9 @@ PACKAGECONFIG[geoip] = "--with-geoip=yes, --with-geoip=no, geoip"
- PACKAGECONFIG[plugins] = "--with-plugins=yes, --with-plugins=no"
- 
- # these next two options require addional layers
--PACKAGECONFIG[adns] = "--with-adns=yes, --with-adns=no, adns"
- PACKAGECONFIG[c-ares] = "--with-c-ares=yes, --with-c-ares=no, c-ares"
- 
--EXTRA_OECONF += "--with-qt=no --enable-usr-local=no --enable-tshark --enable-rawshark"
--
--do_configure_prepend() {
--    # force to use fallback
--    sed -i -e '/^glib_prefix/s/=.*$/=""/' ${S}/aclocal-flags
--}
-+EXTRA_OECONF += "--with-qt=no --enable-tshark --enable-rawshark"
- 
- ALLOW_EMPTY_${PN} = "1"
- INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+  samba: blacklist, fails to build with new binutils-2.27 (2016-09-05 13:34:13 -0400)
+
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib.git jhuang0/d_samba_160909_0
+  http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/d_samba_160909_0
+
+Jackie Huang (2):
+  waf-samba.bbclass: Add PACKAGECONFIG_CONFARGS to CONFIGUREOPTS
+  samba: restrict the blacklist to ARM only
+
+ meta-networking/classes/waf-samba.bbclass                 | 1 +
+ meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 6 +++---
+ 2 files changed, 4 insertions(+), 3 deletions(-)
+
 -- 
-2.7.4
+2.8.3
 
 
