@@ -1,42 +1,31 @@
-Return-Path: <dev@codyps.com>
-Received: from mail-oi0-f65.google.com (mail-oi0-f65.google.com
-	[209.85.218.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 3CA7A60851
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 4AD3877029
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Sep 2016 20:26:54 +0000 (UTC)
-Received: by mail-oi0-f65.google.com with SMTP id a144so3825906oii.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Sep 2016 13:26:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codyps.com; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=i1b/4GGSVEAElWAfMtUnFgxDbf7T7FvQz7U1fktIN50=;
-	b=AN21XHh1YkbYObk89caGT/OS1H7nHdaV9kioSiVg03Fc6fxonRbBmxJQQfZoh0QmiF
-	fdbMAPR583P74oHh31JGQcHX7m0qzWCW7eH8HbLwThWs16ohFoNwdLBuGEONZWsFaRAK
-	+fdKhWB5cKb2qCkfwN6ddeHu+IZzw6K61Uwho=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=i1b/4GGSVEAElWAfMtUnFgxDbf7T7FvQz7U1fktIN50=;
-	b=hkKvduSNCHbrrTrMlaQcXjkbV7uj9ipKezD+A434bpXpSPspzf/OD9+CyA1MqhX7yK
-	XIaevIl/8CWVEUcDRHdB7TNxdY9OnYVMHIf8/8XN5KCzw1pmKkdmMzEmaPgdZRrd4bYX
-	CezrkpqrKtEh2k1gjRLFlKDg2LIDqVqmY2JA7uDP8lDU8rKkyoSMF1riEN0SoH2nJGGI
-	ccutDhNedIDla7RXGszRliTMucdpQcF1mTqvuexq86RE5biu4y6bUNOInvohGwlsTdtv
-	zJQS4qEL+Y4i8pG4WUMbBfm9T76BzCWYa2BDtUx08rBx1e8+aE8aQGDUGShtUcokwMks
-	zEMg==
-X-Gm-Message-State: AE9vXwPy+M/ngd6ntO+imeq7yDxeDB4SDqiCVKxWD7CrzGE0tM5Qbx+Ob0VZW4JKPUEAlA==
-X-Received: by 10.202.181.84 with SMTP id e81mr8244465oif.126.1473452815144;
-	Fri, 09 Sep 2016 13:26:55 -0700 (PDT)
-Received: from localhost (static-96-237-165-28.bstnma.fios.verizon.net.
-	[96.237.165.28]) by smtp.gmail.com with ESMTPSA id
-	u185sm2364058itc.3.2016.09.09.13.26.54
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 09 Sep 2016 13:26:54 -0700 (PDT)
-From: Cody P Schafer <dev@codyps.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  9 Sep 2016 16:26:45 -0400
-Message-Id: <20160909202645.23148-1-dev@codyps.com>
-X-Mailer: git-send-email 2.9.3
-Subject: [meta-oe][PATCH] meta-oe/thrift: fix build on gcc-6
+	Fri,  9 Sep 2016 20:44:49 +0000 (UTC)
+Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
+	by relay1.mentorg.com with esmtp 
+	id 1biSfI-0003qA-9V from Joe_MacDonald@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Sep 2016 13:44:48 -0700
+Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
+	(147.34.97.43) with Microsoft SMTP Server id 14.3.224.2; Fri, 9 Sep 2016
+	13:44:47 -0700
+Received: by burninator (Postfix, from userid 1000)	id 7263C580D7D; Fri,  9
+	Sep 2016 16:44:46 -0400 (EDT)
+Date: Fri, 9 Sep 2016 16:44:46 -0400
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20160909204446.GB5631@mentor.com>
+References: <cover.1473388166.git.jackie.huang@windriver.com>
+	<b21847dcc8605a8522be2bea1c0a1b4788cf841e.1473388166.git.jackie.huang@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <b21847dcc8605a8522be2bea1c0a1b4788cf841e.1473388166.git.jackie.huang@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-networking][PATCH 2/2 v2] samba: restrict the blacklist to ARM only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,48 +38,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Sep 2016 20:26:55 -0000
+X-List-Received-Date: Fri, 09 Sep 2016 20:44:51 -0000
+X-Groupsio-MsgNum: 63043
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="mxv5cy4qt+RJ9ypb"
+Content-Disposition: inline
 
-thrift build issues on gcc-6 were essentially 2 issues:
+--mxv5cy4qt+RJ9ypb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- - gcc-6 has stricter overflow checking on array declaration, and
-   thrift was using `char` when it should have used `signed char`
- - gcc-6 is really picky about it's include paths (`-I`), and thrift
-   had a bad habbit of passing internal ones when it was cross compiled
-   due to how it was using `include_directories()`
+[[oe] [meta-networking][PATCH 2/2 v2] samba: restrict the blacklist to ARM =
+only] On 16.09.09 (Fri 10:34) jackie.huang@windriver.com wrote:
 
-This adds 2 patches (both variations of those submitted upstream, the
-ones included here are rebased onto thrift-0.9.3).
+> From: Jackie Huang <jackie.huang@windriver.com>
+>=20
+> It builds fine except for arm now, and the do_package
+> and libpam issue is fixed by:
+> "waf-samba.bbclass: Add PACKAGECONFIG_CONFARGS to CONFIGUREOPTS"
 
-	https://issues.apache.org/jira/browse/THRIFT-3831
-	https://issues.apache.org/jira/browse/THRIFT-3828
+Did you confirm that you're still seeing the failure for arm?
 
-Signed-off-by: Cody P Schafer <dev@codyps.com>
----
- meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+-J.
 
-diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
-index ce0b492..fdea7f1 100644
---- a/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
-+++ b/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
-@@ -10,6 +10,8 @@ DEPENDS = "thrift-native boost python libevent flex-native bison-native \
- 
- SRC_URI = "git://git-wip-us.apache.org/repos/asf/thrift.git;protocol=https \
-            file://0001-Forcibly-disable-check-for-Qt5.patch \
-+           file://0001-THRIFT-3828-In-cmake-avoid-use-of-both-quoted-paths-.patch \
-+           file://0002-THRIFT-3831-in-test-cpp-explicitly-use-signed-char.patch \
- "
- SRCREV = "61b8a29b0704ccd81b520f2300f5d1bb261fea3e"
- S = "${WORKDIR}/git"
-@@ -32,6 +34,3 @@ EXTRA_OECMAKE_class-nativesdk = "-DWITH_QT4=OFF -DWITH_QT5=OFF \
- do_install_append () {
-     ln -sf thrift ${D}/${bindir}/thrift-compiler
- }
--
--# http://errors.yoctoproject.org/Errors/Details/68622/
--PNBLACKLIST[thrift] ?= "BROKEN: fails to build with gcc-6"
--- 
-2.9.3
+>=20
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/=
+meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> index 042203e..c34adcb 100644
+> --- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> +++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> @@ -319,6 +319,6 @@ RDEPENDS_${PN}-pidl_append =3D " perl"
+>  FILES_${PN}-pidl =3D "${bindir}/pidl ${datadir}/perl5/Parse"
+> =20
+>  # http://errors.yoctoproject.org/Errors/Details/81004/
+> -# before this issue it was also failing in do_package and
+> -# autodetecting libpam dependency
+> -PNBLACKLIST[samba] ?=3D "BROKEN: fails to build with new binutils-2.27"
+> +BLACKLIST_REASON ?=3D ""
+> +BLACKLIST_REASON_arm =3D "BROKEN: fails to build with new binutils-2.27"
+> +PNBLACKLIST[samba] ?=3D "${BLACKLIST_REASON}"
+> --=20
+> 2.8.3
+>=20
+--=20
+-Joe MacDonald.
+:wq
 
+--mxv5cy4qt+RJ9ypb
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJX0x8+AAoJEEn8ffcsOfaWOy4IAIjZv6pE9TZdsPoYhKPhuS4/
+sZk3xEHn+u6AdkGdIsuuI9fKdyqPtowBD2rdu7TDio//43KOtN4EOEpzMvwCqPPv
+G2FAFxLj+Rv0ZkKwpItcrUf4XiJIydL011ZdxaCl4Sc+Ar/raheViAwlA5kbOVMh
+QAs9rhH9LzpPO2WM5yY0v/K8lDwtDQI6e2s/J/M5PQA2gHAug081M6cdWfTfj4ON
+VVm0kz2+JlWYuhu8ROVpqsmFEXzClbi/h3pD46Adp/zu2jF01s57yAvCR9iQWjJY
+Bq5uwXOWtxK18obvDIoDShypSk2NZ+RbY9gLU1/TgBlVCkDWJTaFpt58WO8BVUs=
+=Fx/G
+-----END PGP SIGNATURE-----
+
+--mxv5cy4qt+RJ9ypb--
