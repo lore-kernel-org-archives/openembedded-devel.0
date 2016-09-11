@@ -1,30 +1,48 @@
-Return-Path: <wangxin2015.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 89B6E77166
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
+	[209.85.213.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 5701D77166
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Sep 2016 12:02:45 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="10845226"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 11 Sep 2016 20:02:45 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id E01DD404240C
+	Sun, 11 Sep 2016 12:05:37 +0000 (UTC)
+Received: by mail-vk0-f66.google.com with SMTP id v189so4462369vkv.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Sep 2016 20:02:42 +0800 (CST)
-Received: from ubuntu.g08.fujitsu.local (10.167.226.120) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.279.2; Sun, 11 Sep 2016 20:02:43 +0800
-From: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 11 Sep 2016 08:02:35 -0400
-Message-ID: <1473595355-1405-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+	Sun, 11 Sep 2016 05:05:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=MzzXZt47X3nENABb0GnJ02jygP/FQYt60FH/u0J10ME=;
+	b=gvD7HIy/f+h3iCrZPxk9UfTI3tfXG+EJANakKSEUDxDd8QO5LtnAfu2WFZjwBecBpX
+	zsPiIYo9ms4Z8HU0LWDC0YGBJE1tS8ovN2Bn007/M8DAa9TRz3QWkrDYETctTPHK6zNv
+	h63KBe6vWKd43Y1dltz3HqNKIsKbBR8TxH9vboe6wbnKpTx8wUdbjwY5tNYE85xZCc3o
+	5q9syYPB8Hc4yqZMdZrzfWrM36zBVc5VQ60g5b4t25tRVpivR4t5WFli3OZIBnnpoYdA
+	DZxD/wWTlZoetEXtcEdhQtG9WG1baf5nkg4IdQwgzEzrRH6l2DqTu+MUGV4VHhdgE/rk
+	PqNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-transfer-encoding;
+	bh=MzzXZt47X3nENABb0GnJ02jygP/FQYt60FH/u0J10ME=;
+	b=hirQiwdxx7mnlXQaAbDtZQBT5/lOHAVg1QTBO6yM/HEnjS1ucbl4N7R/I6PAE13dEr
+	vEorc9eXWkmkzCGRuHN23RStTeEufBDUFliNEXbONdssPcDoep5Uj5/qMLnIHga9b5k8
+	DzREI9xlga2xuOkmj1JfvKhLJA66FiSXgVPcFUkk8b2Kxaaj7FS0hcXWJr7+dAe6dMtb
+	WXTwIAp/BWHTRODuLlPnWjQ0yo7DftoNXRcEn9O0As6/orn7+4gm6v2hbPFm0fSPP0IJ
+	07dqCwJxmvOoNdO6ttgntlF8q59sboGRtA5jl2g8KQ2THKtJVI0id7IawAjsY3/rPmav
+	/OcQ==
+X-Gm-Message-State: AE9vXwMlYAMB723Z46CJe4grDgLX9C/yQsL7Jl3yDlny/p0Pn84XppHO2eEcR8+Q7uyWN/HCwf94m5DrdcUrtQ==
+X-Received: by 10.31.199.67 with SMTP id x64mr7962493vkf.124.1473595538481;
+	Sun, 11 Sep 2016 05:05:38 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.120]
-X-yoursite-MailScanner-ID: E01DD404240C.A6F9F
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangxin2015.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] tk: 8.6.4 -> 8.6.6
+Received: by 10.176.65.130 with HTTP; Sun, 11 Sep 2016 05:05:38 -0700 (PDT)
+In-Reply-To: <1473020112-25797-5-git-send-email-schnitzeltony@googlemail.com>
+References: <1473020112-25797-1-git-send-email-schnitzeltony@googlemail.com>
+	<1473020112-25797-5-git-send-email-schnitzeltony@googlemail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 11 Sep 2016 14:05:38 +0200
+Message-ID: <CALbNGRQ_gPdw6O53fVeX5gUnpppM7GreKxy2Q02iovJukV_YCQ@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 5/5] samba: fix build by linking with bfd instead of gold
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,38 +55,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Sep 2016 12:02:47 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 11 Sep 2016 12:05:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Upgrade tk from 8.6.4 to 8.6.6.
+On Sun, Sep 4, 2016 at 10:15 PM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> Use this workaround as long as there is no better (upstream) fix
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> ---
+>  meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/=
+meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> index e35d527..3205c5d 100644
+> --- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> +++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> @@ -88,7 +88,7 @@ EXTRA_OECONF +=3D "--enable-fhs \
+>                  "
+>  DISABLE_STATIC =3D ""
+>
+> -LDFLAGS +=3D "-Wl,-z,relro,-z,now"
+> +LDFLAGS +=3D "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES'=
+, 'ld-is-gold', ' -fuse-ld=3Dbfd ', '', d)}"
+>
+>  do_install_append() {
+>      if ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'true', 'false',=
+ d)}; then
+> --
+> 2.5.5
+>
+1. This did not make it into master but is still in master-next.
+2. Jackie Huang has sent a patch only blacklisting on arm [1] =3D> seems
+only arm has this bug
 
-Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
----
- meta-oe/recipes-devtools/tcltk/{tk_8.6.4.bb => tk_8.6.6.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/tcltk/{tk_8.6.4.bb => tk_8.6.6.bb} (94%)
+[1] http://lists.openembedded.org/pipermail/openembedded-devel/2016-Septemb=
+er/109036.html
 
-diff --git a/meta-oe/recipes-devtools/tcltk/tk_8.6.4.bb b/meta-oe/recipes-devtools/tcltk/tk_8.6.6.bb
-similarity index 94%
-rename from meta-oe/recipes-devtools/tcltk/tk_8.6.4.bb
-rename to meta-oe/recipes-devtools/tcltk/tk_8.6.6.bb
-index d8eca50..59075bc 100644
---- a/meta-oe/recipes-devtools/tcltk/tk_8.6.4.bb
-+++ b/meta-oe/recipes-devtools/tcltk/tk_8.6.6.bb
-@@ -26,8 +26,8 @@ SRC_URI = "\
-     file://fix-xft.diff \
-     file://configure.use.fontconfig.with.xft.patch \
- "
--SRC_URI[md5sum] = "261754d7dc2a582f00e35547777e1fea"
--SRC_URI[sha256sum] = "08f99df85e5dc9c4271762163c6aabb962c8b297dc5c4c1af8bdd05fc2dd26c1"
-+SRC_URI[md5sum] = "dd7dbb3a6523c42d05f6ab6e86096e99"
-+SRC_URI[sha256sum] = "d62c371a71b4744ed830e3c21d27968c31dba74dd2c45f36b9b071e6d88eb19d"
- 
- S = "${WORKDIR}/${BPN}${PV}/unix"
- 
--- 
-2.7.4
+=3D> I would like to send a patch changing to bfd linker only on arm.
+Against which branch shall I create this patch?
 
-
-
+Andreas
 
