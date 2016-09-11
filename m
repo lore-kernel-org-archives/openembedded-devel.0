@@ -1,44 +1,30 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 09359771F2
+Return-Path: <wangxin2015.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id A1B89762B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Sep 2016 12:12:18 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id b187so96734136wme.1
+	Sun, 11 Sep 2016 15:05:57 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="10846983"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 11 Sep 2016 23:05:52 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 70D61404240C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Sep 2016 05:12:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=xRxXPcQk/RXfOsiq+R5AP+YH0LKQWyg68TdmlFmzVeI=;
-	b=Qjdi0V1fQAGDDZ2ld0xtV2h28w+UeUQ53yeynlOS7eFTQjqcOoqtmV75KwIYhYvRQJ
-	eUVssHrhTmpjE97nIB9aGvprA8h8VhrKOw6Gg557N9VjDQXnEkacXG6qW36EcJOp3cpt
-	P4GdMgW+UnQ1G2iL/cU2tNy1PO9sfdszuJ+ggQu4Uz57pweWGzTxRde4aA4wWupk0FK6
-	4bST8Yc12B4P7axWd884+0SiWRMqKMw1AVrBOfXevdzR/p5RCWKvYVtTPvc6JBJJWiT1
-	8hHiDOtUDMYj9mTKc//QckJRfxrPIi6U+iCbMwIE+AwCQUamibakZwUpeyLL1N4MIy/c
-	JAqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=xRxXPcQk/RXfOsiq+R5AP+YH0LKQWyg68TdmlFmzVeI=;
-	b=FJd2o7bNg6XUGPLq+4hwfS54rVeSoMYxm6EWjEUALWaEGDs10U9ZeDy8QUVjtyYlYY
-	7tyoB1O4lkycWsIPbJKC2uUM632TFwJreLTDbj5w1RmSrjxbTQqY2KFtoEAcDL0mdUMj
-	5TDP/mUQYPf9b6dd5IEmXxAEOUuqL5wIWvrhnkxeOXWn0FgyToB13g5W8naMn6ZaS/lA
-	gqnRRBRqdcrdze600Upd03OR44zhMl/TCRKZE5Mi9s0GkMwHBypdmxjpyd7sZKKh7O+q
-	wC69eKd6xEnLTE5M+GoAJ7Q4ehogJYvdJycZXKqCZhABozxE1ZCT5jus83iZY3xRNbbv
-	CPkA==
-X-Gm-Message-State: AE9vXwN9s97mW/g3aGeQ7KJVi/t8kFMRvH0VOeGiLe813K56eyARMk/Z/FYeLbczgDMbfBZqD5aRPAq7rSUA/w==
-X-Received: by 10.194.235.69 with SMTP id uk5mr10473298wjc.53.1473595938309;
-	Sun, 11 Sep 2016 05:12:18 -0700 (PDT)
+	Sun, 11 Sep 2016 23:05:49 +0800 (CST)
+Received: from ubuntu.g08.fujitsu.local (10.167.226.120) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.279.2; Sun, 11 Sep 2016 23:05:49 +0800
+From: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 11 Sep 2016 11:05:30 -0400
+Message-ID: <1473606330-1638-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Received: by 10.80.154.225 with HTTP; Sun, 11 Sep 2016 05:12:17 -0700 (PDT)
-In-Reply-To: <1473593516-1335-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
-References: <1473593516-1335-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 11 Sep 2016 14:12:17 +0200
-Message-ID: <CA+chaQcnTcnwfATJjUmEpe_jmVwPYSBnE1q2WyekJ5fzotzidg@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] xterm: 320 -> 325
+X-Originating-IP: [10.167.226.120]
+X-yoursite-MailScanner-ID: 70D61404240C.A38B5
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangxin2015.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python][PATCH] python-dbus: 1.2.0 -> 1.2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,64 +37,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Sep 2016 12:12:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 11 Sep 2016 15:05:59 -0000
+Content-Type: text/plain
 
-What changed in xterm.h?
+Upgrade python-dbus from 1.2.0 to 1.2.4.
 
-On Sun, Sep 11, 2016 at 1:31 PM, Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
-wrote:
+Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+---
+ .../python/{python-dbus_1.2.0.bb => python-dbus_1.2.4.bb}             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-dbus_1.2.0.bb => python-dbus_1.2.4.bb} (88%)
 
-> Upgrade xterm from 320 to 325.
->
-> Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
-> ---
->  meta-oe/recipes-graphics/xorg-app/{xterm_320.bb => xterm_325.bb} | 6
-> +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-graphics/xorg-app/{xterm_320.bb => xterm_325.bb}
-> (78%)
->
-> diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_320.bb
-> b/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
-> similarity index 78%
-> rename from meta-oe/recipes-graphics/xorg-app/xterm_320.bb
-> rename to meta-oe/recipes-graphics/xorg-app/xterm_325.bb
-> index f2abc3c..e0baf3c 100644
-> --- a/meta-oe/recipes-graphics/xorg-app/xterm_320.bb
-> +++ b/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
-> @@ -2,12 +2,12 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
->  SUMMARY = "xterm is the standard terminal emulator for the X Window
-> System"
->  DEPENDS = "libxaw xproto xextproto libxext libxau libxinerama libxpm
-> ncurses"
->
-> -LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=
-> ee6435019d00b884cde8d7ba2b318ff0"
-> +LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=
-> 842e945c46c43e05c44d95003aa878e1"
->
->  SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
->
-> -SRC_URI[md5sum] = "0d7f0e6390d132ae59876b3870e5783d"
-> -SRC_URI[sha256sum] = "a60dbb574334c081425fa30f011cd9
-> f571e3be7a91e2a84e252461798bce24a7"
-> +SRC_URI[md5sum] = "e78a0bbc4d5fa3780917e447ae8ebc6b"
-> +SRC_URI[sha256sum] = "3b31b07a0c40427e9330ec3be9d1a7
-> 48c72808f945953cea9e526e48be315f1b"
->
->  PACKAGECONFIG ?= ""
->  PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft
-> fontconfig freetype-native"
-> --
-> 2.7.4
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-python/recipes-devtools/python/python-dbus_1.2.0.bb b/meta-python/recipes-devtools/python/python-dbus_1.2.4.bb
+similarity index 88%
+rename from meta-python/recipes-devtools/python/python-dbus_1.2.0.bb
+rename to meta-python/recipes-devtools/python/python-dbus_1.2.4.bb
+index 95ba920..271b559 100644
+--- a/meta-python/recipes-devtools/python/python-dbus_1.2.0.bb
++++ b/meta-python/recipes-devtools/python/python-dbus_1.2.4.bb
+@@ -8,8 +8,8 @@ DEPENDS = "expat dbus dbus-glib virtual/libintl python-pyrex-native"
+ SRC_URI = "http://dbus.freedesktop.org/releases/dbus-python/dbus-python-${PV}.tar.gz \
+ "
+ 
+-SRC_URI[md5sum] = "b09cd2d1a057cc432ce944de3fc06bf7"
+-SRC_URI[sha256sum] = "e12c6c8b2bf3a9302f75166952cbe41d6b38c3441bbc6767dbd498942316c6df"
++SRC_URI[md5sum] = "7372a588c83a7232b4e08159bfd48fe5"
++SRC_URI[sha256sum] = "e2f1d6871f74fba23652e51d10873e54f71adab0525833c19bad9e99b1b2f9cc"
+ S = "${WORKDIR}/dbus-python-${PV}"
+ 
+ inherit distutils-base autotools pkgconfig
+-- 
+2.7.4
+
+
+
 
