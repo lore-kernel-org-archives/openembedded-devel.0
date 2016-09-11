@@ -1,30 +1,41 @@
-Return-Path: <wangxin2015.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id B4CE5762B4
+Return-Path: <guzaszymon@gmail.com>
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 979DF77162
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Sep 2016 15:13:11 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="10847059"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 11 Sep 2016 23:13:10 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 578BA404240C
+	Sun, 11 Sep 2016 18:10:23 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id a6so22181176wmc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Sep 2016 23:13:12 +0800 (CST)
-Received: from ubuntu.g08.fujitsu.local (10.167.226.120) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.279.2; Sun, 11 Sep 2016 23:13:12 +0800
-From: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 11 Sep 2016 11:13:05 -0400
-Message-ID: <1473606785-1681-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+	Sun, 11 Sep 2016 11:10:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=ULXbaiAwJzha53B7V8pueim22n72Yn5j54vemIQi1Fw=;
+	b=G/6swDVAHc7c4lkyiyTuTxhISZAv5NKR1YRlw7UR8+EbjIFZK0YccpfdoiKhAJjrKz
+	f0o96RNYkE5SLUs/8NBb0rM0IEsv18XfxXYIUaLyDGl2ZN3M9RnuwbixXg/Z2VTEFF5N
+	LRAN5y1dL4nr5iKI4vggKrzLHxGctKrZkgcdvg4lQSFwzIU/a2PCqSvrSAhNv0T1BdQb
+	ibSMezi1zk/bbsxe7a0GJPXRkwvmnIwBiq9w2XjHoZqNDeuqbtqY5hpDgtlNtHIof38g
+	vgNxjlosn3AdI2OFRKh7tgD2mLYah6EJNFLAxGGkndP1W3lt/x+tFb02xYUtJKNmoKfN
+	mB+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=ULXbaiAwJzha53B7V8pueim22n72Yn5j54vemIQi1Fw=;
+	b=lpmdqwjtJ0jDIOaNdu9Cl8d3w9hoULlANZW120IyaeYdIWqnNhFhJ8pOljLDuOz+7y
+	1h9sysT/UGzOuB/51RW0v7ub7dQ5DveuZDJDtIiOo8xW1EWuTQKW35C7AiXELZwQu9Bw
+	GwVmYm8VmdCS83sQFqCxzVRIbcU+88mf+ihjw4h+Dx3qRd99UW3iHxDoFDgZZudC2NS6
+	U45B2GWQs4V/y6Ar5bLQ8p/NdVj+xPB+iMIAzb5p6LV/JGiXhfE3yfDx5T2InKzJW6ow
+	hTjBYS+7ZRWUI3XntalEMVzMlC5+WdCc4oTAvYmVO9OW+oGsx46LKL/FLojQh+vU1V/z
+	5Nhw==
+X-Gm-Message-State: AE9vXwNxIEXTQe9bLb8gkFKdsinWBwZOHizTTiaAvo2hchYaSApl0CzHf8tA9rDs1vHLT/3Vs01pdeYVV5Nphg==
+X-Received: by 10.28.166.197 with SMTP id p188mr7736433wme.85.1473617423612;
+	Sun, 11 Sep 2016 11:10:23 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.120]
-X-yoursite-MailScanner-ID: 578BA404240C.A45BD
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangxin2015.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python][PATCH] python-pyyaml: 3.11 -> 3.12
+Received: by 10.28.15.2 with HTTP; Sun, 11 Sep 2016 11:10:23 -0700 (PDT)
+From: Szymon Guza <guzaszymon@gmail.com>
+Date: Sun, 11 Sep 2016 20:10:23 +0200
+Message-ID: <CAO=ipHJL-FjdSgDE7pCaxUTjh-DcaMthn0y-X=PxqpJRiG+rvw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [yocto] problem with openCV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,38 +48,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Sep 2016 15:13:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 11 Sep 2016 18:10:24 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Upgrade python-pyyaml from 3.11 to 3.12.
+Hello,
 
-Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
----
- .../python/{python-pyyaml_3.11.bb => python-pyyaml_3.12.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyyaml_3.11.bb => python-pyyaml_3.12.bb} (78%)
+I want to create my own yocto disto image based on core-image-weston with
+C/C++ compliers and openCV. But when I'm trying to bitbake openCV error
+appears:
 
-diff --git a/meta-python/recipes-devtools/python/python-pyyaml_3.11.bb b/meta-python/recipes-devtools/python/python-pyyaml_3.12.bb
-similarity index 78%
-rename from meta-python/recipes-devtools/python/python-pyyaml_3.11.bb
-rename to meta-python/recipes-devtools/python/python-pyyaml_3.12.bb
-index a017e0e..61b1d2c 100644
---- a/meta-python/recipes-devtools/python/python-pyyaml_3.11.bb
-+++ b/meta-python/recipes-devtools/python/python-pyyaml_3.12.bb
-@@ -9,8 +9,8 @@ SRC_URI = "http://pyyaml.org/download/pyyaml/PyYAML-${PV}.tar.gz \
-            file://setup.py \
- "
- 
--SRC_URI[md5sum] = "f50e08ef0fe55178479d3a618efe21db"
--SRC_URI[sha256sum] = "c36c938a872e5ff494938b33b14aaa156cb439ec67548fcab3535bb78b0846e8"
-+SRC_URI[md5sum] = "4c129761b661d181ebf7ff4eb2d79950"
-+SRC_URI[sha256sum] = "592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab"
- 
- S = "${WORKDIR}/PyYAML-${PV}"
- 
--- 
-2.7.4
+| -- Configuring incomplete, errors occurred!
+| See also "/home/admin/Zynq/poky/build/tmp/work/i586-poky-linux/
+opencv/3.1+gitAUTOINC+92387b1ef8-r0/build/CMakeFiles/CMakeOutput.log".
+| See also "/home/admin/Zynq/poky/build/tmp/work/i586-poky-linux/
+opencv/3.1+gitAUTOINC+92387b1ef8-r0/build/CMakeFiles/CMakeError.log".
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_configure (log file is located at
+/home/admin/Zynq/poky/build/tmp/work/i586-poky-linux/opencv/3.1+gitAUTOINC+
+92387b1ef8-r0/temp/log.do_configure.7661)
+ERROR: Task 278 (/home/admin/Zynq/poky/meta-openembedded/meta-oe/recipes-
+support/opencv/opencv_3.1.bb, do_configure) failed with exit code '1'
 
+It is connected with this:
 
+This recipe is *blacklisted* by the meta-oe
+<https://layers.openembedded.org/layerindex/branch/master/layer/meta-oe/>
+layer. The reason provided is:
 
+BROKEN: fails to build with gcc-6
+
+??
+Am I right or openCV is now unavailable? Or Am i doing something wrong?
+I am looking forward to hearing from you.
 
