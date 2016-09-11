@@ -1,30 +1,30 @@
 Return-Path: <wangxin2015.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id A1B89762B4
+	by mail.openembedded.org (Postfix) with ESMTP id B4CE5762B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Sep 2016 15:05:57 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="10846983"
+	Sun, 11 Sep 2016 15:13:11 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="10847059"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 11 Sep 2016 23:05:52 +0800
+	by heian.cn.fujitsu.com with ESMTP; 11 Sep 2016 23:13:10 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 70D61404240C
+	by cn.fujitsu.com (Postfix) with ESMTP id 578BA404240C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Sep 2016 23:05:49 +0800 (CST)
+	Sun, 11 Sep 2016 23:13:12 +0800 (CST)
 Received: from ubuntu.g08.fujitsu.local (10.167.226.120) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.279.2; Sun, 11 Sep 2016 23:05:49 +0800
+	Server (TLS) id 14.3.279.2; Sun, 11 Sep 2016 23:13:12 +0800
 From: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 11 Sep 2016 11:05:30 -0400
-Message-ID: <1473606330-1638-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
+Date: Sun, 11 Sep 2016 11:13:05 -0400
+Message-ID: <1473606785-1681-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.120]
-X-yoursite-MailScanner-ID: 70D61404240C.A38B5
+X-yoursite-MailScanner-ID: 578BA404240C.A45BD
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: wangxin2015.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python][PATCH] python-dbus: 1.2.0 -> 1.2.4
+Subject: [meta-python][PATCH] python-pyyaml: 3.11 -> 3.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,35 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Sep 2016 15:05:59 -0000
+X-List-Received-Date: Sun, 11 Sep 2016 15:13:12 -0000
 Content-Type: text/plain
 
-Upgrade python-dbus from 1.2.0 to 1.2.4.
+Upgrade python-pyyaml from 3.11 to 3.12.
 
 Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
 ---
- .../python/{python-dbus_1.2.0.bb => python-dbus_1.2.4.bb}             | 4 ++--
+ .../python/{python-pyyaml_3.11.bb => python-pyyaml_3.12.bb}           | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-dbus_1.2.0.bb => python-dbus_1.2.4.bb} (88%)
+ rename meta-python/recipes-devtools/python/{python-pyyaml_3.11.bb => python-pyyaml_3.12.bb} (78%)
 
-diff --git a/meta-python/recipes-devtools/python/python-dbus_1.2.0.bb b/meta-python/recipes-devtools/python/python-dbus_1.2.4.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python-dbus_1.2.0.bb
-rename to meta-python/recipes-devtools/python/python-dbus_1.2.4.bb
-index 95ba920..271b559 100644
---- a/meta-python/recipes-devtools/python/python-dbus_1.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python-dbus_1.2.4.bb
-@@ -8,8 +8,8 @@ DEPENDS = "expat dbus dbus-glib virtual/libintl python-pyrex-native"
- SRC_URI = "http://dbus.freedesktop.org/releases/dbus-python/dbus-python-${PV}.tar.gz \
+diff --git a/meta-python/recipes-devtools/python/python-pyyaml_3.11.bb b/meta-python/recipes-devtools/python/python-pyyaml_3.12.bb
+similarity index 78%
+rename from meta-python/recipes-devtools/python/python-pyyaml_3.11.bb
+rename to meta-python/recipes-devtools/python/python-pyyaml_3.12.bb
+index a017e0e..61b1d2c 100644
+--- a/meta-python/recipes-devtools/python/python-pyyaml_3.11.bb
++++ b/meta-python/recipes-devtools/python/python-pyyaml_3.12.bb
+@@ -9,8 +9,8 @@ SRC_URI = "http://pyyaml.org/download/pyyaml/PyYAML-${PV}.tar.gz \
+            file://setup.py \
  "
  
--SRC_URI[md5sum] = "b09cd2d1a057cc432ce944de3fc06bf7"
--SRC_URI[sha256sum] = "e12c6c8b2bf3a9302f75166952cbe41d6b38c3441bbc6767dbd498942316c6df"
-+SRC_URI[md5sum] = "7372a588c83a7232b4e08159bfd48fe5"
-+SRC_URI[sha256sum] = "e2f1d6871f74fba23652e51d10873e54f71adab0525833c19bad9e99b1b2f9cc"
- S = "${WORKDIR}/dbus-python-${PV}"
+-SRC_URI[md5sum] = "f50e08ef0fe55178479d3a618efe21db"
+-SRC_URI[sha256sum] = "c36c938a872e5ff494938b33b14aaa156cb439ec67548fcab3535bb78b0846e8"
++SRC_URI[md5sum] = "4c129761b661d181ebf7ff4eb2d79950"
++SRC_URI[sha256sum] = "592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab"
  
- inherit distutils-base autotools pkgconfig
+ S = "${WORKDIR}/PyYAML-${PV}"
+ 
 -- 
 2.7.4
 
