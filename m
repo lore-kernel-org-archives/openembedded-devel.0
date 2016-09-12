@@ -1,46 +1,45 @@
-Return-Path: <sujith.h@gmail.com>
-Received: from mail-qk0-f181.google.com (mail-qk0-f181.google.com
-	[209.85.220.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 01A597705F
+Return-Path: <zeenix@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 61872731E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Sep 2016 09:47:54 +0000 (UTC)
-Received: by mail-qk0-f181.google.com with SMTP id w204so136366495qka.0
+	Mon, 12 Sep 2016 10:12:46 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id b187so12867543wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Sep 2016 02:47:55 -0700 (PDT)
+	Mon, 12 Sep 2016 03:12:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=JlpPgvG9WVhCtUEl9eTpAV1pMrDUT1oMfqB5LmBgMho=;
-	b=kE3BPd6hAqlWM8Vq/n/8NDC7l6FSr8ywq64J+2NT0Oj1r0Pfs9uR/d9Eg6wNn8g9X+
-	ORvVILfZKhaCGgSRLBBX/zQ6yfPrvMYchLPEFZRfQN9zgEYVwepv9VlKfS3XHBjGJgc9
-	S0FlQ4jsf8DX6CfuCivd9Z/rJDIHlkkRNTDylEJVEF/YwYGNUSuxHyncUTdNDDcABcwj
-	o1rJCcjJKSfd1rZ419OEhvcTwJAPWQPse/F8+3HBYehOy8t/yUbrBqs94DUU+CQW2tSq
-	ufcWdkWECegLiCbJljHPhpyI/rfHLfGYxfQzLVwVJNfkHVzkxkQTlF5rJvpqkLN7sVQm
-	5C1A==
+	h=from:to:cc:subject:date:message-id;
+	bh=O0i1aMDL8HT5RRCmNMAocHZsXrZkO2QOnii5jl/kAU8=;
+	b=wl2mHb6szXy6TgQV8u/n8dXb6tPBtEDoqVBPmlGoNSK25lA0KJwo0ZsCNZfKEAfi3M
+	7NdaVh2Y6K2hUUISaxb/T5YC6dpzESIlTe8TAVDjeXk7SSH9r1kNL7upmPhRbbHwVHjd
+	qTh4HFJSeVBCASrIBmA9k/EjE0eDyP9DBs6XZvjP8gKbLRZO1clc+J0QbaXaKP5S7+Px
+	7nItSdeMUWIOEsENVJoAHJO5yhbxRbmBzgbt0UpOUdUzLqMxLNdCJTsGBPzj+I4pdEhZ
+	9DBlmJ9uBBiuu6BUOg5jOnn/p16YkxMMQxAa1ikB9NXumq3X1mwkUtITjGCnDBI1W7aW
+	cVOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=JlpPgvG9WVhCtUEl9eTpAV1pMrDUT1oMfqB5LmBgMho=;
-	b=ZoaHjwgZ2G4UpUOjxfewm8PcWsx25AZcnDyPnBFSmHbWUnKm6jIyFoL8hAZ4Zg4e9J
-	sYCSJUwvrNIJ/L9AGx+Kk/PEgrYqw9+uWKJs65agFPyNziUEYDL0Fg8eJHzxxuS8QHBx
-	ACzZZ8Kc4QUwpk1emOG+NV6KoYmjJopPfZh6TVqLltbVnk3n2n2h0T8C08NrROk6RBwx
-	sdMxMtg+MJ7t7FLVIiCjSLS9UX/I312Kenvt4lLIEpMRKF5VLNBI6DhZTsdyAWJOMiLq
-	8pI7uYLmathzo1Y8xGjAFr3jUa0Dg+Nc9R/JqI6+2DpamkuzYm7ws39hLyEROEwUOt/J
-	FuKg==
-X-Gm-Message-State: AE9vXwPlH7atsv4rP2ariUWX36P2EpJGXvVJm2I2wdBE65LCtu0qC1+XM6EugWDllvjgEl5zgEdC39JWDEIEOQ==
-X-Received: by 10.55.143.134 with SMTP id r128mr19114161qkd.161.1473673674774; 
-	Mon, 12 Sep 2016 02:47:54 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.55.183.1 with HTTP; Mon, 12 Sep 2016 02:47:34 -0700 (PDT)
-In-Reply-To: <1473668091-5615-1-git-send-email-sujith.h@gmail.com>
-References: <1473668091-5615-1-git-send-email-sujith.h@gmail.com>
-From: sujith h <sujith.h@gmail.com>
-Date: Mon, 12 Sep 2016 15:17:34 +0530
-Message-ID: <CADyYWLnzkgD+B3R1qjX1tF2PeVULe686qU14m=ntSo54C7LtXQ@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-java][PATCH] xpp[23]: fix/remove bashism
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=O0i1aMDL8HT5RRCmNMAocHZsXrZkO2QOnii5jl/kAU8=;
+	b=TkJS4ge7ERaDycwce/GbpqsUTPFRNsrdtlRh9aiezSMY4CY1gUSwCpuwcNS1Umz4sC
+	nN9Q9Y8xhv1VCmx1JdQLFCHPiTP2Ua1eBhNWtwWZ82jvrOJeBKTipI/TyybGdqxgJklJ
+	eK5XEeLh4LV+0Ylhwh8BdmVD3u0qPj1GUMmmqFW1C6yhP7L7ZtWcsjecW+jmJszmNmvr
+	WKE2EiZUfFaeXhhN4VH0vXATrmH/zRrwuL+ieE4yBsdS4YGDLtvEshqaGMKomblVu6En
+	Z6AMu/NWnxzss2q1bn9Ui/PV1cEe7IUgOiKLVEY6cLNh+edjmYEa+eiH8epAgwSJ9+Aq
+	J25g==
+X-Gm-Message-State: AE9vXwPYAw1ZyKQ3681wdV34lcXsCFRd2f/7U7rzvmUNT8JhdfaU0kZksK2okOZZsQgQsQ==
+X-Received: by 10.194.187.175 with SMTP id ft15mr13500814wjc.66.1473675166326; 
+	Mon, 12 Sep 2016 03:12:46 -0700 (PDT)
+Received: from zeelaptop.office.pelagicore.net ([83.218.80.242])
+	by smtp.gmail.com with ESMTPSA id
+	ce6sm17139004wjc.27.2016.09.12.03.12.45
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 12 Sep 2016 03:12:45 -0700 (PDT)
+From: Zeeshan Ali <zeenix@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 12 Sep 2016 12:12:40 +0200
+Message-Id: <1473675160-13440-1-git-send-email-zeenix@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Zeeshan Ali <zeeshan.ali@pelagicore.com>
+Subject: [meta-oe] [PATCH v2] geoclue: Update to 2.4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,77 +52,157 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Sep 2016 09:47:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 12 Sep 2016 10:12:46 -0000
 
-Hi,
+From: Zeeshan Ali <zeeshan.ali@pelagicore.com>
 
-Hope the patch looks ok. Else do let me know I can work on the same.
+Also drop redundant and now unusable patch.
 
-Thanks,
-Sujith H
+Signed-off-by: Zeeshan Ali <zeeshan.ali@pelagicore.com>
+---
+ .../geoclue/files/soup-session-fix.patch           | 30 ------------
+ .../recipes-navigation/geoclue/geoclue_2.0.0.bb    | 33 --------------
+ .../recipes-navigation/geoclue/geoclue_2.4.4.bb    | 53 ++++++++++++++++++++++
+ 3 files changed, 53 insertions(+), 63 deletions(-)
+ delete mode 100644 meta-oe/recipes-navigation/geoclue/files/soup-session-fix.patch
+ delete mode 100644 meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb
+ create mode 100644 meta-oe/recipes-navigation/geoclue/geoclue_2.4.4.bb
 
-On Mon, Sep 12, 2016 at 1:44 PM, Sujith H <sujith.h@gmail.com> wrote:
+diff --git a/meta-oe/recipes-navigation/geoclue/files/soup-session-fix.patch b/meta-oe/recipes-navigation/geoclue/files/soup-session-fix.patch
+deleted file mode 100644
+index 70fe3f5..0000000
+--- a/meta-oe/recipes-navigation/geoclue/files/soup-session-fix.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-Upstream-Status: Upstream-Status: Inappropriate [poky 9.0 has older libsoup]
+-
+-Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
+-
+-diff --git a/src/gclue-ipclient.c b/src/gclue-ipclient.c
+-index 09add30..1771d5c 100644
+---- a/src/gclue-ipclient.c
+-+++ b/src/gclue-ipclient.c
+-@@ -83,7 +83,7 @@ gclue_ipclient_init (GClueIpclient *ipclient)
+- {
+-         ipclient->priv = G_TYPE_INSTANCE_GET_PRIVATE ((ipclient), GCLUE_TYPE_IPCLIENT, GClueIpclientPrivate);
+- 
+--        ipclient->priv->soup_session = soup_session_new ();
+-+        ipclient->priv->soup_session = soup_session_sync_new ();
+- }
+- 
+- /**
+-diff --git a/src/geoip-server/geoip-update.c b/src/geoip-server/geoip-update.c
+-index 6cce7b2..ef672ba 100644
+---- a/src/geoip-server/geoip-update.c
+-+++ b/src/geoip-server/geoip-update.c
+-@@ -214,7 +214,7 @@ main (int argc, char **argv)
+-                         path = GEOIP_DATABASE_PATH;
+-         }
+- 
+--        session = soup_session_new ();
+-+        session = soup_session_sync_new ();
+- 
+-         for (i = 0; i < G_N_ELEMENTS (db_info_map); i++) {
+-                 SoupMessage *msg = NULL;
+diff --git a/meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb b/meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb
+deleted file mode 100644
+index 90e8533..0000000
+--- a/meta-oe/recipes-navigation/geoclue/geoclue_2.0.0.bb
++++ /dev/null
+@@ -1,33 +0,0 @@
+-SUMMARY = "The Geolocation Service"
+-DESCRIPTION = "Geoclue is a D-Bus service that provides location information. \
+-The primary goal of the Geoclue project is to make creating location-aware applications \
+-as simple as possible, while the secondary goal is to ensure that no application \
+-can access location information without explicit permission from user."
+-LICENSE = "GPLv2.0+"
+-SECTION = "console/network"
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=8114b83a0435d8136b47bd70111ce5cd"
+-
+-DEPENDS = "glib-2.0 dbus dbus-glib json-glib libsoup-2.4 intltool-native"
+-
+-inherit autotools pkgconfig gtk-doc
+-
+-SRC_URI = " \
+-    http://www.freedesktop.org/software/geoclue/releases/2.0/geoclue-${PV}.tar.xz \
+-    file://soup-session-fix.patch \
+-"
+-
+-SRC_URI[md5sum] = "401ff99d530b177c62afacef0a33efd9"
+-SRC_URI[sha256sum] = "4a82f184e55a163d86e0ad69bbe1bba9960bb5094220fe1f01350bceda8c67a1"
+-
+-PACKAGECONFIG[geoip] = "--enable-geoip-server,--disable-geoip-server,geoip"
+-
+-EXTRA_OECONF += " \
+-    --with-dbus-service-user=root \
+-    --with-dbus-sys-dir=${sysconfdir}/dbus-1/system.d \
+-"
+-
+-FILES_${PN} += " \
+-    ${datadir}/dbus-1/system-services/org.freedesktop.GeoClue2.service \
+-    ${datadir}/geoclue-2.0/geoclue-interface.xml \
+-"
+diff --git a/meta-oe/recipes-navigation/geoclue/geoclue_2.4.4.bb b/meta-oe/recipes-navigation/geoclue/geoclue_2.4.4.bb
+new file mode 100644
+index 0000000..3170d44
+--- /dev/null
++++ b/meta-oe/recipes-navigation/geoclue/geoclue_2.4.4.bb
+@@ -0,0 +1,53 @@
++SUMMARY = "The Geolocation Service"
++DESCRIPTION = "Geoclue is a D-Bus service that provides location information. \
++The primary goal of the Geoclue project is to make creating location-aware applications \
++as simple as possible, while the secondary goal is to ensure that no application \
++can access location information without explicit permission from user."
++LICENSE = "GPLv2.0+"
++SECTION = "console/network"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=8114b83a0435d8136b47bd70111ce5cd"
++
++DEPENDS = "glib-2.0 dbus json-glib libsoup-2.4 intltool-native"
++
++inherit autotools pkgconfig gtk-doc
++
++SRC_URI = " \
++    http://www.freedesktop.org/software/geoclue/releases/2.4/geoclue-${PV}.tar.xz \
++"
++
++SRC_URI[md5sum] = "d2a5b05f4bad032673fe23afbce27926"
++SRC_URI[sha256sum] = "9c43fb9d0c12067ea64400500abb0640194947d4c2c55e38545afe5d9c5c315c"
++
++export BUILD_SYS
++export HOST_SYS
++export STAGING_INCDIR
++export STAGING_LIBDIR
++
++# Without this line, package is delcared a library and named libgeoclue*
++AUTO_LIBNAME_PKGS = ""
++
++PACKAGECONFIG ??= "3g modem-gps cdma nmea lib"
++PACKAGECONFIG[3g] = "--enable-3g-source,--disable-3g-source,modemmanager"
++PACKAGECONFIG[modem-gps] = "--enable-modem-gps-source,--disable-modem-gps-source,modemmanager"
++PACKAGECONFIG[cdma] = "--enable-cdma-source,--disable-cdma-source,modemmanager"
++PACKAGECONFIG[nmea] = "--enable-nmea-source,--disable-nmea-source,avahi"
++PACKAGECONFIG[lib] = "--enable-libgeoclue,--disable-libgeoclue,gobject-introspection"
++
++EXTRA_OECONF += " \
++    --with-dbus-service-user=root \
++    --with-dbus-sys-dir=${sysconfdir}/dbus-1/system.d \
++    --enable-demo-agent=no \
++"
++
++FILES_${PN} += " \
++    ${datadir}/dbus-1/system-services \
++    ${libdir} \
++    ${systemd_unitdir} \
++    ${prefix}/libexec \
++"
++
++FILES_${PN}-dev += " \
++    ${datadir}/dbus-1/interfaces \
++    ${datadir}/gir-1.0 \
++"
+-- 
+2.7.4
 
-> From: Christopher Larson <chris_larson@mentor.com>
->
-> This was breaking on hosts with dash as /bin/sh.
->
-> Signed-off-by: Christopher Larson <chris_larson@mentor.com>
-> ---
->  recipes-core/xml-commons/xpp2_2.1.10.bb    | 2 +-
->  recipes-core/xml-commons/xpp3_1.1.3.4.O.bb | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/recipes-core/xml-commons/xpp2_2.1.10.bb
-> b/recipes-core/xml-commons/xpp2_2.1.10.bb
-> index d3baca4..c926722 100644
-> --- a/recipes-core/xml-commons/xpp2_2.1.10.bb
-> +++ b/recipes-core/xml-commons/xpp2_2.1.10.bb
-> @@ -19,7 +19,7 @@ do_compile() {
->
->      sourcepath=3D"src/java/drivers/jaxp11:src/java/drivers/sax2:
-> src/java/impl/factory:src/java/impl/format:src/java/
-> impl/node:src/java/impl/pullparser:src/java/impl/tag:src/java/intf"
->
-> -    findpath=3D"${sourcepath//:/ }"
-> +    findpath=3D"$(echo "$sourcepath" | tr : " ")"
->
->      javac -sourcepath $sourcepath -d build-oe `find $findpath -name
-> "*.java"`
->
-> diff --git a/recipes-core/xml-commons/xpp3_1.1.3.4.O.bb
-> b/recipes-core/xml-commons/xpp3_1.1.3.4.O.bb
-> index bedb8a9..f264022 100644
-> --- a/recipes-core/xml-commons/xpp3_1.1.3.4.O.bb
-> +++ b/recipes-core/xml-commons/xpp3_1.1.3.4.O.bb
-> @@ -19,7 +19,7 @@ do_compile() {
->      mkdir -p build-oe
->
->      sourcepath=3D"src/java/api:src/java/builder:src/java/dom2_
-> builder:src/java/mxp1_min:src/java/mxp1_standard:src/java/
-> parser_pool:src/java/sax2_driver:src/java/serializer_
-> impl:src/java/util:src/java/wrapper"
-> -    findpath=3D"${sourcepath//:/ }"
-> +    findpath=3D"$(echo "$sourcepath" | tr : " ")"
->
->      javac -sourcepath $sourcepath -d build-oe `find $findpath -name
-> "*.java"`
->
-> --
-> 1.9.1
->
->
-
-
---=20
-=E0=B4=B8=E0=B5=81=E0=B4=9C=E0=B4=BF=E0=B4=A4=E0=B5=8D =E0=B4=B9=E0=B4=B0=
-=E0=B4=BF=E0=B4=A6=E0=B4=BE=E0=B4=B8=E0=B4=A8=E0=B5=8D
-Bangalore
-<Project>Contributor to KDE project
-<Project>Contributor to Yocto project
-http://fci.wikia.com/wiki/Anti-DRM-Campaign
-<Blog> http://sujithh.info
-C-x C-c
 
