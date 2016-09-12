@@ -1,30 +1,24 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B89CD77029
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with SMTP id 06D9A771F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Sep 2016 13:06:44 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u8CD6f7E027129
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 12 Sep 2016 06:06:43 -0700 (PDT)
-Received: from yow-masselst-d1.localnet (128.224.56.91) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.294.0; Mon, 12 Sep 2016 06:06:40 -0700
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-Date: Mon, 12 Sep 2016 09:06:39 -0400
-Message-ID: <26802314.gkp84O62sb@yow-masselst-d1>
-Organization: Wind River Internation Inc.
-User-Agent: KMail/5.1.3 (Linux/4.4.0-21-generic; KDE/5.18.0; x86_64; ; )
-In-Reply-To: <1B858668EC6A94408DCA5225FDFA85AA013A2BCCE1@ALA-MBA.corp.ad.wrs.com>
-References: <cover.1473388166.git.jackie.huang@windriver.com>
-	<20160910003524.GA18761@mentor.com>
-	<1B858668EC6A94408DCA5225FDFA85AA013A2BCCE1@ALA-MBA.corp.ad.wrs.com>
+	Mon, 12 Sep 2016 13:12:08 +0000 (UTC)
+Received: (qmail 13811 invoked by uid 1003); 12 Sep 2016 13:12:09 -0000
+Received: from unknown (HELO ?10.20.2.199?) (philip@opensdr.com@38.99.225.50)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	12 Sep 2016 13:12:08 -0000
+To: openembedded-devel@lists.openembedded.org
+References: <CAO=ipHJL-FjdSgDE7pCaxUTjh-DcaMthn0y-X=PxqpJRiG+rvw@mail.gmail.com>
+	<6dde3cd8-e6c9-7883-54a7-3603d57eb6dc@balister.org>
+	<CAO=ipHLWUxu0FZeXizxawURPjZPCn1=0shH2g=L-+AfC=s4u6w@mail.gmail.com>
+From: Philip Balister <philip@balister.org>
+Message-ID: <bc1753f0-3250-d206-da98-947450928a72@balister.org>
+Date: Mon, 12 Sep 2016 07:12:06 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.2.0
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH 2/2 v2] samba: restrict the blacklist to ARM only
+In-Reply-To: <CAO=ipHLWUxu0FZeXizxawURPjZPCn1=0shH2g=L-+AfC=s4u6w@mail.gmail.com>
+Subject: Re: [yocto] problem with openCV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,124 +31,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Sep 2016 13:06:46 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Mon, 12 Sep 2016 13:12:09 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-On Sunday, September 11, 2016 9:26:44 PM EDT Huang, Jie (Jackie) wrote:
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org
-> > [mailto:openembedded-devel- bounces@lists.openembedded.org] On Behalf Of
-> > Joe MacDonald
-> > Sent: Saturday, September 10, 2016 8:35 AM
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: Re: [oe] [meta-networking][PATCH 2/2 v2] samba: restrict the
-> > blacklist to ARM only
-> >=20
-> > [Re: [oe] [meta-networking][PATCH 2/2 v2] samba: restrict the blacklist=
- to
-> > ARM only] On 16.09.10 (Sat>=20
-> > 00:03) Andreas M=FCller wrote:
-> > > On Fri, Sep 9, 2016 at 10:44 PM, Joe MacDonald=20
-<Joe_MacDonald@mentor.com> wrote:
-> > > > [[oe] [meta-networking][PATCH 2/2 v2] samba: restrict the blacklist=
- to
-> > > > ARM only] On 16.09.09 (Fri>=20
-> > 10:34) jackie.huang@windriver.com wrote:
-> > > >> From: Jackie Huang <jackie.huang@windriver.com>
-> > > >>=20
-> > > >> It builds fine except for arm now, and the do_package
-> > > >> and libpam issue is fixed by:
-> > > >> "waf-samba.bbclass: Add PACKAGECONFIG_CONFARGS to CONFIGUREOPTS"
-> > > >=20
-> > > > Did you confirm that you're still seeing the failure for arm?
-> > > >=20
-> > > > -J.
-> > > >=20
-> > > >> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> > > >> ---
-> > > >>=20
-> > > >>  meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 6 +++=
-=2D--
-> > > >>  1 file changed, 3 insertions(+), 3 deletions(-)
-> > > >>=20
-> > > >> diff --git
-> > > >> a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta=
-=2D>=20
-> > networking/recipes-connectivity/samba/samba_4.4.5.bb
-> >=20
-> > > >> index 042203e..c34adcb 100644
-> > > >> --- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-> > > >> +++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-> > > >> @@ -319,6 +319,6 @@ RDEPENDS_${PN}-pidl_append =3D " perl"
-> > > >>=20
-> > > >>  FILES_${PN}-pidl =3D "${bindir}/pidl ${datadir}/perl5/Parse"
-> > > >> =20
-> > > >>  # http://errors.yoctoproject.org/Errors/Details/81004/
-> > > >>=20
-> > > >> -# before this issue it was also failing in do_package and
-> > > >> -# autodetecting libpam dependency
-> > > >> -PNBLACKLIST[samba] ?=3D "BROKEN: fails to build with new
-> > > >> binutils-2.27"
-> > > >> +BLACKLIST_REASON ?=3D ""
-> > > >> +BLACKLIST_REASON_arm =3D "BROKEN: fails to build with new
-> > > >> binutils-2.27"
-> > > >> +PNBLACKLIST[samba] ?=3D "${BLACKLIST_REASON}"
-> > > >> --
-> > > >> 2.8.3
-> > > >=20
-> > > > --
-> > > > -Joe MacDonald.
-> > > >=20
-> > > > :wq
-> > >=20
-> > > Did you see [1] - it fixes build for arm.
-> > >=20
-> > > [1] http://lists.openembedded.org/pipermail/openembedded-devel/2016->=
- >=20
-> > September/108972.html
-> >=20
-> > I didn't, actually, but I had picked it up in my tree anyway when I
-> > scooped up the latest set of changes in master-next.  The reason I was
-> > asking was because I wasn't seeing a failure anymore in samba on arm and
-> > was curious why Jackie was still seeing it if I wasn't and I hadn't seen
->=20
-> Actually I never see the failure in:
-> http://errors.yoctoproject.org/Errors/Details/81004/
->=20
-> and I didn't notice Andreas' patch, I was fixing another issue but Mark
-> asked me to include the restrict on ARM, please see:
->=20
-> https://patchwork.openembedded.org/patch/131249/
->=20
-> so I thought at least Mark was still seeing this and sent this patch.
->=20
-> Mark, could you confirm that you're still seeing the failure for arm?
+On 09/12/2016 12:00 AM, Szymon Guza wrote:
+> Do you have any tips for me? Where should I search those patches? Or where
+> I can find recipes for more recent version? Or Can you tell me if there is
+> 1.0 version for openCV available for Yocto?
 
-I was never able to reproduce the issue but was working on the assumption t=
-hat=20
-it was still a real issue, and thus the need to continue to blacklist ARM. =
-if=20
-the issue no longer exists then the proper thing to do would be to remove t=
-he=20
-blacklist entry and in the commit log which does this, identify what change=
-d=20
-to remedy the situation.=20
+Use the layer index to find recipes for opencv.
 
-Mark
+Use google to find upstream opencv project and read about it.
 
+Philip
 
->=20
-> Thanks,
-> Jackie
->=20
-> > an explicit patch to resolve the issue.  But there it is, mystery
-> > solved.  Thanks for the heads-up, Andreas.
-> >=20
-> > --
-> > -Joe MacDonald.
-> >=20
-> > :wq
-
-
+> 
+> 2016-09-11 22:20 GMT+02:00 Philip Balister <philip@balister.org>:
+> 
+>> On 09/11/2016 02:10 PM, Szymon Guza wrote:
+>>> Hello,
+>>>
+>>> I want to create my own yocto disto image based on core-image-weston with
+>>> C/C++ compliers and openCV. But when I'm trying to bitbake openCV error
+>>> appears:
+>>>
+>>> | -- Configuring incomplete, errors occurred!
+>>> | See also "/home/admin/Zynq/poky/build/tmp/work/i586-poky-linux/
+>>> opencv/3.1+gitAUTOINC+92387b1ef8-r0/build/CMakeFiles/CMakeOutput.log".
+>>> | See also "/home/admin/Zynq/poky/build/tmp/work/i586-poky-linux/
+>>> opencv/3.1+gitAUTOINC+92387b1ef8-r0/build/CMakeFiles/CMakeError.log".
+>>> | WARNING: exit code 1 from a shell command.
+>>> | ERROR: Function failed: do_configure (log file is located at
+>>> /home/admin/Zynq/poky/build/tmp/work/i586-poky-linux/
+>> opencv/3.1+gitAUTOINC+
+>>> 92387b1ef8-r0/temp/log.do_configure.7661)
+>>> ERROR: Task 278 (/home/admin/Zynq/poky/meta-
+>> openembedded/meta-oe/recipes-
+>>> support/opencv/opencv_3.1.bb, do_configure) failed with exit code '1'
+>>>
+>>> It is connected with this:
+>>>
+>>> This recipe is *blacklisted* by the meta-oe
+>>> <https://layers.openembedded.org/layerindex/branch/master/layer/meta-oe/
+>>>
+>>> layer. The reason provided is:
+>>>
+>>> BROKEN: fails to build with gcc-6
+>>
+>> This is telling you you need to update the recipe by finding or writing
+>> patches so the opencv builds with gcc6. Try looking for a more recent
+>> version of opencv and/or patches to address the compile problems.
+>>
+>> Philip
+>>
+>> Philip
+>>
+>>>
+>>> ??
+>>> Am I right or openCV is now unavailable? Or Am i doing something wrong?
+>>> I am looking forward to hearing from you.
+>>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
 
