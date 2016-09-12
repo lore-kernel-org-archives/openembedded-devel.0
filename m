@@ -1,37 +1,30 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 433D9762B4
+Return-Path: <wangxin2015.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 199027705C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Sep 2016 01:35:39 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u8C1ZciR021879
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Sun, 11 Sep 2016 18:35:38 -0700
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.175]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0294.000;
-	Sun, 11 Sep 2016 18:35:37 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: "Joe MacDonald (Joe_MacDonald@mentor.com)" <Joe_MacDonald@mentor.com>,
-	"Asselstine, Mark" <Mark.Asselstine@windriver.com>,
-	=?utf-8?B?QW5kcmVhcyBNw7xsbGVy?= <schnitzeltony@googlemail.com>
-Thread-Topic: [oe] [PATCH 5/5] samba: fix build by linking with bfd instead
-	of gold
-Thread-Index: AQHSDCTYxhzkDV9t9keeb86dimcOjKB1EbwA
-Date: Mon, 12 Sep 2016 01:35:36 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA013A2BDD11@ALA-MBA.corp.ad.wrs.com>
-References: <1473020112-25797-1-git-send-email-schnitzeltony@googlemail.com>
-	<1473020112-25797-5-git-send-email-schnitzeltony@googlemail.com>
-	<CALbNGRQ_gPdw6O53fVeX5gUnpppM7GreKxy2Q02iovJukV_YCQ@mail.gmail.com>
-In-Reply-To: <CALbNGRQ_gPdw6O53fVeX5gUnpppM7GreKxy2Q02iovJukV_YCQ@mail.gmail.com>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.131]
+	Mon, 12 Sep 2016 02:20:56 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="10856879"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 12 Sep 2016 10:20:55 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 4748541B60FB
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Sep 2016 10:20:55 +0800 (CST)
+Received: from ubuntu.g08.fujitsu.local (10.167.226.120) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.279.2; Mon, 12 Sep 2016 10:20:58 +0800
+From: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 11 Sep 2016 22:20:55 -0400
+Message-ID: <1473646855-2216-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 5/5] samba: fix build by linking with bfd instead	of gold
+X-Originating-IP: [10.167.226.120]
+X-yoursite-MailScanner-ID: 4748541B60FB.A6FAF
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangxin2015.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] ttf-dejavu: 2.35 -> 2.37
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,49 +37,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Sep 2016 01:35:40 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 12 Sep 2016 02:20:57 -0000
+Content-Type: text/plain
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogb3BlbmVtYmVkZGVkLWRl
-dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyBbbWFpbHRvOm9wZW5lbWJlZGRlZC1k
-ZXZlbC0NCj4gYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnXSBPbiBCZWhhbGYgT2YgQW5k
-cmVhcyBNw7xsbGVyDQo+IFNlbnQ6IFN1bmRheSwgU2VwdGVtYmVyIDExLCAyMDE2IDg6MDYgUE0N
-Cj4gVG86IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFN1Ympl
-Y3Q6IFJlOiBbb2VdIFtQQVRDSCA1LzVdIHNhbWJhOiBmaXggYnVpbGQgYnkgbGlua2luZyB3aXRo
-IGJmZCBpbnN0ZWFkIG9mIGdvbGQNCj4gDQo+IE9uIFN1biwgU2VwIDQsIDIwMTYgYXQgMTA6MTUg
-UE0sIEFuZHJlYXMgTcO8bGxlcg0KPiA8c2Nobml0emVsdG9ueUBnb29nbGVtYWlsLmNvbT4gd3Jv
-dGU6DQo+ID4gVXNlIHRoaXMgd29ya2Fyb3VuZCBhcyBsb25nIGFzIHRoZXJlIGlzIG5vIGJldHRl
-ciAodXBzdHJlYW0pIGZpeA0KPiA+DQo+ID4gU2lnbmVkLW9mZi1ieTogQW5kcmVhcyBNw7xsbGVy
-IDxzY2huaXR6ZWx0b255QGdvb2dsZW1haWwuY29tPg0KPiA+IC0tLQ0KPiA+ICBtZXRhLW5ldHdv
-cmtpbmcvcmVjaXBlcy1jb25uZWN0aXZpdHkvc2FtYmEvc2FtYmFfNC40LjUuYmIgfCAyICstDQo+
-ID4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQ0KPiA+DQo+
-ID4gZGlmZiAtLWdpdCBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWNvbm5lY3Rpdml0eS9zYW1i
-YS9zYW1iYV80LjQuNS5iYiBiL21ldGEtDQo+IG5ldHdvcmtpbmcvcmVjaXBlcy1jb25uZWN0aXZp
-dHkvc2FtYmEvc2FtYmFfNC40LjUuYmINCj4gPiBpbmRleCBlMzVkNTI3Li4zMjA1YzVkIDEwMDY0
-NA0KPiA+IC0tLSBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWNvbm5lY3Rpdml0eS9zYW1iYS9z
-YW1iYV80LjQuNS5iYg0KPiA+ICsrKyBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWNvbm5lY3Rp
-dml0eS9zYW1iYS9zYW1iYV80LjQuNS5iYg0KPiA+IEBAIC04OCw3ICs4OCw3IEBAIEVYVFJBX09F
-Q09ORiArPSAiLS1lbmFibGUtZmhzIFwNCj4gPiAgICAgICAgICAgICAgICAgICINCj4gPiAgRElT
-QUJMRV9TVEFUSUMgPSAiIg0KPiA+DQo+ID4gLUxERkxBR1MgKz0gIi1XbCwteixyZWxybywteixu
-b3ciDQo+ID4gK0xERkxBR1MgKz0gIi1XbCwteixyZWxybywteixub3cgJHtAYmIudXRpbHMuY29u
-dGFpbnMoJ0RJU1RST19GRUFUVVJFUycsICdsZC1pcy1nb2xkJywgJyAtZnVzZS0NCj4gbGQ9YmZk
-ICcsICcnLCBkKX0iDQo+ID4NCj4gPiAgZG9faW5zdGFsbF9hcHBlbmQoKSB7DQo+ID4gICAgICBp
-ZiAke0BiYi51dGlscy5jb250YWlucygnUEFDS0FHRUNPTkZJRycsICdzeXN0ZW1kJywgJ3RydWUn
-LCAnZmFsc2UnLCBkKX07IHRoZW4NCj4gPiAtLQ0KPiA+IDIuNS41DQo+ID4NCj4gMS4gVGhpcyBk
-aWQgbm90IG1ha2UgaXQgaW50byBtYXN0ZXIgYnV0IGlzIHN0aWxsIGluIG1hc3Rlci1uZXh0Lg0K
-PiAyLiBKYWNraWUgSHVhbmcgaGFzIHNlbnQgYSBwYXRjaCBvbmx5IGJsYWNrbGlzdGluZyBvbiBh
-cm0gWzFdID0+IHNlZW1zDQo+IG9ubHkgYXJtIGhhcyB0aGlzIGJ1Zw0KPiANCj4gWzFdIGh0dHA6
-Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL3BpcGVybWFpbC9vcGVuZW1iZWRkZWQtZGV2ZWwvMjAx
-Ni1TZXB0ZW1iZXIvMTA5MDM2Lmh0bWwNCg0KUGxlYXNlIHNlZSBteSByZXBseSBvbiB0aGlzOg0K
-aHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvcGlwZXJtYWlsL29wZW5lbWJlZGRlZC1kZXZl
-bC8yMDE2LVNlcHRlbWJlci8xMDkwNzEuaHRtbA0KDQo+IA0KPiA9PiBJIHdvdWxkIGxpa2UgdG8g
-c2VuZCBhIHBhdGNoIGNoYW5naW5nIHRvIGJmZCBsaW5rZXIgb25seSBvbiBhcm0uDQoNCkkgYWdy
-ZWUgaWYgaXQncyBjb25maXJtZWQgb25seSBhcm0gaGFzIHRoaXMgaXNzdWUuDQoNClRoYW5rcywN
-CkphY2tpZQ0KDQo+IEFnYWluc3Qgd2hpY2ggYnJhbmNoIHNoYWxsIEkgY3JlYXRlIHRoaXMgcGF0
-Y2g/DQo+IA0KPiBBbmRyZWFzDQo+IC0tDQo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fDQo+IE9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4g
-T3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gaHR0cDovL2xpc3Rz
-Lm9wZW5lbWJlZGRlZC5vcmcvbWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwNCg==
+1) Upgrade ttf-dejavu from 2.35 to 2.37. 
+2) Modify LIC_FILES_CHKSUM, since the date in it has been changed, But the LICENSE has not been changed.
+
+Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+---
+ .../ttf-fonts/{ttf-dejavu_2.35.bb => ttf-dejavu_2.37.bb}      | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-graphics/ttf-fonts/{ttf-dejavu_2.35.bb => ttf-dejavu_2.37.bb} (80%)
+
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.35.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.37.bb
+similarity index 80%
+rename from meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.35.bb
+rename to meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.37.bb
+index 3ce791b..1d24f2f 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.35.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-dejavu_2.37.bb
+@@ -3,7 +3,7 @@ require ttf.inc
+ SUMMARY = "DejaVu font - TTF Edition"
+ HOMEPAGE = "http://dejavu.sourceforge.net/wiki/"
+ LICENSE = "BitstreamVera"
+-LIC_FILES_CHKSUM = "file://${WORKDIR}/dejavu-fonts-ttf-${PV}/LICENSE;md5=9f867da7a73fad2715291348e80d0763"
++LIC_FILES_CHKSUM = "file://${WORKDIR}/dejavu-fonts-ttf-${PV}/LICENSE;md5=449b2c30bfe5fa897fe87b8b70b16cfa""
+ 
+ # all subpackages except ${PN}-common itself rdepends on ${PN}-common
+ RDEPENDS_${PN}-sans = "${PN}-common"
+@@ -11,6 +11,7 @@ RDEPENDS_${PN}-sans-mono = "${PN}-common"
+ RDEPENDS_${PN}-sans-condensed = "${PN}-common"
+ RDEPENDS_${PN}-serif = "${PN}-common"
+ RDEPENDS_${PN}-serif-condensed = "${PN}-common"
++RDEPENDS_${PN}-mathtexgyre = "${PN}-common"
+ RDEPENDS_${PN}-common = ""
+ PR = "r7"
+ 
+@@ -30,15 +31,17 @@ PACKAGES = "\
+             ${PN}-sans-condensed \
+             ${PN}-serif \
+             ${PN}-serif-condensed \
++            ${PN}-mathtexgyre \
+             ${PN}-common"
+-FONT_PACKAGES = "${PN}-sans ${PN}-sans-mono ${PN}-sans-condensed ${PN}-serif ${PN}-serif-condensed"
++FONT_PACKAGES = "${PN}-sans ${PN}-sans-mono ${PN}-sans-condensed ${PN}-serif ${PN}-serif-condensed ${PN}-mathtexgyre"
+ 
+ FILES_${PN}-sans            = "${datadir}/fonts/truetype/DejaVuSans.ttf ${datadir}/fonts/truetype/DejaVuSans-*.ttf"
+ FILES_${PN}-sans-mono       = "${datadir}/fonts/truetype/DejaVuSansMono*.ttf"
+ FILES_${PN}-sans-condensed  = "${datadir}/fonts/truetype/DejaVuSansCondensed*.ttf"
+ FILES_${PN}-serif           = "${datadir}/fonts/truetype/DejaVuSerif.ttf ${datadir}/fonts/truetype/DejaVuSerif-*.ttf"
+ FILES_${PN}-serif-condensed = "${datadir}/fonts/truetype/DejaVuSerifCondensed*.ttf"
++FILES_${PN}-mathtexgyre     = "${datadir}/fonts/truetype/DejaVuMathTeXGyre.ttf"
+ FILES_${PN}-common          = "${sysconfdir}"
+ 
+-SRC_URI[md5sum] = "59eaca5acf5c7c8212e92778e3e01f32"
+-SRC_URI[sha256sum] = "f6d7965586101ff3a8a5c3ec503e082bb6a9604ff53413e10702e5917c194d88"
++SRC_URI[md5sum] = "d0efec10b9f110a32e9b8f796e21782c"
++SRC_URI[sha256sum] = "fa9ca4d13871dd122f61258a80d01751d603b4d3ee14095d65453b4e846e17d7"
+-- 
+2.7.4
+
+
+
 
