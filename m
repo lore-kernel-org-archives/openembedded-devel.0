@@ -1,33 +1,50 @@
-Return-Path: <wmills@ti.com>
-X-Greylist: delayed 550 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 12 Sep 2016 14:57:09 UTC
-Received: from comal.ext.ti.com (comal.ext.ti.com [198.47.26.152])
-	by mail.openembedded.org (Postfix) with ESMTP id 8DB49771DC;
-	Mon, 12 Sep 2016 14:57:09 +0000 (UTC)
-Received: from dflxv15.itg.ti.com ([128.247.5.124])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id u8CElwPm031593;
-	Mon, 12 Sep 2016 09:47:58 -0500
-Received: from DFLE73.ent.ti.com (dfle73.ent.ti.com [128.247.5.110])
-	by dflxv15.itg.ti.com (8.14.3/8.13.8) with ESMTP id u8CElv4Y005765;
-	Mon, 12 Sep 2016 09:47:57 -0500
-Received: from dlep33.itg.ti.com (157.170.170.75) by DFLE73.ent.ti.com
-	(128.247.5.110) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 12 Sep 2016 09:47:56 -0500
-Received: from [172.22.174.13] (ileax41-snat.itg.ti.com [10.172.224.153])	by
-	dlep33.itg.ti.com (8.14.3/8.13.8) with ESMTP id u8CEluWX010543;
-	Mon, 12 Sep 2016 09:47:56 -0500
-To: Jeff Osier-Mixon <jefro@jefro.net>, Yocto Project <yocto@yoctoproject.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <CA+YB3raLEFHAECfBVAspQni9fG0_X0oTPM-Z_F64FzV6PuNdUw@mail.gmail.com>
-From: William Mills <wmills@ti.com>
-Message-ID: <57D6C026.1050701@ti.com>
-Date: Mon, 12 Sep 2016 10:48:06 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.7.2
+Return-Path: <ross.burton@intel.com>
+Received: from mail-it0-f51.google.com (mail-it0-f51.google.com
+	[209.85.214.51])
+	by mail.openembedded.org (Postfix) with ESMTP id CC89C760A5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Sep 2016 15:34:53 +0000 (UTC)
+Received: by mail-it0-f51.google.com with SMTP id o3so13851312ita.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Sep 2016 08:34:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=9te+OTo4D3eM2VEvlbxLuK+mXpvJMM/HAy762jaTzRM=;
+	b=nqg9ndp9Ia+v24AwXLPWchkBDt+xO+Kf7/XuNM/t/6kvl+qhd3T0rI7poxU88yTXp5
+	b+ljnF/PUcBGE9sWb30x5Ab2ZB563i4kOBCbR/Q7zxcBY/OZ8oo43XIc/69IFnkTcm2M
+	uDn9NUzelVIlleRVY0mDgNgTBBGdo3BM4EwbxqZq471/aoDnP0hTzwrIibuJbOW6tvJ5
+	9Q3BgJOj4KgeeOrTzc98XwirzgZkzHVITYMTEU5vYGokUnwMgP40O6P+JvVTda8MvpOf
+	GS9YGNwO3vp2pp4DWF3uLFyGeFE5SQO/vbwynS/+frUO903lm6dALjc1keVVVPhjFEAR
+	sJxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=9te+OTo4D3eM2VEvlbxLuK+mXpvJMM/HAy762jaTzRM=;
+	b=GR+wMAnEqHv7zQ6P4gEZQfP+prNvUa2Yq88Xv2wSmQ67TKXO2/RpRsFV1QYCqHsqaq
+	tRNAHsWqPZxFJZy2uKHHfkEGcYz4CxkIpWMoOkQfK/zYddVxsFIewgRJeRHemq1mbtgX
+	xpHAH/ZTJnoIvY4yes+jRgWQfYpaYnMTDTacvU9h0H92hEiJ9n21TuOXHytm/1aVGXyF
+	zlKONfvyiix/vkLV1EngOTirQA5FhbxN6HOL6FEelBlDqb6oKVWCDz3qTqSQU8gLQ+v8
+	eia2/qUvvCkJWUvVoowQwhPkTMcQvJkx32qN2AtXIi+H6lhJpp5CQ9R05T9swI1RnnW8
+	ee6Q==
+X-Gm-Message-State: AE9vXwNWX/twq5WMam9za2RU811f2tFspGLYYePodw7acJjmxXnaAUxlQCpfGceLXoxYbe3PnCx6qo002qqCz48c
+X-Received: by 10.157.17.203 with SMTP id y11mr21209429oty.188.1473694493707; 
+	Mon, 12 Sep 2016 08:34:53 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CA+YB3raLEFHAECfBVAspQni9fG0_X0oTPM-Z_F64FzV6PuNdUw@mail.gmail.com>
+Received: by 10.107.135.27 with HTTP; Mon, 12 Sep 2016 08:34:33 -0700 (PDT)
+In-Reply-To: <57D6C026.1050701@ti.com>
+References: <CA+YB3raLEFHAECfBVAspQni9fG0_X0oTPM-Z_F64FzV6PuNdUw@mail.gmail.com>
+	<57D6C026.1050701@ti.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 12 Sep 2016 16:34:33 +0100
+Message-ID: <CAJTo0LZv=DxdJOUUb3t0Wr4_gcD8mqL_-hu=bVsjUZh=n-mcLA@mail.gmail.com>
+To: William Mills <wmills@ti.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
 Subject: Re: [yocto] Subjects for YP Developer Day at ELCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -41,50 +58,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Sep 2016 14:57:10 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 12 Sep 2016 15:34:54 -0000
+Content-Type: text/plain; charset=UTF-8
 
+On 12 September 2016 at 15:48, William Mills <wmills@ti.com> wrote:
 
-On 09/09/2016 11:51 AM, Jeff Osier-Mixon wrote:
-> Hi all - we are in the planning stages for DevDay at ELCE right now,
-> particularly the advanced track. This track changes every session,
-> usually to cover the things we are working on hardest - for example,
-> in San Diego we covered CROPS, devtool, the latest Toaster features,
-> and much more.
->
-> Whether you are able to attend DevDay or not, we would be grateful to
-> hear your suggestions for subjects to cover in the advanced track. We
-> are currently planning talks about CROPS, devtool and the ESDK,
-> Toaster, wic, smack, security, and a few other things. If you have a
-> burning desire to hear about something specific, please let us know.
+> 5) Can Yocto [cross-]build snaps or flatpaks?
 >
 
-*** Status and state of the art for read-only root filesystems.
-1) r/o root + tmpfs only for ephemeral systems
-2) r/o root + select r/w points (bind-volatile?)
-3) r/o root + unionfs r/w
+Just because it's interesting, note that the standard freedesktop.org
+flatpak runtime is in fact bootstrapped through a custom OE distro.
 
-My interest would be in #1 & #2 as it is security related.
-r/w mount would be nosuid, nodev, etc and perhaps noexec
-A survey of the space should include #3 however.
-
-I know there is a section in the developer manual for the basic 
-mechanisms of r/o root but it appears a lot is left as an excrice for 
-the user.  Are the full demo images etc?
-
-*** What is the OE/YP response to Ubuntu-core?
-4) Can Yocto build transactionally updated-able bundles for kernel and 
-core-os/root-fs?
-5) Can Yocto [cross-]build snaps or flatpaks?
-6) Will snapd (or whatever flatpak needs) become 1st class ecosystem 
-components?
-	Ex: meta-snappy has a lot of good work but is early days
-	    Currently meta-snappy disables AppArmor & seccomp
-	    snapd does only light ns & cgroup control and relies on
-	      AppArmor to do most of the containment
-             so snapd w/o AppArmor is a demo
-	    [Arch is no better BTW]
-
-Bill
+Ross
 
