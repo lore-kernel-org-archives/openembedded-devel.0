@@ -1,45 +1,45 @@
-Return-Path: <guzaszymon@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id E20D87316B
+Return-Path: <sujith.h@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id CBA797716F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Sep 2016 06:00:24 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id g141so1020937wmd.1
+	Mon, 12 Sep 2016 08:14:57 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id a6so12452721wmc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Sep 2016 23:00:25 -0700 (PDT)
+	Mon, 12 Sep 2016 01:14:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=vPIuQqnDNHosc4GztFvKwOBC+IguJha2713jp9QKQHQ=;
-	b=J6XmrG0MsGTuUOovjiGRm6nJIfuyCoQl/YfKReo17EeZlZ33UNgiOBoa61RR7i8+T0
-	Gi9rSR/isFxA0rJz5TK+ShLoSJIBaSeNDbsJ5t+9Px2fi25XSemZxgq0TdIyd8gnrfWH
-	cB7CgdbeRS1MV00jTVD/X6Jw3zQZVORHhxWJtNdiSvP+bJ9NzyibVowtdgp1ElaGrnEn
-	+ApOc93EO95Z/Lmb5KiyXL3RLyXWyxxecla6Tt+YSfIZvV1r4KwVopwLVUwSPhQuxCNW
-	eHJnEtPevM4bimRY3udlVDeXYw4w1etfYyy/AJLHzL4+KbxQ/qAM/NIMq2Hlvx9RoiHY
-	HhZg==
+	h=from:to:cc:subject:date:message-id;
+	bh=dKWCIFX4hkmc1LGfpty6B1Fka6KEWh/PiBHY61GOVds=;
+	b=LHEAafH3HNoeEmZ8Z7RGiUOn6rDU26ZR9pj/xzItmj1ctZUfA/UTOowZXyVVWkd9RG
+	D2QgiihdlnRN35rTj0wQk4XfBODWkgF48H3pwfbHK8hMGUTCrWzSlqsgLHFLByA4dzVB
+	OHwbg9GZzy4m2mV5Li5LmQOGS20d/8ydHpyTMDYFMnhRfbtNf5ML8UkOubyakmEKzu2M
+	kgEI0hrBoXYV5AGsTBorB3GEyrBKkFlg50PdQv0D493Jd0bGD6BeNp3JLAojaN1uUPYd
+	J05DLyrBKr1jX8UkVBhH7xnowCCSO61McS1FurD0y3CZlH8S1wvXxe1SCTQ/76+hKM3P
+	41eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=vPIuQqnDNHosc4GztFvKwOBC+IguJha2713jp9QKQHQ=;
-	b=SLW1vzctnrIN4H6rdiEY4MAERtaFoWHCaMI3QQjhImszAKGTsCtc1NRJ8z1SLYlirY
-	Ck2qRj3TMIHoeA+OEMEhQwnqp8UxqPg1StqSHkKAdfA4bRBTLUczvlbYPI6LwpXLthLg
-	vuz/9xH76LXgUbQTO2cgIGNlgmwTvk8ncthktiu6VesFMsozrCInmhENaes8a9vJQ2Hw
-	H6bgFiLK5V42Ecn2AuBP9S5llwLFZbe7oq5GUJ3CkXCwLVPyANZZqlM8mpykErQqsdyU
-	jg8/DPx0xorBf2G5pIM67P4qNzsRxOxXC+jPsj/mT+bQ5yenVRBVBSPxGvyPGZy7jsrw
-	hfQw==
-X-Gm-Message-State: AE9vXwMarczLo9jrIX/DbEynd/BcTjJmLPUPGVovR3EbbqUzuA9EPRHTpDYiit8AoVq8m/AsFa3WutftYICwBA==
-X-Received: by 10.194.173.102 with SMTP id bj6mr7666974wjc.22.1473660024340;
-	Sun, 11 Sep 2016 23:00:24 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.28.15.2 with HTTP; Sun, 11 Sep 2016 23:00:23 -0700 (PDT)
-In-Reply-To: <6dde3cd8-e6c9-7883-54a7-3603d57eb6dc@balister.org>
-References: <CAO=ipHJL-FjdSgDE7pCaxUTjh-DcaMthn0y-X=PxqpJRiG+rvw@mail.gmail.com>
-	<6dde3cd8-e6c9-7883-54a7-3603d57eb6dc@balister.org>
-From: Szymon Guza <guzaszymon@gmail.com>
-Date: Mon, 12 Sep 2016 08:00:23 +0200
-Message-ID: <CAO=ipHLWUxu0FZeXizxawURPjZPCn1=0shH2g=L-+AfC=s4u6w@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=dKWCIFX4hkmc1LGfpty6B1Fka6KEWh/PiBHY61GOVds=;
+	b=fczrOsFS/QohDGFtkJZpaIEI+q3dps5fu4H45+GIe/gEI5D2pC4WsKewYQ4ST0uMyZ
+	hZLNYiEt4Ao4s5c6W/U5Tsi66iqMmAaihqNkSOCUkruUJI5F4OTJFVUh0MLIbmc2Qecl
+	t3QgDLc8kPyaT4wpxYOb4pDe9xcjquDrIpVqbbf2VKIc5IQh7xRqAZL6ouyL3kOx1hv0
+	ibCfXRyQQhgpSJOyJevhxra4d/N54mT0ST/Sz0Ggl9Q7d1M8yW/zUewQxDgJeHemZGgv
+	sLGoHBhyP6ePQTRwODeGMGrCSg5JGCfagYVy7yjEPy/xMwmmoLDnjd5TjT7oLSZUq3uv
+	fJXg==
+X-Gm-Message-State: AE9vXwOc4Ww35bRo6ZytpH1foc45uNyG53O8EmsHI4gnVTUSW3jhXPjXjgn10Pc9vl6lBA==
+X-Received: by 10.194.145.229 with SMTP id sx5mr7663840wjb.13.1473668097871;
+	Mon, 12 Sep 2016 01:14:57 -0700 (PDT)
+Received: from kdekidd0.inp-wifi.mentorg.com ([139.181.35.34])
+	by smtp.gmail.com with ESMTPSA id
+	de8sm9173381wjc.24.2016.09.12.01.14.55
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 12 Sep 2016 01:14:57 -0700 (PDT)
+From: Sujith H <sujith.h@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [yocto] problem with openCV
+Date: Mon, 12 Sep 2016 13:44:51 +0530
+Message-Id: <1473668091-5615-1-git-send-email-sujith.h@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Cc: Christopher Larson <chris_larson@mentor.com>
+Subject: [meta-java][PATCH] xpp[23]: fix/remove bashism
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,62 +52,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Sep 2016 06:00:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 12 Sep 2016 08:15:01 -0000
 
-Do you have any tips for me? Where should I search those patches? Or where
-I can find recipes for more recent version? Or Can you tell me if there is
-1.0 version for openCV available for Yocto?
+From: Christopher Larson <chris_larson@mentor.com>
 
-2016-09-11 22:20 GMT+02:00 Philip Balister <philip@balister.org>:
+This was breaking on hosts with dash as /bin/sh.
 
-> On 09/11/2016 02:10 PM, Szymon Guza wrote:
-> > Hello,
-> >
-> > I want to create my own yocto disto image based on core-image-weston with
-> > C/C++ compliers and openCV. But when I'm trying to bitbake openCV error
-> > appears:
-> >
-> > | -- Configuring incomplete, errors occurred!
-> > | See also "/home/admin/Zynq/poky/build/tmp/work/i586-poky-linux/
-> > opencv/3.1+gitAUTOINC+92387b1ef8-r0/build/CMakeFiles/CMakeOutput.log".
-> > | See also "/home/admin/Zynq/poky/build/tmp/work/i586-poky-linux/
-> > opencv/3.1+gitAUTOINC+92387b1ef8-r0/build/CMakeFiles/CMakeError.log".
-> > | WARNING: exit code 1 from a shell command.
-> > | ERROR: Function failed: do_configure (log file is located at
-> > /home/admin/Zynq/poky/build/tmp/work/i586-poky-linux/
-> opencv/3.1+gitAUTOINC+
-> > 92387b1ef8-r0/temp/log.do_configure.7661)
-> > ERROR: Task 278 (/home/admin/Zynq/poky/meta-
-> openembedded/meta-oe/recipes-
-> > support/opencv/opencv_3.1.bb, do_configure) failed with exit code '1'
-> >
-> > It is connected with this:
-> >
-> > This recipe is *blacklisted* by the meta-oe
-> > <https://layers.openembedded.org/layerindex/branch/master/layer/meta-oe/
-> >
-> > layer. The reason provided is:
-> >
-> > BROKEN: fails to build with gcc-6
->
-> This is telling you you need to update the recipe by finding or writing
-> patches so the opencv builds with gcc6. Try looking for a more recent
-> version of opencv and/or patches to address the compile problems.
->
-> Philip
->
-> Philip
->
-> >
-> > ??
-> > Am I right or openCV is now unavailable? Or Am i doing something wrong?
-> > I am looking forward to hearing from you.
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Signed-off-by: Christopher Larson <chris_larson@mentor.com>
+---
+ recipes-core/xml-commons/xpp2_2.1.10.bb    | 2 +-
+ recipes-core/xml-commons/xpp3_1.1.3.4.O.bb | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-core/xml-commons/xpp2_2.1.10.bb b/recipes-core/xml-commons/xpp2_2.1.10.bb
+index d3baca4..c926722 100644
+--- a/recipes-core/xml-commons/xpp2_2.1.10.bb
++++ b/recipes-core/xml-commons/xpp2_2.1.10.bb
+@@ -19,7 +19,7 @@ do_compile() {
+ 
+     sourcepath="src/java/drivers/jaxp11:src/java/drivers/sax2:src/java/impl/factory:src/java/impl/format:src/java/impl/node:src/java/impl/pullparser:src/java/impl/tag:src/java/intf"
+ 
+-    findpath="${sourcepath//:/ }"
++    findpath="$(echo "$sourcepath" | tr : " ")"
+ 
+     javac -sourcepath $sourcepath -d build-oe `find $findpath -name "*.java"`
+ 
+diff --git a/recipes-core/xml-commons/xpp3_1.1.3.4.O.bb b/recipes-core/xml-commons/xpp3_1.1.3.4.O.bb
+index bedb8a9..f264022 100644
+--- a/recipes-core/xml-commons/xpp3_1.1.3.4.O.bb
++++ b/recipes-core/xml-commons/xpp3_1.1.3.4.O.bb
+@@ -19,7 +19,7 @@ do_compile() {
+     mkdir -p build-oe
+ 
+     sourcepath="src/java/api:src/java/builder:src/java/dom2_builder:src/java/mxp1_min:src/java/mxp1_standard:src/java/parser_pool:src/java/sax2_driver:src/java/serializer_impl:src/java/util:src/java/wrapper"
+-    findpath="${sourcepath//:/ }"
++    findpath="$(echo "$sourcepath" | tr : " ")"
+ 
+     javac -sourcepath $sourcepath -d build-oe `find $findpath -name "*.java"`
+ 
+-- 
+1.9.1
+
 
