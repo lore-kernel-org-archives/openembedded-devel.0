@@ -1,40 +1,46 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 2C61E771BF
+Return-Path: <ross.burton@intel.com>
+Received: from mail-it0-f42.google.com (mail-it0-f42.google.com
+	[209.85.214.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 4417F7726C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Sep 2016 15:27:21 +0000 (UTC)
-Received: by mail-wm0-f44.google.com with SMTP id 1so207840134wmz.1
+	Tue, 13 Sep 2016 16:03:49 +0000 (UTC)
+Received: by mail-it0-f42.google.com with SMTP id 186so48941991itf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Sep 2016 08:27:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=ZbhEotjfSmRqVP26OfLjMnxeMJBy+8BWivWcQUm1NVM=;
-	b=EAK1zeIUsJPj0SEjkAPySzTznKZHgOXOkBapRLflkziX+EIOR1LdjZCZmi8Y3sqEcR
-	caLs3VsNYMh1kOic8kDdPxMxPCPM+1jYhFhwB6Y+N6yBbAnJduFR9t9RGchEsVemAIeM
-	4XYhh3UbV/e5Gm9DALRmnssnCuaZwGaXato75K2m0/nuQqQQ8ixv0XqfU9FXCPFtbr4q
-	pKicUvpu1p3uFP0rga4jdarwX9fsxdTshdhPMaZ7L1cdc2Oq4y7HEMDSRoWVlEsdyDyY
-	iBdXoAKALRGP68BDG9MQnWH0J46p+trC92KRjYrF8rOmVs344KMdgtbHj56HhbAG104R
-	nSDw==
+	Tue, 13 Sep 2016 09:03:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=sZ7tW5il5OTdg0y4mPjEfY/T3NoYHwEcH15PZ2nHV4Q=;
+	b=nPFXgH9Prr+RmUkUTUMYVpdXIZQWse0lMTNMu6hV/8rzhNvIwYW3V/9B4w818Dm8FR
+	83U0awoSHHj3Ahe2kAQ3R3phvbySGiZHdbG1+q/cTkyQwWCzMz/sV9Rpc46cnYiyyEpT
+	eDxdR09BFpjDK+ndqQ5MmyEA+6Al+HuyFnYxlvG/JwNxiYO7iYClUDwJFE8Qojappv54
+	jUCqLy7dkOnvbEcUUAxq7mzZ7ASnwKXGL+oyDFT9NvaK/Kn1WVMkVCBoTsWzFs/xdKfU
+	u40v7E+o6xuPI9N4pkZ97I9T/dF6pXvaeg2z6j+cVrS54ITzu6OucNgQXP3bkznW3OMq
+	RhxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=ZbhEotjfSmRqVP26OfLjMnxeMJBy+8BWivWcQUm1NVM=;
-	b=OyDYKpGYUFza0TrBq2VSed7eCT0Ck0icIfxekAp+5+I6Awim9DBjfikLQPh2dC4ZI5
-	i0vChkby+3Whg+ccEPyJaNsoLlFtzssT/17EfNdem5mAUGaAdxNjDvJHuj64Sf7E2h7z
-	GSe9XeWTDqIJMtVUrVu+aOvcQtoM7Cpgl381PtZcjnUPUrBZXfyKIw6B/ZEJAI1H/7Bf
-	k6CmXI2m2/qKK1/6RnDnYi+Vzz4tq/opChPXIzM1Gy1b+rzZ41CJNk/sD3NlVhMlI+J9
-	+QqhFos7nnL+ct3qkYW9TSGhIJ7C+LPtc8+tAySFMXNVygeAcJ6Mf6fWQP0uTIpVfb/Y
-	bv6w==
-X-Gm-Message-State: AE9vXwPCobOuBPjS17m7N2OoctGSVfxk/QuIdOYDlcnuRbMrGC9RvFUPtKySA+JHviNkSaI4a2CHlmoE4rqZtA==
-X-Received: by 10.28.198.206 with SMTP id w197mr1393976wmf.30.1473780442108;
-	Tue, 13 Sep 2016 08:27:22 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=sZ7tW5il5OTdg0y4mPjEfY/T3NoYHwEcH15PZ2nHV4Q=;
+	b=bqb1ruoGoEZz3nIjfgYaLR5sM10Fc9fyaL5RxEWkDeHc0/lsFnbjjf3Z1rjfG0u0Bd
+	UGONs/ZZCjeL3ls2vNC2W46Q+Y+PcUAE9qOFV0RyNoXxgRU6LkeNmldDS+jloupL12sb
+	Qo23Q9A+YzZDqv2qmfmt4Ew/XvQKF532v7T++LD5VazlmYdfv8S74XF+ctLLALD1td4m
+	k+SF/CAYCJXYgNwjkC3wUPM5rrPby2iP0O/K2uLBvkmD/LaXl2iTYy+3BsGDZyudLsGF
+	H3JIHBIlBz9yjXesMsSrCuW949LezHx+eLHHRj/X0e8bLRoKDi9F+U8MfnEHybdAbyXs
+	GSOA==
+X-Gm-Message-State: AE9vXwNu25p9zKEBKYNkKcBSABUj3fA53n3Ma1fk3wRan7JsFZJGLtpzOHCa+jBMNg3VncwaVkpcWsygECsnrFBL
+X-Received: by 10.107.130.203 with SMTP id m72mr3357195ioi.8.1473782607225;
+	Tue, 13 Sep 2016 09:03:27 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.28.128.143 with HTTP; Tue, 13 Sep 2016 08:27:01 -0700 (PDT)
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Tue, 13 Sep 2016 17:27:01 +0200
-Message-ID: <CAPybu_2CDc4eD=vRuEL7TOL2eb0mN=ygDrx0jX8WxmLqqAYnnw@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: update_font_cache intercept: qemu: uncaught target signal 4 (Illegal instruction)
+Received: by 10.107.135.27 with HTTP; Tue, 13 Sep 2016 09:03:06 -0700 (PDT)
+In-Reply-To: <CAPybu_2CDc4eD=vRuEL7TOL2eb0mN=ygDrx0jX8WxmLqqAYnnw@mail.gmail.com>
+References: <CAPybu_2CDc4eD=vRuEL7TOL2eb0mN=ygDrx0jX8WxmLqqAYnnw@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 13 Sep 2016 17:03:06 +0100
+Message-ID: <CAJTo0LY7k+XDcwumMzfZLzOj_iOeKG_svL=QK_drDv_hHdbXhA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: update_font_cache intercept: qemu: uncaught target signal 4 (Illegal instruction)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,33 +53,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Sep 2016 15:27:23 -0000
+X-List-Received-Date: Tue, 13 Sep 2016 16:03:50 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Hi
+On 13 September 2016 at 16:27, Ricardo Ribalda Delgado <
+ricardo.ribalda@gmail.com> wrote:
 
-Anyone else is getting this error while building the image:
+> NOTE: Running intercept scripts:
+> NOTE: > Executing update_font_cache intercept ...
+> qemu: uncaught target signal 4 (Illegal instruction) - core dumped
+> Illegal instruction
+>
 
-NOTE: Running intercept scripts:
-NOTE: > Executing update_font_cache intercept ...
-qemu: uncaught target signal 4 (Illegal instruction) - core dumped
-Illegal instruction
-WARNING: The postinstall intercept hook 'update_font_cache' failed
-(exit code: 132)! See log for details!
-WARNING: The postinstalls for the following packages will be postponed
-for first boot: liberation-fonts cantarell-fonts
-NOTE: > Executing update_pixbuf_cache intercept ...
-NOTE: > Executing update_icon_cache intercept ...
-NOTE: > Executing update_gio_module_cache intercept ...
-NOTE: Executing write_package_manifest ...
+What MACHINE?
 
-
-The image is usable. When I boot it and install other package,
-font_cache is updated properly
-
-
-Thanks!
-
--- 
-Ricardo Ribalda
+Ross
 
