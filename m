@@ -1,49 +1,45 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A909755F8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 82681601A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Sep 2016 20:14:21 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id i130so66830830wmf.0
+	Wed, 14 Sep 2016 21:21:02 +0000 (UTC)
+Received: by mail-wm0-f46.google.com with SMTP id b187so66943608wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Sep 2016 13:14:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=kU6ofzDSlFkTuZLQ/KRGwzBPUT7seEC4yPo0b8AiKU4=;
-	b=ww2kqOf8fLEXDjB0QQQcWlV0GU/42NXpxcWMqiaZTwxeGL23YaxvWSzH8h1HUV+8c4
-	i8sbFbVn00W0H9Fhed5KfIM3m9cfMjV1pFQRi4IFVv5/XJMdO29sKeMkJUIm2cnz0koo
-	Ft/y0Ku5RUmCC3IleIycOH08y9jbkltDsxl7VxvEhvkj5zL1cSjUpJmce1Px36oqqmX7
-	IbBZzVHFlFR22fQLTBlyJH5Tc1mUJGrCICX1lY0QIufvqNqMihaTIxVU6jjK8EmxfQ69
-	aenGzSDq2Fhp9beA1kPd4fx7964d1dpBNKpqV6IxMHO1+R5lbu8TZwXOJ1cp/P/Duhu8
-	9Iiw==
+	Wed, 14 Sep 2016 14:21:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=U49uNwOo400PqS7nqvgGZDW/l8TMrR1EG2r/fdP1RHI=;
+	b=dEUY63XJvRPQHhzWt5XXId4+ZiLkjqgDMhc89GyPBo8oiN9cbcAPm8WsxKaTqfLAT9
+	vjpwqFq905mZ21hWpzVBRMWYQyEO7sddJK55jRtZ/uho6yR5CT8WJ3uQQwG2uQ+JKxXw
+	L34NEIzVZMjVBjDeRyfkQ6848dJn8JP3gWluHMqwO5sCaH/jnzb1+3TirULEjAAIA2UI
+	Fk8cjPXnkaqJbf1ftmoIvw2rwNjhlxS5eI/xI5hjb+rfwXx+WP5HlHnDzeZARCX2dCjO
+	KDEqc4p9kEKUhH/x6WN6nzxM/SX9JdDfTZqD48vykvSSO5xQO+vJGbn9kO+X4TOaapbr
+	2rRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=kU6ofzDSlFkTuZLQ/KRGwzBPUT7seEC4yPo0b8AiKU4=;
-	b=HV6c2KtbLE1sZt7N7d6sFeJsB97xpValqTpCxJKSLDLHaCE/vMsMPfdceQx2odVYkQ
-	CbE1Phd32oFutG/jP3s3uXMUFJG42Zo6w7FdsI+pdDbBeLOoltrqcfqzQOPahfVy5mHR
-	KBUV9BX5KUAI53n8uel+NgQTapqSKA8i9h35mFutRCCSHyLGoDfz/0bApTpVLmK7r4NG
-	MAshk5bpDoxePmrnxt45vRyZMh3k2Je4wJiyZeNKvp5k+jt1ope6MeqNENusrpHAgVjs
-	l6RyajOSkCMAq9gK7ZQFs/VOCCakQzFq+rCkRaCVu/eLYGT8A9Oig/yp7iBgGAsh0Fo/
-	/Seg==
-X-Gm-Message-State: AE9vXwNL45mcVpKhUsVUcdVGZD3/s883XpVKIFXO0MsHP1py/PkN3RlCNX6hTBNLXOLyOw==
-X-Received: by 10.28.47.199 with SMTP id v190mr4689547wmv.28.1473884061625;
-	Wed, 14 Sep 2016 13:14:21 -0700 (PDT)
-Received: from localhost.localdomain (p5B0A0BE9.dip0.t-ipconnect.de.
-	[91.10.11.233]) by smtp.googlemail.com with ESMTPSA id
-	17sm3999350wju.44.2016.09.14.13.14.20
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 14 Sep 2016 13:14:21 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 14 Sep 2016 22:14:08 +0200
-Message-Id: <1473884049-27152-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.5.5
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=U49uNwOo400PqS7nqvgGZDW/l8TMrR1EG2r/fdP1RHI=;
+	b=AsWPIRYuHcPpRdOKMCI9pU8IiOWAxQlpYNeLQ12uuv0RXDex10MQVleyPaZ1Hr0Lxy
+	O1mz+LGD7qGe7IK6gO01Yo8N/nD/d48mcRsDaqzraEQMOBFcALG8uef1dpqtpzZ/SNCg
+	p7MYajDql1lwofxjlekWW29znFMX+yL9/WIhJf2OhEJKIn1d3FgHxPdjtww/lJPdZsaf
+	/bP/BTZwTNC/YPA6OnLGfd0w6quqFZ/H9h1yNXflxhr5haLQrdw9fqHdN9w8zBzGbNt/
+	bzLZGDDy4VurCGSN7lQRfr3qIY9tPWJUL2VGP4h5IiIVuMnp1iSYtnOqxFwD4rL8s4Xu
+	wtEQ==
+X-Gm-Message-State: AE9vXwMSU8yeVZvUUYMOl726eVu3sJDUyfMv1VplOU3xYndOKbDQ1/Kpuz7drAuVrIL6Y8jnEEDYYsaE+U2sqQ==
+X-Received: by 10.194.235.69 with SMTP id uk5mr4512760wjc.53.1473888062987;
+	Wed, 14 Sep 2016 14:21:02 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH] samba: unblacklist
+Received: by 10.80.154.225 with HTTP; Wed, 14 Sep 2016 14:21:02 -0700 (PDT)
+In-Reply-To: <1473884049-27152-2-git-send-email-schnitzeltony@googlemail.com>
+References: <1473884049-27152-1-git-send-email-schnitzeltony@googlemail.com>
+	<1473884049-27152-2-git-send-email-schnitzeltony@googlemail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 14 Sep 2016 23:21:02 +0200
+Message-ID: <CA+chaQdQZLYvVssqqR0-0JPBPHzWSYPTZb1ROro+QKqx3vKMRg@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH] samba: unblacklist and link with bfd on arm only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,22 +52,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Sep 2016 20:14:25 -0000
+X-List-Received-Date: Wed, 14 Sep 2016 21:21:03 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-This should make all happy:
+What about the other 2 issues mentioned in the comment?
 
-* arm people can build again
-* others are not affected
+On Wed, Sep 14, 2016 at 10:14 PM, Andreas M=C3=BCller <
+schnitzeltony@googlemail.com> wrote:
 
-Andreas Müller (1):
-  samba: unblacklist and link with bfd on arm only
-
- meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 8 ++------
- 1 file changed, 2 insertions(+), 6 deletions(-)
-
--- 
-2.5.5
-
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> ---
+>  meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 8 ++------
+>  1 file changed, 2 insertions(+), 6 deletions(-)
+>
+> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> index 7d7fa02..53721b1 100644
+> --- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> +++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> @@ -88,7 +88,8 @@ EXTRA_OECONF +=3D "--enable-fhs \
+>                  "
+>  DISABLE_STATIC =3D ""
+>
+> -LDFLAGS +=3D "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES'=
+,
+> 'ld-is-gold', ' -fuse-ld=3Dbfd ', '', d)}"
+> +LDFLAGS +=3D "-Wl,-z,relro,-z,now"
+> +LDFLAGS_append_arm =3D " ${@bb.utils.contains('DISTRO_FEATURES',
+> 'ld-is-gold', ' -fuse-ld=3Dbfd ', '', d)}"
+>
+>  do_install_append() {
+>      if ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'true', 'false',
+> d)}; then
+> @@ -317,8 +318,3 @@ FILES_${PN}-python-dbg =3D "${libdir}/python${PYTHON_
+> BASEVERSION}/site-packages/.d
+>
+>  RDEPENDS_${PN}-pidl_append =3D " perl"
+>  FILES_${PN}-pidl =3D "${bindir}/pidl ${datadir}/perl5/Parse"
+> -
+> -# http://errors.yoctoproject.org/Errors/Details/81004/
+> -# before this issue it was also failing in do_package and
+> -# autodetecting libpam dependency
+> -PNBLACKLIST[samba] ?=3D "BROKEN: fails to build with new binutils-2.27"
+> --
+> 2.5.5
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
