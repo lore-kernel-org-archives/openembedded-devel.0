@@ -1,24 +1,50 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 599727706E
+Return-Path: <mats.dev.list@gmail.com>
+Received: from mail-lf0-f65.google.com (mail-lf0-f65.google.com
+	[209.85.215.65])
+	by mail.openembedded.org (Postfix) with ESMTP id BF6A5770F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Sep 2016 06:25:33 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u8E6PYDb012058
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 14 Sep 2016 10:45:49 +0000 (UTC)
+Received: by mail-lf0-f65.google.com with SMTP id k12so461268lfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Sep 2016 23:25:34 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 13 Sep 2016 23:25:33 -0700
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 14 Sep 2016 02:25:32 -0400
-Message-ID: <1473834332-210799-1-git-send-email-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Wed, 14 Sep 2016 03:45:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:subject:to:message-id:date:user-agent:mime-version
+	:content-transfer-encoding;
+	bh=1gKBGwm/o25TrSlfXoxzTVTUpgdGL7Tx75nUv/FC77Y=;
+	b=iiE1CTfj+fmue66LnLwbnipIiviHvwpaobxRkGhusqMLLVo8mJRQWcLVtZMvBYwSwR
+	1OV/5y8vMFaDwcIIM7VmR4XkA6gIewwi+/SLwYsHJhqTT1n0KVKiqiydLLLC39v7f6Ml
+	CV1szK30O1xOMK7NQyi7OIH7FcR33SXqkK4Bt1xlxJN6efwR3OfM28VBvWkP0mYtGbwT
+	luk7ZdC0G/zqMQzX6pzrbzkVVSj5TkA2K+lfhq3X1HLjGxENIbxCpzMCU+1hbRDM3Q3f
+	WJFE2HwUT2gYar3dOjaZf6FeS7dvxQxlUxPhOEtSmP7VG5P89YD985nXxtAJPkS+q6gL
+	+Qcg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:subject:to:message-id:date:user-agent
+	:mime-version:content-transfer-encoding;
+	bh=1gKBGwm/o25TrSlfXoxzTVTUpgdGL7Tx75nUv/FC77Y=;
+	b=Rj4AK7/zuhCadWqY4wie4tb/wrGQT/3i/cduycnm9zOglZJB7cyCH4NtKK5cR0+LbW
+	7bybANuYGEL3ijkZAG7SZlhERnbPbl1qWdjOwLe/Yp8oE/wg0G0HuJA9ye3oW2S381Bw
+	DOPSPRw6l9Y2DEEkbRRPN4gV65BRBwXMK0PgYraA0UxnlLuJFX9SUg2zo43qp6znzoRb
+	x6idrWIXnt6jIvnnKSDI+7vwoQbhMbE/DF/ZK83kbI0GdPXDUHdDlLkgKbNoEtyJy5F1
+	T9DZFdRko/2sXTbgzYH4UFfzMmjn+XNfGORgaApf0jyRQv9L8/D0BoKFkASwvAYPD+Wz
+	qvaw==
+X-Gm-Message-State: AE9vXwMO7XG9Ws/sPNi2/5Gy4CSaku0esz8KcWLyN2KebuK6DTo/0gbygvybltsZCsYhcA==
+X-Received: by 10.25.24.91 with SMTP id o88mr757290lfi.81.1473849948669;
+	Wed, 14 Sep 2016 03:45:48 -0700 (PDT)
+Received: from [192.168.1.205] ([195.84.96.49])
+	by smtp.gmail.com with ESMTPSA id
+	l10sm4599381lfd.19.2016.09.14.03.45.47
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 14 Sep 2016 03:45:48 -0700 (PDT)
+From: Mats Karrman <mats.dev.list@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <17c49fd3-d0d9-d00f-69d9-07656bee9c00@gmail.com>
+Date: Wed, 14 Sep 2016 12:45:10 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.2.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] openldap: fix CVE-2015-3276
+Subject: [PATCH] libnl: Fix possible host contamination error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,107 +57,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Sep 2016 06:25:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 14 Sep 2016 10:45:50 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Li Wang <li.wang@windriver.com>
+ From 975b7e64462a465449d367ff6a4e5240a59221d9 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Mats=20K=C3=A4rrman?= <mats@southpole.se>
+Date: Wed, 14 Sep 2016 12:29:27 +0200
+Subject: [PATCH] libnl: Fix possible host contamination error
 
-the patch comes from:
-https://bugzilla.redhat.com/show_bug.cgi?id=1238322
-https://bugzilla.redhat.com/attachment.cgi?id=1055640
-
-The nss_parse_ciphers function in libraries/libldap/tls_m.c in
-OpenLDAP does not properly parse OpenSSL-style multi-keyword mode
-cipher strings, which might cause a weaker than intended cipher to
-be used and allow remote attackers to have unspecified impact via
-unknown vectors.
-
-Signed-off-by: Li Wang <li.wang@windriver.com>
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
 ---
- .../openldap/openldap/openldap-CVE-2015-3276.patch | 59 ++++++++++++++++++++++
- .../recipes-support/openldap/openldap_2.4.44.bb    |  1 +
- 2 files changed, 60 insertions(+)
- create mode 100644 meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch
+  meta/recipes-support/libnl/libnl_3.2.28.bb | 4 ++++
+  1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch b/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch
-new file mode 100644
-index 0000000..de9ca52
---- /dev/null
-+++ b/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2015-3276.patch
-@@ -0,0 +1,59 @@
-+openldap CVE-2015-3276
+  Possibly a cannon to swat a fly but I get "WARNING: libnl-1_3.2.28-r0 
+do_package_qa: QA Issue: libnl: /libnl-nf/usr/lib/libnl-nf-3.so.200.23.0 
+is owned by uid 1001, which is the same as the user running bitbake. 
+This may be due to host contamination [host-user-contaminated]"
+  type errors on every file.
+
+diff --git a/meta/recipes-support/libnl/libnl_3.2.28.bb 
+b/meta/recipes-support/libnl/libnl_3.2.28.bb
+index 26982f3..3fcfbc1 100644
+--- a/meta/recipes-support/libnl/libnl_3.2.28.bb
++++ b/meta/recipes-support/libnl/libnl_3.2.28.bb
+@@ -23,6 +23,10 @@ SRC_URI[sha256sum] = 
+"cd608992c656e8f6e3ab6c1391b162a5a51c49336b9219f7f390e61fc5
+
+  inherit autotools pkgconfig
+
++do_install_append() {
++    chown -R root:root ${D}
++}
 +
-+the patch comes from:
-+https://bugzilla.redhat.com/show_bug.cgi?id=1238322
-+https://bugzilla.redhat.com/attachment.cgi?id=1055640
-+
-+The nss_parse_ciphers function in libraries/libldap/tls_m.c in
-+OpenLDAP does not properly parse OpenSSL-style multi-keyword mode
-+cipher strings, which might cause a weaker than intended cipher to
-+be used and allow remote attackers to have unspecified impact via
-+unknown vectors.
-+
-+Signed-off-by: Li Wang <li.wang@windriver.com>
-+---
-+ libraries/libldap/tls_m.c |   27 ++++++++++++++++-----------
-+ 1 file changed, 16 insertions(+), 11 deletions(-)
-+
-+diff --git a/libraries/libldap/tls_m.c b/libraries/libldap/tls_m.c
-+index 9b101f9..e6f3051 100644
-+--- a/libraries/libldap/tls_m.c
-++++ b/libraries/libldap/tls_m.c
-+@@ -621,18 +621,23 @@ nss_parse_ciphers(const char *cipherstr, int cipher_list[ciphernum])
-+ 			 */
-+ 			if (mask || strength || protocol) {
-+ 				for (i=0; i<ciphernum; i++) {
-+-					if (((ciphers_def[i].attr & mask) ||
-+-						 (ciphers_def[i].strength & strength) ||
-+-						 (ciphers_def[i].version & protocol)) &&
-+-						(cipher_list[i] != -1)) {
-+-						/* Enable the NULL ciphers only if explicity
-+-						 * requested */
-+-						if (ciphers_def[i].attr & SSL_eNULL) {
-+-							if (mask & SSL_eNULL)
-+-								cipher_list[i] = action;
-+-						} else
-++					/* if more than one mask is provided
-++					 * then AND logic applies (to match openssl)
-++					 */
-++					if ( cipher_list[i] == -1) )
-++						continue;
-++					if ( mask && ! (ciphers_def[i].attr & mask) )
-++						continue;
-++					if ( strength && ! (ciphers_def[i].strength & strength) )
-++						continue;
-++					if ( protocol && ! (ciphers_def[i].version & protocol) )
-++						continue;
-++					/* Enable the NULL ciphers only if explicity requested */
-++					if (ciphers_def[i].attr & SSL_eNULL) {
-++						if (mask & SSL_eNULL)
-+ 							cipher_list[i] = action;
-+-					}
-++					} else
-++						cipher_list[i] = action;
-+ 				}
-+ 			} else {
-+ 				for (i=0; i<ciphernum; i++) {
-+-- 
-+1.7.9.5
-+
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.44.bb b/meta-oe/recipes-support/openldap/openldap_2.4.44.bb
-index 48e9066..41f753e 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.44.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.44.bb
-@@ -24,6 +24,7 @@ SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
-     file://initscript \
-     file://slapd.service \
-     file://thread_stub.patch \
-+    file://openldap-CVE-2015-3276.patch \
- "
- 
- SRC_URI[md5sum] = "693ac26de86231f8dcae2b4e9d768e51"
+  FILES_${PN} = "${libdir}/libnl-3.so.* \
+                 ${libdir}/libnl.so.* \
+                 ${sysconfdir}"
 -- 
-2.8.1
+2.1.4
+
 
 
