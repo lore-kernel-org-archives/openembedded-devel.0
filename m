@@ -1,30 +1,30 @@
 Return-Path: <wangxin2015.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id E39D4731D1
+	by mail.openembedded.org (Postfix) with ESMTP id 3F22C731D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Sep 2016 04:57:10 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="10962003"
+	Wed, 14 Sep 2016 04:59:35 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="10962113"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 14 Sep 2016 12:57:10 +0800
+	by heian.cn.fujitsu.com with ESMTP; 14 Sep 2016 12:59:35 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id E62B44623466
+	by cn.fujitsu.com (Postfix) with ESMTP id 4196A4623461
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Sep 2016 12:57:09 +0800 (CST)
+	Wed, 14 Sep 2016 12:59:36 +0800 (CST)
 Received: from ubuntu.g08.fujitsu.local (10.167.226.120) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.279.2; Wed, 14 Sep 2016 12:57:08 +0800
+	Server (TLS) id 14.3.279.2; Wed, 14 Sep 2016 12:59:34 +0800
 From: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 14 Sep 2016 00:57:06 -0400
-Message-ID: <1473829026-3132-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
+Date: Wed, 14 Sep 2016 00:59:33 -0400
+Message-ID: <1473829173-3175-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.120]
-X-yoursite-MailScanner-ID: E62B44623466.A4AAA
+X-yoursite-MailScanner-ID: 4196A4623461.A369D
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: wangxin2015.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-xfce][PATCH] imsettings: 1.6.8 -> 1.7.1
+Subject: [meta-networking][PATCH] lksctp-tools: 1.0.16 -> 1.0.17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,88 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Sep 2016 04:57:13 -0000
+X-List-Received-Date: Wed, 14 Sep 2016 04:59:37 -0000
 Content-Type: text/plain
 
-1) Upgrade imsettings from 1.6.8 to 1.7.1.
-2) Fix the directory structure.
-3) Modify one patch, since the data has been changed.
-    multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
-4) Modify DEPENDS, fix warning.
-    WARNING: imsettings-1.7.1-r0 do_configure: Missing DEPENDS on intltool-native
+Upgrade lksctp-tools from 1.0.16 to 1.0.17.
 
 Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
 ---
- .../{ => imsettings}/gtk-is-required-by-notify.patch         |  0
- ...-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch | 12 +++++-------
- .../{imsettings_1.6.8.bb => imsettings/imsettings_1.7.1.bb}  |  8 ++++----
- 3 files changed, 9 insertions(+), 11 deletions(-)
- rename meta-xfce/recipes-extended/imsettings/{ => imsettings}/gtk-is-required-by-notify.patch (100%)
- rename meta-xfce/recipes-extended/imsettings/{ => imsettings}/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch (61%)
- rename meta-xfce/recipes-extended/{imsettings_1.6.8.bb => imsettings/imsettings_1.7.1.bb} (74%)
+ .../lksctp-tools/{lksctp-tools_1.0.16.bb => lksctp-tools_1.0.17.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/lksctp-tools/{lksctp-tools_1.0.16.bb => lksctp-tools_1.0.17.bb} (94%)
 
-diff --git a/meta-xfce/recipes-extended/imsettings/gtk-is-required-by-notify.patch b/meta-xfce/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
-similarity index 100%
-rename from meta-xfce/recipes-extended/imsettings/gtk-is-required-by-notify.patch
-rename to meta-xfce/recipes-extended/imsettings/imsettings/gtk-is-required-by-notify.patch
-diff --git a/meta-xfce/recipes-extended/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch b/meta-xfce/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
-similarity index 61%
-rename from meta-xfce/recipes-extended/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
-rename to meta-xfce/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
-index 9e31847..d5ac87d 100644
---- a/meta-xfce/recipes-extended/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
-+++ b/meta-xfce/recipes-extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
-@@ -5,16 +5,14 @@ It will cause configure error as follow.
+diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb
+similarity index 94%
+rename from meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
+rename to meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb
+index e6a84cc..11c43ff 100644
+--- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
++++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb
+@@ -14,8 +14,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/lksctp/${BP}.tar.gz \
+     file://v6test.sh \
+ "
  
- Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+-SRC_URI[md5sum] = "708bb0b5a6806ad6e8d13c55b067518e"
+-SRC_URI[sha256sum] = "0903dd526b7f30a89d5031aa2c82757612becc38ed7bc6e4f972f8deae351f26"
++SRC_URI[md5sum] = "68e9b8fa4d4e331029b247b72d46d7a5"
++SRC_URI[sha256sum] = "1aeb204cdb2befc94d9eb3037d1609c9d1d2cd5379d6dd2c0a8ca9b10533aa15"
  
--diff -Nurp imsettings-1.6.8.orig/Makefile.am imsettings-1.6.8/Makefile.am
----- imsettings-1.6.8.orig/Makefile.am	2013-02-08 11:33:59.000000000 +0900
--+++ imsettings-1.6.8/Makefile.am	2015-06-24 14:15:32.070000007 +0900
--@@ -1,9 +1,7 @@
-+diff -Nurp imsettings-1.7.1.orig/Makefile.am imsettings-1.7.1/Makefile.am
-+--- imsettings-1.7.1.orig/Makefile.am	2013-02-08 11:33:59.000000000 +0900
-++++ imsettings-1.7.1/Makefile.am	2015-06-24 14:15:32.070000007 +0900
-+@@ -1,7 +1,7 @@
-  NULL =
-  SUBDIRS = data imsettings imsettings-daemon backends utils po tests docs
-  
---ACLOCAL_AMFLAGS =			\
---	-I m4macros			\
---	$(NULL)
-+-ACLOCAL_AMFLAGS = -Im4macros
- +ACLOCAL_AMFLAGS = -I m4macros $(NULL)
-  
-  CONFIGURE_DEPENDENCIES =		\
-diff --git a/meta-xfce/recipes-extended/imsettings_1.6.8.bb b/meta-xfce/recipes-extended/imsettings/imsettings_1.7.1.bb
-similarity index 74%
-rename from meta-xfce/recipes-extended/imsettings_1.6.8.bb
-rename to meta-xfce/recipes-extended/imsettings/imsettings_1.7.1.bb
-index 699547d..8c04db6 100644
---- a/meta-xfce/recipes-extended/imsettings_1.6.8.bb
-+++ b/meta-xfce/recipes-extended/imsettings/imsettings_1.7.1.bb
-@@ -13,8 +13,8 @@ SRC_URI = "https://bitbucket.org/tagoh/imsettings/downloads/${BPN}-${PV}.tar.bz2
-            file://gtk-is-required-by-notify.patch \
-            file://multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch"
- 
--SRC_URI[md5sum] = "c31429f1d60e36d7f811f871c75b6c41"
--SRC_URI[sha256sum] = "2620ffbf9a6dc842dbf994b4773d4fe355eb77076ccf33f726ba63f16c0d08ba"
-+SRC_URI[md5sum] = "ab439e21a7d86fa99fbc04586c755349"
-+SRC_URI[sha256sum] = "12c35352386057ba68d69a0b7d9a1d0d01ebbd893aafe0a094c3158c8079ac9a"
- 
- LICENSE = "LGPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
-@@ -23,8 +23,8 @@ EXTRA_OECONF = "--with-xinputsh=50-xinput.sh \
-                 --disable-static \
-                "
- 
--DEPENDS = "gtk+ gconf libnotify dbus-glib libgxim xfconf"
-+DEPENDS = "gtk+ gconf libnotify dbus-glib libgxim xfconf intltool-native"
- 
- RDEPENDS_${PN} += "bash"
- 
--FILES_${PN} += "${datadir}/dbus-1/*"
-+FILES_${PN} += "${datadir}/dbus-1/* ${datadir}/gir-1.0/* ${libdir}/girepository-1.0/*"
+ #| arm-oe-linux-gnueabi-libtool: link: arm-oe-linux-gnueabi-gcc  -march=armv5te -marm -mthumb-interwork --sysroot=/home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemuarm -shared  -fPIC -DPIC  .libs/bindx.o .libs/connectx.o .libs/peeloff.o .libs/opt_info.o .libs/addrs.o .libs/sendmsg.o .libs/recvmsg.o    -march=armv5te -marm -mthumb-interwork --sysroot=/home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemuarm -O2 -Wl,--version-script=/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnueabi/lksctp-tools/1.0.16-r0/lksctp-tools-1.0.16/src/lib/Versions.map -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed   -Wl,-soname -Wl,libsctp.so.1 -o .libs/libsctp.so.1.0.16
+ #| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.0/ld: error: symbol sctp_connectx has undefined version
 -- 
 2.7.4
 
