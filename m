@@ -1,52 +1,30 @@
-Return-Path: <mike.looijmans@topicproducts.com>
-X-Greylist: delayed 1856 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 14 Sep 2016 12:26:30 UTC
-Received: from mx12-14.smtp.antispamcloud.com (mx12-14.smtp.antispamcloud.com
-	[46.165.232.184])
-	by mail.openembedded.org (Postfix) with ESMTP id A6F05734B8
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A40573285
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Sep 2016 12:26:30 +0000 (UTC)
-Received: from [37.74.225.130] (helo=TOP-EX01.TOPIC.LOCAL)
-	by mx12.antispamcloud.com with esmtps (TLSv1:AES256-SHA:256)
-	(Exim 4.85) (envelope-from <mike.looijmans@topicproducts.com>)
-	id 1bk8mo-0007Qx-9N for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Sep 2016 13:55:31 +0200
-Received: from [192.168.80.121] (192.168.80.121) by webmail.topic.nl
-	(192.168.10.102) with Microsoft SMTP Server (TLS) id 14.3.224.2;
-	Wed, 14 Sep 2016 13:55:29 +0200
-To: <openembedded-devel@lists.openembedded.org>
-References: <17c49fd3-d0d9-d00f-69d9-07656bee9c00@gmail.com>
-From: Mike Looijmans <mike.looijmans@topic.nl>
-Organization: TOPIC
-Message-ID: <57D93AB0.2010305@topic.nl>
-Date: Wed, 14 Sep 2016 13:55:28 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.8.0
+	Wed, 14 Sep 2016 12:27:21 +0000 (UTC)
+Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
+	by relay1.mentorg.com with esmtp 
+	id 1bk9He-0001ft-3t from Joe_MacDonald@mentor.com ;
+	Wed, 14 Sep 2016 05:27:22 -0700
+Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
+	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 14 Sep 2016 05:27:21 -0700
+Received: by burninator (Postfix, from userid 1000)	id ADAE45807FB; Wed, 14
+	Sep 2016 08:27:20 -0400 (EDT)
+Date: Wed, 14 Sep 2016 08:27:20 -0400
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+Message-ID: <20160914122720.GD25499@mentor.com>
+References: <1473829173-3175-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <17c49fd3-d0d9-d00f-69d9-07656bee9c00@gmail.com>
-X-Originating-IP: [192.168.80.121]
-X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
-X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
-X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W6KAUC/fjyuDn
-	NXFr4uarw8GIk4znw5EcwHHi+ra9lypEmJCbamfqLB4wH/k+k+Tftor9O5jjWZI633McN2M/OUXR
-	4XktS92Fqq3Qa0exZrH30SrPk8tfaSF+RZrpk8YKU12d2pmLLkAmzasehlwbl330I7d8n7Wa3GQ1
-	Gavb9/w+DKA2NNvQHVv9U39IvZ21x85OM4GWP9JQ/hHPc9c4dspy46MY4AXC06EFbOC1uAoX2ECf
-	0tidf4f9xbnt4dr3ucE6FVHy9oQcVLiVeDoadp8jI9oH6dGc6edzLFJtSM1o5rQC2VE4ySdZe0mi
-	K6wgOmG6/54gza7q5Za0AFsz6J51OyFNIoaxpS1mXZNdroDdpaan89csPuxNcrcm3g0VrZ+7KIxe
-	L9a8yWCRhadOUlss+n2ffnQxt6aJ7klZab+9g1L5kxBIYGB7BJyUdlmpOtqAyNDaGu3M3V4NLSLw
-	IF/664n8xZZ193ZhZHjQXRtPWfCpEalZkqHbJcTqNjqGWxwNFavLErUb39TUKcCiO2iH1Wgh6RAe
-	nBR+licROGa7w33/14GVkNZ6okgvMpPoU75prjeyjuZlW2IsigoonmNIBxN+8iLMjiqr6CILtV73
-	kf3bHfLz5oIsvwONwYzu
-X-Report-Abuse-To: spam@mx99.antispamcloud.com
-X-Originating-IP: 37.74.225.130
-X-SpamExperts-Domain: topic.nl
-X-SpamExperts-Username: 37.74.225.128/28
-Authentication-Results: antispamcloud.com;
-	auth=pass smtp.auth=37.74.225.128/28@topic.nl
-X-SpamExperts-Outgoing-Class: ham
-X-SpamExperts-Outgoing-Evidence: SB/global_tokens (0.00311722141238)
-X-Recommended-Action: accept
-Subject: Re: [PATCH] libnl: Fix possible host contamination error
+In-Reply-To: <1473829173-3175-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] lksctp-tools: 1.0.16 -> 1.0.17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,72 +37,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Sep 2016 12:26:34 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
+X-List-Received-Date: Wed, 14 Sep 2016 12:27:22 -0000
+X-Groupsio-MsgNum: 63112
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Hf61M2y+wYpnELGG"
+Content-Disposition: inline
+
+--Hf61M2y+wYpnELGG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-=EF=BB=BFUsually this is the result from using a "cp" (typically "cp -r") c=
-ommand in=20
-the install script instead of "install". Use "install" if possible, patch t=
-he=20
-makefile if you have to. If the install script uses "cp -r", add a few extr=
-a=20
---preserve options to the command to prevent it overriding ownership.
+[[oe] [meta-networking][PATCH] lksctp-tools: 1.0.16 -> 1.0.17] On 16.09.14 =
+(Wed 00:59) Wang Xin wrote:
 
-On 14-09-16 12:45, Mats Karrman wrote:
->  From 975b7e64462a465449d367ff6a4e5240a59221d9 Mon Sep 17 00:00:00 2001
-> From: =3D?UTF-8?q?Mats=3D20K=3DC3=3DA4rrman?=3D <mats@southpole.se>
-> Date: Wed, 14 Sep 2016 12:29:27 +0200
-> Subject: [PATCH] libnl: Fix possible host contamination error
->
+> Upgrade lksctp-tools from 1.0.16 to 1.0.17.
+>=20
+> Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+
+Is this any different than the one you sent out on Monday?  It looks
+like an accidental re-send, but I thought I'd ask in case you intended
+to send something different.
+
+-J.
+
 > ---
->   meta/recipes-support/libnl/libnl_3.2.28.bb | 4 ++++
->   1 file changed, 4 insertions(+)
->
->   Possibly a cannon to swat a fly but I get "WARNING: libnl-1_3.2.28-r0
-> do_package_qa: QA Issue: libnl: /libnl-nf/usr/lib/libnl-nf-3.so.200.23.0 =
-is
-> owned by uid 1001, which is the same as the user running bitbake. This ma=
-y be
-> due to host contamination [host-user-contaminated]"
->   type errors on every file.
->
-> diff --git a/meta/recipes-support/libnl/libnl_3.2.28.bb
-> b/meta/recipes-support/libnl/libnl_3.2.28.bb
-> index 26982f3..3fcfbc1 100644
-> --- a/meta/recipes-support/libnl/libnl_3.2.28.bb
-> +++ b/meta/recipes-support/libnl/libnl_3.2.28.bb
-> @@ -23,6 +23,10 @@ SRC_URI[sha256sum] =3D
-> "cd608992c656e8f6e3ab6c1391b162a5a51c49336b9219f7f390e61fc5
->
->   inherit autotools pkgconfig
->
-> +do_install_append() {
-> +    chown -R root:root ${D}
-> +}
-> +
->   FILES_${PN} =3D "${libdir}/libnl-3.so.* \
->                  ${libdir}/libnl.so.* \
->                  ${sysconfdir}"
+>  .../lksctp-tools/{lksctp-tools_1.0.16.bb =3D> lksctp-tools_1.0.17.bb}   =
+| 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-networking/recipes-support/lksctp-tools/{lksctp-tools_1.0.16=
+=2Ebb =3D> lksctp-tools_1.0.17.bb} (94%)
+>=20
+> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.=
+0.16.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.=
+bb
+> similarity index 94%
+> rename from meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0=
+=2E16.bb
+> rename to meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.1=
+7.bb
+> index e6a84cc..11c43ff 100644
+> --- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
+> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb
+> @@ -14,8 +14,8 @@ SRC_URI =3D "${SOURCEFORGE_MIRROR}/lksctp/${BP}.tar.gz \
+>      file://v6test.sh \
+>  "
+> =20
+> -SRC_URI[md5sum] =3D "708bb0b5a6806ad6e8d13c55b067518e"
+> -SRC_URI[sha256sum] =3D "0903dd526b7f30a89d5031aa2c82757612becc38ed7bc6e4=
+f972f8deae351f26"
+> +SRC_URI[md5sum] =3D "68e9b8fa4d4e331029b247b72d46d7a5"
+> +SRC_URI[sha256sum] =3D "1aeb204cdb2befc94d9eb3037d1609c9d1d2cd5379d6dd2c=
+0a8ca9b10533aa15"
+> =20
+>  #| arm-oe-linux-gnueabi-libtool: link: arm-oe-linux-gnueabi-gcc  -march=
+=3Darmv5te -marm -mthumb-interwork --sysroot=3D/home/jenkins/oe/world/shr-c=
+ore/tmp-eglibc/sysroots/qemuarm -shared  -fPIC -DPIC  .libs/bindx.o .libs/c=
+onnectx.o .libs/peeloff.o .libs/opt_info.o .libs/addrs.o .libs/sendmsg.o .l=
+ibs/recvmsg.o    -march=3Darmv5te -marm -mthumb-interwork --sysroot=3D/home=
+/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemuarm -O2 -Wl,--version-sc=
+ript=3D/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnu=
+eabi/lksctp-tools/1.0.16-r0/lksctp-tools-1.0.16/src/lib/Versions.map -Wl,-O=
+1 -Wl,--hash-style=3Dgnu -Wl,--as-needed   -Wl,-soname -Wl,libsctp.so.1 -o =
+=2Elibs/libsctp.so.1.0.16
+>  #| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/=
+libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.0/ld: error: symb=
+ol sctp_connectx has undefined version
+> --=20
+> 2.7.4
+>=20
+>=20
+>=20
+--=20
+-Joe MacDonald.
+:wq
 
+--Hf61M2y+wYpnELGG
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
 
-Kind regards,
+iQEcBAEBAgAGBQJX2UIoAAoJEEn8ffcsOfaWQ00IAML985XA35bknqeuw79eOHbE
++UKAvRfQJcx1KO7na9XJNKFfpS6IM70HCN8SYjG1JmgFp87bIqj36tzrM2BqYoqR
+ib/gBrQ584nAU4fzD2SlS5ZLH7IEQMnKesNiAeInOg6zLyNBE3wAyqLZJfV2TAvo
+SQkL6Mtyr+kkP6VCVHkpFLXJMFqXERX4LUZl8AGfQmpmdhFHe1/YCf52f5ObDvP8
+LaJJSSGEvgPOhfjQU+Q2wqdn3l3Y944gM5/16qkBbYsafsHMiQ3LFIpyy9ww9rQJ
+wlTgGb06R2s+DyImf6QhtE/wwQsUdcmEI3oLo41ncrpA90rohiCDdr/SzADoKMk=
+=eheU
+-----END PGP SIGNATURE-----
 
-Mike Looijmans
-System Expert
-
-TOPIC Products
-Materiaalweg 4, NL-5681 RJ Best
-Postbus 440, NL-5680 AK Best
-Telefoon: +31 (0) 499 33 69 79
-E-mail: mike.looijmans@topicproducts.com
-Website: www.topicproducts.com
-
-Please consider the environment before printing this e-mail
-
-Topic zoekt gedreven (embedded) software specialisten!
-http://topic.nl/vacancy/topic-zoekt-technische-software-engineers/
-
-
-
+--Hf61M2y+wYpnELGG--
