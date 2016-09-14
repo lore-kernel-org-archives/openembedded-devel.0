@@ -1,30 +1,50 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A40573285
+Return-Path: <piotr.lewicki@elfin.de>
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A5346011F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Sep 2016 12:27:21 +0000 (UTC)
-Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
-	by relay1.mentorg.com with esmtp 
-	id 1bk9He-0001ft-3t from Joe_MacDonald@mentor.com ;
-	Wed, 14 Sep 2016 05:27:22 -0700
-Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
-	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
-	Wed, 14 Sep 2016 05:27:21 -0700
-Received: by burninator (Postfix, from userid 1000)	id ADAE45807FB; Wed, 14
-	Sep 2016 08:27:20 -0400 (EDT)
-Date: Wed, 14 Sep 2016 08:27:20 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
-Message-ID: <20160914122720.GD25499@mentor.com>
-References: <1473829173-3175-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
+	Wed, 14 Sep 2016 12:39:23 +0000 (UTC)
+Received: by mail-wm0-f41.google.com with SMTP id 1so28391028wmz.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Sep 2016 05:39:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=elfin.de; s=google;
+	h=to:from:subject:message-id:date:user-agent:mime-version
+	:content-transfer-encoding;
+	bh=LPaPQscLYj/HO/KOEYgSLtb+itgRkiTI9M0w/iaG1jo=;
+	b=KHiZO0hKNRJV5HclLe7M2tEgi94095CKnWWijlyMkpgFWPMDO+xVltRfUHmQZdc7jU
+	s/n+cicXJAv6UerRXGkXL92RkN9U2s/Y9kczWjnfIG/ZkTJAKJ55aLf2yQBp4qWC06Bd
+	CiHXiHSUPNMyxFVFjfd9MglAKuhgsEU1LxFyvaOaB2lPcrC3HNgEF48I+cOAXmUnPNpt
+	AK6nZTC0hVubhfw+O/jdp0/P0U+REyMz45P53I7A71cLiJN2J4faDA+QzMst7dRvjzjA
+	qYNRME9Gcmdr3E++UPIpVdo29FeMkayFnoAmyzagi5YxiQkiFgzdKdtNuRdVVL59MWJ5
+	Iqog==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+	:mime-version:content-transfer-encoding;
+	bh=LPaPQscLYj/HO/KOEYgSLtb+itgRkiTI9M0w/iaG1jo=;
+	b=jDTJrSiHX6sPr3eL6dywR0l+WvwdFjHR2BsI0ICcbXBxcxTVeJEk5WXLrcJjco5QmQ
+	m1P2oPSqqylKqy1HM7joZC8Uf7gcDkL/39eSb3NbyL0dent9znyRnFeSVuehK1uOjV+t
+	PkKTC5wA1f6r1ycdlRUS/qQHmjZbmhDU/d99HQer+iMJh7/q6ySG1vZkbfA69bjsfIWI
+	aHbk4YRF5bv2Izr3pP+Wl/+5zDEAMDaYbWNl9HdICb64fPD2qKgl2/NcQt6v2+Av+F2U
+	NVjK4HguLlypkL6h9CyuMZRCBdrF5nLAvKpkg+hkGpp7qEMYQDcbkpA5+IdmAw+PWkEN
+	y9xg==
+X-Gm-Message-State: AE9vXwNZQt+zdAMY7cDq5eXVdG0W3KeHvhTiaBDrXdpmfKQO6o8Ol/1vS6xQtEIGLvG4pQ==
+X-Received: by 10.194.243.10 with SMTP id wu10mr2430340wjc.130.1473856763986; 
+	Wed, 14 Sep 2016 05:39:23 -0700 (PDT)
+Received: from [192.168.2.170] (b2b-94-79-174-114.unitymedia.biz.
+	[94.79.174.114]) by smtp.gmail.com with ESMTPSA id
+	bl3sm4013749wjc.26.2016.09.14.05.39.23
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 14 Sep 2016 05:39:23 -0700 (PDT)
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+From: "piotr.lewicki" <piotr.lewicki@elfin.de>
+Message-ID: <3a7cc6c5-fec8-ee48-5492-8e3d91488bc1@elfin.de>
+Date: Wed, 14 Sep 2016 14:39:22 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.2.0
 MIME-Version: 1.0
-In-Reply-To: <1473829173-3175-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] lksctp-tools: 1.0.16 -> 1.0.17
+Subject: [meta-qt5][bug] configure step of qtdeclarative fail during "populate_sdk" step
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,95 +57,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Sep 2016 12:27:22 -0000
-X-Groupsio-MsgNum: 63112
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Hf61M2y+wYpnELGG"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 14 Sep 2016 12:39:24 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---Hf61M2y+wYpnELGG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-[[oe] [meta-networking][PATCH] lksctp-tools: 1.0.16 -> 1.0.17] On 16.09.14 =
-(Wed 00:59) Wang Xin wrote:
+I just tried to execute "populate_sdk" step but my build failed due to 
+the error in "nativesdk-qtdeclarative". (log below)
 
-> Upgrade lksctp-tools from 1.0.16 to 1.0.17.
->=20
-> Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+I use the newest version of meta-qt5 
+(4656ab3636c099906989e0d923e1ac7a8ffe7b31) and I'm building an image for 
+raspberry pi.
 
-Is this any different than the one you sent out on Monday?  It looks
-like an accidental re-send, but I thought I'd ask in case you intended
-to send something different.
+Could you help me with this?
 
--J.
 
-> ---
->  .../lksctp-tools/{lksctp-tools_1.0.16.bb =3D> lksctp-tools_1.0.17.bb}   =
-| 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-networking/recipes-support/lksctp-tools/{lksctp-tools_1.0.16=
-=2Ebb =3D> lksctp-tools_1.0.17.bb} (94%)
->=20
-> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.=
-0.16.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.=
-bb
-> similarity index 94%
-> rename from meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0=
-=2E16.bb
-> rename to meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.1=
-7.bb
-> index e6a84cc..11c43ff 100644
-> --- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.16.bb
-> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb
-> @@ -14,8 +14,8 @@ SRC_URI =3D "${SOURCEFORGE_MIRROR}/lksctp/${BP}.tar.gz \
->      file://v6test.sh \
->  "
-> =20
-> -SRC_URI[md5sum] =3D "708bb0b5a6806ad6e8d13c55b067518e"
-> -SRC_URI[sha256sum] =3D "0903dd526b7f30a89d5031aa2c82757612becc38ed7bc6e4=
-f972f8deae351f26"
-> +SRC_URI[md5sum] =3D "68e9b8fa4d4e331029b247b72d46d7a5"
-> +SRC_URI[sha256sum] =3D "1aeb204cdb2befc94d9eb3037d1609c9d1d2cd5379d6dd2c=
-0a8ca9b10533aa15"
-> =20
->  #| arm-oe-linux-gnueabi-libtool: link: arm-oe-linux-gnueabi-gcc  -march=
-=3Darmv5te -marm -mthumb-interwork --sysroot=3D/home/jenkins/oe/world/shr-c=
-ore/tmp-eglibc/sysroots/qemuarm -shared  -fPIC -DPIC  .libs/bindx.o .libs/c=
-onnectx.o .libs/peeloff.o .libs/opt_info.o .libs/addrs.o .libs/sendmsg.o .l=
-ibs/recvmsg.o    -march=3Darmv5te -marm -mthumb-interwork --sysroot=3D/home=
-/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/qemuarm -O2 -Wl,--version-sc=
-ript=3D/home/jenkins/oe/world/shr-core/tmp-eglibc/work/armv5te-oe-linux-gnu=
-eabi/lksctp-tools/1.0.16-r0/lksctp-tools-1.0.16/src/lib/Versions.map -Wl,-O=
-1 -Wl,--hash-style=3Dgnu -Wl,--as-needed   -Wl,-soname -Wl,libsctp.so.1 -o =
-=2Elibs/libsctp.so.1.0.16
->  #| /home/jenkins/oe/world/shr-core/tmp-eglibc/sysroots/x86_64-linux/usr/=
-libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.0/ld: error: symb=
-ol sctp_connectx has undefined version
-> --=20
-> 2.7.4
->=20
->=20
->=20
---=20
--Joe MacDonald.
-:wq
+Thank you,
 
---Hf61M2y+wYpnELGG
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Piotr Lewicki
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
 
-iQEcBAEBAgAGBQJX2UIoAAoJEEn8ffcsOfaWQ00IAML985XA35bknqeuw79eOHbE
-+UKAvRfQJcx1KO7na9XJNKFfpS6IM70HCN8SYjG1JmgFp87bIqj36tzrM2BqYoqR
-ib/gBrQ584nAU4fzD2SlS5ZLH7IEQMnKesNiAeInOg6zLyNBE3wAyqLZJfV2TAvo
-SQkL6Mtyr+kkP6VCVHkpFLXJMFqXERX4LUZl8AGfQmpmdhFHe1/YCf52f5ObDvP8
-LaJJSSGEvgPOhfjQU+Q2wqdn3l3Y944gM5/16qkBbYsafsHMiQ3LFIpyy9ww9rQJ
-wlTgGb06R2s+DyImf6QhtE/wwQsUdcmEI3oLo41ncrpA90rohiCDdr/SzADoKMk=
-=eheU
------END PGP SIGNATURE-----
+ERROR: nativesdk-qtdeclarative-5.7.0+gitAUTOINC+d48b397cc7-r0 
+do_configure: Error calling 
+/home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/sysroots/x86_64-linux/usr/bin/qt5/qmake 
+-makefile -o Makefile     CONFIG+=OE_QTXMLPATTERNS_ENABLED 
+/home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qtdeclarative/5.7.0+gitAUTOINC+d48b397cc7-r0/git/qtdeclarative.pro 
 
---Hf61M2y+wYpnELGG--
+ERROR: nativesdk-qtdeclarative-5.7.0+gitAUTOINC+d48b397cc7-r0 
+do_configure: Function failed: do_configure (log file is located at 
+/home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qtdeclarative/5.7.0+gitAUTOINC+d48b397cc7-r0/temp/log.do_configure.17400)
+ERROR: Logfile of failure stored in: 
+/home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qtdeclarative/5.7.0+gitAUTOINC+d48b397cc7-r0/temp/log.do_configure.17400
+Log data follows:
+| DEBUG: Executing python function sysroot_cleansstate
+| DEBUG: Python function sysroot_cleansstate finished
+| DEBUG: Executing shell function qmake5_base_preconfigure
+| Previously configured separate build directory detected, cleaning 
+/home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qtdeclarative/5.7.0+gitAUTOINC+d48b397cc7-r0/build
+| DEBUG: Shell function qmake5_base_preconfigure finished
+| DEBUG: Executing shell function do_configure
+| NOTE: qmake prevar substitution: ' CONFIG+=OE_QTXMLPATTERNS_ENABLED'
+| ERROR: Error calling 
+/home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/sysroots/x86_64-linux/usr/bin/qt5/qmake 
+-makefile -o Makefile     CONFIG+=OE_QTXMLPATTERNS_ENABLED 
+/home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qtdeclarative/5.7.0+gitAUTOINC+d48b397cc7-r0/git/qtdeclarative.pro
+| 
+/home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qtdeclarative/5.7.0+gitAUTOINC+d48b397cc7-r0/git/.qmake.conf:1: 
+Cannot find feature qt_build_config
+| Could not find qmake configuration file linux-oe-g++.
+| Error processing project file: 
+/home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qtdeclarative/5.7.0+gitAUTOINC+d48b397cc7-r0/git/qtdeclarative.pro
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_configure (log file is located at 
+/home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qtdeclarative/5.7.0+gitAUTOINC+d48b397cc7-r0/temp/log.do_configure.17400)
+ERROR: Task 
+virtual:nativesdk:/home/piotr.lewicki/yocto-raspberry/2016-08-15/build/../layers/meta-qt5/recipes-qt/qt5/qtdeclarative_git.bb:do_configure 
+(virtual:nativesdk:/home/piotr.lewicki/yocto-raspberry/2016-08-15/build/../layers/meta-qt5/recipes-qt/qt5/qtdeclarative_git.bb:do_configure) 
+failed with exit code '1'
+NOTE: Tasks Summary: Attempted 4627 tasks of which 4573 didn't need to 
+be rerun and 1 failed.
+NOTE: Writing buildhistory
+
+Summary: 1 task failed:
+virtual:nativesdk:/home/piotr.lewicki/yocto-raspberry/2016-08-15/build/../layers/meta-qt5/recipes-qt/qt5/qtdeclarative_git.bb:do_configure
+Summary: There were 2 ERROR messages shown, returning a non-zero exit code.
+
+
