@@ -1,24 +1,30 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B2C460851
+Return-Path: <wangxin2015.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 8CB04731D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Sep 2016 03:40:48 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u8E3en6B013839
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 14 Sep 2016 04:52:05 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="10961847"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 14 Sep 2016 12:52:04 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id AE8A94623461
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Sep 2016 20:40:49 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Tue, 13 Sep 2016 20:40:48 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <Haiqing.Bai@windriver.com>
-Date: Wed, 14 Sep 2016 11:37:53 +0800
-Message-ID: <1473824273-29398-1-git-send-email-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Wed, 14 Sep 2016 12:52:01 +0800 (CST)
+Received: from ubuntu.g08.fujitsu.local (10.167.226.120) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.279.2; Wed, 14 Sep 2016 12:52:00 +0800
+From: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 14 Sep 2016 00:51:57 -0400
+Message-ID: <1473828717-3079-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] networkmanager: Fix package splitting and systemd service issue
+X-Originating-IP: [10.167.226.120]
+X-yoursite-MailScanner-ID: AE8A94623461.A679C
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangxin2015.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-networking][PATCH] drbd-utils: 8.9.3 -> 8.9.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,109 +37,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Sep 2016 03:40:49 -0000
+X-List-Received-Date: Wed, 14 Sep 2016 04:52:11 -0000
 Content-Type: text/plain
 
-From: Haiqing Bai <Haiqing.Bai@windriver.com>
+1) Upgrade drbd-utils from 8.9.3 to 8.9.6.
+2) Delete one patch, since the data has been changed.
+    0001-Makefile.in-don-t-compile-documentation.patch
+3) Modify EXTRA_OECONF, since the documentation file is not suitable for cross-compile, so we do not compile it.
 
-* Put binary "/usr/bin/nm-online" into main package
-  as the systemd service "NetworkManager-wait-online.service"
-  is provided by main package and it needs to run
-  "/usr/bin/nm-online"
-* Correct "NetworkManager-wait-online.service.in"
-  to avoid dependency circle and get right service status
-
-Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
-Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
 ---
- ...ger-fixed-issues-of-NetworkManager-wait-o.patch | 44 ++++++++++++++++++++++
- .../networkmanager/networkmanager_1.0.12.bb        |  7 +---
- 2 files changed, 46 insertions(+), 5 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-networkmanager-fixed-issues-of-NetworkManager-wait-o.patch
+ .../drbd/{drbd-utils_8.9.3.bb => drbd-utils_8.9.6.bb}               | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-support/drbd/{drbd-utils_8.9.3.bb => drbd-utils_8.9.6.bb} (86%)
 
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-networkmanager-fixed-issues-of-NetworkManager-wait-o.patch b/meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-networkmanager-fixed-issues-of-NetworkManager-wait-o.patch
-new file mode 100644
-index 0000000..4eb9e21
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager/0002-networkmanager-fixed-issues-of-NetworkManager-wait-o.patch
-@@ -0,0 +1,44 @@
-+From 0690452b863286e524d2037427816b7850301f93 Mon Sep 17 00:00:00 2001
-+From: Haiqing Bai <Haiqing.Bai@windriver.com>
-+Date: Tue, 6 Sep 2016 09:27:38 +0800
-+Subject: [PATCH] networkmanager: fixed issues of
-+ NetworkManager-wait-online.service.in.
-+
-+Remove network.target in "Before" to avoid circle dependency.
-+Wants=network.target
-+Before=network.target network-online.target
-+
-+Correct the "WantedBy" to network-online.target.
-+
-+Upstream-status: Pending
-+
-+Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
-+---
-+ data/NetworkManager-wait-online.service.in | 7 ++++---
-+ 1 file changed, 4 insertions(+), 3 deletions(-)
-+
-+diff --git a/data/NetworkManager-wait-online.service.in b/data/NetworkManager-wait-online.service.in
-+index 6ad6942..1753d20 100644
-+--- a/data/NetworkManager-wait-online.service.in
-++++ b/data/NetworkManager-wait-online.service.in
-+@@ -1,13 +1,14 @@
-+ [Unit]
-+ Description=Network Manager Wait Online
-++Documentation=man:nm-online(1)
-+ Requisite=NetworkManager.service
-+ After=NetworkManager.service
-+-Wants=network.target
-+-Before=network.target network-online.target
-++Before=network-online.target
-+ 
-+ [Service]
-+ Type=oneshot
-+ ExecStart=@bindir@/nm-online -s -q --timeout=30
-++RemainAfterExit=yes
-+ 
-+ [Install]
-+-WantedBy=multi-user.target
-++WantedBy=network-online.target
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.12.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.12.bb
-index 56ca847..9134880 100644
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.12.bb
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.0.12.bb
-@@ -16,6 +16,7 @@ SRC_URI = " \
-     file://0001-don-t-try-to-run-sbin-dhclient-to-get-the-version-nu.patch \
-     file://0002-add-pkg-config-for-libgcrypt.patch \
-     file://0006-Fix-nm-version-macro-includes.patch \
-+    file://0002-networkmanager-fixed-issues-of-NetworkManager-wait-o.patch \
- "
- SRC_URI[md5sum] = "ebb273456a81ccf9dfaf2461061b0e96"
- SRC_URI[sha256sum] = "3a470f8c60109b1acb5784ddc2423501706b5fe34c793a6faee87e591eb04a9e"
-@@ -62,7 +63,7 @@ PACKAGECONFIG[ifupdown] = "--enable-ifupdown,--disable-ifupdown"
- PACKAGECONFIG[netconfig] = "--with-netconfig=yes,--with-netconfig=no"
- PACKAGECONFIG[qt4-x11-free] = "--enable-qt,--disable-qt,qt4-x11-free"
+diff --git a/meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb b/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb
+similarity index 86%
+rename from meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb
+rename to meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb
+index 44459b5..3d6f5b2 100644
+--- a/meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb
++++ b/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb
+@@ -9,11 +9,10 @@ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
  
--PACKAGES =+ "libnmutil libnmglib libnmglib-vpn ${PN}-tests \
-+PACKAGES =+ "libnmutil libnmglib libnmglib-vpn \
-   ${PN}-nmtui ${PN}-nmtui-doc \
-   ${PN}-adsl \
- "
-@@ -99,10 +100,6 @@ FILES_${PN}-dev += " \
-     ${libdir}/NetworkManager/*.la \
- "
+ SRC_URI = "http://oss.linbit.com/drbd/${BP}.tar.gz \
+-           file://0001-Makefile.in-don-t-compile-documentation.patch \
+            file://0001-Makefile.in-fix-permission-bits-for-drbd.service.patch \
+           "
+-SRC_URI[md5sum] = "09c9c33c041e1f4f85dd359f9e0b0f24"
+-SRC_URI[sha256sum] = "011050578c153bf4fef86e03749304ff9f333b7af3512c5c395e0e870a0445bd"
++SRC_URI[md5sum] = "76ed6d3190cd77b00890f3365353124b"
++SRC_URI[sha256sum] = "297b77c9b3f88de2e7dae459234f2753ea4fc2805282b2d276e35cf51e292913"
  
--FILES_${PN}-tests = " \
--    ${bindir}/nm-online \
--"
--
- FILES_${PN}-nmtui = " \
-     ${bindir}/nmtui \
-     ${bindir}/nmtui-edit \
+ SYSTEMD_SERVICE_${PN} = "drbd.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
+@@ -28,6 +27,7 @@ EXTRA_OECONF = " \
+                 --with-distro debian          \
+                 --with-initscripttype=both    \
+                 --with-systemdunitdir=${systemd_unitdir}/system \
++                --without-manual\
+                "
+ 
+ RDEPENDS_${PN} += "bash perl"
 -- 
-2.8.1
+2.7.4
+
+
 
 
