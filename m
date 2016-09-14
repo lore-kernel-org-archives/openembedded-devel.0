@@ -1,50 +1,52 @@
-Return-Path: <mats.dev.list@gmail.com>
-Received: from mail-lf0-f65.google.com (mail-lf0-f65.google.com
-	[209.85.215.65])
-	by mail.openembedded.org (Postfix) with ESMTP id BF6A5770F4
+Return-Path: <mike.looijmans@topicproducts.com>
+X-Greylist: delayed 1856 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 14 Sep 2016 12:26:30 UTC
+Received: from mx12-14.smtp.antispamcloud.com (mx12-14.smtp.antispamcloud.com
+	[46.165.232.184])
+	by mail.openembedded.org (Postfix) with ESMTP id A6F05734B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Sep 2016 10:45:49 +0000 (UTC)
-Received: by mail-lf0-f65.google.com with SMTP id k12so461268lfb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Sep 2016 03:45:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:subject:to:message-id:date:user-agent:mime-version
-	:content-transfer-encoding;
-	bh=1gKBGwm/o25TrSlfXoxzTVTUpgdGL7Tx75nUv/FC77Y=;
-	b=iiE1CTfj+fmue66LnLwbnipIiviHvwpaobxRkGhusqMLLVo8mJRQWcLVtZMvBYwSwR
-	1OV/5y8vMFaDwcIIM7VmR4XkA6gIewwi+/SLwYsHJhqTT1n0KVKiqiydLLLC39v7f6Ml
-	CV1szK30O1xOMK7NQyi7OIH7FcR33SXqkK4Bt1xlxJN6efwR3OfM28VBvWkP0mYtGbwT
-	luk7ZdC0G/zqMQzX6pzrbzkVVSj5TkA2K+lfhq3X1HLjGxENIbxCpzMCU+1hbRDM3Q3f
-	WJFE2HwUT2gYar3dOjaZf6FeS7dvxQxlUxPhOEtSmP7VG5P89YD985nXxtAJPkS+q6gL
-	+Qcg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:subject:to:message-id:date:user-agent
-	:mime-version:content-transfer-encoding;
-	bh=1gKBGwm/o25TrSlfXoxzTVTUpgdGL7Tx75nUv/FC77Y=;
-	b=Rj4AK7/zuhCadWqY4wie4tb/wrGQT/3i/cduycnm9zOglZJB7cyCH4NtKK5cR0+LbW
-	7bybANuYGEL3ijkZAG7SZlhERnbPbl1qWdjOwLe/Yp8oE/wg0G0HuJA9ye3oW2S381Bw
-	DOPSPRw6l9Y2DEEkbRRPN4gV65BRBwXMK0PgYraA0UxnlLuJFX9SUg2zo43qp6znzoRb
-	x6idrWIXnt6jIvnnKSDI+7vwoQbhMbE/DF/ZK83kbI0GdPXDUHdDlLkgKbNoEtyJy5F1
-	T9DZFdRko/2sXTbgzYH4UFfzMmjn+XNfGORgaApf0jyRQv9L8/D0BoKFkASwvAYPD+Wz
-	qvaw==
-X-Gm-Message-State: AE9vXwMO7XG9Ws/sPNi2/5Gy4CSaku0esz8KcWLyN2KebuK6DTo/0gbygvybltsZCsYhcA==
-X-Received: by 10.25.24.91 with SMTP id o88mr757290lfi.81.1473849948669;
-	Wed, 14 Sep 2016 03:45:48 -0700 (PDT)
-Received: from [192.168.1.205] ([195.84.96.49])
-	by smtp.gmail.com with ESMTPSA id
-	l10sm4599381lfd.19.2016.09.14.03.45.47
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 14 Sep 2016 03:45:48 -0700 (PDT)
-From: Mats Karrman <mats.dev.list@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <17c49fd3-d0d9-d00f-69d9-07656bee9c00@gmail.com>
-Date: Wed, 14 Sep 2016 12:45:10 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.2.0
+	Wed, 14 Sep 2016 12:26:30 +0000 (UTC)
+Received: from [37.74.225.130] (helo=TOP-EX01.TOPIC.LOCAL)
+	by mx12.antispamcloud.com with esmtps (TLSv1:AES256-SHA:256)
+	(Exim 4.85) (envelope-from <mike.looijmans@topicproducts.com>)
+	id 1bk8mo-0007Qx-9N for openembedded-devel@lists.openembedded.org;
+	Wed, 14 Sep 2016 13:55:31 +0200
+Received: from [192.168.80.121] (192.168.80.121) by webmail.topic.nl
+	(192.168.10.102) with Microsoft SMTP Server (TLS) id 14.3.224.2;
+	Wed, 14 Sep 2016 13:55:29 +0200
+To: <openembedded-devel@lists.openembedded.org>
+References: <17c49fd3-d0d9-d00f-69d9-07656bee9c00@gmail.com>
+From: Mike Looijmans <mike.looijmans@topic.nl>
+Organization: TOPIC
+Message-ID: <57D93AB0.2010305@topic.nl>
+Date: Wed, 14 Sep 2016 13:55:28 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.8.0
 MIME-Version: 1.0
-Subject: [PATCH] libnl: Fix possible host contamination error
+In-Reply-To: <17c49fd3-d0d9-d00f-69d9-07656bee9c00@gmail.com>
+X-Originating-IP: [192.168.80.121]
+X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
+X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
+X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W6KAUC/fjyuDn
+	NXFr4uarw8GIk4znw5EcwHHi+ra9lypEmJCbamfqLB4wH/k+k+Tftor9O5jjWZI633McN2M/OUXR
+	4XktS92Fqq3Qa0exZrH30SrPk8tfaSF+RZrpk8YKU12d2pmLLkAmzasehlwbl330I7d8n7Wa3GQ1
+	Gavb9/w+DKA2NNvQHVv9U39IvZ21x85OM4GWP9JQ/hHPc9c4dspy46MY4AXC06EFbOC1uAoX2ECf
+	0tidf4f9xbnt4dr3ucE6FVHy9oQcVLiVeDoadp8jI9oH6dGc6edzLFJtSM1o5rQC2VE4ySdZe0mi
+	K6wgOmG6/54gza7q5Za0AFsz6J51OyFNIoaxpS1mXZNdroDdpaan89csPuxNcrcm3g0VrZ+7KIxe
+	L9a8yWCRhadOUlss+n2ffnQxt6aJ7klZab+9g1L5kxBIYGB7BJyUdlmpOtqAyNDaGu3M3V4NLSLw
+	IF/664n8xZZ193ZhZHjQXRtPWfCpEalZkqHbJcTqNjqGWxwNFavLErUb39TUKcCiO2iH1Wgh6RAe
+	nBR+licROGa7w33/14GVkNZ6okgvMpPoU75prjeyjuZlW2IsigoonmNIBxN+8iLMjiqr6CILtV73
+	kf3bHfLz5oIsvwONwYzu
+X-Report-Abuse-To: spam@mx99.antispamcloud.com
+X-Originating-IP: 37.74.225.130
+X-SpamExperts-Domain: topic.nl
+X-SpamExperts-Username: 37.74.225.128/28
+Authentication-Results: antispamcloud.com;
+	auth=pass smtp.auth=37.74.225.128/28@topic.nl
+X-SpamExperts-Outgoing-Class: ham
+X-SpamExperts-Outgoing-Evidence: SB/global_tokens (0.00311722141238)
+X-Recommended-Action: accept
+Subject: Re: [PATCH] libnl: Fix possible host contamination error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,44 +59,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Sep 2016 10:45:50 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 14 Sep 2016 12:26:34 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
- From 975b7e64462a465449d367ff6a4e5240a59221d9 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Mats=20K=C3=A4rrman?= <mats@southpole.se>
-Date: Wed, 14 Sep 2016 12:29:27 +0200
-Subject: [PATCH] libnl: Fix possible host contamination error
+=EF=BB=BFUsually this is the result from using a "cp" (typically "cp -r") c=
+ommand in=20
+the install script instead of "install". Use "install" if possible, patch t=
+he=20
+makefile if you have to. If the install script uses "cp -r", add a few extr=
+a=20
+--preserve options to the command to prevent it overriding ownership.
 
----
-  meta/recipes-support/libnl/libnl_3.2.28.bb | 4 ++++
-  1 file changed, 4 insertions(+)
+On 14-09-16 12:45, Mats Karrman wrote:
+>  From 975b7e64462a465449d367ff6a4e5240a59221d9 Mon Sep 17 00:00:00 2001
+> From: =3D?UTF-8?q?Mats=3D20K=3DC3=3DA4rrman?=3D <mats@southpole.se>
+> Date: Wed, 14 Sep 2016 12:29:27 +0200
+> Subject: [PATCH] libnl: Fix possible host contamination error
+>
+> ---
+>   meta/recipes-support/libnl/libnl_3.2.28.bb | 4 ++++
+>   1 file changed, 4 insertions(+)
+>
+>   Possibly a cannon to swat a fly but I get "WARNING: libnl-1_3.2.28-r0
+> do_package_qa: QA Issue: libnl: /libnl-nf/usr/lib/libnl-nf-3.so.200.23.0 =
+is
+> owned by uid 1001, which is the same as the user running bitbake. This ma=
+y be
+> due to host contamination [host-user-contaminated]"
+>   type errors on every file.
+>
+> diff --git a/meta/recipes-support/libnl/libnl_3.2.28.bb
+> b/meta/recipes-support/libnl/libnl_3.2.28.bb
+> index 26982f3..3fcfbc1 100644
+> --- a/meta/recipes-support/libnl/libnl_3.2.28.bb
+> +++ b/meta/recipes-support/libnl/libnl_3.2.28.bb
+> @@ -23,6 +23,10 @@ SRC_URI[sha256sum] =3D
+> "cd608992c656e8f6e3ab6c1391b162a5a51c49336b9219f7f390e61fc5
+>
+>   inherit autotools pkgconfig
+>
+> +do_install_append() {
+> +    chown -R root:root ${D}
+> +}
+> +
+>   FILES_${PN} =3D "${libdir}/libnl-3.so.* \
+>                  ${libdir}/libnl.so.* \
+>                  ${sysconfdir}"
 
-  Possibly a cannon to swat a fly but I get "WARNING: libnl-1_3.2.28-r0 
-do_package_qa: QA Issue: libnl: /libnl-nf/usr/lib/libnl-nf-3.so.200.23.0 
-is owned by uid 1001, which is the same as the user running bitbake. 
-This may be due to host contamination [host-user-contaminated]"
-  type errors on every file.
 
-diff --git a/meta/recipes-support/libnl/libnl_3.2.28.bb 
-b/meta/recipes-support/libnl/libnl_3.2.28.bb
-index 26982f3..3fcfbc1 100644
---- a/meta/recipes-support/libnl/libnl_3.2.28.bb
-+++ b/meta/recipes-support/libnl/libnl_3.2.28.bb
-@@ -23,6 +23,10 @@ SRC_URI[sha256sum] = 
-"cd608992c656e8f6e3ab6c1391b162a5a51c49336b9219f7f390e61fc5
 
-  inherit autotools pkgconfig
+Kind regards,
 
-+do_install_append() {
-+    chown -R root:root ${D}
-+}
-+
-  FILES_${PN} = "${libdir}/libnl-3.so.* \
-                 ${libdir}/libnl.so.* \
-                 ${sysconfdir}"
--- 
-2.1.4
+Mike Looijmans
+System Expert
+
+TOPIC Products
+Materiaalweg 4, NL-5681 RJ Best
+Postbus 440, NL-5680 AK Best
+Telefoon: +31 (0) 499 33 69 79
+E-mail: mike.looijmans@topicproducts.com
+Website: www.topicproducts.com
+
+Please consider the environment before printing this e-mail
+
+Topic zoekt gedreven (embedded) software specialisten!
+http://topic.nl/vacancy/topic-zoekt-technische-software-engineers/
 
 
 
