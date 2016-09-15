@@ -1,50 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-qt0-f178.google.com (mail-qt0-f178.google.com
-	[209.85.216.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 1ACE87718D;
-	Thu, 15 Sep 2016 14:17:41 +0000 (UTC)
-Received: by mail-qt0-f178.google.com with SMTP id 38so25788187qte.1;
-	Thu, 15 Sep 2016 07:17:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=lkxCOT1bYnD8yKP7LIBWsPUYnHs9C8rr/yVHtzMB/BU=;
-	b=psJYsZ2SgmbOOUT3wMlAtQjok44qIYqFr+JZEtRsXNAj5MJqgw5nPaXX1dWmjHE+Iz
-	5QzvykyNEz+jvvzvRhmt5t2x98IPL81fmSOGdbmhY3NveM74Sr1hdQ7vbH+bO4Ljn7MU
-	3RtgiabC2ZyqkZ9Zl32p0jYf+Bevftw7hniYzTGJx2OGSfCTu5Ar6XK+WiG5T2kcC85T
-	YnQQvydwJmvEfLQybAwA6/Uv33gzmeRbQhV4t+BEXPH1TVa/KjcjJOop40UiUvp5O3Vj
-	i6uQuMIrg/WLUaJ/1sxhedaki/WFStz0z+dWCRvKrFzW/zQemXHntAfah1WBa4cIRz9R
-	9moQ==
+Return-Path: <ross.burton@intel.com>
+Received: from mail-it0-f51.google.com (mail-it0-f51.google.com
+	[209.85.214.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 01472771F2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Sep 2016 16:27:56 +0000 (UTC)
+Received: by mail-it0-f51.google.com with SMTP id n143so84331860ita.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Sep 2016 09:27:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=LDdsRkT/iCepmDjvSFLsb4a1cA1huZMmKYm/1d2+0Ww=;
+	b=O2jo4kkbLofSXHbE3r0nztHOWEMeOO8Pi1X00y6DsaUI6DfsNuqklTDST8HnUsSwaO
+	lqZFJANQdJRV2VOTx9V2q1z5wsJWIKbfleKhKiSgOFRCHUWjS+4bnMqGwlsQ5baQV9C5
+	D7j5Z/AwjPir9qCvfA2tLdyGkYmSvjpd6gJvZrxam/yXTUoWTPqcpGNSAQkkmz1jRdqQ
+	updg+vZUu+4+TrCRDV8HU/l/fdljwA8nSdVmbTaOwh4ht68KMCPx2J5e4NhueNeBE51u
+	7vXRAW18UmaR/BnGidBdRLJtfw8k5UcDThwFp1BhTMyE/Mn02b1ojZucOAsVyCW1OZeF
+	BHhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=lkxCOT1bYnD8yKP7LIBWsPUYnHs9C8rr/yVHtzMB/BU=;
-	b=hvCA6O1jnVzpmdY1XIKr8JG9m3tGbvhQlS+CTtZroIy4IaBnJ9mJvNklnX/98/0KH5
-	hwfrqe8ouX+yDfVYZCvmZlEOfq/XQFgwsgyY3plZmGaA+DpI62G6bH6j9QWUEzdPmqij
-	0rg662lbnPNx0XNR3NwT6mM75ZpFbz3OgHJdJMNC4cLTwKiXrusaFB5rgI3JkvPVsgyx
-	i4ujmAjDzwcLnOlMX3gy5x3tLKPIU0Jx4Ui3kmQWxwORSwbE7uAF5fp7NCJSDZq6NR3e
-	8OJT10FybBq3nw044WX9Wlk8Nu/ohiEMQR/7bqoMlloXLKug1rWi+My051v/nhqqyabQ
-	aCtQ==
-X-Gm-Message-State: AE9vXwP8HCeJtl1uTzmUtUqLe3eW1cOicneDYjbt8kcNlsunkwO/C6qPca2UuBF/ZIcitA==
-X-Received: by 10.28.209.76 with SMTP id i73mr3120897wmg.104.1473949061479;
-	Thu, 15 Sep 2016 07:17:41 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	bj8sm3651728wjc.49.2016.09.15.07.17.40
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 15 Sep 2016 07:17:40 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 15 Sep 2016 16:17:40 +0200
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20160915141740.GD2641@jama>
-References: <20160915084338.GC2641@jama>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=LDdsRkT/iCepmDjvSFLsb4a1cA1huZMmKYm/1d2+0Ww=;
+	b=TWwXd/j0u6rCtKw1LLTZfRvqh65c5x+G9NXxJHq4aEXfg+e1B9CZhUorga1RPeu8Ua
+	RpiwnMd1U+Eat5TmWz0kAVtqC264TzvQ7UXFPoTk0ZPr9t6Mzmlz8XPTpArrXzd48lkO
+	7weiKDgbVmo9j8/zUu2vyIZYYjhpdTof6ePWukBlkmaV9gmxA2koygpViepZJhpqEv8i
+	CyY9d0JK8/H3nChLGT1zWQVMI3M30wFH0iSzTA9w00oEA4uGRqCyaGTmxea/jigfcv0T
+	PvtNz7JaNHWX/Gj6p7ny4k8SClko8GvhBA8UGLE9wPYbCHom5uB0kxmEjfvv0p2vYiyu
+	AmKg==
+X-Gm-Message-State: AE9vXwPEjkaFfaAJfMTehckuKjBTjOVQT+OoW0Qko4eyM/iqcSH5WN+5jtmKo7r0NnJGY2uYKXAUk6pDbt8OpEaj
+X-Received: by 10.107.53.206 with SMTP id k75mr20032265ioo.195.1473956876699; 
+	Thu, 15 Sep 2016 09:27:56 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20160915084338.GC2641@jama>
-User-Agent: Mutt/1.7.0 (2016-08-17)
-Subject: Re: State of bitbake world 2016-09-13
+Received: by 10.107.135.27 with HTTP; Thu, 15 Sep 2016 09:27:36 -0700 (PDT)
+In-Reply-To: <CAPybu_2uCKcpvtba7Yrrs3trmSQ13w6Q9o+VsEXXFHJJO-EyUQ@mail.gmail.com>
+References: <CAPybu_2CDc4eD=vRuEL7TOL2eb0mN=ygDrx0jX8WxmLqqAYnnw@mail.gmail.com>
+	<CAJTo0LY7k+XDcwumMzfZLzOj_iOeKG_svL=QK_drDv_hHdbXhA@mail.gmail.com>
+	<CAPybu_2uCKcpvtba7Yrrs3trmSQ13w6Q9o+VsEXXFHJJO-EyUQ@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 15 Sep 2016 17:27:36 +0100
+Message-ID: <CAJTo0LYM0OX4A3512Q1Y7TnmdWuj7ROxGYB+Drr2Dh5T4-urGA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: update_font_cache intercept: qemu: uncaught target signal 4 (Illegal instruction)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,70 +55,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2016 14:17:42 -0000
-X-Groupsio-MsgNum: 63131
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="C+ts3FVlLX8+P6JN"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 15 Sep 2016 16:28:02 -0000
+Content-Type: text/plain; charset=UTF-8
 
---C+ts3FVlLX8+P6JN
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 15 September 2016 at 09:34, Ricardo Ribalda Delgado <
+ricardo.ribalda@gmail.com> wrote:
 
-On Thu, Sep 15, 2016 at 10:43:38AM +0200, Martin Jansa wrote:
-> =3D=3D Number of issues - stats =3D=3D
-> {| class=3D'wikitable'
-> !|Date		     !!colspan=3D'3'|Failed tasks			    !!colspan=3D'6'|Failed de=
-pencencies			 !!|Signatures		  !!colspan=3D'12'|QA !!Comment
-> |-
-> ||		||qemuarm	||qemux86	||qemux86_64	||qemuarm||max||min	||qemux86||max||=
-min	||all 	||already-stripped	||libdir	||textrel	||build-deps	||file-rdeps	=
-||version-going-backwards	||host-user-contaminated	||installed-vs-shipped	|=
-|unknown-configure-option	||symlink-to-sysroot	||invalid-pkgconfig	||pkgnam=
-e	||=09
-> |-
-> ||2016-09-13	||3	||4	||4	||16	||4	||3	||16	||4	||4	||0	||0		||0		||1		||1=
-0		||4		||0		||0		||0		||0		||0		||0		||0		||=09
-> |}
+> MACHINE is qt5022, which is:
+>
+> x86_64 + -march=btver1 -mtune=btver1
+>
 
-> =3D=3D=3D Failed dependencies for qemuarm (16) =3D=3D=3D
->=20
-> Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/log.dependen=
-cies.qemuarm.20160913_042944.log/
-> Found differences:=20
->     * WARN: jasper: jasper-bin rdepends on freeglut, but it isn't a build=
- dependency?
->     * WARN: jasper: jasper-bin rdepends on libgl-mesa, but it isn't a bui=
-ld dependency?
->     * WARN: jasper: jasper-bin rdepends on libglu, but it isn't a build d=
-ependency?
->     * WARN: enchant: enchant rdepends on hunspell, but it isn't a build d=
-ependency?
-> Found errors:=20
->     * ERROR: 16 issues were found in these recipes: enchant jasper libdrm=
- libunwind qtwebkit samba xfsprogs
+So the compiler is probably using instructions that qemu doesn't recognise.
 
-=2E..
-> gammu-1.32.0: libgsmsd rdepends on unixodbc, but it isn't a build depende=
-ncy, missing unixodbc in DEPENDS or PACKAGECONFIG? [build-deps]
-> libgit2-0.24.1: libgit2 rdepends on libssh2, but it isn't a build depende=
-ncy, missing libssh2 in DEPENDS or PACKAGECONFIG? [build-deps]
-> mpv-0.15.0: mpv rdepends on libjack, but it isn't a build dependency, mis=
-sing jack in DEPENDS or PACKAGECONFIG? [build-deps]
+If qemu can pretend to be that machine then you can pass the relevant
+options to qemu in your BSP, see the QEMU_EXTRAOPTIONS variable assignments
+in e.g. tune-corei7.inc.  If qemu can't execute target code then you can
+either ignore the messages or extend qemu.bbclass so that it is possible to
+say "qemu doesn't work" in a BSP.
 
-I'm testing  patches for these (and chrony reported 2016-09-01 in
-complete QA log).
+Ross
 
---C+ts3FVlLX8+P6JN
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAlfarYMACgkQN1Ujt2V2gBx31gCffk1xmaYAcNx+og44qBJYlJgZ
-Y0wAni9UGAmddaK6mzwPYlVVwd4rVSU3
-=mtGo
------END PGP SIGNATURE-----
-
---C+ts3FVlLX8+P6JN--
