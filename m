@@ -1,57 +1,29 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-yb0-f172.google.com (mail-yb0-f172.google.com
-	[209.85.213.172])
-	by mail.openembedded.org (Postfix) with ESMTP id D1AC760111
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 6AF1A60851
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2016 21:30:29 +0000 (UTC)
-Received: by mail-yb0-f172.google.com with SMTP id x93so45220028ybh.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2016 14:30:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=4DbVSYQywxue9s4u4ssDFM36pgar2NDXflQhLQCRT4w=;
-	b=BsWhrWmL54F2RyDSSd3IaPjd9Jf+h21sEBDdbvXgYrMQwfgqs3UtvbTri1fKnpL+aG
-	4XYPbBYUtEDFlIabhZpSH7OXYeo+DJhzXpLLjVruldcIcKNNK3NuRFAhBm5vnvD/SH4l
-	A2WFaRLiZ1OKU/hyzpt1+nhV+GJd7psGXs8tGku8aGo2XGPUR8h4shk9Gql2kKemb9Sr
-	+6lSQN9aLK6foeYvJyxOWUp4ZVUPblAcZFuClKjFjlGVtQGAyOhZGjCfuN+cmEuz7jSn
-	58k2LMmPQVTOXW/vgN3T+ICLk9GBRcEqT+EAwGPYbJX14gc1zCKJ58DCm/CqD1aZiH8B
-	2rTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=4DbVSYQywxue9s4u4ssDFM36pgar2NDXflQhLQCRT4w=;
-	b=LgnALXjSEQmwTEcarLo7KTfiXW9C6thzlBPCr4Bgr5CvkpwgRaaJPS6AwBnZYbG6IM
-	n8hjAJ/CLDMT8bLv/bb7A2WXqvYe+R33GjIftc+ZDLRAmDts80cdyGdOgY38eT2RJjvP
-	tuuEpEc2yG+PlLrFietdQuQND7ZDYC5ZfGwq3SsRRm0C+jTsWOZ6CMlRjtOiazP0Hs8q
-	roumGXlUGStKe5FWB2W7uGF2jHQdQzFPRYCyNpYrENbZEwAySxsLJi4V6/Pm3ZaaG7po
-	vJmaSYTBHM/PyRQqOG4RnS7Lz+d1vtHktfTGRxW68q8CTCSI2b5OR9v/JSBvCD+WQsxm
-	rEhA==
-X-Gm-Message-State: AE9vXwPHgS1CFglXCfnwKGVVKZxnwDNZAPPaHgUOna2IUhD8gBO1xnBHo+zHXjveGaQqKXCZiJrWFw1yxg069Q==
-X-Received: by 10.31.58.200 with SMTP id h191mr59657vka.51.1473975029472; Thu,
-	15 Sep 2016 14:30:29 -0700 (PDT)
+	Thu, 15 Sep 2016 22:17:16 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 15 Sep 2016 15:17:17 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.30,341,1470726000"; d="scan'208";a="1056909761"
+Received: from ananthna-mobl.gar.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.255.179.76])
+	by fmsmga002.fm.intel.com with ESMTP; 15 Sep 2016 15:17:14 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: "Maxin B. John" <maxin.john@intel.com>,
+	Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 16 Sep 2016 10:17:11 +1200
+Message-ID: <12285709.EfYBoYq9CT@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.10 (Linux/4.7.3-100.fc23.x86_64; KDE/4.14.20; x86_64; ;
+	)
+In-Reply-To: <1472730043-31245-5-git-send-email-maxin.john@intel.com>
+References: <1472730043-31245-1-git-send-email-maxin.john@intel.com>
+	<1472730043-31245-5-git-send-email-maxin.john@intel.com>
 MIME-Version: 1.0
-Received: by 10.176.65.130 with HTTP; Thu, 15 Sep 2016 14:30:28 -0700 (PDT)
-In-Reply-To: <CALbNGRQTv3L7hx0r1CE1fTn=Jb9n1aWWQor6v+85HSrm9nDsBg@mail.gmail.com>
-References: <1473884049-27152-1-git-send-email-schnitzeltony@googlemail.com>
-	<1473884049-27152-2-git-send-email-schnitzeltony@googlemail.com>
-	<CA+chaQdQZLYvVssqqR0-0JPBPHzWSYPTZb1ROro+QKqx3vKMRg@mail.gmail.com>
-	<CALbNGRTg=j3JGSN4CZm9uSEGXy1-1OWX9i3sP9UHefdiiZQOwA@mail.gmail.com>
-	<CA+chaQcd6S4wmUNWvqVfiRV_6f1KV4=+7VHoMtUJ5KkTdJJ8ag@mail.gmail.com>
-	<CALbNGRQ92cGVmUY5Af5qGBFCzsi_kLsKB6cYgVzhtMhyxjV4kQ@mail.gmail.com>
-	<CA+chaQc1ts6XJvoCUeyDQt37_C9Bk62e6-3vXXioqm6n0UL-_A@mail.gmail.com>
-	<CA+chaQf+VabfADqTaP0N5ZqwZ9xiP1rP9bj7k4HL2KE62wkgPQ@mail.gmail.com>
-	<CALbNGRQV1ttB8zyX+MPp4eLOKE4nezA9cQ4Js5rPjfVgRQ4nGA@mail.gmail.com>
-	<20160915193118.GE2641@jama>
-	<CALbNGRQTv3L7hx0r1CE1fTn=Jb9n1aWWQor6v+85HSrm9nDsBg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Thu, 15 Sep 2016 23:30:28 +0200
-Message-ID: <CALbNGRR6hMGaGc+Li6C1dypn6V1BYNW=PV=OD2+4rh0eW9dSYw@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] samba: unblacklist and link with bfd on arm only
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 4/4] tslib: move recipe from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,17 +36,140 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2016 21:30:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 15 Sep 2016 22:17:19 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-On Thu, Sep 15, 2016 at 10:23 PM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> Apart from this mystery: I found [1] and will play around with it.
->
-> [1] https://lists.samba.org/archive/samba-technical/2011-May/077532.html
->
-Would have been too easy :(
+On Thu, 01 Sep 2016 14:40:43 Maxin B. John wrote:
+> Move tslib recipe from oe-core layer.
+> 
+> Signed-off-by: Maxin B. John <maxin.john@intel.com>
+> ---
+>  meta-gpe/recipes-graphics/tslib/tslib/ts.conf  | 25 ++++++++++++
+>  meta-gpe/recipes-graphics/tslib/tslib/tslib.sh |  8 ++++
+>  meta-gpe/recipes-graphics/tslib/tslib_1.1.bb   | 53
+> ++++++++++++++++++++++++++ 3 files changed, 86 insertions(+)
+>  create mode 100644 meta-gpe/recipes-graphics/tslib/tslib/ts.conf
+>  create mode 100644 meta-gpe/recipes-graphics/tslib/tslib/tslib.sh
+>  create mode 100644 meta-gpe/recipes-graphics/tslib/tslib_1.1.bb
+> 
+> diff --git a/meta-gpe/recipes-graphics/tslib/tslib/ts.conf
+> b/meta-gpe/recipes-graphics/tslib/tslib/ts.conf new file mode 100644
+> index 0000000..1b0da93
+> --- /dev/null
+> +++ b/meta-gpe/recipes-graphics/tslib/tslib/ts.conf
+> @@ -0,0 +1,25 @@
+> +# Uncomment if you wish to use the linux input layer event interface
+> +module_raw input
+> +
+> +# Uncomment if you're using a Sharp Zaurus SL-5500/SL-5000d
+> +# module_raw collie
+> +
+> +# Uncomment if you're using a Sharp Zaurus SL-C700/C750/C760/C860
+> +# module_raw corgi
+> +
+> +# Uncomment if you're using a device with a UCB1200/1300/1400 TS interface
+> +# module_raw ucb1x00
+> +
+> +# Uncomment if you're using an HP iPaq h3600 or similar
+> +# module_raw h3600
+> +
+> +# Uncomment if you're using a Hitachi Webpad
+> +# module_raw mk712
+> +
+> +# Uncomment if you're using an IBM Arctic II
+> +# module_raw arctic2
+> +
+> +module pthres pmin=1
+> +module variance delta=30
+> +module dejitter delta=100
+> +module linear
+> diff --git a/meta-gpe/recipes-graphics/tslib/tslib/tslib.sh
+> b/meta-gpe/recipes-graphics/tslib/tslib/tslib.sh new file mode 100644
+> index 0000000..7068e8d
+> --- /dev/null
+> +++ b/meta-gpe/recipes-graphics/tslib/tslib/tslib.sh
+> @@ -0,0 +1,8 @@
+> +#!/bin/sh
+> +
+> +if [ -e /dev/input/touchscreen0 ]; then
+> +    TSLIB_TSDEVICE=/dev/input/touchscreen0
+> +
+> +    export TSLIB_TSDEVICE
+> +fi
+> +
+> diff --git a/meta-gpe/recipes-graphics/tslib/tslib_1.1.bb
+> b/meta-gpe/recipes-graphics/tslib/tslib_1.1.bb new file mode 100644
+> index 0000000..b0264c3
+> --- /dev/null
+> +++ b/meta-gpe/recipes-graphics/tslib/tslib_1.1.bb
+> @@ -0,0 +1,53 @@
+> +SUMMARY = "An abstraction layer for touchscreen panel events"
+> +DESCRIPTION = "Tslib is an abstraction layer for touchscreen panel \
+> +events, as well as a filter stack for the manipulation of those events. \
+> +Tslib is generally used on embedded devices to provide a common user \
+> +space interface to touchscreen functionality."
+> +HOMEPAGE = "http://tslib.berlios.de/"
+> +
+> +AUTHOR = "Russell King w/ plugins by Chris Larson et. al."
+> +SECTION = "base"
+> +LICENSE = "LGPLv2"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=f30a9716ef3762e3467a2f62bf790f0a"
+> +
+> +SRC_URI =
+> "https://github.com/kergoth/tslib/releases/download/${PV}/tslib-${PV}.tar.x
+> z;downloadfilename=tslib-${PV}.tar.xz \ +           file://ts.conf \
+> +           file://tslib.sh \
+> +"
+> +
+> +SRC_URI[md5sum] = "14771f8607b341bb4b297819d37e837d"
+> +SRC_URI[sha256sum] =
+> "fe35e5f710ea933b118f710e2ce4403ac076fe69926b570333867d4de082a51c" +
+> +UPSTREAM_CHECK_URI = "https://github.com/kergoth/tslib/releases"
+> +
+> +inherit autotools pkgconfig
+> +
+> +EXTRA_OECONF = "--enable-shared --disable-h3600 --enable-input
+> --disable-corgi --disable-collie --disable-mk712 --disable-arctic2
+> --disable-ucb1x00" +
+> +do_install_prepend() {
+> +	install -m 0644 ${WORKDIR}/ts.conf ${S}/etc/ts.conf
+> +}
+> +
+> +do_install_append() {
+> +	install -d ${D}${sysconfdir}/profile.d/
+> +	install -m 0755 ${WORKDIR}/tslib.sh ${D}${sysconfdir}/profile.d/
+> +}
+> +
+> +# People should consider using udev's /dev/input/touchscreen0 symlink
+> +# instead of detect-stylus
+> +#RDEPENDS_tslib-conf_weird-machine = "detect-stylus"
+> +RPROVIDES_tslib-conf = "libts-0.0-conf"
+> +
+> +PACKAGES =+ "tslib-conf tslib-tests tslib-calibrate"
+> +DEBIAN_NOAUTONAME_tslib-conf = "1"
+> +DEBIAN_NOAUTONAME_tslib-tests = "1"
+> +DEBIAN_NOAUTONAME_tslib-calibrate = "1"
+> +
+> +RDEPENDS_${PN} = "tslib-conf"
+> +RRECOMMENDS_${PN} = "pointercal"
+> +
+> +FILES_${PN}-dev += "${libdir}/ts/*.la"
+> +FILES_tslib-conf = "${sysconfdir}/ts.conf ${sysconfdir}/profile.d/tslib.sh
+> ${datadir}/tslib" +FILES_${PN} = "${libdir}/*.so.* ${libdir}/ts/*.so*"
+> +FILES_tslib-calibrate += "${bindir}/ts_calibrate"
+> +FILES_tslib-tests = "${bindir}/ts_harvest ${bindir}/ts_print
+> ${bindir}/ts_print_raw ${bindir}/ts_test"
 
-Andreas
+So it seems like this has been blocked purely based on indentation that 
+arguably doesn't even really matter, and as a result we no longer have tslib 
+anywhere. Can you guys please resolve this ASAP?
+
+Thanks,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
