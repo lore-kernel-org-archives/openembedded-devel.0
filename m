@@ -1,47 +1,47 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
-	[209.85.213.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 1B5BA6057A
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 11AC2770A1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2016 06:20:31 +0000 (UTC)
-Received: by mail-vk0-f66.google.com with SMTP id m62so589441vkd.2
+	Thu, 15 Sep 2016 08:03:59 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id b184so5894802wma.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Sep 2016 23:20:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=8eZlcocBdUhIlvcxU9MlgTPdyMwmjN+rg2i34Ccsq2M=;
-	b=nskJqdnbCarjjRRvbXF/knyVVv/iFro2dQEu0ZV91ckkgwvNOc6cKn8frgsWr0+NT5
-	JdrytR+LgIzPAUKc0dwz3o8kjgk2tNqt++SbIrSC1OaP4EauQdDLJgQHc9CGHaN79Zwn
-	tw58oC0d+jSfJ3kl9ugUkCxQtqljtzfOSAB2WnuzrUc1kUjW/OpDdz+RLbiu/G1FBmp4
-	deSocHX3UObgnx5TCKLy/FNgjXPUBDgeGyHFHsxnETpSJu5DgLjA/I7oGiyG7g23OjN+
-	j6ZxsJdXBY7rIi3HfO9AEAJzdldQd5CVAUOAPYFihDTXHrpv6PTagr9hx8AKiVQyYyhI
-	71kw==
+	Thu, 15 Sep 2016 01:04:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=Q4ulJPrHdAthC/PI1k2XbBSToJbi8Dw73VTuKG/RYw0=;
+	b=A/FtyqRNsa0i6eyrhp1+cbkLmtooDkiaMUnZfUsTIp/vLpbes3JAGURJgCxU0xg1yz
+	psiTqO1X5izNWJLQyCFuSr2DzSEj4upQP1kP188DocLkcen9oHMKXcDL8x3R5rQDKtG+
+	P1RzGkUVtiiXz08aY5txdCP8CY1sGNLz2sEzfsGKtYh+Z6bP0AQi+Ix94iPX6mk03gur
+	6TlwBePdbPuIiijkug8/5efOHdpHZovLeeV2Z4iiUqZ+M15p7BZbh70eYl/4ZJ6smvOw
+	pffiUK8xqL0OFgmM22Gxc6uMnWR97l7D7/3/Wwhaj0I0ybtRKDMGMIYLJ6fC8kQAAekc
+	u6Nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=8eZlcocBdUhIlvcxU9MlgTPdyMwmjN+rg2i34Ccsq2M=;
-	b=bpFvCPrLwMtWlrk/FnmZGzEoH1fIcFKRVhIixp4Soc0uXb6gWTiruiG8BJjj2Gn5Jb
-	hKrZQZfLhYfhS5oRcpyy0Ajl5DCAg34laYZL1Mt68UBB9rb/BfvZ6HDFLFtv/cK4/pXb
-	E/E5rEcNVX60sZXwnbIXGbSCu6hEwDclBiSMXtVgO9SnwlKwMKnwNOICygiDUAy9hnNX
-	4bIyxcdyBJvVgJl+ZVH3dEkSglBjDCRJ/2ll078VtjsXUsoOmFIhJP32Ds4aGVENyT/e
-	p41pCunCJ+MK9+GN15mc2HtefI8vt16SOSYWpeL7yrQ8Sydm65plwzxCUDTMknindFTJ
-	fTug==
-X-Gm-Message-State: AE9vXwMK7waCGRmJOAwkD+FlYL1Ao9Pdm79wkHuIKJD1F7k7Op9pJt+1hoa/yhWeiefaugfKmFMI4LPDIDSLoQ==
-X-Received: by 10.31.171.202 with SMTP id u193mr1348212vke.67.1473920431707;
-	Wed, 14 Sep 2016 23:20:31 -0700 (PDT)
+	:message-id:subject:to;
+	bh=Q4ulJPrHdAthC/PI1k2XbBSToJbi8Dw73VTuKG/RYw0=;
+	b=JTzshY//kw/KXwDUhu3JnxK5NYDN46E4KIwhDwmCAdBmFTcVAh39dYY/8qjEQ3R+rp
+	YMoOeFMMJwawaYzAM7k9FPWTaXdKYESOX5Caq5tr2cb2pdJJr1nCfdxHNhSuo1cAQkJp
+	LlCytzlBJ1Q7HF+XWoqPKYc+8qaVKNMm4CiiJeG57O8xKWIi7upAWZ/PaH+DcRIyoe4Z
+	aEvdwtp7aTdDqVieKZ/lks5agklgqnLFkxGaxlJmnVhIOAeliOjDNeOHELcN8ONQgxwq
+	YtXdHNZAdx7d/aEdPDCjLZ40rmApcuZuA7D1pW33duaqsgqSgnXEqLOa7WKmrZY1vNG2
+	m49w==
+X-Gm-Message-State: AE9vXwPoBq9C1QTnnCXfXYwEc55cR8PJvdPTAPaZ4R39oHpAOXAkznrGx+kXkVSSLJN/PSLXpLPRZNEsLwfRiA==
+X-Received: by 10.28.86.8 with SMTP id k8mr1708232wmb.33.1473926639863; Thu,
+	15 Sep 2016 01:03:59 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.176.65.130 with HTTP; Wed, 14 Sep 2016 23:20:31 -0700 (PDT)
-In-Reply-To: <1473387111-23110-1-git-send-email-akuster808@gmail.com>
-References: <1473387111-23110-1-git-send-email-akuster808@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Thu, 15 Sep 2016 08:20:31 +0200
-Message-ID: <CALbNGRSTTV=uzad6dNgh_Y2=sTQ48mUgN+S=gznvgLL80mq7mA@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Cc: akuster <akuster@mvista.com>
-Subject: Re: [meta-networking][PATCH] wireshark: update to 2.2
+Received: by 10.80.137.202 with HTTP; Thu, 15 Sep 2016 01:03:59 -0700 (PDT)
+In-Reply-To: <CALbNGRTg=j3JGSN4CZm9uSEGXy1-1OWX9i3sP9UHefdiiZQOwA@mail.gmail.com>
+References: <1473884049-27152-1-git-send-email-schnitzeltony@googlemail.com>
+	<1473884049-27152-2-git-send-email-schnitzeltony@googlemail.com>
+	<CA+chaQdQZLYvVssqqR0-0JPBPHzWSYPTZb1ROro+QKqx3vKMRg@mail.gmail.com>
+	<CALbNGRTg=j3JGSN4CZm9uSEGXy1-1OWX9i3sP9UHefdiiZQOwA@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 15 Sep 2016 10:03:59 +0200
+Message-ID: <CA+chaQcd6S4wmUNWvqVfiRV_6f1KV4=+7VHoMtUJ5KkTdJJ8ag@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH] samba: unblacklist and link with bfd on arm only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,57 +54,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2016 06:20:32 -0000
+X-List-Received-Date: Thu, 15 Sep 2016 08:04:00 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 9, 2016 at 4:11 AM, Armin Kuster <akuster808@gmail.com> wrote:
-> remove unused config params.
-> Drop PE
-> Drop do_configure_prepend
-> update PACKAGECONFIG's for graphics
->
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  .../{wireshark_2.0.5.bb => wireshark_2.2.0.bb}     | 24 ++++++----------------
->  1 file changed, 6 insertions(+), 18 deletions(-)
->  rename meta-networking/recipes-support/wireshark/{wireshark_2.0.5.bb => wireshark_2.2.0.bb} (69%)
->
-> diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.0.5.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.0.bb
-> similarity index 69%
-> rename from meta-networking/recipes-support/wireshark/wireshark_2.0.5.bb
-> rename to meta-networking/recipes-support/wireshark/wireshark_2.2.0.bb
-> index 31ca4d2..dca3be6 100644
-> --- a/meta-networking/recipes-support/wireshark/wireshark_2.0.5.bb
-> +++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.0.bb
-> @@ -8,21 +8,16 @@ DEPENDS = "pcre expat glib-2.0 sbc"
->
->  SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
->
-> -SRC_URI[md5sum] = "627b5fc6cf0aeca196c75debd5e69b14"
-> -SRC_URI[sha256sum] = "0ce0241330828973f5b4efee422a3760cab8ce0b41e7721c4b9fd185be1bb10b"
-> -
-> -PE = "1"
-This causes
+WARN: samba: samba rdepends on libpam, but it isn't a build dependency?
 
-ERROR: wireshark-2.2.0-r0 do_packagedata: QA Issue: Package version
-for package wireshark-dbg went backwards which would break package
-feeds from (1:2.0.5-r0.0 to 0:2.2.0-r0.0) [version-going-backwards]
-ERROR: wireshark-2.2.0-r0 do_packagedata: QA Issue: Package version
-for package wireshark-staticdev went backwards which would break
-package feeds from (1:2.0.5-r0.0 to 0:2.2.0-r0.0)
-[version-going-backwards]
-ERROR: wireshark-2.2.0-r0 do_packagedata: QA Issue: Package version
-for package wireshark-dev went backwards which would break package
-feeds from (1:2.0.5-r0.0 to 0:2.2.0-r0.0) [version-going-backwards]
-ERROR: wireshark-2.2.0-r0 do_packagedata: QA Issue: Package version
-for package wireshark-doc went backwards which would break package
-feeds from (1:2.0.5-r0.0 to 0:2.2.0-r0.0) [version-going-backwards]
-ERROR: wireshark-2.2.0-r0 do_packagedata: QA Issue: Package version
-for package wireshark-locale went backwards which would break package
-feeds from (1:2.0.5-r0.0 to 0:2.2.0-r0.0) [version-going-backwards]
-ERROR: wireshark-2.2.0-r0 do_packagedata: QA Issue: Package version
-for package wireshark went backwards which would break package feeds
-from (1:2.0.5-r0.0 to 0:2.2.0-r0.0) [version-going-backwards]
+is reported in every report (where samba was successfully built)
+http://www.openembedded.org/wiki/Bitbake_World_Status for more than a year
+- pam isn't in typical 'crowded' sysroot unless you have pam in
+DISTRO_FEATURES and it might be always detected when you have pam in
+DISTRO_FEATURES.
 
-Andreas
+There is also at least one report where it failed with ld.gold also for
+qemux86, e.g.:
+http://errors.yoctoproject.org/Errors/Details/75447/
+
+I'll of course include these changes in next jenkins build to report which
+failures it will re-introduce.
+
+On Thu, Sep 15, 2016 at 12:20 AM, Andreas M=C3=BCller <
+schnitzeltony@googlemail.com> wrote:
+
+> On Wed, Sep 14, 2016 at 11:21 PM, Martin Jansa <martin.jansa@gmail.com>
+> wrote:
+> > What about the other 2 issues mentioned in the comment?
+> >
+> I am sure I am missing something. I did
+>
+> * pull meta-oe
+> * built samba with this patch attached in a 'crowded' sysroot (good
+> for floating dependencies) for arm (raspi2)
+>
+> -> No warnings/errors
+>
+> Andreas
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
