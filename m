@@ -1,38 +1,39 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-qk0-f179.google.com (mail-qk0-f179.google.com
-	[209.85.220.179])
-	by mail.openembedded.org (Postfix) with ESMTP id EF5B773216
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-yb0-f182.google.com (mail-yb0-f182.google.com
+	[209.85.213.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 3362373189
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2016 17:39:51 +0000 (UTC)
-Received: by mail-qk0-f179.google.com with SMTP id t7so64554800qkh.2
+	Thu, 15 Sep 2016 19:25:08 +0000 (UTC)
+Received: by mail-yb0-f182.google.com with SMTP id i66so40910249yba.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2016 10:39:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	Thu, 15 Sep 2016 12:25:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=XcCuz+Vx/qt/BGD05rEeclgPmnekUL/mtpyG/3m4wdA=;
-	b=QNLbasWUrjSOxXJcCl+mbfx1yoCaHl0OIWRlSIE8msXXuiXGwwIUEzM8bZeIBEvL1b
-	bGCBQXyjEZHmh8mMlZAouPWjAd/D7a2riWyuxxZsz8QFqi9PSfHmIOcGu1XfQ1HPM5qb
-	lkWSxszrBO+GZsnjNX0PlLsfFUho3hhHGvgKMI0VsrzT7w/GOZlJi1vBqx+StD7Q3Ov3
-	yxoxpgSlkEwa4eruyLOqK1v6dicBh+YTg7Y3TGcjGJ1CUxIM4v18R1UjFt9m6jt0Lx6F
-	VBw7OIv//Ok5R/B/KnZpIGgAMq16YmlV4f70Rg/rIQ8s51zFL8HT2cAdnk/6TfdfjWOX
-	ydvQ==
+	bh=0911NG40/PTVp+kWM9BLWPnHdnZa54uKoHW18qzt518=;
+	b=Spk3/HF0HsqBcx7oOkI4/JVn8x/hn5klBQ0NyliSt91lyErjiyCyHZ5hpjVH76Qr/P
+	CcZd7GlD0FXEeu6ADRbEEM0peeqZwGI36jEs+II4xrzhIsC6Tp8QoJ5wsmGbbH4SVLuK
+	u/ereOm2NpO7KauWaoWNI8pYgYKOFhgEGWWN5R87u4EoIZV9OVuBbyDrLsMDjdAREXQ0
+	T8RJ2w4I5LEtTDiWT7hRCvt/MSlPfODW+gzJWK4bdtB2JMScrapHa7qHrFV9pcHScK3c
+	FO3aDWDv8m931VM4yhvQ0XT0SeNUnyXvoSs0afbE5Z0dmi1PqV7c9GYWcrr9elpcXhux
+	Q7eA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=XcCuz+Vx/qt/BGD05rEeclgPmnekUL/mtpyG/3m4wdA=;
-	b=HRsoUhMXQ4aLBdDU5kHnpWd5tLQ3vtIlrrTs3uNNRfkfNgJPogxrIOKf/YNS4FnT7M
-	3VmxX4S8hIHeBOOY2WY75Ho2nuO9L8aKM1isT6Uijn4kT9BLocRqM6m62Nf7O/EA2QMC
-	gKu6GyWRa5bSPaW12JlI+rgnFL5HWdBwd2D7mn08qEiXnUgnmAyTBOXBrPGsDL9n6+vC
-	G1ycdjY3/3T5UedLZf62ZeNGz2S+w3ydm1kwpMSuGMf6KM4QPZXqpH7XCMpiOEKDvdps
-	v07uvCwj8OciAjisEd9G1nQl796v1uk/29/djMoxd4+rF6i6NbcwihpHfxHXx4O93UyC
-	Q90Q==
-X-Gm-Message-State: AE9vXwMxtw+xnwOwLc16LHKFSaxAAC8wk60KXRMD9y3rKec9iYiOhAt3IfkM4BQdOWsNYvQB0KaKhkp0V7Mvdw==
-X-Received: by 10.194.101.40 with SMTP id fd8mr1445322wjb.215.1473961190912;
-	Thu, 15 Sep 2016 10:39:50 -0700 (PDT)
+	bh=0911NG40/PTVp+kWM9BLWPnHdnZa54uKoHW18qzt518=;
+	b=m3jAxwZg8ndi8sUZuJah3kkpBQOtUDL3GOp5Vk4Ym3f0Twc6p4diZT+7Voz0E1ztOG
+	37XAjY87aurCHYOTwYEYR3cJQClceHJhyIZ8KJiK80spFUmSSMsMHfxOSq7MnQ4dzwYc
+	rGe/aJ5G6SfeFgOPOdc9G0zQ0D3veN72p//yHp43IGh/Re0qmbHRcuCstA6HmtME2YzL
+	wLZHWOCMJPAF1jcUIFOT07BHZ1EI6x262HmmrIuaalByVj1FJBD4X/6q/BtfMVU5Ptn3
+	2lyV82Hzb8qWwlMP4gI/wkkRXxLdA7qEr/cSlQVgWosyxW+tlP4+FyvqnAhf7FiqyMVw
+	48GA==
+X-Gm-Message-State: AE9vXwNEqPI+fq5fQuuCytJekCgm2ZOWUncnffordinFXsUhKRj6jZmBDdWZNfXeHOAycKL49GF5WvbTI5TXLQ==
+X-Received: by 10.37.10.202 with SMTP id 193mr7003380ybk.174.1473967508513;
+	Thu, 15 Sep 2016 12:25:08 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.80.137.202 with HTTP; Thu, 15 Sep 2016 10:39:50 -0700 (PDT)
-In-Reply-To: <CA+chaQc1ts6XJvoCUeyDQt37_C9Bk62e6-3vXXioqm6n0UL-_A@mail.gmail.com>
+Received: by 10.176.65.130 with HTTP; Thu, 15 Sep 2016 12:25:08 -0700 (PDT)
+In-Reply-To: <CA+chaQf+VabfADqTaP0N5ZqwZ9xiP1rP9bj7k4HL2KE62wkgPQ@mail.gmail.com>
 References: <1473884049-27152-1-git-send-email-schnitzeltony@googlemail.com>
 	<1473884049-27152-2-git-send-email-schnitzeltony@googlemail.com>
 	<CA+chaQdQZLYvVssqqR0-0JPBPHzWSYPTZb1ROro+QKqx3vKMRg@mail.gmail.com>
@@ -40,11 +41,12 @@ References: <1473884049-27152-1-git-send-email-schnitzeltony@googlemail.com>
 	<CA+chaQcd6S4wmUNWvqVfiRV_6f1KV4=+7VHoMtUJ5KkTdJJ8ag@mail.gmail.com>
 	<CALbNGRQ92cGVmUY5Af5qGBFCzsi_kLsKB6cYgVzhtMhyxjV4kQ@mail.gmail.com>
 	<CA+chaQc1ts6XJvoCUeyDQt37_C9Bk62e6-3vXXioqm6n0UL-_A@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 15 Sep 2016 19:39:50 +0200
-Message-ID: <CA+chaQf+VabfADqTaP0N5ZqwZ9xiP1rP9bj7k4HL2KE62wkgPQ@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<CA+chaQf+VabfADqTaP0N5ZqwZ9xiP1rP9bj7k4HL2KE62wkgPQ@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 15 Sep 2016 21:25:08 +0200
+Message-ID: <CALbNGRQV1ttB8zyX+MPp4eLOKE4nezA9cQ4Js5rPjfVgRQ4nGA@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH] samba: unblacklist and link with bfd on arm only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -58,47 +60,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2016 17:39:52 -0000
+X-List-Received-Date: Thu, 15 Sep 2016 19:25:10 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-and
-http://lists.openembedded.org/pipermail/openembedded-devel/2016-March/10666=
-1.html
-
-On Thu, Sep 15, 2016 at 7:38 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
-
-> Does your log.do_package show that it was actually linked with libpam?
+On Thu, Sep 15, 2016 at 7:39 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> and
+> http://lists.openembedded.org/pipermail/openembedded-devel/2016-March/106661.html
 >
-> more details in:
-> http://lists.openembedded.org/pipermail/openembedded-devel/
-> 2016-March/106583.html
+> On Thu, Sep 15, 2016 at 7:38 PM, Martin Jansa <martin.jansa@gmail.com>
+> wrote:
 >
-> On Thu, Sep 15, 2016 at 6:57 PM, Andreas M=C3=BCller <
-> schnitzeltony@googlemail.com> wrote:
->
->> On Thu, Sep 15, 2016 at 10:03 AM, Martin Jansa <martin.jansa@gmail.com>
->> wrote:
->> > WARN: samba: samba rdepends on libpam, but it isn't a build dependency=
-?
->> >
->> > is reported in every report (where samba was successfully built)
->> > http://www.openembedded.org/wiki/Bitbake_World_Status for more than a
->> year
->> > - pam isn't in typical 'crowded' sysroot unless you have pam in
->> > DISTRO_FEATURES and it might be always detected when you have pam in
->> > DISTRO_FEATURES.
->> >
->> Just checked: libpam was in my sysroot and I received no warnings.
+>> Does your log.do_package show that it was actually linked with libpam?
 >>
->> Andreas
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
->
->
+I think I got it now: Problem does not occur to me as I have pam in
+DISTRO_FEATURE -> pam in PACKAGECONFIG -> libpam in DEPENDS. To get
+'your' problem, I have to remove pam from PACKAGECONFIG explicitly.
+
+Will report...
+
+Andreas
 
