@@ -1,44 +1,48 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 0558F765DB
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 33CB07716E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2016 08:34:34 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id b184so6015020wma.3
+	Thu, 15 Sep 2016 08:39:08 +0000 (UTC)
+Received: by mail-wm0-f45.google.com with SMTP id 1so78188542wmz.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2016 01:34:35 -0700 (PDT)
+	Thu, 15 Sep 2016 01:39:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=k7AiVc/hz0Y9lYzL/3JR7tH0qsBK5vamfBTZ7IyYkpw=;
-	b=Lb4+lQUrBhIY4K0wltk8XmXXnBrqok+2cxP7C43oxruC+ww26oGW/7Sn0kB7S9UANa
-	Umocb3UFt6t4fwpLlaXfu8itExQYXbsS25WEaeveXsLYv4Fu9MHWKRnXvjnxYZ+Fm06E
-	gmS6P95S90Ku0XPkIvIO5UPvHm+CSyE82OBJTvkZae3o00Mo783yFnEewHItZuDgAb6E
-	P0Rqvuuyu+BYhMWP0JZA7vcJP+Q3wt8I9sYtZzdDpCMJKR+gKOeTYBGav/A6ABnqimgo
-	KOIHfltXGvW5ZGiuoGyqRlYLHwk4J1nQ7DnrqK/8wI0GBe8x4+G42SDP+8w5SHCXBvU0
-	0sLw==
+	h=from:date:to:cc:subject:message-id:mime-version:content-disposition
+	:user-agent; bh=WlGoFLNUArYqag8GZcWEkD4UeLg4qK9sq3HMuWq/h3I=;
+	b=UnM1DmIhy7wTZnwN8qgUfvSGx99WFYpVbyLrLFlF/5bOlUEocWT3zFAErt2FmC4CWJ
+	FIV4dAipJ3F4eS32/K3WA76G9IBRvsCE1SNO5FKB59n2k+FtD3uRN/3QR+58zwUjcVcw
+	TtI2ZSh6xC9xNlOA8yQy8A9TQLC5XoaRbWAM5G0TbLd1o1ddHe0li0ZDo/ZdtkwSJxj6
+	JRDPQeGAM1bDM2lCc0s6qAgwXfFcMM76ogS1pkTXc/9D/OWjKiIxfNo/OY+VB0edx+Sk
+	ZtjfgIBPx+Nx9oEWw8chNelxeEzv9kW9Ra5moOh51XcgVLepxlW09EYVkxrgaqm4MhE9
+	7Gbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=k7AiVc/hz0Y9lYzL/3JR7tH0qsBK5vamfBTZ7IyYkpw=;
-	b=PAigKG+84rLOaLJU36Kzrww+sqTcf4tgn42Q0s5APHKq0b7uojfQHTyq3aAcn7oR2l
-	3IR6O/VkUsMl2huITOCnEqTYCRGhfMcQG78x4txoqmWAJZAc3qB0awL0JPKFMzUS580H
-	upSZnzEZ3i0YHP+LlPnoQgnev7lBVNCSK9NUwK7Gu6Mi6QSOGnbTWqn3+VIed/Y8U84v
-	EXz2+WhpI8GoFEJTFzKHkIFooNiRJhsioOp+gupQGeNIwn056ZTjYwDNflU8/4AiU0d1
-	7ZXiHhe3PNZcAZWHRP0FzLcMu0wQjsmPOGE0WDc1lcTU11tkNMCsPDY+u+ilf2Okp+Up
-	NVow==
-X-Gm-Message-State: AE9vXwO5niDzRIYHBmrVIlaxiqYKHkCjcMQM5n/8xN5E8IP2DB+ZDsXwZC03AnKXrf0S7IhN6v+gKpB6ilvyCA==
-X-Received: by 10.28.131.208 with SMTP id f199mr1737666wmd.116.1473928474737; 
-	Thu, 15 Sep 2016 01:34:34 -0700 (PDT)
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:mime-version
+	:content-disposition:user-agent;
+	bh=WlGoFLNUArYqag8GZcWEkD4UeLg4qK9sq3HMuWq/h3I=;
+	b=PRdcDYOiY1zcb3i3y/4vgRfr9RAg7QKoJLMUbdz7+0dl7GolxBuV4v16DHDfKMVbQz
+	iZlHp7aIjd1NtBHwNtsz0/VD8hoyySz3JzGf/crdq2xCot9K2ZWe2MKlTCEvAMjevjBD
+	rLKsA/tC57sZqNudgL+R1ly52k+FjiX7+7QqhhLS1VsuRHw/fZgqYjBRTfixA7cS+0pf
+	pK7N+N8yZa+4CRsVOnk8TvAXYf6Tdx2MROOD9jGf5NWNkVReJOPmCaM69Xz3N8zyaH0i
+	NZzwgTQTZRzCqqMNwQjSK5UcQkoojneQqi16/G+MYp13u687vqjOlmMm2mRQLX24rl9e
+	r2+g==
+X-Gm-Message-State: AE9vXwOixKLzgQHetMhaAq8AEMSYU/gPhJBQMQG0I/XxBDr6KcWSbAWv3TZN3doF2dZ2SA==
+X-Received: by 10.28.157.194 with SMTP id g185mr1753919wme.34.1473928748201;
+	Thu, 15 Sep 2016 01:39:08 -0700 (PDT)
+Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
+	[89.176.104.169])
+	by smtp.gmail.com with ESMTPSA id d62sm1378211wmd.7.2016.09.15.01.39.07
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 15 Sep 2016 01:39:07 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 15 Sep 2016 10:39:06 +0200
+To: Joe MacDonald <Joe_MacDonald@mentor.com>
+Message-ID: <20160915083906.GB2641@jama>
 MIME-Version: 1.0
-Received: by 10.28.128.143 with HTTP; Thu, 15 Sep 2016 01:34:14 -0700 (PDT)
-In-Reply-To: <CAJTo0LY7k+XDcwumMzfZLzOj_iOeKG_svL=QK_drDv_hHdbXhA@mail.gmail.com>
-References: <CAPybu_2CDc4eD=vRuEL7TOL2eb0mN=ygDrx0jX8WxmLqqAYnnw@mail.gmail.com>
-	<CAJTo0LY7k+XDcwumMzfZLzOj_iOeKG_svL=QK_drDv_hHdbXhA@mail.gmail.com>
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Thu, 15 Sep 2016 10:34:14 +0200
-Message-ID: <CAPybu_2uCKcpvtba7Yrrs3trmSQ13w6Q9o+VsEXXFHJJO-EyUQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: update_font_cache intercept: qemu: uncaught target signal 4 (Illegal instruction)
+User-Agent: Mutt/1.7.0 (2016-08-17)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: 3 meta-networking patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,52 +55,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2016 08:34:35 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 15 Sep 2016 08:39:09 -0000
+X-Groupsio-MsgNum: 63124
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="qcHopEYAB45HaUaB"
+Content-Disposition: inline
 
-MACHINE is qt5022, which is:
+--qcHopEYAB45HaUaB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-x86_64 + -march=btver1 -mtune=btver1
+Hi Joe,
 
+can you please confirm state of thes change:
+https://patchwork.openembedded.org/patch/128859/
+it's Accepted on patchwork, but still applicable and included i
+master-next.
 
+I'll drop these 2 from master-next as they are marked as
+Rejected/Changes-Requested now:
+https://patchwork.openembedded.org/patch/122365/
+https://patchwork.openembedded.org/patch/125839/
 
+Regards,
 
-conf/machine/include/ia32-base.inc
-conf/machine/include/x86/arch-x86.inc
-+
-DEFAULTTUNE ?= "bobcat-64"
-TUNEVALID[bobcat] = "Bobcat"
-TUNE_CCARGS += "${@bb.utils.contains("TUNE_FEATURES", "bobcat",
-"-march=btver1 -mtune=btver1", "", d)}"
-AVAILTUNES += "bobcat-64"
-TUNE_FEATURES_tune-bobcat-64 = "bobcat m64"
-BASE_LIB_tune-bobcat-64 = "lib64"
-TUNE_PKGARCH_tune-bobcat-64 = "bobcat_64"
-PACKAGE_EXTRA_ARCHS_tune-bobcat-64 = "${TUNE_PKGARCH_tune-bobcat-64}"
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Thanks!
+--qcHopEYAB45HaUaB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-On Tue, Sep 13, 2016 at 6:03 PM, Burton, Ross <ross.burton@intel.com> wrote:
-> On 13 September 2016 at 16:27, Ricardo Ribalda Delgado <
-> ricardo.ribalda@gmail.com> wrote:
->
->> NOTE: Running intercept scripts:
->> NOTE: > Executing update_font_cache intercept ...
->> qemu: uncaught target signal 4 (Illegal instruction) - core dumped
->> Illegal instruction
->>
->
-> What MACHINE?
->
-> Ross
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+-----BEGIN PGP SIGNATURE-----
 
+iEYEARECAAYFAlfaXikACgkQN1Ujt2V2gBwFFgCgtK0uvRio90RRuMI2zLjvvo5D
+2cwAn3EHqwnBv6c3JbmWJF1LVfLMJKYg
+=g7Uv
+-----END PGP SIGNATURE-----
 
-
--- 
-Ricardo Ribalda
-
+--qcHopEYAB45HaUaB--
