@@ -1,44 +1,57 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 37B01700F3
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-yb0-f172.google.com (mail-yb0-f172.google.com
+	[209.85.213.172])
+	by mail.openembedded.org (Postfix) with ESMTP id D1AC760111
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2016 20:39:38 +0000 (UTC)
-Received: by mail-wm0-f46.google.com with SMTP id l132so4447934wmf.0
+	Thu, 15 Sep 2016 21:30:29 +0000 (UTC)
+Received: by mail-yb0-f172.google.com with SMTP id x93so45220028ybh.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2016 13:39:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=ZNMDP6Cl+EeCQ06CM6bZNXhQ+ifIGR+w5ZfnumvanOg=;
-	b=RLhTYzg9ooyHfgL8ib7B8tX1ux1fIu/wkVWyUI+0HHqjr+pI7nGN+N1LP7lJZgACDh
-	O5cEsoUdyWqJoLjLgpm7cP5Hw8ZCBS3V7sqkpPXYKvjoCqtlu690IoyHzFF0VjHik5lo
-	ShivYR/Wyd0EaTfInQVGGeBGf+PaHlRHb5WTPmCf04UEUzFU4cf0mpLiULBFrAuPt6Oq
-	PJtMo/8k6ywLRmWwPmryz/lYVmqo3Xyei1sXKuOomoV6WAru4SVQmx33eesMjidBMZZv
-	G8O234N/TQRl8/dJmFs9wDnyoxqwHcFaEIEyLQR6FrO2rL0dyq97EGjQTCeZTr2QG0WK
-	Lagw==
+	Thu, 15 Sep 2016 14:30:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=4DbVSYQywxue9s4u4ssDFM36pgar2NDXflQhLQCRT4w=;
+	b=BsWhrWmL54F2RyDSSd3IaPjd9Jf+h21sEBDdbvXgYrMQwfgqs3UtvbTri1fKnpL+aG
+	4XYPbBYUtEDFlIabhZpSH7OXYeo+DJhzXpLLjVruldcIcKNNK3NuRFAhBm5vnvD/SH4l
+	A2WFaRLiZ1OKU/hyzpt1+nhV+GJd7psGXs8tGku8aGo2XGPUR8h4shk9Gql2kKemb9Sr
+	+6lSQN9aLK6foeYvJyxOWUp4ZVUPblAcZFuClKjFjlGVtQGAyOhZGjCfuN+cmEuz7jSn
+	58k2LMmPQVTOXW/vgN3T+ICLk9GBRcEqT+EAwGPYbJX14gc1zCKJ58DCm/CqD1aZiH8B
+	2rTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=ZNMDP6Cl+EeCQ06CM6bZNXhQ+ifIGR+w5ZfnumvanOg=;
-	b=bAfbFHNxnsKBAuvw3w7GHVspLHndqnnKnGMDK8Am3oEukmi1r7rhD/VyE9PrVhkGjf
-	AUbE+WUmsxZEBx7WMoEdsf1sA/rJASgLNtkSCk69HHdQiVdD5b1GhuKlLxnvd31LZHAh
-	dl3UEhQEaMYPvUQR900qGjSpEUqHN2DPc1G1BqaqK9ZElxEHU6N8kh4pU4Q0TNNhWufv
-	pPksnPWMyOiI/NLFdSCEDut985hzMo+ChzaxvhsdPXWej4Q6pcNrO9NzPh9TEnWtRWt6
-	STWNyWSlTL/MFfeN2iw3AvbtOGtbIs53j1WJKxZ7XX/rdGuvQvPIk9cR4aQzKwcTcnPd
-	PQww==
-X-Gm-Message-State: AE9vXwMQlNGpzEtTikRyniXrgD1jXZexuLYXTwAVGT+kgevQ0y1P2g1hIkwgP5zxetP5CN4Nsfbug/BGkrchrg==
-X-Received: by 10.194.141.163 with SMTP id rp3mr10714500wjb.124.1473971979089; 
-	Thu, 15 Sep 2016 13:39:39 -0700 (PDT)
+	:message-id:subject:to:content-transfer-encoding;
+	bh=4DbVSYQywxue9s4u4ssDFM36pgar2NDXflQhLQCRT4w=;
+	b=LgnALXjSEQmwTEcarLo7KTfiXW9C6thzlBPCr4Bgr5CvkpwgRaaJPS6AwBnZYbG6IM
+	n8hjAJ/CLDMT8bLv/bb7A2WXqvYe+R33GjIftc+ZDLRAmDts80cdyGdOgY38eT2RJjvP
+	tuuEpEc2yG+PlLrFietdQuQND7ZDYC5ZfGwq3SsRRm0C+jTsWOZ6CMlRjtOiazP0Hs8q
+	roumGXlUGStKe5FWB2W7uGF2jHQdQzFPRYCyNpYrENbZEwAySxsLJi4V6/Pm3ZaaG7po
+	vJmaSYTBHM/PyRQqOG4RnS7Lz+d1vtHktfTGRxW68q8CTCSI2b5OR9v/JSBvCD+WQsxm
+	rEhA==
+X-Gm-Message-State: AE9vXwPHgS1CFglXCfnwKGVVKZxnwDNZAPPaHgUOna2IUhD8gBO1xnBHo+zHXjveGaQqKXCZiJrWFw1yxg069Q==
+X-Received: by 10.31.58.200 with SMTP id h191mr59657vka.51.1473975029472; Thu,
+	15 Sep 2016 14:30:29 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.80.137.202 with HTTP; Thu, 15 Sep 2016 13:39:38 -0700 (PDT)
-In-Reply-To: <1473970910-2046-1-git-send-email-ross.burton@intel.com>
-References: <1473970910-2046-1-git-send-email-ross.burton@intel.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 15 Sep 2016 22:39:38 +0200
-Message-ID: <CA+chaQfXzaqCyQMZ-ou+p7m4_vFg4pvSa2Sm60t3MX6TL8yraw@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH][meta-oe] portaudio: upgrade to latest release
+Received: by 10.176.65.130 with HTTP; Thu, 15 Sep 2016 14:30:28 -0700 (PDT)
+In-Reply-To: <CALbNGRQTv3L7hx0r1CE1fTn=Jb9n1aWWQor6v+85HSrm9nDsBg@mail.gmail.com>
+References: <1473884049-27152-1-git-send-email-schnitzeltony@googlemail.com>
+	<1473884049-27152-2-git-send-email-schnitzeltony@googlemail.com>
+	<CA+chaQdQZLYvVssqqR0-0JPBPHzWSYPTZb1ROro+QKqx3vKMRg@mail.gmail.com>
+	<CALbNGRTg=j3JGSN4CZm9uSEGXy1-1OWX9i3sP9UHefdiiZQOwA@mail.gmail.com>
+	<CA+chaQcd6S4wmUNWvqVfiRV_6f1KV4=+7VHoMtUJ5KkTdJJ8ag@mail.gmail.com>
+	<CALbNGRQ92cGVmUY5Af5qGBFCzsi_kLsKB6cYgVzhtMhyxjV4kQ@mail.gmail.com>
+	<CA+chaQc1ts6XJvoCUeyDQt37_C9Bk62e6-3vXXioqm6n0UL-_A@mail.gmail.com>
+	<CA+chaQf+VabfADqTaP0N5ZqwZ9xiP1rP9bj7k4HL2KE62wkgPQ@mail.gmail.com>
+	<CALbNGRQV1ttB8zyX+MPp4eLOKE4nezA9cQ4Js5rPjfVgRQ4nGA@mail.gmail.com>
+	<20160915193118.GE2641@jama>
+	<CALbNGRQTv3L7hx0r1CE1fTn=Jb9n1aWWQor6v+85HSrm9nDsBg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 15 Sep 2016 23:30:28 +0200
+Message-ID: <CALbNGRR6hMGaGc+Li6C1dypn6V1BYNW=PV=OD2+4rh0eW9dSYw@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] samba: unblacklist and link with bfd on arm only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,219 +64,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2016 20:39:39 -0000
+X-List-Received-Date: Thu, 15 Sep 2016 21:30:30 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-This PV change looks like a downgrade as old recipe had SRCREV = "1387" and
-new PV indicates 1919.
+On Thu, Sep 15, 2016 at 10:23 PM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> Apart from this mystery: I found [1] and will play around with it.
+>
+> [1] https://lists.samba.org/archive/samba-technical/2011-May/077532.html
+>
+Would have been too easy :(
 
-On Thu, Sep 15, 2016 at 10:21 PM, Ross Burton <ross.burton@intel.com> wrote:
-
-> PortAudio has moved from Subversion to Git, so the SRC_URI needs to be
-> updated.
-> They also have stable tarballs so instead of taking a random git hash use
-> the
-> latest release.  This was svn revision 1919 so to keep the version order
-> correct
-> hard-code this into the PV.
->
-> The license is in fact MIT, so use that in LICENSE instead of PortAudio
-> (which
-> wasn't defined anywhere, resulting in QA warnings).
->
-> Add a patch to pass LDFLAGS to all the compiles.
->
-> Remove the useless assignment to TESTS.  Install the test suite manually
-> using
-> libtool so that we don't install the wrapper scripts.
->
-> Explicitly disable ASIHPI to avoid floating dependencies.
->
-> Remove redundant commented-out lines.
->
-> Signed-off-by: Ross Burton <ross.burton@intel.com>
-> ---
->  .../recipes-support/portaudio/files/ldflags.patch  | 51
-> ++++++++++++++++++++++
->  .../portaudio/portaudio-v19_20140130.bb            | 32 ++++++++++++++
->  .../recipes-support/portaudio/portaudio-v19_svn.bb | 32 --------------
->  3 files changed, 83 insertions(+), 32 deletions(-)
->  create mode 100644 meta-oe/recipes-support/portaudio/files/ldflags.patch
->  create mode 100644 meta-oe/recipes-support/portaudio/portaudio-v19_
-> 20140130.bb
->  delete mode 100644 meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
->
-> diff --git a/meta-oe/recipes-support/portaudio/files/ldflags.patch
-> b/meta-oe/recipes-support/portaudio/files/ldflags.patch
-> new file mode 100644
-> index 0000000..aca93a5
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/portaudio/files/ldflags.patch
-> @@ -0,0 +1,51 @@
-> +Upstream forgot to pass LDFLAGS to everything apart from the main library.
-> +
-> +Upstream-Status: Pending
-> +Signed-off-by: Ross Burton <ross.burton@intel.com>
-> +
-> +diff --git a/Makefile.in b/Makefile.in
-> +index 5e1a764..61ecdd1 100644
-> +--- a/Makefile.in
-> ++++ b/Makefile.in
-> +@@ -171,20 +171,20 @@ lib/$(PALIB): lib-stamp $(LTOBJS) $(MAKEFILE)
-> $(PAINC)
-> +       @WITH_ASIO_TRUE@  $(LIBTOOL) --mode=link --tag=CXX $(CXX)
-> $(PA_LDFLAGS) -o lib/$(PALIB) $(LTOBJS) $(DLL_LIBS)
-> +
-> + $(ALL_TESTS): bin/%: lib/$(PALIB) $(MAKEFILE) $(PAINC) test/%.c
-> +-      @WITH_ASIO_FALSE@ $(LIBTOOL) --mode=link $(CC) -o $@ $(CFLAGS)
-> $(top_srcdir)/test/$*.c lib/$(PALIB) $(LIBS)
-> +-      @WITH_ASIO_TRUE@  $(LIBTOOL) --mode=link --tag=CXX $(CXX) -o $@
-> $(CXXFLAGS) $(top_srcdir)/test/$*.c lib/$(PALIB) $(LIBS)
-> ++      @WITH_ASIO_FALSE@ $(LIBTOOL) --mode=link $(CC) -o $@ $(CFLAGS)
-> $(LDFLAGS) $(top_srcdir)/test/$*.c lib/$(PALIB) $(LIBS)
-> ++      @WITH_ASIO_TRUE@  $(LIBTOOL) --mode=link --tag=CXX $(CXX) -o $@
-> $(CXXFLAGS) $(LDFLAGS) $(top_srcdir)/test/$*.c lib/$(PALIB) $(LIBS)
-> +
-> + $(EXAMPLES): bin/%: lib/$(PALIB) $(MAKEFILE) $(PAINC) examples/%.c
-> +-      @WITH_ASIO_FALSE@ $(LIBTOOL) --mode=link $(CC) -o $@ $(CFLAGS)
-> $(top_srcdir)/examples/$*.c lib/$(PALIB) $(LIBS)
-> +-      @WITH_ASIO_TRUE@  $(LIBTOOL) --mode=link --tag=CXX $(CXX) -o $@
-> $(CXXFLAGS) $(top_srcdir)/examples/$*.c lib/$(PALIB) $(LIBS)
-> ++      @WITH_ASIO_FALSE@ $(LIBTOOL) --mode=link $(CC) -o $@ $(CFLAGS)
-> $(LDFLAGS) $(top_srcdir)/examples/$*.c lib/$(PALIB) $(LIBS)
-> ++      @WITH_ASIO_TRUE@  $(LIBTOOL) --mode=link --tag=CXX $(CXX) -o $@
-> $(CXXFLAGS) $(LDFLAGS) $(top_srcdir)/examples/$*.c lib/$(PALIB) $(LIBS)
-> +
-> + $(SELFTESTS): bin/%: lib/$(PALIB) $(MAKEFILE) $(PAINC) qa/%.c
-> +-      @WITH_ASIO_FALSE@ $(LIBTOOL) --mode=link $(CC) -o $@ $(CFLAGS)
-> $(top_srcdir)/qa/$*.c lib/$(PALIB) $(LIBS)
-> +-      @WITH_ASIO_TRUE@  $(LIBTOOL) --mode=link --tag=CXX $(CXX) -o $@
-> $(CXXFLAGS) $(top_srcdir)/qa/$*.c lib/$(PALIB) $(LIBS)
-> ++      @WITH_ASIO_FALSE@ $(LIBTOOL) --mode=link $(CC) -o $@ $(CFLAGS)
-> $(LDFLAGS) $(top_srcdir)/qa/$*.c lib/$(PALIB) $(LIBS)
-> ++      @WITH_ASIO_TRUE@  $(LIBTOOL) --mode=link --tag=CXX $(CXX) -o $@
-> $(CXXFLAGS) $(LDFLAGS) $(top_srcdir)/qa/$*.c lib/$(PALIB) $(LIBS)
-> +
-> + bin/paloopback: lib/$(PALIB) $(MAKEFILE) $(PAINC) $(LOOPBACK_OBJS)
-> +-      @WITH_ASIO_FALSE@ $(LIBTOOL) --mode=link $(CC) -o $@ $(CFLAGS)
-> $(LOOPBACK_OBJS) lib/$(PALIB) $(LIBS)
-> +-      @WITH_ASIO_TRUE@ $(LIBTOOL) --mode=link --tag=CXX $(CXX) -o $@
-> $(CXXFLAGS)  $(LOOPBACK_OBJS) lib/$(PALIB) $(LIBS)
-> ++      @WITH_ASIO_FALSE@ $(LIBTOOL) --mode=link $(CC) -o $@ $(CFLAGS)
-> $(LDFLAGS) $(LOOPBACK_OBJS) lib/$(PALIB) $(LIBS)
-> ++      @WITH_ASIO_TRUE@ $(LIBTOOL) --mode=link --tag=CXX $(CXX) -o $@
-> $(CXXFLAGS) $(LDFLAGS) $(LOOPBACK_OBJS) lib/$(PALIB) $(LIBS)
-> +
-> + install: lib/$(PALIB) portaudio-2.0.pc
-> +       $(INSTALL) -d $(DESTDIR)$(libdir)
-> +@@ -224,10 +224,10 @@ distclean: clean
-> +       $(CC) -c $(CFLAGS) $< -o $@
-> +
-> + %.lo: %.c $(MAKEFILE) $(PAINC)
-> +-      $(LIBTOOL) --mode=compile $(CC) -c $(CFLAGS) $< -o $@
-> ++      $(LIBTOOL) --mode=compile $(CC) -c $(CFLAGS) $(LDFLAGS) $< -o $@
-> +
-> + %.lo: %.cpp $(MAKEFILE) $(PAINC)
-> +-      $(LIBTOOL) --mode=compile --tag=CXX $(CXX) -c $(CXXFLAGS) $< -o $@
-> ++      $(LIBTOOL) --mode=compile --tag=CXX $(CXX) -c $(CXXFLAGS)
-> $(LDFLAGS) $< -o $@
-> +
-> + %.o: %.cpp $(MAKEFILE) $(PAINC)
-> +       $(CXX) -c $(CXXFLAGS) $< -o $@
-> diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19_20140130.bb
-> b/meta-oe/recipes-support/portaudio/portaudio-v19_20140130.bb
-> new file mode 100644
-> index 0000000..8f2b0db
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/portaudio/portaudio-v19_20140130.bb
-> @@ -0,0 +1,32 @@
-> +SUMMARY = "A portable audio library"
-> +SECTION = "libs/multimedia"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=26107732c2ab637c5710446fcfaf02
-> df"
-> +
-> +PV = "v19+svnr1919"
-> +
-> +SRC_URI = "http://www.portaudio.com/archives/pa_stable_v19_20140130.tgz \
-> +           file://ldflags.patch"
-> +SRC_URI[md5sum] = "7f220406902af9dca009668e198cbd23"
-> +SRC_URI[sha256sum] = "8fe024a5f0681e112c6979808f684c
-> 3516061cc51d3acc0b726af98fc96c8d57"
-> +
-> +S = "${WORKDIR}/portaudio"
-> +
-> +inherit autotools pkgconfig
-> +
-> +PACKAGECONFIG ??= "alsa jack"
-> +PACKAGECONFIG[alsa] = "--with-alsa, --without-alsa, alsa-lib,"
-> +PACKAGECONFIG[jack] = "--with-jack, --without-jack, jack,"
-> +
-> +EXTRA_OECONF = "--without-oss --without-asihpi"
-> +
-> +do_install_append() {
-> +    mkdir --parents ${D}${bindir}
-> +    for b in ${B}/bin/pa*; do
-> +        # Bit nasty, should always work
-> +        ${B}/*-libtool --mode install install $b ${D}${bindir}
-> +    done
-> +}
-> +
-> +PACKAGES += "portaudio-examples"
-> +FILES_portaudio-examples = "${bindir}"
-> diff --git a/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
-> b/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
-> deleted file mode 100644
-> index c8d7378..0000000
-> --- a/meta-oe/recipes-support/portaudio/portaudio-v19_svn.bb
-> +++ /dev/null
-> @@ -1,32 +0,0 @@
-> -SUMMARY = "A portable audio library"
-> -SECTION = "libs/multimedia"
-> -LICENSE = "PortAudio"
-> -LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=26107732c2ab637c5710446fcfaf02
-> df"
-> -
-> -PV = "v19+svnr${SRCPV}"
-> -
-> -SRCREV = "1387"
-> -SRC_URI = "svn://subversion.assembla.com/svn/portaudio/portaudio;
-> module=trunk;protocol=http"
-> -S = "${WORKDIR}/trunk"
-> -
-> -inherit autotools pkgconfig
-> -
-> -PACKAGECONFIG ??= "alsa jack"
-> -PACKAGECONFIG[alsa] = "--with-alsa, --without-alsa, alsa-lib,"
-> -PACKAGECONFIG[jack] = "--with-jack, --without-jack, jack,"
-> -
-> -EXTRA_OECONF = "--without-oss"
-> -
-> -TESTS = "  pa_devs patest1      patest_hang patest_many
->  patest_prime patest_sine patest_stop     patest_write_sine        \
-> -pa_fuzz    patest_buffer        patest_in_overflow  patest_maxsines
->  patest_read_record  patest_sine8         patest_sync              \
-> -pa_minlat  patest_callbackstop  patest_latency      patest_multi_sine
->  patest_record       patest_sine_formats  patest_toomanysines      \
-> -paqa_devs  patest_clip          patest_leftright    patest_out_underflow
-> patest_ringmix      patest_sine_time     patest_underflow         \
-> -paqa_errs  patest_dither        patest_longsine     patest_pink
->  patest_saw          patest_start_stop    patest_wire"
-> -
-> -# DEFINES = PA_USE_OSS=1 HAVE_LIBPTHREAD=1
-> -# DEFINES += PA_LITTLE_ENDIAN
-> -
-> -# INCLUDEPATH = ../pa_common
-> -
-> -PACKAGES += "portaudio-examples"
-> -FILES_portaudio-examples = "${bindir}"
-> --
-> 2.8.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Andreas
 
