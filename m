@@ -1,47 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 11AC2770A1
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id BCA3F77047
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2016 08:03:59 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id b184so5894802wma.3
+	Thu, 15 Sep 2016 08:05:56 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id b187so5848141wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2016 01:04:00 -0700 (PDT)
+	Thu, 15 Sep 2016 01:05:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=Q4ulJPrHdAthC/PI1k2XbBSToJbi8Dw73VTuKG/RYw0=;
-	b=A/FtyqRNsa0i6eyrhp1+cbkLmtooDkiaMUnZfUsTIp/vLpbes3JAGURJgCxU0xg1yz
-	psiTqO1X5izNWJLQyCFuSr2DzSEj4upQP1kP188DocLkcen9oHMKXcDL8x3R5rQDKtG+
-	P1RzGkUVtiiXz08aY5txdCP8CY1sGNLz2sEzfsGKtYh+Z6bP0AQi+Ix94iPX6mk03gur
-	6TlwBePdbPuIiijkug8/5efOHdpHZovLeeV2Z4iiUqZ+M15p7BZbh70eYl/4ZJ6smvOw
-	pffiUK8xqL0OFgmM22Gxc6uMnWR97l7D7/3/Wwhaj0I0ybtRKDMGMIYLJ6fC8kQAAekc
-	u6Nw==
+	h=from:to:cc:subject:date:message-id;
+	bh=iERfHJinoQ8dxb+8PJvFJKNL5HZSp+aVOIQr4UpH/ws=;
+	b=OeHi/ojDe5jiEwalVD+4ZqrXQoSyHRevp5bnysCy03KzntlOWsi7C1Mea7j754gVO5
+	FIrEsi7ypP278nLnhu9k+N63BbwD1YfStWSqBQWZXqtzVkuWd+IadB71zzdiObR9J8BX
+	egXyk47bZfOU9MYQj1N5sl28auhYjJtr662dKxkNs0vL1woVxL0YHlsGHvQ5yiBv5COY
+	yfZeZVk67YYszYBVX6KmBmWEX/N+u9q4qgakzLJzbp7xQbxZq6nvopdV2Mim2hGGdJUK
+	Zo6KVGhF7/NGkZ4W1O3/VflXu6rDnAXf6XSgySLa0px9C4MOXxQ5h7qfiPXsgM/xK5gh
+	0zUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=Q4ulJPrHdAthC/PI1k2XbBSToJbi8Dw73VTuKG/RYw0=;
-	b=JTzshY//kw/KXwDUhu3JnxK5NYDN46E4KIwhDwmCAdBmFTcVAh39dYY/8qjEQ3R+rp
-	YMoOeFMMJwawaYzAM7k9FPWTaXdKYESOX5Caq5tr2cb2pdJJr1nCfdxHNhSuo1cAQkJp
-	LlCytzlBJ1Q7HF+XWoqPKYc+8qaVKNMm4CiiJeG57O8xKWIi7upAWZ/PaH+DcRIyoe4Z
-	aEvdwtp7aTdDqVieKZ/lks5agklgqnLFkxGaxlJmnVhIOAeliOjDNeOHELcN8ONQgxwq
-	YtXdHNZAdx7d/aEdPDCjLZ40rmApcuZuA7D1pW33duaqsgqSgnXEqLOa7WKmrZY1vNG2
-	m49w==
-X-Gm-Message-State: AE9vXwPoBq9C1QTnnCXfXYwEc55cR8PJvdPTAPaZ4R39oHpAOXAkznrGx+kXkVSSLJN/PSLXpLPRZNEsLwfRiA==
-X-Received: by 10.28.86.8 with SMTP id k8mr1708232wmb.33.1473926639863; Thu,
-	15 Sep 2016 01:03:59 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.80.137.202 with HTTP; Thu, 15 Sep 2016 01:03:59 -0700 (PDT)
-In-Reply-To: <CALbNGRTg=j3JGSN4CZm9uSEGXy1-1OWX9i3sP9UHefdiiZQOwA@mail.gmail.com>
-References: <1473884049-27152-1-git-send-email-schnitzeltony@googlemail.com>
-	<1473884049-27152-2-git-send-email-schnitzeltony@googlemail.com>
-	<CA+chaQdQZLYvVssqqR0-0JPBPHzWSYPTZb1ROro+QKqx3vKMRg@mail.gmail.com>
-	<CALbNGRTg=j3JGSN4CZm9uSEGXy1-1OWX9i3sP9UHefdiiZQOwA@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=iERfHJinoQ8dxb+8PJvFJKNL5HZSp+aVOIQr4UpH/ws=;
+	b=DCln72rGCPDj80jqFvdAtMg8hJ9Hxk16coMqcMeLLr1SvpPcF72N3t3wubMLje7M98
+	ywGpLeuYtjz7KPngePg4RmW16//Tz/opuJ2OemE5p+lvYujjcFZZmyo+Xv3PjXhDq/XO
+	qA+X/AQA/pTiGqiFVopip6H2XAmHpm3WEENb6qLvwF/jXKW2A55qi+v1mpmx4ZDkOiDy
+	elG2ybGwssceBmEauxD/svQQw89q4qs1FQxET+RVq8aCK6BYreXr/0j7PT0q1ShAI8UP
+	bSIW2rOSCnX1gbuLLpAu4hIk9HnersH4i2hbO0h2/6B8Es/aQN0X5Prr9ci5WV5XPygQ
+	koJw==
+X-Gm-Message-State: AE9vXwNyNc4wfnk/S89Top0alOPxV6wH0QKjk9XWx4wS2U1/T1jpDx9OeVpkJzElrJi1qw==
+X-Received: by 10.194.90.104 with SMTP id bv8mr7896668wjb.189.1473926756829;
+	Thu, 15 Sep 2016 01:05:56 -0700 (PDT)
+Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
+	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
+	190sm1227735wmk.13.2016.09.15.01.05.55
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 15 Sep 2016 01:05:56 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 15 Sep 2016 10:03:59 +0200
-Message-ID: <CA+chaQcd6S4wmUNWvqVfiRV_6f1KV4=+7VHoMtUJ5KkTdJJ8ag@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH] samba: unblacklist and link with bfd on arm only
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 15 Sep 2016 10:05:51 +0200
+Message-Id: <20160915080551.15057-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.10.0
+Subject: [meta-browser][PATCH] chromium-wayland: include 0006-Remove-GBM-support-from-wayland.gyp.patch only with CHROMIUM_ENABLE_WAYLAND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,45 +52,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2016 08:04:00 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 15 Sep 2016 08:06:00 -0000
 
-WARN: samba: samba rdepends on libpam, but it isn't a build dependency?
+* otherwise build fails to apply, because there is no ozone directory
+  No file to patch.  Skipping patch.
 
-is reported in every report (where samba was successfully built)
-http://www.openembedded.org/wiki/Bitbake_World_Status for more than a year
-- pam isn't in typical 'crowded' sysroot unless you have pam in
-DISTRO_FEATURES and it might be always detected when you have pam in
-DISTRO_FEATURES.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-There is also at least one report where it failed with ld.gold also for
-qemux86, e.g.:
-http://errors.yoctoproject.org/Errors/Details/75447/
+diff --git a/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb b/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
+index 8db8a4e..f7ad2ce 100644
+--- a/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
++++ b/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
+@@ -7,7 +7,6 @@ SRC_URI += "\
+         file://0003-Remove-hard-coded-values-for-CC-and-CXX.patch \
+         file://0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch \
+         file://0005-Override-root-filesystem-access-restriction.patch \
+-	file://chromium-wayland/0006-Remove-GBM-support-from-wayland.gyp.patch \
+ 	file://chromium-wayland/0007-Workaround-for-glib-related-build-error-with-ozone-w.patch \
+         file://chromium-wayland/0011-Replace-readdir_r-with-readdir.patch \
+         file://chromium-wayland/remove-Werror.patch \
+@@ -22,7 +21,7 @@ SRC_URI[sha256sum] = "4ca4e2adb340b3fb4d502266ad7d6bda45fa3519906dbf63cce11a63f6
+ OZONE_WAYLAND_GIT_BRANCH = "Milestone-SouthSister"
+ OZONE_WAYLAND_GIT_SRCREV = "c605505044af3345a276abbd7c29fd53db1dea40"
+ 
+-SRC_URI += "${@base_conditional('CHROMIUM_ENABLE_WAYLAND', '1', 'git://github.com/01org/ozone-wayland.git;destsuffix=${OZONE_WAYLAND_GIT_DESTSUFFIX};branch=${OZONE_WAYLAND_GIT_BRANCH};rev=${OZONE_WAYLAND_GIT_SRCREV}', '', d)}"
++SRC_URI += "${@base_conditional('CHROMIUM_ENABLE_WAYLAND', '1', 'git://github.com/01org/ozone-wayland.git;destsuffix=${OZONE_WAYLAND_GIT_DESTSUFFIX};branch=${OZONE_WAYLAND_GIT_BRANCH};rev=${OZONE_WAYLAND_GIT_SRCREV} file://chromium-wayland/0006-Remove-GBM-support-from-wayland.gyp.patch', '', d)}"
+ 
+ # Component build is unsupported in ozone-wayland for Chromium 48
+ python() {
+-- 
+2.10.0
 
-I'll of course include these changes in next jenkins build to report which
-failures it will re-introduce.
-
-On Thu, Sep 15, 2016 at 12:20 AM, Andreas M=C3=BCller <
-schnitzeltony@googlemail.com> wrote:
-
-> On Wed, Sep 14, 2016 at 11:21 PM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
-> > What about the other 2 issues mentioned in the comment?
-> >
-> I am sure I am missing something. I did
->
-> * pull meta-oe
-> * built samba with this patch attached in a 'crowded' sysroot (good
-> for floating dependencies) for arm (raspi2)
->
-> -> No warnings/errors
->
-> Andreas
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
