@@ -1,30 +1,47 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E9BE73D27
+Return-Path: <joe@deserted.net>
+Received: from mail-it0-f68.google.com (mail-it0-f68.google.com
+	[209.85.214.68])
+	by mail.openembedded.org (Postfix) with ESMTP id ECBF077175
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Sep 2016 13:01:15 +0000 (UTC)
-Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
-	by relay1.mentorg.com with esmtp 
-	id 1bkWHz-00005r-R2 from Joe_MacDonald@mentor.com ;
-	Thu, 15 Sep 2016 06:01:15 -0700
-Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
-	(147.34.97.43) with Microsoft SMTP Server id 14.3.224.2;
-	Thu, 15 Sep 2016 06:01:15 -0700
-Received: by burninator (Postfix, from userid 1000)	id F2B4A580415; Thu, 15
-	Sep 2016 09:01:14 -0400 (EDT)
-Date: Thu, 15 Sep 2016 09:01:14 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20160915130114.GA5455@mentor.com>
-References: <20160915083906.GB2641@jama>
-MIME-Version: 1.0
-In-Reply-To: <20160915083906.GB2641@jama>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: 3 meta-networking patches
+	Thu, 15 Sep 2016 13:38:45 +0000 (UTC)
+Received: by mail-it0-f68.google.com with SMTP id e20so4482259itc.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Sep 2016 06:38:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=deserted-net.20150623.gappssmtp.com; s=20150623;
+	h=sender:from:to:subject:date:message-id;
+	bh=QmCyi6ZP/90ECMI1jINTC2oKKWf7d9vHP85iD7sY/fE=;
+	b=DnnMp2QhAXPsVe3Ya8IIfMeXjCA6g8N5jSVWkqaTqjH94F3O8fa8KfIjScA4rJcP3J
+	5KuTdEMGEwW/bE26pOxQhnvTWv2R7HnxqdOdTsY0XBc7Pl6RyxwA3kKXTPN9QyCazhzi
+	63VIFPIMLCtkOn3cK//mXGFux5S7hDxuADjlmMWx/SvriybNxnGsYXV7tTzSkM9Yh58w
+	ctWLked2hPACCNFRP7FCgVIXAKTB3k+DgrZzAYwWg+gmL04Aya5lVHmkA3sHNovSh09m
+	g4Y/DfERmeKbRGS4jZHZhLJ6UHylCABxQWota/bueBbTy2PJlsQya/jKmi/qlf7/wnL4
+	Ld7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:sender:from:to:subject:date:message-id;
+	bh=QmCyi6ZP/90ECMI1jINTC2oKKWf7d9vHP85iD7sY/fE=;
+	b=RXYubIzpynU5kAMJLFxo5QpETkUg10TyTIFapSyqby8ZzCLrrv8gnzE2vcicWoU6iX
+	ntZSwR06C/y6f/TFaFO0MYmA+UI9dDy7mt9Ul1VhLUvbOEkwvMQfm2AkyGiY/RCZ03FC
+	D/s2B6UB+hRE27MibZDY9DrZVc/VGcSq4lQPHacSSiJCVtS+t6zOveuEUlcqTqojVwjZ
+	xqvZ2LJB0GBvZWMwfBLP5wB1JpHQHKefREY7TSjUlhbLPBgzfa8dzyb7aTrdqUIhrDHH
+	HUrQpdL8r6gUCBIRvB9PKLoTwO9UkM5iKcDoxAjUK27cXUG5xNUqujKkj+BfFVqZCXdH
+	0f5g==
+X-Gm-Message-State: AE9vXwN1kSyASkNg1zni2uVi8Y8ZLdegQxBNa/KtefMFIZpiTyIoTaQoP1T0dMpceWx7VA==
+X-Received: by 10.107.158.213 with SMTP id h204mr17029092ioe.75.1473946726011; 
+	Thu, 15 Sep 2016 06:38:46 -0700 (PDT)
+Received: from mir.deserted.net ([23.233.31.74])
+	by smtp.gmail.com with ESMTPSA id r94sm1693216ioi.2.2016.09.15.06.38.44
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 15 Sep 2016 06:38:45 -0700 (PDT)
+Sender: Joe MacDonald <joe@deserted.net>
+From: Joe MacDonald <joe_macdonald@mentor.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 15 Sep 2016 09:38:52 -0400
+Message-Id: <1473946732-6665-1-git-send-email-joe_macdonald@mentor.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-networking][PATCH] samba: un-blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,58 +54,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Sep 2016 13:01:16 -0000
-X-Groupsio-MsgNum: 63129
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="1yeeQ81UyVL57Vl7"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 15 Sep 2016 13:38:46 -0000
 
---1yeeQ81UyVL57Vl7
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Commit b60c60806e57f69233db582ef88d113867c2ecd1 resolves the linking
+issue, later commits (mainly 12a118989296d13e036d0daa9f9a3d45eee03ded)
+resolve the packaging issue, so re-enable samba for everyone.
 
-Hey Martin,
+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+---
+ meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 5 -----
+ 1 file changed, 5 deletions(-)
 
-[3 meta-networking patches] On 16.09.15 (Thu 10:39) Martin Jansa wrote:
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+index 7d7fa02..3686faa 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+@@ -317,8 +317,3 @@ FILES_${PN}-python-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.d
+ 
+ RDEPENDS_${PN}-pidl_append = " perl"
+ FILES_${PN}-pidl = "${bindir}/pidl ${datadir}/perl5/Parse"
+-
+-# http://errors.yoctoproject.org/Errors/Details/81004/
+-# before this issue it was also failing in do_package and
+-# autodetecting libpam dependency
+-PNBLACKLIST[samba] ?= "BROKEN: fails to build with new binutils-2.27"
+-- 
+1.9.1
 
-> Hi Joe,
->=20
-> can you please confirm state of thes change:
-> https://patchwork.openembedded.org/patch/128859/
-> it's Accepted on patchwork, but still applicable and included i
-> master-next.
 
-Curious.  I'll scoop that up this morning.  It looks pretty obvious.
-
-> I'll drop these 2 from master-next as they are marked as
-> Rejected/Changes-Requested now:
-> https://patchwork.openembedded.org/patch/122365/
-> https://patchwork.openembedded.org/patch/125839/
-
-Yep, the former had a lot of discussion around it and ultimately the
-rationale wasn't solid.  The latter was resolved with patches to
-waf-samba as a generic solution rather than piecemeal, as this was
-doing.
-
---=20
--Joe MacDonald.
-:wq
-
---1yeeQ81UyVL57Vl7
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJX2puQAAoJEEn8ffcsOfaW6GQIAL7yCZDDoETG7IlruNPijDVY
-cwT7MQYkSJKhQbg8VDKJEXNR/9g3U3fqHtC4Xwu3cdnnO4jBMi9q5pYrpqXzFrhr
-Fagw6kSMJMbp5jkp/WCJQRmzJ3u12HYvU1tPVzlQzZduxYi/8dcvD6oNmWqJaEHg
-Jt22wRoEPx9plQPSO0RUTclaRrqffmvSrUq64tkOWeE7UrmLkvWluPZYQ4qpTrTJ
-gW4t2qTG44+fsWtFxHIGJVzEh/Hol3WuoBeYHrWaSxfaa0aepyRH3oxwZ/1TC6KM
-nX1AVmQ1by4ZmyXWE7xS07OxmoZPBh+/IeTlP1tJ1aQNzW6E93ye6CFMQ6lTgUU=
-=+JIW
------END PGP SIGNATURE-----
-
---1yeeQ81UyVL57Vl7--
