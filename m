@@ -1,48 +1,52 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D0AC6FFFB
+Return-Path: <piotr.lewicki@elfin.de>
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id B478C731D6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Sep 2016 12:10:20 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id b187so3446259wme.0
+	Fri, 16 Sep 2016 14:29:22 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id 1so45059945wmz.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Sep 2016 05:10:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=JVMmOp1Yy2CtF1lW/c1u9BvIV0xor039BRGuEIwJyWQ=;
-	b=VpM9KlE4AqWEIITjPr2Ew00TtjLq+MFlDzmwY8m8xztvEkwmw7+SLhygeUpqPN5OpB
-	kPTHYSqyEUWifzmCBFu0bBHJQNL48d1k1dVrwNIBRYQ7wdFSpN6cpyPsCelMkI9BlM8A
-	SWhSU3Fj5h5Ao80wP5IfMnUI1+G8TH9S5Xebk9k9wG2HhlLZh0s1yTKDTt8bbyH39yly
-	Ll9o8MYg7Pwp+9oxYZbd58Qse9KqYYIvfpCtZ5bDSvot+hZs3nbr5h5y+v/yA7jWpuux
-	klBrnGH4mWSun/gAQ0TfqpS8hJvt339Hb476iQm3syp19a8Am+Sv3GEBzl2o5aSwcgnv
-	baTQ==
+	Fri, 16 Sep 2016 07:29:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=elfin.de; s=google;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=9mYG/4W3cP5f1c1spXuvaPLPK7k84/iV5h8OG4e9i9E=;
+	b=Y79YOrkHST1nCIaW7KRptJ+7A4UMDRrwXtubxrtpQ3gojzEe8d+rdZ6qRrW5V9Da2I
+	lrMYhwywK4JqgIF9pKl46zCduPM1kKW9jujd1EPUZND2s2za0tkwfaTY3M8UREoZEN9u
+	sy0JAe41blE/kSeJyz83KUC42dHzTu/6zNg0wrLTwquQyqOug8yPR3/HLNj3cxoEcITx
+	nQSoTsz1unRSw3RsflYbKUdLud+HKKgH/BKpGJNya2tTsKJTlf45Im27OBLalBdmbyQd
+	teNUI1MMz1BDKIb3I6cBB+Bc/vOM5lTfu0Bx8Q6E72mpAzS/HUJqoMFskjqoJqpAspw1
+	U62w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=JVMmOp1Yy2CtF1lW/c1u9BvIV0xor039BRGuEIwJyWQ=;
-	b=HaWx63YbJC4UcUaevDjANG8I4mIW/3xg5fkIGUN2ALfZwiKIKEREdXb7txwUfZzSos
-	uda4jrinxXH0BJEPZouZ3G2O/VhrZzkfm2pbnMyExMb/2Nvav4EmOSgWmV3RDChySOxk
-	GeHCvsP1JfdQU/PAq/7q/3xpeoVliZOnfTSZRQ2l//v0ChFzESqdlavyKspOCUt/Q/Rb
-	q2kBO2TqLThqZHxhjQiI05boWqy9LXJZpbEmpK6Z6U+0zX0uddrbtHKkqM4LnWyMAaoN
-	CICWGUnhlxVgehfXb4h1bdO9Fqun+f+jTNdpybfQLI+jqL/Ro4Szh846bqCVevGv4V3y
-	abyA==
-X-Gm-Message-State: AE9vXwPt47lDsKtFR7PhdlKE7/9+7Hy4Yhvj2OS2zuNaL+l0K4ps4ut/dkEEce0r6mr4V1nlGrIRpWYZ/V6mvQ==
-X-Received: by 10.28.173.205 with SMTP id w196mr8030786wme.86.1474027821094;
-	Fri, 16 Sep 2016 05:10:21 -0700 (PDT)
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=9mYG/4W3cP5f1c1spXuvaPLPK7k84/iV5h8OG4e9i9E=;
+	b=lMuThyhP3lKMkmy8nBbkXJcuqR2LDic4YiWwJ47hiA2FObKA7Cl1BWTFCEA+jnxl0A
+	e3Bma3LeYlIaC0U1mtRNO3ozXDeERx/p2VRhLIpfrhT/+mT1u0n3xoZlolhK8m/nby7C
+	ELUZhGZotsxZBs7LVEwqZqB5fLSz3LuisNXCXSlfbYjxJldCyV3cP6JizImPbNF53vqp
+	5RxP7WTKpw8FwxKkCykVLcqq57NIZqLOXvHK1dVDnBMh23EMorZKIMjg8RynMVnDR5BL
+	iG/8UA0zKilPBRG3wlh0gX2eBRVznREQQ72XuRCaHS+fid/xE2Wmq5w59bgxGj42GwYj
+	fh0g==
+X-Gm-Message-State: AE9vXwNVMCSMZGHnHwCQUCs/iqs8Tivy3NXNpIgsqBdxvaZ5/Qwf1x6Dn55eD4E8Gtk+qA==
+X-Received: by 10.28.66.156 with SMTP id k28mr8018209wmi.58.1474036162644;
+	Fri, 16 Sep 2016 07:29:22 -0700 (PDT)
+Received: from [192.168.2.170] (b2b-94-79-174-114.unitymedia.biz.
+	[94.79.174.114])
+	by smtp.gmail.com with ESMTPSA id l3sm8693879wjp.17.2016.09.16.07.29.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 16 Sep 2016 07:29:22 -0700 (PDT)
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <3a7cc6c5-fec8-ee48-5492-8e3d91488bc1@elfin.de>
+From: "piotr.lewicki" <piotr.lewicki@elfin.de>
+Message-ID: <7092297e-7837-f90e-f2c6-33c674b60391@elfin.de>
+Date: Fri, 16 Sep 2016 16:29:21 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.2.0
 MIME-Version: 1.0
-Received: by 10.80.140.2 with HTTP; Fri, 16 Sep 2016 05:10:20 -0700 (PDT)
-In-Reply-To: <20160916085050.GA27969@mbabyjoh-desk.ger.corp.intel.com>
-References: <1472730043-31245-1-git-send-email-maxin.john@intel.com>
-	<1472730043-31245-5-git-send-email-maxin.john@intel.com>
-	<12285709.EfYBoYq9CT@peggleto-mobl.ger.corp.intel.com>
-	<1649463.EYVuLskMBZ@peggleto-mobl.ger.corp.intel.com>
-	<20160916085050.GA27969@mbabyjoh-desk.ger.corp.intel.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-Date: Fri, 16 Sep 2016 14:10:20 +0200
-Message-ID: <CAAQYJAtf4ixqfk+0Xk2z7jSHE8=b3GWW1m=Viw8Qnu_1ZMCFSQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
-Subject: Re: [PATCH 4/4] tslib: move recipe from oe-core
+In-Reply-To: <3a7cc6c5-fec8-ee48-5492-8e3d91488bc1@elfin.de>
+Subject: Re: [meta-qt5][bug] configure step of qtdeclarative fail during "populate_sdk" step
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,62 +59,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Sep 2016 12:10:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 16 Sep 2016 14:29:26 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Sep 16, 2016 at 10:50 AM, Maxin B. John <maxin.john@intel.com> wrote:
-> Hi Paul,
+Just a follow up.
+
+The SDK was built properly after making a clean build.
+
+
+BR,
+
+Piotr
+
+
+On 14.09.2016 14:39, piotr.lewicki wrote:
+> Hi,
 >
-> On Fri, Sep 16, 2016 at 10:19:50AM +1200, Paul Eggleton wrote:
->> On Fri, 16 Sep 2016 10:17:11 Paul Eggleton wrote:
->> > On Thu, 01 Sep 2016 14:40:43 Maxin B. John wrote:
->> > > Move tslib recipe from oe-core layer.
->> > >
->> > > Signed-off-by: Maxin B. John <maxin.john@intel.com>
->> > > ---
->> > >
->> > >  meta-gpe/recipes-graphics/tslib/tslib/ts.conf  | 25 ++++++++++++
->> > >  meta-gpe/recipes-graphics/tslib/tslib/tslib.sh |  8 ++++
->> > >  meta-gpe/recipes-graphics/tslib/tslib_1.1.bb   | 53
->> > >
+> I just tried to execute "populate_sdk" step but my build failed due to 
+> the error in "nativesdk-qtdeclarative". (log below)
 >
-> Apparently I missed to notice some replies to these patches (recently
-> my inbox has been behaving a bit strangely - missing or delaying some mails
-> for a day or two). Sorry for that!
+> I use the newest version of meta-qt5 
+> (4656ab3636c099906989e0d923e1ac7a8ffe7b31) and I'm building an image 
+> for raspberry pi.
 >
->> Also, is meta-gpe really an appropriate place for this?
->>
-> I am open to suggestions. xtscal had HOMEPAGE set as "http://gpe.linuxtogo.org".
-> Since other packages were logically connected to that, moved them to meta-gpe
-> as well.
-
-Hi,
-
-meta-gpe is almost empty..time to merge it down in one other
-generic/middleware layer?
-Plus there are other recipes depending on tslib as for example zaurusd
-(meta-handheld).
-
-Now, where to put stuff like this tslib?
-To avoid the creation of another one I'd say we could start putting
-things in meta-oe.
-Well, there is still one drawback...the 'custom' xserver-nodm-init is
-still present but there are patches on the ML for its removal.
-
-Opinions?
-
-Cheers
-Andrea
-
+> Could you help me with this?
 >
->> Cheers,
->> Paul
 >
-> Best Regards,
-> Maxin
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Thank you,
+>
+> Piotr Lewicki
+>
+>
+> ERROR: nativesdk-qtdeclarative-5.7.0+gitAUTOINC+d48b397cc7-r0 
+> do_configure: Error calling 
+> /home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/sysroots/x86_64-linux/usr/bin/qt5/qmake 
+> -makefile -o Makefile     CONFIG+=OE_QTXMLPATTERNS_ENABLED 
+> /home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qtdeclarative/5.7.0+gitAUTOINC+d48b397cc7-r0/git/qtdeclarative.pro 
+>
+> ERROR: nativesdk-qtdeclarative-5.7.0+gitAUTOINC+d48b397cc7-r0 
+> do_configure: Function failed: do_configure (log file is located at 
+> /home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qtdeclarative/5.7.0+gitAUTOINC+d48b397cc7-r0/temp/log.do_configure.17400)
+> ERROR: Logfile of failure stored in: 
+> /home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qtdeclarative/5.7.0+gitAUTOINC+d48b397cc7-r0/temp/log.do_configure.17400
+> Log data follows:
+> | DEBUG: Executing python function sysroot_cleansstate
+> | DEBUG: Python function sysroot_cleansstate finished
+> | DEBUG: Executing shell function qmake5_base_preconfigure
+> | Previously configured separate build directory detected, cleaning 
+> /home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qtdeclarative/5.7.0+gitAUTOINC+d48b397cc7-r0/build
+> | DEBUG: Shell function qmake5_base_preconfigure finished
+> | DEBUG: Executing shell function do_configure
+> | NOTE: qmake prevar substitution: ' CONFIG+=OE_QTXMLPATTERNS_ENABLED'
+> | ERROR: Error calling 
+> /home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/sysroots/x86_64-linux/usr/bin/qt5/qmake 
+> -makefile -o Makefile     CONFIG+=OE_QTXMLPATTERNS_ENABLED 
+> /home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qtdeclarative/5.7.0+gitAUTOINC+d48b397cc7-r0/git/qtdeclarative.pro
+> | 
+> /home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qtdeclarative/5.7.0+gitAUTOINC+d48b397cc7-r0/git/.qmake.conf:1: 
+> Cannot find feature qt_build_config
+> | Could not find qmake configuration file linux-oe-g++.
+> | Error processing project file: 
+> /home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qtdeclarative/5.7.0+gitAUTOINC+d48b397cc7-r0/git/qtdeclarative.pro
+> | WARNING: exit code 1 from a shell command.
+> | ERROR: Function failed: do_configure (log file is located at 
+> /home/piotr.lewicki/yocto-raspberry/2016-08-15/build/tmp/work/x86_64-nativesdk-pokysdk-linux/nativesdk-qtdeclarative/5.7.0+gitAUTOINC+d48b397cc7-r0/temp/log.do_configure.17400)
+> ERROR: Task 
+> virtual:nativesdk:/home/piotr.lewicki/yocto-raspberry/2016-08-15/build/../layers/meta-qt5/recipes-qt/qt5/qtdeclarative_git.bb:do_configure 
+> (virtual:nativesdk:/home/piotr.lewicki/yocto-raspberry/2016-08-15/build/../layers/meta-qt5/recipes-qt/qt5/qtdeclarative_git.bb:do_configure) 
+> failed with exit code '1'
+> NOTE: Tasks Summary: Attempted 4627 tasks of which 4573 didn't need to 
+> be rerun and 1 failed.
+> NOTE: Writing buildhistory
+>
+> Summary: 1 task failed:
+> virtual:nativesdk:/home/piotr.lewicki/yocto-raspberry/2016-08-15/build/../layers/meta-qt5/recipes-qt/qt5/qtdeclarative_git.bb:do_configure 
+>
+> Summary: There were 2 ERROR messages shown, returning a non-zero exit 
+> code.
+>
+
 
