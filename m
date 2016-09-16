@@ -1,46 +1,27 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id A693E6057A
+Return-Path: <maxin.john@intel.com>
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+	by mail.openembedded.org (Postfix) with ESMTP id 009346FFFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Sep 2016 10:26:19 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id k186so32862693wmd.0
+	Fri, 16 Sep 2016 11:19:15 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by orsmga104.jf.intel.com with ESMTP; 16 Sep 2016 04:19:16 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.30,344,1470726000"; d="scan'208";a="880027919"
+Received: from linux.intel.com ([10.54.29.200])
+	by orsmga003.jf.intel.com with ESMTP; 16 Sep 2016 04:19:17 -0700
+Received: from mbabyjoh-desk.fi.intel.com (mbabyjoh-desk.fi.intel.com
+	[10.237.72.71])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by linux.intel.com (Postfix) with ESMTP id 324806A4006
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Sep 2016 03:26:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=E8FHWeRBYtg05PbYVL9gC8BZQwkSbkv71V18aWh5XBA=;
-	b=ogFpq7nUAsLnVmKREYH8sQrkbWjj9q4YCayc3WK1C4VyFxgkcURUcUVfbxq5ZIgUmA
-	xpeU5pzvZbfA0awMnp5APYRXLM3BcMCjQ1DBUM60mQIigRgCw29pUwHEYpS2b8btwVPp
-	BIoN3BMLa4c+pUeXQSOHtRHikvaH9lTsFXaxP61t2ye1NOMfi2D5SKchSpNWAii/aBia
-	uvPGb6ATwGO1WKb2obOkud0D5ud4k3LzTCkiTO5hY8yX0bLADQZV8oYDqSoMR9hxzr4S
-	CQkcjP3gG9eAX+JftvJoTeeX0DXvZ7RxqnZ/aSbOTw1z7kjtBoSpOySt+Y8/Zc4XJB4R
-	7zqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=E8FHWeRBYtg05PbYVL9gC8BZQwkSbkv71V18aWh5XBA=;
-	b=CZSTc2L1zvVAQ4NzocrWRtlUFXoexJ6wW/XNvorrjdvDJLkiaVjFtGjyG1dBV/UsSq
-	1oko9Ur14AjSaor89DXc4qFvqF+oJJW5VB+Irvm24tEutzv+mNHV2LBD+jIayEiYKb6B
-	gDeQmyuOrF6+FvxFm8QRDDVjvZsW9FCUIRnj5H9Uj0HSIO8+y61YwvFa6Tha1i33LKUs
-	5bGXZStkYoXQMqbgUvrYofgKJcNSDqBoOWwcFMOWpKn6YvFpkNuTezynMLfhA1REX0eY
-	/BvPtERbow4wfhAHA9sQ6Cg0o4oi6Ws3OUFDGmd2NJz4XGX4Fe7g51+4DwKhTALUrE5z
-	VXEA==
-X-Gm-Message-State: AE9vXwPDAdOBd6WjiuezRkJ1eYC4OwZt3B93wWhex+fSRSHvQN3LRhvJIuw7BJ4wuYxfnY7elY+q0Iws17nH2A==
-X-Received: by 10.194.133.104 with SMTP id pb8mr12536281wjb.139.1474021579349; 
-	Fri, 16 Sep 2016 03:26:19 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.28.128.143 with HTTP; Fri, 16 Sep 2016 03:25:58 -0700 (PDT)
-In-Reply-To: <CAJTo0LYM0OX4A3512Q1Y7TnmdWuj7ROxGYB+Drr2Dh5T4-urGA@mail.gmail.com>
-References: <CAPybu_2CDc4eD=vRuEL7TOL2eb0mN=ygDrx0jX8WxmLqqAYnnw@mail.gmail.com>
-	<CAJTo0LY7k+XDcwumMzfZLzOj_iOeKG_svL=QK_drDv_hHdbXhA@mail.gmail.com>
-	<CAPybu_2uCKcpvtba7Yrrs3trmSQ13w6Q9o+VsEXXFHJJO-EyUQ@mail.gmail.com>
-	<CAJTo0LYM0OX4A3512Q1Y7TnmdWuj7ROxGYB+Drr2Dh5T4-urGA@mail.gmail.com>
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Fri, 16 Sep 2016 12:25:58 +0200
-Message-ID: <CAPybu_2AtV3MX60jVqOiLVrVtHYgN9UvQ+wwmW0azUiUj2gywA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: update_font_cache intercept: qemu: uncaught target signal 4 (Illegal instruction)
+	Fri, 16 Sep 2016 04:18:51 -0700 (PDT)
+From: "Maxin B. John" <maxin.john@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 16 Sep 2016 14:19:13 +0300
+Message-Id: <1474024757-10162-1-git-send-email-maxin.john@intel.com>
+X-Mailer: git-send-email 2.4.0
+Subject: [PATCH v2 0/4] move tslib, pointercal and xtscal recipes from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,46 +34,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Sep 2016 10:26:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 16 Sep 2016 11:19:18 -0000
 
-Hi Ross
+Move tslib, pointercal and xtscal recipes from oe-core. These recipes
+are already removed from oe-core with these commits:
 
-That was the issue! thanks
+1. xtscal: remove recipe : 5bcdb9f0995474635789cf0774aba9b774277c53
+2. tslib: remove recipe : d37f6b595fd9ce53c79ff9281f2e20df7fa0503d
+3. pointercal: remove recipe: d56dffe629dfc86a8d3c7a043c8c2893004f803e
 
-For the record, this fixes the problem for bobcat architecture (at least for me)
+Changes in v2:
+    Addressed the review comments about indentation.
 
-QEMU_EXTRAOPTIONS_bobcat-64 = "-cpu Opteron_G3,check=false"
+Maxin B. John (4):
+  pointercal: move recipe from oe-core
+  meta-gpe: add pointercal to layer.conf
+  xtscal: move recipe from oe-core
+  tslib: move recipe from oe-core
 
-
-Thanks!
-
-On Thu, Sep 15, 2016 at 6:27 PM, Burton, Ross <ross.burton@intel.com> wrote:
-> On 15 September 2016 at 09:34, Ricardo Ribalda Delgado <
-> ricardo.ribalda@gmail.com> wrote:
->
->> MACHINE is qt5022, which is:
->>
->> x86_64 + -march=btver1 -mtune=btver1
->>
->
-> So the compiler is probably using instructions that qemu doesn't recognise.
->
-> If qemu can pretend to be that machine then you can pass the relevant
-> options to qemu in your BSP, see the QEMU_EXTRAOPTIONS variable assignments
-> in e.g. tune-corei7.inc.  If qemu can't execute target code then you can
-> either ignore the messages or extend qemu.bbclass so that it is possible to
-> say "qemu doesn't work" in a BSP.
->
-> Ross
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
+ meta-gpe/conf/layer.conf                           |   2 +
+ meta-gpe/recipes-bsp/pointercal/pointercal/COPYING |   2 +
+ .../recipes-bsp/pointercal/pointercal/pointercal   |   0
+ .../pointercal/pointercal/qemuarm/pointercal       |   1 +
+ .../pointercal/pointercal/qemuarmv6/pointercal     |   1 +
+ .../pointercal/pointercal/qemuarmv7/pointercal     |   1 +
+ .../pointercal/pointercal/qemumips/pointercal      |   1 +
+ .../pointercal/pointercal/qemuppc/pointercal       | Bin 0 -> 36 bytes
+ .../pointercal/pointercal/qemux86-64/pointercal    |   1 +
+ .../pointercal/pointercal/qemux86/pointercal       |   1 +
+ meta-gpe/recipes-bsp/pointercal/pointercal_0.0.bb  |  22 +
+ meta-gpe/recipes-graphics/tslib/tslib/ts.conf      |  25 +
+ meta-gpe/recipes-graphics/tslib/tslib/tslib.sh     |   8 +
+ meta-gpe/recipes-graphics/tslib/tslib_1.1.bb       |  53 ++
+ .../xtscal/xtscal/30xTs_Calibrate.sh               |  13 +
+ .../xtscal/xtscal/change-cross.patch               |  18 +
+ .../recipes-graphics/xtscal/xtscal/cleanup.patch   | 621 +++++++++++++++++++++
+ .../xtscal/dso_linking_change_build_fix.patch      |  27 +
+ meta-gpe/recipes-graphics/xtscal/xtscal_0.6.3.bb   |  33 ++
+ 19 files changed, 830 insertions(+)
+ create mode 100644 meta-gpe/recipes-bsp/pointercal/pointercal/COPYING
+ create mode 100644 meta-gpe/recipes-bsp/pointercal/pointercal/pointercal
+ create mode 100644 meta-gpe/recipes-bsp/pointercal/pointercal/qemuarm/pointercal
+ create mode 100644 meta-gpe/recipes-bsp/pointercal/pointercal/qemuarmv6/pointercal
+ create mode 100644 meta-gpe/recipes-bsp/pointercal/pointercal/qemuarmv7/pointercal
+ create mode 100644 meta-gpe/recipes-bsp/pointercal/pointercal/qemumips/pointercal
+ create mode 100644 meta-gpe/recipes-bsp/pointercal/pointercal/qemuppc/pointercal
+ create mode 100644 meta-gpe/recipes-bsp/pointercal/pointercal/qemux86-64/pointercal
+ create mode 100644 meta-gpe/recipes-bsp/pointercal/pointercal/qemux86/pointercal
+ create mode 100644 meta-gpe/recipes-bsp/pointercal/pointercal_0.0.bb
+ create mode 100644 meta-gpe/recipes-graphics/tslib/tslib/ts.conf
+ create mode 100644 meta-gpe/recipes-graphics/tslib/tslib/tslib.sh
+ create mode 100644 meta-gpe/recipes-graphics/tslib/tslib_1.1.bb
+ create mode 100644 meta-gpe/recipes-graphics/xtscal/xtscal/30xTs_Calibrate.sh
+ create mode 100644 meta-gpe/recipes-graphics/xtscal/xtscal/change-cross.patch
+ create mode 100644 meta-gpe/recipes-graphics/xtscal/xtscal/cleanup.patch
+ create mode 100644 meta-gpe/recipes-graphics/xtscal/xtscal/dso_linking_change_build_fix.patch
+ create mode 100644 meta-gpe/recipes-graphics/xtscal/xtscal_0.6.3.bb
 
 -- 
-Ricardo Ribalda
+2.4.0
+
 
