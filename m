@@ -1,24 +1,29 @@
-Return-Path: <Wenlin.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A4736080F
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BDAE3605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Sep 2016 05:55:20 +0000 (UTC)
+	Sun, 18 Sep 2016 07:57:27 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u8I5tK9P024653
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u8I7vR8g007104
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Sep 2016 22:55:20 -0700 (PDT)
-Received: from pek-xzhang1-d1.corp.ad.wrs.com (128.224.162.142) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Sat, 17 Sep 2016 22:55:19 -0700
-From: WenLin Kang <wenlin.kang@windriver.com>
+	Sun, 18 Sep 2016 00:57:28 -0700
+Received: from [128.224.163.140] (128.224.163.140) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.294.0;
+	Sun, 18 Sep 2016 00:57:27 -0700
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 18 Sep 2016 13:55:18 +0800
-Message-ID: <1474178118-5202-1-git-send-email-wenlin.kang@windriver.com>
-X-Mailer: git-send-email 2.1.4
+References: <1471921830-2919-1-git-send-email-Zhixiong.Chi@windriver.com>
+	<20160901122045.gpuxub43upiiniyt@jama> <57CCF446.4050703@windriver.com>
+From: "Yu, Mingli" <mingli.yu@windriver.com>
+Message-ID: <57DE47D6.8010304@windriver.com>
+Date: Sun, 18 Sep 2016 15:52:54 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.4.0
 MIME-Version: 1.0
-Subject: [meta-qt5][PATCH] qtmultimedia: fix conflicting declaration error
+In-Reply-To: <57CCF446.4050703@windriver.com>
+X-Originating-IP: [128.224.163.140]
+Subject: Re: [meta-oe][PATCH] mariadb: add libdbi-perl to the depends of mariadb-server
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,171 +36,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Sep 2016 05:55:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 18 Sep 2016 07:57:29 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-From: Wenlin Kang <wenlin.kang@windriver.com>
 
-The error info is as the follow:
-| In file included from /.../sysroots/fsl-imx6/usr/include/qt5/QtGui/qopengl.h:123:0,
-|                  from /.../sysroots/fsl-imx6/usr/include/qt5/QtGui/qopenglshaderprogram.h:41,
-|                  from /.../sysroots/fsl-imx6/usr/include/qt5/QtQuick/qsgmaterial.h:38,
-|                  from /.../sysroots/fsl-imx6/usr/include/qt5/QtQuick/QSGMaterial:1,
-|                  from /.../qtmultimedia/5.5.1+gitAUTOINC+0cf41ef53f-r0/git/src/plugins/videonode/imx6/qsgvivantevideomaterial.h:40,
-|                  from /.../qtmultimedia/5.5.1+gitAUTOINC+0cf41ef53f-r0/git/src/plugins/videonode/imx6/qsgvivantevideomaterial.cpp:37:
-| /.../sysroots/fsl-imx6/usr/include/qt5/QtGui/qopenglext.h:474:19: error: conflicting declaration 'typedef ptrdiff_t GLsizeiptr'
-|  typedef ptrdiff_t GLsizeiptr;
-|                    ^
-| In file included from /.../qtmultimedia/5.5.1+gitAUTOINC+0cf41ef53f-r0/git/src/plugins/videonode/imx6/qsgvivantevideomaterial.cpp:34:0:
-| /.../sysroots/fsl-imx6/usr/include/GLES2/gl2.h:67:25: note: previous declaration as 'typedef khronos_ssize_t GLsizeiptr'
-|  typedef khronos_ssize_t GLsizeiptr;
-|                          ^
-| In file included from /.../sysroots/fsl-imx6/usr/include/qt5/QtGui/qopengl.h:123:0,
-|                  from /.../sysroots/fsl-imx6/usr/include/qt5/QtGui/qopenglshaderprogram.h:41,
-|                  from /.../sysroots/fsl-imx6/usr/include/qt5/QtQuick/qsgmaterial.h:38,
-|                  from /.../sysroots/fsl-imx6/usr/include/qt5/QtQuick/QSGMaterial:1,
-|                  from /.../qtmultimedia/5.5.1+gitAUTOINC+0cf41ef53f-r0/git/src/plugins/videonode/imx6/qsgvivantevideomaterial.h:40,
-|                  from /.../qtmultimedia/5.5.1+gitAUTOINC+0cf41ef53f-r0/git/src/plugins/videonode/imx6/qsgvivantevideomaterial.cpp:37:
-| /.../sysroots/fsl-imx6/usr/include/qt5/QtGui/qopenglext.h:475:19: error: conflicting declaration 'typedef ptrdiff_t GLintptr'
-|  typedef ptrdiff_t GLintptr;
-|                    ^
-| In file included from /.../qtmultimedia/5.5.1+gitAUTOINC+0cf41ef53f-r0/git/src/plugins/videonode/imx6/qsgvivantevideomaterial.cpp:34:0:
-| /.../sysroots/fsl-imx6/usr/include/GLES2/gl2.h:68:26: note: previous declaration as 'typedef khronos_intptr_t GLintptr'
-|  typedef khronos_intptr_t GLintptr;
-|                           ^
 
-Here, use lgl2.h instead of gl2.h and gl2ext.h,
-fix the "conflicting declaration" error.
+On 2016年09月05日 12:27, Zhixiong Chi wrote:
+>
+>
+> On 2016年09月01日 20:20, Martin Jansa wrote:
+>> On Tue, Aug 23, 2016 at 11:10:30AM +0800, Zhixiong Chi wrote:
+>>> The commands(mysql_convert_table_format and mysql_setpermission) need
+>>> to the supported API provided by the libdbi-perl package.
+>>> So add the libdbi-perl to the variable RDEPENDS of mariabdb-server.
+>> This isn't possible, libdbi-perl is in meta-perl and mariadb is in
+>> meta-oe.
+>>
+>> meta-oe doesn't depend (and cannot) on meta-perl.
+> The script mysql_convert_table_format(line 50) and
+> mysql_convert_table_format
+> (line 20) which located xxx/mariadb/scripts/ source path will call the
+> DBI function
+> with the sentence "use DBI", and this DBI function is provided by the
+> libdbi-perl
+> package.
+>
+> So the scripts will fail when start to work.
 
-Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
----
- ...tmultimedia-fix-a-conflicting-declaration.patch | 103 +++++++++++++++++++++
- recipes-qt/qt5/qtmultimedia_git.bb                 |   1 +
- 2 files changed, 104 insertions(+)
- create mode 100644 recipes-qt/qt5/qtmultimedia/0001-qtmultimedia-fix-a-conflicting-declaration.patch
+Any update?
 
-diff --git a/recipes-qt/qt5/qtmultimedia/0001-qtmultimedia-fix-a-conflicting-declaration.patch b/recipes-qt/qt5/qtmultimedia/0001-qtmultimedia-fix-a-conflicting-declaration.patch
-new file mode 100644
-index 0000000..8547f72
---- /dev/null
-+++ b/recipes-qt/qt5/qtmultimedia/0001-qtmultimedia-fix-a-conflicting-declaration.patch
-@@ -0,0 +1,103 @@
-+From 849355a1c59d76fa39dc93b537458a084190fa45 Mon Sep 17 00:00:00 2001
-+From: Wenlin Kang <wenlin.kang@windriver.com>
-+Date: Thu, 8 Sep 2016 12:18:13 +0800
-+Subject: [PATCH] qtmultimedia: fix a conflicting declaration
-+
-+Use lgl2.h instead of gl2.h and gl2ext.h,
-+fix a "conflicting declaration" error.
-+
-+Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
-+---
-+ src/plugins/videonode/imx6/lgl2.h                  | 46 ++++++++++++++++++++++
-+ .../videonode/imx6/qsgvivantevideomaterial.cpp     |  5 ++-
-+ src/plugins/videonode/imx6/qsgvivantevideonode.cpp |  5 ++-
-+ 3 files changed, 52 insertions(+), 4 deletions(-)
-+ create mode 100644 src/plugins/videonode/imx6/lgl2.h
-+
-+diff --git a/src/plugins/videonode/imx6/lgl2.h b/src/plugins/videonode/imx6/lgl2.h
-+new file mode 100644
-+index 0000000..2423697
-+--- /dev/null
-++++ b/src/plugins/videonode/imx6/lgl2.h
-+@@ -0,0 +1,46 @@
-++#ifndef __L_GL2_H__
-++#define __L_GL2_H__
-++
-++// this file comes from <GLES2/gl2.h> and <GLES2/gl2ext.h>,
-++// it's a light gl2.h.
-++
-++/*-------------------------------------------------------------------------
-++ * Definition of KHRONOS_APIENTRY
-++ *-------------------------------------------------------------------------
-++ * This follows the return type of the function  and precedes the function
-++ * name in the function prototype.
-++ */
-++#if defined(_WIN32) && !defined(_WIN32_WCE) && !defined(__SCITECH_SNAP__)
-++     /* Win32 but not WinCE */
-++#   define KHRONOS_APIENTRY __stdcall
-++#else
-++#   define KHRONOS_APIENTRY
-++#endif
-++
-++#ifndef GL_APIENTRY
-++#   define GL_APIENTRY KHRONOS_APIENTRY
-++#endif
-++
-++#ifndef GL_APIENTRYP
-++#   define GL_APIENTRYP GL_APIENTRY*
-++#endif
-++
-++typedef void GLvoid;
-++typedef unsigned int GLenum;
-++typedef unsigned int GLuint;
-++typedef int GLsizei;
-++
-++#define GL_VIV_YV12                                             0x8FC0
-++#define GL_VIV_NV12                                             0x8FC1
-++#define GL_VIV_YUY2                                             0x8FC2
-++#define GL_VIV_UYVY                                             0x8FC3
-++#define GL_VIV_NV21                                             0x8FC4
-++#define GL_VIV_I420                                             0x8FC5
-++
-++typedef void (GL_APIENTRYP PFNGLTEXDIRECTVIVMAPPROC) (GLenum Target, GLsizei Width, GLsizei Height, GLenum Format, GLvoid ** Logical, const GLuint * Physical);
-++typedef void (GL_APIENTRYP PFNGLTEXDIRECTMAPVIVPROC) (GLenum Target, GLsizei Width, GLsizei Height, GLenum Format, GLvoid ** Logical, const GLuint * Physical);
-++typedef void (GL_APIENTRYP PFNGLTEXDIRECTVIVPROC) (GLenum Target, GLsizei Width, GLsizei Height, GLenum Format, GLvoid ** Pixels);
-++typedef void (GL_APIENTRYP PFNGLTEXDIRECTINVALIDATEVIVPROC) (GLenum Target);
-++typedef void (GL_APIENTRYP PFNGLTEXDIRECTTILEDMAPVIVPROC) (GLenum Target, GLsizei Width, GLsizei Height, GLenum Format, GLvoid ** Logical, const GLuint * Physical);
-++
-++#endif
-+diff --git a/src/plugins/videonode/imx6/qsgvivantevideomaterial.cpp b/src/plugins/videonode/imx6/qsgvivantevideomaterial.cpp
-+index 2e2092b..54568db 100644
-+--- a/src/plugins/videonode/imx6/qsgvivantevideomaterial.cpp
-++++ b/src/plugins/videonode/imx6/qsgvivantevideomaterial.cpp
-+@@ -31,8 +31,9 @@
-+ **
-+ ****************************************************************************/
-+ 
-+-#include <GLES2/gl2.h>
-+-#include <GLES2/gl2ext.h>
-++// use lgl2.h instead of <GLES2/gl2.h> and <GLES2/gl2ext.h>,
-++// fixes a conflicting declaration issue.
-++#include "lgl2.h"
-+ 
-+ #include "qsgvivantevideomaterial.h"
-+ #include "qsgvivantevideomaterialshader.h"
-+diff --git a/src/plugins/videonode/imx6/qsgvivantevideonode.cpp b/src/plugins/videonode/imx6/qsgvivantevideonode.cpp
-+index 229a69b..184fd12 100644
-+--- a/src/plugins/videonode/imx6/qsgvivantevideonode.cpp
-++++ b/src/plugins/videonode/imx6/qsgvivantevideonode.cpp
-+@@ -31,8 +31,9 @@
-+ **
-+ ****************************************************************************/
-+ 
-+-#include <GLES2/gl2.h>
-+-#include <GLES2/gl2ext.h>
-++// use lgl2.h instead of <GLES2/gl2.h> and <GLES2/gl2ext.h>,
-++// fixes a conflicting declaration issue.
-++#include "lgl2.h"
-+ 
-+ #include "qsgvivantevideonode.h"
-+ #include "qsgvivantevideomaterialshader.h"
-+-- 
-+1.9.1
-+
-diff --git a/recipes-qt/qt5/qtmultimedia_git.bb b/recipes-qt/qt5/qtmultimedia_git.bb
-index 3bbfb6e..245f106 100644
---- a/recipes-qt/qt5/qtmultimedia_git.bb
-+++ b/recipes-qt/qt5/qtmultimedia_git.bb
-@@ -36,6 +36,7 @@ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains_any('PACKAGECONFIG', 'gstreamer gst
- 
- SRC_URI += "\
-     file://0001-Initial-porting-effort-to-GStreamer-1.0.patch \
-+    file://0001-qtmultimedia-fix-a-conflicting-declaration.patch \
- "
- 
- SRCREV = "1be4f74843b41f8bc1d1d64e83485f4eb864e8b4"
--- 
-2.1.4
+The issue also exists in my environment as mariabdb-server rdepends on 
+DBI.pm which is provided by libdbi-perl.
 
+Thanks,
+
+>
+> Thanks.
+>>> Signed-off-by: Zhixiong Chi <Zhixiong.Chi@windriver.com>
+>>> ---
+>>>   meta-oe/recipes-support/mysql/mariadb.inc | 2 +-
+>>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc
+>>> b/meta-oe/recipes-support/mysql/mariadb.inc
+>>> index 73905b6..c2d2ecf 100644
+>>> --- a/meta-oe/recipes-support/mysql/mariadb.inc
+>>> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
+>>> @@ -169,7 +169,7 @@ RDEPENDS_${PN}-client = "perl
+>>> perl-module-getopt-long perl-module-file-temp \
+>>>   RDEPENDS_${PN}-server = "perl perl-module-getopt-long
+>>> perl-module-data-dumper \
+>>>       perl-module-file-basename perl-module-file-path
+>>> perl-module-sys-hostname \
+>>>       perl-module-file-copy perl-module-file-temp perl-module-posix \
+>>> -    ${PN}-client"
+>>> +    ${PN}-client libdbi-perl"
+>>>   RDEPENDS_${PN}-leftovers = "perl perl-module-cwd
+>>> perl-module-benchmark perl-module-getopt-long \
+>>>       perl-module-posix perl-module-data-dumper perl-module-sigtrap
+>>> perl-module-threads \
+>>>       perl-module-threads-shared perl-module-io-socket
+>>> perl-module-sys-hostname perl-module-file-copy \
+>>> --
+>>> 1.9.1
+>>>
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>>
+>
 
