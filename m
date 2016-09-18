@@ -1,49 +1,24 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id F33726FF78
+Return-Path: <Zhe.He@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D7776731B9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Sep 2016 00:47:43 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id w84so2136550wmg.0
+	Sun, 18 Sep 2016 02:53:53 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u8I2rr8T016959
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Sep 2016 17:47:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=5O6uDncNawKHpXvZ0eAZDyi7H1mq43dOFGp0ULFbSk8=;
-	b=Z1YUTB/sf0QccecF9L0PFdO6lG4ntsS1bOXHWpzJ/2dS/wyAqTZ5jgfUI5P7/2oGFi
-	pKDdWd+syxaIIzPFt48h+3EcoPWQke65WtVcsY4Xx+9OAgtYWCbDhVk5cPoUBkzvZ1UB
-	/1uBUGaQZNKR2B9+5F5xkLd91uUyi8iTrykehaXqagSR4Xw+Q8GmEwwRbXjqNTOWmCxV
-	wO0lDaZ5XselDk8xZP3qjNL7f1p0E+DK82dp23Bs0/p4a7oDNwnzz6lIiFiB8npLjUgJ
-	rQS67lsNvj7M0s6HYB3oW1d9nwq3wRMerWvyaqhVyYi0vwUoVAcAYmjcn0/BCE7y4r4Z
-	bxaQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=5O6uDncNawKHpXvZ0eAZDyi7H1mq43dOFGp0ULFbSk8=;
-	b=mGj4GWbhJKzgywjaGUmIWYZOATv4AGODSrE/d1HEJoZ3yqjIi2ggessw89FaHxh/p7
-	+ui7M00hfKukcDVELqt+KFaE1aP1rJyirFH4hZy7tekCLV3TS/ciQ8pKc5rRznP7ULen
-	Vx/XmtE3uqZjqeAvL7flnNURyWzPRE9FOP/LYacDAMULA8FodbRAbL3xxFTs4LC2DBg0
-	GGQFGkxqCQVtrCoocykZ6ORf8wauZfliTFlAB9PVNlwvXX5QJ6CBY59hrEpUiyYrFCYc
-	vXkGFey0Po2ZS9sNFsy9YO6wU14M5jriWjE0GpRMb+5q2AL4ZAFvhIFaBQZfYidoQy6k
-	knEQ==
-X-Gm-Message-State: AE9vXwPyWLGcMAJf+G5NjvRNAmEfmgOSQiuhkhs7BMMEhfHO3yrxijCfXu8zJ7CzmkWRdw==
-X-Received: by 10.28.206.75 with SMTP id e72mr3813612wmg.65.1474159663174;
-	Sat, 17 Sep 2016 17:47:43 -0700 (PDT)
-Received: from localhost.localdomain (p4FDF0635.dip0.t-ipconnect.de.
-	[79.223.6.53]) by smtp.googlemail.com with ESMTPSA id
-	a1sm15415116wju.41.2016.09.17.17.47.42
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 17 Sep 2016 17:47:42 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 Sep 2016 02:47:25 +0200
-Message-Id: <1474159646-8902-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.5.5
+	Sat, 17 Sep 2016 19:53:53 -0700 (PDT)
+Received: from PEK-ZHE-D1.wrs.com (128.224.162.234) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
+	Sat, 17 Sep 2016 19:53:52 -0700
+From: <zhe.he@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 18 Sep 2016 10:52:59 +0800
+Message-ID: <1474167179-6717-1-git-send-email-zhe.he@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [PATCH 1/2] fftw: build all configurations by one recipe
+Subject: [meta-oe] [PATCH] bash2dash conversion
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,164 +31,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Sep 2016 00:47:44 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 18 Sep 2016 02:53:54 -0000
+Content-Type: text/plain
 
-* avoids conflicts installing same files into sysroot
-* for packages requiring a specific version of fftw: simply add fftw to DEPENDS
-* no need for some distro decision - recipes depndong on fftw take what they
-  need
-* each executable is packed into an own package to avoid dragging in all
-  libraries
+From: "Tim K. Chan" <nirvanatk@gmail.com>
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Change bash style to dash style
+
+Signed-off-by: Tim K. Chan <nirvanatk@gmail.com>
+[Adjust context]
+Signed-off-by: He Zhe <zhe.he@windriver.com>
 ---
- meta-oe/recipes-support/fftw/fftw.inc       | 25 ------------
- meta-oe/recipes-support/fftw/fftw_3.3.4.bb  | 62 ++++++++++++++++++++++++++++-
- meta-oe/recipes-support/fftw/fftwf_3.3.4.bb | 11 -----
- meta-oe/recipes-support/fftw/fftwl_3.3.4.bb |  9 -----
- 4 files changed, 61 insertions(+), 46 deletions(-)
- delete mode 100644 meta-oe/recipes-support/fftw/fftw.inc
- delete mode 100644 meta-oe/recipes-support/fftw/fftwf_3.3.4.bb
- delete mode 100644 meta-oe/recipes-support/fftw/fftwl_3.3.4.bb
+ .../iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb          | 2 +-
+ meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb                 | 6 ++++--
+ meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb                    | 2 +-
+ meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb             | 2 +-
+ meta-oe/recipes-support/postgresql/postgresql.inc                   | 2 +-
+ 5 files changed, 8 insertions(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-support/fftw/fftw.inc b/meta-oe/recipes-support/fftw/fftw.inc
-deleted file mode 100644
-index a0adf59..0000000
---- a/meta-oe/recipes-support/fftw/fftw.inc
-+++ /dev/null
-@@ -1,25 +0,0 @@
--DESCRIPTION = "FFTW"
--SECTION = "libs"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
--
--PROVIDES = "virtual/fftw"
--
--RPROVIDES_${PN} += "libfftw3"
--
--SRC_URI = "http://www.fftw.org/fftw-${PV}.tar.gz"
--
--S = "${WORKDIR}/fftw-${PV}"
--
--inherit autotools pkgconfig
--
--EXTRA_OECONF = "--disable-fortran --enable-shared --enable-threads"
--
--do_configure_prepend() {
--    echo 'AM_PROG_AS' >> ${S}/configure.ac
--}
--
--PACKAGES =+ "lib${BPN}"
--FILES_lib${BPN} = "${libdir}/lib*.so.*"
--
--# rename binary in /bin and use u-a tpo choose between different precision implementations?
-diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.4.bb b/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
-index 990f01e..cbcd1b9 100644
---- a/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
-+++ b/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
-@@ -1,6 +1,66 @@
--require fftw.inc
-+DESCRIPTION = "FFTW"
-+SECTION = "libs"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
+index 03f6459..17a5c1e 100644
+--- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
+@@ -103,7 +103,7 @@ pkg_postinst_${PN}() {
  
-+SRC_URI = "http://www.fftw.org/fftw-${PV}.tar.gz"
- SRC_URI[md5sum] = "2edab8c06b24feeb3b82bbb3ebf3e7b3"
- SRC_URI[sha256sum] = "8f0cde90929bc05587c3368d2f15cd0530a60b8a9912a8e2979a72dbe5af0982"
+     if [ -e /etc/init.d/populate-volatile.sh ]; then
+         /etc/init.d/populate-volatile.sh update
+-    elif command -v systemd-tmpfiles >/dev/null; then
++    elif command -p systemd-tmpfiles >/dev/null; then
+         systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/iscsi.conf
+     fi
+ }
+diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+index 3c3b4b5..2961b6b 100644
+--- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
++++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+@@ -33,7 +33,9 @@ do_configure() {
+ }
  
-+inherit autotools pkgconfig
-+
-+# we had multiple recipes in the past
-+PROVIDES = "fftwl fftwf"
-+
-+EXTRA_OECONF = "--disable-fortran --enable-shared --enable-threads"
-+
-+do_configure() {
-+    # configure fftw
-+	mkdir -p ${B}
-+    cd ${B}
-+    # full (re)configure
-+    autotools_do_configure
-+    mv ${B} ${WORKDIR}/build-fftw
-+
-+    # configure fftwl
-+	mkdir -p ${B}
-+    cd ${B}
-+    # configure only
-+    oe_runconf  --enable-long-double
-+    mv ${B} ${WORKDIR}/build-fftwl 
-+
-+    # configure fftwf
-+	mkdir -p ${B}
-+    cd ${B}
-+    # configure only
-+    oe_runconf --enable-single ${@bb.utils.contains('TUNE_FEATURES', 'neon', '--enable-neon', '', d)}
-+    mv ${B} ${WORKDIR}/build-fftwf
-+}
-+
-+do_compile() {
-+    for lib in fftw fftwl fftwf; do
-+        cd ${WORKDIR}/build-$lib
-+        autotools_do_compile
+ do_compile () {
+-    . ${CONFIG_SITE}
++    for CONFIG_SITE_ITEM in $CONFIG_SITE; do
++    	. $CONFIG_SITE_ITEM
 +    done
-+}
-+
-+do_install() {
-+    for lib in fftw fftwl fftwf; do
-+        cd ${WORKDIR}/build-$lib
-+        autotools_do_install
-+    done
-+}
-+
-+
-+PACKAGES =+ "libfftw libfftwl libfftwf"
-+FILES_libfftw = "${libdir}/libfftw3.so.* ${libdir}/libfftw3_*.so.*"
-+FILES_libfftwl = "${libdir}/libfftw3l.so.* ${libdir}/libfftw3l_*.so.*"
-+FILES_libfftwf = "${libdir}/libfftw3f.so.* ${libdir}/libfftw3f_*.so.*"
-+
-+PACKAGES =+ "fftw-wisdom fftwl-wisdom fftwf-wisdom fftw-wisdom-to-conf"
-+FILES_fftw-wisdom = "${bindir}/fftw-wisdom"
-+FILES_fftwl-wisdom = "${bindir}/fftwl-wisdom"
-+FILES_fftwf-wisdom = "${bindir}/fftwf-wisdom"
-+FILES_fftw-wisdom-to-conf = "${bindir}/fftw-wisdom-to-conf"
-+
- BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb b/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb
-deleted file mode 100644
-index 4a65986..0000000
---- a/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--require fftw.inc
--
--# conflicts with fftw and fftwl
--EXCLUDE_FROM_WORLD = "1"
--
--EXTRA_OECONF += "--enable-single \
--    ${@bb.utils.contains('TUNE_FEATURES', 'neon', '--enable-neon', '', d)} \
--"
--
--SRC_URI[md5sum] = "2edab8c06b24feeb3b82bbb3ebf3e7b3"
--SRC_URI[sha256sum] = "8f0cde90929bc05587c3368d2f15cd0530a60b8a9912a8e2979a72dbe5af0982"
-diff --git a/meta-oe/recipes-support/fftw/fftwl_3.3.4.bb b/meta-oe/recipes-support/fftw/fftwl_3.3.4.bb
-deleted file mode 100644
-index 432ff12..0000000
---- a/meta-oe/recipes-support/fftw/fftwl_3.3.4.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--require fftw.inc
--
--# conflicts with fftw and fftwf
--EXCLUDE_FROM_WORLD = "1"
--
--EXTRA_OECONF += "--enable-long-double"
--
--SRC_URI[md5sum] = "2edab8c06b24feeb3b82bbb3ebf3e7b3"
--SRC_URI[sha256sum] = "8f0cde90929bc05587c3368d2f15cd0530a60b8a9912a8e2979a72dbe5af0982"
+     if [ X"$ac_cv_uint" = X"yes" ]; then
+         CFLAGS="${CFLAGS} -DHAVE_uint"
+     fi
+@@ -68,7 +70,7 @@ do_install () {
+ 
+ pkg_postinst_${PN} () {
+     if [ -z "$D" ]; then
+-        if command -v systemd-tmpfiles >/dev/null; then
++        if command -p systemd-tmpfiles >/dev/null; then
+             systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/lmbench.conf
+         elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
+             ${sysconfdir}/init.d/populate-volatile.sh update
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
+index 3a3886b..ba0e2ac 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.13.2.bb
+@@ -108,7 +108,7 @@ do_install_append() {
+ 
+ pkg_postinst_${PN} () {
+     if [ -z "$D" ]; then
+-        if command -v systemd-tmpfiles >/dev/null; then
++        if command -p systemd-tmpfiles >/dev/null; then
+             systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/krb5.conf
+         elif [ -e ${sysconfdir}/init.d/populate-volatile.sh ]; then
+             ${sysconfdir}/init.d/populate-volatile.sh update
+diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
+index 84e465d..b1346b3 100644
+--- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
++++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
+@@ -67,7 +67,7 @@ pkg_postinst_${PN} () {
+ 
+     if [ x"$D" != "x" ]; then
+         OPTS="--root=$D"
+-        if type systemctl >/dev/null 2>/dev/null; then
++        if command -p systemctl >/dev/null 2>/dev/null; then
+                 systemctl $OPTS ${SYSTEMD_AUTO_ENABLE} ${SYSTEMD_SERVICE}
+         fi
+         exit 1
+diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
+index e473f58..9592c79 100644
+--- a/meta-oe/recipes-support/postgresql/postgresql.inc
++++ b/meta-oe/recipes-support/postgresql/postgresql.inc
+@@ -179,7 +179,7 @@ do_install_append() {
+ 
+     # install COPYRIGHT README HISTORY
+     install -d -m 0755 ${D}${docdir}/${BPN}
+-    for i in ${B}/{COPYRIGHT,README,HISTORY} ${B}/doc/{KNOWN_BUGS,MISSING_FEATURES,README*,bug.template}; do
++    for i in ${B}/COPYRIGHT ${B}/README ${B}/HISTORY ${B}/doc/KNOWN_BUGS ${B}/doc/MISSING_FEATURES ${B}/doc/README* ${B}/doc/bug.template; do
+         [ -f $i ] && install $i ${D}${docdir}/${BPN}
+     done
+ 
 -- 
-2.5.5
+2.8.1
 
 
