@@ -1,51 +1,49 @@
 Return-Path: <schnitzeltony@googlemail.com>
 Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 00AD473163
+	by mail.openembedded.org (Postfix) with ESMTP id F33726FF78
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 18 Sep 2016 00:47:43 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id b184so9293880wma.3
+Received: by mail-wm0-f68.google.com with SMTP id w84so2136550wmg.0
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat, 17 Sep 2016 17:47:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	h=from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=macLMU/gBh+b20egEiha0ZwENCi+BNjz8LlqQnCHYVQ=;
-	b=etZtRTkhq++Zg0BtUopA2hgAgzbF4jszyBpPxrVQnevqKvT2S2m/Oq5K1rsdHX5dxR
-	rd+F5nrufASetDMJj8kX6nZlMn1BztjSosWs3c7m7jTzRB2z9fNxAcOLsIuL/k4xol+e
-	2X1xb+ms9wmYCVnXkS/H25Q6cq02ispl7tgIIRy5Cp/LeXToX5zA9qrE0l8a9xnOZ8iZ
-	bzbr1MkbBmM0uvyqJhyGPnI3NuAP9z7TR7sKlinHmcgZ0elqQhj1fks4U9XD1NElNixn
-	nAtYWf8F/d+nKsOYDfq2Bx9FtIm2I3G/6zjZpTR3lLZUl8C1giw6PAjU9U+1EAOf5ohI
-	B+GQ==
+	bh=5O6uDncNawKHpXvZ0eAZDyi7H1mq43dOFGp0ULFbSk8=;
+	b=Z1YUTB/sf0QccecF9L0PFdO6lG4ntsS1bOXHWpzJ/2dS/wyAqTZ5jgfUI5P7/2oGFi
+	pKDdWd+syxaIIzPFt48h+3EcoPWQke65WtVcsY4Xx+9OAgtYWCbDhVk5cPoUBkzvZ1UB
+	/1uBUGaQZNKR2B9+5F5xkLd91uUyi8iTrykehaXqagSR4Xw+Q8GmEwwRbXjqNTOWmCxV
+	wO0lDaZ5XselDk8xZP3qjNL7f1p0E+DK82dp23Bs0/p4a7oDNwnzz6lIiFiB8npLjUgJ
+	rQS67lsNvj7M0s6HYB3oW1d9nwq3wRMerWvyaqhVyYi0vwUoVAcAYmjcn0/BCE7y4r4Z
+	bxaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=macLMU/gBh+b20egEiha0ZwENCi+BNjz8LlqQnCHYVQ=;
-	b=TpK7rQTUjTNuMKxBPL1dxbs2bWJXxSl+074tZ9uM6xIpxNHR/KET17gN4TnD8ed6DA
-	CbysSDzDZxQmWM0wK00aum4BH4l8vCILKEWi6wKOhpZ8oeKYWy/rZGmbA3RWHx6tQWoK
-	U0+/si/t69yOROsOc+IN7LwgTHrMx/cXeLKL2SrHn83boW/MlCyNmXGGAOGl19BU58jo
-	LC9mqpa3hlc0Y2vz5TZlOmWuDuW/ov0VR+R5DxarOX2secvOv0A75W8dJ8taKl94Nuyv
-	gbdrHYeCtdvBADgyEKZJHftzaJdKpWkmBEZLuSv8J0eXOanmaYyKh5tlhnu71UTOnCmr
-	i1Fw==
-X-Gm-Message-State: AE9vXwPWlRbGWbEE8S04I3Hf+AiOfa9XF+FV8xMg1r4dmfX+fN0ifLXAr30HuBF4mIv5+A==
-X-Received: by 10.28.198.130 with SMTP id w124mr3262549wmf.63.1474159663889;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=5O6uDncNawKHpXvZ0eAZDyi7H1mq43dOFGp0ULFbSk8=;
+	b=mGj4GWbhJKzgywjaGUmIWYZOATv4AGODSrE/d1HEJoZ3yqjIi2ggessw89FaHxh/p7
+	+ui7M00hfKukcDVELqt+KFaE1aP1rJyirFH4hZy7tekCLV3TS/ciQ8pKc5rRznP7ULen
+	Vx/XmtE3uqZjqeAvL7flnNURyWzPRE9FOP/LYacDAMULA8FodbRAbL3xxFTs4LC2DBg0
+	GGQFGkxqCQVtrCoocykZ6ORf8wauZfliTFlAB9PVNlwvXX5QJ6CBY59hrEpUiyYrFCYc
+	vXkGFey0Po2ZS9sNFsy9YO6wU14M5jriWjE0GpRMb+5q2AL4ZAFvhIFaBQZfYidoQy6k
+	knEQ==
+X-Gm-Message-State: AE9vXwPyWLGcMAJf+G5NjvRNAmEfmgOSQiuhkhs7BMMEhfHO3yrxijCfXu8zJ7CzmkWRdw==
+X-Received: by 10.28.206.75 with SMTP id e72mr3813612wmg.65.1474159663174;
 	Sat, 17 Sep 2016 17:47:43 -0700 (PDT)
 Received: from localhost.localdomain (p4FDF0635.dip0.t-ipconnect.de.
 	[79.223.6.53]) by smtp.googlemail.com with ESMTPSA id
-	a1sm15415116wju.41.2016.09.17.17.47.43
+	a1sm15415116wju.41.2016.09.17.17.47.42
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 17 Sep 2016 17:47:43 -0700 (PDT)
+	Sat, 17 Sep 2016 17:47:42 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 Sep 2016 02:47:26 +0200
-Message-Id: <1474159646-8902-2-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun, 18 Sep 2016 02:47:25 +0200
+Message-Id: <1474159646-8902-1-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
-In-Reply-To: <1474159646-8902-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1474159646-8902-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/2] imagemagick: depend on fftw not virtual/fftw
+Subject: [PATCH 1/2] fftw: build all configurations by one recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,24 +60,159 @@ X-List-Received-Date: Sun, 18 Sep 2016 00:47:44 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+* avoids conflicts installing same files into sysroot
+* for packages requiring a specific version of fftw: simply add fftw to DEPENDS
+* no need for some distro decision - recipes depndong on fftw take what they
+  need
+* each executable is packed into an own package to avoid dragging in all
+  libraries
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/fftw/fftw.inc       | 25 ------------
+ meta-oe/recipes-support/fftw/fftw_3.3.4.bb  | 62 ++++++++++++++++++++++++++++-
+ meta-oe/recipes-support/fftw/fftwf_3.3.4.bb | 11 -----
+ meta-oe/recipes-support/fftw/fftwl_3.3.4.bb |  9 -----
+ 4 files changed, 61 insertions(+), 46 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/fftw/fftw.inc
+ delete mode 100644 meta-oe/recipes-support/fftw/fftwf_3.3.4.bb
+ delete mode 100644 meta-oe/recipes-support/fftw/fftwl_3.3.4.bb
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
-index adfcf55..74fe369 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
-@@ -3,7 +3,7 @@ SECTION = "console/utils"
- LICENSE = "ImageMagick"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=22d47a47bf252ca3ed7f71273b53612e"
- # FIXME: There are many more checked libraries. All should be added or explicitly disabled to get consistent results.
--DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib virtual/fftw freetype"
-+DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib fftw freetype"
+diff --git a/meta-oe/recipes-support/fftw/fftw.inc b/meta-oe/recipes-support/fftw/fftw.inc
+deleted file mode 100644
+index a0adf59..0000000
+--- a/meta-oe/recipes-support/fftw/fftw.inc
++++ /dev/null
+@@ -1,25 +0,0 @@
+-DESCRIPTION = "FFTW"
+-SECTION = "libs"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+-
+-PROVIDES = "virtual/fftw"
+-
+-RPROVIDES_${PN} += "libfftw3"
+-
+-SRC_URI = "http://www.fftw.org/fftw-${PV}.tar.gz"
+-
+-S = "${WORKDIR}/fftw-${PV}"
+-
+-inherit autotools pkgconfig
+-
+-EXTRA_OECONF = "--disable-fortran --enable-shared --enable-threads"
+-
+-do_configure_prepend() {
+-    echo 'AM_PROG_AS' >> ${S}/configure.ac
+-}
+-
+-PACKAGES =+ "lib${BPN}"
+-FILES_lib${BPN} = "${libdir}/lib*.so.*"
+-
+-# rename binary in /bin and use u-a tpo choose between different precision implementations?
+diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.4.bb b/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
+index 990f01e..cbcd1b9 100644
+--- a/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
++++ b/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
+@@ -1,6 +1,66 @@
+-require fftw.inc
++DESCRIPTION = "FFTW"
++SECTION = "libs"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
  
- # Important note: tarballs for all patchsets within a version are deleted when
- # a new pachset is created. To avoid multiple patches for each patchset, try to
++SRC_URI = "http://www.fftw.org/fftw-${PV}.tar.gz"
+ SRC_URI[md5sum] = "2edab8c06b24feeb3b82bbb3ebf3e7b3"
+ SRC_URI[sha256sum] = "8f0cde90929bc05587c3368d2f15cd0530a60b8a9912a8e2979a72dbe5af0982"
+ 
++inherit autotools pkgconfig
++
++# we had multiple recipes in the past
++PROVIDES = "fftwl fftwf"
++
++EXTRA_OECONF = "--disable-fortran --enable-shared --enable-threads"
++
++do_configure() {
++    # configure fftw
++	mkdir -p ${B}
++    cd ${B}
++    # full (re)configure
++    autotools_do_configure
++    mv ${B} ${WORKDIR}/build-fftw
++
++    # configure fftwl
++	mkdir -p ${B}
++    cd ${B}
++    # configure only
++    oe_runconf  --enable-long-double
++    mv ${B} ${WORKDIR}/build-fftwl 
++
++    # configure fftwf
++	mkdir -p ${B}
++    cd ${B}
++    # configure only
++    oe_runconf --enable-single ${@bb.utils.contains('TUNE_FEATURES', 'neon', '--enable-neon', '', d)}
++    mv ${B} ${WORKDIR}/build-fftwf
++}
++
++do_compile() {
++    for lib in fftw fftwl fftwf; do
++        cd ${WORKDIR}/build-$lib
++        autotools_do_compile
++    done
++}
++
++do_install() {
++    for lib in fftw fftwl fftwf; do
++        cd ${WORKDIR}/build-$lib
++        autotools_do_install
++    done
++}
++
++
++PACKAGES =+ "libfftw libfftwl libfftwf"
++FILES_libfftw = "${libdir}/libfftw3.so.* ${libdir}/libfftw3_*.so.*"
++FILES_libfftwl = "${libdir}/libfftw3l.so.* ${libdir}/libfftw3l_*.so.*"
++FILES_libfftwf = "${libdir}/libfftw3f.so.* ${libdir}/libfftw3f_*.so.*"
++
++PACKAGES =+ "fftw-wisdom fftwl-wisdom fftwf-wisdom fftw-wisdom-to-conf"
++FILES_fftw-wisdom = "${bindir}/fftw-wisdom"
++FILES_fftwl-wisdom = "${bindir}/fftwl-wisdom"
++FILES_fftwf-wisdom = "${bindir}/fftwf-wisdom"
++FILES_fftw-wisdom-to-conf = "${bindir}/fftw-wisdom-to-conf"
++
+ BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb b/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb
+deleted file mode 100644
+index 4a65986..0000000
+--- a/meta-oe/recipes-support/fftw/fftwf_3.3.4.bb
++++ /dev/null
+@@ -1,11 +0,0 @@
+-require fftw.inc
+-
+-# conflicts with fftw and fftwl
+-EXCLUDE_FROM_WORLD = "1"
+-
+-EXTRA_OECONF += "--enable-single \
+-    ${@bb.utils.contains('TUNE_FEATURES', 'neon', '--enable-neon', '', d)} \
+-"
+-
+-SRC_URI[md5sum] = "2edab8c06b24feeb3b82bbb3ebf3e7b3"
+-SRC_URI[sha256sum] = "8f0cde90929bc05587c3368d2f15cd0530a60b8a9912a8e2979a72dbe5af0982"
+diff --git a/meta-oe/recipes-support/fftw/fftwl_3.3.4.bb b/meta-oe/recipes-support/fftw/fftwl_3.3.4.bb
+deleted file mode 100644
+index 432ff12..0000000
+--- a/meta-oe/recipes-support/fftw/fftwl_3.3.4.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require fftw.inc
+-
+-# conflicts with fftw and fftwf
+-EXCLUDE_FROM_WORLD = "1"
+-
+-EXTRA_OECONF += "--enable-long-double"
+-
+-SRC_URI[md5sum] = "2edab8c06b24feeb3b82bbb3ebf3e7b3"
+-SRC_URI[sha256sum] = "8f0cde90929bc05587c3368d2f15cd0530a60b8a9912a8e2979a72dbe5af0982"
 -- 
 2.5.5
 
