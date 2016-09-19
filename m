@@ -1,60 +1,45 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-yw0-f175.google.com (mail-yw0-f175.google.com
-	[209.85.161.175])
-	by mail.openembedded.org (Postfix) with ESMTP id E38FC60557
+Return-Path: <Adrian.Dudau@enea.com>
+X-Greylist: delayed 427 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 19 Sep 2016 13:05:01 UTC
+Received: from smtp-out11.electric.net (smtp-out11.electric.net
+	[185.38.181.38])
+	by mail.openembedded.org (Postfix) with ESMTP id 4D2096011A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Sep 2016 11:01:07 +0000 (UTC)
-Received: by mail-yw0-f175.google.com with SMTP id u82so135945340ywc.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Sep 2016 04:01:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=fLkbFoOU10sPQNocIiMl+pmnV0ZGBaIBvHPlhdaiVJ4=;
-	b=Fhmi9NtSoZPocOsz7YcdEvSApzC3+eC8bx2Ad+CoW9iTIcgbR2bVsVahPR04/ol9J1
-	Qlnmxs6UMDVmIak7Jx9tU+3P6/LcVB4s8F40jakzVk23fQCjW8rX87cO/YlUtEqx/Pzm
-	bnkX639HhYb7jW8Fh3ucqrqFA8IxpQ2+pgif8kjopHsDGtIUyM1LLhUDMMLuSF+7eOVw
-	6Eua+we+2uMredsgm5fUHxkbT1s+/rb3lZ0qhp9I9he1isWTEJKsKWLYnerDft7nRwQ2
-	O1rv0sDiHDasxJ+aIcWxwbJjeHIMAErFm+M089WnLTWR+8HOxUSdyz6dJw8Lzhs1WxPS
-	/wlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=fLkbFoOU10sPQNocIiMl+pmnV0ZGBaIBvHPlhdaiVJ4=;
-	b=Izvpi+e6r7hri7waipVX78wmOb8MYs8afuuUyBFRyriFBr7fpfEuPUsmvlBj90CbqJ
-	a467GEEPg18vHgtIxPfgjJV0yt4O6+3z9H5oivY1pjCEsJKQXY9d2Qxs5mE8WDXV/Y3Z
-	zAAjZsoYRpXRYK1srvgw4AW4uLi1mcsG4UvmaNUQn79Zht8TIBXL4meQvfgcOo5r4viq
-	rPhdmVzZ+6DrZm1vbGyh7IlxX9sTAUFQFL5b4nsr1dbeWFzaFbT1+nbrVjbbu88boonv
-	UGRFDOD0BvM4e5YdpeceRP7/Xi7MFTktfEltgk8DpcMyTt5yRA0qGhzEqVY6IvsXdohg
-	YyGA==
-X-Gm-Message-State: AE9vXwO7OKGXNV0gwF8VdDy0vTdCT7WXc6ESmtD/psPPNiotMV8WzjE8oUOMxX6sekvh9A==
-X-Received: by 10.13.243.196 with SMTP id c187mr23563050ywf.137.1474282867672; 
-	Mon, 19 Sep 2016 04:01:07 -0700 (PDT)
-Received: from mail-yw0-f171.google.com (mail-yw0-f171.google.com.
-	[209.85.161.171]) by smtp.gmail.com with ESMTPSA id
-	p71sm2778328ywe.40.2016.09.19.04.01.06
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 19 Sep 2016 04:01:06 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-yw0-f171.google.com with SMTP id t67so138033091ywg.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Sep 2016 04:01:06 -0700 (PDT)
-X-Received: by 10.129.146.196 with SMTP id j187mr3207725ywg.28.1474282865851; 
-	Mon, 19 Sep 2016 04:01:05 -0700 (PDT)
+	Mon, 19 Sep 2016 13:05:01 +0000 (UTC)
+Received: from 1blyAE-0005sV-TF by out11c.electric.net with emc1-ok (Exim 4.87)
+	(envelope-from <Adrian.Dudau@enea.com>) id 1blyAE-0005t0-Tl
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Sep 2016 05:59:14 -0700
+Received: by emcmailer; Mon, 19 Sep 2016 05:59:14 -0700
+Received: from [192.36.1.72] (helo=mx-3.enea.com)
+	by out11c.electric.net with esmtps (TLSv1:AES128-SHA:128) (Exim 4.87)
+	(envelope-from <Adrian.Dudau@enea.com>) id 1blyAE-0005sV-TF
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Sep 2016 05:59:14 -0700
+Received: from sestofb11.enea.se (172.21.3.152) by smtp.enea.com
+	(172.21.1.208) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 19 Sep 2016 14:59:13 +0200
+Received: by sestofb11.enea.se (Postfix, from userid 4451)	id B7F44441551;
+	Mon, 19 Sep 2016 14:59:13 +0200 (CEST)
+From: Adrian Dudau <adrian.dudau@enea.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 19 Sep 2016 14:59:13 +0200
+Message-ID: <1474289953-39208-1-git-send-email-adrian.dudau@enea.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Received: by 10.31.154.68 with HTTP; Mon, 19 Sep 2016 04:01:05 -0700 (PDT)
-In-Reply-To: <CABcZANn79dEop66L+-zU7EOyv++T-AcH4Qsg=Z_vkQzShbo4LQ@mail.gmail.com>
-References: <1474167179-6717-1-git-send-email-zhe.he@windriver.com>
-	<CABcZANn79dEop66L+-zU7EOyv++T-AcH4Qsg=Z_vkQzShbo4LQ@mail.gmail.com>
-Date: Mon, 19 Sep 2016 08:01:05 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKp2+qfMO2Qx0nP=8ysOjWhUCeAmSPhjCNez1ddGjaNXkA@mail.gmail.com>
-Message-ID: <CAP9ODKp2+qfMO2Qx0nP=8ysOjWhUCeAmSPhjCNez1ddGjaNXkA@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] [PATCH] bash2dash conversion
+Received-SPF: None (SESTOEX08.enea.se: adrian.dudau@enea.com does not
+	designate permitted sender hosts)
+X-Outbound-IP: 192.36.1.72
+X-Env-From: Adrian.Dudau@enea.com
+X-Proto: esmtps
+X-Revdns: mx-3.enea.com
+X-HELO: mx-3.enea.com
+X-TLS: TLSv1:AES128-SHA:128
+X-Authenticated_ID: 
+X-PolicySMART: 6551647
+X-Virus-Status: Scanned by VirusSMART (c)
+X-Virus-Status: Scanned by VirusSMART (s)
+Subject: [meta-networking][PATCH] openl2tp: Obey LDFLAGS in Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,29 +52,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Sep 2016 11:01:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 19 Sep 2016 13:05:05 -0000
+Content-Type: text/plain
 
-On Sun, Sep 18, 2016 at 12:36 AM, Christopher Larson
-<clarson@kergoth.com> wrote:
-> The purpose of =E2=80=98command=E2=80=99 is to *run* a command, not check=
- if it=E2=80=99s
-> available, and =E2=80=98type=E2=80=99 is mandated in SuSv3/SuSv4/POSIX. I=
-f dash doesn=E2=80=99t
-> provide it, it=E2=80=99s broken.
+This avoids a "QA Issue: No GNU_HASH in the elf binary"
 
-It provides it and works:
+Signed-off-by: Adrian Dudau <adrian.dudau@enea.com>
+---
+ .../openl2tp/openl2tp/Makefile-obey-LDFLAGS.patch         | 15 +++++++++++++++
+ .../recipes-protocols/openl2tp/openl2tp_1.8.bb            |  1 +
+ 2 files changed, 16 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/openl2tp/openl2tp/Makefile-obey-LDFLAGS.patch
 
-% dash
-$ if type dash; then echo "dash is found and working"; else echo "Error"; f=
-i
-dash is /bin/dash
-dash is found and working
-$
+diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp/Makefile-obey-LDFLAGS.patch b/meta-networking/recipes-protocols/openl2tp/openl2tp/Makefile-obey-LDFLAGS.patch
+new file mode 100644
+index 0000000..811fadd
+--- /dev/null
++++ b/meta-networking/recipes-protocols/openl2tp/openl2tp/Makefile-obey-LDFLAGS.patch
+@@ -0,0 +1,15 @@
++Upstream-Status: Pending
++
++--- openl2tp-1.8/Makefile.orig	2016-09-16 14:54:18.554291976 +0200
+++++ openl2tp-1.8/Makefile	2016-09-16 14:57:23.559090400 +0200
++@@ -157,8 +157,8 @@ ADD_CFLAGS=			-I. -Iusl -Icli -isystem i
++ 				-MMD -Wall -Wno-strict-aliasing \
++ 				$(ADD_CPPFLAGS) $(CPPFLAGS.dmalloc) \
++ 				-DSYS_LIBDIR=$(SYS_LIBDIR)
++-LDFLAGS.l2tpd=		-Wl,-E -L. -Lusl -lusl -ldl $(LIBS.dmalloc) -lc
++-LDFLAGS.l2tpconfig=	-Lcli -lcli -lreadline $(LIBS.dmalloc) $(READLINE_LDFLAGS) -lc
+++LDFLAGS.l2tpd=		-Wl,-E -L. -Lusl -lusl -ldl $(LIBS.dmalloc) -lc $(LDFLAGS)
+++LDFLAGS.l2tpconfig=	-Lcli -lcli -lreadline $(LIBS.dmalloc) $(READLINE_LDFLAGS) -lc $(LDFLAGS)
++ 
++ OPT_CFLAGS?=		-O
++ 
+diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
+index d043b63..270472e 100644
+--- a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
++++ b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
+@@ -14,6 +14,7 @@ DEPENDS = "popt flex readline"
+ SRC_URI = "http://ftp.jaist.ac.jp/pub/sourceforge/o/op/${PN}/${PN}/${PV}/${BP}.tar.gz \
+            file://Makefile-modify-CFLAGS-to-aviod-build-error.patch \
+            file://openl2tp-simplify-gcc-warning-hack.patch \
++           file://Makefile-obey-LDFLAGS.patch \
+           "
+ SRC_URI[md5sum] = "e3d08dedfb9e6a9a1e24f6766f6dadd0"
+ SRC_URI[sha256sum] = "1c97704d4b963a87fbc0e741668d4530933991515ae9ab0dffd11b5444f4860f"
+-- 
+1.9.1
 
---=20
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
