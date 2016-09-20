@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F61465CB5
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EA2E607A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Sep 2016 05:59:37 +0000 (UTC)
+	Tue, 20 Sep 2016 05:59:38 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u8K5xapM004763
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u8K5xeZf020385
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Sep 2016 22:59:37 -0700
+	Mon, 19 Sep 2016 22:59:40 -0700 (PDT)
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Mon, 19 Sep 2016 22:59:36 -0700
+	14.3.294.0; Mon, 19 Sep 2016 22:59:39 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 20 Sep 2016 13:42:25 +0800
-Message-ID: <8ca1074485dd857c97e91a384184a45ff2cdabca.1474348826.git.jackie.huang@windriver.com>
+Date: Tue, 20 Sep 2016 13:42:26 +0800
+Message-ID: <c8133d456781f58dd3142f443cc08d808615efba.1474348826.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.8.3
 In-Reply-To: <cover.1474348826.git.jackie.huang@windriver.com>
 References: <cover.1474348826.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 3/4] libldb: fixes for deterministic builds
+Subject: [meta-networking][PATCH 4/4] libtdb: fixes for deterministic builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Sep 2016 05:59:37 -0000
+X-List-Received-Date: Tue, 20 Sep 2016 05:59:38 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
@@ -53,21 +53,21 @@ From: Jackie Huang <jackie.huang@windriver.com>
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../ldb-Add-configure-options-for-packages.patch   | 124 +++++++++++++++++++++
- .../recipes-support/libldb/libldb_1.1.27.bb        |  13 ++-
- 2 files changed, 136 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/libldb/libldb/ldb-Add-configure-options-for-packages.patch
+ .../tdb-Add-configure-options-for-packages.patch   | 127 +++++++++++++++++++++
+ .../recipes-support/libtdb/libtdb_1.3.10.bb        |  16 ++-
+ 2 files changed, 140 insertions(+), 3 deletions(-)
+ create mode 100644 meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
 
-diff --git a/meta-networking/recipes-support/libldb/libldb/ldb-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libldb/libldb/ldb-Add-configure-options-for-packages.patch
+diff --git a/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
 new file mode 100644
-index 0000000..b628912
+index 0000000..6db0f9c
 --- /dev/null
-+++ b/meta-networking/recipes-support/libldb/libldb/ldb-Add-configure-options-for-packages.patch
-@@ -0,0 +1,124 @@
-+From 75c66723bf2f76085038f0cb6f6824a5554c6f15 Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
+@@ -0,0 +1,127 @@
++From 7f86be29df07fd6c371e3f4315cb7629c1b49eaa Mon Sep 17 00:00:00 2001
 +From: Jackie Huang <jackie.huang@windriver.com>
-+Date: Wed, 14 Sep 2016 16:01:07 +0800
-+Subject: [PATCH] ldb: Add configure options for packages
++Date: Tue, 20 Sep 2016 09:04:47 +0800
++Subject: [PATCH] tdb: Add configure options for packages
 +
 +Add configure options for the following packages:
 + - acl
@@ -84,6 +84,7 @@ index 0000000..b628912
 + lib/replace/wscript                  | 43 +++++++++++++++++++++++++++++++-----
 + wscript                              |  4 ++++
 + 3 files changed, 46 insertions(+), 7 deletions(-)
++ mode change 100644 => 100755 wscript
 +
 +diff --git a/lib/replace/system/wscript_configure b/lib/replace/system/wscript_configure
 +index 2035474..10f9ae7 100644
@@ -171,39 +172,46 @@ index 0000000..b628912
 +     conf.CHECK_HEADERS('sys/extattr.h sys/ea.h sys/proplist.h sys/cdefs.h')
 +     conf.CHECK_HEADERS('utmp.h utmpx.h lastlog.h')
 +diff --git a/wscript b/wscript
-+index 2af8571..92145fd 100755
++old mode 100644
++new mode 100755
++index 50b2286..eb5f90e
 +--- a/wscript
 ++++ b/wscript
-+@@ -29,6 +29,10 @@ def set_options(opt):
-+     opt.RECURSE('lib/replace')
-+     opt.tool_options('python') # options for disabling pyc or pyo compilation
++@@ -66,6 +66,10 @@ def set_options(opt):
++                        action="store_true", dest='disable_python', default=False)
++ 
 + 
 ++    opt.add_option('--with-valgrind',
 ++                   help=("enable use of valgrind"),
 ++                   action="store_true", dest='enable_valgrind', default=False)
 ++
 + def configure(conf):
-+     conf.RECURSE('lib/tdb')
-+     conf.RECURSE('lib/tevent')
++     conf.env.disable_tdb_mutex_locking = getattr(Options.options,
++                                                  'disable_tdb_mutex_locking',
 +-- 
 +2.8.3
 +
-diff --git a/meta-networking/recipes-support/libldb/libldb_1.1.27.bb b/meta-networking/recipes-support/libldb/libldb_1.1.27.bb
-index b92bf22..80c95f9 100644
---- a/meta-networking/recipes-support/libldb/libldb_1.1.27.bb
-+++ b/meta-networking/recipes-support/libldb/libldb_1.1.27.bb
-@@ -3,14 +3,25 @@ HOMEPAGE = "http://ldb.samba.org"
+diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.3.10.bb b/meta-networking/recipes-support/libtdb/libtdb_1.3.10.bb
+index 35ae8c0..9ab0811 100644
+--- a/meta-networking/recipes-support/libtdb/libtdb_1.3.10.bb
++++ b/meta-networking/recipes-support/libtdb/libtdb_1.3.10.bb
+@@ -2,17 +2,27 @@ SUMMARY = "The tdb library"
  SECTION = "libs"
- LICENSE = "LGPL-3.0+ & LGPL-2.1+ & GPL-3.0+"
+ LICENSE = "LGPL-3.0+ & GPL-3.0+"
  
--DEPENDS += "libaio libbsd libtdb libtalloc libtevent popt"
-+DEPENDS += "libbsd libtdb libtalloc libtevent popt"
- RDEPENDS_pyldb += "python"
+-DEPENDS += "libaio"
+-
+ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
+                     file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
  
- SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
-            file://do-not-import-target-module-while-cross-compile.patch \
-+           file://ldb-Add-configure-options-for-packages.patch \
-           "
+ SRC_URI = "http://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
+-           file://do-not-check-xsltproc-manpages.patch"
++           file://do-not-check-xsltproc-manpages.patch \
++           file://tdb-Add-configure-options-for-packages.patch \
++"
+ 
+ SRC_URI[md5sum] = "c98f24eb469022b0f1741d3a504cfda5"
+ SRC_URI[sha256sum] = "5578fb726bd04835f250bea11fe7d1398fe0bb3a7c9390404241c83cd6b50c1c"
  
 +PACKAGECONFIG ??= "\
 +    ${@bb.utils.contains('DISTRO_FEATURES', 'acl', 'acl', '', d)} \
@@ -211,14 +219,13 @@ index b92bf22..80c95f9 100644
 +"
 +PACKAGECONFIG[acl] = "--with-acl,,acl"
 +PACKAGECONFIG[attr] = "--with-attr,,attr"
- PACKAGECONFIG[ldap] = ",,openldap"
 +PACKAGECONFIG[libaio] = "--with-libaio,,libaio,"
 +PACKAGECONFIG[libcap] = "--with-libcap,,libcap,"
 +PACKAGECONFIG[valgrind] = "--with-valgrind,,valgrind,"
 +
- SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'ldap', '', 'file://avoid-openldap-unless-wanted.patch', d)}"
+ S = "${WORKDIR}/tdb-${PV}"
  
- LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
+ inherit waf-samba
 -- 
 2.8.3
 
