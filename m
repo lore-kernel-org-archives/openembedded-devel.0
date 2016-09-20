@@ -1,24 +1,26 @@
-Return-Path: <Wenzong.Fan@windriver.com>
+Return-Path: <Jackie.Huang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7FFCE60123
+	by mail.openembedded.org (Postfix) with ESMTP id CE7F560778
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Sep 2016 05:57:28 +0000 (UTC)
+	Tue, 20 Sep 2016 05:59:32 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u8K5vRcO020164
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u8K5xYTC020364
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Sep 2016 22:57:30 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 19 Sep 2016 22:57:27 -0700
-From: <wenzong.fan@windriver.com>
+	Mon, 19 Sep 2016 22:59:34 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Mon, 19 Sep 2016 22:59:33 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 20 Sep 2016 01:57:25 -0400
-Message-ID: <1474351045-153359-1-git-send-email-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 2.8.1
+Date: Tue, 20 Sep 2016 13:42:23 +0800
+Message-ID: <3eedb5bcccfc787f9673143098f394efa6ae6124.1474348826.git.jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.8.3
+In-Reply-To: <cover.1474348826.git.jackie.huang@windriver.com>
+References: <cover.1474348826.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] rsyslog: upgrade to 7.6.7
+Subject: [meta-networking][PATCH 1/4] libtalloc: fixes for deterministic builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,171 +33,197 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Sep 2016 05:57:30 -0000
+X-List-Received-Date: Tue, 20 Sep 2016 05:59:33 -0000
 Content-Type: text/plain
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+From: Jackie Huang <jackie.huang@windriver.com>
 
-* fix CVEs CVE-2014-3634, CVE-2014-3683
+* Add configure option and PACKAGECONFIG for
+  the following packages:
+  - acl
+  - attr
+  - libaio
+  - libcap
+  - valgrind
 
-* rebase the patch use-pkgconfig-to-check-libgcrypt.patch
+* They are all optional, so disable by default
+  or control them based on DISTRO_FEATURES.
 
-* backport fixes for build error:
-  lexer.l:34:14: error: expected identifier or '(' before '__extension__'
+* Remove the direct dependency on libaio
 
-* replace the old configure option '--enable-cached-man-pages' with
-  '--disable-generate-man-pages'
-
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- ...include-config.h-before-any-other-headers.patch | 51 ++++++++++++++++++++++
- .../rsyslog/use-pkgconfig-to-check-libgcrypt.patch | 25 +++++------
- .../rsyslog/{rsyslog_7.6.1.bb => rsyslog_7.6.7.bb} |  7 +--
- 3 files changed, 66 insertions(+), 17 deletions(-)
- create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/bugfix-include-config.h-before-any-other-headers.patch
- rename meta-oe/recipes-extended/rsyslog/{rsyslog_7.6.1.bb => rsyslog_7.6.7.bb} (96%)
+ ...talloc-Add-configure-options-for-packages.patch | 124 +++++++++++++++++++++
+ .../recipes-support/libtalloc/libtalloc_2.1.8.bb   |  16 ++-
+ 2 files changed, 137 insertions(+), 3 deletions(-)
+ create mode 100644 meta-networking/recipes-support/libtalloc/libtalloc/talloc-Add-configure-options-for-packages.patch
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/bugfix-include-config.h-before-any-other-headers.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/bugfix-include-config.h-before-any-other-headers.patch
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc/talloc-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libtalloc/libtalloc/talloc-Add-configure-options-for-packages.patch
 new file mode 100644
-index 0000000..1048b42
+index 0000000..d383df4
 --- /dev/null
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog/bugfix-include-config.h-before-any-other-headers.patch
-@@ -0,0 +1,51 @@
-+Backport below commit for fixing:
++++ b/meta-networking/recipes-support/libtalloc/libtalloc/talloc-Add-configure-options-for-packages.patch
+@@ -0,0 +1,124 @@
++From 77fd757624c9b20073a7abefaca8382caa4fd376 Mon Sep 17 00:00:00 2001
++From: Jackie Huang <jackie.huang@windriver.com>
++Date: Wed, 14 Sep 2016 11:11:35 +0800
++Subject: [PATCH] talloc: Add configure options for packages
 +
-+lexer.l:34:14: error: expected identifier or '(' before '__extension__'
++Add configure options for the following packages:
++ - acl
++ - attr
++ - libaio
++ - libcap
++ - valgrind
 +
-+From 876bdd1c85353f7e254f4b4c3e228484860cea57 Mon Sep 17 00:00:00 2001
-+From: Tomas Heinrich <theinric@redhat.com>
-+Date: Mon, 17 Nov 2014 20:53:22 +0100
-+Subject: [PATCH] bugfix: include config.h before any other headers
++Upstream-Status: Inappropriate [oe deterministic build specific]
 +
-+For some reason, flex used to prepend several standard headers before
-+config.h. This prevented some conditional extension in these headers
-+from being defined.
-+
-+The explicit prototype for strdup() shouldn't be required anymore as
-+it should be provided by string.h.
-+
-+Upstream-Status: Backport
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 +---
-+ grammar/lexer.l | 7 +++++--
-+ 1 file changed, 5 insertions(+), 2 deletions(-)
++ lib/replace/system/wscript_configure |  6 ++++-
++ lib/replace/wscript                  | 43 +++++++++++++++++++++++++++++++-----
++ wscript                              |  4 ++++
++ 3 files changed, 46 insertions(+), 7 deletions(-)
 +
-+diff --git a/grammar/lexer.l b/grammar/lexer.l
-+index 359cf9f..c834ef7 100644
-+--- a/grammar/lexer.l
-++++ b/grammar/lexer.l
-+@@ -28,10 +28,12 @@
-+   * limitations under the License.
-+   */
++diff --git a/lib/replace/system/wscript_configure b/lib/replace/system/wscript_configure
++index 2035474..10f9ae7 100644
++--- a/lib/replace/system/wscript_configure
+++++ b/lib/replace/system/wscript_configure
++@@ -1,6 +1,10 @@
++ #!/usr/bin/env python
 + 
-+-%{
-++%top{
-+ #include "config.h"
-++}
++-conf.CHECK_HEADERS('sys/capability.h')
+++import Options
 ++
-++%{
-+ #include "parserif.h"
-+-extern char *strdup(__const char*); /* somehow we may not get this from string.h... */
-+ %}
+++if Options.options.enable_libcap:
+++    conf.CHECK_HEADERS('sys/capability.h')
+++
++ conf.CHECK_FUNCS('getpwnam_r getpwuid_r getpwent_r')
 + 
-+ %option noyywrap nodefault case-insensitive yylineno
-+@@ -67,6 +69,7 @@ extern char *strdup(__const char*); /* somehow we may not get this from string.h
-+ #include <ctype.h>
-+ #include <stdio.h>
-+ #include <stdlib.h>
-++#include <string.h>
-+ #include <strings.h>
-+ #include <libestr.h>
-+ #include "rainerscript.h"
++ # solaris varients of getXXent_r
++diff --git a/lib/replace/wscript b/lib/replace/wscript
++index fc43e1a..a899dd2 100644
++--- a/lib/replace/wscript
+++++ b/lib/replace/wscript
++@@ -23,6 +23,22 @@ def set_options(opt):
++     opt.PRIVATE_EXTENSION_DEFAULT('')
++     opt.RECURSE('buildtools/wafsamba')
++ 
+++    opt.add_option('--with-acl',
+++                   help=("Enable use of acl"),
+++                   action="store_true", dest='enable_acl', default=False)
+++
+++    opt.add_option('--with-attr',
+++                   help=("Enable use of attr"),
+++                   action="store_true", dest='enable_attr', default=False)
+++
+++    opt.add_option('--with-libaio',
+++                   help=("Enable use of libaio"),
+++                   action="store_true", dest='enable_libaio', default=False)
+++
+++    opt.add_option('--with-libcap',
+++                   help=("Enable use of libcap"),
+++                   action="store_true", dest='enable_libcap', default=False)
+++
++ @Utils.run_once
++ def configure(conf):
++     conf.RECURSE('buildtools/wafsamba')
++@@ -32,12 +48,25 @@ def configure(conf):
++     conf.DEFINE('HAVE_LIBREPLACE', 1)
++     conf.DEFINE('LIBREPLACE_NETWORK_CHECKS', 1)
++ 
++-    conf.CHECK_HEADERS('linux/types.h crypt.h locale.h acl/libacl.h compat.h')
++-    conf.CHECK_HEADERS('acl/libacl.h attr/xattr.h compat.h ctype.h dustat.h')
+++    conf.CHECK_HEADERS('linux/types.h crypt.h locale.h compat.h')
+++    conf.CHECK_HEADERS('compat.h ctype.h dustat.h')
++     conf.CHECK_HEADERS('fcntl.h fnmatch.h glob.h history.h krb5.h langinfo.h')
++-    conf.CHECK_HEADERS('libaio.h locale.h ndir.h pwd.h')
++-    conf.CHECK_HEADERS('shadow.h sys/acl.h')
++-    conf.CHECK_HEADERS('sys/attributes.h attr/attributes.h sys/capability.h sys/dir.h sys/epoll.h')
+++    conf.CHECK_HEADERS('locale.h ndir.h pwd.h')
+++    conf.CHECK_HEADERS('shadow.h')
+++    conf.CHECK_HEADERS('sys/attributes.h sys/dir.h sys/epoll.h')
+++
+++    if Options.options.enable_acl:
+++        conf.CHECK_HEADERS('acl/libacl.h sys/acl.h')
+++
+++    if Options.options.enable_attr:
+++        conf.CHECK_HEADERS('attr/attributes.h attr/xattr.h')
+++
+++    if Options.options.enable_libaio:
+++        conf.CHECK_HEADERS('libaio.h')
+++
+++    if Options.options.enable_libcap:
+++        conf.CHECK_HEADERS('sys/capability.h')
+++
++     conf.CHECK_HEADERS('port.h')
++     conf.CHECK_HEADERS('sys/fcntl.h sys/filio.h sys/filsys.h sys/fs/s5param.h sys/fs/vx/quota.h')
++     conf.CHECK_HEADERS('sys/id.h sys/ioctl.h sys/ipc.h sys/mman.h sys/mode.h sys/ndir.h sys/priv.h')
++@@ -73,7 +102,9 @@ def configure(conf):
++ 
++     conf.CHECK_CODE('', headers='rpc/rpc.h rpcsvc/yp_prot.h', define='HAVE_RPCSVC_YP_PROT_H')
++ 
++-    conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h valgrind/memcheck.h')
+++    if Options.options.enable_valgrind:
+++        conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h valgrind/memcheck.h')
+++
++     conf.CHECK_HEADERS('nss_common.h nsswitch.h ns_api.h')
++     conf.CHECK_HEADERS('sys/extattr.h sys/ea.h sys/proplist.h sys/cdefs.h')
++     conf.CHECK_HEADERS('utmp.h utmpx.h lastlog.h')
++diff --git a/wscript b/wscript
++index 41f3be7..f900c24 100644
++--- a/wscript
+++++ b/wscript
++@@ -35,6 +35,10 @@ def set_options(opt):
++         opt.add_option('--disable-python',
++                        help=("disable the pytalloc module"),
++                        action="store_true", dest='disable_python', default=False)
+++        opt.add_option('--with-valgrind',
+++                       help=("enable use of valgrind"),
+++                       action="store_true", dest='enable_valgrind', default=False)
+++
++ 
++ 
++ def configure(conf):
 +-- 
-+2.7.4
++2.8.3
 +
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/use-pkgconfig-to-check-libgcrypt.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/use-pkgconfig-to-check-libgcrypt.patch
-index ebc1070..46eddd6 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog/use-pkgconfig-to-check-libgcrypt.patch
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog/use-pkgconfig-to-check-libgcrypt.patch
-@@ -9,34 +9,31 @@ libgcrypt does no longer provide libgcrypt-config, and provide
- *.pc, so we should use pkgconfig to check
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
+index 7c85ab3..8b2ae33 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
++++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
+@@ -3,9 +3,11 @@ HOMEPAGE = "http://talloc.samba.org"
+ SECTION = "libs"
+ LICENSE = "LGPL-3.0+ & GPL-3.0+"
  
- Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
- ---
-- configure.ac |   19 +------------------
-- 1 file changed, 1 insertion(+), 18 deletions(-)
-+ configure.ac | 15 +--------------
-+ 1 file changed, 1 insertion(+), 14 deletions(-)
+-DEPENDS += "libaio libbsd"
++DEPENDS += "libbsd"
  
- diff --git a/configure.ac b/configure.ac
--index 017116e..1b880f8 100644
-+index 0f31869..d35db42 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -784,24 +784,7 @@ AC_ARG_ENABLE(libgcrypt,
-+@@ -777,20 +777,7 @@ AC_ARG_ENABLE(libgcrypt,
-          [enable_libgcrypt=yes]
-  )
-  if test "x$enable_libgcrypt" = "xyes"; then
---        AC_CHECK_PROG(
---      	    [HAVE_LIBGCRYPT_CONFIG],
---            [libgcrypt-config],
---            [yes],,,
---            )
---        if test "x${HAVE_LIBGCRYPT_CONFIG}" != "xyes"; then
-+-	AC_PATH_PROG([LIBGCRYPT_CONFIG],[libgcrypt-config],[no])
-+-        if test "x${LIBGCRYPT_CONFIG}" = "xno"; then
- -           AC_MSG_FAILURE([libgcrypt-config not found in PATH])
- -        fi
- -        AC_CHECK_LIB(
- -		[gcrypt],
- -        	[gcry_cipher_open],
---        	[LIBGCRYPT_CFLAGS="`libgcrypt-config --cflags`"
---        	LIBGCRYPT_LIBS="`libgcrypt-config --libs`"
-+-        	[LIBGCRYPT_CFLAGS="`${LIBGCRYPT_CONFIG} --cflags`"
-+-        	LIBGCRYPT_LIBS="`${LIBGCRYPT_CONFIG} --libs`"
- -        	],
- -        	[AC_MSG_FAILURE([libgcrypt is missing])],
---        	[`libgcrypt-config --libs --cflags`]
-+-        	[`${LIBGCRYPT_CONFIG} --libs --cflags`]
- -        	)
- -	AC_DEFINE([ENABLE_LIBGCRYPT], [1], [Indicator that LIBGCRYPT is present])
- +	PKG_CHECK_MODULES(LIBGCRYPT, libgcrypt)
-@@ -44,5 +41,5 @@ index 017116e..1b880f8 100644
-  AM_CONDITIONAL(ENABLE_LIBGCRYPT, test x$enable_libgcrypt = xyes)
-  AC_SUBST(LIBGCRYPT_CFLAGS)
- -- 
--1.7.9.5
-+2.8.1
+-SRC_URI = "http://samba.org/ftp/talloc/talloc-${PV}.tar.gz"
++SRC_URI = "http://samba.org/ftp/talloc/talloc-${PV}.tar.gz \
++           file://talloc-Add-configure-options-for-packages.patch \
++"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
+                     file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
  
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_7.6.1.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_7.6.7.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/rsyslog/rsyslog_7.6.1.bb
-rename to meta-oe/recipes-extended/rsyslog/rsyslog_7.6.7.bb
-index c1d923c..664ab9f 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_7.6.1.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_7.6.7.bb
-@@ -27,15 +27,16 @@ SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
-            file://json-0.12-fix.patch \
-            file://replace_deprecated_GnuTLS_functions.patch \
-            file://use_gnutls_certificate_type_set_priority_only_if_available.patch \
-+           file://bugfix-include-config.h-before-any-other-headers.patch \
-            file://enable_tls_ptests.patch \
- "
+@@ -15,7 +17,15 @@ SRC_URI[sha256sum] = "22d14911164d4de67ff76b5269fa5250d01f78c955bc77e28615350996
  
--SRC_URI[md5sum] = "093c462a5245012bd9e7b82dd8aedffb"
--SRC_URI[sha256sum] = "357f089d866c351d5fe5b7139fa85b010223d77b3c21f29b2a1baa8688926111"
-+SRC_URI[md5sum] = "fa78a6e675fe78a811edcdf7eb6f1975"
-+SRC_URI[sha256sum] = "fc29d2d9cbf3396091dd0bab2eb6f847aed4a44ef73138a97ddf9447446125ee"
+ inherit waf-samba
  
- inherit autotools pkgconfig systemd update-rc.d update-alternatives ptest
+-PACKAGECONFIG[attr] = ",,attr"
++PACKAGECONFIG ??= "\
++    ${@bb.utils.contains('DISTRO_FEATURES', 'acl', 'acl', '', d)} \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'xattr', 'attr', '', d)} \
++"
++PACKAGECONFIG[acl] = "--with-acl,,acl"
++PACKAGECONFIG[attr] = "--with-attr,,attr"
++PACKAGECONFIG[libaio] = "--with-libaio,,libaio,"
++PACKAGECONFIG[libcap] = "--with-libcap,,libcap,"
++PACKAGECONFIG[valgrind] = "--with-valgrind,,valgrind,"
  
--EXTRA_OECONF += "--enable-cached-man-pages"
-+EXTRA_OECONF += "--disable-generate-man-pages"
+ SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'attr', '', 'file://avoid-attr-unless-wanted.patch', d)}"
  
- # first line is default yes in configure
- PACKAGECONFIG ??= " \
 -- 
-2.8.1
+2.8.3
 
 
