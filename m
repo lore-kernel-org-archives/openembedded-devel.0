@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pa0-f66.google.com (mail-pa0-f66.google.com
 	[209.85.220.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C73760778
+	by mail.openembedded.org (Postfix) with ESMTP id 4F10B6078D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Sep 2016 20:18:06 +0000 (UTC)
-Received: by mail-pa0-f66.google.com with SMTP id oz2so1312488pac.0
+	Tue, 20 Sep 2016 20:18:07 +0000 (UTC)
+Received: by mail-pa0-f66.google.com with SMTP id my20so1307611pab.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Sep 2016 13:18:08 -0700 (PDT)
+	Tue, 20 Sep 2016 13:18:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=e+qIkmfiVRjGjhdbe4FgpMC5XVr8vBb52RWMD+5yWlo=;
-	b=Du6bDVyt20/UCdIIgiacqQGJWraB3bQ+o0Muer6VNTAjhDzVmKcPaScFyYhRa6ORoH
-	89sTnuvfD5hlTACmV52qjZ8vw/W7OsjgZfdhsVCrGrBT/yQMUZU+na+OWFzdg9w39euZ
-	iegWEvUVnY2xe16PWhS9I5pKQcpSQXpMac2bMYpvGCA/iWacvwTRGuG2GJGmkfnFL6bZ
-	nSKuzWf55aYTgg93gdxmlVmEJaypSGJYVB+81Ohos8lUnKb0E4LyB5XmY8JPK7NH4DWt
-	tp8vBE7rnqSa7b393bSXfE3d/fUJB8fT/XoF492ENpwYIoR0C6pcmo4hydmDGJqBSUlR
-	0dPQ==
+	bh=BoVTkpyOQqf2Xh/8AQYwrwYxDuGi6qAa83u4j97/3yI=;
+	b=F/kj/ofPdQ7LwbxMahYnpwaxYcXxGLv2U9qKpv8g0w+6IYfxrMbXo90oAsubRtyzsb
+	Tdz+JOoTL6t7fYfTvxKKm5LfNYqo7wkGhBscfbvS0LuS4cQn91k2ceaODLITE4+HmWGZ
+	850AKoYMH0LmNtopCbNhJIDtg91RYAh2zYIbMPiJEJ2VnNv1fZhZhsf0gSfojazz+X7Y
+	87Sh1+FbVTvvsydz4IVW+3n9sZa0eAlsDx224a0W1jjYmDSbNwtqBkBM3RJVE2j/v8H+
+	Net9X0n1LmdwKpLZv5rNwaJEk1t1ls3H3wc7GUrPlTq1B/esEsZhBJFGxECUbkUX8Q59
+	51ew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=e+qIkmfiVRjGjhdbe4FgpMC5XVr8vBb52RWMD+5yWlo=;
-	b=HGNwa0BqXfNlAK7tcQJM36QJ+jKL7EqNW5YdYTgIj5WZu9w/UZvT9DpBNSRWEbXnm2
-	9xnrFMcWkivMRG7PEPZWnWMI/vVxoZ1Cgz2d5vLrbzM9MRoJe115o9FfLy2p3Sx6Sl8e
-	+yhqzvzECj6lDINPoM0FvWZid3nzB8hma+WVff2jWiwpxDgci+VsS71JtJLVcmSFJc7d
-	9f+fIkpLHwAehj2J81/Wbfy/rUHCbkvtieDePx3VWVOR2oS/yZVz4x0wXxA2ZcWb2g6P
-	HSF8XzNe29FYfs+qb9RPfH9ummI01K0SxuRxYdFDjg6ESnyNi0dEG4GyEUsEywkgoDo+
-	N0Xw==
-X-Gm-Message-State: AE9vXwObNuPo7Y7rEppL6GRER+3YNouqyKa5iFJXPFTcLkU8yUEd11uvBmWAauIdPLmJdA==
-X-Received: by 10.66.134.51 with SMTP id ph19mr59294307pab.30.1474402688401;
-	Tue, 20 Sep 2016 13:18:08 -0700 (PDT)
+	bh=BoVTkpyOQqf2Xh/8AQYwrwYxDuGi6qAa83u4j97/3yI=;
+	b=jrZlNIvTnV/aiLUbT3cCdK4yG81788NUkSa1sNo/Re/3ealY8P72SiUBJntogr/9AZ
+	SSdtG2CoJq4P94dRCidVXwMXyWxqWtKFfF0TDqy5P2dO9h0jUkE+s0J+jY+NGj3fCLVw
+	4RKy5/KmICy0yLjOxC+PaoFjbU3aJP4RnOCnqF0ys4yaCQ90AmAUpUS6hBtb2jYhdH63
+	PcopkFqmvC3xsYM9uDdTWxLm3hciUaZVWwXwtakwMEbZkJH4fe6AplY9bugKYAwdhQ5h
+	QFk0Z+ta+sOEIPKDTeYfWVDRiVlomEIqE3TqaGweAgasIqglh/mgQMY3+cDTtnj0v3Ni
+	bAEw==
+X-Gm-Message-State: AE9vXwP2H6Za2Myg/498noQhMk+w3nowK/d3XlIYQub5Rul01bMm1PorrMYasWoSWjV6KA==
+X-Received: by 10.67.11.107 with SMTP id eh11mr29664557pad.89.1474402689111;
+	Tue, 20 Sep 2016 13:18:09 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192])
-	by smtp.gmail.com with ESMTPSA id z5sm110645pff.3.2016.09.20.13.18.07
+	by smtp.gmail.com with ESMTPSA id z5sm110645pff.3.2016.09.20.13.18.08
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 20 Sep 2016 13:18:07 -0700 (PDT)
+	Tue, 20 Sep 2016 13:18:08 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Sep 2016 13:17:58 -0700
-Message-Id: <20160920201759.28409-2-raj.khem@gmail.com>
+Date: Tue, 20 Sep 2016 13:17:59 -0700
+Message-Id: <20160920201759.28409-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.9.3
 In-Reply-To: <20160920201759.28409-1-raj.khem@gmail.com>
 References: <20160920201759.28409-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/3] gpsd: Fix build with musl
+Subject: [meta-oe][PATCH 3/3] lirc: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,63 +59,78 @@ X-List-Received-Date: Tue, 20 Sep 2016 20:18:09 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../gpsd-3.14/0001-include-sys-ttydefaults.h.patch | 34 ++++++++++++++++++++++
- meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb       |  1 +
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-include-sys-ttydefaults.h.patch
+ ...crcd-Mark-local-inline-funtions-as-static.patch | 49 ++++++++++++++++++++++
+ meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb    |  1 +
+ 2 files changed, 50 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/lirc/lirc/0001-lircrcd-Mark-local-inline-funtions-as-static.patch
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-include-sys-ttydefaults.h.patch b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-include-sys-ttydefaults.h.patch
+diff --git a/meta-oe/recipes-connectivity/lirc/lirc/0001-lircrcd-Mark-local-inline-funtions-as-static.patch b/meta-oe/recipes-connectivity/lirc/lirc/0001-lircrcd-Mark-local-inline-funtions-as-static.patch
 new file mode 100644
-index 0000000..b27c671
+index 0000000..e19d276
 --- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd-3.14/0001-include-sys-ttydefaults.h.patch
-@@ -0,0 +1,34 @@
-+From 543f79222520cc6ab65d20f9fa356dac5c848e3b Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-connectivity/lirc/lirc/0001-lircrcd-Mark-local-inline-funtions-as-static.patch
+@@ -0,0 +1,49 @@
++From c2be4543e4777c9e3d74b30326ba37b01917b0a9 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 17 Aug 2016 02:16:12 +0000
-+Subject: [PATCH] include sys/ttydefaults.h
++Date: Thu, 25 Aug 2016 03:02:37 +0000
++Subject: [PATCH] lircrcd: Mark local inline funtions as static
 +
-+This is needed for CTRL definition, as exposed by musl on glibc
-+this include file gets pulled indirectly.
-+
-+/usr/src/debug/gpsd/3.14-r0/gpsd-3.14/gpsmon.c:605: undefined reference to `CTRL'
-+clang-3.9: error: linker command failed with exit code 1 (use -v to see invocation)
-+scons: *** [gpsmon] Error 1
++These functions are not used anywhere outside
++this file, so they should be converted into static
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
 +Upstream-Status: Pending
 +
-+ gpsmon.c | 1 +
-+ 1 file changed, 1 insertion(+)
++ daemons/lircrcd.c | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
 +
-+diff --git a/gpsmon.c b/gpsmon.c
-+index bee05b8..daed818 100644
-+--- a/gpsmon.c
-++++ b/gpsmon.c
-+@@ -20,6 +20,7 @@
-+ #include <sys/types.h>
-+ #include <sys/stat.h>
-+ #include <sys/select.h>
-++#include <sys/ttydefaults.h>
-+ #include <fcntl.h>
-+ #ifndef S_SPLINT_S
-+ #include <unistd.h>
++diff --git a/daemons/lircrcd.c b/daemons/lircrcd.c
++index 55777cd..5ddc94d 100644
++--- a/daemons/lircrcd.c
+++++ b/daemons/lircrcd.c
++@@ -153,7 +153,7 @@ char *s;
++ /* A safer write(), since sockets might not write all but only some of the
++    bytes requested */
++ 
++-inline int write_socket(int fd, char *buf, int len)
+++static inline int write_socket(int fd, char *buf, int len)
++ {
++ 	int done, todo = len;
++ 
++@@ -167,7 +167,7 @@ inline int write_socket(int fd, char *buf, int len)
++ 	return (len);
++ }
++ 
++-inline int write_socket_len(int fd, char *buf)
+++static inline int write_socket_len(int fd, char *buf)
++ {
++ 	int len;
++ 
++@@ -177,7 +177,7 @@ inline int write_socket_len(int fd, char *buf)
++ 	return (1);
++ }
++ 
++-inline int read_timeout(int fd, char *buf, int len, int timeout)
+++static inline int read_timeout(int fd, char *buf, int len, int timeout)
++ {
++ 	fd_set fds;
++ 	struct timeval tv;
 +-- 
-+1.8.3.1
++1.9.1
 +
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-index 6158e97..4ff6d91 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-@@ -17,6 +17,7 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-     file://0003-Whoops-check-for-C11-not-for-not-C11-in-stdatomic.h-.patch \
-     file://0001-Include-stdatomic.h-only-in-C-mode.patch \
-     file://0001-libgpsd-core-Fix-issue-with-ACTIVATE-hook-not-being-.patch \
-+    file://0001-include-sys-ttydefaults.h.patch \
-     file://gpsd-default \
-     file://gpsd \
-     file://60-gpsd.rules \
+diff --git a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb b/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
+index 7162fcd..1726192 100644
+--- a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
++++ b/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
+@@ -1,6 +1,7 @@
+ require lirc.inc
+ 
+ SRC_URI += " \
++    file://0001-lircrcd-Mark-local-inline-funtions-as-static.patch \
+     file://lircd.service \
+     file://lircd.init \
+     file://lircexec.init \
 -- 
 2.9.3
 
