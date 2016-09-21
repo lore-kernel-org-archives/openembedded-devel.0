@@ -1,29 +1,47 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 7432070016
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id D2A9460684
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Sep 2016 15:47:30 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP; 21 Sep 2016 08:47:32 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.30,374,1470726000"; d="scan'208";a="1060060484"
-Received: from linux.intel.com ([10.54.29.200])
-	by fmsmga002.fm.intel.com with ESMTP; 21 Sep 2016 08:47:33 -0700
-Received: from mbabyjoh-desk.fi.intel.com (mbabyjoh-desk.fi.intel.com
-	[10.237.72.71])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by linux.intel.com (Postfix) with ESMTP id AEA9D6A4080
+	Wed, 21 Sep 2016 18:32:32 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id p47so1808255qtc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Sep 2016 08:47:06 -0700 (PDT)
-From: "Maxin B. John" <maxin.john@intel.com>
+	Wed, 21 Sep 2016 11:32:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:organization;
+	bh=gmypjEE1Fx30ddZRpJKYRqlqNrWgpkvG77YjnlfyiSc=;
+	b=nRAAnrTvDPBLml5f7C/jASuTD/1L41V74kXI373F6AXdr0VVaceID9cPPNpv4hB64M
+	XcXD+Ovu4VSFoGE7htWPpcTjqK1uLbfrGs6uT2DZTnHe8rbLJKdqQlyefbDN0dbxwFog
+	V0pflJYpkv1S6NoXAR872HA7s116p8AQB7HFJFvViucqNLQ1TqoMz0WnyCcHNiVdSgaf
+	RNtBmfTNJEK2/UgK4qMChLyJzdQrajAd76iR5eAhOZorYlZs7KRLELTIZZJc5g03aA7Y
+	g5wzNSCdunZDaaxgZ2dgMHuKI60Zx1Cpw4JSN8tVaYe1t7I3YG/yvhJ8A7qdtuqgnMus
+	h9DQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=gmypjEE1Fx30ddZRpJKYRqlqNrWgpkvG77YjnlfyiSc=;
+	b=cEb8r3yQ+K4pL+1iWSNAuq5nuni3l9IetAwhKTNxSRNL7rjqlL0On9HyDU5cK82PJb
+	mybSVr8M8eXbwVZ0ZwpXqlrJHtu4DoYALGJDgxoho1j5CKBOlwB9lFgxYzumCclPmR7T
+	Y30TwTAld0trV1j9u3QdpFAdBEvtSEx6V79tH1rijb8/ywunEB43jYtN4adHMjbaGa1E
+	mGAGNZND/jZCni8vyreZAAD9lKlNJTGM0NO2Pty+SQunsTRjtyAY6R57E6qQJuL4rCgi
+	U5zHw2Awb5+ig2ZqpxD5XEepeG64bbgG/8gMTdPxcptIa5Sd/l8UcHixg6k8bT2KwC7J
+	gJLg==
+X-Gm-Message-State: AE9vXwOqmWuAL6ixWlx0TcS674FZ6jLmC1CI9vc1In1ErjyPBZZSNSfiaGfg1Un6fGEGKg==
+X-Received: by 10.237.59.174 with SMTP id r43mr43217227qte.77.1474482753407;
+	Wed, 21 Sep 2016 11:32:33 -0700 (PDT)
+Received: from monster.lab.ossystems.com.br ([179.105.252.78])
+	by smtp.gmail.com with ESMTPSA id
+	73sm19544887qtc.16.2016.09.21.11.32.30
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 21 Sep 2016 11:32:32 -0700 (PDT)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Sep 2016 18:47:14 +0300
-Message-Id: <1474472834-20008-5-git-send-email-maxin.john@intel.com>
-X-Mailer: git-send-email 2.4.0
-In-Reply-To: <1474472834-20008-1-git-send-email-maxin.john@intel.com>
-References: <1474472834-20008-1-git-send-email-maxin.john@intel.com>
-Subject: [PATCH 4/4] tslib: move recipe from oe-core
+Date: Wed, 21 Sep 2016 15:31:38 -0300
+Message-Id: <1474482698-22007-1-git-send-email-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.1.4
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-qt5][krogoth][PATCH] qtwebengine: Add gperf-native to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,125 +54,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Sep 2016 15:47:30 -0000
+X-List-Received-Date: Wed, 21 Sep 2016 18:32:33 -0000
 
-Move tslib recipe from oe-core layer
+Fix error:
 
-Signed-off-by: Maxin B. John <maxin.john@intel.com>
+FAILED: cd ../build/tmp/work/cortexa9hf-neon-mx6qdl-linux-gnueabi/qtwebengine/
+5.6.99+5.7.0-beta+gitAUTOINC+dbf7dd2742_29c16917b3-r0/git/src/3rdparty/chromium/
+third_party/WebKit/Source/platform; gperf "--key-positions=*" -D -s 2
+ColorData.gperf "--output-file=../build/tmp/work/cortexa9hf-neon-mx6qdl-linux-
+gnueabi/qtwebengine/5.6.99+5.7.0-beta+gitAUTOINC+dbf7dd2742_29c16917b3-r0/git/
+src/core/Release/gen/blink/platform/ColorData.cpp"
+ /bin/sh: gperf: command not found
+ ninja: build stopped: subcommand failedP
+
+Change-Id: Ic28d0ac72fcbce8054638a3168b5d6a34bc129b5
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 ---
- meta-oe/recipes-graphics/tslib/tslib/ts.conf  | 25 +++++++++++++
- meta-oe/recipes-graphics/tslib/tslib/tslib.sh |  8 ++++
- meta-oe/recipes-graphics/tslib/tslib_1.1.bb   | 53 +++++++++++++++++++++++++++
- 3 files changed, 86 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/tslib/tslib/ts.conf
- create mode 100644 meta-oe/recipes-graphics/tslib/tslib/tslib.sh
- create mode 100644 meta-oe/recipes-graphics/tslib/tslib_1.1.bb
+ recipes-qt/qt5/qtwebengine_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-graphics/tslib/tslib/ts.conf b/meta-oe/recipes-graphics/tslib/tslib/ts.conf
-new file mode 100644
-index 0000000..1b0da93
---- /dev/null
-+++ b/meta-oe/recipes-graphics/tslib/tslib/ts.conf
-@@ -0,0 +1,25 @@
-+# Uncomment if you wish to use the linux input layer event interface
-+module_raw input
-+
-+# Uncomment if you're using a Sharp Zaurus SL-5500/SL-5000d
-+# module_raw collie
-+
-+# Uncomment if you're using a Sharp Zaurus SL-C700/C750/C760/C860
-+# module_raw corgi
-+
-+# Uncomment if you're using a device with a UCB1200/1300/1400 TS interface
-+# module_raw ucb1x00
-+
-+# Uncomment if you're using an HP iPaq h3600 or similar
-+# module_raw h3600
-+
-+# Uncomment if you're using a Hitachi Webpad
-+# module_raw mk712
-+
-+# Uncomment if you're using an IBM Arctic II
-+# module_raw arctic2
-+
-+module pthres pmin=1
-+module variance delta=30
-+module dejitter delta=100
-+module linear
-diff --git a/meta-oe/recipes-graphics/tslib/tslib/tslib.sh b/meta-oe/recipes-graphics/tslib/tslib/tslib.sh
-new file mode 100644
-index 0000000..7068e8d
---- /dev/null
-+++ b/meta-oe/recipes-graphics/tslib/tslib/tslib.sh
-@@ -0,0 +1,8 @@
-+#!/bin/sh
-+
-+if [ -e /dev/input/touchscreen0 ]; then
-+    TSLIB_TSDEVICE=/dev/input/touchscreen0
-+
-+    export TSLIB_TSDEVICE
-+fi
-+
-diff --git a/meta-oe/recipes-graphics/tslib/tslib_1.1.bb b/meta-oe/recipes-graphics/tslib/tslib_1.1.bb
-new file mode 100644
-index 0000000..502034a
---- /dev/null
-+++ b/meta-oe/recipes-graphics/tslib/tslib_1.1.bb
-@@ -0,0 +1,53 @@
-+SUMMARY = "An abstraction layer for touchscreen panel events"
-+DESCRIPTION = "Tslib is an abstraction layer for touchscreen panel \
-+events, as well as a filter stack for the manipulation of those events. \
-+Tslib is generally used on embedded devices to provide a common user \
-+space interface to touchscreen functionality."
-+HOMEPAGE = "http://tslib.berlios.de/"
-+
-+AUTHOR = "Russell King w/ plugins by Chris Larson et. al."
-+SECTION = "base"
-+LICENSE = "LGPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f30a9716ef3762e3467a2f62bf790f0a"
-+
-+SRC_URI = "https://github.com/kergoth/tslib/releases/download/${PV}/tslib-${PV}.tar.xz;downloadfilename=tslib-${PV}.tar.xz \
-+           file://ts.conf \
-+           file://tslib.sh \
-+"
-+
-+SRC_URI[md5sum] = "14771f8607b341bb4b297819d37e837d"
-+SRC_URI[sha256sum] = "fe35e5f710ea933b118f710e2ce4403ac076fe69926b570333867d4de082a51c"
-+
-+UPSTREAM_CHECK_URI = "https://github.com/kergoth/tslib/releases"
-+
-+inherit autotools pkgconfig
-+
-+EXTRA_OECONF = "--enable-shared --disable-h3600 --enable-input --disable-corgi --disable-collie --disable-mk712 --disable-arctic2 --disable-ucb1x00"
-+
-+do_install_prepend() {
-+    install -m 0644 ${WORKDIR}/ts.conf ${S}/etc/ts.conf
-+}
-+
-+do_install_append() {
-+    install -d ${D}${sysconfdir}/profile.d/
-+    install -m 0755 ${WORKDIR}/tslib.sh ${D}${sysconfdir}/profile.d/
-+}
-+
-+# People should consider using udev's /dev/input/touchscreen0 symlink
-+# instead of detect-stylus
-+#RDEPENDS_tslib-conf_weird-machine = "detect-stylus"
-+RPROVIDES_tslib-conf = "libts-0.0-conf"
-+
-+PACKAGES =+ "tslib-conf tslib-tests tslib-calibrate"
-+DEBIAN_NOAUTONAME_tslib-conf = "1"
-+DEBIAN_NOAUTONAME_tslib-tests = "1"
-+DEBIAN_NOAUTONAME_tslib-calibrate = "1"
-+
-+RDEPENDS_${PN} = "tslib-conf"
-+RRECOMMENDS_${PN} = "pointercal"
-+
-+FILES_${PN}-dev += "${libdir}/ts/*.la"
-+FILES_tslib-conf = "${sysconfdir}/ts.conf ${sysconfdir}/profile.d/tslib.sh ${datadir}/tslib"
-+FILES_${PN} = "${libdir}/*.so.* ${libdir}/ts/*.so*"
-+FILES_tslib-calibrate += "${bindir}/ts_calibrate"
-+FILES_tslib-tests = "${bindir}/ts_harvest ${bindir}/ts_print ${bindir}/ts_print_raw ${bindir}/ts_test"
+diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
+index 28b9fe6..979f606 100644
+--- a/recipes-qt/qt5/qtwebengine_git.bb
++++ b/recipes-qt/qt5/qtwebengine_git.bb
+@@ -16,6 +16,7 @@ DEPENDS += " \
+     qtlocation \
+     libdrm fontconfig pixman openssl pango cairo icu pciutils \
+     libcap \
++    gperf-native \
+ "
+ 
+ # when qtbase is built with xcb enabled (default with x11 in DISTRO_FEATURES),
 -- 
-2.4.0
+2.1.4
 
 
