@@ -1,51 +1,26 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 8178370057
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id C01D57002B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Sep 2016 05:53:03 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id 133so6660393wmq.2
+	Wed, 21 Sep 2016 05:58:19 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u8L5wKhX003124
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Sep 2016 22:53:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=ScoBDHVWwIB1F5JR7/ZEfTnRUysH8hd5Quvejl5KU+M=;
-	b=PoOJoiWd026JeFMlLtT8Geou/M7Q3GP507QE71GHPADLXCRqoEKctTHfArOvXvUL41
-	dhvuuQ+FQaAVw7ftKgxwUzdjcpNOTQ8QIt8DTvLDnhTmLbskCtUEbaBxBaJpeC5JCX/y
-	qm1+s0+ecae2/2XN31rnMstfLM5IX84QI6w47ro0HbeUStOp0G4maDdV6Fy22JpiSpAq
-	eDtjpukIAdMAoL5/QiU4EyzUgtxT2HmDxuja9bESW1JlZKl/3URGnpWj1Nn/T6Q+nWeD
-	cX4rwP9ert4ULTO+h+QqGu9AgSV74VoZ8fsfOlh7ROkatJrTOMf46EkPlNNvpQQd6UC3
-	zCuQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=ScoBDHVWwIB1F5JR7/ZEfTnRUysH8hd5Quvejl5KU+M=;
-	b=UzlB1l1Lh0nmO3xWjqV8Ec9y4pPtBWS/A0Dry5PKdM8X6AksGEnKqJMGJ7tzLETDnO
-	KoRfaqPs3JMs4ySgI0EmuriLY78mS3g44p1cIaAGr7AxbZIFQPJQXbEFttcKdA+in8tl
-	DvHitB6dwfDNR/YMNetLHr3a6+jIJ8BPeI52I/uRt1yFxCaHskInDk3xqxL51C4JbDlY
-	bVcSwFT4d4393sGJ2+VyTn+92Mfax/hOLAQrZEnJpOqO0VxUtQ/Pmse5Il26CqXNoqsl
-	kOrGU4OkK2KmdYknDVXdBNx25VDBp8jz3beyBP1Ad57UJCPk+iQjJnWQYy4J0aLy8MCo
-	H/oA==
-X-Gm-Message-State: AE9vXwPhfPUNO4ReVBYK+sl5vznB/juudtcLGUi4nXxeZjvJxNxbt6Sjq/PFYK2wtGFw6w==
-X-Received: by 10.194.90.104 with SMTP id bv8mr38785037wjb.189.1474437184293; 
-	Tue, 20 Sep 2016 22:53:04 -0700 (PDT)
-Received: from localhost.localdomain (p4FDF06F5.dip0.t-ipconnect.de.
-	[79.223.6.245]) by smtp.googlemail.com with ESMTPSA id
-	b128sm30776307wmb.21.2016.09.20.22.53.03
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 20 Sep 2016 22:53:03 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Sep 2016 07:52:52 +0200
-Message-Id: <1474437173-26079-2-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.5.5
-In-Reply-To: <1474437173-26079-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1474437173-26079-1-git-send-email-schnitzeltony@googlemail.com>
+	Tue, 20 Sep 2016 22:58:20 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Tue, 20 Sep 2016 22:58:20 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 21 Sep 2016 13:41:02 +0800
+Message-ID: <7153ab32f1b63b9dda24816b4547c156096f69e6.1474435724.git.jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.8.3
+In-Reply-To: <cover.1474435724.git.jackie.huang@windriver.com>
+References: <cover.1474435724.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/2] fftw: fix reconfigure error introduced in previous patch
+Subject: [meta-networking][PATCH 1/8 v2] libtalloc: fix for LIC_FILES_CHKSUM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,49 +33,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Sep 2016 05:53:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 21 Sep 2016 05:58:20 -0000
+Content-Type: text/plain
 
-| config.status: executing libtool commands
-| mv: cannot move ‘<WORKDIR>/build’ to ‘<WORKDIR>/build-fftw/build’: Directory not empty
-| WARNING: <WORKDIR>/temp/run.do_configure.21632:1 exit 1 from 'mv <WORKDIR>/build <WORKDIR>/build-fftw'
-| ERROR: Function failed: do_configure (log file is located at <WORKDIR>/temp/log.do_configure.21632)
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Use the source files instead of common-licenses
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-oe/recipes-support/fftw/fftw_3.3.4.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.4.bb b/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
-index cbcd1b9..a453214 100644
---- a/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
-+++ b/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
-@@ -16,6 +16,7 @@ EXTRA_OECONF = "--disable-fortran --enable-shared --enable-threads"
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
+index 7c85ab3..483dbda 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
++++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
+@@ -6,8 +6,8 @@ LICENSE = "LGPL-3.0+ & GPL-3.0+"
+ DEPENDS += "libaio libbsd"
  
- do_configure() {
-     # configure fftw
-+    rm -rf ${WORKDIR}/build-fftw
- 	mkdir -p ${B}
-     cd ${B}
-     # full (re)configure
-@@ -23,6 +24,7 @@ do_configure() {
-     mv ${B} ${WORKDIR}/build-fftw
+ SRC_URI = "http://samba.org/ftp/talloc/talloc-${PV}.tar.gz"
+-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
+-                    file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
++LIC_FILES_CHKSUM = "file://talloc.h;beginline=3;endline=27;md5=a301712782cad6dd6d5228bfa7825249 \
++                    file://pytalloc.h;beginline=1;endline=18;md5=2c498cc6f2263672483237b20f46b43d"
  
-     # configure fftwl
-+    rm -rf ${WORKDIR}/build-fftwl
- 	mkdir -p ${B}
-     cd ${B}
-     # configure only
-@@ -30,6 +32,7 @@ do_configure() {
-     mv ${B} ${WORKDIR}/build-fftwl 
- 
-     # configure fftwf
-+    rm -rf ${WORKDIR}/build-fftwf
- 	mkdir -p ${B}
-     cd ${B}
-     # configure only
+ SRC_URI[md5sum] = "6fb70af4174330e4cc139ea63b07c9e9"
+ SRC_URI[sha256sum] = "22d14911164d4de67ff76b5269fa5250d01f78c955bc77e28615350996877130"
 -- 
-2.5.5
+2.8.3
 
 
