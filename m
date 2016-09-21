@@ -1,27 +1,29 @@
 Return-Path: <maxin.john@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 501716FFD8
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C5386FFFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Sep 2016 15:47:21 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 21 Sep 2016 08:47:23 -0700
+	Wed, 21 Sep 2016 15:47:25 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by fmsmga102.fm.intel.com with ESMTP; 21 Sep 2016 08:47:27 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.30,374,1470726000"; d="scan'208";a="1060060441"
+X-IronPort-AV: E=Sophos;i="5.30,374,1470726000"; d="scan'208";a="882334712"
 Received: from linux.intel.com ([10.54.29.200])
-	by fmsmga002.fm.intel.com with ESMTP; 21 Sep 2016 08:47:24 -0700
+	by orsmga003.jf.intel.com with ESMTP; 21 Sep 2016 08:47:27 -0700
 Received: from mbabyjoh-desk.fi.intel.com (mbabyjoh-desk.fi.intel.com
 	[10.237.72.71])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by linux.intel.com (Postfix) with ESMTP id B7E0B6A4080
+	by linux.intel.com (Postfix) with ESMTP id E171B6A4080
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Sep 2016 08:46:57 -0700 (PDT)
+	Wed, 21 Sep 2016 08:47:01 -0700 (PDT)
 From: "Maxin B. John" <maxin.john@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Sep 2016 18:47:10 +0300
-Message-Id: <1474472834-20008-1-git-send-email-maxin.john@intel.com>
+Date: Wed, 21 Sep 2016 18:47:12 +0300
+Message-Id: <1474472834-20008-3-git-send-email-maxin.john@intel.com>
 X-Mailer: git-send-email 2.4.0
-Subject: [PATCH v3 0/4] move tslib, pointercal and xtscal recipes from oe-core
+In-Reply-To: <1474472834-20008-1-git-send-email-maxin.john@intel.com>
+References: <1474472834-20008-1-git-send-email-maxin.john@intel.com>
+Subject: [PATCH 2/4] meta-oe: add pointercal to layer.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,63 +38,25 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 21 Sep 2016 15:47:26 -0000
 
-Move tslib, pointercal and xtscal recipes from oe-core. These recipes
-are already removed from oe-core with these commits:
+add pointercal to SIGGEN_EXCLUDERECIPES_ABISAFE in layer.conf
 
-1. xtscal: remove recipe : 5bcdb9f0995474635789cf0774aba9b774277c53
-2. tslib: remove recipe : d37f6b595fd9ce53c79ff9281f2e20df7fa0503d
-3. pointercal: remove recipe: d56dffe629dfc86a8d3c7a043c8c2893004f803e
+Signed-off-by: Maxin B. John <maxin.john@intel.com>
+---
+ meta-oe/conf/layer.conf | 1 +
+ 1 file changed, 1 insertion(+)
 
-Changes in v2:
-    Addressed the review comments about indentation
-Changes in v3:
-    Move to meta-oe instead of meta-gpe
-
-Maxin B. John (4):
-  pointercal: move recipe from oe-core
-  meta-oe: add pointercal to layer.conf
-  xtscal: move recipe from oe-core
-  tslib: move recipe from oe-core
-
- meta-oe/conf/layer.conf                            |   1 +
- .../recipes-graphics/pointercal/pointercal/COPYING |   2 +
- .../pointercal/pointercal/pointercal               |   0
- .../pointercal/pointercal/qemuarm/pointercal       |   1 +
- .../pointercal/pointercal/qemuarmv6/pointercal     |   1 +
- .../pointercal/pointercal/qemuarmv7/pointercal     |   1 +
- .../pointercal/pointercal/qemumips/pointercal      |   1 +
- .../pointercal/pointercal/qemuppc/pointercal       | Bin 0 -> 36 bytes
- .../pointercal/pointercal/qemux86-64/pointercal    |   1 +
- .../pointercal/pointercal/qemux86/pointercal       |   1 +
- .../recipes-graphics/pointercal/pointercal_0.0.bb  |  22 +
- meta-oe/recipes-graphics/tslib/tslib/ts.conf       |  25 +
- meta-oe/recipes-graphics/tslib/tslib/tslib.sh      |   8 +
- meta-oe/recipes-graphics/tslib/tslib_1.1.bb        |  53 ++
- .../xtscal/xtscal/30xTs_Calibrate.sh               |  13 +
- .../xtscal/xtscal/change-cross.patch               |  18 +
- .../recipes-graphics/xtscal/xtscal/cleanup.patch   | 621 +++++++++++++++++++++
- .../xtscal/dso_linking_change_build_fix.patch      |  27 +
- meta-oe/recipes-graphics/xtscal/xtscal_0.6.3.bb    |  33 ++
- 19 files changed, 829 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/pointercal/pointercal/COPYING
- create mode 100644 meta-oe/recipes-graphics/pointercal/pointercal/pointercal
- create mode 100644 meta-oe/recipes-graphics/pointercal/pointercal/qemuarm/pointercal
- create mode 100644 meta-oe/recipes-graphics/pointercal/pointercal/qemuarmv6/pointercal
- create mode 100644 meta-oe/recipes-graphics/pointercal/pointercal/qemuarmv7/pointercal
- create mode 100644 meta-oe/recipes-graphics/pointercal/pointercal/qemumips/pointercal
- create mode 100644 meta-oe/recipes-graphics/pointercal/pointercal/qemuppc/pointercal
- create mode 100644 meta-oe/recipes-graphics/pointercal/pointercal/qemux86-64/pointercal
- create mode 100644 meta-oe/recipes-graphics/pointercal/pointercal/qemux86/pointercal
- create mode 100644 meta-oe/recipes-graphics/pointercal/pointercal_0.0.bb
- create mode 100644 meta-oe/recipes-graphics/tslib/tslib/ts.conf
- create mode 100644 meta-oe/recipes-graphics/tslib/tslib/tslib.sh
- create mode 100644 meta-oe/recipes-graphics/tslib/tslib_1.1.bb
- create mode 100644 meta-oe/recipes-graphics/xtscal/xtscal/30xTs_Calibrate.sh
- create mode 100644 meta-oe/recipes-graphics/xtscal/xtscal/change-cross.patch
- create mode 100644 meta-oe/recipes-graphics/xtscal/xtscal/cleanup.patch
- create mode 100644 meta-oe/recipes-graphics/xtscal/xtscal/dso_linking_change_build_fix.patch
- create mode 100644 meta-oe/recipes-graphics/xtscal/xtscal_0.6.3.bb
-
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index eba8ccd..bdc8210 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -37,6 +37,7 @@ SIGGEN_EXCLUDERECIPES_ABISAFE += " \
+   gpsd-machine-conf \
+   distro-feed-configs \
+   ca-certificates \
++  pointercal \
+ "
+ 
+ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
 -- 
 2.4.0
 
