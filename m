@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7803670031
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 030FB70031
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Sep 2016 05:58:25 +0000 (UTC)
+	Wed, 21 Sep 2016 05:58:26 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u8L5wQXm007074
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u8L5wSYA024090
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Sep 2016 22:58:27 -0700
+	Tue, 20 Sep 2016 22:58:28 -0700 (PDT)
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Tue, 20 Sep 2016 22:58:26 -0700
+	14.3.294.0; Tue, 20 Sep 2016 22:58:28 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 21 Sep 2016 13:41:06 +0800
-Message-ID: <ef97d27d27689fe574809de1753700197816de8f.1474435724.git.jackie.huang@windriver.com>
+Date: Wed, 21 Sep 2016 13:41:07 +0800
+Message-ID: <6f6d97cc748c4db71cf35fba31a054403e0cf4d7.1474435724.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.8.3
 In-Reply-To: <cover.1474435724.git.jackie.huang@windriver.com>
 References: <cover.1474435724.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 5/8 v2] libtalloc: fixes for deterministic builds
+Subject: [meta-networking][PATCH 6/8 v2] libtevent: fixes for deterministic builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Sep 2016 05:58:25 -0000
+X-List-Received-Date: Wed, 21 Sep 2016 05:58:27 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
@@ -54,21 +54,21 @@ From: Jackie Huang <jackie.huang@windriver.com>
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- ...talloc-Add-configure-options-for-packages.patch | 177 +++++++++++++++++++++
- .../recipes-support/libtalloc/libtalloc_2.1.8.bb   |  17 +-
- 2 files changed, 190 insertions(+), 4 deletions(-)
- create mode 100644 meta-networking/recipes-support/libtalloc/libtalloc/talloc-Add-configure-options-for-packages.patch
+ ...tevent-Add-configure-options-for-packages.patch | 180 +++++++++++++++++++++
+ .../recipes-support/libtevent/libtevent_0.9.29.bb  |  17 +-
+ 2 files changed, 194 insertions(+), 3 deletions(-)
+ create mode 100644 meta-networking/recipes-support/libtevent/libtevent/tevent-Add-configure-options-for-packages.patch
 
-diff --git a/meta-networking/recipes-support/libtalloc/libtalloc/talloc-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libtalloc/libtalloc/talloc-Add-configure-options-for-packages.patch
+diff --git a/meta-networking/recipes-support/libtevent/libtevent/tevent-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libtevent/libtevent/tevent-Add-configure-options-for-packages.patch
 new file mode 100644
-index 0000000..46b2405
+index 0000000..ddb8e4e
 --- /dev/null
-+++ b/meta-networking/recipes-support/libtalloc/libtalloc/talloc-Add-configure-options-for-packages.patch
-@@ -0,0 +1,177 @@
-+From efc1b02144f23fdf84dbc5ff15307815e0f2a425 Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-support/libtevent/libtevent/tevent-Add-configure-options-for-packages.patch
+@@ -0,0 +1,180 @@
++From c00f6d35bdc06dffb54daa815e57b44210a5de04 Mon Sep 17 00:00:00 2001
 +From: Jackie Huang <jackie.huang@windriver.com>
-+Date: Wed, 14 Sep 2016 11:11:35 +0800
-+Subject: [PATCH] talloc: Add configure options for packages
++Date: Wed, 21 Sep 2016 09:57:49 +0800
++Subject: [PATCH] tevent: Add configure options for packages
 +
 +Add configure options for the following packages:
 + - acl
@@ -86,6 +86,7 @@ index 0000000..46b2405
 + lib/replace/wscript                  | 85 ++++++++++++++++++++++++++++--------
 + wscript                              |  7 ++-
 + 3 files changed, 79 insertions(+), 19 deletions(-)
++ mode change 100755 => 100644 wscript
 +
 +diff --git a/lib/replace/system/wscript_configure b/lib/replace/system/wscript_configure
 +index 2035474..10f9ae7 100644
@@ -222,12 +223,14 @@ index 0000000..46b2405
 +     conf.CHECK_CODE('''
 +                 struct ucred cred;
 +diff --git a/wscript b/wscript
-+index 41f3be7..556c1c8 100644
++old mode 100755
++new mode 100644
++index 71b9475..50793db
 +--- a/wscript
 ++++ b/wscript
-+@@ -35,7 +35,12 @@ def set_options(opt):
++@@ -26,7 +26,12 @@ def set_options(opt):
 +         opt.add_option('--disable-python',
-+                        help=("disable the pytalloc module"),
++                        help=("disable the pytevent module"),
 +                        action="store_true", dest='disable_python', default=False)
 +-
 ++        opt.add_option('--with-valgrind',
@@ -242,24 +245,26 @@ index 0000000..46b2405
 +-- 
 +2.8.3
 +
-diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
-index 483dbda..97a9a75 100644
---- a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
-+++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
-@@ -3,9 +3,9 @@ HOMEPAGE = "http://talloc.samba.org"
+diff --git a/meta-networking/recipes-support/libtevent/libtevent_0.9.29.bb b/meta-networking/recipes-support/libtevent/libtevent_0.9.29.bb
+index 222a22a..9f4e235 100644
+--- a/meta-networking/recipes-support/libtevent/libtevent_0.9.29.bb
++++ b/meta-networking/recipes-support/libtevent/libtevent_0.9.29.bb
+@@ -3,10 +3,12 @@ HOMEPAGE = "http://tevent.samba.org"
  SECTION = "libs"
- LICENSE = "LGPL-3.0+ & GPL-3.0+"
+ LICENSE = "LGPLv3+"
  
--DEPENDS += "libaio libbsd"
--
--SRC_URI = "http://samba.org/ftp/talloc/talloc-${PV}.tar.gz"
-+SRC_URI = "http://samba.org/ftp/talloc/talloc-${PV}.tar.gz \
-+           file://talloc-Add-configure-options-for-packages.patch \
+-DEPENDS += "libaio libbsd libtalloc"
++DEPENDS += "libtalloc"
+ RDEPENDS_python-tevent = "python"
+ 
+-SRC_URI = "http://samba.org/ftp/tevent/tevent-${PV}.tar.gz"
++SRC_URI = "http://samba.org/ftp/tevent/tevent-${PV}.tar.gz \
++           file://tevent-Add-configure-options-for-packages.patch \
 +"
- LIC_FILES_CHKSUM = "file://talloc.h;beginline=3;endline=27;md5=a301712782cad6dd6d5228bfa7825249 \
-                     file://pytalloc.h;beginline=1;endline=18;md5=2c498cc6f2263672483237b20f46b43d"
+ LIC_FILES_CHKSUM = "file://tevent.h;endline=26;md5=4e458d658cb25e21efc16f720e78b85a"
  
-@@ -15,7 +15,16 @@ SRC_URI[sha256sum] = "22d14911164d4de67ff76b5269fa5250d01f78c955bc77e28615350996
+ SRC_URI[md5sum] = "4372c1430a1ecb7ea0adddfdf21c0d55"
+@@ -14,7 +16,16 @@ SRC_URI[sha256sum] = "a4f519b0bbb718fe2175bee9011ee4d199675f28c2ef80531be38e7bba
  
  inherit waf-samba
  
