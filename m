@@ -1,48 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f66.google.com (mail-pa0-f66.google.com
-	[209.85.220.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F10B6078D
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id AC91C6080F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Sep 2016 20:18:07 +0000 (UTC)
-Received: by mail-pa0-f66.google.com with SMTP id my20so1307611pab.3
+	Wed, 21 Sep 2016 00:51:11 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u8L0pBN0029200
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Sep 2016 13:18:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=BoVTkpyOQqf2Xh/8AQYwrwYxDuGi6qAa83u4j97/3yI=;
-	b=F/kj/ofPdQ7LwbxMahYnpwaxYcXxGLv2U9qKpv8g0w+6IYfxrMbXo90oAsubRtyzsb
-	Tdz+JOoTL6t7fYfTvxKKm5LfNYqo7wkGhBscfbvS0LuS4cQn91k2ceaODLITE4+HmWGZ
-	850AKoYMH0LmNtopCbNhJIDtg91RYAh2zYIbMPiJEJ2VnNv1fZhZhsf0gSfojazz+X7Y
-	87Sh1+FbVTvvsydz4IVW+3n9sZa0eAlsDx224a0W1jjYmDSbNwtqBkBM3RJVE2j/v8H+
-	Net9X0n1LmdwKpLZv5rNwaJEk1t1ls3H3wc7GUrPlTq1B/esEsZhBJFGxECUbkUX8Q59
-	51ew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=BoVTkpyOQqf2Xh/8AQYwrwYxDuGi6qAa83u4j97/3yI=;
-	b=jrZlNIvTnV/aiLUbT3cCdK4yG81788NUkSa1sNo/Re/3ealY8P72SiUBJntogr/9AZ
-	SSdtG2CoJq4P94dRCidVXwMXyWxqWtKFfF0TDqy5P2dO9h0jUkE+s0J+jY+NGj3fCLVw
-	4RKy5/KmICy0yLjOxC+PaoFjbU3aJP4RnOCnqF0ys4yaCQ90AmAUpUS6hBtb2jYhdH63
-	PcopkFqmvC3xsYM9uDdTWxLm3hciUaZVWwXwtakwMEbZkJH4fe6AplY9bugKYAwdhQ5h
-	QFk0Z+ta+sOEIPKDTeYfWVDRiVlomEIqE3TqaGweAgasIqglh/mgQMY3+cDTtnj0v3Ni
-	bAEw==
-X-Gm-Message-State: AE9vXwP2H6Za2Myg/498noQhMk+w3nowK/d3XlIYQub5Rul01bMm1PorrMYasWoSWjV6KA==
-X-Received: by 10.67.11.107 with SMTP id eh11mr29664557pad.89.1474402689111;
-	Tue, 20 Sep 2016 13:18:09 -0700 (PDT)
-Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
-	[76.102.32.192])
-	by smtp.gmail.com with ESMTPSA id z5sm110645pff.3.2016.09.20.13.18.08
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 20 Sep 2016 13:18:08 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Sep 2016 13:17:59 -0700
-Message-Id: <20160920201759.28409-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.9.3
-In-Reply-To: <20160920201759.28409-1-raj.khem@gmail.com>
-References: <20160920201759.28409-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/3] lirc: Fix build with clang
+	Tue, 20 Sep 2016 17:51:12 -0700 (PDT)
+Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.129]) by
+	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0294.000;
+	Tue, 20 Sep 2016 17:51:10 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-networking][PATCH 1/4] libtalloc: fixes for
+	deterministic builds
+Thread-Index: AQHSEwrX03pbgyKyPkGpIFn0sZSpIaCB+fJAgACDGACAAJ1L8A==
+Date: Wed, 21 Sep 2016 00:51:09 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AA013A2D3698@ALA-MBA.corp.ad.wrs.com>
+References: <cover.1474348826.git.jackie.huang@windriver.com>
+	<3eedb5bcccfc787f9673143098f394efa6ae6124.1474348826.git.jackie.huang@windriver.com>
+	<20160920064630.GA3461@jama>
+	<1B858668EC6A94408DCA5225FDFA85AA013A2D27EC@ALA-MBA.corp.ad.wrs.com>
+	<CA+chaQd+N5buESNmhYZaSrBR_0PshAajQgXm6sqVFzZnDeenGQ@mail.gmail.com>
+In-Reply-To: <CA+chaQd+N5buESNmhYZaSrBR_0PshAajQgXm6sqVFzZnDeenGQ@mail.gmail.com>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.131]
+MIME-Version: 1.0
+Subject: Re: [meta-networking][PATCH 1/4] libtalloc: fixes for deterministic builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,83 +44,327 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Sep 2016 20:18:09 -0000
+X-List-Received-Date: Wed, 21 Sep 2016 00:51:11 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...crcd-Mark-local-inline-funtions-as-static.patch | 49 ++++++++++++++++++++++
- meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb    |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/lirc/lirc/0001-lircrcd-Mark-local-inline-funtions-as-static.patch
 
-diff --git a/meta-oe/recipes-connectivity/lirc/lirc/0001-lircrcd-Mark-local-inline-funtions-as-static.patch b/meta-oe/recipes-connectivity/lirc/lirc/0001-lircrcd-Mark-local-inline-funtions-as-static.patch
-new file mode 100644
-index 0000000..e19d276
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/lirc/lirc/0001-lircrcd-Mark-local-inline-funtions-as-static.patch
-@@ -0,0 +1,49 @@
-+From c2be4543e4777c9e3d74b30326ba37b01917b0a9 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 25 Aug 2016 03:02:37 +0000
-+Subject: [PATCH] lircrcd: Mark local inline funtions as static
-+
-+These functions are not used anywhere outside
-+this file, so they should be converted into static
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+Upstream-Status: Pending
-+
-+ daemons/lircrcd.c | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/daemons/lircrcd.c b/daemons/lircrcd.c
-+index 55777cd..5ddc94d 100644
-+--- a/daemons/lircrcd.c
-++++ b/daemons/lircrcd.c
-+@@ -153,7 +153,7 @@ char *s;
-+ /* A safer write(), since sockets might not write all but only some of the
-+    bytes requested */
-+ 
-+-inline int write_socket(int fd, char *buf, int len)
-++static inline int write_socket(int fd, char *buf, int len)
-+ {
-+ 	int done, todo = len;
-+ 
-+@@ -167,7 +167,7 @@ inline int write_socket(int fd, char *buf, int len)
-+ 	return (len);
-+ }
-+ 
-+-inline int write_socket_len(int fd, char *buf)
-++static inline int write_socket_len(int fd, char *buf)
-+ {
-+ 	int len;
-+ 
-+@@ -177,7 +177,7 @@ inline int write_socket_len(int fd, char *buf)
-+ 	return (1);
-+ }
-+ 
-+-inline int read_timeout(int fd, char *buf, int len, int timeout)
-++static inline int read_timeout(int fd, char *buf, int len, int timeout)
-+ {
-+ 	fd_set fds;
-+ 	struct timeval tv;
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb b/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
-index 7162fcd..1726192 100644
---- a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
-+++ b/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
-@@ -1,6 +1,7 @@
- require lirc.inc
- 
- SRC_URI += " \
-+    file://0001-lircrcd-Mark-local-inline-funtions-as-static.patch \
-     file://lircd.service \
-     file://lircd.init \
-     file://lircexec.init \
--- 
-2.9.3
 
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Martin Jansa
+> Sent: Tuesday, September 20, 2016 4:14 PM
+> To: openembedded-devel
+> Subject: Re: [oe] [meta-networking][PATCH 1/4] libtalloc: fixes for deter=
+ministic builds
+>=20
+> something like:
+> PACKAGECONFIG[valgrind] =3D "--with-valgrind,--without-valgrind,valgrind,=
+"
+
+That's what I wanted as well, but there is not an implicit option "--withou=
+t-pkg" when
+"--with-pkg" is added, we have to explicitly add both of them, which I thou=
+ght may not
+be necessary.
+
+It's definitely more clear, so I will add them as suggested in v2.
+
+Thanks,
+Jackie
+
+>=20
+>=20
+> On Tue, Sep 20, 2016 at 9:32 AM, Huang, Jie (Jackie) <
+> Jackie.Huang@windriver.com> wrote:
+>=20
+> >
+> >
+> > > -----Original Message-----
+> > > From: openembedded-devel-bounces@lists.openembedded.org [mailto:
+> > openembedded-devel-
+> > > bounces@lists.openembedded.org] On Behalf Of Martin Jansa
+> > > Sent: Tuesday, September 20, 2016 2:47 PM
+> > > To: openembedded-devel@lists.openembedded.org
+> > > Subject: Re: [oe] [meta-networking][PATCH 1/4] libtalloc: fixes for
+> > deterministic builds
+> > >
+> > > On Tue, Sep 20, 2016 at 01:42:23PM +0800, jackie.huang@windriver.com
+> > wrote:
+> > > > From: Jackie Huang <jackie.huang@windriver.com>
+> > > >
+> > > > * Add configure option and PACKAGECONFIG for
+> > > >   the following packages:
+> > > >   - acl
+> > > >   - attr
+> > > >   - libaio
+> > > >   - libcap
+> > > >   - valgrind
+> > > >
+> > > > * They are all optional, so disable by default
+> > > >   or control them based on DISTRO_FEATURES.
+> > > >
+> > > > * Remove the direct dependency on libaio
+> > > >
+> > > > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> > > > ---
+> > > >  ...talloc-Add-configure-options-for-packages.patch | 124
+> > +++++++++++++++++++++
+> > > >  .../recipes-support/libtalloc/libtalloc_2.1.8.bb   |  16 ++-
+> > > >  2 files changed, 137 insertions(+), 3 deletions(-)
+> > > >  create mode 100644 meta-networking/recipes-
+> > support/libtalloc/libtalloc/talloc-Add-configure-
+> > > options-for-packages.patch
+> > > >
+> > > > diff --git a/meta-networking/recipes-support/libtalloc/libtalloc/
+> > talloc-Add-configure-options-for-
+> > > packages.patch b/meta-networking/recipes-support/libtalloc/libtalloc/
+> > talloc-Add-configure-
+> > > options-for-packages.patch
+> > > > new file mode 100644
+> > > > index 0000000..d383df4
+> > > > --- /dev/null
+> > > > +++ b/meta-networking/recipes-support/libtalloc/libtalloc/
+> > talloc-Add-configure-options-for-
+> > > packages.patch
+> > > > @@ -0,0 +1,124 @@
+> > > > +From 77fd757624c9b20073a7abefaca8382caa4fd376 Mon Sep 17 00:00:00
+> > 2001
+> > > > +From: Jackie Huang <jackie.huang@windriver.com>
+> > > > +Date: Wed, 14 Sep 2016 11:11:35 +0800
+> > > > +Subject: [PATCH] talloc: Add configure options for packages
+> > > > +
+> > > > +Add configure options for the following packages:
+> > > > + - acl
+> > > > + - attr
+> > > > + - libaio
+> > > > + - libcap
+> > > > + - valgrind
+> > > > +
+> > > > +Upstream-Status: Inappropriate [oe deterministic build specific]
+> > > > +
+> > > > +Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> > > > +---
+> > > > + lib/replace/system/wscript_configure |  6 ++++-
+> > > > + lib/replace/wscript                  | 43
+> > +++++++++++++++++++++++++++++++-----
+> > > > + wscript                              |  4 ++++
+> > > > + 3 files changed, 46 insertions(+), 7 deletions(-)
+> > > > +
+> > > > +diff --git a/lib/replace/system/wscript_configure
+> > b/lib/replace/system/wscript_configure
+> > > > +index 2035474..10f9ae7 100644
+> > > > +--- a/lib/replace/system/wscript_configure
+> > > > ++++ b/lib/replace/system/wscript_configure
+> > > > +@@ -1,6 +1,10 @@
+> > > > + #!/usr/bin/env python
+> > > > +
+> > > > +-conf.CHECK_HEADERS('sys/capability.h')
+> > > > ++import Options
+> > > > ++
+> > > > ++if Options.options.enable_libcap:
+> > > > ++    conf.CHECK_HEADERS('sys/capability.h')
+> > > > ++
+> > > > + conf.CHECK_FUNCS('getpwnam_r getpwuid_r getpwent_r')
+> > > > +
+> > > > + # solaris varients of getXXent_r
+> > > > +diff --git a/lib/replace/wscript b/lib/replace/wscript
+> > > > +index fc43e1a..a899dd2 100644
+> > > > +--- a/lib/replace/wscript
+> > > > ++++ b/lib/replace/wscript
+> > > > +@@ -23,6 +23,22 @@ def set_options(opt):
+> > > > +     opt.PRIVATE_EXTENSION_DEFAULT('')
+> > > > +     opt.RECURSE('buildtools/wafsamba')
+> > > > +
+> > > > ++    opt.add_option('--with-acl',
+> > > > ++                   help=3D("Enable use of acl"),
+> > > > ++                   action=3D"store_true", dest=3D'enable_acl',
+> > default=3DFalse)
+> > > > ++
+> > > > ++    opt.add_option('--with-attr',
+> > > > ++                   help=3D("Enable use of attr"),
+> > > > ++                   action=3D"store_true", dest=3D'enable_attr',
+> > default=3DFalse)
+> > > > ++
+> > > > ++    opt.add_option('--with-libaio',
+> > > > ++                   help=3D("Enable use of libaio"),
+> > > > ++                   action=3D"store_true", dest=3D'enable_libaio',
+> > default=3DFalse)
+> > > > ++
+> > > > ++    opt.add_option('--with-libcap',
+> > > > ++                   help=3D("Enable use of libcap"),
+> > > > ++                   action=3D"store_true", dest=3D'enable_libcap',
+> > default=3DFalse)
+> > > > ++
+> > > > + @Utils.run_once
+> > > > + def configure(conf):
+> > > > +     conf.RECURSE('buildtools/wafsamba')
+> > > > +@@ -32,12 +48,25 @@ def configure(conf):
+> > > > +     conf.DEFINE('HAVE_LIBREPLACE', 1)
+> > > > +     conf.DEFINE('LIBREPLACE_NETWORK_CHECKS', 1)
+> > > > +
+> > > > +-    conf.CHECK_HEADERS('linux/types.h crypt.h locale.h acl/libacl=
+.h
+> > compat.h')
+> > > > +-    conf.CHECK_HEADERS('acl/libacl.h attr/xattr.h compat.h ctype.=
+h
+> > dustat.h')
+> > > > ++    conf.CHECK_HEADERS('linux/types.h crypt.h locale.h compat.h')
+> > > > ++    conf.CHECK_HEADERS('compat.h ctype.h dustat.h')
+> > > > +     conf.CHECK_HEADERS('fcntl.h fnmatch.h glob.h history.h krb5.h
+> > langinfo.h')
+> > > > +-    conf.CHECK_HEADERS('libaio.h locale.h ndir.h pwd.h')
+> > > > +-    conf.CHECK_HEADERS('shadow.h sys/acl.h')
+> > > > +-    conf.CHECK_HEADERS('sys/attributes.h attr/attributes.h
+> > sys/capability.h sys/dir.h sys/epoll.h')
+> > > > ++    conf.CHECK_HEADERS('locale.h ndir.h pwd.h')
+> > > > ++    conf.CHECK_HEADERS('shadow.h')
+> > > > ++    conf.CHECK_HEADERS('sys/attributes.h sys/dir.h sys/epoll.h')
+> > > > ++
+> > > > ++    if Options.options.enable_acl:
+> > > > ++        conf.CHECK_HEADERS('acl/libacl.h sys/acl.h')
+> > > > ++
+> > > > ++    if Options.options.enable_attr:
+> > > > ++        conf.CHECK_HEADERS('attr/attributes.h attr/xattr.h')
+> > > > ++
+> > > > ++    if Options.options.enable_libaio:
+> > > > ++        conf.CHECK_HEADERS('libaio.h')
+> > > > ++
+> > > > ++    if Options.options.enable_libcap:
+> > > > ++        conf.CHECK_HEADERS('sys/capability.h')
+> > > > ++
+> > > > +     conf.CHECK_HEADERS('port.h')
+> > > > +     conf.CHECK_HEADERS('sys/fcntl.h sys/filio.h sys/filsys.h
+> > sys/fs/s5param.h sys/fs/vx/quota.h')
+> > > > +     conf.CHECK_HEADERS('sys/id.h sys/ioctl.h sys/ipc.h sys/mman.h
+> > sys/mode.h sys/ndir.h
+> > > sys/priv.h')
+> > > > +@@ -73,7 +102,9 @@ def configure(conf):
+> > > > +
+> > > > +     conf.CHECK_CODE('', headers=3D'rpc/rpc.h rpcsvc/yp_prot.h',
+> > define=3D'HAVE_RPCSVC_YP_PROT_H')
+> > > > +
+> > > > +-    conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h
+> > valgrind/memcheck.h')
+> > > > ++    if Options.options.enable_valgrind:
+> > > > ++        conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h
+> > valgrind/memcheck.h')
+> > > > ++
+> > > > +     conf.CHECK_HEADERS('nss_common.h nsswitch.h ns_api.h')
+> > > > +     conf.CHECK_HEADERS('sys/extattr.h sys/ea.h sys/proplist.h
+> > sys/cdefs.h')
+> > > > +     conf.CHECK_HEADERS('utmp.h utmpx.h lastlog.h')
+> > > > +diff --git a/wscript b/wscript
+> > > > +index 41f3be7..f900c24 100644
+> > > > +--- a/wscript
+> > > > ++++ b/wscript
+> > > > +@@ -35,6 +35,10 @@ def set_options(opt):
+> > > > +         opt.add_option('--disable-python',
+> > > > +                        help=3D("disable the pytalloc module"),
+> > > > +                        action=3D"store_true", dest=3D'disable_pyt=
+hon',
+> > default=3DFalse)
+> > > > ++        opt.add_option('--with-valgrind',
+> > > > ++                       help=3D("enable use of valgrind"),
+> > > > ++                       action=3D"store_true", dest=3D'enable_valg=
+rind',
+> > default=3DFalse)
+> > > > ++
+> > > > +
+> > > > +
+> > > > + def configure(conf):
+> > > > +--
+> > > > +2.8.3
+> > > > +
+> > > > diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.
+> > 1.8.bb b/meta-
+> > > networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
+> > > > index 7c85ab3..8b2ae33 100644
+> > > > --- a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
+> > > > +++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
+> > > > @@ -3,9 +3,11 @@ HOMEPAGE =3D "http://talloc.samba.org"
+> > > >  SECTION =3D "libs"
+> > > >  LICENSE =3D "LGPL-3.0+ & GPL-3.0+"
+> > > >
+> > > > -DEPENDS +=3D "libaio libbsd"
+> > > > +DEPENDS +=3D "libbsd"
+> > > >
+> > > > -SRC_URI =3D "http://samba.org/ftp/talloc/talloc-${PV}.tar.gz"
+> > > > +SRC_URI =3D "http://samba.org/ftp/talloc/talloc-${PV}.tar.gz \
+> > > > +           file://talloc-Add-configure-options-for-packages.patch =
+\
+> > > > +"
+> > > >  LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/
+> > files/common-licenses/LGPL-
+> > > 3.0;md5=3Dbfccfe952269fff2b407dd11f2f3083b \
+> > > >                      file://${COREBASE}/meta/files/
+> > common-licenses/GPL-
+> > > 3.0;md5=3Dc79ff39f19dfec6d293b95dea7b07891"
+> > >
+> > > I know you haven't changed this, but
+> > >
+> > > This is wrong, we should use some files in talloc source, not
+> > > common-license.
+> >
+> > Yes, I will fix this as follow-up.
+> >
+> > >
+> > > >
+> > > > @@ -15,7 +17,15 @@ SRC_URI[sha256sum] =3D
+> > > "22d14911164d4de67ff76b5269fa5250d01f78c955bc77e28615350996
+> > > >
+> > > >  inherit waf-samba
+> > > >
+> > > > -PACKAGECONFIG[attr] =3D ",,attr"
+> > > > +PACKAGECONFIG ??=3D "\
+> > > > +    ${@bb.utils.contains('DISTRO_FEATURES', 'acl', 'acl', '', d)} =
+\
+> > > > +    ${@bb.utils.contains('DISTRO_FEATURES', 'xattr', 'attr', '', d=
+)}
+> > \
+> > > > +"
+> > > > +PACKAGECONFIG[acl] =3D "--with-acl,,acl"
+> > > > +PACKAGECONFIG[attr] =3D "--with-attr,,attr"
+> > > > +PACKAGECONFIG[libaio] =3D "--with-libaio,,libaio,"
+> > > > +PACKAGECONFIG[libcap] =3D "--with-libcap,,libcap,"
+> > > > +PACKAGECONFIG[valgrind] =3D "--with-valgrind,,valgrind,"
+> > >
+> > > What about disable options for clarity?
+> >
+> > Do you mean something like:
+> > PACKAGECONFIG[valgrind] =3D ",--disable-valgrind,valgrind,"
+> >
+> > Thanks,
+> > Jackie
+> >
+> > >
+> > > >
+> > > >  SRC_URI +=3D "${@bb.utils.contains('PACKAGECONFIG', 'attr', '',
+> > 'file://avoid-attr-unless-
+> > > wanted.patch', d)}"
+> > > >
+> > > > --
+> > > > 2.8.3
+> > > >
+> > > > --
+> > > > _______________________________________________
+> > > > Openembedded-devel mailing list
+> > > > Openembedded-devel@lists.openembedded.org
+> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > >
+> > > --
+> > > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
