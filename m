@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 827186FFD7
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7803670031
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Sep 2016 05:58:23 +0000 (UTC)
+	Wed, 21 Sep 2016 05:58:25 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u8L5wPPY003127
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u8L5wQXm007074
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Sep 2016 22:58:25 -0700 (PDT)
+	Tue, 20 Sep 2016 22:58:27 -0700
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Tue, 20 Sep 2016 22:58:24 -0700
+	14.3.294.0; Tue, 20 Sep 2016 22:58:26 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 21 Sep 2016 13:41:05 +0800
-Message-ID: <dab74fc374de3ef7dd9a6f3fa148e2f0ac203500.1474435724.git.jackie.huang@windriver.com>
+Date: Wed, 21 Sep 2016 13:41:06 +0800
+Message-ID: <ef97d27d27689fe574809de1753700197816de8f.1474435724.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.8.3
 In-Reply-To: <cover.1474435724.git.jackie.huang@windriver.com>
 References: <cover.1474435724.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 4/8 v2] libldb: fix for LIC_FILES_CHKSUM
+Subject: [meta-networking][PATCH 5/8 v2] libtalloc: fixes for deterministic builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,35 +33,250 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Sep 2016 05:58:24 -0000
+X-List-Received-Date: Wed, 21 Sep 2016 05:58:25 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-Use the source files instead of common-licenses
+* Add configure option and PACKAGECONFIG for
+  the following packages:
+  - acl
+  - attr
+  - libaio
+  - libbsd
+  - libcap
+  - valgrind
+
+* They are all optional, so disable by default
+  or control them based on DISTRO_FEATURES.
+
+* Remove the direct dependency on libaio and libbsd
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-networking/recipes-support/libldb/libldb_1.1.27.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ ...talloc-Add-configure-options-for-packages.patch | 177 +++++++++++++++++++++
+ .../recipes-support/libtalloc/libtalloc_2.1.8.bb   |  17 +-
+ 2 files changed, 190 insertions(+), 4 deletions(-)
+ create mode 100644 meta-networking/recipes-support/libtalloc/libtalloc/talloc-Add-configure-options-for-packages.patch
 
-diff --git a/meta-networking/recipes-support/libldb/libldb_1.1.27.bb b/meta-networking/recipes-support/libldb/libldb_1.1.27.bb
-index b92bf22..7b6e6e3 100644
---- a/meta-networking/recipes-support/libldb/libldb_1.1.27.bb
-+++ b/meta-networking/recipes-support/libldb/libldb_1.1.27.bb
-@@ -13,9 +13,9 @@ SRC_URI = "http://samba.org/ftp/ldb/ldb-${PV}.tar.gz \
- PACKAGECONFIG[ldap] = ",,openldap"
- SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'ldap', '', 'file://avoid-openldap-unless-wanted.patch', d)}"
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc/talloc-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libtalloc/libtalloc/talloc-Add-configure-options-for-packages.patch
+new file mode 100644
+index 0000000..46b2405
+--- /dev/null
++++ b/meta-networking/recipes-support/libtalloc/libtalloc/talloc-Add-configure-options-for-packages.patch
+@@ -0,0 +1,177 @@
++From efc1b02144f23fdf84dbc5ff15307815e0f2a425 Mon Sep 17 00:00:00 2001
++From: Jackie Huang <jackie.huang@windriver.com>
++Date: Wed, 14 Sep 2016 11:11:35 +0800
++Subject: [PATCH] talloc: Add configure options for packages
++
++Add configure options for the following packages:
++ - acl
++ - attr
++ - libaio
++ - libbsd
++ - libcap
++ - valgrind
++
++Upstream-Status: Inappropriate [oe deterministic build specific]
++
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++---
++ lib/replace/system/wscript_configure |  6 ++-
++ lib/replace/wscript                  | 85 ++++++++++++++++++++++++++++--------
++ wscript                              |  7 ++-
++ 3 files changed, 79 insertions(+), 19 deletions(-)
++
++diff --git a/lib/replace/system/wscript_configure b/lib/replace/system/wscript_configure
++index 2035474..10f9ae7 100644
++--- a/lib/replace/system/wscript_configure
+++++ b/lib/replace/system/wscript_configure
++@@ -1,6 +1,10 @@
++ #!/usr/bin/env python
++ 
++-conf.CHECK_HEADERS('sys/capability.h')
+++import Options
+++
+++if Options.options.enable_libcap:
+++    conf.CHECK_HEADERS('sys/capability.h')
+++
++ conf.CHECK_FUNCS('getpwnam_r getpwuid_r getpwent_r')
++ 
++ # solaris varients of getXXent_r
++diff --git a/lib/replace/wscript b/lib/replace/wscript
++index fc43e1a..12d2a70 100644
++--- a/lib/replace/wscript
+++++ b/lib/replace/wscript
++@@ -23,6 +23,41 @@ def set_options(opt):
++     opt.PRIVATE_EXTENSION_DEFAULT('')
++     opt.RECURSE('buildtools/wafsamba')
++ 
+++    opt.add_option('--with-acl',
+++                   help=("Enable use of acl"),
+++                   action="store_true", dest='enable_acl')
+++    opt.add_option('--without-acl',
+++                   help=("Disable use of acl"),
+++                   action="store_false", dest='enable_acl', default=False)
+++
+++    opt.add_option('--with-attr',
+++                   help=("Enable use of attr"),
+++                   action="store_true", dest='enable_attr')
+++    opt.add_option('--without-attr',
+++                   help=("Disable use of attr"),
+++                   action="store_false", dest='enable_attr', default=False)
+++
+++    opt.add_option('--with-libaio',
+++                   help=("Enable use of libaio"),
+++                   action="store_true", dest='enable_libaio')
+++    opt.add_option('--without-libaio',
+++                   help=("Disable use of libaio"),
+++                   action="store_false", dest='enable_libaio', default=False)
+++
+++    opt.add_option('--with-libbsd',
+++                   help=("Enable use of libbsd"),
+++                   action="store_true", dest='enable_libbsd')
+++    opt.add_option('--without-libbsd',
+++                   help=("Disable use of libbsd"),
+++                   action="store_false", dest='enable_libbsd', default=False)
+++
+++    opt.add_option('--with-libcap',
+++                   help=("Enable use of libcap"),
+++                   action="store_true", dest='enable_libcap')
+++    opt.add_option('--without-libcap',
+++                   help=("Disable use of libcap"),
+++                   action="store_false", dest='enable_libcap', default=False)
+++
++ @Utils.run_once
++ def configure(conf):
++     conf.RECURSE('buildtools/wafsamba')
++@@ -32,12 +67,25 @@ def configure(conf):
++     conf.DEFINE('HAVE_LIBREPLACE', 1)
++     conf.DEFINE('LIBREPLACE_NETWORK_CHECKS', 1)
++ 
++-    conf.CHECK_HEADERS('linux/types.h crypt.h locale.h acl/libacl.h compat.h')
++-    conf.CHECK_HEADERS('acl/libacl.h attr/xattr.h compat.h ctype.h dustat.h')
+++    conf.CHECK_HEADERS('linux/types.h crypt.h locale.h compat.h')
+++    conf.CHECK_HEADERS('compat.h ctype.h dustat.h')
++     conf.CHECK_HEADERS('fcntl.h fnmatch.h glob.h history.h krb5.h langinfo.h')
++-    conf.CHECK_HEADERS('libaio.h locale.h ndir.h pwd.h')
++-    conf.CHECK_HEADERS('shadow.h sys/acl.h')
++-    conf.CHECK_HEADERS('sys/attributes.h attr/attributes.h sys/capability.h sys/dir.h sys/epoll.h')
+++    conf.CHECK_HEADERS('locale.h ndir.h pwd.h')
+++    conf.CHECK_HEADERS('shadow.h')
+++    conf.CHECK_HEADERS('sys/attributes.h sys/dir.h sys/epoll.h')
+++
+++    if Options.options.enable_acl:
+++        conf.CHECK_HEADERS('acl/libacl.h sys/acl.h')
+++
+++    if Options.options.enable_attr:
+++        conf.CHECK_HEADERS('attr/attributes.h attr/xattr.h')
+++
+++    if Options.options.enable_libaio:
+++        conf.CHECK_HEADERS('libaio.h')
+++
+++    if Options.options.enable_libcap:
+++        conf.CHECK_HEADERS('sys/capability.h')
+++
++     conf.CHECK_HEADERS('port.h')
++     conf.CHECK_HEADERS('sys/fcntl.h sys/filio.h sys/filsys.h sys/fs/s5param.h sys/fs/vx/quota.h')
++     conf.CHECK_HEADERS('sys/id.h sys/ioctl.h sys/ipc.h sys/mman.h sys/mode.h sys/ndir.h sys/priv.h')
++@@ -73,7 +121,9 @@ def configure(conf):
++ 
++     conf.CHECK_CODE('', headers='rpc/rpc.h rpcsvc/yp_prot.h', define='HAVE_RPCSVC_YP_PROT_H')
++ 
++-    conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h valgrind/memcheck.h')
+++    if Options.options.enable_valgrind:
+++        conf.CHECK_HEADERS('valgrind.h valgrind/valgrind.h valgrind/memcheck.h')
+++
++     conf.CHECK_HEADERS('nss_common.h nsswitch.h ns_api.h')
++     conf.CHECK_HEADERS('sys/extattr.h sys/ea.h sys/proplist.h sys/cdefs.h')
++     conf.CHECK_HEADERS('utmp.h utmpx.h lastlog.h')
++@@ -248,17 +298,18 @@ def configure(conf):
++ 
++     conf.CHECK_FUNCS('prctl dirname basename')
++ 
++-    # libbsd on some platforms provides strlcpy and strlcat
++-    if not conf.CHECK_FUNCS('strlcpy strlcat'):
++-        conf.CHECK_FUNCS_IN('strlcpy strlcat', 'bsd', headers='bsd/string.h',
++-                checklibc=True)
++-    if not conf.CHECK_FUNCS('getpeereid'):
++-        conf.CHECK_FUNCS_IN('getpeereid', 'bsd', headers='sys/types.h bsd/unistd.h')
++-    if not conf.CHECK_FUNCS_IN('setproctitle', 'setproctitle', headers='setproctitle.h'):
++-        conf.CHECK_FUNCS_IN('setproctitle', 'bsd', headers='sys/types.h bsd/unistd.h')
++-
++-    if not conf.CHECK_FUNCS('closefrom'):
++-        conf.CHECK_FUNCS_IN('closefrom', 'bsd', headers='bsd/unistd.h')
+++    if Options.options.enable_libbsd:
+++        # libbsd on some platforms provides strlcpy and strlcat
+++        if not conf.CHECK_FUNCS('strlcpy strlcat'):
+++            conf.CHECK_FUNCS_IN('strlcpy strlcat', 'bsd', headers='bsd/string.h',
+++                    checklibc=True)
+++        if not conf.CHECK_FUNCS('getpeereid'):
+++            conf.CHECK_FUNCS_IN('getpeereid', 'bsd', headers='sys/types.h bsd/unistd.h')
+++        if not conf.CHECK_FUNCS_IN('setproctitle', 'setproctitle', headers='setproctitle.h'):
+++            conf.CHECK_FUNCS_IN('setproctitle', 'bsd', headers='sys/types.h bsd/unistd.h')
+++
+++        if not conf.CHECK_FUNCS('closefrom'):
+++            conf.CHECK_FUNCS_IN('closefrom', 'bsd', headers='bsd/unistd.h')
++ 
++     conf.CHECK_CODE('''
++                 struct ucred cred;
++diff --git a/wscript b/wscript
++index 41f3be7..556c1c8 100644
++--- a/wscript
+++++ b/wscript
++@@ -35,7 +35,12 @@ def set_options(opt):
++         opt.add_option('--disable-python',
++                        help=("disable the pytalloc module"),
++                        action="store_true", dest='disable_python', default=False)
++-
+++        opt.add_option('--with-valgrind',
+++                       help=("enable use of valgrind"),
+++                       action="store_true", dest='enable_valgrind')
+++        opt.add_option('--without-valgrind',
+++                       help=("disable use of valgrind"),
+++                       action="store_false", dest='enable_valgrind', default=False)
++ 
++ def configure(conf):
++     conf.RECURSE('lib/replace')
++-- 
++2.8.3
++
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
+index 483dbda..97a9a75 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
++++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
+@@ -3,9 +3,9 @@ HOMEPAGE = "http://talloc.samba.org"
+ SECTION = "libs"
+ LICENSE = "LGPL-3.0+ & GPL-3.0+"
  
--LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
--                    file://${COREBASE}/meta/files/common-licenses/LGPL-2.1;md5=1a6d268fd218675ffea8be556788b780 \
--                    file://${COREBASE}/meta/files/common-licenses/GPL-3.0;md5=c79ff39f19dfec6d293b95dea7b07891"
-+LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9adade \
-+                    file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
-+                    file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
+-DEPENDS += "libaio libbsd"
+-
+-SRC_URI = "http://samba.org/ftp/talloc/talloc-${PV}.tar.gz"
++SRC_URI = "http://samba.org/ftp/talloc/talloc-${PV}.tar.gz \
++           file://talloc-Add-configure-options-for-packages.patch \
++"
+ LIC_FILES_CHKSUM = "file://talloc.h;beginline=3;endline=27;md5=a301712782cad6dd6d5228bfa7825249 \
+                     file://pytalloc.h;beginline=1;endline=18;md5=2c498cc6f2263672483237b20f46b43d"
  
- SRC_URI[md5sum] = "50a194dea128d062cf4b44c59130219b"
- SRC_URI[sha256sum] = "cdb8269cba09006ddf3766eb7721192b52ae3fdc8a6b95f4318b6b740b9d35ac"
+@@ -15,7 +15,16 @@ SRC_URI[sha256sum] = "22d14911164d4de67ff76b5269fa5250d01f78c955bc77e28615350996
+ 
+ inherit waf-samba
+ 
+-PACKAGECONFIG[attr] = ",,attr"
++PACKAGECONFIG ??= "\
++    ${@bb.utils.contains('DISTRO_FEATURES', 'acl', 'acl', '', d)} \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'xattr', 'attr', '', d)} \
++"
++PACKAGECONFIG[acl] = "--with-acl,--without-acl,acl"
++PACKAGECONFIG[attr] = "--with-attr,--without-attr,attr"
++PACKAGECONFIG[libaio] = "--with-libaio,--without-libaio,libaio"
++PACKAGECONFIG[libbsd] = "--with-libbsd,--without-libbsd,libbsd"
++PACKAGECONFIG[libcap] = "--with-libcap,--without-libcap,libcap"
++PACKAGECONFIG[valgrind] = "--with-valgrind,--without-valgrind,valgrind"
+ 
+ SRC_URI += "${@bb.utils.contains('PACKAGECONFIG', 'attr', '', 'file://avoid-attr-unless-wanted.patch', d)}"
+ 
 -- 
 2.8.3
 
