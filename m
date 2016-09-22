@@ -1,30 +1,24 @@
-Return-Path: <wangxin2015.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D6837197F
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 8172265CBA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Sep 2016 02:13:53 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="11230251"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 22 Sep 2016 10:13:54 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id DD8CF4042406
+	Thu, 22 Sep 2016 08:30:19 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u8M8ULlT016731
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Sep 2016 10:13:52 +0800 (CST)
-Received: from ubuntu.g08.fujitsu.local (10.167.226.120) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.279.2; Thu, 22 Sep 2016 10:13:52 +0800
-From: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+	Thu, 22 Sep 2016 01:30:21 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.294.0; Thu, 22 Sep 2016 01:30:20 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 21 Sep 2016 08:03:15 -0400
-Message-ID: <1474459395-16379-1-git-send-email-wangxin2015.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+Date: Thu, 22 Sep 2016 16:13:06 +0800
+Message-ID: <20160922081306.23381-1-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.8.3
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.120]
-X-yoursite-MailScanner-ID: DD8CF4042406.A51A7
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangxin2015.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] logwatch: 7.4.1 -> 7.4.3
+Subject: [meta-oe][PATCH] mpich: fix QA issue and remove blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,38 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Sep 2016 02:13:57 -0000
+X-List-Received-Date: Thu, 22 Sep 2016 08:30:25 -0000
 Content-Type: text/plain
 
-Upgrade logwatch from 7.4.1 to 7.4.3.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Signed-off-by: Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+Remove the reference of S from .la and DEBUG_PREFIX_MAP
+from .pc file to avoid QA issues.
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../logwatch/{logwatch_7.4.1.bb => logwatch_7.4.3.bb}                 | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/logwatch/{logwatch_7.4.1.bb => logwatch_7.4.3.bb} (95%)
+ meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/logwatch/logwatch_7.4.1.bb b/meta-oe/recipes-extended/logwatch/logwatch_7.4.3.bb
-similarity index 95%
-rename from meta-oe/recipes-extended/logwatch/logwatch_7.4.1.bb
-rename to meta-oe/recipes-extended/logwatch/logwatch_7.4.3.bb
-index b121522..aea539e 100644
---- a/meta-oe/recipes-extended/logwatch/logwatch_7.4.1.bb
-+++ b/meta-oe/recipes-extended/logwatch/logwatch_7.4.3.bb
-@@ -12,8 +12,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=f2566bb12b16d2d80d90ebc533261aa7"
- RDEPENDS_${PN} = "perl"
+diff --git a/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb b/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
+index ead1f61..1dee6bd 100644
+--- a/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
++++ b/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
+@@ -36,5 +36,7 @@ do_configure_prepend() {
+     exit
+ }
  
- SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BP}/${BP}.tar.gz"
--SRC_URI[md5sum] = "a0c3d8721f877bdcd4a9089eb1b4691b"
--SRC_URI[sha256sum] = "35ec31f9fe981aaa727b144ab3ff2eb655997d8ccabaf66586458f5dfc3a56eb"
-+SRC_URI[md5sum] = "22bd22841caa45f12c605abc3e0c2b09"
-+SRC_URI[sha256sum] = "1dbdc48d65e150f2dbb43f1e4f4700d94166e053b1c7bbbdedf4ad670283720e"
- 
- do_install() {
-     install -m 0755 -d ${D}${sysconfdir}/logwatch/scripts
+-# http://errors.yoctoproject.org/Errors/Details/35146/
+-PNBLACKLIST[mpich] ?= "BROKEN: QA Issue: libmpi.la failed sanity test (workdir), QA Issue: mpich.pc failed sanity test (tmpdir)"
++do_install_append() {
++    sed -i 's,${S}/,,g' ${D}/${libdir}/libmpi.la
++    sed -i 's,${DEBUG_PREFIX_MAP},,g' ${D}/${libdir}/pkgconfig/mpich.pc
++}
 -- 
-2.7.4
-
-
+2.8.3
 
 
