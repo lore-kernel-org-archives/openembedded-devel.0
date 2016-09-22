@@ -1,45 +1,47 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-it0-f43.google.com (mail-it0-f43.google.com
-	[209.85.214.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 197C56093A
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vk0-f48.google.com (mail-vk0-f48.google.com
+	[209.85.213.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 31C2260778
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Sep 2016 10:19:29 +0000 (UTC)
-Received: by mail-it0-f43.google.com with SMTP id o3so152881099ita.1
+	Thu, 22 Sep 2016 10:47:08 +0000 (UTC)
+Received: by mail-vk0-f48.google.com with SMTP id a63so18808588vke.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Sep 2016 03:19:31 -0700 (PDT)
+	Thu, 22 Sep 2016 03:47:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=HiEbfZzzwvuwIKrvadELqLDBZYTkxXZYGnZ7iNjglJw=;
-	b=Denp6cpu1QzMjyoSwbhdpIxKCAuBLyhxsFSPFaaUHoYrUCUvbTN10FncDxz/v7fBsy
-	MSqdPF5gtoslBKRQQhSEvtJk0ymol1qXBDjUlKxw4Uf30jDk0zaOKzGIw3JtC6F8hVTy
-	DMkgCkHUHhYqWo82cdZrh8szjyX1fpfrdcZqamjr7q/w7ON5R8xid0tCe5CqUaGtmid5
-	FQPYzBy2GLdBLJiJRmo9j8GuOht4IPWmH14X4kliwOr48GgsHIU5Yf4hy5JgwAvMRQam
-	crc21VpyNCcruobBevh9okolvq+xwOh0ZnsolK1KeNqkJtATGXdx1CTixVeQLriyHouA
-	QIGQ==
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=NHd35xC7xklWBVAO4etW+UimsJyBkD3vqD1QapxPfsQ=;
+	b=WZS2eT5M0+HVNatreYz5DEx/Bigs3Wj99xnp4aAaD4Zu7FuFTzfl5T1HfpGlPql1v8
+	vYL6H3dAn8C1rW5kgLblrpzYoPNuq/J6wUXN1YF7B+z82qupQ13yNdsiyPwVG31azime
+	3YfflobAMxRkMAWrXzjVpiG4QqStZBLZXMoi4YjWyqfOQ12j3LMENKS9hwmvDavv056T
+	j+3H3VnZ/MplEuLIX8xW57SbgakRSXx5a3UHqE3N5EmMsffrhcMc6O5VJlUlGO/K7SHD
+	KdRll7lHDMt10rjVkzOVi5+rJ3EuZFYM1OtYuqn7xBa8GZwJ3IvRl/9kA69pyPv3DfXw
+	nmRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=HiEbfZzzwvuwIKrvadELqLDBZYTkxXZYGnZ7iNjglJw=;
-	b=O1kOCfys2AqzD4/1iEPNKahybHNprNAsnK16xrJv4O3ObCDlObe73YdBQq9JEcE1oy
-	Es6CMA0zHGlO1veVcuawttdHiIVmY4xJVvMqGxfZmA5yXfmBNV2xhYqn3U8YJ2rkapDK
-	V0aqjDgSyuGKPaP75D+wqUJmxJHsYy1ZNwc88Fy3L1vvl9ol9zmGjzDvN1GJCwgoI/RO
-	plPgq6Wz4t2EdwdcEUZ32HdYxB2x+DU6NxKyuqlzQoNqYXDRj51ApQQC1aAClFSjhgjr
-	1Dji83jYlQMdPM5DR7cBeGdAVWWTLtP+arS7tgG8Em9aWKd11qnQSmjaHSyUYnZLoq+i
-	1vog==
-X-Gm-Message-State: AE9vXwM1te1frQmi5R1bD/hXxakbfMuro0zhqNAFegQ2Qsb3h8UozNhT6ua1opNlf52WRqZPZiqMJZu1JxwPBxB1
-X-Received: by 10.36.208.71 with SMTP id m68mr1819001itg.104.1474539571119;
-	Thu, 22 Sep 2016 03:19:31 -0700 (PDT)
+	:message-id:subject:to:content-transfer-encoding;
+	bh=NHd35xC7xklWBVAO4etW+UimsJyBkD3vqD1QapxPfsQ=;
+	b=Tpb6S+L19t46M+hUTAvR/TPRi04rnMpPwMhrRHExDUssptxYl6ZC51iRKFWcW+Otp1
+	5mYw8Twu5SbGRisHCCqKnp0X5sCgxNsPJO2BzWbXloJ7cajWq28wUc9MG11H0F5xW5cF
+	jw/rhT9YP0tHJ50ZzFcJHzTtD/+sSU97gFa9o0KF1ObQUo2I1ldqSbkfPON8VOG/Vdgk
+	I0q8jn8YWtg3/ih9wSZZkNGPQNgLysE3G2KBCH+cJVAyR5G74kRHFtqvzQw5BDWmW/OC
+	MhFRDX6/WRsYSiCuny9XtSUqXEPG7tJw632WyyOJ6KbsGmbsoMkhRVwWSTUuYqDINBj6
+	GW8g==
+X-Gm-Message-State: AE9vXwOGU4Th/FKggruOHSwZbunvxeXk4RMNb12287lvu/rHgzJLaS/nTxtuGmr7rKO60lFBm8Ox9H0IHxrLBQ==
+X-Received: by 10.31.141.19 with SMTP id p19mr832430vkd.67.1474541229824; Thu,
+	22 Sep 2016 03:47:09 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.107.155.66 with HTTP; Thu, 22 Sep 2016 03:19:10 -0700 (PDT)
-In-Reply-To: <1474490283-1332-1-git-send-email-schnitzeltony@googlemail.com>
+Received: by 10.176.65.130 with HTTP; Thu, 22 Sep 2016 03:47:09 -0700 (PDT)
+In-Reply-To: <CAJTo0Lbfvn2UbvYU8vH6WZEzJTv0JLsKMT5H9bjZqjCH02zP9g@mail.gmail.com>
 References: <1474490283-1332-1-git-send-email-schnitzeltony@googlemail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 22 Sep 2016 11:19:10 +0100
-Message-ID: <CAJTo0Lbfvn2UbvYU8vH6WZEzJTv0JLsKMT5H9bjZqjCH02zP9g@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<CAJTo0Lbfvn2UbvYU8vH6WZEzJTv0JLsKMT5H9bjZqjCH02zP9g@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 22 Sep 2016 12:47:09 +0200
+Message-ID: <CALbNGRTXgVgGKzPzB9-8FoN5nJN+CSsGMnoocRAahXWH0Ss5tA@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH 1/2] portaudio: has MIT license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -53,19 +55,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Sep 2016 10:19:30 -0000
+X-List-Received-Date: Thu, 22 Sep 2016 10:47:09 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 21 September 2016 at 21:38, Andreas M=C3=BCller <schnitzeltony@googlemai=
-l.com>
-wrote:
-
-> -LICENSE =3D "PortAudio"
-> +LICENSE =3D "MIT"
+On Thu, Sep 22, 2016 at 12:19 PM, Burton, Ross <ross.burton@intel.com> wrot=
+e:
+> On 21 September 2016 at 21:38, Andreas M=C3=BCller <schnitzeltony@googlem=
+ail.com>
+> wrote:
 >
+>> -LICENSE =3D "PortAudio"
+>> +LICENSE =3D "MIT"
+>>
+>
+> FWIW my upgrade patch last week incorporates this change.
+>
+I did not notice - sorry
 
-FWIW my upgrade patch last week incorporates this change.
-
-Ross
+Andreas
 
