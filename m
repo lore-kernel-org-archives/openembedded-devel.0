@@ -1,48 +1,45 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f48.google.com (mail-vk0-f48.google.com
-	[209.85.213.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 31C2260778
+Return-Path: <net147@gmail.com>
+Received: from mail-pa0-f67.google.com (mail-pa0-f67.google.com
+	[209.85.220.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 61C89600BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Sep 2016 10:47:08 +0000 (UTC)
-Received: by mail-vk0-f48.google.com with SMTP id a63so18808588vke.3
+	Fri, 23 Sep 2016 02:39:34 +0000 (UTC)
+Received: by mail-pa0-f67.google.com with SMTP id oz2so4374561pac.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Sep 2016 03:47:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=NHd35xC7xklWBVAO4etW+UimsJyBkD3vqD1QapxPfsQ=;
-	b=WZS2eT5M0+HVNatreYz5DEx/Bigs3Wj99xnp4aAaD4Zu7FuFTzfl5T1HfpGlPql1v8
-	vYL6H3dAn8C1rW5kgLblrpzYoPNuq/J6wUXN1YF7B+z82qupQ13yNdsiyPwVG31azime
-	3YfflobAMxRkMAWrXzjVpiG4QqStZBLZXMoi4YjWyqfOQ12j3LMENKS9hwmvDavv056T
-	j+3H3VnZ/MplEuLIX8xW57SbgakRSXx5a3UHqE3N5EmMsffrhcMc6O5VJlUlGO/K7SHD
-	KdRll7lHDMt10rjVkzOVi5+rJ3EuZFYM1OtYuqn7xBa8GZwJ3IvRl/9kA69pyPv3DfXw
-	nmRw==
+	Thu, 22 Sep 2016 19:39:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=GIG2+huyCIw1l5G0tRa6twIoSLlEhNP72TFyKxpRZdA=;
+	b=zSOjL62p3Yiim8DxCRB52BGJF21k+xr+MufVqYxUG8uGBDvPZfk3h4Yh7rvserXOO1
+	NpSmbd1VrvHcbcMTNrGic0WyucAHyTPRc9NEnSnp53CuOhh5uvFLZf31kXWhYM/EIVFF
+	Typx+kO0yfRgICOThentF1dGfB970ojKb9BwuwodsBRAVN/vdXEkwKrYy47e603d93US
+	9ln0P2n3ok8v7mWSjUjmjmUKRCeFSHcXz69+nEI0FcB0Vnz+fG8xtaFlaWX7n1PNXqIx
+	Jipufxc1bDwyLfYTld0DgH9lDvOoCLU38qpWV3XBHFC/31ULf+tDwDWjEsEH49/9rs/A
+	rH2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=NHd35xC7xklWBVAO4etW+UimsJyBkD3vqD1QapxPfsQ=;
-	b=Tpb6S+L19t46M+hUTAvR/TPRi04rnMpPwMhrRHExDUssptxYl6ZC51iRKFWcW+Otp1
-	5mYw8Twu5SbGRisHCCqKnp0X5sCgxNsPJO2BzWbXloJ7cajWq28wUc9MG11H0F5xW5cF
-	jw/rhT9YP0tHJ50ZzFcJHzTtD/+sSU97gFa9o0KF1ObQUo2I1ldqSbkfPON8VOG/Vdgk
-	I0q8jn8YWtg3/ih9wSZZkNGPQNgLysE3G2KBCH+cJVAyR5G74kRHFtqvzQw5BDWmW/OC
-	MhFRDX6/WRsYSiCuny9XtSUqXEPG7tJw632WyyOJ6KbsGmbsoMkhRVwWSTUuYqDINBj6
-	GW8g==
-X-Gm-Message-State: AE9vXwOGU4Th/FKggruOHSwZbunvxeXk4RMNb12287lvu/rHgzJLaS/nTxtuGmr7rKO60lFBm8Ox9H0IHxrLBQ==
-X-Received: by 10.31.141.19 with SMTP id p19mr832430vkd.67.1474541229824; Thu,
-	22 Sep 2016 03:47:09 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.176.65.130 with HTTP; Thu, 22 Sep 2016 03:47:09 -0700 (PDT)
-In-Reply-To: <CAJTo0Lbfvn2UbvYU8vH6WZEzJTv0JLsKMT5H9bjZqjCH02zP9g@mail.gmail.com>
-References: <1474490283-1332-1-git-send-email-schnitzeltony@googlemail.com>
-	<CAJTo0Lbfvn2UbvYU8vH6WZEzJTv0JLsKMT5H9bjZqjCH02zP9g@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Thu, 22 Sep 2016 12:47:09 +0200
-Message-ID: <CALbNGRTXgVgGKzPzB9-8FoN5nJN+CSsGMnoocRAahXWH0Ss5tA@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/2] portaudio: has MIT license
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=GIG2+huyCIw1l5G0tRa6twIoSLlEhNP72TFyKxpRZdA=;
+	b=XMz/0kTQBNNRttopWh3qY1klyuWWjGZATLszaKND7qinweFlxtbEjDuAEh4q28X17h
+	skozH6J4e6tAtS0kJlHpvHqOVc36dQj4xbEanHF7LvRRdFI5ZACUUFlw0LYzBo20Ibxg
+	LYTEWZXyIRxOtVd//tYDH5r2sox3ybfDiVBK09mftRKQjtL59HTSnxpsqBp3+lwCutb7
+	j+nmPm2kZeb7WoSciwnJlrH0Idd/E6LIKtvR5tEZCafE4njkwgmtuZLlGkyWUN/1Z/S9
+	nn7wr9PVR4sMI2dZ+ZJsYGl3921e2FZiBpcvsBTsZAw7tpqPd3qN2ewGgj+EsJYmzNlR
+	GU/g==
+X-Gm-Message-State: AE9vXwPs8YeahSH2uarCTDHT67Jg41k2CBiZYfs3nDfSozIutBigeUmdZtZPCXMJFWhZLQ==
+X-Received: by 10.66.129.174 with SMTP id nx14mr8506338pab.167.1474598375533; 
+	Thu, 22 Sep 2016 19:39:35 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by smtp.gmail.com with ESMTPSA id 70sm6919141pfn.46.2016.09.22.19.39.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 22 Sep 2016 19:39:34 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 23 Sep 2016 12:39:24 +1000
+Message-Id: <20160923023924.29771-1-net147@gmail.com>
+X-Mailer: git-send-email 2.10.0
+Subject: [meta-oe][PATCH] p7zip: do not hardcode path in native wrapper script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,23 +52,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Sep 2016 10:47:09 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 23 Sep 2016 02:39:34 -0000
 
-On Thu, Sep 22, 2016 at 12:19 PM, Burton, Ross <ross.burton@intel.com> wrot=
-e:
-> On 21 September 2016 at 21:38, Andreas M=C3=BCller <schnitzeltony@googlem=
-ail.com>
-> wrote:
->
->> -LICENSE =3D "PortAudio"
->> +LICENSE =3D "MIT"
->>
->
-> FWIW my upgrade patch last week incorporates this change.
->
-I did not notice - sorry
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ meta-oe/recipes-extended/p7zip/p7zip_16.02.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-Andreas
+diff --git a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
+index 9f87e9f..fdd51db 100644
+--- a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
++++ b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
+@@ -29,8 +29,10 @@ do_install_class-native() {
+ 
+     # Create a shell script wrapper to execute next to 7z.so
+     mv ${D}${bindir}/7z ${D}${bindir}/7z.bin
+-    echo "#! /bin/sh" > ${D}${bindir}/7z
+-    echo "exec ${D}${bindir}/7z.bin \"\$@\"" >> ${D}${bindir}/7z
++    cat > ${D}${bindir}/7z << 'EOF'
++#!/bin/sh
++exec "$(dirname "$0")"/7z.bin "$@"
++EOF
+     chmod 0755 ${D}${bindir}/7z
+ }
+ 
+-- 
+2.10.0
+
 
