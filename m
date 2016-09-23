@@ -1,26 +1,26 @@
 Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F82065CBA
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B27DC700F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Sep 2016 09:28:21 +0000 (UTC)
+	Fri, 23 Sep 2016 09:28:23 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u8N9SNLN011801
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u8N9SOEg029405
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Sep 2016 02:28:23 -0700 (PDT)
+	Fri, 23 Sep 2016 02:28:25 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Fri, 23 Sep 2016 02:28:22 -0700
+	14.3.294.0; Fri, 23 Sep 2016 02:28:24 -0700
 From: <mingli.yu@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 23 Sep 2016 17:24:45 +0800
-Message-ID: <1474622687-10511-2-git-send-email-mingli.yu@windriver.com>
+Date: Fri, 23 Sep 2016 17:24:46 +0800
+Message-ID: <1474622687-10511-3-git-send-email-mingli.yu@windriver.com>
 X-Mailer: git-send-email 2.8.1
 In-Reply-To: <1474622687-10511-1-git-send-email-mingli.yu@windriver.com>
 References: <1474622687-10511-1-git-send-email-mingli.yu@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2 1/3] mariadb: add libdbi-perl to RDEPENDS
+Subject: [meta-oe][PATCH v2 2/3] mariadb: add libdbd-mysql-perl to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,104 +33,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Sep 2016 09:28:22 -0000
+X-List-Received-Date: Fri, 23 Sep 2016 09:28:23 -0000
 Content-Type: text/plain
 
-From: Zhixiong Chi <Zhixiong.Chi@windriver.com>
+From: Mingli Yu <Mingli.Yu@windriver.com>
 
-The commands(mysql_convert_table_format and mysql_setpermission) need
-the supported API provided by the libdbi-perl package.
-So add the libdbi-perl to the variable RDEPENDS of mariabdb-server.
+* Add libdbd-mysql-perl to RDEPENDS as mysql_setpermission
+  depends on DBD::mysql module
 
-Move libdbi-perl from meta-perl to meta-oe
+  root@test:~# mysql_setpermission -h
+  Option h is ambiguous (help, host)
+  Password for user to connect to MySQL:
+  install_driver(mysql) failed: Can't locate DBD/mysql.pm
+  in @INC (you may need to install the DBD::mysql module)
+  (@INC contains: /etc/perl /usr/lib64/perl/site_perl/5.22.1/
+  /usr/lib64/perl/site_perl/5.22.1
+  /usr/lib64/perl/vendor_perl/5.22.1/
+  /usr/lib64/perl/vendor_perl/5.22.1
+  /usr/lib64/perl/5.22.1/ /usr/lib64/perl/5.22.1
+  /usr/local/lib/site_perl /usr/lib64/perl/5.22.1 .)
+  at (eval 11) line 3, <STDIN> line 1.
+  Perhaps the DBD::mysql perl module hasn't been fully installed,
+  or perhaps the capitalisation of 'mysql' isn't right.
+  Available drivers: DBM, ExampleP, File, Gofer, Proxy, Sponge.
+  at /usr/bin/mysql_setpermission line 90.
 
-Signed-off-by: Zhixiong Chi <Zhixiong.Chi@windriver.com>
+* Add libmysqlclient to Provides as libdbd-mysql-perl depend on it
+
 Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
 ---
- meta-oe/recipes-devtools/perl/libdbi-perl_1.636.bb | 26 ++++++++++++++++++++++
- meta-oe/recipes-support/mysql/mariadb.inc          |  2 +-
- meta-perl/recipes-perl/libdb/libdbi-perl_1.636.bb  | 26 ----------------------
- 3 files changed, 27 insertions(+), 27 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/perl/libdbi-perl_1.636.bb
- delete mode 100644 meta-perl/recipes-perl/libdb/libdbi-perl_1.636.bb
+ meta-oe/recipes-support/mysql/mariadb.inc       | 2 +-
+ meta-oe/recipes-support/mysql/mariadb_5.5.50.bb | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.636.bb b/meta-oe/recipes-devtools/perl/libdbi-perl_1.636.bb
-new file mode 100644
-index 0000000..085b904
---- /dev/null
-+++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.636.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "The Perl Database Interface"
-+DESCRIPTION = "DBI is a database access Application Programming Interface \
-+(API) for the Perl Language. The DBI API Specification defines a set \
-+of functions, variables and conventions that provide a consistent \
-+database interface independent of the actual database being used. \
-+"
-+HOMEPAGE = "http://search.cpan.org/dist/DBI/"
-+SECTION = "libs"
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+RDEPENDS_${PN} = " perl-module-carp \
-+                   perl-module-exporter \
-+                   perl-module-exporter-heavy \
-+                   perl-module-dynaloader \
-+"
-+
-+LIC_FILES_CHKSUM = "file://DBI.pm;beginline=8147;endline=8151;md5=2e5f6cf47e5ad7b77dcb6172edc29292"
-+
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz"
-+SRC_URI[md5sum] = "60f291e5f015550dde71d1858dfe93ba"
-+SRC_URI[sha256sum] = "8f7ddce97c04b4b7a000e65e5d05f679c964d62c8b02c94c1a7d815bb2dd676c"
-+
-+S = "${WORKDIR}/DBI-${PV}"
-+
-+inherit cpan
-+
-+BBCLASSEXTEND = "native"
 diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
-index 73905b6..c2d2ecf 100644
+index c2d2ecf..5dd8d64 100644
 --- a/meta-oe/recipes-support/mysql/mariadb.inc
 +++ b/meta-oe/recipes-support/mysql/mariadb.inc
 @@ -169,7 +169,7 @@ RDEPENDS_${PN}-client = "perl perl-module-getopt-long perl-module-file-temp \
  RDEPENDS_${PN}-server = "perl perl-module-getopt-long perl-module-data-dumper \
      perl-module-file-basename perl-module-file-path perl-module-sys-hostname \
      perl-module-file-copy perl-module-file-temp perl-module-posix \
--    ${PN}-client"
-+    ${PN}-client libdbi-perl"
+-    ${PN}-client libdbi-perl"
++    ${PN}-client libdbi-perl libdbd-mysql-perl"
  RDEPENDS_${PN}-leftovers = "perl perl-module-cwd perl-module-benchmark perl-module-getopt-long \
      perl-module-posix perl-module-data-dumper perl-module-sigtrap perl-module-threads \
      perl-module-threads-shared perl-module-io-socket perl-module-sys-hostname perl-module-file-copy \
-diff --git a/meta-perl/recipes-perl/libdb/libdbi-perl_1.636.bb b/meta-perl/recipes-perl/libdb/libdbi-perl_1.636.bb
-deleted file mode 100644
-index 085b904..0000000
---- a/meta-perl/recipes-perl/libdb/libdbi-perl_1.636.bb
-+++ /dev/null
-@@ -1,26 +0,0 @@
--SUMMARY = "The Perl Database Interface"
--DESCRIPTION = "DBI is a database access Application Programming Interface \
--(API) for the Perl Language. The DBI API Specification defines a set \
--of functions, variables and conventions that provide a consistent \
--database interface independent of the actual database being used. \
--"
--HOMEPAGE = "http://search.cpan.org/dist/DBI/"
--SECTION = "libs"
--LICENSE = "Artistic-1.0 | GPL-1.0+"
--RDEPENDS_${PN} = " perl-module-carp \
--                   perl-module-exporter \
--                   perl-module-exporter-heavy \
--                   perl-module-dynaloader \
--"
--
--LIC_FILES_CHKSUM = "file://DBI.pm;beginline=8147;endline=8151;md5=2e5f6cf47e5ad7b77dcb6172edc29292"
--
--SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz"
--SRC_URI[md5sum] = "60f291e5f015550dde71d1858dfe93ba"
--SRC_URI[sha256sum] = "8f7ddce97c04b4b7a000e65e5d05f679c964d62c8b02c94c1a7d815bb2dd676c"
--
--S = "${WORKDIR}/DBI-${PV}"
--
--inherit cpan
--
--BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.50.bb b/meta-oe/recipes-support/mysql/mariadb_5.5.50.bb
+index 8f998a3..d789573 100644
+--- a/meta-oe/recipes-support/mysql/mariadb_5.5.50.bb
++++ b/meta-oe/recipes-support/mysql/mariadb_5.5.50.bb
+@@ -4,7 +4,7 @@ EXTRA_OECMAKE += "-DSTACK_DIRECTION=-1"
+ 
+ DEPENDS += "mariadb-native ncurses zlib readline libaio libevent"
+ 
+-PROVIDES += "mysql5"
++PROVIDES += "mysql5 libmysqlclient"
+ 
+ RPROVIDES_${PN} += "mysql5"
+ RREPLACES_${PN} += "mysql5"
 -- 
 2.8.1
 
