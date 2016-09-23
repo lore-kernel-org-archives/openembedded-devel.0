@@ -1,31 +1,25 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D853160068
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 52E886FF76
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Sep 2016 02:46:25 +0000 (UTC)
+	Fri, 23 Sep 2016 08:30:31 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u8N2kQRW007275
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u8N8UW3u001796
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Sep 2016 19:46:26 -0700
-Received: from [128.224.163.140] (128.224.163.140) by ALA-HCA.corp.ad.wrs.com
+	Fri, 23 Sep 2016 01:30:32 -0700 (PDT)
+Received: from localhost (128.224.162.178) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.294.0;
-	Thu, 22 Sep 2016 19:46:25 -0700
+	Fri, 23 Sep 2016 01:30:32 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1471921830-2919-1-git-send-email-Zhixiong.Chi@windriver.com>
-	<20160901122045.gpuxub43upiiniyt@jama> <57CCF446.4050703@windriver.com>
-	<57DE47D6.8010304@windriver.com> <57E21DD7.1000601@windriver.com>
-	<20160921070836.GC3461@jama>
-From: "Yu, Mingli" <mingli.yu@windriver.com>
-Message-ID: <57E49661.4020809@windriver.com>
-Date: Fri, 23 Sep 2016 10:41:37 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.4.0
+Date: Fri, 23 Sep 2016 16:30:27 +0800
+Message-ID: <cover.1474619229.git.yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <20160921070836.GC3461@jama>
-X-Originating-IP: [128.224.163.140]
-Subject: Re: [meta-oe][PATCH] mariadb: add libdbi-perl to the depends of mariadb-server
+X-Originating-IP: [128.224.162.178]
+Subject: [meta-networking][PATCH 0/2] squid: two fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,107 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Sep 2016 02:46:26 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 23 Sep 2016 08:30:32 -0000
+Content-Type: text/plain
 
 
+The following changes since commit 24e387aaf78bc0f68a46abb1fab3a76364804bd1:
 
-On 2016年09月21日 15:08, Martin Jansa wrote:
-> On Wed, Sep 21, 2016 at 01:42:47PM +0800, Yu, Mingli wrote:
->>
->>
->> On 2016年09月18日 15:52, Yu, Mingli wrote:
->>>
->>>
->>> On 2016年09月05日 12:27, Zhixiong Chi wrote:
->>>>
->>>>
->>>> On 2016年09月01日 20:20, Martin Jansa wrote:
->>>>> On Tue, Aug 23, 2016 at 11:10:30AM +0800, Zhixiong Chi wrote:
->>>>>> The commands(mysql_convert_table_format and mysql_setpermission) need
->>>>>> to the supported API provided by the libdbi-perl package.
->>>>>> So add the libdbi-perl to the variable RDEPENDS of mariabdb-server.
->>>>> This isn't possible, libdbi-perl is in meta-perl and mariadb is in
->>>>> meta-oe.
->>>>>
->>>>> meta-oe doesn't depend (and cannot) on meta-perl.
->>>> The script mysql_convert_table_format(line 50) and
->>>> mysql_convert_table_format
->>>> (line 20) which located xxx/mariadb/scripts/ source path will call the
->>>> DBI function
->>>> with the sentence "use DBI", and this DBI function is provided by the
->>>> libdbi-perl
->>>> package.
->>>>
->>>> So the scripts will fail when start to work.
->>>
->>> Any update?
->>>
->>> The issue also exists in my environment as mariabdb-server rdepends on
->>> DBI.pm which is provided by libdbi-perl.
->>>
->>> Thanks,
->>
->> Ping.
->
-> Pong.
->
-> Still cannot depend on meta-perl layer from meta-oe.
+  openldap: fix CVE-2015-3276 (2016-09-19 16:24:10 +0200)
 
-Thanks! If so will resend V2 patch to move libdbi-perl from meta-perl to 
-meta-oe.
+are available in the git repository at:
 
-Thanks,
+  git://git.openembedded.org/meta-openembedded-contrib yzhao/squid-fixes
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=yzhao/squid-fixes
 
->
->> Thanks,
->>
->>>
->>>>
->>>> Thanks.
->>>>>> Signed-off-by: Zhixiong Chi <Zhixiong.Chi@windriver.com>
->>>>>> ---
->>>>>>    meta-oe/recipes-support/mysql/mariadb.inc | 2 +-
->>>>>>    1 file changed, 1 insertion(+), 1 deletion(-)
->>>>>>
->>>>>> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc
->>>>>> b/meta-oe/recipes-support/mysql/mariadb.inc
->>>>>> index 73905b6..c2d2ecf 100644
->>>>>> --- a/meta-oe/recipes-support/mysql/mariadb.inc
->>>>>> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
->>>>>> @@ -169,7 +169,7 @@ RDEPENDS_${PN}-client = "perl
->>>>>> perl-module-getopt-long perl-module-file-temp \
->>>>>>    RDEPENDS_${PN}-server = "perl perl-module-getopt-long
->>>>>> perl-module-data-dumper \
->>>>>>        perl-module-file-basename perl-module-file-path
->>>>>> perl-module-sys-hostname \
->>>>>>        perl-module-file-copy perl-module-file-temp perl-module-posix \
->>>>>> -    ${PN}-client"
->>>>>> +    ${PN}-client libdbi-perl"
->>>>>>    RDEPENDS_${PN}-leftovers = "perl perl-module-cwd
->>>>>> perl-module-benchmark perl-module-getopt-long \
->>>>>>        perl-module-posix perl-module-data-dumper perl-module-sigtrap
->>>>>> perl-module-threads \
->>>>>>        perl-module-threads-shared perl-module-io-socket
->>>>>> perl-module-sys-hostname perl-module-file-copy \
->>>>>> --
->>>>>> 1.9.1
->>>>>>
->>>>>> --
->>>>>> _______________________________________________
->>>>>> Openembedded-devel mailing list
->>>>>> Openembedded-devel@lists.openembedded.org
->>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>>>
->>>>>
->>>>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
->
+Yi Zhao (2):
+  squid: specify sysconfdir and logdir
+  squid: fix ptest failure
+
+ ...squid-don-t-do-squid-conf-tests-at-build-time.patch |  6 +++---
+ .../recipes-daemons/squid/files/volatiles.03_squid     |  1 +
+ meta-networking/recipes-daemons/squid/squid_3.5.20.bb  | 18 ++++++++++++++++--
+ 3 files changed, 20 insertions(+), 5 deletions(-)
+
+-- 
+2.7.4
+
 
