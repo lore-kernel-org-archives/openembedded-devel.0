@@ -1,89 +1,92 @@
 Return-Path: <roman.alyautdin@rtsoft.de>
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
-	(mail-db5eur01on0114.outbound.protection.outlook.com [104.47.2.114])
-	by mail.openembedded.org (Postfix) with ESMTP id 29B666014F
+X-Greylist: delayed 38333 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 24 Sep 2016 11:19:19 UTC
+Received: from EUR02-AM5-obe.outbound.protection.outlook.com
+	(mail-eopbgr00132.outbound.protection.outlook.com [40.107.0.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 34BEF60079
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Sep 2016 01:39:58 +0000 (UTC)
+	Sat, 24 Sep 2016 11:19:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=5031003890.onmicrosoft.com; s=selector1-rtsoft-de;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
 	bh=Nh71eDhUGN/dU46/l2vAerqK8tLXr6x7gT5u55YzBZo=;
-	b=bwA6MH7pY5QR5rHy9wA4Ln8ynNDkXK2gcIgOY2zp2++CyDJPOaVcRi3vlygEW68xSsdh2Ok1kgd3nHawsJO3x/zv5Qa4uOzwTteUIQXTCdDqpXlV7Z3P49UIhq+ZY9r6ozs51UibjMJ1D+89AyFCvXfNMGkSWTFgRrTWYhlq9Yk=
+	b=JJKYxAPqHZ31F6Ncz2w9DtrnZNgXoNnoCpyUNFSCVcPUZHkE7n/AyQ/9KMW4AtQ23NM0AKs/RrWmWcXnFPKCFUyu2MEbrvRDSxQ+toOerVYN/ChmNldIkMDycIanCHwe9vDjoFbV1Fj8v8vJPM7ap5taxoyrjghmtcWYSi2DY00=
 Authentication-Results: spf=none (sender IP is )
 	smtp.mailfrom=roman.alyautdin@rtsoft.de; 
 Received: from romanpc.dev.rtsoft.ru (213.79.90.226) by
-	AM3PR06MB353.eurprd06.prod.outlook.com (2a01:111:e400:881c::14) with
+	AM3PR06MB356.eurprd06.prod.outlook.com (2a01:111:e400:881c::21) with
 	Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P384) id 15.1.629.8;
-	Fri, 23 Sep 2016 16:08:12 +0000
+	Fri, 23 Sep 2016 16:44:04 +0000
 From: Roman Alyautdin <roman.alyautdin@rtsoft.de>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 23 Sep 2016 19:07:49 +0300
-Message-ID: <1474646869-6967-1-git-send-email-roman.alyautdin@rtsoft.de>
+Date: Fri, 23 Sep 2016 19:43:36 +0300
+Message-ID: <1474649016-7314-1-git-send-email-roman.alyautdin@rtsoft.de>
 X-Mailer: git-send-email 1.7.9.5
 MIME-Version: 1.0
 X-Originating-IP: [213.79.90.226]
-X-ClientProxiedBy: AMSPR02CA0021.eurprd02.prod.outlook.com
-	(2a01:111:e400:8028::21) To AM3PR06MB353.eurprd06.prod.outlook.com
-	(2a01:111:e400:881c::14)
-X-MS-Office365-Filtering-Correlation-Id: 94f39f25-5aad-4c5e-bb20-08d3e3cbd1a8
-X-Microsoft-Exchange-Diagnostics: 1; AM3PR06MB353;
-	2:eS0D89u8SgnrTmZLtjDMHaaP1j2hlkWBUfuC+TQCh4IyG2/SZlsj9MiRAbpq2FKel8PO8+JfgtbQT1l400zz4wLyghg9krCleJJvzGoxmMSJj/txkkkLggbpLf3p8iZvs5IdvE7kjZ3fUJizvSY0lWtm2SQuaNoGZgaYxzPVMFonDcZCMrvfch2x7UwBpMbR;
-	3:OrYv0O6N4HE6L7bCGQJLHsYJaLPrzhUc7H35AOsriUGjbwdYLfM2lp64pa9Zk+Ru958FAmOtIs7n+73QCQYAji2HZxck9ShBQDg89GVI1wAdcULq/xKY0WR4YFD5zzFs;
-	25:X4Z+ubnMU5epu2gG77TkvFFPzl9vVuvb/1Tnns9JExdM5RQF7G8YahTap7yxJ0E96l8Mz2FYTn0YwfBhDhFz0SIicKPhjyrM0HB0SQSx+5MUkTIjmFj4GU5rJeJkmO7Yr46BdGJI3jMQJD6fTu16RTgEeUuGbaMig+YZ2KXon8DYwExkchjaivLj5FBHpM8cJoYQ0MtGfCyosPeb08rzjFjW+dkuZBGgPtFU4NtZaij30iriYouA0H1bRKnFdas5heB/YZJSny0ryzNjb2dbKKQGPQhvjTZoD7YflFTuzcmaJQNzaO0z4Ujur1xCtgXoUPfj37ZdoiN2cPyVRbKF2FBXPF6M/D4cptIiEZyuEbHaz/8gS6yAlB0Aoh58IhNQg39GKS0jPJ7TlrasN6t6LMDEFtVDJIOGeS2w7eUMJEs=
-X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:AM3PR06MB353;
-X-Microsoft-Exchange-Diagnostics: 1; AM3PR06MB353;
-	31:3w8V6xmevP7xq4oLcfp0eGi5Oya/yBu/O9GKag3rA4GClewE5OVBb/dITrEZhCHrYLUVYV7SV3BXyVIGoIIHN+44TW88cCCkbQjFRF7b62HqiqqtL5mxS+VU5m0/jPQseJIvA4hmtlD0/DpbkTVlUyLxUwoAZL2GmZwGrW/zcdoOzBVOsnusNiI7tJG1aqI74K4Mf6TySHU29myOoHM5XNiIOBW8fyF0xIKPQ7zu3uY=;
-	20:mQIiqtC1BTHdNrk0ce4/oQxsd2H4aZrrqeanJN7m5QPE/3AD+3A4Uhpwwi63/yoTwNV40+5E7XfI2Rz+iVIczoLshfglT9KyCTjzIVABMLmqFVc31RaTV7hQYXZVHMOhuMWpV7t1im34AIpOsQnQH9vnM0CqMDyoXIHD9292V8cNz5ybZNC60k7DTdR6zezTG8csmzuwlkqi3r9umEgap739E+SFcfup06ragQgAZroCTnur8BGL/Qnuw/qckEkqQYIjHOjNnNFS+qfJGxYcPlxiR+J5iko6ohQZJrt7dphvgy9tVhoBUKI6GXRvkLnAf6IUkSO9K8NUiT3TVExEZA==
-X-Microsoft-Antispam-PRVS: <AM3PR06MB353767C529CEA660481A7E0FBC80@AM3PR06MB353.eurprd06.prod.outlook.com>
+X-ClientProxiedBy: HE1PR0801CA0030.eurprd08.prod.outlook.com
+	(2603:10a6:3:6::40) To AM3PR06MB356.eurprd06.prod.outlook.com
+	(2a01:111:e400:881c::21)
+X-MS-Office365-Filtering-Correlation-Id: 3a91bff3-9fc5-4bad-41d2-08d3e3d0d4b2
+X-Microsoft-Exchange-Diagnostics: 1; AM3PR06MB356;
+	2:bsHshVaaaEwfHrQG8C435WcMVJCEsQ0R4Hhv0GGgfPqqGmdE90oisIglrJ4GvHMemKpMXkriQ45xgGYKyOYJIyoGW3NKADIH7DEMP6sRl8Vr5nX1tQxwNyt0MJBLk7Fg+sYZqXoOUcM6Z56mj7TBL9fRRiximQxu7J4ji1def/DrLOYLFXEafvFkZe+jQMza;
+	3:gcpjqOBkrTMk4ZqoDHvFcuA4gJIrIJ5UibyA+OQlhZn1djzC0ZTm7jgW43TDncCUxu9Pkp2WCBb5M1Cnldue2qzPWBnf87gL8yxR9MqGr0+I7WGG3DlmPnTGeRwmwmqz
+X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:AM3PR06MB356;
+X-Microsoft-Exchange-Diagnostics: 1; AM3PR06MB356;
+	25:iugLzXsXp6J/4Asmn3LWyKQYGqeFC82HcsdCuF5osRB8AZY1LS0WeIj9PpYuJXQWblVzfyUq+peeWiAvfHL0WBuxLK8GHr0NlIw82z2gHOkt/GAZDmOzQrNBC52b9uahiLBDR1gq5KIH38sz8ZpEfl0BrOa1N37M5r+EsOS6MNz/xDoJUx8maZaVG4XvAB6/PWWh4SAGo3sEocH1Atu4ZuoiHG34AJzbbH6uV1qyor3lk/kVDC1zdySuKwYO7gsfkbJwLXJigFqvdIL1qwviRTMEGcO93D50cZmtabtc8okllyB3A44KmFSTEDnJiQ9Xy4WUqSCA2Eg505ilYgd+7NBekg0eZvsEURXy4R9LCKtvVp0Mlo+Mcu2Bq6BqmyC9fK7bOIJIsS8tUfbRmf6gUkgDpVjPWjzuAJAFMP3LFtgLUAESUS9goKy2T2hJcHc/4INt777P6lA7d1dw9ni0hR+ES/RqkNO52qQ/SfQ5pDthPUZlcTF5F+hdOsQRZZaC47pj11Pel3b8kmxjemx/vXYwj3Po/N4qAHf6x89Tn8eQSgjFYwZXTFEK2DhXqqTJwh80NxUk2FvoBCoa4RhyNV5xZTOLusH764Jwc5Nig5T2AxHxQ1sdE5o1X2rg509Pbknb4pTGKq8z+QyDbg8iQDYxzWrzN0ukIQiJ9Ozq8P6z84+wBujyo8k2436LNIPEE/NUKClvE2TEoECwwNpBks46Yd7Xek3OKCToxoNm3t6TzcqiwJ3TKUTVwbab7mAx/ArJ8xKuxiR/qEHyCSRRnhuP4+6ehKLx8xwdo/Mj3B/6O8FUatB1gTptKQtkblL53qq+Igo5Pj4QQnaScQd4tQ==
+X-Microsoft-Exchange-Diagnostics: 1; AM3PR06MB356;
+	31:cAZM+p76dbvKgfLKzhrYt0zK5KcENBTD8VtYjssYNADOUnqehVAZ7olcpBC9RB5VJdFk0GTPWTbl+1vtlcJRxgzB2WR4C/3mSYfU/PlembqWUyJsBTbpoMeSfeF5yYkR6GQXliUKo9dlNYB0Ra5/punGuOZck9/mb1hlCB4gmsmLjiipyVwFLGZX8pfkg09KH4G50Qci+go3jshpdNaI10cb3lQqbu2HC3x9UT0ZADk=;
+	20:KEQ2fxeUQx4WdErR9r/0lcx2PqpCyYd7RmwahccZ0mgV7SqCfTkKK+OrfecWVqXycrClPWeKXF+EjTkiGMxJGjawSZQHJjVocTphRUE12zlG1KOg0yDKmxt2ClaF0W4lazTn5mJlivlFes5EQ7PMFuH+LKy+smqXjliZnzDQMaGkRSD9LELIUPSLZFYcDxd292AO7U6e8T8Y/jETj+Fc00hKICjWuOHX0IObNMIr9VGFJ2mccvIpuJHFaYm5LyKo8vg0SAG3wUpld1BYFSexaOvURPSfcwG17O0LJUE5zScV0Y76jZnZ23JarizwsWNRqNa2ijOLvvZjuZsKFhXmDw==
+X-Microsoft-Antispam-PRVS: <AM3PR06MB3567F68308AF0EBAFAE36F8FBC80@AM3PR06MB356.eurprd06.prod.outlook.com>
 X-Exchange-Antispam-Report-Test: UriScan:(166708455590820);
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(6040176)(601004)(2401047)(8121501046)(5005006)(3002001)(10201501046)(6042046)(6043046);
-	SRVR:AM3PR06MB353; BCL:0; PCL:0; RULEID:; SRVR:AM3PR06MB353; 
-X-Microsoft-Exchange-Diagnostics: 1; AM3PR06MB353;
-	4:PaaTJUbbbNLpZXIsnm0IQDp8r7D1imBG6/24Z/+A7R1cpCSDszdupsnmkLwfiBr37rQ4+TS2haEvdaGyp0kkBSjPXI//BbLdJfI4f9WKIydOHFQJP/XRHb3SccEUsJsAfL8rNFDvbj6Qi7S4XWBFEad86GKIfceN3ucLKqeY+r4jDP6XqHTBMOrq3Rg/v3fAcYV+sHnwziy2c/FE3CdfXWvZkAdQjGb0f8kUqU0/0e578dBE+uqFu1Oa2cq+o7t9m14GALrz86hbAmqk0Ew8VguXLV+btFiGKcDbNHGzdBCjFsv4RcuP5Vil0YXrr1L/FdNKxYc8qO4e4Ln7Jw7ofmkbDMy5JeRCTFDeL0pOdANaFREemvoYxU0RB05E6mZ6aNjZZoqn1SHbZQXEO+V32wpZphTF6EaFUltBb2HDOiSniqToFxjEK6zmXhpg76GVknDntqfDjuI2/kxrglPVXw==
+	RULEID:(6040176)(601004)(2401047)(8121501046)(5005006)(10201501046)(3002001)(6043046)(6042046);
+	SRVR:AM3PR06MB356; BCL:0; PCL:0; RULEID:; SRVR:AM3PR06MB356; 
+X-Microsoft-Exchange-Diagnostics: 1; AM3PR06MB356;
+	4:t2fI4AZFmtOhD9zxXDXktnDTiCtXHjheCdXG58VjEF1re/NCrkNqiw4+iqRcYKIdEQe0VrJSHypdxiZbhrFaMV36IN1Ymrua9O2eF0rOw1WNZBlJNrA46ZogH0NJrQ/JGSS7QXZd+hBe37eUSOkz0Nv5Y+wiyGL61hfQYSAWBgt/KS7x07Wn4U9Qvs87qfhR/dmishWhkkJJApBT3FLtV3FTBC5i32YW4n7fZR7H4IVQplj98EoLeX08i+mTgs3z4tWxFTklOqBmmKlnmWSL+pgXvqyJRpe/1k4Sf6W3Q1FsoiH3+SJcJvzMMYX+YMGtvrfg7wlgO9lkVuehNjriXybml6qjzg329xOASCtf15aIpqdo88I8CfqBtQ4lTYFFuXJ4spQyAtZEbywuRI7B/xnyBhfHO7rBs6sNhoA3eBtltIB60ReuCDpxmRSurLACNJyc6wr2hwzFT+HWWeCiWDlESqZFiKHU9a+Q371Svtc=
 X-Forefront-PRVS: 0074BBE012
 X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10019020)(4630300001)(6009001)(7916002)(189002)(199003)(575784001)(107886002)(50986999)(189998001)(101416001)(106356001)(86362001)(4001430100002)(97736004)(33646002)(36756003)(6916009)(15975445007)(5003940100001)(48376002)(105586002)(50466002)(81166006)(586003)(3846002)(305945005)(450100001)(6116002)(75402003)(4326007)(7846002)(42186005)(2906002)(92566002)(81156014)(50226002)(7736002)(66066001)(229853001)(74482002)(47776003)(5660300001)(8676002)(2351001)(19580395003)(110136003)(68736007)(19580405001)(142923001)(4720700001);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:AM3PR06MB353;
-	H:romanpc.dev.rtsoft.ru; FPR:; SPF:None; PTR:InfoNoRecords; MX:1;
-	A:1; LANG:en; 
+	SFS:(10019020)(4630300001)(6009001)(7916002)(199003)(189002)(105586002)(19580395003)(2351001)(74482002)(81156014)(75402003)(107886002)(19580405001)(92566002)(97736004)(50226002)(8676002)(33646002)(110136003)(4001430100002)(81166006)(450100001)(66066001)(68736007)(7736002)(5660300001)(47776003)(36756003)(42186005)(229853001)(106356001)(189998001)(101416001)(50466002)(7846002)(6116002)(48376002)(2906002)(4326007)(305945005)(5003940100001)(575784001)(3846002)(15975445007)(50986999)(86362001)(586003)(6916009)(142923001)(4720700001);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:AM3PR06MB356;
+	H:romanpc.dev.rtsoft.ru; FPR:; SPF:None; PTR:InfoNoRecords; A:1;
+	MX:1; LANG:en; 
 Received-SPF: None (protection.outlook.com: rtsoft.de does not designate
 	permitted sender hosts)
-X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; AM3PR06MB353;
-	23:l53MNjNujES2R7lyXiHbXu2jml5maNpRJ8KsscEiD2?=
-	=?us-ascii?Q?1FnWltPN711iBjDt7xR/6RWf0mXcBK9e6xQrWPMhs8JwXppcKebWAkDDAk7F?=
-	=?us-ascii?Q?xinT3fnm3KcqcX8KY2xZUyQrTQuvZqGoiscyurDZi3ki5RWSigaoTHqukO6i?=
-	=?us-ascii?Q?lND0rwNIaFt1IUUUDdl2ZOiEX3ieAhwqw1dQZslA0syd2UfLAqRVEFWf6TGN?=
-	=?us-ascii?Q?PtgA9M+LSAQEGu3LFYP61EbQktGBKbculre3OfR8jl7Ce9lJ0ph+NZZSDQV3?=
-	=?us-ascii?Q?vtM/WTjQuw6hbkH6UI5uiE4tkePEgR/+bUgBhBQkqYLhawFYgQ6UXkZwsPb7?=
-	=?us-ascii?Q?6h5UGSRAqynttzui9+a3ieGkmT/HIiP5eWbXvyYRGYLh+9UjssuwubKNQh7p?=
-	=?us-ascii?Q?W8oD85W/+F9yWCkDhQqkJmCsVSzIqo/3spWcEkAv4CFcxxlZvT0FT2vRpvuX?=
-	=?us-ascii?Q?26kCJ+vGYQIfQM89PNngLaZ++qvZQf/WhxTG+QVGx1tG7ebDMVqOls6Kis1+?=
-	=?us-ascii?Q?E8FnAzuzNJqedJjApLu5LXLs22/YYd/92aGlLKvHDh51k4VWbevgOn9m6t1j?=
-	=?us-ascii?Q?yQ2juRJGTg5B/2jzY4Le5DOzTBmLepdI+M9Iq3v+S/bLs8+yUAHaNh9D6xAM?=
-	=?us-ascii?Q?+hLFowXmly+H79QnSBIUlQNkGQB8AdKya7U4YTwd+P1ZhZkJ2n/j/qfNTphG?=
-	=?us-ascii?Q?/E4P0hj+52qNk8q7NFN6tYK+2iYB5nqqQJIRy5wVdu4YIImD2KAcbNlm6uEE?=
-	=?us-ascii?Q?06fOlihqrLGYDBYV99DdyOQwgK9rI67SxYiJAPzY4VrLT1CqVxNsvq83xjTk?=
-	=?us-ascii?Q?tvul4Ox3uY4LWyZHiHVdMsHtnLKvH/4yCGvRZUh3Peg8qd4cjHlBik4ampyN?=
-	=?us-ascii?Q?Z7QkoQxk+SI9r0wOumbJUq8444OdtSEhUJEfROtWi/I6S8NAQRnSi+79FD+c?=
-	=?us-ascii?Q?HIydK74moMRAPDUtKvBgoGl1Cx6E9Nebi6iK4Nn5b8lE4nyyBjcIJP1Kl5g+?=
-	=?us-ascii?Q?p1rrzeVIUHbblkmU7PbX/KTIhKBq/C+o+D32GDGwOsrm65a4qKu7GcaK+R9f?=
-	=?us-ascii?Q?3CvyEwo/tjYT/tBNqJ3KTD9j4yU4UGlAY1Dz+i1O9jLyMtn6ZgonPPwTFAXz?=
-	=?us-ascii?Q?4B2M+y8owH2oUvbczzzCR5Y6vN1puJUoj3zu0KKR1YMnrPbLGA1RZghPAX/k?=
-	=?us-ascii?Q?+Q2aropi3ursIc01komxPKmT8wLyI9bQKuGfuX74YvD4hBwGSDkHijph6tFe?=
-	=?us-ascii?Q?PUccEbq+BQG+bUL3xHPOyPF64hrpFs5EM1OHGD?=
-X-Microsoft-Exchange-Diagnostics: 1; AM3PR06MB353;
-	6:dTtNrgQRokFIdhS2rLqwQUoM8wiSWUXbEBNoSi9gn0M/sXAI7XOy0A9MFN9gIT6dczshx1vMRLOeOJ1tBSMduq0/yNSfuQOLcHvPTgf5ZSUCSBYRYPhCr3e2GNFmCMq7Rm/7Tv+6PWTJu8T+K2ChCkBAmE6Ni9fgAxHFu4TXzPxLKy+NLloRhP0iFBnOS5H/fEalys0g7W3LPHql1eKooA4Cb8U0QncB/T6vYm+2oFH/Brh/hm5ZkU+5bCp2aqqFkPN/z7ZBUdXkmd7mbNZO/YH9sEtINAbuvYDUTkXlhPogbi33Sh3Nc/B5q4lnWZFO;
-	5:47q1Vx2EuqFe7sB0R32DltBC/pJ9r/EKeiAPWxDRRlODmkJyufcVpB1q/3UKoULvPsStYId+twAvac1pinkjl6Gu5A1LIg8XMC6uiN6F1yWgpU7vAJO1W6DWnytM6w5K6uyoxSFOQBjc0CDhnBdiTw==;
-	24:9TSUGAqpAIF7bEzDYm2flzXtSMQbxs3x6yDvFcG+MhVMv1B0cMdVQTT523M64JlI2pLtfDwiR/V7xvAjWeEUcMj0H5WVn8X7t9PjaF/1hqg=;
-	7:ORpFn/znWZmoUqcFjnQGxzYDVu4mi99hbfqloTcNy9nBBWOQ+FH1SJx3P2IAyDSRWk2IXTb45eIJ33ruWyI/o8v2m9pR2NzxDzZpSEiXl9FBCOLzxE9ioTZ0lTLGKqsYzmtyFSjcrKXn+E4ocovpuJRhKaUd1LHa5XY0jzPxryZoe5elaWnapZfMoqzx6dQSZJWdLR3jeLHVYGSnbd6u87fHEFM7U24JzX03RBR1jLu70GaznFBcSiC0xk8608KmKPPC1+e+cm6Bi7pP/PAd2gyE8Mz+BB2nBIhLV2743SGOFaWLH6paWPFdl/pkjBLf
+X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; AM3PR06MB356;
+	23:pluoxppep9gIT8+DEe05GykQLJwAIWz4imJDlZChas?=
+	=?us-ascii?Q?toQr4D1HisjRiGhTYmYBXPlt0k3ptNCWr0P/ZXztSpyga0/oKBjwrxHP91jM?=
+	=?us-ascii?Q?pxuEbqNt/Vk7CxRe1kYYdFel+Pz06yUacsK4ZnLjpvSjQSUUamQ3DfKD4jEa?=
+	=?us-ascii?Q?0TA39q5PrPV7MHB3YBaPyY8aD+soitvxqxflmfELK21xaRcJApuCsMz8ggoH?=
+	=?us-ascii?Q?Qo6O5DKuh4RmqgpsPbTAgd8LG/bFHfqKuVz3tvXVXs2H7MMtj8cmDScIlQj+?=
+	=?us-ascii?Q?/U/Y2cptqoXlUYQWSVI8dZH7wU3ji8rQkJv4tLlot8jYSf74ESlhYAvQu4xr?=
+	=?us-ascii?Q?6BWlqIZ6nRLL3RIR5OkKj0/L87jhv2VBD9Yh/sQj9dER9qDz0HyKxHJZn3Wf?=
+	=?us-ascii?Q?8nUnYwNThptPRxJRjf4o1Vh9n7uJ26GHZ2z0UYAsYXdNynCXtzERfz6+egTC?=
+	=?us-ascii?Q?24EMnyeLJ/GxGrxWnh9dZMFQlMQHbzM1Pd5GmATq5pg4uQ6SH8F+4eGN1qvG?=
+	=?us-ascii?Q?LUilu6FMT6K2b5Q9Ic0pOAl75p2wCVFyK++YlO4cUG5JGLoLB8UTRsyOf6OH?=
+	=?us-ascii?Q?qWKihA/yOMdQMKHad0yaJtmrGSmiX0BMGjQZxpfkB8DHlVIFJWTR4LnB0yz0?=
+	=?us-ascii?Q?qy2fuTTcJq+Aq0f2BPYG1YPtkdeftJVi4fFp38d4hppRABRuDheelZCiBeXy?=
+	=?us-ascii?Q?cfsLlCIn9R3r6Pdndtn+VJslBiOsu2+4PL4nM82CBTPIDSxr2bg3gMBZVl4A?=
+	=?us-ascii?Q?jPFWwQRnJSQGKbhIONqjKmppXdVOzMRwOWxPGwg8ytF7RP1oBpqD69hn/XZV?=
+	=?us-ascii?Q?azD2l7XQxe2umcoSnmO4V7e16kKZeGQi1A67yHpM2aEF926tQrHHdpJMZzjb?=
+	=?us-ascii?Q?dH6a1wIqpfbv3CF7PJa1gXyAyLbKq0WY4/d3jQnzwmCr9fg02w70WsGE8rhd?=
+	=?us-ascii?Q?ZzjoMUEYA9PfI51ed3cqMdzoXNEVeAp9NcZl0WdE6baJWq3h7Y8SrO2WO1US?=
+	=?us-ascii?Q?g20bLkgKG5DbZ9nozxKpi9aFG4pORj1Z48xOz7dLrq3c/mrk+kXZchUyhL35?=
+	=?us-ascii?Q?wsqnLPDDzW01y1HRH0x9hZ9UkBaMpH1ey+p6c/GxgAVfHlhXn/giTC2iXjzj?=
+	=?us-ascii?Q?NMctSJ3NkhBLhplvwawmQq480upCnBtma52nJhUrRebwthb2hEFyHqBsufDz?=
+	=?us-ascii?Q?flRRFaP8Mzn30avP8Pm+fSDVAbO7ivzxjQ8JcMwqrC0Q+erKrPlPoOC5wHNH?=
+	=?us-ascii?Q?MxmcJwDg9jeMTzpSoBntGi3e3Ov6jbKOvrUKpP?=
+X-Microsoft-Exchange-Diagnostics: 1; AM3PR06MB356;
+	6:PcUUMrrAHQL1S7ie8Wleq0WTLoM6So49MN0UXq20Cm8qXaIkeFcKNlxTcu8uDmXNIu0rgy3TULUoiuyxE+X3fi2hEI9hZWl6DkXAIO2kpsKjXMMrhKJq/iVH0thuc1fTyj43nXWoR+50KYbykmfeuB0KIPr6HlISsu12rBEh68gLCbtWFQK4+D7DaVZrIA8oI7Em0/XJlDZqzs/o7OF5qx8ZrrU9PYaQSD6jdZlIFpb/jbu0BTeHuTB7muLCXwOlYlQ7dcZJJSG0W1Pav/uOpUX9fC9SfGmdfKylU4IglT1VE32QWk2pYNhxN0zaGoGT;
+	5:P9hVz6rCr4Qe2mfZMHyT4k3QRVXuf93RG30r9YsaCrUiLrBbH7fYGqiZCqk/BDHXrAHji7gljXfr9r30BJMP6OKT+VUVFeRBYZLRd30bp1FV9n/WVj+qjL/YqWa05rVRJPzMbR3/ZekXtFPsocfOYA==;
+	24:fVhx9HZKEC+vrzKssjnFe/R78FK3Z677IMEV+OdCwx6W97z7pjbtqDoCSTzeM9x0Z8vpEruOM/MMBjTB1/CMggK4S7AJyirVY4IkgaeD7es=;
+	7:rJRKthgNhvGA+13H6HY1OHjzU6CU3Pyi2jCjFz08ezN/xYP8m4U07PXtF8ni9bZ2Y2YOFW4De56tmlqIsGB7fNDBtz3wgspXTEHL52xDAWEa350N2At14cEXe3eo3m8XmktLcZNjTV147GqqWzznzag8/hkVpaFFM5EYJcxEcHrkZw/JtvoIdc7wAPSxvEAfS0QNNL/y7ZtoEUP3I9/p76ooPWFAT9aHiHcA3nardfN+q9v3+v+RgHepJlKpIEUDaqS+x5hCFwdku4WJ8WN3ReG8fKZM4YoELeWm8DkeZf0X+vyWN2mXhzV+w7jFVAv7
 SpamDiagnosticOutput: 1:99
 SpamDiagnosticMetadata: NSPM
 X-OriginatorOrg: rtsoft.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2016 16:08:12.2242 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2016 16:44:04.6553 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM3PR06MB353
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM3PR06MB356
 Subject: [meta-networking][PATCH] mbedtls: separate general .inc and version-specific recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -97,7 +100,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Sep 2016 01:39:59 -0000
+X-List-Received-Date: Sat, 24 Sep 2016 11:19:21 -0000
 Content-Type: text/plain
 
 The patch proposes to separate general part of mbedtls recipe into .inc
