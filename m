@@ -1,46 +1,48 @@
-Return-Path: <liu.ming50@gmail.com>
-Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
-	[209.85.215.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 35B2F600BB
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
+	[209.85.215.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 2561660602
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Sep 2016 16:21:29 +0000 (UTC)
-Received: by mail-lf0-f66.google.com with SMTP id s29so9763719lfg.3
+	Mon, 26 Sep 2016 20:34:18 +0000 (UTC)
+Received: by mail-lf0-f68.google.com with SMTP id s29so10842671lfg.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Sep 2016 09:21:31 -0700 (PDT)
+	Mon, 26 Sep 2016 13:34:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=SCsf/+yKeC9apGhY+RlG4Y67haPrlOWU9UtN8nTnpus=;
-	b=wPMl6z1Jath9lznW8ynyRGKzi+XdgHhRpsmGrQ4f3yUwq4pucQ+gcMc66anZGwZTUi
-	uOcjGyv7GlZcNupwjuBw3rwGoejm5crRUPiNfJlQKtj9c3XcGZWFAwUEmvM4mli6ALgI
-	nr7g5HCzOLC6VdeO0L/wblAEXCcP6q8s/Wr/ha8B82K+F0B/c3LY6r9wJJe9SiH6AIRM
-	cXGF7qTFogbPGvXbOOrIbzeXsNZ1a5PZAwYult7NVym3B44YJgkbiuMwd9Txq/CI2Kdt
-	qh3MlapSTCD1p1+JsoEwPQl6icY9T2JLIRRnI5QA+owlHiGPcc+HDerwpghCaM/5v5JO
-	QakQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=3PzwgGef8nmJ5mlydDSN9DJg3itnHXKqkUIc1ODN0FI=;
+	b=hnAxR9wlvw6kvey4lekX/FHEhfij7quyujyu5Rb9eYvbAxvwZD9JhoT0SYWJorRPEQ
+	S3C4AFzvypEAq+IiPZ2RlMwK4qA3aAjW2kK9rK6ZM+EqiWJ7PmAu7rvTwFZacibvQXu0
+	ovPR9qNWEDRaVQ9fK8Nwasyw4VTabW28e8LQhx4uH9UMwbzAF5A6/z9LXAT1naiTLXLq
+	jp8xJOb+vkgwgBdA7623smxdQu+NuQe70mAhVWBcUhKW+msdiNBHIGzH7SVPp9o647cn
+	LqY6eZv+aXwsu+Vdrd9D+VVlMPvv3S8cBE64rAy0fdr3sfeIwd63yFGbImfdyGkM9Rqy
+	yOVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=SCsf/+yKeC9apGhY+RlG4Y67haPrlOWU9UtN8nTnpus=;
-	b=gBYJ/F9zKpYc0/JOM/KG3CUoFLz1gpKvAu640Tc60mJW8gLYOmh+nxaKIhcRoahYfV
-	DKXnfdC/tiqxtRYqZqOJyo/oPJcxubaDHQrAqQsFp1aRaciy+ggtBSs4pcVuZMl31RA9
-	12f0lFF6wocyYrcQbicJzZHMGEEUhdmTVsz6/bhpATtLpw3rrZUgnm3RF196GsZk0Bvj
-	qqCu3Uesjk+PyAbc0ikXprbZvueY0IARTd6HS7e6CLIlMR6LxzOzlctFuZ1865D8p9cX
-	Jdn6TiLstElOG7gcpc80L9nlfaY8QbKpUwkhlrr+WEIBfZ8jA6/jea9itdNZQlen5sds
-	CdDQ==
-X-Gm-Message-State: AE9vXwPJ0QFx6kZBDWL+IgYGvK62waqooibb/pxw47B8z9u+zuQnFoYRfMkO2eU0YFgrYg==
-X-Received: by 10.25.16.35 with SMTP id f35mr6342728lfi.160.1474906890062;
-	Mon, 26 Sep 2016 09:21:30 -0700 (PDT)
-Received: from localhost.localdomain (m77-218-250-198.cust.tele2.se.
-	[77.218.250.198])
-	by smtp.gmail.com with ESMTPSA id e3sm3865958lji.31.2016.09.26.09.21.28
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 26 Sep 2016 09:21:28 -0700 (PDT)
-From: liu.ming50@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Sep 2016 18:21:32 +0200
-Message-Id: <1474906892-3842-1-git-send-email-liu.ming50@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Cc: yue.tao@windriver.com, Ming Liu <peter.x.liu@external.atlascopco.com>
-Subject: [meta-networking] [PATCH] atftp: fixes musl libc build
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=3PzwgGef8nmJ5mlydDSN9DJg3itnHXKqkUIc1ODN0FI=;
+	b=GGj7anKujyZ3lIcJE7K2oPgKRZxTr17IJDdP+cN8yfQw4mMCbxbzOI6EvZ6NvwgZIi
+	r5r29Jf7UKG5W+hMT8RBPznXn601+q+A4aVoWKpniiqrzD4zPzwM/cnRc6Amr72SLFLb
+	+O1sbDuAehw+bvK5OxpNCOg42zZzsjgK14CKxpBzbLSGI/iKHs7QYYa+2bBjzd2RGKTK
+	j6KNhU5VBBgTPkOJ1vTQ9sLIiiYURd01mwEBprMPt4qctFH1QAgfOquIOb2ttAuRvNdW
+	ISCn8ZdQf90/cYA59q0ZDAllF9db5iBT1pKOtPiGNhfi6wN/UFKB4/nO9rTChWiK0+tF
+	woYQ==
+X-Gm-Message-State: AA6/9RnFX31eV3STTys84U7CbRJCan/OgndEOXg/UvxUUT8780KRTHRo4UUkhl4vCae/LKNrtWKFP4TlGQ4t6w==
+X-Received: by 10.28.54.193 with SMTP id y62mr14972465wmh.96.1474922058872;
+	Mon, 26 Sep 2016 13:34:18 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.80.130.68 with HTTP; Mon, 26 Sep 2016 13:34:18 -0700 (PDT)
+In-Reply-To: <CAMKF1so4gZ9zYqS17E-xRq0U-bu27aiv6v_EiR2zc3OqCgDSYg@mail.gmail.com>
+References: <1474634029-22896-1-git-send-email-mike.looijmans@topic.nl>
+	<CAMKF1srhhYfYO69noEU30+66yDX8cLNbEB7tpJhkubKwjPoevw@mail.gmail.com>
+	<57E69552.9040209@topic.nl>
+	<CAMKF1so4gZ9zYqS17E-xRq0U-bu27aiv6v_EiR2zc3OqCgDSYg@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 26 Sep 2016 22:34:18 +0200
+Message-ID: <CA+chaQcftFerFC0S9_+XwsZqZ6EAMtdfOjGj5yjoy2mut9wO0Q@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-networking][PATCH] phytool: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,138 +55,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Sep 2016 16:21:30 -0000
+X-List-Received-Date: Mon, 26 Sep 2016 20:34:21 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Ming Liu <peter.x.liu@external.atlascopco.com>
+2 more issues:
 
-The patches derive from buildroot:
-https://git.busybox.net/buildroot/commit/?id=ef33c008e3c5048d1442f8b0f6336db2fa8d79a1
+WARNING: phytool-1.0.1-r0 do_populate_lic: Could not copy license file
+phytool/1.0.1-r0/git/COPYING to
+phytool/1.0.1-r0/license-destdir/phytool/COPYING: [Errno 2] No such
+file or directory: 'phytool/1.0.1-r0/git/COPYING'
+ERROR: phytool-1.0.1-r0 do_populate_lic: QA Issue: phytool:
+LIC_FILES_CHKSUM points to an invalid file:
+phytool/1.0.1-r0/git/COPYING [license-checksum]
+NOTE: recipe phytool-1.0.1-r0: task do_populate_lic: Succeeded
+...
 
-Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
----
- ...gz.h-fix-musl-compile-add-missing-defines.patch | 45 ++++++++++++++++++++++
- ...-tftpd.h-fix-musl-compile-missing-include.patch | 43 +++++++++++++++++++++
- meta-networking/recipes-daemons/atftp/atftp_git.bb |  4 ++
- 3 files changed, 92 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/atftp/atftp/0001-argz.h-fix-musl-compile-add-missing-defines.patch
- create mode 100644 meta-networking/recipes-daemons/atftp/atftp/0002-tftp.h-tftpd.h-fix-musl-compile-missing-include.patch
+NOTE: recipe phytool-1.0.1-r0: task do_package_qa: Started
+ERROR: phytool-1.0.1-r0 do_package_qa: QA Issue: No GNU_HASH in the
+elf binary: 'phytool/1.0.1-r0/packages-split/phytool/usr/bin/phytool'
+[ldflags]
+ERROR: phytool-1.0.1-r0 do_package_qa: QA Issue: No GNU_HASH in the
+elf binary: 'phytool/1.0.1-r0/packages-split/phytool/usr/bin/phytool'
+[ldflags]
+ERROR: phytool-1.0.1-r0 do_package_qa: QA run found fatal errors.
+Please consider fixing them.
+ERROR: phytool-1.0.1-r0 do_package_qa: Function failed: do_package_qa
 
-diff --git a/meta-networking/recipes-daemons/atftp/atftp/0001-argz.h-fix-musl-compile-add-missing-defines.patch b/meta-networking/recipes-daemons/atftp/atftp/0001-argz.h-fix-musl-compile-add-missing-defines.patch
-new file mode 100644
-index 0000000..cfa8a73
---- /dev/null
-+++ b/meta-networking/recipes-daemons/atftp/atftp/0001-argz.h-fix-musl-compile-add-missing-defines.patch
-@@ -0,0 +1,45 @@
-+From 543e67919f5cacf309ac88ab091331e41af4224b Mon Sep 17 00:00:00 2001
-+From: Peter Seiderer <ps.report@gmx.net>
-+Date: Thu, 16 Apr 2015 22:41:57 +0200
-+Subject: [PATCH] argz.h: fix musl compile (add missing defines)
-+
-+Upstream-Status: Pending
-+
-+Add __THROW, __BEGIN_DECLS, __END_DECLS and __attribute_pure__ defines.
-+
-+Signed-off-by: Peter Seiderer <ps.report@gmx.net>
-+Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
-+---
-+ argz.h | 16 ++++++++++++++++
-+ 1 file changed, 16 insertions(+)
-+
-+diff --git a/argz.h b/argz.h
-+index 582be55..bdf9f62 100644
-+--- a/argz.h
-++++ b/argz.h
-+@@ -48,6 +48,22 @@
-+ # define __const const
-+ #endif
-+ 
-++#ifndef __THROW
-++# define __THROW
-++#endif
-++
-++#ifndef __BEGIN_DECLS
-++# define __BEGIN_DECLS
-++#endif
-++
-++#ifndef __END_DECLS
-++# define __END_DECLS
-++#endif
-++
-++#ifndef __attribute_pure__
-++# define __attribute_pure__
-++#endif
-++
-+ #ifndef __error_t_defined
-+ typedef int error_t;
-+ #endif
-+-- 
-+2.1.4
-+
-diff --git a/meta-networking/recipes-daemons/atftp/atftp/0002-tftp.h-tftpd.h-fix-musl-compile-missing-include.patch b/meta-networking/recipes-daemons/atftp/atftp/0002-tftp.h-tftpd.h-fix-musl-compile-missing-include.patch
-new file mode 100644
-index 0000000..093054c
---- /dev/null
-+++ b/meta-networking/recipes-daemons/atftp/atftp/0002-tftp.h-tftpd.h-fix-musl-compile-missing-include.patch
-@@ -0,0 +1,43 @@
-+From 77e399899d9d7297d23c321811b628febdf0fd92 Mon Sep 17 00:00:00 2001
-+From: Peter Seiderer <ps.report@gmx.net>
-+Date: Thu, 16 Apr 2015 22:43:49 +0200
-+Subject: [PATCH] tftp.h/tftpd.h: fix musl compile (missing include)
-+
-+Upstream-Status: Pending
-+
-+Add sys/types.h include for u_char typedef.
-+
-+Signed-off-by: Peter Seiderer <ps.report@gmx.net>
-+Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
-+---
-+ tftp.h  | 1 +
-+ tftpd.h | 1 +
-+ 2 files changed, 2 insertions(+)
-+
-+diff --git a/tftp.h b/tftp.h
-+index 12bd6aa..32a3f63 100644
-+--- a/tftp.h
-++++ b/tftp.h
-+@@ -19,6 +19,7 @@
-+ 
-+ #include <sys/time.h>
-+ #include <sys/times.h>
-++#include <sys/types.h>
-+ #include "tftp_def.h"
-+ #include "config.h"
-+ 
-+diff --git a/tftpd.h b/tftpd.h
-+index 945065e..60d3a49 100644
-+--- a/tftpd.h
-++++ b/tftpd.h
-+@@ -20,6 +20,7 @@
-+ #include <pthread.h>
-+ #include <arpa/tftp.h>
-+ #include <arpa/inet.h>
-++#include <sys/types.h>
-+ #include "tftp_io.h"
-+ 
-+ /*
-+-- 
-+2.1.4
-+
-diff --git a/meta-networking/recipes-daemons/atftp/atftp_git.bb b/meta-networking/recipes-daemons/atftp/atftp_git.bb
-index b222c34..a9949d5 100644
---- a/meta-networking/recipes-daemons/atftp/atftp_git.bb
-+++ b/meta-networking/recipes-daemons/atftp/atftp_git.bb
-@@ -15,6 +15,10 @@ SRC_URI = "git://git.code.sf.net/p/atftp/code \
-            file://atftpd.service \
-            file://atftp-0.7-sorcerers_apprentice.patch \
- "
-+SRC_URI_append_libc-musl = " file://0001-argz.h-fix-musl-compile-add-missing-defines.patch \
-+                             file://0002-tftp.h-tftpd.h-fix-musl-compile-missing-include.patch \
-+                           "
-+
- S = "${WORKDIR}/git"
- 
- inherit autotools update-rc.d systemd
--- 
-1.9.1
 
+On Mon, Sep 26, 2016 at 9:31 AM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> On Sat, Sep 24, 2016 at 8:01 AM, Mike Looijmans <mike.looijmans@topic.nl>
+> wrote:
+> > On 23-09-16 20:33, Khem Raj wrote:
+> >>
+> >> On Fri, Sep 23, 2016 at 5:33 AM, Mike Looijmans <
+> mike.looijmans@topic.nl>
+> >> wrote:
+> >>>
+> >>> A nice tool to directly read, write and interpret ethernet PHY data.
+> >>> Very useful when debugging PHY or MDIO problems, which ethtool does
+> >>> not do.
+> >>>
+> >>> Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
+> >>> ---
+> >>>   meta-networking/recipes-support/phytool/phytool.bb | 14
+> ++++++++++++++
+> >>>   1 file changed, 14 insertions(+)
+> >>>   create mode 100644 meta-networking/recipes-support/phytool/
+> phytool.bb
+> >>>
+> >>> diff --git a/meta-networking/recipes-support/phytool/phytool.bb
+> >>> b/meta-networking/recipes-support/phytool/phytool.bb
+> >>> new file mode 100644
+> >>> index 0000000..9d541b7
+> >>> --- /dev/null
+> >>> +++ b/meta-networking/recipes-support/phytool/phytool.bb
+> >>> @@ -0,0 +1,14 @@
+> >>> +SUMMARY = "PHY interface tool for Linux"
+> >>> +LICENSE = "GPLv2"
+> >>> +LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae1
+> 9f"
+> >>> +
+> >>> +PV = "1.0.1"
+> >>> +SRCREV = "1a3ea62a218206e9faf3b27fb5d01c85692024c8"
+> >>> +SRC_URI = "git://github.com/wkz/phytool.git"
+> >>> +
+> >>> +S = "${WORKDIR}/git"
+> >>> +
+> >>> +do_install() {
+> >>> +       install -d ${D}${prefix}/bin
+> >>
+> >>
+> >> perhaps use base_bindir here
+> >
+> >
+> > The makefile installs to $PREFIX/bin so I deliberately put the same
+> folder
+> > in the recipe (the makefile doesn't create the directory). If anyone
+> changes
+> > $bindir the install will fail.
+>
+> I see the logic,  if you dont want to use bitbake variables then perhaps
+> its
+> good to add a comment to explain why it was not done
+>
+> >
+> >>
+> >>> +       oe_runmake 'DESTDIR=${D}' 'PREFIX=${prefix}' install
+> >>> +}
+> >>> --
+> >>> 1.9.1
+> >>>
+> >>> --
+> >>> _______________________________________________
+> >>> Openembedded-devel mailing list
+> >>> Openembedded-devel@lists.openembedded.org
+> >>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> >
+> >
+> > --
+> > Mike Looijmans
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
