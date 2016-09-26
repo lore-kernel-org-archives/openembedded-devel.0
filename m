@@ -1,26 +1,52 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8919B60102
+Return-Path: <samuli.piippo@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id A0B2660796
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Sep 2016 05:35:10 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u8Q5ZChP015322
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 26 Sep 2016 05:54:16 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id l132so12303807wmf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Sep 2016 22:35:12 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Sun, 25 Sep 2016 22:35:11 -0700
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 26 Sep 2016 13:31:21 +0800
-Message-ID: <1474867881-15637-4-git-send-email-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.8.1
-In-Reply-To: <1474867881-15637-1-git-send-email-mingli.yu@windriver.com>
-References: <1474867881-15637-1-git-send-email-mingli.yu@windriver.com>
+	Sun, 25 Sep 2016 22:54:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=0hg8tSD7DT6IS8BoLajR8etmMCJT2e06Hk+UIilQEBc=;
+	b=BETt1ydvieMr7foczjVpIfA2G7Vg26hwrz3S+Qjlrw29NqOmJhNT3QVNWs/iH0EpS8
+	ebTtJdGjIZAxHkpnwBdnK/h7POjGOilGIxXYzNoFxWbnd9Hn3vZli1TUn/ArtHV19Cqh
+	KwsM63LdTAR1hndRvcCuFe8MRz6NXsZOE/qcqjYrIGXx2esLmQkaQoDTN0cMd493Vq6x
+	NZkqluVN5Eva0nLhnOqdQiqFmjVLmhrNd0FK5H4qdb1omT8LyO1+wpE/lQyIbG+1UWnD
+	giffxOMrJz6jgJVSTLtJSMLJHusFQ3Iu5l3XpsxVSET8Z6UezAeiRNag55nFHULV+Fkq
+	430A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=0hg8tSD7DT6IS8BoLajR8etmMCJT2e06Hk+UIilQEBc=;
+	b=jRdpaPJKsHOLuKbqCe/ATPr4hUBQmgFAT1oQfrH22lMmH4XZkSx1WSc1xYvogj5u0O
+	CwoPyMXvK+eqBVFg+63Md69zrY+egg1AesnC7N0WoVxkKhTPg3ru4z4RCnebbTrxfja2
+	8QKPDXEqYl65FCSscEvAdeEY/y8nyXzxdxw+xe5B6abi7e3neZWn5fiYcLk/VxHgLB7c
+	gaYGGfC6JWq2/EfQpTbjqXralekmb0cIxxfKjzW0hixHAIeWRIO6DEN5KM1MJlkfXJDm
+	vLpnXg6LF0ZGtr/9MVwaXpt7eKW5SLup0AkOqO6NerkEq80Lu8/bHX4D/I2zS2GFsDaC
+	nQ7w==
+X-Gm-Message-State: AA6/9RmWnGHiT7IzfGlsynKAkWYKQ3mabnnxzPZddaJCHg+z6kH7n9QuLnVJ8nTU/Ndv7A==
+X-Received: by 10.28.50.199 with SMTP id y190mr13183638wmy.61.1474869256892;
+	Sun, 25 Sep 2016 22:54:16 -0700 (PDT)
+Received: from [10.9.21.51] ([192.89.120.53])
+	by smtp.googlemail.com with ESMTPSA id
+	bl3sm20375785wjc.26.2016.09.25.22.54.15
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 25 Sep 2016 22:54:15 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org
+References: <1474790089-17176-1-git-send-email-dachaac@gmail.com>
+	<8b791747-fcdb-93e4-2941-f020722f03ef@gmail.com>
+From: Samuli Piippo <samuli.piippo@gmail.com>
+Message-ID: <e6052030-7344-9698-7f0c-6e1b9293c7af@gmail.com>
+Date: Mon, 26 Sep 2016 08:54:24 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.3.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2 3/3] libdbd-mysql-perl: add new recipe
+In-Reply-To: <8b791747-fcdb-93e4-2941-f020722f03ef@gmail.com>
+Subject: Re: [meta-qt5][krogoth][PATCH] qtwayland: Fix building of QWaylandIntegration if some Qt5 features are disabled.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,52 +59,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Sep 2016 05:35:10 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 26 Sep 2016 05:54:16 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-From: Mingli Yu <Mingli.Yu@windriver.com>
+On 25.09.2016 12:37, Vesa Jääskeläinen wrote:
+> On 25/09/2016 10.54, Vesa Jääskeläinen wrote:
+>> QPlatformIntegration's interface methods are disabled based on
+>> QT_NO_OPENGL,
+>> QT_NO_CLIPBOARD, QT_NO_DRAGANDDROP, QT_NO_ACCESSIBILITY and
+>> QT_NO_SESSIONMANAGER, these has to be taken into account when compiling
+>> QtWayland.
+>>
+>> Signed-off-by: Vesa Jääskeläinen <dachaac@gmail.com>
+>> ---
+>>   recipes-qt/qt5/qtwayland-native_git.bb             |   1 +
+>>   ...g-of-QWaylandIntegration-if-some-Qt5-feat.patch | 156
+>> +++++++++++++++++++++
+>>   recipes-qt/qt5/qtwayland_git.bb                    |   1 +
+>>   3 files changed, 158 insertions(+)
+>>   create mode 100644
+>> recipes-qt/qt5/qtwayland/0001-Fix-building-of-QWaylandIntegration-if-some-Qt5-feat.patch
+>>
+>>
+> FYI: I have sent upstream PR but no response within a week:
+> https://github.com/qt/qtwayland/pull/1
+>
+>
 
-* Add new recipe libdbd-mysql-perl as mariadb-server
-  rdepends on it
-
-Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
----
- .../perl/libdbd-mysql-perl_4.036.bb                | 25 ++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.036.bb
-
-diff --git a/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.036.bb b/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.036.bb
-new file mode 100644
-index 0000000..f5dbef2
---- /dev/null
-+++ b/meta-oe/recipes-devtools/perl/libdbd-mysql-perl_4.036.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "A Perl DBI driver for MySQL"
-+DESCRIPTION = "DBD::mysql is the Perl5 Database Interface driver for \
-+the MySQL database. In other words: DBD::mysql is an interface between \
-+the Perl programming language and the MySQL programming API that comes \
-+with the MySQL relational database management system. Most functions \
-+provided by this programming API are supported. Some rarely used \
-+functions are missing, mainly because no-one ever requested them. \
-+"
-+HOMEPAGE = "http://search.cpan.org/~michielb/DBD-mysql-4.036/lib/DBD/mysql.pm"
-+
-+SECTION = "libs"
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+DEPENDS += "libdbi-perl-native libmysqlclient"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d0a06964340e5c0cde88b7af611f755c"
-+
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MI/MICHIELB/DBD-mysql-${PV}.tar.gz \
-+"
-+
-+SRC_URI[md5sum] = "fdee1d8dc4ae54bc6cb7cd5a3f3d3342"
-+SRC_URI[sha256sum] = "5c48a823f86b8110ccb6504c6176ca248b52f56829dd4548bc39c3509f4154cf"
-+
-+S = "${WORKDIR}/DBD-mysql-${PV}"
-+
-+inherit cpan
--- 
-2.8.1
-
+FYI: All commits to Qt modules must go through Qt Gerrit 
+(codereview.qt-project.org), github is used only as a mirror.
 
