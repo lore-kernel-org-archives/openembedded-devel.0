@@ -1,24 +1,44 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 57675606B3
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-vk0-f51.google.com (mail-vk0-f51.google.com
+	[209.85.213.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 1CEAB60620
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Sep 2016 07:47:48 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u8Q7loM3027255
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 26 Sep 2016 07:53:20 +0000 (UTC)
+Received: by mail-vk0-f51.google.com with SMTP id z126so43676264vkd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Sep 2016 00:47:50 -0700 (PDT)
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.181) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Mon, 26 Sep 2016 00:47:49 -0700
-From: <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 26 Sep 2016 15:47:48 +0800
-Message-ID: <1474876068-6032-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Mon, 26 Sep 2016 00:53:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=nAfkYxXr4QXB+QKLJF/5BbezU46IR+vG2C6w3CfpJSY=;
+	b=z4IOra/7W9hb3Wr0OKNqGZR+l1G3Kj5fEBMz/iV6J3UsYbNrr0uqoZLe4sHy0BufcD
+	R8Q9+dTwkmfFwfEXudA/H7DaWeS0jXAdMGZq5paDFBIEsdIuG53vwGud1e4pxGYLPTDg
+	chVsTg16KfhmjDP1/NUW2z9MIvvSzrS9Fm9jjDVMsD8NoCxbNIIfdm65fzeFGEVKy+GH
+	0AEtG8fVCWLUMX3onQX6lCwdZbh7DdzPX0O82iD00F/GSHQ8Q7a6ZEmDn3wAZWsChgTX
+	+TDjKdhs5D3HeTXczjRRKggaodUWJvPSjObqMFdFYbgabLpiaCdx8EkFkNmZkRAq2REf
+	I3rg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=nAfkYxXr4QXB+QKLJF/5BbezU46IR+vG2C6w3CfpJSY=;
+	b=ebcm++UDacY0SbdPrapoa9GN5ImtHxzEtrvNOQqIsK4fcW+52w5Ifa5jedTQovG4yc
+	PCzu5j/dXKxApIC/VXQ/BWRHnREDcS1tuKSCOhDhpuWo1kISd5DLZFJrfFQ4gIkI1/ym
+	07gGNqc7uEEeEJOHU4uswd9zPAFan/9UpzeZAjATYlEqBwVx3jiWDvqmNgf9p9U4/oE9
+	VREP51+TA7tsHWObErZTrPO6bFlHW6IxDTJQOaA5rm+4UWW/Jhcqc8RB8MznrB+j1uO2
+	f6hVi7h/4o0W4QoWCuO8C20to3OMN75KK1McgMZ41udy25xIFaduNV08ZgUEg2Aba3Xj
+	cIXg==
+X-Gm-Message-State: AA6/9RmB75ixJ2i5Ft02w0MHxLBXtZGZh8f7mE8JlIk2pX5QaZHWnjeKy1ua0iQTtPG2HSdvyvLBoIcOo58dow==
+X-Received: by 10.31.15.85 with SMTP id 82mr5706782vkp.93.1474876402007; Mon,
+	26 Sep 2016 00:53:22 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] gperftools: fix to work on aarch64
+Received: by 10.176.80.33 with HTTP; Mon, 26 Sep 2016 00:52:51 -0700 (PDT)
+In-Reply-To: <1474876068-6032-1-git-send-email-Qi.Chen@windriver.com>
+References: <1474876068-6032-1-git-send-email-Qi.Chen@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 26 Sep 2016 00:52:51 -0700
+Message-ID: <CAMKF1so1UVpnG2nQhSuOVXssf1SP+eAg2mHDn_j030e8XdmESQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] gperftools: fix to work on aarch64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,33 +51,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Sep 2016 07:47:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 26 Sep 2016 07:53:22 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Chen Qi <Qi.Chen@windriver.com>
+On Mon, Sep 26, 2016 at 12:47 AM,  <Qi.Chen@windriver.com> wrote:
+> +EXTRA_OECONF_aarch64 += "--disable-libunwind"
 
-Add '--disable-libunwind' to make it work on aarch64. This would avoid
-system hanging when using libtcmalloc.so.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- meta-oe/recipes-support/gperftools/gperftools_2.5.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.5.bb b/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
-index 1572d4c..2e4479c 100644
---- a/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
-+++ b/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
-@@ -14,5 +14,6 @@ inherit autotools
- # On mips, we have the following error.
- #   do_page_fault(): sending SIGSEGV to ls for invalid read access from 00000008
- #   Segmentation fault (core dumped)
--# On aarch64, system hangs when using libtcmalloc.so.
--COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64|arm).*-linux*"
-+COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64|arm|aarch64).*-linux*"
-+# On aarch64, add this option to avoid system hanging when using libtcmalloc.so.
-+EXTRA_OECONF_aarch64 += "--disable-libunwind"
--- 
-1.9.1
-
+use append += is undocumented
 
