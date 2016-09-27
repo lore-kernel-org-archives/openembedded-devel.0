@@ -1,52 +1,52 @@
 Return-Path: <schnitzeltony@googlemail.com>
 Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
 	[209.85.215.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 02DEA607B3
+	by mail.openembedded.org (Postfix) with ESMTP id 4FF6D6078E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Sep 2016 05:55:55 +0000 (UTC)
-Received: by mail-lf0-f66.google.com with SMTP id s64so700583lfs.2
+	Tue, 27 Sep 2016 05:55:56 +0000 (UTC)
+Received: by mail-lf0-f66.google.com with SMTP id s29so694663lfg.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Sep 2016 22:55:57 -0700 (PDT)
+	Mon, 26 Sep 2016 22:55:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=Vb5Yu71Rr1lVfUypMMmom/11JcVpWE3Gu5mq9v1gmvE=;
-	b=ImzKJPWjyi04FQ34wzajOFSQg2anEyOLelM67R/bez9k/Vi7OBHPi/MYCezAMSfk7i
-	BSbF1Uq7oE6GdWvHSHYFpDO24tHBTmGZXSKkrurbGw+5fuXz0mKn5zkO1qpSNNyqEomG
-	k7vQXqzXHLguENfFpD2Tzn5DNSAhST5EyerXoX/SVH9iNcIg14MTECGfsKV49fvUipC2
-	lTf+QDnCSurgUgPv50r8dcrI8pN7A1KcF4W6ZhzfC619wb1JzedyzuG1xULj+SaPbuls
-	5UhzjOmr9xEZrCVulp4Mq/8dzeKSCcYetQTUhBLfh+NnbNq6nXJKquoyGCryvtmBkj42
-	rlMA==
+	bh=u8tPIPYJSo/DZDf9XZr9L0eVh2PeZi7Y+Z5kS2WQ/hY=;
+	b=VnmHt72rleYdiK0fD1YW4nOvFviky0rWCm1jtXOfYFmT46flL2eaOMR4ML0PF+xVf1
+	P2nQFqap++gSjHG4smop0/Ix3xj71XIr/OenTh2NcA7WMEEuP3A9TXajmEb7TqIgPRhP
+	piscXdSczxYUhUeEM7wisDaraYnAMi90mkmedUSyu+xyIMGR9Ohtuh7Cy0DledG3P6bp
+	EwiGX2vOFKFcJIE1Z1WLj4HhIAVQLOcfVN7SYyIMh1p+ltaP7463VVdrVbkaR29ChA1V
+	7uo310+6e4CuHR0+3I64Zj5d4Hd12w5ku/Xi3toSguzXZN36Gsk5CeVlv7jyt3z+kni5
+	t9qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=Vb5Yu71Rr1lVfUypMMmom/11JcVpWE3Gu5mq9v1gmvE=;
-	b=RjdCCXeOQmyuTTXK29ab63kSK3soULjFZHRz+XHw5UshI+ewWlyqXkZYO3i5LLY6IM
-	JsVWgv+VFlqjEmE4+SXvgm0qF485tfr1SVgC8D/ckQg6LBdOHTtgKxz/CcjYYghQBZnL
-	CLUog8hQYP163TjQ296I2bh3NVGn9yfNC0Za0MDCFYrcR45LXKHF0Jz+Lr7n7fzU6EYq
-	SaXWdQFd0RpsyGYEn3bujTC8XnEPSLjGxiKvK0jcsRWuevKSXicth//jyrr84Mq9jB8Q
-	xZVo32WvktvGqVtlU7PX8FH6/74CAEdquLLNs3KCAbhBrBBdXjTeDhDO76XA+RgOJgzo
-	herw==
-X-Gm-Message-State: AE9vXwPoPEzkZ1+6MAKKlE58qhTiwyG6VBvLNwPVGlIEa1vHP3TIeNRRXPercOLTshAH+w==
-X-Received: by 10.194.161.166 with SMTP id xt6mr24238656wjb.165.1474955756364; 
-	Mon, 26 Sep 2016 22:55:56 -0700 (PDT)
+	bh=u8tPIPYJSo/DZDf9XZr9L0eVh2PeZi7Y+Z5kS2WQ/hY=;
+	b=k6hpVUUWmzQgKEK++S0zheGATe7ROc6SdWCS5HH6xB/t8yDgACD+VSEke+3kRvxJFp
+	SyjbqjV0umR2N+IJ3VwcXeO8q+vw4Qmt+YLlrRnFP5xL7UjketHgbnlddfXqayfHGXEV
+	2ALp873J26xXZLC0vyLws+y4i2IQSiYRAXtkVZWRnea9TmlzoZFb41KyjfzdZoK+g98q
+	AoXvE/kOkonhEHnHI1IcWmFDBy8kjaP+Nr2Gc86Lx8jA1e+Q+YPOQxR56vynjBkU7PHa
+	EOYSoGw9mRipktB8EYFc6tBjToMosjDnpFhWbKg039U6plBS2gDzEdmyO1EmL4DRcLKg
+	U20g==
+X-Gm-Message-State: AE9vXwNWrGi3gCY0zUku6MRlOqPXgbJUcmkEQAmFZrldUM6plOR0pZTyMfBygl40hRO1Cg==
+X-Received: by 10.194.178.130 with SMTP id cy2mr20592572wjc.138.1474955757095; 
+	Mon, 26 Sep 2016 22:55:57 -0700 (PDT)
 Received: from localhost.localdomain (p4FDF068E.dip0.t-ipconnect.de.
 	[79.223.6.142]) by smtp.googlemail.com with ESMTPSA id
-	f15sm1156668wmf.8.2016.09.26.22.55.55
+	f15sm1156668wmf.8.2016.09.26.22.55.56
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 26 Sep 2016 22:55:55 -0700 (PDT)
+	Mon, 26 Sep 2016 22:55:56 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Sep 2016 07:55:32 +0200
-Message-Id: <1474955733-30185-9-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue, 27 Sep 2016 07:55:33 +0200
+Message-Id: <1474955733-30185-10-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
 In-Reply-To: <1474955733-30185-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1474955733-30185-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 8/9] poppler: update to 0.47.0
+Subject: [PATCH 9/9] physfs: move to sources found at github/supertux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,87 +63,96 @@ X-List-Received-Date: Tue, 27 Sep 2016 05:55:56 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+It seems that physfs is still maintained there and has the functionality
+required by latest supertux.
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../0001-add-manadatory-options-to-find-qt4-qt5-moc.patch  | 14 +++++++-------
- .../poppler/{poppler_0.43.0.bb => poppler_0.47.0.bb}       |  4 ++--
- 2 files changed, 9 insertions(+), 9 deletions(-)
- rename meta-oe/recipes-support/poppler/{poppler_0.43.0.bb => poppler_0.47.0.bb} (93%)
+ .../physfs/files/0001-fix-build-with-gcc-6.patch   | 52 ++++++++++++++++++++++
+ .../physfs/{physfs_2.0.3.bb => physfs_git.bb}      | 10 +++--
+ 2 files changed, 59 insertions(+), 3 deletions(-)
+ create mode 100644 meta-filesystems/recipes-support/physfs/files/0001-fix-build-with-gcc-6.patch
+ rename meta-filesystems/recipes-support/physfs/{physfs_2.0.3.bb => physfs_git.bb} (55%)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler/0001-add-manadatory-options-to-find-qt4-qt5-moc.patch b/meta-oe/recipes-support/poppler/poppler/0001-add-manadatory-options-to-find-qt4-qt5-moc.patch
-index 560b073..4e80d24 100644
---- a/meta-oe/recipes-support/poppler/poppler/0001-add-manadatory-options-to-find-qt4-qt5-moc.patch
-+++ b/meta-oe/recipes-support/poppler/poppler/0001-add-manadatory-options-to-find-qt4-qt5-moc.patch
-@@ -14,10 +14,10 @@ Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-  1 file changed, 8 insertions(+), 47 deletions(-)
- 
- diff --git a/configure.ac b/configure.ac
--index 67599c0..40fa596 100644
-+index c4cfc2c..8e961c7 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -622,25 +622,10 @@ AC_SUBST(POPPLER_QT4_LIBS)
-+@@ -712,25 +712,10 @@ AC_SUBST(POPPLER_QT4_LIBS)
-  AC_SUBST(POPPLER_QT4_TEST_LIBS)
-  
-  if test x$enable_poppler_qt4 = xyes; then
-@@ -47,27 +47,27 @@ index 67599c0..40fa596 100644
-    AC_SUBST(MOCQT4)
-    AC_MSG_RESULT([$MOCQT4])
-  fi
--@@ -679,34 +664,10 @@ AC_SUBST(POPPLER_QT5_LIBS)
-+@@ -769,34 +754,10 @@ AC_SUBST(POPPLER_QT5_LIBS)
-  AC_SUBST(POPPLER_QT5_TEST_LIBS)
-  
-  if test x$enable_poppler_qt5 = xyes; then
- -  AC_CHECK_TOOL(MOCQT5, moc)
- -  AC_MSG_CHECKING([for Qt5 moc])
- -  mocversion=`$MOCQT5 -v 2>&1`
---  mocversiongrep=`echo $mocversion | grep "Qt 5\|moc 5"`
-+-  mocversiongrep=`echo $mocversion | grep -E "Qt 5|moc 5"`
- -  if test x"$mocversiongrep" != x"$mocversion"; then
- -    AC_MSG_RESULT([no])
- -    # moc was not the qt5 one, try with moc-qt5
- -    AC_CHECK_TOOL(MOCQT52, moc-qt5)
- -    AC_MSG_CHECKING([for Qt5 moc-qt5])
- -    mocversion=`$MOCQT52 -v 2>&1`
---    mocversiongrep=`echo $mocversion | grep "Qt 5\|moc-qt5 5\|moc 5"`
-+-    mocversiongrep=`echo $mocversion | grep -E "Qt 5|moc-qt5 5|moc 5"`
- -    if test x"$mocversiongrep" != x"$mocversion"; then
- -      AC_CHECK_TOOL(QTCHOOSER, qtchooser)
- -      AC_MSG_CHECKING([for qtchooser])
- -      qt5tooldir=`QT_SELECT=qt5 qtchooser -print-env | grep QTTOOLDIR | cut -d '=' -f 2 | cut -d \" -f 2`
- -      mocversion=`$qt5tooldir/moc -v 2>&1`
---      mocversiongrep=`echo $mocversion | grep "Qt 5\|moc 5"`
-+-      mocversiongrep=`echo $mocversion | grep -E "Qt 5|moc 5"`
- -      if test x"$mocversiongrep" != x"$mocversion"; then
- -        # no valid moc found
- -        enable_poppler_qt5=no;
-@@ -87,5 +87,5 @@ index 67599c0..40fa596 100644
-    AC_MSG_RESULT([$MOCQT5])
-  fi
- -- 
--1.9.3
+diff --git a/meta-filesystems/recipes-support/physfs/files/0001-fix-build-with-gcc-6.patch b/meta-filesystems/recipes-support/physfs/files/0001-fix-build-with-gcc-6.patch
+new file mode 100644
+index 0000000..805c4a1
+--- /dev/null
++++ b/meta-filesystems/recipes-support/physfs/files/0001-fix-build-with-gcc-6.patch
+@@ -0,0 +1,52 @@
++From 06fe4c205094e0b65d3e5d1244f52089ed5bdafb Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Sun, 25 Sep 2016 23:50:22 +0200
++Subject: [PATCH] fix build with gcc-6
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Upstream-Status: Pending
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++---
++ src/archiver_zip.c | 1 -
++ src/physfs_miniz.h | 3 +++
++ 2 files changed, 3 insertions(+), 1 deletion(-)
++
++diff --git a/src/archiver_zip.c b/src/archiver_zip.c
++index 5c4996d..3b436db 100644
++--- a/src/archiver_zip.c
+++++ b/src/archiver_zip.c
++@@ -845,7 +845,6 @@ static ZIPentry *zip_hash_ancestors(ZIPinfo *info, char *name)
++     if (sep)
++     {
++         const size_t namelen = (sep - name) + 1;
++-        ZIPentry *parent;
++ 
++         *sep = '\0';  /* chop off last piece. */
++         retval = zip_find_entry(info, name);
++diff --git a/src/physfs_miniz.h b/src/physfs_miniz.h
++index 619cb71..fd877c0 100644
++--- a/src/physfs_miniz.h
+++++ b/src/physfs_miniz.h
++@@ -194,6 +194,8 @@ struct tinfl_decompressor_tag
++     code_len = TINFL_FAST_LOOKUP_BITS; do { temp = (pHuff)->m_tree[~temp + ((bit_buf >> code_len++) & 1)]; } while (temp < 0); \
++   } sym = temp; bit_buf >>= code_len; num_bits -= code_len; } MZ_MACRO_END
++ 
+++#pragma GCC diagnostic push
+++#pragma GCC diagnostic ignored "-Wmisleading-indentation"
++ static tinfl_status tinfl_decompress(tinfl_decompressor *r, const mz_uint8 *pIn_buf_next, size_t *pIn_buf_size, mz_uint8 *pOut_buf_start, mz_uint8 *pOut_buf_next, size_t *pOut_buf_size, const mz_uint32 decomp_flags)
++ {
++   static const int s_length_base[31] = { 3,4,5,6,7,8,9,10,11,13, 15,17,19,23,27,31,35,43,51,59, 67,83,99,115,131,163,195,227,258,0,0 };
++@@ -465,6 +467,7 @@ common_exit:
++   }
++   return status;
++ }
+++#pragma GCC diagnostic pop
++ 
++ /* Flush values. For typical usage you only need MZ_NO_FLUSH and MZ_FINISH. The other stuff is for advanced use. */
++ enum { MZ_NO_FLUSH = 0, MZ_PARTIAL_FLUSH = 1, MZ_SYNC_FLUSH = 2, MZ_FULL_FLUSH = 3, MZ_FINISH = 4, MZ_BLOCK = 5 };
++-- 
 +2.5.5
++
+diff --git a/meta-filesystems/recipes-support/physfs/physfs_2.0.3.bb b/meta-filesystems/recipes-support/physfs/physfs_git.bb
+similarity index 55%
+rename from meta-filesystems/recipes-support/physfs/physfs_2.0.3.bb
+rename to meta-filesystems/recipes-support/physfs/physfs_git.bb
+index 5618f28..3f1c156 100644
+--- a/meta-filesystems/recipes-support/physfs/physfs_2.0.3.bb
++++ b/meta-filesystems/recipes-support/physfs/physfs_git.bb
+@@ -6,6 +6,10 @@ DEPENDS = "readline zlib"
  
-diff --git a/meta-oe/recipes-support/poppler/poppler_0.43.0.bb b/meta-oe/recipes-support/poppler/poppler_0.47.0.bb
-similarity index 93%
-rename from meta-oe/recipes-support/poppler/poppler_0.43.0.bb
-rename to meta-oe/recipes-support/poppler/poppler_0.47.0.bb
-index 9abcd2c..071cfb2 100644
---- a/meta-oe/recipes-support/poppler/poppler_0.43.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_0.47.0.bb
-@@ -7,8 +7,8 @@ SRC_URI = " \
-     file://0001-add-manadatory-options-to-find-qt4-qt5-moc.patch \
-     file://0002-fix-gcc-6-math-ambiguous-errors.patch \
- "
--SRC_URI[md5sum] = "1d2b001663119855cdfbc0713dbfb9c6"
--SRC_URI[sha256sum] = "c720e26a26ee10b7ebc9e256d2ee7adcdb536cf85f9f1c4777a38f7f81fb2456"
-+SRC_URI[md5sum] = "669b195ff24173d35cacf1d20b6fe4fa"
-+SRC_URI[sha256sum] = "b872e7228fc34a71ce4b47a5aea2a57ae67528818fa846e1e0eda089319bd242"
+ inherit cmake
  
- DEPENDS = "fontconfig zlib cairo lcms"
- 
+-SRC_URI = "http://icculus.org/${BPN}/downloads/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "c2c727a8a8deb623b521b52d0080f613"
+-SRC_URI[sha256sum] = "ca862097c0fb451f2cacd286194d071289342c107b6fe69079c079883ff66b69"
++SRC_URI = " \
++    git://github.com/SuperTux/physfs.git \
++    file://0001-fix-build-with-gcc-6.patch \
++"
++SRCREV = "f3b45a94d0b7c0a85469b1e60fefd8383b6719ba"
++S = "${WORKDIR}/git"
++PV = "2.0.3+git${SRCPV}"
 -- 
 2.5.5
 
