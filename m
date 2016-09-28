@@ -1,24 +1,46 @@
-Return-Path: <Dengke.Du@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id AB4C1600BB
+Return-Path: <oliver.graute@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id EE9E26006E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Sep 2016 08:36:31 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u8S8aWAH021675
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 28 Sep 2016 09:14:42 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id l132so4906041wmf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Sep 2016 01:36:33 -0700 (PDT)
-Received: from pek-lpgtest20.wrs.com (128.224.179.28) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Wed, 28 Sep 2016 01:36:31 -0700
-From: Dengke Du <dengke.du@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 28 Sep 2016 16:36:26 +0800
-Message-ID: <1475051786-117691-1-git-send-email-dengke.du@windriver.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH V2] edac-utils: add systemd support and required dependencies for edac
+	Wed, 28 Sep 2016 02:14:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=y+69rXYnfF6DN5nUXgzQkjhxiqQYWTzseB82v+o1zbI=;
+	b=cUOfQHiyCCA1iNwNK5sWYaytPy9eX8jqHS4fyz03rAe1TaZmMQFQe2O16f65J+w56Y
+	TsyUzmiOGnOyLXv6fZ5jKfpgIa19vxEev9J/ST86tvk7hLopnKK/ROs55F+hUlbnqe/m
+	NJWbthc9Yf6Dp738xGAcUS3h+MApcnS2nTTdbXrG65RLjPFCEXn0ca6aCYi9sNPNnVRi
+	VTX6Gt46JrVh/XdGG86CL8OeyLgYPr2Ure12SEtVVgPwkm9BNTvyxSo2Xh/V+AueKOvr
+	O5oenF+IrKXFk02juWZAIf7Bi90KyttRCnTFKdhclJQg8ByXmBiMexw6uxepmgc/AdEj
+	jprg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=y+69rXYnfF6DN5nUXgzQkjhxiqQYWTzseB82v+o1zbI=;
+	b=LbmHsCwZq6CANnms3gp7fB8iZn3xpTImJb2BhvkOGUKjUFjiaG+2094kQPpS+EdPps
+	2lmzIIgHl2t14bP2PYYmG1nVUojTy8WvVk9uHDXqHorpDpbcyjL+OmYY7i0sGP2M+6wc
+	xP8nRGt4AxUPzvBLfm6mmF/ZadsajJbcQPF0cG1LbHuJsDp4urnL054Rz2aU66pUYS7F
+	RY5W7hLMTK5Hj4w9HKzUX1JwVB+kJu04LjW6IMEgctXAIV4K8MriAOMRqO/51kVdPWep
+	jrVgRmVaqMH+vN2BuJ9Q76e4uT1lovrhfJnsOyLzARAg/xTUX9E70AuKGIAtkuP9u5/q
+	qf8w==
+X-Gm-Message-State: AA6/9Rkf2Y4eEo0YB9oY6hHjpLpEhQhEtWm0AFefdyRmZFKvGDNzv152AFydtEcYW0FJ6A==
+X-Received: by 10.28.174.76 with SMTP id x73mr7339745wme.60.1475054084071;
+	Wed, 28 Sep 2016 02:14:44 -0700 (PDT)
+Received: from localhost (x55b137ed.dyn.telefonica.de. [85.177.55.237])
+	by smtp.gmail.com with ESMTPSA id
+	lz5sm7248050wjb.24.2016.09.28.02.14.42
+	(version=TLS1_2 cipher=AES128-SHA bits=128/128);
+	Wed, 28 Sep 2016 02:14:43 -0700 (PDT)
+From: Oliver Graute <oliver.graute@gmail.com>
+X-Google-Original-From: Oliver Graute <oliver.graute@neuhaus.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 28 Sep 2016 11:14:40 +0200
+Message-Id: <1475054080-20531-1-git-send-email-oliver.graute@neuhaus.de>
+X-Mailer: git-send-email 1.9.1
+Cc: Oliver Graute <oliver.graute@neuhaus.de>
+Subject: [meta-networking][PATCH] libnetfilter-acct: added new recipe for libnetfilter-acct 1.0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,71 +53,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Sep 2016 08:36:37 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 28 Sep 2016 09:14:43 -0000
 
-Changed in V2:
-	Change the title to eliminate confused.
-
-Add systemd unit files for edac-utils.
-
-Signed-off-by: Dengke Du <dengke.du@windriver.com>
 ---
- meta-oe/recipes-support/edac-utils/edac-utils_git.bb  | 14 +++++++++++++-
- meta-oe/recipes-support/edac-utils/files/edac.service | 11 +++++++++++
- 2 files changed, 24 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/edac-utils/files/edac.service
+ .../libnetfilter/libnetfilter-acct_1.0.3.bb               | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-networking/recipes-filter/libnetfilter/libnetfilter-acct_1.0.3.bb
 
-diff --git a/meta-oe/recipes-support/edac-utils/edac-utils_git.bb b/meta-oe/recipes-support/edac-utils/edac-utils_git.bb
-index c0ad665..b3ff1cc 100644
---- a/meta-oe/recipes-support/edac-utils/edac-utils_git.bb
-+++ b/meta-oe/recipes-support/edac-utils/edac-utils_git.bb
-@@ -14,9 +14,10 @@ S = "${WORKDIR}/git"
- SRC_URI = "git://github.com/grondo/edac-utils \
-     file://make-init-script-be-able-to-automatically-load-EDAC-.patch \
-     file://add-restart-to-initscript.patch \
-+    file://edac.service \
- "
- 
--inherit autotools-brokensep
-+inherit autotools-brokensep systemd
- 
- do_configure_prepend () {
-     touch ${S}/ChangeLog
-@@ -31,4 +32,15 @@ RDEPENDS_${PN}_powerpc = "dmidecode"
- RDEPENDS_${PN}_powerpc64 = "dmidecode"
- RDEPENDS_${PN}_append = " \
-     perl-module-file-basename perl-module-file-find perl-module-getopt-long perl-module-posix \
-+    perl-module-overload \
-+    perl-module-overloading \
-+    perl-module-file-glob \
- "
-+
-+do_install_append() {
-+	install -d ${D}${systemd_unitdir}/system
-+	install -m 644 ${WORKDIR}/edac.service ${D}/${systemd_unitdir}/system
-+	sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}/${systemd_unitdir}/system/edac.service
-+}
-+
-+SYSTEMD_SERVICE_${PN} = "edac.service"
-diff --git a/meta-oe/recipes-support/edac-utils/files/edac.service b/meta-oe/recipes-support/edac-utils/files/edac.service
+diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-acct_1.0.3.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-acct_1.0.3.bb
 new file mode 100644
-index 0000000..9f687a8
+index 0000000..0d71303
 --- /dev/null
-+++ b/meta-oe/recipes-support/edac-utils/files/edac.service
-@@ -0,0 +1,11 @@
-+[Unit]
-+Description=Initialize EDAC Drivers For Machine Hardware
++++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-acct_1.0.3.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "libnetfilter_acct accounting infrastructure."
++DESCRIPTION = "libnetfilter_acct is the userspace library providing interface to extended accounting infrastructure."
++HOMEPAGE = "http://netfilter.org/projects/libnetfilter_acct/index.html"
++SECTION = "libs"
++LICENSE = "LGPL-2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
++DEPENDS = "libnfnetlink libmnl"
 +
-+[Service]
-+Type=oneshot
-+ExecStart=@SBINDIR@/edac-ctl --register-labels
-+ExecStop=@SBINDIR@/edac-ctl --unload
-+RemainAfterExit=yes
++SRC_URI = "http://ftp.netfilter.org/pub/libnetfilter_acct/libnetfilter_acct-1.0.3.tar.bz2"
++SRC_URI[md5sum] = "814b2972b2f5c740ff87510bc109168b"
++SRC_URI[sha256sum] = "4250ceef3efe2034f4ac05906c3ee427db31b9b0a2df41b2744f4bf79a959a1a"
 +
-+[Install]
-+WantedBy=multi-user.target
++S = "${WORKDIR}/libnetfilter_acct-${PV}"
++
++inherit autotools pkgconfig
 -- 
-2.7.4
+1.9.1
 
 
