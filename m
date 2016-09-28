@@ -1,27 +1,24 @@
-Return-Path: <mike.looijmans@topic.nl>
-Received: from atl4mhob13.myregisteredsite.com
-	(atl4mhob13.myregisteredsite.com [209.17.115.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 2DF006FFE8
+Return-Path: <Wenzong.Fan@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BEEBD600E2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Sep 2016 07:53:33 +0000 (UTC)
-Received: from mailpod.hostingplatform.com ([10.30.71.208])
-	by atl4mhob13.myregisteredsite.com (8.14.4/8.14.4) with ESMTP id
-	u8S7rWjh011519 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Sep 2016 03:53:32 -0400
-Received: (qmail 17929 invoked by uid 0); 28 Sep 2016 07:53:32 -0000
-X-TCPREMOTEIP: 37.74.225.130
-X-Authenticated-UID: mike@milosoftware.com
-Received: from unknown (HELO mikebuntu.TOPIC.LOCAL)
-	(mike@milosoftware.com@37.74.225.130)
-	by 0 with ESMTPA; 28 Sep 2016 07:53:32 -0000
-From: Mike Looijmans <mike.looijmans@topic.nl>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Sep 2016 09:53:27 +0200
-Message-Id: <1475049207-7642-1-git-send-email-mike.looijmans@topic.nl>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1474634029-22896-1-git-send-email-mike.looijmans@topic.nl>
-References: <1474634029-22896-1-git-send-email-mike.looijmans@topic.nl>
-Subject: [PATCH v2] phytool: Add recipe
+	Wed, 28 Sep 2016 08:06:40 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u8S86WBZ015404
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Sep 2016 01:06:41 -0700
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 28 Sep 2016 01:06:38 -0700
+From: <wenzong.fan@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 28 Sep 2016 04:06:37 -0400
+Message-ID: <1475049997-179733-1-git-send-email-wenzong.fan@windriver.com>
+X-Mailer: git-send-email 2.8.1
+MIME-Version: 1.0
+Subject: [meta-webserver][PATCH] webmin: Set PERLLIB to runtime path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,86 +31,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Sep 2016 07:53:36 -0000
+X-List-Received-Date: Wed, 28 Sep 2016 08:06:42 -0000
+Content-Type: text/plain
 
-A nice tool to directly read, write and interpret ethernet PHY data.
-Very useful when debugging PHY or MDIO problems, which ethtool does
-not do.
+From: Yue Tao <Yue.Tao@windriver.com>
 
-Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
+This fixes:
+
+  # on target
+  $ grep PERLLIB /etc/webmin/start
+  PERLLIB=/path/to/builddir/.../webmin/1.801-r0/image/usr/libexec/webmin
+
+Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
 ---
-v2:
-  Add $bindir comment
-  Add patch (pending upstream) to fix LDFLAGS warning
-  Fix license filename
+ meta-webserver/recipes-webadmin/webmin/files/setup.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- meta-networking/recipes-support/phytool/phytool.bb | 17 ++++++++++++
- .../0001-Makefile-Honor-LDFLAGS-variable.patch     | 31 ++++++++++++++++++++++
- 2 files changed, 48 insertions(+)
- create mode 100644 meta-networking/recipes-support/phytool/phytool.bb
- create mode 100644 meta-networking/recipes-support/phytool/phytool/0001-Makefile-Honor-LDFLAGS-variable.patch
-
-diff --git a/meta-networking/recipes-support/phytool/phytool.bb b/meta-networking/recipes-support/phytool/phytool.bb
-new file mode 100644
-index 0000000..e95b035
---- /dev/null
-+++ b/meta-networking/recipes-support/phytool/phytool.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "PHY interface tool for Linux"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=39bba7d2cf0ba1036f2a6e2be52fe3f0"
-+
-+PV = "1.0.1"
-+SRCREV = "1a3ea62a218206e9faf3b27fb5d01c85692024c8"
-+SRC_URI = "git://github.com/wkz/phytool.git \
-+	file://0001-Makefile-Honor-LDFLAGS-variable.patch"
-+
-+S = "${WORKDIR}/git"
-+
-+# Intentionally not using $bindir here because the Makefile is hard-coded to
-+# install into $PREFIX/bin
-+do_install() {
-+	install -d ${D}${prefix}/bin
-+	oe_runmake 'DESTDIR=${D}' 'PREFIX=${prefix}' install
-+}
-diff --git a/meta-networking/recipes-support/phytool/phytool/0001-Makefile-Honor-LDFLAGS-variable.patch b/meta-networking/recipes-support/phytool/phytool/0001-Makefile-Honor-LDFLAGS-variable.patch
-new file mode 100644
-index 0000000..8b99d09
---- /dev/null
-+++ b/meta-networking/recipes-support/phytool/phytool/0001-Makefile-Honor-LDFLAGS-variable.patch
-@@ -0,0 +1,31 @@
-+From 8b75a5e6238fe30661b672743560fe4d357237fd Mon Sep 17 00:00:00 2001
-+From: Mike Looijmans <mike.looijmans@topic.nl>
-+Date: Wed, 28 Sep 2016 09:42:45 +0200
-+Subject: [PATCH] Makefile: Honor LDFLAGS variable
-+
-+Passing $(LDFLAGS) to the linker is important for cross-compile environments.
-+OpenEmbedded builds will display QA errors like this:
-+... QA Issue: No GNU_HASH in the elf binary ... [ldflags]
-+
-+Upstream-Status: Pending
-+Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
-+---
-+ Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/Makefile b/Makefile
-+index b52843b..70bb414 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -22,7 +22,7 @@ hdrs = $(wildcard *.h)
-+ 
-+ phytool: $(objs)
-+ 	@printf "  CC      $(subst $(ROOTDIR)/,,$(shell pwd)/$@)\n"
-+-	@$(CC) $(LDLIBS) -o $@ $^
-++	@$(CC) $(LDFLAGS) $(LDLIBS) -o $@ $^
-+ 
-+ all: phytool
-+ 
-+-- 
-+1.9.1
-+
+diff --git a/meta-webserver/recipes-webadmin/webmin/files/setup.sh b/meta-webserver/recipes-webadmin/webmin/files/setup.sh
+index 8d24f92..64e6c9d 100755
+--- a/meta-webserver/recipes-webadmin/webmin/files/setup.sh
++++ b/meta-webserver/recipes-webadmin/webmin/files/setup.sh
+@@ -18,7 +18,7 @@ ver=`cat "$wadir/version"`
+ cd "$wadir"
+ 
+ # Work out perl library path
+-PERLLIB=$wadir
++PERLLIB=$wadir_runtime
+ 
+ # Validate source directory
+ allmods=`cd "$wadir"; echo */module.info | sed -e 's/\/module.info//g'`
 -- 
-1.9.1
+2.8.1
 
 
