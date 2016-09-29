@@ -1,24 +1,24 @@
 Return-Path: <ruben.de.smet@rubdos.be>
 Received: from mail.glycos.org (mail.glycos.org [178.62.217.237])
-	by mail.openembedded.org (Postfix) with ESMTP id 7113C6E5CB
+	by mail.openembedded.org (Postfix) with ESMTP id 5BAEC6E5CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Sep 2016 13:33:33 +0000 (UTC)
+	Thu, 29 Sep 2016 13:34:59 +0000 (UTC)
 Received: from arch-club.local (unknown [85.27.50.55])
-	by mail.glycos.org (Postfix) with ESMTPSA id B4ABB400A0;
-	Thu, 29 Sep 2016 13:33:34 +0000 (UTC)
+	by mail.glycos.org (Postfix) with ESMTPSA id DFEA8400A0;
+	Thu, 29 Sep 2016 13:35:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rubdos.be;
-	s=default; t=1475156015;
-	bh=TLRLyz8wr1khjppwGVm/KqV2h8GFWyk/ujOa2/mBdI4=;
+	s=default; t=1475156101;
+	bh=YeJT9SVZyiN6j6vfLhCS6u97GZ6C6PvDwRBrEvflfZU=;
 	h=From:To:Cc:Subject:Date;
-	b=Ztfy5aS2AvCFjFranMYLJoqmnt89BUEqEgVAZQcEAPrwwW6KBtcPgSv93z5CuWYjC
-	0jNiEXp6pvQ2z4XZ5ZhEf1ZtiRjTvvwgdF09aekX026K/UbsdNGM0h5WYD5DOw6+Cl
-	RqrTGJR59w5v3CvETS1i9sz8qVYqJR/liQSeC0JM=
+	b=J7W+zQOYk8fo/2RUqqyRYskcDmyFeH7X9IaDfjUDFzkIAMgtsEdoBHCY5V/H1mmrc
+	XjKznYTSIrFi7k4kjuP6Jucp8IlgCtgZ7C5oApXAuLDzynW51fX0bxQV+4etcFwJSL
+	PDtlkWcghca+LVQgfKAm7liAKuE5l0169fdvR+mM=
 From: Ruben De Smet <ruben.de.smet@rubdos.be>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Sep 2016 15:30:54 +0200
-Message-Id: <20160929133054.20096-1-ruben.de.smet@rubdos.be>
+Date: Thu, 29 Sep 2016 15:34:55 +0200
+Message-Id: <20160929133455.26272-1-ruben.de.smet@rubdos.be>
 X-Mailer: git-send-email 2.10.0
-Subject: [meta-python][PATCH] python-scales: add recipe for version 1.0.9
+Subject: [meta-python][PATCH] python-cassandra-driver: add recipe for version 3.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,54 +31,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Sep 2016 13:33:37 -0000
+X-List-Received-Date: Thu, 29 Sep 2016 13:34:59 -0000
 
-A python module for tracking server state and statisticst
+A Python library for Apache Cassandra
 
 Signed-off-by: Ruben De Smet <ruben.de.smet@rubdos.be>
 ---
- meta-python/recipes-devtools/python/python-scales.inc       | 13 +++++++++++++
- meta-python/recipes-devtools/python/python3-scales_1.0.9.bb | 11 +++++++++++
- 2 files changed, 24 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-scales.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-scales_1.0.9.bb
+ .../python/python-cassandra-driver.inc              | 21 +++++++++++++++++++++
+ .../python/python3-cassandra-driver_3.6.0.bb        | 16 ++++++++++++++++
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-cassandra-driver.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-cassandra-driver_3.6.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-scales.inc b/meta-python/recipes-devtools/python/python-scales.inc
+diff --git a/meta-python/recipes-devtools/python/python-cassandra-driver.inc b/meta-python/recipes-devtools/python/python-cassandra-driver.inc
 new file mode 100644
-index 0000000..5a46e2b
+index 0000000..d3e4cf6
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-scales.inc
-@@ -0,0 +1,13 @@
-+SUMMARY = "Metrics for Python"
-+DESCRIPTION = "Tracks server state and statistics, allowing you to see what \
-+your server is doing. It can also send metrics to Graphite for graphing or to \
-+a file for crash forensics."
++++ b/meta-python/recipes-devtools/python/python-cassandra-driver.inc
+@@ -0,0 +1,21 @@
++SUMMARY = "DataStax Python Driver for Apache Cassandra"
++DESCRIPTION = "A modern, feature-rich and highly-tunable Python client \
++library for Apache Cassandra (1.2+) and DataStax Enterprise (3.1+) using \
++exclusively Cassandra's binary protocol and Cassandra Query Language v3."
++HOMEPAGE = "https://github.com/datastax/python-driver"
 +SECTION = "devel/python"
 +LICENSE = "Apache-2.0"
-+# LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
-+SRCNAME = "scales"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
++SRCNAME = "cassandra-driver"
 +
-+SRC_URI[md5sum] = "c61167f2b5f506f0a34a7b8a295a9567"
-+SRC_URI[sha256sum] = "8b6930f7d4bf115192290b44c757af5e254e3fcfcb75ff9a51f5c96a404e2753"
++SRC_URI[md5sum] = "756a3b235c5766c3072ed62e1083c9ef"
++SRC_URI[sha256sum] = "049c8a871e49052c7b72fddb6569f1bfe738bbfea0a562eeeb5404abeff015ab"
++
++DISTUTILS_BUILD_ARGS += " \
++    --no-libev \
++"
++DISTUTILS_INSTALL_ARGS += " \
++    --no-libev \
++"
 +
 +inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python3-scales_1.0.9.bb b/meta-python/recipes-devtools/python/python3-scales_1.0.9.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.6.0.bb b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.6.0.bb
 new file mode 100644
-index 0000000..ecf6c67
+index 0000000..65fd2c0
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-scales_1.0.9.bb
-@@ -0,0 +1,11 @@
++++ b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.6.0.bb
+@@ -0,0 +1,16 @@
 +inherit setuptools3
-+require python-scales.inc
++require python-cassandra-driver.inc
 +
 +RDEPENDS_${PN} += "\
++    python3-cython \
++    python3-multiprocessing \
 +    python3-six \
++    python3-json \
++    libevent \
 +"
++RDEPENDS_${PN}_class-native = ""
 +
 +DEPENDS_${PN} += "\
 +    python3-setuptools \
++    python3-cython \
 +"
-+
 -- 
 2.10.0
 
