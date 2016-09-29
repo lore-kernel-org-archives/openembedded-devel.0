@@ -1,34 +1,24 @@
-Return-Path: <Jackie.Huang@windriver.com>
+Return-Path: <Wenzong.Fan@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 814946013D
+	by mail.openembedded.org (Postfix) with ESMTP id A793960111
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Sep 2016 01:55:10 +0000 (UTC)
+	Thu, 29 Sep 2016 02:49:12 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u8T1tBfN022369
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u8T2nCjf028534
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Sep 2016 18:55:11 -0700 (PDT)
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.129]) by
-	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0294.000;
-	Wed, 28 Sep 2016 18:55:10 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-networking][PATCH] ntp : Add openssl to default
-	PACKAGECONFIG options
-Thread-Index: AQHSGaa/a45sC/Pob06zM0utTfpOZaCPs4ww
-Date: Thu, 29 Sep 2016 01:55:09 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA013A2E31EC@ALA-MBA.corp.ad.wrs.com>
-References: <20160928021717.28355-1-jackie.huang@windriver.com>
-	<CAMKF1soN+e18xvZ7iuKb_Bxf++sj59=851q+_UH_UCH24_uLvA@mail.gmail.com>
-In-Reply-To: <CAMKF1soN+e18xvZ7iuKb_Bxf++sj59=851q+_UH_UCH24_uLvA@mail.gmail.com>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.146]
+	Wed, 28 Sep 2016 19:49:13 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 28 Sep 2016 19:49:11 -0700
+From: <wenzong.fan@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 28 Sep 2016 22:49:11 -0400
+Message-ID: <1475117351-88945-1-git-send-email-wenzong.fan@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Subject: Re: [meta-networking][PATCH] ntp : Add openssl to default PACKAGECONFIG options
+Subject: [meta-oe][PATCH] mariadb: replace the CC with CC_VERSION and CXX with CXX_VERSION
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,73 +31,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Sep 2016 01:55:10 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 29 Sep 2016 02:49:12 -0000
+Content-Type: text/plain
 
+From: Yue Tao <Yue.Tao@windriver.com>
 
+mysqlbug.sh is a bug report script. It makes a report with the build information,
+including gcc version. The CC is the local path of gcc, which is useless for bug
+report, and the path may expose private information, so change it to CC_VERSION.
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of Khem Raj
-> Sent: Thursday, September 29, 2016 12:38 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-networking][PATCH] ntp : Add openssl to default P=
-ACKAGECONFIG options
->=20
-> Is this the common usecase ?
+Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
+Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+---
+ meta-oe/recipes-support/mysql/mariadb.inc          |  1 +
+ .../mysql/mariadb/change-cc-to-cc-version.patch    | 26 ++++++++++++++++++++++
+ 2 files changed, 27 insertions(+)
+ create mode 100644 meta-oe/recipes-support/mysql/mariadb/change-cc-to-cc-version.patch
 
-I guess so, It's been the default option in our distro, and I checked that =
-it's also enabled
-in popular Linux distributions like debian/Ubuntu, redhat/fedora and opensu=
-se.
+diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
+index 73905b6..9d91aec 100644
+--- a/meta-oe/recipes-support/mysql/mariadb.inc
++++ b/meta-oe/recipes-support/mysql/mariadb.inc
+@@ -15,6 +15,7 @@ SRC_URI = "http://archive.mariadb.org/mariadb-${PV}/source/mariadb-${PV}.tar.gz
+            file://mysql-systemd-start \
+            file://configure.cmake-fix-valgrind.patch \
+            file://fix-a-building-failure.patch \
++           file://change-cc-to-cc-version.patch \
+           "
+ 
+ SRC_URI[md5sum] = "5cfb169934170a429589e05f0f5aba9c"
+diff --git a/meta-oe/recipes-support/mysql/mariadb/change-cc-to-cc-version.patch b/meta-oe/recipes-support/mysql/mariadb/change-cc-to-cc-version.patch
+new file mode 100644
+index 0000000..02bda24
+--- /dev/null
++++ b/meta-oe/recipes-support/mysql/mariadb/change-cc-to-cc-version.patch
+@@ -0,0 +1,26 @@
++mariadb: replace the CC with CC_VERSION and CXX with CXX_VERSION
++
++mysqlbug.sh is a bug report script. It makes a report with the build information,
++including gcc version. The CC is the local path of gcc, which is useless for bug
++report, and the path may expose private information, so change it to CC_VERSION.
++
++Upstream-Status: Pending
++
++Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
++Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
++================================
++diff --git a/scripts/mysqlbug.sh.old b/scripts/mysqlbug.sh
++index e9df210..d4b8d53 100644
++--- a/scripts/mysqlbug.sh.old
+++++ b/scripts/mysqlbug.sh
++@@ -24,8 +24,8 @@ VERSION="@VERSION@@MYSQL_SERVER_SUFFIX@"
++ COMPILATION_COMMENT="@COMPILATION_COMMENT@"
++ BUGmysql="maria-developers@lists.launchpad.net"
++ # This is set by configure
++-COMP_CALL_INFO="CC='@SAVE_CC@'  CFLAGS='@SAVE_CFLAGS@'  CXX='@SAVE_CXX@'  CXXFLAGS='@SAVE_CXXFLAGS@'  LDFLAGS='@SAVE_LDFLAGS@'  ASFLAGS='@SAVE_ASFLAGS@'"
++-COMP_RUN_INFO="CC='@CC@'  CFLAGS='@CFLAGS@'  CXX='@CXX@'  CXXFLAGS='@CXXFLAGS@'  LDFLAGS='@LDFLAGS@'  ASFLAGS='@ASFLAGS@'"
+++COMP_CALL_INFO="CC='@CC_VERSION@'  CFLAGS='@SAVE_CFLAGS@'  CXX='@CXX_VERSION@'  CXXFLAGS='@SAVE_CXXFLAGS@'  LDFLAGS='@SAVE_LDFLAGS@'  ASFLAGS='@SAVE_ASFLAGS@'"
+++COMP_RUN_INFO="CC='@CC_VERSION@'  CFLAGS='@CFLAGS@'  CXX='@CXX_VERSION@'  CXXFLAGS='@CXXFLAGS@'  LDFLAGS='@LDFLAGS@'  ASFLAGS='@ASFLAGS@'"
++ CONFIGURE_LINE="@CONF_COMMAND@"
++ 
++ LIBC_INFO=""
+-- 
+2.8.1
 
-Thanks,
-Jackie
-
->=20
-> On Sep 27, 2016 7:35 PM, <jackie.huang@windriver.com> wrote:
->=20
-> > From: Jackie Huang <jackie.huang@windriver.com>
-> >
-> > Add openssl to default PACKAGECONFIG options so ntp
-> > is configured to have crypto support by default.
-> >
-> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> > ---
-> >  meta-networking/recipes-support/ntp/ntp_4.2.8p8.bb | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p8.bb
-> > b/meta-networking/recipes-support/ntp/ntp_4.2.8p8.bb
-> > index f3344c0..202d1a3 100644
-> > --- a/meta-networking/recipes-support/ntp/ntp_4.2.8p8.bb
-> > +++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p8.bb
-> > @@ -46,7 +46,7 @@ USERADD_PARAM_${PN} =3D "--system --home-dir
-> > ${NTP_USER_HOME} \
-> >                         --shell /bin/false --user-group ntp"
-> >
-> >  # NB: debug is default-enabled by NTP; keep it default-enabled here.
-> > -PACKAGECONFIG ??=3D "cap debug refclocks \
-> > +PACKAGECONFIG ??=3D "cap debug refclocks openssl \
-> >      ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
-> >  "
-> >  PACKAGECONFIG[openssl] =3D "--with-openssl-libdir=3D${STAGING_LIBDIR} =
-\
-> > --
-> > 2.8.3
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
