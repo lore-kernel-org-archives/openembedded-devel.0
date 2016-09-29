@@ -1,24 +1,24 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id EBA716093B
+Return-Path: <ruben.de.smet@rubdos.be>
+Received: from mail.glycos.org (mail.glycos.org [178.62.217.237])
+	by mail.openembedded.org (Postfix) with ESMTP id 6096B607A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Sep 2016 08:02:51 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u8T82qic004858
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Sep 2016 01:02:52 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 29 Sep 2016 01:02:51 -0700
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 29 Sep 2016 04:02:49 -0400
-Message-ID: <1475136169-61955-1-git-send-email-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 2.8.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libsmi: rdepends on wget and set WGET as target path
+	Thu, 29 Sep 2016 13:30:28 +0000 (UTC)
+Received: from arch-club.local (unknown [85.27.50.55])
+	by mail.glycos.org (Postfix) with ESMTPSA id C3FF2400A0;
+	Thu, 29 Sep 2016 13:30:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rubdos.be;
+	s=default; t=1475155829;
+	bh=ELbuXO9E5tj3CWZKkg7dF0RE6m8d8sD7f/RzYZbe30I=;
+	h=From:To:Cc:Subject:Date;
+	b=CNJhsPc4IBQHsQ2QaL+NO5Nvsle79zWfO6CkLBwCt/maQGsKFkwE1qEVl976/kwlw
+	HIyBJGzklkYrjThnT7a/zQZJ2olxCwS959yrBROgB6BnKQvFovnfMqzTH7zljy6PIz
+	eVbTCxZf8tnTeRBWQn813BU8BIZPub/tuT7d/gC0=
+From: Ruben De Smet <ruben.de.smet@rubdos.be>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 29 Sep 2016 15:30:21 +0200
+Message-Id: <20160929133021.18854-1-ruben.de.smet@rubdos.be>
+X-Mailer: git-send-email 2.10.0
+Subject: [meta-python][PATCH] python-spidev: add recipe for version 3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,39 +31,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Sep 2016 08:02:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 29 Sep 2016 13:30:29 -0000
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+A python module for interfacing with SPI
 
-* /usr/bin/smicache requires wget:
-  + WGET=/usr/bin/wget
-
-* Set the WGET as target path to avoid host contamination.
-
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+Signed-off-by: Ruben De Smet <ruben.de.smet@rubdos.be>
 ---
- meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python-spidev.inc   | 17 +++++++++++++++++
+ .../recipes-devtools/python/python3-spidev_3.2.bb       | 10 ++++++++++
+ 2 files changed, 27 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-spidev.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-spidev_3.2.bb
 
-diff --git a/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-index b049067..b537ce6 100644
---- a/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-+++ b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-@@ -12,9 +12,11 @@ SRC_URI = "https://www.ibr.cs.tu-bs.de/projects/${BPN}/download/${BP}.tar.gz \
- SRC_URI[md5sum] = "4bf47483c06c9f07d1b10fbc74eddf11"
- SRC_URI[sha256sum] = "f21accdadb1bb328ea3f8a13fc34d715baac6e2db66065898346322c725754d3"
- 
-+RDEPENDS_${PN} += "wget"
+diff --git a/meta-python/recipes-devtools/python/python-spidev.inc b/meta-python/recipes-devtools/python/python-spidev.inc
+new file mode 100644
+index 0000000..1b93763
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-spidev.inc
+@@ -0,0 +1,17 @@
++SUMMARY = "Python bindings for Linux SPI access through spidev"
++DESCRIPTION = "This project contains a python module for interfacing with SPI\
++devices from user space via the spidev linux kernel driver.\
++This is a modified version of the code originally found\
++[here](http://elk.informatik.fh-augsburg.de/da/da-49/trees/pyap7k/lang/py-spi)\
++All code is GPLv2 licensed unless explicitly stated otherwise."
++HOMEPAGE = "http://github.com/doceme/py-spidev"
++SECTION = "devel/python"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=54bdb9022ebb75ab68399cdaab97da60"
++SRCNAME = "spidev"
 +
- inherit autotools
- 
--EXTRA_OECONF = "ac_cv_path_SH=${base_bindir}/sh"
-+EXTRA_OECONF = "ac_cv_path_SH=${base_bindir}/sh ac_cv_path_WGET=${bindir}/wget"
- 
- do_install_append () {
-     install -d ${D}${sysconfdir}
++SRC_URI[md5sum] = "f601676f1bb48b9aa3b3897f95216365"
++SRC_URI[sha256sum] = "09d2b5122f0dd79910713a11f9a0020f71537224bf829916def4fffc0ea59456"
++
++
++inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python3-spidev_3.2.bb b/meta-python/recipes-devtools/python/python3-spidev_3.2.bb
+new file mode 100644
+index 0000000..4794e61
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-spidev_3.2.bb
+@@ -0,0 +1,10 @@
++inherit setuptools3
++require python-spidev.inc
++
++RDEPENDS_${PN} += "\
++"
++RDEPENDS_${PN}_class-native = ""
++
++DEPENDS_${PN} += "\
++    python3-setuptools \
++"
 -- 
-2.8.1
+2.10.0
 
 
