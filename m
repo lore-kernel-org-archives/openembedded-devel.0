@@ -1,47 +1,49 @@
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-lf0-f42.google.com (mail-lf0-f42.google.com
-	[209.85.215.42])
-	by mail.openembedded.org (Postfix) with ESMTP id EECD8602D9
+Return-Path: <laurent.gourvenec@qarnot-computing.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E5D960190
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Sep 2016 13:55:01 +0000 (UTC)
-Received: by mail-lf0-f42.google.com with SMTP id g62so80392186lfe.3
+	Fri, 30 Sep 2016 08:09:25 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id p138so2256964wmb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Sep 2016 06:55:03 -0700 (PDT)
+	Fri, 30 Sep 2016 01:09:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=mNoC9piyFQwKvn1AgvK8yuK64Fc4n7XqoPdUzMe8sSA=;
-	b=cQBqcu5wPjieTTWeN4OHNlUj3a4EqI0M2kJlhM3BadvFlckJomDMVOXQYw76cEObfa
-	8J9oKwIz6SRvLvX+cdztBxq40CHLnFWuxLyWne3utZSC6ATQqGXZgrWfPXh/PXdra6On
-	2Uaj8I0UppZnN6vXT02CzTu0d0VlwWJjGb/Qb5TpwwExO3SmewA7JXufnWJZmev1s5mD
-	v9/LlIh5JehHV0Z0IEdmMEhx7g8W0oybIUCKeWzX3p229+7rhyMMiKMyV6zsg+boSIkV
-	gJa5VcUCU7rnzRQfMef+gEmD4HqPZBP/qYvjAq70Yp7hP+DjnfQ0JjS3uF2x+h+oZAW0
-	hQFA==
+	d=qarnot-computing-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=yojxBam/X6wMdaElfKnbLr0ysDuFdhuAMDbmkFTHPyE=;
+	b=oeChhUN3CxY2lTb0bFPccUQRbfDMpxBTZZElqu9mRkMmRN6Hz97P7JjGxoLNtLLxT1
+	TcjVBUlJOKoTeirY5Me+Umjuhis36u0hrD9wJ2VoP4hPNiehG8jAmI3xZyStMnaTwuBl
+	m0hhuE5t+bja8raoYDeE6rzZ1fr0wLbON9628ThzLh+2BsWO4h2Ak9q2zjtnzTY2GiTp
+	HW6LrX+8ujOy+7r63l8DKDKTbFR5OgRxmBI/8elMov6R7vAEyQbVNNsRt8C0GLxIYuWI
+	pwV7UJvSPRFBhn9HX8wrJSj3QsPp8B5Gunh+2zDO335HpvwWp3dq8H5j3MG2PIgy33lu
+	cwvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=mNoC9piyFQwKvn1AgvK8yuK64Fc4n7XqoPdUzMe8sSA=;
-	b=I8z2FNrzBaAvIGNQJVeXR0z3JwLnpsMwsapdrdpTVeQ3HGHh1oi7Jt6NlxGcOk+QVK
-	3LQNgfSP3TYqiwhdZwfSlOYqHodYcN156sHzYPf5cebpG9VXSjAGzx5s52vFdZbflKz6
-	dqIHKujL8QptoBma+hKS4cruxMYHwUJM/PO25mJbAMms32rV7WXdv3iDtp0AVP5F/mtz
-	96XwbaDd/VWfmk6iXIsfXcq/h+edFgWLr+1ffQgws93u8hPgJ5qU2cSlBpU89D6/Sh+x
-	cOAFXHbog64Ggk9KHfklbupg+XrRt7Ab3fKpoa+In8rbJ/EQDQGGsesS5a1PD+7tAkUu
-	CPYg==
-X-Gm-Message-State: AA6/9RnmTtGUW2wSFHKlXhjMQcMkTkiee9uEfNI5OKwEgUBnle0pqH7nnWWyMpGOamATosOd594wq4B9OK26Xg==
-X-Received: by 10.46.71.85 with SMTP id u82mr701416lja.19.1475157301515; Thu,
-	29 Sep 2016 06:55:01 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.25.24.195 with HTTP; Thu, 29 Sep 2016 06:54:31 -0700 (PDT)
-X-Originating-IP: [177.100.224.38]
-In-Reply-To: <20160929133054.20096-1-ruben.de.smet@rubdos.be>
-References: <20160929133054.20096-1-ruben.de.smet@rubdos.be>
-From: Fabio Berton <fabio.berton@ossystems.com.br>
-Date: Thu, 29 Sep 2016 10:54:31 -0300
-Message-ID: <CAAPZna1EHTEKernEX88FO5gv=1m5VrEhf-S3LB6EDF91j8vd2w@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=yojxBam/X6wMdaElfKnbLr0ysDuFdhuAMDbmkFTHPyE=;
+	b=WbHf+Wcq3f+Wvvcieysb/6+RVZWmy0zFsCFSiaZXPwpcT0S7F5cDjOd3mYVNc2ePEu
+	knXXQJX+1UWACG5bVZ23byvuJia0OaYv/1Cb42JUPdNQwIawf3aeP9M+CYEXJoA34MT5
+	aO9kgh7BbRyLP+3Ef/HwHr+805k8DjVILJhp3cNE08gUAbyFFZmWRy1VaeuFP8sesb4I
+	dXWoZpc4JneBZI3Etvkv6QPnojs07iGHOMtpp2580KEauJACNay8AAArWsP70y2iJFcI
+	OKykfdxeT7RX6U8zkcmLbHafKfS0J2jNlTbTJHQs0UT1BJZ/jDRkEgCuGmsX1YXEMdTs
+	bBFQ==
+X-Gm-Message-State: AA6/9RkqfIF/VloYfWKLlnkGEecZCnYo1uBzPv1QeXCgbrcNTa8Twau+12jVOBZ+eS9O4g==
+X-Received: by 10.28.143.82 with SMTP id r79mr2336845wmd.7.1475222966654;
+	Fri, 30 Sep 2016 01:09:26 -0700 (PDT)
+Received: from debiang.dev.qarnot.loc (127.147.89.92.rev.sfr.net.
+	[92.89.147.127]) by smtp.gmail.com with ESMTPSA id
+	n131sm2847325wmd.3.2016.09.30.01.09.25
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 30 Sep 2016 01:09:26 -0700 (PDT)
+From: =?UTF-8?q?Laurent=20Gourv=C3=A9nec?=
+	<laurent.gourvenec@qarnot-computing.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-python][PATCH] python-scales: add recipe for version 1.0.9
+Date: Fri, 30 Sep 2016 10:08:48 +0200
+Message-Id: <1475222928-351-1-git-send-email-laurent.gourvenec@qarnot-computing.com>
+X-Mailer: git-send-email 2.1.4
+MIME-Version: 1.0
+Subject: [meta-oe][daisy][PATCH] python-cython: update SRC_URI for new download location
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,91 +56,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Sep 2016 13:55:06 -0000
+X-List-Received-Date: Fri, 30 Sep 2016 08:09:27 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Thu, Sep 29, 2016 at 10:30 AM, Ruben De Smet <ruben.de.smet@rubdos.be>
-wrote:
+Signed-off-by: Laurent Gourvénec <laurent.gourvenec@qarnot-computing.com>
+---
+ meta-oe/recipes-devtools/python/python-cython_0.15.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> A python module for tracking server state and statisticst
->
-> Signed-off-by: Ruben De Smet <ruben.de.smet@rubdos.be>
-> ---
->  meta-python/recipes-devtools/python/python-scales.inc       | 13
-> +++++++++++++
->  meta-python/recipes-devtools/python/python3-scales_1.0.9.bb | 11
-> +++++++++++
->  2 files changed, 24 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python-scales.inc
->  create mode 100644 meta-python/recipes-devtools/python/
-> python3-scales_1.0.9.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python-scales.inc
-> b/meta-python/recipes-devtools/python/python-scales.inc
-> new file mode 100644
-> index 0000000..5a46e2b
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-scales.inc
-> @@ -0,0 +1,13 @@
-> +SUMMARY =3D "Metrics for Python"
-> +DESCRIPTION =3D "Tracks server state and statistics, allowing you to see
-> what \
-> +your server is doing. It can also send metrics to Graphite for graphing
-> or to \
-> +a file for crash forensics."
-> +SECTION =3D "devel/python"
-> +LICENSE =3D "Apache-2.0"
-> +# LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc3c=
-6bd
-> 57"
-> +SRCNAME =3D "scales"
-> +
-> +SRC_URI[md5sum] =3D "c61167f2b5f506f0a34a7b8a295a9567"
-> +SRC_URI[sha256sum] =3D "8b6930f7d4bf115192290b44c757af
-> 5e254e3fcfcb75ff9a51f5c96a404e2753"
-> +
-> +inherit pypi
-> diff --git a/meta-python/recipes-devtools/python/python3-scales_1.0.9.bb
-> b/meta-python/recipes-devtools/python/python3-scales_1.0.9.bb
-> new file mode 100644
-> index 0000000..ecf6c67
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-scales_1.0.9.bb
-> @@ -0,0 +1,11 @@
-> +inherit setuptools3
-> +require python-scales.inc
-> +
-> +RDEPENDS_${PN} +=3D "\
-> +    python3-six \
->
+diff --git a/meta-oe/recipes-devtools/python/python-cython_0.15.1.bb b/meta-oe/recipes-devtools/python/python-cython_0.15.1.bb
+index 0bf057a..65db532 100644
+--- a/meta-oe/recipes-devtools/python/python-cython_0.15.1.bb
++++ b/meta-oe/recipes-devtools/python/python-cython_0.15.1.bb
+@@ -8,7 +8,7 @@ SRCNAME = "Cython"
+ BBCLASSEXTEND = "native"
+ PR = "r3"
+ 
+-SRC_URI = "http://www.cython.org/release/${SRCNAME}-${PV}.tar.gz \
++SRC_URI = "https://pypi.python.org/packages/source/C/Cython/Cython-${PV}.tar.gz \
+            file://0001-Don-t-append-docs-to-_Extension.extension.__doc__.patch \
+ "
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
+-- 
+2.1.4
 
-=E2=80=8BYou can move this to inc file and use
-
-RDEPENDS_${PN} +=3D " \
-    ${PYTHON_PN}-six \
-
-so, will work with both python 2 and 3.
-
-+"
-> +
-> +DEPENDS_${PN} +=3D "\
-> +    python3-setuptools \
-> +"
->
-
-
-=E2=80=8BIs this not provided by setuptools3
-=E2=80=8B class?=E2=80=8B
-
-+
-> --
-> 2.10.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
