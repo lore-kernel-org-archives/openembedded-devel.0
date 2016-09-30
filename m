@@ -1,49 +1,42 @@
-Return-Path: <laurent.gourvenec@qarnot-computing.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 4E5D960190
+Return-Path: <dev@codyps.com>
+Received: from mail-it0-f65.google.com (mail-it0-f65.google.com
+	[209.85.214.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 9C39560190
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Sep 2016 08:09:25 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id p138so2256964wmb.0
+	Fri, 30 Sep 2016 18:48:54 +0000 (UTC)
+Received: by mail-it0-f65.google.com with SMTP id j69so3412502itb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Sep 2016 01:09:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=qarnot-computing-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=yojxBam/X6wMdaElfKnbLr0ysDuFdhuAMDbmkFTHPyE=;
-	b=oeChhUN3CxY2lTb0bFPccUQRbfDMpxBTZZElqu9mRkMmRN6Hz97P7JjGxoLNtLLxT1
-	TcjVBUlJOKoTeirY5Me+Umjuhis36u0hrD9wJ2VoP4hPNiehG8jAmI3xZyStMnaTwuBl
-	m0hhuE5t+bja8raoYDeE6rzZ1fr0wLbON9628ThzLh+2BsWO4h2Ak9q2zjtnzTY2GiTp
-	HW6LrX+8ujOy+7r63l8DKDKTbFR5OgRxmBI/8elMov6R7vAEyQbVNNsRt8C0GLxIYuWI
-	pwV7UJvSPRFBhn9HX8wrJSj3QsPp8B5Gunh+2zDO335HpvwWp3dq8H5j3MG2PIgy33lu
-	cwvQ==
+	Fri, 30 Sep 2016 11:48:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codyps.com; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=Y/FphB5zYS1JdrIkWON5OxnUZAiodQj0AxRXT/nILUY=;
+	b=AoMhntK01VoXXwA2w7vFLg+pXSKJVrIaDCNBFIY13a4N3+UAGNVymLfdHPEixdeAy9
+	pmkZGzjflws8WHDxmEXELjEpN5560ow3NhDcVUmAvEXgIVBuQgVE8MHW7RUQ58IUtE0n
+	B3xZ1Cb6HopfRI4u4uEbkHUqkWVd2WKU2dGBk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=yojxBam/X6wMdaElfKnbLr0ysDuFdhuAMDbmkFTHPyE=;
-	b=WbHf+Wcq3f+Wvvcieysb/6+RVZWmy0zFsCFSiaZXPwpcT0S7F5cDjOd3mYVNc2ePEu
-	knXXQJX+1UWACG5bVZ23byvuJia0OaYv/1Cb42JUPdNQwIawf3aeP9M+CYEXJoA34MT5
-	aO9kgh7BbRyLP+3Ef/HwHr+805k8DjVILJhp3cNE08gUAbyFFZmWRy1VaeuFP8sesb4I
-	dXWoZpc4JneBZI3Etvkv6QPnojs07iGHOMtpp2580KEauJACNay8AAArWsP70y2iJFcI
-	OKykfdxeT7RX6U8zkcmLbHafKfS0J2jNlTbTJHQs0UT1BJZ/jDRkEgCuGmsX1YXEMdTs
-	bBFQ==
-X-Gm-Message-State: AA6/9RkqfIF/VloYfWKLlnkGEecZCnYo1uBzPv1QeXCgbrcNTa8Twau+12jVOBZ+eS9O4g==
-X-Received: by 10.28.143.82 with SMTP id r79mr2336845wmd.7.1475222966654;
-	Fri, 30 Sep 2016 01:09:26 -0700 (PDT)
-Received: from debiang.dev.qarnot.loc (127.147.89.92.rev.sfr.net.
-	[92.89.147.127]) by smtp.gmail.com with ESMTPSA id
-	n131sm2847325wmd.3.2016.09.30.01.09.25
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 30 Sep 2016 01:09:26 -0700 (PDT)
-From: =?UTF-8?q?Laurent=20Gourv=C3=A9nec?=
-	<laurent.gourvenec@qarnot-computing.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Y/FphB5zYS1JdrIkWON5OxnUZAiodQj0AxRXT/nILUY=;
+	b=hOKWrLeGBp5BTAkYDKPCESM20sOlCdP3juSa72lRyjXbHpVV6brZPh4keskjLMXnbE
+	GttDBRvw7H9I+j/YIO1TaK0jpNE2cPN+hhcmsqbW8PyKOOq5D+yuohrq18gPULDPWpnW
+	L5RS1ha7e+z1rgTHZfZxzGDUAjX3EgZPSmpVw63t+rWVcF3CEi/FvvqPUczqOZ2/eiCT
+	71BuTvQUrASf2U7ANbtuvVhLwmemJmropAtt4cXcKb+GSoTo3avZlVExhr2++X5IXOAg
+	ofHZLbrLeKxfu3Z0ZnQI+Lv/v02+ld7xL94BHAIkqbie9oFyrdpBpz/BdW9JH+v6EXgW
+	Boxg==
+X-Gm-Message-State: AA6/9RlYAXAVGU3oc6KRNYxbzC1cFWfrejR+5WTOQdbUuZMk2RKYxeWiro5kpomxR2wsrA==
+X-Received: by 10.36.204.68 with SMTP id x65mr6396221itf.54.1475261335513;
+	Fri, 30 Sep 2016 11:48:55 -0700 (PDT)
+Received: from localhost (static-96-237-165-28.bstnma.fios.verizon.net.
+	[96.237.165.28]) by smtp.gmail.com with ESMTPSA id
+	e124sm8132411ioe.15.2016.09.30.11.48.54
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 30 Sep 2016 11:48:55 -0700 (PDT)
+From: Cody P Schafer <dev@codyps.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Sep 2016 10:08:48 +0200
-Message-Id: <1475222928-351-1-git-send-email-laurent.gourvenec@qarnot-computing.com>
-X-Mailer: git-send-email 2.1.4
-MIME-Version: 1.0
-Subject: [meta-oe][daisy][PATCH] python-cython: update SRC_URI for new download location
+Date: Fri, 30 Sep 2016 14:48:51 -0400
+Message-Id: <20160930184851.4866-1-dev@codyps.com>
+X-Mailer: git-send-email 2.10.0
+Subject: [meta-oe][PATCH v2] meta-oe/recipes-connectivity/thrift: disable java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,29 +49,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Sep 2016 08:09:27 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 30 Sep 2016 18:48:54 -0000
 
-Signed-off-by: Laurent Gourvénec <laurent.gourvenec@qarnot-computing.com>
+Without this, thrift will try to use system java to build it's java
+bindings, which is both unexpected and may fail depending on the
+version of system java.
+
+Signed-off-by: Cody P Schafer <dev@codyps.com>
 ---
- meta-oe/recipes-devtools/python/python-cython_0.15.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/python/python-cython_0.15.1.bb b/meta-oe/recipes-devtools/python/python-cython_0.15.1.bb
-index 0bf057a..65db532 100644
---- a/meta-oe/recipes-devtools/python/python-cython_0.15.1.bb
-+++ b/meta-oe/recipes-devtools/python/python-cython_0.15.1.bb
-@@ -8,7 +8,7 @@ SRCNAME = "Cython"
- BBCLASSEXTEND = "native"
- PR = "r3"
+Since v1:
+
+ - ensure java is disabled in native & nativesdk too by reworking EXTRA_OECMAKE
+   formation to use appends.
+
+ meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
+index fdea7f1..905e561 100644
+--- a/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
++++ b/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
+@@ -25,10 +25,10 @@ export STAGING_LIBDIR
+ export BUILD_SYS
+ export HOST_SYS
  
--SRC_URI = "http://www.cython.org/release/${SRCNAME}-${PV}.tar.gz \
-+SRC_URI = "https://pypi.python.org/packages/source/C/Cython/Cython-${PV}.tar.gz \
-            file://0001-Don-t-append-docs-to-_Extension.extension.__doc__.patch \
- "
- S = "${WORKDIR}/${SRCNAME}-${PV}"
+-EXTRA_OECMAKE = "-DWITH_QT4=OFF -DWITH_QT5=OFF"
+-EXTRA_OECMAKE_class-native = "-DWITH_QT4=OFF -DWITH_QT5=OFF \
++EXTRA_OECMAKE = "-DWITH_QT4=OFF -DWITH_QT5=OFF -DBUILD_JAVA=OFF"
++EXTRA_OECMAKE_append_class-native = "\
+              -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF -DWITH_CPP=OFF"
+-EXTRA_OECMAKE_class-nativesdk = "-DWITH_QT4=OFF -DWITH_QT5=OFF \
++EXTRA_OECMAKE_append_class-nativesdk = "\
+              -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF -DWITH_PYTHON=OFF"
+ 
+ do_install_append () {
 -- 
-2.1.4
+2.10.0
 
 
