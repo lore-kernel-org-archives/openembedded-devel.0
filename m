@@ -1,49 +1,49 @@
 Return-Path: <armccurdy@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 0856B6FFC7
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 7035E6FF72
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Sep 2016 22:30:28 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id q2so5475488pfj.0
+	Fri, 30 Sep 2016 22:30:30 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id n24so5452851pfb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Sep 2016 15:30:30 -0700 (PDT)
+	Fri, 30 Sep 2016 15:30:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=IWK6MrbiJ4Sa7ocv7GToO3conYimh7YEDROmgbBiJ0A=;
-	b=ckizxDuZ0Am3yZynown8v3RsPEudeGWeqrjR4bUGX2hHgsSb81CHPT5AydU8gKpSRS
-	hcoUqO6b5cS5pMbX3+vLyKRG+8NVxB9CN4S6GrJr/aIrnZ6pvnc4V/6s6Lh6F7Dv+A1t
-	wdEpaS6pjo7XuTJQhMDJaoxbAp5YVMTck9m/njIkIV4yuD98zG5TsYyYvDjgiBpOcMMX
-	i4vvTNdv82wtt53n+2pt9EbJv+I2F/L/Yhf+Sfvepe5wcEufs4kDcIkQbrz15tlXy2iQ
-	WdbKBcrNihrOMquXvk2ZO6wycczuvWzlxXkdkz5Z0yPsRhuZz5lhSFCZV8tiBBLDG+Vt
-	+JXg==
+	bh=d1pnOofSho29wwSJsjOr4J2MpJtKXEF3YNMIWvH1+60=;
+	b=FvLiZlw6XFXNUmsNu1f3Iy8wGchxe252x4v7oXCwI35E5bxGpZt6a/hObXKKzsbEqC
+	OJSzdQdgxyetFGEVpVvn2P4m/PhlY74QY11s8MIRBTfl02TFFEn8yiw0Rcj5BnFiElHy
+	YPdeLcQop+RMdDc64u2TOpETaz+L6ccYKg4HyAn3MOjhY4MCyksBhoZA9P+NQuAj6ne4
+	HQAI/xwjEkh9kmBx2wk7z6RBOHBAzXhnl9vyh5fKx9MsaTKJSTrqnf9/8mVF+2Rn2zQg
+	KsnPJOKUIb4UK1RF8c2TSZtk7ZmPNzPOTe9sBS+plwbApgiDv5ICoMzJbAcl6D/H9YxK
+	c7ew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=IWK6MrbiJ4Sa7ocv7GToO3conYimh7YEDROmgbBiJ0A=;
-	b=gGp5tHqM9ZCXQ2JxIDNxjHOgZZohPGq6Q4l8ZwvoPlD2KTXLkjdtpX2na4B1E4Lq9E
-	MXPWh6hUQKdNutxfyT1s+eDw7vAyblixXa8RzkKb6D4hAqbrZJoU3S774E8RAv4BacKB
-	gAl1kXDEjN1C7TvBX/iMg6kYRpmr7oFOQPUH67f58c4vdSKvLf87HHHMTcKYjofrMIyx
-	tSUXxlZgUQOuSjU8CXA75WxUzww6QKVxaBcg6kFXtVlz3LeDJGkFmJwrO4wdsUMEd7nz
-	WXW4zSMo8hr2DWhtlcEpRac0BTnNdxUAZn3y6EpGpDLpttTNfGxiGRV5dj1tJcVvBymc
-	67xw==
-X-Gm-Message-State: AA6/9Rl2uuHOf5aWw9eKEOXK1ReKbu3FzyiOzUsyoWbkJT+9DVpT8Oehs717S9ytxHVxGA==
-X-Received: by 10.98.9.215 with SMTP id 84mr15815677pfj.44.1475274629867;
-	Fri, 30 Sep 2016 15:30:29 -0700 (PDT)
+	bh=d1pnOofSho29wwSJsjOr4J2MpJtKXEF3YNMIWvH1+60=;
+	b=kq9kfDh+zAc/LYNfN2T63fKcTwKrYWt3oPdnee2FcGq0UmHygYYyB54WVexlslTezg
+	PCDjAcqG3blD+UuO7laKaRnaw81odVRVtDBl/QcxnMijiRsQ/nS/X2ILKqSf7ljE8+jP
+	YqwKHtNZK5JOzi7LTjcSJtrF4mr61dQUO5K0hRa3jULPmmpbjKf37xe/EJiI54vUA6qB
+	6pah/AOH196zk7FYLu0PJG6dsYZNBkZOMC5DlKPNr8TgrTIf25q+ZYT1WLxgEPj0BdVY
+	sXzr4lym1+IDOAgmvzHK8k46vCBq+fHI6VnQHoFgXm4LNBdZCXBJAe40rxNNnYCiojzs
+	Zbww==
+X-Gm-Message-State: AA6/9RnMl/ijm4nMMOuPigB0UC9e9cpfLGkG1FSRIumMG164I+Xs3uwW42lBbl6Bnln/Vw==
+X-Received: by 10.98.68.8 with SMTP id r8mr15786680pfa.0.1475274631837;
+	Fri, 30 Sep 2016 15:30:31 -0700 (PDT)
 Received: from e6520.adbgroup.pl
 	(50-204-102-64-static.hfc.comcastbusiness.net. [50.204.102.64])
 	by smtp.gmail.com with ESMTPSA id
-	h82sm30125150pfh.22.2016.09.30.15.30.28
+	h82sm30125150pfh.22.2016.09.30.15.30.30
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 30 Sep 2016 15:30:28 -0700 (PDT)
+	Fri, 30 Sep 2016 15:30:31 -0700 (PDT)
 From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Sep 2016 15:30:13 -0700
-Message-Id: <1475274614-10777-3-git-send-email-armccurdy@gmail.com>
+Date: Fri, 30 Sep 2016 15:30:14 -0700
+Message-Id: <1475274614-10777-4-git-send-email-armccurdy@gmail.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1475274614-10777-1-git-send-email-armccurdy@gmail.com>
 References: <1475274614-10777-1-git-send-email-armccurdy@gmail.com>
-Subject: [meta-oe][PATCH 2/3] onig: update 5.9.3 -> 5.9.6
+Subject: [meta-oe][PATCH 3/3] jq: add support for jq-native + misc minor fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,52 +56,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Sep 2016 22:30:29 -0000
+X-List-Received-Date: Fri, 30 Sep 2016 22:30:30 -0000
 
-  2014/12/12: Version 5.9.6
-
-  2013/11/27: [impl] add onigenc_end_unicode().  (thanks Takenori Imoto)
-  2013/11/27: [impl] add onig_add_end_call().    (thanks Takenori Imoto)
-
-  2013/10/21: Version 5.9.5
-
-  2013/10/21: [impl] escape warnings for -Wall. (regparse.c)
-  2013/10/21: [bug] fixes an issue on Windows x64. (thanks Anatoliy Belsky)
-                    The issue was discovered in PHP, see https://bugs.php.net/64769.
-  2013/10/21: [impl] remove unused variable. (regcomp.c)
-
-  2013/04/04: Version 5.9.4
-
-  2013/04/04: [dev]  remove Makefile.in from git repository.
-  2013/04/04: [dist] add oniguruma.pc.in file. (for pkg-config)
-                     (thanks Giulio Paci)
-
-  https://web.archive.org/web/20150702035706/http://www.geocities.jp/kosako3/oniguruma/HISTORY_5X.txt
+ - Add PACKAGECONFIG options for docs, maintainer-mode and oniguruma
 
 Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- meta-oe/recipes-support/onig/{onig_5.9.3.bb => onig_5.9.6.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/onig/{onig_5.9.3.bb => onig_5.9.6.bb} (82%)
+ .../jq/jq/Support-without-oniguruma.patch          | 68 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/jq/jq_1.5.bb              | 21 ++++---
+ 2 files changed, 82 insertions(+), 7 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/jq/jq/Support-without-oniguruma.patch
 
-diff --git a/meta-oe/recipes-support/onig/onig_5.9.3.bb b/meta-oe/recipes-support/onig/onig_5.9.6.bb
-similarity index 82%
-rename from meta-oe/recipes-support/onig/onig_5.9.3.bb
-rename to meta-oe/recipes-support/onig/onig_5.9.6.bb
-index 416c2bf..abbaf98 100644
---- a/meta-oe/recipes-support/onig/onig_5.9.3.bb
-+++ b/meta-oe/recipes-support/onig/onig_5.9.6.bb
-@@ -9,8 +9,8 @@ SRC_URI = "https://web.archive.org/web/20150807014439/http://www.geocities.jp/ko
-            file://do-not-use-system-headers.patch \
-            file://configure.patch"
+diff --git a/meta-oe/recipes-devtools/jq/jq/Support-without-oniguruma.patch b/meta-oe/recipes-devtools/jq/jq/Support-without-oniguruma.patch
+new file mode 100644
+index 0000000..1dfd955
+--- /dev/null
++++ b/meta-oe/recipes-devtools/jq/jq/Support-without-oniguruma.patch
+@@ -0,0 +1,68 @@
++From 18b4b18b41f5ed396d73449ce8d6ec408d95d6b2 Mon Sep 17 00:00:00 2001
++From: David Tolnay <dtolnay@gmail.com>
++Date: Sat, 21 Nov 2015 10:05:37 -0800
++Subject: [PATCH] Support --without-oniguruma
++
++Upstream-Status: Backport
++
++Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
++
++---
++ configure.ac | 41 ++++++++++++++++++++---------------------
++ 1 file changed, 20 insertions(+), 21 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index 9e2c8cf..7f6be34 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -52,27 +52,26 @@ fi
++ AC_ARG_WITH([oniguruma],
++     [AS_HELP_STRING([--with-oniguruma=prefix],
++         [try this for a non-standard install prefix of the oniguruma library])],
++-    [ONIGURUMAPATHSET=1],
++-    [ONIGURUMAPATHSET=0])
++-
++-if test $ONIGURUMAPATHSET = 1; then
++-  CFLAGS="$CFLAGS -I${with_oniguruma}/include"
++-  LDFLAGS="$LDFLAGS -L${with_oniguruma}/lib"
++-fi
++-
++-# check for ONIGURUMA library
++-HAVE_ONIGURUMA=0
++-AC_CHECK_HEADER("oniguruma.h",
++-    AC_CHECK_LIB([onig],[onig_version],[LIBS="$LIBS -lonig"; HAVE_ONIGURUMA=1;]))
++-
++-# handle check results
++-if test $HAVE_ONIGURUMA != 1; then
++-    AC_MSG_NOTICE([Oniguruma was not found.])
++-    AC_MSG_NOTICE([ Try setting the location using '--with-oniguruma=PREFIX' ])
++-else
++-    AC_DEFINE([HAVE_ONIGURUMA],1,[Define to 1 if Oniguruma is installed])
++-fi
++-
+++    [],
+++    [with_oniguruma=yes])
+++
+++AS_IF([test "x$with_oniguruma" != xno], [
+++    AS_IF([test "x$with_oniguruma" != xyes], [
+++        CFLAGS="$CFLAGS -I${with_oniguruma}/include"
+++        LDFLAGS="$LDFLAGS -L${with_oniguruma}/lib"
+++    ])
+++    # check for ONIGURUMA library
+++    have_oniguruma=0
+++    AC_CHECK_HEADER("oniguruma.h",
+++        AC_CHECK_LIB([onig],[onig_version],[LIBS="$LIBS -lonig"; have_oniguruma=1;]))
+++    # handle check results
+++    AS_IF([test $have_oniguruma = 1], [
+++        AC_DEFINE([HAVE_ONIGURUMA], 1, [Define to 1 if Oniguruma is installed])
+++    ], [
+++        AC_MSG_NOTICE([Oniguruma was not found.])
+++        AC_MSG_NOTICE([Try setting the location using '--with-oniguruma=PREFIX'])
+++    ])
+++])
++ 
++ dnl Check for valgrind
++ AC_CHECK_PROGS(valgrind_cmd, valgrind)
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-devtools/jq/jq_1.5.bb b/meta-oe/recipes-devtools/jq/jq_1.5.bb
+index 612eaf3..0f40815 100644
+--- a/meta-oe/recipes-devtools/jq/jq_1.5.bb
++++ b/meta-oe/recipes-devtools/jq/jq_1.5.bb
+@@ -2,16 +2,14 @@ SUMMARY = "Lightweight and flexible command-line JSON processor"
+ DESCRIPTION = "jq is like sed for JSON data, you can use it to slice and \
+                filter and map and transform structured data with the same \
+                ease that sed, awk, grep and friends let you play with text."
+-HOMEPAGE = "http://stedolan.github.io/jq/"
++HOMEPAGE = "https://stedolan.github.io/jq/"
+ BUGTRACKER = "https://github.com/stedolan/jq/issues"
+ SECTION = "utils"
+-
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=29dd0c35d7e391bb8d515eacf7592e00"
  
--SRC_URI[md5sum] = "0d4eda2066d3c92970842a6790ce897a"
--SRC_URI[sha256sum] = "c3bba66b2a84760e6582c40881db97c839d94f327870009724bb8b4d0c051f2a"
-+SRC_URI[md5sum] = "d08f10ea5c94919780e6b7bed1ef9830"
-+SRC_URI[sha256sum] = "d5642010336a6f68b7f2e34b1f1cb14be333e4d95c2ac02b38c162caf44e47a7"
+-DEPENDS = "flex-native bison-native onig"
+-
+-SRC_URI = "https://github.com/stedolan/${BPN}/releases/download/${BPN}-${PV}/${BPN}-${PV}.tar.gz \
++SRC_URI = "https://github.com/stedolan/${BPN}/releases/download/${BP}/${BP}.tar.gz \
++           file://Support-without-oniguruma.patch \
+ "
  
- BINCONFIG = "${bindir}/onig-config"
+ SRC_URI[md5sum] = "0933532b086bd8b6a41c1b162b1731f9"
+@@ -19,5 +17,14 @@ SRC_URI[sha256sum] = "c4d2bfec6436341113419debf479d833692cc5cdab7eb0326b5a4d4fbe
  
+ inherit autotools
+ 
+-# Don't build documentation (generation requires ruby)
+-EXTRA_OECONF = "--disable-docs --disable-maintainer-mode"
++PACKAGECONFIG ?= "oniguruma"
++
++PACKAGECONFIG[docs] = "--enable-docs,--disable-docs,ruby-native"
++PACKAGECONFIG[maintainer-mode] = "--enable-maintainer-mode,--disable-maintainer-mode,flex-native bison-native"
++PACKAGECONFIG[oniguruma] = "--with-oniguruma,--without-oniguruma,onig"
++
++OE_EXTRACONF += " \
++    --disable-valgrind \
++"
++
++BBCLASSEXTEND = "native"
 -- 
 1.9.1
 
