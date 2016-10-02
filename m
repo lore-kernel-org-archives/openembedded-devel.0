@@ -1,47 +1,49 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 15336601D4
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B38F60745
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Oct 2016 14:48:57 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id i85so887335pfa.0
+	Sun,  2 Oct 2016 20:17:06 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id f193so7087586wmg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Oct 2016 07:48:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=2My30jy7MYUsjO+7rDgj3JLQBBneLMWqMuooVwHIF2g=;
-	b=Y9HxpmMGYem2dqZ1dr6pS0+cTrOzqumzWLoI4wbDtb4GFK8JBcVcIqVFOw9CCLX/Xg
-	lMJtcN00YtOCQfpbB0fp5fot+xo40BXdlsfOOvuej58b4lemyCm1TKvXfQfEl+Z0TzyV
-	1O5pk5k0kJw8fcEnRfjc2uMVIFgMawFEE98grC0JheiUHRcSertCL03Nm9An8T6fwzu9
-	czAdb2xyr7867Ie9Q2ZA5/WbxXffJoYhtwIYyrtPdcmPL6hZQmOwS6FG0sAReieE46Lp
-	qTh7D5eFGoWJx1MhW4F1xWb9b6KMwGA6CL3GzdOXfXOmwExJT3Z6uv6C5FYKLVEbiXV5
-	RH6Q==
+	Sun, 02 Oct 2016 13:17:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=TO6UwXEqxD/Jldg5DmMlyrKmfg2KHffQc1uMDAp7ntU=;
+	b=B6yCG/0sCqmM13wYNk3KK/j1ynwaHQSjrSzpvrr4ARGToIkoQOToXWGJWkBCNo248R
+	dy9hCVawI9IabD6GFQ/RL892UlmiNK6oPMp6TSxEpRtZVnwizRtzmBXsq7zxSJ9/Oifi
+	QVLPLiXgVQOTnVaYv0dKIXlBjWbD/wM9u7y6NRo5AyCJTPOc1fuPs/eW6bww1V61xp+O
+	efSoh5FG76t6o/LrnzXqypsATiP4BYvjisounDw2bOKmGtpS39MqQIL5Ate6Le7Sr7hD
+	wWqpVxfs14MPJw9JtGz5YZ5bBrBBizC87PXVwdvW53/tr5O9Xvei3SP+6E6z6aAeI6ls
+	BnEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=2My30jy7MYUsjO+7rDgj3JLQBBneLMWqMuooVwHIF2g=;
-	b=LRSzRBKDgxTpQSGSrR4ZFchfTvMVDVzUkF/khov03ursJdjt5wbSRRLDapHseOPYsA
-	0Enqp3gS7LBtjrdm4rMHL9/rTbcrHAO51NTdl4AdG9PnAnQvSp/vtC1VtZ3Kkk7YP+/T
-	CpAkUB2O0G+5tEoTmytQ7yEK5Hl8MS4Ae5cipc0UV5IX/lmIIBMfFPGjRnib/ntkcPDI
-	0QJeL15RcSFWrt7ixAhDEChCzFcwv3Xmz80zNIAL0EDzsFQIqleBnwYEJJkEKQqP+bZG
-	HFuSCC+bwRi3OGCRLjZObUvdtfxU0P8M2BD6IaPpH2vEO67cD/gxqoWAONwtXItfcA5/
-	+NBg==
-X-Gm-Message-State: AA6/9RmPOu+JMQIRiplCMzUqcvVa884VHy6Ry4N7aVmgEkcVyVFadxzD9KLo54F8NqjWqQ==
-X-Received: by 10.98.60.142 with SMTP id b14mr17307180pfk.93.1475419739302;
-	Sun, 02 Oct 2016 07:48:59 -0700 (PDT)
-Received: from akuster-ThinkPad-X240.mvista.com
-	([2601:202:4001:9ea0:c1fe:336b:94fd:8c8e])
-	by smtp.gmail.com with ESMTPSA id
-	si1sm41009615pab.0.2016.10.02.07.48.58
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 02 Oct 2016 07:48:58 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster808@gmail.com,
-	openembedded-devel@lists.openembedded.org
-Date: Sun,  2 Oct 2016 07:48:57 -0700
-Message-Id: <1475419737-29679-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] mariadb: update to version 5.5.52
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=TO6UwXEqxD/Jldg5DmMlyrKmfg2KHffQc1uMDAp7ntU=;
+	b=AtwG+7kxbZigNzV+Y45eeivAyLFpPeiVcoQpCXBUPdboSeJcvaM6wlL7Vq0/jkN7KU
+	qZqUkdCV7R98dxWy7LUIwnxfTxA4wk/swGHtrB0eVm9T20FT7IxiosKRD+RyDYBoproR
+	5OTgIA1rWO4jV5Dy2QR5zN2t10jFcza734H29K8Hxk5ZoyY6OEvo0JD7oKhw0nNAG62p
+	RE7NRT87HpERWv5xA7o5RPMZRyAOMiUWHfNfQa8YfOrSb6Zv5X+X5RXlw+F5nge1f6IR
+	2DQDcOngHyc5OPGKznmieESzrBzzdtbz/jF530vcBwXDPe788pgpo41zHaa3gh5LH4/3
+	wp1w==
+X-Gm-Message-State: AA6/9RmVIJbyL0VwdM6ZUZ+I8LfHjy7Ion9bWhjh5GxVUslPNfOAsS2YcxeUTVQ0uDWBlw==
+X-Received: by 10.28.74.21 with SMTP id x21mr7013586wma.16.1475439427580;
+	Sun, 02 Oct 2016 13:17:07 -0700 (PDT)
+Received: from localhost.localdomain (p5B0A22AF.dip0.t-ipconnect.de.
+	[91.10.34.175]) by smtp.googlemail.com with ESMTPSA id
+	q65sm15423508wmd.24.2016.10.02.13.17.06
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 02 Oct 2016 13:17:07 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  2 Oct 2016 22:16:52 +0200
+Message-Id: <1475439412-4117-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.5
+MIME-Version: 1.0
+Subject: [PATCH] gst-plugins-base: fix rare but annoying build errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,45 +56,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Oct 2016 14:49:00 -0000
+X-List-Received-Date: Sun, 02 Oct 2016 20:17:07 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Update to latest from 5.5.50 to 5.5.52, maintenance updates.
-includes CVE-2016-6662 affects < 5.5.51
+As mentioned long ago in [1] for me gst-plugins-base failed when rebuilding.
+Before this patch I had no other choice but to build from scratch.
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+When error occured I saw
+
+in config.log:
+GLIB_CFLAGS='-pthread line /home/superandy/tmp/oe-core-glibc/sysroots/raspberrypi2/usr/include/glib-2.0 -I/home/superandy/tmp/oe-core-glibc/sysroots/raspberrypi2/usr/lib/glib-2.0/include'
+
+and build failed with:
+| arm-angstrom-linux-gnueabi-gcc: error: line: No such file or directory
+
+[1] http://lists.openembedded.org/pipermail/openembedded-devel/2016-March/106528.html
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../mysql/{mariadb-native_5.5.50.bb => mariadb-native_5.5.52.bb}     | 0
- meta-oe/recipes-support/mysql/mariadb.inc                            | 5 ++---
- .../recipes-support/mysql/{mariadb_5.5.50.bb => mariadb_5.5.52.bb}   | 0
- 3 files changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/mysql/{mariadb-native_5.5.50.bb => mariadb-native_5.5.52.bb} (100%)
- rename meta-oe/recipes-support/mysql/{mariadb_5.5.50.bb => mariadb_5.5.52.bb} (100%)
+ ...l.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch | 32 ++++++++++++++++++++++
+ .../gstreamer-0.10/gst-plugins-base_0.10.36.bb     |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base-0.10.36/0001-aclocal.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.5.50.bb b/meta-oe/recipes-support/mysql/mariadb-native_5.5.52.bb
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb-native_5.5.50.bb
-rename to meta-oe/recipes-support/mysql/mariadb-native_5.5.52.bb
-diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
-index 5dd8d64..7725311 100644
---- a/meta-oe/recipes-support/mysql/mariadb.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb.inc
-@@ -16,9 +16,8 @@ SRC_URI = "http://archive.mariadb.org/mariadb-${PV}/source/mariadb-${PV}.tar.gz
-            file://configure.cmake-fix-valgrind.patch \
-            file://fix-a-building-failure.patch \
-           "
--
--SRC_URI[md5sum] = "5cfb169934170a429589e05f0f5aba9c"
--SRC_URI[sha256sum] = "030b60a787333bf20ec0ee02b02da52474772c069954dc914f894a7703989b76"
-+SRC_URI[md5sum] = "fca86f1eaed2163b4bdce4f98f472324"
-+SRC_URI[sha256sum] = "e142f9459507b97c5848042863b313ce70750118446bb4e35e5c07fe66007293"
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base-0.10.36/0001-aclocal.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base-0.10.36/0001-aclocal.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch
+new file mode 100644
+index 0000000..29fbec5
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base-0.10.36/0001-aclocal.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch
+@@ -0,0 +1,32 @@
++From 5478eafecf618cd8e742cc1b96d688a2c7ce5a79 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Sun, 2 Oct 2016 21:49:33 +0200
++Subject: [PATCH] gst-glib2.m4: don't do crazy things to GLIB_CFLAGS
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++we are definitely not one of those poor souls mentioned
++
++Upstream-Status: Pending
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++---
++ common/m4/gst-glib2.m4 | 1 -
++ 1 file changed, 1 deletion(-)
++
++diff --git a/common/m4/gst-glib2.m4 b/common/m4/gst-glib2.m4
++index b01f02f..4569ae5 100644
++--- a/common/m4/gst-glib2.m4
+++++ b/common/m4/gst-glib2.m4
++@@ -69,7 +69,6 @@ AC_DEFUN([AG_GST_GLIB_CHECK],
++   fi
++ 
++   dnl for the poor souls who for example have glib in /usr/local
++-  AS_SCRUB_INCLUDE(GLIB_CFLAGS)
++ 
++   AC_SUBST(GLIB_EXTRA_CFLAGS)
++ ])
++-- 
++2.5.5
++
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
+index e2dbb17..eefd993 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
+@@ -11,6 +11,7 @@ DEPENDS += "alsa-lib libogg libvorbis libtheora util-linux tremor glib-2.0-nativ
+ SRC_URI += "file://gst-plugins-base-tremor.patch \
+             file://configure.ac-fix-subparse-plugin.patch \
+             file://audioresample-Fix-build-on-x86-if-emmintrin.h-is-ava.patch \
++            file://0001-aclocal.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch \
+ "
  
- S = "${WORKDIR}/mariadb-${PV}"
- 
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.50.bb b/meta-oe/recipes-support/mysql/mariadb_5.5.52.bb
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb_5.5.50.bb
-rename to meta-oe/recipes-support/mysql/mariadb_5.5.52.bb
+ SRC_URI[md5sum] = "776c73883e567f67b9c4a2847d8d041a"
 -- 
-2.7.4
+2.5.5
 
 
