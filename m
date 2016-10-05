@@ -1,53 +1,49 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E4414719C5;
-	Wed,  5 Oct 2016 13:48:05 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id f193so20061615wmg.2;
-	Wed, 05 Oct 2016 06:48:07 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ua0-f195.google.com (mail-ua0-f195.google.com
+	[209.85.217.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 4565971A30
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  5 Oct 2016 15:38:36 +0000 (UTC)
+Received: by mail-ua0-f195.google.com with SMTP id 10so3813498ual.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 05 Oct 2016 08:38:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=8H4n5bae2sk7PgW9YbmYVWcppqhKIRU4UkC+ii5sh4Y=;
-	b=M+5CWqEDEeDqIn4p1T/b02qT+LewaqQ/ztiwFI1m6cJ8pYmnoKcGM6XhHG7uMGmJeV
-	9jFmpGYqtObEifKGPEOgjONfanWXxrYA/liMRSUlRV7Gbqc29/p8xKcUeFimW44MPAaa
-	S9gaPAqCAPbqUin6CW3ZBeBZCUNN96QC8xeqmpguqB6Oq4gwYUQnK4da5pwh64ZZ23op
-	YN7PxEtbJDGdP6Ex7UENIp4hIiW9wpGRHenPjWfvb3Aaf0+9v8GCSmrBC56vNFQW9q97
-	kyiUGAlFds/qWOMLbqT7fRw611UB5MDRJuoy36r/4Yn15aJBFrib3KQXCA9mFS90ho99
-	B0xw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=XbRLR567ndXKsgwrrB9Qtqp0USGfkMYlFiuq1+v4bfA=;
+	b=LXjHIRqcFevOeZm4dSUAbDX0cu+pYs7m5u2nal5P60Ep1NDgr6u/RNbyV2JNxy9Dic
+	iz/+SgrSlgARJWozYHQvBYyT4FHMDD/9ez8lweDornn/BGJPvgCeKX6dkrRytjWj4JSh
+	V9Br1b8H12RiSOf5K5zcfWEvseNm0jlFoqwdS9SwoZrmiGo1j+N91jbaxM3hxuhbA+L2
+	WtvXR1f8VWkpZyMZTFTkne/Dz1z0wS3xeyJY5rYqciraXGL4YBnuJEy25/5Mpcj+LtO3
+	+qGUKBj2iYSb/wzJ0/n0lohs0Vy1/uFC34NjmGy5mfe0a7kiZtZyqTuypGAmS1ky1QdI
+	HMsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=8H4n5bae2sk7PgW9YbmYVWcppqhKIRU4UkC+ii5sh4Y=;
-	b=NnBczxlxy0rN8h7xkoOTPblcWGndq+/Q11F5njDaJUvPABB+MX/ZpcMU+YaDf9ufAS
-	SMsHaCp7L9NCwLSOit2Qal/0dYba3CVfn/gA5AqLqINLz5LzYV/pwP5HnPIKCDZkC7ps
-	5M6HPjAoOH4qR7zyqXopBeghQuSN1+PyvlLL976H680HeQdMW1i0kh6AVUDYqGvzXwJk
-	944DcWthETylRwLqE8nCKyTjfWf8th4nqUUlsbpzAc1wUy9tVGURHd+NGdB4IH+nkZ0v
-	EyGKaNuMmTxNpB1bhZzuaFH4lF/HgrUgOE1hj6wkuF4P7NLl6JDp587YstzXbG0nxqBH
-	zfPQ==
-X-Gm-Message-State: AA6/9RlPTlbQAR8HGBeJOYG/ocILtR5Kuo7thDyHVqXit6/SVlsvV/yOUepeIbwH4LHiaQ==
-X-Received: by 10.194.16.161 with SMTP id h1mr7785760wjd.164.1475675286117;
-	Wed, 05 Oct 2016 06:48:06 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169])
-	by smtp.gmail.com with ESMTPSA id c5sm9078664wjw.29.2016.10.05.06.48.05
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 05 Oct 2016 06:48:05 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 5 Oct 2016 15:48:07 +0200
-To: Andreas =?iso-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>
-Message-ID: <20161005134807.GB2926@jama>
-References: <20161005131408.GA2926@jama>
-	<CALbNGRRDzx-2FPMd_hgfoEMQgHPGFjfjViMSCAfJaBZRg=c9ig@mail.gmail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=XbRLR567ndXKsgwrrB9Qtqp0USGfkMYlFiuq1+v4bfA=;
+	b=UQIB7GiA14RyuEPsAazwbPnlcJ/VxNAqZVx0mvEL5k5vgGHuWybo3DxqP+MNIt27tX
+	te0A6tNAu1G+AnQIVXHmROrwrv+Wf12nhFg0T4dGCkg3VB6xPeafyRCrY9MAB1Koccab
+	oEAemWD9FOV4zn5ntdYgIgMzwwVFSs5iP1pKixBiFtbCa4UxWaTglDvXMo1b3YYmtdLj
+	P8QVxzIRYElwcsfpHgaioxDchWpyGYJY53Po9L4NyPDW8yrf7sJNycE7dcYhsfQX8yZo
+	bJO5y5uifLYB98EbQ8T65C+n5cn0yYvKlpPSjF+Dvc1gj0ADFtez7MaAkRVTD0HTHibx
+	nb0g==
+X-Gm-Message-State: AA6/9RmKNQgMFO954J6rqg8EGXb+Ktug57oXy5Wtkfr0yRHhDj8nbwcdGzzdwp1l+OGl+1vgXNoCIRjgpKoo7Q==
+X-Received: by 10.159.38.227 with SMTP id 90mr6341027uay.31.1475681917793;
+	Wed, 05 Oct 2016 08:38:37 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRRDzx-2FPMd_hgfoEMQgHPGFjfjViMSCAfJaBZRg=c9ig@mail.gmail.com>
-User-Agent: Mutt/1.7.0 (2016-08-17)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world 2016-10-04
+Received: by 10.176.86.206 with HTTP; Wed, 5 Oct 2016 08:38:07 -0700 (PDT)
+In-Reply-To: <1475660078-12664-1-git-send-email-mike.looijmans@topic.nl>
+References: <1474634029-22896-1-git-send-email-mike.looijmans@topic.nl>
+	<CAMKF1srhhYfYO69noEU30+66yDX8cLNbEB7tpJhkubKwjPoevw@mail.gmail.com>
+	<57E69552.9040209@topic.nl>
+	<CAMKF1so4gZ9zYqS17E-xRq0U-bu27aiv6v_EiR2zc3OqCgDSYg@mail.gmail.com>
+	<CA+chaQcftFerFC0S9_+XwsZqZ6EAMtdfOjGj5yjoy2mut9wO0Q@mail.gmail.com>
+	<1475660078-12664-1-git-send-email-mike.looijmans@topic.nl>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 5 Oct 2016 08:38:07 -0700
+Message-ID: <CAMKF1sqTt+xuBTo4JyBDMUaHoygpuVUgcjQWyGfM9DAobaioyQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH v2] phytool: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,57 +56,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Oct 2016 13:48:10 -0000
-X-Groupsio-MsgNum: 63377
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="f2QGlHpHGjS2mn6Y"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 05 Oct 2016 15:38:37 -0000
+Content-Type: text/plain; charset=UTF-8
 
---f2QGlHpHGjS2mn6Y
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, Oct 5, 2016 at 2:34 AM, Mike Looijmans <mike.looijmans@topic.nl> wrote:
+> A nice tool to directly read, write and interpret ethernet PHY data.
+> Very useful when debugging PHY or MDIO problems, which ethtool does
+> not do.
+>
+> Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
+> ---
+> v2: Fix LICENSE filename and checksum
+>     Honor LDFLAGS value (patch accepted upstream)
+>
+>  meta-networking/recipes-support/phytool/phytool.bb | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/phytool/phytool.bb
+>
+> diff --git a/meta-networking/recipes-support/phytool/phytool.bb b/meta-networking/recipes-support/phytool/phytool.bb
+> new file mode 100644
+> index 0000000..d451aa9
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/phytool/phytool.bb
+> @@ -0,0 +1,14 @@
+> +SUMMARY = "PHY interface tool for Linux"
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=39bba7d2cf0ba1036f2a6e2be52fe3f0"
+> +
+> +PV = "1.0.1"
 
-On Wed, Oct 05, 2016 at 03:29:25PM +0200, Andreas M=FCller wrote:
-> > =3D=3D=3D qemuarm (1) =3D=3D=3D
-> >     * meta-openembedded/meta-filesystems/recipes-support/physfs/physfs_=
-git.bb:do_populate_lic
-> ^ This one was fixed during run - correct?
-> >
-> > =3D=3D=3D qemux86 (2) =3D=3D=3D
-> >     * meta-browser/recipes-browser/chromium/chromium_52.0.2743.76.bb:do=
-_compile
-> >     * meta-openembedded/meta-oe/recipes-support/mongodb/mongodb_git.bb:=
-do_compile
-> >
-> > =3D=3D=3D qemux86_64 (1) =3D=3D=3D
-> >     * meta-openembedded/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6=
-=2Ebb:do_compile
-> >
->=20
-> ...
->=20
-> >
-> > =3D=3D Tested changes (nocluded in master yet:
-> > ad9b1ce firefox: Fix build using gcc 6
-> ^ Where does this one come from?
+perhaps its better to include SRCPV in PV above since the SRCREV
+below is really 1.0.1+some more commits. moreover we get srcrev
+accounted for task hashes
 
-https://patchwork.openembedded.org/patch/126075/
+> +SRCREV = "3149bfdb4f513e2f0da0a7d0bc5d0873578696f2"
+> +SRC_URI = "git://github.com/wkz/phytool.git"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +do_install() {
+> +       install -d ${D}${prefix}/bin
+> +       oe_runmake 'DESTDIR=${D}' 'PREFIX=${prefix}' install
+> +}
+> --
+> 1.9.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-probably
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---f2QGlHpHGjS2mn6Y
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAlf1BHEACgkQN1Ujt2V2gBzJ1wCdF/otkEP/VWIc1GKTPDTRMCMr
-vFYAn0Ner+gwNXZ5JFKkanTneJAkmAAZ
-=L+Js
------END PGP SIGNATURE-----
-
---f2QGlHpHGjS2mn6Y--
