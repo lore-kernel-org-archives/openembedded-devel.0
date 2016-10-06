@@ -1,57 +1,46 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 03DF071A20
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pa0-f67.google.com (mail-pa0-f67.google.com
+	[209.85.220.67])
+	by mail.openembedded.org (Postfix) with ESMTP id DD77A71A98
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Oct 2016 16:32:44 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id b201so20215658wmb.1
+	Thu,  6 Oct 2016 00:33:37 +0000 (UTC)
+Received: by mail-pa0-f67.google.com with SMTP id qn10so192992pac.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Oct 2016 09:32:46 -0700 (PDT)
+	Wed, 05 Oct 2016 17:33:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=qxL+16hL0G9siP6FRlJsjj8p7N5WrgQ15xj9u+0+7j4=;
-	b=tezSiM5YIVLo/2IWTGHibuHR46DCWJ9/T/NJLak+tLe9pI7SgviAyqkQcZaAnVVprz
-	R61rcJChe89BEy/NjzUsmfuDbqf4pZMr0hI8Z8ozkAcB2M3uksepBthIjQRwMx0yhHxU
-	5UKDoc9Eva57aQFzE19DiNE4SCOsFbYfiTqNIpIPAHT6Ux26IgjEmzaxogcKmDfhBWWS
-	eheyK6PDNfe148aGx/glvgeo+DSyWCEfr59MHfd/pAAbio0OEyEtY/YLcxsc8/Pko38F
-	6euElNYA/pq1le+mpsOwnsbVHvZkK0B5EsthTyfWyud/dJpaCjQ0oSFIQr60a60qdOnz
-	3A0Q==
+	h=from:to:subject:date:message-id;
+	bh=/z+DjwjXA1/VXmtFinuVkVTWo+YhqjmDin4ukmYs14E=;
+	b=PD6nwMCVD41/X7HkoBDs1EmYpS2MtDuEr1CRon2makg3v2CnqPEzQYm+dsbO49GCOJ
+	IVZnI+ZMpq1GkQRIpNBLHUOFj4KKVcq4l6te38uFDdSpiR6wfMOKtvHH78IqfehEzKgB
+	FUCQDWyxQMvoQatdYo8k5HnbFocyPnWu9OrNRX/yB86rVfqqWU9C8qCOHyUZpowh5/6v
+	pGRMRLGR5PWnESJt9jNvb/eogImu3E321wkfAPz+kbZPdhyedah8s9K0wMdICcxe+Alp
+	2CBylp2uRSJM0Qb0NwrVl4hR149EFXQy5u5FubVAkiYLh34WhE32BxHsRJq4K441oiuC
+	mb4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=qxL+16hL0G9siP6FRlJsjj8p7N5WrgQ15xj9u+0+7j4=;
-	b=UiGQqAtiSBEvaKgqp5eISQJeOx2GdfKvMXruEuLH1nxDCs26ajyh8z4+VzqW4tXzGI
-	FXeCCHOAEfn3lKEGC8aLT700ZxBYdckwIlhtNzSM8cGvpIJrF7lP3lPIRWRYz1cz4ZqW
-	0tuOqxoU6dFs9aNcyAljdjxoeSSY6Kl+aA5qpco51ZdomVFMgN7lznNSQSjRotg+a15T
-	jf0X4GsziOJelLHHWhCpp7ZK//B2sGqkosNPQMRGXR0NsCZUAwIDczMF/JVfpZnUEW4K
-	UlW8t4o2wG7Q2/ERjSBQZoSPDjyS+sYCt4k9yuZcC4RtgIxR9+FGx+MseRCuA19iSvew
-	lnXQ==
-X-Gm-Message-State: AA6/9RlRpVc254p/6jtoVIH1659oTmYORvnQuxjYpwZSWnJouBCcR1F+WoG0uuRXcxw3fw==
-X-Received: by 10.194.80.74 with SMTP id p10mr514976wjx.121.1475685165686;
-	Wed, 05 Oct 2016 09:32:45 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	f142sm10379971wmf.19.2016.10.05.09.32.44
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=/z+DjwjXA1/VXmtFinuVkVTWo+YhqjmDin4ukmYs14E=;
+	b=I5sn6T7fjdVYxO2VyFdrj5vBUvTnqHe0TiGF7BcwSLxtSJfsmjAQeTssF0EQQ1nwWt
+	EUAxKECu6uwVYnyK6mQTl+jAECjAGQvE8D/Ire9SfE7wz4Qhi/HmArRDEDERyQvwKuYe
+	+o7aYzgpTo87sR6AClT6JsfvSESXpJebBHSCMvQe0hyUIr2cTE9r1lmYDBTp6P7WaI3m
+	WWKS1YUTSFIYZk2jH3l1w0jaE46FcsLZOqSE4SUuBC2bhg0QkhMH0/o7pvdgONlfzG/5
+	LMHXwDRcfPcJqdfavdlM0Ic3RCUpEwKSetG7njolK23xEimxU1QdxJVjCKH77XcIn0cs
+	elvQ==
+X-Gm-Message-State: AA6/9RmWdv1n0DYe90PtH8U7h7+YK8DW/9BwU5El42cg8xXMBrVSGzmtt9J6/gVjNoXAyw==
+X-Received: by 10.66.21.231 with SMTP id y7mr14269933pae.156.1475714018923;
+	Wed, 05 Oct 2016 17:33:38 -0700 (PDT)
+Received: from akuster-ThinkPad-X240.mvista.com
+	(50-233-148-156-static.hfc.comcastbusiness.net. [50.233.148.156])
+	by smtp.gmail.com with ESMTPSA id n85sm120595pfb.31.2016.10.05.17.33.38
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 05 Oct 2016 09:32:44 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 5 Oct 2016 18:32:47 +0200
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 05 Oct 2016 17:33:38 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161005163247.GC2926@jama>
-References: <1474634029-22896-1-git-send-email-mike.looijmans@topic.nl>
-	<CAMKF1srhhYfYO69noEU30+66yDX8cLNbEB7tpJhkubKwjPoevw@mail.gmail.com>
-	<57E69552.9040209@topic.nl>
-	<CAMKF1so4gZ9zYqS17E-xRq0U-bu27aiv6v_EiR2zc3OqCgDSYg@mail.gmail.com>
-	<CA+chaQcftFerFC0S9_+XwsZqZ6EAMtdfOjGj5yjoy2mut9wO0Q@mail.gmail.com>
-	<1475660078-12664-1-git-send-email-mike.looijmans@topic.nl>
-	<CAMKF1sqTt+xuBTo4JyBDMUaHoygpuVUgcjQWyGfM9DAobaioyQ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqTt+xuBTo4JyBDMUaHoygpuVUgcjQWyGfM9DAobaioyQ@mail.gmail.com>
-User-Agent: Mutt/1.7.0 (2016-08-17)
-Subject: Re: [meta-networking][PATCH v2] phytool: Add recipe
+Date: Wed,  5 Oct 2016 17:33:37 -0700
+Message-Id: <1475714017-9205-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-networking][PATCH] wireshark: update to 2.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,90 +53,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Oct 2016 16:32:46 -0000
-X-Groupsio-MsgNum: 63381
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="32u276st3Jlj2kUU"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 06 Oct 2016 00:33:39 -0000
 
---32u276st3Jlj2kUU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Restore PE
 
-On Wed, Oct 05, 2016 at 08:38:07AM -0700, Khem Raj wrote:
-> On Wed, Oct 5, 2016 at 2:34 AM, Mike Looijmans <mike.looijmans@topic.nl> =
-wrote:
-> > A nice tool to directly read, write and interpret ethernet PHY data.
-> > Very useful when debugging PHY or MDIO problems, which ethtool does
-> > not do.
-> >
-> > Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
-> > ---
-> > v2: Fix LICENSE filename and checksum
-> >     Honor LDFLAGS value (patch accepted upstream)
-> >
-> >  meta-networking/recipes-support/phytool/phytool.bb | 14 ++++++++++++++
-> >  1 file changed, 14 insertions(+)
-> >  create mode 100644 meta-networking/recipes-support/phytool/phytool.bb
-> >
-> > diff --git a/meta-networking/recipes-support/phytool/phytool.bb b/meta-=
-networking/recipes-support/phytool/phytool.bb
-> > new file mode 100644
-> > index 0000000..d451aa9
-> > --- /dev/null
-> > +++ b/meta-networking/recipes-support/phytool/phytool.bb
-> > @@ -0,0 +1,14 @@
-> > +SUMMARY =3D "PHY interface tool for Linux"
-> > +LICENSE =3D "GPLv2"
-> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D39bba7d2cf0ba1036f2a6e2be52=
-fe3f0"
-> > +
-> > +PV =3D "1.0.1"
->=20
-> perhaps its better to include SRCPV in PV above since the SRCREV
-> below is really 1.0.1+some more commits. moreover we get srcrev
-> accounted for task hashes
->=20
-> > +SRCREV =3D "3149bfdb4f513e2f0da0a7d0bc5d0873578696f2"
-> > +SRC_URI =3D "git://github.com/wkz/phytool.git"
-> > +
-> > +S =3D "${WORKDIR}/git"
-> > +
-> > +do_install() {
-> > +       install -d ${D}${prefix}/bin
-> > +       oe_runmake 'DESTDIR=3D${D}' 'PREFIX=3D${prefix}' install
+includes 2 security fixes:
+wnpa-sec-2016-57. NCP dissector crash. Fixed in 2.2.1.
+wnpa-sec-2016-56. Bluetooth L2CAP dissector crash. Fixed in 2.2.1.
 
-We're not using tabs for indentation.
-see http://www.openembedded.org/wiki/Styleguide
+see https://www.wireshark.org/docs/relnotes/wireshark-2.2.1.html
 
-> > +}
-> > --
-> > 1.9.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../wireshark/{wireshark_2.2.0.bb => wireshark_2.2.1.bb}             | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_2.2.0.bb => wireshark_2.2.1.bb} (93%)
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.0.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
+similarity index 93%
+rename from meta-networking/recipes-support/wireshark/wireshark_2.2.0.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
+index dca3be6..a5fb7f6 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_2.2.0.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
+@@ -8,8 +8,9 @@ DEPENDS = "pcre expat glib-2.0 sbc"
+ 
+ SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
+ 
+-SRC_URI[md5sum] = "c7de0997f74934f25b456846cf75cb81"
+-SRC_URI[sha256sum] = "a6847e741efcba6cb9d92d464d4219917bee3ad0b8f5b0f80d4388ad2f3f1104"
++PE = "1"
++SRC_URI[md5sum] = "49a1023a69ac108ca089d750eee50e37"
++SRC_URI[sha256sum] = "900e22af04c8b35e0d02a25a360ab1fb7cfe5ac18fc48a9afd75a7103e569149"
+ 
+ inherit autotools pkgconfig perlnative
+ 
+-- 
+2.7.4
 
---32u276st3Jlj2kUU
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAlf1Ky4ACgkQN1Ujt2V2gBwNFACfWjLQY3Eg8LT+MQGSWORpgtAN
-PcQAn17lsPARjzwOJoZ3xpomZReY6KRd
-=OXOU
------END PGP SIGNATURE-----
-
---32u276st3Jlj2kUU--
