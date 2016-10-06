@@ -1,25 +1,49 @@
-Return-Path: <mike.looijmans@topic.nl>
-Received: from atl4mhob14.myregisteredsite.com
-	(atl4mhob14.myregisteredsite.com [209.17.115.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 3380471A57
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id EF06560720
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Oct 2016 05:59:05 +0000 (UTC)
-Received: from mailpod.hostingplatform.com ([10.30.71.206])
-	by atl4mhob14.myregisteredsite.com (8.14.4/8.14.4) with ESMTP id
-	u965x4ia001445 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 6 Oct 2016 01:59:04 -0400
-Received: (qmail 5316 invoked by uid 0); 6 Oct 2016 05:59:04 -0000
-X-TCPREMOTEIP: 37.74.225.130
-X-Authenticated-UID: mike@milosoftware.com
-Received: from unknown (HELO mikebuntu.TOPIC.LOCAL)
-	(mike@milosoftware.com@37.74.225.130)
-	by 0 with ESMTPA; 6 Oct 2016 05:59:04 -0000
-From: Mike Looijmans <mike.looijmans@topic.nl>
+	Thu,  6 Oct 2016 08:07:31 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id 123so2204903wmb.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 Oct 2016 01:07:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=t0vZ5YKl9gynuCBzu/fF+46lyBpsFmd6QoqN75C9zNc=;
+	b=W10RC9haxthnV4dom+m7pTspCjzMnUStIEX07rjLSGSaOY8spCdYs+/xXWLas/qyvs
+	A2W8tyC0TTYWsUzQ0ELXJDFJyLBJf9EeJ0gCflLu/CGI1yCt6mKhM7cypcyEmo5nkKlJ
+	rmAwrMBA0dvz9FlK9XbN0JbrMPPca8tScoGa2qOeFs4Pshd37pXHzYgm/hq0kxp7xQf1
+	CK1n+Xn2YvPDHZSYf1Knc0NrdCWOw4g8BdeovenRqEok3eiHxO+o+61dyf5wv9kvzacS
+	Zd12VW/8d3nRnmi/nOSGMq5geEtJU2aj213YZRpnWZPhopT4wq5pgyMerEvB//PT7xAE
+	6Ygw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=t0vZ5YKl9gynuCBzu/fF+46lyBpsFmd6QoqN75C9zNc=;
+	b=SkvFhHbZ0Jflr/ha10XoAv389bPBxtCUm2BScaPtLXjiX5pzukwE+FyJWKN440ZL+t
+	cbIwmNsV4KIf0bxrZ4oHmUrbCXUqAiIgzfXXxeJMV8FkMPg/QZZEvPcAQZJbegqV/Z7T
+	b1A3xNyOM4zr+h4omBVJ5pOuu9xPllcy/o0pypFZtggIBqpMfe/Q2mF69ZHf79YTfySu
+	xUa6DtxIFklbA9SCqHIcCyUp+QB19sAF1MUU3Hj99WvOaf5uBM5lsmMsnx9ZHFYyMts1
+	A4Wmk6aOF13J3jhEqohovJK4vdGxkd97BJcLzkRXVO+VxZvL8AWhPAI4oVV2vhh1djzG
+	i07Q==
+X-Gm-Message-State: AA6/9Rkov/5QhbGkaNFHHwWw1WE5J50bzqPMycvgMSSEMuUsDZn6WX81aNXByD8obG1WZA==
+X-Received: by 10.28.8.139 with SMTP id 133mr190332wmi.80.1475741253158;
+	Thu, 06 Oct 2016 01:07:33 -0700 (PDT)
+Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
+	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
+	iq2sm13018191wjb.19.2016.10.06.01.07.32
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 06 Oct 2016 01:07:32 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Oct 2016 07:59:01 +0200
-Message-Id: <1475733541-3401-1-git-send-email-mike.looijmans@topic.nl>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][PATCH v3] phytool: Add recipe
+Date: Thu,  6 Oct 2016 10:07:29 +0200
+Message-Id: <20161006080729.26628-2-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.10.1
+In-Reply-To: <20161006080729.26628-1-Martin.Jansa@gmail.com>
+References: <20161006080729.26628-1-Martin.Jansa@gmail.com>
+Cc: Juhee Cho <juhee.cho@lge.com>
+Subject: [meta-oe][WIP][PATCH 2/2] leptonica: add PACKAGECONFIG for giflib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,43 +56,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Oct 2016 05:59:08 -0000
+X-List-Received-Date: Thu, 06 Oct 2016 08:07:32 -0000
 
-A nice tool to directly read, write and interpret ethernet PHY data.
-Very useful when debugging PHY or MDIO problems, which ethtool does
-not do.
+From: Juhee Cho <juhee.cho@lge.com>
 
-Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
+* make it easier to disable giflib
+
+Signed-off-by: Juhee Cho <juhee.cho@lge.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
-v3: Add SRCPV to PV
-    Indent using spaces instead of tab
-v2: Fix LICENSE filename and checksum
-    Honor LDFLAGS value (patch accepted upstream)
- meta-networking/recipes-support/phytool/phytool.bb | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-networking/recipes-support/phytool/phytool.bb
+ meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-support/phytool/phytool.bb b/meta-networking/recipes-support/phytool/phytool.bb
-new file mode 100644
-index 0000000..e4391df
---- /dev/null
-+++ b/meta-networking/recipes-support/phytool/phytool.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "PHY interface tool for Linux"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=39bba7d2cf0ba1036f2a6e2be52fe3f0"
-+
-+PV = "1.0.1+git${SRCPV}"
-+SRCREV = "3149bfdb4f513e2f0da0a7d0bc5d0873578696f2"
-+SRC_URI = "git://github.com/wkz/phytool.git"
-+
-+S = "${WORKDIR}/git"
-+
-+do_install() {
-+    install -d ${D}${prefix}/bin
-+    oe_runmake 'DESTDIR=${D}' 'PREFIX=${prefix}' install
-+}
+diff --git a/meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb b/meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb
+index 0aebe89..c32d24a 100644
+--- a/meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb
++++ b/meta-oe/recipes-graphics/leptonica/leptonica_1.73.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "A pedagogically-oriented open source site containing software that is broadly useful for image processing and image analysis applications"
+-DEPENDS = "jpeg tiff libpng zlib giflib"
++DEPENDS = "jpeg tiff libpng zlib"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://leptonica-license.txt;md5=20cdd3af097ca431b82004c691f406a6"
+ 
+@@ -11,7 +11,8 @@ EXTRA_OECONF += " \
+     --without-libwebp \
+ "
+ 
+-PACKAGECONFIG ??= ""
++PACKAGECONFIG ??= "giflib"
+ PACKAGECONFIG[openjpeg] = "--with-libopenjpeg,--without-libopenjpeg,openjpeg"
++PACKAGECONFIG[giflib] = "--with-giflib,--without-giflib,giflib"
+ 
+ inherit autotools pkgconfig
 -- 
-1.9.1
+2.10.1
 
 
