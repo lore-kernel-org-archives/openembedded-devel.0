@@ -1,46 +1,47 @@
-Return-Path: <igor.socec@pelagicore.com>
-Received: from mail-lf0-f42.google.com (mail-lf0-f42.google.com
-	[209.85.215.42])
-	by mail.openembedded.org (Postfix) with ESMTP id BCF2760111
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ua0-f179.google.com (mail-ua0-f179.google.com
+	[209.85.217.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A21B60557
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Oct 2016 16:45:55 +0000 (UTC)
-Received: by mail-lf0-f42.google.com with SMTP id l131so21902877lfl.2
+	Thu,  6 Oct 2016 16:53:07 +0000 (UTC)
+Received: by mail-ua0-f179.google.com with SMTP id r64so23094430uar.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Oct 2016 09:45:57 -0700 (PDT)
+	Thu, 06 Oct 2016 09:53:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=xDEGykT1xtnZa0Js+6TfcCYQ7tlUme30crlOuRHuN4w=;
-	b=mm293eSpY+haHITe0QXZBGO4BaU8ba7NzJusF5Yg3cA4oplj28vQBs1UF/f56Urngy
-	ZZhrDkxNaRu+EFjDIwl7tk8Pq4YcUp/79qc2qs9gwFPLaKOc5p8nAOrtJ47ElLLLJ/6e
-	LnpIDaPLB1eefI8RfAfPYXS7jiOMEBw+pdxnt4V3GAjx1DvESHwX9fo57fKfShv8a2pz
-	CcMnnR8p78rnETW9nuRUtrC4VHhJDLA/cfQ800D4CxY3p/3zvwlBI4oOJvtKKOJVEieX
-	8HeJxTBrU3LM8tLZWT/G9csonANKqGlAcHFWWkZmnvqjrZDDxCXeFJUohv0iPzIet/3d
-	zy2g==
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=iq+PJilYY7s8aVwkTdEqqw6kAy7i2R8aRj1FxuA5RUs=;
+	b=hEmnb8VOoLjdZU+5G8nm3xxd6ONuc0n4oe1LHUuXnt679ZuJo2I/1VPUwQCUS0lm1R
+	4C9Uo+tS4U5YHvEzXUT3izSpd00axn4MmVt/s9XlY6+7Vsop/2S/ULfY3F2c3HZrNtGE
+	Gh8KAKtC7ItcDPpBqgBzmRZtGfuKeea07fgyevDqt6avrIHoGLSoStKNaLHLA9FpPAWM
+	QeAaMYxR3skkURvrQBoCv3wTCFyF+nZp1CR/vLYuF4rE2BBMa1cMRGM3mz3yBfiNMg34
+	CXuhFtPMwKPM2hhIfuqNWEIzhTLozRsija3Sdc2gtVO1lfTpHcpzsSeViJpbAhspdOrL
+	e64Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=xDEGykT1xtnZa0Js+6TfcCYQ7tlUme30crlOuRHuN4w=;
-	b=ZjE7ynt88NylCh9uiPDR71hlqcvUmWiIrWHQfyxQn8QuBUNBk2oCE/W1fVfaxuVcqv
-	Woe8EFTvwnS78wep59fNmwPpmEIUWTr4/iVmZRlGL+3z9j5Bmmmci0aVsQqsQHup6e9d
-	IHDfDR17o/Q1Kqg2GNmjogx7/2oNyiNoloq2CbHGB8X45hLAmYMT3Bzk+KR+JnHiBMSK
-	Mad5bVLTLdanWgv7eSugO66X9Ukx1ITKNZOhZNiKTDyd2G+Kck4RvbiopRrziz0j5t+k
-	pXPBYxQ9s/fvuoEePpnXM5CItZeVhKwWdta8+9luIAnYTCw+TX+H3lepo5gitjoWLm1o
-	gcjA==
-X-Gm-Message-State: AA6/9RkhyRQUd7+aD667bqSP4RSZjrAwMwSdoe/V2F6sBlHQl68cZcUL93ME7b4EUBrFq3OS
-X-Received: by 10.46.0.133 with SMTP id e5mr325450lji.50.1475772355829;
-	Thu, 06 Oct 2016 09:45:55 -0700 (PDT)
-Received: from mydeb.mecel.net (static-212-247-53-108.cust.tele2.se.
-	[212.247.53.108])
-	by smtp.gmail.com with ESMTPSA id 5sm2808209ljb.22.2016.10.06.09.45.54
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 06 Oct 2016 09:45:55 -0700 (PDT)
-From: Igor Socec <igor.socec@pelagicore.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Oct 2016 18:45:43 +0200
-Message-Id: <20161006164543.10141-2-igor.socec@pelagicore.com>
-X-Mailer: git-send-email 2.9.3
-Subject: [meta-oe][PATCH] jansson: update to 2.9
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=iq+PJilYY7s8aVwkTdEqqw6kAy7i2R8aRj1FxuA5RUs=;
+	b=BYl4cdR3p8A5e88x9axbxWgDP+r7J5Fciz6ouwGSXi2kXDxNM3oXYG1aZMEYHTKKPO
+	T/ejUaK5GfTxZ9I8aKIgSnHQC/ICJ1VqlUKzsJbb9VaNlatWW/mFDwdf2qDwunyomQdG
+	o0Gl57czybApAFmDYObyx3rfEZTUNA4FSBg6JpSxMmgiUG4wPh1O8OHZ0KDMuARCK7fk
+	d8qFY5luNApYFMm8Qw81qgAbz87vJWcEEDQ/qS1/e5EBMpNJQ1D4ShRrGSQFjPqhGE+M
+	yGYt/fMTZd/5NoGd6Fbqy2itZVUQ5g+bZuFUnmSVstsO92+sHOjEydInNdcONB5XCro8
+	KrCA==
+X-Gm-Message-State: AA6/9Rlq/olrrS+TXIz5QtiMB9pWcQROgf+T02XifHk9z6LNjf+uR+5M+Lg//WgWIfdYxct7WtYqKDWy8Oq6jg==
+X-Received: by 10.176.82.220 with SMTP id w28mr10013619uaw.65.1475772788909;
+	Thu, 06 Oct 2016 09:53:08 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.176.65.130 with HTTP; Thu, 6 Oct 2016 09:53:08 -0700 (PDT)
+In-Reply-To: <1475771979-17364-1-git-send-email-akuster808@gmail.com>
+References: <1475771979-17364-1-git-send-email-akuster808@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 6 Oct 2016 18:53:08 +0200
+Message-ID: <CALbNGRQTUGqBep6kfzrhx9c-TyvYOD7N=H-B0s=rzv8UAru1bw@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Cc: akuster <akuster@mvista.com>
+Subject: Re: [meta-gnome][PATCH] gvfs: fix fetch error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,38 +54,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Oct 2016 16:45:56 -0000
+X-List-Received-Date: Thu, 06 Oct 2016 16:53:08 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Igor Socec <igor.socec@pelagicore.com>
----
- meta-oe/recipes-extended/jansson/{jansson_2.4.bb => jansson_2.9.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-extended/jansson/{jansson_2.4.bb => jansson_2.9.bb} (53%)
+On Thu, Oct 6, 2016 at 6:39 PM, Armin Kuster <akuster808@gmail.com> wrote:
+> ERROR: gvfs-1.28.3-r0 do_fetch: Function failed: Fetcher failure for URL: 'http://ftp.gnome.org/pub/GNOME/sources/gvfs/1.28/gvfs-1.28.3.tar.xz;name=archive'. Unable to fetch URL from any source.
+>
+> change SRC_URI
+>
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>  meta-gnome/recipes-gnome/gvfs/gvfs_1.28.3.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.28.3.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.28.3.bb
+> index fde57c1..746d73c 100644
+> --- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.28.3.bb
+> +++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.28.3.bb
+> @@ -6,6 +6,8 @@ inherit gnome bash-completion
+>
+>  DEPENDS += "libsecret glib-2.0 gconf intltool-native libgudev udisks2"
+>
+> +SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
+> +
+>  SRC_URI[archive.md5sum] = "d2399a1a217dd5030e8830c7e7c813c2"
+>  SRC_URI[archive.sha256sum] = "458c4cb68570f6ef4a9e152995c62d0057c3e0a07ed64d84c7200cdd22f0bd17"
+>
+> --
+> 2.3.5
+>
+I that a gvfs-only or a gnome common issue?
 
-diff --git a/meta-oe/recipes-extended/jansson/jansson_2.4.bb b/meta-oe/recipes-extended/jansson/jansson_2.9.bb
-similarity index 53%
-rename from meta-oe/recipes-extended/jansson/jansson_2.4.bb
-rename to meta-oe/recipes-extended/jansson/jansson_2.9.bb
-index c235729..455b374 100644
---- a/meta-oe/recipes-extended/jansson/jansson_2.4.bb
-+++ b/meta-oe/recipes-extended/jansson/jansson_2.9.bb
-@@ -1,12 +1,12 @@
- SUMMARY = "Jansson is a C library for encoding, decoding and manipulating JSON data"
- HOMEPAGE = "http://www.digip.org/jansson/"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=6946b728e700de875e60ebb453cc3a20"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8b70213ec164c7bd876ec2120ba52f61"
- 
- SRC_URI = "http://www.digip.org/jansson/releases/${BPN}-${PV}.tar.gz"
- 
--SRC_URI[md5sum] = "c4629b89bf0432f3158c461e88fe0113"
--SRC_URI[sha256sum] = "1fcbd1ac3d8b610644acf86a5731d760bb228c9acbace20a2ad0f23baec79b41"
-+SRC_URI[md5sum] = "84abaefee9502b2f2ff394d758f160c7"
-+SRC_URI[sha256sum] = "0ad0d074ca049a36637e7abef755d40849ad73e926b93914ce294927b97bd2a5"
- 
- inherit autotools pkgconfig
- 
--- 
-2.9.3
-
+Andreas
 
