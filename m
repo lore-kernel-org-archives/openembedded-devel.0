@@ -1,46 +1,57 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pa0-f67.google.com (mail-pa0-f67.google.com
-	[209.85.220.67])
-	by mail.openembedded.org (Postfix) with ESMTP id DD77A71A98
+Return-Path: <prvs=0087855c4f=mike.looijmans@topicproducts.com>
+Received: from mx12-04.smtp.antispamcloud.com (mx12-04.smtp.antispamcloud.com
+	[46.165.232.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 9FC0271A46
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Oct 2016 00:33:37 +0000 (UTC)
-Received: by mail-pa0-f67.google.com with SMTP id qn10so192992pac.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Oct 2016 17:33:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=/z+DjwjXA1/VXmtFinuVkVTWo+YhqjmDin4ukmYs14E=;
-	b=PD6nwMCVD41/X7HkoBDs1EmYpS2MtDuEr1CRon2makg3v2CnqPEzQYm+dsbO49GCOJ
-	IVZnI+ZMpq1GkQRIpNBLHUOFj4KKVcq4l6te38uFDdSpiR6wfMOKtvHH78IqfehEzKgB
-	FUCQDWyxQMvoQatdYo8k5HnbFocyPnWu9OrNRX/yB86rVfqqWU9C8qCOHyUZpowh5/6v
-	pGRMRLGR5PWnESJt9jNvb/eogImu3E321wkfAPz+kbZPdhyedah8s9K0wMdICcxe+Alp
-	2CBylp2uRSJM0Qb0NwrVl4hR149EFXQy5u5FubVAkiYLh34WhE32BxHsRJq4K441oiuC
-	mb4Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=/z+DjwjXA1/VXmtFinuVkVTWo+YhqjmDin4ukmYs14E=;
-	b=I5sn6T7fjdVYxO2VyFdrj5vBUvTnqHe0TiGF7BcwSLxtSJfsmjAQeTssF0EQQ1nwWt
-	EUAxKECu6uwVYnyK6mQTl+jAECjAGQvE8D/Ire9SfE7wz4Qhi/HmArRDEDERyQvwKuYe
-	+o7aYzgpTo87sR6AClT6JsfvSESXpJebBHSCMvQe0hyUIr2cTE9r1lmYDBTp6P7WaI3m
-	WWKS1YUTSFIYZk2jH3l1w0jaE46FcsLZOqSE4SUuBC2bhg0QkhMH0/o7pvdgONlfzG/5
-	LMHXwDRcfPcJqdfavdlM0Ic3RCUpEwKSetG7njolK23xEimxU1QdxJVjCKH77XcIn0cs
-	elvQ==
-X-Gm-Message-State: AA6/9RmWdv1n0DYe90PtH8U7h7+YK8DW/9BwU5El42cg8xXMBrVSGzmtt9J6/gVjNoXAyw==
-X-Received: by 10.66.21.231 with SMTP id y7mr14269933pae.156.1475714018923;
-	Wed, 05 Oct 2016 17:33:38 -0700 (PDT)
-Received: from akuster-ThinkPad-X240.mvista.com
-	(50-233-148-156-static.hfc.comcastbusiness.net. [50.233.148.156])
-	by smtp.gmail.com with ESMTPSA id n85sm120595pfb.31.2016.10.05.17.33.38
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 05 Oct 2016 17:33:38 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Oct 2016 17:33:37 -0700
-Message-Id: <1475714017-9205-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] wireshark: update to 2.2.1
+	Thu,  6 Oct 2016 05:54:31 +0000 (UTC)
+Received: from [37.74.225.130] (helo=TOP-EX01.TOPIC.LOCAL)
+	by mx12.antispamcloud.com with esmtps (TLSv1:ECDHE-RSA-AES256-SHA:256)
+	(Exim 4.86) (envelope-from <mike.looijmans@topicproducts.com>)
+	id 1bs1dU-0001yU-TE for openembedded-devel@lists.openembedded.org;
+	Thu, 06 Oct 2016 07:54:30 +0200
+Received: from [192.168.80.121] (192.168.80.121) by webmail.topic.nl
+	(192.168.10.102) with Microsoft SMTP Server id 14.3.224.2;
+	Thu, 6 Oct 2016 07:54:27 +0200
+To: <openembedded-devel@lists.openembedded.org>
+References: <1474634029-22896-1-git-send-email-mike.looijmans@topic.nl>
+	<CAMKF1srhhYfYO69noEU30+66yDX8cLNbEB7tpJhkubKwjPoevw@mail.gmail.com>
+	<57E69552.9040209@topic.nl>
+	<CAMKF1so4gZ9zYqS17E-xRq0U-bu27aiv6v_EiR2zc3OqCgDSYg@mail.gmail.com>
+	<CA+chaQcftFerFC0S9_+XwsZqZ6EAMtdfOjGj5yjoy2mut9wO0Q@mail.gmail.com>
+	<1475660078-12664-1-git-send-email-mike.looijmans@topic.nl>
+	<CAMKF1sqTt+xuBTo4JyBDMUaHoygpuVUgcjQWyGfM9DAobaioyQ@mail.gmail.com>
+	<20161005163247.GC2926@jama>
+From: Mike Looijmans <mike.looijmans@topic.nl>
+Organization: TOPIC
+Message-ID: <845c18a2-7424-d286-a87a-4621a793ceca@topic.nl>
+Date: Thu, 6 Oct 2016 07:54:27 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.3.0
+MIME-Version: 1.0
+In-Reply-To: <20161005163247.GC2926@jama>
+X-Originating-IP: [192.168.80.121]
+X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
+X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
+X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W6KAUC/fjyuDn
+	NXFr4uarw8GIk4znw5EcwHHi+ra9lypEmJCbamfqLB4wH/k+k+Tftor9O5jjWZI633McN2M/OUXR
+	4XktS92Fqq3Qa0exZrH30SrPk8tfaSF+RZrpk8YKU12d2pmLLkAmzasehlwbl7ueYq6S6jdj8kEu
+	zqVO9P4+DKA2NNvQHVv9U39IvZ21x85OM4GWP9JQ/hHPc9c4dspy46MY4AXC06EFbOC1uAoX2ECf
+	0tidf4f9xbnt4dr3ucE6FVHy9oQcVLiVeDoadp8jI9oH6dGc6edzLFJtSM1o5rQC2VE4ySdZe0mi
+	K6wgOmG6/54gza7q5Za0AFsz6J51OyFNIoaxpS1mXZNdroDdpaan89csPuxNcrcm3g0VrZ+7KIxe
+	L9a8yWCRhadOUlss+n2ffnQxt6aJ7klZab+9g1L5kxBIYGB7BJyUdlmpOtqAyNDaGu3M3V4NLSLw
+	IF/664n8xZZ193ZhZHjQXRtPWfCpEalZkqHbJcTqNjqGWxwNFavLErUb39TUKcCiO2iH1Wgh6RAe
+	nBR+licROGa7w33/14GVkNZ6okgvMpPoU75prjeyjuZlW2IsigoonmNIBxN+8iLMjiqr6CILtV73
+	kf3bHfLz5oIsvwONwYzu
+X-Report-Abuse-To: spam@mx99.antispamcloud.com
+X-Originating-IP: 37.74.225.130
+X-SpamExperts-Domain: topic.nl
+X-SpamExperts-Username: 37.74.225.128/28
+Authentication-Results: antispamcloud.com;
+	auth=pass smtp.auth=37.74.225.128/28@topic.nl
+X-SpamExperts-Outgoing-Class: ham
+X-SpamExperts-Outgoing-Evidence: SB/global_tokens (0.0030285043839)
+X-Recommended-Action: accept
+Subject: Re: [meta-networking][PATCH v2] phytool: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,42 +64,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Oct 2016 00:33:39 -0000
+X-List-Received-Date: Thu, 06 Oct 2016 05:54:32 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Restore PE
+=EF=BB=BFOn 05-10-16 18:32, Martin Jansa wrote:
+> On Wed, Oct 05, 2016 at 08:38:07AM -0700, Khem Raj wrote:
+>> On Wed, Oct 5, 2016 at 2:34 AM, Mike Looijmans <mike.looijmans@topic.nl>=
+ wrote:
+>>> A nice tool to directly read, write and interpret ethernet PHY data.
+>>> Very useful when debugging PHY or MDIO problems, which ethtool does
+>>> not do.
+>>>
+>>> Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
+>>> ---
+>>> v2: Fix LICENSE filename and checksum
+>>>     Honor LDFLAGS value (patch accepted upstream)
+>>>
+>>>  meta-networking/recipes-support/phytool/phytool.bb | 14 ++++++++++++++
+>>>  1 file changed, 14 insertions(+)
+>>>  create mode 100644 meta-networking/recipes-support/phytool/phytool.bb
+>>>
+>>> diff --git a/meta-networking/recipes-support/phytool/phytool.bb b/meta-=
+networking/recipes-support/phytool/phytool.bb
+>>> new file mode 100644
+>>> index 0000000..d451aa9
+>>> --- /dev/null
+>>> +++ b/meta-networking/recipes-support/phytool/phytool.bb
+>>> @@ -0,0 +1,14 @@
+>>> +SUMMARY =3D "PHY interface tool for Linux"
+>>> +LICENSE =3D "GPLv2"
+>>> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D39bba7d2cf0ba1036f2a6e2be52=
+fe3f0"
+>>> +
+>>> +PV =3D "1.0.1"
+>>
+>> perhaps its better to include SRCPV in PV above since the SRCREV
+>> below is really 1.0.1+some more commits. moreover we get srcrev
+>> accounted for task hashes
 
-includes 2 security fixes:
-wnpa-sec-2016-57. NCP dissector crash. Fixed in 2.2.1.
-wnpa-sec-2016-56. Bluetooth L2CAP dissector crash. Fixed in 2.2.1.
+Will do.
 
-see https://www.wireshark.org/docs/relnotes/wireshark-2.2.1.html
+>>
+>>> +SRCREV =3D "3149bfdb4f513e2f0da0a7d0bc5d0873578696f2"
+>>> +SRC_URI =3D "git://github.com/wkz/phytool.git"
+>>> +
+>>> +S =3D "${WORKDIR}/git"
+>>> +
+>>> +do_install() {
+>>> +       install -d ${D}${prefix}/bin
+>>> +       oe_runmake 'DESTDIR=3D${D}' 'PREFIX=3D${prefix}' install
+>
+> We're not using tabs for indentation.
+> see http://www.openembedded.org/wiki/Styleguide
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../wireshark/{wireshark_2.2.0.bb => wireshark_2.2.1.bb}             | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_2.2.0.bb => wireshark_2.2.1.bb} (93%)
+Will fix in v3.
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.0.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
-similarity index 93%
-rename from meta-networking/recipes-support/wireshark/wireshark_2.2.0.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
-index dca3be6..a5fb7f6 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_2.2.0.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
-@@ -8,8 +8,9 @@ DEPENDS = "pcre expat glib-2.0 sbc"
- 
- SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
- 
--SRC_URI[md5sum] = "c7de0997f74934f25b456846cf75cb81"
--SRC_URI[sha256sum] = "a6847e741efcba6cb9d92d464d4219917bee3ad0b8f5b0f80d4388ad2f3f1104"
-+PE = "1"
-+SRC_URI[md5sum] = "49a1023a69ac108ca089d750eee50e37"
-+SRC_URI[sha256sum] = "900e22af04c8b35e0d02a25a360ab1fb7cfe5ac18fc48a9afd75a7103e569149"
- 
- inherit autotools pkgconfig perlnative
- 
--- 
-2.7.4
+I also want to move it to another location in meta-oe, because meta-network=
+ing=20
+depends on meta-python and it's really weird to have to add meta-python to=
+=20
+your layers just to get a simple C binary tool.
+
+Mike.
+
+
+Kind regards,
+
+Mike Looijmans
+System Expert
+
+TOPIC Products
+Materiaalweg 4, NL-5681 RJ Best
+Postbus 440, NL-5680 AK Best
+Telefoon: +31 (0) 499 33 69 79
+E-mail: mike.looijmans@topicproducts.com
+Website: www.topicproducts.com
+
+Please consider the environment before printing this e-mail
+
+
+
+
 
 
