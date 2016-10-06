@@ -1,71 +1,52 @@
-Return-Path: <msbarth@linux.vnet.ibm.com>
-X-Greylist: delayed 5564 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 06 Oct 2016 22:57:30 UTC
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
-	[148.163.156.1])
-	by mail.openembedded.org (Postfix) with ESMTP id 851EF7199E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pa0-f65.google.com (mail-pa0-f65.google.com
+	[209.85.220.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 233A5606CA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Oct 2016 22:57:30 +0000 (UTC)
-Received: from pps.filterd (m0098399.ppops.net [127.0.0.1])
-	by mx0a-001b2d01.pphosted.com (8.16.0.17/8.16.0.17) with SMTP id
-	u96LOLw3124761 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 6 Oct 2016 17:24:47 -0400
-Received: from e33.co.us.ibm.com (e33.co.us.ibm.com [32.97.110.151])
-	by mx0a-001b2d01.pphosted.com with ESMTP id 25wu5fsty6-1
-	(version=TLSv1.2 cipher=AES256-SHA bits=256 verify=NOT)
+	Thu,  6 Oct 2016 23:48:47 +0000 (UTC)
+Received: by mail-pa0-f65.google.com with SMTP id cd13so1762680pac.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Oct 2016 17:24:47 -0400
-Received: from localhost
-	by e33.co.us.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
-	Violators will be prosecuted
-	for <openembedded-devel@lists.openembedded.org> from
-	<msbarth@linux.vnet.ibm.com>; Thu, 6 Oct 2016 15:24:46 -0600
-Received: from d03dlp01.boulder.ibm.com (9.17.202.177)
-	by e33.co.us.ibm.com (192.168.1.133) with IBM ESMTP SMTP Gateway:
-	Authorized Use Only! Violators will be prosecuted; 
-	Thu, 6 Oct 2016 15:24:45 -0600
-Received: from b01cxnp22033.gho.pok.ibm.com (b01cxnp22033.gho.pok.ibm.com
-	[9.57.198.23])
-	by d03dlp01.boulder.ibm.com (Postfix) with ESMTP id 98B9D1FF0021
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Oct 2016 15:24:25 -0600 (MDT)
-Received: from b01ledav001.gho.pok.ibm.com (b01ledav001.gho.pok.ibm.com
-	[9.57.199.106])
-	by b01cxnp22033.gho.pok.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
-	u96LOhvN17367442; Thu, 6 Oct 2016 21:24:44 GMT
-Received: from b01ledav001.gho.pok.ibm.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 59F8C28060;
-	Thu,  6 Oct 2016 17:24:44 -0400 (EDT)
-Received: from UbuntuVM.aus.stglabs.ibm.com (unknown [9.10.99.147])
-	by b01ledav001.gho.pok.ibm.com (Postfix) with ESMTP id 1B60A28046;
-	Thu,  6 Oct 2016 17:24:44 -0400 (EDT)
-From: Matthew Barth <msbarth@linux.vnet.ibm.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Oct 2016 16:24:26 -0500
-X-Mailer: git-send-email 1.9.1
-X-TM-AS-GCONF: 00
-X-Content-Scanned: Fidelis XPS MAILER
-x-cbid: 16100621-0008-0000-0000-000005C154DE
-X-IBM-SpamModules-Scores: 
-X-IBM-SpamModules-Versions: BY=3.00005864; HX=3.00000240; KW=3.00000007;
-	PH=3.00000004; SC=3.00000186; SDB=6.00765188; UDB=6.00365595;
-	IPR=6.00541043; 
-	BA=6.00004791; NDR=6.00000001; ZLA=6.00000005; ZF=6.00000009;
-	ZB=6.00000000; 
-	ZP=6.00000000; ZH=6.00000000; ZU=6.00000002; MB=3.00012897;
-	XFM=3.00000011; UTC=2016-10-06 21:24:46
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 16100621-0009-0000-0000-00003BED6474
-Message-Id: <1475789066-4308-1-git-send-email-msbarth@linux.vnet.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2016-10-06_09:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	spamscore=0 suspectscore=1
-	malwarescore=0 phishscore=0 adultscore=0 bulkscore=0 classifier=spam
-	adjust=0 reason=mlx scancount=1 engine=8.0.1-1609300000
-	definitions=main-1610060375
-Cc: Matthew Barth <msbarth@linux.vnet.ibm.com>
-Subject: [meta-oe][PATCH] autoconf-archive: 2012.04.07 -> 2016.09.16
+	Thu, 06 Oct 2016 16:48:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:mime-version:from:in-reply-to:date:cc:message-id:references
+	:to; bh=8IEN3kArpxRL1uk8fgefLgPykZtcXkM15aUXzDa7Juo=;
+	b=kM5HVjNqg3rbOIYaBksZR2I/xRfVbgS047ibUIBk5kqOQK61G4wiQ9Qz9RiQDs78sc
+	QD0z5XN/rnlLiWx0U2Eo57TamgbEJMmdbTwUd0JcnIl/T02g4/ObHFTvtcvtGMwYIzcm
+	wcZs5T1vnW8QyYZOW1b9NGHSNjhAU53kCD+dwuxh4CWoJDeb407dhjxMVX+G+b2S/j6H
+	9Cu0DwuEVYerBIY4S6/V+l6Tc9RTgkej3IDzJm5rubCsSxlKbTWPmXHIvTycFkN6Xr0N
+	91lg3KffI4OCcP8DzUUBAOL6qyNIXT/xg1gxT/CKpJU2Zw9JpStFNiBfKbJoxvIjNDz6
+	whAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:subject:mime-version:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=8IEN3kArpxRL1uk8fgefLgPykZtcXkM15aUXzDa7Juo=;
+	b=OwMJaq0gbWadHfTgJfL2Z/XQO7sq9z+8AkRCWm/CL58XzPdubZ0p707VcAB7FS96JM
+	1rl6iOsWQlLaT7317/9tpTvpHPjYgSaeCIqAVOXfSBMlH8kyMU5x5QGZFdNRJodiB6YC
+	x5NsrH2BVJ2qphJFKkFG2OqHyiSbD6KbQonBqmjw1Z/WhADz+x3ZyHmRptbxDBktx4d1
+	oV9yTS5d9p3QD+T3iGlptD1qP10ikS1VD60DpNUV4/WvhPA7z3c52Ftu8QIaAMeHHvcV
+	qkNorBzJ5pr2C0vQWuRtcmVyv59M8vv3un9XGxsiSQ+8E8CxXXjOJM1m1KZ6MTZZX0+3
+	4LDg==
+X-Gm-Message-State: AA6/9RkDoPtoqfrPBp0t4k/L7cbkrqHXm4VWY0cGXsvktq0syDEkQUoOe4Q63nZ4nzNThw==
+X-Received: by 10.66.245.204 with SMTP id xq12mr26206855pac.37.1475797729088; 
+	Thu, 06 Oct 2016 16:48:49 -0700 (PDT)
+Received: from ?IPv6:2601:646:8882:b8c:1891:a07b:2b72:a6d8?
+	([2601:646:8882:b8c:1891:a07b:2b72:a6d8])
+	by smtp.gmail.com with ESMTPSA id
+	ps2sm25521929pab.31.2016.10.06.16.48.47
+	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 06 Oct 2016 16:48:48 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
+X-Pgp-Agent: GPGMail
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <1475783887-20739-1-git-send-email-denis@denix.org>
+Date: Thu, 6 Oct 2016 16:48:44 -0700
+Message-Id: <1F10663F-D6B7-4A28-BB4C-0F8E65B0D5CD@gmail.com>
+References: <1475783887-20739-1-git-send-email-denis@denix.org>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Mailer: Apple Mail (2.3124)
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [meta-python][PATCH] python-pybind11: add pybind11 for operability between C++11 and Python
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -78,64 +59,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Oct 2016 22:57:30 -0000
+X-List-Received-Date: Thu, 06 Oct 2016 23:48:48 -0000
+X-Groupsio-MsgNum: 63396
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_FFD93175-70E3-45B0-AE6B-5E8D76C84BBB";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 
-Signed-off-by: Matthew Barth <msbarth@linux.vnet.ibm.com>
----
- meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc     | 7 ++++---
- ...toconf-archive_2012.04.07.bb => autoconf-archive_2016.09.16.bb} | 6 +++---
- 2 files changed, 7 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-devtools/autoconf-archive/{autoconf-archive_2012.04.07.bb => autoconf-archive_2016.09.16.bb} (61%)
-
-diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-index 9399363..2b5df70 100644
---- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-+++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-@@ -1,15 +1,16 @@
-+SUMMARY = "A collection of macros for GNU Autoconf"
-+DESCRIPTION = "The autoconf-archive set of macros extend the pre-defined \
-+capabilities within the complete autoconf tool set."
- LICENSE = "GPLv3"
- HOMEPAGE = "http://www.gnu.org/software/autoconf-archive/"
- SECTION = "devel"
--
- DEPENDS += "m4-native"
- DEPENDS_class-native = "m4-native gnu-config-native"
- DEPENDS_class-nativesdk = "m4-nativesdk gnu-config-nativesdk"
--
- RDEPENDS_${PN} = "m4 gnu-config"
- RDEPENDS_${PN}_class-native = "m4-native gnu-config-native"
- RDEPENDS_${PN}_class-nativesdk = "m4-nativesdk gnu-config-nativesdk"
- 
--SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.bz2"
-+SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz"
- 
- inherit autotools
-diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
-similarity index 61%
-rename from meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
-rename to meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
-index 5baaecc..da648c2 100644
---- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
-+++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
-@@ -1,13 +1,13 @@
- require autoconf-archive.inc
- 
--
- PARALLEL_MAKE = ""
- 
- LICENSE = "GPLv2 & GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
--SRC_URI[md5sum] = "e842c5b9fae021007bd70550362e5e80"
--SRC_URI[sha256sum] = "040b443bf68efd52fbfcb294b556bfbbbfe432db78445ca25e0cfe2e88f96a14"
-+SRC_URI[md5sum] = "bf19d4cddce260b3c3e1d51d42509071"
-+SRC_URI[sha256sum] = "e8f2efd235f842bad2f6938bf4a72240a5e5fcd248e8444335e63beb60fabd82"
- 
- EXTRA_OECONF += "ac_cv_path_M4=m4"
-+
- BBCLASSEXTEND = "native nativesdk"
--- 
-1.9.1
+--Apple-Mail=_FFD93175-70E3-45B0-AE6B-5E8D76C84BBB
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
 
 
+> On Oct 6, 2016, at 12:58 PM, Denys Dmytriyenko <denis@denix.org> =
+wrote:
+>=20
+> From: Denys Dmytriyenko <denys@ti.com>
+>=20
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> ---
+> meta-python/recipes-devtools/python/python-pybind11.inc       | 9 =
++++++++++
+> meta-python/recipes-devtools/python/python-pybind11_1.8.1.bb  | 2 ++
+> meta-python/recipes-devtools/python/python3-pybind11_1.8.1.bb | 2 ++
+> 3 files changed, 13 insertions(+)
+> create mode 100644 =
+meta-python/recipes-devtools/python/python-pybind11.inc
+> create mode 100644 =
+meta-python/recipes-devtools/python/python-pybind11_1.8.1.bb
+> create mode 100644 =
+meta-python/recipes-devtools/python/python3-pybind11_1.8.1.bb
+>=20
+> diff --git a/meta-python/recipes-devtools/python/python-pybind11.inc =
+b/meta-python/recipes-devtools/python/python-pybind11.inc
+> new file mode 100644
+> index 0000000..e13f6a5
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-pybind11.inc
+> @@ -0,0 +1,9 @@
+> +SUMMARY =3D "Seamless operability between C++11 and Python"
+> +HOMEPAGE =3D "https://github.com/wjakob/pybind11"
+> +LICENSE =3D "BSD-2-Clause"
+> +LIC_FILES_CHKSUM =3D =
+"file://PKG-INFO;md5=3D1e9383cd3e97753d7dd6067d079519ea"
+> +PR =3D =E2=80=9Cr0"
+
+Drop this
+
+> +
+> +SRC_URI =3D =
+"https://pypi.python.org/packages/89/0b/f3a25633e49be5fae17ed2c7751c8106a0=
+8199db70e3c82e8cc043388ba9/pybind11-1.8.1.tar.gz"
+> +SRC_URI[md5sum] =3D "67845d8fd89a1c400dc7c61ccdee14d6"
+> +SRC_URI[sha256sum] =3D =
+"358d4b7d8c38cd1dde66064178c6bbaaa2c479a44e67e642820fe0f329a4fff8"
+> diff --git =
+a/meta-python/recipes-devtools/python/python-pybind11_1.8.1.bb =
+b/meta-python/recipes-devtools/python/python-pybind11_1.8.1.bb
+> new file mode 100644
+> index 0000000..e567430
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-pybind11_1.8.1.bb
+> @@ -0,0 +1,2 @@
+> +inherit pypi setuptools
+> +require python-pybind11.inc
+> diff --git =
+a/meta-python/recipes-devtools/python/python3-pybind11_1.8.1.bb =
+b/meta-python/recipes-devtools/python/python3-pybind11_1.8.1.bb
+> new file mode 100644
+> index 0000000..355e284
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-pybind11_1.8.1.bb
+> @@ -0,0 +1,2 @@
+> +inherit pypi setuptools3
+> +require python-pybind11.inc
+> --
+> 2.7.4
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+--Apple-Mail=_FFD93175-70E3-45B0-AE6B-5E8D76C84BBB
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEYEARECAAYFAlf24t8ACgkQuwUzVZGdMxRpugCdFD2x/BTUJDxspxreFzlBLxbH
+B8YAn2qe51T9rbnwZnPegfo74g7IqpOM
+=Voez
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_FFD93175-70E3-45B0-AE6B-5E8D76C84BBB--
