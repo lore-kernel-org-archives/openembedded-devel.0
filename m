@@ -1,28 +1,49 @@
-Return-Path: <leonardo.sandoval.gonzalez@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 35EC9719B7
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ua0-f195.google.com (mail-ua0-f195.google.com
+	[209.85.217.195])
+	by mail.openembedded.org (Postfix) with ESMTP id F3207719B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Oct 2016 16:08:21 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga103.jf.intel.com with ESMTP; 07 Oct 2016 09:08:22 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.31,456,1473145200"; 
-	d="scan'208,217";a="1050809012"
-Received: from lsandov1-mobl2.zpn.intel.com (HELO [10.219.5.48])
-	([10.219.5.48])
-	by fmsmga001.fm.intel.com with ESMTP; 07 Oct 2016 09:08:22 -0700
-To: openembedded-devel@lists.openembedded.org
-References: <1473280623-4410-1-git-send-email-leonardo.sandoval.gonzalez@linux.intel.com>
-	<20160912160945.GA2653@jama>
-From: Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>
-Message-ID: <0f87375a-b4f4-3c03-c18f-56112538f121@linux.intel.com>
-Date: Fri, 7 Oct 2016 11:12:17 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.3.0
+	Fri,  7 Oct 2016 16:23:12 +0000 (UTC)
+Received: by mail-ua0-f195.google.com with SMTP id 49so2043646uac.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 Oct 2016 09:23:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=utcg+q7vo8LIG0FqphW0fIyfjwy7bkgc6ZLyJMJLjaQ=;
+	b=ZX2sF94zJEefi5wEGF5AkBKCAjKAXC7SLAMIXvmPDbebV+MCgHxQfYqg5ZIgQlG7O5
+	XMaaN1LE9koxa4mNDLFFUbLBcsAzO63glXjN+Ji66KmDdb1aXCBPiJS+/350uXfzx1Oi
+	zwuZRkaFEgWZTnID+NDmhE2u0ApGCPvYzqA8qkWfocfSUO6on5l3YKT+ERJC+yfmd1JS
+	XVZ90SYcrd6SGQmxNJbsy7H+8mwdEQ4oRoLLrsoypdTU9G15kya8Nokcp1nwokoDmG8+
+	sTChRb/ovSsEpDKYNSy4+0o1ZHETdW9nv2c0qGHHKaeN6Plv6ubZnwNFNRQx5AAeMrI0
+	9JkA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-transfer-encoding;
+	bh=utcg+q7vo8LIG0FqphW0fIyfjwy7bkgc6ZLyJMJLjaQ=;
+	b=JZubiBy2YvmfBCFzIsiJX33NApPn22J7MY0xQRph/vKwXHoscb9vE5hHKUGnYXZ8BF
+	GLB+tOseehbo8H22g+gzdFIEMgm2YgMSFYjddFn2BWNbmJcOHAkeaphgNU9y3EWORs6d
+	6nMBFz7rzSTur4jXIAaBPT3N97E1vC545xI6T4DuBQp0RWI15zGJUC3TE1xTY19u4dEY
+	yhIt+Izt+jy0CZ/WrgDxFfeHfMAj35VSGj919HVVRzpRiz+SKOuvEtQMMwfOX4t7MxfR
+	w0R6S05pzguiZHCtvEU0n25/MPZMzbZ6OQ77XStk2P+S0clXWcIdtKVO5uRLgL+QjTYe
+	0nFQ==
+X-Gm-Message-State: AA6/9Rn9sMc/j37q4Xlo3CBBep1U1cK+7MDUE8VH9tRkEMDbMha3+zrlN64jxLGHrBv2Pnuc98u2YOsqR7MTBQ==
+X-Received: by 10.176.64.229 with SMTP id i92mr15063369uad.32.1475857393771;
+	Fri, 07 Oct 2016 09:23:13 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20160912160945.GA2653@jama>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-python][PATCH] python-unidiff: python module for parsing diff data
+Received: by 10.176.65.130 with HTTP; Fri, 7 Oct 2016 09:23:13 -0700 (PDT)
+In-Reply-To: <E5E0F819-27C7-4FFD-9639-39BF2B9BE459@gmail.com>
+References: <1475831964-1993-1-git-send-email-schnitzeltony@googlemail.com>
+	<1475831964-1993-2-git-send-email-schnitzeltony@googlemail.com>
+	<E5E0F819-27C7-4FFD-9639-39BF2B9BE459@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 7 Oct 2016 18:23:13 +0200
+Message-ID: <CALbNGRRL2t1anoyHUMtBdWx8+7OkP=GkkdVDYH_Bne6+c7DAXg@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 2/5] jack: remove portaudio PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,58 +56,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Oct 2016 16:08:23 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 07 Oct 2016 16:23:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-
-
-On 09/12/2016 11:09 AM, Martin Jansa wrote:
-> On Wed, Sep 07, 2016 at 03:37:03PM -0500, leonardo.sandoval.gonzalez@linux.intel.com wrote:
->> From: Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>
->>
->> The module takes diff data, from commands like diff or git-format-patch,
->> parses it and creates python objects in the form of patch sets. More
->> info is given on the recipe metadata.
-> This conflicts with python-flask-pymongo
+On Fri, Oct 7, 2016 at 5:14 PM, Khem Raj <raj.khem@gmail.com> wrote:
 >
-> ERROR: python-flask-pymongo-0.4.1-r0 do_populate_sysroot_setscene: The recipe python-flask-pymongo is trying to install files into a shared area when those files already exist. Those files and their manifest location are:
-> qemux86/usr/lib/python2.7/site-packages/tests/__init__.pyc
->   Matched in b'manifest-qemux86-python-unidiff.populate_sysroot'
-> qemux86/usr/lib/python2.7/site-packages/tests/__init__.py
->   Matched in b'manifest-qemux86-python-unidiff.populate_sysroot'
-> Please verify which recipe should provide the above files.
-Sorry for the delay. I will send a v2 to fix this.
->> Signed-off-by: Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>
->> ---
->>   meta-python/recipes-devtools/python/python-unidiff_0.5.2.bb | 9 +++++++++
->>   1 file changed, 9 insertions(+)
->>   create mode 100644 meta-python/recipes-devtools/python/python-unidiff_0.5.2.bb
+>> On Oct 7, 2016, at 2:19 AM, Andreas M=C3=BCller <schnitzeltony@googlemai=
+l.com> wrote:
 >>
->> diff --git a/meta-python/recipes-devtools/python/python-unidiff_0.5.2.bb b/meta-python/recipes-devtools/python/python-unidiff_0.5.2.bb
->> new file mode 100644
->> index 0000000..3ee5bc2
->> --- /dev/null
->> +++ b/meta-python/recipes-devtools/python/python-unidiff_0.5.2.bb
->> @@ -0,0 +1,9 @@
->> +SUMMARY = "Unified diff parsing/metadata extraction library"
->> +HOMEPAGE = "http://github.com/matiasb/python-unidiff"
->> +LICENSE = "MIT"
->> +LIC_FILES_CHKSUM = "file://LICENSE;md5=4c434b08ef42fea235bb019b5e5a97b3"
->> +
->> +SRC_URI[md5sum] = "20dd70ba5a35bc95bf869322d6852227"
->> +SRC_URI[sha256sum] = "344330ec3637e96b44dca77e086b205645b55648cf4d2b80fc673200f8a6a7e9"
->> +
->> +inherit pypi setuptools
->> -- 
->> 2.1.4
->>
->> -- 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> portaudio backend is only available for windows builds - see README (and=
+ if set
+>> it would cause a cyclic dependency with portaudio's jack PACKAGECONFIG)
 >
->
+> should be unconditionally keep =E2=80=94portaudio=3Dno ?
+As long as we are not building for windows: No
 
+Andreas
 
