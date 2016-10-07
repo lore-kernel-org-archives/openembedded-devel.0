@@ -1,50 +1,55 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
-	[209.85.213.66])
-	by mail.openembedded.org (Postfix) with ESMTP id DE6CC71993
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id C018C607A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Oct 2016 14:20:42 +0000 (UTC)
-Received: by mail-vk0-f66.google.com with SMTP id b186so1959818vkb.3
+	Fri,  7 Oct 2016 15:13:19 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id 190so3010538pfv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Oct 2016 07:20:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=nKY3BoxVTBYYMh3U9fYcazqTeMFaZZBUuBwnkZKN128=;
-	b=0c9V0x0+eCtJAxZHZr3khMEkgI8mv6dLp6/lKD9R+QJjyV/m1Tx+vlfEa6ku3u7BYM
-	7b2rgAM0sKEwtMQhQV6hfKSFlRqz3i2XKbOVtc16lW7y20uuc0v6XLR/LvH1/jTzP6ml
-	spQh6nPJ3Y/L2HBs/J2c0WhcbdoUBi6Lul541W0alWCPcTxgZ281sZSEKGGGCKulUda/
-	EZ11huuW/hbGn+ooyXi0FRqZxkwcXqomk8fzlyWvDg4ets48FhSxVILHaIriNn49b9QP
-	wNoE+JaBcMNCwQxsF+LBImGUxhUME9rn5OZBFgGqpUSjoknoKFUGNu6lKLxq6HRlWn7+
-	JWow==
+	Fri, 07 Oct 2016 08:13:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:mime-version:from:in-reply-to:date:cc:message-id:references
+	:to; bh=qEfdXw5PXbZwkpdE/XHpzPlQ+zCRK/IXXeSoFiG7MSA=;
+	b=fJPoc6b4NwEczyfU/E78a6Qo0fn376EZZa6+4Tdu/vg8Ism707tkbZr99+zZ3PYMn5
+	DZISs4NEeJoikB6mPgAlRQWI+nwEqS+SptXgSnyphmXImM/exAU5yUBgpHDz4j1yoAfp
+	77b8weN4wC2DM2sxySSnLGvYF/5uJGc2WS401fS+fSVh1eBfKYqMKo9jPT87YE3Sqkrh
+	W9L4zrD5YEwuYeLXx92TfAeD/vNEZVvo8BCTbKD8a5rlA394IKtGgDPdVudG4I6wy9JM
+	1hh/0QxTW1bnsAvuINB1YiHXlvxsjQfrqnYCHFYpAQhYvENi22Ao7wGfW3PKUV4xiILO
+	JIRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=nKY3BoxVTBYYMh3U9fYcazqTeMFaZZBUuBwnkZKN128=;
-	b=ZpmcxVcDxuSZzRh9ciJMVmxcyhZAxXYnsT85ZU0P4/FqfQkSBD91Wi3/q4rMb8pItr
-	EMIyzULpZ5nJRAB3XRRv6IHlVIUr8jLdbRK/VCdHMZzNRDJOOeEx+8RGMo4Eube5RdBh
-	geSxVoCopCymNt31LIkCQoNqJMDmnl0Ow5N2RvsqjMJ1+k7fZ9pdMt7JhZQVm3Xh723Z
-	aHZbhe3QtJ1diM6aG98UC3qcI2gG20s1boHfOaEdmv05cciaVOyoVwzCe/QKRKptQu0D
-	I7d5enMJNzsKRVjE3GmCEyaDLPnjcCO9ltCHK2eUiZozRmzwgcGAtbVvXu8w+CbrddG5
-	1Bkg==
-X-Gm-Message-State: AA6/9RmCsy5JGjOztU2Ph+A6CjOnIS2N0iW7hCziggGeZ/jJQACUS40S+DjZAmh4+Q0NPj0JPAzf2X+1+BTP4w==
-X-Received: by 10.31.128.2 with SMTP id b2mr2792013vkd.81.1475850043747; Fri,
-	07 Oct 2016 07:20:43 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.176.65.130 with HTTP; Fri, 7 Oct 2016 07:20:43 -0700 (PDT)
-In-Reply-To: <1475841300.2264.14.camel@gmail.com>
-References: <1475831964-1993-1-git-send-email-schnitzeltony@googlemail.com>
-	<1475831964-1993-4-git-send-email-schnitzeltony@googlemail.com>
-	<1475841300.2264.14.camel@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Fri, 7 Oct 2016 16:20:43 +0200
-Message-ID: <CALbNGRTPWXSFgYajNvGbvXXb-qY4A1yT=6W3-QUwS1JQ5o2=oA@mail.gmail.com>
-To: Max Krummenacher <max.oss.09@gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 4/5] florence: update 0.6.3
+	h=x-gm-message-state:subject:mime-version:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=qEfdXw5PXbZwkpdE/XHpzPlQ+zCRK/IXXeSoFiG7MSA=;
+	b=byDcH8kvB41AwXH7R02hU7j0IVHIUUGZyZDQ6YZB5ocOFH3DYG+TkeWCbvPB9tNL3T
+	XdlDDrt0VXf50IXFqf/ERQHNo6U1sKqSHNZ3erWjBC9WwWu6GVLwRv4skfrnQQiVuITU
+	EuUJGrRNcK4tdFrBFCnbWKgFRPx5gQV8gNIgaiwtGOJWMq4HETWcv2bR8q7OVuKdlkEc
+	lOZpDDIXJUjHX9PNwg2SCzAXO8aRgDnKxoLQ8v7oeJF2LNWpR63ZMlqjjZ6HgNGMBJD2
+	6PW1UTeOxrqDij0D5cAevpGmt+Vd3Wl2ooBReUfmprKz4Lq4opiulxv/Mt7O403E+KPE
+	agVw==
+X-Gm-Message-State: AA6/9Rk9syD7Jg00DxBotEPdcZ6xwq8KmXum38QPBjr1o/ZoRxaa8fGlpVjb8XowgGdyKA==
+X-Received: by 10.98.43.17 with SMTP id r17mr29156556pfr.115.1475853200860;
+	Fri, 07 Oct 2016 08:13:20 -0700 (PDT)
+Received: from ?IPv6:2601:646:8882:b8c:cd9d:6261:adca:4b85?
+	([2601:646:8882:b8c:cd9d:6261:adca:4b85])
+	by smtp.gmail.com with ESMTPSA id
+	t190sm14262259pfb.34.2016.10.07.08.13.19
+	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 07 Oct 2016 08:13:20 -0700 (PDT)
+Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
+X-Pgp-Agent: GPGMail
+From: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <d2f7c268-61e6-04b1-07ea-7c749f2e5ca6@linux.vnet.ibm.com>
+Date: Fri, 7 Oct 2016 08:13:18 -0700
+Message-Id: <632342F2-FCE2-44B6-A188-1A4173637BA1@gmail.com>
+References: <1475789066-4308-1-git-send-email-msbarth@linux.vnet.ibm.com>
+	<ADEE5812-4155-4506-B9A5-3029E3B58CDB@gmail.com>
+	<d2f7c268-61e6-04b1-07ea-7c749f2e5ca6@linux.vnet.ibm.com>
+To: msbarth <msbarth@linux.vnet.ibm.com>
+X-Mailer: Apple Mail (2.3124)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] autoconf-archive: 2012.04.07 -> 2016.09.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,36 +62,142 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Oct 2016 14:20:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 07 Oct 2016 15:13:19 -0000
+X-Groupsio-MsgNum: 63412
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_002F0F83-EA5F-48C3-9F2C-B45708C879D9";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+
+--Apple-Mail=_002F0F83-EA5F-48C3-9F2C-B45708C879D9
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=utf-8
 
-On Fri, Oct 7, 2016 at 1:55 PM, Max Krummenacher <max.oss.09@gmail.com> wro=
-te:
-> Resent, this time from the correct account.
->
-> Hi
->
-> Am Freitag, den 07.10.2016, 11:19 +0200 schrieb Andreas M=C3=BCller:
->> * patches were either leftovers or do not match the code
->> * DESCRIPTION -> shortened SUMMARY
->
-> 0.5.x requires gtk 2 and gstreamer 0.10 while 0.6.x requires gtk 3 and
-> gstreamer 1.0.
-> Would be nice to see this in the commit message. I guess gtk+3 also
-> needs do go into DEPENDS, see below.
-I did not see that there was a warning dragging in gtk3 - patch would
-need update
->
-> Maybe the move from gtk 2 to 3 would even justify to add a new recipe
-> florence3 while keeping the existing one?
-1. I updated florence because 0.5.4 is completely useless for me: It
-moves around after each hide / buttons are improperly painted.
-2. I don't like the idea of keeping around different versions. By this
-we stick on unmaintained versions for reasons out of my interest.
-3. After further tests I saw that 0.6.3's has other strange bugs
 
-=3D> I suggest we forget this patch
+> On Oct 7, 2016, at 7:58 AM, msbarth <msbarth@linux.vnet.ibm.com> =
+wrote:
+>=20
+>=20
+>=20
+> On 10/06/2016 06:49 PM, Khem Raj wrote:
+>>> On Oct 6, 2016, at 2:24 PM, Matthew Barth =
+<msbarth@linux.vnet.ibm.com> <mailto:msbarth@linux.vnet.ibm.com> wrote:
+>>>=20
+>>> Signed-off-by: Matthew Barth <msbarth@linux.vnet.ibm.com> =
+<mailto:msbarth@linux.vnet.ibm.com>
+>>> ---
+>>> meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc     | =
+7 ++++---
+>>> ...toconf-archive_2012.04.07.bb =3D> autoconf-archive_2016.09.16.bb} =
+| 6 +++---
+>>> 2 files changed, 7 insertions(+), 6 deletions(-)
+>>> rename =
+meta-oe/recipes-devtools/autoconf-archive/{autoconf-archive_2012.04.07.bb =
+=3D> autoconf-archive_2016.09.16.bb} (61%)
+>>>=20
+>>> diff --git =
+a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc =
+b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
+>>> index 9399363..2b5df70 100644
+>>> --- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
+>>> +++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
+>>> @@ -1,15 +1,16 @@
+>>> +SUMMARY =3D "A collection of macros for GNU Autoconf"
+>>> +DESCRIPTION =3D "The autoconf-archive set of macros extend the =
+pre-defined \
+>>> +capabilities within the complete autoconf tool set."
+>>> LICENSE =3D "GPLv3"
+>>> HOMEPAGE =3D "http://www.gnu.org/software/autoconf-archive/" =
+<http://www.gnu.org/software/autoconf-archive/>
+>>> SECTION =3D "devel"
+>>> -
+>>> DEPENDS +=3D "m4-native"
+>>> DEPENDS_class-native =3D "m4-native gnu-config-native"
+>>> DEPENDS_class-nativesdk =3D "m4-nativesdk gnu-config-nativesdk"
+>>> -
+>>> RDEPENDS_${PN} =3D "m4 gnu-config"
+>>> RDEPENDS_${PN}_class-native =3D "m4-native gnu-config-native"
+>>> RDEPENDS_${PN}_class-nativesdk =3D "m4-nativesdk =
+gnu-config-nativesdk"
+>>>=20
+>>> -SRC_URI =3D "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.bz2"
+>>> +SRC_URI =3D "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz"
+>>>=20
+>>> inherit autotools
+>>> diff --git =
+a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb=
+ =
+b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb=
 
-Andreas
+>>> similarity index 61%
+>>> rename from =
+meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
+>>> rename to =
+meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
+>>> index 5baaecc..da648c2 100644
+>>> --- =
+a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb=
 
+>>> +++ =
+b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb=
+
+>>> @@ -1,13 +1,13 @@
+>>> require autoconf-archive.inc
+>>>=20
+>>> -
+>>> PARALLEL_MAKE =3D =E2=80=9C"
+>> Do we still need this ?
+> Most likely for this package, no. I have built successfully a few =
+times without, however since this was likely originally added due to a =
+race condition that doesnt conclude it can be removed, so I left it in.
+
+sometimes fixes may have landed upstream which fixes such issues. So we =
+can get rid of it. if it does not cause the issue with parallel builds =
+anymore
+may be it should be removed
+
+>>> LICENSE =3D "GPLv2 & GPLv3"
+>>> LIC_FILES_CHKSUM =3D =
+"file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae504" =
+<file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae504>
+>>>=20
+>>> -SRC_URI[md5sum] =3D "e842c5b9fae021007bd70550362e5e80"
+>>> -SRC_URI[sha256sum] =3D =
+"040b443bf68efd52fbfcb294b556bfbbbfe432db78445ca25e0cfe2e88f96a14"
+>>> +SRC_URI[md5sum] =3D "bf19d4cddce260b3c3e1d51d42509071"
+>>> +SRC_URI[sha256sum] =3D =
+"e8f2efd235f842bad2f6938bf4a72240a5e5fcd248e8444335e63beb60fabd82"
+>>>=20
+>>> EXTRA_OECONF +=3D "ac_cv_path_M4=3Dm4"
+>>> +
+>>> BBCLASSEXTEND =3D "native nativesdk"
+>>> --
+>>> 1.9.1
+>>>=20
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org =
+<mailto:Openembedded-devel@lists.openembedded.org>
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel =
+<http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
+>=20
+
+
+--Apple-Mail=_002F0F83-EA5F-48C3-9F2C-B45708C879D9
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iEUEARECAAYFAlf3u44ACgkQuwUzVZGdMxTEIwCXRRv6exBkkryNgXgRrEEYcJh3
+1gCePFEG7kvznQRga082pbtpJNMqtUo=
+=d1t0
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_002F0F83-EA5F-48C3-9F2C-B45708C879D9--
