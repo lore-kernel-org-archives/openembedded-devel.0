@@ -1,24 +1,24 @@
 Return-Path: <gcho-openembedded-devel@m.gmane.org>
 Received: from blaine.gmane.org (unknown [195.159.176.226])
-	by mail.openembedded.org (Postfix) with ESMTP id 82B376022E
+	by mail.openembedded.org (Postfix) with ESMTP id 0115F719C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Oct 2016 06:10:31 +0000 (UTC)
+	Fri,  7 Oct 2016 06:15:18 +0000 (UTC)
 Received: from list by blaine.gmane.org with local (Exim 4.84_2)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1bsOMQ-0005F6-Gi for openembedded-devel@lists.openembedded.org;
-	Fri, 07 Oct 2016 08:10:22 +0200
+	id 1bsOQy-0005z5-5s for openembedded-devel@lists.openembedded.org;
+	Fri, 07 Oct 2016 08:15:04 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Fri, 7 Oct 2016 08:10:02 +0200
-Message-ID: <nt7e7o$9p0$1@blaine.gmane.org>
-References: <1475789066-4308-1-git-send-email-msbarth@linux.vnet.ibm.com>
+Date: Fri, 7 Oct 2016 08:10:56 +0200
+Message-ID: <nt7e9d$9p0$2@blaine.gmane.org>
+References: <1475733541-3401-1-git-send-email-mike.looijmans@topic.nl>
 Mime-Version: 1.0
 X-Complaints-To: usenet@blaine.gmane.org
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
 	Gecko/20100101 Thunderbird/45.3.0
-In-Reply-To: <1475789066-4308-1-git-send-email-msbarth@linux.vnet.ibm.com>
-Subject: Re: [meta-oe][PATCH] autoconf-archive: 2012.04.07 -> 2016.09.16
+In-Reply-To: <1475733541-3401-1-git-send-email-mike.looijmans@topic.nl>
+Subject: Re: [meta-networking][PATCH v3] phytool: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,40 +31,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Oct 2016 06:10:32 -0000
+X-List-Received-Date: Fri, 07 Oct 2016 06:15:19 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-Op 06-10-16 om 23:24 schreef Matthew Barth:
-> Signed-off-by: Matthew Barth <msbarth@linux.vnet.ibm.com>
-> ---
->  meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc     | 7 ++++---
->  ...toconf-archive_2012.04.07.bb => autoconf-archive_2016.09.16.bb} | 6 +++---
->  2 files changed, 7 insertions(+), 6 deletions(-)
->  rename meta-oe/recipes-devtools/autoconf-archive/{autoconf-archive_2012.04.07.bb => autoconf-archive_2016.09.16.bb} (61%)
+Op 06-10-16 om 07:59 schreef Mike Looijmans:
+> A nice tool to directly read, write and interpret ethernet PHY data.
+> Very useful when debugging PHY or MDIO problems, which ethtool does
+> not do.
 > 
-> diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-> index 9399363..2b5df70 100644
-> --- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-> +++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-> @@ -1,15 +1,16 @@
-> +SUMMARY = "A collection of macros for GNU Autoconf"
-> +DESCRIPTION = "The autoconf-archive set of macros extend the pre-defined \
-> +capabilities within the complete autoconf tool set."
->  LICENSE = "GPLv3"
->  HOMEPAGE = "http://www.gnu.org/software/autoconf-archive/"
->  SECTION = "devel"
-> -
->  DEPENDS += "m4-native"
->  DEPENDS_class-native = "m4-native gnu-config-native"
->  DEPENDS_class-nativesdk = "m4-nativesdk gnu-config-nativesdk"
-> -
->  RDEPENDS_${PN} = "m4 gnu-config"
->  RDEPENDS_${PN}_class-native = "m4-native gnu-config-native"
->  RDEPENDS_${PN}_class-nativesdk = "m4-nativesdk gnu-config-nativesdk"
+> Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
+> ---
+> v3: Add SRCPV to PV
+>     Indent using spaces instead of tab
+> v2: Fix LICENSE filename and checksum
+>     Honor LDFLAGS value (patch accepted upstream)
+>  meta-networking/recipes-support/phytool/phytool.bb | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/phytool/phytool.bb
+> 
+> diff --git a/meta-networking/recipes-support/phytool/phytool.bb b/meta-networking/recipes-support/phytool/phytool.bb
+> new file mode 100644
+> index 0000000..e4391df
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/phytool/phytool.bb
+> @@ -0,0 +1,14 @@
+> +SUMMARY = "PHY interface tool for Linux"
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=39bba7d2cf0ba1036f2a6e2be52fe3f0"
+> +
+> +PV = "1.0.1+git${SRCPV}"
+> +SRCREV = "3149bfdb4f513e2f0da0a7d0bc5d0873578696f2"
+> +SRC_URI = "git://github.com/wkz/phytool.git"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +do_install() {
+> +    install -d ${D}${prefix}/bin
 
-If you're poking at whitespace, you should fix other layout issues as well, R*
-variables go below do_install, not next to DEPENDS
+${D}${bindir}
+
+> +    oe_runmake 'DESTDIR=${D}' 'PREFIX=${prefix}' install
+> +}
+> 
 
 
 
