@@ -1,53 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 1EB136093A
+Received: from mail-pa0-f67.google.com (mail-pa0-f67.google.com
+	[209.85.220.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F51A719E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Oct 2016 15:14:47 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id t25so3004990pfg.2
+	Fri,  7 Oct 2016 15:15:33 +0000 (UTC)
+Received: by mail-pa0-f67.google.com with SMTP id hh10so2884032pac.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Oct 2016 08:14:49 -0700 (PDT)
+	Fri, 07 Oct 2016 08:15:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:subject:from:in-reply-to:date:message-id:references:to; 
-	bh=hwCuCipfj0LNDCDpbAvmYGLFJDf2thelXZhJIYMyFZw=;
-	b=adcKQmby43P0CHqvzzINYfklMgaTxrvW9dPlAP8rJrwN5NKryshD//kzqkLabj7yWM
-	v3bR9XK0Zy1MlUQJs1CTWXJ1eLqXAPfKsCak4Cnz34Z5RCNB/C7T6uqpHKzLoDp3mc6u
-	FVgUhKk/0Ihc9YWv4lxPj0ZikoheZoQJuk4RYXl8awmom/4lrKc0Cyux/F47jlDBMjTW
-	63QHRXf0DuE2PHfweNJxnhM+RLCNPW8+6UnjzR2oimiVeQcrkQmH6pb5L4eb61fp27zf
-	dpRd1ehz0wJgpNQFuZ7K6jsaw3j4bp45iGKDeI1QywOVNRpMam5+rYoaNsOYtN5AhEV/
-	odBA==
+	bh=LtUDOwsneeBs0qZyA8kR3xmkBXm2aWoevXZFzwn4U4w=;
+	b=jqK0esQ0b82yY8n8gzJ7K3xv4giHxZTdU+ioakePy8lxVA6dRZA4Qo70Hqvso0YDnk
+	P4i7KsxQqJwUtrSzDVWKNoJQdN1EJURJ+scfUdQfT7G1qiLEQN2fjyk2YtZTQL9WTT8X
+	I5Qm+iy5QTmVFTnBaMq9O1Xazo2d7L2sAzSZeLNMFeKf76dyCJwgJVKuWyPIGRBtdjtx
+	HehTGoCD/ncpRwNTHiHPdvBgs6EfZ3U/dQYwIB2sDxA3fMJTz6Dgzd0WJKeaO+uzTRtM
+	E0bX/stplCDNoQRJzU2+Y24jBSKSEFv7Z4hMgkzidF5ZeoOCpBd6bxBwnyIwmtKlvuyW
+	Rk/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date
 	:message-id:references:to;
-	bh=hwCuCipfj0LNDCDpbAvmYGLFJDf2thelXZhJIYMyFZw=;
-	b=UQNJAU05IanUIrYjnqAygUjVZeTZeI1e6fIDDIKDVsKSDDQCOU+eNaPi5XUjG/PPxZ
-	1VeE+dbKErnC9BGCyR0kC8FyKcwxNT+C6Q24EUcIK3MHi8EFYeLY1JaaNk9IwxHm4iIX
-	OHQmpFR8iXmiZPhMQ/GPW37iIFrLTwF+N4cLPidWIX9iKlqRDV/R9N3E4Xth76PocRPr
-	1l5zhKa3k1I28nALUZ95Vxg5wVsLtTmotMWN3AG3nsArzcZ2Y31HVfTP9XDVQiP1kjc3
-	2j2AVuZWI2HWYb7eNhjjdDjjpa8NYjt3AYcpOuIbXUw8c6rLnez8EeqqveyQtKGsfwpX
-	hvuw==
-X-Gm-Message-State: AA6/9RlbmdgjEIKggfvEHdcA1MuLWwM69sFny0EuYKVT+c87JyL5LLpQ0oBkanUzho359w==
-X-Received: by 10.98.135.134 with SMTP id i128mr19026443pfe.178.1475853289215; 
-	Fri, 07 Oct 2016 08:14:49 -0700 (PDT)
+	bh=LtUDOwsneeBs0qZyA8kR3xmkBXm2aWoevXZFzwn4U4w=;
+	b=I34ZQPbXJesZmyfUDkp+Goo/ROR7acSPrx3DiQeMlRoiPY+aZTk6Rdfn0H1gb4y6N3
+	FBqRlAr8NCQ/V9y9MiCyQmxR4JC5mc34v0Ag91QH37PTU5Q6YOUfF5DLNzva45I1nhrd
+	vulPoytgQQuXFozsyEFCoQbnLQZnZMSqRnwPGhPqSFXq7KAOfTQ+Yz5HbzetDfuN7Yxr
+	aYZdLQX5ZjEVcOGURQtj7yFaUCrBZsFfJz3Ss0YxOGkfZplvIaIFXcHn7l00oHD3FNuQ
+	6zYcfUAZMaCUpTCzkxQb99zNVnkDIPECiy82ECYKGQeveRpcsX31cSURfCBoQ0YZlz/G
+	gywg==
+X-Gm-Message-State: AA6/9Rmo+hx0RHrnectGE3CEuQk1eFeHqud301KSc+qikZYSbU8IxAiOUqd3NRKPJrZ2/A==
+X-Received: by 10.66.78.9 with SMTP id x9mr30853702paw.201.1475853334558;
+	Fri, 07 Oct 2016 08:15:34 -0700 (PDT)
 Received: from ?IPv6:2601:646:8882:b8c:cd9d:6261:adca:4b85?
 	([2601:646:8882:b8c:cd9d:6261:adca:4b85])
 	by smtp.gmail.com with ESMTPSA id
-	p26sm14775056pfj.80.2016.10.07.08.14.48
+	p26sm14775056pfj.80.2016.10.07.08.15.33
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 07 Oct 2016 08:14:48 -0700 (PDT)
+	Fri, 07 Oct 2016 08:15:33 -0700 (PDT)
 Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
 X-Pgp-Agent: GPGMail
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1475831964-1993-2-git-send-email-schnitzeltony@googlemail.com>
-Date: Fri, 7 Oct 2016 08:14:46 -0700
-Message-Id: <E5E0F819-27C7-4FFD-9639-39BF2B9BE459@gmail.com>
-References: <1475831964-1993-1-git-send-email-schnitzeltony@googlemail.com>
-	<1475831964-1993-2-git-send-email-schnitzeltony@googlemail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <20161007085121.16502-2-igor.socec@pelagicore.com>
+Date: Fri, 7 Oct 2016 08:15:32 -0700
+Message-Id: <7F3E06C7-3B86-4BA4-B157-F06436A518C9@gmail.com>
+References: <CAMKF1soNE54yHLS5tm25yZa68d=vitr7ETHjEWbqK10_-etxFw@mail.gmail.com>
+	<20161007085121.16502-2-igor.socec@pelagicore.com>
+To: openembedded-devel@lists.openembedded.org
 X-Mailer: Apple Mail (2.3124)
-Subject: Re: [PATCH 2/5] jack: remove portaudio PACKAGECONFIG
+Subject: Re: [meta-oe][PATCH] jansson: update to 2.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,50 +60,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Oct 2016 15:14:49 -0000
-X-Groupsio-MsgNum: 63413
+X-List-Received-Date: Fri, 07 Oct 2016 15:15:33 -0000
+X-Groupsio-MsgNum: 63414
 Content-Type: multipart/signed;
-	boundary="Apple-Mail=_F7825B36-C879-45D3-8DD2-F91E13D8B8B1";
+	boundary="Apple-Mail=_3ED6843F-9183-4A91-BD52-B2CFCC56D049";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---Apple-Mail=_F7825B36-C879-45D3-8DD2-F91E13D8B8B1
+--Apple-Mail=_3ED6843F-9183-4A91-BD52-B2CFCC56D049
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain;
 	charset=utf-8
 
 
-> On Oct 7, 2016, at 2:19 AM, Andreas M=C3=BCller =
-<schnitzeltony@googlemail.com> wrote:
+> On Oct 7, 2016, at 1:51 AM, Igor Socec <igor.socec@pelagicore.com> =
+wrote:
 >=20
-> portaudio backend is only available for windows builds - see README =
-(and if set
-> it would cause a cyclic dependency with portaudio's jack =
-PACKAGECONFIG)
-
-should be unconditionally keep =E2=80=94portaudio=3Dno ?
-
+> Improved build, tests and documentation.
 >=20
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> New features: functions and macros (*pack, *foreach, *string*, =
+*alloc*)
+>=20
+> Security fixes: CVE-2013-6401
+>=20
+> Bugfixes:
+> - Number parsing and overflows
+> - Fix l_isxdigit() macro (#97).
+> - Check for NULL key in json_object_get() and json_object_del() =
+(#151).
+> - Enhance hashtable seeding on Windows (#162).
+> - json_unpack(): Allow mixing JSON_STRICT with optional keys (#162, =
+#163).
+> - Fix int/int32 mismatch (#142).
+> - Parse subnormal numbers correctly (#202).
+> - Fix a crash when parsing inputs consisting of very deeply nested =
+arrays or objects (#282, #284).
+> - Never convert numbers to integers in the parser when =
+JSON_DECODE_INT_AS_REAL is set (#212).
+> - Handle out-of-memory situations gracefully in the hashtable =
+implementation (#298).
+>=20
+> Signed-off-by: Igor Socec <igor.socec@pelagicore.com>
 > ---
-> meta-oe/recipes-multimedia/jack/jack_git.bb | 1 -
-> 1 file changed, 1 deletion(-)
+> meta-oe/recipes-extended/jansson/{jansson_2.4.bb =3D> jansson_2.9.bb} =
+| 6 +++---
+> 1 file changed, 3 insertions(+), 3 deletions(-)
+> rename meta-oe/recipes-extended/jansson/{jansson_2.4.bb =3D> =
+jansson_2.9.bb} (53%)
 >=20
-> diff --git a/meta-oe/recipes-multimedia/jack/jack_git.bb =
-b/meta-oe/recipes-multimedia/jack/jack_git.bb
-> index 34615b4..06e0322 100644
-> --- a/meta-oe/recipes-multimedia/jack/jack_git.bb
-> +++ b/meta-oe/recipes-multimedia/jack/jack_git.bb
-> @@ -23,7 +23,6 @@ inherit waf pkgconfig
+> diff --git a/meta-oe/recipes-extended/jansson/jansson_2.4.bb =
+b/meta-oe/recipes-extended/jansson/jansson_2.9.bb
+> similarity index 53%
+> rename from meta-oe/recipes-extended/jansson/jansson_2.4.bb
+> rename to meta-oe/recipes-extended/jansson/jansson_2.9.bb
+> index c235729..455b374 100644
+> --- a/meta-oe/recipes-extended/jansson/jansson_2.4.bb
+> +++ b/meta-oe/recipes-extended/jansson/jansson_2.9.bb
+> @@ -1,12 +1,12 @@
+> SUMMARY =3D "Jansson is a C library for encoding, decoding and =
+manipulating JSON data"
+> HOMEPAGE =3D "http://www.digip.org/jansson/"
+> LICENSE =3D "MIT"
+> -LIC_FILES_CHKSUM =3D =
+"file://LICENSE;md5=3D6946b728e700de875e60ebb453cc3a20"
+> +LIC_FILES_CHKSUM =3D =
+"file://LICENSE;md5=3D8b70213ec164c7bd876ec2120ba52f61=E2=80=9D
+
+what changed in license?
+
 >=20
-> PACKAGECONFIG ??=3D "alsa"
-> PACKAGECONFIG[alsa] =3D "--alsa=3Dyes,alsa=3Dno,alsa-lib"
-> -PACKAGECONFIG[portaudio] =3D =
-"--portaudio=3Dyes,--portaudio=3Dno,portaudio"
+> SRC_URI =3D =
+"http://www.digip.org/jansson/releases/${BPN}-${PV}.tar.gz"
 >=20
-> PACKAGES =3D+ "libjack jack-server jack-utils"
+> -SRC_URI[md5sum] =3D "c4629b89bf0432f3158c461e88fe0113"
+> -SRC_URI[sha256sum] =3D =
+"1fcbd1ac3d8b610644acf86a5731d760bb228c9acbace20a2ad0f23baec79b41"
+> +SRC_URI[md5sum] =3D "84abaefee9502b2f2ff394d758f160c7"
+> +SRC_URI[sha256sum] =3D =
+"0ad0d074ca049a36637e7abef755d40849ad73e926b93914ce294927b97bd2a5"
+>=20
+> inherit autotools pkgconfig
 >=20
 > --
-> 2.7.4
+> 2.9.3
 >=20
 > --
 > _______________________________________________
@@ -112,7 +150,7 @@ b/meta-oe/recipes-multimedia/jack/jack_git.bb
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
---Apple-Mail=_F7825B36-C879-45D3-8DD2-F91E13D8B8B1
+--Apple-Mail=_3ED6843F-9183-4A91-BD52-B2CFCC56D049
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment;
 	filename=signature.asc
@@ -123,9 +161,9 @@ Content-Description: Message signed with OpenPGP using GPGMail
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlf3u+YACgkQuwUzVZGdMxSMvgCfbpFY26C2jJBTXNCCIcZwa/w8
-fpEAn11sxf7N1DV/1JcoQSr4csiYfe2+
-=BMS7
+iEYEARECAAYFAlf3vBQACgkQuwUzVZGdMxQbvgCdEQhzbBJmpBNxwdWTosH762ZA
+d58AoIYR9CHOR6hx1GG+AxLaveoQR79O
+=LU1t
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_F7825B36-C879-45D3-8DD2-F91E13D8B8B1--
+--Apple-Mail=_3ED6843F-9183-4A91-BD52-B2CFCC56D049--
