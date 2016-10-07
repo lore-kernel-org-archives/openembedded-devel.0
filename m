@@ -1,53 +1,69 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pa0-f67.google.com (mail-pa0-f67.google.com
-	[209.85.220.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F51A719E8
+Return-Path: <msbarth@linux.vnet.ibm.com>
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+	[148.163.156.1])
+	by mail.openembedded.org (Postfix) with ESMTP id B4E56719D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Oct 2016 15:15:33 +0000 (UTC)
-Received: by mail-pa0-f67.google.com with SMTP id hh10so2884032pac.0
+	Fri,  7 Oct 2016 15:30:16 +0000 (UTC)
+Received: from pps.filterd (m0098393.ppops.net [127.0.0.1])
+	by mx0a-001b2d01.pphosted.com (8.16.0.17/8.16.0.17) with SMTP id
+	u97FTfc1017946 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 7 Oct 2016 11:30:17 -0400
+Received: from e37.co.us.ibm.com (e37.co.us.ibm.com [32.97.110.158])
+	by mx0a-001b2d01.pphosted.com with ESMTP id 25xdca2qwq-1
+	(version=TLSv1.2 cipher=AES256-SHA bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Oct 2016 08:15:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:subject:from:in-reply-to:date:message-id:references:to; 
-	bh=LtUDOwsneeBs0qZyA8kR3xmkBXm2aWoevXZFzwn4U4w=;
-	b=jqK0esQ0b82yY8n8gzJ7K3xv4giHxZTdU+ioakePy8lxVA6dRZA4Qo70Hqvso0YDnk
-	P4i7KsxQqJwUtrSzDVWKNoJQdN1EJURJ+scfUdQfT7G1qiLEQN2fjyk2YtZTQL9WTT8X
-	I5Qm+iy5QTmVFTnBaMq9O1Xazo2d7L2sAzSZeLNMFeKf76dyCJwgJVKuWyPIGRBtdjtx
-	HehTGoCD/ncpRwNTHiHPdvBgs6EfZ3U/dQYwIB2sDxA3fMJTz6Dgzd0WJKeaO+uzTRtM
-	E0bX/stplCDNoQRJzU2+Y24jBSKSEFv7Z4hMgkzidF5ZeoOCpBd6bxBwnyIwmtKlvuyW
-	Rk/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date
-	:message-id:references:to;
-	bh=LtUDOwsneeBs0qZyA8kR3xmkBXm2aWoevXZFzwn4U4w=;
-	b=I34ZQPbXJesZmyfUDkp+Goo/ROR7acSPrx3DiQeMlRoiPY+aZTk6Rdfn0H1gb4y6N3
-	FBqRlAr8NCQ/V9y9MiCyQmxR4JC5mc34v0Ag91QH37PTU5Q6YOUfF5DLNzva45I1nhrd
-	vulPoytgQQuXFozsyEFCoQbnLQZnZMSqRnwPGhPqSFXq7KAOfTQ+Yz5HbzetDfuN7Yxr
-	aYZdLQX5ZjEVcOGURQtj7yFaUCrBZsFfJz3Ss0YxOGkfZplvIaIFXcHn7l00oHD3FNuQ
-	6zYcfUAZMaCUpTCzkxQb99zNVnkDIPECiy82ECYKGQeveRpcsX31cSURfCBoQ0YZlz/G
-	gywg==
-X-Gm-Message-State: AA6/9Rmo+hx0RHrnectGE3CEuQk1eFeHqud301KSc+qikZYSbU8IxAiOUqd3NRKPJrZ2/A==
-X-Received: by 10.66.78.9 with SMTP id x9mr30853702paw.201.1475853334558;
-	Fri, 07 Oct 2016 08:15:34 -0700 (PDT)
-Received: from ?IPv6:2601:646:8882:b8c:cd9d:6261:adca:4b85?
-	([2601:646:8882:b8c:cd9d:6261:adca:4b85])
-	by smtp.gmail.com with ESMTPSA id
-	p26sm14775056pfj.80.2016.10.07.08.15.33
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 07 Oct 2016 08:15:33 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
-X-Pgp-Agent: GPGMail
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20161007085121.16502-2-igor.socec@pelagicore.com>
-Date: Fri, 7 Oct 2016 08:15:32 -0700
-Message-Id: <7F3E06C7-3B86-4BA4-B157-F06436A518C9@gmail.com>
-References: <CAMKF1soNE54yHLS5tm25yZa68d=vitr7ETHjEWbqK10_-etxFw@mail.gmail.com>
-	<20161007085121.16502-2-igor.socec@pelagicore.com>
+	Fri, 07 Oct 2016 11:30:17 -0400
+Received: from localhost
+	by e37.co.us.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+	Violators will be prosecuted
+	for <openembedded-devel@lists.openembedded.org> from
+	<msbarth@linux.vnet.ibm.com>; Fri, 7 Oct 2016 09:30:16 -0600
+Received: from d03dlp02.boulder.ibm.com (9.17.202.178)
+	by e37.co.us.ibm.com (192.168.1.137) with IBM ESMTP SMTP Gateway:
+	Authorized Use Only! Violators will be prosecuted; 
+	Fri, 7 Oct 2016 09:30:13 -0600
+Received: from b03cxnp07029.gho.boulder.ibm.com
+	(b03cxnp07029.gho.boulder.ibm.com [9.17.130.16])
+	by d03dlp02.boulder.ibm.com (Postfix) with ESMTP id 05E473E40047
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  7 Oct 2016 09:30:13 -0600 (MDT)
+Received: from b03ledav002.gho.boulder.ibm.com
+	(b03ledav002.gho.boulder.ibm.com [9.17.130.233])
+	by b03cxnp07029.gho.boulder.ibm.com (8.14.9/8.14.9/NCO v10.0) with
+	ESMTP id u97FTiO114942524; Fri, 7 Oct 2016 08:30:12 -0700
+Received: from b03ledav002.gho.boulder.ibm.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id D13BA136044;
+	Fri,  7 Oct 2016 09:30:12 -0600 (MDT)
+Received: from UbuntuVM.aus.stglabs.ibm.com (unknown [9.10.99.147])
+	by b03ledav002.gho.boulder.ibm.com (Postfix) with ESMTP id AE91513603C; 
+	Fri,  7 Oct 2016 09:30:12 -0600 (MDT)
+From: Matthew Barth <msbarth@linux.vnet.ibm.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.3124)
-Subject: Re: [meta-oe][PATCH] jansson: update to 2.9
+Date: Fri,  7 Oct 2016 10:30:16 -0500
+X-Mailer: git-send-email 1.9.1
+X-TM-AS-GCONF: 00
+X-Content-Scanned: Fidelis XPS MAILER
+x-cbid: 16100715-0024-0000-0000-000014BCCDF0
+X-IBM-SpamModules-Scores: 
+X-IBM-SpamModules-Versions: BY=3.00005868; HX=3.00000240; KW=3.00000007;
+	PH=3.00000004; SC=3.00000186; SDB=6.00765528; UDB=6.00365813;
+	IPR=6.00541386; 
+	BA=6.00004792; NDR=6.00000001; ZLA=6.00000005; ZF=6.00000009;
+	ZB=6.00000000; 
+	ZP=6.00000000; ZH=6.00000000; ZU=6.00000002; MB=3.00012906;
+	XFM=3.00000011; UTC=2016-10-07 15:30:14
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 16100715-0025-0000-0000-00004521A8A0
+Message-Id: <1475854216-6859-1-git-send-email-msbarth@linux.vnet.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2016-10-07_07:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+	spamscore=0 suspectscore=1
+	malwarescore=0 phishscore=0 adultscore=0 bulkscore=0 classifier=spam
+	adjust=0 reason=mlx scancount=1 engine=8.0.1-1609300000
+	definitions=main-1610070267
+Cc: Matthew Barth <msbarth@linux.vnet.ibm.com>
+Subject: [meta-oe][PATCH v2] autoconf-archive: 2012.04.07 -> 2016.09.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,110 +76,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Oct 2016 15:15:33 -0000
-X-Groupsio-MsgNum: 63414
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_3ED6843F-9183-4A91-BD52-B2CFCC56D049";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Fri, 07 Oct 2016 15:30:16 -0000
 
---Apple-Mail=_3ED6843F-9183-4A91-BD52-B2CFCC56D049
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=utf-8
+Signed-off-by: Matthew Barth <msbarth@linux.vnet.ibm.com>
+---
+ meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc    | 7 ++++---
+ ...oconf-archive_2012.04.07.bb => autoconf-archive_2016.09.16.bb} | 8 +++-----
+ 2 files changed, 7 insertions(+), 8 deletions(-)
+ rename meta-oe/recipes-devtools/autoconf-archive/{autoconf-archive_2012.04.07.bb => autoconf-archive_2016.09.16.bb} (55%)
 
-
-> On Oct 7, 2016, at 1:51 AM, Igor Socec <igor.socec@pelagicore.com> =
-wrote:
->=20
-> Improved build, tests and documentation.
->=20
-> New features: functions and macros (*pack, *foreach, *string*, =
-*alloc*)
->=20
-> Security fixes: CVE-2013-6401
->=20
-> Bugfixes:
-> - Number parsing and overflows
-> - Fix l_isxdigit() macro (#97).
-> - Check for NULL key in json_object_get() and json_object_del() =
-(#151).
-> - Enhance hashtable seeding on Windows (#162).
-> - json_unpack(): Allow mixing JSON_STRICT with optional keys (#162, =
-#163).
-> - Fix int/int32 mismatch (#142).
-> - Parse subnormal numbers correctly (#202).
-> - Fix a crash when parsing inputs consisting of very deeply nested =
-arrays or objects (#282, #284).
-> - Never convert numbers to integers in the parser when =
-JSON_DECODE_INT_AS_REAL is set (#212).
-> - Handle out-of-memory situations gracefully in the hashtable =
-implementation (#298).
->=20
-> Signed-off-by: Igor Socec <igor.socec@pelagicore.com>
-> ---
-> meta-oe/recipes-extended/jansson/{jansson_2.4.bb =3D> jansson_2.9.bb} =
-| 6 +++---
-> 1 file changed, 3 insertions(+), 3 deletions(-)
-> rename meta-oe/recipes-extended/jansson/{jansson_2.4.bb =3D> =
-jansson_2.9.bb} (53%)
->=20
-> diff --git a/meta-oe/recipes-extended/jansson/jansson_2.4.bb =
-b/meta-oe/recipes-extended/jansson/jansson_2.9.bb
-> similarity index 53%
-> rename from meta-oe/recipes-extended/jansson/jansson_2.4.bb
-> rename to meta-oe/recipes-extended/jansson/jansson_2.9.bb
-> index c235729..455b374 100644
-> --- a/meta-oe/recipes-extended/jansson/jansson_2.4.bb
-> +++ b/meta-oe/recipes-extended/jansson/jansson_2.9.bb
-> @@ -1,12 +1,12 @@
-> SUMMARY =3D "Jansson is a C library for encoding, decoding and =
-manipulating JSON data"
-> HOMEPAGE =3D "http://www.digip.org/jansson/"
-> LICENSE =3D "MIT"
-> -LIC_FILES_CHKSUM =3D =
-"file://LICENSE;md5=3D6946b728e700de875e60ebb453cc3a20"
-> +LIC_FILES_CHKSUM =3D =
-"file://LICENSE;md5=3D8b70213ec164c7bd876ec2120ba52f61=E2=80=9D
-
-what changed in license?
-
->=20
-> SRC_URI =3D =
-"http://www.digip.org/jansson/releases/${BPN}-${PV}.tar.gz"
->=20
-> -SRC_URI[md5sum] =3D "c4629b89bf0432f3158c461e88fe0113"
-> -SRC_URI[sha256sum] =3D =
-"1fcbd1ac3d8b610644acf86a5731d760bb228c9acbace20a2ad0f23baec79b41"
-> +SRC_URI[md5sum] =3D "84abaefee9502b2f2ff394d758f160c7"
-> +SRC_URI[sha256sum] =3D =
-"0ad0d074ca049a36637e7abef755d40849ad73e926b93914ce294927b97bd2a5"
->=20
-> inherit autotools pkgconfig
->=20
-> --
-> 2.9.3
->=20
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
+index 9399363..2b5df70 100644
+--- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
++++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
+@@ -1,15 +1,16 @@
++SUMMARY = "A collection of macros for GNU Autoconf"
++DESCRIPTION = "The autoconf-archive set of macros extend the pre-defined \
++capabilities within the complete autoconf tool set."
+ LICENSE = "GPLv3"
+ HOMEPAGE = "http://www.gnu.org/software/autoconf-archive/"
+ SECTION = "devel"
+-
+ DEPENDS += "m4-native"
+ DEPENDS_class-native = "m4-native gnu-config-native"
+ DEPENDS_class-nativesdk = "m4-nativesdk gnu-config-nativesdk"
+-
+ RDEPENDS_${PN} = "m4 gnu-config"
+ RDEPENDS_${PN}_class-native = "m4-native gnu-config-native"
+ RDEPENDS_${PN}_class-nativesdk = "m4-nativesdk gnu-config-nativesdk"
+ 
+-SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.bz2"
++SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz"
+ 
+ inherit autotools
+diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
+similarity index 55%
+rename from meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
+rename to meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
+index 5baaecc..1a0470c 100644
+--- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
++++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
+@@ -1,13 +1,11 @@
+ require autoconf-archive.inc
+ 
+-
+-PARALLEL_MAKE = ""
+-
+ LICENSE = "GPLv2 & GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+-SRC_URI[md5sum] = "e842c5b9fae021007bd70550362e5e80"
+-SRC_URI[sha256sum] = "040b443bf68efd52fbfcb294b556bfbbbfe432db78445ca25e0cfe2e88f96a14"
++SRC_URI[md5sum] = "bf19d4cddce260b3c3e1d51d42509071"
++SRC_URI[sha256sum] = "e8f2efd235f842bad2f6938bf4a72240a5e5fcd248e8444335e63beb60fabd82"
+ 
+ EXTRA_OECONF += "ac_cv_path_M4=m4"
++
+ BBCLASSEXTEND = "native nativesdk"
+-- 
+1.9.1
 
 
---Apple-Mail=_3ED6843F-9183-4A91-BD52-B2CFCC56D049
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlf3vBQACgkQuwUzVZGdMxQbvgCdEQhzbBJmpBNxwdWTosH762ZA
-d58AoIYR9CHOR6hx1GG+AxLaveoQR79O
-=LU1t
------END PGP SIGNATURE-----
-
---Apple-Mail=_3ED6843F-9183-4A91-BD52-B2CFCC56D049--
