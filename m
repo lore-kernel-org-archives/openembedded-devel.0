@@ -1,51 +1,49 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 4629B60720
+Return-Path: <igor.socec@pelagicore.com>
+Received: from mail-lf0-f49.google.com (mail-lf0-f49.google.com
+	[209.85.215.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 6EA5A6014F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  8 Oct 2016 10:04:02 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id f193so6403553wmg.2
+	Sat,  8 Oct 2016 10:10:00 +0000 (UTC)
+Received: by mail-lf0-f49.google.com with SMTP id b75so56925089lfg.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 08 Oct 2016 03:04:04 -0700 (PDT)
+	Sat, 08 Oct 2016 03:10:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=I2hupruMhcHfDs7MSM3R3cS1sC0UqPPCoaXojBt+tUc=;
-	b=Q9yto+mdMQf1yGHjQsCkmjWKrCly3IPhZaHjLMuJZX+MRjOkWNVxLgZmeyyzTFaDbI
-	Kg8ThHNcaC4f7HV9RF1N/hTv/0jWK1uwid1b4dO9qe2PftdFjgjf8DDwhXQxlq+KtfsL
-	Ol/VTIlF1s+pnlLo9gVYKbTUVdw2bhoHjeKiAsBQ0yYfLRjNC0iKgKvyggiAtAZjHZhq
-	8sF7E8YK30VKyrjSUhX+uOFqwXdC0ECO6HbiOhIvfGRMTJUBqbT6+u950DFzLOR5XIUY
-	Fodz0rbpy0wrD/xyA8xO7Wgprwap6/A4gB2yux76v/KEm1M4DSHstdL5Zz0k1lWK3PGk
-	5rEQ==
+	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=STaofX5lu33Uakwy8xQ/5xaqDIdM09lvD7IZiEiSKSw=;
+	b=MSRSyPYdxKCgoeb7xbGY0K/0wc7Ct/m9Q/ECB+EqsKB3jR/xXQOBkbOG0W6zzDBA6U
+	KRgUhL7skSeIZterlt+35VvUUIy/+glhvJPIJCPy9AhhSdbDilIAiLrbGGjkjXkxdLaR
+	pKRgpv3YBa/Zxu6NXepgwQ12pTFweG04q7QLlabzfIHKdG3RiR16gs8Ev68gF+4IL+O7
+	ssqVJnfc1fI2sdMcEteQf72VL3v0tS5b4OCyAC6p41maAw+hOQFGJvHx+so5LfYXgE0r
+	10s1g2bzRfq/zGxVkeksXE2A0LxrVnNDBfMU6MHxMJ9H4YigHQGjBmgeVJNsbWg6QclB
+	ftDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=I2hupruMhcHfDs7MSM3R3cS1sC0UqPPCoaXojBt+tUc=;
-	b=bg0vUsLzyf9/XIKOJvk1zvK5XUpMUN/igEhfhTFRHvGFpVMJbe9V1iBCjjEKQ/V+jl
-	ZIWeEpL1ZwtEe727gEnnte7BJ24DCtGpaXYBTo4laYLZk97VT8BsK0zeT1C7cLzJ5/uD
-	MMF0nicdVqOSfYhpqUq+6dl7Dm/gBJTEpjTBiqDCdnZgZWzvssoTxQAOvkleAl7CmvgM
-	rk8BXiyyglDejIoTHS8v5HnChftS9IMvBeznDWfvB0zAB6XGKwd08gdLjk6ocXrxa9Lp
-	Q6/Y36qb07fJq0N+5e/FACowNP7aY3YwkRyI/begzt6LRAS3ZI6UWJGcg851EuXqIs57
-	Oy0Q==
-X-Gm-Message-State: AA6/9RncTOmDAOvbsQx+wGgE/JVjVe3ywstg4hU9RpxgBWlKcvrVdzMBTey9VSr9rTIcmw==
-X-Received: by 10.194.55.9 with SMTP id n9mr19282509wjp.208.1475921031005;
-	Sat, 08 Oct 2016 03:03:51 -0700 (PDT)
-Received: from localhost.localdomain (p4FDF0EC6.dip0.t-ipconnect.de.
-	[79.223.14.198]) by smtp.googlemail.com with ESMTPSA id
-	n7sm7509219wmf.18.2016.10.08.03.03.50
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=STaofX5lu33Uakwy8xQ/5xaqDIdM09lvD7IZiEiSKSw=;
+	b=K71mfr8Dcvx1rS/HuVFnJNTU6QX4kkK4qcwRqKPVhiI0J4V5HE73sa0tolzjH5v6pe
+	vC0EkVlNuanNQBVVrd8qnT6ynl9nBkMmeXHyIBqLjW7px/22bZuILkeGhUNkLYWsiq5Y
+	pHpYHX239hEecRfoBm7Ur/BimfQ6E8/WvvciBJ4x2gprQ3v2aKzwk72kazQ/bb/ryDU0
+	ZVzEdaREBHa0kkA72yaPA3hX5vvhKrRazx4nAzPqjV1ZvBE3nnLtqNHzWTXTvVQvYEAC
+	aYY5Swyr2Ad6eLAXCHyL3+viEfeqtXNFYA35JBMYB5NqqMoE6l0nMI4W43AwjJNbpv/I
+	SfsA==
+X-Gm-Message-State: AA6/9Rk9Q0hrbTJB8jaALrgM99F7ARjKSkK3GhpCyIjvYGxptpptY7/1eoV1Kr4urCGtSXHi
+X-Received: by 10.46.0.133 with SMTP id e5mr3283839lji.50.1475921401257;
+	Sat, 08 Oct 2016 03:10:01 -0700 (PDT)
+Received: from localhost.localdomain (c83-248-119-238.bredband.comhem.se.
+	[83.248.119.238])
+	by smtp.gmail.com with ESMTPSA id i80sm4282442lfg.6.2016.10.08.03.10.00
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 08 Oct 2016 03:03:50 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Sat, 08 Oct 2016 03:10:00 -0700 (PDT)
+From: Igor Socec <igor.socec@pelagicore.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  8 Oct 2016 12:03:34 +0200
-Message-Id: <1475921015-7131-4-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.5.5
-In-Reply-To: <1475921015-7131-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1475921015-7131-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [PATCH V2 3/4] a2jmidid: initial add v8
+Date: Sat,  8 Oct 2016 12:09:50 +0200
+Message-Id: <20161008100950.5978-2-igor.socec@pelagicore.com>
+X-Mailer: git-send-email 2.9.3
+In-Reply-To: <CFF7DF6C-0418-4E89-BC99-98A7101F5237@gmail.com>
+References: <CFF7DF6C-0418-4E89-BC99-98A7101F5237@gmail.com>
+Subject: [meta-oe][PATCH v2] jansson: update to 2.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,96 +56,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Oct 2016 10:04:03 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 08 Oct 2016 10:10:03 -0000
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Improved build, tests and documentation.
+
+New features: functions and macros (*pack, *foreach, *string*, *alloc*)
+
+Security fixes: CVE-2013-6401
+
+Bugfixes:
+- Number parsing and overflows
+- Fix l_isxdigit() macro (#97).
+- Check for NULL key in json_object_get() and json_object_del() (#151).
+- Enhance hashtable seeding on Windows (#162).
+- json_unpack(): Allow mixing JSON_STRICT with optional keys (#162, #163).
+- Fix int/int32 mismatch (#142).
+- Parse subnormal numbers correctly (#202).
+- Fix a crash when parsing inputs consisting of very deeply nested arrays or objects (#282, #284).
+- Never convert numbers to integers in the parser when JSON_DECODE_INT_AS_REAL is set (#212).
+- Handle out-of-memory situations gracefully in the hashtable implementation (#298).
+
+The copyright date in the LICENSE file was updated for 2016.
+
+Signed-off-by: Igor Socec <igor.socec@pelagicore.com>
 ---
- ...-pthread-library-dependency-to-fix-linkin.patch | 43 ++++++++++++++++++++++
- meta-oe/recipes-multimedia/jack/a2jmidid_8.bb      | 22 +++++++++++
- 2 files changed, 65 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/jack/a2jmidid/0001-wscript-add-pthread-library-dependency-to-fix-linkin.patch
- create mode 100644 meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
+ meta-oe/recipes-extended/jansson/{jansson_2.4.bb => jansson_2.9.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-extended/jansson/{jansson_2.4.bb => jansson_2.9.bb} (53%)
 
-diff --git a/meta-oe/recipes-multimedia/jack/a2jmidid/0001-wscript-add-pthread-library-dependency-to-fix-linkin.patch b/meta-oe/recipes-multimedia/jack/a2jmidid/0001-wscript-add-pthread-library-dependency-to-fix-linkin.patch
-new file mode 100644
-index 0000000..d17d311
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/jack/a2jmidid/0001-wscript-add-pthread-library-dependency-to-fix-linkin.patch
-@@ -0,0 +1,43 @@
-+From 488dc9b00239976caac6bd9ed76b38d9d1659dd9 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Tue, 4 Oct 2016 23:44:49 +0200
-+Subject: [PATCH] wscript: add pthread library dependency to fix linking
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Stolen from [1]
-+
-+[1] http://pkgs.fedoraproject.org/cgit/rpms/a2jmidid.git/tree/a2jmidid-linking.patch
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ wscript | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/wscript b/wscript
-+index 664625b..66a532a 100644
-+--- a/wscript
-++++ b/wscript
-+@@ -67,6 +67,7 @@ def configure(conf):
-+         conf.env['DBUS_ENABLED'] = False
-+ 
-+     conf.env['LIB_DL'] = ['dl']
-++    conf.env['LIB_PTHREAD'] = ['pthread']
-+ 
-+     #conf.check_header('expat.h', mandatory=True)
-+     #conf.env['LIB_EXPAT'] = ['expat']
-+@@ -152,7 +153,7 @@ def build(bld):
-+ 
-+     prog.includes = '.' # make waf dependency tracking work
-+     prog.target = 'a2jmidid'
-+-    prog.uselib = 'ALSA JACK DL'
-++    prog.uselib = 'ALSA JACK DL PTHREAD'
-+     if bld.env()['DBUS_ENABLED']:
-+         prog.uselib += " DBUS-1"
-+     prog = bld.create_obj('cc', 'program')
-+-- 
-+2.5.5
-+
-diff --git a/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb b/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
-new file mode 100644
-index 0000000..d7e93b6
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "a2jmidid is daemon for exposing ALSA sequencer applications as JACK MIDI"
-+SECTION = "libs/multimedia"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = " \
-+    file://gpl2.txt;md5=751419260aa954499f7abaabaa882bbe \
-+"
-+
-+DEPENDS = "alsa-lib jack dbus"
-+
-+SRC_URI = " \
-+    http://download.gna.org/${BPN}/${BPN}-${PV}.tar.bz2 \
-+    file://0001-wscript-add-pthread-library-dependency-to-fix-linkin.patch \
-+"
-+SRC_URI[md5sum] = "9cf4edbc3ad2ddeeaf6c8c1791ff3ddd"
-+SRC_URI[sha256sum] = "2a9635f62aabc59edb54ada07048dd47e896b90caff94bcee710d3582606f55f"
-+
-+inherit waf
-+
-+export LINKFLAGS="${LDFLAGS}"
-+
-+FILES_${PN} += "${datadir}/dbus-1/services"
+diff --git a/meta-oe/recipes-extended/jansson/jansson_2.4.bb b/meta-oe/recipes-extended/jansson/jansson_2.9.bb
+similarity index 53%
+rename from meta-oe/recipes-extended/jansson/jansson_2.4.bb
+rename to meta-oe/recipes-extended/jansson/jansson_2.9.bb
+index c235729..455b374 100644
+--- a/meta-oe/recipes-extended/jansson/jansson_2.4.bb
++++ b/meta-oe/recipes-extended/jansson/jansson_2.9.bb
+@@ -1,12 +1,12 @@
+ SUMMARY = "Jansson is a C library for encoding, decoding and manipulating JSON data"
+ HOMEPAGE = "http://www.digip.org/jansson/"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=6946b728e700de875e60ebb453cc3a20"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=8b70213ec164c7bd876ec2120ba52f61"
+ 
+ SRC_URI = "http://www.digip.org/jansson/releases/${BPN}-${PV}.tar.gz"
+ 
+-SRC_URI[md5sum] = "c4629b89bf0432f3158c461e88fe0113"
+-SRC_URI[sha256sum] = "1fcbd1ac3d8b610644acf86a5731d760bb228c9acbace20a2ad0f23baec79b41"
++SRC_URI[md5sum] = "84abaefee9502b2f2ff394d758f160c7"
++SRC_URI[sha256sum] = "0ad0d074ca049a36637e7abef755d40849ad73e926b93914ce294927b97bd2a5"
+ 
+ inherit autotools pkgconfig
+ 
 -- 
-2.5.5
+2.9.3
 
 
