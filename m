@@ -1,51 +1,49 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f68.google.com (mail-vk0-f68.google.com
-	[209.85.213.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 09E5A6FFD7
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 113F96FFCC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Oct 2016 23:05:35 +0000 (UTC)
-Received: by mail-vk0-f68.google.com with SMTP id b186so2391128vkb.3
+	Sat,  8 Oct 2016 10:03:47 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id i130so6405215wmg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Oct 2016 16:05:37 -0700 (PDT)
+	Sat, 08 Oct 2016 03:03:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	h=from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=Jlphu2acLkYeyk/Xkqqat3PQstMdPLAU3erw1UNNIYg=;
-	b=YfU9Q/jEQRkQyos1vwAavBE4xZK1qK/HHvPDgt+FF7Lyf26RTRuhpsn10Xj4BpUHcu
-	6iNHn1rw6j5IOZY0QRvqYgKqPBaTnUm7BY0JBuLAYPoCK7r4LMYafwMOsDClzYiIv5hW
-	36k87eNHBNPZO3D4/Ic+D3dZVns/I7mbO1/3Y/MdKJ03bmo3Nv54lG/WpNkYVKuu9viA
-	ev+ejxfV3i8VBH0hxWZBa1Q8057ArgIu0838pR3sI4U/4ozgz1EjhIXFD72K31EoJtSM
-	rtFZs+hDQXqzHGgstIFGWn51M2TWjcLP5R4kZoq2aSjhajHbUyRPF7y4qDiy2L0YS0CB
-	IoQA==
+	bh=YAHJm2P+UBWc4XfM59XJzd8U9LA1peTBdMcYCnbHzTM=;
+	b=lposy0YOeSkTdrcmR4TfCloS1JWcc/MhBtkBJZS19QbkbX6vdkzfSRy7kMRH+0IEjg
+	TC7venmTGYejk35o9N5GjvF3orne2H7QnZJ5hMHVLvaum81/tB0rm0ETGV9AS5O9D/7G
+	qaH6oufOOGRqP3oQ1TK6ADe4NsQe0tAKJbTQHAxvVrRe8lpT/nj30NduT+o6zvCo+gxh
+	f3RmfE9eyzU7R+X8NWe4wom2kJIhhwJ4xwS5BSqcXExiOvQAUe2yWmp9dmbwI22xRr2B
+	2Q+N13eXuYqA9k5+xt4iBifqn/IN+ndzhmhVhh5cQiLJ32p/y1pPDv+TIjWKz/n2OE0k
+	QyaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=Jlphu2acLkYeyk/Xkqqat3PQstMdPLAU3erw1UNNIYg=;
-	b=GMfBfsCv+GFB8zKwcguTRew1QjkyMhDAj97luV6YxW/6qEwIFBQjzWN1DBKkPkSVjk
-	XQharI9Wc55Vsk6mttt2c6YTFXr0bGKimTnD/ZhqjWSfcUTqGlOFiz0fOHElBa8/CX7l
-	aoAqpfHndSwI8eqydKkXef92AhTetbbO47kXylaSlQ2XkfN9CuF3LLWQ17FrEPsr12ji
-	9coz3Q+nCWPP3lhuYQgwnOrbk1CwKQ43QvfGWogt2E6i4HXDfDm14IqFC4XSNdjLkBGQ
-	qgQKfnsN67ptVxYR61fxD5TQ7s6MpmZR9gyMTRCVXkdxj86nzuXq50kQ8LBSNW22zuUc
-	f44Q==
-X-Gm-Message-State: AA6/9RlyLhHXn8mcm2QyK4pql6VmNjs3WxbKGwU77d1OYvRT9FdXkGjxHxZ+4HFqh9vj4AqRSUrarYf8WCcpiw==
-X-Received: by 10.31.206.198 with SMTP id e189mr4275231vkg.51.1475881536128;
-	Fri, 07 Oct 2016 16:05:36 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=YAHJm2P+UBWc4XfM59XJzd8U9LA1peTBdMcYCnbHzTM=;
+	b=e9OknHW0cWYHqdF0MJ/FJ5L0WIL9vvuBsARMfiJOExFH7+j/BHIM34o9GzkHCHxjGt
+	GfN9d7u2QPWaNWu5NH4x9l9g15PzV28U5FQEJlDSs1lD5uXlh1PANXAzGVZAd0puk7I6
+	mVIx7DtQOzNNTBbCSh1pIBrvwLSe1lqAcOsLk0bQF7VkFUsaMDcQw0Z1xzfnvXSuoWpR
+	ylisA/X1ukL499gUPwxhU0mB5Z2SfOTGZdONw/D8iluawseItzBIcSwexoRhgHxrQFg3
+	zYLHiV4yH/qgkxC3OujGfS3uT6T4kQ+Um1EHwRPDEsmyb0XXH7rR48QvZHUNoaW1huLg
+	VhVw==
+X-Gm-Message-State: AA6/9RkqiTdXpFFVgqWR7oF3M0Zr4189MJsI4ezx32M9YSo0fnX/u821z31MGS0rGo7fLw==
+X-Received: by 10.194.112.131 with SMTP id iq3mr20217027wjb.123.1475921028444; 
+	Sat, 08 Oct 2016 03:03:48 -0700 (PDT)
+Received: from localhost.localdomain (p4FDF0EC6.dip0.t-ipconnect.de.
+	[79.223.14.198]) by smtp.googlemail.com with ESMTPSA id
+	n7sm7509219wmf.18.2016.10.08.03.03.47
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 08 Oct 2016 03:03:47 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  8 Oct 2016 12:03:31 +0200
+Message-Id: <1475921015-7131-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.5
 MIME-Version: 1.0
-Received: by 10.176.65.130 with HTTP; Fri, 7 Oct 2016 16:05:35 -0700 (PDT)
-In-Reply-To: <22CD53EF-6069-450F-8F54-A5A6FB0FF71D@gmail.com>
-References: <1475831964-1993-1-git-send-email-schnitzeltony@googlemail.com>
-	<1475831964-1993-2-git-send-email-schnitzeltony@googlemail.com>
-	<E5E0F819-27C7-4FFD-9639-39BF2B9BE459@gmail.com>
-	<CALbNGRRL2t1anoyHUMtBdWx8+7OkP=GkkdVDYH_Bne6+c7DAXg@mail.gmail.com>
-	<22CD53EF-6069-450F-8F54-A5A6FB0FF71D@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Sat, 8 Oct 2016 01:05:35 +0200
-Message-ID: <CALbNGRQ+HPvR9qkFLQNeOMsOTBCycfOjB0EpQk7B2TXoAwVxaQ@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 2/5] jack: remove portaudio PACKAGECONFIG
+Subject: [PATCH V2 0/4] jack and more
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,30 +56,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Oct 2016 23:05:37 -0000
+X-List-Received-Date: Sat, 08 Oct 2016 10:03:48 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Sat, Oct 8, 2016 at 12:12 AM, Khem Raj <raj.khem@gmail.com> wrote:
->
->> On Oct 7, 2016, at 9:23 AM, Andreas M=C3=BCller <schnitzeltony@googlemai=
-l.com> wrote:
->>
->> On Fri, Oct 7, 2016 at 5:14 PM, Khem Raj <raj.khem@gmail.com> wrote:
->>>
->>>> On Oct 7, 2016, at 2:19 AM, Andreas M=C3=BCller <schnitzeltony@googlem=
-ail.com> wrote:
->>>>
->>>> portaudio backend is only available for windows builds - see README (a=
-nd if set
->>>> it would cause a cyclic dependency with portaudio's jack PACKAGECONFIG=
-)
->>>
->>> should be unconditionally keep =E2=80=94portaudio=3Dno ?
->> As long as we are not building for windows: No
->
-> does it default to no ? may be its better to be explicit
-Maybe - I'll prepare V2.
+V1 -> V2
 
-Andreas
+* remove florence update
+* disable jack's portaudio configuration explicitly
+
+Andreas Müller (4):
+  jack: swap to jack2
+  jack: remove portaudio PACKAGECONFIG
+  a2jmidid: initial add v8
+  xdg-user-dirs: initial add 0.15
+
+ ...-pthread-library-dependency-to-fix-linkin.patch | 43 +++++++++++++++++++
+ meta-oe/recipes-multimedia/jack/a2jmidid_8.bb      | 22 ++++++++++
+ meta-oe/recipes-multimedia/jack/jack_0.125.0rc1.bb | 49 ----------------------
+ meta-oe/recipes-multimedia/jack/jack_git.bb        | 35 ++++++++++++++++
+ .../xdg-user-dirs/files/xdg-user-dirs.desktop      |  9 ++++
+ .../xdg-user-dirs/xdg-user-dirs_0.15.bb            | 22 ++++++++++
+ 6 files changed, 131 insertions(+), 49 deletions(-)
+ create mode 100644 meta-oe/recipes-multimedia/jack/a2jmidid/0001-wscript-add-pthread-library-dependency-to-fix-linkin.patch
+ create mode 100644 meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
+ delete mode 100644 meta-oe/recipes-multimedia/jack/jack_0.125.0rc1.bb
+ create mode 100644 meta-oe/recipes-multimedia/jack/jack_git.bb
+ create mode 100644 meta-oe/recipes-support/xdg-user-dirs/files/xdg-user-dirs.desktop
+ create mode 100644 meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.15.bb
+
+-- 
+2.5.5
+
 
