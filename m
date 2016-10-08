@@ -1,51 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 7DEEA6FFCC
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 4629B60720
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  8 Oct 2016 10:03:50 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id i130so6405347wmg.0
+	Sat,  8 Oct 2016 10:04:02 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id f193so6403553wmg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 08 Oct 2016 03:03:52 -0700 (PDT)
+	Sat, 08 Oct 2016 03:04:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=VDsnX/Cx0LpOpF+jdAXNOIOj5D7Rb/ET8zSqjsoaIkE=;
-	b=keR2GHwqMDJqVwQxsWWK+pGoqML4DvHhjQTnxmRmxfNfjSS0f7rnpVhwmZpopTnnvT
-	NlomFoDXQogya05BWMQA6qPVOAdp6sny5ul9I4cE5M5kyI2pCE4Q1unkTv2Q++jJYRiR
-	+DYJPwLFR80h9fHNROXnr97afxja9c6GcUvScUKaPO2FUo43jXzJ7iXdViwRtJf0PgzN
-	zd6enRwFenqNXbADwSW3Gqm9uXPAC7AF4/9MCcIhRB96RpA9ruWtAFdZTHpb+If/cQNS
-	vhPhTcxreIz5YVD+4UrUDhl0vq8GuvRZHW+EwoSSE53EUAz4CPkarj8vKqq0nwACVUcD
-	77Lw==
+	bh=I2hupruMhcHfDs7MSM3R3cS1sC0UqPPCoaXojBt+tUc=;
+	b=Q9yto+mdMQf1yGHjQsCkmjWKrCly3IPhZaHjLMuJZX+MRjOkWNVxLgZmeyyzTFaDbI
+	Kg8ThHNcaC4f7HV9RF1N/hTv/0jWK1uwid1b4dO9qe2PftdFjgjf8DDwhXQxlq+KtfsL
+	Ol/VTIlF1s+pnlLo9gVYKbTUVdw2bhoHjeKiAsBQ0yYfLRjNC0iKgKvyggiAtAZjHZhq
+	8sF7E8YK30VKyrjSUhX+uOFqwXdC0ECO6HbiOhIvfGRMTJUBqbT6+u950DFzLOR5XIUY
+	Fodz0rbpy0wrD/xyA8xO7Wgprwap6/A4gB2yux76v/KEm1M4DSHstdL5Zz0k1lWK3PGk
+	5rEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=VDsnX/Cx0LpOpF+jdAXNOIOj5D7Rb/ET8zSqjsoaIkE=;
-	b=SjD4Ag0nqVBM2qHq9WeATp56p+2AUyUs6eZ0aM5ydHdp0UOXuOlkstT1obwFD2aFlm
-	0wiyjvMwIc4EjqKzoMZKNgx+UeHMxa5qMLBNI75w27jBs8tPJOQwyY73C/Gu9VlVlcJa
-	/XpIepT5fDieY4itcjLKi0yRtlF2mGdPa20nbdXxPznSsy4GtIalsvTiDvV8A8ZVzvkw
-	uvBRAeP8HS5PurJHAFNPlBzlTp8G7h6BgzfjhKGpxCZuK17mZE3i5wxgkgjGxZT+sPeA
-	dN5QBuCvSiOeYEM0wyVCSy/ubK12ERCZpYaUgGX++TYOFdHNLDoLoU0f12AB2rS/6fm6
-	alzQ==
-X-Gm-Message-State: AA6/9Rn/edxhQQr8ugbFrVfAJp4bgLnsxoYy1ZsUHqdAC/QD/HxNzce9T03zQtpNiEluoA==
-X-Received: by 10.28.213.211 with SMTP id m202mr2558112wmg.79.1475921031764;
+	bh=I2hupruMhcHfDs7MSM3R3cS1sC0UqPPCoaXojBt+tUc=;
+	b=bg0vUsLzyf9/XIKOJvk1zvK5XUpMUN/igEhfhTFRHvGFpVMJbe9V1iBCjjEKQ/V+jl
+	ZIWeEpL1ZwtEe727gEnnte7BJ24DCtGpaXYBTo4laYLZk97VT8BsK0zeT1C7cLzJ5/uD
+	MMF0nicdVqOSfYhpqUq+6dl7Dm/gBJTEpjTBiqDCdnZgZWzvssoTxQAOvkleAl7CmvgM
+	rk8BXiyyglDejIoTHS8v5HnChftS9IMvBeznDWfvB0zAB6XGKwd08gdLjk6ocXrxa9Lp
+	Q6/Y36qb07fJq0N+5e/FACowNP7aY3YwkRyI/begzt6LRAS3ZI6UWJGcg851EuXqIs57
+	Oy0Q==
+X-Gm-Message-State: AA6/9RncTOmDAOvbsQx+wGgE/JVjVe3ywstg4hU9RpxgBWlKcvrVdzMBTey9VSr9rTIcmw==
+X-Received: by 10.194.55.9 with SMTP id n9mr19282509wjp.208.1475921031005;
 	Sat, 08 Oct 2016 03:03:51 -0700 (PDT)
 Received: from localhost.localdomain (p4FDF0EC6.dip0.t-ipconnect.de.
 	[79.223.14.198]) by smtp.googlemail.com with ESMTPSA id
-	n7sm7509219wmf.18.2016.10.08.03.03.51
+	n7sm7509219wmf.18.2016.10.08.03.03.50
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 08 Oct 2016 03:03:51 -0700 (PDT)
+	Sat, 08 Oct 2016 03:03:50 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  8 Oct 2016 12:03:35 +0200
-Message-Id: <1475921015-7131-5-git-send-email-schnitzeltony@googlemail.com>
+Date: Sat,  8 Oct 2016 12:03:34 +0200
+Message-Id: <1475921015-7131-4-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
 In-Reply-To: <1475921015-7131-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1475921015-7131-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH V2 4/4] xdg-user-dirs: initial add 0.15
+Subject: [PATCH V2 3/4] a2jmidid: initial add v8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,64 +58,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Oct 2016 10:03:51 -0000
+X-List-Received-Date: Sat, 08 Oct 2016 10:04:03 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-It lives in meta-qt5-extra for a while and I tested it in my images. It is a
-nice helper for desktops so I suggest to move it to more common layer.
-
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../xdg-user-dirs/files/xdg-user-dirs.desktop      |  9 +++++++++
- .../xdg-user-dirs/xdg-user-dirs_0.15.bb            | 22 ++++++++++++++++++++++
- 2 files changed, 31 insertions(+)
- create mode 100644 meta-oe/recipes-support/xdg-user-dirs/files/xdg-user-dirs.desktop
- create mode 100644 meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.15.bb
+ ...-pthread-library-dependency-to-fix-linkin.patch | 43 ++++++++++++++++++++++
+ meta-oe/recipes-multimedia/jack/a2jmidid_8.bb      | 22 +++++++++++
+ 2 files changed, 65 insertions(+)
+ create mode 100644 meta-oe/recipes-multimedia/jack/a2jmidid/0001-wscript-add-pthread-library-dependency-to-fix-linkin.patch
+ create mode 100644 meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
 
-diff --git a/meta-oe/recipes-support/xdg-user-dirs/files/xdg-user-dirs.desktop b/meta-oe/recipes-support/xdg-user-dirs/files/xdg-user-dirs.desktop
+diff --git a/meta-oe/recipes-multimedia/jack/a2jmidid/0001-wscript-add-pthread-library-dependency-to-fix-linkin.patch b/meta-oe/recipes-multimedia/jack/a2jmidid/0001-wscript-add-pthread-library-dependency-to-fix-linkin.patch
 new file mode 100644
-index 0000000..a9a22d3
+index 0000000..d17d311
 --- /dev/null
-+++ b/meta-oe/recipes-support/xdg-user-dirs/files/xdg-user-dirs.desktop
-@@ -0,0 +1,9 @@
-+[Desktop Entry]
-+Type=Application
-+Name=User folders update
-+Exec=xdg-user-dirs-update
-+StartupNotify=false
-+NoDisplay=true
-+X-GNOME-Autostart-Phase=Initialization
-+X-KDE-autostart-phase=1
++++ b/meta-oe/recipes-multimedia/jack/a2jmidid/0001-wscript-add-pthread-library-dependency-to-fix-linkin.patch
+@@ -0,0 +1,43 @@
++From 488dc9b00239976caac6bd9ed76b38d9d1659dd9 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Tue, 4 Oct 2016 23:44:49 +0200
++Subject: [PATCH] wscript: add pthread library dependency to fix linking
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
-diff --git a/meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.15.bb b/meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.15.bb
++Stolen from [1]
++
++[1] http://pkgs.fedoraproject.org/cgit/rpms/a2jmidid.git/tree/a2jmidid-linking.patch
++
++Upstream-Status: Pending
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++---
++ wscript | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/wscript b/wscript
++index 664625b..66a532a 100644
++--- a/wscript
+++++ b/wscript
++@@ -67,6 +67,7 @@ def configure(conf):
++         conf.env['DBUS_ENABLED'] = False
++ 
++     conf.env['LIB_DL'] = ['dl']
+++    conf.env['LIB_PTHREAD'] = ['pthread']
++ 
++     #conf.check_header('expat.h', mandatory=True)
++     #conf.env['LIB_EXPAT'] = ['expat']
++@@ -152,7 +153,7 @@ def build(bld):
++ 
++     prog.includes = '.' # make waf dependency tracking work
++     prog.target = 'a2jmidid'
++-    prog.uselib = 'ALSA JACK DL'
+++    prog.uselib = 'ALSA JACK DL PTHREAD'
++     if bld.env()['DBUS_ENABLED']:
++         prog.uselib += " DBUS-1"
++     prog = bld.create_obj('cc', 'program')
++-- 
++2.5.5
++
+diff --git a/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb b/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
 new file mode 100644
-index 0000000..b94e0cc
+index 0000000..d7e93b6
 --- /dev/null
-+++ b/meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.15.bb
++++ b/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
 @@ -0,0 +1,22 @@
-+DESCRIPTION = "xdg-user-dirs is a tool to help manage user directories like the desktop folder and the music folder"
++SUMMARY = "a2jmidid is daemon for exposing ALSA sequencer applications as JACK MIDI"
++SECTION = "libs/multimedia"
++
 +LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++LIC_FILES_CHKSUM = " \
++    file://gpl2.txt;md5=751419260aa954499f7abaabaa882bbe \
++"
++
++DEPENDS = "alsa-lib jack dbus"
 +
 +SRC_URI = " \
-+    http://user-dirs.freedesktop.org/releases/${BPN}-${PV}.tar.gz \
-+    file://xdg-user-dirs.desktop \
++    http://download.gna.org/${BPN}/${BPN}-${PV}.tar.bz2 \
++    file://0001-wscript-add-pthread-library-dependency-to-fix-linkin.patch \
 +"
-+SRC_URI[md5sum] = "f5aaf5686ad7d8809a664bfb4566a54d"
-+SRC_URI[sha256sum] = "20b4a751f41d0554bce3e0ce5e8d934be98cc62d48f0b90a894c3e1916552786"
++SRC_URI[md5sum] = "9cf4edbc3ad2ddeeaf6c8c1791ff3ddd"
++SRC_URI[sha256sum] = "2a9635f62aabc59edb54ada07048dd47e896b90caff94bcee710d3582606f55f"
 +
-+inherit autotools gettext
++inherit waf
 +
-+do_install_append () {
-+    install -d ${D}${sysconfdir}/xdg/autostart
-+    install -m 644 ${WORKDIR}/xdg-user-dirs.desktop ${D}${sysconfdir}/xdg/autostart
-+}
++export LINKFLAGS="${LDFLAGS}"
 +
-+CONFFILES_${PN} += " \
-+    ${sysconfdir}/xdg/user-dirs.conf \
-+    ${sysconfdir}/xdg/user-dirs.defaults \
-+"
++FILES_${PN} += "${datadir}/dbus-1/services"
 -- 
 2.5.5
 
