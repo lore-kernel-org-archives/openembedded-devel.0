@@ -1,47 +1,41 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-it0-f53.google.com (mail-it0-f53.google.com
-	[209.85.214.53])
-	by mail.openembedded.org (Postfix) with ESMTP id A231671A74
+Return-Path: <dominic.sacre@gmx.de>
+X-Greylist: delayed 304 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 11 Oct 2016 09:53:41 UTC
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+	by mail.openembedded.org (Postfix) with ESMTP id D026F71A78
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Oct 2016 09:37:43 +0000 (UTC)
-Received: by mail-it0-f53.google.com with SMTP id l13so98144555itl.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Oct 2016 02:37:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=6qV74Gpg0qB7H5iREHqn+8xjA8E50Z/smwiKIqpaNIU=;
-	b=GPeTpuoUovEMgPSZGYDlZCaqsy/VCsEl9UyayiRLQBRP2WDF1lVz8H8vNUaBe+Bd1+
-	adhXD3v3AhaYlJD8QcJqHc39L/08m4I0IRSCGCovq0kFqh28GeaFCQnYCriyTcEc80Gt
-	ItKcTLXYCZUsUa67ImYtMWXwlOe7rMIBwRS7PmyyZhmajKcbXospX+mnbkoIYUQq4CBI
-	9aSJzWUAg6tRqOoCE2mQYhhni4pAhQ3LKaNHL3EBo/qbF/vdRqmEwlsLPwYh1wphv/LS
-	EgbSlYGDU1UYAhz6WmjUal+VsCIIsoN4Go4LrvqphBvoTNLWHJEeQoaR5DivACtgJIr/
-	rKjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=6qV74Gpg0qB7H5iREHqn+8xjA8E50Z/smwiKIqpaNIU=;
-	b=l0Dg8Vy3SpHX82wnunODxTalmvLPdQJVM2d8fEeOWH7kgEO2a663+3cqsvKZ/QbXJQ
-	z8GdtSe+Fj/6ILwCcV+FZATrJGuGOb/akZ5voizqBJkgC2LPt2aGUL/aboMR4rq8YXa3
-	hxsRw7VfC3Nf3jnozYtjUMNevOxOeQ9SstqvhqMYKRnLcWyrPiQekz9UEFRwr6XWy5BS
-	EuYAqwAkv6UL8AwOHFTS/oxua9eL7+6oICIz/AK3l7ZAhfYQF3zab3UE75G/kh0a9K+4
-	2dI9UijRh6p55M1mhsu3bsMaRckOX6MFT7clxI/F1wBxoADQUuf0ldaT1Ea+Q9kL7Kcg
-	WUUQ==
-X-Gm-Message-State: AA6/9RltDxI5PFxByZl/h5XyoxfLwmBwuCvIis08W2O/HcjzxqXCwJRkEux3GuXd+vUl7KqL9IeAgXD273wwCzyG
-X-Received: by 10.36.109.3 with SMTP id m3mr4613266itc.20.1476178664569; Tue,
-	11 Oct 2016 02:37:44 -0700 (PDT)
+	Tue, 11 Oct 2016 09:53:41 +0000 (UTC)
+Received: from [192.168.1.41] ([80.147.195.117]) by mail.gmx.com (mrgmx102)
+	with ESMTPSA (Nemesis) id 0LyS5K-1apEFZ3nDa-015qs2;
+	Tue, 11 Oct 2016 11:48:36 +0200
+From: =?UTF-8?Q?Dominic_Sacr=c3=a9?= <dominic.sacre@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+References: <1475921015-7131-1-git-send-email-schnitzeltony@googlemail.com>
+	<1475921015-7131-2-git-send-email-schnitzeltony@googlemail.com>
+Message-ID: <663f41e0-6925-9d81-302b-99e90a778a20@gmx.de>
+Date: Tue, 11 Oct 2016 11:47:31 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.3.0
 MIME-Version: 1.0
-Received: by 10.107.155.66 with HTTP; Tue, 11 Oct 2016 02:37:24 -0700 (PDT)
-In-Reply-To: <20161011082443.GA2929@jama>
-References: <1476117065-12316-1-git-send-email-ross.burton@intel.com>
-	<20161011082443.GA2929@jama>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 11 Oct 2016 10:37:24 +0100
-Message-ID: <CAJTo0Lb5nriNQHSdLKoi2xkyk3PWCvNfF3tCS-TwuM65XhO0Nw@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH][meta-oe] opencv: fix packaging and install
+In-Reply-To: <1475921015-7131-2-git-send-email-schnitzeltony@googlemail.com>
+X-Provags-ID: V03:K0:gG3/TH7QF6gk2OU3eI0lD4s6i/CnP5THyGMqTfPO4TIYaF+JCAr
+	GAIAXilpl+kPEGTnVWr+DLmlG1e31MBNQwwmvtFaHmGRg72r4OCUrCJ8fSXmsJiXS0ngc2w
+	jiZC4EkA8xATQsEJ82+IQ7Rh5Q0pwNDdjq5eDu8l3G8Kep8iFP/al/MocU7ULte+0zPH4Sl
+	p5Bk397sf8aHXnerTn93Q==
+X-UI-Out-Filterresults: notjunk:1;V01:K0:vLlKL/SEcLA=:LH5ERTofIpDGzpCT6kF8jn
+	Gt0qLpcJPIoVgmtgnswzGK4Mltm4oz/6ollm3BJHAePJD1qx6aOPxqSLjLz0DTpCsDJPt7bcM
+	GUIQravQfOsk4WEmO7Lt9MFpEstbhTOMdYgKjgYYTCPq/b/oqlmshwu69kDB8g4RpfROq/cNk
+	rj+HPGNkbqp/impvdElYxXwYZZAdHF7XH5IPHPjaTxI8rIUB/KgEKpsp5aeEIWh/Ahn/U+VFh
+	rAlhVrntpkd46PeyamMJtqAmUjC0yYsdETnHVUzuKI16jc7nRsJ/fnC8aon/bgxcwXmFgMI5t
+	Rq8TsYuqHUH+jQaVif6Z9nYOPBKwjsjMQB2HFtriX1pg+9ez7f2ddK9pEi4qsvPXZiLiiGqJQ
+	GmcPOSRzsRbpXloN0YzNAUmg+BoBf6ffd1g5gI6hhP4JcKZiSCAEM/jg5Azrte19ASLwhbgio
+	72jwyKyak/bViPx481hD/T8lHFyuAPUC7JkaDIQXW2e5nVDx6LzNv/LLVlQBb6pfxy3ZxVZrN
+	P6Zj+0QtkDOyx+ixmeVwvemRgEtSjBi7jzVteimB7F8fLUhM8kI/4og3N3RgFfFE/Z0J+eNvb
+	fxBvykenXCDX7efNlnmt9QGiQVl00bqszkOhMIlHYES5yuylbCSfxJlCNVU0JeXiD05rXLryV
+	AJAiJXsGhR1ww0Ac/pMhBOlQvv7yBs+ui/dhH1rJDXvCKRqL3VMgSezu95Ez1t9CFQma5S8WP
+	PH9W7BtNIwkaSOePhjmEuqdNGZKJYOodRJDA42rCrg/ge84PX14GacuB6y0tsvT8WBSeKwsP5
+	Lk6+g+T
+Subject: Re: [PATCH V2 1/4] jack: swap to jack2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,22 +48,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Oct 2016 09:37:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 11 Oct 2016 09:53:43 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On 11 October 2016 at 09:24, Martin Jansa <martin.jansa@gmail.com> wrote:
+On 2016-10-08 12:03, Andreas Müller wrote:
+> * works out of the box without modificatins to /etc/security/limits.conf neccessary
+> * neon support was introduced
+> * on RaspberryPi2 buffer sizes can be set to smallest accepted value without XRUN
+>   -> reduced latency
 
-> On Mon, Oct 10, 2016 at 05:31:05PM +0100, Ross Burton wrote:
-> > The OpenCV*.cmake files and the static library should be in the
-> opencv-dev
-> > package, not opencv-apps.
->
-> Why not PN-staticdev?
->
+Jack1 and Jack2 are alternative implementations with different
+advantages and disadvantages (depending on hardware and use-case).
 
-I've not actually used opencv but it appears that his static library isn't
-a static form of the main libraries but an auxiliary library that only
-comes in static form.
+Despite its name, Jack2 is not really the successor to Jack1, so I think
+it would be better to keep "jack" as is, and add "jack2" as a separate
+recipe.
 
-Ross
+Note that Jack2 runs in so-called asynchronous mode by default, which
+adds a bit of latency (at the same buffer size), and also influences the
+way xruns are reported.
+Both versions will require modifications to /etc/security/limits.conf in
+order to use realtime (FIFO) scheduling, which is crucial for low latencies.
+
+
+Dominic
 
