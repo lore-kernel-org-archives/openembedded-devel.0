@@ -1,46 +1,46 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 2020D7198D
+Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
+	[209.85.215.67])
+	by mail.openembedded.org (Postfix) with ESMTP id D82CA601F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Oct 2016 14:29:46 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id n189so3728554qke.1
+	Wed, 12 Oct 2016 20:26:45 +0000 (UTC)
+Received: by mail-lf0-f67.google.com with SMTP id b75so8789738lfg.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Oct 2016 07:29:47 -0700 (PDT)
+	Wed, 12 Oct 2016 13:26:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=KI1PG2ujO0qTFbVIyCwwj3eVdZua17KbBTG0T1OZcwc=;
-	b=vyVSvlAKot9bpNKG7iVw2334jixP6rEBV93ui4zQlY2bIO4Tx9IKC2IqMjTCSrHdwf
-	yusEeAVbOxmyvwo1v4PbBVRXrn94VF/6dbI/NpGdFCq7iNLK0fugRYTU4D1u7nwsI4/L
-	r5T5VuqcN150C70rQp2X1Qpv7NsJQMCsl/0zCrtMu8rFVGr2dMiGUw/pyabPKa40gIip
-	odbD7LgD6WscuPEGa2d/KkTSkDT93ne5DwbulDryGKukpb98QtTfVxn1KJsni2K5MNIr
-	wYFxzD5guW83PdgqryVt0EMwCYuE3K8GChYDz5itwZ074j5EHrXYjZJJZk7P2lUoYr2r
-	pKPg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=0BHQPFW5d4NeZqZkOhtha3q3bGOzhcLqnHhIlQpE4TE=;
+	b=n91+8W+i4MYA8VKetKvORP+bZ5wIaTycaypGCZ/9KG0mMXM2gLMkAsy+SgacJXNy6Q
+	OvgtWZjDN5gZVwnJaReA+sSrerFFSWHmqle71IwPV0fF+c50Gbv33xwXkB9VEL5DvVBQ
+	hXGIdYqhht7wgJQDasjwWMeoBSJ5Z/pVzQG07oqN0IbSGoBXt5xB9ylu7robu2U35e2g
+	vRQOpU7s4onmar1mnpZJsYGkYg0uDC8GQHuUbGZTvhcip+2YC3EkPbzoTkNQ/RWXClmf
+	klt8zuJOJCf8D/jFyZcy+3r2RRsQZlM1mScsb2VrX96Ho9VHCFQJnPfsLxpm3+X1PWtF
+	SqZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=KI1PG2ujO0qTFbVIyCwwj3eVdZua17KbBTG0T1OZcwc=;
-	b=W491qoy98nOtY0WmAZqQ6eKszbCB/yM2/j9Z4V87aYKrJxCQxkGxBleWh+Vg1dJx8m
-	8uvNo/kPt95asLgpcpIoe/0wMVBuG0Z0eZlvIVkCaCIf83Rp0vVoPqhKdeD8Z/aSWcPh
-	4c2OgtktXfIi8cUxFVpCAUoZz+k3pEKqxs9EORt+pfh6B5rchcps35gGGpsmKum613Jp
-	/Tj/tYhJ56o9nv3nEswU5MZYqvVe1MNSlmbIHeaxvRPthQtvGCJcjP9B+KdlWSNQcfZa
-	Hfx19nkx66jJOHGcLcULAw6BnTCVfG60MjIQvlxg2CZxeZgMB0UN5vn+umpJ3l8OrThE
-	Pl/g==
-X-Gm-Message-State: AA6/9RkiUewP+/4Z/std0vQQh2TOujgTIOESEkx8mTP2UrgQ1xATR0gmNE5og59EZU0v7g==
-X-Received: by 10.194.235.34 with SMTP id uj2mr1886796wjc.144.1476282587400;
-	Wed, 12 Oct 2016 07:29:47 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	pe5sm13381673wjb.15.2016.10.12.07.29.46
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 12 Oct 2016 07:29:46 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=0BHQPFW5d4NeZqZkOhtha3q3bGOzhcLqnHhIlQpE4TE=;
+	b=L4zt4wmqFhRj+mUR1BwQHcE4nrdgLnIoScDUpuFUTBTvyFy0FkW+X6MLz4Hziq0QKn
+	43yA1hQybSIN5Y3Bb984RVpxVQxP1jBpdUIPGo9DJvCyx7pzdqlHavJArC/tzL1FNZsy
+	RpgjkmbMXP/6dl60lt0b6RJhvj7XR+lP7tBPFadhObL3wBhU3uqk1HN4MTxndP4y+Ar6
+	l+RIocCj+pUWDa5C+ShOr/5pg6JFeLWvn1TYdWFg/alL6p5tKyu+U0DVvzE9DxBrje8D
+	UEFwRmOwseF9znDhvuow3Lu8FjtoeuM9GB6EjXznMSFLRpSnvAo9etyuv8RZndES2iRs
+	XGRQ==
+X-Gm-Message-State: AA6/9RnpuVda0SrcOjO0vp755lSsIIVIvDleD01lMA17Vu1pkzqUQb1Lk9xZ77korkMPb0N3Wa+yzNiVl3m0PQ==
+X-Received: by 10.194.146.195 with SMTP id te3mr4079748wjb.51.1476304006076;
+	Wed, 12 Oct 2016 13:26:46 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.80.159.203 with HTTP; Wed, 12 Oct 2016 13:26:45 -0700 (PDT)
+In-Reply-To: <1475854216-6859-1-git-send-email-msbarth@linux.vnet.ibm.com>
+References: <1475854216-6859-1-git-send-email-msbarth@linux.vnet.ibm.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Oct 2016 16:29:45 +0200
-Message-Id: <20161012142945.6272-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.10.1
-Subject: [meta-oe][WIP][PATCH] gpsd, mongodb: use PACKAGECONFIG_CONFARGS instead of now empty EXTRA_OECONF
+Date: Wed, 12 Oct 2016 22:26:45 +0200
+Message-ID: <CA+chaQd6QesJQpKBtxuADbAAcYBtMs3tT-_JfqatAwip1uZOBw@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Matthew Barth <msbarth@linux.vnet.ibm.com>
+Subject: Re: [meta-oe][PATCH v2] autoconf-archive: 2012.04.07 -> 2016.09.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,65 +53,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Oct 2016 14:29:46 -0000
+X-List-Received-Date: Wed, 12 Oct 2016 20:26:47 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* this will fix mongodb build for x86
-  http://errors.yoctoproject.org/Errors/Details/90392/
-  which was failing because of missing --wiredtiger=off in qemux86 builds
+Some files from this conflict with gnome-common:
 
-* also we can drop DISABLE_STATIC, because now it's not leaking through
-  EXTRA_OECONF
+ERROR: autoconf-archive-2016.09.16-r0 do_populate_sysroot: The recipe
+autoconf-archive is trying to install files into a shared area when
+those files already exist. Those files and their manifest location
+are:
+   sysroots/qemux86/usr/share/aclocal/ax_check_enable_debug.m4
+ Matched in b'manifest-qemux86-gnome-common.populate_sysroot'
+ sysroots/qemux86/usr/share/aclocal/ax_code_coverage.m4
+ Matched in b'manifest-qemux86-gnome-common.populate_sysroot'
+Please verify which recipe should provide the above files.
 
-* it will also resolve again autodetected dependencies on bluez, qt and
-  tcmalloc as shown in bitbake -e output:
 
-env.gpsd-before:EXTRA_OESCONS="     sysroot=/OE/build/oe-core/tmp-glibc/sysroots/qemux86     libQgpsmm='false'     debug='true'     strip='false'     chrpath='yes'     systemd='true'      "
-env.gpsd-after:EXTRA_OESCONS="     sysroot=/OE/build/oe-core/tmp-glibc/sysroots/qemux86     libQgpsmm='false'     debug='true'     strip='false'     chrpath='yes'     systemd='true'      bluez='true' qt='no' "
+On Fri, Oct 7, 2016 at 5:30 PM, Matthew Barth <msbarth@linux.vnet.ibm.com>
+wrote:
 
-env.mongodb-before:EXTRA_OESCONS="--prefix=/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/mongodb/3.3.0+gitAUTOINC+aacd231be0-r0/image/usr                  LIBPATH=/OE/build/oe-core/tmp-glibc/sysroots/qemux86/usr/lib                  LINKFLAGS='-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed'                  \
-  CXXFLAGS='-O2 -pipe -g -feliminate-unused-debug-types -fdebug-prefix-map=/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/mongodb/3.3.0+gitAUTOINC+aacd231be0-r0=/usr/src/debug/mongodb/3.3.0+gitAUTOINC+aacd231be0-r0 -fdebug-prefix-map=/OE/build/oe-core/tmp-glibc/sysroots/x86_64-linux= -fdebug-prefix-map=/OE/build/oe-core/tmp-glibc/sysroots/qemux86= -fvisibility-inlines-hidden'                  \
-  TARGET_ARCH=i586                  --ssl                  --disable-warnings-as-errors                  --use-system-pcre                  --use-system-zlib                  --js-engine=none                  --nostrip                                    mongod mongos"
-env.mongodb-after:EXTRA_OESCONS="--prefix=/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/mongodb/3.3.0+gitAUTOINC+aacd231be0-r0/image/usr                  LIBPATH=/OE/build/oe-core/tmp-glibc/sysroots/qemux86/usr/lib                  LINKFLAGS='-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed'                  \
-  CXXFLAGS='-O2 -pipe -g -feliminate-unused-debug-types -fdebug-prefix-map=/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/mongodb/3.3.0+gitAUTOINC+aacd231be0-r0=/usr/src/debug/mongodb/3.3.0+gitAUTOINC+aacd231be0-r0 -fdebug-prefix-map=/OE/build/oe-core/tmp-glibc/sysroots/x86_64-linux= -fdebug-prefix-map=/OE/build/oe-core/tmp-glibc/sysroots/qemux86= -fvisibility-inlines-hidden'                  \
-  TARGET_ARCH=i586                  --ssl                  --disable-warnings-as-errors                  --use-system-pcre                  --use-system-zlib                  --js-engine=none                  --nostrip                   --use-system-tcmalloc --wiredtiger=off                  mongod mongos"
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb   | 3 +--
- meta-oe/recipes-support/mongodb/mongodb_git.bb | 3 +--
- 2 files changed, 2 insertions(+), 4 deletions(-)
-
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-index 4ff6d91..b7b8968 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-@@ -46,9 +46,8 @@ EXTRA_OESCONS = " \
-     strip='false' \
-     chrpath='yes' \
-     systemd='${SYSTEMD_OESCONS}' \
--    ${EXTRA_OECONF} \
-+    ${PACKAGECONFIG_CONFARGS} \
- "
--DISABLE_STATIC = ""
- # this cannot be used, because then chrpath is not found and only static lib is built
- # target=${HOST_SYS}
- 
-diff --git a/meta-oe/recipes-support/mongodb/mongodb_git.bb b/meta-oe/recipes-support/mongodb/mongodb_git.bb
-index cb6c1b3..f1a6555 100644
---- a/meta-oe/recipes-support/mongodb/mongodb_git.bb
-+++ b/meta-oe/recipes-support/mongodb/mongodb_git.bb
-@@ -43,9 +43,8 @@ EXTRA_OESCONS = "--prefix=${D}${prefix} \
-                  --use-system-zlib \
-                  --js-engine=none \
-                  --nostrip \
--                 ${EXTRA_OECONF} \
-+                 ${PACKAGECONFIG_CONFARGS} \
-                  mongod mongos"
--DISABLE_STATIC = ""
- 
- scons_do_compile() {
-         ${STAGING_BINDIR_NATIVE}/scons ${PARALLEL_MAKE} ${EXTRA_OESCONS} || \
--- 
-2.10.1
-
+> Signed-off-by: Matthew Barth <msbarth@linux.vnet.ibm.com>
+> ---
+>  meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc    | 7
+> ++++---
+>  ...oconf-archive_2012.04.07.bb => autoconf-archive_2016.09.16.bb} | 8
+> +++-----
+>  2 files changed, 7 insertions(+), 8 deletions(-)
+>  rename meta-oe/recipes-devtools/autoconf-archive/{autoconf-
+> archive_2012.04.07.bb => autoconf-archive_2016.09.16.bb} (55%)
+>
+> diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
+> b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
+> index 9399363..2b5df70 100644
+> --- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
+> +++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
+> @@ -1,15 +1,16 @@
+> +SUMMARY = "A collection of macros for GNU Autoconf"
+> +DESCRIPTION = "The autoconf-archive set of macros extend the pre-defined \
+> +capabilities within the complete autoconf tool set."
+>  LICENSE = "GPLv3"
+>  HOMEPAGE = "http://www.gnu.org/software/autoconf-archive/"
+>  SECTION = "devel"
+> -
+>  DEPENDS += "m4-native"
+>  DEPENDS_class-native = "m4-native gnu-config-native"
+>  DEPENDS_class-nativesdk = "m4-nativesdk gnu-config-nativesdk"
+> -
+>  RDEPENDS_${PN} = "m4 gnu-config"
+>  RDEPENDS_${PN}_class-native = "m4-native gnu-config-native"
+>  RDEPENDS_${PN}_class-nativesdk = "m4-nativesdk gnu-config-nativesdk"
+>
+> -SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.bz2"
+> +SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz"
+>
+>  inherit autotools
+> diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-
+> archive_2012.04.07.bb b/meta-oe/recipes-devtools/autoconf-archive/
+> autoconf-archive_2016.09.16.bb
+> similarity index 55%
+> rename from meta-oe/recipes-devtools/autoconf-archive/autoconf-
+> archive_2012.04.07.bb
+> rename to meta-oe/recipes-devtools/autoconf-archive/autoconf-
+> archive_2016.09.16.bb
+> index 5baaecc..1a0470c 100644
+> --- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-
+> archive_2012.04.07.bb
+> +++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-
+> archive_2016.09.16.bb
+> @@ -1,13 +1,11 @@
+>  require autoconf-archive.inc
+>
+> -
+> -PARALLEL_MAKE = ""
+> -
+>  LICENSE = "GPLv2 & GPLv3"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+>
+> -SRC_URI[md5sum] = "e842c5b9fae021007bd70550362e5e80"
+> -SRC_URI[sha256sum] = "040b443bf68efd52fbfcb294b556bf
+> bbbfe432db78445ca25e0cfe2e88f96a14"
+> +SRC_URI[md5sum] = "bf19d4cddce260b3c3e1d51d42509071"
+> +SRC_URI[sha256sum] = "e8f2efd235f842bad2f6938bf4a722
+> 40a5e5fcd248e8444335e63beb60fabd82"
+>
+>  EXTRA_OECONF += "ac_cv_path_M4=m4"
+> +
+>  BBCLASSEXTEND = "native nativesdk"
+> --
+> 1.9.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
