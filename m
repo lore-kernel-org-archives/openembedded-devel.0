@@ -1,24 +1,24 @@
 Return-Path: <Qi.Chen@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 94D196022F
+	by mail.openembedded.org (Postfix) with ESMTP id F05DA71A8D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Oct 2016 05:05:16 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u9D55Gf4026471
+	Thu, 13 Oct 2016 06:54:17 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u9D6sIFp009196
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Oct 2016 22:05:17 -0700 (PDT)
+	Wed, 12 Oct 2016 23:54:18 -0700 (PDT)
 Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.181) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Wed, 12 Oct 2016 22:05:16 -0700
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Wed, 12 Oct 2016 23:54:17 -0700
 From: <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 13 Oct 2016 13:05:40 +0800
-Message-ID: <1476335140-29414-1-git-send-email-Qi.Chen@windriver.com>
+Date: Thu, 13 Oct 2016 14:54:41 +0800
+Message-ID: <1476341681-29827-1-git-send-email-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] tipcutils: upgrade to 2.2.0
+Subject: [meta-oe][PATCH] gnuplot: upgrade to 5.0.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,120 +31,159 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Oct 2016 05:05:18 -0000
+X-List-Received-Date: Thu, 13 Oct 2016 06:54:19 -0000
 Content-Type: text/plain
 
 From: Chen Qi <Qi.Chen@windriver.com>
 
 Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../recipes-extended/tipcutils/tipcutils_2.0.6.bb  | 43 ---------------------
- .../recipes-extended/tipcutils/tipcutils_2.2.0.bb  | 45 ++++++++++++++++++++++
- 2 files changed, 45 insertions(+), 43 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb
- create mode 100644 meta-oe/recipes-extended/tipcutils/tipcutils_2.2.0.bb
+ .../gnuplot-4.6.5/lua-loadlibs-configure-in-fix.patch    | 16 ----------------
+ .../recipes-extended/gnuplot/gnuplot-4.6.5/subdirs.patch | 11 -----------
+ meta-oe/recipes-extended/gnuplot/gnuplot.inc             |  1 -
+ .../gnuplot/gnuplot/lua-loadlibs-configure-in-fix.patch  | 16 ++++++++++++++++
+ meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch   | 11 +++++++++++
+ meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb        | 14 --------------
+ meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb        | 14 ++++++++++++++
+ 7 files changed, 41 insertions(+), 42 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/lua-loadlibs-configure-in-fix.patch
+ delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/subdirs.patch
+ create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/lua-loadlibs-configure-in-fix.patch
+ create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch
+ delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb
+ create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb
 
-diff --git a/meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb b/meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb
+diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/lua-loadlibs-configure-in-fix.patch b/meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/lua-loadlibs-configure-in-fix.patch
 deleted file mode 100644
-index 0ac8fad..0000000
---- a/meta-oe/recipes-extended/tipcutils/tipcutils_2.0.6.bb
+index 23f2cd2..0000000
+--- a/meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/lua-loadlibs-configure-in-fix.patch
 +++ /dev/null
-@@ -1,43 +0,0 @@
--SUMMARY = "Transparent Inter-Process Communication protocol"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://tipc-config/tipc-config.c;endline=32;md5=527a3d5745e1581b15a4fddfb5dfda68"
--
--SRC_URI = "git://tipc.git.sourceforge.net/gitroot/tipc/tipcutils"
--SRCREV = "292a03e17f889013fca2c7bd0aaeebd600c88f40"
--
--DEPENDS="virtual/kernel"
--
--PACKAGE_ARCH = "${MACHINE_ARCH}"
--
--inherit autotools
--
--S = "${WORKDIR}/git"
--
--do_configure_prepend() {
--    ( cd ${S}; ${S}/bootstrap )
--}
--
--do_install_append() {
--    demos="benchmark hello_world topology_subscr_demo connection_demo \
--           multicast_demo stream_demo"
--    for i in $demos;do
--        install -d ${D}/opt/tipcutils/demos/$i
--        install ${B}/demos/$i/client_tipc ${D}/opt/tipcutils/demos/$i/
--        install ${B}/demos/$i/server_tipc ${D}/opt/tipcutils/demos/$i/
--    done
--    install -d ${D}/opt/tipcutils/demos/inventory_sim
--    install ${B}/demos/inventory_sim/inventory_sim ${D}/opt/tipcutils/demos/inventory_sim/
--
--    install -d ${D}/opt/tipcutils/ptts
--    install ${B}/ptts/tipcTS ${D}/opt/tipcutils/ptts/
--    install ${B}/ptts/tipcTC ${D}/opt/tipcutils/ptts/
--
--    install -d ${D}${sysconfdir}
--    cp -R --no-dereference --preserve=mode,links -v ${S}/scripts/etc/* ${D}${sysconfdir}/
--    chown -R root:root ${D}${sysconfdir}
--}
--
--PACKAGES += "${PN}-demos"
--FILES_${PN}-dbg += "/opt/tipcutils/demos/*/.debug /opt/tipcutils/ptts/.debug"
--FILES_${PN}-demos = "/opt/tipcutils/*"
--
-diff --git a/meta-oe/recipes-extended/tipcutils/tipcutils_2.2.0.bb b/meta-oe/recipes-extended/tipcutils/tipcutils_2.2.0.bb
+@@ -1,16 +0,0 @@
+-Index: gnuplot-4.6.5/configure.in
+-===================================================================
+---- gnuplot-4.6.5.orig/configure.in
+-+++ gnuplot-4.6.5/configure.in
+-@@ -690,6 +690,11 @@ if test "${with_lua}" = yes ; then
+-   fi
+- 
+-   if test "$with_lua" != no; then
+-+    dnl check for dlopen/dl to fix loadlibs link failure
+-+    AC_CHECK_FUNC([dlopen], [],
+-+      AC_CHECK_LIB([dl], [dlopen], DLOPEN_LIBS="-ldl"))
+-+    AC_SUBST(DLOPEN_LIBS)
+-+    LUA_LIBS="$LUA_LIBS $DLOPEN_LIBS"
+-     TERMLIBS="$TERMLIBS $LUA_LIBS"
+-     CPPFLAGS="$CPPFLAGS $LUA_CFLAGS"
+-   else
+diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/subdirs.patch b/meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/subdirs.patch
+deleted file mode 100644
+index 8c7d1f0..0000000
+--- a/meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/subdirs.patch
++++ /dev/null
+@@ -1,11 +0,0 @@
+---- /tmp/Makefile.am	2007-08-23 13:10:15.560659023 +0200
+-+++ gnuplot-4.2.0/Makefile.am	2007-08-23 13:10:34.961764629 +0200
+-@@ -1,7 +1,7 @@
+- ## Process this file with automake to produce Makefile.in -*-Makefile-*-
+- AUTOMAKE_OPTIONS = foreign 1.2h
+- 
+--SUBDIRS = config m4 term src docs $(LISPDIR) man demo tutorial share
+-+SUBDIRS = config m4 term src  $(LISPDIR) man share
+- 
+- EXTRA_DIST = BUGS CodeStyle Copyright FAQ GNUmakefile INSTALL INSTALL.gnu \
+- Makefile.maint PATCHLEVEL PGPKEYS PORTING README README.1ST README.exp \
+diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot.inc b/meta-oe/recipes-extended/gnuplot/gnuplot.inc
+index 69bc74b..5bcf2ad 100644
+--- a/meta-oe/recipes-extended/gnuplot/gnuplot.inc
++++ b/meta-oe/recipes-extended/gnuplot/gnuplot.inc
+@@ -17,7 +17,6 @@ PACKAGECONFIG[cairo] = "--with-cairo,--without-cairo,cairo pango"
+ PACKAGECONFIG[lua] = "--with-lua,--without-lua,lua"
+ 
+ EXTRA_OECONF = "--with-readline=${STAGING_LIBDIR}/.. \
+-                --without-lisp-files \
+                 --without-tutorial \
+                 --disable-wxwidgets"
+ 
+diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot/lua-loadlibs-configure-in-fix.patch b/meta-oe/recipes-extended/gnuplot/gnuplot/lua-loadlibs-configure-in-fix.patch
 new file mode 100644
-index 0000000..5c5b289
+index 0000000..23f2cd2
 --- /dev/null
-+++ b/meta-oe/recipes-extended/tipcutils/tipcutils_2.2.0.bb
-@@ -0,0 +1,45 @@
-+SUMMARY = "Transparent Inter-Process Communication protocol"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://tipclog/tipc.h;endline=35;md5=985b6ea8735818511d276c1b466cce98"
++++ b/meta-oe/recipes-extended/gnuplot/gnuplot/lua-loadlibs-configure-in-fix.patch
+@@ -0,0 +1,16 @@
++Index: gnuplot-4.6.5/configure.in
++===================================================================
++--- gnuplot-4.6.5.orig/configure.in
+++++ gnuplot-4.6.5/configure.in
++@@ -690,6 +690,11 @@ if test "${with_lua}" = yes ; then
++   fi
++ 
++   if test "$with_lua" != no; then
+++    dnl check for dlopen/dl to fix loadlibs link failure
+++    AC_CHECK_FUNC([dlopen], [],
+++      AC_CHECK_LIB([dl], [dlopen], DLOPEN_LIBS="-ldl"))
+++    AC_SUBST(DLOPEN_LIBS)
+++    LUA_LIBS="$LUA_LIBS $DLOPEN_LIBS"
++     TERMLIBS="$TERMLIBS $LUA_LIBS"
++     CPPFLAGS="$CPPFLAGS $LUA_CFLAGS"
++   else
+diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch b/meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch
+new file mode 100644
+index 0000000..8c7d1f0
+--- /dev/null
++++ b/meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch
+@@ -0,0 +1,11 @@
++--- /tmp/Makefile.am	2007-08-23 13:10:15.560659023 +0200
+++++ gnuplot-4.2.0/Makefile.am	2007-08-23 13:10:34.961764629 +0200
++@@ -1,7 +1,7 @@
++ ## Process this file with automake to produce Makefile.in -*-Makefile-*-
++ AUTOMAKE_OPTIONS = foreign 1.2h
++ 
++-SUBDIRS = config m4 term src docs $(LISPDIR) man demo tutorial share
+++SUBDIRS = config m4 term src  $(LISPDIR) man share
++ 
++ EXTRA_DIST = BUGS CodeStyle Copyright FAQ GNUmakefile INSTALL INSTALL.gnu \
++ Makefile.maint PATCHLEVEL PGPKEYS PORTING README README.1ST README.exp \
+diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb b/meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb
+deleted file mode 100644
+index 3f694a0..0000000
+--- a/meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-require gnuplot.inc
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/gnuplot/${BP}.tar.gz;name=archive \
+-    http://www.mneuroth.de/privat/zaurus/qtplot-0.2.tar.gz;name=qtplot \
+-    file://subdirs.patch \
+-    file://lua-loadlibs-configure-in-fix.patch \
+-    file://gnuplot.desktop \
+-    file://gnuplot.png \
+-"
+-
+-SRC_URI[archive.md5sum] = "9a476b21f74bd99c876f1509d731a0f9"
+-SRC_URI[archive.sha256sum] = "e550f030c7d04570e89c3d4e3f6e82296816508419c86ab46c4dd73156519a2d"
+-SRC_URI[qtplot.md5sum] = "0a481885a496092c77eb4017540b5cf6"
+-SRC_URI[qtplot.sha256sum] = "6df317183ff62cc82f3dcf88207a267cd6478cb5147f55d7530c94f1ad5f4132"
+diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb b/meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb
+new file mode 100644
+index 0000000..42308ba
+--- /dev/null
++++ b/meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb
+@@ -0,0 +1,14 @@
++require gnuplot.inc
 +
-+SRC_URI = "git://tipc.git.sourceforge.net/gitroot/tipc/tipcutils"
-+SRCREV = "dc8c2d324cda2e80a6e07ee1998fca0839d4a721"
++SRC_URI = "${SOURCEFORGE_MIRROR}/gnuplot/${BP}.tar.gz;name=archive \
++    http://www.mneuroth.de/privat/zaurus/qtplot-0.2.tar.gz;name=qtplot \
++    file://subdirs.patch \
++    file://lua-loadlibs-configure-in-fix.patch \
++    file://gnuplot.desktop \
++    file://gnuplot.png \
++"
 +
-+DEPENDS="virtual/kernel"
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+inherit autotools pkgconfig
-+
-+DEPENDS += "libdaemon"
-+
-+S = "${WORKDIR}/git"
-+
-+do_configure_prepend() {
-+    ( cd ${S}; ${S}/bootstrap )
-+}
-+
-+do_install_append() {
-+    demos="benchmark hello_world topology_subscr_demo connection_demo \
-+           multicast_demo stream_demo"
-+    for i in $demos;do
-+        install -d ${D}/opt/tipcutils/demos/$i
-+        install ${B}/demos/$i/client_tipc ${D}/opt/tipcutils/demos/$i/
-+        install ${B}/demos/$i/server_tipc ${D}/opt/tipcutils/demos/$i/
-+    done
-+    install -d ${D}/opt/tipcutils/demos/inventory_sim
-+    install ${B}/demos/inventory_sim/inventory_sim ${D}/opt/tipcutils/demos/inventory_sim/
-+
-+    install -d ${D}/opt/tipcutils/ptts
-+    install ${B}/ptts/tipcTS ${D}/opt/tipcutils/ptts/
-+    install ${B}/ptts/tipcTC ${D}/opt/tipcutils/ptts/
-+
-+    install -d ${D}${sysconfdir}
-+    cp -R --no-dereference --preserve=mode,links -v ${S}/scripts/etc/* ${D}${sysconfdir}/
-+    chown -R root:root ${D}${sysconfdir}
-+}
-+
-+PACKAGES += "${PN}-demos"
-+FILES_${PN}-dbg += "/opt/tipcutils/demos/*/.debug /opt/tipcutils/ptts/.debug"
-+FILES_${PN}-demos = "/opt/tipcutils/*"
-+
++SRC_URI[archive.md5sum] = "c5e96fca73afbee4f57cbc1bfce6b3b8"
++SRC_URI[archive.sha256sum] = "25f3e0bf192e01115c580f278c3725d7a569eb848786e12b455a3fda70312053"
++SRC_URI[qtplot.md5sum] = "0a481885a496092c77eb4017540b5cf6"
++SRC_URI[qtplot.sha256sum] = "6df317183ff62cc82f3dcf88207a267cd6478cb5147f55d7530c94f1ad5f4132"
 -- 
-1.9.1
+2.8.3
 
 
