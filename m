@@ -1,36 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 69ECC6AC00
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C01971AEA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Oct 2016 22:21:59 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id n189so7253748qke.1
+	Thu, 13 Oct 2016 22:23:52 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id z190so7242803qkc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Oct 2016 15:22:01 -0700 (PDT)
+	Thu, 13 Oct 2016 15:23:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=kaVHCWQD0nVS2A7j6GVPBqbXNcTTjRcI9PYAfqmdn6Y=;
-	b=bdMoO5sPjinhNxh+vErxoToJ6scpNT6/49h/Ubxdv2wsINu+wX0cMSdPHLcdsLaAXD
-	fgfsptLt3bs++cD5y71p3x23d99QK/zsW4FPIYAP9QyKGDZgCioVwry7ydZP3dzaAe0h
-	BmZAKtpckpl8fwWwEuy/Z+EIkd3Y4kPFPpwE8NW6W6StIX2f4cJFPxMHPoZBVsLqG7el
-	rTwZSuXskRJL8g8lYYV5Op3QPszk8+tAeohoSba3L26YsvJ0PgTlv2IEVK6B0xeW7ytr
-	MxKS0j8kEx6Joe+WodM90CEZWPKRjj6TIR9u+rs4yGMtnldBMOs2iSExFXp0MRnpxro/
-	geJA==
-X-Gm-Message-State: AA6/9RkkntiZC7WARHNC1BR0K9xiYVqwNgu0Z3ECDve+Ay3m2y+FOtxPMKcf8WGTvDJJ0Q==
-X-Received: by 10.55.167.66 with SMTP id q63mr8535463qke.61.1476397320819;
-	Thu, 13 Oct 2016 15:22:00 -0700 (PDT)
+	bh=WJ8CTYHGCx2jrZY9mzUvDSsoQgw9gTHDRtcbXoBnRUQ=;
+	b=U9e/W+BrJWHfJau98y5N7Ys+ZnxNpFRN+QlyCOBkaRbbgrh7PeZGkuVmW1nWDsp39g
+	NTaDDCKjEXYDu+xBa+oMarhbAkyJ4WN7m7/1UT6e5eiTiIWN4pqofo9JeIkvHb/UccIM
+	b09HgSQl264NSJFG5EGyEK76FurDofPxE6v/EWcBy8u6tGmf/7zmWAs0IaJsa7cHD1S2
+	4d+9AOQuV0R+ouGhkoZGYpbWK+fYn2r/DhexRapoVaLNNfjWQcqLznHQH0yxJnxbEFWk
+	CO0XXuUqy4d3Ae5AFmAmQRdcTK+A4tAiVhgc67/0gjGqM0pyBSXTLn3ILveVzdqHPvvs
+	AzFQ==
+X-Gm-Message-State: AA6/9RnrFM5nGnFPBVISwok8opgabHUF1Ml64h0bImqNLyXUJGBPvFMBEOhY2T/kcHaDOQ==
+X-Received: by 10.55.20.78 with SMTP id e75mr8361291qkh.267.1476397433929;
+	Thu, 13 Oct 2016 15:23:53 -0700 (PDT)
 Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
-	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
-	z41sm3472608qtb.13.2016.10.13.15.21.58
+	[69.124.217.3])
+	by smtp.gmail.com with ESMTPSA id u44sm5947799qtu.5.2016.10.13.15.23.53
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 13 Oct 2016 15:21:58 -0700 (PDT)
+	Thu, 13 Oct 2016 15:23:53 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Oct 2016 18:21:50 -0400
-Message-Id: <1476397310-1206-1-git-send-email-derek@asterius.io>
+Date: Thu, 13 Oct 2016 18:23:46 -0400
+Message-Id: <1476397426-2775-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pymisp: update to version 2.4.51.1
+Subject: [meta-python][PATCH] python-pymongo: update to version 3.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,42 +43,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Oct 2016 22:22:01 -0000
+X-List-Received-Date: Thu, 13 Oct 2016 22:23:53 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pymisp.inc               | 6 +++---
- .../python/{python-pymisp_2.4.49.bb => python-pymisp_2.4.51.1.bb}   | 0
- .../python/{python3-pymisp_2.4.49.bb => python3-pymisp_2.4.51.1.bb} | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pymisp_2.4.49.bb => python-pymisp_2.4.51.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.49.bb => python3-pymisp_2.4.51.1.bb} (100%)
+ meta-python/recipes-devtools/python/python-pymongo.inc                | 4 ++--
+ .../python/{python-pymongo_3.2.2.bb => python-pymongo_3.3.0.bb}       | 0
+ .../python/{python3-pymongo_3.2.2.bb => python3-pymongo_3.3.0.bb}     | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pymongo_3.2.2.bb => python-pymongo_3.3.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pymongo_3.2.2.bb => python3-pymongo_3.3.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pymisp.inc b/meta-python/recipes-devtools/python/python-pymisp.inc
-index abeed93..2b2601a 100644
---- a/meta-python/recipes-devtools/python/python-pymisp.inc
-+++ b/meta-python/recipes-devtools/python/python-pymisp.inc
-@@ -1,9 +1,9 @@
- DESCRIPTION = "Python API for MISP"
- HOMEPAGE = "https://github.com/MISP/PyMISP"
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=67a9496dcf5cf97af38edc77834fb4b9"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=200286bb8d148a5a157bf22abf623cbb"
+diff --git a/meta-python/recipes-devtools/python/python-pymongo.inc b/meta-python/recipes-devtools/python/python-pymongo.inc
+index e0f52dd..0a256a7 100644
+--- a/meta-python/recipes-devtools/python/python-pymongo.inc
++++ b/meta-python/recipes-devtools/python/python-pymongo.inc
+@@ -8,5 +8,5 @@ HOMEPAGE = "http://github.com/mongodb/mongo-python-driver"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=2a944942e1496af1886903d274dedb13"
  
--SRC_URI[md5sum] = "7cd8279f658899aabc606567b094896d"
--SRC_URI[sha256sum] = "45527078d48efc493f30c27d0dedc4143670b0cf85ecb8f2118c9c6463b1c86c"
-+SRC_URI[md5sum] = "03b5def47d8fde29f2303ed42ab1e375"
-+SRC_URI[sha256sum] = "2bb35c365470ad46f9afbb96408c01894aaa10b369fac0f6b92010190a7087ad"
- 
- RDEPENDS_${PN} += " ${PYTHON_PN}-requests"
-diff --git a/meta-python/recipes-devtools/python/python-pymisp_2.4.49.bb b/meta-python/recipes-devtools/python/python-pymisp_2.4.51.1.bb
+-SRC_URI[md5sum] = "70408f8115d7aa52fb6eef0e552834a6"
+-SRC_URI[sha256sum] = "f2018165823b341d83d398165d1c625e5db5cc779e7c44c107034407808463b6"
++SRC_URI[md5sum] = "42cd12a5014fb7d3e1987ca04f5c651f"
++SRC_URI[sha256sum] = "3d45302fc2622fabf34356ba274c69df41285bac71bbd229f1587283b851b91e"
+diff --git a/meta-python/recipes-devtools/python/python-pymongo_3.2.2.bb b/meta-python/recipes-devtools/python/python-pymongo_3.3.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pymisp_2.4.49.bb
-rename to meta-python/recipes-devtools/python/python-pymisp_2.4.51.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.49.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.51.1.bb
+rename from meta-python/recipes-devtools/python/python-pymongo_3.2.2.bb
+rename to meta-python/recipes-devtools/python/python-pymongo_3.3.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pymongo_3.2.2.bb b/meta-python/recipes-devtools/python/python3-pymongo_3.3.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.49.bb
-rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.51.1.bb
+rename from meta-python/recipes-devtools/python/python3-pymongo_3.2.2.bb
+rename to meta-python/recipes-devtools/python/python3-pymongo_3.3.0.bb
 -- 
 2.7.4
 
