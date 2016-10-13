@@ -1,49 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
-	[209.85.215.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D078719D9
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 550F46FF80
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Oct 2016 18:41:22 +0000 (UTC)
-Received: by mail-lf0-f66.google.com with SMTP id b75so13904304lfg.3
+	Thu, 13 Oct 2016 21:59:40 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id z190so7211182qkc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Oct 2016 11:41:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=mbrSVGgOfGIwFzP6+2n9VN/Rm1okPYUVRtN+bEehzws=;
-	b=J0h3sMjik/CDk2XHnlua66VMMZS8kBvJsyFhPObAGK0VCDqMmdq4uTWyQTrBNrT1nb
-	Z7sjXW35oB1DAIT2jGEKEiZNjMaoEMD9jS2VGgVi8ROOgWxrykJO4oU/LhJzUU98mWNp
-	Ii7G6jKEP0/I/alnH92rR6qlQpT6mQo0Cgt21DTcjkKyvY/MRjJYeS6XSkvgdn2vzm/6
-	ReJLiTMunELf5oxHrnpxbU6xaumAMzegeHIzzNlEXtuinGr2ti1nWk9I6OYPqOBr0nmW
-	FKHkpoUnjyrYqHSuR3K67x/40Nti8ad8UNRBOdbgnvAflDx54bUlzhsKYXkEe24QqC8e
-	jdXw==
+	Thu, 13 Oct 2016 14:59:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=mbrSVGgOfGIwFzP6+2n9VN/Rm1okPYUVRtN+bEehzws=;
-	b=WwpYLRFBpVQ8MRB/VcEKVLZ7iZfap4QQR9umlXhwNB3CdjsSbRJZwxPuEevm8+Wwwy
-	MePbC2dZCpUq7XdICAUowgl5w5fMkrP8c4veevsGzWnSZoD43eil5idZNhv2GDjAoWK6
-	OoXgp9iwOYqNII094RHkuIN1u/pIQJOm9x/M/qszXKOfWPavZPSRy5qfh8pIWIQFNSoa
-	FGRMeWliZzCt731wJWEXhrW84U/JQL58wO3D+Phv2pddhwIQrLiHQZNBg9v8yvejjXN3
-	LpRPJDfT2WKPlMeECwXgqMHeKnbvPJkY5enYE0cUsb/p70ZQo0pMGnA7+UjASHdlHSWv
-	i5ig==
-X-Gm-Message-State: AA6/9RmTQ0RXNVjWTLod/dh4QGQklLOF/izefMDi+ilr/8bpQfJP8E6CqWthf8Z5Ydzugg==
-X-Received: by 10.28.199.207 with SMTP id x198mr3065887wmf.34.1476384084058;
-	Thu, 13 Oct 2016 11:41:24 -0700 (PDT)
-Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
-	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
-	ct1sm24611423wjd.13.2016.10.13.11.41.23
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Oct 2016 11:41:23 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Fg/YqsValc+sqw19heSpgGA6/pV7vj40zgz+ndoKCU8=;
+	b=iqQsPwq0in+gFVZZcw2btFwl4iE1s/QF9EJd7UmK6Z7T+t4cT2Co9pbDMvfFJU76c0
+	T/ZJDKF8f+zapFrGgZPcfYHlqoXyYAfVAqGO3ogdSBF8gLBAoHv+DGTGymlPWh/uZcX6
+	xymm8zjISKfGpNR7fkL0fICOSY4Ikaqmo7f+1e1iYb9a2W1EO7Wwn6hj7SuzFpGRNA4E
+	vtFIPIuLY12gjWeKdWB/sdLXQUWsggnePafEZRiKtshrfQhqjBj0u/mZDrmQB5pDxELu
+	o7Sk20f4MDYnHrd/p9PU2sBL/QV8x0TuB8hbOUZdIQ4CvdUQjq2xZainaj03A3IzAGot
+	mSRg==
+X-Gm-Message-State: AA6/9RnVuqSl3Ddrx5NG7xTShhvu8aOdXnx1s2m6O/75nVBRouKVQDQK6XPalBu2PnlJkg==
+X-Received: by 10.55.204.215 with SMTP id n84mr10226449qkl.240.1476395981487; 
+	Thu, 13 Oct 2016 14:59:41 -0700 (PDT)
+Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
+	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
+	t30sm5900597qtt.22.2016.10.13.14.58.55
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 13 Oct 2016 14:58:59 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Oct 2016 20:41:21 +0200
-Message-Id: <20161013184121.18637-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.10.1
-In-Reply-To: <20161013183247.GE2924@jama>
-References: <20161013183247.GE2924@jama>
-Subject: [meta-browser][PATCHv2] chromium-wayland: skip when CHROMIUM_ENABLE_WAYLAND isn't enabled
+Date: Thu, 13 Oct 2016 17:58:18 -0400
+Message-Id: <1476395898-16502-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-certifi: update to version 2016.9.26
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,39 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Oct 2016 18:41:24 -0000
+X-List-Received-Date: Thu, 13 Oct 2016 21:59:41 -0000
 
-* otherwise chromium-wayland recipe might build with CHROMIUM_ENABLE_WAYLAND 0 and then
-  autodetect couple of x11 libraries
-  chromium-wayland-48.0.2548.0: chromium-wayland rdepends on atk, but it isn't a build dependency, missing atk in DEPENDS or PACKAGECONFIG? [build-deps]
-  chromium-wayland-48.0.2548.0: chromium-wayland rdepends on gdk-pixbuf, but it isn't a build dependency, missing gdk-pixbuf in DEPENDS or PACKAGECONFIG? [build-deps]
-  chromium-wayland-48.0.2548.0: chromium-wayland rdepends on gtk+, but it isn't a build dependency, missing gtk+ in DEPENDS or PACKAGECONFIG? [build-deps]
-  chromium-wayland-48.0.2548.0: chromium-wayland rdepends on libxcomposite, but it isn't a build dependency, missing libxcomposite in DEPENDS or PACKAGECONFIG? [build-deps]
-  chromium-wayland-48.0.2548.0: chromium-wayland rdepends on libxcursor, but it isn't a build dependency, missing libxcursor in DEPENDS or PACKAGECONFIG? [build-deps]
-  chromium-wayland-48.0.2548.0: chromium-wayland rdepends on libxscrnsaver, but it isn't a build dependency, missing libxscrnsaver in DEPENDS or PACKAGECONFIG? [build-deps]
-
-* reported a while ago in:
-  http://lists.openembedded.org/pipermail/openembedded-devel/2016-September/109131.html
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-python/recipes-devtools/python/python-certifi.inc                | 4 ++--
+ .../{python-certifi_2016.8.8.bb => python-certifi_2016.9.26.bb}       | 0
+ .../{python3-certifi_2016.8.8.bb => python3-certifi_2016.9.26.bb}     | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-certifi_2016.8.8.bb => python-certifi_2016.9.26.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-certifi_2016.8.8.bb => python3-certifi_2016.9.26.bb} (100%)
 
-diff --git a/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb b/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
-index f7ad2ce..bbba147 100644
---- a/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
-+++ b/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
-@@ -28,6 +28,8 @@ python() {
-     if (d.getVar('CHROMIUM_ENABLE_WAYLAND', True) == '1'):
-         if bb.utils.contains('PACKAGECONFIG', 'component-build', True, False, d):
-             bb.fatal("Chromium 48 Wayland version cannot be built in component-mode")
-+    else:
-+        raise bb.parse.SkipPackage("CHROMIUM_ENABLE_WAYLAND isn't enabled")
- }
+diff --git a/meta-python/recipes-devtools/python/python-certifi.inc b/meta-python/recipes-devtools/python/python-certifi.inc
+index 77fa53b..894154d 100644
+--- a/meta-python/recipes-devtools/python/python-certifi.inc
++++ b/meta-python/recipes-devtools/python/python-certifi.inc
+@@ -7,8 +7,8 @@ HOMEPAGE = " http://certifi.io/"
+ LICENSE = "ISC"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f77f61d14ee6feac4228d3ebd26cc1f1"
  
- CHROMIUM_WAYLAND_GYP_DEFINES = "use_ash=1 use_aura=1 chromeos=0 use_ozone=1 use_xkbcommon=1"
+-SRC_URI[md5sum] = "b57513f7670482da45bb350b792f659e"
+-SRC_URI[sha256sum] = "99864ed602d8a9d212e339b15ffa438895002eda7b7db20dca5309dac9605ae9"
++SRC_URI[md5sum] = "baa81e951a29958563689d868ef1064d"
++SRC_URI[sha256sum] = "8275aef1bbeaf05c53715bfc5d8569bd1e04ca1e8e69608cc52bcaac2604eb19"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-certifi_2016.8.8.bb b/meta-python/recipes-devtools/python/python-certifi_2016.9.26.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-certifi_2016.8.8.bb
+rename to meta-python/recipes-devtools/python/python-certifi_2016.9.26.bb
+diff --git a/meta-python/recipes-devtools/python/python3-certifi_2016.8.8.bb b/meta-python/recipes-devtools/python/python3-certifi_2016.9.26.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-certifi_2016.8.8.bb
+rename to meta-python/recipes-devtools/python/python3-certifi_2016.9.26.bb
 -- 
-2.10.1
+2.7.4
 
 
