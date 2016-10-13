@@ -1,26 +1,46 @@
-Return-Path: <amarnath.valluri@intel.com>
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by mail.openembedded.org (Postfix) with ESMTP id A777E60807
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
+	[209.85.215.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EAF26AC00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Oct 2016 11:25:01 +0000 (UTC)
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-	by fmsmga105.fm.intel.com with ESMTP; 13 Oct 2016 04:25:02 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.31,339,1473145200"; d="scan'208";a="19243768"
-Received: from linux.intel.com ([10.54.29.200])
-	by orsmga005.jf.intel.com with ESMTP; 13 Oct 2016 04:25:02 -0700
-Received: from avalluri-GigaByte.fi.intel.com (avalluri-gigabyte.fi.intel.com
-	[10.237.72.170]) (using TLSv1 with cipher AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	by linux.intel.com (Postfix) with ESMTP id 4AB856A4080
+	Thu, 13 Oct 2016 12:46:53 +0000 (UTC)
+Received: by mail-lf0-f67.google.com with SMTP id l131so9710713lfl.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Oct 2016 04:24:30 -0700 (PDT)
-From: Amarnath Valluri <amarnath.valluri@intel.com>
+	Thu, 13 Oct 2016 05:46:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=jNK0c2dHPscP5t0LczfQcXs9PqhDIVkcpaJoY7dMQqM=;
+	b=kjUU+ddLN7+oEmIiNsKZG3XRnQj7vKTcZiwhr00lPZoDYDKtzoPtivoRlrdAWFvw16
+	JAJgFq+INZeOfB5CCWyQd3wNfGVl2zE7UBccemPPXL48sFHvZUK24lKVNxwMcnK7kqlm
+	dXmyPxG8Re0IBVexaJeoFXcVWcroAgydNIhstIE7G6Ng1C5RSGm/J3quY3BDMSxu6Jfy
+	ydHPfyxbdLhlOOS90gi0DMPK7+XfTDQtBUnV/hZwz1ySxHHM4iy0j0EfTG+0OxZ+Uah6
+	fVPQvTb6HODnqFn8nMhpgnAwSIhGAJC3yU9Frg0eM2FuGzuwQEnjr8Uxq1q2p/IH1TpM
+	Qe8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=jNK0c2dHPscP5t0LczfQcXs9PqhDIVkcpaJoY7dMQqM=;
+	b=XUUz5VUpRtoDyiv2lN/8nBk09q8xKY3TokXSXlHUHmBiosjJiut5PXjhGgBH5QI95S
+	zVkc+zrYjsetDZeEdc9QoO0gcbs8j0rYxQqCUIKV1IBEmLiunPIIkbaLVbGQYAUzqCS1
+	dfhr+l46LQdKwHkkarB49qcSBWkmW3nbfMhuaOQKJXwh7F/UjQbyuhpVrlh59YYY4mTh
+	3CirfJKOMHZwk6iGcEcaIe3YS6ErSJ6N3aLo6Q1IIlMZ2fDh3wX1jul6IBM53fc+thSX
+	c5s4BriovJZFdmzU1JQ3gfPDHIXPgdqDDecSr8i2uqDvBsgRrRV+eMBnUqUwNfYMrQzH
+	SnHA==
+X-Gm-Message-State: AA6/9RmRiZ1f+qWXrddfBIaHgXIx0OrjsT+I2hy9exkdZNqtVsDCAxsRc8+WvSeQxcDexg==
+X-Received: by 10.28.64.213 with SMTP id n204mr2041727wma.64.1476362814866;
+	Thu, 13 Oct 2016 05:46:54 -0700 (PDT)
+Received: from localhost (ip-89-176-104-169.net.upcbroadband.cz.
+	[89.176.104.169]) by smtp.gmail.com with ESMTPSA id
+	h3sm22301942wjp.45.2016.10.13.05.46.53
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 13 Oct 2016 05:46:54 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Oct 2016 14:25:02 +0300
-Message-Id: <1476357902-17249-1-git-send-email-amarnath.valluri@intel.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-java][PATCH] ant-native: Fix random build failure
+Date: Thu, 13 Oct 2016 14:46:51 +0200
+Message-Id: <20161013124651.4285-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.10.1
+Subject: [meta-oe][PATCH] ipmiutil: uncomment PARALLEL_MAKE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,44 +53,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Oct 2016 11:25:01 -0000
+X-List-Received-Date: Thu, 13 Oct 2016 12:46:54 -0000
 
-Due to lack of task dependency between 'do_removebinaries' and 'do_removecruft'
-when both run parallelly sometimes, 'find' in do_removebinaries referring on
-directories that sare already removed by do_removecruft.
+* it's randomly failing for last year, so it wasn't there by accident
+  at least one race condition is on ipmilan.o:
+  | obj/ipmilan.o: file not recognized: File truncated
+  | collect2: error: ld returned 1 exit status
+  | make[2]: *** [libipmiutil.so] Error 1
+  | make[2]: *** Waiting for unfinished jobs....
+* oldest failure report was on 2015-08-30
+  http://www.openembedded.org/wiki/Bitbake_World_Status_Jethro
+  and many more were reported since then in:
+  http://www.openembedded.org/wiki/Bitbake_World_Status_Krogoth
+  http://www.openembedded.org/wiki/Bitbake_World_Status
+  and even more
+  http://errors.yoctoproject.org/Errors/Search/?query=ipmiutil
+  e.g. good examples (not with musl)
+  http://errors.yoctoproject.org/Errors/Details/88674/
+  http://errors.yoctoproject.org/Errors/Details/85986/
 
-This change makes sure that both tasks execute sequentially.
-
-Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-core/ant/ant-native_1.8.1.bb | 2 +-
+ meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-core/ant/ant-native_1.8.1.bb b/recipes-core/ant/ant-native_1.8.1.bb
-index 35b45d6..be65d3b 100644
---- a/recipes-core/ant/ant-native_1.8.1.bb
-+++ b/recipes-core/ant/ant-native_1.8.1.bb
-@@ -30,7 +30,7 @@ do_removecruft() {
- 	rm -rf ${S}/src/main/org/apache/tools/ant/taskdefs/optional/NetRexxC.java
- }
+diff --git a/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb b/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb
+index 9e74df5..bdb3d47 100644
+--- a/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb
++++ b/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb
+@@ -15,7 +15,7 @@ HOMEPAGE = "http://ipmiutil.sourceforge.net"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5f9372493401f309e6149dd2ce0a044b"
  
--addtask removecruft before do_patch after do_unpack
-+addtask removecruft before do_patch after do_removebinaries
+-#PARALLEL_MAKE = ""
++PARALLEL_MAKE = ""
  
- do_compile() {
-   mkdir -p build
+ SRC_URI = "${SOURCEFORGE_MIRROR}/ipmiutil/ipmiutil-${PV}.tar.gz \
+     file://fix_systemd_path.patch "
 -- 
-2.7.4
-
----------------------------------------------------------------------
-Intel Finland Oy
-Registered Address: PL 281, 00181 Helsinki 
-Business Identity Code: 0357606 - 4 
-Domiciled in Helsinki 
-
-This e-mail and any attachments may contain confidential material for
-the sole use of the intended recipient(s). Any review or distribution
-by others is strictly prohibited. If you are not the intended
-recipient, please contact the sender and delete all copies.
+2.10.1
 
 
