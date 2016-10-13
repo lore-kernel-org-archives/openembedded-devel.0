@@ -1,24 +1,26 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9389D60766
+Return-Path: <amarnath.valluri@intel.com>
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+	by mail.openembedded.org (Postfix) with ESMTP id A777E60807
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Oct 2016 08:28:31 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u9D8SWUN028639
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 13 Oct 2016 11:25:01 +0000 (UTC)
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+	by fmsmga105.fm.intel.com with ESMTP; 13 Oct 2016 04:25:02 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.31,339,1473145200"; d="scan'208";a="19243768"
+Received: from linux.intel.com ([10.54.29.200])
+	by orsmga005.jf.intel.com with ESMTP; 13 Oct 2016 04:25:02 -0700
+Received: from avalluri-GigaByte.fi.intel.com (avalluri-gigabyte.fi.intel.com
+	[10.237.72.170]) (using TLSv1 with cipher AES128-SHA (128/128 bits))
+	(No client certificate requested)
+	by linux.intel.com (Postfix) with ESMTP id 4AB856A4080
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Oct 2016 01:28:32 -0700 (PDT)
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.181) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Thu, 13 Oct 2016 01:28:31 -0700
-From: <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 13 Oct 2016 16:28:55 +0800
-Message-ID: <1476347335-30308-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libsocketcan: upgrade to 0.0.10
+	Thu, 13 Oct 2016 04:24:30 -0700 (PDT)
+From: Amarnath Valluri <amarnath.valluri@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 13 Oct 2016 14:25:02 +0300
+Message-Id: <1476357902-17249-1-git-send-email-amarnath.valluri@intel.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-java][PATCH] ant-native: Fix random build failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,113 +33,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Oct 2016 08:28:32 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 13 Oct 2016 11:25:01 -0000
 
-From: Chen Qi <Qi.Chen@windriver.com>
+Due to lack of task dependency between 'do_removebinaries' and 'do_removecruft'
+when both run parallelly sometimes, 'find' in do_removebinaries referring on
+directories that sare already removed by do_removecruft.
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+This change makes sure that both tasks execute sequentially.
+
+Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
 ---
- ...e-strcmp-instead-of-sizeof-on-char-string.patch | 39 ----------------------
- .../socketcan/libsocketcan_0.0.10.bb               | 14 ++++++++
- .../socketcan/libsocketcan_0.0.9.bb                | 20 -----------
- 3 files changed, 14 insertions(+), 59 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/socketcan/libsocketcan/0001-Use-strcmp-instead-of-sizeof-on-char-string.patch
- create mode 100644 meta-oe/recipes-extended/socketcan/libsocketcan_0.0.10.bb
- delete mode 100644 meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb
+ recipes-core/ant/ant-native_1.8.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/socketcan/libsocketcan/0001-Use-strcmp-instead-of-sizeof-on-char-string.patch b/meta-oe/recipes-extended/socketcan/libsocketcan/0001-Use-strcmp-instead-of-sizeof-on-char-string.patch
-deleted file mode 100644
-index aa6196e..0000000
---- a/meta-oe/recipes-extended/socketcan/libsocketcan/0001-Use-strcmp-instead-of-sizeof-on-char-string.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--From 94094cc4ee7ae585da3e5e7e83e7d82b5d6de656 Mon Sep 17 00:00:00 2001
--From: Alexander Stein <alexander.stein@systec-electronic.com>
--Date: Wed, 14 Nov 2012 12:13:06 +0100
--Subject: [PATCH] Use strcmp instead of sizeof on char* string
--
--This bug was detected by the clang warning:
--libsocketcan.c:384:16: warning: argument to 'sizeof' in 'strncmp' call
--is the same expression as the source; did you mean to provide an
--explicit length? [-Wsizeof-pointer-memaccess]
--sizeof(name)) != 0)
--~~~~~~~^~~~~~
--
--Signed-off-by: Alexander Stein <alexander.stein@systec-electronic.com>
--Signed-off-by: Marc Kleine-Budde <mkl@pengutronix.de>
-----
--Upstream-Status: Backport
--
-- src/libsocketcan.c | 5 ++---
-- 1 file changed, 2 insertions(+), 3 deletions(-)
--
--diff --git a/src/libsocketcan.c b/src/libsocketcan.c
--index fedcbdc..841c2ed 100644
----- a/src/libsocketcan.c
--+++ b/src/libsocketcan.c
--@@ -379,9 +379,8 @@ static int do_get_nl_link(int fd, __u8 acquire, const char *name, void *res)
-- 				nl_msg->nlmsg_len - NLMSG_LENGTH(sizeof(struct ifaddrmsg));
-- 			parse_rtattr(tb, IFLA_MAX, IFLA_RTA(ifi), len);
-- 
---			if (strncmp
---			    ((char *)RTA_DATA(tb[IFLA_IFNAME]), name,
---			     sizeof(name)) != 0)
--+			if (strcmp
--+			    ((char *)RTA_DATA(tb[IFLA_IFNAME]), name) != 0)
-- 				continue;
-- 
-- 			if (tb[IFLA_LINKINFO])
---- 
--1.8.3.1
--
-diff --git a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.10.bb b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.10.bb
-new file mode 100644
-index 0000000..60ca580
---- /dev/null
-+++ b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.10.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "Control basic functions in socketcan from userspace"
-+HOMEPAGE = "http://www.pengutronix.de"
-+SECTION = "libs/network"
-+
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://src/libsocketcan.c;beginline=3;endline=17;md5=97e38adced4385d8fba1ae2437cedee1"
-+
-+SRCREV = "51f1610160a1707f026f8c2d714a6f7aa3ca232b"
-+
-+SRC_URI = "git://git.pengutronix.de/git/tools/libsocketcan.git;protocol=git"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit autotools pkgconfig
-diff --git a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb
-deleted file mode 100644
-index 98ef73f..0000000
---- a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.9.bb
-+++ /dev/null
-@@ -1,20 +0,0 @@
--SUMMARY = "Control basic functions in socketcan from userspace"
--HOMEPAGE = "http://www.pengutronix.de"
--SECTION = "libs/network"
--
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://src/libsocketcan.c;beginline=3;endline=17;md5=97e38adced4385d8fba1ae2437cedee1"
--
--SRCREV = "e1a224bf1c409adf0c02b07a90deada634e54b88"
--
--SRC_URI = "git://git.pengutronix.de/git/tools/libsocketcan.git;protocol=git \
--    file://0001-Use-strcmp-instead-of-sizeof-on-char-string.patch \
--"
--
--S = "${WORKDIR}/git"
--
--inherit autotools pkgconfig
--
--do_configure_prepend() {
--    sed -i -e s:tests/GNUmakefile::g -e s:trunk:0.0.9: ${S}/configure.ac
--}
+diff --git a/recipes-core/ant/ant-native_1.8.1.bb b/recipes-core/ant/ant-native_1.8.1.bb
+index 35b45d6..be65d3b 100644
+--- a/recipes-core/ant/ant-native_1.8.1.bb
++++ b/recipes-core/ant/ant-native_1.8.1.bb
+@@ -30,7 +30,7 @@ do_removecruft() {
+ 	rm -rf ${S}/src/main/org/apache/tools/ant/taskdefs/optional/NetRexxC.java
+ }
+ 
+-addtask removecruft before do_patch after do_unpack
++addtask removecruft before do_patch after do_removebinaries
+ 
+ do_compile() {
+   mkdir -p build
 -- 
-2.8.3
+2.7.4
+
+---------------------------------------------------------------------
+Intel Finland Oy
+Registered Address: PL 281, 00181 Helsinki 
+Business Identity Code: 0357606 - 4 
+Domiciled in Helsinki 
+
+This e-mail and any attachments may contain confidential material for
+the sole use of the intended recipient(s). Any review or distribution
+by others is strictly prohibited. If you are not the intended
+recipient, please contact the sender and delete all copies.
 
 
