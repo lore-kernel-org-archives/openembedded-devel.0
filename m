@@ -1,36 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B356719EF
+Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
+	[209.85.220.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 1086771ABE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Oct 2016 16:31:00 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id n189so8987098qke.1
+	Fri, 14 Oct 2016 16:47:47 +0000 (UTC)
+Received: by mail-qk0-f193.google.com with SMTP id n189so9016232qke.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Oct 2016 09:31:02 -0700 (PDT)
+	Fri, 14 Oct 2016 09:47:49 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=lU2kwwJ2CAbyoBP+5qGVwrSK9cuPnhAXQwSCp38DHUo=;
-	b=eVShqB2VADXz+XnHkabxKC8nopGX8V9zpa+4zTuH/JB8wZnv4420EViT01qPzqm95e
-	slIY24tWSF7hPLAleK3VgWvMYKBk+VTFeF7DQtSwiyuhu7MbswumngdSuZ6HLniOQ0vc
-	O8jFvKLeBo3f6OLJb8xkF1xMATBq2YQ586gFvduH44ztPOAaLoY0X9WF7IA9pC4rVL9g
-	waXotUd2P8g+l3XDLxXmwb7TaMw0hi/lRWAkBAET5JD36iVcaOBHdDe1vuIAF1cvF8lH
-	4+iZBM614BcuIuwY0oG7xK+zvzq2nG5xu8e/C1XJ7frkUsoxntMgL8rD5DzMScE/Dzp+
-	jTHw==
-X-Gm-Message-State: AA6/9Rlsx55RYj5MFoZIONyHpElr/5j0Pga5iU0clSuG4eEQ6JqDANop1NIjxlOAypzqCQ==
-X-Received: by 10.55.168.209 with SMTP id r200mr14398694qke.160.1476462662227; 
-	Fri, 14 Oct 2016 09:31:02 -0700 (PDT)
+	bh=InuOwxk9G6/GothE3RnBuQ2ZwpelZQsxvCBG2ReMFH4=;
+	b=LndhYMwOZu91XawGWODxKps5lhWILGZ8/jYCbZ7VFM9rHJWeXaWBaxItfsuQcOaDeO
+	INTq9Ca0XPdT0W8EgCU5+Gsy8KTnjtkEEQwDaCHKw7UmQXl78saE4LQlz/ubJXqu8GCz
+	Q0iHi3WH6digEkCYrKNQyymPu6dfdCBjOzcPIQLdSKiO0jf42hH5lLMBl8QNjVh9GcC7
+	lEWuKv5DH02NKyhksVvIE31uwnoogAhLqRuGWuS6zSzDk5Kc3cwakB5TjlPr4P/e1uCN
+	fL0UShJv0ZWQXpuODKf/tP4QnC1lwuSu76n9IU0mwkIhbHtf2Kxq9FzPsO2zWq08WZT9
+	K4+g==
+X-Gm-Message-State: AA6/9RmPE2ZsGzlAIGXEKWYqxz490nXxw/qaeGW5d24CA3PuV2UuDb1KMEIHACu6dU7zeg==
+X-Received: by 10.55.80.136 with SMTP id e130mr12195628qkb.119.1476463669102; 
+	Fri, 14 Oct 2016 09:47:49 -0700 (PDT)
 Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
 	[69.124.217.3])
-	by smtp.gmail.com with ESMTPSA id a26sm7919213qka.2.2016.10.14.09.30.58
+	by smtp.gmail.com with ESMTPSA id b12sm7466360qta.4.2016.10.14.09.47.46
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 14 Oct 2016 09:31:00 -0700 (PDT)
+	Fri, 14 Oct 2016 09:47:46 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Oct 2016 12:30:45 -0400
-Message-Id: <1476462645-15223-1-git-send-email-derek@asterius.io>
+Date: Fri, 14 Oct 2016 12:47:34 -0400
+Message-Id: <1476463654-15349-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] libsoc: update to version 0.8.2
+Subject: [meta-oe][PATCH] mpich: update to version 3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,37 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Oct 2016 16:31:02 -0000
-
- * License file changed to 'LICENCE' but the terms remain the same
+X-List-Received-Date: Fri, 14 Oct 2016 16:47:49 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-support/libsoc/{libsoc_0.8.1.bb => libsoc_0.8.2.bb} | 4 ++--
+ meta-oe/recipes-devtools/mpich/{mpich_3.1.1.bb => mpich_3.2.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/libsoc/{libsoc_0.8.1.bb => libsoc_0.8.2.bb} (89%)
+ rename meta-oe/recipes-devtools/mpich/{mpich_3.1.1.bb => mpich_3.2.bb} (86%)
 
-diff --git a/meta-oe/recipes-support/libsoc/libsoc_0.8.1.bb b/meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb
-similarity index 89%
-rename from meta-oe/recipes-support/libsoc/libsoc_0.8.1.bb
-rename to meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb
-index 9c1a520..01708df 100644
---- a/meta-oe/recipes-support/libsoc/libsoc_0.8.1.bb
-+++ b/meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb
-@@ -5,11 +5,11 @@ DESCRIPTION = "libsoc is a C library to interface with common peripherals (gpio,
- HOMEPAGE = "https://github.com/jackmitch/libsoc"
+diff --git a/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb b/meta-oe/recipes-devtools/mpich/mpich_3.2.bb
+similarity index 86%
+rename from meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
+rename to meta-oe/recipes-devtools/mpich/mpich_3.2.bb
+index 1dee6bd..4537a66 100644
+--- a/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
++++ b/meta-oe/recipes-devtools/mpich/mpich_3.2.bb
+@@ -9,8 +9,8 @@ SRC_URI = " \
+     http://www.mpich.org/static/downloads/${PV}/mpich-${PV}.tar.gz \
+ "
  
- LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=e0bfebea12a718922225ba987b2126a5"
-+LIC_FILES_CHKSUM = "file://LICENCE;md5=e0bfebea12a718922225ba987b2126a5"
+-SRC_URI[md5sum] = "40dc408b1e03cc36d80209baaa2d32b7"
+-SRC_URI[sha256sum] = "455ccfaf4ec724d2cf5d8bff1f3d26a958ad196121e7ea26504fd3018757652d"
++SRC_URI[md5sum] = "f414cfa77099cd1fa1a5ae4e22db508a"
++SRC_URI[sha256sum] = "0778679a6b693d7b7caff37ff9d2856dc2bfc51318bf8373859bfa74253da3dc"
  
- inherit autotools pkgconfig python-dir
+ CACHED_CONFIGUREVARS += "BASH_SHELL=${base_bindir}/bash"
  
--SRCREV = "7fc953f980f4a51f0272ad691d3aa06b6aedbf16"
-+SRCREV = "fd1ad6e7823fa76d8db0d3c5884faffa8ffddafb"
- SRC_URI = "git://github.com/jackmitch/libsoc.git"
- 
- S = "${WORKDIR}/git"
 -- 
 2.7.4
 
