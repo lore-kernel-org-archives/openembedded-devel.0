@@ -1,36 +1,45 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 42C9A71998
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-vk0-f46.google.com (mail-vk0-f46.google.com
+	[209.85.213.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E5D971AB7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Oct 2016 22:51:46 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id m5so3166136qtb.0
+	Fri, 14 Oct 2016 12:12:59 +0000 (UTC)
+Received: by mail-vk0-f46.google.com with SMTP id b186so111824961vkb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Oct 2016 15:51:48 -0700 (PDT)
+	Fri, 14 Oct 2016 05:13:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=FIccoLh7hIUi8sYk+go1+0O5K7IrHEwdxyRMBHJ4rjI=;
+	b=wL6MP/C9M+ZgSXq/iMdIfN8SkWFwWrK/DK4Q7bbazn30MX5jbZkHnbXCG7VxsL+OsU
+	Wrs69HpIoSG7LD9S5QtHJdgQXYEvIkr79ow0cSbXwy6OHyI1XO0uld9CS5KcVW4JfxQA
+	2xSIrIlN/dPcCXHuj27+pNwDm2nQYQnxOu+RmIlatM+nCB28KGF3HDGU4Hx2LYr09T9F
+	x6WIzBDRwNZtg7wVE+j87wg6W+KzP2Z6y5wgYgpZywi6z+9a0wG0qLTuc828nPJi8SxG
+	J2Yf6ae366fQQjUUURgSk2jF2+hGRKV4s4MqSlELqRxjPVLteSSGxy12+aNviW0n/W7i
+	fbTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=BRzVN07qpPq2c3n3ivOsTCwB5E6E42ZGIL85EyPHNlY=;
-	b=Qhb88UkJbq7uVYdlzB3HXHEoGzoDh72eh0Ca1JH/WJe5OeP4P9ew1sDZMrYhLpeVjR
-	ueyM20o2xeCSPBc6GeUaZEjwu9E0B78F49QNY7CCq1kshLxl9T9P7lUGF8Pzv/+Lz22h
-	TabKp7jc0JksZOqgRHS06iEbscAAIdjzFbSttONjzoYw/779CtgCbQvz5J7zRtw//oly
-	3PCmkA5PFiPLBS3HADzJVQ/ZH/yW3r5kq8mKZ/GJfkfeOx7JwlT38qVbY8vHNGwsA6eT
-	BoxjMQohktmfKU9u9+e72WQyjLtpJu0cZRCjzm/XVI+vzVuB1D/RHtM+RBrfUZK5wF+N
-	qWfQ==
-X-Gm-Message-State: AA6/9RnGITO/XppuSjStLORwLidfghb4f2zvqYbaxrFfIUCF+E5IAkII5qjLK5Ksed0qJQ==
-X-Received: by 10.200.46.77 with SMTP id s13mr9497347qta.29.1476399108058;
-	Thu, 13 Oct 2016 15:51:48 -0700 (PDT)
-Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
-	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
-	d69sm5984481qke.45.2016.10.13.15.51.47
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 13 Oct 2016 15:51:47 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Oct 2016 18:51:41 -0400
-Message-Id: <1476399101-29346-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-bcrypt: update to version 3.1.1
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=FIccoLh7hIUi8sYk+go1+0O5K7IrHEwdxyRMBHJ4rjI=;
+	b=ZfnzvS+x3G6AXPTrMh7IzYJdHCZ4hV+UrPhpaZs+LzxkyIyOldtx3QDLEBI1/bP1Fq
+	59kEcuAPCwhALQkAR4SEUnnTmkfTxsocHl1MN9mZ18G0e2fGR1RHmRzfX++4xBh1acKA
+	k9pl1pe6Z4n6G+CyGGmf8dTsKAEeqzy0/42HzXzmEwuGHZ5RlL68BckX3XUTO8dC+tT0
+	rOxndhc+vgj7yKIXo29EdDf4pRswQkKcz61ZhL8U9SGOXW7WOy3FOhfyC2joi5KfJtCP
+	1uSppbqynLCF2dm0taspaWWej5HGMZJ2LQ9nYp1Ca8w7jMBKepibM70U0JaUMF/e4Cc7
+	wkIA==
+X-Gm-Message-State: AA6/9RnIsoqU0hPGJ/B987Wg7fQxEZkLuJZEvY6RQjtYpRL9urv7i8cap0lGcZwcZO7EWEA3n2J4amj1e7+qtA==
+X-Received: by 10.31.0.67 with SMTP id 64mr8349260vka.173.1476447180163; Fri,
+	14 Oct 2016 05:13:00 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.176.86.206 with HTTP; Fri, 14 Oct 2016 05:12:29 -0700 (PDT)
+In-Reply-To: <20161013184121.18637-1-Martin.Jansa@gmail.com>
+References: <20161013183247.GE2924@jama>
+	<20161013184121.18637-1-Martin.Jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 14 Oct 2016 14:12:29 +0200
+Message-ID: <CAMKF1srWAdJNf3a6WFGQjBycHX1YSHh2USKcywp4GKB0YaoX+w@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser][PATCHv2] chromium-wayland: skip when CHROMIUM_ENABLE_WAYLAND isn't enabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,33 +52,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Oct 2016 22:51:48 -0000
+X-List-Received-Date: Fri, 14 Oct 2016 12:13:00 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../python/{python-bcrypt_3.1.0.bb => python-bcrypt_3.1.1.bb}         | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-bcrypt_3.1.0.bb => python-bcrypt_3.1.1.bb} (67%)
+On Thu, Oct 13, 2016 at 8:41 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> * otherwise chromium-wayland recipe might build with CHROMIUM_ENABLE_WAYLAND 0 and then
+>   autodetect couple of x11 libraries
+>   chromium-wayland-48.0.2548.0: chromium-wayland rdepends on atk, but it isn't a build dependency, missing atk in DEPENDS or PACKAGECONFIG? [build-deps]
+>   chromium-wayland-48.0.2548.0: chromium-wayland rdepends on gdk-pixbuf, but it isn't a build dependency, missing gdk-pixbuf in DEPENDS or PACKAGECONFIG? [build-deps]
+>   chromium-wayland-48.0.2548.0: chromium-wayland rdepends on gtk+, but it isn't a build dependency, missing gtk+ in DEPENDS or PACKAGECONFIG? [build-deps]
+>   chromium-wayland-48.0.2548.0: chromium-wayland rdepends on libxcomposite, but it isn't a build dependency, missing libxcomposite in DEPENDS or PACKAGECONFIG? [build-deps]
+>   chromium-wayland-48.0.2548.0: chromium-wayland rdepends on libxcursor, but it isn't a build dependency, missing libxcursor in DEPENDS or PACKAGECONFIG? [build-deps]
+>   chromium-wayland-48.0.2548.0: chromium-wayland rdepends on libxscrnsaver, but it isn't a build dependency, missing libxscrnsaver in DEPENDS or PACKAGECONFIG? [build-deps]
+>
+> * reported a while ago in:
+>   http://lists.openembedded.org/pipermail/openembedded-devel/2016-September/109131.html
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb b/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
+> index f7ad2ce..bbba147 100644
+> --- a/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
+> +++ b/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
+> @@ -28,6 +28,8 @@ python() {
+>      if (d.getVar('CHROMIUM_ENABLE_WAYLAND', True) == '1'):
+>          if bb.utils.contains('PACKAGECONFIG', 'component-build', True, False, d):
+>              bb.fatal("Chromium 48 Wayland version cannot be built in component-mode")
+> +    else:
+> +        raise bb.parse.SkipPackage("CHROMIUM_ENABLE_WAYLAND isn't enabled")
 
-diff --git a/meta-python/recipes-devtools/python/python-bcrypt_3.1.0.bb b/meta-python/recipes-devtools/python/python-bcrypt_3.1.1.bb
-similarity index 67%
-rename from meta-python/recipes-devtools/python/python-bcrypt_3.1.0.bb
-rename to meta-python/recipes-devtools/python/python-bcrypt_3.1.1.bb
-index caeef60..aae037f 100644
---- a/meta-python/recipes-devtools/python/python-bcrypt_3.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python-bcrypt_3.1.1.bb
-@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8f7bb094c7232b058c7e9f2e431f389c"
- 
- DEPENDS = "python-cffi-native"
- 
--SRC_URI[md5sum] = "49d79e646dbf27a05b81e4f0c4f717c7"
--SRC_URI[sha256sum] = "e54820d8b9eff357d1003f5b8d4b949a632b76b89610d8a933783fd476033ebe"
-+SRC_URI[md5sum] = "7348b2c361e23cf205701bba7652d789"
-+SRC_URI[sha256sum] = "0309a4a72bd1dc314279cf1ee14e277227732f14c9b63ab96715654e13fe9321"
- 
- inherit pypi setuptools
- 
--- 
-2.7.4
-
+This is ok.
 
