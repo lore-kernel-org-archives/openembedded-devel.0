@@ -1,36 +1,45 @@
-Return-Path: <straka.derek@gmail.com>
+Return-Path: <mario.goulart@gmail.com>
 Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
 	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 1086771ABE
+	by mail.openembedded.org (Postfix) with ESMTP id E0D6B71A32
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Oct 2016 16:47:47 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id n189so9016232qke.1
+	Sun, 16 Oct 2016 12:16:24 +0000 (UTC)
+Received: by mail-qk0-f193.google.com with SMTP id v138so11842607qka.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Oct 2016 09:47:49 -0700 (PDT)
+	Sun, 16 Oct 2016 05:16:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=w+SADstOW0ckm5iNnegyjABSNG2PylxuNnXKHhGYbFk=;
+	b=uoo5RRpVpOvykKSHp7ANiWtuZDJ6+S3VnYP4BvYWuJTRqqw6vRuwm0dbO+bFGFowLH
+	gurcNkNiVaM8dNrYNZEz2KBvgY7VuOOy2y1sxRjC7svXVkB/E3QBejGq4T36O7nhx18g
+	AF6yqKC80meyvNxmocZULSYxRERyu4ZqqXxnFjcVXmuqo/+6fGje7CzeUleU0KjDp5vL
+	J4NuigWx2O0sILlhMJWiALn8Bk29bpZBvfvHZd7f95BytfsrXWiIXHG0jrTs9B69BVoe
+	V2qiHc+T9NUNL4gYE1tZuTvib70ddv37JN6Ml9azKjeHqz4h8E6JGaakTRvb09P7ppFH
+	Si1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=InuOwxk9G6/GothE3RnBuQ2ZwpelZQsxvCBG2ReMFH4=;
-	b=LndhYMwOZu91XawGWODxKps5lhWILGZ8/jYCbZ7VFM9rHJWeXaWBaxItfsuQcOaDeO
-	INTq9Ca0XPdT0W8EgCU5+Gsy8KTnjtkEEQwDaCHKw7UmQXl78saE4LQlz/ubJXqu8GCz
-	Q0iHi3WH6digEkCYrKNQyymPu6dfdCBjOzcPIQLdSKiO0jf42hH5lLMBl8QNjVh9GcC7
-	lEWuKv5DH02NKyhksVvIE31uwnoogAhLqRuGWuS6zSzDk5Kc3cwakB5TjlPr4P/e1uCN
-	fL0UShJv0ZWQXpuODKf/tP4QnC1lwuSu76n9IU0mwkIhbHtf2Kxq9FzPsO2zWq08WZT9
-	K4+g==
-X-Gm-Message-State: AA6/9RmPE2ZsGzlAIGXEKWYqxz490nXxw/qaeGW5d24CA3PuV2UuDb1KMEIHACu6dU7zeg==
-X-Received: by 10.55.80.136 with SMTP id e130mr12195628qkb.119.1476463669102; 
-	Fri, 14 Oct 2016 09:47:49 -0700 (PDT)
-Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
-	[69.124.217.3])
-	by smtp.gmail.com with ESMTPSA id b12sm7466360qta.4.2016.10.14.09.47.46
+	bh=w+SADstOW0ckm5iNnegyjABSNG2PylxuNnXKHhGYbFk=;
+	b=cjsS3wj83TjovmmtzPOvGsqwl/EUAC1n8XpKg1RSC9wmlI4SFO+6+7Ooa722h8MBBT
+	Sze89aChW2zY6+P6VeDOpLJsNc2z96Cm+aGg30XJPns1RjobM1yRayjkOu4bvxR/QN1P
+	wzOF3LodvsUvKpsrT0kdB4z9mUVIA/BwtB57n0q2D3TSnnzrGUpuCPdFrWxqnjavEbNF
+	9/yf5qp0uxmAI51mbHmJLTjdE6Ecyxnt6E6Ux7WiIXLPSPlgqFfFaCfHXVrfXyWjQgXf
+	ZfT5yL0NZe2QBW1b6OghHgYFpIQfxUTMRE++ruTTzU0zL9m3biRsNDN1lUZcdc4YugPX
+	h2WQ==
+X-Gm-Message-State: AA6/9Rk3gnri4uV94jZwURG6826hXvfRnMzAO+4sp5cLDDhoqeHty6M4bO2CKc3RTgxzfg==
+X-Received: by 10.195.13.107 with SMTP id ex11mr6937467wjd.99.1476620186089;
+	Sun, 16 Oct 2016 05:16:26 -0700 (PDT)
+Received: from oe.parenteses.org (email.parenteses.org. [5.9.149.108])
+	by smtp.gmail.com with ESMTPSA id
+	ce6sm42011117wjc.27.2016.10.16.05.16.24
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 14 Oct 2016 09:47:46 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+	Sun, 16 Oct 2016 05:16:24 -0700 (PDT)
+From: Mario Domenech Goulart <mario.goulart@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Oct 2016 12:47:34 -0400
-Message-Id: <1476463654-15349-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] mpich: update to version 3.2
+Date: Sun, 16 Oct 2016 14:15:49 +0200
+Message-Id: <1476620149-25938-1-git-send-email-mario.goulart@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCH] postgresql.inc: Fix do_configure error (could not find Python.h)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,33 +52,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Oct 2016 16:47:49 -0000
+X-List-Received-Date: Sun, 16 Oct 2016 12:16:26 -0000
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Fixes:
+
+| checking for Python.h... no
+| configure: error: header file <Python.h> is required for Python
+| NOTE: The following config.log files may provide further information.
+| WARNING: exit code 1 from a shell command.
+| NOTE: .../tmp/work/armv5e-poky-linux-gnueabi/postgresql/9.4.8-r0.0/build/config.log
+| ERROR: configure failed
+
+Signed-off-by: Mario Domenech Goulart <mario.goulart@gmail.com>
 ---
- meta-oe/recipes-devtools/mpich/{mpich_3.1.1.bb => mpich_3.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/mpich/{mpich_3.1.1.bb => mpich_3.2.bb} (86%)
+ meta-oe/recipes-support/postgresql/postgresql.inc | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb b/meta-oe/recipes-devtools/mpich/mpich_3.2.bb
-similarity index 86%
-rename from meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
-rename to meta-oe/recipes-devtools/mpich/mpich_3.2.bb
-index 1dee6bd..4537a66 100644
---- a/meta-oe/recipes-devtools/mpich/mpich_3.1.1.bb
-+++ b/meta-oe/recipes-devtools/mpich/mpich_3.2.bb
-@@ -9,8 +9,8 @@ SRC_URI = " \
-     http://www.mpich.org/static/downloads/${PV}/mpich-${PV}.tar.gz \
- "
+diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
+index 9592c79..454624c 100644
+--- a/meta-oe/recipes-support/postgresql/postgresql.inc
++++ b/meta-oe/recipes-support/postgresql/postgresql.inc
+@@ -40,6 +40,8 @@ export LDFLAGS_SL = "${LDFLAGS}"
  
--SRC_URI[md5sum] = "40dc408b1e03cc36d80209baaa2d32b7"
--SRC_URI[sha256sum] = "455ccfaf4ec724d2cf5d8bff1f3d26a958ad196121e7ea26504fd3018757652d"
-+SRC_URI[md5sum] = "f414cfa77099cd1fa1a5ae4e22db508a"
-+SRC_URI[sha256sum] = "0778679a6b693d7b7caff37ff9d2856dc2bfc51318bf8373859bfa74253da3dc"
+ inherit autotools pkgconfig perlnative pythonnative useradd update-rc.d systemd
  
- CACHED_CONFIGUREVARS += "BASH_SHELL=${base_bindir}/bash"
++CFLAGS += "-I${STAGING_INCDIR}/${PYTHON_DIR}"
++
+ SYSTEMD_SERVICE_${PN} = "postgresql.service"
+ SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+ 
+@@ -109,12 +111,6 @@ python populate_packages_prepend() {
+ }
+ 
+ do_configure() {
+-    # do_configure_prepend
+-    # make sure configure finds python includdirs with these envs
+-    export \
+-           STAGING_INCDIR=${STAGING_INCDIR} \
+-           STAGING_LIBDIR=${STAGING_LIBDIR}
+-
+     # do_configure
+     autotools_do_configure
  
 -- 
-2.7.4
+2.1.4
 
 
