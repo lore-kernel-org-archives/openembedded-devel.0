@@ -1,46 +1,46 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E1818719B7
+Return-Path: <gizero@gmail.com>
+Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
+	[209.85.215.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 18FCF71998
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Oct 2016 05:05:32 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id s8so11964403pfj.2
+	Mon, 17 Oct 2016 21:28:32 +0000 (UTC)
+Received: by mail-lf0-f67.google.com with SMTP id x79so28951280lff.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Oct 2016 22:05:34 -0700 (PDT)
+	Mon, 17 Oct 2016 14:28:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=3hM4Uc7HZfXXPd0E8elU+k63z1EN6IMuPCJJFt6Uiy4=;
-	b=MD+I58PrjDWnilK63mU+4ze+HgqrV0xj4aVCPwAKHasOv+IW0Sd5EoxjJ3a88Fun4y
-	tF+l2w9B2SDa+65pwODM2iSvBRTc53UQIfb70t7cdqeMDkDo3Rji75tB4CzysFPFoqme
-	oH3fhuIcjpzDZEUZWEm9fuKDWBba0MQ/3+KnpXfTZvAKqs5I9gdAd4yGuF/HPr1gE9yQ
-	7TPOAK9bl7YDbQXR0WOON9F99U6WGUiExRdn8kOJpd/aXclKg0w9KyBX2PRUghNZZ8XA
-	Ub9IKnMsyob/Fl7hJ0F3CMEOiN6/mJj4ajsD5OS8QsW6f7H6JQ3yiqRS8dwkhV8wLLiY
-	63hg==
+	bh=2JQC4KYDVS2IFge+9TRenyJ9+oibvvLpR7zdKN9Euew=;
+	b=kQLWdG3q83dSEG3FkEE4Z9bo75ggSaW4aCmllHUZv7m3uGkSMlwdRSai1TZEX51irr
+	miYlQ4t+fQZfcEFd7w6kTODrBD5vPqr1wk/ZmpjXP+UM3NX/yN8mLeBXh813zmyObTw/
+	lc+NbxBX9LpCT5yBTnJw0DbMXJhqqVkNqvN/PUHsEfqeEHqnWJdWBFl5S8bst07ua7gv
+	PwB3Az485MMDA3y9iY0QQi/SpjyGCzrIkQ3M59Xv4UHhD8bAI6oy7TcAfjXbHeD/F5Hc
+	vMjmYcbjYbTIq28U4xTcZnIib9nwhX/4LRK8Ps06tQwHo470rwWhYDVQU/yF/yhOzfxA
+	8cIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=3hM4Uc7HZfXXPd0E8elU+k63z1EN6IMuPCJJFt6Uiy4=;
-	b=PA7QH+VTSTKRAlUAq1B6tUJJhvjWBxV+7IrZ74gxUmYbPJ2G+tPmvl5a99uJn6kCp8
-	Od5IGNkqQa+pkeG1Q7z+7WUQs1PUV4cxah9VIAecTCE2Zl9xnfcMsWq+WwhMJ4irbxOM
-	2cJt6STrgE91NUgAz7p7iPoMDcRhHTQDBZl6/Z0RYbsHeDA8mInqJQcZ6kxcgXXtoFB2
-	kz2YbuaoMUBEbAQBv53fymYAQ8kGLgk4cT7a9+F6K60+tHN5P9fwYF9iYLJeoJvFIEuh
-	03rVGsviHCOFGdo3zglD46I3AGrLy0ng5kaSkOwHAx27HZXevN7seNV5JWXI6WfFbu/C
-	u+kQ==
-X-Gm-Message-State: AA6/9RlJfnODaCMePrYNtRDTj0F5USFa34i2pHl2/E0V4LBTcwptZpKde+ZHaC+Iow2B2A==
-X-Received: by 10.98.61.85 with SMTP id k82mr35081880pfa.7.1476680734404;
-	Sun, 16 Oct 2016 22:05:34 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	bh=2JQC4KYDVS2IFge+9TRenyJ9+oibvvLpR7zdKN9Euew=;
+	b=fCIdirPa5AiY9B4t1nerIeOaNXVajajbSSjbbgs1y5m51qmZrcQn/jrEXJmYTw8CP3
+	DAmo0xSfcQm+NrLVr+rxh1zGFtYzan3bhuGqQIFP4Asrevj3leAMb097PeB9FMbuN+dn
+	mtJq0BDRm5XbSuMmNvakyemyoAmw7r5W47owqEp1aUXT2XYZxuPtEGQyGLRnFSwK0OFM
+	7Yc2L/KXaoVaDvgz1CzR/05jNW4jTHC1U9XeAB6A/lDyXGG5k5uPutCkoR/LERuR3/NZ
+	NI+TynYNmJHIAIbvgLzYK/hVnpv4wZG/Jd0u3RivtwPaecbywL7ginUkd4uLifgpJpVl
+	Wfxg==
+X-Gm-Message-State: AA6/9RkXEDn/lGtSwKjYtXJ3viUrFTVGXU6R7+SEU+fTIdIjSyyPZHXyl5QjJRgYgJgi4w==
+X-Received: by 10.194.93.234 with SMTP id cx10mr12733238wjb.140.1476739713551; 
+	Mon, 17 Oct 2016 14:28:33 -0700 (PDT)
+Received: from gizero-desktop.tw.it
+	(host168-65-static.12-87-b.business.telecomitalia.it. [87.12.65.168])
 	by smtp.gmail.com with ESMTPSA id
-	d89sm21690523pfe.32.2016.10.16.22.05.32
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 16 Oct 2016 22:05:33 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
+	a1sm56344626wju.41.2016.10.17.14.28.29
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 17 Oct 2016 14:28:30 -0700 (PDT)
+From: Andrea Galbusera <gizero@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Oct 2016 16:06:08 +1100
-Message-Id: <20161017050608.16565-1-net147@gmail.com>
-X-Mailer: git-send-email 2.10.0
-Subject: [meta-oe][PATCH] nodejs: update to 4.6.0
+Date: Mon, 17 Oct 2016 23:28:01 +0200
+Message-Id: <1476739681-14848-1-git-send-email-gizero@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] inotify-tools: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,33 +53,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Oct 2016 05:05:36 -0000
+X-List-Received-Date: Mon, 17 Oct 2016 21:28:34 -0000
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
+inotify-tools is a C library and a set of command-line programs for Linux
+providing a simple interface to inotify.
+
+Signed-off-by: Andrea Galbusera <gizero@gmail.com>
 ---
- meta-oe/recipes-devtools/nodejs/{nodejs_4.5.0.bb => nodejs_4.6.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_4.5.0.bb => nodejs_4.6.0.bb} (96%)
+ .../inotifywait-fix-compile-error-with-GCC-6.patch | 45 ++++++++++++++++++++++
+ .../inotify-tools/inotify-tools_git.bb             | 23 +++++++++++
+ 2 files changed, 68 insertions(+)
+ create mode 100644 meta-oe/recipes-support/inotify-tools/inotify-tools/inotifywait-fix-compile-error-with-GCC-6.patch
+ create mode 100644 meta-oe/recipes-support/inotify-tools/inotify-tools_git.bb
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_4.5.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_4.6.0.bb
-similarity index 96%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_4.5.0.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_4.6.0.bb
-index ceba2b8..7479371 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_4.5.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.6.0.bb
-@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
- SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-     file://no-registry.patch \
- "
--SRC_URI[md5sum] = "ac8e38c83f29e83d496d4bc4283487b0"
--SRC_URI[sha256sum] = "97b99d378c56802444208409568e2e66c46332897f06aead74d1ffbe733bd488"
-+SRC_URI[md5sum] = "40f3613f679d252674e000013e75ed8a"
-+SRC_URI[sha256sum] = "42910dbd34e49bfc40580e06753947c30d31101455a38e9f0343a23d67c0c694"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
+diff --git a/meta-oe/recipes-support/inotify-tools/inotify-tools/inotifywait-fix-compile-error-with-GCC-6.patch b/meta-oe/recipes-support/inotify-tools/inotify-tools/inotifywait-fix-compile-error-with-GCC-6.patch
+new file mode 100644
+index 0000000..ba042a2
+--- /dev/null
++++ b/meta-oe/recipes-support/inotify-tools/inotify-tools/inotifywait-fix-compile-error-with-GCC-6.patch
+@@ -0,0 +1,45 @@
++From 7affb288d6c0726e7b1ebc317a878927b6ef0d02 Mon Sep 17 00:00:00 2001
++From: Andrea Galbusera <gizero@gmail.com>
++Date: Tue, 13 Sep 2016 08:10:29 +0200
++Subject: [PATCH] inotifywait: fix compile error with GCC 6
++
++Fails to compile with misleading-indentation error
++
++| src/inotifywait.c: In function 'output_event_csv':
++| src/inotifywait.c:126:5: error: this 'if' clause does not guard... [-Werror=misleading-indentation]
++|      if (filename != NULL)
++|      ^~
++| src/inotifywait.c:129:2: note: ...this statement, but the latter is misleadingly indented as if it is guarded by the 'if'
++|   printf("%s,", csv_escape( inotifytools_event_to_str( event->mask ) ) );
++|   ^~~~~~
++| cc1: all warnings being treated as errors
++
++Fix indentation to resolve.
++
++Upstream-Status: Submitted [https://github.com/rvoicilas/inotify-tools/pull/66]
++
++Signed-off-by: Andrea Galbusera <gizero@gmail.com>
++---
++ src/inotifywait.c | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/src/inotifywait.c b/src/inotifywait.c
++index c5ce5e3..404a85b 100644
++--- a/src/inotifywait.c
+++++ b/src/inotifywait.c
++@@ -122,9 +122,9 @@ void validate_format( char * fmt ) {
++ 
++ 
++ void output_event_csv( struct inotify_event * event ) {
++-    char *filename = csv_escape(inotifytools_filename_from_wd(event->wd));
++-    if (filename != NULL)
++-        printf("%s,", filename);
+++	char *filename = csv_escape(inotifytools_filename_from_wd(event->wd));
+++	if (filename != NULL)
+++		printf("%s,", filename);
++ 
++ 	printf("%s,", csv_escape( inotifytools_event_to_str( event->mask ) ) );
++ 	if ( event->len > 0 )
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-support/inotify-tools/inotify-tools_git.bb b/meta-oe/recipes-support/inotify-tools/inotify-tools_git.bb
+new file mode 100644
+index 0000000..a8ef557
+--- /dev/null
++++ b/meta-oe/recipes-support/inotify-tools/inotify-tools_git.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "Command line tools and C library providing a simple interface to inotify"
++AUTHOR = "Rohan McGovern <rohan@mcgovern.id.au>"
++HOMEPAGE = "http://wiki.github.com/rvoicilas/inotify-tools"
++SECTION = "console/devel"
++LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ac6c26e52aea428ee7f56dc2c56424c6"
++
++SRCREV = "1df9af4d6cd0f4af4b1b19254bcf056aed4ae395"
++PV = "3.14+git${SRCPV}"
++
++SRC_URI = "git://github.com/rvoicilas/${BPN} \
++           file://inotifywait-fix-compile-error-with-GCC-6.patch \
++          "
++
++S = "${WORKDIR}/git"
++
++inherit autotools
++
++EXTRA_OECONF = "--disable-doxygen"
++
++PACKAGES =+ "libinotifytools"
++
++FILES_libinotifytools = "${libdir}/lib*.so.*"
 -- 
-2.10.0
+1.9.1
 
 
