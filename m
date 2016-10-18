@@ -1,59 +1,35 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-vk0-f68.google.com (mail-vk0-f68.google.com
-	[209.85.213.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D14871ACF
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id C944E60589
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 15:24:15 +0000 (UTC)
-Received: by mail-vk0-f68.google.com with SMTP id 83so8840802vkd.0
+	Tue, 18 Oct 2016 17:23:30 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 735CD20992
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 08:24:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=qVTFBfZxmcQOlPopwv6/g8XTsx6MYPCGFFa0Mi1Ax6Q=;
-	b=SwKQ8PSnc5iMHVcfxQpSkIAiD9IhbwcvBF4kA8okteidFXI+JsSXLNZlvdMdxV3wzG
-	9Fe6jl7UWuyEqO3DIifwCXIElsp3sxLWODtfPWC0PfzrgT8nlMg9G03XJvj+pBzHjXTs
-	OAwbm8cnIEW4BHWbU9UuwRU5XQTkSRRRb5uznLprQ57Pk3Cy1RxaDnzQ3bUZT6mH9jx5
-	rtEr+xCIb4fRN02o1jnSJxkE2aobLXYSe09wMaW4CK/NZyheO17TL9oUXTua6wGuKZ15
-	WDASmHLLvQldM79lgY8HqCr5muqasIApIfJVnnygCNC8BIph8MRti/M9tVMN4GxPWW43
-	XBHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc;
-	bh=qVTFBfZxmcQOlPopwv6/g8XTsx6MYPCGFFa0Mi1Ax6Q=;
-	b=lddOoaEOZVubu0jkiGmROPtp0d60ZK0y45iVzzTBaKUcrJPs5R8hHovpNAQ4cion5Y
-	VlIyPVsKSjXMwhM1eisV6MLHA41aHZ2cXWFq1du3vCB62FP4Mc5PHUxerMTmnSgyaxIc
-	o9XQ47Ply1fTD/CuUz4m9BizMKESu8ojjVJSbNEsOr9qWiZVkuO5tKDcHIjg30xispPB
-	IDFVBQejTzymr5lswaE+lrEIBfcl83CFEWzlj9AmBEk1D1/IeE7eiLqU9ciWSZuqQAcx
-	q26yNCNxYahVQ4NUNVWSRGPkKr76IdCYicEiRNJR5TYlTOCYL+5e0Hl/WFMIv+xSHYgy
-	CPPg==
-X-Gm-Message-State: AA6/9Rn9sFNyTtkgPWJdPyh7Ck59ota/mRXDRwKgF84HoFTwde2lWxGVlvoDA51rIIqHEg==
-X-Received: by 10.31.115.8 with SMTP id o8mr1212691vkc.2.1476804256243;
-	Tue, 18 Oct 2016 08:24:16 -0700 (PDT)
-Received: from mail-vk0-f50.google.com (mail-vk0-f50.google.com.
-	[209.85.213.50]) by smtp.gmail.com with ESMTPSA id
-	f189sm14149286vka.14.2016.10.18.08.24.14
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Oct 2016 08:24:15 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-vk0-f50.google.com with SMTP id 83so199033287vkd.0
+	Tue, 18 Oct 2016 17:23:30 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id jYM5fA5w2Apd
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 08:24:14 -0700 (PDT)
-X-Received: by 10.31.47.70 with SMTP id v67mr1200681vkv.4.1476804254575; Tue,
-	18 Oct 2016 08:24:14 -0700 (PDT)
+	Tue, 18 Oct 2016 17:23:30 +0000 (UTC)
+Received: from gandalf.denix.org (pool-100-15-106-107.washdc.fios.verizon.net
+	[100.15.106.107])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 5AC862001A
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 18 Oct 2016 17:23:30 +0000 (UTC)
+Received: by gandalf.denix.org (Postfix, from userid 1000)
+	id 9F979162175; Tue, 18 Oct 2016 13:23:29 -0400 (EDT)
+Date: Tue, 18 Oct 2016 13:23:29 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20161018172329.GJ2494@denix.org>
+References: <20160811034947.GW8521@denix.org>
 MIME-Version: 1.0
-Received: by 10.31.120.78 with HTTP; Tue, 18 Oct 2016 08:24:14 -0700 (PDT)
-In-Reply-To: <1476803797-18279-1-git-send-email-ting.liu@nxp.com>
-References: <1476803797-18279-1-git-send-email-ting.liu@nxp.com>
-Date: Tue, 18 Oct 2016 13:24:14 -0200
-X-Gmail-Original-Message-ID: <CAP9ODKqtXnW9D8LqeCxfmVWcx63xiEM=DRK9dt6pT_Eq0iSpKw@mail.gmail.com>
-Message-ID: <CAP9ODKqtXnW9D8LqeCxfmVWcx63xiEM=DRK9dt6pT_Eq0iSpKw@mail.gmail.com>
-To: Ting Liu <ting.liu@nxp.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] xterm: use ${libdir} to avoid installed-vs-shipped error on ppc64
+In-Reply-To: <20160811034947.GW8521@denix.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [meta-qt5] Latest Qt5 5.6.1+ update breaks qtwayland?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,36 +42,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2016 15:24:16 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 18 Oct 2016 17:23:34 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tue, Oct 18, 2016 at 1:16 PM,  <ting.liu@nxp.com> wrote:
-> From: Ting Liu <ting.liu@nxp.com>
->
-> xterm installs files into PREFIX/lib/X11/app-defaults by default.
-> This leads to QA issue on ppc64 which defines libdir as /usr/lib64:
-> ERROR: QA Issue: xterm: Files/directories were installed but not shipped in any package:
->   /usr/lib
->   /usr/lib/X11
->   /usr/lib/X11/app-defaults
->   /usr/lib/X11/app-defaults/UXTerm
->   /usr/lib/X11/app-defaults/KOI8RXTerm-color
->   /usr/lib/X11/app-defaults/XTerm-color
->   /usr/lib/X11/app-defaults/UXTerm-color
->   /usr/lib/X11/app-defaults/KOI8RXTerm
->   /usr/lib/X11/app-defaults/XTerm
->
-> Fix it by passing --with-app-defaults=${libdir}/X11/app-defaults to configure.
->
-> Signed-off-by: Ting Liu <ting.liu@nxp.com>
+On Wed, Aug 10, 2016 at 11:49:47PM -0400, Denys Dmytriyenko wrote:
+> Has anyone seen this:
+> 
+> git/src/client/qwaylandintegration_p.h:91:29: error: 'QPlatformAccessibility* QtWaylandClient::QWaylandIntegration::accessibility() const' marked 'override', but does not override
+> |      QPlatformAccessibility *accessibility() const Q_DECL_OVERRIDE;
+> 
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
-
-Armin/Martin: this is an important fix as ppc64 machines are currently
-broken. Please apply this onto master and morty branches.
+Ping on this one. Anyone else is seeing this? Is it C++11 specific? I'm using 
+gcc-5.3 from Linaro...
 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Denys
 
