@@ -1,35 +1,36 @@
 Return-Path: <denis@denix.org>
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id EB25E719AA
+	by mail.openembedded.org (Postfix) with ESMTP id 4D16A60766
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 19:44:01 +0000 (UTC)
+	Tue, 18 Oct 2016 19:44:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 0C061208EE
+	by mailout4.zoneedit.com (Postfix) with ESMTP id A3D4C208EE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 19:44:03 +0000 (UTC)
+	Tue, 18 Oct 2016 19:44:38 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id olof3_IGwGrf
+	port 10024) with ESMTP id J6IwUKP4Wkpi
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 19:44:02 +0000 (UTC)
+	Tue, 18 Oct 2016 19:44:38 +0000 (UTC)
 Received: from gandalf.denix.org (pool-100-15-106-107.washdc.fios.verizon.net
 	[100.15.106.107])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D05832001A
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8F0872001A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 19:44:02 +0000 (UTC)
+	Tue, 18 Oct 2016 19:44:38 +0000 (UTC)
 Received: by gandalf.denix.org (Postfix, from userid 1000)
-	id 25DD1162175; Tue, 18 Oct 2016 15:44:02 -0400 (EDT)
-Date: Tue, 18 Oct 2016 15:44:02 -0400
+	id 3D656162175; Tue, 18 Oct 2016 15:44:38 -0400 (EDT)
+Date: Tue, 18 Oct 2016 15:44:38 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161018194402.GL2494@denix.org>
-References: <1474790089-17176-1-git-send-email-dachaac@gmail.com>
+Message-ID: <20161018194438.GM2494@denix.org>
+References: <20160811034947.GW8521@denix.org> <20161018172329.GJ2494@denix.org>
+	<01175d17-569e-9507-ae81-20c16aa76ece@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1474790089-17176-1-git-send-email-dachaac@gmail.com>
+In-Reply-To: <01175d17-569e-9507-ae81-20c16aa76ece@gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [meta-qt5][krogoth][PATCH] qtwayland: Fix building of QWaylandIntegration if some Qt5 features are disabled.
+Subject: Re: [meta-qt5] Latest Qt5 5.6.1+ update breaks qtwayland?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,229 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Oct 2016 19:44:02 -0000
+X-List-Received-Date: Tue, 18 Oct 2016 19:44:38 -0000
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
-On Sun, Sep 25, 2016 at 10:54:49AM +0300, Vesa J‰‰skel‰inen wrote:
-> QPlatformIntegration's interface methods are disabled based on QT_NO_OPENGL,
-> QT_NO_CLIPBOARD, QT_NO_DRAGANDDROP, QT_NO_ACCESSIBILITY and
-> QT_NO_SESSIONMANAGER, these has to be taken into account when compiling
-> QtWayland.
+On Tue, Oct 18, 2016 at 09:27:23PM +0300, Vesa J‰‰skel‰inen wrote:
+> On 18/10/2016 20.23, Denys Dmytriyenko wrote:
 > 
-> Signed-off-by: Vesa J‰‰skel‰inen <dachaac@gmail.com>
+> >On Wed, Aug 10, 2016 at 11:49:47PM -0400, Denys Dmytriyenko wrote:
+> >>Has anyone seen this:
+> >>
+> >>git/src/client/qwaylandintegration_p.h:91:29: error: 'QPlatformAccessibility* QtWaylandClient::QWaylandIntegration::accessibility() const' marked 'override', but does not override
+> >>|      QPlatformAccessibility *accessibility() const Q_DECL_OVERRIDE;
+> >>
+> >Ping on this one. Anyone else is seeing this? Is it C++11 specific? I'm using
+> >gcc-5.3 from Linaro...
+> >
+> Try the patch I sent earlier to this mailing list:
+> http://lists.openembedded.org/pipermail/openembedded-devel/2016-September/109281.html
+> 
+> FYI -- filed the bug report for this:
+> https://bugreports.qt.io/browse/QTBUG-56192
 
-Tested-by: Denys Dmytriyenko <denys@ti.com>
-
-Resolves the build issue for me on krogoth and Qt 5.6.1
-
-I also forward-ported this patch to master and Qt 5.7.0 and submitted it 
-separately.
+Thanks! I was able to validate it. Also ported it to master.
 
 -- 
 Denys
-
-
-> ---
->  recipes-qt/qt5/qtwayland-native_git.bb             |   1 +
->  ...g-of-QWaylandIntegration-if-some-Qt5-feat.patch | 156 +++++++++++++++++++++
->  recipes-qt/qt5/qtwayland_git.bb                    |   1 +
->  3 files changed, 158 insertions(+)
->  create mode 100644 recipes-qt/qt5/qtwayland/0001-Fix-building-of-QWaylandIntegration-if-some-Qt5-feat.patch
-> 
-> diff --git a/recipes-qt/qt5/qtwayland-native_git.bb b/recipes-qt/qt5/qtwayland-native_git.bb
-> index 8fc1862..18477b0 100644
-> --- a/recipes-qt/qt5/qtwayland-native_git.bb
-> +++ b/recipes-qt/qt5/qtwayland-native_git.bb
-> @@ -15,6 +15,7 @@ DEPENDS = "qtbase-native wayland-native"
->  
->  SRC_URI += " \
->      file://0001-Install-the-qtwaylandscanner-tool-to-the-native-side.patch \
-> +    file://0001-Fix-building-of-QWaylandIntegration-if-some-Qt5-feat.patch \
->  "
->  
->  do_configure() {
-> diff --git a/recipes-qt/qt5/qtwayland/0001-Fix-building-of-QWaylandIntegration-if-some-Qt5-feat.patch b/recipes-qt/qt5/qtwayland/0001-Fix-building-of-QWaylandIntegration-if-some-Qt5-feat.patch
-> new file mode 100644
-> index 0000000..d173e67
-> --- /dev/null
-> +++ b/recipes-qt/qt5/qtwayland/0001-Fix-building-of-QWaylandIntegration-if-some-Qt5-feat.patch
-> @@ -0,0 +1,156 @@
-> +From de85e1c1ee76be845a21b441d9e4ea12a30d84c7 Mon Sep 17 00:00:00 2001
-> +From: =?UTF-8?q?Vesa=20J=C3=A4=C3=A4skel=C3=A4inen?= <dachaac@gmail.com>
-> +Date: Sun, 18 Sep 2016 11:51:59 +0300
-> +Subject: [PATCH] Fix building of QWaylandIntegration if some Qt5 features are
-> + disabled.
-> +
-> +QPlatformIntegration's interface methods are disabled based on QT_NO_OPENGL,
-> +QT_NO_CLIPBOARD, QT_NO_DRAGANDDROP, QT_NO_ACCESSIBILITY and
-> +QT_NO_SESSIONMANAGER, these has to be taken into account when compiling
-> +QtWayland.
-> +---
-> + src/client/qwaylandintegration.cpp | 21 ++++++++++++++++++---
-> + src/client/qwaylandintegration_p.h | 12 ++++++++++++
-> + 2 files changed, 30 insertions(+), 3 deletions(-)
-> +
-> +diff --git a/src/client/qwaylandintegration.cpp b/src/client/qwaylandintegration.cpp
-> +index 39fff53..481e3d6 100644
-> +--- a/src/client/qwaylandintegration.cpp
-> ++++ b/src/client/qwaylandintegration.cpp
-> +@@ -39,7 +39,9 @@
-> + #include "qwaylandinputcontext_p.h"
-> + #include "qwaylandshmbackingstore_p.h"
-> + #include "qwaylandnativeinterface_p.h"
-> ++#ifndef QT_NO_CLIPBOARD
-> + #include "qwaylandclipboard_p.h"
-> ++#endif
-> + #include "qwaylanddnd_p.h"
-> + #include "qwaylandwindowmanagerintegration_p.h"
-> + #include "qwaylandscreen_p.h"
-> +@@ -57,7 +59,9 @@
-> + #include <QSocketNotifier>
-> + 
-> + #include <qpa/qplatforminputcontextfactory_p.h>
-> ++#ifndef QT_NO_ACCESSIBILITY
-> + #include <qpa/qplatformaccessibility.h>
-> ++#endif
-> + #include <qpa/qplatforminputcontext.h>
-> + 
-> + #include "qwaylandhardwareintegration_p.h"
-> +@@ -117,8 +121,6 @@ QWaylandIntegration::QWaylandIntegration()
-> +     , mNativeInterface(new QWaylandNativeInterface(this))
-> + #ifndef QT_NO_ACCESSIBILITY
-> +     , mAccessibility(new QPlatformAccessibility())
-> +-#else
-> +-    , mAccessibility(0)
-> + #endif
-> +     , mClientBufferIntegrationInitialized(false)
-> +     , mServerBufferIntegrationInitialized(false)
-> +@@ -126,9 +128,12 @@ QWaylandIntegration::QWaylandIntegration()
-> + {
-> +     initializeInputDeviceIntegration();
-> +     mDisplay = new QWaylandDisplay(this);
-> ++#ifndef QT_NO_CLIPBOARD
-> +     mClipboard = new QWaylandClipboard(mDisplay);
-> ++#endif
-> ++#ifndef QT_NO_DRAGANDDROP
-> +     mDrag = new QWaylandDrag(mDisplay);
-> +-
-> ++#endif
-> +     QString icStr = QPlatformInputContextFactory::requested();
-> +     icStr.isNull() ? mInputContext.reset(new QWaylandInputContext(mDisplay))
-> +                    : mInputContext.reset(QPlatformInputContextFactory::create(icStr));
-> +@@ -136,8 +141,12 @@ QWaylandIntegration::QWaylandIntegration()
-> + 
-> + QWaylandIntegration::~QWaylandIntegration()
-> + {
-> ++#ifndef QT_NO_DRAGANDDROP
-> +     delete mDrag;
-> ++#endif
-> ++#ifndef QT_NO_CLIPBOARD
-> +     delete mClipboard;
-> ++#endif
-> + #ifndef QT_NO_ACCESSIBILITY
-> +     delete mAccessibility;
-> + #endif
-> +@@ -213,15 +222,19 @@ QPlatformFontDatabase *QWaylandIntegration::fontDatabase() const
-> +     return mFontDb;
-> + }
-> + 
-> ++#ifndef QT_NO_CLIPBOARD
-> + QPlatformClipboard *QWaylandIntegration::clipboard() const
-> + {
-> +     return mClipboard;
-> + }
-> ++#endif
-> + 
-> ++#ifndef QT_NO_DRAGANDDROP
-> + QPlatformDrag *QWaylandIntegration::drag() const
-> + {
-> +     return mDrag;
-> + }
-> ++#endif
-> + 
-> + QPlatformInputContext *QWaylandIntegration::inputContext() const
-> + {
-> +@@ -243,10 +256,12 @@ QVariant QWaylandIntegration::styleHint(StyleHint hint) const
-> +     return QPlatformIntegration::styleHint(hint);
-> + }
-> + 
-> ++#ifndef QT_NO_ACCESSIBILITY
-> + QPlatformAccessibility *QWaylandIntegration::accessibility() const
-> + {
-> +     return mAccessibility;
-> + }
-> ++#endif
-> + 
-> + QPlatformServices *QWaylandIntegration::services() const
-> + {
-> +diff --git a/src/client/qwaylandintegration_p.h b/src/client/qwaylandintegration_p.h
-> +index 987d805..b50ad95 100644
-> +--- a/src/client/qwaylandintegration_p.h
-> ++++ b/src/client/qwaylandintegration_p.h
-> +@@ -80,15 +80,21 @@ public:
-> + 
-> +     QPlatformNativeInterface *nativeInterface() const Q_DECL_OVERRIDE;
-> + 
-> ++#ifndef QT_NO_CLIPBOARD
-> +     QPlatformClipboard *clipboard() const Q_DECL_OVERRIDE;
-> ++#endif
-> + 
-> ++#ifndef QT_NO_DRAGANDDROP
-> +     QPlatformDrag *drag() const Q_DECL_OVERRIDE;
-> ++#endif
-> + 
-> +     QPlatformInputContext *inputContext() const Q_DECL_OVERRIDE;
-> + 
-> +     QVariant styleHint(StyleHint hint) const Q_DECL_OVERRIDE;
-> + 
-> ++#ifndef QT_NO_ACCESSIBILITY
-> +     QPlatformAccessibility *accessibility() const Q_DECL_OVERRIDE;
-> ++#endif
-> + 
-> +     QPlatformServices *services() const Q_DECL_OVERRIDE;
-> + 
-> +@@ -117,12 +123,18 @@ private:
-> +     void initializeInputDeviceIntegration();
-> + 
-> +     QPlatformFontDatabase *mFontDb;
-> ++#ifndef QT_NO_CLIPBOARD
-> +     QPlatformClipboard *mClipboard;
-> ++#endif
-> ++#ifndef QT_NO_DRAGANDDROP
-> +     QPlatformDrag *mDrag;
-> ++#endif
-> +     QWaylandDisplay *mDisplay;
-> +     QPlatformNativeInterface *mNativeInterface;
-> +     QScopedPointer<QPlatformInputContext> mInputContext;
-> ++#ifndef QT_NO_ACCESSIBILITY
-> +     QPlatformAccessibility *mAccessibility;
-> ++#endif
-> +     bool mClientBufferIntegrationInitialized;
-> +     bool mServerBufferIntegrationInitialized;
-> +     bool mShellIntegrationInitialized;
-> +-- 
-> +2.7.4
-> +
-> diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
-> index 3153dc0..f6c4903 100644
-> --- a/recipes-qt/qt5/qtwayland_git.bb
-> +++ b/recipes-qt/qt5/qtwayland_git.bb
-> @@ -34,6 +34,7 @@ FILES_${PN}-plugins-dbg += " \
->  
->  SRC_URI += " \
->      file://0001-examples-wayland-include-server-buffer-only-when-bui.patch \
-> +    file://0001-Fix-building-of-QWaylandIntegration-if-some-Qt5-feat.patch \
->  "
->  
->  SRCREV = "d8b4bef3ddff327598027c8f94a61e3d0b61a2dd"
-> -- 
-> 2.7.4
-> 
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
