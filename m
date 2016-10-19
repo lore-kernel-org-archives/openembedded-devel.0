@@ -1,48 +1,45 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id C483A719A1
+Received: from mail-ua0-f193.google.com (mail-ua0-f193.google.com
+	[209.85.217.193])
+	by mail.openembedded.org (Postfix) with ESMTP id C64D571B07
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2016 05:38:52 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id s8so1421896pfj.2
+	Wed, 19 Oct 2016 05:44:39 +0000 (UTC)
+Received: by mail-ua0-f193.google.com with SMTP id 38so162981uaj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 22:38:54 -0700 (PDT)
+	Tue, 18 Oct 2016 22:44:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Jmzy+ULoSePJuaJXTSLOzXTRPjQqk8NDKYkHn6LES3c=;
-	b=EN2JZvUomKh4DN2roJIVEQ1eidiOheGXqZKjuXhJmrXzL7Q3hom3ZTaLv3TkFJde0D
-	h30FHuWpKO6BXZOctUuQlkeGxOd24IejnI7gkfbpmbw72ZoT2VFuVt4543AfdOKh0m/+
-	yhaBmB+F7x1JY9v8lx51EyPdpUXb9CqzrMFpt6IUPIQ4DmzlXhuV/BT7O8cWr3w+z3DP
-	Hw02VtSF8UJmZvfC/37Jnc/Cf7yTA7XVi3YGRydJ8BLayPtd9kXcY1y6Qap2IxaBd8w+
-	+mgsxEANlnfQ9pmlhOtjSsBRc/GmxM3McfkWTdVv6CHi4HTk4kJWJ856lzMm0CWuIr3z
-	75ig==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=StXUcQORxP5bYjedsraszaMEfdqTPVnewglHz7jzPE4=;
+	b=xumMszx4oQjhyrJjMp3ZFmA+hswSvmASM8NTlkVdDCi4ZbaHcHNvhXq5j1WAR/ZMsf
+	6fopg0JZsvygkuvNMnkzoj+xn/ymB7cYo8lzvdX+WSahVRL6z8A1H2XwlWhNVeTgkNB9
+	PuaV+NCGkCn3HC75UxQOoReIhTkWXk6Wh0KyKF3s5JITkU+BzORslc1Qt9ijmdNxofh9
+	ExE0Jktlepz0hJGYObkLrLSd0d4kWC8sakxLmwiVwCb94rRZK9imIjYE7meyyxlfohtm
+	QC961bB4ASPL9GokbTwSiN9TMkTtxtzKAw3gvMpzyQot6rV9KKMycE4GBbyS9g1VjxsG
+	Pabw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=Jmzy+ULoSePJuaJXTSLOzXTRPjQqk8NDKYkHn6LES3c=;
-	b=DQUCmrMY7Kt1nMcPueJhXVw1j8108pSzud90/S2KHdEXObIitgh06mXoqCIEe9683y
-	2GcdTYOPN2is/trd/mgujIsB2RzK01+6ffapyMPqYKOGwHgWtD4tKt05uIdtxrfJA77l
-	vpxm4GAAKng+G/fKQOWMjA83vLUwdwydhvVExWY+lHeyX/7qNWBTNqlYlZ7zUSUdK6JG
-	hdl3MqqZyfG+B4qlM9huqc5tYbVNKh7x2yrB0jR9DMSxasMimxVmf+HcfzTTS3HU9/SC
-	Lb5DGkeJheyn4fORa7aBd4l1oDYXfN6898MA7pohs3hqBNzivJEpMsJ0E5sY8UFeP4Kj
-	Ru4w==
-X-Gm-Message-State: AA6/9RnoInIq4/w9C0nJCXj9DRHkPRvqw1CIJWJP/iY2KmONnbrrmP8r/NLqez6Jn86m9g==
-X-Received: by 10.99.149.28 with SMTP id p28mr6349457pgd.150.1476855534557;
-	Tue, 18 Oct 2016 22:38:54 -0700 (PDT)
-Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
-	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	qd12sm60099564pab.22.2016.10.18.22.38.53
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Oct 2016 22:38:54 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=StXUcQORxP5bYjedsraszaMEfdqTPVnewglHz7jzPE4=;
+	b=BUD5nkD7jKBGN56r3qAjwMnPZaDFY/moQg+bWOKpoqhhtjWo6Go+0fiGQrTjpfBc3G
+	XvbZmY7m2Y+0opQxgvzTGPs9lTP2mY5WXGYMRxziKC+OYDBeesDtBor7IXIRV/6W1u00
+	72U6/nkCA4zCj5yZcvhYaZ5sfM9sc6XNBhHvI7BaV26kDur0i29O9nmFzZwV55LQmgAl
+	wrVroP7h/1t6r7U8tPSb2ggpi+6tsg86LscoxgwhInJzi1deUw5DDsHa9S3f8x+XOO7M
+	yVjf08ylypZ7ZIRWaoV9+xaHelBQIxAxu91CVDLGYcN/xr0WQUAdtxs9SmRaJlsE6rf2
+	1n8w==
+X-Gm-Message-State: AA6/9Rlbxgpwt1/7TuzYurg2WZQnk4cKdQlqFaFb+0LB0mSXSZxWWCMeZjPoTVZg72svd8xokFn8T0U+W85Stw==
+X-Received: by 10.176.2.232 with SMTP id 95mr959404uah.32.1476855880042; Tue,
+	18 Oct 2016 22:44:40 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.176.86.206 with HTTP; Tue, 18 Oct 2016 22:44:09 -0700 (PDT)
+In-Reply-To: <1476778230-105764-2-git-send-email-herve.jourdain@neuf.fr>
+References: <1476778230-105764-1-git-send-email-herve.jourdain@neuf.fr>
+	<1476778230-105764-2-git-send-email-herve.jourdain@neuf.fr>
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Oct 2016 22:38:34 -0700
-Message-Id: <20161019053834.11523-16-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.10.0
-In-Reply-To: <20161019053834.11523-1-raj.khem@gmail.com>
-References: <20161019053834.11523-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 16/16] mg: Update to 20161005
+Date: Tue, 18 Oct 2016 22:44:09 -0700
+Message-ID: <CAMKF1sp5KNDqbgzvqKp0D3JHFMTdqc_ovbMRoD1ve30z5upshw@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/1] v4l-utils: add support for "native" build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,61 +52,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Oct 2016 05:38:52 -0000
+X-List-Received-Date: Wed, 19 Oct 2016 05:44:40 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../mg/{mg_20110905.bb => mg_20161005.bb}            | 20 +++++++++-----------
- 1 file changed, 9 insertions(+), 11 deletions(-)
- rename meta-oe/recipes-support/mg/{mg_20110905.bb => mg_20161005.bb} (59%)
+On Tue, Oct 18, 2016 at 1:10 AM, Herve Jourdain <herve.jourdain@neuf.fr> wrote:
+> Signed-off-by: Herve Jourdain <herve.jourdain@neuf.fr>
+> ---
+>  meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb
+> index 6148695..b9732fe 100644
+> --- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb
+> +++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb
+> @@ -43,3 +43,6 @@ FILES_libv4l-dbg += "${libdir}/libv4l/.debug ${libdir}/libv4l/plugins/.debug"
+>  FILES_libv4l-dev += "${includedir} ${libdir}/pkgconfig \
+>                       ${libdir}/libv4l*${SOLIBSDEV} ${libdir}/*.la \
+>                       ${libdir}/v4l*${SOLIBSDEV} ${libdir}/libv4l/*.la ${libdir}/libv4l/plugins/*.la"
+> +
+> +PARALLEL_MAKE_class-native = ""
 
-diff --git a/meta-oe/recipes-support/mg/mg_20110905.bb b/meta-oe/recipes-support/mg/mg_20161005.bb
-similarity index 59%
-rename from meta-oe/recipes-support/mg/mg_20110905.bb
-rename to meta-oe/recipes-support/mg/mg_20161005.bb
-index 95aeb62..f9ceb46 100644
---- a/meta-oe/recipes-support/mg/mg_20110905.bb
-+++ b/meta-oe/recipes-support/mg/mg_20161005.bb
-@@ -1,15 +1,13 @@
- SUMMARY = "A portable version of the mg maintained by the OpenBSD team"
- HOMEPAGE = "http://homepage.boetes.org/software/mg/"
- LICENSE = "PD"
--LIC_FILES_CHKSUM = "file://version.c;md5=811e1b67a5cd60c12b218a2b7c1adbf2"
--DEPENDS = "ncurses"
-+LIC_FILES_CHKSUM = "file://version.c;md5=1895eb37bf6bd79cdc5c89d8166fabfb"
-+DEPENDS = "ncurses libbsd"
- SECTION = "console/editors"
- 
--SRC_URI = "http://homepage.boetes.org/software/mg/mg-${PV}.tar.gz \
--           file://remove_ncurses_check.patch"
--
--SRC_URI[md5sum] = "2de35316fa8ebafe6003efaae70b723e"
--SRC_URI[sha256sum] = "1cd37d7e6a3eecc890a5718c38b8f38495057ba93856762a756ccee2f9618229"
-+SRC_URI = "http://homepage.boetes.org/software/mg/mg-${PV}.tar.gz"
-+SRC_URI[md5sum] = "fc6faeeee7308bb46f3512b75867ed51"
-+SRC_URI[sha256sum] = "b7fcb5136a6783ca24c8463ab0852fc1f26bdb2bb1c24759b2c51ccfc46c5e61"
- 
- # CFLAGS isn't in EXTRA_OEMAKE, as the makefile picks it up via ?=
- EXTRA_OEMAKE = "\
-@@ -21,13 +19,13 @@ EXTRA_OEMAKE = "\
-     'libdir=${libdir}' \
-     'includedir=${includedir}' \
-     'mandir=${mandir}' \
-+    'PKG_CONFIG=pkg-config' \
- "
- 
--do_configure () {
--    sed -i Makefile.in -e 's,^prefix=.*,prefix=${prefix},'
--    ./configure
--}
-+CFLAGS += "-I${STAGING_INCDIR}/bsd"
- 
- do_install () {
-     oe_runmake install DESTDIR=${D}
- }
-+
-+inherit pkgconfig
--- 
-2.10.0
+you seem to have root casued it. Then why not fix the Makefile instead
 
+> +BBCLASSEXTEND = "native"
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
