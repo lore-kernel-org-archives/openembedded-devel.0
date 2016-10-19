@@ -1,44 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-vk0-f68.google.com (mail-vk0-f68.google.com
-	[209.85.213.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 4891A7197B
+Return-Path: <Dengke.Du@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A7B171AAC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2016 01:22:29 +0000 (UTC)
-Received: by mail-vk0-f68.google.com with SMTP id b186so641125vkb.3
+	Wed, 19 Oct 2016 05:03:47 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u9J53j9m011820
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 18:22:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=vjvPu4uvNAslzKdbKCfs1AoaELSp1bYBvtc3DiE/LkY=;
-	b=MOIaSa+QDPnShsawJZQ5j14y+ZwOZJbcBLNmnTM3WTXOF5QFpHzw1acQWoFi3kPpxV
-	a7DqYl9JBV+ISCJxUIo6M28mD0ZZQoZ8wwhCpz7x13PVVZjXVBoJ4uLzlbflDGDR3X6S
-	1OvHmNNbOwvC1IaLMV8XRpRwVpYGLJ5aVvpfawYRLYZChcHmz9cniWJgX5yyDgBRGUYf
-	Sl4MLzOdDEkOBoSKilIm/XAm2eVuwMKZ3HWS2XM9qrrYbP69YiaSnutpq/9BzBCNugtH
-	/P87rzu8vOG3LC3Z0w2UVFU//rTlYQF/aIYyer0NmVxYg9XPkx78pbMzZ0G/rUCX0sYX
-	sAew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=vjvPu4uvNAslzKdbKCfs1AoaELSp1bYBvtc3DiE/LkY=;
-	b=WPiKLTBIvPG2+Aa4tiBOtltI+hc2kAAojMRQlE++R2qktfgR8LbXDAJEyGbcncp9zZ
-	g/VUW19DMMWVBvRWravdQTyYzUlwbI2OCtm4nw5//uLFJs9O/GvAFfl2fY+ZRJoS19WC
-	VmdqFFD6lzQjsIos1xsjTnv9xnTsEIVooJpwCIKbLLf09hcmCrBi6H1hcC92F0KuAvpK
-	XdxM5IsOMSdvltykgWMfJXFDMkuDdECSl7ip+Xmi53I6W8005EwLtUYH7+F0rLYMXDj8
-	P8/HXq48BtaDAVk9yS2TcU0hXy0oTC6kApqwyiabNVUfQCe16dXCA3B51shzZA9XBKqA
-	+sIw==
-X-Gm-Message-State: AA6/9RlrFMhoygl+jPlSO8iW9gD0/axDqnYd8KkXmmdIfBUUk1BP+dxsRgx7Tyqkzgv+PTyYmvA/b6Mo0uGEjg==
-X-Received: by 10.31.153.17 with SMTP id b17mr3572101vke.84.1476840149662;
-	Tue, 18 Oct 2016 18:22:29 -0700 (PDT)
+	Tue, 18 Oct 2016 22:03:45 -0700
+Received: from pek-lpgtest20.wrs.com (128.224.179.28) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.294.0; Tue, 18 Oct 2016 22:03:44 -0700
+From: Dengke Du <dengke.du@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 19 Oct 2016 13:03:43 +0800
+Message-ID: <1476853423-129811-1-git-send-email-dengke.du@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Received: by 10.176.86.206 with HTTP; Tue, 18 Oct 2016 18:21:59 -0700 (PDT)
-In-Reply-To: <20161018172329.GJ2494@denix.org>
-References: <20160811034947.GW8521@denix.org> <20161018172329.GJ2494@denix.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 18 Oct 2016 18:21:59 -0700
-Message-ID: <CAMKF1so1XtVq2nQ1Ue2v5FtPaTG4Qj0K+LAgSeDEybCPA-8=Kg@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] Latest Qt5 5.6.1+ update breaks qtwayland?
+Subject: [PATCH] libndp: 1.5 -> 1.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,28 +31,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Oct 2016 01:22:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 19 Oct 2016 05:03:52 -0000
+Content-Type: text/plain
 
-On Tue, Oct 18, 2016 at 10:23 AM, Denys Dmytriyenko <denis@denix.org> wrote:
-> On Wed, Aug 10, 2016 at 11:49:47PM -0400, Denys Dmytriyenko wrote:
->> Has anyone seen this:
->>
->> git/src/client/qwaylandintegration_p.h:91:29: error: 'QPlatformAccessibility* QtWaylandClient::QWaylandIntegration::accessibility() const' marked 'override', but does not override
->> |      QPlatformAccessibility *accessibility() const Q_DECL_OVERRIDE;
->>
->
-> Ping on this one. Anyone else is seeing this? Is it C++11 specific? I'm using
-> gcc-5.3 from Linaro...
+Signed-off-by: Dengke Du <dengke.du@windriver.com>
+---
+ meta-oe/recipes-connectivity/libndp/libndp_1.5.bb | 10 ----------
+ meta-oe/recipes-connectivity/libndp/libndp_1.6.bb | 10 ++++++++++
+ 2 files changed, 10 insertions(+), 10 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/libndp/libndp_1.5.bb
+ create mode 100644 meta-oe/recipes-connectivity/libndp/libndp_1.6.bb
 
-are you using -std=c++11 to compile it ?
+diff --git a/meta-oe/recipes-connectivity/libndp/libndp_1.5.bb b/meta-oe/recipes-connectivity/libndp/libndp_1.5.bb
+deleted file mode 100644
+index 8f1d1ff..0000000
+--- a/meta-oe/recipes-connectivity/libndp/libndp_1.5.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-SUMMARY = "Library for IPv6 Neighbor Discovery Protocol"
+-
+-LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+-
+-SRC_URI = "http://libndp.org/files/${BPN}-${PV}.tar.gz"
+-SRC_URI[md5sum] = "beb82e8d75d8382d1b7c0bb0f68be429"
+-SRC_URI[sha256sum] = "faf116ab70ce9514ec4e8573556025debea08f606e7f38b616de1f26e120c795"
+-
+-inherit autotools
+diff --git a/meta-oe/recipes-connectivity/libndp/libndp_1.6.bb b/meta-oe/recipes-connectivity/libndp/libndp_1.6.bb
+new file mode 100644
+index 0000000..a35dff8
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/libndp/libndp_1.6.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "Library for IPv6 Neighbor Discovery Protocol"
++
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
++
++SRC_URI = "http://libndp.org/files/${BPN}-${PV}.tar.gz"
++SRC_URI[md5sum] = "1e54d26bcb4a4110bc3f90c5dd04f1a7"
++SRC_URI[sha256sum] = "0c7dfa84e013bd5e569ef2c6292a6f72cfaf14f4ff77a77425e52edc33ffac0e"
++
++inherit autotools
+-- 
+2.7.4
 
->
-> --
-> Denys
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
