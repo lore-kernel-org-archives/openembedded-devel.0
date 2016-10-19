@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
 	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 50C6771C36
+	by mail.openembedded.org (Postfix) with ESMTP id 0FF8F71C62
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2016 05:38:51 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id i85so1426893pfa.0
+	Wed, 19 Oct 2016 05:38:52 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id 128so1429623pfz.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 22:38:53 -0700 (PDT)
+	Tue, 18 Oct 2016 22:38:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=dW4O9viK6GaLaSENMgnqB4TfEVEEtkXNiW7VXBm0y6U=;
-	b=OjP6jP7hp+bYXrFEhdqFNcb5r/5dMIZ/vYmNtzOuYmwbPWQisAWaVSFK2ywLkgY5KW
-	AzG9lJjhlKt27nPgdF6hNs8Q1BkRVEHn22TK+S5mhJlayjJ/2NnLsxuCEGykeuagoHuA
-	b9U2/QPhqHV3b3fpzswl4NA6DgRTZfh+JL16sNQmGCXq9zfJ7Jx5fDsrL/pVdGnATc/A
-	gwQdqjZ7TF8oVXX14oYq1narFLy7kDuSrG/cwm9UsRRaZHhJ7V6DkgSajnLCJugbHAWX
-	3YfscWgI+ZkZkHpjquvnrXzcSwfTZ9e6AsPdyReV3SH72i7Fi2KLCowxmBUYy1lW3dU8
-	Fffg==
+	bh=UzhVC/kLZuD5icuw9tUoBUN+lnneNpUck783+Rpq/1I=;
+	b=JN4vW1Ducxsak5pX2D0Y+m/USzlnQAhof8ikQ7yzPrTs94+VKv6G+tfXj7B/qtp6pX
+	UKMJQ9plikQBXkoavDtH1HX9YfLBuNUjPoZJGhBdVDETTMv0xw7FDu6vgP53OtSwEh7w
+	odyDeMFio5E9cuTZWl/l11FFFYprKdkapmwjzu8amBaivpwtFyr3WbQKaDWn3qjCh1zx
+	9bea/Up+KrWI3yROzOngKLfmn+0uNxI9gavANoJOgfuY5CHT6m2pd4srzzV17NMUDfOs
+	EsWizQ8CqLXHPmDdfsXcetDDQ91LAodziXgoXBzWJAgUthZKeBxzM1aa63P4uNB0mHDn
+	GuyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=dW4O9viK6GaLaSENMgnqB4TfEVEEtkXNiW7VXBm0y6U=;
-	b=VSIezEm5gIBttQXDbIkdaHSDTdr4yqaKQ7lIIa5a/lzVSJGJKVNRBCwEu0xTrU50jM
-	OThcqGNlQaqpBN3DY3zjq2VhC0zEAacAOXYn2aHnGOK3mR70JnR+2T36ifiCmZagRYz2
-	/Q7AAYBsUXtR5zuC8f/69/KRpL8isidXfeyBKQ8dG8ZC1g1CADjwTKcBwse2UNxgCK+p
-	pnZ3zo2lokl3uN7ysPYJYjirNoUm9WN0sMvAlyNYp7M+eXR8ZvMXTyWUoY+ck9KbVNHE
-	BNY0FHTEI96ltXNnlfYL6NbQXCBkWq2ciYzJJ7kW7ZU4552mCPulxJ0MZO8Cz/pMRCzt
-	cwlw==
-X-Gm-Message-State: AA6/9RkyxTaoHPS+lw4V9mBtcWPWesNYmt0QJgvOMW2ofvEnppZ4tEjM8XNJC3E8gkfLyw==
-X-Received: by 10.99.153.17 with SMTP id d17mr6484441pge.122.1476855533029;
+	bh=UzhVC/kLZuD5icuw9tUoBUN+lnneNpUck783+Rpq/1I=;
+	b=cgTfW6AhOzGfZsxwpzS6FibTJzBBkw53po/DSxXFzKvtrBgXnTJ2QXvdX3ZLPTpNoa
+	NDA0A1e8hwnfcseok/7Gy9XPL0T0jf+seaxfm+EkJt5eEYifIdpwunH4+erc5qEmhT2R
+	Yyo/R/Fy9gbLAAt9Y3u1nS/HCfuoJYl2onFP0x4jqXNB6MEbXIW4GhQ4qnuP/LAZ5adF
+	Q/9D2025yZnrj4ZpeEJE7ftkRP3qZ0EjPEJ1jmHIC5gPkXNaeEsZ/MGAbK/iKodST5hp
+	hYMwxMUw3YkwbwXj3lj+uE56V6Eu878df2CgrvpcE7Cb91LwOPNXQgZAbI0jgF8h95Cm
+	08Hw==
+X-Gm-Message-State: AA6/9Rnjkm7VK+esEzhX3BszkQg/nmw+52FWz2yzvtgwh1AcKGBfavoSCRus5JkFk9j7nQ==
+X-Received: by 10.98.159.130 with SMTP id v2mr7912282pfk.48.1476855533803;
 	Tue, 18 Oct 2016 22:38:53 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	qd12sm60099564pab.22.2016.10.18.22.38.52
+	qd12sm60099564pab.22.2016.10.18.22.38.53
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Oct 2016 22:38:52 -0700 (PDT)
+	Tue, 18 Oct 2016 22:38:53 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Oct 2016 22:38:32 -0700
-Message-Id: <20161019053834.11523-14-raj.khem@gmail.com>
+Date: Tue, 18 Oct 2016 22:38:33 -0700
+Message-Id: <20161019053834.11523-15-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.0
 In-Reply-To: <20161019053834.11523-1-raj.khem@gmail.com>
 References: <20161019053834.11523-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 14/16] fwts: Update to 16.09 release
+Subject: [meta-networking][PATCH 15/16] libmnl, nftables: Update versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,142 +55,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Oct 2016 05:38:51 -0000
+X-List-Received-Date: Wed, 19 Oct 2016 05:38:52 -0000
 
-license change is just year change from 2014 to 2016
-Fix build with clang while here
+libmnl -> 1.0.4
+nftables -> 0.6
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...nstant-logical-operand-warning-with-clang.patch | 81 ++++++++++++++++++++++
- meta-oe/recipes-test/fwts/fwts_git.bb              | 15 ++--
- 2 files changed, 91 insertions(+), 5 deletions(-)
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0001-ignore-constant-logical-operand-warning-with-clang.patch
+ .../recipes-filter/libmnl/{libmnl_1.0.3.bb => libmnl_1.0.4.bb}       | 4 ++--
+ .../recipes-filter/nftables/{nftables_0.5.bb => nftables_0.6.bb}     | 5 ++---
+ 2 files changed, 4 insertions(+), 5 deletions(-)
+ rename meta-networking/recipes-filter/libmnl/{libmnl_1.0.3.bb => libmnl_1.0.4.bb} (78%)
+ rename meta-networking/recipes-filter/nftables/{nftables_0.5.bb => nftables_0.6.bb} (74%)
 
-diff --git a/meta-oe/recipes-test/fwts/fwts/0001-ignore-constant-logical-operand-warning-with-clang.patch b/meta-oe/recipes-test/fwts/fwts/0001-ignore-constant-logical-operand-warning-with-clang.patch
-new file mode 100644
-index 0000000..ccfe580
---- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0001-ignore-constant-logical-operand-warning-with-clang.patch
-@@ -0,0 +1,81 @@
-+From 953cff93c85d3cfd5cbcac56e14443dc5f6e5fbd Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 19 Oct 2016 01:57:16 +0000
-+Subject: [PATCH] ignore constant-logical-operand warning with clang
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/uefi/uefirtauthvar/uefirtauthvar.c | 5 +++++
-+ 1 file changed, 5 insertions(+)
-+
-+Index: git/src/uefi/uefirtauthvar/uefirtauthvar.c
-+===================================================================
-+--- git.orig/src/uefi/uefirtauthvar/uefirtauthvar.c
-++++ git/src/uefi/uefirtauthvar/uefirtauthvar.c
-+@@ -142,6 +142,9 @@ static int uefirtauthvar_deinit(fwts_fra
-+ 	return FWTS_OK;
-+ }
-+ 
-++#pragma clang diagnostic push
-++#pragma clang diagnostic ignored "-Wconstant-logical-operand"
-++
-+ static int check_fw_support(fwts_framework *fw, uint64_t status)
-+ {
-+ 	if ((status == EFI_INVALID_PARAMETER) &&
-+@@ -172,6 +175,8 @@ static int check_fw_support(fwts_framewo
-+ 	return FWTS_OK;
-+ }
-+ 
-++#pragma clang diagnostic pop
-++
-+ /*
-+  * Set the created authenticated variable, AuthVarCreate,
-+  * and checking the data size and data.
-+Index: git/src/lib/src/fwts_acpi_tables.c
-+===================================================================
-+--- git.orig/src/lib/src/fwts_acpi_tables.c
-++++ git/src/lib/src/fwts_acpi_tables.c
-+@@ -392,10 +392,14 @@ static int fwts_acpi_handle_fadt(
-+ 	/* Determine FACS addr and load it.
-+ 	 * Will ignore the missing FACS in the hardware-reduced mode.
-+ 	 */
-++#pragma clang diagnostic push
-++#pragma clang diagnostic ignored "-Waddress-of-packed-member"
-++
-+ 	result = fwts_acpi_handle_fadt_tables(fw, fadt,
-+ 			"FACS", "FIRMWARE_CTRL", "X_FIRMWARE_CTRL",
-+ 			&fadt->firmware_control, &fadt->x_firmware_ctrl,
-+ 			provenance);
-++
-+ 	if (result != FWTS_OK) {
-+ 		if ((result == FWTS_NULL_POINTER) &&
-+ 				fwts_acpi_is_reduced_hardware(fadt)) {
-+@@ -414,6 +418,7 @@ static int fwts_acpi_handle_fadt(
-+ 		return FWTS_ERROR;
-+ 	}
-+ 	return FWTS_OK;
-++#pragma clang diagnostic pop
-+ }
-+ 
-+ /*
-+Index: git/src/dmi/dmicheck/dmicheck.c
-+===================================================================
-+--- git.orig/src/dmi/dmicheck/dmicheck.c
-++++ git/src/dmi/dmicheck/dmicheck.c
-+@@ -209,6 +209,8 @@ static const char *uuid_patterns[] = {
-+ 	"0A0A0A0A-0A0A-0A0A-0A0A-0A0A0A0A0A0A",
-+ 	NULL,
-+ };
-++#pragma clang diagnostic push
-++#pragma clang diagnostic ignored "-Wunneeded-internal-declaration"
-+ 
-+ static const fwts_chassis_type_map fwts_dmi_chassis_type[] = {
-+ 	{ "Invalid",		FWTS_SMBIOS_CHASSIS_INVALID },
-+@@ -245,6 +247,7 @@ static const fwts_chassis_type_map fwts_
-+ 	{ "Convertible",	FWTS_SMBIOS_CHASSIS_CONVERTIBLE },
-+ 	{ "Detachable",		FWTS_SMBIOS_CHASSIS_DETACHABLE },
-+ };
-++#pragma clang diagnostic pop
-+ 
-+ /* Remapping table from buggy version numbers to correct values */
-+ static const fwts_dmi_version dmi_versions[] = {
-diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb b/meta-oe/recipes-test/fwts/fwts_git.bb
-index 197fe20..cbf5154 100644
---- a/meta-oe/recipes-test/fwts/fwts_git.bb
-+++ b/meta-oe/recipes-test/fwts/fwts_git.bb
-@@ -3,12 +3,14 @@ DESCRIPTION = "The tool fwts comprises of over fifty tests that are designed to
- HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
+diff --git a/meta-networking/recipes-filter/libmnl/libmnl_1.0.3.bb b/meta-networking/recipes-filter/libmnl/libmnl_1.0.4.bb
+similarity index 78%
+rename from meta-networking/recipes-filter/libmnl/libmnl_1.0.3.bb
+rename to meta-networking/recipes-filter/libmnl/libmnl_1.0.4.bb
+index b3a5f2e..b458799 100644
+--- a/meta-networking/recipes-filter/libmnl/libmnl_1.0.3.bb
++++ b/meta-networking/recipes-filter/libmnl/libmnl_1.0.4.bb
+@@ -7,7 +7,7 @@ LICENSE = "LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
  
- LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=deb8af5388e838d133eaa036f4d1496f"
-+LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd34dcdb9e4db568519"
+ SRC_URI = "http://www.netfilter.org/projects/libmnl/files/libmnl-${PV}.tar.bz2;name=tar"
+-SRC_URI[tar.md5sum] = "7d95fc3bea3365bc03c48e484224f65f"
+-SRC_URI[tar.sha256sum] = "6f14336e9acdbc62c2dc71bbb59ce162e54e9af5c80153e92476c5443fe784de"
++SRC_URI[tar.md5sum] = "be9b4b5328c6da1bda565ac5dffadb2d"
++SRC_URI[tar.sha256sum] = "171f89699f286a5854b72b91d06e8f8e3683064c5901fb09d954a9ab6f551f81"
  
--PV = "14.12.00"
-+PV = "16.09.00"
+ inherit autotools pkgconfig
+diff --git a/meta-networking/recipes-filter/nftables/nftables_0.5.bb b/meta-networking/recipes-filter/nftables/nftables_0.6.bb
+similarity index 74%
+rename from meta-networking/recipes-filter/nftables/nftables_0.5.bb
+rename to meta-networking/recipes-filter/nftables/nftables_0.6.bb
+index 11b5e5a..5dd9362 100644
+--- a/meta-networking/recipes-filter/nftables/nftables_0.5.bb
++++ b/meta-networking/recipes-filter/nftables/nftables_0.6.bb
+@@ -10,8 +10,7 @@ RRECOMMENDS_${PN} += "kernel-module-nf-tables \
+ SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2 \
+            file://fix-to-generate-ntf.8.patch \
+           "
+-
+-SRC_URI[md5sum] = "94bfe1c54bcb9f6ed974835f2fca8069"
+-SRC_URI[sha256sum] = "1fb6dff333d8a4fc347cbbe273bf905a2634b27a8c39df0d3a45d5a3fde10ad6"
++SRC_URI[md5sum] = "fd320e35fdf14b7be795492189b13dae"
++SRC_URI[sha256sum] = "dede62655f1c56f2bc9f9be12d103d930dcef6d5f9e0855854ad9c6f93cd6c2d"
  
--SRCREV = "efc18d16294f492b7f72bba64344b2eed50e6a69"
--SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git"
-+SRCREV = "7fd1834a879f27647b371c18284868c9a54f6474"
-+SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git \
-+           file://0001-ignore-constant-logical-operand-warning-with-clang.patch \
-+           "
- 
- S = "${WORKDIR}/git"
- 
-@@ -16,9 +18,12 @@ DEPENDS = "libpcre json-c glib-2.0"
- 
- inherit autotools-brokensep
- 
--CFLAGS += "-I${STAGING_INCDIR}/json-c -Wno-error=misleading-indentation"
-+CFLAGS += "-I${STAGING_INCDIR}/json-c -Wno-error=unknown-pragmas"
- 
- FILES_${PN} += "${libdir}/fwts/lib*${SOLIBS}"
- FILES_${PN}-dev += "${libdir}/fwts/lib*${SOLIBSDEV} ${libdir}/fwts/lib*.la"
- FILES_${PN}-staticdev += "${libdir}/fwts/lib*a"
- FILES_${PN}-dbg += "${libdir}/fwts/.debug"
-+
-+TOOLCHAIN = "gcc"
-+
+ inherit autotools pkgconfig
 -- 
 2.10.0
 
