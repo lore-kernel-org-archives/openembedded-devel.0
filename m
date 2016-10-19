@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
 	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 384F9719A1
+	by mail.openembedded.org (Postfix) with ESMTP id AA30B719A1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2016 05:38:41 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id s8so1421483pfj.2
+	Wed, 19 Oct 2016 05:38:42 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id r16so1418043pfg.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 22:38:43 -0700 (PDT)
+	Tue, 18 Oct 2016 22:38:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=knpHVP+LvbKMWXX9+QgFmxOKlI0qdsu7Qh7Ud6A1P3s=;
-	b=luWf7ODmCynRXXnQEVIFeO7dTsHqmi2Y38aUVytT0eBkyhVf87X7wKqM1rfisB+doo
-	UidfdTT6nQKKRZ0Tie6LRHVIoNyMUnHGNhVqBJbLMKDnqtd4z6pC/2dzNyuR3kIgOweh
-	jRTyLD6EIfvRnLBDxGRcAl8cZQV9IMRED1pDDwRgMafyheh0Gr0US3FYRjrjWY1qdEYq
-	SezWgoBmSI9ovhVPCY22mj1o5fUR/tx4wIrnhLrJPDkSKngZpHg/3vSKgiOw58gvOlTV
-	Kv/CtUeEptxF4djM59+7wZVknlLSv5YZCVqe1mfO/33PqQs+HAanbCOt1RSsl89j/36L
-	w3Ag==
+	bh=vf2LSnvCu0dD6gcUjKY2J/TY0IcqePuddhxNt9cT86o=;
+	b=eW+0eoa5Rz8QX4yTw+lwR+8f01Ce2gLBuZZ4MFFD2FC67BvOGdBHnmh/hcH15Ctjbh
+	Q1nWngXE15B6rxJrVVf5BNTYbDe0wHJiVIagrSl7g83romdPEVjBX+ZM7H2+SgGxIZxd
+	HZUv1bSvhgwmzttlqsNpZZd3CARP/C1tQDcTJaOvXF7+LA/eGqk47q3C+uuK8PnS11Fc
+	1SQrLB5C5Hh+4MnV9zHb0sM5B4Ter2tog3fZZUiFKJ9McbPv2EfOic9t7jR9X012SyNo
+	nNmzhL7Gj4/t7HP3wNaFoBpzJsTufUMJjR9qsMYY5VeD7RS7optKfHaOeF8OJJvXVtBZ
+	GVQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=knpHVP+LvbKMWXX9+QgFmxOKlI0qdsu7Qh7Ud6A1P3s=;
-	b=RrJsA2ZCTwj994ouohzCoeHt3UM7A2hB1qsYpuN8o+wdHOhpY5pKrvt+WHlaGDIwHt
-	HuVyiDkyFMgBjPJHE3r9UlHgn5RLjGGL3yU00oHEEHWUfzqBJNVAJhMN41v9DSQKaaEB
-	c0UTJDS6awvBSjPDNBx7O68Ze1yQAQdfhgcc5ySb5XTU02dUU3sS3r28qW1kEFm0llUZ
-	uUJKacy+vXEd7hIZRwxXvoDoZhUk/tcHDI05VyDA8dwznzXoJm4U5LLp3G846wM0GVU1
-	EEHEcP2Cpxwl7nrOg3Z8hYUJSG/UjzMiv7ISb4GVNKURwPTUqPftjiwFgIRqRoP5GjNp
-	sEdw==
-X-Gm-Message-State: AA6/9RlmNeowXBUEX3rzr7d+t3Ccnc0UGkSYKQFjrjwKjVrzKuuRrAa/XrxGB5Zda8tvZA==
-X-Received: by 10.98.34.7 with SMTP id i7mr7711353pfi.145.1476855523310;
-	Tue, 18 Oct 2016 22:38:43 -0700 (PDT)
+	bh=vf2LSnvCu0dD6gcUjKY2J/TY0IcqePuddhxNt9cT86o=;
+	b=dQwwYkTw1pUSYtuu5e0fh8ti/AXroqOKZWwnPyknyGIIWL2jIy2xJc1R/YfWsRBAlJ
+	GTQQuiStyt/RrQ1b27VEjKNgF5DuBM0Fls9lv1V/6/sUmK2nxR3GDIsFJxZ5HIbs8D5a
+	UntaSne63k8eunRiCFMCtmc/i8JQ37KDJIDAylYeo2vu6XhjRC1QTrh5OygwLsUtJ/rq
+	DKcLAvW0+zuAXnm4tQvGonkSj1wsNh6vX7n6BSuwurbwOf3r1Fh15HI+jmAUHhuXwVvv
+	u/8IWgFOXXUuEZOlu78iK0AVCXmy4zHp4TYKJgvo8/rTikvEp/POpK9wVkV+byIwOS3s
+	O0Pw==
+X-Gm-Message-State: AA6/9Rn/H1DIJbQmxNmwhmQgPJUC59lawJJIGzYBFu0YLckeZ9fLS5tZczJoVBrFSAgU6w==
+X-Received: by 10.99.9.129 with SMTP id 123mr6412768pgj.84.1476855524370;
+	Tue, 18 Oct 2016 22:38:44 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	qd12sm60099564pab.22.2016.10.18.22.38.41
+	qd12sm60099564pab.22.2016.10.18.22.38.43
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Oct 2016 22:38:42 -0700 (PDT)
+	Tue, 18 Oct 2016 22:38:43 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Oct 2016 22:38:20 -0700
-Message-Id: <20161019053834.11523-2-raj.khem@gmail.com>
+Date: Tue, 18 Oct 2016 22:38:21 -0700
+Message-Id: <20161019053834.11523-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.0
 In-Reply-To: <20161019053834.11523-1-raj.khem@gmail.com>
 References: <20161019053834.11523-1-raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 02/16] libbonobo: Fix missing dep on orbit2-native and build with clang
+Subject: [meta-oe][PATCH 03/16] libmbim: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,71 +57,110 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 19 Oct 2016 05:38:42 -0000
 
+We need to check for clang in configure so
+the warning options can be added surgically
+depending upon compiler type
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-gnome/recipes-gnome/bonobo/libbonobo.inc      |  2 +-
- .../libbonobo/fix-nonliteral-in-string.patch       | 26 ++++++++++++++++++++++
- .../recipes-gnome/bonobo/libbonobo_2.32.1.bb       |  1 +
- 3 files changed, 28 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-gnome/bonobo/libbonobo/fix-nonliteral-in-string.patch
+ .../libmbim/libmbim/clang.patch                    | 73 ++++++++++++++++++++++
+ .../recipes-connectivity/libmbim/libmbim_1.14.0.bb |  4 +-
+ 2 files changed, 76 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-connectivity/libmbim/libmbim/clang.patch
 
-diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
-index e0f6168..60a8597 100644
---- a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
-+++ b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
-@@ -3,7 +3,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-                     file://COPYING.LIB;md5=7fbc338309ac38fefcd64b04bb903e34"
- SECTION = "x11/gnome/libs"
--DEPENDS = "glib-2.0 orbit2 intltool-native libxml2 dbus dbus-glib"
-+DEPENDS = "glib-2.0 orbit2-native orbit2 intltool-native libxml2 dbus dbus-glib"
- 
- inherit gnomebase gtk-doc lib_package
- 
-diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo/fix-nonliteral-in-string.patch b/meta-gnome/recipes-gnome/bonobo/libbonobo/fix-nonliteral-in-string.patch
+diff --git a/meta-oe/recipes-connectivity/libmbim/libmbim/clang.patch b/meta-oe/recipes-connectivity/libmbim/libmbim/clang.patch
 new file mode 100644
-index 0000000..20db671
+index 0000000..92e657c
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/bonobo/libbonobo/fix-nonliteral-in-string.patch
-@@ -0,0 +1,26 @@
-+This checks whether the format string is a literal on the calling function. As bonobo_debug_print()
-+takes already a va_list, we specify the format on the functions that call it
-+The second number, which is 0 here, should then be the argument index of the variadic argument
++++ b/meta-oe/recipes-connectivity/libmbim/libmbim/clang.patch
+@@ -0,0 +1,73 @@
++Check for clang compiler since we need to disable
++unused-function warning for clang, at same time
++pass werror when checking for compiler options if
++werror is enabled so spurious options do not get
++enabled. Only the ones that are supported by given
++compiler are accepted.
 +
-+Fixed warning with clang
-+
-+| ../../libbonobo-2.32.1/bonobo/bonobo-debug.c:58:32: error: format string is not a string literal [-Werror,-Wformat-nonliteral]
-+|         vfprintf (_bonobo_debug_file, fmt, args);
-+|                                       ^~~
-+| 1 error generated.
-+
-+Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Upstream-Status: Pending
 +
-+Index: libbonobo-2.32.1/bonobo/bonobo-debug.c
++Index: libmbim-1.14.0/m4/compiler-warnings.m4
 +===================================================================
-+--- libbonobo-2.32.1.orig/bonobo/bonobo-debug.c
-++++ libbonobo-2.32.1/bonobo/bonobo-debug.c
-+@@ -47,6 +47,7 @@ bonobo_debug_init(void)
-+ 	  _bonobo_debug_file = stderr;
-+ }
++--- libmbim-1.14.0.orig/m4/compiler-warnings.m4
+++++ libmbim-1.14.0/m4/compiler-warnings.m4
++@@ -2,10 +2,30 @@ AC_DEFUN([LIBMBIM_COMPILER_WARNINGS],
++ [AC_ARG_ENABLE(more-warnings,
++ 	AS_HELP_STRING([--enable-more-warnings], [Possible values: no/yes/error]),
++ 	set_more_warnings="$enableval",set_more_warnings=error)
+++
+++# Clang throws a lot of warnings when it does not understand a flag. Disable
+++# this warning for now so other warnings are visible.
+++AC_MSG_CHECKING([if compiling with clang])
+++AC_COMPILE_IFELSE([AC_LANG_PROGRAM([], [[
+++#ifndef __clang__
+++	not clang
+++#endif
+++	]])],
+++	[CLANG=yes],
+++	[CLANG=no]
+++)
+++AC_MSG_RESULT([$CLANG])
+++AS_IF([test "x$CLANG" = "xyes"], [CLANG_FLAGS=-Wno-error=unused-function])
+++CFLAGS="$CFLAGS $CLANG_FLAGS"
+++LDFLAGS="$LDFLAGS $CLANG_FLAGS"
+++
++ AC_MSG_CHECKING(for more warnings)
++ if test "$GCC" = "yes" -a "$set_more_warnings" != "no"; then
++ 	AC_MSG_RESULT(yes)
++ 	CFLAGS="-Wall -std=gnu89 $CFLAGS"
+++	if test "x$set_more_warnings" = xerror; then
+++		WERROR="-Werror"
+++	fi
 + 
-++__attribute__((__format__ (printf, 2, 0)))
-+ void
-+ bonobo_debug_print (const char *name, char *fmt, ...)
-+ {
-diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb b/meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb
-index fd4d812..8e00eb4 100644
---- a/meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb
-@@ -2,6 +2,7 @@ require libbonobo.inc
++ 	for option in -Wmissing-declarations -Wmissing-prototypes \
++ 		      -Wdeclaration-after-statement -Wstrict-prototypes \
++@@ -17,22 +37,23 @@ if test "$GCC" = "yes" -a "$set_more_war
++ 		      -Wmissing-include-dirs -Waggregate-return \
++ 		      -Wformat-security; do
++ 		SAVE_CFLAGS="$CFLAGS"
++-		CFLAGS="$CFLAGS $option"
+++		CFLAGS="$CFLAGS $option $WERROR"
++ 		AC_MSG_CHECKING([whether gcc understands $option])
++ 		AC_TRY_COMPILE([], [],
++ 			has_option=yes,
++ 			has_option=no,)
++ 		if test $has_option = no; then
++ 			CFLAGS="$SAVE_CFLAGS"
+++		else
+++			CFLAGS="$SAVE_CFLAGS $option"
++ 		fi
++ 		AC_MSG_RESULT($has_option)
++ 		unset has_option
++ 		unset SAVE_CFLAGS
++ 	done
+++	CFLAGS="$CFLAGS $WERROR"
++ 	unset option
++-	if test "x$set_more_warnings" = xerror; then
++-		CFLAGS="$CFLAGS -Werror"
++-	fi
+++	unset WERROR
++ else
++ 	AC_MSG_RESULT(no)
++ fi
+diff --git a/meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb b/meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb
+index 0a8aaaf..02a1788 100644
+--- a/meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb
++++ b/meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb
+@@ -11,6 +11,8 @@ DEPENDS = "glib-2.0 libgudev"
  
- SRC_URI += "file://0001-Remove-use-of-G_DISABLE_DEPRECATED.patch \
-             file://do-not-use-srcdir-variable.patch \
-+            file://fix-nonliteral-in-string.patch \
-            "
- SRC_URI[archive.md5sum] = "27fa902d4fdf6762ee010e7053aaf77b"
- SRC_URI[archive.sha256sum] = "9160d4f277646400d3bb6b4fa73636cc6d1a865a32b9d0760e1e9e6ee624976b"
+ inherit autotools pkgconfig bash-completion
+ 
+-SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
++SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
++           file://clang.patch \
++"
+ SRC_URI[md5sum] = "2ed809e65c85353d3ab59e372890e549"
+ SRC_URI[sha256sum] = "ca8d52a95a18cbabae8f15f83f1572316e888b6504f946e6645d24405127ab5b"
 -- 
 2.10.0
 
