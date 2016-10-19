@@ -1,47 +1,44 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 9445F71AFE
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-vk0-f68.google.com (mail-vk0-f68.google.com
+	[209.85.213.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 4891A7197B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2016 00:28:45 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id 128so756314pfz.1
+	Wed, 19 Oct 2016 01:22:29 +0000 (UTC)
+Received: by mail-vk0-f68.google.com with SMTP id b186so641125vkb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 17:28:47 -0700 (PDT)
+	Tue, 18 Oct 2016 18:22:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=l/HkDqt2Is2oMDXIpRk7POc/kDoqIQCQ+qPwBfWmXM0=;
-	b=YKFwN28hgPlENK4m8iMjOaiNKn9O+2Rr5g76m1DxXie2d2w1Yw9RYc7C3fzyRqOd+4
-	6I/1ayd3BqSgbZfJ2sIJs5/BOFzmSEBVZvaQvJ/LSmVY0n9KE4ZGdcdPDCeQz1MQ+teq
-	EwlFCqQKYuCu9X5ruRhVtP4lfhOezZpl82ZCnm6NL/IlQhDL/guVEDn8YOVh8Uod3qie
-	lqtjUhMrHDxK4OpqSiU+BSi3TxsEJzW4bX3gli7h9LHkRnpluGFG1WpsAQ2z4FbfOa06
-	bK8v0/SyVKcqUG3H4iqA6z8lZtzrhUB8al/SqzodpQY83aRpkLNP/B7O/ijGKTFF/Wq/
-	upHA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=vjvPu4uvNAslzKdbKCfs1AoaELSp1bYBvtc3DiE/LkY=;
+	b=MOIaSa+QDPnShsawJZQ5j14y+ZwOZJbcBLNmnTM3WTXOF5QFpHzw1acQWoFi3kPpxV
+	a7DqYl9JBV+ISCJxUIo6M28mD0ZZQoZ8wwhCpz7x13PVVZjXVBoJ4uLzlbflDGDR3X6S
+	1OvHmNNbOwvC1IaLMV8XRpRwVpYGLJ5aVvpfawYRLYZChcHmz9cniWJgX5yyDgBRGUYf
+	Sl4MLzOdDEkOBoSKilIm/XAm2eVuwMKZ3HWS2XM9qrrYbP69YiaSnutpq/9BzBCNugtH
+	/P87rzu8vOG3LC3Z0w2UVFU//rTlYQF/aIYyer0NmVxYg9XPkx78pbMzZ0G/rUCX0sYX
+	sAew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=l/HkDqt2Is2oMDXIpRk7POc/kDoqIQCQ+qPwBfWmXM0=;
-	b=GdsWN1SULopg01GKeujDedPjy0Po8piK9KYdeWy0dgWnSdpp4Ow3MsWTgdZ+vvLojA
-	xLjNdG7mWtHhnc0KlW/g9MQXsTpQPHmr/VyoAjWHMyxa+neoijmC2LKhtT6k+Uvqhn4I
-	WtiUyvduZApGlEMFWzYnRK5Pceqhxvp9CPQ05xBYknvFzxTZtEov1xmurUQ9/ucZ+SO9
-	A0y/W9VrMWoWRpZGnFvNqJZ4DO7b5ixDyQjFNLUn2iMMA29Vg7WVVMkkJscHLWXhfuwF
-	iiNetlX5eN2NHk0jez/m0DZJBuaRfMNjREeIlPLV4Vffvgdu5D5C4I++WQ/RlGvs06di
-	aoiQ==
-X-Gm-Message-State: AA6/9RlNMX3Wz/aqmXbBeXyxr+bILwOwc9e3fhblXaGVfOrdaU1hSu7moWaJLr97Kr7rpA==
-X-Received: by 10.98.82.75 with SMTP id g72mr5509643pfb.119.1476836926847;
-	Tue, 18 Oct 2016 17:28:46 -0700 (PDT)
-Received: from akuster-ThinkPad-X240.mvista.com
-	(50-233-148-156-static.hfc.comcastbusiness.net. [50.233.148.156])
-	by smtp.gmail.com with ESMTPSA id
-	r77sm58497775pfa.85.2016.10.18.17.28.46
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 18 Oct 2016 17:28:46 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster@mvista.com,
-	openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Oct 2016 17:28:45 -0700
-Message-Id: <1476836925-14631-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] wireshark: install missing header files
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=vjvPu4uvNAslzKdbKCfs1AoaELSp1bYBvtc3DiE/LkY=;
+	b=WPiKLTBIvPG2+Aa4tiBOtltI+hc2kAAojMRQlE++R2qktfgR8LbXDAJEyGbcncp9zZ
+	g/VUW19DMMWVBvRWravdQTyYzUlwbI2OCtm4nw5//uLFJs9O/GvAFfl2fY+ZRJoS19WC
+	VmdqFFD6lzQjsIos1xsjTnv9xnTsEIVooJpwCIKbLLf09hcmCrBi6H1hcC92F0KuAvpK
+	XdxM5IsOMSdvltykgWMfJXFDMkuDdECSl7ip+Xmi53I6W8005EwLtUYH7+F0rLYMXDj8
+	P8/HXq48BtaDAVk9yS2TcU0hXy0oTC6kApqwyiabNVUfQCe16dXCA3B51shzZA9XBKqA
+	+sIw==
+X-Gm-Message-State: AA6/9RlrFMhoygl+jPlSO8iW9gD0/axDqnYd8KkXmmdIfBUUk1BP+dxsRgx7Tyqkzgv+PTyYmvA/b6Mo0uGEjg==
+X-Received: by 10.31.153.17 with SMTP id b17mr3572101vke.84.1476840149662;
+	Tue, 18 Oct 2016 18:22:29 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.176.86.206 with HTTP; Tue, 18 Oct 2016 18:21:59 -0700 (PDT)
+In-Reply-To: <20161018172329.GJ2494@denix.org>
+References: <20160811034947.GW8521@denix.org> <20161018172329.GJ2494@denix.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 18 Oct 2016 18:21:59 -0700
+Message-ID: <CAMKF1so1XtVq2nQ1Ue2v5FtPaTG4Qj0K+LAgSeDEybCPA-8=Kg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5] Latest Qt5 5.6.1+ update breaks qtwayland?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,48 +51,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Oct 2016 00:28:46 -0000
+X-List-Received-Date: Wed, 19 Oct 2016 01:22:32 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Wireshark does not install header files. add install_append
-Remove ALLOW_EMPTY & INHIBIT_PACKAGE_DEBUG_SPLIT, they are no longer needed
+On Tue, Oct 18, 2016 at 10:23 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+> On Wed, Aug 10, 2016 at 11:49:47PM -0400, Denys Dmytriyenko wrote:
+>> Has anyone seen this:
+>>
+>> git/src/client/qwaylandintegration_p.h:91:29: error: 'QPlatformAccessibility* QtWaylandClient::QWaylandIntegration::accessibility() const' marked 'override', but does not override
+>> |      QPlatformAccessibility *accessibility() const Q_DECL_OVERRIDE;
+>>
+>
+> Ping on this one. Anyone else is seeing this? Is it C++11 specific? I'm using
+> gcc-5.3 from Linaro...
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../recipes-support/wireshark/wireshark_2.2.1.bb   | 22 +++++++++++++++++++---
- 1 file changed, 19 insertions(+), 3 deletions(-)
+are you using -std=c++11 to compile it ?
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
-index a5fb7f6..f7d7927 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
-@@ -43,7 +43,23 @@ PACKAGECONFIG[c-ares] = "--with-c-ares=yes, --with-c-ares=no, c-ares"
- 
- EXTRA_OECONF += "--with-qt=no --enable-tshark --enable-rawshark"
- 
--ALLOW_EMPTY_${PN} = "1"
--INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-+# Currently wireshark does not install header files
-+do_install_append () {
- 
--FILES_${PN} += "${datadir}*"
-+	install -d ${D}/${includedir}/${BPN}
-+	install -d ${D}/${includedir}/${BPN}/epan
-+	install -d ${D}/${includedir}/${BPN}/epan/crypt
-+	install -d ${D}/${includedir}/${BPN}/epan/dfilter
-+	install -d ${D}/${includedir}/${BPN}/epan/dissectors
-+	install -d ${D}/${includedir}/${BPN}/epan/ftypes
-+	install -d ${D}/${includedir}/${BPN}/epan/wmem
-+
-+	install config.h ${D}/${includedir}/${BPN}
-+	install ${S}/register.h ${D}/${includedir}/${BPN}
-+	install -D ${S}/epan/*.h ${D}/${includedir}/${BPN}/epan
-+	install -D ${S}/epan/crypt/*.h ${D}/${includedir}/${BPN}/epan/crypt
-+	install -D ${S}/epan/dfilter/*.h ${D}/${includedir}/${BPN}/epan/dfilter
-+	install -D ${S}/epan/dissectors/*.h ${D}/${includedir}/${BPN}/epan/dissectors
-+	install -D ${S}/epan/ftypes/*.h ${D}/${includedir}/${BPN}/epan/ftypes
-+	install -D ${S}/epan/wmem/*.h ${D}/${includedir}/${BPN}/epan/wmem
-+}
--- 
-2.7.4
-
+>
+> --
+> Denys
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
