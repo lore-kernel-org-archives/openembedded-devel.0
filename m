@@ -1,24 +1,48 @@
-Return-Path: <Dengke.Du@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 0305A719E6
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 384F9719A1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2016 05:27:01 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u9J5R2Rv027904
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 19 Oct 2016 05:38:41 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id s8so1421483pfj.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 22:27:02 -0700 (PDT)
-Received: from pek-lpgtest20.wrs.com (128.224.179.28) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Tue, 18 Oct 2016 22:27:01 -0700
-From: Dengke Du <dengke.du@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 19 Oct 2016 13:27:00 +0800
-Message-ID: <1476854820-158987-1-git-send-email-dengke.du@windriver.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-Subject: [PATCH] linux-atm: fix do_compile error
+	Tue, 18 Oct 2016 22:38:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=knpHVP+LvbKMWXX9+QgFmxOKlI0qdsu7Qh7Ud6A1P3s=;
+	b=luWf7ODmCynRXXnQEVIFeO7dTsHqmi2Y38aUVytT0eBkyhVf87X7wKqM1rfisB+doo
+	UidfdTT6nQKKRZ0Tie6LRHVIoNyMUnHGNhVqBJbLMKDnqtd4z6pC/2dzNyuR3kIgOweh
+	jRTyLD6EIfvRnLBDxGRcAl8cZQV9IMRED1pDDwRgMafyheh0Gr0US3FYRjrjWY1qdEYq
+	SezWgoBmSI9ovhVPCY22mj1o5fUR/tx4wIrnhLrJPDkSKngZpHg/3vSKgiOw58gvOlTV
+	Kv/CtUeEptxF4djM59+7wZVknlLSv5YZCVqe1mfO/33PqQs+HAanbCOt1RSsl89j/36L
+	w3Ag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=knpHVP+LvbKMWXX9+QgFmxOKlI0qdsu7Qh7Ud6A1P3s=;
+	b=RrJsA2ZCTwj994ouohzCoeHt3UM7A2hB1qsYpuN8o+wdHOhpY5pKrvt+WHlaGDIwHt
+	HuVyiDkyFMgBjPJHE3r9UlHgn5RLjGGL3yU00oHEEHWUfzqBJNVAJhMN41v9DSQKaaEB
+	c0UTJDS6awvBSjPDNBx7O68Ze1yQAQdfhgcc5ySb5XTU02dUU3sS3r28qW1kEFm0llUZ
+	uUJKacy+vXEd7hIZRwxXvoDoZhUk/tcHDI05VyDA8dwznzXoJm4U5LLp3G846wM0GVU1
+	EEHEcP2Cpxwl7nrOg3Z8hYUJSG/UjzMiv7ISb4GVNKURwPTUqPftjiwFgIRqRoP5GjNp
+	sEdw==
+X-Gm-Message-State: AA6/9RlmNeowXBUEX3rzr7d+t3Ccnc0UGkSYKQFjrjwKjVrzKuuRrAa/XrxGB5Zda8tvZA==
+X-Received: by 10.98.34.7 with SMTP id i7mr7711353pfi.145.1476855523310;
+	Tue, 18 Oct 2016 22:38:43 -0700 (PDT)
+Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
+	qd12sm60099564pab.22.2016.10.18.22.38.41
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 18 Oct 2016 22:38:42 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 18 Oct 2016 22:38:20 -0700
+Message-Id: <20161019053834.11523-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.10.0
+In-Reply-To: <20161019053834.11523-1-raj.khem@gmail.com>
+References: <20161019053834.11523-1-raj.khem@gmail.com>
+Subject: [meta-gnome][PATCH 02/16] libbonobo: Fix missing dep on orbit2-native and build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,127 +55,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Oct 2016 05:27:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 19 Oct 2016 05:38:42 -0000
 
-Issue: LIN9-1688
-
-With linux kernel v4.8, for file ./src/maint/zntune.c, glibc time.h is
-included before linux time.h, when compile zntune.c, it break down by
-the following errors:
-
-	redefinition of 'struct timespec' 'struct timeval'
-	                'struct timezone' 'struct itimerval'
-
-We should exclude the linux time.h by disable linux/atm_zatm.h and move
-some useful definition in linux/atm_zatm.h to a new header file in linux-atm
-source code to resolve it.
-
-(LOCAL REV: NOT UPSTREAM) -- will sent to oe-devel 20161019
-
-Signed-off-by: Dengke Du <dengke.du@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-fix-compile-error-with-linux-kernel-v4.8.patch | 74 ++++++++++++++++++++++
- .../recipes-support/linux-atm/linux-atm_2.5.2.bb   |  4 +-
- 2 files changed, 77 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/0001-fix-compile-error-with-linux-kernel-v4.8.patch
+ meta-gnome/recipes-gnome/bonobo/libbonobo.inc      |  2 +-
+ .../libbonobo/fix-nonliteral-in-string.patch       | 26 ++++++++++++++++++++++
+ .../recipes-gnome/bonobo/libbonobo_2.32.1.bb       |  1 +
+ 3 files changed, 28 insertions(+), 1 deletion(-)
+ create mode 100644 meta-gnome/recipes-gnome/bonobo/libbonobo/fix-nonliteral-in-string.patch
 
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/0001-fix-compile-error-with-linux-kernel-v4.8.patch b/meta-networking/recipes-support/linux-atm/linux-atm/0001-fix-compile-error-with-linux-kernel-v4.8.patch
+diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
+index e0f6168..60a8597 100644
+--- a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
++++ b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
+@@ -3,7 +3,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
+                     file://COPYING.LIB;md5=7fbc338309ac38fefcd64b04bb903e34"
+ SECTION = "x11/gnome/libs"
+-DEPENDS = "glib-2.0 orbit2 intltool-native libxml2 dbus dbus-glib"
++DEPENDS = "glib-2.0 orbit2-native orbit2 intltool-native libxml2 dbus dbus-glib"
+ 
+ inherit gnomebase gtk-doc lib_package
+ 
+diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo/fix-nonliteral-in-string.patch b/meta-gnome/recipes-gnome/bonobo/libbonobo/fix-nonliteral-in-string.patch
 new file mode 100644
-index 0000000..583a6ca
+index 0000000..20db671
 --- /dev/null
-+++ b/meta-networking/recipes-support/linux-atm/linux-atm/0001-fix-compile-error-with-linux-kernel-v4.8.patch
-@@ -0,0 +1,74 @@
-+From 7cdafc0dee8054f82777ed3bf6d4c8b5582d09ad Mon Sep 17 00:00:00 2001
-+From: Dengke Du <dengke.du@windriver.com>
-+Date: Tue, 18 Oct 2016 07:56:02 +0000
-+Subject: [PATCH] fix compile error with linux kernel v4.8
++++ b/meta-gnome/recipes-gnome/bonobo/libbonobo/fix-nonliteral-in-string.patch
+@@ -0,0 +1,26 @@
++This checks whether the format string is a literal on the calling function. As bonobo_debug_print()
++takes already a va_list, we specify the format on the functions that call it
++The second number, which is 0 here, should then be the argument index of the variadic argument
 +
-+In src/maint/zntune.c, the glibc time.h is included before linux
-+time.h, so when compile the zntune.c, it break down by errors:
++Fixed warning with clang
 +
-+	redefinition of 'struct timespec' 'struct timeval'
-+	                'struct timezone' 'struct itimerval'
++| ../../libbonobo-2.32.1/bonobo/bonobo-debug.c:58:32: error: format string is not a string literal [-Werror,-Wformat-nonliteral]
++|         vfprintf (_bonobo_debug_file, fmt, args);
++|                                       ^~~
++| 1 error generated.
 +
-+We should exclude the linux time.h by disable linux/atm_zatm.h and
-+move some useful definition in linux/atm_zatm.h to zntune.c to resolve
-+it.
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
-+Upstream-status: Pending
-+
-+Signed-off-by: Dengke Du <dengke.du@windriver.com>
-+---
-+ src/include/atm_zatm.h | 26 ++++++++++++++++++++++++++
-+ src/maint/zntune.c     |  3 +--
-+ 2 files changed, 27 insertions(+), 2 deletions(-)
-+ create mode 100644 src/include/atm_zatm.h
-+
-+diff --git a/src/include/atm_zatm.h b/src/include/atm_zatm.h
-+new file mode 100644
-+index 0000000..7d64f4d
-+--- /dev/null
-++++ b/src/include/atm_zatm.h
-+@@ -0,0 +1,26 @@
-++#include <linux/atmapi.h>
-++#include <linux/atmioc.h>
-++
-++#define ZATM_GETPOOL    _IOW('a',ATMIOC_SARPRV+1,struct atmif_sioc)
-++                                                /* get pool statistics */
-++#define ZATM_GETPOOLZ   _IOW('a',ATMIOC_SARPRV+2,struct atmif_sioc)
-++                                                /* get statistics and zero */
-++#define ZATM_SETPOOL    _IOW('a',ATMIOC_SARPRV+3,struct atmif_sioc)
-++
-++struct zatm_pool_info {
-++        int ref_count;                  /* free buffer pool usage counters */
-++        int low_water,high_water;       /* refill parameters */
-++        int rqa_count,rqu_count;        /* queue condition counters */
-++        int offset,next_off;            /* alignment optimizations: offset */
-++        int next_cnt,next_thres;        /* repetition counter and threshold */
-++};                                                /* set pool parameters */
-++
-++struct zatm_pool_req {
-++        int pool_num;                   /* pool number */
-++        struct zatm_pool_info info;     /* actual information */
-++};
-++
-++#define ZATM_OAM_POOL           0       /* free buffer pool for OAM cells */
-++#define ZATM_AAL0_POOL          1       /* free buffer pool for AAL0 cells */
-++#define ZATM_AAL5_POOL_BASE     2       /* first AAL5 free buffer pool */
-++#define ZATM_LAST_POOL  ZATM_AAL5_POOL_BASE+10 /* max. 64 kB */
-+diff --git a/src/maint/zntune.c b/src/maint/zntune.c
-+index 62d62ab..bb93eab 100644
-+--- a/src/maint/zntune.c
-++++ b/src/maint/zntune.c
-+@@ -13,9 +13,8 @@
-+ #include <sys/socket.h>
-+ #include <sys/ioctl.h>
-+ #include <atm.h>
-++#include <atm_zatm.h>
-+ #include <sys/time.h> /* for struct timeval, although it's not used */
-+-#include <linux/atm_zatm.h>
-+-
++Index: libbonobo-2.32.1/bonobo/bonobo-debug.c
++===================================================================
++--- libbonobo-2.32.1.orig/bonobo/bonobo-debug.c
+++++ libbonobo-2.32.1/bonobo/bonobo-debug.c
++@@ -47,6 +47,7 @@ bonobo_debug_init(void)
++ 	  _bonobo_debug_file = stderr;
++ }
 + 
-+ static void usage(const char *name)
+++__attribute__((__format__ (printf, 2, 0)))
++ void
++ bonobo_debug_print (const char *name, char *fmt, ...)
 + {
-+-- 
-+2.9.0
-+
-diff --git a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-index edfb045..6ab8b07 100644
---- a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-+++ b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
-@@ -9,7 +9,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb b/meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb
+index fd4d812..8e00eb4 100644
+--- a/meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb
+@@ -2,6 +2,7 @@ require libbonobo.inc
  
- SRC_URI = "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
-            file://link-with-ldflags.patch \
--           file://install-from-buildir.patch"
-+           file://install-from-buildir.patch \
-+           file://0001-fix-compile-error-with-linux-kernel-v4.8.patch \
-+"
- 
- SRC_URI[md5sum] = "d49499368c3cf15f73a05d9bce8824a8"
- SRC_URI[sha256sum] = "9645481a2b16476b59220aa2d6bc5bc41043f291326c9b37581018fbd16dd53a"
+ SRC_URI += "file://0001-Remove-use-of-G_DISABLE_DEPRECATED.patch \
+             file://do-not-use-srcdir-variable.patch \
++            file://fix-nonliteral-in-string.patch \
+            "
+ SRC_URI[archive.md5sum] = "27fa902d4fdf6762ee010e7053aaf77b"
+ SRC_URI[archive.sha256sum] = "9160d4f277646400d3bb6b4fa73636cc6d1a865a32b9d0760e1e9e6ee624976b"
 -- 
-2.7.4
+2.10.0
 
 
