@@ -1,45 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B9DF719A1
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id CC93F71C30
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2016 05:38:40 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id i85so1426465pfa.0
+	Wed, 19 Oct 2016 05:38:43 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id s8so1421561pfj.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 22:38:42 -0700 (PDT)
+	Tue, 18 Oct 2016 22:38:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=ioZf6UWpWdTu52bkPUOsxgGj2DHFlMCrKWys49dhTqs=;
-	b=Ivs2eHGKDRHZkVbrIjtJBL/nHsaDU87+umvtU3kxpAQsrI5TgpkVKjS3pQwvIJwExR
-	2HWcJrwvR5hpUD2GvF7VJsc9WQdYvGoN0uL6IWHPSN8E17UvfQUVAti+OVf9HTLZnI8D
-	QZLaXUo41EOlY4BNuM5l/Aid3fAIXw4AbGDsr4kQN98VvHkq9oukYXLcJzIlgQRIXk2V
-	LCh5er4PHGyZUBfF4GM+rAIlJv+38WjqxsHBVNjpXFv1Fj/gh1q56f2aqJJRBgY8wD/g
-	CZRC0Z/enCrUcp5X9aXXfbrYCYoA/ocEUZIUCIdQULfE9oIJ8eG88e39IZNSdM6I6pdA
-	9+hQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=2qddh/1R8PlSzjRd2PaKPURL5dit8eNb6eA7dYW5TRM=;
+	b=CIyTPc/33b2BULTQkLbf7hFeh1pAmNT0/8jsFnDRxIsM6j8lB6y+4bYJMnkJfjQLdo
+	bha131pIO/mCBBJIWbg1267FDllPp1VQWj8Q8m7zqN1kPXQVVxjPbA5WSuJiNzkwg7/w
+	SXsr9mvLBj4cVUG5N5F3ITyQ3RrVHM+1AI88t+y/wc1tg6JR4BXxeDW4DfTuEXQ0Q1ng
+	nB0otn1nnvwhl5nzcHBsuG6ht2rcV9j3zMejtQAZs+qMyhwy5cgau3M6Mns7S3i83rdP
+	swp1+igZrgEAcvjSzanKIsy9KtbNdd1FyhLmn5FLwUU7z78BOIrU79e9ve7AtihjaxWf
+	Endg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ioZf6UWpWdTu52bkPUOsxgGj2DHFlMCrKWys49dhTqs=;
-	b=Fj20rvu/GRxCYNPbuRlwwkGx4wIMlL/dj9S2SMnG66OuQ1T2ZI15oj/1EgNE1uReXZ
-	zrNHOdBC75hIlUm9emZ5OuuoIFgFXfg8jGRT9zzu3ErvKtHKPw8xba5xZHbHPaYJQv+n
-	UD9Si9W5gkL17WgoHmlo9EfHMG4U46yvCBL+8fmM1lGyquEVkZSz+B09mvWxzeovbpNa
-	t7CBBj5lHVMxKMoagTN0ZaR7ux74438Ivkyith9Wwrzmcz8pjGBOTGltMaNL0qgB//+j
-	F1N3Mcw6MxjJV+mI6pBxCcQPmWbfBjMYbfNUq4mUXUgYby01XJkh4qe32N752rrClpyJ
-	joOA==
-X-Gm-Message-State: AA6/9Rn3adp2flC19MVOkP905DNQG3QPTVJYhbMQ3PvY7vzcZTJ1NiwtOKHd4/10yEdARg==
-X-Received: by 10.98.20.200 with SMTP id 191mr7756264pfu.51.1476855521689;
-	Tue, 18 Oct 2016 22:38:41 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=2qddh/1R8PlSzjRd2PaKPURL5dit8eNb6eA7dYW5TRM=;
+	b=l+B9cV7N1o1A8Ij59E2lLURsmQXUE9i8lAwTa+BsQu+9DWCQYU8R8i0MXxmGNGPQKu
+	IWs5rwQF8Ql2lDazD7HuNX+3xzx+bv6gtk3htLPHhScQU4P7tVQapMQdLSkkW8UKrvSV
+	0zKgy0hMM1hjeIs5MESUIL0aF34dOJtUDsFO0oscE1QbBLj1+4uoOqvzxIaVMV/ErPVO
+	C/lwHZfiBVIGZzTtHTUpa2OFfXMDNCfKawQGtrB/TzI6Y/DGUEs7VZcjSa1iaRzDOjQ9
+	6yV3YveCTAPscDkSaPecKPW5JJCRaFZXdmCd4FIOs/aYr/G0YTjR+2UPfsMiMBpbFGRl
+	i4vw==
+X-Gm-Message-State: AA6/9RnFR+xw6APuUCIuytgsiZh9tq6L1e3zI4xe02Q6HM40sVE6+uuRGwn43uIhKyWvoQ==
+X-Received: by 10.98.66.149 with SMTP id h21mr7778267pfd.32.1476855525136;
+	Tue, 18 Oct 2016 22:38:45 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	qd12sm60099564pab.22.2016.10.18.22.38.40
+	qd12sm60099564pab.22.2016.10.18.22.38.44
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Oct 2016 22:38:40 -0700 (PDT)
+	Tue, 18 Oct 2016 22:38:44 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Oct 2016 22:38:19 -0700
-Message-Id: <20161019053834.11523-1-raj.khem@gmail.com>
+Date: Tue, 18 Oct 2016 22:38:22 -0700
+Message-Id: <20161019053834.11523-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.0
-Subject: [meta-oe][PATCH 01/16] boinc: Add recipe for boinc-client
+In-Reply-To: <20161019053834.11523-1-raj.khem@gmail.com>
+References: <20161019053834.11523-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 04/16] libplist: Squash warnings found by clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,228 +55,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Oct 2016 05:38:43 -0000
+X-List-Received-Date: Wed, 19 Oct 2016 05:38:44 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../boinc/boinc-client/boinc-AM_CONDITIONAL.patch  | 19 +++++
- .../boinc/boinc-client/cross-compile.patch         | 92 ++++++++++++++++++++++
- .../boinc/boinc-client/opengl_m4_check.patch       | 13 +++
- .../recipes-extended/boinc/boinc-client_7.6.33.bb  | 60 ++++++++++++++
- 4 files changed, 184 insertions(+)
- create mode 100644 meta-oe/recipes-extended/boinc/boinc-client/boinc-AM_CONDITIONAL.patch
- create mode 100644 meta-oe/recipes-extended/boinc/boinc-client/cross-compile.patch
- create mode 100644 meta-oe/recipes-extended/boinc/boinc-client/opengl_m4_check.patch
- create mode 100644 meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb
+ .../files/0001-Fix-warnings-found-with-clang.patch | 51 ++++++++++++++++++++++
+ .../libimobiledevice/libplist_1.8.bb               |  3 +-
+ 2 files changed, 53 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/libimobiledevice/files/0001-Fix-warnings-found-with-clang.patch
 
-diff --git a/meta-oe/recipes-extended/boinc/boinc-client/boinc-AM_CONDITIONAL.patch b/meta-oe/recipes-extended/boinc/boinc-client/boinc-AM_CONDITIONAL.patch
+diff --git a/meta-oe/recipes-extended/libimobiledevice/files/0001-Fix-warnings-found-with-clang.patch b/meta-oe/recipes-extended/libimobiledevice/files/0001-Fix-warnings-found-with-clang.patch
 new file mode 100644
-index 0000000..3ebf7c8
+index 0000000..f8114a0
 --- /dev/null
-+++ b/meta-oe/recipes-extended/boinc/boinc-client/boinc-AM_CONDITIONAL.patch
-@@ -0,0 +1,19 @@
-+--- A/configure.ac
-++++ B/configure.ac
-+@@ -39,6 +39,7 @@ AC_PROG_CC
-+ AC_PROG_CXX
-+ AC_PROG_F77
-+ AC_PROG_CPP
-++AC_PROG_OBJCXX
-+ AC_PROG_MAKE_SET
-+ SAH_LINKS
-+ AC_LANG_PUSH(C)
-+@@ -744,6 +745,8 @@ AM_CONDITIONAL(ENABLE_LIBRARIES, [test "
-+ AM_CONDITIONAL(INSTALL_HEADERS, [test "${enable_install_headers}" = yes])
-+ AM_CONDITIONAL(HAVE_CUDA_LIB, [test "${enable_client}" = yes -a -f ./coprocs/CUDA/posix/${boinc_platform}/libcudart.so])
-+ 
-++PKG_CHECK_MODULES([GTK2], [gtk+-2.0])
-++
-+ dnl ======================================================================
-+ dnl some more vodoo required for building portable client-binary (client, clientgui)
-+ dnl ======================================================================
-diff --git a/meta-oe/recipes-extended/boinc/boinc-client/cross-compile.patch b/meta-oe/recipes-extended/boinc/boinc-client/cross-compile.patch
-new file mode 100644
-index 0000000..3d29558
---- /dev/null
-+++ b/meta-oe/recipes-extended/boinc/boinc-client/cross-compile.patch
-@@ -0,0 +1,92 @@
-+Index: boinc-client_release-7.6-7.6.33/api/Makefile.am
-+===================================================================
-+--- boinc-client_release-7.6-7.6.33.orig/api/Makefile.am
-++++ boinc-client_release-7.6-7.6.33/api/Makefile.am
-+@@ -43,18 +43,18 @@ endif
-+ 
-+ lib_LTLIBRARIES = libboinc_api.la
-+ libboinc_api_la_SOURCES = $(api_files)
-+-libboinc_api_la_LDFLAGS = -L$(libdir) -rpath $(libdir) -version-number $(LIBBOINC_VERSION)
-++libboinc_api_la_LDFLAGS = -version-number $(LIBBOINC_VERSION)
-+ 
-+ if BUILD_GRAPHICS_API
-+ lib_LTLIBRARIES += libboinc_graphics2.la
-+ libboinc_graphics2_la_SOURCES = $(graphics2_files)
-+ libboinc_graphics2_la_CPPFLAGS = -I$(top_srcdir) -I$(top_srcdir)/lib -I$(top_srcdir)/samples/image_libs
-+-libboinc_graphics2_la_LDFLAGS = -L$(libdir) -rpath $(libdir) -version-number $(LIBBOINC_VERSION) -ljpeg
-++libboinc_graphics2_la_LDFLAGS = -version-number $(LIBBOINC_VERSION) -ljpeg
-+ endif #BUILD_GRAPHICS_API
-+ 
-+ lib_LTLIBRARIES += libboinc_opencl.la
-+ libboinc_opencl_la_SOURCES = $(opencl_files)
-+-libboinc_opencl_la_LDFLAGS = -L$(libdir) -rpath $(libdir) -version-number $(LIBBOINC_VERSION)
-++libboinc_opencl_la_LDFLAGS = -version-number $(LIBBOINC_VERSION)
-+ 
-+ if INSTALL_HEADERS
-+ ## install only headers that are meant for exporting the API !!
-+Index: boinc-client_release-7.6-7.6.33/lib/Makefile.am
-+===================================================================
-+--- boinc-client_release-7.6-7.6.33.orig/lib/Makefile.am
-++++ boinc-client_release-7.6-7.6.33/lib/Makefile.am
-+@@ -173,7 +173,7 @@ lib_LTLIBRARIES = libboinc.la
-+ libboinc_la_SOURCES = $(generic_sources) $(mac_sources) $(win_sources)
-+ libboinc_la_CFLAGS = $(AM_CFLAGS) $(PICFLAGS) $(PTHREAD_CFLAGS)
-+ libboinc_la_CXXFLAGS = $(AM_CXXFLAGS) $(PICFLAGS) $(PTHREAD_CFLAGS)
-+-libboinc_la_LDFLAGS = -L$(libdir) -rpath $(libdir) -static -version-number $(LIBBOINC_VERSION)
-++libboinc_la_LDFLAGS = -static -version-number $(LIBBOINC_VERSION)
-+ libboinc_la_LIBADD =
-+ 
-+ if ENABLE_BOINCCRYPT
-+@@ -181,7 +181,7 @@ lib_LTLIBRARIES += libboinc_crypt.la
-+ libboinc_crypt_la_SOURCES = crypt.cpp
-+ libboinc_crypt_la_CFLAGS = $(AM_CFLAGS) $(PICFLAGS) $(PTHREAD_CFLAGS) $(SSL_CFLAGS)
-+ libboinc_crypt_la_CXXFLAGS = $(AM_CXXFLAGS) $(PICFLAGS) $(PTHREAD_CFLAGS) $(SSL_CXXFLAGS)
-+-libboinc_crypt_la_LDFLAGS = -L$(libdir) -rpath $(libdir) -static -version-number $(LIBBOINC_VERSION)
-++libboinc_crypt_la_LDFLAGS = -static -version-number $(LIBBOINC_VERSION)
-+ libboinc_crypt_la_LIBADD =
-+ endif
-+ 
-+@@ -190,7 +190,7 @@ lib_LTLIBRARIES += libboinc_fcgi.la
-+ libboinc_fcgi_la_SOURCES = $(libfcgi_sources) $(mac_sources) $(win_sources)
-+ libboinc_fcgi_la_CFLAGS = -D_USING_FCGI_ $(AM_CFLAGS) $(PICFLAGS) $(PTHREAD_CFLAGS)
-+ libboinc_fcgi_la_CXXFLAGS = -D_USING_FCGI_ $(AM_CXXFLAGS) $(PICFLAGS) $(PTHREAD_CFLAGS)
-+-libboinc_fcgi_la_LDFLAGS = -L$(libdir) -rpath $(libdir) -version-number $(LIBBOINC_VERSION)
-++libboinc_fcgi_la_LDFLAGS = -version-number $(LIBBOINC_VERSION)
-+ libboinc_fcgi_la_LIBADD =
-+ endif 
-+ # end of "if ENABLE_FCGI"
-+Index: boinc-client_release-7.6-7.6.33/sched/Makefile.am
-+===================================================================
-+--- boinc-client_release-7.6-7.6.33.orig/sched/Makefile.am
-++++ boinc-client_release-7.6-7.6.33/sched/Makefile.am
-+@@ -26,7 +26,7 @@ lib_LTLIBRARIES = libsched.la
-+ libsched_la_SOURCES = $(libsched_sources)
-+ libsched_la_CFLAGS = $(AM_CPPFLAGS)
-+ libsched_la_CXXFLAGS = $(AM_CPPFLAGS)
-+-libsched_la_LDFLAGS= -L$(libdir) -rpath $(libdir) -version-number $(LIBBOINC_VERSION)
-++libsched_la_LDFLAGS= -version-number $(LIBBOINC_VERSION)
-+ libsched_la_LIBADD= $(SSL_LIBS)
-+ 
-+ ## install only headers that are meant for exporting the API !!
-+@@ -48,7 +48,7 @@ lib_LTLIBRARIES += libsched_fcgi.la
-+ libsched_fcgi_la_SOURCES = $(libsched_sources)
-+ libsched_fcgi_la_CFLAGS = -D_USING_FCGI_ $(AM_CPPFLAGS)
-+ libsched_fcgi_la_CXXFLAGS = -D_USING_FCGI_ $(AM_CPPFLAGS)
-+-libsched_fcgi_la_LDFLAGS= -L$(libdir) -rpath $(libdir) -version-number $(LIBBOINC_VERSION)
-++libsched_fcgi_la_LDFLAGS= -version-number $(LIBBOINC_VERSION)
-+ libsched_fcgi_la_LIBADD=
-+ 
-+ endif
-+Index: boinc-client_release-7.6-7.6.33/zip/Makefile.am
-+===================================================================
-+--- boinc-client_release-7.6-7.6.33.orig/zip/Makefile.am
-++++ boinc-client_release-7.6-7.6.33/zip/Makefile.am
-+@@ -61,7 +61,7 @@ endif
-+ 
-+ lib_LTLIBRARIES = libboinc_zip.la
-+ libboinc_zip_la_SOURCES = $(libboinc_zip_sources)
-+-libboinc_zip_la_LDFLAGS = -L$(libdir) -rpath $(libdir) -version-number $(LIBBOINC_VERSION)
-++libboinc_zip_la_LDFLAGS = -version-number $(LIBBOINC_VERSION)
-+ libboinc_zip_la_LIBADD =
-+ 
-+ # Some OSs may not prefix libraries with lib.
-diff --git a/meta-oe/recipes-extended/boinc/boinc-client/opengl_m4_check.patch b/meta-oe/recipes-extended/boinc/boinc-client/opengl_m4_check.patch
-new file mode 100644
-index 0000000..f7295c1
---- /dev/null
-+++ b/meta-oe/recipes-extended/boinc/boinc-client/opengl_m4_check.patch
-@@ -0,0 +1,13 @@
-+Index: boinc-client_release-7.6-7.6.33/m4/ax_check_gl.m4
-+===================================================================
-+--- boinc-client_release-7.6-7.6.33.orig/m4/ax_check_gl.m4
-++++ boinc-client_release-7.6-7.6.33/m4/ax_check_gl.m4
-+@@ -58,7 +58,7 @@ else
-+     else
-+       ax_try_lib="${ax_lib}"
-+     fi
-+-    LIBS="-L${prefix}/lib ${ax_try_lib} ${GL_LIBS} ${ax_save_LIBS}"
-++    LIBS="${ax_try_lib} ${GL_LIBS} ${ax_save_LIBS}"
-+     AC_LINK_IFELSE(
-+     [AC_LANG_PROGRAM([[
-+ # if HAVE_WINDOWS_H && defined(_WIN32)
-diff --git a/meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb b/meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb
-new file mode 100644
-index 0000000..34472e0
---- /dev/null
-+++ b/meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb
-@@ -0,0 +1,60 @@
-+# Copyright (C) 2016 Khem Raj <raj.khem@gmail.com>
-+# Released under the MIT license (see COPYING.MIT for the terms)
++++ b/meta-oe/recipes-extended/libimobiledevice/files/0001-Fix-warnings-found-with-clang.patch
+@@ -0,0 +1,51 @@
++From ad1be542b87b3186f8ef7bee2c594daefe5bb4c8 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 18 Oct 2016 21:31:40 +0000
++Subject: [PATCH] Fix warnings found with clang
 +
-+SUMMARY = "Open-source software for volunteer computing"
-+DESCRIPTION = "The Berkeley Open Infrastructure for Network Computing (BOINC) is an open- \
-+source software platform which supports distributed computing, primarily in \
-+the form of volunteer computing and desktop Grid computing.  It is well \
-+suited for problems which are often described as trivially parallel.  BOINC \
-+is the underlying software used by projects such as SETI@home, Einstein@Home, \
-+ClimatePrediciton.net, the World Community Grid, and many other distributed \
-+computing projects. \
-+This package installs the BOINC client software, which will allow your \
-+computer to participate in one or more BOINC projects, using your spare \
-+computer time to search for cures for diseases, model protein folding, study \
-+global warming, discover sources of gravitational waves, and many other types \
-+of scientific and mathematical research."
++| /mnt/oe/openembedded-core/build/workspace/sources/libplist/src/base64.c:107:12: error: non-void function 'base64decode' should return a value [-Wreturn-type]
++|         if (!buf) return;
++|                   ^
++| /mnt/oe/openembedded-core/build/workspace/sources/libplist/src/base64.c:109:16: error: non-void function 'base64decode' should return a value [-Wreturn-type]
++|         if (len <= 0) return;
 +
-+HOMEPAGE = "http://boinc.berkeley.edu/"
-+LICENSE = "LGPLv2+ & GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-+                    file://COPYING.LESSER;md5=6a6a8e020838b23406c81b19c1d46df6"
-+SECTION = "applications"
-+DEPENDS = "curl jpeg openssl xcb-util sqlite3 virtual/libgl libnotify gtk+ nettle"
++Upstream-Status: Pending
 +
-+SRC_URI = "https://github.com/BOINC/boinc/archive/client_release/7.6/${PV}.tar.gz \
-+           file://boinc-AM_CONDITIONAL.patch \
-+           file://opengl_m4_check.patch \
-+           file://cross-compile.patch \
-+"
-+SRC_URI[md5sum] = "437b4b98e384b4bda4ef7056e68166ac"
-+SRC_URI[sha256sum] = "c4b1c29b9655013e0ac61dddf47ad7f30f38c46159f02a9d9dc8ab854e99aa6d"
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ libcnary/node.c | 2 +-
++ src/base64.c    | 4 ++--
++ 2 files changed, 3 insertions(+), 3 deletions(-)
 +
-+inherit gettext autotools-brokensep pkgconfig
++diff --git a/libcnary/node.c b/libcnary/node.c
++index 1f9f669..d6f3f63 100644
++--- a/libcnary/node.c
+++++ b/libcnary/node.c
++@@ -104,7 +104,7 @@ int node_detach(node_t* parent, node_t* child) {
++ 
++ int node_insert(node_t* parent, unsigned int index, node_t* child)
++ {
++-	if (!parent || !child) return;
+++	if (!parent || !child) return -1;
++ 	child->isLeaf = TRUE;
++ 	child->isRoot = FALSE;
++ 	child->parent = parent;
++diff --git a/src/base64.c b/src/base64.c
++index 65c6061..531a06a 100644
++--- a/src/base64.c
+++++ b/src/base64.c
++@@ -104,9 +104,9 @@ static int base64decode_block(unsigned char *target, const char *data, size_t da
++ 
++ unsigned char *base64decode(const char *buf, size_t *size)
++ {
++-	if (!buf) return;
+++	if (!buf) return 0;
++ 	size_t len = strlen(buf);
++-	if (len <= 0) return;
+++	if (len <= 0) return 0;
++ 	unsigned char *outbuf = (unsigned char*)malloc((len/4)*3+3);
++ 
++ 	unsigned char *line;
++-- 
++1.9.1
 +
-+S = "${WORKDIR}/${BPN}_release-7.6-${PV}"
-+
-+EXTRA_OECONF += "\
-+    --enable-libraries \
-+    --enable-unicode \
-+    --enable-shared \
-+    --enable-dynamic-client-linkage \
-+    --enable-client \
-+    --disable-server \
-+    --disable-static \
-+    --disable-manager \
-+    --with-ssl=${STAGING_EXECPREFIXDIR} \
-+    --without-wxdir \
-+    --without-x \
-+    --with-boinc-platform=${TARGET_SYS} \
-+"
-+export PKG_CONFIG = "${STAGING_BINDIR_NATIVE}/pkg-config"
-+
-+do_compile_prepend () {
-+	# Disable rpaths
-+	sed -i -e 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' ${B}/${TARGET_SYS}-libtool
-+	sed -i -e 's|^sys_lib_dlsearch_path_spec=.*|sys_lib_dlsearch_path_spec=""|g' ${B}/${TARGET_SYS}-libtool
-+	sed -i -e 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' ${B}/${TARGET_SYS}-libtool
-+}
-+
-+SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
+diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb b/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
+index 6e8d69f..10d40fb 100644
+--- a/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
++++ b/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
+@@ -10,7 +10,8 @@ inherit cmake pkgconfig
+ 
+ SRC_URI = "http://www.libimobiledevice.org/downloads/libplist-${PV}.tar.bz2 \
+            file://fix-parallel-make.patch \
+-"
++           file://0001-Fix-warnings-found-with-clang.patch \
++           "
+ 
+ SRC_URI[md5sum] = "2a9e0258847d50f9760dc3ece25f4dc6"
+ SRC_URI[sha256sum] = "a418da3880308199b74766deef2a760a9b169b81a868a6a9032f7614e20500ec"
 -- 
 2.10.0
 
