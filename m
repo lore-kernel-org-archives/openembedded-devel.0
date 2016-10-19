@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 1EA2471C30
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D3F2719A1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2016 05:38:44 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id r16so1418092pfg.3
+	Wed, 19 Oct 2016 05:38:45 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id 128so1429355pfz.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 22:38:46 -0700 (PDT)
+	Tue, 18 Oct 2016 22:38:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=vHiUmawCBOuFYH6aaNJPZvEGJkDUrGIas9dnOwtZeRk=;
-	b=VzVXaTRrCLX7JDXjz1BuCPS5+WBX3gZGzj0nC75DBZS6gbFc6+hIOP9uh8ZAS2PAAl
-	Sa9PMVcaYDJJYOSl/93VOG1dHlwlGN3ZUvdrWei2EasCr4GoDQdk0T+jeqLtul3AgGLO
-	ffBQM5XIaPd23OODhiRzurYj8bHTxVnc5eCS0mgdZaEjQbWruIcZnG9lUaSadrO4Djgz
-	LtuFRnIUS7kuCo31NBBue0nY0OkzO4xRR1n3NE5ogOD0PrhtnSJv5jOkWXSkjCAbeRCa
-	6ZT4k6hZ8rXi675eyNBhndOVfeRs9dEiQ+YPnqLSDT9Bf1PyZlXYWY6P4P1DL7Slzkpd
-	esEQ==
+	bh=WFLHkpSf8UhB/z4GbTjbuvQe15hwslQc2hNlBunNKxo=;
+	b=tlE9eAOO4vcDpsAJfFTzb1E/zgO2NtlJ60+Jc/OcSFGOxAZq288ujZyuSoL+6Qu/wl
+	3j/CzvArPqSlZIPhcbcr4Cuc9QGTE2COufm6mVPIjV6jdZa2F9BKsjBG+PEWgN2Tl6ju
+	u6Z/9ecum71j31JNUP92v5Iv86ZwsJJKpyEamrTcL5puSeNanHnjnBxr9eM4r89eNhJ+
+	r37OK7aN59GytL8vKum6eSeWWJwcpDQmL7M6jnTuTmpTxRxE5PLp1wO3mFU+u3S6ZZBa
+	Dcy2fWNlSXPICmHCdjddxTEWlvFWcgfdeCzOP50qsEp19pRP0yU+3VmNf3EgsdGsr221
+	44BQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=vHiUmawCBOuFYH6aaNJPZvEGJkDUrGIas9dnOwtZeRk=;
-	b=ZF+6OPNbEIW+RSnDSENO96oqH658keFbUj+K09t/kW4yKWmUefB0mWJ1p5nVW7I0XQ
-	T62Lm8xVpL9/vgA/y2icmtHbWzqB1TUxSJ/0qTn9IgHv5RiUmpmQy5Cf1ilFj0uLZTX6
-	zdqoMAqZ77sm8fLuza6WAyYGLenv92IiQd7SedxUuvU+4D3Emvq74e4vu9z7d5FiOANk
-	irDzckhEI/UTe2prewWoSHYQXV9lrjNi/EJg/ELoWDVbt7PP5aaV4s8BdMURSTjzOUsB
-	4BX5dMlejtuYS5od0oV7R0tqsY4sDqY0JaSKJJrSXMPh8ULVFG9SCnB6a+fn2/g0PP1j
-	aIiw==
-X-Gm-Message-State: AA6/9RklEAdETCaCVY+vE4R/xd/aT6hUiwnnSZUx9pRmthPi08P7pLg83wHlhLCJHTOJfA==
-X-Received: by 10.98.196.17 with SMTP id y17mr7760811pff.172.1476855525865;
-	Tue, 18 Oct 2016 22:38:45 -0700 (PDT)
+	bh=WFLHkpSf8UhB/z4GbTjbuvQe15hwslQc2hNlBunNKxo=;
+	b=Zl1DfDPeGyc4eDRWxaeIjksZNq76xGDBlrMPClERgIcxG0zw3K7dQ+IThhSBIb5DTv
+	3h6bBlkfmjCppf3/xyd3tPqkJIiMekeVwW0cd0+a6o5FqY6HqXBb3AfKz/LiUJVSHOQO
+	SSBlfjNgJtosaVK0X7L8hDeSnyQGb6PIjdGu3f+g2rrqtO6s0HsMFQWMihqLftjotieR
+	NTdE6WSBSLEpiesz33f4+7bmfRxuVs5BsY14CWdEnIANSJmeXcZh1Ct2R97G7AWWB1y4
+	XHUL9fZWEeObZ0M3uDjNGRNYX7dyq/3pVb08oU7Dfzc9L98hCwPQKMZOZNg3EQjF7gj8
+	x0DA==
+X-Gm-Message-State: AA6/9Rl4nBTsqAR516m68vMsCgLp+6zZwYtrUcaRRcPvkDaeXgEIvJWI0AAxFvk+kDWATg==
+X-Received: by 10.99.147.11 with SMTP id b11mr6515672pge.22.1476855526639;
+	Tue, 18 Oct 2016 22:38:46 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
 	qd12sm60099564pab.22.2016.10.18.22.38.45
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Oct 2016 22:38:45 -0700 (PDT)
+	Tue, 18 Oct 2016 22:38:46 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Oct 2016 22:38:23 -0700
-Message-Id: <20161019053834.11523-5-raj.khem@gmail.com>
+Date: Tue, 18 Oct 2016 22:38:24 -0700
+Message-Id: <20161019053834.11523-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.0
 In-Reply-To: <20161019053834.11523-1-raj.khem@gmail.com>
 References: <20161019053834.11523-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 05/16] frame: Fix build with clang
+Subject: [meta-python][PATCH 06/16] python-greenlet: Rename register from rX to xX for aarch64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,61 +55,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Oct 2016 05:38:44 -0000
+X-List-Received-Date: Wed, 19 Oct 2016 05:38:45 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../frame/pessimizing-move.patch                   | 27 ++++++++++++++++++++++
- .../canonical-multitouch/frame_2.5.0.bb            |  3 ++-
- 2 files changed, 29 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/canonical-multitouch/frame/pessimizing-move.patch
+ ...x-instead-of-r-for-aarch64-register-names.patch | 38 ++++++++++++++++++++++
+ .../python/python-greenlet_0.4.9.bb                |  3 ++
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-greenlet/0001-Use-x-instead-of-r-for-aarch64-register-names.patch
 
-diff --git a/meta-oe/recipes-support/canonical-multitouch/frame/pessimizing-move.patch b/meta-oe/recipes-support/canonical-multitouch/frame/pessimizing-move.patch
+diff --git a/meta-python/recipes-devtools/python/python-greenlet/0001-Use-x-instead-of-r-for-aarch64-register-names.patch b/meta-python/recipes-devtools/python/python-greenlet/0001-Use-x-instead-of-r-for-aarch64-register-names.patch
 new file mode 100644
-index 0000000..aa5a56a
+index 0000000..4868bf3
 --- /dev/null
-+++ b/meta-oe/recipes-support/canonical-multitouch/frame/pessimizing-move.patch
-@@ -0,0 +1,27 @@
-+let compiler decide on copy elision
-+Fixes compiler errors with clang
-+| ../../frame-2.5.0/src/x11/device_x11.cpp:126:13: error: moving a temporary object prevents copy elision [-Werror,-Wpessimizing-move]
-+|             std::move(UniqueUFAxis(static_cast<oif::frame::UFAxis*>(axis)));
-+|             ^
-+| ../../frame-2.5.0/src/x11/device_x11.cpp:126:13: note: remove std::move call here
-+|             std::move(UniqueUFAxis(static_cast<oif::frame::UFAxis*>(axis)));
-+|             ^~~~~~~~~~                                                    ~
-+| 1 error generated.
++++ b/meta-python/recipes-devtools/python/python-greenlet/0001-Use-x-instead-of-r-for-aarch64-register-names.patch
+@@ -0,0 +1,38 @@
++From b53fb3bf861f895034452e984f2accb8bebbd3c9 Mon Sep 17 00:00:00 2001
++From: Fredrik Fornwall <fredrik@fornwall.net>
++Date: Wed, 7 Sep 2016 09:25:54 +0200
++Subject: [PATCH] Use x instead of r for aarch64 register names
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Upstream-Status: Pending
++This fixes clang compatibility.
++---
++Upstream-Status: Backport
 +
-+Index: frame-2.5.0/src/x11/device_x11.cpp
-+===================================================================
-+--- frame-2.5.0.orig/src/x11/device_x11.cpp
-++++ frame-2.5.0/src/x11/device_x11.cpp
-+@@ -122,8 +122,7 @@ UFDeviceX11::UFDeviceX11(Display* displa
-+         UFAxis_* axis = new UFAxis(type, valuator_info->min, valuator_info->max,
-+                                    valuator_info->resolution);
++ platform/switch_aarch64_gcc.h | 5 +++--
++ 1 file changed, 3 insertions(+), 2 deletions(-)
++
++diff --git a/platform/switch_aarch64_gcc.h b/platform/switch_aarch64_gcc.h
++index 2fbc569..0b9d556 100644
++--- a/platform/switch_aarch64_gcc.h
+++++ b/platform/switch_aarch64_gcc.h
++@@ -2,6 +2,7 @@
++  * this is the internal transfer function.
++  *
++  * HISTORY
+++ * 07-Sep-16 Add clang support using x register naming. Fredrik Fornwall
++  * 13-Apr-13 Add support for strange GCC caller-save decisions
++  * 08-Apr-13 File creation. Michael Matz
++  *
++@@ -15,8 +16,8 @@
 + 
-+-        axes_[type] =
-+-            std::move(UniqueUFAxis(static_cast<oif::frame::UFAxis*>(axis)));
-++        axes_[type] = UniqueUFAxis(static_cast<oif::frame::UFAxis*>(axis));
++ #ifdef SLP_EVAL
++ #define STACK_MAGIC 0
++-#define REGS_TO_SAVE "r19", "r20", "r21", "r22", "r23", "r24", "r25", "r26", \
++-                     "r27", "r28", "r30" /* aka lr */, \
+++#define REGS_TO_SAVE "x19", "x20", "x21", "x22", "x23", "x24", "x25", "x26", \
+++                     "x27", "x28", "x30" /* aka lr */, \
++                      "v8", "v9", "v10", "v11", \
++                      "v12", "v13", "v14", "v15"
 + 
-+         axis_map_[valuator_info->number] = type;
-+ 
-diff --git a/meta-oe/recipes-support/canonical-multitouch/frame_2.5.0.bb b/meta-oe/recipes-support/canonical-multitouch/frame_2.5.0.bb
-index ecc9524..0ad10a4 100644
---- a/meta-oe/recipes-support/canonical-multitouch/frame_2.5.0.bb
-+++ b/meta-oe/recipes-support/canonical-multitouch/frame_2.5.0.bb
-@@ -10,7 +10,8 @@ LIC_FILES_CHKSUM = " \
++-- 
++1.9.1
++
+diff --git a/meta-python/recipes-devtools/python/python-greenlet_0.4.9.bb b/meta-python/recipes-devtools/python/python-greenlet_0.4.9.bb
+index c1bc214..4c0faf5 100644
+--- a/meta-python/recipes-devtools/python/python-greenlet_0.4.9.bb
++++ b/meta-python/recipes-devtools/python/python-greenlet_0.4.9.bb
+@@ -3,6 +3,9 @@ LICENSE = "MIT & PSF"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
+                     file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
  
- inherit autotools pkgconfig
- 
--SRC_URI = "https://launchpad.net/${BPN}/trunk/v${PV}/+download/${BPN}-${PV}.tar.gz"
-+SRC_URI = "https://launchpad.net/${BPN}/trunk/v${PV}/+download/${BPN}-${PV}.tar.gz \
-+           file://pessimizing-move.patch"
- SRC_URI[md5sum] = "02baa941091c5d198cd1623b3ad36e68"
- SRC_URI[sha256sum] = "cfb9ab52cdccd926f1822a457264d0014c7eb9f4600a72626063dd073b26256f"
++SRC_URI += "\
++           file://0001-Use-x-instead-of-r-for-aarch64-register-names.patch \
++           "
+ SRC_URI[md5sum] = "c6659cdb2a5e591723e629d2eef22e82"
+ SRC_URI[sha256sum] = "58b2f3a2e7075c655616bf95e82868db4980f3bb6661db70ad02a51e4ddd2252"
  
 -- 
 2.10.0
