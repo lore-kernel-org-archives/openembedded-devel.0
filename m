@@ -1,24 +1,24 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id F407B6FF69
+Return-Path: <Dengke.Du@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0305A719E6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2016 05:19:59 +0000 (UTC)
+	Wed, 19 Oct 2016 05:27:01 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u9J5K0uC026918
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u9J5R2Rv027904
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 22:20:00 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	Tue, 18 Oct 2016 22:27:02 -0700 (PDT)
+Received: from pek-lpgtest20.wrs.com (128.224.179.28) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Tue, 18 Oct 2016 22:19:59 -0700
-From: <jackie.huang@windriver.com>
+	14.3.294.0; Tue, 18 Oct 2016 22:27:01 -0700
+From: Dengke Du <dengke.du@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 19 Oct 2016 13:00:57 +0800
-Message-ID: <20161019050057.4584-1-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.8.3
+Date: Wed, 19 Oct 2016 13:27:00 +0800
+Message-ID: <1476854820-158987-1-git-send-email-dengke.du@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-perl][PATCH] adduser: always add -M option for useradd
+Subject: [PATCH] linux-atm: fix do_compile error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,125 +31,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Oct 2016 05:20:00 -0000
+X-List-Received-Date: Wed, 19 Oct 2016 05:27:03 -0000
 Content-Type: text/plain
 
-From: Jackie Huang <jackie.huang@windriver.com>
+Issue: LIN9-1688
 
-The useradd (from package passwd) in debian based system
-sets -M (--no-create-home) by default, but the one we are
-using (from package shadow) sets -m (--create-home) by
-default, the previous patch added -M option conditionally,
-which worked but we see a confused message:
-"The home directory `/home/newuser' already exists. Not copying from `/etc/skel'"
+With linux kernel v4.8, for file ./src/maint/zntune.c, glibc time.h is
+included before linux time.h, when compile zntune.c, it break down by
+the following errors:
 
-So change it to always add the -M option for useradd and let
-adduser handle the home creation with its logic.
+	redefinition of 'struct timespec' 'struct timeval'
+	                'struct timezone' 'struct itimerval'
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+We should exclude the linux time.h by disable linux/atm_zatm.h and move
+some useful definition in linux/atm_zatm.h to a new header file in linux-atm
+source code to resolve it.
+
+(LOCAL REV: NOT UPSTREAM) -- will sent to oe-devel 20161019
+
+Signed-off-by: Dengke Du <dengke.du@windriver.com>
 ---
- meta-perl/recipes-perl/adduser/adduser_3.115.bb    |  2 +-
- ...atch => adduser-add-M-option-for-useradd.patch} | 48 ++++++++--------------
- 2 files changed, 19 insertions(+), 31 deletions(-)
- rename meta-perl/recipes-perl/adduser/files/{adduser-add-M-option-for-useradd-when-no-create-home.patch => adduser-add-M-option-for-useradd.patch} (38%)
+ ...-fix-compile-error-with-linux-kernel-v4.8.patch | 74 ++++++++++++++++++++++
+ .../recipes-support/linux-atm/linux-atm_2.5.2.bb   |  4 +-
+ 2 files changed, 77 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/0001-fix-compile-error-with-linux-kernel-v4.8.patch
 
-diff --git a/meta-perl/recipes-perl/adduser/adduser_3.115.bb b/meta-perl/recipes-perl/adduser/adduser_3.115.bb
-index 312bad8..81068d6 100644
---- a/meta-perl/recipes-perl/adduser/adduser_3.115.bb
-+++ b/meta-perl/recipes-perl/adduser/adduser_3.115.bb
-@@ -7,7 +7,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://debian/copyright;md5=caed49ab166f22ef31bf1127f558d0ef"
- 
- SRC_URI = "http://ftp.de.debian.org/debian/pool/main/a/${BPN}/${BPN}_${PV}.tar.xz \
--           file://adduser-add-M-option-for-useradd-when-no-create-home.patch \
-+           file://adduser-add-M-option-for-useradd.patch \
- "
- 
- SRC_URI[md5sum] = "6bb6d93922d281f1b56393a53f8ce5fd"
-diff --git a/meta-perl/recipes-perl/adduser/files/adduser-add-M-option-for-useradd-when-no-create-home.patch b/meta-perl/recipes-perl/adduser/files/adduser-add-M-option-for-useradd.patch
-similarity index 38%
-rename from meta-perl/recipes-perl/adduser/files/adduser-add-M-option-for-useradd-when-no-create-home.patch
-rename to meta-perl/recipes-perl/adduser/files/adduser-add-M-option-for-useradd.patch
-index 4b0a03f..2ecec51 100644
---- a/meta-perl/recipes-perl/adduser/files/adduser-add-M-option-for-useradd-when-no-create-home.patch
-+++ b/meta-perl/recipes-perl/adduser/files/adduser-add-M-option-for-useradd.patch
-@@ -1,57 +1,45 @@
--From 809f00a6ef0224b41b2e1207194c8da3cd3e3c7e Mon Sep 17 00:00:00 2001
-+From 55a0adfc416ad85dbc440eaa667d98c200a8ce62 Mon Sep 17 00:00:00 2001
- From: Jackie Huang <jackie.huang@windriver.com>
- Date: Thu, 18 Dec 2014 17:23:37 +0800
--Subject: [PATCH] adduser: add -M option for useradd when --no-create-home is specified
-+Subject: [PATCH] adduser: add -M option for useradd
- 
- The useradd (from package passwd) in debian based system sets -M (--no-create-home) by default,
- but the one we are using (from package shadow) sets -m (--create-home) by default, so we
--need to explicitly add -M option for useradd call when --no-create-home is specified for adduser.
-+need to explicitly add -M option for useradd call or it will try to create home twice and
-+throw a confused message:
-+"The home directory `/home/newuser' already exists. Not copying from `/etc/skel'"
- 
--Upstream-Status: Pending
-+Upstream-Status: Submitted [1]
+diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/0001-fix-compile-error-with-linux-kernel-v4.8.patch b/meta-networking/recipes-support/linux-atm/linux-atm/0001-fix-compile-error-with-linux-kernel-v4.8.patch
+new file mode 100644
+index 0000000..583a6ca
+--- /dev/null
++++ b/meta-networking/recipes-support/linux-atm/linux-atm/0001-fix-compile-error-with-linux-kernel-v4.8.patch
+@@ -0,0 +1,74 @@
++From 7cdafc0dee8054f82777ed3bf6d4c8b5582d09ad Mon Sep 17 00:00:00 2001
++From: Dengke Du <dengke.du@windriver.com>
++Date: Tue, 18 Oct 2016 07:56:02 +0000
++Subject: [PATCH] fix compile error with linux kernel v4.8
 +
-+[1] https://lists.alioth.debian.org/pipermail/adduser-devel/2016-October/005478.html
++In src/maint/zntune.c, the glibc time.h is included before linux
++time.h, so when compile the zntune.c, it break down by errors:
++
++	redefinition of 'struct timespec' 'struct timeval'
++	                'struct timezone' 'struct itimerval'
++
++We should exclude the linux time.h by disable linux/atm_zatm.h and
++move some useful definition in linux/atm_zatm.h to zntune.c to resolve
++it.
++
++Upstream-status: Pending
++
++Signed-off-by: Dengke Du <dengke.du@windriver.com>
++---
++ src/include/atm_zatm.h | 26 ++++++++++++++++++++++++++
++ src/maint/zntune.c     |  3 +--
++ 2 files changed, 27 insertions(+), 2 deletions(-)
++ create mode 100644 src/include/atm_zatm.h
++
++diff --git a/src/include/atm_zatm.h b/src/include/atm_zatm.h
++new file mode 100644
++index 0000000..7d64f4d
++--- /dev/null
+++++ b/src/include/atm_zatm.h
++@@ -0,0 +1,26 @@
+++#include <linux/atmapi.h>
+++#include <linux/atmioc.h>
+++
+++#define ZATM_GETPOOL    _IOW('a',ATMIOC_SARPRV+1,struct atmif_sioc)
+++                                                /* get pool statistics */
+++#define ZATM_GETPOOLZ   _IOW('a',ATMIOC_SARPRV+2,struct atmif_sioc)
+++                                                /* get statistics and zero */
+++#define ZATM_SETPOOL    _IOW('a',ATMIOC_SARPRV+3,struct atmif_sioc)
+++
+++struct zatm_pool_info {
+++        int ref_count;                  /* free buffer pool usage counters */
+++        int low_water,high_water;       /* refill parameters */
+++        int rqa_count,rqu_count;        /* queue condition counters */
+++        int offset,next_off;            /* alignment optimizations: offset */
+++        int next_cnt,next_thres;        /* repetition counter and threshold */
+++};                                                /* set pool parameters */
+++
+++struct zatm_pool_req {
+++        int pool_num;                   /* pool number */
+++        struct zatm_pool_info info;     /* actual information */
+++};
+++
+++#define ZATM_OAM_POOL           0       /* free buffer pool for OAM cells */
+++#define ZATM_AAL0_POOL          1       /* free buffer pool for AAL0 cells */
+++#define ZATM_AAL5_POOL_BASE     2       /* first AAL5 free buffer pool */
+++#define ZATM_LAST_POOL  ZATM_AAL5_POOL_BASE+10 /* max. 64 kB */
++diff --git a/src/maint/zntune.c b/src/maint/zntune.c
++index 62d62ab..bb93eab 100644
++--- a/src/maint/zntune.c
+++++ b/src/maint/zntune.c
++@@ -13,9 +13,8 @@
++ #include <sys/socket.h>
++ #include <sys/ioctl.h>
++ #include <atm.h>
+++#include <atm_zatm.h>
++ #include <sys/time.h> /* for struct timeval, although it's not used */
++-#include <linux/atm_zatm.h>
++-
++ 
++ static void usage(const char *name)
++ {
++-- 
++2.9.0
++
+diff --git a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
+index edfb045..6ab8b07 100644
+--- a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
++++ b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
+@@ -9,7 +9,9 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
- ---
-- adduser |   20 ++++++++++++++++----
-- 1 files changed, 16 insertions(+), 4 deletions(-)
-+ adduser | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ SRC_URI = "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
+            file://link-with-ldflags.patch \
+-           file://install-from-buildir.patch"
++           file://install-from-buildir.patch \
++           file://0001-fix-compile-error-with-linux-kernel-v4.8.patch \
++"
  
- diff --git a/adduser b/adduser
--index c3bd8b0..9a07f9f 100755
-+index a5f83f3..f6cb52c 100755
- --- a/adduser
- +++ b/adduser
--@@ -434,8 +434,14 @@ if ($action eq "addsysuser") {
--     $shell = $special_shell || '/bin/false';
-+@@ -435,7 +435,7 @@ if ($action eq "addsysuser") {
-      $undouser = $new_name;
-      my $useradd = &which('useradd');
---    &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
-+     &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
- -		$shell, '-u', $new_uid, $new_name);
--+    if ($no_create_home) {
--+        &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
--+		    $shell, '-u', $new_uid, '-M', $new_name);
--+    }
--+    else {
--+        &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
--+                    $shell, '-u', $new_uid, $new_name);
--+    }
-++	        $shell, '-u', $new_uid, '-M', $new_name);
-      if(!$disabled_login) {
-          my $usermod = &which('usermod');
-          &systemcall($usermod, '-p', '*', $new_name);
--@@ -524,8 +530,14 @@ if ($action eq "adduser") {
-- 	$shell = $special_shell || $config{"dshell"};
-+@@ -525,7 +525,7 @@ if ($action eq "adduser") {
-      $undouser = $new_name;
-      my $useradd = &which('useradd');
---    &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
-+     &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
- -		$shell, '-u', $new_uid, $new_name);
--+    if ($no_create_home) {
--+        &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
--+	    	    $shell, '-u', $new_uid, '-M', $new_name);
--+    }
--+    else {
--+        &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
--+	    	    $shell, '-u', $new_uid, $new_name);
--+    }
-++               $shell, '-u', $new_uid, '-M', $new_name);
-      &invalidate_nscd();
-  
-      create_homedir (1); # copy skeleton data
- -- 
--1.7.1
-+1.8.5.2
- 
+ SRC_URI[md5sum] = "d49499368c3cf15f73a05d9bce8824a8"
+ SRC_URI[sha256sum] = "9645481a2b16476b59220aa2d6bc5bc41043f291326c9b37581018fbd16dd53a"
 -- 
-2.8.3
+2.7.4
 
 
