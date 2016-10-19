@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
 	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 10EA371BFF
+	by mail.openembedded.org (Postfix) with ESMTP id 5D95E71BFF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2016 05:38:47 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id r16so1418220pfg.3
+	Wed, 19 Oct 2016 05:38:48 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id s8so1421732pfj.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 22:38:49 -0700 (PDT)
+	Tue, 18 Oct 2016 22:38:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=U/d1+MhAq4XCaXTpoyKCYYN9UCiib4uKIQ0Z/sdc0rw=;
-	b=sJPChg6dYtPpBGfs0TRJdTI13cZ4XqmJOcyoHEDQ84RC93u0+ficsPtTKzMD5f8ncU
-	y4H6Ml+CuWErBzxpOMvrPpIlEB4gl1kiUngaPxdr/qU3hLVFlwuBGmnrPMREPtcZ5SYQ
-	tHRSHTsqGCZOEK17tqHbnHTWdtsVSvCgtRt5zqt5vF3Cb+kVMyDetIlLFmRAAPFf4h0P
-	5vBFGfCVyO9KFPUupeqWbyNPf3hrTorIMkhWgvxc3o4Oi4ffbPCRKJVkdpqSMqL8IpF6
-	ZOLpwS2qqwsp8YgP0LWz/yovWZJ5CMtavoHjvpluDL8b73WfFmm7JPjHf1iRRE7AMcmd
-	ZKzA==
+	bh=YEJGMsMnLh/znEW9/56eC4SXF/GbgzE2tXnhTNWh/1E=;
+	b=fcCwTIYQoI87rOlkStHzsaNe4DpOFtpllG7ypYL2nqAKzJhap8EyxBglR/P2uFKZ0T
+	nieQ4rRiHGJZYCZG8ZUjEdfpIFtpPPSq9bD0CFGQ6eBBuS1rPacwrHuVyw8NGDZgLewb
+	mypcTs1geSSWnrplCXGPP6Mk4RN6Wp/1KUii1TM8Qh0YA/x/b1TxSKi0LABOZhZjIuMo
+	kHmqV7rcRDOFXX2Q3Rhj1DDRYulkbm8ANHgcP3D/GWv2m0HW4nNGEf/0VfoiSNWPMFTh
+	lXwlFFFA0BxZMmo9CTLDFOIA8JGmBngzaaMgd0Rm6Pj+7KwpaEmya1OpEXSpufDNlgdK
+	K7NQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=U/d1+MhAq4XCaXTpoyKCYYN9UCiib4uKIQ0Z/sdc0rw=;
-	b=mzAX0XkPUN7o5Hm1O4znPCtKQtZRSSpREh1H1nehTwz7Cr8/5PTrCJ9oc2dfkVxHZs
-	KIFsFe4wygkBQpvDXpVF97c/DZA/ne3LyaFqyVokwkQkBsG3hO6hM1VF2TqB7e66KU/I
-	COLTd/3ud3O5LCVCaEAK6pSLGGEtvzsW85+EwE47MMvWJyEQvBICuGpak7zZ8Ly2r5Qb
-	CxeD2LOfiJChte/d0QFzvvzMd9hjODSFTZIo0SHCMHG1Oi6XOHhm7QDW4eQBIi+GkTl8
-	GH+3i7b55/dCB9fVjnEIrR0LWdXQksv8FhbgBQb8Kvq62Rhhbi3shxEWBTrm+PgbmDy6
-	MERw==
-X-Gm-Message-State: AA6/9RnGEsatE/Vh4NUzeveJj/aqPSPz5CxEp5+UMNdS2JMuTBUSSQc2YGjsU8B6TWCxzA==
-X-Received: by 10.99.125.16 with SMTP id y16mr6484100pgc.38.1476855529112;
+	bh=YEJGMsMnLh/znEW9/56eC4SXF/GbgzE2tXnhTNWh/1E=;
+	b=Q9I4Y6ddvsnsn3IFQdhFsi/4vfPr30FJ8XTurJavXPz0YPU/7EX+6USo4f8rFkhAAa
+	MxCWh7NpAOHFtS9andkw0NW4hIi2Cr1Pg//lXUHRSckcChAhRhWBHqd2lsmf6PCdkaeT
+	8jItoUAguEOw/opwh03UZtYfJR3egxM/IRRAaJ7IDNI1bKlhhs9cUQy5tJXU/jlyb6JM
+	ITz2xM5ZrQFb9ARTQezZEdCgKMUPo735R2mEJLHlf6ypiwhthQUOGw978pc17yJ57KpX
+	o2rivC36hpiXQMKwQQ6CvAskQ472H8jnZkMkuR10qsOYJj61rk70cRE1IJGD9LO9moHH
+	5OmA==
+X-Gm-Message-State: AA6/9RkpohW1srhBgdEakakv+bgEqzpd4SEPhg2eVY6Q/q96HA9W/FyggrlD3A0J6DpsqQ==
+X-Received: by 10.98.219.6 with SMTP id f6mr7942803pfg.72.1476855529833;
 	Tue, 18 Oct 2016 22:38:49 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	qd12sm60099564pab.22.2016.10.18.22.38.48
+	qd12sm60099564pab.22.2016.10.18.22.38.49
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Oct 2016 22:38:48 -0700 (PDT)
+	Tue, 18 Oct 2016 22:38:49 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Oct 2016 22:38:27 -0700
-Message-Id: <20161019053834.11523-9-raj.khem@gmail.com>
+Date: Tue, 18 Oct 2016 22:38:28 -0700
+Message-Id: <20161019053834.11523-10-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.0
 In-Reply-To: <20161019053834.11523-1-raj.khem@gmail.com>
 References: <20161019053834.11523-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 09/16] gpm: Remove nested functions
+Subject: [meta-oe][PATCH 10/16] flashrom: Fix build with clang and aarch64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,360 +57,226 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 19 Oct 2016 05:38:48 -0000
 
-Helps compiling with clang which doesnt support
-nested functions
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../gpm/gpm-1.99.7/remove_nested_functions.patch   | 326 +++++++++++++++++++++
- meta-oe/recipes-support/gpm/gpm_1.99.7.bb          |   1 +
- 2 files changed, 327 insertions(+)
- create mode 100644 meta-oe/recipes-support/gpm/gpm-1.99.7/remove_nested_functions.patch
+ .../flashrom/0001-Fix-compilation-on-aarch64.patch | 62 +++++++++++++++++++
+ ...utological-pointer-compare-when-using-cla.patch | 35 +++++++++++
+ .../0003-remove-duplicate-const-qualifiers.patch   | 71 ++++++++++++++++++++++
+ .../recipes-extended/flashrom/flashrom_0.9.6.1.bb  |  8 ++-
+ 4 files changed, 175 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/flashrom/flashrom/0001-Fix-compilation-on-aarch64.patch
+ create mode 100644 meta-oe/recipes-extended/flashrom/flashrom/0002-Disable-Wtautological-pointer-compare-when-using-cla.patch
+ create mode 100644 meta-oe/recipes-extended/flashrom/flashrom/0003-remove-duplicate-const-qualifiers.patch
 
-diff --git a/meta-oe/recipes-support/gpm/gpm-1.99.7/remove_nested_functions.patch b/meta-oe/recipes-support/gpm/gpm-1.99.7/remove_nested_functions.patch
+diff --git a/meta-oe/recipes-extended/flashrom/flashrom/0001-Fix-compilation-on-aarch64.patch b/meta-oe/recipes-extended/flashrom/flashrom/0001-Fix-compilation-on-aarch64.patch
 new file mode 100644
-index 0000000..d2d6cb8
+index 0000000..6c2f64e
 --- /dev/null
-+++ b/meta-oe/recipes-support/gpm/gpm-1.99.7/remove_nested_functions.patch
-@@ -0,0 +1,326 @@
-+Remove nested functions, they are not available in all compilers
-+e.g. clang will not support them.
++++ b/meta-oe/recipes-extended/flashrom/flashrom/0001-Fix-compilation-on-aarch64.patch
+@@ -0,0 +1,62 @@
++From d9e4dc750dc45e42b482d744829254a3672c11b3 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 19 Oct 2016 00:24:08 +0000
++Subject: [PATCH 1/3] Fix compilation on aarch64
 +
-+Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ arch.h     | 2 +-
++ hwaccess.c | 2 +-
++ hwaccess.h | 6 +++---
++ 3 files changed, 5 insertions(+), 5 deletions(-)
 +
-+Index: gpm-1.99.7/src/drivers/summa/i.c
++Index: flashrom-0.9.6.1/arch.h
 +===================================================================
-+--- gpm-1.99.7.orig/src/drivers/summa/i.c
-++++ gpm-1.99.7/src/drivers/summa/i.c
-+@@ -36,6 +36,28 @@ extern int summamaxy;
++--- flashrom-0.9.6.1.orig/arch.h
+++++ flashrom-0.9.6.1/arch.h
++@@ -27,7 +27,7 @@
++ #define __FLASHROM_ARCH__ "mips"
++ #elif defined(__powerpc__) || defined(__powerpc64__) || defined(__ppc__) || defined(__ppc64__)
++ #define __FLASHROM_ARCH__ "ppc"
++-#elif defined(__arm__)
+++#elif defined(__arm__) || defined(__aarch64__)
++ #define __FLASHROM_ARCH__ "arm"
++ #endif
++ __FLASHROM_ARCH__
++Index: flashrom-0.9.6.1/hwaccess.c
++===================================================================
++--- flashrom-0.9.6.1.orig/hwaccess.c
+++++ flashrom-0.9.6.1/hwaccess.c
++@@ -121,7 +121,7 @@ int rget_io_perms(void)
++ 	return 0;
++ }
 + 
-+ extern signed char summaid;
++-#elif defined (__arm__)
+++#elif defined (__arm__) || defined (__aarch64__)
 + 
-++static void resetsumma(int fd)
-++{
-++   write(fd, 0, 1);          /* Reset */
-++   usleep(400000);           /* wait */
-++}
-++
-++static int waitsumma(int fd)
-++{
-++   struct timeval timeout;
-++
-++   fd_set readfds;
-++
-++   int err;
-++
-++   FD_ZERO(&readfds);
-++   FD_SET(fd, &readfds);
-++   timeout.tv_sec = 0;
-++   timeout.tv_usec = 200000;
-++   err = select(FD_SETSIZE, &readfds, NULL, NULL, &timeout);
-++   return (err);
-++}
-++
-+ Gpm_Type *I_summa(int fd, unsigned short flags, struct Gpm_Type *type, int argc,
-+                   char **argv)
++ static inline void sync_primitive(void)
 + {
-+@@ -43,24 +65,6 @@ Gpm_Type *I_summa(int fd, unsigned short
-+    flags = argc = 0;            /* FIXME: 1.99.13 */
-+    argv = NULL;
-+ 
-+-   void resetsumma() {
-+-      write(fd, 0, 1);          /* Reset */
-+-      usleep(400000);           /* wait */
-+-   }
-+-   int waitsumma() {
-+-      struct timeval timeout;
-+-
-+-      fd_set readfds;
-+-
-+-      int err;
-+-
-+-      FD_ZERO(&readfds);
-+-      FD_SET(fd, &readfds);
-+-      timeout.tv_sec = 0;
-+-      timeout.tv_usec = 200000;
-+-      err = select(FD_SETSIZE, &readfds, NULL, NULL, &timeout);
-+-      return (err);
-+-   }
-+    int err;
-+ 
-+    char buffer[255];
-+@@ -91,7 +95,7 @@ Gpm_Type *I_summa(int fd, unsigned short
-+     */
-+    setspeed(fd, 1200, 9600, 1,
-+             B9600 | CS8 | CREAD | CLOCAL | HUPCL | PARENB | PARODD);
-+-   resetsumma();
-++   resetsumma(fd);
-+ 
-+    write(fd, SS_PROMPT_MODE, strlen(SS_PROMPT_MODE));
-+ 
-+@@ -103,7 +107,7 @@ Gpm_Type *I_summa(int fd, unsigned short
-+        * read the Summa Firm-ID 
-+        */
-+       write(fd, SS_FIRMID, strlen(SS_FIRMID));
-+-      err = waitsumma();
-++      err = waitsumma(fd);
-+       if(!((err == -1) || (!err))) {
-+          summaid = 10;          /* Original Summagraphics */
-+          read(fd, buffer, 255); /* Read Firm-ID */
-+@@ -111,14 +115,14 @@ Gpm_Type *I_summa(int fd, unsigned short
-+    }
-+ 
-+    if(summaid < 0) {            /* Genius-test */
-+-      resetsumma();
-++      resetsumma(fd);
-+       write(fd, GEN_MMSERIES, 1);
-+       write(fd, &GEN_MODELL, 1);        /* Read modell */
-+-      err = waitsumma();
-++      err = waitsumma(fd);
-+       if(!((err == -1) || (!err))) {    /* read Genius-ID */
-+-         err = waitsumma();
-++         err = waitsumma(fd);
-+          if(!((err == -1) || (!err))) {
-+-            err = waitsumma();
-++            err = waitsumma(fd);
-+             if(!((err == -1) || (!err))) {
-+                read(fd, &config, 1);
-+                summaid = (config[0] & 224) >> 5;        /* genius tablet-id
-+@@ -135,14 +139,14 @@ Gpm_Type *I_summa(int fd, unsigned short
-+     * unknown tablet ?
-+     */
-+    if((summaid < 0) || (summaid == 11)) {
-+-      resetsumma();
-++      resetsumma(fd);
-+       write(fd, SS_BINARY_FMT SS_PROMPT_MODE, 3);
-+    }
-+ 
-+    /*
-+     * read tablet size 
-+     */
-+-   err = waitsumma();
-++   err = waitsumma(fd);
-+    if(!((err == -1) || (!err)))
-+       read(fd, buffer, sizeof(buffer));
-+    write(fd, SS_READCONFIG, 1);
-+Index: gpm-1.99.7/src/drivers/wacom/i.c
++Index: flashrom-0.9.6.1/hwaccess.h
 +===================================================================
-+--- gpm-1.99.7.orig/src/drivers/wacom/i.c
-++++ gpm-1.99.7/src/drivers/wacom/i.c
-+@@ -30,10 +30,6 @@
-+ #include "message.h"            /* gpm_report */
-+ #include "wacom.h"              /* wacom */
++--- flashrom-0.9.6.1.orig/hwaccess.h
+++++ flashrom-0.9.6.1/hwaccess.h
++@@ -68,8 +68,8 @@
++ #error Little-endian PowerPC #defines are unknown
++ #endif
 + 
-+-Gpm_Type *I_wacom(int fd, unsigned short flags, struct Gpm_Type *type, int argc,
-+-                  char **argv)
-+-{
-+-
-+ /* wacom graphire tablet */
-+ #define UD_RESETBAUD     "\r$"  /* reset baud rate to default (wacom V) */
-+    /*
-+@@ -45,83 +41,91 @@ Gpm_Type *I_wacom(int fd, unsigned short
-+ #define UD_COORD         "~C\r" /* Request max coordinates */
-+ #define UD_STOP          "\nSP\r"       /* stop sending coordinates */
++-#elif defined (__arm__)
++-#if defined (__ARMEL__)
+++#elif defined (__arm__) || defined (__aarch64__)
+++#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
++ #define __FLASHROM_LITTLE_ENDIAN__ 1
++ #else
++ #error Big-endian ARM #defines are unknown
++@@ -337,7 +337,7 @@ int libpayload_wrmsr(int addr, msr_t msr
 + 
-+-   flags = 0;                   /* FIXME: 1.99.13 */
++ /* PCI port I/O is not yet implemented on MIPS. */
 + 
-+-   void reset_wacom() {
-+-      /*
-+-       * Init Wacom communication; this is modified from xf86Wacom.so module 
-+-       */
-+-      /*
-+-       * Set speed to 19200 
-+-       */
-+-      setspeed(fd, 1200, 19200, 0, B19200 | CS8 | CREAD | CLOCAL | HUPCL);
-+-      /*
-+-       * Send Reset Baudrate Command 
-+-       */
-+-      write(fd, UD_RESETBAUD, strlen(UD_RESETBAUD));
-+-      usleep(250000);
-+-      /*
-+-       * Send Reset Command 
-+-       */
-+-      write(fd, UD_RESET, strlen(UD_RESET));
-+-      usleep(75000);
-+-      /*
-+-       * Set speed to 9600bps 
-+-       */
-+-      setspeed(fd, 1200, 9600, 0, B9600 | CS8 | CREAD | CLOCAL | HUPCL);
-+-      /*
-+-       * Send Reset Command 
-+-       */
-+-      write(fd, UD_RESET, strlen(UD_RESET));
-+-      usleep(250000);
-+-      write(fd, UD_STOP, strlen(UD_STOP));
-+-      usleep(100000);
-+-   }
-++static void reset_wacom(int fd)
-++{
-++   /*
-++    * Init Wacom communication; this is modified from xf86Wacom.so module 
-++    */
-++   /*
-++    * Set speed to 19200 
-++    */
-++   setspeed(fd, 1200, 19200, 0, B19200 | CS8 | CREAD | CLOCAL | HUPCL);
-++   /*
-++    * Send Reset Baudrate Command 
-++    */
-++   write(fd, UD_RESETBAUD, strlen(UD_RESETBAUD));
-++   usleep(250000);
-++   /*
-++    * Send Reset Command 
-++    */
-++   write(fd, UD_RESET, strlen(UD_RESET));
-++   usleep(75000);
-++   /*
-++    * Set speed to 9600bps 
-++    */
-++   setspeed(fd, 1200, 9600, 0, B9600 | CS8 | CREAD | CLOCAL | HUPCL);
-++   /*
-++    * Send Reset Command 
-++    */
-++   write(fd, UD_RESET, strlen(UD_RESET));
-++   usleep(250000);
-++   write(fd, UD_STOP, strlen(UD_STOP));
-++   usleep(100000);
-++}
++-#elif defined(__arm__)
+++#elif defined(__arm__) || defined (__aarch64__)
 + 
-+-   int wait_wacom() {
-+-      /*
-+-       *  Wait up to 200 ms for Data from Tablet.
-+-       *  Do not read that data.
-+-       *  Give back 0 on timeout condition, -1 on error and 1 for DataPresent
-+-       */
-+-      struct timeval timeout;
-+-
-+-      fd_set readfds;
-+-
-+-      int err;
-+-
-+-      FD_ZERO(&readfds);
-+-      FD_SET(fd, &readfds);
-+-      timeout.tv_sec = 0;
-+-      timeout.tv_usec = 200000;
-+-      err = select(FD_SETSIZE, &readfds, NULL, NULL, &timeout);
-+-      return ((err > 0) ? 1 : err);
-+-   }
-++static int wait_wacom(int fd)
-++{
-++   /*
-++    *  Wait up to 200 ms for Data from Tablet.
-++    *  Do not read that data.
-++    *  Give back 0 on timeout condition, -1 on error and 1 for DataPresent
-++    */
-++   struct timeval timeout;
++ /* Non memory mapped I/O is not supported on ARM. */
 + 
-+-   char buffer[50], *p;
-++   fd_set readfds;
-+ 
-+-   int RequestData(char *cmd) {
-+-      int err;
-++   int err;
-+ 
-+-      /*
-+-       * Send cmd if not null, and get back answer from tablet.
-+-       * Get Data to buffer until full or timeout.
-+-       * Give back 0 for timeout and !0 for buffer full
-+-       */
-+-      if(cmd)
-+-         write(fd, cmd, strlen(cmd));
-+-      memset(buffer, 0, sizeof(buffer));
-+-      p = buffer;
-+-      err = wait_wacom();
-+-      while(err != -1 && err && (p - buffer) < (int) (sizeof(buffer) - 1)) {
-+-         p += read(fd, p, (sizeof(buffer) - 1) - (p - buffer));
-+-         err = wait_wacom();
-+-      }
-+-      /*
-+-       * return 1 for buffer full 
-+-       */
-+-      return ((strlen(buffer) >= (sizeof(buffer) - 1)) ? !0 : 0);
-++   FD_ZERO(&readfds);
-++   FD_SET(fd, &readfds);
-++   timeout.tv_sec = 0;
-++   timeout.tv_usec = 200000;
-++   err = select(FD_SETSIZE, &readfds, NULL, NULL, &timeout);
-++   return ((err > 0) ? 1 : err);
-++}
+diff --git a/meta-oe/recipes-extended/flashrom/flashrom/0002-Disable-Wtautological-pointer-compare-when-using-cla.patch b/meta-oe/recipes-extended/flashrom/flashrom/0002-Disable-Wtautological-pointer-compare-when-using-cla.patch
+new file mode 100644
+index 0000000..aec11bf
+--- /dev/null
++++ b/meta-oe/recipes-extended/flashrom/flashrom/0002-Disable-Wtautological-pointer-compare-when-using-cla.patch
+@@ -0,0 +1,35 @@
++From 9be0d152dfe8ac0f9b665d61aeb3f99dae533e0f Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 19 Oct 2016 00:25:09 +0000
++Subject: [PATCH 2/3] Disable Wtautological-pointer-compare when using clang
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ flashrom.c | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/flashrom.c b/flashrom.c
++index 04e9934..bf49104 100644
++--- a/flashrom.c
+++++ b/flashrom.c
++@@ -1569,6 +1569,9 @@ int selfcheck(void)
++ 	 * For 'flashchips' we check the first element to be non-null. In the
++ 	 * other cases there exist use cases where the first element can be
++ 	 * null. */
+++#pragma clang diagnostic push
+++#pragma clang diagnostic ignored "-Wtautological-pointer-compare"
 ++
-++static int RequestData(int fd, char *cmd, char *buffer)
-++{
-++   int err;
-++   char *p;
-++   /*
-++    * Send cmd if not null, and get back answer from tablet.
-++    * Get Data to buffer until full or timeout.
-++    * Give back 0 for timeout and !0 for buffer full
-++    */
-++   if(cmd)
-++      write(fd, cmd, strlen(cmd));
-++   memset(buffer, 0, sizeof(buffer));
-++   p = buffer;
-++   err = wait_wacom(fd);
-++   while(err != -1 && err && (p - buffer) < (int) (sizeof(buffer) - 1)) {
-++      p += read(fd, p, (sizeof(buffer) - 1) - (p - buffer));
-++      err = wait_wacom(fd);
-+    }
-++   /*
-++    * return 1 for buffer full 
-++    */
-++   return ((strlen(buffer) >= (sizeof(buffer) - 1)) ? !0 : 0);
-++}
-++
-++Gpm_Type *I_wacom(int fd, unsigned short flags, struct Gpm_Type *type, int argc,
-++                  char **argv)
-++{
-++
-++   flags = 0;                   /* FIXME: 1.99.13 */
-++
-++   char buffer[50];
++ 	if (flashchips == NULL || flashchips[0].vendor == NULL) {
++ 		msg_gerr("Flashchips table miscompilation!\n");
++ 		ret = 1;
++@@ -1602,6 +1605,7 @@ int selfcheck(void)
++ 		msg_gerr("Known laptops table does not exist!\n");
++ 		ret = 1;
++ 	}
+++#pragma clang diagnostic pop
++ #endif
++ 	return ret;
++ }
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-extended/flashrom/flashrom/0003-remove-duplicate-const-qualifiers.patch b/meta-oe/recipes-extended/flashrom/flashrom/0003-remove-duplicate-const-qualifiers.patch
+new file mode 100644
+index 0000000..99283d3
+--- /dev/null
++++ b/meta-oe/recipes-extended/flashrom/flashrom/0003-remove-duplicate-const-qualifiers.patch
+@@ -0,0 +1,71 @@
++From 42ec9bd51e60aa38fe6e78f644e742d6989b6683 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 19 Oct 2016 00:25:23 +0000
++Subject: [PATCH 3/3] remove duplicate const qualifiers
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ bitbang_spi.c  | 12 ++++++------
++ dummyflasher.c |  2 +-
++ 2 files changed, 7 insertions(+), 7 deletions(-)
++
++diff --git a/bitbang_spi.c b/bitbang_spi.c
++index 11d2de1..508cf45 100644
++--- a/bitbang_spi.c
+++++ b/bitbang_spi.c
++@@ -26,33 +26,33 @@
++ #include "spi.h"
 + 
-+    /*
-+     * We do both modes, relative and absolute, with the same function.
-+@@ -143,17 +147,17 @@ Gpm_Type *I_wacom(int fd, unsigned short
-+    };
-+    parse_argv(optioninfo, argc, argv);
-+    type->absolute = WacomAbsoluteWanted;
-+-   reset_wacom();
-++   reset_wacom(fd);
++ /* Note that CS# is active low, so val=0 means the chip is active. */
++-static void bitbang_spi_set_cs(const const struct bitbang_spi_master *master, int val)
+++static void bitbang_spi_set_cs(const struct bitbang_spi_master *master, int val)
++ {
++ 	master->set_cs(val);
++ }
 + 
-+    /*
-+     * "Flush" input queque 
-+     */
-+-   while(RequestData(NULL)) ;
-++   while(RequestData(fd, NULL, buffer)) ;
++-static void bitbang_spi_set_sck(const const struct bitbang_spi_master *master, int val)
+++static void bitbang_spi_set_sck(const struct bitbang_spi_master *master, int val)
++ {
++ 	master->set_sck(val);
++ }
 + 
-+    /*
-+     * read WACOM-ID 
-+     */
-+-   RequestData(UD_FIRMID);
-++   RequestData(fd, UD_FIRMID, buffer);
++-static void bitbang_spi_set_mosi(const const struct bitbang_spi_master *master, int val)
+++static void bitbang_spi_set_mosi(const struct bitbang_spi_master *master, int val)
++ {
++ 	master->set_mosi(val);
++ }
 + 
-+    /*
-+     * Search for matching modell 
-+@@ -180,7 +184,7 @@ Gpm_Type *I_wacom(int fd, unsigned short
-+     * read Wacom max size 
-+     */
-+    if(WacomModell != (-1) && (!wcmodell[WacomModell].maxX)) {
-+-      RequestData(UD_COORD);
-++      RequestData(fd, UD_COORD, buffer);
-+       sscanf(buffer + 2, "%d,%d", &wmaxx, &wmaxy);
-+       wmaxx = (wmaxx - wcmodell[WacomModell].border);
-+       wmaxy = (wmaxy - wcmodell[WacomModell].border);
-diff --git a/meta-oe/recipes-support/gpm/gpm_1.99.7.bb b/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
-index 7022057..bbb8c28 100644
---- a/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
-+++ b/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
-@@ -13,6 +13,7 @@ SRC_URI = "ftp://arcana.linux.it/pub/gpm/gpm-${PV}.tar.bz2 \
-            file://no-docs.patch \
-            file://processcreds.patch \
-            file://eglibc-2.17.patch \
-+           file://remove_nested_functions.patch \
-            file://init"
++-static int bitbang_spi_get_miso(const const struct bitbang_spi_master *master)
+++static int bitbang_spi_get_miso(const struct bitbang_spi_master *master)
++ {
++ 	return master->get_miso();
++ }
++ 
++-static void bitbang_spi_request_bus(const const struct bitbang_spi_master *master)
+++static void bitbang_spi_request_bus(const struct bitbang_spi_master *master)
++ {
++ 	if (master->request_bus)
++ 		master->request_bus();
++ }
++ 
++-static void bitbang_spi_release_bus(const const struct bitbang_spi_master *master)
+++static void bitbang_spi_release_bus(const struct bitbang_spi_master *master)
++ {
++ 	if (master->release_bus)
++ 		master->release_bus();
++diff --git a/dummyflasher.c b/dummyflasher.c
++index 66d0df0..d0de41c 100644
++--- a/dummyflasher.c
+++++ b/dummyflasher.c
++@@ -66,7 +66,7 @@ int spi_ignorelist_size = 0;
++ static uint8_t emu_status = 0;
++ 
++ /* A legit complete SFDP table based on the MX25L6436E (rev. 1.8) datasheet. */
++-static const uint8_t const sfdp_table[] = {
+++static const uint8_t sfdp_table[] = {
++ 	0x53, 0x46, 0x44, 0x50, // @0x00: SFDP signature
++ 	0x00, 0x01, 0x01, 0xFF, // @0x04: revision 1.0, 2 headers
++ 	0x00, 0x00, 0x01, 0x09, // @0x08: JEDEC SFDP header rev. 1.0, 9 DW long
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-extended/flashrom/flashrom_0.9.6.1.bb b/meta-oe/recipes-extended/flashrom/flashrom_0.9.6.1.bb
+index a1f0b30..d3ec578 100644
+--- a/meta-oe/recipes-extended/flashrom/flashrom_0.9.6.1.bb
++++ b/meta-oe/recipes-extended/flashrom/flashrom_0.9.6.1.bb
+@@ -5,11 +5,17 @@ HOMEPAGE = "http://flashrom.org"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ DEPENDS = "pciutils"
  
- inherit autotools-brokensep update-rc.d
+-SRC_URI = "http://download.flashrom.org/releases/flashrom-${PV}.tar.bz2"
++SRC_URI = "http://download.flashrom.org/releases/flashrom-${PV}.tar.bz2 \
++           file://0001-Fix-compilation-on-aarch64.patch \
++           file://0002-Disable-Wtautological-pointer-compare-when-using-cla.patch \
++           file://0003-remove-duplicate-const-qualifiers.patch \
++           "
+ 
+ SRC_URI[md5sum] = "407e836c0a2b17ec76583cb6809f65e5"
+ SRC_URI[sha256sum] = "6f7b588cce74c90b4fe9c9c794de105de76e0323442fb5770b1aeab81e9d560a"
+ 
++CFLAGS += "-Wno-error=unknown-pragmas"
++
+ do_install() {
+     oe_runmake PREFIX=${prefix} DESTDIR=${D} install
+ }
 -- 
 2.10.0
 
