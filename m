@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D7BA71C36
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 10EA371BFF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2016 05:38:46 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id 128so1429404pfz.1
+	Wed, 19 Oct 2016 05:38:47 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id r16so1418220pfg.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 22:38:48 -0700 (PDT)
+	Tue, 18 Oct 2016 22:38:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=9zYXe3dd5Q46UBN4tWUSg1AmGhZWrrUn1WsKpAEU5cM=;
-	b=BsWYJ1tqa09dFvyFovHhkyQak76eD2Ec2gZ6oW4FRn9ZE1Arc/gFe6WZbBwJTYFxcq
-	zWHqGO7+wbpnj/T8jkDRbtNTWuUyZFFg9oNCYlFz+YCH6u2yoq/7AICb1Z7xDxj4Ir5K
-	p1OBUBwhhgNslsyblQY10DzT8fJLktdQK1ljFTgyw5+jq13SllEvxW08xi47lh/qwRjJ
-	M20s+C0r7VMUFXxVuCjVvuMxjfNHunqDuQl6krrOtpmy7KnHgy/w9iMrEGf5z1sKaYHV
-	sddcgyGZcOvAxu1jqC8Vju9kiILkKk5F5LyUED+eCqOi5fUVCacN7cOag367PJQcPLGp
-	2uBw==
+	bh=U/d1+MhAq4XCaXTpoyKCYYN9UCiib4uKIQ0Z/sdc0rw=;
+	b=sJPChg6dYtPpBGfs0TRJdTI13cZ4XqmJOcyoHEDQ84RC93u0+ficsPtTKzMD5f8ncU
+	y4H6Ml+CuWErBzxpOMvrPpIlEB4gl1kiUngaPxdr/qU3hLVFlwuBGmnrPMREPtcZ5SYQ
+	tHRSHTsqGCZOEK17tqHbnHTWdtsVSvCgtRt5zqt5vF3Cb+kVMyDetIlLFmRAAPFf4h0P
+	5vBFGfCVyO9KFPUupeqWbyNPf3hrTorIMkhWgvxc3o4Oi4ffbPCRKJVkdpqSMqL8IpF6
+	ZOLpwS2qqwsp8YgP0LWz/yovWZJ5CMtavoHjvpluDL8b73WfFmm7JPjHf1iRRE7AMcmd
+	ZKzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=9zYXe3dd5Q46UBN4tWUSg1AmGhZWrrUn1WsKpAEU5cM=;
-	b=DLuNYvBdyhNjljhEktZMgwDzDkHGZK+u9KFeqBXZy+b3VTvrR3P2vRIDO68xXmfoXC
-	1/TNwTw4AmEDrMGCvyfyeIVY0nFX7tJh5l2MFI3oD3/N36VFlX23bgGhqNKh5dO1W03p
-	NWYATXHUPyDHtNaXTNaJ/6P7BVlfJQinEjy8zV8bqCslPO6Z/aJBAteRHq0iA1sqJR2/
-	Sgh9qxnv5eofZuIBBoaa+ZFPF57Ub9ODR0sjiMEhbQTttxxi3vaa46UvYhlERGGONwxw
-	hdu/UTG8dQnwkG9cE7jtq3ihc7SHzupVmP/ZOYg1J/PzQdQ07HqjiVeHZ0zGz9/Tbmu8
-	AyyA==
-X-Gm-Message-State: AA6/9RlRBAAt7UesywznrJ1jpQS/6UzuNhqIT6T/j/CRD2p8qxj1yoW6ECAv3ftPL5ADOA==
-X-Received: by 10.99.131.66 with SMTP id h63mr6378542pge.103.1476855528327;
-	Tue, 18 Oct 2016 22:38:48 -0700 (PDT)
+	bh=U/d1+MhAq4XCaXTpoyKCYYN9UCiib4uKIQ0Z/sdc0rw=;
+	b=mzAX0XkPUN7o5Hm1O4znPCtKQtZRSSpREh1H1nehTwz7Cr8/5PTrCJ9oc2dfkVxHZs
+	KIFsFe4wygkBQpvDXpVF97c/DZA/ne3LyaFqyVokwkQkBsG3hO6hM1VF2TqB7e66KU/I
+	COLTd/3ud3O5LCVCaEAK6pSLGGEtvzsW85+EwE47MMvWJyEQvBICuGpak7zZ8Ly2r5Qb
+	CxeD2LOfiJChte/d0QFzvvzMd9hjODSFTZIo0SHCMHG1Oi6XOHhm7QDW4eQBIi+GkTl8
+	GH+3i7b55/dCB9fVjnEIrR0LWdXQksv8FhbgBQb8Kvq62Rhhbi3shxEWBTrm+PgbmDy6
+	MERw==
+X-Gm-Message-State: AA6/9RnGEsatE/Vh4NUzeveJj/aqPSPz5CxEp5+UMNdS2JMuTBUSSQc2YGjsU8B6TWCxzA==
+X-Received: by 10.99.125.16 with SMTP id y16mr6484100pgc.38.1476855529112;
+	Tue, 18 Oct 2016 22:38:49 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	qd12sm60099564pab.22.2016.10.18.22.38.47
+	qd12sm60099564pab.22.2016.10.18.22.38.48
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Oct 2016 22:38:47 -0700 (PDT)
+	Tue, 18 Oct 2016 22:38:48 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Oct 2016 22:38:26 -0700
-Message-Id: <20161019053834.11523-8-raj.khem@gmail.com>
+Date: Tue, 18 Oct 2016 22:38:27 -0700
+Message-Id: <20161019053834.11523-9-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.0
 In-Reply-To: <20161019053834.11523-1-raj.khem@gmail.com>
 References: <20161019053834.11523-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 08/16] lowpan-tools: Fix errors found with clang
+Subject: [meta-oe][PATCH 09/16] gpm: Remove nested functions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,79 +55,362 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Oct 2016 05:38:47 -0000
+X-List-Received-Date: Wed, 19 Oct 2016 05:38:48 -0000
+
+Helps compiling with clang which doesnt support
+nested functions
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Fix-build-errors-with-clang.patch         | 34 ++++++++++++++++++++++
- .../lowpan-tools/lowpan-tools_git.bb               |  6 +++-
- 2 files changed, 39 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-Fix-build-errors-with-clang.patch
+ .../gpm/gpm-1.99.7/remove_nested_functions.patch   | 326 +++++++++++++++++++++
+ meta-oe/recipes-support/gpm/gpm_1.99.7.bb          |   1 +
+ 2 files changed, 327 insertions(+)
+ create mode 100644 meta-oe/recipes-support/gpm/gpm-1.99.7/remove_nested_functions.patch
 
-diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-Fix-build-errors-with-clang.patch b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-Fix-build-errors-with-clang.patch
+diff --git a/meta-oe/recipes-support/gpm/gpm-1.99.7/remove_nested_functions.patch b/meta-oe/recipes-support/gpm/gpm-1.99.7/remove_nested_functions.patch
 new file mode 100644
-index 0000000..8e906f7
+index 0000000..d2d6cb8
 --- /dev/null
-+++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-Fix-build-errors-with-clang.patch
-@@ -0,0 +1,34 @@
-+From 5f9e80acb0a1ac399839bf160e43f6120c4b5128 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 18 Oct 2016 23:49:09 +0000
-+Subject: [PATCH] Fix build errors with clang
-+
-+| ../../../../../../../workspace/sources/lowpan-tools/src/coordinator.c:313:50: error: format specifies type 'unsigned char' but the argument has type 'int' [-Werror,-Wformat]
-+|                 fprintf(stderr, "Opt: %c (%hhx)\n", (char)opt, opt);
-+|                                           ~~~~                 ^~~
-+|                                           %x
-+| 1 error generated.
++++ b/meta-oe/recipes-support/gpm/gpm-1.99.7/remove_nested_functions.patch
+@@ -0,0 +1,326 @@
++Remove nested functions, they are not available in all compilers
++e.g. clang will not support them.
 +
 +Upstream-Status: Pending
-+
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/coordinator.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/coordinator.c b/src/coordinator.c
-+index c139aae..f0de6d2 100644
-+--- a/src/coordinator.c
-++++ b/src/coordinator.c
-+@@ -310,7 +310,7 @@ int main(int argc, char **argv)
-+ #else
-+ 		opt = getopt(argc, argv, "l:f:d:m:n:i:s:p:c:hv");
-+ #endif
-+-		fprintf(stderr, "Opt: %c (%hhx)\n", opt, opt);
-++		fprintf(stderr, "Opt: %c (%hhx)\n", opt, (unsigned char)opt);
-+ 		if (opt == -1)
-+ 			break;
++Index: gpm-1.99.7/src/drivers/summa/i.c
++===================================================================
++--- gpm-1.99.7.orig/src/drivers/summa/i.c
+++++ gpm-1.99.7/src/drivers/summa/i.c
++@@ -36,6 +36,28 @@ extern int summamaxy;
 + 
-+-- 
-+1.9.1
-+
-diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-index 76a4edf..8c7dbc0 100644
---- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-+++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-@@ -9,7 +9,9 @@ DEPENDS = "flex-native bison-native libnl python"
++ extern signed char summaid;
++ 
+++static void resetsumma(int fd)
+++{
+++   write(fd, 0, 1);          /* Reset */
+++   usleep(400000);           /* wait */
+++}
+++
+++static int waitsumma(int fd)
+++{
+++   struct timeval timeout;
+++
+++   fd_set readfds;
+++
+++   int err;
+++
+++   FD_ZERO(&readfds);
+++   FD_SET(fd, &readfds);
+++   timeout.tv_sec = 0;
+++   timeout.tv_usec = 200000;
+++   err = select(FD_SETSIZE, &readfds, NULL, NULL, &timeout);
+++   return (err);
+++}
+++
++ Gpm_Type *I_summa(int fd, unsigned short flags, struct Gpm_Type *type, int argc,
++                   char **argv)
++ {
++@@ -43,24 +65,6 @@ Gpm_Type *I_summa(int fd, unsigned short
++    flags = argc = 0;            /* FIXME: 1.99.13 */
++    argv = NULL;
++ 
++-   void resetsumma() {
++-      write(fd, 0, 1);          /* Reset */
++-      usleep(400000);           /* wait */
++-   }
++-   int waitsumma() {
++-      struct timeval timeout;
++-
++-      fd_set readfds;
++-
++-      int err;
++-
++-      FD_ZERO(&readfds);
++-      FD_SET(fd, &readfds);
++-      timeout.tv_sec = 0;
++-      timeout.tv_usec = 200000;
++-      err = select(FD_SETSIZE, &readfds, NULL, NULL, &timeout);
++-      return (err);
++-   }
++    int err;
++ 
++    char buffer[255];
++@@ -91,7 +95,7 @@ Gpm_Type *I_summa(int fd, unsigned short
++     */
++    setspeed(fd, 1200, 9600, 1,
++             B9600 | CS8 | CREAD | CLOCAL | HUPCL | PARENB | PARODD);
++-   resetsumma();
+++   resetsumma(fd);
++ 
++    write(fd, SS_PROMPT_MODE, strlen(SS_PROMPT_MODE));
++ 
++@@ -103,7 +107,7 @@ Gpm_Type *I_summa(int fd, unsigned short
++        * read the Summa Firm-ID 
++        */
++       write(fd, SS_FIRMID, strlen(SS_FIRMID));
++-      err = waitsumma();
+++      err = waitsumma(fd);
++       if(!((err == -1) || (!err))) {
++          summaid = 10;          /* Original Summagraphics */
++          read(fd, buffer, 255); /* Read Firm-ID */
++@@ -111,14 +115,14 @@ Gpm_Type *I_summa(int fd, unsigned short
++    }
++ 
++    if(summaid < 0) {            /* Genius-test */
++-      resetsumma();
+++      resetsumma(fd);
++       write(fd, GEN_MMSERIES, 1);
++       write(fd, &GEN_MODELL, 1);        /* Read modell */
++-      err = waitsumma();
+++      err = waitsumma(fd);
++       if(!((err == -1) || (!err))) {    /* read Genius-ID */
++-         err = waitsumma();
+++         err = waitsumma(fd);
++          if(!((err == -1) || (!err))) {
++-            err = waitsumma();
+++            err = waitsumma(fd);
++             if(!((err == -1) || (!err))) {
++                read(fd, &config, 1);
++                summaid = (config[0] & 224) >> 5;        /* genius tablet-id
++@@ -135,14 +139,14 @@ Gpm_Type *I_summa(int fd, unsigned short
++     * unknown tablet ?
++     */
++    if((summaid < 0) || (summaid == 11)) {
++-      resetsumma();
+++      resetsumma(fd);
++       write(fd, SS_BINARY_FMT SS_PROMPT_MODE, 3);
++    }
++ 
++    /*
++     * read tablet size 
++     */
++-   err = waitsumma();
+++   err = waitsumma(fd);
++    if(!((err == -1) || (!err)))
++       read(fd, buffer, sizeof(buffer));
++    write(fd, SS_READCONFIG, 1);
++Index: gpm-1.99.7/src/drivers/wacom/i.c
++===================================================================
++--- gpm-1.99.7.orig/src/drivers/wacom/i.c
+++++ gpm-1.99.7/src/drivers/wacom/i.c
++@@ -30,10 +30,6 @@
++ #include "message.h"            /* gpm_report */
++ #include "wacom.h"              /* wacom */
++ 
++-Gpm_Type *I_wacom(int fd, unsigned short flags, struct Gpm_Type *type, int argc,
++-                  char **argv)
++-{
++-
++ /* wacom graphire tablet */
++ #define UD_RESETBAUD     "\r$"  /* reset baud rate to default (wacom V) */
++    /*
++@@ -45,83 +41,91 @@ Gpm_Type *I_wacom(int fd, unsigned short
++ #define UD_COORD         "~C\r" /* Request max coordinates */
++ #define UD_STOP          "\nSP\r"       /* stop sending coordinates */
++ 
++-   flags = 0;                   /* FIXME: 1.99.13 */
++ 
++-   void reset_wacom() {
++-      /*
++-       * Init Wacom communication; this is modified from xf86Wacom.so module 
++-       */
++-      /*
++-       * Set speed to 19200 
++-       */
++-      setspeed(fd, 1200, 19200, 0, B19200 | CS8 | CREAD | CLOCAL | HUPCL);
++-      /*
++-       * Send Reset Baudrate Command 
++-       */
++-      write(fd, UD_RESETBAUD, strlen(UD_RESETBAUD));
++-      usleep(250000);
++-      /*
++-       * Send Reset Command 
++-       */
++-      write(fd, UD_RESET, strlen(UD_RESET));
++-      usleep(75000);
++-      /*
++-       * Set speed to 9600bps 
++-       */
++-      setspeed(fd, 1200, 9600, 0, B9600 | CS8 | CREAD | CLOCAL | HUPCL);
++-      /*
++-       * Send Reset Command 
++-       */
++-      write(fd, UD_RESET, strlen(UD_RESET));
++-      usleep(250000);
++-      write(fd, UD_STOP, strlen(UD_STOP));
++-      usleep(100000);
++-   }
+++static void reset_wacom(int fd)
+++{
+++   /*
+++    * Init Wacom communication; this is modified from xf86Wacom.so module 
+++    */
+++   /*
+++    * Set speed to 19200 
+++    */
+++   setspeed(fd, 1200, 19200, 0, B19200 | CS8 | CREAD | CLOCAL | HUPCL);
+++   /*
+++    * Send Reset Baudrate Command 
+++    */
+++   write(fd, UD_RESETBAUD, strlen(UD_RESETBAUD));
+++   usleep(250000);
+++   /*
+++    * Send Reset Command 
+++    */
+++   write(fd, UD_RESET, strlen(UD_RESET));
+++   usleep(75000);
+++   /*
+++    * Set speed to 9600bps 
+++    */
+++   setspeed(fd, 1200, 9600, 0, B9600 | CS8 | CREAD | CLOCAL | HUPCL);
+++   /*
+++    * Send Reset Command 
+++    */
+++   write(fd, UD_RESET, strlen(UD_RESET));
+++   usleep(250000);
+++   write(fd, UD_STOP, strlen(UD_STOP));
+++   usleep(100000);
+++}
++ 
++-   int wait_wacom() {
++-      /*
++-       *  Wait up to 200 ms for Data from Tablet.
++-       *  Do not read that data.
++-       *  Give back 0 on timeout condition, -1 on error and 1 for DataPresent
++-       */
++-      struct timeval timeout;
++-
++-      fd_set readfds;
++-
++-      int err;
++-
++-      FD_ZERO(&readfds);
++-      FD_SET(fd, &readfds);
++-      timeout.tv_sec = 0;
++-      timeout.tv_usec = 200000;
++-      err = select(FD_SETSIZE, &readfds, NULL, NULL, &timeout);
++-      return ((err > 0) ? 1 : err);
++-   }
+++static int wait_wacom(int fd)
+++{
+++   /*
+++    *  Wait up to 200 ms for Data from Tablet.
+++    *  Do not read that data.
+++    *  Give back 0 on timeout condition, -1 on error and 1 for DataPresent
+++    */
+++   struct timeval timeout;
++ 
++-   char buffer[50], *p;
+++   fd_set readfds;
++ 
++-   int RequestData(char *cmd) {
++-      int err;
+++   int err;
++ 
++-      /*
++-       * Send cmd if not null, and get back answer from tablet.
++-       * Get Data to buffer until full or timeout.
++-       * Give back 0 for timeout and !0 for buffer full
++-       */
++-      if(cmd)
++-         write(fd, cmd, strlen(cmd));
++-      memset(buffer, 0, sizeof(buffer));
++-      p = buffer;
++-      err = wait_wacom();
++-      while(err != -1 && err && (p - buffer) < (int) (sizeof(buffer) - 1)) {
++-         p += read(fd, p, (sizeof(buffer) - 1) - (p - buffer));
++-         err = wait_wacom();
++-      }
++-      /*
++-       * return 1 for buffer full 
++-       */
++-      return ((strlen(buffer) >= (sizeof(buffer) - 1)) ? !0 : 0);
+++   FD_ZERO(&readfds);
+++   FD_SET(fd, &readfds);
+++   timeout.tv_sec = 0;
+++   timeout.tv_usec = 200000;
+++   err = select(FD_SETSIZE, &readfds, NULL, NULL, &timeout);
+++   return ((err > 0) ? 1 : err);
+++}
+++
+++static int RequestData(int fd, char *cmd, char *buffer)
+++{
+++   int err;
+++   char *p;
+++   /*
+++    * Send cmd if not null, and get back answer from tablet.
+++    * Get Data to buffer until full or timeout.
+++    * Give back 0 for timeout and !0 for buffer full
+++    */
+++   if(cmd)
+++      write(fd, cmd, strlen(cmd));
+++   memset(buffer, 0, sizeof(buffer));
+++   p = buffer;
+++   err = wait_wacom(fd);
+++   while(err != -1 && err && (p - buffer) < (int) (sizeof(buffer) - 1)) {
+++      p += read(fd, p, (sizeof(buffer) - 1) - (p - buffer));
+++      err = wait_wacom(fd);
++    }
+++   /*
+++    * return 1 for buffer full 
+++    */
+++   return ((strlen(buffer) >= (sizeof(buffer) - 1)) ? !0 : 0);
+++}
+++
+++Gpm_Type *I_wacom(int fd, unsigned short flags, struct Gpm_Type *type, int argc,
+++                  char **argv)
+++{
+++
+++   flags = 0;                   /* FIXME: 1.99.13 */
+++
+++   char buffer[50];
++ 
++    /*
++     * We do both modes, relative and absolute, with the same function.
++@@ -143,17 +147,17 @@ Gpm_Type *I_wacom(int fd, unsigned short
++    };
++    parse_argv(optioninfo, argc, argv);
++    type->absolute = WacomAbsoluteWanted;
++-   reset_wacom();
+++   reset_wacom(fd);
++ 
++    /*
++     * "Flush" input queque 
++     */
++-   while(RequestData(NULL)) ;
+++   while(RequestData(fd, NULL, buffer)) ;
++ 
++    /*
++     * read WACOM-ID 
++     */
++-   RequestData(UD_FIRMID);
+++   RequestData(fd, UD_FIRMID, buffer);
++ 
++    /*
++     * Search for matching modell 
++@@ -180,7 +184,7 @@ Gpm_Type *I_wacom(int fd, unsigned short
++     * read Wacom max size 
++     */
++    if(WacomModell != (-1) && (!wcmodell[WacomModell].maxX)) {
++-      RequestData(UD_COORD);
+++      RequestData(fd, UD_COORD, buffer);
++       sscanf(buffer + 2, "%d,%d", &wmaxx, &wmaxy);
++       wmaxx = (wmaxx - wcmodell[WacomModell].border);
++       wmaxy = (wmaxy - wcmodell[WacomModell].border);
+diff --git a/meta-oe/recipes-support/gpm/gpm_1.99.7.bb b/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
+index 7022057..bbb8c28 100644
+--- a/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
++++ b/meta-oe/recipes-support/gpm/gpm_1.99.7.bb
+@@ -13,6 +13,7 @@ SRC_URI = "ftp://arcana.linux.it/pub/gpm/gpm-${PV}.tar.bz2 \
+            file://no-docs.patch \
+            file://processcreds.patch \
+            file://eglibc-2.17.patch \
++           file://remove_nested_functions.patch \
+            file://init"
  
- PV = "0.3.1+git${SRCPV}"
- SRC_URI = "git://git.code.sf.net/p/linux-zigbee/linux-zigbee \
--           file://no-help2man.patch"
-+           file://no-help2man.patch \
-+           file://0001-Fix-build-errors-with-clang.patch \
-+           "
- SRCREV = "38f42dbfce9e13629263db3bd3b81f14c69bb733"
- 
- S = "${WORKDIR}/git"
-@@ -18,6 +20,8 @@ inherit autotools python-dir pkgconfig
- 
- CACHED_CONFIGUREVARS += "am_cv_python_pythondir=${PYTHON_SITEPACKAGES_DIR}/lowpan-tools"
- 
-+CFLAGS += "-Wno-initializer-overrides"
-+
- do_install_append() {
-     rmdir ${D}${localstatedir}/run
- }
+ inherit autotools-brokensep update-rc.d
 -- 
 2.10.0
 
