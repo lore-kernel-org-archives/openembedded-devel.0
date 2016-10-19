@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F1B571C36
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 50C6771C36
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2016 05:38:50 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id 128so1429565pfz.1
+	Wed, 19 Oct 2016 05:38:51 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id i85so1426893pfa.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 22:38:52 -0700 (PDT)
+	Tue, 18 Oct 2016 22:38:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=jICsqI0G5bPw3ZLj/vZX7G4JoByKfKLMxWz4+p/ElJ0=;
-	b=XzBqhpKeLliCSI0K7YsCRTw4Oc7/O7zssM8rph6TxE4v17bpG7EFdCd/sSpTjfS/Dy
-	jIEcu9oFuGsnEyfawkSjE+mwqwjrAVUM4a+vdLgoDJvSxy5AcGIBaArMI1lLrBxZ4ORb
-	mPYvsoQ1ntTobCAqsrhxiGdE2cpgMpmHqCT/V4FVwLVHvKbOOLogj4TGJIxxqt6AhWjq
-	xxsn50ekqsHknmM9Gd9/PcuKjt+yOX5wuLLxia9FtNg/oNH2AjRhpRxvFmShWV1y8Rvp
-	xycJc1vm0rmT435ieqM393zX1y9CQlgQOIWy/PYEOuDFuyiZ98QxTZILXvPCzdBOrA3m
-	Impg==
+	bh=dW4O9viK6GaLaSENMgnqB4TfEVEEtkXNiW7VXBm0y6U=;
+	b=OjP6jP7hp+bYXrFEhdqFNcb5r/5dMIZ/vYmNtzOuYmwbPWQisAWaVSFK2ywLkgY5KW
+	AzG9lJjhlKt27nPgdF6hNs8Q1BkRVEHn22TK+S5mhJlayjJ/2NnLsxuCEGykeuagoHuA
+	b9U2/QPhqHV3b3fpzswl4NA6DgRTZfh+JL16sNQmGCXq9zfJ7Jx5fDsrL/pVdGnATc/A
+	gwQdqjZ7TF8oVXX14oYq1narFLy7kDuSrG/cwm9UsRRaZHhJ7V6DkgSajnLCJugbHAWX
+	3YfscWgI+ZkZkHpjquvnrXzcSwfTZ9e6AsPdyReV3SH72i7Fi2KLCowxmBUYy1lW3dU8
+	Fffg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=jICsqI0G5bPw3ZLj/vZX7G4JoByKfKLMxWz4+p/ElJ0=;
-	b=OO5QcjcJkQwwd3Lo4yP/OwCAgoo9V/WpufZvEWKK+9pYO9E9cVGBzLSflisN8/0mCW
-	KyXQCu5W7I27G5bYNyy559xtxztmvFMQ72mzjx3bTvFaGLAKlZL6tmWL7v/AHrMzWw/l
-	WypA0gV6XPOa65awDQ32gr6/iCUcf+N2PeJPaS0ymyvDa3dnc7Xkb96WhmsV62CeG0oN
-	fsJ5BuWuFMBtjLjlM9PZeQNdoB+raZ2s0VTg9+jwRHwjEtNJoUHu0zQNjmA7hWfP1RSk
-	vXBXRmkUo1Bp3NeLpQlLJAPDAQNaEfQAGd6kJ4sV9vuoTo08yXldvMJZrdrubCKtDMfH
-	Vx9A==
-X-Gm-Message-State: AA6/9Rk3I0d5UcGoRlKalUehtmGFStR/rhpSjpjaR4YcD1DJpHPO7D8H7awCjYuG8yC9Nw==
-X-Received: by 10.99.3.77 with SMTP id 74mr6384327pgd.174.1476855532245;
-	Tue, 18 Oct 2016 22:38:52 -0700 (PDT)
+	bh=dW4O9viK6GaLaSENMgnqB4TfEVEEtkXNiW7VXBm0y6U=;
+	b=VSIezEm5gIBttQXDbIkdaHSDTdr4yqaKQ7lIIa5a/lzVSJGJKVNRBCwEu0xTrU50jM
+	OThcqGNlQaqpBN3DY3zjq2VhC0zEAacAOXYn2aHnGOK3mR70JnR+2T36ifiCmZagRYz2
+	/Q7AAYBsUXtR5zuC8f/69/KRpL8isidXfeyBKQ8dG8ZC1g1CADjwTKcBwse2UNxgCK+p
+	pnZ3zo2lokl3uN7ysPYJYjirNoUm9WN0sMvAlyNYp7M+eXR8ZvMXTyWUoY+ck9KbVNHE
+	BNY0FHTEI96ltXNnlfYL6NbQXCBkWq2ciYzJJ7kW7ZU4552mCPulxJ0MZO8Cz/pMRCzt
+	cwlw==
+X-Gm-Message-State: AA6/9RkyxTaoHPS+lw4V9mBtcWPWesNYmt0QJgvOMW2ofvEnppZ4tEjM8XNJC3E8gkfLyw==
+X-Received: by 10.99.153.17 with SMTP id d17mr6484441pge.122.1476855533029;
+	Tue, 18 Oct 2016 22:38:53 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	qd12sm60099564pab.22.2016.10.18.22.38.51
+	qd12sm60099564pab.22.2016.10.18.22.38.52
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Oct 2016 22:38:51 -0700 (PDT)
+	Tue, 18 Oct 2016 22:38:52 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Oct 2016 22:38:31 -0700
-Message-Id: <20161019053834.11523-13-raj.khem@gmail.com>
+Date: Tue, 18 Oct 2016 22:38:32 -0700
+Message-Id: <20161019053834.11523-14-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.0
 In-Reply-To: <20161019053834.11523-1-raj.khem@gmail.com>
 References: <20161019053834.11523-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 13/16] joe: Fix build with clang
+Subject: [meta-oe][PATCH 14/16] fwts: Update to 16.09 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,64 +57,140 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 19 Oct 2016 05:38:51 -0000
 
+license change is just year change from 2014 to 2016
+Fix build with clang while here
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../joe/joe/0001-adjust-signature-of-main.patch    | 30 ++++++++++++++++++++++
- meta-oe/recipes-support/joe/joe_3.1.bb             |  4 ++-
- 2 files changed, 33 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/joe/joe/0001-adjust-signature-of-main.patch
+ ...nstant-logical-operand-warning-with-clang.patch | 81 ++++++++++++++++++++++
+ meta-oe/recipes-test/fwts/fwts_git.bb              | 15 ++--
+ 2 files changed, 91 insertions(+), 5 deletions(-)
+ create mode 100644 meta-oe/recipes-test/fwts/fwts/0001-ignore-constant-logical-operand-warning-with-clang.patch
 
-diff --git a/meta-oe/recipes-support/joe/joe/0001-adjust-signature-of-main.patch b/meta-oe/recipes-support/joe/joe/0001-adjust-signature-of-main.patch
+diff --git a/meta-oe/recipes-test/fwts/fwts/0001-ignore-constant-logical-operand-warning-with-clang.patch b/meta-oe/recipes-test/fwts/fwts/0001-ignore-constant-logical-operand-warning-with-clang.patch
 new file mode 100644
-index 0000000..00f48e8
+index 0000000..ccfe580
 --- /dev/null
-+++ b/meta-oe/recipes-support/joe/joe/0001-adjust-signature-of-main.patch
-@@ -0,0 +1,30 @@
-+From 27e4639254f2b2eb7d04790bd8cf16ecfcbac1c2 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-test/fwts/fwts/0001-ignore-constant-logical-operand-warning-with-clang.patch
+@@ -0,0 +1,81 @@
++From 953cff93c85d3cfd5cbcac56e14443dc5f6e5fbd Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 19 Oct 2016 01:07:16 +0000
-+Subject: [PATCH] adjust signature of main()
-+
-+clang complains about the types of main() function
-+
-+Upstream-Status: Pending
++Date: Wed, 19 Oct 2016 01:57:16 +0000
++Subject: [PATCH] ignore constant-logical-operand warning with clang
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ main.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ src/uefi/uefirtauthvar/uefirtauthvar.c | 5 +++++
++ 1 file changed, 5 insertions(+)
 +
-+diff --git a/main.c b/main.c
-+index 81ba543..ee7506c 100644
-+--- a/main.c
-++++ b/main.c
-+@@ -159,7 +159,7 @@ extern int breakflg;
++Index: git/src/uefi/uefirtauthvar/uefirtauthvar.c
++===================================================================
++--- git.orig/src/uefi/uefirtauthvar/uefirtauthvar.c
+++++ git/src/uefi/uefirtauthvar/uefirtauthvar.c
++@@ -142,6 +142,9 @@ static int uefirtauthvar_deinit(fwts_fra
++ 	return FWTS_OK;
++ }
 + 
-+ unsigned char **mainenv;
-+ 
-+-int main(int argc, unsigned char **argv, unsigned char **envv)
-++int main(int argc, char **argv, char **envv)
+++#pragma clang diagnostic push
+++#pragma clang diagnostic ignored "-Wconstant-logical-operand"
+++
++ static int check_fw_support(fwts_framework *fw, uint64_t status)
 + {
-+ 	CAP *cap;
-+ 	unsigned char *s;
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-support/joe/joe_3.1.bb b/meta-oe/recipes-support/joe/joe_3.1.bb
-index fb9a9fb..1ad355b 100644
---- a/meta-oe/recipes-support/joe/joe_3.1.bb
-+++ b/meta-oe/recipes-support/joe/joe_3.1.bb
-@@ -4,7 +4,9 @@ HOMEPAGE = "http://joe-editor.sourceforge.net/"
- LICENSE = "GPLv1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=da10ed7cf8038981c580e11c1d3e8fb6"
++ 	if ((status == EFI_INVALID_PARAMETER) &&
++@@ -172,6 +175,8 @@ static int check_fw_support(fwts_framewo
++ 	return FWTS_OK;
++ }
++ 
+++#pragma clang diagnostic pop
+++
++ /*
++  * Set the created authenticated variable, AuthVarCreate,
++  * and checking the data size and data.
++Index: git/src/lib/src/fwts_acpi_tables.c
++===================================================================
++--- git.orig/src/lib/src/fwts_acpi_tables.c
+++++ git/src/lib/src/fwts_acpi_tables.c
++@@ -392,10 +392,14 @@ static int fwts_acpi_handle_fadt(
++ 	/* Determine FACS addr and load it.
++ 	 * Will ignore the missing FACS in the hardware-reduced mode.
++ 	 */
+++#pragma clang diagnostic push
+++#pragma clang diagnostic ignored "-Waddress-of-packed-member"
+++
++ 	result = fwts_acpi_handle_fadt_tables(fw, fadt,
++ 			"FACS", "FIRMWARE_CTRL", "X_FIRMWARE_CTRL",
++ 			&fadt->firmware_control, &fadt->x_firmware_ctrl,
++ 			provenance);
+++
++ 	if (result != FWTS_OK) {
++ 		if ((result == FWTS_NULL_POINTER) &&
++ 				fwts_acpi_is_reduced_hardware(fadt)) {
++@@ -414,6 +418,7 @@ static int fwts_acpi_handle_fadt(
++ 		return FWTS_ERROR;
++ 	}
++ 	return FWTS_OK;
+++#pragma clang diagnostic pop
++ }
++ 
++ /*
++Index: git/src/dmi/dmicheck/dmicheck.c
++===================================================================
++--- git.orig/src/dmi/dmicheck/dmicheck.c
+++++ git/src/dmi/dmicheck/dmicheck.c
++@@ -209,6 +209,8 @@ static const char *uuid_patterns[] = {
++ 	"0A0A0A0A-0A0A-0A0A-0A0A-0A0A0A0A0A0A",
++ 	NULL,
++ };
+++#pragma clang diagnostic push
+++#pragma clang diagnostic ignored "-Wunneeded-internal-declaration"
++ 
++ static const fwts_chassis_type_map fwts_dmi_chassis_type[] = {
++ 	{ "Invalid",		FWTS_SMBIOS_CHASSIS_INVALID },
++@@ -245,6 +247,7 @@ static const fwts_chassis_type_map fwts_
++ 	{ "Convertible",	FWTS_SMBIOS_CHASSIS_CONVERTIBLE },
++ 	{ "Detachable",		FWTS_SMBIOS_CHASSIS_DETACHABLE },
++ };
+++#pragma clang diagnostic pop
++ 
++ /* Remapping table from buggy version numbers to correct values */
++ static const fwts_dmi_version dmi_versions[] = {
+diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb b/meta-oe/recipes-test/fwts/fwts_git.bb
+index 197fe20..cbf5154 100644
+--- a/meta-oe/recipes-test/fwts/fwts_git.bb
++++ b/meta-oe/recipes-test/fwts/fwts_git.bb
+@@ -3,12 +3,14 @@ DESCRIPTION = "The tool fwts comprises of over fifty tests that are designed to
+ HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
  
--SRC_URI = "${SOURCEFORGE_MIRROR}/joe-editor/joe-${PV}.tar.gz"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/joe-editor/joe-${PV}.tar.gz \
-+           file://0001-adjust-signature-of-main.patch \
+ LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=deb8af5388e838d133eaa036f4d1496f"
++LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd34dcdb9e4db568519"
+ 
+-PV = "14.12.00"
++PV = "16.09.00"
+ 
+-SRCREV = "efc18d16294f492b7f72bba64344b2eed50e6a69"
+-SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git"
++SRCREV = "7fd1834a879f27647b371c18284868c9a54f6474"
++SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git \
++           file://0001-ignore-constant-logical-operand-warning-with-clang.patch \
 +           "
  
- PACKAGECONFIG ??= "curses"
- PACKAGECONFIG[curses] = "--enable-curses,--disable-curses,ncurses,ncurses-terminfo"
+ S = "${WORKDIR}/git"
+ 
+@@ -16,9 +18,12 @@ DEPENDS = "libpcre json-c glib-2.0"
+ 
+ inherit autotools-brokensep
+ 
+-CFLAGS += "-I${STAGING_INCDIR}/json-c -Wno-error=misleading-indentation"
++CFLAGS += "-I${STAGING_INCDIR}/json-c -Wno-error=unknown-pragmas"
+ 
+ FILES_${PN} += "${libdir}/fwts/lib*${SOLIBS}"
+ FILES_${PN}-dev += "${libdir}/fwts/lib*${SOLIBSDEV} ${libdir}/fwts/lib*.la"
+ FILES_${PN}-staticdev += "${libdir}/fwts/lib*a"
+ FILES_${PN}-dbg += "${libdir}/fwts/.debug"
++
++TOOLCHAIN = "gcc"
++
 -- 
 2.10.0
 
