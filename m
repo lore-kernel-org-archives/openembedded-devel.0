@@ -1,45 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f193.google.com (mail-ua0-f193.google.com
-	[209.85.217.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C64D571B07
+Return-Path: <prvs=09387d20d=Richard.Leitner@skidata.com>
+X-Greylist: delayed 829 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 19 Oct 2016 14:08:52 UTC
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 16489719CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2016 05:44:39 +0000 (UTC)
-Received: by mail-ua0-f193.google.com with SMTP id 38so162981uaj.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 22:44:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=StXUcQORxP5bYjedsraszaMEfdqTPVnewglHz7jzPE4=;
-	b=xumMszx4oQjhyrJjMp3ZFmA+hswSvmASM8NTlkVdDCi4ZbaHcHNvhXq5j1WAR/ZMsf
-	6fopg0JZsvygkuvNMnkzoj+xn/ymB7cYo8lzvdX+WSahVRL6z8A1H2XwlWhNVeTgkNB9
-	PuaV+NCGkCn3HC75UxQOoReIhTkWXk6Wh0KyKF3s5JITkU+BzORslc1Qt9ijmdNxofh9
-	ExE0Jktlepz0hJGYObkLrLSd0d4kWC8sakxLmwiVwCb94rRZK9imIjYE7meyyxlfohtm
-	QC961bB4ASPL9GokbTwSiN9TMkTtxtzKAw3gvMpzyQot6rV9KKMycE4GBbyS9g1VjxsG
-	Pabw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=StXUcQORxP5bYjedsraszaMEfdqTPVnewglHz7jzPE4=;
-	b=BUD5nkD7jKBGN56r3qAjwMnPZaDFY/moQg+bWOKpoqhhtjWo6Go+0fiGQrTjpfBc3G
-	XvbZmY7m2Y+0opQxgvzTGPs9lTP2mY5WXGYMRxziKC+OYDBeesDtBor7IXIRV/6W1u00
-	72U6/nkCA4zCj5yZcvhYaZ5sfM9sc6XNBhHvI7BaV26kDur0i29O9nmFzZwV55LQmgAl
-	wrVroP7h/1t6r7U8tPSb2ggpi+6tsg86LscoxgwhInJzi1deUw5DDsHa9S3f8x+XOO7M
-	yVjf08ylypZ7ZIRWaoV9+xaHelBQIxAxu91CVDLGYcN/xr0WQUAdtxs9SmRaJlsE6rf2
-	1n8w==
-X-Gm-Message-State: AA6/9Rlbxgpwt1/7TuzYurg2WZQnk4cKdQlqFaFb+0LB0mSXSZxWWCMeZjPoTVZg72svd8xokFn8T0U+W85Stw==
-X-Received: by 10.176.2.232 with SMTP id 95mr959404uah.32.1476855880042; Tue,
-	18 Oct 2016 22:44:40 -0700 (PDT)
+	Wed, 19 Oct 2016 14:08:52 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: =?us-ascii?q?A2FeCADoegdY/0oKEKxcHgYMgzwBAQEBA?=
+	=?us-ascii?q?XR8B6NVikWCP4V6gg+CCCOBdIQKgkkUAQIBAQEBAQEBA4EGg0pbgQ4BLSiBFg4?=
+	=?us-ascii?q?FxRYBhzQBAQEHJ4Y9jnsFiD6RTYFmhEOJY4I6h0aFd4x+hAAefYMUG4FVcAGHP?=
+	=?us-ascii?q?IEAAQEB?=
+X-IPAS-Result: =?us-ascii?q?A2FeCADoegdY/0oKEKxcHgYMgzwBAQEBAXR8B6NVikWCP4V?=
+	=?us-ascii?q?6gg+CCCOBdIQKgkkUAQIBAQEBAQEBA4EGg0pbgQ4BLSiBFg4FxRYBhzQBAQEHJ?=
+	=?us-ascii?q?4Y9jnsFiD6RTYFmhEOJY4I6h0aFd4x+hAAefYMUG4FVcAGHPIEAAQEB?=
+X-IronPort-AV: E=Sophos;i="5.31,514,1473112800"; 
+   d="scan'208";a="100361"
+From: Richard Leitner <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 19 Oct 2016 15:54:25 +0200
+Message-ID: <1476885265-22755-1-git-send-email-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.1.4
 MIME-Version: 1.0
-Received: by 10.176.86.206 with HTTP; Tue, 18 Oct 2016 22:44:09 -0700 (PDT)
-In-Reply-To: <1476778230-105764-2-git-send-email-herve.jourdain@neuf.fr>
-References: <1476778230-105764-1-git-send-email-herve.jourdain@neuf.fr>
-	<1476778230-105764-2-git-send-email-herve.jourdain@neuf.fr>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 18 Oct 2016 22:44:09 -0700
-Message-ID: <CAMKF1sp5KNDqbgzvqKp0D3JHFMTdqc_ovbMRoD1ve30z5upshw@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/1] v4l-utils: add support for "native" build
+X-Originating-IP: [172.16.60.30]
+X-ClientProxiedBy: sdex1srv.skidata.net (172.16.10.92) To sdex1srv.skidata.net
+	(172.16.10.92)
+Subject: [meta-java][PATCH] icedtea7-native: fix source archive checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,35 +37,175 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Oct 2016 05:44:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 19 Oct 2016 14:08:54 -0000
+Content-Type: text/plain
 
-On Tue, Oct 18, 2016 at 1:10 AM, Herve Jourdain <herve.jourdain@neuf.fr> wrote:
-> Signed-off-by: Herve Jourdain <herve.jourdain@neuf.fr>
-> ---
->  meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb
-> index 6148695..b9732fe 100644
-> --- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb
-> +++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb
-> @@ -43,3 +43,6 @@ FILES_libv4l-dbg += "${libdir}/libv4l/.debug ${libdir}/libv4l/plugins/.debug"
->  FILES_libv4l-dev += "${includedir} ${libdir}/pkgconfig \
->                       ${libdir}/libv4l*${SOLIBSDEV} ${libdir}/*.la \
->                       ${libdir}/v4l*${SOLIBSDEV} ${libdir}/libv4l/*.la ${libdir}/libv4l/plugins/*.la"
-> +
-> +PARALLEL_MAKE_class-native = ""
+The upstream checksum of the downloaded icedtea-native changeset
+archives has changed. Due to the fact the contents are exactly the
+same (see below for checksum comparisons) we adopt these new checksums.
 
-you seem to have root casued it. Then why not fix the Makefile instead
+OPENJDK)
+   $ sha256sum openjdk_*
+   5efd8e66f18fcbf45527bcc74aa3e6ed11f66bc793c88e3841925c4acb4827ba openjdk_new_f89009ada191.tar.bz2
+   54a0ef02b56b265b4122324e08a33c42ececbf2a300ada260611e7b6ccdba96d openjdk_old_f89009ada191.tar.bz2
 
-> +BBCLASSEXTEND = "native"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+   $ tar xf openjdk_new_f89009ada191.tar.bz2 -O | sha256sum
+   2a9103bf67e7fed6db6b6d0dd4075764599bdd829cd5551b7d5defb27410ec92  -
+   $ tar xf openjdk_old_f89009ada191.tar.bz2 -O | sha256sum
+   2a9103bf67e7fed6db6b6d0dd4075764599bdd829cd5551b7d5defb27410ec92  -
+
+HOTSPOT)
+   $ sha256sum a456d0771ba0*
+   09a64fca0beff0759ef1b461d63ed6a00e43032972781bb3a55e49d8b93f67d0 a456d0771ba0-new.tar.gz
+   69719a9657b15e6bef1bef137a15d830293091fbc46616fe8759e863ba904442 a456d0771ba0-old.tar.gz
+
+   $ tar xf a456d0771ba0-new.tar.gz | sha256sum
+   e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  -
+   $ tar xf a456d0771ba0-old.tar.gz | sha256sum
+   e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  -
+
+CORBA)
+   $ sha256sum 79ee8535bc51*
+   00bf0b0996484db3d0497345ca5b14db4ffb2288b6c7adf8a003b2eafc396fb2 79ee8535bc51-new.tar.gz
+   f61dad8d484e4a9e645b7fb73da87bc44f9986a074629154f37ed46be05f5b84 79ee8535bc51-old.tar.gz
+
+   $ tar xf 79ee8535bc51-new.tar.gz -O | sha256sum
+   dfb2aa48d068b57d68db1a7759d42c0bff047a096a2d76d7ca5fee13942ce6fb  -
+   $ tar xf 79ee8535bc51-old.tar.gz -O | sha256sum
+   dfb2aa48d068b57d68db1a7759d42c0bff047a096a2d76d7ca5fee13942ce6fb  -
+
+JAXP)
+   $ sha256sum 77e7219c7424*
+   bb4beb62fae52d0ff871aefd64ae54eaed8978bff87df1e23f1bfead40ceae6d 77e7219c7424-new.tar.gz
+   9cfbc0efaface20f7188870b9bf5b0ebc73d745cd9a49d013cd4e81ba223ccdc 77e7219c7424-old.tar.gz
+
+   $ tar xf 77e7219c7424-new.tar.gz -O | sha256sum
+   7f8495064705991f4a8b581076b7cb30410add3480a7ee9782f30ea9ba9b30d8  -
+   $ tar xf 77e7219c7424-old.tar.gz -O | sha256sum
+   7f8495064705991f4a8b581076b7cb30410add3480a7ee9782f30ea9ba9b30d8  -
+
+JAXWS)
+   $ sha256sum d92eda447bca*
+   566778320a0fa18ca93427d6afadc8bd3e416fd8249f9ce88e37e215f9295335 d92eda447bca-new.tar.gz
+   6d0858d46b68d6e8488e70d1675e5b656aeb4ef51e8ee4e330e77219f92c1c0c d92eda447bca-old.tar.gz
+
+   $ tar xf d92eda447bca-new.tar.gz -O | sha256sum
+   67ba2dbfc15810134e625f818bbe49b79e6673cdb6eb52e08e4318cb9f9f776c  -
+   $ tar xf d92eda447bca-old.tar.gz -O | sha256sum
+   67ba2dbfc15810134e625f818bbe49b79e6673cdb6eb52e08e4318cb9f9f776c  -
+
+JDK)
+   $ sha256sum d7ecb57d3c61*
+   b24bf93559804610a6e1078bea94adcec1b2f818dd600b12304926f6e86c6747 d7ecb57d3c61-new.tar.gz
+   11146763409098a42dd9896f3fb7e7324a58c5cff5298009eb347ad26abeed51 d7ecb57d3c61-old.tar.gz
+
+   $ tar xf d7ecb57d3c61-new.tar.gz | sha256sum
+   e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  -
+   $ tar xf d7ecb57d3c61-old.tar.gz | sha256sum
+   e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  -
+
+LANGTOOLS)
+   $ sha256sum fd2fdb20d858*
+   10fee41a0cdd1b166ff78e6426430c76af0f2358d026c181d325af1e41646c34 fd2fdb20d858-new.tar.gz
+   3a4039348aa49547fffa96563b77b704c72e2ac3ead2c132843ba1e9fe4dbad2 fd2fdb20d858-old.tar.gz
+
+   $ tar xf fd2fdb20d858-new.tar.gz -O | sha256sum
+   4994132cef3d7fca7402e22efbe45ba26a827ac5923228091134d5214616526b  -
+   $ tar xf fd2fdb20d858-old.tar.gz -O | sha256sum
+   4994132cef3d7fca7402e22efbe45ba26a827ac5923228091134d5214616526b  -
+
+Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+---
+ recipes-core/icedtea/icedtea7-native_2.1.3.bb      | 28 +++++++++++-----------
+ .../icedtea/openjdk-7-03b147/fix-checksums.patch   | 28 +++++++++++++++-------
+ 2 files changed, 33 insertions(+), 23 deletions(-)
+
+diff --git a/recipes-core/icedtea/icedtea7-native_2.1.3.bb b/recipes-core/icedtea/icedtea7-native_2.1.3.bb
+index 7391c65..df2b01b 100644
+--- a/recipes-core/icedtea/icedtea7-native_2.1.3.bb
++++ b/recipes-core/icedtea/icedtea7-native_2.1.3.bb
+@@ -8,29 +8,29 @@ SRC_URI[iced.md5sum] = "200e74ad440f9c4bfa21cc2bd94b4325"
+ SRC_URI[iced.sha256sum] = "1929e57eb6718d30735e1e04e9e129457f845f7d7a8404b2b028740d0779ddb6"
+ 
+ HOTSPOT_CHANGESET = "a456d0771ba0"
+-SRC_URI[hotspot.md5sum] = "23c46cbb8e8a2e04dafa6ef63bc810c4"
+-SRC_URI[hotspot.sha256sum] = "09a64fca0beff0759ef1b461d63ed6a00e43032972781bb3a55e49d8b93f67d0"
++SRC_URI[hotspot.md5sum] = "625d903e79e4f9aaf21cf98e369118e1"
++SRC_URI[hotspot.sha256sum] = "69719a9657b15e6bef1bef137a15d830293091fbc46616fe8759e863ba904442"
+ 
+ CORBA_CHANGESET = "79ee8535bc51"
+-SRC_URI[corba.md5sum] = "0e04317a6a74fea66ecac51c6171413c"
+-SRC_URI[corba.sha256sum] = "f61dad8d484e4a9e645b7fb73da87bc44f9986a074629154f37ed46be05f5b84"
++SRC_URI[corba.md5sum] = "f9aae602c4d31203fcbf8dcfc5560ad9"
++SRC_URI[corba.sha256sum] = "00bf0b0996484db3d0497345ca5b14db4ffb2288b6c7adf8a003b2eafc396fb2"
+ 
+ JAXP_CHANGESET = "77e7219c7424"
+-SRC_URI[jaxp.md5sum] = "27ea9ad4c7a4c43eb1ccab8a0f365a50"
+-SRC_URI[jaxp.sha256sum] = "9cfbc0efaface20f7188870b9bf5b0ebc73d745cd9a49d013cd4e81ba223ccdc"
++SRC_URI[jaxp.md5sum] = "440258a557c3cf0d585304a04ab060b8"
++SRC_URI[jaxp.sha256sum] = "bb4beb62fae52d0ff871aefd64ae54eaed8978bff87df1e23f1bfead40ceae6d"
+ 
+ JAXWS_CHANGESET = "d92eda447bca"
+-SRC_URI[jaxws.md5sum] = "4fb688cb0e2c703dfdedca187bb94070"
+-SRC_URI[jaxws.sha256sum] = "6d0858d46b68d6e8488e70d1675e5b656aeb4ef51e8ee4e330e77219f92c1c0c"
++SRC_URI[jaxws.md5sum] = "52b1d409628184988ff0f1d1e4d0a853"
++SRC_URI[jaxws.sha256sum] = "566778320a0fa18ca93427d6afadc8bd3e416fd8249f9ce88e37e215f9295335"
+ 
+ JDK_CHANGESET = "d7ecb57d3c61"
+-SRC_URI[jdk.md5sum] = "0e90a9d980d44998083343a3a7614bb5"
+-SRC_URI[jdk.sha256sum] = "11146763409098a42dd9896f3fb7e7324a58c5cff5298009eb347ad26abeed51"
++SRC_URI[jdk.md5sum] = "db2a0f91f27ad7ebbc68db53691ca403"
++SRC_URI[jdk.sha256sum] = "b24bf93559804610a6e1078bea94adcec1b2f818dd600b12304926f6e86c6747"
+ 
+ LANGTOOLS_CHANGESET = "fd2fdb20d858"
+-SRC_URI[langtools.md5sum] = "48335bb031d4c75e75823e2d70f17ef5"
+-SRC_URI[langtools.sha256sum] = "3a4039348aa49547fffa96563b77b704c72e2ac3ead2c132843ba1e9fe4dbad2"
++SRC_URI[langtools.md5sum] = "702becdfee546841ed038c79fa1a9909"
++SRC_URI[langtools.sha256sum] = "10fee41a0cdd1b166ff78e6426430c76af0f2358d026c181d325af1e41646c34"
+ 
+ OPENJDK_CHANGESET = "f89009ada191"
+-SRC_URI[openjdk.md5sum] = "c26bbb33addfaeb14d28a1329b4b5a3e"
+-SRC_URI[openjdk.sha256sum] = "54a0ef02b56b265b4122324e08a33c42ececbf2a300ada260611e7b6ccdba96d"
++SRC_URI[openjdk.md5sum] = "2bc941373ca4b033c9a25f972eec7858"
++SRC_URI[openjdk.sha256sum] = "5efd8e66f18fcbf45527bcc74aa3e6ed11f66bc793c88e3841925c4acb4827ba"
+diff --git a/recipes-core/icedtea/openjdk-7-03b147/fix-checksums.patch b/recipes-core/icedtea/openjdk-7-03b147/fix-checksums.patch
+index e975707..d7d1eb6 100644
+--- a/recipes-core/icedtea/openjdk-7-03b147/fix-checksums.patch
++++ b/recipes-core/icedtea/openjdk-7-03b147/fix-checksums.patch
+@@ -1,13 +1,23 @@
+-Index: 03b21-2.1.3-r2.0/icedtea-2.1.3/Makefile.am
+-===================================================================
+---- icedtea-2.1.3/Makefile.am	2012-11-23 00:40:49.323361758 +0100
+-+++ icedtea-2.1.3/Makefile.am	2012-11-23 00:41:55.500083848 +0100
+-@@ -18,7 +18,7 @@
+- JAXWS_SHA256SUM = 6d0858d46b68d6e8488e70d1675e5b656aeb4ef51e8ee4e330e77219f92c1c0c
+- JDK_SHA256SUM = 11146763409098a42dd9896f3fb7e7324a58c5cff5298009eb347ad26abeed51
+- LANGTOOLS_SHA256SUM = 3a4039348aa49547fffa96563b77b704c72e2ac3ead2c132843ba1e9fe4dbad2
++--- icedtea-2.1.3/Makefile.am	2016-10-18 15:31:45.451073805 +0200
+++++ icedtea-2.1.3/Makefile.am	2016-10-18 15:42:14.651066400 +0200
++@@ -12,13 +12,13 @@
++ LANGTOOLS_CHANGESET = fd2fdb20d858
++ OPENJDK_CHANGESET = f89009ada191
++ 
++-CORBA_SHA256SUM = f61dad8d484e4a9e645b7fb73da87bc44f9986a074629154f37ed46be05f5b84
++-HOTSPOT_SHA256SUM = 09a64fca0beff0759ef1b461d63ed6a00e43032972781bb3a55e49d8b93f67d0
++-JAXP_SHA256SUM = 9cfbc0efaface20f7188870b9bf5b0ebc73d745cd9a49d013cd4e81ba223ccdc
++-JAXWS_SHA256SUM = 6d0858d46b68d6e8488e70d1675e5b656aeb4ef51e8ee4e330e77219f92c1c0c
++-JDK_SHA256SUM = 11146763409098a42dd9896f3fb7e7324a58c5cff5298009eb347ad26abeed51
++-LANGTOOLS_SHA256SUM = 3a4039348aa49547fffa96563b77b704c72e2ac3ead2c132843ba1e9fe4dbad2
+ -OPENJDK_SHA256SUM = 0f2e414fee619e78c33bceaee7c440efa598d651b23a75fd61e1282ad6001839
+-+OPENJDK_SHA256SUM = 54a0ef02b56b265b4122324e08a33c42ececbf2a300ada260611e7b6ccdba96d
+++CORBA_SHA256SUM = 00bf0b0996484db3d0497345ca5b14db4ffb2288b6c7adf8a003b2eafc396fb2
+++HOTSPOT_SHA256SUM = 69719a9657b15e6bef1bef137a15d830293091fbc46616fe8759e863ba904442
+++JAXP_SHA256SUM = bb4beb62fae52d0ff871aefd64ae54eaed8978bff87df1e23f1bfead40ceae6d
+++JAXWS_SHA256SUM = 566778320a0fa18ca93427d6afadc8bd3e416fd8249f9ce88e37e215f9295335
+++JDK_SHA256SUM = b24bf93559804610a6e1078bea94adcec1b2f818dd600b12304926f6e86c6747
+++LANGTOOLS_SHA256SUM = 10fee41a0cdd1b166ff78e6426430c76af0f2358d026c181d325af1e41646c34
+++OPENJDK_SHA256SUM = 5efd8e66f18fcbf45527bcc74aa3e6ed11f66bc793c88e3841925c4acb4827ba
+  
+  CACAO_VERSION = a567bcb7f589
+  CACAO_SHA256SUM = d49f79debc131a5694cae6ab3ba2864e7f3249ee8d9dc09aae8afdd4dc6b09f9
+-- 
+2.1.4
+
 
