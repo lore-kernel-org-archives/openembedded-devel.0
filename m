@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id CC93F71C30
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 1EA2471C30
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Oct 2016 05:38:43 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id s8so1421561pfj.2
+	Wed, 19 Oct 2016 05:38:44 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id r16so1418092pfg.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Oct 2016 22:38:45 -0700 (PDT)
+	Tue, 18 Oct 2016 22:38:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=2qddh/1R8PlSzjRd2PaKPURL5dit8eNb6eA7dYW5TRM=;
-	b=CIyTPc/33b2BULTQkLbf7hFeh1pAmNT0/8jsFnDRxIsM6j8lB6y+4bYJMnkJfjQLdo
-	bha131pIO/mCBBJIWbg1267FDllPp1VQWj8Q8m7zqN1kPXQVVxjPbA5WSuJiNzkwg7/w
-	SXsr9mvLBj4cVUG5N5F3ITyQ3RrVHM+1AI88t+y/wc1tg6JR4BXxeDW4DfTuEXQ0Q1ng
-	nB0otn1nnvwhl5nzcHBsuG6ht2rcV9j3zMejtQAZs+qMyhwy5cgau3M6Mns7S3i83rdP
-	swp1+igZrgEAcvjSzanKIsy9KtbNdd1FyhLmn5FLwUU7z78BOIrU79e9ve7AtihjaxWf
-	Endg==
+	bh=vHiUmawCBOuFYH6aaNJPZvEGJkDUrGIas9dnOwtZeRk=;
+	b=VzVXaTRrCLX7JDXjz1BuCPS5+WBX3gZGzj0nC75DBZS6gbFc6+hIOP9uh8ZAS2PAAl
+	Sa9PMVcaYDJJYOSl/93VOG1dHlwlGN3ZUvdrWei2EasCr4GoDQdk0T+jeqLtul3AgGLO
+	ffBQM5XIaPd23OODhiRzurYj8bHTxVnc5eCS0mgdZaEjQbWruIcZnG9lUaSadrO4Djgz
+	LtuFRnIUS7kuCo31NBBue0nY0OkzO4xRR1n3NE5ogOD0PrhtnSJv5jOkWXSkjCAbeRCa
+	6ZT4k6hZ8rXi675eyNBhndOVfeRs9dEiQ+YPnqLSDT9Bf1PyZlXYWY6P4P1DL7Slzkpd
+	esEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=2qddh/1R8PlSzjRd2PaKPURL5dit8eNb6eA7dYW5TRM=;
-	b=l+B9cV7N1o1A8Ij59E2lLURsmQXUE9i8lAwTa+BsQu+9DWCQYU8R8i0MXxmGNGPQKu
-	IWs5rwQF8Ql2lDazD7HuNX+3xzx+bv6gtk3htLPHhScQU4P7tVQapMQdLSkkW8UKrvSV
-	0zKgy0hMM1hjeIs5MESUIL0aF34dOJtUDsFO0oscE1QbBLj1+4uoOqvzxIaVMV/ErPVO
-	C/lwHZfiBVIGZzTtHTUpa2OFfXMDNCfKawQGtrB/TzI6Y/DGUEs7VZcjSa1iaRzDOjQ9
-	6yV3YveCTAPscDkSaPecKPW5JJCRaFZXdmCd4FIOs/aYr/G0YTjR+2UPfsMiMBpbFGRl
-	i4vw==
-X-Gm-Message-State: AA6/9RnFR+xw6APuUCIuytgsiZh9tq6L1e3zI4xe02Q6HM40sVE6+uuRGwn43uIhKyWvoQ==
-X-Received: by 10.98.66.149 with SMTP id h21mr7778267pfd.32.1476855525136;
+	bh=vHiUmawCBOuFYH6aaNJPZvEGJkDUrGIas9dnOwtZeRk=;
+	b=ZF+6OPNbEIW+RSnDSENO96oqH658keFbUj+K09t/kW4yKWmUefB0mWJ1p5nVW7I0XQ
+	T62Lm8xVpL9/vgA/y2icmtHbWzqB1TUxSJ/0qTn9IgHv5RiUmpmQy5Cf1ilFj0uLZTX6
+	zdqoMAqZ77sm8fLuza6WAyYGLenv92IiQd7SedxUuvU+4D3Emvq74e4vu9z7d5FiOANk
+	irDzckhEI/UTe2prewWoSHYQXV9lrjNi/EJg/ELoWDVbt7PP5aaV4s8BdMURSTjzOUsB
+	4BX5dMlejtuYS5od0oV7R0tqsY4sDqY0JaSKJJrSXMPh8ULVFG9SCnB6a+fn2/g0PP1j
+	aIiw==
+X-Gm-Message-State: AA6/9RklEAdETCaCVY+vE4R/xd/aT6hUiwnnSZUx9pRmthPi08P7pLg83wHlhLCJHTOJfA==
+X-Received: by 10.98.196.17 with SMTP id y17mr7760811pff.172.1476855525865;
 	Tue, 18 Oct 2016 22:38:45 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	qd12sm60099564pab.22.2016.10.18.22.38.44
+	qd12sm60099564pab.22.2016.10.18.22.38.45
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Oct 2016 22:38:44 -0700 (PDT)
+	Tue, 18 Oct 2016 22:38:45 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Oct 2016 22:38:22 -0700
-Message-Id: <20161019053834.11523-4-raj.khem@gmail.com>
+Date: Tue, 18 Oct 2016 22:38:23 -0700
+Message-Id: <20161019053834.11523-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.0
 In-Reply-To: <20161019053834.11523-1-raj.khem@gmail.com>
 References: <20161019053834.11523-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 04/16] libplist: Squash warnings found by clang
+Subject: [meta-oe][PATCH 05/16] frame: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,82 +59,58 @@ X-List-Received-Date: Wed, 19 Oct 2016 05:38:44 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../files/0001-Fix-warnings-found-with-clang.patch | 51 ++++++++++++++++++++++
- .../libimobiledevice/libplist_1.8.bb               |  3 +-
- 2 files changed, 53 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/libimobiledevice/files/0001-Fix-warnings-found-with-clang.patch
+ .../frame/pessimizing-move.patch                   | 27 ++++++++++++++++++++++
+ .../canonical-multitouch/frame_2.5.0.bb            |  3 ++-
+ 2 files changed, 29 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/canonical-multitouch/frame/pessimizing-move.patch
 
-diff --git a/meta-oe/recipes-extended/libimobiledevice/files/0001-Fix-warnings-found-with-clang.patch b/meta-oe/recipes-extended/libimobiledevice/files/0001-Fix-warnings-found-with-clang.patch
+diff --git a/meta-oe/recipes-support/canonical-multitouch/frame/pessimizing-move.patch b/meta-oe/recipes-support/canonical-multitouch/frame/pessimizing-move.patch
 new file mode 100644
-index 0000000..f8114a0
+index 0000000..aa5a56a
 --- /dev/null
-+++ b/meta-oe/recipes-extended/libimobiledevice/files/0001-Fix-warnings-found-with-clang.patch
-@@ -0,0 +1,51 @@
-+From ad1be542b87b3186f8ef7bee2c594daefe5bb4c8 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 18 Oct 2016 21:31:40 +0000
-+Subject: [PATCH] Fix warnings found with clang
-+
-+| /mnt/oe/openembedded-core/build/workspace/sources/libplist/src/base64.c:107:12: error: non-void function 'base64decode' should return a value [-Wreturn-type]
-+|         if (!buf) return;
-+|                   ^
-+| /mnt/oe/openembedded-core/build/workspace/sources/libplist/src/base64.c:109:16: error: non-void function 'base64decode' should return a value [-Wreturn-type]
-+|         if (len <= 0) return;
-+
-+Upstream-Status: Pending
++++ b/meta-oe/recipes-support/canonical-multitouch/frame/pessimizing-move.patch
+@@ -0,0 +1,27 @@
++let compiler decide on copy elision
++Fixes compiler errors with clang
++| ../../frame-2.5.0/src/x11/device_x11.cpp:126:13: error: moving a temporary object prevents copy elision [-Werror,-Wpessimizing-move]
++|             std::move(UniqueUFAxis(static_cast<oif::frame::UFAxis*>(axis)));
++|             ^
++| ../../frame-2.5.0/src/x11/device_x11.cpp:126:13: note: remove std::move call here
++|             std::move(UniqueUFAxis(static_cast<oif::frame::UFAxis*>(axis)));
++|             ^~~~~~~~~~                                                    ~
++| 1 error generated.
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ libcnary/node.c | 2 +-
-+ src/base64.c    | 4 ++--
-+ 2 files changed, 3 insertions(+), 3 deletions(-)
++Upstream-Status: Pending
 +
-+diff --git a/libcnary/node.c b/libcnary/node.c
-+index 1f9f669..d6f3f63 100644
-+--- a/libcnary/node.c
-++++ b/libcnary/node.c
-+@@ -104,7 +104,7 @@ int node_detach(node_t* parent, node_t* child) {
++Index: frame-2.5.0/src/x11/device_x11.cpp
++===================================================================
++--- frame-2.5.0.orig/src/x11/device_x11.cpp
+++++ frame-2.5.0/src/x11/device_x11.cpp
++@@ -122,8 +122,7 @@ UFDeviceX11::UFDeviceX11(Display* displa
++         UFAxis_* axis = new UFAxis(type, valuator_info->min, valuator_info->max,
++                                    valuator_info->resolution);
 + 
-+ int node_insert(node_t* parent, unsigned int index, node_t* child)
-+ {
-+-	if (!parent || !child) return;
-++	if (!parent || !child) return -1;
-+ 	child->isLeaf = TRUE;
-+ 	child->isRoot = FALSE;
-+ 	child->parent = parent;
-+diff --git a/src/base64.c b/src/base64.c
-+index 65c6061..531a06a 100644
-+--- a/src/base64.c
-++++ b/src/base64.c
-+@@ -104,9 +104,9 @@ static int base64decode_block(unsigned char *target, const char *data, size_t da
++-        axes_[type] =
++-            std::move(UniqueUFAxis(static_cast<oif::frame::UFAxis*>(axis)));
+++        axes_[type] = UniqueUFAxis(static_cast<oif::frame::UFAxis*>(axis));
 + 
-+ unsigned char *base64decode(const char *buf, size_t *size)
-+ {
-+-	if (!buf) return;
-++	if (!buf) return 0;
-+ 	size_t len = strlen(buf);
-+-	if (len <= 0) return;
-++	if (len <= 0) return 0;
-+ 	unsigned char *outbuf = (unsigned char*)malloc((len/4)*3+3);
++         axis_map_[valuator_info->number] = type;
 + 
-+ 	unsigned char *line;
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb b/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
-index 6e8d69f..10d40fb 100644
---- a/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
-+++ b/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
-@@ -10,7 +10,8 @@ inherit cmake pkgconfig
+diff --git a/meta-oe/recipes-support/canonical-multitouch/frame_2.5.0.bb b/meta-oe/recipes-support/canonical-multitouch/frame_2.5.0.bb
+index ecc9524..0ad10a4 100644
+--- a/meta-oe/recipes-support/canonical-multitouch/frame_2.5.0.bb
++++ b/meta-oe/recipes-support/canonical-multitouch/frame_2.5.0.bb
+@@ -10,7 +10,8 @@ LIC_FILES_CHKSUM = " \
  
- SRC_URI = "http://www.libimobiledevice.org/downloads/libplist-${PV}.tar.bz2 \
-            file://fix-parallel-make.patch \
--"
-+           file://0001-Fix-warnings-found-with-clang.patch \
-+           "
+ inherit autotools pkgconfig
  
- SRC_URI[md5sum] = "2a9e0258847d50f9760dc3ece25f4dc6"
- SRC_URI[sha256sum] = "a418da3880308199b74766deef2a760a9b169b81a868a6a9032f7614e20500ec"
+-SRC_URI = "https://launchpad.net/${BPN}/trunk/v${PV}/+download/${BPN}-${PV}.tar.gz"
++SRC_URI = "https://launchpad.net/${BPN}/trunk/v${PV}/+download/${BPN}-${PV}.tar.gz \
++           file://pessimizing-move.patch"
+ SRC_URI[md5sum] = "02baa941091c5d198cd1623b3ad36e68"
+ SRC_URI[sha256sum] = "cfb9ab52cdccd926f1822a457264d0014c7eb9f4600a72626063dd073b26256f"
+ 
 -- 
 2.10.0
 
