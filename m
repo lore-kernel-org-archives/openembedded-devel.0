@@ -1,39 +1,46 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
-	[209.85.215.66])
-	by mail.openembedded.org (Postfix) with ESMTP id DF0466E65F
+Return-Path: <joelguittet@gmail.com>
+Received: from mail-qk0-f170.google.com (mail-qk0-f170.google.com
+	[209.85.220.170])
+	by mail.openembedded.org (Postfix) with ESMTP id EE8EA71A7F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Oct 2016 21:16:32 +0000 (UTC)
-Received: by mail-lf0-f66.google.com with SMTP id x23so2170587lfi.1
+	Thu, 20 Oct 2016 21:49:35 +0000 (UTC)
+Received: by mail-qk0-f170.google.com with SMTP id n189so121155925qke.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Oct 2016 14:16:34 -0700 (PDT)
+	Thu, 20 Oct 2016 14:49:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=zheIlu3sY9jg7iPL+18Qgi/65Zaic+YF+WKZao+2WYo=;
+	b=iVEWZmMFbF7YyYHitACRrc1WZhax8xHS3b69vYDMgGsi/AUX3C1Wm27PWZx3D5VkxK
+	XklFaiJ2/7cmC59aObYNWBoDVnG1TFTVebABiFWXqPfGe53wq6l34KwPshliajMEqMz6
+	jq1ZAmxfRHJJtBFOyW1KHhk9Hh2ynNwW9sTbv9fufcHCIkublmNqA+je7cRjOSlDN+pP
+	zdID3VzVWeen/Fafnx6O+uNMTESHXr9ZX8lyC4VSQlWbn98fsT+FME9gxxwPQWiymK0S
+	3pHdaIjPXLdiuMrk2EM7JqYRQ572eq3RBTPV2ytQyNDxkneobnU+7JWPDvc8ZzEnVLCB
+	UBaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=zAX2TKO6WC+F8Gzh5s+mE+gpBKXQqwS5kaNcldPvqAs=;
-	b=GYMhsdNaOhEUn4UaYpzlSBzzHhXqKNzRB+mZPN0Xtqgca2uPpbkm5RMXgKQbzcX5Ty
-	Q+z/VA+mx3Lyr5zS82OdaYVYJ7ZBTEBboB9KPrt8QzvhsAbSjIJ4xcoEgHsZVv6XuXwF
-	E9Ve8t7qwp/51m6iloz/pOlQC2MtGB76IWVaoTSh/r8NF1dkHMh12kzcUQHYRD3XuF49
-	IomZ9ruPRIEQlBuMgUtfVrePR0T76LrYa1c5umbsr8U131u1iBJHZJLqGMlRg8twm5on
-	2wWqpHsMdcbWud6weWGGkBJhiRo7Z0mK9p4SC/wykfBQUvlh1F26LFkNdtjVDaD4D3cU
-	9daw==
-X-Gm-Message-State: AA6/9Rla4VLpW2Y8UibTdNprQr9Y+n74+/G7o2yeQc1o25pKyUyEc2dQFRu9caFQlaMD1A==
-X-Received: by 10.28.163.196 with SMTP id m187mr7033677wme.73.1476998192316;
-	Thu, 20 Oct 2016 14:16:32 -0700 (PDT)
-Received: from tfsielt31850.tycofs.com (31-187-15-27.dynamic.upc.ie.
-	[31.187.15.27]) by smtp.gmail.com with ESMTPSA id
-	yo1sm81553728wjc.16.2016.10.20.14.16.30
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 20 Oct 2016 14:16:31 -0700 (PDT)
-From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Oct 2016 22:16:30 +0100
-Message-Id: <20161020211630.2707-1-git@andred.net>
-X-Mailer: git-send-email 2.9.3
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=zheIlu3sY9jg7iPL+18Qgi/65Zaic+YF+WKZao+2WYo=;
+	b=mKdTxKFDVYM6aJcg6ou/9jqqarsoWGd8xkZlqgxL3deKGBrzRVUdvmEuQACejygblH
+	R2/XFJqOryahb2vA8c42q3+H4cvmQM2mGQ7ZwsKwM9oyXe4z50/aKiy1tsbiaW1zSwRH
+	8dWIV6cKd4A7a6ic804k4ADkfeMoWVSAPOG+T6MUi+llBpeBXpa6Nk4e0oCHV834F2Z1
+	ver7p1Z2JWQ8DdBEj353qZFuGvbyjnE208Od1q1vC3Gfk2N8pw3Y8WEihl6D4JZ/FEZQ
+	rwi+V/f7exHP4RTpwI0z4C68tFj3G7ixatPY+H52TssYMBNrC5Kl1y5jR4jnUekxhjpe
+	6LoQ==
+X-Gm-Message-State: AA6/9RnUUy7VGMISok6T2AB1YEKCv5Z2+RMA2o/6PsXNbxBEXC6nsXpNl41CE+7AYGbAsxz7lQ9eLy1koxfvRA==
+X-Received: by 10.194.24.163 with SMTP id v3mr1541877wjf.180.1477000176815;
+	Thu, 20 Oct 2016 14:49:36 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] c-ares: update 1.11.0 -> 1.12.0
+Received: by 10.80.171.94 with HTTP; Thu, 20 Oct 2016 14:49:36 -0700 (PDT)
+In-Reply-To: <20161020083012.GA30415@mbabyjoh-desk.ger.corp.intel.com>
+References: <CAOwy=PPr-9vu=kJTSR8qJk6_31jjP1FrUO3XvO_JrSDb2-n-fQ@mail.gmail.com>
+	<20161020083012.GA30415@mbabyjoh-desk.ger.corp.intel.com>
+From: =?UTF-8?Q?Jo=C3=ABl_Guittet?= <joelguittet@gmail.com>
+Date: Thu, 20 Oct 2016 23:49:36 +0200
+Message-ID: <CAOwy=POestVnv=tRa0eR6hFHEZTa1eP1CGSV2B+2EGFQA0gpaQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-java] fails to fetch icedtea
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,71 +53,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Oct 2016 21:16:33 -0000
+X-List-Received-Date: Thu, 20 Oct 2016 21:49:36 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-Highlight:
-- fix CVE-2016-5180
+Hi,
 
-Other changes, from https://c-ares.haxx.se/changelog.html
+The fix also works here, thanks!
 
-c-ares version 1.12.0 - Sep 29 2016
-Changes:
-    api: add ARES_OPT_NOROTATE optmask value
+Joel
 
-Bug fixes:
-    CVE-2016-5180: ares_create_query single byte out of buffer write
-    configure: acknowledge --disable-tests [1]
-    man pages: fix typos detected by Lintian
-    test: add missing #includes for dns-proto.cc
-    test: avoid in6addr_* constants
-    test: Build with MinGW on AppVeyor
-    Makefile.m32: add support for extra flags
-    Makefile.m32: add support for CROSSPREFIX
-    configure: check if tests can get built before enabled
-    ares_library_cleanup: reset ares_realloc too
-    ahost.c: add cast to fix C++ compile
-    test: Only pass unused args to GoogleTest
-    build: commonize MSVC version detection
-    msvc_ver.inc: support Visual Studio 2015 Update 1, 2, 3
-    test: for AF_UNSPEC, return CNAME only for AAAA, but valid A record
-    ares_getnameinfo: explicitly clear struct servent before use
-    test: Update fuzzing function prototype
-    init: fix nsort initialization
-    test: add fuzzing check script to tests
-    web: http => https
-    read_tcp_data: remove superfluous NULL check
-    LICENSE.md: add a stand-alone license file
-    SECURITY.md: suggested "security process" for the project
-    ares_init_options: only propagate init failures from options [2]
-    headers: remove checks for and defines of variable sizes
-    test: fix gMock to work with gcc >= 6.x [3]
+2016-10-20 10:30 GMT+02:00 Maxin B. John <maxin.john@intel.com>:
 
-Signed-off-by: André Draszik <git@andred.net>
----
- .../recipes-support/c-ares/{c-ares_1.11.0.bb => c-ares_1.12.0.bb}     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/c-ares/{c-ares_1.11.0.bb => c-ares_1.12.0.bb} (76%)
-
-diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb b/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
-similarity index 76%
-rename from meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
-rename to meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
-index c98be7d..8b63972 100644
---- a/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
-+++ b/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://ares_init.c;beginline=1;endline=3;md5=53f5ecf4c22c37c
- SRC_URI = "http://c-ares.haxx.se/download/${BP}.tar.gz \
-            file://0001-configure.ac-don-t-override-passed-cflags.patch \
- "
--SRC_URI[md5sum] = "d5c6d522cfc54bb6f215a0b7912d46be"
--SRC_URI[sha256sum] = "b3612e6617d9682928a1d50c1040de4db6519f977f0b25d40cf1b632900b3efd"
-+SRC_URI[md5sum] = "2ca44be1715cd2c5666a165d35788424"
-+SRC_URI[sha256sum] = "8692f9403cdcdf936130e045c84021665118ee9bfea905d1a76f04d4e6f365fb"
- 
- inherit autotools pkgconfig
--- 
-2.9.3
-
+> Hi Joel,
+>
+> On Thu, Oct 20, 2016 at 08:36:06AM +0200, Jo=C3=ABl Guittet wrote:
+> > Hi,
+> >
+> > I'm building an image with OpenJDK, but fetching icedtea fails. It was
+> > correctly done few weeks ago. Log indicates error on checksum, but I ha=
+ve
+> > reviewed changes on meta-java and I do not understand why. Anybody with
+> the
+> > same issue?
+> >
+>
+> Apparently, there were some updates in the upstream servers and it
+> resulted in
+> change in checksums (pretty bad)
+>
+> Richard Leitner sent a fix for that yesterday and it is in master-next no=
+w:
+> http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/
+> commit/?h=3Dmaster-next&id=3D8b028a5e67c8081a4ecd65d33fe52fed46416a1a
+>
+> > Log:
+> >
+> > WARNING: Checksum failure encountered with download of
+> > http://icedtea.classpath.org/hg/release/icedtea7-forest-2.
+> 1/archive/f89009ada191.tar.bz2;name=3Dopenjdk;unpack=3Dfalse
+> > - will attempt other sources if available
+> > WARNING: Renaming /home/kubuntu/yocto/build/
+> downloads/f89009ada191.tar.bz2
+> > to
+> > /home/kubuntu/yocto/build/downloads/f89009ada191.tar.bz2_bad-checksum_
+> 2bc941373ca4b033c9a25f972eec7858
+> > ERROR: Fetcher failure for URL: '
+> > http://icedtea.classpath.org/hg/release/icedtea7-forest-2.
+> 1/archive/f89009ada191.tar.bz2;name=3Dopenjdk;unpack=3Dfalse'.
+> > Checksum mismatch!
+> > File: '/home/kubuntu/yocto/build/downloads/f89009ada191.tar.bz2' has md=
+5
+> > checksum 2bc941373ca4b033c9a25f972eec7858 when
+> > c26bbb33addfaeb14d28a1329b4b5a3e was expected
+> > File: '/home/kubuntu/yocto/build/downloads/f89009ada191.tar.bz2' has
+> sha256
+> > checksum 5efd8e66f18fcbf45527bcc74aa3e6ed11f66bc793c88e3841925c4acb48
+> 27ba
+> > when 54a0ef02b56b265b4122324e08a33c42ececbf2a300ada260611e7b6ccdba96d
+> was
+> > expected
+> > If this change is expected (e.g. you have upgraded to a new version
+> without
+> > updating the checksums) then you can use these lines within the recipe:
+> > SRC_URI[openjdk.md5sum] =3D "2bc941373ca4b033c9a25f972eec7858"
+> > SRC_URI[openjdk.sha256sum] =3D
+> > "5efd8e66f18fcbf45527bcc74aa3e6ed11f66bc793c88e3841925c4acb4827ba"
+> > Otherwise you should retry the download and/or check with upstream to
+> > determine if the file has become corrupted or otherwise unexpectedly
+> > modified.
+> >
+> > ERROR: Function failed: Fetcher failure for URL: '
+> > http://icedtea.classpath.org/hg/release/icedtea7-forest-2.
+> 1/archive/f89009ada191.tar.bz2;name=3Dopenjdk;unpack=3Dfalse'.
+> > Unable to fetch URL from any source.
+> > ERROR: Logfile of failure stored in:
+> > /home/kubuntu/yocto/build/tmp/work/x86_64-linux/icedtea7-
+> native/2.1.3-r1.0/temp/log.do_fetch.10452
+> > ERROR: Task 1258
+> > (/home/kubuntu/yocto/build/../meta-java/recipes-core/icedtea/
+> > icedtea7-native_2.1.3.bb, do_fetch) failed with exit code '1'
+> >
+> > Regards,
+> > Joel
+> > --
+>
+> Best Regards,
+> Maxin
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
