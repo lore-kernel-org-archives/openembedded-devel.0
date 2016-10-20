@@ -1,34 +1,42 @@
-Return-Path: <herve.jourdain@neuf.fr>
-Received: from smtp26.services.sfr.fr (smtp26.services.sfr.fr [93.17.128.10])
-	by mail.openembedded.org (Postfix) with ESMTP id 832E3719D6
+Return-Path: <joelguittet@gmail.com>
+Received: from mail-qk0-f181.google.com (mail-qk0-f181.google.com
+	[209.85.220.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 2335D71C84
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Oct 2016 03:37:22 +0000 (UTC)
-Received: from nbhjo (111-250-195-39.dynamic.hinet.net [111.250.195.39])
-	by msfrf2627.sfr.fr (SMTP Server) with ESMTP id 2C92D1C000408
+	Thu, 20 Oct 2016 06:36:05 +0000 (UTC)
+Received: by mail-qk0-f181.google.com with SMTP id o68so74703799qkf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Oct 2016 05:37:19 +0200 (CEST)
-Received: from nbhjo (111-250-195-39.dynamic.hinet.net
-	[111.250.195.39])	(using TLSv1.2
-	with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))	(No client
-	certificate requested)	(Authenticated sender: herve.jourdain@neuf.fr)
-	by msfrf2627.sfr.fr (SMTP Server) with ESMTPSA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Oct 2016 05:37:17 +0200 (CEST)
-Authentication-Results: sfr.fr; auth=pass (LOGIN)
-	smtp.auth=herve.jourdain@neuf.fr
-From: Herve Jourdain <herve.jourdain@neuf.fr>
-To: openembedded-devel@lists.openembedded.org
-References: <1476778230-105764-1-git-send-email-herve.jourdain@neuf.fr>
-	<1476778230-105764-2-git-send-email-herve.jourdain@neuf.fr>
-	<CAMKF1sp5KNDqbgzvqKp0D3JHFMTdqc_ovbMRoD1ve30z5upshw@mail.gmail.com>
-In-Reply-To: <CAMKF1sp5KNDqbgzvqKp0D3JHFMTdqc_ovbMRoD1ve30z5upshw@mail.gmail.com>
-Date: Thu, 20 Oct 2016 05:37:11 +0200
-Message-ID: <004401d22a83$41aaf150$c500d3f0$@neuf.fr>
+	Wed, 19 Oct 2016 23:36:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=92zTqE6NVJ6IK32Qo8lub1Lnyw24J6oFS52X6pM6CzM=;
+	b=0QIFZhXYcKY3+Y0jdZY8WEb+AFQpod5PBhj9wG4ZNIneg8g0zJ4QKt/cARELMLvv5G
+	L/ug4HoqL9SC0ZJU6D+pnDPugvAEOGnUvmBeNoWT5RiprFN3KLnp4QTmXgQdytThEYwy
+	Je3KfEDulrzxcgixThLXZ1pgwQmJ+oxf/HLEaPtIVSv7IPcfyaYrlUplrE9p74cYlV3t
+	BPXaXKXIj3/ZgfQY6D4UeGZcnZz5bB+t2emDrU5EpA3H3wfEjyue80ZSbZj/pJ26/Xrr
+	rj+3V71xO5qpZjQvSbot+5ueG2+OrLGBZnLN0p6hYzZUEVUbew5xDT7S+7u8T5RHlONc
+	Tuig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=92zTqE6NVJ6IK32Qo8lub1Lnyw24J6oFS52X6pM6CzM=;
+	b=C/9zTrZ4Tky7F9OSILK1AFcbJY8KknI5zJEnHFGzg8NdzuP0d5rgLsLod5SewzXX+j
+	ZiLU8rMQrfbZD08ZV83uyA11OWxPJlLoX9mf3aPlAIXF1SFnJkta4KuaYIa+MeLn5NEJ
+	r7QYcgf1y4Ua+G+y6Ut9pN7LMWt7ZoAtbbQKU/GSPxt1mHIngn7D1cfNhutp/9ma53jr
+	+H5MoiVC+kWx+tgOQm4J49TBRhOQr3M4AvBI+XfBCbIRGGpkx8rSQtkS2t9HW3PCFEkV
+	PzjG3JpPuMnrZj7LkgZmNXiSmCmak0FqwigdG0YeBQuUS12jJoGxR8tGQ/LSbEKx/M49
+	M8XQ==
+X-Gm-Message-State: AA6/9RlZy+3cbyD86mi9VCcCKfILf5QypKOpqc/TxD6qTspKh1zx3O9iDcm7upvfxqORlnAQ31QGMWBLbDxtBA==
+X-Received: by 10.194.22.103 with SMTP id c7mr6376698wjf.34.1476945366851;
+	Wed, 19 Oct 2016 23:36:06 -0700 (PDT)
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 15.0
-Thread-Index: AQI3c7hyZNQItEghW7KuPxLN7yfbqQF+Ks07AXDu5wOfzqWuoA==
-X-sfr-mailing: LEGIT
-Subject: Re: ***SPAM*** Re: [meta-oe][PATCH 1/1] v4l-utils: add support for "native"	build
+Received: by 10.80.171.94 with HTTP; Wed, 19 Oct 2016 23:36:06 -0700 (PDT)
+From: =?UTF-8?Q?Jo=C3=ABl_Guittet?= <joelguittet@gmail.com>
+Date: Thu, 20 Oct 2016 08:36:06 +0200
+Message-ID: <CAOwy=PPr-9vu=kJTSR8qJk6_31jjP1FrUO3XvO_JrSDb2-n-fQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-java] fails to fetch icedtea
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,66 +49,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Oct 2016 03:37:22 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Content-Language: fr
+X-List-Received-Date: Thu, 20 Oct 2016 06:36:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi Khem,
+Hi,
 
-Well, I guess I didn't really have the time then, so I went for the fastest
-solution available...
-But you're right, I'll try fixing the makefile, and post a V2. I believe I
-should have time for that in 1 or 2 days.
+I'm building an image with OpenJDK, but fetching icedtea fails. It was
+correctly done few weeks ago. Log indicates error on checksum, but I have
+reviewed changes on meta-java and I do not understand why. Anybody with the
+same issue?
 
-Cheers,
-Herve
+Log:
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of Khem
-Raj
-Sent: mercredi 19 octobre 2016 07:44
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: ***SPAM*** Re: [oe] [meta-oe][PATCH 1/1] v4l-utils: add support for
-"native" build
+WARNING: Checksum failure encountered with download of
+http://icedtea.classpath.org/hg/release/icedtea7-forest-2.1/archive/f89009ada191.tar.bz2;name=openjdk;unpack=false
+- will attempt other sources if available
+WARNING: Renaming /home/kubuntu/yocto/build/downloads/f89009ada191.tar.bz2
+to
+/home/kubuntu/yocto/build/downloads/f89009ada191.tar.bz2_bad-checksum_2bc941373ca4b033c9a25f972eec7858
+ERROR: Fetcher failure for URL: '
+http://icedtea.classpath.org/hg/release/icedtea7-forest-2.1/archive/f89009ada191.tar.bz2;name=openjdk;unpack=false'.
+Checksum mismatch!
+File: '/home/kubuntu/yocto/build/downloads/f89009ada191.tar.bz2' has md5
+checksum 2bc941373ca4b033c9a25f972eec7858 when
+c26bbb33addfaeb14d28a1329b4b5a3e was expected
+File: '/home/kubuntu/yocto/build/downloads/f89009ada191.tar.bz2' has sha256
+checksum 5efd8e66f18fcbf45527bcc74aa3e6ed11f66bc793c88e3841925c4acb4827ba
+when 54a0ef02b56b265b4122324e08a33c42ececbf2a300ada260611e7b6ccdba96d was
+expected
+If this change is expected (e.g. you have upgraded to a new version without
+updating the checksums) then you can use these lines within the recipe:
+SRC_URI[openjdk.md5sum] = "2bc941373ca4b033c9a25f972eec7858"
+SRC_URI[openjdk.sha256sum] =
+"5efd8e66f18fcbf45527bcc74aa3e6ed11f66bc793c88e3841925c4acb4827ba"
+Otherwise you should retry the download and/or check with upstream to
+determine if the file has become corrupted or otherwise unexpectedly
+modified.
 
-On Tue, Oct 18, 2016 at 1:10 AM, Herve Jourdain <herve.jourdain@neuf.fr>
-wrote:
-> Signed-off-by: Herve Jourdain <herve.jourdain@neuf.fr>
-> ---
->  meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb
-b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb
-> index 6148695..b9732fe 100644
-> --- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb
-> +++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb
-> @@ -43,3 +43,6 @@ FILES_libv4l-dbg += "${libdir}/libv4l/.debug
-${libdir}/libv4l/plugins/.debug"
->  FILES_libv4l-dev += "${includedir} ${libdir}/pkgconfig \
->                       ${libdir}/libv4l*${SOLIBSDEV} ${libdir}/*.la \
->                       ${libdir}/v4l*${SOLIBSDEV} ${libdir}/libv4l/*.la
-${libdir}/libv4l/plugins/*.la"
-> +
-> +PARALLEL_MAKE_class-native = ""
+ERROR: Function failed: Fetcher failure for URL: '
+http://icedtea.classpath.org/hg/release/icedtea7-forest-2.1/archive/f89009ada191.tar.bz2;name=openjdk;unpack=false'.
+Unable to fetch URL from any source.
+ERROR: Logfile of failure stored in:
+/home/kubuntu/yocto/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/temp/log.do_fetch.10452
+ERROR: Task 1258
+(/home/kubuntu/yocto/build/../meta-java/recipes-core/icedtea/
+icedtea7-native_2.1.3.bb, do_fetch) failed with exit code '1'
 
-you seem to have root casued it. Then why not fix the Makefile instead
-
-> +BBCLASSEXTEND = "native"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
--- 
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+Regards,
+Joel
 
