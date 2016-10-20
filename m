@@ -1,46 +1,39 @@
-Return-Path: <joelguittet@gmail.com>
-Received: from mail-qk0-f170.google.com (mail-qk0-f170.google.com
-	[209.85.220.170])
-	by mail.openembedded.org (Postfix) with ESMTP id EE8EA71A7F
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
+	[209.85.215.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 727886080F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Oct 2016 21:49:35 +0000 (UTC)
-Received: by mail-qk0-f170.google.com with SMTP id n189so121155925qke.0
+	Thu, 20 Oct 2016 22:33:23 +0000 (UTC)
+Received: by mail-lf0-f66.google.com with SMTP id b75so2707386lfg.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Oct 2016 14:49:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=zheIlu3sY9jg7iPL+18Qgi/65Zaic+YF+WKZao+2WYo=;
-	b=iVEWZmMFbF7YyYHitACRrc1WZhax8xHS3b69vYDMgGsi/AUX3C1Wm27PWZx3D5VkxK
-	XklFaiJ2/7cmC59aObYNWBoDVnG1TFTVebABiFWXqPfGe53wq6l34KwPshliajMEqMz6
-	jq1ZAmxfRHJJtBFOyW1KHhk9Hh2ynNwW9sTbv9fufcHCIkublmNqA+je7cRjOSlDN+pP
-	zdID3VzVWeen/Fafnx6O+uNMTESHXr9ZX8lyC4VSQlWbn98fsT+FME9gxxwPQWiymK0S
-	3pHdaIjPXLdiuMrk2EM7JqYRQ572eq3RBTPV2ytQyNDxkneobnU+7JWPDvc8ZzEnVLCB
-	UBaw==
+	Thu, 20 Oct 2016 15:33:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=zheIlu3sY9jg7iPL+18Qgi/65Zaic+YF+WKZao+2WYo=;
-	b=mKdTxKFDVYM6aJcg6ou/9jqqarsoWGd8xkZlqgxL3deKGBrzRVUdvmEuQACejygblH
-	R2/XFJqOryahb2vA8c42q3+H4cvmQM2mGQ7ZwsKwM9oyXe4z50/aKiy1tsbiaW1zSwRH
-	8dWIV6cKd4A7a6ic804k4ADkfeMoWVSAPOG+T6MUi+llBpeBXpa6Nk4e0oCHV834F2Z1
-	ver7p1Z2JWQ8DdBEj353qZFuGvbyjnE208Od1q1vC3Gfk2N8pw3Y8WEihl6D4JZ/FEZQ
-	rwi+V/f7exHP4RTpwI0z4C68tFj3G7ixatPY+H52TssYMBNrC5Kl1y5jR4jnUekxhjpe
-	6LoQ==
-X-Gm-Message-State: AA6/9RnUUy7VGMISok6T2AB1YEKCv5Z2+RMA2o/6PsXNbxBEXC6nsXpNl41CE+7AYGbAsxz7lQ9eLy1koxfvRA==
-X-Received: by 10.194.24.163 with SMTP id v3mr1541877wjf.180.1477000176815;
-	Thu, 20 Oct 2016 14:49:36 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.80.171.94 with HTTP; Thu, 20 Oct 2016 14:49:36 -0700 (PDT)
-In-Reply-To: <20161020083012.GA30415@mbabyjoh-desk.ger.corp.intel.com>
-References: <CAOwy=PPr-9vu=kJTSR8qJk6_31jjP1FrUO3XvO_JrSDb2-n-fQ@mail.gmail.com>
-	<20161020083012.GA30415@mbabyjoh-desk.ger.corp.intel.com>
-From: =?UTF-8?Q?Jo=C3=ABl_Guittet?= <joelguittet@gmail.com>
-Date: Thu, 20 Oct 2016 23:49:36 +0200
-Message-ID: <CAOwy=POestVnv=tRa0eR6hFHEZTa1eP1CGSV2B+2EGFQA0gpaQ@mail.gmail.com>
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=3dYSA2I6gxUGCV/cN1jEbo5toHzAmu8UjWfaAtS7Yhs=;
+	b=H95en8w37YZKpdhUtPEeE90NbWLU1qARizbn9jinKxkre5eJ4NguNUdjprfr0SrlOD
+	heRdXympyyqxWol0QcnqoAjCWF4ixzwCv7nATE446zVeMdzOOMSphSOGweDBwQfht1N6
+	KubYhPokMWG6t0f3WYMQrrWjPj2oTxViVXtluXMwlMqXMRHXb8l2J5wqbqGI6GEfDIy5
+	uEcczl9w4XkKMFHri5/Jo7TjcM13ECjLrCSyp7fogBxB3GTuLk96W6PhAcYjWR23RkRD
+	94yoUXiIKJPc0k83K3s+7pXEVI/Y5WbbRs2aUyk0IsMiqS6aGnZibucVq5Hjdf3/zwSF
+	Tg7A==
+X-Gm-Message-State: AA6/9RlNRFCrNfeI6Z40YrwcmOADJPXXFJ7vM2eX0pgs8uUVl9v/WwKbMotJTsGTfBC8Zg==
+X-Received: by 10.194.246.169 with SMTP id xx9mr1636580wjc.76.1477002803581;
+	Thu, 20 Oct 2016 15:33:23 -0700 (PDT)
+Received: from tfsielt31850.tycofs.com (31-187-15-27.dynamic.upc.ie.
+	[31.187.15.27])
+	by smtp.gmail.com with ESMTPSA id o143sm849036wmd.7.2016.10.20.15.33.22
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 20 Oct 2016 15:33:22 -0700 (PDT)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-java] fails to fetch icedtea
+Date: Thu, 20 Oct 2016 23:33:21 +0100
+Message-Id: <20161020223321.7992-1-git@andred.net>
+X-Mailer: git-send-email 2.9.3
+MIME-Version: 1.0
+Subject: [meta-networking][morty][PATCH] c-ares: fix CVE-2016-5180
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,97 +46,205 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Oct 2016 21:49:36 -0000
+X-List-Received-Date: Thu, 20 Oct 2016 22:33:24 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hi,
+Backport patch to fix CVE-2016-5180 from c-ares upstream:
+  https://c-ares.haxx.se/adv_20160929.html
 
-The fix also works here, thanks!
+Signed-off-by: André Draszik <git@andred.net>
+---
+ .../c-ares/c-ares/CVE-2016-5180.patch              | 166 +++++++++++++++++++++
+ .../recipes-support/c-ares/c-ares_1.11.0.bb        |   1 +
+ 2 files changed, 167 insertions(+)
+ create mode 100644 meta-networking/recipes-support/c-ares/c-ares/CVE-2016-5180.patch
 
-Joel
+diff --git a/meta-networking/recipes-support/c-ares/c-ares/CVE-2016-5180.patch b/meta-networking/recipes-support/c-ares/c-ares/CVE-2016-5180.patch
+new file mode 100644
+index 0000000..0b4fbb4
+--- /dev/null
++++ b/meta-networking/recipes-support/c-ares/c-ares/CVE-2016-5180.patch
+@@ -0,0 +1,166 @@
++From 115fe381c75147352d7a8d21aa3ffb85ca367219 Mon Sep 17 00:00:00 2001
++From: Daniel Stenberg <daniel@haxx.se>
++Date: Fri, 23 Sep 2016 14:44:11 +0200
++Subject: [PATCH] ares_create_query: avoid single-byte buffer overwrite
++
++... when the name ends with an escaped dot.
++
++CVE-2016-5180
++
++Bug: https://c-ares.haxx.se/adv_20160929.html
++---
++Upstream-Status: Backport [https://c-ares.haxx.se/adv_20160929.html]
++CVE: CVE-2016-5180
++Signed-off-by: André Draszik <git@andred.net>
++ ares_create_query.c | 84 +++++++++++++++++++++++++----------------------------
++ 1 file changed, 39 insertions(+), 45 deletions(-)
++
++diff --git a/ares_create_query.c b/ares_create_query.c
++index a34dda7..7f4c52d 100644
++--- a/ares_create_query.c
+++++ b/ares_create_query.c
++@@ -83,61 +83,35 @@
++  * label.  The list is terminated by a label of length zero (which can
++  * be thought of as the root domain).
++  */
++ 
++ int ares_create_query(const char *name, int dnsclass, int type,
++-                      unsigned short id, int rd, unsigned char **buf,
++-                      int *buflen, int max_udp_size)
+++                      unsigned short id, int rd, unsigned char **bufp,
+++                      int *buflenp, int max_udp_size)
++ {
++-  int len;
+++  size_t len;
++   unsigned char *q;
++   const char *p;
+++  size_t buflen;
+++  unsigned char *buf;
++ 
++   /* Set our results early, in case we bail out early with an error. */
++-  *buflen = 0;
++-  *buf = NULL;
+++  *buflenp = 0;
+++  *bufp = NULL;
++ 
++-  /* Compute the length of the encoded name so we can check buflen.
++-   * Start counting at 1 for the zero-length label at the end. */
++-  len = 1;
++-  for (p = name; *p; p++)
++-    {
++-      if (*p == '\\' && *(p + 1) != 0)
++-        p++;
++-      len++;
++-    }
++-  /* If there are n periods in the name, there are n + 1 labels, and
++-   * thus n + 1 length fields, unless the name is empty or ends with a
++-   * period.  So add 1 unless name is empty or ends with a period.
+++  /* Allocate a memory area for the maximum size this packet might need. +2
+++   * is for the length byte and zero termination if no dots or ecscaping is
+++   * used.
++    */
++-  if (*name && *(p - 1) != '.')
++-    len++;
++-
++-  /* Immediately reject names that are longer than the maximum of 255
++-   * bytes that's specified in RFC 1035 ("To simplify implementations,
++-   * the total length of a domain name (i.e., label octets and label
++-   * length octets) is restricted to 255 octets or less."). We aren't
++-   * doing this just to be a stickler about RFCs. For names that are
++-   * too long, 'dnscache' closes its TCP connection to us immediately
++-   * (when using TCP) and ignores the request when using UDP, and
++-   * BIND's named returns ServFail (TCP or UDP). Sending a request
++-   * that we know will cause 'dnscache' to close the TCP connection is
++-   * painful, since that makes any other outstanding requests on that
++-   * connection fail. And sending a UDP request that we know
++-   * 'dnscache' will ignore is bad because resources will be tied up
++-   * until we time-out the request.
++-   */
++-  if (len > MAXCDNAME)
++-    return ARES_EBADNAME;
++-
++-  *buflen = len + HFIXEDSZ + QFIXEDSZ + (max_udp_size ? EDNSFIXEDSZ : 0);
++-  *buf = ares_malloc(*buflen);
++-  if (!*buf)
++-      return ARES_ENOMEM;
+++  len = strlen(name) + 2 + HFIXEDSZ + QFIXEDSZ +
+++    (max_udp_size ? EDNSFIXEDSZ : 0);
+++  buf = ares_malloc(len);
+++  if (!buf)
+++    return ARES_ENOMEM;
++ 
++   /* Set up the header. */
++-  q = *buf;
+++  q = buf;
++   memset(q, 0, HFIXEDSZ);
++   DNS_HEADER_SET_QID(q, id);
++   DNS_HEADER_SET_OPCODE(q, QUERY);
++   if (rd) {
++     DNS_HEADER_SET_RD(q, 1);
++@@ -157,23 +131,27 @@ int ares_create_query(const char *name, int dnsclass, int type,
++ 
++   /* Start writing out the name after the header. */
++   q += HFIXEDSZ;
++   while (*name)
++     {
++-      if (*name == '.')
+++      if (*name == '.') {
+++        free (buf);
++         return ARES_EBADNAME;
+++      }
++ 
++       /* Count the number of bytes in this label. */
++       len = 0;
++       for (p = name; *p && *p != '.'; p++)
++         {
++           if (*p == '\\' && *(p + 1) != 0)
++             p++;
++           len++;
++         }
++-      if (len > MAXLABEL)
+++      if (len > MAXLABEL) {
+++        free (buf);
++         return ARES_EBADNAME;
+++      }
++ 
++       /* Encode the length and copy the data. */
++       *q++ = (unsigned char)len;
++       for (p = name; *p && *p != '.'; p++)
++         {
++@@ -193,16 +171,32 @@ int ares_create_query(const char *name, int dnsclass, int type,
++ 
++   /* Finish off the question with the type and class. */
++   DNS_QUESTION_SET_TYPE(q, type);
++   DNS_QUESTION_SET_CLASS(q, dnsclass);
++ 
+++  q += QFIXEDSZ;
++   if (max_udp_size)
++   {
++-      q += QFIXEDSZ;
++       memset(q, 0, EDNSFIXEDSZ);
++       q++;
++       DNS_RR_SET_TYPE(q, T_OPT);
++       DNS_RR_SET_CLASS(q, max_udp_size);
+++      q += (EDNSFIXEDSZ-1);
+++  }
+++  buflen = (q - buf);
+++
+++  /* Reject names that are longer than the maximum of 255 bytes that's
+++   * specified in RFC 1035 ("To simplify implementations, the total length of
+++   * a domain name (i.e., label octets and label length octets) is restricted
+++   * to 255 octets or less."). */
+++  if (buflen > (MAXCDNAME + HFIXEDSZ + QFIXEDSZ +
+++                (max_udp_size ? EDNSFIXEDSZ : 0))) {
+++    free (buf);
+++    return ARES_EBADNAME;
++   }
++ 
+++  /* we know this fits in an int at this point */
+++  *buflenp = (int) buflen;
+++  *bufp = buf;
+++
++   return ARES_SUCCESS;
++ }
++-- 
++2.9.3
++
+diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb b/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
+index c98be7d..bea2332 100644
+--- a/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
++++ b/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
+@@ -7,6 +7,7 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://ares_init.c;beginline=1;endline=3;md5=53f5ecf4c22c37cf1ddd1ef8f8eccce0"
+ 
+ SRC_URI = "http://c-ares.haxx.se/download/${BP}.tar.gz \
++           file://CVE-2016-5180.patch \
+            file://0001-configure.ac-don-t-override-passed-cflags.patch \
+ "
+ SRC_URI[md5sum] = "d5c6d522cfc54bb6f215a0b7912d46be"
+-- 
+2.9.3
 
-2016-10-20 10:30 GMT+02:00 Maxin B. John <maxin.john@intel.com>:
-
-> Hi Joel,
->
-> On Thu, Oct 20, 2016 at 08:36:06AM +0200, Jo=C3=ABl Guittet wrote:
-> > Hi,
-> >
-> > I'm building an image with OpenJDK, but fetching icedtea fails. It was
-> > correctly done few weeks ago. Log indicates error on checksum, but I ha=
-ve
-> > reviewed changes on meta-java and I do not understand why. Anybody with
-> the
-> > same issue?
-> >
->
-> Apparently, there were some updates in the upstream servers and it
-> resulted in
-> change in checksums (pretty bad)
->
-> Richard Leitner sent a fix for that yesterday and it is in master-next no=
-w:
-> http://git.yoctoproject.org/cgit/cgit.cgi/meta-java/
-> commit/?h=3Dmaster-next&id=3D8b028a5e67c8081a4ecd65d33fe52fed46416a1a
->
-> > Log:
-> >
-> > WARNING: Checksum failure encountered with download of
-> > http://icedtea.classpath.org/hg/release/icedtea7-forest-2.
-> 1/archive/f89009ada191.tar.bz2;name=3Dopenjdk;unpack=3Dfalse
-> > - will attempt other sources if available
-> > WARNING: Renaming /home/kubuntu/yocto/build/
-> downloads/f89009ada191.tar.bz2
-> > to
-> > /home/kubuntu/yocto/build/downloads/f89009ada191.tar.bz2_bad-checksum_
-> 2bc941373ca4b033c9a25f972eec7858
-> > ERROR: Fetcher failure for URL: '
-> > http://icedtea.classpath.org/hg/release/icedtea7-forest-2.
-> 1/archive/f89009ada191.tar.bz2;name=3Dopenjdk;unpack=3Dfalse'.
-> > Checksum mismatch!
-> > File: '/home/kubuntu/yocto/build/downloads/f89009ada191.tar.bz2' has md=
-5
-> > checksum 2bc941373ca4b033c9a25f972eec7858 when
-> > c26bbb33addfaeb14d28a1329b4b5a3e was expected
-> > File: '/home/kubuntu/yocto/build/downloads/f89009ada191.tar.bz2' has
-> sha256
-> > checksum 5efd8e66f18fcbf45527bcc74aa3e6ed11f66bc793c88e3841925c4acb48
-> 27ba
-> > when 54a0ef02b56b265b4122324e08a33c42ececbf2a300ada260611e7b6ccdba96d
-> was
-> > expected
-> > If this change is expected (e.g. you have upgraded to a new version
-> without
-> > updating the checksums) then you can use these lines within the recipe:
-> > SRC_URI[openjdk.md5sum] =3D "2bc941373ca4b033c9a25f972eec7858"
-> > SRC_URI[openjdk.sha256sum] =3D
-> > "5efd8e66f18fcbf45527bcc74aa3e6ed11f66bc793c88e3841925c4acb4827ba"
-> > Otherwise you should retry the download and/or check with upstream to
-> > determine if the file has become corrupted or otherwise unexpectedly
-> > modified.
-> >
-> > ERROR: Function failed: Fetcher failure for URL: '
-> > http://icedtea.classpath.org/hg/release/icedtea7-forest-2.
-> 1/archive/f89009ada191.tar.bz2;name=3Dopenjdk;unpack=3Dfalse'.
-> > Unable to fetch URL from any source.
-> > ERROR: Logfile of failure stored in:
-> > /home/kubuntu/yocto/build/tmp/work/x86_64-linux/icedtea7-
-> native/2.1.3-r1.0/temp/log.do_fetch.10452
-> > ERROR: Task 1258
-> > (/home/kubuntu/yocto/build/../meta-java/recipes-core/icedtea/
-> > icedtea7-native_2.1.3.bb, do_fetch) failed with exit code '1'
-> >
-> > Regards,
-> > Joel
-> > --
->
-> Best Regards,
-> Maxin
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
