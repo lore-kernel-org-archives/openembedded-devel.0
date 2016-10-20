@@ -1,61 +1,39 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-vk0-f51.google.com (mail-vk0-f51.google.com
-	[209.85.213.51])
-	by mail.openembedded.org (Postfix) with ESMTP id F36A160620
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
+	[209.85.215.66])
+	by mail.openembedded.org (Postfix) with ESMTP id DF0466E65F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Oct 2016 16:53:14 +0000 (UTC)
-Received: by mail-vk0-f51.google.com with SMTP id q126so81530944vkd.2
+	Thu, 20 Oct 2016 21:16:32 +0000 (UTC)
+Received: by mail-lf0-f66.google.com with SMTP id x23so2170587lfi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Oct 2016 09:53:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=7dI2fKDuMY629XotRHFp8t4BqpMm46q5ooV60wxD45E=;
-	b=ZnsmwSbWM/FPFmlzxDUuFf6qpUEnHBuRj02DN4XMcrj3bw5E2RN2YIoBs5ayXcGL8h
-	ucVXPdpz+/07UMCR5fAIYpAEV2q5qyZC0weGkATrtciVlCFR7hEUvfsmiuFtAUTY6b2F
-	WCCgwdwHZbGvMLpXeVIMOdCTyGRBCotZomUGvgMyBrFZmNWhGJlR49WE8Kqk7ogQ2yBB
-	FtfdcpaG1MOLDOHS0eS9oADND9JE4h2C1AQyCD+T+Y45uH2PjzblrkeZK2VmFpmjHjDl
-	l4kcKlcdw678Aumx8OyBJzHdFBGjVGDN23FgUUYF0BGhnQduA9aNlMi9JaBpWwo8eETV
-	hBXg==
+	Thu, 20 Oct 2016 14:16:34 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc;
-	bh=7dI2fKDuMY629XotRHFp8t4BqpMm46q5ooV60wxD45E=;
-	b=BD6LE+X6mKnoRIzgKGLCs5+gGGIV+W4P56H6Gi58SFW6VmCQpG0d1AQnNObppkGhJ/
-	IeNcA1wNFKlLjlGBZAicSoHWZl/eTUenipVs80R1O44qnCgM+a+C2xhqJ3fknqRW/Bhz
-	0xnxMD11ew/tqNkcW35KyuHqmE2orpdw1NHqRhsDmBwlLBilQTXgsBaPm4Mhcel0I6ic
-	vcYhJwFiVa/xtYXRvUs1RAcshFCC6nwgBQkM6Fg6q77wd3ExKell4vs/44ZYu1LYW2Ba
-	MhH8H03mY1O8AhhQEa/swrHgiTKlEPEQKkCBczHfPbIaQOS1bBGZMAmk3xNUUyTaHYg3
-	wwsw==
-X-Gm-Message-State: AA6/9RkbKOaXpGbP4t3AblGjA4qH5XLOmo4V3ZIFzlLgqP/TPyjvmnxdFy3o/E3ORkGevA==
-X-Received: by 10.31.150.7 with SMTP id y7mr2423422vkd.97.1476982394349;
-	Thu, 20 Oct 2016 09:53:14 -0700 (PDT)
-Received: from mail-vk0-f46.google.com (mail-vk0-f46.google.com.
-	[209.85.213.46]) by smtp.gmail.com with ESMTPSA id
-	t198sm17365296vkc.6.2016.10.20.09.53.12
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=zAX2TKO6WC+F8Gzh5s+mE+gpBKXQqwS5kaNcldPvqAs=;
+	b=GYMhsdNaOhEUn4UaYpzlSBzzHhXqKNzRB+mZPN0Xtqgca2uPpbkm5RMXgKQbzcX5Ty
+	Q+z/VA+mx3Lyr5zS82OdaYVYJ7ZBTEBboB9KPrt8QzvhsAbSjIJ4xcoEgHsZVv6XuXwF
+	E9Ve8t7qwp/51m6iloz/pOlQC2MtGB76IWVaoTSh/r8NF1dkHMh12kzcUQHYRD3XuF49
+	IomZ9ruPRIEQlBuMgUtfVrePR0T76LrYa1c5umbsr8U131u1iBJHZJLqGMlRg8twm5on
+	2wWqpHsMdcbWud6weWGGkBJhiRo7Z0mK9p4SC/wykfBQUvlh1F26LFkNdtjVDaD4D3cU
+	9daw==
+X-Gm-Message-State: AA6/9Rla4VLpW2Y8UibTdNprQr9Y+n74+/G7o2yeQc1o25pKyUyEc2dQFRu9caFQlaMD1A==
+X-Received: by 10.28.163.196 with SMTP id m187mr7033677wme.73.1476998192316;
+	Thu, 20 Oct 2016 14:16:32 -0700 (PDT)
+Received: from tfsielt31850.tycofs.com (31-187-15-27.dynamic.upc.ie.
+	[31.187.15.27]) by smtp.gmail.com with ESMTPSA id
+	yo1sm81553728wjc.16.2016.10.20.14.16.30
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 20 Oct 2016 09:53:12 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-vk0-f46.google.com with SMTP id q126so81528218vkd.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Oct 2016 09:53:12 -0700 (PDT)
-X-Received: by 10.31.210.130 with SMTP id j124mr2503968vkg.17.1476982392108;
-	Thu, 20 Oct 2016 09:53:12 -0700 (PDT)
+	Thu, 20 Oct 2016 14:16:31 -0700 (PDT)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 20 Oct 2016 22:16:30 +0100
+Message-Id: <20161020211630.2707-1-git@andred.net>
+X-Mailer: git-send-email 2.9.3
 MIME-Version: 1.0
-Received: by 10.31.120.78 with HTTP; Thu, 20 Oct 2016 09:53:11 -0700 (PDT)
-In-Reply-To: <20161020164624.12103-1-otavio@ossystems.com.br>
-References: <20161020164624.12103-1-otavio@ossystems.com.br>
-Date: Thu, 20 Oct 2016 14:53:11 -0200
-X-Gmail-Original-Message-ID: <CAP9ODKpCA6tuXf7Kv=RA5kabS85ju50zt8zaCrzu0kXm6CnvNw@mail.gmail.com>
-Message-ID: <CAP9ODKpCA6tuXf7Kv=RA5kabS85ju50zt8zaCrzu0kXm6CnvNw@mail.gmail.com>
-To: Otavio Salvador <otavio@ossystems.com.br>
-Cc: Samuli Piippo <samuli.piippo@theqtcompany.com>,
-	Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5 PATCH] qmake5_paths.bbclass: Fix fonts installation path
+Subject: [meta-networking][PATCH] c-ares: update 1.11.0 -> 1.12.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,27 +46,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Oct 2016 16:53:15 -0000
+X-List-Received-Date: Thu, 20 Oct 2016 21:16:33 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hello folks,
+Highlight:
+- fix CVE-2016-5180
 
-On Thu, Oct 20, 2016 at 2:46 PM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> As Qt internal fonts (qtbase-fonts) are not included anymore, we need
-> to rely on system fonts to work.
->
-> All major distributions, as well as all recipes on OE-Core and
-> Meta-OE, use ${datadir}/fonts as path so we adapt the value for use
-> for Qt use as well.
->
-> Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+Other changes, from https://c-ares.haxx.se/changelog.html
 
-Please take a look at this. This fixes a customer which were trying to
-use morty with Qt Virtual Keyboard.
+c-ares version 1.12.0 - Sep 29 2016
+Changes:
+    api: add ARES_OPT_NOROTATE optmask value
 
+Bug fixes:
+    CVE-2016-5180: ares_create_query single byte out of buffer write
+    configure: acknowledge --disable-tests [1]
+    man pages: fix typos detected by Lintian
+    test: add missing #includes for dns-proto.cc
+    test: avoid in6addr_* constants
+    test: Build with MinGW on AppVeyor
+    Makefile.m32: add support for extra flags
+    Makefile.m32: add support for CROSSPREFIX
+    configure: check if tests can get built before enabled
+    ares_library_cleanup: reset ares_realloc too
+    ahost.c: add cast to fix C++ compile
+    test: Only pass unused args to GoogleTest
+    build: commonize MSVC version detection
+    msvc_ver.inc: support Visual Studio 2015 Update 1, 2, 3
+    test: for AF_UNSPEC, return CNAME only for AAAA, but valid A record
+    ares_getnameinfo: explicitly clear struct servent before use
+    test: Update fuzzing function prototype
+    init: fix nsort initialization
+    test: add fuzzing check script to tests
+    web: http => https
+    read_tcp_data: remove superfluous NULL check
+    LICENSE.md: add a stand-alone license file
+    SECURITY.md: suggested "security process" for the project
+    ares_init_options: only propagate init failures from options [2]
+    headers: remove checks for and defines of variable sizes
+    test: fix gMock to work with gcc >= 6.x [3]
+
+Signed-off-by: André Draszik <git@andred.net>
+---
+ .../recipes-support/c-ares/{c-ares_1.11.0.bb => c-ares_1.12.0.bb}     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/c-ares/{c-ares_1.11.0.bb => c-ares_1.12.0.bb} (76%)
+
+diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb b/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+similarity index 76%
+rename from meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
+rename to meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+index c98be7d..8b63972 100644
+--- a/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
++++ b/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://ares_init.c;beginline=1;endline=3;md5=53f5ecf4c22c37c
+ SRC_URI = "http://c-ares.haxx.se/download/${BP}.tar.gz \
+            file://0001-configure.ac-don-t-override-passed-cflags.patch \
+ "
+-SRC_URI[md5sum] = "d5c6d522cfc54bb6f215a0b7912d46be"
+-SRC_URI[sha256sum] = "b3612e6617d9682928a1d50c1040de4db6519f977f0b25d40cf1b632900b3efd"
++SRC_URI[md5sum] = "2ca44be1715cd2c5666a165d35788424"
++SRC_URI[sha256sum] = "8692f9403cdcdf936130e045c84021665118ee9bfea905d1a76f04d4e6f365fb"
+ 
+ inherit autotools pkgconfig
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+2.9.3
+
 
