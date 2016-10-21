@@ -1,26 +1,64 @@
-Return-Path: <amarnath.valluri@intel.com>
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by mail.openembedded.org (Postfix) with ESMTP id C715F6FFA4
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-vk0-f42.google.com (mail-vk0-f42.google.com
+	[209.85.213.42])
+	by mail.openembedded.org (Postfix) with ESMTP id E496071C21
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2016 11:43:27 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by fmsmga105.fm.intel.com with ESMTP; 21 Oct 2016 04:43:29 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.31,376,1473145200"; d="scan'208";a="1057104020"
-Received: from linux.intel.com ([10.54.29.200])
-	by fmsmga001.fm.intel.com with ESMTP; 21 Oct 2016 04:43:29 -0700
-Received: from avalluri-GigaByte.fi.intel.com (avalluri-gigabyte.fi.intel.com
-	[10.237.72.170]) (using TLSv1 with cipher AES128-SHA (128/128 bits))
-	(No client certificate requested)
-	by linux.intel.com (Postfix) with ESMTP id 1F02D6A4080
+	Fri, 21 Oct 2016 11:58:20 +0000 (UTC)
+Received: by mail-vk0-f42.google.com with SMTP id 83so112816464vkd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2016 04:42:55 -0700 (PDT)
-From: Amarnath Valluri <amarnath.valluri@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Oct 2016 14:43:35 +0300
-Message-Id: <1477050215-18659-1-git-send-email-amarnath.valluri@intel.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] glmark2: Enabling c++ 11 features
+	Fri, 21 Oct 2016 04:58:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:cc; bh=/l54avhcXusdCZrcz5dTOzuEbWSSMUjfFOMmPO2vXJA=;
+	b=YzlmUXk2fEb91TESrXTfiKvD8zbvlkyjo0L75CSv+w30ZTfOvpFsTPHPiJgeEHHcBz
+	DS02sk/N4amm6iUTHWVDOgYKnwSZiRztJYkMT4xxAIAis9tVp6DO4sStLfKlobxlDLqo
+	wiDxZ5qTIWw85VD4XDn63EmvGLzU+ZnJFi1B/IRB8nDPzJZ26EwuGhOCuqgkR6ObqXkh
+	olYsVsfBWM+7iho1IJUthTModCMkojJMzxBvPMH7pJC/1kuC4tMbyy2fL6/ShFhhixuQ
+	yJ+ctug89YLs7+T4D3sZfXYuUGivHbHzWRkL+x8cmcbeQ2YXXv2im7Lp9gyjOZdfOrJc
+	itPg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:cc;
+	bh=/l54avhcXusdCZrcz5dTOzuEbWSSMUjfFOMmPO2vXJA=;
+	b=Lfil2h5W/zOr0Kjyy7dKvt9MT6hPmI/fVrwsYU5pyCSU/M9bWsUM3GtMAVnwwC+qZn
+	PhfkBVf7WGN4sQ3RSCv0o2IxLefAgzvSFBG4+TXjj5KQgVZWnl9dx7G0+Gef44Lt59Eo
+	0BKywk+pm3H/ESLyRZ4hJgd+owY6XjvmF00ZUXZuRH2Osea9BkIC+KU1acL/g0eHAq+N
+	Bobr/DCBcOiDS9LPPi2oKe2/AuEtbLpZn8Ba6AQRSs88xSvXUYzCyrQSXJFwGDf9bBsK
+	iAHBSmGUMupBR/7nvEe6dNe0sG9Ww/Dsm5cja5U/yNOkdIheMILyQzdM+clBvN+Tm8YJ
+	QJjw==
+X-Gm-Message-State: ABUngvfy8dg+Zob1PVGeSJebWIqEQo36X7Fw8dKwY82WwwrMNX3/f1H88T+wttPyum0OzQ==
+X-Received: by 10.31.157.216 with SMTP id g207mr440787vke.90.1477051101612;
+	Fri, 21 Oct 2016 04:58:21 -0700 (PDT)
+Received: from mail-vk0-f44.google.com (mail-vk0-f44.google.com.
+	[209.85.213.44])
+	by smtp.gmail.com with ESMTPSA id u18sm1039446uau.0.2016.10.21.04.58.20
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 21 Oct 2016 04:58:20 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-vk0-f44.google.com with SMTP id 83so112815291vkd.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Oct 2016 04:58:20 -0700 (PDT)
+X-Received: by 10.31.210.130 with SMTP id j124mr439020vkg.17.1477051100033;
+	Fri, 21 Oct 2016 04:58:20 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.31.49.82 with HTTP; Fri, 21 Oct 2016 04:58:19 -0700 (PDT)
+In-Reply-To: <9d63d09b-a249-6a77-197a-15f84f2bce44@qt.io>
+References: <20161020164624.12103-1-otavio@ossystems.com.br>
+	<CAP9ODKpCA6tuXf7Kv=RA5kabS85ju50zt8zaCrzu0kXm6CnvNw@mail.gmail.com>
+	<9d63d09b-a249-6a77-197a-15f84f2bce44@qt.io>
+Date: Fri, 21 Oct 2016 09:58:19 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKoOwCfNrC9tWD+1phO0Sw=hr_OYRFVNXmjM2pH1vYV60g@mail.gmail.com>
+Message-ID: <CAP9ODKoOwCfNrC9tWD+1phO0Sw=hr_OYRFVNXmjM2pH1vYV60g@mail.gmail.com>
+To: Samuli Piippo <samuli.piippo@qt.io>
+Cc: Samuli Piippo <samuli.piippo@theqtcompany.com>,
+	Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-qt5 PATCH] qmake5_paths.bbclass: Fix fonts installation path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,47 +71,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2016 11:43:29 -0000
+X-List-Received-Date: Fri, 21 Oct 2016 11:58:22 -0000
+Content-Type: text/plain; charset=UTF-8
 
-When build with gcc5,  Failed with below errors:
-| ../src/image-reader.cpp: In member function 'bool PNGReader::init(const
-string&)':
-| ../src/image-reader.cpp:123:16: error: 'unique_ptr' in namespace 'std' does
-not name a template type
+On Fri, Oct 21, 2016 at 4:47 AM, Samuli Piippo <samuli.piippo@qt.io> wrote:
+> That looks like the correct path to use, but how does this fix the problem?
+> OE_QMAKE_PATH_QT_FONTS doesn't seem to used anywhere in meta-qt5 any more
+> and probably should have been removed together with the font packaging bits.
 
-This change explicitly enables c++11 features, as code using them.
+It did not fix it, indeed. We had a left over from a test so it hided
+the issue. We are checking it now.
 
-Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
----
- meta-oe/recipes-benchmark/glmark2/glmark2_git.bb | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-index 396ae70..a2558a7 100644
---- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-+++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
-@@ -28,6 +28,9 @@ PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'x11-gl
-                   ${@bb.utils.contains('DISTRO_FEATURES', 'wayland opengl', 'wayland-gl wayland-gles2', '', d)} \
-                   drm-gl drm-gles2"
- 
-+# Enable C++11 features
-+CXXFLAGS += "-std=c++11"
-+
- PACKAGECONFIG[x11-gl] = ",,virtual/libgl virtual/libx11"
- PACKAGECONFIG[x11-gles2] = ",,virtual/libgles2 virtual/libx11"
- PACKAGECONFIG[drm-gl] = ",,virtual/libgl libdrm"
 -- 
-2.7.4
-
----------------------------------------------------------------------
-Intel Finland Oy
-Registered Address: PL 281, 00181 Helsinki 
-Business Identity Code: 0357606 - 4 
-Domiciled in Helsinki 
-
-This e-mail and any attachments may contain confidential material for
-the sole use of the intended recipient(s). Any review or distribution
-by others is strictly prohibited. If you are not the intended
-recipient, please contact the sender and delete all copies.
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
