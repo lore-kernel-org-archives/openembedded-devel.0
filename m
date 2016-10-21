@@ -1,24 +1,24 @@
-Return-Path: <Liezhi.Yang@windriver.com>
+Return-Path: <Kai.Kang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id C62AB6011F
+	by mail.openembedded.org (Postfix) with ESMTP id 0EF6D6FF73
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2016 06:32:05 +0000 (UTC)
+	Fri, 21 Oct 2016 06:52:01 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u9L6W6uO001051
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u9L6q3lt003977
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Oct 2016 23:32:06 -0700 (PDT)
-Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 20 Oct 2016 23:32:05 -0700
-From: Robert Yang <liezhi.yang@windriver.com>
+	Thu, 20 Oct 2016 23:52:03 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.294.0; Thu, 20 Oct 2016 23:52:02 -0700
+From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 20 Oct 2016 23:32:05 -0700
-Message-ID: <20161021063205.29410-1-liezhi.yang@windriver.com>
-X-Mailer: git-send-email 2.9.0
+Date: Fri, 21 Oct 2016 14:46:25 +0800
+Message-ID: <20161021064625.19052-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.10.1
 MIME-Version: 1.0
-Subject: [meta-systemd][PATCH] dhcp_%.bbappend: fix replaces original key warning
+Subject: [meta-networking][PATCH] c-ares: 1.11.0 -> 1.12.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,34 +31,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2016 06:32:05 -0000
+X-List-Received-Date: Fri, 21 Oct 2016 06:52:03 -0000
 Content-Type: text/plain
 
-Use ${PN} rather than dhcp to keep align with oe-core to fix:
-WARNING: oe-core/meta/recipes-connectivity/dhcp/dhcp_4.3.4.bb: Variable key SYSTEMD_AUTO_ENABLE_${PN}-client (enable) replaces original key SYSTEMD_AUTO_ENABLE_dhcp-client (disable).
-WARNING: oe-core/meta/recipes-connectivity/dhcp/dhcp_4.3.4.bb: Variable key SYSTEMD_SERVICE_${PN}-client (dhclient.service) replaces original key SYSTEMD_SERVICE_dhcp-client (dhclient.service).
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+Upgrade c-ares from 1.11.0 to 1.12.0.
+
+* update LIC_FILES_CHKSUM that a stand-alone license file is added
+* CVE-2016-5180 is fixed in 1.12.0
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../recipes-support/c-ares/{c-ares_1.11.0.bb => c-ares_1.12.0.bb}   | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-support/c-ares/{c-ares_1.11.0.bb => c-ares_1.12.0.bb} (60%)
 
-diff --git a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend b/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend
-index 94d7bd6..9c7d93f 100644
---- a/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend
-+++ b/meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend
-@@ -2,8 +2,8 @@
- FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb b/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+similarity index 60%
+rename from meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
+rename to meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+index c98be7d..da8e096 100644
+--- a/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
++++ b/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+@@ -4,12 +4,12 @@ DESCRIPTION = "c-ares is a C library that resolves names asynchronously."
+ HOMEPAGE = "http://daniel.haxx.se/projects/c-ares/"
+ SECTION = "libs"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://ares_init.c;beginline=1;endline=3;md5=53f5ecf4c22c37cf1ddd1ef8f8eccce0"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=f4b026880834eb01c035c5e5cb47ccac"
  
- SYSTEMD_PACKAGES += "dhcp-client"
--SYSTEMD_SERVICE_dhcp-client = "dhclient.service"
--SYSTEMD_AUTO_ENABLE_dhcp-client = "disable"
-+SYSTEMD_SERVICE_${PN}-client = "dhclient.service"
-+SYSTEMD_AUTO_ENABLE_${PN}-client = "disable"
+ SRC_URI = "http://c-ares.haxx.se/download/${BP}.tar.gz \
+            file://0001-configure.ac-don-t-override-passed-cflags.patch \
+ "
+-SRC_URI[md5sum] = "d5c6d522cfc54bb6f215a0b7912d46be"
+-SRC_URI[sha256sum] = "b3612e6617d9682928a1d50c1040de4db6519f977f0b25d40cf1b632900b3efd"
++SRC_URI[md5sum] = "2ca44be1715cd2c5666a165d35788424"
++SRC_URI[sha256sum] = "8692f9403cdcdf936130e045c84021665118ee9bfea905d1a76f04d4e6f365fb"
  
- FILES_${PN}-client += "${systemd_unitdir}/system/dhclient.service"
- RPROVIDES_dhcp-server += "dhcp-server-systemd"
+ inherit autotools pkgconfig
 -- 
-2.9.0
+2.10.1
 
 
