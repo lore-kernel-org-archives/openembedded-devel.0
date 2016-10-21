@@ -1,39 +1,26 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 9996271B56
+Return-Path: <amarnath.valluri@intel.com>
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+	by mail.openembedded.org (Postfix) with ESMTP id C715F6FFA4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2016 09:28:52 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id n189so6573673qke.1
+	Fri, 21 Oct 2016 11:43:27 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga105.fm.intel.com with ESMTP; 21 Oct 2016 04:43:29 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.31,376,1473145200"; d="scan'208";a="1057104020"
+Received: from linux.intel.com ([10.54.29.200])
+	by fmsmga001.fm.intel.com with ESMTP; 21 Oct 2016 04:43:29 -0700
+Received: from avalluri-GigaByte.fi.intel.com (avalluri-gigabyte.fi.intel.com
+	[10.237.72.170]) (using TLSv1 with cipher AES128-SHA (128/128 bits))
+	(No client certificate requested)
+	by linux.intel.com (Postfix) with ESMTP id 1F02D6A4080
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2016 02:28:54 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=V5e6i0CIxY2mNrPZ7e6NjEwxhyANpBYxS/H/O0yLjg0=;
-	b=hLVe5cz3fgI9GM3ysAA7Sc0ulfyX1xY+wS1yXx63Mv1SCIevqgVv/Gwods2qaXIJzr
-	+JkIh02ScPRyyIjqRtpD115spkNIYGNNuMBg40inSc+oU4lSfZz8sOlAlgL9XcDrSpew
-	2amhv+0CdClSgHQPjbTReDh2uMaeFUiBr+qt0kxmONXbPw/ld24ZJGN+ah6cZW1+0MXv
-	O1KMpuOla9TY8Ylyoqujue+iTUf27stg2Gm/po8dP6FJzgxyoecknH7SjopJ4V6DOQz6
-	yR1ZdWfxt5UqjJnVKYJYm7yuWW2r8BJ7zqCbdC/Hw5/WO0Lq/wxunJVh4zvGiaH9JQEz
-	eLng==
-X-Gm-Message-State: ABUngveK+mm+c5pz7mwv8kIwnK6c0jz0hZGeCdaUPGJ9wSKf5V/UUzv4iUcOD49F7UoRNQ==
-X-Received: by 10.194.102.67 with SMTP id fm3mr3140876wjb.80.1477042133316;
-	Fri, 21 Oct 2016 02:28:53 -0700 (PDT)
-Received: from tfsielt31850.tycofs.com ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id
-	x127sm3176457wmd.21.2016.10.21.02.28.52
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 21 Oct 2016 02:28:52 -0700 (PDT)
-From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+	Fri, 21 Oct 2016 04:42:55 -0700 (PDT)
+From: Amarnath Valluri <amarnath.valluri@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Oct 2016 10:28:51 +0100
-Message-Id: <20161021092851.27635-1-git@andred.net>
-X-Mailer: git-send-email 2.9.3
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] c-ares: fix metadata
+Date: Fri, 21 Oct 2016 14:43:35 +0300
+Message-Id: <1477050215-18659-1-git-send-email-amarnath.valluri@intel.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] glmark2: Enabling c++ 11 features
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,30 +33,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2016 09:28:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 21 Oct 2016 11:43:29 -0000
 
-We should set SUMMARY instead of DESCRIPTION.
+When build with gcc5,  Failed with below errors:
+| ../src/image-reader.cpp: In member function 'bool PNGReader::init(const
+string&)':
+| ../src/image-reader.cpp:123:16: error: 'unique_ptr' in namespace 'std' does
+not name a template type
 
-Signed-off-by: André Draszik <git@andred.net>
+This change explicitly enables c++11 features, as code using them.
+
+Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
 ---
- meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-benchmark/glmark2/glmark2_git.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb b/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
-index da8e096..4e28d6a 100644
---- a/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
-+++ b/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
-@@ -1,6 +1,6 @@
- # Copyright (c) 2012-2014 LG Electronics, Inc.
+diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+index 396ae70..a2558a7 100644
+--- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
++++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+@@ -28,6 +28,9 @@ PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'x11-gl
+                   ${@bb.utils.contains('DISTRO_FEATURES', 'wayland opengl', 'wayland-gl wayland-gles2', '', d)} \
+                   drm-gl drm-gles2"
  
--DESCRIPTION = "c-ares is a C library that resolves names asynchronously."
-+SUMMARY = "c-ares is a C library that resolves names asynchronously."
- HOMEPAGE = "http://daniel.haxx.se/projects/c-ares/"
- SECTION = "libs"
- LICENSE = "MIT"
++# Enable C++11 features
++CXXFLAGS += "-std=c++11"
++
+ PACKAGECONFIG[x11-gl] = ",,virtual/libgl virtual/libx11"
+ PACKAGECONFIG[x11-gles2] = ",,virtual/libgles2 virtual/libx11"
+ PACKAGECONFIG[drm-gl] = ",,virtual/libgl libdrm"
 -- 
-2.9.3
+2.7.4
+
+---------------------------------------------------------------------
+Intel Finland Oy
+Registered Address: PL 281, 00181 Helsinki 
+Business Identity Code: 0357606 - 4 
+Domiciled in Helsinki 
+
+This e-mail and any attachments may contain confidential material for
+the sole use of the intended recipient(s). Any review or distribution
+by others is strictly prohibited. If you are not the intended
+recipient, please contact the sender and delete all copies.
 
 
