@@ -1,26 +1,27 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id C0D4D71A79
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D1A171B71
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2016 07:21:46 +0000 (UTC)
+	Fri, 21 Oct 2016 07:23:42 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id u9L7LXae009105
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u9L7NYjb027756
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 21 Oct 2016 00:21:33 -0700 (PDT)
+	Fri, 21 Oct 2016 00:23:34 -0700 (PDT)
 Received: from [128.224.162.161] (128.224.162.161) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 21 Oct 2016 00:21:32 -0700
-To: <openembedded-devel@lists.openembedded.org>
-References: <20161021064625.19052-1-kai.kang@windriver.com>
+	Fri, 21 Oct 2016 00:23:32 -0700
+To: <git@andred.net>
+References: <20161020211630.2707-1-git@andred.net>
 From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <9233e84f-355c-6ce1-a3c0-0f339953e928@windriver.com>
-Date: Fri, 21 Oct 2016 15:21:31 +0800
+Message-ID: <eb06c3eb-f54e-12fe-c2e7-d30c67ac925b@windriver.com>
+Date: Fri, 21 Oct 2016 15:23:31 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
 	Thunderbird/45.3.0
 MIME-Version: 1.0
-In-Reply-To: <20161021064625.19052-1-kai.kang@windriver.com>
-Subject: Re: [meta-networking][PATCH] c-ares: 1.11.0 -> 1.12.0
+In-Reply-To: <20161020211630.2707-1-git@andred.net>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] c-ares: update 1.11.0 -> 1.12.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,43 +34,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2016 07:21:47 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+X-List-Received-Date: Fri, 21 Oct 2016 07:23:44 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 2016年10月21日 14:46, kai.kang@windriver.com wrote:
-> From: Kai Kang <kai.kang@windriver.com>
+On 2016年10月21日 05:16, André Draszik wrote:
+> Highlight:
+> - fix CVE-2016-5180
 >
-> Upgrade c-ares from 1.11.0 to 1.12.0.
+> Other changes, from https://c-ares.haxx.se/changelog.html
 >
-> * update LIC_FILES_CHKSUM that a stand-alone license file is added
+> c-ares version 1.12.0 - Sep 29 2016
+> Changes:
+>      api: add ARES_OPT_NOROTATE optmask value
+>
+> Bug fixes:
+>      CVE-2016-5180: ares_create_query single byte out of buffer write
+>      configure: acknowledge --disable-tests [1]
+>      man pages: fix typos detected by Lintian
+>      test: add missing #includes for dns-proto.cc
+>      test: avoid in6addr_* constants
+>      test: Build with MinGW on AppVeyor
+>      Makefile.m32: add support for extra flags
+>      Makefile.m32: add support for CROSSPREFIX
+>      configure: check if tests can get built before enabled
+>      ares_library_cleanup: reset ares_realloc too
+>      ahost.c: add cast to fix C++ compile
+>      test: Only pass unused args to GoogleTest
+>      build: commonize MSVC version detection
+>      msvc_ver.inc: support Visual Studio 2015 Update 1, 2, 3
+>      test: for AF_UNSPEC, return CNAME only for AAAA, but valid A record
+>      ares_getnameinfo: explicitly clear struct servent before use
+>      test: Update fuzzing function prototype
+>      init: fix nsort initialization
+>      test: add fuzzing check script to tests
+>      web: http => https
+>      read_tcp_data: remove superfluous NULL check
+>      LICENSE.md: add a stand-alone license file
+>      SECURITY.md: suggested "security process" for the project
+>      ares_init_options: only propagate init failures from options [2]
+>      headers: remove checks for and defines of variable sizes
+>      test: fix gMock to work with gcc >= 6.x [3]
+>
+> Signed-off-by: André Draszik <git@andred.net>
+> ---
+>   .../recipes-support/c-ares/{c-ares_1.11.0.bb => c-ares_1.12.0.bb}     | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-networking/recipes-support/c-ares/{c-ares_1.11.0.bb => c-ares_1.12.0.bb} (76%)
+>
+> diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb b/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+> similarity index 76%
+> rename from meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
+> rename to meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+> index c98be7d..8b63972 100644
+> --- a/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
+> +++ b/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+> @@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://ares_init.c;beginline=1;endline=3;md5=53f5ecf4c22c37c
 
-Didn't see André Draszik's patch to upgrade c-ares. So please ignore it.
+A stand-alone license file is added. It is better to update 
+LIC_FILES_CHKSUM.
 
 --Kai
 
-> * CVE-2016-5180 is fixed in 1.12.0
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->   .../recipes-support/c-ares/{c-ares_1.11.0.bb => c-ares_1.12.0.bb}   | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
->   rename meta-networking/recipes-support/c-ares/{c-ares_1.11.0.bb => c-ares_1.12.0.bb} (60%)
->
-> diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb b/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
-> similarity index 60%
-> rename from meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
-> rename to meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
-> index c98be7d..da8e096 100644
-> --- a/meta-networking/recipes-support/c-ares/c-ares_1.11.0.bb
-> +++ b/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
-> @@ -4,12 +4,12 @@ DESCRIPTION = "c-ares is a C library that resolves names asynchronously."
->   HOMEPAGE = "http://daniel.haxx.se/projects/c-ares/"
->   SECTION = "libs"
->   LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://ares_init.c;beginline=1;endline=3;md5=53f5ecf4c22c37cf1ddd1ef8f8eccce0"
-> +LIC_FILES_CHKSUM = "file://LICENSE.md;md5=f4b026880834eb01c035c5e5cb47ccac"
->   
 >   SRC_URI = "http://c-ares.haxx.se/download/${BP}.tar.gz \
 >              file://0001-configure.ac-don-t-override-passed-cflags.patch \
 >   "
