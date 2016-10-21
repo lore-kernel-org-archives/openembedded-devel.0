@@ -1,46 +1,26 @@
-Return-Path: <philip.balister@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 5EF5A60268
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2016 12:14:20 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id z190so6942415qkc.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2016 05:14:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=smmu04amaUuaTxXiLPLk6Zg9EvUyfxzhT70kkeWWY14=;
-	b=mbR1/6eryZEIHvzVTUlp2G2Umr9xP1x0mRCGWQz+bzX/3cJHOuYWIxixaNQttBIjhE
-	mL/PdlZRtOOoZSz7Cj/WXvqaS7plPTGPSLm+BegpGFO88VYS+sdGAH3NBi6cOSu9t31O
-	sYENyAGXFuKyZ2fRG+PsuG6ti38Vc4jJsrRIiNUuEf0NIg/tXSMU3zqpQ611A5FFxXaD
-	r+tgGIFEkypw/o72YvVNVs44p7q75YRy/XfBZU4BEgKJu2f72PmITW7UD/7lC6l5i2md
-	Rn+TwQP1pvtnAwje363TJV/J7D2xwyk4hKkOzryfrrLknNzhLnSq96+ygYWAc73bovvh
-	V/KA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=smmu04amaUuaTxXiLPLk6Zg9EvUyfxzhT70kkeWWY14=;
-	b=XbxMb64SiTBQvIiO9mGIoAWDKPUF9FjrFJ+HZMvTbzK+Efk8mtbn0rzEJOQb9Lq0ki
-	FVHo4Z2oclxgTi1sVJlIcu8aeOg7fptYtNOZplZ2d/XRWpfeRCeprPwxrWRSUCmw01A+
-	4uu9rI7w5Dxo+CQjS/UBJypT2haU2UpN6Ja424LF4ExHcVw8Gfov8qxqAS3c2MyJ5ymr
-	aLKpz2Guq9k5jewaTuS+UMSbmaP97jLgCC/bOBCrVT0lh/tRomD62mmkeF0cQ9MtABfY
-	d1USJQSTWYgJy1EFqhW/uZK08AyaupmB7Iuy40lRKUXnn6buUrTrhG6Tnm+lY5P7EzBI
-	0Nkg==
-X-Gm-Message-State: ABUngveo3nlxZQOzNtnZvsDNC+O6GIujG+XgBQoLPx7WlRGIUqHwO6dl0JWdeT3DzeSqPw==
-X-Received: by 10.55.145.197 with SMTP id t188mr716950qkd.59.1477052061885;
-	Fri, 21 Oct 2016 05:14:21 -0700 (PDT)
-Received: from thuvia.localdomain (pool-71-171-14-165.ronkva.east.verizon.net.
-	[71.171.14.165])
-	by smtp.gmail.com with ESMTPSA id 21sm1190868qtx.12.2016.10.21.05.14.20
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 21 Oct 2016 05:14:20 -0700 (PDT)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Oct 2016 08:14:16 -0400
-Message-Id: <1477052056-14472-1-git-send-email-philip@balister.org>
-X-Mailer: git-send-email 2.5.5
-Subject: [meta-oe][PATCH] fftw: Allow an empty package for fftw.
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 4D514600E2;
+	Fri, 21 Oct 2016 12:57:19 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by fmsmga102.fm.intel.com with ESMTP; 21 Oct 2016 05:57:22 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.31,376,1473145200"; d="scan'208";a="892464671"
+Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
+	([10.237.68.161])
+	by orsmga003.jf.intel.com with ESMTP; 21 Oct 2016 05:57:19 -0700
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Yocto Project <yocto@yoctoproject.org>
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+Message-ID: <03b5e98b-0724-daa2-8f78-ab4624f52752@linux.intel.com>
+Date: Fri, 21 Oct 2016 15:55:08 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Icedove/45.4.0
+MIME-Version: 1.0
+Subject: Attention all: patches for upstream source will be applied with stricter criteria for context
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,28 +33,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2016 12:14:22 -0000
+X-List-Received-Date: Fri, 21 Oct 2016 12:57:20 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The fftw-dev package RDEPENDS on the fftw package. Let the recipe create an
-empty one to satisfy this requirement.
+Hello all,
 
-Signed-off-by: Philip Balister <philip@balister.org>
----
- meta-oe/recipes-support/fftw/fftw_3.3.4.bb | 2 ++
- 1 file changed, 2 insertions(+)
+while updating gnutls to a newer version I came across a rather serious 
+issue: the way we patch source code is very lenient about the context 
+for the lines to be changed. Basically, it's enough for one line before 
+and after the changed line to match, because patch command's default 
+setting for 'fuzz factor' allows it. If these lines happen to be 
+whitespace or braces, then there's nothing to prevent the patch from 
+being applied incorrectly.
 
-diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.4.bb b/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
-index 0faaea1..0bb6cc2 100644
---- a/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
-+++ b/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
-@@ -69,4 +69,6 @@ FILES_fftwl-wisdom = "${bindir}/fftwl-wisdom"
- FILES_fftwf-wisdom = "${bindir}/fftwf-wisdom"
- FILES_fftw-wisdom-to-conf = "${bindir}/fftw-wisdom-to-conf"
- 
-+ALLOW_EMPTY_${PN}= "1"
-+
- BBCLASSEXTEND = "native"
--- 
-2.5.5
+Here's a particularly nasty example of this happening completely 
+silently (compile step works fine too), with security implications:
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
 
+I think this absolutely needs to be fixed. The downside is that this 
+will break a lot of patches across all layers - after setting the fuzz 
+to zero in oe-core we have 87 recipes that fail to be patched. Maxin and 
+I are currently going through them one by one and getting them fixed.
+
+Regards,
+Alex
 
