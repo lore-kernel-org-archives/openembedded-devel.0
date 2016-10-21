@@ -1,53 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
 	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 72DE171DA4;
-	Fri, 21 Oct 2016 17:05:18 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id r16so9111483pfg.3;
-	Fri, 21 Oct 2016 10:05:20 -0700 (PDT)
+	by mail.openembedded.org (Postfix) with ESMTP id 4EB1E6E660
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Oct 2016 17:08:25 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id s8so9122908pfj.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 Oct 2016 10:08:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:from:in-reply-to:date:cc:message-id:references
-	:to; bh=VPfq3i6SBSpG/APk0ELzLuWDvA9XqPXxbCs4IYLHDhU=;
-	b=UnBlki233N8lOoNqO9w5cHY1AabdHFS1PAqaqvQZDBtlp8Cw8J8K0eFOaQBkka72yM
-	YquowoYBuvw+Fgd+AxgjuZ46oyREmeI5EM0TI0GE3FJtK1ZwPVa5+9kKbJ9Ez3izRbiv
-	L/WDyM90Si0iBCBKaq9bdWxI3w87ss2m9pqyFfPsJZup8Gral85dxdbe8z4fFX65B3Pf
-	n5pgC4EwxqkbouoHO2SS6PTd2Iz40JdIgSvExVskH86r+QaEAo7VGQxgRnyyYJn9qEh7
-	xHTVM4fPem7d0L6ALviq1cZCam9zauUEyQxUKIioSBP1fwpeWGkjU98rXo74TDLAav6h
-	f48A==
+	h=mime-version:subject:from:in-reply-to:date:message-id:references:to; 
+	bh=8rM4SjgQG8wl9pKiS7A5gEwe7A4ASFTOjJhyeNsREYs=;
+	b=WQyYnFFk5HrddkzUoz+4uS+eAXj3Mg2Uq2MhbKBl51HP1/peQHu9tmGOzkjdJEK0hx
+	U5vjfrrJ4qaDWlDWPyKr79bpAQBZ9+O01DR7JT0sQhrLuMpyltzgbJfdx4uBdkVz1aWU
+	xV6f+lqaXoGAmeRfLgz/cpvLXSqS8J/m4VsH/Hcd3dWMCrR+TiL8Tc/s/f2Tb2fqDvdE
+	V7/IOUb3fCcWzMLIC4brdcDRC6baYChomb4VmcN8UvKr0EI3PyPjc1F6RwsY7kDC3Hex
+	bHfiiXXtQn6BlZuLIpj8qwhnSHVpsLMGSR5vi/9rliV6aoIlxlpA1yOkER0h+GKtd+5B
+	D4Kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:mime-version:from:in-reply-to:date:cc
+	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date
 	:message-id:references:to;
-	bh=VPfq3i6SBSpG/APk0ELzLuWDvA9XqPXxbCs4IYLHDhU=;
-	b=QN6nu5J6JmuW47DLPD1MQBLS2+lpPOYnyP2QPHRwJNSzvlLdfsF7O0doPpSZOd+US7
-	F5kWwc+55N8HZeNBpe75WP6hcnu3RWV+cCIYPrXufNvpOPC989J58VdQEJPZq1cPGsVx
-	/s7NpsvZkjAncS/+AQTBxzpobBnXLoATqrd3IjFLyt3ih1Mxb70/du6muwZJuB5Yc0aU
-	5ZezhHbnjQerus0rd6bXBn9N/Wbd/NVDPs8kCl3XZU7q3i5XhI8Wa9nIigZbi3hNC55m
-	BfoKGuDun9gnof6hVIA5SezCJrF0BcMphd7rJhoJEOfOBXc3TfhOqVHRqj8R4nmjP6GI
-	AT9A==
-X-Gm-Message-State: ABUngvc6DcAJpdkLKOdZ09NPvcL9imfy5LxfcugjKkpiVU5hIxuSsP2cnsjrpNYIAgKtDA==
-X-Received: by 10.98.206.1 with SMTP id y1mr3373021pfg.70.1477069519876;
-	Fri, 21 Oct 2016 10:05:19 -0700 (PDT)
+	bh=8rM4SjgQG8wl9pKiS7A5gEwe7A4ASFTOjJhyeNsREYs=;
+	b=QmBPaNNGUw7a7kzUjjz/KrsAkoOxOgWf5pbOktOm/otlvHemFKiGhjr2yQ+RhJ4RY/
+	dkgZsDA091Iq889es2ViQmYUqObaz9xv+EZboJT+GQ7dlz7Lfaf75k/mcf7n536hQo7G
+	iYWKlYysfOiS6PItOZI/QUyvTPY39I7KdsyqrRBOpGYpdiSHOuGJpuqSJQY7DmXQ99AH
+	fXmlaWslvvCacqxFboEqWMQTwhGeupV/f/Nai79yV2R/mO+K2C1BojF62De/vWNA0d0H
+	ehm+bLjy9FyafA/iEt1vDfFFJwpbKY9TtikggE66s1TpIDzDHGzVcKMBi3pKSkLKfbPq
+	ukew==
+X-Gm-Message-State: ABUngvf9pk7ydWI1jZoMWvV4nk/gZc06PNOWu9J9fkWPUkg/cHwBuYF1Dk2oJp0K6ULWMQ==
+X-Received: by 10.98.153.204 with SMTP id t73mr3345184pfk.144.1477069707505;
+	Fri, 21 Oct 2016 10:08:27 -0700 (PDT)
 Received: from [192.168.0.130] (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192])
-	by smtp.gmail.com with ESMTPSA id bx5sm6531356pad.6.2016.10.21.10.05.18
+	by smtp.gmail.com with ESMTPSA id s6sm6527110pfg.46.2016.10.21.10.08.26
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 21 Oct 2016 10:05:19 -0700 (PDT)
+	Fri, 21 Oct 2016 10:08:26 -0700 (PDT)
 Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
 X-Pgp-Agent: GPGMail
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <03b5e98b-0724-daa2-8f78-ab4624f52752@linux.intel.com>
-Date: Fri, 21 Oct 2016 10:05:13 -0700
-Message-Id: <80B25E1D-5083-4751-BD09-DEB6DBE7FA7F@gmail.com>
-References: <03b5e98b-0724-daa2-8f78-ab4624f52752@linux.intel.com>
-To: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+In-Reply-To: <1477052056-14472-1-git-send-email-philip@balister.org>
+Date: Fri, 21 Oct 2016 10:08:25 -0700
+Message-Id: <36CFFABF-F18A-405E-BA43-08713EC46478@gmail.com>
+References: <1477052056-14472-1-git-send-email-philip@balister.org>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 X-Mailer: Apple Mail (2.3124)
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [yocto] Attention all: patches for upstream source will be applied with stricter criteria for context
+Subject: Re: [meta-oe][PATCH] fftw: Allow an empty package for fftw.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,55 +58,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2016 17:05:19 -0000
-X-Groupsio-MsgNum: 63558
+X-List-Received-Date: Fri, 21 Oct 2016 17:08:26 -0000
+X-Groupsio-MsgNum: 63559
 Content-Type: multipart/signed;
-	boundary="Apple-Mail=_1A3F1D3A-449C-400F-ABF9-BCB53103ED0A";
+	boundary="Apple-Mail=_DFDA061B-AD0E-4821-94B8-0EF7CBAACFA8";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---Apple-Mail=_1A3F1D3A-449C-400F-ABF9-BCB53103ED0A
+--Apple-Mail=_DFDA061B-AD0E-4821-94B8-0EF7CBAACFA8
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain;
-	charset=us-ascii
+	charset=utf-8
 
 
-> On Oct 21, 2016, at 5:55 AM, Alexander Kanavin =
-<alexander.kanavin@linux.intel.com> wrote:
+> On Oct 21, 2016, at 5:14 AM, Philip Balister <philip@balister.org> =
+wrote:
 >=20
-> Hello all,
+> The fftw-dev package RDEPENDS on the fftw package. Let the recipe =
+create an
+> empty one to satisfy this requirement.
 >=20
-> while updating gnutls to a newer version I came across a rather =
-serious issue: the way we patch source code is very lenient about the =
-context for the lines to be changed. Basically, it's enough for one line =
-before and after the changed line to match, because patch command's =
-default setting for 'fuzz factor' allows it. If these lines happen to be =
-whitespace or braces, then there's nothing to prevent the patch from =
-being applied incorrectly.
+> Signed-off-by: Philip Balister <philip@balister.org>
+> ---
+> meta-oe/recipes-support/fftw/fftw_3.3.4.bb | 2 ++
+> 1 file changed, 2 insertions(+)
 >=20
-> Here's a particularly nasty example of this happening completely =
-silently (compile step works fine too), with security implications:
-> https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D10450
+> diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.4.bb =
+b/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
+> index 0faaea1..0bb6cc2 100644
+> --- a/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
+> +++ b/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
+> @@ -69,4 +69,6 @@ FILES_fftwl-wisdom =3D "${bindir}/fftwl-wisdom"
+> FILES_fftwf-wisdom =3D "${bindir}/fftwf-wisdom"
+> FILES_fftw-wisdom-to-conf =3D "${bindir}/fftw-wisdom-to-conf"
 >=20
-> I think this absolutely needs to be fixed. The downside is that this =
-will break a lot of patches across all layers - after setting the fuzz =
-to zero in oe-core we have 87 recipes that fail to be patched. Maxin and =
-I are currently going through them one by one and getting them fixed.
+> +ALLOW_EMPTY_${PN}=3D =E2=80=9C1"
 
-perhaps a list of the recipes, with steps to configure fuzz factor on =
-wiki would enable other folks to
-fix them especially the recipe maintainers should care.
+as Martin said
 
+RDEPENDS_${PN}-dev =3D =E2=80=9C=E2=80=9D
+
+should be done.
+
+> +
+> BBCLASSEXTEND =3D "native"
+> --
+> 2.5.5
 >=20
-> Regards,
-> Alex
 > --
 > _______________________________________________
-> yocto mailing list
-> yocto@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/yocto
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
---Apple-Mail=_1A3F1D3A-449C-400F-ABF9-BCB53103ED0A
+--Apple-Mail=_DFDA061B-AD0E-4821-94B8-0EF7CBAACFA8
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment;
 	filename=signature.asc
@@ -119,9 +122,9 @@ Content-Description: Message signed with OpenPGP using GPGMail
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlgKSs0ACgkQuwUzVZGdMxR+xQCdGaWl9kCDDxDXl8QGOFRMUMKH
-p5gAn1mCevm/eb7B1icYwpb4HwMzDJVZ
-=H4zG
+iEYEARECAAYFAlgKS4kACgkQuwUzVZGdMxR2NQCgki4Kdmq87PORkUfq9mRafS84
++NAAoIpXemsULYd4mv4Go4WV6cPUAeBf
+=7iLS
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_1A3F1D3A-449C-400F-ABF9-BCB53103ED0A--
+--Apple-Mail=_DFDA061B-AD0E-4821-94B8-0EF7CBAACFA8--
