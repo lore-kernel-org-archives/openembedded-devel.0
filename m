@@ -1,64 +1,46 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-vk0-f42.google.com (mail-vk0-f42.google.com
-	[209.85.213.42])
-	by mail.openembedded.org (Postfix) with ESMTP id E496071C21
+Return-Path: <philip.balister@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 5EF5A60268
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2016 11:58:20 +0000 (UTC)
-Received: by mail-vk0-f42.google.com with SMTP id 83so112816464vkd.0
+	Fri, 21 Oct 2016 12:14:20 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id z190so6942415qkc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2016 04:58:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=/l54avhcXusdCZrcz5dTOzuEbWSSMUjfFOMmPO2vXJA=;
-	b=YzlmUXk2fEb91TESrXTfiKvD8zbvlkyjo0L75CSv+w30ZTfOvpFsTPHPiJgeEHHcBz
-	DS02sk/N4amm6iUTHWVDOgYKnwSZiRztJYkMT4xxAIAis9tVp6DO4sStLfKlobxlDLqo
-	wiDxZ5qTIWw85VD4XDn63EmvGLzU+ZnJFi1B/IRB8nDPzJZ26EwuGhOCuqgkR6ObqXkh
-	olYsVsfBWM+7iho1IJUthTModCMkojJMzxBvPMH7pJC/1kuC4tMbyy2fL6/ShFhhixuQ
-	yJ+ctug89YLs7+T4D3sZfXYuUGivHbHzWRkL+x8cmcbeQ2YXXv2im7Lp9gyjOZdfOrJc
-	itPg==
+	Fri, 21 Oct 2016 05:14:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=smmu04amaUuaTxXiLPLk6Zg9EvUyfxzhT70kkeWWY14=;
+	b=mbR1/6eryZEIHvzVTUlp2G2Umr9xP1x0mRCGWQz+bzX/3cJHOuYWIxixaNQttBIjhE
+	mL/PdlZRtOOoZSz7Cj/WXvqaS7plPTGPSLm+BegpGFO88VYS+sdGAH3NBi6cOSu9t31O
+	sYENyAGXFuKyZ2fRG+PsuG6ti38Vc4jJsrRIiNUuEf0NIg/tXSMU3zqpQ611A5FFxXaD
+	r+tgGIFEkypw/o72YvVNVs44p7q75YRy/XfBZU4BEgKJu2f72PmITW7UD/7lC6l5i2md
+	Rn+TwQP1pvtnAwje363TJV/J7D2xwyk4hKkOzryfrrLknNzhLnSq96+ygYWAc73bovvh
+	V/KA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc;
-	bh=/l54avhcXusdCZrcz5dTOzuEbWSSMUjfFOMmPO2vXJA=;
-	b=Lfil2h5W/zOr0Kjyy7dKvt9MT6hPmI/fVrwsYU5pyCSU/M9bWsUM3GtMAVnwwC+qZn
-	PhfkBVf7WGN4sQ3RSCv0o2IxLefAgzvSFBG4+TXjj5KQgVZWnl9dx7G0+Gef44Lt59Eo
-	0BKywk+pm3H/ESLyRZ4hJgd+owY6XjvmF00ZUXZuRH2Osea9BkIC+KU1acL/g0eHAq+N
-	Bobr/DCBcOiDS9LPPi2oKe2/AuEtbLpZn8Ba6AQRSs88xSvXUYzCyrQSXJFwGDf9bBsK
-	iAHBSmGUMupBR/7nvEe6dNe0sG9Ww/Dsm5cja5U/yNOkdIheMILyQzdM+clBvN+Tm8YJ
-	QJjw==
-X-Gm-Message-State: ABUngvfy8dg+Zob1PVGeSJebWIqEQo36X7Fw8dKwY82WwwrMNX3/f1H88T+wttPyum0OzQ==
-X-Received: by 10.31.157.216 with SMTP id g207mr440787vke.90.1477051101612;
-	Fri, 21 Oct 2016 04:58:21 -0700 (PDT)
-Received: from mail-vk0-f44.google.com (mail-vk0-f44.google.com.
-	[209.85.213.44])
-	by smtp.gmail.com with ESMTPSA id u18sm1039446uau.0.2016.10.21.04.58.20
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=smmu04amaUuaTxXiLPLk6Zg9EvUyfxzhT70kkeWWY14=;
+	b=XbxMb64SiTBQvIiO9mGIoAWDKPUF9FjrFJ+HZMvTbzK+Efk8mtbn0rzEJOQb9Lq0ki
+	FVHo4Z2oclxgTi1sVJlIcu8aeOg7fptYtNOZplZ2d/XRWpfeRCeprPwxrWRSUCmw01A+
+	4uu9rI7w5Dxo+CQjS/UBJypT2haU2UpN6Ja424LF4ExHcVw8Gfov8qxqAS3c2MyJ5ymr
+	aLKpz2Guq9k5jewaTuS+UMSbmaP97jLgCC/bOBCrVT0lh/tRomD62mmkeF0cQ9MtABfY
+	d1USJQSTWYgJy1EFqhW/uZK08AyaupmB7Iuy40lRKUXnn6buUrTrhG6Tnm+lY5P7EzBI
+	0Nkg==
+X-Gm-Message-State: ABUngveo3nlxZQOzNtnZvsDNC+O6GIujG+XgBQoLPx7WlRGIUqHwO6dl0JWdeT3DzeSqPw==
+X-Received: by 10.55.145.197 with SMTP id t188mr716950qkd.59.1477052061885;
+	Fri, 21 Oct 2016 05:14:21 -0700 (PDT)
+Received: from thuvia.localdomain (pool-71-171-14-165.ronkva.east.verizon.net.
+	[71.171.14.165])
+	by smtp.gmail.com with ESMTPSA id 21sm1190868qtx.12.2016.10.21.05.14.20
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 21 Oct 2016 04:58:20 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-vk0-f44.google.com with SMTP id 83so112815291vkd.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Oct 2016 04:58:20 -0700 (PDT)
-X-Received: by 10.31.210.130 with SMTP id j124mr439020vkg.17.1477051100033;
-	Fri, 21 Oct 2016 04:58:20 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.31.49.82 with HTTP; Fri, 21 Oct 2016 04:58:19 -0700 (PDT)
-In-Reply-To: <9d63d09b-a249-6a77-197a-15f84f2bce44@qt.io>
-References: <20161020164624.12103-1-otavio@ossystems.com.br>
-	<CAP9ODKpCA6tuXf7Kv=RA5kabS85ju50zt8zaCrzu0kXm6CnvNw@mail.gmail.com>
-	<9d63d09b-a249-6a77-197a-15f84f2bce44@qt.io>
-Date: Fri, 21 Oct 2016 09:58:19 -0200
-X-Gmail-Original-Message-ID: <CAP9ODKoOwCfNrC9tWD+1phO0Sw=hr_OYRFVNXmjM2pH1vYV60g@mail.gmail.com>
-Message-ID: <CAP9ODKoOwCfNrC9tWD+1phO0Sw=hr_OYRFVNXmjM2pH1vYV60g@mail.gmail.com>
-To: Samuli Piippo <samuli.piippo@qt.io>
-Cc: Samuli Piippo <samuli.piippo@theqtcompany.com>,
-	Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-qt5 PATCH] qmake5_paths.bbclass: Fix fonts installation path
+	Fri, 21 Oct 2016 05:14:20 -0700 (PDT)
+Sender: Philip Balister <philip.balister@gmail.com>
+From: Philip Balister <philip@balister.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 21 Oct 2016 08:14:16 -0400
+Message-Id: <1477052056-14472-1-git-send-email-philip@balister.org>
+X-Mailer: git-send-email 2.5.5
+Subject: [meta-oe][PATCH] fftw: Allow an empty package for fftw.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,19 +53,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Oct 2016 11:58:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 21 Oct 2016 12:14:22 -0000
 
-On Fri, Oct 21, 2016 at 4:47 AM, Samuli Piippo <samuli.piippo@qt.io> wrote:
-> That looks like the correct path to use, but how does this fix the problem?
-> OE_QMAKE_PATH_QT_FONTS doesn't seem to used anywhere in meta-qt5 any more
-> and probably should have been removed together with the font packaging bits.
+The fftw-dev package RDEPENDS on the fftw package. Let the recipe create an
+empty one to satisfy this requirement.
 
-It did not fix it, indeed. We had a left over from a test so it hided
-the issue. We are checking it now.
+Signed-off-by: Philip Balister <philip@balister.org>
+---
+ meta-oe/recipes-support/fftw/fftw_3.3.4.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
+diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.4.bb b/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
+index 0faaea1..0bb6cc2 100644
+--- a/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
++++ b/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
+@@ -69,4 +69,6 @@ FILES_fftwl-wisdom = "${bindir}/fftwl-wisdom"
+ FILES_fftwf-wisdom = "${bindir}/fftwf-wisdom"
+ FILES_fftw-wisdom-to-conf = "${bindir}/fftw-wisdom-to-conf"
+ 
++ALLOW_EMPTY_${PN}= "1"
++
+ BBCLASSEXTEND = "native"
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+2.5.5
+
 
