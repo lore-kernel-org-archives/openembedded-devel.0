@@ -1,46 +1,44 @@
-Return-Path: <philip.balister@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 3650B70100
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-vk0-f43.google.com (mail-vk0-f43.google.com
+	[209.85.213.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 983A762132
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Oct 2016 19:21:51 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id z190so13828337qkc.3
+	Mon, 24 Oct 2016 23:04:50 +0000 (UTC)
+Received: by mail-vk0-f43.google.com with SMTP id h85so4480113vkc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Oct 2016 12:21:53 -0700 (PDT)
+	Mon, 24 Oct 2016 16:04:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=cyqOdNvXDInuWh1jCjqBVIKYgPA/L7ptEDlKnz53pBk=;
-	b=heQ5xntpaYcj8BsGfMKkIZ9MNICUqE9PfI6fc2BxKs9kYfk6mvSbhLU8u6nwcdq839
-	c8V2TEvOXpQ7pJaWf+EfdQ9UFtBinqj5kHEmsWZ6Pv1Yv2hbrNiatrWplqSYWGKfn24I
-	j4ymUqILNtkVMF4czvB+3nrFy1/IG9P2mvTCvyH5IC3SxeSYuGm23tO0eJiXrsFxv3co
-	l46I+qOeiLuT0wicSOVqoWGNRKOYSUSnqnzon+tSL7s5iYC/uFcnmCn8Va4xJnXMyDsa
-	bj/jH9iG1r+RQ2kbU3aoBhuF67vkH7n+c87XKaOG1o4x45ysACsX0SpvVwy0bgq/CvRS
-	uIyw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=v1m7Eq+/yW2Hhnie86O7fKKMaE7ep+PR2rkNeEldPcA=;
+	b=N1lBS612nUupC9FLT3GRsUnEKQ+P7IPinYCMtBjzOhTEMFiIjN2R3ZEx69LRRJSk8r
+	mWziZkynwsKUAEYSwCsFWvBIRe4oZXx9z+zDw0/TTJn9d+LveIgW0XCvxEYMel7fCw3b
+	QxqO0vjCIsuq/j3n415qmlcCSJkSx/0HFb4gxWRafQ01A97YtcVI7qgHeaf/uauvTpI1
+	MuSiLj0yQs2Vfo1u83h+o1TMu+vAmCt8nVJ/RJF3CCclsmj6qBCK173R5iOlHMlPk+jp
+	zisG5ftqsQQxk3F4DCNV4tDZjI9FTTNYIL4qqXOzzQZaua4h2CmvfipdET967R6ts/Uh
+	9Ekg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=cyqOdNvXDInuWh1jCjqBVIKYgPA/L7ptEDlKnz53pBk=;
-	b=aoMNQseEXQlTsJzXLCGo+HX+RKmS2lfNYBLn1zY/rH+lpbP6hEJ49rl6buLpbrfQwy
-	pC/Ljhc3AlPBMq8L8t/YdGHRDLwCmTcwcs4lXiNZAvsOOg6wW0n0j4wXjFYDd0x7LX4N
-	kTTy2JtOPJAE8lIMu4gzPYpySKRFIeJ1fyOcr5Pr8UX69seO1nk4QtZORO+4x9lDzyC+
-	0K+indQhVEFlgSWtp4R9bD1H++/BOVoyOEoVpkf0M2DHlsDyovtKC19U0B8gcDAEL/71
-	GcqKvx1/48svpurOJ4lTcaO73JUC7bXFrhSi/gw8Ev7BFnZoquifhblsYRP1iFlfhjz9
-	/sMQ==
-X-Gm-Message-State: ABUngvcbAPv/gYHeVrUUc0AL09pwqW/IL96ATKzo5zSZcqZuL+YADECAwYXHoJ+K3IW+xw==
-X-Received: by 10.55.188.193 with SMTP id m184mr15621994qkf.129.1477336912738; 
-	Mon, 24 Oct 2016 12:21:52 -0700 (PDT)
-Received: from thuvia.localdomain (pool-71-171-14-165.ronkva.east.verizon.net.
-	[71.171.14.165])
-	by smtp.gmail.com with ESMTPSA id f79sm9170669qke.6.2016.10.24.12.21.48
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 24 Oct 2016 12:21:52 -0700 (PDT)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Oct 2016 15:21:37 -0400
-Message-Id: <1477336897-969-1-git-send-email-philip@balister.org>
-X-Mailer: git-send-email 2.5.5
-Subject: [meta-oe][PATCHv2] fftw: Remove the fftw-dev package dependency on non-existent fftw package.
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=v1m7Eq+/yW2Hhnie86O7fKKMaE7ep+PR2rkNeEldPcA=;
+	b=l2iT6HVXpGDa04LL3iVW472ShZ2L/mOFkBS+vhDBxEK3l1J9Y2sDYjvSLQOPj7gvNI
+	7XBmayPcBnzOOg+3xORW/dev9RdhH5iMGaJVnJWrthURPenHr75aXpc0UqAMBRtYGRU/
+	rTvDZcWI0EboAJHZdg6nsc/+I2z2js98jEhFtHUWOM4BhDMJfPwoPSmaN/WtZMebXqKa
+	QYunRvWIKlwRieJRGKj4WF5UiCBqPzew1s3uKat/P+SoIR2skY6BIYlP0qJqiIyd5tcN
+	Fwm/ov4rYUDNWdJ+LdtF8DOfabgYUfCWRk4YAyAzumtQb2ubBvF974XYaPeQ/4fbpphd
+	TT1w==
+X-Gm-Message-State: ABUngvfQ8bhEdIjZ76aYkjAbmAWvQ+q+Y83oToqiUSEymObTQ9+oKcyMLq1V1uXQyE+j47EFeRCALaO5I6M50A==
+X-Received: by 10.31.15.65 with SMTP id 62mr10622216vkp.93.1477350291096; Mon,
+	24 Oct 2016 16:04:51 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.176.86.206 with HTTP; Mon, 24 Oct 2016 16:04:20 -0700 (PDT)
+In-Reply-To: <6137B5D0-B8F8-4137-B822-D555F003E385@gmail.com>
+References: <6137B5D0-B8F8-4137-B822-D555F003E385@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 24 Oct 2016 16:04:20 -0700
+Message-ID: <CAMKF1sq0aCfPyUuG80_mYkno+wVZkE7pSPza6kMJ-hsyU4Nh5w@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: openjdk-8 runtime failure with x11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,29 +51,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Oct 2016 19:21:52 -0000
+X-List-Received-Date: Mon, 24 Oct 2016 23:04:52 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The fftw-dev package RDEPENDS on the fftw package, but the package is not
-created. Remove the dependency on fftw so that images using fftw-dev will
-build.
+On Sun, Oct 23, 2016 at 6:01 PM, Randy Mortensen <randy.mort@gmail.com> wrote:
+> Using yocto jethro and meta-java to build openjdk-8 but when running a java swing app, it fails with the following:
+>
+> Exception in thread "main" java.awt.AWTError: Toolkit not found: sun.awt.X11.XToolkit followed by a stack trace.
+>
+> It seems openjdk-8 is being built without X11 support?
+> Is there a fix or known workaround?
 
-Signed-off-by: Philip Balister <philip@balister.org>
----
- meta-oe/recipes-support/fftw/fftw_3.3.4.bb | 2 ++
- 1 file changed, 2 insertions(+)
+do you have 'x11' in your DISTRO_FEATURES as well as PACKAGECONFIG for
+openjdk ? if not then it wont enable this support
 
-diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.4.bb b/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
-index 0faaea1..e753743 100644
---- a/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
-+++ b/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
-@@ -69,4 +69,6 @@ FILES_fftwl-wisdom = "${bindir}/fftwl-wisdom"
- FILES_fftwf-wisdom = "${bindir}/fftwf-wisdom"
- FILES_fftw-wisdom-to-conf = "${bindir}/fftw-wisdom-to-conf"
- 
-+RDEPENDS_${PN}-dev = ""
-+
- BBCLASSEXTEND = "native"
--- 
-2.5.5
+may be you can add a little bbappend in your layer to add x11 to
+PACKAGECONFIG or via local.conf
 
+PACKAGECONFIG_append_pn-openjdk = " x11"
+
+> Thanks
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
