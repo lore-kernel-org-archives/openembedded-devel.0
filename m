@@ -1,64 +1,46 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
-	[209.85.217.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 7DFD8719AC
+Return-Path: <net147@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 1493271A9B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Oct 2016 10:36:37 +0000 (UTC)
-Received: by mail-ua0-f196.google.com with SMTP id m11so1160255uab.2
+	Mon, 24 Oct 2016 13:40:32 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id i85so16665539pfa.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Oct 2016 03:36:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=vLc0VNC8agHCKihIyoTfmV+ZIRowRnKudmpxDHEVjXk=;
-	b=CAbX0sYk9JWF/4j8SlQSGScBxlF+yQG22XIRS4LsX6zQR6MiupUKp/FPrAd95i89aA
-	7SbjnTLv7MDFcvudzGXPxg/frEfqOxsYTkLZHhXEMnPWIiZg93y61acxYtD5tJEBLuba
-	mxLZpsbFq+nStGb7Ep5pIn+t9IgJHGuUI6RrmdYeFYO+NXnH4QDa+gotYePOrFWozcyR
-	DekVUVskJGf5tnx8DPlGedymN5+a5Li43RYQwC/OCeuKmK/QB7zcmQPJynt5r3K2gzBB
-	fXV6PksNUu5UxVgAGXpLrO+mg3GNXxKXYqmNHKBLhgymdazmu/ThJ/PS+TBPVIkWNCz1
-	iEWw==
+	Mon, 24 Oct 2016 06:40:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=5XvWfDwFKqXO91EiQQmm9prERXTo/V9heXreQqa0we8=;
+	b=NrTV6Ilkt9t05uC0vsGZhiGCjJOGogFDoh9tsTpy3XJyGe4cUbf/0cIk7CLfDRC3uZ
+	GQgB9t7fGvZOXIxV6ed07GCAYHPOjnTAOkOgEzMZSUJMpihf2sPRx0daMiwVdgsW1i9u
+	KvHCwmq5EeDKEZ+foiXs7sZGlfX5R+UFeXqaVnXPWHifRYliokxBmxYeyp6hcqF3KtzS
+	4YhNkhpPyR8KAccwGhjlIIsOEQAm5lt08YsO7GmCYoLK8u8jDSZ3V6pOCODwyfdch4eG
+	esfqnY9Dw9QJMgwwkfEFC1wsmOI8CUUPfoMQfkC6ObYAQCQG61tumEZhhXZY4IOLZq35
+	8zSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc;
-	bh=vLc0VNC8agHCKihIyoTfmV+ZIRowRnKudmpxDHEVjXk=;
-	b=IrfBYW6+EVXxohuUxg6EXfwlZC+ilICG5mj3enTdK/CQm6GiMdy0EG92zMNMxARIRR
-	obXYsBsgskDdtvl5lsbL2xiVSuoJf+Ti+EI2KnaF+r7dGQgEldQpgYRHAXjn/Oduyh4h
-	Sw7uhABH6KPdGOZJXjZIP0uJdicoaBqVsJEjMGL/EgNO7v9g2C5PRlaBj2z+jUweWY6B
-	oQqHlhfNzp5gvHi1j7xG3OBMDUmFUVdPgFkZBEawmJ97TKVPjdVlf9NFd5FEcJCcac+o
-	o7/+E8Htl9ZEEFjBv3FymeE/I+nyXx+FVCN9EeZa5uXCwNZDh0ZOrwOmc3hq4sZqiEAh
-	yi8Q==
-X-Gm-Message-State: ABUngveTapruScnrKaie+d0+c7pW+bU+zJzADXqoqEQopO6EDfKUhTQwRTWvQVo80E09Hg==
-X-Received: by 10.176.69.195 with SMTP id u61mr6515070uau.106.1477305398180;
-	Mon, 24 Oct 2016 03:36:38 -0700 (PDT)
-Received: from mail-vk0-f49.google.com (mail-vk0-f49.google.com.
-	[209.85.213.49])
-	by smtp.gmail.com with ESMTPSA id b5sm3504202uab.15.2016.10.24.03.36.36
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=5XvWfDwFKqXO91EiQQmm9prERXTo/V9heXreQqa0we8=;
+	b=XhePQ/8NmNsNDs/fRAOExjAvr9vTgZiLImHebk2n9zxMHSeYbIRsA3lEbMmMBrHLl9
+	ZaAw83O4Vk6JlBbrT4dW/PtueU5Iqv12z3Emry0hVsboUkZ9eJMhN/ejMsKCJ4UZ1OBe
+	2sjiPzngnpilfj4pqeuhCX4EFsul3uNuj3TmGplPbwnXQF98onM5dWCMzuAN8F/VZa64
+	TzuqpuIH6gwgFioei+iCTlJAYBjv2oE6X3pQAi/U0wWA0QeIskcWf4HCMBcfiJRNf1nj
+	7ozs8mnXaNSFOKpYM9cvBOM+p7CqC516ZUG2tU24TWqsez+8Abw4L6ax5QCTMCfF+R+Y
+	Hfsw==
+X-Gm-Message-State: ABUngvcLYrZgWPrMVokRw8q388SkIbjNrHO8FE6Occrpe9KooFMb4F6rT+/Fcx+BtTdXPw==
+X-Received: by 10.98.155.3 with SMTP id r3mr28868767pfd.122.1477316433973;
+	Mon, 24 Oct 2016 06:40:33 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by smtp.gmail.com with ESMTPSA id
+	c5sm25700601pfj.71.2016.10.24.06.40.32
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 24 Oct 2016 03:36:37 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-vk0-f49.google.com with SMTP id 2so167196329vkb.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Oct 2016 03:36:36 -0700 (PDT)
-X-Received: by 10.31.108.70 with SMTP id h67mr8218338vkc.163.1477305396546;
-	Mon, 24 Oct 2016 03:36:36 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.31.49.82 with HTTP; Mon, 24 Oct 2016 03:36:35 -0700 (PDT)
-In-Reply-To: <CAP9ODKoOwCfNrC9tWD+1phO0Sw=hr_OYRFVNXmjM2pH1vYV60g@mail.gmail.com>
-References: <20161020164624.12103-1-otavio@ossystems.com.br>
-	<CAP9ODKpCA6tuXf7Kv=RA5kabS85ju50zt8zaCrzu0kXm6CnvNw@mail.gmail.com>
-	<9d63d09b-a249-6a77-197a-15f84f2bce44@qt.io>
-	<CAP9ODKoOwCfNrC9tWD+1phO0Sw=hr_OYRFVNXmjM2pH1vYV60g@mail.gmail.com>
-Date: Mon, 24 Oct 2016 08:36:35 -0200
-X-Gmail-Original-Message-ID: <CAP9ODKp=dp6NhBN4PEPAjKw04G==BBO4MN+WCCy3BvxZ-NW5AA@mail.gmail.com>
-Message-ID: <CAP9ODKp=dp6NhBN4PEPAjKw04G==BBO4MN+WCCy3BvxZ-NW5AA@mail.gmail.com>
-To: Otavio Salvador <otavio@ossystems.com.br>
-Cc: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>,
-	Samuli Piippo <samuli.piippo@theqtcompany.com>
-Subject: Re: [meta-qt5 PATCH] qmake5_paths.bbclass: Fix fonts installation path
+	Mon, 24 Oct 2016 06:40:33 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 25 Oct 2016 00:40:27 +1100
+Message-Id: <20161024134027.15139-1-net147@gmail.com>
+X-Mailer: git-send-email 2.10.1
+Subject: [meta-oe][PATCH] nodejs: update to 4.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,25 +53,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Oct 2016 10:36:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 24 Oct 2016 13:40:33 -0000
 
-On Fri, Oct 21, 2016 at 9:58 AM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Fri, Oct 21, 2016 at 4:47 AM, Samuli Piippo <samuli.piippo@qt.io> wrote:
->> That looks like the correct path to use, but how does this fix the problem?
->> OE_QMAKE_PATH_QT_FONTS doesn't seem to used anywhere in meta-qt5 any more
->> and probably should have been removed together with the font packaging bits.
->
-> It did not fix it, indeed. We had a left over from a test so it hided
-> the issue. We are checking it now.
+Fixes CVE-2016-5180.
 
-This change ought to be ignored; the Qt QPA has a hardcoded path which
-can be overridden using an environment var and this seems to be the
-standard practice for people not using fontconfig support.
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ meta-oe/recipes-devtools/nodejs/{nodejs_4.6.0.bb => nodejs_4.6.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_4.6.0.bb => nodejs_4.6.1.bb} (96%)
 
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_4.6.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_4.6.1.bb
+similarity index 96%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_4.6.0.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_4.6.1.bb
+index 7479371..03e9812 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_4.6.0.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.6.1.bb
+@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
+ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+     file://no-registry.patch \
+ "
+-SRC_URI[md5sum] = "40f3613f679d252674e000013e75ed8a"
+-SRC_URI[sha256sum] = "42910dbd34e49bfc40580e06753947c30d31101455a38e9f0343a23d67c0c694"
++SRC_URI[md5sum] = "4f70295e3eebef1f998fa38456263eaf"
++SRC_URI[sha256sum] = "fe2a85df8758001878abb5bbaf17a6b6cdc12b3e465b1d3bace83b37fdf0345a"
+ 
+ S = "${WORKDIR}/node-v${PV}"
+ 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+2.10.1
+
 
