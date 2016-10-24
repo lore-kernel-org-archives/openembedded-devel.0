@@ -1,54 +1,46 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com
-	[209.85.192.175])
-	by mail.openembedded.org (Postfix) with ESMTP id AD34A606B2
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 3ABF771AB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Oct 2016 13:43:06 +0000 (UTC)
-Received: by mail-pf0-f175.google.com with SMTP id s8so99489941pfj.2
+	Mon, 24 Oct 2016 15:43:51 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id o81so10386207wma.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Oct 2016 06:43:08 -0700 (PDT)
+	Mon, 24 Oct 2016 08:43:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=ZW0e4Tk1zOOfFNZD6zokjOtHdOqEpoSoZypdCFNZ7vc=;
-	b=RorlDjOzI1tLSzPqh8Qo2L1vcgGSs4nXUO5cOdqaGRPP4Amjq6aJgpRiXgVAuWGRsC
-	V7xNIzqEthv8iuq2lCFSzQzb2eOYbeYh4oM+wPCd9/WheQ6dEBDnLNlj2etGSnvFsIBV
-	Of1YSBaOzXk1INHLfFaSzdfKognYiOz8j2oZaeUPPUoiGMkxwkrS9GS0wLG0vQca1bXl
-	GWbMbE1tdUynChpPLhfIwKJOLXhP5HyQ+Vhl2mTSKj9432eGsMiWJ+jku+sa3HOmFpnH
-	aFpzpNZHZGPV3faWOXeM7LVZbqYzc/XzcQ+jGxWviePe+oRArF9SCsNe7opM3RASa9zH
-	cfNQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=mskBmrQKeUskzwfe21l6WpVAtoeGfiXtypj5Z+/2YTU=;
+	b=VZuAJep2lqPER+yy/LZ/EHyZL7YYhZf+l+zn4ISVSHntDtmhADfHmTVxFS2A7PqRiH
+	HxZHGsrRuowKcuCCeRBrVjJkQLTQl5LjFptpy2YEiJIioKM8tPOcDMrGiznE4QG2c0kU
+	7f1WaHpyP3LBOKWV9xj+K8/qhNjlBwUImj2zc6GseD3AMhMSlgcAciLfeY58X8wyFkWC
+	LTabNnRonvnNvca/Wrck4vJSW1iu+BHWBQIjPubgQP6anu+VTQPAiyeNzsRvGY1po9Yc
+	E2gvFE1RW96vUVa3CDJajjAmcIHG5Fa/AceQ03l2TbU0CgbTLJJjocDAFpRub8vmsThQ
+	EpKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=ZW0e4Tk1zOOfFNZD6zokjOtHdOqEpoSoZypdCFNZ7vc=;
-	b=gGoOjZjgFVfgReszvPDXokMUzE3N0fp2eURvsQiu4OJASsD55aO1Xa45stJCJ9dTTi
-	IiTHPV3jdh+Ituu0n8vCtc4cvq6LPxPO4U2D87n9ue26TxvJq41pnygPPg1mU6qUESRC
-	O5IugC7iRaAFqNnzn6jO/g+lh9iCOvmdJ45AhhLL3Gc19TiqA1+7UIg9cMkpnpvmVRv1
-	+veoSQdjFz+Wx8gmgGJUDZeq/tvaUAUaDqs6RnGd/r61rzxS0qU0OtDrzH/h4rQkX9Ns
-	kpgcNDs/tgw+aIbnGPoibXP/hvQPqjy0U14v9oIwIOhOnJSoGobnYJkSQaW5gMA5Tktb
-	8zJQ==
-X-Gm-Message-State: ABUngvf5RQu6c0hEaYaubPvTXiE2hxnkV94iBagVSbx7QBfVCRANokirFQhozPX5VNUHlA==
-X-Received: by 10.36.17.17 with SMTP id 17mr2117052itf.4.1477316587458;
-	Mon, 24 Oct 2016 06:43:07 -0700 (PDT)
-Received: from openSUSE-i7.site (dsl-67-55-28-109.acanac.net. [67.55.28.109])
-	by smtp.gmail.com with ESMTPSA id
-	g72sm1385444itc.5.2016.10.24.06.43.06
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 24 Oct 2016 06:43:06 -0700 (PDT)
-Date: Mon, 24 Oct 2016 09:43:04 -0400
-From: Trevor Woerner <twoerner@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Message-ID: <20161024134304.GA31203@openSUSE-i7.site>
-References: <16076428.LW6cBLIOWS@localhost.localdomain>
-	<CA+chaQd4_k4HPKqOzn-DSL92EM=UCejFpx87==0ub+aR8AE39w@mail.gmail.com>
-	<20161013142338.GC2924@jama>
-	<CAHUNapQ39pXD4sjxQHgRFmq-GGLbZbBgQ6jVYKTsL2A7rzpLfA@mail.gmail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=mskBmrQKeUskzwfe21l6WpVAtoeGfiXtypj5Z+/2YTU=;
+	b=Ze3gk+U3am6KIxo+y98XEARhg/m0qA82Atw4zsCuRpnwuAPXwPiIuswd5KmJnCqliy
+	HlZbu6RGfmtqR4puAalMhS/2IdmxEJtp32DluHrJ6dYiYmm5c12zKbHOOWErvm7O7So5
+	xlWDGtZXSbEcT6F18S/qFYEEnhpARpdjoqvTJZtnYK3jrF4FkBMVDIRKGx6PMOHOW4cX
+	WIA3MjXVFmFlVk7eCM1hpDY5x4C01JFOcMm6fpeMpQiCchKFKlJmm4W9BOHKfzALcO+r
+	JaRSwYIzhEJKzQ9n6Nkswlzt3HG3hUFkvlddZ5H2fgyBr4RcBIEQ6MsGKxKOHavi6oZn
+	N9/A==
+X-Gm-Message-State: ABUngvc6eo+EYPwH/iHrFWQzP1Fj3alCnFGyh2+pLeg+ljxmD8QGprRya1F+ENolm17JqKcaWejZFSGJj0+kcw==
+X-Received: by 10.194.83.166 with SMTP id r6mr12311911wjy.186.1477323831660;
+	Mon, 24 Oct 2016 08:43:51 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAHUNapQ39pXD4sjxQHgRFmq-GGLbZbBgQ6jVYKTsL2A7rzpLfA@mail.gmail.com>
-User-Agent: Mutt/1.6.0 (2016-04-01)
-Cc: otavio@ossystems.com.br, Davis@openSUSE-i7.site
-Subject: Re: [meta-browser] Chromium Doesn't build for 32bit targets.
+Received: by 10.80.159.203 with HTTP; Mon, 24 Oct 2016 08:43:50 -0700 (PDT)
+In-Reply-To: <f831f9a9-d2e3-9fd3-41f9-d8479a933a1a@balister.org>
+References: <1477052056-14472-1-git-send-email-philip@balister.org>
+	<36CFFABF-F18A-405E-BA43-08713EC46478@gmail.com>
+	<f831f9a9-d2e3-9fd3-41f9-d8479a933a1a@balister.org>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 24 Oct 2016 17:43:50 +0200
+Message-ID: <CA+chaQd09rwPViw9bwaXT3cpNqhGPE3k_4=Ud3cFOxPWi6E4Uw@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH] fftw: Allow an empty package for fftw.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,25 +53,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Oct 2016 13:43:07 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Mon, 24 Oct 2016 15:43:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-I have been able to build and run chromium-52.0.2743.76 for qemux86!
+RDEPENDS_${PN}-dev_remove =3D =E2=80=9C${PN}=E2=80=9D
 
-I'll be pushing a patch for this issue soon, but I want to do a little more
-investigation beforehand:
+doesn't work?
 
-1) I discovered, a while back, that chromium won't run on the Minnow (x86-64)
-unless I also use glibc-2.23. Therefore for my tests on this issue I switched
-down to 2.23. So I want to switch back to glibc-2.24 to see how that works on
-qemux86.
+On Sat, Oct 22, 2016 at 1:05 AM, Philip Balister <philip@balister.org>
+wrote:
 
-2) I want to make sure that my patch doesn't affect x86-64 (i.e. what's
-currently working). Otherwise I'll just have to make the patch conditional on
-arch.
-
-3) I want to investigate bumping the chromium version to something newer to
-see if that might fix the issue too (otherwise, I will investigate bumping,
-but not as an activity related to this issue).
+> On 10/21/2016 01:08 PM, Khem Raj wrote:
+> >
+> >> On Oct 21, 2016, at 5:14 AM, Philip Balister <philip@balister.org>
+> wrote:
+> >>
+> >> The fftw-dev package RDEPENDS on the fftw package. Let the recipe
+> create an
+> >> empty one to satisfy this requirement.
+> >>
+> >> Signed-off-by: Philip Balister <philip@balister.org>
+> >> ---
+> >> meta-oe/recipes-support/fftw/fftw_3.3.4.bb | 2 ++
+> >> 1 file changed, 2 insertions(+)
+> >>
+> >> diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
+> b/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
+> >> index 0faaea1..0bb6cc2 100644
+> >> --- a/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
+> >> +++ b/meta-oe/recipes-support/fftw/fftw_3.3.4.bb
+> >> @@ -69,4 +69,6 @@ FILES_fftwl-wisdom =3D "${bindir}/fftwl-wisdom"
+> >> FILES_fftwf-wisdom =3D "${bindir}/fftwf-wisdom"
+> >> FILES_fftw-wisdom-to-conf =3D "${bindir}/fftw-wisdom-to-conf"
+> >>
+> >> +ALLOW_EMPTY_${PN}=3D =E2=80=9C1"
+> >
+> > as Martin said
+> >
+> > RDEPENDS_${PN}-dev =3D =E2=80=9C=E2=80=9D
+> >
+> > should be done.
+>
+> It also RDEPENDS on libfftw libfftwf and libfftwl.
+>
+> Is there a way to remove just one entry in the RDEPENDS line? Need to
+> think through exactly what is going on.
+>
+> Philip
+>
+> >
+> >> +
+> >> BBCLASSEXTEND =3D "native"
+> >> --
+> >> 2.5.5
+> >>
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> >
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
