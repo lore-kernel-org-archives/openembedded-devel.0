@@ -1,46 +1,47 @@
-Return-Path: <rudolf.streif@gmail.com>
-Received: from mail-it0-f53.google.com (mail-it0-f53.google.com
-	[209.85.214.53])
-	by mail.openembedded.org (Postfix) with ESMTP id C36AD71A2B;
-	Sat, 22 Oct 2016 22:52:31 +0000 (UTC)
-Received: by mail-it0-f53.google.com with SMTP id f129so11974318itc.1;
-	Sat, 22 Oct 2016 15:52:33 -0700 (PDT)
+Return-Path: <randy.mort@gmail.com>
+Received: from mail-pf0-f178.google.com (mail-pf0-f178.google.com
+	[209.85.192.178])
+	by mail.openembedded.org (Postfix) with ESMTP id E9FA171AB5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Oct 2016 01:01:29 +0000 (UTC)
+Received: by mail-pf0-f178.google.com with SMTP id r16so87821095pfg.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 23 Oct 2016 18:01:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=qym0xq0hrb+6kGwLZhLQjo1dnEu6o9Ie8qinooa/0OA=;
-	b=TizPjhnVkH4QH1ZSQ/b7mSeQCddIHCI/VGCq5AV2d6e0jzqfKRraxaF7lSkbnp8jot
-	aKbeLhLA1A+QbNMgLZijCA7XbFuxsuDHnXJPWiSjrSjMqAmdSDhMPe2CswlaVrQAvgnZ
-	ckqyMBrdV09lIIK1tmKkLfxBygTSBvEVp1zZH2kHBn/W2oSrj8V2q6/wnLL9nab6mg9+
-	yURsSqtHFkTxV9MJrqDld70hMBhaweBicZXuXX1S/ldDpMT5c+ImvbmhlMgoTALjc+gK
-	Nx8wl1oMoZ3aH7J3z2mM4xk/d/tfA1aAVqbBflBBmsgVRh7KNAQ5OhcaBAjSHyw7rxHS
-	Suvw==
+	h=from:content-transfer-encoding:subject:message-id:date:to
+	:mime-version; bh=rSW7kBa2gYirs4St7JIhQ/mwKzdHmZom+YVlpvRvy4Q=;
+	b=M+xiDsx+WIFYRlKcmIfReBF9RjNegSsiW3pOAcLSBwOqUAiyQZJlR9CdyewJ+dEXad
+	pzV8WAqzLpW4TOTB+N9SOaF5eoK0QOoJF04eZZz33e6tta+pdZbrGoPJkfM784ko7W6W
+	Rp+HmL7Wa0t0p/GXIHX1IghZEB6ebJYhDHjVbvAk6qEKnWNMFg/qmUVw1N6qF+aq7m4Y
+	Zguz5gpCR/DbN+aj2pucUTR+uFWF0oHWBCr7eFbzbZzO5fBxjr7mDgLzv3O0wrecqx25
+	/4LDoJHejl6WIvBWMknZyRanrVgqZdForFREV1aAmNAoTOv8EBpoH70+AFZPVzS6XL1Q
+	qA3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=qym0xq0hrb+6kGwLZhLQjo1dnEu6o9Ie8qinooa/0OA=;
-	b=N6xKFnHR+CURMmCRnx3me4ukIGTRVjRakfkyusJjhnNH1QMk/0NJI4JuIYyyRHRrGu
-	9v/ysE5WpnhIOEJO41gNugLQbV9IRiFVv+romd0HfFl/xn3GKsQ248QP9NR/flDeSAeC
-	FfbuuYP0j51uqv4dWMVa2lesEwQUjCVdkSTavELemqnaMUI5QJpyeCIm/p4P92A+HC1H
-	fESsQYwXOM2v1OlFHQG+NCq3TztpWcPpXMK65+nyrDyC+RsfH74ieUmRF0yLi2+TDx8P
-	pj+8tgOcMmu1Kg9BG263ewCuwSOlDWgR7UoCbFpE10pokofVSlVbdHRHVP/XLUn0J/Gn
-	xLig==
-X-Gm-Message-State: AA6/9RmZ0QzsKKy7qgASlrHxgtrjUaHulMo9nz7B7fqYqd1cHYeId1VTtej8ypt7zhwdtqQ6sM//GI1LMYAgmg==
-X-Received: by 10.202.49.4 with SMTP id x4mr13864740oix.129.1477176753323;
-	Sat, 22 Oct 2016 15:52:33 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.202.71.87 with HTTP; Sat, 22 Oct 2016 15:52:31 -0700 (PDT)
-Received: by 10.202.71.87 with HTTP; Sat, 22 Oct 2016 15:52:31 -0700 (PDT)
-In-Reply-To: <b90f6c4e-10db-9459-c212-1232e262cb72@balister.org>
-References: <142664ed-14dc-6a12-3756-1664f65c70ad@gmail.com>
-	<b90f6c4e-10db-9459-c212-1232e262cb72@balister.org>
-From: Rudolf Streif <rudolf.streif@gmail.com>
-Date: Sat, 22 Oct 2016 15:52:31 -0700
-Message-ID: <CAEKp-aZfGX_YCWXUGgjUfG34C6MveTHfAkze66kFx6hLWJnpKg@mail.gmail.com>
+	h=x-gm-message-state:from:content-transfer-encoding:subject
+	:message-id:date:to:mime-version;
+	bh=rSW7kBa2gYirs4St7JIhQ/mwKzdHmZom+YVlpvRvy4Q=;
+	b=fTWIleLtKgrrLv7ODQC0GJbGmhGwuXSmApRov+3VbGkbRXLE/920kWQ5VrV6WE18jp
+	tYMyocIpbwWrDh/7ii61odqLwuZpwFbzEm2MJnxI3J9Qubl1PcMIsDEiTSqqk8fMFaQn
+	bWwbspoCYPJaIGzwUnN/m4QVDC2FDjWg/ZD6SSdcWpBLEvRu8HkHo2PUb5Qw25dxoWIV
+	EawXIY0iVlDOGPM3eLucQgALSCODZmk9HsNAbJUJwPpSl6v5wQ/5MP0AY2gyLNmQbgAi
+	O/mgjmt+oV383J2/PMGxo26+UExMrg2Y60/UwUaNFneA24L5QRNFw51aS1+R623HgULe
+	dmsg==
+X-Gm-Message-State: ABUngvdTuDNRxpJg86plFhZ4fpiZFwnxcM6H3qRKW10mLPJVqwgd0OaWDevy5GAWbN0+0w==
+X-Received: by 10.99.121.133 with SMTP id u127mr19523663pgc.4.1477270890076;
+	Sun, 23 Oct 2016 18:01:30 -0700 (PDT)
+Received: from [10.24.0.6] ([199.229.250.98]) by smtp.gmail.com with ESMTPSA id
+	144sm19934282pfz.72.2016.10.23.18.01.28
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 23 Oct 2016 18:01:29 -0700 (PDT)
+From: Randy Mortensen <randy.mort@gmail.com>
+Message-Id: <6137B5D0-B8F8-4137-B822-D555F003E385@gmail.com>
+Date: Sun, 23 Oct 2016 19:01:27 -0600
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] OEDAM - Portland
+Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
+X-Mailer: Apple Mail (2.3124)
+Subject: openjdk-8 runtime failure with x11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,61 +54,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Oct 2016 22:52:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 24 Oct 2016 01:01:30 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-If it is of interest to the OE community I can potentially offer Jaguar
-Land Rover's conference facilities at our Open Source Technology Center
-(OSTC). OSTC is located in Portland 's Pearl District. We have
-state-of-the-art facilities with ample space, 20 foot 9-screen video walls,
-VoIP audio systems,  and a really good network.
+Using yocto jethro and meta-java to build openjdk-8 but when running a =
+java swing app, it fails with the following:
 
-Cheers,
-Rudi
+Exception in thread "main" java.awt.AWTError: Toolkit not found: =
+sun.awt.X11.XToolkit followed by a stack trace.
 
-Kind regards,
-Rudolf J Streif
-
-On Oct 22, 2016 3:27 PM, "Philip Balister" <philip@balister.org> wrote:
-
-> Also, if you want to donate directly via check (reduces processing fees,
-> easier for some businesses) see the SPI donation page at:
->
-> http://spi-inc.org/donations/
->
-> It also covers donations from non US people and businesses.
->
-> Philip
->
-> On 10/22/2016 01:27 PM, akuster808 wrote:
-> > Hello OE Developers and Users,
-> >
-> > The next OpenEmbedded developer's meeting will be held in Portland
-> > before or after ELC; Feb 21-23.  A little over 4 months away.  In the
-> > past, we have relied on funds outside of OE to make our developer
-> > meetings a reality. This next meeting, we would like the OEDAM to be
-> > self-funded.
-> >
-> > The OE Developer meetings occur twice a year and it's where OE
-> > maintainers, developers, members and enthusiasts come together to
-> > discuss issues and plan future development for OE.
-> >
-> > If you find yourself using OE, enjoying playing with it or are a company
-> > using OE in a product, please consider donating to OE. You can find a
-> > "Donate" button at http://openembedded.org. If you have any questions
-> > regarding donation, please contact me, off-list.
-> >
-> >
-> > Kind regards,
-> >
-> > Armin
-> >
-> >
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+It seems openjdk-8 is being built without X11 support?
+Is there a fix or known workaround?
+Thanks=
 
