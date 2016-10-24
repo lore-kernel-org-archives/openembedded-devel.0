@@ -1,24 +1,64 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 274D3719BD
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
+	[209.85.217.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 7DFD8719AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Oct 2016 08:54:42 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u9O8siQ5017495
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Mon, 24 Oct 2016 10:36:37 +0000 (UTC)
+Received: by mail-ua0-f196.google.com with SMTP id m11so1160255uab.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Oct 2016 01:54:44 -0700
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 24 Oct 2016 01:54:43 -0700
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 24 Oct 2016 04:54:42 -0400
-Message-ID: <1477299282-254843-1-git-send-email-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Mon, 24 Oct 2016 03:36:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:cc; bh=vLc0VNC8agHCKihIyoTfmV+ZIRowRnKudmpxDHEVjXk=;
+	b=CAbX0sYk9JWF/4j8SlQSGScBxlF+yQG22XIRS4LsX6zQR6MiupUKp/FPrAd95i89aA
+	7SbjnTLv7MDFcvudzGXPxg/frEfqOxsYTkLZHhXEMnPWIiZg93y61acxYtD5tJEBLuba
+	mxLZpsbFq+nStGb7Ep5pIn+t9IgJHGuUI6RrmdYeFYO+NXnH4QDa+gotYePOrFWozcyR
+	DekVUVskJGf5tnx8DPlGedymN5+a5Li43RYQwC/OCeuKmK/QB7zcmQPJynt5r3K2gzBB
+	fXV6PksNUu5UxVgAGXpLrO+mg3GNXxKXYqmNHKBLhgymdazmu/ThJ/PS+TBPVIkWNCz1
+	iEWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:cc;
+	bh=vLc0VNC8agHCKihIyoTfmV+ZIRowRnKudmpxDHEVjXk=;
+	b=IrfBYW6+EVXxohuUxg6EXfwlZC+ilICG5mj3enTdK/CQm6GiMdy0EG92zMNMxARIRR
+	obXYsBsgskDdtvl5lsbL2xiVSuoJf+Ti+EI2KnaF+r7dGQgEldQpgYRHAXjn/Oduyh4h
+	Sw7uhABH6KPdGOZJXjZIP0uJdicoaBqVsJEjMGL/EgNO7v9g2C5PRlaBj2z+jUweWY6B
+	oQqHlhfNzp5gvHi1j7xG3OBMDUmFUVdPgFkZBEawmJ97TKVPjdVlf9NFd5FEcJCcac+o
+	o7/+E8Htl9ZEEFjBv3FymeE/I+nyXx+FVCN9EeZa5uXCwNZDh0ZOrwOmc3hq4sZqiEAh
+	yi8Q==
+X-Gm-Message-State: ABUngveTapruScnrKaie+d0+c7pW+bU+zJzADXqoqEQopO6EDfKUhTQwRTWvQVo80E09Hg==
+X-Received: by 10.176.69.195 with SMTP id u61mr6515070uau.106.1477305398180;
+	Mon, 24 Oct 2016 03:36:38 -0700 (PDT)
+Received: from mail-vk0-f49.google.com (mail-vk0-f49.google.com.
+	[209.85.213.49])
+	by smtp.gmail.com with ESMTPSA id b5sm3504202uab.15.2016.10.24.03.36.36
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 24 Oct 2016 03:36:37 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-vk0-f49.google.com with SMTP id 2so167196329vkb.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Oct 2016 03:36:36 -0700 (PDT)
+X-Received: by 10.31.108.70 with SMTP id h67mr8218338vkc.163.1477305396546;
+	Mon, 24 Oct 2016 03:36:36 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] openldap: use recommended backend mdb
+Received: by 10.31.49.82 with HTTP; Mon, 24 Oct 2016 03:36:35 -0700 (PDT)
+In-Reply-To: <CAP9ODKoOwCfNrC9tWD+1phO0Sw=hr_OYRFVNXmjM2pH1vYV60g@mail.gmail.com>
+References: <20161020164624.12103-1-otavio@ossystems.com.br>
+	<CAP9ODKpCA6tuXf7Kv=RA5kabS85ju50zt8zaCrzu0kXm6CnvNw@mail.gmail.com>
+	<9d63d09b-a249-6a77-197a-15f84f2bce44@qt.io>
+	<CAP9ODKoOwCfNrC9tWD+1phO0Sw=hr_OYRFVNXmjM2pH1vYV60g@mail.gmail.com>
+Date: Mon, 24 Oct 2016 08:36:35 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKp=dp6NhBN4PEPAjKw04G==BBO4MN+WCCy3BvxZ-NW5AA@mail.gmail.com>
+Message-ID: <CAP9ODKp=dp6NhBN4PEPAjKw04G==BBO4MN+WCCy3BvxZ-NW5AA@mail.gmail.com>
+To: Otavio Salvador <otavio@ossystems.com.br>
+Cc: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>,
+	Samuli Piippo <samuli.piippo@theqtcompany.com>
+Subject: Re: [meta-qt5 PATCH] qmake5_paths.bbclass: Fix fonts installation path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,58 +71,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Oct 2016 08:54:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 24 Oct 2016 10:36:37 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Kai Kang <kai.kang@windriver.com>
+On Fri, Oct 21, 2016 at 9:58 AM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> On Fri, Oct 21, 2016 at 4:47 AM, Samuli Piippo <samuli.piippo@qt.io> wrote:
+>> That looks like the correct path to use, but how does this fix the problem?
+>> OE_QMAKE_PATH_QT_FONTS doesn't seem to used anywhere in meta-qt5 any more
+>> and probably should have been removed together with the font packaging bits.
+>
+> It did not fix it, indeed. We had a left over from a test so it hided
+> the issue. We are checking it now.
 
-The mdb backend to slapd(8) is the recommended primary backend for a
-normal slapd database. Add PACKAGECONFIG 'mdb' to enable it and build
-mdb as SLAPD_STATIC_BACKENDS.
+This change ought to be ignored; the Qt QPA has a hardcoded path which
+can be overridden using an environment var and this seems to be the
+standard practice for people not using fontconfig support.
 
-This fixes the errors while starting slapd:
-
-  $systemctl start slapd
-  Job for slapd.service failed because the control process exited \
-  with error code. See "systemctl status slapd.service" and \
-  "journalctl -xe" for details.
-
-  $ systemctl status slapd
-  ...
-  /etc/openldap/slapd.conf: line 53: <database> failed init (bdb)
-  Unrecognized database type (bdb)
-  slapd.service: Control process exited, code=exited status=1
-  ...
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
- meta-oe/recipes-support/openldap/openldap_2.4.44.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.44.bb b/meta-oe/recipes-support/openldap/openldap_2.4.44.bb
-index 41f753e..4e95a77 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.44.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.44.bb
-@@ -53,7 +53,7 @@ EXTRA_OECONF += "--with-yielding-select=yes"
- EXTRA_OECONF += "--enable-dynamic"
- 
- PACKAGECONFIG ??= "gnutls modules \
--                   ldap meta monitor null passwd shell proxycache dnssrv \
-+                   mdb ldap meta monitor null passwd shell proxycache dnssrv \
-                    ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
- "
- #--with-tls              with TLS/SSL support auto|openssl|gnutls [auto]
-@@ -97,7 +97,7 @@ PACKAGECONFIG[hdb] = "--enable-hdb=yes,--enable-hdb=no,db"
- PACKAGECONFIG[ldap] = "--enable-ldap=mod,--enable-ldap=no,"
- 
- #--enable-mdb          enable mdb database backend no|yes|mod [yes]
--PACKAGECONFIG[mdb] = "--enable-mdb=mod,--enable-mdb=no,"
-+PACKAGECONFIG[mdb] = "--enable-mdb=yes,--enable-mdb=no,"
- 
- #--enable-meta         enable metadirectory backend no|yes|mod no
- PACKAGECONFIG[meta] = "--enable-meta=mod,--enable-meta=no,"
 -- 
-2.8.1
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
