@@ -1,30 +1,24 @@
-Return-Path: <Randy.MacLeod@windriver.com>
+Return-Path: <Dengke.Du@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id D4BCA6FFD8
+	by mail.openembedded.org (Postfix) with ESMTP id 045A071AF4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Oct 2016 02:41:33 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u9P2fX58007081
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 24 Oct 2016 19:41:33 -0700 (PDT)
-Received: from [172.25.44.6] (172.25.44.6) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 24 Oct 2016 19:41:32 -0700
-To: akuster808 <akuster808@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <9278bc38-73d6-8593-aee4-ee981eb62b7c@windriver.com>
-	<1960865a-ab12-9dd5-84ff-5dfac53fd36a@gmail.com>
-From: Randy MacLeod <randy.macleod@windriver.com>
-Message-ID: <50ff50ee-1928-51c2-7a3a-6018de1fd167@windriver.com>
-Date: Mon, 24 Oct 2016 22:41:30 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.3.0
+	Tue, 25 Oct 2016 04:47:09 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u9P4lAnm007633
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Oct 2016 21:47:11 -0700 (PDT)
+Received: from pek-lpgtest20.wrs.com (128.224.179.28) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Mon, 24 Oct 2016 21:47:10 -0700
+From: Dengke Du <dengke.du@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 25 Oct 2016 12:47:09 +0800
+Message-ID: <1477370829-107070-1-git-send-email-dengke.du@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <1960865a-ab12-9dd5-84ff-5dfac53fd36a@gmail.com>
-X-Originating-IP: [172.25.44.6]
-Subject: Re: OE plans for morty
+Subject: [PATCH] sdparm: 1.09 -> 1.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,134 +31,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Oct 2016 02:41:34 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 25 Oct 2016 04:47:13 -0000
+Content-Type: text/plain
 
-On 2016-10-24 10:07 PM, akuster808 wrote:
-> Randy,
->
->
-> On 10/24/2016 05:51 PM, Randy MacLeod wrote:
->>
->>
->> I saw that morty has been branched and there have been 38 commits
->> made to master.  Woo-hoo and thanks Martin!
->
->
->>
->> Armin,
->>
->> Many of the master commits sh/could be cherry-picked back
->> to morty since they are bug fixes rather than package uprevs.
->> I have a list of commits to cherry-pick below. '?' indicates
->> that I'm not sure from the oneline summary if it's just a bug
->> fix as you might expect.
->
-> Thanks for providing commit ids you are interested in.
->
-> I have pushed the contrib morty-next  this morning.
->
-> http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=akuster/morty-next
->
+Signed-off-by: Dengke Du <dengke.du@windriver.com>
+---
+ .../sdparm/files/make-sysroot-work.patch           | 14 ++++++++-----
+ meta-oe/recipes-support/sdparm/sdparm_1.09.bb      | 23 ----------------------
+ meta-oe/recipes-support/sdparm/sdparm_1.10.bb      | 23 ++++++++++++++++++++++
+ 3 files changed, 32 insertions(+), 28 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/sdparm/sdparm_1.09.bb
+ create mode 100644 meta-oe/recipes-support/sdparm/sdparm_1.10.bb
 
-Cool. That's a good start and we'll follow what's going on
-there and in morty-next.
-
->
->
->>
->> Are you going to do a dot release in the coming weeks or will
->> it be more like early next year?
->
-> I am hoping to do a pull request request shortly after morty is
-> announced by Richard.
->
-> Some of the commits listed below are in master-next so I need to wait
-> for them to hit master before I  cherry-pick any additional changes.
->
-> Hope this is a satisfactory plan.
-
-It is!
-
-Thanks Armin,
-../Randy
-
->
->
-> regards,
-> Armin
->
->>
->> ../Randy
->>
->> ec0fb46 openldap: use recommended backend mdb
->>
->> ? 64ebc30 android-tools: fix native build
->> d2902a3 dhcp_%.bbappend: fix replaces original key warning
->>
->> ? 965d028 python-unidiff: python module for parsing diff data
->>
->> ? 1be8a35 joe: Fix build with clang
->> ? 2084473 openl2tp: Fix build with clang
->> ? 0004410 flashrom: Fix build with clang and aarch64
->> ? 83fec86 gpm: Remove nested functions
->> ? 9446302 lowpan-tools: Fix errors found with clang
->>
->> ? 5e0dc68 python-greenlet: Rename register from rX to xX for aarch64
->> ? d8e9117 frame: Fix build with clang
->> ? 612b2bb libplist: Squash warnings found by clang
->> ? 2951547 libmbim: Fix build with clang
->> ? c04bdbe libbonobo: Fix missing dep on orbit2-native and build with
->> clang
->>
->> 6b3e9ff linux-atm: fix do_compile error
->>
->> ? 9a83c34 adduser: always add -M option for useradd
->>
->> ? da12104 v4l-utils: add support for "native" build
->>
->>
->> cfe1fba postgresql.inc: Fix do_configure error (could not find Python.h)
->>
->>
->> ? 8ba31c9 gpsd, mongodb: use PACKAGECONFIG_CONFARGS instead of now
->> empty EXTRA_OECONF
->> ? f882db6 ipmiutil: uncomment PARALLEL_MAKE
->>
->> ? 54c7e78 pcsc-lite: Seperate GPLV3 portions from BSD
->> fded4cf opencv: fix packaging and install
->>
->>
->> 1c072cb gvfs: fix fetch error
->> ? 0cc3d06 leptonica: add PACKAGECONFIG for giflib
->> ? 8eef5ab wireshark: update to 2.2.1
->>
->> ? 812e940 ntp : Add openssl to default PACKAGECONFIG options
->> ? 8760099 atftp: fixes musl libc build
->> ? 5abe6ea arptables: add the directory for default
->> /etc/sysconfig/arptables
->> ? a0e2240 arptables: add arptables systemd service file
->> 93b0d65 iscsitarget: resolve build error with linux kernel 4.8
->> 9e8d127 squid: fix ptest failure
->> 6f54f29 squid: specify sysconfdir and logdir
->> 307d1c9 libtdb: fixes for deterministic builds
->> 5175c03 libldb: fixes for deterministic builds
->> 5291715 libtevent: fixes for deterministic builds
->> 778a2b6 libtalloc: fixes for deterministic builds
->> fe652f8 libldb: fix for LIC_FILES_CHKSUM
->> f25aa3d libtdb: fix for LIC_FILES_CHKSUM
->> d4a36f6 libtevent: fix for LIC_FILES_CHKSUM
->> 0014397 libtalloc: fix for LIC_FILES_CHKSUM
->>
->> a95726d samba: replace pam packageconfig by hard dependency
->> 3fdfdd8 samba: un-blacklist
->>
->
-
-
+diff --git a/meta-oe/recipes-support/sdparm/files/make-sysroot-work.patch b/meta-oe/recipes-support/sdparm/files/make-sysroot-work.patch
+index 5405ed8..3fd85d9 100644
+--- a/meta-oe/recipes-support/sdparm/files/make-sysroot-work.patch
++++ b/meta-oe/recipes-support/sdparm/files/make-sysroot-work.patch
+@@ -1,27 +1,31 @@
+-[PATCH] make sysroot work
++From 15f0722bc5481cca5ba92adceab8c769112e4ea6 Mon Sep 17 00:00:00 2001
++From: Dengke Du <dengke.du@windriver.com>
++Date: Mon, 24 Oct 2016 07:28:13 +0000
++Subject: [PATCH] sdparm: make sysroot work
+ 
+ Upstream-Status: Pending
+ 
+ Add = before the included dir to make sysroot work
+ 
+ Signed-off-by: Roy.Li <rongqing.li@windriver.com>
++Signed-off-by: Dengke Du <dengke.du@windriver.com>
+ ---
+  src/Makefile.am | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+ diff --git a/src/Makefile.am b/src/Makefile.am
+-index c83788c..9f62115 100644
++index 61dd9f8..42c911f 100644
+ --- a/src/Makefile.am
+ +++ b/src/Makefile.am
+-@@ -32,7 +32,7 @@ sglib_SOURCES =		../lib/sg_lib.c \
++@@ -41,7 +41,7 @@ sglib_SOURCES =		../lib/sg_lib.c \
+  			../lib/sg_pt_common.c
+  
+  if HAVE_SGUTILS
+--INCLUDES = -I/usr/include/scsi
++-INCLUDES = -I/scsi
+ +INCLUDES = -I=@includedir@/scsi
+  sdparm_LDADD = @GETOPT_O_FILES@ @os_libs@ @SGUTILS_LIBS@
+  sdparm_DEPENDENCIES = @GETOPT_O_FILES@
+  else
+ -- 
+-1.9.1
++2.7.4
+ 
+diff --git a/meta-oe/recipes-support/sdparm/sdparm_1.09.bb b/meta-oe/recipes-support/sdparm/sdparm_1.09.bb
+deleted file mode 100644
+index ca11ca4..0000000
+--- a/meta-oe/recipes-support/sdparm/sdparm_1.09.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-SUMMARY = "fetch and change SCSI mode pages"
+-DESCRIPTION = "The sdparm utility accesses and optionally modifies \
+-SCSI devices' mode page and inquiry data."
+-HOMEPAGE = "http://sg.danny.cz/sg/sdparm.html"
+-SECTION = "console/utils"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=ecab6c36b7ba82c675581dd0afde36f7 \
+-                    file://lib/BSD_LICENSE;md5=1d52f4a66f1e0ed96776bf354ab7a2ed"
+-DEPENDS="sg3-utils"
+-SRC_URI = "http://sg.danny.cz/sg/p/${BPN}-${PV}.tgz \
+-           file://make-sysroot-work.patch \
+-           "
+-
+-PACKAGES =+ "${PN}-scripts"
+-RDEPENDS_${PN}-scripts += "bash ${PN}"
+-
+-SRC_URI[md5sum] = "e51b1fd41c3e4c9d1274a2e4f046eebf"
+-SRC_URI[sha256sum] = "7294f44173ac0946f1de8af02b1bdb0bd648079245396589397a2b0d3abc42d3"
+-
+-inherit autotools
+-
+-# Put the bash scripts to ${PN}-scripts
+-FILES_${PN}-scripts = "${bindir}/sas_disk_blink ${bindir}/scsi_ch_swp"
+diff --git a/meta-oe/recipes-support/sdparm/sdparm_1.10.bb b/meta-oe/recipes-support/sdparm/sdparm_1.10.bb
+new file mode 100644
+index 0000000..8ab2819
+--- /dev/null
++++ b/meta-oe/recipes-support/sdparm/sdparm_1.10.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "fetch and change SCSI mode pages"
++DESCRIPTION = "The sdparm utility accesses and optionally modifies \
++SCSI devices' mode page and inquiry data."
++HOMEPAGE = "http://sg.danny.cz/sg/sdparm.html"
++SECTION = "console/utils"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ecab6c36b7ba82c675581dd0afde36f7 \
++                    file://lib/BSD_LICENSE;md5=1d52f4a66f1e0ed96776bf354ab7a2ed"
++DEPENDS="sg3-utils"
++SRC_URI = "http://sg.danny.cz/sg/p/${BPN}-${PV}.tgz \
++           file://make-sysroot-work.patch \
++           "
++
++PACKAGES =+ "${PN}-scripts"
++RDEPENDS_${PN}-scripts += "bash ${PN}"
++
++SRC_URI[md5sum] = "bdae64375376ce8fe4bf9521c1db858f"
++SRC_URI[sha256sum] = "1ea1ed1bb1ee2aef62392618fa42da9ed027d5e655f174525c39235778292ab3"
++
++inherit autotools
++
++# Put the bash scripts to ${PN}-scripts
++FILES_${PN}-scripts = "${bindir}/sas_disk_blink ${bindir}/scsi_ch_swp"
 -- 
-# Randy MacLeod. SMTS, Linux, Wind River
-Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON, 
-Canada, K2K 2W5
+2.7.4
+
 
