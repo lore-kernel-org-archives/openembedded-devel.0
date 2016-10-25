@@ -1,28 +1,25 @@
-Return-Path: <Dengke.Du@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 0926A6FEE0
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E6F170016
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Oct 2016 08:47:09 +0000 (UTC)
+	Tue, 25 Oct 2016 09:19:02 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u9P8lAn9019757
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Oct 2016 01:47:10 -0700
-Received: from [128.224.162.169] (128.224.162.169) by ALA-HCA.corp.ad.wrs.com
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u9P9J3T6009460
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 25 Oct 2016 02:19:03 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 25 Oct 2016 01:47:09 -0700
+	Tue, 25 Oct 2016 02:19:02 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <1477370829-107070-1-git-send-email-dengke.du@windriver.com>
-	<6e9aa1b0-86a3-b993-7c64-c96eeeab9a3c@windriver.com>
-From: Dengke Du <dengke.du@windriver.com>
-Message-ID: <2951b996-6e9d-e5ac-03bf-8b7b9dbba22e@windriver.com>
-Date: Tue, 25 Oct 2016 16:47:06 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.3.0
+Date: Tue, 25 Oct 2016 05:18:59 -0400
+Message-ID: <81fb1551c2699cd2f579720d1640c70d85887776.1477386993.git.hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
+In-Reply-To: <cover.1477386993.git.hongxu.jia@windriver.com>
+References: <cover.1477386993.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <6e9aa1b0-86a3-b993-7c64-c96eeeab9a3c@windriver.com>
-Subject: Re: [PATCH] sdparm: 1.09 -> 1.10
+Subject: [PATCH 1/1] libxklavier: upgrade 5.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,143 +32,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Oct 2016 08:47:11 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 25 Oct 2016 09:19:02 -0000
+Content-Type: text/plain
 
-OK, thanks for reminding, I will send V2.
+The gnome does not support 5.4 any more,
+get 5.4 from fedora to upgrade.
 
-// Dengke
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ .../files/fix-do_installe-failure.patch            | 36 ++++++++++++++++++++++
+ .../{libxklavier_5.3.bb => libxklavier_5.4.bb}     | 15 ++++++---
+ 2 files changed, 47 insertions(+), 4 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/libxklavier/files/fix-do_installe-failure.patch
+ rename meta-gnome/recipes-gnome/libxklavier/{libxklavier_5.3.bb => libxklavier_5.4.bb} (55%)
 
-
-On 2016年10月25日 16:28, Robert Yang wrote:
->
-> Missing [meta-oe] in subject line, see:
->
-> propriate prefix so that it is clear which layer the patch is intended 
-> to be applied to:
->
-> // Robert
->
-> On 10/25/2016 12:47 PM, Dengke Du wrote:
->> Signed-off-by: Dengke Du <dengke.du@windriver.com>
->> ---
->>  .../sdparm/files/make-sysroot-work.patch           | 14 ++++++++-----
->>  meta-oe/recipes-support/sdparm/sdparm_1.09.bb      | 23 
->> ----------------------
->>  meta-oe/recipes-support/sdparm/sdparm_1.10.bb      | 23 
->> ++++++++++++++++++++++
->>  3 files changed, 32 insertions(+), 28 deletions(-)
->>  delete mode 100644 meta-oe/recipes-support/sdparm/sdparm_1.09.bb
->>  create mode 100644 meta-oe/recipes-support/sdparm/sdparm_1.10.bb
->>
->> diff --git 
->> a/meta-oe/recipes-support/sdparm/files/make-sysroot-work.patch 
->> b/meta-oe/recipes-support/sdparm/files/make-sysroot-work.patch
->> index 5405ed8..3fd85d9 100644
->> --- a/meta-oe/recipes-support/sdparm/files/make-sysroot-work.patch
->> +++ b/meta-oe/recipes-support/sdparm/files/make-sysroot-work.patch
->> @@ -1,27 +1,31 @@
->> -[PATCH] make sysroot work
->> +From 15f0722bc5481cca5ba92adceab8c769112e4ea6 Mon Sep 17 00:00:00 2001
->> +From: Dengke Du <dengke.du@windriver.com>
->> +Date: Mon, 24 Oct 2016 07:28:13 +0000
->> +Subject: [PATCH] sdparm: make sysroot work
->>
->>  Upstream-Status: Pending
->>
->>  Add = before the included dir to make sysroot work
->>
->>  Signed-off-by: Roy.Li <rongqing.li@windriver.com>
->> +Signed-off-by: Dengke Du <dengke.du@windriver.com>
->>  ---
->>   src/Makefile.am | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->>  diff --git a/src/Makefile.am b/src/Makefile.am
->> -index c83788c..9f62115 100644
->> +index 61dd9f8..42c911f 100644
->>  --- a/src/Makefile.am
->>  +++ b/src/Makefile.am
->> -@@ -32,7 +32,7 @@ sglib_SOURCES =        ../lib/sg_lib.c \
->> +@@ -41,7 +41,7 @@ sglib_SOURCES =        ../lib/sg_lib.c \
->>               ../lib/sg_pt_common.c
->>
->>   if HAVE_SGUTILS
->> --INCLUDES = -I/usr/include/scsi
->> +-INCLUDES = -I/scsi
->>  +INCLUDES = -I=@includedir@/scsi
->>   sdparm_LDADD = @GETOPT_O_FILES@ @os_libs@ @SGUTILS_LIBS@
->>   sdparm_DEPENDENCIES = @GETOPT_O_FILES@
->>   else
->>  --
->> -1.9.1
->> +2.7.4
->>
->> diff --git a/meta-oe/recipes-support/sdparm/sdparm_1.09.bb 
->> b/meta-oe/recipes-support/sdparm/sdparm_1.09.bb
->> deleted file mode 100644
->> index ca11ca4..0000000
->> --- a/meta-oe/recipes-support/sdparm/sdparm_1.09.bb
->> +++ /dev/null
->> @@ -1,23 +0,0 @@
->> -SUMMARY = "fetch and change SCSI mode pages"
->> -DESCRIPTION = "The sdparm utility accesses and optionally modifies \
->> -SCSI devices' mode page and inquiry data."
->> -HOMEPAGE = "http://sg.danny.cz/sg/sdparm.html"
->> -SECTION = "console/utils"
->> -LICENSE = "BSD"
->> -LIC_FILES_CHKSUM = 
->> "file://COPYING;md5=ecab6c36b7ba82c675581dd0afde36f7 \
->> - file://lib/BSD_LICENSE;md5=1d52f4a66f1e0ed96776bf354ab7a2ed"
->> -DEPENDS="sg3-utils"
->> -SRC_URI = "http://sg.danny.cz/sg/p/${BPN}-${PV}.tgz \
->> -           file://make-sysroot-work.patch \
->> -           "
->> -
->> -PACKAGES =+ "${PN}-scripts"
->> -RDEPENDS_${PN}-scripts += "bash ${PN}"
->> -
->> -SRC_URI[md5sum] = "e51b1fd41c3e4c9d1274a2e4f046eebf"
->> -SRC_URI[sha256sum] = 
->> "7294f44173ac0946f1de8af02b1bdb0bd648079245396589397a2b0d3abc42d3"
->> -
->> -inherit autotools
->> -
->> -# Put the bash scripts to ${PN}-scripts
->> -FILES_${PN}-scripts = "${bindir}/sas_disk_blink ${bindir}/scsi_ch_swp"
->> diff --git a/meta-oe/recipes-support/sdparm/sdparm_1.10.bb 
->> b/meta-oe/recipes-support/sdparm/sdparm_1.10.bb
->> new file mode 100644
->> index 0000000..8ab2819
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/sdparm/sdparm_1.10.bb
->> @@ -0,0 +1,23 @@
->> +SUMMARY = "fetch and change SCSI mode pages"
->> +DESCRIPTION = "The sdparm utility accesses and optionally modifies \
->> +SCSI devices' mode page and inquiry data."
->> +HOMEPAGE = "http://sg.danny.cz/sg/sdparm.html"
->> +SECTION = "console/utils"
->> +LICENSE = "BSD"
->> +LIC_FILES_CHKSUM = 
->> "file://COPYING;md5=ecab6c36b7ba82c675581dd0afde36f7 \
->> + file://lib/BSD_LICENSE;md5=1d52f4a66f1e0ed96776bf354ab7a2ed"
->> +DEPENDS="sg3-utils"
->> +SRC_URI = "http://sg.danny.cz/sg/p/${BPN}-${PV}.tgz \
->> +           file://make-sysroot-work.patch \
->> +           "
->> +
->> +PACKAGES =+ "${PN}-scripts"
->> +RDEPENDS_${PN}-scripts += "bash ${PN}"
->> +
->> +SRC_URI[md5sum] = "bdae64375376ce8fe4bf9521c1db858f"
->> +SRC_URI[sha256sum] = 
->> "1ea1ed1bb1ee2aef62392618fa42da9ed027d5e655f174525c39235778292ab3"
->> +
->> +inherit autotools
->> +
->> +# Put the bash scripts to ${PN}-scripts
->> +FILES_${PN}-scripts = "${bindir}/sas_disk_blink ${bindir}/scsi_ch_swp"
->>
+diff --git a/meta-gnome/recipes-gnome/libxklavier/files/fix-do_installe-failure.patch b/meta-gnome/recipes-gnome/libxklavier/files/fix-do_installe-failure.patch
+new file mode 100644
+index 0000000..29eeef3
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/libxklavier/files/fix-do_installe-failure.patch
+@@ -0,0 +1,36 @@
++From 2343283caf88d2390afee08fe034b4c970b20f2e Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Sat, 16 Apr 2016 06:40:04 -0400
++Subject: [PATCH] fix do_installe failure
++
++| 18  /usr/bin/install -c -m 644 ../../libxklavier-5.4/libxklavier/libxklavier.vapi
++libxklavier.deps 'tmp/work/corei7-64-wrs-linux/libxklavier/5.4-r0/image/
++usr/share/vala/vapi'
++| 19 /usr/bin/install: cannot stat '../../libxklavier-5.4/libxklavier/
++libxklavier.vapi': No such file or directory
++| 20 Makefile:621: recipe for target 'install-vapiDATA' failed
++| 21 make[3]: *** [install-vapiDATA] Error 1
++| 22 make[3]: *** Waiting for unfinished jobs....
++
++Upstream-Stauts: Pending
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ libxklavier/Makefile.am | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/libxklavier/Makefile.am b/libxklavier/Makefile.am
++index c9c1bbe..f0efa32 100644
++--- a/libxklavier/Makefile.am
+++++ b/libxklavier/Makefile.am
++@@ -131,6 +131,6 @@ libxklavier.deps:
++ 	done
++ 
++ vapidir = $(datadir)/vala/vapi
++-vapi_DATA = $(VAPIGEN_VAPIS) $(VAPIGEN_VAPIS:.vapi=.deps)
+++vapi_DATA = $(VAPIGEN_VAPIS:.vapi=.deps)
++ endif
++ endif
++-- 
++1.9.1
++
+diff --git a/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.3.bb b/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.4.bb
+similarity index 55%
+rename from meta-gnome/recipes-gnome/libxklavier/libxklavier_5.3.bb
+rename to meta-gnome/recipes-gnome/libxklavier/libxklavier_5.4.bb
+index 384841a..ff9853d 100644
+--- a/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.3.bb
++++ b/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.4.bb
+@@ -4,11 +4,18 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=6e29c688d912da12b66b73e32b03d812"
+ 
+ DEPENDS = "xkbcomp gtk+ iso-codes libxi libxml2"
+ 
+-GNOME_COMPRESS_TYPE = "xz"
++inherit autotools pkgconfig gettext gobject-introspection
+ 
+-inherit gnomebase gettext gobject-introspection
+-SRC_URI[archive.md5sum] = "290ea2a8abc40f78a3a16bdae6f02808"
+-SRC_URI[archive.sha256sum] = "ebec3bc54b5652838502b96223152fb1cd8fcb14ace5cb02d718fc3276bbd404"
++RDEPENDS_${PN} += "iso-codes xkbcomp"
++
++SRC_URI = " \
++    http://pkgs.fedoraproject.org/repo/pkgs/${BPN}/${BPN}-${PV}.tar.bz2/13af74dcb6011ecedf1e3ed122bd31fa/${BPN}-${PV}.tar.bz2 \
++    file://fix-do_installe-failure.patch \
++"
++SRC_URI[md5sum] = "13af74dcb6011ecedf1e3ed122bd31fa"
++SRC_URI[sha256sum] = "17a34194df5cbcd3b7bfd0f561d95d1f723aa1c87fca56bc2c209514460a9320"
++
++FILES_${PN} += "${datadir}/*"
+ 
+ EXTRA_OECONF = "--with-xkb-bin-base=${bindir}"
+ 
+-- 
+2.8.1
 
 
