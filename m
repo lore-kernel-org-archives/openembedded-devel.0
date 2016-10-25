@@ -1,51 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id C70BB71A15
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id A3CA671A47
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Oct 2016 13:30:42 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id d128so1175155wmf.0
+	Tue, 25 Oct 2016 13:32:12 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id h8so1160855wmi.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Oct 2016 06:30:44 -0700 (PDT)
+	Tue, 25 Oct 2016 06:32:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=2c0ppazTnW+U4EdLTbbegz8Qzo3aQAXk6RpUXm/+eCo=;
-	b=i5jYZRgPj6ub1p0j6yeaKrnoIE/yZM0DtQfkPQNy7bKvWz2VNTAp4yLAEWEOOJe9K4
-	LLCPiz1VcvoP0W66yTKfBJyql7m0OajULHK5H/qDt8uaZYyqTfYWbOSCShyz810vQ9AO
-	YZ1Xgo1f4W1x02ryVbJGS60UhcFTHMuRl1Cb6LWz9Ek5JIDP5IK/A8mwnlcggkC8sp7e
-	2G0I7XV/lx4uEWo/p2ASoTdjCC7lVsFfQ2HzOakis3AaarcDGpETAOCT58sUpJ9Tgeir
-	M0SR0bhZG3JL2ga/7MV15knaoQ3vk7c/gQ0rP+p4vsqdT3M9PlsSGBKL1YCwNPrbltwU
-	XIkA==
+	bh=ntY2QxjnaLfVpY5FdCP+6Iu1zVO4NSgbDtCNDWkKxv0=;
+	b=DHn1b9xwGBDj2I7CswxoyaSMcIYljfyg0uxALwh/t0dg16zSW6lVThd+4b98g5jVLy
+	IdrQunuAu9xdKvCdXWS2BRXMwUP3mnmcuQQjm8m9myyZIvWHIWG9R3E85iyw9oPmubZC
+	uzVzah/HPv3ogpbht3TS/ZO15Nh3dCkInC1NswhQ0g44cDCBb2o8erFIjMzF1AvnqmwS
+	9AA0xJ7WodeTbwS+avXW4lP30zLaKckr1YiMtQxy3pru7QbcpzbKUmAOtzz8lNnrmmhh
+	31ulcNDpPZUwEuzpYs/FzNskjh0YQ1cpZMDFX/JAfkp9RU2etBjj5Zkl4vEbxYY9Fq29
+	JhFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:date:to:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=2c0ppazTnW+U4EdLTbbegz8Qzo3aQAXk6RpUXm/+eCo=;
-	b=hOaopF2yBtwiRcUxkNwcHa9j3d9htaIqJVjZLr+zV6yoBJMtbDjQCO4hEQeotewDHc
-	BVYHAPn11n0sagc9Akb41rOyjhHj3UtWLeTzSupc+iajMni8qS+oEuvvsWk5mI0PNhej
-	NYABKlpESf9FcZcBssg4l0/jK9b26KArmrLmQajF4OVCIT0EGa1xrnfEOJVOa2f6qlEz
-	OuF5u15UMfhHn2QNHAaaN6tQ4XiZtDY/frvJ1UzE/NtJBvijKbCd3G+/9g2X8XfDxhD2
-	xqYmVyubrcSOIcNWwTYAU88WSqo2mVxV5utdh5I21O0y08wIz0D/LeyZaju/j9XDoI1d
-	p85g==
-X-Gm-Message-State: ABUngvdzGINIM79H/Re1SO8miMglBsxpNqHX79TJGr8G8w7yF3kEl2YNVZqUaDCJNrp+Gw==
-X-Received: by 10.28.11.17 with SMTP id 17mr199189wml.88.1477402243246;
-	Tue, 25 Oct 2016 06:30:43 -0700 (PDT)
+	bh=ntY2QxjnaLfVpY5FdCP+6Iu1zVO4NSgbDtCNDWkKxv0=;
+	b=NuwJYwCU39pydqTmCn+UGM+nkf78xLmZLBfWH2P0+yvW6S+t1jl7FbR9SafrYr2HpN
+	p4Fym42Z329b4BoCU1LawW7bdVyGtcwmRR2QFPrKTgNLxHo67aNdRernxPG+u8edoNTG
+	eONU5ffSRjdJUZjooqu3i7oSzScUfp5wyX96CLUB8IazCsYlNuQWTKLXFr0lWWSqjq2X
+	2rHwEq/dpiywMyei8jGoTtUU6BP0iJU8/riBeF59IdVZGcl5t1Lw4vBjewlDUbod0jJ2
+	teKILh8ihcZXDOxcru3Q7Hg59qFxEH46RWIJYwITezfRclVYr2PG0XNY4i4kab9gE7qR
+	Ypjw==
+X-Gm-Message-State: ABUngvd5lq6DLm33NfwWS90E75AYNS88y5zPfaDkpaUR7+wdJPGhbnHKJ4Ey5G1EmabfjA==
+X-Received: by 10.28.148.22 with SMTP id w22mr3563384wmd.42.1477402332801;
+	Tue, 25 Oct 2016 06:32:12 -0700 (PDT)
 Received: from localhost (ip-89-176-50-133.net.upcbroadband.cz.
 	[89.176.50.133]) by smtp.gmail.com with ESMTPSA id
-	af4sm25183831wjc.17.2016.10.25.06.30.41
+	im3sm25115862wjb.13.2016.10.25.06.32.11
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 25 Oct 2016 06:30:42 -0700 (PDT)
+	Tue, 25 Oct 2016 06:32:11 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 25 Oct 2016 15:30:42 +0200
+Date: Tue, 25 Oct 2016 15:32:11 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161025133042.GC2911@jama>
-References: <1476341681-29827-1-git-send-email-Qi.Chen@windriver.com>
+Message-ID: <20161025133211.GD2911@jama>
+References: <20161019053834.11523-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1476341681-29827-1-git-send-email-Qi.Chen@windriver.com>
+In-Reply-To: <20161019053834.11523-1-raj.khem@gmail.com>
 User-Agent: Mutt/1.7.1 (2016-10-04)
-Subject: Re: [meta-oe][PATCH] gnuplot: upgrade to 5.0.5
+Subject: Re: [meta-oe][PATCH 01/16] boinc: Add recipe for boinc-client
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,204 +58,304 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Oct 2016 13:30:43 -0000
-X-Groupsio-MsgNum: 63596
+X-List-Received-Date: Tue, 25 Oct 2016 13:32:15 -0000
+X-Groupsio-MsgNum: 63597
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="0lnxQi9hkpPO77W3"
+	protocol="application/pgp-signature"; boundary="UoPmpPX/dBe4BELn"
 Content-Disposition: inline
 
---0lnxQi9hkpPO77W3
+--UoPmpPX/dBe4BELn
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 13, 2016 at 02:54:41PM +0800, Qi.Chen@windriver.com wrote:
-> From: Chen Qi <Qi.Chen@windriver.com>
+On Tue, Oct 18, 2016 at 10:38:19PM -0700, Khem Raj wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-Fails to build - autodetects qt5 in sysroot
+boinc-client-7.6.33: boinc-client rdepends on libxscrnsaver, but it
+isn't a build dependency, missing libxscrnsaver in DEPENDS or
+PACKAGECONFIG? [build-deps]
 
-http://errors.yoctoproject.org/Errors/Details/93026/
-
-> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 > ---
->  .../gnuplot-4.6.5/lua-loadlibs-configure-in-fix.patch    | 16 ----------=
-------
->  .../recipes-extended/gnuplot/gnuplot-4.6.5/subdirs.patch | 11 -----------
->  meta-oe/recipes-extended/gnuplot/gnuplot.inc             |  1 -
->  .../gnuplot/gnuplot/lua-loadlibs-configure-in-fix.patch  | 16 ++++++++++=
+>  .../boinc/boinc-client/boinc-AM_CONDITIONAL.patch  | 19 +++++
+>  .../boinc/boinc-client/cross-compile.patch         | 92 ++++++++++++++++=
 ++++++
->  meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch   | 11 +++++++++++
->  meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb        | 14 ----------=
-----
->  meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb        | 14 ++++++++++=
-++++
->  7 files changed, 41 insertions(+), 42 deletions(-)
->  delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/lua-lo=
-adlibs-configure-in-fix.patch
->  delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/subdir=
-s.patch
->  create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/lua-loadlibs=
--configure-in-fix.patch
->  create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch
->  delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb
->  create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb
+>  .../boinc/boinc-client/opengl_m4_check.patch       | 13 +++
+>  .../recipes-extended/boinc/boinc-client_7.6.33.bb  | 60 ++++++++++++++
+>  4 files changed, 184 insertions(+)
+>  create mode 100644 meta-oe/recipes-extended/boinc/boinc-client/boinc-AM_=
+CONDITIONAL.patch
+>  create mode 100644 meta-oe/recipes-extended/boinc/boinc-client/cross-com=
+pile.patch
+>  create mode 100644 meta-oe/recipes-extended/boinc/boinc-client/opengl_m4=
+_check.patch
+>  create mode 100644 meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb
 >=20
-> diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/lua-loadlibs-=
-configure-in-fix.patch b/meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/lua=
--loadlibs-configure-in-fix.patch
-> deleted file mode 100644
-> index 23f2cd2..0000000
-> --- a/meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/lua-loadlibs-configu=
-re-in-fix.patch
-> +++ /dev/null
-> @@ -1,16 +0,0 @@
-> -Index: gnuplot-4.6.5/configure.in
-> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> ---- gnuplot-4.6.5.orig/configure.in
-> -+++ gnuplot-4.6.5/configure.in
-> -@@ -690,6 +690,11 @@ if test "${with_lua}" =3D yes ; then
-> -   fi
-> -=20
-> -   if test "$with_lua" !=3D no; then
-> -+    dnl check for dlopen/dl to fix loadlibs link failure
-> -+    AC_CHECK_FUNC([dlopen], [],
-> -+      AC_CHECK_LIB([dl], [dlopen], DLOPEN_LIBS=3D"-ldl"))
-> -+    AC_SUBST(DLOPEN_LIBS)
-> -+    LUA_LIBS=3D"$LUA_LIBS $DLOPEN_LIBS"
-> -     TERMLIBS=3D"$TERMLIBS $LUA_LIBS"
-> -     CPPFLAGS=3D"$CPPFLAGS $LUA_CFLAGS"
-> -   else
-> diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/subdirs.patch=
- b/meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/subdirs.patch
-> deleted file mode 100644
-> index 8c7d1f0..0000000
-> --- a/meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/subdirs.patch
-> +++ /dev/null
-> @@ -1,11 +0,0 @@
-> ---- /tmp/Makefile.am	2007-08-23 13:10:15.560659023 +0200
-> -+++ gnuplot-4.2.0/Makefile.am	2007-08-23 13:10:34.961764629 +0200
-> -@@ -1,7 +1,7 @@
-> - ## Process this file with automake to produce Makefile.in -*-Makefile-*-
-> - AUTOMAKE_OPTIONS =3D foreign 1.2h
-> -=20
-> --SUBDIRS =3D config m4 term src docs $(LISPDIR) man demo tutorial share
-> -+SUBDIRS =3D config m4 term src  $(LISPDIR) man share
-> -=20
-> - EXTRA_DIST =3D BUGS CodeStyle Copyright FAQ GNUmakefile INSTALL INSTALL=
-=2Egnu \
-> - Makefile.maint PATCHLEVEL PGPKEYS PORTING README README.1ST README.exp \
-> diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot.inc b/meta-oe/recip=
-es-extended/gnuplot/gnuplot.inc
-> index 69bc74b..5bcf2ad 100644
-> --- a/meta-oe/recipes-extended/gnuplot/gnuplot.inc
-> +++ b/meta-oe/recipes-extended/gnuplot/gnuplot.inc
-> @@ -17,7 +17,6 @@ PACKAGECONFIG[cairo] =3D "--with-cairo,--without-cairo,=
-cairo pango"
->  PACKAGECONFIG[lua] =3D "--with-lua,--without-lua,lua"
-> =20
->  EXTRA_OECONF =3D "--with-readline=3D${STAGING_LIBDIR}/.. \
-> -                --without-lisp-files \
->                  --without-tutorial \
->                  --disable-wxwidgets"
-> =20
-> diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot/lua-loadlibs-config=
-ure-in-fix.patch b/meta-oe/recipes-extended/gnuplot/gnuplot/lua-loadlibs-co=
-nfigure-in-fix.patch
+> diff --git a/meta-oe/recipes-extended/boinc/boinc-client/boinc-AM_CONDITI=
+ONAL.patch b/meta-oe/recipes-extended/boinc/boinc-client/boinc-AM_CONDITION=
+AL.patch
 > new file mode 100644
-> index 0000000..23f2cd2
+> index 0000000..3ebf7c8
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/gnuplot/gnuplot/lua-loadlibs-configure-in-=
-fix.patch
-> @@ -0,0 +1,16 @@
-> +Index: gnuplot-4.6.5/configure.in
+> +++ b/meta-oe/recipes-extended/boinc/boinc-client/boinc-AM_CONDITIONAL.pa=
+tch
+> @@ -0,0 +1,19 @@
+> +--- A/configure.ac
+> ++++ B/configure.ac
+> +@@ -39,6 +39,7 @@ AC_PROG_CC
+> + AC_PROG_CXX
+> + AC_PROG_F77
+> + AC_PROG_CPP
+> ++AC_PROG_OBJCXX
+> + AC_PROG_MAKE_SET
+> + SAH_LINKS
+> + AC_LANG_PUSH(C)
+> +@@ -744,6 +745,8 @@ AM_CONDITIONAL(ENABLE_LIBRARIES, [test "
+> + AM_CONDITIONAL(INSTALL_HEADERS, [test "${enable_install_headers}" =3D y=
+es])
+> + AM_CONDITIONAL(HAVE_CUDA_LIB, [test "${enable_client}" =3D yes -a -f ./=
+coprocs/CUDA/posix/${boinc_platform}/libcudart.so])
+> +=20
+> ++PKG_CHECK_MODULES([GTK2], [gtk+-2.0])
+> ++
+> + dnl =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> + dnl some more vodoo required for building portable client-binary (clien=
+t, clientgui)
+> + dnl =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> diff --git a/meta-oe/recipes-extended/boinc/boinc-client/cross-compile.pa=
+tch b/meta-oe/recipes-extended/boinc/boinc-client/cross-compile.patch
+> new file mode 100644
+> index 0000000..3d29558
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/boinc/boinc-client/cross-compile.patch
+> @@ -0,0 +1,92 @@
+> +Index: boinc-client_release-7.6-7.6.33/api/Makefile.am
 > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- gnuplot-4.6.5.orig/configure.in
-> ++++ gnuplot-4.6.5/configure.in
-> +@@ -690,6 +690,11 @@ if test "${with_lua}" =3D yes ; then
-> +   fi
+> +--- boinc-client_release-7.6-7.6.33.orig/api/Makefile.am
+> ++++ boinc-client_release-7.6-7.6.33/api/Makefile.am
+> +@@ -43,18 +43,18 @@ endif
 > +=20
-> +   if test "$with_lua" !=3D no; then
-> ++    dnl check for dlopen/dl to fix loadlibs link failure
-> ++    AC_CHECK_FUNC([dlopen], [],
-> ++      AC_CHECK_LIB([dl], [dlopen], DLOPEN_LIBS=3D"-ldl"))
-> ++    AC_SUBST(DLOPEN_LIBS)
-> ++    LUA_LIBS=3D"$LUA_LIBS $DLOPEN_LIBS"
-> +     TERMLIBS=3D"$TERMLIBS $LUA_LIBS"
-> +     CPPFLAGS=3D"$CPPFLAGS $LUA_CFLAGS"
-> +   else
-> diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch b/met=
-a-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch
+> + lib_LTLIBRARIES =3D libboinc_api.la
+> + libboinc_api_la_SOURCES =3D $(api_files)
+> +-libboinc_api_la_LDFLAGS =3D -L$(libdir) -rpath $(libdir) -version-numbe=
+r $(LIBBOINC_VERSION)
+> ++libboinc_api_la_LDFLAGS =3D -version-number $(LIBBOINC_VERSION)
+> +=20
+> + if BUILD_GRAPHICS_API
+> + lib_LTLIBRARIES +=3D libboinc_graphics2.la
+> + libboinc_graphics2_la_SOURCES =3D $(graphics2_files)
+> + libboinc_graphics2_la_CPPFLAGS =3D -I$(top_srcdir) -I$(top_srcdir)/lib =
+-I$(top_srcdir)/samples/image_libs
+> +-libboinc_graphics2_la_LDFLAGS =3D -L$(libdir) -rpath $(libdir) -version=
+-number $(LIBBOINC_VERSION) -ljpeg
+> ++libboinc_graphics2_la_LDFLAGS =3D -version-number $(LIBBOINC_VERSION) -=
+ljpeg
+> + endif #BUILD_GRAPHICS_API
+> +=20
+> + lib_LTLIBRARIES +=3D libboinc_opencl.la
+> + libboinc_opencl_la_SOURCES =3D $(opencl_files)
+> +-libboinc_opencl_la_LDFLAGS =3D -L$(libdir) -rpath $(libdir) -version-nu=
+mber $(LIBBOINC_VERSION)
+> ++libboinc_opencl_la_LDFLAGS =3D -version-number $(LIBBOINC_VERSION)
+> +=20
+> + if INSTALL_HEADERS
+> + ## install only headers that are meant for exporting the API !!
+> +Index: boinc-client_release-7.6-7.6.33/lib/Makefile.am
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- boinc-client_release-7.6-7.6.33.orig/lib/Makefile.am
+> ++++ boinc-client_release-7.6-7.6.33/lib/Makefile.am
+> +@@ -173,7 +173,7 @@ lib_LTLIBRARIES =3D libboinc.la
+> + libboinc_la_SOURCES =3D $(generic_sources) $(mac_sources) $(win_sources)
+> + libboinc_la_CFLAGS =3D $(AM_CFLAGS) $(PICFLAGS) $(PTHREAD_CFLAGS)
+> + libboinc_la_CXXFLAGS =3D $(AM_CXXFLAGS) $(PICFLAGS) $(PTHREAD_CFLAGS)
+> +-libboinc_la_LDFLAGS =3D -L$(libdir) -rpath $(libdir) -static -version-n=
+umber $(LIBBOINC_VERSION)
+> ++libboinc_la_LDFLAGS =3D -static -version-number $(LIBBOINC_VERSION)
+> + libboinc_la_LIBADD =3D
+> +=20
+> + if ENABLE_BOINCCRYPT
+> +@@ -181,7 +181,7 @@ lib_LTLIBRARIES +=3D libboinc_crypt.la
+> + libboinc_crypt_la_SOURCES =3D crypt.cpp
+> + libboinc_crypt_la_CFLAGS =3D $(AM_CFLAGS) $(PICFLAGS) $(PTHREAD_CFLAGS)=
+ $(SSL_CFLAGS)
+> + libboinc_crypt_la_CXXFLAGS =3D $(AM_CXXFLAGS) $(PICFLAGS) $(PTHREAD_CFL=
+AGS) $(SSL_CXXFLAGS)
+> +-libboinc_crypt_la_LDFLAGS =3D -L$(libdir) -rpath $(libdir) -static -ver=
+sion-number $(LIBBOINC_VERSION)
+> ++libboinc_crypt_la_LDFLAGS =3D -static -version-number $(LIBBOINC_VERSIO=
+N)
+> + libboinc_crypt_la_LIBADD =3D
+> + endif
+> +=20
+> +@@ -190,7 +190,7 @@ lib_LTLIBRARIES +=3D libboinc_fcgi.la
+> + libboinc_fcgi_la_SOURCES =3D $(libfcgi_sources) $(mac_sources) $(win_so=
+urces)
+> + libboinc_fcgi_la_CFLAGS =3D -D_USING_FCGI_ $(AM_CFLAGS) $(PICFLAGS) $(P=
+THREAD_CFLAGS)
+> + libboinc_fcgi_la_CXXFLAGS =3D -D_USING_FCGI_ $(AM_CXXFLAGS) $(PICFLAGS)=
+ $(PTHREAD_CFLAGS)
+> +-libboinc_fcgi_la_LDFLAGS =3D -L$(libdir) -rpath $(libdir) -version-numb=
+er $(LIBBOINC_VERSION)
+> ++libboinc_fcgi_la_LDFLAGS =3D -version-number $(LIBBOINC_VERSION)
+> + libboinc_fcgi_la_LIBADD =3D
+> + endif=20
+> + # end of "if ENABLE_FCGI"
+> +Index: boinc-client_release-7.6-7.6.33/sched/Makefile.am
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- boinc-client_release-7.6-7.6.33.orig/sched/Makefile.am
+> ++++ boinc-client_release-7.6-7.6.33/sched/Makefile.am
+> +@@ -26,7 +26,7 @@ lib_LTLIBRARIES =3D libsched.la
+> + libsched_la_SOURCES =3D $(libsched_sources)
+> + libsched_la_CFLAGS =3D $(AM_CPPFLAGS)
+> + libsched_la_CXXFLAGS =3D $(AM_CPPFLAGS)
+> +-libsched_la_LDFLAGS=3D -L$(libdir) -rpath $(libdir) -version-number $(L=
+IBBOINC_VERSION)
+> ++libsched_la_LDFLAGS=3D -version-number $(LIBBOINC_VERSION)
+> + libsched_la_LIBADD=3D $(SSL_LIBS)
+> +=20
+> + ## install only headers that are meant for exporting the API !!
+> +@@ -48,7 +48,7 @@ lib_LTLIBRARIES +=3D libsched_fcgi.la
+> + libsched_fcgi_la_SOURCES =3D $(libsched_sources)
+> + libsched_fcgi_la_CFLAGS =3D -D_USING_FCGI_ $(AM_CPPFLAGS)
+> + libsched_fcgi_la_CXXFLAGS =3D -D_USING_FCGI_ $(AM_CPPFLAGS)
+> +-libsched_fcgi_la_LDFLAGS=3D -L$(libdir) -rpath $(libdir) -version-numbe=
+r $(LIBBOINC_VERSION)
+> ++libsched_fcgi_la_LDFLAGS=3D -version-number $(LIBBOINC_VERSION)
+> + libsched_fcgi_la_LIBADD=3D
+> +=20
+> + endif
+> +Index: boinc-client_release-7.6-7.6.33/zip/Makefile.am
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- boinc-client_release-7.6-7.6.33.orig/zip/Makefile.am
+> ++++ boinc-client_release-7.6-7.6.33/zip/Makefile.am
+> +@@ -61,7 +61,7 @@ endif
+> +=20
+> + lib_LTLIBRARIES =3D libboinc_zip.la
+> + libboinc_zip_la_SOURCES =3D $(libboinc_zip_sources)
+> +-libboinc_zip_la_LDFLAGS =3D -L$(libdir) -rpath $(libdir) -version-numbe=
+r $(LIBBOINC_VERSION)
+> ++libboinc_zip_la_LDFLAGS =3D -version-number $(LIBBOINC_VERSION)
+> + libboinc_zip_la_LIBADD =3D
+> +=20
+> + # Some OSs may not prefix libraries with lib.
+> diff --git a/meta-oe/recipes-extended/boinc/boinc-client/opengl_m4_check.=
+patch b/meta-oe/recipes-extended/boinc/boinc-client/opengl_m4_check.patch
 > new file mode 100644
-> index 0000000..8c7d1f0
+> index 0000000..f7295c1
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch
-> @@ -0,0 +1,11 @@
-> +--- /tmp/Makefile.am	2007-08-23 13:10:15.560659023 +0200
-> ++++ gnuplot-4.2.0/Makefile.am	2007-08-23 13:10:34.961764629 +0200
-> +@@ -1,7 +1,7 @@
-> + ## Process this file with automake to produce Makefile.in -*-Makefile-*-
-> + AUTOMAKE_OPTIONS =3D foreign 1.2h
-> +=20
-> +-SUBDIRS =3D config m4 term src docs $(LISPDIR) man demo tutorial share
-> ++SUBDIRS =3D config m4 term src  $(LISPDIR) man share
-> +=20
-> + EXTRA_DIST =3D BUGS CodeStyle Copyright FAQ GNUmakefile INSTALL INSTALL=
-=2Egnu \
-> + Makefile.maint PATCHLEVEL PGPKEYS PORTING README README.1ST README.exp \
-> diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb b/meta-oe/=
-recipes-extended/gnuplot/gnuplot_4.6.5.bb
-> deleted file mode 100644
-> index 3f694a0..0000000
-> --- a/meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb
-> +++ /dev/null
-> @@ -1,14 +0,0 @@
-> -require gnuplot.inc
-> -
-> -SRC_URI =3D "${SOURCEFORGE_MIRROR}/gnuplot/${BP}.tar.gz;name=3Darchive \
-> -    http://www.mneuroth.de/privat/zaurus/qtplot-0.2.tar.gz;name=3Dqtplot=
- \
-> -    file://subdirs.patch \
-> -    file://lua-loadlibs-configure-in-fix.patch \
-> -    file://gnuplot.desktop \
-> -    file://gnuplot.png \
-> -"
-> -
-> -SRC_URI[archive.md5sum] =3D "9a476b21f74bd99c876f1509d731a0f9"
-> -SRC_URI[archive.sha256sum] =3D "e550f030c7d04570e89c3d4e3f6e822968165084=
-19c86ab46c4dd73156519a2d"
-> -SRC_URI[qtplot.md5sum] =3D "0a481885a496092c77eb4017540b5cf6"
-> -SRC_URI[qtplot.sha256sum] =3D "6df317183ff62cc82f3dcf88207a267cd6478cb51=
-47f55d7530c94f1ad5f4132"
-> diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb b/meta-oe/=
-recipes-extended/gnuplot/gnuplot_5.0.5.bb
+> +++ b/meta-oe/recipes-extended/boinc/boinc-client/opengl_m4_check.patch
+> @@ -0,0 +1,13 @@
+> +Index: boinc-client_release-7.6-7.6.33/m4/ax_check_gl.m4
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- boinc-client_release-7.6-7.6.33.orig/m4/ax_check_gl.m4
+> ++++ boinc-client_release-7.6-7.6.33/m4/ax_check_gl.m4
+> +@@ -58,7 +58,7 @@ else
+> +     else
+> +       ax_try_lib=3D"${ax_lib}"
+> +     fi
+> +-    LIBS=3D"-L${prefix}/lib ${ax_try_lib} ${GL_LIBS} ${ax_save_LIBS}"
+> ++    LIBS=3D"${ax_try_lib} ${GL_LIBS} ${ax_save_LIBS}"
+> +     AC_LINK_IFELSE(
+> +     [AC_LANG_PROGRAM([[
+> + # if HAVE_WINDOWS_H && defined(_WIN32)
+> diff --git a/meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb b/meta=
+-oe/recipes-extended/boinc/boinc-client_7.6.33.bb
 > new file mode 100644
-> index 0000000..42308ba
+> index 0000000..34472e0
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb
-> @@ -0,0 +1,14 @@
-> +require gnuplot.inc
+> +++ b/meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb
+> @@ -0,0 +1,60 @@
+> +# Copyright (C) 2016 Khem Raj <raj.khem@gmail.com>
+> +# Released under the MIT license (see COPYING.MIT for the terms)
 > +
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/gnuplot/${BP}.tar.gz;name=3Darchive \
-> +    http://www.mneuroth.de/privat/zaurus/qtplot-0.2.tar.gz;name=3Dqtplot=
- \
-> +    file://subdirs.patch \
-> +    file://lua-loadlibs-configure-in-fix.patch \
-> +    file://gnuplot.desktop \
-> +    file://gnuplot.png \
+> +SUMMARY =3D "Open-source software for volunteer computing"
+> +DESCRIPTION =3D "The Berkeley Open Infrastructure for Network Computing =
+(BOINC) is an open- \
+> +source software platform which supports distributed computing, primarily=
+ in \
+> +the form of volunteer computing and desktop Grid computing.  It is well \
+> +suited for problems which are often described as trivially parallel.  BO=
+INC \
+> +is the underlying software used by projects such as SETI@home, Einstein@=
+Home, \
+> +ClimatePrediciton.net, the World Community Grid, and many other distribu=
+ted \
+> +computing projects. \
+> +This package installs the BOINC client software, which will allow your \
+> +computer to participate in one or more BOINC projects, using your spare \
+> +computer time to search for cures for diseases, model protein folding, s=
+tudy \
+> +global warming, discover sources of gravitational waves, and many other =
+types \
+> +of scientific and mathematical research."
+> +
+> +HOMEPAGE =3D "http://boinc.berkeley.edu/"
+> +LICENSE =3D "LGPLv2+ & GPLv3"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae=
+504 \
+> +                    file://COPYING.LESSER;md5=3D6a6a8e020838b23406c81b19=
+c1d46df6"
+> +SECTION =3D "applications"
+> +DEPENDS =3D "curl jpeg openssl xcb-util sqlite3 virtual/libgl libnotify =
+gtk+ nettle"
+> +
+> +SRC_URI =3D "https://github.com/BOINC/boinc/archive/client_release/7.6/$=
+{PV}.tar.gz \
+> +           file://boinc-AM_CONDITIONAL.patch \
+> +           file://opengl_m4_check.patch \
+> +           file://cross-compile.patch \
 > +"
+> +SRC_URI[md5sum] =3D "437b4b98e384b4bda4ef7056e68166ac"
+> +SRC_URI[sha256sum] =3D "c4b1c29b9655013e0ac61dddf47ad7f30f38c46159f02a9d=
+9dc8ab854e99aa6d"
 > +
-> +SRC_URI[archive.md5sum] =3D "c5e96fca73afbee4f57cbc1bfce6b3b8"
-> +SRC_URI[archive.sha256sum] =3D "25f3e0bf192e01115c580f278c3725d7a569eb84=
-8786e12b455a3fda70312053"
-> +SRC_URI[qtplot.md5sum] =3D "0a481885a496092c77eb4017540b5cf6"
-> +SRC_URI[qtplot.sha256sum] =3D "6df317183ff62cc82f3dcf88207a267cd6478cb51=
-47f55d7530c94f1ad5f4132"
+> +inherit gettext autotools-brokensep pkgconfig
+> +
+> +S =3D "${WORKDIR}/${BPN}_release-7.6-${PV}"
+> +
+> +EXTRA_OECONF +=3D "\
+> +    --enable-libraries \
+> +    --enable-unicode \
+> +    --enable-shared \
+> +    --enable-dynamic-client-linkage \
+> +    --enable-client \
+> +    --disable-server \
+> +    --disable-static \
+> +    --disable-manager \
+> +    --with-ssl=3D${STAGING_EXECPREFIXDIR} \
+> +    --without-wxdir \
+> +    --without-x \
+> +    --with-boinc-platform=3D${TARGET_SYS} \
+> +"
+> +export PKG_CONFIG =3D "${STAGING_BINDIR_NATIVE}/pkg-config"
+> +
+> +do_compile_prepend () {
+> +	# Disable rpaths
+> +	sed -i -e 's|^hardcode_libdir_flag_spec=3D.*|hardcode_libdir_flag_spec=
+=3D""|g' ${B}/${TARGET_SYS}-libtool
+> +	sed -i -e 's|^sys_lib_dlsearch_path_spec=3D.*|sys_lib_dlsearch_path_spe=
+c=3D""|g' ${B}/${TARGET_SYS}-libtool
+> +	sed -i -e 's|^runpath_var=3DLD_RUN_PATH|runpath_var=3DDIE_RPATH_DIE|g' =
+${B}/${TARGET_SYS}-libtool
+> +}
+> +
+> +SECURITY_CFLAGS =3D "${SECURITY_NO_PIE_CFLAGS}"
 > --=20
-> 2.8.3
+> 2.10.0
 >=20
 > --=20
 > _______________________________________________
@@ -266,15 +366,15 @@ recipes-extended/gnuplot/gnuplot_5.0.5.bb
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---0lnxQi9hkpPO77W3
+--UoPmpPX/dBe4BELn
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iEYEARECAAYFAlgPXoEACgkQN1Ujt2V2gBwmhACgtZxLvCudOmqVat3cokTlfYSP
-o7EAn3/eoKXiUx157eHkzp8+8mMePvQm
-=6Nfq
+iEYEARECAAYFAlgPXtsACgkQN1Ujt2V2gBzeIgCfbiqXTrL8hTY5kOpvYouigB7K
+mDkAmwSnWCqmfcS+oOFyw4OH10xHd2PL
+=qqcX
 -----END PGP SIGNATURE-----
 
---0lnxQi9hkpPO77W3--
+--UoPmpPX/dBe4BELn--
