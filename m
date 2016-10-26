@@ -1,51 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 630B571998
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 6015C71989
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Oct 2016 14:27:01 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id o81so3731700wma.2
+	Wed, 26 Oct 2016 14:30:49 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id y138so3597011wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Oct 2016 07:27:03 -0700 (PDT)
+	Wed, 26 Oct 2016 07:30:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=JHV9qUHti0PfuE3foykVdF2jkEj9F81lFT3yf1tLki4=;
-	b=QdwMN9tp7RwMePccx19WI3JWZtFZMZHF4T4oGkdM+X8+u9IarR6aCLgGua0YtkXRf0
-	u9O35o6DI0PNQBXDUWiGYIWT9QEF+wfHS2uM88uxL9/R6zDpL5Z8fIRwDXXYPih60HKF
-	6anMga3O8xDqHs3SrrCvMfPPrfosHIZGZ/rAQ2Lg1eE1HGXsA//iJn1QzMNvyYqAUnf0
-	GimQgI9e/mdxWOfGxGyRRs79n+GPtnCKiNPbC596WTgisiapyFY1GbZUqDNwmuuB9XRx
-	VLkSNXDsGJc817+JQ+3lU4SvOE3OZhuenh4dm0QjQ7Ohh34q4vfaGxTOKhG9ZUFOPNqk
-	ZN4g==
+	bh=yb5yek9BuxIJXqnHQj6ImpJfci0RmpbnlSSCI+mHfs4=;
+	b=FnYKAFNpxjufeC5TkObUl+gGDtMSa/gYI/vFubjqr/tbFH0+gGSrhIf6EP5+tAMg7Q
+	Sf8k8Wzmdjcg7WuQ0k9yn0M/9aMvo6hB3wXjx5ctcbJ6ixXuJ12IRXvrTV2MhmIhUPTs
+	l1KTA92gy42R4sEZ7Ae1fGFP3xMJXsrqEOcno76jiV4ob8pf35YdMhN1q4X1IvxbCNBe
+	HXDaXSIOAdXCTJbRdYx0W/ApCwRzYDt0kG58nApK6tKvTSSLuuuA2rZd+ZTKwbldDbT9
+	ZMJP5B+HMI5GXi9GBqyD7dv0u+DT89+hSPPuFwwDBxxO0LJnv07C3gN5qY604V8jz0Rk
+	YSMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:date:to:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=JHV9qUHti0PfuE3foykVdF2jkEj9F81lFT3yf1tLki4=;
-	b=Q+F2D5w73Tv+UO6xfYgbdzmNJroBwsfoHylXogWk2aWooZRJD2O1XQN+uxCt1LOA2I
-	tDhBwe/qXbly/cEcXDRfDcyeBdlPBk2+3VqmC3hH1KxExl56fXCfJ9qWDviGmFCHroXj
-	UJkgZSvw/mHCgrMtyLrfZtP3AG5tz8/fHmaXDj00zZ49vC2hwNxsnYiI15kKPCzN7S6X
-	aj6ZQipceyrUZXi1p9Mwf1XotBdca87byAKX1t5iW6dDhXD1zgtGGcIu4IP/7UTJFky7
-	cTZ5ZO8bNOEXTEZIYh8kVf9Gc6MAuFZwx0ZA1MCm+z8hLe4jcLgwDpVBR9I1aS6cD65U
-	DtrA==
-X-Gm-Message-State: ABUngvez6McXiwK6+jpJ+ZFGExBzAxIe7aR+otpXHWAUdgwNu4Pvmtu1EMtNKRJVm7Zg9g==
-X-Received: by 10.194.80.74 with SMTP id p10mr2469928wjx.121.1477492022575;
-	Wed, 26 Oct 2016 07:27:02 -0700 (PDT)
+	bh=yb5yek9BuxIJXqnHQj6ImpJfci0RmpbnlSSCI+mHfs4=;
+	b=VHsAObgPwDpP/sSzSuUopfUkU52/THUJLkRdxXcEglFxoFVO6r5Z/8y/HIb5siYMn2
+	fHBfpocGu0a31si1EZLTSFC+R7BtGLC7JLot7kc2+7SdXh35wMAVr7bYehSXWyvQvR6W
+	k8rKU1+B72D14LWTMLh3xcLR3UF0jT7l7IptwPIkzj+ncMY7vMoxyzHlYX664/WRODHn
+	FWisvN1Umi9fD8Uh+/z7ryobyUdzov8AG2TV5A1fzfE5s1aWbprmARpASruKINFdcdaX
+	WteQD6KesXs3o9/u5NLA4rD5CY9E5zAHPVxC+umphjrRRHJRLa8v5GB0Ao1rJ5odpFtf
+	rHvA==
+X-Gm-Message-State: ABUngvcX+wwZCkeH5VT1ka+lNcB2I38ACF6RJmtGIDHwoWU8j6uGHjecWnJOTxUwKQkm/w==
+X-Received: by 10.28.172.6 with SMTP id v6mr8432982wme.36.1477492250098;
+	Wed, 26 Oct 2016 07:30:50 -0700 (PDT)
 Received: from localhost (ip-89-176-50-133.net.upcbroadband.cz.
 	[89.176.50.133]) by smtp.gmail.com with ESMTPSA id
-	x127sm9887428wmd.21.2016.10.26.07.27.01
+	h133sm9935722wmg.23.2016.10.26.07.30.49
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 26 Oct 2016 07:27:01 -0700 (PDT)
+	Wed, 26 Oct 2016 07:30:49 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 26 Oct 2016 16:27:02 +0200
+Date: Wed, 26 Oct 2016 16:30:50 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161026142702.GD4096@jama>
-References: <1477469034-23992-1-git-send-email-jianchuan.wang@windriver.com>
+Message-ID: <20161026143050.GE4096@jama>
+References: <1474826085-1209-1-git-send-email-dachaac@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1477469034-23992-1-git-send-email-jianchuan.wang@windriver.com>
+In-Reply-To: <1474826085-1209-1-git-send-email-dachaac@gmail.com>
 User-Agent: Mutt/1.7.1 (2016-10-04)
-Subject: Re: [PATCH] netmap: Rename the _count to _recount for kernel v4.8
+Subject: Re: [meta-qt5][krogoth][PATCH] Update Qt's git repositories to match new location
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,146 +58,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Oct 2016 14:27:02 -0000
-X-Groupsio-MsgNum: 63612
+X-List-Received-Date: Wed, 26 Oct 2016 14:30:50 -0000
+X-Groupsio-MsgNum: 63613
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="zbGR4y+acU1DwHSi"
+	protocol="application/pgp-signature"; boundary="imjhCm/Pyz7Rq5F2"
 Content-Disposition: inline
 
---zbGR4y+acU1DwHSi
-Content-Type: text/plain; charset=us-ascii
+--imjhCm/Pyz7Rq5F2
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 26, 2016 at 04:03:54PM +0800, jianchuan.wang@windriver.com wrot=
-e:
-> From: Jianchuan Wang <jianchuan.wang@windriver.com>
->=20
-> Rename the _count to _recount since Adjusting the member of struct page
-> in the kernel v4.8
-
-Did you forgot to unblacklist netmap-modules?
-
-ERROR: Nothing PROVIDES 'netmap-modules' (but
-/home/jenkins/oe/world/shr-core/meta-openembedded/meta-networking/recipes-k=
-ernel/netmap/netmap_git.bb
-DEPENDS on or otherwise requires it)
-ERROR: netmap-modules was skipped: Recipe is blacklisted: BROKEN: not
-compatible with default kernel version 4.8
-ERROR: Nothing RPROVIDES 'netmap' (but
-/home/jenkins/oe/world/shr-core/meta-openembedded/meta-networking/recipes-k=
-ernel/netmap/netmap_git.bb
-RDEPENDS on or otherwise requires it)
-ERROR: No eligible RPROVIDERs exist for 'netmap'
-NOTE: Runtime target 'netmap' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['netmap']
-ERROR: Nothing RPROVIDES 'netmap-dev' (but
-/home/jenkins/oe/world/shr-core/meta-openembedded/meta-networking/recipes-k=
-ernel/netmap/netmap_git.bb
-RDEPENDS on or otherwise requires it)
-ERROR: No eligible RPROVIDERs exist for 'netmap-dev'
-NOTE: Runtime target 'netmap-dev' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['netmap-dev']
-
->=20
-> Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
+On Sun, Sep 25, 2016 at 08:54:45PM +0300, Vesa J=E4=E4skel=E4inen wrote:
+> Signed-off-by: Vesa J=E4=E4skel=E4inen <dachaac@gmail.com>
 > ---
->  ...0001-netmap-Rename-the-_conut-to-_recount.patch | 31 ++++++++++++++++=
-++++++
->  .../recipes-kernel/netmap/netmap-modules_git.bb    |  2 ++
->  .../recipes-kernel/netmap/netmap_git.bb            |  2 --
->  3 files changed, 33 insertions(+), 2 deletions(-)
->  create mode 100644 meta-networking/recipes-kernel/netmap/files/0001-netm=
-ap-Rename-the-_conut-to-_recount.patch
+>  conf/layer.conf | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> diff --git a/meta-networking/recipes-kernel/netmap/files/0001-netmap-Rena=
-me-the-_conut-to-_recount.patch b/meta-networking/recipes-kernel/netmap/fil=
-es/0001-netmap-Rename-the-_conut-to-_recount.patch
-> new file mode 100644
-> index 0000000..4a92a13
-> --- /dev/null
-> +++ b/meta-networking/recipes-kernel/netmap/files/0001-netmap-Rename-the-=
-_conut-to-_recount.patch
-> @@ -0,0 +1,31 @@
-> +From 3de3d534c0b85f2d0378f699160e1a026a7317a7 Mon Sep 17 00:00:00 2001
-> +From: Jianchuan Wang <jianchuan.wang@windriver.com>
-> +Date: Wed, 26 Oct 2016 03:11:27 -0400
-> +Subject: [PATCH] netmap: Rename the _conut to _recount
-> +
-> +Rename the _count into _refcount since Adjusting the member of
-> +struct page in the kernel v4.8.
-> +
-> +Upstream-Status: Submitted
-> +
-> +Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
-> +---
-> + LINUX/bsd_glue.h | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/LINUX/bsd_glue.h b/LINUX/bsd_glue.h
-> +index 9a116a0..8df6838 100644
-> +--- a/LINUX/bsd_glue.h
-> ++++ b/LINUX/bsd_glue.h
-> +@@ -130,7 +130,7 @@ struct net_device_ops {
-> + 	do {						  \
-> + 		int i_;					  \
-> + 		for (i_ =3D 1; i_ < (1 << (order)); i_++)	  \
-> +-			atomic_set(&(page)[i_]._count, 1);\
-> ++			atomic_set(&(page)[i_]._refcount, 1);\
-> + 	} while (0)
-> + #endif /* HAVE_SPLIT_PAGE */
-> +=20
-> +--=20
-> +2.8.1
-> +
-> diff --git a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb =
-b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-> index e9eea56..009f9bc 100644
-> --- a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-> +++ b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
-> @@ -44,6 +44,8 @@ python __anonymous () {
->  LDFLAGS :=3D "${@'${LDFLAGS}'.replace('-Wl,-O1', '')}"
->  LDFLAGS :=3D "${@'${LDFLAGS}'.replace('-Wl,--as-needed', '')}"
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index b7207e6..9220a75 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -27,5 +27,5 @@ LICENSE_PATH +=3D "${LAYERDIR}/licenses"
 > =20
-> +SRC_URI +=3D "file://0001-netmap-Rename-the-_conut-to-_recount.patch"
-> +
->  do_configure () {
->      cd ${S}/LINUX
->      ./configure ${EXTRA_OECONF}
-> diff --git a/meta-networking/recipes-kernel/netmap/netmap_git.bb b/meta-n=
-etworking/recipes-kernel/netmap/netmap_git.bb
-> index 667e7cc..a5bc57a 100644
-> --- a/meta-networking/recipes-kernel/netmap/netmap_git.bb
-> +++ b/meta-networking/recipes-kernel/netmap/netmap_git.bb
-> @@ -33,5 +33,3 @@ FILES_${PN} +=3D "${bindir}"
->  RDEPENDS_${PN} =3D "kernel-module-netmap"
->  RRECOMMENDS_${PN} =3D "kernel-module-netmap"
+>  IMAGE_FEATURES[validitems] +=3D "qtcreator-debug"
 > =20
-> -# http://errors.yoctoproject.org/Errors/Details/69733/
-> -PNBLACKLIST[netmap] ?=3D "BROKEN: Tries to build kernel module and fails=
-, either it should be disabled or there should be dependency on kernel like=
- in netmap-modules"
-> --=20
-> 2.7.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> -QT_GIT ?=3D "git://github.com/qtproject"
+> +QT_GIT ?=3D "git://github.com/qt"
+>  QT_GIT_PROTOCOL ?=3D "git"
+
+This isn't in master yet, so it cannot be applied in krogoth and it also
+breaks qt5everywheredemo fetch
+http://errors.yoctoproject.org/Errors/Details/93069/
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---zbGR4y+acU1DwHSi
+--imjhCm/Pyz7Rq5F2
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iEYEARECAAYFAlgQvTUACgkQN1Ujt2V2gBy0ngCfTR3mC4cbIY1eBhYM2SjJ0F9Q
-2asAn3Ou8HRPctD8cJh0yfphc4jo0QWl
-=rJTH
+iEYEARECAAYFAlgQvhoACgkQN1Ujt2V2gBzDXQCgiqp5fW4VPuUNzA8481fkbrNU
+b/YAnA9KQCqwb7LJsB30IKnLnBp/k/SV
+=JYd/
 -----END PGP SIGNATURE-----
 
---zbGR4y+acU1DwHSi--
+--imjhCm/Pyz7Rq5F2--
