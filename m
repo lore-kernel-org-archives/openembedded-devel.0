@@ -1,53 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id BFED760777
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 630B571998
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Oct 2016 08:33:16 +0000 (UTC)
-Received: by mail-wm0-f49.google.com with SMTP id b80so211057369wme.1
+	Wed, 26 Oct 2016 14:27:01 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id o81so3731700wma.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Oct 2016 01:33:18 -0700 (PDT)
+	Wed, 26 Oct 2016 07:27:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=vuEwDCh1u4zcbN2TchrbmP+TbUAfQLBeCcsoKFfRF2Y=;
-	b=bF6a0WCVKgo/q/VlBk0jr9zBumSDXjJh8YnD6t/Z/Q5qoB8F1k9chGXJsCjWbEtmrv
-	/S7tVaa7vKTvmsLqRC6hbd8NjWk5TdKHkPl9P7X2brhhxB4Vbh3/zd2K9ZBNgbAmAtfT
-	NrdHxeHjNyN1sQdpQMvh1r7wnaBXtgfDYYgSiWX8zCTSuQZ4VMwS+jVt0ldXcSvbv3Mm
-	zDmwtcMnAb067CwuAqzefLDc6lU8thuzZto5ErLkwiFG0ytNlDxLlr77z4BsmjZm1R52
-	HY7AITEdJ7B8ISM31t7QBzw7yb4Sg5SQBYX/Ufo1tnt5poGO+pJiW3edAJYkUA3q3p4G
-	oaRQ==
+	bh=JHV9qUHti0PfuE3foykVdF2jkEj9F81lFT3yf1tLki4=;
+	b=QdwMN9tp7RwMePccx19WI3JWZtFZMZHF4T4oGkdM+X8+u9IarR6aCLgGua0YtkXRf0
+	u9O35o6DI0PNQBXDUWiGYIWT9QEF+wfHS2uM88uxL9/R6zDpL5Z8fIRwDXXYPih60HKF
+	6anMga3O8xDqHs3SrrCvMfPPrfosHIZGZ/rAQ2Lg1eE1HGXsA//iJn1QzMNvyYqAUnf0
+	GimQgI9e/mdxWOfGxGyRRs79n+GPtnCKiNPbC596WTgisiapyFY1GbZUqDNwmuuB9XRx
+	VLkSNXDsGJc817+JQ+3lU4SvOE3OZhuenh4dm0QjQ7Ohh34q4vfaGxTOKhG9ZUFOPNqk
+	ZN4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	h=x-gm-message-state:from:date:to:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=vuEwDCh1u4zcbN2TchrbmP+TbUAfQLBeCcsoKFfRF2Y=;
-	b=bC/HYkpir3iROXM9rHMvPPUSueVpXWdpbQb8acb/cn1ZAHHgyowEwYBnVJ1+F3y0wr
-	+N+uJlUa32mw0ejx8Pk/oivU/7bwUhkEGlrVyMQwBN7fXJPEZZPsqUrfeXvgD8r57w36
-	VgnjBqIdNNoCJxTEixK9l/3pvaxCfpJFGBN3lDlKK5Fu/RBfY2wYMCezdAOQsxecyfn/
-	wmg+s1AZPUlksS9GgEJxfql8pmkaeei9Maeu9Pdl8nv/sY7h00ybT4z5uKvx8Tr03j10
-	wdmNw9dtTJIh7gXFW/tP3bQ/WmFXOIvIGsojOPpG44vIOEH+bNhu5ItlKzTelZJSqtc+
-	cmUg==
-X-Gm-Message-State: ABUngve3SFhqVtmhjBFeHauURG9nLerCheqtlRwV8N1r99nWoQP32APpeUTnjbNYp/DOBQ==
-X-Received: by 10.194.201.103 with SMTP id jz7mr1213319wjc.70.1477470796124;
-	Wed, 26 Oct 2016 01:33:16 -0700 (PDT)
+	bh=JHV9qUHti0PfuE3foykVdF2jkEj9F81lFT3yf1tLki4=;
+	b=Q+F2D5w73Tv+UO6xfYgbdzmNJroBwsfoHylXogWk2aWooZRJD2O1XQN+uxCt1LOA2I
+	tDhBwe/qXbly/cEcXDRfDcyeBdlPBk2+3VqmC3hH1KxExl56fXCfJ9qWDviGmFCHroXj
+	UJkgZSvw/mHCgrMtyLrfZtP3AG5tz8/fHmaXDj00zZ49vC2hwNxsnYiI15kKPCzN7S6X
+	aj6ZQipceyrUZXi1p9Mwf1XotBdca87byAKX1t5iW6dDhXD1zgtGGcIu4IP/7UTJFky7
+	cTZ5ZO8bNOEXTEZIYh8kVf9Gc6MAuFZwx0ZA1MCm+z8hLe4jcLgwDpVBR9I1aS6cD65U
+	DtrA==
+X-Gm-Message-State: ABUngvez6McXiwK6+jpJ+ZFGExBzAxIe7aR+otpXHWAUdgwNu4Pvmtu1EMtNKRJVm7Zg9g==
+X-Received: by 10.194.80.74 with SMTP id p10mr2469928wjx.121.1477492022575;
+	Wed, 26 Oct 2016 07:27:02 -0700 (PDT)
 Received: from localhost (ip-89-176-50-133.net.upcbroadband.cz.
-	[89.176.50.133])
-	by smtp.gmail.com with ESMTPSA id m5sm1714582wmd.17.2016.10.26.01.33.15
+	[89.176.50.133]) by smtp.gmail.com with ESMTPSA id
+	x127sm9887428wmd.21.2016.10.26.07.27.01
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 26 Oct 2016 01:33:15 -0700 (PDT)
+	Wed, 26 Oct 2016 07:27:01 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 26 Oct 2016 10:33:16 +0200
-To: akuster808 <akuster808@gmail.com>
-Message-ID: <20161026083316.GB4096@jama>
-References: <9278bc38-73d6-8593-aee4-ee981eb62b7c@windriver.com>
-	<1960865a-ab12-9dd5-84ff-5dfac53fd36a@gmail.com>
+Date: Wed, 26 Oct 2016 16:27:02 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20161026142702.GD4096@jama>
+References: <1477469034-23992-1-git-send-email-jianchuan.wang@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <1960865a-ab12-9dd5-84ff-5dfac53fd36a@gmail.com>
+In-Reply-To: <1477469034-23992-1-git-send-email-jianchuan.wang@windriver.com>
 User-Agent: Mutt/1.7.1 (2016-10-04)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: OE plans for morty
+Subject: Re: [PATCH] netmap: Rename the _count to _recount for kernel v4.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,160 +58,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Oct 2016 08:33:18 -0000
-X-Groupsio-MsgNum: 63611
+X-List-Received-Date: Wed, 26 Oct 2016 14:27:02 -0000
+X-Groupsio-MsgNum: 63612
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="b5gNqxB1S1yM7hjW"
+	protocol="application/pgp-signature"; boundary="zbGR4y+acU1DwHSi"
 Content-Disposition: inline
 
---b5gNqxB1S1yM7hjW
+--zbGR4y+acU1DwHSi
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 24, 2016 at 07:07:55PM -0700, akuster808 wrote:
-> Randy,
+On Wed, Oct 26, 2016 at 04:03:54PM +0800, jianchuan.wang@windriver.com wrot=
+e:
+> From: Jianchuan Wang <jianchuan.wang@windriver.com>
 >=20
->=20
-> On 10/24/2016 05:51 PM, Randy MacLeod wrote:
-> >
-> >
-> > I saw that morty has been branched and there have been 38 commits
-> > made to master.  Woo-hoo and thanks Martin!
->=20
->=20
-> >
-> > Armin,
-> >
-> > Many of the master commits sh/could be cherry-picked back
-> > to morty since they are bug fixes rather than package uprevs.
-> > I have a list of commits to cherry-pick below. '?' indicates
-> > that I'm not sure from the oneline summary if it's just a bug
-> > fix as you might expect.
->=20
-> Thanks for providing commit ids you are interested in.
->=20
-> I have pushed the contrib morty-next  this morning.
->=20
-> http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=3Dakuster/m=
-orty-next
+> Rename the _count to _recount since Adjusting the member of struct page
+> in the kernel v4.8
 
-What about using current master (I've pushed bunch of commits today) +
-hopefully following in meta-networking which should be pushed by Joe
-(currently waiting in master-next):
+Did you forgot to unblacklist netmap-modules?
 
-pick 2c1d637 linux-atm: fix do_compile error
-pick bfb71d5 lowpan-tools: Fix errors found with clang
-pick 944cd7a openl2tp: Fix build with clang
-pick 9641512 libmnl, nftables: Update versions
-pick 8303d85 c-ares: update 1.11.0 -> 1.12.0
-pick 36c563d c-ares: fix metadata
-pick 7552201 lksctp-tools: 1.0.16 -> 1.0.17
-pick a0fcdac drbd-utils: 8.9.3 -> 8.9.6
+ERROR: Nothing PROVIDES 'netmap-modules' (but
+/home/jenkins/oe/world/shr-core/meta-openembedded/meta-networking/recipes-k=
+ernel/netmap/netmap_git.bb
+DEPENDS on or otherwise requires it)
+ERROR: netmap-modules was skipped: Recipe is blacklisted: BROKEN: not
+compatible with default kernel version 4.8
+ERROR: Nothing RPROVIDES 'netmap' (but
+/home/jenkins/oe/world/shr-core/meta-openembedded/meta-networking/recipes-k=
+ernel/netmap/netmap_git.bb
+RDEPENDS on or otherwise requires it)
+ERROR: No eligible RPROVIDERs exist for 'netmap'
+NOTE: Runtime target 'netmap' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['netmap']
+ERROR: Nothing RPROVIDES 'netmap-dev' (but
+/home/jenkins/oe/world/shr-core/meta-openembedded/meta-networking/recipes-k=
+ernel/netmap/netmap_git.bb
+RDEPENDS on or otherwise requires it)
+ERROR: No eligible RPROVIDERs exist for 'netmap-dev'
+NOTE: Runtime target 'netmap-dev' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['netmap-dev']
 
-This gives us almost clean bitbake world status I've sent few minutes
-ago.
-
-I haven't merged the README update to morty yet, so we can do this sync
-with master as fast forward (and continue to do so until there is fist
-master-only change merged in master).
-
-Regards,
-
-> > Are you going to do a dot release in the coming weeks or will
-> > it be more like early next year?
 >=20
-> I am hoping to do a pull request request shortly after morty is=20
-> announced by Richard.
+> Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
+> ---
+>  ...0001-netmap-Rename-the-_conut-to-_recount.patch | 31 ++++++++++++++++=
+++++++
+>  .../recipes-kernel/netmap/netmap-modules_git.bb    |  2 ++
+>  .../recipes-kernel/netmap/netmap_git.bb            |  2 --
+>  3 files changed, 33 insertions(+), 2 deletions(-)
+>  create mode 100644 meta-networking/recipes-kernel/netmap/files/0001-netm=
+ap-Rename-the-_conut-to-_recount.patch
 >=20
-> Some of the commits listed below are in master-next so I need to wait=20
-> for them to hit master before I  cherry-pick any additional changes.
+> diff --git a/meta-networking/recipes-kernel/netmap/files/0001-netmap-Rena=
+me-the-_conut-to-_recount.patch b/meta-networking/recipes-kernel/netmap/fil=
+es/0001-netmap-Rename-the-_conut-to-_recount.patch
+> new file mode 100644
+> index 0000000..4a92a13
+> --- /dev/null
+> +++ b/meta-networking/recipes-kernel/netmap/files/0001-netmap-Rename-the-=
+_conut-to-_recount.patch
+> @@ -0,0 +1,31 @@
+> +From 3de3d534c0b85f2d0378f699160e1a026a7317a7 Mon Sep 17 00:00:00 2001
+> +From: Jianchuan Wang <jianchuan.wang@windriver.com>
+> +Date: Wed, 26 Oct 2016 03:11:27 -0400
+> +Subject: [PATCH] netmap: Rename the _conut to _recount
+> +
+> +Rename the _count into _refcount since Adjusting the member of
+> +struct page in the kernel v4.8.
+> +
+> +Upstream-Status: Submitted
+> +
+> +Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
+> +---
+> + LINUX/bsd_glue.h | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/LINUX/bsd_glue.h b/LINUX/bsd_glue.h
+> +index 9a116a0..8df6838 100644
+> +--- a/LINUX/bsd_glue.h
+> ++++ b/LINUX/bsd_glue.h
+> +@@ -130,7 +130,7 @@ struct net_device_ops {
+> + 	do {						  \
+> + 		int i_;					  \
+> + 		for (i_ =3D 1; i_ < (1 << (order)); i_++)	  \
+> +-			atomic_set(&(page)[i_]._count, 1);\
+> ++			atomic_set(&(page)[i_]._refcount, 1);\
+> + 	} while (0)
+> + #endif /* HAVE_SPLIT_PAGE */
+> +=20
+> +--=20
+> +2.8.1
+> +
+> diff --git a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb =
+b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
+> index e9eea56..009f9bc 100644
+> --- a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
+> +++ b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
+> @@ -44,6 +44,8 @@ python __anonymous () {
+>  LDFLAGS :=3D "${@'${LDFLAGS}'.replace('-Wl,-O1', '')}"
+>  LDFLAGS :=3D "${@'${LDFLAGS}'.replace('-Wl,--as-needed', '')}"
+> =20
+> +SRC_URI +=3D "file://0001-netmap-Rename-the-_conut-to-_recount.patch"
+> +
+>  do_configure () {
+>      cd ${S}/LINUX
+>      ./configure ${EXTRA_OECONF}
+> diff --git a/meta-networking/recipes-kernel/netmap/netmap_git.bb b/meta-n=
+etworking/recipes-kernel/netmap/netmap_git.bb
+> index 667e7cc..a5bc57a 100644
+> --- a/meta-networking/recipes-kernel/netmap/netmap_git.bb
+> +++ b/meta-networking/recipes-kernel/netmap/netmap_git.bb
+> @@ -33,5 +33,3 @@ FILES_${PN} +=3D "${bindir}"
+>  RDEPENDS_${PN} =3D "kernel-module-netmap"
+>  RRECOMMENDS_${PN} =3D "kernel-module-netmap"
+> =20
+> -# http://errors.yoctoproject.org/Errors/Details/69733/
+> -PNBLACKLIST[netmap] ?=3D "BROKEN: Tries to build kernel module and fails=
+, either it should be disabled or there should be dependency on kernel like=
+ in netmap-modules"
+> --=20
+> 2.7.4
 >=20
-> Hope this is a satisfactory plan.
->=20
->=20
-> regards,
-> Armin
->=20
-> >
-> > ../Randy
-> >
-> > ec0fb46 openldap: use recommended backend mdb
-> >
-> > ? 64ebc30 android-tools: fix native build
-> > d2902a3 dhcp_%.bbappend: fix replaces original key warning
-> >
-> > ? 965d028 python-unidiff: python module for parsing diff data
-> >
-> > ? 1be8a35 joe: Fix build with clang
-> > ? 2084473 openl2tp: Fix build with clang
-> > ? 0004410 flashrom: Fix build with clang and aarch64
-> > ? 83fec86 gpm: Remove nested functions
-> > ? 9446302 lowpan-tools: Fix errors found with clang
-> >
-> > ? 5e0dc68 python-greenlet: Rename register from rX to xX for aarch64
-> > ? d8e9117 frame: Fix build with clang
-> > ? 612b2bb libplist: Squash warnings found by clang
-> > ? 2951547 libmbim: Fix build with clang
-> > ? c04bdbe libbonobo: Fix missing dep on orbit2-native and build with=20
-> > clang
-> >
-> > 6b3e9ff linux-atm: fix do_compile error
-> >
-> > ? 9a83c34 adduser: always add -M option for useradd
-> >
-> > ? da12104 v4l-utils: add support for "native" build
-> >
-> >
-> > cfe1fba postgresql.inc: Fix do_configure error (could not find Python.h)
-> >
-> >
-> > ? 8ba31c9 gpsd, mongodb: use PACKAGECONFIG_CONFARGS instead of now=20
-> > empty EXTRA_OECONF
-> > ? f882db6 ipmiutil: uncomment PARALLEL_MAKE
-> >
-> > ? 54c7e78 pcsc-lite: Seperate GPLV3 portions from BSD
-> > fded4cf opencv: fix packaging and install
-> >
-> >
-> > 1c072cb gvfs: fix fetch error
-> > ? 0cc3d06 leptonica: add PACKAGECONFIG for giflib
-> > ? 8eef5ab wireshark: update to 2.2.1
-> >
-> > ? 812e940 ntp : Add openssl to default PACKAGECONFIG options
-> > ? 8760099 atftp: fixes musl libc build
-> > ? 5abe6ea arptables: add the directory for default=20
-> > /etc/sysconfig/arptables
-> > ? a0e2240 arptables: add arptables systemd service file
-> > 93b0d65 iscsitarget: resolve build error with linux kernel 4.8
-> > 9e8d127 squid: fix ptest failure
-> > 6f54f29 squid: specify sysconfdir and logdir
-> > 307d1c9 libtdb: fixes for deterministic builds
-> > 5175c03 libldb: fixes for deterministic builds
-> > 5291715 libtevent: fixes for deterministic builds
-> > 778a2b6 libtalloc: fixes for deterministic builds
-> > fe652f8 libldb: fix for LIC_FILES_CHKSUM
-> > f25aa3d libtdb: fix for LIC_FILES_CHKSUM
-> > d4a36f6 libtevent: fix for LIC_FILES_CHKSUM
-> > 0014397 libtalloc: fix for LIC_FILES_CHKSUM
-> >
-> > a95726d samba: replace pam packageconfig by hard dependency
-> > 3fdfdd8 samba: un-blacklist
-> >
->=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---b5gNqxB1S1yM7hjW
+--zbGR4y+acU1DwHSi
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iEYEARECAAYFAlgQaksACgkQN1Ujt2V2gBzDngCfYjC5ipX46TafNFotDqBEKGLv
-zOAAn3t3ZBNJVx1+UFnxuG/9pb+/40uD
-=5/0H
+iEYEARECAAYFAlgQvTUACgkQN1Ujt2V2gBy0ngCfTR3mC4cbIY1eBhYM2SjJ0F9Q
+2asAn3Ou8HRPctD8cJh0yfphc4jo0QWl
+=rJTH
 -----END PGP SIGNATURE-----
 
---b5gNqxB1S1yM7hjW--
+--zbGR4y+acU1DwHSi--
