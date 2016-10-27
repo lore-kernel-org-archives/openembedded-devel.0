@@ -1,31 +1,36 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E8D16FFCE
+Return-Path: <Sam.Lin@emerson.com>
+X-Greylist: delayed 579 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 27 Oct 2016 18:58:46 UTC
+Received: from esa5.emerson-outbound.iphmx.com
+	(esa5.emerson-outbound.iphmx.com [68.232.143.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 693EC601F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Oct 2016 17:02:38 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 7750E20863;
-	Thu, 27 Oct 2016 17:02:38 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id mF82ydQRmDRr; Thu, 27 Oct 2016 17:02:38 +0000 (UTC)
-Received: from gandalf.denix.org (pool-100-15-106-107.washdc.fios.verizon.net
-	[100.15.106.107])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4DE9F201FD;
-	Thu, 27 Oct 2016 17:02:36 +0000 (UTC)
-Received: from sam.denix (sam [192.168.0.5])
-	by gandalf.denix.org (Postfix) with ESMTP id 82C43162173;
-	Thu, 27 Oct 2016 13:02:35 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Oct 2016 13:02:35 -0400
-Message-Id: <1477587755-24666-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Cc: Ian Ray <ian.ray@ge.com>, Denys Dmytriyenko <denys@ti.com>
-Subject: [meta-oe][krogoth][PATCH] syslog-ng: expand service file @variables@ earlier
+	Thu, 27 Oct 2016 18:58:46 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.31,553,1473120000"; d="scan'208,217";a="42682055"
+Received: from usstlz-pinfez05.extemr.org ([144.191.128.189])
+	by esa5.emerson-outbound.iphmx.com with ESMTP/TLS/AES128-SHA;
+	27 Oct 2016 18:49:08 +0000
+Received: from USSTLZ-PMSG008.emrsn.org (10.16.72.190) by mail.emerson.com
+	(10.16.8.78) with Microsoft SMTP Server (TLS) id 14.3.224.2;
+	Thu, 27 Oct 2016 18:50:38 +0000
+Received: from USSTLZ-PMSG007.emrsn.org ([169.254.2.244]) by
+	USSTLZ-PMSG008.emrsn.org ([169.254.3.181]) with mapi id 14.03.0224.002;
+	Thu, 27 Oct 2016 18:49:08 +0000
+From: <Sam.Lin@Emerson.com>
+To: <openembedded-devel@lists.openembedded.org>
+Thread-Topic: Question for Krogoth mongodb (3.3.0+gitX) recipe
+Thread-Index: AdIwZETSdSFRtkY6Qb+nCAx21YxrCQACFt1AAAWJBoA=
+Date: Thu, 27 Oct 2016 18:49:07 +0000
+Message-ID: <63F070ED13CF484B8FBF261782095790B773B606@USSTLZ-PMSG007.emrsn.org>
+References: <63F070ED13CF484B8FBF261782095790B773B3CF@USSTLZ-PMSG007.emrsn.org>
+In-Reply-To: <63F070ED13CF484B8FBF261782095790B773B3CF@USSTLZ-PMSG007.emrsn.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.19.249.11]
+MIME-Version: 1.0
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: Question for Krogoth mongodb (3.3.0+gitX) recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,48 +43,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Oct 2016 17:02:39 -0000
+X-List-Received-Date: Thu, 27 Oct 2016 18:58:48 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-From: Ian Ray <ian.ray@ge.com>
+Hi,
 
-Move variable expansion of @SBINDIR@, @LOCALSTATEDIR@, and @BASEBINDIR@
-earlier during install, to before the systemd service file is installed
-by an automake rule.
+For Krogoth mongodb 3.3.0+gitX recipe, it only can build "mongod" (database=
+ process) and "mongos" (sharding controller) components but missing "mongo"=
+ database shell. Please refer to https://github.com/mongodb/mongo/blob/mast=
+er/README#L9  I am curious that will mongodb recipe support "mongo" databas=
+e shell in future?
 
-Signed-off-by: Ian Ray <ian.ray@ge.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
-
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-index 4e0f697..898e9c2 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-@@ -60,6 +60,12 @@ do_configure_prepend() {
-     eval "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
- }
- 
-+do_install_prepend() {
-+    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
-+    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
-+    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
-+}
-+
- do_install_append() {
-     install -d ${D}/${sysconfdir}/${BPN}
-     install ${WORKDIR}/syslog-ng.conf ${D}${sysconfdir}/${BPN}/${BPN}.conf
-@@ -70,9 +76,6 @@ do_install_append() {
-     install -d ${D}/${localstatedir}/lib/${BPN}
-     # Remove /var/run as it is created on startup
-     rm -rf ${D}${localstatedir}/run
--    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
--    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
--    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
- }
- 
- FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
--- 
-2.7.4
-
+Thanks,
+Sam Lin
 
