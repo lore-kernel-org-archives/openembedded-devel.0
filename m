@@ -1,43 +1,24 @@
-Return-Path: <ian@boundarydevices.com>
-Received: from mail-qk0-f180.google.com (mail-qk0-f180.google.com
-	[209.85.220.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 803A5719EC
+Return-Path: <joe.slater@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EC0A260746
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Oct 2016 15:53:16 +0000 (UTC)
-Received: by mail-qk0-f180.google.com with SMTP id z190so51437132qkc.2
+	Thu, 27 Oct 2016 16:48:43 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u9RGmiqj004228
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Oct 2016 08:53:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=boundarydevices-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=VIhQliiTjiXk8P7UDVdHVm/yt4N4yGnMaoZHAea7EYo=;
-	b=VzFIyj5ZoiES4XGlrwe9zvgx6evZ1a1htjAUHoUDmKJuSa6o2tpwXRkpJ+7VIl6Aqi
-	mZxG4GFnP+uFf5b8T4qkyZuQW38HoBGxyxRGeMtJrvJ2BkRFxB7mUP0gV52S7sTV1V/s
-	+XI6qejqIDVo2m8kk3QK19oD+PRU3LcJqWt7NVlmXCE+dPXDGZ95837iTHFSICtavo5v
-	kwkCV4Ln6YYMgGcUrF0EjJdGQ0h9AzYs60AWC9MNrqHMzVbAPyj6JOEppZLPPNs7WL+r
-	hC9YZaAc2KEbfEu/gdlN2bzKWsPhJfAlstZ8xcyipl9hdlufFMcYH8Qmaz+GmIxenaLa
-	gSVA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=VIhQliiTjiXk8P7UDVdHVm/yt4N4yGnMaoZHAea7EYo=;
-	b=Sct66FUf80sEg/LyNUu+AvT15tpBgdpcKuEEnnK/jL0CyFgYCDonyJRV2MZ+Guuem/
-	SB7CnYSrprwxnA+htEc3r15DdTtXptBcnc23qwRfU1Nw7UM++uyawh6lYVosXRoIi3qP
-	LWlNjN7c/AEJwwCJ0GupZPkiMRGpB3lIKl4ZlrYh5Pl9vOphiAGGulqDm4ShL03ZT8WO
-	R8MX1wGHFbUw7XN9bv5O/DfghcpQVXZF5cZaB5NpXondPjLqv7fSz3iDGvxTXxw1kdY/
-	wkeAW/F35AKllYs2pdwdizDvpx4gZeNoVZZEpMaqZleneINsd2UcqXY7bt457VU9u2SN
-	5Dag==
-X-Gm-Message-State: ABUngvcsHCn30qQrZ7DNLfnR0YnU6m3XjZRV+EXKZKaZDguxdy0cHi2R8WUGy2yVUBXMmAxgh4jQGfzkPaRsXQ==
-X-Received: by 10.55.203.25 with SMTP id d25mr7816683qkj.240.1477583598220;
-	Thu, 27 Oct 2016 08:53:18 -0700 (PDT)
+	Thu, 27 Oct 2016 09:48:44 -0700
+Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.294.0; Thu, 27 Oct 2016 09:48:43 -0700
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 27 Oct 2016 09:48:43 -0700
+Message-ID: <1477586923-32487-1-git-send-email-jslater@windriver.com>
+X-Mailer: git-send-email 1.7.3.4
 MIME-Version: 1.0
-Received: by 10.12.136.173 with HTTP; Thu, 27 Oct 2016 08:53:17 -0700 (PDT)
-From: Ian Coolidge <ian@boundarydevices.com>
-Date: Thu, 27 Oct 2016 08:53:17 -0700
-Message-ID: <CADseiPkafvnNWo3pyhjPfjj-05ssn_UepHd7z8NKvCYk_PdBAg@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-browser] chromium-wayland touch not working
+Subject: [meta-openembedded][PATCH 1/1] apache2: cve-2016-5387
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,16 +31,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Oct 2016 15:53:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 27 Oct 2016 16:48:48 -0000
+Content-Type: text/plain
 
-Hi All,
+Handle HTTP_PROXY envirnoment variable.
 
-I've built essentially core-image-weston with chromium-wayland on Yocto
-Krogoth and touch isn't working on the chromium browser. Is there some
-setting or configuration I'm missing? Touch is working just fine on the
-wayland desktop, just not on chromium-wayland.
+Signed-off-by: Joe Slater <jslater@windriver.com>
+---
+ .../apache2/apache2/cve-2016-5387.patch            |   25 ++++++++++++++++++++
+ .../recipes-httpd/apache2/apache2_2.4.23.bb        |    1 +
+ 2 files changed, 26 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch
 
-Thanks for any help!
--Ian
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch b/meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch
+new file mode 100644
+index 0000000..dbcdfc6
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch
+@@ -0,0 +1,25 @@
++This patch has been copied from https://www.apache.org/security/asf-httpoxy-response.txt
++as a mitigation of CVE-2016-5387.
++
++Upstream-Status: Backport - fixed in 2.4.24
++
++Signed-off-by: Joe Slater<jslater@windriver.com>
++
++
++--- a/server/util_script.c	(revision 1752426)
+++++ b/server/util_script.c	(working copy)
++@@ -186,6 +186,14 @@ AP_DECLARE(void) ap_add_common_vars(request_rec *r
++         else if (!strcasecmp(hdrs[i].key, "Content-length")) {
++             apr_table_addn(e, "CONTENT_LENGTH", hdrs[i].val);
++         }
+++        /* HTTP_PROXY collides with a popular envvar used to configure
+++         * proxies, don't let clients set/override it.  But, if you must...
+++         */
+++#ifndef SECURITY_HOLE_PASS_PROXY
+++        else if (!strcasecmp(hdrs[i].key, "Proxy")) {
+++            ;
+++        }
+++#endif
++         /*
++          * You really don't want to disable this check, since it leaves you
++          * wide open to CGIs stealing passwords and people viewing them
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
+index be24998..7656595 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
+@@ -17,6 +17,7 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
+            file://httpd-2.4.3-fix-race-issue-of-dir-install.patch \
+            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
+            file://configure-allow-to-disable-selinux-support.patch \
++           file://cve-2016-5387.patch \
+            file://init \
+            file://apache2-volatile.conf \
+            file://apache2.service \
+-- 
+1.7.9.5
+
 
