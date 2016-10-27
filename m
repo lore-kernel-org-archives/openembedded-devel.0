@@ -1,24 +1,31 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EC0A260746
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E8D16FFCE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Oct 2016 16:48:43 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u9RGmiqj004228
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Oct 2016 09:48:44 -0700
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Thu, 27 Oct 2016 09:48:43 -0700
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 27 Oct 2016 09:48:43 -0700
-Message-ID: <1477586923-32487-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
-MIME-Version: 1.0
-Subject: [meta-openembedded][PATCH 1/1] apache2: cve-2016-5387
+	Thu, 27 Oct 2016 17:02:38 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 7750E20863;
+	Thu, 27 Oct 2016 17:02:38 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id mF82ydQRmDRr; Thu, 27 Oct 2016 17:02:38 +0000 (UTC)
+Received: from gandalf.denix.org (pool-100-15-106-107.washdc.fios.verizon.net
+	[100.15.106.107])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 4DE9F201FD;
+	Thu, 27 Oct 2016 17:02:36 +0000 (UTC)
+Received: from sam.denix (sam [192.168.0.5])
+	by gandalf.denix.org (Postfix) with ESMTP id 82C43162173;
+	Thu, 27 Oct 2016 13:02:35 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 27 Oct 2016 13:02:35 -0400
+Message-Id: <1477587755-24666-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Cc: Ian Ray <ian.ray@ge.com>, Denys Dmytriyenko <denys@ti.com>
+Subject: [meta-oe][krogoth][PATCH] syslog-ng: expand service file @variables@ earlier
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,62 +38,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Oct 2016 16:48:48 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 27 Oct 2016 17:02:39 -0000
 
-Handle HTTP_PROXY envirnoment variable.
+From: Ian Ray <ian.ray@ge.com>
 
-Signed-off-by: Joe Slater <jslater@windriver.com>
+Move variable expansion of @SBINDIR@, @LOCALSTATEDIR@, and @BASEBINDIR@
+earlier during install, to before the systemd service file is installed
+by an automake rule.
+
+Signed-off-by: Ian Ray <ian.ray@ge.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- .../apache2/apache2/cve-2016-5387.patch            |   25 ++++++++++++++++++++
- .../recipes-httpd/apache2/apache2_2.4.23.bb        |    1 +
- 2 files changed, 26 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch
+ meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch b/meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch
-new file mode 100644
-index 0000000..dbcdfc6
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch
-@@ -0,0 +1,25 @@
-+This patch has been copied from https://www.apache.org/security/asf-httpoxy-response.txt
-+as a mitigation of CVE-2016-5387.
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+index 4e0f697..898e9c2 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+@@ -60,6 +60,12 @@ do_configure_prepend() {
+     eval "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
+ }
+ 
++do_install_prepend() {
++    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
++    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
++    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
++}
 +
-+Upstream-Status: Backport - fixed in 2.4.24
-+
-+Signed-off-by: Joe Slater<jslater@windriver.com>
-+
-+
-+--- a/server/util_script.c	(revision 1752426)
-++++ b/server/util_script.c	(working copy)
-+@@ -186,6 +186,14 @@ AP_DECLARE(void) ap_add_common_vars(request_rec *r
-+         else if (!strcasecmp(hdrs[i].key, "Content-length")) {
-+             apr_table_addn(e, "CONTENT_LENGTH", hdrs[i].val);
-+         }
-++        /* HTTP_PROXY collides with a popular envvar used to configure
-++         * proxies, don't let clients set/override it.  But, if you must...
-++         */
-++#ifndef SECURITY_HOLE_PASS_PROXY
-++        else if (!strcasecmp(hdrs[i].key, "Proxy")) {
-++            ;
-++        }
-++#endif
-+         /*
-+          * You really don't want to disable this check, since it leaves you
-+          * wide open to CGIs stealing passwords and people viewing them
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-index be24998..7656595 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-@@ -17,6 +17,7 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://httpd-2.4.3-fix-race-issue-of-dir-install.patch \
-            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
-            file://configure-allow-to-disable-selinux-support.patch \
-+           file://cve-2016-5387.patch \
-            file://init \
-            file://apache2-volatile.conf \
-            file://apache2.service \
+ do_install_append() {
+     install -d ${D}/${sysconfdir}/${BPN}
+     install ${WORKDIR}/syslog-ng.conf ${D}${sysconfdir}/${BPN}/${BPN}.conf
+@@ -70,9 +76,6 @@ do_install_append() {
+     install -d ${D}/${localstatedir}/lib/${BPN}
+     # Remove /var/run as it is created on startup
+     rm -rf ${D}${localstatedir}/run
+-    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
+-    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
+-    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
+ }
+ 
+ FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
 -- 
-1.7.9.5
+2.7.4
 
 
