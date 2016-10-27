@@ -1,55 +1,43 @@
-Return-Path: <dachaac@gmail.com>
-Received: from mail-lf0-f65.google.com (mail-lf0-f65.google.com
-	[209.85.215.65])
-	by mail.openembedded.org (Postfix) with ESMTP id C55A871A90
+Return-Path: <ian@boundarydevices.com>
+Received: from mail-qk0-f180.google.com (mail-qk0-f180.google.com
+	[209.85.220.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 803A5719EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Oct 2016 17:31:08 +0000 (UTC)
-Received: by mail-lf0-f65.google.com with SMTP id x23so575344lfi.1
+	Thu, 27 Oct 2016 15:53:16 +0000 (UTC)
+Received: by mail-qk0-f180.google.com with SMTP id z190so51437132qkc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Oct 2016 10:31:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=Rbyx0igRdu+SeAAyv5NNnECJGI8dzMXoI2KgrL8JlB8=;
-	b=IwQtoGTmoKxnjO3SA2d/orccvbPOE1RPMH10tCqT0SshKr8EYSuJFfKQtBG9KXjHK7
-	9yAAP9mv8kJYZr3PYXgUD4Zo5h+tgBl59eqjN6th3WMSXbLW+j2/vDCatzclGlnFuGN4
-	qpXXk/68jfkiNSsIB8JYR3wam4s14j6lMa1+h6CGRO0lN4utfxM5WCfGKpufPR/gWcC6
-	Ds0mRDSFfpaPuf11GS1GMX023MUVayJ26dEdx8f2dpl9Qre3Uc6xLqwa+N9eg77E3R9P
-	ffZUWjQhpwnpmkRzcm7QLOsZ9Bm32iv23Fr4HNi63LObtfJKU2021KDgT1ffVJUXO+uh
-	k6/g==
+	Thu, 27 Oct 2016 08:53:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=boundarydevices-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=VIhQliiTjiXk8P7UDVdHVm/yt4N4yGnMaoZHAea7EYo=;
+	b=VzFIyj5ZoiES4XGlrwe9zvgx6evZ1a1htjAUHoUDmKJuSa6o2tpwXRkpJ+7VIl6Aqi
+	mZxG4GFnP+uFf5b8T4qkyZuQW38HoBGxyxRGeMtJrvJ2BkRFxB7mUP0gV52S7sTV1V/s
+	+XI6qejqIDVo2m8kk3QK19oD+PRU3LcJqWt7NVlmXCE+dPXDGZ95837iTHFSICtavo5v
+	kwkCV4Ln6YYMgGcUrF0EjJdGQ0h9AzYs60AWC9MNrqHMzVbAPyj6JOEppZLPPNs7WL+r
+	hC9YZaAc2KEbfEu/gdlN2bzKWsPhJfAlstZ8xcyipl9hdlufFMcYH8Qmaz+GmIxenaLa
+	gSVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=Rbyx0igRdu+SeAAyv5NNnECJGI8dzMXoI2KgrL8JlB8=;
-	b=hdgqbE7VHuNB4wlihAw2wjLKB2MRRABNzcu2ej24zmZAGZDNBE9+Zh6OVG9E88JTLc
-	8YKv+bf1ZivK6mQzxj/iqhz2s9OWwM0k3BFDk5VxXTsnKuf7Uw9E42E7M0TFfo98Bq/Q
-	7FqtNU3EIzk3fkr1h1xIB4duqTjagLMk7x3bgrNOd7yHWLn9nQTa+ZGNReY0PDoNzkUk
-	4E28hx2US4C/s4Ken5VMQSErMAnPXRmQ9BRKLCvRhmSRX2z6KGXW9d/Bd6R0o7BG1cuz
-	+m9O4ZG3j7gneVrUW6rbWD5aTtVtycfaZ8FSGFNuS8atZk9Y2HiSuc2bLMEitRR5Ige1
-	v4Pw==
-X-Gm-Message-State: ABUngvctks50icPe2AvpOzjYH5h55FyhAgpIlKykUTcDqnJNZmtgX0dwbscrjQu6gpZkPw==
-X-Received: by 10.25.195.209 with SMTP id t200mr2983077lff.172.1477503069060; 
-	Wed, 26 Oct 2016 10:31:09 -0700 (PDT)
-Received: from ?IPv6:2001:14ba:80fe:4000:55d3:44f1:376f:fc7f?
-	(dtd-fyyc16qcscq7s-v-t-3.rev.dnainternet.fi.
-	[2001:14ba:80fe:4000:55d3:44f1:376f:fc7f])
-	by smtp.googlemail.com with ESMTPSA id
-	e38sm562688lji.38.2016.10.26.10.31.08
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Oct 2016 10:31:08 -0700 (PDT)
-To: openembedded-devel@lists.openembedded.org
-References: <1474826085-1209-1-git-send-email-dachaac@gmail.com>
-	<20161026143050.GE4096@jama>
-From: =?UTF-8?B?VmVzYSBKw6TDpHNrZWzDpGluZW4=?= <dachaac@gmail.com>
-Message-ID: <27ac9cf7-aaec-7312-065e-2919763b7f62@gmail.com>
-Date: Wed, 26 Oct 2016 20:31:08 +0300
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
-	Gecko/20100101 Thunderbird/45.4.0
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=VIhQliiTjiXk8P7UDVdHVm/yt4N4yGnMaoZHAea7EYo=;
+	b=Sct66FUf80sEg/LyNUu+AvT15tpBgdpcKuEEnnK/jL0CyFgYCDonyJRV2MZ+Guuem/
+	SB7CnYSrprwxnA+htEc3r15DdTtXptBcnc23qwRfU1Nw7UM++uyawh6lYVosXRoIi3qP
+	LWlNjN7c/AEJwwCJ0GupZPkiMRGpB3lIKl4ZlrYh5Pl9vOphiAGGulqDm4ShL03ZT8WO
+	R8MX1wGHFbUw7XN9bv5O/DfghcpQVXZF5cZaB5NpXondPjLqv7fSz3iDGvxTXxw1kdY/
+	wkeAW/F35AKllYs2pdwdizDvpx4gZeNoVZZEpMaqZleneINsd2UcqXY7bt457VU9u2SN
+	5Dag==
+X-Gm-Message-State: ABUngvcsHCn30qQrZ7DNLfnR0YnU6m3XjZRV+EXKZKaZDguxdy0cHi2R8WUGy2yVUBXMmAxgh4jQGfzkPaRsXQ==
+X-Received: by 10.55.203.25 with SMTP id d25mr7816683qkj.240.1477583598220;
+	Thu, 27 Oct 2016 08:53:18 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20161026143050.GE4096@jama>
-Subject: Re: [meta-qt5][krogoth][PATCH] Update Qt's git repositories to match new location
+Received: by 10.12.136.173 with HTTP; Thu, 27 Oct 2016 08:53:17 -0700 (PDT)
+From: Ian Coolidge <ian@boundarydevices.com>
+Date: Thu, 27 Oct 2016 08:53:17 -0700
+Message-ID: <CADseiPkafvnNWo3pyhjPfjj-05ssn_UepHd7z8NKvCYk_PdBAg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-browser] chromium-wayland touch not working
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,39 +50,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Oct 2016 17:31:10 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 27 Oct 2016 15:53:21 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 26/10/2016 17.30, Martin Jansa wrote:
+Hi All,
 
-> On Sun, Sep 25, 2016 at 08:54:45PM +0300, Vesa Jääskeläinen wrote:
->> Signed-off-by: Vesa Jääskeläinen <dachaac@gmail.com>
->> ---
->>   conf/layer.conf | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/conf/layer.conf b/conf/layer.conf
->> index b7207e6..9220a75 100644
->> --- a/conf/layer.conf
->> +++ b/conf/layer.conf
->> @@ -27,5 +27,5 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
->>   
->>   IMAGE_FEATURES[validitems] += "qtcreator-debug"
->>   
->> -QT_GIT ?= "git://github.com/qtproject"
->> +QT_GIT ?= "git://github.com/qt"
->>   QT_GIT_PROTOCOL ?= "git"
-> This isn't in master yet, so it cannot be applied in krogoth and it also
-> breaks qt5everywheredemo fetch
-> http://errors.yoctoproject.org/Errors/Details/93069/
->
-Hmm... It seems that 'qt5-everywhere-demo' has moved to:
-git://github.com/qt-labs/qt5-everywhere-demo
+I've built essentially core-image-weston with chromium-wayland on Yocto
+Krogoth and touch isn't working on the chromium browser. Is there some
+setting or configuration I'm missing? Touch is working just fine on the
+wayland desktop, just not on chromium-wayland.
 
-I'll play around with it and send V2... I suppose you want it first for 
-master then.
-
-Thanks,
-Vesa Jääskeläinen
+Thanks for any help!
+-Ian
 
