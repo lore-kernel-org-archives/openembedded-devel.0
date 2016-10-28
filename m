@@ -1,36 +1,49 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 855C971AAD
+Return-Path: <kergoth@gmail.com>
+Received: from mail-oi0-f65.google.com (mail-oi0-f65.google.com
+	[209.85.218.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B313719A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Oct 2016 14:48:32 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id 23so2122363qtp.2
+	Fri, 28 Oct 2016 15:07:31 +0000 (UTC)
+Received: by mail-oi0-f65.google.com with SMTP id n202so4000335oig.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Oct 2016 07:48:34 -0700 (PDT)
+	Fri, 28 Oct 2016 08:07:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc;
+	bh=1oyEIWEgy3pdTj/YlgN4tm3o43Nh0rkok/zV4Z5V6DE=;
+	b=w5AcCwOidi4/GEyeZDYDfDfeT/hiHtRNAQnUHhoBcraAhS3OarnqBVcMLHz6jN8L67
+	KGifnu3/DktL3BF2NoVrbfdssipAMi2XgTKz042jEqA0cz/jcnXHptaENLsUZaH/vb/I
+	/ibFY4Z57+1uNbswEn03WWhWFWztZEXPvn6xG7fgS6XtTi05RDZ01T1xd5C7P1VXt9m2
+	EoOyTHtckoMEqLiBy+AM2swyvL/gRwxE65zq3W8dsjuv71Cp6MVBEyPCdu9WE4y1U7rm
+	OFH6NYz6mACBcDuf4Lyz4KWl4ObaPfegMx+gGIbTtRDWDpg+fWJWO5G3II2Rvq8F8nxo
+	DM5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ngCOGUhRBAilYvDRn4cT+DNpVs0r8KAUcTsJtdUXdPo=;
-	b=CuZGkOlQqZELxXIur0GUHTN6UGksKDG+JnWXBi2b3zQUCdKmryZPftOw3eFHPaNE7D
-	I4fRiVBsZE5hd/m7SELVa4eLdERxa73D1W6gGjPR4bDsqxDaORa0MnYW/RaTp2+hHkNz
-	aULC6teOPKiIph5Y73HiKQCue0UF1jr5uH6x3B7Z/S6bMfIParWTSgwaj1NoMAIyN33w
-	YykzSwPFbgt3rVvWPwbxQqY0en5tboH/Pecul8rUXkgCRJP/UrTXI8ohPj8fy+CYO/UH
-	Fa+i727a+WmLNr4N/N70HRuNOjBxg0/7gNREt/xcZg1cJy/CsLDHWiJcvIT63xwBgN6X
-	Eh2w==
-X-Gm-Message-State: ABUngvcFZF1vBqVkd5jg3RRyNvjPVgpDc/eH9RFxIklGkA5/5rA13HzyLSi8fJ6x/RkIZg==
-X-Received: by 10.200.36.154 with SMTP id s26mr12411611qts.0.1477666113780;
-	Fri, 28 Oct 2016 07:48:33 -0700 (PDT)
-Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
-	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
-	y55sm6384089qty.23.2016.10.28.07.48.33
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 28 Oct 2016 07:48:33 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 28 Oct 2016 10:48:26 -0400
-Message-Id: <1477666106-25770-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-msgpack: update to version 0.4.8
+	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
+	:date:message-id:subject:to:cc;
+	bh=1oyEIWEgy3pdTj/YlgN4tm3o43Nh0rkok/zV4Z5V6DE=;
+	b=mDwYABZ8hM4XzIdTz5xwDM0js/wZCAdGgm137JYd2bE246CZVGNkTv8DF8k5Cz9871
+	dTgn1M5W1XHQxj8ll77ROjqvK2WCs8hnhWW3fBpbYjVVZblc49ckFahx9+Pvdd+/01Zm
+	nj3+ng6z9+l5LNHgrWjl3Fw2R0erKqoibj95d6TSjuuMZ5rqDpfZoKnkwnVPV72HCZCK
+	jGxAvQG13EyvaS1W9e9wnZKkaZoCULH/LdcRGdiRPmzZt8JHBv9xOOJzf+3UvShE1pCL
+	16TaFeUmZA59zCPdoVnUDEbBkhRcSC/cVT5bOYXnRgaLnZ4mvWzzfgZiIIcfT0LY1OQC
+	0slQ==
+X-Gm-Message-State: ABUngvdl5q0m8XbTqTnfS4NA/A0lgKSZaRE8spNV9EIQqs40Ml+nik4AmQiSg/YxJQnB9+ZzcNzfvAjFnsVrbw==
+X-Received: by 10.157.58.35 with SMTP id j32mr10511542otc.166.1477667252012;
+	Fri, 28 Oct 2016 08:07:32 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.157.13.194 with HTTP; Fri, 28 Oct 2016 08:07:11 -0700 (PDT)
+In-Reply-To: <1477649243-26613-1-git-send-email-ting.liu@nxp.com>
+References: <1477649243-26613-1-git-send-email-ting.liu@nxp.com>
+From: Christopher Larson <clarson@kergoth.com>
+Date: Fri, 28 Oct 2016 08:07:11 -0700
+X-Google-Sender-Auth: TD5BmKYGPenZNAvyR4L5BK5L7WQ
+Message-ID: <CABcZANnSmHOMkrKJ3M6CQN62+JHXCbRzXKZ3Ucx8PQ2_9cfmhQ@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Otavio Salvador <otavio.salvador@ossystems.com.br>
+Subject: Re: [meta-oe][PATCH] xterm: use ${libdir} to avoid installed-vs-shipped error on ppc64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,33 +56,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Oct 2016 14:48:33 -0000
+X-List-Received-Date: Fri, 28 Oct 2016 15:07:31 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../python/{python-msgpack_0.4.7.bb => python-msgpack_0.4.8.bb}       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-msgpack_0.4.7.bb => python-msgpack_0.4.8.bb} (57%)
+On Fri, Oct 28, 2016 at 3:07 AM, <ting.liu@nxp.com> wrote:
 
-diff --git a/meta-python/recipes-devtools/python/python-msgpack_0.4.7.bb b/meta-python/recipes-devtools/python/python-msgpack_0.4.8.bb
-similarity index 57%
-rename from meta-python/recipes-devtools/python/python-msgpack_0.4.7.bb
-rename to meta-python/recipes-devtools/python/python-msgpack_0.4.8.bb
-index a3f73fb..8a0ad8f 100644
---- a/meta-python/recipes-devtools/python/python-msgpack_0.4.7.bb
-+++ b/meta-python/recipes-devtools/python/python-msgpack_0.4.8.bb
-@@ -2,8 +2,8 @@ SUMMARY = "MessagePack (de)serializer"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=cd9523181d9d4fbf7ffca52eaa2a5751"
- 
--SRC_URI[md5sum] = "eb2aad1081534ef3a9f32a0ecd350b9b"
--SRC_URI[sha256sum] = "5e001229a54180a02dcdd59db23c9978351af55b1290c27bc549e381f43acd6b"
-+SRC_URI[md5sum] = "dcd854fb41ee7584ebbf35e049e6be98"
-+SRC_URI[sha256sum] = "1a2b19df0f03519ec7f19f826afb935b202d8979b0856c6fb3dc28955799f886"
- 
- PYPI_PACKAGE = "msgpack-python"
- inherit pypi setuptools
+> xterm installs files into PREFIX/lib/X11/app-defaults by default.
+> This leads to QA issue on ppc64 which defines libdir as /usr/lib64:
+> ERROR: QA Issue: xterm: Files/directories were installed but not shipped
+> in any package:
+>   /usr/lib
+>   /usr/lib/X11
+>   /usr/lib/X11/app-defaults
+>   /usr/lib/X11/app-defaults/UXTerm
+>   /usr/lib/X11/app-defaults/KOI8RXTerm-color
+>   /usr/lib/X11/app-defaults/XTerm-color
+>   /usr/lib/X11/app-defaults/UXTerm-color
+>   /usr/lib/X11/app-defaults/KOI8RXTerm
+>   /usr/lib/X11/app-defaults/XTerm
+>
+> Fix it by passing --with-app-defaults=${libdir}/X11/app-defaults to
+> configure.
+>
+> Signed-off-by: Ting Liu <ting.liu@nxp.com>
+> ---
+>  meta-oe/recipes-graphics/xorg-app/xterm_325.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
+> b/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
+> index e0baf3c..48556c7 100644
+> --- a/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
+> +++ b/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
+> @@ -14,6 +14,7 @@ PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft
+> fontconfig fre
+>
+>  EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
+>                   --x-libraries=${STAGING_LIBDIR} \
+> +                 --with-app-defaults=${libdir}/X11/app-defaults \
+>                   FREETYPE_CONFIG=${STAGING_BINDIR_CROSS}/freetype-config
+> \
+>                   --disable-imake \
+>                   --disable-rpath-hack \
+>
+
+Are you sure this is correct? I highly doubt those files are actually
+multilib specific. Would it not be better to just package these files in
+their current location?
 -- 
-2.7.4
-
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
