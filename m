@@ -1,54 +1,41 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 632CC71B32
+Return-Path: <johannes.pointner@br-automation.com>
+X-Greylist: delayed 903 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 28 Oct 2016 06:38:07 UTC
+Received: from mail2.br-automation.com (mail2.br-automation.com
+	[213.33.116.61])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F9B6719B0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Oct 2016 01:27:49 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id i85so4048783pfa.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Oct 2016 18:27:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:from:in-reply-to:date:cc:message-id:references
-	:to; bh=c0qb9ZXE6efURm7a+7lhhMrhiXo0m1O+8Lj/Q4oBJT8=;
-	b=KB2cR3AZtNNp5VorZvdQ4Pe+FnyrbCkiUgFWciXrPNJT3tDGwJvqam+BkKCe7OvohJ
-	KFK40MXi46WZI2Ht96pNLtaT1Y9trEt33bu7tAXyRI0obVSakk/bHhf+JbDBnvTfxrOP
-	4hbjFsbCtN/48rY8rcCYKYD58XTjxQUe/XzP+J7/Sgt9N9GBbp+WlZC8hYVy/KfnNtfL
-	mhP5zb5wr1Z9olH7ITb8uFwnqx0psQ63GjLyxUvphfmRZckgJ2OyzmLKcE/6obPJj3Sb
-	xCr5Nz69YqmSWri6v18PJJDp7NsJT68SmVeBL2WSTJ8lKWbR0Qfh5f+v4bti0iFm5b+N
-	P3LA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:mime-version:from:in-reply-to:date:cc
-	:message-id:references:to;
-	bh=c0qb9ZXE6efURm7a+7lhhMrhiXo0m1O+8Lj/Q4oBJT8=;
-	b=B2xiKUPxTiu2rWmYb9xPfdjkFTH7oG6/7mZ2c9uERCyO41neodlngfQU4fNSVJ9/1w
-	9vjbKjV9t2LbU7xWvLJbNz4DHIvLaF28Qyma9TCA2YeBb+l75Z4Q7exwevU09aPgFjLS
-	Io//s+Hi9oABnlm7zKzAvRa0NHa+ldZ6ifQeIcvn6sjY7H4KMmeSibOEBuUO0lMwLDtL
-	GU3tBgioDy4L5RoOVFzHSMy1jHHnOjxGvyHx4rMg7EdKNJ9xXAaLENg+hamhTkdROCbW
-	6QFgnaBh2vRgEbEWLSxNekhYRh384+iSc4jFt8L2rpOtgLFHtIdDsWby/XCfVFWUaLr9
-	cqnw==
-X-Gm-Message-State: ABUngvd/6NY94ZaIPUY+Ha/Qs8MrvAF+EBVJh2uVwjVN9ZbvESn/hh05xS8UR9wYENI7vA==
-X-Received: by 10.99.168.78 with SMTP id i14mr16610602pgp.162.1477618071525;
-	Thu, 27 Oct 2016 18:27:51 -0700 (PDT)
-Received: from ?IPv6:2601:646:8882:b8c:98cf:ea9b:f72:6b74?
-	([2601:646:8882:b8c:98cf:ea9b:f72:6b74])
-	by smtp.gmail.com with ESMTPSA id
-	z11sm14362464pfd.49.2016.10.27.18.27.50
-	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 27 Oct 2016 18:27:50 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
-X-Pgp-Agent: GPGMail
-From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20161027200430.GJ2494@denix.org>
-Date: Thu, 27 Oct 2016 18:27:44 -0700
-Message-Id: <51A395DD-6A69-4C9A-929B-B1998A74BCD8@gmail.com>
-References: <1477587755-24666-1-git-send-email-denis@denix.org>
-	<64B593B9-ABC1-4FAA-975D-144F46C7B134@gmail.com>
-	<20161027200430.GJ2494@denix.org>
+	Fri, 28 Oct 2016 06:38:07 +0000 (UTC)
+X-AuditID: c0a80110-2565e9a000000f55-db-5812eec85e39
+Received: from brsmtp01.br-automation.com (Unknown_Domain [192.168.1.60])
+	by mail2.br-automation.com () with SMTP id E4.9E.03925.8CEE2185;
+	Fri, 28 Oct 2016 08:23:04 +0200 (CEST)
+From: Johannes Pointner <johannes.pointner@br-automation.com>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.3124)
-Cc: Ian Ray <ian.ray@ge.com>
-Subject: Re: [meta-oe][krogoth][PATCH] syslog-ng: expand service file @variables@ earlier
+Date: Fri, 28 Oct 2016 08:22:38 +0200
+Message-Id: <20161028062238.30497-1-johannes.pointner@br-automation.com>
+X-Mailer: git-send-email 2.10.1
+X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Release
+	9.0.1FP5|November 22, 2015) at 28/10/2016 08:23:11,
+	Serialize by Router on BRSMTPINTERN2/InternSMTP(Release
+	9.0.1FP5|November 22, 2015) at 28/10/2016 08:23:16,
+	Serialize complete at 28/10/2016 08:23:16,
+	Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release
+	9.0.1FP5|November 22, 2015) at 28.10.2016 08:22:58,
+	Serialize by Router on BRSMTP01/Eggelsberg/AT/B&R(Release
+	9.0.1FP5|November 22, 2015) at 28.10.2016 08:23:01,
+	Serialize complete at 28.10.2016 08:23:01
+X-TNEFEvaluated: 1
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrNJMWRmVeSWpSXmKPExsVyYAWjje6Jd0IRBq3fFCwuHl7K7MDocW7j
+	CsYAxigum5TUnMyy1CJ9uwSujMNHPzAXTOasaPyj28DYx9HFyMkhIWAisebEPdYuRi4OIYHN
+	jBIP5s5jAkmwCdhKHJnwlQXEFhHQlfj4YS4jiM0sYC3xfvkCVhBbWMBK4tW7Q0A1HBwsAqoS
+	65ZEgYR5BTwk2ld9YYOYLy9x4eopFpD5EgIbWSQO/W1ggUgISZxefJZ5AiP3AkaGVYziuYmZ
+	OUZ6SUW6iaUl+bmJJZn5eXrJ+bmbGCFeFNjBuPuN9iFGAQ5GJR7eRfOFIoRYE8uKK3MPMUpw
+	MCuJ8K56AxTiTUmsrEotyo8vKs1JLT7EKM3BoiTOa3wXKCWQnliSmp2aWpBaBJNl4uCUamDk
+	sVcqtYx92R600uOXB+NBgzvL+i06+UROX2VT2b7b/1uvec0D9521uSzWWVtXhUcd/VBdPTeX
+	4cRO7T0fb/88I+m+Pac2Z8uMSf0/RYr+vi/4ptv75tbUgMzm+LyCUnEZ6QVWPzYVrDzhXLXe
+	ZYPoc+Nfb/YF7J3MMMFUc/UPydoDfEx/DiYqsRRnJBpqMRcVJwIARxAe6d4BAAA=
+Subject: [meta-oe][PATCH] libtiny2: Upgrade 3.0.0 -> 4.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,86 +48,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Oct 2016 01:27:50 -0000
-X-Groupsio-MsgNum: 63623
-Content-Type: multipart/signed;
-	boundary="Apple-Mail=_CDAF69FB-D4CD-41E9-992B-040B68430CB3";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Fri, 28 Oct 2016 06:38:09 -0000
 
---Apple-Mail=_CDAF69FB-D4CD-41E9-992B-040B68430CB3
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
+This new release includes loots of small (incompatible) changes, and
+the addition of int64 support.
+
+Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com>
+---
+ .../libtinyxml2/{libtinyxml2_3.0.0.bb => libtinyxml2_4.0.1.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libtinyxml2/{libtinyxml2_3.0.0.bb => libtinyxml2_4.0.1.bb} (88%)
+
+diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_3.0.0.bb b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_4.0.1.bb
+similarity index 88%
+rename from meta-oe/recipes-support/libtinyxml2/libtinyxml2_3.0.0.bb
+rename to meta-oe/recipes-support/libtinyxml2/libtinyxml2_4.0.1.bb
+index af0b785..3a66598 100644
+--- a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_3.0.0.bb
++++ b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_4.0.1.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://tinyxml2.cpp;endline=22;md5=c19221dbd8a66ad3090462af4
+ 
+ SRC_URI = "git://github.com/leethomason/tinyxml2.git"
+ 
+-SRCREV = "1977a7258cc66fd4da7f1e9da05a4933646a7803"
++SRCREV = "74d44acb176f8510abf28ee0a70961eb26631988"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.10.1
 
 
-> On Oct 27, 2016, at 1:04 PM, Denys Dmytriyenko <denis@denix.org> =
-wrote:
->=20
-> On Thu, Oct 27, 2016 at 12:55:33PM -0700, Khem Raj wrote:
->>=20
->>> On Oct 27, 2016, at 10:02 AM, Denys Dmytriyenko <denis@denix.org> =
-wrote:
->>>=20
->>> From: Ian Ray <ian.ray@ge.com>
->>>=20
->>> Move variable expansion of @SBINDIR@, @LOCALSTATEDIR@, and =
-@BASEBINDIR@
->>> earlier during install, to before the systemd service file is =
-installed
->>> by an automake rule.
->>>=20
->>> Signed-off-by: Ian Ray <ian.ray@ge.com>
->>> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
->>> ---
->>> meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 9 ++++++---
->>> 1 file changed, 6 insertions(+), 3 deletions(-)
->>>=20
->>> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc =
-b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
->>> index 4e0f697..898e9c2 100644
->>> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
->>> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
->>> @@ -60,6 +60,12 @@ do_configure_prepend() {
->>>    eval "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', '', =
-'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=3D64//" =
-${S}/configure.in', d)}"
->>> }
->>>=20
->>> +do_install_prepend() {
->>> +    sed -i -e 's,@SBINDIR@,${sbindir},g' =
-${S}/contrib/systemd/*.service
->>> +    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' =
-${S}/contrib/systemd/*.service
->>> +    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' =
-${S}/contrib/systemd/*.service
->>> +}
->>=20
->> perhaps, its better to sed the installed artifacts in staging area =
-under ${D}
->> it can be done during post install and then ${S} is not edited as it =
-is doing
->> right now.
->=20
-> That would probably be a better solution... for master. This is just a =
-mere
-> backport of the commit already in master.
-
-I guess then we need to do it once again via master.
-
---Apple-Mail=_CDAF69FB-D4CD-41E9-992B-040B68430CB3
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
-	filename=signature.asc
-Content-Type: application/pgp-signature;
-	name=signature.asc
-Content-Description: Message signed with OpenPGP using GPGMail
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlgSqZUACgkQuwUzVZGdMxSLzgCdH6pzq7YiMcExc5hMDD/izh3g
-SegAoINzaKbi/1ldlbsgk/nCefIDEotQ
-=Ddth
------END PGP SIGNATURE-----
-
---Apple-Mail=_CDAF69FB-D4CD-41E9-992B-040B68430CB3--
