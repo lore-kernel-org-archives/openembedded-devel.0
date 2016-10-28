@@ -1,36 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F87E60670
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id BF0E360670
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Oct 2016 13:47:07 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id v138so2181138qka.2
+	Fri, 28 Oct 2016 13:47:08 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id 12so2441466qtm.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Oct 2016 06:47:09 -0700 (PDT)
+	Fri, 28 Oct 2016 06:47:10 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=3jx5NX84FDrsFKP8CpsL6fOvsjrocxITuFuK6IjhXok=;
-	b=U6fvJbaUeVJBspUANZCfXgvlizlkk9JPcEH/p8RQj0JiwdUkU4+21CcZz9g1DXm2JX
-	sWIpAl2gAkLZGrn97eM/XgePnd7wy/hzXoKcK+QN2UyfMd9te2ZNHjnUhQCpdsXq0etg
-	Tj4nYln//cw5QrhUoIz03q1tdbIUNDZTht+AodZ6WLoWTVuqwdZ0EzO4R9AgHeVAZ3Bo
-	XDaCVRWP5fQO8DHIcjNKESU7xPJjACKbFmTS3yClGWA6DBU5uABknNyLG+IeD6ZWMkmr
-	T6X22w9Q+LYyQunbj2WehE60bFQWus0TahjN4mR2bY07C/VYrHeGLbsxgK62yG/GVOrq
-	rVhQ==
-X-Gm-Message-State: ABUngvcorf3TYHz05+z+sPvKMP4uWjmWYoj+51D1+msaP+5yyeylrnsyk/FhCHIAFgSbHg==
-X-Received: by 10.55.112.195 with SMTP id l186mr10948595qkc.183.1477662429085; 
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=AobcM6sjHJ3afnoUW4zh1XMQsCwygNA7lBHQNmm9ZQc=;
+	b=WszTWuX+lFIUHXxAPQUH/ALxJRAeXzxpB5BHZk9u3Cx74vPCWAfvIAgc52YuBspVtX
+	FM0mjE8P7m1BtiPZnRVXgW6jNMM0OrU7lL/4at+fJqVD5+FXcPiR3Ov9rML2X0OdlZAq
+	v9xwpMB9ub8xCrCa3ARs6Y8riwGn3b4C7VQ7/7hxgpHdOWRBpomC2nAkZ2mWvW6F12X6
+	1k2CGwnY5+r2cUz0Bo1IALbi3e1R9iTp8eJyJ8Cb/IVzA0QrhsN6rUKyCNCKElFjkSo0
+	OB0MN7PK97xPCkkdLBa9Dmi5Yht34HlDX6CWhnqsBnBAvlWO3CeRZBDuqNV0Ea4Ep4vA
+	DEVw==
+X-Gm-Message-State: ABUngvcEvA8QqL/11r0txsCS2m8wBAAkdpx2SgUwVw8WF4gCM1t7xq9zoLfNJDi5k35Uyw==
+X-Received: by 10.237.46.1 with SMTP id j1mr8311946qtd.29.1477662429675;
 	Fri, 28 Oct 2016 06:47:09 -0700 (PDT)
 Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
 	[69.124.217.3])
-	by smtp.gmail.com with ESMTPSA id i5sm6267334qtb.14.2016.10.28.06.47.08
+	by smtp.gmail.com with ESMTPSA id i5sm6267334qtb.14.2016.10.28.06.47.09
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 28 Oct 2016 06:47:08 -0700 (PDT)
+	Fri, 28 Oct 2016 06:47:09 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 28 Oct 2016 09:46:57 -0400
-Message-Id: <1477662418-29346-1-git-send-email-derek@asterius.io>
+Date: Fri, 28 Oct 2016 09:46:58 -0400
+Message-Id: <1477662418-29346-2-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH 1/2] python-webencodings: add recipe for version 0.5
+In-Reply-To: <1477662418-29346-1-git-send-email-derek@asterius.io>
+References: <1477662418-29346-1-git-send-email-derek@asterius.io>
+Subject: [meta-python][PATCH 2/2] python-html5lib: update to version 0.999999999
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,26 +50,46 @@ X-List-Received-Date: Fri, 28 Oct 2016 13:47:08 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-webencodings_0.5.bb | 10 ++++++++++
- 1 file changed, 10 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-webencodings_0.5.bb
+ .../recipes-devtools/python/python-html5lib_0.9999999.bb   |  8 --------
+ .../recipes-devtools/python/python-html5lib_0.999999999.bb | 14 ++++++++++++++
+ 2 files changed, 14 insertions(+), 8 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-html5lib_0.9999999.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-html5lib_0.999999999.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-webencodings_0.5.bb b/meta-python/recipes-devtools/python/python-webencodings_0.5.bb
+diff --git a/meta-python/recipes-devtools/python/python-html5lib_0.9999999.bb b/meta-python/recipes-devtools/python/python-html5lib_0.9999999.bb
+deleted file mode 100644
+index bb92e59..0000000
+--- a/meta-python/recipes-devtools/python/python-html5lib_0.9999999.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-SUMMARY = "HTML parser based on the WHATWG HTML specifcation"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=1ba5ada9e6fead1fdc32f43c9f10ba7c"
+-
+-SRC_URI[md5sum] = "ef43cb05e9e799f25d65d1135838a96f"
+-SRC_URI[sha256sum] = "2612a191a8d5842bfa057e41ba50bbb9dcb722419d2408c78cff4758d0754868"
+-
+-inherit pypi setuptools
+diff --git a/meta-python/recipes-devtools/python/python-html5lib_0.999999999.bb b/meta-python/recipes-devtools/python/python-html5lib_0.999999999.bb
 new file mode 100644
-index 0000000..fbe6285
+index 0000000..d0f7b56
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-webencodings_0.5.bb
-@@ -0,0 +1,10 @@
-+SUMMARY = "Character encoding aliases for legacy web content"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;startline=8;endline=9;md5=2fc6c99a19e6dbde9f7a2239143c9d13"
++++ b/meta-python/recipes-devtools/python/python-html5lib_0.999999999.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "HTML parser based on the WHATWG HTML specifcation"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=1ba5ada9e6fead1fdc32f43c9f10ba7c"
 +
-+SRC_URI[md5sum] = "878714d45241f7970dffd8991d61fff9"
-+SRC_URI[sha256sum] = "a5c55ee93b24e740fe951c37b5c228dccc1f171450e188555a775261cce1b904"
++SRC_URI[md5sum] = "8578e4e3a341436cb9743a9e4a299239"
++SRC_URI[sha256sum] = "ee747c0ffd3028d2722061936b5c65ee4fe13c8e4613519b4447123fc4546298"
 +
 +inherit pypi setuptools
 +
-+RDEPENDS_${PN} += "${PYTHON_PN}-codecs"
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-six \
++    ${PYTHON_PN}-webencodings \
++    ${PYTHON_PN}-xml \
++    "
 -- 
 2.7.4
 
