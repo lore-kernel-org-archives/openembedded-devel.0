@@ -1,48 +1,58 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-oi0-f65.google.com (mail-oi0-f65.google.com
-	[209.85.218.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B313719A8
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-ua0-f195.google.com (mail-ua0-f195.google.com
+	[209.85.217.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 65522719D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Oct 2016 15:07:31 +0000 (UTC)
-Received: by mail-oi0-f65.google.com with SMTP id n202so4000335oig.2
+	Fri, 28 Oct 2016 15:32:39 +0000 (UTC)
+Received: by mail-ua0-f195.google.com with SMTP id 12so2733487uas.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Oct 2016 08:07:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=1oyEIWEgy3pdTj/YlgN4tm3o43Nh0rkok/zV4Z5V6DE=;
-	b=w5AcCwOidi4/GEyeZDYDfDfeT/hiHtRNAQnUHhoBcraAhS3OarnqBVcMLHz6jN8L67
-	KGifnu3/DktL3BF2NoVrbfdssipAMi2XgTKz042jEqA0cz/jcnXHptaENLsUZaH/vb/I
-	/ibFY4Z57+1uNbswEn03WWhWFWztZEXPvn6xG7fgS6XtTi05RDZ01T1xd5C7P1VXt9m2
-	EoOyTHtckoMEqLiBy+AM2swyvL/gRwxE65zq3W8dsjuv71Cp6MVBEyPCdu9WE4y1U7rm
-	OFH6NYz6mACBcDuf4Lyz4KWl4ObaPfegMx+gGIbTtRDWDpg+fWJWO5G3II2Rvq8F8nxo
-	DM5Q==
+	Fri, 28 Oct 2016 08:32:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to; 
+	bh=DTZsCmxnzdJ2/FQJkQjmFpeqH1zkbiXhWGRiP1Xjr/w=;
+	b=eGMlQuidfNK+oyT+IJO1Eulio1VclJeWM7QVxbo4yXWsgbHKatohP1rnhTSLPVf3Zk
+	yvHIzmu+qS/lZ/deNT7vb/AMv8AZfaYRGpUyNfNx+mnZgc9R7Te7eau76OcVSA0x5NQd
+	y6CEsoKImXj8stuDO3Ew/iw/4fY8bZYqEXOYB1Ffh9W5T9T1uCUvblV6YIgw6EI0tTQK
+	oQATO7Vz6WqkSS+JivXno16kl5/Z3+VTgUL95eMc5uUsXdMzSPj/ZiJcdsY3HvIiY60G
+	BeCvmrJkPqiXPcxN+V0ih1lcRPRv5aZXmd6G9Z5qOqUENDp50yWzTpu0IcNb5Si5IIcC
+	JGDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to:cc;
-	bh=1oyEIWEgy3pdTj/YlgN4tm3o43Nh0rkok/zV4Z5V6DE=;
-	b=mDwYABZ8hM4XzIdTz5xwDM0js/wZCAdGgm137JYd2bE246CZVGNkTv8DF8k5Cz9871
-	dTgn1M5W1XHQxj8ll77ROjqvK2WCs8hnhWW3fBpbYjVVZblc49ckFahx9+Pvdd+/01Zm
-	nj3+ng6z9+l5LNHgrWjl3Fw2R0erKqoibj95d6TSjuuMZ5rqDpfZoKnkwnVPV72HCZCK
-	jGxAvQG13EyvaS1W9e9wnZKkaZoCULH/LdcRGdiRPmzZt8JHBv9xOOJzf+3UvShE1pCL
-	16TaFeUmZA59zCPdoVnUDEbBkhRcSC/cVT5bOYXnRgaLnZ4mvWzzfgZiIIcfT0LY1OQC
-	0slQ==
-X-Gm-Message-State: ABUngvdl5q0m8XbTqTnfS4NA/A0lgKSZaRE8spNV9EIQqs40Ml+nik4AmQiSg/YxJQnB9+ZzcNzfvAjFnsVrbw==
-X-Received: by 10.157.58.35 with SMTP id j32mr10511542otc.166.1477667252012;
-	Fri, 28 Oct 2016 08:07:32 -0700 (PDT)
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to;
+	bh=DTZsCmxnzdJ2/FQJkQjmFpeqH1zkbiXhWGRiP1Xjr/w=;
+	b=lDPLwveej6IlMLfVc2QMql9EInung9LEFlKTvVbciYsoBAa17D55yqLd25hcr2V7Ld
+	7TfMKJlFKYoywnpTn21TFbEHr7yPn85ob2lziMpdYjW0HsWZiSYbdcAb8u+KYD3zgDmx
+	bROZHD0VFfx94abnruESP0Q4lKj52L4eX+vzpwFEKQZWe+foXYh8dEm3quLtsS1i7XX+
+	3VPENxLt8Hmcq/tsSCOcqCmsU20zLklCUmoKBS9B1HW4ZPK3Sx5kH/ZPtsPxG3E7JnFT
+	+x4m6vI8MSuneR2CGlK6c3+oPxevSKNWrahefr2quT1n46UKI9BcQHHUMQGZMSP7aQP2
+	nQGQ==
+X-Gm-Message-State: ABUngvfsaG7qScVg3yFrrs2rJnJHEaw7YOUIS090aaVqjODNdpVPrHb2et/FQhazuVyvMQ==
+X-Received: by 10.176.85.152 with SMTP id v24mr12494306uaa.67.1477668760016;
+	Fri, 28 Oct 2016 08:32:40 -0700 (PDT)
+Received: from mail-ua0-f173.google.com (mail-ua0-f173.google.com.
+	[209.85.217.173]) by smtp.gmail.com with ESMTPSA id
+	o12sm3126518vka.19.2016.10.28.08.32.38
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 28 Oct 2016 08:32:39 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-ua0-f173.google.com with SMTP id 12so57261218uas.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Oct 2016 08:32:38 -0700 (PDT)
+X-Received: by 10.176.6.233 with SMTP id g96mr12499767uag.97.1477668758567;
+	Fri, 28 Oct 2016 08:32:38 -0700 (PDT)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.157.13.194 with HTTP; Fri, 28 Oct 2016 08:07:11 -0700 (PDT)
-In-Reply-To: <1477649243-26613-1-git-send-email-ting.liu@nxp.com>
+Received: by 10.31.49.82 with HTTP; Fri, 28 Oct 2016 08:32:37 -0700 (PDT)
+In-Reply-To: <CABcZANnSmHOMkrKJ3M6CQN62+JHXCbRzXKZ3Ucx8PQ2_9cfmhQ@mail.gmail.com>
 References: <1477649243-26613-1-git-send-email-ting.liu@nxp.com>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Fri, 28 Oct 2016 08:07:11 -0700
-X-Google-Sender-Auth: TD5BmKYGPenZNAvyR4L5BK5L7WQ
-Message-ID: <CABcZANnSmHOMkrKJ3M6CQN62+JHXCbRzXKZ3Ucx8PQ2_9cfmhQ@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Otavio Salvador <otavio.salvador@ossystems.com.br>
+	<CABcZANnSmHOMkrKJ3M6CQN62+JHXCbRzXKZ3Ucx8PQ2_9cfmhQ@mail.gmail.com>
+Date: Fri, 28 Oct 2016 13:32:37 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKqgJE_15K6=4RcTzh34u6wNLKiK+w1hZ2LMz-mFTY9C0Q@mail.gmail.com>
+Message-ID: <CAP9ODKqgJE_15K6=4RcTzh34u6wNLKiK+w1hZ2LMz-mFTY9C0Q@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH] xterm: use ${libdir} to avoid installed-vs-shipped error on ppc64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -56,57 +66,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Oct 2016 15:07:31 -0000
+X-List-Received-Date: Fri, 28 Oct 2016 15:32:40 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Fri, Oct 28, 2016 at 3:07 AM, <ting.liu@nxp.com> wrote:
+On Fri, Oct 28, 2016 at 1:07 PM, Christopher Larson <clarson@kergoth.com> wrote:
+> On Fri, Oct 28, 2016 at 3:07 AM, <ting.liu@nxp.com> wrote:
+>
+>> xterm installs files into PREFIX/lib/X11/app-defaults by default.
+>> This leads to QA issue on ppc64 which defines libdir as /usr/lib64:
+>> ERROR: QA Issue: xterm: Files/directories were installed but not shipped
+>> in any package:
+>>   /usr/lib
+>>   /usr/lib/X11
+>>   /usr/lib/X11/app-defaults
+>>   /usr/lib/X11/app-defaults/UXTerm
+>>   /usr/lib/X11/app-defaults/KOI8RXTerm-color
+>>   /usr/lib/X11/app-defaults/XTerm-color
+>>   /usr/lib/X11/app-defaults/UXTerm-color
+>>   /usr/lib/X11/app-defaults/KOI8RXTerm
+>>   /usr/lib/X11/app-defaults/XTerm
+>>
+>> Fix it by passing --with-app-defaults=${libdir}/X11/app-defaults to
+>> configure.
+>>
+>> Signed-off-by: Ting Liu <ting.liu@nxp.com>
+>> ---
+>>  meta-oe/recipes-graphics/xorg-app/xterm_325.bb | 1 +
+>>  1 file changed, 1 insertion(+)
+>>
+>> diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
+>> b/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
+>> index e0baf3c..48556c7 100644
+>> --- a/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
+>> +++ b/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
+>> @@ -14,6 +14,7 @@ PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft
+>> fontconfig fre
+>>
+>>  EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
+>>                   --x-libraries=${STAGING_LIBDIR} \
+>> +                 --with-app-defaults=${libdir}/X11/app-defaults \
+>>                   FREETYPE_CONFIG=${STAGING_BINDIR_CROSS}/freetype-config
+>> \
+>>                   --disable-imake \
+>>                   --disable-rpath-hack \
+>>
+>
+> Are you sure this is correct? I highly doubt those files are actually
+> multilib specific. Would it not be better to just package these files in
+> their current location?
 
-> xterm installs files into PREFIX/lib/X11/app-defaults by default.
-> This leads to QA issue on ppc64 which defines libdir as /usr/lib64:
-> ERROR: QA Issue: xterm: Files/directories were installed but not shipped
-> in any package:
->   /usr/lib
->   /usr/lib/X11
->   /usr/lib/X11/app-defaults
->   /usr/lib/X11/app-defaults/UXTerm
->   /usr/lib/X11/app-defaults/KOI8RXTerm-color
->   /usr/lib/X11/app-defaults/XTerm-color
->   /usr/lib/X11/app-defaults/UXTerm-color
->   /usr/lib/X11/app-defaults/KOI8RXTerm
->   /usr/lib/X11/app-defaults/XTerm
->
-> Fix it by passing --with-app-defaults=${libdir}/X11/app-defaults to
-> configure.
->
-> Signed-off-by: Ting Liu <ting.liu@nxp.com>
-> ---
->  meta-oe/recipes-graphics/xorg-app/xterm_325.bb | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
-> b/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
-> index e0baf3c..48556c7 100644
-> --- a/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
-> +++ b/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
-> @@ -14,6 +14,7 @@ PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft
-> fontconfig fre
->
->  EXTRA_OECONF = " --x-includes=${STAGING_INCDIR} \
->                   --x-libraries=${STAGING_LIBDIR} \
-> +                 --with-app-defaults=${libdir}/X11/app-defaults \
->                   FREETYPE_CONFIG=${STAGING_BINDIR_CROSS}/freetype-config
-> \
->                   --disable-imake \
->                   --disable-rpath-hack \
->
+Or use datadir
 
-Are you sure this is correct? I highly doubt those files are actually
-multilib specific. Would it not be better to just package these files in
-their current location?
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
