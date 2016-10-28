@@ -1,36 +1,28 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 49FAA71985
+Return-Path: <Kai.Iskratsch@zenotrack.com>
+X-Greylist: delayed 320 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 28 Oct 2016 14:23:07 UTC
+Received: from zenotrack.com (zenotrack.com [213.164.30.194])
+	by mail.openembedded.org (Postfix) with ESMTP id CF9F471A04
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Oct 2016 13:52:35 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id v138so2191700qka.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Oct 2016 06:52:37 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=LHPOm6izyU956isLPCKTYpnUAhs4yr+ywmuayAHWsZk=;
-	b=SIcKsm454qpwlxQu6C+tIqWP4CvsLez//+IkPlRAf27bo1vLoa6X0c9qdx8qHnvSOc
-	7bDblcCfk1adLpAzt0UAzbfGD93+dihuHk/+L6yLJXM/d4naKOXwFlhdR8vSN52ont3I
-	Uuw6LjiToUuM64/7z7xxryMStcOQxCas5xXISBhiWYgkTxhYbqwFYmGw029FJjq+HCT+
-	HruxDfhX7OC85PWb/vrq7MEHDdhGSvUF/1W88qxvl0Zv1IeYCV9j8Yv4JLQveDGDVh85
-	XA7KorWRY8jSbefPi50m0aW7G0dqj+IS5ugn8P6CEJok4HQLxvFRafZ3Z2Yr5cfPQ4R9
-	J8kA==
-X-Gm-Message-State: ABUngvfSNjXYVYnjn+AKp/gremMDMCAMSYj5FEWMiR4IDvq7j2KSP+c3CsSajObh7C413Q==
-X-Received: by 10.55.92.66 with SMTP id q63mr12948097qkb.54.1477662756751;
-	Fri, 28 Oct 2016 06:52:36 -0700 (PDT)
-Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
-	[69.124.217.3])
-	by smtp.gmail.com with ESMTPSA id x2sm6274569qkc.14.2016.10.28.06.52.36
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 28 Oct 2016 06:52:36 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 28 Oct 2016 09:52:27 -0400
-Message-Id: <1477662747-3385-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-ipaddress: update to version 1.0.17
+	Fri, 28 Oct 2016 14:23:07 +0000 (UTC)
+Received: from linux-k058.site (192.168.2.82) by VSVR02.ZenoTrack.local
+	(192.168.2.242) with Microsoft SMTP Server (TLS) id 14.3.319.2;
+	Fri, 28 Oct 2016 16:16:46 +0200
+X-ZyXEL-AS-Log: ZW110-zt-zywall-1-MailContent-VirusOutbreak-DNSBL
+X-ZyXEL-AS-DLog: eClass[1]-eVirusThreatLevel[0]-RefId[str=0001.0A0C0207.58135F4E.0075,
+	ss=1, re=0.000, recu=0.000, reip=0]     
+References: <20161028112529.28464-1-kai.iskratsch@zenotrack.com>
+To: <openembedded-devel@lists.openembedded.org>
+From: Kai Iskratsch <kai.iskratsch@zenotrack.com>
+X-Forwarded-Message-Id: <20161028112529.28464-1-kai.iskratsch@zenotrack.com>
+Message-ID: <82cf8d34-0c55-f3ea-ebfa-b184a7c1c478@zenotrack.com>
+Date: Fri, 28 Oct 2016 16:17:47 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.4.0
+MIME-Version: 1.0
+In-Reply-To: <20161028112529.28464-1-kai.iskratsch@zenotrack.com>
+X-Originating-IP: [192.168.2.82]
+Subject: [meta-gnome, jethro][PATCH] fix zenity build, and remove blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,32 +35,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Oct 2016 13:52:36 -0000
+X-List-Received-Date: Fri, 28 Oct 2016 14:23:08 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+
+Zenity was blacklisted in meta-gnome, but it seems the fixes for the 
+problem listed in blacklist reason were rather minimal,
+
+additionally the newer version of libnotify no longer has the notify_notification_new_with_status_icon function, so this
+had to be replaced with notify_notification_new to get the build to complete
 ---
- .../python/{python-ipaddress_1.0.16.bb => python-ipaddress_1.0.17.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-ipaddress_1.0.16.bb => python-ipaddress_1.0.17.bb} (64%)
+  .../0002-fix-build-with-newer-libnotify.patch      | 28 ++++++++++++++++++++++
+  meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb   | 12 ++++++----
+  2 files changed, 35 insertions(+), 5 deletions(-)
+  create mode 100644 meta-gnome/recipes-gnome/zenity/files/0002-fix-build-with-newer-libnotify.patch
 
-diff --git a/meta-python/recipes-devtools/python/python-ipaddress_1.0.16.bb b/meta-python/recipes-devtools/python/python-ipaddress_1.0.17.bb
-similarity index 64%
-rename from meta-python/recipes-devtools/python/python-ipaddress_1.0.16.bb
-rename to meta-python/recipes-devtools/python/python-ipaddress_1.0.17.bb
-index 1e97ef7..686d5fd 100644
---- a/meta-python/recipes-devtools/python/python-ipaddress_1.0.16.bb
-+++ b/meta-python/recipes-devtools/python/python-ipaddress_1.0.17.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7f538584cc3407bf76042def7168548a"
- 
- DEPENDS += "python-pip"
- 
--SRC_URI[md5sum] = "1e27b62aa20f5b6fc200b2bdbf0d0847"
--SRC_URI[sha256sum] = "5a3182b322a706525c46282ca6f064d27a02cffbd449f9f47416f1dc96aa71b0"
-+SRC_URI[md5sum] = "8bbf0326719fafb1f453921ef96729fe"
-+SRC_URI[sha256sum] = "3a21c5a15f433710aaa26f1ae174b615973a25182006ae7f9c26de151cd51716"
- 
- inherit pypi setuptools
+diff --git a/meta-gnome/recipes-gnome/zenity/files/0002-fix-build-with-newer-libnotify.patch b/meta-gnome/recipes-gnome/zenity/files/0002-fix-build-with-newer-libnotify.patch
+new file mode 100644
+index 0000000..67501c8
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/zenity/files/0002-fix-build-with-newer-libnotify.patch
+@@ -0,0 +1,28 @@
++From 87f5f2acbf4f2cad50a0d1ea389d7170fe325b4e Mon Sep 17 00:00:00 2001
++From: Kai Iskratsch <kai.iskratsch@zenotrack.com>
++Date: Thu, 27 Oct 2016 13:08:40 +0200
++Subject: [PATCH] fix build with newer libnotify
++
++---
++ src/notification.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/notification.c b/src/notification.c
++index 99a2e36..3e5b320 100644
++--- a/src/notification.c
+++++ b/src/notification.c
++@@ -184,10 +184,10 @@ zenity_notification_handle_stdin (GIOChannel *channel,
++             icon = freeme = g_filename_to_uri (icon_file, NULL, NULL);
++           }
++
++-          notif = notify_notification_new_with_status_icon (
+++          notif = notify_notification_new (
++                               message[0] /* title */,
++                               message[1] /* summary */,
++-                              icon, status_icon);
+++                              gtk_status_icon_get_icon_name( status_icon));
++
++           g_strfreev (message);
++           g_free (freeme);
++--
++2.10.1
+diff --git a/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb b/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb
+index 4e01c5c..bc6c9c4 100644
+--- a/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb
+@@ -4,18 +4,20 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
+  
+  PR = "r2"
+  
+-PNBLACKLIST[zenity] ?= "BROKEN: doesn't build with B!=S"
+-
+-DEPENDS = "gtk+ glib-2.0 libnotify gnome-doc-utils"
++GNOME_COMPRESS_TYPE = "bz2"
++DEPENDS = "gtk+ glib-2.0 libnotify gnome-doc-utils intltool-native"
++RDEPENDS_${PN} += "perl"
+  
+  inherit gnomebase
+-SRC_URI += "file://0001-Makefile.am-don-t-build-help.patch"
++SRC_URI += "file://0001-Makefile.am-don-t-build-help.patch \
++            file://0002-fix-build-with-newer-libnotify.patch \
++            "
+  SRC_URI[archive.md5sum] = "aa66ec35451b16e424519b4973082170"
+  SRC_URI[archive.sha256sum] = "8838be041a07364b62a4281c971392e4a09bb01bb3237a836ec0457ec0ea18ac"
+  
+  EXTRA_OECONF += "--disable-scrollkeeper"
+  # remove -I/usr/include from zenity_CPPFLAGS
+  do_configure_prepend() {
+-    sed -i -e '/-I$(includedir)/d' src/Makefile.am
++    sed -i -e '/-I$(includedir)/d' ${S}/src/Makefile.am
+  }
+  
 -- 
-2.7.4
+2.10.1
 
 
