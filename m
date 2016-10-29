@@ -1,51 +1,49 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id C73C571DC0
+Return-Path: <dachaac@gmail.com>
+Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
+	[209.85.215.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 363D571A93
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Oct 2016 21:00:01 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id m83so8989891wmc.0
+	Sat, 29 Oct 2016 13:25:39 +0000 (UTC)
+Received: by mail-lf0-f66.google.com with SMTP id n3so5059222lfn.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Oct 2016 14:00:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	Sat, 29 Oct 2016 06:25:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=jwkLyp+HuEIPCtlPa04pSA4nGIbm1nYH4g6+fFpopV8=;
-	b=UH5Of+chZ97ugg47ZKmGgI2D7rdkzq8ohNotxjG/we74cfAuxjq2Xro8Pk13QWXBHT
-	R6SLAKYc7w4ZZGks0X+c0n8UpUk1Rzl0+3vRDnEA2ei8PXXMpn6tHRqw7RCkkjN5v6wb
-	fzulT6MfILE6rWh8KvcIL98UtEYrYSBkOTTi78LkhhO0YdaNQdl402H8kEi6+/YvXeXQ
-	UnXJnZi1M1NIKcNq2NNt/E3vXFYPNjhsiCcdijI+/QzMISzgxCsjYTMimypu7pXUWWte
-	+uvaAgKdeHfcMBADlGpIJ3CgkkyX45CapG9DtdjX/h6VjgLGon47iFX/Q3DZVNZAuGhp
-	weiQ==
+	bh=1vTW6DSktoLXTkoO++mJ3pYk+S1Q/JiN3YxsAwQPWzM=;
+	b=pTM9cSuJJjvBTSjGcOubG20UWHpaUpUo0JqxRg5N6aReygTSoovbJf7ZPawqAqUj91
+	18MSMyBlsWE3ZwtdyZgyeS7C81Hv5JRWVvRdOyOF58WTopujE4LFNvNujKz8vhBJgMyB
+	c7fIOEz0c8QHAUr5UMgafywlQo9XD93j6mNIq2FA2F8hv6fWNKnWT/C0dATZaTH24yq2
+	8EZyPZM9Qsq8HIBC7cbydCP1Mb/XjYlYdcx/huwNhOH1623bVufA8zslaQYTD5cyIADk
+	RcFRWI+DSwcR7zoRLlaXMYGzNPwN07gf6ES4gJEkyJ/HrS42EEFLiHzHr581C+ING2jl
+	Amlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=jwkLyp+HuEIPCtlPa04pSA4nGIbm1nYH4g6+fFpopV8=;
-	b=Gm/7LWrWYwBLDn6K7jEnMep84LzEOq24TZ7p7GzCuvE8OeFLbW8GvcTjrGrRfC127X
-	iCNT15G10/JTA0608kwfND9aFbxjsHvtKx9tdLLPjBfLH0Fzy5vU7CMGOnGHDvjZos4Q
-	ScdgrRfiB7jkn6OnfmEVnMnkMNMDU7NsK6D5J8yXWsJEhHF6K108WKhTojvzScRPYFQ4
-	A5MN5R3T5v0+vxlzJP/qxSXfNcoMhIiAeuJsZnbV2Cel7qNFq8wbKv6qY9f5dbqyQ66l
-	kxudfyi3Y1VnHR+W8n230wUjwVedxMen5cXkhFyrFjbiXxdEgsAs6/JFnGQ4Sb0UIT+Y
-	Vf2w==
-X-Gm-Message-State: ABUngvdus8IxmvamUC4CEl0rFg+bzCuM79lpxT0qtMebYHWzL2ViYHbKoAniA2YMWFKBMg==
-X-Received: by 10.28.30.143 with SMTP id e137mr464877wme.96.1477688402774;
-	Fri, 28 Oct 2016 14:00:02 -0700 (PDT)
-Received: from localhost.localdomain (p4FDF08E7.dip0.t-ipconnect.de.
-	[79.223.8.231]) by smtp.googlemail.com with ESMTPSA id
-	ya1sm15955329wjb.23.2016.10.28.14.00.02
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 28 Oct 2016 14:00:02 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=1vTW6DSktoLXTkoO++mJ3pYk+S1Q/JiN3YxsAwQPWzM=;
+	b=ZEWzifb6GThkLAb/GUSZR5PNfcdOO4XvR7UjjP7ZIxEYpehv4AdX0Mhp9TMPL8i3gE
+	Nmk5Id7k4JJU+mQ9/ulXnS3ijdHvs1AkJBxa0QbAXZg8BWRRZ2xr+ToeoXe1ZDQVaYXz
+	PNAENe/ZlZJuR+rh51ICv4uwXTsOwq7h/XOkvbA271YAEHVoSdBtojRq1CNFI6KkFs7n
+	ioucVgyeVe/PfalkahQTEz6EjnXdYl8DcQUnQ6uIPr3Y6uspDvKO+TsDAIljVlDB4VhM
+	TctgH6aOm9sFSq5ifcq2uXllSKq88M7bv8q8bHa918+hrgKvIO5mxdYiN+FDs8TPL02/
+	Qgow==
+X-Gm-Message-State: ABUngvfl40Lfes8XKS8bpNJceNlUI+yeerPprK+6D46/y4whR5qfzYcHHf2u1IbkhVDbxA==
+X-Received: by 10.25.215.34 with SMTP id o34mr11902569lfg.35.1477747540555;
+	Sat, 29 Oct 2016 06:25:40 -0700 (PDT)
+Received: from localhost.localdomain
+	(dtd-fyyj9s1547l4zq--t-3.rev.dnainternet.fi.
+	[2001:14ba:80fe:4000:fd7d:738d:a714:6fff])
+	by smtp.gmail.com with ESMTPSA id 127sm545173ljf.27.2016.10.29.06.25.39
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 29 Oct 2016 06:25:39 -0700 (PDT)
+From: =?UTF-8?q?Vesa=20J=C3=A4=C3=A4skel=C3=A4inen?= <dachaac@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 28 Oct 2016 22:59:50 +0200
-Message-Id: <1477688390-25172-2-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.5.5
-In-Reply-To: <1477688390-25172-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1477688390-25172-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Sat, 29 Oct 2016 16:24:55 +0300
+Message-Id: <1477747495-15188-1-git-send-email-dachaac@gmail.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [PATCH] exo: unbreak Thunar's detailed file view
+Subject: [meta-qt5][master][PATCH] Update Qt5's git repositories to match new locations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,76 +56,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Oct 2016 21:00:03 -0000
+X-List-Received-Date: Sat, 29 Oct 2016 13:25:40 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-see further details at [1]
+Qt5's repositories in github has changed locations.
 
-[1] https://bugzilla.xfce.org/show_bug.cgi?id=12916
+Qt5 itself and most of its modules are now under:
+github.com/qt
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Where as qt5-everywhere-demo is under:
+github.com/qt-labs
+
+Signed-off-by: Vesa Jääskeläinen <dachaac@gmail.com>
 ---
- ...e-fix-for-Thunar-detailed-view-Xfce-12916.patch | 36 ++++++++++++++++++++++
- meta-xfce/recipes-xfce/exo/exo_0.11.1.bb           |  1 +
- 2 files changed, 37 insertions(+)
- create mode 100644 meta-xfce/recipes-xfce/exo/exo/0001-Probable-fix-for-Thunar-detailed-view-Xfce-12916.patch
+ conf/layer.conf                              | 3 ++-
+ recipes-qt/examples/qt5everywheredemo_1.0.bb | 2 +-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-xfce/recipes-xfce/exo/exo/0001-Probable-fix-for-Thunar-detailed-view-Xfce-12916.patch b/meta-xfce/recipes-xfce/exo/exo/0001-Probable-fix-for-Thunar-detailed-view-Xfce-12916.patch
-new file mode 100644
-index 0000000..16f12fe
---- /dev/null
-+++ b/meta-xfce/recipes-xfce/exo/exo/0001-Probable-fix-for-Thunar-detailed-view-Xfce-12916.patch
-@@ -0,0 +1,36 @@
-+From fea2619e6d07ac72b2eff6f408bb3daa2dbdf671 Mon Sep 17 00:00:00 2001
-+From: Sean Davis <smd.seandavis@gmail.com>
-+Date: Thu, 27 Oct 2016 20:31:36 -0400
-+Subject: [PATCH] Probable fix for Thunar detailed view (Xfce #12916)
-+
-+Upstream-Status: Pending [1-2]
-+
-+[1] https://git.xfce.org/xfce/exo/commit/?id=fea2619e6d07ac72b2eff6f408bb3daa2dbdf671
-+[2] https://bugzilla.xfce.org/show_bug.cgi?id=12916
-+
-+---
-+ exo/exo-tree-view.c | 6 +-----
-+ 1 file changed, 1 insertion(+), 5 deletions(-)
-+
-+diff --git a/exo/exo-tree-view.c b/exo/exo-tree-view.c
-+index 8c8564f..2d0fc04 100644
-+--- a/exo/exo-tree-view.c
-++++ b/exo/exo-tree-view.c
-+@@ -385,13 +385,9 @@ exo_tree_view_button_press_event (GtkWidget      *widget,
-+         }
-+     }
-+ 
-+-  /* see bug http://bugzilla.xfce.org/show_bug.cgi?id=6230 for more information */
-+   if (G_LIKELY (gtk_tree_selection_get_select_function (selection) == (GtkTreeSelectionFunc) exo_noop_false))
-+     {
-+-      /* just reset the select function (previously set to exo_noop_false),
-+-       * there's no clean way to do this, so what the heck.
-+-       */
-+-      gtk_tree_selection_set_select_function (selection, NULL, NULL, NULL);
-++      gtk_tree_selection_set_select_function (selection, (GtkTreeSelectionFunc) exo_noop_true, NULL, NULL);
-+     }
-+ 
-+   /* release the path (if any) */
-+-- 
-+2.5.5
-+
-diff --git a/meta-xfce/recipes-xfce/exo/exo_0.11.1.bb b/meta-xfce/recipes-xfce/exo/exo_0.11.1.bb
-index 92155f2..0b0353b 100644
---- a/meta-xfce/recipes-xfce/exo/exo_0.11.1.bb
-+++ b/meta-xfce/recipes-xfce/exo/exo_0.11.1.bb
-@@ -11,6 +11,7 @@ inherit xfce pythonnative perlnative gtk-doc
- SRC_URI += " \
-     file://exo-no-tests-0.8.patch \
-     file://configure.patch \
-+    file://0001-Probable-fix-for-Thunar-detailed-view-Xfce-12916.patch \
- "
+diff --git a/conf/layer.conf b/conf/layer.conf
+index b7207e6..b2a4fbc 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -27,5 +27,6 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
  
- SRC_URI_append_class-native = " \
+ IMAGE_FEATURES[validitems] += "qtcreator-debug"
+ 
+-QT_GIT ?= "git://github.com/qtproject"
++QT_GIT ?= "git://github.com/qt"
++QT_LABS_GIT ?= "git://github.com/qt-labs"
+ QT_GIT_PROTOCOL ?= "git"
+diff --git a/recipes-qt/examples/qt5everywheredemo_1.0.bb b/recipes-qt/examples/qt5everywheredemo_1.0.bb
+index ab2bbd4..7735d90 100644
+--- a/recipes-qt/examples/qt5everywheredemo_1.0.bb
++++ b/recipes-qt/examples/qt5everywheredemo_1.0.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://main.cpp;md5=1187cb795a0f96bce64e63dd1a67dc2b"
+ DEPENDS = "qtdeclarative qtgraphicaleffects"
+ 
+ SRCREV = "c17fe9e0ec0882ac4c4dc1168095f569acab5d09"
+-SRC_URI = "${QT_GIT}/qt-labs-qt5-everywhere-demo"
++SRC_URI = "${QT_LABS_GIT}/qt-labs-qt5-everywhere-demo"
+ 
+ S = "${WORKDIR}/git/QtDemo"
+ 
 -- 
-2.5.5
+2.7.4
 
 
