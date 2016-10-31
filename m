@@ -1,27 +1,49 @@
-Return-Path: <sander.visser.2@consultant.volvo.com>
-X-Greylist: delayed 616 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 31 Oct 2016 20:01:41 UTC
-Received: from mail-gw3.it.volvo.com (mail-gw3.it.volvo.com [192.138.110.232])
-	by mail.openembedded.org (Postfix) with ESMTP id 2CDCE719AC
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F7DD71A31
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Oct 2016 20:01:41 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.31,428,1473112800"; 
-	d="scan'208,217";a="693965541"
-From: "Visser Sander (2) (Consultant)" <sander.visser.2@consultant.volvo.com>
-To: "'openembedded-devel@lists.openembedded.org'"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-oe] packagegroup-core-eclipse-debug
-Thread-Index: AdIzr+KWVDZdBsc6TJmmK5SbGhzFlw==
-Date: Mon, 31 Oct 2016 19:51:21 +0000
-Message-ID: <4d4b2776807f4f6e8480ea33a3a71c89@SEGOTNC5112-N6.vcn.ds.volvo.net>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [131.97.199.99]
+	Mon, 31 Oct 2016 22:11:05 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id c17so20256326wmc.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Oct 2016 15:11:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=18iIB+y8nErqvvLSYcGcuGWJIsUzfv85Dy7E8e11fa8=;
+	b=Q81JfOjZ5LpKg0ihSv2FFOTTlrAwCH/89MGzu8Q7gwYDSg2/joeyJnVoZFZH9bR0t0
+	Oy0E8+BxrLLXkFZ0/fgd4W7ZOaha3BwcGRvD50Fylc+gKl9vOnAJRZ/j8/4bD/lvig2o
+	5OcVoDWYcRBpiXMdBUOA/NaUfp9tw7z9au1O0yKoqHh/bR2iyLGqEPiEdtuQ5pOqKhMm
+	QWd7XOGlkCtoYnocVcFVSMBBkVyXzPXHhx+mqS5jfgDNFT4nVZ/EqandWBoWkB9XNUDY
+	Ee3E7Tuq4ktPjDTn1RQBwDbx5LLxbwWkakf/Jw31zGhJCTTsJUyi3KaHX1Y+m5szAgHC
+	ecfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=18iIB+y8nErqvvLSYcGcuGWJIsUzfv85Dy7E8e11fa8=;
+	b=M88gcHMtcmAOFQ2u5Fs+FtB75h/EGazY+SAVDF173Bdqj486M+5OOGZFg9TPFKkk5L
+	xTxQ+rdzzEC2PsVN/vj3H+1ayutcEGG+KyEqzcTEdCBhor73rGbeU+DWf5BrrzrHrVyU
+	72sY2dWevmFiyakAb5tL0AY8Y23BTBXwECdQoy90K8ePSg3SYrhv+21sxtNwvDQ7kWZ/
+	jnqMNubKyEQeNHAPxtVpQUEHJZto+Hc092kd+j+Ozxw1Ng3Z6OpFQY/mxnHBvJlKW+aM
+	ZXBpCbyEaQe0zCU92W+DpaxHmd5gzs1ff+GJLWjSHqWd5EKxln2esvRxmxIq/21d2NZJ
+	57zw==
+X-Gm-Message-State: ABUngvf0KKB5sI0gsy5m9I9JiUvXtkDdPpI7Fj2p8aaklMJkjEfEZWDcgqqgIjev9ENstQ==
+X-Received: by 10.28.199.6 with SMTP id x6mr358826wmf.116.1477951865998;
+	Mon, 31 Oct 2016 15:11:05 -0700 (PDT)
+Received: from localhost.localdomain (p5B0A3FE5.dip0.t-ipconnect.de.
+	[91.10.63.229]) by smtp.googlemail.com with ESMTPSA id
+	129sm26918697wmq.9.2016.10.31.15.11.05
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 31 Oct 2016 15:11:05 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 31 Oct 2016 23:10:37 +0100
+Message-Id: <1477951849-32149-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.5
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-oe] packagegroup-core-eclipse-debug
+Subject: [PATCH 01/13] python-distutils-extra: initial add 2.39
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,16 +56,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2016 20:01:42 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 31 Oct 2016 22:11:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi
+add version for python2 and python3
 
-meta/recipes-core/packagegroups/packagegroup-core-eclipse-debug.bb RDEPENDS=
- on gdbserver but that is no longer provided. Should RDEPENDS on gdb instea=
-d?
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-oe/recipes-devtools/python/python-distutils-extra.bb  |  9 +++++++++
+ meta-oe/recipes-devtools/python/python-distutils-extra.inc | 13 +++++++++++++
+ meta-oe/recipes-devtools/python/python3-distutils-extra.bb | 11 +++++++++++
+ 3 files changed, 33 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/python/python-distutils-extra.bb
+ create mode 100644 meta-oe/recipes-devtools/python/python-distutils-extra.inc
+ create mode 100644 meta-oe/recipes-devtools/python/python3-distutils-extra.bb
 
-/Regards Sander
+diff --git a/meta-oe/recipes-devtools/python/python-distutils-extra.bb b/meta-oe/recipes-devtools/python/python-distutils-extra.bb
+new file mode 100644
+index 0000000..56dd33d
+--- /dev/null
++++ b/meta-oe/recipes-devtools/python/python-distutils-extra.bb
+@@ -0,0 +1,9 @@
++require python-distutils-extra.inc
++
++inherit setuptools
++
++DISTUTILS_INSTALL_ARGS += "--install-lib=${libdir}/${PYTHON_DIR}/site-packages"
++
++RDEPENDS_${PN} = "\
++    python-distutils \
++"
+diff --git a/meta-oe/recipes-devtools/python/python-distutils-extra.inc b/meta-oe/recipes-devtools/python/python-distutils-extra.inc
+new file mode 100644
+index 0000000..4d87d77
+--- /dev/null
++++ b/meta-oe/recipes-devtools/python/python-distutils-extra.inc
+@@ -0,0 +1,13 @@
++SUMMARY = "python-distutils extension"
++DESCRITION = "python-distutils extension integrating gettext support, themed icons and scrollkeeper based documentation"
++HOMEPAGE = "https://launchpad.net/python-distutils-extra"
++SECTION = "devel/python"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=4325afd396febcb659c36b49533135d4"
++
++PV = "2.39"
++SRC_URI = "https://launchpad.net/python-distutils-extra/trunk/${PV}/+download/python-distutils-extra-${PV}.tar.gz"
++SRC_URI[md5sum] = "16e06db0ef73a35b4bff4b9eed5699b5"
++SRC_URI[sha256sum] = "723f24f4d65fc8d99b33a002fbbb3771d4cc9d664c97085bf37f3997ae8063af"
++
++BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-devtools/python/python3-distutils-extra.bb b/meta-oe/recipes-devtools/python/python3-distutils-extra.bb
+new file mode 100644
+index 0000000..af242b8
+--- /dev/null
++++ b/meta-oe/recipes-devtools/python/python3-distutils-extra.bb
+@@ -0,0 +1,11 @@
++require python-distutils-extra.inc
++
++inherit setuptools3
++
++S = "${WORKDIR}/python-distutils-extra-${PV}"
++
++DISTUTILS_INSTALL_ARGS += "--install-lib=${libdir}/${PYTHON_DIR}/site-packages"
++
++RDEPENDS_${PN} = "\
++    python3-setuptools \
++"
+-- 
+2.5.5
+
 
