@@ -1,51 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 24D5A71A7B
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 0853271AFC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Oct 2016 22:11:13 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id p190so14027240wmp.1
+	Mon, 31 Oct 2016 22:11:14 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id c17so20256764wmc.3
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 31 Oct 2016 15:11:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=sPdvndZG8yTCSgJaxNfOSs7Bg1qglc+SvgiZ/ya0KFw=;
-	b=qqdSWvFQ0vLD9T+2KnO5uyq6dw8+uZ5QyfXd4xLMMN+08UyP/Cr1TOxj5pdJkiTwnG
-	FaDt52Mz4ixJF2Ofq0UI3mAusXMk/dwkN9Dk9m3tBpcK3Ir5YlhudlxeJkPuf2ErXV24
-	OA5hiUAqvE9rLIrhbh2SHx0DyXl8kNyuyy2312PbLlnRpJCQA5zjrJnNerCZaR9jIyw6
-	yFSILGRQDpIqOSQkAyUSCZZ1ChklSGOjf2CjNqQgTefLPDWmc2GjKoe1PnpWRcV7JzfF
-	GgPnjYC3V5bn6qSjwyq1hxbNUdRhl6juVR0qFbV9aRxEyAqZ5typ9v63pHDsCEH+jYXn
-	7VCg==
+	bh=QcKHzgM7uhfKHFO7z4JXSHDjql/PPSv5TDSLtHy22/o=;
+	b=UAOQvrvz7ozsKAbCOpzyYsRNpkT4HbHiNZ/ak2PZqLU56m5gpFAkQkAidOhG5Xzwae
+	n5C0W2dgM6G89+CYxxTb21djF6uxmoEAtLlfbw29KkjNdDy+WQAb9CSmwzpJ+ZfmBuge
+	0szi+FHXhXtEKqBD/1BGZlUohh+984x+h/ghsu7WOG4uFTHfy/xK+87p/3kbmGEiGlY6
+	SbAQVVEQdJIaJ6Glvu0Cxh1rUvlZmxCSPe7WXFg7CSQeXo6To/TRtX4RZbaktUAVti69
+	+V5148p0C/D2w77EOqm0Rqw2LAOhyjOudAQBloLOem4tGLVl8znNXPa9lvSK+TSODF6r
+	nvcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=sPdvndZG8yTCSgJaxNfOSs7Bg1qglc+SvgiZ/ya0KFw=;
-	b=HP55q/cJ+0XDA49h5w0tfRWS6ggWmWycS+KluAl0JThWOgzoD+X6IDZu22eX29ttTU
-	o8tnUK4sywsjHqrDznhPaD1FWGL/IMPqPRLLBwV/kzRGVngp91SM+b/9lAbWF2UW7oxJ
-	A6AU0g2GotdWuuuAneZD+8Psr3VFndItZ8Ajsy1auQy2Sj7wGxFQd3gmFkO+4H2DsU3X
-	fdIOXf/+sJHp4TkjoVFH2l+bcjADHV9I6IxUK3ybIKoMNbrmJQ3ldH4szPCoduRxfcsf
-	WYtdA643xZ5oNdYlSMsXwZ4rP/II+4HNxUjLy9K6iamWKFHs+mUZiH/0Fht+s3GX6nZM
-	xZuw==
-X-Gm-Message-State: ABUngvdk49L1NGYtXPbD4/tjPm9uO3/snTT6sTTQa71u9p1V4Y1iOro0nNIne8yqbR+Ydw==
-X-Received: by 10.195.11.166 with SMTP id ej6mr17612931wjd.60.1477951874196;
-	Mon, 31 Oct 2016 15:11:14 -0700 (PDT)
+	bh=QcKHzgM7uhfKHFO7z4JXSHDjql/PPSv5TDSLtHy22/o=;
+	b=gmTjI2LridgD/H4EW4lcCtUwrEcl9uDhNCv9Ufa/TypJuzwhGGpvEb0OVE6PYs/ebC
+	CD/lFuOaZnNyLkr/3Ddw/cW6/6YbGPZLwxD8Hy+DMIof8IiVg/Kog0UmIMb8ay7V93/E
+	4HB+ukImR6c/HFktR+74/eFHENq3B0+W44L9mOsoEfGqVDhFITgXawb4ghRqMWs/OCgb
+	J6b7UMf8vH/SRZEvWDSfDSRiyp1UnUMqEjupnGe2Bteb3Rr3n9av1bvztlbu199L8RMH
+	mXMh4rQAhM+or3p+IRjXtWyRyFSPqpLQjOSBsvTenGiay/502rFBY2pvinSXlytfbSSc
+	5h8Q==
+X-Gm-Message-State: ABUngvfqorgajR5jFoVtp1Lma7EKkIaeKhzbcrjOT3Q5ftmkcr22Wov5uAfTttocEOlfWw==
+X-Received: by 10.28.216.17 with SMTP id p17mr12535641wmg.11.1477951875010;
+	Mon, 31 Oct 2016 15:11:15 -0700 (PDT)
 Received: from localhost.localdomain (p5B0A3FE5.dip0.t-ipconnect.de.
 	[91.10.63.229]) by smtp.googlemail.com with ESMTPSA id
-	129sm26918697wmq.9.2016.10.31.15.11.13
+	129sm26918697wmq.9.2016.10.31.15.11.14
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 31 Oct 2016 15:11:13 -0700 (PDT)
+	Mon, 31 Oct 2016 15:11:14 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Oct 2016 23:10:47 +0100
-Message-Id: <1477951849-32149-11-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 31 Oct 2016 23:10:48 +0100
+Message-Id: <1477951849-32149-12-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
 In-Reply-To: <1477951849-32149-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1477951849-32149-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 11/13] xfce4-terminal: update to 0.8.1
+Subject: [PATCH 12/13] xfce4-panel: do not display desktop icon when no window is opened
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,40 +58,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2016 22:11:13 -0000
+X-List-Received-Date: Mon, 31 Oct 2016 22:11:14 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../{xfce4-terminal_0.6.3.bb => xfce4-terminal_0.8.1.bb}           | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
- rename meta-xfce/recipes-apps/xfce4-terminal/{xfce4-terminal_0.6.3.bb => xfce4-terminal_0.8.1.bb} (54%)
+ ...do-not-display-desktop-icon-when-no-windo.patch | 60 ++++++++++++++++++++++
+ .../recipes-xfce/xfce4-panel/xfce4-panel_4.12.0.bb |  1 +
+ 2 files changed, 61 insertions(+)
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-panel/files/0003-windowmenu-do-not-display-desktop-icon-when-no-windo.patch
 
-diff --git a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.1.bb
-similarity index 54%
-rename from meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb
-rename to meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.1.bb
-index 98ffec2..9313efb 100644
---- a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.6.3.bb
-+++ b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.1.bb
-@@ -1,13 +1,12 @@
- SUMMARY = "Terminal emulator for the Xfce desktop environment"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
--DEPENDS = "glib-2.0 gtk+ vte9 libxfce4ui"
--RDEPENDS_${PN} += "vte9-termcap"
-+DEPENDS = "glib-2.0 gtk+3 vte libxfce4ui"
+diff --git a/meta-xfce/recipes-xfce/xfce4-panel/files/0003-windowmenu-do-not-display-desktop-icon-when-no-windo.patch b/meta-xfce/recipes-xfce/xfce4-panel/files/0003-windowmenu-do-not-display-desktop-icon-when-no-windo.patch
+new file mode 100644
+index 0000000..b2d960c
+--- /dev/null
++++ b/meta-xfce/recipes-xfce/xfce4-panel/files/0003-windowmenu-do-not-display-desktop-icon-when-no-windo.patch
+@@ -0,0 +1,60 @@
++From 0651f228cef01a6c3e4758a991cace1cd7721031 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Mon, 24 Sep 2012 09:57:46 +0200
++Subject: [PATCH] windowmenu: do not display desktop icon when no window is
++ active
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++* desktop icon is of no use
++* desktop icon confuses when using showdesktop plugin
++
++Upstream-Status: Pending
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++---
++ plugins/windowmenu/windowmenu.c |   12 ++++++------
++ 1 files changed, 6 insertions(+), 6 deletions(-)
++
++diff --git a/plugins/windowmenu/windowmenu.c b/plugins/windowmenu/windowmenu.c
++index c96123a..9404021 100644
++--- a/plugins/windowmenu/windowmenu.c
+++++ b/plugins/windowmenu/windowmenu.c
++@@ -256,7 +256,7 @@ window_menu_plugin_init (WindowMenuPlugin *plugin)
++   g_signal_connect (G_OBJECT (plugin->button), "toggled",
++       G_CALLBACK (window_menu_plugin_menu), plugin);
++ 
++-  plugin->icon = xfce_panel_image_new_from_source ("user-desktop");
+++  plugin->icon = xfce_panel_image_new_from_source (NULL);
++   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->icon);
++   gtk_widget_show (plugin->icon);
++ }
++@@ -634,7 +634,7 @@ window_menu_plugin_active_window_changed (WnckScreen       *screen,
++           /* skip 'fake' windows */
++           type = wnck_window_get_window_type (window);
++           if (type == WNCK_WINDOW_DESKTOP || type == WNCK_WINDOW_DOCK)
++-            goto show_desktop_icon;
+++            goto show_no_icon;
++ 
++           /* get the window icon and set the tooltip */
++           gtk_widget_set_tooltip_text (GTK_WIDGET (icon),
++@@ -648,11 +648,11 @@ window_menu_plugin_active_window_changed (WnckScreen       *screen,
++         }
++       else
++         {
++-          show_desktop_icon:
+++          show_no_icon:
++ 
++-          /* desktop is shown right now */
++-          xfce_panel_image_set_from_source (icon, "user-desktop");
++-          gtk_widget_set_tooltip_text (GTK_WIDGET (icon), _("Desktop"));
+++          /* no icon is shown right now */
+++          xfce_panel_image_set_from_source (icon, NULL);
+++          gtk_widget_set_tooltip_text (GTK_WIDGET (icon), _("No Windows"));
++         }
++     }
++ }
++-- 
++1.7.6.5
++
+diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.0.bb b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.0.bb
+index 6a2b944..4148d9a 100644
+--- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.0.bb
++++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.12.0.bb
+@@ -11,6 +11,7 @@ SRC_URI[sha256sum] = "30920fc2e2fc26279a82b5261a155c2cc15ab2aa1ced2275684a6ff826
+ SRC_URI += " \
+     file://0001-Fix-compiler-warning-in-clock-plugin-about-shadowed-.patch \
+     file://0002-clock-time-make-change-of-system-s-timezone-change-t.patch \
++    file://0003-windowmenu-do-not-display-desktop-icon-when-no-windo.patch \
+ "
  
- inherit xfce-app
- 
- FILES_${PN} += "${datadir}/xfce4 \
-                 ${datadir}/gnome-control-center"
- 
--SRC_URI[md5sum] = "6a2816d8b0933cd707ed456ceb731399"
--SRC_URI[sha256sum] = "912f4716c2395a14a80620ef982b4af1e2a67a8df9a1ef0b802ecae826057e08"
-+SRC_URI[md5sum] = "46d347c0ecbb74a7878d48833042371d"
-+SRC_URI[sha256sum] = "ddfe53a89d315a4a9170ca6d2cee2d33145bd63630062b2e867fb3a5fcde5fdf"
+ EXTRA_OECONF += "--enable-gtk3"
 -- 
 2.5.5
 
