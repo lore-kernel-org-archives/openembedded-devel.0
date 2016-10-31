@@ -1,51 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
 Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B70471AAE
+	by mail.openembedded.org (Postfix) with ESMTP id EDE8471AD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Oct 2016 22:11:08 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id 68so13534970wmz.2
+	Mon, 31 Oct 2016 22:11:09 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id p190so14027065wmp.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Oct 2016 15:11:10 -0700 (PDT)
+	Mon, 31 Oct 2016 15:11:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=gqWqxZ2uxWVVNN2slnY32Fe0+y5MYOl5HPiLwQqy7zw=;
-	b=hlQNEDQmeyJpaV4OOz1dJIaBsQrYj/gAqFlQXQM5uBoDNfj4IFqoonuoM0KGh8o6hL
-	rwIb/sMjGxXQJKwk1uigYLwuzmJ24mWNQ/6sqfx2d4Z4gJR3zn9U9KaHxynvgbUydQ2v
-	w1BNnaFqFmNxrKo6W34mbHtVVGIpSPHSxqI62uyoki4ZG3nqWxbzy7+PDElrFh6UAcBt
-	feURXlrDDKOj0SPDGEO7xj3y/vVu5LA/UE633nUgy2ek6tl2MKArKknvl7nG9qNZQ2pz
-	9lJE/EijQkAyyHMllF0qQDuvwf4vEQrrRzwBEACSaX+SZHEvzw745zAh6uRXyoJezn9g
-	CFfg==
+	bh=Xt21pxXyJMwRsiHB8fja21cqKEEWgo3irvoBLRvCGuQ=;
+	b=nF4xDnVZ8U4o+P3tmFOiUIbEQe3doGybEmkXd2+pxUsla50TYGdj/xbIJZvVGe58H2
+	M9kPYugMx4Mj0oLVbt7qJONy7zZaaoTw5Ray9YLAj8OBtn+GIJ+bjSPL3MyGpawdfckj
+	O7NoWL08VeTYVxuNgzpoB/l2tObSJq7GFJgwrt30mSnG14UpVmNw5Snz32VD0AUCLrQB
+	+8wKoVfBAlUnleWF+EwTxwdFELebbbxFnASpycqDBkFs4NUb59knisGivtx+PD4mV43r
+	851kXNj/YQimoUtknIw34WHDbGME8d+R3la1ofrxpTNR7UXL7a9AZSR9Hynq54kBieFS
+	JNlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=gqWqxZ2uxWVVNN2slnY32Fe0+y5MYOl5HPiLwQqy7zw=;
-	b=YNxrWhN7nasWmP5UmIdQQ4VMU+5ZXZGeOiOjUTQGqd8jyZfv/NyD0X+5IhtYlarH1b
-	xNLQB25TjFsm+81G939dCFKOUgO6UGofCyIwkEtLmNv1xxPepB2DOQAZpzQutvQoYCOU
-	c2POOiT5xyy0Ou3089P9HLFSqkqz7FrdvC+EZCUyIacYe3j/sG/h7rTikV56KnNl7diW
-	XT/ly7M3q+4VOt7QuEqPxVM2LElIrr0erEw3pHCrcy5GvNB5H/3bihiW+A+OXBJVR1r6
-	AVN4IGlmYr1MMLKS0wXgWA4DNnofZ7cyLg/8hUfdozFrqytl3QvDpTVs3q/TLrAkpfUo
-	fpNQ==
-X-Gm-Message-State: ABUngvdCKrvU8if34uHvyiCzasfC50eCCVmLBkri7qxXmSS/xBIAA4+0mNHHF6lTsGVOLg==
-X-Received: by 10.194.100.225 with SMTP id fb1mr1401636wjb.128.1477951869330; 
-	Mon, 31 Oct 2016 15:11:09 -0700 (PDT)
+	bh=Xt21pxXyJMwRsiHB8fja21cqKEEWgo3irvoBLRvCGuQ=;
+	b=ernvyXAe/0U0K8GkgXKM0ne8cc4NMVF7BCgPzxirq5WVcRrIDtXOyFRhX/jHicptCI
+	0VdKuG7YmP0Vi8ZXdm5juZbDjMl9u3//NCODb3KDbPRS5UV/EaQ+ZpmJVl3SHODO5WYM
+	HScgV8jnrhTiJDXNmgAR/vYqbS4gcA6GNwExHGpoGS4r/4+aDL9rwxEYNZyFEEju7/fE
+	nKaOY9CwIAi3hRTkmK1VG9jcIGqjucCcCUWVUevYHPptnYZ13eliNc/XB44uRIIR6zvI
+	ZnSMPhL/2QrHXckEPdBoPy8K8qR7Ol08dD90nN9BtTW2qlGCHLyArWUWS6BRcoyRkfvp
+	Xi8w==
+X-Gm-Message-State: ABUngvdCVCUsAFc1OgYel8mHfvcEPZ+6vyyM8GWhiKbgsh8tDKxdbMPnAKDadghEQMiZfA==
+X-Received: by 10.194.248.162 with SMTP id yn2mr23844497wjc.203.1477951870963; 
+	Mon, 31 Oct 2016 15:11:10 -0700 (PDT)
 Received: from localhost.localdomain (p5B0A3FE5.dip0.t-ipconnect.de.
 	[91.10.63.229]) by smtp.googlemail.com with ESMTPSA id
-	129sm26918697wmq.9.2016.10.31.15.11.08
+	129sm26918697wmq.9.2016.10.31.15.11.10
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 31 Oct 2016 15:11:08 -0700 (PDT)
+	Mon, 31 Oct 2016 15:11:10 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Oct 2016 23:10:41 +0100
-Message-Id: <1477951849-32149-5-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 31 Oct 2016 23:10:43 +0100
+Message-Id: <1477951849-32149-7-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
 In-Reply-To: <1477951849-32149-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1477951849-32149-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 05/13] xfce4-whiskermenu-plugin: update to 2.0.2
+Subject: [PATCH 07/13] ristretto: update to 0.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,31 +58,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2016 22:11:08 -0000
+X-List-Received-Date: Mon, 31 Oct 2016 22:11:10 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...-whiskermenu-plugin_2.0.1.bb => xfce4-whiskermenu-plugin_2.0.2.bb} | 4 ++--
+ .../recipes-apps/ristretto/{ristretto_0.8.0.bb => ristretto_0.8.1.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_2.0.1.bb => xfce4-whiskermenu-plugin_2.0.2.bb} (63%)
+ rename meta-xfce/recipes-apps/ristretto/{ristretto_0.8.0.bb => ristretto_0.8.1.bb} (73%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.0.1.bb b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.0.2.bb
-similarity index 63%
-rename from meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.0.1.bb
-rename to meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.0.2.bb
-index 7cf1e43..6950234 100644
---- a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.0.1.bb
-+++ b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.0.2.bb
-@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-xfce/recipes-apps/ristretto/ristretto_0.8.0.bb b/meta-xfce/recipes-apps/ristretto/ristretto_0.8.1.bb
+similarity index 73%
+rename from meta-xfce/recipes-apps/ristretto/ristretto_0.8.0.bb
+rename to meta-xfce/recipes-apps/ristretto/ristretto_0.8.1.bb
+index 66399cf..7abf186 100644
+--- a/meta-xfce/recipes-apps/ristretto/ristretto_0.8.0.bb
++++ b/meta-xfce/recipes-apps/ristretto/ristretto_0.8.1.bb
+@@ -9,7 +9,7 @@ inherit xfce-app
  
- inherit xfce-panel-plugin cmake
+ RRECOMMENDS_${PN} += "tumbler"
  
--SRC_URI[md5sum] = "0718eb713809df0049fcc5b7ddd9b533"
--SRC_URI[sha256sum] = "ced25394512d102090a504b95f19dffad8bf38754c3ddad85c765b184a7eb616"
-+SRC_URI[md5sum] = "abaae8068fdcca9e72a41f4a6d28c685"
-+SRC_URI[sha256sum] = "c8ba09b3cc0b2ec863af310752a9ca69560fc4c27cbd3174a9dceca1af79e412"
+-SRC_URI[md5sum] = "94c778850325a4e5a12e3433c8a05432"
+-SRC_URI[sha256sum] = "71625324cecda7199acbc95a3ea5132d0dcbf808771e7a209ea2b9503ae4f328"
++SRC_URI[md5sum] = "5332876b627b3237eebb76db66e2fb11"
++SRC_URI[sha256sum] = "0b4c90c585166c958d479075b98da6e28ca500bda6f4d3443f20e0a2172030ee"
+ 
+ FILES_${PN} += "${datadir}/appdata"
 -- 
 2.5.5
 
