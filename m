@@ -1,25 +1,24 @@
-Return-Path: <mike.looijmans@topic.nl>
-Received: from atl4mhob23.registeredsite.com (atl4mhob23.registeredsite.com
-	[209.17.115.117])
-	by mail.openembedded.org (Postfix) with ESMTP id 3BFD170016
+Return-Path: <Junxian.Xiao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 2865F60132
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Oct 2016 07:30:04 +0000 (UTC)
-Received: from mailpod.hostingplatform.com ([10.30.71.205])
-	by atl4mhob23.registeredsite.com (8.14.4/8.14.4) with ESMTP id
-	u9V7U4NS099678 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Oct 2016 03:30:04 -0400
-Received: (qmail 21838 invoked by uid 0); 31 Oct 2016 07:30:04 -0000
-X-TCPREMOTEIP: 37.74.225.130
-X-Authenticated-UID: mike@milosoftware.com
-Received: from unknown (HELO mikebuntu.TOPIC.LOCAL)
-	(mike@milosoftware.com@37.74.225.130)
-	by 0 with ESMTPA; 31 Oct 2016 07:30:04 -0000
-From: Mike Looijmans <mike.looijmans@topic.nl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Oct 2016 08:29:23 +0100
-Message-Id: <1477898963-3759-1-git-send-email-mike.looijmans@topic.nl>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-qt4][PATCH] qt4-embedded: Default to build tslib when touchscreen is defined
+	Mon, 31 Oct 2016 08:47:33 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id u9V8lZAO015549
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Oct 2016 01:47:35 -0700 (PDT)
+Received: from pek-idpbuild2.wrs.com (128.224.178.5) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.294.0; Mon, 31 Oct 2016 01:47:34 -0700
+From: "Junxian.Xiao" <Junxian.Xiao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 31 Oct 2016 16:47:01 +0800
+Message-ID: <1477903622-19542-1-git-send-email-Junxian.Xiao@windriver.com>
+X-Mailer: git-send-email 1.7.1
+MIME-Version: 1.0
+Subject: [PATCH] apache2: include .load files in modules.d
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,37 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2016 07:30:06 -0000
+X-List-Received-Date: Mon, 31 Oct 2016 08:47:34 -0000
+Content-Type: text/plain
 
-When "touchscreen" is in the MACHINE_FEATURES, packagegroup-core-qt4e
-will RDEPEND on qt4-embedded-plugin-mousedriver-tslib, but that
-library is not being built by default, resulting in an error like:
-opkg_prepare_url_for_install: Couldn't find anything to satisfy 'qt4-embedded-plugin-mousedriver-tslib'.
+Issue: LIN8-5007
 
-To prevent that from happening, add "tslib" to the default
-PACKAGECONFIG when touchscreen is defined.
+According to other linux distributes like ubuntu, the modules
+are usually included by 'LoadModule' command in *.load files
+in mods-enable directory, and *.conf files in this directory
+are for special configurations for each module.
 
-Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
+The stucture of the files tree is not the same in yocto, so this
+may be not the rule that we must follow. But still add *.load to
+be compatible with customer's normal usage habits.
+
+Signed-off-by: Junxian.Xiao <Junxian.Xiao@windriver.com>
 ---
-Applies to both morty and master branches.
+ .../recipes-httpd/apache2/apache2_2.4.16.bb        |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
- recipes-qt4/qt4/qt4-embedded.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/recipes-qt4/qt4/qt4-embedded.inc b/recipes-qt4/qt4/qt4-embedded.inc
-index 1122080..9c2d9da 100644
---- a/recipes-qt4/qt4/qt4-embedded.inc
-+++ b/recipes-qt4/qt4/qt4-embedded.inc
-@@ -3,7 +3,7 @@ DESCRIPTION = "Qt is a versatile cross-platform application framework -- this is
- SECTION = "libs"
- HOMEPAGE = "http://qt-project.org/"
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
+index 4aacff1..52127c2 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
+@@ -81,6 +81,7 @@ do_install_append() {
  
--PACKAGECONFIG ??= ""
-+PACKAGECONFIG ??= '${@bb.utils.contains("MACHINE_FEATURES", "touchscreen", "tslib", "",d)}'
- PACKAGECONFIG[tslib] = " -plugin-mouse-tslib, ,tslib"
- 
- QT4EDEPENDS = ""
+     # Ensure configuration file pulls in conf.d and modules.d
+     printf "\nIncludeOptional ${sysconfdir}/${BPN}/conf.d/*.conf" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
++    printf "\nIncludeOptional ${sysconfdir}/${BPN}/modules.d/*.load" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
+     printf "\nIncludeOptional ${sysconfdir}/${BPN}/modules.d/*.conf\n\n" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
+     # match with that is in init script
+     printf "\nPidFile /run/httpd.pid" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
 -- 
-1.9.1
+1.7.1
 
 
