@@ -1,24 +1,46 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 518EA71A7D
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id AADE171AAD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Oct 2016 02:05:24 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id u9V25PT7014840
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Mon, 31 Oct 2016 03:57:48 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id y68so1705997pfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Oct 2016 19:05:25 -0700
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Sun, 30 Oct 2016 19:05:25 -0700
-From: Chen Qi <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 31 Oct 2016 10:05:11 +0800
-Message-ID: <20161031020511.11743-1-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 2.8.3
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] iscsi-initiator-utils: fix postinstall and systemd service file
+	Sun, 30 Oct 2016 20:57:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=kbT/ekFvPv+iblBXUOyjMFOf/FCf9AGumcubmGuz3mo=;
+	b=vjwkrL9679fyFehY09Qm3aI2EDs5XBSFfjuFIL3sub/+0NaUX3ZY5ppQZs0mlzbmOO
+	ZWZCWA4Ao48DFDLHYd5UNOFFbZUoVRpGNexidRMq0DXJfPaaWlWH6IESm8jDGz0DgGl6
+	3NLcC1aLchL8iceZkZiJDVX3rMw5n+X7pAna/G9/Dfl3Es4fIjTTqrj1lS4P09KOS9lL
+	LDWjHUI65vc525geM0KIBB94SA0htWoW9NlBEAKatmac62oqP/oDwUWj4LvLhyzWojTg
+	rEoTQDApcF73ndb2BQpzrswoMGzrJjcaFR3zJ/tgE1S/F1zSWzFBCi73kwgL2/hdouWA
+	fqKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=kbT/ekFvPv+iblBXUOyjMFOf/FCf9AGumcubmGuz3mo=;
+	b=Eq6k2wNqrRWbiyDICLR7CY2rvjDlhF1ri/wEr/unQLjHhoLhkft+t6RFRziaKZOXxq
+	cyPZ4rUph16MI7LBQ4WALQNoF4hflDVetuTpd7nHZgMWZdzVCdwGxjf28y3/to4FD28K
+	IYVEiA8B3QsZWv9IgVsSgwP7CfKfelFMMWt9CkV7vcM4HGytCtMZmRBP3ctIIVeEuIXG
+	oTsCjO0RB/L77ZEGRAzzoPPj+XL5EePchA4tLTrCig4ht4Ni5JtYvOy+thzMCplQvx5M
+	kYZqagZTRyyIdo4Kj9ZbknNa+xHrms1zShHCj8royOLVqGljQC1QD+fN3fgTvidqhxRX
+	QBsA==
+X-Gm-Message-State: ABUngvd7lLGqO7SKTP+tc67LunXqwLQK6UX40fkgBvOHOt/FzCvPBO2WchYK/jRYXfR3Ig==
+X-Received: by 10.99.173.75 with SMTP id y11mr38396103pgo.130.1477886268607;
+	Sun, 30 Oct 2016 20:57:48 -0700 (PDT)
+Received: from akuster-ThinkPad-X240.hsd1.ca.comcast.net
+	([2601:202:4001:9ea0:a515:1856:7377:d74f])
+	by smtp.gmail.com with ESMTPSA id e6sm32775402pad.0.2016.10.30.20.57.47
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 30 Oct 2016 20:57:48 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster808@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Date: Sun, 30 Oct 2016 20:57:46 -0700
+Message-Id: <1477886266-2836-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-networking][V2]PATCH] wireshark: install missing header files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,106 +53,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Oct 2016 02:05:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 31 Oct 2016 03:57:48 -0000
 
-Fix postinstall and systemd service file so that the postinstall script does
-not fail at rootfs time.
+Wireshark does not install header files. add install_append
+Remove ALLOW_EMPTY & INHIBIT_PACKAGE_DEBUG_SPLIT, they are no longer needed
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+V2]
+add missing libssh and sbc config
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../files/iscsi-initiator.service                  |  1 +
- .../iscsi-initiator-utils/files/set_initiatorname  | 12 ++++++++++
- .../iscsi-initiator-utils_2.0-873.bb               | 27 +++++++++-------------
- 3 files changed, 24 insertions(+), 16 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/set_initiatorname
+ .../recipes-support/wireshark/wireshark_2.2.1.bb   | 28 ++++++++++++++++++----
+ 1 file changed, 24 insertions(+), 4 deletions(-)
 
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator.service b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator.service
-index b139751..3790dae 100644
---- a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator.service
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator.service
-@@ -5,6 +5,7 @@ After=syslog.target
- [Service]
- EnvironmentFile=/etc/default/iscsi-initiator
- ExecStartPre=/sbin/modprobe iscsi_tcp
-+ExecStartPre=/usr/lib/iscsi/set_initiatorname
- ExecStart=/usr/sbin/iscsid -f $OPTS_ISCSID
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
+index a5fb7f6..4e23bae 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
+@@ -4,7 +4,7 @@ SECTION = "net"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
  
- [Install]
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/set_initiatorname b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/set_initiatorname
-new file mode 100644
-index 0000000..a196c6b
---- /dev/null
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/set_initiatorname
-@@ -0,0 +1,12 @@
-+#!/bin/sh
-+if [ ! -f /etc/iscsi/initiatorname.iscsi ]; then
-+    INITIATORNAME=$(iscsi-iname)
-+    cat >/etc/iscsi/initiatorname.iscsi <<EOF
-+## DO NOT EDIT OR REMOVE THIS FILE!
-+## If you remove this file, the iSCSI daemon will not start.
-+## If you change the InitiatorName, existing access control lists
-+## may reject this initiator.  The InitiatorName must be unique
-+## for each iSCSI initiator.  Do NOT duplicate iSCSI InitiatorNames.
-+InitiatorName=$INITIATORNAME
-+EOF
-+fi
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
-index 03f6459..4b13155 100644
---- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
-@@ -21,6 +21,7 @@ SRC_URI = "http://www.open-iscsi.org/bits/open-iscsi-${PV}.tar.gz \
-            file://iscsi-initiator \
-            file://iscsi-initiator.service \
-            file://iscsi-initiator-targets.service \
-+           file://set_initiatorname \
- "
- SRC_URI[md5sum] = "8b8316d7c9469149a6cc6234478347f7"
- SRC_URI[sha256sum] = "7dd9f2f97da417560349a8da44ea4fcfe98bfd5ef284240a2cc4ff8e88ac7cd9"
-@@ -82,6 +83,8 @@ do_install () {
-         install -m 0644 ${WORKDIR}/iscsi-initiator.service \
-                         ${WORKDIR}/iscsi-initiator-targets.service \
-                         ${D}${systemd_unitdir}/system/
-+	install -d ${D}${nonarch_libdir}/iscsi
-+	install -m 0755 ${WORKDIR}/set_initiatorname ${D}${nonarch_libdir}/iscsi
-     else
-         install -d ${D}/etc/default/volatiles
-         install -m 0644 ${WORKDIR}/99_iscsi-initiator-utils ${D}/etc/default/volatiles
-@@ -89,25 +92,17 @@ do_install () {
- }
+-DEPENDS = "pcre expat glib-2.0 sbc"
++DEPENDS = "pcre expat glib-2.0"
  
- pkg_postinst_${PN}() {
--    #default there is no initiatorname.iscsi installed
--    #but it is needed or iscsid will fail
--
--    #will run only when postinst on target
--    if [ "x$D" != "x" ]; then
--        exit 1
--    fi
--    if [ ! -f ${sysconfdir}/iscsi/initiatorname.iscsi ]; then
--        echo "InitiatorName=$(${sbindir}/iscsi-iname)" > \
--        ${sysconfdir}/iscsi/initiatorname.iscsi
--    fi
--
--    if [ -e /etc/init.d/populate-volatile.sh ]; then
--        /etc/init.d/populate-volatile.sh update
--    elif command -v systemd-tmpfiles >/dev/null; then
--        systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/iscsi.conf
-+    if [ "x$D" = "x" ]; then
-+	if [ -e /etc/init.d/populate-volatile.sh ]; then
-+            /etc/init.d/populate-volatile.sh update
-+	elif command -v systemd-tmpfiles >/dev/null; then
-+            systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/iscsi.conf
-+	fi
-     fi
- }
+ SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
  
- SYSTEMD_SERVICE = " iscsi-initiator.service iscsi-initiator-targets.service "
- INITSCRIPT_NAME = "iscsid"
- INITSCRIPT_PARAMS = "start 30 1 2 3 4 5 . stop 70 0 1 2 3 4 5 6 ."
+@@ -37,13 +37,33 @@ PACKAGECONFIG[lua] = "--with-lua=yes, --with-lua=no, lua"
+ PACKAGECONFIG[zlib] = "--with-zlib=yes, --with-zlib=no, zlib"
+ PACKAGECONFIG[geoip] = "--with-geoip=yes, --with-geoip=no, geoip"
+ PACKAGECONFIG[plugins] = "--with-plugins=yes, --with-plugins=no"
++PACKAGECONFIG[sbc] = "--with-sbc=yes, --with-sbc=no, sbc"
 +
-+FILES_${PN} += "${nonarch_libdir}/iscsi"
++PACKAGECONFIG[libssh] = "--with-ssh=yes, --with-ssh=no, libssh2"
++
+ 
+ # these next two options require addional layers
+ PACKAGECONFIG[c-ares] = "--with-c-ares=yes, --with-c-ares=no, c-ares"
+ 
+ EXTRA_OECONF += "--with-qt=no --enable-tshark --enable-rawshark"
+ 
+-ALLOW_EMPTY_${PN} = "1"
+-INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
++# Currently wireshark does not install header files
++do_install_append () {
++
++	install -d ${D}/${includedir}/${BPN}
++	install -d ${D}/${includedir}/${BPN}/epan
++	install -d ${D}/${includedir}/${BPN}/epan/crypt
++	install -d ${D}/${includedir}/${BPN}/epan/dfilter
++	install -d ${D}/${includedir}/${BPN}/epan/dissectors
++	install -d ${D}/${includedir}/${BPN}/epan/ftypes
++	install -d ${D}/${includedir}/${BPN}/epan/wmem
+ 
+-FILES_${PN} += "${datadir}*"
++	install config.h ${D}/${includedir}/${BPN}
++	install ${S}/register.h ${D}/${includedir}/${BPN}
++	install -D ${S}/epan/*.h ${D}/${includedir}/${BPN}/epan
++	install -D ${S}/epan/crypt/*.h ${D}/${includedir}/${BPN}/epan/crypt
++	install -D ${S}/epan/dfilter/*.h ${D}/${includedir}/${BPN}/epan/dfilter
++	install -D ${S}/epan/dissectors/*.h ${D}/${includedir}/${BPN}/epan/dissectors
++	install -D ${S}/epan/ftypes/*.h ${D}/${includedir}/${BPN}/epan/ftypes
++	install -D ${S}/epan/wmem/*.h ${D}/${includedir}/${BPN}/epan/wmem
++}
 -- 
-2.8.3
+2.7.4
 
 
