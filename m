@@ -1,51 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E2C7D71AE6
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 9321D71A7B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Oct 2016 22:11:10 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id c17so20256601wmc.3
+	Mon, 31 Oct 2016 22:11:11 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id 68so13535116wmz.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Oct 2016 15:11:12 -0700 (PDT)
+	Mon, 31 Oct 2016 15:11:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=soAW6Oo34n4Z3PNqPKTSs6M3/U8aDzM7SR0rpji2TuQ=;
-	b=nusQukwyJ5GM0ruzAqnFM3GHIE8plzzXYHz/gFBx3P/CFQ16twNuaqsdmrb5iYWoZV
-	HpD3BFsy48tFegrNqltsyIAADnJUC8lV2VoyTcPZi5sT2JoA0scuomsaNil4oOdP3tkS
-	3UzDaWxqJcwP1ka3WyTfsZtKUigjjwCfOESqzPrAsPM+5GXYoQ4UrHbQTg4ni8H2S8hM
-	p6MV4v0/DXSL2HP/d+GFjjwIi5e7omjB2xAmVztK6WbIv+sTCmW+cMEGxxZFNLsJhxww
-	dNYV+3wXjGiVExMeuzmLAMghp1J9dsrUKgs+mv6gw7XpJoG0CHv5J30Zp2oFl7lDDkc/
-	oloQ==
+	bh=0vG5BgTkUeS5/qJD+Z0QV9FLU8NOvFH9wVFq0awcxiM=;
+	b=rpQBSYFw6XS7l1CFTBn7DYyGNIjIYRAte/UunXF/pDq+ZmFmDL4E9J53pAXm9XGzgg
+	XR/2U6GPaOK8lNIEwVT8/WsYX3eaAfLzGfQlv+APDSrtDFpa0Ot72CUemkTA+JzhS2dW
+	DZxKOObGo5YXnh5/u8tA+b4jCn+t5vqAl/gRxo7YIAucRXZAN3WEOB9Ml6HkI3w+Y2N9
+	fqyDdh8mp0hk1eJJomMyL3Txw4g3bQ+EKPh9hnxmi0COk8LOWTkm9EOpq8d8nGFsPTH6
+	utsdYYVBrwi0VNxPEzaPnqOj1m9s7NX4iE14EYJDaJH+oSo0kVHfTUuGMSE3lL7TmVTr
+	PAWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=soAW6Oo34n4Z3PNqPKTSs6M3/U8aDzM7SR0rpji2TuQ=;
-	b=kKWTQ3SV3OrKVvdglpWCRYBo9iepRjtPxPQR01I0JVIiFcBjw7Zjam22FnnpvoPnJM
-	D+2pbthXQNy9mMMVPuI1VbAzpla9225tnKKc5JI8wbvO4VPmnuxd0vfcYL8fG25Zu/xO
-	GAPivjrE0GBUQdEQLP2OBGW4HiZdYWjiNJsy3/rJ64PXyuXGKtm+KQ4MT8bFJzf1NCp5
-	4ahmpjl1+zwC3xW+IgB/K0hRR7sKthGV8UVLBBHHbUTlkBFzYK/Qag2Ic6a376Ua8Hsq
-	hazr1YxtVUiwc9cnWhc/02wczl41RzrH6XzWx8+HVC4Hz7nuglIMmnu9wiK9E2fEjtSH
-	b2Vw==
-X-Gm-Message-State: ABUngvcVbD4L0+If7K0nbuxbMk/VnmWg0e+KxPkCIf9wWfja+wkcLodHtzbt3DOgG4ebGQ==
-X-Received: by 10.28.154.77 with SMTP id c74mr11867434wme.23.1477951871796;
-	Mon, 31 Oct 2016 15:11:11 -0700 (PDT)
+	bh=0vG5BgTkUeS5/qJD+Z0QV9FLU8NOvFH9wVFq0awcxiM=;
+	b=keCwBN6CgBffXVjy93BSTboN1rN5JJzxjkuS0Pno4+vJsPMjsmWzzS/FY7tx64fXX9
+	GeHq4D0ZFnoUGz85Gmerb7ijEKw6rIC5wd8MjF4XkkOKQiqHGBnNwm0nA8srwGZACZTN
+	WyLdCdXCVOMBYmC+lhMpcup4NYDnfsaTe9LcWLb4BnhwfO5+xJd+ST2epEEwUhlU+opm
+	zRJIM69JArnEDfgaE9/6FsCo5l3b4P4h1P9wCZT93YmjiuXokQTdVQ+DmU7qp90wm9vh
+	iTKidHT/8jUWMqQNNicK3hvbQ7aFCqwRliH1XQy8lDLtP0ohnj/Z1bBhYyxnPPX4+rvX
+	YYkA==
+X-Gm-Message-State: ABUngvfMBZsubfP4MDoA3dxM0k2KaciK/neq+WAopseFVkX4X7Gy+1NeXntJN5YLE83V5w==
+X-Received: by 10.28.109.87 with SMTP id i84mr11864503wmc.100.1477951872505;
+	Mon, 31 Oct 2016 15:11:12 -0700 (PDT)
 Received: from localhost.localdomain (p5B0A3FE5.dip0.t-ipconnect.de.
 	[91.10.63.229]) by smtp.googlemail.com with ESMTPSA id
-	129sm26918697wmq.9.2016.10.31.15.11.10
+	129sm26918697wmq.9.2016.10.31.15.11.11
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 31 Oct 2016 15:11:11 -0700 (PDT)
+	Mon, 31 Oct 2016 15:11:12 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Oct 2016 23:10:44 +0100
-Message-Id: <1477951849-32149-8-git-send-email-schnitzeltony@googlemail.com>
+Date: Mon, 31 Oct 2016 23:10:45 +0100
+Message-Id: <1477951849-32149-9-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
 In-Reply-To: <1477951849-32149-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1477951849-32149-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 08/13] xfconf: update to 4.12.1
+Subject: [PATCH 09/13] xfce4-notifyd: update to 0.3.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,28 +64,28 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-xfce/xfconf/{xfconf_4.12.0.bb => xfconf_4.12.1.bb} | 4 ++--
+ .../xfce4-notifyd/{xfce4-notifyd_0.3.2.bb => xfce4-notifyd_0.3.3.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/xfconf/{xfconf_4.12.0.bb => xfconf_4.12.1.bb} (75%)
+ rename meta-xfce/recipes-apps/xfce4-notifyd/{xfce4-notifyd_0.3.2.bb => xfce4-notifyd_0.3.3.bb} (78%)
 
-diff --git a/meta-xfce/recipes-xfce/xfconf/xfconf_4.12.0.bb b/meta-xfce/recipes-xfce/xfconf/xfconf_4.12.1.bb
-similarity index 75%
-rename from meta-xfce/recipes-xfce/xfconf/xfconf_4.12.0.bb
-rename to meta-xfce/recipes-xfce/xfconf/xfconf_4.12.1.bb
-index ff1dfa4..a42426f 100644
---- a/meta-xfce/recipes-xfce/xfconf/xfconf_4.12.0.bb
-+++ b/meta-xfce/recipes-xfce/xfconf/xfconf_4.12.1.bb
-@@ -8,8 +8,8 @@ inherit xfce gtk-doc
+diff --git a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.3.2.bb b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.3.3.bb
+similarity index 78%
+rename from meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.3.2.bb
+rename to meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.3.3.bb
+index 2894af4..a50cea5 100644
+--- a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.3.2.bb
++++ b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.3.3.bb
+@@ -6,8 +6,8 @@ DEPENDS = "libxfce4util libxfce4ui xfconf gtk+ dbus dbus-glib libnotify"
  
- EXTRA_OECONF += "PERL=${STAGING_DIR_TARGET}/usr/bin/perl"
+ inherit xfce-app
  
--SRC_URI[md5sum] = "8ebfac507b4d6ce3f4bac9d257c2853b"
--SRC_URI[sha256sum] = "9910eaea8405336415d4d7f3056403f8c67bc23ba0dce251eac35205c603b156"
-+SRC_URI[md5sum] = "20dc8d2bfd80ba136bf4964021b32757"
-+SRC_URI[sha256sum] = "35f48564e5694faa54fdc180cd3268e16fc2352946a89a3c2fc12cbe400ada36"
+-SRC_URI[md5sum] = "9ee9bd823710c8753cb99f5a8028d528"
+-SRC_URI[sha256sum] = "c554db55d9d759c32115e9e5da029bd68b07628438ef2bac7ae4b458567c85a4"
++SRC_URI[md5sum] = "f918bd3f9f9ad85eace408aecf541198"
++SRC_URI[sha256sum] = "986c4cfeb64c21c6bfb2fe65839490ad0f501fdfc8ed10cc71815da5da110f73"
  
- FILES_${PN} += "${libdir}/xfce4/xfconf/xfconfd \
-                 ${datadir}/dbus-1/services/org.xfce.Xfconf.service"
+ do_compile_prepend() {
+     mkdir -p xfce4-notifyd
 -- 
 2.5.5
 
