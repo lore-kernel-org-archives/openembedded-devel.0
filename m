@@ -1,51 +1,50 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F86371A8D
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 19D7471B4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Nov 2016 18:06:26 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id c17so23719422wmc.3
+	Tue,  1 Nov 2016 18:12:08 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id c17so23739664wmc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Nov 2016 11:06:28 -0700 (PDT)
+	Tue, 01 Nov 2016 11:12:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=K28yGzXLkGmSgH/STqFb3Yxx5koqnCozvsAlWXuvLdE=;
-	b=c9doIr2gtWArg+Ru4h86+Cfbkc7i4YK+CqPk8FGtLAewrTEry9yNefTXXjYDq7bPx1
-	4OxKCtI/r7C4eyGyNDK2ZGsL50CpT9do+VqAQ4ZA6AllXIKLq1N50zC4DlN8toY1lexe
-	D7VSu8RoVwe2gnHAdXJVMely+0L628eBFwEPofl33onku3QGSXeR+7/xblwo+2JU8Y1G
-	XrWk6WKsECqVRlGjhl4gH+SWr6X69lGN8dSN5Hta+9IP/TsfUu3ECDch8pIumvUim0wk
-	tswhaogV/fJ/aHCnKzRUWJVLcM3Z7/swzOoW4PznAeevmjwhExFkyRj+gc/9772gS8DH
-	1hYg==
+	bh=k5HVMyEHFhH4hl4A6kY8vBAdrvL3BH5rmiBHrKafzGI=;
+	b=hra9K1AC6wMhwcLWv0P7Sdi9XIRVhAHTz6lkSKe1oJRI96SkWNyauLJ0sf5E2abTWn
+	HCVHhvgyemr92OFR3EhxGaxFXvlKZikX8/wHsqhSNIjzQU5ZkcHaceInqwZ1U71YyD7/
+	ufwaebk5GTVe3acrMSZ3sBAi38itN+lrseYHgWD+8/xLlsvue8cDBuHG3vTUjUhDCEF3
+	berBo6DsRjEmBq1pcRkwpZP5jdRPtExK0vUV/z0lH5WdrZjSRwml5DOqJrws694ek1lA
+	/uOga6NvJi8ElOkD2Zo1pBtxCvJZaut2QXxibRkRD/7FmcQzNeQBszXYC8pY8O57gc5E
+	gUdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:date:to:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=K28yGzXLkGmSgH/STqFb3Yxx5koqnCozvsAlWXuvLdE=;
-	b=ZZqB5Vcg8m2xaEE4HLipwh6yGf6gwUYsNtpfNxdAQAHhpwSPhHj6Yxter8Q+SVYxEn
-	5e/bjNdv/c5R0iPhjJw/RS3+i346xhs/Ao4P4wJxdBcaOI7DxYS1fR2Z9UWXbb2Du0R9
-	2QA+h/LK+kWTR+TO8jNYF+xjgEwbv2u7iTUEcgGUOh5q6sLlg7lCJTgOI1D75xP4z1Ay
-	d1dci7r0L1qZUBAYxWqi1ek3nN1D+w9useAB+YOP2KP5YaFAu6rrHOBeE0CIjFfFLKR7
-	sT0wDEFFyBrHTMoerS4+/5dl0JNPY7W/y5tC72vBKTjj1fXsxdD9cacwdCybz8LMyvPZ
-	x19g==
-X-Gm-Message-State: ABUngvcVf07ktIZ7MTdUEYMMWtv/Y7zBWYiV0qSaf6yjqrXhEtprVYAXy56/rCjS1fw29g==
-X-Received: by 10.28.40.67 with SMTP id o64mr2508365wmo.5.1478023587648;
-	Tue, 01 Nov 2016 11:06:27 -0700 (PDT)
+	bh=k5HVMyEHFhH4hl4A6kY8vBAdrvL3BH5rmiBHrKafzGI=;
+	b=eLyZPUTHK3DaJbCI5O3q0s87oAZH/60+W9X3c6Yvc8bCmhIh9t/nQkaQfRQpMv7CR2
+	Eb9IobQCwz/Z5VKGDC7tuTv/uhsiP3iOa3+hcx48YlMskHhIoZ9QQFNAquZquiDMafRe
+	Eubb/nHI+hnj9WuAGOnmFoxWffOaP3sscdoIYeJY3wXkxz/9pzN6IWzeKPqHCQywDhGw
+	JM9Q1+wZvQKws8srt/e0l3EcFpdBNusU1xkYpNFFsgMPPVU/s1LlBa24DPvppttlRZY9
+	5pck8qmbUrbxYCZ6rhQnX+viisVLA6uw9Iev4C7MU1HjLksPRmTsq6aGR1iMUW2yNyFu
+	6Uyw==
+X-Gm-Message-State: ABUngve5A+dgVf3wp6cdGL+bo6/tS54fK+tpGpKeLQTyns1iKZBVJ220MLODeolIaFGvMw==
+X-Received: by 10.28.184.23 with SMTP id i23mr2573888wmf.66.1478023929080;
+	Tue, 01 Nov 2016 11:12:09 -0700 (PDT)
 Received: from localhost ([217.30.64.102]) by smtp.gmail.com with ESMTPSA id
-	k17sm31658742wmd.8.2016.11.01.11.06.26
+	h2sm26293049wjy.40.2016.11.01.11.12.08
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 01 Nov 2016 11:06:26 -0700 (PDT)
+	Tue, 01 Nov 2016 11:12:08 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 1 Nov 2016 19:06:31 +0100
+Date: Tue, 1 Nov 2016 19:12:13 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161101180631.GD2985@jama>
-References: <20161028112529.28464-1-kai.iskratsch@zenotrack.com>
-	<82cf8d34-0c55-f3ea-ebfa-b184a7c1c478@zenotrack.com>
+Message-ID: <20161101181213.GE2985@jama>
+References: <1477903622-19542-1-git-send-email-Junxian.Xiao@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <82cf8d34-0c55-f3ea-ebfa-b184a7c1c478@zenotrack.com>
+In-Reply-To: <1477903622-19542-1-git-send-email-Junxian.Xiao@windriver.com>
 User-Agent: Mutt/1.7.1 (2016-10-04)
-Subject: Re: [meta-gnome, jethro][PATCH] fix zenity build, and remove blacklist
+Subject: Re: [PATCH] apache2: include .load files in modules.d
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,115 +57,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Nov 2016 18:06:27 -0000
-X-Groupsio-MsgNum: 63681
+X-List-Received-Date: Tue, 01 Nov 2016 18:12:09 -0000
+X-Groupsio-MsgNum: 63682
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="l+goss899txtYvYf"
+	protocol="application/pgp-signature"; boundary="lHGcFxmlz1yfXmOs"
 Content-Disposition: inline
 
---l+goss899txtYvYf
+--lHGcFxmlz1yfXmOs
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 28, 2016 at 04:17:47PM +0200, Kai Iskratsch wrote:
+On Mon, Oct 31, 2016 at 04:47:01PM +0800, Junxian.Xiao wrote:
+> Issue: LIN8-5007
 >=20
-> Zenity was blacklisted in meta-gnome, but it seems the fixes for the=20
-> problem listed in blacklist reason were rather minimal,
+> According to other linux distributes like ubuntu, the modules
+> are usually included by 'LoadModule' command in *.load files
+> in mods-enable directory, and *.conf files in this directory
+> are for special configurations for each module.
 >=20
-> additionally the newer version of libnotify no longer has the notify_noti=
-fication_new_with_status_icon function, so this
-> had to be replaced with notify_notification_new to get the build to compl=
-ete
+> The stucture of the files tree is not the same in yocto, so this
+> may be not the rule that we must follow. But still add *.load to
+> be compatible with customer's normal usage habits.
 
-Is this already fixed in krogoth, morty and master?
+OE @ ~/meta-openembedded $ pwam 133390
+2016-11-01 19:10:52
+URL:https://patchwork.openembedded.org/patch/133390/mbox/ [1933] ->
+"pw-am-133390.patch" [1]
+Applying: apache2: include .load files in modules.d
+error: meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb: does not
+exist in index
 
-I don't think so, so it needs to be fixed in master first and then it
-might be backported into older releases.
+commit 7707dd5bc82583e4cc41ae3080b40d0d6ede8a45
+Author:     Derek Straka <derek@asterius.io>
+AuthorDate: Wed Jul 13 08:46:59 2016 -0400
+Commit:     Martin Jansa <Martin.Jansa@gmail.com>
+CommitDate: Fri Jul 29 11:00:55 2016 +0200
 
+    apache2: update to version 2.4.23
+   =20
+    Signed-off-by: Derek Straka <derek@asterius.io>
+    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+
+REBASE and retest before sending changes!
+
+> Signed-off-by: Junxian.Xiao <Junxian.Xiao@windriver.com>
 > ---
->   .../0002-fix-build-with-newer-libnotify.patch      | 28 +++++++++++++++=
-+++++++
->   meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb   | 12 ++++++----
->   2 files changed, 35 insertions(+), 5 deletions(-)
->   create mode 100644 meta-gnome/recipes-gnome/zenity/files/0002-fix-build=
--with-newer-libnotify.patch
+>  .../recipes-httpd/apache2/apache2_2.4.16.bb        |    1 +
+>  1 files changed, 1 insertions(+), 0 deletions(-)
 >=20
-> diff --git a/meta-gnome/recipes-gnome/zenity/files/0002-fix-build-with-ne=
-wer-libnotify.patch b/meta-gnome/recipes-gnome/zenity/files/0002-fix-build-=
-with-newer-libnotify.patch
-> new file mode 100644
-> index 0000000..67501c8
-> --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/zenity/files/0002-fix-build-with-newer-lib=
-notify.patch
-> @@ -0,0 +1,28 @@
-> +From 87f5f2acbf4f2cad50a0d1ea389d7170fe325b4e Mon Sep 17 00:00:00 2001
-> +From: Kai Iskratsch <kai.iskratsch@zenotrack.com>
-> +Date: Thu, 27 Oct 2016 13:08:40 +0200
-> +Subject: [PATCH] fix build with newer libnotify
-> +
-> +---
-> + src/notification.c | 4 ++--
-> + 1 file changed, 2 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/src/notification.c b/src/notification.c
-> +index 99a2e36..3e5b320 100644
-> +--- a/src/notification.c
-> ++++ b/src/notification.c
-> +@@ -184,10 +184,10 @@ zenity_notification_handle_stdin (GIOChannel *chan=
-nel,
-> +             icon =3D freeme =3D g_filename_to_uri (icon_file, NULL, NUL=
-L);
-> +           }
-> +
-> +-          notif =3D notify_notification_new_with_status_icon (
-> ++          notif =3D notify_notification_new (
-> +                               message[0] /* title */,
-> +                               message[1] /* summary */,
-> +-                              icon, status_icon);
-> ++                              gtk_status_icon_get_icon_name( status_ico=
-n));
-> +
-> +           g_strfreev (message);
-> +           g_free (freeme);
-> +--
-> +2.10.1
-> diff --git a/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb b/meta-gnom=
-e/recipes-gnome/zenity/zenity_2.32.1.bb
-> index 4e01c5c..bc6c9c4 100644
-> --- a/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb
-> +++ b/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb
-> @@ -4,18 +4,20 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D3bf50002aefd=
-002f49e7bb854063f7e7"
->  =20
->   PR =3D "r2"
->  =20
-> -PNBLACKLIST[zenity] ?=3D "BROKEN: doesn't build with B!=3DS"
-> -
-> -DEPENDS =3D "gtk+ glib-2.0 libnotify gnome-doc-utils"
-> +GNOME_COMPRESS_TYPE =3D "bz2"
-> +DEPENDS =3D "gtk+ glib-2.0 libnotify gnome-doc-utils intltool-native"
-> +RDEPENDS_${PN} +=3D "perl"
->  =20
->   inherit gnomebase
-> -SRC_URI +=3D "file://0001-Makefile.am-don-t-build-help.patch"
-> +SRC_URI +=3D "file://0001-Makefile.am-don-t-build-help.patch \
-> +            file://0002-fix-build-with-newer-libnotify.patch \
-> +            "
->   SRC_URI[archive.md5sum] =3D "aa66ec35451b16e424519b4973082170"
->   SRC_URI[archive.sha256sum] =3D "8838be041a07364b62a4281c971392e4a09bb01=
-bb3237a836ec0457ec0ea18ac"
->  =20
->   EXTRA_OECONF +=3D "--disable-scrollkeeper"
->   # remove -I/usr/include from zenity_CPPFLAGS
->   do_configure_prepend() {
-> -    sed -i -e '/-I$(includedir)/d' src/Makefile.am
-> +    sed -i -e '/-I$(includedir)/d' ${S}/src/Makefile.am
->   }
->  =20
+> diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb b/met=
+a-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
+> index 4aacff1..52127c2 100644
+> --- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
+> +++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.16.bb
+> @@ -81,6 +81,7 @@ do_install_append() {
+> =20
+>      # Ensure configuration file pulls in conf.d and modules.d
+>      printf "\nIncludeOptional ${sysconfdir}/${BPN}/conf.d/*.conf" >> ${D=
+}/${sysconfdir}/${BPN}/httpd.conf
+> +    printf "\nIncludeOptional ${sysconfdir}/${BPN}/modules.d/*.load" >> =
+${D}/${sysconfdir}/${BPN}/httpd.conf
+>      printf "\nIncludeOptional ${sysconfdir}/${BPN}/modules.d/*.conf\n\n"=
+ >> ${D}/${sysconfdir}/${BPN}/httpd.conf
+>      # match with that is in init script
+>      printf "\nPidFile /run/httpd.pid" >> ${D}/${sysconfdir}/${BPN}/httpd=
+=2Econf
 > --=20
-> 2.10.1
+> 1.7.1
 >=20
 > --=20
 > _______________________________________________
@@ -177,15 +136,15 @@ bb3237a836ec0457ec0ea18ac"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---l+goss899txtYvYf
+--lHGcFxmlz1yfXmOs
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iEYEARECAAYFAlgY2acACgkQN1Ujt2V2gByV+wCfTXdFb6xWyxhvvNBRXmzfmGzN
-M0oAnimf4sMoDmp+n67T/MpmyOaNXOJe
-=b2T1
+iEYEARECAAYFAlgY2vwACgkQN1Ujt2V2gBwN2wCguSCm/it9J18HZs8ytxnoyfTI
+0BEAn3fqFonn2NX4ZfDK7hdWyiKnEnK6
+=FTDQ
 -----END PGP SIGNATURE-----
 
---l+goss899txtYvYf--
+--lHGcFxmlz1yfXmOs--
