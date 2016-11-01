@@ -1,52 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 080D760762
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 553BC6FF73
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Nov 2016 16:47:47 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id y68so6229572pfb.1
+	Tue,  1 Nov 2016 16:51:03 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id a136so8712901pfa.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Nov 2016 09:47:49 -0700 (PDT)
+	Tue, 01 Nov 2016 09:51:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:mime-version:from:in-reply-to:date:cc:message-id:references
-	:to; bh=4FrhVPzISoBoFwIqSEApmR6RO8O/2cYBMkWSmDUz0Hw=;
-	b=SylvisVtKEZaLZjLb5K91dKRrWdt0aTubSEn0OqYNkXbEJokq6bWxo5NXaJCKUXwxR
-	NQaZWWe0SMcTYN0DjQwZ2t5WCHGbudaz1b9GFKEJgqz/ElcZ6FJG0lRfQ40EetfwuYTc
-	l3XFYGoXFeVprnG4S0biFXfywPKk12Ho3TuFhlAe2AFeBI74vy/bkqh4UrXYdtsBrorE
-	y+JYBQwlDPkQ3ZUHkOl4f6W+pZyCnFm/eckNsfG1NVUlGRvgv/698/WpMIw9y5BRk2Oy
-	QduFZiV3O0tkjMS0Oj6wf5ZBLleUI8Eye43ULhKpVAt4bfv3H0jq8ff9pmkccUtRwXPe
-	WiMg==
+	h=mime-version:subject:from:in-reply-to:date:message-id:references:to; 
+	bh=GtcDhuGzIgM89fkIutIfJ54ahDc3Up0MXwQxuKlsets=;
+	b=wY1kxfvocgVXY+jyeio8CpIg2TB6GhqKMe8lF85YLp1wLkqn1ontKrWOET5jy9wvTS
+	4vGNYnd2O7CWj1bqO0s4G0fXVNS/LAxbt6r+QHiJx3UUAx2t4sKhRD1NYFrXcGndmgnz
+	WGZJOzUgseZSaHWXOGZOhSzQOOzkZ4pngLiGBkY1ibp576a0ubTsGGTZm+KJ/JcYcDB+
+	Ns4G/kEdVz3wBSxkkVh0BeFimmGvgUt8/xH69zkp9SBDP0PlD8uIpCTtdHwzVZyF90ym
+	rV/K0PIlpMcbMR0kL36jrQJO2zg7Vbz3Lu+e86WfZVzR5+L0gFP88pzrVatr4k3OU8ZQ
+	R5/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:mime-version:from:in-reply-to:date:cc
+	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date
 	:message-id:references:to;
-	bh=4FrhVPzISoBoFwIqSEApmR6RO8O/2cYBMkWSmDUz0Hw=;
-	b=JkhQXTcLGCwtZIBEUUtNIfW2jttqubAT7zc8eXq4wWriqy7JNC2aBuX+i4V1T2Qkh3
-	ekvatEXdxiQQow9HlpHtPYXTfiKjX5NajIczac5J/o6xIpkQBluDfMMZK+JICrwt8p43
-	Hs3uYVuR8mYpBT4u5W4ZjIuxkoOjSsXmC4rw8oupmZlFETBimMucQLdCpQtmkpqyV7A7
-	Vrae4kuT8xenOay+AXLNz51vpPJVN69xPq6lOwGbluJcO2xExUIYAkNMTQ1IXR6s0z4U
-	HWIbs6/ikblwsbw8Eny5du+F2H9A/m4Bq1FnDghsLpVihEnSzZFNPqk5KghjIWW6gON3
-	JPSg==
-X-Gm-Message-State: ABUngvceCxxcntU2wDQ2F4VrbwKp0NRjQTqQicNiyER8u+dNPjf6Gfc8A/1XJrnmw/uq2w==
-X-Received: by 10.99.143.2 with SMTP id n2mr50216879pgd.70.1478018868270;
-	Tue, 01 Nov 2016 09:47:48 -0700 (PDT)
+	bh=GtcDhuGzIgM89fkIutIfJ54ahDc3Up0MXwQxuKlsets=;
+	b=d7hKk+blPhvZnOSsS+bc8+5F8xEZFwJau58waNRKBjAOjSEm6PzwgccOglWkgy9T5i
+	jgNzv/TXSYnhwOmCuSec+bHeZs3ix/rliFBgbhH2v+I+tHZULaKih9na8u7DAacRJL1a
+	zhVYpgGrVAavIUUgPMv6WZngi0679flzhhT9gOJU9sj9DFK3FqitqXx36ayxdMSqAXpl
+	8EKwkwB8t9bGQVQDkb+js/0+bj1vp2e0mMIjqDK9Xn1jqlzwoLdq1nC+Cf7hcVZ7bUzW
+	LEuy3Eoc0tUhtrMK0YlLpPZFc9Xo5i5/ivZ5ot6kBJr3rKlU9LOkojoyywJi8A7dd7re
+	El4g==
+X-Gm-Message-State: ABUngveC0v7IUD0XmJc1o1nPrLNNS44xdfFHlc43phv3KRRq2wA/COJfe27JHGxjiSrH3Q==
+X-Received: by 10.99.112.65 with SMTP id a1mr51121925pgn.31.1478019064823;
+	Tue, 01 Nov 2016 09:51:04 -0700 (PDT)
 Received: from ?IPv6:2601:646:8882:b8c:bd37:fcaa:669f:4910?
 	([2601:646:8882:b8c:bd37:fcaa:669f:4910])
-	by smtp.gmail.com with ESMTPSA id
-	v6sm41505592paz.45.2016.11.01.09.47.47
+	by smtp.gmail.com with ESMTPSA id 4sm43373355pfg.66.2016.11.01.09.51.03
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 01 Nov 2016 09:47:47 -0700 (PDT)
+	Tue, 01 Nov 2016 09:51:04 -0700 (PDT)
 Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
 X-Pgp-Agent: GPGMail
 From: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <1477887173-20915-1-git-send-email-ting.liu@nxp.com>
-Date: Tue, 1 Nov 2016 09:47:46 -0700
-Message-Id: <8288DE57-F7E8-4C0C-B072-4043981592D3@gmail.com>
-References: <1477887173-20915-1-git-send-email-ting.liu@nxp.com>
+In-Reply-To: <CAJTo0LYLT0bL4bgvkL_zJ1OGfOyvdxCooJ5V45ngtgW_pJFx0g@mail.gmail.com>
+Date: Tue, 1 Nov 2016 09:51:03 -0700
+Message-Id: <5F5E2368-C835-42C4-875F-B88DDB4EFF2D@gmail.com>
+References: <4d4b2776807f4f6e8480ea33a3a71c89@SEGOTNC5112-N6.vcn.ds.volvo.net>
+	<CAJTo0LYLT0bL4bgvkL_zJ1OGfOyvdxCooJ5V45ngtgW_pJFx0g@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Mailer: Apple Mail (2.3124)
-Cc: Otavio Salvador <otavio.salvador@ossystems.com.br>
-Subject: Re: [meta-oe][PATCH] xterm: package /usr/lib/X11 to avoid installed-vs-shipped error on ppc64
+Subject: Re: [meta-oe] packagegroup-core-eclipse-debug
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,64 +59,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Nov 2016 16:47:48 -0000
-X-Groupsio-MsgNum: 63678
+X-List-Received-Date: Tue, 01 Nov 2016 16:51:03 -0000
+X-Groupsio-MsgNum: 63679
 Content-Type: multipart/signed;
-	boundary="Apple-Mail=_31FCD534-6F22-495A-BF45-6C76BF5659E3";
+	boundary="Apple-Mail=_55719505-BF0A-4A56-90A3-91EE1943840D";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 
---Apple-Mail=_31FCD534-6F22-495A-BF45-6C76BF5659E3
-Content-Transfer-Encoding: quoted-printable
+--Apple-Mail=_55719505-BF0A-4A56-90A3-91EE1943840D
+Content-Transfer-Encoding: 7bit
 Content-Type: text/plain;
-	charset=utf-8
+	charset=us-ascii
 
 
-> On Oct 30, 2016, at 9:12 PM, ting.liu@nxp.com wrote:
->=20
-> From: Ting Liu <ting.liu@nxp.com>
->=20
-> commit 'ad5d2ff6c782a3319aedc25cc641574e39328460 xterm: 308 -> 320' =
-changed
-> FILES_${PN} from "/usr/lib/X11" to "${libdir}/X11". This leads to QA =
-issue
-> on ppc64 which defines libdir as /usr/lib64:
-> ERROR: QA Issue: xterm: Files/directories were installed but not =
-shipped in any package:
->  /usr/lib
->  /usr/lib/X11
->  /usr/lib/X11/app-defaults
->  /usr/lib/X11/app-defaults/UXTerm
->  /usr/lib/X11/app-defaults/KOI8RXTerm-color
->  /usr/lib/X11/app-defaults/XTerm-color
->  /usr/lib/X11/app-defaults/UXTerm-color
->  /usr/lib/X11/app-defaults/KOI8RXTerm
->  /usr/lib/X11/app-defaults/XTerm
->=20
-> Restore the setting of FILES_${PN} to package the installed ASCII text =
-files.
->=20
-> Signed-off-by: Ting Liu <ting.liu@nxp.com>
-> ---
-> meta-oe/recipes-graphics/xorg-app/xterm_325.bb | 2 +-
-> 1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_325.bb =
-b/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
-> index e0baf3c..a627af0 100644
-> --- a/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
-> +++ b/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
-> @@ -27,4 +27,4 @@ do_configure() {
->     oe_runconf
-> }
->=20
-> -FILES_${PN} +=3D "${libdir}/X11"
-> +FILES_${PN} +=3D "/usr/lib/X11=E2=80=9D
+> On Nov 1, 2016, at 5:35 AM, Burton, Ross <ross.burton@intel.com> wrote:
+> 
+> On 31 October 2016 at 19:51, Visser Sander (2) (Consultant) <
+> sander.visser.2@consultant.volvo.com> wrote:
+> 
+>> meta/recipes-core/packagegroups/packagegroup-core-eclipse-debug.bb
+>> RDEPENDS on gdbserver but that is no longer provided. Should RDEPENDS on
+>> gdb instead?
+>> 
+> 
+> The gdb recipe builds a gdbserver package.  There is a very rare bug that I
+> can't seem to find where sometimes gdb won't build gdbserver, but I've
+> never been able to figure out how and why this happens and you can fix it
+> by rebuilding gdb (bitbake -C unpack gdb).
 
-should it be ${nonarch_libdir}/x11
+it can be excluded if someone excludes GPLv3 from accepted packages
+perhaps thats are case here ?
 
-> --
-> 2.7.4
->=20
+> 
+> Ross
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -124,7 +98,7 @@ should it be ${nonarch_libdir}/x11
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
---Apple-Mail=_31FCD534-6F22-495A-BF45-6C76BF5659E3
+--Apple-Mail=_55719505-BF0A-4A56-90A3-91EE1943840D
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment;
 	filename=signature.asc
@@ -135,9 +109,9 @@ Content-Description: Message signed with OpenPGP using GPGMail
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlgYxzIACgkQuwUzVZGdMxQ7qQCfVanIBaTk1a6cAr4eaK+4yuCb
-JusAnjZV2CS0IWDLF81IxzsOiTlzE3bx
-=nk3N
+iEYEARECAAYFAlgYx/cACgkQuwUzVZGdMxSEdwCdH44Xggm2CDBB18MdZloMERv2
+M2AAnib+2LhGGRxWDBW2T6McnDBPyU4x
+=eTaa
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_31FCD534-6F22-495A-BF45-6C76BF5659E3--
+--Apple-Mail=_55719505-BF0A-4A56-90A3-91EE1943840D--
