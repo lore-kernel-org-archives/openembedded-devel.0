@@ -1,27 +1,27 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D7AB5719C1
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id E4E8971B2E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Nov 2016 09:23:18 +0000 (UTC)
+	Tue,  1 Nov 2016 09:23:15 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id uA19NJIF025884
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uA19NGBq027788
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 1 Nov 2016 02:23:20 -0700
+	Tue, 1 Nov 2016 02:23:16 -0700 (PDT)
 Received: from localhost (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.294.0;
-	Tue, 1 Nov 2016 02:23:19 -0700
+	Tue, 1 Nov 2016 02:23:15 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 1 Nov 2016 17:23:02 +0800
-Message-ID: <85f49851d91fe5994321541d42734e8ea51423a7.1477991825.git.yi.zhao@windriver.com>
+Date: Tue, 1 Nov 2016 17:23:01 +0800
+Message-ID: <7dca69306f6608cdf84c1a2156e278ebe0954418.1477991825.git.yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1477991825.git.yi.zhao@windriver.com>
 References: <cover.1477991825.git.yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.162.198]
-Subject: [meta-networking][PATCH 3/6] zeroconf: fix QA warning for GNU_HASH
+Subject: [meta-networking][PATCH 2/6] nuttcp: fix QA warning for GNU_HASH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,53 +37,26 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Tue, 01 Nov 2016 09:23:19 -0000
 Content-Type: text/plain
 
-Add LDFLAGS variable to Makefile so that extra linker flags can be sent
-via this variable.
+Set LDFLAGS explicitly for do_compile
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../zeroconf/zeroconf/makefile-add-ldflags.patch      | 19 +++++++++++++++++++
- .../recipes-protocols/zeroconf/zeroconf_0.9.bb        |  1 +
- 2 files changed, 20 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/zeroconf/zeroconf/makefile-add-ldflags.patch
+ meta-networking/recipes-support/nuttcp/nuttcp_7.2.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-protocols/zeroconf/zeroconf/makefile-add-ldflags.patch b/meta-networking/recipes-protocols/zeroconf/zeroconf/makefile-add-ldflags.patch
-new file mode 100644
-index 0000000..c5a4414
---- /dev/null
-+++ b/meta-networking/recipes-protocols/zeroconf/zeroconf/makefile-add-ldflags.patch
-@@ -0,0 +1,19 @@
-+Add LDFLAGS variable to Makefile, make sure the extra linker flags can be passed.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+
-+diff --git a/Makefile b/Makefile
-+index 77f3364..c98083f 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -18,7 +18,7 @@ clean:
-+ 
-+ zeroconf: zeroconf.o delay.o
-+ 	$(Q)echo "Creating $@"
-+-	$(Q)$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
-++	$(Q)$(CC) $(CFLAGS) ${LDFLAGS} -o $@ $^ $(LIBS)
-+ 
-+ 
-+ # Automatic dependency generation
-diff --git a/meta-networking/recipes-protocols/zeroconf/zeroconf_0.9.bb b/meta-networking/recipes-protocols/zeroconf/zeroconf_0.9.bb
-index 9307263..13f9b9b 100644
---- a/meta-networking/recipes-protocols/zeroconf/zeroconf_0.9.bb
-+++ b/meta-networking/recipes-protocols/zeroconf/zeroconf_0.9.bb
-@@ -18,6 +18,7 @@ PR = "r1"
+diff --git a/meta-networking/recipes-support/nuttcp/nuttcp_7.2.1.bb b/meta-networking/recipes-support/nuttcp/nuttcp_7.2.1.bb
+index 7f666fb..9430add 100644
+--- a/meta-networking/recipes-support/nuttcp/nuttcp_7.2.1.bb
++++ b/meta-networking/recipes-support/nuttcp/nuttcp_7.2.1.bb
+@@ -20,7 +20,7 @@ SRC_URI[sha256sum] = "c6e33810ccce67260f8d5d627f60e429d44f532365c58ed5673d035e2a
+ S = "${WORKDIR}"
  
- SRC_URI = "http://www.progsoc.org/~wildfire/zeroconf/download/${BPN}-${PV}.tar.gz \
-            file://compilefix.patch \
-+           file://makefile-add-ldflags.patch \
-            file://zeroconf-default \
-            file://debian-zeroconf"
+ do_compile () {
+-    ${CC} ${CFLAGS} -o nuttcp nuttcp-${PV}.c
++    ${CC} ${CFLAGS} ${LDFLAGS} -o nuttcp nuttcp-${PV}.c
+ }
  
+ do_install () {
 -- 
 2.7.4
 
