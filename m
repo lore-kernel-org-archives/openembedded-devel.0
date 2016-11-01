@@ -1,27 +1,59 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 05C5B719FA
+Return-Path: <anders@chargestorm.se>
+Received: from mail-lf0-f50.google.com (mail-lf0-f50.google.com
+	[209.85.215.50])
+	by mail.openembedded.org (Postfix) with ESMTP id F2DC06E666
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Nov 2016 09:23:30 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id uA19NWLE025889
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Tue,  1 Nov 2016 10:53:27 +0000 (UTC)
+Received: by mail-lf0-f50.google.com with SMTP id c13so16663157lfg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 1 Nov 2016 02:23:32 -0700
-Received: from localhost (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.294.0;
-	Tue, 1 Nov 2016 02:23:31 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 1 Nov 2016 17:23:05 +0800
-Message-ID: <0a5ea5c173ed7d2cb092da2a4e17a7c6a06f7da6.1477991825.git.yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <cover.1477991825.git.yi.zhao@windriver.com>
-References: <cover.1477991825.git.yi.zhao@windriver.com>
+	Tue, 01 Nov 2016 03:53:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=chargestorm-se.20150623.gappssmtp.com; s=20150623;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-disposition:in-reply-to:organization
+	:user-agent; bh=sbfqbpjK821a1bq+3kWf82gzH8icgbD/udrUxiVO58M=;
+	b=bGPrpeaoH8pyUxDfA8hXS067N3ifGMiskC/vWB15OfltMyLcI07OoWCQtdBPm/IO2U
+	Sj+9NMAP5L2pM1yOgmg/8bxOjRkZck7Rgd4RN6E9GKEbOSiYs6Ld25xVtjFTlgwLhyGw
+	+L19/isXE/XdrGkM17IatX4+IuDP9LhPfFfWcM5k0tIyVxVAEmi09qaIExHcjDmvmSnn
+	SH7Bdasc1YLoEOJ/B43cznO9icpp3o1n/jp9yMrCWCQ9sH+3bAMqKm0hI6gN6VNr1yE6
+	0TwJHqx+NQkbSjwDSXvwHG7tE0Itpjc9fCBrKgkgwQk7ipG5Jme8hvt/xhIcEOZlJG+f
+	C0AA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
+	:references:mime-version:content-disposition:in-reply-to
+	:organization:user-agent;
+	bh=sbfqbpjK821a1bq+3kWf82gzH8icgbD/udrUxiVO58M=;
+	b=LhQOgwhfK+pW4j74KvP8SrmClQcNkTerWb9epfIruLooBbxImSv3kwO6Xt3TvX3XnE
+	TSovhdZ9L0o3TQCs/L4Yv/vgT6kSY2QnCtIJev8830wCPfNdpFXUJoPWrQL0JHayrOXo
+	uvievG9W6ykzfyW688Kp0VJlKzAURmZGsJYXEhQocWq8T3VXEZ1ZHqDv/1XpcXt09KbB
+	zAhMftJ7y3bTofAM4fGF8yXCeJihdOdTK4uYjmbb8RmzThWgMnKbZUagNlTGGeYUbIm9
+	KFb90rj7LxXvPTcHTbKmHN1aFwyfWHK0cXnrEaC7MPCwzS8ZuDpXF/g1pZCddqAewUxM
+	Xwow==
+X-Gm-Message-State: ABUngvd7zBrSKzS8lg47uDasFGHwgdenicvOsYe6EZiQ/VZSRV9WMgJaPB1z08dz5fz/jg==
+X-Received: by 10.25.93.67 with SMTP id p3mr20460262lfj.1.1477997608082;
+	Tue, 01 Nov 2016 03:53:28 -0700 (PDT)
+Received: from ad.chargestorm.se (213-64-218-49-no126.business.telia.com.
+	[213.64.218.49])
+	by smtp.gmail.com with ESMTPSA id 76sm5344624ljb.43.2016.11.01.03.53.27
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 01 Nov 2016 03:53:27 -0700 (PDT)
+Date: Tue, 1 Nov 2016 11:53:25 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20161101105325.o4hcpm7p3ds7zvsh@ad.chargestorm.se>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <4d4b2776807f4f6e8480ea33a3a71c89@SEGOTNC5112-N6.vcn.ds.volvo.net>
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.198]
-Subject: [meta-networking][PATCH 6/6] tunctl: fix QA warning for GNU_HASH
+In-Reply-To: <4d4b2776807f4f6e8480ea33a3a71c89@SEGOTNC5112-N6.vcn.ds.volvo.net>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: NeoMutt/20161014 (1.7.1)
+Subject: Re: [meta-oe] packagegroup-core-eclipse-debug
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,60 +66,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Nov 2016 09:23:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 01 Nov 2016 10:53:28 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Add LDFLAGS variable to Makefile so that extra linker flags can be sent
-via this variable.
+* Visser Sander (2) (Consultant) <sander.visser.2@consultant.volvo.com> [161031 21:10]:
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- meta-networking/recipes-support/tunctl/tunctl.inc     |  4 +++-
- .../tunctl/tunctl/makefile-add-ldflags.patch          | 19 +++++++++++++++++++
- 2 files changed, 22 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/tunctl/tunctl/makefile-add-ldflags.patch
+> meta/recipes-core/packagegroups/packagegroup-core-eclipse-debug.bb
+> RDEPENDS on gdbserver but that is no longer provided. Should RDEPENDS
+> on gdb instead?
 
-diff --git a/meta-networking/recipes-support/tunctl/tunctl.inc b/meta-networking/recipes-support/tunctl/tunctl.inc
-index e95cfa5..1c11823 100644
---- a/meta-networking/recipes-support/tunctl/tunctl.inc
-+++ b/meta-networking/recipes-support/tunctl/tunctl.inc
-@@ -3,7 +3,9 @@ SECTION = "net"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://tunctl.c;beginline=1;endline=4;md5=ff3a09996bc5fff6bc5d4e0b4c28f999"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/tunctl/tunctl-${PV}.tar.gz"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/tunctl/tunctl-${PV}.tar.gz \
-+           file://makefile-add-ldflags.patch \
-+          "
- 
- do_compile() {
-     oe_runmake tunctl
-diff --git a/meta-networking/recipes-support/tunctl/tunctl/makefile-add-ldflags.patch b/meta-networking/recipes-support/tunctl/tunctl/makefile-add-ldflags.patch
-new file mode 100644
-index 0000000..c96f538
---- /dev/null
-+++ b/meta-networking/recipes-support/tunctl/tunctl/makefile-add-ldflags.patch
-@@ -0,0 +1,19 @@
-+Add LDFLAGS variable to Makefile, make sure the extra linker flags can be passed.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+
-+diff --git a/Makefile b/Makefile
-+index a0aa7f6..d6ce2c7 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -14,7 +14,7 @@ MAN_DIR ?= /usr/share/man/man$(MANS)
-+ all : $(BIN) $(MAN)
-+ 
-+ $(BIN) : $(BIN).c
-+-	$(CC) $(CFLAGS) -o $(BIN) $(BIN).c
-++	$(CC) $(CFLAGS) ${LDFLAGS} -o $(BIN) $(BIN).c
-+ 
-+ $(MAN) : $(PACKAGE).sgml
-+ 	docbook2man $(PACKAGE).sgml
+Why do you think that gdbserver is no longer provided?
+
+Sure, I haven't built master for some time, but it's still added in
+http://git.openembedded.org/openembedded-core/tree/meta/recipes-devtools/gdb/gdb.inc
+
+Besides, what's needed for eclipse-debugging, is gdbserver on the
+target.
+
+Cheers,
+Anders
+
 -- 
-2.7.4
-
+Anders Darander, Senior System Architect
+ChargeStorm AB / eStorm AB
 
