@@ -1,49 +1,48 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-qk0-f172.google.com (mail-qk0-f172.google.com
-	[209.85.220.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 24822607A3
+Received: from mail-qk0-f182.google.com (mail-qk0-f182.google.com
+	[209.85.220.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D4856E666
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Nov 2016 11:09:08 +0000 (UTC)
-Received: by mail-qk0-f172.google.com with SMTP id x190so11605001qkb.0
+	Wed,  2 Nov 2016 11:10:21 +0000 (UTC)
+Received: by mail-qk0-f182.google.com with SMTP id n204so3040354qke.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Nov 2016 04:09:10 -0700 (PDT)
+	Wed, 02 Nov 2016 04:10:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=iZV8mylvSsuTHj3nvILcBc2WBD4xaOmx2fwDSFr86NI=;
-	b=LwA3hJ7xMMoHD5pPfUUhZDNZEjElhslNt806QxVvtwG5gbmwoSQVTFozduPK7kLAHD
-	ZV6NXIwP/x7QZuC1ZN0KWunVvCvTkrC4Pi9aGCiAznh9VGlmoBi8MOdCrPHhzyYse/n/
-	OmNy+jePa2wHQmAb34k2avHEh0+buX0UkUA2bt+ZLfwJlNKDF0PScKpCcSnqqBXMepvG
-	OPsr1Qh/QYMmYU+i0gy9JEOekEPrnxZP9EXyB0hsIWcZv1is2+4ks1hW9z+exLJHKBvO
-	B9i7j/TM4MxVPeZg+PxJ49n4acKr5UkgttYVgxtQLeP4gklR8dd14F2FkL7DWg09Fexr
-	pMnw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=HlrUb75i8xOx+IoCM+ZLY1hiVYfK4A4Vhdma5QUMHQ4=;
+	b=uEuwlSSiS4z7oTaHLsz1kwsg4UB4DVKxZnvoIexSOvB3689atlwDgUI2zBc53a9uKV
+	siCsUQO2q55lfDjyBPAjUnRoycMp+KV8ESef+GMQuE7OhF+IJtvL1Q3Eou43CFFRt4lX
+	o49nViMgp2xOIhznucaUe9i7xoQlJxOVFOHAGGdQ/k3YZPTrPGwWQWm7HbZcm1Tyc6ms
+	F7aoLxBpfkhp+AyqksnnLduZqf8lqWOF1pnTq3p7FSVQaUG349GBH2tZ/S3EHCnwkdKS
+	ioUC3osj/mxuodjtTnMLguRARGeQ0l0KYttAdZ+GYlCmkqCxRJL8BpJcavla5COjfnJ6
+	NS9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=iZV8mylvSsuTHj3nvILcBc2WBD4xaOmx2fwDSFr86NI=;
-	b=eZvYB45YUbjFwW9FU1fPvXAbQJtNVwHR/ebCH8Ec9habwaH4K/FxxD2NxRwm5z1ERi
-	BT4QKhiu9p6jizf/vhzVxU/Tw8zPVPgZrzLrfSjb25PbS1A+tykB7f9ffjo4OIijR0FU
-	eaSA1FY42UnnDTvSa6MdMiGr0794/zjjModzT16Ail976qwkVnr+3kTmo2Yg4pOgoDZ8
-	W7u/1WumR0TUW2ukYkqb6ZGvtWxSfBp1f8hvrz+MWlqoXzyqQH+h+3C4tQqDxN55LcMk
-	DjCtKOS/GiVZQqGFawaJJcs6Sz3TOz+ri77v6qCgSTjX22BMIba1BeJZKfhK6UhIavku
-	Qs9A==
-X-Gm-Message-State: ABUngve/l4R8v9y3MHi5bqIray/pNhjMcHB2ai0FSc5tLQSdi9EaloOxuezJf9zAityqOB2eWhleQvhkrBmA6+sq
-X-Received: by 10.55.130.7 with SMTP id e7mr2795459qkd.121.1478084949482; Wed,
-	02 Nov 2016 04:09:09 -0700 (PDT)
+	:message-id:subject:to;
+	bh=HlrUb75i8xOx+IoCM+ZLY1hiVYfK4A4Vhdma5QUMHQ4=;
+	b=WdztlUaqwo/UovSs2jtLl7uvvgOCyveuM4yxgE/D3bmVGtw5wVaU+REsKk9QMx0Gvm
+	FE6gDW+2NvA0DSPGxX2C33ZIPkaDMfVEtg8Fj07/FAxg/S1eSgh9W4FRsqr/LZedrb9g
+	CkidFafnd31zcocTfCUROTARmweiCTGsLZ9GR7sXu8piav4wUPtxM3LTZA8ru8uITE15
+	o07CjhYRqYM3YBWTFbtbACVnloh24fi/Tm8g38OzEqYq2KWrjuIU0zbPo1dCtcnIVh6R
+	ncEgVMKHhOGPJCwrfjE+pH5s+NC0/dKtIl8pb0imUze7GeICBUHdt9g3rfxLhj0j6vhl
+	vvJg==
+X-Gm-Message-State: ABUngveXvVR9N+C1ZuWuUBrdfX4x98Sxo849fMa74hTUxl+EouGT7g3pNeM4Lolk6R3dQaQh4LzlKub8FZaTm3J5
+X-Received: by 10.55.215.6 with SMTP id m6mr2421144qki.244.1478085022610; Wed,
+	02 Nov 2016 04:10:22 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.140.85.208 with HTTP; Wed, 2 Nov 2016 04:08:49 -0700 (PDT)
-In-Reply-To: <1852679.faEG3Nt9xx@peggleto-mobl.ger.corp.intel.com>
-References: <1477898963-3759-1-git-send-email-mike.looijmans@topic.nl>
-	<CAEHkU3U4wbOuPLCy-Ndj+ScuH2QnyBHd76FhOiTyQJzG1Kxqqg@mail.gmail.com>
-	<8af647f4-b068-fba9-a508-ea1fd82ecdac@topic.nl>
-	<1852679.faEG3Nt9xx@peggleto-mobl.ger.corp.intel.com>
+Received: by 10.140.85.208 with HTTP; Wed, 2 Nov 2016 04:10:02 -0700 (PDT)
+In-Reply-To: <5F5E2368-C835-42C4-875F-B88DDB4EFF2D@gmail.com>
+References: <4d4b2776807f4f6e8480ea33a3a71c89@SEGOTNC5112-N6.vcn.ds.volvo.net>
+	<CAJTo0LYLT0bL4bgvkL_zJ1OGfOyvdxCooJ5V45ngtgW_pJFx0g@mail.gmail.com>
+	<5F5E2368-C835-42C4-875F-B88DDB4EFF2D@gmail.com>
 From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 2 Nov 2016 11:08:49 +0000
-Message-ID: <CAJTo0LY_nQfg5czXfOauC=eNG1fy0MDrreEvyuLx5NfyBny-Dw@mail.gmail.com>
+Date: Wed, 2 Nov 2016 11:10:02 +0000
+Message-ID: <CAJTo0LaRSrTKRCQ-=0hQ+RR=grEuLhh+=-eLpqBTwDPr4dcSHg@mail.gmail.com>
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt4][PATCH] qt4-embedded: Default to build tslib when touchscreen is defined
+Subject: Re: [meta-oe] packagegroup-core-eclipse-debug
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,29 +55,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Nov 2016 11:09:09 -0000
+X-List-Received-Date: Wed, 02 Nov 2016 11:10:22 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On 2 November 2016 at 03:01, Paul Eggleton <paul.eggleton@linux.intel.com>
-wrote:
+On 1 November 2016 at 16:51, Khem Raj <raj.khem@gmail.com> wrote:
 
-> I have merged both of the patches to master and taken the liberty of
-> merging
-> them to morty as well, just so it isn't horribly broken. I appreciate it's
-> still slightly broken from some perspectives.
+> > The gdb recipe builds a gdbserver package.  There is a very rare bug
+> that I
+> > can't seem to find where sometimes gdb won't build gdbserver, but I've
+> > never been able to figure out how and why this happens and you can fix it
+> > by rebuilding gdb (bitbake -C unpack gdb).
 >
-> I suspect the reason this was done was to remove the tslib dependency by
-> default so that meta-oe wasn't pulled in. Whether or not that's a good
-> idea is
-> another question, personally I wouldn't have done it this way. It seems to
-> me
-> if you have a touchscreen arguably you need tslib here.
+> it can be excluded if someone excludes GPLv3 from accepted packages
+> perhaps thats are case here ?
 >
 
-AFAIK tslib is only required for some touchscreens, for example the one I
-have somewhere in the attic works with standard kernel input drivers.  The
-LSB builds on the autobuilder pull in meta-qt4 so doesn't this mean that
-meta-oe is now a build dependency for the AB runs?
+I've seen this happen once, and the package wasn't even created.  GPLv3
+exclusion happens at image time, not package build time.
 
 Ross
 
