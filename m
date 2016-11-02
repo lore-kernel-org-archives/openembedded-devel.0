@@ -1,51 +1,30 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 6093371C2D
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 31634605FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Nov 2016 18:30:58 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id u144so4634752wmu.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Nov 2016 11:30:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=R7iL8/XY/JWCn3xXqxmJErCuvMeQD3btmStpy4bIT40=;
-	b=MWMVIU2BxVBhb0J3wK670/55+51yHpnXG6jtFkutKnSc6lYBi3e/lEWMaFIvp8JE0K
-	pfT3RHmQ0GTZ5hB2XZNJf2ivFm0XospJujdYKOuz/DvEzvoq7ip4Q7lAFXuX+MSvUbMk
-	hGerxsQukWP682yL4Jw5YdiIT7a6Az/II1fHhKAdpbjfkEGP3w9cg2BBH/olOluNobkB
-	gisCwgJnYPf9u+AlH6sl7algrg0qOYyaUxX3PS5ol7jDxEIXs0RaqA5xSsYXHJozPzaQ
-	+NGxJ/Oi9MSqVj+5d0gG01SDkt6C+oDDacZ0R/PrPkBm6uTVB0TqzI4wmhEpZzLBJCMA
-	FWPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=R7iL8/XY/JWCn3xXqxmJErCuvMeQD3btmStpy4bIT40=;
-	b=G9MQhlhgFvgNl3HikcxES7efdJV8BKABxupvUIqq44QZE6ywJI4dQd//cFymJpiWm/
-	135ATRBPQiAGmIS32yL4c5r3H2WeIZgQ690gYOJHkpiVJvPLKrAPf4iPcOYKqY5oanrd
-	SrjsErZ0oDWTRi4uwIbWifrZKItw29sHyLRARnRAS624IXrQkKTPikE/xgHVpmYCO49V
-	NyjoJ+1Pbf1nEJXXFDl+oeSQha501wAOKHR5yfXGLXjq/0h7wKCIoqyrU0ZMGHNCqfAm
-	DnFrZJQS6eFTfA7LLdhF0nOdemyvSW1fp6k16swzL38kaiXKlIsNyBsQLysKtiyRrfR+
-	V6UQ==
-X-Gm-Message-State: ABUngvdVHNpCbo/MhZwFdKGX7xYBCx7nMpJ5+ntKYnVYR2b/nCMqsRQU/SMAjt1+Iwmgwg==
-X-Received: by 10.28.88.18 with SMTP id m18mr20186wmb.26.1478025059060;
-	Tue, 01 Nov 2016 11:30:59 -0700 (PDT)
-Received: from localhost.localdomain (p5B0A3D1D.dip0.t-ipconnect.de.
-	[91.10.61.29]) by smtp.googlemail.com with ESMTPSA id
-	m194sm31902763wmg.11.2016.11.01.11.30.58
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 01 Nov 2016 11:30:58 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Nov 2016 19:30:42 +0100
-Message-Id: <1478025042-25619-2-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.5.5
-In-Reply-To: <1478025042-25619-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1478025042-25619-1-git-send-email-schnitzeltony@googlemail.com>
+	Wed,  2 Nov 2016 03:01:53 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP; 01 Nov 2016 20:01:55 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.31,582,1473145200"; d="scan'208";a="1062644063"
+Received: from kgonza2-mobl.amr.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.255.158.24])
+	by fmsmga001.fm.intel.com with ESMTP; 01 Nov 2016 20:01:53 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Maxin John <maxin.john@intel.com>,
+	Alexander Kanavin <alexander.kanavin@linux.intel.com>
+Date: Wed, 02 Nov 2016 16:01:50 +1300
+Message-ID: <1852679.faEG3Nt9xx@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.10 (Linux/4.7.9-100.fc23.x86_64; KDE/4.14.20; x86_64; ;
+	)
+In-Reply-To: <8af647f4-b068-fba9-a508-ea1fd82ecdac@topic.nl>
+References: <1477898963-3759-1-git-send-email-mike.looijmans@topic.nl>
+	<CAEHkU3U4wbOuPLCy-Ndj+ScuH2QnyBHd76FhOiTyQJzG1Kxqqg@mail.gmail.com>
+	<8af647f4-b068-fba9-a508-ea1fd82ecdac@topic.nl>
 MIME-Version: 1.0
-Subject: [PATCH 1/1] gstreamer: fix rare but annoying build errors
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt4][PATCH] qt4-embedded: Default to build tslib when touchscreen is defined
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,76 +37,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Nov 2016 18:30:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 02 Nov 2016 03:01:54 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-same as:
+I have merged both of the patches to master and taken the liberty of merging 
+them to morty as well, just so it isn't horribly broken. I appreciate it's 
+still slightly broken from some perspectives.
 
-commit 63707b56b5352ed72f1c5291967455b78f50fb7d
-Author: Andreas Müller <schnitzeltony@googlemail.com>
-Date:   Sun Oct 2 22:16:52 2016 +0200
+I suspect the reason this was done was to remove the tslib dependency by 
+default so that meta-oe wasn't pulled in. Whether or not that's a good idea is 
+another question, personally I wouldn't have done it this way. It seems to me 
+if you have a touchscreen arguably you need tslib here.
 
-gst-plugins-base: fix rare but annoying build errors
+Maxin / Alex, can you please determine what the right course of action is 
+going forward and take care of it?
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- ...2.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch | 32 ++++++++++++++++++++++
- .../gstreamer-0.10/gstreamer_0.10.36.bb            |  1 +
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0002-gst-glib2.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch
+Thanks,
+Paul
 
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0002-gst-glib2.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0002-gst-glib2.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch
-new file mode 100644
-index 0000000..8db3966
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0002-gst-glib2.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch
-@@ -0,0 +1,32 @@
-+From 4b145ceb22bbce7ba6e209c6ab61f2d5867e69f9 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Tue, 1 Nov 2016 19:02:30 +0100
-+Subject: [PATCH] gst-glib2.m4: don't do crazy things to GLIB_CFLAGS
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+we are definitely not one of those poor souls mentioned
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ common/m4/gst-glib2.m4 | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/common/m4/gst-glib2.m4 b/common/m4/gst-glib2.m4
-+index b01f02f..4569ae5 100644
-+--- a/common/m4/gst-glib2.m4
-++++ b/common/m4/gst-glib2.m4
-+@@ -69,7 +69,6 @@ AC_DEFUN([AG_GST_GLIB_CHECK],
-+   fi
-+ 
-+   dnl for the poor souls who for example have glib in /usr/local
-+-  AS_SCRUB_INCLUDE(GLIB_CFLAGS)
-+ 
-+   AC_SUBST(GLIB_EXTRA_CFLAGS)
-+ ])
-+-- 
-+2.5.5
-+
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb
-index e3bd5e5..512a28f 100644
---- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb
-+++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb
-@@ -16,6 +16,7 @@ SRC_URI = "http://gstreamer.freedesktop.org/src/gstreamer/gstreamer-${PV}.tar.bz
-            file://gst-inspect-check-error.patch \
-            file://0001-baseparse-Fix-self-comparison-always-evaluates-to-tr.patch \
-            file://0001-parse-make-grammar.y-work-with-Bison-3.patch \
-+           file://0002-gst-glib2.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch \
- "
- 
- SRC_URI[md5sum] = "a0cf7d6877f694a1a2ad2b4d1ecb890b"
+On Tue, 01 Nov 2016 16:02:06 Mike Looijmans wrote:
+> Having some more experience with it, my suggestion would be to REVERT
+> c4671873af5ab6c7d15ca397538f154c11c3486e "qt4-embedded.inc: provide
+> PACKAGECONFIG for tslib".
+> 
+> The problem with using MACHINE_FEATURES for building the qt4 libs is that
+> the qt4 package becomes machine-specific, and if you're buiding for
+> multiple machines (with and without touchscreen), there'll be lots of
+> "setstate" activity to take care of that.
+> 
+> Building tslib hardly hurts, it's a small dependency, while building qt4
+> takes something like 5 minutes on our big ass i7 build server. And deciding
+> not to install the plugin is quite efficient.
+> 
+> At the very least, "tslib" should be in the default config.
+> 
+> I don't know the rationale behind commit c4671873af5, if reducing compile
+> time was the incentive, it's not really paying off. Time would be better
+> spent avoiding building "perl" or "bash"...
+> 
+> On 31-10-16 15:12, Max Krummenacher wrote:
+> > Hi
+> > 
+> > I sent a similar patch:
+> > https://lists.yoctoproject.org/pipermail/yocto/2016-October/032661.html
+> > 
+> > Both fix the build error with the HEAD of meta-qt4.
+> > 
+> > Question is if "touchscreen" in MACHINE_FEATURES should build for
+> > tslib by default.
+> > If yes, your patch is needed.
+> > 
+> > However the error will pop up again if someone chooses to set
+> > PACKAGECONFIG to not include tslib.
+> > That would be handled by the patch above, so applying both patches
+> > would fix the problem and default to having tslib support.
+> > 
+> > Max
+> > 
+> > P.S.What is the 'correct' mailinglist for meta-qt4?
+> > 
+> > 2016-10-31 8:29 GMT+01:00 Mike Looijmans <mike.looijmans@topic.nl>:
+> >> When "touchscreen" is in the MACHINE_FEATURES, packagegroup-core-qt4e
+> >> will RDEPEND on qt4-embedded-plugin-mousedriver-tslib, but that
+> >> library is not being built by default, resulting in an error like:
+> >> opkg_prepare_url_for_install: Couldn't find anything to satisfy
+> >> 'qt4-embedded-plugin-mousedriver-tslib'.
+> >> 
+> >> To prevent that from happening, add "tslib" to the default
+> >> PACKAGECONFIG when touchscreen is defined.
+> >> 
+> >> Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
+> >> ---
+> >> Applies to both morty and master branches.
+> >> 
+> >>  recipes-qt4/qt4/qt4-embedded.inc | 2 +-
+> >>  1 file changed, 1 insertion(+), 1 deletion(-)
+> >> 
+> >> diff --git a/recipes-qt4/qt4/qt4-embedded.inc
+> >> b/recipes-qt4/qt4/qt4-embedded.inc index 1122080..9c2d9da 100644
+> >> --- a/recipes-qt4/qt4/qt4-embedded.inc
+> >> +++ b/recipes-qt4/qt4/qt4-embedded.inc
+> >> @@ -3,7 +3,7 @@ DESCRIPTION = "Qt is a versatile cross-platform
+> >> application framework -- this is>> 
+> >>  SECTION = "libs"
+> >>  HOMEPAGE = "http://qt-project.org/"
+> >> 
+> >> -PACKAGECONFIG ??= ""
+> >> +PACKAGECONFIG ??= '${@bb.utils.contains("MACHINE_FEATURES",
+> >> "touchscreen", "tslib", "",d)}'>> 
+> >>  PACKAGECONFIG[tslib] = " -plugin-mouse-tslib, ,tslib"
+> >>  
+> >>  QT4EDEPENDS = ""
+> >> 
+> >> --
+> >> 1.9.1
+> >> 
+> >> --
+> 
+> Kind regards,
+> 
+> Mike Looijmans
+> System Expert
+> 
+> TOPIC Products
+> Materiaalweg 4, NL-5681 RJ Best
+> Postbus 440, NL-5680 AK Best
+> Telefoon: +31 (0) 499 33 69 79
+> E-mail: mike.looijmans@topicproducts.com
+> Website: www.topicproducts.com
+> 
+> Please consider the environment before printing this e-mail
+> 
+> 
+> 
+> 
+> 
+> _______________________________________________
+> 
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 -- 
-2.5.5
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
