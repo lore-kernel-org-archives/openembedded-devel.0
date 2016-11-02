@@ -1,24 +1,44 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5FD7C60248
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 48A557198E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Nov 2016 06:34:50 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uA26YqrM008783
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed,  2 Nov 2016 06:53:13 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id t79so16252124wmt.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 1 Nov 2016 23:34:52 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Tue, 1 Nov 2016 23:34:51 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 2 Nov 2016 14:34:29 +0800
-Message-ID: <20161102063429.23924-1-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.8.3
+	Tue, 01 Nov 2016 23:53:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=fBIDHke8Crs4oCm90O/Yu3UQQhKkznI2jKP36JQg2Lc=;
+	b=Z4uhRkiWhcZgOqTOezgm4PhYGPkPQAPbOPym35nEHgb4HpSwevXRqef+cGkOCrfnFE
+	D18JznQ+6vyVsJyTr0msht76lTRIx7lQxheqXf3CbXJ5cR0zABBoVFKpGV4HDjWSmBpy
+	t4zhzak+MXf3RXwD85tjQxaiaRY34RXJEMuCjG9FCjJ/eOn/GLp8rB/0rOanp0SSBl6a
+	eLu5/bS/wVDXaDqpapokG+6h+xG+TnBf/E2QR1crz5LovV44R3SPlUPU6hauZBusiBGz
+	FHvBJlFLmySBOJJ1JYHxrDCMbW8gdvDO+oDNpKcnXNdUuRmvhgbBrWucuIxkim4OVtrY
+	ewWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=fBIDHke8Crs4oCm90O/Yu3UQQhKkznI2jKP36JQg2Lc=;
+	b=eMIHaW/O3sEXP2u1AXHiOlCoY9UyURxFHleFdhSJy+Cljf/Q0l0VqHh4/tdBijPA1a
+	mpPu3Rsh5D+LCDgLcK8GhNmsO3FykXB9nZthVk3kRG/sh6sRT1UBOtTB/Vg/dVyY28CH
+	TvYCQYx+nx0YEdoq3EDy8rwwbDc1zlNRJ+2tXudGxETDfNEUu4AIBPHBb8xB19CALYn4
+	gtKD59CcxvVs+uSbWCaRd8DLHLX50H7gzjK4ynEq3W155P0/bLK1hXP+ymIy9ClS4gKy
+	DKFuUlQVzRGAjfFhQEEui84OqfbDGxt0B8/vyphDsl9MdsOdz3JC40pgVvewqxsHqx+Z
+	seUA==
+X-Gm-Message-State: ABUngvf0axZlBjM/eoeBixslj9KAxC8UxHpMEH/cXHmYbwSUWM1sY77weMsers2XEQJJOHmoVNPA3Q+ZifDfqg==
+X-Received: by 10.28.151.17 with SMTP id z17mr1347633wmd.15.1478069594478;
+	Tue, 01 Nov 2016 23:53:14 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH v2] squid: disable gnu atomic operations for mipsel
+Received: by 10.80.134.144 with HTTP; Tue, 1 Nov 2016 23:53:14 -0700 (PDT)
+In-Reply-To: <1478067044-24649-1-git-send-email-gizero@gmail.com>
+References: <1478067044-24649-1-git-send-email-gizero@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 2 Nov 2016 07:53:14 +0100
+Message-ID: <CA+chaQcVE-eMoqCZaTF-esaHc4+0ZYAeOe7JmQ3UtQDwn32Rrg@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH] libiio: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,37 +51,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Nov 2016 06:34:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 02 Nov 2016 06:53:15 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Jackie Huang <jackie.huang@windriver.com>
+Don't use github archives which are regenerated from time to time.
 
-Disable GNU atomic operations for mipsel since it's
-not supported.
+On Wed, Nov 2, 2016 at 7:10 AM, Andrea Galbusera <gizero@gmail.com> wrote:
 
-Refer to https://gcc.gnu.org/bugzilla/show_bug.cgi?id=56300:
-
-  There is no hardware support for 8 bytes atomic operations on
-  32-bit MIPS targets.
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- meta-networking/recipes-daemons/squid/squid_3.5.20.bb | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-networking/recipes-daemons/squid/squid_3.5.20.bb b/meta-networking/recipes-daemons/squid/squid_3.5.20.bb
-index 364d00e..fc7f768 100644
---- a/meta-networking/recipes-daemons/squid/squid_3.5.20.bb
-+++ b/meta-networking/recipes-daemons/squid/squid_3.5.20.bb
-@@ -38,6 +38,7 @@ USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --she
- 
- PACKAGECONFIG ??= "${@bb.utils.contains('TARGET_ARCH', 'powerpc', 'noatomics', '', d)} \
-                    ${@bb.utils.contains('TARGET_ARCH', 'mips', 'noatomics', '', d)} \
-+                   ${@bb.utils.contains('TARGET_ARCH', 'mipsel', 'noatomics', '', d)} \
-                    ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
-                   "
- PACKAGECONFIG[libnetfilter-conntrack] = "--with-netfilter-conntrack=${includedir}, --without-netfilter-conntrack, libnetfilter-conntrack"
--- 
-2.8.3
-
+> libiio is a C library for interfacing with IIO devices. It abstracts
+> the low-level details of the hardware, and provides a simple yet complete
+> programming interface.
+>
+> This recipe provides the following packages:
+> * libiio: main package with C library
+> * libiio-iiod: user space daemon providing network backend to iio devices
+> * libiio-tests: user space test applications using libiio
+> * libiio-python: python bindings
+> ---
+>  meta-oe/recipes-support/libiio/libiio_2015.2-r1.bb | 21
+> +++++++++++++++++++++
+>  1 file changed, 21 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/libiio/libiio_2015.2-r1.bb
+>
+> diff --git a/meta-oe/recipes-support/libiio/libiio_2015.2-r1.bb
+> b/meta-oe/recipes-support/libiio/libiio_2015.2-r1.bb
+> new file mode 100644
+> index 0000000..8c062b6
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/libiio/libiio_2015.2-r1.bb
+> @@ -0,0 +1,21 @@
+> +SUMMARY = "Library for interfacing with IIO devices"
+> +HOMEPAGE = "https://wiki.analog.com/resources/tools-software/
+> linux-software/libiio"
+> +SECTION = "libs"
+> +LICENSE = "LGPLv2.1+"
+> +LIC_FILES_CHKSUM = "file://COPYING.txt;md5=7c13b3376cea0ce68d2d2da0a1b3a7
+> 2c"
+> +
+> +SRC_URI = "https://github.com/analogdevicesinc/${PN}/archive/${PV}.tar.gz
+> "
+> +SRC_URI[md5sum] = "fbd6faa9c420659023072eb3c74ed037"
+> +SRC_URI[sha256sum] = "b230cfd5ef5550cebf485950d8b1f4
+> d5cfa7d5f0814aeb7b44e530e9caecb83a"
+> +
+> +DEPENDS = "avahi libxml2"
+> +
+> +inherit cmake pythonnative
+> +
+> +PACKAGES =+ "${PN}-iiod ${PN}-tests ${PN}-python"
+> +
+> +RDEPENDS_${PN}-python = "${PN} python-ctypes python-stringold"
+> +
+> +FILES_${PN}-iiod = "${sbindir}/iiod"
+> +FILES_${PN}-tests = "${bindir}"
+> +FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
+> --
+> 1.9.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
