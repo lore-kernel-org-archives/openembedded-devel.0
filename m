@@ -1,53 +1,45 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C47D719F9
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 2EFCD719E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Nov 2016 15:24:32 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id y68so5160197pfb.1
+	Thu,  3 Nov 2016 17:33:47 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id a136so5433845pfa.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Nov 2016 08:24:34 -0700 (PDT)
+	Thu, 03 Nov 2016 10:33:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=SWK8DjHj67vRwDMdyhQdZ6OqGmodoABNcfsJllE/qrs=;
-	b=SJz6OLLTkJFobmHjEqNBMPCjL/9KXQqkLvzM9zVmf2Jo4SqjnySBLpCbjKX7i7Ipj5
-	vn/Lau/k1OvHkS5eOXNSDuG1XHWK8Esphp0elASSKxo7X8v5uMtqX67PR4YQBknQ7Mvk
-	L/+ay1DYYnnIt2bgrwA0EMSHdM51meywKtPqJN4RLEG7ivtVL5q5vo+FWY2rA929bXit
-	fGxNKxO9r3IaM+LH0U9HXDcIL+pLany34EGklm6T2xBFMpcx7ZIoTqnH/qp+BA84Ta/t
-	X4qP27X5aiqPueKj6rsSO7LaCM3ZGty6q8RuoVha6jEOH2V7aGwrgLibA5HKBZscZjKO
-	BJ5w==
+	h=from:to:cc:subject:date:message-id;
+	bh=dozy95z7AeIKtUjtU7ca7qrWPF9ahlP26lsbLcqweU8=;
+	b=OQ4eyZeyudR6fjXLh7hPJP7DLX5dGXjCudy5ClYT68xoGC+3kBf6cxjd+4M7rcCKEq
+	97EEQO1js654bxPpOIhuTx7BQKK6ZgLQOjbWMqSOZJl6aoi0zDyNUz1XTS93pqX76CLU
+	GXUGlPWQCZz0yLfnkPeXAgUrVCCfGSW7M1Wyf0524yqhTwL4gwPx1D87QRYG4zZ4y9lz
+	E9Pnncu7GdHkVFzfW0PNd5yJ6tasCzsPxQ1lamLGT/F0VzkjEr24HBxuIkBkCHsqCLFU
+	bQn7LenSzkUuHs61aOScxKs7j2dDerqISDJ5xU+Rkf8RzVcIkIvv0uotP0gkiDyQYgHY
+	9Uxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=SWK8DjHj67vRwDMdyhQdZ6OqGmodoABNcfsJllE/qrs=;
-	b=mTPR29Cw7goxuyL7zjVhCBbzLHry4TwK1xHvNB/8xVmb5kdB8Gt7x/5QisCBlzTaV9
-	bk9QWaP055AnTukWK/BjbLuYtTB0LqdUFjmK8bTG4KJfs97hE+maqCr3s1cXBmutSaRO
-	KSpC2Ex9FrNxsLexZi2hK2WPQo5ZdNQZCegFagR2/F7VaYYzIgbiiO9LgXE0Hifm6Lyo
-	FLHiYgj7x3iiab29E9aDEDIa0mkpI7CyhSQ/Exw/je9ZAtJqnzSmB0AD98nqNA744/RP
-	M4s+1qJdqdJyRA5/MVSfw12TJRB5ko1UV2FaV8RLrd5mckrtAlzlD1XP4vL4tmBW0qzF
-	86xg==
-X-Gm-Message-State: ABUngvdmdRpRlxVXTf2q+fSIZNzsYFhY7pELtNmEaQgmd8XDdc8hOykDLYmwYcqgaSQREw==
-X-Received: by 10.99.251.5 with SMTP id o5mr14695890pgh.160.1478186673630;
-	Thu, 03 Nov 2016 08:24:33 -0700 (PDT)
-Received: from ?IPv6:2601:202:4001:9ea0:614c:a5d9:489d:9d27?
-	([2601:202:4001:9ea0:614c:a5d9:489d:9d27])
-	by smtp.googlemail.com with ESMTPSA id
-	r88sm13550879pfe.93.2016.11.03.08.24.33
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=dozy95z7AeIKtUjtU7ca7qrWPF9ahlP26lsbLcqweU8=;
+	b=GAvU5SiCpRVx1an3W4ah68txKIE1yAf8f21ofRO2hPtLj1mdc6lxXIldgY/r1+YlMJ
+	IM5dnhAFBXR6gy/+4Axyw4ao+4Y+Y5zeu6GV6VJ72XgCoHci7YSAj+2TWNl2qXnD8uYw
+	EfgiEES4Tq62SCFNk6LMJDLWbK9Vg7z7gCMd6f34Q7IAHCJjO16gzC78Xm7g3rqSp6f7
+	w9P9naO+OhHsgFScKUsa0VNWbz//omacj6UZ5Ji6/eeFTCg8AXRhQpDOi7ProafWkpgx
+	1vjARTyxZlWyCxLr5aQU8jyPBGYCHR/wFbIeADQv6VZn6DGgExAI2458x2sS0u7QzocV
+	b/yQ==
+X-Gm-Message-State: ABUngvc7oEm14sHyrUfN7549QN5BWKW39v8Qw/v78oL/+DQXKsqKw8SnRZByWOJ/vYDQ1g==
+X-Received: by 10.98.193.68 with SMTP id i65mr18966202pfg.155.1478194429255;
+	Thu, 03 Nov 2016 10:33:49 -0700 (PDT)
+Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
+	uh10sm14241214pab.5.2016.11.03.10.33.48
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 03 Nov 2016 08:24:33 -0700 (PDT)
+	Thu, 03 Nov 2016 10:33:48 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1477420954-7346-1-git-send-email-michael.davis@essvote.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <b917a9b5-5b0c-607b-011a-6fed1e528b37@gmail.com>
-Date: Thu, 3 Nov 2016 08:24:32 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.3.0
-MIME-Version: 1.0
-In-Reply-To: <1477420954-7346-1-git-send-email-michael.davis@essvote.com>
-Subject: Re: [meta-oe][krogoth][PATCH] pcsc-lite: Seperate GPLV3 portions from BSD
+Date: Thu,  3 Nov 2016 10:33:41 -0700
+Message-Id: <20161103173342.13661-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.10.2
+Subject: [meta-oe][PATCH 1/2] krb5: Add -fPIC to compile flags
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,75 +52,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Nov 2016 15:24:33 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 03 Nov 2016 17:33:48 -0000
 
+Fixes errors on x86_64 e.g.
+errors.so: relocation R_X86_64_PC32 against symbol `k5_vset_error' can not be used when making a shared object; recompile with -fPIC
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-connectivity/krb5/krb5_1.13.6.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-On 10/25/2016 11:43 AM, Davis, Michael wrote:
-> From: "Davis, Michael" <michael.davis@essvote.com>
-> 
-> GPLV3 and BSD portions were originally placed in the same package.
-> The GPLv3 portion has been seperated into pcsc-lite-spy and
-> pcsc-lite-spy-dev so the package can be used with GPLv3 blacklisted.
-> 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> (cherry picked from commit 54c7e784c7689d8cff4173db716bb7913c65315f)
-> Signed-off-by: Michael Davis <michael.davis@essvote.com>
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.13.6.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.13.6.bb
+index e2d0594..06f7f90 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.13.6.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.13.6.bb
+@@ -51,8 +51,8 @@ CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regc
+                   ac_cv_printf_positional=yes ac_cv_file__etc_environment=yes \
+                   ac_cv_file__etc_TIMEZONE=no"
+ 
+-CFLAGS_append = " -DDESTRUCTOR_ATTR_WORKS=1 -I${STAGING_INCDIR}/et"
+-LDFLAGS_append = " -lpthread"
++CFLAGS_append = " -fPIC -DDESTRUCTOR_ATTR_WORKS=1 -I${STAGING_INCDIR}/et"
++LDFLAGS_append = " -pthread"
+ 
+ FILES_${PN} += "${datadir}/gnats"
+ FILES_${PN}-doc += "${datadir}/examples"
+-- 
+2.10.2
 
-merged to staging.
-Armin
-> ---
->  .../recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb  | 24 ++++++++++++++++++----
->  1 file changed, 20 insertions(+), 4 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
-> index cc72549..0d2cb33 100644
-> --- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
-> +++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
-> @@ -1,7 +1,13 @@
->  SUMMARY = "PC/SC Lite smart card framework and applications"
->  HOMEPAGE = "http://pcsclite.alioth.debian.org/"
->  LICENSE = "BSD & GPLv3+"
-> -LICENSE_${PN}-dev = "GPLv3+"
-> +LICENSE_${PN} = "BSD"
-> +LICENSE_${PN}-lib = "BSD"
-> +LICENSE_${PN}-doc = "BSD"
-> +LICENSE_${PN}-dev = "BSD"
-> +LICENSE_${PN}-dbg = "BSD & GPLv3+"
-> +LICENSE_${PN}-spy = "GPLv3+"
-> +LICENSE_${PN}-spy-dev = "GPLv3+"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=bcfbd85230ac3c586fb294c8b627cf32"
->  DEPENDS = "udev"
->  
-> @@ -20,14 +26,24 @@ EXTRA_OECONF = " \
->  
->  S = "${WORKDIR}/pcsc-lite-${PV}"
->  
-> -PACKAGES =+ "${PN}-lib"
-> +PACKAGES = "${PN} ${PN}-dbg ${PN}-dev ${PN}-lib ${PN}-doc ${PN}-spy ${PN}-spy-dev"
->  
->  RRECOMMENDS_${PN} = "ccid"
->  
-> -FILES_${PN}-lib = "${libdir}/lib*${SOLIBS}"
-> +FILES_${PN} = "${sbindir}/pcscd"
-> +FILES_${PN}-lib = "${libdir}/libpcsclite*${SOLIBS}"
-> +FILES_${PN}-dev = "${includedir} \
-> +                   ${libdir}/pkgconfig \
-> +                   ${libdir}/libpcsclite.la \
-> +                   ${libdir}/libpcsclite.so"
-> +                   
-> +FILES_${PN}-spy = "${bindir}/pcsc-spy \
-> +                   ${libdir}/libpcscspy*${SOLIBS}"
-> +FILES_${PN}-spy-dev = "${libdir}/libpcscspy.la \
-> +                       ${libdir}/libpcscspy.so "
->  
->  RPROVIDES_${PN} += "${PN}-systemd"
->  RREPLACES_${PN} += "${PN}-systemd"
->  RCONFLICTS_${PN} += "${PN}-systemd"
->  SYSTEMD_SERVICE_${PN} = "pcscd.socket"
-> -RDEPENDS_${PN} +="python"
-> +RDEPENDS_${PN}-spy +="python"
-> 
 
