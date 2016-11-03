@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 6EABC71B1E
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C47D719F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Nov 2016 15:20:53 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id y68so5152711pfb.1
+	Thu,  3 Nov 2016 15:24:32 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id y68so5160197pfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Nov 2016 08:20:55 -0700 (PDT)
+	Thu, 03 Nov 2016 08:24:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:cc:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding;
-	bh=UOdf5ZPlqa3kcT9zQeDr2VqtB08b3jdeeatkriN44xc=;
-	b=fXR13N8hr3I6PUHvY9HQV4Z64ZwLRM1yri7LzC1Kw+Nneyj7eeK9AVvwHfm3+xccDC
-	+52pBrrt2SjWdLtaki5CfyNisYUKUCah8clVkLEyQBb1XwE8RUCPCvCOQfvyOUt23KdJ
-	izQPK8wc1tSnn/U8Z7k/ipYqbbeWd+qdopHPpDoQ6opk70F44XUzWkSe266X4tz/uac5
-	0AmJQiLePUwF9nAAn3xzqSFyCeYet2rOGtuLEWOn9xDS/2KWYTWMOFVGeljkgujzDBCP
-	2uoh2fZlir6x3PmOAUfRGmwYnPnK2D0UbTkTbeAPCvOqS6EBvvBm6iZ1oSIOwymwdb5P
-	t32Q==
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=SWK8DjHj67vRwDMdyhQdZ6OqGmodoABNcfsJllE/qrs=;
+	b=SJz6OLLTkJFobmHjEqNBMPCjL/9KXQqkLvzM9zVmf2Jo4SqjnySBLpCbjKX7i7Ipj5
+	vn/Lau/k1OvHkS5eOXNSDuG1XHWK8Esphp0elASSKxo7X8v5uMtqX67PR4YQBknQ7Mvk
+	L/+ay1DYYnnIt2bgrwA0EMSHdM51meywKtPqJN4RLEG7ivtVL5q5vo+FWY2rA929bXit
+	fGxNKxO9r3IaM+LH0U9HXDcIL+pLany34EGklm6T2xBFMpcx7ZIoTqnH/qp+BA84Ta/t
+	X4qP27X5aiqPueKj6rsSO7LaCM3ZGty6q8RuoVha6jEOH2V7aGwrgLibA5HKBZscZjKO
+	BJ5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
+	h=x-gm-message-state:subject:to:references:from:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=UOdf5ZPlqa3kcT9zQeDr2VqtB08b3jdeeatkriN44xc=;
-	b=kpbBCEjb1hWJoc0ff5kLq1rL4A5wrSw17lnMwhC8PmGwHZCUTJLDbQFDkh1Ro6WDar
-	fcNlfNa9zXEGv+4uwGwbTQpN9BzpmLIqz9pFSjq2HCcVVblrZnX96AkqS+Urw9PgDEbn
-	nz+KM+o8j9+wIeSZvdwsO8xTdNKS9+uqEjQDo/+9oJZH18nFUYj16LU/cAbd/VuZfKZZ
-	VB/FSABY22a4lOnRCj2jRdtZfl3bFD1qDS8aiGn4cG6nol/VzyQfyeB/yaYG+5MDEgmg
-	VRLfiecYqJjKuP8S0KnhaEt/iYJtrEdR4aDEgA5+8+LzpuES9uYakOvc4fwY3zpv9262
-	15og==
-X-Gm-Message-State: ABUngve/e5EQkD+F5opK/M/YQcGBaPUgwx+4MBJpgMy/7OENTyVurb6ySJ98+l6Vs+rMig==
-X-Received: by 10.98.9.67 with SMTP id e64mr17971142pfd.74.1478186455286;
-	Thu, 03 Nov 2016 08:20:55 -0700 (PDT)
+	bh=SWK8DjHj67vRwDMdyhQdZ6OqGmodoABNcfsJllE/qrs=;
+	b=mTPR29Cw7goxuyL7zjVhCBbzLHry4TwK1xHvNB/8xVmb5kdB8Gt7x/5QisCBlzTaV9
+	bk9QWaP055AnTukWK/BjbLuYtTB0LqdUFjmK8bTG4KJfs97hE+maqCr3s1cXBmutSaRO
+	KSpC2Ex9FrNxsLexZi2hK2WPQo5ZdNQZCegFagR2/F7VaYYzIgbiiO9LgXE0Hifm6Lyo
+	FLHiYgj7x3iiab29E9aDEDIa0mkpI7CyhSQ/Exw/je9ZAtJqnzSmB0AD98nqNA744/RP
+	M4s+1qJdqdJyRA5/MVSfw12TJRB5ko1UV2FaV8RLrd5mckrtAlzlD1XP4vL4tmBW0qzF
+	86xg==
+X-Gm-Message-State: ABUngvdmdRpRlxVXTf2q+fSIZNzsYFhY7pELtNmEaQgmd8XDdc8hOykDLYmwYcqgaSQREw==
+X-Received: by 10.99.251.5 with SMTP id o5mr14695890pgh.160.1478186673630;
+	Thu, 03 Nov 2016 08:24:33 -0700 (PDT)
 Received: from ?IPv6:2601:202:4001:9ea0:614c:a5d9:489d:9d27?
 	([2601:202:4001:9ea0:614c:a5d9:489d:9d27])
 	by smtp.googlemail.com with ESMTPSA id
-	j192sm13545052pfc.60.2016.11.03.08.20.54
+	r88sm13550879pfe.93.2016.11.03.08.24.33
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 03 Nov 2016 08:20:54 -0700 (PDT)
+	Thu, 03 Nov 2016 08:24:33 -0700 (PDT)
 To: openembedded-devel@lists.openembedded.org
-References: <1477587755-24666-1-git-send-email-denis@denix.org>
+References: <1477420954-7346-1-git-send-email-michael.davis@essvote.com>
 From: akuster808 <akuster808@gmail.com>
-Message-ID: <271f87f6-ac90-2389-3499-9c3bb8d80fa6@gmail.com>
-Date: Thu, 3 Nov 2016 08:20:53 -0700
+Message-ID: <b917a9b5-5b0c-607b-011a-6fed1e528b37@gmail.com>
+Date: Thu, 3 Nov 2016 08:24:32 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
 	Thunderbird/45.3.0
 MIME-Version: 1.0
-In-Reply-To: <1477587755-24666-1-git-send-email-denis@denix.org>
-Cc: Ian Ray <ian.ray@ge.com>, Denys Dmytriyenko <denys@ti.com>
-Subject: Re: [meta-oe][krogoth][PATCH] syslog-ng: expand service file @variables@ earlier
+In-Reply-To: <1477420954-7346-1-git-send-email-michael.davis@essvote.com>
+Subject: Re: [meta-oe][krogoth][PATCH] pcsc-lite: Seperate GPLV3 portions from BSD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,54 +60,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Nov 2016 15:20:54 -0000
+X-List-Received-Date: Thu, 03 Nov 2016 15:24:33 -0000
 Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: 7bit
 
 
 
-On 10/27/2016 10:02 AM, Denys Dmytriyenko wrote:
-> From: Ian Ray <ian.ray@ge.com>
+On 10/25/2016 11:43 AM, Davis, Michael wrote:
+> From: "Davis, Michael" <michael.davis@essvote.com>
 > 
-> Move variable expansion of @SBINDIR@, @LOCALSTATEDIR@, and @BASEBINDIR@
-> earlier during install, to before the systemd service file is installed
-> by an automake rule.
+> GPLV3 and BSD portions were originally placed in the same package.
+> The GPLv3 portion has been seperated into pcsc-lite-spy and
+> pcsc-lite-spy-dev so the package can be used with GPLv3 blacklisted.
 > 
-> Signed-off-by: Ian Ray <ian.ray@ge.com>
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> (cherry picked from commit 54c7e784c7689d8cff4173db716bb7913c65315f)
+> Signed-off-by: Michael Davis <michael.davis@essvote.com>
 
 merged to staging.
--armin
+Armin
 > ---
->  meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 9 ++++++---
->  1 file changed, 6 insertions(+), 3 deletions(-)
+>  .../recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb  | 24 ++++++++++++++++++----
+>  1 file changed, 20 insertions(+), 4 deletions(-)
 > 
-> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> index 4e0f697..898e9c2 100644
-> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> @@ -60,6 +60,12 @@ do_configure_prepend() {
->      eval "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
->  }
+> diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
+> index cc72549..0d2cb33 100644
+> --- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
+> +++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb
+> @@ -1,7 +1,13 @@
+>  SUMMARY = "PC/SC Lite smart card framework and applications"
+>  HOMEPAGE = "http://pcsclite.alioth.debian.org/"
+>  LICENSE = "BSD & GPLv3+"
+> -LICENSE_${PN}-dev = "GPLv3+"
+> +LICENSE_${PN} = "BSD"
+> +LICENSE_${PN}-lib = "BSD"
+> +LICENSE_${PN}-doc = "BSD"
+> +LICENSE_${PN}-dev = "BSD"
+> +LICENSE_${PN}-dbg = "BSD & GPLv3+"
+> +LICENSE_${PN}-spy = "GPLv3+"
+> +LICENSE_${PN}-spy-dev = "GPLv3+"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=bcfbd85230ac3c586fb294c8b627cf32"
+>  DEPENDS = "udev"
 >  
-> +do_install_prepend() {
-> +    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
-> +    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
-> +    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
-> +}
-> +
->  do_install_append() {
->      install -d ${D}/${sysconfdir}/${BPN}
->      install ${WORKDIR}/syslog-ng.conf ${D}${sysconfdir}/${BPN}/${BPN}.conf
-> @@ -70,9 +76,6 @@ do_install_append() {
->      install -d ${D}/${localstatedir}/lib/${BPN}
->      # Remove /var/run as it is created on startup
->      rm -rf ${D}${localstatedir}/run
-> -    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
-> -    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
-> -    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
->  }
+> @@ -20,14 +26,24 @@ EXTRA_OECONF = " \
 >  
->  FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
+>  S = "${WORKDIR}/pcsc-lite-${PV}"
+>  
+> -PACKAGES =+ "${PN}-lib"
+> +PACKAGES = "${PN} ${PN}-dbg ${PN}-dev ${PN}-lib ${PN}-doc ${PN}-spy ${PN}-spy-dev"
+>  
+>  RRECOMMENDS_${PN} = "ccid"
+>  
+> -FILES_${PN}-lib = "${libdir}/lib*${SOLIBS}"
+> +FILES_${PN} = "${sbindir}/pcscd"
+> +FILES_${PN}-lib = "${libdir}/libpcsclite*${SOLIBS}"
+> +FILES_${PN}-dev = "${includedir} \
+> +                   ${libdir}/pkgconfig \
+> +                   ${libdir}/libpcsclite.la \
+> +                   ${libdir}/libpcsclite.so"
+> +                   
+> +FILES_${PN}-spy = "${bindir}/pcsc-spy \
+> +                   ${libdir}/libpcscspy*${SOLIBS}"
+> +FILES_${PN}-spy-dev = "${libdir}/libpcscspy.la \
+> +                       ${libdir}/libpcscspy.so "
+>  
+>  RPROVIDES_${PN} += "${PN}-systemd"
+>  RREPLACES_${PN} += "${PN}-systemd"
+>  RCONFLICTS_${PN} += "${PN}-systemd"
+>  SYSTEMD_SERVICE_${PN} = "pcscd.socket"
+> -RDEPENDS_${PN} +="python"
+> +RDEPENDS_${PN}-spy +="python"
 > 
 
