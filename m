@@ -1,48 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id AB31C71AC0
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 429C171985
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu,  3 Nov 2016 08:20:46 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id i88so4145928pfk.2
+Received: by mail-pf0-f196.google.com with SMTP id n85so4135909pfi.3
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 03 Nov 2016 01:20:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=K1gEc/jtD4NJ85uOxfWuR1WlXOHFobDtEKQsmLHSQPY=;
-	b=lTX0fTGueBduG39FLgDArIBSZz/ikL+6baE7rKouk+fvwToagJHkiEoUTg+tgACkBa
-	8BqB4t+vdA1wqngIkhODxNgagK2B9xRH2PequO9YtMlzDzoDrqmpmwsR6udJSRLCSmD5
-	zFsS+inenFHb81F//dhgw97HB3TQWzgz4h5uzNoV8e5sKrStAfP+k+/qwrXIf0rj3DeE
-	9K0iQeTo53QFiUizN6OCuvKet+j2CFxxjTEj/Iv91qIiM/I4GO2gncFgsvPhzQx5ds9+
-	oFJUAi1FsUEXvC4CfV8ci0uZDP6zKUMSA8fJP8RDY1E7cDZ3rVTicKPlN0w3xcytWBSZ
-	mB+w==
+	bh=fHiAmRFOQCWd9XQqBDo5d+8q2gdv7/eIn5obflB/2NI=;
+	b=rZsdDEgWc/351p5HHZSkRDt8YFktE0h10lcyRu84m++2D4iU1OPA6pBsP3offLIrQL
+	oO8Rpg4vpp9RIhAlC9Po6HaeWmEeOITuR9YwWzKZC9/fShYhRu4ezXQmut0ojI5cuT9H
+	u7ttp2vfFKNZYpIYKXfMEe7kE85C8cOp9amm9mBsB2XMDmxA0pbMYKc+2vl+BzLzEVWc
+	e/ko7ZRNPrWnZy7WJfh8uXTgEGiH/cfQFeV64kbnvWN5WfMhvB0CCiM7tcB6N9uVbaHP
+	vAuf6nWW9WqH/3j5XD25/dbJiFNAn+QfBQH8GAxRJF5wzl75obE4t1Z+xkmocbKs5Rao
+	eiEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=K1gEc/jtD4NJ85uOxfWuR1WlXOHFobDtEKQsmLHSQPY=;
-	b=FrDn7kfgOB4N/qIzb1jvX3YpI1EMR33v3Sf1EVg7LTeqRUKA7F7gYAEYDbl1LPvnLp
-	x+qpIibpxqI1NbcUG7aP7F5BwEIa59SdU511l+EXezR2clQav47LEzM7wcRbwY6055s9
-	0vr7ooLcoAkdk7ijvl93yh7qpPJk+W7HRa6fi4RfAzi5yy/8JE0KqD5bcQL3CF5n2Yb8
-	uBD9uaBFk24h3GJZd9jfqN4nfY74iTHA9tLaQlqKNvjzjzcAS/rY3aBdHzFWFDuOpm9u
-	je7BwAe5vTODmlt0MZd1R3JVvCLRUqDcwEfRevLs4oqsw6dLmXu3U7fBizJlhNSDkVWl
-	4Gjg==
-X-Gm-Message-State: ABUngvdvbaZrQ0kFiP+8I67wK/20ijRkTNGVOWZDTNlc1FTZ7AO5uo3oMP1IJfdWyhEqEA==
-X-Received: by 10.98.98.68 with SMTP id w65mr14571610pfb.121.1478161247863;
-	Thu, 03 Nov 2016 01:20:47 -0700 (PDT)
+	bh=fHiAmRFOQCWd9XQqBDo5d+8q2gdv7/eIn5obflB/2NI=;
+	b=jFqDrhK6aIpW/J7eVLQZ+i/ghqtRgystF8uMzh4KUbAo8LBFQDsY978gW53CrwVrN9
+	zeq9YZ2E5sMRzIdB1vBO4Y+CxxjpBEnNUND+noq1ZNZ7gntn39lEDMmsm9wTt19Tr7Mz
+	wn5p9/NeqNZ/hZCgPqNM2qnsnOYvBY+fzaeVHSEIS+i7xP56nsrZ8NTnxeJaXn44ZQYu
+	n9n08iJ0xBDFpciloTS+87Wjs2B1JRVMYXaXogllow9JKbNX3UvAJ94eLPe3ZHfaM/+p
+	J+DThoPp5yA/yoGC8omyzny1EKx7qkLwVktpZpLep2zUnHk4foYM2E0J4DoQ3XotSVVR
+	7rNg==
+X-Gm-Message-State: ABUngvfH66FcWG7EZAxG+I6rl07RGYp0PgM6QsFNpmoHR6r2nKRnmHhChJYfH+/DEZ5YJg==
+X-Received: by 10.99.125.77 with SMTP id m13mr12009582pgn.58.1478161248713;
+	Thu, 03 Nov 2016 01:20:48 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
 	y2sm10386225pfk.54.2016.11.03.01.20.47
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 03 Nov 2016 01:20:47 -0700 (PDT)
+	Thu, 03 Nov 2016 01:20:48 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  3 Nov 2016 01:20:35 -0700
-Message-Id: <20161103082038.6331-4-raj.khem@gmail.com>
+Date: Thu,  3 Nov 2016 01:20:36 -0700
+Message-Id: <20161103082038.6331-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.2
 In-Reply-To: <20161103082038.6331-1-raj.khem@gmail.com>
 References: <20161103082038.6331-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 4/7] meta_oe_security_flags.inc: Add libcec, libmodplug, libcdio
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-multimedia][PATCH 5/7] dcadec, libsquish: Add new recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,24 +56,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Nov 2016 08:20:46 -0000
+X-List-Received-Date: Thu, 03 Nov 2016 08:20:47 -0000
 
+Transport from meta-dominion, to support
+new kodi mediacenter
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/conf/distro/include/meta_oe_security_flags.inc | 3 +++
- 1 file changed, 3 insertions(+)
+ .../recipes-multimedia/dca/dcadec_0.2.0.bb            | 17 +++++++++++++++++
+ .../recipes-multimedia/libsquish/libsquish_git.bb     | 19 +++++++++++++++++++
+ 2 files changed, 36 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb
+ create mode 100644 meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb
 
-diff --git a/meta-oe/conf/distro/include/meta_oe_security_flags.inc b/meta-oe/conf/distro/include/meta_oe_security_flags.inc
-index 93f35e2..2559948 100644
---- a/meta-oe/conf/distro/include/meta_oe_security_flags.inc
-+++ b/meta-oe/conf/distro/include/meta_oe_security_flags.inc
-@@ -9,3 +9,6 @@ SECURITY_CFLAGS_pn-openldap = "${SECURITY_NO_PIE_CFLAGS}"
- SECURITY_CFLAGS_pn-s3c64xx-gpio = "${SECURITY_NO_PIE_CFLAGS}"
- SECURITY_CFLAGS_pn-s3c24xx-gpio = "${SECURITY_NO_PIE_CFLAGS}"
- SECURITY_CFLAGS_pn-cpufrequtils = "${SECURITY_NO_PIE_CFLAGS}"
-+SECURITY_CFLAGS_pn-libcec = "${SECURITY_NO_PIE_CFLAGS}"
-+SECURITY_CFLAGS_pn-libmodplug = "${SECURITY_NO_PIE_CFLAGS}"
-+SECURITY_CFLAGS_pn-libcdio = "${SECURITY_NO_PIE_CFLAGS}"
+diff --git a/meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb b/meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb
+new file mode 100644
+index 0000000..45b53c1
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "DTS Coherent Acoustics decoder with support for HD extensions"
++
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING.LGPLv2.1;md5=4fbd65380cdd255951079008b364516c"
++
++SRCREV = "b93deed1a231dd6dd7e39b9fe7d2abe05aa00158"
++SRC_URI = "git://github.com/foo86/dcadec.git;protocol=http"
++
++S = "${WORKDIR}/git"
++
++inherit lib_package
++
++EXTRA_OEMAKE = "CONFIG_SHARED=1"
++
++do_install() {
++	oe_runmake install DESTDIR="${D}" PREFIX="${prefix}"
++}
+diff --git a/meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb b/meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb
+new file mode 100644
+index 0000000..f060f1e
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "The squish library (abbreviated to libsquish) is an open source DXT compression library written in C++ "
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://alpha.cpp;beginline=3;endline=22;md5=6665e479f71feb92d590ea9ae9b9f6d5"
++
++PV = "1.10+git${SRCPV}"
++
++SRCREV = "52e7d93c5947f72380521116c05d97c528863ba8"
++SRC_URI = "git://github.com/OpenELEC/libsquish.git;protocol=https"
++
++S = "${WORKDIR}/git"
++
++EXTRA_OEMAKE = "INSTALL_DIR=${D}${prefix}"
++
++do_install() {
++	install -d ${D}${includedir}
++	install -d ${D}${libdir}/pkgconfig
++	oe_runmake install 
++}
 -- 
 2.10.2
 
