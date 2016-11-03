@@ -1,48 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 72DF8719E1
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id B2B3871C2E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Nov 2016 17:33:48 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id y68so5427563pfb.1
+	Thu,  3 Nov 2016 18:47:45 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id n85so5552404pfi.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Nov 2016 10:33:50 -0700 (PDT)
+	Thu, 03 Nov 2016 11:47:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=MWbreEEQC5fjj+ffZZ5uYjMIAzPpcsMrhJPYmHMjDLY=;
-	b=c23dmEw9M9ePeomn4B0wR7KELZmZDE58Dhe0L4mBE/X+d7KvIDZ3wWrJ0+hCX+C9Hk
-	Np8sMnI0/slfdToBD5M3iHdu9txBfLwUcX3h73Kp2meSkmuh056uNSmOSmuTtu6f3Rp3
-	jGy+zDc3c8iDGRhpZVsx/ahj0Pg7EVq/1hTbYvcqJVzNhv8lvfKI621/of+uInX32PvT
-	xfPEgW0XpIFvWtAuencT6Z4LJ6W1n9viHp/l1nOCPsbgRYJlTKjslZFYDrBRT7BAP8F6
-	FKvB1hWCihm4QL7X3CoowbA2cV4pEtOzHK6JBCyWDwgk6r+mMhc1saBiCadKWtlv1qX+
-	lm+A==
+	h=from:to:cc:subject:date:message-id;
+	bh=Rs5e3dJwxnz6gOjxz19OoipPX19S7bOrC1nkkbJW+DU=;
+	b=rEOFwSvXQ3nH/2uG+PlwnjkKA4DKzbWYKp5TSzgJJxSFXV6/MoKUcztnKNQD/DoBkb
+	lgAFXSrWo3TXoJSOpC+3HqbT9VQfER4bNz/mwb41LWva3gEYMoNuykej9u5fqMOCy4Ue
+	dKDMptqn/2B/wSkaEf0T3yH301tA3FtMlahfKTOfpEhql/KSZOfO7IfCYRFRKQaBkroQ
+	WMd0R5u/hE6xRGAxMYuURLcpWGUfWzAX/RiF5U+4lb6+2RtfFCmPuImPhvzYfDpZHXwT
+	FcpPgEogQYUgS0eECZILmL7D6PG2bFZoF99gRZFm3wdgWPykSZ6nDbUNSdDxEuX6Nwu5
+	XDzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=MWbreEEQC5fjj+ffZZ5uYjMIAzPpcsMrhJPYmHMjDLY=;
-	b=fW03Q8I135ftJRZfMdlgCw42VYmX5KqMW0lVKmqCnlA/zgvsxpFTWSql5ROUDQwAVq
-	KCk1mjxFQ8IcOPtQci8sV7pJy83eLN5jzcKbdP4AABKzDNJYgOnKLw6aTF9aVLhKInua
-	d9tkAHT8YUmKNuzf6Mm+xuia3G3JXc+c3AymmiPrG27YtulkCTCVGMHwWObG5NE21sw1
-	9LpBb6zatPgBfmELZMFZyMiGvV/fAnDlXXwbzbiV0XWWYllwXqOVfnJX0Etv2FfNx6nl
-	XoFV95FqQ3HlDuBqXQaDVk2HiBN7pEmWV/AUpe7WcJ/y4KeiVPscGYq3USfum1C4mPtg
-	1Xgg==
-X-Gm-Message-State: ABUngvcM+sEYyvI8D4+vARNHPqdPj7lUExCxqVuxoDGw0jwuA7FyI4fC5M7C8z39LVb0Uw==
-X-Received: by 10.99.63.135 with SMTP id m129mr15577136pga.16.1478194430037;
-	Thu, 03 Nov 2016 10:33:50 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Rs5e3dJwxnz6gOjxz19OoipPX19S7bOrC1nkkbJW+DU=;
+	b=EWsZq20UnXIgkznHsiBcxQ4Ft2Whl7ZB5wmxPgbWyK4Yf3g7qPZ1NUu0l3rlNZdTuv
+	cTyU65/2Srso6BkgAwaztymDwQb+dcUIGGZ3EkqNtS4yC/HxpjEN97Lw5CmJG25hONab
+	Fg5a4PpnkMPdb82OvYyLcf9oRm0xkPhgpwr3fwPQMRTuc2zx5zaymnQWlH1ToWWWPAim
+	CjX1GRrCa0XjrRxTP9Y8+qmjKNApNUJG/oS8Wpw24Qkcd591e27c9pjTSBGJ3GzjDwiK
+	YrZ3v0q22STHUbyICHlHOHHhcbYvqgaKL/w7oW5DqyoST1tZ5WyaSWaH8SyBl4iifp2/
+	sbgw==
+X-Gm-Message-State: ABUngvc3ILLtNuQjhrzvLP3u4U1r20WsauI0DgjBfp1RRGkYYO2h1E5m/cfvuexsrvJrqQ==
+X-Received: by 10.98.101.71 with SMTP id z68mr19082482pfb.13.1478198866667;
+	Thu, 03 Nov 2016 11:47:46 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	uh10sm14241214pab.5.2016.11.03.10.33.49
+	128sm14482324pfy.4.2016.11.03.11.47.45
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 03 Nov 2016 10:33:49 -0700 (PDT)
+	Thu, 03 Nov 2016 11:47:46 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  3 Nov 2016 10:33:42 -0700
-Message-Id: <20161103173342.13661-2-raj.khem@gmail.com>
+Date: Thu,  3 Nov 2016 11:47:39 -0700
+Message-Id: <20161103184740.13712-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.2
-In-Reply-To: <20161103173342.13661-1-raj.khem@gmail.com>
-References: <20161103173342.13661-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] Disable PIE for libvdpau
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH 7/8] libcec: Update to 3.1.0+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,26 +53,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Nov 2016 17:33:48 -0000
+X-List-Received-Date: Thu, 03 Nov 2016 18:47:45 -0000
 
+Depends on p8platform therefore add recipe for
+p8platform
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/conf/distro/include/meta_oe_security_flags.inc | 5 +++++
- 1 file changed, 5 insertions(+)
+Changes from V1 -> V2:
+- Add x11 dependencies if x11 is in DISTRO_FEATURES
 
-diff --git a/meta-oe/conf/distro/include/meta_oe_security_flags.inc b/meta-oe/conf/distro/include/meta_oe_security_flags.inc
-index 2559948..e57cc5b 100644
---- a/meta-oe/conf/distro/include/meta_oe_security_flags.inc
-+++ b/meta-oe/conf/distro/include/meta_oe_security_flags.inc
-@@ -12,3 +12,8 @@ SECURITY_CFLAGS_pn-cpufrequtils = "${SECURITY_NO_PIE_CFLAGS}"
- SECURITY_CFLAGS_pn-libcec = "${SECURITY_NO_PIE_CFLAGS}"
- SECURITY_CFLAGS_pn-libmodplug = "${SECURITY_NO_PIE_CFLAGS}"
- SECURITY_CFLAGS_pn-libcdio = "${SECURITY_NO_PIE_CFLAGS}"
+ meta-oe/recipes-extended/libcec/libcec_git.bb         | 18 ++++++++++++------
+ meta-oe/recipes-extended/p8platform/p8platform_git.bb | 18 ++++++++++++++++++
+ 2 files changed, 30 insertions(+), 6 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/p8platform/p8platform_git.bb
+
+diff --git a/meta-oe/recipes-extended/libcec/libcec_git.bb b/meta-oe/recipes-extended/libcec/libcec_git.bb
+index 0f2a64e..32ab4b9 100644
+--- a/meta-oe/recipes-extended/libcec/libcec_git.bb
++++ b/meta-oe/recipes-extended/libcec/libcec_git.bb
+@@ -2,18 +2,24 @@ SUMMARY = "USB CEC Adaptor communication Library"
+ HOMEPAGE = "http://libcec.pulse-eight.com/"
+ 
+ LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=5e8e16396992369f73f3d28875f846da"
++LIC_FILES_CHKSUM = "file://COPYING;md5=e61fd86f9c947b430126181da2c6c715"
+ 
+-DEPENDS = "udev lockdev"
++DEPENDS = "p8platform udev lockdev"
+ 
+-PV = "2.1.4"
++DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libx11 libxrandr', '', d)}"
+ 
+-SRCREV = "81e38211724bc6e8bd7a60f484433053ed682635"
+-SRC_URI = "git://github.com/Pulse-Eight/libcec.git;branch=release"
++PV = "3.1.0+gitr${SRCPV}"
 +
-+#| /mnt/b/build/tmp-glibc/sysroots/intel-corei7-64/usr/lib/libc_nonshared.a(elf-init.oS): In function `__libc_csu_init':
-+#| /usr/src/debug/glibc/2.24-r0/git/csu/elf-init.c:86: undefined reference to `__init_array_start'
++SRCREV = "6d68d21243aa92862592435e8396b4280ea46c3f"
++SRC_URI = "git://github.com/Pulse-Eight/libcec.git"
+ 
+ S = "${WORKDIR}/git"
+ 
+-inherit autotools pkgconfig
++inherit cmake pkgconfig
 +
-+SECURITY_CFLAGS_pn-libvdpau = "${SECURITY_NO_PIE_CFLAGS}"
++# Disable python wrapper, it doesn't have crosscompiles
++EXTRA_OECMAKE = "-DCMAKE_INSTALL_LIBDIR=${libdir} -DCMAKE_INSTALL_LIBDIR_NOARCH=${libdir} \
++                 -DSKIP_PYTHON_WRAPPER=1"
+ 
+ # cec-client and xbmc need the .so present to work :(
+ FILES_${PN} += "${libdir}/*.so"
+diff --git a/meta-oe/recipes-extended/p8platform/p8platform_git.bb b/meta-oe/recipes-extended/p8platform/p8platform_git.bb
+new file mode 100644
+index 0000000..f6347c2
+--- /dev/null
++++ b/meta-oe/recipes-extended/p8platform/p8platform_git.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Platform support library used by libCEC and binary add-ons for Kodi"
++HOMEPAGE = "http://libcec.pulse-eight.com/"
++
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://src/os.h;md5=752555fa94e82005d45fd201fee5bd33"
++
++PV = "2.1.0"
++
++SRC_URI = "git://github.com/Pulse-Eight/platform.git"
++SRCREV = "d7bceb64541cb046421cbcd4c98d91e9bf24822f"
++
++S = "${WORKDIR}/git"
++
++inherit cmake pkgconfig
++
++EXTRA_OECMAKE += "-DCMAKE_INSTALL_LIBDIR=${libdir} -DCMAKE_INSTALL_LIBDIR_NOARCH=${libdir}"
++
++FILES_${PN}-dev += "${libdir}/p8-platform"
 -- 
 2.10.2
 
