@@ -1,50 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E58E71AFD
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 873BB71A8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Nov 2016 21:38:29 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id p190so989034wmp.1
+	Thu,  3 Nov 2016 23:44:05 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id y68so6112540pfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Nov 2016 14:38:30 -0700 (PDT)
+	Thu, 03 Nov 2016 16:44:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=IzDwf1jBc1JPiR/z+FuetUikS63o9wocQ/im1YK+0Tk=;
-	b=VgBuwpZRLPOG6A1V3NR9JjLH4dYhZev+t54v2LPbG1lfai2NxTvKsptKG9xO5ySd2Q
-	1iy57itr/uA5O+s4qvvJmsZjnvXussKQwV3gCoh8HipjzmYfHSFiKcIjyJUnO/BPsDDC
-	dYIF9hR37F3w5P+eXAgmMubz5pBpi1oPtpdXLmyB4fc22j0ARNj5WWTlEA/S+m7fOIRy
-	UCWo9OpN1cpvRL/mbkyhZD2uXT+OBN6u5c65nt4S7nn5pXhsp/YSDqvBsJOkjmcgCsbK
-	nMwZvvQFs/KnSyYFJO06KThcw4L0Itt+he7tubevHbNDrJ5iytpbHQYXARcFzR92clom
-	dqBw==
+	h=from:to:cc:subject:date:message-id;
+	bh=AZBauUnBHWLWKtTrHIkG6RfCOtvh9WUs/AFoxoROQtQ=;
+	b=e0m3gcy7FrANCqhibGD3iwSfWNgGcSYPHkcnVuMPnp4YgTFIvUh5voQnsN774rxfzq
+	DVc6LFpHpkkniNuXxwqLAJKP8U8SFlAVnRfktDsv9E9fBW4zWkg0fFZM+yJV719WNV7Q
+	C347o9iCX5kUPOpZRZnsaJDxQy4vBaCtaKB+VelgYyvWXO7ZFu4icJ9bY0v5X6f1XOeE
+	c2FIKcZHNqjniu+d+xGG0TBxITZ0kFNojQ91keBvIfY/R/AI8swWHILAtfeFxEAGXKAu
+	UTOubOyAVUz+LVzIRKxwGx9hAi7UvPeaI22qLhA9oq/0bHCL+N9dYA6sAhUg4h1Ff3zF
+	MtWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=IzDwf1jBc1JPiR/z+FuetUikS63o9wocQ/im1YK+0Tk=;
-	b=Jq1h88MdZO9x6rRCp2Rdq+aimSQRl2BLfIBMrfkGMk9Ey1oaIQYcyn3QcZ0Y2U85xR
-	+xC5RU2DhAfa8nHpg3EBghVQ9onrwmZ6DFTlvAfZD7K4KsZnNQAHBJWw1f5mX9WMO891
-	NUcsw62TbKT8b3RobpveDwbxwr3af1Okoh/0rsK/RM8kRK9d6d9fQxthjhP6siafvEUH
-	kx1CWVRw1Os9mKpnILwID/xLfHcedX90j0pQXYIBwi4s0IeO6oRWEEV18ZpfsnFZ6LkL
-	dgzLDqNtEltD8KEzbkHkBWgO49bcpP5dlGThiepHzMxtdbNu24NS/MsH0b2l6d4BQvUJ
-	DCKQ==
-X-Gm-Message-State: ABUngvdyVD4nBanb37Bv29pbLJrQ3qASJb5isHtL6RrgnOK4eEj+XoCUzXfi4/HFGsWyZA==
-X-Received: by 10.28.213.74 with SMTP id m71mr82746wmg.39.1478209110027;
-	Thu, 03 Nov 2016 14:38:30 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	o62sm1111359wmg.12.2016.11.03.14.38.29
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 03 Nov 2016 14:38:29 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 3 Nov 2016 22:38:30 +0100
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=AZBauUnBHWLWKtTrHIkG6RfCOtvh9WUs/AFoxoROQtQ=;
+	b=jsUZdteDjxx361YmbhuvsTY1JPwfsbtrG3atpmPTmeWcNutGNCzlEevIYBumwjmkyr
+	Hx7sc3rhK3Ubbe0FGrUf0B4xMaklJAM1BUB/eFP3YahPFV6/i31hqqsr2TX/iDnpZd8Y
+	7BhbSkCsnWhGTG5w8huR5t+mz/n7eAFpji0OinQ/o0VCbfH8yyT9hfHFtDTC6zBJihhh
+	U11PbIgO1c0cDVslSu+nOyvg68w1ckyyPhpN/aH3sk1JVbWv/8WBZUaQ7wGD5uLf5xPV
+	DEipgcVV2okRq2zPixIwZvTKAYtRcK1Vt0SqKvi8JNTuaw/H9G7PoMX7RXZmuHbnximB
+	kabg==
+X-Gm-Message-State: ABUngvdLZF8jW57o7WfpYfsBZYkGIR1ax+qSuxA2z90jKrTJZ0DViHYOumXVzDdekHYYQQ==
+X-Received: by 10.99.152.25 with SMTP id q25mr17742652pgd.36.1478216647547;
+	Thu, 03 Nov 2016 16:44:07 -0700 (PDT)
+Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192])
+	by smtp.gmail.com with ESMTPSA id pe4sm7357103pac.6.2016.11.03.16.44.06
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 03 Nov 2016 16:44:07 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161103212705.GA3003@jama>
-References: <1477886266-2836-1-git-send-email-akuster808@gmail.com>
-	<20161101180418.GC2985@jama>
-MIME-Version: 1.0
-In-Reply-To: <20161101180418.GC2985@jama>
-User-Agent: Mutt/1.7.1 (2016-10-04)
-Subject: Re: [meta-networking][V2]PATCH] wireshark: install missing header files
+Date: Thu,  3 Nov 2016 16:44:02 -0700
+Message-Id: <20161103234402.3085-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.10.2
+Subject: [meta-multimedia][PATCH] kodi: Fix build with pic on x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,176 +52,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Nov 2016 21:38:31 -0000
-X-Groupsio-MsgNum: 63728
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="2B/JsCI69OhZNC5r"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 03 Nov 2016 23:44:06 -0000
 
---2B/JsCI69OhZNC5r
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Upgrade 17.x to latest on master
 
-On Tue, Nov 01, 2016 at 07:04:18PM +0100, Martin Jansa wrote:
-> On Sun, Oct 30, 2016 at 08:57:46PM -0700, Armin Kuster wrote:
-> > Wireshark does not install header files. add install_append
-> > Remove ALLOW_EMPTY & INHIBIT_PACKAGE_DEBUG_SPLIT, they are no longer ne=
-eded
-> >=20
-> > V2]
-> > add missing libssh and sbc config
-> >=20
-> > Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> > ---
-> >  .../recipes-support/wireshark/wireshark_2.2.1.bb   | 28 ++++++++++++++=
-++++----
-> >  1 file changed, 24 insertions(+), 4 deletions(-)
-> >=20
-> > diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.1.=
-bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
-> > index a5fb7f6..4e23bae 100644
-> > --- a/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
-> > +++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
-> > @@ -4,7 +4,7 @@ SECTION =3D "net"
-> >  LICENSE =3D "GPL-2.0"
-> >  LIC_FILES_CHKSUM =3D "file://README.linux;md5=3D631e077455b7972172eb14=
-9195e065b0"
-> > =20
-> > -DEPENDS =3D "pcre expat glib-2.0 sbc"
-> > +DEPENDS =3D "pcre expat glib-2.0"
-> > =20
-> >  SRC_URI =3D "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.=
-bz2"
-> > =20
-> > @@ -37,13 +37,33 @@ PACKAGECONFIG[lua] =3D "--with-lua=3Dyes, --with-lu=
-a=3Dno, lua"
-> >  PACKAGECONFIG[zlib] =3D "--with-zlib=3Dyes, --with-zlib=3Dno, zlib"
-> >  PACKAGECONFIG[geoip] =3D "--with-geoip=3Dyes, --with-geoip=3Dno, geoip"
-> >  PACKAGECONFIG[plugins] =3D "--with-plugins=3Dyes, --with-plugins=3Dno"
-> > +PACKAGECONFIG[sbc] =3D "--with-sbc=3Dyes, --with-sbc=3Dno, sbc"
-> > +
-> > +PACKAGECONFIG[libssh] =3D "--with-ssh=3Dyes, --with-ssh=3Dno, libssh2"
-> > +
-> > =20
-> >  # these next two options require addional layers
-> >  PACKAGECONFIG[c-ares] =3D "--with-c-ares=3Dyes, --with-c-ares=3Dno, c-=
-ares"
-> > =20
-> >  EXTRA_OECONF +=3D "--with-qt=3Dno --enable-tshark --enable-rawshark"
-> > =20
-> > -ALLOW_EMPTY_${PN} =3D "1"
-> > -INHIBIT_PACKAGE_DEBUG_SPLIT =3D "1"
-> > +# Currently wireshark does not install header files
-> > +do_install_append () {
-> > +
-> > +	install -d ${D}/${includedir}/${BPN}
-> > +	install -d ${D}/${includedir}/${BPN}/epan
-> > +	install -d ${D}/${includedir}/${BPN}/epan/crypt
-> > +	install -d ${D}/${includedir}/${BPN}/epan/dfilter
-> > +	install -d ${D}/${includedir}/${BPN}/epan/dissectors
-> > +	install -d ${D}/${includedir}/${BPN}/epan/ftypes
-> > +	install -d ${D}/${includedir}/${BPN}/epan/wmem
-> > =20
-> > -FILES_${PN} +=3D "${datadir}*"
->=20
-> Doesn't this still cause many unpackaged files and QA errors as reported
-> earlier?
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../0012-Always-compile-libcpluff-as-PIC.patch     | 30 ++++++++++++++++++++++
+ .../0005-Always-compile-libcpluff-as-PIC.patch     | 30 ++++++++++++++++++++++
+ .../recipes-mediacenter/kodi/kodi_16.bb            |  1 +
+ .../recipes-mediacenter/kodi/kodi_17.bb            |  3 ++-
+ 4 files changed, 63 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-mediacenter/kodi/kodi-16/0012-Always-compile-libcpluff-as-PIC.patch
+ create mode 100644 meta-multimedia/recipes-mediacenter/kodi/kodi-17/0005-Always-compile-libcpluff-as-PIC.patch
 
-It does and sbc issue is still there as well:
-
-wireshark-2.2.1: wireshark: Files/directories were installed but not
-shipped in any package:
-  /usr/share/mime
-  /usr/share/appdata
-  /usr/share/icons
-  /usr/share/mime/packages
-  /usr/share/mime/packages/wireshark.xml
-  /usr/share/appdata/wireshark.appdata.xml
-  /usr/share/icons/hicolor
-  /usr/share/icons/hicolor/16x16
-  /usr/share/icons/hicolor/24x24
-  /usr/share/icons/hicolor/32x32
-  /usr/share/icons/hicolor/48x48
-  /usr/share/icons/hicolor/64x64
-  /usr/share/icons/hicolor/128x128
-  /usr/share/icons/hicolor/256x256
-  /usr/share/icons/hicolor/scalable
-  /usr/share/icons/hicolor/16x16/apps
-  /usr/share/icons/hicolor/16x16/mimetypes
-  /usr/share/icons/hicolor/16x16/apps/wireshark.png
-  /usr/share/icons/hicolor/16x16/mimetypes/application-wireshark-doc.png
-  /usr/share/icons/hicolor/24x24/apps
-  /usr/share/icons/hicolor/24x24/mimetypes
-  /usr/share/icons/hicolor/24x24/apps/wireshark.png
-  /usr/share/icons/hicolor/24x24/mimetypes/application-wireshark-doc.png
-  /usr/share/icons/hicolor/32x32/apps
-  /usr/share/icons/hicolor/32x32/mimetypes
-  /usr/share/icons/hicolor/32x32/apps/wireshark.png
-  /usr/share/icons/hicolor/32x32/mimetypes/application-wireshark-doc.png
-  /usr/share/icons/hicolor/48x48/apps
-  /usr/share/icons/hicolor/48x48/mimetypes
-  /usr/share/icons/hicolor/48x48/apps/wireshark.png
-  /usr/share/icons/hicolor/48x48/mimetypes/application-wireshark-doc.png
-  /usr/share/icons/hicolor/64x64/apps
-  /usr/share/icons/hicolor/64x64/mimetypes
-  /usr/share/icons/hicolor/64x64/apps/wireshark.png
-  /usr/share/icons/hicolor/64x64/mimetypes/application-wireshark-doc.png
-  /usr/share/icons/hicolor/128x128/apps
-  /usr/share/icons/hicolor/128x128/mimetypes
-  /usr/share/icons/hicolor/128x128/apps/wireshark.png
-  /usr/share/icons/hicolor/128x128/mimetypes/application-wireshark-doc.png
-  /usr/share/icons/hicolor/256x256/apps
-  /usr/share/icons/hicolor/256x256/mimetypes
-  /usr/share/icons/hicolor/256x256/apps/wireshark.png
-  /usr/share/icons/hicolor/256x256/mimetypes/application-wireshark-doc.png
-  /usr/share/icons/hicolor/scalable/apps
-  /usr/share/icons/hicolor/scalable/apps/wireshark.svg
-Please set FILES such that these items are packaged. Alternatively if
-they are unneeded, avoid installing them or delete them within
-do_install.
-wireshark: 45 installed and not shipped files. [installed-vs-shipped]
-wireshark-2.2.1: wireshark rdepends on sbc, but it isn't a build
-dependency, missing sbc in DEPENDS or PACKAGECONFIG? [build-deps]
-
->=20
-> > +	install config.h ${D}/${includedir}/${BPN}
-> > +	install ${S}/register.h ${D}/${includedir}/${BPN}
-> > +	install -D ${S}/epan/*.h ${D}/${includedir}/${BPN}/epan
-> > +	install -D ${S}/epan/crypt/*.h ${D}/${includedir}/${BPN}/epan/crypt
-> > +	install -D ${S}/epan/dfilter/*.h ${D}/${includedir}/${BPN}/epan/dfilt=
-er
-> > +	install -D ${S}/epan/dissectors/*.h ${D}/${includedir}/${BPN}/epan/di=
-ssectors
-> > +	install -D ${S}/epan/ftypes/*.h ${D}/${includedir}/${BPN}/epan/ftypes
-> > +	install -D ${S}/epan/wmem/*.h ${D}/${includedir}/${BPN}/epan/wmem
-> > +}
-> > --=20
-> > 2.7.4
-> >=20
-> > --=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi-16/0012-Always-compile-libcpluff-as-PIC.patch b/meta-multimedia/recipes-mediacenter/kodi/kodi-16/0012-Always-compile-libcpluff-as-PIC.patch
+new file mode 100644
+index 0000000..f4b22cd
+--- /dev/null
++++ b/meta-multimedia/recipes-mediacenter/kodi/kodi-16/0012-Always-compile-libcpluff-as-PIC.patch
+@@ -0,0 +1,30 @@
++From 1fa9026dbcaaf674aedc9734034869934845812a Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 3 Nov 2016 13:10:00 -0700
++Subject: [PATCH] Always compile libcpluff as PIC
++
++Fixes errors e.g.
++
++ld: lib/cpluff/libcpluff/.libs/libcpluff.a(pcontrol.o): relocation R_X86_64_PC32 against symbol `cp_stop_plugins' can not be used when making a shared object; recompile with -fPIC
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index 5d47a4a..cd59129 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -2636,7 +2636,7 @@ XB_CONFIG_MODULE([lib/cpluff], [
++     --prefix="${prefix}" --includedir="${includedir}" --libdir="${libdir}" --datadir="${datadir}" \
++     --host=$host_alias \
++     --build=$build_alias \
++-    --target=$target_alias CFLAGS="$CFLAGS" CC="$CC" CXX="$CXX" LDFLAGS="$LDFLAGS" LIBS=""
+++    --target=$target_alias --with-pic=yes CFLAGS="$CFLAGS" CC="$CC" CXX="$CXX" LDFLAGS="$LDFLAGS" LIBS=""
++     #LDFLAGS="$LDFLAGS -Wl,-read_only_relocs,suppress"    
++ ], [0])
++ 
++-- 
++2.10.2
++
+diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0005-Always-compile-libcpluff-as-PIC.patch b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0005-Always-compile-libcpluff-as-PIC.patch
+new file mode 100644
+index 0000000..f513334
+--- /dev/null
++++ b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0005-Always-compile-libcpluff-as-PIC.patch
+@@ -0,0 +1,30 @@
++From 603e8925a8b1609d483d866346a35fefbc66cfca Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 3 Nov 2016 13:10:00 -0700
++Subject: [PATCH 5/5] Always compile libcpluff as PIC
++
++Fixes errors e.g.
++
++ld: lib/cpluff/libcpluff/.libs/libcpluff.a(pcontrol.o): relocation R_X86_64_PC32 against symbol `cp_stop_plugins' can not be used when making a shared object; recompile with -fPIC
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index b210b73..52d5f11 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -2385,7 +2385,7 @@ XB_CONFIG_MODULE([lib/cpluff], [
++     --prefix="${prefix}" --includedir="${includedir}" --libdir="${libdir}" --datadir="${datadir}" \
++     --host=$host_alias \
++     --build=$build_alias \
++-    --target=$target_alias CFLAGS="$CFLAGS" CC="$CC" CXX="$CXX" LDFLAGS="$LDFLAGS" LIBS=""
+++    --target=$target_alias --with-pic=yes CFLAGS="$CFLAGS" CC="$CC" CXX="$CXX" LDFLAGS="$LDFLAGS" LIBS=""
++     #LDFLAGS="$LDFLAGS -Wl,-read_only_relocs,suppress"
++ ], [0])
++ 
++-- 
++2.10.2
++
+diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi_16.bb b/meta-multimedia/recipes-mediacenter/kodi/kodi_16.bb
+index 38a53ee..02216fc 100644
+--- a/meta-multimedia/recipes-mediacenter/kodi/kodi_16.bb
++++ b/meta-multimedia/recipes-mediacenter/kodi/kodi_16.bb
+@@ -76,6 +76,7 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;branch=Jarvis \
+            file://0009-lib-cximage-6.0-fix-compilation-with-gcc6.patch \
+            file://0010-curl-support-version-7.5.0-and-upwards.patch \
+            file://0011-xbmc_pvr_types.h-Fix-compilation-with-gcc6.patch \
++           file://0012-Always-compile-libcpluff-as-PIC.patch \
+ "
+ 
+ inherit autotools-brokensep gettext pythonnative
+diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
+index bdf077a..22b23c6 100644
+--- a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
++++ b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
+@@ -63,13 +63,14 @@ DEPENDS = " \
+ 
+ PROVIDES = "xbmc"
+ 
+-SRCREV = "32c7788e7cce711be5b7f3893c82dddd79658268"
++SRCREV = "7f6abd1dd6d1aefcb4303083f34aaa90a8df9fce"
+ PV = "17.0+gitr${SRCPV}"
+ SRC_URI = "git://github.com/xbmc/xbmc.git;branch=master \
+            file://0001-configure-don-t-try-to-run-stuff-to-find-tinyxml.patch \
+            file://0002-handle-SIGTERM.patch \
+            file://0003-add-support-to-read-frequency-output-if-using-intel-.patch \
+            file://0004-Disable-DVD-support.patch \
++           file://0005-Always-compile-libcpluff-as-PIC.patch \
+ "
+ 
+ inherit autotools-brokensep gettext pythonnative
+-- 
+2.10.2
 
 
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---2B/JsCI69OhZNC5r
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAlgbrlYACgkQN1Ujt2V2gBzRqACfeMJ/BQuDNW9yFqy2062ojl0r
-4wwAoJV+gh4N1a74paIdnQJq39IegzU9
-=ofoX
------END PGP SIGNATURE-----
-
---2B/JsCI69OhZNC5r--
