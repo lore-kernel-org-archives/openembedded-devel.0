@@ -1,40 +1,40 @@
 Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CAB571B69
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id A544D71B01
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Nov 2016 21:00:07 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id c17so849344wmc.3
+	Thu,  3 Nov 2016 21:01:20 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id u144so874247wmu.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Nov 2016 14:00:09 -0700 (PDT)
+	Thu, 03 Nov 2016 14:01:22 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=A/6pB0RcceLKxtmEPN6DAXc+iE0f1DDjZ5iMFBbt4gg=;
-	b=XMfLgo6NaA79Pr/Pe4MnEkA0NSBHNsHvSl5HfKshdC0FZsszM7h/Qk1fiX5af5aY28
-	pE8HDJxAjZ/XSzqa+2qBJoLUEjwIsJNS1nb6sOpjCpma0BlMblHaNs8vszYl58olGPRr
-	QHlKh2JiL5GS+6PxHcT2r3HXVfynqjf1o8JKzqN+PG4d31YgIXckd8TmdQECefTJ+XCO
-	ZWBqZSKmwCeQnFbyKtZCRJ41PW6zho1poEB2tHFdP+zx8Ljc9HRXmiEimyMIAHaBJPT7
-	LhYHS2Kiy12jVsvEFhtxjD2hmGKlMWXUK7NMb581pG50sJurYXCyv8pXdazpFJpKFPc3
-	IZMQ==
-X-Gm-Message-State: ABUngvdO7HwNh26QDYJk4h8Uk+Ey/ngx9971LEyX4Cil/AtL6GP/6DBukGbes9YgnxdyQw==
-X-Received: by 10.28.167.77 with SMTP id q74mr6611262wme.21.1478206808623;
-	Thu, 03 Nov 2016 14:00:08 -0700 (PDT)
+	bh=NUBk/OVfHA7P3LeUYT+4+xbwJH+RoVOrvSkJKC5CmZI=;
+	b=I+SGj8uv370xLzgFAVZtZ8k8BiFRRv9ZgyXA+sJFClsUDXiiSmRnW/sZ6OE/UTF4XH
+	/1zdNTmbXYLELXcypUNGG/iuyyxYLRuGyijkQUrfHG1Yos0KQddjZlwULeJpyoJpnsvw
+	a0LYNvsvZWxGsaKwyxWubL+o7LQpPh8p7gRj0bdnCNz9HJyg1G26/BzxZAx07bFtC7Kx
+	QGeyNFA+eCsxDAutuEgVTaJM5beeAP/7pRtuDbabai9SMagfEGmZ8ePyoz7lyfbI7vYr
+	IcNe0Td35VUXuvgZcGclwULflG4qBSNdsIUs7LYWtr4EPie9AguJcuhJy6yuzrjyKxk4
+	ldug==
+X-Gm-Message-State: ABUngvfbOf8Ttm76IGY1pDxNQnvXdzL9vOo0Kfhwi+w9XEhjjqS2wes487aRBuMcB24XBw==
+X-Received: by 10.28.227.9 with SMTP id a9mr9656512wmh.85.1478206881008;
+	Thu, 03 Nov 2016 14:01:21 -0700 (PDT)
 Received: from tfsielt31850.fritz.box (31-187-15-27.dynamic.upc.ie.
-	[31.187.15.27])
-	by smtp.gmail.com with ESMTPSA id k74sm947595wmd.18.2016.11.03.14.00.07
+	[31.187.15.27]) by smtp.gmail.com with ESMTPSA id
+	hb5sm10657971wjc.5.2016.11.03.14.01.20
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 03 Nov 2016 14:00:07 -0700 (PDT)
+	Thu, 03 Nov 2016 14:01:20 -0700 (PDT)
 From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  3 Nov 2016 21:00:06 +0000
-Message-Id: <20161103210006.26936-1-git@andred.net>
+Date: Thu,  3 Nov 2016 21:01:19 +0000
+Message-Id: <20161103210119.27391-1-git@andred.net>
 X-Mailer: git-send-email 2.10.1
-In-Reply-To: <20161103195846.26528-1-git@andred.net>
-References: <20161103195846.26528-1-git@andred.net>
+In-Reply-To: <20161103210006.26936-1-git@andred.net>
+References: <20161103210006.26936-1-git@andred.net>
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH v2] streamripper: add v1.64.6
+Subject: [meta-multimedia][PATCH v3] streamripper: add v1.64.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,14 +47,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Nov 2016 21:00:08 -0000
+X-List-Received-Date: Thu, 03 Nov 2016 21:01:22 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: André Draszik <adraszik@tycoint.com>
-
-Change-Id: I24322d5aecc2fa8b9dc0bdf40e825298085c9a62
-Signed-off-by: André Draszik <adraszik@tycoint.com>
+Signed-off-by: André Draszik <git@andred.net>
 ---
  ...build-these-are-foreign-automake-projects.patch | 49 ++++++++++++++++++++++
  ...ld-don-t-ignore-CPPFLAGS-from-environment.patch | 30 +++++++++++++
