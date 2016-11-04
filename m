@@ -1,44 +1,28 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f195.google.com (mail-ua0-f195.google.com
-	[209.85.217.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F2A971B4A
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 780D471B3A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Nov 2016 03:08:15 +0000 (UTC)
-Received: by mail-ua0-f195.google.com with SMTP id 12so2679332uas.3
+	Fri,  4 Nov 2016 03:13:10 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id uA43DASF018159
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Nov 2016 20:08:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=d0ghw+f0eQUdaC2bqh75Lqgurryhga3oTrTCVEwxydk=;
-	b=qHfOcZBLF3bpbH+73wAaRFjt9wG0LeVsH+o9wgeiyvnXQyqAlYXNiw7N4P2uo4qi0t
-	S7Jhopu699pa1rm/zxrOiLcBEyhXdJCr9e5CKKyQXPTPDpkRAFcbYR7qzAn3PyUG0jvV
-	S1W4QEIayrZZAbvWCvvVxpkllhd6ajpOqrgbE0EPbfsh6aE6+tmQP1A9VnpHOh3O1SEd
-	Ya6MAANw64tHu/tgfpA8BC2+bRrIj3MPLSYXJOU4q1vW2UWRuxZxqzjFbBmyThDs3GiA
-	7ThL0pIvWgaqLnCDF6iGo021YZhdJmw++jC8OuZfsLk8XruougGU3pdrnXguRWFjTRZl
-	ojng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=d0ghw+f0eQUdaC2bqh75Lqgurryhga3oTrTCVEwxydk=;
-	b=lZLEOt6QUUJF2FSkRx5m9Zb726Kv9LZd+ldEGJKj2DqIuH6IVTnu7jwRA/VEza9rhO
-	9pRPl1VIx17P4nwGOGZULXCZzXXRQqAioUxBBC/SPWQYqRWFU+XtpOGBLLpHpoKEGXvW
-	DZQ+nusLlVQUnZJMfGiXV3/w0a9UpptslbmtL7AcvHMncAattGzT7DjDgrakXA6Ad4FA
-	8/jSY+ooPF9SApDqaoXL0CMQwU6dPruwAc/qFxgfVYrRF0BYQZgzSQoj08rKAdn5pNjd
-	Qgaxl+qksoH2uJ02WLhXSpv2Zg1PHONWzdSJVOAzc2AHeOjcyW+UfAbRQrIjoDLtLHr8
-	90ug==
-X-Gm-Message-State: ABUngvcSD3grm6SUQ0Ye24fEeQ9dSa9sxCKuD+uWq9tXwC8xqWdK7mE3MUIRVq6bryI8sYYCIYLvvQjA//4VYw==
-X-Received: by 10.159.48.146 with SMTP id j18mr9730162uab.6.1478228895928;
-	Thu, 03 Nov 2016 20:08:15 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.176.5.136 with HTTP; Thu, 3 Nov 2016 20:07:45 -0700 (PDT)
-In-Reply-To: <CANx9H-D_PU1LkZqzY-zrnzu2O=DwVQrrQ0YPtEOB-ocv2F-y_Q@mail.gmail.com>
+	Thu, 3 Nov 2016 20:13:11 -0700 (PDT)
+Received: from [128.224.162.209] (128.224.162.209) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.294.0;
+	Thu, 3 Nov 2016 20:13:10 -0700
+To: <openembedded-devel@lists.openembedded.org>
 References: <20161102063040.23598-1-Qi.Chen@windriver.com>
 	<CANx9H-D_PU1LkZqzY-zrnzu2O=DwVQrrQ0YPtEOB-ocv2F-y_Q@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 3 Nov 2016 20:07:45 -0700
-Message-ID: <CAMKF1sosBOS_5_oFi6FvFciymmey9A1MpXXYvpNGkRFOZT6bUg@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+From: ChenQi <Qi.Chen@windriver.com>
+Message-ID: <581BFCDE.10308@windriver.com>
+Date: Fri, 4 Nov 2016 11:13:34 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.7.2
+MIME-Version: 1.0
+In-Reply-To: <CANx9H-D_PU1LkZqzY-zrnzu2O=DwVQrrQ0YPtEOB-ocv2F-y_Q@mail.gmail.com>
+X-Originating-IP: [128.224.162.209]
 Subject: Re: [meta-oe][PATCH V2] gnuplot: upgrade to 5.0.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -52,20 +36,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Nov 2016 03:08:15 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 04 Nov 2016 03:13:10 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-and use -M option to let git detect moves vs copies to make it easier
-to review recipes
-
-add
-
-[diff]
-        renames = copies
-
-to ~/.gitconfig
-
-On Thu, Nov 3, 2016 at 7:23 PM, Tim Orling <ticotimo@gmail.com> wrote:
+On 11/04/2016 10:23 AM, Tim Orling wrote:
 > I would rather see a PACKAGECONFIG for qt5
 >
 > On Tue, Nov 1, 2016 at 11:30 PM, Chen Qi <Qi.Chen@windriver.com> wrote:
@@ -74,27 +49,27 @@ On Thu, Nov 3, 2016 at 7:23 PM, Tim Orling <ticotimo@gmail.com> wrote:
 >>
 >> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 >> ---
->>  .../gnuplot-4.6.5/lua-loadlibs-configure-in-fix.patch    | 16
+>>   .../gnuplot-4.6.5/lua-loadlibs-configure-in-fix.patch    | 16
 >> ----------------
->>  .../recipes-extended/gnuplot/gnuplot-4.6.5/subdirs.patch | 11 -----------
->>  meta-oe/recipes-extended/gnuplot/gnuplot.inc             |  2 +-
->>  .../gnuplot/gnuplot/lua-loadlibs-configure-in-fix.patch  | 16
+>>   .../recipes-extended/gnuplot/gnuplot-4.6.5/subdirs.patch | 11 -----------
+>>   meta-oe/recipes-extended/gnuplot/gnuplot.inc             |  2 +-
+>>   .../gnuplot/gnuplot/lua-loadlibs-configure-in-fix.patch  | 16
 >> ++++++++++++++++
->>  meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch   | 11 +++++++++++
->>  meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb        | 14
+>>   meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch   | 11 +++++++++++
+>>   meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb        | 14
 >> --------------
->>  meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb        | 14
+>>   meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb        | 14
 >> ++++++++++++++
->>  7 files changed, 42 insertions(+), 42 deletions(-)
->>  delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/lua-
+>>   7 files changed, 42 insertions(+), 42 deletions(-)
+>>   delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/lua-
 >> loadlibs-configure-in-fix.patch
->>  delete mode 100644 meta-oe/recipes-extended/
+>>   delete mode 100644 meta-oe/recipes-extended/
 >> gnuplot/gnuplot-4.6.5/subdirs.patch
->>  create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/lua-loadlibs-
+>>   create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/lua-loadlibs-
 >> configure-in-fix.patch
->>  create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch
->>  delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb
->>  create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb
+>>   create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch
+>>   delete mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb
+>>   create mode 100644 meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb
 >>
 >> diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/lua-
 >> loadlibs-configure-in-fix.patch b/meta-oe/recipes-extended/
@@ -147,19 +122,23 @@ On Thu, Nov 3, 2016 at 7:23 PM, Tim Orling <ticotimo@gmail.com> wrote:
 >> +++ b/meta-oe/recipes-extended/gnuplot/gnuplot.inc
 >> @@ -17,7 +17,7 @@ PACKAGECONFIG[cairo] = "--with-cairo,--without-cairo,cairo
 >> pango"
->>  PACKAGECONFIG[lua] = "--with-lua,--without-lua,lua"
+>>   PACKAGECONFIG[lua] = "--with-lua,--without-lua,lua"
 >>
->>  EXTRA_OECONF = "--with-readline=${STAGING_LIBDIR}/.. \
+>>   EXTRA_OECONF = "--with-readline=${STAGING_LIBDIR}/.. \
 >> -                --without-lisp-files \
 >> +                --without-qt \
 >>
->
 > This would be more universal in a PACKAGECONFIG
 > e.g. PACKAGECONFIG[qt4] = "--with-qt,--without-qt,qt4-x11-free"
 >
->
->>                  --without-tutorial \
->>                  --disable-wxwidgets"
+
+The problem is that it fails to compile with qt4. So I just disabled it.
+
+Regards,
+Chen Qi
+
+>>                   --without-tutorial \
+>>                   --disable-wxwidgets"
 >>
 >> diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot/lua-loadlibs-configure-in-fix.patch
 >> b/meta-oe/recipes-extended/gnuplot/gnuplot/lua-loadlibs-
@@ -260,9 +239,5 @@ On Thu, Nov 3, 2016 at 7:23 PM, Tim Orling <ticotimo@gmail.com> wrote:
 >> Openembedded-devel@lists.openembedded.org
 >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >>
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 
