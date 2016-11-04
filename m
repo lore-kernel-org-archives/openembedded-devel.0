@@ -1,30 +1,27 @@
-Return-Path: <ruben.de.smet@rubdos.be>
-Received: from mail.glycos.org (mail.glycos.org [178.62.217.237])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D65871C45
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with SMTP id 7DC9B71AA9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Nov 2016 19:40:26 +0000 (UTC)
-Received: from arch-club.local (unknown [84.198.89.1])
-	by mail.glycos.org (Postfix) with ESMTPSA id 028DE44CDB;
-	Fri,  4 Nov 2016 19:40:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rubdos.be;
-	s=default; t=1478288427;
-	bh=1p5xl0G6kwnJtTzMYN7L50wdRjFCs2iA7kznxBv7J9o=;
-	h=Subject:To:References:From:Date:In-Reply-To;
-	b=DF4VTGDa7lAY33N5tIv2R0caBcNRCsJ2vChE9/GSASBn8BGQvsYK5bsxPmTc63NIo
-	dETdMH/B954Z5GzwS55ZVfQWE9dtl3ZQxHYdnxiaLKzZjYR0nA5xu2/ibA0q/48bUb
-	zuN4H9ZOCvH2c0qUAo1+SPXgwsXWRKQaN55erJTc=
-To: Derek Straka <straka.derek@gmail.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-References: <20161104101423.20557-1-ruben.de.smet@rubdos.be>
-	<CADNbA1qAHFx9PTPAhue2xC0Z2nQ-tQC4Vz11QqHmH5ufnp3Vug@mail.gmail.com>
-From: Ruben De Smet <ruben.de.smet@rubdos.be>
-Message-ID: <a064e5a9-338e-57a7-6da9-87735bcab61a@rubdos.be>
-Date: Fri, 4 Nov 2016 20:40:21 +0100
+	Fri,  4 Nov 2016 21:08:37 +0000 (UTC)
+Received: (qmail 30781 invoked by uid 1003); 4 Nov 2016 21:08:38 -0000
+Received: from unknown (HELO ?192.168.11.142?)
+	(philip@opensdr.com@108.44.116.4)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	4 Nov 2016 21:08:38 -0000
+To: openembedded-devel@lists.openembedded.org
+References: <1478225282-27345-1-git-send-email-timothy.t.orling@linux.intel.com>
+	<CAMKF1spNzuAWTGU+S_n2v8PD8yZSz8OhRfj6NwZs_Qfu3rK5KA@mail.gmail.com>
+	<CANx9H-C=g=ai3AO-95nWa49+9Jv=_00AA7sBBcBXHN4OVjG_Zg@mail.gmail.com>
+	<CANx9H-BkdLaOBamyAW5BNVSDaG7ZjMHxBE0YBN9vM7D9Y7rjyA@mail.gmail.com>
+From: Philip Balister <philip@balister.org>
+Message-ID: <ecca4885-a1e1-6290-0840-fd73023221e7@balister.org>
+Date: Fri, 4 Nov 2016 17:08:35 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
 	Thunderbird/45.4.0
 MIME-Version: 1.0
-In-Reply-To: <CADNbA1qAHFx9PTPAhue2xC0Z2nQ-tQC4Vz11QqHmH5ufnp3Vug@mail.gmail.com>
-Subject: Re: [meta-python][PATCH v2] python-scales: add recipe for version 1.0.9
+In-Reply-To: <CANx9H-BkdLaOBamyAW5BNVSDaG7ZjMHxBE0YBN9vM7D9Y7rjyA@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] mariadb: use faster download URL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,64 +34,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Nov 2016 19:40:26 -0000
-X-Groupsio-MsgNum: 63752
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="A70daSqhIadqxiCULmP887jvkmUGHbQf8"
+X-List-Received-Date: Fri, 04 Nov 2016 21:08:37 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
---A70daSqhIadqxiCULmP887jvkmUGHbQf8
-Content-Type: multipart/mixed; boundary="1AA8u3Niq2B7hU27IA658cwCACnLvv4tQ";
- protected-headers="v1"
-From: Ruben De Smet <ruben.de.smet@rubdos.be>
-To: Derek Straka <straka.derek@gmail.com>,
- openembeded-devel <openembedded-devel@lists.openembedded.org>
-Message-ID: <a064e5a9-338e-57a7-6da9-87735bcab61a@rubdos.be>
-Subject: Re: [oe] [meta-python][PATCH v2] python-scales: add recipe for
- version 1.0.9
-References: <20161104101423.20557-1-ruben.de.smet@rubdos.be>
- <CADNbA1qAHFx9PTPAhue2xC0Z2nQ-tQC4Vz11QqHmH5ufnp3Vug@mail.gmail.com>
-In-Reply-To: <CADNbA1qAHFx9PTPAhue2xC0Z2nQ-tQC4Vz11QqHmH5ufnp3Vug@mail.gmail.com>
+On 11/04/2016 12:44 AM, Tim Orling wrote:
+> On Thu, Nov 3, 2016 at 9:42 PM, Tim Orling <ticotimo@gmail.com> wrote:
+> 
+>>
+>>
+>> On Thu, Nov 3, 2016 at 8:05 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>>
+>>> On Thu, Nov 3, 2016 at 7:08 PM, Tim Orling
+>>> <timothy.t.orling@linux.intel.com> wrote:
+>>>> The current URL takes about 2 hours to download.
+>>>
+>>> how fast is new one, do they keep the tarballs there for long time ?
+>>> or shove them into archive after new release is out
+>>>
+>>> 10 MB/s vs. 3.4KB/s by my test.
+>> It is the same organization, just a different server.
+>> We could instead trust GitHub archives if you prefer. But the current URL
+>> is just not working.
+>>
+> 
+> And from what I can tell by browsing the URL, all the old versions are
+> still there.
+> 
 
---1AA8u3Niq2B7hU27IA658cwCACnLvv4tQ
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+I can't comment on the new URL, but I noticed the agonizingly slow
+download the other day when I did a really clean test build.
 
-On 11/04/2016 02:24 PM, Derek Straka wrote:
-> Is there a reason this is commented out?  You'll need something or it w=
-ill
-> give a QA Issue about license-checksum
->=20
-> Missing a closing quote here
+Philip
 
+>>
+>>
+>>>>
+>>>> Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
+>>>> ---
+>>>>  meta-oe/recipes-support/mysql/mariadb.inc | 2 +-
+>>>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc
+>>> b/meta-oe/recipes-support/mysql/mariadb.inc
+>>>> index edef40b..689b8ab 100644
+>>>> --- a/meta-oe/recipes-support/mysql/mariadb.inc
+>>>> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
+>>>> @@ -4,7 +4,7 @@ SECTION = "libs"
+>>>>  LICENSE = "GPLv2"
+>>>>  LIC_FILES_CHKSUM = "file://COPYING;md5=751419260a
+>>> a954499f7abaabaa882bbe"
+>>>>
+>>>> -SRC_URI = "http://archive.mariadb.org/mariadb-${PV}/source/mariadb-${
+>>> PV}.tar.gz \
+>>>> +SRC_URI = "http://downloads.mariadb.com/MariaDB/mariadb-${PV}/source/m
+>>> ariadb-${PV}.tar.gz \
+>>>>             file://fix-cmake-module-path.patch \
+>>>>             file://remove-bad-path.patch \
+>>>>             file://fix-mysqlclient-r-version.patch \
+>>>> --
+>>>> 2.7.4
+>>>>
+>>>> --
+>>>> _______________________________________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.openembedded.org
+>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>>
+>>
 
-I noticed there's a lot more wrong with this.
-
-Apparently the project didn't even depend on this anymore, so I'll fix
-this later.
-
-License problem was that the PyPi package didn't include a license file.
-As we don't need this package anytime soon now, I'll file an issue with
-scales, and perhaps fix this in the future.
-
-
---1AA8u3Niq2B7hU27IA658cwCACnLvv4tQ--
-
---A70daSqhIadqxiCULmP887jvkmUGHbQf8
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQE2BAEBCAAgBQJYHOQlGRxydWJlbi5kZS5zbWV0QGdseWNvcy5vcmcACgkQ+CZa
-iBIT3BCAJgf/bgA9LGyh4D1Lt0PO3AEGJZEzvjUr4Bl+WypQyslCvIM3bdU6is1a
-BwElgpCeZMNab/knTUR4qiFWiBq9/4FD0WHBUvBrc9Zlu/ZQ2Bhjd+sfg0ZHe/KO
-m6fwYc/hagg9E6r5GhyHz0Y9JulG7y4Qe0Tw3wt8FVYUhLpXOfZ98B1VqIld8SNG
-/6mTlsbvdsyXumnL6+rAv5Hx50Rbd3Fl7+LFtsEWdGd+6K9apmLVzUfbxKXVxDUM
-bodQcWlGzotNaQ9JYNSupcJFa21tJZJftaj5gi8GmjqkpPjV1Vkk2e+yGZDm9avd
-xD0QH80GBJGetL5U+pa9Ff7crGLAatF/qw==
-=MuRj
------END PGP SIGNATURE-----
-
---A70daSqhIadqxiCULmP887jvkmUGHbQf8--
