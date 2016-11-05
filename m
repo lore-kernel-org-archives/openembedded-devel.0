@@ -1,47 +1,47 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F0A371A00
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vk0-f54.google.com (mail-vk0-f54.google.com
+	[209.85.213.54])
+	by mail.openembedded.org (Postfix) with ESMTP id A5E5460290
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Nov 2016 18:00:36 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id y68so11383296pfb.1
+	Sat,  5 Nov 2016 21:41:22 +0000 (UTC)
+Received: by mail-vk0-f54.google.com with SMTP id p9so94167088vkd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Nov 2016 11:00:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=+ruG7JSMlAa/QmASqYdkKNAYJZhUaqXuzwvqFhnHlvQ=;
-	b=Hxmc4PqA+diESA4pnpIwab1tz3SebOX7io8PM84CJd4CExNzi8K/cI8jt2YxpxAUbN
-	dhj6hzpvxZO9DpVK7iJluK+9yMxe97vPy1b0F6k6OJE2BDKdQcwCde/fX1vKllzDwJMp
-	gSq+QnlQNL57LBH4A/4dn2ZEj3qxuI4SYUEjI6xSb6kVipG+Ii0/Zq4b6SK5qM+xXRED
-	E/QnikdbEgJehsLzVAfxf7SpUj8Btc+jJx3Vfd76G3+BoVhnOwaJdFmFKM+amMVvv+3x
-	hE87bI5JXDFlOGRLVO56LWSzP0KjcgQXEoyM8EEhbPzwjlZcFUQY1DAHbk8/L34ziBJn
-	rtmw==
+	Sat, 05 Nov 2016 14:41:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=IVUg/mSmcTtnl4C/YcoE+WELQQyNM+drGnuanm2QOC8=;
+	b=k5NV+8ttMUriBwQcp1RP5KIufWUYs2qS8yohCbWfvDdaYj2QQW+TIcIjUgXDcQ40vi
+	0DwYPNjV5+YgfidDJs5jSjfScomU88zcFVhjVbSdJ9P73uwfdGUZWB4TV/Tw+sliINu6
+	VXLLWpXDbvXbh3YeCPk12ZIegnX0XfgdW9t9m1eZWSdxkVZsnc41dz8/cZxhExS31GMn
+	0JqLkN6uCOhfQCqyqbQ7UTO1kUOvIs1M35DrEwBj1M48fhx5UwixymI05m9PmV5blfmI
+	HP8nbjqL12RTMCy2gZJRqwtfTf9RAGSutqgd1AV1+Fq0kwI7x6WD7YL8a3cSUJ1/fdTD
+	Co1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=+ruG7JSMlAa/QmASqYdkKNAYJZhUaqXuzwvqFhnHlvQ=;
-	b=RVAIL8kqd+RVWGv3EsA9PyzjbfdckZSzdks8nvNtA/9pWZYjB3bQSIG2dwjjWNZUnB
-	SwaVlwHJMa7FHbGa6lR6lTGWo8rLaKujx5xUAr5lfBBprW4FXgXxSqnyMD5c7msrYE1m
-	7h6L0J1jV18HdS7z6rHfuDbPGApv0fYA+kkUpkUTEP32o62kb9GaBEJmkEHy4UsnjSkE
-	0k0u6W6n5yvGWa9BM+iGdyx+j6SsWTmmXRiZvv88Npp0+S66A9ab16AiB/stZYhYbREh
-	7uV3tBnHEhczAKQeEUZsN62DemL9vx62WXYiUInttuP5/uKHFvXGhUOvzf7QWU97ZRFY
-	7k6A==
-X-Gm-Message-State: ABUngvf71JzkHK50BBb6XwP9hS1RNxU/z7KCW6oU97XQQsiANLV8L+BycMPFLrp599pRRQ==
-X-Received: by 10.99.241.21 with SMTP id f21mr31624975pgi.110.1478368838086;
-	Sat, 05 Nov 2016 11:00:38 -0700 (PDT)
-Received: from akuster-ThinkPad-X240.hsd1.ca.comcast.net
-	([2601:202:4001:9ea0:a827:9dec:2e32:f14])
-	by smtp.gmail.com with ESMTPSA id
-	g78sm29016863pfe.19.2016.11.05.11.00.37
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 05 Nov 2016 11:00:37 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	akuster808@gmail.com
-Date: Sat,  5 Nov 2016 11:00:36 -0700
-Message-Id: <1478368836-16477-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][V3][PATCH] wireshark: install missing header files
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=IVUg/mSmcTtnl4C/YcoE+WELQQyNM+drGnuanm2QOC8=;
+	b=kAvJIa3aVWqt221KYLboBZH+95I3GcRHnuR7SKUF6sy37lc/mMEE4nJRkSi5QE+lEQ
+	oeLh8txNEWVebU4j2Ig1JHNZPUS2ksPibTY5tCK0IXYMRUrsQqvp2orGx7ZRm0hjziBF
+	wbI6MaS8C15Rd2XoBzGCa1vEUia7lrwWywPIo9mrv4pDeq4y23Oku7YCtxJHxx/spXiH
+	zuVm22y3CnKGuXRoKHNhK3D9ZfTP1IyQbiby2SanuhJOxC7g92xXavP03r574gMj9A+Q
+	/dsTQwmsBKx5fk6NpcK6vR7l13QDhLgvRHJnv+Kk+cFExPf82tUv7U88VRP2nOscPns1
+	hqHQ==
+X-Gm-Message-State: ABUngvcmN9G+zyHxDvO/e6NWCmi3G53T8fECV4GxMLG4CmiPT0r1QoWFamMMhKHb0+FIG+c0kIN/wbaqPivUow==
+X-Received: by 10.31.161.65 with SMTP id k62mr16163604vke.12.1478382083698;
+	Sat, 05 Nov 2016 14:41:23 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.159.36.211 with HTTP; Sat, 5 Nov 2016 14:41:23 -0700 (PDT)
+In-Reply-To: <OF04FA5FC4.E8F1EE5F-ONC1258061.004ADD35-C1258061.004C6F4E@rohde-schwarz.com>
+References: <OF04FA5FC4.E8F1EE5F-ONC1258061.004ADD35-C1258061.004C6F4E@rohde-schwarz.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sat, 5 Nov 2016 22:41:23 +0100
+Message-ID: <CALbNGRREixk7qahQ2_pW-M48LiOb9HffAozOEmwvd2iyCu50ag@mail.gmail.com>
+To: Thomas.Betker@rohde-schwarz.com
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5] qttools and QT_LIBINFIX
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,84 +54,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Nov 2016 18:00:37 -0000
+X-List-Received-Date: Sat, 05 Nov 2016 21:41:25 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Wireshark does not install header files. add install_append
-Remove ALLOW_EMPTY & INHIBIT_PACKAGE_DEBUG_SPLIT, they are no longer needed
+On Fri, Nov 4, 2016 at 2:54 PM,  <Thomas.Betker@rohde-schwarz.com> wrote:
+> Hello Andreas,
+>
+> in our project, we are using meta-qt5 with non-empty QT_LIBINFIX, and
+> building qttools fails because "cannot find -lQt5Lucene". I think
+> recipes-qt/qt5/qttools/0002-assistant-help-fix-linking-of-dependent-libraries.patch
+> should read
+>
+>         LIBS += -lQtLucene$${QT_LIBINFIX}
+>
+> instead of
+>
+>         LIBS += -lQtLucene
+>
+> Could you have a look at this?
+>
+> Best regards,
+> Thomas Betker
+Hi Thomas,
 
-V2]
-add missing libssh and sbc config
+to be honest even after googling around I did not really understand
+what QT_LIBINFIX is for - OK I did not spend much time on it...
 
-V3]
-restore removed FILES append and fixed missing sbc in PACKAGECONFIG
+I'd suggest you send a patch for this. As QT_LIBINFIX is empty by
+default this should go through build tests done by Martin.
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- .../recipes-support/wireshark/wireshark_2.2.1.bb   | 31 ++++++++++++++++++----
- 1 file changed, 26 insertions(+), 5 deletions(-)
+Regards
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
-index a5fb7f6..a8f61fe 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
-@@ -4,7 +4,7 @@ SECTION = "net"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
- 
--DEPENDS = "pcre expat glib-2.0 sbc"
-+DEPENDS = "pcre expat glib-2.0"
- 
- SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
- 
-@@ -16,8 +16,7 @@ inherit autotools pkgconfig perlnative
- 
- ARM_INSTRUCTION_SET = "arm"
- 
--
--PACKAGECONFIG ?= "libpcap gnutls libnl libcap"
-+PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc"
- PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk2 graphics", "", d)}"
- #PACKAGECONFIG += " ${@bb.utils.contains("DISTRO_FEATURES", "opengl", "gtk3", "", d)}"
- 
-@@ -37,13 +36,35 @@ PACKAGECONFIG[lua] = "--with-lua=yes, --with-lua=no, lua"
- PACKAGECONFIG[zlib] = "--with-zlib=yes, --with-zlib=no, zlib"
- PACKAGECONFIG[geoip] = "--with-geoip=yes, --with-geoip=no, geoip"
- PACKAGECONFIG[plugins] = "--with-plugins=yes, --with-plugins=no"
-+PACKAGECONFIG[sbc] = "--with-sbc=yes, --with-sbc=no, sbc"
-+
-+PACKAGECONFIG[libssh] = "--with-ssh=yes, --with-ssh=no, libssh2"
-+
- 
- # these next two options require addional layers
- PACKAGECONFIG[c-ares] = "--with-c-ares=yes, --with-c-ares=no, c-ares"
- 
- EXTRA_OECONF += "--with-qt=no --enable-tshark --enable-rawshark"
- 
--ALLOW_EMPTY_${PN} = "1"
--INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-+# Currently wireshark does not install header files
-+do_install_append () {
-+
-+	install -d ${D}/${includedir}/${BPN}
-+	install -d ${D}/${includedir}/${BPN}/epan
-+	install -d ${D}/${includedir}/${BPN}/epan/crypt
-+	install -d ${D}/${includedir}/${BPN}/epan/dfilter
-+	install -d ${D}/${includedir}/${BPN}/epan/dissectors
-+	install -d ${D}/${includedir}/${BPN}/epan/ftypes
-+	install -d ${D}/${includedir}/${BPN}/epan/wmem
-+
-+	install config.h ${D}/${includedir}/${BPN}
-+	install ${S}/register.h ${D}/${includedir}/${BPN}
-+	install -D ${S}/epan/*.h ${D}/${includedir}/${BPN}/epan
-+	install -D ${S}/epan/crypt/*.h ${D}/${includedir}/${BPN}/epan/crypt
-+	install -D ${S}/epan/dfilter/*.h ${D}/${includedir}/${BPN}/epan/dfilter
-+	install -D ${S}/epan/dissectors/*.h ${D}/${includedir}/${BPN}/epan/dissectors
-+	install -D ${S}/epan/ftypes/*.h ${D}/${includedir}/${BPN}/epan/ftypes
-+	install -D ${S}/epan/wmem/*.h ${D}/${includedir}/${BPN}/epan/wmem
-+}
- 
- FILES_${PN} += "${datadir}*"
--- 
-2.7.4
-
+Andreas
 
