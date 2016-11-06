@@ -1,51 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
 Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id B524171A87
+	by mail.openembedded.org (Postfix) with ESMTP id 8924071A4F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  6 Nov 2016 22:07:13 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id a20so2687466wme.2
+	Sun,  6 Nov 2016 22:07:12 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id a20so2687444wme.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Nov 2016 14:07:15 -0800 (PST)
+	Sun, 06 Nov 2016 14:07:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=LKOhVvkvk/KEOkakREivp7QbLQLJGHAR8al2TmuvCA8=;
-	b=FGFQ27jYlJsUmpszHnaSZBuXJwN4YzYibItjS2VJUl3fku9SPBjU5/5fXnNY1U9gjC
-	c8H6Bj0eaxsChyR/BaRJlfMZhpADaluOIPPgQcVhRI0Fur6kqnfvyqlDggMSScD9/Shf
-	YhXNUwqGS9DqvnFejs4yXXxLYfAMx37RVTsB0E8QwHEwNGZqHXFMtHv3rr4XaM6BN8W9
-	W9zEPnnB4TPGAmMxT/mUixV3934xLUuw2+Rl/WEbz+u1BCMKfsgriU0BEVamS/+gYlXh
-	7PtSWxFyeEKiHI4RpzvVgaOCa/BfX1wtvfW8M3HXKkTnrv29753sYU1kkn5wccEcbmvn
-	ktcA==
+	bh=ld3lpS3SOgTqWjAUnIXnyi/NmIFOZS+kW9iZ8/iNstU=;
+	b=TPMrgwF3nzE0+6TOXz4rKaIXp4awvwPq2PCgqGrfLYWJEZ09T0Ov93o/+VhWzX/3Ja
+	MsTQW4s4W39F3KowzvOjbkThHAPvUyQwRz6qeMW60+/m25WaE7RgYZ18S9jkttm2qwL8
+	l5aFOWMNhhy+MGeFnT/2JOe0UXcTNm59PQkxVWeiFEKALjkN/6aUR9oCZs8fDtPmEB7t
+	IUEJN6rjvpwXo8Z/FKyTs5POJeOjF51dP2kb8f44GE17stu9mmaHylxVRqWjOJj10NKA
+	XUzRY7YCYtq94KItMVAMJIr0cZX8bM2qU/3f2PkEhEIPNOjVQSp3h9umLpNbq4dS4/JB
+	CgEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=LKOhVvkvk/KEOkakREivp7QbLQLJGHAR8al2TmuvCA8=;
-	b=ienifC24NiJesyY5EtgTdfsSw+fWwPYJfMLB7rPAuZuvLM/+TDs6nWwkpEb3keeihL
-	WuktRgxZuWZs2uMWbQ6UwnfhYkXbTftC6WNOU3FxmIdLwiVvBKOtzzQXfiMFqJuAGuHX
-	hIbkeMwdmtszcrGM68Jb5ws4isjnQBIri4KSd+ywQphdsaeGKBhKGzI/4cNrxbqWkOdh
-	GVaS21hswA3KakKt55uHDWXfhpdZUWeiHAv7Rtnifg1NOLrk6ean/wazU2uFc+HSgNYD
-	bRbyFvawVfKahaZEgxGQqvxOrH2HGF4Ppa8VOmaLeN+wFHP5jCcRGMglfIb9o1IaqV+r
-	FIZw==
-X-Gm-Message-State: ABUngve31LJIMnEK/SOXUF/gS8RbDqpAVtURRCBhoxGq4IdmSmarHLDuscKBEH4Typ1lNw==
-X-Received: by 10.194.243.104 with SMTP id wx8mr2929086wjc.229.1478470034627; 
-	Sun, 06 Nov 2016 14:07:14 -0800 (PST)
+	bh=ld3lpS3SOgTqWjAUnIXnyi/NmIFOZS+kW9iZ8/iNstU=;
+	b=Occe70yKQTgTG491p3tJWdT+z2JWME5tsBYHfwO5BE6l5ptokv4yUEyswgtE/IRGMn
+	ZrKlhsFj8AnZS2EGT+xSjyvjUcAVwCVydy7M/Q36gvWuXcs+0Ga1zqkOrxTkqJLDD7af
+	KoisLTz7Emb7dal6zW8Y+IQ56W7mXAWR+jyIdY+eGfTvQ9s8j69VqPmW4SaeJgjfT7EL
+	L/QwAruDc2Gzn3RTd2Cm6yta1hnHC03W/ME04NiwBclaA6jlFjFi+HTX8bhV8+EHG81i
+	bR71f5G7XXL6PT+wkIW5XpHUOyrodJNakPL0U4yK5xO1euqJrPYcdYEBwKcm+mtE1zRQ
+	Fepg==
+X-Gm-Message-State: ABUngvfl95BCr0kikV7zkZOfPkJfzzOvnWmiKGr290FaB16p2DtebNXpMe9kX2jL7wlFJA==
+X-Received: by 10.194.250.1 with SMTP id yy1mr2829740wjc.219.1478470033858;
+	Sun, 06 Nov 2016 14:07:13 -0800 (PST)
 Received: from localhost.localdomain (p4FDF1D71.dip0.t-ipconnect.de.
 	[79.223.29.113]) by smtp.googlemail.com with ESMTPSA id
 	k2sm16044363wjv.11.2016.11.06.14.07.13
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 06 Nov 2016 14:07:14 -0800 (PST)
+	Sun, 06 Nov 2016 14:07:13 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  6 Nov 2016 23:06:43 +0100
-Message-Id: <1478470013-27247-5-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun,  6 Nov 2016 23:06:42 +0100
+Message-Id: <1478470013-27247-4-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
 In-Reply-To: <1478470013-27247-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1478470013-27247-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 05/15] xfce4-fsguard-plugin: update to 1.1.0
+Subject: [PATCH 04/15] xfce4-diskperf-plugin: update to 2.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,35 +62,27 @@ X-List-Received-Date: Sun, 06 Nov 2016 22:07:14 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-license has changed from GPLv2 to GPLv3
-
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...fce4-fsguard-plugin_1.0.2.bb => xfce4-fsguard-plugin_1.1.0.bb} | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
- rename meta-xfce/recipes-panel-plugins/fsguard/{xfce4-fsguard-plugin_1.0.2.bb => xfce4-fsguard-plugin_1.1.0.bb} (53%)
+ ...{xfce4-diskperf-plugin_2.5.5.bb => xfce4-diskperf-plugin_2.6.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/diskperf/{xfce4-diskperf-plugin_2.5.5.bb => xfce4-diskperf-plugin_2.6.0.bb} (65%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.0.2.bb b/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.0.bb
-similarity index 53%
-rename from meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.0.2.bb
-rename to meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.0.bb
-index 0f9199d..8b924ac 100644
---- a/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.0.2.bb
-+++ b/meta-xfce/recipes-panel-plugins/fsguard/xfce4-fsguard-plugin_1.1.0.bb
-@@ -1,9 +1,9 @@
- DESCRIPTION = "The FSGuard panel plugin checks free space on a chosen mount point frequently and displays a message when a limit is reached"
- HOMEPAGE = "http://goodies.xfce.org/projects/panel-plugins/xfce4-fsguard-plugin?&#recet_releases"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.5.bb b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.6.0.bb
+similarity index 65%
+rename from meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.5.bb
+rename to meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.6.0.bb
+index 801699c..31845e6 100644
+--- a/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.5.5.bb
++++ b/meta-xfce/recipes-panel-plugins/diskperf/xfce4-diskperf-plugin_2.6.0.bb
+@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d3e627798d6a60bece47aa8b3532e1f1"
  
  inherit xfce-panel-plugin
  
--SRC_URI[md5sum] = "db7741d1827e428b005e94d25e2ec00a"
--SRC_URI[sha256sum] = "a2c8d59386ae3d23cf6bdd06a1cdd7a1b9473cf6f38ae106600b194c601040ae"
-+SRC_URI[md5sum] = "c9fcc1ff37f38e6ed518eca3b9887aa8"
-+SRC_URI[sha256sum] = "6b038322b49d29625219e6a54497085b8f834b9c1fd15282ce286a6529d7c445"
+-SRC_URI[md5sum] = "199e4365cb3a1fcd5f6164044aedba17"
+-SRC_URI[sha256sum] = "cbeb0c00f97362eef3f135afb77947aef73e938bae0386250a122ac6644b521b"
++SRC_URI[md5sum] = "fdb061b5dee6efe04b14d10c166727b0"
++SRC_URI[sha256sum] = "4897f34ccd8c3d050f8d2d95652af6ab740a670a108bf01f582945779305900e"
 -- 
 2.5.5
 
