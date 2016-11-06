@@ -1,43 +1,45 @@
-Return-Path: <00moses.alexander00@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 966FB71A35
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 60501719B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Nov 2016 23:27:47 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id 68so9817486wmz.2
+	Sun,  6 Nov 2016 05:42:19 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id i88so12506124pfk.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Nov 2016 16:27:49 -0700 (PDT)
+	Sat, 05 Nov 2016 22:42:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=rDZdeWFLp3C7ckuCxvg9LwE8I8PKOa69P4rUe4pyPtc=;
-	b=PQwzd+E9BrVeuAoVGrypI8hqG4pTFXv5ejvAqzASvaE25GW4iKTXY+QVKCGUK+k45R
-	yJ8gHQUxSHb557BUsBwaeiK8hwJ8BUNDlkDWXOVUEOPB+0+dSzEX2SGjmau0Ebf9HLHA
-	FKuaD/8pZaykvrQGZ9caoypbRtiTPuPTw7+Ht/DdNMQrTlHA6zZ0GeY143/apVps8/Bi
-	2vJNyEb6zHmnJ/hEcFIMiuJPTXwTpxA32so7v67oq3yoHhJR3hUF+b5MWXY59mSVoWX8
-	Bc67Uq7a9g4DFbKg0FJ6TGdpcPkCnFhqDtAT1h89zxpqpc31mX8JfMVSypduH21xdDHD
-	qiXg==
+	bh=mLa3/PgZWlE6xv2WoAjL236GeD1WWf2H2zE6f6hECes=;
+	b=t49p04IE6mjpwtCLXYom47H5wS3Put5BI0xyiAlweLzhYNE1NQ7nHXXKYS1ZGWEzvP
+	gRuxaWrG2jjEMOIHdfXcmyyHDXJVyOHzGl1FcgwvblpyV3oOxJ47iuU7lnIQyCv3I9HX
+	axPEn/dtJu1LnuuBwunxLZMIoW9rwrzc3zsF+Xkd0YhzTiE8IaBaqNNmj/Ic2hKgXl+7
+	AhcOREy5YCPdWrTJWQ4EFNDx1ym54LuODQAWiCIcUIFO/LqBnRmuwSdD1Wy/nwLAEob8
+	hKKMcliJijjUkhsOmCmd0rSs0xTF4dGvK3Ty1I349w3LL9I6yGlT4Cz8c5D8hg3Hz+PH
+	0b5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=rDZdeWFLp3C7ckuCxvg9LwE8I8PKOa69P4rUe4pyPtc=;
-	b=Ga6R+hYItVaEid8Dd7r0cOsv2gvRPcvA+O3MQW9HQeXSlVvrInLouAVRWCep8lKC7N
-	Ibs26EdopwOJXx5n/10XpASNEqht5A7nrWggwk5UJtpY9ngyDm3Qn+Dv49j/VBdBk1/V
-	hwOpvv8svVMTADemC4eS5HvyFF9ICgqJsOsRJKnOHVgNKQ5PjFvhqVt/scWyx0OBWduX
-	wXh2tg2KjhVqNSgVlmea0QL2SNUZ/fW1hvZahpPijSU4QyVYlJHtWWzqr2/ugL6xu+mp
-	MdxvemkHtfqdgs6eYt38+ELHomCysbWFalfmSys44KXLQX30rHL9lSgJWpohNjROGAVk
-	ISYA==
-X-Gm-Message-State: ABUngvc8rXaLiEU38pCMC27tGWH1/8XFusI2xzzASBUj3G1qiHzQjXekilmSkeXU+Xef0Q==
-X-Received: by 10.28.8.202 with SMTP id 193mr630554wmi.101.1478388468129;
-	Sat, 05 Nov 2016 16:27:48 -0700 (PDT)
-Received: from localhost.localdomain ([188.24.218.70])
-	by smtp.gmail.com with ESMTPSA id f3sm4571211wmf.10.2016.11.05.16.27.47
+	bh=mLa3/PgZWlE6xv2WoAjL236GeD1WWf2H2zE6f6hECes=;
+	b=QQMY1iOPjYILaT3e8WbxLpvW2L2Ne6/JaYMSFmelBoXVYphz1+WTmGCE8ruBsMmUTP
+	AafGi6akOLlbZcG6NBbgMEO5LQaZsuTpGXX4x6MVsyE5iq/mgFOGOYI1Lyuay2J2m4fl
+	GpNtsdY3d0B4xxxJsCbrVvY31H0HhBtjfzsoYabtvTaU7l+qTteZl+Ta0FGRY4EFes4P
+	Aid//Gn6ZH4vqWTT8UU4knSSHBNmPpsC+uD5JRWcvmkeYUY+NXKKDoppOWBp55apQIc+
+	2pYYZSADFX4JzeqYa+Z8kmMPe0KoiUwH+jTeLxmp/d5eB431JKMKrbeGZ5Q9O58fSltZ
+	QteA==
+X-Gm-Message-State: ABUngvcRhbgz38fvdOjizMMgbVN37ALTrRCtNdx5O82nIGN3vH01ziL9b2+ByD6LS7Pyag==
+X-Received: by 10.98.74.18 with SMTP id x18mr2190567pfa.58.1478410940951;
+	Sat, 05 Nov 2016 22:42:20 -0700 (PDT)
+Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
+	j68sm30869664pfk.95.2016.11.05.22.42.20
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 05 Nov 2016 16:27:47 -0700 (PDT)
-From: Alexandru Moise <00moses.alexander00@gmail.com>
+	Sat, 05 Nov 2016 22:42:20 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  6 Nov 2016 01:27:35 +0200
-Message-Id: <20161105232735.12691-1-00moses.alexander00@gmail.com>
+Date: Sat,  5 Nov 2016 22:42:14 -0700
+Message-Id: <20161106054214.16950-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.2
-Subject: [meta-networking][PATCH] fwknop: Initial add 2.6.9
+Subject: [meta-oe][PATCH V2 3/7] libplist: Remove rpaths surgically
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,58 +52,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Nov 2016 23:27:49 -0000
+X-List-Received-Date: Sun, 06 Nov 2016 05:42:22 -0000
 
-fwknop is a SPA (Single Packet Authorization) scheme for strong
-service concealment. Modern alternative to port knocking using
-a single encrypted packet for authentification with a firewall.
+Check for files first before operating on it
 
-Signed-off-by: Alexandru Moise <00moses.alexander00@gmail.com>
+Fixes QA errors like below
+
+  /usr/lib/python2.7/site-packages/plist/__init__.py
+  /usr/lib/python2.7/site-packages/plist/_plist.so
+  /usr/lib/python2.7/site-packages/plist/plist.py
+Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+libplist: 3 installed and not shipped files. [installed-vs-shipped]
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-support/fwknop/fwknop_2.6.9.bb         | 34 ++++++++++++++++++++++
- 1 file changed, 34 insertions(+)
- create mode 100644 meta-networking/recipes-support/fwknop/fwknop_2.6.9.bb
+Changes V1->V2
+- Check for _plist.so before chrpathing it
 
-diff --git a/meta-networking/recipes-support/fwknop/fwknop_2.6.9.bb b/meta-networking/recipes-support/fwknop/fwknop_2.6.9.bb
-new file mode 100644
-index 0000000..49b11ad
---- /dev/null
-+++ b/meta-networking/recipes-support/fwknop/fwknop_2.6.9.bb
-@@ -0,0 +1,34 @@
-+SUMMARY = "fwknop - Single Packet Authorization"
-+HOMEPAGE = "http://www.cipherdyne.org/fwknop/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
-+		    "
-+inherit autotools-brokensep
-+
-+SRC_URI = "http://www.cipherdyne.org/${BPN}/download/${BPN}-${PV}.tar.bz2 \
-+          "
-+
-+SRC_URI[md5sum] = "e2c49e9674888a028bd443a55c3aaa22"
-+SRC_URI[sha256sum] = "5bf47fe1fd30e862d29464f762c0b8bf89b5e298665c37624d6707826da956d4"
-+
-+DEPENDS = "libpcap gpgme"
-+
-+EXTRA_OECONF = " --with-iptables=/usr/sbin/iptables \
-+               "
-+
-+do_configure () {
-+	aclocal
-+	libtoolize --automake --copy --force
-+	autoconf
-+	autoheader
-+	automake -a
-+	oe_runconf
+ meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb b/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
+index 10d40fb..f789796 100644
+--- a/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
++++ b/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
+@@ -16,8 +16,16 @@ SRC_URI = "http://www.libimobiledevice.org/downloads/libplist-${PV}.tar.bz2 \
+ SRC_URI[md5sum] = "2a9e0258847d50f9760dc3ece25f4dc6"
+ SRC_URI[sha256sum] = "a418da3880308199b74766deef2a760a9b169b81a868a6a9032f7614e20500ec"
+ 
+-PACKAGES =+ "${PN}-utils ${PN}++"
++do_install_append () {
++    if [ -e ${D}${libdir}/python*/site-packages/plist/_plist.so ]; then
++        chrpath -d ${D}${libdir}/python*/site-packages/plist/_plist.so
++    fi
 +}
 +
-+PACKAGES =+ "${PN}-client ${PN}-daemon"
++PACKAGES =+ "${PN}-utils ${PN}++ ${PN}-python"
+ FILES_${PN} = "${libdir}/libplist${SOLIBS}"
+ FILES_${PN}++ = "${libdir}/libplist++${SOLIBS}"
+ FILES_${PN}-utils = "${bindir}/*"
++FILES_${PN}-python = "${libdir}/python*/site-packages/*"
 +
-+FILES_${PN}-client = "${bindir}/fwknop"
-+FILES_${PN}-daemon = "${sbindir}/fwknopd \
-+                      ${sysconfdir}/fwknop/access.conf \
-+                      ${sysconfdir}/fwknop/fwknopd.conf"
-+
+ 
 -- 
 2.10.2
 
