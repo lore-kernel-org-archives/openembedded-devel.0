@@ -1,51 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F3C671A4F
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 072CD71A8D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  6 Nov 2016 22:07:15 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id p190so13518622wmp.1
+	Sun,  6 Nov 2016 22:07:16 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id a20so2687574wme.2
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 06 Nov 2016 14:07:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=kPLFavwgKZjCMdrfjMqE7WaXeyLR7Fyi4akEjD8v5Ls=;
-	b=LMmy63NO+0X14nDSPsJ7K+uGn39P7NT+tmsqGwdBSgNI9t3talth8oa9VQtkLJyuRI
-	f/PBo1Tn/MKIpzIK0h/Eku9SDhTTE1KdiSsSFCBUfkvl91UnIakWTWv07qVxAgfJ9x2r
-	EurwapV07fSXk1ncp1qeJ0veN8/hJlrv0xfOvYTAnf9NT+2PqypERfg7Ly6MxLiLHfgA
-	Nd9ffw0OCUBFcm/NKgBvMCPgWuw8x74Kif7dYp2W611jecdn2griZKpxVa3b34seaYnk
-	NfXDvm+poc5ASB4ukcTNSD7WJEg/yHSw6EfJZv+/MF/O+czlxQ00QPMWbNfxjzZJ2iUe
-	bJXA==
+	bh=WTpG6Tm+fPX5aJOK9+2VPZ6QnZJ4HWYnfMMx8taANEQ=;
+	b=v+eHYO4VBq8BsDt/ZuAyrHxGY/FtItGeL99N0Hhh875JvHApDSt/1dklFaWMmXB0KS
+	sw91jSsRPNQUgywTz+gUbkiLUc3P6Sz5IUghLK+adFntXZZGmy4l1KRYm6QgMXTdNd9J
+	9iB0I/LUh5FH+w3TZ2WweirfiA7W7KI/0wF75jzjD3q1U9Cc6rGEkAG3OKkVEU1HkGGh
+	WBSQOBdgAVan83V5izqV7SMNerQhPL3zFlIUiJkgqrn3d+nh3HGIRdemAyjZyMbkpTGV
+	BjkW7q78N9xE3zAL7aUIISTQ3jwWhfH8g+UBlahjCSfo8lvmbNkLRwqwpz2DZLPLwpLF
+	8Gmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=kPLFavwgKZjCMdrfjMqE7WaXeyLR7Fyi4akEjD8v5Ls=;
-	b=izktQEqtmAXbMlnnwte/G3TZc7qI6q6tNdeik2t9t4zEfU8XJ3cKBYSulEmBIdvijC
-	SIL8UhXt3bbiOtesDsmGHJ8f0UH1GvK8C/UVoYhYlFGCusLkZPWWu4kv5y4ksmDLqw+R
-	7ZE9EOwEs9G603nlTLhwirvLggoEQENcnN6WHUIiXML4mJgkQ/rEYQ8MIIOxAdVI4yBn
-	HZhkE5jwrv7Fl28uJkDT15jeqo1mhKQ5yJmaY5W1yt85bYNYhJsXfH6ZJ4gffJrs1xqG
-	6yt/iCV8FCdO2AALjJHYQgJWZySdzudQaeXJvfaQY2XCZtZ7zx53JRLkxoHhnlopdmcj
-	FtZQ==
-X-Gm-Message-State: ABUngvdLokUCDqlmvQQ5qDwTrPG/VJEc41D/Y3mabfrnuohks+hlNsb3Pc0RJ8Pn3Lu2xQ==
-X-Received: by 10.194.205.1 with SMTP id lc1mr2875826wjc.192.1478470036254;
+	bh=WTpG6Tm+fPX5aJOK9+2VPZ6QnZJ4HWYnfMMx8taANEQ=;
+	b=hsaui8pXei5DrDzyzBsWab6uecNoq1EzAm9FNOVbnpXPZx04q2FvpntEQ18klPu/gi
+	SyqW6RTQ6E61l1wT1aiJTRhj0YmGIs23FJA8JXwegR9TOPYhy6ufdoeMq1sdpApSu/Na
+	6a2m3odDmJN+Y2XzBLSL2Nhyv1g2PQtAi93OsUyX7eIork34GiZ29cBNlqYJvPQ40eP5
+	joIu73jcxfbZ+751MW2zINRVAXtFfJktT5/n/RK2CDN6Ae4lGlRmWTNd2FyW6n0zQMKF
+	slSP5nW42ntHWkCmHErUEyAXAqNCvGcjagc406cMNCAGsbIGqzx/9t4+y3KGwpoKq4nJ
+	6jow==
+X-Gm-Message-State: ABUngvfBa1KRfd1Opydz1c3LdFhffBdvA+KjMcRHgUffScmhdUrfKKM1HX96eNs9yWwHlA==
+X-Received: by 10.194.29.161 with SMTP id l1mr2920265wjh.97.1478470036987;
 	Sun, 06 Nov 2016 14:07:16 -0800 (PST)
 Received: from localhost.localdomain (p4FDF1D71.dip0.t-ipconnect.de.
 	[79.223.29.113]) by smtp.googlemail.com with ESMTPSA id
-	k2sm16044363wjv.11.2016.11.06.14.07.15
+	k2sm16044363wjv.11.2016.11.06.14.07.16
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 06 Nov 2016 14:07:15 -0800 (PST)
+	Sun, 06 Nov 2016 14:07:16 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  6 Nov 2016 23:06:45 +0100
-Message-Id: <1478470013-27247-7-git-send-email-schnitzeltony@googlemail.com>
+Date: Sun,  6 Nov 2016 23:06:46 +0100
+Message-Id: <1478470013-27247-8-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
 In-Reply-To: <1478470013-27247-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1478470013-27247-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 07/15] xfce4-netload-plugin: update to 1.3.0
+Subject: [PATCH 08/15] xfce4-smartbookmark-plugin: update to 0.5.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,31 +58,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Nov 2016 22:07:15 -0000
+X-List-Received-Date: Sun, 06 Nov 2016 22:07:16 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../{xfce4-netload-plugin_1.2.4.bb => xfce4-netload-plugin_1.3.0.bb}  | 4 ++--
+ ...rtbookmark-plugin_0.4.6.bb => xfce4-smartbookmark-plugin_0.5.0.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/netload/{xfce4-netload-plugin_1.2.4.bb => xfce4-netload-plugin_1.3.0.bb} (66%)
+ rename meta-xfce/recipes-panel-plugins/smartbookmark/{xfce4-smartbookmark-plugin_0.4.6.bb => xfce4-smartbookmark-plugin_0.5.0.bb} (66%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.2.4.bb b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.0.bb
+diff --git a/meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.4.6.bb b/meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.5.0.bb
 similarity index 66%
-rename from meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.2.4.bb
-rename to meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.0.bb
-index c9f7a2a..9e31ebe 100644
---- a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.2.4.bb
-+++ b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.0.bb
-@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=35a7203c41b86d15546dddc05995f97f"
+rename from meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.4.6.bb
+rename to meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.5.0.bb
+index 3f47f06..6289ad3 100644
+--- a/meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.4.6.bb
++++ b/meta-xfce/recipes-panel-plugins/smartbookmark/xfce4-smartbookmark-plugin_0.5.0.bb
+@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
  inherit xfce-panel-plugin
  
--SRC_URI[md5sum] = "ce53e1135e4bff5afcd899627110bd11"
--SRC_URI[sha256sum] = "fface918822c012d806717116566e54947ad7613b9290b45a18e2d5ffb8730d3"
-+SRC_URI[md5sum] = "9b625d8ad513085f2e1569171db00b44"
-+SRC_URI[sha256sum] = "615a280a1bc6c1e3f40755798217a230fd022f7744b095e7df978b63f25c8057"
+-SRC_URI[md5sum] = "01b7735d4d9ab0150d4ddd3becb94d5f"
+-SRC_URI[sha256sum] = "3bed2b322cd39ce5845d6da07938c702260f3f1a9700b690ef377fba752ba24f"
++SRC_URI[md5sum] = "6f242fe584ee2fdd2b1d3d69ef3d5914"
++SRC_URI[sha256sum] = "139539c58d54d878de86ef8a882c793cd909981e6b888f7f9d5e230a8fe310a4"
 -- 
 2.5.5
 
