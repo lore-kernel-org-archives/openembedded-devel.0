@@ -1,24 +1,48 @@
-Return-Path: <Dengke.Du@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id F316160766
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id EC6A671987
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Nov 2016 02:18:05 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uA72I7CC000225
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon,  7 Nov 2016 07:41:01 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id 144so7046519pfv.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 6 Nov 2016 18:18:07 -0800 (PST)
-Received: from pek-lpgtest20.wrs.com (128.224.179.28) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Sun, 6 Nov 2016 18:18:06 -0800
-From: Dengke Du <dengke.du@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 7 Nov 2016 10:18:05 +0800
-Message-ID: <1478485085-26160-1-git-send-email-dengke.du@windriver.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-Subject: [meta-python][PATCH V2] python-pyserial: remove serialjava.py
+	Sun, 06 Nov 2016 23:41:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=2/vGuuB8xX0p+68S2XHr7Ar5S5/3c8rPtjd1T+TUGqU=;
+	b=dpB04bQ7s2I/jQ61J4EfxDgRPsVqFrt6gleUrilUjjCqfq46HjlmnEeEYfjMuotvDP
+	WNsg/LAKW7PqgLa73uu9Hl//SSsoDVVRwwCiMCwVD4s7gwkWiQbrcgoeFSWKqAJtTe5h
+	yPcVHgax8wjWZj+RsgkTQCFooY/XEZNkfq1egZtFkDUA44Jyalq9U2YO44Ai3Pe4MFzC
+	aq/DOyZZ4Aw7GInEisy755GnlOvoAgIiAqLdB4mHkg8lm0Wiu3Oo8Z0lv2KsfKYrfMOX
+	Jx+4Gw2mWW3SRTczROLdRylvE9pe6gHOjvWuTWr5Fxoxq7UoTrKX9YY6GTb552lffmhE
+	qYeg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=2/vGuuB8xX0p+68S2XHr7Ar5S5/3c8rPtjd1T+TUGqU=;
+	b=QR2Z1HHynxU9YXTCiO9HvuI5mY10gj4nCmOwTzX1FbYKt5+UhoYoW7V1J1itK7LIpv
+	OFrO15sfBN9Y7kKu3WoQ3rbxLX8IY+FggmbwhAgnwjW0ESnvfqwgQPpgjGqnf8Equh+j
+	yLghjuaDqZX/0yJSGy3VxCFlNzCJJOuDPG8OerI+i3Ytu5f2yANK9tSwh4vpZR62Ou9k
+	vnWUS9L3CR1tqJ2tL3oT2TYTfRznIS0ZVNY1SSX/zAunesNCDglWpRK4UEEJpufe+LOh
+	gLjnzZb4ZxvnRs/Hok5Fnqs/R2RuDVJwLDk7WzDUGVW2/CuUmk5XBXayOyYHj70erlcc
+	Vnpw==
+X-Gm-Message-State: ABUngvdDG0OCQ04sM8KDxBP5onnan22c9MHS93E0kShRvTed3R2+1ydT66LgMKPAQYu+rg==
+X-Received: by 10.99.221.85 with SMTP id g21mr8909688pgj.121.1478504463538;
+	Sun, 06 Nov 2016 23:41:03 -0800 (PST)
+Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
+	131sm37626623pfx.92.2016.11.06.23.41.02
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 06 Nov 2016 23:41:03 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  6 Nov 2016 23:40:55 -0800
+Message-Id: <20161107074056.18613-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.10.2
+In-Reply-To: <20161107074056.18613-1-raj.khem@gmail.com>
+References: <20161107074056.18613-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/3] lockdev: Pretend GNU libc on musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,33 +55,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Nov 2016 02:18:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 07 Nov 2016 07:41:02 -0000
 
-The serialjava.py depends on jpython, we don't support jpython now.So remove it.
+it has all needed features but expects " -D__GNU_LIBRARY__"
+so make it happy when using musl
 
-Signed-off-by: Dengke Du <dengke.du@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-pyserial.inc | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ meta-oe/recipes-support/lockdev/lockdev_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyserial.inc b/meta-python/recipes-devtools/python/python-pyserial.inc
-index a4c7728..61f3776 100644
---- a/meta-python/recipes-devtools/python/python-pyserial.inc
-+++ b/meta-python/recipes-devtools/python/python-pyserial.inc
-@@ -14,3 +14,11 @@ SRC_URI[md5sum] = "2f72100de3e410b36d575e12e82e9d27"
- SRC_URI[sha256sum] = "d657051249ce3cbd0446bcfb2be07a435e1029da4d63f53ed9b4cdde7373364c"
- 
- inherit pypi
+diff --git a/meta-oe/recipes-support/lockdev/lockdev_git.bb b/meta-oe/recipes-support/lockdev/lockdev_git.bb
+index 023b9a7..507ce3f 100644
+--- a/meta-oe/recipes-support/lockdev/lockdev_git.bb
++++ b/meta-oe/recipes-support/lockdev/lockdev_git.bb
+@@ -18,3 +18,5 @@ do_configure_prepend () {
+     # Make automake happy
+     touch ChangeLog
+ }
 +
-+do_install_append() {
-+	# We don't support jpython now.
-+	if [ -e ${D}${PYTHON_SITEPACKAGES_DIR}/serial/serialjava.py ]; then
-+		rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/serial/serialjava.py
-+		rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/serial/serialjava.pyc
-+	fi
-+}
++CFLAGS_append_libc-musl = " -D__GNU_LIBRARY__"
 -- 
-2.7.4
+2.10.2
 
 
