@@ -1,24 +1,44 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id CA7BE60269
+Return-Path: <gizero@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 5CBB471A5F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Nov 2016 10:05:45 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uA7A5ken003106
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon,  7 Nov 2016 10:59:26 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id c17so15746248wmc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 7 Nov 2016 02:05:46 -0800 (PST)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Mon, 7 Nov 2016 02:05:45 -0800
-From: Chen Qi <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 7 Nov 2016 18:05:02 +0800
-Message-ID: <20161107100502.1128-1-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 2.8.3
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH V3] gnuplot: upgrade to 5.0.5
+	Mon, 07 Nov 2016 02:59:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=vemwV2TEtwYkwzylRoDhBH0I5StkZyKWeWA5Ro7buuU=;
+	b=GmrNnfJBTPkK6CSoOlhjNhK+IvyCLn6WHvMz7EsX/lGDuiM3K8b3dxjLEHpy8hNjC3
+	EDOBJv4asyukiywQaiq8i/ompZv4ufBULr8HW2y1hs0TuskhxLBaXjrZtx0gMKXReUWH
+	5kVbuKpbESwjRNXXT8QV4KUAl2evLmV6kSXAqMh2KaaK0YZxulTcM5WLYHKPYBNwooSc
+	U0ht4Jg/t9c5qUwWfDS6u4w6azeFZQP4E6US/lxKPZYZEpW9v9UOwgi+rbRRJjk0HvsS
+	R0Cj8ZG1Np4eDOiyqBdLsyRfPUFBqtzXRJhm6lhx8lOvZqZH17ZA81OrQUkvgsS7315k
+	aRpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=vemwV2TEtwYkwzylRoDhBH0I5StkZyKWeWA5Ro7buuU=;
+	b=O1v1R0YXWmOxGqZ2Cdq+Obnj5hy3HjgmFF6jNJXe2LB2WyZUNQmACxhwKjqgyGZrit
+	95JLfe493bg8L25EaYQ2MbwXhtorr4cXmAGxP5EYTJkym00F864o8W2ZJsIz51tILXMp
+	n5uLh/ngwISEbOmMiVbc3+yNj68fAyQQePsITj/sW3niHp6clv9BvRFoUPqvkWZBbYE9
+	Bu92k+dAcuqQkCyGuU9ujLZh55662I6HRhqS3CHykm4spZwcXAWwWZd+ojBMPFSCzTu3
+	j77khdx99gevfmZZMsZRL6EbPPOzwxRnsUDc/OILP03qikos9bxhUJOcz+wl4ORAbBgx
+	PB9A==
+X-Gm-Message-State: ABUngvfmyYgcuOlPcIytneP79ctLQr0p1FiZYw3zQh4Dwxo0JEVPXq4T3Y3Mfl2TGCvz2Q==
+X-Received: by 10.28.211.71 with SMTP id k68mr8182696wmg.21.1478516367250;
+	Mon, 07 Nov 2016 02:59:27 -0800 (PST)
+Received: from gizero-desktop.tw.it
+	(host168-65-static.12-87-b.business.telecomitalia.it. [87.12.65.168])
+	by smtp.gmail.com with ESMTPSA id d64sm6792209wmh.3.2016.11.07.02.59.26
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 07 Nov 2016 02:59:26 -0800 (PST)
+From: Andrea Galbusera <gizero@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  7 Nov 2016 11:59:10 +0100
+Message-Id: <1478516350-31751-1-git-send-email-gizero@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [PATCH] ref-manual: fix typo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,67 +51,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Nov 2016 10:05:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 07 Nov 2016 10:59:26 -0000
 
-Add PACKAGECONFIG for 'qt4' and default to not enable it as there's
-do_compile failure when qt4 is enabled.
-
-The obsolete '--without-lisp-files' option is removed.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Andrea Galbusera <gizero@gmail.com>
 ---
- meta-oe/recipes-extended/gnuplot/gnuplot.inc                          | 3 ++-
- .../{gnuplot-4.6.5 => gnuplot}/lua-loadlibs-configure-in-fix.patch    | 0
- .../recipes-extended/gnuplot/{gnuplot-4.6.5 => gnuplot}/subdirs.patch | 0
- .../recipes-extended/gnuplot/{gnuplot_4.6.5.bb => gnuplot_5.0.5.bb}   | 4 ++--
- 4 files changed, 4 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-extended/gnuplot/{gnuplot-4.6.5 => gnuplot}/lua-loadlibs-configure-in-fix.patch (100%)
- rename meta-oe/recipes-extended/gnuplot/{gnuplot-4.6.5 => gnuplot}/subdirs.patch (100%)
- rename meta-oe/recipes-extended/gnuplot/{gnuplot_4.6.5.bb => gnuplot_5.0.5.bb} (74%)
+ documentation/kernel-dev/kernel-dev-advanced.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot.inc b/meta-oe/recipes-extended/gnuplot/gnuplot.inc
-index 69bc74b..19ee874 100644
---- a/meta-oe/recipes-extended/gnuplot/gnuplot.inc
-+++ b/meta-oe/recipes-extended/gnuplot/gnuplot.inc
-@@ -15,9 +15,10 @@ acpaths = ""
- PACKAGECONFIG ??= "cairo"
- PACKAGECONFIG[cairo] = "--with-cairo,--without-cairo,cairo pango"
- PACKAGECONFIG[lua] = "--with-lua,--without-lua,lua"
-+# there's compilation failure if qt4 is enabled
-+PACKAGECONFIG[qt4] = "--with-qt,--without-qt,qt4-x11-free"
- 
- EXTRA_OECONF = "--with-readline=${STAGING_LIBDIR}/.. \
--                --without-lisp-files \
-                 --without-tutorial \
-                 --disable-wxwidgets"
- 
-diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/lua-loadlibs-configure-in-fix.patch b/meta-oe/recipes-extended/gnuplot/gnuplot/lua-loadlibs-configure-in-fix.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/lua-loadlibs-configure-in-fix.patch
-rename to meta-oe/recipes-extended/gnuplot/gnuplot/lua-loadlibs-configure-in-fix.patch
-diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/subdirs.patch b/meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch
-similarity index 100%
-rename from meta-oe/recipes-extended/gnuplot/gnuplot-4.6.5/subdirs.patch
-rename to meta-oe/recipes-extended/gnuplot/gnuplot/subdirs.patch
-diff --git a/meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb b/meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb
-similarity index 74%
-rename from meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb
-rename to meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb
-index 3f694a0..42308ba 100644
---- a/meta-oe/recipes-extended/gnuplot/gnuplot_4.6.5.bb
-+++ b/meta-oe/recipes-extended/gnuplot/gnuplot_5.0.5.bb
-@@ -8,7 +8,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gnuplot/${BP}.tar.gz;name=archive \
-     file://gnuplot.png \
- "
- 
--SRC_URI[archive.md5sum] = "9a476b21f74bd99c876f1509d731a0f9"
--SRC_URI[archive.sha256sum] = "e550f030c7d04570e89c3d4e3f6e82296816508419c86ab46c4dd73156519a2d"
-+SRC_URI[archive.md5sum] = "c5e96fca73afbee4f57cbc1bfce6b3b8"
-+SRC_URI[archive.sha256sum] = "25f3e0bf192e01115c580f278c3725d7a569eb848786e12b455a3fda70312053"
- SRC_URI[qtplot.md5sum] = "0a481885a496092c77eb4017540b5cf6"
- SRC_URI[qtplot.sha256sum] = "6df317183ff62cc82f3dcf88207a267cd6478cb5147f55d7530c94f1ad5f4132"
+diff --git a/documentation/kernel-dev/kernel-dev-advanced.xml b/documentation/kernel-dev/kernel-dev-advanced.xml
+index 9e15f17..ed982fb 100644
+--- a/documentation/kernel-dev/kernel-dev-advanced.xml
++++ b/documentation/kernel-dev/kernel-dev-advanced.xml
+@@ -256,7 +256,7 @@
+             When stored outside of the recipe-space, the kernel Metadata
+             files reside in a separate repository.
+             The OpenEmbedded build system adds the Metadata to the build as
+-            a "ktype=meta" repository through the
++            a "type=kmeta" repository through the
+             <ulink url='&YOCTO_DOCS_REF_URL;#var-SRC_URI'><filename>SRC_URI</filename></ulink>
+             variable.
+             As an example, consider the following <filename>SRC_URI</filename>
 -- 
-2.8.3
+1.9.1
 
 
