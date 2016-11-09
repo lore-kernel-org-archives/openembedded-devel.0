@@ -1,26 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 763AB605B3
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 50AF4605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Nov 2016 08:06:02 +0000 (UTC)
+	Wed,  9 Nov 2016 08:06:03 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id uA98637K019906
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uA9865ve027798
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 9 Nov 2016 00:06:03 -0800 (PST)
+	Wed, 9 Nov 2016 00:06:05 -0800 (PST)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Wed, 9 Nov 2016 00:06:02 -0800
+	14.3.294.0; Wed, 9 Nov 2016 00:06:04 -0800
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 9 Nov 2016 15:58:51 +0800
-Message-ID: <20161109075853.12636-2-kai.kang@windriver.com>
+Date: Wed, 9 Nov 2016 15:58:52 +0800
+Message-ID: <20161109075853.12636-3-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.10.1
 In-Reply-To: <20161109075853.12636-1-kai.kang@windriver.com>
 References: <20161109075853.12636-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/3] iozone3: 434 -> 465
+Subject: [PATCH 2/3] libhugetlbfs: 1.19 -> 1.20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,46 +33,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Nov 2016 08:06:02 -0000
+X-List-Received-Date: Wed, 09 Nov 2016 08:06:04 -0000
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-Update LIC_FILES_CHKSUM according to:
+Upgrade libhugetlbfs from 1.19 to 1.20.
 
-http://www.iozone.org/docs/Iozone_License.txt
+* Remove libhugetlbfs-avoid-using-restrict-as-var-name.patch which is
+  fixed in upstream.
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../recipes-benchmark/iozone3/{iozone3_434.bb => iozone3_465.bb} | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-benchmark/iozone3/{iozone3_434.bb => iozone3_465.bb} (92%)
+ ...ugetlbfs-avoid-using-restrict-as-var-name.patch | 34 ----------------------
+ .../libhugetlbfs/libhugetlbfs_git.bb               |  5 ++--
+ 2 files changed, 2 insertions(+), 37 deletions(-)
+ delete mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-avoid-using-restrict-as-var-name.patch
 
-diff --git a/meta-oe/recipes-benchmark/iozone3/iozone3_434.bb b/meta-oe/recipes-benchmark/iozone3/iozone3_465.bb
-similarity index 92%
-rename from meta-oe/recipes-benchmark/iozone3/iozone3_434.bb
-rename to meta-oe/recipes-benchmark/iozone3/iozone3_465.bb
-index daa36ee..67ce885 100644
---- a/meta-oe/recipes-benchmark/iozone3/iozone3_434.bb
-+++ b/meta-oe/recipes-benchmark/iozone3/iozone3_465.bb
-@@ -3,13 +3,14 @@ HOMEPAGE = "http://www.iozone.org/"
- AUTHOR = "Don Capps <don.capps2@verizon.net>, William D. Norcott <wnorcott@us.oracle.com>"
- SECTION = "console/tests"
- LICENSE = "iozone3"
--LIC_FILES_CHKSUM = "file://iozone.c;beginline=268;endline=272;md5=ab42a6185fd0443978871f11a007ac0b"
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-avoid-using-restrict-as-var-name.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-avoid-using-restrict-as-var-name.patch
+deleted file mode 100644
+index b77cfe1..0000000
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/files/libhugetlbfs-avoid-using-restrict-as-var-name.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-Avoid using keyword restrict as variable name which causes error with gcc 5.x:
 -
-+LIC_FILES_CHKSUM = "file://iozone.c;beginline=37;endline=48;md5=7331260091868dcad0f9edea735b5f4b \
-+    file://iozone.c;beginline=260;endline=266;md5=77f9ee51e45b57a7e7519c4fa0b4f00b \
-+"
- SRC_URI = "http://www.iozone.org/src/current/${BPN}_${PV}.tar \
-     file://copyright.txt \
- "
--SRC_URI[md5sum] = "3e8f4213581407225065b91774e970ed"
--SRC_URI[sha256sum] = "2c388d9db393a5505b31eca38951883744c69745f687f3c7df5185b4681d462a"
-+SRC_URI[md5sum] = "c924e5e46fb1cf8145f420e8e57eb954"
-+SRC_URI[sha256sum] = "2e3d72916e7d7340a7c505fc0c3d28553fcc5ff2daf41d811368e55bd4e6a293"
+-| hugeutils.c: In function '__lh_hugetlbfs_setup_env':
+-| hugeutils.c:304:40: error: expected identifier or '(' before 'restrict'
+-|    char *p, *tok, *exe, buf[MAX_EXE+1], restrict[MAX_EXE];
+-|                                         ^
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+----
+-diff --git a/hugeutils.c b/hugeutils.c
+-index 53a7fbd..b9d7001 100644
+---- a/hugeutils.c
+-+++ b/hugeutils.c
+-@@ -301,14 +301,14 @@ void hugetlbfs_setup_env()
+- 
+- 	env = getenv("HUGETLB_RESTRICT_EXE");
+- 	if (env) {
+--		char *p, *tok, *exe, buf[MAX_EXE+1], restrict[MAX_EXE];
+-+		char *p, *tok, *exe, buf[MAX_EXE+1], restricted[MAX_EXE];
+- 		int found = 0;
+- 
+- 		exe = get_exe_name(buf, sizeof buf);
+- 		DEBUG("Found HUGETLB_RESTRICT_EXE, this exe is \"%s\"\n", exe);
+--		strncpy(restrict, env, sizeof restrict);
+--		restrict[sizeof(restrict)-1] = 0;
+--		for (p = restrict; (tok = strtok(p, ":")) != NULL; p = NULL) {
+-+		strncpy(restricted, env, sizeof restricted);
+-+		restricted[sizeof(restricted)-1] = 0;
+-+		for (p = restricted; (tok = strtok(p, ":")) != NULL; p = NULL) {
+- 			DEBUG("  ...check exe match for \"%s\"\n",  tok);
+- 			if (strcmp(tok, exe) == 0) {
+- 				found = 1;
+diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+index 301b550..72553cf 100644
+--- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
++++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+@@ -7,10 +7,10 @@ DEPENDS = "sysfsutils perl"
+ RDEPENDS_${PN} += "bash perl python python-io python-lang python-subprocess python-resource ${PN}-perl"
+ RDEPENDS_${PN}-tests += "bash"
  
- S = "${WORKDIR}/${BPN}_${PV}/src/current/"
+-PV = "2.19"
++PV = "2.20"
+ PE = "1"
+ 
+-SRCREV = "426c22d65415fcb8927f68fbc5887e075a8dc40a"
++SRCREV = "e44180072b796c0e28e53c4d01ef6279caaa2a99"
+ SRC_URI = " \
+     git://github.com/libhugetlbfs/libhugetlbfs.git;protocol=https \
+     file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
+@@ -18,7 +18,6 @@ SRC_URI = " \
+     file://tests-Makefile-install-static-4G-edge-testcases.patch \
+     file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
+     file://libhugetlbfs-elf_i386-avoid-search-host-library-path.patch \
+-    file://libhugetlbfs-avoid-using-restrict-as-var-name.patch \
+     file://Force-text-segment-alignment-to-0x08000000-for-i386-.patch \
+ "
  
 -- 
 2.10.1
