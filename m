@@ -1,24 +1,46 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 38AB360797
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
+	[209.85.213.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 54E067198F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Nov 2016 10:15:52 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id uAAAFrQ8020906
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Thu, 10 Nov 2016 15:38:21 +0000 (UTC)
+Received: by mail-vk0-f66.google.com with SMTP id p9so11256175vkd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Nov 2016 02:15:53 -0800
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Thu, 10 Nov 2016 02:15:52 -0800
-From: Chen Qi <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 10 Nov 2016 18:14:56 +0800
-Message-ID: <20161110101456.21092-1-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 2.8.3
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] openobex: upgrade to 1.7.2
+	Thu, 10 Nov 2016 07:38:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:organization;
+	bh=58NP1siQ2btC7Qfc8OdS1Jwj3fh+oikOd5+Fco0PeLw=;
+	b=Du7HqwxJPBOOZbsVTAecOhgRHiP22dsDZAB3RvYgH+q2IEZVOgFEpKRXj+sTFP20V8
+	GLd625sFgeENbZK5Wf5xCDMh85GDzyiFdWy/V5KeLQqlpjHrW/YUJg3Q2OUAjZY7sZRO
+	Jfh5nMLWP9Q27XWmgLo/Hdsw9Qu81S7wD1VHUhU3jtyzaXz6z+EIyD+SIGs5yhWb54sq
+	M5I5cfhbtq/ZtluFs0N7OLGS4YdwPMjIkAfzP0nUTHOhjqSYCFfOG1GGemYCV5rdVZRL
+	b00XPHUwQuuGxaop//dyAg4XLY8aKNzG+1mHPN1zHkxeEmBFDdC6ypjeZbZFr1GHkwjE
+	Nobg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=58NP1siQ2btC7Qfc8OdS1Jwj3fh+oikOd5+Fco0PeLw=;
+	b=g++sl9gM67acw44jx6ht1AbsjSIpO3AgzC/CEMu7Tn8/89GI3anPWQ8tQ5oBu/UAsC
+	RkgmDzGu3sgfLGn0udIsQ7QYf1yDROArgQZ5nKEGHaNQD1NRSgtwY6YATyvvBSnFaGf5
+	DxbMOTJaqY/OXzVR6RBaKmS3GQ7efkJBWKy+9kki2pEZAtwxA7UPxgWjwqL/SMrBPaZf
+	VxLgMLtalzeJKWIM2o3kF5l0tHfkne5KNyKX4SlUaCy1FISdYV9Q1ztTWrxm3l4ELb9k
+	8Njo33DgU4uVNmcRdhIR4Fp/5ZmV0QhD0QYFtKMevkQcKpzng+zkrdFN9M7G1P+m5Hav
+	Kqqg==
+X-Gm-Message-State: ABUngvfy9SvV1YfoeLBbnRiuy8nDFsNVGvZPnQ1kYywdW1U8iHmfGKOQ+aB4GtYQnmF7MQ==
+X-Received: by 10.31.95.210 with SMTP id t201mr3839775vkb.49.1478792302596;
+	Thu, 10 Nov 2016 07:38:22 -0800 (PST)
+Received: from monster.lab.ossystems.com.br ([187.23.155.148])
+	by smtp.gmail.com with ESMTPSA id e34sm1189043uae.1.2016.11.10.07.38.20
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 10 Nov 2016 07:38:21 -0800 (PST)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Nov 2016 13:37:56 -0200
+Message-Id: <1478792276-17772-1-git-send-email-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.1.4
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-python][PATCH] python-humanize, python3-humanize: Add recipe for version 0.5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,204 +53,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Nov 2016 10:15:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 10 Nov 2016 15:38:24 -0000
 
-Add a patch to resolve segment fault in obex-check-device.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 ---
- .../obex/openobex-1.5/disable-cable-test.patch     | 16 ----------
- .../openobex-1.5/libusb_crosscompile_check.patch   | 11 -------
- .../obex/openobex-1.5/separate_builddir.patch      | 16 ----------
- ...001-obex-check-device-avoid-segment-fault.patch | 29 ++++++++++++++++++
- meta-oe/recipes-connectivity/obex/openobex_1.5.bb  | 35 ----------------------
- .../recipes-connectivity/obex/openobex_1.7.2.bb    | 33 ++++++++++++++++++++
- 6 files changed, 62 insertions(+), 78 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/obex/openobex-1.5/disable-cable-test.patch
- delete mode 100644 meta-oe/recipes-connectivity/obex/openobex-1.5/libusb_crosscompile_check.patch
- delete mode 100644 meta-oe/recipes-connectivity/obex/openobex-1.5/separate_builddir.patch
- create mode 100644 meta-oe/recipes-connectivity/obex/openobex/0001-obex-check-device-avoid-segment-fault.patch
- delete mode 100644 meta-oe/recipes-connectivity/obex/openobex_1.5.bb
- create mode 100644 meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
+ meta-python/recipes-devtools/python/python-humanize.inc       | 10 ++++++++++
+ meta-python/recipes-devtools/python/python-humanize_0.5.1.bb  |  2 ++
+ meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb |  2 ++
+ 3 files changed, 14 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-humanize.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-humanize_0.5.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
 
-diff --git a/meta-oe/recipes-connectivity/obex/openobex-1.5/disable-cable-test.patch b/meta-oe/recipes-connectivity/obex/openobex-1.5/disable-cable-test.patch
-deleted file mode 100644
-index 95b636d..0000000
---- a/meta-oe/recipes-connectivity/obex/openobex-1.5/disable-cable-test.patch
-+++ /dev/null
-@@ -1,16 +0,0 @@
--
--#
--# Patch managed by http://www.holgerschurig.de/patcher.html
--#
--
----- openobex-1.2/apps/Makefile.am~disable-cable-test
--+++ openobex-1.2/apps/Makefile.am
--@@ -6,7 +6,7 @@
-- 	obex_io.c obex_io.h \
-- 	obex_put_common.c obex_put_common.h
-- 
---bin_PROGRAMS = irxfer obex_tcp irobex_palm3 obex_test
--+bin_PROGRAMS = irxfer obex_tcp irobex_palm3
-- 
-- obex_test_SOURCES = \
-- 	obex_test.c obex_test.h \
-diff --git a/meta-oe/recipes-connectivity/obex/openobex-1.5/libusb_crosscompile_check.patch b/meta-oe/recipes-connectivity/obex/openobex-1.5/libusb_crosscompile_check.patch
-deleted file mode 100644
-index 1177dfe..0000000
---- a/meta-oe/recipes-connectivity/obex/openobex-1.5/libusb_crosscompile_check.patch
-+++ /dev/null
-@@ -1,11 +0,0 @@
----- /tmp/acinclude.m4	2009-04-12 10:32:15.000000000 +0200
--+++ openobex-1.5/acinclude.m4	2009-04-12 10:32:38.000000000 +0200
--@@ -158,7 +158,7 @@
-- 		;;
-- 	*)
-- 		PKG_CHECK_MODULES(USB, libusb, usb_lib_found=yes, AC_MSG_RESULT(no))
---		AC_CHECK_FILE(${prefix}/lib/pkgconfig/libusb.pc, REQUIRES="libusb")
--+		REQUIRES="libusb"
-- 		;;
-- 	esac
-- 	AC_SUBST(USB_CFLAGS)
-diff --git a/meta-oe/recipes-connectivity/obex/openobex-1.5/separate_builddir.patch b/meta-oe/recipes-connectivity/obex/openobex-1.5/separate_builddir.patch
-deleted file mode 100644
-index 8abf8ae..0000000
---- a/meta-oe/recipes-connectivity/obex/openobex-1.5/separate_builddir.patch
-+++ /dev/null
-@@ -1,16 +0,0 @@
--Fix detection of IrDA failing with B!=S
--
--Upstream-Status: Pending
--
--Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
--
----- a/acinclude.m4	2014-05-24 14:05:41.757796816 +0100
--+++ b/acinclude.m4	2014-05-24 14:03:06.556795536 +0100
--@@ -54,6 +54,7 @@
-- ])
-- 
-- AC_DEFUN([AC_PATH_IRDA_LINUX], [
--+	CPPFLAGS="${CPPFLAGS} -I${srcdir}"
-- 	AC_CACHE_CHECK([for IrDA support], irda_found, [
-- 		AC_TRY_COMPILE([
-- 				#include <sys/socket.h>
-diff --git a/meta-oe/recipes-connectivity/obex/openobex/0001-obex-check-device-avoid-segment-fault.patch b/meta-oe/recipes-connectivity/obex/openobex/0001-obex-check-device-avoid-segment-fault.patch
+diff --git a/meta-python/recipes-devtools/python/python-humanize.inc b/meta-python/recipes-devtools/python/python-humanize.inc
 new file mode 100644
-index 0000000..d7c2681
+index 0000000..d9fac09
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/obex/openobex/0001-obex-check-device-avoid-segment-fault.patch
-@@ -0,0 +1,29 @@
-+Subject: obex-check-device: avoid segment fault
++++ b/meta-python/recipes-devtools/python/python-humanize.inc
+@@ -0,0 +1,10 @@
++SUMMARY = "Python humanize utilities"
++HOMEPAGE = "http://github.com/jmoiron/humanize"
 +
-+The argument number needs to be no less than 3 instead of 2. Otherwise,
-+when we use `obex-check-device xxx' on target, there would be segment
-+fault error.
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENCE;md5=d2eff82fc25dd07c919a02465884f02e"
 +
-+Upstream-Status: Pending
++SRC_URI[md5sum] = "e8473d9dc1b220911cac2edd53b1d973"
++SRC_URI[sha256sum] = "a43f57115831ac7c70de098e6ac46ac13be00d69abbf60bdcac251344785bb19"
 +
-+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-+---
-+ udev/obex-check-device.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/udev/obex-check-device.c b/udev/obex-check-device.c
-+index 9eb4769..df9fc73 100644
-+--- a/udev/obex-check-device.c
-++++ b/udev/obex-check-device.c
-+@@ -62,7 +62,7 @@ int main (int argc, char **argv)
-+ 	unsigned long vendor;
-+ 	unsigned long product;
-+ 
-+-	if (argc < 2)
-++	if (argc < 3)
-+ 		return 0;
-+ 
-+ 	vendor = strtoul(argv[1], NULL, 16);
-+-- 
-+2.8.3
-+
-diff --git a/meta-oe/recipes-connectivity/obex/openobex_1.5.bb b/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
-deleted file mode 100644
-index 6ac7905..0000000
---- a/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
-+++ /dev/null
-@@ -1,35 +0,0 @@
--DESCRIPTION = "The Openobex project is an open source implementation of the \
--Object Exchange (OBEX) protocol."
--HOMEPAGE = "http://openobex.triq.net"
--SECTION = "libs"
--DEPENDS = "virtual/libusb0"
--DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES','bluez5','bluez5','bluez4',d)}"
--
--LICENSE = "GPLv2 & LGPLv2.1"
--LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
--                    file://COPYING.LIB;md5=a6f89e2100d9b6cdffcea4f398e37343 \
--"
--
--SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/openobex-${PV}.tar.gz \
--           file://disable-cable-test.patch \
--           file://libusb_crosscompile_check.patch \
--           file://separate_builddir.patch"
--
--SRC_URI[md5sum] = "0d83dc86445a46a1b9750107ba7ab65c"
--SRC_URI[sha256sum] = "e602047570799a47ecb028420bda8f2cef41310e5a99d084de10aa9422935e65"
--
--inherit autotools binconfig pkgconfig
--
--EXTRA_OECONF = "--enable-apps --enable-syslog"
--
--do_install_append() {
--    install -d ${D}${datadir}/aclocal
--    install -m 0644 ${S}/openobex.m4 ${D}${datadir}/aclocal
--}
--
--PACKAGES += "openobex-apps"
--FILES_${PN} = "${libdir}/lib*.so.*"
--FILES_${PN}-dev += "${bindir}/openobex-config"
--FILES_${PN}-apps = "${bindir}/*"
--DEBIAN_NOAUTONAME_${PN}-apps = "1"
--
-diff --git a/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb b/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-humanize_0.5.1.bb b/meta-python/recipes-devtools/python/python-humanize_0.5.1.bb
 new file mode 100644
-index 0000000..5828838
+index 0000000..5769309
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
-@@ -0,0 +1,33 @@
-+DESCRIPTION = "The Openobex project is an open source implementation of the \
-+Object Exchange (OBEX) protocol."
-+HOMEPAGE = "http://openobex.triq.net"
-+SECTION = "libs"
-+DEPENDS = "virtual/libusb0"
-+DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES','bluez5','bluez5','bluez4',d)}"
-+
-+LICENSE = "GPLv2 & LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
-+                    file://COPYING.LIB;md5=a6f89e2100d9b6cdffcea4f398e37343 \
-+"
-+
-+SRC_URI = "http://downloads.sourceforge.net/openobex/openobex-${PV}-Source.tar.gz \
-+           file://0001-obex-check-device-avoid-segment-fault.patch"
-+
-+SRC_URI[md5sum] = "f6e0b6cb7dcfd731460a7e9a91429a3a"
-+SRC_URI[sha256sum] = "158860aaea52f0fce0c8e4b64550daaae06df2689e05834697b7e8c7d73dd4fc"
-+
-+inherit cmake
-+
-+S = "${WORKDIR}/openobex-${PV}-Source"
-+
-+EXTRA_OECMAKE += "-DCMAKE_BUILD_TYPE=Release"
-+
-+do_install_append () {
-+    if [ "`ls -A ${D}${bindir}`" = "" ]; then
-+	rm -rf ${D}${bindir}
-+    fi
-+}
-+
-+FILES_${PN}-dev += "${libdir}/cmake"
-+
-+
++++ b/meta-python/recipes-devtools/python/python-humanize_0.5.1.bb
+@@ -0,0 +1,2 @@
++inherit pypi setuptools
++require python-humanize.inc
+diff --git a/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb b/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
+new file mode 100644
+index 0000000..04464ac
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-humanize_0.5.1.bb
+@@ -0,0 +1,2 @@
++inherit pypi setuptools3
++require python-humanize.inc
 -- 
-2.8.3
+2.1.4
 
 
