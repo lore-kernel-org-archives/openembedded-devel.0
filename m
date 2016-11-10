@@ -1,24 +1,24 @@
-Return-Path: <Junxian.Xiao@windriver.com>
+Return-Path: <Jackie.Huang@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C887719B3
+	by mail.openembedded.org (Postfix) with ESMTP id E212371985
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Nov 2016 02:32:12 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id uAA2WDjA007460
+	Thu, 10 Nov 2016 08:27:05 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id uAA8R6iZ011084
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 9 Nov 2016 18:32:13 -0800 (PST)
-Received: from jxiao1-OptiPlex-990.wrs.com (128.224.162.155) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.294.0; Wed, 9 Nov 2016 18:32:12 -0800
-From: "Junxian.Xiao" <Junxian.Xiao@windriver.com>
+	Thu, 10 Nov 2016 00:27:06 -0800 (PST)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Thu, 10 Nov 2016 00:27:05 -0800
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 10 Nov 2016 10:31:42 +0800
-Message-ID: <1478745102-15521-2-git-send-email-Junxian.Xiao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+Date: Thu, 10 Nov 2016 16:26:09 +0800
+Message-ID: <20161110082609.8513-1-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.8.3
 MIME-Version: 1.0
-Subject: [meta-webserver][PATCH v2] apache2: include .load files in modules.d
+Subject: [meta-oe][PATCH] openjpeg: rename the download file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,35 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Nov 2016 02:32:12 -0000
+X-List-Received-Date: Thu, 10 Nov 2016 08:27:09 -0000
 Content-Type: text/plain
 
-According to other Linux distributes like Ubuntu, the modules
-are usually included by 'LoadModule' command in *.load files
-in mods-enable directory, as *.conf files in this directory
-are usually used for special configurations for each module.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Include *.load in apache2 top conf file to be compatible with
-customer's normal usage habits.
+Rename the download file to avoid collisions in DL_DIR.
 
-Signed-off-by: Junxian.Xiao <Junxian.Xiao@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-index be24998..96f21dd 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-@@ -80,6 +80,7 @@ do_install_append() {
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.1.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.1.bb
+index d767adc..fa4f796 100644
+--- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.1.bb
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.1.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://www.openjpeg.org"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c648878b4840d7babaade1303e7f108c"
  
-     # Ensure configuration file pulls in conf.d and modules.d
-     printf "\nIncludeOptional ${sysconfdir}/${BPN}/conf.d/*.conf" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
-+    printf "\nIncludeOptional ${sysconfdir}/${BPN}/modules.d/*.load" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
-     printf "\nIncludeOptional ${sysconfdir}/${BPN}/modules.d/*.conf\n\n" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
-     # match with that is in init script
-     printf "\nPidFile /run/httpd.pid" >> ${D}/${sysconfdir}/${BPN}/httpd.conf
+-SRC_URI = "https://github.com/uclouvain/${BPN}/archive/v${PV}.tar.gz"
++SRC_URI = "https://github.com/uclouvain/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz"
+ SRC_URI[md5sum] = "0cc4b2aee0a9b6e9e21b7abcd201a3ec"
+ SRC_URI[sha256sum] = "82c27f47fc7219e2ed5537ac69545bf15ed8c6ba8e6e1e529f89f7356506dbaa"
+ 
 -- 
-2.7.4
+1.9.1
 
 
