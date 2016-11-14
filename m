@@ -1,36 +1,33 @@
-Return-Path: <f.suligoi@asem.it>
-Received: from smtp.asem.it (smtp.asem.it [151.22.69.122])
-	by mail.openembedded.org (Postfix) with ESMTP id AE60A60620
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 0BFC86FF72
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Nov 2016 12:39:43 +0000 (UTC)
-Received: from webmail.asem.it by asem.it (smtp.asem.it)
-	(SecurityGateway 4.0.1) with ESMTP id SG002422523.MSG 
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Nov 2016 13:39:40 +0100AS
-Received: from ASAS013.asem.intra ([172.16.16.50]) by ASAS014.asem.intra
-	([172.16.16.51]) with mapi id 14.03.0319.002;
-	Mon, 14 Nov 2016 13:39:41 +0100
-From: Flavio Suligoi <f.suligoi@asem.it>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-browser] Chromium crash start the test
-	www.html5test.com
-Thread-Index: AQHSPm7z2zmPIcpxwUyzDFgQ7/2XZKDYajh2
-Date: Mon, 14 Nov 2016 12:39:40 +0000
-Message-ID: <3A8890C59B0943428C1CECF15A6881A743327DD3@ASAS013.asem.intra>
-References: <3A8890C59B0943428C1CECF15A6881A74332681B@ASAS013.asem.intra>,
-	<e9a8aedbf732444598e003ce0c553ab9@XCH-ALN-008.cisco.com>
-In-Reply-To: <e9a8aedbf732444598e003ce0c553ab9@XCH-ALN-008.cisco.com>
-Accept-Language: it-IT, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.16.17.75]
+	Mon, 14 Nov 2016 13:49:48 +0000 (UTC)
+Received: from svr-orw-fem-04.mgc.mentorg.com ([147.34.97.41])
+	by relay1.mentorg.com with esmtp 
+	id 1c6Hdt-0005jP-Qc from Joe_MacDonald@mentor.com ;
+	Mon, 14 Nov 2016 05:49:49 -0800
+Received: from burninator (147.34.91.1) by svr-orw-fem-04.mgc.mentorg.com
+	(147.34.97.41) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 14 Nov 2016 05:49:49 -0800
+Received: by burninator (Postfix, from userid 1000)	id 32C66580595; Mon, 14
+	Nov 2016 08:49:48 -0500 (EST)
+Date: Mon, 14 Nov 2016 08:49:48 -0500
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20161114134947.GA9012@mentor.com>
+References: <9278bc38-73d6-8593-aee4-ee981eb62b7c@windriver.com>
+	<1960865a-ab12-9dd5-84ff-5dfac53fd36a@gmail.com>
+	<20161026083316.GB4096@jama> <20161114113445.GA2914@jama>
 MIME-Version: 1.0
-X-SGHeloLookup-Result: pass smtp.helo=webmail.asem.it (ip=172.16.16.51)
-X-SGSPF-Result: none (smtp.asem.it)
-X-SGOP-RefID: str=0001.0A0B0206.5829B08D.00BD, ss=1, re=0.000, recu=0.000,
-	reip=0.000, cl=1, cld=1, fgs=0 (_st=1 _vt=0 _iwf=0)
-Subject: Re: [meta-browser] Chromium crash start the test	www.html5test.com
+In-Reply-To: <20161114113445.GA2914@jama>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: OE plans for morty
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,168 +40,190 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Nov 2016 12:39:45 -0000
-Content-Language: it-IT
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Mon, 14 Nov 2016 13:49:50 -0000
+X-Groupsio-MsgNum: 63814
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="M9NhX3UHpAaciwkO"
+Content-Disposition: inline
+
+--M9NhX3UHpAaciwkO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Julien,=0A=
-=0A=
-I have two recurring errors.=0A=
-The first one:=0A=
-=0A=
-imx6dl:~# export DISPLAY=3D:0.0=0A=
-imx6dl:~# google-chrome =0A=
-[837:837:1114/133445:ERROR:sandbox_linux.cc(338)] InitializeSandbox() calle=
-d with multiple threads in process gpu-process=0A=
-[811:811:1114/133447:ERROR:surface_display_output_surface.cc(100)] Not impl=
-emented reached in virtual void cc::SurfaceDisplayOutputSurface::SetBeginFr=
-ameSource(cc::SurfaceId, cc::BeginFrameSource*)=0A=
-[811:811:1114/133451:ERROR:surface_display_output_surface.cc(100)] Not impl=
-emented reached in virtual void cc::SurfaceDisplayOutputSurface::SetBeginFr=
-ameSource(cc::SurfaceId, cc::BeginFrameSource*)=0A=
-[811:811:1114/133451:ERROR:delegated_frame_host.cc(543)] Not implemented re=
-ached in virtual void content::DelegatedFrameHost::SetBeginFrameSource(cc::=
-SurfaceId, cc::BeginFrameSource*)=0A=
-[811:811:1114/133451:ERROR:delegated_frame_host.cc(543)] Not implemented re=
-ached in virtual void content::DelegatedFrameHost::SetBeginFrameSource(cc::=
-SurfaceId, cc::BeginFrameSource*)=0A=
-[811:811:1114/133451:ERROR:delegated_frame_host.cc(543)] Not implemented re=
-ached in virtual void content::DelegatedFrameHost::SetBeginFrameSource(cc::=
-SurfaceId, cc::BeginFrameSource*)=0A=
-/usr/bin/google-chrome: line 11:   811 Segmentation fault      /usr/bin/chr=
-omium/chrome ${CHROME_EXTRA_ARGS} $@=0A=
-imx6dl:~# =0A=
-=0A=
-=0A=
-The second one, cause by a big alloc of over 1.5 GBytes of RAM (my board ha=
-s 1GB of RAM):=0A=
-=0A=
-imx6dl:~# export DISPLAY=3D:0.0=0A=
-imx6dl:~# google-chrome www.google.com=0A=
-[933:933:1114/133638:ERROR:sandbox_linux.cc(338)] InitializeSandbox() calle=
-d with multiple threads in process gpu-process=0A=
-[907:907:1114/133639:ERROR:surface_display_output_surface.cc(100)] Not impl=
-emented reached in virtual void cc::SurfaceDisplayOutputSurface::SetBeginFr=
-ameSource(cc::SurfaceId, cc::BeginFrameSource*)=0A=
-[907:907:1114/133639:ERROR:delegated_frame_host.cc(543)] Not implemented re=
-ached in virtual void content::DelegatedFrameHost::SetBeginFrameSource(cc::=
-SurfaceId, cc::BeginFrameSource*)=0A=
-[907:907:1114/133639:ERROR:delegated_frame_host.cc(543)] Not implemented re=
-ached in virtual void content::DelegatedFrameHost::SetBeginFrameSource(cc::=
-SurfaceId, cc::BeginFrameSource*)=0A=
-[907:907:1114/133649:ERROR:delegated_frame_host.cc(543)] Not implemented re=
-ached in virtual void content::DelegatedFrameHost::SetBeginFrameSource(cc::=
-SurfaceId, cc::BeginFrameSource*)=0A=
-[907:907:1114/133650:ERROR:delegated_frame_host.cc(543)] Not implemented re=
-ached in virtual void content::DelegatedFrameHost::SetBeginFrameSource(cc::=
-SurfaceId, cc::BeginFrameSource*)=0A=
-tcmalloc: large alloc 1518362624 bytes =3D=3D (nil) @ =0A=
-[907:923:1114/133650:FATAL:memory_linux.cc(43)] Out of memory.=0A=
-#0 0x00005524ab52 <unknown>=0A=
-#1 0x00005525a4fa <unknown>=0A=
-#2 0x000055268096 <unknown>=0A=
-#3 0x0000580ecdb6 tc_newarray=0A=
-#4 0x0000555440be <unknown>=0A=
-#5 0x000055544144 <unknown>=0A=
-#6 0x000056c213d8 <unknown>=0A=
-#7 0x000056c84b72 <unknown>=0A=
-#8 0x000056c84f1a <unknown>=0A=
-#9 0x000056c9078e <unknown>=0A=
-#10 0x000056d3411a <unknown>=0A=
-#11 0x000056c8ca30 <unknown>=0A=
-#12 0x000056c94ee8 <unknown>=0A=
-#13 0x000056c8e5ae <unknown>=0A=
-#14 0x000056c8f1aa <unknown>=0A=
-#15 0x00005528e182 <unknown>=0A=
-#16 0x00005525e24a <unknown>=0A=
-#17 0x00005525e7ca <unknown>=0A=
-#18 0x00005525ea9c <unknown>=0A=
-#19 0x00005525fdac <unknown>=0A=
-#20 0x00005526bb34 <unknown>=0A=
-#21 0x00005525dbcc <unknown>=0A=
-#22 0x00005527b58c <unknown>=0A=
-#23 0x0000552790aa <unknown>=0A=
-=0A=
-/usr/bin/google-chrome: line 11:   907 Aborted                 /usr/bin/chr=
-omium/chrome ${CHROME_EXTRA_ARGS} $@=0A=
-rt40-imx6dl:~# =0A=
-=0A=
-=0A=
-=0A=
-________________________________________=0A=
-Da: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel-b=
-ounces@lists.openembedded.org] per conto di Julien Brianceau (jbriance) [jb=
-riance@cisco.com]=0A=
-Inviato: luned=EC 14 novembre 2016 12.50=0A=
-A: openembedded-devel@lists.openembedded.org=0A=
-Oggetto: Re: [oe] [meta-browser] Chromium crash start the test  www.html5te=
-st.com=0A=
-=0A=
-Hi,=0A=
-=0A=
-Do you have a callstack or any debug information about this crash ?=0A=
-=0A=
-Julien=0A=
-=0A=
------Original Message-----=0A=
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Flavio Suligoi=0A=
-Sent: vendredi 11 novembre 2016 12:18=0A=
-To: openembedded-devel@lists.openembedded.org=0A=
-Subject: [oe] [meta-browser] Chromium crash start the test www.html5test.co=
-m=0A=
-=0A=
-Hi all,=0A=
-=0A=
-I'm using Yocto 2.1 Krogoth, with an i.MX6DL (DualLite) board and the meta-=
-browser layer.=0A=
-The chromium version is the classic" 48.0.2548.0.=0A=
-=0A=
-To call the executable I use the switches:=0A=
-=0A=
-  *   --use-gl=3Degl=0A=
-  *   --gpu-no-context-lost=0A=
-  *   --ignore-gpu-blacklist=0A=
-  *   --user-data-dir=3D/home/root/.chromium/=0A=
-=0A=
-I use chromium in kiosk mode, with the web address directly written on the =
-command line.=0A=
-=0A=
-This because chromium, when more than one tab is opened, always crashes.=0A=
-=0A=
-=0A=
-Anyway, when I try to test the HTML5 compatibility using the website "www.h=
-tml5test.com<http://www.html5test.com>" , chromium crashes immediately, aft=
-er downloading the html5 code, even before starting the test.=0A=
-=0A=
-=0A=
-Do you have any solution/patch to solve this problem?=0A=
-=0A=
-=0A=
-Best regards,=0A=
-=0A=
-=0A=
-Flavio=0A=
-=0A=
-=0A=
-P.S.: html5test is a very used and common html5 test and I have to use it t=
-o check the html5 compatibility of my board.=0A=
-=0A=
-=0A=
-=0A=
-=0A=
-=0A=
-=0A=
-=0A=
---=0A=
-_______________________________________________=0A=
-Openembedded-devel mailing list=0A=
-Openembedded-devel@lists.openembedded.org=0A=
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel=0A=
---=0A=
-_______________________________________________=0A=
-Openembedded-devel mailing list=0A=
-Openembedded-devel@lists.openembedded.org=0A=
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel=0A=
+[Re: OE plans for morty] On 16.11.14 (Mon 12:34) Martin Jansa wrote:
 
+> On Wed, Oct 26, 2016 at 10:33:16AM +0200, Martin Jansa wrote:
+> > On Mon, Oct 24, 2016 at 07:07:55PM -0700, akuster808 wrote:
+> > > Randy,
+> > >=20
+> > >=20
+> > > On 10/24/2016 05:51 PM, Randy MacLeod wrote:
+> > > >
+> > > >
+> > > > I saw that morty has been branched and there have been 38 commits
+> > > > made to master.  Woo-hoo and thanks Martin!
+> > >=20
+> > >=20
+> > > >
+> > > > Armin,
+> > > >
+> > > > Many of the master commits sh/could be cherry-picked back
+> > > > to morty since they are bug fixes rather than package uprevs.
+> > > > I have a list of commits to cherry-pick below. '?' indicates
+> > > > that I'm not sure from the oneline summary if it's just a bug
+> > > > fix as you might expect.
+> > >=20
+> > > Thanks for providing commit ids you are interested in.
+> > >=20
+> > > I have pushed the contrib morty-next  this morning.
+> > >=20
+> > > http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=3Dakust=
+er/morty-next
+> >=20
+> > What about using current master (I've pushed bunch of commits today) +
+> > hopefully following in meta-networking which should be pushed by Joe
+> > (currently waiting in master-next):
+> >=20
+> > pick 2c1d637 linux-atm: fix do_compile error
+> > pick bfb71d5 lowpan-tools: Fix errors found with clang
+> > pick 944cd7a openl2tp: Fix build with clang
+> > pick 9641512 libmnl, nftables: Update versions
+> > pick 8303d85 c-ares: update 1.11.0 -> 1.12.0
+> > pick 36c563d c-ares: fix metadata
+> > pick 7552201 lksctp-tools: 1.0.16 -> 1.0.17
+> > pick a0fcdac drbd-utils: 8.9.3 -> 8.9.6
+> >=20
+> > This gives us almost clean bitbake world status I've sent few minutes
+> > ago.
+> >=20
+> > I haven't merged the README update to morty yet, so we can do this sync
+> > with master as fast forward (and continue to do so until there is fist
+> > master-only change merged in master).
+>=20
+> Joe: when are you planing to merge next batch of meta-networking
+> changes? At least the list mentioned above? I'm still waiting with final
+> morty branch update before merging first master-only changes.
+
+I've been out for the last week and a bit, but I'll look at those this
+morning and follow-up / merge as appropriate.
+
+-J.
+
+>=20
+> Regards,
+>=20
+> > Regards,
+> >=20
+> > > > Are you going to do a dot release in the coming weeks or will
+> > > > it be more like early next year?
+> > >=20
+> > > I am hoping to do a pull request request shortly after morty is=20
+> > > announced by Richard.
+> > >=20
+> > > Some of the commits listed below are in master-next so I need to wait=
+=20
+> > > for them to hit master before I  cherry-pick any additional changes.
+> > >=20
+> > > Hope this is a satisfactory plan.
+> > >=20
+> > >=20
+> > > regards,
+> > > Armin
+> > >=20
+> > > >
+> > > > ../Randy
+> > > >
+> > > > ec0fb46 openldap: use recommended backend mdb
+> > > >
+> > > > ? 64ebc30 android-tools: fix native build
+> > > > d2902a3 dhcp_%.bbappend: fix replaces original key warning
+> > > >
+> > > > ? 965d028 python-unidiff: python module for parsing diff data
+> > > >
+> > > > ? 1be8a35 joe: Fix build with clang
+> > > > ? 2084473 openl2tp: Fix build with clang
+> > > > ? 0004410 flashrom: Fix build with clang and aarch64
+> > > > ? 83fec86 gpm: Remove nested functions
+> > > > ? 9446302 lowpan-tools: Fix errors found with clang
+> > > >
+> > > > ? 5e0dc68 python-greenlet: Rename register from rX to xX for aarch64
+> > > > ? d8e9117 frame: Fix build with clang
+> > > > ? 612b2bb libplist: Squash warnings found by clang
+> > > > ? 2951547 libmbim: Fix build with clang
+> > > > ? c04bdbe libbonobo: Fix missing dep on orbit2-native and build wit=
+h=20
+> > > > clang
+> > > >
+> > > > 6b3e9ff linux-atm: fix do_compile error
+> > > >
+> > > > ? 9a83c34 adduser: always add -M option for useradd
+> > > >
+> > > > ? da12104 v4l-utils: add support for "native" build
+> > > >
+> > > >
+> > > > cfe1fba postgresql.inc: Fix do_configure error (could not find Pyth=
+on.h)
+> > > >
+> > > >
+> > > > ? 8ba31c9 gpsd, mongodb: use PACKAGECONFIG_CONFARGS instead of now=
+=20
+> > > > empty EXTRA_OECONF
+> > > > ? f882db6 ipmiutil: uncomment PARALLEL_MAKE
+> > > >
+> > > > ? 54c7e78 pcsc-lite: Seperate GPLV3 portions from BSD
+> > > > fded4cf opencv: fix packaging and install
+> > > >
+> > > >
+> > > > 1c072cb gvfs: fix fetch error
+> > > > ? 0cc3d06 leptonica: add PACKAGECONFIG for giflib
+> > > > ? 8eef5ab wireshark: update to 2.2.1
+> > > >
+> > > > ? 812e940 ntp : Add openssl to default PACKAGECONFIG options
+> > > > ? 8760099 atftp: fixes musl libc build
+> > > > ? 5abe6ea arptables: add the directory for default=20
+> > > > /etc/sysconfig/arptables
+> > > > ? a0e2240 arptables: add arptables systemd service file
+> > > > 93b0d65 iscsitarget: resolve build error with linux kernel 4.8
+> > > > 9e8d127 squid: fix ptest failure
+> > > > 6f54f29 squid: specify sysconfdir and logdir
+> > > > 307d1c9 libtdb: fixes for deterministic builds
+> > > > 5175c03 libldb: fixes for deterministic builds
+> > > > 5291715 libtevent: fixes for deterministic builds
+> > > > 778a2b6 libtalloc: fixes for deterministic builds
+> > > > fe652f8 libldb: fix for LIC_FILES_CHKSUM
+> > > > f25aa3d libtdb: fix for LIC_FILES_CHKSUM
+> > > > d4a36f6 libtevent: fix for LIC_FILES_CHKSUM
+> > > > 0014397 libtalloc: fix for LIC_FILES_CHKSUM
+> > > >
+> > > > a95726d samba: replace pam packageconfig by hard dependency
+> > > > 3fdfdd8 samba: un-blacklist
+> > > >
+> > >=20
+> >=20
+> > --=20
+> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>=20
+>=20
+>=20
+--=20
+-Joe MacDonald.
+:wq
+
+--M9NhX3UHpAaciwkO
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJYKcDzAAoJEEn8ffcsOfaW/SsIAMg4GZkzMgBTORbGQjOglkvl
+WAJNQIA3HNK/5Pkfaa+uiFYTG8kIXAilOdU2VMyH07Is8kSL/108YXRZT0yig2gp
+JeoflqZxpSYKpEbcm8fiLH0a7r2xCwX3KvbEv/FxSwU4hGF1extJpnbuDlHRI6vI
+zDHV7bSnjmfpHo+MXA/3SUKCxwaZm3o6l1fLwLnYnmd5XMvztPWaTkyQO0d53mv4
+Rq2uBg9mbDSt1b2xIqD+RdtfnnkmkJxXcVv+qLL6gsfz/GZAeVymNQTceJsDIaK2
+n27SO+vMVlodr3Kq+69NsFgnKIZCK2mqavqZB5N7+Wk3BHipV2TXsdydQA/eqT4=
+=g7vn
+-----END PGP SIGNATURE-----
+
+--M9NhX3UHpAaciwkO--
