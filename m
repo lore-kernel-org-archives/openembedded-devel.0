@@ -1,25 +1,48 @@
-Return-Path: <jussi.kukkonen@intel.com>
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by mail.openembedded.org (Postfix) with ESMTP id ACA1860068
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 0536F6060E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Nov 2016 11:44:12 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga105.fm.intel.com with ESMTP; 15 Nov 2016 03:44:14 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.31,494,1473145200"; d="scan'208";a="1085433491"
-Received: from linux.intel.com ([10.54.29.200])
-	by fmsmga002.fm.intel.com with ESMTP; 15 Nov 2016 03:44:14 -0800
-Received: from theory.fi.intel.com (theory.fi.intel.com [10.237.72.53])
-	by linux.intel.com (Postfix) with ESMTP id 6BE3B6A4006;
-	Tue, 15 Nov 2016 03:43:34 -0800 (PST)
-From: Jussi Kukkonen <jussi.kukkonen@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Nov 2016 13:44:07 +0200
-Message-Id: <1479210247-9859-3-git-send-email-jussi.kukkonen@intel.com>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1479210247-9859-1-git-send-email-jussi.kukkonen@intel.com>
-References: <1479210247-9859-1-git-send-email-jussi.kukkonen@intel.com>
-Subject: [PATCH 2/2] xserver-common: Don't install some Xsession files
+	Tue, 15 Nov 2016 12:29:28 +0000 (UTC)
+Received: by mail-wm0-f46.google.com with SMTP id g23so163866654wme.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Nov 2016 04:29:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:subject:from:in-reply-to:date:cc:message-id:references
+	:to; bh=w00vhkqEDEjJyLLChrUh7pBegN+I3H5cGFNe9og1rMw=;
+	b=Px2YirnLQBB1b7FfzebyIntm0A6EAbOYVQHbIOd0KpZaeLP/Io+Vz9SsHNnlB08/kR
+	Mv0973yj9LIgXIoEQ5mCCVvC0UG9wuC8PqK5E492zx3/u6GYf14mOIOI45fHSvYJQLSe
+	KUNNJCv8Gd7EUciXorljtMZ1oGmjs+3rahqUl+CwID+NRVpFlV9utGBSIaJzTUGpwCi4
+	gXz4UGMoT+sxVJ/5IV8iiAjZUZTDc78yUkztp27OV71dYGgHNKU4eOsQr8U4jNSlkDNX
+	sSGipyq1GAbauctzYocYNQ4MjDRggYa2rCocFQuw0jnFc7f55MBlfCQQ0Z1hfoXs9bh+
+	5mXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
+	:message-id:references:to;
+	bh=w00vhkqEDEjJyLLChrUh7pBegN+I3H5cGFNe9og1rMw=;
+	b=kAkvOpZ2VNGj4rZ/uoXNmv4fd6CqWfsnobeXj6mWNXwdhZfJRQrFcSmdj7zO6WTOrk
+	jJDzBHBzLu8zzTgij7XAAzeHB/vgM6l9WmmPSfOoHCKHbvnMxQiNGQrfSgU+2nQEG41+
+	JOKOugeNTKXlaRVdffgl02c7vrlIEbKrnb+j4tB9ddZ5ebiHY3VVYXoaI8Ii8vAviqqC
+	V60VUyHztNaYzQ8yrCsl1MFGzd9rOsro1NkqxfReI2IMJBq0GBr6EhcTf7pvGVe2EpqP
+	UjBgMs2/Rb8LE9njzTUYCM4uHfaDtLqJPytDBgQ7bROFRj6Sx3KpT6eL7ZUIcZ2vn18l
+	OakA==
+X-Gm-Message-State: ABUngvemKuUVaOCKgrWGxAVuwDgk/mPYCg8VOANeAy122IVHbGSZVKpL2hvX7DoWqLxa+A==
+X-Received: by 10.28.127.9 with SMTP id a9mr3721420wmd.95.1479212969599;
+	Tue, 15 Nov 2016 04:29:29 -0800 (PST)
+Received: from [192.168.10.204] ([62.157.143.22])
+	by smtp.gmail.com with ESMTPSA id u18sm3199816wmd.1.2016.11.15.04.29.28
+	(version=TLS1 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 15 Nov 2016 04:29:28 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 9.3 \(3124\))
+From: Jens Rehsack <rehsack@gmail.com>
+In-Reply-To: <alpine.LFD.2.20.1611141643001.32623@localhost.localdomain>
+Date: Tue, 15 Nov 2016 13:29:27 +0100
+Message-Id: <9D035763-8338-45EA-85A0-20F7CD6329DD@gmail.com>
+References: <alpine.LFD.2.20.1611141643001.32623@localhost.localdomain>
+To: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-Mailer: Apple Mail (2.3124)
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: curious about "superfluous" meta-cpan recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,193 +55,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Nov 2016 11:44:12 -0000
+X-List-Received-Date: Tue, 15 Nov 2016 12:29:29 -0000
+X-Groupsio-MsgNum: 63823
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_F9157CDF-1E64-4A62-924E-7A3A793B7AB7";
+	protocol="application/pgp-signature"; micalg=pgp-sha512
 
-The goal is that the graphical_init_manager (xserver-nodm-init)
-provides Xsession (and some basic scripts) and that xserver-common
-can then provide additional Xsession scripts. Remove the Xsession
-files that xserver-nodm-init installs.
+--Apple-Mail=_F9157CDF-1E64-4A62-924E-7A3A793B7AB7
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset=us-ascii
 
-Bump PR so xserver-nodm-init can RCONFLICT with old one.
+Hi Robert,
 
-Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
----
- .../0001-Don-t-install-Xsession-or-Xserver.patch   | 30 ++++++++++++++++++++++
- ...0003-add-89xdgautostart-Xsession.d-script.patch | 29 ---------------------
- ...0005-add-XWindowManager-Xsession.d-script.patch | 23 -----------------
- ...erver-Start-Xsession-like-x11-common-does.patch | 26 -------------------
- .../xserver-common/xserver-common_1.34.bb          |  6 ++---
- 5 files changed, 32 insertions(+), 82 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0001-Don-t-install-Xsession-or-Xserver.patch
- delete mode 100644 meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0003-add-89xdgautostart-Xsession.d-script.patch
- delete mode 100644 meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWindowManager-Xsession.d-script.patch
- delete mode 100644 meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0014-Xserver-Start-Xsession-like-x11-common-does.patch
+> Am 14.11.2016 um 22:45 schrieb Robert P. J. Day <rpjday@crashcourse.ca>:
+> 
+> 
+>  to follow up on a point i made earlier, it seems that a number of
+> recipes in meta-cpan are, these days, unnecessary as they are
+> available in the standard OE or meta-oe layers. i took a quick look
+> and found the following examples:
+> 
+> meta-cpan			OE/meta-oe equivalent		type
+> 
+> 
+> uri-perl			liburi-perl			oe-core
+> encode-locale-perl		libencode-locale-perl		meta-perl
+> io-socket-ssl-perl		libio-socket-ssl-perl		meta-perl
+> compress-raw-bzip2-perl		perl-module-compress-raw-bzip2	MODULE
+> compress-raw-zlib-perl		perl-module-compress-raw-zlib	MODULE
+> io-compress-perl		perl-module-io-compress-*	MODULE(???)
+> dbd-sqlite-perl			libdbd-sqlite-perl		meta-perl
+> dbi-perl			libdbi-perl			meta-perl
+> capture-tiny-perl		libcapture-tiny-perl		meta-perl
+> class-method-modifiers-perl	libclass-method-modifiers-perl	meta-perl
+> extutils-config-perl		libextutils-config-perl		meta-perl
+> extutils-cppguess-perl		libextutils-cppguess-perl	meta-perl
+> extutils-helpers-perl		libextutils-helpers-perl	meta-perl
+> extutils-installpaths-perl	libextutils-installpaths-perl	meta-perl
+> extutils-parsexs-perl		libextutils-parsexs-perl	meta-perl
+> getopt-long-perl		perl-module-getopt-long		MODULE
+> mime-types-perl			libmime-types-perl		meta-perl
+> 
+>  so you can see that a number of meta-cpan recipes appear to be
+> effectively available in basic OE. does that make them unnecessary? is
+> there any reason to have meta-cpan recipes that basically reproduce
+> what is already available? (other than version numbers, of course.)
 
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0001-Don-t-install-Xsession-or-Xserver.patch b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0001-Don-t-install-Xsession-or-Xserver.patch
-new file mode 100644
-index 0000000..26288d6
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0001-Don-t-install-Xsession-or-Xserver.patch
-@@ -0,0 +1,30 @@
-+From c92ce6a4b3622874f820b5ec487a2b63f519826c Mon Sep 17 00:00:00 2001
-+From: Jussi Kukkonen <jussi.kukkonen@intel.com>
-+Date: Thu, 10 Nov 2016 14:33:05 +0200
-+Subject: [PATCH] Don't install Xsession or Xserver
-+
-+The goal is to use Xsession and Xserver from xserver-nodm-init.
-+Xsession scripts and xserver-common from this recipe will still
-+be used as before.
-+
-+Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
-+---
-+ Makefile | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/Makefile b/Makefile
-+index caa5de1..7e36bbc 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -20,7 +20,5 @@ install-program:
-+ 	install -m 755 run-calibrate.sh $(DESTDIR)$(PREFIX)/bin/run-calibrate.sh
-+ 	install -m 644 X11/Xdefaults $(DESTDIR)/etc/X11/Xdefaults
-+ 	install -m 755 X11/Xinit $(DESTDIR)/etc/X11/Xinit
-+-	install -m 755 X11/Xserver $(DESTDIR)/etc/X11/Xserver
-+-	install -m 755 X11/Xsession $(DESTDIR)/etc/X11/Xsession
-+ 	install -m 755 X11/xserver-common $(DESTDIR)/etc/X11/xserver-common
-+ 	install -m 755 X11/functions $(DESTDIR)/etc/X11/functions
-+ 	install -d $(DESTDIR)/etc/X11/xmodmap
-+-- 
-+2.1.4
-+
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0003-add-89xdgautostart-Xsession.d-script.patch b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0003-add-89xdgautostart-Xsession.d-script.patch
-deleted file mode 100644
-index bf806a9..0000000
---- a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0003-add-89xdgautostart-Xsession.d-script.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--From a93a86c2ff1ca5eb35615f4e1568409ff342aa7f Mon Sep 17 00:00:00 2001
--From: Martin Jansa <Martin.Jansa@gmail.com>
--Date: Wed, 11 Apr 2012 14:29:41 +0200
--Subject: [PATCH 03/12] add 89xdgautostart Xsession.d script
--
--Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-----
-- X11/Xsession.d/89xdgautostart |    9 +++++++++
-- 1 files changed, 9 insertions(+), 0 deletions(-)
-- create mode 100644 X11/Xsession.d/89xdgautostart
--
--diff --git a/X11/Xsession.d/89xdgautostart b/X11/Xsession.d/89xdgautostart
--new file mode 100644
--index 0000000..9886f9f
----- /dev/null
--+++ b/X11/Xsession.d/89xdgautostart
--@@ -0,0 +1,9 @@
--+#!/bin/sh
--+
--+XDGAUTOSTART=/etc/xdg/autostart
--+if [ -d $XDGAUTOSTART ] ; then
--+    for SCRIPT in $XDGAUTOSTART/*; do
--+        CMD=`grep ^Exec= $SCRIPT | cut -d '=' -f 2`
--+        $CMD &
--+    done
--+fi
---- 
--1.7.8.5
--
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWindowManager-Xsession.d-script.patch b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWindowManager-Xsession.d-script.patch
-deleted file mode 100644
-index 1782665..0000000
---- a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0005-add-XWindowManager-Xsession.d-script.patch
-+++ /dev/null
-@@ -1,23 +0,0 @@
--From b01a532ebb525552e23d7169a2aeb55c42b3ec99 Mon Sep 17 00:00:00 2001
--From: Martin Jansa <Martin.Jansa@gmail.com>
--Date: Wed, 11 Apr 2012 14:32:13 +0200
--Subject: [PATCH 05/12] add XWindowManager Xsession.d script
--
--Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-----
-- X11/Xsession.d/90xXWindowManager |    6 ++++++
-- 1 files changed, 6 insertions(+), 0 deletions(-)
-- create mode 100644 X11/Xsession.d/90xXWindowManager
--
--Index: xserver-common-1.34/X11/Xsession.d/90xXWindowManager
--===================================================================
----- /dev/null	1970-01-01 00:00:00.000000000 +0000
--+++ xserver-common-1.34/X11/Xsession.d/90xXWindowManager	2012-06-28 15:02:22.010521773 +0200
--@@ -0,0 +1,7 @@
--+if [ -x $HOME/.Xsession ]; then
--+    exec $HOME/.Xsession
--+elif [ -x /usr/bin/x-session-manager ]; then
--+    exec /usr/bin/x-session-manager
--+else
--+    exec /usr/bin/x-window-manager
--+fi
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0014-Xserver-Start-Xsession-like-x11-common-does.patch b/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0014-Xserver-Start-Xsession-like-x11-common-does.patch
-deleted file mode 100644
-index 5a75964..0000000
---- a/meta-oe/recipes-graphics/xserver-common/xserver-common-1.34/0014-Xserver-Start-Xsession-like-x11-common-does.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From 8171f89944969a081be1ac193b2a59016e39a345 Mon Sep 17 00:00:00 2001
--From: Martin Jansa <Martin.Jansa@gmail.com>
--Date: Tue, 29 Oct 2013 17:07:21 +0100
--Subject: [PATCH 14/14] Xserver: Start Xsession like x11-common does
--
--Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-----
-- X11/Xserver | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/X11/Xserver b/X11/Xserver
--index 559f059..4b88637 100755
----- a/X11/Xserver
--+++ b/X11/Xserver
--@@ -4,6 +4,6 @@
-- . /etc/X11/xserver-common
-- 
-- echo "tslib: $TSLIB_TSDEVICE"
---echo "exec $XSERVER $ARGS -dpi $DPI $*"
---exec $XSERVER $ARGS -dpi $DPI $*
--+echo "exec xinit /etc/X11/Xsession -- $BINDIR/$XSERVER $ARGS -dpi $DPI $*"
-- 
--+exec xinit /etc/X11/Xsession -- $BINDIR/$XSERVER $ARGS -dpi $DPI $*
---- 
--1.8.4.2
--
-diff --git a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-index 0315ed7..cc30541 100644
---- a/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-+++ b/meta-oe/recipes-graphics/xserver-common/xserver-common_1.34.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Common X11 scripts and support files"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
--PR = "r8"
-+PR = "r9"
- 
- # we are using a gpe-style Makefile
- inherit gpe
-@@ -13,8 +13,6 @@ SRC_URI[sha256sum] = "cd04c33418f776b1e13fcc7af3d6bd0c7cccd03fbabd7dbcd97f88166c
- SRC_URI_append = " \
-     file://0001-COPYING-add-GPLv2-license-file.patch \
-     file://0002-add-setdpi-Xinit.d-script.patch \
--    file://0003-add-89xdgautostart-Xsession.d-script.patch \
--    file://0005-add-XWindowManager-Xsession.d-script.patch \
-     file://0006-add-support-for-etc-X11-xserver-system.patch \
-     file://0007-use-own-functions-file-instead-etc-init.d-functions.patch \
-     file://0008-xserver-common-add-dpi-and-nocursor-params-for-gta01.patch \
-@@ -23,8 +21,8 @@ SRC_URI_append = " \
-     file://0011-xserver-common-add-support-for-nexus-one-alias-mahim.patch \
-     file://0012-xserver-common-add-support-for-gta04-alias-OpenPhoen.patch \
-     file://0013-xserver-common-add-support-for-tuna-alias-Galaxy-Nex.patch \
--    file://0014-Xserver-Start-Xsession-like-x11-common-does.patch \
-     file://0015-xserver-common-disable-TCP-connections.patch \
-+    file://0001-Don-t-install-Xsession-or-Xserver.patch \
- "
- 
- do_install_append() {
--- 
-2.1.4
+you're slightly to fast. There is a clear reason for that what you
+identified as superfluous: reliability.
+
+Experienced users expected, one can easily add an liburi-perl_%.bbappend
+or an uri-perl_%.bbappend containing a PROVIDES+="...".
+But noone is enforced to remove such a PROVIDES...
+
+What drives me to package cpan distributions which are already in
+meta-oe? The way they're packaged. meta-cpan containes recipes in
+a way as they're meant by CPAN authors, not by Debian or oe-contributors.
+
+Best regards
+--
+Jens Rehsack - rehsack@gmail.com
 
 
+--Apple-Mail=_F9157CDF-1E64-4A62-924E-7A3A793B7AB7
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP using GPGMail
+
+-----BEGIN PGP SIGNATURE-----
+Comment: GPGTools - https://gpgtools.org
+
+iQIcBAEBCgAGBQJYKv+oAAoJEESZlq7c5QqdILcQAKojeZJjoy6NXcy60qWkoqc0
+7ePtDx76GIGmWb3KNoEPDHU7MczP1qbPCz8EydfMyoHh8n5oNEJlD1YtgZd3wgEa
+CJxvT55Jj+416BmB8Q2Fg9vdkXfTbIL701vQ82Vm5WBdVOk7kL3zj1wd3FLn0A82
+XxelJzx5qb90gz62ZO0x4KJ35jUrJlJAJobxwIHyxPzeE09S4ZaQEOuWh88GTYCg
+w9zPN9hdg99PCCSHLcDfGuAj2VSb0jWr8Q1ctolTCBo0uU4gHAVBC6cyioI6w/2M
+1MkTkgoDjyqx/FINu5pyMFOtNl4s5R9xPFXo1yWnh+7leKv9bhPLpX8iWWqcc62m
+BVsjryietKRHLzceMmLud2u7tn3jSvQKZrwl6w6NKdlQjpjoeDFNwfunVYs4GrXh
+HQ61A36wp7XwmdLAdquXtaWCbQef/195OfuZGUFvQRM1HBrE71T0Dh59Fo8uHBfd
+1t3hRBvhPj4a1fmcj3lnlXeXBGxrU4NiqgcPP3GLFH1Nf8Z6y3BCiQqsVvr8Hz9W
+kigrxZxkPk6M3lAA0nj3e2Qe9p7Zy1JUpBKTl3h5di9PSqu8lQPLSiEJqZidyk74
+Y/ednmsuqrRz3srWzC1Sv5PWZY6vNayNVTpj2qGDwcnj2SsKJEpqyYlG48Bq9l7x
+QAij7QNn44VAdPNK1/tw
+=gJN0
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_F9157CDF-1E64-4A62-924E-7A3A793B7AB7--
