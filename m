@@ -1,24 +1,24 @@
-Return-Path: <Fang.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C6CF719DB
+Return-Path: <jussi.kukkonen@intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 6B0AC60068
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Nov 2016 01:50:13 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id uAF1o7OZ003594
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 14 Nov 2016 17:50:08 -0800 (PST)
-Received: from pek-fjia-d1.corp.ad.wrs.com (128.224.159.145) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.294.0; Mon, 14 Nov 2016 17:50:07 -0800
-From: Fang Jia <fang.jia@windriver.com>
-To: <dompe@hpe.com>, <ops-dev@lists.openswitch.net>,
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 15 Nov 2016 09:49:44 +0800
-Message-ID: <1479174584-21418-1-git-send-email-fang.jia@windriver.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [meta-foss-openswitch][PATCH] open-vm-tools: add init script
+	Tue, 15 Nov 2016 11:44:09 +0000 (UTC)
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+	by orsmga101.jf.intel.com with ESMTP; 15 Nov 2016 03:44:11 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.31,494,1473145200"; d="scan'208";a="31159274"
+Received: from linux.intel.com ([10.54.29.200])
+	by orsmga004.jf.intel.com with ESMTP; 15 Nov 2016 03:44:11 -0800
+Received: from theory.fi.intel.com (theory.fi.intel.com [10.237.72.53])
+	by linux.intel.com (Postfix) with ESMTP id 005046A4006
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Nov 2016 03:43:31 -0800 (PST)
+From: Jussi Kukkonen <jussi.kukkonen@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 15 Nov 2016 13:44:05 +0200
+Message-Id: <1479210247-9859-1-git-send-email-jussi.kukkonen@intel.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCH 0/2] X initialization refactoring
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,195 +31,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Nov 2016 01:50:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 15 Nov 2016 11:44:11 -0000
 
-- Add init script to support not systemd system.
-- Use ${libdir} in case the board is a 64-bit machine.
+This set has a companion set on oe-core, neither set makes much sense
+without the other. Cover letters are identical. Please CC both lists
+if needed.
 
-Signed-off-by: Fang Jia <fang.jia@windriver.com>
----
- .../recipes-extended/open-vm-tools/files/default   |   3 +
- .../recipes-extended/open-vm-tools/files/init      | 105 +++++++++++++++++++++
- .../open-vm-tools/open-vm-tools_10.0.5.bb          |  23 +++--
- 3 files changed, 125 insertions(+), 6 deletions(-)
- create mode 100644 yocto/openswitch/meta-foss-openswitch/recipes-extended/open-vm-tools/files/default
- create mode 100644 yocto/openswitch/meta-foss-openswitch/recipes-extended/open-vm-tools/files/init
 
-diff --git a/yocto/openswitch/meta-foss-openswitch/recipes-extended/open-vm-tools/files/default b/yocto/openswitch/meta-foss-openswitch/recipes-extended/open-vm-tools/files/default
-new file mode 100644
-index 0000000..782e015
---- /dev/null
-+++ b/yocto/openswitch/meta-foss-openswitch/recipes-extended/open-vm-tools/files/default
-@@ -0,0 +1,3 @@
-+#Defaults for vmware-tools
-+RUN_DAEMON="no"
-+OPTIONS=""
-diff --git a/yocto/openswitch/meta-foss-openswitch/recipes-extended/open-vm-tools/files/init b/yocto/openswitch/meta-foss-openswitch/recipes-extended/open-vm-tools/files/init
-new file mode 100644
-index 0000000..a8dafe5
---- /dev/null
-+++ b/yocto/openswitch/meta-foss-openswitch/recipes-extended/open-vm-tools/files/init
-@@ -0,0 +1,105 @@
-+#!/bin/sh
-+### BEGIN INIT INFO
-+# Provides:
-+# Required-Start:      In vmware environment
-+# Required-Stop:
-+# Default-Start:
-+# Default-Stop:
-+# Short-Description: Open Vmware Tools Daemon
-+### END INIT INFO
-+#
-+# You can edit /etc/default/vmware-tools to modify the default configuration.
-+#
-+
-+set -e
-+
-+# source function library
-+. /etc/init.d/functions
-+
-+# /etc/init.d/vmtools: start and stop the VMware Tools daemon
-+DEMEO="/usr/sbin/vmtoolsd"
-+DEFAULT_CONFIG_FILE="/etc/default/vmware-tools"
-+
-+test -x $DEMEO || exit 0
-+( $DEMEO -\? 2>&1 | grep -q VMware ) 2>/dev/null || exit 0
-+
-+# Defaults
-+RUN_DAEMON="no"
-+OPTIONS=""
-+PIDFILE="/var/run/vmtoolsd.pid"
-+
-+# Reads config file (will override defaults above)
-+if test -f $DEFAULT_CONFIG_FILE; then
-+    . $DEFAULT_CONFIG_FILE
-+fi
-+
-+if [ "$RUN_DAEMON" != "yes" ] ; then
-+	echo "vmware-tools disabled in $DEFAULT_CONFIG_FILE"
-+	exit 0
-+fi
-+
-+if [ ! -x /usr/sbin/vmware-checkvm ] || ! /usr/sbin/vmware-checkvm > /dev/null 2>&1
-+then
-+	echo "open-vm-tools: not starting as this is not a VMware VM"
-+	exit 0
-+fi
-+
-+check_for_no_start() {
-+    if [ "$RUN_DAEMON" != "yes" ] ; then
-+	    echo "vmware-tools disabled in $DEFAULT_CONFIG_FILE"
-+	    exit 0
-+    fi
-+}
-+
-+check_status() {
-+	RET="0"
-+	start-stop-daemon -q -K -t -x $DEMEO || RET="$?"
-+	if [ "$RET" = "0" ]; then
-+		PID=`cat $PIDFILE`
-+		echo "vmtoolsd($PID) is running"
-+	else
-+		echo "vmtoolsd is not running"
-+		exit $RET
-+	fi
-+}
-+
-+export PATH="${PATH:+$PATH:}/usr/sbin:/sbin:/usr/bin"
-+
-+case "$1" in
-+  start)
-+        check_for_no_start
-+        echo "Starting VMware Tools Shell server"
-+	for i in vmhgfs vsock vmci; do
-+		modprobe $i >/dev/null 2>/dev/null &
-+	done
-+        start-stop-daemon -S -m --background --pidfile $PIDFILE -x $DEMEO -- $OPTIONS && echo "done." || echo "FAILED!"
-+        ;;
-+  stop)
-+        echo -n "Stopping VMware Tools Shell server"
-+	start-stop-daemon -K -o --pidfile $PIDFILE --name vmtoolsd && echo "done." || echo "FAILED!"
-+	if [ -f  "$PIDFILE" ] ; then
-+		rm -f $PIDFILE
-+	fi
-+	sleep 1
-+	for i in vmhgfs vsock; do
-+		modprobe -r $i >/dev/null 2>/dev/null &
-+	done
-+        ;;
-+
-+  reload|force-reload|restart)
-+	$0 stop
-+	sleep 2
-+	$0 start
-+        ;;
-+
-+  status)
-+        check_status;
-+        exit $?
-+  ;;
-+
-+  *)
-+        echo "Usage: /etc/init.d/vmtools {start|stop|status|reload|force-reload|restart}"
-+        exit 1
-+esac
-+
-+exit 0
-diff --git a/yocto/openswitch/meta-foss-openswitch/recipes-extended/open-vm-tools/open-vm-tools_10.0.5.bb b/yocto/openswitch/meta-foss-openswitch/recipes-extended/open-vm-tools/open-vm-tools_10.0.5.bb
-index 6938950..a6949d7 100644
---- a/yocto/openswitch/meta-foss-openswitch/recipes-extended/open-vm-tools/open-vm-tools_10.0.5.bb
-+++ b/yocto/openswitch/meta-foss-openswitch/recipes-extended/open-vm-tools/open-vm-tools_10.0.5.bb
-@@ -9,6 +9,8 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https \
-            file://tools.conf \
-            file://vmtoolsd.service \
-            file://0001-Fix-kernel-detection.patch \
-+           file://init \
-+           file://default \
-            "
- 
- SRCREV = "538ea037a1549b6fd4e57529f7448a3fd2aa47af"
-@@ -41,24 +43,33 @@ EXTRA_OEMAKE = "KERNEL_RELEASE=${KERNEL_VERSION}"
- 
- CFLAGS += '-Wno-error=deprecated-declarations'
- 
--FILES_${PN} += "/usr/lib/open-vm-tools/plugins/vmsvc/lib*.so \
--		/usr/lib/open-vm-tools/plugins/common/lib*.so \
--    ${sysconfdir}/vmware-tools/tools.conf"
-+FILES_${PN} += "${libdir}/open-vm-tools/plugins/vmsvc/lib*.so \
-+		${libdir}/open-vm-tools/plugins/common/lib*.so \
-+		${sysconfdir}/vmware-tools/tools.conf \
-+		${sysconfdir}/init.d ${sysconfdir}/default"
- FILES_${PN}-locale += "/usr/share/open-vm-tools/messages"
--FILES_${PN}-dev += "/usr/lib/open-vm-tools/plugins/common/lib*.la"
--FILES_${PN}-dbg += "/usr/lib/open-vm-tools/plugins/common/.debug \
--		    /usr/lib/open-vm-tools/plugins/vmsvc/.debug"
-+FILES_${PN}-dev += "${libdir}/open-vm-tools/plugins/common/lib*.la"
-+FILES_${PN}-dbg += "${libdir}/open-vm-tools/plugins/common/.debug \
-+		    ${libdir}/open-vm-tools/plugins/vmsvc/.debug"
- 
- CONFFILES_${PN} += "${sysconfdir}/vmware-tools/tools.conf"
- 
- do_install_append() {
-+    install -d ${D}${sysconfdir}/init.d
-+    install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/vmtools
-+
-     ln -sf /usr/sbin/mount.vmhgfs ${D}/sbin/mount.vmhgfs
-     install -d ${D}${systemd_unitdir}/system ${D}${sysconfdir}/vmware-tools
-     install -m 644 ${WORKDIR}/*.service ${D}${systemd_unitdir}/system
-     install -m 0644 ${WORKDIR}/tools.conf ${D}${sysconfdir}/vmware-tools/tools.conf
-+
-+    install -d ${D}${sysconfdir}/default
-+    install -m 0755 ${WORKDIR}/default ${D}${sysconfdir}/default/vmware-tools
- }
- 
- do_configure_prepend() {
-     export CUSTOM_PROCPS_NAME=procps
-     export CUSTOM_PROCPS_LIBS=-L${STAGING_LIBDIR}/libprocps.so
-+    export CUSTOM_DNET_CPPFLAGS=-I${STAGING_INCDIR}
-+    export CUSTOM_DNET_LIBS=-L${STAGING_LIBDIR}
- }
--- 
-1.9.1
+Current state:
+ * meta-oe and oe-core both provide xserver-nodm-init: the oe-core
+   version should already do everything the meta-oe version does, but
+   the meta-oe version gets selected by default because of layer
+   priority.
+ * meta-oe and oe-core provide xserver-common and x11-common:
+   x11-common files are essentially a subset of xserver-common files.
+
+
+Goals:
+ * Adding meta-oe to bblayers alone should not modify X initialization
+ * meta-oe and oe-core should not duplicate content without reason
+ * xserver startup should still be modifiable from other layers
+   (just not implicitly)
+
+
+What was done to achieve those goals:
+ * (oe-core) Removed old cruft from x11-common. What was left is
+   Xsession and a few Xsession scripts.
+ * (oe-core) Merged what's left of x11-common into xserver-nodm-init
+ * (meta-oe) Removed xserver-nodm-init-2.0 as unneeded
+ * (meta-oe) No longer install files in xserver-common that oe-core
+   xserver-nodm-init installs
+
+
+xserver-common now has to be explicitly installed if it is wanted.
+
+There are multiple ways to solve these issues: I'm prepared to try
+alternative approaches if needed. Testing results are appreciated
+as well.
+
+
+Cheers,
+ Jussi
 
 
