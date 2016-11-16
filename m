@@ -1,40 +1,48 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 74E22719EA
+Return-Path: <ricardo.ribalda@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 5923171976
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Nov 2016 17:19:23 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id u144so2108858wmu.0
+	Wed, 16 Nov 2016 00:11:37 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id m203so5455736wma.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Nov 2016 09:19:24 -0800 (PST)
+	Tue, 15 Nov 2016 16:11:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=zPC1iPR16GAnNT5XHj7CBINCk4pAic2kSghuz4sMcS8=;
+	b=WxDeqkdLal2KxcyfXfrBo6W8F2iDnAC4lhGy7UxqD4h8hGd3zcU2P7YSg7hdpq45Vt
+	uHibl1rLF2q8LFG8vNU3pJdxGQObgztfpRPje0sdL0+GjyO+UDOfsw4iC1PCC7qcSEuo
+	h3PE6p5FUS2tHsXOi2DMei/D0MNXpXwDxQ7tXOCDYuhzZ1nHK4MV02KaiuzXPCdR+j2X
+	s8MwQJzkt6k2h4VYEsAJfOMj264gZJyeOsxIpc6CrDSlG18uq+XfcHC+jpGvuWl9+qSb
+	F/tprt74XYKvWOD5zbkWE0gLVLQhRYzOlE1i/m4YBC1GZSg7DmPNHFmaGhhz26hC/MzI
+	ELoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=vg9fAs0l1FW/pZNlB+Z3fkbBv0cHqgY4qlKaa4LIOfA=;
-	b=Btqtc64rGnAXPYzD2Qs1Fgx+En8sfoi9HqAKcyw20+dGFYQFTh5hb56Uyf32adnZ0n
-	ey9lV/GgsdnSqBSPsS0fnscHt+UVh1Wbk67vO6/FjhCs07hrB6CA02AgDUWCMfFErxds
-	VBpOPQpKxxIMZWtkqjoXAywLiy3Qb0/8xN4Y8NzZYAYFxkFgY6Ub57UzXZ4CPfWqZ+zC
-	k9WJNWifkzdfj1uS7pcl1Ji4Dw+xVrAPJNfAjkDGrUM78KQaBer71kFTgIgOMKBCsH2g
-	9DjEUkzmBrTNl15glCVrHFyYaINJrvYOf6cujywUrg8UPD/+XJgKFfQAaN5C9KmhveXo
-	KQtQ==
-X-Gm-Message-State: ABUngvd2rItS4rA0sreW6j2vqAZLvl8Z9Ehw1HUSBtEnn+2P42si5Yb3M6c/enbL1FDaow==
-X-Received: by 10.28.230.72 with SMTP id d69mr5121892wmh.119.1479230363407;
-	Tue, 15 Nov 2016 09:19:23 -0800 (PST)
-Received: from tfsielt31850 ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id
-	125sm5319386wmh.14.2016.11.15.09.19.22
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 15 Nov 2016 09:19:22 -0800 (PST)
-Message-ID: <1479230361.3131.6.camel@andred.net>
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Nov 2016 17:19:21 +0000
-In-Reply-To: <20161115154311.30118-1-git@andred.net>
-References: <20161115154311.30118-1-git@andred.net>
-X-Mailer: Evolution 3.22.1-2 
-Mime-Version: 1.0
-Subject: Re: [meta-networking][PATCH 0/2] ncp - a fast file copy tool for LANs
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=zPC1iPR16GAnNT5XHj7CBINCk4pAic2kSghuz4sMcS8=;
+	b=XRsduekzknDmETezPMvS8Se6gWv6SztNxt0vkBuo5nVI13ENTrWz4quQxefd+L+lfW
+	PqfwLx8iAmSMeVpN4/lUG0Y3GP/xHMMeKGSkc/92QchtDPetLL4JmN+sEF53kaUBLFbN
+	Qc8kjTTdyZnQsIrDFUs8MSXn9TBHjhcQ265i5MAHgqMVTv7Egrd+qcwpT+/XvK1oGJpX
+	YA0F/TvycFnpGKbrEDolaTc2kAHNAs41anaFWa5LFveokgNGXVmM7VVkPP/yRQQ99kwW
+	9O23BkZoTZmVz+2Q+5pv2yGV7Uy5zOtS2uHVIHcFrc0npKJO1emSRNlTwLxV3NHU1NVn
+	r5IQ==
+X-Gm-Message-State: ABUngveRXw2gv6huM0KFiNtzNwbNfNi5HtdK2mR5kvDBvkaa9sMfrw5js46XtM/YP1smJS3VLWo9/QbO0CpMVg==
+X-Received: by 10.28.137.193 with SMTP id l184mr6015173wmd.88.1479255098413;
+	Tue, 15 Nov 2016 16:11:38 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.195.9.34 with HTTP; Tue, 15 Nov 2016 16:11:17 -0800 (PST)
+In-Reply-To: <20161031103434.932-2-ricardo.ribalda@gmail.com>
+References: <20161031103434.932-1-ricardo.ribalda@gmail.com>
+	<20161031103434.932-2-ricardo.ribalda@gmail.com>
+From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Date: Wed, 16 Nov 2016 01:11:17 +0100
+Message-ID: <CAPybu_0YDwmMB-1z1Mo9bhoadUFcY35vE98nDMuZzriYn1bXOg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	erkka.kaaria@intel.com, Kyle Russell <bkylerussell@gmail.com>,
+	Dan McGregor <daniel.mcgregor@vecima.com>, 
+	"Maxin B . John" <maxin.john@intel.com>
+Subject: Re: [meta-java][PATCH 2/2] openjdk-7-release-03b147.inc: Ignore deprecation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,34 +55,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Nov 2016 17:19:23 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 16 Nov 2016 00:11:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2016-11-15 at 15:43 +0000, André Draszik wrote:
-> "ncp" is a utility for copying files in a LAN. It has absolutely
-> no security or integrity checking, no throttling, no features,
-> except one:
->   you don't have to type the coordinates of your peer.
+ping?
 
-Hm, hold on. Something went wrong along the way. I can't actually install it
-anymore:
+On Mon, Oct 31, 2016 at 11:34 AM, Ricardo Ribalda Delgado
+<ricardo.ribalda@gmail.com> wrote:
+> readdir_r has been deprecated since glibc 2.24. As openjdk uses this
+> function, a warning is generated during build that gets turned into
+> an error when -Werror is used.
+>
+> While the readdir function is suggested as an replacement, it has
+> slightly different API. The warning is ignored instead to prevent any
+> unexpected breakage from patching the offending functions.
+>
+> (Note: This is just a port of 0f127a49696 from Erkka K=C3=A4=C3=A4ri=C3=
+=A4 for openjdk-7
+> , all the credit for him)
+>
+> Credit-to: Erkka K=C3=A4=C3=A4ri=C3=A4 <erkka.kaaria@intel.com>
+> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+> ---
+>  recipes-core/icedtea/openjdk-7-release-03b147.inc | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/recipes-core/icedtea/openjdk-7-release-03b147.inc b/recipes-=
+core/icedtea/openjdk-7-release-03b147.inc
+> index 068572959fa1..1d054ffe35e8 100644
+> --- a/recipes-core/icedtea/openjdk-7-release-03b147.inc
+> +++ b/recipes-core/icedtea/openjdk-7-release-03b147.inc
+> @@ -7,6 +7,10 @@ FILESPATH =3D. "${FILE_DIRNAME}/openjdk-7-03b147:"
+>  # Force arm mode for now
+>  ARM_INSTRUCTION_SET_armv4t =3D "ARM"
+>
+> +# readdir_r was deprecated in glibc-2.24. Ignore the error for now
+> +# NOTE: When updating the recipe, please check if this is still needed
+> +CFLAGS_append =3D " -Wno-error=3Ddeprecated-declarations"
+> +
+>  ICEDTEA_URI =3D "http://icedtea.wildebeest.org/download/source/${ICEDTEA=
+}.tar.gz;name=3Diced"
+>
+>  ICEDTEA_PREFIX =3D "icedtea7-forest-2.1"
+> --
+> 2.10.1
+>
 
-root@poky:~# opkg update
-Package ncp-dbg version 1.2.4-r0 has no valid architecture, ignoring.
-Package ncp-dev version 1.2.4-r0 has no valid architecture, ignoring.
-Package ncp-doc version 1.2.4-r0 has no valid architecture, ignoring.
-Package ncp version 1.2.4-r0 has no valid architecture, ignoring.
-
-root@poky:~# opkg install ncp
-Package ncp-dbg version 1.2.4-r0 has no valid architecture, ignoring.
-Package ncp-dev version 1.2.4-r0 has no valid architecture, ignoring.
-Package ncp-doc version 1.2.4-r0 has no valid architecture, ignoring.
-Package ncp version 1.2.4-r0 has no valid architecture, ignoring.
-Collected errors:
- * opkg_prepare_url_for_install: Couldn't find anything to satisfy 'ncp'.
 
 
-a.
-
+--=20
+Ricardo Ribalda
 
