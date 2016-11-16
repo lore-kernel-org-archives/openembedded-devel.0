@@ -1,58 +1,55 @@
 Return-Path: <thilo.cestonaro@ts.fujitsu.com>
-Received: from mail1.bemta3.messagelabs.com (mail1.bemta3.messagelabs.com
-	[195.245.230.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 398806FF78
+Received: from mail1.bemta5.messagelabs.com (mail1.bemta5.messagelabs.com
+	[195.245.231.142])
+	by mail.openembedded.org (Postfix) with ESMTP id B672F60111
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Nov 2016 15:43:01 +0000 (UTC)
-Received: from [85.158.138.179] by server-9.bemta-3.messagelabs.com id
-	18/F9-08915-68E7C285; Wed, 16 Nov 2016 15:43:02 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrCKsWRWlGSWpSXmKPExsViZ8MRqttapxN
-	h0L5L1OLi4aXMDowe5zauYAxgjGLNzEvKr0hgzTh+pZexYIppReOU1WwNjJeNuhi5OIQENjNJ
-	nNy/mxnCOcYo0bDwLpDDCeRcZJQ4s04fxGYTcJfYeu8+E4gtIhAjsfT8eTYQW1jAWeL716msX
-	YwcQHEXiUXrfCBKjCTmvDkOVs4ioCrx484ZsHJeAVOJdRvng5ULCVRLvJkqCRLmBJqy+l8jG8
-	RWb4nTH2eDXcAooCKx6+4WRhCbWUBc4taT+WAjJQREJB5ePM0GYYtKvHz8jxXCVpHYsu4DO4S
-	tI3H2+hNGCNtAYuvSfSwQtqLEi5bPzBAzqyQ6/25nhThNUOLkzCcsExjFZyFZNwtJ2SwkZRBx
-	TYnW7b/ZIWxtiWULXzND2LYS+6+uhLJNJV4f/cgIYStKTOl+yL6AkWMVo3pxalFZapGuoV5SU
-	WZ6RkluYmaOrqGBsV5uanFxYnpqTmJSsV5yfu4mRmDsMgDBDsblH50OMUpyMCmJ8naU6UQI8S
-	Xlp1RmJBZnxBeV5qQWH2KU4eBQkuAVqAXKCRalpqdWpGXmAJMITFqCg0dJhHdvDVCat7ggMbc
-	4Mx0idYpRUUqc9xFIQgAkkVGaB9cGS1yXGGWlhHkZgQ4R4ilILcrNLEGVf8UozsGoJMxbCbKd
-	JzOvBG76K6DFTECL9wiALS5JREhJNTDqval/dPGWQf5rZc/Cx3PeN8fbPPt1p+7inPibs33tW
-	6/VzagIvaN9feXu19bt+conazIf3rtzKdCTcb/Dpz8LMzfIbBCy1MsztKpnVDlSGNSgxOnKPJ
-	l3l1nVC0XNTibGlELT1jOTTiVozFVMPTtfIqMsdqm+1DxWt1s2Vx2cHfTnHPmm+VyJpTgj0VC
-	Luag4EQBnUqvBVwMAAA==
+	Wed, 16 Nov 2016 15:44:40 +0000 (UTC)
+Received: from [85.158.136.83] by server-6.bemta-5.messagelabs.com id
+	94/52-14841-9EE7C285; Wed, 16 Nov 2016 15:44:41 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrPKsWRWlGSWpSXmKPExsViZ8MxRfdFnU6
+	EwbabohYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8aeNckFJ6IqTvxvYm9gbIjsYuTiEBLYzCSx
+	ctpXRgjnGKPEu85uKOcio8SG2fuZuhg5OdgE3CW23rsPZosIxEgsPX+eDcQWFrCTePX3GzNE3
+	FlibncvC4StJ7Ft9jtWEJtFQFVi2eNeRhCbV8BUYtPb42A1QgLeEqc/zgbrZRRQkdh1dwtYDb
+	OAuMStJ/PBdkkIiEg8vHiaDcIWlXj5+B8rhK0isWXdB3YIW0fi7PUnjBC2gcTWpftYIGxFiRc
+	tn5khZlZJrLt/jx3iBkGJkzOfsExgFJ2FZN0sJGWzkJRBxB0kJu25yQZha0q0bv/NDmFrSyxb
+	+JoZwg6RWP1qMpStKDGl+yFUTazE7k9nWSFsW4n9V1dC1ZhKvD76kRFZ/QJGnlWMGsWpRWWpR
+	bqGpnpJRZnpGSW5iZk5uoYGpnq5qcXFiempOYlJxXrJ+bmbGIERzwAEOxgbtnseYpTkYFIS5e
+	0o04kQ4kvKT6nMSCzOiC8qzUktPsQow8GhJMFbXQuUEyxKTU+tSMvMAaYemLQEB4+SCO9rkDR
+	vcUFibnFmOkTqFKOilDjvJZCEAEgiozQPrg2W7i4xykoJ8zICHSLEU5BalJtZgir/ilGcg1FJ
+	mPc7yBSezLwSuOmvgBYzAS3eIwC2uCQRISXVwLhCg0UrXpd9Wfl967eTxX6tPrwt+SJX+Yo31
+	j+C5c+37Xr7j5+z9cUxsT1r78XwqpVPN3P0+rLtjbAy52bhtIvP78y4u1LPIyxt2+ZZ7JVxi3
+	sZI8xbtst8t67MjNtamZFt1vmDsab6cPmM5K320/MFxJa5trVa7/v9RvPR04/VBXl/DXaUL1Z
+	iKc5INNRiLipOBAD+Ftr6cgMAAA==
 X-Env-Sender: thilo.cestonaro@ts.fujitsu.com
-X-Msg-Ref: server-6.tower-169.messagelabs.com!1479310980!77328489!1
-X-Originating-IP: [62.60.8.85]
+X-Msg-Ref: server-9.tower-36.messagelabs.com!1479311079!70456637!1
+X-Originating-IP: [62.60.8.148]
 X-StarScan-Received: 
 X-StarScan-Version: 9.0.16; banners=-,-,-
 X-VirusChecked: Checked
-Received: (qmail 17809 invoked from network); 16 Nov 2016 15:43:01 -0000
-Received: from unknown (HELO mailhost4.uk.fujitsu.com) (62.60.8.85)
-	by server-6.tower-169.messagelabs.com with DHE-RSA-AES256-GCM-SHA384
-	encrypted SMTP; 16 Nov 2016 15:43:01 -0000
+Received: (qmail 1269 invoked from network); 16 Nov 2016 15:44:40 -0000
+Received: from unknown (HELO mailhost1.uk.fujitsu.com) (62.60.8.148)
+	by server-9.tower-36.messagelabs.com with DHE-RSA-AES256-GCM-SHA384
+	encrypted SMTP; 16 Nov 2016 15:44:40 -0000
 Received: from R01UKEXCASM125.r01.fujitsu.local (ex2k13_125.fs.fujitsu.com
 	[10.183.43.177])
-	by mailhost4.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id
-	uAGFgupK022858
+	by mailhost1.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id
+	uAGFhif8028624
 	(version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Nov 2016 15:42:56 GMT
+	Wed, 16 Nov 2016 15:43:44 GMT
 Received: from R01UKEXCASM121.r01.fujitsu.local (10.183.43.173) by
 	R01UKEXCASM125.r01.fujitsu.local (10.183.43.177) with Microsoft SMTP
-	Server (TLS) id 15.0.1178.4; Wed, 16 Nov 2016 15:42:59 +0000
+	Server (TLS) id 15.0.1178.4; Wed, 16 Nov 2016 15:44:39 +0000
 Received: from R01UKEXCASM121.r01.fujitsu.local ([fe80::48eb:6503:a1bb:c29c])
 	by R01UKEXCASM121.r01.fujitsu.local ([fe80::48eb:6503:a1bb:c29c%22])
-	with mapi id 15.00.1178.000; Wed, 16 Nov 2016 15:42:59 +0000
+	with mapi id 15.00.1178.000; Wed, 16 Nov 2016 15:44:39 +0000
 From: "thilo.cestonaro@ts.fujitsu.com" <thilo.cestonaro@ts.fujitsu.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] libdbus-c++: added recipe for it
-Thread-Index: AQHSQB7/+ya0JgSHN0KeENfYYtGi76DbvvCA
-Date: Wed, 16 Nov 2016 15:42:59 +0000
-Message-ID: <1479310757.4732.17.camel@ts.fujitsu.com>
-References: <20161116102307.7678-1-thilo.cestonaro@ts.fujitsu.com>
-	<e098613f-6906-c91c-41cf-721df6a03f49@linux.intel.com>
-In-Reply-To: <e098613f-6906-c91c-41cf-721df6a03f49@linux.intel.com>
+Thread-Topic: [oe][meta-oe][PATCH] libdbus-c++: added recipe for it
+Thread-Index: AQHSQCBWGcmoXQHV4UWd9llsKkmqdw==
+Date: Wed, 16 Nov 2016 15:44:38 +0000
+Message-ID: <1479310856.4732.19.camel@ts.fujitsu.com>
 Reply-To: "thilo.cestonaro@ts.fujitsu.com" <thilo.cestonaro@ts.fujitsu.com>
 Accept-Language: de-DE, en-GB, en-US
 X-MS-Has-Attach: yes
@@ -62,7 +59,7 @@ x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.183.43.206]
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] libdbus-c++: added recipe for it
+Subject: [meta-oe][PATCH] libdbus-c++: added recipe for it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,56 +72,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Nov 2016 15:43:02 -0000
-X-Groupsio-MsgNum: 63838
+X-List-Received-Date: Wed, 16 Nov 2016 15:44:41 -0000
+X-Groupsio-MsgNum: 63839
 Content-Language: en-US
 Content-Type: multipart/signed; micalg=sha-1;
 	protocol="application/x-pkcs7-signature";
-	boundary="=-26hH+FGIXacOtZwUbVyk"
+	boundary="=-noaZIjr8XGNSmuvdesMN"
 
---=-26hH+FGIXacOtZwUbVyk
+--=-noaZIjr8XGNSmuvdesMN
+Content-Type: multipart/mixed; boundary="=-tMk4eOziZXqfk+V/bZkT"
+
+--=-tMk4eOziZXqfk+V/bZkT
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hey Alex,
+Hey,
 
-the whole mail is the patch. I send it via git send-email and there is the =
-signed off line in it. But I can attach it and send it manually with my mai=
-l program if the git send-email thing is no good.
+here is a patch which adds a recipe for libdbus-c++.
 
-Regards,
-Thilo
+Cheers,
+Thilo Cestonaro
 
-Am Mittwoch, den 16.11.2016, 17:27 +0200 schrieb Alexander Kanavin:
-> On 11/16/2016 12:23 PM, Thilo Cestonaro wrote:
-> > to fix the build, two patches where needed.
-> >=20
-> > One which just adds an include of unistd.h, as the functions pipe, writ=
-e and
-> > close defined by this include, weren't defined.
-> >=20
-> > The other patch enables the build to build the tools of libdbus-c++ for=
- the
-> > target, which, without the patch, will always be build for the host, ev=
-en when
-> > cross compiling.
->=20
-> You need to include this information on top of the patch files=C2=A0
-> themselves. So that when people look at the patches, they can=C2=A0
-> immediately see what they are for, without digging through commit=C2=A0
-> history. And also patches are still missing Upstream-Status, and=C2=A0
-> Signed-off-by lines (I asked you about it earlier). Have a look at any=C2=
-=A0
-> other recipe patch in oe-core to see how it should look like.
->=20
-> Do read http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines=
-=C2=A0
-> please.
->=20
-> Alex
->=20
+--=-tMk4eOziZXqfk+V/bZkT
+Content-Disposition: attachment; filename="0001-libdbus-c-added-recipe-for-it.patch"
+Content-Transfer-Encoding: base64
+Content-Type: text/x-patch; name="0001-libdbus-c-added-recipe-for-it.patch";
+	charset="UTF-8"
 
---=-26hH+FGIXacOtZwUbVyk
+RnJvbSA1MDk4NDZjMzBhNmU2ZWVmNmNkZTc4NDFkOTliYjAwMjU0YTViZmZlIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBUaGlsbyBDZXN0b25hcm8gPHRoaWxvLmNlc3RvbmFyb0B0cy5m
+dWppdHN1LmNvbT4KRGF0ZTogVHVlLCAxNSBOb3YgMjAxNiAxNjoxMjowNCArMDEwMApTdWJqZWN0
+OiBsaWJkYnVzLWMrKzogYWRkZWQgcmVjaXBlIGZvciBpdAoKdG8gZml4IHRoZSBidWlsZCwgdHdv
+IHBhdGNoZXMgd2hlcmUgbmVlZGVkLgoKT25lIHdoaWNoIGp1c3QgYWRkcyBhbiBpbmNsdWRlIG9m
+IHVuaXN0ZC5oLCBhcyB0aGUgZnVuY3Rpb25zIHBpcGUsIHdyaXRlIGFuZApjbG9zZSBkZWZpbmVk
+IGJ5IHRoaXMgaW5jbHVkZSwgd2VyZW4ndCBkZWZpbmVkLgoKVGhlIG90aGVyIHBhdGNoIGVuYWJs
+ZXMgdGhlIGJ1aWxkIHRvIGJ1aWxkIHRoZSB0b29scyBvZiBsaWJkYnVzLWMrKyBmb3IgdGhlCnRh
+cmdldCwgd2hpY2gsIHdpdGhvdXQgdGhlIHBhdGNoLCB3aWxsIGFsd2F5cyBiZSBidWlsZCBmb3Ig
+dGhlIGhvc3QsIGV2ZW4gd2hlbgpjcm9zcyBjb21waWxpbmcuCgpTaWduZWQtb2ZmLWJ5OiBUaGls
+byBDZXN0b25hcm8gPHRoaWxvLmNlc3RvbmFyb0B0cy5mdWppdHN1LmNvbT4KLS0tCiAuLi4vZml4
+LW1pc3NpbmctdW5pc3RkLmgtaW5jbHVkZS5wYXRjaCAgICAgICAgICAgICB8IDEyICsrKysrKysr
+KysrCiAuLi4vcmVtb3ZlLUNYWF9GT1JfQlVJTEQtc3R1ZmYucGF0Y2ggICAgICAgICAgICAgICB8
+IDI0ICsrKysrKysrKysrKysrKysrKysrKysKIG1ldGEtb2UvcmVjaXBlcy1jb3JlL2RidXMvbGli
+ZGJ1cy1jKytfMC45LjAuYmIgICAgIHwgMjQgKysrKysrKysrKysrKysrKysrKysrKwogMyBmaWxl
+cyBjaGFuZ2VkLCA2MCBpbnNlcnRpb25zKCspCiBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9y
+ZWNpcGVzLWNvcmUvZGJ1cy9saWJkYnVzLWMrKy0wLjkuMC9maXgtbWlzc2luZy11bmlzdGQuaC1p
+bmNsdWRlLnBhdGNoCiBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNpcGVzLWNvcmUvZGJ1
+cy9saWJkYnVzLWMrKy0wLjkuMC9yZW1vdmUtQ1hYX0ZPUl9CVUlMRC1zdHVmZi5wYXRjaAogY3Jl
+YXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1jb3JlL2RidXMvbGliZGJ1cy1jKytfMC45
+LjAuYmIKCmRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtY29yZS9kYnVzL2xpYmRidXMtYysr
+LTAuOS4wL2ZpeC1taXNzaW5nLXVuaXN0ZC5oLWluY2x1ZGUucGF0Y2ggYi9tZXRhLW9lL3JlY2lw
+ZXMtY29yZS9kYnVzL2xpYmRidXMtYysrLTAuOS4wL2ZpeC1taXNzaW5nLXVuaXN0ZC5oLWluY2x1
+ZGUucGF0Y2gKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4uNWNiODA5NgotLS0g
+L2Rldi9udWxsCisrKyBiL21ldGEtb2UvcmVjaXBlcy1jb3JlL2RidXMvbGliZGJ1cy1jKystMC45
+LjAvZml4LW1pc3NpbmctdW5pc3RkLmgtaW5jbHVkZS5wYXRjaApAQCAtMCwwICsxLDEyIEBACitk
+aWZmIC0tZ2l0IGEvaW5jbHVkZS9kYnVzLWMrKy9ldmVudGxvb3AtaW50ZWdyYXRpb24uaCBiL2lu
+Y2x1ZGUvZGJ1cy1jKysvZXZlbnRsb29wLWludGVncmF0aW9uLmgKK2luZGV4IDFiMDMwMmUuLjNl
+NDQzMDQgMTAwNjQ0CistLS0gYS9pbmNsdWRlL2RidXMtYysrL2V2ZW50bG9vcC1pbnRlZ3JhdGlv
+bi5oCisrKysgYi9pbmNsdWRlL2RidXMtYysrL2V2ZW50bG9vcC1pbnRlZ3JhdGlvbi5oCitAQCAt
+MjYsNiArMjYsNyBAQAorICNkZWZpbmUgX19EQlVTWFhfRVZFTlRMT09QX0lOVEVHUkFUSU9OX0gK
+KyAKKyAjaW5jbHVkZSA8ZXJybm8uaD4KKysjaW5jbHVkZSA8dW5pc3RkLmg+CisgI2luY2x1ZGUg
+ImFwaS5oIgorICNpbmNsdWRlICJkaXNwYXRjaGVyLmgiCisgI2luY2x1ZGUgInV0aWwuaCIKZGlm
+ZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1jb3JlL2RidXMvbGliZGJ1cy1jKystMC45LjAvcmVt
+b3ZlLUNYWF9GT1JfQlVJTEQtc3R1ZmYucGF0Y2ggYi9tZXRhLW9lL3JlY2lwZXMtY29yZS9kYnVz
+L2xpYmRidXMtYysrLTAuOS4wL3JlbW92ZS1DWFhfRk9SX0JVSUxELXN0dWZmLnBhdGNoCm5ldyBm
+aWxlIG1vZGUgMTAwNjQ0CmluZGV4IDAwMDAwMDAuLjkwNjQ3MGEKLS0tIC9kZXYvbnVsbAorKysg
+Yi9tZXRhLW9lL3JlY2lwZXMtY29yZS9kYnVzL2xpYmRidXMtYysrLTAuOS4wL3JlbW92ZS1DWFhf
+Rk9SX0JVSUxELXN0dWZmLnBhdGNoCkBAIC0wLDAgKzEsMjQgQEAKK2RpZmYgLU5hdXIgbGliZGJ1
+cy1jKystMC45LjAub3JpL2NvbmZpZ3VyZS5hYyBsaWJkYnVzLWMrKy0wLjkuMC9jb25maWd1cmUu
+YWMKKy0tLSBsaWJkYnVzLWMrKy0wLjkuMC5vcmkvY29uZmlndXJlLmFjCTIwMTYtMTEtMTUgMTQ6
+MjU6MzYuMDg1ODgyNzc0ICswMTAwCisrKysgbGliZGJ1cy1jKystMC45LjAvY29uZmlndXJlLmFj
+CTIwMTYtMTEtMTUgMTQ6Mjc6MDguODE0NTY4NzE3ICswMTAwCitAQCAtNjQsOSArNjQsNiBAQAor
+IEFDX1BST0dfQ0MKKyBBQ19QUk9HX0NYWAorIAorLUNYWF9GT1JfQlVJTEQ9JHtDWFhfRk9SX0JV
+SUxELSR7Q1hYfX0KKy1BQ19TVUJTVChDWFhfRk9SX0JVSUxEKQorLQorIEFNX1BST0dfTElCVE9P
+TAorIAorIFBLR19QUk9HX1BLR19DT05GSUcKK2RpZmYgLU5hdXIgbGliZGJ1cy1jKystMC45LjAu
+b3JpL3Rvb2xzL01ha2VmaWxlLmFtIGxpYmRidXMtYysrLTAuOS4wL3Rvb2xzL01ha2VmaWxlLmFt
+CistLS0gbGliZGJ1cy1jKystMC45LjAub3JpL3Rvb2xzL01ha2VmaWxlLmFtCTIwMTYtMTEtMTUg
+MTQ6MjU6MzYuMDg5ODgyODAzICswMTAwCisrKysgbGliZGJ1cy1jKystMC45LjAvdG9vbHMvTWFr
+ZWZpbGUuYW0JMjAxNi0xMS0xNSAxNDoyNjoxOS40NTQyMDM1ODMgKzAxMDAKK0BAIC0xLDcgKzEs
+NSBAQAorICMgaGFja3ksIGJ1dCAuLi4KKyAKKy1DWFggPSAkKENYWF9GT1JfQlVJTEQpCistCisg
+QU1fQ1BQRkxBR1MgPSBcCisgCSQoZGJ1c19DRkxBR1MpIFwKKyAJJCh4bWxfQ0ZMQUdTKSBcCmRp
+ZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtY29yZS9kYnVzL2xpYmRidXMtYysrXzAuOS4wLmJi
+IGIvbWV0YS1vZS9yZWNpcGVzLWNvcmUvZGJ1cy9saWJkYnVzLWMrK18wLjkuMC5iYgpuZXcgZmls
+ZSBtb2RlIDEwMDY0NAppbmRleCAwMDAwMDAwLi43ZWRhZmZjCi0tLSAvZGV2L251bGwKKysrIGIv
+bWV0YS1vZS9yZWNpcGVzLWNvcmUvZGJ1cy9saWJkYnVzLWMrK18wLjkuMC5iYgpAQCAtMCwwICsx
+LDI0IEBACitTVU1NQVJZID0gIkRCdXMtQysrIExpYnJhcnkiCitERVNDUklQVElPTiA9ICJEQnVz
+LWMrKyBhdHRlbXB0cyB0byBwcm92aWRlIGEgQysrIEFQSSBmb3IgRC1CVVMuIFRoZSBsaWJyYXJ5
+IGhhcyBhIGdsaWIgYW5kIGFuIEVjb3JlIG1haW5sb29wIGludGVncmF0aW9uLiBJdCBhbHNvIG9m
+ZmVycyBhbiBvcHRpb25hbCBvd24gbWFpbiBsb29wLiIKK0hPTUVQQUdFID0gImh0dHA6Ly9kYnVz
+LWNwbHVzcGx1cy5zb3VyY2Vmb3JnZS5uZXQiCitTRUNUSU9OID0gImJhc2UiCitMSUNFTlNFID0g
+IkxHUEx2Mi4xIgorTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vQ09QWUlORzttZDU9ZmJjMDkz
+OTAxODU3ZmNkMTE4ZjA2NWY5MDA5ODJjMjQiCitERVBFTkRTID0gImRidXMgZ2xpYi0yLjAgbGli
+cGNyZSIKKworU1JDX1VSSSA9ICIke1NPVVJDRUZPUkdFX01JUlJPUn0vcHJvamVjdC9kYnVzLWNw
+bHVzcGx1cy9kYnVzLWMrKy8ke1BWfS8ke0JQTn0tJHtQVn0udGFyLmd6IFwKKwkJICAgZmlsZTov
+L2ZpeC1taXNzaW5nLXVuaXN0ZC5oLWluY2x1ZGUucGF0Y2ggXAorCQkgICBmaWxlOi8vcmVtb3Zl
+LUNYWF9GT1JfQlVJTEQtc3R1ZmYucGF0Y2giCitTUkNfVVJJW21kNXN1bV0gPSAiZTc1MjExNmY1
+MjNmYTg4ZWYwNDFlNjNkM2RlZTRkZTIiCitTUkNfVVJJW3NoYTI1NnN1bV0gPSAiYmMxMWFjMjk3
+YjNjYjAxMGJlOTA0YzcyNzg5Njk1NTQzZWUzZmRmM2Q3NWNkYzgyMjVmZDM3MTM4NWFmNGU2MSIK
+KworRVhUUkFfT0VDT05GID0gIi0tZGlzYWJsZS1lY29yZSAtLWRpc2FibGUtZXhhbXBsZXMgLS1k
+aXNhYmxlLXRlc3RzIgorCitpbmhlcml0IGF1dG90b29scyBwa2djb25maWcKKworUEFDS0FHRVMg
+Kz0gIiR7UE59LXRvb2xzIgorCitGSUxFU18ke1BOfSA9ICIke2xpYmRpcn0iCitGSUxFU18ke1BO
+fS10b29scyA9ICIke2JpbmRpcn0iCisKK0JCQ0xBU1NFWFRFTkQgPSAibmF0aXZlIgotLSAKMi4x
+MC4yCgo=
+
+--=-tMk4eOziZXqfk+V/bZkT--
+
+--=-noaZIjr8XGNSmuvdesMN
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Disposition: attachment; filename="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -190,12 +242,12 @@ QBy6Idk/KoCGOVaTvnQjigkkq8NvA7z+aTGbM6Ok6yTw7cJ2WMKNg+hi0k8j+g1Wxh2aKiTOd7gW
 6w9goPO/mLR03vgotHjyZpe+Lf9axMWrCSzjlB4ElP/P7WxjL51ham/1cY36NHWjgiYxggHhMIIB
 3QIBATA9MC8xLTArBgNVBAMTJEZ1aml0c3UgVGVjaG5vbG9neSBTb2x1dGlvbnMgVXNlciBDQQIK
 JZSUgAAAAAIkfTAJBgUrDgMCGgUAoIH7MBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZI
-hvcNAQkFMQ8XDTE2MTExNjE1MzkxN1owIwYJKoZIhvcNAQkEMRYEFN5n7AH9orrwYGlZCcZCr4VJ
-T9G2MEwGCSsGAQQBgjcQBDE/MD0wLzEtMCsGA1UEAxMkRnVqaXRzdSBUZWNobm9sb2d5IFNvbHV0
+hvcNAQkFMQ8XDTE2MTExNjE1NDA1NlowIwYJKoZIhvcNAQkEMRYEFJeuaLGF7RvGBWUVhvrQo/Se
+PyVoMEwGCSsGAQQBgjcQBDE/MD0wLzEtMCsGA1UEAxMkRnVqaXRzdSBUZWNobm9sb2d5IFNvbHV0
 aW9ucyBVc2VyIENBAgollJSAAAAAAiR9ME4GCyqGSIb3DQEJEAILMT+gPTAvMS0wKwYDVQQDEyRG
 dWppdHN1IFRlY2hub2xvZ3kgU29sdXRpb25zIFVzZXIgQ0ECCiWUlIAAAAACJH0wDQYJKoZIhvcN
-AQEBBQAEgYB4Wz09EheqQzKY0cny/Rs60c09aOzFg/752N7+HhWilrhkzE6yKwTXTgqGiwHmVGfW
-NZD9VNEMynCCK5/S1a/g/Pn3QPPlPgoWTpnBZIz0yEZuEm4qCMviFgHMati/uW9DtSkiXizqpBtR
-ySc9Ui7jggNZa4zKJ+ozJz40wYOZEQAAAAAAAA==
+AQEBBQAEgYAjw+TL18xsKfObV4QmSIfKtTvLuFCIkoEfqXCn5z7Wr9IdZKe/bFBMp538ywa/10Ho
+oBG6hVYgxPZYjDFZiueJ3KWmRKm0vqtZNelCje7iitgCMbtB6APvOg7hsXrpDkQoQCAQQMSBy4vQ
+F4j5fO+ewAQbBHRi65J/wR81VrY1UgAAAAAAAA==
 
---=-26hH+FGIXacOtZwUbVyk--
+--=-noaZIjr8XGNSmuvdesMN--
