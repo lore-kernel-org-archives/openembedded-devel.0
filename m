@@ -1,32 +1,25 @@
-Return-Path: <rpjday@crashcourse.ca>
-X-Greylist: delayed 784 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 16 Nov 2016 11:07:04 UTC
-Received: from smtp684.redcondor.net (smtp684.redcondor.net [208.80.206.84])
-	by mail.openembedded.org (Postfix) with ESMTP id BC5E160116
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 1254E719B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Nov 2016 11:07:04 +0000 (UTC)
-Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by smtp684.redcondor.net ({700db0a8-6fb7-4c8b-9b2a-6812225182d8})
-	via TCP (outbound) with ESMTPS id 20161116105400503_0684;
-	Wed, 16 Nov 2016 10:54:00 +0000
-X-RC-FROM: <rpjday@crashcourse.ca>
-Received: from [216.191.234.70] (port=46236 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1c6xqf-0005RK-Fs; Wed, 16 Nov 2016 05:53:49 -0500
-Date: Wed, 16 Nov 2016 05:52:43 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@ca624034.mitel.com
-To: Jens Rehsack <rehsack@gmail.com>
-In-Reply-To: <9D035763-8338-45EA-85A0-20F7CD6329DD@gmail.com>
-Message-ID: <alpine.LFD.2.20.1611160548290.1284@ca624034.mitel.com>
-References: <alpine.LFD.2.20.1611141643001.32623@localhost.localdomain>
-	<9D035763-8338-45EA-85A0-20F7CD6329DD@gmail.com>
-User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
+	Wed, 16 Nov 2016 15:28:27 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by orsmga103.jf.intel.com with ESMTP; 16 Nov 2016 07:27:59 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.31,500,1473145200"; d="scan'208";a="902104961"
+Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
+	([10.237.68.161])
+	by orsmga003.jf.intel.com with ESMTP; 16 Nov 2016 07:27:58 -0800
+To: openembedded-devel@lists.openembedded.org
+References: <20161116102307.7678-1-thilo.cestonaro@ts.fujitsu.com>
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+Message-ID: <e098613f-6906-c91c-41cf-721df6a03f49@linux.intel.com>
+Date: Wed, 16 Nov 2016 17:27:59 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Icedove/45.4.0
 MIME-Version: 1.0
-X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: curious about "superfluous" meta-cpan recipes
+In-Reply-To: <20161116102307.7678-1-thilo.cestonaro@ts.fujitsu.com>
+Subject: Re: [meta-oe][PATCH] libdbus-c++: added recipe for it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,69 +32,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Nov 2016 11:07:05 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Wed, 16 Nov 2016 15:28:29 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, 15 Nov 2016, Jens Rehsack wrote:
-
-> Hi Robert,
+On 11/16/2016 12:23 PM, Thilo Cestonaro wrote:
+> to fix the build, two patches where needed.
 >
-> > Am 14.11.2016 um 22:45 schrieb Robert P. J. Day <rpjday@crashcourse.ca>:
-> >
-> >
-> >  to follow up on a point i made earlier, it seems that a number of
-> > recipes in meta-cpan are, these days, unnecessary as they are
-> > available in the standard OE or meta-oe layers. i took a quick
-> > look and found the following examples:
-> >
-> > meta-cpan			OE/meta-oe equivalent		type
-> >
-> >
-> > uri-perl			liburi-perl			oe-core
-> > encode-locale-perl		libencode-locale-perl		meta-perl
-> > io-socket-ssl-perl		libio-socket-ssl-perl		meta-perl
-
-... snip ...
-
-> >  so you can see that a number of meta-cpan recipes appear to be
-> > effectively available in basic OE. does that make them
-> > unnecessary? is there any reason to have meta-cpan recipes that
-> > basically reproduce what is already available? (other than version
-> > numbers, of course.)
+> One which just adds an include of unistd.h, as the functions pipe, write and
+> close defined by this include, weren't defined.
 >
-> you're slightly too fast...
+> The other patch enables the build to build the tools of libdbus-c++ for the
+> target, which, without the patch, will always be build for the host, even when
+> cross compiling.
 
-  that's what *she* said. :-) but seriously ...
+You need to include this information on top of the patch files 
+themselves. So that when people look at the patches, they can 
+immediately see what they are for, without digging through commit 
+history. And also patches are still missing Upstream-Status, and 
+Signed-off-by lines (I asked you about it earlier). Have a look at any 
+other recipe patch in oe-core to see how it should look like.
 
-> There is a clear reason for that what you identified as superfluous:
-> reliability.
->
-> Experienced users expected, one can easily add an
-> liburi-perl_%.bbappend or an uri-perl_%.bbappend containing a
-> PROVIDES+="...". But noone is enforced to remove such a PROVIDES...
->
-> What drives me to package cpan distributions which are already in
-> meta-oe? The way they're packaged. meta-cpan containes recipes in a
-> way as they're meant by CPAN authors, not by Debian or
-> oe-contributors.
+Do read http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines 
+please.
 
-  is there anywhere a guide for writing perl recipes? i've already
-noticed the subtle differences in packaging, and someone earlier
-mentioned to avoid the meta-debian recipes as they have their own
-standard, and so on.
-
-  is there a HOWTO for this? thanks muchly.
-
-rday
-
--- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+Alex
 
 
