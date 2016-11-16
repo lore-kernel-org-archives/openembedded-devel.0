@@ -1,48 +1,46 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 5923171976
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 627B46E64F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Nov 2016 00:11:37 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id m203so5455736wma.3
+	Wed, 16 Nov 2016 00:11:52 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id a20so5501117wme.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Nov 2016 16:11:39 -0800 (PST)
+	Tue, 15 Nov 2016 16:11:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=zPC1iPR16GAnNT5XHj7CBINCk4pAic2kSghuz4sMcS8=;
-	b=WxDeqkdLal2KxcyfXfrBo6W8F2iDnAC4lhGy7UxqD4h8hGd3zcU2P7YSg7hdpq45Vt
-	uHibl1rLF2q8LFG8vNU3pJdxGQObgztfpRPje0sdL0+GjyO+UDOfsw4iC1PCC7qcSEuo
-	h3PE6p5FUS2tHsXOi2DMei/D0MNXpXwDxQ7tXOCDYuhzZ1nHK4MV02KaiuzXPCdR+j2X
-	s8MwQJzkt6k2h4VYEsAJfOMj264gZJyeOsxIpc6CrDSlG18uq+XfcHC+jpGvuWl9+qSb
-	F/tprt74XYKvWOD5zbkWE0gLVLQhRYzOlE1i/m4YBC1GZSg7DmPNHFmaGhhz26hC/MzI
-	ELoQ==
+	:cc; bh=RPqVzb16P5wcUkexFhwBwnh/S/RKWzEIrBio+E5PXf8=;
+	b=lpirI9SxjEvpdgDgMsCSF968BbV2UHAGdWn1NggKGzTVpeh7+S0UzXQLNU6Uqx91s6
+	/6sa8ZznEck/iH0+uZoM4U+/U9Qm81UzoBrhS2SV2AcMp1gzyh7fYZs/s7xHSEjHETg+
+	sDPCXD63C/zLrf6jU0yrmmrtfg+SLpaWbz85ReOFkHYgzxjaQB6LbCrFlczIe5d4fpW6
+	oyyylnFuGOvL05PzfEXIbMW/LR3ul0vh9LwZkYvAYRtnkTMPEo3GUiWLg6vtVyz3/gKH
+	4vBhT3SZatGzmtIJ4ln00Zb9ti/B7WZtXx6YauzLMWRWprzQhYUAEjNAEAc999O5ZdvV
+	8UEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=zPC1iPR16GAnNT5XHj7CBINCk4pAic2kSghuz4sMcS8=;
-	b=XRsduekzknDmETezPMvS8Se6gWv6SztNxt0vkBuo5nVI13ENTrWz4quQxefd+L+lfW
-	PqfwLx8iAmSMeVpN4/lUG0Y3GP/xHMMeKGSkc/92QchtDPetLL4JmN+sEF53kaUBLFbN
-	Qc8kjTTdyZnQsIrDFUs8MSXn9TBHjhcQ265i5MAHgqMVTv7Egrd+qcwpT+/XvK1oGJpX
-	YA0F/TvycFnpGKbrEDolaTc2kAHNAs41anaFWa5LFveokgNGXVmM7VVkPP/yRQQ99kwW
-	9O23BkZoTZmVz+2Q+5pv2yGV7Uy5zOtS2uHVIHcFrc0npKJO1emSRNlTwLxV3NHU1NVn
-	r5IQ==
-X-Gm-Message-State: ABUngveRXw2gv6huM0KFiNtzNwbNfNi5HtdK2mR5kvDBvkaa9sMfrw5js46XtM/YP1smJS3VLWo9/QbO0CpMVg==
-X-Received: by 10.28.137.193 with SMTP id l184mr6015173wmd.88.1479255098413;
-	Tue, 15 Nov 2016 16:11:38 -0800 (PST)
+	:message-id:subject:to:cc;
+	bh=RPqVzb16P5wcUkexFhwBwnh/S/RKWzEIrBio+E5PXf8=;
+	b=NevMZ1WjzIVu4g96R0C8zOTg48tegktGKwrZbShkb5mj1mIviBsTHaio6P4/JCdOzF
+	v5In0GCsKvz7yQjB4kGCVla7n0nSc5/oCAgekc6q4ei5qgnVIBbJW9N/+v5klXLZREE1
+	pIXFMEj1DlBKlre0SZrsO/1SCMF+LN5hHzT7YHVznKGNuNS8mDi14jIY0nde/GCuJ2yw
+	Rv0/qMndy9lCV3s8QrDJT//lGO2Of1DCmmXAfjDIAisXeKg448gArmHFPCY7OH48Wg6W
+	s5Qlq4N5VSfZuCe/yVCQEY/Nr7epLdDWGYjrK6C3Lwmrb8jO9+kU4GKNjtYSJMcbgf74
+	+UeQ==
+X-Gm-Message-State: ABUngvewuJkfVReOuuDuxtY5CEflcpWPgsZYK0MqVD83wHpcR6TaO5AEnNXO48PON7jWknD8ry/vPBb8criWzw==
+X-Received: by 10.28.69.130 with SMTP id l2mr6552050wmi.123.1479255114165;
+	Tue, 15 Nov 2016 16:11:54 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.195.9.34 with HTTP; Tue, 15 Nov 2016 16:11:17 -0800 (PST)
-In-Reply-To: <20161031103434.932-2-ricardo.ribalda@gmail.com>
+Received: by 10.195.9.34 with HTTP; Tue, 15 Nov 2016 16:11:33 -0800 (PST)
+In-Reply-To: <20161031103434.932-1-ricardo.ribalda@gmail.com>
 References: <20161031103434.932-1-ricardo.ribalda@gmail.com>
-	<20161031103434.932-2-ricardo.ribalda@gmail.com>
 From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Wed, 16 Nov 2016 01:11:17 +0100
-Message-ID: <CAPybu_0YDwmMB-1z1Mo9bhoadUFcY35vE98nDMuZzriYn1bXOg@mail.gmail.com>
+Date: Wed, 16 Nov 2016 01:11:33 +0100
+Message-ID: <CAPybu_0jotuGgKE5GWnwvGrmrR_LPB0FPRNAcu+_T-SzdrGjMw@mail.gmail.com>
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>,
 	erkka.kaaria@intel.com, Kyle Russell <bkylerussell@gmail.com>,
 	Dan McGregor <daniel.mcgregor@vecima.com>, 
 	"Maxin B . John" <maxin.john@intel.com>
-Subject: Re: [meta-java][PATCH 2/2] openjdk-7-release-03b147.inc: Ignore deprecation
+Subject: Re: [meta-java][PATCH 1/2] icedtea7-native: Fix segmentation fault
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,55 +53,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Nov 2016 00:11:38 -0000
+X-List-Received-Date: Wed, 16 Nov 2016 00:11:53 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
 ping?
 
 On Mon, Oct 31, 2016 at 11:34 AM, Ricardo Ribalda Delgado
 <ricardo.ribalda@gmail.com> wrote:
-> readdir_r has been deprecated since glibc 2.24. As openjdk uses this
-> function, a warning is generated during build that gets turned into
-> an error when -Werror is used.
+> Without this patch the generated icedtea produces segmentation faults.
+> This is probably due to a race condition during cleanout.
 >
-> While the readdir function is suggested as an replacement, it has
-> slightly different API. The warning is ignored instead to prevent any
-> unexpected breakage from patching the offending functions.
->
-> (Note: This is just a port of 0f127a49696 from Erkka K=C3=A4=C3=A4ri=C3=
-=A4 for openjdk-7
-> , all the credit for him)
->
-> Credit-to: Erkka K=C3=A4=C3=A4ri=C3=A4 <erkka.kaaria@intel.com>
 > Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 > ---
->  recipes-core/icedtea/openjdk-7-release-03b147.inc | 4 ++++
->  1 file changed, 4 insertions(+)
+>  recipes-core/icedtea/icedtea7-native.inc           |  2 ++
+>  .../icedtea/openjdk-7-03b147/sigsegv.patch         | 42 ++++++++++++++++++++++
+>  2 files changed, 44 insertions(+)
+>  create mode 100644 recipes-core/icedtea/openjdk-7-03b147/sigsegv.patch
 >
-> diff --git a/recipes-core/icedtea/openjdk-7-release-03b147.inc b/recipes-=
-core/icedtea/openjdk-7-release-03b147.inc
-> index 068572959fa1..1d054ffe35e8 100644
-> --- a/recipes-core/icedtea/openjdk-7-release-03b147.inc
-> +++ b/recipes-core/icedtea/openjdk-7-release-03b147.inc
-> @@ -7,6 +7,10 @@ FILESPATH =3D. "${FILE_DIRNAME}/openjdk-7-03b147:"
->  # Force arm mode for now
->  ARM_INSTRUCTION_SET_armv4t =3D "ARM"
+> diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
+> index 00756888b62c..0ecf620cd279 100644
+> --- a/recipes-core/icedtea/icedtea7-native.inc
+> +++ b/recipes-core/icedtea/icedtea7-native.inc
+> @@ -42,6 +42,7 @@ SRC_URI = " \
+>    file://allow-headless-build.patch;striplevel=0 \
+>    file://jaxws_fix_NullPointerException.patch;apply=no \
+>    file://timezoneszip.patch \
+> +  file://sigsegv.patch;apply=no \
+>    "
 >
-> +# readdir_r was deprecated in glibc-2.24. Ignore the error for now
-> +# NOTE: When updating the recipe, please check if this is still needed
-> +CFLAGS_append =3D " -Wno-error=3Ddeprecated-declarations"
+>  S = "${WORKDIR}/${ICEDTEA}"
+> @@ -153,6 +154,7 @@ do_configure_append() {
+>         oe_runmake patch-boot
+>
+>         patch -p1 < ${WORKDIR}/jaxws_fix_NullPointerException.patch
+> +       patch -p1 < ${WORKDIR}/sigsegv.patch
+>  }
+>
+>  EXTRA_OEMAKE = ' \
+> diff --git a/recipes-core/icedtea/openjdk-7-03b147/sigsegv.patch b/recipes-core/icedtea/openjdk-7-03b147/sigsegv.patch
+> new file mode 100644
+> index 000000000000..0c3e44eff826
+> --- /dev/null
+> +++ b/recipes-core/icedtea/openjdk-7-03b147/sigsegv.patch
+> @@ -0,0 +1,42 @@
+> +diff --git a/openjdk-boot/hotspot/src/share/vm/runtime/thread.cpp b/openjdk-boot/hotspot/src/share/vm/runtime/thread.cpp
+> +index 8b7059c8389f..67e9e7bd4bce 100644
+> +--- a/openjdk-boot/hotspot/src/share/vm/runtime/thread.cpp
+> ++++ b/openjdk-boot/hotspot/src/share/vm/runtime/thread.cpp
+> +@@ -764,10 +764,13 @@ bool Thread::claim_oops_do_par_case(int strong_roots_parity) {
+> + }
 > +
->  ICEDTEA_URI =3D "http://icedtea.wildebeest.org/download/source/${ICEDTEA=
-}.tar.gz;name=3Diced"
->
->  ICEDTEA_PREFIX =3D "icedtea7-forest-2.1"
+> + void Thread::oops_do(OopClosure* f, CodeBlobClosure* cf) {
+> +-  active_handles()->oops_do(f);
+> ++  if (f && active_handles())
+> ++        active_handles()->oops_do(f);
+> +   // Do oop for ThreadShadow
+> +-  f->do_oop((oop*)&_pending_exception);
+> +-  handle_area()->oops_do(f);
+> ++  if (f)
+> ++        f->do_oop((oop*)&_pending_exception);
+> ++  if (f && handle_area())
+> ++        handle_area()->oops_do(f);
+> + }
+> +
+> + void Thread::nmethods_do(CodeBlobClosure* cf) {
+> +diff --git a/openjdk/hotspot/src/share/vm/runtime/thread.cpp b/openjdk/hotspot/src/share/vm/runtime/thread.cpp
+> +index 8b7059c8389f..67e9e7bd4bce 100644
+> +--- a/openjdk/hotspot/src/share/vm/runtime/thread.cpp
+> ++++ b/openjdk/hotspot/src/share/vm/runtime/thread.cpp
+> +@@ -764,10 +764,13 @@ bool Thread::claim_oops_do_par_case(int strong_roots_parity) {
+> + }
+> +
+> + void Thread::oops_do(OopClosure* f, CodeBlobClosure* cf) {
+> +-  active_handles()->oops_do(f);
+> ++  if (f && active_handles())
+> ++        active_handles()->oops_do(f);
+> +   // Do oop for ThreadShadow
+> +-  f->do_oop((oop*)&_pending_exception);
+> +-  handle_area()->oops_do(f);
+> ++  if (f)
+> ++        f->do_oop((oop*)&_pending_exception);
+> ++  if (f && handle_area())
+> ++        handle_area()->oops_do(f);
+> + }
+> +
+> + void Thread::nmethods_do(CodeBlobClosure* cf) {
 > --
 > 2.10.1
 >
 
 
 
---=20
+-- 
 Ricardo Ribalda
 
