@@ -1,26 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6EE5271A95
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A78B71A95
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2016 05:45:09 +0000 (UTC)
+	Thu, 17 Nov 2016 05:45:10 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id uAH5jAN1021280
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id uAH5jCAo017667
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Nov 2016 21:45:11 -0800
+	Wed, 16 Nov 2016 21:45:12 -0800 (PST)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Wed, 16 Nov 2016 21:45:10 -0800
+	14.3.294.0; Wed, 16 Nov 2016 21:45:11 -0800
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Nov 2016 13:37:36 +0800
-Message-ID: <20161117053737.309-2-kai.kang@windriver.com>
+Date: Thu, 17 Nov 2016 13:37:37 +0800
+Message-ID: <20161117053737.309-3-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.10.1
 In-Reply-To: <20161117053737.309-1-kai.kang@windriver.com>
 References: <20161117053737.309-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 2/3] samba: correct sub-package name for multilib
+Subject: [meta-networking][PATCH 3/3] curlpp: fix qa issue of do_configure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,41 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Nov 2016 05:45:10 -0000
+X-List-Received-Date: Thu, 17 Nov 2016 05:45:11 -0000
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-The name of sub-package lib${PN}-base is not right when extended by
-multilib. Correct it by replace ${PN} with ${BPN}.
+curlpp is configured with boost by default. And it searches boost
+directory on build machine. If boost is installed on build machine, then
+causes qa issue:
+
+| ERROR: curlpp-0.7.3-r0 do_configure: This autoconf log indicates
+| errors, it looked at host include and/or library paths while
+| determining system capabilities.
+
+Pass the boost directory in ${STAGING_DIR_HOST} to configure script to
+disable search on build machine to fix the issue.
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-index fe63701..98058f4 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-@@ -140,7 +140,7 @@ do_install_append() {
+diff --git a/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb b/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
+index 1848aa6..c3a242a 100644
+--- a/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
++++ b/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
+@@ -16,6 +16,7 @@ SRC_URI[sha256sum] = "e3f9427b27c5bddf898d383d45c0d3d5397e2056ff935d9a5cdaef6a9a
  
- PACKAGES =+ "${PN}-python ${PN}-python-dbg ${PN}-pidl libwinbind libwinbind-dbg libwinbind-krb5-locator"
- PACKAGES =+ "libwbclient libnss-winbind winbind winbind-dbg libnetapi libsmbsharemodes \
--             libsmbclient libsmbclient-dev lib${PN}-base ${PN}-base ${PN}-ctdb-tests"
-+             libsmbclient libsmbclient-dev lib${BPN}-base ${PN}-base ${PN}-ctdb-tests"
+ inherit autotools-brokensep pkgconfig binconfig
  
- RDEPENDS_${PN} += "${PN}-base"
- 
-@@ -178,7 +178,7 @@ FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
- #     echo $l
- # done
- 
--FILES_lib${PN}-base = "\
-+FILES_lib${BPN}-base = "\
-                     ${sysconfdir}/default \
-                     ${sysconfdir}/samba \
-                     ${libdir}/libdcerpc-binding.so.* \
++EXTRA_OECONF = "--with-boost=${STAGING_DIR_HOST}${prefix}"
+ # Upstream is currently working on porting the code to use std::unique_ptr instead of the
+ # deprecated auto_ptr.  For now, ignore the issue.
+ CXXFLAGS += "-Wno-error=deprecated-declarations"
 -- 
 2.10.1
 
