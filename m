@@ -1,36 +1,34 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 2AB6865C90
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 94CD671A23
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2016 03:09:23 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id n34so13098312qtb.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Nov 2016 19:09:25 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ENdN2nDNcrwdU1sEr9gOlmyDMXgFbhylPRs9ybq+cIc=;
-	b=It8MANkzFVGHoJBnjVWOt+ZjYFSLW/lzupYlGJJ2zl+8qTDxNVymAbFX7O3OXPXOWI
-	18YtHR9NM9lbLNEryjf5EYcKsQNiIbuDdr+iYPbCrBP8YGZziPNZ4MCnhDH7qHSAR7hw
-	Eu6/tnpZ+rSP3ixFwgPLoZBUDAa7WJiR1SFhwROqAVhvY+spE4z1YD/2gu+gnOs0Sptc
-	rzQKRCVpLqYoiMERh0sN9O1Uj+QmZm8f8KI8r5q4H0DMCIcSNd28yfh53LAlDYsgd1u/
-	4sbj3Hi2PWR1+y3XlNVxV3MVkUO/rtNqjxu6PMgyzTGh1hUI6aKDBOFNC2X8ynykiBhj
-	fXbQ==
-X-Gm-Message-State: AKaTC02qRhgp7Oj1aV2T09HMnG2ENEWbo7anmh09Z9nvmKRW2sbGfGc7xQZzPGGYVgvYNA==
-X-Received: by 10.200.39.230 with SMTP id x35mr458942qtx.259.1479352165108;
-	Wed, 16 Nov 2016 19:09:25 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
-	[69.124.217.3])
-	by smtp.gmail.com with ESMTPSA id y52sm494496qty.11.2016.11.16.19.09.24
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 16 Nov 2016 19:09:24 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
+	Thu, 17 Nov 2016 03:58:59 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 270B32098D;
+	Thu, 17 Nov 2016 03:59:01 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id VbZprMtnAAtH; Thu, 17 Nov 2016 03:59:01 +0000 (UTC)
+Received: from gandalf.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
+	[100.15.95.79])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0194620567;
+	Thu, 17 Nov 2016 03:58:59 +0000 (UTC)
+Received: by gandalf.denix.org (Postfix, from userid 1000)
+	id 5F28D1621A4; Wed, 16 Nov 2016 22:58:59 -0500 (EST)
+Date: Wed, 16 Nov 2016 22:58:59 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Nov 2016 22:09:15 -0500
-Message-Id: <1479352155-15344-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-requests: update to version 2.12.0
+Message-ID: <20161117035859.GB26131@denix.org>
+References: <1477587755-24666-1-git-send-email-denis@denix.org>
+	<271f87f6-ac90-2389-3499-9c3bb8d80fa6@gmail.com>
+	<20161114190940.GB22657@denix.org>
+MIME-Version: 1.0
+In-Reply-To: <20161114190940.GB22657@denix.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [meta-oe][krogoth][PATCH] syslog-ng: expand service file @variables@ earlier
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,41 +41,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Nov 2016 03:09:24 -0000
+X-List-Received-Date: Thu, 17 Nov 2016 03:59:01 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-requests.inc               | 4 ++--
- .../python/{python-requests_2.11.1.bb => python-requests_2.12.0.bb}   | 0
- .../python/{python3-requests_2.11.1.bb => python3-requests_2.12.0.bb} | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-requests_2.11.1.bb => python-requests_2.12.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-requests_2.11.1.bb => python3-requests_2.12.0.bb} (100%)
+On Mon, Nov 14, 2016 at 02:09:40PM -0500, Denys Dmytriyenko wrote:
+> On Thu, Nov 03, 2016 at 08:20:53AM -0700, akuster808 wrote:
+> > 
+> > 
+> > On 10/27/2016 10:02 AM, Denys Dmytriyenko wrote:
+> > > From: Ian Ray <ian.ray@ge.com>
+> > > 
+> > > Move variable expansion of @SBINDIR@, @LOCALSTATEDIR@, and @BASEBINDIR@
+> > > earlier during install, to before the systemd service file is installed
+> > > by an automake rule.
+> > > 
+> > > Signed-off-by: Ian Ray <ian.ray@ge.com>
+> > > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> > 
+> > merged to staging.
+> 
+> Armin,
+> 
+> Any updates on this? Also, I don't see it in krogoth-next - what staging you 
+> are referring to?
 
-diff --git a/meta-python/recipes-devtools/python/python-requests.inc b/meta-python/recipes-devtools/python/python-requests.inc
-index 287078a..9f851e4 100644
---- a/meta-python/recipes-devtools/python/python-requests.inc
-+++ b/meta-python/recipes-devtools/python/python-requests.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://python-requests.org"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d9bb3515869c0f426cb8441c899ae7f5"
- 
--SRC_URI[md5sum] = "ad5f9c47b5c5dfdb28363ad7546b0763"
--SRC_URI[sha256sum] = "5acf980358283faba0b897c73959cecf8b841205bb4b2ad3ef545f46eae1a133"
-+SRC_URI[md5sum] = "d0d3e5fb81c6b4d87c08ed5cad677337"
-+SRC_URI[sha256sum] = "57b6c314a2c5f014dce634a0e1eeeb1707741b2e30bc7fee9c5b01fa216d57a3"
- 
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-email \
-diff --git a/meta-python/recipes-devtools/python/python-requests_2.11.1.bb b/meta-python/recipes-devtools/python/python-requests_2.12.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-requests_2.11.1.bb
-rename to meta-python/recipes-devtools/python/python-requests_2.12.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-requests_2.11.1.bb b/meta-python/recipes-devtools/python/python3-requests_2.12.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-requests_2.11.1.bb
-rename to meta-python/recipes-devtools/python/python3-requests_2.12.0.bb
--- 
-2.7.4
+Ping again, this time copy Armin directly.
 
+
+> > >  meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 9 ++++++---
+> > >  1 file changed, 6 insertions(+), 3 deletions(-)
+> > > 
+> > > diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> > > index 4e0f697..898e9c2 100644
+> > > --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> > > +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> > > @@ -60,6 +60,12 @@ do_configure_prepend() {
+> > >      eval "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
+> > >  }
+> > >  
+> > > +do_install_prepend() {
+> > > +    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
+> > > +    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
+> > > +    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
+> > > +}
+> > > +
+> > >  do_install_append() {
+> > >      install -d ${D}/${sysconfdir}/${BPN}
+> > >      install ${WORKDIR}/syslog-ng.conf ${D}${sysconfdir}/${BPN}/${BPN}.conf
+> > > @@ -70,9 +76,6 @@ do_install_append() {
+> > >      install -d ${D}/${localstatedir}/lib/${BPN}
+> > >      # Remove /var/run as it is created on startup
+> > >      rm -rf ${D}${localstatedir}/run
+> > > -    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
+> > > -    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
+> > > -    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
+> > >  }
+> > >  
+> > >  FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
+> > > 
+> > -- 
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
