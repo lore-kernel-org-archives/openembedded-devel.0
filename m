@@ -1,36 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 0945A605FE
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B3F7719B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2016 02:58:20 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id n6so13108512qtd.0
+	Thu, 17 Nov 2016 02:59:21 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id h201so24191820qke.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Nov 2016 18:58:22 -0800 (PST)
+	Wed, 16 Nov 2016 18:59:23 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=RncF/IyZ8cUdimFfJQFtaG7RSyyyy5JIx3Xpi8BRu80=;
-	b=gp3FbesiohVjzvLALX5f+97vVo13Um3+NX00w36hufUGcfvJd6zQLhsyPSegX37gdc
-	VcU3Wj8K3vCWFUud5/5V/MwKb5Llv9l9acmsgONRvSQtEUH1Z2cNHRa8PLKcLxs29N6n
-	bs6T1ft5ZDPNjoX0nNe7xpRGvflkU7MxES6DtDJa3xkADk7NUoHDIglH5vibBRXELkBl
-	IeyDkNLfMIQ1FDcbQjVmi80FHmt/PAykmSwzXVVqlA+G9XkrUE/C2XARfpbgulC/Lb9m
-	5yj61sLXg2uWKyt597Rk/9uRz7Lrx0vAF7cxCMVEW7ihznNvx6HhkeJV2Gm5EmvPFB8G
-	Dgbg==
-X-Gm-Message-State: AKaTC00CjUO/tda3HR0C+qpAgEb791NGF76v5NSughGZ5H6clBQn/uvcwzcs/ESDBDyVTw==
-X-Received: by 10.237.32.70 with SMTP id 64mr440120qta.163.1479351502055;
-	Wed, 16 Nov 2016 18:58:22 -0800 (PST)
+	bh=tAY/cqn4MHLB4ks5IrJmP+63mLEMQGY802iorGd7Pno=;
+	b=Z6HQmAZ8oxQZpxJOsjBHKQKUHa/acVuwH7sOBkpHTmCAzx/lkOYX3HGtDQjN4NmWl5
+	sqPLBngFakoq5exYVODzLmsbHUv7YR8L/MTBQw7x3EqlqZ771Oq+icJxB5+De7N2iSoE
+	6shR5i8v+5j32qEtJyxycwUl+gk58hjBrvxaVXLsuhgYqG2lEhQEEqcrFGLEsqpjdydg
+	gIBAEiMy5Vygjw2e6ReUZEwvITfD7fqxKKqFojsYo9JY1Q2b7e1PDfdtWgI+uLedDzuA
+	ojV13namGKl6Y7y3AEmAE6CbVA98KLOgu1LjTn70neMcSvFOVL77rQ6rKqHabz98tJ0d
+	LFpQ==
+X-Gm-Message-State: AKaTC00AY9MWwjwd78F7ivHpXOlOfeR+FDslE8YaaE7JJFpkLowlzHl7GxNfeBC3xTMY8A==
+X-Received: by 10.55.73.75 with SMTP id w72mr804018qka.321.1479351562646;
+	Wed, 16 Nov 2016 18:59:22 -0800 (PST)
 Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
 	[69.124.217.3])
-	by smtp.gmail.com with ESMTPSA id i19sm479919qte.8.2016.11.16.18.58.21
+	by smtp.gmail.com with ESMTPSA id u13sm452845qtc.37.2016.11.16.18.59.22
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 16 Nov 2016 18:58:21 -0800 (PST)
+	Wed, 16 Nov 2016 18:59:22 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Nov 2016 21:58:09 -0500
-Message-Id: <1479351489-31658-1-git-send-email-derek@asterius.io>
+Date: Wed, 16 Nov 2016 21:59:14 -0500
+Message-Id: <1479351554-31739-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-urllib3: update to version 1.19
+Subject: [meta-python][PATCH] python-setuptools-scm: update to version 1.15.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,40 +43,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Nov 2016 02:58:21 -0000
+X-List-Received-Date: Thu, 17 Nov 2016 02:59:21 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-urllib3.inc                | 4 ++--
- .../python/{python-urllib3_1.18.bb => python-urllib3_1.19.bb}         | 0
- .../python/{python3-urllib3_1.18.bb => python3-urllib3_1.19.bb}       | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-urllib3_1.18.bb => python-urllib3_1.19.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-urllib3_1.18.bb => python3-urllib3_1.19.bb} (100%)
+ .../python/python-setuptools-scm_1.11.1.bb             | 18 ------------------
+ .../python/python-setuptools-scm_1.15.0.bb             | 13 +++++++++++++
+ 2 files changed, 13 insertions(+), 18 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-setuptools-scm_1.11.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-setuptools-scm_1.15.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-urllib3.inc b/meta-python/recipes-devtools/python/python-urllib3.inc
-index 938eb5e..70035af 100644
---- a/meta-python/recipes-devtools/python/python-urllib3.inc
-+++ b/meta-python/recipes-devtools/python/python-urllib3.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ea114851ad9a8c311aac8728a681a067"
- 
--SRC_URI[md5sum] = "1eadd93bd5e58d3528d977111f2997ea"
--SRC_URI[sha256sum] = "d30dd4d1cbbc36ebab6e4a2076820cfe0c60f10adf087fecbc5a3edae79fdc81"
-+SRC_URI[md5sum] = "4aa7c6c310cd938683e9b1831e110bac"
-+SRC_URI[sha256sum] = "87f362d061184191d07ced0b947d8526f3e1884f21b0fe97fab313dedcb895be"
- 
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-certifi \
-diff --git a/meta-python/recipes-devtools/python/python-urllib3_1.18.bb b/meta-python/recipes-devtools/python/python-urllib3_1.19.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-urllib3_1.18.bb
-rename to meta-python/recipes-devtools/python/python-urllib3_1.19.bb
-diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.18.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.19.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-urllib3_1.18.bb
-rename to meta-python/recipes-devtools/python/python3-urllib3_1.19.bb
+diff --git a/meta-python/recipes-devtools/python/python-setuptools-scm_1.11.1.bb b/meta-python/recipes-devtools/python/python-setuptools-scm_1.11.1.bb
+deleted file mode 100644
+index 2a3b97d..0000000
+--- a/meta-python/recipes-devtools/python/python-setuptools-scm_1.11.1.bb
++++ /dev/null
+@@ -1,18 +0,0 @@
+-SUMMARY = "the blessed package to manage your versions by scm tags"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=838c366f69b72c5df05c96dff79b35f2"
+-
+-inherit pypi setuptools
+-
+-SRCNAME = "setuptools_scm"
+-
+-SRC_URI = "https://pypi.python.org/packages/84/aa/c693b5d41da513fed3f0ee27f1bf02a303caa75bbdfa5c8cc233a1d778c4/${SRCNAME}-${PV}.tar.gz"
+-
+-SRC_URI[md5sum] = "4d19b2bc9580016d991f665ac20e2e8f"
+-SRC_URI[sha256sum] = "8c45f738a23410c5276b0ed9294af607f491e4260589f1eb90df8312e23819bf"
+-
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
+-
+-RDEPENDS_${PN} = "python-py python-setuptools python-argparse python-debugger python-json"
+-
+-
+diff --git a/meta-python/recipes-devtools/python/python-setuptools-scm_1.15.0.bb b/meta-python/recipes-devtools/python/python-setuptools-scm_1.15.0.bb
+new file mode 100644
+index 0000000..45204c9
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-setuptools-scm_1.15.0.bb
+@@ -0,0 +1,13 @@
++SUMMARY = "the blessed package to manage your versions by scm tags"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=838c366f69b72c5df05c96dff79b35f2"
++
++SRC_URI[md5sum] = "b6916c78ed6253d6602444fad4279c5b"
++SRC_URI[sha256sum] = "daf12d05aa2155a46aa357453757ffdc47d87f839e62114f042bceac6a619e2f"
++
++PYPI_PACKAGE = "setuptools_scm"
++inherit pypi setuptools
++
++RDEPENDS_${PN} = "python-py python-setuptools python-argparse python-debugger python-json"
++
++
 -- 
 2.7.4
 
