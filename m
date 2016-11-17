@@ -1,34 +1,24 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 94CD671A23
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 5EA6971987
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2016 03:58:59 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 270B32098D;
-	Thu, 17 Nov 2016 03:59:01 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id VbZprMtnAAtH; Thu, 17 Nov 2016 03:59:01 +0000 (UTC)
-Received: from gandalf.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
-	[100.15.95.79])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0194620567;
-	Thu, 17 Nov 2016 03:58:59 +0000 (UTC)
-Received: by gandalf.denix.org (Postfix, from userid 1000)
-	id 5F28D1621A4; Wed, 16 Nov 2016 22:58:59 -0500 (EST)
-Date: Wed, 16 Nov 2016 22:58:59 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161117035859.GB26131@denix.org>
-References: <1477587755-24666-1-git-send-email-denis@denix.org>
-	<271f87f6-ac90-2389-3499-9c3bb8d80fa6@gmail.com>
-	<20161114190940.GB22657@denix.org>
+	Thu, 17 Nov 2016 05:45:08 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uAH5j9jQ028424
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Nov 2016 21:45:09 -0800 (PST)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Wed, 16 Nov 2016 21:45:08 -0800
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 17 Nov 2016 13:37:35 +0800
+Message-ID: <20161117053737.309-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.10.1
 MIME-Version: 1.0
-In-Reply-To: <20161114190940.GB22657@denix.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [meta-oe][krogoth][PATCH] syslog-ng: expand service file @variables@ earlier
+Subject: [meta-networking][PATCH 1/3] samba: Fix qa issue and update ctdb-tests
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,73 +31,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Nov 2016 03:59:01 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 17 Nov 2016 05:45:10 -0000
+Content-Type: text/plain
 
-On Mon, Nov 14, 2016 at 02:09:40PM -0500, Denys Dmytriyenko wrote:
-> On Thu, Nov 03, 2016 at 08:20:53AM -0700, akuster808 wrote:
-> > 
-> > 
-> > On 10/27/2016 10:02 AM, Denys Dmytriyenko wrote:
-> > > From: Ian Ray <ian.ray@ge.com>
-> > > 
-> > > Move variable expansion of @SBINDIR@, @LOCALSTATEDIR@, and @BASEBINDIR@
-> > > earlier during install, to before the systemd service file is installed
-> > > by an automake rule.
-> > > 
-> > > Signed-off-by: Ian Ray <ian.ray@ge.com>
-> > > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > 
-> > merged to staging.
-> 
-> Armin,
-> 
-> Any updates on this? Also, I don't see it in krogoth-next - what staging you 
-> are referring to?
+From: Kai Kang <kai.kang@windriver.com>
 
-Ping again, this time copy Armin directly.
+Fix file-rdeps QA warning by replace shell interpreter of script
+${bindir}/onnode with /bin/sh that it doesn't has any bashism.
 
+File ${bindir}/ctdb_run_cluster_tests which is a link to
+${bindir}/ctdb_run_tests is split into package samba. That causes wrong
+runtime dependency that samba depends on samba-ctdb-tests. Split the
+file to samba-ctdb-tests to fix the issue.
 
-> > >  meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 9 ++++++---
-> > >  1 file changed, 6 insertions(+), 3 deletions(-)
-> > > 
-> > > diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> > > index 4e0f697..898e9c2 100644
-> > > --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> > > +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> > > @@ -60,6 +60,12 @@ do_configure_prepend() {
-> > >      eval "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
-> > >  }
-> > >  
-> > > +do_install_prepend() {
-> > > +    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
-> > > +    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
-> > > +    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
-> > > +}
-> > > +
-> > >  do_install_append() {
-> > >      install -d ${D}/${sysconfdir}/${BPN}
-> > >      install ${WORKDIR}/syslog-ng.conf ${D}${sysconfdir}/${BPN}/${BPN}.conf
-> > > @@ -70,9 +76,6 @@ do_install_append() {
-> > >      install -d ${D}/${localstatedir}/lib/${BPN}
-> > >      # Remove /var/run as it is created on startup
-> > >      rm -rf ${D}${localstatedir}/run
-> > > -    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
-> > > -    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
-> > > -    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
-> > >  }
-> > >  
-> > >  FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
-> > > 
-> > -- 
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Script ctdb_run_tests calls command 'getopt', so add runtime dependency
+util-linux-getopt. Install config file and test cases for
+samba-ctdt-tests at same time.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ .../recipes-connectivity/samba/samba_4.4.5.bb           | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
+
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+index e9694d4..fe63701 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+@@ -43,7 +43,7 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${SYSVIN
+ "
+ 
+ RDEPENDS_${PN}-base += "${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'lsb', '', d)}"
+-RDEPENDS_${PN}-ctdb-tests += "bash"
++RDEPENDS_${PN}-ctdb-tests += "bash util-linux-getopt"
+ 
+ PACKAGECONFIG[acl] = "--with-acl-support,--without-acl-support,acl"
+ PACKAGECONFIG[fam] = "--with-fam,--without-fam,gamin"
+@@ -122,6 +122,19 @@ do_install_append() {
+     install -d ${D}${sysconfdir}/sysconfig/
+     install -m644 packaging/systemd/samba.sysconfig ${D}${sysconfdir}/sysconfig/samba
+ 
++    # install ctdb config file and test cases
++    install -D -m 0644 ${S}/ctdb/tests/onnode/nodes ${D}${sysconfdir}/ctdb/nodes
++    # the items are from ctdb/tests/run_tests.sh
++    for d in onnode takeover tool eventscripts cunit simple complex; do
++        testdir=${D}${datadir}/ctdb-tests/$d
++        install -d $testdir
++        cp ${S}/ctdb/tests/$d/*.sh $testdir
++        cp -r ${S}/ctdb/tests/$d/scripts ${S}/ctdb/tests/$d/stubs $testdir || true
++    done
++
++    # fix file-rdeps qa warning
++    sed -i 's:\(#!/bin/\)bash:\1sh:' ${D}${bindir}/onnode
++
+     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
+ }
+ 
+@@ -140,6 +153,8 @@ FILES_${PN}-base = "${sbindir}/nmbd \
+ "
+ 
+ FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
++                          ${bindir}/ctdb_run_cluster_tests \
++                          ${sysconfdir}/ctdb/nodes \
+                           ${libdir}/ctdb-tests \
+                           ${datadir}/ctdb-tests \
+                           /run/ctdb \
+-- 
+2.10.1
+
 
