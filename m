@@ -1,30 +1,49 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from smtp685.redcondor.net (smtp685.redcondor.net [208.80.206.85])
-	by mail.openembedded.org (Postfix) with ESMTP id 1DD977199C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
+	[209.85.217.196])
+	by mail.openembedded.org (Postfix) with ESMTP id C4EC2719E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2016 16:25:22 +0000 (UTC)
-Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by smtp685.redcondor.net ({20c8e40f-6b6c-4c9e-abff-1640ea7bf404})
-	via TCP (outbound) with ESMTPS id 20161117162521882_0685
+	Thu, 17 Nov 2016 17:10:40 +0000 (UTC)
+Received: by mail-ua0-f196.google.com with SMTP id 12so15019134uas.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2016 08:25:21 -0800
-X-RC-FROM: <rpjday@crashcourse.ca>
-X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
-Received: from [174.118.92.171] (port=34414 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1c7PUx-0002wZ-8R for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Nov 2016 11:25:15 -0500
-Date: Thu, 17 Nov 2016 11:24:08 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost.localdomain
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.20.1611171121160.9215@localhost.localdomain>
-User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
+	Thu, 17 Nov 2016 09:10:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=oz1syTuxZiFYxpEU70zOYGWV3bpGEXsnGJPCCTBS6I4=;
+	b=G/PHvAdT+nr7aGw1vU8MFBLefBwWJ4G1ybGWiSqCQhijnxQZegBUU0SlQUf4WxnyAv
+	fTdMTnELiNn0rNVF6Y538Sq6guGiCLCuR3tNcDlE5MIslqG9a0holKWcOuXtYuNRasvm
+	RNCm8Rb3za8MHzZ4zD2veRGfYig2DOVIXT33IhvPHzHWU34ZXYh3bfgcBxjFhK3S5owD
+	t8mFCKrGZWkZssc+oPs4vTv4zQSzgGHXt9c+P0Fmeqw6j6R3YOKr85iTnbPYWNkTljno
+	TAZZuecKt2RG21cCXiZwed4ysAhCBQj62jjwAAuaE6Hg8VlJo1EXbo9bjby5A4C84S0T
+	RkoA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=oz1syTuxZiFYxpEU70zOYGWV3bpGEXsnGJPCCTBS6I4=;
+	b=hy8ckK9beF/mF+RlILqbOfwodfXK09Z4zerYbQX3RZIjytEne5eGI4I8AFVwMVjMa9
+	zmtaGM/NlnMpZ2y4hTCZWid3iXDFFEk8RbKc29Cni6a9R3MKyncEnqBHXzzETQmY7zt/
+	hpyG9Ou9OlCCL1DgUSBpwj0okTx0YH79lTUs7hFJ/DiRIO3ZDEFTk0FvzrdWwCjk5Moa
+	XSshv3oXqCGpGkpfeTqrd7Wpuyz3Ky8Bcp1mzoflM7JfaFQAdqLILrCGE3zbt4YSaV3o
+	cpAdxc9o++PtDdLjA5EwGLLV31UYrbBrDi4b+GUvcQCDh0kVzFkGXm9ysAxLnhLAxv8X
+	jzhA==
+X-Gm-Message-State: ABUngvfVextJ7yPEKy9mwxqFsoCL0xoBuBDPgAwpTUFDtOmIIXcOJR1PfEFy7t8Y25HcafJqbJYDbkr8XY1xyg==
+X-Received: by 10.176.0.180 with SMTP id 49mr2588324uaj.32.1479402641979; Thu,
+	17 Nov 2016 09:10:41 -0800 (PST)
 MIME-Version: 1.0
-X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
-Subject: "libtest-harness-perl_3.36.bb" ... "libtap-parsser-result-bailout-perl:
+Received: by 10.176.5.136 with HTTP; Thu, 17 Nov 2016 09:10:11 -0800 (PST)
+In-Reply-To: <1479383974.27546.3.camel@andred.net>
+References: <20161115154311.30118-3-git@andred.net>
+	<20161116090234.30806-1-git@andred.net>
+	<109be6fe-8d0c-619b-fb4a-4f836982e064@gmail.com>
+	<1479383974.27546.3.camel@andred.net>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 17 Nov 2016 09:10:11 -0800
+Message-ID: <CAMKF1sqxxyjaYL2EJXD_KzGGMYuB5ohWvye9ba-YrJ6e0pU1Gg@mail.gmail.com>
+To: =?UTF-8?Q?Andr=C3=A9_Draszik?= <git@andred.net>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH 2/2 v2] ncp: add v1.2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,29 +56,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Nov 2016 16:25:23 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Thu, 17 Nov 2016 17:10:42 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
+On Thu, Nov 17, 2016 at 3:59 AM, Andr=C3=A9 Draszik <git@andred.net> wrote:
+> On Wed, 2016-11-16 at 09:28 -0800, Khem Raj wrote:
+>>
+>> On 11/16/16 1:02 AM, Andr=C3=A9 Draszik wrote:
+>> > Signed-off-by: Andr=C3=A9 Draszik <git@andred.net>
+>> > ---
+>> >  meta-networking/recipes-support/ncp/ncp_1.2.4.bb | 32
+>> > ++++++++++++++++++++++++
+>> >  1 file changed, 32 insertions(+)
+>> >  create mode 100644 meta-networking/recipes-support/ncp/ncp_1.2.4.bb
+>> >
+>> > diff --git a/meta-networking/recipes-support/ncp/ncp_1.2.4.bb b/meta-
+>> > networking/recipes-support/ncp/ncp_1.2.4.bb
+>> > new file mode 100644
+>> > index 0000000..7bbaaad
+>> > --- /dev/null
+>> > +++ b/meta-networking/recipes-support/ncp/ncp_1.2.4.bb
+>> > @@ -0,0 +1,32 @@
+>> > +SUMMARY =3D "a fast file copy tool for LANs"
+>> > +DESCRIPTION =3D "ncp is a utility for copying files in a LAN. It has
+>> > absolutely no \
+>> > +security or integrity checking, no throttling, no features, except \
+>> > +one: you don't have to type the coordinates of your peer."
+>> > +HOMEPAGE =3D "http://www.fefe.de/ncp"
+>> > +LICENSE =3D "GPLv2"
+>> > +LIC_FILES_CHKSUM =3D "file://${COREBASE}/meta/files/common-licenses/G=
+PL-
+>> > 2.0;md5=3D801f80980d171dd6425610833a22dbe6"
+>> > +DEPENDS =3D "libowfat"
+>> > +
+>> > +SRC_URI =3D "https://dl.fefe.de/${BP}.tar.bz2"
+>> > +SRC_URI[md5sum] =3D "421c4855bd3148b7d0a4342942b4bf13"
+>> > +SRC_URI[sha256sum] =3D
+>> > "6cfa72edd5f7717bf7a4a93ccc74c4abd89892360e2e0bb095a73c24b9359b88"
+>> > +
+>> > +EXTRA_OEMAKE =3D "\
+>> > +    DIET=3D \
+>> > +    DEBUG=3Dnostrip \
+>> > +    CC=3D'${CC}' CFLAGS=3D'${CFLAGS} -I${STAGING_INCDIR}/libowfat'
+>> > LDFLAGS=3D'${LDFLAGS}' \
+>> > +"
+>>
+>> Is setting CC etc. on make cmdline really needed ?
+>
+> Yes, the Makefile sets CC CFLAGS LDFLAGS excplicitly, so make doesn't
+> inherit them from the environment variables, because OE doesn't pass the =
+-e
+> make flag anymore. https://www.gnu.org/software/make/manual/html_node/Env=
+iro
+> nment.html#Environment
+>
+>> may be just adding the -I flags to CPPFLAGS is enough ?
+>
+> It doesn't respect CPPFLAGS, but an alternative would be:
+>
+> EXTRA_OEMAKE =3D "\
+>     DIET=3D \
+>     DEBUG=3Dnostrip \
+>     -e \
+> "
+> CFLAGS_append =3D " -I${STAGING_INCDIR}/libowfat"
 
-  in meta-perl/recipes-perl/libtest/libtest-harness-perl_3.36.bb, can
-i assume this line is a typo?
+Thats seems better.
 
-    ...
-    libtap-parsser-result-bailout-perl \
-           ^^^^^^^ ?
+>
+> I have no preference either way, but my original version makes it more
+> obvious what we're after.
+>
+>
+>> > +
+>> > +do_install() {
+>> > +    install -d -m0755 ${D}${bindir}
+>>
+>> not needed if you can just do
+>>
+>> install -D -m 0755 ncp ${D}${bindir}/ncp
+>>
+>> and avoid two calls to install ( one for dir and another for file )
+>>
+>> > +    install -d -m0755 ${D}${mandir}/man1
+>> > +
+>> > +    install -m0755 ncp ${D}${bindir}
+>>
+>>
+>> > +    ln -sf ncp ${D}${bindir}/npoll
+>> > +    ln -sf ncp ${D}${bindir}/npush
+>> > +
+>> > +    install -m0644 ncp.1 npush.1 ${D}${mandir}/man1
+>>
+>> same here not needed.
+>
+> Using -D that'd still need two calls, as multiple files are being copied =
+and
+> -D only allows you to specify one destination (I think). Not really gaini=
+ng
+> anything here. In addition, you have to specify the source filename multi=
+ple
+> times (in src and destination).
+> This:
+>     install -d -m0755 ${D}${mandir}/man1
+>     install -m0644 ncp.1 npush.1 ${D}${mandir}/man1
+> vs.
+>     install -D -m0644 ncp.1 ${D}${mandir}/man1/ncp.1
+>     install -D -m0644 npush.1 ${D}${mandir}/man1/npush.1
 
-if so, will submit patch.
+but 4 install calls will be reduced to two.
 
-rday
-
--- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
-
+>
+>
+> Cheers,
+> Andre'
+>
 
