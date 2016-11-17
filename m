@@ -1,24 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5EA6971987
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6EE5271A95
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2016 05:45:08 +0000 (UTC)
+	Thu, 17 Nov 2016 05:45:09 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uAH5j9jQ028424
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id uAH5jAN1021280
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Nov 2016 21:45:09 -0800 (PST)
+	Wed, 16 Nov 2016 21:45:11 -0800
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Wed, 16 Nov 2016 21:45:08 -0800
+	14.3.294.0; Wed, 16 Nov 2016 21:45:10 -0800
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Nov 2016 13:37:35 +0800
-Message-ID: <20161117053737.309-1-kai.kang@windriver.com>
+Date: Thu, 17 Nov 2016 13:37:36 +0800
+Message-ID: <20161117053737.309-2-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.10.1
+In-Reply-To: <20161117053737.309-1-kai.kang@windriver.com>
+References: <20161117053737.309-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/3] samba: Fix qa issue and update ctdb-tests
+Subject: [meta-networking][PATCH 2/3] samba: correct sub-package name for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,65 +38,36 @@ Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-Fix file-rdeps QA warning by replace shell interpreter of script
-${bindir}/onnode with /bin/sh that it doesn't has any bashism.
-
-File ${bindir}/ctdb_run_cluster_tests which is a link to
-${bindir}/ctdb_run_tests is split into package samba. That causes wrong
-runtime dependency that samba depends on samba-ctdb-tests. Split the
-file to samba-ctdb-tests to fix the issue.
-
-Script ctdb_run_tests calls command 'getopt', so add runtime dependency
-util-linux-getopt. Install config file and test cases for
-samba-ctdt-tests at same time.
+The name of sub-package lib${PN}-base is not right when extended by
+multilib. Correct it by replace ${PN} with ${BPN}.
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../recipes-connectivity/samba/samba_4.4.5.bb           | 17 ++++++++++++++++-
- 1 file changed, 16 insertions(+), 1 deletion(-)
+ meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-index e9694d4..fe63701 100644
+index fe63701..98058f4 100644
 --- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
 +++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-@@ -43,7 +43,7 @@ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${SYSVIN
- "
+@@ -140,7 +140,7 @@ do_install_append() {
  
- RDEPENDS_${PN}-base += "${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'lsb', '', d)}"
--RDEPENDS_${PN}-ctdb-tests += "bash"
-+RDEPENDS_${PN}-ctdb-tests += "bash util-linux-getopt"
+ PACKAGES =+ "${PN}-python ${PN}-python-dbg ${PN}-pidl libwinbind libwinbind-dbg libwinbind-krb5-locator"
+ PACKAGES =+ "libwbclient libnss-winbind winbind winbind-dbg libnetapi libsmbsharemodes \
+-             libsmbclient libsmbclient-dev lib${PN}-base ${PN}-base ${PN}-ctdb-tests"
++             libsmbclient libsmbclient-dev lib${BPN}-base ${PN}-base ${PN}-ctdb-tests"
  
- PACKAGECONFIG[acl] = "--with-acl-support,--without-acl-support,acl"
- PACKAGECONFIG[fam] = "--with-fam,--without-fam,gamin"
-@@ -122,6 +122,19 @@ do_install_append() {
-     install -d ${D}${sysconfdir}/sysconfig/
-     install -m644 packaging/systemd/samba.sysconfig ${D}${sysconfdir}/sysconfig/samba
+ RDEPENDS_${PN} += "${PN}-base"
  
-+    # install ctdb config file and test cases
-+    install -D -m 0644 ${S}/ctdb/tests/onnode/nodes ${D}${sysconfdir}/ctdb/nodes
-+    # the items are from ctdb/tests/run_tests.sh
-+    for d in onnode takeover tool eventscripts cunit simple complex; do
-+        testdir=${D}${datadir}/ctdb-tests/$d
-+        install -d $testdir
-+        cp ${S}/ctdb/tests/$d/*.sh $testdir
-+        cp -r ${S}/ctdb/tests/$d/scripts ${S}/ctdb/tests/$d/stubs $testdir || true
-+    done
-+
-+    # fix file-rdeps qa warning
-+    sed -i 's:\(#!/bin/\)bash:\1sh:' ${D}${bindir}/onnode
-+
-     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
- }
+@@ -178,7 +178,7 @@ FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
+ #     echo $l
+ # done
  
-@@ -140,6 +153,8 @@ FILES_${PN}-base = "${sbindir}/nmbd \
- "
- 
- FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
-+                          ${bindir}/ctdb_run_cluster_tests \
-+                          ${sysconfdir}/ctdb/nodes \
-                           ${libdir}/ctdb-tests \
-                           ${datadir}/ctdb-tests \
-                           /run/ctdb \
+-FILES_lib${PN}-base = "\
++FILES_lib${BPN}-base = "\
+                     ${sysconfdir}/default \
+                     ${sysconfdir}/samba \
+                     ${libdir}/libdcerpc-binding.so.* \
 -- 
 2.10.1
 
