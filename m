@@ -1,54 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-it0-f66.google.com (mail-it0-f66.google.com
 	[209.85.214.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A69965CC7
+	by mail.openembedded.org (Postfix) with ESMTP id 3EC56719DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2016 18:09:09 +0000 (UTC)
-Received: by mail-it0-f66.google.com with SMTP id o1so16876172ito.1
+	Thu, 17 Nov 2016 18:13:08 +0000 (UTC)
+Received: by mail-it0-f66.google.com with SMTP id b123so16916940itb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2016 10:09:11 -0800 (PST)
+	Thu, 17 Nov 2016 10:13:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:cc:from:organization:message-id:date
-	:user-agent:mime-version:in-reply-to;
-	bh=shJR1Pm1oCLmoTQSnJJp6hYPBJSs33t79HAHzuBOswU=;
-	b=lhEGE0AjVj2LRH+aPI62V2IBKzWA6rPXqZSInKVE93+4L2nkWSkdCzMeSEJ2kF+E9V
-	sneUMyrHoU4blwUgldhqlhYNOsdlV59S1ScS9ya3/2SbPoPSKiTv39Q0UmyQkDg1QW8r
-	MErEHQhZfW1bmedbwlbQJMiQbeQ10wSFG4D4h8/Nnv13ko9KjXzHTPycMIfcyoj/1wqY
-	PAkptEk1IyeXBwPNqem9cQEC8olPwLq+KhtUqtZdR03iknscq/FCpdwH8LY5h2ksptXV
-	odqVC99FB/QxN0yyLysllpPjpvrT0k/oHVWx4viOIDsW07opUerkzYSWQ5nMvpp9WmgR
-	HcUQ==
+	h=subject:to:references:from:organization:message-id:date:user-agent
+	:mime-version:in-reply-to;
+	bh=knH5hIlMnx9ozavvY+hJh7N8PCsH4EDU7jTMPsXWlLo=;
+	b=beXKIdd3wBMUx6RlY7tlvAXWb22QNetJAdHggsiMayGv9ibHdCepOoF/M656X5RQv5
+	Xnb1QGMV7pmhdnk0Ar/kfbUAhnuFgxJZtKDjSg+PiLMGp7aD9Vbaq2JuCjcN/DFunsAO
+	jlNot4h315JwvcIAvmNmPFdrBVSVDNYNmC+ZzbV3LwCJMboyfTkZOuKi7Z8lcxn3VlXs
+	7UIUg1FJ76Q334ifMRxCH+IZsiZ1iaIPNqZjiFFoEIIj0Td714ZKznV4B35+MFe1kfck
+	NsBBVnleyVmgbzoy4MVU70kVB3KEMVSA6Psk3jCITXNVFN/T8q2HolHh2T1cIh9FSyV4
+	YwWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:cc:from:organization
+	h=x-gm-message-state:subject:to:references:from:organization
 	:message-id:date:user-agent:mime-version:in-reply-to;
-	bh=shJR1Pm1oCLmoTQSnJJp6hYPBJSs33t79HAHzuBOswU=;
-	b=NWRR/JqbqT2Q10JiYzXX3Nz2TjE99X4wOYuZTbaToJF2liXCz+gqyLla2B17Oq39/o
-	85k3uq4PbojkvR26lDVBe/UdR5PpBKc3igGWQcJsA/DOGi8mJnDX9phbZJy9bjSj+x0B
-	MpVclbvSut1K9nkDOBTEcPhPf7SqisqgtvWy4pF9CIBqu9k9mst7Yb0kyMDNmmuZ1rl/
-	WB+0OpHmPBS6e/orP2hIQKNVy2qnrVneaNaa2bfokyUTah5RrcGDYDvlzA6MEy0o8Pvc
-	JJwFmc3TolzJuGCe7StsoinZY9qihukIJiReENNuAcyZsYR277zkIvwYEKf5JlvNnZK4
-	zV6Q==
-X-Gm-Message-State: ABUngvfimHSHzUFP/V7Tyy3shNa92sLE1gR2mcIorWcAlTTbexp0shXfqWpF3lTYMs8ZLA==
-X-Received: by 10.107.57.131 with SMTP id g125mr5137128ioa.108.1479406151503; 
-	Thu, 17 Nov 2016 10:09:11 -0800 (PST)
+	bh=knH5hIlMnx9ozavvY+hJh7N8PCsH4EDU7jTMPsXWlLo=;
+	b=DhLFHjDm1h8roby+eLf1zZggtsSp77NRt4ee3ilQkMuuOFRdAM0xcO8DkdoP4ddPsH
+	8C9L9y0QN+0iSkPaNvFq6v76FxmBRr4+8QtLjwbh8DhtPvDZGiGVxfufD6EB81HYZrDn
+	lr2REprhQw/S7cTLUmhp3hwsdTAdVygLSHwEAgavSEL2H7f3sWupnNT6C7K0gGImnRzD
+	+2flsdmwqikJ7Gb7dvuPOUpyu1D1Tbx0rkx31B0yt+0Who4WMo/fieWQamUpg81ctSt8
+	NLVJgDJcxVbVONkYkNIi7oRCXdG3BerlWIgBEHNWxoDtXf4rIgxUNwyiqW0yXdZ14df8
+	pF1g==
+X-Gm-Message-State: ABUngvfaZxJQS3MhHRlx8axO8YOBUQntp5NAimcaKe/4KfmpiDdMWb/Sm/epuEdJ3GyeNQ==
+X-Received: by 10.36.160.134 with SMTP id o128mr13610481ite.26.1479406390633; 
+	Thu, 17 Nov 2016 10:13:10 -0800 (PST)
 Received: from CACSVMO-14452.local (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	i200sm5434967itb.0.2016.11.17.10.09.10
+	141sm1313138ity.12.2016.11.17.10.13.09
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 17 Nov 2016 10:09:11 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org,
-	=?UTF-8?Q?Jacobo_Aragunde_P=c3=a9rez?= <jaragunde@igalia.com>
-References: <1479404055-12584-1-git-send-email-jaragunde@igalia.com>
+	Thu, 17 Nov 2016 10:13:10 -0800 (PST)
+To: openembedded-devel@lists.openembedded.org, wenzong.fan@windriver.com
+References: <1479351761-70393-1-git-send-email-wenzong.fan@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
 Organization: himvis.com
-Message-ID: <d960264f-ef18-8875-cdfb-29a1b604ec87@gmail.com>
-Date: Thu, 17 Nov 2016 10:09:09 -0800
+Message-ID: <9e50d470-714e-1c5c-83a9-39691b7315f8@gmail.com>
+Date: Thu, 17 Nov 2016 10:11:49 -0800
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:50.0)
 	Gecko/20100101 Thunderbird/50.0
 MIME-Version: 1.0
-In-Reply-To: <1479404055-12584-1-git-send-email-jaragunde@igalia.com>
-Cc: denis@eukrea.com, eric@eukrea.com, otavio@ossystems.com.br
-Subject: Re: [meta-browser][PATCH 1/3] Set CHROMIUM_ENABLE_WAYLAND flag in chromium-wayland recipe
+In-Reply-To: <1479351761-70393-1-git-send-email-wenzong.fan@windriver.com>
+Subject: Re: [meta-oe][PATCH] opencv: remove DEFAULT_PREFERENCE = "-1" for 3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,103 +59,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Nov 2016 18:09:10 -0000
-X-Groupsio-MsgNum: 63865
+X-List-Received-Date: Thu, 17 Nov 2016 18:13:09 -0000
+X-Groupsio-MsgNum: 63866
 Content-Type: multipart/signed; micalg=pgp-sha1;
 	protocol="application/pgp-signature";
-	boundary="MvenT5itK9ft6tI7E5GqWWbResIUS3Np8"
+	boundary="E7PHe1I0clOPeBD9DvgQS6KdEdVtNsSAt"
 
---MvenT5itK9ft6tI7E5GqWWbResIUS3Np8
-Content-Type: multipart/mixed; boundary="NWuWgOvD0M7TXugRF3jk8QBUJ2otwSjN2";
+--E7PHe1I0clOPeBD9DvgQS6KdEdVtNsSAt
+Content-Type: multipart/mixed; boundary="0Muu52Gn6xFoNGmk7UECKMARrlT4JSLxg";
  protected-headers="v1"
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
- =?UTF-8?Q?Jacobo_Aragunde_P=c3=a9rez?= <jaragunde@igalia.com>
-Cc: denis@eukrea.com, otavio@ossystems.com.br, eric@eukrea.com
-Message-ID: <d960264f-ef18-8875-cdfb-29a1b604ec87@gmail.com>
-Subject: Re: [oe] [meta-browser][PATCH 1/3] Set CHROMIUM_ENABLE_WAYLAND flag
- in chromium-wayland recipe
-References: <1479404055-12584-1-git-send-email-jaragunde@igalia.com>
-In-Reply-To: <1479404055-12584-1-git-send-email-jaragunde@igalia.com>
+To: openembedded-devel@lists.openembedded.org, wenzong.fan@windriver.com
+Message-ID: <9e50d470-714e-1c5c-83a9-39691b7315f8@gmail.com>
+Subject: Re: [oe] [meta-oe][PATCH] opencv: remove DEFAULT_PREFERENCE = "-1"
+ for 3.1
+References: <1479351761-70393-1-git-send-email-wenzong.fan@windriver.com>
+In-Reply-To: <1479351761-70393-1-git-send-email-wenzong.fan@windriver.com>
 
---NWuWgOvD0M7TXugRF3jk8QBUJ2otwSjN2
-Content-Type: text/plain; charset=utf-8
+--0Muu52Gn6xFoNGmk7UECKMARrlT4JSLxg
+Content-Type: text/plain; charset=windows-1252
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
 
 
 
-On 11/17/16 9:34 AM, Jacobo Aragunde P=C3=A9rez wrote:
-> It makes no sense to trigger a build of chromium-wayland and not
-> enable CHROMIUM_ENABLE_WAYLAND, so we are doing it directly in the
-> recipe now.
+On 11/16/16 7:02 PM, wenzong.fan@windriver.com wrote:
+> From: Wenzong Fan <wenzong.fan@windriver.com>
 >=20
-> We are allowed to remove some conditionals, now we know the value of
-> the flag beforehand.
+> The opencv 2.4 has been blacklisted, 3.1 should be the default choice
+> for both opencv and lib32-opencv.
+
+blacklisting does not change the norms. Is it possible to fix the reason =
+for
+blacklisting 2.x
+
 >=20
-> Signed-off-by: Jacobo Aragunde P=C3=A9rez <jaragunde@igalia.com>
+> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
 > ---
->  recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb | 11 +++++---=
----
->  1 file changed, 5 insertions(+), 6 deletions(-)
+>  meta-oe/recipes-support/opencv/opencv_3.1.bb | 2 --
+>  1 file changed, 2 deletions(-)
 >=20
-> diff --git a/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb b=
-/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
-> index bbba147..f66e77c 100644
-> --- a/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
-> +++ b/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
-> @@ -1,3 +1,5 @@
-> +CHROMIUM_ENABLE_WAYLAND =3D "1"
-> +
->  include chromium-browser.inc
+> diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/rec=
+ipes-support/opencv/opencv_3.1.bb
+> index 1bbb965..a212f4f 100644
+> --- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
+> +++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+> @@ -8,8 +8,6 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D0ea90d28b4de=
+883d7af5e6711f14f7bf"
+>  ARM_INSTRUCTION_SET_armv4 =3D "arm"
+>  ARM_INSTRUCTION_SET_armv5 =3D "arm"
 > =20
->  DEPENDS +=3D "wayland libxkbcommon"
-> @@ -21,15 +23,12 @@ SRC_URI[sha256sum] =3D "4ca4e2adb340b3fb4d502266ad7=
-d6bda45fa3519906dbf63cce11a63f6
->  OZONE_WAYLAND_GIT_BRANCH =3D "Milestone-SouthSister"
->  OZONE_WAYLAND_GIT_SRCREV =3D "c605505044af3345a276abbd7c29fd53db1dea40=
-"
+> -DEFAULT_PREFERENCE =3D "-1"
+> -
+>  DEPENDS =3D "python-numpy libtool swig swig-native python bzip2 zlib g=
+lib-2.0 libwebp protobuf protobuf-native"
 > =20
-> -SRC_URI +=3D "${@base_conditional('CHROMIUM_ENABLE_WAYLAND', '1', 'git=
-://github.com/01org/ozone-wayland.git;destsuffix=3D${OZONE_WAYLAND_GIT_DE=
-STSUFFIX};branch=3D${OZONE_WAYLAND_GIT_BRANCH};rev=3D${OZONE_WAYLAND_GIT_=
-SRCREV} file://chromium-wayland/0006-Remove-GBM-support-from-wayland.gyp.=
-patch', '', d)}"
-> +SRC_URI +=3D "git://github.com/01org/ozone-wayland.git;destsuffix=3D${=
-OZONE_WAYLAND_GIT_DESTSUFFIX};branch=3D${OZONE_WAYLAND_GIT_BRANCH};rev=3D=
-${OZONE_WAYLAND_GIT_SRCREV} file://chromium-wayland/0006-Remove-GBM-suppo=
-rt-from-wayland.gyp.patch"
-> =20
->  # Component build is unsupported in ozone-wayland for Chromium 48
->  python() {
-> -    if (d.getVar('CHROMIUM_ENABLE_WAYLAND', True) =3D=3D '1'):
-> -        if bb.utils.contains('PACKAGECONFIG', 'component-build', True,=
- False, d):
-> -            bb.fatal("Chromium 48 Wayland version cannot be built in c=
-omponent-mode")
-> -    else:
-> -        raise bb.parse.SkipPackage("CHROMIUM_ENABLE_WAYLAND isn't enab=
-led")
-> +    if bb.utils.contains('PACKAGECONFIG', 'component-build', True, Fal=
-se, d):
-> +        bb.fatal("Chromium 48 Wayland version cannot be built in compo=
-nent-mode")
->  }
-> =20
-
-
-you still need to skip parsing this recipe if user has not enabled waylan=
-d
-
-
->  CHROMIUM_WAYLAND_GYP_DEFINES =3D "use_ash=3D1 use_aura=3D1 chromeos=3D=
-0 use_ozone=3D1 use_xkbcommon=3D1"
+>  SRCREV_opencv =3D "92387b1ef8fad15196dd5f7fb4931444a68bc93a"
 >=20
 
 
---NWuWgOvD0M7TXugRF3jk8QBUJ2otwSjN2--
+--0Muu52Gn6xFoNGmk7UECKMARrlT4JSLxg--
 
---MvenT5itK9ft6tI7E5GqWWbResIUS3Np8
+--E7PHe1I0clOPeBD9DvgQS6KdEdVtNsSAt
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
@@ -165,9 +128,9 @@ Content-Disposition: attachment; filename="signature.asc"
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAlgt8kUACgkQuwUzVZGdMxRdyACdGDTShZ5dah+jHnzOtysyQzAo
-MOoAoIBUR7ZFf6fw6A46JlZ6ebViLflr
-=N40K
+iEYEARECAAYFAlgt8uUACgkQuwUzVZGdMxTZwQCfZlAXz33gFqr2G/hYz5WaXrEq
+mwsAnigP88uzg4Dw/lKAeZheTOcck8N7
+=Wy18
 -----END PGP SIGNATURE-----
 
---MvenT5itK9ft6tI7E5GqWWbResIUS3Np8--
+--E7PHe1I0clOPeBD9DvgQS6KdEdVtNsSAt--
