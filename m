@@ -1,51 +1,40 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 63EEB60797
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id B0D2371ACC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 10:57:41 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id g23so4957640wme.1
+	Fri, 18 Nov 2016 10:59:17 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id g23so4971310wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 02:57:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=qPlP8VLlDyfMdVGaLWuLIO4Qi/ezl9WOYIiU+EmBzmk=;
-	b=eoX0xktu3xQh3j9Qxl0yQYAKFLAKl8DLwAuox+7ch+jtFDE/ILWgCFllyZcyK92B5t
-	iye/MIdISREVKcXzgQt+6Pjq7IHDGzznDAOh+0DdVIj31HhmB50s2dVq0hNgxI7YtEvB
-	TgA6o0vPN5Qdfsi5k6ToNvgibAeQkz6yDcBzRp7zJVl5CUM7WWN/XQ2ItpvqgykV9Ao9
-	xJG5vBxSa0KAmlG4hrv7wl4WR6QspL0YnHz0KzTbuwvy6zy5VL0cf5t3juE/aFRlZjIS
-	c65ElEkqK4z48LQFdG8bwHrXc5+jdiyGLlYbcPx93QqBEiTWFHLokltvwkOWespQ+54l
-	UFWg==
+	Fri, 18 Nov 2016 02:59:19 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=qPlP8VLlDyfMdVGaLWuLIO4Qi/ezl9WOYIiU+EmBzmk=;
-	b=ev9WQuqVdGPX6fyWsuEzhqLPuG18IlrXLfpT7/c/zIv/UM3kaK4BzbGIs3sN4Sctbq
-	wWaTGdnudanFyjfjgKhyjIQ2Kk9EV8Y1vV6fu6cZ+IkmBz4CAiqyLBZvcrt21lgMVUiy
-	DDa8IMDNXPF2MKX1/lKBOKqwafOnocR273faf9VSYpQlE+Le1Rd/UrzMl4a7aPc73q5g
-	EYW6e9Ak1zoc9dv9BHowNTjPezPqHRNpWWcntRB1uLNFtK1o8qpSJclN3m6596XRO/o5
-	a4n33g+Dlq6arB1HfZ+CK32YWFET8Y+S0CdTbYbP6CVL+i8dkOko8y/kKHuAozySnQFW
-	JmIQ==
-X-Gm-Message-State: AKaTC00YwxbXRtleCn4mgYyGUaBuDzyRHARGb98lzEejk9OIkowNX0+kdmE0ViYe9Lnu0Q==
-X-Received: by 10.28.73.135 with SMTP id w129mr9079494wma.42.1479466662558;
-	Fri, 18 Nov 2016 02:57:42 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	bj1sm8218990wjc.17.2016.11.18.02.57.41
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=m08ExRlvN9sXkbp1/AAbpFN3Kb7Pw+rtMu/0CPod7NY=;
+	b=hzIFPHcq1KcPIr9pVnpqb8hdoueWT2S6qKOLf3PSB6v1vv5MwtXNM82i88LR7vMNHM
+	97wsTC5DiNgIY4b6lnvSIBBbd8xECmTI3d/NfATeSzjGw0EpyVqjAByjOlVvGbxpJs7N
+	PwOocfbctdCIkJvEV/2w1DEpgw7Wyw04VwofHy2ZEB8UdT4hPfXLcGOeX/58uvboV/9o
+	3xZ9zythja3IY/Oo1McaQ7Iukm4sk5CUG7SuZTWvAv4OhNL9G6k57bpKsZEun5MxJI6L
+	28XVMixKTmiKY/zbUP/0XtkPU+spbX/tHTiMserFwNJGNsrFHHGJGNjAIrayl8ODDJNO
+	v6ZA==
+X-Gm-Message-State: AKaTC01tXBDq5TlUMMW6d6lEvkE299vvgFZDFWYophrgqXxeaXPJDqJCz/x1c4pPZCx9cA==
+X-Received: by 10.28.18.129 with SMTP id 123mr9210447wms.2.1479466758943;
+	Fri, 18 Nov 2016 02:59:18 -0800 (PST)
+Received: from tfsielt31850 ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	g10sm8201153wjw.18.2016.11.18.02.59.18
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 18 Nov 2016 02:57:41 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 18 Nov 2016 11:57:42 +0100
+	Fri, 18 Nov 2016 02:59:18 -0800 (PST)
+Message-ID: <1479466757.27546.9.camel@andred.net>
+From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161118105742.GA3324@jama>
-References: <20161104101423.20557-1-ruben.de.smet@rubdos.be>
-	<CADNbA1q0Tm6-+caB187piY3bDMHbUHavbK3HL9Z1DivHdFZYbA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CADNbA1q0Tm6-+caB187piY3bDMHbUHavbK3HL9Z1DivHdFZYbA@mail.gmail.com>
-User-Agent: Mutt/1.7.1 (2016-10-04)
-Subject: Re: [meta-python][PATCH v2] python-scales: add recipe for version 1.0.9
+Date: Fri, 18 Nov 2016 10:59:17 +0000
+In-Reply-To: <1479464791-28098-1-git-send-email-koen.kooi@linaro.org>
+References: <1479464791-28098-1-git-send-email-koen.kooi@linaro.org>
+X-Mailer: Evolution 3.22.1-2 
+Mime-Version: 1.0
+Cc: Koen Kooi <koen.kooi@linaro.org>
+Subject: Re: [meta-oe][PATCH] android-tools: fix do_install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,118 +47,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2016 10:57:43 -0000
-X-Groupsio-MsgNum: 63878
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ikeVEW9yuYc//A+q"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 18 Nov 2016 10:59:19 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
---ikeVEW9yuYc//A+q
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, 2016-11-18 at 11:26 +0100, Koen Kooi wrote:
+> The previous patch introduced 2 bugs that made packaging fail:
+> 
+> 1) Always failing grep
+> 2) Conditionally install systemd files
+> 
+> Systemd.bbclass doesn't handle conditional installation and will throw an
+> error.
+> 
+> Tested with -native and regular cross builds.
+> 
+> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
+> ---
+>  .../android-tools/android-tools_5.1.1.r37.bb          | 19 ++++++++++++
+> -------
+>  1 file changed, 12 insertions(+), 7 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-devtools/android-tools/android-
+> tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-
+> tools_5.1.1.r37.bb
+> index 1769b6a..5041465 100644
+> --- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+> +++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+> @@ -108,7 +108,10 @@ do_compile() {
+>  }
+>  
+>  do_install() {
+> -    if [ grep -q "ext4_utils" "${TOOLS}" ] ; then
+> +    export TOOLSFILE="${WORKDIR}/tools.txt"
+> +    echo ${TOOLS} > ${TOOLSFILE}
+> +
+> +    if grep -q "ext4_utils" ${TOOLSFILE} ; then
 
-On Fri, Nov 04, 2016 at 09:45:50AM -0400, Derek Straka wrote:
-> On Fri, Nov 4, 2016 at 6:14 AM, Ruben De Smet <ruben.de.smet@rubdos.be>
-> wrote:
->=20
-> > A python module for tracking server state and statisticst
-> >
-> > Signed-off-by: Ruben De Smet <ruben.de.smet@rubdos.be>
-> > ---
-> >  meta-python/recipes-devtools/python/python-scales.inc   | 17
-> > +++++++++++++++++
-> >  .../recipes-devtools/python/python3-scales_1.0.9.bb     |  2 ++
-> >  2 files changed, 19 insertions(+)
-> >  create mode 100644 meta-python/recipes-devtools/python/python-scales.i=
-nc
-> >  create mode 100644 meta-python/recipes-devtools/python/
-> > python3-scales_1.0.9.bb
-> >
-> > diff --git a/meta-python/recipes-devtools/python/python-scales.inc
-> > b/meta-python/recipes-devtools/python/python-scales.inc
-> > new file mode 100644
-> > index 0000000..4a10a78
-> > --- /dev/null
-> > +++ b/meta-python/recipes-devtools/python/python-scales.inc
-> > @@ -0,0 +1,17 @@
-> > +SUMMARY =3D "Metrics for Python"
-> > +DESCRIPTION =3D "Tracks server state and statistics, allowing you to s=
-ee
-> > what \
-> > +your server is doing. It can also send metrics to Graphite for graphing
-> > or to \
-> > +a file for crash forensics."
-> > +SECTION =3D "devel/python"
-> > +LICENSE =3D "Apache-2.0"
-> > +# LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D3b83ef96387f14655fc854ddc=
-3c6bd
-> > 57"
-> >
-> Is there a reason this is commented out?  You'll need something or it will
-> give a QA Issue about license-checksum
+Why not simply echo instead of doing file i/o:
+if echo ${TOOLS} | grep ....
 
-Yes it does and fails.
 
-ERROR: python3-scales-1.0.9-r0 do_populate_lic: QA Issue: python3-scales: R=
-ecipe file fetches files and does not have license file information (LIC_FI=
-LES_CHKSUM) [license-checksum]
-ERROR: python3-scales-1.0.9-r0 do_populate_lic: Fatal QA errors found, fail=
-ing task.
-ERROR: python3-scales-1.0.9-r0 do_populate_lic: Function failed: populate_l=
-ic_qa_checksum
+>          install -D -p -m0755 ${S}/system/core/libsparse/simg_dump.py
+> ${D}${bindir}/simg_dump
+>          install -D -p -m0755 ${S}/system/extras/ext4_utils/mkuserimg.sh
+> ${D}${bindir}/mkuserimg
 
->=20
-> > +SRCNAME =3D "scales"
-> > +
-> > +SRC_URI[md5sum] =3D "c61167f2b5f506f0a34a7b8a295a9567"
-> > +SRC_URI[sha256sum] =3D "8b6930f7d4bf115192290b44c757af
-> > 5e254e3fcfcb75ff9a51f5c96a404e2753"
-> > +
-> > +inherit pypi
-> > +
-> > +
-> > +RDEPENDS_${PN} +=3D " \
-> > +    ${PYTHON_PN}-six \
-> >
-> Missing a closing quote here
->=20
-> > diff --git a/meta-python/recipes-devtools/python/python3-scales_1.0.9.bb
-> > b/meta-python/recipes-devtools/python/python3-scales_1.0.9.bb
-> > new file mode 100644
-> > index 0000000..91b48c2
-> > --- /dev/null
-> > +++ b/meta-python/recipes-devtools/python/python3-scales_1.0.9.bb
-> > @@ -0,0 +1,2 @@
-> > +inherit setuptools3
-> > +require python-scales.inc
-> > --
-> > 2.10.2
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+BTW, if ext4_utils is not in TOOLS, then none of the following TOOLS will
+install correctly, because ${D}${bindir} is created only in this block here.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>  
+> @@ -120,21 +123,23 @@ do_install() {
+>          install -m0755 ${B}/ext4_utils/simg2simg ${D}${bindir}
+>      fi
+>  
+> -    if [ grep -q "adb " "${TOOLS}" ] ; then
+> +    if grep -q "adb " ${TOOLSFILE} ; then
+>          install -m0755 ${B}/adb/adb ${D}${bindir}i
+                                                    ^
 
---ikeVEW9yuYc//A+q
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+This doesn't look right.
 
------BEGIN PGP SIGNATURE-----
 
-iEYEARECAAYFAlgu3qUACgkQN1Ujt2V2gBxclQCdEN+Qe4OVjcNCLptjImH/bJ9m
-G/0AoKPCwy0x6i9qogP8SmtHLqK3NlEg
-=IACW
------END PGP SIGNATURE-----
+>      fi
+>  
+> -    if [ grep -q "adbd" "${TOOLS}" ] ; then
+> +    if grep -q "adbd" ${TOOLSFILE} ; then
+>          install -m0755 ${B}/adbd/adbd ${D}${bindir}
+> -        install -D -p -m0644 ${WORKDIR}/android-tools-adbd.service \
+> -          ${D}${systemd_unitdir}/system/android-tools-adbd.service
+>      fi
+>  
+> -    if [ grep -q "fastboot" "${TOOLS}" ] ; then
+> +    # Outside the if statement to avoid errors during do_package
+> +    install -D -p -m0644 ${WORKDIR}/android-tools-adbd.service \
+> +      ${D}${systemd_unitdir}/system/android-tools-adbd.service
+> +
+> +    if grep -q "fastboot" ${TOOLSFILE} ; then
+>          install -m0755 ${B}/fastboot/fastboot ${D}${bindir}
+>      fi
+>  
+> -    if [ grep -q "mkbootimg" "${TOOLS}" ] ; then
+> +    if grep -q "mkbootimg" ${TOOLSFILE} ; then
+>           install -m0755 ${B}/mkbootimg/mkbootimg ${D}${bindir}
+>      fi
+>  }
+> -- 
+> 2.4.11
+> 
 
---ikeVEW9yuYc//A+q--
