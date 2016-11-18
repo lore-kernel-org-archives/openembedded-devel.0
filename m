@@ -1,46 +1,46 @@
-Return-Path: <thilo.cestonaro@ts.fujitsu.com>
-X-Greylist: delayed 425 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 18 Nov 2016 13:29:39 UTC
-Received: from mail1.bemta6.messagelabs.com (mail1.bemta6.messagelabs.com
-	[193.109.254.111])
-	by mail.openembedded.org (Postfix) with ESMTP id C15D86B6F7
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id D260A71A8D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 13:29:39 +0000 (UTC)
-Received: from [193.109.254.3] by server-7.bemta-6.messagelabs.com id
-	A4/D9-29519-B900F285; Fri, 18 Nov 2016 13:22:35 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrNLMWRWlGSWpSXmKPExsViZ8MxVXcWg36
-	EwZ7LUhYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa8b2PROYC66pVrw8N5WtgfGnYhcjF4eQwCVG
-	iS3flrJ1MXIAObUS7b0aICabgJnEt/WFXYycHCICuhIfP8xlBAkzC5hIPF3tBxIWFnCU2Nf0k
-	QXEZhFQlbjzYCcziM0r4Cwx4+AyRhBbQkBeYuH5I0wTGDkXMDKsYtQoTi0qSy3SNTTXSyrKTM
-	8oyU3MzNE1NDDTy00tLk5MT81JTCrWS87P3cQI9BQDEOxgvL0x4BCjJAeTkiivd79ehBBfUn5
-	KZUZicUZ8UWlOavEhRhkODiUJXuv/QDnBotT01Iq0zBxgyMCkJTh4lER4VUHSvMUFibnFmekQ
-	qVOMilLivD//ASUEQBIZpXlwbbAwvcQoKyXMywh0iBBPQWpRbmYJqvwrRnEORiVhXl2Q8TyZe
-	SVw018BLWYCWrxHQAdkcUkiQkqqgbG6zmDBt336fiU8Ceu6mycc2SbSwcZ3lC3Ni/PuL/2/N5
-	2lLC50v5hpvWC1kGjvk/XzvP33riwT7Y5X6DHRLf2o/EWzutO39Fmimk5vZflGDw1JpWrl0/8
-	lbE8Y/A15KvXG+XPrwzOZosJFJyZOfKORmeKn/6khQZ3j+DHuFfLmrku25at4KbEUZyQaajEX
-	FScCAHql7o5OAgAA
-X-Env-Sender: thilo.cestonaro@ts.fujitsu.com
-X-Msg-Ref: server-4.tower-184.messagelabs.com!1479475354!79934505!1
-X-Originating-IP: [62.60.8.149]
-X-StarScan-Received: 
-X-StarScan-Version: 9.0.16; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 8636 invoked from network); 18 Nov 2016 13:22:34 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-	by server-4.tower-184.messagelabs.com with DHE-RSA-AES256-GCM-SHA384
-	encrypted SMTP; 18 Nov 2016 13:22:34 -0000
-Received: from abgdgate50u.abg.fsc.net ([172.25.138.66])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id
-	uAIDMnVM030027 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 13:22:54 GMT
-Received: from abg4858n-lnx.abg.fsc.net ([172.26.69.149])
-	by abgdgate50u.abg.fsc.net with ESMTP; 18 Nov 2016 14:22:29 +0100
-From: Thilo Cestonaro <thilo.cestonaro@ts.fujitsu.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Nov 2016 14:18:45 +0100
-Message-Id: <20161118131845.18499-1-thilo.cestonaro@ts.fujitsu.com>
-X-Mailer: git-send-email 2.10.2
-Subject: [meta-oe][PATCH v2] libdbus-c++: added recipe for it
+	Fri, 18 Nov 2016 15:24:39 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id e9so20572431pgc.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Nov 2016 07:24:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:subject:date:message-id;
+	bh=SJPsdJFjFJs4n1qscyzWSrSDlsH8uH6nWBu7HzmOzxo=;
+	b=lPkZKk6Zc+jqYTD4nJMm+8G6xnttfatfCAKYdeFGoaEjoH6m7tKcGVpCdtciiWfCTn
+	rE5q7pq57mHDWhlW1U9moWNFykHo+0G6k+cgMqe1W1VKxTzPM/bd/FaRSzknPwM4HBF1
+	GIUobS/RmdBXYwrFC5XCvzg5CTBboPPfmbVssPLiea0zp1wekhyTYKAuQBCfd0KXwPQv
+	5xHozdljMe4An9IY3HvnHDu6WJE1791von4HDWpxKyu+GhmUUjsX1Dh3uUNZxw4qGQht
+	dikz22fV5kXIa2nlor0bV1hK6gOVRzJwyuikKj6HKLhRmMUiTuAzZgW/TZxsdRIggr3j
+	/VaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=SJPsdJFjFJs4n1qscyzWSrSDlsH8uH6nWBu7HzmOzxo=;
+	b=B4IM4HBrSIivpE1B+u6B1ajazMr+1ocDgBZKCgXRY+qH/Jby7YLD7BS3IZfcDiUiIW
+	Z69hv3BiOOhk2dRaitdiv5iZ1HXsGp2AsmD6hv6Y0d+PzGc0NvbrQAi8CK5dSkQB7Y9H
+	Dx5nr7sBbtzCAY4zaJbNhEce1JVaJQMcVej9xiipN+ESfdBPJ4dGY8KGwAmZV7Y80zq8
+	4LRrPl4jt7p0sqRNwtGScgoWQm/WMWBbkJH4GHKNhRUj3SqZ/z7tJ3QLx1jMG3RtpiEV
+	r+CcxrR1asqNRIFuRteR5vmXOeIfMlB0AseE6vlAVLpXTEyoRk17EsQGcLlnR770ojjH
+	HMKw==
+X-Gm-Message-State: AKaTC01wNJhVurUSXPXlQfYB7/t5QIdwDOG7EdYulqsVvin+I05ossEQiA9J5BTMiPcRag==
+X-Received: by 10.98.9.149 with SMTP id 21mr254032pfj.159.1479482680865;
+	Fri, 18 Nov 2016 07:24:40 -0800 (PST)
+Received: from Pahoa2.hsd1.ca.comcast.net
+	([2601:202:4001:9ea0:e516:3069:2e5f:dd9])
+	by smtp.gmail.com with ESMTPSA id
+	n25sm18890120pfi.33.2016.11.18.07.24.40
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 18 Nov 2016 07:24:40 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster@mvista.com,
+	openembedded-devel@lists.openembedded.org
+Date: Fri, 18 Nov 2016 07:24:34 -0800
+Message-Id: <cover.1479482464.git.akuster808@gmail.com>
+X-Mailer: git-send-email 2.3.5
+Subject: [PATCH 0/3] meta-oe pull request krogoth-next
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,137 +53,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2016 13:29:43 -0000
+X-List-Received-Date: Fri, 18 Nov 2016 15:24:43 -0000
 
-Signed-off-by: Thilo Cestonaro <thilo.cestonaro@ts.fujitsu.com>
----
- .../fix-missing-unistd.h-include.patch             | 40 ++++++++++++++++++++++
- .../remove-CXX_FOR_BUILD-stuff.patch               | 33 ++++++++++++++++++
- meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb     | 24 +++++++++++++
- 3 files changed, 97 insertions(+)
- create mode 100644 meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/fix-missing-unistd.h-include.patch
- create mode 100644 meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/remove-CXX_FOR_BUILD-stuff.patch
- create mode 100644 meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
+Please consider these changes for krogoth
+The following changes since commit 851a064b53dca3b14dd33eaaaca9573b1a36bf0e:
 
- changes v2:
- added Upstream-Status to libdbus-c++ patches.
+  pypi.bbclass: Allow fetching without requiring the hash (2016-10-05 18:38:31 +0200)
 
-diff --git a/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/fix-missing-unistd.h-include.patch b/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/fix-missing-unistd.h-include.patch
-new file mode 100644
-index 0000000..903a720
---- /dev/null
-+++ b/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/fix-missing-unistd.h-include.patch
-@@ -0,0 +1,40 @@
-+
-+sniped from ChromiumOS
-+
-+https://bugs.gentoo.org/424707
-+
-+From 154f7861d19a2bd5c79c488f9989610971db451b Mon Sep 17 00:00:00 2001
-+From: Han Shen <shenhan@google.com>
-+Date: Thu, 31 May 2012 16:49:35 -0700
-+Subject: [PATCH] Fixed dbus-c++ gcc 4.7 building problem.
-+
-+Just add "unistd.h" inclusion to eventloop-integration.h.
-+
-+BUG=None
-+TEST=Manually built using gcc 4.7.
-+
-+Change-Id: I87bd1f90db6a4c974a5ed8134044e8be2034aff2
-+Reviewed-on: https://gerrit.chromium.org/gerrit/24260
-+Tested-by: Han Shen <shenhan@google.com>
-+Reviewed-by: Yunlian Jiang <yunlian@chromium.org>
-+Commit-Ready: Han Shen <shenhan@chromium.org>
-+Upstream-Status: Inappropriate [ not author, no upstream ]
-+Signed-off-by: Thilo Cestonaro <thilo.cestonaro@ts.fujitsu.com>
-+---
-+ include/dbus-c++/eventloop-integration.h |    1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/include/dbus-c++/eventloop-integration.h b/include/dbus-c++/eventloop-integration.h
-+index 5108340..1b56ab5 100644
-+--- a/include/dbus-c++/eventloop-integration.h
-++++ b/include/dbus-c++/eventloop-integration.h
-+@@ -27,6 +27,7 @@
-+ 
-+ #include <cstring>
-+ #include <errno.h>
-++#include <unistd.h>
-+ #include "api.h"
-+ #include "dispatcher.h"
-+ #include "util.h"
-+-- 
-+1.7.9.7
-diff --git a/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/remove-CXX_FOR_BUILD-stuff.patch b/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/remove-CXX_FOR_BUILD-stuff.patch
-new file mode 100644
-index 0000000..fa29d3c
---- /dev/null
-+++ b/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/remove-CXX_FOR_BUILD-stuff.patch
-@@ -0,0 +1,33 @@
-+From: Thilo Cestonaro <thilo.cestonaro@ts.fujitsu.com>
-+Date: Fri, 18 Nov 2016 10:23:07 +0100
-+Subject: Build libdbus-c++ tools for target platform rather than enforced for
-+host platform.
-+
-+Upstream-Status: Inappropriate [no upstream]
-+Signed-off-by: Thilo Cestonaro <thilo.cestonaro@ts.fujitsu.com>
-+---
-+
-+diff -Naur libdbus-c++-0.9.0.ori/configure.ac libdbus-c++-0.9.0/configure.ac
-+--- libdbus-c++-0.9.0.ori/configure.ac	2016-11-15 14:25:36.085882774 +0100
-++++ libdbus-c++-0.9.0/configure.ac	2016-11-15 14:27:08.814568717 +0100
-+@@ -64,9 +64,6 @@
-+ AC_PROG_CC
-+ AC_PROG_CXX
-+ 
-+-CXX_FOR_BUILD=${CXX_FOR_BUILD-${CXX}}
-+-AC_SUBST(CXX_FOR_BUILD)
-+-
-+ AM_PROG_LIBTOOL
-+ 
-+ PKG_PROG_PKG_CONFIG
-+diff -Naur libdbus-c++-0.9.0.ori/tools/Makefile.am libdbus-c++-0.9.0/tools/Makefile.am
-+--- libdbus-c++-0.9.0.ori/tools/Makefile.am	2016-11-15 14:25:36.089882803 +0100
-++++ libdbus-c++-0.9.0/tools/Makefile.am	2016-11-15 14:26:19.454203583 +0100
-+@@ -1,7 +1,5 @@
-+ # hacky, but ...
-+ 
-+-CXX = $(CXX_FOR_BUILD)
-+-
-+ AM_CPPFLAGS = \
-+ 	$(dbus_CFLAGS) \
-+ 	$(xml_CFLAGS) \
-diff --git a/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb b/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
-new file mode 100644
-index 0000000..7edaffc
---- /dev/null
-+++ b/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
-@@ -0,0 +1,24 @@
-+SUMMARY = "DBus-C++ Library"
-+DESCRIPTION = "DBus-c++ attempts to provide a C++ API for D-BUS. The library has a glib and an Ecore mainloop integration. It also offers an optional own main loop."
-+HOMEPAGE = "http://dbus-cplusplus.sourceforge.net"
-+SECTION = "base"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
-+DEPENDS = "dbus glib-2.0 libpcre"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/project/dbus-cplusplus/dbus-c++/${PV}/${BPN}-${PV}.tar.gz \
-+		   file://fix-missing-unistd.h-include.patch \
-+		   file://remove-CXX_FOR_BUILD-stuff.patch"
-+SRC_URI[md5sum] = "e752116f523fa88ef041e63d3dee4de2"
-+SRC_URI[sha256sum] = "bc11ac297b3cb010be904c72789695543ee3fdf3d75cdc8225fd371385af4e61"
-+
-+EXTRA_OECONF = "--disable-ecore --disable-examples --disable-tests"
-+
-+inherit autotools pkgconfig
-+
-+PACKAGES += "${PN}-tools"
-+
-+FILES_${PN} = "${libdir}"
-+FILES_${PN}-tools = "${bindir}"
-+
-+BBCLASSEXTEND = "native"
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib akuster/krogoth-next
+  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=akuster/krogoth-next
+
+Andre McCurdy (1):
+  syslog-ng: remove unused patches
+
+Davis, Michael (1):
+  pcsc-lite: Seperate GPLV3 portions from BSD
+
+Ian Ray (1):
+  syslog-ng: expand service file @variables@ earlier
+
+ .../recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb  |  24 +-
+ .../files/afsql-afsql_dd_insert_db-refactor.patch  | 494 ---------------------
+ ...init-the-new-config-when-reverting-to-the.patch |  36 --
+ .../files/free-global-LogTemplateOptions.patch     |  30 --
+ .../logwriter-dont-allocate-a-new-buffer.patch     |  26 --
+ .../rewrite-expr-grammar.ym-Free-up-token.patch    |  17 -
+ .../files/still-free-the-unconsumed-item.patch     |  90 ----
+ .../syslog-ng-verify-the-list-before-del.patch     |  38 --
+ meta-oe/recipes-support/syslog-ng/syslog-ng.inc    |   9 +-
+ 9 files changed, 26 insertions(+), 738 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/syslog-ng/files/afsql-afsql_dd_insert_db-refactor.patch
+ delete mode 100644 meta-oe/recipes-support/syslog-ng/files/deinit-the-new-config-when-reverting-to-the.patch
+ delete mode 100644 meta-oe/recipes-support/syslog-ng/files/free-global-LogTemplateOptions.patch
+ delete mode 100644 meta-oe/recipes-support/syslog-ng/files/logwriter-dont-allocate-a-new-buffer.patch
+ delete mode 100644 meta-oe/recipes-support/syslog-ng/files/rewrite-expr-grammar.ym-Free-up-token.patch
+ delete mode 100644 meta-oe/recipes-support/syslog-ng/files/still-free-the-unconsumed-item.patch
+ delete mode 100644 meta-oe/recipes-support/syslog-ng/files/syslog-ng-verify-the-list-before-del.patch
+
 -- 
-2.10.2
+2.3.5
 
 
