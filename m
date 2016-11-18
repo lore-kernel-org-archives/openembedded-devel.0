@@ -1,52 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-it0-f66.google.com (mail-it0-f66.google.com
-	[209.85.214.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 3EC56719DE
+Return-Path: <Quanyang.Wang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 903C271ACA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2016 18:13:08 +0000 (UTC)
-Received: by mail-it0-f66.google.com with SMTP id b123so16916940itb.2
+	Fri, 18 Nov 2016 01:41:48 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id uAI1fkJg019937
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2016 10:13:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:organization:message-id:date:user-agent
-	:mime-version:in-reply-to;
-	bh=knH5hIlMnx9ozavvY+hJh7N8PCsH4EDU7jTMPsXWlLo=;
-	b=beXKIdd3wBMUx6RlY7tlvAXWb22QNetJAdHggsiMayGv9ibHdCepOoF/M656X5RQv5
-	Xnb1QGMV7pmhdnk0Ar/kfbUAhnuFgxJZtKDjSg+PiLMGp7aD9Vbaq2JuCjcN/DFunsAO
-	jlNot4h315JwvcIAvmNmPFdrBVSVDNYNmC+ZzbV3LwCJMboyfTkZOuKi7Z8lcxn3VlXs
-	7UIUg1FJ76Q334ifMRxCH+IZsiZ1iaIPNqZjiFFoEIIj0Td714ZKznV4B35+MFe1kfck
-	NsBBVnleyVmgbzoy4MVU70kVB3KEMVSA6Psk3jCITXNVFN/T8q2HolHh2T1cIh9FSyV4
-	YwWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:organization
-	:message-id:date:user-agent:mime-version:in-reply-to;
-	bh=knH5hIlMnx9ozavvY+hJh7N8PCsH4EDU7jTMPsXWlLo=;
-	b=DhLFHjDm1h8roby+eLf1zZggtsSp77NRt4ee3ilQkMuuOFRdAM0xcO8DkdoP4ddPsH
-	8C9L9y0QN+0iSkPaNvFq6v76FxmBRr4+8QtLjwbh8DhtPvDZGiGVxfufD6EB81HYZrDn
-	lr2REprhQw/S7cTLUmhp3hwsdTAdVygLSHwEAgavSEL2H7f3sWupnNT6C7K0gGImnRzD
-	+2flsdmwqikJ7Gb7dvuPOUpyu1D1Tbx0rkx31B0yt+0Who4WMo/fieWQamUpg81ctSt8
-	NLVJgDJcxVbVONkYkNIi7oRCXdG3BerlWIgBEHNWxoDtXf4rIgxUNwyiqW0yXdZ14df8
-	pF1g==
-X-Gm-Message-State: ABUngvfaZxJQS3MhHRlx8axO8YOBUQntp5NAimcaKe/4KfmpiDdMWb/Sm/epuEdJ3GyeNQ==
-X-Received: by 10.36.160.134 with SMTP id o128mr13610481ite.26.1479406390633; 
-	Thu, 17 Nov 2016 10:13:10 -0800 (PST)
-Received: from CACSVMO-14452.local (c-76-102-32-192.hsd1.ca.comcast.net.
-	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	141sm1313138ity.12.2016.11.17.10.13.09
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 17 Nov 2016 10:13:10 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org, wenzong.fan@windriver.com
-References: <1479351761-70393-1-git-send-email-wenzong.fan@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Organization: himvis.com
-Message-ID: <9e50d470-714e-1c5c-83a9-39691b7315f8@gmail.com>
-Date: Thu, 17 Nov 2016 10:11:49 -0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:50.0)
-	Gecko/20100101 Thunderbird/50.0
+	Thu, 17 Nov 2016 17:41:49 -0800 (PST)
+Received: from pek-lpgbuild1.wrs.com (128.224.153.21) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.294.0; Thu, 17 Nov 2016 17:41:46 -0800
+From: <quanyang.wang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 18 Nov 2016 09:41:44 +0800
+Message-ID: <1479433304-10280-1-git-send-email-quanyang.wang@windriver.com>
+X-Mailer: git-send-email 1.7.1
 MIME-Version: 1.0
-In-Reply-To: <1479351761-70393-1-git-send-email-wenzong.fan@windriver.com>
-Subject: Re: [meta-oe][PATCH] opencv: remove DEFAULT_PREFERENCE = "-1" for 3.1
+Subject: [meta-oe] [PATCH] mcelog: Add Kabylake client support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,78 +31,141 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Nov 2016 18:13:09 -0000
-X-Groupsio-MsgNum: 63866
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="E7PHe1I0clOPeBD9DvgQS6KdEdVtNsSAt"
+X-List-Received-Date: Fri, 18 Nov 2016 01:41:48 -0000
+Content-Type: text/plain
 
---E7PHe1I0clOPeBD9DvgQS6KdEdVtNsSAt
-Content-Type: multipart/mixed; boundary="0Muu52Gn6xFoNGmk7UECKMARrlT4JSLxg";
- protected-headers="v1"
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org, wenzong.fan@windriver.com
-Message-ID: <9e50d470-714e-1c5c-83a9-39691b7315f8@gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] opencv: remove DEFAULT_PREFERENCE = "-1"
- for 3.1
-References: <1479351761-70393-1-git-send-email-wenzong.fan@windriver.com>
-In-Reply-To: <1479351761-70393-1-git-send-email-wenzong.fan@windriver.com>
+From: wqyoung <quanyang.wang@windriver.com>
 
---0Muu52Gn6xFoNGmk7UECKMARrlT4JSLxg
-Content-Type: text/plain; charset=windows-1252
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Issue: TA164086
+(LOCAL REV: NOT UPSTREAM) -- will send to oe-devel on 20161117
+
+CPU models 0x8E and 0x9E denote kabylake client processor
+
+Signed-off-by: Quanyang Wang <quanyang.wang@windriver.com>
+---
+ .../mcelog/0001-Add-Kabylake-client-support.patch  | 95 ++++++++++++++++++++++
+ meta-oe/recipes-support/mcelog/mcelog_1.40.bb      |  1 +
+ 2 files changed, 96 insertions(+)
+ create mode 100644 meta-oe/recipes-support/mcelog/mcelog/0001-Add-Kabylake-client-support.patch
+
+diff --git a/meta-oe/recipes-support/mcelog/mcelog/0001-Add-Kabylake-client-support.patch b/meta-oe/recipes-support/mcelog/mcelog/0001-Add-Kabylake-client-support.patch
+new file mode 100644
+index 0000000..4a3545a
+--- /dev/null
++++ b/meta-oe/recipes-support/mcelog/mcelog/0001-Add-Kabylake-client-support.patch
+@@ -0,0 +1,96 @@
++From 11bfbb446116c8313728157148a6bb15625031e8 Mon Sep 17 00:00:00 2001
++From: Tony Luck <tony.luck@intel.com>
++Date: Tue, 30 Aug 2016 09:37:02 -0700
++Subject: [PATCH] Add Kabylake client support
++
++CPU models 0x8E and 0x9E denote kabylake client processor
++
++Upstream-Status: Backport [A little modification on context]
++https://github.com/andikleen/mcelog/commit/11bfbb446116c8313728157148a6bb15625031e8
++
++Signed-off-by: Tony Luck <tony.luck@intel.com>
++Signed-off-by: Andi Kleen <ak@linux.intel.com>
++Signed-off-by: Quanyang Wang <quanyang.wang@windriver.com>
++---
++ intel.c  | 5 ++++-
++ intel.h  | 3 ++-
++ mcelog.c | 4 +++-
++ mcelog.h | 1 +
++ 4 files changed, 10 insertions(+), 3 deletions(-)
++
++diff --git a/intel.c b/intel.c
++index f4ef9f6..33a99a8 100644
++--- a/intel.c
+++++ b/intel.c
++@@ -35,7 +35,8 @@ void intel_cpu_init(enum cputype cpu)
++ 	    cpu == CPU_IVY_BRIDGE || cpu == CPU_IVY_BRIDGE_EPEX ||
++ 	    cpu == CPU_HASWELL || cpu == CPU_HASWELL_EPEX || cpu == CPU_BROADWELL ||
++ 	    cpu == CPU_BROADWELL_DE || cpu == CPU_BROADWELL_EPEX ||
++-	    cpu == CPU_KNIGHTS_LANDING || cpu == CPU_SKYLAKE || cpu == CPU_SKYLAKE_XEON)
+++	    cpu == CPU_KNIGHTS_LANDING || cpu == CPU_SKYLAKE || cpu == CPU_SKYLAKE_XEON ||
+++	    cpu == CPU_KABYLAKE)
++ 		memory_error_support = 1;
++ }
++ 
++@@ -90,6 +91,8 @@ enum cputype select_intel_cputype(int family, int model)
++ 			return CPU_SKYLAKE;
++ 		else if (model == 0x55)
++ 			return CPU_SKYLAKE_XEON;
+++		else if (model == 0x8E || model == 0x9E)
+++			return CPU_KABYLAKE;
++ 		if (model > 0x1a) {
++ 			Eprintf("Family 6 Model %u CPU: only decoding architectural errors\n",
++ 				model);
++diff --git a/intel.h b/intel.h
++index d22895b..c231925 100644
++--- a/intel.h
+++++ b/intel.h
++@@ -26,5 +26,6 @@ extern int memory_error_support;
++ 	case CPU_ATOM:	\
++ 	case CPU_KNIGHTS_LANDING: \
++ 	case CPU_SKYLAKE: \
++-	case CPU_SKYLAKE_XEON
+++	case CPU_SKYLAKE_XEON: \
+++	case CPU_KABYLAKE
++ 
++diff --git a/mcelog.c b/mcelog.c
++index 1d79fa1..7214a0d 100644
++--- a/mcelog.c
+++++ b/mcelog.c
++@@ -238,6 +238,7 @@ static char *cputype_name[] = {
++ 	[CPU_ATOM] = "ATOM",
++ 	[CPU_SKYLAKE] = "Skylake",
++ 	[CPU_SKYLAKE_XEON] = "Skylake server",
+++	[CPU_KABYLAKE] = "Kabylake",
++ };
++ 
++ static struct config_choice cpu_choices[] = {
++@@ -287,6 +288,7 @@ static struct config_choice cpu_choices[] = {
++ 	{ "atom", CPU_ATOM },
++ 	{ "skylake", CPU_SKYLAKE },
++ 	{ "skylake_server", CPU_SKYLAKE_XEON },
+++	{ "kabylake", CPU_KABYLAKE },
++ 	{ NULL }
++ };
++ 
++@@ -451,7 +453,7 @@ static void dump_mce(struct mce *m, unsigned recordlen)
++ 	    cputype != CPU_HASWELL_EPEX && cputype != CPU_BROADWELL &&
++ 	    cputype != CPU_BROADWELL_DE && cputype != CPU_BROADWELL_EPEX &&
++ 	    cputype != CPU_KNIGHTS_LANDING && cputype != CPU_SKYLAKE &&
++-	    cputype != CPU_SKYLAKE_XEON)
+++	    cputype != CPU_SKYLAKE_XEON && cputype != CPU_KABYLAKE)
++ 		resolveaddr(m->addr);
++ 	if (!ascii_mode && ismemerr && (m->status & MCI_STATUS_ADDRV)) {
++ 		diskdb_resolve_addr(m->addr);
++diff --git a/mcelog.h b/mcelog.h
++index abc8bc9..254b3a0 100644
++--- a/mcelog.h
+++++ b/mcelog.h
++@@ -130,6 +130,7 @@ enum cputype {
++ 	CPU_ATOM,
++ 	CPU_SKYLAKE,
++ 	CPU_SKYLAKE_XEON,
+++	CPU_KABYLAKE,
++ };
++ 
++ enum option_ranges {
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-support/mcelog/mcelog_1.40.bb b/meta-oe/recipes-support/mcelog/mcelog_1.40.bb
+index 9aebbd5..0d359fc 100644
+--- a/meta-oe/recipes-support/mcelog/mcelog_1.40.bb
++++ b/meta-oe/recipes-support/mcelog/mcelog_1.40.bb
+@@ -7,6 +7,7 @@ SECTION = "System Environment/Base"
+ 
+ SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http; \
+     file://mcelog-debash.patch \
++    file://0001-Add-Kabylake-client-support.patch \
+     file://run-ptest \
+ "
+ 
+-- 
+1.9.1
 
 
-
-On 11/16/16 7:02 PM, wenzong.fan@windriver.com wrote:
-> From: Wenzong Fan <wenzong.fan@windriver.com>
->=20
-> The opencv 2.4 has been blacklisted, 3.1 should be the default choice
-> for both opencv and lib32-opencv.
-
-blacklisting does not change the norms. Is it possible to fix the reason =
-for
-blacklisting 2.x
-
->=20
-> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-> ---
->  meta-oe/recipes-support/opencv/opencv_3.1.bb | 2 --
->  1 file changed, 2 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/rec=
-ipes-support/opencv/opencv_3.1.bb
-> index 1bbb965..a212f4f 100644
-> --- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
-> +++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-> @@ -8,8 +8,6 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D0ea90d28b4de=
-883d7af5e6711f14f7bf"
->  ARM_INSTRUCTION_SET_armv4 =3D "arm"
->  ARM_INSTRUCTION_SET_armv5 =3D "arm"
-> =20
-> -DEFAULT_PREFERENCE =3D "-1"
-> -
->  DEPENDS =3D "python-numpy libtool swig swig-native python bzip2 zlib g=
-lib-2.0 libwebp protobuf protobuf-native"
-> =20
->  SRCREV_opencv =3D "92387b1ef8fad15196dd5f7fb4931444a68bc93a"
->=20
-
-
---0Muu52Gn6xFoNGmk7UECKMARrlT4JSLxg--
-
---E7PHe1I0clOPeBD9DvgQS6KdEdVtNsSAt
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAlgt8uUACgkQuwUzVZGdMxTZwQCfZlAXz33gFqr2G/hYz5WaXrEq
-mwsAnigP88uzg4Dw/lKAeZheTOcck8N7
-=Wy18
------END PGP SIGNATURE-----
-
---E7PHe1I0clOPeBD9DvgQS6KdEdVtNsSAt--
