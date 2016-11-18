@@ -1,52 +1,44 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id E26C9719B4
+Return-Path: <thilo.cestonaro@ts.fujitsu.com>
+Received: from mail1.bemta3.messagelabs.com (mail1.bemta3.messagelabs.com
+	[195.245.230.163])
+	by mail.openembedded.org (Postfix) with ESMTP id B267F71A82
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 03:12:11 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id e9so18875890pgc.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2016 19:12:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:subject:references:in-reply-to:message-id:date:to
-	:content-transfer-encoding:mime-version;
-	bh=L37vYBRDI/tsO+mJUZWZUHJ1Ijd9/X3RNhcDCuO5LIQ=;
-	b=naO5lXA6bAzkjNjtLsWKrrRBIhsv483nqEmDuSraf9IVPu3U9jHHfhPQkvFzqvHcpE
-	l6ISCzAVvyZFtfvi4XGOmCknJCaxNxHoJOa9raHJigjHHd6tD4nE4xVa9/3URch6sF1d
-	zMW4dYgOMmfvK/Le7mu+TIm8n7zveEdiWoT7k/ijutOXktmLdfvmddaYbaRfVF65TQ87
-	oDJbpEf4l1YmP8UtNgsquSwj4FfdnURiV/WnvPYez5/s3/OL0sfPrHQxHvdQf/AhJNUz
-	V8tKIGWkmN+gu//kQNLVasTFueHU87mpN4SeGrnth+FoFeviqhqK0H5LYjyLvi7qziMp
-	2yzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:subject:references:in-reply-to:message-id
-	:date:to:content-transfer-encoding:mime-version;
-	bh=L37vYBRDI/tsO+mJUZWZUHJ1Ijd9/X3RNhcDCuO5LIQ=;
-	b=YlWW0PyYSqUVtFeqpfyBA2d5tS8/DkYQCzbYjDbz3cR+FuOeG+CtkcJ6n9nQbonzAb
-	GwOOCWERX/TbQgZJR0CeSWEhwh0intVko/R6nKI8CfXVDUiUyTvfri/9keQ1POcv9/se
-	7YQll8WIhzPUzPI2ICfA06oqczE+mQJhpfMPUFdHDT+gjRfmBuI87leB30b37oFE+Gal
-	45KyLaq5E43dtvHOaP+cibYXnKom83Z3Asz15Kdf23vifAZaF3CJAvkUYHCELJU51rLA
-	LxWk5mI6bJyNeZpQLdnAab0j4ZZ5cebbBuO34g4ymelWX5nZeA6xsOEttvA8aDysV8Mg
-	k2jQ==
-X-Gm-Message-State: ABUngvfSrUARTG7B13vxVDKQJla3wr3149Z9Arg/Hs4H5+PLYU8c/qpPnCrvPyzlv9TykQ==
-X-Received: by 10.99.153.26 with SMTP id d26mr14461345pge.44.1479438732596;
-	Thu, 17 Nov 2016 19:12:12 -0800 (PST)
-Received: from ?IPv6:2601:1c0:6000:fe8:2d49:7dcd:e965:e902?
-	([2601:1c0:6000:fe8:2d49:7dcd:e965:e902])
-	by smtp.gmail.com with ESMTPSA id
-	64sm11788310pfu.17.2016.11.17.19.12.12
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 17 Nov 2016 19:12:12 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
-X-Google-Original-From: Tim Orling <TicoTimo@gmail.com>
-References: <alpine.LFD.2.20.1611171121160.9215@localhost.localdomain>
-X-Mailer: iPad Mail (14B100)
-In-Reply-To: <alpine.LFD.2.20.1611171121160.9215@localhost.localdomain>
-Message-Id: <FEECB22E-689E-4052-B50E-6EC453743B8B@gmail.com>
-Date: Thu, 17 Nov 2016 19:12:10 -0800
+	Fri, 18 Nov 2016 09:40:51 +0000 (UTC)
+Received: from [85.158.138.179] by server-3.bemta-3.messagelabs.com id
+	15/29-24885-3ACCE285; Fri, 18 Nov 2016 09:40:51 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrNLMWRWlGSWpSXmKPExsViZ8MxVXfxGb0
+	Ig9MzxS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1owzU+QK1qtUHPy0iq2B8YVCFyMXh5DAJUaJ
+	lvdPWboYOYGcWomPX7YwdTFycLAJmEl8W18IEhYR0JX4+GEuI0iYWcBE4ulqP5CwsICdxKu/3
+	5hBbBYBVYme59PBpvAKOElsWf+fFcSWEJCXWHj+CNMERs4FjAyrGDWKU4vKUot0jcz1kooy0z
+	NKchMzc3QNDYz1clOLixPTU3MSk4r1kvNzNzECPVXPwMC4g7Flr98hRkkOJiVRXu9+vQghvqT
+	8lMqMxOKM+KLSnNTiQ4wyHBxKEryZp4FygkWp6akVaZk5wJCBSUtw8CiJ8FqBpHmLCxJzizPT
+	IVKnGBWlxHk3gyQEQBIZpXlwbbAwvcQoKyXMy8jAwCDEU5BalJtZgir/ilGcg1FJmJcXZApPZ
+	l4J3PRXQIuZgBbvEdABWVySiJCSamAMm1baIDxv19S5j3/W+J+o0PZcqifhpXdm7qGjbm5GU1
+	d425j6ZQddtlfqnGG0tX654JbPHef9gpfVnDK6PS3MUv+jbeK5z8uvfxNYPb16N9/BOJ/LXnp
+	1MZkvJB3Wz/qxatsamRPvJKpa4hR+9kYUaOmaHpYTn330/rzW4rTCSQWvcpf/n/dJiaU4I9FQ
+	i7moOBEA5oEV204CAAA=
+X-Env-Sender: thilo.cestonaro@ts.fujitsu.com
+X-Msg-Ref: server-6.tower-169.messagelabs.com!1479462051!77771565!1
+X-Originating-IP: [62.60.8.149]
+X-StarScan-Received: 
+X-StarScan-Version: 9.0.16; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 12326 invoked from network); 18 Nov 2016 09:40:51 -0000
+Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
+	by server-6.tower-169.messagelabs.com with DHE-RSA-AES256-GCM-SHA384
+	encrypted SMTP; 18 Nov 2016 09:40:51 -0000
+Received: from abgdgate60u.abg.fsc.net ([172.25.138.90])
+	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id
+	uAI9f2Tf022588 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Nov 2016 09:41:11 GMT
+Received: from abg4858n-lnx.abg.fsc.net ([172.26.69.149])
+	by abgdgate60u.abg.fsc.net with ESMTP; 18 Nov 2016 10:40:42 +0100
+From: Thilo Cestonaro <thilo.cestonaro@ts.fujitsu.com>
 To: openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0 (1.0)
-Subject: Re: "libtest-harness-perl_3.36.bb" ... "libtap-parsser-result-bailout-perl:
+Date: Fri, 18 Nov 2016 10:36:59 +0100
+Message-Id: <20161118093659.9117-1-thilo.cestonaro@ts.fujitsu.com>
+X-Mailer: git-send-email 2.10.2
+Subject: [meta-oe][PATCH] libdbus-c++: added recipe for it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,46 +51,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2016 03:12:17 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 18 Nov 2016 09:40:54 -0000
 
-Yes. Typo.
---Tim
+Signed-off-by: Thilo Cestonaro <thilo.cestonaro@ts.fujitsu.com>
+---
+ .../fix-missing-unistd.h-include.patch             | 39 ++++++++++++++++++++++
+ .../remove-CXX_FOR_BUILD-stuff.patch               | 32 ++++++++++++++++++
+ meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb     | 24 +++++++++++++
+ 3 files changed, 95 insertions(+)
+ create mode 100644 meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/fix-missing-unistd.h-include.patch
+ create mode 100644 meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/remove-CXX_FOR_BUILD-stuff.patch
+ create mode 100644 meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
 
-> On Nov 17, 2016, at 8:24 AM, Robert P. J. Day <rpjday@crashcourse.ca> wrot=
-e:
->=20
->=20
->  in meta-perl/recipes-perl/libtest/libtest-harness-perl_3.36.bb, can
-> i assume this line is a typo?
->=20
->    ...
->    libtap-parsser-result-bailout-perl \
->           ^^^^^^^ ?
->=20
-> if so, will submit patch.
->=20
-> rday
->=20
-> --=20
->=20
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> Robert P. J. Day                                 Ottawa, Ontario, CANADA
->                        http://crashcourse.ca
->=20
-> Twitter:                                       http://twitter.com/rpjday
-> LinkedIn:                               http://ca.linkedin.com/in/rpjday
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/fix-missing-unistd.h-include.patch b/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/fix-missing-unistd.h-include.patch
+new file mode 100644
+index 0000000..4673375
+--- /dev/null
++++ b/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/fix-missing-unistd.h-include.patch
+@@ -0,0 +1,39 @@
++
++sniped from ChromiumOS
++
++https://bugs.gentoo.org/424707
++
++From 154f7861d19a2bd5c79c488f9989610971db451b Mon Sep 17 00:00:00 2001
++From: Han Shen <shenhan@google.com>
++Date: Thu, 31 May 2012 16:49:35 -0700
++Subject: [PATCH] Fixed dbus-c++ gcc 4.7 building problem.
++
++Just add "unistd.h" inclusion to eventloop-integration.h.
++
++BUG=None
++TEST=Manually built using gcc 4.7.
++
++Change-Id: I87bd1f90db6a4c974a5ed8134044e8be2034aff2
++Reviewed-on: https://gerrit.chromium.org/gerrit/24260
++Tested-by: Han Shen <shenhan@google.com>
++Reviewed-by: Yunlian Jiang <yunlian@chromium.org>
++Commit-Ready: Han Shen <shenhan@chromium.org>
++Signed-off-by: Thilo Cestonaro <thilo.cestonaro@ts.fujitsu.com>
++---
++ include/dbus-c++/eventloop-integration.h |    1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/include/dbus-c++/eventloop-integration.h b/include/dbus-c++/eventloop-integration.h
++index 5108340..1b56ab5 100644
++--- a/include/dbus-c++/eventloop-integration.h
+++++ b/include/dbus-c++/eventloop-integration.h
++@@ -27,6 +27,7 @@
++ 
++ #include <cstring>
++ #include <errno.h>
+++#include <unistd.h>
++ #include "api.h"
++ #include "dispatcher.h"
++ #include "util.h"
++-- 
++1.7.9.7
+diff --git a/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/remove-CXX_FOR_BUILD-stuff.patch b/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/remove-CXX_FOR_BUILD-stuff.patch
+new file mode 100644
+index 0000000..247dcf6
+--- /dev/null
++++ b/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/remove-CXX_FOR_BUILD-stuff.patch
+@@ -0,0 +1,32 @@
++From: Thilo Cestonaro <thilo.cestonaro@ts.fujitsu.com>
++Date: Fri, 18 Nov 2016 10:23:07 +0100
++Subject: Build libdbus-c++ tools for target platform rather than enforced for
++host platform.
++
++Signed-off-by: Thilo Cestonaro <thilo.cestonaro@ts.fujitsu.com>
++---
++
++diff -Naur libdbus-c++-0.9.0.ori/configure.ac libdbus-c++-0.9.0/configure.ac
++--- libdbus-c++-0.9.0.ori/configure.ac	2016-11-15 14:25:36.085882774 +0100
+++++ libdbus-c++-0.9.0/configure.ac	2016-11-15 14:27:08.814568717 +0100
++@@ -64,9 +64,6 @@
++ AC_PROG_CC
++ AC_PROG_CXX
++ 
++-CXX_FOR_BUILD=${CXX_FOR_BUILD-${CXX}}
++-AC_SUBST(CXX_FOR_BUILD)
++-
++ AM_PROG_LIBTOOL
++ 
++ PKG_PROG_PKG_CONFIG
++diff -Naur libdbus-c++-0.9.0.ori/tools/Makefile.am libdbus-c++-0.9.0/tools/Makefile.am
++--- libdbus-c++-0.9.0.ori/tools/Makefile.am	2016-11-15 14:25:36.089882803 +0100
+++++ libdbus-c++-0.9.0/tools/Makefile.am	2016-11-15 14:26:19.454203583 +0100
++@@ -1,7 +1,5 @@
++ # hacky, but ...
++ 
++-CXX = $(CXX_FOR_BUILD)
++-
++ AM_CPPFLAGS = \
++ 	$(dbus_CFLAGS) \
++ 	$(xml_CFLAGS) \
+diff --git a/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb b/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
+new file mode 100644
+index 0000000..7edaffc
+--- /dev/null
++++ b/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "DBus-C++ Library"
++DESCRIPTION = "DBus-c++ attempts to provide a C++ API for D-BUS. The library has a glib and an Ecore mainloop integration. It also offers an optional own main loop."
++HOMEPAGE = "http://dbus-cplusplus.sourceforge.net"
++SECTION = "base"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
++DEPENDS = "dbus glib-2.0 libpcre"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/project/dbus-cplusplus/dbus-c++/${PV}/${BPN}-${PV}.tar.gz \
++		   file://fix-missing-unistd.h-include.patch \
++		   file://remove-CXX_FOR_BUILD-stuff.patch"
++SRC_URI[md5sum] = "e752116f523fa88ef041e63d3dee4de2"
++SRC_URI[sha256sum] = "bc11ac297b3cb010be904c72789695543ee3fdf3d75cdc8225fd371385af4e61"
++
++EXTRA_OECONF = "--disable-ecore --disable-examples --disable-tests"
++
++inherit autotools pkgconfig
++
++PACKAGES += "${PN}-tools"
++
++FILES_${PN} = "${libdir}"
++FILES_${PN}-tools = "${bindir}"
++
++BBCLASSEXTEND = "native"
+-- 
+2.10.2
+
 
