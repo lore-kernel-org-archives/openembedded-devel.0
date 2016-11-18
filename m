@@ -1,27 +1,36 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 34F1960722
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 1189B71993
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 02:38:40 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id uAI2ce4Z019376
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Thu, 17 Nov 2016 18:38:40 -0800
-Received: from [128.224.162.208] (128.224.162.208) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 17 Nov 2016 18:38:39 -0800
-To: Khem Raj <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
-References: <1479351761-70393-1-git-send-email-wenzong.fan@windriver.com>
-	<9e50d470-714e-1c5c-83a9-39691b7315f8@gmail.com>
-From: wenzong fan <wenzong.fan@windriver.com>
-Message-ID: <696ebdcf-d08d-72cd-7ee8-50b2c11e63d8@windriver.com>
-Date: Fri, 18 Nov 2016 10:38:38 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.4.0
-MIME-Version: 1.0
-In-Reply-To: <9e50d470-714e-1c5c-83a9-39691b7315f8@gmail.com>
-Subject: Re: [meta-oe][PATCH] opencv: remove DEFAULT_PREFERENCE = "-1" for 3.1
+	Fri, 18 Nov 2016 02:45:51 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id l20so16132798qta.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Nov 2016 18:45:53 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=AfWWBlvvDEvLFQhoSfxfSVmnNhAUl7QD5Prl3UBqjNg=;
+	b=bKSdGQmPk/m3CNEw4rwmzoX4/ObGTF/rtj60CkuT0yRD+XcltiHgoMsx+YiROxP6oQ
+	LgHx6EQJT7xN95dvAt2x0FNVPS4qwo7RU/FYqr4o5JaOz2BvqH1BBubqIJvQ2p/vji48
+	5gGrpQbNQ1+VMPuoA7VkiVCHwmDFE1zMWg9Fu6rb4id4vOZv8rsCSwLj4Rz+eghwtZzb
+	l6xbmLkKhokovX771I0wL6NWiucgVy+oejUfTFOgcoMRAmAaqjMdPOFoaWghbvB4trU8
+	+wbOltbwUH5CIjGgReuygHUxXe2wG4/26eY95FAgYIE0t4QfQ5N4zjS8u70u0B3Xutqg
+	Rumw==
+X-Gm-Message-State: AKaTC01sPDhJrOhCfs/vVfCqdz+mgY9zRn//6VDZOTNnMeiMmE0ZP8F7IuggUWwzAZ2U/A==
+X-Received: by 10.200.46.129 with SMTP id h1mr4676412qta.277.1479437152999;
+	Thu, 17 Nov 2016 18:45:52 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
+	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
+	k143sm3018761qke.22.2016.11.17.18.45.52
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 17 Nov 2016 18:45:52 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 17 Nov 2016 21:45:44 -0500
+Message-Id: <1479437144-14510-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-pytz: update to version 2016.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,48 +43,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2016 02:38:44 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 18 Nov 2016 02:45:52 -0000
 
-On 11/18/2016 02:11 AM, Khem Raj wrote:
->
->
-> On 11/16/16 7:02 PM, wenzong.fan@windriver.com wrote:
->> From: Wenzong Fan <wenzong.fan@windriver.com>
->>
->> The opencv 2.4 has been blacklisted, 3.1 should be the default choice
->> for both opencv and lib32-opencv.
->
-> blacklisting does not change the norms. Is it possible to fix the reason for
-> blacklisting 2.x
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-pytz_2016.4.bb | 14 --------------
+ meta-python/recipes-devtools/python/python-pytz_2016.7.bb | 15 +++++++++++++++
+ 2 files changed, 15 insertions(+), 14 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pytz_2016.4.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-pytz_2016.7.bb
 
-The reason is "Not compatible with currently used ffmpeg 3", I can try 
-to fix it but I can't promise it could be fixed definitely.
+diff --git a/meta-python/recipes-devtools/python/python-pytz_2016.4.bb b/meta-python/recipes-devtools/python/python-pytz_2016.4.bb
+deleted file mode 100644
+index 6cbea28..0000000
+--- a/meta-python/recipes-devtools/python/python-pytz_2016.4.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-SUMMARY = "World timezone definitions, modern and historical"
+-HOMEPAGE = " http://pythonhosted.org/pytz"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=22b38951eb857cf285a4560a914b7cd6"
+-
+-SRC_URI[md5sum] = "a3316cf3842ed0375ba5931914239d97"
+-SRC_URI[sha256sum] = "c823de61ff40d1996fe087cec343e0503881ca641b897e0f9b86c7683a0bfee1"
+-
+-inherit pypi setuptools
+-
+-RDEPENDS_${PN} = "\
+-    python-core \
+-    python-datetime \
+-"
+diff --git a/meta-python/recipes-devtools/python/python-pytz_2016.7.bb b/meta-python/recipes-devtools/python/python-pytz_2016.7.bb
+new file mode 100644
+index 0000000..508fd3b
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pytz_2016.7.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "World timezone definitions, modern and historical"
++HOMEPAGE = " http://pythonhosted.org/pytz"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=22b38951eb857cf285a4560a914b7cd6"
++
++SRC_URI[md5sum] = "8660ba7c3c0abd23e6e4efa493b02966"
++SRC_URI[sha256sum] = "8787de03f35f31699bcaf127e56ad14c00647965ed24d72dbaca87c6e4f843a3"
++
++inherit pypi setuptools
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-io \
++    ${PYTHON_PN}-threading \
++"
+-- 
+2.7.4
 
-Thanks
-Wenzong
-
->
->>
->> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
->> ---
->>  meta-oe/recipes-support/opencv/opencv_3.1.bb | 2 --
->>  1 file changed, 2 deletions(-)
->>
->> diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
->> index 1bbb965..a212f4f 100644
->> --- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
->> +++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
->> @@ -8,8 +8,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0ea90d28b4de883d7af5e6711f14f7bf"
->>  ARM_INSTRUCTION_SET_armv4 = "arm"
->>  ARM_INSTRUCTION_SET_armv5 = "arm"
->>
->> -DEFAULT_PREFERENCE = "-1"
->> -
->>  DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0 libwebp protobuf protobuf-native"
->>
->>  SRCREV_opencv = "92387b1ef8fad15196dd5f7fb4931444a68bc93a"
->>
->
 
