@@ -1,55 +1,39 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id DB21371976
+Return-Path: <prvs=41305a0675=michael.davis@essvote.com>
+Received: from mail1.essvote.com (mail1.essvote.com [66.37.226.19])
+	by mail.openembedded.org (Postfix) with ESMTP id CB35171A90
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 15:25:48 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id c4so11205668pfb.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 07:25:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=Gme/nXcHWvIi1Y+iM4Rgew7FrxxpLB9+jce2fE83siU=;
-	b=VZs5171yx1qMRZWO9qczd59hwoJBqJjC9SvfKOD1uEvUtNklx93K9mNSkjfBd4u3y+
-	tK5NIt7rHkpzW0eKb0z+l2xTWJLnuIOjJJeGM7IgqlGhSlvSarIFnpqDML3hWxgHr9wF
-	CXvW24q1PvaxlCmAIgYMX5ZVgZydDLI0favIlgmMGCGlCNegEQT6+OB+uQ8/+eEkb5Ox
-	DjfSD4CqxBYdyGljZBJrh02Emd9cJaQx8EDEGwsHHuJA/ZqanLYJtyUHUV5ZegwtMyTE
-	4n+NcxRVUFDLXnKGlvdzfyS4iem8Jw4stDvtGCHc7zmWON79aBKJ5xZa0wbViRYYvDC5
-	QoBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=Gme/nXcHWvIi1Y+iM4Rgew7FrxxpLB9+jce2fE83siU=;
-	b=Ths8MFI2lOVsiY6IlNllqfFKZaN+GTwQLs5JYT8+s7Mwp3Z1EXQ/TIucJ4ZEqED9HD
-	Eprzfj/m4H3Y6AhcTjoJNZm6kTu5koc6/ZllyssmY6YX/k4feDw1I1UO7frF9ZFcPqzw
-	cIvBTCImcF7M4+k2+9bQeVfU/GVIE+mAlEOYXNSEgpEaQrKfQFAoKXHO+1liq4/J8V4Y
-	uUrNxqH2eASVuL3qQKKHCl8/AxblpH4umuYHzl0HNS84qFxLTWEyrsb9E3+cUqVT8d4c
-	dw/aL+sGnRw3KYdFvJSOtGXdG35EnJcGcZsubpxcuCneG1of/hpwzEewzVurm/XWtXlG
-	UAuQ==
-X-Gm-Message-State: AKaTC03lRstE2Os9baOKiAWyxY0xD29eF3LzRFUysr/MpPP9DQmL0Ii9817yivKeAcWOsQ==
-X-Received: by 10.99.209.5 with SMTP id k5mr473652pgg.13.1479482750269;
-	Fri, 18 Nov 2016 07:25:50 -0800 (PST)
-Received: from ?IPv6:2601:202:4001:9ea0:31d0:92df:f69d:58e2?
-	([2601:202:4001:9ea0:31d0:92df:f69d:58e2])
-	by smtp.gmail.com with ESMTPSA id
-	a66sm18860382pfa.64.2016.11.18.07.25.49
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 18 Nov 2016 07:25:49 -0800 (PST)
-To: Denys Dmytriyenko <denis@denix.org>,
-	openembedded-devel@lists.openembedded.org
-References: <1477587755-24666-1-git-send-email-denis@denix.org>
-	<271f87f6-ac90-2389-3499-9c3bb8d80fa6@gmail.com>
-	<20161114190940.GB22657@denix.org> <20161117035859.GB26131@denix.org>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <af58f301-6a21-6f9b-3c87-26fa8d44935b@gmail.com>
-Date: Fri, 18 Nov 2016 07:25:48 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.4.0
+	Fri, 18 Nov 2016 16:34:59 +0000 (UTC)
+X-AuditID: 0a000213-f79eb6d000002ccd-f0-582f2db36ed9
+Received: from ESS-EX01.essvote.corp.local (Unknown_Domain [172.16.110.40])
+	by mail1.essvote.com (Symantec Messaging Gateway) with SMTP id
+	5C.80.11469.3BD2F285; Fri, 18 Nov 2016 10:34:59 -0600 (CST)
+Received: from ESS-EX01.essvote.corp.local ([::1]) by
+	ESS-EX01.essvote.corp.local ([::1]) with mapi id 14.03.0301.000;
+	Fri, 18 Nov 2016 10:34:59 -0600
+From: "Davis, Michael" <michael.davis@essvote.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-browser][PATCH] chromium: Fix ILL_ILLOPN signal in sandbox
+Thread-Index: AQHSQbmzUjYjlAyelEWTF94/o4GWUA==
+Date: Fri, 18 Nov 2016 16:34:58 +0000
+Message-ID: <1479486866-19082-1-git-send-email-michael.davis@essvote.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.1.1.157]
 MIME-Version: 1.0
-In-Reply-To: <20161117035859.GB26131@denix.org>
-Subject: Re: [meta-oe][krogoth][PATCH] syslog-ng: expand service file @variables@ earlier
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrELMWRmVeSWpSXmKPExsWyRiBPQ3ezrn6EwbKt1hYXDy9ldmD0OLdx
+	BWMAYxS3TVJiSVlwZnqevl0Cd8aak+dZC/YJVpw4e4qpgXERfxcjJ4eEgInErec/WSFsMYkL
+	99azdTFycQgJnGCUOPF9DjtIQkhgFqNE0zQpEJtNwEji3PVNjCC2iECsxLxNM5lAbGYBA4l3
+	mzeCDRIW8JT41TmTHaImQKLvyTFmCFtPYu2JfqBeDg4WAVWJ84tlQMK8QOULji9lAbEZgW74
+	fmoN1EhxiVtP5jNB3CYgsWTPeWYIW1Ti5eN/UDfLSfz8sIgRol5P4sbUKWwQtrbEsoWvmSHm
+	C0qcnPmEZQKjyCwkY2chaZmFpGUWkpYFjCyrGAVzEzNzDPVSi4vL8ktS9ZLzczcxAkOei4FJ
+	eAfjnCm2hxgFOBiVeHgTNPQihFgTy4orcw8xSnOwKInzvngkECEkkJ5YkpqdmlqQWhRfVJqT
+	WnyIkYmD8xCjBAeXlEhxal5KalFiaUlGPCiy4ouBsSXVwLhg0t4iFq+5FvURu+OmGSiwuT5+
+	2fGqx8Ol5d+832W3q1uDU0/kLe0Wq286tGvhIYML+696ndQ1DzrgeXT3rx3XvnHP83zoVbe9
+	IXjJydR1UgbX523N3L1ZtaeMrX3pyzkpazPK+fZPaHqeo/B5S/e/3UXTEhIXzlOcwh1wLffi
+	3eOZ6ckuCpuUWIozEg21mIuKEwHSqS2pdQIAAA==
+Subject: [meta-browser][PATCH] chromium: Fix ILL_ILLOPN signal in sandbox
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,77 +46,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2016 15:25:50 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 18 Nov 2016 16:35:00 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
+Fix Aw Snap! error when running chromium 52 in Morty with sandbox enabled.
 
+Signed-off-by: Michael Davis <michael.davis@essvote.com>
+---
+ .../chromium/chromium/chromium/unset-madv-free.patch      | 15 +++++++++++=
+++++
+ recipes-browser/chromium/chromium_52.0.2743.76.bb         |  1 +
+ 2 files changed, 16 insertions(+)
+ create mode 100644 recipes-browser/chromium/chromium/chromium/unset-madv-f=
+ree.patch
 
-On 11/16/2016 07:58 PM, Denys Dmytriyenko wrote:
-> On Mon, Nov 14, 2016 at 02:09:40PM -0500, Denys Dmytriyenko wrote:
->> On Thu, Nov 03, 2016 at 08:20:53AM -0700, akuster808 wrote:
->>>
->>> On 10/27/2016 10:02 AM, Denys Dmytriyenko wrote:
->>>> From: Ian Ray <ian.ray@ge.com>
->>>>
->>>> Move variable expansion of @SBINDIR@, @LOCALSTATEDIR@, and @BASEBINDIR@
->>>> earlier during install, to before the systemd service file is installed
->>>> by an automake rule.
->>>>
->>>> Signed-off-by: Ian Ray <ian.ray@ge.com>
->>>> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
->>> merged to staging.
->> Armin,
->>
->> Any updates on this? Also, I don't see it in krogoth-next - what staging you
->> are referring to?
-> Ping again, this time copy Armin directly.
-oops, Had it sitting on my system forgot to push to contrib. Pull 
-request sent.
-
-- Armin
->
->
->>>>   meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 9 ++++++---
->>>>   1 file changed, 6 insertions(+), 3 deletions(-)
->>>>
->>>> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
->>>> index 4e0f697..898e9c2 100644
->>>> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
->>>> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
->>>> @@ -60,6 +60,12 @@ do_configure_prepend() {
->>>>       eval "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
->>>>   }
->>>>   
->>>> +do_install_prepend() {
->>>> +    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
->>>> +    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
->>>> +    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
->>>> +}
->>>> +
->>>>   do_install_append() {
->>>>       install -d ${D}/${sysconfdir}/${BPN}
->>>>       install ${WORKDIR}/syslog-ng.conf ${D}${sysconfdir}/${BPN}/${BPN}.conf
->>>> @@ -70,9 +76,6 @@ do_install_append() {
->>>>       install -d ${D}/${localstatedir}/lib/${BPN}
->>>>       # Remove /var/run as it is created on startup
->>>>       rm -rf ${D}${localstatedir}/run
->>>> -    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
->>>> -    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
->>>> -    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
->>>>   }
->>>>   
->>>>   FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
->>>>
->>> -- 
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> -- 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+diff --git a/recipes-browser/chromium/chromium/chromium/unset-madv-free.pat=
+ch b/recipes-browser/chromium/chromium/chromium/unset-madv-free.patch
+new file mode 100644
+index 0000000..15d4982
+--- /dev/null
++++ b/recipes-browser/chromium/chromium/chromium/unset-madv-free.patch
+@@ -0,0 +1,15 @@
++diff -Naur chromium-52.0.2743.76/third_party/WebKit/Source/wtf/allocator/P=
+ageAllocator.cpp chromium-52.0.2743.76b/third_party/WebKit/Source/wtf/alloc=
+ator/PageAllocator.cpp
++--- chromium-52.0.2743.76/third_party/WebKit/Source/wtf/allocator/PageAllo=
+cator.cpp	2016-07-15 17:02:49.000000000 -0500
+++++ chromium-52.0.2743.76b/third_party/WebKit/Source/wtf/allocator/PageAll=
+ocator.cpp	2016-11-18 09:13:01.109731385 -0600
++@@ -41,6 +41,11 @@
++ #include <errno.h>
++ #include <sys/mman.h>
++=20
+++#if OS(LINUX) && defined(MADV_FREE)
+++// Added in Linux 4.5, but it breaks the sandbox.
+++#undef MADV_FREE
+++#endif
+++
++ #ifndef MADV_FREE
++ #define MADV_FREE MADV_DONTNEED
++ #endif
+diff --git a/recipes-browser/chromium/chromium_52.0.2743.76.bb b/recipes-br=
+owser/chromium/chromium_52.0.2743.76.bb
+index 14b519c..5be3c32 100644
+--- a/recipes-browser/chromium/chromium_52.0.2743.76.bb
++++ b/recipes-browser/chromium/chromium_52.0.2743.76.bb
+@@ -9,6 +9,7 @@ SRC_URI +=3D "\
+         file://0005-Override-root-filesystem-access-restriction.patch \
+         file://chromium/0011-Replace-readdir_r-with-readdir.patch \
+         file://chromium/remove-Werror.patch \
++        file://chromium/unset-madv-free.patch \
+         ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://c=
+omponent-build.gypi', '', d)} \
+         ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file=
+://0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \
+ "
+--=20
+2.5.5
 
