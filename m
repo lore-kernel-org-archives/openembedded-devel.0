@@ -1,34 +1,44 @@
-Return-Path: <jaragunde@igalia.com>
-Received: from smtp4.mundo-r.com (smtp3.mundo-r.com [212.51.32.191])
-	by mail.openembedded.org (Postfix) with ESMTP id 2AD7171AA7
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 9B64E60102
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 09:48:51 +0000 (UTC)
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: A2B9AwBKzS5Y/5tjdVtdHAEBBAEBCgEBgzcBAQEBAR9YLFSNP5cQkCCCOIIOIBmBTiSCR4M2AoIaPxQBAgEBAQEBAQFiKIRoAQEBAQIBIw8BRhALGAICJgICVwYBDAYCAQGIYAwBCat7gimLVgEBAQEBBQEBAQEjgQmFM4F9gl2HFTiCXQWaSIZAijKCP41oSZEaHjeFBIFGPTQBAYhIAQEB
-X-IPAS-Result: A2B9AwBKzS5Y/5tjdVtdHAEBBAEBCgEBgzcBAQEBAR9YLFSNP5cQkCCCOIIOIBmBTiSCR4M2AoIaPxQBAgEBAQEBAQFiKIRoAQEBAQIBIw8BRhALGAICJgICVwYBDAYCAQGIYAwBCat7gimLVgEBAQEBBQEBAQEjgQmFM4F9gl2HFTiCXQWaSIZAijKCP41oSZEaHjeFBIFGPTQBAYhIAQEB
-X-IronPort-AV: E=Sophos;i="5.31,656,1473112800"; d="scan'208";a="80045591"
-Received: from fanzine.igalia.com ([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 18 Nov 2016 10:48:52 +0100
-Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
-	by fanzine.igalia.com with esmtps 
-	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
-	id 1c7fmu-0004ed-9I; Fri, 18 Nov 2016 10:48:52 +0100
-Received: from ip162.dynamic.igalia.com ([192.168.10.162])
-	by mail.igalia.com with esmtps 
-	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
-	id 1c7fmu-0002Ub-6q; Fri, 18 Nov 2016 10:48:52 +0100
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-References: <1479404055-12584-1-git-send-email-jaragunde@igalia.com>
-	<d960264f-ef18-8875-cdfb-29a1b604ec87@gmail.com>
-From: =?UTF-8?Q?Jacobo_Aragunde_P=c3=a9rez?= <jaragunde@igalia.com>
-Message-ID: <97dbec03-3c2a-0b32-db48-ea4e2bd9c093@igalia.com>
-Date: Fri, 18 Nov 2016 10:48:52 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.4.0
-MIME-Version: 1.0
-In-Reply-To: <d960264f-ef18-8875-cdfb-29a1b604ec87@gmail.com>
-Cc: eric@eukrea.com, otavio@ossystems.com.br
-Subject: Re: [meta-browser][PATCH 1/3] Set CHROMIUM_ENABLE_WAYLAND flag in chromium-wayland recipe
+	Fri, 18 Nov 2016 10:09:05 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id g23so4530562wme.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Nov 2016 02:09:07 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=/G/cGpAz01oB0u9zcYo/Gjq1qoBPChGAjTg8VqIUbtc=;
+	b=TvxEtBLPAGnS7AIHLwkhGygiAq5j5vH/M7L/x7AQ8Zl2XrvTF7j1XWzk3t8EfPOVvN
+	g3VtWt0WRS/bpB3W0d7x3NeGJj3qs9ynGNlF6Ptlq4MH2uXeQsg42jn+vjeWqEZCVEtm
+	HyCSrYeA6pW28iItTZQnisuj1+6enuvfhrSANWYlFVwHi0nGCAha4I/rbFO3mYq8wtj5
+	+qOLjvNtNHocJMG/9aq2poYXWxjMpumRlkkzPGvuDZ2+4oghVFFpzKnrn1JbuQXWH0jE
+	kt3peaSOtc61m/h5zw7Ty5bltQrwzIzIMEPX4uazWd51Q5mTLqcHXvEFrU16tnMWo5XE
+	KeYg==
+X-Gm-Message-State: AKaTC012M8ffm6e7m7+caBLdtMd5cOesxtFAJluQgi7HejrXdmvgRU+drggJ5K49AEleXQ==
+X-Received: by 10.194.186.177 with SMTP id fl17mr4901838wjc.143.1479463746790; 
+	Fri, 18 Nov 2016 02:09:06 -0800 (PST)
+Received: from tfsielt31850 ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	ab10sm7926855wjc.45.2016.11.18.02.09.05
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 18 Nov 2016 02:09:05 -0800 (PST)
+Message-ID: <1479463744.27546.7.camel@andred.net>
+From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
+To: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 18 Nov 2016 10:09:04 +0000
+In-Reply-To: <CAMKF1sqxxyjaYL2EJXD_KzGGMYuB5ohWvye9ba-YrJ6e0pU1Gg@mail.gmail.com>
+References: <20161115154311.30118-3-git@andred.net>
+	<20161116090234.30806-1-git@andred.net>
+	<109be6fe-8d0c-619b-fb4a-4f836982e064@gmail.com>
+	<1479383974.27546.3.camel@andred.net>
+	<CAMKF1sqxxyjaYL2EJXD_KzGGMYuB5ohWvye9ba-YrJ6e0pU1Gg@mail.gmail.com>
+X-Mailer: Evolution 3.22.1-2 
+Mime-Version: 1.0
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH 2/2 v2] ncp: add v1.2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,68 +51,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2016 09:48:53 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Fri, 18 Nov 2016 10:09:08 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-On 17/11/16 19:09, Khem Raj wrote:
+On Thu, 2016-11-17 at 09:10 -0800, Khem Raj wrote:
+> On Thu, Nov 17, 2016 at 3:59 AM, André Draszik <git@andred.net> wrote:
+> > On Wed, 2016-11-16 at 09:28 -0800, Khem Raj wrote:
+> > > 
+> > > On 11/16/16 1:02 AM, André Draszik wrote:
+> > > > Signed-off-by: André Draszik <git@andred.net>
+> > > > ---
+> > > >  meta-networking/recipes-support/ncp/ncp_1.2.4.bb | 32
+> > > > ++++++++++++++++++++++++
+> > > >  1 file changed, 32 insertions(+)
+> > > >  create mode 100644 meta-networking/recipes-support/ncp/ncp_1.2.4.bb
+> > > > 
+> > > > diff --git a/meta-networking/recipes-support/ncp/ncp_1.2.4.bb
+> > > > b/meta-
+> > > > networking/recipes-support/ncp/ncp_1.2.4.bb
+> > > > new file mode 100644
+> > > > index 0000000..7bbaaad
+> > > > --- /dev/null
+> > > > +++ b/meta-networking/recipes-support/ncp/ncp_1.2.4.bb
+> > > > @@ -0,0 +1,32 @@
+> > > > +SUMMARY = "a fast file copy tool for LANs"
+> > > > +DESCRIPTION = "ncp is a utility for copying files in a LAN. It has
+> > > > absolutely no \
+> > > > +security or integrity checking, no throttling, no features, except
+> > > > \
+> > > > +one: you don't have to type the coordinates of your peer."
+> > > > +HOMEPAGE = "http://www.fefe.de/ncp"
+> > > > +LICENSE = "GPLv2"
+> > > > +LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-
+> > > > licenses/GPL-
+> > > > 2.0;md5=801f80980d171dd6425610833a22dbe6"
+> > > > +DEPENDS = "libowfat"
+> > > > +
+> > > > +SRC_URI = "https://dl.fefe.de/${BP}.tar.bz2"
+> > > > +SRC_URI[md5sum] = "421c4855bd3148b7d0a4342942b4bf13"
+> > > > +SRC_URI[sha256sum] =
+> > > > "6cfa72edd5f7717bf7a4a93ccc74c4abd89892360e2e0bb095a73c24b9359b88"
+> > > > +
+> > > > +EXTRA_OEMAKE = "\
+> > > > +    DIET= \
+> > > > +    DEBUG=nostrip \
+> > > > +    CC='${CC}' CFLAGS='${CFLAGS} -I${STAGING_INCDIR}/libowfat'
+> > > > LDFLAGS='${LDFLAGS}' \
+> > > > +"
+> > > 
+> > > Is setting CC etc. on make cmdline really needed ?
+> > 
+> > Yes, the Makefile sets CC CFLAGS LDFLAGS excplicitly, so make doesn't
+> > inherit them from the environment variables, because OE doesn't pass the
+> > -e
+> > make flag anymore. https://www.gnu.org/software/make/manual/html_node/En
+> > viro
+> > nment.html#Environment
+> > 
+> > > may be just adding the -I flags to CPPFLAGS is enough ?
+> > 
+> > It doesn't respect CPPFLAGS, but an alternative would be:
+> > 
+> > EXTRA_OEMAKE = "\
+> >     DIET= \
+> >     DEBUG=nostrip \
+> >     -e \
+> > "
+> > CFLAGS_append = " -I${STAGING_INCDIR}/libowfat"
 > 
-> 
-> On 11/17/16 9:34 AM, Jacobo Aragunde Pérez wrote:
->> It makes no sense to trigger a build of chromium-wayland and not
->> enable CHROMIUM_ENABLE_WAYLAND, so we are doing it directly in the
->> recipe now.
->>
->> We are allowed to remove some conditionals, now we know the value of
->> the flag beforehand.
->>
->> Signed-off-by: Jacobo Aragunde Pérez <jaragunde@igalia.com>
->> ---
->>  recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb | 11 +++++------
->>  1 file changed, 5 insertions(+), 6 deletions(-)
->>
->> diff --git a/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb b/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
->> index bbba147..f66e77c 100644
->> --- a/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
->> +++ b/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
->> @@ -1,3 +1,5 @@
->> +CHROMIUM_ENABLE_WAYLAND = "1"
->> +
->>  include chromium-browser.inc
->>  
->>  DEPENDS += "wayland libxkbcommon"
->> @@ -21,15 +23,12 @@ SRC_URI[sha256sum] = "4ca4e2adb340b3fb4d502266ad7d6bda45fa3519906dbf63cce11a63f6
->>  OZONE_WAYLAND_GIT_BRANCH = "Milestone-SouthSister"
->>  OZONE_WAYLAND_GIT_SRCREV = "c605505044af3345a276abbd7c29fd53db1dea40"
->>  
->> -SRC_URI += "${@base_conditional('CHROMIUM_ENABLE_WAYLAND', '1', 'git://github.com/01org/ozone-wayland.git;destsuffix=${OZONE_WAYLAND_GIT_DESTSUFFIX};branch=${OZONE_WAYLAND_GIT_BRANCH};rev=${OZONE_WAYLAND_GIT_SRCREV} file://chromium-wayland/0006-Remove-GBM-support-from-wayland.gyp.patch', '', d)}"
->> +SRC_URI += "git://github.com/01org/ozone-wayland.git;destsuffix=${OZONE_WAYLAND_GIT_DESTSUFFIX};branch=${OZONE_WAYLAND_GIT_BRANCH};rev=${OZONE_WAYLAND_GIT_SRCREV} file://chromium-wayland/0006-Remove-GBM-support-from-wayland.gyp.patch"
->>  
->>  # Component build is unsupported in ozone-wayland for Chromium 48
->>  python() {
->> -    if (d.getVar('CHROMIUM_ENABLE_WAYLAND', True) == '1'):
->> -        if bb.utils.contains('PACKAGECONFIG', 'component-build', True, False, d):
->> -            bb.fatal("Chromium 48 Wayland version cannot be built in component-mode")
->> -    else:
->> -        raise bb.parse.SkipPackage("CHROMIUM_ENABLE_WAYLAND isn't enabled")
->> +    if bb.utils.contains('PACKAGECONFIG', 'component-build', True, False, d):
->> +        bb.fatal("Chromium 48 Wayland version cannot be built in component-mode")
->>  }
->>  
-> 
-> 
-> you still need to skip parsing this recipe if user has not enabled wayland
-> 
+> Thats seems better.
 
-Will do, thanks for the tip.
+I am not sure I agree. This means one could accidentally override make
+variables. Being explicit as in the original version is more deterministic.
+Otherwise somebody would have to audit each recipe's makefile once a
+variable is added or removed from the bitbake environment. That doesn't
+scale. It would appear that the -e flag was removed from EXTRA_OEMAKE in rev
+aeb653861a0ec39ea7a014c0622980edcbf653fa for a similar reason... Even the
+make manual recommends against using -e.
 
-> 
->>  CHROMIUM_WAYLAND_GYP_DEFINES = "use_ash=1 use_aura=1 chromeos=0 use_ozone=1 use_xkbcommon=1"
->>
-> 
 
-Best,
--- 
-Jacobo Aragunde
-Software Engineer at Igalia
+Andre'
+
 
