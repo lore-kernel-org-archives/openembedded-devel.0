@@ -1,42 +1,55 @@
-Return-Path: <dev@codyps.com>
-Received: from mail-it0-f66.google.com (mail-it0-f66.google.com
-	[209.85.214.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 9CFDC71AE5
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id DB21371976
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 15:25:19 +0000 (UTC)
-Received: by mail-it0-f66.google.com with SMTP id o1so4920477ito.1
+	Fri, 18 Nov 2016 15:25:48 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id c4so11205668pfb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 07:25:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codyps.com; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=1Z6f2fwDQH93iZwIeRA4mX+qsq6uvePol2M9QL+I8/M=;
-	b=WmCuF+CCBWIH8yUtSRsUOq1DcGJHy3CxIenp/PVPrGwO0N6GKF5AZJSeLK5L/8V0Cp
-	QI7JEkkiLd8BhI7RgT6dnBz6ER27f0c+jckxR2gdruZxX3fjUP0HWRjzDra+BbAHtP85
-	DRTViRpA2Qk+CFlARhosb4O4AzqtVgSSWg+zE=
+	Fri, 18 Nov 2016 07:25:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=Gme/nXcHWvIi1Y+iM4Rgew7FrxxpLB9+jce2fE83siU=;
+	b=VZs5171yx1qMRZWO9qczd59hwoJBqJjC9SvfKOD1uEvUtNklx93K9mNSkjfBd4u3y+
+	tK5NIt7rHkpzW0eKb0z+l2xTWJLnuIOjJJeGM7IgqlGhSlvSarIFnpqDML3hWxgHr9wF
+	CXvW24q1PvaxlCmAIgYMX5ZVgZydDLI0favIlgmMGCGlCNegEQT6+OB+uQ8/+eEkb5Ox
+	DjfSD4CqxBYdyGljZBJrh02Emd9cJaQx8EDEGwsHHuJA/ZqanLYJtyUHUV5ZegwtMyTE
+	4n+NcxRVUFDLXnKGlvdzfyS4iem8Jw4stDvtGCHc7zmWON79aBKJ5xZa0wbViRYYvDC5
+	QoBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=1Z6f2fwDQH93iZwIeRA4mX+qsq6uvePol2M9QL+I8/M=;
-	b=lDAyC22jvBhRtsnTdZzDKMelETQoHAy5rIv+lR0O3j6rESh4tL3e2IUB0ZBvigKv0R
-	+Xql2oEJjicWVLDQv3IxvH4d9Jeb4eVMwhJNwUKHRXQArtDl/FFmuhc4aClj/WRHxgun
-	tEAwVFL/GiPXuygjs/zWbglEwIYT9er+VKzPQRDL4J88+Vi6C6S1A4bdkigjP/ZDVWA1
-	KBTlgPW3ADt7x8WYUSgs/OkO5nza2eYBg+M2d1uOaxysKsmxaUYC+JLrGhs3DrSMBYTj
-	NK6xoOZGycVy9Ul3WxtMDRPcH1h5DQ5/2inXKLKFnaUOSd+mM8tTo3nlmMLS0Glnfkq5
-	OXpA==
-X-Gm-Message-State: AKaTC020cl+Xq63RJjqZWAfmKvrhNrMJKQ4M0jCMSV3dIYy3AAqIfr0IEkrqnGw7pH1nAw==
-X-Received: by 10.107.153.134 with SMTP id b128mr257351ioe.160.1479482720811; 
-	Fri, 18 Nov 2016 07:25:20 -0800 (PST)
-Received: from localhost (static-72-74-84-52.bstnma.fios.verizon.net.
-	[72.74.84.52]) by smtp.gmail.com with ESMTPSA id
-	e202sm3118847ioe.27.2016.11.18.07.25.20
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 18 Nov 2016 07:25:20 -0800 (PST)
-From: Cody P Schafer <dev@codyps.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Nov 2016 10:25:13 -0500
-Message-Id: <20161118152513.31194-1-dev@codyps.com>
-X-Mailer: git-send-email 2.10.2
-Subject: [meta-java][PATCH] openjdk-7: ignore the readdir_r deprecation already ignored in openjdk-8
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=Gme/nXcHWvIi1Y+iM4Rgew7FrxxpLB9+jce2fE83siU=;
+	b=Ths8MFI2lOVsiY6IlNllqfFKZaN+GTwQLs5JYT8+s7Mwp3Z1EXQ/TIucJ4ZEqED9HD
+	Eprzfj/m4H3Y6AhcTjoJNZm6kTu5koc6/ZllyssmY6YX/k4feDw1I1UO7frF9ZFcPqzw
+	cIvBTCImcF7M4+k2+9bQeVfU/GVIE+mAlEOYXNSEgpEaQrKfQFAoKXHO+1liq4/J8V4Y
+	uUrNxqH2eASVuL3qQKKHCl8/AxblpH4umuYHzl0HNS84qFxLTWEyrsb9E3+cUqVT8d4c
+	dw/aL+sGnRw3KYdFvJSOtGXdG35EnJcGcZsubpxcuCneG1of/hpwzEewzVurm/XWtXlG
+	UAuQ==
+X-Gm-Message-State: AKaTC03lRstE2Os9baOKiAWyxY0xD29eF3LzRFUysr/MpPP9DQmL0Ii9817yivKeAcWOsQ==
+X-Received: by 10.99.209.5 with SMTP id k5mr473652pgg.13.1479482750269;
+	Fri, 18 Nov 2016 07:25:50 -0800 (PST)
+Received: from ?IPv6:2601:202:4001:9ea0:31d0:92df:f69d:58e2?
+	([2601:202:4001:9ea0:31d0:92df:f69d:58e2])
+	by smtp.gmail.com with ESMTPSA id
+	a66sm18860382pfa.64.2016.11.18.07.25.49
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 18 Nov 2016 07:25:49 -0800 (PST)
+To: Denys Dmytriyenko <denis@denix.org>,
+	openembedded-devel@lists.openembedded.org
+References: <1477587755-24666-1-git-send-email-denis@denix.org>
+	<271f87f6-ac90-2389-3499-9c3bb8d80fa6@gmail.com>
+	<20161114190940.GB22657@denix.org> <20161117035859.GB26131@denix.org>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <af58f301-6a21-6f9b-3c87-26fa8d44935b@gmail.com>
+Date: Fri, 18 Nov 2016 07:25:48 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.4.0
+MIME-Version: 1.0
+In-Reply-To: <20161117035859.GB26131@denix.org>
+Subject: Re: [meta-oe][krogoth][PATCH] syslog-ng: expand service file @variables@ earlier
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,45 +62,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2016 15:25:19 -0000
+X-List-Received-Date: Fri, 18 Nov 2016 15:25:50 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Without this, icedtea7-native (used to bootstrap openjdk) fails to build on my
-host system due to deprecation warnings being treated as errors.
 
-I haven't observed the same issue with openjdk-7 itself, but it seems likely to
-affect it as well, so I've added the -Wno-error flag there too.
 
-Signed-off-by: Cody P Schafer <dev@codyps.com>
----
- recipes-core/icedtea/openjdk-7-release-03b147.inc | 4 ++++
- recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb     | 4 ++++
- 2 files changed, 8 insertions(+)
+On 11/16/2016 07:58 PM, Denys Dmytriyenko wrote:
+> On Mon, Nov 14, 2016 at 02:09:40PM -0500, Denys Dmytriyenko wrote:
+>> On Thu, Nov 03, 2016 at 08:20:53AM -0700, akuster808 wrote:
+>>>
+>>> On 10/27/2016 10:02 AM, Denys Dmytriyenko wrote:
+>>>> From: Ian Ray <ian.ray@ge.com>
+>>>>
+>>>> Move variable expansion of @SBINDIR@, @LOCALSTATEDIR@, and @BASEBINDIR@
+>>>> earlier during install, to before the systemd service file is installed
+>>>> by an automake rule.
+>>>>
+>>>> Signed-off-by: Ian Ray <ian.ray@ge.com>
+>>>> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+>>> merged to staging.
+>> Armin,
+>>
+>> Any updates on this? Also, I don't see it in krogoth-next - what staging you
+>> are referring to?
+> Ping again, this time copy Armin directly.
+oops, Had it sitting on my system forgot to push to contrib. Pull 
+request sent.
 
-diff --git a/recipes-core/icedtea/openjdk-7-release-03b147.inc b/recipes-core/icedtea/openjdk-7-release-03b147.inc
-index 0685729..fe18ee5 100644
---- a/recipes-core/icedtea/openjdk-7-release-03b147.inc
-+++ b/recipes-core/icedtea/openjdk-7-release-03b147.inc
-@@ -113,3 +113,7 @@ export DISTRIBUTION_PATCHES = " \
- 	patches/icedtea-jdk-unzip.patch \
- 	${CLEAN_X11_DISTRIBUTION_PATCH} \
-         "
-+
-+# readdir_r was deprecated in glibc-2.24. Ignore the error for now
-+# NOTE: When updating the recipe, please check if this is still needed
-+CFLAGS_append = " -Wno-error=deprecated-declarations"
-diff --git a/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb b/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
-index 711f572..eba353e 100644
---- a/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
-+++ b/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
-@@ -64,3 +64,7 @@ DISTRIBUTION_PATCHES = "\
- "
- 
- export DISTRIBUTION_PATCHES
-+
-+# readdir_r was deprecated in glibc-2.24. Ignore the error for now
-+# NOTE: When updating the recipe, please check if this is still needed
-+CFLAGS_append = " -Wno-error=deprecated-declarations"
--- 
-2.10.2
+- Armin
+>
+>
+>>>>   meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 9 ++++++---
+>>>>   1 file changed, 6 insertions(+), 3 deletions(-)
+>>>>
+>>>> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+>>>> index 4e0f697..898e9c2 100644
+>>>> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+>>>> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+>>>> @@ -60,6 +60,12 @@ do_configure_prepend() {
+>>>>       eval "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
+>>>>   }
+>>>>   
+>>>> +do_install_prepend() {
+>>>> +    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
+>>>> +    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
+>>>> +    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
+>>>> +}
+>>>> +
+>>>>   do_install_append() {
+>>>>       install -d ${D}/${sysconfdir}/${BPN}
+>>>>       install ${WORKDIR}/syslog-ng.conf ${D}${sysconfdir}/${BPN}/${BPN}.conf
+>>>> @@ -70,9 +76,6 @@ do_install_append() {
+>>>>       install -d ${D}/${localstatedir}/lib/${BPN}
+>>>>       # Remove /var/run as it is created on startup
+>>>>       rm -rf ${D}${localstatedir}/run
+>>>> -    sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
+>>>> -    sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
+>>>> -    sed -i -e 's,@BASEBINDIR@,${base_bindir},g' ${S}/contrib/systemd/*.service
+>>>>   }
+>>>>   
+>>>>   FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools"
+>>>>
+>>> -- 
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> -- 
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
