@@ -1,44 +1,34 @@
-Return-Path: <thilo.cestonaro@ts.fujitsu.com>
-Received: from mail1.bemta3.messagelabs.com (mail1.bemta3.messagelabs.com
-	[195.245.230.163])
-	by mail.openembedded.org (Postfix) with ESMTP id B267F71A82
+Return-Path: <jaragunde@igalia.com>
+Received: from smtp4.mundo-r.com (smtp3.mundo-r.com [212.51.32.191])
+	by mail.openembedded.org (Postfix) with ESMTP id 2AD7171AA7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 09:40:51 +0000 (UTC)
-Received: from [85.158.138.179] by server-3.bemta-3.messagelabs.com id
-	15/29-24885-3ACCE285; Fri, 18 Nov 2016 09:40:51 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrNLMWRWlGSWpSXmKPExsViZ8MxVXfxGb0
-	Ig9MzxS0uHl7K7MDocW7jCsYAxijWzLyk/IoE1owzU+QK1qtUHPy0iq2B8YVCFyMXh5DAJUaJ
-	lvdPWboYOYGcWomPX7YwdTFycLAJmEl8W18IEhYR0JX4+GEuI0iYWcBE4ulqP5CwsICdxKu/3
-	5hBbBYBVYme59PBpvAKOElsWf+fFcSWEJCXWHj+CNMERs4FjAyrGDWKU4vKUot0jcz1kooy0z
-	NKchMzc3QNDYz1clOLixPTU3MSk4r1kvNzNzECPVXPwMC4g7Flr98hRkkOJiVRXu9+vQghvqT
-	8lMqMxOKM+KLSnNTiQ4wyHBxKEryZp4FygkWp6akVaZk5wJCBSUtw8CiJ8FqBpHmLCxJzizPT
-	IVKnGBWlxHk3gyQEQBIZpXlwbbAwvcQoKyXMy8jAwCDEU5BalJtZgir/ilGcg1FJmJcXZApPZ
-	l4J3PRXQIuZgBbvEdABWVySiJCSamAMm1baIDxv19S5j3/W+J+o0PZcqifhpXdm7qGjbm5GU1
-	d425j6ZQddtlfqnGG0tX654JbPHef9gpfVnDK6PS3MUv+jbeK5z8uvfxNYPb16N9/BOJ/LXnp
-	1MZkvJB3Wz/qxatsamRPvJKpa4hR+9kYUaOmaHpYTn330/rzW4rTCSQWvcpf/n/dJiaU4I9FQ
-	i7moOBEA5oEV204CAAA=
-X-Env-Sender: thilo.cestonaro@ts.fujitsu.com
-X-Msg-Ref: server-6.tower-169.messagelabs.com!1479462051!77771565!1
-X-Originating-IP: [62.60.8.149]
-X-StarScan-Received: 
-X-StarScan-Version: 9.0.16; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 12326 invoked from network); 18 Nov 2016 09:40:51 -0000
-Received: from unknown (HELO mailhost2.uk.fujitsu.com) (62.60.8.149)
-	by server-6.tower-169.messagelabs.com with DHE-RSA-AES256-GCM-SHA384
-	encrypted SMTP; 18 Nov 2016 09:40:51 -0000
-Received: from abgdgate60u.abg.fsc.net ([172.25.138.90])
-	by mailhost2.uk.fujitsu.com (8.14.5/8.14.5) with ESMTP id
-	uAI9f2Tf022588 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 09:41:11 GMT
-Received: from abg4858n-lnx.abg.fsc.net ([172.26.69.149])
-	by abgdgate60u.abg.fsc.net with ESMTP; 18 Nov 2016 10:40:42 +0100
-From: Thilo Cestonaro <thilo.cestonaro@ts.fujitsu.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Nov 2016 10:36:59 +0100
-Message-Id: <20161118093659.9117-1-thilo.cestonaro@ts.fujitsu.com>
-X-Mailer: git-send-email 2.10.2
-Subject: [meta-oe][PATCH] libdbus-c++: added recipe for it
+	Fri, 18 Nov 2016 09:48:51 +0000 (UTC)
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: A2B9AwBKzS5Y/5tjdVtdHAEBBAEBCgEBgzcBAQEBAR9YLFSNP5cQkCCCOIIOIBmBTiSCR4M2AoIaPxQBAgEBAQEBAQFiKIRoAQEBAQIBIw8BRhALGAICJgICVwYBDAYCAQGIYAwBCat7gimLVgEBAQEBBQEBAQEjgQmFM4F9gl2HFTiCXQWaSIZAijKCP41oSZEaHjeFBIFGPTQBAYhIAQEB
+X-IPAS-Result: A2B9AwBKzS5Y/5tjdVtdHAEBBAEBCgEBgzcBAQEBAR9YLFSNP5cQkCCCOIIOIBmBTiSCR4M2AoIaPxQBAgEBAQEBAQFiKIRoAQEBAQIBIw8BRhALGAICJgICVwYBDAYCAQGIYAwBCat7gimLVgEBAQEBBQEBAQEjgQmFM4F9gl2HFTiCXQWaSIZAijKCP41oSZEaHjeFBIFGPTQBAYhIAQEB
+X-IronPort-AV: E=Sophos;i="5.31,656,1473112800"; d="scan'208";a="80045591"
+Received: from fanzine.igalia.com ([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 18 Nov 2016 10:48:52 +0100
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+	by fanzine.igalia.com with esmtps 
+	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
+	id 1c7fmu-0004ed-9I; Fri, 18 Nov 2016 10:48:52 +0100
+Received: from ip162.dynamic.igalia.com ([192.168.10.162])
+	by mail.igalia.com with esmtps 
+	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
+	id 1c7fmu-0002Ub-6q; Fri, 18 Nov 2016 10:48:52 +0100
+To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+References: <1479404055-12584-1-git-send-email-jaragunde@igalia.com>
+	<d960264f-ef18-8875-cdfb-29a1b604ec87@gmail.com>
+From: =?UTF-8?Q?Jacobo_Aragunde_P=c3=a9rez?= <jaragunde@igalia.com>
+Message-ID: <97dbec03-3c2a-0b32-db48-ea4e2bd9c093@igalia.com>
+Date: Fri, 18 Nov 2016 10:48:52 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.4.0
+MIME-Version: 1.0
+In-Reply-To: <d960264f-ef18-8875-cdfb-29a1b604ec87@gmail.com>
+Cc: eric@eukrea.com, otavio@ossystems.com.br
+Subject: Re: [meta-browser][PATCH 1/3] Set CHROMIUM_ENABLE_WAYLAND flag in chromium-wayland recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,132 +41,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2016 09:40:54 -0000
+X-List-Received-Date: Fri, 18 Nov 2016 09:48:53 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Thilo Cestonaro <thilo.cestonaro@ts.fujitsu.com>
----
- .../fix-missing-unistd.h-include.patch             | 39 ++++++++++++++++++++++
- .../remove-CXX_FOR_BUILD-stuff.patch               | 32 ++++++++++++++++++
- meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb     | 24 +++++++++++++
- 3 files changed, 95 insertions(+)
- create mode 100644 meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/fix-missing-unistd.h-include.patch
- create mode 100644 meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/remove-CXX_FOR_BUILD-stuff.patch
- create mode 100644 meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
+On 17/11/16 19:09, Khem Raj wrote:
+> 
+> 
+> On 11/17/16 9:34 AM, Jacobo Aragunde Pérez wrote:
+>> It makes no sense to trigger a build of chromium-wayland and not
+>> enable CHROMIUM_ENABLE_WAYLAND, so we are doing it directly in the
+>> recipe now.
+>>
+>> We are allowed to remove some conditionals, now we know the value of
+>> the flag beforehand.
+>>
+>> Signed-off-by: Jacobo Aragunde Pérez <jaragunde@igalia.com>
+>> ---
+>>  recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb | 11 +++++------
+>>  1 file changed, 5 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb b/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
+>> index bbba147..f66e77c 100644
+>> --- a/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
+>> +++ b/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
+>> @@ -1,3 +1,5 @@
+>> +CHROMIUM_ENABLE_WAYLAND = "1"
+>> +
+>>  include chromium-browser.inc
+>>  
+>>  DEPENDS += "wayland libxkbcommon"
+>> @@ -21,15 +23,12 @@ SRC_URI[sha256sum] = "4ca4e2adb340b3fb4d502266ad7d6bda45fa3519906dbf63cce11a63f6
+>>  OZONE_WAYLAND_GIT_BRANCH = "Milestone-SouthSister"
+>>  OZONE_WAYLAND_GIT_SRCREV = "c605505044af3345a276abbd7c29fd53db1dea40"
+>>  
+>> -SRC_URI += "${@base_conditional('CHROMIUM_ENABLE_WAYLAND', '1', 'git://github.com/01org/ozone-wayland.git;destsuffix=${OZONE_WAYLAND_GIT_DESTSUFFIX};branch=${OZONE_WAYLAND_GIT_BRANCH};rev=${OZONE_WAYLAND_GIT_SRCREV} file://chromium-wayland/0006-Remove-GBM-support-from-wayland.gyp.patch', '', d)}"
+>> +SRC_URI += "git://github.com/01org/ozone-wayland.git;destsuffix=${OZONE_WAYLAND_GIT_DESTSUFFIX};branch=${OZONE_WAYLAND_GIT_BRANCH};rev=${OZONE_WAYLAND_GIT_SRCREV} file://chromium-wayland/0006-Remove-GBM-support-from-wayland.gyp.patch"
+>>  
+>>  # Component build is unsupported in ozone-wayland for Chromium 48
+>>  python() {
+>> -    if (d.getVar('CHROMIUM_ENABLE_WAYLAND', True) == '1'):
+>> -        if bb.utils.contains('PACKAGECONFIG', 'component-build', True, False, d):
+>> -            bb.fatal("Chromium 48 Wayland version cannot be built in component-mode")
+>> -    else:
+>> -        raise bb.parse.SkipPackage("CHROMIUM_ENABLE_WAYLAND isn't enabled")
+>> +    if bb.utils.contains('PACKAGECONFIG', 'component-build', True, False, d):
+>> +        bb.fatal("Chromium 48 Wayland version cannot be built in component-mode")
+>>  }
+>>  
+> 
+> 
+> you still need to skip parsing this recipe if user has not enabled wayland
+> 
 
-diff --git a/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/fix-missing-unistd.h-include.patch b/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/fix-missing-unistd.h-include.patch
-new file mode 100644
-index 0000000..4673375
---- /dev/null
-+++ b/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/fix-missing-unistd.h-include.patch
-@@ -0,0 +1,39 @@
-+
-+sniped from ChromiumOS
-+
-+https://bugs.gentoo.org/424707
-+
-+From 154f7861d19a2bd5c79c488f9989610971db451b Mon Sep 17 00:00:00 2001
-+From: Han Shen <shenhan@google.com>
-+Date: Thu, 31 May 2012 16:49:35 -0700
-+Subject: [PATCH] Fixed dbus-c++ gcc 4.7 building problem.
-+
-+Just add "unistd.h" inclusion to eventloop-integration.h.
-+
-+BUG=None
-+TEST=Manually built using gcc 4.7.
-+
-+Change-Id: I87bd1f90db6a4c974a5ed8134044e8be2034aff2
-+Reviewed-on: https://gerrit.chromium.org/gerrit/24260
-+Tested-by: Han Shen <shenhan@google.com>
-+Reviewed-by: Yunlian Jiang <yunlian@chromium.org>
-+Commit-Ready: Han Shen <shenhan@chromium.org>
-+Signed-off-by: Thilo Cestonaro <thilo.cestonaro@ts.fujitsu.com>
-+---
-+ include/dbus-c++/eventloop-integration.h |    1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/include/dbus-c++/eventloop-integration.h b/include/dbus-c++/eventloop-integration.h
-+index 5108340..1b56ab5 100644
-+--- a/include/dbus-c++/eventloop-integration.h
-++++ b/include/dbus-c++/eventloop-integration.h
-+@@ -27,6 +27,7 @@
-+ 
-+ #include <cstring>
-+ #include <errno.h>
-++#include <unistd.h>
-+ #include "api.h"
-+ #include "dispatcher.h"
-+ #include "util.h"
-+-- 
-+1.7.9.7
-diff --git a/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/remove-CXX_FOR_BUILD-stuff.patch b/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/remove-CXX_FOR_BUILD-stuff.patch
-new file mode 100644
-index 0000000..247dcf6
---- /dev/null
-+++ b/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/remove-CXX_FOR_BUILD-stuff.patch
-@@ -0,0 +1,32 @@
-+From: Thilo Cestonaro <thilo.cestonaro@ts.fujitsu.com>
-+Date: Fri, 18 Nov 2016 10:23:07 +0100
-+Subject: Build libdbus-c++ tools for target platform rather than enforced for
-+host platform.
-+
-+Signed-off-by: Thilo Cestonaro <thilo.cestonaro@ts.fujitsu.com>
-+---
-+
-+diff -Naur libdbus-c++-0.9.0.ori/configure.ac libdbus-c++-0.9.0/configure.ac
-+--- libdbus-c++-0.9.0.ori/configure.ac	2016-11-15 14:25:36.085882774 +0100
-++++ libdbus-c++-0.9.0/configure.ac	2016-11-15 14:27:08.814568717 +0100
-+@@ -64,9 +64,6 @@
-+ AC_PROG_CC
-+ AC_PROG_CXX
-+ 
-+-CXX_FOR_BUILD=${CXX_FOR_BUILD-${CXX}}
-+-AC_SUBST(CXX_FOR_BUILD)
-+-
-+ AM_PROG_LIBTOOL
-+ 
-+ PKG_PROG_PKG_CONFIG
-+diff -Naur libdbus-c++-0.9.0.ori/tools/Makefile.am libdbus-c++-0.9.0/tools/Makefile.am
-+--- libdbus-c++-0.9.0.ori/tools/Makefile.am	2016-11-15 14:25:36.089882803 +0100
-++++ libdbus-c++-0.9.0/tools/Makefile.am	2016-11-15 14:26:19.454203583 +0100
-+@@ -1,7 +1,5 @@
-+ # hacky, but ...
-+ 
-+-CXX = $(CXX_FOR_BUILD)
-+-
-+ AM_CPPFLAGS = \
-+ 	$(dbus_CFLAGS) \
-+ 	$(xml_CFLAGS) \
-diff --git a/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb b/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
-new file mode 100644
-index 0000000..7edaffc
---- /dev/null
-+++ b/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
-@@ -0,0 +1,24 @@
-+SUMMARY = "DBus-C++ Library"
-+DESCRIPTION = "DBus-c++ attempts to provide a C++ API for D-BUS. The library has a glib and an Ecore mainloop integration. It also offers an optional own main loop."
-+HOMEPAGE = "http://dbus-cplusplus.sourceforge.net"
-+SECTION = "base"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
-+DEPENDS = "dbus glib-2.0 libpcre"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/project/dbus-cplusplus/dbus-c++/${PV}/${BPN}-${PV}.tar.gz \
-+		   file://fix-missing-unistd.h-include.patch \
-+		   file://remove-CXX_FOR_BUILD-stuff.patch"
-+SRC_URI[md5sum] = "e752116f523fa88ef041e63d3dee4de2"
-+SRC_URI[sha256sum] = "bc11ac297b3cb010be904c72789695543ee3fdf3d75cdc8225fd371385af4e61"
-+
-+EXTRA_OECONF = "--disable-ecore --disable-examples --disable-tests"
-+
-+inherit autotools pkgconfig
-+
-+PACKAGES += "${PN}-tools"
-+
-+FILES_${PN} = "${libdir}"
-+FILES_${PN}-tools = "${bindir}"
-+
-+BBCLASSEXTEND = "native"
+Will do, thanks for the tip.
+
+> 
+>>  CHROMIUM_WAYLAND_GYP_DEFINES = "use_ash=1 use_aura=1 chromeos=0 use_ozone=1 use_xkbcommon=1"
+>>
+> 
+
+Best,
 -- 
-2.10.2
-
+Jacobo Aragunde
+Software Engineer at Igalia
 
