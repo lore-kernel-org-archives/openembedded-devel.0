@@ -1,38 +1,40 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id B0D2371ACC
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-qk0-f170.google.com (mail-qk0-f170.google.com
+	[209.85.220.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A9216FFF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 10:59:17 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id g23so4971310wme.1
+	Fri, 18 Nov 2016 11:09:08 +0000 (UTC)
+Received: by mail-qk0-f170.google.com with SMTP id x190so257706829qkb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 02:59:19 -0800 (PST)
+	Fri, 18 Nov 2016 03:09:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=0JI6yJiJdSe0XNCuzuh9XUQEgpd6tkWzO7tMUVN3rkU=;
+	b=jgwaKWMtQrPJSVmTC5dknXlSWeM+a0jDqNgrUspPEk8tPN03zIhvMm2+MOhVBFHCD+
+	lbjiCbm3lHQXZ640ZI0+jCPgcchK5FdteLthG1BHU3ZkBd3n3T84n7eL/FWfwK1JOGQ6
+	qMMVmKndEO7JKiG9psw5BajanSzccohVP542Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=m08ExRlvN9sXkbp1/AAbpFN3Kb7Pw+rtMu/0CPod7NY=;
-	b=hzIFPHcq1KcPIr9pVnpqb8hdoueWT2S6qKOLf3PSB6v1vv5MwtXNM82i88LR7vMNHM
-	97wsTC5DiNgIY4b6lnvSIBBbd8xECmTI3d/NfATeSzjGw0EpyVqjAByjOlVvGbxpJs7N
-	PwOocfbctdCIkJvEV/2w1DEpgw7Wyw04VwofHy2ZEB8UdT4hPfXLcGOeX/58uvboV/9o
-	3xZ9zythja3IY/Oo1McaQ7Iukm4sk5CUG7SuZTWvAv4OhNL9G6k57bpKsZEun5MxJI6L
-	28XVMixKTmiKY/zbUP/0XtkPU+spbX/tHTiMserFwNJGNsrFHHGJGNjAIrayl8ODDJNO
-	v6ZA==
-X-Gm-Message-State: AKaTC01tXBDq5TlUMMW6d6lEvkE299vvgFZDFWYophrgqXxeaXPJDqJCz/x1c4pPZCx9cA==
-X-Received: by 10.28.18.129 with SMTP id 123mr9210447wms.2.1479466758943;
-	Fri, 18 Nov 2016 02:59:18 -0800 (PST)
-Received: from tfsielt31850 ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id
-	g10sm8201153wjw.18.2016.11.18.02.59.18
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 18 Nov 2016 02:59:18 -0800 (PST)
-Message-ID: <1479466757.27546.9.camel@andred.net>
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Nov 2016 10:59:17 +0000
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=0JI6yJiJdSe0XNCuzuh9XUQEgpd6tkWzO7tMUVN3rkU=;
+	b=QxsXrGD9r6qGkvxrNMb10iT3iPlL7dKLRksTNxxHcOE6tZNKvSllbgkt6Dxzfa9/z0
+	cg01Oqct3LrmYRfPy+WTVvh7B6DqjqFbkXGNkhnJUvyURJUANEz3mRwKbeHb5CUtu2Lw
+	ALXNqAUGh17ym8hHaYV8tvg3Ar/hgKttjLcESG7zOVZcmS0ed1c+Y2ZhlrDmxLIE6kiO
+	m8HMvy/q6H3RSjL0NU2fuDAQRK2bSCRV3qUOUSWBtc3apLC7PKNOhZmQ3Ccna76AHvof
+	l5Yc4G94BH+12/4AXJ0z6fVBlIqz709RK4TGv6OiKwUc/KIlmikYkZ1186WTySFPqj1n
+	e7gg==
+X-Gm-Message-State: AKaTC02m042ym3S2mzM+VrbcEGxWYNugHxBTexXsEvsFl8SCmpZGRSLOvy85dg05KSjHdbWOFbNQZOh0RPdjggl3
+X-Received: by 10.55.98.73 with SMTP id w70mr10244128qkb.91.1479467350327;
+	Fri, 18 Nov 2016 03:09:10 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.140.104.102 with HTTP; Fri, 18 Nov 2016 03:08:49 -0800 (PST)
 In-Reply-To: <1479464791-28098-1-git-send-email-koen.kooi@linaro.org>
 References: <1479464791-28098-1-git-send-email-koen.kooi@linaro.org>
-X-Mailer: Evolution 3.22.1-2 
-Mime-Version: 1.0
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Fri, 18 Nov 2016 12:08:49 +0100
+Message-ID: <CAP71Wjw8ti_zfUpZKqiwp=VggWq8=87sG49xrvHwbCvKy=4CVQ@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Cc: Koen Kooi <koen.kooi@linaro.org>
 Subject: Re: [meta-oe][PATCH] android-tools: fix do_install
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -47,92 +49,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2016 10:59:19 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 18 Nov 2016 11:09:10 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Fri, 2016-11-18 at 11:26 +0100, Koen Kooi wrote:
-> The previous patch introduced 2 bugs that made packaging fail:
-> 
-> 1) Always failing grep
-> 2) Conditionally install systemd files
-> 
-> Systemd.bbclass doesn't handle conditional installation and will throw an
-> error.
-> 
-> Tested with -native and regular cross builds.
-> 
-> Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
-> ---
->  .../android-tools/android-tools_5.1.1.r37.bb          | 19 ++++++++++++
-> -------
->  1 file changed, 12 insertions(+), 7 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-devtools/android-tools/android-
-> tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-
-> tools_5.1.1.r37.bb
-> index 1769b6a..5041465 100644
-> --- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-> +++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-> @@ -108,7 +108,10 @@ do_compile() {
->  }
->  
->  do_install() {
-> -    if [ grep -q "ext4_utils" "${TOOLS}" ] ; then
-> +    export TOOLSFILE="${WORKDIR}/tools.txt"
-> +    echo ${TOOLS} > ${TOOLSFILE}
+On Fri, Nov 18, 2016 at 11:26 AM, Koen Kooi <koen.kooi@linaro.org> wrote:
+> -    if [ grep -q "ext4_utils" "${TOOLS}" ] ; then
+> +    export TOOLSFILE="${WORKDIR}/tools.txt"
+> +    echo ${TOOLS} > ${TOOLSFILE}
 > +
-> +    if grep -q "ext4_utils" ${TOOLSFILE} ; then
-
-Why not simply echo instead of doing file i/o:
-if echo ${TOOLS} | grep ....
+> +    if grep -q "ext4_utils" ${TOOLSFILE} ; then
 
 
->          install -D -p -m0755 ${S}/system/core/libsparse/simg_dump.py
-> ${D}${bindir}/simg_dump
->          install -D -p -m0755 ${S}/system/extras/ext4_utils/mkuserimg.sh
-> ${D}${bindir}/mkuserimg
+how about this instead?
 
-BTW, if ext4_utils is not in TOOLS, then none of the following TOOLS will
-install correctly, because ${D}${bindir} is created only in this block here.
+echo  "${TOOLS}" | grep -q "ext4_utils"
 
->  
-> @@ -120,21 +123,23 @@ do_install() {
->          install -m0755 ${B}/ext4_utils/simg2simg ${D}${bindir}
->      fi
->  
-> -    if [ grep -q "adb " "${TOOLS}" ] ; then
-> +    if grep -q "adb " ${TOOLSFILE} ; then
->          install -m0755 ${B}/adb/adb ${D}${bindir}i
-                                                    ^
-
-This doesn't look right.
-
-
->      fi
->  
-> -    if [ grep -q "adbd" "${TOOLS}" ] ; then
-> +    if grep -q "adbd" ${TOOLSFILE} ; then
->          install -m0755 ${B}/adbd/adbd ${D}${bindir}
-> -        install -D -p -m0644 ${WORKDIR}/android-tools-adbd.service \
-> -          ${D}${systemd_unitdir}/system/android-tools-adbd.service
->      fi
->  
-> -    if [ grep -q "fastboot" "${TOOLS}" ] ; then
-> +    # Outside the if statement to avoid errors during do_package
-> +    install -D -p -m0644 ${WORKDIR}/android-tools-adbd.service \
-> +      ${D}${systemd_unitdir}/system/android-tools-adbd.service
-> +
-> +    if grep -q "fastboot" ${TOOLSFILE} ; then
->          install -m0755 ${B}/fastboot/fastboot ${D}${bindir}
->      fi
->  
-> -    if [ grep -q "mkbootimg" "${TOOLS}" ] ; then
-> +    if grep -q "mkbootimg" ${TOOLSFILE} ; then
->           install -m0755 ${B}/mkbootimg/mkbootimg ${D}${bindir}
->      fi
->  }
-> -- 
-> 2.4.11
-> 
+it looks simpler and more readable to me.
 
