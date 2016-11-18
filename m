@@ -1,46 +1,42 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id D260A71A8D
+Return-Path: <dev@codyps.com>
+Received: from mail-it0-f66.google.com (mail-it0-f66.google.com
+	[209.85.214.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 9CFDC71AE5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 15:24:39 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id e9so20572431pgc.1
+	Fri, 18 Nov 2016 15:25:19 +0000 (UTC)
+Received: by mail-it0-f66.google.com with SMTP id o1so4920477ito.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 07:24:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:subject:date:message-id;
-	bh=SJPsdJFjFJs4n1qscyzWSrSDlsH8uH6nWBu7HzmOzxo=;
-	b=lPkZKk6Zc+jqYTD4nJMm+8G6xnttfatfCAKYdeFGoaEjoH6m7tKcGVpCdtciiWfCTn
-	rE5q7pq57mHDWhlW1U9moWNFykHo+0G6k+cgMqe1W1VKxTzPM/bd/FaRSzknPwM4HBF1
-	GIUobS/RmdBXYwrFC5XCvzg5CTBboPPfmbVssPLiea0zp1wekhyTYKAuQBCfd0KXwPQv
-	5xHozdljMe4An9IY3HvnHDu6WJE1791von4HDWpxKyu+GhmUUjsX1Dh3uUNZxw4qGQht
-	dikz22fV5kXIa2nlor0bV1hK6gOVRzJwyuikKj6HKLhRmMUiTuAzZgW/TZxsdRIggr3j
-	/VaA==
+	Fri, 18 Nov 2016 07:25:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codyps.com; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=1Z6f2fwDQH93iZwIeRA4mX+qsq6uvePol2M9QL+I8/M=;
+	b=WmCuF+CCBWIH8yUtSRsUOq1DcGJHy3CxIenp/PVPrGwO0N6GKF5AZJSeLK5L/8V0Cp
+	QI7JEkkiLd8BhI7RgT6dnBz6ER27f0c+jckxR2gdruZxX3fjUP0HWRjzDra+BbAHtP85
+	DRTViRpA2Qk+CFlARhosb4O4AzqtVgSSWg+zE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=SJPsdJFjFJs4n1qscyzWSrSDlsH8uH6nWBu7HzmOzxo=;
-	b=B4IM4HBrSIivpE1B+u6B1ajazMr+1ocDgBZKCgXRY+qH/Jby7YLD7BS3IZfcDiUiIW
-	Z69hv3BiOOhk2dRaitdiv5iZ1HXsGp2AsmD6hv6Y0d+PzGc0NvbrQAi8CK5dSkQB7Y9H
-	Dx5nr7sBbtzCAY4zaJbNhEce1JVaJQMcVej9xiipN+ESfdBPJ4dGY8KGwAmZV7Y80zq8
-	4LRrPl4jt7p0sqRNwtGScgoWQm/WMWBbkJH4GHKNhRUj3SqZ/z7tJ3QLx1jMG3RtpiEV
-	r+CcxrR1asqNRIFuRteR5vmXOeIfMlB0AseE6vlAVLpXTEyoRk17EsQGcLlnR770ojjH
-	HMKw==
-X-Gm-Message-State: AKaTC01wNJhVurUSXPXlQfYB7/t5QIdwDOG7EdYulqsVvin+I05ossEQiA9J5BTMiPcRag==
-X-Received: by 10.98.9.149 with SMTP id 21mr254032pfj.159.1479482680865;
-	Fri, 18 Nov 2016 07:24:40 -0800 (PST)
-Received: from Pahoa2.hsd1.ca.comcast.net
-	([2601:202:4001:9ea0:e516:3069:2e5f:dd9])
-	by smtp.gmail.com with ESMTPSA id
-	n25sm18890120pfi.33.2016.11.18.07.24.40
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 18 Nov 2016 07:24:40 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster@mvista.com,
-	openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Nov 2016 07:24:34 -0800
-Message-Id: <cover.1479482464.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.3.5
-Subject: [PATCH 0/3] meta-oe pull request krogoth-next
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=1Z6f2fwDQH93iZwIeRA4mX+qsq6uvePol2M9QL+I8/M=;
+	b=lDAyC22jvBhRtsnTdZzDKMelETQoHAy5rIv+lR0O3j6rESh4tL3e2IUB0ZBvigKv0R
+	+Xql2oEJjicWVLDQv3IxvH4d9Jeb4eVMwhJNwUKHRXQArtDl/FFmuhc4aClj/WRHxgun
+	tEAwVFL/GiPXuygjs/zWbglEwIYT9er+VKzPQRDL4J88+Vi6C6S1A4bdkigjP/ZDVWA1
+	KBTlgPW3ADt7x8WYUSgs/OkO5nza2eYBg+M2d1uOaxysKsmxaUYC+JLrGhs3DrSMBYTj
+	NK6xoOZGycVy9Ul3WxtMDRPcH1h5DQ5/2inXKLKFnaUOSd+mM8tTo3nlmMLS0Glnfkq5
+	OXpA==
+X-Gm-Message-State: AKaTC020cl+Xq63RJjqZWAfmKvrhNrMJKQ4M0jCMSV3dIYy3AAqIfr0IEkrqnGw7pH1nAw==
+X-Received: by 10.107.153.134 with SMTP id b128mr257351ioe.160.1479482720811; 
+	Fri, 18 Nov 2016 07:25:20 -0800 (PST)
+Received: from localhost (static-72-74-84-52.bstnma.fios.verizon.net.
+	[72.74.84.52]) by smtp.gmail.com with ESMTPSA id
+	e202sm3118847ioe.27.2016.11.18.07.25.20
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 18 Nov 2016 07:25:20 -0800 (PST)
+From: Cody P Schafer <dev@codyps.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 18 Nov 2016 10:25:13 -0500
+Message-Id: <20161118152513.31194-1-dev@codyps.com>
+X-Mailer: git-send-email 2.10.2
+Subject: [meta-java][PATCH] openjdk-7: ignore the readdir_r deprecation already ignored in openjdk-8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,46 +49,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2016 15:24:43 -0000
+X-List-Received-Date: Fri, 18 Nov 2016 15:25:19 -0000
 
-Please consider these changes for krogoth
-The following changes since commit 851a064b53dca3b14dd33eaaaca9573b1a36bf0e:
+Without this, icedtea7-native (used to bootstrap openjdk) fails to build on my
+host system due to deprecation warnings being treated as errors.
 
-  pypi.bbclass: Allow fetching without requiring the hash (2016-10-05 18:38:31 +0200)
+I haven't observed the same issue with openjdk-7 itself, but it seems likely to
+affect it as well, so I've added the -Wno-error flag there too.
 
-are available in the git repository at:
+Signed-off-by: Cody P Schafer <dev@codyps.com>
+---
+ recipes-core/icedtea/openjdk-7-release-03b147.inc | 4 ++++
+ recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb     | 4 ++++
+ 2 files changed, 8 insertions(+)
 
-  git://git.openembedded.org/meta-openembedded-contrib akuster/krogoth-next
-  http://cgit.openembedded.org/cgit.cgi/meta-openembedded-contrib/log/?h=akuster/krogoth-next
-
-Andre McCurdy (1):
-  syslog-ng: remove unused patches
-
-Davis, Michael (1):
-  pcsc-lite: Seperate GPLV3 portions from BSD
-
-Ian Ray (1):
-  syslog-ng: expand service file @variables@ earlier
-
- .../recipes-support/pcsc-lite/pcsc-lite_1.8.13.bb  |  24 +-
- .../files/afsql-afsql_dd_insert_db-refactor.patch  | 494 ---------------------
- ...init-the-new-config-when-reverting-to-the.patch |  36 --
- .../files/free-global-LogTemplateOptions.patch     |  30 --
- .../logwriter-dont-allocate-a-new-buffer.patch     |  26 --
- .../rewrite-expr-grammar.ym-Free-up-token.patch    |  17 -
- .../files/still-free-the-unconsumed-item.patch     |  90 ----
- .../syslog-ng-verify-the-list-before-del.patch     |  38 --
- meta-oe/recipes-support/syslog-ng/syslog-ng.inc    |   9 +-
- 9 files changed, 26 insertions(+), 738 deletions(-)
- delete mode 100644 meta-oe/recipes-support/syslog-ng/files/afsql-afsql_dd_insert_db-refactor.patch
- delete mode 100644 meta-oe/recipes-support/syslog-ng/files/deinit-the-new-config-when-reverting-to-the.patch
- delete mode 100644 meta-oe/recipes-support/syslog-ng/files/free-global-LogTemplateOptions.patch
- delete mode 100644 meta-oe/recipes-support/syslog-ng/files/logwriter-dont-allocate-a-new-buffer.patch
- delete mode 100644 meta-oe/recipes-support/syslog-ng/files/rewrite-expr-grammar.ym-Free-up-token.patch
- delete mode 100644 meta-oe/recipes-support/syslog-ng/files/still-free-the-unconsumed-item.patch
- delete mode 100644 meta-oe/recipes-support/syslog-ng/files/syslog-ng-verify-the-list-before-del.patch
-
+diff --git a/recipes-core/icedtea/openjdk-7-release-03b147.inc b/recipes-core/icedtea/openjdk-7-release-03b147.inc
+index 0685729..fe18ee5 100644
+--- a/recipes-core/icedtea/openjdk-7-release-03b147.inc
++++ b/recipes-core/icedtea/openjdk-7-release-03b147.inc
+@@ -113,3 +113,7 @@ export DISTRIBUTION_PATCHES = " \
+ 	patches/icedtea-jdk-unzip.patch \
+ 	${CLEAN_X11_DISTRIBUTION_PATCH} \
+         "
++
++# readdir_r was deprecated in glibc-2.24. Ignore the error for now
++# NOTE: When updating the recipe, please check if this is still needed
++CFLAGS_append = " -Wno-error=deprecated-declarations"
+diff --git a/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb b/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
+index 711f572..eba353e 100644
+--- a/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
++++ b/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
+@@ -64,3 +64,7 @@ DISTRIBUTION_PATCHES = "\
+ "
+ 
+ export DISTRIBUTION_PATCHES
++
++# readdir_r was deprecated in glibc-2.24. Ignore the error for now
++# NOTE: When updating the recipe, please check if this is still needed
++CFLAGS_append = " -Wno-error=deprecated-declarations"
 -- 
-2.3.5
+2.10.2
 
 
