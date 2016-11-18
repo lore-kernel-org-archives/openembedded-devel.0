@@ -1,24 +1,36 @@
-Return-Path: <Quanyang.Wang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 903C271ACA
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id E3D2971A00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 01:41:48 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id uAI1fkJg019937
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 18 Nov 2016 02:06:21 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id l20so16059907qta.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2016 17:41:49 -0800 (PST)
-Received: from pek-lpgbuild1.wrs.com (128.224.153.21) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Thu, 17 Nov 2016 17:41:46 -0800
-From: <quanyang.wang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 18 Nov 2016 09:41:44 +0800
-Message-ID: <1479433304-10280-1-git-send-email-quanyang.wang@windriver.com>
-X-Mailer: git-send-email 1.7.1
-MIME-Version: 1.0
-Subject: [meta-oe] [PATCH] mcelog: Add Kabylake client support
+	Thu, 17 Nov 2016 18:06:23 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=+1xwzKHqD0bAU8zbjMe9kff7M3qHswJYSLJaKpyiAvw=;
+	b=l7tvYfhQVAljW7yVSDzfUJv7hlxY72Xlu/dyrKcZgPNNQM/Djh4CgOIhL9dHegZGTk
+	Yz2rtd1lU2VXe7vneV9mf0J18v2qRf6ohrIDzD2Yg25TUXfcT/q9rwiHybm95a0CBiOG
+	1yZwqZtxbmkk5Cv504R7D2Fo16LQWsR+lHyKnch3uyAzcnx87jnjYn5Pzx/oHyNuf1i6
+	sxcmAVFxQGv6QWMxhU3s4J3cSnvqVMiQgIZBDshCbUzLlTfVyz3L7DBsC5ZvximD8vAQ
+	fsazN0aVGBWde1/ZStdGzfDSWyX3dqqlVUDfiHWC7YvRgy20ayV86FK9ofknVjELhLad
+	O12Q==
+X-Gm-Message-State: AKaTC02dwGvDnms5AHtBW2z+VBuQawElDg7sss15Ef2B3z9uDwHA44OA9O3c8+49WWPC2A==
+X-Received: by 10.237.37.202 with SMTP id y10mr4694228qtc.211.1479434782509;
+	Thu, 17 Nov 2016 18:06:22 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
+	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
+	y44sm2917806qtc.45.2016.11.17.18.06.21
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 17 Nov 2016 18:06:22 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 17 Nov 2016 21:05:51 -0500
+Message-Id: <1479434751-30188-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-pyserial: update to version 3.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,141 +43,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2016 01:41:48 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 18 Nov 2016 02:06:22 -0000
 
-From: wqyoung <quanyang.wang@windriver.com>
-
-Issue: TA164086
-(LOCAL REV: NOT UPSTREAM) -- will send to oe-devel on 20161117
-
-CPU models 0x8E and 0x9E denote kabylake client processor
-
-Signed-off-by: Quanyang Wang <quanyang.wang@windriver.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../mcelog/0001-Add-Kabylake-client-support.patch  | 95 ++++++++++++++++++++++
- meta-oe/recipes-support/mcelog/mcelog_1.40.bb      |  1 +
- 2 files changed, 96 insertions(+)
- create mode 100644 meta-oe/recipes-support/mcelog/mcelog/0001-Add-Kabylake-client-support.patch
+ meta-python/recipes-devtools/python/python-pyserial.inc               | 4 ++--
+ .../python/{python-pyserial_3.1.1.bb => python-pyserial_3.2.1.bb}     | 2 ++
+ .../python/{python3-pyserial_3.1.1.bb => python3-pyserial_3.2.1.bb}   | 0
+ 3 files changed, 4 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyserial_3.1.1.bb => python-pyserial_3.2.1.bb} (51%)
+ rename meta-python/recipes-devtools/python/{python3-pyserial_3.1.1.bb => python3-pyserial_3.2.1.bb} (100%)
 
-diff --git a/meta-oe/recipes-support/mcelog/mcelog/0001-Add-Kabylake-client-support.patch b/meta-oe/recipes-support/mcelog/mcelog/0001-Add-Kabylake-client-support.patch
-new file mode 100644
-index 0000000..4a3545a
---- /dev/null
-+++ b/meta-oe/recipes-support/mcelog/mcelog/0001-Add-Kabylake-client-support.patch
-@@ -0,0 +1,96 @@
-+From 11bfbb446116c8313728157148a6bb15625031e8 Mon Sep 17 00:00:00 2001
-+From: Tony Luck <tony.luck@intel.com>
-+Date: Tue, 30 Aug 2016 09:37:02 -0700
-+Subject: [PATCH] Add Kabylake client support
-+
-+CPU models 0x8E and 0x9E denote kabylake client processor
-+
-+Upstream-Status: Backport [A little modification on context]
-+https://github.com/andikleen/mcelog/commit/11bfbb446116c8313728157148a6bb15625031e8
-+
-+Signed-off-by: Tony Luck <tony.luck@intel.com>
-+Signed-off-by: Andi Kleen <ak@linux.intel.com>
-+Signed-off-by: Quanyang Wang <quanyang.wang@windriver.com>
-+---
-+ intel.c  | 5 ++++-
-+ intel.h  | 3 ++-
-+ mcelog.c | 4 +++-
-+ mcelog.h | 1 +
-+ 4 files changed, 10 insertions(+), 3 deletions(-)
-+
-+diff --git a/intel.c b/intel.c
-+index f4ef9f6..33a99a8 100644
-+--- a/intel.c
-++++ b/intel.c
-+@@ -35,7 +35,8 @@ void intel_cpu_init(enum cputype cpu)
-+ 	    cpu == CPU_IVY_BRIDGE || cpu == CPU_IVY_BRIDGE_EPEX ||
-+ 	    cpu == CPU_HASWELL || cpu == CPU_HASWELL_EPEX || cpu == CPU_BROADWELL ||
-+ 	    cpu == CPU_BROADWELL_DE || cpu == CPU_BROADWELL_EPEX ||
-+-	    cpu == CPU_KNIGHTS_LANDING || cpu == CPU_SKYLAKE || cpu == CPU_SKYLAKE_XEON)
-++	    cpu == CPU_KNIGHTS_LANDING || cpu == CPU_SKYLAKE || cpu == CPU_SKYLAKE_XEON ||
-++	    cpu == CPU_KABYLAKE)
-+ 		memory_error_support = 1;
-+ }
-+ 
-+@@ -90,6 +91,8 @@ enum cputype select_intel_cputype(int family, int model)
-+ 			return CPU_SKYLAKE;
-+ 		else if (model == 0x55)
-+ 			return CPU_SKYLAKE_XEON;
-++		else if (model == 0x8E || model == 0x9E)
-++			return CPU_KABYLAKE;
-+ 		if (model > 0x1a) {
-+ 			Eprintf("Family 6 Model %u CPU: only decoding architectural errors\n",
-+ 				model);
-+diff --git a/intel.h b/intel.h
-+index d22895b..c231925 100644
-+--- a/intel.h
-++++ b/intel.h
-+@@ -26,5 +26,6 @@ extern int memory_error_support;
-+ 	case CPU_ATOM:	\
-+ 	case CPU_KNIGHTS_LANDING: \
-+ 	case CPU_SKYLAKE: \
-+-	case CPU_SKYLAKE_XEON
-++	case CPU_SKYLAKE_XEON: \
-++	case CPU_KABYLAKE
-+ 
-+diff --git a/mcelog.c b/mcelog.c
-+index 1d79fa1..7214a0d 100644
-+--- a/mcelog.c
-++++ b/mcelog.c
-+@@ -238,6 +238,7 @@ static char *cputype_name[] = {
-+ 	[CPU_ATOM] = "ATOM",
-+ 	[CPU_SKYLAKE] = "Skylake",
-+ 	[CPU_SKYLAKE_XEON] = "Skylake server",
-++	[CPU_KABYLAKE] = "Kabylake",
-+ };
-+ 
-+ static struct config_choice cpu_choices[] = {
-+@@ -287,6 +288,7 @@ static struct config_choice cpu_choices[] = {
-+ 	{ "atom", CPU_ATOM },
-+ 	{ "skylake", CPU_SKYLAKE },
-+ 	{ "skylake_server", CPU_SKYLAKE_XEON },
-++	{ "kabylake", CPU_KABYLAKE },
-+ 	{ NULL }
-+ };
-+ 
-+@@ -451,7 +453,7 @@ static void dump_mce(struct mce *m, unsigned recordlen)
-+ 	    cputype != CPU_HASWELL_EPEX && cputype != CPU_BROADWELL &&
-+ 	    cputype != CPU_BROADWELL_DE && cputype != CPU_BROADWELL_EPEX &&
-+ 	    cputype != CPU_KNIGHTS_LANDING && cputype != CPU_SKYLAKE &&
-+-	    cputype != CPU_SKYLAKE_XEON)
-++	    cputype != CPU_SKYLAKE_XEON && cputype != CPU_KABYLAKE)
-+ 		resolveaddr(m->addr);
-+ 	if (!ascii_mode && ismemerr && (m->status & MCI_STATUS_ADDRV)) {
-+ 		diskdb_resolve_addr(m->addr);
-+diff --git a/mcelog.h b/mcelog.h
-+index abc8bc9..254b3a0 100644
-+--- a/mcelog.h
-++++ b/mcelog.h
-+@@ -130,6 +130,7 @@ enum cputype {
-+ 	CPU_ATOM,
-+ 	CPU_SKYLAKE,
-+ 	CPU_SKYLAKE_XEON,
-++	CPU_KABYLAKE,
-+ };
-+ 
-+ enum option_ranges {
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-support/mcelog/mcelog_1.40.bb b/meta-oe/recipes-support/mcelog/mcelog_1.40.bb
-index 9aebbd5..0d359fc 100644
---- a/meta-oe/recipes-support/mcelog/mcelog_1.40.bb
-+++ b/meta-oe/recipes-support/mcelog/mcelog_1.40.bb
-@@ -7,6 +7,7 @@ SECTION = "System Environment/Base"
- 
- SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http; \
-     file://mcelog-debash.patch \
-+    file://0001-Add-Kabylake-client-support.patch \
-     file://run-ptest \
+diff --git a/meta-python/recipes-devtools/python/python-pyserial.inc b/meta-python/recipes-devtools/python/python-pyserial.inc
+index a4c7728..c7ab5b4 100644
+--- a/meta-python/recipes-devtools/python/python-pyserial.inc
++++ b/meta-python/recipes-devtools/python/python-pyserial.inc
+@@ -10,7 +10,7 @@ RDEPENDS_${PN} = "\
+     ${PYTHON_PN}-stringold \
  "
  
+-SRC_URI[md5sum] = "2f72100de3e410b36d575e12e82e9d27"
+-SRC_URI[sha256sum] = "d657051249ce3cbd0446bcfb2be07a435e1029da4d63f53ed9b4cdde7373364c"
++SRC_URI[md5sum] = "7142a421c8b35d2dac6c47c254db023d"
++SRC_URI[sha256sum] = "1eecfe4022240f2eab5af8d414f0504e072ee68377ba63d3b6fe6e66c26f66d1"
+ 
+ inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-pyserial_3.1.1.bb b/meta-python/recipes-devtools/python/python-pyserial_3.2.1.bb
+similarity index 51%
+rename from meta-python/recipes-devtools/python/python-pyserial_3.1.1.bb
+rename to meta-python/recipes-devtools/python/python-pyserial_3.2.1.bb
+index ad2b350..91a0f26 100644
+--- a/meta-python/recipes-devtools/python/python-pyserial_3.1.1.bb
++++ b/meta-python/recipes-devtools/python/python-pyserial_3.2.1.bb
+@@ -1,2 +1,4 @@
+ inherit setuptools
+ require python-pyserial.inc
++
++RDEPENDS_${PN} += "${PYTHON_PN}-importlib"
+diff --git a/meta-python/recipes-devtools/python/python3-pyserial_3.1.1.bb b/meta-python/recipes-devtools/python/python3-pyserial_3.2.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pyserial_3.1.1.bb
+rename to meta-python/recipes-devtools/python/python3-pyserial_3.2.1.bb
 -- 
-1.9.1
+2.7.4
 
 
