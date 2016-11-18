@@ -1,36 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E3D2971A00
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id D0F4471A23
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Nov 2016 02:06:21 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id l20so16059907qta.1
+	Fri, 18 Nov 2016 02:32:16 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id x190so29480344qkb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Nov 2016 18:06:23 -0800 (PST)
+	Thu, 17 Nov 2016 18:32:18 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=+1xwzKHqD0bAU8zbjMe9kff7M3qHswJYSLJaKpyiAvw=;
-	b=l7tvYfhQVAljW7yVSDzfUJv7hlxY72Xlu/dyrKcZgPNNQM/Djh4CgOIhL9dHegZGTk
-	Yz2rtd1lU2VXe7vneV9mf0J18v2qRf6ohrIDzD2Yg25TUXfcT/q9rwiHybm95a0CBiOG
-	1yZwqZtxbmkk5Cv504R7D2Fo16LQWsR+lHyKnch3uyAzcnx87jnjYn5Pzx/oHyNuf1i6
-	sxcmAVFxQGv6QWMxhU3s4J3cSnvqVMiQgIZBDshCbUzLlTfVyz3L7DBsC5ZvximD8vAQ
-	fsazN0aVGBWde1/ZStdGzfDSWyX3dqqlVUDfiHWC7YvRgy20ayV86FK9ofknVjELhLad
-	O12Q==
-X-Gm-Message-State: AKaTC02dwGvDnms5AHtBW2z+VBuQawElDg7sss15Ef2B3z9uDwHA44OA9O3c8+49WWPC2A==
-X-Received: by 10.237.37.202 with SMTP id y10mr4694228qtc.211.1479434782509;
-	Thu, 17 Nov 2016 18:06:22 -0800 (PST)
+	bh=XCt9SsCrfaarTgBZUzzTrRpvfjEundutspicmyZkATo=;
+	b=Rnqmhb4l4B9c24j8cPiJDi+XojaiV6fFjYXY2leNY1b9Izp9q9jsS2cXdcB7GujDxF
+	PhA743yRyTObCO1eK6ToCdB/6tV9EmyWDlcz/Pffwhkqx4mk/TDTahF4Gn66glNqJQdd
+	oe6fouwmN/v1llgNq2BHUzIjui+zsvM8J9jSiImR9sK7+mXHwNQRck4xXVRzepPJ1tm0
+	p9tj3BjHrADsfprikk8spr5dbS3Cl0tMyqnrxEZnoQmQCC6PRo8udrr/Bjw3gZJFFCvk
+	j/4a9oQIUsuKVhDu9AI/QyN1nSr9E23eTeDfvkHndbsy2EzhzgBQgO52/de7On5FpPMI
+	/mBQ==
+X-Gm-Message-State: AKaTC01KlAuCYxGzke5XtQeLzoTS1drs39x4uu27qMDXrl8iLFZyW9wC03eR4MZnUKmGBQ==
+X-Received: by 10.55.22.18 with SMTP id g18mr7662657qkh.75.1479436337547;
+	Thu, 17 Nov 2016 18:32:17 -0800 (PST)
 Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
 	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
-	y44sm2917806qtc.45.2016.11.17.18.06.21
+	g79sm2616993qke.26.2016.11.17.18.32.16
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 17 Nov 2016 18:06:22 -0800 (PST)
+	Thu, 17 Nov 2016 18:32:16 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Nov 2016 21:05:51 -0500
-Message-Id: <1479434751-30188-1-git-send-email-derek@asterius.io>
+Date: Thu, 17 Nov 2016 21:32:03 -0500
+Message-Id: <1479436323-26549-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pyserial: update to version 3.2.1
+Subject: [meta-python][PATCH] python-pycparser: update to version 2.17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,47 +43,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Nov 2016 02:06:22 -0000
+X-List-Received-Date: Fri, 18 Nov 2016 02:32:17 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pyserial.inc               | 4 ++--
- .../python/{python-pyserial_3.1.1.bb => python-pyserial_3.2.1.bb}     | 2 ++
- .../python/{python3-pyserial_3.1.1.bb => python3-pyserial_3.2.1.bb}   | 0
- 3 files changed, 4 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyserial_3.1.1.bb => python-pyserial_3.2.1.bb} (51%)
- rename meta-python/recipes-devtools/python/{python3-pyserial_3.1.1.bb => python3-pyserial_3.2.1.bb} (100%)
+ meta-python/recipes-devtools/python/python-pycparser.inc       | 10 +++++++---
+ .../{python-pycparser_2.14.bb => python-pycparser_2.17.bb}     |  0
+ meta-python/recipes-devtools/python/python3-pycparser_2.14.bb  |  2 --
+ meta-python/recipes-devtools/python/python3-pycparser_2.17.bb  |  6 ++++++
+ 4 files changed, 13 insertions(+), 5 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pycparser_2.14.bb => python-pycparser_2.17.bb} (100%)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pycparser_2.14.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pycparser_2.17.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-pyserial.inc b/meta-python/recipes-devtools/python/python-pyserial.inc
-index a4c7728..c7ab5b4 100644
---- a/meta-python/recipes-devtools/python/python-pyserial.inc
-+++ b/meta-python/recipes-devtools/python/python-pyserial.inc
-@@ -10,7 +10,7 @@ RDEPENDS_${PN} = "\
-     ${PYTHON_PN}-stringold \
- "
+diff --git a/meta-python/recipes-devtools/python/python-pycparser.inc b/meta-python/recipes-devtools/python/python-pycparser.inc
+index bf3b757..88646f0 100644
+--- a/meta-python/recipes-devtools/python/python-pycparser.inc
++++ b/meta-python/recipes-devtools/python/python-pycparser.inc
+@@ -1,8 +1,12 @@
+ SUMMARY = "Parser of the C language, written in pure Python"
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=8fb364772b1441821d391591f340c35a"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d0cfca7bbc0610f849707d9e4fd82eac"
  
--SRC_URI[md5sum] = "2f72100de3e410b36d575e12e82e9d27"
--SRC_URI[sha256sum] = "d657051249ce3cbd0446bcfb2be07a435e1029da4d63f53ed9b4cdde7373364c"
-+SRC_URI[md5sum] = "7142a421c8b35d2dac6c47c254db023d"
-+SRC_URI[sha256sum] = "1eecfe4022240f2eab5af8d414f0504e072ee68377ba63d3b6fe6e66c26f66d1"
+-SRC_URI[md5sum] = "a2bc8d28c923b4fe2b2c3b4b51a4f935"
+-SRC_URI[sha256sum] = "7959b4a74abdc27b312fed1c21e6caf9309ce0b29ea86b591fd2e99ecdf27f73"
++SRC_URI[md5sum] = "ca98dcb50bc1276f230118f6af5a40c7"
++SRC_URI[sha256sum] = "0aac31e917c24cb3357f5a4d5566f2cc91a19ca41862f6c3c22dc60a629673b6"
  
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-pyserial_3.1.1.bb b/meta-python/recipes-devtools/python/python-pyserial_3.2.1.bb
-similarity index 51%
-rename from meta-python/recipes-devtools/python/python-pyserial_3.1.1.bb
-rename to meta-python/recipes-devtools/python/python-pyserial_3.2.1.bb
-index ad2b350..91a0f26 100644
---- a/meta-python/recipes-devtools/python/python-pyserial_3.1.1.bb
-+++ b/meta-python/recipes-devtools/python/python-pyserial_3.2.1.bb
-@@ -1,2 +1,4 @@
- inherit setuptools
- require python-pyserial.inc
+ BBCLASSEXTEND = "native nativesdk"
 +
-+RDEPENDS_${PN} += "${PYTHON_PN}-importlib"
-diff --git a/meta-python/recipes-devtools/python/python3-pyserial_3.1.1.bb b/meta-python/recipes-devtools/python/python3-pyserial_3.2.1.bb
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-subprocess \
++    "
+diff --git a/meta-python/recipes-devtools/python/python-pycparser_2.14.bb b/meta-python/recipes-devtools/python/python-pycparser_2.17.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyserial_3.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-pyserial_3.2.1.bb
+rename from meta-python/recipes-devtools/python/python-pycparser_2.14.bb
+rename to meta-python/recipes-devtools/python/python-pycparser_2.17.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pycparser_2.14.bb b/meta-python/recipes-devtools/python/python3-pycparser_2.14.bb
+deleted file mode 100644
+index b30db54..0000000
+--- a/meta-python/recipes-devtools/python/python3-pycparser_2.14.bb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-inherit pypi setuptools3
+-require python-pycparser.inc
+diff --git a/meta-python/recipes-devtools/python/python3-pycparser_2.17.bb b/meta-python/recipes-devtools/python/python3-pycparser_2.17.bb
+new file mode 100644
+index 0000000..0bd1c8f
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pycparser_2.17.bb
+@@ -0,0 +1,6 @@
++inherit pypi setuptools3
++require python-pycparser.inc
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-netclient \
++    " 
 -- 
 2.7.4
 
