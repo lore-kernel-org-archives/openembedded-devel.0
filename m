@@ -1,22 +1,25 @@
-Return-Path: <markus.lehtonen@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 47111607A2
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C1F66FF0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2016 15:20:47 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga101.jf.intel.com with ESMTP; 21 Nov 2016 07:20:49 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.31,675,1473145200"; d="scan'208";a="789102836"
-Received: from marquiz.fi.intel.com ([10.237.72.155])
-	by FMSMGA003.fm.intel.com with ESMTP; 21 Nov 2016 07:20:48 -0800
-From: Markus Lehtonen <markus.lehtonen@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Nov 2016 17:20:45 +0200
-Message-Id: <1479741645-2318-3-git-send-email-markus.lehtonen@linux.intel.com>
-X-Mailer: git-send-email 2.6.6
-In-Reply-To: <1479741645-2318-1-git-send-email-markus.lehtonen@linux.intel.com>
-References: <1479741645-2318-1-git-send-email-markus.lehtonen@linux.intel.com>
-Subject: [PATCH 2/2] rsyslog: don't use update-alternatives to manage init script
+	Mon, 21 Nov 2016 18:42:36 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id uALIgbm9020382
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Mon, 21 Nov 2016 10:42:37 -0800
+Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 21 Nov 2016 10:42:36 -0800
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <joe_macdonald@mentor.com>
+Date: Mon, 21 Nov 2016 13:42:35 -0500
+Message-ID: <1479753755-30913-2-git-send-email-mark.asselstine@windriver.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1479753755-30913-1-git-send-email-mark.asselstine@windriver.com>
+References: <1479753755-30913-1-git-send-email-mark.asselstine@windriver.com>
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH 2/2] dnsmasq: allow for dnsmasq instances to reuse default dnsmasq.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,83 +32,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2016 15:20:47 -0000
+X-List-Received-Date: Mon, 21 Nov 2016 18:42:37 -0000
+Content-Type: text/plain
 
-Also, explicitly conflict with other syslog providers.
+By defining 'listen-address' in the global dnsmasq.conf file we
+prevent other instances of dnsmasq from using the global config as we
+will get an error that the address is already in use. Instead we pass
+'local-service' when we start the main dnsmasq instance which will
+listen on the loopback address as well as any other local
+subnets. This will allow the main dnsmasq instance to play nice with
+other instances we might start for network-manager, libvirt, lxc...
 
-[YOCTO #10433]
-
-Signed-off-by: Markus Lehtonen <markus.lehtonen@linux.intel.com>
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
 ---
- meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb | 34 +++-------------------
- 1 file changed, 4 insertions(+), 30 deletions(-)
+ .../recipes-support/dnsmasq/files/dnsmasq-noresolvconf.service          | 2 +-
+ .../recipes-support/dnsmasq/files/dnsmasq-resolvconf.service            | 2 +-
+ meta-networking/recipes-support/dnsmasq/files/dnsmasq.conf              | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
-index 7242323..c0e0a6d 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
-@@ -29,7 +29,7 @@ SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
- SRC_URI[md5sum] = "ad0f25f429aa2daa326732950a5eeb6c"
- SRC_URI[sha256sum] = "06e2884181333dccecceaca82827ae24ca7a258b4fbf7b1e07a80d4caae640ca"
+diff --git a/meta-networking/recipes-support/dnsmasq/files/dnsmasq-noresolvconf.service b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-noresolvconf.service
+index 32f8e59..0c64fab 100644
+--- a/meta-networking/recipes-support/dnsmasq/files/dnsmasq-noresolvconf.service
++++ b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-noresolvconf.service
+@@ -6,7 +6,7 @@ After=network.target
+ Type=forking
+ PIDFile=/run/dnsmasq.pid
+ ExecStartPre=/usr/bin/dnsmasq --test
+-ExecStart=/usr/bin/dnsmasq -x /run/dnsmasq.pid -7 /etc/dnsmasq.d
++ExecStart=/usr/bin/dnsmasq -x /run/dnsmasq.pid -7 /etc/dnsmasq.d --local-service
+ ExecStop=/bin/kill $MAINPID
+ ExecReload=/bin/kill -HUP $MAINPID
  
--inherit autotools pkgconfig systemd update-rc.d update-alternatives ptest
-+inherit autotools pkgconfig systemd update-rc.d ptest
+diff --git a/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf.service b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf.service
+index 07b4817..2980f7d 100644
+--- a/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf.service
++++ b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf.service
+@@ -6,7 +6,7 @@ After=network.target
+ Type=forking
+ PIDFile=/run/dnsmasq.pid
+ ExecStartPre=/usr/bin/dnsmasq --test
+-ExecStart=/usr/bin/dnsmasq -x /run/dnsmasq.pid -7 /etc/dnsmasq.d
++ExecStart=/usr/bin/dnsmasq -x /run/dnsmasq.pid -7 /etc/dnsmasq.d --local-service
+ ExecStartPost=/usr/bin/dnsmasq-resolvconf-helper start
+ ExecStopPre=/usr/bin/dnsmasq-resolvconf-helper stop
+ ExecStop=/bin/kill $MAINPID
+diff --git a/meta-networking/recipes-support/dnsmasq/files/dnsmasq.conf b/meta-networking/recipes-support/dnsmasq/files/dnsmasq.conf
+index bd0ee00..34d5135 100755
+--- a/meta-networking/recipes-support/dnsmasq/files/dnsmasq.conf
++++ b/meta-networking/recipes-support/dnsmasq/files/dnsmasq.conf
+@@ -77,7 +77,7 @@ bogus-priv
+ #except-interface=
+ # Or which to listen on by address (remember to include 127.0.0.1 if
+ # you use this.)
+-listen-address=127.0.0.1
++#listen-address=127.0.0.1
  
- EXTRA_OECONF += "--disable-generate-man-pages"
- 
-@@ -114,7 +114,7 @@ do_install_ptest() {
- 
- do_install_append() {
-     install -d "${D}${sysconfdir}/init.d"
--    install -m 755 ${WORKDIR}/initscript ${D}${sysconfdir}/init.d/syslog.${BPN}
-+    install -m 755 ${WORKDIR}/initscript ${D}${sysconfdir}/init.d/syslog
-     install -m 644 ${WORKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
-     install -m 644 ${WORKDIR}/rsyslog.logrotate ${D}${sysconfdir}/logrotate.rsyslog
- }
-@@ -124,20 +124,10 @@ FILES_${PN} += "${bindir}"
- INITSCRIPT_NAME = "syslog"
- INITSCRIPT_PARAMS = "defaults"
- 
--# higher than sysklogd's 100
--ALTERNATIVE_PRIORITY = "110"
--
--ALTERNATIVE_${PN} = "syslogd syslog-conf syslog-logrotate"
--
--ALTERNATIVE_LINK_NAME[syslogd] = "${base_sbindir}/syslogd"
--ALTERNATIVE_TARGET[syslogd] = "${sbindir}/rsyslogd"
--ALTERNATIVE_LINK_NAME[syslog-conf] = "${sysconfdir}/syslog.conf"
--ALTERNATIVE_TARGET[syslog-conf] = "${sysconfdir}/rsyslog.conf"
--ALTERNATIVE_LINK_NAME[syslog-logrotate] = "${sysconfdir}/logrotate.d/syslog"
--ALTERNATIVE_TARGET[syslog-logrotate] = "${sysconfdir}/logrotate.rsyslog"
--
- CONFFILES_${PN} = "${sysconfdir}/rsyslog.conf"
- 
-+RCONFLICTS_${PN} = "busybox-syslog sysklogd syslog-ng"
-+
- RPROVIDES_${PN} += "${PN}-systemd"
- RREPLACES_${PN} += "${PN}-systemd"
- RCONFLICTS_${PN} += "${PN}-systemd"
-@@ -154,19 +144,3 @@ VALGRIND_arm = ""
- VALGRIND_aarch64 = ""
- RDEPENDS_${PN}-ptest += "make diffutils gzip bash gawk coreutils procps"
- RRECOMMENDS_${PN}-ptest += "${TCLIBC}-dbg ${VALGRIND}"
--
--# no syslog-init for systemd
--python () {
--    if bb.utils.contains('DISTRO_FEATURES', 'sysvinit', True, False, d):
--        pn = d.getVar('PN', True)
--        sysconfdir = d.getVar('sysconfdir', True)
--        d.appendVar('ALTERNATIVE_%s' % (pn), ' syslog-init')
--        d.setVarFlag('ALTERNATIVE_LINK_NAME', 'syslog-init', '%s/init.d/syslog' % (sysconfdir))
--        d.setVarFlag('ALTERNATIVE_TARGET', 'syslog-init', '%s/init.d/syslog.%s' % (d.getVar('sysconfdir', True), d.getVar('BPN', True)))
--
--    if bb.utils.contains('DISTRO_FEATURES', 'systemd', True, False, d):
--        pn = d.getVar('PN', True)
--        d.appendVar('ALTERNATIVE_%s' % (pn), ' syslog-service')
--        d.setVarFlag('ALTERNATIVE_LINK_NAME', 'syslog-service', '%s/systemd/system/syslog.service' % (d.getVar('sysconfdir', True)))
--        d.setVarFlag('ALTERNATIVE_TARGET', 'syslog-service', '%s/system/rsyslog.service' % (d.getVar('systemd_unitdir', True)))
--}
+ # On systems which support it, dnsmasq binds the wildcard address,
+ # even when it is listening on only some interfaces. It then discards
 -- 
-2.6.6
+2.7.4
 
 
