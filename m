@@ -1,47 +1,48 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f53.google.com (mail-vk0-f53.google.com
-	[209.85.213.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 784FD60767
+Received: from mail-ua0-f195.google.com (mail-ua0-f195.google.com
+	[209.85.217.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 0910C6FFC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2016 12:08:45 +0000 (UTC)
-Received: by mail-vk0-f53.google.com with SMTP id 137so217142841vkl.0
+	Mon, 21 Nov 2016 12:09:24 +0000 (UTC)
+Received: by mail-ua0-f195.google.com with SMTP id 12so25031238uas.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2016 04:08:46 -0800 (PST)
+	Mon, 21 Nov 2016 04:09:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-transfer-encoding;
-	bh=K6db6HpUxDmVDaQtrOsOyOtlFOYxMq/e3Ivvbhdd3YU=;
-	b=IfaCyT/H8PjNZX1YdbMLN/UDnaDDFV1p07Mjp0HgLqvmAT0a9IKqKbXEM671/XoJIo
-	oP+zcVtEC4HDpiohMuaMf3SB27GymM2bEoK3ryqscmZjblwfMnz7qrCwjWs0Htk3BILV
-	QiJY7kQkkHnde7yUjYaYWIg6n01dYKUrdEcAYP3LeyCeDAyqUxwFqoyRIGB3PJAwdCKF
-	qYdgy6NWItIFUgCjhVe973DQ7gf9VXwtAxJAAc9FvjQGWkvkqmaOZq0snguTVmUSZoGb
-	q2P7SAnBKL91K8e7ukPksRl35cjQ6L30WY/dedx0oS84y2J3Ws3p9aqqTq1gNijtP5sr
-	mSZg==
+	bh=kHi0zYjasGg8ntgf5XFDNUazPiQeDY44xDtvTapuZKk=;
+	b=WLeqrKW1aP7wUNcQw62dtS9l+pWJNVRART47wEgTeBkC5Pmo0AzmwdJTDjmka+uJFC
+	waqZj89XDjI65ZEZrQ2azW42Zgt+PcdoVDvLuVWkda+s9fpXKYov2DeF1WIuRLZZjWPS
+	2rC2yLOqi+1/JjTdiMh8uifajkJYtRdnIFuLqdgdPwurC57cSw8lkPPfTlhA945E3gTl
+	X8VCm6Lwd8XxchyUeCiuR1ZyMHONLy7+KPGss8BEVYvV/2BMn+V13j9l7kpB8hr5pFuq
+	0gF3/6DdAJ8B34om961DN4+OE8k2kL/cNDtfldsUlvpP7W+7uu8brRAqQDtYQ9Kv0vUB
+	iHJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:content-transfer-encoding;
-	bh=K6db6HpUxDmVDaQtrOsOyOtlFOYxMq/e3Ivvbhdd3YU=;
-	b=DVma4Etu7B0uW7X7mxieDylKQ9ytDJvOmm6LKCaG4JPjjwIxVRoZkCzZf8oANa7rLr
-	kN/FyQvIl3Fsb5Xsk93mC2feKLr8s4Lgbfkxob50Fnf2yw7pbVnHIAuAh8+AVCTVj+O7
-	XtziD2VHV6QwzW44Cxt3a7T2wbSVlc4/vyfGSpmExTslkj/4OK1PdKlXli6Rn4y16Yz4
-	P0VjNYvHIBsqc6u9ZXNbKhKjN9vK2cDXhwnGqNulRVcr38BCetQMGnAF5Z6bhjmLBqsb
-	si6sslc8FlfwscAQ9OdJ+cpT7Z31UMWZlkxJFswsoGeB7QymAjQUVT4B6e01CchYYTMy
-	Uoxg==
-X-Gm-Message-State: AKaTC02T79HHWtKhb/vAsGVTt4UJW5YRjPBjDSHhB/rz/TuOBCJ5IwMY/GszQL9pguL1oWEUa4MhN7DKUCoHCw==
-X-Received: by 10.31.161.65 with SMTP id k62mr6634683vke.12.1479730126177;
-	Mon, 21 Nov 2016 04:08:46 -0800 (PST)
+	bh=kHi0zYjasGg8ntgf5XFDNUazPiQeDY44xDtvTapuZKk=;
+	b=h3R8Cb6Hcg243V+g4zKGzmYYVc/vpoPoMnuKLfMdOUYyU1RLRMJ7Kia3jGzTYP5faI
+	PpF8Yd10JjwtAZTbeUBT9DzsfRpUbUFqr2SAjQcBEcLdFlQRhEkWeMPy5oWA20ZeJI8I
+	HwmoAVnE906kcxwlraQwOIaAzxv3Dm8XKrmZmp/XFMiA7Vbkza/3F1eayImO2eN3moK/
+	BTd6sWwr/fGAPhS4/B5uzSKkbv9ImDwkUxQxeCGdmM2zgijAbbJSKPCIZfUkkiRqUISA
+	GnH2YGShoeR2bzj0CXVP2F6rYsWOKGfSQ55bpeoTmv+EE9PSp5ZJvT0j7kQ6kdBj8W9m
+	QgjA==
+X-Gm-Message-State: AKaTC01CjaFtVGzvu0kgyoCpPYA2PG6V6//NRnWF5yeeudS0J5LOqBHgAjVdoiY75Pd42Ft5HvWEXNy3m4PB5w==
+X-Received: by 10.176.82.71 with SMTP id j7mr5344047uaa.77.1479730165723; Mon,
+	21 Nov 2016 04:09:25 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.159.36.211 with HTTP; Mon, 21 Nov 2016 04:08:45 -0800 (PST)
-In-Reply-To: <1477951849-32149-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1477951849-32149-1-git-send-email-schnitzeltony@googlemail.com>
+Received: by 10.159.36.211 with HTTP; Mon, 21 Nov 2016 04:09:25 -0800 (PST)
+In-Reply-To: <1478025042-25619-2-git-send-email-schnitzeltony@googlemail.com>
+References: <1478025042-25619-1-git-send-email-schnitzeltony@googlemail.com>
+	<1478025042-25619-2-git-send-email-schnitzeltony@googlemail.com>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Mon, 21 Nov 2016 13:08:45 +0100
-Message-ID: <CALbNGRTLPKdreTpRBxgfT8Rq6bK3rzGKnpx7EN-DUp7s=ag_DA@mail.gmail.com>
+Date: Mon, 21 Nov 2016 13:09:25 +0100
+Message-ID: <CALbNGRS0CDcX7MhAgjJnY_xDYpnPSg8yT9YYQs85e2JjkMBU3A@mail.gmail.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 01/13] python-distutils-extra: initial add 2.39
+Subject: Re: [PATCH 1/1] gstreamer: fix rare but annoying build errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,93 +55,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2016 12:08:46 -0000
+X-List-Received-Date: Mon, 21 Nov 2016 12:09:25 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 31, 2016 at 11:10 PM, Andreas M=C3=BCller
+On Tue, Nov 1, 2016 at 7:30 PM, Andreas M=C3=BCller
 <schnitzeltony@googlemail.com> wrote:
-> add version for python2 and python3
+> same as:
+>
+> commit 63707b56b5352ed72f1c5291967455b78f50fb7d
+> Author: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> Date:   Sun Oct 2 22:16:52 2016 +0200
+>
+> gst-plugins-base: fix rare but annoying build errors
 >
 > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
 > ---
->  meta-oe/recipes-devtools/python/python-distutils-extra.bb  |  9 ++++++++=
-+
->  meta-oe/recipes-devtools/python/python-distutils-extra.inc | 13 ++++++++=
-+++++
->  meta-oe/recipes-devtools/python/python3-distutils-extra.bb | 11 ++++++++=
-+++
->  3 files changed, 33 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/python/python-distutils-extr=
-a.bb
->  create mode 100644 meta-oe/recipes-devtools/python/python-distutils-extr=
-a.inc
->  create mode 100644 meta-oe/recipes-devtools/python/python3-distutils-ext=
-ra.bb
+>  ...2.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch | 32 ++++++++++++++++=
+++++++
+>  .../gstreamer-0.10/gstreamer_0.10.36.bb            |  1 +
+>  2 files changed, 33 insertions(+)
+>  create mode 100644 meta-multimedia/recipes-multimedia/gstreamer-0.10/gst=
+reamer-0.10.36/0002-gst-glib2.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch
 >
-> diff --git a/meta-oe/recipes-devtools/python/python-distutils-extra.bb b/=
-meta-oe/recipes-devtools/python/python-distutils-extra.bb
+> diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-=
+0.10.36/0002-gst-glib2.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch b/meta=
+-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36/0002-gst-gl=
+ib2.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch
 > new file mode 100644
-> index 0000000..56dd33d
+> index 0000000..8db3966
 > --- /dev/null
-> +++ b/meta-oe/recipes-devtools/python/python-distutils-extra.bb
-> @@ -0,0 +1,9 @@
-> +require python-distutils-extra.inc
+> +++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer-0.10.36=
+/0002-gst-glib2.m4-don-t-do-crazy-things-to-GLIB_CFLAGS.patch
+> @@ -0,0 +1,32 @@
+> +From 4b145ceb22bbce7ba6e209c6ab61f2d5867e69f9 Mon Sep 17 00:00:00 2001
+> +From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@googlem=
+ail.com>
+> +Date: Tue, 1 Nov 2016 19:02:30 +0100
+> +Subject: [PATCH] gst-glib2.m4: don't do crazy things to GLIB_CFLAGS
+> +MIME-Version: 1.0
+> +Content-Type: text/plain; charset=3DUTF-8
+> +Content-Transfer-Encoding: 8bit
 > +
-> +inherit setuptools
+> +we are definitely not one of those poor souls mentioned
 > +
-> +DISTUTILS_INSTALL_ARGS +=3D "--install-lib=3D${libdir}/${PYTHON_DIR}/sit=
-e-packages"
+> +Upstream-Status: Pending
 > +
-> +RDEPENDS_${PN} =3D "\
-> +    python-distutils \
-> +"
-> diff --git a/meta-oe/recipes-devtools/python/python-distutils-extra.inc b=
-/meta-oe/recipes-devtools/python/python-distutils-extra.inc
-> new file mode 100644
-> index 0000000..4d87d77
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/python/python-distutils-extra.inc
-> @@ -0,0 +1,13 @@
-> +SUMMARY =3D "python-distutils extension"
-> +DESCRITION =3D "python-distutils extension integrating gettext support, =
-themed icons and scrollkeeper based documentation"
-> +HOMEPAGE =3D "https://launchpad.net/python-distutils-extra"
-> +SECTION =3D "devel/python"
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D4325afd396febcb659c36b4953313=
-5d4"
+> +Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> +---
+> + common/m4/gst-glib2.m4 | 1 -
+> + 1 file changed, 1 deletion(-)
 > +
-> +PV =3D "2.39"
-> +SRC_URI =3D "https://launchpad.net/python-distutils-extra/trunk/${PV}/+d=
-ownload/python-distutils-extra-${PV}.tar.gz"
-> +SRC_URI[md5sum] =3D "16e06db0ef73a35b4bff4b9eed5699b5"
-> +SRC_URI[sha256sum] =3D "723f24f4d65fc8d99b33a002fbbb3771d4cc9d664c97085b=
-f37f3997ae8063af"
+> +diff --git a/common/m4/gst-glib2.m4 b/common/m4/gst-glib2.m4
+> +index b01f02f..4569ae5 100644
+> +--- a/common/m4/gst-glib2.m4
+> ++++ b/common/m4/gst-glib2.m4
+> +@@ -69,7 +69,6 @@ AC_DEFUN([AG_GST_GLIB_CHECK],
+> +   fi
 > +
-> +BBCLASSEXTEND =3D "native"
-> diff --git a/meta-oe/recipes-devtools/python/python3-distutils-extra.bb b=
-/meta-oe/recipes-devtools/python/python3-distutils-extra.bb
-> new file mode 100644
-> index 0000000..af242b8
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/python/python3-distutils-extra.bb
-> @@ -0,0 +1,11 @@
-> +require python-distutils-extra.inc
+> +   dnl for the poor souls who for example have glib in /usr/local
+> +-  AS_SCRUB_INCLUDE(GLIB_CFLAGS)
 > +
-> +inherit setuptools3
+> +   AC_SUBST(GLIB_EXTRA_CFLAGS)
+> + ])
+> +--
+> +2.5.5
 > +
-> +S =3D "${WORKDIR}/python-distutils-extra-${PV}"
-> +
-> +DISTUTILS_INSTALL_ARGS +=3D "--install-lib=3D${libdir}/${PYTHON_DIR}/sit=
-e-packages"
-> +
-> +RDEPENDS_${PN} =3D "\
-> +    python3-setuptools \
-> +"
+> diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_=
+0.10.36.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.=
+10.36.bb
+> index e3bd5e5..512a28f 100644
+> --- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36=
+.bb
+> +++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36=
+.bb
+> @@ -16,6 +16,7 @@ SRC_URI =3D "http://gstreamer.freedesktop.org/src/gstre=
+amer/gstreamer-${PV}.tar.bz
+>             file://gst-inspect-check-error.patch \
+>             file://0001-baseparse-Fix-self-comparison-always-evaluates-to=
+-tr.patch \
+>             file://0001-parse-make-grammar.y-work-with-Bison-3.patch \
+> +           file://0002-gst-glib2.m4-don-t-do-crazy-things-to-GLIB_CFLAGS=
+.patch \
+>  "
+>
+>  SRC_URI[md5sum] =3D "a0cf7d6877f694a1a2ad2b4d1ecb890b"
 > --
 > 2.5.5
 >
 
-ping on whole series
+ping
 
