@@ -1,23 +1,24 @@
-Return-Path: <Mark.Asselstine@windriver.com>
+Return-Path: <joe.slater@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CC81719F7
+	by mail.openembedded.org (Postfix) with ESMTP id C5BC06FFF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2016 18:42:35 +0000 (UTC)
+	Mon, 21 Nov 2016 19:35:20 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uALIga0R005917
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 21 Nov 2016 10:42:36 -0800 (PST)
-Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 21 Nov 2016 10:42:35 -0800
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <joe_macdonald@mentor.com>
-Date: Mon, 21 Nov 2016 13:42:34 -0500
-Message-ID: <1479753755-30913-1-git-send-email-mark.asselstine@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uALJZLAw006222
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Nov 2016 11:35:22 -0800 (PST)
+Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.294.0; Mon, 21 Nov 2016 11:35:19 -0800
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 21 Nov 2016 11:35:19 -0800
+Message-ID: <1479756919-17586-1-git-send-email-jslater@windriver.com>
+X-Mailer: git-send-email 1.7.3.4
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/2] dnsmasq: read the conf files found in dnsmasq.d
+Subject: [meta-java][PATCH 1/1] layer.conf: add LAYERVERSION and LAYERDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,55 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2016 18:42:37 -0000
+X-List-Received-Date: Mon, 21 Nov 2016 19:35:21 -0000
 Content-Type: text/plain
 
-The dnsmasq package installs a ${sysconfigdir}/dnsmasq.d directory but
-doesn't currently use any configuration files that might be placed
-there. This goes against what the user would expect and doesn't match
-what you see in other distros.
+Version "1", and only depend on "core".
 
-We could ensure this config directory is read when dnsmasq is started,
-as we are doing here, or by including it in the main dnsmasq.conf
-file. By doing it here we can have better reuseability of the main
-dnsmasq.conf file by other instances of dnsmasq.
-
-There are currently no files added to the dnsmasq.d directory for core
-oe images, so this should not result in any runtime behavior changes.
-
-Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+Signed-off-by: Joe Slater <jslater@windriver.com>
 ---
- .../recipes-support/dnsmasq/files/dnsmasq-noresolvconf.service          | 2 +-
- .../recipes-support/dnsmasq/files/dnsmasq-resolvconf.service            | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ conf/layer.conf |    6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-networking/recipes-support/dnsmasq/files/dnsmasq-noresolvconf.service b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-noresolvconf.service
-index cde2244..32f8e59 100644
---- a/meta-networking/recipes-support/dnsmasq/files/dnsmasq-noresolvconf.service
-+++ b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-noresolvconf.service
-@@ -6,7 +6,7 @@ After=network.target
- Type=forking
- PIDFile=/run/dnsmasq.pid
- ExecStartPre=/usr/bin/dnsmasq --test
--ExecStart=/usr/bin/dnsmasq -x /run/dnsmasq.pid
-+ExecStart=/usr/bin/dnsmasq -x /run/dnsmasq.pid -7 /etc/dnsmasq.d
- ExecStop=/bin/kill $MAINPID
- ExecReload=/bin/kill -HUP $MAINPID
+diff --git a/conf/layer.conf b/conf/layer.conf
+index 84a4d89..0d92919 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -8,4 +8,10 @@ BBFILE_COLLECTIONS += "meta-java"
+ BBFILE_PATTERN_meta-java := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-java = "10"
  
-diff --git a/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf.service b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf.service
-index 68b175c..07b4817 100644
---- a/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf.service
-+++ b/meta-networking/recipes-support/dnsmasq/files/dnsmasq-resolvconf.service
-@@ -6,7 +6,7 @@ After=network.target
- Type=forking
- PIDFile=/run/dnsmasq.pid
- ExecStartPre=/usr/bin/dnsmasq --test
--ExecStart=/usr/bin/dnsmasq -x /run/dnsmasq.pid
-+ExecStart=/usr/bin/dnsmasq -x /run/dnsmasq.pid -7 /etc/dnsmasq.d
- ExecStartPost=/usr/bin/dnsmasq-resolvconf-helper start
- ExecStopPre=/usr/bin/dnsmasq-resolvconf-helper stop
- ExecStop=/bin/kill $MAINPID
++# This should only be incremented on significant changes that will
++# cause compatibility issues with other layers
++LAYERVERSION_meta-java = "1"
++
++LAYERDEPENDS_meta-java = "core"
++
+ LICENSE_PATH += "${LAYERDIR}/licenses"
 -- 
-2.7.4
+1.7.9.5
 
 
