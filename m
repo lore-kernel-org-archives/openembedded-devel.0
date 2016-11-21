@@ -1,47 +1,47 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
-	[209.85.217.196])
-	by mail.openembedded.org (Postfix) with ESMTP id DE1AD71999
+Received: from mail-ua0-f194.google.com (mail-ua0-f194.google.com
+	[209.85.217.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 36F8B719AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2016 12:10:08 +0000 (UTC)
-Received: by mail-ua0-f196.google.com with SMTP id 50so25155180uae.2
+	Mon, 21 Nov 2016 12:10:40 +0000 (UTC)
+Received: by mail-ua0-f194.google.com with SMTP id 50so25156672uae.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2016 04:10:10 -0800 (PST)
+	Mon, 21 Nov 2016 04:10:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-transfer-encoding;
-	bh=nzgyba7ATsuPhRfQ1wQgLhyIEJGmc+y51fQ6wMHtMew=;
-	b=y3VaR+PkKHTzAs5aPSYVDjRccE1xM4IeiZyvHduSrRtdQrw8geGBpfKdChyDiw1prr
-	49wYoZUnNfgjOLYf+XUK9eF1DvFtcalDvnfqrBUr6hMQzUQakui13ioGHt1djq8zHuis
-	7D8UCYqYLHyXsZ+DvkBTz8+DLgvKJpAr+X44cg+BQ3sMnWvqUM2d3DgdDwijQI5mqQbW
-	58YyritDEx15MmnK+uUmDDVXU8MN7xLnPd/GbxM7KZVdWjbwT97YKPZc7YNuSNg3rx3b
-	gf7uvjukjla3be8mwIEJBWkUH5c1Al0WLzwKtKDHIIBcShIfoDx+UQnmyZo1vXOxK9RD
-	ofGA==
+	bh=XD98YMHwbDw/RoRlGlZUMfkqAmAB5T8MqmqPUOy4vyE=;
+	b=YZrCiqMMoVejuriPS2Rc9ZvFM0VPgSOUjwLYOFmcc9CO61cidXI1DnwJH73zGBi1Kb
+	xYuCZWcxsYAHcg/mUZRUXhyaahbpcpyd6ON/H9E0YLxkF9sbSzO/W8qdisa8Lwr2+9Tg
+	W8jMiV0q5LZMn+qxrcaZErIX9e/8Sq1+6kt+BZKtSLVZ/26Af659klZuLGKKkIjSjxbT
+	WJhnDr8NSDiSfjnNtiQ+ITQkFSCUMzpY3pM3r63jECGGMz+BUT1qgmu/Nep7t8H36gpl
+	eR6Bjovumpsi0EJaQmURTzAc+xoaTwnZv+fJ6B/wszrX01m4pt1vFcwzPgloMUQULQIT
+	1X6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:content-transfer-encoding;
-	bh=nzgyba7ATsuPhRfQ1wQgLhyIEJGmc+y51fQ6wMHtMew=;
-	b=FWVOFiKaVb61B91LEfTbsIUetNyWyj0u6Xqb0+WqPiK44cZoix/YIV8JQYapKVqyRl
-	Pab3UJXYI//pBxh3aV7hBjDBmTOXek4v4o5zy0awpSV5f7tbcrx6VC9OQ8DSY9SCbWNi
-	rQyaJrYp5hiAwI6qrq9iFuBexxzW0roENqSWqfz46H2VwoAm7g3AZbBOq0kB8Fywe01N
-	O0du/g3aUQx+LgJvsS5W2LAwZcaDnFEMKW7qgtiA8Uzpp7I28w6HU/2m3DP8UKPChRHp
-	/DjKtskx7dqE62GUQ7t/E2XJsvVCXDsbPN/tE6jVm7XvOdPKJ5vDq3xBcBj2czIO2tY6
-	2MIg==
-X-Gm-Message-State: AKaTC03ISaX70eSnkRMgvl5LgQqW0UkQANH0XKp7IWnyOdvJujVK9rTNnxLirXu1IkPLTfPTEjFbzjuzy31ILQ==
-X-Received: by 10.176.0.180 with SMTP id 49mr7095947uaj.32.1479730210231; Mon,
-	21 Nov 2016 04:10:10 -0800 (PST)
+	bh=XD98YMHwbDw/RoRlGlZUMfkqAmAB5T8MqmqPUOy4vyE=;
+	b=PdR5HkEL6RJ01Mc73mghzuPNorv3/6NkmBwYow7bXBDHelRlvdROUvxk6yAY3uYAQ8
+	56hcXYiTQIQR5BopMj63nUspiXAdAW5MYNO9HI+PVgdKyIthrYuNE0TcLF2FikuKT+1M
+	n3imZw97lQasOL1vbukLLD075wIbe1t0XZEAI857Gcr7s7SUYWUJU+a8E13FTxPsNZl1
+	Q20pPubKnDsNq/Otc1bWu28j++atb/M55Ow5xjzlVc4FuaTr6Qn3qG0CBXtYQqxd0em8
+	NB+qPzBQ5RxSYhc0PRSiep3wLFUHk3kYsIPWelcNq+gmzUG1QImB+RNDmOH4oHr4fX2v
+	ThNw==
+X-Gm-Message-State: AKaTC03rNatZ38g6gnhoOqkHhxO99wZjj6rQipLU9loXj0akFEntILLF4kZGw+i5IODCu17jyFKo1+P8XM+LBA==
+X-Received: by 10.176.5.130 with SMTP id e2mr7227277uae.108.1479730242069;
+	Mon, 21 Nov 2016 04:10:42 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.159.36.211 with HTTP; Mon, 21 Nov 2016 04:10:09 -0800 (PST)
-In-Reply-To: <1478470013-27247-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1478470013-27247-1-git-send-email-schnitzeltony@googlemail.com>
+Received: by 10.159.36.211 with HTTP; Mon, 21 Nov 2016 04:10:41 -0800 (PST)
+In-Reply-To: <1478562596-4919-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1478562596-4919-1-git-send-email-schnitzeltony@googlemail.com>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Mon, 21 Nov 2016 13:10:09 +0100
-Message-ID: <CALbNGRQ=RwVWJ8ut4oHKyMx1L=C0afWbs-AW4oT4YL_Zaa53vQ@mail.gmail.com>
+Date: Mon, 21 Nov 2016 13:10:41 +0100
+Message-ID: <CALbNGRTyHRkJfgu85sTpdod3SmP=gs_HGgpPGMOg_nxLfFCQDw@mail.gmail.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 01/15] Revert "physfs: move to sources found at github/supertux"
+Subject: Re: [PATCH] glmark: update to latest sources
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,158 +54,217 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2016 12:10:10 -0000
+X-List-Received-Date: Mon, 21 Nov 2016 12:10:41 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Nov 6, 2016 at 11:06 PM, Andreas M=C3=BCller
+On Tue, Nov 8, 2016 at 12:49 AM, Andreas M=C3=BCller
 <schnitzeltony@googlemail.com> wrote:
-> This reverts commit 3bbec2b7921c83e13b64e808ef34122a608933f0.
+> With mesa 13.0.0 glmark-es2 crashed at the terrain part. This bug was fix=
+ed in
+> the latest commit. See further details at [1].
 >
-> The commit was intended to make supertux in meta-games happy. Now I found=
- out
-> that:
->
-> * other packets e.g meta-retro d1x-rebirth segfault with supertux version=
- of physfs
-> * supertux can be configured to use it's own physfs as static library
->
-> To avoid package version counting backwards PE =3D 1 was added. The patch
-> required for supertux was already applied in meta-games.
+> [1] https://github.com/glmark2/glmark2/issues/25
 >
 > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
 > ---
->  .../physfs/files/0001-fix-build-with-gcc-6.patch   | 52 ----------------=
+>  ...uild-error-due-missing-space-before-macro.patch | 27 ----------
+>  .../files/Fix-deprecated-declarations.patch        | 61 ----------------=
 ------
->  .../recipes-support/physfs/physfs_2.0.3.bb         | 13 ++++++
->  .../recipes-support/physfs/physfs_git.bb           | 15 -------
->  3 files changed, 13 insertions(+), 67 deletions(-)
->  delete mode 100644 meta-filesystems/recipes-support/physfs/files/0001-fi=
-x-build-with-gcc-6.patch
->  create mode 100644 meta-filesystems/recipes-support/physfs/physfs_2.0.3.=
-bb
->  delete mode 100644 meta-filesystems/recipes-support/physfs/physfs_git.bb
+>  ...-packages-to-be-used-by-the-enabled-flavo.patch |  6 +--
+>  meta-oe/recipes-benchmark/glmark2/glmark2_git.bb   | 14 ++---
+>  4 files changed, 10 insertions(+), 98 deletions(-)
+>  delete mode 100644 meta-oe/recipes-benchmark/glmark2/files/Fix-build-err=
+or-due-missing-space-before-macro.patch
+>  delete mode 100644 meta-oe/recipes-benchmark/glmark2/files/Fix-deprecate=
+d-declarations.patch
 >
-> diff --git a/meta-filesystems/recipes-support/physfs/files/0001-fix-build=
--with-gcc-6.patch b/meta-filesystems/recipes-support/physfs/files/0001-fix-=
-build-with-gcc-6.patch
+> diff --git a/meta-oe/recipes-benchmark/glmark2/files/Fix-build-error-due-=
+missing-space-before-macro.patch b/meta-oe/recipes-benchmark/glmark2/files/=
+Fix-build-error-due-missing-space-before-macro.patch
 > deleted file mode 100644
-> index 805c4a1..0000000
-> --- a/meta-filesystems/recipes-support/physfs/files/0001-fix-build-with-g=
-cc-6.patch
+> index 00eb2ed..0000000
+> --- a/meta-oe/recipes-benchmark/glmark2/files/Fix-build-error-due-missing=
+-space-before-macro.patch
 > +++ /dev/null
-> @@ -1,52 +0,0 @@
-> -From 06fe4c205094e0b65d3e5d1244f52089ed5bdafb Mon Sep 17 00:00:00 2001
-> -From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@googlem=
-ail.com>
-> -Date: Sun, 25 Sep 2016 23:50:22 +0200
-> -Subject: [PATCH] fix build with gcc-6
-> -MIME-Version: 1.0
-> -Content-Type: text/plain; charset=3DUTF-8
-> -Content-Transfer-Encoding: 8bit
+> @@ -1,27 +0,0 @@
+> -From 3fb9b6aeed2e2758239e59ba9ba1ca98535fe510 Mon Sep 17 00:00:00 2001
+> -From: Otavio Salvador <otavio@ossystems.com.br>
+> -Date: Fri, 19 Aug 2016 15:08:44 +0000
+> -Subject: [PATCH] Fix build error due missing space before macro
+> -Organization: O.S. Systems Software LTDA.
 > -
-> -Upstream-Status: Pending
-> -
-> -Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> -Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 > ----
-> - src/archiver_zip.c | 1 -
-> - src/physfs_miniz.h | 3 +++
-> - 2 files changed, 3 insertions(+), 1 deletion(-)
+> - src/native-state-x11.cpp | 2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
 > -
-> -diff --git a/src/archiver_zip.c b/src/archiver_zip.c
-> -index 5c4996d..3b436db 100644
-> ---- a/src/archiver_zip.c
-> -+++ b/src/archiver_zip.c
-> -@@ -845,7 +845,6 @@ static ZIPentry *zip_hash_ancestors(ZIPinfo *info, c=
-har *name)
-> -     if (sep)
-> -     {
-> -         const size_t namelen =3D (sep - name) + 1;
-> --        ZIPentry *parent;
-> -
-> -         *sep =3D '\0';  /* chop off last piece. */
-> -         retval =3D zip_find_entry(info, name);
-> -diff --git a/src/physfs_miniz.h b/src/physfs_miniz.h
-> -index 619cb71..fd877c0 100644
-> ---- a/src/physfs_miniz.h
-> -+++ b/src/physfs_miniz.h
-> -@@ -194,6 +194,8 @@ struct tinfl_decompressor_tag
-> -     code_len =3D TINFL_FAST_LOOKUP_BITS; do { temp =3D (pHuff)->m_tree[=
-~temp + ((bit_buf >> code_len++) & 1)]; } while (temp < 0); \
-> -   } sym =3D temp; bit_buf >>=3D code_len; num_bits -=3D code_len; } MZ_=
-MACRO_END
-> -
-> -+#pragma GCC diagnostic push
-> -+#pragma GCC diagnostic ignored "-Wmisleading-indentation"
-> - static tinfl_status tinfl_decompress(tinfl_decompressor *r, const mz_ui=
-nt8 *pIn_buf_next, size_t *pIn_buf_size, mz_uint8 *pOut_buf_start, mz_uint8=
- *pOut_buf_next, size_t *pOut_buf_size, const mz_uint32 decomp_flags)
+> -diff --git a/src/native-state-x11.cpp b/src/native-state-x11.cpp
+> -index 3b66b77..3c1703b 100644
+> ---- a/src/native-state-x11.cpp
+> -+++ b/src/native-state-x11.cpp
+> -@@ -60,7 +60,7 @@ NativeStateX11::display()
+> - bool
+> - NativeStateX11::create_window(WindowProperties const& properties)
 > - {
-> -   static const int s_length_base[31] =3D { 3,4,5,6,7,8,9,10,11,13, 15,1=
-7,19,23,27,31,35,43,51,59, 67,83,99,115,131,163,195,227,258,0,0 };
-> -@@ -465,6 +467,7 @@ common_exit:
-> -   }
-> -   return status;
-> - }
-> -+#pragma GCC diagnostic pop
+> --    static const char *win_name("glmark2 "GLMARK_VERSION);
+> -+    static const char *win_name("glmark2 " GLMARK_VERSION);
 > -
-> - /* Flush values. For typical usage you only need MZ_NO_FLUSH and MZ_FIN=
-ISH. The other stuff is for advanced use. */
-> - enum { MZ_NO_FLUSH =3D 0, MZ_PARTIAL_FLUSH =3D 1, MZ_SYNC_FLUSH =3D 2, =
-MZ_FULL_FLUSH =3D 3, MZ_FINISH =3D 4, MZ_BLOCK =3D 5 };
+> -     if (!xdpy_) {
+> -         Log::error("Error: X11 Display has not been initialized!\n");
 > ---
-> -2.5.5
+> -2.1.4
 > -
-> diff --git a/meta-filesystems/recipes-support/physfs/physfs_2.0.3.bb b/me=
-ta-filesystems/recipes-support/physfs/physfs_2.0.3.bb
-> new file mode 100644
-> index 0000000..dc2c106
-> --- /dev/null
-> +++ b/meta-filesystems/recipes-support/physfs/physfs_2.0.3.bb
-> @@ -0,0 +1,13 @@
-> +SUMMARY =3D "PhysicsFS is a library to provide abstract access to variou=
-s archives"
-> +HOMEAPAGE =3D "http://icculus.org/physfs"
-> +LICENSE =3D "Zlib"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D5d94e3eaaa10b00ca803ba35a=
-3e87cde"
-> +DEPENDS =3D "readline zlib"
-> +
-> +inherit cmake
-> +
-> +PE =3D "1"
-> +
-> +SRC_URI =3D "http://icculus.org/${BPN}/downloads/${BP}.tar.bz2"
-> +SRC_URI[md5sum] =3D "c2c727a8a8deb623b521b52d0080f613"
-> +SRC_URI[sha256sum] =3D "ca862097c0fb451f2cacd286194d071289342c107b6fe690=
-79c079883ff66b69"
-> diff --git a/meta-filesystems/recipes-support/physfs/physfs_git.bb b/meta=
--filesystems/recipes-support/physfs/physfs_git.bb
+> diff --git a/meta-oe/recipes-benchmark/glmark2/files/Fix-deprecated-decla=
+rations.patch b/meta-oe/recipes-benchmark/glmark2/files/Fix-deprecated-decl=
+arations.patch
 > deleted file mode 100644
-> index a50715c..0000000
-> --- a/meta-filesystems/recipes-support/physfs/physfs_git.bb
+> index 7a25de7..0000000
+> --- a/meta-oe/recipes-benchmark/glmark2/files/Fix-deprecated-declarations=
+.patch
 > +++ /dev/null
-> @@ -1,15 +0,0 @@
-> -SUMMARY =3D "PhysicsFS is a library to provide abstract access to variou=
-s archives"
-> -HOMEAPAGE =3D "http://icculus.org/physfs"
-> -LICENSE =3D "Zlib"
-> -LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D4424d2cfb8a288df2843c4467=
-b5d719a"
-> -DEPENDS =3D "readline zlib"
+> @@ -1,61 +0,0 @@
+> -Index: git/src/image-reader.cpp
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- git.orig/src/image-reader.cpp      2016-07-29 16:17:51.000000000 -05=
+00
+> -+++ git/src/image-reader.cpp   2016-07-29 16:18:43.000000000 -0500
+> -@@ -120,7 +120,7 @@
 > -
-> -inherit cmake
+> -     Log::debug("Reading PNG file %s\n", filename.c_str());
 > -
-> -SRC_URI =3D " \
-> -    git://github.com/SuperTux/physfs.git \
-> -    file://0001-fix-build-with-gcc-6.patch \
-> -"
-> -SRCREV =3D "f3b45a94d0b7c0a85469b1e60fefd8383b6719ba"
-> -S =3D "${WORKDIR}/git"
-> -PV =3D "2.0.3+git${SRCPV}"
+> --    const std::auto_ptr<std::istream> is_ptr(Util::get_resource(filenam=
+e));
+> -+    const std::unique_ptr<std::istream> is_ptr(Util::get_resource(filen=
+ame));
+> -     if (!(*is_ptr)) {
+> -         Log::error("Cannot open file %s!\n", filename.c_str());
+> -         return false;
+> -Index: git/src/libmatrix/shader-source.cc
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- git.orig/src/libmatrix/shader-source.cc    2016-07-29 16:18:14.00000=
+0000 -0500
+> -+++ git/src/libmatrix/shader-source.cc 2016-07-29 16:18:43.000000000 -05=
+00
+> -@@ -34,7 +34,7 @@
+> - bool
+> - ShaderSource::load_file(const std::string& filename, std::string& str)
+> - {
+> --    std::auto_ptr<std::istream> is_ptr(Util::get_resource(filename));
+> -+    std::unique_ptr<std::istream> is_ptr(Util::get_resource(filename));
+> -     std::istream& inputFile(*is_ptr);
+> -
+> -     if (!inputFile)
+> -Index: git/src/model.cpp
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- git.orig/src/model.cpp     2016-07-29 16:18:00.000000000 -0500
+> -+++ git/src/model.cpp  2016-07-29 16:18:43.000000000 -0500
+> -@@ -361,7 +361,7 @@
+> -
+> -     Log::debug("Loading model from 3ds file '%s'\n", filename.c_str());
+> -
+> --    const std::auto_ptr<std::istream> input_file_ptr(Util::get_resource=
+(filename));
+> -+    const std::unique_ptr<std::istream> input_file_ptr(Util::get_resour=
+ce(filename));
+> -     std::istream& input_file(*input_file_ptr);
+> -
+> -     if (!input_file) {
+> -@@ -681,7 +681,7 @@
+> - {
+> -     Log::debug("Loading model from obj file '%s'\n", filename.c_str());
+> -
+> --    const std::auto_ptr<std::istream> input_file_ptr(Util::get_resource=
+(filename));
+> -+    const std::unique_ptr<std::istream> input_file_ptr(Util::get_resour=
+ce(filename));
+> -     std::istream& inputFile(*input_file_ptr);
+> -     if (!inputFile)
+> -     {
+> -Index: git/src/scene-jellyfish.cpp
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- git.orig/src/scene-jellyfish.cpp   2016-07-29 16:18:08.000000000 -05=
+00
+> -+++ git/src/scene-jellyfish.cpp        2016-07-29 16:18:43.000000000 -05=
+00
+> -@@ -272,7 +272,7 @@
+> - {
+> -     Log::debug("Loading model from file '%s'\n", filename.c_str());
+> -
+> --    const std::auto_ptr<std::istream> input_file_ptr(Util::get_resource=
+(filename));
+> -+    const std::unique_ptr<std::istream> input_file_ptr(Util::get_resour=
+ce(filename));
+> -     std::istream& inputFile(*input_file_ptr);
+> -     if (!inputFile)
+> -     {
+> diff --git a/meta-oe/recipes-benchmark/glmark2/files/build-Check-packages=
+-to-be-used-by-the-enabled-flavo.patch b/meta-oe/recipes-benchmark/glmark2/=
+files/build-Check-packages-to-be-used-by-the-enabled-flavo.patch
+> index ff13329..72b8deb 100644
+> --- a/meta-oe/recipes-benchmark/glmark2/files/build-Check-packages-to-be-=
+used-by-the-enabled-flavo.patch
+> +++ b/meta-oe/recipes-benchmark/glmark2/files/build-Check-packages-to-be-=
+used-by-the-enabled-flavo.patch
+> @@ -18,9 +18,9 @@ index cab62a3..e7eaed0 100644
+>  --- a/wscript
+>  +++ b/wscript
+>  @@ -121,13 +121,17 @@ def configure(ctx):
+> -                 ('mirclient','mirclient', '0.13', list_contains(Options=
+.options.flavors, 'mir')),
+> -                 ('wayland-client','wayland-client', None, list_contains=
+(Options.options.flavors, 'wayland')),
+> -                 ('wayland-egl','wayland-egl', None, list_contains(Optio=
+ns.options.flavors, 'wayland'))]
+> +                 ('mirclient','mirclient', '0.13', list_contains(ctx.opt=
+ions.flavors, 'mir')),
+> +                 ('wayland-client','wayland-client', None, list_contains=
+(ctx.options.flavors, 'wayland')),
+> +                 ('wayland-egl','wayland-egl', None, list_contains(ctx.o=
+ptions.flavors, 'wayland'))]
+>  -    for (pkg, uselib, atleast, mandatory) in opt_pkgs:
+>  +    for (pkg, uselib, atleast, check) in opt_pkgs:
+>  +        # Check packages required by the flavors
+> diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/r=
+ecipes-benchmark/glmark2/glmark2_git.bb
+> index a2558a7..e8ccf37 100644
+> --- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+> +++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+> @@ -12,13 +12,13 @@ DEPENDS =3D "libpng12 jpeg"
+>
+>  PV =3D "2014.03+${SRCPV}"
+>
+> -SRC_URI =3D "git://github.com/glmark2/glmark2.git;protocol=3Dhttps \
+> -           file://build-Check-packages-to-be-used-by-the-enabled-flavo.p=
+atch \
+> -           file://0001-Fix-wl_surface-should-be-destoryed-after-the-wl_w=
+ind.patch \
+> -           file://Fix-build-error-due-missing-space-before-macro.patch \
+> -           file://Fix-configure-for-sqrt-check.patch \
+> -           file://Fix-deprecated-declarations.patch"
+> -SRCREV =3D "fa71af2dfab711fac87b9504b6fc9862f44bf72a"
+> +SRC_URI =3D " \
+> +    git://github.com/glmark2/glmark2.git;protocol=3Dhttps \
+> +    file://build-Check-packages-to-be-used-by-the-enabled-flavo.patch \
+> +    file://0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.pat=
+ch \
+> +    file://Fix-configure-for-sqrt-check.patch \
+> +"
+> +SRCREV =3D "f413c5b423250b4fde8f95639ad368d5b02c5b9b"
+>
+>  S =3D "${WORKDIR}/git"
+>
 > --
 > 2.5.5
 >
 
-ping on whole series
+ping
 
