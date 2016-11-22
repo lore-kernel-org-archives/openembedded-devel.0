@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 241DF719C0
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BDBA3719C7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Nov 2016 07:33:05 +0000 (UTC)
+	Tue, 22 Nov 2016 07:33:06 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uAM7X6LL010592
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id uAM7X8pr005553
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2016 23:33:06 -0800 (PST)
+	Mon, 21 Nov 2016 23:33:08 -0800
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Mon, 21 Nov 2016 23:33:06 -0800
+	14.3.294.0; Mon, 21 Nov 2016 23:33:07 -0800
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 22 Nov 2016 15:30:51 +0800
-Message-ID: <86086a1e217b58aac6b93ee55b20135aa01325d1.1479795970.git.jackie.huang@windriver.com>
+Date: Tue, 22 Nov 2016 15:30:52 +0800
+Message-ID: <ca3c415bb007fdd62f2a6fea41cc22fcd6544006.1479795970.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.8.3
 In-Reply-To: <cover.1479795970.git.jackie.huang@windriver.com>
 References: <cover.1479795970.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-gnome][PATCH 06/27] gnome-disk-utility: add x11 to REQUIRED_DISTRO_FEATURES
+Subject: [meta-gnome][PATCH 07/27] gtksourceview2: add x11 to REQUIRED_DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,34 +33,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Nov 2016 07:33:05 -0000
+X-List-Received-Date: Tue, 22 Nov 2016 07:33:06 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-gnome-disk-utility depends on virtual/libx11.
+gtksourceview2 depends on gtk+ which requires x11 distro feature.
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb    | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
-index 2f427e7..eac9dbd 100644
---- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
-@@ -7,7 +7,10 @@ DEPENDS = "glib-2.0 gtk+ libnotify libunique udisks avahi-ui virtual/libx11 liba
+diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
+index ebd2955..df37b04 100644
+--- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
++++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
+@@ -10,7 +10,9 @@ PNAME = "gtksourceview"
  
- PR = "r4"
+ S = "${WORKDIR}/${PNAME}-${PV}"
  
--inherit gnomebase gtk-icon-cache
-+inherit gnomebase gtk-icon-cache distro_features_check
+-inherit gnomebase lib_package gettext
++inherit gnomebase lib_package gettext distro_features_check
 +
 +REQUIRED_DISTRO_FEATURES = "x11"
-+
- SRC_URI[archive.md5sum] = "f0366c8baebca0404d190b2d78f3582d"
- SRC_URI[archive.sha256sum] = "03e461b6bda7f773f8018d25fa3213d3073d4dc83a76e6b39d962652f4de6a98"
- GNOME_COMPRESS_TYPE="bz2"
+ 
+ # overrule SRC_URI from gnome.conf
+ SRC_URI = "${GNOME_MIRROR}/${PNAME}/${@gnome_verdir("${PV}")}/${PNAME}-${PV}.tar.bz2;name=archive \
 -- 
 2.8.3
 
