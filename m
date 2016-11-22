@@ -1,50 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id B7D7670022
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-qk0-f175.google.com (mail-qk0-f175.google.com
+	[209.85.220.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 33A6B6060E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Nov 2016 16:54:11 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id m203so5078685wma.3
+	Tue, 22 Nov 2016 18:07:01 +0000 (UTC)
+Received: by mail-qk0-f175.google.com with SMTP id q130so36753428qke.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Nov 2016 08:54:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=sRn5iWfxykCrNb19t5ANKVGceESD9O2rV3W5rvFJk6Q=;
-	b=M3Zhfu75GpoTqtZWrc85KDeNALkplSZKqAqfJAmQBGSkXVZrfR6LvBFPH3FimLztyQ
-	ivX4cMmm7W9WYl/qBJ9XZbmtSNThwP+I74SGrP0lOH8wRQgKd6otF7eSAhSrqzh8QisL
-	kJ1Xll/4FLqZFVvjJJzV0sh/AQ60JmQPscWPBHzf+zpZN4cVANJ17Lsk7gAocSS/AbLJ
-	wLaZcPRYWWrlvVgB106KOHcHykO4nf/ayxPNVlYCGL5v2hY+D+yAQxZL17SM61HR28vp
-	40dbfOPGyWKwroKF7TC3am0uykV+pWiLvz90usG2DAoyyBOQLom1MFLSQoHCiAPIagXp
-	anWg==
+	Tue, 22 Nov 2016 10:07:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=qEtYbJLqHpbtdfzmv57s0q62ug7FQiUYmsUSNOXX88I=;
+	b=O1m8npenWpo59QfGJUAcnJhi3yKYGlZwAgpSmG3IX6cgmqoBkU28VN7LuX1LGXxl/z
+	vzBdJnWT1DxrGxfADP9dQMmJeBc2Rxulow6RC83tmCtr+vMu/fqUyWkE74fWhcuU7MXD
+	b/WL+k0vbd6VO51cSTzFXYHLkNfjzFS/8Gl9ZkZ3ooDerudMLIgIZwCG0dNx9Y/k8kBL
+	sN2dxvgyjRK7Kwfk4AuZLcHlqno1WNPc3ci1LQ/e7BQ7HlFAZRBTKqqh4v4ZSImh+Pd/
+	qAmyzyu6pxlqoh0J2Rfo0/ZH/ByVzxERVBYVFGWB+svSQLLVVqxQOIAvUB6OAvojOUjD
+	Ae2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=sRn5iWfxykCrNb19t5ANKVGceESD9O2rV3W5rvFJk6Q=;
-	b=VdH4BuCE8U4sSYFP7RyXV38IR/bTXMVMQt0D0osait/l7cIc3Q7Q0mxQ79CQemp1wt
-	JloxonWzS0HNXQsJcZaVYfQbgYMtZFw35/0/pt4UPwlUpqYKVV4lgWTYB4bHMDoxy/rD
-	o9THa2amibree4wMh/ucVJpRwrh5TQ+SKDYVpUBwvsAcNsXcjN85e4nQlVgvIx0R6E38
-	iDWQyfahtTXo5X7XF81PqWCb/vn8Wdk44luWl1r+dKmYiUn40dwWMo7tfsuvKHN3PlBO
-	NFoFOCm7GlM6zBuKRntY+8UHoxqFvcCx+emkidNHGq2zqzV7JP18ZDtnLVEjy8inbI8+
-	ST3Q==
-X-Gm-Message-State: AKaTC03p5WWbhXXrVROt/+hndUPDdkeqjqo5tiZOytp5EYC0ezw9BXvNkeV4ynobemb6kA==
-X-Received: by 10.28.139.131 with SMTP id n125mr3274041wmd.116.1479833651993; 
-	Tue, 22 Nov 2016 08:54:11 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	yj10sm31865211wjb.3.2016.11.22.08.54.11
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 22 Nov 2016 08:54:11 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 22 Nov 2016 17:54:12 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161122165412.GD3348@jama>
-References: <20161109020926.14361-1-raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=qEtYbJLqHpbtdfzmv57s0q62ug7FQiUYmsUSNOXX88I=;
+	b=kZMV+6E79zBqdPc/8LkbYfrfUTrUaS8B+QJJKFXiujn1Ng5s9G3Ya9ye9SOl7VjYLT
+	IZQGjB+oPecEt8PkiVPxELUufF11MfiF04u886/E0Fe59c2qlt2f1q0jzHfA3E5uf1gu
+	B6i3SVfjqDfpSC0gLQEEzDerPY9vzLPVKoTIx1DA35v5hONb0KhhYc1qeD3ltd/uqOxV
+	+IrVoUDEa/jepiLIM7C38zpyDW/BDQA9j0xxCjd88AgP/KMkMHuAb08JDJ3PVaZRH0Mi
+	TqILz5hetcStjV47a2msDHQi8yjmOGAx+wYDxsstzSKTuHX9OJ6u4/T7qA1csQ/+Mf1j
+	7Zjw==
+X-Gm-Message-State: AKaTC00irtRZfYSipDtu+HePen9knyEpSKPllHdk0Kidm+MMRjjgoi0Iur/ZCIuEI+EzeSfbSAJQrf80h9N/yA==
+X-Received: by 10.46.5.150 with SMTP id 144mr11937076ljf.45.1479838022750;
+	Tue, 22 Nov 2016 10:07:02 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20161109020926.14361-1-raj.khem@gmail.com>
-User-Agent: Mutt/1.7.1 (2016-10-04)
-Subject: Re: [meta-oe][PATCH] breakpad: Upgrade to latest
+Received: by 10.25.39.210 with HTTP; Tue, 22 Nov 2016 10:06:32 -0800 (PST)
+X-Originating-IP: [189.114.111.135]
+In-Reply-To: <20161122165203.GC3348@jama>
+References: <1475714017-9205-1-git-send-email-akuster808@gmail.com>
+	<20161122165203.GC3348@jama>
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+Date: Tue, 22 Nov 2016 16:06:32 -0200
+Message-ID: <CAAPZna3Gw-FmHrZe-5pSD7Hsp=W-UntZ4PiOr=+aOLWfWsGXsQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-networking][PATCH] wireshark: update to 2.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,95 +55,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Nov 2016 16:54:11 -0000
-X-Groupsio-MsgNum: 63949
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="T7mxYSe680VjQnyC"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 22 Nov 2016 18:07:02 -0000
+Content-Type: text/plain; charset=UTF-8
 
---T7mxYSe680VjQnyC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Martin,
 
-On Tue, Nov 08, 2016 at 06:09:26PM -0800, Khem Raj wrote:
-> Switch to using git
-> Gets aarch64 support
->=20
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../breakpad/{breakpad_svn.bb =3D> breakpad_git.bb}      | 18 ++++++++++=
-+++++---
->  1 file changed, 15 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-devtools/breakpad/{breakpad_svn.bb =3D> breakpad_=
-git.bb} (87%)
->=20
-> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb b/meta-oe/=
-recipes-devtools/breakpad/breakpad_git.bb
-> similarity index 87%
-> rename from meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
-> rename to meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-> index b573ea5..6dc6500 100644
-> --- a/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
-> +++ b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-> @@ -13,9 +13,21 @@ inherit autotools
-> =20
->  BBCLASSEXTEND =3D "native"
-> =20
-> -SRCREV =3D "r1435"
-> -SRC_URI =3D "svn://google-breakpad.googlecode.com/svn;module=3Dtrunk;pro=
-tocol=3Dhttp"
-> -S =3D "${WORKDIR}/trunk"
+I fixed this issue in libpcap recipe and I'll send a patch to oe-core.
 
-Please define some sane PV, now it goes backwards:
-breakpad-git: Package version for package breakpad-dbg went backwards
-which would break package feeds from (0:svn-r0.36 to 0:git-r0.0)
-[version-going-backwards]
 
-> +SRCREV_breakpad =3D "2f6cb866d615d6240a18c7535c994c6bb93b1ba5"
-> +SRCREV_glog =3D "d8cb47f77d1c31779f3ff890e1a5748483778d6a"
-> +SRCREV_gmock =3D "f7d03d2734759ee12b57d2dbcb695607d89e8e05"
-> +SRCREV_gtest =3D "ec44c6c1675c25b9827aacd08c02433cccde7780"
-> +SRCREV_protobuf =3D "cb6dd4ef5f82e41e06179dcd57d3b1d9246ad6ac"
-> +SRCREV_lss =3D "1549d20f6d3e7d66bb4e687c0ab9da42c2bff2ac"
-> +
-> +SRC_URI =3D "git://github.com/google/breakpad;name=3Dbreakpad \
-> +           git://github.com/google/glog.git;destsuffix=3Dgit/src/third_p=
-arty/glog;name=3Dglog \
-> +           git://github.com/google/googlemock.git;destsuffix=3Dgit/src/t=
-esting;name=3Dgmock \
-> +           git://github.com/google/googletest.git;destsuffix=3Dgit/src/t=
-esting/gtest;name=3Dgtest \
-> +           git://github.com/google/protobuf.git;destsuffix=3Dgit/src/thi=
-rd_party/protobuf/protobuf;name=3Dprotobuf \
-> +           git://chromium.googlesource.com/linux-syscall-support;protoco=
-l=3Dhttps;destsuffix=3Dgit/src/third_party/lss;name=3Dlss \
-> +"
-> +S =3D "${WORKDIR}/git"
-> =20
->  COMPATIBLE_MACHINE_powerpc =3D "(!.*ppc).*"
-> =20
-> --=20
-> 2.10.2
->=20
-> --=20
+On Tue, Nov 22, 2016 at 2:52 PM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
+
+> On Wed, Oct 05, 2016 at 05:33:37PM -0700, Armin Kuster wrote:
+> > Restore PE
+> >
+> > includes 2 security fixes:
+> > wnpa-sec-2016-57. NCP dissector crash. Fixed in 2.2.1.
+> > wnpa-sec-2016-56. Bluetooth L2CAP dissector crash. Fixed in 2.2.1.
+> >
+> > see https://www.wireshark.org/docs/relnotes/wireshark-2.2.1.html
+>
+> It didn't last building for very long, now it seems to be broken by
+> libpcap upgrade in oe-core:
+>
+> http://errors.yoctoproject.org/Errors/Details/104702/
+>
+> >
+> > Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> > ---
+> >  .../wireshark/{wireshark_2.2.0.bb => wireshark_2.2.1.bb}             |
+> 5 +++--
+> >  1 file changed, 3 insertions(+), 2 deletions(-)
+> >  rename meta-networking/recipes-support/wireshark/{wireshark_2.2.0.bb
+> => wireshark_2.2.1.bb} (93%)
+> >
+> > diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.
+> 2.0.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
+> > similarity index 93%
+> > rename from meta-networking/recipes-support/wireshark/wireshark_2.2.0.bb
+> > rename to meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
+> > index dca3be6..a5fb7f6 100644
+> > --- a/meta-networking/recipes-support/wireshark/wireshark_2.2.0.bb
+> > +++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.1.bb
+> > @@ -8,8 +8,9 @@ DEPENDS = "pcre expat glib-2.0 sbc"
+> >
+> >  SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2
+> "
+> >
+> > -SRC_URI[md5sum] = "c7de0997f74934f25b456846cf75cb81"
+> > -SRC_URI[sha256sum] = "a6847e741efcba6cb9d92d464d4219
+> 917bee3ad0b8f5b0f80d4388ad2f3f1104"
+> > +PE = "1"
+> > +SRC_URI[md5sum] = "49a1023a69ac108ca089d750eee50e37"
+> > +SRC_URI[sha256sum] = "900e22af04c8b35e0d02a25a360ab1
+> fb7cfe5ac18fc48a9afd75a7103e569149"
+> >
+> >  inherit autotools pkgconfig perlnative
+> >
+> > --
+> > 2.7.4
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---T7mxYSe680VjQnyC
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWDR4MwAKCRA3VSO3ZXaA
-HFGNAJ0XLcqGv67ikt70DhQ0yPX9JbWpYwCgrMVc/wOwK2oPN1qsqlxbK57Sdy4=
-=0p8l
------END PGP SIGNATURE-----
-
---T7mxYSe680VjQnyC--
