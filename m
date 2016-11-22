@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 57DAB605C2
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 296A2605C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Nov 2016 07:33:10 +0000 (UTC)
+	Tue, 22 Nov 2016 07:33:13 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id uAM7X9JF007444
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id uAM7XEiP005556
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2016 23:33:12 -0800 (PST)
+	Mon, 21 Nov 2016 23:33:14 -0800
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Mon, 21 Nov 2016 23:33:08 -0800
+	14.3.294.0; Mon, 21 Nov 2016 23:33:14 -0800
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 22 Nov 2016 15:30:53 +0800
-Message-ID: <fb8e00614c49df7d08feff3a3f7e0c69d33f6f20.1479795970.git.jackie.huang@windriver.com>
+Date: Tue, 22 Nov 2016 15:30:55 +0800
+Message-ID: <4f451e7e168a858dba719bc6f40f24e079c7b571.1479795970.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.8.3
 In-Reply-To: <cover.1479795970.git.jackie.huang@windriver.com>
 References: <cover.1479795970.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-gnome][PATCH 08/27] libwnck: add x11 to REQUIRED_DISTRO_FEATURES
+Subject: [meta-xfce][PATCH 10/27] packagegroup-xfce-base: add x11 to REQUIRED_DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,33 +33,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Nov 2016 07:33:10 -0000
+X-List-Received-Date: Tue, 22 Nov 2016 07:33:13 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-libwnck depends on gtk+ which requires x11 distro feature.
+Most packages in this packagegroup require x11 distro feature.
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb | 4 +++-
+ meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb b/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
-index d273e6c..83e8468 100644
---- a/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
-+++ b/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
-@@ -8,7 +8,9 @@ DEPENDS = "intltool-native gtk+ gdk-pixbuf-native libxres"
- PACKAGECONFIG ??= "startup-notification"
- PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
+diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
+index 14ea4b4..e2f238c 100644
+--- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
++++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
+@@ -4,7 +4,9 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
+ PR = "r5"
  
--inherit gnomebase gobject-introspection
-+inherit gnomebase gobject-introspection distro_features_check
-+REQUIRED_DISTRO_FEATURES = "x11"
+-inherit packagegroup
++inherit packagegroup distro_features_check
 +
- GNOME_COMPRESS_TYPE = "xz"
- SRC_URI[archive.md5sum] = "f03e1139296e2a3a92e3b65a3080cd32"
- SRC_URI[archive.sha256sum] = "83f732d20781fc88b22cdc6aaf2d4f388db6d3d4ff28d1a8fd45be9fb7743a9e"
++REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ RDEPENDS_${PN} = " \
+     xfwm4 \
 -- 
 2.8.3
 
