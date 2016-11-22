@@ -1,24 +1,26 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id C5BC06FFF7
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 13C58719BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2016 19:35:20 +0000 (UTC)
+	Tue, 22 Nov 2016 07:32:58 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uALJZLAw006222
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id uAM7WxBA005547
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2016 11:35:22 -0800 (PST)
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	Mon, 21 Nov 2016 23:33:00 -0800
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Mon, 21 Nov 2016 11:35:19 -0800
-From: Joe Slater <jslater@windriver.com>
+	14.3.294.0; Mon, 21 Nov 2016 23:32:59 -0800
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 21 Nov 2016 11:35:19 -0800
-Message-ID: <1479756919-17586-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
+Date: Tue, 22 Nov 2016 15:30:46 +0800
+Message-ID: <346934dd2aea3f4f2b119b673739fa1514092bfe.1479795970.git.jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.8.3
+In-Reply-To: <cover.1479795970.git.jackie.huang@windriver.com>
+References: <cover.1479795970.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-java][PATCH 1/1] layer.conf: add LAYERVERSION and LAYERDEPENDS
+Subject: [meta-oe][PATCH 01/27] gtkmm: add x11 to REQUIRED_DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,32 +33,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Nov 2016 19:35:21 -0000
+X-List-Received-Date: Tue, 22 Nov 2016 07:32:59 -0000
 Content-Type: text/plain
 
-Version "1", and only depend on "core".
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Signed-off-by: Joe Slater <jslater@windriver.com>
+gtkmm depends on gtk+ which requires x11 distro feature.
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- conf/layer.conf |    6 ++++++
- 1 file changed, 6 insertions(+)
+ meta-oe/recipes-gnome/gtk+/gtkmm_2.24.3.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index 84a4d89..0d92919 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -8,4 +8,10 @@ BBFILE_COLLECTIONS += "meta-java"
- BBFILE_PATTERN_meta-java := "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-java = "10"
+diff --git a/meta-oe/recipes-gnome/gtk+/gtkmm_2.24.3.bb b/meta-oe/recipes-gnome/gtk+/gtkmm_2.24.3.bb
+index 80595fe..f4e0865 100644
+--- a/meta-oe/recipes-gnome/gtk+/gtkmm_2.24.3.bb
++++ b/meta-oe/recipes-gnome/gtk+/gtkmm_2.24.3.bb
+@@ -8,7 +8,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
  
-+# This should only be incremented on significant changes that will
-+# cause compatibility issues with other layers
-+LAYERVERSION_meta-java = "1"
+ DEPENDS = "atkmm pangomm glibmm gtk+ cairomm"
+ 
+-inherit gnome autotools pkgconfig
++inherit gnome autotools pkgconfig distro_features_check
 +
-+LAYERDEPENDS_meta-java = "core"
-+
- LICENSE_PATH += "${LAYERDIR}/licenses"
++REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ GNOME_COMPRESS_TYPE = "xz"
+ 
 -- 
-1.7.9.5
+2.8.3
 
 
