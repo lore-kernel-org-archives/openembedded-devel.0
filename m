@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 296A2605C2
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C938605C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Nov 2016 07:33:13 +0000 (UTC)
+	Tue, 22 Nov 2016 07:33:15 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id uAM7XEiP005556
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uAM7XD7F010595
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2016 23:33:14 -0800
+	Mon, 21 Nov 2016 23:33:13 -0800 (PST)
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Mon, 21 Nov 2016 23:33:14 -0800
+	14.3.294.0; Mon, 21 Nov 2016 23:33:12 -0800
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 22 Nov 2016 15:30:55 +0800
-Message-ID: <4f451e7e168a858dba719bc6f40f24e079c7b571.1479795970.git.jackie.huang@windriver.com>
+Date: Tue, 22 Nov 2016 15:30:54 +0800
+Message-ID: <8f35d9101be1477450a413f9eb629b920ea059f8.1479795970.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.8.3
 In-Reply-To: <cover.1479795970.git.jackie.huang@windriver.com>
 References: <cover.1479795970.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 10/27] packagegroup-xfce-base: add x11 to REQUIRED_DISTRO_FEATURES
+Subject: [meta-gnome][PATCH 09/27] libxklavier: add x11 to REQUIRED_DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,33 +33,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Nov 2016 07:33:13 -0000
+X-List-Received-Date: Tue, 22 Nov 2016 07:33:15 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-Most packages in this packagegroup require x11 distro feature.
+libxklavier depends on gtk+ and libxi which require
+x11 distro feature.
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ meta-gnome/recipes-gnome/libxklavier/libxklavier_5.3.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
-index 14ea4b4..e2f238c 100644
---- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
-+++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
-@@ -4,7 +4,9 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
- PR = "r5"
+diff --git a/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.3.bb b/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.3.bb
+index 384841a..872c868 100644
+--- a/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.3.bb
++++ b/meta-gnome/recipes-gnome/libxklavier/libxklavier_5.3.bb
+@@ -6,7 +6,10 @@ DEPENDS = "xkbcomp gtk+ iso-codes libxi libxml2"
  
--inherit packagegroup
-+inherit packagegroup distro_features_check
+ GNOME_COMPRESS_TYPE = "xz"
+ 
+-inherit gnomebase gettext gobject-introspection
++inherit gnomebase gettext gobject-introspection distro_features_check
 +
 +REQUIRED_DISTRO_FEATURES = "x11"
++
+ SRC_URI[archive.md5sum] = "290ea2a8abc40f78a3a16bdae6f02808"
+ SRC_URI[archive.sha256sum] = "ebec3bc54b5652838502b96223152fb1cd8fcb14ace5cb02d718fc3276bbd404"
  
- RDEPENDS_${PN} = " \
-     xfwm4 \
 -- 
 2.8.3
 
