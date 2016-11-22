@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B9C060616
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C1874605C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Nov 2016 07:33:21 +0000 (UTC)
+	Tue, 22 Nov 2016 07:33:17 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id uAM7XMRb005562
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id uAM7XGJg007457
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Nov 2016 23:33:23 -0800
+	Mon, 21 Nov 2016 23:33:16 -0800 (PST)
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Mon, 21 Nov 2016 23:33:22 -0800
+	14.3.294.0; Mon, 21 Nov 2016 23:33:15 -0800
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 22 Nov 2016 15:31:01 +0800
-Message-ID: <6bd85e26dc8c4eb50bc5e55443eee41a84f477d1.1479795970.git.jackie.huang@windriver.com>
+Date: Tue, 22 Nov 2016 15:30:56 +0800
+Message-ID: <7ecf26c7f14e0d7cf089866d850b5cfcdeb0919a.1479795970.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.8.3
 In-Reply-To: <cover.1479795970.git.jackie.huang@windriver.com>
 References: <cover.1479795970.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 16/27] garcon: add x11 to REQUIRED_DISTRO_FEATURES
+Subject: [meta-xfce][PATCH 11/27] xfce4-pulseaudio-plugin: add x11 to REQUIRED_DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,33 +33,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Nov 2016 07:33:21 -0000
+X-List-Received-Date: Tue, 22 Nov 2016 07:33:22 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-garcon depends on libxfce4ui which requires x11 distro feature
+xfce4-pulseaudio-plugin depends on pavucontrol which
+requires x11 distro feature.
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-xfce/recipes-xfce/garcon/garcon_0.4.0.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ .../recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.4.bb   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-xfce/garcon/garcon_0.4.0.bb b/meta-xfce/recipes-xfce/garcon/garcon_0.4.0.bb
-index 81143b5..8a3260a 100644
---- a/meta-xfce/recipes-xfce/garcon/garcon_0.4.0.bb
-+++ b/meta-xfce/recipes-xfce/garcon/garcon_0.4.0.bb
-@@ -4,7 +4,9 @@ LICENSE = "LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=04a01abcbdabffae1ca26335a293276b"
- DEPENDS = "xfce4-dev-tools-native libxfce4util libxfce4ui intltool-native"
+diff --git a/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.4.bb b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.4.bb
+index 65026ac..4c7ca70 100644
+--- a/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.4.bb
++++ b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.4.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f5eac6bb0d6ec0dc655e417781d4015f"
  
--inherit xfce gtk-doc
-+inherit xfce gtk-doc distro_features_check
-+
-+REQUIRED_DISTRO_FEATURES = "x11"
+ inherit xfce-panel-plugin distro_features_check
  
- SRC_URI += "file://0001-xfce-applications.menu-don-t-bloat-settings-menu-by-.patch"
- SRC_URI[md5sum] = "aba62b80787aac295083bf7afd419ffb"
+-REQUIRED_DISTRO_FEATURES = "pulseaudio"
++REQUIRED_DISTRO_FEATURES = "pulseaudio x11"
+ 
+ DEPENDS += "pulseaudio"
+ 
 -- 
 2.8.3
 
