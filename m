@@ -1,47 +1,44 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f193.google.com (mail-ua0-f193.google.com
-	[209.85.217.193])
-	by mail.openembedded.org (Postfix) with ESMTP id BBE4D6E65F
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 4222360770
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Nov 2016 21:59:47 +0000 (UTC)
-Received: by mail-ua0-f193.google.com with SMTP id 12so3378915uas.3
+	Tue, 22 Nov 2016 23:10:05 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id f82so51234576wmf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Nov 2016 13:59:49 -0800 (PST)
+	Tue, 22 Nov 2016 15:10:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=3R8r42pUwR/gEN47xmRr1/5xfgboUQLVo4UR7Vpn7jQ=;
-	b=A5gnz3mAhodf+Qe6jL5QntKhDKrTIfxf3hgLqiPIBQCsPtE83BkcRw/lvs/C1T2HWR
-	PM/WPb3zGNkhd7rHfBESSRjRAZD8QRp+yJSjBW5OXtvqC652OJlzInfwwLZIeL88SB1J
-	sP3H/TSoaIsOizWoC4L8pt/HeWQT9yJyHSiPVJ1zilLJYMftHn3WOnCSYmvnGNTQsz7S
-	J4p7ODWootUa+LOQNUttui5W4pqKZv86GnyGNE5OucZCOUsCTBmxKPTeNFwGDKEgjS0w
-	VZDLRPc6rdaHHyziaI8uoL4a5qvFRqAKG7Tr4uWN6LuzpG1kZbMlPGoYQiMRwUJuWV42
-	JVFw==
+	bh=6+nq3ogqX/Lj+OMdVKKb2Bk2BXMQtbCw3flP5nG+/jc=;
+	b=tJnZAAuh72o26xQg+prlisqB5mrVyOV4Awp1WsIFlDQmAITEDwviaNDMlz9RXKtzqf
+	/MComXxJxNdH6+Dk9oyy+LEZ87g6juk/bElOJ9YKTmLJ9lAfXn3LziFICuRM5JHrQN5a
+	nv0UMy0kb2/nMyV9tClYcluych68wiFIkD8fSaSoZ22HMKCR+SPzfcg0xB6w2OJ1Z0J3
+	3XpJ5VQG3BgoiI12Jg5hrZBCRUwcEehKnvCHv3PCka7yDOODfZLDOMkRDv+bLxI5a+Za
+	axO4cqk4gQTSmAcTClv6wJdsVGLgtIndoWp6uKd+f7lA/v2D+8ACO5VLu788zyOmYjjU
+	gF+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=3R8r42pUwR/gEN47xmRr1/5xfgboUQLVo4UR7Vpn7jQ=;
-	b=CEIdLh9vyFVmKrBVX4XKrE3xFF2uqhHzJouFL0nb9/UMuWgmzLnc4eS52bQxliXf0g
-	LL4CMKT6enibeySPTWEbLdU0NWpZ3biwDB/VgtPopgMn757DJTAg7KJXpxOTWIYRPlTd
-	BH20Oa89Gbv8xF7OuqoGULZJj0qYVvhDtE88VrdG9ojGDQ2FYYqFVaqgufTdmpKncVX+
-	RikHk0JZ4kcGwTg/CsFSJKOxDe5NVWEkm/TABCJiXRA16DLt/kFcQWLJCtkxUtocvKOZ
-	yc7EmRJVwPuZnwpFU2FS43xlbd0OAV2Dd3Uz1NPbs68HH8CKdNO+z/EKULl/xL2GHmlP
-	0KfQ==
-X-Gm-Message-State: AKaTC0249OeZo68pwoZiYu2EimeZWtQ6O/5bSuPRQj9FO13xNiI4HLk5dvoa1XydgvG7YKD4yD80qMxB8EeVZQ==
-X-Received: by 10.159.48.146 with SMTP id j18mr12217697uab.6.1479851988540;
-	Tue, 22 Nov 2016 13:59:48 -0800 (PST)
+	bh=6+nq3ogqX/Lj+OMdVKKb2Bk2BXMQtbCw3flP5nG+/jc=;
+	b=KetBGSStwSZnydXRfk1KyJqUSC24x1vBl1ZoYd5LtF1DZxYRI8c3Z6SKZCrkLv6TrP
+	0+rJaOtiTfjRTtQvPD9zdsO88cept6PfxpBoXR2yubyCVqsUWAmSW9tAu0K59C65kdfY
+	P/UG86AB2ZWzWwMQH/KAEvveM/XznMLy0V+v9SZFGKWXoMr/v8iaN7Y09ug2Fq9hJ76V
+	pFWgqCLalC0x3R6DjW4ubBCfqEorhKGpbVyZ/QfAypifgD8aUgrjNUNLsPHMdnojpJgh
+	Jf3evNcoeJIMbvOkI4pSPNfKv7FcmGvSkRmyMT2Xl3cZD1gezHtxx/Rtj9QBrJL0pz46
+	if4w==
+X-Gm-Message-State: AKaTC01NBvOy4h15IKmqvnr/2rfTuCel4TMAAufBhulApRrQWUjHEZFmZL4LxlHN4UvvmvB4iP1x5Fo87nfhUw==
+X-Received: by 10.28.184.88 with SMTP id i85mr478797wmf.49.1479856206921; Tue,
+	22 Nov 2016 15:10:06 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.176.5.136 with HTTP; Tue, 22 Nov 2016 13:59:47 -0800 (PST)
-Received: by 10.176.5.136 with HTTP; Tue, 22 Nov 2016 13:59:47 -0800 (PST)
-In-Reply-To: <20161122164904.GB3348@jama>
-References: <20161117023409.5303-1-Qi.Chen@windriver.com>
-	<20161122164904.GB3348@jama>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 22 Nov 2016 13:59:47 -0800
-Message-ID: <CAMKF1sq2of6X2U6yG4AjNE48kqrBM_DC_jnHV-Z+0rC0taNdcA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.80.134.144 with HTTP; Tue, 22 Nov 2016 15:10:06 -0800 (PST)
+In-Reply-To: <1479436323-26549-1-git-send-email-derek@asterius.io>
+References: <1479436323-26549-1-git-send-email-derek@asterius.io>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 23 Nov 2016 00:10:06 +0100
+Message-ID: <CA+chaQdG_JH9-4YPni759T4Md6TtEka1U55CqUdQ2BdJ5+K9=w@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH V2] openobex: upgrade to 1.7.2
+Subject: Re: [meta-python][PATCH] python-pycparser: update to version 2.17
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,268 +51,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Nov 2016 21:59:48 -0000
+X-List-Received-Date: Tue, 22 Nov 2016 23:10:07 -0000
 Content-Type: text/plain; charset=UTF-8
 
-I am sending patches which should fix these too
+Causes:
 
-On Nov 22, 2016 9:01 AM, "Martin Jansa" <martin.jansa@gmail.com> wrote:
+NOTE: Resolving any missing task queue dependencies
+ERROR: Nothing RPROVIDES 'python-subprocess-native' (but virtual:native:
+meta-oe/meta-python/recipes-devtools/python/python-pycparser_2.17.bb
+<https://anaconda.lgsvl.com/jenkins/job/webos-pro-jansa-master-test-signatures/ws/build/meta-oe/meta-python/recipes-devtools/python/python-pycparser_2.17.bb>
+RDEPENDS
+on or otherwise requires it)
+NOTE: Runtime target 'python-subprocess-native' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['python-subprocess-native']
+ERROR: Required build target 'meta-world-pkgdata' has no buildable
+providers.
+Missing or unbuildable dependency chain was: ['meta-world-pkgdata',
+'python-cryptography', 'python-cffi-native', 'python-pycparser-native',
+'python-subprocess-native']
 
-> On Thu, Nov 17, 2016 at 10:34:09AM +0800, Chen Qi wrote:
-> > Add a patch to resolve segment fault in obex-check-device.
-> > Disable generation of documentation.
+On Fri, Nov 18, 2016 at 3:32 AM, Derek Straka <derek@asterius.io> wrote:
+
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+>  meta-python/recipes-devtools/python/python-pycparser.inc       | 10
+> +++++++---
+>  .../{python-pycparser_2.14.bb => python-pycparser_2.17.bb}     |  0
+>  meta-python/recipes-devtools/python/python3-pycparser_2.14.bb  |  2 --
+>  meta-python/recipes-devtools/python/python3-pycparser_2.17.bb  |  6
+> ++++++
+>  4 files changed, 13 insertions(+), 5 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python-pycparser_2.14.bb =>
+> python-pycparser_2.17.bb} (100%)
+>  delete mode 100644 meta-python/recipes-devtools/python/
+> python3-pycparser_2.14.bb
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python3-pycparser_2.17.bb
 >
-> This is probably causing obexftp and obex-data-server issues:
-> http://errors.yoctoproject.org/Errors/Details/104698/
-> http://errors.yoctoproject.org/Errors/Details/104700/
+> diff --git a/meta-python/recipes-devtools/python/python-pycparser.inc
+> b/meta-python/recipes-devtools/python/python-pycparser.inc
+> index bf3b757..88646f0 100644
+> --- a/meta-python/recipes-devtools/python/python-pycparser.inc
+> +++ b/meta-python/recipes-devtools/python/python-pycparser.inc
+> @@ -1,8 +1,12 @@
+>  SUMMARY = "Parser of the C language, written in pure Python"
+>  LICENSE = "BSD-3-Clause"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=8fb364772b1441821d391591f340c35a"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=d0cfca7bbc0610f849707d9e4fd82eac"
 >
-> reported in
-> http://lists.openembedded.org/pipermail/openembedded-devel/
-> 2016-November/109897.html
-> >
-> > Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-> > ---
-> >  .../obex/openobex-1.5/disable-cable-test.patch     | 16 ----------
-> >  .../openobex-1.5/libusb_crosscompile_check.patch   | 11 -------
-> >  .../obex/openobex-1.5/separate_builddir.patch      | 16 ----------
-> >  ...001-obex-check-device-avoid-segment-fault.patch | 29
-> ++++++++++++++++++
-> >  meta-oe/recipes-connectivity/obex/openobex_1.5.bb  | 35
-> ----------------------
-> >  .../recipes-connectivity/obex/openobex_1.7.2.bb    | 33
-> ++++++++++++++++++++
-> >  6 files changed, 62 insertions(+), 78 deletions(-)
-> >  delete mode 100644 meta-oe/recipes-connectivity/
-> obex/openobex-1.5/disable-cable-test.patch
-> >  delete mode 100644 meta-oe/recipes-connectivity/
-> obex/openobex-1.5/libusb_crosscompile_check.patch
-> >  delete mode 100644 meta-oe/recipes-connectivity/
-> obex/openobex-1.5/separate_builddir.patch
-> >  create mode 100644 meta-oe/recipes-connectivity/
-> obex/openobex/0001-obex-check-device-avoid-segment-fault.patch
-> >  delete mode 100644 meta-oe/recipes-connectivity/obex/openobex_1.5.bb
-> >  create mode 100644 meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
-> >
-> > diff --git a/meta-oe/recipes-connectivity/obex/openobex-1.5/disable-cable-test.patch
-> b/meta-oe/recipes-connectivity/obex/openobex-1.5/disable-cable-test.patch
-> > deleted file mode 100644
-> > index 95b636d..0000000
-> > --- a/meta-oe/recipes-connectivity/obex/openobex-1.
-> 5/disable-cable-test.patch
-> > +++ /dev/null
-> > @@ -1,16 +0,0 @@
-> > -
-> > -#
-> > -# Patch managed by http://www.holgerschurig.de/patcher.html
-> > -#
-> > -
-> > ---- openobex-1.2/apps/Makefile.am~disable-cable-test
-> > -+++ openobex-1.2/apps/Makefile.am
-> > -@@ -6,7 +6,7 @@
-> > -     obex_io.c obex_io.h \
-> > -     obex_put_common.c obex_put_common.h
-> > -
-> > --bin_PROGRAMS = irxfer obex_tcp irobex_palm3 obex_test
-> > -+bin_PROGRAMS = irxfer obex_tcp irobex_palm3
-> > -
-> > - obex_test_SOURCES = \
-> > -     obex_test.c obex_test.h \
-> > diff --git a/meta-oe/recipes-connectivity/obex/openobex-1.
-> 5/libusb_crosscompile_check.patch b/meta-oe/recipes-
-> connectivity/obex/openobex-1.5/libusb_crosscompile_check.patch
-> > deleted file mode 100644
-> > index 1177dfe..0000000
-> > --- a/meta-oe/recipes-connectivity/obex/openobex-1.
-> 5/libusb_crosscompile_check.patch
-> > +++ /dev/null
-> > @@ -1,11 +0,0 @@
-> > ---- /tmp/acinclude.m4        2009-04-12 10:32:15.000000000 +0200
-> > -+++ openobex-1.5/acinclude.m4        2009-04-12 10:32:38.000000000 +0200
-> > -@@ -158,7 +158,7 @@
-> > -             ;;
-> > -     *)
-> > -             PKG_CHECK_MODULES(USB, libusb, usb_lib_found=yes,
-> AC_MSG_RESULT(no))
-> > --            AC_CHECK_FILE(${prefix}/lib/pkgconfig/libusb.pc,
-> REQUIRES="libusb")
-> > -+            REQUIRES="libusb"
-> > -             ;;
-> > -     esac
-> > -     AC_SUBST(USB_CFLAGS)
-> > diff --git a/meta-oe/recipes-connectivity/obex/openobex-1.5/separate_builddir.patch
-> b/meta-oe/recipes-connectivity/obex/openobex-1.5/separate_builddir.patch
-> > deleted file mode 100644
-> > index 8abf8ae..0000000
-> > --- a/meta-oe/recipes-connectivity/obex/openobex-1.
-> 5/separate_builddir.patch
-> > +++ /dev/null
-> > @@ -1,16 +0,0 @@
-> > -Fix detection of IrDA failing with B!=S
-> > -
-> > -Upstream-Status: Pending
-> > -
-> > -Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
-> > -
-> > ---- a/acinclude.m4   2014-05-24 14:05:41.757796816 +0100
-> > -+++ b/acinclude.m4   2014-05-24 14:03:06.556795536 +0100
-> > -@@ -54,6 +54,7 @@
-> > - ])
-> > -
-> > - AC_DEFUN([AC_PATH_IRDA_LINUX], [
-> > -+    CPPFLAGS="${CPPFLAGS} -I${srcdir}"
-> > -     AC_CACHE_CHECK([for IrDA support], irda_found, [
-> > -             AC_TRY_COMPILE([
-> > -                             #include <sys/socket.h>
-> > diff --git a/meta-oe/recipes-connectivity/obex/openobex/
-> 0001-obex-check-device-avoid-segment-fault.patch b/meta-oe/recipes-
-> connectivity/obex/openobex/0001-obex-check-device-avoid-
-> segment-fault.patch
-> > new file mode 100644
-> > index 0000000..d7c2681
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-connectivity/obex/openobex/
-> 0001-obex-check-device-avoid-segment-fault.patch
-> > @@ -0,0 +1,29 @@
-> > +Subject: obex-check-device: avoid segment fault
-> > +
-> > +The argument number needs to be no less than 3 instead of 2. Otherwise,
-> > +when we use `obex-check-device xxx' on target, there would be segment
-> > +fault error.
-> > +
-> > +Upstream-Status: Pending
-> > +
-> > +Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-> > +---
-> > + udev/obex-check-device.c | 2 +-
-> > + 1 file changed, 1 insertion(+), 1 deletion(-)
-> > +
-> > +diff --git a/udev/obex-check-device.c b/udev/obex-check-device.c
-> > +index 9eb4769..df9fc73 100644
-> > +--- a/udev/obex-check-device.c
-> > ++++ b/udev/obex-check-device.c
-> > +@@ -62,7 +62,7 @@ int main (int argc, char **argv)
-> > +     unsigned long vendor;
-> > +     unsigned long product;
-> > +
-> > +-    if (argc < 2)
-> > ++    if (argc < 3)
-> > +             return 0;
-> > +
-> > +     vendor = strtoul(argv[1], NULL, 16);
-> > +--
-> > +2.8.3
-> > +
-> > diff --git a/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
-> b/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
-> > deleted file mode 100644
-> > index 6ac7905..0000000
-> > --- a/meta-oe/recipes-connectivity/obex/openobex_1.5.bb
-> > +++ /dev/null
-> > @@ -1,35 +0,0 @@
-> > -DESCRIPTION = "The Openobex project is an open source implementation of
-> the \
-> > -Object Exchange (OBEX) protocol."
-> > -HOMEPAGE = "http://openobex.triq.net"
-> > -SECTION = "libs"
-> > -DEPENDS = "virtual/libusb0"
-> > -DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES','bluez5','bluez5','
-> bluez4',d)}"
-> > -
-> > -LICENSE = "GPLv2 & LGPLv2.1"
-> > -LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a
-> \
-> > -                    file://COPYING.LIB;md5=
-> a6f89e2100d9b6cdffcea4f398e37343 \
-> > -"
-> > -
-> > -SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/openobex-${PV}
-> .tar.gz \
-> > -           file://disable-cable-test.patch \
-> > -           file://libusb_crosscompile_check.patch \
-> > -           file://separate_builddir.patch"
-> > -
-> > -SRC_URI[md5sum] = "0d83dc86445a46a1b9750107ba7ab65c"
-> > -SRC_URI[sha256sum] = "e602047570799a47ecb028420bda8f
-> 2cef41310e5a99d084de10aa9422935e65"
-> > -
-> > -inherit autotools binconfig pkgconfig
-> > -
-> > -EXTRA_OECONF = "--enable-apps --enable-syslog"
-> > -
-> > -do_install_append() {
-> > -    install -d ${D}${datadir}/aclocal
-> > -    install -m 0644 ${S}/openobex.m4 ${D}${datadir}/aclocal
-> > -}
-> > -
-> > -PACKAGES += "openobex-apps"
-> > -FILES_${PN} = "${libdir}/lib*.so.*"
-> > -FILES_${PN}-dev += "${bindir}/openobex-config"
-> > -FILES_${PN}-apps = "${bindir}/*"
-> > -DEBIAN_NOAUTONAME_${PN}-apps = "1"
-> > -
-> > diff --git a/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
-> b/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
-> > new file mode 100644
-> > index 0000000..948308e
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
-> > @@ -0,0 +1,33 @@
-> > +DESCRIPTION = "The Openobex project is an open source implementation of
-> the \
-> > +Object Exchange (OBEX) protocol."
-> > +HOMEPAGE = "http://openobex.triq.net"
-> > +SECTION = "libs"
-> > +DEPENDS = "virtual/libusb0"
-> > +DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES','bluez5','bluez5','
-> bluez4',d)}"
-> > +
-> > +LICENSE = "GPLv2 & LGPLv2.1"
-> > +LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a
-> \
-> > +                    file://COPYING.LIB;md5=
-> a6f89e2100d9b6cdffcea4f398e37343 \
-> > +"
-> > +
-> > +SRC_URI = "http://downloads.sourceforge.net/openobex/openobex-${PV}-
-> Source.tar.gz \
-> > +           file://0001-obex-check-device-avoid-segment-fault.patch"
-> > +
-> > +SRC_URI[md5sum] = "f6e0b6cb7dcfd731460a7e9a91429a3a"
-> > +SRC_URI[sha256sum] = "158860aaea52f0fce0c8e4b64550da
-> aae06df2689e05834697b7e8c7d73dd4fc"
-> > +
-> > +inherit cmake
-> > +
-> > +S = "${WORKDIR}/openobex-${PV}-Source"
-> > +
-> > +EXTRA_OECMAKE += "-DCMAKE_BUILD_TYPE=Release -DBUILD_DOCUMENTATION=no"
-> > +
-> > +do_install_append () {
-> > +    if [ "`ls -A ${D}${bindir}`" = "" ]; then
-> > +     rm -rf ${D}${bindir}
-> > +    fi
-> > +}
-> > +
-> > +FILES_${PN}-dev += "${libdir}/cmake"
-> > +
-> > +
-> > --
-> > 2.8.3
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> -SRC_URI[md5sum] = "a2bc8d28c923b4fe2b2c3b4b51a4f935"
+> -SRC_URI[sha256sum] = "7959b4a74abdc27b312fed1c21e6ca
+> f9309ce0b29ea86b591fd2e99ecdf27f73"
+> +SRC_URI[md5sum] = "ca98dcb50bc1276f230118f6af5a40c7"
+> +SRC_URI[sha256sum] = "0aac31e917c24cb3357f5a4d5566f2
+> cc91a19ca41862f6c3c22dc60a629673b6"
 >
+>  BBCLASSEXTEND = "native nativesdk"
+> +
+> +RDEPENDS_${PN} += "\
+> +    ${PYTHON_PN}-subprocess \
+> +    "
+> diff --git a/meta-python/recipes-devtools/python/python-pycparser_2.14.bb
+> b/meta-python/recipes-devtools/python/python-pycparser_2.17.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python-pycparser_2.14.bb
+> rename to meta-python/recipes-devtools/python/python-pycparser_2.17.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-pycparser_2.14.bb
+> b/meta-python/recipes-devtools/python/python3-pycparser_2.14.bb
+> deleted file mode 100644
+> index b30db54..0000000
+> --- a/meta-python/recipes-devtools/python/python3-pycparser_2.14.bb
+> +++ /dev/null
+> @@ -1,2 +0,0 @@
+> -inherit pypi setuptools3
+> -require python-pycparser.inc
+> diff --git a/meta-python/recipes-devtools/python/python3-pycparser_2.17.bb
+> b/meta-python/recipes-devtools/python/python3-pycparser_2.17.bb
+> new file mode 100644
+> index 0000000..0bd1c8f
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-pycparser_2.17.bb
+> @@ -0,0 +1,6 @@
+> +inherit pypi setuptools3
+> +require python-pycparser.inc
+> +
+> +RDEPENDS_${PN} += "\
+> +    ${PYTHON_PN}-netclient \
+> +    "
 > --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> 2.7.4
 >
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 >
 
