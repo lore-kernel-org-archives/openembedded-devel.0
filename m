@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
 	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A35271AA7
+	by mail.openembedded.org (Postfix) with ESMTP id A8F1271AF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 09:22:47 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id c4so445285pfb.3
+	Wed, 23 Nov 2016 09:22:48 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id c4so445307pfb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 01:22:49 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=3bO+pStVTc4TWYr8FBszMPbLeFieY2HhtygIB43PGnw=;
-	b=MYwaRnSjwtxWaFU8guLFP4lFk2qjsrmTNhD5yXvmOa1ikD+tTl4PGI0YJBj5EblJil
-	1iCkeJ7avKI48kTpCTczNhNJFWMCGac6Un7BW+f/digugT3FsTZjD2iRmqKOg8WBT+Ps
-	XJKX0jBXUoTAs76uzU1Fdq05mfzYy63BUdo7I8PjJ3YaqFdAdcRHH89PRlXMqrkUe2TH
-	JHMeBoc7cK7IAF7hMt5Hr7A+IuXmT5xAleUFTyOKMKcR9BLmnVMvdos8SfOFlT7DoNX4
-	kkiJ04aXbqVxpWconKqz2ZTWRpFVstaBZXolIDNrxeo5Cpt0LC0ROs98UFcE61lJKcZ/
-	IDQg==
+	bh=MDyJzOZIwa1P73i1ztBUonh1QuBSe3AapBCgZXpmwr0=;
+	b=VxtixjmVOgGmgqZaebRFTp1bGPSxotLsPRpXmSsE7jgQdRgw1mj7GPGU4DEb1onynz
+	TDQZqH3dsidyhZU2i9tJG2rMgWvYSo4283SJyFiKiueldN6NnqXZGwDkFHm0GIjghD2U
+	WqZ7oY0oUWUvFj7riB98nNFipyPdOzHB1oYGUOmel7rVQanUl5Gg3xVzPN6+wXj6itir
+	X7oMfwvsC0AvoVuIwNAW5JjRzH5QuirJWkzPwoPXzcKsxLwg+bosLYy1fNkSVGQtT7uD
+	Tdia+TPPSj4YKLw5Oi8olCn55FtIiFwow6kRBvG3qps6Xzbsy6GNna9W3P6+0Gq65nP9
+	HL5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=3bO+pStVTc4TWYr8FBszMPbLeFieY2HhtygIB43PGnw=;
-	b=dptV1LCUQrNvgXThS2XhQO8j9cqMsgHjxNdKz1N33M90kss/y590n8TvbEqPrfxCSp
-	xjSPGaGxts4MVxdP67EUJeZ/SKVLPmpZt/XLRUM9g1FN9HUyxQQU1r3tbK8oFSH3qrIz
-	dQFNkLDpAJXDo3pBE3ymoXt6CtXgqiGOCNrdVoWuU5mUHkQIsFH4ySbLQhmnhtTd1g6V
-	SIFAFdJjunkXTItfwgvKm3XmNbmDNiR4r0ZTX8xZlXDmEEUieYMng3E7dY5OVxLqmNdG
-	4Bc/MHcXx+GT/ivDUU6/Lu1EUxtUz5GtlWa/4Eh2DuF5L/JeLF3wz/WzEVmLd1kQmQRt
-	MM6g==
-X-Gm-Message-State: AKaTC00hJSR5UbLhdWrJNI29Cl0mu6uF/LbQ+3jE1O4A1VZM2hFR3gevmntuhHnpGmiisQ==
-X-Received: by 10.99.66.198 with SMTP id p189mr3616464pga.30.1479892969695;
-	Wed, 23 Nov 2016 01:22:49 -0800 (PST)
+	bh=MDyJzOZIwa1P73i1ztBUonh1QuBSe3AapBCgZXpmwr0=;
+	b=h501haXiMu6l2A9KW4yJiZGhvjkv7vqxLTyyqpIDVDxdihnqP0ZDLrs02wWv5xEfj5
+	QNFVmmsIqCKEDaBeI0b+KQtBnp3XCD+VYLb3Mlc1+7avLx+3OaJNEWbRVVAdcHLbgaOt
+	oadz2ynTdWqORqdG/V6O3foodd6w39+g4Is9fqOH1pFxOHCRPWehQF3cW+buoOfsI8ZO
+	q3IDpmahMTjQSMf3AFRJa4axB08uTq4eE36c4YWzbcyBtF3e9TIdKUYsXtuGOOC7uYn9
+	00wZSJX0dESI39WE+52wc/8BM0gNgC/kCYh5AzenTr55aNHbLC+fTtlh5irT5O1kNeez
+	Ul2w==
+X-Gm-Message-State: AKaTC013HM20Bw7Qo1jZPXZhEKx5Xf2h9/gX4j4px7Q0cOCNcTmLicgZ8YwV7K9w0uf8nw==
+X-Received: by 10.99.230.83 with SMTP id p19mr3503257pgj.138.1479892970436;
+	Wed, 23 Nov 2016 01:22:50 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u23sm51056087pfg.86.2016.11.23.01.22.48
+	u23sm51056087pfg.86.2016.11.23.01.22.49
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Nov 2016 01:22:49 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:50 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Nov 2016 01:22:02 -0800
-Message-Id: <20161123092209.23699-42-raj.khem@gmail.com>
+Date: Wed, 23 Nov 2016 01:22:03 -0800
+Message-Id: <20161123092209.23699-43-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.2
 In-Reply-To: <20161123092209.23699-1-raj.khem@gmail.com>
 References: <20161123092209.23699-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 42/49] libmad: Fix build with clang
+Subject: [meta-oe][PATCH 43/49] modemmanager: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,72 +59,61 @@ X-List-Received-Date: Wed, 23 Nov 2016 09:22:48 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...4-Remove-clang-unsupported-compiler-flags.patch | 43 ++++++++++++++++++++++
- .../recipes-multimedia/libmad/libmad_0.15.1b.bb    |  1 +
- 2 files changed, 44 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/libmad/libmad/0004-Remove-clang-unsupported-compiler-flags.patch
+ .../modemmanager/modemmanager/enum-conversion.patch | 21 +++++++++++++++++++++
+ ...{modemmanager_1.6.0.bb => modemmanager_1.6.4.bb} |  8 +++++---
+ 2 files changed, 26 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/modemmanager/modemmanager/enum-conversion.patch
+ rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.6.0.bb => modemmanager_1.6.4.bb} (88%)
 
-diff --git a/meta-oe/recipes-multimedia/libmad/libmad/0004-Remove-clang-unsupported-compiler-flags.patch b/meta-oe/recipes-multimedia/libmad/libmad/0004-Remove-clang-unsupported-compiler-flags.patch
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager/enum-conversion.patch b/meta-oe/recipes-connectivity/modemmanager/modemmanager/enum-conversion.patch
 new file mode 100644
-index 0000000..5bfce4d
+index 0000000..a3fb0f3
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/libmad/libmad/0004-Remove-clang-unsupported-compiler-flags.patch
-@@ -0,0 +1,43 @@
-+From 3d3fce9b8b927a817b89dd78a60b5cf7d978f64c Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Sebastian=20Dr=C3=B6ge?= <sebastian@centricular.com>
-+Date: Tue, 16 Sep 2014 12:28:47 +0300
-+Subject: [PATCH 4/4] Remove clang unsupported compiler flags
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager/enum-conversion.patch
+@@ -0,0 +1,21 @@
++Fixes errors found bt Clang
 +
-+---
-+ configure.ac | 12 ++++++------
-+ 1 file changed, 6 insertions(+), 6 deletions(-)
++| ../../ModemManager-1.6.4/src/mm-bearer-qmi.c:774:50: error: implicit conversion from enumeration type 'MMBearerStatus' to different enumeration type 'MMBearerConnectionStatus' [-Werror,-Wenum-conversion]
++|         MMBearerConnectionStatus bearer_status = mm_base_bearer_get_status (MM_BASE_BEARER (self));
++|                                  ~~~~~~~~~~~~~   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++| 1 error generated.
 +
-+diff --git a/configure.ac b/configure.ac
-+index 4fcd48b..40302db 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -140,20 +140,20 @@ then
-+     case "$optimize" in
-+ 	-O|"-O "*)
-+ 	    optimize="-O"
-+-	    optimize="$optimize -fforce-addr"
-++	    : #optimize="$optimize -fforce-addr"
-+ 	    : #x optimize="$optimize -finline-functions"
-+ 	    : #- optimize="$optimize -fstrength-reduce"
-+-	    optimize="$optimize -fthread-jumps"
-+-	    optimize="$optimize -fcse-follow-jumps"
-+-	    optimize="$optimize -fcse-skip-blocks"
-++	    : #optimize="$optimize -fthread-jumps"
-++	    : #optimize="$optimize -fcse-follow-jumps"
-++	    : #optimize="$optimize -fcse-skip-blocks"
-+ 	    : #x optimize="$optimize -frerun-cse-after-loop"
-+ 	    : #x optimize="$optimize -frerun-loop-opt"
-+ 	    : #x optimize="$optimize -fgcse"
-+ 	    optimize="$optimize -fexpensive-optimizations"
-+-	    optimize="$optimize -fregmove"
-++	    : #optimize="$optimize -fregmove"
-+ 	    : #* optimize="$optimize -fdelayed-branch"
-+ 	    : #x optimize="$optimize -fschedule-insns"
-+-	    optimize="$optimize -fschedule-insns2"
-++	    : #optimize="$optimize -fschedule-insns2"
-+ 	    : #? optimize="$optimize -ffunction-sections"
-+ 	    : #? optimize="$optimize -fcaller-saves"
-+ 	    : #> optimize="$optimize -funroll-loops"
-+-- 
-+2.1.0
 +
-diff --git a/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb b/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb
-index 3a647bf..8d9246a 100644
---- a/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb
-+++ b/meta-oe/recipes-multimedia/libmad/libmad_0.15.1b.bb
-@@ -17,6 +17,7 @@ SRC_URI = "ftp://ftp.mars.org/pub/mpeg/libmad-${PV}.tar.gz \
-     file://obsolete_automake_macros.patch \
-     file://automake-foreign.patch \
- "
-+SRC_URI_append_toolchain-clang = " file://0004-Remove-clang-unsupported-compiler-flags.patch "
++Index: ModemManager-1.6.4/src/mm-bearer-qmi.c
++===================================================================
++--- ModemManager-1.6.4.orig/src/mm-bearer-qmi.c
+++++ ModemManager-1.6.4/src/mm-bearer-qmi.c
++@@ -771,7 +771,7 @@ packet_service_status_indication_cb (Qmi
++             &connection_status,
++             NULL,
++             NULL)) {
++-        MMBearerConnectionStatus bearer_status = mm_base_bearer_get_status (MM_BASE_BEARER (self));
+++        MMBearerConnectionStatus bearer_status = (MMBearerConnectionStatus)mm_base_bearer_get_status (MM_BASE_BEARER (self));
++ 
++         if (connection_status == QMI_WDS_CONNECTION_STATUS_DISCONNECTED &&
++             bearer_status != MM_BEARER_CONNECTION_STATUS_DISCONNECTED &&
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.6.0.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.6.4.bb
+similarity index 88%
+rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.6.0.bb
+rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.6.4.bb
+index e26c227..5e4e220 100644
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.6.0.bb
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.6.4.bb
+@@ -11,9 +11,11 @@ inherit gnomebase gettext systemd vala gobject-introspection bash-completion
  
- SRC_URI[md5sum] = "1be543bc30c56fb6bea1d7bf6a64e66c"
- SRC_URI[sha256sum] = "bbfac3ed6bfbc2823d3775ebb931087371e142bb0e9bb1bee51a76a6e0078690"
+ DEPENDS = "glib-2.0 libgudev dbus-glib intltool-native"
+ 
+-SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz"
+-SRC_URI[md5sum] = "d9d93d2961ee35b4cd8a75a6a8631cb4"
+-SRC_URI[sha256sum] = "a94f4657a8fa6835e2734fcc6edf20aa8c8d452f62299d7748541021c3eb2445"
++SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz \
++           file://enum-conversion.patch \
++"
++SRC_URI[md5sum] = "06488186c7dd53f8104183b86f7a1568"
++SRC_URI[sha256sum] = "cdd5b4cb1e4d7643643a28ccbfc4bb354bfa9cb89a77ea160ebdf7926171c668"
+ 
+ S = "${WORKDIR}/ModemManager-${PV}"
+ 
 -- 
 2.10.2
 
