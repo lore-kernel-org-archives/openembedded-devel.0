@@ -1,48 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f177.google.com (mail-pf0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 669F9719E5
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 6D8D771AA9
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 23 Nov 2016 09:22:47 +0000 (UTC)
-Received: by mail-pf0-f177.google.com with SMTP id d2so2626630pfd.0
+Received: by mail-pg0-f67.google.com with SMTP id e9so668863pgc.1
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 23 Nov 2016 01:22:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=IH7BLiEkqABdWbeIP4miOLAhlDVW0ZUH5opEp5h2+80=;
-	b=jta5fP6Bf9gzjZzWAoLAp5OgUVnockjJ0MO7EygJpUQfDjCpT3tWapLnK9SZINofqH
-	Ct/rh/IxfxqNHzPpDaUp6OKIGiszhhEvui316ASGT8d6u3Gwt/QIhwj7e3Ngoowcwdl6
-	ZUj8gnUEubNsYGF6rePuv0r3Djfam2PWb6yIRXYFkOustu9SRa8Amt7D0XizAe+z/9N1
-	0JdAlohyWfNq9gJ1OTj2cZjZf2D/nvQuLLXTC4OWh1cIjvHtmjqDCS0dkjgXLhIRmsHD
-	gWhSYVg3KxdG0JpYgP2IzAIxGb6Ivqhp/fRBLEqkWIA3HheA0aj8211mIU7DglsTbZ1f
-	33eA==
+	bh=rv8HNXp6AUPyBJfbyNrWhBM/Vu7GiOo1IpaB2gwNxUM=;
+	b=LcMk/LTteh4Jz7pfFH2gQykyCzuVPNerRiFEPnbXKL12osDqUjVI1aBZEefyj95BEY
+	Cwg/HnSZRzEEKZu9IfpFMgeUzp3cEhmGO/Gia5S8PyK2zLYbGanlCSoV2e49OyJWx66k
+	45av138B1UOKkInBYoeaI2ZNtY+bdY9IgVso0gvHQp2K0TsqOaVh2Teaaw+g/1/O3uYa
+	lOOaGOQe61OQ+K3rAog0yTmubJyqfjk2Q5ir2tKhm8SeH7KloZ3n/LjVnC91hsOShbrH
+	qb1MpkoY7tDo7gzwRekuoJMAGkN4qDS5FNKKoCHkyInXOSQx5gF8QyPbWMJ7iS8RzRYZ
+	dn/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=IH7BLiEkqABdWbeIP4miOLAhlDVW0ZUH5opEp5h2+80=;
-	b=T4rfFg+quPpKzFzNlWiTvdoWHVURd+8kpkSxZ8ISYHmPS8I7VaPt9MEPRMlxxy7z4s
-	gPPJG8e9Lanu1DTguEgLAfi0Wjrmp24E6Uvgn6/CA0lxhIkiieUsT1SXIRxOjSv+4CoA
-	x2nWtS55Y1TTmC1uHoVgOKUVcHcf9xngNkStl9JKt9jDZOoVudTbckou/QJMcK85ZYal
-	GAtfA1TAvFESlFc/xsRO63NSCpaE5OZX90w1wbq0GAT94+jB+XFF7V5AgSCgnSoRg9pN
-	eN3t2QFI9datYDPKypOrsZl+hc/NQMheisZRE/3fWnFdANQkPNibLJ+pMbkGf1SCOap4
-	kprw==
-X-Gm-Message-State: AKaTC03MT5gizcKX0dj6QmkApmSAqj8f5dX4HneaA6S/Y/ews0Ok+WzG3rcBZsZ46ZaBsw==
-X-Received: by 10.99.219.21 with SMTP id e21mr3505219pgg.136.1479892968145;
+	bh=rv8HNXp6AUPyBJfbyNrWhBM/Vu7GiOo1IpaB2gwNxUM=;
+	b=T9L1FsRbdAvxANrzyGsUijSoE9spw0F3sFod5zJX95el10ECnIjJogqizijGsD28Wl
+	WYYswLu/YRuaxGzGbUqwY1ZRZ8TIXukTGWx4cxjL90VicAU8MJMrf9K8zbCicgpjUYpp
+	97fz9ED9ACkP5eiNa9UU+Ik99mmjZTjsXBcYG+U5wfKsw1ROh1rBYkFRGTOj+6j5waYd
+	cw8mWIs7G264jlMMds5mJMub6RQePzINFO62SLoBPfl9UfZDY6azx9SmopJt9RK4jAom
+	stlf570LtJ0jeci/MpNlrPaDKOidhgwhFrq87YzolpFH7v0IudWT1ZQ4+VpZA4nBgOj0
+	j5rA==
+X-Gm-Message-State: AKaTC03HwtZWWmsBIF60YXCH9kG0YFkcSg084FwSnTIrk58MN0O7OZZ3XUjSZYRVvBGibQ==
+X-Received: by 10.84.210.233 with SMTP id a96mr4618554pli.72.1479892968870;
 	Wed, 23 Nov 2016 01:22:48 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u23sm51056087pfg.86.2016.11.23.01.22.47
+	u23sm51056087pfg.86.2016.11.23.01.22.48
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Nov 2016 01:22:47 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:48 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Nov 2016 01:22:00 -0800
-Message-Id: <20161123092209.23699-40-raj.khem@gmail.com>
+Date: Wed, 23 Nov 2016 01:22:01 -0800
+Message-Id: <20161123092209.23699-41-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.2
 In-Reply-To: <20161123092209.23699-1-raj.khem@gmail.com>
 References: <20161123092209.23699-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 40/49] jsoncpp: Add new recipe
+Subject: [meta-oe][PATCH 41/49] jsonrpc: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,197 +58,214 @@ X-List-Received-Date: Wed, 23 Nov 2016 09:22:47 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-jsoncpp-rename-features-header-file.patch | 152 +++++++++++++++++++++
- meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.7.7.bb  |  21 +++
- 2 files changed, 173 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-jsoncpp-rename-features-header-file.patch
- create mode 100644 meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.7.7.bb
+ ...ce-hardcoded-lib-CMAKE_LIBRARY_PATH-with-.patch | 77 ++++++++++++++++++++++
+ ...torclient-Typecast-min-arguments-correctl.patch | 33 ++++++++++
+ ...torserver-Include-sys-select.h-before-oth.patch | 34 ++++++++++
+ meta-oe/recipes-devtools/jsonrpc/jsonrpc_0.7.0.bb  | 30 +++++++++
+ 4 files changed, 174 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-cmake-replace-hardcoded-lib-CMAKE_LIBRARY_PATH-with-.patch
+ create mode 100644 meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-filedescriptorclient-Typecast-min-arguments-correctl.patch
+ create mode 100644 meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-filedescriptorserver-Include-sys-select.h-before-oth.patch
+ create mode 100644 meta-oe/recipes-devtools/jsonrpc/jsonrpc_0.7.0.bb
 
-diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-jsoncpp-rename-features-header-file.patch b/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-jsoncpp-rename-features-header-file.patch
+diff --git a/meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-cmake-replace-hardcoded-lib-CMAKE_LIBRARY_PATH-with-.patch b/meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-cmake-replace-hardcoded-lib-CMAKE_LIBRARY_PATH-with-.patch
 new file mode 100644
-index 0000000..f1397ea
+index 0000000..748e4da
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-jsoncpp-rename-features-header-file.patch
-@@ -0,0 +1,152 @@
-+Issue: Build error in TDK DS_stub
++++ b/meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-cmake-replace-hardcoded-lib-CMAKE_LIBRARY_PATH-with-.patch
+@@ -0,0 +1,77 @@
++From ac61124df17ab76527508bbb9a3115d4d6cc1af6 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 21 Nov 2016 11:26:26 -0800
++Subject: [PATCH] cmake: replace hardcoded lib/${CMAKE_LIBRARY_PATH} with
++ {CMAKE_INSTALL_LIBDIR}
 +
-+In file included from /home/ubuntu/work/daisy-rdk/build-qemux86hyb/tmp/sysroots/qemux86hyb/usr/include/c++/i586-rdk-linux/bits/c++config.h:426:0,
-+                 from /home/ubuntu/work/daisy-rdk/build-qemux86hyb/tmp/sysroots/qemux86hyb/usr/include/c++/string:38,
-+                 from /home/ubuntu/work/daisy-rdk/build-qemux86hyb/tmp/sysroots/qemux86hyb/usr/include/json/value.h:12,
-+                 from /home/ubuntu/work/daisy-rdk/build-qemux86hyb/tmp/sysroots/qemux86hyb/usr/include/json/json.h:10,
-+                 from ./include/DeviceSettingsAgent.h:15,
-+                 from src/DeviceSettingsAgent.cpp:13:
-+/home/ubuntu/work/daisy-rdk/build-qemux86hyb/tmp/sysroots/qemux86hyb/usr/include/c++/i586-rdk-linux/bits/os_defines.h:44:19: error: missing binary operator before token "("
-+ #if __GLIBC_PREREQ(2,15) && defined(_GNU_SOURCE)
++Fixes
++| CMake Error at src/jsonrpccpp/CMakeLists.txt:207 (install):
++|   install TARGETS given unknown argument "/lib".
 +
-+The issue was jsoncpp has features.h which was conflicting with the system
-+header file features.h.
++and
 +
-+So renamed the header file  features.h in jsoncpp to json-features.h so
-+as to localize the effect of this change within jsoncpp.
++Wrong install paths during cross compile
 +
-+ Signed-off-by: Ridish Aravindan <ridish.ra@lnttechservices.com>
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/jsonrpccpp/CMakeLists.txt    | 8 ++++----
++ src/stubgenerator/CMakeLists.txt | 6 +++---
++ 2 files changed, 7 insertions(+), 7 deletions(-)
 +
-+Index: jsoncpp-src-0.6.0-rc2/include/json/json-features.h
-+===================================================================
-+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
-++++ jsoncpp-src-0.6.0-rc2/include/json/json-features.h	2014-08-27 06:41:40.000000000 +0000
-+@@ -0,0 +1,49 @@
-++// Copyright 2007-2010 Baptiste Lepilleur
-++// Distributed under MIT license, or public domain if desired and
-++// recognized in your jurisdiction.
-++// See file LICENSE for detail or copy at http://jsoncpp.sourceforge.net/LICENSE
-++
-++#ifndef CPPTL_JSON_FEATURES_H_INCLUDED
-++# define CPPTL_JSON_FEATURES_H_INCLUDED
-++
-++#if !defined(JSON_IS_AMALGAMATION)
-++# include "forwards.h"
-++#endif // if !defined(JSON_IS_AMALGAMATION)
-++
-++namespace Json {
-++
-++   /** \brief Configuration passed to reader and writer.
-++    * This configuration object can be used to force the Reader or Writer
-++    * to behave in a standard conforming way.
-++    */
-++   class JSON_API Features
-++   {
-++   public:
-++      /** \brief A configuration that allows all features and assumes all strings are UTF-8.
-++       * - C & C++ comments are allowed
-++       * - Root object can be any JSON value
-++       * - Assumes Value strings are encoded in UTF-8
-++       */
-++      static Features all();
-++
-++      /** \brief A configuration that is strictly compatible with the JSON specification.
-++       * - Comments are forbidden.
-++       * - Root object must be either an array or an object value.
-++       * - Assumes Value strings are encoded in UTF-8
-++       */
-++      static Features strictMode();
-++
-++      /** \brief Initialize the configuration like JsonConfig::allFeatures;
-++       */
-++      Features();
-++
-++      /// \c true if comments are allowed. Default: \c true.
-++      bool allowComments_;
-++
-++      /// \c true if root must be either an array or an object value. Default: \c false.
-++      bool strictRoot_;
-++   };
-++
-++} // namespace Json
-++
-++#endif // CPPTL_JSON_FEATURES_H_INCLUDED
-+Index: jsoncpp-src-0.6.0-rc2/include/json/json.h
-+===================================================================
-+--- jsoncpp-src-0.6.0-rc2.orig/include/json/json.h	2011-05-02 21:47:24.000000000 +0000
-++++ jsoncpp-src-0.6.0-rc2/include/json/json.h	2014-08-27 06:39:13.000000000 +0000
-+@@ -10,6 +10,6 @@
-+ # include "value.h"
-+ # include "reader.h"
-+ # include "writer.h"
-+-# include "features.h"
-++# include "json-features.h"
++diff --git a/src/jsonrpccpp/CMakeLists.txt b/src/jsonrpccpp/CMakeLists.txt
++index e4a1eb5..13f9056 100644
++--- a/src/jsonrpccpp/CMakeLists.txt
+++++ b/src/jsonrpccpp/CMakeLists.txt
++@@ -205,15 +205,15 @@ if (WIN32)
++ endif()
 + 
-+ #endif // JSON_JSON_H_INCLUDED
-+Index: jsoncpp-src-0.6.0-rc2/include/json/reader.h
-+===================================================================
-+--- jsoncpp-src-0.6.0-rc2.orig/include/json/reader.h	2011-05-02 21:47:24.000000000 +0000
-++++ jsoncpp-src-0.6.0-rc2/include/json/reader.h	2014-08-27 06:39:32.000000000 +0000
-+@@ -7,7 +7,7 @@
-+ # define CPPTL_JSON_READER_H_INCLUDED
++ install(TARGETS ${ALL_LIBS}
++-	LIBRARY DESTINATION lib${LIB_SUFFIX}/${CMAKE_LIBRARY_PATH}
++-	ARCHIVE DESTINATION lib${LIB_SUFFIX}/${CMAKE_LIBRARY_PATH}
+++	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+++	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++ 	RUNTIME DESTINATION bin
++ )
 + 
-+ #if !defined(JSON_IS_AMALGAMATION)
-+-# include "features.h"
-++# include "json-features.h"
-+ # include "value.h"
-+ #endif // if !defined(JSON_IS_AMALGAMATION)
-+ # include <deque>
-+Index: jsoncpp-src-0.6.0-rc2/include/json/features.h
-+===================================================================
-+--- jsoncpp-src-0.6.0-rc2.orig/include/json/features.h	2011-05-02 21:46:58.000000000 +0000
-++++ /dev/null	1970-01-01 00:00:00.000000000 +0000
-+@@ -1,49 +0,0 @@
-+-// Copyright 2007-2010 Baptiste Lepilleur
-+-// Distributed under MIT license, or public domain if desired and
-+-// recognized in your jurisdiction.
-+-// See file LICENSE for detail or copy at http://jsoncpp.sourceforge.net/LICENSE
-+-
-+-#ifndef CPPTL_JSON_FEATURES_H_INCLUDED
-+-# define CPPTL_JSON_FEATURES_H_INCLUDED
-+-
-+-#if !defined(JSON_IS_AMALGAMATION)
-+-# include "forwards.h"
-+-#endif // if !defined(JSON_IS_AMALGAMATION)
-+-
-+-namespace Json {
-+-
-+-   /** \brief Configuration passed to reader and writer.
-+-    * This configuration object can be used to force the Reader or Writer
-+-    * to behave in a standard conforming way.
-+-    */
-+-   class JSON_API Features
-+-   {
-+-   public:
-+-      /** \brief A configuration that allows all features and assumes all strings are UTF-8.
-+-       * - C & C++ comments are allowed
-+-       * - Root object can be any JSON value
-+-       * - Assumes Value strings are encoded in UTF-8
-+-       */
-+-      static Features all();
-+-
-+-      /** \brief A configuration that is strictly compatible with the JSON specification.
-+-       * - Comments are forbidden.
-+-       * - Root object must be either an array or an object value.
-+-       * - Assumes Value strings are encoded in UTF-8
-+-       */
-+-      static Features strictMode();
-+-
-+-      /** \brief Initialize the configuration like JsonConfig::allFeatures;
-+-       */
-+-      Features();
-+-
-+-      /// \c true if comments are allowed. Default: \c true.
-+-      bool allowComments_;
-+-
-+-      /// \c true if root must be either an array or an object value. Default: \c false.
-+-      bool strictRoot_;
-+-   };
-+-
-+-} // namespace Json
-+-
-+-#endif // CPPTL_JSON_FEATURES_H_INCLUDED
-diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.7.7.bb b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.7.7.bb
++ #set pkg-config
++ get_filename_component(FULL_PATH_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX} ABSOLUTE)
++ set(FULL_PATH_INCLUDEDIR "${FULL_PATH_INSTALL_PREFIX}/include")
++-set(FULL_PATH_LIBDIR "${FULL_PATH_INSTALL_PREFIX}/lib/${CMAKE_LIBRARY_PATH}")
+++set(FULL_PATH_LIBDIR "${FULL_PATH_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
++ 
++ CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/libjsonrpccpp-client.pc.cmake ${CMAKE_BINARY_DIR}/libjsonrpccpp-client.pc)
++ CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/libjsonrpccpp-server.pc.cmake ${CMAKE_BINARY_DIR}/libjsonrpccpp-server.pc)
++@@ -223,6 +223,6 @@ INSTALL(FILES
++     "${CMAKE_BINARY_DIR}/libjsonrpccpp-server.pc"
++     "${CMAKE_BINARY_DIR}/libjsonrpccpp-client.pc"
++     "${CMAKE_BINARY_DIR}/libjsonrpccpp-common.pc"
++-    DESTINATION "lib${LIB_SUFFIX}/${CMAKE_LIBRARY_PATH}/pkgconfig")
+++    DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
++ 
++ 
++diff --git a/src/stubgenerator/CMakeLists.txt b/src/stubgenerator/CMakeLists.txt
++index f9dbe4c..b57b0fe 100644
++--- a/src/stubgenerator/CMakeLists.txt
+++++ b/src/stubgenerator/CMakeLists.txt
++@@ -58,15 +58,15 @@ CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/libjsonrpccpp-stub.pc.cmake ${CMAKE_BIN
++ 
++ INSTALL(FILES
++     "${CMAKE_BINARY_DIR}/libjsonrpccpp-stub.pc"
++-    DESTINATION "lib/${CMAKE_LIBRARY_PATH}/pkgconfig")
+++    DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
++ 
++ install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/stubgenerator/
++         DESTINATION include/jsonrpccpp/stubgen
++         FILES_MATCHING PATTERN "*.h")
++ 
++ install(TARGETS ${ALL_LIBS} jsonrpcstub
++-        LIBRARY DESTINATION lib${LIB_SUFFIX}/${CMAKE_LIBRARY_PATH}
++-        ARCHIVE DESTINATION lib${LIB_SUFFIX}/${CMAKE_LIBRARY_PATH}
+++        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+++        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++         RUNTIME DESTINATION bin
++ )
++ 
++-- 
++2.10.2
++
+diff --git a/meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-filedescriptorclient-Typecast-min-arguments-correctl.patch b/meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-filedescriptorclient-Typecast-min-arguments-correctl.patch
 new file mode 100644
-index 0000000..17947e3
+index 0000000..d21e979
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.7.7.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "JSON C++ lib used to read and write json file."
-+DESCRIPTION = "Jsoncpp is an implementation of a JSON (http://json.org) reader \
-+               and writer in C++. JSON (JavaScript Object Notation) is a \
-+               lightweight data-interchange format. It is easy for humans to \
-+               read and write. It is easy for machines to parse and generate."
++++ b/meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-filedescriptorclient-Typecast-min-arguments-correctl.patch
+@@ -0,0 +1,33 @@
++From 9500f12f5d827840634311d6ca972d9551211e4d Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 21 Nov 2016 01:00:51 -0800
++Subject: [PATCH] filedescriptorclient: Typecast min() arguments correctly
 +
-+HOMEPAGE = "http://sourceforge.net/projects/jsoncpp/"
++Fixes
++
++| /mnt/a/build/tmp-glibc/work/cortexa7hf-neon-vfpv4-oe-linux-gnueabi/jsonrpc/0.7.0-r0/git/src/jsonrpccp
++p/client/connectors/filedescriptorclient.cpp:47:92: note:   deduced conflicting types for parameter 'co
++nst _Tp' ('unsigned int' and 'long unsigned int')
++|      ssize_t byteWritten = write(outputfd, toSend.c_str(), min(toSend.size(), MAX_WRITE_SIZE));
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/jsonrpccpp/client/connectors/filedescriptorclient.cpp | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/jsonrpccpp/client/connectors/filedescriptorclient.cpp b/src/jsonrpccpp/client/connectors/filedescriptorclient.cpp
++index 77aac7e..6325b5c 100644
++--- a/src/jsonrpccpp/client/connectors/filedescriptorclient.cpp
+++++ b/src/jsonrpccpp/client/connectors/filedescriptorclient.cpp
++@@ -43,7 +43,7 @@ void FileDescriptorClient::SendRPCMessage(const std::string& message,
++   string toSend = message;
++   do
++   {
++-    ssize_t byteWritten = write(outputfd, toSend.c_str(), min(toSend.size(), MAX_WRITE_SIZE));
+++    ssize_t byteWritten = write(outputfd, toSend.c_str(), min((long unsigned int)toSend.size(), MAX_WRITE_SIZE));
++     if (byteWritten < 1)
++       throw JsonRpcException(Errors::ERROR_CLIENT_CONNECTOR,
++         "Unknown error occured while writing to the output file descriptor");
++-- 
++2.10.2
++
+diff --git a/meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-filedescriptorserver-Include-sys-select.h-before-oth.patch b/meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-filedescriptorserver-Include-sys-select.h-before-oth.patch
+new file mode 100644
+index 0000000..3b9068a
+--- /dev/null
++++ b/meta-oe/recipes-devtools/jsonrpc/jsonrpc/0001-filedescriptorserver-Include-sys-select.h-before-oth.patch
+@@ -0,0 +1,34 @@
++From c7aad10628949e126f50e3264b5bc7eb417347c6 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 21 Nov 2016 01:25:10 -0800
++Subject: [PATCH] filedescriptorserver: Include sys/select.h before other
++ headers
++
++Fixes errors e.g.
++| /mnt/a/build/tmp-glibc/work/cortexa7hf-neon-vfpv4-oe-linux-gnueabi/jsonrpc/0.7.0-r0/git/src/jsonrpccp
++p/server/connectors/filedescriptorserver.h:63:7: error: unknown type name 'fd_set'
++|       fd_set read_fds;
++|       ^
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/jsonrpccpp/server/connectors/filedescriptorserver.cpp | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/jsonrpccpp/server/connectors/filedescriptorserver.cpp b/src/jsonrpccpp/server/connectors/filedescriptorserver.cpp
++index 9d74223..8e019ca 100644
++--- a/src/jsonrpccpp/server/connectors/filedescriptorserver.cpp
+++++ b/src/jsonrpccpp/server/connectors/filedescriptorserver.cpp
++@@ -7,8 +7,8 @@
++  * @license See attached LICENSE.txt
++  ************************************************************************/
++ 
++-#include "filedescriptorserver.h"
++ #include <sys/select.h>
+++#include "filedescriptorserver.h"
++ #include <sys/types.h>
++ #include <sys/stat.h>
++ #include <unistd.h>
++-- 
++2.10.2
++
+diff --git a/meta-oe/recipes-devtools/jsonrpc/jsonrpc_0.7.0.bb b/meta-oe/recipes-devtools/jsonrpc/jsonrpc_0.7.0.bb
+new file mode 100644
+index 0000000..3a43f90
+--- /dev/null
++++ b/meta-oe/recipes-devtools/jsonrpc/jsonrpc_0.7.0.bb
+@@ -0,0 +1,30 @@
++SUMMARY = "C++ framework for json-rpc 1.0 and 2.0"
++DESCRIPTION = "JsonRpc-Cpp is an OpenSource implementation of JSON-RPC \
++               protocol in C++. JSON-RPC is a lightweight remote procedure \
++               call protocol similar to XML-RPC."
++HOMEPAGE = "https://github.com/cinemast/libjson-rpc-cpp"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ee72d601854d5d2a065cf642883c489b"
++
++PV = "0.7.0+git${SRCPV}"
++
++SRC_URI = "git://github.com/cinemast/libjson-rpc-cpp \
++           file://0001-cmake-replace-hardcoded-lib-CMAKE_LIBRARY_PATH-with-.patch \
++           file://0001-filedescriptorclient-Typecast-min-arguments-correctl.patch \
++           file://0001-filedescriptorserver-Include-sys-select.h-before-oth.patch \
++"
++SRCREV = "ccbdb41388bdd929828941652da816bf52a0580e"
 +
 +SECTION = "libs"
 +
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=c56ee55c03a55f8105b969d8270632ce"
-+
-+SRCREV = "d8cd848ede1071a25846cd90b4fddf269d868ff1"
-+SRC_URI = "git://github.com/open-source-parsers/jsoncpp \
-+"
++DEPENDS = "curl jsoncpp libmicrohttpd"
 +
 +S = "${WORKDIR}/git"
++
 +inherit cmake
 +
-+EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON -DJSONCPP_WITH_TESTS=OFF"
++EXTRA_OECMAKE += "-DCOMPILE_TESTS=NO -DCOMPILE_STUBGEN=NO -DCOMPILE_EXAMPLES=NO \
++                  -DBUILD_SHARED_LIBS=YES -DBUILD_STATIC_LIBS=YES \
++                  -DCMAKE_LIBRARY_PATH=${libdir} \
++"
 -- 
 2.10.2
 
