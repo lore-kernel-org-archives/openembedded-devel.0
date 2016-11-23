@@ -1,33 +1,54 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from smtp685.redcondor.net (smtp685.redcondor.net [208.80.206.85])
-	by mail.openembedded.org (Postfix) with ESMTP id EB96C71A79
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f53.google.com (mail-pg0-f53.google.com [74.125.83.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 096D565CBA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 22:28:05 +0000 (UTC)
-Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by smtp685.redcondor.net ({20c8e40f-6b6c-4c9e-abff-1640ea7bf404})
-	via TCP (outbound) with ESMTPS id 20161123222805835_0685
+	Wed, 23 Nov 2016 22:57:48 +0000 (UTC)
+Received: by mail-pg0-f53.google.com with SMTP id f188so10691327pgc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 14:28:05 -0800
-X-RC-FROM: <rpjday@crashcourse.ca>
-X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
-Received: from [174.118.92.171] (port=38888 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1c9g1H-0003lq-P3 for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Nov 2016 17:27:59 -0500
-Date: Wed, 23 Nov 2016 17:26:52 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost.localdomain
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <04A98AEA-497D-4919-B83E-27C442F24FB9@gmail.com>
-Message-ID: <alpine.LFD.2.20.1611231725430.20812@localhost.localdomain>
+	Wed, 23 Nov 2016 14:57:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:content-transfer-encoding:mime-version:subject:date:references
+	:to:in-reply-to:message-id;
+	bh=nhefJU6JzyyglurqnbE0Vj66HXlGLAMRxHxIMv7qsHE=;
+	b=eVGCv6a3KQ6/GeuZ6Zb4jrRjtZswj27dYHkaUaC+uj4WeRXQm/J7K9glh8wZkU+oxC
+	yyP/5yALH3IEdibosLFuN2PjjciCVJPCH/RrbYzpIhMEP+PRShT6ub3SYGIvQIiibHxS
+	5JaD2DGOtjI9C2C/W9IP1BIfZzD7PA96yJsHDTqNdsRo2/ro1EbPqtUC86JQ2ASH839f
+	NCJMlfe/FDVgJSoNHxCEJ++ZtMu24gLega5R8SZCGy8BOcppDLmDzHMiEF/+lC0XHO2j
+	HUUawYokmChWV26qKi2zr6MradZapti1jk+qZJE/PZwFgSPJrwpwqQ6PlmRGzqTZCd6U
+	0I2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:content-transfer-encoding:mime-version
+	:subject:date:references:to:in-reply-to:message-id;
+	bh=nhefJU6JzyyglurqnbE0Vj66HXlGLAMRxHxIMv7qsHE=;
+	b=UBDTkG5FcTrrcIcClR0sFCuy4JZbnSDWRAtYQU2C25gQR0qz+ECPwyl7UrLb+KhhHY
+	klKNAKlsG/fO/Pu3gtaBVxHlI5pkn6KQmV7sPNY5nL17hdcvxvt2ukqlp27b+aMZQicS
+	SebsVjF0G2jfZwjF8gLRGHOsnjH006J1xaNUFGkdtlPW/mN96W4MIxB/xiSueaDh+Vni
+	sjn2g7Kv+wsGd1Z+mGm5CGstu2+l7kj1oM8pOVfc0bUW1gq8fskeNMEj3aWz3n2jQ7T2
+	FNNsBcy5BJhK6A5EkJBcvNsefug0zkAf2nOHwglZpfb4E9bywgLcTglvefhfrpnstQP3
+	fkyQ==
+X-Gm-Message-State: AKaTC00WgYUvmoXyQ/DApBCiz/akIqHuuGr4oVy6mRGLtOMppINJDmCFohpl+SVYbMUerQ==
+X-Received: by 10.84.215.142 with SMTP id l14mr11485667pli.99.1479941869364;
+	Wed, 23 Nov 2016 14:57:49 -0800 (PST)
+Received: from ?IPv6:2601:646:8882:b8c:5159:9909:3ede:f0af?
+	([2601:646:8882:b8c:5159:9909:3ede:f0af])
+	by smtp.gmail.com with ESMTPSA id
+	c22sm37164902pgn.12.2016.11.23.14.57.48
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 23 Nov 2016 14:57:48 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+Mime-Version: 1.0 (Mac OS X Mail 10.1 \(3251\))
+Date: Wed, 23 Nov 2016 14:57:47 -0800
 References: <alpine.LFD.2.20.1611231326510.15876@localhost.localdomain>
 	<5E80B6DC-66EC-499B-84D0-41A5D4F1A1BC@gmail.com>
 	<alpine.LFD.2.20.1611231624420.18557@localhost.localdomain>
 	<04A98AEA-497D-4919-B83E-27C442F24FB9@gmail.com>
-User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
-MIME-Version: 1.0
-X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
+	<alpine.LFD.2.20.1611231725430.20812@localhost.localdomain>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <alpine.LFD.2.20.1611231725430.20812@localhost.localdomain>
+Message-Id: <B0BDB8C7-A743-409A-BF59-AF7AFDB18061@gmail.com>
+X-Mailer: Apple Mail (2.3251)
 Subject: Re: mozjs/unhandled signal 11/64k page patch/__powerpc64__ ???
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -41,37 +62,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Nov 2016 22:28:07 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Wed, 23 Nov 2016 22:57:50 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 23 Nov 2016, Khem Raj wrote:
 
->
-> > On Nov 23, 2016, at 1:26 PM, Robert P. J. Day <rpjday@crashcourse.ca> wrote:
-> >
-> > On Wed, 23 Nov 2016, Khem Raj wrote:
-> >
-> >> can you reproduce it on version 24 as well ?
-> >
-> >  not sure what you mean ... this is running on a qemuppc image. i
-> > haven't tried running this on fedora 24 itself. what exactly do you
-> > want me to try?
-> >
->
-> I meant version of mozjs
+> On Nov 23, 2016, at 2:26 PM, Robert P. J. Day <rpjday@crashcourse.ca> =
+wrote:
+>=20
+> On Wed, 23 Nov 2016, Khem Raj wrote:
+>=20
+>>=20
+>>> On Nov 23, 2016, at 1:26 PM, Robert P. J. Day =
+<rpjday@crashcourse.ca> wrote:
+>>>=20
+>>> On Wed, 23 Nov 2016, Khem Raj wrote:
+>>>=20
+>>>> can you reproduce it on version 24 as well ?
+>>>=20
+>>> not sure what you mean ... this is running on a qemuppc image. i
+>>> haven't tried running this on fedora 24 itself. what exactly do you
+>>> want me to try?
+>>>=20
+>>=20
+>> I meant version of mozjs
+>=20
+>  this is version 17.
 
-  this is version 17.
+OK, I think 24 has such issues taken care of. I am not near code right =
+now.
+but it will be good to check if something is already fixed there for =
+this
 
-rday
-
--- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+>=20
+> rday
+>=20
+> --=20
+>=20
+> =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> Robert P. J. Day                                 Ottawa, Ontario, =
+CANADA
+>                        http://crashcourse.ca
+>=20
+> Twitter:                                       =
+http://twitter.com/rpjday
+> LinkedIn:                               =
+http://ca.linkedin.com/in/rpjday
+> =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
