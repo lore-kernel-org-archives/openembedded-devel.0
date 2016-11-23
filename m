@@ -1,45 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 1AD66719E5
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 2654B71A8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 09:22:15 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id y68so448537pfb.1
+	Wed, 23 Nov 2016 09:22:18 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id p66so667763pga.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 01:22:17 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=IXr4S3hVwgn/n8r6Oz8hxMOou3x7U3RRbdxh8REa2FA=;
-	b=ZIYqxHQjWENqyaOgmZRs6EmHsIQQkfTUXT1EznXgW0WlQ/Uhh8cb/m5LA6d7BLkEtP
-	jWJivDRAQv+DYidKgBqC1WFhI59LqhFAvxO4BbTaYkzRcPmkGFjVmDgn6lkEOXd+KXb1
-	OVQHQRx7Fwn1xY4yj6m7pFqykKwNT0OPRf8VhrmgmR0Rb68vHLezYGSjGb4kU6yujPvb
-	w55pygjjSnktUFCZLfma+Fm3BvtjwnU+CiLtRGZN7W1R6C5ufNWr8qH2uhMoml+pd+gH
-	R8DKQztXhazz1ymnBJDicLnRREys2GIFoY64PNBfC9BNFB/KcuCiW9sD40Rfw8v5smGJ
-	goAQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=UNirNs3YF0rCWjIEcMPPRvOtlzRGnemoWUGCj0ye30w=;
+	b=NBmu0dxFdS4nTUnUth2YKGH8N55cCPSKulFxowGlENNH2WuvR/P3/0rN2bKmL2FwhG
+	ehIejpR8SsM7oMEPpELfJ/pfFfSzMdnJkTyUD//lWro10IDB/PudWwonaCYX24pO1ate
+	bGa90dAiyLtkFdVl2hquwAb1oNndD6Q465zWe9Paq2JoYC6IYE6L1F1FcdYaFGh7rS3T
+	iSUy3Bg5OrIxOaYNrBDgCmNZACxvkYbYrZ97SkkUgqJ2qqCp6i3+pEEVsy5xNC9qnDx9
+	m78QjyRQIg/FqFp7dVMVopWxEnI7DzTvikrHF08446KiArE4GqAb9HFv2Szjj5UX1BmT
+	vLZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=IXr4S3hVwgn/n8r6Oz8hxMOou3x7U3RRbdxh8REa2FA=;
-	b=OD/Aht9TmWRgveMZn8ShYTYeEKylwwLwGgaDH3bszmAsAB3NhZ+exMCdNhrmh51zkt
-	LNUwk1EWMavSoFZ7XdaqYBF7XJack9s9rFZ7u8ear3poTQEGqoDyca7nfVB+J2ulURtD
-	UoAZDSMKrjTJ1udACx2fCC4imTFS+jplA5rcEHtCyCbzO7O0YRyridrasE/fQ/snXb62
-	NgLDfSE3a7ggzRZam1aPlPOE+jSSrCyEu88hzeKXbWQFoJknm91++kVsrb9uXtodcvVi
-	hZsOy+/d0r/bOXCUOwq4YOEq/TccUd/EZrk26E7/Eqv2SFsAHje8lbjiGpIkSiuHAxuk
-	pupA==
-X-Gm-Message-State: AKaTC03RQLl31lol1Vt+GwZnap78Oi9jWj6CXWU7i9EJTSkwlN07FszX1QrT0RvJ/VN1cw==
-X-Received: by 10.98.8.84 with SMTP id c81mr1906902pfd.114.1479892937245;
-	Wed, 23 Nov 2016 01:22:17 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=UNirNs3YF0rCWjIEcMPPRvOtlzRGnemoWUGCj0ye30w=;
+	b=TKd6NQY2RJjxGwwNRqUyHT8vsY4kqC053djz1bQgVUQfuZmtf87HXfOMfIYa+jasjE
+	se1sod6ObA41IWUL2s76+IC4jYxDBXu+TevkGIfCIainJmWIiJQbkwDZ+ILD5IuKl3W9
+	SpGtwv5L+HqIUw/wodP3W1FbNcRMuJSW4qc8Ioa5h9YrvQR/5ywh4KA9Xgk023fuKKUZ
+	4Bw9S9ew6XM0Xr+LKLAfc6Uvc7anbgk7XY6xp8cc7+L8HPNjHEq7V/324vGWvccpdQWP
+	pruTtEP+G8zyE4JBfSKP3AXwy2J+AT0Ihmc90vySkYkFT4Z7Dc01jK0WuN3yHjYNWUR7
+	CHQg==
+X-Gm-Message-State: AKaTC03l8KSY9qKKo3e496toZoGufa0K/rCdZA09kO6DUkR6VnULfIgLcG5uwYxpl72Gtw==
+X-Received: by 10.98.100.66 with SMTP id y63mr1936168pfb.49.1479892939700;
+	Wed, 23 Nov 2016 01:22:19 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u23sm51056087pfg.86.2016.11.23.01.22.16
+	u23sm51056087pfg.86.2016.11.23.01.22.19
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Nov 2016 01:22:16 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:19 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Nov 2016 01:21:21 -0800
-Message-Id: <20161123092209.23699-1-raj.khem@gmail.com>
+Date: Wed, 23 Nov 2016 01:21:24 -0800
+Message-Id: <20161123092209.23699-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.2
-Subject: [meta-oe][PATCH 01/49] libqmi: Fix build with clang
+In-Reply-To: <20161123092209.23699-1-raj.khem@gmail.com>
+References: <20161123092209.23699-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 04/49] libplist: Remove rpaths surgically
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,117 +56,43 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 23 Nov 2016 09:22:18 -0000
 
+Check for files first before operating on it
+
+Fixes QA errors like below
+
+  /usr/lib/python2.7/site-packages/plist/__init__.py
+  /usr/lib/python2.7/site-packages/plist/_plist.so
+  /usr/lib/python2.7/site-packages/plist/plist.py
+Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
+libplist: 3 installed and not shipped files. [installed-vs-shipped]
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../libqmi/libqmi/0001-Detect-clang.patch          | 84 ++++++++++++++++++++++
- .../recipes-connectivity/libqmi/libqmi_1.16.0.bb   |  4 +-
- 2 files changed, 87 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-connectivity/libqmi/libqmi/0001-Detect-clang.patch
+ meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi/0001-Detect-clang.patch b/meta-oe/recipes-connectivity/libqmi/libqmi/0001-Detect-clang.patch
-new file mode 100644
-index 0000000..4047ffb
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/libqmi/libqmi/0001-Detect-clang.patch
-@@ -0,0 +1,84 @@
-+From 4cfb728804157e8f3c69e11ba4df449d8f76388f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 20 Oct 2016 04:42:26 +0000
-+Subject: [PATCH] Detect clang
-+
-+Check for clang compiler since we need to disable
-+unused-function warning for clang, at same time
-+pass werror when checking for compiler options if
-+werror is enabled so spurious options do not get
-+enabled. Only the ones that are supported by given
-+compiler are accepted.
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Upstream-Status: Pending
-+---
-+ m4/compiler-warnings.m4 | 29 +++++++++++++++++++++++++----
-+ 1 file changed, 25 insertions(+), 4 deletions(-)
-+
-+diff --git a/m4/compiler-warnings.m4 b/m4/compiler-warnings.m4
-+index de4a8b0..e4ba718 100644
-+--- a/m4/compiler-warnings.m4
-++++ b/m4/compiler-warnings.m4
-+@@ -2,10 +2,30 @@ AC_DEFUN([LIBQMI_COMPILER_WARNINGS],
-+ [AC_ARG_ENABLE(more-warnings,
-+ 	AS_HELP_STRING([--enable-more-warnings], [Possible values: no/yes/error]),
-+ 	set_more_warnings="$enableval",set_more_warnings=error)
-++
-++# Clang throws a lot of warnings when it does not understand a flag. Disable
-++# this warning for now so other warnings are visible.
-++AC_MSG_CHECKING([if compiling with clang])
-++AC_COMPILE_IFELSE([AC_LANG_PROGRAM([], [[
-++#ifndef __clang__
-++	not clang
-++#endif
-++	]])],
-++	[CLANG=yes],
-++	[CLANG=no]
-++)
-++AC_MSG_RESULT([$CLANG])
-++AS_IF([test "x$CLANG" = "xyes"], [CLANG_FLAGS=-Wno-error=unused-function])
-++CFLAGS="$CFLAGS $CLANG_FLAGS"
-++LDFLAGS="$LDFLAGS $CLANG_FLAGS"
-++
-+ AC_MSG_CHECKING(for more warnings)
-+ if test "$GCC" = "yes" -a "$set_more_warnings" != "no"; then
-+ 	AC_MSG_RESULT(yes)
-+ 	CFLAGS="-Wall -std=gnu89 $CFLAGS"
-++	if test "x$set_more_warnings" = xerror; then
-++		WERROR="-Werror"
-++	fi
-+ 
-+ 	for option in -Wmissing-declarations -Wmissing-prototypes \
-+ 		      -Wdeclaration-after-statement -Wstrict-prototypes \
-+@@ -17,22 +37,23 @@ if test "$GCC" = "yes" -a "$set_more_warnings" != "no"; then
-+ 		      -Wmissing-include-dirs -Waggregate-return \
-+ 		      -Wformat-security; do
-+ 		SAVE_CFLAGS="$CFLAGS"
-+-		CFLAGS="$CFLAGS $option"
-++		CFLAGS="$CFLAGS $option $WERROR"
-+ 		AC_MSG_CHECKING([whether gcc understands $option])
-+ 		AC_TRY_COMPILE([], [],
-+ 			has_option=yes,
-+ 			has_option=no,)
-+ 		if test $has_option = no; then
-+ 			CFLAGS="$SAVE_CFLAGS"
-++		else
-++			CFLAGS="$SAVE_CFLAGS $option"
-+ 		fi
-+ 		AC_MSG_RESULT($has_option)
-+ 		unset has_option
-+ 		unset SAVE_CFLAGS
-+ 	done
-++	CFLAGS="$CFLAGS $WERROR"
-+ 	unset option
-+-	if test "x$set_more_warnings" = xerror; then
-+-		CFLAGS="$CFLAGS -Werror"
-+-	fi
-++	unset WERROR
-+ else
-+ 	AC_MSG_RESULT(no)
-+ fi
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.16.0.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.16.0.bb
-index 5ac889f..679b102 100644
---- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.16.0.bb
-+++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.16.0.bb
-@@ -11,6 +11,8 @@ DEPENDS = "glib-2.0 libgudev libmbim"
+diff --git a/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb b/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
+index 10d40fb..f789796 100644
+--- a/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
++++ b/meta-oe/recipes-extended/libimobiledevice/libplist_1.8.bb
+@@ -16,8 +16,16 @@ SRC_URI = "http://www.libimobiledevice.org/downloads/libplist-${PV}.tar.bz2 \
+ SRC_URI[md5sum] = "2a9e0258847d50f9760dc3ece25f4dc6"
+ SRC_URI[sha256sum] = "a418da3880308199b74766deef2a760a9b169b81a868a6a9032f7614e20500ec"
  
- inherit autotools pkgconfig bash-completion
+-PACKAGES =+ "${PN}-utils ${PN}++"
++do_install_append () {
++    if [ -e ${D}${libdir}/python*/site-packages/plist/_plist.so ]; then
++        chrpath -d ${D}${libdir}/python*/site-packages/plist/_plist.so
++    fi
++}
++
++PACKAGES =+ "${PN}-utils ${PN}++ ${PN}-python"
+ FILES_${PN} = "${libdir}/libplist${SOLIBS}"
+ FILES_${PN}++ = "${libdir}/libplist++${SOLIBS}"
+ FILES_${PN}-utils = "${bindir}/*"
++FILES_${PN}-python = "${libdir}/python*/site-packages/*"
++
  
--SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
-+SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
-+           file://0001-Detect-clang.patch \
-+           "
- SRC_URI[md5sum] = "4970c110f160b33637a3515004c637b2"
- SRC_URI[sha256sum] = "7ab6bb47fd23bf4d3fa17424e40ea5552d08b19e5ee4f125f21f316c8086ba2a"
 -- 
 2.10.2
 
