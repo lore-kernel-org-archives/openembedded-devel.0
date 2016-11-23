@@ -1,48 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E22CB719E5
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 7CEC0605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 09:22:39 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id i88so445044pfk.2
+	Wed, 23 Nov 2016 09:22:40 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id 3so673626pgd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 01:22:41 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=rXoxJPfmGkwQMf9gNqyaHt1IwaguE0qAufqrfRW8WKA=;
-	b=wEvGR16YDIn+v2/7EsV6lQg2ZI8nDvUvP66HFTocQL6ELJVwL5ns9mwxKjz58ebnOb
-	hyh0GtOGDhSpzgzd5y+0mzZBNGe9yqEazernv3ksUdGhDFC7gosHuysIkTHS8f78AjAa
-	GSxJJ2VuFDygASwUGmEFBELcDvG3pMdiOa018Zdbc/kWaSl/Cits3Kn1PV/UXJ7ncBJ0
-	mO/SjmbEUhr25GUW+Mx2+hU991m6blzpPBaaF01DDoVckjMUhn8sJC/kMFhXj7wJIeOq
-	ZeAtE/08MIgO6PUZGBwBkro8dut1V52ZXoQb02bgLNqWaq3znz8m1A5kuYP3m/WeJQz+
-	AtmA==
+	bh=goASv1lS1tWyOXRlL/rtyX+ezr6tRbZXTYX5S53DO8c=;
+	b=MUMS5uf6nEgcWde/3ppA/Ft/qX9qsSjsiCoFoBAv57kBT1RJ/zyhNvLjsBhzqLi/+E
+	bYEWJQ8GTnjZd08wWcAyGR5A4NS3PBt40TpEw/rDH9qrdDK3/4PFKIs1ztk0K10/c1kh
+	AFnpJVYvBr2RFdIk144KG+q1XhewJTUwNA39oe5WwmA6I3LZ9Mlq+BdgtnSlHnaTTLz9
+	RIVvmKa/L9SZm7JI2P1ILyMn3lpyy81oVoT8LzE8vNeJAiEFksG5570Hv46Jed1LjRXM
+	hChlk9kqeKJVvDiXdLb2+NOxwAMdp0TKz7jdoTIsx0xQL8X/GcULtQJD66Q2OLlG+Mb/
+	lCFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=rXoxJPfmGkwQMf9gNqyaHt1IwaguE0qAufqrfRW8WKA=;
-	b=Q9YMNR3PGK5b4JorSV9ycs4hBlStYJmCZ4OyuwDQMtpe+3QigyL1ka60x9O2uXmp6r
-	wX4MgnWUCyTdV52WUJR7t4le6PIkvaq9IhkNLPcvqmyMzHLKcF4/u9XMPOoS6W4e0g8j
-	/x3A5EorFFlFqDldKekmIRLFzApCw8+BVvdckbsiJCWcsvmxmcRzOTFeLL5B1O9FU2Bl
-	EOuZSCcnOKDJDhYwKIHpsKdX0VCjeXMKJdhXZ5mTrXhO37TtFlvUoNqwquqjeP+HSF3C
-	OorQbPRnB0hciuqPZ2nL7R8R8iXceu8oZE577N0rq9XFu3moBXrNzhD/a/daJu/ltYXv
-	EGLw==
-X-Gm-Message-State: AKaTC029jIwDnrWQJEgaopX3/Q+G5VgEs3vp9hQA9OzRPlZyjCwkGuImV3FxWC0rhi7aGg==
-X-Received: by 10.84.173.4 with SMTP id o4mr4637322plb.123.1479892961255;
-	Wed, 23 Nov 2016 01:22:41 -0800 (PST)
+	bh=goASv1lS1tWyOXRlL/rtyX+ezr6tRbZXTYX5S53DO8c=;
+	b=LRV2kWEXF/W5JV86wdbndnsCt3OWjd4bOuCEW3EkrN+YkYIlw3G3FjgpLLshvXDTJK
+	Py/NHzprSOry0Mjo9UDky5E45mqaRTWtIO3pWoFoNl0LrXhXs/J9xz8HzEefA4y0WQsg
+	hSgcYc+wuNCXFNxH3roSdFR3IwtYMSWcSMk7BDtFbOXZ28XKHUY1Rc7n8K1I/D8mWPXw
+	yPr6QmSFO8Yv4qq4OvdNSbeuaErUc0AFuRk9KWIQOhTEHLDeLlNEsiDKGq503nvsj7tB
+	8t1MgoufbDbf/HadQpUCNNdhEE56j8AsN9vLbYibd2oDWPWOLjj0Yki6v7vwLbt0mJPz
+	2DIg==
+X-Gm-Message-State: AKaTC0365wAB3tTYp/o1C8qMG0faokUF0xU1KFdCKTh9hSDI261YfVQdXjqSb8YTONNC3A==
+X-Received: by 10.99.126.94 with SMTP id o30mr3574533pgn.66.1479892962096;
+	Wed, 23 Nov 2016 01:22:42 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u23sm51056087pfg.86.2016.11.23.01.22.40
+	u23sm51056087pfg.86.2016.11.23.01.22.41
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Nov 2016 01:22:40 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:41 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Nov 2016 01:21:52 -0800
-Message-Id: <20161123092209.23699-32-raj.khem@gmail.com>
+Date: Wed, 23 Nov 2016 01:21:53 -0800
+Message-Id: <20161123092209.23699-33-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.2
 In-Reply-To: <20161123092209.23699-1-raj.khem@gmail.com>
 References: <20161123092209.23699-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 32/49] md5deep: Fix build with clang
+Subject: [meta-oe][PATCH 33/49] dialog: Update 1.3-20160424 -> 1.3-20160828
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,61 +58,31 @@ X-List-Received-Date: Wed, 23 Nov 2016 09:22:40 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../files/0001-Fix-errors-found-by-clang.patch     | 32 ++++++++++++++++++++++
- meta-oe/recipes-extended/md5deep/md5deep_4.4.bb    |  1 +
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-oe/recipes-extended/md5deep/files/0001-Fix-errors-found-by-clang.patch
+ .../dialog/{dialog_1.3-20160424.bb => dialog_1.3-20160828.bb}        | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-extended/dialog/{dialog_1.3-20160424.bb => dialog_1.3-20160828.bb} (86%)
 
-diff --git a/meta-oe/recipes-extended/md5deep/files/0001-Fix-errors-found-by-clang.patch b/meta-oe/recipes-extended/md5deep/files/0001-Fix-errors-found-by-clang.patch
-new file mode 100644
-index 0000000..cc7cdc3
---- /dev/null
-+++ b/meta-oe/recipes-extended/md5deep/files/0001-Fix-errors-found-by-clang.patch
-@@ -0,0 +1,32 @@
-+From 6ef69a26126ee4e69a25392fd456b8a66c51dffd Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 15 Nov 2016 02:46:55 +0000
-+Subject: [PATCH] Fix errors found by clang
-+
-+Fixes errors like
-+
-+../../git/src/hash.cpp:282:19: error: ordered comparison between pointer and zero ('const unsigned char *' and 'int')
-+            if(fdht->base>0){
-+               ~~~~~~~~~~^~
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/hash.cpp | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/hash.cpp b/src/hash.cpp
-+index 4216157..52f419b 100644
-+--- a/src/hash.cpp
-++++ b/src/hash.cpp
-+@@ -279,7 +279,7 @@ void file_data_hasher_t::hash()
-+ 		MAP_FILE|
-+ #endif
-+ 		MAP_SHARED,fd,0);
-+-	    if(fdht->base>0){		
-++	    if(fdht->base != (void *) -1){
-+ 		/* mmap is successful, so set the bounds.
-+ 		 * if it is not successful, we default to reading the fd
-+ 		 */
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-extended/md5deep/md5deep_4.4.bb b/meta-oe/recipes-extended/md5deep/md5deep_4.4.bb
-index 960e00f..bb30abe 100644
---- a/meta-oe/recipes-extended/md5deep/md5deep_4.4.bb
-+++ b/meta-oe/recipes-extended/md5deep/md5deep_4.4.bb
-@@ -9,6 +9,7 @@ SRCREV = "cd2ed7416685a5e83eb10bb659d6e9bec01244ae"
+diff --git a/meta-oe/recipes-extended/dialog/dialog_1.3-20160424.bb b/meta-oe/recipes-extended/dialog/dialog_1.3-20160828.bb
+similarity index 86%
+rename from meta-oe/recipes-extended/dialog/dialog_1.3-20160424.bb
+rename to meta-oe/recipes-extended/dialog/dialog_1.3-20160828.bb
+index 2d8fbae..bff3d97 100644
+--- a/meta-oe/recipes-extended/dialog/dialog_1.3-20160424.bb
++++ b/meta-oe/recipes-extended/dialog/dialog_1.3-20160828.bb
+@@ -8,11 +8,10 @@ DEPENDS = "ncurses"
+ LICENSE = "LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
  
- SRC_URI = "git://github.com/jessek/hashdeep.git \
-         file://wrong-variable-expansion.patch \
-+        file://0001-Fix-errors-found-by-clang.patch \
-         "
+-SRC_URI[md5sum] = "582d804252205f73df2d892ebdc5212e"
+-SRC_URI[sha256sum] = "47f5870876e778aa2902f2e91b4070418d4651b647e1a67a94127cb8aab5b5eb"
+-
+ SRC_URI = "ftp://invisible-island.net/dialog/dialog-${PV}.tgz \
+           "
++SRC_URI[md5sum] = "a39ec183517bc1feaff017d067300b8c"
++SRC_URI[sha256sum] = "453095abaec288bfbc1ca9faced917e17742cff1ea45ec46210071ac153562f9"
  
- S = "${WORKDIR}/git"
+ # hardcoded here for use in dialog-static recipe
+ S = "${WORKDIR}/dialog-${PV}"
 -- 
 2.10.2
 
