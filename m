@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 93FEE719E5
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 652E971AA7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 09:22:50 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id y68so449289pfb.1
+	Wed, 23 Nov 2016 09:22:51 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id c4so445373pfb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 01:22:52 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=f+CrZU5ABxfeJCruUHXykiJLZ+yoTrsWxEpOq2AwlSk=;
-	b=wqu788tMMmCump7cWGhsI0OmByjiqg6KrdJL8LIX4CJFgDVrojAQrpYiiH415eTiua
-	E8hAjctUGYDoYvbHMraKR85qwJfWhX9+4YTK1cTktiq421A92T5kRAeyA3g+EXD097tz
-	SEx/MaGkBTj7LCxAEm4x2hvjrATzmwx8+bifxWMWDVx2wUaNRH8bDwHdUCcPJBVzK+qD
-	6/B3DFkl+WAGb0MEF1ZEbkYH56SCKzH1Vzv41XhT9Q+UZx+D7oV7Zkjv52BZk3v8D1LG
-	ejV5rbGxn5Vizrfv+9npIWKAP1ouy0xf8k2Ntvip8eOSSFPHR7kRCs3x5el4tB35Vz0y
-	VIZQ==
+	bh=YzK3d3tTGTCqQSxd6oqSUhUXJBVzoC2t1acxg3H5OwM=;
+	b=rXihKH70de+AGjUaR9PDXLuivsi542+vAACpIiq+dd/RbaMom9gO8gHW9/YTAREgFu
+	NEWSRleAwOvlrXPifUXylSKs5hd2QtagdV2d3CsVi6z5eelEbxLzm8fwkGoCFTrvF4cZ
+	UVegkd8vWuWoIMsgmGLj3KKQG8x/GdgLBZMd02KIfo1jIlSGfid6I7nRuE0KztAfCuvU
+	o3rMFpJaFGRHcEiUdR0PL5xSh8DUhr5dNbGI/6tgundp5QCGYhR2CzU/kW5l4I0hrsLm
+	RbESbWoHWyadSJRLHOZCPSY4x6XbbQKCBlw/xqhgDk77U8CPhU/0Gzv5kx3NX2x+tepz
+	zkKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=f+CrZU5ABxfeJCruUHXykiJLZ+yoTrsWxEpOq2AwlSk=;
-	b=OwLtgZKPI2GXKJ608rJ6ZJiI6YW9svNEfhEbXX8Be9qSM7JnKkoMJ00lnmkRi6IoCz
-	GudSbLOuwsPc3fi9dp5W567uo7lLiDPnFJivurELFnxBDj0dy8M6WBpwJk+MwYW84nKK
-	8Aswbsuh44lFzTljyE5XWRSXxOfiCP3gK/CoGthgGBOVWU6sgiWSNsNjLa7foJowyxeO
-	9MJ0UD7OhMQ8yoio0DHOtuu1OpFVpHOOLxKu56z6QSb+GlXNm2tMJJJRshGb2g9QhApM
-	jpBAYU5ZY3et629cK7lpOVeMQ7ZBhMfobPS22E8Fz+VA9OTFsJUlWfT7FGHdKPV7W09j
-	eLsA==
-X-Gm-Message-State: AKaTC020s+c0hr0JPGQTv2dLht5gEHaEVezC1BGWnaRFC/dpDjqQSxN0snpuvDBJ3yUckw==
-X-Received: by 10.84.210.40 with SMTP id z37mr4677454plh.32.1479892971904;
-	Wed, 23 Nov 2016 01:22:51 -0800 (PST)
+	bh=YzK3d3tTGTCqQSxd6oqSUhUXJBVzoC2t1acxg3H5OwM=;
+	b=eld53rAVVDzaIQm4UIixz4iykayDOdCPHpmxuoRRh96rdn5QC0W1ylgb0O+BNAfWc0
+	CEsiRHWhJtfKlmPQKmnWiDElan0vXwRkZnnL0kOpQobqaurLTNR3R+rSmwwvyNZ1sAHB
+	YFXXvJ5IgeZ46SSNlhWwv8ZPWdFxsy9XcFl2B27nxIqNka5GtcmlLxVYYQJl7B9U1Wuh
+	RuY+I4PPa4zklK6sWZOxqraM4OnYq7B26f5s50lR6r4MQMy2HfIACTfFJDHR1+dUHD4I
+	1Z8Z73ue/nJaFviq2DhOD5jsnYUy6Yoh7W6359BFD7p4wcV6ERgRxcs6ydT/UmBVZqHn
+	ejlA==
+X-Gm-Message-State: AKaTC03bXfsAnykhKntdKmmCKkaifcMTqkyNTcxlwC5CdRTaTWXuvHlkpI0CO87EpqmFnQ==
+X-Received: by 10.99.126.94 with SMTP id o30mr3575492pgn.66.1479892973007;
+	Wed, 23 Nov 2016 01:22:53 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
 	u23sm51056087pfg.86.2016.11.23.01.22.51
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Nov 2016 01:22:51 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:52 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Nov 2016 01:22:05 -0800
-Message-Id: <20161123092209.23699-45-raj.khem@gmail.com>
+Date: Wed, 23 Nov 2016 01:22:06 -0800
+Message-Id: <20161123092209.23699-46-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.2
 In-Reply-To: <20161123092209.23699-1-raj.khem@gmail.com>
 References: <20161123092209.23699-1-raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 45/49] kodi-17: Update to latest
+Subject: [meta-multimedia][PATCH 46/49] tvheadend: Update to 4.0.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,546 +55,415 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Nov 2016 09:22:50 -0000
+X-List-Received-Date: Wed, 23 Nov 2016 09:22:51 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-musl.patch => 0001-Fix-file_Emu-on-musl.patch} |  4 +-
- ...e-FILEWRAP.patch => 0002-Remove-FILEWRAP.patch} | 28 +++++++-------
- ...e-don-t-try-to-run-stuff-to-find-tinyxml.patch} |  8 ++--
- ...dle-SIGTERM.patch => 0004-handle-SIGTERM.patch} | 22 +++++------
- ...to-read-frequency-output-if-using-intel-.patch} |  6 +--
- ...upport.patch => 0006-Disable-DVD-support.patch} | 10 ++---
- ... => 0007-Always-compile-libcpluff-as-PIC.patch} |  6 +--
- ....cmake-use-CMAKE_FIND_ROOT_PATH-to-fix-cr.patch | 43 ++++++++++++++++++++++
- ...0009-build-Add-support-for-musl-triplets.patch} |  8 ++--
- ...ix-compiler-warning-comparing-pointer-to-.patch | 40 ++++++++++++++++++++
- .../recipes-mediacenter/kodi/kodi-platform_git.bb  |  3 +-
- .../recipes-mediacenter/kodi/kodi_17.bb            | 30 +++++++++------
- 12 files changed, 149 insertions(+), 59 deletions(-)
- rename meta-multimedia/recipes-mediacenter/kodi/kodi-17/{0008-Fix-file_Emu-on-musl.patch => 0001-Fix-file_Emu-on-musl.patch} (99%)
- rename meta-multimedia/recipes-mediacenter/kodi/kodi-17/{0007-Remove-FILEWRAP.patch => 0002-Remove-FILEWRAP.patch} (78%)
- rename meta-multimedia/recipes-mediacenter/kodi/kodi-17/{0001-configure-don-t-try-to-run-stuff-to-find-tinyxml.patch => 0003-configure-don-t-try-to-run-stuff-to-find-tinyxml.patch} (75%)
- rename meta-multimedia/recipes-mediacenter/kodi/kodi-17/{0002-handle-SIGTERM.patch => 0004-handle-SIGTERM.patch} (89%)
- rename meta-multimedia/recipes-mediacenter/kodi/kodi-17/{0003-add-support-to-read-frequency-output-if-using-intel-.patch => 0005-add-support-to-read-frequency-output-if-using-intel-.patch} (83%)
- rename meta-multimedia/recipes-mediacenter/kodi/kodi-17/{0004-Disable-DVD-support.patch => 0006-Disable-DVD-support.patch} (78%)
- rename meta-multimedia/recipes-mediacenter/kodi/kodi-17/{0005-Always-compile-libcpluff-as-PIC.patch => 0007-Always-compile-libcpluff-as-PIC.patch} (86%)
- create mode 100644 meta-multimedia/recipes-mediacenter/kodi/kodi-17/0008-kodi-config.cmake-use-CMAKE_FIND_ROOT_PATH-to-fix-cr.patch
- rename meta-multimedia/recipes-mediacenter/kodi/kodi-17/{0006-build-Add-support-for-musl-triplets.patch => 0009-build-Add-support-for-musl-triplets.patch} (97%)
- create mode 100644 meta-multimedia/recipes-mediacenter/kodi/kodi-17/0010-RssReader-Fix-compiler-warning-comparing-pointer-to-.patch
+ .../tvheadend/0001-Fix-checks-for-sse2-mmx.patch   | 40 ++++++++++
+ ...efile-Ignore-warning-about-wrong-includes.patch | 31 ++++++++
+ ...end-specific-LD-CFLAGS-into-a-helper-vari.patch | 92 ----------------------
+ .../0001-disable-varargs-warning-on-clang.patch    | 32 ++++++++
+ .../0001-dvr-Use-labs-instead-of-abs.patch         | 37 +++++++++
+ ...verride-forced-overrdiing-og-CC-STRIP-and.patch | 40 ++++++++++
+ .../tvheadend/0002-fix-issues-with-gcc6.patch      | 46 -----------
+ .../recipes-dvb/tvheadend/tvheadend_git.bb         | 15 ++--
+ 8 files changed, 189 insertions(+), 144 deletions(-)
+ create mode 100644 meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-Fix-checks-for-sse2-mmx.patch
+ create mode 100644 meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-Makefile-Ignore-warning-about-wrong-includes.patch
+ delete mode 100644 meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-Move-tvheadend-specific-LD-CFLAGS-into-a-helper-vari.patch
+ create mode 100644 meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-disable-varargs-warning-on-clang.patch
+ create mode 100644 meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-dvr-Use-labs-instead-of-abs.patch
+ create mode 100644 meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-hdhomerun-Override-forced-overrdiing-og-CC-STRIP-and.patch
+ delete mode 100644 meta-multimedia/recipes-dvb/tvheadend/tvheadend/0002-fix-issues-with-gcc6.patch
 
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0008-Fix-file_Emu-on-musl.patch b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0001-Fix-file_Emu-on-musl.patch
-similarity index 99%
-rename from meta-multimedia/recipes-mediacenter/kodi/kodi-17/0008-Fix-file_Emu-on-musl.patch
-rename to meta-multimedia/recipes-mediacenter/kodi/kodi-17/0001-Fix-file_Emu-on-musl.patch
-index 7598c7a..20b6377 100644
---- a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0008-Fix-file_Emu-on-musl.patch
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0001-Fix-file_Emu-on-musl.patch
-@@ -1,7 +1,7 @@
--From 3a10d9479e7c9a77c478b8b428e4309ff22e8498 Mon Sep 17 00:00:00 2001
-+From 7ae4fcf290ffb0b76374efafeaee575456ac9023 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sun, 6 Nov 2016 23:08:27 -0800
--Subject: [PATCH 8/8] Fix file_Emu on musl
-+Subject: [PATCH 01/10] Fix file_Emu on musl
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0007-Remove-FILEWRAP.patch b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0002-Remove-FILEWRAP.patch
-similarity index 78%
-rename from meta-multimedia/recipes-mediacenter/kodi/kodi-17/0007-Remove-FILEWRAP.patch
-rename to meta-multimedia/recipes-mediacenter/kodi/kodi-17/0002-Remove-FILEWRAP.patch
-index c2d3259..7f48e93 100644
---- a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0007-Remove-FILEWRAP.patch
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0002-Remove-FILEWRAP.patch
-@@ -1,7 +1,7 @@
--From f4c5710192256e903b253353fb018ebd68d0b651 Mon Sep 17 00:00:00 2001
-+From ad1977a358319093b305df6d84be6db676ef1e4a Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sun, 6 Nov 2016 22:35:16 -0800
--Subject: [PATCH 7/8] Remove FILEWRAP
-+Subject: [PATCH 02/10] Remove FILEWRAP
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-@@ -10,10 +10,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  2 files changed, 2 insertions(+), 8 deletions(-)
- 
- diff --git a/xbmc/utils/posix/PosixInterfaceForCLog.cpp b/xbmc/utils/posix/PosixInterfaceForCLog.cpp
--index 6614487..a91d157 100644
-+index a3d4983..8443024 100644
- --- a/xbmc/utils/posix/PosixInterfaceForCLog.cpp
- +++ b/xbmc/utils/posix/PosixInterfaceForCLog.cpp
--@@ -28,10 +28,6 @@
-+@@ -29,10 +29,6 @@
-  #include "platform/android/activity/XBMCApp.h"
-  #endif // TARGET_ANDROID
-  
-@@ -24,7 +24,7 @@ index 6614487..a91d157 100644
-  CPosixInterfaceForCLog::CPosixInterfaceForCLog() :
-    m_file(NULL)
-  { }
--@@ -51,7 +47,7 @@ bool CPosixInterfaceForCLog::OpenLogFile(const std::string &logFilename, const s
-+@@ -52,7 +48,7 @@ bool CPosixInterfaceForCLog::OpenLogFile(const std::string &logFilename, const s
-    (void)remove(backupOldLogToFilename.c_str()); // if it's failed, try to continue
-    (void)rename(logFilename.c_str(), backupOldLogToFilename.c_str()); // if it's failed, try to continue
-  
-@@ -34,24 +34,24 @@ index 6614487..a91d157 100644
-      return false; // error, can't open log file
-  
- diff --git a/xbmc/utils/posix/PosixInterfaceForCLog.h b/xbmc/utils/posix/PosixInterfaceForCLog.h
--index bb53442..2983e73 100644
-+index c1e8ffe..75836b7 100644
- --- a/xbmc/utils/posix/PosixInterfaceForCLog.h
- +++ b/xbmc/utils/posix/PosixInterfaceForCLog.h
--@@ -21,8 +21,6 @@
-+@@ -19,8 +19,6 @@
-+  *
-+  */
-  
-- #include <string>
-- 
---struct FILEWRAP; // forward declaration, wrapper for FILE
-+-#include <string>
- -
-+ struct FILEWRAP; // forward declaration, wrapper for FILE
-+ 
-  class CPosixInterfaceForCLog
-- {
-- public:
- @@ -34,5 +32,5 @@ public:
-    void PrintDebugString(const std::string& debugString);
--   static void GetCurrentLocalTime(int& hour, int& minute, int& second);
-+   static void GetCurrentLocalTime(int& hour, int& minute, int& second, double& millisecond);
-  private:
- -  FILEWRAP* m_file;
--+  FILE * m_file;
-++  FILE* m_file;
-  };
- -- 
- 2.10.2
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0001-configure-don-t-try-to-run-stuff-to-find-tinyxml.patch b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0003-configure-don-t-try-to-run-stuff-to-find-tinyxml.patch
-similarity index 75%
-rename from meta-multimedia/recipes-mediacenter/kodi/kodi-17/0001-configure-don-t-try-to-run-stuff-to-find-tinyxml.patch
-rename to meta-multimedia/recipes-mediacenter/kodi/kodi-17/0003-configure-don-t-try-to-run-stuff-to-find-tinyxml.patch
-index b3780db..49217a4 100644
---- a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0001-configure-don-t-try-to-run-stuff-to-find-tinyxml.patch
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0003-configure-don-t-try-to-run-stuff-to-find-tinyxml.patch
-@@ -1,14 +1,14 @@
--From 53c7b1667a41b25775d1dc009d8ced61f383da0b Mon Sep 17 00:00:00 2001
-+From a91a3ba229dc5903935f7dd98dd03bbb4fe5ac1f Mon Sep 17 00:00:00 2001
- From: Koen Kooi <koen@dominion.thruhere.net>
- Date: Sat, 6 Feb 2016 15:43:01 +0100
--Subject: [PATCH 1/3] configure: don't try to run stuff to find tinyxml
-+Subject: [PATCH 03/10] configure: don't try to run stuff to find tinyxml
- 
- ---
-  configure.ac | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/configure.ac b/configure.ac
--index 5a41fb4..243c7e5 100644
-+index 34fe643..3132dc1 100644
- --- a/configure.ac
- +++ b/configure.ac
- @@ -1043,7 +1043,7 @@ fi
-@@ -21,5 +21,5 @@ index 5a41fb4..243c7e5 100644
-  #include <stdlib.h>
-  #include <tinyxml.h>
- -- 
--2.10.1
-+2.10.2
- 
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0002-handle-SIGTERM.patch b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0004-handle-SIGTERM.patch
-similarity index 89%
-rename from meta-multimedia/recipes-mediacenter/kodi/kodi-17/0002-handle-SIGTERM.patch
-rename to meta-multimedia/recipes-mediacenter/kodi/kodi-17/0004-handle-SIGTERM.patch
-index b2af5de..dc37439 100644
---- a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0002-handle-SIGTERM.patch
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0004-handle-SIGTERM.patch
-@@ -1,7 +1,7 @@
--From 1c1484303a055bfde655ffae3829554aaefc2e07 Mon Sep 17 00:00:00 2001
-+From 49046c1685465a5486fe9e1c04b99c585aab6862 Mon Sep 17 00:00:00 2001
- From: Stefan Saraev <stefan@saraev.ca>
- Date: Wed, 2 Nov 2016 11:28:34 -0700
--Subject: [PATCH 2/3] handle SIGTERM
-+Subject: [PATCH 04/10] handle SIGTERM
- 
- 0. CApplication::Stop cant be trusted. (deadlocks crashes and boo)
- 
-@@ -26,10 +26,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  5 files changed, 30 insertions(+), 5 deletions(-)
- 
- diff --git a/xbmc/Application.cpp b/xbmc/Application.cpp
--index 4c118e0..58b151a 100644
-+index 100a2f2..fda892d 100644
- --- a/xbmc/Application.cpp
- +++ b/xbmc/Application.cpp
--@@ -2428,12 +2428,12 @@ void CApplication::OnApplicationMessage(ThreadMessage* pMsg)
-+@@ -2426,12 +2426,12 @@ void CApplication::OnApplicationMessage(ThreadMessage* pMsg)
-    switch (pMsg->dwMessage)
-    {
-    case TMSG_POWERDOWN:
-@@ -44,7 +44,7 @@ index 4c118e0..58b151a 100644
-      break;
-    
-    case TMSG_SHUTDOWN:
--@@ -2454,12 +2454,13 @@ void CApplication::OnApplicationMessage(ThreadMessage* pMsg)
-+@@ -2452,12 +2452,13 @@ void CApplication::OnApplicationMessage(ThreadMessage* pMsg)
-  
-    case TMSG_RESTART:
-    case TMSG_RESET:
-@@ -59,7 +59,7 @@ index 4c118e0..58b151a 100644
-      Stop(EXITCODE_RESTARTAPP);
-  #endif
-      break;
--@@ -2883,6 +2884,13 @@ bool CApplication::Cleanup()
-+@@ -2881,6 +2882,13 @@ bool CApplication::Cleanup()
-    }
-  }
-  
-@@ -73,7 +73,7 @@ index 4c118e0..58b151a 100644
-  void CApplication::Stop(int exitCode)
-  {
-    try
--@@ -2890,7 +2898,7 @@ void CApplication::Stop(int exitCode)
-+@@ -2888,7 +2896,7 @@ void CApplication::Stop(int exitCode)
-      m_frameMoveGuard.unlock();
-  
-      CVariant vExitCode(CVariant::VariantTypeObject);
-@@ -82,7 +82,7 @@ index 4c118e0..58b151a 100644
-      CAnnouncementManager::GetInstance().Announce(System, "xbmc", "OnQuit", vExitCode);
-  
-      // Abort any active screensaver
--@@ -2924,7 +2932,6 @@ void CApplication::Stop(int exitCode)
-+@@ -2922,7 +2930,6 @@ void CApplication::Stop(int exitCode)
-  
-      m_bStop = true;
-      m_AppFocused = false;
-@@ -91,10 +91,10 @@ index 4c118e0..58b151a 100644
-  
-      // cancel any jobs from the jobmanager
- diff --git a/xbmc/Application.h b/xbmc/Application.h
--index 22aca81..9992677 100644
-+index a9d9bf5..e536deb 100644
- --- a/xbmc/Application.h
- +++ b/xbmc/Application.h
--@@ -160,6 +160,7 @@ public:
-+@@ -159,6 +159,7 @@ public:
-    void StopPVRManager();
-    void ReinitPVRManager();
-    bool IsCurrentThread() const;
-@@ -159,5 +159,5 @@ index a8b64e5..3d80032 100644
-    XBMC::Context context;
-  
- -- 
--2.10.1
-+2.10.2
- 
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0003-add-support-to-read-frequency-output-if-using-intel-.patch b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0005-add-support-to-read-frequency-output-if-using-intel-.patch
-similarity index 83%
-rename from meta-multimedia/recipes-mediacenter/kodi/kodi-17/0003-add-support-to-read-frequency-output-if-using-intel-.patch
-rename to meta-multimedia/recipes-mediacenter/kodi/kodi-17/0005-add-support-to-read-frequency-output-if-using-intel-.patch
-index d638550..ee10c40 100644
---- a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0003-add-support-to-read-frequency-output-if-using-intel-.patch
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0005-add-support-to-read-frequency-output-if-using-intel-.patch
-@@ -1,7 +1,7 @@
--From 4ef1e9dab9193f1a5305d25c8eda97f8f06ea154 Mon Sep 17 00:00:00 2001
-+From 4d1368d20f04216aec9551d9845b305f96a21015 Mon Sep 17 00:00:00 2001
- From: Stephan Raue <stephan@openelec.tv>
- Date: Mon, 1 Sep 2014 03:16:37 +0200
--Subject: [PATCH 3/3] add support to read frequency output if using intel's
-+Subject: [PATCH 05/10] add support to read frequency output if using intel's
-  pstate driver
- 
- ---
-@@ -22,5 +22,5 @@ index 5e2ebbd..fd04d5a 100644
-    {
-      m_cpuInfoForFreq = true;
- -- 
--2.10.1
-+2.10.2
- 
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0004-Disable-DVD-support.patch b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0006-Disable-DVD-support.patch
-similarity index 78%
-rename from meta-multimedia/recipes-mediacenter/kodi/kodi-17/0004-Disable-DVD-support.patch
-rename to meta-multimedia/recipes-mediacenter/kodi/kodi-17/0006-Disable-DVD-support.patch
-index 6f5f9a2..08dfac3 100644
---- a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0004-Disable-DVD-support.patch
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0006-Disable-DVD-support.patch
-@@ -1,7 +1,7 @@
--From 191cf3f084b4d34846711034a7fe3078f8243c82 Mon Sep 17 00:00:00 2001
-+From 3d3ec391038c6ee73897a7fab753b11b589de1ed Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Wed, 2 Nov 2016 12:39:20 -0700
--Subject: [PATCH 4/4] Disable DVD support
-+Subject: [PATCH 06/10] Disable DVD support
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-@@ -9,7 +9,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  1 file changed, 1 insertion(+), 3 deletions(-)
- 
- diff --git a/Makefile.in b/Makefile.in
--index 58b3a17..b7c3fce 100644
-+index 0d70e9b..050c7ca 100644
- --- a/Makefile.in
- +++ b/Makefile.in
- @@ -10,8 +10,7 @@ EC_DIRS= \
-@@ -22,7 +22,7 @@ index 58b3a17..b7c3fce 100644
-  
-  VideoPlayer_ARCHIVES=xbmc/cores/VideoPlayer/VideoPlayer.a \
-                     xbmc/cores/VideoPlayer/DVDCodecs/DVDCodecs.a \
--@@ -343,7 +342,6 @@ libaddon: exports
-+@@ -347,7 +346,6 @@ libaddon: exports
-  	$(MAKE) -C lib/addons/library.xbmc.pvr
-  	$(MAKE) -C lib/addons/library.kodi.inputstream
-  dvdpcodecs: dllloader
-@@ -31,5 +31,5 @@ index 58b3a17..b7c3fce 100644
-  dvdpextcodecs:
-  
- -- 
--2.10.1
-+2.10.2
- 
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0005-Always-compile-libcpluff-as-PIC.patch b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0007-Always-compile-libcpluff-as-PIC.patch
-similarity index 86%
-rename from meta-multimedia/recipes-mediacenter/kodi/kodi-17/0005-Always-compile-libcpluff-as-PIC.patch
-rename to meta-multimedia/recipes-mediacenter/kodi/kodi-17/0007-Always-compile-libcpluff-as-PIC.patch
-index f513334..8fd7ece 100644
---- a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0005-Always-compile-libcpluff-as-PIC.patch
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0007-Always-compile-libcpluff-as-PIC.patch
-@@ -1,7 +1,7 @@
--From 603e8925a8b1609d483d866346a35fefbc66cfca Mon Sep 17 00:00:00 2001
-+From d989cbdb7686c3b95dc749967f89b93e47f955a6 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Thu, 3 Nov 2016 13:10:00 -0700
--Subject: [PATCH 5/5] Always compile libcpluff as PIC
-+Subject: [PATCH 07/10] Always compile libcpluff as PIC
- 
- Fixes errors e.g.
- 
-@@ -13,7 +13,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
- diff --git a/configure.ac b/configure.ac
--index b210b73..52d5f11 100644
-+index 3132dc1..ab4eea3 100644
- --- a/configure.ac
- +++ b/configure.ac
- @@ -2385,7 +2385,7 @@ XB_CONFIG_MODULE([lib/cpluff], [
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0008-kodi-config.cmake-use-CMAKE_FIND_ROOT_PATH-to-fix-cr.patch b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0008-kodi-config.cmake-use-CMAKE_FIND_ROOT_PATH-to-fix-cr.patch
+diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-Fix-checks-for-sse2-mmx.patch b/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-Fix-checks-for-sse2-mmx.patch
 new file mode 100644
-index 0000000..9390144
+index 0000000..3283a5b
 --- /dev/null
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0008-kodi-config.cmake-use-CMAKE_FIND_ROOT_PATH-to-fix-cr.patch
-@@ -0,0 +1,43 @@
-+From 51cd8d5f084013360b29fe497193288ebde2f4f9 Mon Sep 17 00:00:00 2001
-+From: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
-+Date: Wed, 29 Jul 2015 23:13:33 +0200
-+Subject: [PATCH 08/10] kodi-config.cmake: use CMAKE_FIND_ROOT_PATH to fix
-+ cross-compilation
-+
-+When cross-compiling, the location at build time of the libraries is
-+not the same as the one at run-time. The CMAKE_FIND_ROOT_PATH variable
-+is here to handle this difference, so use it in kodi-config.cmake.
-+
-+Signed-off-by: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
-+---
-+ project/cmake/KodiConfig.cmake.in | 5 +++--
-+ 1 file changed, 3 insertions(+), 2 deletions(-)
-+
-+diff --git a/project/cmake/KodiConfig.cmake.in b/project/cmake/KodiConfig.cmake.in
-+index c02a680..9d6a566 100644
-+--- a/project/cmake/KodiConfig.cmake.in
-++++ b/project/cmake/KodiConfig.cmake.in
-+@@ -7,10 +7,10 @@ if(NOT @APP_NAME_UC@_PREFIX)
-+   set(@APP_NAME_UC@_PREFIX @APP_PREFIX@)
-+ endif()
-+ if(NOT @APP_NAME_UC@_INCLUDE_DIR)
-+-  set(@APP_NAME_UC@_INCLUDE_DIR @APP_INCLUDE_DIR@)
-++  set(@APP_NAME_UC@_INCLUDE_DIR ${CMAKE_FIND_ROOT_PATH}/@APP_INCLUDE_DIR@)
-+ endif()
-+ if(NOT @APP_NAME_UC@_LIB_DIR)
-+-  set(@APP_NAME_UC@_LIB_DIR @APP_LIB_DIR@)
-++  set(@APP_NAME_UC@_LIB_DIR ${CMAKE_FIND_ROOT_PATH}/@APP_LIB_DIR@)
-+ endif()
-+ if(NOT @APP_NAME_UC@_DATA_DIR)
-+   set(@APP_NAME_UC@_DATA_DIR @APP_DATA_DIR@)
-+@@ -19,6 +19,7 @@ if(NOT WIN32)
-+   set(CMAKE_CXX_FLAGS "$ENV{CXXFLAGS} @CXX11_SWITCH@")
-+ endif()
-+ list(APPEND CMAKE_MODULE_PATH @APP_LIB_DIR@ @APP_DATA_DIR@/cmake)
-++list(APPEND CMAKE_MODULE_PATH ${CMAKE_FIND_ROOT_PATH}/@APP_LIB_DIR@ ${CMAKE_FIND_ROOT_PATH}/@APP_DATA_DIR@/cmake)
-+ 
-+ string(REPLACE ";" " " ARCH_DEFINES "@ARCH_DEFINES@")
-+ add_definitions(${ARCH_DEFINES} -DBUILD_KODI_ADDON)
-+-- 
-+2.10.2
-+
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0006-build-Add-support-for-musl-triplets.patch b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0009-build-Add-support-for-musl-triplets.patch
-similarity index 97%
-rename from meta-multimedia/recipes-mediacenter/kodi/kodi-17/0006-build-Add-support-for-musl-triplets.patch
-rename to meta-multimedia/recipes-mediacenter/kodi/kodi-17/0009-build-Add-support-for-musl-triplets.patch
-index 71c5c41..f3e739a 100644
---- a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0006-build-Add-support-for-musl-triplets.patch
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0009-build-Add-support-for-musl-triplets.patch
-@@ -1,7 +1,7 @@
--From 99769ac5653884e49d1c8c34e65d2e565cd9e314 Mon Sep 17 00:00:00 2001
-+From 8b2bad58585af0f829fb06e19c9bd2b6caf30808 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sun, 6 Nov 2016 11:54:41 -0800
--Subject: [PATCH 6/6] build: Add support for musl triplets
-+Subject: [PATCH 09/10] build: Add support for musl triplets
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-@@ -11,7 +11,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  3 files changed, 23 insertions(+), 23 deletions(-)
- 
- diff --git a/configure.ac b/configure.ac
--index 52d5f11..a772973 100644
-+index ab4eea3..925466a 100644
- --- a/configure.ac
- +++ b/configure.ac
- @@ -526,7 +526,7 @@ case $host in
-@@ -131,7 +131,7 @@ index d28f263..ff5dc20 100644
-       ;;
-    *-*linux-android*)
- diff --git a/tools/depends/configure.ac b/tools/depends/configure.ac
--index a0bc386..b96d20e 100644
-+index f438e5d..409f4d7 100644
- --- a/tools/depends/configure.ac
- +++ b/tools/depends/configure.ac
- @@ -120,13 +120,13 @@ platform_cc=gcc
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0010-RssReader-Fix-compiler-warning-comparing-pointer-to-.patch b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0010-RssReader-Fix-compiler-warning-comparing-pointer-to-.patch
-new file mode 100644
-index 0000000..e34a5b7
---- /dev/null
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0010-RssReader-Fix-compiler-warning-comparing-pointer-to-.patch
++++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-Fix-checks-for-sse2-mmx.patch
 @@ -0,0 +1,40 @@
-+From 55233024648b5673dbf223586968e71cc4c70711 Mon Sep 17 00:00:00 2001
++From f0dab6d6fe4b0aae4394eee93be86e9747c6ed5c Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 16 Nov 2016 18:49:36 -0800
-+Subject: [PATCH 10/10] RssReader: Fix compiler warning comparing pointer to
-+ zero
++Date: Tue, 22 Nov 2016 05:07:38 +0000
++Subject: [PATCH] Fix checks for sse2/mmx
 +
-+Clang finds this warning
-+RssReader.cpp:272:19: error: ordered comparison between pointer and zero ('TiXmlElement *' and 'int')
-+  while (itemNode > 0)
-+         ~~~~~~~~ ^ ~
-+RssReader.cpp:276:22: error: ordered comparison between pointer and zero ('TiXmlNode *' and 'int')
-+    while (childNode > 0)
-+           ~~~~~~~~~ ^ ~
++Just checking for cmdline options is not enough
++its better to check for builtin defines to be
++sure, clang does not error out on sse2 options on
++arm e.g. and it ends up doing SSE2 stuff for arm
++which is not desired
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ xbmc/utils/RssReader.cpp | 4 ++--
++ configure | 10 ++++++++--
++ 1 file changed, 8 insertions(+), 2 deletions(-)
++
++diff --git a/configure b/configure
++index 47d2cf2..4be000c 100755
++--- a/configure
+++++ b/configure
++@@ -118,8 +118,14 @@ fi
++ # Valiate compiler
++ check_cc || die 'No C compiler found'
++ check_cc_header execinfo
++-check_cc_option mmx
++-check_cc_option sse2
+++check_cc_snippet mmx '#ifndef __MMX__
+++error "MMX not supported"
+++#endif
+++'
+++check_cc_snippet sse2 '#ifndef __SSE2__
+++error "SSE2 not supported"
+++#endif
+++'
++ 
++ if check_cc '
++ #if !defined(__clang__)
++-- 
++1.9.1
++
+diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-Makefile-Ignore-warning-about-wrong-includes.patch b/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-Makefile-Ignore-warning-about-wrong-includes.patch
+new file mode 100644
+index 0000000..248a5e6
+--- /dev/null
++++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-Makefile-Ignore-warning-about-wrong-includes.patch
+@@ -0,0 +1,31 @@
++From 7d672305c7ad2f716dfe1c487b525a1a92954d4a Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 22 Nov 2016 06:22:36 +0000
++Subject: [PATCH] Makefile: Ignore warning about wrong includes
++
++It happens on musl especially
++usr/include/sys/poll.h:1:2: error: redirecting incorrect #include <sys/poll.h> to <poll.h> [-Werror,-W#warnings]
++| #warning redirecting incorrect #include <sys/poll.h> to <poll.h>
++|  ^
++| In file included from src/avahi.c:48:
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ Makefile | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/Makefile b/Makefile
++index f41ef1a..cc7b249 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -54,6 +54,7 @@ CFLAGS  += -Wno-microsoft -Qunused-arguments -Wno-unused-function
++ CFLAGS  += -Wno-unused-value -Wno-tautological-constant-out-of-range-compare
++ CFLAGS  += -Wno-parentheses-equality -Wno-incompatible-pointer-types
++ CFLAGS  += -Wno-error=varargs
+++CFLAGS  += -Wno-error=\#warnings
++ endif
++ 
++ ifeq ($(CONFIG_LIBFFMPEG_STATIC),yes)
++-- 
++1.8.3.1
++
+diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-Move-tvheadend-specific-LD-CFLAGS-into-a-helper-vari.patch b/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-Move-tvheadend-specific-LD-CFLAGS-into-a-helper-vari.patch
+deleted file mode 100644
+index 9dfcce0..0000000
+--- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-Move-tvheadend-specific-LD-CFLAGS-into-a-helper-vari.patch
++++ /dev/null
+@@ -1,92 +0,0 @@
+-From 2ee64b359464b48f751683faa5ded3ee8200fe90 Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Fri, 21 Dec 2012 10:15:42 +0100
+-Subject: [PATCH] Move tvheadend specific LD/CFLAGS into a helper variable to
+- avoid being overwritten
+-
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+-
+-Upstream-Status: Inappropriate [OE specific]
+----
+- Makefile              |   20 ++++++++++----------
+- support/configure.inc |    8 ++++----
+- 2 files changed, 14 insertions(+), 14 deletions(-)
+-
+-diff --git a/Makefile b/Makefile
+-index 8c6b293..daf5f14 100644
+---- a/Makefile
+-+++ b/Makefile
+-@@ -27,12 +27,12 @@ PROG = ${BUILDDIR}/tvheadend
+- # Common compiler flags
+- #
+- 
+--CFLAGS  += -Wall -Werror -Wwrite-strings -Wno-deprecated-declarations
+--CFLAGS  += -Wmissing-prototypes -fms-extensions
+--CFLAGS  += -g -funsigned-char -O2 
+--CFLAGS  += -D_FILE_OFFSET_BITS=64
+--CFLAGS  += -I${BUILDDIR} -I${CURDIR}/src -I${CURDIR}
+--LDFLAGS += -lrt -ldl -lpthread -lm
+-+TVH_CFLAGS  += -Wall -Werror -Wwrite-strings -Wno-deprecated-declarations
+-+TVH_CFLAGS  += -Wmissing-prototypes -fms-extensions
+-+TVH_CFLAGS  += -g -funsigned-char -O2 
+-+TVH_CFLAGS  += -D_FILE_OFFSET_BITS=64
+-+TVH_CFLAGS  += -I${BUILDDIR} -I${CURDIR}/src -I${CURDIR}
+-+TVH_LDFLAGS += -lrt -ldl -lpthread -lm
+- 
+- #
+- # Other config
+-@@ -179,8 +179,8 @@ SRCS-${CONFIG_CWC}  += src/ffdecsa/ffdecsa_interface.c \
+- 	src/ffdecsa/ffdecsa_int.c
+- SRCS-${CONFIG_MMX}  += src/ffdecsa/ffdecsa_mmx.c
+- SRCS-${CONFIG_SSE2} += src/ffdecsa/ffdecsa_sse2.c
+--${BUILDDIR}/src/ffdecsa/ffdecsa_mmx.o  : CFLAGS += -mmmx
+--${BUILDDIR}/src/ffdecsa/ffdecsa_sse2.o : CFLAGS += -msse2
+-+${BUILDDIR}/src/ffdecsa/ffdecsa_mmx.o  : TVH_CFLAGS += -mmmx
+-+${BUILDDIR}/src/ffdecsa/ffdecsa_sse2.o : TVH_CFLAGS += -msse2
+- endif
+- 
+- # File bundles
+-@@ -217,12 +217,12 @@ all: ${PROG}
+- 
+- # Binary
+- ${PROG}: $(OBJS) $(ALLDEPS)
+--	$(CC) -o $@ $(OBJS) $(CFLAGS) $(LDFLAGS)
+-+	$(CC) -o $@ $(OBJS) $(TVH_CFLAGS) $(TVH_LDFLAGS) $(CFLAGS) $(LDFLAGS)
+- 
+- # Object
+- ${BUILDDIR}/%.o: %.c
+- 	@mkdir -p $(dir $@)
+--	$(CC) -MD -MP $(CFLAGS) -c -o $@ $(CURDIR)/$<
+-+	$(CC) -MD -MP $(TVH_CFLAGS) $(CFLAGS) -c -o $@ $(CURDIR)/$<
+- 
+- # Add-on
+- ${BUILDDIR}/%.so: ${SRCS_EXTRA}
+-diff --git a/support/configure.inc b/support/configure.inc
+-index 0130880..332511e 100644
+---- a/support/configure.inc
+-+++ b/support/configure.inc
+-@@ -464,8 +464,8 @@ ifeq (\$(origin CC),default)
+- CC        = ${CC}
+- endif
+- PYTHON   ?= ${PYTHON}
+--CFLAGS   += ${CFLAGS}
+--LDFLAGS  += ${LDFLAGS}
+-+TVH_CFLAGS   += ${CFLAGS}
+-+TVH_LDFLAGS  += ${LDFLAGS}
+- prefix    = ${prefix}
+- bindir    = ${bindir}
+- mandir    = ${mandir}
+-@@ -482,8 +482,8 @@ EOF
+-   # Add package config
+-   for pkg in ${PACKAGES[*]}; do
+-     cat >>${CONFIG_MK} <<EOF
+--LDFLAGS += $(pkg-config --libs $pkg)
+--CFLAGS  += $(pkg-config --cflags $pkg)
+-+TVH_LDFLAGS += $(pkg-config --libs $pkg)
+-+TVH_CFLAGS  += $(pkg-config --cflags $pkg)
+- EOF
+-   done
+- 
+--- 
+-1.7.7.6
+-
+diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-disable-varargs-warning-on-clang.patch b/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-disable-varargs-warning-on-clang.patch
+new file mode 100644
+index 0000000..a4c4c4d
+--- /dev/null
++++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-disable-varargs-warning-on-clang.patch
+@@ -0,0 +1,32 @@
++From 906d95695af95970bf551ea55b6c3e70332c6b97 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 22 Nov 2016 05:22:32 +0000
++Subject: [PATCH] disable varargs warning on clang
++
++The issue is that 'len' is an unsigned char and we violate the promotion rules
++for passing the value to va_start.
++
++passing an object that undergoes defau
++lt argument promotion to 'va_start' has undefined behavior [-Wvarargs]
++|   va_start(ap, len);
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ Makefile | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/Makefile b/Makefile
++index 8c5e380..f41ef1a 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -53,6 +53,7 @@ ifeq ($(COMPILER), clang)
++ CFLAGS  += -Wno-microsoft -Qunused-arguments -Wno-unused-function
++ CFLAGS  += -Wno-unused-value -Wno-tautological-constant-out-of-range-compare
++ CFLAGS  += -Wno-parentheses-equality -Wno-incompatible-pointer-types
+++CFLAGS  += -Wno-error=varargs
++ endif
++ 
++ ifeq ($(CONFIG_LIBFFMPEG_STATIC),yes)
++-- 
++1.9.1
++
+diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-dvr-Use-labs-instead-of-abs.patch b/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-dvr-Use-labs-instead-of-abs.patch
+new file mode 100644
+index 0000000..ea34cdb
+--- /dev/null
++++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-dvr-Use-labs-instead-of-abs.patch
+@@ -0,0 +1,37 @@
++From a715671eadcbf989fdaf05f62e71b93ac1749615 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 22 Nov 2016 06:08:31 +0000
++Subject: [PATCH] dvr: Use labs() instead of abs()
++
++Makes clang happy
++
++dvr/dvr_db.c:853:10: error: absolute value function
++'abs' given an argument of type 'long' but has parameter of type 'int' which may cause truncation of value [-Werror,-Wabsolute-value]
++if ((abs(de->de_start - e->start) < 600) && (abs(de->de_stop - e->stop) < 600)) {
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/dvr/dvr_db.c | 4 ++--
 + 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+diff --git a/xbmc/utils/RssReader.cpp b/xbmc/utils/RssReader.cpp
-+index 9186f56..2494dc8 100644
-+--- a/xbmc/utils/RssReader.cpp
-++++ b/xbmc/utils/RssReader.cpp
-+@@ -269,11 +269,11 @@ void CRssReader::GetNewsItems(TiXmlElement* channelXmlNode, int iFeed)
-+   if (m_tagSet.empty())
-+     AddTag("title");
++diff --git a/src/dvr/dvr_db.c b/src/dvr/dvr_db.c
++index 165caa6..5656569 100644
++--- a/src/dvr/dvr_db.c
+++++ b/src/dvr/dvr_db.c
++@@ -414,11 +414,11 @@ dvr_entry_fuzzy_match(dvr_entry_t *de, epg_broadcast_t *e)
++   /* Wrong length (+/-20%) */
++   t1 = de->de_stop - de->de_start;
++   t2  = e->stop - e->start;
++-  if ( abs(t2 - t1) > (t1 / 5) )
+++  if ( labs(t2 - t1) > (t1 / 5) )
++     return 0;
 + 
-+-  while (itemNode > 0)
-++  while (itemNode != NULL)
-+   {
-+     TiXmlNode* childNode = itemNode->FirstChild();
-+     mTagElements.clear();
-+-    while (childNode > 0)
-++    while (childNode != NULL)
-+     {
-+       std::string strName = childNode->ValueStr();
-+ 
++   /* Outside of window */
++-  if (abs(e->start - de->de_start) > de->de_config->dvr_update_window)
+++  if (labs(e->start - de->de_start) > de->de_config->dvr_update_window)
++     return 0;
++   
++   /* Title match (or contains?) */
 +-- 
-+2.10.2
++1.9.1
 +
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi-platform_git.bb b/meta-multimedia/recipes-mediacenter/kodi/kodi-platform_git.bb
-index 5077454..802259d 100644
---- a/meta-multimedia/recipes-mediacenter/kodi/kodi-platform_git.bb
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi-platform_git.bb
-@@ -8,9 +8,8 @@ DEPENDS = "libtinyxml kodi"
+diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-hdhomerun-Override-forced-overrdiing-og-CC-STRIP-and.patch b/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-hdhomerun-Override-forced-overrdiing-og-CC-STRIP-and.patch
+new file mode 100644
+index 0000000..484e723
+--- /dev/null
++++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0001-hdhomerun-Override-forced-overrdiing-og-CC-STRIP-and.patch
+@@ -0,0 +1,40 @@
++From c3767e189e90965407937b6178adbbd8cdafe31d Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 22 Nov 2016 05:59:10 +0000
++Subject: [PATCH] hdhomerun: Override forced overrdiing og CC/STRIP and CFLAGS
++
++This is required for cross compiling otherwise it ends up
++using build host gcc
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ Makefile.hdhomerun | 6 ++++--
++ 1 file changed, 4 insertions(+), 2 deletions(-)
++
++diff --git a/Makefile.hdhomerun b/Makefile.hdhomerun
++index 943ffec..8bd14ff 100644
++--- a/Makefile.hdhomerun
+++++ b/Makefile.hdhomerun
++@@ -18,8 +18,8 @@
++ 
++ include $(dir $(lastword $(MAKEFILE_LIST))).config.mk
++ 
++-unexport CFLAGS
++-unexport LDFLAGS
+++#unexport CFLAGS
+++#unexport LDFLAGS
++ 
++ define DOWNLOAD
++ 	@mkdir -p $(LIBHDHRDIR)/build
++@@ -75,6 +75,8 @@ $(LIBHDHRDIR)/$(LIBHDHR)/.tvh_download:
++ 	$(call DOWNLOAD,$(LIBHDHR_URL),$(LIBHDHRDIR)/$(LIBHDHR_TB),$(LIBHDHR_SHA1))
++ 	$(call UNTAR,$(LIBHDHR_TB),z)
++ 	ln -sf libhdhomerun $(LIBHDHRDIR)/$(LIBHDHR)
+++	@sed -i -e "s/CC.*:=/CC ?=/" $(LIBHDHRDIR)/$(LIBHDHR)/Makefile
+++	@sed -i -e "s/STRIP.*:=/STRIP ?=/" $(LIBHDHRDIR)/$(LIBHDHR)/Makefile
++ 	@touch $@
++ 
++ $(LIBHDHRDIR)/$(LIBHDHR)/.tvh_build: \
++-- 
++1.9.1
++
+diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0002-fix-issues-with-gcc6.patch b/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0002-fix-issues-with-gcc6.patch
+deleted file mode 100644
+index 55b9249..0000000
+--- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend/0002-fix-issues-with-gcc6.patch
++++ /dev/null
+@@ -1,46 +0,0 @@
+---- git/src/htsmsg.c.orig	2016-06-17 11:47:53.026921237 -0400
+-+++ git/src/htsmsg.c	2016-06-17 11:49:03.086922457 -0400
+-@@ -574,13 +574,13 @@
+-     case HMF_MAP:
+-       printf("MAP) = {\n");
+-       htsmsg_print0(&f->hmf_msg, indent + 1);
+--      for(i = 0; i < indent; i++) printf("\t"); printf("}\n");
+-+      for(i = 0; i < indent; i++) {printf("\t");} printf("}\n");
+-       break;
+- 
+-     case HMF_LIST:
+-       printf("LIST) = {\n");
+-       htsmsg_print0(&f->hmf_msg, indent + 1);
+--      for(i = 0; i < indent; i++) printf("\t"); printf("}\n");
+-+      for(i = 0; i < indent; i++) {printf("\t");} printf("}\n");
+-       break;
+-       
+-     case HMF_STR:
+---- git/src/dvb/dvb_tables.c.orig	2016-06-17 11:51:09.142924652 -0400
+-+++ git/src/dvb/dvb_tables.c	2016-06-17 11:54:33.962928219 -0400
+-@@ -935,10 +935,10 @@
+-     onid = (ptr[24] << 8) | ptr[25];
+-     
+-     /* Search all muxes on adapter */
+--    LIST_FOREACH(tdmi, &tda->tda_muxes, tdmi_adapter_link)
+--      if(tdmi->tdmi_transport_stream_id == tsid && tdmi->tdmi_network_id == onid);
+--	break;
+--    
+-+    LIST_FOREACH(tdmi, &tda->tda_muxes, tdmi_adapter_link) {
+-+      if(tdmi->tdmi_transport_stream_id == tsid && tdmi->tdmi_network_id == onid)
+-+    	break;
+-+    }
+-     if(tdmi == NULL)
+-       continue;
+- 
+---- git/src/epggrab/module/eit.c.orig	2016-06-17 11:49:57.726923409 -0400
+-+++ git/src/epggrab/module/eit.c	2016-06-17 11:50:14.526923701 -0400
+-@@ -214,7 +214,7 @@
+-   if (m && m->enabled) cptr = _eit_freesat_conv;
+-   else
+-     m = epggrab_module_find_by_id("uk_freeview");
+--    if (m && m->enabled) cptr = _eit_freesat_conv;
+-+  if (m && m->enabled) cptr = _eit_freesat_conv;
+- 
+-   /* Convert */
+-   return dvb_get_string_with_len(dst, dstlen, src, srclen, charset, cptr);
+diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+index bd5062c..170536a 100644
+--- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
++++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+@@ -4,14 +4,17 @@ HOMEPAGE = "https://www.lonelycoder.com/redmine/projects/tvheadend"
+ DEPENDS = "avahi zlib openssl python-native"
  
- PV = "16.0.0"
+ LICENSE = "GPLv3+"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=9eef91148a9b14ec7f9df333daebc746"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=9cae5acac2e9ee2fc3aec01ac88ce5db"
  
--SRCREV = "15edaf78d6307eaa5e1d17028122d8bce9d55aa2"
-+SRCREV = "c8188d82678fec6b784597db69a68e74ff4986b5"
- SRC_URI = "git://github.com/xbmc/kodi-platform.git \
--           file://0001-Fix-build-after-platform-rename.patch \
-            file://0001-fix-cross-compile-badness.patch \
-            file://kodi-platform-02_no-multi-lib.patch \
-           "
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
-index 13be123..ee8c743 100644
---- a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
-@@ -63,20 +63,22 @@ DEPENDS = " \
- 
- PROVIDES = "xbmc"
- 
--SRCREV = "7f6abd1dd6d1aefcb4303083f34aaa90a8df9fce"
-+SRCREV = "59579457e5fa56baae3b3fb2521518ad6fadd14e"
- PV = "17.0+gitr${SRCPV}"
- SRC_URI = "git://github.com/xbmc/xbmc.git;branch=master \
--           file://0001-configure-don-t-try-to-run-stuff-to-find-tinyxml.patch \
--           file://0002-handle-SIGTERM.patch \
--           file://0003-add-support-to-read-frequency-output-if-using-intel-.patch \
--           file://0004-Disable-DVD-support.patch \
--           file://0005-Always-compile-libcpluff-as-PIC.patch \
--           file://0006-build-Add-support-for-musl-triplets.patch \
-+           file://0003-configure-don-t-try-to-run-stuff-to-find-tinyxml.patch \
-+           file://0004-handle-SIGTERM.patch \
-+           file://0005-add-support-to-read-frequency-output-if-using-intel-.patch \
-+           file://0006-Disable-DVD-support.patch \
-+           file://0007-Always-compile-libcpluff-as-PIC.patch \
-+           file://0008-kodi-config.cmake-use-CMAKE_FIND_ROOT_PATH-to-fix-cr.patch \
-+           file://0009-build-Add-support-for-musl-triplets.patch \
-+           file://0010-RssReader-Fix-compiler-warning-comparing-pointer-to-.patch \
+-SRC_URI = "git://github.com/tvheadend/tvheadend.git \
+-           file://0001-Move-tvheadend-specific-LD-CFLAGS-into-a-helper-vari.patch \
+-           file://0002-fix-issues-with-gcc6.patch \
++SRC_URI = "git://github.com/tvheadend/tvheadend.git;branch=release/4.0 \
++           file://0001-Fix-checks-for-sse2-mmx.patch \
++           file://0001-disable-varargs-warning-on-clang.patch \
++           file://0001-hdhomerun-Override-forced-overrdiing-og-CC-STRIP-and.patch \
++           file://0001-dvr-Use-labs-instead-of-abs.patch \
++           file://0001-Makefile-Ignore-warning-about-wrong-includes.patch \
  "
+-SRCREV = "a420c83a0e0d2c31c2c15d0fec6fedc3f5a36dfe"
+-PV = "3.3"
++SRCREV = "64fec8120158de585e18be705055259484518d94"
++PV = "4.0.9+git${SRCREV}"
  
- SRC_URI_append_libc-musl = " \
--           file://0007-Remove-FILEWRAP.patch \
--           file://0008-Fix-file_Emu-on-musl.patch \
-+           file://0001-Fix-file_Emu-on-musl.patch \
-+           file://0002-Remove-FILEWRAP.patch \
- "
+ S = "${WORKDIR}/git"
  
- inherit autotools-brokensep gettext pythonnative
-@@ -103,7 +105,9 @@ PACKAGECONFIG[x11] = "--enable-x11,--disable-x11,libxinerama libxmu libxrandr li
- PACKAGECONFIG[pulseaudio] = "--enable-pulse,--disable-pulse,pulseaudio"
- PACKAGECONFIG[lcms] = "--enable-lcms2,--disable-lcms2,lcms"
- 
-+
- EXTRA_OECONF_append_rpi = " --disable-openmax --enable-player=omxplayer --with-platform=raspberry-pi2"
-+EXTRA_OECONF_remove_aarch64 = "--with-platform=raspberry-pi2"
- LDFLAGS_append_rpi = " -lvchostif "
- EXTRA_OECONF = " \
-     --disable-debug \
-@@ -118,10 +122,12 @@ EXTRA_OECONF = " \
-     --enable-texturepacker=no \
- "
- 
--FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O4 -ffast-math"
--FULL_OPTIMIZATION_armv7ve = "-fexpensive-optimizations -fomit-frame-pointer -O4 -ffast-math"
-+FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O3 -ffast-math"
-+FULL_OPTIMIZATION_armv7ve = "-fexpensive-optimizations -fomit-frame-pointer -O3 -ffast-math"
- BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
- 
-+EXTRA_OECONF_append = " LIBTOOL=${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool"
-+
- # for python modules
- export HOST_SYS
- export BUILD_SYS
-@@ -187,3 +193,5 @@ RRECOMMENDS_${PN}_append_libc-glibc = " glibc-charmap-ibm850 \
- 
- RPROVIDES_${PN} += "xbmc"
- 
-+TOOLCHAIN = "gcc"
-+
 -- 
 2.10.2
 
