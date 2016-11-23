@@ -1,47 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A0B160767
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id F0E4071AAB
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 23 Nov 2016 09:22:22 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id x23so663603pgx.3
+Received: by mail-pg0-f65.google.com with SMTP id x23so663628pgx.3
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 23 Nov 2016 01:22:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=gHdXaNpQ0EfbOD6MJtCeYozT4MmGKnL1Rm6TAyPS1XU=;
-	b=lefnDCzYvk3/kZCKhQadOpUJXCXy1UTsRe76bDG8E7uuxWoa9Es4TTqtGKn2a3VTKo
-	rcSgz1nGHKW4GFs+DzQ5novvjyPt7T6veG9F+EMFZJx8CbbMitHARSvj/qnuO4/1yMAZ
-	jktLEB5AqKeTzWiwarTcJYc7IHM71UWHvPuMkD5yHUwA/wctLlIXFAGV1KriGGVhjKOv
-	EfoiRiVKpEo3N18IM0QN6hNrkXhxthG61yJaagUxWh063vpIXeEjfHjYqYMd2snWW1m1
-	9O3xws+fD2pEqORRqjiiFgup862XKPsYc3k/e/0cdjjUAOsW97cHlUwiV3x2i8u5uf4N
-	4mlQ==
+	bh=OsVpkBsRSAOcZ5Td2ses+iweiY8V7s0nlBi1tY47wg8=;
+	b=kZc0+M/9eAouU9vk3CBBXiRBSVlWtWVGQ4F4WQFNWSo6YIDfOant65aIdL0QyvrTqa
+	XSPtJxpWiGnOKxnUGpIXPUggCR1XIG+nCrWS53OPsn5Kv+0BFBVqsT0xpfkHvaUY+vyn
+	QiJW8F8KOOoBRigJAMtB988uTriel8epeo5xgOhxgxovt9pcdrSR56cyO6g8Z7BmanuC
+	EWNERKVg/flvum4paBOfOFkn6mUAAUGNYuHyJGcTjaWKfxMblDM8/PW4Yvr1MlmpQTop
+	c2EzZ2rPtAD68uNuPHmxLucytICwei9GSBX8XlOS/ww/UAioPoSO9OV+F3slgKwRD95R
+	lO5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=gHdXaNpQ0EfbOD6MJtCeYozT4MmGKnL1Rm6TAyPS1XU=;
-	b=gQ7ts90rCRuEFvDEYJrVA8/RlZtD7+eDw18XlGIzD5xOpxSREO0BuOGFIssGfYyDks
-	ztUUiZrfzRsNbXYVwm6YK/DtiJAtCM09+Xxq9EUFgIdwSe7YRPYYyHUzrwm0B/Ffkw/2
-	mxOzEjFWsH5WQa8LUOCbZloNQkTPa+t4XUnbagRPquoNx/XOxwg0k5pgNLtDw7OtkfQ6
-	zIytW7aF7VcCQcsjb7QV/WrYikWPxpWvdtKFclZyLupClXLw7JINpYkxHYvv8QThXPD7
-	kjDWRbUfeULj3a+rUEFnnweai7NxM6qyVphkx1DaTLcAlSWZ4xl1brU6nmKdyuqt+CdK
-	bGaw==
-X-Gm-Message-State: AKaTC03smg6ZqT86YvilvXwLg0Hhquj2LGztEN68I6vUhlt9b/eQtLYCtDJUIheWWf2vUQ==
-X-Received: by 10.84.173.4 with SMTP id o4mr4635297plb.123.1479892944028;
+	bh=OsVpkBsRSAOcZ5Td2ses+iweiY8V7s0nlBi1tY47wg8=;
+	b=govknsQOJ+B0HfuTmhZG3+xW3it80PC2PJv9vVypCCKIGrqWz/akM6ZxIMN9Pd4OeC
+	5hjqV+Kj0n7o04al/s+lMLsTN1sCpZB5YSGgbkTAfsPVAbsxKGGE112S7gNYgFzY4eDZ
+	58eW4MQxIZeDz6LvomuEQsL3YY0I10GME26hOB0Ejupw3gSqhAQGS4aiUtllyzA5sl5t
+	2Y93PjYgQcsmCj/VWUU917kUNWbcQENleVWo3LU72wNChLVYZS3KE3TXZQBSDKqM68aK
+	G9IORA7X2a+EW460GYQNV04T9M+xsPkV2/fNxUarjfScZ0OV7RxH2BoI+RVCPqp14WUN
+	z7Qg==
+X-Gm-Message-State: AKaTC02eS/SozhOMs5XtVokIlJeoLz6w18enVYBEoJpQ4lYPGAEo2p68L04Q07DO2ykjeQ==
+X-Received: by 10.99.1.132 with SMTP id 126mr3513521pgb.129.1479892944745;
 	Wed, 23 Nov 2016 01:22:24 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u23sm51056087pfg.86.2016.11.23.01.22.23
+	u23sm51056087pfg.86.2016.11.23.01.22.24
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Nov 2016 01:22:23 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:24 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Nov 2016 01:21:29 -0800
-Message-Id: <20161123092209.23699-9-raj.khem@gmail.com>
+Date: Wed, 23 Nov 2016 01:21:30 -0800
+Message-Id: <20161123092209.23699-10-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.2
 In-Reply-To: <20161123092209.23699-1-raj.khem@gmail.com>
 References: <20161123092209.23699-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 09/49] fwts: Update to 16.09 release
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][PATCH 10/49] libvdpau: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,146 +55,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Nov 2016 09:22:22 -0000
+X-List-Received-Date: Wed, 23 Nov 2016 09:22:23 -0000
 
-license change is just year change from 2014 to 2016
-Fix build with clang while here
+From: Koen Kooi <koen@dominion.thruhere.net>
 
+Needed for x86 machines
+
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...nstant-logical-operand-warning-with-clang.patch | 81 ++++++++++++++++++++++
- meta-oe/recipes-test/fwts/fwts_git.bb              | 21 ++++--
- 2 files changed, 95 insertions(+), 7 deletions(-)
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0001-ignore-constant-logical-operand-warning-with-clang.patch
+ meta-oe/recipes-graphics/vdpau/libvdpau_git.bb | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
 
-diff --git a/meta-oe/recipes-test/fwts/fwts/0001-ignore-constant-logical-operand-warning-with-clang.patch b/meta-oe/recipes-test/fwts/fwts/0001-ignore-constant-logical-operand-warning-with-clang.patch
+diff --git a/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb b/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
 new file mode 100644
-index 0000000..ccfe580
+index 0000000..31f4df4
 --- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0001-ignore-constant-logical-operand-warning-with-clang.patch
-@@ -0,0 +1,81 @@
-+From 953cff93c85d3cfd5cbcac56e14443dc5f6e5fbd Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 19 Oct 2016 01:57:16 +0000
-+Subject: [PATCH] ignore constant-logical-operand warning with clang
++++ b/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "Video Decode and Presentation API for UNIX"
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/uefi/uefirtauthvar/uefirtauthvar.c | 5 +++++
-+ 1 file changed, 5 insertions(+)
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=83af8811a28727a13f04132cc33b7f58"
 +
-+Index: git/src/uefi/uefirtauthvar/uefirtauthvar.c
-+===================================================================
-+--- git.orig/src/uefi/uefirtauthvar/uefirtauthvar.c
-++++ git/src/uefi/uefirtauthvar/uefirtauthvar.c
-+@@ -142,6 +142,9 @@ static int uefirtauthvar_deinit(fwts_fra
-+ 	return FWTS_OK;
-+ }
-+ 
-++#pragma clang diagnostic push
-++#pragma clang diagnostic ignored "-Wconstant-logical-operand"
-++
-+ static int check_fw_support(fwts_framework *fw, uint64_t status)
-+ {
-+ 	if ((status == EFI_INVALID_PARAMETER) &&
-+@@ -172,6 +175,8 @@ static int check_fw_support(fwts_framewo
-+ 	return FWTS_OK;
-+ }
-+ 
-++#pragma clang diagnostic pop
-++
-+ /*
-+  * Set the created authenticated variable, AuthVarCreate,
-+  * and checking the data size and data.
-+Index: git/src/lib/src/fwts_acpi_tables.c
-+===================================================================
-+--- git.orig/src/lib/src/fwts_acpi_tables.c
-++++ git/src/lib/src/fwts_acpi_tables.c
-+@@ -392,10 +392,14 @@ static int fwts_acpi_handle_fadt(
-+ 	/* Determine FACS addr and load it.
-+ 	 * Will ignore the missing FACS in the hardware-reduced mode.
-+ 	 */
-++#pragma clang diagnostic push
-++#pragma clang diagnostic ignored "-Waddress-of-packed-member"
-++
-+ 	result = fwts_acpi_handle_fadt_tables(fw, fadt,
-+ 			"FACS", "FIRMWARE_CTRL", "X_FIRMWARE_CTRL",
-+ 			&fadt->firmware_control, &fadt->x_firmware_ctrl,
-+ 			provenance);
-++
-+ 	if (result != FWTS_OK) {
-+ 		if ((result == FWTS_NULL_POINTER) &&
-+ 				fwts_acpi_is_reduced_hardware(fadt)) {
-+@@ -414,6 +418,7 @@ static int fwts_acpi_handle_fadt(
-+ 		return FWTS_ERROR;
-+ 	}
-+ 	return FWTS_OK;
-++#pragma clang diagnostic pop
-+ }
-+ 
-+ /*
-+Index: git/src/dmi/dmicheck/dmicheck.c
-+===================================================================
-+--- git.orig/src/dmi/dmicheck/dmicheck.c
-++++ git/src/dmi/dmicheck/dmicheck.c
-+@@ -209,6 +209,8 @@ static const char *uuid_patterns[] = {
-+ 	"0A0A0A0A-0A0A-0A0A-0A0A-0A0A0A0A0A0A",
-+ 	NULL,
-+ };
-++#pragma clang diagnostic push
-++#pragma clang diagnostic ignored "-Wunneeded-internal-declaration"
-+ 
-+ static const fwts_chassis_type_map fwts_dmi_chassis_type[] = {
-+ 	{ "Invalid",		FWTS_SMBIOS_CHASSIS_INVALID },
-+@@ -245,6 +247,7 @@ static const fwts_chassis_type_map fwts_
-+ 	{ "Convertible",	FWTS_SMBIOS_CHASSIS_CONVERTIBLE },
-+ 	{ "Detachable",		FWTS_SMBIOS_CHASSIS_DETACHABLE },
-+ };
-++#pragma clang diagnostic pop
-+ 
-+ /* Remapping table from buggy version numbers to correct values */
-+ static const fwts_dmi_version dmi_versions[] = {
-diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb b/meta-oe/recipes-test/fwts/fwts_git.bb
-index 197fe20..b04be02 100644
---- a/meta-oe/recipes-test/fwts/fwts_git.bb
-+++ b/meta-oe/recipes-test/fwts/fwts_git.bb
-@@ -3,22 +3,29 @@ DESCRIPTION = "The tool fwts comprises of over fifty tests that are designed to
- HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
- 
- LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=deb8af5388e838d133eaa036f4d1496f"
-+LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd34dcdb9e4db568519"
- 
--PV = "14.12.00"
-+PV = "16.09.00"
- 
--SRCREV = "efc18d16294f492b7f72bba64344b2eed50e6a69"
--SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git"
-+SRCREV = "15386283ad55e2a5b9366c1f43f4531ef79b01cb"
-+SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git \
-+           file://0001-ignore-constant-logical-operand-warning-with-clang.patch \
-+           "
- 
- S = "${WORKDIR}/git"
- 
--DEPENDS = "libpcre json-c glib-2.0"
-+COMPATIBLE_HOST = "(i.86|x86_64|aarch64|powerpc64).*-linux"
- 
--inherit autotools-brokensep
-+DEPENDS = "libpcre json-c glib-2.0 dtc"
- 
--CFLAGS += "-I${STAGING_INCDIR}/json-c -Wno-error=misleading-indentation"
++DEPENDS = "virtual/libx11 libxext dri2proto"
++
++PV = "1.1.1+git${SRCPV}"
++
++SRCREV = "a21bf7aa438f5dd40d0a300a3167aa3d6f26dccc"
++SRC_URI = "git://anongit.freedesktop.org/vdpau/libvdpau"
++
++S = "${WORKDIR}/git"
++
 +inherit autotools pkgconfig
 +
-+CFLAGS += "-I${STAGING_INCDIR}/json-c -Wno-error=unknown-pragmas"
- 
- FILES_${PN} += "${libdir}/fwts/lib*${SOLIBS}"
- FILES_${PN}-dev += "${libdir}/fwts/lib*${SOLIBSDEV} ${libdir}/fwts/lib*.la"
- FILES_${PN}-staticdev += "${libdir}/fwts/lib*a"
- FILES_${PN}-dbg += "${libdir}/fwts/.debug"
++do_install_append() {
++    rm -f ${D}${libdir}/*/*.la
++}
 +
-+TOOLCHAIN = "gcc"
-+
++FILES_${PN}-dbg += "${libdir}/vdpau/.debug"
++FILES_${PN}-dev += "${libdir}/vdpau/lib*${SOLIBSDEV}"
++FILES_${PN} += "${libdir}/vdpau/lib*${SOLIBS}"
 -- 
 2.10.2
 
