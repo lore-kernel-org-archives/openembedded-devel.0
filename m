@@ -1,47 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id F2E49605B3
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id A944B71AA9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 09:22:44 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id x23so664258pgx.3
+	Wed, 23 Nov 2016 09:22:45 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id c4so445228pfb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 01:22:46 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=DdVt9wsPFBgaU4i0mEobteT/njuu/BWca1zvZ2gyqUQ=;
-	b=I8yEXTDseYlZxBm390xB+eP865JR8na3hfXHZ/3nv0/MCsYrc6fLMH/Jjgqs17bsXl
-	T3dJvlHCxqizNZ94IxkrhZawt/BOxdo30UhJs3BFj/c0JQ0h91dvzZAvMGZ3Jq1cJPf9
-	qlrOYprjlPzolm1F/YLWEGSWZ7cJkoGhGr92klEC3BoufBRc2JHl9E+vOOTsUsKUk8dd
-	wAMBhJS/JXBBQ6xGa/T6rROjGQqcUnyuFA+1132x4LoXmayoIlOs097SALINB4Cg74NU
-	wcclGcy0BK+MaNNa1XLqH+f9sxxBxSbFay7ui14r45EPmkASnCFuOs1fudZONwXXbNbJ
-	lS1A==
+	bh=TrUWAZgCT+Jqr3xW1CC/ihQ3uNDwDpNT0t6v8JYL74E=;
+	b=OwexzZ/IxU0BJ10K+vvY9ew2g24v1nFPbY4wPX4MGVmX6drafTpnjcV4VudySpy1Es
+	0E8a++craWTP3TBEtFAB+k240cBCzyqMYW46B6f5pJC3UUL0VqOtffmU+u/HHkEGTmkU
+	bizxTEidq9Ig2YYWiVLZRQCSRvDcP6w9wR+v32L3OCJMMwQZ39rUZbvxwnJioHC2g8fs
+	90PP+ilsB4yqeB4FNsf+3j8EZ2ap/xLceiJaXrogJRbw1E/1u+/8nXKhqzz/7b1k3xjO
+	Rpo9DtK65HNeMP2MUMNe2R5tu5fZC3VT+iEX7BgSLLB2fDZrRh+r+U5VPTlHDEuEcz6n
+	sQug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=DdVt9wsPFBgaU4i0mEobteT/njuu/BWca1zvZ2gyqUQ=;
-	b=Xxl6puK8E35AoYygyXCcbawMNAAIQdh4YT8S8yJ0luWQHDG1lh/5CLH7wq37cjMJ84
-	ihbRse3jqhDUw+Wm2JgJXAih63WVDzZmy2Rle9K0mJNIJneMAwwpmAML+iKkyyzMwrfx
-	0JlM0A5VW4HWJJnFL6/0GG5bi6ZOUrc+xjtpdMQJKc1bmk56xpbybVbyEhY9nbH4BwYd
-	du4v/fgbmWqmx4sXJ/B8/sSqWe+HzCF2prWls8v6e92dykKl0gVibl0WsNOy5QNG5yJm
-	IeDMLGJH+9AZzryTh//v1GEEx7tiH3IsK9afHXT/UebzWWxLH1dWPOKxrLrMCM9pykve
-	kmEw==
-X-Gm-Message-State: AKaTC01RNWNojWQwZzHBLmQuVMj2JPjwf12cpPWSIQifquW8XTkgLJGw7kdjlyuyTl7g6Q==
-X-Received: by 10.99.244.17 with SMTP id g17mr3582924pgi.80.1479892966745;
-	Wed, 23 Nov 2016 01:22:46 -0800 (PST)
+	bh=TrUWAZgCT+Jqr3xW1CC/ihQ3uNDwDpNT0t6v8JYL74E=;
+	b=XLgLyIrZHWLr86dbsahzPXlpw4qF8OFS9Hezpp06ibcVk6fmlLPWv5AzfWFWcP5kxG
+	RpmetNyvgloEBEv1lFPn2hIUB3TYMSol876Nk5HjAQqVFczDhCYVqeMnifjI9xd2JKkM
+	8hVSROa0dk3RZXImOfGAjeNCnULm6oHBjh34Ww/qG0j0QRjhfMu1kFMuSJ90ZH7x9wl7
+	Fpk5p0GyMX0LguXnTojJHUDRG34HHW4cbIwyekFLaQpQtoYvBWBFu3Uh2wxQmVfn/PRj
+	CVtMjEuzxmbqutzwX0MbIo0+ov5VdaeWRyg29JRRBNOynf3eJDC+6OqklgOAGnrjnF2A
+	dh/g==
+X-Gm-Message-State: AKaTC00Cn5X+Wlc4xHMspJm7qdD0hP6LwiPyg2eAbLjvp6xY8q3LyTSjQtFP0fEgpKuvyQ==
+X-Received: by 10.84.195.228 with SMTP id j91mr4569372pld.88.1479892967438;
+	Wed, 23 Nov 2016 01:22:47 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
 	u23sm51056087pfg.86.2016.11.23.01.22.46
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Nov 2016 01:22:46 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:47 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Nov 2016 01:21:58 -0800
-Message-Id: <20161123092209.23699-38-raj.khem@gmail.com>
+Date: Wed, 23 Nov 2016 01:21:59 -0800
+Message-Id: <20161123092209.23699-39-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.2
 In-Reply-To: <20161123092209.23699-1-raj.khem@gmail.com>
 References: <20161123092209.23699-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 38/49] fribidi: Fix build with security flags turned on
+Subject: [meta-oe][PATCH 39/49] libmicrohttpd: Upgrade to 0.9.52
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,28 +57,34 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 23 Nov 2016 09:22:45 -0000
 
-Clang complains like below
-| ../../fribidi-0.19.7/charset/fribidi-char-sets-cap-rtl.c:148:7: error: expected expression
-|       DBG ("warning: could not find a mapping for CapRTL to Unicode:");
-
-Therefore quick fix is to remove FORTIFY_SOURCE from cmdline
+Inherit gettext is needed
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../{libmicrohttpd_0.9.50.bb => libmicrohttpd_0.9.52.bb}            | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/libmicrohttpd/{libmicrohttpd_0.9.50.bb => libmicrohttpd_0.9.52.bb} (81%)
 
-diff --git a/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb b/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb
-index f8e7aa0..e79de66 100644
---- a/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb
-+++ b/meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb
-@@ -10,6 +10,7 @@ DEPENDS = "glib-2.0 libpcre"
- inherit autotools lib_package pkgconfig
+diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.50.bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.52.bb
+similarity index 81%
+rename from meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.50.bb
+rename to meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.52.bb
+index 421b78e..2a006b5 100644
+--- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.50.bb
++++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.52.bb
+@@ -6,10 +6,10 @@ SECTION = "net"
+ DEPENDS = "libgcrypt gnutls file"
  
- CFLAGS_append = "  -DPAGE_SIZE=4096 "
-+SECURITY_CFLAGS_remove_toolchain-clang = "-D_FORTIFY_SOURCE=2"
+ SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
+-SRC_URI[md5sum] = "4a3f793d59f663a2b0fc62d44668fb66"
+-SRC_URI[sha256sum] = "d1b6385068abded29b6470e383287aa7705de05ae3c08ad0bf5747ac4dc6ebd7"
++SRC_URI[md5sum] = "767111e817e2497ff92f943c5653497a"
++SRC_URI[sha256sum] = "54797f6e763d417627f89f60e4ae0a431dab0523f92f83def23ea02d0defafea"
  
- SRC_URI = "http://fribidi.org/download/fribidi-${PV}.tar.bz2"
+-inherit autotools lib_package pkgconfig
++inherit autotools lib_package pkgconfig gettext
+ 
+ EXTRA_OECONF += "--disable-static --with-gnutls=${STAGING_LIBDIR}/../"
  
 -- 
 2.10.2
