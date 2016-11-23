@@ -1,47 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 1419071A8B
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 558CA71A8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 09:22:26 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id x23so663747pgx.3
+	Wed, 23 Nov 2016 09:22:29 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id p66so668093pga.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 01:22:28 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=w/cZegccxTGeHLOFIucRUT54CDoFZUP7h6HMCZI/wPA=;
-	b=E2+N6PFFUiI4i4aA09Pbl7wq8PcDESOFKYUZVq0hasz0YgUrUJPVVt6uhC8izOVyCl
-	rE9FX4aMuHug2zP/VdGpV3xBtC7l+6GguYOb9cVkxsdmMf/8HYo/N/ceMPN0bDYUFfR+
-	2BQL34A1uQAhh+Y8OjdMlQ4Lm+i92qRv3eomAiMFBt9oS9nPd7N4gKKgadOPHhjdjTaC
-	/AC/GogL/UMPuxfrBoHLZBhOKI5Cw6S/0RBpoC8Cf4bYXzQtunGpIDcalyqWh7eleXIe
-	9S0PmQK/BCHPd2dgPzHRikzk/mH7iqWagyi5Nr7eFErnQ8GptV+lvJYZQ70KepTZRZ9j
-	mTEA==
+	bh=2SwM+fWjGHaOefrz4ycMEntEl303zDp4t/FD/dtqqxg=;
+	b=BYjiSsStyVBdhFqEJ24kFCddaExAHs+Fbfume1FH4FY04VA4cmdH3gqAnyNH4JKVy3
+	Zrk9YoNao4bhMxm4Ztyr95IBmCybbeJB8jlhuSwCrE2hLo7mPaNej4Vi4O2v/5D9U0Kd
+	JXhx/migLDHlAlZQQNU5PCPK/2iILIUGrsLjsUTaiA4vboTEl0wfJ2JrIeG119/Y7u42
+	89IQ48DBJ0HU53ZC1E0xGA44+AdxPUhmVXP9hNaHzRHSvbhjNhTZIbNT0yxxl3/L5c1C
+	4Q1E4WkMxJGXsack+W2KJcEVncTW+UHGu61svZCO9vi1MUisND6wqMVSdP2XQ7lAawEN
+	bXCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=w/cZegccxTGeHLOFIucRUT54CDoFZUP7h6HMCZI/wPA=;
-	b=Hq20ZfvW7qOW0xIouya56IfmuhUaAes9rkJurmJH79C8IMShdg3uXATldp5u7WUu1p
-	1Gjo0jh8iDXZ3MCAVnI3x9hW8jcr6HjdAdztSQ8bUOuMnLiqslHeBrlmFgCsK8qsvvRl
-	v30hOUWT4Sov66F9Q0gYson96z1KpdSLQKGjUEtpPPwHv3NZaGN55GVRiVTNAYvfgXyn
-	Fg/CKU6lNYCfQb+YqCv5CBnlhKe57KH1lmoF2acrr5FTJdly+QoruDj0R2XZ4VnreyYb
-	npWgLcjf9IMS0Ia8fD+79U3WVW1w0KL7FuQVZvG8vuHucEunOSCCFwtc1Yn2yTk4nCB0
-	C+ig==
-X-Gm-Message-State: AKaTC03F4rk+2vD3Jdu0fYvoLV423YGdQfL8EmJuYTfrN1OHL+LwX1plTI5dJF2cCiM9Bg==
-X-Received: by 10.84.197.1 with SMTP id m1mr4521102pld.75.1479892948485;
-	Wed, 23 Nov 2016 01:22:28 -0800 (PST)
+	bh=2SwM+fWjGHaOefrz4ycMEntEl303zDp4t/FD/dtqqxg=;
+	b=QAWPuY7K+G1nmoy5LnN49lMSPu2nIx1ReH2NYPI3Fc8Wv9lZe7j004HqnYviJOyXyu
+	PNIpbgPSbF1k3IPozKGyX9nCdhZ5laqOfL+/XDsFaJLtwjVkEjShhtVucZpHrk2zc/XG
+	KM4lZv5SlHcLotWAkWu7ng4AICDkPNJ/zmLoi0CE6Y9bWW/8vItmZ4TwPW3NmiWuyS0C
+	UFAbMfTT+ufXjmoI0QRuB95Ay+ttR+mVBENvi9EJjpmbxBYpOn2tvfMeY1NW/mgWnhk7
+	I7FU3R/zGjrs8B3u8OEbJH7HLGIhHZ3S15a9L0gIB5S9SC4IzKQTzoWu8bmwXVqOUk7n
+	ffZA==
+X-Gm-Message-State: AKaTC007k3BOlfNjdwK+9OHYmCMn350EJhmwVN7ZXp+RnyHHj7OGD5DAJL9I7nykr4d/KA==
+X-Received: by 10.84.199.194 with SMTP id d2mr4581453plh.151.1479892950623;
+	Wed, 23 Nov 2016 01:22:30 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u23sm51056087pfg.86.2016.11.23.01.22.27
+	u23sm51056087pfg.86.2016.11.23.01.22.29
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Nov 2016 01:22:28 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:30 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Nov 2016 01:21:35 -0800
-Message-Id: <20161123092209.23699-15-raj.khem@gmail.com>
+Date: Wed, 23 Nov 2016 01:21:38 -0800
+Message-Id: <20161123092209.23699-18-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.2
 In-Reply-To: <20161123092209.23699-1-raj.khem@gmail.com>
 References: <20161123092209.23699-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 15/49] samba: Fix build with musl
+Subject: [meta-oe][PATCH V2 18/49] breakpad: Upgrade to latest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,175 +56,53 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 23 Nov 2016 09:22:29 -0000
 
+Switch to using git
+Gets aarch64 support
+
+Define PV and use SRCPV
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../samba/samba-4.4.5/samba-4.2.7-pam.patch        | 36 +++++++++
- .../samba-4.3.9-remove-getpwent_r.patch            | 87 ++++++++++++++++++++++
- .../recipes-connectivity/samba/samba_4.4.5.bb      |  7 ++
- 3 files changed, 130 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/samba/samba-4.4.5/samba-4.2.7-pam.patch
- create mode 100644 meta-networking/recipes-connectivity/samba/samba-4.4.5/samba-4.3.9-remove-getpwent_r.patch
+ .../breakpad/{breakpad_svn.bb => breakpad_git.bb}  | 22 +++++++++++++++++++---
+ 1 file changed, 19 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/breakpad/{breakpad_svn.bb => breakpad_git.bb} (86%)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba-4.4.5/samba-4.2.7-pam.patch b/meta-networking/recipes-connectivity/samba/samba-4.4.5/samba-4.2.7-pam.patch
-new file mode 100644
-index 0000000..6b9ade9
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/samba/samba-4.4.5/samba-4.2.7-pam.patch
-@@ -0,0 +1,36 @@
-+Lifted from gentoo and ported to 4.4.5
-+
-+http://data.gpo.zugaina.org/musl/net-fs/samba/files/samba-4.2.7-pam.patch
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+
-+Index: samba-4.4.5/source3/wscript
-+===================================================================
-+--- samba-4.4.5.orig/source3/wscript
-++++ samba-4.4.5/source3/wscript
-+@@ -873,7 +873,7 @@ msg.msg_accrightslen = sizeof(fd);
-+         if conf.env.with_iconv:
-+             conf.DEFINE('HAVE_ICONV', 1)
-+ 
-+-    if Options.options.with_pam:
-++    if Options.options.with_pam != False:
-+         use_pam=True
-+         conf.CHECK_HEADERS('security/pam_appl.h pam/pam_appl.h')
-+         if not conf.CONFIG_SET('HAVE_SECURITY_PAM_APPL_H') and not conf.CONFIG_SET('HAVE_PAM_PAM_APPL_H'):
-+@@ -945,6 +945,15 @@ int i; i = PAM_RADIO_TYPE;
-+         if use_pam:
-+             conf.DEFINE('WITH_PAM', 1)
-+             conf.DEFINE('WITH_PAM_MODULES', 1)
-++    else:
-++        Logs.warn("PAM disabled")
-++        use_pam=False
-++        conf.undefine('WITH_PAM')
-++        conf.undefine('WITH_PAM_MODULES')
-++        conf.undefine('HAVE_SECURITY_PAM_APPL_H')
-++        conf.undefine('PAM_RHOST')
-++        conf.undefine('PAM_TTY')
-++        conf.undefine('HAVE_PAM_PAM_APPL_H')
-+ 
-+     seteuid = False
-+ 
-diff --git a/meta-networking/recipes-connectivity/samba/samba-4.4.5/samba-4.3.9-remove-getpwent_r.patch b/meta-networking/recipes-connectivity/samba/samba-4.4.5/samba-4.3.9-remove-getpwent_r.patch
-new file mode 100644
-index 0000000..71db99c
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/samba/samba-4.4.5/samba-4.3.9-remove-getpwent_r.patch
-@@ -0,0 +1,87 @@
-+Musl does not have _r versions of getent() and getpwent() APIs
-+
-+Taken from gentoo
-+http://data.gpo.zugaina.org/musl/net-fs/samba/files/samba-4.3.9-remove-getpwent_r.patch
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Index: samba-4.4.5/source4/torture/local/nss_tests.c
-+===================================================================
-+--- samba-4.4.5.orig/source4/torture/local/nss_tests.c
-++++ samba-4.4.5/source4/torture/local/nss_tests.c
-+@@ -247,7 +247,6 @@ static bool test_getgrnam_r(struct tortu
-+ 	return true;
-+ }
-+ 
-+-
-+ static bool test_getgrgid(struct torture_context *tctx,
-+ 			  gid_t gid,
-+ 			  struct group *grp_p)
-+@@ -333,6 +332,7 @@ static bool test_enum_passwd(struct tort
-+ 	return true;
-+ }
-+ 
-++#if HAVE_GETPWENT_R
-+ static bool test_enum_r_passwd(struct torture_context *tctx,
-+ 			       struct passwd **pwd_array_p,
-+ 			       size_t *num_pwd_p)
-+@@ -381,6 +381,7 @@ static bool test_enum_r_passwd(struct to
-+ 
-+ 	return true;
-+ }
-++#endif
-+ 
-+ static bool torture_assert_passwd_equal(struct torture_context *tctx,
-+ 					const struct passwd *p1,
-+@@ -432,7 +433,7 @@ static bool test_passwd_r(struct torture
-+ 	struct passwd *pwd, pwd1, pwd2;
-+ 	size_t num_pwd;
-+ 
-+-	torture_assert(tctx, test_enum_r_passwd(tctx, &pwd, &num_pwd),
-++	torture_assert(tctx, test_enum_passwd(tctx, &pwd, &num_pwd),
-+ 						"failed to enumerate passwd");
-+ 
-+ 	for (i=0; i < num_pwd; i++) {
-+@@ -460,7 +461,7 @@ static bool test_passwd_r_cross(struct t
-+ 	struct passwd *pwd, pwd1, pwd2, pwd3, pwd4;
-+ 	size_t num_pwd;
-+ 
-+-	torture_assert(tctx, test_enum_r_passwd(tctx, &pwd, &num_pwd),
-++	torture_assert(tctx, test_enum_passwd(tctx, &pwd, &num_pwd),
-+ 						"failed to enumerate passwd");
-+ 
-+ 	for (i=0; i < num_pwd; i++) {
-+@@ -531,6 +532,7 @@ static bool test_enum_group(struct tortu
-+ 	return true;
-+ }
-+ 
-++#if HAVE_GETGRENT_R
-+ static bool test_enum_r_group(struct torture_context *tctx,
-+ 			      struct group **grp_array_p,
-+ 			      size_t *num_grp_p)
-+@@ -579,6 +581,7 @@ static bool test_enum_r_group(struct tor
-+ 
-+ 	return true;
-+ }
-++#endif
-+ 
-+ static bool torture_assert_group_equal(struct torture_context *tctx,
-+ 				       const struct group *g1,
-+@@ -635,7 +638,7 @@ static bool test_group_r(struct torture_
-+ 	struct group *grp, grp1, grp2;
-+ 	size_t num_grp;
-+ 
-+-	torture_assert(tctx, test_enum_r_group(tctx, &grp, &num_grp),
-++	torture_assert(tctx, test_enum_group(tctx, &grp, &num_grp),
-+ 					       "failed to enumerate group");
-+ 
-+ 	for (i=0; i < num_grp; i++) {
-+@@ -663,7 +666,7 @@ static bool test_group_r_cross(struct to
-+ 	struct group *grp, grp1, grp2, grp3, grp4;
-+ 	size_t num_grp;
-+ 
-+-	torture_assert(tctx, test_enum_r_group(tctx, &grp, &num_grp),
-++	torture_assert(tctx, test_enum_group(tctx, &grp, &num_grp),
-+ 					       "failed to enumerate group");
-+ 
-+ 	for (i=0; i < num_grp; i++) {
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-index e9694d4..a27bcd1 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-@@ -20,6 +20,10 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
-            file://0006-avoid-using-colon-in-the-checking-msg.patch \
-            file://volatiles.03_samba \
-           "
-+SRC_URI_append_libc-musl = " \
-+           file://samba-4.2.7-pam.patch \
-+           file://samba-4.3.9-remove-getpwent_r.patch \
-+          "
+diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
+similarity index 86%
+rename from meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
+rename to meta-oe/recipes-devtools/breakpad/breakpad_git.bb
+index b573ea5..c0e306c 100644
+--- a/meta-oe/recipes-devtools/breakpad/breakpad_svn.bb
++++ b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
+@@ -13,9 +13,25 @@ inherit autotools
  
- SRC_URI[md5sum] = "6950c5e9f7bdeb8a610c2ca957a15be4"
- SRC_URI[sha256sum] = "b876ef2e63f66265490e80a122e66ef2d7616112b839df68f56ac2e1ce17a7bd"
-@@ -29,6 +33,9 @@ inherit systemd waf-samba cpan-base perlnative update-rc.d
- RDEPENDS_${PN}_remove = "perl"
+ BBCLASSEXTEND = "native"
  
- DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb krb5 libbsd libaio libpam"
-+DEPENDS_append_libc-musl = " libtirpc"
-+CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
-+LDFLAGS_append_libc-musl = " -ltirpc"
+-SRCREV = "r1435"
+-SRC_URI = "svn://google-breakpad.googlecode.com/svn;module=trunk;protocol=http"
+-S = "${WORKDIR}/trunk"
++PV = "1.0+git${SRCPV}"
++
++SRCREV_FORMAT = "breakpad_glog_gmock_gtest_protobuf_lss"
++
++SRCREV_breakpad = "2f6cb866d615d6240a18c7535c994c6bb93b1ba5"
++SRCREV_glog = "d8cb47f77d1c31779f3ff890e1a5748483778d6a"
++SRCREV_gmock = "f7d03d2734759ee12b57d2dbcb695607d89e8e05"
++SRCREV_gtest = "ec44c6c1675c25b9827aacd08c02433cccde7780"
++SRCREV_protobuf = "cb6dd4ef5f82e41e06179dcd57d3b1d9246ad6ac"
++SRCREV_lss = "1549d20f6d3e7d66bb4e687c0ab9da42c2bff2ac"
++
++SRC_URI = "git://github.com/google/breakpad;name=breakpad \
++           git://github.com/google/glog.git;destsuffix=git/src/third_party/glog;name=glog \
++           git://github.com/google/googlemock.git;destsuffix=git/src/testing;name=gmock \
++           git://github.com/google/googletest.git;destsuffix=git/src/testing/gtest;name=gtest \
++           git://github.com/google/protobuf.git;destsuffix=git/src/third_party/protobuf/protobuf;name=protobuf \
++           git://chromium.googlesource.com/linux-syscall-support;protocol=https;destsuffix=git/src/third_party/lss;name=lss \
++"
++S = "${WORKDIR}/git"
  
- SYSVINITTYPE_linuxstdbase = "lsb"
- SYSVINITTYPE = "sysv"
+ COMPATIBLE_MACHINE_powerpc = "(!.*ppc).*"
+ 
 -- 
 2.10.2
 
