@@ -1,47 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 341B471AB8
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A43471AB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 09:22:26 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id x23so663723pgx.3
+	Wed, 23 Nov 2016 09:22:27 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id 144so452012pfv.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 01:22:27 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=aGYn92IobpcaHdbiHMTA2GuZCb7f1/A2Bx5400RBGZQ=;
-	b=Z7Nw62MmfZNA+CSw2w9wGJe6wdKraggcFxWJC8kOaX7nRWN+blJeP+91uSmxD6ZOjD
-	kxt7Q6cp5DMh0zxRFo7apgaDgrHVXlWR2JiB89A0XrY4iHaoGMCmfYnqmqEez6qPBuAo
-	yuIL6xB/Eyah9jUFnLg+2P/8LoJmSEoMvkGXJf4Pt0fpRZlCMmNHJEbt5TxzxFN05SNb
-	kn7MptH663JX+z9qeXeths4qps3fgIEsaq5Z81dhXVAiVZUnJ2fWv6m4XKk7dpekA18a
-	DgheWrQvv/3bupgFgbpfB+Ep7UQHRImCST7ra8rfHPaDTyqFDNq1uPtx6c6KOTAuIYlm
-	kssA==
+	bh=2/vGuuB8xX0p+68S2XHr7Ar5S5/3c8rPtjd1T+TUGqU=;
+	b=BPKCw1ojenGZruyV0rqzFxqM0rnw8JBfcBlF83z8Jh4DazoKF8mbnpBj2g4JjfLJ6m
+	enixO7gOPRVfVMVNtJttEbTIVW4o4kbDbVQhJ2waerwxv3x4l48DjLtRq23W5PwzGj4Z
+	Fb3w0nF8rOeIV7RBvFlnTdvJpLGzlUQCOS+QA7yFkcNnbNqycaCB7bu9G6SkwqeMQlk5
+	HufJM70OM1JvOHG/BiobKFsJl6ndU8t9asu7+CCSEXfqNateJwH7PHjnukdWoHagReeu
+	uJ5CixGwxF/xOIZMQaXnEwzgjD6aFhPBW+MpNpmlar2jw0Owob3BFJ/azBTtZ7UBF3T0
+	ExIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=aGYn92IobpcaHdbiHMTA2GuZCb7f1/A2Bx5400RBGZQ=;
-	b=b1iW1r5j5Z6N7rsiz55ziJp6daFS/Chn++cCcnLcB+kL/V38d+fHdZCAV2o/3FBham
-	o8AS4igjMd3kstcH77Fm4ufopHkQfajThXArSUntYAwZhiFXEToHdFPBeJ2q2OObCz/J
-	RNznL+NUmXFxni13LKhfPD+wSjiQ782PDimvyRg3xVVkan1YbmHBol+Vj7jVKRv6+1kl
-	XbYVpJZfo7ybV5wWLH4H31GrGilziz1l1KaznhsW2D9CQ472G6upQro0kRhvWmMOBGlA
-	+wBfcUYOF1iMPwTAnhPGww9HmVT/tkP5wlvoguzsVznRLKIHTeP6xZY3RaHDrMkKsya8
-	mYcQ==
-X-Gm-Message-State: AKaTC00ZE0mZ7z6O+lKYAGmwNT16QnqDsrMP0ciyjfCItfyg5GyfuMvSjr8Yiz/TnyPyhA==
-X-Received: by 10.84.213.144 with SMTP id g16mr4642220pli.134.1479892947774;
-	Wed, 23 Nov 2016 01:22:27 -0800 (PST)
+	bh=2/vGuuB8xX0p+68S2XHr7Ar5S5/3c8rPtjd1T+TUGqU=;
+	b=Iyfh7rWj1YfoAK1c3ieSJYfTNHg4S/HW6GdSVeD569BBH/DAkK7T10MOqupNW5YBQ9
+	ijd/DD8XIicQVQsXVNsWGA9WRn2RHpXWeFXQDz7kRTjkdZBFKgKBDUCxUTqYkFsx/3D9
+	nwxknFWn9JDj+BF0BB/bMxLpj0S8TpxFxbWMsL06miB/2oaHDbhYtuB4HwI0ZZvzzUNh
+	2VwOYR+NOhjLB7ggMnTTpD9AL+jWsNZAgdD0FMxmZxF75JeDpLnOcofOaf9R9HxIRXVM
+	RmormcIWHpAhWDfSPEWBLqSgT3hf/YGEcPPPB8MM0fWSrl5qgt34Um14MbHqsWX2F3VD
+	Z0Zw==
+X-Gm-Message-State: AKaTC02N96nXd043o+T+MA5B0hFtsnlLcFQvb++sqovrCxZFt/39bAFuyexgLdOCiMfYTA==
+X-Received: by 10.84.218.6 with SMTP id q6mr4564167pli.139.1479892949168;
+	Wed, 23 Nov 2016 01:22:29 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u23sm51056087pfg.86.2016.11.23.01.22.27
+	u23sm51056087pfg.86.2016.11.23.01.22.28
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Nov 2016 01:22:27 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:28 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Nov 2016 01:21:34 -0800
-Message-Id: <20161123092209.23699-14-raj.khem@gmail.com>
+Date: Wed, 23 Nov 2016 01:21:36 -0800
+Message-Id: <20161123092209.23699-16-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.2
 In-Reply-To: <20161123092209.23699-1-raj.khem@gmail.com>
 References: <20161123092209.23699-1-raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 14/49] kodi-17: Add packageconfig for lcms support
+Subject: [meta-oe][PATCH 16/49] lockdev: Pretend GNU libc on musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,28 +55,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Nov 2016 09:22:26 -0000
+X-List-Received-Date: Wed, 23 Nov 2016 09:22:27 -0000
 
-Keep it disabled by default, makes builds more
-deterministic
+it has all needed features but expects " -D__GNU_LIBRARY__"
+so make it happy when using musl
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-support/lockdev/lockdev_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
-index 22b23c6..05d9975 100644
---- a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
-@@ -95,6 +95,7 @@ PACKAGECONFIG[vdpau] = "--enable-vdpau,--disable-vdpau,libvdpau"
- PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5"
- PACKAGECONFIG[x11] = "--enable-x11,--disable-x11,libxinerama libxmu libxrandr libxtst"
- PACKAGECONFIG[pulseaudio] = "--enable-pulse,--disable-pulse,pulseaudio"
-+PACKAGECONFIG[lcms] = "--enable-lcms2,--disable-lcms2,lcms"
- 
- EXTRA_OECONF_append_rpi = " --disable-openmax --enable-player=omxplayer --with-platform=raspberry-pi2"
- LDFLAGS_append_rpi = " -lvchostif "
+diff --git a/meta-oe/recipes-support/lockdev/lockdev_git.bb b/meta-oe/recipes-support/lockdev/lockdev_git.bb
+index 023b9a7..507ce3f 100644
+--- a/meta-oe/recipes-support/lockdev/lockdev_git.bb
++++ b/meta-oe/recipes-support/lockdev/lockdev_git.bb
+@@ -18,3 +18,5 @@ do_configure_prepend () {
+     # Make automake happy
+     touch ChangeLog
+ }
++
++CFLAGS_append_libc-musl = " -D__GNU_LIBRARY__"
 -- 
 2.10.2
 
