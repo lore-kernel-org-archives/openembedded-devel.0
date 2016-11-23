@@ -1,47 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id D9DCF71AFA
+	by mail.openembedded.org (Postfix) with ESMTP id 99D1D719E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 09:22:52 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id p66so668776pga.2
+	Wed, 23 Nov 2016 09:22:53 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id x23so664522pgx.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 01:22:54 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Zsd0eSG3LTnX7GJRKDdOmZhSDoqdgEiYgMXr/8J19+w=;
-	b=M0gZYIu+R5U2KU5jmRs3WycOPopP5CwcwBd0m1ISESrJn1i140VUFs2GAHAHh37WO2
-	1XtAnxk3PoSYhlfjA9UCC6ygQbdxrcPLIyA9mggEDfeEuao4+KXE6Zo0yuYz3KkFfzKl
-	3I3llvZz+br3/j0HmFwpa3zg8HegKYmvz9n5qP7K5vSiJkxpqLGcAh0gvNBc884ZFXlj
-	TP2was5K+pCzYWGyhQa9Se91CuQWnfsdiS8PxxbikjnqdbO4vyWcpFQindNyr+c/Vdum
-	mJIDJZ8LANjP8WEzqpxZdGDBNcwLaRR3xYtoKHMVpepcY+amSRYvPlss9pqIBlIrydsV
-	iecQ==
+	bh=X64OmgB1K8E0QoV0lf3QC4n5C8Pg3pfs3eRHeFuY6ek=;
+	b=qU804ntYNJsFtS4UXYUuFMuyxqChfE2HkrUkCiIHe0dCaK0xgDJt2rC3hQdXUBZiFP
+	G6mBxCaTkC61n2B006ukdvSCKnNxfR/IHl3foyjAFGDxuw9cDtoqlNNFLr2+GZMD0wx4
+	zIK2aNFTQWbDnnyfzSaj//P7lvo5ARxKxDYXTcSM8aWnD/3wDHLegFpLHZUK1Hr0FOee
+	RgFKnsFQjBNKkjrPo/nIX/fEcbcPf+KmVgYba9RKVvfeO6khUf8e2VLzP57iw/ZfU3ma
+	j4wblCjrskm4kgNE9+PE0CKW8Kr0ohALCa6DYn/hEQ1yCx1K3WjOggW6Ew52NpSJ+3gk
+	kQSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=Zsd0eSG3LTnX7GJRKDdOmZhSDoqdgEiYgMXr/8J19+w=;
-	b=BiTfC0iQRiMdHxdwtLMIjGKiYhBOUwKk3+naIAy/B3UqWUpYPY3JrkEFnLxFCSSdoP
-	zJE/F1h/BLKt/Rty+cfMpMIEbrfjeiH+w15i3ca8JTyXy26xlalAuGLy9ThR2IaxVq5R
-	3gQmDGYGE3AtKQ7cgdTtTuLXHXS+CoeD97DnBw/JaE/kZbGN/7P6GQNu78sfacJLO2JE
-	HhFNCH2L4vui6ZwFnsm0mz6jkbdiyPjPe0sPvcEND1ufMuvzM2WJlZtxYxO63AJ5lbxP
-	hVdJHP+KvwMXKBfAl/GoGOrxt7ZXDzm8R/vHHXgD/wbQZ1D8iP5pc4dycmJfFFX79Umb
-	11kQ==
-X-Gm-Message-State: AKaTC02QCXbwAJg9WiOwynOAoHXJTE3O0RGueytiQDsRj9xQCADFCWHv2WeqcsGrYKtweA==
-X-Received: by 10.84.193.129 with SMTP id f1mr4569719pld.129.1479892974428;
-	Wed, 23 Nov 2016 01:22:54 -0800 (PST)
+	bh=X64OmgB1K8E0QoV0lf3QC4n5C8Pg3pfs3eRHeFuY6ek=;
+	b=FohlutUVyzAE5UQk2/wPDxjzn6je7EPyyBJUSdBnX5uyXF13HoRXGT9NwkHeLK4WBG
+	HIPU49XAlL+ORkh4HoPkirnot9MNivt5rFhviB1V4SEuRUNZImwmWp6mwhlgNvRJrpMh
+	y4I1wehlxtxW25/7Et0xhdNyIxlL0bBQvfoRHvRqlDARFIAA2fbu/FV551lRKqAAjNGr
+	fxoBaixvkV8a4KS+AuqXqSEsUA+sMQQZmtjkok60N3FFDM25NALP6qJdXNc0KJbF9Dr4
+	3oMchGBvaWmVEOl90AjBwn1jacEBcilEK4odneUWQG4rD/bpFoj7zrbmNdf23fSRcpTk
+	DlXA==
+X-Gm-Message-State: AKaTC00408tIpvCY+Noxc9xCwXupDDsrID6yfLKhtimNX/NtSQOdBRKmObrxQeYV30w1Bw==
+X-Received: by 10.99.116.92 with SMTP id e28mr3560734pgn.162.1479892975144;
+	Wed, 23 Nov 2016 01:22:55 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u23sm51056087pfg.86.2016.11.23.01.22.53
+	u23sm51056087pfg.86.2016.11.23.01.22.54
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Wed, 23 Nov 2016 01:22:54 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Nov 2016 01:22:08 -0800
-Message-Id: <20161123092209.23699-48-raj.khem@gmail.com>
+Date: Wed, 23 Nov 2016 01:22:09 -0800
+Message-Id: <20161123092209.23699-49-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.2
 In-Reply-To: <20161123092209.23699-1-raj.khem@gmail.com>
 References: <20161123092209.23699-1-raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 48/49] vlc: Add packageconfig for vdpau
+Subject: [meta-oe][PATCH 49/49] mpv: Add libvdpau to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,54 +56,27 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 23 Nov 2016 09:22:53 -0000
 
-Fix packaging of libvlc_vdpau.so since this plugin
-does not have soname version
-
 Fixes
-
-QA Issue: non -dev/-dbg/nativesdk- package contains symlink .so: vlc path '/work/cortexa7hf-neon-vfpv4-oe-linux-gnueabi/vlc/2.2.2-r0/packages-split/vlc/usr/lib/vlc/libvlc_vdpau.so' [dev-so]
+WARNING: mpv-0.15.0-r0 do_package_qa: QA Issue: mpv rdepends on libvdpau, but it isn't a build dependency, missing libvdpau in DEPENDS or PACKAGECONFIG? [build-deps]
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/vlc/vlc.inc | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-index 0972b61..087baab 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-@@ -37,7 +37,7 @@ EXTRA_OECONF = "\
-     ac_cv_path_UIC=${STAGING_BINDIR_NATIVE}/uic4 \
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
+index 292c701..c49811c 100644
+--- a/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
++++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
+@@ -3,7 +3,7 @@ DESCRIPTION = "mpv is a fork of mplayer2 and MPlayer. It shares some features wi
+ SECTION = "multimedia"
+ HOMEPAGE = "http://www.mpv.io/"
+ DEPENDS = "zlib ffmpeg jpeg virtual/libx11 xsp libxv \
+-           libxscrnsaver libv4l libxinerama \
++           libxscrnsaver libv4l libxinerama libvdpau \
  "
  
--PACKAGECONFIG ?= " live555 dc1394 dv1394 notify fontconfig freetype dvdread png ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 sdl', '', d)}"
-+PACKAGECONFIG ?= " live555 dc1394 dv1394 notify fontconfig freetype dvdread png ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 sdl vdpau', '', d)}"
- PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
- PACKAGECONFIG[sdl] = "--enable-sdl,--disable-sdl,virtual/libsdl libsdl-image "
- PACKAGECONFIG[a52] = "--enable-a52,--disable-a52,liba52"
-@@ -72,6 +72,7 @@ PACKAGECONFIG[dvdread] = "--enable-dvdread,--disable-dvdread, libdvdread libdvdc
- PACKAGECONFIG[vnc] = "--enable-vnc,--disable-vnc, libvncserver"
- PACKAGECONFIG[x11] = "--with-x --enable-xcb,--without-x --disable-xcb,  xcb-util-keysyms libxpm libxinerama"
- PACKAGECONFIG[png] = "--enable-png,--disable-png,libpng"
-+PACKAGECONFIG[vdpau] = "--enable-vdpau,--disable-vdpau,libvdpau"
- 
- do_configure_prepend() {
-     cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
-@@ -94,6 +95,7 @@ FILES_${PN} += "\
-     ${datadir}/applications \
-     ${datadir}/vlc/ \
-     ${datadir}/icons \
-+    ${lindir}/vlc/vlc/libvlc_vdpau.so \
- "
- 
- FILES_${PN}-dbg += "\
-@@ -104,3 +106,6 @@ FILES_${PN}-dbg += "\
- FILES_${PN}-staticdev += "\
-     ${libdir}/vlc/plugins/*/*.a \
- "
-+
-+INSANE_SKIP_${PN} = "dev-so"
-+
+ REQUIRED_DISTRO_FEATURES = "x11"
 -- 
 2.10.2
 
