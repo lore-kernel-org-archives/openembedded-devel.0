@@ -1,47 +1,29 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 99D1D719E5
+Return-Path: <richard@rpsys.net>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 2507771AF9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 09:22:53 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id x23so664522pgx.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 01:22:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=X64OmgB1K8E0QoV0lf3QC4n5C8Pg3pfs3eRHeFuY6ek=;
-	b=qU804ntYNJsFtS4UXYUuFMuyxqChfE2HkrUkCiIHe0dCaK0xgDJt2rC3hQdXUBZiFP
-	G6mBxCaTkC61n2B006ukdvSCKnNxfR/IHl3foyjAFGDxuw9cDtoqlNNFLr2+GZMD0wx4
-	zIK2aNFTQWbDnnyfzSaj//P7lvo5ARxKxDYXTcSM8aWnD/3wDHLegFpLHZUK1Hr0FOee
-	RgFKnsFQjBNKkjrPo/nIX/fEcbcPf+KmVgYba9RKVvfeO6khUf8e2VLzP57iw/ZfU3ma
-	j4wblCjrskm4kgNE9+PE0CKW8Kr0ohALCa6DYn/hEQ1yCx1K3WjOggW6Ew52NpSJ+3gk
-	kQSw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=X64OmgB1K8E0QoV0lf3QC4n5C8Pg3pfs3eRHeFuY6ek=;
-	b=FohlutUVyzAE5UQk2/wPDxjzn6je7EPyyBJUSdBnX5uyXF13HoRXGT9NwkHeLK4WBG
-	HIPU49XAlL+ORkh4HoPkirnot9MNivt5rFhviB1V4SEuRUNZImwmWp6mwhlgNvRJrpMh
-	y4I1wehlxtxW25/7Et0xhdNyIxlL0bBQvfoRHvRqlDARFIAA2fbu/FV551lRKqAAjNGr
-	fxoBaixvkV8a4KS+AuqXqSEsUA+sMQQZmtjkok60N3FFDM25NALP6qJdXNc0KJbF9Dr4
-	3oMchGBvaWmVEOl90AjBwn1jacEBcilEK4odneUWQG4rD/bpFoj7zrbmNdf23fSRcpTk
-	DlXA==
-X-Gm-Message-State: AKaTC00408tIpvCY+Noxc9xCwXupDDsrID6yfLKhtimNX/NtSQOdBRKmObrxQeYV30w1Bw==
-X-Received: by 10.99.116.92 with SMTP id e28mr3560734pgn.162.1479892975144;
-	Wed, 23 Nov 2016 01:22:55 -0800 (PST)
-Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
-	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u23sm51056087pfg.86.2016.11.23.01.22.54
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Nov 2016 01:22:54 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 23 Nov 2016 12:39:56 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	uANCduRj032452; Wed, 23 Nov 2016 12:39:56 GMT
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id yfgWGqfP2V7x; Wed, 23 Nov 2016 12:39:56 +0000 (GMT)
+Received: from hex ([192.168.3.34]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	uANCdr97032449
+	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
+	Wed, 23 Nov 2016 12:39:54 GMT
+Received: from richard by hex with local (Exim 4.86_2)
+	(envelope-from <richard@rpsys.net>)
+	id 1c9Wq9-0000Qh-TH; Wed, 23 Nov 2016 12:39:53 +0000
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Nov 2016 01:22:09 -0800
-Message-Id: <20161123092209.23699-49-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.10.2
-In-Reply-To: <20161123092209.23699-1-raj.khem@gmail.com>
-References: <20161123092209.23699-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 49/49] mpv: Add libvdpau to DEPENDS
+Date: Wed, 23 Nov 2016 12:39:49 +0000
+Message-Id: <1479904789-1607-1-git-send-email-richard.purdie@linuxfoundation.org>
+X-Mailer: git-send-email 2.7.4
+Cc: Richard Purdie <richard.purdie@linuxfoundation.org>
+Subject: [PATCH] nis/opencv: Update getVar/setVar syntax
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,30 +36,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Nov 2016 09:22:53 -0000
+X-List-Received-Date: Wed, 23 Nov 2016 12:39:57 -0000
 
-Fixes
-WARNING: mpv-0.15.0-r0 do_package_qa: QA Issue: mpv rdepends on libvdpau, but it isn't a build dependency, missing libvdpau in DEPENDS or PACKAGECONFIG? [build-deps]
+The deprecated APIs are removed from bitbake, update two old style references
+in meta-oe/meta-networking.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 ---
- meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-support/nis/nis.inc  | 2 +-
+ meta-oe/recipes-support/opencv/opencv_3.1.bb | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
-index 292c701..c49811c 100644
---- a/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.15.0.bb
-@@ -3,7 +3,7 @@ DESCRIPTION = "mpv is a fork of mplayer2 and MPlayer. It shares some features wi
- SECTION = "multimedia"
- HOMEPAGE = "http://www.mpv.io/"
- DEPENDS = "zlib ffmpeg jpeg virtual/libx11 xsp libxv \
--           libxscrnsaver libv4l libxinerama \
-+           libxscrnsaver libv4l libxinerama libvdpau \
- "
+diff --git a/meta-networking/recipes-support/nis/nis.inc b/meta-networking/recipes-support/nis/nis.inc
+index c4aa10e..e027a1c 100644
+--- a/meta-networking/recipes-support/nis/nis.inc
++++ b/meta-networking/recipes-support/nis/nis.inc
+@@ -25,7 +25,7 @@ do_install() {
+ # so force the package to be skipped here (this will cause a
+ # 'nothing provides' error)
+ python () {
+-    os = bb.data.getVar("TARGET_OS", d, 1)
++    os = d.getVar("TARGET_OS", True)
+     if os == "linux-uclibc":
+         raise bb.parse.SkipPackage("NIS functionality requires rpcsvc/yp.h, uClibC does not provide this")
+ }
+diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+index 2136b07..670c94b 100644
+--- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
++++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+@@ -108,7 +108,7 @@ python populate_packages_prepend () {
+     for pkg in packages[1:]:
+         if not pkg in blacklist and not pkg in metapkg_rdepends and not pkg.endswith('-dev') and not pkg.endswith('-dbg') and not pkg.endswith('-doc') and not pkg.endswith('-locale'):
+             metapkg_rdepends.append(pkg)
+-    bb.data.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends), d)
++    d.setVar('RDEPENDS_' + metapkg, ' '.join(metapkg_rdepends))
  
- REQUIRED_DISTRO_FEATURES = "x11"
+ }
+ 
 -- 
-2.10.2
+2.7.4
 
 
