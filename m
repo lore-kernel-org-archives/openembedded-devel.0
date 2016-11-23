@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E922719E5
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id B540F71AAA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 09:22:19 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id 3so672995pgd.0
+	Wed, 23 Nov 2016 09:22:20 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id p66so667836pga.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 01:22:21 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=fHiAmRFOQCWd9XQqBDo5d+8q2gdv7/eIn5obflB/2NI=;
-	b=xaZ1n443FPAm49zj5/RAOTDf2V3rIInVLdfxAejWez4WaeKlZtu+m7CzZ49VA+TKJY
-	vlQDu0dUeb49kYAuAhkVJhdezcYeJZo2uNBdTEIBZGdldsecccDpOdKZf9dVI+abePRM
-	yxh+D9tQJcQqrJGVc86CjaxfMJE7rKra+ANbX0oN71ZSJmw5NQ7LLPTzbuQ3VSNIAvBh
-	nd1zezNOVtmNKdZRqtIP8D1bKPz0jsnWegG0FSyGzD2KJHaeKTPlLhOYe2dfY6J+BkzS
-	DYuBbPvPuOGU/eFmeUkezRJJiWkcgsNOHLnKeUGlpy8d7ld14vXHn8lpO5NaW8MaWElt
-	kqTA==
+	bh=lC3fBh4+R9arl4vPocYJLIxTW/JCalbEHrVdh1713FA=;
+	b=QYsmVQ8iAhBs2ZvRSavabfUnVq3JZBz7MjviVdmzf9xGcLcLLKKyZAh2MH3LnGq5Ro
+	EnYjxB9JGlCh9WP2CRofqilJ/eTqK17gawFo8tbQgkLATLsTIEWEeuvYBasUEftIUneo
+	q6F3R5lxQtOs4Hc9BEe2Bm1GWAMxe7jTpDgiUd2WsVJq/UvxuD7R8BTMnJrBowUns4xr
+	1QFDVcwVC39ldHlqQpzEIze8bZyoplFX17Seu8tZTAC25aW0OlnClprjafiC0ptdoE3m
+	34RPsiHWrjzJVEPRzaKJ6VASVBgJtgRbvA75ICwlnNJvqJ5ZFxUZuABF2BHPZGdvHTiH
+	/yXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=fHiAmRFOQCWd9XQqBDo5d+8q2gdv7/eIn5obflB/2NI=;
-	b=CA2vkZ54vHvS7ZsJNh/7RRjVLhWX0OYwjVK9V/k38BM6AIU3Ab1u+nhLnMFqKwsoNC
-	ucgOyfNQmMmHKZm9KOYsF6yZpSXwE3oKGQZb5QTnK78RjU2WCCRv4+CfKgJHHYPcBTbq
-	x5A6NZhOJ6RJj0BN1oUgWJpIRvQrl+XDztVCYBSty5JvopfNmhAvfh8cMBPt8Bzg5Kia
-	RpFkhOYzst2yF1hNs4lBJeQuSdieH7lqUOAvLaXu83UvrbG2rYocTUr/ruGGPh03Y4nF
-	87b9CK2vI61wNVvAAwZO0fV/SusiAyEY+ehwHNIpCbrq7HP+7n3ey7jcrokqxK2TOTYR
-	v9rg==
-X-Gm-Message-State: AKaTC02CqoZYqWv/MjXyZJsz3392uAeNCi8wBXFW6QvqweylqprmYC5Acs05z3BzL+bmkw==
-X-Received: by 10.98.196.199 with SMTP id h68mr1915138pfk.120.1479892941185;
+	bh=lC3fBh4+R9arl4vPocYJLIxTW/JCalbEHrVdh1713FA=;
+	b=WW5icnDkutU/OcCRnAgigCH3PXZc4IQFeRzraI8iblsd6ew3Mwhl7PtnK51gzcVM+0
+	EO10PQyLAHDjloS2Kfk7KurS2qMNrhJNUAWCWKI3qrXrUDh6qBxxzd3zTaxuCXrzxxUJ
+	hU1LcZqlCMADZcGkj9gJOZDC4xd32UaC/hi3raM6AXH9pDQW/h5NQogObpoISrkz2o9n
+	elnXzMI/VzzErstn+flZRDszWX+HWU0vFP3+HiQmMDgkRhPjit7vqzIsaD8xMuUf2Tt6
+	fYing6KpTAmApb2ARNafOAtkHhjNdIf/8qZWZoX5aRBlN816X4aMWUxG8s98qQKFF9Zn
+	Qjuw==
+X-Gm-Message-State: AKaTC02iYUPZ63vBdDx1bLdoKIJDrZ6Vxuou/UOjdU+V3lscTk66A/j1jxrRFSURgbiF5Q==
+X-Received: by 10.84.218.6 with SMTP id q6mr4563290pli.139.1479892941969;
 	Wed, 23 Nov 2016 01:22:21 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u23sm51056087pfg.86.2016.11.23.01.22.20
+	u23sm51056087pfg.86.2016.11.23.01.22.21
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Nov 2016 01:22:20 -0800 (PST)
+	Wed, 23 Nov 2016 01:22:21 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Nov 2016 01:21:26 -0800
-Message-Id: <20161123092209.23699-6-raj.khem@gmail.com>
+Date: Wed, 23 Nov 2016 01:21:27 -0800
+Message-Id: <20161123092209.23699-7-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.2
 In-Reply-To: <20161123092209.23699-1-raj.khem@gmail.com>
 References: <20161123092209.23699-1-raj.khem@gmail.com>
 Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-multimedia][PATCH 06/49] dcadec, libsquish: Add new recipes
+Subject: [meta-oe][PATCH 07/49] libcec: Update to 3.1.0+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,66 +57,76 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 23 Nov 2016 09:22:20 -0000
 
-Transport from meta-dominion, to support
-new kodi mediacenter
+Depends on p8platform therefore add recipe for
+p8platform
 
 Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-multimedia/dca/dcadec_0.2.0.bb            | 17 +++++++++++++++++
- .../recipes-multimedia/libsquish/libsquish_git.bb     | 19 +++++++++++++++++++
- 2 files changed, 36 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb
- create mode 100644 meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb
+ meta-oe/recipes-extended/libcec/libcec_git.bb         | 18 ++++++++++++------
+ meta-oe/recipes-extended/p8platform/p8platform_git.bb | 18 ++++++++++++++++++
+ 2 files changed, 30 insertions(+), 6 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/p8platform/p8platform_git.bb
 
-diff --git a/meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb b/meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb
+diff --git a/meta-oe/recipes-extended/libcec/libcec_git.bb b/meta-oe/recipes-extended/libcec/libcec_git.bb
+index 0f2a64e..32ab4b9 100644
+--- a/meta-oe/recipes-extended/libcec/libcec_git.bb
++++ b/meta-oe/recipes-extended/libcec/libcec_git.bb
+@@ -2,18 +2,24 @@ SUMMARY = "USB CEC Adaptor communication Library"
+ HOMEPAGE = "http://libcec.pulse-eight.com/"
+ 
+ LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=5e8e16396992369f73f3d28875f846da"
++LIC_FILES_CHKSUM = "file://COPYING;md5=e61fd86f9c947b430126181da2c6c715"
+ 
+-DEPENDS = "udev lockdev"
++DEPENDS = "p8platform udev lockdev"
+ 
+-PV = "2.1.4"
++DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libx11 libxrandr', '', d)}"
+ 
+-SRCREV = "81e38211724bc6e8bd7a60f484433053ed682635"
+-SRC_URI = "git://github.com/Pulse-Eight/libcec.git;branch=release"
++PV = "3.1.0+gitr${SRCPV}"
++
++SRCREV = "6d68d21243aa92862592435e8396b4280ea46c3f"
++SRC_URI = "git://github.com/Pulse-Eight/libcec.git"
+ 
+ S = "${WORKDIR}/git"
+ 
+-inherit autotools pkgconfig
++inherit cmake pkgconfig
++
++# Disable python wrapper, it doesn't have crosscompiles
++EXTRA_OECMAKE = "-DCMAKE_INSTALL_LIBDIR=${libdir} -DCMAKE_INSTALL_LIBDIR_NOARCH=${libdir} \
++                 -DSKIP_PYTHON_WRAPPER=1"
+ 
+ # cec-client and xbmc need the .so present to work :(
+ FILES_${PN} += "${libdir}/*.so"
+diff --git a/meta-oe/recipes-extended/p8platform/p8platform_git.bb b/meta-oe/recipes-extended/p8platform/p8platform_git.bb
 new file mode 100644
-index 0000000..45b53c1
+index 0000000..f6347c2
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "DTS Coherent Acoustics decoder with support for HD extensions"
++++ b/meta-oe/recipes-extended/p8platform/p8platform_git.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Platform support library used by libCEC and binary add-ons for Kodi"
++HOMEPAGE = "http://libcec.pulse-eight.com/"
 +
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING.LGPLv2.1;md5=4fbd65380cdd255951079008b364516c"
++LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://src/os.h;md5=752555fa94e82005d45fd201fee5bd33"
 +
-+SRCREV = "b93deed1a231dd6dd7e39b9fe7d2abe05aa00158"
-+SRC_URI = "git://github.com/foo86/dcadec.git;protocol=http"
++PV = "2.1.0"
++
++SRC_URI = "git://github.com/Pulse-Eight/platform.git"
++SRCREV = "d7bceb64541cb046421cbcd4c98d91e9bf24822f"
 +
 +S = "${WORKDIR}/git"
 +
-+inherit lib_package
++inherit cmake pkgconfig
 +
-+EXTRA_OEMAKE = "CONFIG_SHARED=1"
++EXTRA_OECMAKE += "-DCMAKE_INSTALL_LIBDIR=${libdir} -DCMAKE_INSTALL_LIBDIR_NOARCH=${libdir}"
 +
-+do_install() {
-+	oe_runmake install DESTDIR="${D}" PREFIX="${prefix}"
-+}
-diff --git a/meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb b/meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb
-new file mode 100644
-index 0000000..f060f1e
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/libsquish/libsquish_git.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "The squish library (abbreviated to libsquish) is an open source DXT compression library written in C++ "
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://alpha.cpp;beginline=3;endline=22;md5=6665e479f71feb92d590ea9ae9b9f6d5"
-+
-+PV = "1.10+git${SRCPV}"
-+
-+SRCREV = "52e7d93c5947f72380521116c05d97c528863ba8"
-+SRC_URI = "git://github.com/OpenELEC/libsquish.git;protocol=https"
-+
-+S = "${WORKDIR}/git"
-+
-+EXTRA_OEMAKE = "INSTALL_DIR=${D}${prefix}"
-+
-+do_install() {
-+	install -d ${D}${includedir}
-+	install -d ${D}${libdir}/pkgconfig
-+	oe_runmake install 
-+}
++FILES_${PN}-dev += "${libdir}/p8-platform"
 -- 
 2.10.2
 
