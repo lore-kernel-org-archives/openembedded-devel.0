@@ -1,49 +1,48 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D2CB71A8D
+Return-Path: <joe@deserted.net>
+Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
+	[209.85.223.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 914B671B0C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 14:13:49 +0000 (UTC)
-Received: by mail-wm0-f43.google.com with SMTP id g23so79828324wme.1
+	Wed, 23 Nov 2016 15:08:27 +0000 (UTC)
+Received: by mail-io0-f196.google.com with SMTP id r94so1947001ioe.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Nov 2016 06:13:51 -0800 (PST)
+	Wed, 23 Nov 2016 07:08:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=qkRZljqDvXBKC7GQmOef4cQVkD6rj26zyYXGLGHItaU=;
-	b=FHG+d4Yr5Ne9NoYgbKHLOpFKoTa7WaPqurmBEkaPh5eqFTMvT4jfUGTvCiCKXKlEJA
-	8Mb5vq8leBccT30t0oXOAZMAfIkhMlUoZyjVhWpwysFAzKfkrdnEE/ZFiNPuj1edJdiz
-	D/mZLbtCr8Lmxk9/64El3YbyE1yb3grYs8JsCuV1rlDrJo7FVaugo0T4oiWhd7B3FdSo
-	N/UtLu3CSq/7GoGGbuHNyBbHA9tB8FHR0U0Sc92jzEbk/ngPlew+aiytZFe3Gj2yOBBU
-	H2v0KbjDEB3WdzDioyCC9H8vZP9nXEEWNmhC5LGEOkD3aOmUzlgMKAMw5kbhRP6gBU5S
-	Z8Dw==
+	d=deserted-net.20150623.gappssmtp.com; s=20150623;
+	h=sender:from:to:subject:date:message-id;
+	bh=HtmHW75EP9wFVr+tXP9rckjiXXcBgxCgw69HehyTz1k=;
+	b=yO5NIbFJCTyZjZYaQULvMdk82zWcb7NJOR+61IyedwaIZ9+Q68AzKE4y3E9/tFe26B
+	jMwwn6eRbCfFVyleFTS0b8bXzA9hWhfFDVaQEumw54HK57Mnv10BT1GdPYtQz8ljQAln
+	uOjUh7AuCb2m8kLlo9yYhQCQ3hVgISokT85mxXjlLt0OEWKxbtPvm7Di7AWC6Fzytn8E
+	MFFcnYaVimckh9K4RscIfXG6ficmPPmsK1CpKO85HHrCrG40Scf+jriPjIBaJnpnbTIZ
+	9PPKQpRGF+biiL8SJaZpFkcX6Dlg6kwOD/qOIIEgkLPyyUn/Nxkaa6AtNhFnwE9JlIA6
+	sbyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=qkRZljqDvXBKC7GQmOef4cQVkD6rj26zyYXGLGHItaU=;
-	b=gpagz+Tx/OdVK1+YqObWEZT79Z4wFWEtxFjH/ri0Ege71BNuiPYUfpeI8+warEgb6z
-	cs9T5SdwWhSav3Rvr44zq/PuacZtudC1tzxoOOmnfT40VfwJHWF1D0y88Dp0tfVMApZE
-	zKkxjYTDWnXL7viIrqMc76rR4AdtYuWnLcOIMiBXKd2M0mFOOZOBlBjMXu5oYn8jU7m+
-	P6OOujYJIn+lWtVJRVsMwf3nbzk3N5YGlUK7HFT83mLPquaKgGUBly1843MxG1kpUPkh
-	tS9i1vVStAazLawzTsFmzp1qASF/29mwgfwSVpW4EOReWOUvS2vsNxbFcXBdnAXG3MuU
-	4z4g==
-X-Gm-Message-State: AKaTC03uZTvxAzZHptIUTWq5CLol3YKHVR/WPlFUwMLcwGUjO9xr+YRCoilxS6GYml7jOiO8
-X-Received: by 10.28.185.78 with SMTP id j75mr7359775wmf.14.1479910430564;
-	Wed, 23 Nov 2016 06:13:50 -0800 (PST)
-Received: from flashheart.burtonini.com (home.burtonini.com. [81.2.106.35])
+	h=x-gm-message-state:sender:from:to:subject:date:message-id;
+	bh=HtmHW75EP9wFVr+tXP9rckjiXXcBgxCgw69HehyTz1k=;
+	b=OzfUOLomh+DE/+iciofAc5U6IzeEY1jJ6jpARUDTKHiMZGE18C95xr+fpTXLwC8DHG
+	bYY0T3ETJ4NUbEF9SAM2+kfW9sn93eOI3U62fUgqH4VJbnRGW7Z3GbTSMnKLc4zg1j4Y
+	MQL3S4dMITfA9Z13oZWbQlLsTAVTMoRgK3yp2wbz5jSFRyyke77zgkrKQ2FyemveM1ht
+	1a+/nSMweoxx5ODptNgHsKkDyL2cryK1PubjaBTWjadzkmokJD2oFY/DER3FpaEi20t2
+	yLGVcnaF8DM7aPugrw2FKK42RTLlMmhz92gYkie/UAevxFFLxEF//Ao5XznXOuJVQKbk
+	eZpQ==
+X-Gm-Message-State: AKaTC03OcJO3RA8xguZHf8KwmCmyfbPhQI+rb6VJgnkXaF3boAHLtpzwsjWStxJNwllRrA==
+X-Received: by 10.107.15.232 with SMTP id 101mr3412456iop.218.1479913707826;
+	Wed, 23 Nov 2016 07:08:27 -0800 (PST)
+Received: from mir.deserted.net (23-233-31-74.cpe.pppoe.ca. [23.233.31.74])
 	by smtp.gmail.com with ESMTPSA id
-	cl10sm36665099wjb.4.2016.11.23.06.13.49
+	17sm11552624ioh.12.2016.11.23.07.08.26
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 23 Nov 2016 06:13:50 -0800 (PST)
-From: Ross Burton <ross.burton@intel.com>
+	Wed, 23 Nov 2016 07:08:26 -0800 (PST)
+Sender: Joe MacDonald <joe@deserted.net>
+From: Joe MacDonald <joe_macdonald@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Nov 2016 14:13:41 +0000
-Message-Id: <1479910421-28750-4-git-send-email-ross.burton@intel.com>
-X-Mailer: git-send-email 2.8.1
-In-Reply-To: <1479910421-28750-1-git-send-email-ross.burton@intel.com>
-References: <1479910421-28750-1-git-send-email-ross.burton@intel.com>
-Subject: [PATCH 4/4] meta-gnome: add explicit gnome-common dependencies
+Date: Wed, 23 Nov 2016 10:08:29 -0500
+Message-Id: <1479913709-20703-1-git-send-email-joe_macdonald@mentor.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-networking][PATCH] iscsi-initiator-utils: Update to 2.0.874
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,255 +55,555 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Nov 2016 14:13:50 -0000
+X-List-Received-Date: Wed, 23 Nov 2016 15:08:28 -0000
 
-gnome-common is deprecated and gnomebase.bbclass will soon stop depending on it,
-so add gnome-common to DEPENDS for the recipes that still use it.
+The latest iscsi-initiator-utils has been available for a while now,
+update our recipe.  The new version no longer bundles its own ISNS server,
+so this update brings in open-isns as a dependency.
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
+Additionally, open-iscsi.org is defunct, the new home is at
+open-iscsi.com, update the SRC_URI and homepage accordingly.
+
+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 ---
- meta-gnome/recipes-gnome/bonobo/libbonobo.inc                          | 2 +-
- meta-gnome/recipes-gnome/evince/evince_3.18.2.bb                       | 2 +-
- meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb                         | 2 +-
- meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb     | 2 +-
- meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb         | 2 +-
- .../recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb      | 2 +-
- .../recipes-gnome/gnome-system-monitor/gnome-system-monitor_2.28.2.bb  | 3 +--
- meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb                 | 2 +-
- meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb        | 3 +--
- meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb                   | 2 +-
- meta-gnome/recipes-gnome/libgnome/libgnome_2.32.1.bb                   | 2 +-
- meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb             | 2 +-
- meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb                | 3 +--
- meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.5.bb                 | 2 +-
- meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb                      | 2 +-
- meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb                     | 2 +-
- 16 files changed, 16 insertions(+), 19 deletions(-)
+ ...nitiator-utils-Do-not-clean-kernel-source.patch |  44 ++++
+ .../iscsi-initiator-utils-dont-use-static.patch    |  21 --
+ ...text-add-include-for-NI_MAXHOST-definiton.patch |  35 +++
+ .../iscsi-initiator-utils-use-var-for-config.patch | 240 ---------------------
+ ...2.0-873.bb => iscsi-initiator-utils_2.0.874.bb} |  68 +++---
+ .../recipes-support/open-isns/open-isns_0.97.bb    |  33 +++
+ 6 files changed, 151 insertions(+), 290 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-Do-not-clean-kernel-source.patch
+ delete mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-dont-use-static.patch
+ create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-fw_context-add-include-for-NI_MAXHOST-definiton.patch
+ delete mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-use-var-for-config.patch
+ rename meta-networking/recipes-daemons/iscsi-initiator-utils/{iscsi-initiator-utils_2.0-873.bb => iscsi-initiator-utils_2.0.874.bb} (65%)
+ create mode 100644 meta-networking/recipes-support/open-isns/open-isns_0.97.bb
 
-diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
-index 60a8597..ce34957 100644
---- a/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
-+++ b/meta-gnome/recipes-gnome/bonobo/libbonobo.inc
-@@ -3,7 +3,7 @@ LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-                     file://COPYING.LIB;md5=7fbc338309ac38fefcd64b04bb903e34"
- SECTION = "x11/gnome/libs"
--DEPENDS = "glib-2.0 orbit2-native orbit2 intltool-native libxml2 dbus dbus-glib"
-+DEPENDS = "gnome-common-native glib-2.0 orbit2-native orbit2 intltool-native libxml2 dbus dbus-glib"
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-Do-not-clean-kernel-source.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-Do-not-clean-kernel-source.patch
+new file mode 100644
+index 0000000..2c46611
+--- /dev/null
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-Do-not-clean-kernel-source.patch
+@@ -0,0 +1,44 @@
++From 4ebab8add4a549c16ab8b124137546c0a7b46a9b Mon Sep 17 00:00:00 2001
++From: Joe MacDonald <joe_macdonald@mentor.com>
++Date: Tue, 15 Nov 2016 11:11:30 -0500
++Subject: [PATCH] Do not clean kernel source
++
++The default behaviour should not be to attempt to clean the kernel source
++tree when building userspace.  When not cross-compiling, however, this action is
++harmless, but when attempting to build within the sysroot and since this package
++is purely userspace, the clean step will fail.
++
++Removing the clean step eliminates an unnecessary dependency on the kernel build
++infrastructure.
++
++Upstream-status: Inappropriate (embedded specific)
++
++Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
++---
++ Makefile | 3 +--
++ 1 file changed, 1 insertion(+), 2 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index c8cd00e..9576bba 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -37,7 +37,7 @@ endif
++ 
++ all: user
++ 
++-user: iscsiuio/Makefile
+++user:
++ 	$(MAKE) -C utils/sysdeps
++ 	$(MAKE) -C utils/fwparam_ibft
++ 	$(MAKE) -C usr
++@@ -75,7 +75,6 @@ clean:
++ 	$(MAKE) -C utils/fwparam_ibft clean
++ 	$(MAKE) -C utils clean
++ 	$(MAKE) -C usr clean
++-	$(MAKE) -C kernel clean
++ 	[ ! -f iscsiuio/Makefile ] || $(MAKE) -C iscsiuio clean
++ 	[ ! -f iscsiuio/Makefile ] || $(MAKE) -C iscsiuio distclean
++ 
++-- 
++1.9.1
++
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-dont-use-static.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-dont-use-static.patch
+deleted file mode 100644
+index ce48e2b..0000000
+--- a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-dont-use-static.patch
++++ /dev/null
+@@ -1,21 +0,0 @@
+-iscsi-initiator-utils not to use static
+-
+-Upstream-status: Backport
+-This patch is from fedora17.
+-
+-Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
+-Signed-off-by: Vu Tran <vu.tran@windriver.com>
+-
+-diff --git a/usr/Makefile b/usr/Makefile
+-index 673b7f1..fd14a10 100644
+---- a/usr/Makefile
+-+++ b/usr/Makefile
+-@@ -61,7 +61,7 @@ iscsiadm: $(ISCSI_LIB_SRCS) $(DISCOVERY_SRCS) iscsiadm.o session_mgmt.o
+- 
+- iscsistart: $(ISCSI_LIB_SRCS) $(INITIATOR_SRCS) $(FW_BOOT_SRCS) \
+- 		iscsistart.o statics.o
+--	$(CC) $(CFLAGS) -static $^ -o $@
+-+	$(CC) $(CFLAGS) $^ -o $@
+- clean:
+- 	rm -f *.o $(PROGRAMS) .depend $(LIBSYS)
+- 
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-fw_context-add-include-for-NI_MAXHOST-definiton.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-fw_context-add-include-for-NI_MAXHOST-definiton.patch
+new file mode 100644
+index 0000000..37d695f
+--- /dev/null
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-fw_context-add-include-for-NI_MAXHOST-definiton.patch
+@@ -0,0 +1,35 @@
++From 79bea58a554205dd185509fbc4e76b5fc40f9038 Mon Sep 17 00:00:00 2001
++From: Joe MacDonald <joe_macdonald@mentor.com>
++Date: Tue, 15 Nov 2016 12:36:45 -0500
++Subject: [PATCH] fw_context: add include for NI_MAXHOST definiton
++
++This appears to build successfully with gcc 4.x but fails on gcc 5+, though it's
++not immediately clear why NI_MAXHOST isn't being defined from the include
++chain.  Currently engaging with the upstream devs to determine the best course
++of action, but this is an adequate workaround.
++
++Upstream-status: Pending
++
++Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
++---
++ include/fw_context.h | 4 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/include/fw_context.h b/include/fw_context.h
++index 44053d8..0b05cea 100644
++--- a/include/fw_context.h
+++++ b/include/fw_context.h
++@@ -21,6 +21,10 @@
++ #ifndef FWPARAM_CONTEXT_H_
++ #define FWPARAM_CONTEXT_H_
++ 
+++#include <sys/socket.h>
+++#ifndef NI_MAXHOST
+++#define NI_MAXHOST 1025
+++#endif
++ #include <netdb.h>
++ #include <net/if.h>
++ 
++-- 
++2.1.4
++
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-use-var-for-config.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-use-var-for-config.patch
+deleted file mode 100644
+index 50227a7..0000000
+--- a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-use-var-for-config.patch
++++ /dev/null
+@@ -1,240 +0,0 @@
+-iscsi-initiator-utils to use var for config
+-
+-Upstream-status: Backport
+-This patch is from fedora.
+-
+-Use /var/lib/iscsi/ instead of /etc/iscsi/ for holding
+-state files.
+-
+-Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
+-Signed-off-by: Vu Tran <vu.tran@windriver.com>
+-
+-diff --git a/README b/README
+-index 7364b2d..5e8bff8 100644
+---- a/README
+-+++ b/README
+-@@ -164,10 +164,10 @@ available on all Linux installations.
+- 
+- The database contains two tables:
+- 
+--- Discovery table (/etc/iscsi/send_targets);
+--- Node table (/etc/iscsi/nodes).
+-+- Discovery table (/var/lib/iscsi/send_targets);
+-+- Node table (/var/lib/iscsi/nodes).
+- 
+--The regular place for iSCSI database files: /etc/iscsi/nodes
+-+The regular place for iSCSI database files: /var/lib/iscsi/nodes
+- 
+- The iscsiadm utility is a command-line tool to manage (update, delete,
+- insert, query) the persistent database.
+-@@ -444,7 +444,7 @@ a scsi_host per HBA port).
+- To manage both types of initiator stacks, iscsiadm uses the interface (iface)
+- structure. For each HBA port or for software iscsi for each network
+- device (ethX) or NIC, that you wish to bind sessions to you must create
+--a iface config /etc/iscsi/ifaces.
+-+a iface config /var/lib/iscsi/ifaces.
+- 
+- Prep:
+- 
+-@@ -478,29 +478,29 @@ Running:
+- iface0 qla4xxx,00:c0:dd:08:63:e8,20.15.0.7,default,iqn.2005-06.com.redhat:madmax
+- iface1 qla4xxx,00:c0:dd:08:63:ea,20.15.0.9,default,iqn.2005-06.com.redhat:madmax
+- 
+--Will report iface configurations that are setup in /etc/iscsi/ifaces.
+-+Will report iface configurations that are setup in /var/lib/iscsi/ifaces.
+- The format is:
+- 
+- iface_name transport_name,hwaddress,ipaddress,net_ifacename,initiatorname
+- 
+- For software iscsi, you can create the iface configs by hand, but it is
+- reccomended that you use iscsiadm's iface mode. There is a iface.example in
+--/etc/iscsi/ifaces which can be used as a template for the daring.
+-+/var/lib/iscsi/ifaces which can be used as a template for the daring.
+- 
+- For each network object you wish to bind a session to you must create
+--a seperate iface config in /etc/iscsi/ifaces and each iface config file
+-+a seperate iface config in /var/lib/iscsi/ifaces and each iface config file
+- must have a unique name which is less than or equal to 64 characters.
+- 
+- Example:
+- 
+- If you have NIC1 with MAC address 00:0F:1F:92:6B:BF and NIC2 with
+- MAC address 00:C0:DD:08:63:E7 and you wanted to do software iscsi over
+--TCP/IP. Then in /etc/iscsi/ifaces/iface0 you would enter:
+-+TCP/IP. Then in /var/lib/iscsi/ifaces/iface0 you would enter:
+- 
+- iface.transport_name = tcp
+- iface.hwaddress = 00:0F:1F:92:6B:BF
+- 
+--and in /etc/iscsi/ifaces/iface1 you would enter:
+-+and in /var/lib/iscsi/ifaces/iface1 you would enter:
+- 
+- iface.transport_name = tcp
+- iface.hwaddress = 00:C0:DD:08:63:E7
+-@@ -550,7 +550,7 @@ cxgb3i.00:07:43:05:97:07 cxgb3i,00:07:43:05:97:07,<empty>,<empty>,<empty>
+- qla4xxx.00:0e:1e:04:8b:2e qla4xxx,00:0e:1e:04:8b:2e,<empty>,<empty>,<empty>
+- 
+- 
+--Will report iface configurations that are setup in /etc/iscsi/ifaces.
+-+Will report iface configurations that are setup in /var/lib/iscsi/ifaces.
+- The format is:
+- 
+- iface_name transport_name,hwaddress,ipaddress,net_ifacename,initiatorname
+-@@ -636,7 +636,7 @@ need a seperate network connection to the target for discovery purposes.
+- *This will be fixed in the next version of open-iscsi*
+- 
+- For compatibility reasons, when you run iscsiadm to do discovery, it
+--will check for interfaces in /etc/iscsi/iscsi/ifaces that are using
+-+will check for interfaces in /var/lib/iscsi/iscsi/ifaces that are using
+- tcp for the iface.transport and it will bind the portals that are discovered
+- so that they will be logged in through those ifaces. This behavior can also
+- be overriden by passing in the interfaces you want to use. For the case
+-@@ -654,7 +654,7 @@ we do not bind a session to a iface, then you can use the special iface
+- 
+- iscsiadm -m discoverydb -t st -p ip:port -I default --discover -P 1
+- 
+--And if you did not define any interfaces in /etc/iscsi/ifaces and do
+-+And if you did not define any interfaces in /var/lib/iscsi/ifaces and do
+- not pass anything into iscsiadm, running iscsiadm will do the default
+- behavior, where we allow the network subsystem to decide which
+- device to use.
+-@@ -696,7 +696,7 @@ To now log into targets it is the same as with sofware iscsi. See section
+- 
+- 	    ./iscsiadm -m discoverydb -t st -p 192.168.1.1:3260 --discover
+- 
+--	This will search /etc/iscsi/send_targets for a record with the
+-+	This will search /var/lib/iscsi/send_targets for a record with the
+- 	ID [portal = 192.168.1.1:3260 and type = sendtargets. If found it
+- 	will perform discovery using the settings stored in the record.
+- 	If a record does not exist, it will be created using the iscsid.conf
+-@@ -705,7 +705,7 @@ To now log into targets it is the same as with sofware iscsi. See section
+- 	The argument to -p may also be a hostname instead of an address.
+- 	    ./iscsiadm -m discoverydb -t st -p smoehost --discover
+- 
+--	For the ifaces, iscsiadm will first search /etc/iscsi/ifaces for
+-+	For the ifaces, iscsiadm will first search /var/lib/iscsi/ifaces for
+- 	interfaces using software iscsi. If any are found then nodes found
+- 	during discovery will be setup so that they can logged in through
+- 	those interfaces. To specify a specific iface, pass the
+-@@ -761,7 +761,7 @@ To now log into targets it is the same as with sofware iscsi. See section
+- 	This command will perform discovery, but not manipulate the node DB.
+- 
+-   - SendTargets iSCSI Discovery with a specific interface. If you
+--	wish to only use a subset of the interfaces in /etc/iscsi/ifaces
+-+	wish to only use a subset of the interfaces in /var/lib/iscsi/ifaces
+- 	then you can pass them in during discovery:
+- 
+- 	     ./iscsiadm -m discoverydb -t sendtargets -p 192.168.1.1:3260 \
+-@@ -1072,8 +1072,8 @@ where targetname is the name of the target and ip_address:port is the address
+- and port of the portal. tpgt, is the portal group tag of
+- the portal, and is not used in iscsiadm commands except for static
+- record creation. And iface name is the name of the iscsi interface
+--defined in /etc/iscsi/ifaces. If no interface was defined in
+--/etc/iscsi/ifaces or passed in, the default behavior is used.
+-+defined in /var/lib/iscsi/ifaces. If no interface was defined in
+-+/var/lib/iscsi/ifaces or passed in, the default behavior is used.
+- Default here is iscsi_tcp/tcp to be used over which ever NIC the
+- network layer decides is best.
+- 
+-@@ -1188,7 +1188,7 @@ If set, iscsid will perform discovery to the address every
+- discovery.isns.discoveryd_poll_inval or
+- discovery.sendtargets.discoveryd_poll_inval seconds,
+- and it will log into any portals found from the discovery source using
+--the ifaces in /etc/iscsi/ifaces.
+-+the ifaces in /var/lib/iscsi/ifaces.
+- 
+- Note that for iSNS the poll_interval does not have to be set. If not set,
+- iscsid will only perform rediscovery when it gets a SCN from the server.
+-diff --git a/doc/iscsiadm.8 b/doc/iscsiadm.8
+-index 7c209f6..e94cca0 100644
+---- a/doc/iscsiadm.8
+-+++ b/doc/iscsiadm.8
+-@@ -89,7 +89,7 @@ This option is only valid for ping submode.
+- .TP
+- \fB\-I\fR, \fB\-\-interface=\fI[iface]\fR
+- The interface argument specifies the iSCSI interface to use for the operation.
+--iSCSI interfaces (iface) are defined in /etc/iscsi/ifaces. For hardware
+-+iSCSI interfaces (iface) are defined in /var/lib/iscsi/ifaces. For hardware
+- iSCSI (qla4xxx) the iface config must have the hardware address
+- (iface.hwaddress = port's MAC address)
+- and the driver/transport_name (iface.transport_name). The iface's name is
+-@@ -166,7 +166,7 @@ If no other options are specified: for \fIdiscoverydb\fR and \fInode\fR, all
+- of their respective records are displayed; for \fIsession\fR, all active
+- sessions and connections are displayed; for \fIfw\fR, all boot firmware
+- values are displayed; for \fIhost\fR, all iSCSI hosts are displayed; and
+--for \fIiface\fR, all ifaces setup in /etc/iscsi/ifaces are displayed.
+-+for \fIiface\fR, all ifaces setup in /var/lib/iscsi/ifaces are displayed.
+- 
+- .TP
+- \fB\-n\fR, \fB\-\-name=\fIname\fR
+-@@ -535,10 +535,10 @@ The configuration file read by \fBiscsid\fR and \fBiscsiadm\fR on startup.
+- The file containing the iSCSI InitiatorName and InitiatorAlias read by
+- \fBiscsid\fR and \fBiscsiadm\fR on startup.
+- .TP
+--/etc/iscsi/nodes/
+-+/var/lib/iscsi/nodes/
+- This directory contains the nodes with their targets.
+- .TP
+--/etc/iscsi/send_targets
+-+/var/lib/iscsi/send_targets
+- This directory contains the portals.
+- 
+- .SH "SEE ALSO"
+-diff --git a/usr/idbm.c b/usr/idbm.c
+-index 4d30aa9..316e54f 100644
+---- a/usr/idbm.c
+-+++ b/usr/idbm.c
+-@@ -2468,9 +2468,9 @@ free_info:
+- int idbm_init(idbm_get_config_file_fn *fn)
+- {
+- 	/* make sure root db dir is there */
+--	if (access(ISCSI_CONFIG_ROOT, F_OK) != 0) {
+--		if (mkdir(ISCSI_CONFIG_ROOT, 0660) != 0) {
+--			log_error("Could not make %s %d\n", ISCSI_CONFIG_ROOT,
+-+	if (access(ISCSIVAR, F_OK) != 0) {
+-+		if (mkdir(ISCSIVAR, 0660) != 0) {
+-+			log_error("Could not make %s %d\n", ISCSIVAR,
+- 				   errno);
+- 			return errno;
+- 		}
+-diff --git a/usr/idbm.h b/usr/idbm.h
+-index 245f046..f45e86e 100644
+---- a/usr/idbm.h
+-+++ b/usr/idbm.h
+-@@ -28,12 +28,16 @@
+- #include "config.h"
+- #include "list.h"
+- 
+--#define NODE_CONFIG_DIR		ISCSI_CONFIG_ROOT"nodes"
+--#define SLP_CONFIG_DIR		ISCSI_CONFIG_ROOT"slp"
+--#define ISNS_CONFIG_DIR		ISCSI_CONFIG_ROOT"isns"
+--#define STATIC_CONFIG_DIR	ISCSI_CONFIG_ROOT"static"
+--#define FW_CONFIG_DIR		ISCSI_CONFIG_ROOT"fw"
+--#define ST_CONFIG_DIR		ISCSI_CONFIG_ROOT"send_targets"
+-+#define ISCSIVAR			"/var/lib/iscsi/"
+-+
+-+#define NODE_CONFIG_DIR    ISCSIVAR"nodes"
+-+#define SLP_CONFIG_DIR     ISCSIVAR"slp"
+-+#define ISNS_CONFIG_DIR    ISCSIVAR"isns"
+-+#define STATIC_CONFIG_DIR  ISCSIVAR"static"
+-+#define FW_CONFIG_DIR      ISCSIVAR"fw"
+-+#define ST_CONFIG_DIR      ISCSIVAR"send_targets"
+-+
+-+
+- #define ST_CONFIG_NAME		"st_config"
+- #define ISNS_CONFIG_NAME	"isns_config"
+- 
+-diff --git a/usr/iface.h b/usr/iface.h
+-index 01f7074..2c6ef72 100644
+---- a/usr/iface.h
+-+++ b/usr/iface.h
+-@@ -20,7 +20,8 @@
+- #ifndef ISCSI_IFACE_H
+- #define ISCSI_IFACE_H
+- 
+--#define IFACE_CONFIG_DIR	ISCSI_CONFIG_ROOT"ifaces"
+-+#include "idbm.h"
+-+#define IFACE_CONFIG_DIR	ISCSIVAR"ifaces"
+- 
+- struct iface_rec;
+- struct list_head;
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0.874.bb
+similarity index 65%
+rename from meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
+rename to meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0.874.bb
+index 4b13155..c3ac5a8 100644
+--- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0.874.bb
+@@ -4,18 +4,18 @@ independent, multi-platform implementation of RFC3720. The iscsi package \
+ provides the server daemon for the iSCSI protocol, as well as the utility \
+ programs used to manage it. iSCSI is a protocol for distributed \
+ disk access using SCSI commands sent over Internet Protocol networks."
+-HOMEPAGE = "http://www.open-iscsi.org/"
++HOMEPAGE = "http://www.open-iscsi.com/"
+ LICENSE = "GPLv2 & LGPLv2.1"
+ SECTION = "net"
+-DEPENDS = "openssl flex-native bison-native"
++DEPENDS = "openssl flex-native bison-native open-isns util-linux"
  
- inherit gnomebase gtk-doc lib_package
+-LIC_FILES_CHKSUM = \
+-        "file://COPYING;md5=393a5ca445f6965873eca0259a17f833 \
+-         file://utils/open-isns/COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
++LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
  
-diff --git a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb b/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-index 1164768..5b31bb8 100644
---- a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-+++ b/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-@@ -2,7 +2,7 @@ SUMMARY = "Evince is a document viewer for document formats like pdf, ps, djvu"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=96f2f8d5ee576a2163977938ea36fa7b"
- SECTION = "x11/office"
--DEPENDS = "gtk+3 libsecret gnome-desktop3 poppler gstreamer1.0-plugins-base orc adwaita-icon-theme intltool-native"
-+DEPENDS = "gtk+3 libsecret gnome-desktop3 poppler gstreamer1.0-plugins-base orc adwaita-icon-theme intltool-native gnome-common-native"
- PR = "r5"
- 
- inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection
-diff --git a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
-index a6c68d3..175b832 100644
---- a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
-+++ b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
-@@ -3,7 +3,7 @@ SECTION = "x11/gnome"
- LICENSE = "GPLv2+"
- PR = "r2"
- 
--DEPENDS = "gvfs enchant gconf gnome-doc-utils glib-2.0 gtk+ gtksourceview2 iso-codes intltool-native"
-+DEPENDS = "gvfs enchant gconf gnome-doc-utils glib-2.0 gtk+ gtksourceview2 iso-codes intltool-native gnome-common-native"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
-diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
-index fe3e572..be62b37 100644
---- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.18.2.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a \
- 
- SECTION = "x11/gnome"
- 
--DEPENDS = "udev gtk+3 libnotify libcanberra intltool-native \
-+DEPENDS = "udev gtk+3 libnotify libcanberra intltool-native gnome-common-native \
-     ${@bb.utils.contains('DISTRO_FEATURES','bluez5','bluez5','bluez4',d)} \
+-SRC_URI = "http://www.open-iscsi.org/bits/open-iscsi-${PV}.tar.gz \
+-           file://iscsi-initiator-utils-use-var-for-config.patch \
+-           file://iscsi-initiator-utils-dont-use-static.patch \
++SRCREV ?= "8db9717e73d32d2c5131da4f9ad86dfd9065f74b"
++
++SRC_URI = "git://github.com/open-iscsi/open-iscsi \
++           file://iscsi-initiator-utils-Do-not-clean-kernel-source.patch \
++           file://iscsi-initiator-utils-fw_context-add-include-for-NI_MAXHOST-definiton.patch \
+            file://initd.debian \
+            file://99_iscsi-initiator-utils \
+            file://iscsi-initiator \
+@@ -23,33 +23,43 @@ SRC_URI = "http://www.open-iscsi.org/bits/open-iscsi-${PV}.tar.gz \
+            file://iscsi-initiator-targets.service \
+            file://set_initiatorname \
  "
+-SRC_URI[md5sum] = "8b8316d7c9469149a6cc6234478347f7"
+-SRC_URI[sha256sum] = "7dd9f2f97da417560349a8da44ea4fcfe98bfd5ef284240a2cc4ff8e88ac7cd9"
  
-diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-index c1a47e0..17950fc 100644
---- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-@@ -12,7 +12,7 @@ SRC_URI[archive.md5sum] = "5c80d628a240eb9d9ff78913b31f2f67"
- SRC_URI[archive.sha256sum] = "55cbecf67efe1fa1e57ac966520a7c46d799c8ba3c652a1219f60cafccb3739d"
- GNOME_COMPRESS_TYPE="bz2"
+-S = "${WORKDIR}/open-iscsi-${PV}"
++S = "${WORKDIR}/git"
++B = "${WORKDIR}/build"
++
++inherit update-rc.d systemd autotools
++
++EXTRA_OECONF = " \
++    --target=${TARGET_SYS} \
++    --host=${BUILD_SYS} \
++    --prefix=${prefix} \
++    --libdir=${libdir} \
++"
  
--DEPENDS += "gconf libxrandr virtual/libx11 gtk+ glib-2.0 gnome-doc-utils startup-notification intltool-native"
-+DEPENDS += "gconf libxrandr virtual/libx11 gtk+ glib-2.0 gnome-doc-utils startup-notification intltool-native gnome-common-native"
+-inherit update-rc.d systemd
++EXTRA_OEMAKE = ' \
++                CC="${CC}" \
++                AR="${AR}" \
++                RANLIB="${RANLIB}" \
++                CFLAGS="${CFLAGS} ${CPPFLAGS} -D_GNU_SOURCE -I. -I../include -I../../include -I../usr -I../../usr" \
++                LDFLAGS="${LDFLAGS}" \
++                LD="${LD}" \
++                OS="${TARGET_SYS}" \
++                TARGET="${TARGET_OS}" \
++                BASE="${prefix}" \
++                MANDIR="${mandir}" \
++'
  
- EXTRA_OECONF = "--disable-scrollkeeper --disable-desktop-docs --disable-gnome-about"
- 
-diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
-index 2f427e7..19ade62 100644
---- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
-@@ -3,7 +3,7 @@ SUMMARY = "GNOME disk utility"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e9115d11797a5e6b746b4e9b90194564"
- 
--DEPENDS = "glib-2.0 gtk+ libnotify libunique udisks avahi-ui virtual/libx11 libatasmart gnome-doc-utils intltool-native libgnome-keyring"
-+DEPENDS = "glib-2.0 gtk+ libnotify libunique udisks avahi-ui virtual/libx11 libatasmart gnome-doc-utils intltool-native gnome-common-native libgnome-keyring"
- 
- PR = "r4"
- 
-diff --git a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_2.28.2.bb b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_2.28.2.bb
-index 55778f7..d5fab62 100644
---- a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_2.28.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_2.28.2.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- SECTION = "x11/gnome"
- PR = "r2"
- 
--DEPENDS = "libgtop gtkmm glibmm gnome-doc-utils libwnck gtk+ dbus-glib librsvg intltool-native"
-+DEPENDS = "libgtop gtkmm glibmm gnome-doc-utils libwnck gtk+ dbus-glib librsvg intltool-native gnome-common-native"
- 
- inherit gnome
- SRC_URI[archive.md5sum] = "3f0bca9b0ebc7a365466851cd580d167"
-@@ -29,4 +29,3 @@ FILES_${PN} += "${datadir}/icons \
- 
- FILES_${PN}-doc += "${datadir}/omf \
-                     ${datadir}/gnome/help "
--
-diff --git a/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb b/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb
-index 1c78474..3ec6466 100644
---- a/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb
-+++ b/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
-                     file://daemon/vfs-daemon.c;endline=21;md5=5f2c61553fb16abb07fc9498ca03fe1f \
-                     file://modules/cdda-cddb.h;endline=22;md5=20ed324ca64907c366ecd7f22b8e0c54"
- 
--DEPENDS = "libxml2 gconf dbus bzip2 gnome-mime-data zlib intltool-native"
-+DEPENDS = "libxml2 gconf dbus bzip2 gnome-mime-data zlib intltool-native gnome-common-native"
- RRECOMMENDS_${PN} = "gnome-vfs-plugin-file shared-mime-info"
- # Some legacy packages will require gnome-mime-data to be installed, but use of
- # it is deprecated.
-diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
-index ebd2955..66f04ae 100644
---- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
-+++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "http://projects.gnome.org/gtksourceview/"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
--DEPENDS = "gtk+ libxml2 intltool-native"
-+DEPENDS = "gtk+ libxml2 intltool-native gnome-common-native"
- 
- PNAME = "gtksourceview"
- 
-@@ -27,4 +27,3 @@ do_configure_prepend() {
+ TARGET_CC_ARCH += "${LDFLAGS}"
++
+ do_configure () {
+-    #need to support cross-compiling in open-isns only
+-    (cd utils/open-isns; gnu-configize; \
+-     ./configure --host=${TARGET_SYS} --build=${BUILD_SYS} --with-security=no )
++    cd ${S}/iscsiuio ; autoreconf --install; ./configure ${EXTRA_OECONF}
  }
  
- FILES_${PN} += " ${datadir}/gtksourceview-2.0"
+ do_compile () {
+-    #make iscsistart one of PROGRAMS if install_user in do_install
+-    #sed -i -e '/^PROGRAMS = /s;$; usr/iscsistart;' Makefile
 -
-diff --git a/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb b/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
-index 6ec6d46..c2157df 100644
---- a/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
-+++ b/meta-gnome/recipes-gnome/libgdata/libgdata_0.16.1.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
-                     file://gdata/gdata.h;endline=20;md5=079a554efcf65d46f96a515806e7e99a \
-                     file://gdata/gdata-types.h;endline=20;md5=7399b111aac8718da13888fc634be6ef"
- 
--DEPENDS = "libxml2 glib-2.0 libsoup-2.4 intltool-native liboauth gcr json-glib"
-+DEPENDS = "gnome-common-native libxml2 glib-2.0 libsoup-2.4 intltool-native liboauth gcr json-glib"
- 
- inherit gnomebase pkgconfig autotools-brokensep gettext gtk-doc vala gobject-introspection
- 
-diff --git a/meta-gnome/recipes-gnome/libgnome/libgnome_2.32.1.bb b/meta-gnome/recipes-gnome/libgnome/libgnome_2.32.1.bb
-index 40caa7b..0055ba4 100644
---- a/meta-gnome/recipes-gnome/libgnome/libgnome_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/libgnome/libgnome_2.32.1.bb
-@@ -12,7 +12,7 @@ SRC_URI[archive.sha256sum] = "b2c63916866485793b87398266dd7778548c1734923c272a94
- SRC_URI += "file://0001-libgnome-Makefile.am-allow-deprecated-symbols.patch"
- GNOME_COMPRESS_TYPE="bz2"
- 
--DEPENDS += "libcanberra gconf-native gnome-vfs libbonobo esound intltool-native"
-+DEPENDS += "libcanberra gconf-native gnome-vfs libbonobo esound intltool-native gnome-common-native"
- 
- EXTRA_OECONF += "--disable-gtk-doc"
- 
-diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb b/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb
-index a0f0b51..41a89ce 100644
---- a/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb
-+++ b/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb
-@@ -8,7 +8,7 @@ inherit gnomebase gtk-doc
- # intltool to provide IT_PROG_INTLTOOL
- # configure: line 12654: syntax error near unexpected token `0.35.0'
- # configure: line 12654: `IT_PROG_INTLTOOL(0.35.0)'
--DEPENDS = "gtk+ libglade libart-lgpl xineramaproto intltool-native"
-+DEPENDS = "gtk+ libglade libart-lgpl xineramaproto intltool-native gnome-common-native"
- 
- SRC_URI[archive.md5sum] = "ffcbb719c671ff5cd86e59aeba8d0b92"
- SRC_URI[archive.sha256sum] = "859b78e08489fce4d5c15c676fec1cd79782f115f516e8ad8bed6abcb8dedd40"
-diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
-index f357657..e5914e0 100644
---- a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
-@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=6e29c688d912da12b66b73e32b03d812"
- 
- SECTION = "x11/gnome/libs"
- 
--DEPENDS = "gconf gtk+ glib-2.0 libxklavier intltool-native"
-+DEPENDS = "gconf gtk+ glib-2.0 libxklavier intltool-native gnome-common-native"
- 
- inherit gnome
- 
-@@ -16,4 +16,3 @@ do_configure_append() {
-     find ${B} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
-     find ${B} -name Makefile | xargs sed -i s:'-I/usr/include':'-I${STAGING_INCDIR}':g
+-    #fix the ar used in open-isns
+-    sed -i -e 's:ar cr :$(AR) cr :' ${S}/utils/open-isns/Makefile
+-    oe_runmake user
++    oe_runmake -C ${S} ${EXTRA_OEMAKE} user
  }
+ 
+ do_install () {
+-    #completely override the install_user as bugs in Makefile
+-    #oe_runmake DESTDIR="${D}" install_user
 -
-diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.5.bb b/meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.5.bb
-index 94b00c1..c4801a9 100644
---- a/meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.5.bb
-+++ b/meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.5.bb
-@@ -3,7 +3,7 @@ LICENSE = "LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605"
+     #install necessary directories
+     install -d ${D}${sbindir} \
+         ${D}${sysconfdir}/init.d \
+@@ -83,8 +93,8 @@ do_install () {
+         install -m 0644 ${WORKDIR}/iscsi-initiator.service \
+                         ${WORKDIR}/iscsi-initiator-targets.service \
+                         ${D}${systemd_unitdir}/system/
+-	install -d ${D}${nonarch_libdir}/iscsi
+-	install -m 0755 ${WORKDIR}/set_initiatorname ${D}${nonarch_libdir}/iscsi
++        install -d ${D}${nonarch_libdir}/iscsi
++        install -m 0755 ${WORKDIR}/set_initiatorname ${D}${nonarch_libdir}/iscsi
+     else
+         install -d ${D}/etc/default/volatiles
+         install -m 0644 ${WORKDIR}/99_iscsi-initiator-utils ${D}/etc/default/volatiles
+@@ -93,11 +103,11 @@ do_install () {
  
- SECTION = "x11/gnome/libs"
--DEPENDS = "libgnome libgnomecanvas libbonoboui libgnome-keyring intltool-native"
-+DEPENDS = "libgnome libgnomecanvas libbonoboui libgnome-keyring intltool-native gnome-common-native"
+ pkg_postinst_${PN}() {
+     if [ "x$D" = "x" ]; then
+-	if [ -e /etc/init.d/populate-volatile.sh ]; then
++        if [ -e /etc/init.d/populate-volatile.sh ]; then
+             /etc/init.d/populate-volatile.sh update
+-	elif command -v systemd-tmpfiles >/dev/null; then
++        elif command -v systemd-tmpfiles >/dev/null; then
+             systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/iscsi.conf
+-	fi
++        fi
+     fi
+ }
  
- inherit gnome
- 
-diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb
-index 602d513..f5e2f1d 100644
---- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb
-+++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.29.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dc7371b50816c96e145fa0f8ade8e24d \
- 
- SECTION = "libs"
- 
--DEPENDS= "libxml2 bzip2 glib-2.0 zlib intltool-native"
-+DEPENDS= "libxml2 bzip2 glib-2.0 zlib intltool-native gnome-common-native"
- 
- inherit autotools pkgconfig gnome gconf gobject-introspection
- 
-diff --git a/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb b/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
-index d273e6c..fa3915b 100644
---- a/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
-+++ b/meta-gnome/recipes-gnome/libwnck/libwnck_2.31.0.bb
-@@ -3,7 +3,7 @@ LICENSE = "LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
- 
- SECTION = "x11/libs"
--DEPENDS = "intltool-native gtk+ gdk-pixbuf-native libxres"
-+DEPENDS = "intltool-native gnome-common-native gtk+ gdk-pixbuf-native libxres"
- 
- PACKAGECONFIG ??= "startup-notification"
- PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
+diff --git a/meta-networking/recipes-support/open-isns/open-isns_0.97.bb b/meta-networking/recipes-support/open-isns/open-isns_0.97.bb
+new file mode 100644
+index 0000000..fe41093
+--- /dev/null
++++ b/meta-networking/recipes-support/open-isns/open-isns_0.97.bb
+@@ -0,0 +1,33 @@
++# Copyright (C) 2016 Joe MacDonald <joe_macdonald@mentor.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
++
++SUMMARY = "iSNS daemon and utility programs"
++DESCRIPTION = "This is a partial implementation of RFC4171, the Internet \
++Storage Name Service (iSNS).  The distribution includes the iSNS server, \
++supporting persisten storage of registrations, isnsadm, a command line \
++utility for managing nodes, and isnsdd, a corresponding discovery daemon."
++HOMEPAGE = "http://github.com/gonzoleeman/open-isns/"
++LICENSE = "GPLv2+ & LGPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=321bf41f280cf805086dd5a720b37785"
++SECTION = "net"
++
++DEPENDS = "openssl systemd"
++
++SRC_URI = " \
++           git://github.com/open-iscsi/open-isns \
++"
++
++SRCREV ?= "09954404e948e41eb0fce8e28836018b4ce3d20d"
++
++S = "${WORKDIR}/git"
++
++inherit systemd autotools-brokensep
++
++EXTRA_OECONF = " --prefix=${prefix} --enable-shared"
++
++do_install_append () {
++    oe_runmake -C ${B} INCDIR=${STAGING_INCDIR}/libisns/ install_hdrs
++    oe_runmake -C ${B} LIBDIR=${D}${libdir} install_lib
++}
++
++FILES_${PN} += "${libdir}"
 -- 
-2.8.1
+1.9.1
 
 
