@@ -1,54 +1,36 @@
-Return-Path: <samuli.piippo@gmail.com>
-Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
-	[209.85.215.66])
-	by mail.openembedded.org (Postfix) with ESMTP id AA3BD719A2
+Return-Path: <rpjday@crashcourse.ca>
+Received: from smtp485.redcondor.net (smtp485.redcondor.net [208.80.204.85])
+	by mail.openembedded.org (Postfix) with ESMTP id E0B6365D00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2016 08:23:03 +0000 (UTC)
-Received: by mail-lf0-f66.google.com with SMTP id o20so1503919lfg.3
+	Thu, 24 Nov 2016 08:59:34 +0000 (UTC)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
+	by smtp485.redcondor.net ({3be039ea-4351-44b0-a8af-642c38b25916})
+	via TCP (outbound) with ESMTPS id 20161124085930621_0485
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2016 00:23:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=OjPb6ku8ndt0Bdr3Wv6GRzj3KDkJkFHqW9iNS/u6gZ4=;
-	b=G15H1Oqva1HxkO7SNMfSAbddgeEXIkL7C9BgTF00fEXiCMiDprBkTVfTPToaqnPYGF
-	fyHe6VBYX2ZL0IXGs+swgyB2zeyX6MgAsXGvnW2hY8h4LaR3FjeinPjiMlG11ocMBJOy
-	MAC9NjAiFjF+LGr3tBBWvDZXZcNpvl8WZiuVvWoXpZo9zxPRQ8C/o7NTeZWgOjYK1iwk
-	yY+4DuC40ne4sYj14LiJ8fN5pH9iPTv4axwG16FI5fCgAVBcF1mzcZiXysd3Da/DUJHc
-	k6p3sSACzf34WoP3XIjMaDjsmoBS9ZJTMLcp8US5YiCIQHo4caI1CTOKU1Im/8IcNwB9
-	45Hg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=OjPb6ku8ndt0Bdr3Wv6GRzj3KDkJkFHqW9iNS/u6gZ4=;
-	b=Pvl+hoxqLI1PeW5b2ffbNRggemYD0sJa9CPV9+wQW86jn6eITqHIt4YcWXyP9fXDrk
-	FpzS2If7r1Wx+0TU7NH6zJQXo1hDL3qO4ru26pPHeQd4/WVnAUzALI33nkB5MU7gnRKF
-	TTqaTTcCEqfMiGFXV/SZMLFNAl87ZEA8Uf134+gSpifNwRMXjFNEqcWuH1FkMN3sE0uC
-	4XhiW9dXod0IQBqheX1WNUcv2fl+zwn7w0/lY9IaBlDOLoYpdaqxdQHn8KLgRj2DnIbs
-	YQIrb1ViVtsIH2vBRCyLcxtymqiUUG+wRYtcqx6f9SQ8YZjcI9adnPYsLf6cm01Xpd8o
-	/sOg==
-X-Gm-Message-State: AKaTC00TePXqyzWYIY9ekpysSE21E55l1tc/6H7FakvVUEbFVXETJBlBcE+Q4g8FPky2SA==
-X-Received: by 10.25.17.207 with SMTP id 76mr454714lfr.93.1479975784101;
-	Thu, 24 Nov 2016 00:23:04 -0800 (PST)
-Received: from [10.9.21.51] ([192.89.120.53])
-	by smtp.googlemail.com with ESMTPSA id
-	z1sm7974164lja.27.2016.11.24.00.23.02
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 24 Nov 2016 00:23:03 -0800 (PST)
+	Thu, 24 Nov 2016 08:59:30 +0000
+X-RC-FROM: <rpjday@crashcourse.ca>
+X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
+Received: from [216.191.234.70] (port=47217 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1c9psL-00013z-64 for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Nov 2016 03:59:25 -0500
+Date: Thu, 24 Nov 2016 03:58:18 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@ca624034.mitel.com
 To: openembedded-devel@lists.openembedded.org
-References: <1479455334-21184-1-git-send-email-samuli.piippo@qt.io>
-	<20161123152941.GC3265@jama> <20161123154346.GD3265@jama>
-	<20161123185251.GG3265@jama> <20161123201431.GI3265@jama>
-From: Samuli Piippo <samuli.piippo@gmail.com>
-Message-ID: <02f7b3e7-93d4-58ae-ebd8-f54fe5781ce1@gmail.com>
-Date: Thu, 24 Nov 2016 10:23:24 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.4.0
+In-Reply-To: <B0BDB8C7-A743-409A-BF59-AF7AFDB18061@gmail.com>
+Message-ID: <alpine.LFD.2.20.1611240356560.22768@ca624034.mitel.com>
+References: <alpine.LFD.2.20.1611231326510.15876@localhost.localdomain>
+	<5E80B6DC-66EC-499B-84D0-41A5D4F1A1BC@gmail.com>
+	<alpine.LFD.2.20.1611231624420.18557@localhost.localdomain>
+	<04A98AEA-497D-4919-B83E-27C442F24FB9@gmail.com>
+	<alpine.LFD.2.20.1611231725430.20812@localhost.localdomain>
+	<B0BDB8C7-A743-409A-BF59-AF7AFDB18061@gmail.com>
+User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
 MIME-Version: 1.0
-In-Reply-To: <20161123201431.GI3265@jama>
-Subject: Re: [meta-qt5][PATCHv2] Upgrade to Qt 5.8
+X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
+Subject: Re: mozjs/unhandled signal 11/64k page patch/__powerpc64__ ???
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,119 +43,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Nov 2016 08:23:04 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 24 Nov 2016 08:59:39 -0000
+Content-Type: text/plain; charset=US-ASCII
 
-On 23.11.2016 22:14, Martin Jansa wrote:
-> On Wed, Nov 23, 2016 at 07:52:51PM +0100, Martin Jansa wrote:
->> On Wed, Nov 23, 2016 at 04:43:46PM +0100, Martin Jansa wrote:
->>> On Wed, Nov 23, 2016 at 04:29:41PM +0100, Martin Jansa wrote:
->>>> On Fri, Nov 18, 2016 at 09:48:54AM +0200, Samuli Piippo wrote:
->>>>> The linux-oe-g++ mkspec is changed to use $$(...) operator to obtain
->>>>> the contents of an environment value when qmake is run instead of when
->>>>> Makefile is processed. All OE_QMAKE_xxx variables need to be exported
->>>>> for qmake to find them. configure's setBootstrapVariable function needs
->>>>> to change $$(..) to normal $(...) operator to work with qmake's Makefile.
->>>>>
->>>>> qt.conf generation for qtbase recipes is not needed, as configure will
->>>>> generate its own version based on configure arguments. Skip running
->>>>> qmake, since configure is now automatically invoked when it's run in
->>>>> qtbase's root folder.
->>>>>
->>>>> Update PACKAGECONFIGs for qtbase to match current configure options.
->>>>>
->>>>> Merge the two qtwayland recipes to one that supports all three targets
->>>>> (target, native, nativesdk) without need for additional patch.
->>>>>
->>>>> Change-Id: Ib37c4d7323e8b45aa2b171e8427b6ec15aaee213
->>>>> Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
->>>>> ---
->>> ...
->>>>> diff --git a/recipes-qt/qt5/qt5-git.inc b/recipes-qt/qt5/qt5-git.inc
->>>>> index e1e25ba..a1dd16a 100644
->>>>> --- a/recipes-qt/qt5/qt5-git.inc
->>>>> +++ b/recipes-qt/qt5/qt5-git.inc
->>>>> @@ -2,7 +2,7 @@
->>>>>  # Copyright (C) 2013-2016 Martin Jansa <martin.jansa@gmail.com>
->>>>>
->>>>>  QT_MODULE ?= "${BPN}"
->>>>> -QT_MODULE_BRANCH ?= "5.7"
->>>>> +QT_MODULE_BRANCH ?= "5.8"
->>>>>  QT_MODULE_BRANCH_PARAM ?= "branch=${QT_MODULE_BRANCH}"
->>>>>
->>>>>  # each module needs to define valid SRCREV
->>>>> @@ -12,4 +12,4 @@ SRC_URI = " \
->>>>>
->>>>>  S = "${WORKDIR}/git"
->>>>>
->>>>> -PV = "5.7.0+git${SRCPV}"
->>>>> +PV = "5.8.0+git${SRCPV}"
->>>>
->>>> This version is wrong as 5.8.0 wasn't released yet (was it?), so this PV
->>>> shouldn't sort higher then 5.8.0 release.
->>>>
->>>> I'll change it to:
->>>> 5.7.99+5.8.0-beta+git${SRCPV}
->>>> like I did in previous releases.
+On Wed, 23 Nov 2016, Khem Raj wrote:
 
-Yes, it's still in beta stage.
+>
+> > On Nov 23, 2016, at 2:26 PM, Robert P. J. Day <rpjday@crashcourse.ca> wrote:
+> >
+> > On Wed, 23 Nov 2016, Khem Raj wrote:
+> >
+> >>
+> >>> On Nov 23, 2016, at 1:26 PM, Robert P. J. Day <rpjday@crashcourse.ca> wrote:
+> >>>
+> >>> On Wed, 23 Nov 2016, Khem Raj wrote:
+> >>>
+> >>>> can you reproduce it on version 24 as well ?
+> >>>
+> >>> not sure what you mean ... this is running on a qemuppc image. i
+> >>> haven't tried running this on fedora 24 itself. what exactly do you
+> >>> want me to try?
+> >>>
+> >>
+> >> I meant version of mozjs
+> >
+> >  this is version 17.
+>
+> OK, I think 24 has such issues taken care of. I am not near code
+> right now. but it will be good to check if something is already
+> fixed there for this
 
->>>
->>> There is also some issue with qtwayland and qtenginio reported in:
->>> http://lists.openembedded.org/pipermail/openembedded-devel/2016-November/110021.html
->>>
->>> I'm trying to reproduce it with only oe-core+meta-qt5, because the qtwayland
->>> one might be caused by bbappend in meta-luneui, but qtenginio might be
->>> easier to reproduce.
+  ok, i'll take a look, and if it *is* fixed in 24, is there a reason
+meta-openembedded/meta-oe still contains only mozjs_17.0.0.bb? would
+it not make sense to bump that up?
 
-Enginio examples are broken, as there are new checks in Qt 5.8.
-Enginio is deprecated and won't be receiving much attention any more, 
-but build can be fixed easily with:
-EXTRA_QMAKEVARS_PRE += "CONFIG+=install_ok"
+rday
 
->>
->> Local build confirmed that qtwayland issue was caused by that bbappend,
->> but qtenginio error is still there and I've also noticed that with:
->>
->> PACKAGECONFIG_append_pn-qtbase = " icu gl accessibility directfb examples kms"
->> PACKAGECONFIG_remove_pn-qtbase = "gl"
->>
->> qtbase.do_compile fails with:
->> http://errors.yoctoproject.org/Errors/Details/107134/
->> and this configuration was working with 5.7 version, is directfb
->> unsupported now in 5.8 or does it just need some tweaks in qtbase
->> PACKAGECONFIGs?
->
-> directfb_egl was introduced to qtConfig in:
->
-> commit 60985aa42b37217fb4c01ed85bbf6f14410c3491
-> Author: Lars Knoll <lars.knoll@qt.io>
-> Date:   Fri Aug 5 13:35:39 2016 +0200
->
->     Use qtConfig throughout in qtbase
->
-> ...
->
-> index d4977bf..de0344f 100644
-> --- a/src/plugins/platforms/directfb/directfb.pro
-> +++ b/src/plugins/platforms/directfb/directfb.pro
-> @@ -24,7 +24,7 @@ HEADERS = qdirectfbintegration.h \
->      qdirectfbeglhooks.h
->
->  # ### port the GL context
-> -contains(QT_CONFIG, directfb_egl) {
-> +qtConfig(directfb_egl) {
->      HEADERS += qdirectfb_egl.h
->      SOURCES += qdirectfb_egl.cpp
->      DEFINES += DIRECTFB_GL_EGL
->
->
-> But there is no directfb_egl in src/gui/configure.json
->
+-- 
 
-I'm not sure what's the actual status of DirectFB within Qt is, but it's 
-not actively developed or tested at all, and it's currently broken as 
-you found out.
-I created bug for Qt for this: https://bugreports.qt.io/browse/QTBUG-57306
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
+
 
