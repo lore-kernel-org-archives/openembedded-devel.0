@@ -1,26 +1,26 @@
 Return-Path: <rpjday@crashcourse.ca>
-Received: from smtp485.redcondor.net (smtp485.redcondor.net [208.80.204.85])
-	by mail.openembedded.org (Postfix) with ESMTP id E0B6365D00
+Received: from smtp486.redcondor.net (smtp486.redcondor.net [208.80.204.86])
+	by mail.openembedded.org (Postfix) with ESMTP id D13A96FF78
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2016 08:59:34 +0000 (UTC)
+	Thu, 24 Nov 2016 09:05:02 +0000 (UTC)
 Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by smtp485.redcondor.net ({3be039ea-4351-44b0-a8af-642c38b25916})
-	via TCP (outbound) with ESMTPS id 20161124085930621_0485
+	by smtp486.redcondor.net ({6695537a-536a-45f9-a249-877c85428649})
+	via TCP (outbound) with ESMTPS id 20161124090455724_0486
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Nov 2016 08:59:30 +0000
+	Thu, 24 Nov 2016 09:04:55 +0000
 X-RC-FROM: <rpjday@crashcourse.ca>
 X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
-Received: from [216.191.234.70] (port=47217 helo=crashcourse.ca)
+Received: from [216.191.234.70] (port=54572 helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1c9psL-00013z-64 for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Nov 2016 03:59:25 -0500
-Date: Thu, 24 Nov 2016 03:58:18 -0500 (EST)
+	id 1c9pxY-0001g8-Tq for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Nov 2016 04:04:49 -0500
+Date: Thu, 24 Nov 2016 04:03:43 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@ca624034.mitel.com
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <B0BDB8C7-A743-409A-BF59-AF7AFDB18061@gmail.com>
-Message-ID: <alpine.LFD.2.20.1611240356560.22768@ca624034.mitel.com>
+Message-ID: <alpine.LFD.2.20.1611240402030.22768@ca624034.mitel.com>
 References: <alpine.LFD.2.20.1611231326510.15876@localhost.localdomain>
 	<5E80B6DC-66EC-499B-84D0-41A5D4F1A1BC@gmail.com>
 	<alpine.LFD.2.20.1611231624420.18557@localhost.localdomain>
@@ -43,7 +43,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Nov 2016 08:59:39 -0000
+X-List-Received-Date: Thu, 24 Nov 2016 09:05:05 -0000
 Content-Type: text/plain; charset=US-ASCII
 
 On Wed, 23 Nov 2016, Khem Raj wrote:
@@ -73,9 +73,13 @@ On Wed, 23 Nov 2016, Khem Raj wrote:
 > right now. but it will be good to check if something is already
 > fixed there for this
 
-  ok, i'll take a look, and if it *is* fixed in 24, is there a reason
-meta-openembedded/meta-oe still contains only mozjs_17.0.0.bb? would
-it not make sense to bump that up?
+  is it just me, or is the SRC_URI in mozjs_17.0.0.bb a bit weird?
+
+SRC_URI = " \
+    http://ftp.mozilla.org/pub/mozilla.org/js/${BPN}${PV}.tar.gz \
+                               ^^^^^^^^^^^ ???
+
+there's no such directory structure.
 
 rday
 
