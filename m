@@ -1,47 +1,34 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id F35276FEFE
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BFF7371A8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Nov 2016 06:24:43 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id 3so7337046pgd.0
+	Sat, 26 Nov 2016 06:26:04 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id uAQ6Q5FG025652
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Nov 2016 22:24:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=uLnVQXwiUndxiGnKKGa0bqzU2k0TDbFhQjqz6G7qAws=;
-	b=qrveOQLiyzbRyLNPzkYmZksUk+2q5/IrVZUt9VtE03IlBxi1/ZLcHRH5v7Aelm3/oC
-	en3l4lIVU348J2GVNPnlu2dnQAIj5+bxgnFXVzmtoUZfLgpGk3hUi4peghagAAD18to4
-	9/M5c0zO/HivcgoqxTO5YhWYz3mnU+6+FDukWtEnP5J/XO9JASmHjM7R6uJtP5yGQlTh
-	9e5x7LtHLtuOFY35CBIUWBADSrdBiafRiGoiorTksfQeAmxRiRdyfhfWfXy3ng5tEBHj
-	2hTHRD8Yf2FHcpp7pebzrgpThWM0FEc4Kzk5a4KdJNIJe2YALaEEBB7R40pPDUIkGwhF
-	obHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=uLnVQXwiUndxiGnKKGa0bqzU2k0TDbFhQjqz6G7qAws=;
-	b=Afe8++lwYeXh4Yo1hA+z9tlf9ntqR6JJlVj1pJX5O/CtP4ciBy4rlEwuWzdFZRcCTA
-	xy0BO69opc9EwBlfJ/nhfUMospmGsbdx4T40jrvWtXRaZ1kkExGebmOap5bbPII2Z3Io
-	bUWAcd3ICsKY+eMxNxhgOzCkBUE/xgRcWlks8ciV7dXWjJQGlKGdgo8hz+BT+gQODi81
-	whn34qsG/LFqnPwSB1sD/9Ny6pWh1S0qYLB42YuBGR7lJptwwgA32PTW9iEHvUFD0NNf
-	z6lY9Dj4j2WOGNDm9P8qk4SOCF0330K0v86V7/97z7icsAlMUNY807o3Z3hOgZS3OLDb
-	XAAQ==
-X-Gm-Message-State: AKaTC01p3j/uGZkO1gBbRWVkoZsj21stl8d1Ls7RHRfQ7TEKJviOedjiS7h2I++JkGKVLA==
-X-Received: by 10.99.127.72 with SMTP id p8mr20760247pgn.183.1480141485188;
-	Fri, 25 Nov 2016 22:24:45 -0800 (PST)
-Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
-	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	e11sm53946299pgp.10.2016.11.25.22.24.44
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 25 Nov 2016 22:24:44 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Nov 2016 22:24:35 -0800
-Message-Id: <20161126062435.27569-4-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.10.2
-In-Reply-To: <20161126062435.27569-1-raj.khem@gmail.com>
-References: <20161126062435.27569-1-raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH V2 4/4] miniupnpd: Add recipe
+	Fri, 25 Nov 2016 22:26:05 -0800 (PST)
+Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.156]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0294.000;
+	Fri, 25 Nov 2016 22:26:05 -0800
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-networking][PATCH] samba: fix the hardcoded path in
+	init script
+Thread-Index: AQHSRkGz8oJPGdcvp0O8sKHx2gEO0qDqzeKw
+Date: Sat, 26 Nov 2016 06:26:03 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AA013A3560D2@ALA-MBA.corp.ad.wrs.com>
+References: <20161124055713.23487-1-jackie.huang@windriver.com>
+	<f95790bd-1e5b-3666-e042-a1fe7aded164@dominion.thruhere.net>
+In-Reply-To: <f95790bd-1e5b-3666-e042-a1fe7aded164@dominion.thruhere.net>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.146]
+MIME-Version: 1.0
+Subject: Re: [meta-networking][PATCH] samba: fix the hardcoded path in init script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,61 +41,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Nov 2016 06:24:44 -0000
+X-List-Received-Date: Sat, 26 Nov 2016 06:26:04 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Add missing dep on libmnl and libnetfilter-conntrack
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../miniupnpd/miniupnpd_2.0.bb                     | 38 ++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
- create mode 100644 meta-multimedia/recipes-connectivity/miniupnpd/miniupnpd_2.0.bb
 
-diff --git a/meta-multimedia/recipes-connectivity/miniupnpd/miniupnpd_2.0.bb b/meta-multimedia/recipes-connectivity/miniupnpd/miniupnpd_2.0.bb
-new file mode 100644
-index 0000000..bb361a1
---- /dev/null
-+++ b/meta-multimedia/recipes-connectivity/miniupnpd/miniupnpd_2.0.bb
-@@ -0,0 +1,38 @@
-+SUMMARY = "Lightweight UPnP IGD daemon"
-+DESCRIPTION = "The miniUPnP daemon is an UPnP IGD (internet gateway device) \
-+which provide NAT traversal services to any UPnP enabled client on \
-+the network."
-+
-+SECTION = "networking"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=aa71c78c373ccfe0ff207af0cd966d91"
-+
-+inherit autotools gettext pkgconfig
-+
-+DEPENDS += "iptables net-tools util-linux libmnl libnetfilter-conntrack"
-+
-+SRC_URI = "http://miniupnp.tuxfamily.org/files/download.php?file=${P}.tar.gz \
-+"
-+SRC_URI[md5sum] = "1c07a215dd9b362e75a9efc05e2fb3b4"
-+SRC_URI[sha256sum] = "d96aa3a00e0f5490826bba3cb97e68cd27479e5839adac4b9bcb66eae786bfb7"
-+
-+IPV6 = "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', '--ipv6', '', d)}"
-+
-+do_compile() {
-+    cd ${S}
-+    CONFIG_OPTIONS="${IPV6} --leasefile" ./genconfig.sh
-+    oe_runmake -f Makefile.linux
-+}
-+
-+do_install() {
-+    install -d ${D}/${sbindir}
-+    install ${S}/miniupnpd ${D}/${sbindir}
-+    install -d ${D}/${sysconfdir}/${BPN}
-+    install ${S}/netfilter/iptables_init.sh ${D}/${sysconfdir}/${BPN}
-+    install ${S}/netfilter/iptables_removeall.sh ${D}/${sysconfdir}/${BPN}
-+    install ${S}/netfilter/ip6tables_init.sh ${D}/${sysconfdir}/${BPN}
-+    install ${S}/netfilter/ip6tables_removeall.sh ${D}/${sysconfdir}/${BPN}
-+    install -m 0644 -b ${S}/miniupnpd.conf ${D}/${sysconfdir}/${BPN}
-+    install -d ${D}/${sysconfdir}/init.d
-+    install ${S}/linux/miniupnpd.init.d.script ${D}/${sysconfdir}/init.d/miniupnpd
-+}
--- 
-2.10.2
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-
+> bounces@lists.openembedded.org] On Behalf Of Koen Kooi
+> Sent: Thursday, November 24, 2016 6:40 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-networking][PATCH] samba: fix the hardcoded path =
+in init script
+>=20
+> Op 24-11-16 om 06:57 schreef jackie.huang@windriver.com:
+> > From: Jackie Huang <jackie.huang@windriver.com>
+> >
+> > Replace the hardcoded path with base_bindir in init script to fix the
+> > error: /etc/init.d/samba.sh: line 15: /usr/bin/ps: No such file or
+> > directory /etc/init.d/samba.sh: line 17: /usr/bin/sed: No such file or
+> > directory /etc/init.d/samba.sh: line 16: /usr/bin/grep: No such file or
+> > directory
+> >
+> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com> ---
+> > meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 1 + 1 file
+> > changed, 1 insertion(+)
+> >
+> > diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> > b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb index
+> > e9694d4..6c1e3ef 100644 ---
+> > a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb +++
+> > b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb @@ -111,6
+> > +111,7 @@ do_install_append() { -e
+> > 's,/opt/samba/smb.conf,${sysconfdir}/samba/smb.conf,g' \ -e
+> > 's,/opt/samba/log,${localstatedir}/log/samba,g' \ -e
+> > 's,/etc/init.d/samba.server,${sysconfdir}/init.d/samba.sh,g' \ +
+> > -e 's,/usr/bin,${base_bindir},g' \ -i ${D}${sysconfdir}/init.d/samba.sh
+> > fi
+>=20
+> Wouldn't it be better to completely remove the absolute paths?
 
+Yeah, the absolute paths don't seem to be necessary, and I think this=20
+check in the init script is not needed as well:
+
+if [ ! -d /usr/bin ]
+then                    # /usr not mounted
+        exit
+fi
+
+I will make a path to remove them if you're agree.
+
+Thanks,
+Jackie
+
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
