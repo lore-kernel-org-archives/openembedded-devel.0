@@ -1,52 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wj0-f193.google.com (mail-wj0-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id A5A296071F
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 73C8A6FF80
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Nov 2016 00:15:10 +0000 (UTC)
-Received: by mail-wj0-f193.google.com with SMTP id o2so3328007wje.2
+	Sat, 26 Nov 2016 00:16:08 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id u144so9836725wmu.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Nov 2016 16:15:12 -0800 (PST)
+	Fri, 25 Nov 2016 16:16:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
+	h=from:date:to:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=nyoOaLASp5+sxiGoxLSKQpz+doSj0w3SpfYioXW1mQQ=;
-	b=WUUH963DUeus8iqtJCorSTttaJ2Bk9EbppVTwHtR+NKPIuVNTgKpWiPzhupu9G2m59
-	JeeWqosg/PxQ9lrO0LfSbBx/N22wveIsU51cacCQl8OW05Hn1qEH7mtoU1fAhwBe0tcm
-	iFf+4mq/brMqGxB1PiZMqHFB/dNe+v6LbcMAESbQfL6pCdwR/W8fmxbGJV06BUSCesvv
-	clupALNr4NF2CIUrOY/vw7elqe1sILVoNTLo4SkSYu1xrwCJWheGZ9E3Rx3MNLTogUYd
-	dn2CHjVqkpA13eax1EC+0gE6l9IlSmLZgxfJ57Xpmi8pEXetEQMxTj4l6FtKp+8HMLkU
-	4tDA==
+	bh=boT2GnB4xFB2+mriYf9kDnOsWKLQgk8qu10OmnZmtIM=;
+	b=eDiANC9ZRzWJyxWCP9MKOeJDo95+1gJBWZ6qXWxSwPmgCwwbFsmCJfbsxHjfUo47oj
+	90tb3XLKERKj9Bt/ensl2CEgMwXZLm2PwXbOBAgnWeUqdI1NuYJhnvi+iNnYSbaHCw4a
+	wWj/ktwgON6TMPv+SzAveJs1Dyxst8ZJ4Ih6vY+nJmRKdR7Cy3HZVKX3oA9sIrQXjuA/
+	tyaCQLU9RYNNclbHPWjXArQ4v+pixZQV1WQa1eHUAqgD01BrzhxBDOxFYrmA9zDuen96
+	b1fBxQCsKoO5v79q+JWxb5V7MgI7JIQyRWGFmGd3KjTT5oi/EsJPXAsAJkjRqUS7nxhZ
+	+jSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	h=x-gm-message-state:from:date:to:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=nyoOaLASp5+sxiGoxLSKQpz+doSj0w3SpfYioXW1mQQ=;
-	b=NaH69enazG2ZGQRHMyzpdAxdqauUeVIAjVd2YMQK9TRNVuJorHK42si5uaKP3OHTS3
-	ny1fn+wcywlbSs5IGNaGz40keg7W7j79xHcbO3mDD+N/3ZygOok1+fwnGg7kyyvgZQYT
-	coBfh8vqnc18uFF/721ASGFmVtijslJgIBObP9ka2KzKEtCLynwAW3VncrOZAd7otsiC
-	sSNYEpDMgXPGcbHL+q0iwMamkla+6RFhKLTGLMY6XLLFTFBZQKo9eJPE52N8yeXvooSo
-	8yJ4PIGubjK2pKhsvDexBfJPwSD4AofF2JlUEhUgV4Ksm6XF/at6BUv58Bm38cdJW+q4
-	pRpQ==
-X-Gm-Message-State: AKaTC00TjbKcqvogVYNt6AFC9Ec/TLgKwLR/pUuR+iwizep+HO6qCyKvp/oNu75qivQcZQ==
-X-Received: by 10.194.221.4 with SMTP id qa4mr10936543wjc.179.1480119311461;
-	Fri, 25 Nov 2016 16:15:11 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	v2sm49524636wja.41.2016.11.25.16.15.10
+	bh=boT2GnB4xFB2+mriYf9kDnOsWKLQgk8qu10OmnZmtIM=;
+	b=gAMSoW7rH8LDamxwOhvOczqV8Gfs6hlcDOypcCg+LK0cQNop64iKUyqAvlix7nL+nx
+	K3OhCK7PYgpye2XBS/DN/x0fc5BTasGz1sUI7slFpdX0SwRbnFQKCs91W/KPdqNU2Xyo
+	bHD26eX8lln5z7fkqHlTPQLczrsFUH6EzeOKLq0mBbL98v4abQVTL0Ha6DFClFKeKe9W
+	lSq6KT1jqXGTud1MJ1d4KAv7i6PfTSE9z+l09puLFiw6NebEftR95XHQjUVcIQ9pwqbl
+	EG6nueTYOBUkOtdOHYAtL/1rYgxm0Moslmo/r2lwV762Aa+R7t+bp+nYTd48liOjnVSP
+	ZtCw==
+X-Gm-Message-State: AKaTC03PwVIoyiRHrwOo+XTgMjElJqNQ/zZXsVVf63sKKLilqPicIFRoXmuyNh+9vSt2Uw==
+X-Received: by 10.28.6.203 with SMTP id 194mr9472514wmg.16.1480119369965;
+	Fri, 25 Nov 2016 16:16:09 -0800 (PST)
+Received: from localhost ([217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id 6sm49425013wjt.5.2016.11.25.16.16.09
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 25 Nov 2016 16:15:10 -0800 (PST)
+	Fri, 25 Nov 2016 16:16:09 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sat, 26 Nov 2016 01:15:15 +0100
+Date: Sat, 26 Nov 2016 01:16:14 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161126001515.GB8369@jama>
+Message-ID: <20161126001614.GC8369@jama>
 References: <20161123092209.23699-1-raj.khem@gmail.com>
-	<20161123092209.23699-8-raj.khem@gmail.com>
+	<20161123092209.23699-29-raj.khem@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20161123092209.23699-8-raj.khem@gmail.com>
+In-Reply-To: <20161123092209.23699-29-raj.khem@gmail.com>
 User-Agent: Mutt/1.7.1 (2016-10-04)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-multimedia][PATCH 08/49] kodi: Add krypton/17.x Jarvis/16.x recipes
+Subject: Re: [meta-networking][PATCH 29/49] dante: Add recipe for 1.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,62 +58,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Nov 2016 00:15:11 -0000
-X-Groupsio-MsgNum: 64044
+X-List-Received-Date: Sat, 26 Nov 2016 00:16:09 -0000
+X-Groupsio-MsgNum: 64045
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="xgyAXRrhYN0wYx8y"
+	protocol="application/pgp-signature"; boundary="JgQwtEuHJzHdouWu"
 Content-Disposition: inline
 
---xgyAXRrhYN0wYx8y
+--JgQwtEuHJzHdouWu
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 23, 2016 at 01:21:28AM -0800, Khem Raj wrote:
-> 16.x is the default since its the latest released version
+On Wed, Nov 23, 2016 at 01:21:49AM -0800, Khem Raj wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  .../recipes-protocols/dante/dante_1.4.1.bb         | 47 ++++++++++++++++=
+++++++
+>  1 file changed, 47 insertions(+)
+>  create mode 100644 meta-networking/recipes-protocols/dante/dante_1.4.1.bb
 >=20
-> remove obsoleted xbmc recipes
-> rename to recipes-mediacenter
-> +S =3D "${WORKDIR}/git"
+> diff --git a/meta-networking/recipes-protocols/dante/dante_1.4.1.bb b/met=
+a-networking/recipes-protocols/dante/dante_1.4.1.bb
+> new file mode 100644
+> index 0000000..dbb86fb
+> --- /dev/null
+> +++ b/meta-networking/recipes-protocols/dante/dante_1.4.1.bb
+> @@ -0,0 +1,47 @@
+> +SECTION =3D "console/utils"
+> +SUMMARY =3D "A free SOCKS server"
+> +DESCRIPTION =3D "Dante consists of a SOCKS server and a SOCKS client,\
+> +implementing RFC 1928 and related standards. It is a flexible product\
+> +that can be used to provide convenient and secure network\
+> +connectivity. Once installed, Dante can in most cases be made\
+> +transparent to clients, providing functionality somewhat similar to\
+> +what could be described as a non-transparent Layer 4 router."
+> +HOMEPAGE =3D "http://www.inet.no/dante/"
 > +
-> +# breaks compilation
-> +ASNEEDED =3D ""
+> +LICENSE =3D "BSD-3-Clause"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D221118dda731fe93a85d0ed973467=
+249"
 > +
-> +ACCEL ?=3D ""
-> +ACCEL_x86 =3D "vaapi vdpau"
-> +ACCEL_x86-64 =3D "vaapi vdpau"
+> +SRC_URI =3D "https://www.inet.no/dante/files/dante-${PV}.tar.gz \
+> +          "
+> +SRC_URI[md5sum] =3D "68c2ce12119e12cea11a90c7a80efa8f"
+> +SRC_URI[sha256sum] =3D "b6d232bd6fefc87d14bf97e447e4fcdeef4b28b16b048d80=
+4b50b48f261c4f53"
 > +
-> +PACKAGECONFIG ??=3D "${ACCEL}"
-> +PACKAGECONFIG_append +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'x11'=
-, ' x11', '', d)}"
-> +PACKAGECONFIG_append +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'open=
-gl', ' opengl', ' openglesv2', d)}"
+> +# without --without-gssapi, config.log will contain reference to /usr/lib
+> +# as a consequence of GSSAPI path being set to /usr by default.
+> +# --with-gssapi-path=3DPATH specify gssapi path
+> +# --without-gssapi        disable gssapi support
+> +# --enable-release        build prerelease as full release
+> +EXTRA_OECONF +=3D "--without-gssapi --sbindir=3D${bindir}"
 > +
-> +PACKAGECONFIG[opengl] =3D "--enable-gl,--enable-gles,"
-> +PACKAGECONFIG[openglesv2] =3D "--enable-gles,--enable-gl,virtual/egl"
-> +PACKAGECONFIG[vaapi] =3D "--enable-vaapi,--disable-vaapi,libva"
-> +PACKAGECONFIG[vdpau] =3D "--enable-vdpau,--disable-vdpau,libvdpau"
-> +PACKAGECONFIG[mysql] =3D "--enable-mysql,--disable-mysql,mysql5"
-> +PACKAGECONFIG[x11] =3D "--enable-x11,--disable-x11,libxinerama libxmu li=
-bxrandr libxtst"
-> +PACKAGECONFIG[pulseaudio] =3D "--enable-pulse,--disable-pulse,pulseaudio"
+> +DEPENDS +=3D "flex-native bison-native"
+> +DEPENDS +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '=
+', d)}"
 
-Did I overlook libva recipe somewhere?
-
-It doesn't even start building for qemux86* because of this libva and
-for qemuarm it fails to configure:
+Autodetects bunch of dependencies:
 http://lists.openembedded.org/pipermail/openembedded-devel/2016-November/11=
 0050.html
 
---xgyAXRrhYN0wYx8y
+--JgQwtEuHJzHdouWu
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWDjUEgAKCRA3VSO3ZXaA
-HA2kAKC7ys9fA6QKk8YEb4/bSVg7cUrgpwCgr7ESqyQY2LmIXCzfL5znHy1RLC0=
-=yqGa
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWDjUTQAKCRA3VSO3ZXaA
+HH6ZAJ46SQyzOaiG/NQ802IXkUFxz/JTnACgg9bJHArSFiA+SPed1dEQme1XXdE=
+=4OfK
 -----END PGP SIGNATURE-----
 
---xgyAXRrhYN0wYx8y--
+--JgQwtEuHJzHdouWu--
