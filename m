@@ -1,34 +1,54 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BFF7371A8B
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wj0-f196.google.com (mail-wj0-f196.google.com
+	[209.85.210.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 100DA71A87
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Nov 2016 06:26:04 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id uAQ6Q5FG025652
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Sat, 26 Nov 2016 07:42:59 +0000 (UTC)
+Received: by mail-wj0-f196.google.com with SMTP id xy5so7852179wjc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Nov 2016 22:26:05 -0800 (PST)
-Received: from ALA-MBA.corp.ad.wrs.com ([169.254.3.156]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0294.000;
-	Fri, 25 Nov 2016 22:26:05 -0800
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-networking][PATCH] samba: fix the hardcoded path in
-	init script
-Thread-Index: AQHSRkGz8oJPGdcvp0O8sKHx2gEO0qDqzeKw
-Date: Sat, 26 Nov 2016 06:26:03 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA013A3560D2@ALA-MBA.corp.ad.wrs.com>
-References: <20161124055713.23487-1-jackie.huang@windriver.com>
-	<f95790bd-1e5b-3666-e042-a1fe7aded164@dominion.thruhere.net>
-In-Reply-To: <f95790bd-1e5b-3666-e042-a1fe7aded164@dominion.thruhere.net>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.162.146]
-MIME-Version: 1.0
-Subject: Re: [meta-networking][PATCH] samba: fix the hardcoded path in init script
+	Fri, 25 Nov 2016 23:43:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=dominion-thruhere-net.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=azuqHLO9zqja+1O6q98SoB2g2d3gyT68pDQQmBUjMKA=;
+	b=CXGYwrZazsnAvV0/mMbOTTOPcseh/0MwX9pGeAB01xlyovOJf4OT5J+EsasbuYJBw8
+	L+L/dAspZ/RIVXa7bbU1P3TO5x1kObS2/lQ7a23Ky+/P5NruYlUJZM92rbvrJxSUYm9e
+	IM0oSfi5+0TXX3b8+igHsVaMRYJDcH/fyhCJJxp9KLjAXkU52vD4fS27wn5Swb+Ycd+k
+	i7/RD+qUenpuOLD6NdyfnLj6KKNey5v2EpTsSMqfw/K3YvoJvDq4SOiV2BMYXW4k2ksu
+	o0/aRzVUnjRJ377uVcoDD+W23LNYkoDaN6RWZo4HGht+a9FPcNBu+gV/Rr4RhHQqrOYK
+	U3JQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=azuqHLO9zqja+1O6q98SoB2g2d3gyT68pDQQmBUjMKA=;
+	b=CDWFNmC6l2CwM9VJBx+az3JsT1k7micgzUEM1R/JvTe6soiUuRwdFdhhFXfnLeGuH1
+	NHhPBsbVvYC+WrzDoI64s/SxNdvnpwrmoxM95U6NULXq4s/LyQR/O/iJs6Bcghsjdacq
+	uFiIr4XjQZ+f+yU9Yj1icPl32IbkPrjowZv9MYs6a9bA+q7uXwzCrZMVfrIS3QDp8ivW
+	MghFFsUtDnqdaw9c7+bhrL2YPWnaUEaXccYYZpnjTBQ4aH41FR2kaitFNHyspG2T5vhv
+	E7qyQ46hjLsSyIuV5VkRGDyGPG9sD/n/XQ1ZK9JxeV1g7UAVUo0JwGkKaihgl3PJzXNr
+	aCQQ==
+X-Gm-Message-State: AKaTC016TgyVvg/F35NrnfOeOe7EKJ7Z0l/1c/w/A33FbkfBiMHN2rcmyXBtTpMsj4Kdhg==
+X-Received: by 10.194.8.226 with SMTP id u2mr10687908wja.91.1480146180827;
+	Fri, 25 Nov 2016 23:43:00 -0800 (PST)
+Received: from [172.20.0.13] (ip4da29576.direct-adsl.nl. [77.162.149.118])
+	by smtp.gmail.com with ESMTPSA id
+	d184sm17369908wmd.8.2016.11.25.23.42.59
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 25 Nov 2016 23:42:59 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 10.1 \(3251\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <20161126001515.GB8369@jama>
+Date: Sat, 26 Nov 2016 08:42:58 +0100
+Message-Id: <A6D1B2BE-C658-4114-AF39-FAC0249D4F98@dominion.thruhere.net>
+References: <20161123092209.23699-1-raj.khem@gmail.com>
+	<20161123092209.23699-8-raj.khem@gmail.com>
+	<20161126001515.GB8369@jama>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Mailer: Apple Mail (2.3251)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-multimedia][PATCH 08/49] kodi: Add krypton/17.x Jarvis/16.x recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,66 +61,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Nov 2016 06:26:04 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Sat, 26 Nov 2016 07:43:01 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: quoted-printable
 
 
-
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-
-> bounces@lists.openembedded.org] On Behalf Of Koen Kooi
-> Sent: Thursday, November 24, 2016 6:40 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-networking][PATCH] samba: fix the hardcoded path =
-in init script
+> Op 26 nov. 2016, om 01:15 heeft Martin Jansa <martin.jansa@gmail.com> =
+het volgende geschreven:
 >=20
-> Op 24-11-16 om 06:57 schreef jackie.huang@windriver.com:
-> > From: Jackie Huang <jackie.huang@windriver.com>
-> >
-> > Replace the hardcoded path with base_bindir in init script to fix the
-> > error: /etc/init.d/samba.sh: line 15: /usr/bin/ps: No such file or
-> > directory /etc/init.d/samba.sh: line 17: /usr/bin/sed: No such file or
-> > directory /etc/init.d/samba.sh: line 16: /usr/bin/grep: No such file or
-> > directory
-> >
-> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com> ---
-> > meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 1 + 1 file
-> > changed, 1 insertion(+)
-> >
-> > diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-> > b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb index
-> > e9694d4..6c1e3ef 100644 ---
-> > a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb +++
-> > b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb @@ -111,6
-> > +111,7 @@ do_install_append() { -e
-> > 's,/opt/samba/smb.conf,${sysconfdir}/samba/smb.conf,g' \ -e
-> > 's,/opt/samba/log,${localstatedir}/log/samba,g' \ -e
-> > 's,/etc/init.d/samba.server,${sysconfdir}/init.d/samba.sh,g' \ +
-> > -e 's,/usr/bin,${base_bindir},g' \ -i ${D}${sysconfdir}/init.d/samba.sh
-> > fi
+> On Wed, Nov 23, 2016 at 01:21:28AM -0800, Khem Raj wrote:
+>> 16.x is the default since its the latest released version
+>>=20
+>> remove obsoleted xbmc recipes
+>> rename to recipes-mediacenter
+>> +S =3D "${WORKDIR}/git"
+>> +
+>> +# breaks compilation
+>> +ASNEEDED =3D ""
+>> +
+>> +ACCEL ?=3D ""
+>> +ACCEL_x86 =3D "vaapi vdpau"
+>> +ACCEL_x86-64 =3D "vaapi vdpau"
+>> +
+>> +PACKAGECONFIG ??=3D "${ACCEL}"
+>> +PACKAGECONFIG_append +=3D "${@bb.utils.contains('DISTRO_FEATURES', =
+'x11', ' x11', '', d)}"
+>> +PACKAGECONFIG_append +=3D "${@bb.utils.contains('DISTRO_FEATURES', =
+'opengl', ' opengl', ' openglesv2', d)}"
+>> +
+>> +PACKAGECONFIG[opengl] =3D "--enable-gl,--enable-gles,"
+>> +PACKAGECONFIG[openglesv2] =3D =
+"--enable-gles,--enable-gl,virtual/egl"
+>> +PACKAGECONFIG[vaapi] =3D "--enable-vaapi,--disable-vaapi,libva"
+>> +PACKAGECONFIG[vdpau] =3D "--enable-vdpau,--disable-vdpau,libvdpau"
+>> +PACKAGECONFIG[mysql] =3D "--enable-mysql,--disable-mysql,mysql5"
+>> +PACKAGECONFIG[x11] =3D "--enable-x11,--disable-x11,libxinerama =
+libxmu libxrandr libxtst"
+>> +PACKAGECONFIG[pulseaudio] =3D =
+"--enable-pulse,--disable-pulse,pulseaudio"
 >=20
-> Wouldn't it be better to completely remove the absolute paths?
-
-Yeah, the absolute paths don't seem to be necessary, and I think this=20
-check in the init script is not needed as well:
-
-if [ ! -d /usr/bin ]
-then                    # /usr not mounted
-        exit
-fi
-
-I will make a path to remove them if you're agree.
-
-Thanks,
-Jackie
-
+> Did I overlook libva recipe somewhere?
 >=20
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> It doesn't even start building for qemux86* because of this libva and
+> for qemuarm it fails to configure:
+> =
+http://lists.openembedded.org/pipermail/openembedded-devel/2016-November/1=
+10050.html
+
+libva is in meta-intel, meta-amd and meta-kodi. I guess we should =
+consider moving it to OE-core or meta-oe.
+
+regards,
+
+Koen
+
 
