@@ -1,50 +1,30 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wj0-f194.google.com (mail-wj0-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D61C71AE7
+Return-Path: <rpjday@crashcourse.ca>
+Received: from smtp484.redcondor.net (smtp484.redcondor.net [208.80.204.84])
+	by mail.openembedded.org (Postfix) with ESMTP id 209EF71ABB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Nov 2016 23:22:48 +0000 (UTC)
-Received: by mail-wj0-f194.google.com with SMTP id o2so5749733wje.2
+	Sun, 27 Nov 2016 12:18:52 +0000 (UTC)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
+	by smtp484.redcondor.net ({c48374e7-08df-40d9-a0de-96cc9883a037})
+	via TCP (outbound) with ESMTPS id 20161127121852749_0484
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Nov 2016 15:22:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=+Ya4Wlgu75WCtfM5YwjJ6TPShxrtJ8OjYFgDWa2t6Mk=;
-	b=Jq1msc4J5t0qRbEc2aI7XHp7W43jz7mLdi18CdiSiAi57QO1PydWJfe72zI0oC2jez
-	y456hQriBXD74bN91/8SX2IgcArK/uK/7eNjSFv5oAZNzU3YjgQ9iGZeRfv3owDHGl3f
-	Lh2OauiYlmwkL8WkscAYsUaVK3sR39/YbU4C1/YzKj+GU8tdSKuxo6urIYLX8mwIwAFa
-	ceyRaagQeAlRxAJWoTz7fEgX9Cl5Rg3wayTddxbperKsEGNl75tU69psX1r+8cqWMayJ
-	safTyzEuE8XIxQKp6QHT0nUA+wFY27KR494ZDIy6iicuY9ZEEfjxLztnxsVnAwQ7rwg1
-	Rxug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=+Ya4Wlgu75WCtfM5YwjJ6TPShxrtJ8OjYFgDWa2t6Mk=;
-	b=h2mJY6NMxgvIrm9LJhxDbcyB1urwDmZM1AIgAPJSn+r2rRG6TTIjbCo2rGmwFuw6LH
-	A5tH/secmumSgUQ3e4bYE92fS1dBrbMwz+JB0eXAASIJUrfpwKAV0Zk3WX0FYgqR6evX
-	2gJQbz4r0ZMBNdqHRc2LxdIOXCMqlcOdAj7ysDaaKiwbEcQloBoPZpKrVBLG0RvNnTka
-	2cozgomwKbIvz6Di+1CiyrAX8hN/Fg3PYqS/iugvCygCkVboYAVsfIcG8t6nlQypvweD
-	99e245Gn0Zq3z9qdeGA5r6eCdKORIwcgXctRXj61EMKhw4Kj0ysOwB6WjTMnPI03qwFx
-	8IQg==
-X-Gm-Message-State: AKaTC00kq4IUeFUUsKXjzaVSKHMnMVbf/4X8EysJ/t+Yd0GcQBXX0wSU9haZYwIuI+thbg==
-X-Received: by 10.194.104.65 with SMTP id gc1mr12967094wjb.164.1480202569283; 
-	Sat, 26 Nov 2016 15:22:49 -0800 (PST)
-Received: from localhost.localdomain (p579CEF63.dip0.t-ipconnect.de.
-	[87.156.239.99]) by smtp.googlemail.com with ESMTPSA id
-	e188sm20789891wma.21.2016.11.26.15.22.48
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 26 Nov 2016 15:22:48 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 27 Nov 2016 00:22:19 +0100
-Message-Id: <1480202539-3411-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.5.5
+	Sun, 27 Nov 2016 12:18:52 +0000
+X-RC-FROM: <rpjday@crashcourse.ca>
+X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
+Received: from [174.118.92.171] (port=39626 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1cAyPu-00061O-LW for openembedded-devel@lists.openembedded.org;
+	Sun, 27 Nov 2016 07:18:46 -0500
+Date: Sun, 27 Nov 2016 07:17:39 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost.localdomain
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.20.1611270710250.21400@localhost.localdomain>
+User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
 MIME-Version: 1.0
-Subject: [PATCH] xfce4-vala: fix build
+X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
+Subject: does recipe naming convention allow 'libcgi-perl_4.28.bb:RPROVIDES_${PN} += "perl-module-cgi"'?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,31 +37,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Nov 2016 23:22:49 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 27 Nov 2016 12:18:56 -0000
+Content-Type: text/plain; charset=US-ASCII
 
-follow oe-core's vala update
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+  (apparently, i am doomed to poke around in OE perl recipes for the
+next little while. le *sigh* ...)
 
-diff --git a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
-index 77fff63..c9eace8 100644
---- a/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
-+++ b/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb
-@@ -9,7 +9,7 @@ SRC_URI = "http://archive.xfce.org/src/bindings/${BPN}/${@xfce_verdir("${PV}")}/
- SRC_URI[md5sum] = "0bbb1d6e473e0fe9b335b7b1b49d8a71"
- SRC_URI[sha256sum] = "07a8f2b7c09fcdd3d86e0c52adea3c58ca011d0142a93997a01b4af77260ae7b"
- 
--EXTRA_OECONF = "-with-vala-api=0.32"
-+EXTRA_OECONF = "-with-vala-api=0.34"
- 
- FILES_${PN} += "${datadir}/vala-*/vapi"
- 
+  curious about the following under meta-openembedded/meta-perl:
+
+$ grep -r RPROVIDES *
+recipes-perl/libtest/libtest-harness-perl_3.36.bb:RPROVIDES_${PN} += "libapp-prove-perl \
+recipes-perl/libio/libio-stringy-perl_2.111.bb:RPROVIDES_${PN} += " libio-atomicfile-perl \
+recipes-perl/libmoo/libmoo-perl_2.000002.bb:RPROVIDES_${PN} = " libmethod-inliner-perl \
+recipes-perl/libextutils/libextutils-parsexs-perl_3.24.bb:RPROVIDES_${PN} += " libextutils-parsexs-constants-perl \
+recipes-perl/libencode/libencode-perl_2.83.bb:RPROVIDES_${PN} += "libencode-alias-perl \
+recipes-perl/libhtml/libhtml-tree-perl_5.03.bb:RPROVIDES_${PN} = " libhtml-element-perl \
+recipes-perl/librole/librole-tiny-perl_2.000001.bb:RPROVIDES_${PN} = " librole-tiny-perl \
+recipes-perl/libcgi/libcgi-perl_4.28.bb:RPROVIDES_${PN} += "perl-module-cgi"
+$
+
+  it's that last line that's odd ... i thought the naming convention
+was that the "perl-module-" prefix was reserved for modules generated
+by the base build of perl itself, while independent recipes used names
+with prefixes of "libxxx-yyyy-perl" and, therefore, provided, well,
+exactly that.
+
+  so what's the rationale for the RPROVIDES in that last example?
+
+rday
+
 -- 
-2.5.5
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
 
