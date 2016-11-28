@@ -1,52 +1,52 @@
 Return-Path: <meerkoetter@googlemail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 1808E71B56
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id C8A8771B56
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2016 16:59:52 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id u144so20011292wmu.0
+	Mon, 28 Nov 2016 16:59:53 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id g23so20090867wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2016 08:59:54 -0800 (PST)
+	Mon, 28 Nov 2016 08:59:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=OI+/vMVdPrFsq0GxoNUV3ZgYCFAgRavluXArdKnmTEw=;
-	b=DReE3BnwskohKlh8lVH8+cciil32zmkY1onXZOL9Q9YjrPAD/w5kTGbZ8dOf5IGSIo
-	Qi1el2XZpg61uSgGxHFj+Z23Bwbj8yTXDuGGYgomzoadAuxXwR2SDFqKmpZ29Y0X+OyC
-	C7KWIqrAdn/P/qIPvLzs2B5GVi2L2w84HmVynAzDo8K6BWapfPhnt3Fl9Jbb+M/bzHSF
-	Wp4mVTMYiK09+jKnnlUR4vvd3iBb1sMCORwNz0T8mwEJxBsSgOpMgBYU047IydgrvATp
-	B1xy4RiZ0yCTn4cS91uofr8v6CKRD8ZvEOP9VbOWcmoOGlk2Gnb0baXtAimMoAqkYfG5
-	A6sg==
+	bh=lBUPmmb2ubVGn8EMJpS/xJyk1RP6xsCSRhFK8sHcanE=;
+	b=p2bP7+s3oC4hHdelokFMxsM7RwShcPziqzocOvv5UyBRnKgAqB9t5qLDHdl4QcUEi2
+	dthgZm/kUNoX3uGi5WP4FVrB0soSA2tdpbH07A36h4bxubDPmJ+6jSIjsn+qrYZESjQ/
+	rZ/HQzaAtjFzdNRYwYxGdBv+dLeYzS5zmMuXAXCGh5nTqrAzKJuIEoNSD6DhlCx6miGT
+	I+mNHbinryZU7zRLCu81szsIA51lxRuMJ6xwg8XPqxGE/5p6daNayQBjNTCPcl+e5JD8
+	8aH7nnXls0futkhxmOSIlJAHy++6MrLKcJ3wBd7L92Q87SKQfIYaHS11Fz7dpcOoPqyt
+	ICLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=OI+/vMVdPrFsq0GxoNUV3ZgYCFAgRavluXArdKnmTEw=;
-	b=lbKXv8wYZy61VWOZTouRD+w11QX4eIyTBWd6Iq0GcgnsMluSZFfLeC5zzNEazkh6Nh
-	HgIkKpLudyTK1sU+V1NZ7DAkVmSoe7HBhdXdk6F5HPrPIbsvb+hWESeadoEAJAamlpsG
-	NQyzqQxcl5O2QPwlSWdgaQSwT+9uwBicGuFc9KQJbTPFPnMbnttIHahPhVk8Vk12U6tu
-	sHjRdiy9IC7qkI3ufi9K7FaWtGPc2gyChLLkLHHciUjtw6VUVGFEUlHr28/YI7UMBCTk
-	rTgQkZt7KkLO5ES5Txd9e1btrXgxpUUrxHqR1lfw6uIyM1BW4VDUwdgyKRIuvZFQ0SuN
-	bSAw==
-X-Gm-Message-State: AKaTC01MiTqB3a8SXsK/gZdzbrVTX0MD/n4qDjfgmfm8oKp8iXRNl+SgVcHC0K9AQoh15w==
-X-Received: by 10.28.66.7 with SMTP id p7mr20604350wma.64.1480352393581;
-	Mon, 28 Nov 2016 08:59:53 -0800 (PST)
+	bh=lBUPmmb2ubVGn8EMJpS/xJyk1RP6xsCSRhFK8sHcanE=;
+	b=NfoAN3VjyulZe0doR+cFGMCv9HOxcrA9wU9bbZQoUQ+kOnRGD4b++vw9ADUB4GIr8k
+	aXmL/vEtVoM529FaQgdliEbrixLWx06vjlFfYJ2FT8Ig4gZ+lVw7WRK3/RtoTTJWIzL1
+	xFRmOl2K3eshhYbNSbPAzD8oL0JViPIvoMhGEe2pSeHlIk7OEHiKyNzMjYCwN9EDe/IV
+	pbfXwBeyOtwy0JRiGfsUcCwOMrH98pZmmmgvmS108AVs4cIRIkIE4n9CBukD34jwW9T1
+	5l/5yL61yDoaMJf0qCJ+tgQbaPGGgk4/DjVmyB44hraKyB1S6feftW/ErGxXdzNfeZb5
+	A+NA==
+X-Gm-Message-State: AKaTC015QwwAOPdFI6o4hBeO5cuQchQk6ud5Z2H6v2bdkEXA9R9KAPrRlhKKnZUBJZj8rQ==
+X-Received: by 10.28.130.137 with SMTP id e131mr19750146wmd.21.1480352394579; 
+	Mon, 28 Nov 2016 08:59:54 -0800 (PST)
 Received: from naos.fritz.box
 	(p20030071EF27C90038C08788B208AAEC.dip0.t-ipconnect.de.
 	[2003:71:ef27:c900:38c0:8788:b208:aaec])
 	by smtp.gmail.com with ESMTPSA id
-	k11sm29756805wmb.18.2016.11.28.08.59.52
+	k11sm29756805wmb.18.2016.11.28.08.59.53
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 28 Nov 2016 08:59:52 -0800 (PST)
+	Mon, 28 Nov 2016 08:59:53 -0800 (PST)
 From: Frank Meerkoetter <meerkoetter@googlemail.com>
 X-Google-Original-From: Frank Meerkoetter <frank@meerkoetter.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Nov 2016 17:59:45 +0100
-Message-Id: <1480352388-7733-3-git-send-email-frank@meerkoetter.org>
+Date: Mon, 28 Nov 2016 17:59:46 +0100
+Message-Id: <1480352388-7733-4-git-send-email-frank@meerkoetter.org>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1480352388-7733-1-git-send-email-frank@meerkoetter.org>
 References: <1480352388-7733-1-git-send-email-frank@meerkoetter.org>
 Cc: Frank Meerkoetter <frank@meerkoetter.org>
-Subject: [meta-oe][PATCH 2/5] Do not expose the redis service to the network by default
+Subject: [meta-oe][PATCH 3/5] Log to syslog
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,29 +59,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2016 16:59:54 -0000
+X-List-Received-Date: Mon, 28 Nov 2016 16:59:55 -0000
 
-Binding it to localhost is a safe default.
+Creating /var/log/redis.log requires root permissions to
+create the file. Use syslog instead so redis does not
+require root.
+
 This affects both sysv and systemd based systems.
 
 Signed-off-by: Frank Meerkoetter <frank@meerkoetter.org>
 ---
- meta-oe/recipes-extended/redis/redis/redis.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-extended/redis/redis/redis.conf | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/meta-oe/recipes-extended/redis/redis/redis.conf b/meta-oe/recipes-extended/redis/redis/redis.conf
-index 923b98e..b932089 100644
+index b932089..ab024ad 100644
 --- a/meta-oe/recipes-extended/redis/redis/redis.conf
 +++ b/meta-oe/recipes-extended/redis/redis/redis.conf
-@@ -30,7 +30,7 @@ port 6379
- # If you want you can bind a single interface, if the bind option is not
- # specified all the interfaces will listen for incoming connections.
- #
--# bind 127.0.0.1
-+bind 127.0.0.1
+@@ -53,14 +53,14 @@ loglevel notice
+ # Specify the log file name. Also 'stdout' can be used to force
+ # Redis to log on the standard output. Note that if you use standard
+ # output for logging but daemonize, logs will be sent to /dev/null
+-logfile /var/log/redis.log
++# logfile /var/log/redis.log
  
- # Specify the path for the unix socket that will be used to listen for
- # incoming connections. There is no default, so Redis will not listen
+ # To enable logging to the system logger, just set 'syslog-enabled' to yes,
+ # and optionally update the other syslog parameters to suit your needs.
+-# syslog-enabled no
++syslog-enabled yes
+ 
+ # Specify the syslog identity.
+-# syslog-ident redis
++syslog-ident redis
+ 
+ # Specify the syslog facility.  Must be USER or between LOCAL0-LOCAL7.
+ # syslog-facility local0
 -- 
 2.7.4
 
