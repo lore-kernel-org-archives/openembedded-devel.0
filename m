@@ -1,48 +1,39 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qk0-f172.google.com (mail-qk0-f172.google.com
-	[209.85.220.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 15EEA71B59
+Return-Path: <razvan.heghedus@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id E0F5C71B2C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2016 15:58:58 +0000 (UTC)
-Received: by mail-qk0-f172.google.com with SMTP id n204so144116368qke.2
+	Mon, 28 Nov 2016 16:16:48 +0000 (UTC)
+Received: from us-aus-exch2.ni.corp.natinst.com
+	(us-aus-exch2.ni.corp.natinst.com [130.164.68.12])
+	by us-aus-skprod3.natinst.com (8.15.0.59/8.15.0.59) with ESMTPS id
+	uASGGnmI016677
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2016 07:59:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=YIJlmNinqHenPnK2ZMnEws4c0H2+eTwxZDg9JvqhOXM=;
-	b=fJf7QtsySbZrRg2BICHxLnC2jBqoaa3hHwVgcNzMEYuzOHQ5g+yV1oNaskUoE3/v0O
-	o8u6PZTM1NoXA2vsKm+nHIZyAbmP1QZYbgWHHRyktK88VjAF6Wz0Urx3QLs22o62UBcl
-	2na3gir3Bh2fTrYxuJ3ddJp1wfCkK2b/GW8pvVFCzdl0RR7JbJKGX2ffiUetlZSctwwA
-	tcfPjAPRFFxkLKLulfMMwd0PMhJZmtJLntyYy83ti8Pddfh+NVMEBUebavMqMR7Pz/kc
-	h4NddNObMgRqePDRyDpj2Houjl9pYltxsoET1eyit6UXWCVNcFhPpZsaaadfUfQZnSDo
-	+6JQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=YIJlmNinqHenPnK2ZMnEws4c0H2+eTwxZDg9JvqhOXM=;
-	b=TSs+q/Aw8ubZO5j6TfHq8HK1Y0kPkZhlpVXO8VKzdRUvEAU9TCEx64ORGtIgFstwQA
-	2St08LTtkUlMHZiCykyJos1sRxaXLqRgxgo+4HZkugT4/SsbD8HtB8ByZVa6pxvBiPK+
-	rbZY7ZM0B6HDYhkcckjYd2qI/xycGiAypZ0vN/haXqLl9YqLYLWWU/yqbKWZt80tSUx4
-	M1YtmPiJ8s3psPeARdNZNQ9RAzy7+y3gXPEFZ3zCHs9i3uSWIgG3rxOTWepb8fSSiXuf
-	HIZCFmavLJok7OI53cuZo02yoI5uNbMtV/maM7x1vLPGRvJ7iwAfG1Q0ts7pqrumx8Oq
-	Qx6w==
-X-Gm-Message-State: AKaTC01glgUxZVK22WQNGHi8E31tryJOFvvodfm4NSoN3WKTBDZ/VdWPJ8Ro6gTHaMW1jvuKZC8pPdC/yyj/7Hsv
-X-Received: by 10.55.5.145 with SMTP id 139mr19466510qkf.77.1480348740082;
-	Mon, 28 Nov 2016 07:59:00 -0800 (PST)
+	Mon, 28 Nov 2016 10:16:49 -0600
+Received: from us-aus-exch3.ni.corp.natinst.com (130.164.68.13) by
+	us-aus-exch2.ni.corp.natinst.com (130.164.68.12) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Mon, 28 Nov 2016 10:16:49 -0600
+Received: from us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) by
+	us-aus-exch3.ni.corp.natinst.com (130.164.68.13) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Mon, 28 Nov 2016 10:16:49 -0600
+Received: from razvanh-ro.natinst.com (130.164.49.7) by
+	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
+	Server
+	id 15.0.1156.6 via Frontend Transport; Mon, 28 Nov 2016 10:16:48 -0600
+From: Heghedus Razvan <razvan.heghedus@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 28 Nov 2016 18:16:32 +0200
+Message-ID: <20161128161632.32542-1-razvan.heghedus@ni.com>
+X-Mailer: git-send-email 2.10.2
 MIME-Version: 1.0
-Received: by 10.140.85.136 with HTTP; Mon, 28 Nov 2016 07:58:39 -0800 (PST)
-In-Reply-To: <20161126001115.GB3271@jama>
-References: <1479910421-28750-1-git-send-email-ross.burton@intel.com>
-	<1479910421-28750-2-git-send-email-ross.burton@intel.com>
-	<20161126001115.GB3271@jama>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 28 Nov 2016 15:58:39 +0000
-Message-ID: <CAJTo0LZHj_WNK3OnzK4acokQ2sis7HD=bA1=W-OK361r86Kv-A@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH 2/4] meta-oe: add explicit dependencies on gnome-common
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2016-11-28_04:, , signatures=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	suspectscore=1
+	malwarescore=0 phishscore=0 adultscore=0 bulkscore=0 classifier=spam
+	adjust=0 reason=mlx scancount=1 engine=8.0.1-1609300000
+	definitions=main-1611280266
+Subject: [meta-oe][PATCH v2] python-pyconnman: Add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,20 +46,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2016 15:58:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 28 Nov 2016 16:16:49 -0000
+Content-Type: text/plain
 
-On 26 November 2016 at 00:11, Martin Jansa <martin.jansa@gmail.com> wrote:
+Signed-off-by: Heghedus Razvan <razvan.heghedus@ni.com>
+---
+ .../python-pyconnman/python-pyconnman_0.1.0.bb             | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-python/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb
 
-> Doesn't it cause libgxim failure reported here?
-> http://lists.openembedded.org/pipermail/openembedded-devel/
-> 2016-November/110050.html
->
+diff --git a/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb b/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb
+new file mode 100644
+index 0000000..6eeab7e
+--- /dev/null
++++ b/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb
+@@ -0,0 +1,14 @@
++DESCRIPTION = "Python-based Network Connectivity Management"
++HOMEPAGE = "https://pypi.python.org/pypi/pyconnman/"
++LICENSE = "Apache-2.0"
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
++
++SRC_URI[md5sum] = "b7fa82034b1c0e1fb1b518ffe3bb4fc0"
++SRC_URI[sha256sum] = "46c64c0692063fd0c9fb0216d49f7884bec9fa9760d8473db4b1e2f8162fab4a"
++
++PYPI_PACKAGE = "pyconnman"
++
++inherit pypi setuptools
++
++RDEPENDS_${PN} = "python-dbus python-pprint"
+\ No newline at end of file
+-- 
+2.10.2
 
-In a sense, because the configure would have been throwing errors silently
-that gnome-comon wasn't present.
-
-Sent a v2 incorporating a change to disable the fatal warnings in gxim.
-
-Ross
 
