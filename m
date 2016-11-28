@@ -1,53 +1,47 @@
-Return-Path: <meerkoetter@googlemail.com>
-Received: from mail-wj0-f196.google.com (mail-wj0-f196.google.com
-	[209.85.210.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 5ED3871B58
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ua0-f195.google.com (mail-ua0-f195.google.com
+	[209.85.217.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 85E936059F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2016 16:59:56 +0000 (UTC)
-Received: by mail-wj0-f196.google.com with SMTP id jb2so14870603wjb.3
+	Mon, 28 Nov 2016 17:48:40 +0000 (UTC)
+Received: by mail-ua0-f195.google.com with SMTP id 50so11105607uae.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2016 08:59:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=+cr6lsw3ovDfkTIuVxa7gS8AaCy9MhJlblzfj2R6qM0=;
-	b=abTEndAm/Mme/FNoj2hJJG2YVRWTxh8S8Bz53zzWWjxg1D881SISh72o8AzrLywarE
-	/jRXOkzuboEO+jDlbYkThsyvtzJBhtVRFFqeUae+KS2INcElk3QHkmd9F9Ahb/6qIB9L
-	J3xea+tKtxmik6SR3oDecOCECM8p7DIW+FeZoOjDVvJeym/vo8I6HP56h7ktUQdSw9vI
-	I4fP+RFMfDwgqbdPhHT2urcXWQPX3vsxuk5YnW+akcTBCPME4cX5MzwlFr5Obr+yxvXx
-	e94L6dVNzWNdXYFkCytQL+boFDz0zQcko3sUqZPiom6ul+eMdc4ckxO62vUAI4ZmR27l
-	e2aw==
+	Mon, 28 Nov 2016 09:48:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=ikd5aIIjahRwO2mYwiswoVUhZBel5a6ZzR76Rs51NYU=;
+	b=kwRAcjHRrlTQooEI+IMz5ben2ypdM9LAV8KTAaxM7JZxIxQK9IwvgXNwYALfs8z+4B
+	RKKIhytEaTHx4V+0oijc/BoNpSlJaa4RdbWK/MgSckZkZCuyQV4/hgxy4sK6L5ridHdp
+	9YKwE9ZhZ03wptngg9spE3B5a0r3jSqUVLq5Txv/GMbBbNGXQT6c13qO1w/mG7o6iZmT
+	GO2yiNtrjuFHgYMbrGDv3Ufcy5iQGH3R537SxrgIBUFvOej7i+G3GJbjI3e39OKaLBAJ
+	DAP4jugyD1gM5BJ1qFealf4ZaRoTTUTr9SOGKtFQju0I+ZQaesjhwUp6tJ8QULJBMwmM
+	elZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=+cr6lsw3ovDfkTIuVxa7gS8AaCy9MhJlblzfj2R6qM0=;
-	b=VvLCTa6rT2HbYP5aXDNMthF+n6D9wGcYD6g8DL+EPKjHhqd5+cFEv/QY6ESIsACKoP
-	0vGEe0wyxc6NSemnY6q1GRN5lviHPBN+o7JOZowWCxLtcg+4DZzXMOnuNXShlFxhMxVB
-	CUsQlyPF5IO5moOPknz83YDqLosWm6vtxev95tp1cr/KoL3GzNIg40nKMyq08J5S5uT6
-	X+OM8/suWUkvQlVGg6YeWrLBWUrlPN/ZMctF9DLy9GVl+4UnTWFhKI/fmRXQ0z2UpJMc
-	gv/tfyL4lOCITWiddge02xdrgkPqNmkOfDMYA65Hyu7rHk24WlREj3ffmexfU1jpQgVv
-	DiyA==
-X-Gm-Message-State: AKaTC0390vuWf8fqY+TlfARZV3EVqk6n379PPkasaQ8BntkBAK5hf1AXYvZH7O4YdxmtYw==
-X-Received: by 10.194.71.69 with SMTP id s5mr19797881wju.197.1480352398080;
-	Mon, 28 Nov 2016 08:59:58 -0800 (PST)
-Received: from naos.fritz.box
-	(p20030071EF27C90038C08788B208AAEC.dip0.t-ipconnect.de.
-	[2003:71:ef27:c900:38c0:8788:b208:aaec])
-	by smtp.gmail.com with ESMTPSA id
-	k11sm29756805wmb.18.2016.11.28.08.59.57
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 28 Nov 2016 08:59:57 -0800 (PST)
-From: Frank Meerkoetter <meerkoetter@googlemail.com>
-X-Google-Original-From: Frank Meerkoetter <frank@meerkoetter.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Nov 2016 17:59:48 +0100
-Message-Id: <1480352388-7733-6-git-send-email-frank@meerkoetter.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1480352388-7733-1-git-send-email-frank@meerkoetter.org>
-References: <1480352388-7733-1-git-send-email-frank@meerkoetter.org>
-Cc: Frank Meerkoetter <frank@meerkoetter.org>
-Subject: [meta-oe][PATCH 5/5] Increase the max number of fds to match the concfig in redis.conf
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=ikd5aIIjahRwO2mYwiswoVUhZBel5a6ZzR76Rs51NYU=;
+	b=eUBLqwkiUYJyPc2b1/l+S14A+EqmqOiend27gTeu9LW+iVE7RaML4LAC+vHrpYOjpr
+	ZJMbqGo6/1Xmj8Yps4Li0AyhGfvJ2fiDc8pzn08I1HC0Ax3ssJ0DbaWyGv88uszqUMRK
+	EdfHYSC+Bs0TX4JVyzEvGzQi144oCywk+fnvl2rFbdKD/imaQyHoz3wsAJ7DlGhjofa7
+	Sy+eCyLvvSnoDRhhJ26YTwofUTDRimLrHu6V8OajX6kQME3trN+/surco/tUV0q3ne9/
+	g0VWnmTxRJrnnVtkILcsNGx7FpZSDYNJUoVhbNHZEKvQ0aFKCeTTuEnPpITR2HSOuN+q
+	jb/A==
+X-Gm-Message-State: AKaTC03+F7ANDYHYyEJ3zynSbk2SVmlIReN237+o3cgMva9ItWY4gO5gXSWjLNHtD1AKEqbj9V+ZYnpxyd99DA==
+X-Received: by 10.176.82.181 with SMTP id v50mr14260937uav.31.1480355321544;
+	Mon, 28 Nov 2016 09:48:41 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.176.5.136 with HTTP; Mon, 28 Nov 2016 09:48:11 -0800 (PST)
+In-Reply-To: <A6D1B2BE-C658-4114-AF39-FAC0249D4F98@dominion.thruhere.net>
+References: <20161123092209.23699-1-raj.khem@gmail.com>
+	<20161123092209.23699-8-raj.khem@gmail.com>
+	<20161126001515.GB8369@jama>
+	<A6D1B2BE-C658-4114-AF39-FAC0249D4F98@dominion.thruhere.net>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 28 Nov 2016 09:48:11 -0800
+Message-ID: <CAMKF1spOfHv6Rs1rssraDFLfqLh-i0upcHFjgYCV0Af02FFr+w@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-multimedia][PATCH 08/49] kodi: Add krypton/17.x Jarvis/16.x recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,31 +54,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2016 16:59:57 -0000
+X-List-Received-Date: Mon, 28 Nov 2016 17:48:40 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Now that the processes no longer runs as root, we need to increase
-the limit for it.
+On Fri, Nov 25, 2016 at 11:42 PM, Koen Kooi <koen@dominion.thruhere.net> wrote:
+>
+>> Op 26 nov. 2016, om 01:15 heeft Martin Jansa <martin.jansa@gmail.com> het volgende geschreven:
+>>
+>> On Wed, Nov 23, 2016 at 01:21:28AM -0800, Khem Raj wrote:
+>>> 16.x is the default since its the latest released version
+>>>
+>>> remove obsoleted xbmc recipes
+>>> rename to recipes-mediacenter
+>>> +S = "${WORKDIR}/git"
+>>> +
+>>> +# breaks compilation
+>>> +ASNEEDED = ""
+>>> +
+>>> +ACCEL ?= ""
+>>> +ACCEL_x86 = "vaapi vdpau"
+>>> +ACCEL_x86-64 = "vaapi vdpau"
+>>> +
+>>> +PACKAGECONFIG ??= "${ACCEL}"
+>>> +PACKAGECONFIG_append += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' x11', '', d)}"
+>>> +PACKAGECONFIG_append += "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', ' opengl', ' openglesv2', d)}"
+>>> +
+>>> +PACKAGECONFIG[opengl] = "--enable-gl,--enable-gles,"
+>>> +PACKAGECONFIG[openglesv2] = "--enable-gles,--enable-gl,virtual/egl"
+>>> +PACKAGECONFIG[vaapi] = "--enable-vaapi,--disable-vaapi,libva"
+>>> +PACKAGECONFIG[vdpau] = "--enable-vdpau,--disable-vdpau,libvdpau"
+>>> +PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5"
+>>> +PACKAGECONFIG[x11] = "--enable-x11,--disable-x11,libxinerama libxmu libxrandr libxtst"
+>>> +PACKAGECONFIG[pulseaudio] = "--enable-pulse,--disable-pulse,pulseaudio"
+>>
+>> Did I overlook libva recipe somewhere?
+>>
+>> It doesn't even start building for qemux86* because of this libva and
+>> for qemuarm it fails to configure:
+>> http://lists.openembedded.org/pipermail/openembedded-devel/2016-November/110050.html
+>
+> libva is in meta-intel, meta-amd and meta-kodi. I guess we should consider moving it to OE-core or meta-oe.
 
-This only affects systemd based systems.
+I think meta-oe is a good destination for this.
 
-Signed-off-by: Frank Meerkoetter <frank@meerkoetter.org>
----
- meta-oe/recipes-extended/redis/redis/redis.service | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-oe/recipes-extended/redis/redis/redis.service b/meta-oe/recipes-extended/redis/redis/redis.service
-index 577bb14..36d2985 100644
---- a/meta-oe/recipes-extended/redis/redis/redis.service
-+++ b/meta-oe/recipes-extended/redis/redis/redis.service
-@@ -8,6 +8,7 @@ Group=redis
- ExecStart=/usr/bin/redis-server /etc/redis/redis.conf
- ExecStop=/usr/bin/redis-cli shutdown
- Restart=always
-+LimitNOFILE=10032
- 
- [Install]
- WantedBy=multi-user.target
--- 
-2.7.4
-
+>
+> regards,
+>
+> Koen
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
