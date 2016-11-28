@@ -1,45 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E8A7606A8
+Return-Path: <joe.slater@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 6760E71A6C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2016 21:16:20 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id i88so6966487pfk.2
+	Mon, 28 Nov 2016 22:12:57 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uASMCwsg020583
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Nov 2016 13:16:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=WtywMvBmpMkxE9oJzB2bP4Yv2HlcvG1vr0uUDwFwDWM=;
-	b=R6PD9UlwrYE+yMqPd6x0RkRqXWtzNad+eeCQiYh8CCcn8c6NltWzPNQKsCCxoQBmsz
-	hjantYOk/PU0nGsMtj0GM5KLWmhHrT9jTzQIv0MKCssNoYi31y/kt1Ij4qYDSx+v1Zcq
-	bEAw3+9AgOCW9lNRglrBzYh32i1t0yxqjUL0XBPxJ8eShCg89vjwNHJQCFPFGQEmo1jn
-	a3YerWC7NBzDNWbQds1CKfBD0mU1NBMlZKd/b8a0FH7cOrdVThBMghCeqXjGuHjoT3MA
-	I8lxe/qY1EQICCogZQow5U2hAc8/aGJ5Noyit/Oopcv/cB7qzFWUn7ikd6QE+zmJ4EsH
-	nbGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=WtywMvBmpMkxE9oJzB2bP4Yv2HlcvG1vr0uUDwFwDWM=;
-	b=F1osEmAypCdZIOCvcy8UJt6Rz3AP6TnrCqmafo1EjGAP7aPbP80UoNCeZx9YjJfMn1
-	jvKzrpVpb6897KD/2GN30+lFP8epa86YiZg2htT/pTzGPUfz4EtPgJY9WlylXl6zsN52
-	hMYmTRy7gggO9O+uqFOiE2kPAAfZ4V4JF6zv4AKUuR/2RjhGl+y0bb9qMp4Q52d2J5fi
-	ccaZ3+Q7HVcL2pikSjU3ll7bz+CnUZRwTwxVzWTQbIQvAJJhuPNhuJA3PMuK3UvMGXi0
-	PUWFRhF88cKuy1oP0NdgkBg0yCS51M4ifXRgn7uwRXwK9mqtGUtd7wtKtXBPyEu2SRbw
-	+SoA==
-X-Gm-Message-State: AKaTC03C/UynpZ3uDYa+O4PMSt5A+xhEP9JgXDhl6Gp4KjXasVQqmUjOfGTfexHyomAt5Q==
-X-Received: by 10.84.202.12 with SMTP id w12mr54525748pld.156.1480367782181;
-	Mon, 28 Nov 2016 13:16:22 -0800 (PST)
-Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
-	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	v82sm89405438pfi.6.2016.11.28.13.16.21
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 28 Nov 2016 13:16:21 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Nov 2016 13:16:16 -0800
-Message-Id: <20161128211616.2710-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.10.2
-Subject: [meta-oe][PATCH] jsoncpp: Remove unused patch
+	Mon, 28 Nov 2016 14:12:58 -0800 (PST)
+Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Mon, 28 Nov 2016 14:12:58 -0800
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 28 Nov 2016 14:12:58 -0800
+Message-ID: <1480371178-5052-1-git-send-email-jslater@windriver.com>
+X-Mailer: git-send-email 1.7.3.4
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH 1/1] ntp: update to version 4.8p9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,173 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Nov 2016 21:16:22 -0000
+X-List-Received-Date: Mon, 28 Nov 2016 22:12:58 -0000
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+This fixes two CVE defects.
+
+Signed-off-by: Joe Slater <jslater@windriver.com>
 ---
- .../0001-jsoncpp-rename-features-header-file.patch | 152 ---------------------
- 1 file changed, 152 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-jsoncpp-rename-features-header-file.patch
+ .../ntp/{ntp_4.2.8p8.bb => ntp_4.2.8p9.bb}         |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/ntp/{ntp_4.2.8p8.bb => ntp_4.2.8p9.bb} (97%)
 
-diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-jsoncpp-rename-features-header-file.patch b/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-jsoncpp-rename-features-header-file.patch
-deleted file mode 100644
-index f1397ea..0000000
---- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp/0001-jsoncpp-rename-features-header-file.patch
-+++ /dev/null
-@@ -1,152 +0,0 @@
--Issue: Build error in TDK DS_stub
--
--In file included from /home/ubuntu/work/daisy-rdk/build-qemux86hyb/tmp/sysroots/qemux86hyb/usr/include/c++/i586-rdk-linux/bits/c++config.h:426:0,
--                 from /home/ubuntu/work/daisy-rdk/build-qemux86hyb/tmp/sysroots/qemux86hyb/usr/include/c++/string:38,
--                 from /home/ubuntu/work/daisy-rdk/build-qemux86hyb/tmp/sysroots/qemux86hyb/usr/include/json/value.h:12,
--                 from /home/ubuntu/work/daisy-rdk/build-qemux86hyb/tmp/sysroots/qemux86hyb/usr/include/json/json.h:10,
--                 from ./include/DeviceSettingsAgent.h:15,
--                 from src/DeviceSettingsAgent.cpp:13:
--/home/ubuntu/work/daisy-rdk/build-qemux86hyb/tmp/sysroots/qemux86hyb/usr/include/c++/i586-rdk-linux/bits/os_defines.h:44:19: error: missing binary operator before token "("
-- #if __GLIBC_PREREQ(2,15) && defined(_GNU_SOURCE)
--
--The issue was jsoncpp has features.h which was conflicting with the system
--header file features.h.
--
--So renamed the header file  features.h in jsoncpp to json-features.h so
--as to localize the effect of this change within jsoncpp.
--
-- Signed-off-by: Ridish Aravindan <ridish.ra@lnttechservices.com>
--
--Index: jsoncpp-src-0.6.0-rc2/include/json/json-features.h
--===================================================================
----- /dev/null	1970-01-01 00:00:00.000000000 +0000
--+++ jsoncpp-src-0.6.0-rc2/include/json/json-features.h	2014-08-27 06:41:40.000000000 +0000
--@@ -0,0 +1,49 @@
--+// Copyright 2007-2010 Baptiste Lepilleur
--+// Distributed under MIT license, or public domain if desired and
--+// recognized in your jurisdiction.
--+// See file LICENSE for detail or copy at http://jsoncpp.sourceforge.net/LICENSE
--+
--+#ifndef CPPTL_JSON_FEATURES_H_INCLUDED
--+# define CPPTL_JSON_FEATURES_H_INCLUDED
--+
--+#if !defined(JSON_IS_AMALGAMATION)
--+# include "forwards.h"
--+#endif // if !defined(JSON_IS_AMALGAMATION)
--+
--+namespace Json {
--+
--+   /** \brief Configuration passed to reader and writer.
--+    * This configuration object can be used to force the Reader or Writer
--+    * to behave in a standard conforming way.
--+    */
--+   class JSON_API Features
--+   {
--+   public:
--+      /** \brief A configuration that allows all features and assumes all strings are UTF-8.
--+       * - C & C++ comments are allowed
--+       * - Root object can be any JSON value
--+       * - Assumes Value strings are encoded in UTF-8
--+       */
--+      static Features all();
--+
--+      /** \brief A configuration that is strictly compatible with the JSON specification.
--+       * - Comments are forbidden.
--+       * - Root object must be either an array or an object value.
--+       * - Assumes Value strings are encoded in UTF-8
--+       */
--+      static Features strictMode();
--+
--+      /** \brief Initialize the configuration like JsonConfig::allFeatures;
--+       */
--+      Features();
--+
--+      /// \c true if comments are allowed. Default: \c true.
--+      bool allowComments_;
--+
--+      /// \c true if root must be either an array or an object value. Default: \c false.
--+      bool strictRoot_;
--+   };
--+
--+} // namespace Json
--+
--+#endif // CPPTL_JSON_FEATURES_H_INCLUDED
--Index: jsoncpp-src-0.6.0-rc2/include/json/json.h
--===================================================================
----- jsoncpp-src-0.6.0-rc2.orig/include/json/json.h	2011-05-02 21:47:24.000000000 +0000
--+++ jsoncpp-src-0.6.0-rc2/include/json/json.h	2014-08-27 06:39:13.000000000 +0000
--@@ -10,6 +10,6 @@
-- # include "value.h"
-- # include "reader.h"
-- # include "writer.h"
---# include "features.h"
--+# include "json-features.h"
-- 
-- #endif // JSON_JSON_H_INCLUDED
--Index: jsoncpp-src-0.6.0-rc2/include/json/reader.h
--===================================================================
----- jsoncpp-src-0.6.0-rc2.orig/include/json/reader.h	2011-05-02 21:47:24.000000000 +0000
--+++ jsoncpp-src-0.6.0-rc2/include/json/reader.h	2014-08-27 06:39:32.000000000 +0000
--@@ -7,7 +7,7 @@
-- # define CPPTL_JSON_READER_H_INCLUDED
-- 
-- #if !defined(JSON_IS_AMALGAMATION)
---# include "features.h"
--+# include "json-features.h"
-- # include "value.h"
-- #endif // if !defined(JSON_IS_AMALGAMATION)
-- # include <deque>
--Index: jsoncpp-src-0.6.0-rc2/include/json/features.h
--===================================================================
----- jsoncpp-src-0.6.0-rc2.orig/include/json/features.h	2011-05-02 21:46:58.000000000 +0000
--+++ /dev/null	1970-01-01 00:00:00.000000000 +0000
--@@ -1,49 +0,0 @@
---// Copyright 2007-2010 Baptiste Lepilleur
---// Distributed under MIT license, or public domain if desired and
---// recognized in your jurisdiction.
---// See file LICENSE for detail or copy at http://jsoncpp.sourceforge.net/LICENSE
---
---#ifndef CPPTL_JSON_FEATURES_H_INCLUDED
---# define CPPTL_JSON_FEATURES_H_INCLUDED
---
---#if !defined(JSON_IS_AMALGAMATION)
---# include "forwards.h"
---#endif // if !defined(JSON_IS_AMALGAMATION)
---
---namespace Json {
---
---   /** \brief Configuration passed to reader and writer.
---    * This configuration object can be used to force the Reader or Writer
---    * to behave in a standard conforming way.
---    */
---   class JSON_API Features
---   {
---   public:
---      /** \brief A configuration that allows all features and assumes all strings are UTF-8.
---       * - C & C++ comments are allowed
---       * - Root object can be any JSON value
---       * - Assumes Value strings are encoded in UTF-8
---       */
---      static Features all();
---
---      /** \brief A configuration that is strictly compatible with the JSON specification.
---       * - Comments are forbidden.
---       * - Root object must be either an array or an object value.
---       * - Assumes Value strings are encoded in UTF-8
---       */
---      static Features strictMode();
---
---      /** \brief Initialize the configuration like JsonConfig::allFeatures;
---       */
---      Features();
---
---      /// \c true if comments are allowed. Default: \c true.
---      bool allowComments_;
---
---      /// \c true if root must be either an array or an object value. Default: \c false.
---      bool strictRoot_;
---   };
---
---} // namespace Json
---
---#endif // CPPTL_JSON_FEATURES_H_INCLUDED
+diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p8.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p9.bb
+similarity index 97%
+rename from meta-networking/recipes-support/ntp/ntp_4.2.8p8.bb
+rename to meta-networking/recipes-support/ntp/ntp_4.2.8p9.bb
+index 202d1a3..9d74c96 100644
+--- a/meta-networking/recipes-support/ntp/ntp_4.2.8p8.bb
++++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p9.bb
+@@ -23,8 +23,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
+            file://ntpd.list \
+ "
+ 
+-SRC_URI[md5sum] = "4a8636260435b230636f053ffd070e34"
+-SRC_URI[sha256sum] = "2ab3d0b5f0456e6311dda1cc27ab75da108762773a19e46abd938bd9407b97ee"
++SRC_URI[md5sum] = "857452b05f5f2e033786f77ade1974ed"
++SRC_URI[sha256sum] = "b724287778e1bac625b447327c9851eedef020517a3545625e9f652a90f30b72"
+ 
+ inherit autotools update-rc.d useradd systemd pkgconfig
+ 
 -- 
-2.10.2
+1.7.9.5
 
 
