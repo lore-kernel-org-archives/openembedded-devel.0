@@ -1,51 +1,50 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wj0-f196.google.com (mail-wj0-f196.google.com
-	[209.85.210.196])
-	by mail.openembedded.org (Postfix) with ESMTP id CB985719F3
+Return-Path: <meerkoetter@googlemail.com>
+Received: from mail-wj0-f170.google.com (mail-wj0-f170.google.com
+	[209.85.210.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 46603719F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Nov 2016 09:15:25 +0000 (UTC)
-Received: by mail-wj0-f196.google.com with SMTP id he10so2997439wjc.2
+	Tue, 29 Nov 2016 10:04:32 +0000 (UTC)
+Received: by mail-wj0-f170.google.com with SMTP id xy5so140271286wjc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Nov 2016 01:15:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=SXDP1mNs/M0n/l+1r5HE0HFGf0INssHKlwank83zhLs=;
-	b=l5Hzv1IOBGObJeSVNG4BZrIRDXH6nB/eavpgXXehIoy5vTjRVANJ0jV2b1jFezE7yv
-	5dJ0R/tohJ8cSfRpA1WtfI9Wz4q1tUAsq/V9etV5lq2FYvgJ+hVMKLj0/bvCzuHpkCmE
-	zhsaLBRrX9qaPW6UW6Z9wl67e2KYFB4pJdaMQqyydF18VSeIATD9Pwmqfg/FDczuxHbY
-	yxSHb6+vdqKwOs4go/4Gs8pljDqKvxQE9UegvTkBDklTUkENaFjehzQ6QIylhDYyHR2p
-	5W3KrGExXLztpgkv5p94VptA9rj37/xA1OU0hkPfz5CVpBHcHOzTBiy8UjL3v5gnXQKS
-	9jxA==
+	Tue, 29 Nov 2016 02:04:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=8QYcnImZ3jft2/nswY2CHuy/Xjw2VySqKHVqtmhQeTg=;
+	b=a/eSPoqcXLhpM7RZVjhR9rj0PHj7A7txAFYs2tIiF01I3viwgiPVluWoVJfEuBLt/l
+	3UNcw5JqWMyDQtT8LFsWea0g+cImpImqMK4GJJSLRWcWJGZkRupCv9evUCIlDmvMuDtN
+	W99iRj/19OL5Sz+XW29fVUmG/ApZjVTgLtZv9vYKPCgFmcScOhEScAtsJGtsEVWqABbC
+	PwL/sIDLCjVYQvBJYM4Y8Uv1LgzejY6VMhzCducYueSBFTmJ+gJEGQYGx3sKARTzL4VZ
+	AatoxjpLiP6RL6vXm/jwDAnHt+BFAX5UQMQHE2OG/+b4CHVxUHrm6TX7EOLn+2GL4VAD
+	Ttcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=SXDP1mNs/M0n/l+1r5HE0HFGf0INssHKlwank83zhLs=;
-	b=YAO27uEnjfff5jIwWoGtaHVnB7CK6KXpgl8FtLr+Ky9kP2ok56q8GQJHq8hhZZSea0
-	LNNEuBPD3wQpfvFYj6/cC8JbHYQ8xJme/udnJcNK9BjXlEXW+BRmZs3fn4gSGdU8kZhS
-	yvN+kGSs+OZQuKfTLNvzRDTd3ew9fNIljN0JCfl/UxpHK0K4RCf1vxtJoa7oTH0YCD9L
-	equsM8I87ONKQ5SuO4hKmQ1YIbO/xMk6ROq8Uir9PAA68GMB+vzEpEaRV9qPLVdtrwak
-	KKG1uNGN9Mj33OrnkD+zJm7Kh0uU9z9mkDNYzrr9CxTi7yFWOAPUNS5ypa3SaqNMkjAc
-	MWDA==
-X-Gm-Message-State: AKaTC00Kt2yPkWekGreKOuJOUviQzS/raNwO1cySSTRBKc0y4T3bynEb4j1SEYoIFgHO4Q==
-X-Received: by 10.194.95.35 with SMTP id dh3mr22766133wjb.141.1480410926631;
-	Tue, 29 Nov 2016 01:15:26 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	d85sm1721892wmd.17.2016.11.29.01.15.25
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 29 Nov 2016 01:15:25 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 29 Nov 2016 10:15:28 +0100
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=8QYcnImZ3jft2/nswY2CHuy/Xjw2VySqKHVqtmhQeTg=;
+	b=NVbP0XmU7AhD4XcqqUgHy/LB6i7+jEVxWcWA4AXjNkPvJ4SREiCRaIboJcyaJCr3as
+	n1DXnOcdKpzN1xDz75VKQgdPkjp8cqzyte35zRErNoOvsSTYiqx28sNvnzJvzkaAnKvh
+	VMDGpVB0j10SxjZ7BUflqtrvDd1MqnH0nkp+rPVLwLgU5XN4u+BHVobUGhJvXD2f5tB1
+	13aNxYiRAp6kFWo+4RORQHsEeXlqdzwhOMwROukDYmTFS0Cvfsr6GDSW0E+jnzi71P2e
+	z0yWvBH58gD7f+Pzmy5wMoGTVp/eOcow3ZnZUnO7xEemw7bJosb39h2Ifwahb+lqnbIX
+	hSOQ==
+X-Gm-Message-State: AKaTC00gMdqqVDc1+hQtyI+j6/O0LQGSGljDF1HTVjvQi8tXXDbvW97CoKKAKzFQs8hcLw==
+X-Received: by 10.194.127.104 with SMTP id nf8mr22784148wjb.39.1480413873679; 
+	Tue, 29 Nov 2016 02:04:33 -0800 (PST)
+Received: from naos.fritz.box
+	(p20030071EF35F10038C08788B208AAEC.dip0.t-ipconnect.de.
+	[2003:71:ef35:f100:38c0:8788:b208:aaec])
+	by smtp.gmail.com with ESMTPSA id
+	e188sm1919656wma.21.2016.11.29.02.04.32
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 29 Nov 2016 02:04:32 -0800 (PST)
+From: Frank Meerkoetter <meerkoetter@googlemail.com>
+X-Google-Original-From: Frank Meerkoetter <frank@meerkoetter.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161129091528.GC2700@jama>
-References: <1480352388-7733-1-git-send-email-frank@meerkoetter.org>
-MIME-Version: 1.0
-In-Reply-To: <1480352388-7733-1-git-send-email-frank@meerkoetter.org>
-User-Agent: Mutt/1.7.1 (2016-10-04)
+Date: Tue, 29 Nov 2016 11:04:21 +0100
+Message-Id: <1480413866-25885-1-git-send-email-frank@meerkoetter.org>
+X-Mailer: git-send-email 2.7.4
 Cc: Frank Meerkoetter <frank@meerkoetter.org>
-Subject: Re: [meta-oe][PATCH 0/5] Improve the redis recipe with a focus on systemd support
+Subject: [meta-oe][PATCHv2 0/5] redis: improve the recipe with focus on systemd support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,62 +57,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Nov 2016 09:15:26 -0000
-X-Groupsio-MsgNum: 64092
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="JWEK1jqKZ6MHAcjA"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 29 Nov 2016 10:04:33 -0000
 
---JWEK1jqKZ6MHAcjA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Improve the redis recipe with focus on systemd support.
 
-On Mon, Nov 28, 2016 at 05:59:43PM +0100, Frank Meerkoetter wrote:
-> Improve the redis recipe with a focus on systemd support.
->=20
-> Frank Meerkoetter (5):
->   Add a systemd service file for redis
->   Do not expose the redis service to the network by default
->   Log to syslog
->   Do not run redis as root
->   Increase the max number of fds to match the concfig in redis.conf
+Frank Meerkoetter (5):
+  redis: add a systemd service file
+  redis: do not expose the service to the network by default
+  redis: log to syslog
+  redis: do not run as root
+  redis: increase the max number of fds to actually match redis.conf
 
-Please follow:
-http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
+ meta-oe/recipes-extended/redis/redis/redis.conf    |  8 ++++----
+ meta-oe/recipes-extended/redis/redis/redis.service | 15 +++++++++++++++
+ meta-oe/recipes-extended/redis/redis_3.0.2.bb      | 21 ++++++++++++++++++++-
+ 3 files changed, 39 insertions(+), 5 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/redis/redis/redis.service
 
-and start the commit messages with
-"redis: "
+-- 
+2.7.4
 
->=20
->  meta-oe/recipes-extended/redis/redis/redis.conf    |  8 ++++----
->  meta-oe/recipes-extended/redis/redis/redis.service | 15 +++++++++++++++
->  meta-oe/recipes-extended/redis/redis_3.0.2.bb      | 21 ++++++++++++++++=
-++++-
->  3 files changed, 39 insertions(+), 5 deletions(-)
->  create mode 100644 meta-oe/recipes-extended/redis/redis/redis.service
->=20
-> --=20
-> 2.7.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---JWEK1jqKZ6MHAcjA
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWD1HLwAKCRA3VSO3ZXaA
-HFs3AJ9PyiRlV6z21JTRu1Q2ILNRRAAmvACgiMtp0AHMqPdY4Y7/j6LJCfKYFqg=
-=b7tW
------END PGP SIGNATURE-----
-
---JWEK1jqKZ6MHAcjA--
