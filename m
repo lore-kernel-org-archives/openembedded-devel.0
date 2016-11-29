@@ -1,29 +1,45 @@
-Return-Path: <jose.a.lamego@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 7526F71A22
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-vk0-f65.google.com (mail-vk0-f65.google.com
+	[209.85.213.65])
+	by mail.openembedded.org (Postfix) with ESMTP id C9A9F719DB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Nov 2016 22:34:42 +0000 (UTC)
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-	by orsmga101.jf.intel.com with ESMTP; 29 Nov 2016 14:34:44 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.31,570,1473145200"; 
-	d="asc'?scan'208";a="36969024"
-Received: from jalamego-mobl2.zpn.intel.com (HELO [10.219.5.146])
-	([10.219.5.146])
-	by orsmga005.jf.intel.com with ESMTP; 29 Nov 2016 14:34:43 -0800
-To: Tom Rini <trini@konsulko.com>, openembedded-devel@lists.openembedded.org
-References: <4717571.f7GXZOAcRz@peggleto-mobl.ger.corp.intel.com>
-	<20161129204327.GG2546@bill-the-cat>
-From: Jose Lamego <jose.a.lamego@linux.intel.com>
-Message-ID: <d93f4841-0154-2232-1802-2b8fcc85a81c@linux.intel.com>
-Date: Tue, 29 Nov 2016 16:34:42 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.4.0
+	Tue, 29 Nov 2016 22:43:51 +0000 (UTC)
+Received: by mail-vk0-f65.google.com with SMTP id x186so7853713vkd.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Nov 2016 14:43:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=NeC4pclS+sqwUFGNTE7zyU7Q/i5zactLyqMD+AzW3ec=;
+	b=BeD3Ok7PqclBLWfYTuTgWNDBm/+UG6Di7w8RT5+xyfr5cdQ3c0mkKKXZ9qW7HhkloY
+	bG+18KY2eLwrDUU87esPZIxF71LM+0NDA1/dFU9tL1umOXyQiqogsHkBRXFgj1gWoViH
+	vfX4/0riUC5FMgHp4rbeMmakfcU/SXFoWA23XXHpcCMz0Ekvahe6Nos+NibdrOsjVV7T
+	eTRKNfnwA9zMgWomT5AZsgOnbK8YkhHWQiMTYHRwn5rdohUatztg6qqEq1WmDGQpx8jn
+	w4eykpRzbRRa3KoidCLUJaQTn/2y5KNofCGZg8AyI0lly8NXAoJ/57o4E++oF1ypw0US
+	FLww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=NeC4pclS+sqwUFGNTE7zyU7Q/i5zactLyqMD+AzW3ec=;
+	b=mLsH985MfiRoG8eClyllDhU9ZG5aP7hlLjcKdyrbsMmRg+oeIV+rt2RiAl7rbwG4/w
+	wxfFDYDRXZCZ+wEoViXCf2IUWD5iL9bDgF16XEQh8bkRtfwbSJ70VwmwLUdNlalszF7Y
+	8AyJpsCEL3+CPaupOUAm2jUqG3MLZRKuFMk06jaMX3Xu4e8zDb/cPxdYK3U4wkjIdmjT
+	WFjWNMW1u8f1BQFr6506KO3etyIUhgeefAikxkMsUUsDmxMoI/NLCxyodhN0E2v+w6W+
+	u00+yNyQMdZWcTTeoMLkng2cohOflPDb0YbCIO2rqftAt/KnyGOxr7ID8A1vV5BJPu2Z
+	tVOg==
+X-Gm-Message-State: AKaTC01VVfEyp6wVFRNhhm8aWZD0Bf8YvMk2KiiCbF5WG0thddEEBisWozPR1lvkZTGc74tfYsvn+MHL1AmyEg==
+X-Received: by 10.31.8.8 with SMTP id 8mr10646573vki.173.1480459432715; Tue,
+	29 Nov 2016 14:43:52 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20161129204327.GG2546@bill-the-cat>
-Cc: Patrick Ohly <patrick.ohly@intel.com>,
-	Michael Halstead <michael@yoctoproject.org>
-Subject: Re: meta-openembedded patchwork git hook
+Received: by 10.159.48.87 with HTTP; Tue, 29 Nov 2016 14:43:22 -0800 (PST)
+In-Reply-To: <20161129195922.GD2700@jama>
+References: <20161128225759.9756-1-raj.khem@gmail.com>
+	<20161129195922.GD2700@jama>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 29 Nov 2016 14:43:22 -0800
+Message-ID: <CAMKF1sog=+RPyNRKK1hrDJDOJhGm3ycJD=H0iyFbdbfomfajtQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libva: Import from meta-intel and update to 1.7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,97 +52,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Nov 2016 22:34:43 -0000
-X-Groupsio-MsgNum: 64119
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="xrEqmDmKB4R7P7d2sl1jHRPL0Aem0rg8J"
+X-List-Received-Date: Tue, 29 Nov 2016 22:43:52 -0000
+Content-Type: text/plain; charset=UTF-8
 
---xrEqmDmKB4R7P7d2sl1jHRPL0Aem0rg8J
-Content-Type: multipart/mixed; boundary="tExnTQSWeoB3WsSSLKmjliRk1WtV2oCRu";
- protected-headers="v1"
-From: Jose Lamego <jose.a.lamego@linux.intel.com>
-To: Tom Rini <trini@konsulko.com>, openembedded-devel@lists.openembedded.org
-Cc: Michael Halstead <michael@yoctoproject.org>,
- Patrick Ohly <patrick.ohly@intel.com>
-Message-ID: <d93f4841-0154-2232-1802-2b8fcc85a81c@linux.intel.com>
-Subject: Re: [oe] meta-openembedded patchwork git hook
-References: <4717571.f7GXZOAcRz@peggleto-mobl.ger.corp.intel.com>
- <20161129204327.GG2546@bill-the-cat>
-In-Reply-To: <20161129204327.GG2546@bill-the-cat>
+On Tue, Nov 29, 2016 at 11:59 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Mon, Nov 28, 2016 at 02:57:59PM -0800, Khem Raj wrote:
+>> This recipe is used by intel and amd BSP layers
+>> additional copies are also there see
+>> https://layers.openembedded.org/layerindex/branch/master/recipes/?q=libva
+>
+> I'm sorry to report more and more issues, but this is causing few more autodetected dependencies
 
---tExnTQSWeoB3WsSSLKmjliRk1WtV2oCRu
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+its good. We will keep fixing them :)
 
-
-
-On 11/29/2016 02:43 PM, Tom Rini wrote:
-> On Wed, Nov 30, 2016 at 06:52:46AM +1300, Paul Eggleton wrote:
->=20
->> Hi folks,
+>
+> mpv-0.15.0: mpv rdepends on libva-x11, but it isn't a build dependency, missing libva in DEPENDS or PACKAGECONFIG? [build-deps]
+> mpv-0.15.0: mpv rdepends on libva, but it isn't a build dependency, missing libva in DEPENDS or PACKAGECONFIG? [build-deps]
+>
+> and there is another one caused by libvdpau I haven't noticed before:
+> ffmpeg-3.2: libavutil rdepends on libvdpau, but it isn't a build dependency, missing libvdpau in DEPENDS or PACKAGECONFIG? [build-deps]
+>
 >>
->> Martin just brought to my attention that the git hook for the=20
->> meta-openembedded repository that's supposed to update patchwork still=
- isn't=20
->> working and hasn't done so for a very long time. I thought we'd fixed =
-this so=20
->> that merged patches get marked as "Accepted", but at least for meta-
->> openembedded it seems like that's not the case.
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ---
+>>  meta-oe/recipes-graphics/libva/libva_1.7.3.bb | 48 +++++++++++++++++++++++++++
+>>  1 file changed, 48 insertions(+)
+>>  create mode 100644 meta-oe/recipes-graphics/libva/libva_1.7.3.bb
 >>
->> Jose / Michael - can you look into this if you haven't already? Please=
- let me=20
->> know if you need any help.
+>> diff --git a/meta-oe/recipes-graphics/libva/libva_1.7.3.bb b/meta-oe/recipes-graphics/libva/libva_1.7.3.bb
+>> new file mode 100644
+>> index 0000000..9994158
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-graphics/libva/libva_1.7.3.bb
+>> @@ -0,0 +1,48 @@
+>> +SUMMARY = "Video Acceleration (VA) API for Linux"
+>> +DESCRIPTION = "Video Acceleration API (VA API) is a library (libVA) \
+>> +and API specification which enables and provides access to graphics \
+>> +hardware (GPU) acceleration for video processing on Linux and UNIX \
+>> +based operating systems. Accelerated processing includes video \
+>> +decoding, video encoding, subpicture blending and rendering. The \
+>> +specification was originally designed by Intel for its GMA (Graphics \
+>> +Media Accelerator) series of GPU hardware, the API is however not \
+>> +limited to GPUs or Intel specific hardware, as other hardware and \
+>> +manufacturers can also freely use this API for hardware accelerated \
+>> +video decoding."
+>> +
+>> +HOMEPAGE = "http://www.freedesktop.org/wiki/Software/vaapi"
+>> +BUGTRACKER = "https://bugs.freedesktop.org"
+>> +
+>> +SECTION = "x11"
+>> +LICENSE = "MIT"
+>> +LIC_FILES_CHKSUM = "file://COPYING;md5=2e48940f94acb0af582e5ef03537800f"
+>> +
+>> +SRC_URI = "http://www.freedesktop.org/software/vaapi/releases/libva/${BP}.tar.bz2"
+>> +SRC_URI[md5sum] = "dafb1d7d6449e850e9eb1a099895c683"
+>> +SRC_URI[sha256sum] = "22bc139498065a7950d966dbdb000cad04905cbd3dc8f3541f80d36c4670b9d9"
+>> +
+>> +DEPENDS = "libdrm virtual/mesa virtual/libgles1 virtual/libgles2 virtual/egl"
+>> +
+>> +inherit autotools pkgconfig
+>> +
+>> +EXTRA_OECONF = "--disable-dummy-driver"
+>> +
+>> +PACKAGECONFIG ??= "${@bb.utils.contains("DISTRO_FEATURES", "x11", "x11", "", d)} \
+>> +                   ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "wayland", "", d)}"
+>> +PACKAGECONFIG[x11] = "--enable-x11,--disable-x11,virtual/libx11 libxext libxfixes"
+>> +PACKAGECONFIG[wayland] = "--enable-wayland,--disable-wayland,wayland"
+>> +
+>> +PACKAGES =+ "${PN}-x11 ${PN}-tpi ${PN}-glx ${PN}-egl ${PN}-wayland"
+>> +
+>> +RDEPENDS_${PN}-tpi =+ "${PN}"
+>> +RDEPENDS_${PN}-x11 =+ "${PN}"
+>> +RDEPENDS_${PN}-glx =+ "${PN}-x11"
+>> +RDEPENDS_${PN}-egl =+ "${PN}-x11"
+>> +
+>> +FILES_${PN}-dbg += "${libdir}/dri/.debug"
+>> +
+>> +FILES_${PN}-x11 =+ "${libdir}/libva-x11*${SOLIBS}"
+>> +FILES_${PN}-tpi =+ "${libdir}/libva-tpi*${SOLIBS}"
+>> +FILES_${PN}-glx =+ "${libdir}/libva-glx*${SOLIBS}"
+>> +FILES_${PN}-egl =+ "${libdir}/libva-egl*${SOLIBS}"
+>> +FILES_${PN}-wayland =+ "${libdir}/libva-wayland*${SOLIBS}"
+>> --
+>> 2.10.2
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
-The git hook was configured to update OE-core only, Michael will help us
-to include meta-openembedded.
-
->=20
-> Since I brought this up on IRC, I wanted to chime in here.  First, if
-> you want to use top-of-tree patchwork you'll also want to grab
-> https://patchwork.ozlabs.org/bundle/stephenfin/post-receive%20fixes/
-
-
-Hi Tom, nice meeting you. OE-Patchwork is using a fork in [1] from
-freedesktop.org's patchwork at [2]. I will look at the hook fixes you
-mentioned at the first chance, thanks for the tip.
-
-> (and fwiw, I also have been setting the DJANGO part to 'dev' rather tha=
-n
-> production for my use-case).  Second, I think part of the problem is
-> that there are just some cases where the hashing fails, which for me is=
-
-> around 10% of the time.  Depending on how much one uses bundles and
-> tracks what ends up being committed this may or may not be a problem.
-> And I'm sure upstream patchwork would appreciate any changes to improve=
-
-> hashing success :)
->=20
-
-Regards
-Jose
-
---=20
-Jose Lamego | OTC Embedded Platforms & Tools | GDC
-
-
---tExnTQSWeoB3WsSSLKmjliRk1WtV2oCRu--
-
---xrEqmDmKB4R7P7d2sl1jHRPL0Aem0rg8J
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iQEcBAEBAgAGBQJYPgKGAAoJEFJAtowlSEbnTYoH/Rw6jVOvW/r++iefTo1zS0UK
-nDQ+AMnf4TaOrs5sCqRIzmknqORbxkQ0QpFQ35EFmAPEbtfwGD98q/Wq/Hcv1uiZ
-QbUlDnqMwQNVNbccKR6AFdZCgzbhx3OJiMUhn0IzzxwOkZHIqwxnmNuInBrjyO0d
-NqgpiTRtTT9XbJE7o3NmX9MJPOX7pzv+SDNKe/+IZGWvIJwEq9vxwYdO8D2yNCOG
-lW5nTBigcA70paI1BbnF0EmgSC13/vJxdEykqUfpuk0M7FH13EmGAqWNksrDHMrC
-kGdFgG/freb0xaAtylIPxLBDdZ1EsWr+b+5jR2R1r51vRRL9OWv6H6kFtzdxOOc=
-=BQTe
------END PGP SIGNATURE-----
-
---xrEqmDmKB4R7P7d2sl1jHRPL0Aem0rg8J--
