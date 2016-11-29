@@ -1,53 +1,53 @@
 Return-Path: <meerkoetter@googlemail.com>
-Received: from mail-wj0-f181.google.com (mail-wj0-f181.google.com
-	[209.85.210.181])
-	by mail.openembedded.org (Postfix) with ESMTP id EC8EF71AF5
+Received: from mail-wj0-f196.google.com (mail-wj0-f196.google.com
+	[209.85.210.196])
+	by mail.openembedded.org (Postfix) with ESMTP id BB88B71ADC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Nov 2016 10:04:35 +0000 (UTC)
-Received: by mail-wj0-f181.google.com with SMTP id qp4so140325384wjc.3
+	Tue, 29 Nov 2016 10:04:36 +0000 (UTC)
+Received: by mail-wj0-f196.google.com with SMTP id jb2so17418163wjb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Nov 2016 02:04:37 -0800 (PST)
+	Tue, 29 Nov 2016 02:04:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=lBUPmmb2ubVGn8EMJpS/xJyk1RP6xsCSRhFK8sHcanE=;
-	b=WAtlKC+nNe0iQTqB1bcGpjMusnUAKFCWP14by/iuHeIF2FDtyGGUWVtKTzlwo+lUoL
-	7iAXPRdtUzEvBjc9uRPiWC8zRzvalnvwyL0TiFxYPyFExtr2uuqC6DkRGIK5oKGakGji
-	waKGTMQjvwC3d+JhL7RGQj8Xhm0JzEVCYTpEYjsUpw4jvdYAuHuIqLQlZTIdXJZG5vp0
-	7qVKfmrqpwx584x9wkmg6h4UEM+kpuCCQwFgKJWb0uTC51mKpGec4EQIISKIJU3jDkLv
-	kT15dE8ZePqeUWszFMwhcXkLoWApcivTdN7Er74Gz68vcs/0fsFSGsR7yT3F4zkF4FEj
-	xhFg==
+	bh=6Bc8MJpaU+JGXMT0IS9LonpZyyvp1rF4BkXTmmCDFrM=;
+	b=m8hMCJR8jjcN0QddpYbamehege82rOW5FEFk0dMbVKngM2v56VRGQTRdybxLl8gvIS
+	/wzMZ+KH4Z6VJN856Qghgrfb0E5AEZKcsE+A10lWKZnTak1h/N1RMVfaKddOTkCUugcM
+	699USs+8/vqA49njSbyt1DgIv1Ovh36EWBcMGX3M3AsJrTO+o28GmkaaqVCpg7R8wIT5
+	4ffno/8mnv607FO5iSGZc95viTujtQX0VakMtt2Bj1gPTRkH8R3T/C97PLPbNsa+XUGE
+	7B9mSy3klXDwlShXHmiwvnvnuCVJsuXVhiajmFFf5q3PpQeviHKhUo4ONaD/k/ign6uZ
+	h6Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=lBUPmmb2ubVGn8EMJpS/xJyk1RP6xsCSRhFK8sHcanE=;
-	b=Oo8qadJnR2dDNrS3wNuYpP/LPj8jO2WAQcJZEsPAp6FItcXwnCWMvdipWYkSSLqMQJ
-	Rg6n+BJYFDAVgvmgxwdAPJqAW+aHVo3avoVI25KNxJAmyJvtDBzMkoqFQGHrqhdf71zz
-	KfdP68pB39xrqU1ts5bldKFW2q11gIU7Bn0i0YINHNbeNnACBqg/dh+o90ybXTJnUwPl
-	RDGRxcaGyJk4v98imFR8N0OUiEywO6ROR55lIusUixOa4WBSRJmOxYWNMGlLBVVLhz04
-	WrdrCPDPe+N7fy0iWUX41diw0GfqCt/pXaElq5d/9edUuyaV4vA0gq71TAZKDwIfiE5S
-	1oCw==
-X-Gm-Message-State: AKaTC00FxfpHHXoQ3yULRIY1MjaJp1TG8ITb99WDh9faD/GoDUDMRqVNDzIvtbepz4hHkA==
-X-Received: by 10.194.107.97 with SMTP id hb1mr22187485wjb.134.1480413876563; 
-	Tue, 29 Nov 2016 02:04:36 -0800 (PST)
+	bh=6Bc8MJpaU+JGXMT0IS9LonpZyyvp1rF4BkXTmmCDFrM=;
+	b=GGhyebazbKBaeoZxOWWdieoEHVMzyGan+SDCjAza3n5vmQXcTVZ+cf3Dk7iqVZUgM5
+	4hHLl8dp20OdNTI09M/y82F4JwznxkBfDbTw9KWHVQNxNAaW7jvWBmh9IXu0STbJ24LU
+	akODZYq8AyPmx/WDMv8oB8UFIfSNzv80qiYOvCj+1dzEEzBjlR63GwV80/oekD5y6NcX
+	XOoR4Eba/QmovxcCxCpqhbcsVhofamdCfB4SgfNsVrfgDgQGXI30nATXliN/MCnLtXa2
+	l+Z+/0j0JkIoiZpHMQ3sszVJA8y2JORKmeecit7zCIXp3Bm8HvxD473fYxohU1299FeG
+	mLQQ==
+X-Gm-Message-State: AKaTC02tLZ2e1G4FCAfdSbEXuAE578cFNqIKPOtbvEpt54tPLLMofhuboh30b8t2LcrbHA==
+X-Received: by 10.194.205.73 with SMTP id le9mr23215788wjc.31.1480413877630;
+	Tue, 29 Nov 2016 02:04:37 -0800 (PST)
 Received: from naos.fritz.box
 	(p20030071EF35F10038C08788B208AAEC.dip0.t-ipconnect.de.
 	[2003:71:ef35:f100:38c0:8788:b208:aaec])
 	by smtp.gmail.com with ESMTPSA id
-	e188sm1919656wma.21.2016.11.29.02.04.35
+	e188sm1919656wma.21.2016.11.29.02.04.36
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 29 Nov 2016 02:04:35 -0800 (PST)
+	Tue, 29 Nov 2016 02:04:36 -0800 (PST)
 From: Frank Meerkoetter <meerkoetter@googlemail.com>
 X-Google-Original-From: Frank Meerkoetter <frank@meerkoetter.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Nov 2016 11:04:24 +0100
-Message-Id: <1480413866-25885-4-git-send-email-frank@meerkoetter.org>
+Date: Tue, 29 Nov 2016 11:04:25 +0100
+Message-Id: <1480413866-25885-5-git-send-email-frank@meerkoetter.org>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1480413866-25885-1-git-send-email-frank@meerkoetter.org>
 References: <1480413866-25885-1-git-send-email-frank@meerkoetter.org>
 Cc: Frank Meerkoetter <frank@meerkoetter.org>
-Subject: [meta-oe][PATCHv2 3/5] redis: log to syslog
+Subject: [meta-oe][PATCHv2 4/5] redis: do not run as root
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,41 +60,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Nov 2016 10:04:36 -0000
+X-List-Received-Date: Tue, 29 Nov 2016 10:04:37 -0000
 
-Creating /var/log/redis.log requires root permissions to
-create the file. Use syslog instead so redis does not
-require root.
+Running a network facing daemon written in C as root is not
+a good idea. Introduce a redis system user/group for that.
 
-This affects both sysv and systemd based systems.
+A drawback is that now redis can no longer increase the
+number of open fds to 10000 (MaxClients). If this is needed
+the ulimit needs to be tweaked in the init script or systemd
+unit file.
+
+This only affects systemd based systems.
 
 Signed-off-by: Frank Meerkoetter <frank@meerkoetter.org>
 ---
- meta-oe/recipes-extended/redis/redis/redis.conf | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-oe/recipes-extended/redis/redis/redis.service | 4 ++--
+ meta-oe/recipes-extended/redis/redis_3.0.2.bb      | 8 +++++++-
+ 2 files changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/redis/redis/redis.conf b/meta-oe/recipes-extended/redis/redis/redis.conf
-index b932089..ab024ad 100644
---- a/meta-oe/recipes-extended/redis/redis/redis.conf
-+++ b/meta-oe/recipes-extended/redis/redis/redis.conf
-@@ -53,14 +53,14 @@ loglevel notice
- # Specify the log file name. Also 'stdout' can be used to force
- # Redis to log on the standard output. Note that if you use standard
- # output for logging but daemonize, logs will be sent to /dev/null
--logfile /var/log/redis.log
-+# logfile /var/log/redis.log
+diff --git a/meta-oe/recipes-extended/redis/redis/redis.service b/meta-oe/recipes-extended/redis/redis/redis.service
+index e2dc6a7..577bb14 100644
+--- a/meta-oe/recipes-extended/redis/redis/redis.service
++++ b/meta-oe/recipes-extended/redis/redis/redis.service
+@@ -3,8 +3,8 @@ Description=Redis In-Memory Data Store
+ After=network.target
  
- # To enable logging to the system logger, just set 'syslog-enabled' to yes,
- # and optionally update the other syslog parameters to suit your needs.
--# syslog-enabled no
-+syslog-enabled yes
+ [Service]
+-User=root
+-Group=root
++User=redis
++Group=redis
+ ExecStart=/usr/bin/redis-server /etc/redis/redis.conf
+ ExecStop=/usr/bin/redis-cli shutdown
+ Restart=always
+diff --git a/meta-oe/recipes-extended/redis/redis_3.0.2.bb b/meta-oe/recipes-extended/redis/redis_3.0.2.bb
+index 89b79d4..a8242b2 100644
+--- a/meta-oe/recipes-extended/redis/redis_3.0.2.bb
++++ b/meta-oe/recipes-extended/redis/redis_3.0.2.bb
+@@ -19,7 +19,12 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+ SRC_URI[md5sum] = "87be8867447f62524b584813e5a7bd14"
+ SRC_URI[sha256sum] = "93e422c0d584623601f89b956045be158889ebe594478a2c24e1bf218495633f"
  
- # Specify the syslog identity.
--# syslog-ident redis
-+syslog-ident redis
+-inherit autotools-brokensep update-rc.d systemd
++inherit autotools-brokensep update-rc.d systemd useradd
++
++USERADD_PACKAGES = "${PN}"
++USERADD_PARAM_${PN}  = "--system --home-dir /var/lib/redis -g redis --shell /bin/false redis"
++GROUPADD_PARAM_${PN} = "--system redis"
++
  
- # Specify the syslog facility.  Must be USER or between LOCAL0-LOCAL7.
- # syslog-facility local0
+ REDIS_ON_SYSTEMD = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}"
+ 
+@@ -31,6 +36,7 @@ do_install() {
+     install -d ${D}/${sysconfdir}/init.d
+     install -m 0755 ${WORKDIR}/init-redis-server ${D}/${sysconfdir}/init.d/redis-server
+     install -d ${D}/var/lib/redis/
++    chown redis.redis ${D}/var/lib/redis/
+ 
+     install -d ${D}${systemd_unitdir}/system
+     install -m 0644 ${WORKDIR}/redis.service ${D}${systemd_unitdir}/system
 -- 
 2.7.4
 
