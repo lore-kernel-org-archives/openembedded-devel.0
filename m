@@ -1,50 +1,45 @@
-Return-Path: <trini@konsulko.com>
-Received: from mail-yw0-f170.google.com (mail-yw0-f170.google.com
-	[209.85.161.170])
-	by mail.openembedded.org (Postfix) with ESMTP id CCE8F70178
+Return-Path: <george.mccollister@gmail.com>
+Received: from mail-io0-f194.google.com (mail-io0-f194.google.com
+	[209.85.223.194])
+	by mail.openembedded.org (Postfix) with ESMTP id B581E71A19
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Nov 2016 20:43:28 +0000 (UTC)
-Received: by mail-yw0-f170.google.com with SMTP id a10so144945908ywa.3
+	Tue, 29 Nov 2016 22:19:45 +0000 (UTC)
+Received: by mail-io0-f194.google.com with SMTP id h133so32461017ioe.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Nov 2016 12:43:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=lH+tzjy3k3aBgDWL9yiH3ZQOjoHp5e339VBNIZzg0HY=;
-	b=sKh79Rnhd7Q99C1bpBin511Ec3kTKxS4H/3HGciCp9wKViYQkH9eODe1Qi/EkS1zPJ
-	yi7GAOvVt6APHlAn+BqOujErC2dyhnXqZ/acTBPEdjbt5CNRjpOyBi4fN6SKX3iTXGyP
-	jmfrkBAcmA1BNK9pMtQfM6B3NBPRops1fQx88=
+	Tue, 29 Nov 2016 14:19:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=T22BTSX6Sk/kv7F86Ki60J8aVFPlyltIAu3BSTy1Yu8=;
+	b=b3eXzWMtVzSyy9P8C9BA4yJEOcghq+QKDxqH54VxNiVRJOCoBalivM6iFgex1ugXeT
+	AsBLKEgao06bBgkxwTwDwQh8rpRWxInPip6vFwgXlaKj2AwGCeaPAzBFy5dRnitJIHYG
+	eN0p6Q2aek8fw+Xjl9cL156dASDmr/JbrQRSSA/ZZm7foRALi/E5qw3XmMf2orwYD3lm
+	DnLJzC2UDAp2x9gPNPT+WEfHkdEsnHv3X0QtvA8rrIEMwhJgdC6hPtEQ4yijgcCC9VvA
+	M25AK6b7B9szkgJFYH/eeeGh6viKPjbb8QX3A4uUutyAvaqxWpVc2TIxOvxha5R5WV+k
+	Tcpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=lH+tzjy3k3aBgDWL9yiH3ZQOjoHp5e339VBNIZzg0HY=;
-	b=d1sVBisKvRhoZ9Aj6YY99ktJ+YX/Eo8m1uiWwYIlIJQWOd5458UfCAPihqXSi6h6yc
-	rIkHa7DWESgT4q7OlZVcPcBXcPzaHL42KVncxdG/gBt5Cf8Jn3ZxZiPlMo6J/o4efcTK
-	zDXNiqRwZfPh8FE1lVc9mnzPBMXAySVc6bw6dQcRt8FsfQ8Tmj27J06XPh1Eii/CIYgZ
-	KtrYYTiY19uy72lrAWhAbuHfPQ2TfasKQuLDoOV4sO7txma7Ye/6DEq3RdZzx7HVqiJX
-	RdKJQKJ7/eDv4CPe7UWePHrVI11SWoCyRoPDR+pTyra4ahcBb/q2/1WUa6FB+nXhzeSp
-	Pd5Q==
-X-Gm-Message-State: AKaTC020Dmds86IcCsMjRSRcLTOwh305NMyEtr2aMyme2nKEZMB6adQYjXzC0BT4ho4NcQ==
-X-Received: by 10.13.200.3 with SMTP id k3mr38627155ywd.173.1480452209790;
-	Tue, 29 Nov 2016 12:43:29 -0800 (PST)
-Received: from bill-the-cat (cpe-75-180-228-133.ec.res.rr.com.
-	[75.180.228.133]) by smtp.gmail.com with ESMTPSA id
-	m136sm22223152ywd.19.2016.11.29.12.43.29
-	(version=TLS1_2 cipher=AES128-SHA bits=128/128);
-	Tue, 29 Nov 2016 12:43:29 -0800 (PST)
-Date: Tue, 29 Nov 2016 15:43:27 -0500
-From: Tom Rini <trini@konsulko.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=T22BTSX6Sk/kv7F86Ki60J8aVFPlyltIAu3BSTy1Yu8=;
+	b=dGO4pu3QakQZw77ZDGw+9AU4FLGfgvVYVOTuSI9iz8xmbq39AdsmR4ry55gYAbJe9P
+	VUZ7eEZS/8im7ULvBTu4xgkG/GJEszUTwpHkUYJYrbARFy5Ihuc+LrlmGulqiVVIG0lv
+	jycEImyDzHEfZ4r9prJB0cBzb7QEHUrP0NAJe/6Y6uOwZmnmy64FQPXZgukgdsHsjYzD
+	YNxL8f7+U4bJrdQQ+GXIS2+QKZOFnzC7ayx8OYMI/cbdLQ0rF9GWOCfnaSkSV5oDSItO
+	sl2u6fEuUGBtSUiba6IIPQ9L5B83NGBcGbo0JtqlpowVZTGLqX5d5R7yd0hGQr5wu8Qx
+	8FFA==
+X-Gm-Message-State: AKaTC02V/yhRjnSrxmtS4u0FXAql3bs2C8Z5R+3jG6gNSkoARsWNnwGvxfh1n2AMX8GuuA==
+X-Received: by 10.36.4.20 with SMTP id 20mr25289353itb.109.1480457986986;
+	Tue, 29 Nov 2016 14:19:46 -0800 (PST)
+Received: from localhost.localdomain (216-21-169-52.slc.googlefiber.net.
+	[216.21.169.52]) by smtp.gmail.com with ESMTPSA id
+	j201sm1579971ita.2.2016.11.29.14.19.46
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 29 Nov 2016 14:19:46 -0800 (PST)
+From: George McCollister <george.mccollister@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161129204327.GG2546@bill-the-cat>
-References: <4717571.f7GXZOAcRz@peggleto-mobl.ger.corp.intel.com>
-MIME-Version: 1.0
-In-Reply-To: <4717571.f7GXZOAcRz@peggleto-mobl.ger.corp.intel.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Patrick Ohly <patrick.ohly@intel.com>,
-	Michael Halstead <michael@yoctoproject.org>,
-	Jose Lamego <jose.a.lamego@intel.com>
-Subject: Re: meta-openembedded patchwork git hook
+Date: Tue, 29 Nov 2016 16:19:12 -0600
+Message-Id: <20161129221912.21538-1-george.mccollister@gmail.com>
+X-Mailer: git-send-email 2.9.3
+Subject: [meta-browser][PATCH] chromium: Remove dependency on Linux 4.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,34 +52,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Nov 2016 20:43:29 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 29 Nov 2016 22:19:45 -0000
 
-On Wed, Nov 30, 2016 at 06:52:46AM +1300, Paul Eggleton wrote:
+Add a patch adapted from qtwebengine to remove the dependency on Linux
+4.5 when glibc >= 2.24 is used. This resolves the problem with tabs
+always showing "Aw, snap!".
 
-> Hi folks,
-> 
-> Martin just brought to my attention that the git hook for the 
-> meta-openembedded repository that's supposed to update patchwork still isn't 
-> working and hasn't done so for a very long time. I thought we'd fixed this so 
-> that merged patches get marked as "Accepted", but at least for meta-
-> openembedded it seems like that's not the case.
-> 
-> Jose / Michael - can you look into this if you haven't already? Please let me 
-> know if you need any help.
+Signed-off-by: George McCollister <george.mccollister@gmail.com>
+---
+ .../chromium/Do-not-depend-on-Linux-4.5.patch      | 33 ++++++++++++++++++++++
+ recipes-browser/chromium/chromium_52.0.2743.76.bb  |  1 +
+ 2 files changed, 34 insertions(+)
+ create mode 100644 recipes-browser/chromium/chromium/chromium/Do-not-depend-on-Linux-4.5.patch
 
-Since I brought this up on IRC, I wanted to chime in here.  First, if
-you want to use top-of-tree patchwork you'll also want to grab
-https://patchwork.ozlabs.org/bundle/stephenfin/post-receive%20fixes/
-(and fwiw, I also have been setting the DJANGO part to 'dev' rather than
-production for my use-case).  Second, I think part of the problem is
-that there are just some cases where the hashing fails, which for me is
-around 10% of the time.  Depending on how much one uses bundles and
-tracks what ends up being committed this may or may not be a problem.
-And I'm sure upstream patchwork would appreciate any changes to improve
-hashing success :)
-
+diff --git a/recipes-browser/chromium/chromium/chromium/Do-not-depend-on-Linux-4.5.patch b/recipes-browser/chromium/chromium/chromium/Do-not-depend-on-Linux-4.5.patch
+new file mode 100644
+index 0000000..fce37cd
+--- /dev/null
++++ b/recipes-browser/chromium/chromium/chromium/Do-not-depend-on-Linux-4.5.patch
+@@ -0,0 +1,33 @@
++From 6e5f0405559780ee3c45825f065e216bf472c262 Mon Sep 17 00:00:00 2001
++From: Allan Sandfeld Jensen <allan.jensen@theqtcompany.com>
++Date: Tue, 9 Aug 2016 16:21:29 +0200
++Subject: [PATCH] Do not depend on Linux 4.5
++
++Avoid using MADV_FREE that was only recently added to Linux. It will fail when
++run on older Linux kernels.
++
++Change-Id: I9b0369fb31402f088b2327c12f70dd39f5e4c8c0
++Reviewed-by: Peter Varga <pvarga@inf.u-szeged.hu>
++---
++ third_party/WebKit/Source/wtf/allocator/PageAllocator.cpp | 5 +++++
++ 1 file changed, 5 insertions(+)
++
++diff --git a/third_party/WebKit/Source/wtf/allocator/PageAllocator.cpp b/third_party/WebKit/Source/wtf/allocator/PageAllocator.cpp
++index 12c9a7b..1639013 100644
++--- a/third_party/WebKit/Source/wtf/allocator/PageAllocator.cpp
+++++ b/third_party/WebKit/Source/wtf/allocator/PageAllocator.cpp
++@@ -41,6 +41,11 @@
++ #include <errno.h>
++ #include <sys/mman.h>
++ 
+++#if OS(LINUX) && defined(MADV_FREE)
+++// Added in Linux 4.5, but we don't want to depend on 4.5 at runtime
+++#undef MADV_FREE
+++#endif
+++
++ #ifndef MADV_FREE
++ #define MADV_FREE MADV_DONTNEED
++ #endif
++-- 
++2.9.3
++
+diff --git a/recipes-browser/chromium/chromium_52.0.2743.76.bb b/recipes-browser/chromium/chromium_52.0.2743.76.bb
+index 14b519c..d85d893 100644
+--- a/recipes-browser/chromium/chromium_52.0.2743.76.bb
++++ b/recipes-browser/chromium/chromium_52.0.2743.76.bb
+@@ -9,6 +9,7 @@ SRC_URI += "\
+         file://0005-Override-root-filesystem-access-restriction.patch \
+         file://chromium/0011-Replace-readdir_r-with-readdir.patch \
+         file://chromium/remove-Werror.patch \
++        file://chromium/Do-not-depend-on-Linux-4.5.patch \
+         ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
+         ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \
+ "
 -- 
-Tom
+2.9.3
+
 
