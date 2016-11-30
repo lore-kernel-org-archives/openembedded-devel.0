@@ -1,52 +1,24 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 7605B62135
+Return-Path: <Haiqing.Bai@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B9086025F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2016 02:10:01 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id 144so9198388pfv.0
+	Wed, 30 Nov 2016 02:58:55 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id uAU2wuRY013873
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Nov 2016 18:10:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:cc:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding;
-	bh=8H77N8kiGNXug5vLrSGdWZijEDdlA3238Pt+1eL9EFo=;
-	b=TOHknW/wmVQPJ5cm5cCDEhIrWobq+R4XeOIbd+vzSYvOA5M7kG5Q4cpANzzIpcYDdT
-	KPTvkzYA2tNIuUv6h4qJOZIfAKF9jRRJDJzVwER4UiVAZqHdR1nJOd3Onotkq8LlNLUY
-	YxzDP5yunmxYn5QUVmOrp3c/13ZbeiijEg+jEr2mBSQvK+OhopzWeozE14aEeB2PJOgi
-	bnl8syxRYlc+ucn5n935WDdPK/MpFAYi8lW+/4BqjR69AdoeV5WbqIeyVoqYeyt/2qt/
-	qIr6FZcIJpd/67IXZIhBEUZG5BF6OUWb6n3cG62FT3+GncFeikbcCMU0MY75jMsxO4Fb
-	IEBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=8H77N8kiGNXug5vLrSGdWZijEDdlA3238Pt+1eL9EFo=;
-	b=mMeig9r+v+068XYPOmQTyVXB3e/bcfL0zhbdSBqFMC8lWfp9Vaj7W4TUjQDRXy3rcs
-	3tVifQEFsm4m+GbnBwlONX4mK+3O2QLAPOR8B1KpOcXL3e3eUv9LiHGvqksFwoEXA4It
-	UlnwRNYLZyLDMVNza3rkUTxkA643dK6wn1f3bH3XaM5EO99Q/+zY/4zvpgiLjtZyr6Dr
-	9si2YTp1b3ykyXILjS55aShlJur+GhKGqbbkcfjyGRD8p5ojaUAToZ6momumGurjk42P
-	KdT79NJjkpvTJrY0lyjMCilhZCoEzKpGAl9HAuTrt5vZc2EX75k0uXNV88iXsoG1Tup/
-	TO5Q==
-X-Gm-Message-State: AKaTC03tWHHkkIFKOwSQq2YLpgYsByn97wP4D3fa4KDGHUpuzkcWwP0cB8R5oA3SEbBh2g==
-X-Received: by 10.99.166.2 with SMTP id t2mr55731874pge.40.1480471802626;
-	Tue, 29 Nov 2016 18:10:02 -0800 (PST)
-Received: from [10.22.11.46] (50-233-148-156-static.hfc.comcastbusiness.net.
-	[50.233.148.156]) by smtp.gmail.com with ESMTPSA id
-	y189sm97882107pfy.32.2016.11.29.18.10.01
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 29 Nov 2016 18:10:02 -0800 (PST)
-To: jslater@windriver.com
-References: <1480371178-5052-1-git-send-email-jslater@windriver.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <1204d0d8-6c6d-8024-59a3-21c755914e39@gmail.com>
-Date: Tue, 29 Nov 2016 18:10:01 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.4.0
+	Tue, 29 Nov 2016 18:58:56 -0800 (PST)
+Received: from pek-lpgtest5.wrs.com (128.224.153.85) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Tue, 29 Nov 2016 18:58:55 -0800
+From: Haiqing Bai <Haiqing.Bai@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <haiqing.bai@windriver.com>
+Date: Wed, 30 Nov 2016 10:56:37 +0800
+Message-ID: <1480474598-8680-1-git-send-email-Haiqing.Bai@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <1480371178-5052-1-git-send-email-jslater@windriver.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH 1/1] ntp: update to version 4.8p9
+Subject: [meta-networking][PATCH] crda: check the word size of target instead of host machine.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,44 +31,157 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2016 02:10:01 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 30 Nov 2016 02:58:55 -0000
+Content-Type: text/plain
 
+When 'USE_OPENSSL=1' is configured for crda, key2pub.py doesn't
+create "keys-ssl.c" with target's word size. Pass 'SITEINFO_BITS'
+from building system to key2pub.py.
 
+Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
+---
+ .../crda/crda/fix-issues-when-USE_OPENSSL-1.patch  | 58 ++++++++++++++++++++++
+ .../use-target-word-size-instead-of-host-s.patch   | 34 +++++++++++++
+ .../recipes-connectivity/crda/crda_3.18.bb         |  7 ++-
+ 3 files changed, 98 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-connectivity/crda/crda/fix-issues-when-USE_OPENSSL-1.patch
+ create mode 100644 meta-networking/recipes-connectivity/crda/crda/use-target-word-size-instead-of-host-s.patch
 
-On 11/28/2016 02:12 PM, Joe Slater wrote:
-> This fixes two CVE defects.
->
-> Signed-off-by: Joe Slater <jslater@windriver.com>
-
-Thanks joe.
-
-I will back port this to  Morty and jethro once it hits master.
-
-- armin
-> ---
->   .../ntp/{ntp_4.2.8p8.bb => ntp_4.2.8p9.bb}         |    4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->   rename meta-networking/recipes-support/ntp/{ntp_4.2.8p8.bb => ntp_4.2.8p9.bb} (97%)
->
-> diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p8.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p9.bb
-> similarity index 97%
-> rename from meta-networking/recipes-support/ntp/ntp_4.2.8p8.bb
-> rename to meta-networking/recipes-support/ntp/ntp_4.2.8p9.bb
-> index 202d1a3..9d74c96 100644
-> --- a/meta-networking/recipes-support/ntp/ntp_4.2.8p8.bb
-> +++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p9.bb
-> @@ -23,8 +23,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
->              file://ntpd.list \
->   "
->   
-> -SRC_URI[md5sum] = "4a8636260435b230636f053ffd070e34"
-> -SRC_URI[sha256sum] = "2ab3d0b5f0456e6311dda1cc27ab75da108762773a19e46abd938bd9407b97ee"
-> +SRC_URI[md5sum] = "857452b05f5f2e033786f77ade1974ed"
-> +SRC_URI[sha256sum] = "b724287778e1bac625b447327c9851eedef020517a3545625e9f652a90f30b72"
->   
->   inherit autotools update-rc.d useradd systemd pkgconfig
->   
+diff --git a/meta-networking/recipes-connectivity/crda/crda/fix-issues-when-USE_OPENSSL-1.patch b/meta-networking/recipes-connectivity/crda/crda/fix-issues-when-USE_OPENSSL-1.patch
+new file mode 100644
+index 0000000..93c836c
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/crda/crda/fix-issues-when-USE_OPENSSL-1.patch
+@@ -0,0 +1,58 @@
++From 8d2164a090f17286ea8291f30a123595cf447dc3 Mon Sep 17 00:00:00 2001
++From: Haiqing Bai <Haiqing.Bai@windriver.com>
++Date: Wed, 30 Nov 2016 10:27:36 +0800
++Subject: [PATCH] crda: fix issues when 'USE_OPENSSL=1'.
++
++Fxed the below issues if configured with 'USE_OPENSSL=1':
++a. keys-ssl.c uses BN_ULONG but doesn't include the openssl headers leading
++   to build failures:
++   keys-ssl.c:2:8: error: unknown type name 'BN_ULONG'
++   static BN_ULONG e_0[1] = {
++
++b. The large unqualified constants also break building:
++   keys-ssl.c:8:2: warning: overflow in implicit constant conversion [-Woverflow]
++     0x63a2705416a0d8e1, 0xdc9fca11c8ba757b,
++
++c. keys-ssl.c: error: 'keys' defined but not used [-Werror=unused-variable]
++   static struct pubkey keys[] = {
++
++Signed-off-by: Mike Frysinger <vapier@gentoo.org>
++Upsteam-Status: Pending
++Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
++---
++ utils/key2pub.py | 5 +++--
++ 1 file changed, 3 insertions(+), 2 deletions(-)
++
++diff --git a/utils/key2pub.py b/utils/key2pub.py
++index 401d58a..3ae00b8 100755
++--- a/utils/key2pub.py
+++++ b/utils/key2pub.py
++@@ -24,7 +24,7 @@ def print_ssl_64(output, name, val):
++     for v1, v2, v3, v4, v5, v6, v7, v8 in vnew:
++         if not idx:
++             output.write('\t')
++-        output.write('0x%.2x%.2x%.2x%.2x%.2x%.2x%.2x%.2x, ' % (ord(v1), ord(v2), ord(v3), ord(v4), ord(v5), ord(v6), ord(v7), ord(v8)))
+++        output.write('0x%.2x%.2x%.2x%.2x%.2x%.2x%.2x%.2xULL, ' % (ord(v1), ord(v2), ord(v3), ord(v4), ord(v5), ord(v6), ord(v7), ord(v8)))
++         idx += 1
++         if idx == 2:
++             idx = 0
++@@ -60,6 +60,7 @@ def print_ssl_32(output, name, val):
++ def print_ssl(output, name, val):
++     import os
++     output.write('#include <stdint.h>\n')
+++    output.write('#include <openssl/bn.h>\n')
++     if os.getenv('TARGET_BITS') == '64':
++         return print_ssl_64(output, name, val)
++     else:
++@@ -78,7 +79,7 @@ struct pubkey {
++ 
++ #define KEYS(e,n)	{ KEY(e), KEY(n), }
++ 
++-static struct pubkey keys[] = {
+++static struct pubkey keys[] __attribute__((unused))= {
++ ''')
++     for n in xrange(n + 1):
++         output.write('	KEYS(e_%d, n_%d),\n' % (n, n))
++-- 
++1.9.1
++
+diff --git a/meta-networking/recipes-connectivity/crda/crda/use-target-word-size-instead-of-host-s.patch b/meta-networking/recipes-connectivity/crda/crda/use-target-word-size-instead-of-host-s.patch
+new file mode 100644
+index 0000000..100b765
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/crda/crda/use-target-word-size-instead-of-host-s.patch
+@@ -0,0 +1,34 @@
++From c1c42513edd27c97341f2033af77c13a4724eb8f Mon Sep 17 00:00:00 2001
++From: Haiqing Bai <Haiqing.Bai@windriver.com>
++Date: Fri, 25 Nov 2016 16:48:01 +0800
++Subject: [PATCH] crda: Use target word size instead of host's.
++
++In key2pub.py, the codes check the wordsize
++of the host machine but not the target's, this fix
++fetches the wordsize of target from the build system.
++
++Upstream-Status: Pending
++Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
++---
++ utils/key2pub.py | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/utils/key2pub.py b/utils/key2pub.py
++index 3e84cd2..401d58a 100755
++--- a/utils/key2pub.py
+++++ b/utils/key2pub.py
++@@ -58,9 +58,9 @@ def print_ssl_32(output, name, val):
++     output.write('};\n\n')
++ 
++ def print_ssl(output, name, val):
++-    import struct
+++    import os
++     output.write('#include <stdint.h>\n')
++-    if len(struct.pack('@L', 0)) == 8:
+++    if os.getenv('TARGET_BITS') == '64':
++         return print_ssl_64(output, name, val)
++     else:
++         return print_ssl_32(output, name, val)
++-- 
++1.9.1
++
+diff --git a/meta-networking/recipes-connectivity/crda/crda_3.18.bb b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
+index 4d8824a..fd68ca6 100644
+--- a/meta-networking/recipes-connectivity/crda/crda_3.18.bb
++++ b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
+@@ -5,12 +5,14 @@ LICENSE = "copyleft-next-0.3.0 & ISC"
+ LIC_FILES_CHKSUM = "file://copyleft-next-0.3.0;md5=8743a2c359037d4d329a31e79eabeffe \
+                     file://${WORKDIR}/wireless-regdb-2014.11.18/LICENSE;md5=07c4f6dea3845b02a18dc00c8c87699c"
+ 
+-DEPENDS = "python-m2crypto-native python-native libgcrypt libnl"
++DEPENDS = "python-m2crypto-native python-native libgcrypt libnl openssl"
+ 
+ SRC_URI = "https://www.kernel.org/pub/software/network/crda/${BP}.tar.xz;name=crda \
+            https://www.kernel.org/pub/software/network/wireless-regdb/wireless-regdb-2014.11.18.tar.xz;name=bin \
+            file://do-not-run-ldconfig-if-destdir-is-set.patch \
+            file://fix-linking-of-libraries-used-by-reglib.patch \
++           file://use-target-word-size-instead-of-host-s.patch \
++           file://fix-issues-when-USE_OPENSSL-1.patch \
+ "
+ SRC_URI[crda.md5sum] = "0431fef3067bf503dfb464069f06163a"
+ SRC_URI[crda.sha256sum] = "43fcb9679f8b75ed87ad10944a506292def13e4afb194afa7aa921b01e8ecdbf"
+@@ -21,6 +23,9 @@ SRC_URI[bin.sha256sum] = "eab6b50f30748a8b0065ba38cf3df05aac161a5861ae0a6c3cfd01
+ inherit python-dir pythonnative
+ # Recursive make problem
+ EXTRA_OEMAKE = "MAKEFLAGS= DESTDIR=${D} LIBDIR=${libdir}/crda LDLIBREG='-Wl,-rpath,${libdir}/crda -lreg'"
++EXTRA_OEMAKE_append = " USE_OPENSSL=1"
++TARGET_BITS = "${SITEINFO_BITS}"
++export TARGET_BITS
+ 
+ do_compile() {
+     oe_runmake all_noverify
+-- 
+1.9.1
 
 
