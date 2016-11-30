@@ -1,18 +1,18 @@
 Return-Path: <obi@opendreambox.org>
 Received: from mail.saftware.de (mail.saftware.de [83.141.3.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 0602A71AB0
+	by mail.openembedded.org (Postfix) with ESMTP id 3424671AB2
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 30 Nov 2016 12:04:14 +0000 (UTC)
 Received: by t510.zcs.saftware.de (Postfix, from userid 1000)
-	id C7498B81F96; Wed, 30 Nov 2016 13:04:06 +0100 (CET)
+	id A3BD2B80C33; Wed, 30 Nov 2016 13:04:06 +0100 (CET)
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Nov 2016 13:03:58 +0100
-Message-Id: <1480507445-20746-10-git-send-email-obi@opendreambox.org>
+Date: Wed, 30 Nov 2016 13:03:57 +0100
+Message-Id: <1480507445-20746-9-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1480507445-20746-1-git-send-email-obi@opendreambox.org>
 References: <1480507445-20746-1-git-send-email-obi@opendreambox.org>
-Subject: [meta-networking][PATCH 10/17] samba: install manpages
+Subject: [meta-networking][PATCH 09/17] samba: add smbclient package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,29 +29,44 @@ X-List-Received-Date: Wed, 30 Nov 2016 12:04:14 -0000
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ .../recipes-connectivity/samba/samba_4.4.5.bb          | 18 +++++++++++++++---
+ 1 file changed, 15 insertions(+), 3 deletions(-)
 
 diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-index 783c327..3f092f3 100644
+index f232c60..783c327 100644
 --- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
 +++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-@@ -89,6 +89,15 @@ EXTRA_OECONF += "--enable-fhs \
- LDFLAGS += "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
+@@ -121,9 +121,10 @@ do_install_append() {
+     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
+ }
  
- do_install_append() {
-+    for section in 1 5 7; do
-+        install -d ${D}${mandir}/man$section
-+        install -m 0644 ctdb/doc/*.$section ${D}${mandir}/man$section
-+    done
-+    for section in 1 5 7 8; do
-+        install -d ${D}${mandir}/man$section
-+        install -m 0644 docs/manpages/*.$section ${D}${mandir}/man$section
-+    done
+-PACKAGES =+ "${PN}-python ${PN}-pidl libwinbind libwinbind-krb5-locator"
+-PACKAGES =+ "libwbclient libnss-winbind winbind libnetapi libsmbsharemodes \
+-             libsmbclient lib${PN}-base ${PN}-base ${PN}-ctdb-tests"
++PACKAGES =+ "${PN}-python ${PN}-pidl libwinbind libwinbind-krb5-locator \
++             libwbclient libnss-winbind winbind libnetapi libsmbsharemodes \
++             libsmbclient lib${PN}-base ${PN}-base ${PN}-ctdb-tests \
++             smbclient"
+ 
+ RDEPENDS_${PN} += "${PN}-base"
+ 
+@@ -276,5 +277,16 @@ FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.so \
+                       ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/web_server/* \
+ "
+ 
++FILES_smbclient = "${bindir}/cifsdd \
++                   ${bindir}/rpcclient \
++                   ${bindir}/smbcacls \
++                   ${bindir}/smbclient \
++                   ${bindir}/smbcquotas \
++                   ${bindir}/smbget \
++                   ${bindir}/smbspool \
++                   ${bindir}/smbtar \
++                   ${bindir}/smbtree \
++                   ${libdir}/samba/smbspool_krb5_wrapper"
 +
-     install -d ${D}${systemd_system_unitdir}
-     install -m 0644 packaging/systemd/*.service ${D}${systemd_system_unitdir}
-     sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' ${D}${systemd_system_unitdir}/*.service
+ RDEPENDS_${PN}-pidl_append = " perl"
+ FILES_${PN}-pidl = "${bindir}/pidl ${datadir}/perl5/Parse"
 -- 
 2.7.4
 
