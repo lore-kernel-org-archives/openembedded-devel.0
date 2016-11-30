@@ -1,16 +1,47 @@
-Return-Path: <obi@opendreambox.org>
-Received: from mail.saftware.de (mail.saftware.de [83.141.3.46])
-	by mail.openembedded.org (Postfix) with ESMTP id DC4ED71A74
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
+	[209.85.213.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 9BF0471A98
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2016 12:06:38 +0000 (UTC)
-Received: by t510.zcs.saftware.de (Postfix, from userid 1000)
-	id B2E7CB81614; Wed, 30 Nov 2016 13:06:37 +0100 (CET)
-From: Andreas Oberritter <obi@opendreambox.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Nov 2016 13:06:37 +0100
-Message-Id: <1480507597-21843-1-git-send-email-obi@opendreambox.org>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] imagemagick: use correct major version in program suffix
+	Wed, 30 Nov 2016 12:22:11 +0000 (UTC)
+Received: by mail-vk0-f66.google.com with SMTP id x186so8710300vkd.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Nov 2016 04:22:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20120113;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=eYdxu1JRRkZJJ6fjpBakhLUtc7fII0fg9yLXRP58fMw=;
+	b=DB+vhC1aXGS6W8AjlXSj3vqEUT0Ot7adSk8ffJ8PQLJ3kcUAZpLO9EV1+2sibCiqiO
+	RiRR4EKl0ivouZ+NPdDgu+04qzuj2bo82lbByR1T3349UKJ4v6kYaL8YH6uDCL+GON5W
+	su8/nmdBVjBpOSS14EGFJrMegTUI26ODpKClsIKDXGt2bcgHP/p1zEdEWiU5sSVPUM9m
+	3cr3O7UUNYWcvSFY8PJIAzqlZ99ryvd93oYNw4+fBj8RKb3u492bjKjZfxWRXTe3ItES
+	jRW1tXtHRqXf0ZYpYhN/sy1lEUK52W2wE6e/tA+fs6rRCssKCzggDKFBc4yz1PhOBcld
+	PH+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=eYdxu1JRRkZJJ6fjpBakhLUtc7fII0fg9yLXRP58fMw=;
+	b=Ok3K/6Gyk9lqDPyroBLIwqdzFpVfbrQzbvUQd4VcAWt5iHlb5CZSs1ppwEbh75nnXl
+	xzxH0YsXcb+ZvVRSeiPEhrZKUnAQoEIqmHSmjO/QUKDHM6QEH/2XDSfBKPre2yimdlWm
+	Nbrrjg27XTgHslo8yy5bkVYArR4LmgS4SI7KZ7zm5vGjdAztptQWtj43J569ePVIIKyr
+	zF5OsFtpsRtn2CnIYwpy7zH8xT+IC/0qviYcVa0XSS3PMp9Ts/6JP3sSU2VjdOf+m6BU
+	xCWYGZE9LXIoyv8tzKNOlbGpkDcWRqqR8BzsTOt2Ad31isrcMRy38bFhBn0fMMo4VW9B
+	h1qg==
+X-Gm-Message-State: AKaTC01UVN17r0fROBngWTKoMLZeALfO6isdR3Ltv3KIEVDExKFFi1k9ecCxX201VjlIHBaBsfAgqQl+6cx5gQ==
+X-Received: by 10.31.50.214 with SMTP id y205mr11884084vky.29.1480508532496;
+	Wed, 30 Nov 2016 04:22:12 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.176.85.157 with HTTP; Wed, 30 Nov 2016 04:22:12 -0800 (PST)
+In-Reply-To: <1480507445-20746-17-git-send-email-obi@opendreambox.org>
+References: <1480507445-20746-1-git-send-email-obi@opendreambox.org>
+	<1480507445-20746-17-git-send-email-obi@opendreambox.org>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 30 Nov 2016 13:22:12 +0100
+Message-ID: <CALbNGRQbW8hGvkCm5XZFKsNenpFcgtfAfHwbNTwcz9A1SG7_HA@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH 17/17] Revert "samba: blacklist, fails to build with new binutils-2.27"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -23,90 +54,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2016 12:06:39 -0000
+X-List-Received-Date: Wed, 30 Nov 2016 12:22:14 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
----
- .../imagemagick/imagemagick_7.0.2.bb               | 46 +++++++++++-----------
- 1 file changed, 23 insertions(+), 23 deletions(-)
+On Wed, Nov 30, 2016 at 1:04 PM, Andreas Oberritter
+<obi@opendreambox.org> wrote:
+> This reverts commit 80b2d4de0ee2a5e6a3302a527e3fcfd2b99c3e37.
+>
+> Disable cluster support, which causes the error.
+>
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> ---
+>  meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> index 8c5f6d8..564b61e 100644
+> --- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> +++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> @@ -81,7 +81,7 @@ EXTRA_OECONF += "--enable-fhs \
+>                   --with-system-mitkrb5 \
+>                   --without-ad-dc \
+>                   ${@base_conditional('TARGET_ARCH', 'x86_64', '', '--disable-glusterfs', d)} \
+> -                 --with-cluster-support \
+> +                 --without-cluster-support \
+>                   --with-profiling-data \
+>                   --with-libiconv=${STAGING_DIR_HOST}${prefix} \
+>                   --with-pam --with-pammodulesdir=${base_libdir}/security \
+> --
+> 2.7.4
+>
+Commit message confuses at least me - samba isn't blacklisted currently
 
-diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
-index 74fe369..cfaa7c3 100644
---- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
-+++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.2.bb
-@@ -20,7 +20,7 @@ inherit autotools pkgconfig update-alternatives
- 
- # xml disabled because it's using xml2-config --prefix to determine prefix which returns just /usr with our libxml2
- # if someone needs xml support then fix it first
--EXTRA_OECONF = "--program-prefix= --program-suffix=.im6 --without-perl --disable-openmp --without-xml --disable-opencl"
-+EXTRA_OECONF = "--program-prefix= --program-suffix=.im7 --without-perl --disable-openmp --without-xml --disable-opencl"
- 
- CACHED_CONFIGUREVARS = "ac_cv_sys_file_offset_bits=yes"
- PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
-@@ -51,40 +51,40 @@ ALTERNATIVE_PRIORITY = "100"
- ALTERNATIVE_${PN} = "animate compare composite conjure convert display \
-     identify import mogrify montage stream"
- 
--ALTERNATIVE_TARGET[animate] = "${bindir}/animate.im6"
--ALTERNATIVE_TARGET[compare] = "${bindir}/compare.im6"
--ALTERNATIVE_TARGET[composite] = "${bindir}/composite.im6"
--ALTERNATIVE_TARGET[conjure] = "${bindir}/conjure.im6"
--ALTERNATIVE_TARGET[convert] = "${bindir}/convert.im6"
--ALTERNATIVE_TARGET[display] = "${bindir}/display.im6"
--ALTERNATIVE_TARGET[identify] = "${bindir}/identify.im6"
--ALTERNATIVE_TARGET[import] = "${bindir}/import.im6"
--ALTERNATIVE_TARGET[mogrify] = "${bindir}/mogrify.im6"
--ALTERNATIVE_TARGET[montage] = "${bindir}/montage.im6"
--ALTERNATIVE_TARGET[stream] = "${bindir}/stream.im6"
-+ALTERNATIVE_TARGET[animate] = "${bindir}/animate.im7"
-+ALTERNATIVE_TARGET[compare] = "${bindir}/compare.im7"
-+ALTERNATIVE_TARGET[composite] = "${bindir}/composite.im7"
-+ALTERNATIVE_TARGET[conjure] = "${bindir}/conjure.im7"
-+ALTERNATIVE_TARGET[convert] = "${bindir}/convert.im7"
-+ALTERNATIVE_TARGET[display] = "${bindir}/display.im7"
-+ALTERNATIVE_TARGET[identify] = "${bindir}/identify.im7"
-+ALTERNATIVE_TARGET[import] = "${bindir}/import.im7"
-+ALTERNATIVE_TARGET[mogrify] = "${bindir}/mogrify.im7"
-+ALTERNATIVE_TARGET[montage] = "${bindir}/montage.im7"
-+ALTERNATIVE_TARGET[stream] = "${bindir}/stream.im7"
- 
- ALTERNATIVE_${PN}-doc = "animate.1 compare.1 composite.1 conjure.1 \
-     convert.1 display.1 identify.1 import.1 mogrify.1 montage.1 stream.1"
- 
- ALTERNATIVE_LINK_NAME[animate.1] = "${mandir}/man1/animate.1"
--ALTERNATIVE_TARGET[animate.1] = "${mandir}/man1/animate.im6.1"
-+ALTERNATIVE_TARGET[animate.1] = "${mandir}/man1/animate.im7.1"
- ALTERNATIVE_LINK_NAME[compare.1] = "${mandir}/man1/compare.1"
--ALTERNATIVE_TARGET[compare.1] = "${mandir}/man1/compare.im6.1"
-+ALTERNATIVE_TARGET[compare.1] = "${mandir}/man1/compare.im7.1"
- ALTERNATIVE_LINK_NAME[composite.1] = "${mandir}/man1/composite.1"
--ALTERNATIVE_TARGET[composite.1] = "${mandir}/man1/composite.im6.1"
-+ALTERNATIVE_TARGET[composite.1] = "${mandir}/man1/composite.im7.1"
- ALTERNATIVE_LINK_NAME[conjure.1] = "${mandir}/man1/conjure.1"
--ALTERNATIVE_TARGET[conjure.1] = "${mandir}/man1/conjure.im6.1"
-+ALTERNATIVE_TARGET[conjure.1] = "${mandir}/man1/conjure.im7.1"
- ALTERNATIVE_LINK_NAME[convert.1] = "${mandir}/man1/convert.1"
--ALTERNATIVE_TARGET[convert.1] = "${mandir}/man1/convert.im6.1"
-+ALTERNATIVE_TARGET[convert.1] = "${mandir}/man1/convert.im7.1"
- ALTERNATIVE_LINK_NAME[display.1] = "${mandir}/man1/display.1"
--ALTERNATIVE_TARGET[display.1] = "${mandir}/man1/display.im6.1"
-+ALTERNATIVE_TARGET[display.1] = "${mandir}/man1/display.im7.1"
- ALTERNATIVE_LINK_NAME[identify.1] = "${mandir}/man1/identify.1"
--ALTERNATIVE_TARGET[identify.1] = "${mandir}/man1/identify.im6.1"
-+ALTERNATIVE_TARGET[identify.1] = "${mandir}/man1/identify.im7.1"
- ALTERNATIVE_LINK_NAME[import.1] = "${mandir}/man1/import.1"
--ALTERNATIVE_TARGET[import.1] = "${mandir}/man1/import.im6.1"
-+ALTERNATIVE_TARGET[import.1] = "${mandir}/man1/import.im7.1"
- ALTERNATIVE_LINK_NAME[mogrify.1] = "${mandir}/man1/mogrify.1"
--ALTERNATIVE_TARGET[mogrify.1] = "${mandir}/man1/mogrify.im6.1"
-+ALTERNATIVE_TARGET[mogrify.1] = "${mandir}/man1/mogrify.im7.1"
- ALTERNATIVE_LINK_NAME[montage.1] = "${mandir}/man1/montage.1"
--ALTERNATIVE_TARGET[montage.1] = "${mandir}/man1/montage.im6.1"
-+ALTERNATIVE_TARGET[montage.1] = "${mandir}/man1/montage.im7.1"
- ALTERNATIVE_LINK_NAME[stream.1] = "${mandir}/man1/stream.1"
--ALTERNATIVE_TARGET[stream.1] = "${mandir}/man1/stream.im6.1"
-+ALTERNATIVE_TARGET[stream.1] = "${mandir}/man1/stream.im7.1"
--- 
-2.7.4
-
+Andreas
 
