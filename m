@@ -1,17 +1,36 @@
-Return-Path: <obi@opendreambox.org>
-Received: from mail.saftware.de (mail.saftware.de [83.141.3.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 268F371AAF
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f179.google.com (mail-qk0-f179.google.com
+	[209.85.220.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B88F71AAB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2016 18:21:20 +0000 (UTC)
-Received: by t510.zcs.saftware.de (Postfix, from userid 1000)
-	id 999E8B81F65; Wed, 30 Nov 2016 19:21:18 +0100 (CET)
-From: Andreas Oberritter <obi@opendreambox.org>
+	Wed, 30 Nov 2016 18:22:10 +0000 (UTC)
+Received: by mail-qk0-f179.google.com with SMTP id n204so218704176qke.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Nov 2016 10:22:12 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ZYw5ICtnOVG5jMDHeTe0Edl2TdImr9EdlzFgTHm4T1w=;
+	b=U++gPm4B408im6qBbaV7DRpi33ZhEko9XB0Ub9qJ+u+3/Qd1u5teXaM7VwhPbC91Yu
+	f/6Q/F2JYBs79Wefe7fnYVjV8iQqHAr27ww5cUM0yRhZCkWUp/4H15RC/ENu6arZqhD4
+	ljcPEmcho2I+2RJHDQC0nijR5rZX9iTBVRDKLsc9YUkluwg+7IyESMvSjXHFPx89tUwQ
+	ZP9QmUWkTLDNRmhZaIE6yLSM7cqR/3nocmWphBqmx7drM5oBzBvmT6G35A1xH0IP5JsJ
+	Hc94YTehZPbdmlIB0KFAEZL3IWFbPcPt5b6wRwlxGemYZA031q8o8iIOAqwEW0q7p2Dg
+	bLYQ==
+X-Gm-Message-State: AKaTC01vL1+frv2nNixBKZ61rNm34eBxyG+THgUsCyV7Fwegp9OZumL8A5G2MTJzS77H3A==
+X-Received: by 10.55.156.81 with SMTP id f78mr32796062qke.123.1480530131539;
+	Wed, 30 Nov 2016 10:22:11 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
+	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
+	q3sm33912856qte.41.2016.11.30.10.22.10
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 30 Nov 2016 10:22:11 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Nov 2016 19:21:18 +0100
-Message-Id: <1480530078-8159-1-git-send-email-obi@opendreambox.org>
+Date: Wed, 30 Nov 2016 13:22:04 -0500
+Message-Id: <1480530124-6898-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: [meta-networking][PATCH] samba: Avoid timeout for nmbd if started offline with systemd
+Subject: [meta-python][PATCH] python-pyasn1: fix RDEPENDS to work correctly when building native version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -24,68 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2016 18:21:21 -0000
+X-List-Received-Date: Wed, 30 Nov 2016 18:22:10 -0000
 
-If no network connection appears within DefaultTimeoutStartSec
-(~ 90s) after startup, nmbd fails to notify systemd and will
-therefore get killed.
-
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- ...void-timeout-for-nmbd-if-started-offline-.patch | 31 ++++++++++++++++++++++
- .../recipes-connectivity/samba/samba_4.4.5.bb      |  1 +
- 2 files changed, 32 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/samba/samba-4.4.5/0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch
+ meta-python/recipes-devtools/python/python-pyasn1.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba-4.4.5/0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch b/meta-networking/recipes-connectivity/samba/samba-4.4.5/0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch
-new file mode 100644
-index 0000000..0ab3436
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/samba/samba-4.4.5/0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch
-@@ -0,0 +1,31 @@
-+Upstream-Status: Submitted [https://github.com/samba-team/samba/pull/70]
-+
-+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-+
-+From 50eac4fd30944e5e1d83060757633fe0ed572723 Mon Sep 17 00:00:00 2001
-+From: Andreas Oberritter <obi@opendreambox.org>
-+Date: Wed, 30 Nov 2016 16:25:06 +0100
-+Subject: [PATCH] packaging: Avoid timeout for nmbd if started offline with
-+ systemd
-+
-+If no network connection appears within DefaultTimeoutStartSec
-+(~ 90s) after startup, nmbd fails to notify systemd and will
-+therefore get killed.
-+
-+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-+---
-+ packaging/systemd/nmb.service | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/packaging/systemd/nmb.service b/packaging/systemd/nmb.service
-+index 992c0cd..555c9ab 100644
-+--- a/packaging/systemd/nmb.service
-++++ b/packaging/systemd/nmb.service
-+@@ -10,6 +10,7 @@ EnvironmentFile=-/etc/sysconfig/samba
-+ ExecStart=/usr/sbin/nmbd $NMBDOPTIONS
-+ ExecReload=/usr/bin/kill -HUP $MAINPID
-+ LimitCORE=infinity
-++TimeoutStartSec=0
-+ 
-+ [Install]
-+ WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-index 8c5f6d8..e6347b8 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-@@ -17,6 +17,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
-            file://16-do-not-check-xsltproc-manpages.patch \
-            file://20-do-not-import-target-module-while-cross-compile.patch \
-            file://21-add-config-option-without-valgrind.patch \
-+           file://0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch \
-            file://0006-avoid-using-colon-in-the-checking-msg.patch \
-            file://volatiles.03_samba \
-           "
+diff --git a/meta-python/recipes-devtools/python/python-pyasn1.inc b/meta-python/recipes-devtools/python/python-pyasn1.inc
+index 7c25de8..72cabc4 100644
+--- a/meta-python/recipes-devtools/python/python-pyasn1.inc
++++ b/meta-python/recipes-devtools/python/python-pyasn1.inc
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=425e62320d430219736139b134db2fc4"
+ SRC_URI[md5sum] = "f00a02a631d4016818659d1cc38d229a"
+ SRC_URI[sha256sum] = "853cacd96d1f701ddd67aa03ecc05f51890135b7262e922710112f12a2ed2a7f"
+ 
+-RDEPENDS_${PN} += " \
++RDEPENDS_${PN}_class-target += " \
+     ${PYTHON_PN}-lang \
+     ${PYTHON_PN}-shell \
+ "
 -- 
 2.7.4
 
