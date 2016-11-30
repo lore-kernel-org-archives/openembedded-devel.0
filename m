@@ -1,31 +1,36 @@
-Return-Path: <jose.a.lamego@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id DB80871AC5
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id B41B671AC0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2016 18:41:26 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga102.jf.intel.com with ESMTP; 30 Nov 2016 10:41:21 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.31,574,1473145200"; 
-	d="asc'?scan'208";a="11739777"
-Received: from jalamego-mobl2.zpn.intel.com (HELO [10.219.5.146])
-	([10.219.5.146])
-	by orsmga002.jf.intel.com with ESMTP; 30 Nov 2016 10:41:20 -0800
+	Wed, 30 Nov 2016 19:14:00 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id n6so20796875qtd.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Nov 2016 11:14:02 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=fZ+0kcyin2RlmGOWvjVBFwXLXVj4VHbg1MfyBYQoyHA=;
+	b=XLrvkTK90EGnDdXX0MzCcluvzUtnpPLvjYJsapVCvVBpCsSkG3xlgdoIOZtDSAzhMj
+	bn49dsRtjTZf5hxLZaI4xqv+ibePTQW5M0+nMPSGSAcLy566/x3hevdWCAI52aogeHfD
+	0PV/YbDam/LV/zxbEHePYrBA+1wSXWaBaRdmljhbW8MaYj5U0uNO1CwjCWffhZsbLI4i
+	hHSuFUyOAx9aVwwVMQkPsSISnRNzuoaX46NkRu1R26/eGEVfnKknl8PXTrwbD6YCNizW
+	ZNGvjHIjdNzFZXSgc0noVc+G6ncmCUy30zDvQiQzKm/lis7OWYl5xOnqBP3J1R3HoMQ4
+	0pSQ==
+X-Gm-Message-State: AKaTC00VW629kH715G94f4HmGmtYtCtDlW5HY3rFuy3KfLMyxUXRTeF+KkGg9wNlgC0J9Q==
+X-Received: by 10.200.55.179 with SMTP id d48mr32696450qtc.181.1480533242286; 
+	Wed, 30 Nov 2016 11:14:02 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
+	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
+	x127sm18157878qkd.37.2016.11.30.11.14.01
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 30 Nov 2016 11:14:01 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-References: <4717571.f7GXZOAcRz@peggleto-mobl.ger.corp.intel.com>
-	<20161129204327.GG2546@bill-the-cat>
-	<d93f4841-0154-2232-1802-2b8fcc85a81c@linux.intel.com>
-	<19E9BF3F-664F-42A4-A170-5B7BB473ED80@gmail.com>
-From: Jose Lamego <jose.a.lamego@linux.intel.com>
-Message-ID: <53ca2ead-1b75-ff6d-30c1-abb16330bad3@linux.intel.com>
-Date: Wed, 30 Nov 2016 12:41:20 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.4.0
-MIME-Version: 1.0
-In-Reply-To: <19E9BF3F-664F-42A4-A170-5B7BB473ED80@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Patrick Ohly <patrick.ohly@intel.com>,
-	Michael Halstead <michael@yoctoproject.org>
-Subject: Re: meta-openembedded patchwork git hook
+Date: Wed, 30 Nov 2016 14:13:54 -0500
+Message-Id: <1480533235-27786-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH 1/2] python-cryptography-vectors: update to version 1.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,130 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2016 18:41:28 -0000
-X-Groupsio-MsgNum: 64166
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="uGS8ONqEX059lKlpuC0GNatUU4SUlinI3"
+X-List-Received-Date: Wed, 30 Nov 2016 19:14:02 -0000
 
---uGS8ONqEX059lKlpuC0GNatUU4SUlinI3
-Content-Type: multipart/mixed; boundary="ue67CtfILgbxD0k9GDIM3oLWV0orNFc1F";
- protected-headers="v1"
-From: Jose Lamego <jose.a.lamego@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Tom Rini <trini@konsulko.com>, Patrick Ohly <patrick.ohly@intel.com>,
- Michael Halstead <michael@yoctoproject.org>
-Message-ID: <53ca2ead-1b75-ff6d-30c1-abb16330bad3@linux.intel.com>
-Subject: Re: [oe] meta-openembedded patchwork git hook
-References: <4717571.f7GXZOAcRz@peggleto-mobl.ger.corp.intel.com>
- <20161129204327.GG2546@bill-the-cat>
- <d93f4841-0154-2232-1802-2b8fcc85a81c@linux.intel.com>
- <19E9BF3F-664F-42A4-A170-5B7BB473ED80@gmail.com>
-In-Reply-To: <19E9BF3F-664F-42A4-A170-5B7BB473ED80@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-cryptography-vectors.inc   | 4 ++--
+ ...cryptography-vectors_1.4.bb => python-cryptography-vectors_1.6.bb} | 0
+ ...ryptography-vectors_1.4.bb => python3-cryptography-vectors_1.6.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cryptography-vectors_1.4.bb => python-cryptography-vectors_1.6.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-cryptography-vectors_1.4.bb => python3-cryptography-vectors_1.6.bb} (100%)
 
---ue67CtfILgbxD0k9GDIM3oLWV0orNFc1F
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
-
-
-
-On 11/29/2016 07:50 PM, Khem Raj wrote:
->=20
->> On Nov 29, 2016, at 2:34 PM, Jose Lamego <jose.a.lamego@linux.intel.co=
-m> wrote:
->>
->>
->>
->> On 11/29/2016 02:43 PM, Tom Rini wrote:
->>> On Wed, Nov 30, 2016 at 06:52:46AM +1300, Paul Eggleton wrote:
->>>
->>>> Hi folks,
->>>>
->>>> Martin just brought to my attention that the git hook for the=20
->>>> meta-openembedded repository that's supposed to update patchwork sti=
-ll isn't=20
->>>> working and hasn't done so for a very long time. I thought we'd fixe=
-d this so=20
->>>> that merged patches get marked as "Accepted", but at least for meta-=
-
->>>> openembedded it seems like that's not the case.
->>>>
->>>> Jose / Michael - can you look into this if you haven't already? Plea=
-se let me=20
->>>> know if you need any help.
->>
->> The git hook was configured to update OE-core only, Michael will help =
-us
->> to include meta-openembedded.
->>
->=20
-> There are more repos using patchwork beyond OE-core and meta-opemebedde=
-d
-> please enable it for all of them  as well.
->=20
-
-Now all of the projects are enabled to receive automatic updates from
-the git-hook (Thanks Michael). Please let me know if any undesired
-behavior is detected.
-
->>>
->>> Since I brought this up on IRC, I wanted to chime in here.  First, if=
-
->>> you want to use top-of-tree patchwork you'll also want to grab
->>> https://patchwork.ozlabs.org/bundle/stephenfin/post-receive%20fixes/
->>
->>
->> Hi Tom, nice meeting you. OE-Patchwork is using a fork in [1] from
->> freedesktop.org's patchwork at [2]. I will look at the hook fixes you
->> mentioned at the first chance, thanks for the tip.
->>
->>> (and fwiw, I also have been setting the DJANGO part to 'dev' rather t=
-han
->>> production for my use-case).  Second, I think part of the problem is
->>> that there are just some cases where the hashing fails, which for me =
-is
->>> around 10% of the time.  Depending on how much one uses bundles and
->>> tracks what ends up being committed this may or may not be a problem.=
-
->>> And I'm sure upstream patchwork would appreciate any changes to impro=
-ve
->>> hashing success :)
->>>
->>
->> Regards
->> Jose
->>
->> --=20
->> Jose Lamego | OTC Embedded Platforms & Tools | GDC
->>
->> --=20
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-
---=20
-Jose Lamego | OTC Embedded Platforms & Tools | GDC
+diff --git a/meta-python/recipes-devtools/python/python-cryptography-vectors.inc b/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
+index 62dfbfd..6af37ed 100644
+--- a/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
++++ b/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
+@@ -7,8 +7,8 @@ DEPENDS = " \
+     ${PYTHON_PN}-cryptography \
+ "
+ 
+-SRC_URI[md5sum] = "b8555dfadafc4ecab4ee4650430d9cab"
+-SRC_URI[sha256sum] = "0728815ef0c53d67fd437aa5220450a9752d41ecb28108f5df628a092ff466ea"
++SRC_URI[md5sum] = "d7d53f061366394267be444fa84cfe89"
++SRC_URI[sha256sum] = "01ccb07c95d128a70732f274bd16af479bcc344e43cac745d2b9ec4ab71ff675"
+ 
+ PYPI_PACKAGE = "cryptography_vectors"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-cryptography-vectors_1.4.bb b/meta-python/recipes-devtools/python/python-cryptography-vectors_1.6.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-cryptography-vectors_1.4.bb
+rename to meta-python/recipes-devtools/python/python-cryptography-vectors_1.6.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_1.4.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_1.6.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-cryptography-vectors_1.4.bb
+rename to meta-python/recipes-devtools/python/python3-cryptography-vectors_1.6.bb
+-- 
+2.7.4
 
 
---ue67CtfILgbxD0k9GDIM3oLWV0orNFc1F--
-
---uGS8ONqEX059lKlpuC0GNatUU4SUlinI3
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iQEcBAEBAgAGBQJYPx1UAAoJEFJAtowlSEbnc6IIAIjc6AIF+EMiokE2B2dwMEO7
-wYBLhPw05lB5FdqQkZRZaZDpHKqfuFluXuUJ3wZJYYyf3rXIlyCcCU6SRXZrA7kn
-i2xOFVIbEM0NVXhSo0nu+QBVE3jhy9thIGOx9jl+pbPDdNrVTRc2BkEy4O6mCrj3
-1IAYdYs94BoX4w2DjtHmF6HkxlNyhCWEh1kYC8hjksR12wCcOUTx/HCmEhS3wTxe
-Jo+YBBIZwwvMgmILVo0eTU0BYq4K87jvRWkdzEissSXX6cWA/rtVxCaJEkg9mj+t
-FeJ0SthmFags0jmhxA5aSaKLUgsm2mBJQxQmZNzIWhd3r9bS1wzTbgYXifiKiyk=
-=YWzE
------END PGP SIGNATURE-----
-
---uGS8ONqEX059lKlpuC0GNatUU4SUlinI3--
