@@ -1,16 +1,18 @@
 Return-Path: <obi@opendreambox.org>
 Received: from mail.saftware.de (mail.saftware.de [83.141.3.46])
-	by mail.openembedded.org (Postfix) with ESMTP id CC19071A87
+	by mail.openembedded.org (Postfix) with ESMTP id B2A1F71A26
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2016 11:59:06 +0000 (UTC)
+	Wed, 30 Nov 2016 12:04:07 +0000 (UTC)
 Received: by t510.zcs.saftware.de (Postfix, from userid 1000)
-	id 111C6B81614; Wed, 30 Nov 2016 12:59:04 +0100 (CET)
+	id 0D4F3B80910; Wed, 30 Nov 2016 13:04:05 +0100 (CET)
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Nov 2016 12:59:04 +0100
-Message-Id: <1480507144-19034-1-git-send-email-obi@opendreambox.org>
+Date: Wed, 30 Nov 2016 13:03:50 +0100
+Message-Id: <1480507445-20746-2-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] krb5: create Debian-like package structure
+In-Reply-To: <1480507445-20746-1-git-send-email-obi@opendreambox.org>
+References: <1480507445-20746-1-git-send-email-obi@opendreambox.org>
+Subject: [meta-networking][PATCH 02/17] samba: remove unneeded conditionals for sysvinit and systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -23,158 +25,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2016 11:59:08 -0000
+X-List-Received-Date: Wed, 30 Nov 2016 12:04:09 -0000
 
-Split libraries and plugins into their own packages. Create packages
-for admin-server, kdc, user and examples. Remove some unneeded binaries.
-
-Enable daemons on boot.
+systemd.bbclass takes care of deleting unused startup scripts.
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- meta-oe/recipes-connectivity/krb5/krb5_1.13.6.bb | 101 ++++++++++++++++++++---
- 1 file changed, 89 insertions(+), 12 deletions(-)
+ meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.13.6.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.13.6.bb
-index 06f7f90..656a02f 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.13.6.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.13.6.bb
-@@ -17,7 +17,7 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${S}/../NOTICE;md5=c6f37efad53b098e420f45e7ab6807dc"
- DEPENDS = "ncurses util-linux e2fsprogs e2fsprogs-native"
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+index fd57505..0e3da56 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+@@ -137,7 +137,8 @@ FILES_${PN}-base = "${sbindir}/nmbd \
+                     ${localstatedir}/lib/samba \
+                     ${localstatedir}/nmbd \
+                     ${localstatedir}/spool/samba \
+-"
++                    ${systemd_unitdir}/system/nmb.service \
++                    ${systemd_unitdir}/system/smb.service"
  
--inherit autotools-brokensep binconfig perlnative systemd
-+inherit autotools-brokensep binconfig perlnative systemd update-rc.d
+ FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
+                           ${libdir}/ctdb-tests \
+@@ -260,13 +261,8 @@ FILES_libnss-winbind = "${libdir}/libnss_*${SOLIBS} \
+ FILES_${PN} += "${base_libdir}/security/pam_smbpass.so \
+ "
  
- SHRT_VER = "${@oe.utils.trim_version("${PV}", 2)}"
- SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
-@@ -36,9 +36,6 @@ SRC_URI[sha256sum] = "9c0a46b8918237a53916370d2e02298c2b294f55f0351f9404e18930bc
- 
- S = "${WORKDIR}/${BP}/src"
- 
--SYSTEMD_SERVICE_${PN} = "krb5-admin-server.service krb5-kdc.service"
--SYSTEMD_AUTO_ENABLE = "disable"
+-SMB_SERVICE="${systemd_unitdir}/system/nmb.service ${systemd_unitdir}/system/smb.service"
+-SMB_SYSV="${sysconfdir}/init.d ${sysconfdir}/rc?.d"
+-FILES_${PN}-base +="${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${SMB_SERVICE}', '', d)}"
+-FILES_${PN}-base +="${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${SMB_SYSV}', '', d)}"
 -
- PACKAGECONFIG ??= "openssl"
- PACKAGECONFIG[libedit] = "--with-libedit,--without-libedit,libedit"
- PACKAGECONFIG[openssl] = "--with-pkinit-crypto-impl=openssl,,openssl"
-@@ -54,13 +51,6 @@ CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regc
- CFLAGS_append = " -fPIC -DDESTRUCTOR_ATTR_WORKS=1 -I${STAGING_INCDIR}/et"
- LDFLAGS_append = " -pthread"
+-FILES_libwinbind = "${base_libdir}/security/pam_winbind.so"
+-FILES_libwinbind += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${systemd_unitdir}/system/winbind.service', '', d)}"
++FILES_libwinbind = "${base_libdir}/security/pam_winbind.so \
++                    ${systemd_unitdir}/system/winbind.service"
+ FILES_libwinbind-krb5-locator = "${libdir}/winbind_krb5_locator.so"
  
--FILES_${PN} += "${datadir}/gnats"
--FILES_${PN}-doc += "${datadir}/examples"
--FILES_${PN}-dbg += "${libdir}/krb5/plugins/*/.debug"
--
--# As this recipe doesn't inherit update-rc.d, we need to add this dependency here
--RDEPENDS_${PN}_class-target += "initscripts-functions"
--
- do_configure() {
-     gnu-configize --force
-     autoreconf
-@@ -69,6 +59,13 @@ do_configure() {
- 
- do_install_append() {
-     rm -rf ${D}/${localstatedir}/run
-+    rm -f ${D}${bindir}/sclient
-+    rm -f ${D}${bindir}/sim_client
-+    rm -f ${D}${bindir}/uuclient
-+    rm -f ${D}${sbindir}/krb5-send-pr
-+    rm -f ${D}${sbindir}/sim_server
-+    rm -f ${D}${sbindir}/sserver
-+    rm -f ${D}${sbindir}/uuserver
- 
-     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-         mkdir -p ${D}/${sysconfdir}/init.d ${D}/${sysconfdir}/default
-@@ -90,7 +87,87 @@ do_install_append() {
-     fi
- }
- 
--pkg_postinst_${PN} () {
-+PACKAGES =+ "${PN}-admin-server \
-+             ${PN}-gss-samples \
-+             ${PN}-k5tls \
-+             ${PN}-kdc \
-+             ${PN}-kdc-ldap \
-+             ${PN}-kpropd \
-+             ${PN}-otp \
-+             ${PN}-pkinit \
-+             ${PN}-user \
-+             libgssapi-krb5 \
-+             libgssrpc \
-+             libk5crypto \
-+             libkadm5clnt-mit \
-+             libkadm5srv-mit \
-+             libkdb5 \
-+             libkrad \
-+             libkrb5 \
-+             libkrb5support \
-+             libverto"
-+
-+FILES_${PN} = ""
-+FILES_${PN}-doc += "${datadir}/examples"
-+FILES_${PN}-dbg += "${libdir}/krb5/plugins/*/.debug"
-+
-+FILES_${PN}-admin-server = "${sbindir}/kadmin.local \
-+                            ${sbindir}/kadmind \
-+                            ${sbindir}/kprop \
-+                            ${sysconfdir}/default/krb5-admin-server \
-+                            ${sysconfdir}/init.d/krb5-admin-server \
-+                            ${systemd_system_unitdir}/krb5-admin-server.service"
-+
-+FILES_${PN}-gss-samples = "${bindir}/gss-client \
-+                           ${sbindir}/gss-server"
-+
-+FILES_${PN}-k5tls = "${libdir}/krb5/plugins/tls/k5tls.so"
-+
-+FILES_${PN}-kdc = "${libdir}/krb5/plugins/kdb/db2.so \
-+                   ${localstatedir}/krb5kdc \
-+                   ${sbindir}/kdb5_util \
-+                   ${sbindir}/kproplog \
-+                   ${sbindir}/krb5kdc \
-+                   ${sysconfdir}/default/krb5-kdc \
-+                   ${sysconfdir}/default/volatiles/87_krb5 \
-+                   ${sysconfdir}/init.d/krb5-kdc \
-+                   ${sysconfdir}/tmpfiles.d/krb5.conf \
-+                   ${systemd_system_unitdir}/krb5-kdc.service"
-+
-+FILES_${PN}-kdc-ldap = "${libdir}/krb5/libkdb_ldap${SOLIBS} \
-+                        ${libdir}/krb5/plugins/kdb/kldap.so \
-+                        ${sbindir}/kdb5_ldap_util"
-+
-+FILES_${PN}-kpropd = "${sbindir}/kpropd"
-+FILES_${PN}-otp = "${libdir}/krb5/plugins/preauth/otp.so"
-+FILES_${PN}-pkinit = "${libdir}/krb5/plugins/preauth/pkinit.so"
-+FILES_${PN}-user = "${bindir}/k*"
-+
-+FILES_libgssapi-krb5 = "${libdir}/libgssapi_krb5${SOLIBS}"
-+FILES_libgssrpc = "${libdir}/libgssrpc${SOLIBS}"
-+FILES_libk5crypto = "${libdir}/libk5crypto${SOLIBS}"
-+FILES_libkadm5clnt-mit = "${libdir}/libkadm5clnt_mit${SOLIBS}"
-+FILES_libkadm5srv-mit = "${libdir}/libkadm5srv_mit${SOLIBS}"
-+FILES_libkdb5 = "${libdir}/libkdb5${SOLIBS}"
-+FILES_libkrad = "${libdir}/libkrad${SOLIBS}"
-+FILES_libkrb5 = "${libdir}/libkrb5${SOLIBS} \
-+                 ${libdir}/krb5/plugins/authdata \
-+                 ${libdir}/krb5/plugins/libkrb5"
-+FILES_libkrb5support = "${libdir}/libkrb5support${SOLIBS}"
-+FILES_libverto = "${libdir}/libverto${SOLIBS}"
-+
-+RDEPENDS_${PN}-kadmin-server = "${PN}-kdc"
-+RDEPENDS_${PN}-kpropd = "${PN}-kdc"
-+
-+INITSCRIPT_PACKAGES = "${PN}-admin-server ${PN}-kdc"
-+INITSCRIPT_NAME_${PN}-admin-server = "krb5-admin-server"
-+INITSCRIPT_NAME_${PN}-kdc = "krb5-kdc"
-+
-+SYSTEMD_PACKAGES = "${PN}-admin-server ${PN}-kdc"
-+SYSTEMD_SERVICE_${PN}-admin-server = "krb5-admin-server.service"
-+SYSTEMD_SERVICE_${PN}-kdc = "krb5-kdc.service"
-+
-+pkg_postinst_${PN}-kdc () {
-     if [ -z "$D" ]; then
-         if command -v systemd-tmpfiles >/dev/null; then
-             systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/krb5.conf
+ FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.so \
 -- 
 2.7.4
 
