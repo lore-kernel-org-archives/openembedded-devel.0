@@ -1,36 +1,31 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f174.google.com (mail-qk0-f174.google.com
-	[209.85.220.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 8ECD971AC5
+Return-Path: <jose.a.lamego@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id DB80871AC5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2016 18:36:47 +0000 (UTC)
-Received: by mail-qk0-f174.google.com with SMTP id n21so219171857qka.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2016 10:36:48 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Uuo9DxP7CPRXDtFb/FzJ9jxqjX7H/cvfch8i66zGN0c=;
-	b=OO8eDXmozISMKYCmIcK5qBucAlItuqaPwHhClbza4iRs9hJHFE7znk3f10/bLRx+KD
-	Rhi+bShVbAWBhSYQwjNCw9s06u2S+94Zgi0+N4OMfZVMujEGnIPZiqfZzh5iVyt/3bB7
-	oWpPaRlkKOw9o8uw8NKnk8o43zg4Ahzp5p8XE0jCPomkJT3us4NSZZahkYBC6+mORRFJ
-	MpOjwuwUjI3DgIhIdrqkC2ZcxZE0pqz/gLhqW/DxALizaoVET3H7mHxtOePga3GbVz/l
-	g1AkeK/llswzLSM0ZRgEeRf+1EREljxfuGX8u9apmiazribCNfgQ34EYEjIF6p4C+sRu
-	QB5A==
-X-Gm-Message-State: AKaTC00gw8LhN8EH5GulbPcU+FmpX7gVavORD79KHPwmDJX7D4tiSqy6jh8v+/VFTIss+A==
-X-Received: by 10.55.166.77 with SMTP id p74mr29996008qke.113.1480531008509;
-	Wed, 30 Nov 2016 10:36:48 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
-	[69.124.217.3])
-	by smtp.gmail.com with ESMTPSA id 5sm34048862qts.47.2016.11.30.10.36.47
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 30 Nov 2016 10:36:48 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
+	Wed, 30 Nov 2016 18:41:26 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga102.jf.intel.com with ESMTP; 30 Nov 2016 10:41:21 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.31,574,1473145200"; 
+	d="asc'?scan'208";a="11739777"
+Received: from jalamego-mobl2.zpn.intel.com (HELO [10.219.5.146])
+	([10.219.5.146])
+	by orsmga002.jf.intel.com with ESMTP; 30 Nov 2016 10:41:20 -0800
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Nov 2016 13:36:41 -0500
-Message-Id: <1480531001-26045-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-ipaddress: add native and nativesdk
+References: <4717571.f7GXZOAcRz@peggleto-mobl.ger.corp.intel.com>
+	<20161129204327.GG2546@bill-the-cat>
+	<d93f4841-0154-2232-1802-2b8fcc85a81c@linux.intel.com>
+	<19E9BF3F-664F-42A4-A170-5B7BB473ED80@gmail.com>
+From: Jose Lamego <jose.a.lamego@linux.intel.com>
+Message-ID: <53ca2ead-1b75-ff6d-30c1-abb16330bad3@linux.intel.com>
+Date: Wed, 30 Nov 2016 12:41:20 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.4.0
+MIME-Version: 1.0
+In-Reply-To: <19E9BF3F-664F-42A4-A170-5B7BB473ED80@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Patrick Ohly <patrick.ohly@intel.com>,
+	Michael Halstead <michael@yoctoproject.org>
+Subject: Re: meta-openembedded patchwork git hook
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,24 +38,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2016 18:36:47 -0000
+X-List-Received-Date: Wed, 30 Nov 2016 18:41:28 -0000
+X-Groupsio-MsgNum: 64166
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="uGS8ONqEX059lKlpuC0GNatUU4SUlinI3"
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-ipaddress_1.0.17.bb | 2 ++
- 1 file changed, 2 insertions(+)
+--uGS8ONqEX059lKlpuC0GNatUU4SUlinI3
+Content-Type: multipart/mixed; boundary="ue67CtfILgbxD0k9GDIM3oLWV0orNFc1F";
+ protected-headers="v1"
+From: Jose Lamego <jose.a.lamego@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Tom Rini <trini@konsulko.com>, Patrick Ohly <patrick.ohly@intel.com>,
+ Michael Halstead <michael@yoctoproject.org>
+Message-ID: <53ca2ead-1b75-ff6d-30c1-abb16330bad3@linux.intel.com>
+Subject: Re: [oe] meta-openembedded patchwork git hook
+References: <4717571.f7GXZOAcRz@peggleto-mobl.ger.corp.intel.com>
+ <20161129204327.GG2546@bill-the-cat>
+ <d93f4841-0154-2232-1802-2b8fcc85a81c@linux.intel.com>
+ <19E9BF3F-664F-42A4-A170-5B7BB473ED80@gmail.com>
+In-Reply-To: <19E9BF3F-664F-42A4-A170-5B7BB473ED80@gmail.com>
 
-diff --git a/meta-python/recipes-devtools/python/python-ipaddress_1.0.17.bb b/meta-python/recipes-devtools/python/python-ipaddress_1.0.17.bb
-index 686d5fd..bfee254 100644
---- a/meta-python/recipes-devtools/python/python-ipaddress_1.0.17.bb
-+++ b/meta-python/recipes-devtools/python/python-ipaddress_1.0.17.bb
-@@ -9,3 +9,5 @@ SRC_URI[md5sum] = "8bbf0326719fafb1f453921ef96729fe"
- SRC_URI[sha256sum] = "3a21c5a15f433710aaa26f1ae174b615973a25182006ae7f9c26de151cd51716"
- 
- inherit pypi setuptools
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.7.4
+--ue67CtfILgbxD0k9GDIM3oLWV0orNFc1F
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
 
+
+On 11/29/2016 07:50 PM, Khem Raj wrote:
+>=20
+>> On Nov 29, 2016, at 2:34 PM, Jose Lamego <jose.a.lamego@linux.intel.co=
+m> wrote:
+>>
+>>
+>>
+>> On 11/29/2016 02:43 PM, Tom Rini wrote:
+>>> On Wed, Nov 30, 2016 at 06:52:46AM +1300, Paul Eggleton wrote:
+>>>
+>>>> Hi folks,
+>>>>
+>>>> Martin just brought to my attention that the git hook for the=20
+>>>> meta-openembedded repository that's supposed to update patchwork sti=
+ll isn't=20
+>>>> working and hasn't done so for a very long time. I thought we'd fixe=
+d this so=20
+>>>> that merged patches get marked as "Accepted", but at least for meta-=
+
+>>>> openembedded it seems like that's not the case.
+>>>>
+>>>> Jose / Michael - can you look into this if you haven't already? Plea=
+se let me=20
+>>>> know if you need any help.
+>>
+>> The git hook was configured to update OE-core only, Michael will help =
+us
+>> to include meta-openembedded.
+>>
+>=20
+> There are more repos using patchwork beyond OE-core and meta-opemebedde=
+d
+> please enable it for all of them  as well.
+>=20
+
+Now all of the projects are enabled to receive automatic updates from
+the git-hook (Thanks Michael). Please let me know if any undesired
+behavior is detected.
+
+>>>
+>>> Since I brought this up on IRC, I wanted to chime in here.  First, if=
+
+>>> you want to use top-of-tree patchwork you'll also want to grab
+>>> https://patchwork.ozlabs.org/bundle/stephenfin/post-receive%20fixes/
+>>
+>>
+>> Hi Tom, nice meeting you. OE-Patchwork is using a fork in [1] from
+>> freedesktop.org's patchwork at [2]. I will look at the hook fixes you
+>> mentioned at the first chance, thanks for the tip.
+>>
+>>> (and fwiw, I also have been setting the DJANGO part to 'dev' rather t=
+han
+>>> production for my use-case).  Second, I think part of the problem is
+>>> that there are just some cases where the hashing fails, which for me =
+is
+>>> around 10% of the time.  Depending on how much one uses bundles and
+>>> tracks what ends up being committed this may or may not be a problem.=
+
+>>> And I'm sure upstream patchwork would appreciate any changes to impro=
+ve
+>>> hashing success :)
+>>>
+>>
+>> Regards
+>> Jose
+>>
+>> --=20
+>> Jose Lamego | OTC Embedded Platforms & Tools | GDC
+>>
+>> --=20
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+
+--=20
+Jose Lamego | OTC Embedded Platforms & Tools | GDC
+
+
+--ue67CtfILgbxD0k9GDIM3oLWV0orNFc1F--
+
+--uGS8ONqEX059lKlpuC0GNatUU4SUlinI3
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iQEcBAEBAgAGBQJYPx1UAAoJEFJAtowlSEbnc6IIAIjc6AIF+EMiokE2B2dwMEO7
+wYBLhPw05lB5FdqQkZRZaZDpHKqfuFluXuUJ3wZJYYyf3rXIlyCcCU6SRXZrA7kn
+i2xOFVIbEM0NVXhSo0nu+QBVE3jhy9thIGOx9jl+pbPDdNrVTRc2BkEy4O6mCrj3
+1IAYdYs94BoX4w2DjtHmF6HkxlNyhCWEh1kYC8hjksR12wCcOUTx/HCmEhS3wTxe
+Jo+YBBIZwwvMgmILVo0eTU0BYq4K87jvRWkdzEissSXX6cWA/rtVxCaJEkg9mj+t
+FeJ0SthmFags0jmhxA5aSaKLUgsm2mBJQxQmZNzIWhd3r9bS1wzTbgYXifiKiyk=
+=YWzE
+-----END PGP SIGNATURE-----
+
+--uGS8ONqEX059lKlpuC0GNatUU4SUlinI3--
