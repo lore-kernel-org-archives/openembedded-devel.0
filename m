@@ -1,20 +1,16 @@
 Return-Path: <obi@opendreambox.org>
-X-Greylist: delayed 421 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 30 Nov 2016 11:19:02 UTC
 Received: from mail.saftware.de (mail.saftware.de [83.141.3.46])
-	by mail.openembedded.org (Postfix) with ESMTP id AAECB71A79
+	by mail.openembedded.org (Postfix) with ESMTP id 4B9D871A77
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2016 11:19:02 +0000 (UTC)
+	Wed, 30 Nov 2016 11:51:25 +0000 (UTC)
 Received: by t510.zcs.saftware.de (Postfix, from userid 1000)
-	id 1E117B80910; Wed, 30 Nov 2016 12:11:58 +0100 (CET)
+	id 9811FB81F65; Wed, 30 Nov 2016 12:51:23 +0100 (CET)
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Nov 2016 12:11:58 +0100
-Message-Id: <1480504318-6582-2-git-send-email-obi@opendreambox.org>
+Date: Wed, 30 Nov 2016 12:51:22 +0100
+Message-Id: <1480506683-17990-1-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1480504318-6582-1-git-send-email-obi@opendreambox.org>
-References: <1480504318-6582-1-git-send-email-obi@opendreambox.org>
-Subject: [meta-qt5][PATCH 2/2] qtbase: Remove comments about ICU and QtWebKit
+Subject: [meta-oe][PATCH 1/2] libcdio-paranoia: new recipe for 10.2+0.93.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,39 +23,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2016 11:19:03 -0000
+X-List-Received-Date: Wed, 30 Nov 2016 11:51:27 -0000
 
-QtWebKit doesn't depend on icu in qtbase. It just didn't enable
-it manually before.
+Since libcdio 0.90, libcdio-paranoia is a separate project.
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- recipes-qt/qt5/qtbase_git.bb | 5 -----
- 1 file changed, 5 deletions(-)
+ .../libcdio/libcdio-paranoia_10.2+0.93+1.bb        | 24 ++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 meta-oe/recipes-multimedia/libcdio/libcdio-paranoia_10.2+0.93+1.bb
 
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index 223383d..6541973 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -37,10 +37,6 @@ DEPENDS += "qtbase-native"
- RDEPENDS_${PN}-tools += "perl"
- 
- # separate some parts of PACKAGECONFIG which are often changed
--# be aware that you need to add icu to build qtwebkit, default
--# PACKAGECONFIG is kept rather minimal for people who don't need
--# stuff like webkit (and it's easier to add options than remove)
--
- PACKAGECONFIG_GL ?= "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gl', '', d)}"
- PACKAGECONFIG_FB ?= "${@bb.utils.contains('DISTRO_FEATURES', 'directfb', 'directfb', '', d)}"
- PACKAGECONFIG_X11 ?= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xcb xsync xshape xrender xrandr xfixes xinput2 xcursor glib xkb', '', d)}"
-@@ -124,7 +120,6 @@ PACKAGECONFIG[directfb] = "-directfb,-no-directfb,directfb"
- PACKAGECONFIG[linuxfb] = "-linuxfb,-no-linuxfb"
- PACKAGECONFIG[mitshm] = "-mitshm,-no-mitshm,mitshm"
- PACKAGECONFIG[kms] = "-kms,-no-kms,virtual/mesa virtual/egl"
--# needed for qtwebkit
- PACKAGECONFIG[icu] = "-icu,-no-icu,icu"
- PACKAGECONFIG[udev] = "-libudev,-no-libudev,udev"
- PACKAGECONFIG[openssl] = "-openssl,-no-openssl,openssl,libssl"
+diff --git a/meta-oe/recipes-multimedia/libcdio/libcdio-paranoia_10.2+0.93+1.bb b/meta-oe/recipes-multimedia/libcdio/libcdio-paranoia_10.2+0.93+1.bb
+new file mode 100644
+index 0000000..82a16cc
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/libcdio/libcdio-paranoia_10.2+0.93+1.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "library to read digital audio CDs with error correction"
++HOMEPAGE = "http://www.gnu.org/software/libcdio/"
++SECTION = "libs"
++LICENSE = "GPLv3+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++DEPENDS = "libcdio"
++
++SRC_URI = "${GNU_MIRROR}/libcdio/${BP}.tar.bz2"
++SRC_URI[md5sum] = "0255aa50e660db7f2c39658b9c565814"
++SRC_URI[sha256sum] = "ec1d9b1d5a28cc042f2cb33a7cc0a2b5ce5525f102bc4c15db1fac322559a493"
++
++inherit autotools pkgconfig
++
++PACKAGES += "${PN}-utils"
++
++FILES_${PN} = "${libdir}/${BPN}${SOLIB}"
++FILES_${PN}-utils = "${bindir}/*"
++
++python libcdio_split_packages() {
++    libdir = d.expand('${libdir}')
++    do_split_packages(d, libdir, '^lib(.*)\.so\..*', 'lib%s', 'libcdio %s library', extra_depends='', allow_links=True)
++}
++
++PACKAGESPLITFUNCS =+ "libcdio_split_packages"
 -- 
 2.7.4
 
