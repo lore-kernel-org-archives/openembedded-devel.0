@@ -1,24 +1,26 @@
 Return-Path: <Haiqing.Bai@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B9086025F
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 5ADFA71A5A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2016 02:58:55 +0000 (UTC)
+	Wed, 30 Nov 2016 02:59:00 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id uAU2wuRY013873
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uAU2x1JA005200
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Nov 2016 18:58:56 -0800 (PST)
+	Tue, 29 Nov 2016 18:59:02 -0800 (PST)
 Received: from pek-lpgtest5.wrs.com (128.224.153.85) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Tue, 29 Nov 2016 18:58:55 -0800
+	14.3.294.0; Tue, 29 Nov 2016 18:59:01 -0800
 From: Haiqing Bai <Haiqing.Bai@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>, <haiqing.bai@windriver.com>
-Date: Wed, 30 Nov 2016 10:56:37 +0800
-Message-ID: <1480474598-8680-1-git-send-email-Haiqing.Bai@windriver.com>
+Date: Wed, 30 Nov 2016 10:56:38 +0800
+Message-ID: <1480474598-8680-2-git-send-email-Haiqing.Bai@windriver.com>
 X-Mailer: git-send-email 1.9.1
+In-Reply-To: <1480474598-8680-1-git-send-email-Haiqing.Bai@windriver.com>
+References: <1480474598-8680-1-git-send-email-Haiqing.Bai@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] crda: check the word size of target instead of host machine.
+Subject: [PATCH] crda: check the word size of target instead of host machine.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,12 +33,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2016 02:58:55 -0000
+X-List-Received-Date: Wed, 30 Nov 2016 02:59:01 -0000
 Content-Type: text/plain
+
+Issue: LIN8-5177
 
 When 'USE_OPENSSL=1' is configured for crda, key2pub.py doesn't
 create "keys-ssl.c" with target's word size. Pass 'SITEINFO_BITS'
 from building system to key2pub.py.
+
+(LOCAL REV: NOT UPSTREAM) -- sent to oe-devel on 20161130
 
 Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
 ---
