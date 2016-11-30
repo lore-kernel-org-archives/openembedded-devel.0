@@ -1,36 +1,17 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f172.google.com (mail-qk0-f172.google.com
-	[209.85.220.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 5948271ABB
+Return-Path: <obi@opendreambox.org>
+Received: from mail.saftware.de (mail.saftware.de [83.141.3.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 268F371AAF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2016 18:20:43 +0000 (UTC)
-Received: by mail-qk0-f172.google.com with SMTP id n204so218656843qke.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Nov 2016 10:20:45 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=kR6B5zx6B1QOV3nX81rKaRI4MAxsJheue9MFjmTyktE=;
-	b=UAonRBv/Jf5FuXNHJW+GG1QJ/BrYbxyxsYoZGX2N/kGYYXUBaTRDV9G2Mu/lCfU5mA
-	XHq8fbqQ+BdqE+veZj2i+zOP0sO+LvFT86jWYnvMuVGTUURIPdNg/Qw/vPud9iN/xNFK
-	0xUdJlX75mJ1g9nIB4g90EM/E7W7uZ2t1hT3A2l+a8UlcUCPLDFz8x6Ml65qAVUlr8DM
-	OvmT8S/pcZBfu5tkgbtlHcRUVgzhmx1wWMrz5OmmBNtI6ZjmyHznH5iJtP56H849C1Eo
-	L9J8iykOLi3DxPRcnMH8SpcauyOkZSNrwZk0Ld/B6w5rntcNeP/8lOb+o6T2gdxn0No+
-	gE/g==
-X-Gm-Message-State: AKaTC00GKJGDyQ4T2Qoyj5+iauwXlV7uj0fKNTdUV6wg6t3C6Qaqk1HH7695gIbNzvFEDg==
-X-Received: by 10.55.89.197 with SMTP id n188mr33749733qkb.217.1480530044656; 
-	Wed, 30 Nov 2016 10:20:44 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
-	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
-	g13sm34038879qtg.15.2016.11.30.10.20.43
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 30 Nov 2016 10:20:44 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
+	Wed, 30 Nov 2016 18:21:20 +0000 (UTC)
+Received: by t510.zcs.saftware.de (Postfix, from userid 1000)
+	id 999E8B81F65; Wed, 30 Nov 2016 19:21:18 +0100 (CET)
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Nov 2016 13:20:36 -0500
-Message-Id: <1480530036-2109-1-git-send-email-derek@asterius.io>
+Date: Wed, 30 Nov 2016 19:21:18 +0100
+Message-Id: <1480530078-8159-1-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-enum34: add native and nativesdk
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-networking][PATCH] samba: Avoid timeout for nmbd if started offline with systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,23 +24,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Nov 2016 18:20:46 -0000
+X-List-Received-Date: Wed, 30 Nov 2016 18:21:21 -0000
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+If no network connection appears within DefaultTimeoutStartSec
+(~ 90s) after startup, nmbd fails to notify systemd and will
+therefore get killed.
+
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- meta-python/recipes-devtools/python/python-enum34_1.1.6.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ ...void-timeout-for-nmbd-if-started-offline-.patch | 31 ++++++++++++++++++++++
+ .../recipes-connectivity/samba/samba_4.4.5.bb      |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/samba/samba-4.4.5/0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch
 
-diff --git a/meta-python/recipes-devtools/python/python-enum34_1.1.6.bb b/meta-python/recipes-devtools/python/python-enum34_1.1.6.bb
-index e9d075f..31d2147 100644
---- a/meta-python/recipes-devtools/python/python-enum34_1.1.6.bb
-+++ b/meta-python/recipes-devtools/python/python-enum34_1.1.6.bb
-@@ -6,3 +6,5 @@ SRC_URI[md5sum] = "5f13a0841a61f7fc295c514490d120d0"
- SRC_URI[sha256sum] = "8ad8c4783bf61ded74527bffb48ed9b54166685e4230386a9ed9b1279e2df5b1"
- 
- inherit pypi setuptools
+diff --git a/meta-networking/recipes-connectivity/samba/samba-4.4.5/0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch b/meta-networking/recipes-connectivity/samba/samba-4.4.5/0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch
+new file mode 100644
+index 0000000..0ab3436
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/samba/samba-4.4.5/0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch
+@@ -0,0 +1,31 @@
++Upstream-Status: Submitted [https://github.com/samba-team/samba/pull/70]
 +
-+BBCLASSEXTEND = "native nativesdk"
++Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
++
++From 50eac4fd30944e5e1d83060757633fe0ed572723 Mon Sep 17 00:00:00 2001
++From: Andreas Oberritter <obi@opendreambox.org>
++Date: Wed, 30 Nov 2016 16:25:06 +0100
++Subject: [PATCH] packaging: Avoid timeout for nmbd if started offline with
++ systemd
++
++If no network connection appears within DefaultTimeoutStartSec
++(~ 90s) after startup, nmbd fails to notify systemd and will
++therefore get killed.
++
++Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
++---
++ packaging/systemd/nmb.service | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/packaging/systemd/nmb.service b/packaging/systemd/nmb.service
++index 992c0cd..555c9ab 100644
++--- a/packaging/systemd/nmb.service
+++++ b/packaging/systemd/nmb.service
++@@ -10,6 +10,7 @@ EnvironmentFile=-/etc/sysconfig/samba
++ ExecStart=/usr/sbin/nmbd $NMBDOPTIONS
++ ExecReload=/usr/bin/kill -HUP $MAINPID
++ LimitCORE=infinity
+++TimeoutStartSec=0
++ 
++ [Install]
++ WantedBy=multi-user.target
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+index 8c5f6d8..e6347b8 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+@@ -17,6 +17,7 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
+            file://16-do-not-check-xsltproc-manpages.patch \
+            file://20-do-not-import-target-module-while-cross-compile.patch \
+            file://21-add-config-option-without-valgrind.patch \
++           file://0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch \
+            file://0006-avoid-using-colon-in-the-checking-msg.patch \
+            file://volatiles.03_samba \
+           "
 -- 
 2.7.4
 
