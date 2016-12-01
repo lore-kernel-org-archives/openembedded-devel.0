@@ -1,48 +1,48 @@
 Return-Path: <pespin.shar@gmail.com>
-Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
-	[209.85.215.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 60E2371B04
+Received: from mail-lf0-f48.google.com (mail-lf0-f48.google.com
+	[209.85.215.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 5276371B0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Dec 2016 15:51:03 +0000 (UTC)
-Received: by mail-lf0-f68.google.com with SMTP id 98so19371946lfs.0
+	Thu,  1 Dec 2016 15:52:38 +0000 (UTC)
+Received: by mail-lf0-f48.google.com with SMTP id c13so174504825lfg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Dec 2016 07:51:05 -0800 (PST)
+	Thu, 01 Dec 2016 07:52:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=ER5OKplZ6pnSmUwPgHgPYJMLs9vsNzh8J79Hb6ZpY34=;
-	b=wnvIldRwMlhPo3V+i0iWneb3XxxQ6Igxgmt3aazn7R39NWLAy4jzDm3rrdh3YBl6TN
-	TsNvtOrxDfj5kTyYmIX+KbZS4KxMfD1Pu3AE0JqYEsI5kvosAV7iWGInyPQE91J/bhXn
-	hLX0n9ImO36p2ll5mmrPpgpR3tRKJNxhDHo7iANFUhGE2D4TGoy6suEumVuj1x3bVHl9
-	GYrswzS0HJBCeRPyB3j1fOXet1wXitjC2QsVSnEMSZ+7wUPfmv96fd/KmvkDvVjESsg6
-	MczgOnZgoPWhSu4lC7bLTysNj7AE0nqaFvnb5EZLSZXE5cmHDP/3VK1XqTfELzPi83XW
-	t42g==
+	:cc; bh=ZWtSi0+35gcwaACUELaihVlC4iCqCds8SZE/Ff2zTB8=;
+	b=wiYzhC2/fxns5aLcprzB9NQIWCfvTFK+pG8q3Q2kGe9iA+i3w+2SirrNKMFJTDzyRC
+	mD1Vt6unOVjZUqFApokjy+GiPA/evXNNMotK07qrUuoQwjo14YLm54zbnxMaKWul42o8
+	9re63r5mpxym/vo9PdBdFd1Kbr3ngB48/x5j5sN4DN7XexZlBTJNoftFnzIAYLnYSWO6
+	f1R3o2KTsD0jWVM01OhOoSZSKpIcS5ioOaPyvlKaphusEBXRF0QKXsBwT8DuChZPj9GO
+	GmX6L8ghguZ9GWeeozvHc+k8JjIWiw2CKjbYoOws3n479OdhA26GQj4S+eekAIdve/kM
+	/fdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=ER5OKplZ6pnSmUwPgHgPYJMLs9vsNzh8J79Hb6ZpY34=;
-	b=HB1w5IKWo3K2DCUsT5tp/92IbOAJI0P2+87ZUjcS3z5QpYQNZ/sZ6i//xaR+nvSF+C
-	o0GnhTZtz9Lw6G30Zh7J990sNhBCIjpuJMhuNT7W3vTd+PaEgXrZKjczD4ThXf2ILX8H
-	rU0O5gTIe7UKyJzyLLohVpv95neW2cOtPqdRfY1osd4yXBqcZiZcqrb/Wu8PKORotBrO
-	pTH4MfVPcaiyz5w9kuFW20PXShtOZA9+AVQyMPciPYyYKo1hPJJqWV0hwwUJLXHgvF94
-	Mtzvmzf6F9iSpbyzEU0pcQj4SYt9T5UFw8f1PnyUT87iqC9wlLxmBA8UIH+x2VBwl4yi
-	6ufw==
-X-Gm-Message-State: AKaTC00RncUtjJkqsc4o6x1GlTExsHCIm5RecvQnylCr5uJgaAxiy7ZXNEWSOfzoNv01R10MQ45T9+MD7KkY8w==
-X-Received: by 10.46.9.21 with SMTP id 21mr19815091ljj.4.1480607464015; Thu,
-	01 Dec 2016 07:51:04 -0800 (PST)
+	bh=ZWtSi0+35gcwaACUELaihVlC4iCqCds8SZE/Ff2zTB8=;
+	b=WlEELUwWv07uBYY2kGVG3wUXvb17fEWBM0nnvuBW+dwj8KwoCpcSj9TCJs7+d/tuvx
+	BCRutV4K4bSawdSqh2iSnkKvM/qI2BKP8Yf2PeOlnFooNTyU1Tr5Jma3Myede5nihuVD
+	Q/QNXtc2gRxzyDbh5rJUPJUk+z057BUWf6TwiQbhW0r2LS2ft08OnhE1IpZIMe9IYwbc
+	c5bp3TpeDZPUSaYORiJTwRcMMd3L3dTKjFnZMIQXY/3n0z7IoRS8SVR2uibwLj43yXSp
+	bE3x1BBNrUc8o1R1eJ/uT3bwyeAH6YSl5sI4ipP03GbmgglieNM7axovGT4rlyFetf0H
+	Fzaw==
+X-Gm-Message-State: AKaTC03OE+xbQa99ZS5bf4y2s+rPDZCp+jiQnzj4h+Q/eqp3fNUlddrdRYTp65wocUr+RVypNXXpdgi7muIlgA==
+X-Received: by 10.25.35.6 with SMTP id j6mr14716161lfj.137.1480607559241; Thu,
+	01 Dec 2016 07:52:39 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.25.155.135 with HTTP; Thu, 1 Dec 2016 07:51:03 -0800 (PST)
-In-Reply-To: <1480352388-7733-2-git-send-email-frank@meerkoetter.org>
-References: <1480352388-7733-1-git-send-email-frank@meerkoetter.org>
-	<1480352388-7733-2-git-send-email-frank@meerkoetter.org>
+Received: by 10.25.155.135 with HTTP; Thu, 1 Dec 2016 07:52:38 -0800 (PST)
+In-Reply-To: <1480413866-25885-2-git-send-email-frank@meerkoetter.org>
+References: <1480413866-25885-1-git-send-email-frank@meerkoetter.org>
+	<1480413866-25885-2-git-send-email-frank@meerkoetter.org>
 From: Pau Espin Pedrol <pespin.shar@gmail.com>
-Date: Thu, 1 Dec 2016 16:51:03 +0100
-Message-ID: <CAEGpDubhHbvKC-DHAHPjEz-KWtjyv8CT2n7gOjiX7M96r9dcrA@mail.gmail.com>
+Date: Thu, 1 Dec 2016 16:52:38 +0100
+Message-ID: <CAEGpDubDpkvHh2oZ=EZKXi9XykKJWyavBN8FZ3WLFZQZer7MpQ@mail.gmail.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: Frank Meerkoetter <frank@meerkoetter.org>
-Subject: Re: [meta-oe][PATCH 1/5] Add a systemd service file for redis
+Subject: Re: [meta-oe][PATCHv2 1/5] redis: add a systemd service file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,7 +55,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Dec 2016 15:51:05 -0000
+X-List-Received-Date: Thu, 01 Dec 2016 15:52:41 -0000
 Content-Type: text/plain; charset=UTF-8
 
 Hi,
@@ -65,7 +65,7 @@ Please use "${systemd_system_unitdir}" instead of
 
 Pau Espin Pedrol
 
-2016-11-28 17:59 GMT+01:00 Frank Meerkoetter <meerkoetter@googlemail.com>:
+2016-11-29 11:04 GMT+01:00 Frank Meerkoetter <meerkoetter@googlemail.com>:
 
 > The redis.conf is changed on the fly to not daemonize redis.
 > The reason for that is that with this appraoch we don't need
