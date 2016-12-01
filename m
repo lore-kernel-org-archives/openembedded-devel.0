@@ -1,47 +1,50 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f43.google.com (mail-vk0-f43.google.com
-	[209.85.213.43])
-	by mail.openembedded.org (Postfix) with ESMTP id B37E671AEB
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qt0-f170.google.com (mail-qt0-f170.google.com
+	[209.85.216.170])
+	by mail.openembedded.org (Postfix) with ESMTP id A3E8C71B23
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Dec 2016 16:16:07 +0000 (UTC)
-Received: by mail-vk0-f43.google.com with SMTP id p9so130991161vkd.3
+	Thu,  1 Dec 2016 17:20:12 +0000 (UTC)
+Received: by mail-qt0-f170.google.com with SMTP id p16so226538207qta.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Dec 2016 08:16:09 -0800 (PST)
+	Thu, 01 Dec 2016 09:20:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=094DLskgnJBmIy6VRYhmMvwl48p41Gi+hZX4bAfMeKU=;
-	b=UH52x5FOMgMBy+4JlZhq2qtUla7NvaM5wOcnXwC9H0Pc3kRNv6fHf5rrEBGadP0tlZ
-	pTdxv850P9PkUsPg1X3kaS+2srU+s2ybduLtSeqmPNBHx4Jvd1mPPlkRRpdlQd4lT8KP
-	1IVBM5L3h61W8XuG+NHUgIYv22SOJv07lOSD/YsDBa6EaRq8Z1JtZev7cqEWoCK4x6gx
-	RQnP3E+8zercRSoa3dzpc70UyDcIWd2nG0cdqAy6G27dOSdEiyamoAulrnDqCVhUvATb
-	iCHPiWELe5SmtH+uBBkm4/ORSgsyqwo9OI/QgEanigjy6XL/o5Vos1fJuJkLRaLuG1UL
-	zZ6w==
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=rb1yK0C1VHbR709h1ZfUNu37kJucaKl1dMsseW97ypk=;
+	b=UT/YbboMQjDkjAAYyPXAKBLk6onoK9CG7+7n1PlN87+OuOcvLkjEFwR3/JwV4St7vQ
+	KMaGTPxHxh8AkMU8zTw8j/q3o8sKcWFz2QaZSoimjpP3owD/ZTDsCftTE+LJsv7D9CQc
+	jkX53YOcDFZJZE/Asaywx8ZvFjsK3Q7TYVZqI0gJUYXbZ+NfVu3czNuObI/SUce8QuS5
+	inqXhCLdl90L/tXTORuzZF2HnhtiQiriny1M9kmFQCukG4lbkgnW/JpxaaXpesgqhsWe
+	ljvXyYSXllJZOLDp2tGfSVUZrZgZ8mM+rWKr27R8gOt2NCzY+ykuSQ1fCVBiC15HlylE
+	H92A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=094DLskgnJBmIy6VRYhmMvwl48p41Gi+hZX4bAfMeKU=;
-	b=I21hGRM1d82ze0fHoW1uN7qqjmphLeWagjodd+WylakY60SasypNBkV81+L0PBuT8x
-	r/uwAr9Cn4+GlkqFI4JgIsEf6bAsggzx2rWcYdFQlcbVklv97QhmXUBHXQRbk/Nfcu5b
-	TI0DwMX0i6XB4WLn79mij4PbeA7Keuq+HEbNQ6ripCcG9hntEZBLyegnfCPDYIDoOqbZ
-	J2BlSY2jgm+uer3466VA5pdZqluTVIVNc916tuCGtgyJHiARgPsOsSwCe2qI3d6i5IMh
-	mytKSHYhnx7I7GurB4JUmMnOPolNLDo/rN48YQjxo9zE0lXf2cShBYX9kMuAFViXy9pv
-	QA3A==
-X-Gm-Message-State: AKaTC02+yTKgiVTRjHN0TJKqslLiWKW28SmSOGE3sQntDCsVBTKRspXYZAr2IPp+vk9et0kkg6YTeDpX9a72CQ==
-X-Received: by 10.31.50.214 with SMTP id y205mr14589092vky.29.1480608968622;
-	Thu, 01 Dec 2016 08:16:08 -0800 (PST)
+	:message-id:subject:to;
+	bh=rb1yK0C1VHbR709h1ZfUNu37kJucaKl1dMsseW97ypk=;
+	b=eY/sXDeXRvgcMkzh9pD5tAqXywS2AE8DJXOSoWRrVvVoNOE1KcgC9SUXAdp0nGJeQl
+	keLWL/hOMioweydqC9/7UzyDffDSHyqZqIl4IvpTmfthe2eEa79EWzCqbTvJTsu9PswN
+	x6NB931c929MRtVGSAy+/oAaR3jVip/jAC6QlkGIz33PXGKd7zFJk6dt4StNm3fha+3N
+	khKX/wAYcIoSfKRfbqz5ql7uoOk9XOeCE+TBze8Rzf2inIhNj9RnBmTqj95JYivfBb/k
+	jcnwP64DhVSsNljDs6HK9eM5xiPjxNkC2j468Vu4akxw7Tmbw8kQU1g+ZmW05+1vZuTT
+	KtQw==
+X-Gm-Message-State: AKaTC016Am3c+RP9/008WU71TlidowdKzcAvrsr2Qesci3q/YghNV5u3J5auNGtd5CGAEYyNO12a/qtsSvhGV2tP
+X-Received: by 10.237.44.161 with SMTP id g30mr35164669qtd.144.1480612814080; 
+	Thu, 01 Dec 2016 09:20:14 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.176.85.157 with HTTP; Thu, 1 Dec 2016 08:16:08 -0800 (PST)
-In-Reply-To: <cover.1480608365.git.akuster808@gmail.com>
-References: <cover.1480608365.git.akuster808@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Thu, 1 Dec 2016 17:16:08 +0100
-Message-ID: <CALbNGRRT2Nz_nHaJZeFLNfYGvoi01hiTuMADrz=kjyAjkTKqvg@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 00/67] meta-oe pull request v2 morty
+Received: by 10.140.106.99 with HTTP; Thu, 1 Dec 2016 09:19:53 -0800 (PST)
+In-Reply-To: <8632C69E-1C6B-482D-AF15-965F55F0AF88@gmail.com>
+References: <20161128225759.9756-1-raj.khem@gmail.com>
+	<CAJTo0LZ+2+MhZ4TepH1dDzC3LyG7gz70TNEzoDjXgaBTjvHOsg@mail.gmail.com>
+	<o1jct4$pvp$1@blaine.gmane.org>
+	<CAJTo0LYLgFFR+6d3SDkso6X28N00tVAnUGuJg4sPG-msMKWU6A@mail.gmail.com>
+	<8632C69E-1C6B-482D-AF15-965F55F0AF88@gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 1 Dec 2016 17:19:53 +0000
+Message-ID: <CAJTo0LYTYa4A42+FA9Ou=bVA6ddH8gzVBpJZJvNfa9Jyb9QQfA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH] libva: Import from meta-intel and update to 1.7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,32 +57,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Dec 2016 16:16:08 -0000
+X-List-Received-Date: Thu, 01 Dec 2016 17:20:14 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 1, 2016 at 5:08 PM, Armin Kuster <akuster808@gmail.com> wrote:
-> Please consider these changes for meta-oe Morty.
+On 1 December 2016 at 03:42, Khem Raj <raj.khem@gmail.com> wrote:
+
+> >> If libva goes in, can we get libva-intel-driver in as well? Those go
+> >> hand-in-glove currently.
+> >>
+> >
+> > Khem, does the AMD BSP use that?  I'd have thought that bit was actually
+> > meta-intel specific.
 >
-> removed two commits not needed.
->
-> The following changes since commit 659d9d3f52bad33d7aa1c63e25681d193416d7=
-6e:
->
-Please consider also
+> its intel BSPs specific
 
-commit 5a752d719eb35dcbdf4b58bd70ec904befbe0c59
-Author: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-Date:   Fri Oct 28 22:59:50 2016 +0200
 
-    exo: unbreak Thunar's detailed file view
+So I'd endorse libva for oe-core, and the intel-driver remains in
+meta-intel.
 
-    see further details at [1]
-
-    [1] https://bugzilla.xfce.org/show_bug.cgi?id=3D12916
-
-    Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-    Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-
-Andreas
+Ross
 
