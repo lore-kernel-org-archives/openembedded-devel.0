@@ -1,22 +1,24 @@
 Return-Path: <daniela.plascencia@linux.intel.com>
 Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
-	by mail.openembedded.org (Postfix) with ESMTP id DF50A71A22
+	by mail.openembedded.org (Postfix) with ESMTP id 0140671B4E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Dec 2016 21:19:29 +0000 (UTC)
+	Thu,  1 Dec 2016 21:19:30 +0000 (UTC)
 Received: from orsmga004.jf.intel.com ([10.7.209.38])
 	by orsmga104.jf.intel.com with ESMTP; 01 Dec 2016 13:19:31 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.33,726,1477983600"; d="scan'208";a="36305719"
+X-IronPort-AV: E=Sophos;i="5.33,726,1477983600"; d="scan'208";a="36305721"
 Received: from yctb04.ostc.intel.com ([10.54.69.58])
 	by orsmga004.jf.intel.com with ESMTP; 01 Dec 2016 13:19:31 -0800
 From: daniela.plascencia@linux.intel.com
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Dec 2016 13:24:45 +0000
-Message-Id: <1480598692-5350-1-git-send-email-daniela.plascencia@linux.intel.com>
+Date: Thu,  1 Dec 2016 13:24:47 +0000
+Message-Id: <1480598692-5350-3-git-send-email-daniela.plascencia@linux.intel.com>
 X-Mailer: git-send-email 2.6.6
+In-Reply-To: <1480598692-5350-1-git-send-email-daniela.plascencia@linux.intel.com>
+References: <1480598692-5350-1-git-send-email-daniela.plascencia@linux.intel.com>
 Cc: Daniela Plascencia <daniela.plascencia@linux.intel.com>,
 	leonardo.sandoval.gonzalez@linux.intel.com
-Subject: [meta-python][PATCH V3 0/7] solves python-pylint runtime dependencies
+Subject: [meta-python][PATCH V3 2/7] python-wrapt: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,37 +35,33 @@ X-List-Received-Date: Thu, 01 Dec 2016 21:19:31 -0000
 
 From: Daniela Plascencia <daniela.plascencia@linux.intel.com>
 
-The python-pylint module is already defined in meta-openembedded,
-but runtime dependencies are missing. This series solves all 
-dependencies and ensures python-pylint is installed correctly in 
-the target.
+The recipe defines the wrapt python module. This module
+provides a transparent object proxy for Python that can
+be used in the construction of function wrappers and
+decorators.
 
-[YOCTO #10411]
-
-Daniela Plascencia (7):
-  python-backports-functools-lru-cache: add new recipe
-  python-wrapt: add new recipe
-  python-astroid: add new recipe
-  python-lazy-object-proxy: add new recipe
-  python-setuptools-scm: add native to BBCLASSEXTEND
-  python-isort: add new recipe
-  python-pylint: modifies package bin to match source and adds
-    dependencies
-
- .../recipes-devtools/python/python-astroid_1.4.8.bb   | 10 ++++++++++
- .../python-backports-functools-lru-cache_1.3.bb       | 14 ++++++++++++++
- .../recipes-devtools/python/python-isort_4.2.5.bb     | 11 +++++++++++
- .../python/python-lazy-object-proxy_1.2.2.bb          | 10 ++++++++++
- .../recipes-devtools/python/python-pylint_1.6.4.bb    | 19 ++++++++++++++++++-
- .../python/python-setuptools-scm_1.15.0.bb            |  6 ++++--
- .../recipes-devtools/python/python-wrapt_1.10.8.bb    | 10 ++++++++++
- 7 files changed, 77 insertions(+), 3 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-astroid_1.4.8.bb
- create mode 100644 meta-python/recipes-devtools/python/python-backports-functools-lru-cache_1.3.bb
- create mode 100644 meta-python/recipes-devtools/python/python-isort_4.2.5.bb
- create mode 100644 meta-python/recipes-devtools/python/python-lazy-object-proxy_1.2.2.bb
+Signed-off-by: Daniela Plascencia <daniela.plascencia@linux.intel.com>
+---
+ meta-python/recipes-devtools/python/python-wrapt_1.10.8.bb | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
  create mode 100644 meta-python/recipes-devtools/python/python-wrapt_1.10.8.bb
 
+diff --git a/meta-python/recipes-devtools/python/python-wrapt_1.10.8.bb b/meta-python/recipes-devtools/python/python-wrapt_1.10.8.bb
+new file mode 100644
+index 0000000..cf92efa
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-wrapt_1.10.8.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "A Python module for decorators, wrappers and monkey patching."
++HOMEPAGE = "http://wrapt.readthedocs.org/"
++LICENSE = "BSD"
++SECTION = "devel/python"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=82704725592991ea88b042d150a66303"
++
++SRC_URI[md5sum] = "7c2a7e6262acc396ef6528b3d66bd047"
++SRC_URI[sha256sum] = "4ea17e814e39883c6cf1bb9b0835d316b2f69f0f0882ffe7dad1ede66ba82c73"
++
++inherit setuptools pypi
 -- 
 2.6.6
 
