@@ -1,55 +1,54 @@
-Return-Path: <trini@konsulko.com>
-Received: from mail-yb0-f182.google.com (mail-yb0-f182.google.com
-	[209.85.213.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 234366011C
+Return-Path: <gordan.markus@pelagicore.com>
+Received: from mail-wj0-f174.google.com (mail-wj0-f174.google.com
+	[209.85.210.174])
+	by mail.openembedded.org (Postfix) with ESMTP id AD01971A1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Dec 2016 12:29:53 +0000 (UTC)
-Received: by mail-yb0-f182.google.com with SMTP id d59so38602021ybi.1
+	Fri,  2 Dec 2016 13:19:53 +0000 (UTC)
+Received: by mail-wj0-f174.google.com with SMTP id xy5so231818167wjc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Dec 2016 04:29:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=g1aJZPsuigB8jmpokYZ8QSW64h2Y34LuwQt9tYaISlc=;
-	b=VDQEJQDVi5QhLgJFk27Oj3hRHiN9u8lVeCvL2Db6Nv/jhG5bUa2/4qWtvV01vqWrVs
-	fxRFr5MfOXlXvV9PzlPreP3qHQ4kpOgAflibQcqluj0vTAWSajKgdgaof/9Da9oeGfhb
-	ndYeRwvcanqQ+hfCVUlRvP01R/RXMmK3I7juY=
+	Fri, 02 Dec 2016 05:19:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
+	h=message-id:subject:from:to:cc:date:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=jldZh8Y2BYf9ql2Ou7ONi3+eJZbz88ok+zCoRK4Bms0=;
+	b=LIaKRyXRBIZ2YFRdxj/d6p0qcFTPFIKL1VbIgAPVc4PJ6DNbaOFKtWNP1Dc2KfekVK
+	VESzRJWuyvJIqqtWJBOiS5xJhVb8RcsLibQgPr8w0oTZwV3AdJMI23u37tl+RYdslUMm
+	Un5r1YiKM/3OPZCmDBDCF9LFhdkYwqZyGcHjb2/W4TKoUYWV0WMqsqx2XLLo7CbwdFAt
+	OWa2b5FLOdbgPlkI0jT5FqV7gJ1YS1AWO/omRmxZ/3WanScRMglw335mUkFXJKmI9cLR
+	R6k0+KZN6fX4KRkvDkxIuBwb3zpAfuMU7me+s3C5D50OPVoZ8IwDWF+/2tvFdynfNbXB
+	bYSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=g1aJZPsuigB8jmpokYZ8QSW64h2Y34LuwQt9tYaISlc=;
-	b=WT8BoTkLGzEFnpbaU3x2GMzUDfi3qfR62ZQTcj3izWY2hOS57wYFr6LGKQ4dmDdVTX
-	HYI+GSbwZwTJRYsLZ5qbvCpesJuRYx6SHyeQibf1yhyoesw1KPyJtnYupL6+1ZnT2xZM
-	dLu5/HjdOD9FH8PfU+3ecyzxkHJbaT8VKTPMBupuSGm72WW7u7pflDRCkZSBlzF1+9E2
-	XpGoeumpPd4icX11+wYYKPXecVgXqr1qZW/pTF0TybGXf0L2oIK4+VhRnQsfTUzLv4SN
-	8TkXaJBCRXz7yfBC01N8DB+nhdfvwXv3ov6ADPmST2UTYB19wtxzIqa7mcpJ28aR1ho+
-	JlXA==
-X-Gm-Message-State: AKaTC02WZ3KkCzW/rKJ8gyF3lD01y6x4F8AhkCEu3LXrCumB4N1xzWz4ZuUh/InRXx4HGQ==
-X-Received: by 10.37.248.14 with SMTP id u14mr18041070ybd.98.1480681794986;
-	Fri, 02 Dec 2016 04:29:54 -0800 (PST)
-Received: from bill-the-cat (cpe-75-180-228-133.ec.res.rr.com.
-	[75.180.228.133])
-	by smtp.gmail.com with ESMTPSA id d5sm1802718ywf.20.2016.12.02.04.29.54
-	(version=TLS1_2 cipher=AES128-SHA bits=128/128);
-	Fri, 02 Dec 2016 04:29:54 -0800 (PST)
-Date: Fri, 2 Dec 2016 07:29:23 -0500
-From: Tom Rini <trini@konsulko.com>
+	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=jldZh8Y2BYf9ql2Ou7ONi3+eJZbz88ok+zCoRK4Bms0=;
+	b=dgu4QrIdtqAB6QTRwFguw3faPWKdxIvL/OmshC1fTBPySSUTwrwwwnFGXKdqOBkPmJ
+	6oW1HHZiZp7Pwe8XO/Q/Ap//dIDxhgw7iET/WFzXOvpkCRqRWc9ibd0wJIpVLBO33kN1
+	oMxz6sVujQDdxVuHkq75+veo3s7cxnsYkzmEsECjnteSwixvYmg0WgqUQMPOknaYe4/9
+	g0+UP5zLhIPJzS9aXJnE7utofKKM+RdUAD8otCo7UpMcZBK2azAXy8ZG8F5Z8H9ifSw0
+	Y767x0VWGh0VLazAwFR23aCwgtqM9wFGiPI7CPV5kixXOorKr4Lfux057goEPYtEp078
+	kpMA==
+X-Gm-Message-State: AKaTC02QLbYNp/lQ6rDl4idMKLLJb/LkyOB0VrdoSwSwxUtl9TKmlF7BveDxVjgbSnFso1ky
+X-Received: by 10.194.99.38 with SMTP id en6mr38800907wjb.184.1480684794146;
+	Fri, 02 Dec 2016 05:19:54 -0800 (PST)
+Received: from gordanmarkus-XPS13 (static-212-247-53-108.cust.tele2.se.
+	[212.247.53.108]) by smtp.googlemail.com with ESMTPSA id
+	yj10sm5595305wjb.3.2016.12.02.05.19.53
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 02 Dec 2016 05:19:53 -0800 (PST)
+Message-ID: <1480684792.22967.5.camel@pelagicore.com>
+From: Gordan =?UTF-8?Q?Marku=C5=A1?= <gordan.markus@pelagicore.com>
 To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20161202122923.GI2546@bill-the-cat>
-References: <4717571.f7GXZOAcRz@peggleto-mobl.ger.corp.intel.com>
-	<20161129204327.GG2546@bill-the-cat>
-	<d93f4841-0154-2232-1802-2b8fcc85a81c@linux.intel.com>
-	<19E9BF3F-664F-42A4-A170-5B7BB473ED80@gmail.com>
-	<53ca2ead-1b75-ff6d-30c1-abb16330bad3@linux.intel.com>
-	<20161202083009.GB3721@jama>
-MIME-Version: 1.0
-In-Reply-To: <20161202083009.GB3721@jama>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: Patrick Ohly <patrick.ohly@intel.com>,
-	openembedded-devel@lists.openembedded.org,
-	Michael Halstead <michael@yoctoproject.org>
-Subject: Re: meta-openembedded patchwork git hook
+Date: Fri, 02 Dec 2016 14:19:52 +0100
+In-Reply-To: <20161202103105.GE3721@jama>
+References: <20161202092012.12438-1-gordan.markus@pelagicore.com>
+	<20161202095419.GD3721@jama> <1480674073.22967.3.camel@pelagicore.com>
+	<20161202103105.GE3721@jama>
+X-Mailer: Evolution 3.22.1-0ubuntu2 
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt5][PATCH] gdb: Fix QA Warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,86 +61,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Dec 2016 12:29:54 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 02 Dec 2016 13:19:54 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Fri, Dec 02, 2016 at 09:30:09AM +0100, Martin Jansa wrote:
-> On Wed, Nov 30, 2016 at 12:41:20PM -0600, Jose Lamego wrote:
-> > 
-> > 
-> > On 11/29/2016 07:50 PM, Khem Raj wrote:
+On Fri, 2016-12-02 at 11:31 +0100, Martin Jansa wrote:
+> On Fri, Dec 02, 2016 at 11:21:13AM +0100, Gordan Markuš wrote:
+> > On Fri, 2016-12-02 at 10:54 +0100, Martin Jansa wrote:
+> > > On Fri, Dec 02, 2016 at 10:20:11AM +0100, Gordan Markuš wrote:
+> > > > WARNING: QA Issue: gdb: invalid PACKAGECONFIG: readline
+> > > > [invalid-
+> > > > packageconfig]
+> > > > 
+> > > > Signed-off-by: Gordan Markuš <gordan.markus@pelagicore.com>
+> > > > ---
+> > > >  recipes-devtools/gdb/gdb_%.bbappend | 2 +-
+> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > 
+> > > > diff --git a/recipes-devtools/gdb/gdb_%.bbappend b/recipes-
+> > > > devtools/gdb/gdb_%.bbappend
+> > > > index 3e663e7..41592c4 100644
+> > > > --- a/recipes-devtools/gdb/gdb_%.bbappend
+> > > > +++ b/recipes-devtools/gdb/gdb_%.bbappend
+> > > > @@ -1 +1 @@
+> > > > -PACKAGECONFIG ??= "readline python"
+> > > > +PACKAGECONFIG ??= "python"
 > > > 
-> > >> On Nov 29, 2016, at 2:34 PM, Jose Lamego <jose.a.lamego@linux.intel.com> wrote:
-> > >>
-> > >>
-> > >>
-> > >> On 11/29/2016 02:43 PM, Tom Rini wrote:
-> > >>> On Wed, Nov 30, 2016 at 06:52:46AM +1300, Paul Eggleton wrote:
-> > >>>
-> > >>>> Hi folks,
-> > >>>>
-> > >>>> Martin just brought to my attention that the git hook for the 
-> > >>>> meta-openembedded repository that's supposed to update patchwork still isn't 
-> > >>>> working and hasn't done so for a very long time. I thought we'd fixed this so 
-> > >>>> that merged patches get marked as "Accepted", but at least for meta-
-> > >>>> openembedded it seems like that's not the case.
-> > >>>>
-> > >>>> Jose / Michael - can you look into this if you haven't already? Please let me 
-> > >>>> know if you need any help.
-> > >>
-> > >> The git hook was configured to update OE-core only, Michael will help us
-> > >> to include meta-openembedded.
-> > >>
+> > > What gdb are you using? The version in oe-core has readline
+> > > PACKAGECONFIG
 > > > 
-> > > There are more repos using patchwork beyond OE-core and meta-opemebedded
-> > > please enable it for all of them  as well.
+> > > meta/recipes-devtools/gdb/gdb-common.inc:PACKAGECONFIG ??=
+> > > "readline"
+> > > meta/recipes-devtools/gdb/gdb-common.inc:# Use --without-system-
+> > > readline to compile with readline 5.
+> > > meta/recipes-devtools/gdb/gdb-common.inc:PACKAGECONFIG[readline]
+> > > = "-
+> > > -with-system-readline,--without-system-readline,readline"
 > > > 
 > > 
-> > Now all of the projects are enabled to receive automatic updates from
-> > the git-hook (Thanks Michael). Please let me know if any undesired
-> > behavior is detected.
+> > We are using the gdb from poky and it's a similar case there.
+> > Though, 
+> > the gdb itself doesn't have the readline PACKAGECONFIG. It is
+> > enabled
+> > by default in the *.inc files. 
 > 
-> Still doesn't mark anything as accepted:
+> No, it isn't, read:
+> https://patchwork.openembedded.org/patch/116843/
+> discussion.
+In that case the patch can be discarded.
+Thank you for sharing this Martin!
 > 
-> OE @ ~/meta-openembedded $ git push origin master
-> Counting objects: 293, done.
-> Delta compression using up to 8 threads.
-> Compressing objects: 100% (257/257), done.
-> Writing objects: 100% (293/293), 48.83 KiB | 0 bytes/s, done.
-> Total 293 (delta 179), reused 68 (delta 18)
-> remote: E: failed to find patch for rev efd3696e70a6603f1a45faa4a172433514f0a487.
-> remote: E: failed to find patch for rev 8c720146b718aae3bc194621f3e095cf11ecb2ed.
-> remote: E: failed to find patch for rev fc2fc9097b2fa437d4af0338e418692b4dd6c989.
-> remote: E: failed to find patch for rev 533826b7652a2cf86ca7b665c25b98c89afc266e.
-> remote: E: failed to find patch for rev 6afb85d29286aaa4cdd892460f6adf68912917a5.
-> remote: E: failed to find patch for rev a7f3ec87f957ff35b8a853cd0e04c6b18bac0ece.
-> remote: E: failed to find patch for rev 877e52fd75c7d3b88add94691df3beb5e0c54529.
-> remote: E: failed to find patch for rev 2f6e45baba961629bfe023599144be6cfcd45728.
-> remote: E: failed to find patch for rev 86fed80d80bc33f0a3cdbf719c00ee5f05ed4d19.
-> remote: E: failed to find patch for rev 41d7bac5d50091cab835eac0a5eaa6c431fb2023.
-> remote: E: failed to find patch for rev a85e12928131fce057f777daa76a7f0c75cffa14.
-> remote: E: failed to find patch for rev 45837e6c567b1b9ff9d152a7e2a752488d313455.
-> remote: E: failed to find patch for rev 119e75e48dbf0539b4e440417901458ffff79b38.
-> remote: E: failed to find patch for rev a4251575f41fa5aafe5072e562497b05c11b6702.
-> remote: E: failed to find patch for rev b6ea2c0bacb21b83bae3605ef4da080de0cad15e.
-> remote: E: failed to find patch for rev 4580e5ae201b320ed407eae26f58655b8768b387.
-> remote: E: failed to find patch for rev c476219e845934f767927e81fe60dbaa157df9ee.
-> remote: E: failed to find patch for rev 0288b204f3c12af1561218fa0cfcdfb9a5508b47.
-> remote: E: failed to find patch for rev 5596b52d64c30d8e66ec6e379cf69a9fc9407fb1.
-> remote: E: failed to find patch for rev 24e51a6a106bc10a8838b23e4bf9ea6304314bca.
-> remote: E: failed to find patch for rev aac6bf8bf911c3f14ff9dce08f0f011838f5a426.
-> remote: I: 0 patch(es) updated to state Accepted.
-> remote: Sending notification emails to: openembedded-commits@lists.openembedded.org.
-> To git.openembedded.org:meta-openembedded
->    761639b..aac6bf8  master -> master
-
-I don't know how far apart the freedesktop.org one is from ozlabs but
-when I was seeing that problem locally as part of what I was working on
-it was because of some missing host deps (that are now not required).
-FWIW you can pretty easily turn the hook into a script to run manually
-and sh -x it to see _why_ it's not hashing out those patches.
-
--- 
-Tom
+> > gdb-cross-canadian.inc:PACKAGECONFIG ??= "python readline"
+> > gdb-cross-canadian.inc:PACKAGECONFIG[readline] = "--with-system-
+> > readline,--without-system-readline,nativesdk-readline"
+> > gdb-common.inc:PACKAGECONFIG ??= "readline"
+> > gdb-common.inc:PACKAGECONFIG[readline] = "--with-system-readline,
+> > --without-system-readline,readline"
+> > gdb-cross.inc:PACKAGECONFIG ??= "python readline"
+> > gdb-cross.inc:PACKAGECONFIG[readline] = "--with-system-readline,
+> > --without-system-readline,readline-native"
+> > 
+> > > > -- 
+> > > > 2.9.3
+> > > > 
+> > > > -- 
+> > > > _______________________________________________
+> > > > Openembedded-devel mailing list
+> > > > Openembedded-devel@lists.openembedded.org
+> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-dev
+> > > > el
+> > > 
+> > > 
+> 
+> 
 
