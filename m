@@ -1,50 +1,44 @@
-Return-Path: <meerkoetter@googlemail.com>
-Received: from mail-wj0-f196.google.com (mail-wj0-f196.google.com
-	[209.85.210.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 167B66057A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 01A5071C14
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Dec 2016 19:34:19 +0000 (UTC)
-Received: by mail-wj0-f196.google.com with SMTP id xy5so31465946wjc.1
+	Fri,  2 Dec 2016 21:22:51 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id e9so8898025pgc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Dec 2016 11:34:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
+	Fri, 02 Dec 2016 13:22:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
-	bh=YeSzk1SNM46XK8Ng9OJq0pRIZug62hciAZduzNKZC9k=;
-	b=0apKtZW/WW3VRYu650WzrpMmycppzLfv1G9+IQ1wGlsUpwIcMiJP1VfvmrvRsWuRwU
-	wOoMBeQAoU6CEIdlt5EbO/5foBiS42kHdh17+vDmMy+ixx+YPPQQLVMWOFp4iNXNq9Ky
-	ViGHu5EY2GITPUGD3I7pYHNOt0e91cTEx2J7t6hgEJBZzRI0Y8hRejnL/hEeLOEgs5Hx
-	zAIX4tgj6ZmM6/Dhd1raK4fUrrAHaBtIIZ3iD/Ep1+Xx/YplJsHG9q98NH23YddbRxBW
-	yieMXeYuwlzLgu8nph+qKRUvUaMuDscAdShNDbPNyFuZR+NobAcxYMIOZ0sRl15edmKQ
-	Dblw==
+	bh=kr+Fuq1CxWDFdlyuLNV1LpcJAD/2+BmSZ8saKYvkXUo=;
+	b=KHf4v6LO+DEj4tLS4ZlRhhrrFzGzQuoNMleCvepLhYFK0mT4sedJ+bhKnXRb6wdL8Q
+	sIuhgsTUYRGOTztlBHE+u7TT0BRumDHCitI7hb27lATJ0zifoOISskbm5wjRSYn0a8g4
+	0sdEkTyBTAs4cuFTDvBh+uxRAg/hZMSpzSybalXp0LH56EZ4+IeWAPRe8DhfcrBv/S8m
+	kov/yRPawNsXWbIhRWfg2QPgVTFta4REmf22LX7uSzGoTpMIbZfQTCdvvrBW/Rur47+C
+	tZF5k61pbls4QEV183nMgSAFXsBeDvW9bP2RDwES5pwRh54ULSSO4JOQZtdylFCenN4X
+	aMwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=YeSzk1SNM46XK8Ng9OJq0pRIZug62hciAZduzNKZC9k=;
-	b=jfU7XdRyvi4SvbMYUCPUIHeQMAlCvTssY1YvkgI0ESUrHI+mWygQF0DxFQlLuPTHG/
-	QMbJMCeRQgZipJwxlUZYf6UnBx6fhbz13/z0A+muQ9mVmhbw9Cp0VwQ8vEOet7vsnbL8
-	SLsaYGi2pwI9H5ZnF6kRqWFdKqODXtx2mGPvwUyrFlTLF+rNtabHxBN1rIS1IGV80OpM
-	wbMlXwQqHaWHFmX874iyuvKDEOTSvZKP5x0D8CnuysJwcrdpreVdkaX+FA3rCHesewTt
-	UqOVFlyrs4bMfieM9xM0+JyX5lEG9qjgDFFstc5VZ6rCcC/kja2/16iRSr0WD34WABF3
-	BYdA==
-X-Gm-Message-State: AKaTC03aQKLAHWI3d1fym9BvysJ2iJ87LdKLCXZuir9QpF9PS8cd6ItwMjfXC7f9j6H6nA==
-X-Received: by 10.194.26.170 with SMTP id m10mr39759682wjg.152.1480707260400; 
-	Fri, 02 Dec 2016 11:34:20 -0800 (PST)
-Received: from naos.fritz.box
-	(p20030071EF356500557AE35AFB271A47.dip0.t-ipconnect.de.
-	[2003:71:ef35:6500:557a:e35a:fb27:1a47])
-	by smtp.gmail.com with ESMTPSA id
-	k11sm4709794wmb.18.2016.12.02.11.34.19
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 02 Dec 2016 11:34:19 -0800 (PST)
-From: Frank Meerkoetter <meerkoetter@googlemail.com>
-X-Google-Original-From: Frank Meerkoetter <frank@meerkoetter.org>
+	bh=kr+Fuq1CxWDFdlyuLNV1LpcJAD/2+BmSZ8saKYvkXUo=;
+	b=StcjRMYi/UUl+CZR/0ByK9qoGyDQqt9PyB/AJZiTe3ZpGDPL5BuBAyclnOXaqF4EiN
+	yW2CvRTPOKrndEbypWjbEQLSD6vNnFC/deto2buzR+PdW2kPE7nJyk1qeK4rr8GK3b6U
+	fyTpYG9b+CFXkwzpNw8lvpY3MGp+zCP3o7prvlwC39Vo1XUfvxadIqLRoqDv5Qhg706u
+	/e/94CC3NyA03DtrzLeRGw1iDnhOLYeaTRjtx4sPX+jvYF5PdrdgXmmptAHFIbQnUFGy
+	DRNRVssZ0v9R+vkHJOKVWShSekPUgyg6IYZAXohoo3jyKrO/Zc/IQ6H3E406um6M+7Qt
+	GXEA==
+X-Gm-Message-State: AKaTC01eu9oGvk/AIavWsFTFykM4d+AMcgN1Bew/uKsgUyiXnZT6TdYO4YLrsBuI+4CDug==
+X-Received: by 10.99.123.87 with SMTP id k23mr83948300pgn.101.1480713773562;
+	Fri, 02 Dec 2016 13:22:53 -0800 (PST)
+Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
+	w16sm9843174pgc.30.2016.12.02.13.22.52
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 02 Dec 2016 13:22:53 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Dec 2016 20:33:59 +0100
-Message-Id: <1480707239-32294-1-git-send-email-frank@meerkoetter.org>
-X-Mailer: git-send-email 2.7.4
-Cc: Frank Meerkoetter <frank@meerkoetter.org>
-Subject: [meta-oe][PATCH] rrdtool: split out rrdcached into a package of its own
+Date: Fri,  2 Dec 2016 13:22:47 -0800
+Message-Id: <20161202212247.3416-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.10.2
+Subject: [meta-oe][PATCH] libvncserver: Fix build with security flags on and disable libva
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,48 +51,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Dec 2016 19:34:20 -0000
+X-List-Received-Date: Fri, 02 Dec 2016 21:22:53 -0000
 
-rrdcached is a caching daemon for rrdtool. It's typically
-used in large installations. Small embedded systems might
-not use it at all. Splitting it out allows a systems builder
-to remove a daemon process running as root.
+When libva is present it detects it and then fails to build
+until the support is fixed, lets disable it
 
-Signed-off-by: Frank Meerkoetter <frank@meerkoetter.org>
+Add a patch to fix issue found when compiling with
+security flags turned on
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+ .../libvncserver/0002-format_string.patch           | 21 +++++++++++++++++++++
+ .../libvncserver/libvncserver_0.9.10.bb             |  3 +++
+ 2 files changed, 24 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver/0002-format_string.patch
 
-diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
-index 09aac4d..f168c16 100644
---- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
-+++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
-@@ -19,7 +19,8 @@ inherit cpan autotools-brokensep gettext pythonnative python-dir systemd
- 
- BBCLASSEXTEND = "native"
- 
--SYSTEMD_SERVICE_${PN} = "rrdcached.socket rrdcached.service"
-+SYSTEMD_PACKAGES = "rrdcached"
-+SYSTEMD_SERVICE_rrdcached = "rrdcached.socket rrdcached.service"
- 
- EXTRA_AUTORECONF = "-I m4"
- 
-@@ -99,6 +100,14 @@ do_configure() {
- }
- 
- PACKAGES =+ "${PN}-perl ${PN}-python"
-+PACKAGES =+ "rrdcached"
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver/0002-format_string.patch b/meta-oe/recipes-graphics/libvncserver/libvncserver/0002-format_string.patch
+new file mode 100644
+index 0000000..566a208
+--- /dev/null
++++ b/meta-oe/recipes-graphics/libvncserver/libvncserver/0002-format_string.patch
+@@ -0,0 +1,21 @@
++From: Luca Falavigna <dktrkranz@debian.org>
++Date: Tue, 27 Jan 2015 01:26:04 +0000
++Subject: format_string
 +
-+DESCRIPTION_rrdcached = \
-+"The rrdcached package contains the data caching daemon for RRDtool."
++---
++ client_examples/gtkvncviewer.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+FILES_rrdcached = "${bindir}/rrdcached \
-+    ${systemd_unitdir}/system/rrdcached.service \
-+    ${systemd_unitdir}/system/rrdcached.socket"
++diff --git a/client_examples/gtkvncviewer.c b/client_examples/gtkvncviewer.c
++index 261b2da..861e4e3 100644
++--- a/client_examples/gtkvncviewer.c
+++++ b/client_examples/gtkvncviewer.c
++@@ -588,7 +588,7 @@ static void GtkDefaultLog (const char *format, ...)
++ 
++ 	time (&log_clock);
++ 	strftime (buf, 255, "%d/%m/%Y %X ", localtime (&log_clock));
++-	fprintf (stdout, buf);
+++	fprintf (stdout, "%s", buf);
++ 
++ 	vfprintf (stdout, format, args);
++ 	fflush (stdout);
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
+index 387202b..0eba87c 100644
+--- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
++++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
+@@ -14,6 +14,7 @@ SRC_URI  = "\
+     ${DEBIAN_MIRROR}/main/libv/libvncserver/libvncserver_0.9.10+dfsg.orig.tar.xz \
+     file://0001-remove-webclients-build.patch \
+     file://0002-common-add-sha1.patch \
++    file://0002-format_string.patch \
+ "
  
- FILES_${PN}-doc += "${datadir}/rrdtool/examples"
+ SRC_URI[md5sum] = "e883b6c7bd339a5e1c48645051abe5c4"
+@@ -21,4 +22,6 @@ SRC_URI[sha256sum] = "583f28869b82aec57768d7d18cd7ff81bf092ecbbc1209b587c2c2cd68
  
+ S = "${WORKDIR}/${BPN}-LibVNCServer-${PV}"
+ 
++EXTRA_OECONF += "--without-libva"
++
+ TARGET_LDFLAGS += "-lgcrypt"
 -- 
-2.7.4
+2.10.2
 
 
