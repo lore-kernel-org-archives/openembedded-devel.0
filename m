@@ -1,54 +1,42 @@
-Return-Path: <gordan.markus@pelagicore.com>
-Received: from mail-wj0-f174.google.com (mail-wj0-f174.google.com
-	[209.85.210.174])
-	by mail.openembedded.org (Postfix) with ESMTP id AD01971A1A
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D830719A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Dec 2016 13:19:53 +0000 (UTC)
-Received: by mail-wj0-f174.google.com with SMTP id xy5so231818167wjc.0
+	Fri,  2 Dec 2016 14:21:13 +0000 (UTC)
+Received: by mail-wm0-f49.google.com with SMTP id f82so17106181wmf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Dec 2016 05:19:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
-	h=message-id:subject:from:to:cc:date:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=jldZh8Y2BYf9ql2Ou7ONi3+eJZbz88ok+zCoRK4Bms0=;
-	b=LIaKRyXRBIZ2YFRdxj/d6p0qcFTPFIKL1VbIgAPVc4PJ6DNbaOFKtWNP1Dc2KfekVK
-	VESzRJWuyvJIqqtWJBOiS5xJhVb8RcsLibQgPr8w0oTZwV3AdJMI23u37tl+RYdslUMm
-	Un5r1YiKM/3OPZCmDBDCF9LFhdkYwqZyGcHjb2/W4TKoUYWV0WMqsqx2XLLo7CbwdFAt
-	OWa2b5FLOdbgPlkI0jT5FqV7gJ1YS1AWO/omRmxZ/3WanScRMglw335mUkFXJKmI9cLR
-	R6k0+KZN6fX4KRkvDkxIuBwb3zpAfuMU7me+s3C5D50OPVoZ8IwDWF+/2tvFdynfNbXB
-	bYSg==
+	Fri, 02 Dec 2016 06:21:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=AwoIeH0DIJHDkx8m3HN8D9U+mRK5AnoEX4IB2Q6VTMI=;
+	b=OC3FVm3Swj7GoyN5xXeuX6FTGN5/Eo0tKuaado/TT+jEiL+33YrsiknnsvwefbMvHM
+	yBLeFW8LUS5IwGny70V63w/oFgTpR3fClljni7ogiCrWydb9oeDi5YfQDXVLduTobtRt
+	O2Ym1SogLFPmeQuvdg7dcwfbVoH5aIBVsOCtU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=jldZh8Y2BYf9ql2Ou7ONi3+eJZbz88ok+zCoRK4Bms0=;
-	b=dgu4QrIdtqAB6QTRwFguw3faPWKdxIvL/OmshC1fTBPySSUTwrwwwnFGXKdqOBkPmJ
-	6oW1HHZiZp7Pwe8XO/Q/Ap//dIDxhgw7iET/WFzXOvpkCRqRWc9ibd0wJIpVLBO33kN1
-	oMxz6sVujQDdxVuHkq75+veo3s7cxnsYkzmEsECjnteSwixvYmg0WgqUQMPOknaYe4/9
-	g0+UP5zLhIPJzS9aXJnE7utofKKM+RdUAD8otCo7UpMcZBK2azAXy8ZG8F5Z8H9ifSw0
-	Y767x0VWGh0VLazAwFR23aCwgtqM9wFGiPI7CPV5kixXOorKr4Lfux057goEPYtEp078
-	kpMA==
-X-Gm-Message-State: AKaTC02QLbYNp/lQ6rDl4idMKLLJb/LkyOB0VrdoSwSwxUtl9TKmlF7BveDxVjgbSnFso1ky
-X-Received: by 10.194.99.38 with SMTP id en6mr38800907wjb.184.1480684794146;
-	Fri, 02 Dec 2016 05:19:54 -0800 (PST)
-Received: from gordanmarkus-XPS13 (static-212-247-53-108.cust.tele2.se.
-	[212.247.53.108]) by smtp.googlemail.com with ESMTPSA id
-	yj10sm5595305wjb.3.2016.12.02.05.19.53
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 02 Dec 2016 05:19:53 -0800 (PST)
-Message-ID: <1480684792.22967.5.camel@pelagicore.com>
-From: Gordan =?UTF-8?Q?Marku=C5=A1?= <gordan.markus@pelagicore.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 02 Dec 2016 14:19:52 +0100
-In-Reply-To: <20161202103105.GE3721@jama>
-References: <20161202092012.12438-1-gordan.markus@pelagicore.com>
-	<20161202095419.GD3721@jama> <1480674073.22967.3.camel@pelagicore.com>
-	<20161202103105.GE3721@jama>
-X-Mailer: Evolution 3.22.1-0ubuntu2 
-Mime-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-qt5][PATCH] gdb: Fix QA Warning
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=AwoIeH0DIJHDkx8m3HN8D9U+mRK5AnoEX4IB2Q6VTMI=;
+	b=Lkl/hHKbsMRJWULEinj8GWA1njh/1/OsfKrlMbFQINkFr43Of+6t7W8GXkzYDEHKAc
+	A0Cn82A7KX8BDcrCp/i+DuqX51o43aTjIKfkpKi/XVi90l6jUNXuQpsrN1Tevnnj0dvJ
+	YRm8Kn5riATneGnZgwc8risPwy/IK8+d3h24dp4xycRlxpa9VftM1ZrdXA4JhOiTio4M
+	upwl3e6mh6Nw+qh34/tzTDz9dEy59BDkrHpdpRYU5rgYGQ70wZYMUAGfpbUcynjju3Ec
+	yY5krskGs0kYLJGurQ812S2MnRpVkIzCVRvtWnJkPjoCLFb7Ewd1w56KK5iYjWVgpcUu
+	u7/w==
+X-Gm-Message-State: AKaTC03kT4x8Bm/k2qpbMmarQ7GEswwC+rhjqIuCTeKtZP6xB2CvowuNzGH1eBU67WUeSdPV
+X-Received: by 10.28.66.194 with SMTP id k63mr3403686wmi.140.1480688474812;
+	Fri, 02 Dec 2016 06:21:14 -0800 (PST)
+Received: from localhost.localdomain
+	(ANice-651-1-42-202.w86-203.abo.wanadoo.fr. [86.203.97.202])
+	by smtp.gmail.com with ESMTPSA id w79sm3469915wmw.0.2016.12.02.06.21.14
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 02 Dec 2016 06:21:14 -0800 (PST)
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  2 Dec 2016 15:21:02 +0100
+Message-Id: <20161202142102.31673-1-nicolas.dechesne@linaro.org>
+X-Mailer: git-send-email 2.10.2
+Cc: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Subject: [meta-oe][morty][PATCH] gpsd: fix multilib build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,77 +49,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Dec 2016 13:19:54 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 02 Dec 2016 14:21:14 -0000
 
-On Fri, 2016-12-02 at 11:31 +0100, Martin Jansa wrote:
-> On Fri, Dec 02, 2016 at 11:21:13AM +0100, Gordan Markuš wrote:
-> > On Fri, 2016-12-02 at 10:54 +0100, Martin Jansa wrote:
-> > > On Fri, Dec 02, 2016 at 10:20:11AM +0100, Gordan Markuš wrote:
-> > > > WARNING: QA Issue: gdb: invalid PACKAGECONFIG: readline
-> > > > [invalid-
-> > > > packageconfig]
-> > > > 
-> > > > Signed-off-by: Gordan Markuš <gordan.markus@pelagicore.com>
-> > > > ---
-> > > >  recipes-devtools/gdb/gdb_%.bbappend | 2 +-
-> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > 
-> > > > diff --git a/recipes-devtools/gdb/gdb_%.bbappend b/recipes-
-> > > > devtools/gdb/gdb_%.bbappend
-> > > > index 3e663e7..41592c4 100644
-> > > > --- a/recipes-devtools/gdb/gdb_%.bbappend
-> > > > +++ b/recipes-devtools/gdb/gdb_%.bbappend
-> > > > @@ -1 +1 @@
-> > > > -PACKAGECONFIG ??= "readline python"
-> > > > +PACKAGECONFIG ??= "python"
-> > > 
-> > > What gdb are you using? The version in oe-core has readline
-> > > PACKAGECONFIG
-> > > 
-> > > meta/recipes-devtools/gdb/gdb-common.inc:PACKAGECONFIG ??=
-> > > "readline"
-> > > meta/recipes-devtools/gdb/gdb-common.inc:# Use --without-system-
-> > > readline to compile with readline 5.
-> > > meta/recipes-devtools/gdb/gdb-common.inc:PACKAGECONFIG[readline]
-> > > = "-
-> > > -with-system-readline,--without-system-readline,readline"
-> > > 
-> > 
-> > We are using the gdb from poky and it's a similar case there.
-> > Though, 
-> > the gdb itself doesn't have the readline PACKAGECONFIG. It is
-> > enabled
-> > by default in the *.inc files. 
-> 
-> No, it isn't, read:
-> https://patchwork.openembedded.org/patch/116843/
-> discussion.
-In that case the patch can be discarded.
-Thank you for sharing this Martin!
-> 
-> > gdb-cross-canadian.inc:PACKAGECONFIG ??= "python readline"
-> > gdb-cross-canadian.inc:PACKAGECONFIG[readline] = "--with-system-
-> > readline,--without-system-readline,nativesdk-readline"
-> > gdb-common.inc:PACKAGECONFIG ??= "readline"
-> > gdb-common.inc:PACKAGECONFIG[readline] = "--with-system-readline,
-> > --without-system-readline,readline"
-> > gdb-cross.inc:PACKAGECONFIG ??= "python readline"
-> > gdb-cross.inc:PACKAGECONFIG[readline] = "--with-system-readline,
-> > --without-system-readline,readline-native"
-> > 
-> > > > -- 
-> > > > 2.9.3
-> > > > 
-> > > > -- 
-> > > > _______________________________________________
-> > > > Openembedded-devel mailing list
-> > > > Openembedded-devel@lists.openembedded.org
-> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-dev
-> > > > el
-> > > 
-> > > 
-> 
-> 
+While testing arm 64/32 multi, the following issue was observed:
+
+WARNING: gpsd-3.14-r0 do_package: QA Issue: gpsd: Files/directories were
+installed but not shipped in any package:
+  /usr/lib/libgpsd.so.22.0
+  /usr/lib/libgps.so.22
+  /usr/lib/libgpsd.so.22.0.0
+  /usr/lib/libgpsd.so.22
+  /usr/lib/libgps.so.22.0.0
+  /usr/lib/libgps.so
+  /usr/lib/libgps.so.22.0
+  /usr/lib/libgpsd.so
+  /usr/lib/pkgconfig
+  /usr/lib/pkgconfig/libgpsd.pc
+  /usr/lib/pkgconfig/libgps.pc
+Please set FILES such that these items are packaged. Alternatively if they are
+unneeded, avoid installing them or delete them within do_install.
+gpsd: 11 installed and not shipped files. [installed-vs-shipped]
+WARNING: gpsd-3.14-r0 do_package_qa: QA Issue: /usr/bin/cgps contained in
+package gps-utils requires libgps.so.22()(64bit), but no providers found in
+RDEPENDS_gps-utils? [file-rdeps]
+WARNING: gpsd-3.14-r0 do_package_qa: QA Issue: /usr/sbin/gpsdctl contained in
+package gpsd requires libgps.so.22()(64bit), but no providers found in
+RDEPENDS_gpsd? [file-rdeps]
+WARNING: gpsd-3.14-r0 do_package_qa: QA Issue: /usr/bin/gpsctl contained in
+package gpsd-gpsctl requires libgps.so.22()(64bit), but no providers found in
+RDEPENDS_gpsd-gpsctl? [file-rdeps]
+WARNING: gpsd-3.14-r0 do_package_qa: QA Issue: gpsd-dbg: found library in wrong
+location: /usr/lib/.debug/libgpsd.so.22.0.0
+gpsd-dbg: found library in wrong location: /usr/lib/.debug/libgps.so.22.0.0 [libdir]
+
+gpsd SConstruct file defaults to using '/lib' suffix, which needs to be
+overriden in the recipe.
+
+Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+(cherry picked from commit 45837e6c567b1b9ff9d152a7e2a752488d313455)
+Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+---
+ meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
+index b7b8968..4d00fea 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
+@@ -46,6 +46,7 @@ EXTRA_OESCONS = " \
+     strip='false' \
+     chrpath='yes' \
+     systemd='${SYSTEMD_OESCONS}' \
++    libdir='${libdir}' \
+     ${PACKAGECONFIG_CONFARGS} \
+ "
+ # this cannot be used, because then chrpath is not found and only static lib is built
+-- 
+2.10.2
+
 
