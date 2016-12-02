@@ -1,53 +1,55 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wj0-f195.google.com (mail-wj0-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 8EC6460746
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C9346069C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Dec 2016 08:15:00 +0000 (UTC)
-Received: by mail-wj0-f195.google.com with SMTP id he10so14993561wjc.2
+	Fri,  2 Dec 2016 08:30:09 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id m203so1509404wma.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Dec 2016 00:15:02 -0800 (PST)
+	Fri, 02 Dec 2016 00:30:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
+	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=FjFLh906vWFBnE20HJVb751wkLJFyOLn7zNXjmtgzuY=;
-	b=pYO7QKdpK8W4M9b42i/fsEsGRckXXkZLTBaDjgVSiQ2MJif/xsbcKwvieM47yDEeZy
-	qh8y20Q6dJPqovnTN9oTsDFRxevwL6RaIAqSzsxj5N/Jn1ga57PBlTR3ZFTv3dyd/KxB
-	66cMmjEwrVfwL0cDgDYpqPQMXqyYjOBIB9a9Bj6XmYQRKaF5wi2lbA8/psZUxpzAd53c
-	EDtOmRiT9x8jwo2VSSTsWvrmKhoHJ74kcZGl+OGOpzG5uQ4XaG7CQcjVjAw3XakyocHu
-	T+d1pyA+tsu5R54+TgRZ8wM4C8YIUtGpGVkQcE4fY+nu6Y2pZfSH3e2WboXfh9oxkUqk
-	4Eww==
+	bh=22aufro3f6Nrj/iAyI9Q+5aPpLHpN7bYXtkDXfwgSM4=;
+	b=HlxIglab2vnULLf+rrqnCqG9EXt4u4ortexnBOe6wvLV+KYZ4bo2SuOoktfiyfn88U
+	81NfSZJSOCWpjwbvJABoTagfhH7OhE6QyNadjJcI1A8wh/3G5C3ONsaZigxIVp2uB9U6
+	lu74ZH+7diULs8whjPvUSPZYAuYlEfe0iO5rzclvTRly0h4U4fzaVZDfObP9gj18/n07
+	jmS0QwAx/u0FMqgUhMv4+IKXAKHmcAsHc3impDWsLqqYcng2lvJhfsh/3xTW/2dWpgsk
+	gkKqjMBBWkYZeY1xyPVCtkaLgXPgQ1WzKUnDhtdLLlwr13kC/CEs4bXRaK2gkgmrXbys
+	THGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=FjFLh906vWFBnE20HJVb751wkLJFyOLn7zNXjmtgzuY=;
-	b=emSUr13t/8rNP0dnHXpdIJdVpoLRP3F2t2w784IxcNm17AZ2FRMC88UenHByPA2OjI
-	ncfIZyFTM0n81RDO+7N5i2PL9vZ18ZUd9i+jYaFR5U7ru2AeKIaktGVfK1zjlq52yxUK
-	/fAGNbwyWCuhoMIFNfAgys3Zs8NLhx99ZHhBtul4VqOFCI+hSkkqPzump9D3964YT6ED
-	SwsF2RLYb5ZSFf8cwlaKRK+Cy5LO0tbw7x7154NMZASRgd4KcbXHBrPPGwCmdOhslTtG
-	8LDnWchgaFZI6cT8drdkJgWne5S+0gy19lp71tINLyUM97XwWFuzEng/fCpTBr39qEHf
-	kBfw==
-X-Gm-Message-State: AKaTC00W7vVDaGQ2W0ga9dVpO3w1QF45VQK5y52iE5kXSNuYeZzA5PsS4Zl/j0Nd5L6fng==
-X-Received: by 10.194.98.208 with SMTP id ek16mr43376586wjb.94.1480666501770; 
-	Fri, 02 Dec 2016 00:15:01 -0800 (PST)
+	bh=22aufro3f6Nrj/iAyI9Q+5aPpLHpN7bYXtkDXfwgSM4=;
+	b=ldA6E2tgdR8UmEbpynITZQwm6WuZCYhT0IAbYp+eq3zjldHkuC+1cUIwiu4ZTTJYte
+	mCdfni0uDjS2WQkDfgCJujJgSGIbhpL+8f8X1dGHAAplBSR9M6bpy8JnaesSKm6Nyq/U
+	GRP/U68f8yWMPrZ7Zjimfn3GqNSDbIZHfTVXQg+suDcNPBy1b9gezvlShPxWQkpexR28
+	pvT/TnPaUmfoQux87XHsr6jKLWfgY+CX6DAetDKIyKNeDSD/a3b2e9KIJYWKVVys8yaQ
+	d38B72xvJb1KCV3ytJeLU7ZA3mnYhmlhf8nOyHQ31ceFjA0M8CfXXdxrS0O77I0ouLLQ
+	Ou7w==
+X-Gm-Message-State: AKaTC00xpIKptAq/oFs5AU6dBW1bE6fHeVX0NB1OMB5BgtQRLxIbiqT+3/MsSOZ+eAYGOg==
+X-Received: by 10.28.13.9 with SMTP id 9mr1650878wmn.50.1480667410564;
+	Fri, 02 Dec 2016 00:30:10 -0800 (PST)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	i10sm4285837wjd.15.2016.12.02.00.15.00
-	for <openembedded-devel@lists.openembedded.org>
+	l67sm1947723wmf.20.2016.12.02.00.30.09
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 02 Dec 2016 00:15:00 -0800 (PST)
+	Fri, 02 Dec 2016 00:30:09 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 2 Dec 2016 09:15:00 +0100
+Date: Fri, 2 Dec 2016 09:30:09 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161202081500.GA3721@jama>
-References: <20161128225759.9756-1-raj.khem@gmail.com>
-	<20161129195922.GD2700@jama>
-	<CAMKF1sog=+RPyNRKK1hrDJDOJhGm3ycJD=H0iyFbdbfomfajtQ@mail.gmail.com>
+Message-ID: <20161202083009.GB3721@jama>
+References: <4717571.f7GXZOAcRz@peggleto-mobl.ger.corp.intel.com>
+	<20161129204327.GG2546@bill-the-cat>
+	<d93f4841-0154-2232-1802-2b8fcc85a81c@linux.intel.com>
+	<19E9BF3F-664F-42A4-A170-5B7BB473ED80@gmail.com>
+	<53ca2ead-1b75-ff6d-30c1-abb16330bad3@linux.intel.com>
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sog=+RPyNRKK1hrDJDOJhGm3ycJD=H0iyFbdbfomfajtQ@mail.gmail.com>
+In-Reply-To: <53ca2ead-1b75-ff6d-30c1-abb16330bad3@linux.intel.com>
 User-Agent: Mutt/1.7.1 (2016-10-04)
-Subject: Re: [meta-oe][PATCH] libva: Import from meta-intel and update to 1.7.3
+Cc: Tom Rini <trini@konsulko.com>, Patrick Ohly <patrick.ohly@intel.com>,
+	Michael Halstead <michael@yoctoproject.org>
+Subject: Re: meta-openembedded patchwork git hook
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,157 +62,174 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Dec 2016 08:15:02 -0000
-X-Groupsio-MsgNum: 64200
+X-List-Received-Date: Fri, 02 Dec 2016 08:30:11 -0000
+X-Groupsio-MsgNum: 64201
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="fdj2RfSjLxBAspz7"
+	protocol="application/pgp-signature"; boundary="0eh6TmSyL6TZE2Uz"
 Content-Disposition: inline
 
---fdj2RfSjLxBAspz7
+--0eh6TmSyL6TZE2Uz
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Nov 29, 2016 at 02:43:22PM -0800, Khem Raj wrote:
-> On Tue, Nov 29, 2016 at 11:59 AM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
-> > On Mon, Nov 28, 2016 at 02:57:59PM -0800, Khem Raj wrote:
-> >> This recipe is used by intel and amd BSP layers
-> >> additional copies are also there see
-> >> https://layers.openembedded.org/layerindex/branch/master/recipes/?q=3D=
-libva
-> >
-> > I'm sorry to report more and more issues, but this is causing few more =
-autodetected dependencies
+On Wed, Nov 30, 2016 at 12:41:20PM -0600, Jose Lamego wrote:
 >=20
-> its good. We will keep fixing them :)
-
-So here is another, possibly caused by libvncserver autodetecting libva:
-http://errors.yoctoproject.org/Errors/Details/109361/
-
-I'm fine with just disabling it, or someone using libvncserver might
-want to fix it with:
-https://github.com/LibVNC/libvncserver/issues/11
-
 >=20
-> >
-> > mpv-0.15.0: mpv rdepends on libva-x11, but it isn't a build dependency,=
- missing libva in DEPENDS or PACKAGECONFIG? [build-deps]
-> > mpv-0.15.0: mpv rdepends on libva, but it isn't a build dependency, mis=
-sing libva in DEPENDS or PACKAGECONFIG? [build-deps]
-> >
-> > and there is another one caused by libvdpau I haven't noticed before:
-> > ffmpeg-3.2: libavutil rdepends on libvdpau, but it isn't a build depend=
-ency, missing libvdpau in DEPENDS or PACKAGECONFIG? [build-deps]
-> >
+> On 11/29/2016 07:50 PM, Khem Raj wrote:
+> >=20
+> >> On Nov 29, 2016, at 2:34 PM, Jose Lamego <jose.a.lamego@linux.intel.co=
+m> wrote:
 > >>
-> >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> >> ---
-> >>  meta-oe/recipes-graphics/libva/libva_1.7.3.bb | 48 ++++++++++++++++++=
-+++++++++
-> >>  1 file changed, 48 insertions(+)
-> >>  create mode 100644 meta-oe/recipes-graphics/libva/libva_1.7.3.bb
 > >>
-> >> diff --git a/meta-oe/recipes-graphics/libva/libva_1.7.3.bb b/meta-oe/r=
-ecipes-graphics/libva/libva_1.7.3.bb
-> >> new file mode 100644
-> >> index 0000000..9994158
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-graphics/libva/libva_1.7.3.bb
-> >> @@ -0,0 +1,48 @@
-> >> +SUMMARY =3D "Video Acceleration (VA) API for Linux"
-> >> +DESCRIPTION =3D "Video Acceleration API (VA API) is a library (libVA)=
- \
-> >> +and API specification which enables and provides access to graphics \
-> >> +hardware (GPU) acceleration for video processing on Linux and UNIX \
-> >> +based operating systems. Accelerated processing includes video \
-> >> +decoding, video encoding, subpicture blending and rendering. The \
-> >> +specification was originally designed by Intel for its GMA (Graphics \
-> >> +Media Accelerator) series of GPU hardware, the API is however not \
-> >> +limited to GPUs or Intel specific hardware, as other hardware and \
-> >> +manufacturers can also freely use this API for hardware accelerated \
-> >> +video decoding."
-> >> +
-> >> +HOMEPAGE =3D "http://www.freedesktop.org/wiki/Software/vaapi"
-> >> +BUGTRACKER =3D "https://bugs.freedesktop.org"
-> >> +
-> >> +SECTION =3D "x11"
-> >> +LICENSE =3D "MIT"
-> >> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2e48940f94acb0af582e5ef035=
-37800f"
-> >> +
-> >> +SRC_URI =3D "http://www.freedesktop.org/software/vaapi/releases/libva=
-/${BP}.tar.bz2"
-> >> +SRC_URI[md5sum] =3D "dafb1d7d6449e850e9eb1a099895c683"
-> >> +SRC_URI[sha256sum] =3D "22bc139498065a7950d966dbdb000cad04905cbd3dc8f=
-3541f80d36c4670b9d9"
-> >> +
-> >> +DEPENDS =3D "libdrm virtual/mesa virtual/libgles1 virtual/libgles2 vi=
-rtual/egl"
-> >> +
-> >> +inherit autotools pkgconfig
-> >> +
-> >> +EXTRA_OECONF =3D "--disable-dummy-driver"
-> >> +
-> >> +PACKAGECONFIG ??=3D "${@bb.utils.contains("DISTRO_FEATURES", "x11", "=
-x11", "", d)} \
-> >> +                   ${@bb.utils.contains("DISTRO_FEATURES", "wayland",=
- "wayland", "", d)}"
-> >> +PACKAGECONFIG[x11] =3D "--enable-x11,--disable-x11,virtual/libx11 lib=
-xext libxfixes"
-> >> +PACKAGECONFIG[wayland] =3D "--enable-wayland,--disable-wayland,waylan=
-d"
-> >> +
-> >> +PACKAGES =3D+ "${PN}-x11 ${PN}-tpi ${PN}-glx ${PN}-egl ${PN}-wayland"
-> >> +
-> >> +RDEPENDS_${PN}-tpi =3D+ "${PN}"
-> >> +RDEPENDS_${PN}-x11 =3D+ "${PN}"
-> >> +RDEPENDS_${PN}-glx =3D+ "${PN}-x11"
-> >> +RDEPENDS_${PN}-egl =3D+ "${PN}-x11"
-> >> +
-> >> +FILES_${PN}-dbg +=3D "${libdir}/dri/.debug"
-> >> +
-> >> +FILES_${PN}-x11 =3D+ "${libdir}/libva-x11*${SOLIBS}"
-> >> +FILES_${PN}-tpi =3D+ "${libdir}/libva-tpi*${SOLIBS}"
-> >> +FILES_${PN}-glx =3D+ "${libdir}/libva-glx*${SOLIBS}"
-> >> +FILES_${PN}-egl =3D+ "${libdir}/libva-egl*${SOLIBS}"
-> >> +FILES_${PN}-wayland =3D+ "${libdir}/libva-wayland*${SOLIBS}"
-> >> --
-> >> 2.10.2
 > >>
-> >> --
+> >> On 11/29/2016 02:43 PM, Tom Rini wrote:
+> >>> On Wed, Nov 30, 2016 at 06:52:46AM +1300, Paul Eggleton wrote:
+> >>>
+> >>>> Hi folks,
+> >>>>
+> >>>> Martin just brought to my attention that the git hook for the=20
+> >>>> meta-openembedded repository that's supposed to update patchwork sti=
+ll isn't=20
+> >>>> working and hasn't done so for a very long time. I thought we'd fixe=
+d this so=20
+> >>>> that merged patches get marked as "Accepted", but at least for meta-
+> >>>> openembedded it seems like that's not the case.
+> >>>>
+> >>>> Jose / Michael - can you look into this if you haven't already? Plea=
+se let me=20
+> >>>> know if you need any help.
+> >>
+> >> The git hook was configured to update OE-core only, Michael will help =
+us
+> >> to include meta-openembedded.
+> >>
+> >=20
+> > There are more repos using patchwork beyond OE-core and meta-opemebedded
+> > please enable it for all of them  as well.
+> >=20
+>=20
+> Now all of the projects are enabled to receive automatic updates from
+> the git-hook (Thanks Michael). Please let me know if any undesired
+> behavior is detected.
+
+Still doesn't mark anything as accepted:
+
+OE @ ~/meta-openembedded $ git push origin master
+Counting objects: 293, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (257/257), done.
+Writing objects: 100% (293/293), 48.83 KiB | 0 bytes/s, done.
+Total 293 (delta 179), reused 68 (delta 18)
+remote: E: failed to find patch for rev efd3696e70a6603f1a45faa4a172433514f=
+0a487.
+remote: E: failed to find patch for rev 8c720146b718aae3bc194621f3e095cf11e=
+cb2ed.
+remote: E: failed to find patch for rev fc2fc9097b2fa437d4af0338e418692b4dd=
+6c989.
+remote: E: failed to find patch for rev 533826b7652a2cf86ca7b665c25b98c89af=
+c266e.
+remote: E: failed to find patch for rev 6afb85d29286aaa4cdd892460f6adf68912=
+917a5.
+remote: E: failed to find patch for rev a7f3ec87f957ff35b8a853cd0e04c6b18ba=
+c0ece.
+remote: E: failed to find patch for rev 877e52fd75c7d3b88add94691df3beb5e0c=
+54529.
+remote: E: failed to find patch for rev 2f6e45baba961629bfe023599144be6cfcd=
+45728.
+remote: E: failed to find patch for rev 86fed80d80bc33f0a3cdbf719c00ee5f05e=
+d4d19.
+remote: E: failed to find patch for rev 41d7bac5d50091cab835eac0a5eaa6c431f=
+b2023.
+remote: E: failed to find patch for rev a85e12928131fce057f777daa76a7f0c75c=
+ffa14.
+remote: E: failed to find patch for rev 45837e6c567b1b9ff9d152a7e2a752488d3=
+13455.
+remote: E: failed to find patch for rev 119e75e48dbf0539b4e440417901458ffff=
+79b38.
+remote: E: failed to find patch for rev a4251575f41fa5aafe5072e562497b05c11=
+b6702.
+remote: E: failed to find patch for rev b6ea2c0bacb21b83bae3605ef4da080de0c=
+ad15e.
+remote: E: failed to find patch for rev 4580e5ae201b320ed407eae26f58655b876=
+8b387.
+remote: E: failed to find patch for rev c476219e845934f767927e81fe60dbaa157=
+df9ee.
+remote: E: failed to find patch for rev 0288b204f3c12af1561218fa0cfcdfb9a55=
+08b47.
+remote: E: failed to find patch for rev 5596b52d64c30d8e66ec6e379cf69a9fc94=
+07fb1.
+remote: E: failed to find patch for rev 24e51a6a106bc10a8838b23e4bf9ea63043=
+14bca.
+remote: E: failed to find patch for rev aac6bf8bf911c3f14ff9dce08f0f011838f=
+5a426.
+remote: I: 0 patch(es) updated to state Accepted.
+remote: Sending notification emails to: openembedded-commits@lists.openembe=
+dded.org.
+To git.openembedded.org:meta-openembedded
+   761639b..aac6bf8  master -> master
+
+> >>>
+> >>> Since I brought this up on IRC, I wanted to chime in here.  First, if
+> >>> you want to use top-of-tree patchwork you'll also want to grab
+> >>> https://patchwork.ozlabs.org/bundle/stephenfin/post-receive%20fixes/
+> >>
+> >>
+> >> Hi Tom, nice meeting you. OE-Patchwork is using a fork in [1] from
+> >> freedesktop.org's patchwork at [2]. I will look at the hook fixes you
+> >> mentioned at the first chance, thanks for the tip.
+> >>
+> >>> (and fwiw, I also have been setting the DJANGO part to 'dev' rather t=
+han
+> >>> production for my use-case).  Second, I think part of the problem is
+> >>> that there are just some cases where the hashing fails, which for me =
+is
+> >>> around 10% of the time.  Depending on how much one uses bundles and
+> >>> tracks what ends up being committed this may or may not be a problem.
+> >>> And I'm sure upstream patchwork would appreciate any changes to impro=
+ve
+> >>> hashing success :)
+> >>>
+> >>
+> >> Regards
+> >> Jose
+> >>
+> >> --=20
+> >> Jose Lamego | OTC Embedded Platforms & Tools | GDC
+> >>
+> >> --=20
 > >> _______________________________________________
 > >> Openembedded-devel mailing list
 > >> Openembedded-devel@lists.openembedded.org
 > >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> > --
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
+> >=20
+>=20
+> --=20
+> Jose Lamego | OTC Embedded Platforms & Tools | GDC
+>=20
+
+
+
+
 > --=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---fdj2RfSjLxBAspz7
+--0eh6TmSyL6TZE2Uz
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWEEthAAKCRA3VSO3ZXaA
-HDHJAKCrwXtENdkJ+VLYh6bhClciRdTmBACeLxE9t+nj/eeOw/ejk6qhMtijwV0=
-=7lOK
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWEExEQAKCRA3VSO3ZXaA
+HOZFAJ42tZV9JpyvWCzrTdWIPZnr5onFTgCdE3FLfeEgdi8dkgOJzXi2E24i26M=
+=JeOC
 -----END PGP SIGNATURE-----
 
---fdj2RfSjLxBAspz7--
+--0eh6TmSyL6TZE2Uz--
