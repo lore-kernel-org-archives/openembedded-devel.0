@@ -1,44 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 1886271A0B
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id C6DCB71A0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Dec 2016 03:04:26 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id e9so9562740pgc.1
+	Sat,  3 Dec 2016 03:04:27 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id x23so9596717pgx.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Dec 2016 19:04:28 -0800 (PST)
+	Fri, 02 Dec 2016 19:04:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=kr+Fuq1CxWDFdlyuLNV1LpcJAD/2+BmSZ8saKYvkXUo=;
-	b=sL3cwI82jRdygvCXji/03DMn0az1aXz6GAfR7J2VismZvQxOiMxxlvL3LWbkKaTHnm
-	w2KifA9Uv275Zda2VzQhkAFZH0qCuewOde/tTasU2JKQlWaEfGCOqGx4aH8QXmFdba6B
-	7ziKA+FX9uNXW7BshuXE2dSaUz4Tjya8mHOjSXkwPvPwUeFLiD6Y2A8EZWPTaQbZS/KI
-	9LBAVkiFwJ5ihVmQFCxaqCVTOhrAWuug6dabKhTglPHdPT5kmxNi5MaL+jkBIqGAciX3
-	9sJlrVvE9PUtuB7cwFqLm2IUOhv+sQCUUE9ZT7ibFb3x4SIz3WkQ2aU7msqXhuPgG9RT
-	Q61A==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=vpGqP0hCaOjpOT66S2U2BOd02n9hLUxHGUFO05jjlOY=;
+	b=iIYWhmlxYsmjd2sj+ZX/J08w0CsR+EcVM3280AnB3vJ5dmlwIr9lIqZPuVm5zm4Bpb
+	ywFAI6U4N9tENEymVXOofnHc/6qu4i9ttgKODsc6BbsvhvrsGfNgBC3bROxrSX2osg9m
+	lxL8tIZQxtHEpKC7vrh3Cm7q1rg3GUjUl+cqKwWEKrmkuQobFuFG/0fbKTsREF4HaF7Z
+	2StBnGFaaLHvh2M+c32hdyTI3zYcj8Z7/6abWiXcu+N/9Y5FkwEEzgoRlgYDB22dEoFb
+	wYJe1LIymQ1lseU+uGK2rA1EVpzbHe81cj+K5KhNLa1DssgeJV3ey3xASwWXgFro9OeB
+	48Pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=kr+Fuq1CxWDFdlyuLNV1LpcJAD/2+BmSZ8saKYvkXUo=;
-	b=eCWO6/R0Cgyz4x9Fxnz/FvnB3okDMU56zwK2z88VJhAFTnX+9vfgdUiB8bg5P4+sNN
-	cZdV0a22fS9MGaf4uNBOlIxxXkvkb+v9wsgoK6NjX6dLNp54i9gd6BOjxjLMaE4dGbZd
-	IbSrRbnn+Fh1usUwQJNJJaSeq4wlm9UZgAFMHfocfpm8QQnS4mRnvZqhV5XLIg5wO/9U
-	VoRdm3I1Fy199Pr22te0ceyrtYa0t4CyLeyafPJaUtpuAxFU2xaWS8qIi/ig9yJfAqwV
-	xJNxDYUKYbSt/Wg16C5odlzNoTypPsfYn3krbwH/CYSUOUDVeNZrUMp2xio6g+NNETgR
-	Tbhg==
-X-Gm-Message-State: AKaTC02snSMPqsUVQGhuloKjulGxhgipQxsOk9uVFS5jyEdFu8Eo18LHDURnh/2KNqUagg==
-X-Received: by 10.84.178.195 with SMTP id z61mr104375100plb.176.1480734268315; 
-	Fri, 02 Dec 2016 19:04:28 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=vpGqP0hCaOjpOT66S2U2BOd02n9hLUxHGUFO05jjlOY=;
+	b=UT1ExvJwUfKc7VXwz+kxWWat2GFUPlE5NFg9XXday/WFjsTj3fXCJhf+WFg3ejPtkd
+	HLX2XKaSCZ54WEJsIkUZgeVU52l/lQCYu1OdibsMLNodG6R0KrAxP6GuJa6ct2vb79Wl
+	sQ7ZV593I3EtU5Wxfdcnbt25jjKIDI7xevDVPyQobydA+XzbjrrluOoewvRoIzD+qAIt
+	zdWVWsGe6gQip4Dgz46VWHVeW4WNMpgQd+9ijSmtPab8HnX2VNI0Hdua5jtJD3Kf6Q1n
+	9rNNAKACM2q+M4yu4G8svGmzDX+YLz8F0hg3xub8EwSVJBPiuOPPkFK0yQQ1s9WIQH6g
+	/7Fg==
+X-Gm-Message-State: AKaTC01upRDbdwHwdpu7AKXZBxKESjymVnGyBu8okmf3yxe3YJVC8jsc+BYrSUiUzDBlrg==
+X-Received: by 10.84.143.162 with SMTP id 31mr38205568plz.2.1480734269068;
+	Fri, 02 Dec 2016 19:04:29 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	186sm10624342pfv.61.2016.12.02.19.04.27
+	186sm10624342pfv.61.2016.12.02.19.04.28
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 02 Dec 2016 19:04:27 -0800 (PST)
+	Fri, 02 Dec 2016 19:04:28 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Dec 2016 19:04:15 -0800
-Message-Id: <20161203030422.17285-1-raj.khem@gmail.com>
+Date: Fri,  2 Dec 2016 19:04:16 -0800
+Message-Id: <20161203030422.17285-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.2
-Subject: [meta-oe][PATCH 1/8] libvncserver: Fix build with security flags on and disable libva
+In-Reply-To: <20161203030422.17285-1-raj.khem@gmail.com>
+References: <20161203030422.17285-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 2/8] python-cson: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,65 +56,39 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 03 Dec 2016 03:04:27 -0000
 
-When libva is present it detects it and then fails to build
-until the support is fixed, lets disable it
-
-Add a patch to fix issue found when compiling with
-security flags turned on
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../libvncserver/0002-format_string.patch           | 21 +++++++++++++++++++++
- .../libvncserver/libvncserver_0.9.10.bb             |  3 +++
- 2 files changed, 24 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/libvncserver/libvncserver/0002-format_string.patch
+ .../recipes-extended/python-cson/python-cson_git.bb | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-python/recipes-extended/python-cson/python-cson_git.bb
 
-diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver/0002-format_string.patch b/meta-oe/recipes-graphics/libvncserver/libvncserver/0002-format_string.patch
+diff --git a/meta-python/recipes-extended/python-cson/python-cson_git.bb b/meta-python/recipes-extended/python-cson/python-cson_git.bb
 new file mode 100644
-index 0000000..566a208
+index 0000000..efb338c
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/libvncserver/libvncserver/0002-format_string.patch
++++ b/meta-python/recipes-extended/python-cson/python-cson_git.bb
 @@ -0,0 +1,21 @@
-+From: Luca Falavigna <dktrkranz@debian.org>
-+Date: Tue, 27 Jan 2015 01:26:04 +0000
-+Subject: format_string
++# Copyright (C) 2015 Khem Raj <raj.khem@gmail.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
 +
-+---
-+ client_examples/gtkvncviewer.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++DESCRIPTION = "Python library for CSON (schema-compressed JSON)"
++HOMEPAGE = "https://github.com/gt3389b/python-cson/"
++LICENSE = "MIT"
++SECTION = "devel/python"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=7709d2635e63ab96973055a23c2a4cac"
 +
-+diff --git a/client_examples/gtkvncviewer.c b/client_examples/gtkvncviewer.c
-+index 261b2da..861e4e3 100644
-+--- a/client_examples/gtkvncviewer.c
-++++ b/client_examples/gtkvncviewer.c
-+@@ -588,7 +588,7 @@ static void GtkDefaultLog (const char *format, ...)
-+ 
-+ 	time (&log_clock);
-+ 	strftime (buf, 255, "%d/%m/%Y %X ", localtime (&log_clock));
-+-	fprintf (stdout, buf);
-++	fprintf (stdout, "%s", buf);
-+ 
-+ 	vfprintf (stdout, format, args);
-+ 	fflush (stdout);
-diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
-index 387202b..0eba87c 100644
---- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
-+++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.10.bb
-@@ -14,6 +14,7 @@ SRC_URI  = "\
-     ${DEBIAN_MIRROR}/main/libv/libvncserver/libvncserver_0.9.10+dfsg.orig.tar.xz \
-     file://0001-remove-webclients-build.patch \
-     file://0002-common-add-sha1.patch \
-+    file://0002-format_string.patch \
- "
- 
- SRC_URI[md5sum] = "e883b6c7bd339a5e1c48645051abe5c4"
-@@ -21,4 +22,6 @@ SRC_URI[sha256sum] = "583f28869b82aec57768d7d18cd7ff81bf092ecbbc1209b587c2c2cd68
- 
- S = "${WORKDIR}/${BPN}-LibVNCServer-${PV}"
- 
-+EXTRA_OECONF += "--without-libva"
++SRCREV = "f3f2898c44bb16b951d3e9f2fbf6d1c4158edda2"
++SRC_URI = "git://github.com/gt3389b/python-cson.git"
 +
- TARGET_LDFLAGS += "-lgcrypt"
++S = "${WORKDIR}/git"
++
++RDEPENDS_${PN}_class-native = ""
++DEPENDS_append_class-native = " python-native "
++
++inherit setuptools
++
++BBCLASSEXTEND = "native"
++
 -- 
 2.10.2
 
