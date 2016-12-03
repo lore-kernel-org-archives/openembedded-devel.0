@@ -1,44 +1,44 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 01A5071C14
+	by mail.openembedded.org (Postfix) with ESMTP id 1886271A0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Dec 2016 21:22:51 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id e9so8898025pgc.1
+	Sat,  3 Dec 2016 03:04:26 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id e9so9562740pgc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Dec 2016 13:22:53 -0800 (PST)
+	Fri, 02 Dec 2016 19:04:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id;
 	bh=kr+Fuq1CxWDFdlyuLNV1LpcJAD/2+BmSZ8saKYvkXUo=;
-	b=KHf4v6LO+DEj4tLS4ZlRhhrrFzGzQuoNMleCvepLhYFK0mT4sedJ+bhKnXRb6wdL8Q
-	sIuhgsTUYRGOTztlBHE+u7TT0BRumDHCitI7hb27lATJ0zifoOISskbm5wjRSYn0a8g4
-	0sdEkTyBTAs4cuFTDvBh+uxRAg/hZMSpzSybalXp0LH56EZ4+IeWAPRe8DhfcrBv/S8m
-	kov/yRPawNsXWbIhRWfg2QPgVTFta4REmf22LX7uSzGoTpMIbZfQTCdvvrBW/Rur47+C
-	tZF5k61pbls4QEV183nMgSAFXsBeDvW9bP2RDwES5pwRh54ULSSO4JOQZtdylFCenN4X
-	aMwQ==
+	b=sL3cwI82jRdygvCXji/03DMn0az1aXz6GAfR7J2VismZvQxOiMxxlvL3LWbkKaTHnm
+	w2KifA9Uv275Zda2VzQhkAFZH0qCuewOde/tTasU2JKQlWaEfGCOqGx4aH8QXmFdba6B
+	7ziKA+FX9uNXW7BshuXE2dSaUz4Tjya8mHOjSXkwPvPwUeFLiD6Y2A8EZWPTaQbZS/KI
+	9LBAVkiFwJ5ihVmQFCxaqCVTOhrAWuug6dabKhTglPHdPT5kmxNi5MaL+jkBIqGAciX3
+	9sJlrVvE9PUtuB7cwFqLm2IUOhv+sQCUUE9ZT7ibFb3x4SIz3WkQ2aU7msqXhuPgG9RT
+	Q61A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
 	bh=kr+Fuq1CxWDFdlyuLNV1LpcJAD/2+BmSZ8saKYvkXUo=;
-	b=StcjRMYi/UUl+CZR/0ByK9qoGyDQqt9PyB/AJZiTe3ZpGDPL5BuBAyclnOXaqF4EiN
-	yW2CvRTPOKrndEbypWjbEQLSD6vNnFC/deto2buzR+PdW2kPE7nJyk1qeK4rr8GK3b6U
-	fyTpYG9b+CFXkwzpNw8lvpY3MGp+zCP3o7prvlwC39Vo1XUfvxadIqLRoqDv5Qhg706u
-	/e/94CC3NyA03DtrzLeRGw1iDnhOLYeaTRjtx4sPX+jvYF5PdrdgXmmptAHFIbQnUFGy
-	DRNRVssZ0v9R+vkHJOKVWShSekPUgyg6IYZAXohoo3jyKrO/Zc/IQ6H3E406um6M+7Qt
-	GXEA==
-X-Gm-Message-State: AKaTC01eu9oGvk/AIavWsFTFykM4d+AMcgN1Bew/uKsgUyiXnZT6TdYO4YLrsBuI+4CDug==
-X-Received: by 10.99.123.87 with SMTP id k23mr83948300pgn.101.1480713773562;
-	Fri, 02 Dec 2016 13:22:53 -0800 (PST)
+	b=eCWO6/R0Cgyz4x9Fxnz/FvnB3okDMU56zwK2z88VJhAFTnX+9vfgdUiB8bg5P4+sNN
+	cZdV0a22fS9MGaf4uNBOlIxxXkvkb+v9wsgoK6NjX6dLNp54i9gd6BOjxjLMaE4dGbZd
+	IbSrRbnn+Fh1usUwQJNJJaSeq4wlm9UZgAFMHfocfpm8QQnS4mRnvZqhV5XLIg5wO/9U
+	VoRdm3I1Fy199Pr22te0ceyrtYa0t4CyLeyafPJaUtpuAxFU2xaWS8qIi/ig9yJfAqwV
+	xJNxDYUKYbSt/Wg16C5odlzNoTypPsfYn3krbwH/CYSUOUDVeNZrUMp2xio6g+NNETgR
+	Tbhg==
+X-Gm-Message-State: AKaTC02snSMPqsUVQGhuloKjulGxhgipQxsOk9uVFS5jyEdFu8Eo18LHDURnh/2KNqUagg==
+X-Received: by 10.84.178.195 with SMTP id z61mr104375100plb.176.1480734268315; 
+	Fri, 02 Dec 2016 19:04:28 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	w16sm9843174pgc.30.2016.12.02.13.22.52
+	186sm10624342pfv.61.2016.12.02.19.04.27
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 02 Dec 2016 13:22:53 -0800 (PST)
+	Fri, 02 Dec 2016 19:04:27 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Dec 2016 13:22:47 -0800
-Message-Id: <20161202212247.3416-1-raj.khem@gmail.com>
+Date: Fri,  2 Dec 2016 19:04:15 -0800
+Message-Id: <20161203030422.17285-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.10.2
-Subject: [meta-oe][PATCH] libvncserver: Fix build with security flags on and disable libva
+Subject: [meta-oe][PATCH 1/8] libvncserver: Fix build with security flags on and disable libva
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,7 +51,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Dec 2016 21:22:53 -0000
+X-List-Received-Date: Sat, 03 Dec 2016 03:04:27 -0000
 
 When libva is present it detects it and then fails to build
 until the support is fixed, lets disable it
