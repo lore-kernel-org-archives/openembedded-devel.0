@@ -1,52 +1,23 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B04A71B19
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 8739970100
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Dec 2016 17:11:51 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id e9so11228811pgc.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Dec 2016 09:11:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=6uYuYR6vivN8gmgKYboPVPtULq/I0bJAwIsseFZZi8o=;
-	b=MYqSA20NdCUKvJroyC3GGJT1JiRq6zH5luAxkupH3snEYxvc7nswJloE7XNwf44KM8
-	ipA5ed1+fyDCXHyXljYuVqEYmDxuZSulEQ4B1AuQryCKFAXbpeBD7R6OGN2Bo4gNth6B
-	7wG+qj7Agixd/yDMZMP76bhApRcWokLi92c14vVFJA7AG99OaAYlddpTkiJ6BFU72zo/
-	MyjZNLlLywA7eH7k/1wC8A3RdbdEKR/AAKrfSShElwBmbK2AWFbA4C22ZRqSQhZv4TuL
-	fHFCD8vMhmZu4kbHXeJ6Gts1X10COUOgrJbwbUelAKA3lwLRcUbiOcqScPpDsI86vyxT
-	fWTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=6uYuYR6vivN8gmgKYboPVPtULq/I0bJAwIsseFZZi8o=;
-	b=lOxeE/JbRM9lS0MO0kHQjahiNtrH1uDEJuSpdPn2iyDM/wbVJ7OCrKBn/VIPK7xdg5
-	rajczVB0yajO4d3ed4aCjReh4wYR38gUgeKZB4bK9egPYjj8Rd02uPREduP4wgiB1BAF
-	t3A++k5dGnUrV0ACwbsL4ARAjMfP1SL4ISVfSPqJTSW3CEuqIBUuN3ZYENXC5nm0ofIV
-	rCbhS7qhwjgqavWZi/t9ozZKtLyBC38vawYxGPzdNhqERxYfu4mLkhnJZr3vqCVNKHrO
-	syilF4ZYjKOEL0pHwmQGYUwMOQmAOLAZrXZAwKpb0mOnPNdV0iOw5ggWoXN1TG/oEzJn
-	nqfA==
-X-Gm-Message-State: AKaTC02IlHDUWJIw9E3DaivuPWvlXqCcMXHgKbnhPJm1tYHyJ7U6Lgo0r+GGUdYNAeOH3w==
-X-Received: by 10.84.217.20 with SMTP id o20mr109129103pli.28.1480785113060;
-	Sat, 03 Dec 2016 09:11:53 -0800 (PST)
-Received: from ?IPv6:2601:202:4001:9ea0:5aa:72a1:f3b6:20dc?
-	([2601:202:4001:9ea0:5aa:72a1:f3b6:20dc])
-	by smtp.googlemail.com with ESMTPSA id
-	w17sm16233964pgm.18.2016.12.03.09.11.52
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 03 Dec 2016 09:11:52 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <20161202142102.31673-1-nicolas.dechesne@linaro.org>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <f300639f-8bee-bc63-804a-8ba02ff12cbf@gmail.com>
-Date: Sat, 3 Dec 2016 09:11:51 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.4.0
+	Sun,  4 Dec 2016 08:34:20 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uB48YJI0022474
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 4 Dec 2016 00:34:19 -0800 (PST)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
+	Sun, 4 Dec 2016 00:34:19 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 4 Dec 2016 03:34:17 -0500
+Message-ID: <1480840457-169896-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-In-Reply-To: <20161202142102.31673-1-nicolas.dechesne@linaro.org>
-Subject: Re: [meta-oe][morty][PATCH] gpsd: fix multilib build
+Subject: [meta-networking][PATCH] iscsi-initiator-utils: fix invoking 32bit "iscsiadm -m node" failed in 64bit kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,70 +30,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Dec 2016 17:11:52 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 04 Dec 2016 08:34:20 -0000
+Content-Type: text/plain
 
+Take struct iscsi_uevent *ev for example:
+In 64bit kernel : sizeof(ev->u): 24, sizeof(ev->r): 16,
+but in 32bit iscsid: sizeof(ev->u): 20, sizeof(ev->r): 16.
 
+While invoking 32bit "iscsiadm -m node" in 64bit kernel,
+we should force ev->u 8byte aligned.
 
-On 12/02/2016 06:21 AM, Nicolas Dechesne wrote:
-> While testing arm 64/32 multi, the following issue was observed:
-> 
-merged to staging.
+For "64bit iscsiadm + 64bit kernel" or "32bit iscsiadm + 32bit kernel",
+they do not need the fix, so conditionally apply the fix patch.
+(MLPREFIX is not NULL means multilib).
 
-thanks,
-Armin
-> WARNING: gpsd-3.14-r0 do_package: QA Issue: gpsd: Files/directories were
-> installed but not shipped in any package:
->   /usr/lib/libgpsd.so.22.0
->   /usr/lib/libgps.so.22
->   /usr/lib/libgpsd.so.22.0.0
->   /usr/lib/libgpsd.so.22
->   /usr/lib/libgps.so.22.0.0
->   /usr/lib/libgps.so
->   /usr/lib/libgps.so.22.0
->   /usr/lib/libgpsd.so
->   /usr/lib/pkgconfig
->   /usr/lib/pkgconfig/libgpsd.pc
->   /usr/lib/pkgconfig/libgps.pc
-> Please set FILES such that these items are packaged. Alternatively if they are
-> unneeded, avoid installing them or delete them within do_install.
-> gpsd: 11 installed and not shipped files. [installed-vs-shipped]
-> WARNING: gpsd-3.14-r0 do_package_qa: QA Issue: /usr/bin/cgps contained in
-> package gps-utils requires libgps.so.22()(64bit), but no providers found in
-> RDEPENDS_gps-utils? [file-rdeps]
-> WARNING: gpsd-3.14-r0 do_package_qa: QA Issue: /usr/sbin/gpsdctl contained in
-> package gpsd requires libgps.so.22()(64bit), but no providers found in
-> RDEPENDS_gpsd? [file-rdeps]
-> WARNING: gpsd-3.14-r0 do_package_qa: QA Issue: /usr/bin/gpsctl contained in
-> package gpsd-gpsctl requires libgps.so.22()(64bit), but no providers found in
-> RDEPENDS_gpsd-gpsctl? [file-rdeps]
-> WARNING: gpsd-3.14-r0 do_package_qa: QA Issue: gpsd-dbg: found library in wrong
-> location: /usr/lib/.debug/libgpsd.so.22.0.0
-> gpsd-dbg: found library in wrong location: /usr/lib/.debug/libgps.so.22.0.0 [libdir]
-> 
-> gpsd SConstruct file defaults to using '/lib' suffix, which needs to be
-> overriden in the recipe.
-> 
-> Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> (cherry picked from commit 45837e6c567b1b9ff9d152a7e2a752488d313455)
-> Signed-off-by: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-> ---
->  meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-> index b7b8968..4d00fea 100644
-> --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-> +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
-> @@ -46,6 +46,7 @@ EXTRA_OESCONS = " \
->      strip='false' \
->      chrpath='yes' \
->      systemd='${SYSTEMD_OESCONS}' \
-> +    libdir='${libdir}' \
->      ${PACKAGECONFIG_CONFARGS} \
->  "
->  # this cannot be used, because then chrpath is not found and only static lib is built
-> 
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ ...g-32bit-iscsiadm-m-node-failed-in-64bit-k.patch | 34 ++++++++++++++++++++++
+ .../iscsi-initiator-utils_2.0-873.bb               |  2 ++
+ 2 files changed, 36 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/fix-invoking-32bit-iscsiadm-m-node-failed-in-64bit-k.patch
+
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/fix-invoking-32bit-iscsiadm-m-node-failed-in-64bit-k.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/fix-invoking-32bit-iscsiadm-m-node-failed-in-64bit-k.patch
+new file mode 100644
+index 0000000..acb5c80
+--- /dev/null
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/fix-invoking-32bit-iscsiadm-m-node-failed-in-64bit-k.patch
+@@ -0,0 +1,34 @@
++From 03d6feb19ddaa46f54808a5d327c61bff248a228 Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Sun, 4 Dec 2016 01:15:03 -0500
++Subject: [PATCH] fix invoking 32bit "iscsiadm -m node" failed in 64bit kernel
++
++In 64bit kernel : sizeof(ev->u): 24, sizeof(ev->r): 16,
++but in 32bit iscsid: sizeof(ev->u): 20, sizeof(ev->r): 16.
++
++While invoking 32bit "iscsiadm -m node" in 64bit kernel,
++we should force ev->u 8byte aligned.
++
++Upstream-Status: Inappropriate [upstream does not support multilib]
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ include/iscsi_if.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/include/iscsi_if.h b/include/iscsi_if.h
++index dad9fd8..17b6c3d 100644
++--- a/include/iscsi_if.h
+++++ b/include/iscsi_if.h
++@@ -219,7 +219,7 @@ struct iscsi_uevent {
++ 			uint32_t	host_no;
++ 			uint16_t	chap_tbl_idx;
++ 		} delete_chap;
++-	} u;
+++	} __attribute__ ((aligned (sizeof(uint64_t)))) u;
++ 	union {
++ 		/* messages k -> u */
++ 		int			retcode;
++-- 
++2.8.1
++
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
+index 4b13155..d3724da 100644
+--- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
+@@ -22,7 +22,9 @@ SRC_URI = "http://www.open-iscsi.org/bits/open-iscsi-${PV}.tar.gz \
+            file://iscsi-initiator.service \
+            file://iscsi-initiator-targets.service \
+            file://set_initiatorname \
++           ${@base_conditional('MLPREFIX', '', '','file://fix-invoking-32bit-iscsiadm-m-node-failed-in-64bit-k.patch', d)} \
+ "
++
+ SRC_URI[md5sum] = "8b8316d7c9469149a6cc6234478347f7"
+ SRC_URI[sha256sum] = "7dd9f2f97da417560349a8da44ea4fcfe98bfd5ef284240a2cc4ff8e88ac7cd9"
+ 
+-- 
+2.8.1
+
 
