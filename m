@@ -1,47 +1,50 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-io0-f195.google.com (mail-io0-f195.google.com
-	[209.85.223.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 64F20719B9
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wj0-f194.google.com (mail-wj0-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C73E719A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Dec 2016 18:53:14 +0000 (UTC)
-Received: by mail-io0-f195.google.com with SMTP id s82so1736902ioi.3
+	Mon,  5 Dec 2016 21:55:28 +0000 (UTC)
+Received: by mail-wj0-f194.google.com with SMTP id he10so27021325wjc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Dec 2016 10:53:16 -0800 (PST)
+	Mon, 05 Dec 2016 13:55:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=deserted-net.20150623.gappssmtp.com; s=20150623;
-	h=sender:from:to:subject:date:message-id;
-	bh=DvKXYc+KUVftvJsAfvcyUM6Zup3fLKzZnuKbgqToLpw=;
-	b=PCuerOPEgg1iKfvSp5ahl+dqlnNa+2oX2Cz5F91eh8PBe1DKUZ0vQUpQGXfZ59qTL2
-	kmf44faThCjtHnTbnxUPXKJJ2w7vyL7Uktf3IsgIZACtu0+rbMxajwB3c4hhpLgOl3tD
-	23x0hvZgh9ZpOK9wnWpU5cmscwanYcJrYthCmpt2UX697eLmvd4td05ZLLD7oiGobISw
-	LszojGyMTUKGjp/L5qBuiP9xotqXeGpQrN/EWsc68rOB9vLaS79JbBuasldzEYK3Bdzr
-	HVG92yR4zzqn+7tIBjjtBIN5ie6gzhpK6gb3Z9sC6k/UWPcGioLg3NSxIfSDjvB6Rzn3
-	2GUw==
+	d=googlemail.com; s=20120113;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=4laTli0GPndCEYCngTe4qrpz1UgvXLiKQe7oEcCMv8s=;
+	b=b0iW6S6J0nC39Ed1OOucKWTHVmoso04iyppPoyu18wnH8OWmoUEdFtrzxjrZlD01F4
+	5c7zVrRDK0mRBnDVJQfZTPcPN9wETkoE4MTUMxFfSSCqcyyBATdPL/+/yGDB4PfJV72R
+	RDM/Yl971FlHHOD5ZLlT7pfTJ/BMsJSojJOgp0+xpiJX+VSR/n8Qvw6oSM3uxz13t5Bh
+	uA9rV3hokClnIQIlDAp/uS74uVcaqB3GSXAf/4nF8KCVVF6M6w6qwM+rQqglucQ1uYvK
+	o07nHcipwTAEFlRdAe4eindhWT8NBFaLfTTH1Max2i+uvUBkusCB+SCjj9XeKfkulT5u
+	AmHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:subject:date:message-id;
-	bh=DvKXYc+KUVftvJsAfvcyUM6Zup3fLKzZnuKbgqToLpw=;
-	b=E2udl/Z3xnzVwM3iO42nFAJSIq0AEpP6P/NXV7s4R/3zBOaWqJYCZ65RT+qHxqJHg4
-	V4Hzq722wwUdztQ+LZg/iNgp7fa+fBmweAF7MQfkY2zIw+t6qwU1smOQWqNT3QGIiK1m
-	3cEIHgcG1wt+HidXreI0fsyNI3uLljblazpL6+y3ovd0OLKVPDPWxOUB1pOLjek8whio
-	6kVqccwBo3C/q9wlTbmb4JSG1fZN986ELnmNBq1R27KJH4ZOJykK/1JumljuXSJAMfrh
-	nYsLIdYAvmQm2bu91YLw8WmOFwseAIzN8m/+gjMw9QaAzXQ8Dc2lbTgc3lEVYCm5LlKo
-	fG1g==
-X-Gm-Message-State: AKaTC02UT8QItKaQWV01Tg9n4CoT+GsAbLLoWxqx/MO5RCSSHZ4i5T+ymbuL5P1kOka8rg==
-X-Received: by 10.107.176.197 with SMTP id z188mr4491644ioe.7.1480963995745;
-	Mon, 05 Dec 2016 10:53:15 -0800 (PST)
-Received: from mir.deserted.net (23-233-31-74.cpe.pppoe.ca. [23.233.31.74])
-	by smtp.gmail.com with ESMTPSA id u12sm21254ita.1.2016.12.05.10.53.14
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=4laTli0GPndCEYCngTe4qrpz1UgvXLiKQe7oEcCMv8s=;
+	b=XHfkX9zLyx3o+meoCgZ3Lt5UqmK6ApuvOYEU0A1pUiBsD57+IznU6zKUJnW5w5lfgI
+	4Gyc9YdFWviXmlU/2kLgK9TRlmRzJRuTp3YwkY5fx1mUwvprdq8JExyHGbYhtnOJFJgB
+	FXlMIfU6QuPY+bkY7VbPOMz2aJxfLyKUwG4hlD2hF+aNV3OGQltRmJX6XYZhZZe1iN9e
+	d7GQhtWaT3R1hWxLZ3lkdPj92Q+FMlybsqo/ufwa5PyY49xmCu/1fxiwIxcJm2N6vyZB
+	X1S6JOktB3pg3WkTtypLCXS7xgiCjHxqCSznodLEjJEJh46Zr7lmehd8J37hplwnpiZo
+	vHyQ==
+X-Gm-Message-State: AKaTC01h4JabwFaM4LAbXpvy42DfdEbQ/5gdGLz2L1LqMmDWlygmMch/jj/YKFbCoIESPg==
+X-Received: by 10.194.120.226 with SMTP id lf2mr51716872wjb.130.1480974929403; 
+	Mon, 05 Dec 2016 13:55:29 -0800 (PST)
+Received: from localhost.localdomain (p579F7D52.dip0.t-ipconnect.de.
+	[87.159.125.82]) by smtp.googlemail.com with ESMTPSA id
+	d64sm714372wmh.3.2016.12.05.13.55.28
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 05 Dec 2016 10:53:14 -0800 (PST)
-Sender: Joe MacDonald <joe@deserted.net>
-From: Joe MacDonald <joe_macdonald@mentor.com>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 05 Dec 2016 13:55:28 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 Dec 2016 13:53:23 -0500
-Message-Id: <1480964003-31884-1-git-send-email-joe_macdonald@mentor.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][PATCH] iscsi-initiator-utils: Update to 2.0.874
+Date: Mon,  5 Dec 2016 22:55:12 +0100
+Message-Id: <1480974912-6768-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.5
+MIME-Version: 1.0
+Subject: [meta-java][PATCH] fix/enhance getVar usage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,570 +57,150 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Dec 2016 18:53:16 -0000
+X-List-Received-Date: Mon, 05 Dec 2016 21:55:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-The latest iscsi-initiator-utils has been available for a while now,
-update our recipe.  The new version no longer bundles its own ISNS server,
-so this update brings in open-isns as a dependency.
+* replace 'bb.data.getVar' by 'd.getVar'. This fixes build with latest master
+* Expand parameter is optional now / default is true
 
-As open-isns depends on systemd, add systemd to REQUIRED_DISTRO_FEATURES
-
-Additionally, open-iscsi.org is defunct, the new home is at
-open-iscsi.com, update the SRC_URI and homepage accordingly.
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...nitiator-utils-Do-not-clean-kernel-source.patch |  44 ++++
- .../iscsi-initiator-utils-dont-use-static.patch    |  21 --
- ...text-add-include-for-NI_MAXHOST-definiton.patch |  35 +++
- .../iscsi-initiator-utils-use-var-for-config.patch | 240 ---------------------
- ...2.0-873.bb => iscsi-initiator-utils_2.0.874.bb} |  86 ++++----
- .../recipes-support/open-isns/open-isns_0.97.bb    |  35 +++
- 6 files changed, 163 insertions(+), 298 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-Do-not-clean-kernel-source.patch
- delete mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-dont-use-static.patch
- create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-fw_context-add-include-for-NI_MAXHOST-definiton.patch
- delete mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-use-var-for-config.patch
- rename meta-networking/recipes-daemons/iscsi-initiator-utils/{iscsi-initiator-utils_2.0-873.bb => iscsi-initiator-utils_2.0.874.bb} (61%)
- create mode 100644 meta-networking/recipes-support/open-isns/open-isns_0.97.bb
+ classes/java-library.bbclass              |  4 ++--
+ recipes-core/icedtea/icedtea7-native.inc  |  2 +-
+ recipes-core/openjdk/openjdk-7-common.inc |  2 +-
+ recipes-core/openjdk/openjdk-8-common.inc | 14 +++++++-------
+ recipes-core/openjdk/openjdk-common.inc   |  6 +++---
+ 5 files changed, 14 insertions(+), 14 deletions(-)
 
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-Do-not-clean-kernel-source.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-Do-not-clean-kernel-source.patch
-new file mode 100644
-index 0000000..2c46611
---- /dev/null
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-Do-not-clean-kernel-source.patch
-@@ -0,0 +1,44 @@
-+From 4ebab8add4a549c16ab8b124137546c0a7b46a9b Mon Sep 17 00:00:00 2001
-+From: Joe MacDonald <joe_macdonald@mentor.com>
-+Date: Tue, 15 Nov 2016 11:11:30 -0500
-+Subject: [PATCH] Do not clean kernel source
-+
-+The default behaviour should not be to attempt to clean the kernel source
-+tree when building userspace.  When not cross-compiling, however, this action is
-+harmless, but when attempting to build within the sysroot and since this package
-+is purely userspace, the clean step will fail.
-+
-+Removing the clean step eliminates an unnecessary dependency on the kernel build
-+infrastructure.
-+
-+Upstream-status: Inappropriate (embedded specific)
-+
-+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-+---
-+ Makefile | 3 +--
-+ 1 file changed, 1 insertion(+), 2 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index c8cd00e..9576bba 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -37,7 +37,7 @@ endif
-+ 
-+ all: user
-+ 
-+-user: iscsiuio/Makefile
-++user:
-+ 	$(MAKE) -C utils/sysdeps
-+ 	$(MAKE) -C utils/fwparam_ibft
-+ 	$(MAKE) -C usr
-+@@ -75,7 +75,6 @@ clean:
-+ 	$(MAKE) -C utils/fwparam_ibft clean
-+ 	$(MAKE) -C utils clean
-+ 	$(MAKE) -C usr clean
-+-	$(MAKE) -C kernel clean
-+ 	[ ! -f iscsiuio/Makefile ] || $(MAKE) -C iscsiuio clean
-+ 	[ ! -f iscsiuio/Makefile ] || $(MAKE) -C iscsiuio distclean
-+ 
-+-- 
-+1.9.1
-+
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-dont-use-static.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-dont-use-static.patch
-deleted file mode 100644
-index ce48e2b..0000000
---- a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-dont-use-static.patch
-+++ /dev/null
-@@ -1,21 +0,0 @@
--iscsi-initiator-utils not to use static
--
--Upstream-status: Backport
--This patch is from fedora17.
--
--Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
--Signed-off-by: Vu Tran <vu.tran@windriver.com>
--
--diff --git a/usr/Makefile b/usr/Makefile
--index 673b7f1..fd14a10 100644
----- a/usr/Makefile
--+++ b/usr/Makefile
--@@ -61,7 +61,7 @@ iscsiadm: $(ISCSI_LIB_SRCS) $(DISCOVERY_SRCS) iscsiadm.o session_mgmt.o
-- 
-- iscsistart: $(ISCSI_LIB_SRCS) $(INITIATOR_SRCS) $(FW_BOOT_SRCS) \
-- 		iscsistart.o statics.o
---	$(CC) $(CFLAGS) -static $^ -o $@
--+	$(CC) $(CFLAGS) $^ -o $@
-- clean:
-- 	rm -f *.o $(PROGRAMS) .depend $(LIBSYS)
-- 
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-fw_context-add-include-for-NI_MAXHOST-definiton.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-fw_context-add-include-for-NI_MAXHOST-definiton.patch
-new file mode 100644
-index 0000000..37d695f
---- /dev/null
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-fw_context-add-include-for-NI_MAXHOST-definiton.patch
-@@ -0,0 +1,35 @@
-+From 79bea58a554205dd185509fbc4e76b5fc40f9038 Mon Sep 17 00:00:00 2001
-+From: Joe MacDonald <joe_macdonald@mentor.com>
-+Date: Tue, 15 Nov 2016 12:36:45 -0500
-+Subject: [PATCH] fw_context: add include for NI_MAXHOST definiton
-+
-+This appears to build successfully with gcc 4.x but fails on gcc 5+, though it's
-+not immediately clear why NI_MAXHOST isn't being defined from the include
-+chain.  Currently engaging with the upstream devs to determine the best course
-+of action, but this is an adequate workaround.
-+
-+Upstream-status: Pending
-+
-+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-+---
-+ include/fw_context.h | 4 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/include/fw_context.h b/include/fw_context.h
-+index 44053d8..0b05cea 100644
-+--- a/include/fw_context.h
-++++ b/include/fw_context.h
-+@@ -21,6 +21,10 @@
-+ #ifndef FWPARAM_CONTEXT_H_
-+ #define FWPARAM_CONTEXT_H_
-+ 
-++#include <sys/socket.h>
-++#ifndef NI_MAXHOST
-++#define NI_MAXHOST 1025
-++#endif
-+ #include <netdb.h>
-+ #include <net/if.h>
-+ 
-+-- 
-+2.1.4
-+
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-use-var-for-config.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-use-var-for-config.patch
-deleted file mode 100644
-index 50227a7..0000000
---- a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/iscsi-initiator-utils-use-var-for-config.patch
-+++ /dev/null
-@@ -1,240 +0,0 @@
--iscsi-initiator-utils to use var for config
--
--Upstream-status: Backport
--This patch is from fedora.
--
--Use /var/lib/iscsi/ instead of /etc/iscsi/ for holding
--state files.
--
--Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
--Signed-off-by: Vu Tran <vu.tran@windriver.com>
--
--diff --git a/README b/README
--index 7364b2d..5e8bff8 100644
----- a/README
--+++ b/README
--@@ -164,10 +164,10 @@ available on all Linux installations.
-- 
-- The database contains two tables:
-- 
---- Discovery table (/etc/iscsi/send_targets);
---- Node table (/etc/iscsi/nodes).
--+- Discovery table (/var/lib/iscsi/send_targets);
--+- Node table (/var/lib/iscsi/nodes).
-- 
---The regular place for iSCSI database files: /etc/iscsi/nodes
--+The regular place for iSCSI database files: /var/lib/iscsi/nodes
-- 
-- The iscsiadm utility is a command-line tool to manage (update, delete,
-- insert, query) the persistent database.
--@@ -444,7 +444,7 @@ a scsi_host per HBA port).
-- To manage both types of initiator stacks, iscsiadm uses the interface (iface)
-- structure. For each HBA port or for software iscsi for each network
-- device (ethX) or NIC, that you wish to bind sessions to you must create
---a iface config /etc/iscsi/ifaces.
--+a iface config /var/lib/iscsi/ifaces.
-- 
-- Prep:
-- 
--@@ -478,29 +478,29 @@ Running:
-- iface0 qla4xxx,00:c0:dd:08:63:e8,20.15.0.7,default,iqn.2005-06.com.redhat:madmax
-- iface1 qla4xxx,00:c0:dd:08:63:ea,20.15.0.9,default,iqn.2005-06.com.redhat:madmax
-- 
---Will report iface configurations that are setup in /etc/iscsi/ifaces.
--+Will report iface configurations that are setup in /var/lib/iscsi/ifaces.
-- The format is:
-- 
-- iface_name transport_name,hwaddress,ipaddress,net_ifacename,initiatorname
-- 
-- For software iscsi, you can create the iface configs by hand, but it is
-- reccomended that you use iscsiadm's iface mode. There is a iface.example in
---/etc/iscsi/ifaces which can be used as a template for the daring.
--+/var/lib/iscsi/ifaces which can be used as a template for the daring.
-- 
-- For each network object you wish to bind a session to you must create
---a seperate iface config in /etc/iscsi/ifaces and each iface config file
--+a seperate iface config in /var/lib/iscsi/ifaces and each iface config file
-- must have a unique name which is less than or equal to 64 characters.
-- 
-- Example:
-- 
-- If you have NIC1 with MAC address 00:0F:1F:92:6B:BF and NIC2 with
-- MAC address 00:C0:DD:08:63:E7 and you wanted to do software iscsi over
---TCP/IP. Then in /etc/iscsi/ifaces/iface0 you would enter:
--+TCP/IP. Then in /var/lib/iscsi/ifaces/iface0 you would enter:
-- 
-- iface.transport_name = tcp
-- iface.hwaddress = 00:0F:1F:92:6B:BF
-- 
---and in /etc/iscsi/ifaces/iface1 you would enter:
--+and in /var/lib/iscsi/ifaces/iface1 you would enter:
-- 
-- iface.transport_name = tcp
-- iface.hwaddress = 00:C0:DD:08:63:E7
--@@ -550,7 +550,7 @@ cxgb3i.00:07:43:05:97:07 cxgb3i,00:07:43:05:97:07,<empty>,<empty>,<empty>
-- qla4xxx.00:0e:1e:04:8b:2e qla4xxx,00:0e:1e:04:8b:2e,<empty>,<empty>,<empty>
-- 
-- 
---Will report iface configurations that are setup in /etc/iscsi/ifaces.
--+Will report iface configurations that are setup in /var/lib/iscsi/ifaces.
-- The format is:
-- 
-- iface_name transport_name,hwaddress,ipaddress,net_ifacename,initiatorname
--@@ -636,7 +636,7 @@ need a seperate network connection to the target for discovery purposes.
-- *This will be fixed in the next version of open-iscsi*
-- 
-- For compatibility reasons, when you run iscsiadm to do discovery, it
---will check for interfaces in /etc/iscsi/iscsi/ifaces that are using
--+will check for interfaces in /var/lib/iscsi/iscsi/ifaces that are using
-- tcp for the iface.transport and it will bind the portals that are discovered
-- so that they will be logged in through those ifaces. This behavior can also
-- be overriden by passing in the interfaces you want to use. For the case
--@@ -654,7 +654,7 @@ we do not bind a session to a iface, then you can use the special iface
-- 
-- iscsiadm -m discoverydb -t st -p ip:port -I default --discover -P 1
-- 
---And if you did not define any interfaces in /etc/iscsi/ifaces and do
--+And if you did not define any interfaces in /var/lib/iscsi/ifaces and do
-- not pass anything into iscsiadm, running iscsiadm will do the default
-- behavior, where we allow the network subsystem to decide which
-- device to use.
--@@ -696,7 +696,7 @@ To now log into targets it is the same as with sofware iscsi. See section
-- 
-- 	    ./iscsiadm -m discoverydb -t st -p 192.168.1.1:3260 --discover
-- 
---	This will search /etc/iscsi/send_targets for a record with the
--+	This will search /var/lib/iscsi/send_targets for a record with the
-- 	ID [portal = 192.168.1.1:3260 and type = sendtargets. If found it
-- 	will perform discovery using the settings stored in the record.
-- 	If a record does not exist, it will be created using the iscsid.conf
--@@ -705,7 +705,7 @@ To now log into targets it is the same as with sofware iscsi. See section
-- 	The argument to -p may also be a hostname instead of an address.
-- 	    ./iscsiadm -m discoverydb -t st -p smoehost --discover
-- 
---	For the ifaces, iscsiadm will first search /etc/iscsi/ifaces for
--+	For the ifaces, iscsiadm will first search /var/lib/iscsi/ifaces for
-- 	interfaces using software iscsi. If any are found then nodes found
-- 	during discovery will be setup so that they can logged in through
-- 	those interfaces. To specify a specific iface, pass the
--@@ -761,7 +761,7 @@ To now log into targets it is the same as with sofware iscsi. See section
-- 	This command will perform discovery, but not manipulate the node DB.
-- 
--   - SendTargets iSCSI Discovery with a specific interface. If you
---	wish to only use a subset of the interfaces in /etc/iscsi/ifaces
--+	wish to only use a subset of the interfaces in /var/lib/iscsi/ifaces
-- 	then you can pass them in during discovery:
-- 
-- 	     ./iscsiadm -m discoverydb -t sendtargets -p 192.168.1.1:3260 \
--@@ -1072,8 +1072,8 @@ where targetname is the name of the target and ip_address:port is the address
-- and port of the portal. tpgt, is the portal group tag of
-- the portal, and is not used in iscsiadm commands except for static
-- record creation. And iface name is the name of the iscsi interface
---defined in /etc/iscsi/ifaces. If no interface was defined in
---/etc/iscsi/ifaces or passed in, the default behavior is used.
--+defined in /var/lib/iscsi/ifaces. If no interface was defined in
--+/var/lib/iscsi/ifaces or passed in, the default behavior is used.
-- Default here is iscsi_tcp/tcp to be used over which ever NIC the
-- network layer decides is best.
-- 
--@@ -1188,7 +1188,7 @@ If set, iscsid will perform discovery to the address every
-- discovery.isns.discoveryd_poll_inval or
-- discovery.sendtargets.discoveryd_poll_inval seconds,
-- and it will log into any portals found from the discovery source using
---the ifaces in /etc/iscsi/ifaces.
--+the ifaces in /var/lib/iscsi/ifaces.
-- 
-- Note that for iSNS the poll_interval does not have to be set. If not set,
-- iscsid will only perform rediscovery when it gets a SCN from the server.
--diff --git a/doc/iscsiadm.8 b/doc/iscsiadm.8
--index 7c209f6..e94cca0 100644
----- a/doc/iscsiadm.8
--+++ b/doc/iscsiadm.8
--@@ -89,7 +89,7 @@ This option is only valid for ping submode.
-- .TP
-- \fB\-I\fR, \fB\-\-interface=\fI[iface]\fR
-- The interface argument specifies the iSCSI interface to use for the operation.
---iSCSI interfaces (iface) are defined in /etc/iscsi/ifaces. For hardware
--+iSCSI interfaces (iface) are defined in /var/lib/iscsi/ifaces. For hardware
-- iSCSI (qla4xxx) the iface config must have the hardware address
-- (iface.hwaddress = port's MAC address)
-- and the driver/transport_name (iface.transport_name). The iface's name is
--@@ -166,7 +166,7 @@ If no other options are specified: for \fIdiscoverydb\fR and \fInode\fR, all
-- of their respective records are displayed; for \fIsession\fR, all active
-- sessions and connections are displayed; for \fIfw\fR, all boot firmware
-- values are displayed; for \fIhost\fR, all iSCSI hosts are displayed; and
---for \fIiface\fR, all ifaces setup in /etc/iscsi/ifaces are displayed.
--+for \fIiface\fR, all ifaces setup in /var/lib/iscsi/ifaces are displayed.
-- 
-- .TP
-- \fB\-n\fR, \fB\-\-name=\fIname\fR
--@@ -535,10 +535,10 @@ The configuration file read by \fBiscsid\fR and \fBiscsiadm\fR on startup.
-- The file containing the iSCSI InitiatorName and InitiatorAlias read by
-- \fBiscsid\fR and \fBiscsiadm\fR on startup.
-- .TP
---/etc/iscsi/nodes/
--+/var/lib/iscsi/nodes/
-- This directory contains the nodes with their targets.
-- .TP
---/etc/iscsi/send_targets
--+/var/lib/iscsi/send_targets
-- This directory contains the portals.
-- 
-- .SH "SEE ALSO"
--diff --git a/usr/idbm.c b/usr/idbm.c
--index 4d30aa9..316e54f 100644
----- a/usr/idbm.c
--+++ b/usr/idbm.c
--@@ -2468,9 +2468,9 @@ free_info:
-- int idbm_init(idbm_get_config_file_fn *fn)
-- {
-- 	/* make sure root db dir is there */
---	if (access(ISCSI_CONFIG_ROOT, F_OK) != 0) {
---		if (mkdir(ISCSI_CONFIG_ROOT, 0660) != 0) {
---			log_error("Could not make %s %d\n", ISCSI_CONFIG_ROOT,
--+	if (access(ISCSIVAR, F_OK) != 0) {
--+		if (mkdir(ISCSIVAR, 0660) != 0) {
--+			log_error("Could not make %s %d\n", ISCSIVAR,
-- 				   errno);
-- 			return errno;
-- 		}
--diff --git a/usr/idbm.h b/usr/idbm.h
--index 245f046..f45e86e 100644
----- a/usr/idbm.h
--+++ b/usr/idbm.h
--@@ -28,12 +28,16 @@
-- #include "config.h"
-- #include "list.h"
-- 
---#define NODE_CONFIG_DIR		ISCSI_CONFIG_ROOT"nodes"
---#define SLP_CONFIG_DIR		ISCSI_CONFIG_ROOT"slp"
---#define ISNS_CONFIG_DIR		ISCSI_CONFIG_ROOT"isns"
---#define STATIC_CONFIG_DIR	ISCSI_CONFIG_ROOT"static"
---#define FW_CONFIG_DIR		ISCSI_CONFIG_ROOT"fw"
---#define ST_CONFIG_DIR		ISCSI_CONFIG_ROOT"send_targets"
--+#define ISCSIVAR			"/var/lib/iscsi/"
--+
--+#define NODE_CONFIG_DIR    ISCSIVAR"nodes"
--+#define SLP_CONFIG_DIR     ISCSIVAR"slp"
--+#define ISNS_CONFIG_DIR    ISCSIVAR"isns"
--+#define STATIC_CONFIG_DIR  ISCSIVAR"static"
--+#define FW_CONFIG_DIR      ISCSIVAR"fw"
--+#define ST_CONFIG_DIR      ISCSIVAR"send_targets"
--+
--+
-- #define ST_CONFIG_NAME		"st_config"
-- #define ISNS_CONFIG_NAME	"isns_config"
-- 
--diff --git a/usr/iface.h b/usr/iface.h
--index 01f7074..2c6ef72 100644
----- a/usr/iface.h
--+++ b/usr/iface.h
--@@ -20,7 +20,8 @@
-- #ifndef ISCSI_IFACE_H
-- #define ISCSI_IFACE_H
-- 
---#define IFACE_CONFIG_DIR	ISCSI_CONFIG_ROOT"ifaces"
--+#include "idbm.h"
--+#define IFACE_CONFIG_DIR	ISCSIVAR"ifaces"
-- 
-- struct iface_rec;
-- struct list_head;
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0.874.bb
-similarity index 61%
-rename from meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
-rename to meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0.874.bb
-index 4b13155..72a17b0 100644
---- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0.874.bb
-@@ -4,52 +4,64 @@ independent, multi-platform implementation of RFC3720. The iscsi package \
- provides the server daemon for the iSCSI protocol, as well as the utility \
- programs used to manage it. iSCSI is a protocol for distributed \
- disk access using SCSI commands sent over Internet Protocol networks."
--HOMEPAGE = "http://www.open-iscsi.org/"
-+HOMEPAGE = "http://www.open-iscsi.com/"
- LICENSE = "GPLv2 & LGPLv2.1"
- SECTION = "net"
--DEPENDS = "openssl flex-native bison-native"
--
--LIC_FILES_CHKSUM = \
--        "file://COPYING;md5=393a5ca445f6965873eca0259a17f833 \
--         file://utils/open-isns/COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
--
--SRC_URI = "http://www.open-iscsi.org/bits/open-iscsi-${PV}.tar.gz \
--           file://iscsi-initiator-utils-use-var-for-config.patch \
--           file://iscsi-initiator-utils-dont-use-static.patch \
--           file://initd.debian \
--           file://99_iscsi-initiator-utils \
--           file://iscsi-initiator \
--           file://iscsi-initiator.service \
--           file://iscsi-initiator-targets.service \
--           file://set_initiatorname \
-+DEPENDS = "openssl flex-native bison-native open-isns util-linux"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
-+
-+SRCREV ?= "8db9717e73d32d2c5131da4f9ad86dfd9065f74b"
-+
-+SRC_URI = "git://github.com/open-iscsi/open-iscsi \
-+    file://iscsi-initiator-utils-Do-not-clean-kernel-source.patch \
-+    file://iscsi-initiator-utils-fw_context-add-include-for-NI_MAXHOST-definiton.patch \
-+    file://initd.debian \
-+    file://99_iscsi-initiator-utils \
-+    file://iscsi-initiator \
-+    file://iscsi-initiator.service \
-+    file://iscsi-initiator-targets.service \
-+    file://set_initiatorname \
- "
--SRC_URI[md5sum] = "8b8316d7c9469149a6cc6234478347f7"
--SRC_URI[sha256sum] = "7dd9f2f97da417560349a8da44ea4fcfe98bfd5ef284240a2cc4ff8e88ac7cd9"
+diff --git a/classes/java-library.bbclass b/classes/java-library.bbclass
+index 144cd2f..4f30d51 100644
+--- a/classes/java-library.bbclass
++++ b/classes/java-library.bbclass
+@@ -23,8 +23,8 @@ def java_package_name(d):
+   pre=""
+   post=""
  
--S = "${WORKDIR}/open-iscsi-${PV}"
-+S = "${WORKDIR}/git"
-+B = "${WORKDIR}/build"
+-  bpn = bb.data.getVar('BPN', d, 1)
+-  ml = bb.data.getVar('MLPREFIX', d, 1)
++  bpn = d.getVar('BPN')
++  ml = d.getVar('MLPREFIX')
+   if not bpn.startswith("lib"):
+     pre='lib'
  
--inherit update-rc.d systemd
-+inherit update-rc.d systemd autotools distro_features_check
-+# open-isns depends on systemd
-+REQUIRED_DISTRO_FEATURES = "systemd"
-+
-+EXTRA_OECONF = " \
-+    --target=${TARGET_SYS} \
-+    --host=${BUILD_SYS} \
-+    --prefix=${prefix} \
-+    --libdir=${libdir} \
-+"
-+
-+EXTRA_OEMAKE = ' \
-+    CC="${CC}" \
-+    AR="${AR}" \
-+    RANLIB="${RANLIB}" \
-+    CFLAGS="${CFLAGS} ${CPPFLAGS} -D_GNU_SOURCE -I. -I../include -I../../include -I../usr -I../../usr" \
-+    LDFLAGS="${LDFLAGS}" \
-+    LD="${LD}" \
-+    OS="${TARGET_SYS}" \
-+    TARGET="${TARGET_OS}" \
-+    BASE="${prefix}" \
-+    MANDIR="${mandir}" \
-+'
+diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
+index 727998c..401aaf7 100644
+--- a/recipes-core/icedtea/icedtea7-native.inc
++++ b/recipes-core/icedtea/icedtea7-native.inc
+@@ -211,7 +211,7 @@ do_compile() {
+ def jdk_arch(d):
+         import bb
  
- TARGET_CC_ARCH += "${LDFLAGS}"
-+
- do_configure () {
--    #need to support cross-compiling in open-isns only
--    (cd utils/open-isns; gnu-configize; \
--     ./configure --host=${TARGET_SYS} --build=${BUILD_SYS} --with-security=no )
-+    cd ${S}/iscsiuio ; autoreconf --install; ./configure ${EXTRA_OECONF}
- }
+-        target_arch = bb.data.getVar('TRANSLATED_TARGET_ARCH', d, 1)
++        target_arch = d.getVar('TRANSLATED_TARGET_ARCH')
  
- do_compile () {
--    #make iscsistart one of PROGRAMS if install_user in do_install
--    #sed -i -e '/^PROGRAMS = /s;$; usr/iscsistart;' Makefile
--
--    #fix the ar used in open-isns
--    sed -i -e 's:ar cr :$(AR) cr :' ${S}/utils/open-isns/Makefile
--    oe_runmake user
-+    oe_runmake -C ${S} ${EXTRA_OEMAKE} user
- }
+         if target_arch in ['i386', 'i486', 'i586', 'i686']:
+             return "x86"
+diff --git a/recipes-core/openjdk/openjdk-7-common.inc b/recipes-core/openjdk/openjdk-7-common.inc
+index c491195..ab3b30d 100644
+--- a/recipes-core/openjdk/openjdk-7-common.inc
++++ b/recipes-core/openjdk/openjdk-7-common.inc
+@@ -55,7 +55,7 @@ export ALT_CUPS_HEADERS_PATH = "${STAGING_INCDIR}"
+ export ALT_FREETYPE_HEADERS_PATH = "${STAGING_INCDIR}/freetype2"
+ export ALT_FREETYPE_LIB_PATH = "${STAGING_LIBDIR}"
+ export CACAO_CONFIGURE_ARGS = " \
+-    ${@['','--enable-softfloat'][bb.data.getVar('TARGET_FPU',d,1) == 'soft']}"
++    ${@['','--enable-softfloat'][d.getVar('TARGET_FPU') == 'soft']}"
  
- do_install () {
--    #completely override the install_user as bugs in Makefile
--    #oe_runmake DESTDIR="${D}" install_user
--
-     #install necessary directories
-     install -d ${D}${sbindir} \
-         ${D}${sysconfdir}/init.d \
-@@ -83,8 +95,8 @@ do_install () {
-         install -m 0644 ${WORKDIR}/iscsi-initiator.service \
-                         ${WORKDIR}/iscsi-initiator-targets.service \
-                         ${D}${systemd_unitdir}/system/
--	install -d ${D}${nonarch_libdir}/iscsi
--	install -m 0755 ${WORKDIR}/set_initiatorname ${D}${nonarch_libdir}/iscsi
-+        install -d ${D}${nonarch_libdir}/iscsi
-+        install -m 0755 ${WORKDIR}/set_initiatorname ${D}${nonarch_libdir}/iscsi
-     else
-         install -d ${D}/etc/default/volatiles
-         install -m 0644 ${WORKDIR}/99_iscsi-initiator-utils ${D}/etc/default/volatiles
-@@ -93,11 +105,11 @@ do_install () {
+ JAVA_HOME[unexport] = "1"
  
- pkg_postinst_${PN}() {
-     if [ "x$D" = "x" ]; then
--	if [ -e /etc/init.d/populate-volatile.sh ]; then
-+        if [ -e /etc/init.d/populate-volatile.sh ]; then
-             /etc/init.d/populate-volatile.sh update
--	elif command -v systemd-tmpfiles >/dev/null; then
-+        elif command -v systemd-tmpfiles >/dev/null; then
-             systemd-tmpfiles --create ${sysconfdir}/tmpfiles.d/iscsi.conf
--	fi
-+        fi
-     fi
- }
+diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
+index c339985..bdcfbfd 100644
+--- a/recipes-core/openjdk/openjdk-8-common.inc
++++ b/recipes-core/openjdk/openjdk-8-common.inc
+@@ -171,7 +171,7 @@ do_configure_prepend() {
+ def get_llvm_configure_arch(d):
+     import bb;
  
-diff --git a/meta-networking/recipes-support/open-isns/open-isns_0.97.bb b/meta-networking/recipes-support/open-isns/open-isns_0.97.bb
-new file mode 100644
-index 0000000..828d116
---- /dev/null
-+++ b/meta-networking/recipes-support/open-isns/open-isns_0.97.bb
-@@ -0,0 +1,35 @@
-+# Copyright (C) 2016 Joe MacDonald <joe_macdonald@mentor.com>
-+# Released under the MIT license (see COPYING.MIT for the terms)
-+
-+SUMMARY = "iSNS daemon and utility programs"
-+DESCRIPTION = "This is a partial implementation of RFC4171, the Internet \
-+Storage Name Service (iSNS).  The distribution includes the iSNS server, \
-+supporting persisten storage of registrations, isnsadm, a command line \
-+utility for managing nodes, and isnsdd, a corresponding discovery daemon."
-+HOMEPAGE = "http://github.com/gonzoleeman/open-isns/"
-+LICENSE = "GPLv2+ & LGPLv2+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=321bf41f280cf805086dd5a720b37785"
-+SECTION = "net"
-+
-+DEPENDS = "openssl systemd"
-+
-+SRC_URI = " \
-+    git://github.com/open-iscsi/open-isns \
-+"
-+
-+SRCREV ?= "09954404e948e41eb0fce8e28836018b4ce3d20d"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit systemd autotools-brokensep distro_features_check
-+# depends on systemd
-+REQUIRED_DISTRO_FEATURES = "systemd"
-+
-+EXTRA_OECONF = " --prefix=${prefix} --enable-shared"
-+
-+do_install_append () {
-+    oe_runmake INCDIR=${D}${includedir}/libisns/ install_hdrs
-+    oe_runmake LIBDIR=${D}${libdir} install_lib
-+}
-+
-+FILES_${PN} += "${libdir}"
+-    arch = bb.data.getVar('TRANSLATED_TARGET_ARCH', d, 1)
++    arch = d.getVar('TRANSLATED_TARGET_ARCH')
+     if arch == "x86-64" or arch == "i486" or arch == "i586" or arch == "i686":
+         arch = "x86"
+     elif arch == "arm":
+@@ -181,7 +181,7 @@ def get_llvm_configure_arch(d):
+     elif arch == "powerpc" or arch == "powerpc64":
+         arch = "powerpc"
+     else:
+-        bb.warn("%s does not support %s yet" % (bb.data.getVar('PN', d, 1), arch) );
++        bb.warn("%s does not support %s yet" % (d.getVar('PN'), arch) );
+ 
+     return arch
+ 
+@@ -193,7 +193,7 @@ export LLVM_CONFIGURE_ARCH="${@get_llvm_configure_arch(d)}"
+ def get_jdk_arch(d):
+     import bb
+ 
+-    jdk_arch = bb.data.getVar('TRANSLATED_TARGET_ARCH', d, 1)
++    jdk_arch = d.getVar('TRANSLATED_TARGET_ARCH')
+     if jdk_arch == "x86-64":
+         jdk_arch = "amd64"
+     elif jdk_arch == "powerpc":
+@@ -211,8 +211,8 @@ export DEBUG_BINARIES = "true"
+ 
+ ALTERNATIVE_PRIORITY = "50"
+ 
+-OPENJDK_UPDATE_VERSION = "${@bb.data.getVar('PV', d, 1).split('b')[0]}"
+-OPENJDK_BUILD_NUMBER = "b${@bb.data.getVar('PV', d, 1).split('b')[1]}"
++OPENJDK_UPDATE_VERSION = "${@d.getVar('PV').split('b')[0]}"
++OPENJDK_BUILD_NUMBER = "b${@d.getVar('PV').split('b')[1]}"
+ EXTRA_OECONF_append = "\
+         --with-build-number=${OPENJDK_BUILD_NUMBER} \
+         --with-update-version=${OPENJDK_UPDATE_VERSION} \
+@@ -248,10 +248,10 @@ def version_specific_cflags(d):
+         # in the cross case, trust that GCCVERSION is correct. This won't
+         # work if the native toolchain is Clang, but as of this writing that
+         # doesn't work anyway.
+-        version = d.getVar('GCCVERSION', expand=True)[0]
++        version = d.getVar('GCCVERSION')[0]
+ 
+     if version.isdigit():
+-        extraflags = d.getVar('FLAGS_GCC%d' % int(version), True) or ''
++        extraflags = d.getVar('FLAGS_GCC%d' % int(version)) or ''
+         return extraflags
+     return ''
+ 
+diff --git a/recipes-core/openjdk/openjdk-common.inc b/recipes-core/openjdk/openjdk-common.inc
+index 6a72572..dfc9476 100644
+--- a/recipes-core/openjdk/openjdk-common.inc
++++ b/recipes-core/openjdk/openjdk-common.inc
+@@ -25,7 +25,7 @@ B = "${S}/build"
+ def get_jdk_arch(d):
+     import bb
+ 
+-    jdk_arch = bb.data.getVar('TRANSLATED_TARGET_ARCH', d, 1)
++    jdk_arch = d.getVar('TRANSLATED_TARGET_ARCH')
+     if jdk_arch == "x86-64":
+         jdk_arch = "amd64"
+     elif jdk_arch == "powerpc":
+@@ -45,7 +45,7 @@ JDK_FAKE = "${WORKDIR}/fake-jdk"
+ def get_llvm_configure_arch(d):
+     import bb;
+ 
+-    arch = bb.data.getVar('TRANSLATED_TARGET_ARCH', d, 1)
++    arch = d.getVar('TRANSLATED_TARGET_ARCH')
+     if arch == "x86-64" or arch == "i486" or arch == "i586" or arch == "i686":
+         arch = "x86"
+     elif arch == "arm":
+@@ -55,7 +55,7 @@ def get_llvm_configure_arch(d):
+     elif arch == "powerpc" or arch == "powerpc64":
+         arch = "powerpc"
+     else:
+-        bb.warn("%s does not support %s yet" % (bb.data.getVar('PN', d, 1), arch) );
++        bb.warn("%s does not support %s yet" % (d.getVar('PN'), arch) );
+ 
+     return arch
+ 
 -- 
-1.9.1
+2.5.5
 
 
