@@ -1,47 +1,25 @@
-Return-Path: <paul.betafive@gmail.com>
-Received: from mail-wj0-f170.google.com (mail-wj0-f170.google.com
-	[209.85.210.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 6822F71A85
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 649296AC4B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Dec 2016 10:42:36 +0000 (UTC)
-Received: by mail-wj0-f170.google.com with SMTP id tg4so11677096wjb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Dec 2016 02:42:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=BfqmjeJRF2jjZWixFwAIq30WiWxdpY0ZHCw4ttRmf0Q=;
-	b=tKCo1tXIfBYv+wSzA20nFonksJwwqUW9LYV9Y8/YRuTcjpF545IFBvROqrLyVrizxs
-	eg27nJjUyy91SITrUZbSPPS54w3KDJSUy/WHPDTF4pX8qf89qU6zaJ/JCOqUTYlMtPrw
-	HvAzVMvYcHak2SohEqnRk7F3aEc+XaaKNrVkW42reDk/PpzzHkvl6Lm8pLpJL1qx5MUi
-	A9S2MIE6ICGm7nKMAJGWTcqcJyGrjInYwC3eGqfZK/u3DmQYX/HugLkxx6n4Ea722pVu
-	bZvtQtd6TMrZjP/GfTwd2anElzDWgKIdyv/UnY6ApVeD3TYmslHJGS4YnKYl/81Ie/HO
-	e7RQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=BfqmjeJRF2jjZWixFwAIq30WiWxdpY0ZHCw4ttRmf0Q=;
-	b=AJsfoKayULq6LfBsvtgsOZes2ZGuupsFQoay9prOCv43CWRRQW2X52Ds9RAeMVFlm0
-	T/KwFoEa+q4hwJVSUfJwoeKjYkABuyyjVjZ69N1F5rHFkaJjzd7mRiVXaMNM+IL/oZkz
-	5Daqw1a193m+42Ta3+/7cmFaz97z5IsuUNWOUgOlbjySaOIfF0Vq48np/9NU49Qi7Dvg
-	D5vUmwdzxCPmvTl5Y1u4u0xP7CkSrpm6we9euasXX86Z74nHEPL2lbCDIchstz84u2s9
-	pYgymnImbAeFVZFPv2O+MCpsD1Pm0MEG7iV+4bVvkhSNaf1MFXAnL9VweAjM4gyfIjuO
-	6oVA==
-X-Gm-Message-State: AKaTC032D3WXgr9PiYUUnYrwrVpNMwd/QyLTEHe0MTsxoIz6iyIUZ30h3staQP9j0ERPFA==
-X-Received: by 10.194.100.225 with SMTP id fb1mr46477559wjb.128.1480848157659; 
-	Sun, 04 Dec 2016 02:42:37 -0800 (PST)
-Received: from dev-jessie.betafive.co.uk
-	(cpc11-shep11-2-0-cust130.8-3.cable.virginm.net. [86.27.96.131])
-	by smtp.gmail.com with ESMTPSA id
-	p144sm12455402wme.23.2016.12.04.02.42.36
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 04 Dec 2016 02:42:36 -0800 (PST)
-Sender: Paul Barker <paul.betafive@gmail.com>
-From: Paul Barker <paul@paulbarker.me.uk>
-To: OpenEmbedded Devel <openembedded-devel@lists.openembedded.org>
-Date: Sun,  4 Dec 2016 10:42:25 +0000
-Message-Id: <1480848145-17610-1-git-send-email-paul@paulbarker.me.uk>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-oe][PATCH] toybox: Upgrade to 0.7.2
+	Mon,  5 Dec 2016 07:52:43 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id uB57qhG2011650
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 4 Dec 2016 23:52:43 -0800 (PST)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
+	Sun, 4 Dec 2016 23:52:43 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 5 Dec 2016 02:52:41 -0500
+Message-ID: <1480924361-21264-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
+In-Reply-To: <1480840457-169896-1-git-send-email-hongxu.jia@windriver.com>
+References: <1480840457-169896-1-git-send-email-hongxu.jia@windriver.com>
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH V2] iscsi-initiator-utils: fix invoking 32bit "iscsiadm -m node" failed in 64bit kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,118 +32,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Dec 2016 10:42:37 -0000
+X-List-Received-Date: Mon, 05 Dec 2016 07:52:44 -0000
+Content-Type: text/plain
 
-Patches are dropped as they are no longer needed.
+Take struct iscsi_uevent *ev for example:
+In 64bit kernel : sizeof(ev->u): 24, sizeof(ev->r): 16,
+but in 32bit iscsid: sizeof(ev->u): 20, sizeof(ev->r): 16.
 
-Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
+While invoking 32bit "iscsiadm -m node" in 64bit kernel,
+we should force ev->u 8byte aligned.
+
+For "64bit iscsiadm + 64bit kernel" or "32bit iscsiadm + 32bit kernel",
+they do not need the fix, so conditionally align by the definition
+of macro MULTILIB. (MLPREFIX is not NULL means multilib).
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../toybox/toybox/0001-Fix-TOYBOX_VERSION.patch    | 29 ------------------
- .../toybox/0002-Fix-trimmed-printf-in-grep.patch   | 34 ----------------------
- .../toybox/{toybox_0.7.1.bb => toybox_0.7.2.bb}    |  6 ++--
- 3 files changed, 2 insertions(+), 67 deletions(-)
- delete mode 100644 meta-oe/recipes-core/toybox/toybox/0001-Fix-TOYBOX_VERSION.patch
- delete mode 100644 meta-oe/recipes-core/toybox/toybox/0002-Fix-trimmed-printf-in-grep.patch
- rename meta-oe/recipes-core/toybox/{toybox_0.7.1.bb => toybox_0.7.2.bb} (90%)
+ ...g-32bit-iscsiadm-m-node-failed-in-64bit-k.patch | 37 ++++++++++++++++++++++
+ .../iscsi-initiator-utils_2.0-873.bb               |  2 ++
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/fix-invoking-32bit-iscsiadm-m-node-failed-in-64bit-k.patch
 
-diff --git a/meta-oe/recipes-core/toybox/toybox/0001-Fix-TOYBOX_VERSION.patch b/meta-oe/recipes-core/toybox/toybox/0001-Fix-TOYBOX_VERSION.patch
-deleted file mode 100644
-index 8af4305..0000000
---- a/meta-oe/recipes-core/toybox/toybox/0001-Fix-TOYBOX_VERSION.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--From 209fad8ebd17bf46d0431dafbb547f429a3cffdf Mon Sep 17 00:00:00 2001
--From: Paul Barker <paul@paulbarker.me.uk>
--Date: Sat, 4 Jun 2016 15:05:49 +0100
--Subject: [PATCH 1/2] Fix TOYBOX_VERSION
--
--The latest tagged version is 0.7.1.
--
--Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
--Upstream-status: Submitted
-----
-- main.c | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/main.c b/main.c
--index eeae2f3..bedb333 100644
----- a/main.c
--+++ b/main.c
--@@ -6,7 +6,7 @@
-- #include "toys.h"
-- 
-- #ifndef TOYBOX_VERSION
---#define TOYBOX_VERSION "0.7.0"
--+#define TOYBOX_VERSION "0.7.1"
-- #endif
-- 
-- // Populate toy_list[].
---- 
--2.1.4
--
-diff --git a/meta-oe/recipes-core/toybox/toybox/0002-Fix-trimmed-printf-in-grep.patch b/meta-oe/recipes-core/toybox/toybox/0002-Fix-trimmed-printf-in-grep.patch
-deleted file mode 100644
-index 37808d0..0000000
---- a/meta-oe/recipes-core/toybox/toybox/0002-Fix-trimmed-printf-in-grep.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From 9c51a0d7690fb3b08871dae2486af4032d8442fb Mon Sep 17 00:00:00 2001
--From: Paul Barker <paul@paulbarker.me.uk>
--Date: Sat, 4 Jun 2016 15:42:48 +0100
--Subject: [PATCH 2/2] Fix trimmed printf in grep
--
--Using a default trim value of INT_MAX/2 when printing a line causes nothing to
--be printed on a system built using OpenEmbedded for the qemux86 target. This may
--also affect other systems.
--
--Signed-off-by: Paul Barker <paul@paulbarker.me.uk>
--Upstream-status: Submitted
-----
-- toys/posix/grep.c | 5 ++++-
-- 1 file changed, 4 insertions(+), 1 deletion(-)
--
--diff --git a/toys/posix/grep.c b/toys/posix/grep.c
--index 2ca02d2..f38c538 100644
----- a/toys/posix/grep.c
--+++ b/toys/posix/grep.c
--@@ -74,7 +74,10 @@ static void outline(char *line, char dash, char *name, long lcount, long bcount,
--   if (!line || (lcount && (toys.optflags&FLAG_n)))
--     printf("%ld%c", lcount, line ? dash : TT.outdelim);
--   if (bcount && (toys.optflags&FLAG_b)) printf("%ld%c", bcount-1, dash);
---  if (line) xprintf("%.*s%c", trim ? trim : INT_MAX/2, line, TT.outdelim);
--+  if (line) {
--+    if (trim) xprintf("%.*s%c", trim, line, TT.outdelim);
--+    else xprintf("%s%c", line, TT.outdelim);
--+  }
-- }
-- 
-- // Show matches in one file
---- 
--2.1.4
--
-diff --git a/meta-oe/recipes-core/toybox/toybox_0.7.1.bb b/meta-oe/recipes-core/toybox/toybox_0.7.2.bb
-similarity index 90%
-rename from meta-oe/recipes-core/toybox/toybox_0.7.1.bb
-rename to meta-oe/recipes-core/toybox/toybox_0.7.2.bb
-index 032b138..93ef45b 100644
---- a/meta-oe/recipes-core/toybox/toybox_0.7.1.bb
-+++ b/meta-oe/recipes-core/toybox/toybox_0.7.2.bb
-@@ -4,12 +4,10 @@ DEPENDS = "attr"
- 
- SRC_URI = " \
-     http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
--    file://0001-Fix-TOYBOX_VERSION.patch \
--    file://0002-Fix-trimmed-printf-in-grep.patch \
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/fix-invoking-32bit-iscsiadm-m-node-failed-in-64bit-k.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/fix-invoking-32bit-iscsiadm-m-node-failed-in-64bit-k.patch
+new file mode 100644
+index 0000000..9bdb56f
+--- /dev/null
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/fix-invoking-32bit-iscsiadm-m-node-failed-in-64bit-k.patch
+@@ -0,0 +1,37 @@
++From 153c61722a95f8d0f0ada8aec96d2e3c84b40a78 Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Mon, 5 Dec 2016 02:24:12 -0500
++Subject: [PATCH] fix invoking 32bit "iscsiadm -m node" failed in 64bit kernel
++
++In 64bit kernel : sizeof(ev->u): 24, sizeof(ev->r): 16,
++but in 32bit iscsid: sizeof(ev->u): 20, sizeof(ev->r): 16.
++
++While invoking 32bit "iscsiadm -m node" in 64bit kernel,
++we should force ev->u 8byte aligned.
++
++Upstream-Status: Inappropriate [upstream does not support multilib]
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ include/iscsi_if.h | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/include/iscsi_if.h b/include/iscsi_if.h
++index dad9fd8..bc68242 100644
++--- a/include/iscsi_if.h
+++++ b/include/iscsi_if.h
++@@ -219,7 +219,11 @@ struct iscsi_uevent {
++ 			uint32_t	host_no;
++ 			uint16_t	chap_tbl_idx;
++ 		} delete_chap;
+++#ifdef MULTILIB
+++	} __attribute__ ((aligned (sizeof(uint64_t)))) u;
+++#else
++ 	} u;
+++#endif
++ 	union {
++ 		/* messages k -> u */
++ 		int			retcode;
++-- 
++2.8.1
++
+diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
+index 4b13155..fd5961d 100644
+--- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
++++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
+@@ -22,6 +22,7 @@ SRC_URI = "http://www.open-iscsi.org/bits/open-iscsi-${PV}.tar.gz \
+            file://iscsi-initiator.service \
+            file://iscsi-initiator-targets.service \
+            file://set_initiatorname \
++           file://fix-invoking-32bit-iscsiadm-m-node-failed-in-64bit-k.patch \
  "
+ SRC_URI[md5sum] = "8b8316d7c9469149a6cc6234478347f7"
+ SRC_URI[sha256sum] = "7dd9f2f97da417560349a8da44ea4fcfe98bfd5ef284240a2cc4ff8e88ac7cd9"
+@@ -37,6 +38,7 @@ do_configure () {
+      ./configure --host=${TARGET_SYS} --build=${BUILD_SYS} --with-security=no )
+ }
  
--SRC_URI[md5sum] = "e959e5ff8c6806781eb06e56f302a393"
--SRC_URI[sha256sum] = "5bb3069f58faf12940d5cfde3209ac7f63210bebdd9023979b0c20cede126ea7"
-+SRC_URI[md5sum] = "372d8fdf6ea3675edbf1f6a4109b6db6"
-+SRC_URI[sha256sum] = "79da71c7c39cef0a5f7b834f0b17d0d436e7994dd33e912f581b4c12d3b1681f"
- 
- LICENSE = "BSD-0-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
++CFLAGS += "${@base_conditional('MLPREFIX', '', '','-DMULTILIB', d)}"
+ do_compile () {
+     #make iscsistart one of PROGRAMS if install_user in do_install
+     #sed -i -e '/^PROGRAMS = /s;$; usr/iscsistart;' Makefile
 -- 
-2.1.4
+2.8.1
 
 
