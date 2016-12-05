@@ -1,28 +1,42 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 267C871A03
+Return-Path: <patrick.ohly@gmx.de>
+X-Greylist: delayed 304 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 05 Dec 2016 12:18:27 UTC
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 42E1C6093E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Dec 2016 07:55:06 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uB57t7qf000837
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 4 Dec 2016 23:55:07 -0800 (PST)
-Received: from [128.224.162.133] (128.224.162.133) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Sun, 4 Dec 2016 23:55:06 -0800
-Reply-To: <openembedded-devel@lists.openembedded.org>
-References: <1480840457-169896-1-git-send-email-hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-From: Hongxu Jia <hongxu.jia@windriver.com>
-Message-ID: <fa00e667-3551-e28f-0d5a-519618a888a2@windriver.com>
-Date: Mon, 5 Dec 2016 15:55:05 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.4.0
-MIME-Version: 1.0
-In-Reply-To: <1480840457-169896-1-git-send-email-hongxu.jia@windriver.com>
-Subject: Re: [meta-networking][PATCH] iscsi-initiator-utils: fix invoking 32bit "iscsiadm -m node" failed in 64bit kernel
+	Mon,  5 Dec 2016 12:18:27 +0000 (UTC)
+Received: from pohly-mobl1 ([93.232.208.235]) by mail.gmx.com (mrgmx103
+	[212.227.17.168]) with ESMTPSA (Nemesis) id 0LjJCt-1coZwZ0bKZ-00dUAU;
+	Mon, 05 Dec 2016 13:13:24 +0100
+Message-ID: <1480940003.17535.32.camel@gmx.de>
+From: Patrick Ohly <patrick.ohly@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 05 Dec 2016 13:13:23 +0100
+In-Reply-To: <CABcZANkz-QEg-+rLr0q-W8BD5K6Z=UFs3MUpZHQXRO+T2xF2hw@mail.gmail.com>
+References: <20161129164817.16671-1-dev@codyps.com>
+	<CABcZANkz-QEg-+rLr0q-W8BD5K6Z=UFs3MUpZHQXRO+T2xF2hw@mail.gmail.com>
+X-Mailer: Evolution 3.12.9-1+b1 
+Mime-Version: 1.0
+X-Provags-ID: V03:K0:Gwy5lUligQkpxU285NXYrRx7e044m796uaC/nKhTwnXQTm/kj1W
+	Erje7jcANKGbzkHZFpRW1N/6lsfQbRjMtZGwGXQhtciBZKYYYj7utC+QpR7pRPkvXltZLUe
+	dhgM/xJWZVE8XB/HDE/8aI+ytwJobss4MhjNQNHCby4wpWKE2Y3lzS87X5NWM82apQ34dmt
+	h4udrLBdvgMbY9XuK10ZQ==
+X-UI-Out-Filterresults: notjunk:1;V01:K0:OMyLKcG3/os=:eRDFQ4ZOJ6m46U7smbEZ+a
+	2Hj0hRumH1duEosBRV3XJjoHkEDxj7yC4vbdDEV4xNCISu8ODNWTKADqIV9LRGBb2Ub6tKzGC
+	qbL900bFN8FIvjAP+wRTyJLTqb7ykimvsJyhY29jx9o4Y8HVU2VPRZo/K4xG8bg9na2v/E9bi
+	4UucFJetphoWauz8aqCxzfwS3sxrWuZNvdENxKBAVmaZxlT6QUXRD2elC3ndWeacdBxiaNyPa
+	V9sB6GPl2ACf/ImXAyPVDr1O3BOBoIPCmMD0EU4qa3CWJckVLp/2tU58zK5ooLNnMvXeFQbMI
+	b6BEDFr0ONjbiLEccDjw1bhA4zs4HvsuNru3Xc+yUIGkwS1vDRYodVtCfTfrjY23c6bjSYk8X
+	os6kT4F/RDrnD3EI95zFnc+FvcBUfG4UOXOzETGJKtBiZuUXyqqun00Q5C05lvFhEWoL6UliL
+	V1YQI56vi6sSkK/041nDn9yQEE2d+54EaotovIEtFMvKGkg4Pnq+HCHZUunKtmGpTqHvVdlXX
+	uKiH1zxwROGukRwKK1N7Ws5aK105dj/nP+IwIrGCk8vjnp2yjcfqydMZMwI+gtTuupzxDK2o2
+	GN5CkqmllQ0OKMwmniIlyNQssmTl8RYqfQK0CFzjzALVNKy6mJAA9FfV4bKxP1HA9uQSKhefr
+	KhliU/Yt6K9M8BTA+1Z2Fen4CQH3IrGgMIDkXZV0OCBsoWIOWoz75e0aG3YA6nBB2Sf86rRui
+	HDx4FcBThyhdEk/iPzUkYzFwgxSFt09q5xK9hfVO14hT5BrYVKn31qPlYVL+eBoU6Q6G/UgTy
+	zwGbLC/
+Cc: Otavio Salvador <otavio@ossystems.com.br>,
+	Mario Domenech Goulart <mario@ossystems.com.br>
+Subject: Re: [meta-java][PATCH] move from bb.data.getVar(x, d, 1) to d.getVar(x, True)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,88 +49,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Dec 2016 07:55:08 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 05 Dec 2016 12:18:28 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 04/12/16 16:34, Hongxu Jia wrote:
-> Take struct iscsi_uevent *ev for example:
-> In 64bit kernel : sizeof(ev->u): 24, sizeof(ev->r): 16,
-> but in 32bit iscsid: sizeof(ev->u): 20, sizeof(ev->r): 16.
->
-> While invoking 32bit "iscsiadm -m node" in 64bit kernel,
-> we should force ev->u 8byte aligned.
->
-> For "64bit iscsiadm + 64bit kernel" or "32bit iscsiadm + 32bit kernel",
-> they do not need the fix, so conditionally apply the fix patch.
-> (MLPREFIX is not NULL means multilib).
->
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> ---
->   ...g-32bit-iscsiadm-m-node-failed-in-64bit-k.patch | 34 ++++++++++++++++++++++
->   .../iscsi-initiator-utils_2.0-873.bb               |  2 ++
->   2 files changed, 36 insertions(+)
->   create mode 100644 meta-networking/recipes-daemons/iscsi-initiator-utils/files/fix-invoking-32bit-iscsiadm-m-node-failed-in-64bit-k.patch
->
-> diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/files/fix-invoking-32bit-iscsiadm-m-node-failed-in-64bit-k.patch b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/fix-invoking-32bit-iscsiadm-m-node-failed-in-64bit-k.patch
-> new file mode 100644
-> index 0000000..acb5c80
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/files/fix-invoking-32bit-iscsiadm-m-node-failed-in-64bit-k.patch
-> @@ -0,0 +1,34 @@
-> +From 03d6feb19ddaa46f54808a5d327c61bff248a228 Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Sun, 4 Dec 2016 01:15:03 -0500
-> +Subject: [PATCH] fix invoking 32bit "iscsiadm -m node" failed in 64bit kernel
-> +
-> +In 64bit kernel : sizeof(ev->u): 24, sizeof(ev->r): 16,
-> +but in 32bit iscsid: sizeof(ev->u): 20, sizeof(ev->r): 16.
-> +
-> +While invoking 32bit "iscsiadm -m node" in 64bit kernel,
-> +we should force ev->u 8byte aligned.
-> +
-> +Upstream-Status: Inappropriate [upstream does not support multilib]
-> +
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + include/iscsi_if.h | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/include/iscsi_if.h b/include/iscsi_if.h
-> +index dad9fd8..17b6c3d 100644
-> +--- a/include/iscsi_if.h
-> ++++ b/include/iscsi_if.h
-> +@@ -219,7 +219,7 @@ struct iscsi_uevent {
-> + 			uint32_t	host_no;
-> + 			uint16_t	chap_tbl_idx;
-> + 		} delete_chap;
-> +-	} u;
-> ++	} __attribute__ ((aligned (sizeof(uint64_t)))) u;
-> + 	union {
-> + 		/* messages k -> u */
-> + 		int			retcode;
-> +--
-> +2.8.1
-> +
-> diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
-> index 4b13155..d3724da 100644
-> --- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
-> +++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0-873.bb
-> @@ -22,7 +22,9 @@ SRC_URI = "http://www.open-iscsi.org/bits/open-iscsi-${PV}.tar.gz \
->              file://iscsi-initiator.service \
->              file://iscsi-initiator-targets.service \
->              file://set_initiatorname \
-> +           ${@base_conditional('MLPREFIX', '', '','file://fix-invoking-32bit-iscsiadm-m-node-failed-in-64bit-k.patch', d)} \
->   "
+On Tue, 2016-11-29 at 13:16 -0700, Christopher Larson wrote:
+> On Tue, Nov 29, 2016 at 9:48 AM, Cody P Schafer <dev@codyps.com> wrote:
+>=20
+> > bb.data.getVar was removed, need to use the modern mechanism.
+> >
+> > Signed-off-by: Cody P Schafer <dev@codyps.com>
+> > ---
+> >  classes/java-library.bbclass              |  4 ++--
+> >  recipes-core/icedtea/icedtea7-native.inc  |  2 +-
+> >  recipes-core/openjdk/openjdk-7-common.inc |  2 +-
+> >  recipes-core/openjdk/openjdk-8-common.inc | 10 +++++-----
+> >  recipes-core/openjdk/openjdk-common.inc   |  6 +++---
+> >  5 files changed, 12 insertions(+), 12 deletions(-)
+> >
+> > diff --git a/classes/java-library.bbclass b/classes/java-library.bbclas=
+s
+> > index 144cd2f..58d5a40 100644
+> > --- a/classes/java-library.bbclass
+> > +++ b/classes/java-library.bbclass
+> > @@ -23,8 +23,8 @@ def java_package_name(d):
+> >    pre=3D""
+> >    post=3D""
+> >
+> > -  bpn =3D bb.data.getVar('BPN', d, 1)
+> > -  ml =3D bb.data.getVar('MLPREFIX', d, 1)
+> > +  bpn =3D d.getVar('BPN', True)
+> > +  ml =3D d.getVar('MLPREFIX', True)
+> >
+>=20
+> If you=E2=80=99re working on master, even the =E2=80=98, True=E2=80=99 is=
+ no longer needed, FYI.
 
-Conditional patches is not good, we should keep one source code.
+I suspect that meta-java master is meant to work with more than just
+bitbake master, so keeping the parameter makes sense.
 
-//Hongxu
+I think the change is okay and I'd love to see it merged as soon as
+possible. In Ostro OS, updating to bitbake and OE-core master is blocked
+by this meta-java incompatibility with bitbake master.
 
-> +
->   SRC_URI[md5sum] = "8b8316d7c9469149a6cc6234478347f7"
->   SRC_URI[sha256sum] = "7dd9f2f97da417560349a8da44ea4fcfe98bfd5ef284240a2cc4ff8e88ac7cd9"
->   
+Can someone with commit rights to meta-java please merge it?
 
+Bye, Patrick
 
 
