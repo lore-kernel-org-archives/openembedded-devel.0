@@ -1,64 +1,47 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-ua0-f193.google.com (mail-ua0-f193.google.com
-	[209.85.217.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 2FA3262132
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-lf0-f54.google.com (mail-lf0-f54.google.com
+	[209.85.215.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 30C29601F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Dec 2016 12:39:55 +0000 (UTC)
-Received: by mail-ua0-f193.google.com with SMTP id 50so31781014uae.2
+	Mon,  5 Dec 2016 16:09:09 +0000 (UTC)
+Received: by mail-lf0-f54.google.com with SMTP id b14so225357021lfg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Dec 2016 04:39:57 -0800 (PST)
+	Mon, 05 Dec 2016 08:09:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=782Xb1FBdy6x5r/cMR9nogMXSkQwGJn4t7tXBiUcM7k=;
-	b=isEoduJFpunhlZ3fDiej48Iqrco3RO/fIJGrb2uwoXsmtsXBGM15XhUj71t8IYaM6M
-	F3uxxCKSkJ/2kNPGqy7kkhR9bjoQQ0RNTtHR7QYLm46leg2LE9Zm3FyeLDzoYEkMbrT3
-	pQ8TrL2YKbwTj5/4mKmnjhCrPZ75fr9Lbs9JX2viP1M2tmJAU1zK/XCj5b+8hZSsIwqT
-	qjLMtTgTTy3Zlg9cKRpw/8K2K8sl6EB5BHGmgDZkFvWTAKk5EBkMWqaeSCCTjZqL/O1t
-	uphZas5BMcjkM+V3vt6D7JX3xS8SAnctARJncOwZCwWuRLm5nUp0n+2cjS/6H+3qN4Jo
-	7jdQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=CB10GnggjlF1dxS92V7/cdX7Mn6t7xa6nCApSu48890=;
+	b=k7OE6mz0TougHNk9Rwdpy/TRc/up2FQpQ/diBEyzPtjjUNzPFdl7sZEYbDdEFQDTTR
+	W04jY6bF6xBJ8hefEzuooZ2RWPnw/n8kcxWitNDFyZKuMk8G+r6rNNWjCPaIBsECyD9P
+	NWErLEkF2bk3doRD1K0bDFg5YCq1IA/NE3FItrKOqcas8QEELXa5sR/pNGBw9l890f9u
+	dsmvNk3/fRIALW5KiLf7juyn/7eel4d8FgcJbH4W8kA69no/+uHwFLuhzzotm7LgUuWK
+	2EitnHTo8va/VUKE0zcii5GDd8phMyxSANEQeyQMWSGFe1pwjzdEmcZKKsu7qNxEgRnF
+	e3xA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=782Xb1FBdy6x5r/cMR9nogMXSkQwGJn4t7tXBiUcM7k=;
-	b=cFd3a1Ln445WxDgrLbL9rOHU3gvxsJKnRyo6QbvAWtjfSnMFzbx6nT/gUXRUNGaOhZ
-	f7P559YruhcCB2Gx9MGWQejhEtmx6X/+x1pbIjDUIxu3fS928evKVelk2YcJtXKobCzl
-	sIsD1WUWyI0MDQPJm0L6yw2knrPER1uKNZAJD1c9mAwJxb9PSdYhTiGwr7ZlpFUEAolP
-	HB5NkBcfCG7MKrcbREcoYUwaMf0YYMuMkMn+fJQwws87Yelm0STtVt56/rPvNavRVDcP
-	/mZ0ngyYSx8U0SG6ZIE9c3ebiFblbos0S9DwUNIyXba4ytmVxQ2ZLH2Tb+X9ehEkCLdM
-	EpVA==
-X-Gm-Message-State: AKaTC03Ka5bKcgJwWvwEDW1eyLOjFW/R3vY7kcX+6e9yohLQV3JmFie6uv4VEr6AJxaV+Q==
-X-Received: by 10.159.41.36 with SMTP id t33mr25718295uat.142.1480941596717;
-	Mon, 05 Dec 2016 04:39:56 -0800 (PST)
-Received: from mail-ua0-f175.google.com (mail-ua0-f175.google.com.
-	[209.85.217.175]) by smtp.gmail.com with ESMTPSA id
-	w135sm4124892vkw.11.2016.12.05.04.39.55
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 05 Dec 2016 04:39:55 -0800 (PST)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-ua0-f175.google.com with SMTP id 51so346511851uai.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Dec 2016 04:39:55 -0800 (PST)
-X-Received: by 10.176.84.8 with SMTP id n8mr8409117uaa.29.1480941595319; Mon,
-	05 Dec 2016 04:39:55 -0800 (PST)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=CB10GnggjlF1dxS92V7/cdX7Mn6t7xa6nCApSu48890=;
+	b=AhVN8WoRGphkNr2SDwpo13FJpRMePbrz385h2zfO5WCR6IgP0x+7NMJuV6UEV7l13K
+	olH2m7IRcfFM3ChM4AoTv6+9K1NibYuewpxTkHVhYKEGHeoHLcTObqovFufICcff0OR1
+	b8hXUGc2k0V2X83Ivo5A9Ytpt+3+6PASGUnEPuXubgN689yPIYk3ZRYXOW6O35MOi0H5
+	OSlsZoT5t6xCSxZ0+Hx3wy1PDbZCiQglNdMJulr2Xr/hCH+IJWtburlAmXsAJoKtIaEZ
+	IxJZLoNPNm5gKeJCK5GXw1z7WEnly8LGSp7i3pu1vdF/xoS7kqdL6ihdWiHut/QISwZX
+	lBHg==
+X-Gm-Message-State: AKaTC001b6Sb5wxGjuL9cFSAHWOe5ait1Fil6roZwm3r8nI2nGneARFOeSY9wxPnR1d5BVmvMVnK7NSRukCDqQ==
+X-Received: by 10.46.72.18 with SMTP id v18mr20438598lja.12.1480954149914;
+	Mon, 05 Dec 2016 08:09:09 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.31.182.83 with HTTP; Mon, 5 Dec 2016 04:39:54 -0800 (PST)
-In-Reply-To: <1480940003.17535.32.camel@gmx.de>
-References: <20161129164817.16671-1-dev@codyps.com>
-	<CABcZANkz-QEg-+rLr0q-W8BD5K6Z=UFs3MUpZHQXRO+T2xF2hw@mail.gmail.com>
-	<1480940003.17535.32.camel@gmx.de>
-Date: Mon, 5 Dec 2016 10:39:54 -0200
-X-Gmail-Original-Message-ID: <CAP9ODKoKgUXWkor0+fKX=HONz6zBTPLUKJ04tEYDACPvfGA8zA@mail.gmail.com>
-Message-ID: <CAP9ODKoKgUXWkor0+fKX=HONz6zBTPLUKJ04tEYDACPvfGA8zA@mail.gmail.com>
-To: Patrick Ohly <patrick.ohly@gmx.de>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>,
-	Mario Domenech Goulart <mario@ossystems.com.br>
-Subject: Re: [meta-java][PATCH] move from bb.data.getVar(x, d, 1) to d.getVar(x, True)
+Received: by 10.25.41.70 with HTTP; Mon, 5 Dec 2016 08:08:39 -0800 (PST)
+X-Originating-IP: [189.114.111.135]
+In-Reply-To: <1479756919-17586-1-git-send-email-jslater@windriver.com>
+References: <1479756919-17586-1-git-send-email-jslater@windriver.com>
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+Date: Mon, 5 Dec 2016 14:08:39 -0200
+Message-ID: <CAAPZna1tZVMDn3MZafgERMKLQF4+p7yMcKmZUUfHCUFam4-kCg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-java][PATCH 1/1] layer.conf: add LAYERVERSION and LAYERDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,56 +54,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Dec 2016 12:39:56 -0000
+X-List-Received-Date: Mon, 05 Dec 2016 16:09:10 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 5, 2016 at 10:13 AM, Patrick Ohly <patrick.ohly@gmx.de> wrote:
-> On Tue, 2016-11-29 at 13:16 -0700, Christopher Larson wrote:
->> On Tue, Nov 29, 2016 at 9:48 AM, Cody P Schafer <dev@codyps.com> wrote:
->>
->> > bb.data.getVar was removed, need to use the modern mechanism.
->> >
->> > Signed-off-by: Cody P Schafer <dev@codyps.com>
->> > ---
->> >  classes/java-library.bbclass              |  4 ++--
->> >  recipes-core/icedtea/icedtea7-native.inc  |  2 +-
->> >  recipes-core/openjdk/openjdk-7-common.inc |  2 +-
->> >  recipes-core/openjdk/openjdk-8-common.inc | 10 +++++-----
->> >  recipes-core/openjdk/openjdk-common.inc   |  6 +++---
->> >  5 files changed, 12 insertions(+), 12 deletions(-)
->> >
->> > diff --git a/classes/java-library.bbclass b/classes/java-library.bbcla=
-ss
->> > index 144cd2f..58d5a40 100644
->> > --- a/classes/java-library.bbclass
->> > +++ b/classes/java-library.bbclass
->> > @@ -23,8 +23,8 @@ def java_package_name(d):
->> >    pre=3D""
->> >    post=3D""
->> >
->> > -  bpn =3D bb.data.getVar('BPN', d, 1)
->> > -  ml =3D bb.data.getVar('MLPREFIX', d, 1)
->> > +  bpn =3D d.getVar('BPN', True)
->> > +  ml =3D d.getVar('MLPREFIX', True)
->> >
->>
->> If you=E2=80=99re working on master, even the =E2=80=98, True=E2=80=99 i=
-s no longer needed, FYI.
->
-> I suspect that meta-java master is meant to work with more than just
-> bitbake master, so keeping the parameter makes sense.
->
-> I think the change is okay and I'd love to see it merged as soon as
-> possible. In Ostro OS, updating to bitbake and OE-core master is blocked
-> by this meta-java incompatibility with bitbake master.
->
-> Can someone with commit rights to meta-java please merge it?
+Hi Joe,
 
-We are on it. Fabio is testing the meta-java patches for merging.
+This layer also depends on meta-oe.
 
---=20
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+On Mon, Nov 21, 2016 at 5:35 PM, Joe Slater <jslater@windriver.com> wrote:
+
+> Version "1", and only depend on "core".
+>
+> Signed-off-by: Joe Slater <jslater@windriver.com>
+> ---
+>  conf/layer.conf |    6 ++++++
+>  1 file changed, 6 insertions(+)
+>
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index 84a4d89..0d92919 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -8,4 +8,10 @@ BBFILE_COLLECTIONS += "meta-java"
+>  BBFILE_PATTERN_meta-java := "^${LAYERDIR}/"
+>  BBFILE_PRIORITY_meta-java = "10"
+>
+> +# This should only be incremented on significant changes that will
+> +# cause compatibility issues with other layers
+> +LAYERVERSION_meta-java = "1"
+> +
+> +LAYERDEPENDS_meta-java = "core"
+> +
+>  LICENSE_PATH += "${LAYERDIR}/licenses"
+> --
+> 1.7.9.5
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
