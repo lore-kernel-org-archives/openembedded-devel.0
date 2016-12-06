@@ -1,50 +1,36 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f177.google.com (mail-ua0-f177.google.com
-	[209.85.217.177])
-	by mail.openembedded.org (Postfix) with ESMTP id EBB626011B
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C37F71A8C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Dec 2016 10:26:49 +0000 (UTC)
-Received: by mail-ua0-f177.google.com with SMTP id b35so376369728uaa.3
+	Tue,  6 Dec 2016 19:00:56 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id h201so45029777qke.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Dec 2016 02:26:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=zJ8t+47+WuCBSjEhjuABDx9RSk+PTo9mL25HRD+wfrw=;
-	b=LeSULV96lb6QJ2UBlkYBVwFazH2Z+EKbeA6Zx7YAsa+KjvlJz8RlH7haV7c48Cg5he
-	221NhaXnLEhUu4XWNQzMvyUxFhPS3ZFRGE2QnHKzb+6CzgbqXqoiCfc75GduTF+mLUm1
-	pymvGVqNs8y2ekZvs7t9o3lfzVAuRd9DkU6o5LYLPQ6yQippDq4ZN3F4/3HrKmfoJnUU
-	gHpTPLXd3HP01+82JLPb8v+1SGjRaM9qp95EW7rquHYhBPAYvhJ5mLUgpGjTKyMZDsDZ
-	R9GnDb4bWVFm5Cz9Kl+yCAmBYZ0/9ykJF3u+S3361HU14Y6ykysPtTu5Dpj/9DPK2BmY
-	7cmw==
+	Tue, 06 Dec 2016 11:00:58 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=zJ8t+47+WuCBSjEhjuABDx9RSk+PTo9mL25HRD+wfrw=;
-	b=H451rz8i7kYHclnxEBWMbwQBMRIzz6OQVYYG0R3wgGreELa0xL0INgzCDZ8Jw2Elk7
-	Le78YK1LTzr22Wh1g3vOsoj3loTV9u4rkF8JesioT1KnD17UhYH6P+zrvdYO9wdoWNbq
-	0WL3XbhcEtCWd6/BK2oHyn9GhycM4eLXagmxw25GZn8eqYYPfWYyi/xcCX3vjQSz8+Z4
-	Mc7NZvYRzxY3sqyLw1S/dSvJodpFa2WnxK0gB5G54up4dIrgNcxiaGuJHNSTY4HgE6zo
-	soivcZIkHSnzkCgqnjUpFCd7mWMBzct0sDPGl79i/O6O4EaG7vy/9RKnXy8AwwnFvJAm
-	wlTw==
-X-Gm-Message-State: AKaTC01Oz17hDDwutmZjdtt/0qViJy2jlM4WlpaJ5NesDA3JYATuAMII6EcX8haEJTy/UrQV5V5XWSNctu4mow==
-X-Received: by 10.176.5.130 with SMTP id e2mr48534323uae.108.1481020010777;
-	Tue, 06 Dec 2016 02:26:50 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.176.85.157 with HTTP; Tue, 6 Dec 2016 02:26:50 -0800 (PST)
-In-Reply-To: <CAMKF1sqjjTooJzi_8hknVNj_OaYAFcOcsL8QZVSw-zOSuwdoFg@mail.gmail.com>
-References: <1480979306-21331-1-git-send-email-schnitzeltony@googlemail.com>
-	<689CB891-7D18-4FEB-9BE5-DF2CD80B066E@gmail.com>
-	<CALbNGRQLu7rhbQP9S0MDBVLdbCPbCybu_nqu++yZpD2fSbn6=g@mail.gmail.com>
-	<CAMKF1sqjjTooJzi_8hknVNj_OaYAFcOcsL8QZVSw-zOSuwdoFg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Tue, 6 Dec 2016 11:26:50 +0100
-Message-ID: <CALbNGRRx2gVVkugwtjGhX3ndThEDFY=y4Wm+odgCCxsV1xzsOA@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH 1/2] exo: fix build after perl update
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=6eeY7LfeB1qijvC3zna6NoyvB3uEYJ+UF9LG8CAdxUg=;
+	b=kRE4n+bWPA8ebIaAEyom6ba+/x/k/gRoOSTTpyawjC+VmkVMXJPgluSENg4BiYzhNB
+	xVQsJNthrbKFfAXYyJu51sCJCFF9rKbivJ62jQtaFcRu9O/Ek/C8B7Fv2C1K1ijFzhwN
+	+oD/y+/OHme0r6AeKrOz5s2T+8CISL8C8cdzMCPTIah/FS7y0NjkAg1Y4nKY60EgLXl4
+	JdSGXT+13UD9ykzLKq6UDxiAzTTI0sXw354Hz0SdEkVIM0DG70LeiXNcu0z7Yn34tqx7
+	snzCl6BHD26KUDbg5ku4aQY1Y7DvvJ9FYxVnEZ76Tbg4Gd73Nw1K1l7lYlnlWvud5mlS
+	rDxg==
+X-Gm-Message-State: AKaTC02kL5uU/AxLCKCm7drESKyLYuEC1V11ZlZG1m27EcT9zlqhrMbc7B2Tp9CIAUhXow==
+X-Received: by 10.233.216.71 with SMTP id u68mr62860377qkf.161.1481050857790; 
+	Tue, 06 Dec 2016 11:00:57 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
+	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
+	v18sm12754480qkb.40.2016.12.06.11.00.57
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 06 Dec 2016 11:00:57 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  6 Dec 2016 14:00:46 -0500
+Message-Id: <1481050846-19188-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] pypi: add default values for UPSTREAM_CHECK_URI and UPSTREAM_CHECK_REGEX
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,41 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Dec 2016 10:26:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 06 Dec 2016 19:00:57 -0000
 
-On Tue, Dec 6, 2016 at 1:26 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> Ok
->
-> On Dec 5, 2016 3:59 PM, "Andreas M=C3=BCller" <schnitzeltony@googlemail.c=
-om>
-> wrote:
->
->> On Tue, Dec 6, 2016 at 12:32 AM, Khem Raj <raj.khem@gmail.com> wrote:
->> >
->> >> On Dec 5, 2016, at 3:08 PM, Andreas M=C3=BCller <
->> schnitzeltony@googlemail.com> wrote:
->> >>
->> >> fixes:
->> >>
->> >> | checking for perl5... no
->> >> | checking for perl... perl
->> >> | checking for perl module URI::Escape... no
->> >> | checking for perl module URI::file... no
->> >> | checking for perl module URI::URL... no
->> >> | configure: error: Atleast one of the required Perl modules
->> (URI::Escape, URI::file and URI::URL) was not found on your system
->> >>
->> >
->> > I was seeing same errors. Should this be using native perl instead ?
->> For exo case I think we already do: The only 'perlish' is
->> liburi-perl-native in DEPENDS and perlnative in inherit
->>
->> Andreas
-Please forget this series. Root cause for configure failure is broken
-liburi-perl-native caused by perl update. I will send out an update of
-liburi-perl-native to oe-core and V2 here
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/classes/pypi.bbclass | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Andreas
+diff --git a/meta-python/classes/pypi.bbclass b/meta-python/classes/pypi.bbclass
+index 3d81ab3..c69d356 100644
+--- a/meta-python/classes/pypi.bbclass
++++ b/meta-python/classes/pypi.bbclass
+@@ -18,6 +18,9 @@ def pypi_src_uri(d):
+ PYPI_SRC_URI ?= "${@pypi_src_uri(d)}"
+ 
+ HOMEPAGE ?= "https://pypi.python.org/pypi/${PYPI_PACKAGE}/"
++UPSTREAM_CHECK_URI ?= "https://pypi.python.org/pypi/${PYPI_PACKAGE}/"
++UPSTREAM_CHECK_REGEX ?= "/${PYPI_PACKAGE}/(?P<pver>(\d+[\.\-_]*)+)"
++
+ SECTION = "devel/python"
+ SRC_URI += "${PYPI_SRC_URI}"
+ S = "${WORKDIR}/${PYPI_PACKAGE}-${PV}"
+-- 
+2.7.4
+
 
