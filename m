@@ -1,51 +1,52 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id C0AE071AE2
+Received: from mail-wj0-f196.google.com (mail-wj0-f196.google.com
+	[209.85.210.196])
+	by mail.openembedded.org (Postfix) with ESMTP id B3A6871B16
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Dec 2016 22:41:06 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id m203so24333284wma.3
+	Tue,  6 Dec 2016 22:41:07 +0000 (UTC)
+Received: by mail-wj0-f196.google.com with SMTP id xy5so46568778wjc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Dec 2016 14:41:08 -0800 (PST)
+	Tue, 06 Dec 2016 14:41:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20120113;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=1J/hfQltescqI26OgbXKOmt6DkGZDPrPV/xb9ETKuYc=;
-	b=a8DadfrrDpZEnCIv32UZBY0QV6NOjg6iGfWoviJbf3xlHJdTc2ie8sbfXx5uD9iGDw
-	HlIV4uWSw8lnxlh7frm3K3ilz4TT1IQAtyO3uEzMBG8Hlbzd/QkdCRoKkOWxVT/6WqT+
-	CL6p0+dAaXGsM3Jt+QHXuhCqZomBGM9BcvadyPIqjen1Umu1BtRBkAGDWnqO6/65jEv6
-	+VYluRTdyDCVhaK5k4xJyvsVjp+3jqdDu1ScnpG9KyngHmD2Z8Zi34Rla1GLjvNsIvus
-	YpB8QiMij7d4RL8RgrpaAVAABAQhhkM1tdCjyppX/ttmtSVDEoXPwpGMJF4oLT25o49v
-	zh1g==
+	bh=am/l5Fz38yq/cLD6lo+7Soomq3Lcz/yswD9ZJSsiYzE=;
+	b=lhTYEIjjk1lyrsRhk9o+AweNL36wwkQphwE/NrDERIcZAyfwYwYRFK1/fK0KEiPjkA
+	eY5HjhCHrMOFMpIOjgP6/KC3FD+0TTr2lcjboZsw55Z5PMtBbvZym1orb/H2me6LxLxS
+	zEEMPJzLpeeJ1oItTsPw6v5xYQ4i4fS3uLhePdvlzxGGJ8hoHLo/JR4xtZnyCUfPrd05
+	jS21w83hTF3XMVkXx+N6MckZp77467HNSJsy7MhkoSBye9lDvyTn13EPL3f0Ax4YccNp
+	+aVHU1D1nIUnTX7Uzy9MKyrF0X81OyHX0fTMZO2oCJLmryzJ4+bIBp6DsjuEKb/Ogmq3
+	eGHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=1J/hfQltescqI26OgbXKOmt6DkGZDPrPV/xb9ETKuYc=;
-	b=YwRYcvE8WqaD0+GBH9tdiGICajPILRYmf8YExufiUOrtMFwcgDHTcRDQt8D/H69CRR
-	oteTlTFfj0qKwo7YIuGBRS2zYro2seguh2h6yDeC5oFtwKzndNkefbNzmp6fN5Hf5QRb
-	sffzJ6OhgfaW/rMP+1VZRl978So+JYTJ+aH5JVt0ydoCYvTOsmnesbIL/FEe/wRXvU0+
-	RDF3ItxLMPQlalmoTQABs2t2ci+hIGv9SG0371yabBsHa5U7hAPJ5qVHL+9oXmq4zKW9
-	Es+bE2uMbrRuc2ap91Uv1g9JxoTZC6PfIv3K3oiUlqWLW7gJqRgXopW+/cfWRG5Ta/z2
-	k03A==
-X-Gm-Message-State: AKaTC00Iom+omr4Dujh4CXEz89aPvHkVMqnl3klJjDXXDOPz2qMx+1e82qxUoVU6zXA83A==
-X-Received: by 10.28.47.15 with SMTP id v15mr696363wmv.76.1481064067367;
-	Tue, 06 Dec 2016 14:41:07 -0800 (PST)
+	bh=am/l5Fz38yq/cLD6lo+7Soomq3Lcz/yswD9ZJSsiYzE=;
+	b=SIz88wFOvOOC/peTXjeUhohu94KPGKUkqaJbYHTiM4EVpVqVvV79DTnj5/rTmE3QjL
+	D1eJ5Z9AzrVoLKQipP9mqIvb2eHEA6fIogmmbmzb9xuQ395AP0o+RiSBi5YxGr94eB/X
+	0iXMUch0HLNYRrbCZVeWDB8P9khvaJRpaJpxzz1udW483u2rbeelMZwqCaMaVFSdYbE4
+	wVI8n3ZffZyGFSe/z4SxLIj8wV5Ydak1ljfBfYHeclY2izxMVCc01t5IGHex0o5RbuZh
+	7JWr3b/DykyratFTr590BEa4i3TO2koU0PcDgifjp1ZktjhPvZRqelGN9vULDjPmXjIu
+	4gNw==
+X-Gm-Message-State: AKaTC025EnUUp0hF2gaTFYATfoKFHsBDP+fbV3Qq3B8G8vBGgQ8buGZM6FRr/8SzDwOJ0Q==
+X-Received: by 10.194.85.137 with SMTP id h9mr54441274wjz.23.1481064068285;
+	Tue, 06 Dec 2016 14:41:08 -0800 (PST)
 Received: from localhost.localdomain (p579CEAA5.dip0.t-ipconnect.de.
 	[87.156.234.165]) by smtp.googlemail.com with ESMTPSA id
-	j6sm28060674wjk.25.2016.12.06.14.41.06
+	j6sm28060674wjk.25.2016.12.06.14.41.07
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 06 Dec 2016 14:41:06 -0800 (PST)
+	Tue, 06 Dec 2016 14:41:07 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  6 Dec 2016 23:40:43 +0100
-Message-Id: <1481064044-26249-5-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue,  6 Dec 2016 23:40:44 +0100
+Message-Id: <1481064044-26249-6-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
 In-Reply-To: <1481064044-26249-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1481064044-26249-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 4/5] xfce4-clipman-plugin: update to 1.4.1
+Subject: [PATCH 5/5] poppler: update to 0.49.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,34 +59,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Dec 2016 22:41:07 -0000
+X-List-Received-Date: Tue, 06 Dec 2016 22:41:08 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../{xfce4-clipman-plugin_1.4.0.bb => xfce4-clipman-plugin_1.4.1.bb}  | 4 ++--
+ .../recipes-support/poppler/{poppler_0.48.0.bb => poppler_0.49.0.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/clipman/{xfce4-clipman-plugin_1.4.0.bb => xfce4-clipman-plugin_1.4.1.bb} (76%)
+ rename meta-oe/recipes-support/poppler/{poppler_0.48.0.bb => poppler_0.49.0.bb} (93%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.0.bb b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.1.bb
-similarity index 76%
-rename from meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.0.bb
-rename to meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.1.bb
-index 988fbb0..aa6a5bc 100644
---- a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.1.bb
-@@ -8,8 +8,8 @@ inherit xfce-panel-plugin
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.48.0.bb b/meta-oe/recipes-support/poppler/poppler_0.49.0.bb
+similarity index 93%
+rename from meta-oe/recipes-support/poppler/poppler_0.48.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_0.49.0.bb
+index ebe986b..ebb16d6 100644
+--- a/meta-oe/recipes-support/poppler/poppler_0.48.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_0.49.0.bb
+@@ -7,8 +7,8 @@ SRC_URI = " \
+     file://0001-add-manadatory-options-to-find-qt4-qt5-moc.patch \
+     file://0002-fix-gcc-6-math-ambiguous-errors.patch \
+ "
+-SRC_URI[md5sum] = "8d61c91cb9e99ad38bba1b0b4432f174"
+-SRC_URI[sha256sum] = "85a003968074c85d8e13bf320ec47cef647b496b56dcff4c790b34e5482fef93"
++SRC_URI[md5sum] = "9e057ed8eee1f9979fa75d8f044783b8"
++SRC_URI[sha256sum] = "14485f0e1e43dcddf49cfc02c2ccb92910ba3e0e91e06f4bd2642ec00cb3a79f"
  
- DEPENDS += "xfconf xproto libxtst"
+ DEPENDS = "fontconfig zlib cairo lcms"
  
--SRC_URI[md5sum] = "cd9c05e54e0fcc3f8d774cacdf18f42c"
--SRC_URI[sha256sum] = "a97671540663df1d90503f73695ac36e16fa2c832be8845ad9402529b8148294"
-+SRC_URI[md5sum] = "5a5c01c347f4503c58902977e671ea09"
-+SRC_URI[sha256sum] = "341cce9665a89e5930e754ef3e27ff97594da22b82b1403099ebcf5c18a5351f"
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[qrencode] = "--enable-libqrencode,--disable-libqrencode,qrencode"
 -- 
 2.5.5
 
