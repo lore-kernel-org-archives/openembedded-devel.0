@@ -1,25 +1,33 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F68971BD8
+Return-Path: <obi@opendreambox.org>
+Received: from mail.dream-property.net (mail.dream-property.net
+	[82.149.226.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 09EED71B85
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Dec 2016 01:47:03 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uB71l4tY024863
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 6 Dec 2016 17:47:04 -0800 (PST)
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.184) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Tue, 6 Dec 2016 17:47:04 -0800
-From: <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 7 Dec 2016 09:47:56 +0800
-Message-ID: <1481075276-9315-3-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1481075276-9315-1-git-send-email-Qi.Chen@windriver.com>
-References: <1481075276-9315-1-git-send-email-Qi.Chen@windriver.com>
+	Wed,  7 Dec 2016 01:57:12 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id D742D31C2255;
+	Wed,  7 Dec 2016 02:57:13 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id nLbXmZ8tZYPH; Wed,  7 Dec 2016 02:57:10 +0100 (CET)
+Received: from [172.22.22.61] (55d40c51.access.ecotel.net [85.212.12.81])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 136C531C207A;
+	Wed,  7 Dec 2016 02:57:10 +0100 (CET)
+To: openembedded-devel@lists.openembedded.org
+References: <1480507543-21520-1-git-send-email-obi@opendreambox.org>
+	<20161202083248.GC3721@jama>
+From: Andreas Oberritter <obi@opendreambox.org>
+Message-ID: <ca559e68-43b4-312a-fee2-8ec8f2083d0b@opendreambox.org>
+Date: Wed, 7 Dec 2016 02:57:09 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.5.1
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 3/3] tftp-hpa: fix ALTERNATIVE_PRIORITY to avoid conflict
+In-Reply-To: <20161202083248.GC3721@jama>
+Subject: Re: [meta-filesystems][PATCH] xfsprogs: unblacklist and update to 4.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,31 +40,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Dec 2016 01:47:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 07 Dec 2016 01:57:13 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-From: Chen Qi <Qi.Chen@windriver.com>
+On 02.12.2016 09:32, Martin Jansa wrote:
+> On Wed, Nov 30, 2016 at 01:05:43PM +0100, Andreas Oberritter wrote:
+>> A patch similar to drop-configure-check-for-aio.patch was applied upstream.
+> 
+> Khem already sent 4.8.0 earlier and I've merged his version today.
+> 
+> Can you rebase on current master to see if we still need anything from
+> this?
 
-Fix ALTERNATIVE_PRIORITY to avoid the same priority of the 'tftp' utility
-with that from busybox.
+Khem, your version fails to build for me (glibc; default PACKAGECONFIG):
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+| .../xfsprogs-4.8.0/libxfs/.libs/libxfs.a(xfs_alloc.o): In function `platform_uuid_compare':
+| /usr/src/debug/xfsprogs/4.8.0-r0/xfsprogs-4.8.0/include/linux.h:89: undefined reference to `uuid_compare'
 
-diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-index 115fa2e..5932f85 100644
---- a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-+++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-@@ -75,5 +75,5 @@ INITSCRIPT_PARAMS = "start 20 2 3 4 5 . stop 20 1 ."
- 
- ALTERNATIVE_${PN} = "tftp"
- ALTERNATIVE_TARGET[tftp] = "${bindir}/tftp-hpa"
--ALTERNATIVE_PRIORITY = "50"
-+ALTERNATIVE_PRIORITY = "60"
- 
--- 
-2.1.0
+The error disappears once I remove link_needed_libs.patch.
 
+Regards,
+Andreas
 
