@@ -1,52 +1,46 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wj0-f195.google.com (mail-wj0-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 0AA0B71975
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-vk0-f68.google.com (mail-vk0-f68.google.com
+	[209.85.213.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 22C07719B0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Dec 2016 21:42:03 +0000 (UTC)
-Received: by mail-wj0-f195.google.com with SMTP id he10so3990924wjc.2
+	Fri,  9 Dec 2016 22:45:35 +0000 (UTC)
+Received: by mail-vk0-f68.google.com with SMTP id x186so1618375vkd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Dec 2016 13:42:05 -0800 (PST)
+	Fri, 09 Dec 2016 14:45:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=NflwpRzA2MIGVF5JVUdawzYTdjX+dd+7dcPEWH8JQcM=;
-	b=rUrEQCGHQKw/HgnHhor+cJ4M5Dp66RaAdHDiKLLtkv5Lkd1T33bSgAY2RyYYModmjv
-	yhJWng/i4Nrn4xUoQmn5oLwHWeievpwvsbW7PgcLxrgs5YruQhA105DrWqLOnQl8Eul2
-	J5d0m6CrwY+UJch/OArxSSR9ykQq5ml7zkUVOKzu53gWMKesRWobdbzo3Bg9l6kbpfZe
-	5dM4aEaQVx3MrPhg0IXvxXXm9xrU2zWHU99QaAwGW3GvZ6goITXBAY4dI2vn0XKaG0C3
-	gt5FBumDhrSsj7V0fW/CRN/LiCo1BbaxmYHMh2s1E9TxfpI8JKKds6/g+hXITl4DNLt6
-	4aTA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=gnuH/wv3ifrYnEYKx1AonURQ+ZHayI/GtgMJubHMOW4=;
+	b=b9DbvvP/B+B8/kFJr+S0xybTMIxHxp97F0TyeRYIZLJyeF4nePa/8LcuJyB1ZrPhRc
+	Lx7418HSjYnAgYEa/Zh7dAlo8A6mVcYxiqgzxP0pZolVOkCUnZzObmZMu22oXLQikAO0
+	6sv0KQnF/g1BFxeT3CYDN4Nfn/hemsAqjYy3sexOKAbTCnW3A7gZQVNXsM6yH7MK8yKz
+	NLYOdAY7C0hw1rfrqTHv3a2srCFYyYeS9SaYxLZVErRXdSPv6oOrnXQYpNvUsVHwjAWL
+	AzXcSnTpGnq/BVSrF5kCPlSIJtdxdz72Px9nQjxeNTPiNRYVyNb2+5lldnAqSaebaVES
+	26GA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=NflwpRzA2MIGVF5JVUdawzYTdjX+dd+7dcPEWH8JQcM=;
-	b=YcvN3D3P5zzPihlSWLAOTiuxAtjouysjD9vUOtjLvGOBY/C1qBw2l8EtY838mhF06f
-	5Q4vvMF6FwW/ieagRouD/tNV/IFGyuoPCFGN9yGchaWhErOMS4PD0hKlSwM7IaW1QEZQ
-	8WOFgLpKZVjlEvMFgiBUBRJnhkCOUXOS+hbZZE5pV+P8f2/FmjVT7hTsagq928DlE3U0
-	shxBkxKmNLgZj6s/HaQQY9NgdgW8Tb7wgPVez15//jEigaAFi3a2m3d3MXEpLVf9vXIA
-	BhWIoAe6zRXumWWRadvUUiggy0yALELOzx1tL7GPADSgyD1RwU1LrvXS+4iA5gMFY7HZ
-	B0eg==
-X-Gm-Message-State: AKaTC01XV+KUkEHnkDfa/owmYLYv0V9x7Uprg9OvB7BkQ7CGwlloKWi43rpwhoWKEyYZZg==
-X-Received: by 10.194.31.201 with SMTP id c9mr70349978wji.176.1481319724643;
-	Fri, 09 Dec 2016 13:42:04 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	a13sm22640713wma.18.2016.12.09.13.42.03
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 09 Dec 2016 13:42:03 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 9 Dec 2016 22:42:05 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161209214205.GG3327@jama>
-References: <20161203030422.17285-1-raj.khem@gmail.com>
-	<20161203030422.17285-4-raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=gnuH/wv3ifrYnEYKx1AonURQ+ZHayI/GtgMJubHMOW4=;
+	b=kigXo9aWwIW8xDRXqCW3qwbM8ZBM8Bo003k9Ox9kiSvHN7w6+S2i/YiyLEP94bRhcH
+	eRKu2aHLNwFZMUnrvPxo8Tsp/RX/gHpbxCvmXsEFzXiXKySU+icJk2Pko0dy9sMgyTnq
+	yH4IHjPdD+viChi8pN/ZllUaKzj9atf+NjZSM3Hjdz04IUGhNtt7CWRPLdL1NSYDtwqz
+	MRl8bgwGGqVihuh/fxfkgfXyL/Jn6mMUhIpPmCDo6nAeL6M+Mh7ZYlpyBuDryyrYD750
+	XHeSFapQgWQHWc4sYjM420DgvW2XO4Juf7elgS2BcnKN3Wae4jpmkWMpsvi9baEP8kEC
+	FZXQ==
+X-Gm-Message-State: AKaTC01HgT/qBkD1E9Y59OBFkD5ZjAWLDdVwvfzuPc0u5eeuxp+4gHV+P2u/EsFrHnMSYbKwW00asKU4s0xjOQ==
+X-Received: by 10.31.234.199 with SMTP id i190mr31329415vkh.31.1481323536431; 
+	Fri, 09 Dec 2016 14:45:36 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20161203030422.17285-4-raj.khem@gmail.com>
-User-Agent: Mutt/1.7.2 (2016-11-26)
-Subject: Re: [meta-oe][PATCH 4/8] libmng: Add recipe
+Received: by 10.159.48.87 with HTTP; Fri, 9 Dec 2016 14:45:06 -0800 (PST)
+In-Reply-To: <20161209214009.GD3327@jama>
+References: <20161203030422.17285-1-raj.khem@gmail.com>
+	<20161203030422.17285-8-raj.khem@gmail.com>
+	<20161209214009.GD3327@jama>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 9 Dec 2016 14:45:06 -0800
+Message-ID: <CAMKF1soVFpteff3kiioqiRb7FSWsTtWkzYDswiKd6MpMEi6XtQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 8/8] loop-aes: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,82 +53,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2016 21:42:05 -0000
-X-Groupsio-MsgNum: 64278
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="xs+9IvWevLaxKUtW"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 09 Dec 2016 22:45:36 -0000
+Content-Type: text/plain; charset=UTF-8
 
---xs+9IvWevLaxKUtW
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Fri, Dec 9, 2016 at 1:40 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Fri, Dec 02, 2016 at 07:04:22PM -0800, Khem Raj wrote:
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ---
+>>  meta-oe/recipes-support/loop-aes/loop-aes_v3.7j.bb | 22 ++++++++++++++++++++++
+>>  1 file changed, 22 insertions(+)
+>>  create mode 100644 meta-oe/recipes-support/loop-aes/loop-aes_v3.7j.bb
+>>
+>> diff --git a/meta-oe/recipes-support/loop-aes/loop-aes_v3.7j.bb b/meta-oe/recipes-support/loop-aes/loop-aes_v3.7j.bb
+>> new file mode 100644
+>> index 0000000..fa60c7b
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-support/loop-aes/loop-aes_v3.7j.bb
+>> @@ -0,0 +1,22 @@
+>> +SUMMARY = "Loop-aes - replacement for loop driver that can do aes encryption"
+>> +DESCRIPTION = "Fast and transparent file system and swap encryption package for \
+>> +               linux. No source code changes to linux kernel. Works with 3.x,\
+>> +               2.6, 2.4, 2.2 and 2.0 kernels."
+>> +HOMEPAGE = "http://sourceforge.net/projects/loop-aes/"
+>> +LICENSE = "GPL-2.0"
+>> +
+>> +LIC_FILES_CHKSUM = "file://aes-GPL.diff;md5=bf349af3486306c2e4d85de5b6fa3bb4"
+>> +
+>> +SRC_URI = "http://loop-aes.sourceforge.net/loop-AES/loop-AES-${PV}.tar.bz2"
+>> +SRC_URI[md5sum] = "335238a7cfd45f157935c59156533a05"
+>> +SRC_URI[sha256sum] = "67ede839d4cac657359c39b05eac46f6991054768a7e1096bef5b92edb3b8aba"
+>> +
+>> +inherit module
+>> +
+>> +S = "${WORKDIR}/loop-AES-${PV}"
+>> +
+>> +EXTRA_OEMAKE += "LINUX_SOURCE=${STAGING_KERNEL_DIR} INSTALL_MOD_PATH=${D} MODINST=n"
+>> +
+>> +do_install () {
+>> +     install -D -m 0655 loop.ko ${D}${base_libdir}/modules/${KERNEL_VERSION}/misc/loop.ko
+>
+> Please use 4 spaces when updating.
+>
 
-On Fri, Dec 02, 2016 at 07:04:18PM -0800, Khem Raj wrote:
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-graphics/libmng/libmng_2.0.3.bb | 22 +++++++++++++++++++=
-+++
->  1 file changed, 22 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/libmng/libmng_2.0.3.bb
+hmm ok
 
-gimp-2.8.18: gimp rdepends on libmng, but it isn't a build dependency,
-missing libmng in DEPENDS or PACKAGECONFIG? [build-deps]
+>> +}
+>
+> It conflicts with linux-yocto:
+> http://errors.yoctoproject.org/Errors/Details/112197/
 
->=20
-> diff --git a/meta-oe/recipes-graphics/libmng/libmng_2.0.3.bb b/meta-oe/re=
-cipes-graphics/libmng/libmng_2.0.3.bb
-> new file mode 100644
-> index 0000000..b176d09
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/libmng/libmng_2.0.3.bb
-> @@ -0,0 +1,22 @@
-> +# Copyright (C) 2016 Khem Raj <raj.khem@gmail.com>
-> +# Released under the MIT license (see COPYING.MIT for the terms)
-> +
-> +DESCRIPTION =3D "Development files for the Multiple-image Network Graphi=
-cs library"
-> +HOMEPAGE =3D "http://www.libmng.com/"
-> +LICENSE =3D "Zlib"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D32becdb8930f90eab219a8021130e=
-c09"
-> +SECTION =3D "devel"
-> +DEPENDS =3D "zlib lcms"
-> +
-> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/${BPN}/${P}.tar.gz"
-> +
-> +SRC_URI[md5sum] =3D "7e9a12ba2a99dff7e736902ea07383d4"
-> +SRC_URI[sha256sum] =3D "cf112a1fb02f5b1c0fce5cab11ea8243852c139e669c4401=
-4125874b14b7dfaa"
-> +
-> +inherit autotools-brokensep pkgconfig
-> +
-> +PACKAGECONFIG ??=3D "jpeg"
-> +
-> +PACKAGECONFIG[jpeg] =3D "--with-jpeg,--without-jpeg,libjpeg-turbo"
-> +PACKAGECONFIG[lcms] =3D "---with-lcms2,--without-lcms2,lcms"
-> +
-> --=20
-> 2.10.2
->=20
-> --=20
+it is supposed to conflict with kernels enabling loop device.
+
+>
+>> --
+>> 2.10.2
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
+> --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---xs+9IvWevLaxKUtW
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWEslLAAKCRA3VSO3ZXaA
-HLIGAKCNBwxxNzWoEJHnwQFBRKo5sASOuQCfWbIrOR971MxUhO81m6/eK4+vxkk=
-=v9j1
------END PGP SIGNATURE-----
-
---xs+9IvWevLaxKUtW--
