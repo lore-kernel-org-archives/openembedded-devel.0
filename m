@@ -1,48 +1,52 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f169.google.com (mail-ua0-f169.google.com
-	[209.85.217.169])
-	by mail.openembedded.org (Postfix) with ESMTP id CA93A71CB7;
-	Fri,  9 Dec 2016 13:02:03 +0000 (UTC)
-Received: by mail-ua0-f169.google.com with SMTP id 20so16585817uak.0;
-	Fri, 09 Dec 2016 05:02:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20120113;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=4MlcS6qUvhC/J9XYA2H9xezsNxkZ0FMl+FUlXClLmtU=;
-	b=pPLdCDgxqBVQlW5X+kh8zR9aPtcoSf1HEsw3V1ISaV2U+yrmld39OGHAnKE+O7djfi
-	EACgeh8OWr4gljZ8/LTRxHNe1biKEFKH4ao4YFsPKDaSv7oekzxeMlCsXOdlnNwFndy5
-	Q9AP9FCI8G/ZKgbP+8C6PwR7ZPlQt62xJEoJ04/M934WrLP0HIhNRnC4jrkW1uf7FfmB
-	XX//2GOCOM65/w5HWN8J3rzFFx9XrTx7hi6ojYRa9rFYz20HjGYnzz1NVhC51pYoVACa
-	b5T986s9B6dxXfRvJYN23Xg5uMo7Y8GNWQ3wUpz9qxiSuLqwZqMbMNrQWw4etJqXfSuB
-	DXbA==
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wj0-f194.google.com (mail-wj0-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id A795E71975
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  9 Dec 2016 21:40:09 +0000 (UTC)
+Received: by mail-wj0-f194.google.com with SMTP id he10so3987004wjc.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 09 Dec 2016 13:40:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=LfLwEHKeVB2+qgwew9JIP0t/sHhM/7m6cCKCm8A/l9Q=;
+	b=o97HPzHLQulIMK53zzSE0oOjCQzGUPVLAVvz/0jwVQkuranmCcYSiIFSH8VsFsW9VF
+	oDIeEuhZED7fI3WXcnnOxAxS9gTWfyp4X4SuuO7CAA5/QuK1fbgs70iP4b0Vf7O0E4g5
+	ElQzTt6vpERzz5FFq0MKB0h5hOOtIoYKDkH/Q9/HF1aORQ0uOpvr6/hatKqLhPgEnu6o
+	IVUPuzkoiWLel/yjWkwHKq2mrjzLm0FhHslSyt2F945PrSCZXAZ/JatHA+qTu08mdAmF
+	3xidoDnf/aYJL7XKvSi3TokHcC8SFaVjeNtrTVhp/IEA7rBXudl22c1Mg9kkwCU5znZv
+	z8Dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=4MlcS6qUvhC/J9XYA2H9xezsNxkZ0FMl+FUlXClLmtU=;
-	b=YZzeY/+DUWj2LUn7U6HsM4D8YZZyXxjvaVdT2VuGWJ7v/9r5uaBwehqiJIaXC4OAwy
-	Rps0BFQUJm+0jXn/iwLeDOYIqIQtnHmoFCBkxCTrF5JKA4tgu7cb/LIsRyonDOcg/I/B
-	0DQcWFtahqqCZqgLz65h5NPRDKU+o0szMDJRDeI3fxnDrIaMXkBbn+DRk30XL/IsvXhU
-	LVdIIQammEBlNy/7WPu7cQRsxqCzhJelUhoQcuX4r73v8QsQ7yxsK/HH3hHj242tNiE3
-	ZIQwWU4Omp/XlgxDVzXOs3+leaBvXhyLS2ceHV5FgW+AqBIP4g9QB+GO0zwncPJUCR5L
-	fQYQ==
-X-Gm-Message-State: AKaTC01DOoFYlD8Y4W8uMCYihm4iDyejl7LoHUlMgj/zagNyYz4dGmtd7z5XZA7aU2QNnSiNZoF6/wI3fTtFLQ==
-X-Received: by 10.176.84.147 with SMTP id p19mr15044978uaa.76.1481288524630;
-	Fri, 09 Dec 2016 05:02:04 -0800 (PST)
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=LfLwEHKeVB2+qgwew9JIP0t/sHhM/7m6cCKCm8A/l9Q=;
+	b=fNzeTDO9LwN4TvLxrUXTvkWnW3+l91DxaG89DAX0ijTDhuipELXiIcQs362ArtMQgG
+	aXmqAfgb5PglkilGDOt+Py277EWaj4aJyYfNoVLMVSdGm/0E5UOA6ro1GxmfV0Oaw9Ox
+	zHR6X7TfKIe1IEWH2w4rd3LnMVuuaIk1ARhVYHy5T7NjgKrNDE2NVaBk6bhDQQbbdTDN
+	ovPXPrNBDH95qVcktScPWaQEq6tPOzCRK8JCVEIV0s8PCu2rxidRGZML6cTcboLdstoR
+	O0Z+fAl6ct+V+I9hP1EWtrA0jq7fifmYx+tmzQaBOQ2GxUlPeEAaBRVHuVMrQgwid4wS
+	O3Mw==
+X-Gm-Message-State: AKaTC01ppPF7KOdDTlMUzBGJsUqE5xiADDrXm7X9QhS+6FjU1TTt88p7JQkf7GBNhJQ/yA==
+X-Received: by 10.194.96.110 with SMTP id dr14mr53226900wjb.209.1481319609928; 
+	Fri, 09 Dec 2016 13:40:09 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	z6sm44310645wjt.24.2016.12.09.13.40.08
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 09 Dec 2016 13:40:09 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 9 Dec 2016 22:40:09 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20161209214009.GD3327@jama>
+References: <20161203030422.17285-1-raj.khem@gmail.com>
+	<20161203030422.17285-8-raj.khem@gmail.com>
 MIME-Version: 1.0
-Received: by 10.176.85.157 with HTTP; Fri, 9 Dec 2016 05:02:03 -0800 (PST)
-In-Reply-To: <20161209124402.GB3327@jama>
-References: <20161209124402.GB3327@jama>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Fri, 9 Dec 2016 14:02:03 +0100
-Message-ID: <CALbNGRRLOOi7fEeXdevp1cC-JZuBbudQpghJfAFQYR9ieoiT3w@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2016-12-06
+In-Reply-To: <20161203030422.17285-8-raj.khem@gmail.com>
+User-Agent: Mutt/1.7.2 (2016-11-26)
+Subject: Re: [meta-oe][PATCH 8/8] loop-aes: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,83 +59,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2016 13:02:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 09 Dec 2016 21:40:19 -0000
+X-Groupsio-MsgNum: 64275
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="eheScQNz3K90DVRs"
+Content-Disposition: inline
+
+--eheScQNz3K90DVRs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 9, 2016 at 1:44 PM, Martin Jansa <martin.jansa@gmail.com> wrote=
-:
-> =3D=3D Number of issues - stats =3D=3D
-> {| class=3D'wikitable'
-> !|Date               !!colspan=3D'3'|Failed tasks                     !!c=
-olspan=3D'6'|Failed depencencies                    !!|Signatures          =
-  !!colspan=3D'12'|QA !!Comment
-> |-
-> ||              ||qemuarm       ||qemux86       ||qemux86_64    ||qemuarm=
-||max||min     ||qemux86||max||min     ||all   ||already-stripped      ||li=
-bdir        ||textrel       ||build-deps    ||file-rdeps    ||version-going=
--backwards       ||host-user-contaminated        ||installed-vs-shipped  ||=
-unknown-configure-option      ||symlink-to-sysroot    ||invalid-pkgconfig  =
-   ||pkgname       ||
-> |-
-> ||2016-12-06    ||6     ||7     ||6     ||13    ||6     ||6     ||15    |=
-|7     ||7     ||0     ||0             ||0             ||1             ||6 =
-            ||3             ||0             ||0             ||0            =
- ||0             ||0             ||0             ||0             ||
-> |}
->
-> http://www.openembedded.org/wiki/Bitbake_World_Status
->
-> =3D=3D Failed tasks 2016-12-06 =3D=3D
->
-> INFO: jenkins-job.sh-1.8.12 Complete log available at http://logs.nslu2-l=
-inux.org/buildlogs/oe/world/pyro/log.report.20161209_001246.log
->
-> =3D=3D=3D common (5) =3D=3D=3D
->     * meta-openembedded/meta-gnome/recipes-gnome/gnome-menus/gnome-menus3=
-_3.10.1.bb:do_configure
->     * meta-openembedded/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb:=
-do_configure
->     * meta-openembedded/meta-gnome/recipes-gnome/libwnck/libwnck3_3.20.1.=
-bb:do_configure
-^^ These three should be fixed with the patches you just applied to master-=
-next
->     * meta-openembedded/meta-multimedia/recipes-mediacenter/kodi/kodi_16.=
-bb:do_configure
->     * meta-openembedded/meta-xfce/recipes-xfce/exo/exo_0.11.1.bb:do_confi=
-gure
-^^ This one should be fixed by oe-core's pending patch 'liburi-perl:
-update to 1.71
->
-> =3D=3D=3D common-x86 (0) =3D=3D=3D
->
-> =3D=3D=3D qemuarm (1) =3D=3D=3D
->     * openembedded-core/meta/recipes-sato/webkit/webkitgtk_2.14.2.bb:do_c=
-ompile
->
-> =3D=3D=3D qemux86 (2) =3D=3D=3D
->     * meta-browser/recipes-browser/chromium/chromium_52.0.2743.76.bb:do_c=
-ompile
->     * meta-qt5/recipes-qt/qt5/qtwebengine_git.bb:do_compile
->
-> =3D=3D=3D qemux86_64 (1) =3D=3D=3D
->     * meta-openembedded/meta-oe/recipes-graphics/libvncserver/libvncserve=
-r_0.9.10.bb:do_compile
->
-> =3D=3D=3D Number of failed tasks (19) =3D=3D=3D
-> {| class=3Dwikitable
-> |-
-> || qemuarm      || 6     || http://logs.nslu2-linux.org/buildlogs/oe/worl=
-d/pyro/log.world.qemuarm.20161206_030245.log/ || http://errors.yoctoproject=
-.org/Errors/Build/25556/
-> |-
-> || qemux86      || 7     || http://logs.nslu2-linux.org/buildlogs/oe/worl=
-d/pyro/log.world.qemux86.20161206_052857.log/ || http://errors.yoctoproject=
-.org/Errors/Build/25561/
-> |-
-> || qemux86_64   || 6     || http://logs.nslu2-linux.org/buildlogs/oe/worl=
-d/pyro/log.world.qemux86-64.20161206_072352.log/ || http://errors.yoctoproj=
-ect.org/Errors/Build/25797/
-> |}
-Andreas
+On Fri, Dec 02, 2016 at 07:04:22PM -0800, Khem Raj wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-oe/recipes-support/loop-aes/loop-aes_v3.7j.bb | 22 ++++++++++++++++=
+++++++
+>  1 file changed, 22 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/loop-aes/loop-aes_v3.7j.bb
+>=20
+> diff --git a/meta-oe/recipes-support/loop-aes/loop-aes_v3.7j.bb b/meta-oe=
+/recipes-support/loop-aes/loop-aes_v3.7j.bb
+> new file mode 100644
+> index 0000000..fa60c7b
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/loop-aes/loop-aes_v3.7j.bb
+> @@ -0,0 +1,22 @@
+> +SUMMARY =3D "Loop-aes - replacement for loop driver that can do aes encr=
+yption"
+> +DESCRIPTION =3D "Fast and transparent file system and swap encryption pa=
+ckage for \
+> +               linux. No source code changes to linux kernel. Works with=
+ 3.x,\
+> +               2.6, 2.4, 2.2 and 2.0 kernels."
+> +HOMEPAGE =3D "http://sourceforge.net/projects/loop-aes/"
+> +LICENSE =3D "GPL-2.0"
+> +
+> +LIC_FILES_CHKSUM =3D "file://aes-GPL.diff;md5=3Dbf349af3486306c2e4d85de5=
+b6fa3bb4"
+> +
+> +SRC_URI =3D "http://loop-aes.sourceforge.net/loop-AES/loop-AES-${PV}.tar=
+=2Ebz2"
+> +SRC_URI[md5sum] =3D "335238a7cfd45f157935c59156533a05"
+> +SRC_URI[sha256sum] =3D "67ede839d4cac657359c39b05eac46f6991054768a7e1096=
+bef5b92edb3b8aba"
+> +
+> +inherit module
+> +
+> +S =3D "${WORKDIR}/loop-AES-${PV}"
+> +
+> +EXTRA_OEMAKE +=3D "LINUX_SOURCE=3D${STAGING_KERNEL_DIR} INSTALL_MOD_PATH=
+=3D${D} MODINST=3Dn"
+> +
+> +do_install () {
+> +     install -D -m 0655 loop.ko ${D}${base_libdir}/modules/${KERNEL_VERS=
+ION}/misc/loop.ko
 
+Please use 4 spaces when updating.
+
+> +}
+
+It conflicts with linux-yocto:
+http://errors.yoctoproject.org/Errors/Details/112197/
+
+> --=20
+> 2.10.2
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--eheScQNz3K90DVRs
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWEskuAAKCRA3VSO3ZXaA
+HH+2AJ9M1mXNjRaH8p6YjoTvMWMa6Ey80ACgkLGY1qJFvrWa3HU3eLVqU02iXQc=
+=3tsX
+-----END PGP SIGNATURE-----
+
+--eheScQNz3K90DVRs--
