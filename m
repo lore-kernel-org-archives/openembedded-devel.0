@@ -1,51 +1,52 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 91AB671CAA
+Received: from mail-wj0-f195.google.com (mail-wj0-f195.google.com
+	[209.85.210.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 0AA0B71975
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Dec 2016 21:41:19 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id m203so5882036wma.3
+	Fri,  9 Dec 2016 21:42:03 +0000 (UTC)
+Received: by mail-wj0-f195.google.com with SMTP id he10so3990924wjc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Dec 2016 13:41:21 -0800 (PST)
+	Fri, 09 Dec 2016 13:42:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:date:to:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=SrFz57SLg+RLl2gfmzxofTDHlRmiK6oV46OULKBXYTo=;
-	b=nTjJeHDYcIyD5Lm6bQauj3xNn2UKimrH3axQGA7dz4ETd/e0NOclP9ze+Q9Kgc0/L9
-	F47YU0nEzpY70ZTulBnne8hjoq1L5hp9KJ4fjSRS/j+LZLdZTAj7BbrCVzBHD4xp6zVJ
-	/+wYWR7xOl8IZdl70hOB7C/aXUAHfWdxTRmuI17S1Mwdt6YbHg4lfdEGU8tPFk6k+2kg
-	PmmhzJxUVJqqxSCW5g8TOLBPI5cOL1Bp+KTJ2YgZjuUmi8PE09LkqwZlLXuqDEraHeZk
-	KeCj6axDc+zDr7x0O2YZFrMXkNz+AuXrBMlkkOJw6LjrJUUUcogxKKAqa5T3Nd0MAs/x
-	l3HQ==
+	bh=NflwpRzA2MIGVF5JVUdawzYTdjX+dd+7dcPEWH8JQcM=;
+	b=rUrEQCGHQKw/HgnHhor+cJ4M5Dp66RaAdHDiKLLtkv5Lkd1T33bSgAY2RyYYModmjv
+	yhJWng/i4Nrn4xUoQmn5oLwHWeievpwvsbW7PgcLxrgs5YruQhA105DrWqLOnQl8Eul2
+	J5d0m6CrwY+UJch/OArxSSR9ykQq5ml7zkUVOKzu53gWMKesRWobdbzo3Bg9l6kbpfZe
+	5dM4aEaQVx3MrPhg0IXvxXXm9xrU2zWHU99QaAwGW3GvZ6goITXBAY4dI2vn0XKaG0C3
+	gt5FBumDhrSsj7V0fW/CRN/LiCo1BbaxmYHMh2s1E9TxfpI8JKKds6/g+hXITl4DNLt6
+	4aTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:date:to:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=SrFz57SLg+RLl2gfmzxofTDHlRmiK6oV46OULKBXYTo=;
-	b=T8WJaFtHBhQrYEmcRWB1mIepFiwBueoLy9jFCctiRrfPg163XevE3hzV6mDYwCk24i
-	pzTHVb13Qpk3oCcLju0YHxlkFLlNI3K/6dtmPIyfKHXhV+RPw9E9Xs7medM8lDYEb0q4
-	HhiqCdaTPmBlCfOzqEFNI/HMkuaIZpF13h7bsu4tck5eHYsVGAY+ZBtpMVg+ZeRiOAUl
-	FSLCtbIXRmDndIHtVrW3CcJopM7eV6q7GiXZZ20aJSDrn73gz857SJmBfHZfewT6LS/p
-	ADHC4dd7CWb1bpNTGihPt74X0AFJlsVS1c8AlngU5tWwmhdJ0uFZUM9yN+xmKvIGYYsE
-	Teiw==
-X-Gm-Message-State: AKaTC00UGMwMnB7fui4FlL4SgePmsLNs9COY1/XMgnFReif1y56zCY+95CotqyGO5is1LQ==
-X-Received: by 10.28.165.2 with SMTP id o2mr312029wme.38.1481319680631;
-	Fri, 09 Dec 2016 13:41:20 -0800 (PST)
+	bh=NflwpRzA2MIGVF5JVUdawzYTdjX+dd+7dcPEWH8JQcM=;
+	b=YcvN3D3P5zzPihlSWLAOTiuxAtjouysjD9vUOtjLvGOBY/C1qBw2l8EtY838mhF06f
+	5Q4vvMF6FwW/ieagRouD/tNV/IFGyuoPCFGN9yGchaWhErOMS4PD0hKlSwM7IaW1QEZQ
+	8WOFgLpKZVjlEvMFgiBUBRJnhkCOUXOS+hbZZE5pV+P8f2/FmjVT7hTsagq928DlE3U0
+	shxBkxKmNLgZj6s/HaQQY9NgdgW8Tb7wgPVez15//jEigaAFi3a2m3d3MXEpLVf9vXIA
+	BhWIoAe6zRXumWWRadvUUiggy0yALELOzx1tL7GPADSgyD1RwU1LrvXS+4iA5gMFY7HZ
+	B0eg==
+X-Gm-Message-State: AKaTC01XV+KUkEHnkDfa/owmYLYv0V9x7Uprg9OvB7BkQ7CGwlloKWi43rpwhoWKEyYZZg==
+X-Received: by 10.194.31.201 with SMTP id c9mr70349978wji.176.1481319724643;
+	Fri, 09 Dec 2016 13:42:04 -0800 (PST)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	ba10sm44283469wjb.32.2016.12.09.13.41.19
+	a13sm22640713wma.18.2016.12.09.13.42.03
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 09 Dec 2016 13:41:19 -0800 (PST)
+	Fri, 09 Dec 2016 13:42:03 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 9 Dec 2016 22:41:21 +0100
+Date: Fri, 9 Dec 2016 22:42:05 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161209214121.GF3327@jama>
-References: <20161206023625.12901-1-raj.khem@gmail.com>
-	<20161206023625.12901-3-raj.khem@gmail.com>
+Message-ID: <20161209214205.GG3327@jama>
+References: <20161203030422.17285-1-raj.khem@gmail.com>
+	<20161203030422.17285-4-raj.khem@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20161206023625.12901-3-raj.khem@gmail.com>
+In-Reply-To: <20161203030422.17285-4-raj.khem@gmail.com>
 User-Agent: Mutt/1.7.2 (2016-11-26)
-Subject: Re: [meta-oe][PATCH 5/7] liboop: Add recipe
+Subject: Re: [meta-oe][PATCH 4/8] libmng: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,56 +59,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2016 21:41:21 -0000
-X-Groupsio-MsgNum: 64277
+X-List-Received-Date: Fri, 09 Dec 2016 21:42:05 -0000
+X-Groupsio-MsgNum: 64278
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="RE3pQJLXZi4fr8Xo"
+	protocol="application/pgp-signature"; boundary="xs+9IvWevLaxKUtW"
 Content-Disposition: inline
 
---RE3pQJLXZi4fr8Xo
+--xs+9IvWevLaxKUtW
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 05, 2016 at 06:36:23PM -0800, Khem Raj wrote:
-> liboop is needed by ruli
-
-liboop-1.0: liboop rdepends on readline, but it isn't a build dependency, m=
-issing readline in DEPENDS or PACKAGECONFIG? [build-deps]
-liboop-1.0: liboop rdepends on libpcre, but it isn't a build dependency, mi=
-ssing libpcre in DEPENDS or PACKAGECONFIG? [build-deps]
-liboop-1.0: liboop rdepends on glib-2.0, but it isn't a build dependency, m=
-issing glib-2.0 in DEPENDS or PACKAGECONFIG? [build-deps]
-
->=20
+On Fri, Dec 02, 2016 at 07:04:18PM -0800, Khem Raj wrote:
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
->  meta-oe/recipes-support/liboop/liboop_1.0.bb | 11 +++++++++++
->  1 file changed, 11 insertions(+)
->  create mode 100644 meta-oe/recipes-support/liboop/liboop_1.0.bb
+>  meta-oe/recipes-graphics/libmng/libmng_2.0.3.bb | 22 +++++++++++++++++++=
++++
+>  1 file changed, 22 insertions(+)
+>  create mode 100644 meta-oe/recipes-graphics/libmng/libmng_2.0.3.bb
+
+gimp-2.8.18: gimp rdepends on libmng, but it isn't a build dependency,
+missing libmng in DEPENDS or PACKAGECONFIG? [build-deps]
+
 >=20
-> diff --git a/meta-oe/recipes-support/liboop/liboop_1.0.bb b/meta-oe/recip=
-es-support/liboop/liboop_1.0.bb
+> diff --git a/meta-oe/recipes-graphics/libmng/libmng_2.0.3.bb b/meta-oe/re=
+cipes-graphics/libmng/libmng_2.0.3.bb
 > new file mode 100644
-> index 0000000..1af228e
+> index 0000000..b176d09
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/liboop/liboop_1.0.bb
-> @@ -0,0 +1,11 @@
-> +DESCRIPTION =3D "Liboop is a low-level event loop management library for=
- POSIX-based operating systems"
-> +HOMEPAGE =3D "http://liboop.org/"
-> +LICENSE =3D "GPL-2.0"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D8b54f38ccbd44feb80ab90e01af8b=
-700"
+> +++ b/meta-oe/recipes-graphics/libmng/libmng_2.0.3.bb
+> @@ -0,0 +1,22 @@
+> +# Copyright (C) 2016 Khem Raj <raj.khem@gmail.com>
+> +# Released under the MIT license (see COPYING.MIT for the terms)
 > +
-> +SRC_URI =3D "http://ftp.debian.org/debian/pool/main/libo/liboop/liboop_$=
-{PV}.orig.tar.gz"
+> +DESCRIPTION =3D "Development files for the Multiple-image Network Graphi=
+cs library"
+> +HOMEPAGE =3D "http://www.libmng.com/"
+> +LICENSE =3D "Zlib"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D32becdb8930f90eab219a8021130e=
+c09"
+> +SECTION =3D "devel"
+> +DEPENDS =3D "zlib lcms"
 > +
-> +SRC_URI[md5sum] =3D "36cb971047d3af02369446f5e0b315a2"
-> +SRC_URI[sha256sum] =3D "34d83c6e0f09ee15cb2bc3131e219747c3b612bb57cf7d25=
-318ab90da9a2d97c"
+> +SRC_URI =3D "${SOURCEFORGE_MIRROR}/${BPN}/${P}.tar.gz"
 > +
-> +inherit autotools pkgconfig
+> +SRC_URI[md5sum] =3D "7e9a12ba2a99dff7e736902ea07383d4"
+> +SRC_URI[sha256sum] =3D "cf112a1fb02f5b1c0fce5cab11ea8243852c139e669c4401=
+4125874b14b7dfaa"
+> +
+> +inherit autotools-brokensep pkgconfig
+> +
+> +PACKAGECONFIG ??=3D "jpeg"
+> +
+> +PACKAGECONFIG[jpeg] =3D "--with-jpeg,--without-jpeg,libjpeg-turbo"
+> +PACKAGECONFIG[lcms] =3D "---with-lcms2,--without-lcms2,lcms"
+> +
 > --=20
 > 2.10.2
 >=20
@@ -120,15 +126,15 @@ es-support/liboop/liboop_1.0.bb
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---RE3pQJLXZi4fr8Xo
+--xs+9IvWevLaxKUtW
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWEslAAAKCRA3VSO3ZXaA
-HBloAJ4pE6YJ2QSL+47k7us8ptXz6pSbMACeNjXy8zDo301SPOQ1SqSAyv63w8g=
-=xuQN
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWEslLAAKCRA3VSO3ZXaA
+HLIGAKCNBwxxNzWoEJHnwQFBRKo5sASOuQCfWbIrOR971MxUhO81m6/eK4+vxkk=
+=v9j1
 -----END PGP SIGNATURE-----
 
---RE3pQJLXZi4fr8Xo--
+--xs+9IvWevLaxKUtW--
