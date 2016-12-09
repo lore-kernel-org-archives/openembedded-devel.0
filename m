@@ -1,58 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id E2EA871CE7
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Dec 2016 11:09:04 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id m203so3286236wma.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Dec 2016 03:09:06 -0800 (PST)
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 7327C7199A;
+	Fri,  9 Dec 2016 12:44:01 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id a20so3841389wme.2;
+	Fri, 09 Dec 2016 04:44:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=NxRQbdhA+7p5o540TufPIQbuTcu/aKzG2gZ6C9R7CgU=;
-	b=fl6xbX+60JbjWKpo8HEyXpQt+m+sxnlow6eM9PtxM2XuX4ZLiW/J29W1MV6kJm5WKE
-	MEpiVFAdDo6pelaGxg0k2KbjKq6uYIPZ6b3YnzonIgRHS2jQc5cdwXQ6E1/VFgh0YJPM
-	0xrx395sU1FuPqj/VKzwKjJT/n9J1SLozZc+e9YN8/iysEYswhDCIRPJXZ83g+6uJjqs
-	7e/iyy5nabplYWkm2TQr7/WI9yZ2oeZWyqkdi3So15UA+aLJZ4LXIpmFXU5oDqVi1fLl
-	JmC17AxWScvRduJhb1oKj7rg3BFYh6q1ZLP73ijbnWCtbCl88tCkoDGH4H+CfJA2q2hf
-	A9Jg==
+	h=from:date:to:subject:message-id:mime-version:content-disposition
+	:user-agent; bh=pcQYX9DPdSO6vLZEOzx3ItTD+8FhhB4xpgGiU5mm9M0=;
+	b=b+yoY9juLtTc8FzU14+I70kcBSzDXnj+G+PZtYg8qVKYJpr5E7ztuv7aKTlX8Gidvm
+	sGyk8RAWU6yRVpIBctvljLB0LTa4O43zjukg1/6h0rh8JME0T/KN6MUgcxxbFd7gVv4k
+	TvbKKSH9NETz5BYTV3QHhVwbK+Y8DXafxL19jg01NxOAT7x+FENU/qHsTqg5Tb/ecobx
+	EB56aXyCV9ddxoci2S5DmXAsKgCTTiPyoggm0edTi++7dh3NuDzWoJywNfRJhWyHUk+f
+	zJtqf2wl7V8B0eAXS3ozzyREJ5l5sbiebvIrswFdwpgy/ws6FR5xQNA3yO2VIJG80v0i
+	Pxgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=NxRQbdhA+7p5o540TufPIQbuTcu/aKzG2gZ6C9R7CgU=;
-	b=Q8KPFgzI5VhFcHknBpZp+j2hLQ2hI80ylMUl8AITGMuv3uqLmnVf9Mnm+1JxQXTTXI
-	SdV561N5/5wcfgHMYe/vjyPLjnKRj3bLy8bVl0+fGZWoKu9MRXtvxMrPoxfAVdA5E36w
-	/YiPTnWmfKEdNIBiGQ/bVn3xbW8pz9vKNFiXURBpNusPQNF2ktKJVooEBmdxFdtHDC5x
-	kLU0tLvbSmejziBEfIgxTWQOrG2RQYnkCZYl99vmDKg+nsbE+n0GJwaFOcKYoBFQyUNS
-	IVR/xljCkh+0I0PF+/LIPwQ2QSDfhBySgcJGEvn0naqrVOp+rgAutVYwdm53h+c3R2Yx
-	qdww==
-X-Gm-Message-State: AKaTC03pojvNYnPUMMjJ6DIY4BxcSDmn91NPXid3lMS9yHjqLX/GCmb58J6DD0hBFUcMgg==
-X-Received: by 10.28.168.70 with SMTP id r67mr6097464wme.19.1481281745491;
-	Fri, 09 Dec 2016 03:09:05 -0800 (PST)
+	h=x-gm-message-state:from:date:to:subject:message-id:mime-version
+	:content-disposition:user-agent;
+	bh=pcQYX9DPdSO6vLZEOzx3ItTD+8FhhB4xpgGiU5mm9M0=;
+	b=HJiwcNYd4RdjIrt0lbCIM8vnNkD2KW4XxHGXA+1HPOkbUZt3GfwOAwhbu2nqtmuIgx
+	Fo5HKwfX4KfbfNYsaztiaHAQ0Lu+eJKKQpd6k6wBbUEVEGPE7k7Db7OTvfZP5cMatzw0
+	REBU6bPiYN+KWej4EeUB1qbwJez2NVCxCVXWsyDpxiIX9a7CcDAShEJfHfdGrnSDzzDA
+	UVRx8Uc6hvTmeDlI63POoontkghlFyRTKhiac8Eu9+dbzlwjVYsONpgCgRCRgp9nPTxH
+	gxn+xBK9jVf5Ls5zyNtq5EtalqEdKogy4R3kSC8E/NJBw8rjPziKdAjE4jR4Hv1uaDF4
+	lDbQ==
+X-Gm-Message-State: AKaTC00m67wZI229NVCxI/5/hid/KubQEDKhxUT7D+icoQJ5bXxg4X/R2JBBE68FDU5bJA==
+X-Received: by 10.28.232.16 with SMTP id f16mr6498840wmh.103.1481287442543;
+	Fri, 09 Dec 2016 04:44:02 -0800 (PST)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	e5sm20022340wma.12.2016.12.09.03.09.04
+	g17sm42189849wjs.38.2016.12.09.04.44.01
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 09 Dec 2016 03:09:04 -0800 (PST)
+	Fri, 09 Dec 2016 04:44:01 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 9 Dec 2016 12:09:05 +0100
-To: Jose Lamego <jose.a.lamego@linux.intel.com>
-Message-ID: <20161209110905.GA3327@jama>
-References: <4717571.f7GXZOAcRz@peggleto-mobl.ger.corp.intel.com>
-	<20161129204327.GG2546@bill-the-cat>
-	<d93f4841-0154-2232-1802-2b8fcc85a81c@linux.intel.com>
-	<19E9BF3F-664F-42A4-A170-5B7BB473ED80@gmail.com>
-	<53ca2ead-1b75-ff6d-30c1-abb16330bad3@linux.intel.com>
-	<20161202083009.GB3721@jama> <20161202122923.GI2546@bill-the-cat>
-	<3a262190-a720-7901-5ab0-8023ecf2521f@linux.intel.com>
+Date: Fri, 9 Dec 2016 13:44:02 +0100
+To: openembedded-core@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20161209124402.GB3327@jama>
 MIME-Version: 1.0
-In-Reply-To: <3a262190-a720-7901-5ab0-8023ecf2521f@linux.intel.com>
 User-Agent: Mutt/1.7.2 (2016-11-26)
-Cc: Patrick Ohly <patrick.ohly@intel.com>,
-	openembedded-devel@lists.openembedded.org,
-	Michael Halstead <michael@yoctoproject.org>
-Subject: Re: meta-openembedded patchwork git hook
+Subject: State of bitbake world, Failed tasks 2016-12-06
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,231 +52,684 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2016 11:09:05 -0000
-X-Groupsio-MsgNum: 64272
+X-List-Received-Date: Fri, 09 Dec 2016 12:44:03 -0000
+X-Groupsio-MsgNum: 64273
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ReaqsoxgOBHFXBhH"
+	protocol="application/pgp-signature"; boundary="H+4ONPRPur6+Ovig"
 Content-Disposition: inline
 
---ReaqsoxgOBHFXBhH
+--H+4ONPRPur6+Ovig
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 02, 2016 at 09:45:22AM -0600, Jose Lamego wrote:
-> I'm looking into this right now. I've filed a bug for tracking:
-> https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D10759
+=3D=3D Number of issues - stats =3D=3D
+{| class=3D'wikitable'
+!|Date		     !!colspan=3D'3'|Failed tasks			    !!colspan=3D'6'|Failed depe=
+ncencies			 !!|Signatures		  !!colspan=3D'12'|QA !!Comment
+|-
+||		||qemuarm	||qemux86	||qemux86_64	||qemuarm||max||min	||qemux86||max||mi=
+n	||all 	||already-stripped	||libdir	||textrel	||build-deps	||file-rdeps	||=
+version-going-backwards	||host-user-contaminated	||installed-vs-shipped	||u=
+nknown-configure-option	||symlink-to-sysroot	||invalid-pkgconfig	||pkgname	=
+||=09
+|-
+||2016-12-06	||6	||7	||6	||13	||6	||6	||15	||7	||7	||0	||0		||0		||1		||6		=
+||3		||0		||0		||0		||0		||0		||0		||0		||=09
+|}
 
-This bug is already closed, but it still doesn't work, where is that
-separate ticket?
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-It still doesn't work for meta-oe and for some reason it's also much
-slower than it used to.
+=3D=3D Failed tasks 2016-12-06 =3D=3D
 
-Took couple minutes to push just a few changes today and no patch was
-updated on patchwork by the git hook, it used to take less than 1 minute.
+INFO: jenkins-job.sh-1.8.12 Complete log available at http://logs.nslu2-lin=
+ux.org/buildlogs/oe/world/pyro/log.report.20161209_001246.log
 
-OE @ ~/meta-openembedded $ git push origin master
-Counting objects: 190, done.
-Delta compression using up to 8 threads.
-Compressing objects: 100% (163/163), done.
-Writing objects: 100% (190/190), 23.37 KiB | 0 bytes/s, done.
-Total 190 (delta 122), reused 11 (delta 7)
-remote: E: failed to find patch for rev 5f85256b46ba2d89bf27f9d3edd607c4b59=
-cf389.
-remote: E: failed to find patch for rev 142faee1734300a041fe16265cb63cd17fb=
-742ae.
-remote: E: failed to find patch for rev 3237c650e79c9046d0e1b94568a45d5c687=
-6dbd2.
-remote: E: failed to find patch for rev 9aace0c5667ab910078cfdd1e388e386f10=
-6c074.
-remote: E: failed to find patch for rev a1bdd5f40e15312bb4891cfa2e0d67d5900=
-51d00.
-remote: E: failed to find patch for rev 3d998f3745b90c6b4db5eaa739e4f976b5d=
-5eef2.
-remote: E: failed to find patch for rev 9cd05c16510cb0b6a09f72e5c7488d021a5=
-5440b.
-remote: E: failed to find patch for rev 4fc06fd23709e77a5ee05b1f0fde57d410f=
-caba6.
-remote: E: failed to find patch for rev cfde74c9dbe8eed65f430334b071aeba662=
-0882d.
-remote: E: failed to find patch for rev 6e0c24e9b3f9d430dec57f61f8c12c74bca=
-5375d.
-remote: E: failed to find patch for rev 9d40291916136ed3c4480102708e75d81cc=
-77ef1.
-remote: E: failed to find patch for rev 336692f24b5ac6c39b65ff3cb971d7bd353=
-ea4e5.
-remote: E: failed to find patch for rev 58ff22a356f8003720ca9fe13749744a2bd=
-02d98.
-remote: E: failed to find patch for rev f44e54116e0c1240aa3d1f1ac0ec098a342=
-764f5.
-remote: E: failed to find patch for rev 00f04936eb6d4eb3ae9b0102f87ca3265ce=
-80bf1.
-remote: E: failed to find patch for rev a838527ccfb33716ce7ff2c4b97c0beb13d=
-4e654.
-remote: E: failed to find patch for rev a749fbc3732f469ee0ec3e36275fb7e8fe6=
-ebd19.
-remote: E: failed to find patch for rev 84597e39c734032a3b84f2ab46c35ba88b0=
-6cdf3.
-remote: E: failed to find patch for rev a541eb88e4dabf506ff2b6c07e7ca19d34a=
-316d7.
-remote: E: failed to find patch for rev 4bb23bc4c444c79052ca6e79e5799d4c5db=
-1e6da.
-remote: E: failed to find patch for rev 6a8d57c0b7e243a22730f637295d620d08b=
-975e0.
-remote: E: failed to find patch for rev 39a71692eb686f6bf694969d2d068f55294=
-846fa.
-remote: E: failed to find patch for rev 13611ae96c9b2fab928eb794415f5bec633=
-1abb2.
-remote: E: failed to find patch for rev d356e03ced0873a0fe1a7a69cb05ee803e3=
-63888.
-remote: E: failed to find patch for rev 1b73d2c713938f10931749ece3a703ad900=
-4376a.
-remote: E: failed to find patch for rev f5a5a84d5c551a3b1daa2c8092279fbed9a=
-be54f.
-remote: E: failed to find patch for rev 8ea8fff79c91c985884859eca49769379e0=
-6c313.
-remote: E: failed to find patch for rev 3aac48c722fa836e04e95a495d758b8ee0d=
-0cdda.
-remote: E: failed to find patch for rev d83612a1e750b98b1c537fada777d615d9d=
-6628a.
-remote: E: failed to find patch for rev d9b5870edaddee69612dada2aa4bc2d8c3f=
-70f44.
-remote: I: 0 patch(es) updated to state Accepted.
-remote: Sending notification emails to: openembedded-commits@lists.openembe=
-dded.org.
-To git.openembedded.org:meta-openembedded
-   18d518a..d9b5870  master -> master
+=3D=3D=3D common (5) =3D=3D=3D
+    * meta-openembedded/meta-gnome/recipes-gnome/gnome-menus/gnome-menus3_3=
+=2E10.1.bb:do_configure
+    * meta-openembedded/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb:do=
+_configure
+    * meta-openembedded/meta-gnome/recipes-gnome/libwnck/libwnck3_3.20.1.bb=
+:do_configure
+    * meta-openembedded/meta-multimedia/recipes-mediacenter/kodi/kodi_16.bb=
+:do_configure
+    * meta-openembedded/meta-xfce/recipes-xfce/exo/exo_0.11.1.bb:do_configu=
+re
 
+=3D=3D=3D common-x86 (0) =3D=3D=3D
 
->=20
->=20
-> On 12/02/2016 06:29 AM, Tom Rini wrote:
-> > On Fri, Dec 02, 2016 at 09:30:09AM +0100, Martin Jansa wrote:
-> >> On Wed, Nov 30, 2016 at 12:41:20PM -0600, Jose Lamego wrote:
-> >>>
-> >>>
-> >>> On 11/29/2016 07:50 PM, Khem Raj wrote:
-> >>>>
-> >>>>> On Nov 29, 2016, at 2:34 PM, Jose Lamego <jose.a.lamego@linux.intel=
-=2Ecom> wrote:
-> >>>>>
-> >>>>>
-> >>>>>
-> >>>>> On 11/29/2016 02:43 PM, Tom Rini wrote:
-> >>>>>> On Wed, Nov 30, 2016 at 06:52:46AM +1300, Paul Eggleton wrote:
-> >>>>>>
-> >>>>>>> Hi folks,
-> >>>>>>>
-> >>>>>>> Martin just brought to my attention that the git hook for the=20
-> >>>>>>> meta-openembedded repository that's supposed to update patchwork =
-still isn't=20
-> >>>>>>> working and hasn't done so for a very long time. I thought we'd f=
-ixed this so=20
-> >>>>>>> that merged patches get marked as "Accepted", but at least for me=
-ta-
-> >>>>>>> openembedded it seems like that's not the case.
-> >>>>>>>
-> >>>>>>> Jose / Michael - can you look into this if you haven't already? P=
-lease let me=20
-> >>>>>>> know if you need any help.
-> >>>>>
-> >>>>> The git hook was configured to update OE-core only, Michael will he=
-lp us
-> >>>>> to include meta-openembedded.
-> >>>>>
-> >>>>
-> >>>> There are more repos using patchwork beyond OE-core and meta-opemebe=
-dded
-> >>>> please enable it for all of them  as well.
-> >>>>
-> >>>
-> >>> Now all of the projects are enabled to receive automatic updates from
-> >>> the git-hook (Thanks Michael). Please let me know if any undesired
-> >>> behavior is detected.
-> >>
-> >> Still doesn't mark anything as accepted:
-> >>
-> >> OE @ ~/meta-openembedded $ git push origin master
-> >> Counting objects: 293, done.
-> >> Delta compression using up to 8 threads.
-> >> Compressing objects: 100% (257/257), done.
-> >> Writing objects: 100% (293/293), 48.83 KiB | 0 bytes/s, done.
-> >> Total 293 (delta 179), reused 68 (delta 18)
-> >> remote: E: failed to find patch for rev efd3696e70a6603f1a45faa4a17243=
-3514f0a487.
-> >> remote: E: failed to find patch for rev 8c720146b718aae3bc194621f3e095=
-cf11ecb2ed.
-> >> remote: E: failed to find patch for rev fc2fc9097b2fa437d4af0338e41869=
-2b4dd6c989.
-> >> remote: E: failed to find patch for rev 533826b7652a2cf86ca7b665c25b98=
-c89afc266e.
-> >> remote: E: failed to find patch for rev 6afb85d29286aaa4cdd892460f6adf=
-68912917a5.
-> >> remote: E: failed to find patch for rev a7f3ec87f957ff35b8a853cd0e04c6=
-b18bac0ece.
-> >> remote: E: failed to find patch for rev 877e52fd75c7d3b88add94691df3be=
-b5e0c54529.
-> >> remote: E: failed to find patch for rev 2f6e45baba961629bfe023599144be=
-6cfcd45728.
-> >> remote: E: failed to find patch for rev 86fed80d80bc33f0a3cdbf719c00ee=
-5f05ed4d19.
-> >> remote: E: failed to find patch for rev 41d7bac5d50091cab835eac0a5eaa6=
-c431fb2023.
-> >> remote: E: failed to find patch for rev a85e12928131fce057f777daa76a7f=
-0c75cffa14.
-> >> remote: E: failed to find patch for rev 45837e6c567b1b9ff9d152a7e2a752=
-488d313455.
-> >> remote: E: failed to find patch for rev 119e75e48dbf0539b4e44041790145=
-8ffff79b38.
-> >> remote: E: failed to find patch for rev a4251575f41fa5aafe5072e562497b=
-05c11b6702.
-> >> remote: E: failed to find patch for rev b6ea2c0bacb21b83bae3605ef4da08=
-0de0cad15e.
-> >> remote: E: failed to find patch for rev 4580e5ae201b320ed407eae26f5865=
-5b8768b387.
-> >> remote: E: failed to find patch for rev c476219e845934f767927e81fe60db=
-aa157df9ee.
-> >> remote: E: failed to find patch for rev 0288b204f3c12af1561218fa0cfcdf=
-b9a5508b47.
-> >> remote: E: failed to find patch for rev 5596b52d64c30d8e66ec6e379cf69a=
-9fc9407fb1.
-> >> remote: E: failed to find patch for rev 24e51a6a106bc10a8838b23e4bf9ea=
-6304314bca.
-> >> remote: E: failed to find patch for rev aac6bf8bf911c3f14ff9dce08f0f01=
-1838f5a426.
-> >> remote: I: 0 patch(es) updated to state Accepted.
-> >> remote: Sending notification emails to: openembedded-commits@lists.ope=
-nembedded.org.
-> >> To git.openembedded.org:meta-openembedded
-> >>    761639b..aac6bf8  master -> master
-> >=20
-> > I don't know how far apart the freedesktop.org one is from ozlabs but
-> > when I was seeing that problem locally as part of what I was working on
-> > it was because of some missing host deps (that are now not required).
-> > FWIW you can pretty easily turn the hook into a script to run manually
-> > and sh -x it to see _why_ it's not hashing out those patches.
-> >=20
->=20
-> --=20
-> Jose Lamego | OTC Embedded Platforms & Tools | GDC
->=20
+=3D=3D=3D qemuarm (1) =3D=3D=3D
+    * openembedded-core/meta/recipes-sato/webkit/webkitgtk_2.14.2.bb:do_com=
+pile
+
+=3D=3D=3D qemux86 (2) =3D=3D=3D
+    * meta-browser/recipes-browser/chromium/chromium_52.0.2743.76.bb:do_com=
+pile
+    * meta-qt5/recipes-qt/qt5/qtwebengine_git.bb:do_compile
+
+=3D=3D=3D qemux86_64 (1) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-graphics/libvncserver/libvncserver_=
+0.9.10.bb:do_compile
+
+=3D=3D=3D Number of failed tasks (19) =3D=3D=3D
+{| class=3Dwikitable
+|-
+|| qemuarm 	|| 6	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/lo=
+g.world.qemuarm.20161206_030245.log/ || http://errors.yoctoproject.org/Erro=
+rs/Build/25556/
+|-
+|| qemux86 	|| 7	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/lo=
+g.world.qemux86.20161206_052857.log/ || http://errors.yoctoproject.org/Erro=
+rs/Build/25561/
+|-
+|| qemux86_64 	|| 6	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro=
+/log.world.qemux86-64.20161206_072352.log/ || http://errors.yoctoproject.or=
+g/Errors/Build/25797/
+|}
+=3D=3D=3D PNBLACKLISTs (115) =3D=3D=3D
+
+=3D=3D=3D QA issues (10) =3D=3D=3D
+{| class=3Dwikitable
+!| Count		||Issue
+|-
+||0	||already-stripped
+|-
+||0	||host-user-contaminated
+|-
+||0	||installed-vs-shipped
+|-
+||0	||invalid-pkgconfig
+|-
+||0	||libdir
+|-
+||0	||pkgname
+|-
+||0	||symlink-to-sysroot
+|-
+||0	||unknown-configure-option
+|-
+||0	||version-going-backwards
+|-
+||1	||textrel
+|-
+||3	||file-rdeps
+|-
+||6	||build-deps
+|}
 
 
 
+=3D=3D=3D Failed dependencies for qemuarm (13) =3D=3D=3D
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.depen=
+dencies.qemuarm.20161206_053217.log/
+Found differences:=20
+Found errors:=20
+    * ERROR: 13 issues were found in these recipes: exo gnome-menus3 gthumb=
+ kodi libwnck3 webkitgtk
 
---ReaqsoxgOBHFXBhH
+=3D=3D=3D Recipes failing with maximal dependencies for qemuarm (6) =3D=3D=
+=3D
+    * exo -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.depend=
+encies.qemuarm.20161206_053217.log//2_max/failed/exo.log
+    * gnome-menus3 -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/l=
+og.dependencies.qemuarm.20161206_053217.log//2_max/failed/gnome-menus3.log
+    * gthumb -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.dep=
+endencies.qemuarm.20161206_053217.log//2_max/failed/gthumb.log
+    * kodi -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.depen=
+dencies.qemuarm.20161206_053217.log//2_max/failed/kodi.log
+    * libwnck3 -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.d=
+ependencies.qemuarm.20161206_053217.log//2_max/failed/libwnck3.log
+    * webkitgtk -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.=
+dependencies.qemuarm.20161206_053217.log//2_max/failed/webkitgtk.log
+
+=3D=3D=3D Recipes failing with minimal dependencies for qemuarm (6) =3D=3D=
+=3D
+    * exo -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.depend=
+encies.qemuarm.20161206_053217.log//3_min/failed/exo.log
+    * gnome-menus3 -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/l=
+og.dependencies.qemuarm.20161206_053217.log//3_min/failed/gnome-menus3.log
+    * gthumb -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.dep=
+endencies.qemuarm.20161206_053217.log//3_min/failed/gthumb.log
+    * kodi -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.depen=
+dencies.qemuarm.20161206_053217.log//3_min/failed/kodi.log
+    * libwnck3 -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.d=
+ependencies.qemuarm.20161206_053217.log//3_min/failed/libwnck3.log
+    * webkitgtk -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.=
+dependencies.qemuarm.20161206_053217.log//3_min/failed/webkitgtk.log
+
+=3D=3D=3D Failed dependencies for qemux86 (15) =3D=3D=3D
+
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.depen=
+dencies.qemux86.20161207_005413.log/
+Found differences:=20
+Found errors:=20
+    * ERROR: 15 issues were found in these recipes: chromium exo gnome-menu=
+s3 gthumb kodi libwnck3 qtwebengine
+
+=3D=3D=3D Recipes failing with maximal dependencies for qemux86 (7) =3D=3D=
+=3D
+    * chromium -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.d=
+ependencies.qemux86.20161207_005413.log//2_max/failed/chromium.log
+    * exo -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.depend=
+encies.qemux86.20161207_005413.log//2_max/failed/exo.log
+    * gnome-menus3 -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/l=
+og.dependencies.qemux86.20161207_005413.log//2_max/failed/gnome-menus3.log
+    * gthumb -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.dep=
+endencies.qemux86.20161207_005413.log//2_max/failed/gthumb.log
+    * kodi -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.depen=
+dencies.qemux86.20161207_005413.log//2_max/failed/kodi.log
+    * libwnck3 -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.d=
+ependencies.qemux86.20161207_005413.log//2_max/failed/libwnck3.log
+    * qtwebengine -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/lo=
+g.dependencies.qemux86.20161207_005413.log//2_max/failed/qtwebengine.log
+
+=3D=3D=3D Recipes failing with minimal dependencies for qemux86 (7) =3D=3D=
+=3D
+    * chromium -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.d=
+ependencies.qemux86.20161207_005413.log//3_min/failed/chromium.log
+    * exo -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.depend=
+encies.qemux86.20161207_005413.log//3_min/failed/exo.log
+    * gnome-menus3 -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/l=
+og.dependencies.qemux86.20161207_005413.log//3_min/failed/gnome-menus3.log
+    * gthumb -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.dep=
+endencies.qemux86.20161207_005413.log//3_min/failed/gthumb.log
+    * kodi -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.depen=
+dencies.qemux86.20161207_005413.log//3_min/failed/kodi.log
+    * libwnck3 -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.d=
+ependencies.qemux86.20161207_005413.log//3_min/failed/libwnck3.log
+    * qtwebengine -- http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/lo=
+g.dependencies.qemux86.20161207_005413.log//3_min/failed/qtwebengine.log
+
+=3D=3D=3D Incorrect PACKAGE_ARCH or sstate signatures (0) =3D=3D=3D
+
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.signa=
+tures.20161206_113106.log/
+
+No issues detected
+
+
+PNBLACKLISTs:
+openembedded-core/:
+meta-browser:
+recipes-browser/chromium/cef3_280796.bb:PNBLACKLIST[cef3] ?=3D "BROKEN: fai=
+ls to build with gcc-6"
+meta-openembedded:
+meta-efl/recipes-efl/e17/diskio_svn.bb:PNBLACKLIST[diskio] ?=3D "broken: sw=
+itch to https://git.enlightenment.org/enlightenment/modules/diskio.git/ and=
+ fix 0.0.1+svnr82070-r0.0/E-MODULES-EXTRA/diskio/e-module-diskio.edc:58. in=
+valid state name: 'off'. "default" state must always be first."
+meta-efl/recipes-efl/e17/elbow_git.bb:PNBLACKLIST[elbow] ?=3D "Depends on b=
+lacklisted webkit-efl"
+meta-efl/recipes-efl/e17/elmdentica_svn.bb:PNBLACKLIST[elmdentica] ?=3D "OL=
+D and depends on broken azy"
+meta-efl/recipes-efl/e17/emprint_svn.bb:PNBLACKLIST[emprint] ?=3D "if you w=
+ant to use these modules with E18, then you need to update it to git recipe=
+ fetching newer sources from http://git.enlightenment.org/apps/emprint.git/"
+meta-efl/recipes-efl/e17/news_svn.bb:PNBLACKLIST[news] ?=3D "if you want to=
+ use these modules with E18, then you need to update it to git recipe fetch=
+ing newer sources from http://git.enlightenment.org/enlightenment/modules/n=
+ews.git/"
+meta-efl/recipes-efl/e17/rage_svn.bb:PNBLACKLIST[rage] ?=3D "if you want to=
+ use these modules with E18, then you need to update it to git recipe fetch=
+ing newer sources from  http://git.enlightenment.org/apps/rage.git/"
+meta-efl/recipes-efl/e17/screenshot_svn.bb:PNBLACKLIST[screenshot] ?=3D "de=
+pends on blacklisted emprint"
+meta-efl/recipes-efl/efl/azy_svn.bb:PNBLACKLIST[azy] ?=3D "OLD and doesn't =
+build with gcc-5"
+meta-efl/recipes-efl/efl/engrave_svn.bb:PNBLACKLIST[engrave] ?=3D "BROKEN: =
+fails to build with latest oe-core"
+meta-efl/recipes-efl/efl/entrance_svn.bb:PNBLACKLIST[entrance] ?=3D "broken=
+: switch to https://git.enlightenment.org/misc/entrance.git and fix 0.0.4+s=
+vnr82070-r7/entrance/data/themes/old/default.edc:678. invalid state name: '=
+defaault'. "default" state must always be first."
+meta-efl/recipes-efl/webkit/webkit-efl.inc:PNBLACKLIST[webkit-efl] ?=3D "Ol=
+d and unmaintaned fork with many security issues"
+meta-efl/recipes-navigation/mcnavi/mcnavi_0.3.4.bb:PNBLACKLIST[mcnavi] ?=3D=
+ "BROKEN: latest version 0.3.4 is 3 years old and now broken with more stri=
+ct ejde_cc from efl-1.13"
+meta-filesystems/recipes-utils/dmapi/dmapi_2.2.12.bb:PNBLACKLIST[dmapi] ?=
+=3D "Depends on broken xfsprogs"
+meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.4.bb:PNBLACKLIST[xfsdump=
+] ?=3D "Depends on broken xfsprogs"
+meta-gnome/recipes-apps/epdfview/epdfview_0.1.8.bb:PNBLACKLIST[epdfview] ?=
+=3D "BROKEN: images are not displayed anymore"
+meta-gnome/recipes-apps/gnome-mplayer/gnome-mplayer_1.0.5.bb:PNBLACKLIST[gn=
+ome-mplayer] ?=3D "rdepends on blacklisted mplayer"
+meta-gnome/recipes-extended/gtk-theme-torturer/gtk-theme-torturer_git.bb:PN=
+BLACKLIST[gtk-theme-torturer] ?=3D "BROKEN: gmacros.h:182:53: error: size o=
+f array '_GStaticAssertCompileTimeAssertion_2' is negative"
+meta-gnome/recipes-gnome/gcalctool/gcalctool_5.32.0.bb:PNBLACKLIST[gcalctoo=
+l] ?=3D "broken at least since April 2013 http://permalink.gmane.org/gmane.=
+comp.handhelds.openembedded/57920 and nobody complained, it's also replaced=
+ by gnome calculator"
+meta-gnome/recipes-gnome/gdm/gdm_2.32.2.bb:PNBLACKLIST[gdm] ?=3D "Depends o=
+n broken gnome-panel"
+meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_2.32.1.b=
+b:PNBLACKLIST[gnome-control-center] ?=3D "Depends on broken gnome-menus"
+meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb:PNBLACKLIST[=
+gnome-keyring] ?=3D "This version conflicts with gcr from oe-core"
+meta-gnome/recipes-gnome/gnome-menus/gnome-menus_2.30.5.bb:PNBLACKLIST[gnom=
+e-menus] ?=3D "BROKEN: fails to build because of python + conflicts with gn=
+ome-menu3"
+meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb:PNBLACKLIST[gnom=
+e-panel3] ?=3D "CONFLICT: depends on libgweather3 which conflicts with libg=
+weather"
+meta-gnome/recipes-gnome/gnome-panel/gnome-panel3_3.0.2.bb:PNBLACKLIST[gnom=
+e-panel3] ?=3D "Depends on broken gnome-menus"
+meta-gnome/recipes-gnome/gnome-panel/gnome-panel_2.32.1.bb:PNBLACKLIST[gnom=
+e-panel] ?=3D "Depends on broken libgweather"
+meta-gnome/recipes-gnome/gnome-power-manager/gnome-power-manager_2.32.0.bb:=
+PNBLACKLIST[gnome-power-manager] ?=3D "BROKEN: not compatible with current =
+libnotify"
+meta-gnome/recipes-gnome/gnome-session/gnome-session_2.32.1.bb:PNBLACKLIST[=
+gnome-session] ?=3D "BROKEN: fails to build with gcc-6"
+meta-gnome/recipes-gnome/gnome/gnome-terminal_2.30.2.bb:PNBLACKLIST[gnome-t=
+erminal] ?=3D "BROKEN: fails to build with gcc-6"
+meta-gnome/recipes-gnome/gnome/libgnomecups_0.2.3.bb:PNBLACKLIST[libgnomecu=
+ps] ?=3D "Depends on broken libgnomeui"
+meta-gnome/recipes-gnome/gnome/libgnomeprint_2.18.8.bb:PNBLACKLIST[libgnome=
+print] ?=3D "Depends on broken libgnomecups"
+meta-gnome/recipes-gnome/gnumeric/gnumeric_1.12.0.bb:PNBLACKLIST[gnumeric] =
+?=3D "Depends on broken libgnomeprint"
+meta-gnome/recipes-gnome/gweather/libgweather3_3.0.2.bb:PNBLACKLIST[libgwea=
+ther3] ?=3D "CONFLICT: 876 files are conflicting with libgweather"
+meta-gnome/recipes-gnome/gweather/libgweather_2.30.3.bb:PNBLACKLIST[libgwea=
+ther] ?=3D "BROKEN: fails to build with gcc-6"
+meta-gnome/recipes-gnome/nautilus/nautilus3_3.2.1.bb:PNBLACKLIST[nautilus3]=
+ ?=3D "BROKEN: fails to build, maybe missing dependency on gnome-desktop-ut=
+ils.h provider"
+meta-gnome/recipes-gnome/pimlico/tasks_0.19.bb:PNBLACKLIST[tasks] ?=3D "Fai=
+ls to build with gcc-6"
+meta-gnome/recipes-gnome/pimlico/tasks_git.bb:PNBLACKLIST[tasks] ?=3D "Fail=
+s to build with gcc-6"
+meta-gnome/recipes-gnome/system-tools/system-tools-backends_2.10.2.bb:PNBLA=
+CKLIST[system-tools-backends] ?=3D "does not build with distroless qemuarm =
+as reported in 'State of bitbake world' thread, nobody volunteered to fix t=
+hem"
+meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb:PNBLACKLIST[zenity] ?=3D "=
+BROKEN: doesn't build with B!=3DS"
+meta-gnome/recipes-support/goffice/goffice_0.10.1.bb:PNBLACKLIST[goffice] ?=
+=3D "BROKEN: fails to build with gcc-6"
+meta-gnome/recipes-support/tracker/tracker_0.14.2.bb:PNBLACKLIST[tracker] ?=
+=3D "BROKEN: fails to build with new binutils-2.27"
+meta-gpe/recipes-support/fbreader/fbreader_git.bb:PNBLACKLIST[fbreader] ?=
+=3D "BROKEN: fails to build with gcc-6"
+meta-multimedia/recipes-mkv/mkvtoolnix/mkvtoolnix_git.bb:PNBLACKLIST[mkvtoo=
+lnix] ?=3D "BROKEN: Failx to build with gcc-5"
+meta-multimedia/recipes-multimedia/coriander/coriander_2.0.2.bb:PNBLACKLIST=
+[coriander] ?=3D "BROKEN: fails to use SDL probably because libsdl-config w=
+as removed, error: unknown type name 'SDL_Overlay'"
+meta-multimedia/recipes-multimedia/dleyna/renderer-service-upnp_0.3.0.bb:PN=
+BLACKLIST[renderer-service-upnp] ?=3D "BROKEN: doesn't build with B!=3DS (t=
+rying to install rendererconsole.py from ${B} instead of ${S})"
+meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-ffmpeg_0.10.13.bb:PNB=
+LACKLIST[gst-ffmpeg] ?=3D "Not compatible with currently used ffmpeg 3"
+meta-multimedia/recipes-multimedia/gstreamer/gst123_0.3.1.bb:PNBLACKLIST[gs=
+t123] ?=3D "gst123 is still "sometimes" using wrong sysroot"
+meta-networking/recipes-daemons/dnrd/dnrd_2.20.3.bb:PNBLACKLIST[dnrd] ?=3D =
+"BROKEN: dnrd-2.20.3-r0 do_package: QA Issue: dnrd: Files/directories were =
+installed but not shipped in any package:"
+meta-networking/recipes-kernel/netmap/netmap-modules_git.bb:PNBLACKLIST[net=
+map-modules] ?=3D "BROKEN: not compatible with default kernel version 4.8"
+meta-networking/recipes-kernel/netmap/netmap_git.bb:PNBLACKLIST[netmap] ?=
+=3D "BROKEN: Tries to build kernel module and fails, either it should be di=
+sabled or there should be dependency on kernel like in netmap-modules"
+meta-networking/recipes-protocols/accel-ppp/accel-ppp_git.bb:PNBLACKLIST[ac=
+cel-ppp] ?=3D "BROKEN: fails to build with new binutils-2.27"
+meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb:PNBLACK=
+LIST[lksctp-tools] ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gol=
+d', "BROKEN: fails to link against sctp_connectx symbol", '', d)}"
+meta-networking/recipes-support/nis/ypbind-mt_2.2.bb:PNBLACKLIST[ypbind-mt]=
+ ?=3D "BROKEN: Depends on broken yp-tools"
+meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb:PNBLACKLIST[bluez-h=
+cidump] ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 con=
+flicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb:PNBLACKLIST[bluez4] ?=3D=
+ "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with =
+bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb:PNBLACKLIS=
+T[gst-plugin-bluetooth] ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'blue=
+z5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURE=
+S', '', d)}"
+meta-oe/recipes-connectivity/soft66/soft66_git.bb:PNBLACKLIST[soft66] ?=3D =
+"BROKEN: depends on broken libftdi"
+meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb:PNBLACKLIST[wvdial] ?=3D=
+ "Depends on broken wvstreams"
+meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb:PNBLACKLIST[wvstream=
+s] ?=3D "BROKEN: fails to build with gcc-6"
+meta-oe/recipes-connectivity/zeroc-ice/zeroc-ice_3.5.1.bb:PNBLACKLIST[zeroc=
+-ice] ?=3D "BROKEN: not compatible with default db version"
+meta-oe/recipes-core/fakeroot/fakeroot_1.18.4.bb:PNBLACKLIST[fakeroot] ?=3D=
+ "BROKEN: QA Issue: -dev package contains non-symlink .so"
+meta-oe/recipes-devtools/cloud9/cloud9_0.6.bb:PNBLACKLIST[cloud9] ?=3D "Not=
+ comatible with current nodejs 0.12, but upstream is working on it for v3"
+meta-oe/recipes-devtools/ltp-ddt/ltp-ddt_1.0.0.bb:PNBLACKLIST[ltp-ddt] ?=3D=
+ "BROKEN: fails since last autotools.bbclass changes"
+meta-oe/recipes-devtools/packagekit/packagekit_0.5.6.bb:PNBLACKLIST[package=
+kit] ?=3D "BROKEN: depends on old deprecated libopkg which is currently dis=
+abled and will be removed soon"
+meta-oe/recipes-extended/subsurface/subsurface_git.bb:PNBLACKLIST[subsurfac=
+e] ?=3D "Needs to be upgraded for compatibility with new libdivecomputer"
+meta-oe/recipes-gnome/gtkextra/gtkextra_3.0.5.bb:PNBLACKLIST[gtkextra] ?=3D=
+ "BROKEN: Fails to build with gcc-5"
+meta-oe/recipes-graphics/clutter/clutter-box2d_git.bb:PNBLACKLIST[clutter-b=
+ox2d] ?=3D "BROKEN: doesn't build with B!=3DS"
+meta-oe/recipes-graphics/fim/fim_0.4-rc1.bb:PNBLACKLIST[fim] ?=3D "BROKEN: =
+doesn't build with B!=3DS (flex: can't open lex.lex)"
+meta-oe/recipes-graphics/slim/slim_1.3.2.bb:PNBLACKLIST[slim] ?=3D "does no=
+t build with distroless qemuarm as reported in 'State of bitbake world' thr=
+ead, nobody volunteered to fix them"
+meta-oe/recipes-graphics/xorg-driver/xf86-input-mtev_git.bb:PNBLACKLIST[xf8=
+6-input-mtev] ?=3D "BROKEN: doesn't build with B!=3DS (Makefile without ${S=
+} in sed call)"
+meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.16.bb:PNBLACKLIS=
+T[xf86-video-geode] ?=3D "BROKEN, fails to build"
+meta-oe/recipes-kernel/ktap/ktap-module_git.bb:PNBLACKLIST[ktap-module] ?=
+=3D "Not compatible with 3.19 kernel"
+meta-oe/recipes-kernel/ktap/ktap_git.bb:PNBLACKLIST[ktap] ?=3D "Depends on =
+blacklisted kernel-module-ktapvm"
+meta-oe/recipes-multimedia/mplayer/mplayer2_git.bb:PNBLACKLIST[mplayer2] ?=
+=3D "Not compatible with currently used ffmpeg 3"
+meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb:PNBLACKLIST[foxtr=
+otgps] ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conf=
+licts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-navigation/gdal/gdal_1.11.1.bb:PNBLACKLIST[gdal] ?=3D "BROK=
+EN: fails to build with gcc-5"
+meta-oe/recipes-navigation/gypsy/gypsy.inc:PNBLACKLIST[gypsy] ?=3D "${@bb.u=
+tils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 an=
+d bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-navigation/navit/navit.inc:PNBLACKLIST[navit] ?=3D "${@bb.u=
+tils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 an=
+d bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-sato/claws-mail/claws-mail_3.9.0.bb:PNBLACKLIST[claws-mail]=
+ ?=3D "depends on blacklisted libetpan"
+meta-oe/recipes-sato/claws-mail/claws-plugin-gtkhtml2-viewer_0.31.bb:PNBLAC=
+KLIST[claws-plugin-gtkhtml2-viewer] ?=3D "depends on blacklisted claws-mail"
+meta-oe/recipes-sato/claws-mail/claws-plugin-mailmbox_1.15.bb:PNBLACKLIST[c=
+laws-plugin-mailmbox] ?=3D "depends on blacklisted claws-mail"
+meta-oe/recipes-sato/claws-mail/claws-plugin-rssyl_0.34.bb:PNBLACKLIST[claw=
+s-plugin-rssyl] ?=3D "depends on blacklisted claws-mail"
+meta-oe/recipes-support/apcupsd/apcupsd_3.14.10.bb:PNBLACKLIST[apcupsd] ?=
+=3D "BROKEN: doesn't build with B!=3DS"
+meta-oe/recipes-support/emacs/emacs_23.4.bb:PNBLACKLIST[emacs] ?=3D "qemu: =
+uncaught target signal 11 (Segmentation fault) - core dumped"
+meta-oe/recipes-support/fftw/benchfft_3.1.bb:PNBLACKLIST[benchfft] ?=3D "do=
+es not build with distroless qemuarm as reported in 'State of bitbake world=
+' thread, nobody volunteered to fix them"
+meta-oe/recipes-support/iksemel/iksemel_1.4.bb:PNBLACKLIST[iksemel] ?=3D "N=
+ot compatible with gnutls version 3.4 currently in oe-core"
+meta-oe/recipes-support/libdbi/libdbi-drivers_0.8.3-1.bb:PNBLACKLIST[libdbi=
+-drivers] ?=3D "BROKEN: fails to build with gcc-5"
+meta-oe/recipes-support/libetpan/libetpan_0.57.bb:PNBLACKLIST[libetpan] ?=
+=3D "Not compatible with gnutls version 3.4 currently in oe-core"
+meta-oe/recipes-support/open-vcdiff/open-vcdiff_0.8.4.bb:PNBLACKLIST[open-v=
+cdiff] ?=3D "BROKEN: fails to build with gcc-6"
+meta-oe/recipes-support/opencv/opencv-samples_2.4.bb:PNBLACKLIST[opencv-sam=
+ples] ?=3D "Depends on blacklisted opencv"
+meta-oe/recipes-support/opencv/opencv_2.4.bb:PNBLACKLIST[opencv] ?=3D "Not =
+compatible with currently used ffmpeg 3"
+meta-oe/recipes-support/openmotif/openmotif_2.3.3.bb:PNBLACKLIST[openmotif]=
+ ?=3D "BROKEN: doesn't build with B!=3DS"
+meta-oe/recipes-support/opensync/libsyncml_0.5.4.bb:PNBLACKLIST[libsyncml] =
+?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts w=
+ith bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-support/openwbem/openwbem_3.2.3.bb:PNBLACKLIST[openwbem] ?=
+=3D "BROKEN: fails to build with gcc-6"
+meta-oe/recipes-support/pidgin/pidgin-otr_4.0.0.bb:PNBLACKLIST[pidgin-otr] =
+?=3D "depends on blacklisted pidgin"
+meta-oe/recipes-support/vala-terminal/vala-terminal_git.bb:PNBLACKLIST[vala=
+-terminal] ?=3D "BROKEN: Doesn't work with B!=3DS, touch: cannot touch `src=
+/.stamp': No such file or directory"
+meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_4.3.36.bb:PNBLACK=
+LIST[vboxguestdrivers] ?=3D "BROKEN: not compatible with default kernel ver=
+sion 4.8"
+meta-qt5:
+meta-smartphone:
+meta-fso/recipes-freesmartphone/freesmartphone/libframeworkd-glib_git.bb:PN=
+BLACKLIST[libframeworkd-glib] ?=3D "BROKEN: many errors when building with =
+gcc-6"
+meta-fso/recipes-freesmartphone/freesmartphone/zhone_git.bb:PNBLACKLIST[zho=
+ne] ?=3D "rdepends on python-pycairo which was removed"
+meta-shr/recipes-shr/3rdparty/advancedcaching_git.bb:PNBLACKLIST[advancedca=
+ching] ?=3D "RDEPENDS on python-pygtk was removed from oe-core"
+meta-shr/recipes-shr/3rdparty/emtooth2_svn.bb:PNBLACKLIST[emtooth2] ?=3D "$=
+{@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with blu=
+ez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-shr/recipes-shr/3rdparty/ffalarms_git.bb:PNBLACKLIST[ffalarms] =3D "Do=
+esn't build after vala upgrade from 0.24.0 to 0.26.1"
+meta-shr/recipes-shr/3rdparty/gwaterpas_0.3.bb:PNBLACKLIST[gwaterpas] ?=3D =
+"broken: depends on blacklisted fltk"ecipes-luneos/luna-webappmanager/luna-=
+webappmanager.bb:PNBLACKLIST[luna-webappmanager] ?=3D "BROKEN: needs to be =
+adapted to new qt-5.7"
+meta-luneui/recipes-luneui/luna-next/luna-next.bb:PNBLACKLIST[luna-next] ?=
+=3D "BROKEN: needs to be adapted to new qtwayland-5.7"
+PNBLACKLIST[android-system] =3D "depends on lxc from meta-virtualiazation w=
+hich isn't included in my world builds"
+PNBLACKLIST[bigbuckbunny-1080p] =3D "big and doesn't really need to be test=
+ed so much"
+PNBLACKLIST[bigbuckbunny-480p] =3D "big and doesn't really need to be teste=
+d so much"
+PNBLACKLIST[bigbuckbunny-720p] =3D "big and doesn't really need to be teste=
+d so much"
+PNBLACKLIST[bigbuckbunny-720p] =3D "big and doesn't really need to be teste=
+d so much"
+PNBLACKLIST[tearsofsteel-1080p] =3D "big and doesn't really need to be test=
+ed so much"
+PNBLACKLIST[build-appliance-image] =3D "tries to include whole downloads di=
+rectory in /home/builder/poky :/"
+PNBLACKLIST[linux-yocto-tiny-kexecboot] =3D "does weird sh!t breaking other=
+ kernels and modules - broken for years"
+PNBLACKLIST[linux-yocto-tiny] =3D "does weird sh!t breaking other kernels a=
+nd modules - broken for years"
+
+QA issues by type:
+count: 0	issue: already-stripped
+
+
+count: 0	issue: libdir
+
+
+count: 1	issue: textrel
+corosync-2.4.0: ELF binary '/tmp/work/core2-64-oe-linux/corosync/2.4.0-r0/p=
+ackages-split/corosync/usr/sbin/corosync' has relocations in .text [textrel]
+
+
+count: 6	issue: build-deps
+directfb-1.7.7: directfb rdepends on libvdpau, but it isn't a build depende=
+ncy, missing libvdpau in DEPENDS or PACKAGECONFIG? [build-deps]
+directfb-1.7.7: directfb rdepends on libx11, but it isn't a build dependenc=
+y, missing libx11 in DEPENDS or PACKAGECONFIG? [build-deps]
+directfb-1.7.7: directfb rdepends on libxau, but it isn't a build dependenc=
+y, missing libxau in DEPENDS or PACKAGECONFIG? [build-deps]
+directfb-1.7.7: directfb rdepends on libxcb, but it isn't a build dependenc=
+y, missing libxcb in DEPENDS or PACKAGECONFIG? [build-deps]
+directfb-1.7.7: directfb rdepends on libxdmcp, but it isn't a build depende=
+ncy, missing libxdmcp in DEPENDS or PACKAGECONFIG? [build-deps]
+directfb-1.7.7: directfb rdepends on libxext, but it isn't a build dependen=
+cy, missing libxext in DEPENDS or PACKAGECONFIG? [build-deps]
+
+
+count: 3	issue: file-rdeps
+libmodule-build-perl-0.31: /usr/bin/config_data contained in package libmod=
+ule-build-perl requires /tmp/sysroots/x86_64-linux/usr/bin/perl-native/perl=
+=2Ereal, but no providers found in RDEPENDS_libmodule-build-perl? [file-rde=
+ps]
+numptyphysics-0.2+svnr109: /usr/share/numptyphysics/convert_all.sh containe=
+d in package numptyphysics requires /bin/bash, but no providers found in RD=
+EPENDS_numptyphysics? [file-rdeps]
+ubx-utils-0.0.0+gitrAUTOINC+b63c0932dd: /usr/bin/memory-map.sh contained in=
+ package ubx-utils requires /bin/bash, but no providers found in RDEPENDS_u=
+bx-utils? [file-rdeps]
+
+
+count: 0	issue: version-going-backwards
+
+
+count: 0	issue: host-user-contaminated
+
+
+count: 0	issue: installed-vs-shipped
+
+
+count: 0	issue: unknown-configure-option
+
+
+count: 0	issue: symlink-to-sysroot
+
+
+count: 0	issue: invalid-pkgconfig
+
+
+count: 0	issue: pkgname
+
+
+
+=3D=3D Tested changes (not included in master yet) - bitbake =3D=3D
+latest upstream commit:=20
+0bb188f ast: remove BBVERSIONS support
+not included in master yet:=20
+7e19fb0 world-image: add extra target
+
+=3D=3D Tested changes (not included in master yet) - openembedded-core =3D=
+=3D
+latest upstream commit:=20
+11063a0 ruby: upgrade to 2.3.1
+not included in master yet:=20
+858d66a qemux86: Add identical qemux86copy variant for tests
+3454879 sstate-sysroot-cruft.sh: Extend the whitelist
+258a996 recipes: Replace "cp -a" with "cp -R --no-dereference --preserve=3D=
+mode,links"
+08fb289 buildhistory.bbclass: metadata-revs show repo parent
+dbbe7b3 metadata-revs: provide more information
+3ac692e report-error: Allow to upload reports automatically
+4276d2f libpcap: Disable exposed bits of WinPCAP remote capture support
+e8fc6f5 ffmpeg: Add packageconfig for vdpau accelaration
+936a6ae Revert "libsdl2: update to 2.0.5"
+
+=3D=3D Tested changes (not included in master yet) - meta-openembedded =3D=
+=3D
+latest upstream commit:=20
+18d518a libxml++: fix LICENSE
+not included in master yet:=20
+3306075 lksctp-tools: 1.0.16 -> 1.0.17
+ccdb295 drbd-utils: 8.9.3 -> 8.9.6
+697eea9 squid: disable gnu atomic operations for mipsel
+a592fba chrony: remove unrecognized option ipv6
+d9ac4a7 opensaf: fix QA Issue
+7ba4792 tsock: Make use of LDFLAGS
+3bae295 fwknop: Initial add 2.6.9
+c5ed287 samba: Fix build with musl
+19ffac4 ifenslave: make option '-h' work
+08e6543 libowfat: add v0.31
+2a1d6de samba: Fix qa issue and update ctdb-tests
+558b973 samba: correct sub-package name for multilib
+6eb29f4 curlpp: fix qa issue of do_configure
+4b42199 ncp: add v1.2.4
+1ec75cf syslog-ng: don't use update-alternatives to manage init script
+9e64d76 rsyslog: don't use update-alternatives to manage init script
+1ecc1cd dnsmasq: read the conf files found in dnsmasq.d
+841a30c dnsmasq: allow for dnsmasq instances to reuse default dnsmasq.conf
+e00d3c5 net-snmp: fix snmptrap to use clientaddr from snmp.conf.
+3d7a03a net-snmp: snmplib, UDPIPv6 transport: Add a missing return statement
+86e3e22 libva: Import from meta-intel and update to 1.7.3
+8cc32a1 kodi: Add krypton/17.x Jarvis/16.x recipes
+9242d51 kodi: Fix build with pic on x86_64
+b4ba430 kodi-17: Add packageconfig for lcms support
+40c8668 kodi-17: Fix build with musl
+c8b6de4 arno-iptables-firewall: Add recipe
+8f5a711 dibbler: Add recipe
+94ab113 ez-ipupdate: Add recipe
+e034a70 inetutils: Disable rsh,rcp,rlogin on musl
+3e664ff ssmtp: Add recipe
+0433ecc dante: Add recipe for 1.4.1
+2263526 ipsec-tools: Fix build with clang
+3335c3e crda: Fix build with clang
+55d73c4 kodi-17: Update to latest
+2f40925 iscsi-initiator-utils: Update to 2.0.874
+728aa81 iscsi-initiator-utils, open-isns: Add systemd to REQUIRED_DISTRO_FE=
+ATURES
+3e6b70d samba: fix the hardcoded path in init script
+122cb86 kodi-17: Fix build for qemuarm and update to latest
+1f9907e ntp: update to version 4.8p9
+ee3b4f5 python-pyconnman: Add new recipe
+09aef76 redis: add a systemd service file
+a7c3848 redis: do not expose the service to the network by default
+2f3c55f redis: log to syslog
+48fe2e1 redis: do not run as root
+7537f89 redis: increase the max number of fds to actually match redis.conf
+bda6318 libcdio-paranoia: new recipe for 10.2+0.93.1
+0551d21 libcdio: clean up recipe
+79b3764 krb5: create Debian-like package structure
+39167a9 imagemagick: use correct major version in program suffix
+6594a23 nginx: update to version 1.11.6
+0342aff python-psutil: update to version 5.0.0
+dd6210c python-pymongo: update to version 3.3.1
+80bf254 python-pytest: update to version 3.0.4
+e0a160f python-six: remove recipe that was pulled into oe-core
+b2385b8 python-enum34: add native and nativesdk
+9b9a8f7 samba: Avoid timeout for nmbd if started offline with systemd
+3e26766 python-pyasn1: fix RDEPENDS to work correctly when building native =
+version
+c34a9f9 python-pip: update to version 9.0.1
+a76d3ee python-ipaddress: add native and nativesdk
+60ad46e python-cryptography-vectors: update to version 1.6
+e9683f2 python-cryptography: update to version 1.6
+56130ea python-pyopenssl: update to version 16.2.0
+4e215f0 python-pymisp: update to version 2.4.54
+04bd041 inetutils: do_configure: fix "Argument list too long"
+90b531b lftp: do_configure: fix "Argument list too long"
+730c13f python-backports-functools-lru-cache: add new recipe
+e965ba6 python-wrapt: add new recipe
+be5d45c python-astroid: add new recipe
+3212524 python-lazy-object-proxy: add new recipe
+17881b9 python-setuptools-scm: add native to BBCLASSEXTEND
+56e43c6 python-isort: add new recipe
+2d030aa python-pylint: modifies package bin to match source and adds depend=
+encies
+0a0a3dc crda: check the word size of target instead of host machine.
+67f1140 samba: use default packaging rules for -dbg and -dev packages
+2686f08 samba: remove unneeded conditionals for sysvinit and systemd
+e58d6b5 samba: use systemd_system_unitdir variable
+e201b29 samba: remove superflous listing of pam_smbpass.so
+211e6e9 samba: install all systemd unit files
+
+=3D=3D Tested changes (not included in master yet) - meta-qt5 =3D=3D
+latest upstream commit:=20
+81fb771 Update Qt5's git repositories to match new locations
+not included in master yet:=20
+2542e2c Upgrade to Qt 5.8
+825231c qtwebengine: use QT_GIT_PROTOCOL variable
+e5095fa qtwebkit: Always enable icu in QT_CONFIG
+49290f1 qtbase: Remove comments about ICU and QtWebKit
+
+=3D=3D Tested changes (not included in master yet) - meta-browser =3D=3D
+latest upstream commit:=20
+1edcce7 chromium-wayland: skip when CHROMIUM_ENABLE_WAYLAND isn't enabled
+not included in master yet:=20
+
+=3D=3D Tested changes (not included in master yet) - meta-webos-ports =3D=3D
+latest upstream commit:=20
+54ba338 libqofono: use the recipe from meta-qt5
+not included in master yet:=20
+
+=3D=3D Tested changes (not included in master yet) - meta-smartphone =3D=3D
+latest upstream commit:=20
+176f337  linux-hp-tenderloin: Update kernel
+not included in master yet:=20
+0ad046f meta-fso: replace deprecated bb.data.getVar('PV',d,1) with d.getVar=
+('PV', True)
+
+--H+4ONPRPur6+Ovig
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWEqQ0AAKCRA3VSO3ZXaA
-HF7CAJ9WMRxA/OhX7mMyajgQ2J3k6qUE8wCdFY8JUrZ0UUFTPb2yGYo13WGwD6c=
-=w+9H
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWEqnEQAKCRA3VSO3ZXaA
+HH6rAJ9w7+T6t7U4OJQLdfMZjcjPV1AiIwCdE/uVwfyPelAked7R1+vbXTYOjrc=
+=5Wnt
 -----END PGP SIGNATURE-----
 
---ReaqsoxgOBHFXBhH--
+--H+4ONPRPur6+Ovig--
