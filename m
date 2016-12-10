@@ -1,46 +1,45 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-vk0-f68.google.com (mail-vk0-f68.google.com
-	[209.85.213.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 22C07719B0
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id B47C271979
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Dec 2016 22:45:35 +0000 (UTC)
-Received: by mail-vk0-f68.google.com with SMTP id x186so1618375vkd.2
+	Sat, 10 Dec 2016 19:48:26 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id m203so2829330wma.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Dec 2016 14:45:37 -0800 (PST)
+	Sat, 10 Dec 2016 11:48:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=gnuH/wv3ifrYnEYKx1AonURQ+ZHayI/GtgMJubHMOW4=;
-	b=b9DbvvP/B+B8/kFJr+S0xybTMIxHxp97F0TyeRYIZLJyeF4nePa/8LcuJyB1ZrPhRc
-	Lx7418HSjYnAgYEa/Zh7dAlo8A6mVcYxiqgzxP0pZolVOkCUnZzObmZMu22oXLQikAO0
-	6sv0KQnF/g1BFxeT3CYDN4Nfn/hemsAqjYy3sexOKAbTCnW3A7gZQVNXsM6yH7MK8yKz
-	NLYOdAY7C0hw1rfrqTHv3a2srCFYyYeS9SaYxLZVErRXdSPv6oOrnXQYpNvUsVHwjAWL
-	AzXcSnTpGnq/BVSrF5kCPlSIJtdxdz72Px9nQjxeNTPiNRYVyNb2+5lldnAqSaebaVES
-	26GA==
+	bh=oTVZ+70UE7Vy9StF6rJBM2gAk5LUh9hF9Llff9b2jDY=;
+	b=rISSMTcL2AkPgWY/bBIYzNfsJFE/9bK7tj/GGjGPVzK2rKzQKfY8gWnS8ZFJGBMi42
+	G1Z6VsaIjE66gbQFGaaSXqZ4ns8RpD13LVN9HvZ4HmrfisgA+Hc7WwuDW9t3l7yCI9HF
+	Itj4V0jOli6qU0J7urYKJa3dde+JHxnqwF4xE1sXyXYYkGVfbCYkycfdCM1bufj7xy1I
+	7Wu/ihOYkfKXyVn8OvGQaPvmVt5Fm0/rqhIWxaZYPGHC0zZHzXZlbo3cMWQMjhahhy6z
+	WzS/OElC5dhHO/FGnsv4pwQtmnebZpCcBdy2hZZyKuB6WEnL81+gv5RmS7EtB0P0rERQ
+	2XwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=gnuH/wv3ifrYnEYKx1AonURQ+ZHayI/GtgMJubHMOW4=;
-	b=kigXo9aWwIW8xDRXqCW3qwbM8ZBM8Bo003k9Ox9kiSvHN7w6+S2i/YiyLEP94bRhcH
-	eRKu2aHLNwFZMUnrvPxo8Tsp/RX/gHpbxCvmXsEFzXiXKySU+icJk2Pko0dy9sMgyTnq
-	yH4IHjPdD+viChi8pN/ZllUaKzj9atf+NjZSM3Hjdz04IUGhNtt7CWRPLdL1NSYDtwqz
-	MRl8bgwGGqVihuh/fxfkgfXyL/Jn6mMUhIpPmCDo6nAeL6M+Mh7ZYlpyBuDryyrYD750
-	XHeSFapQgWQHWc4sYjM420DgvW2XO4Juf7elgS2BcnKN3Wae4jpmkWMpsvi9baEP8kEC
-	FZXQ==
-X-Gm-Message-State: AKaTC01HgT/qBkD1E9Y59OBFkD5ZjAWLDdVwvfzuPc0u5eeuxp+4gHV+P2u/EsFrHnMSYbKwW00asKU4s0xjOQ==
-X-Received: by 10.31.234.199 with SMTP id i190mr31329415vkh.31.1481323536431; 
-	Fri, 09 Dec 2016 14:45:36 -0800 (PST)
+	bh=oTVZ+70UE7Vy9StF6rJBM2gAk5LUh9hF9Llff9b2jDY=;
+	b=g02sUz8jMAhAj6iqR/GbIWowFpyQCwLjQLgz5GXx08/EZubIQB6e7MO6pXVBFULx2c
+	2eMNxmlu09QTzbtdziEAsLKfygD/ccUTEN4YyFRDT069b8P5yXHa90/hKDNirq1PsSfP
+	RxPLYg2QU3ahWqQtFLjORtMdn9HhBXx0h5aCPimYnCYSSV7Hd5BpDfDfVUmsefQBa8yp
+	zBur8ieYSLBa2AUa2Fneraas2C5f9M3F5AwlmGNVHxlSWJ8y3mPQqmqUy1ObW/H092gr
+	MWaiNWe8v7emf8Zc8vBOPlhiPfWU+kPfojwqY3IPRRCi6voIJyPI59x/ZmUaOobyocUc
+	qt0w==
+X-Gm-Message-State: AKaTC03iaENEtZkm7opV4Byt+FUhkNUGZ/9cXxZOhoUARsZNmCmfe3otJAcu7I09qmKn4k4PacnKr3lkNNVvRg==
+X-Received: by 10.28.39.199 with SMTP id n190mr11149644wmn.124.1481399307577; 
+	Sat, 10 Dec 2016 11:48:27 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.159.48.87 with HTTP; Fri, 9 Dec 2016 14:45:06 -0800 (PST)
-In-Reply-To: <20161209214009.GD3327@jama>
+Received: by 10.80.134.144 with HTTP; Sat, 10 Dec 2016 11:48:27 -0800 (PST)
+In-Reply-To: <20161203030422.17285-7-raj.khem@gmail.com>
 References: <20161203030422.17285-1-raj.khem@gmail.com>
-	<20161203030422.17285-8-raj.khem@gmail.com>
-	<20161209214009.GD3327@jama>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 9 Dec 2016 14:45:06 -0800
-Message-ID: <CAMKF1soVFpteff3kiioqiRb7FSWsTtWkzYDswiKd6MpMEi6XtQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 8/8] loop-aes: Add recipe
+	<20161203030422.17285-7-raj.khem@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Sat, 10 Dec 2016 20:48:27 +0100
+Message-ID: <CA+chaQf447Syhn6GMRJQFL_sw5tS4eO23OXvzUdvUzYOrsq9aw@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH 7/8] avro: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,69 +52,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Dec 2016 22:45:36 -0000
+X-List-Received-Date: Sat, 10 Dec 2016 19:48:29 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Fri, Dec 9, 2016 at 1:40 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Fri, Dec 02, 2016 at 07:04:22PM -0800, Khem Raj wrote:
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  meta-oe/recipes-support/loop-aes/loop-aes_v3.7j.bb | 22 ++++++++++++++++++++++
->>  1 file changed, 22 insertions(+)
->>  create mode 100644 meta-oe/recipes-support/loop-aes/loop-aes_v3.7j.bb
->>
->> diff --git a/meta-oe/recipes-support/loop-aes/loop-aes_v3.7j.bb b/meta-oe/recipes-support/loop-aes/loop-aes_v3.7j.bb
->> new file mode 100644
->> index 0000000..fa60c7b
->> --- /dev/null
->> +++ b/meta-oe/recipes-support/loop-aes/loop-aes_v3.7j.bb
->> @@ -0,0 +1,22 @@
->> +SUMMARY = "Loop-aes - replacement for loop driver that can do aes encryption"
->> +DESCRIPTION = "Fast and transparent file system and swap encryption package for \
->> +               linux. No source code changes to linux kernel. Works with 3.x,\
->> +               2.6, 2.4, 2.2 and 2.0 kernels."
->> +HOMEPAGE = "http://sourceforge.net/projects/loop-aes/"
->> +LICENSE = "GPL-2.0"
->> +
->> +LIC_FILES_CHKSUM = "file://aes-GPL.diff;md5=bf349af3486306c2e4d85de5b6fa3bb4"
->> +
->> +SRC_URI = "http://loop-aes.sourceforge.net/loop-AES/loop-AES-${PV}.tar.bz2"
->> +SRC_URI[md5sum] = "335238a7cfd45f157935c59156533a05"
->> +SRC_URI[sha256sum] = "67ede839d4cac657359c39b05eac46f6991054768a7e1096bef5b92edb3b8aba"
->> +
->> +inherit module
->> +
->> +S = "${WORKDIR}/loop-AES-${PV}"
->> +
->> +EXTRA_OEMAKE += "LINUX_SOURCE=${STAGING_KERNEL_DIR} INSTALL_MOD_PATH=${D} MODINST=n"
->> +
->> +do_install () {
->> +     install -D -m 0655 loop.ko ${D}${base_libdir}/modules/${KERNEL_VERSION}/misc/loop.ko
->
-> Please use 4 spaces when updating.
->
+What is supposed to provide lzma?
 
-hmm ok
+https://layers.openembedded.org/layerindex/recipe/53191/
 
->> +}
->
-> It conflicts with linux-yocto:
-> http://errors.yoctoproject.org/Errors/Details/112197/
+On Sat, Dec 3, 2016 at 4:04 AM, Khem Raj <raj.khem@gmail.com> wrote:
 
-it is supposed to conflict with kernels enabling loop device.
-
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-oe/recipes-support/avro/avro-c_1.8.1.bb | 18 ++++++++++++++++++
+>  1 file changed, 18 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/avro/avro-c_1.8.1.bb
 >
->> --
->> 2.10.2
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+> diff --git a/meta-oe/recipes-support/avro/avro-c_1.8.1.bb
+> b/meta-oe/recipes-support/avro/avro-c_1.8.1.bb
+> new file mode 100644
+> index 0000000..ebaab4f
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/avro/avro-c_1.8.1.bb
+> @@ -0,0 +1,18 @@
+> +SUMMARY = "Apache Avro data serialization system."
+> +HOMEPAGE = "http://apr.apache.org/"
+> +SECTION = "libs"
+> +
+> +
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=73bdf70f268f0b3b9c5a83dd7a6f3324"
+> +
+> +DEPENDS = "jansson zlib lzma"
+> +
+> +SRC_URI = "${APACHE_MIRROR}/avro/avro-${PV}/c/avro-c-${PV}.tar.gz"
+> +
+> +SRC_URI[md5sum] = "b268348536714541e10411823a1b59b0"
+> +SRC_URI[sha256sum] = "e5042088fa47e1aa2860c5cfed0bd0
+> 61d81f9e96628f8b4d87a24d9b8c5e4ecc"
+> +
+> +LDFLAGS_append_libc-uclibc = " -lm"
+> +
+> +inherit cmake
 > --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> 2.10.2
 >
 > --
 > _______________________________________________
