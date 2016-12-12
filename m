@@ -1,45 +1,35 @@
-Return-Path: <vomegaz@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 236B170018
+Return-Path: <henning@itconsulting-heinold.de>
+Received: from mail.familie-heinold.de (familie-heinold.de [85.214.48.103])
+	by mail.openembedded.org (Postfix) with ESMTP id D5AB770101
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Dec 2016 11:40:07 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id u144so4773235wmu.0
+	Mon, 12 Dec 2016 08:30:24 +0000 (UTC)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id BCBEFD40392
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Dec 2016 03:40:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=eYWyjWO6V+UOnbALgbT2iwsSOwEM7cBWZtO/KTbY8u8=;
-	b=G0zRLOKLov14y9lwtYcfx44ymiQW8rIZOYXLkVxy52ri09fKsj8Ks1+VoXkPRY7xdU
-	EwPxXCRPlq3gtbN6WlROpH8/rIyfaNwAxEyFI7MspXm8rv3veOkVRyCXDcQw67Wq5/OA
-	9JZphuOs/KGata5Ej3MdkBGWk53zu0JpKu42m0qfuFpLCUdk8AbO8WIMYsS2zdR1vP3Z
-	zWr6ITY0Z9Ltkq5oGhIHaP/NVtgXdZckGMB9Cwbr6NfIu5/DQRJtiO4GNuHCFbp9i7j1
-	iSkw67i0Q3WRmKkXtk8v7EyluQz8hSTZzHcjE9VzJdAfhuBN0p6Ksjwf4uQZFDqcB/Iv
-	QeBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=eYWyjWO6V+UOnbALgbT2iwsSOwEM7cBWZtO/KTbY8u8=;
-	b=DKVQimcca2G7vN7iG4STOJVMi1forzU1Kj1qXx8IRFR7M3HYPQNqPGDt4jD1vqf0Z6
-	A2ORj0Wt4Bb0uB+lLTux00BlQMkblXnVG7H2ZkonIt7vDeXO5oSGgn2EDWWIkGqtHhwB
-	dasS+C3MZkVu9+1HA3nFCkA4iBSRztVfroxqM/0IDeq5rWXw2+QOSqHsL4hsRrk+tup2
-	Tm5f5XnxnT8VNGBRgszO4Kkphy1R95J6qaFlYoUpwb3PVU/ORThBBdDHYAh1QJO1c+T/
-	9Oc9fgya0TSWILraL41QRb5wUK1KjxKMz1xbOM3p3msQ8D3uZoX0B49zhfpQW8g9gQEO
-	gOVg==
-X-Gm-Message-State: AKaTC01bj9tRIPH0z9swaJEtrVvBPPG/ZyGUUGOFUZsqsFuzuOZnc7qLIsMYWJ+Dq16/sQ==
-X-Received: by 10.28.36.193 with SMTP id k184mr12867548wmk.40.1481456408135;
-	Sun, 11 Dec 2016 03:40:08 -0800 (PST)
-Received: from sgxcmp483.sigfox.com (ram31-1-82-234-79-177.fbx.proxad.net.
-	[82.234.79.177]) by smtp.gmail.com with ESMTPSA id
-	q65sm30107072wmd.6.2016.12.11.03.40.07
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 11 Dec 2016 03:40:07 -0800 (PST)
-Sender: Thomas PERROT <vomegaz@gmail.com>
-From: Thomas Perrot <thomas.perrot@tupi.fr>
+	Mon, 12 Dec 2016 09:30:23 +0100 (CET)
+Received: from mail.familie-heinold.de (localhost [127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 07B46D4025E
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Dec 2016 09:30:23 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.5 required=5.0 tests=ALL_TRUSTED,BAYES_00
+	autolearn=ham version=3.3.2
+Received: from mail.itconsulting-heinold.de (unknown [178.19.210.209])
+	by mail.familie-heinold.de (Postfix) with ESMTPSA
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Dec 2016 09:30:22 +0100 (CET)
+Date: Mon, 12 Dec 2016 09:30:14 +0100
+From: Henning Heinold <henning@itconsulting-heinold.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 11 Dec 2016 12:40:04 +0100
-Message-Id: <20161211114004.14413-1-thomas.perrot@tupi.fr>
-X-Mailer: git-send-email 2.11.0
-Subject: [meta-oe][PATCH] Update makedumpfile recipe to add ARM into COMPATIBLE_HOST
+Message-ID: <20161212083013.GA9402@mail.itconsulting-heinold.de>
+References: <CAH4+OFpuPOdJsiEGXO=QX58qq_y_85c5SFHQZ2WM7VE0wo+HXw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAH4+OFpuPOdJsiEGXO=QX58qq_y_85c5SFHQZ2WM7VE0wo+HXw@mail.gmail.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: OpenJDK-8-jre: javadoc: error - java.lang.OutOfMemoryError
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,27 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Dec 2016 11:40:14 -0000
+X-List-Received-Date: Mon, 12 Dec 2016 08:30:26 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Thomas Perrot <thomas.perrot@tupi.fr>
----
- meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Thu, Dec 08, 2016 at 04:55:19PM +0530, Srinivasa Rao Ragolu wrote:
+> Hi All,
+> 
+> I am trying to build openjdk-8-jre for arm using yocto meta-java layer. I
+> have been facing do_compile error for openjdk-8-jre as shown below.
+> 
+> Can somebody help me to resolve this issue...
+> 
+> *| javadoc: error - java.lang.OutOfMemoryError: Please increase memory.*
+> *| For example, on the JDK Classic or HotSpot VMs, add the option -J-Xmx*
+> *| such as -J-Xmx32m.*
+> *| 1 error*
+> 
+> 
+> Please help me in resolving this issue .
+> 
+> THanks,
+> Srinivas.
 
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
-index c9a22703a..93a6f62c3 100644
---- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
-@@ -12,7 +12,7 @@ RDEPENDS_${PN}-tools = "perl ${PN}"
- 
- # arm would compile but has never been tested upstream.  mips would not compile.
- #
--COMPATIBLE_HOST = "(x86_64|i.86|powerpc).*-linux"
-+COMPATIBLE_HOST = "(x86_64|i.86|powerpc|arm).*-linux"
- 
- PACKAGES =+ "${PN}-tools"
- FILES_${PN}-tools = "${bindir}/*.pl"
--- 
-2.11.0
+Hi,
 
+try to use a computer with more RAM.
+
+Bye Henning
 
