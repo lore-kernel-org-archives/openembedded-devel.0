@@ -1,29 +1,46 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id EC5BB71D7F
+Return-Path: <ricardo.ribalda@gmail.com>
+Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
+	[209.85.215.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 0DF5571E29
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2016 20:48:46 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by fmsmga102.fm.intel.com with ESMTP; 13 Dec 2016 12:48:47 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.33,342,1477983600"; d="scan'208";a="1071686799"
-Received: from oshau-mobl1.gar.corp.intel.com (HELO
-	peggleto-mobl.ger.corp.intel.com) ([10.255.185.66])
-	by orsmga001.jf.intel.com with ESMTP; 13 Dec 2016 12:48:44 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Robert Cagle <rcagle@omnitron-systems.com>
-Date: Wed, 14 Dec 2016 09:48:41 +1300
-Message-ID: <2668593.4cPb1u5Jh3@peggleto-mobl.ger.corp.intel.com>
-Organization: Intel Corporation
-User-Agent: KMail/4.14.10 (Linux/4.8.12-100.fc23.x86_64; KDE/4.14.20; x86_64; ;
-	)
-In-Reply-To: <44E60BE3F360494194A33E0B8411CB9A62AE16@oscar.ostdom.com>
-References: <44E60BE3F360494194A33E0B8411CB9A62ADD8@oscar.ostdom.com>
-	<eb581f04-c965-f26c-97c2-3b04fd639515@windriver.com>
-	<44E60BE3F360494194A33E0B8411CB9A62AE16@oscar.ostdom.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: bitbake dependency question
+	Tue, 13 Dec 2016 21:04:08 +0000 (UTC)
+Received: by mail-lf0-f68.google.com with SMTP id 96so1230935lfs.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Dec 2016 13:04:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=A4XMydRdPgO0ryyIgxHlJBeOCJLVl3xNI//z1FA0gW8=;
+	b=LpoWcCh+CAOLFL958WKaSooA3wKeV2aI4nOXV83gLe2DHtP9nehVw6kf2qvE/LvWEc
+	TWFD7vmPQLLEXGKydtuQ3o6CSX2StXsbbZTOfyIw1h4uD5N90As5D3xfZtdPSUKad9zR
+	YGoeZ/kwM57cYcR3QSF8VBuqa3xCYF4gf0eLuXmWmDo5Q5x4XC7ys+X4EpRe41Yp0UXY
+	aWhhsT9Wu8hI+VdEu2IVFhTd5sWjGSB0mC9nyPfeuPcJsHz46gutxYTpajPnfmhrMUsf
+	qFVN8sFJWtPW9tVI8K/MC3fnYGnqIgs74Cax1gWnAld5csXthF213of6GWtPcX3auAiX
+	FSmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=A4XMydRdPgO0ryyIgxHlJBeOCJLVl3xNI//z1FA0gW8=;
+	b=jG6xJAbXmjcXZL/WoKkhHYcrtjqOM9p4Qf5olCTJMejfzR5VEO7zl5HNMee0oty3Gt
+	reksz0nm5anuFugL24VoL5YaDplO4uy0KqF1qKWrlsntwN0tus4K+jReJEL/FXtKWwTg
+	a5l3WK8qs01dmjwBg0dHLbchEvDg1mKyvi4wP4Dgr/JqQr/mHWYPc+sK4HDkuHcWfwh6
+	GrjYU2HP/sCwdFpjwFt2WJdOqAFmowPO1TQ8tsjrm0rw+g8zdXtFCnRpIqGo5MpeRn2i
+	SCCJ7aF2fi0rqkS69ksMJXpSNur4wHB75q7TDTYOPsHZp3L2qM8b8u9L0pPhdqXiygqa
+	QIvw==
+X-Gm-Message-State: AKaTC005yMA79ycPaW4LFxC5Ua/MjR/0vWrP19uZA6+x6JKtoiYm6jDayoRRJZSieWfI1w==
+X-Received: by 10.25.24.98 with SMTP id o95mr32032178lfi.4.1481663049616;
+	Tue, 13 Dec 2016 13:04:09 -0800 (PST)
+Received: from neopili.qtec.com
+	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
+	by smtp.gmail.com with ESMTPSA id 26sm6678921lji.37.2016.12.13.13.04.08
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 13 Dec 2016 13:04:08 -0800 (PST)
+From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+To: openembedded-devel@lists.openembedded.org, Martin.Jansa@gmail.com,
+	ross.burton@intel.com
+Date: Tue, 13 Dec 2016 22:03:57 +0100
+Message-Id: <20161213210404.6940-1-ricardo.ribalda@gmail.com>
+X-Mailer: git-send-email 2.10.2
+Subject: [meta-oe][PATCH 1/8] opencv: Update repository location
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,76 +53,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2016 20:48:47 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 13 Dec 2016 21:04:09 -0000
 
-Hi Robert,
+All opencv repos are now on github.com/opencv
 
-On Tue, 13 Dec 2016 04:47:31 Robert Cagle wrote:
-> Robert Yang wrote:
-> > Try something like:
-> > In recipeD.bb:
-> > PLUGIN_RECIPES ??= "A" (or b, c)
-> > DEPENDS = "${PLUGIN_RECIPES} other..."
-> > 
-> > In local.conf:
-> > PLUGIN_RECIPES = "A" (or b, c).
-> 
-> Hi Robert,
-> Thanks for the response! My current solution is similar to what you suggest:
-> 
-> local.conf
-> PLUGIN_RECIPES = "recipeA recipeB recipeC"
-> 
-> recipeD.bb:
-> DEPENDS = "${PLUGIN_RECIPES} other"
-> 
-> I'm assuming the weak reference in 'PLUGIN_RECIPES ??= "A" (or b, c)'  is to
-> prevent errors if someone forgets to define PLUGIN_RECIPES in local.conf?
+Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+---
+ meta-oe/recipes-support/opencv/opencv_3.1.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Correct, ??= is a "weak" or "lazy" default.
+diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+index a0dd98131777..fa2fdb6e6c31 100644
+--- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
++++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+@@ -16,9 +16,9 @@ SRCREV_party3 = "81a676001ca8075ada498583e4166079e5744668"
+ IPP_MD5 = "808b791a6eac9ed78d32a7666804320e"
  
-> I was hoping to do something like this in an image recipe:
-> my-image.bb:
->    IMAGE_INSTALL_append = " recipeA  recipeB recipeC recipeD"
-> and have the rest happen automatically based on the contents of those
-> recipes.
-> 
-> However, maybe I could at least do:
-> my-image.bb:
->    IMAGE_INSTALL_append = " ${PLUGIN_RECIPES} recipeD  other..."
-
-This will almost certainly be fine in your case, but something to bear in mind 
-is that IMAGE_INSTALL refers to packages, not recipes. By default the main 
-package of a recipe is the same name as the recipe, but it doesn't have to be 
-that way.
-
-> and have everything controlled from local.conf by one variable. I'd rather
-> have it the other way around (defined once in my-image.bb), but I can live
-> with this. Thanks again!
-
-FYI, one of the basic principles of the way OE works is that one recipe cannot 
-affect the processing of another except by way of the sysroot (and then the 
-first recipe must also be in the second's DEPENDS) - many other parts of the 
-system rest upon this design. Hence why you can't say "in this image I want 
-this other recipe built in this way, and in that image I want it built in that 
-other way". All you get to control in an image recipe is which packages to 
-include, and maybe do some post-processing. Of course, you can set variables 
-at the configuration level and have multiple recipes pick it up, as in the 
-above example.
-
-Another way to handle this kind of situation with plugins is to simply build 
-them all with all dependencies, and have the runtime design such that it's 
-fully flexible as to which plugins are installed - then you just make the 
-choice in the image. (Perhaps what you're building is already that way and 
-you're just trying to save on build time?)
-
-Cheers,
-Paul
-
+ SRCREV_FORMAT = "opencv"
+-SRC_URI = "git://github.com/Itseez/opencv.git;name=opencv \
+-    git://github.com/Itseez/opencv_contrib.git;destsuffix=contrib;name=contrib \
+-    git://github.com/Itseez/opencv_3rdparty.git;branch=ippicv/master_20151201;destsuffix=party3;name=party3 \
++SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
++    git://github.com/opencv/opencv_contrib.git;destsuffix=contrib;name=contrib \
++    git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20151201;destsuffix=party3;name=party3 \
+     file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
+     file://fixgcc60.patch \
+     file://fixpkgconfig.patch \
 -- 
+2.10.2
 
-Paul Eggleton
-Intel Open Source Technology Centre
 
