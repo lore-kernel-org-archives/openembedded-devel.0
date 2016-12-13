@@ -1,30 +1,37 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id CC53371A91
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wj0-f194.google.com (mail-wj0-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 7634C71BEE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2016 05:28:26 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="13856918"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 13 Dec 2016 13:28:07 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id EEFF44670486
+	Tue, 13 Dec 2016 09:39:05 +0000 (UTC)
+Received: by mail-wj0-f194.google.com with SMTP id xy5so15365120wjc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2016 13:28:06 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.81) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Tue, 13 Dec 2016 13:28:06 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 13 Dec 2016 05:28:03 -0800
-Message-ID: <1481635683-62635-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-X-Originating-IP: [10.167.226.81]
-X-yoursite-MailScanner-ID: EEFF44670486.AB165
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH] add php 7.1.0
+	Tue, 13 Dec 2016 01:39:07 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20130820;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=hfe2gD18ZGJbgnzNCG5kYEgqI7/6RxnwSLq3ikbTl6s=;
+	b=m/m6DQt8249TXyg7AJKVbPE1MZ4ePy6+40KBdKDGdoz3QU8vOd3P8R6X4z2mAe94WJ
+	H0tNTOg2yRpVEQNr1HLyQQ6VrfbsGxzlMFIyhw1P4c+ZrIdTGLz34qN0yLtmIfWLUPzP
+	PAVB/tdHocysC0to6oliSP8HKdybTv1zszLdR8hUZq+QgrjCQHNtO1/DNnnw4YIeLvtO
+	gZDRUVU3z544OaXcH3w2wml+r3+Cazb8kuedQYwSXe2icaGJ6EXAIxuLRrp0rYfhR9U0
+	IK5Pr666k0hTV9ufct/4a7Yh7cZvgcMbKigUoraxztptbQKe72JG0GtBeWMp2NkAnNfK
+	rvnw==
+X-Gm-Message-State: AKaTC00v7EBeEW+dQqKToMy7QxblqHGSks12S3CsHfr/mjAdPfHty8nIRAQF/uv2IRWkPw==
+X-Received: by 10.194.93.104 with SMTP id ct8mr98317091wjb.87.1481621946724;
+	Tue, 13 Dec 2016 01:39:06 -0800 (PST)
+Received: from tfsielt31850.tycofs.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	l67sm17845082wmf.0.2016.12.13.01.39.05
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 13 Dec 2016 01:39:05 -0800 (PST)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 13 Dec 2016 09:39:04 +0000
+Message-Id: <20161213093904.24994-1-git@andred.net>
+X-Mailer: git-send-email 2.10.2
+Subject: [meta-oe][PATCH] protobuf: switch from mips16 to mips32 due to in-line assembler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,174 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2016 05:28:28 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 13 Dec 2016 09:39:07 -0000
 
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+From: Lukasz Nowak <lnowak@tycoint.com>
 
-1)add php_7.1.0.bb
-2)Delete php_5.5.38.bb,since it is Replaced by php_5.6.26.bb.
-3)Delete pthread-check-threads-m4.patch, since it is integrated upstream.
+| mipsel-poky-linux-musl-libtool: compile:  mipsel-poky-linux-musl-g++ -mel -mabi=32 -msoft-float -march=mips32r2 -mips16 -minterlink-compressed -mtune=24kec -mdsp --sysroot=<sysroot> -DHAVE_CONFIG_H -I. -I../../git/src -I.. -Wall -Wwrite-strings -Woverloaded-virtual -Wno-sign-compare -O2 -pipe -g -feliminate-unused-debug-types -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -fvisibility-inlines-hidden -c ../../git/src/google/protobuf/repeated_field.cc  -fPIC -DPIC -o google/protobuf/.libs/repeated_field.o
+| {standard input}: Assembler messages:
+| {standard input}:113: Error: unrecognized opcode `sync'
+| {standard input}:140: Error: unrecognized opcode `ll $2,0($16)'
+| {standard input}:143: Error: unrecognized opcode `sc $4,0($16)'
+| {standard input}:202: Error: unrecognized opcode `sync'
+| {standard input}:275: Error: unrecognized opcode `sync'
+| Makefile:2064: recipe for target 'google/protobuf/stubs/once.lo' failed
+| make[3]: *** [google/protobuf/stubs/once.lo] Error 1
+
+Protobuf implements atomics for mips, using ASM "sync" instruction.
+It is not available in mips16e. Switching the library to mips32 is
+the easiest solution.
+
+Signed-off-by: Lukasz Nowak <lnowak@tycoint.com>
 ---
- .../change-AC_TRY_RUN-to-AC_TRY_LINK.patch         | 56 ++++++++++++++++++++++
- meta-oe/recipes-devtools/php/php.inc               |  3 +-
- .../php/php/pthread-check-threads-m4.patch         | 30 ------------
- meta-oe/recipes-devtools/php/php_5.5.38.bb         |  6 ---
- meta-oe/recipes-devtools/php/php_7.0.1.bb          |  8 ++++
- 5 files changed, 65 insertions(+), 38 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
- delete mode 100644 meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch
- delete mode 100644 meta-oe/recipes-devtools/php/php_5.5.38.bb
- create mode 100644 meta-oe/recipes-devtools/php/php_7.0.1.bb
+ meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch b/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
-new file mode 100644
-index 0000000..39c334f
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
-@@ -0,0 +1,56 @@
-+[PATCH] config.m4: change AC_TRY_RUN to AC_TRY_LINK
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb
+index 2977c59..7b8f629 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb
+@@ -28,4 +28,6 @@ S = "${WORKDIR}/git"
+ 
+ FILES_${PN}-compiler = "${bindir} ${libdir}/libprotoc${SOLIBS}"
+ 
++MIPS_INSTRUCTION_SET = "mips"
 +
-+Upstream-Status: Pending
-+
-+AC_TRY_RUN is not suitable for cross-compile
-+
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+---
-+ ext/fileinfo/config.m4 | 31 ++++++-------------------------
-+ 1 file changed, 6 insertions(+), 25 deletions(-)
-+
-+diff --git a/ext/fileinfo/config.m4 b/ext/fileinfo/config.m4
-+index 7e98d62..8a8ea0e 100644
-+--- a/ext/fileinfo/config.m4
-++++ b/ext/fileinfo/config.m4
-+@@ -14,31 +14,12 @@ if test "$PHP_FILEINFO" != "no"; then
-+     libmagic/readcdf.c libmagic/softmagic.c"
-+ 
-+   AC_MSG_CHECKING([for strcasestr])
-+-  AC_TRY_RUN([
-+-#include <string.h>
-+-#include <strings.h>
-+-#include <stdlib.h>
-+-
-+-int main(void)
-+-{
-+-        char *s0, *s1, *ret;
-+-
-+-        s0 = (char *) malloc(42);
-+-        s1 = (char *) malloc(8);
-+-
-+-        memset(s0, 'X', 42);
-+-        s0[24] = 'Y';
-+-        s0[26] = 'Z';
-+-        s0[41] = '\0';
-+-        memset(s1, 'x', 8);
-+-        s1[0] = 'y';
-+-        s1[2] = 'Z';
-+-        s1[7] = '\0';
-+-
-+-        ret = strcasestr(s0, s1);
-+-
-+-        return !(NULL != ret);
-+-}
-++  AC_TRY_COMPILE([
-++     #include <string.h>
-++     #include <strings.h>
-++     #include <stdlib.h>
-++  ],[
-++     strcasestr(NULL, NULL);
-+   ],[
-+     dnl using the platform implementation
-+     AC_MSG_RESULT(yes)
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index cd91940..191005f 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -24,7 +24,6 @@ SRC_URI_append_class-target = " \
-             file://php-fpm.conf \
-             file://php-fpm-apache.conf \
-             file://configure.patch \
--            file://pthread-check-threads-m4.patch \
-             file://70_mod_php5.conf \
-             file://php-fpm.service \
-           "
-@@ -218,7 +217,7 @@ FILES_${PN}-doc += "${PHP_LIBDIR}/php/doc"
- FILES_${PN}-cli = "${bindir}/php"
- FILES_${PN}-phar = "${bindir}/phar*"
- FILES_${PN}-cgi = "${bindir}/php-cgi"
--FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service"
-+FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service /etc/*"
- FILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
- CONFFILES_${PN}-fpm = "${sysconfdir}/php-fpm.conf"
- CONFFILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
-diff --git a/meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch b/meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch
-deleted file mode 100644
-index 0c564cd..0000000
---- a/meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From d8067ceacbf54e79c9c6b68675332c09eaa0b55d Mon Sep 17 00:00:00 2001
--From: Jackie Huang <jackie.huang@windriver.com>
--Date: Mon, 8 Apr 2013 14:29:51 +0800
--Subject: [PATCH] pthread-check
--
--Enable pthreads support when cross-compiling
--
--Upstream-Status: Inapproprate [config]
--
--Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-----
-- TSRM/threads.m4 |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
--
--diff --git a/TSRM/threads.m4 b/TSRM/threads.m4
--index 38494ce..15d9454 100644
----- a/TSRM/threads.m4
--+++ b/TSRM/threads.m4
--@@ -86,7 +86,7 @@ int main() {
--   pthreads_working=no
--   ], [
--   dnl For cross compiling running this test is of no use. NetWare supports pthreads
---  pthreads_working=no
--+  pthreads_working=yes
--   case $host_alias in
--   *netware*)
--     pthreads_working=yes
---- 
--1.7.4.1
--
-diff --git a/meta-oe/recipes-devtools/php/php_5.5.38.bb b/meta-oe/recipes-devtools/php/php_5.5.38.bb
-deleted file mode 100644
-index 26f35b1..0000000
---- a/meta-oe/recipes-devtools/php/php_5.5.38.bb
-+++ /dev/null
-@@ -1,6 +0,0 @@
--require php.inc
--
--LIC_FILES_CHKSUM = "file://LICENSE;md5=464ca70af214d2407f6b7d4458158afd"
--
--SRC_URI[md5sum] = "312244a0eecad602a1555ed2434e223f"
--SRC_URI[sha256sum] = "473c81ebb2e48ca468caee031762266651843d7227c18a824add9b07b9393e38"
-diff --git a/meta-oe/recipes-devtools/php/php_7.0.1.bb b/meta-oe/recipes-devtools/php/php_7.0.1.bb
-new file mode 100644
-index 0000000..899acf9
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php_7.0.1.bb
-@@ -0,0 +1,8 @@
-+require php.inc
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b602636d46a61c0ac0432bbf5c078fe4"
-+
-+SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch"
-+SRC_URI[md5sum] = "54e364b60a88db77adb96aacb10f10a4"
-+SRC_URI[sha256sum] = "68bcfd7deed5b3474d81dec9f74d122058327e2bed0ac25bbc9ec70995228e61"
-+
+ BBCLASSEXTEND = "native nativesdk"
 -- 
-2.7.4
-
-
+2.10.2
 
 
