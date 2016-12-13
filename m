@@ -1,49 +1,49 @@
 Return-Path: <ricardo.ribalda@gmail.com>
 Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
 	[209.85.215.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 776BB71E47
+	by mail.openembedded.org (Postfix) with ESMTP id 666E271E4B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2016 21:04:13 +0000 (UTC)
-Received: by mail-lf0-f68.google.com with SMTP id y21so4873019lfa.0
+	Tue, 13 Dec 2016 21:04:15 +0000 (UTC)
+Received: by mail-lf0-f68.google.com with SMTP id y21so4873285lfa.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2016 13:04:15 -0800 (PST)
+	Tue, 13 Dec 2016 13:04:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=PdV51Ox8ZOcgfneVHpt/DHIidG8P1lStuVs/Ra1JHtM=;
-	b=wVLHBPNqwG9z1MT697oH0+S0SJsNp9qDhI/jaHbGilzN0xB4DQPVhvGxtYzc67Xg61
-	F4cQ32y3b46NpaBqy6p7a9wOCi3P1TGOpuO489bH3w/QoOC++hrRNCM2VmHts3foS3R4
-	m5HtGyHQpJGp8dKnqv7dRBHEwBNdf+JsQdDJtV9LjK0ufyixQ9xsw2+UaZH1nWSlaRSU
-	MqH1Ii7l3FQQwA6RlJPKKmk/wJAxcqh0kdZTrUD5HIkrrEg+0CJnSMY02im1oO2XqxAK
-	S+s5o5dyZHZYfXoyfEfPnnm6uozQBQQvjuu1zd0g8Rqs5TSp40TUMZw6I4A2ZsypKgzJ
-	2F2A==
+	bh=vrIWAyymDRinpy+AtMhYPHU5qx910z6pkp8RnAqNNTU=;
+	b=FekxGdvxbAj0KwdOR6vSrN7L661lCeLUpnre51MXjjWyjvTfYY6GTgEecHvUhCjrl+
+	RnH26ZdARSsQQUiRLEfXSol8NJqQvs6BTj7qJnrqiidk/yU0AB0lVrTYvTbpMAn37XgC
+	ZUMVdLII1nax8X0IXgirTiUAIrOWeRq09zL413JQmMvbTjM5c+DIvIPK5p6YSxurzkkp
+	KpqvXp2oQtQHJxOFKwY95vdBg8VhlADIfT1ECqFE34ctAvpuhGWiv3H3dAJVCdKfx1jH
+	M7hrXIqf789GTmB3yOYXsaGbGdkFxEl3YtOftsGqxDwMZpvAPFt7g+v9TlFKKLXcg7Hh
+	0ekg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20130820;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=PdV51Ox8ZOcgfneVHpt/DHIidG8P1lStuVs/Ra1JHtM=;
-	b=c0xJuvLRqNmTR8oqD24M7Ka7SiKCQg0ASgXNuj2idPDJD24ReM/onWz/8rf7ISHt75
-	t7qiTg4Gzvld4trYgYTZKqocxT+8465RrXBkxFFdai2otQ3Ov8PDhJxzZ5WwqaLaexDA
-	CY0BIMmqTvG0GieXPQ9FVYe04phvSRJTOalgRopQOAM3nMdGXa1I/zfWV/TJWm5/K0bE
-	YdCvKFVyi1BqJT3maHtRcNZudJvHbpw/737DyX8KyJfv7R5CVeoTR7iH3BqPtY6Co1zt
-	0olmwcHRN99cOcJ2U1US6tXr8JLr/qc9D3HXkz5cNAJxqGqpMI+QIOI37on7XTa6CuIi
-	iugw==
-X-Gm-Message-State: AKaTC01tND0VaTSm9bcaj8W+CLg3GtEj2Ngtkd+scTLqJcWSf0kYtCLo4n9hC5jUvd+5GQ==
-X-Received: by 10.46.77.92 with SMTP id a89mr39689415ljb.28.1481663054554;
-	Tue, 13 Dec 2016 13:04:14 -0800 (PST)
+	bh=vrIWAyymDRinpy+AtMhYPHU5qx910z6pkp8RnAqNNTU=;
+	b=jmxTW8t3Ap78xnuJVM7XbQjBOQj7iDdgBWaROhSTjP37N3s7wmRMD+RlUgmbsWi2Xa
+	wkoglk3jp5iLs5fyrCiVY8auYHaJWPWZzqg5cF8IPqxIVmiAhOVXMJUUTb8pVo5X2m9X
+	cLO1bYl2J4OIcJ48YIn7mdHOjHaHc6BJMuF1x9ivFkQSE9gyAV7VsqpRtQoztpw63+Zv
+	WgS2MI031cV8WpNJVt9LgEXaUggD7AREFz141S2EOrgYDOVoylJd7+VyPMXigjkK6MNP
+	X12dFhag6KUDxXu2XOmBGXp6t2pkAygXOoQ4HLYbT9vObd6xWlTLVrIFzTjKuT/EdZer
+	qBRA==
+X-Gm-Message-State: AKaTC02xLSW3eH6lB1e5Xc2WKvL1QIdpdDc29tXKVN1fvHAD0q12NePdu5WadNv2cIqt8w==
+X-Received: by 10.46.72.17 with SMTP id v17mr37675507lja.5.1481663055999;
+	Tue, 13 Dec 2016 13:04:15 -0800 (PST)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id 26sm6678921lji.37.2016.12.13.13.04.13
+	by smtp.gmail.com with ESMTPSA id 26sm6678921lji.37.2016.12.13.13.04.14
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 13 Dec 2016 13:04:13 -0800 (PST)
+	Tue, 13 Dec 2016 13:04:14 -0800 (PST)
 From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 To: openembedded-devel@lists.openembedded.org, Martin.Jansa@gmail.com,
 	ross.burton@intel.com
-Date: Tue, 13 Dec 2016 22:04:00 +0100
-Message-Id: <20161213210404.6940-4-ricardo.ribalda@gmail.com>
+Date: Tue, 13 Dec 2016 22:04:01 +0100
+Message-Id: <20161213210404.6940-5-ricardo.ribalda@gmail.com>
 X-Mailer: git-send-email 2.10.2
 In-Reply-To: <20161213210404.6940-1-ricardo.ribalda@gmail.com>
 References: <20161213210404.6940-1-ricardo.ribalda@gmail.com>
-Subject: [meta-oe][PATCH 4/8] opencv: Add support for OpenJDK
+Subject: [meta-oe][PATCH 5/8] opencv: Add support for python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,45 +56,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2016 21:04:14 -0000
+X-List-Received-Date: Tue, 13 Dec 2016 21:04:15 -0000
 
-Add support for OpenJDK8 and Oracle-java
+New PACKAGECONFIG options: python2 and python3. Python3 selectec by
+default, because it is almost 2017 ;).
 
 Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 ---
- meta-oe/recipes-support/opencv/opencv_3.1.bb | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/opencv/opencv_3.1.bb | 24 +++++++++++++++++-------
+ 1 file changed, 17 insertions(+), 7 deletions(-)
 
 diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-index a5d681e79ca2..6e877f17749f 100644
+index 6e877f17749f..5a334fdd16d6 100644
 --- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
 +++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-@@ -62,7 +62,8 @@ PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON,-DWITH_JPEG=OFF,jpeg,"
- PACKAGECONFIG[libav] = "-DWITH_FFMPEG=ON,-DWITH_FFMPEG=OFF,libav,"
- PACKAGECONFIG[libv4l] = "-DWITH_LIBV4L=ON,-DWITH_LIBV4L=OFF,v4l-utils,"
- PACKAGECONFIG[opencl] = "-DWITH_OPENCL=ON,-DWITH_OPENCL=OFF,opencl-headers,"
--PACKAGECONFIG[oracle-java] = "-DJAVA_INCLUDE_PATH=${JAVA_HOME}/include -DJAVA_INCLUDE_PATH2=${JAVA_HOME}/include/linux -DJAVA_AWT_INCLUDE_PATH=${JAVA_HOME}/include -DJAVA_AWT_LIBRARY=${JAVA_HOME}/lib/amd64/libjawt.so -DJAVA_JVM_LIBRARY=${JAVA_HOME}/lib/amd64/server/libjvm.so,,ant-native oracle-jse-jdk oracle-jse-jdk-native,"
-+PACKAGECONFIG[oracle-java] = "-DJAVA_INCLUDE_PATH=${ORACLE_JAVA_HOME}/include -DJAVA_INCLUDE_PATH2=${ORACLE_JAVA_HOME}/include/linux -DJAVA_AWT_INCLUDE_PATH=${ORACLE_JAVA_HOME}/include -DJAVA_AWT_LIBRARY=${ORACLE_JAVA_HOME}/lib/amd64/libjawt.so -DJAVA_JVM_LIBRARY=${ORACLE_JAVA_HOME}/lib/amd64/server/libjvm.so,,ant-native oracle-jse-jdk oracle-jse-jdk-native,"
-+PACKAGECONFIG[java] = "-DJAVA_INCLUDE_PATH=${JAVA_HOME}/include -DJAVA_INCLUDE_PATH2=${JAVA_HOME}/include/linux -DJAVA_AWT_INCLUDE_PATH=${JAVA_HOME}/include -DJAVA_AWT_LIBRARY=${JAVA_HOME}/lib/amd64/libjawt.so -DJAVA_JVM_LIBRARY=${JAVA_HOME}/lib/amd64/server/libjvm.so,,ant-native fastjar-native openjdk-8-native,"
- PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,"
- PACKAGECONFIG[samples] = "-DBUILD_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON,-DBUILD_EXAMPLES=OFF,,"
- PACKAGECONFIG[tbb] = "-DWITH_TBB=ON,-DWITH_TBB=OFF,tbb,"
-@@ -73,12 +74,14 @@ inherit distutils-base pkgconfig cmake
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0ea90d28b4de883d7af5e6711f14f7bf"
+ ARM_INSTRUCTION_SET_armv4 = "arm"
+ ARM_INSTRUCTION_SET_armv5 = "arm"
+ 
+-DEPENDS = "python-numpy libtool swig swig-native python bzip2 zlib glib-2.0 libwebp protobuf protobuf-native"
++DEPENDS = "libtool swig swig-native python bzip2 zlib glib-2.0 libwebp protobuf protobuf-native"
+ 
+ SRCREV_opencv = "92387b1ef8fad15196dd5f7fb4931444a68bc93a"
+ SRCREV_contrib = "5409d5ad560523c85c6796cc5a009347072d883c"
+@@ -33,8 +33,7 @@ do_unpack_extra() {
+ }
+ addtask unpack_extra after do_unpack before do_patch
+ 
+-EXTRA_OECMAKE = "-DPYTHON2_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include \
+-    -DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
++EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
+     -DWITH_1394=OFF \
+     -DCMAKE_SKIP_RPATH=ON \
+     -DOPENCV_ICV_PACKAGE_DOWNLOADED=${IPP_MD5} \
+@@ -47,10 +46,12 @@ EXTRA_OECMAKE = "-DPYTHON2_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DI
+ "
+ EXTRA_OECMAKE_append_x86 = " -DX86=ON"
+ 
+-PACKAGECONFIG ??= "eigen jpeg png tiff v4l libv4l gstreamer samples tbb  gphoto2 \
++PACKAGECONFIG ??= "python3 eigen jpeg png tiff v4l libv4l gstreamer samples tbb  gphoto2 \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk", "", d)} \
+     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libav", "", d)}"
+ 
++PACKAGECONFIG[python2] = "-DPYTHON2_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include,,python-numpy,"
++PACKAGECONFIG[python3] = "-DPYTHON3_NUMPY_INCLUDE_DIRS:PATH=${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages/numpy/core/include,,python3-numpy,"
+ PACKAGECONFIG[amdblas] = "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libclamdblas,"
+ PACKAGECONFIG[amdfft] = "-DWITH_OPENCLAMDFFT=ON,-DWITH_OPENCLAMDFFT=OFF,libclamdfft,"
+ PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen gflags glog,"
+@@ -70,10 +71,13 @@ PACKAGECONFIG[tbb] = "-DWITH_TBB=ON,-DWITH_TBB=OFF,tbb,"
+ PACKAGECONFIG[tiff] = "-DWITH_TIFF=ON,-DWITH_TIFF=OFF,tiff,"
+ PACKAGECONFIG[v4l] = "-DWITH_V4L=ON,-DWITH_V4L=OFF,v4l-utils,"
+ 
+-inherit distutils-base pkgconfig cmake
++inherit pkgconfig cmake
++
++inherit ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'distutils3-base', '', d)}
++inherit ${@bb.utils.contains('PACKAGECONFIG', 'python2', 'distutils-base', '', d)}
  
  export PYTHON_CSPEC="-I${STAGING_INCDIR}/${PYTHON_DIR}"
- export PYTHON="${STAGING_BINDIR_NATIVE}/python"
--export JAVA_HOME="${STAGING_DIR_NATIVE}/usr/bin/java"
-+export ORACLE_JAVA_HOME="${STAGING_DIR_NATIVE}/usr/bin/java"
-+export JAVA_HOME="${STAGING_DIR_NATIVE}/usr/lib/jvm/openjdk-8-native"
+-export PYTHON="${STAGING_BINDIR_NATIVE}/python"
++export PYTHON="${STAGING_BINDIR_NATIVE}/${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3', 'python', d)}"
+ export ORACLE_JAVA_HOME="${STAGING_DIR_NATIVE}/usr/bin/java"
+ export JAVA_HOME="${STAGING_DIR_NATIVE}/usr/lib/jvm/openjdk-8-native"
  export ANT_DIR="${STAGING_DIR_NATIVE}/usr/share/ant/"
- 
- TARGET_CC_ARCH += "-I${S}/include "
+@@ -82,7 +86,9 @@ TARGET_CC_ARCH += "-I${S}/include "
  
  PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'oracle-java', '${PN}-java-dbg ${PN}-java', '', d)} \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'java', '${PN}-java-dbg ${PN}-java', '', d)} \
-     ${PN}-samples-dbg ${PN}-samples ${PN}-apps python-opencv"
+     ${@bb.utils.contains('PACKAGECONFIG', 'java', '${PN}-java-dbg ${PN}-java', '', d)} \
+-    ${PN}-samples-dbg ${PN}-samples ${PN}-apps python-opencv"
++    ${@bb.utils.contains('PACKAGECONFIG', 'python2', 'python-${PN}', '', d)} \
++    ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3-${PN}', '', d)} \
++    ${PN}-samples-dbg ${PN}-samples ${PN}-apps"
  
  python populate_packages_prepend () {
+     cv_libdir = d.expand('${libdir}')
+@@ -134,6 +140,10 @@ SUMMARY_python-opencv = "Python bindings to opencv"
+ FILES_python-opencv = "${PYTHON_SITEPACKAGES_DIR}/*"
+ RDEPENDS_python-opencv = "python-core python-numpy"
+ 
++SUMMARY_python3-opencv = "Python bindings to opencv"
++FILES_python3-opencv = "${PYTHON_SITEPACKAGES_DIR}/*"
++RDEPENDS_python3-opencv = "python3-core python3-numpy"
++
+ do_install_append() {
+     cp ${S}/include/opencv/*.h ${D}${includedir}/opencv/
+     sed -i '/blobtrack/d' ${D}${includedir}/opencv/cvaux.h
 -- 
 2.10.2
 
