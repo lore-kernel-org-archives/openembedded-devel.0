@@ -1,42 +1,29 @@
-Return-Path: <sragolu@mvista.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 28AF171C07
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id EC5BB71D7F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2016 09:57:24 +0000 (UTC)
-Received: by mail-wm0-f42.google.com with SMTP id c184so21329876wmd.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2016 01:57:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mvista-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=o3dnfv24YiPyirAA7AnJUFJGuBU4WolsCyZM/Mk1yI0=;
-	b=dskRtGGI2zbzJ60cAQVMo1ByFM6ydl9AqRdnC663vfnxhL+gkKGHc02cKjlGUCnEC2
-	71RnnchTCpz+tVoRUPiYWDKG5yrVlDwtdp7EaoBKaCVUV3QHEGFQkGNYH5MGgJx9IMFp
-	80aP03HGJxv11gPceD28rBDEwUfQ/7D0Vas49AziWWTVFEE31HW6sw/yfugf4cRdJjMM
-	5+obsTHOKSp5t5VsfWvKCPg28UyORJrWQK/4mB/gN+6leTuIelViisw+8OrSQ6rIuUob
-	oSFe6Mr+fuYBKwG1RbD0jRNzuBYRqiK9S6bz43Y3k+ErXuVxDo6/pade0f4YfpUmS6WE
-	gmjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=o3dnfv24YiPyirAA7AnJUFJGuBU4WolsCyZM/Mk1yI0=;
-	b=L7ONzotTEQ/BCmGY+mDXuLMT8PIVOoz+jZKDPx42RX7cTwRPRzNSTRKNto6VOuDiZy
-	qp6Z17uepQqAkwdfepyozoUFugIMEtUC83p21R1rVmBp4wRUxI3uRyA6trHwUzheWAfF
-	Ruisv5/5P80kmkQNpu4xbW+WNxvUc0iMJatg6qNP9H4Ay+5Xw4+Ty4XO6rPQIAunp+Wo
-	XoesUkOHBrFE8LKSsjh+xuovTQREx6lbZPFzLoUUf1Q4RshQm8gDlRSEyoF80Kx+ONED
-	yBhP3wd1nQoYD5OHZu8U9xBmjZkRWgpaKbUU3eFolTV+rydvH+1QolPnJxlggQP5cBYi
-	OO7w==
-X-Gm-Message-State: AKaTC03lnVwEsCHgQNGpXvlJgxZljKsONITxlBoMx7Q8n14o3reR1RJXCHS94C2xYIZyPLUhj6khP5oc5fg5uV4h
-X-Received: by 10.25.150.210 with SMTP id y201mr32509058lfd.58.1481623045213; 
-	Tue, 13 Dec 2016 01:57:25 -0800 (PST)
+	Tue, 13 Dec 2016 20:48:46 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by fmsmga102.fm.intel.com with ESMTP; 13 Dec 2016 12:48:47 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.33,342,1477983600"; d="scan'208";a="1071686799"
+Received: from oshau-mobl1.gar.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.255.185.66])
+	by orsmga001.jf.intel.com with ESMTP; 13 Dec 2016 12:48:44 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Robert Cagle <rcagle@omnitron-systems.com>
+Date: Wed, 14 Dec 2016 09:48:41 +1300
+Message-ID: <2668593.4cPb1u5Jh3@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+User-Agent: KMail/4.14.10 (Linux/4.8.12-100.fc23.x86_64; KDE/4.14.20; x86_64; ;
+	)
+In-Reply-To: <44E60BE3F360494194A33E0B8411CB9A62AE16@oscar.ostdom.com>
+References: <44E60BE3F360494194A33E0B8411CB9A62ADD8@oscar.ostdom.com>
+	<eb581f04-c965-f26c-97c2-3b04fd639515@windriver.com>
+	<44E60BE3F360494194A33E0B8411CB9A62AE16@oscar.ostdom.com>
 MIME-Version: 1.0
-Received: by 10.25.158.144 with HTTP; Tue, 13 Dec 2016 01:57:24 -0800 (PST)
-From: Srinivasa Rao Ragolu <sragolu@mvista.com>
-Date: Tue, 13 Dec 2016 15:27:24 +0530
-Message-ID: <CAH4+OFoKCiQ+reQ-52MoXSMPgZW9+TNp938E0EXH5Pif48=-pg@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: OpenJDK 8 is failing to configure ( dylan yocto)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: bitbake dependency question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,33 +36,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2016 09:57:26 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 13 Dec 2016 20:48:47 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Hi All,
+Hi Robert,
 
-I have taken openjdk-8_72b05 from yocto and tried to build . But somehow
-autotools configure could not able to find configure script in
-common/autoconf directory and failing at configure stage. Please provide
-your inputs to resolve this issue.
+On Tue, 13 Dec 2016 04:47:31 Robert Cagle wrote:
+> Robert Yang wrote:
+> > Try something like:
+> > In recipeD.bb:
+> > PLUGIN_RECIPES ??= "A" (or b, c)
+> > DEPENDS = "${PLUGIN_RECIPES} other..."
+> > 
+> > In local.conf:
+> > PLUGIN_RECIPES = "A" (or b, c).
+> 
+> Hi Robert,
+> Thanks for the response! My current solution is similar to what you suggest:
+> 
+> local.conf
+> PLUGIN_RECIPES = "recipeA recipeB recipeC"
+> 
+> recipeD.bb:
+> DEPENDS = "${PLUGIN_RECIPES} other"
+> 
+> I'm assuming the weak reference in 'PLUGIN_RECIPES ??= "A" (or b, c)'  is to
+> prevent errors if someone forgets to define PLUGIN_RECIPES in local.conf?
 
-Log data follows:
-| DEBUG: Executing python function sysroot_cleansstate
-| DEBUG: Python function sysroot_cleansstate finished
-| DEBUG: SITE files ['endian-little', 'common-linux', 'common-glibc',
-'bit-64', 'x86_64-linux', 'common']
-| DEBUG: Executing shell function autotools_preconfigure
-| DEBUG: Shell function autotools_preconfigure finished
-| DEBUG: Executing shell function do_configure
-| ERROR: no configure script found at
-/home/srinivas/cham-project/ericsson-project/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/jdk8u-e8bed1496ff2/configure
-| ERROR: Function failed: do_configure (see
-/home/srinivas/cham-project/ericsson-project/tmp/work/x86_64-linux/openjdk-8-native/72b05-r0/temp/log.do_configure.18043
-for further information)
+Correct, ??= is a "weak" or "lazy" default.
+ 
+> I was hoping to do something like this in an image recipe:
+> my-image.bb:
+>    IMAGE_INSTALL_append = " recipeA  recipeB recipeC recipeD"
+> and have the rest happen automatically based on the contents of those
+> recipes.
+> 
+> However, maybe I could at least do:
+> my-image.bb:
+>    IMAGE_INSTALL_append = " ${PLUGIN_RECIPES} recipeD  other..."
 
+This will almost certainly be fine in your case, but something to bear in mind 
+is that IMAGE_INSTALL refers to packages, not recipes. By default the main 
+package of a recipe is the same name as the recipe, but it doesn't have to be 
+that way.
 
-Please help me in resolving this issue
+> and have everything controlled from local.conf by one variable. I'd rather
+> have it the other way around (defined once in my-image.bb), but I can live
+> with this. Thanks again!
 
-Thanks in advance,
-Srinivas.
+FYI, one of the basic principles of the way OE works is that one recipe cannot 
+affect the processing of another except by way of the sysroot (and then the 
+first recipe must also be in the second's DEPENDS) - many other parts of the 
+system rest upon this design. Hence why you can't say "in this image I want 
+this other recipe built in this way, and in that image I want it built in that 
+other way". All you get to control in an image recipe is which packages to 
+include, and maybe do some post-processing. Of course, you can set variables 
+at the configuration level and have multiple recipes pick it up, as in the 
+above example.
+
+Another way to handle this kind of situation with plugins is to simply build 
+them all with all dependencies, and have the runtime design such that it's 
+fully flexible as to which plugins are installed - then you just make the 
+choice in the image. (Perhaps what you're building is already that way and 
+you're just trying to save on build time?)
+
+Cheers,
+Paul
+
+-- 
+
+Paul Eggleton
+Intel Open Source Technology Centre
 
