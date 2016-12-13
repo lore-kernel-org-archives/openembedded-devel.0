@@ -1,29 +1,30 @@
-Return-Path: <rcagle@omnitron-systems.com>
-Received: from mail01.omnitron-systems.com (mail01.omnitron-systems.com
-	[70.169.247.114])
-	by mail.openembedded.org (Postfix) with ESMTP id 097E271A31
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id CC53371A91
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2016 04:47:31 +0000 (UTC)
-Received: from OSCAR.ostdom.com ([fe80::2158:4d9b:82b3:313d]) by
-	oscar.ostdom.com ([fe80::2158:4d9b:82b3:313d%14]) with mapi id
-	14.03.0319.002; Mon, 12 Dec 2016 20:47:32 -0800
-From: Robert Cagle <rcagle@omnitron-systems.com>
-To: Robert Yang <liezhi.yang@windriver.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] bitbake dependency question
-Thread-Index: AdJU5iU1LANZZXXMQKOKaHr7Dnu+lQARkN2A//+VNKs=
-Date: Tue, 13 Dec 2016 04:47:31 +0000
-Message-ID: <44E60BE3F360494194A33E0B8411CB9A62AE16@oscar.ostdom.com>
-References: <44E60BE3F360494194A33E0B8411CB9A62ADD8@oscar.ostdom.com>,
-	<eb581f04-c965-f26c-97c2-3b04fd639515@windriver.com>
-In-Reply-To: <eb581f04-c965-f26c-97c2-3b04fd639515@windriver.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [108.184.166.78]
+	Tue, 13 Dec 2016 05:28:26 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="13856918"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 13 Dec 2016 13:28:07 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id EEFF44670486
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Dec 2016 13:28:06 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.81) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.319.2; Tue, 13 Dec 2016 13:28:06 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 13 Dec 2016 05:28:03 -0800
+Message-ID: <1481635683-62635-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: Re: bitbake dependency question
+X-Originating-IP: [10.167.226.81]
+X-yoursite-MailScanner-ID: EEFF44670486.AB165
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH] add php 7.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,96 +37,174 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2016 04:47:33 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 13 Dec 2016 05:28:28 -0000
+Content-Type: text/plain
 
-> Try something like:=0A=
-> In recipeD.bb:=0A=
-> PLUGIN_RECIPES ??=3D "A" (or b, c)=0A=
-> DEPENDS =3D "${PLUGIN_RECIPES} other..."=0A=
-=0A=
-> In local.conf:=0A=
-> PLUGIN_RECIPES =3D "A" (or b, c).=0A=
-=0A=
-Hi Robert,=0A=
-Thanks for the response! My current solution is similar to what you suggest=
-:=0A=
-=0A=
-local.conf=0A=
-PLUGIN_RECIPES =3D "recipeA recipeB recipeC"=0A=
-=0A=
-recipeD.bb:=0A=
-DEPENDS =3D "${PLUGIN_RECIPES} other"=0A=
-=0A=
-I'm assuming the weak reference in 'PLUGIN_RECIPES ??=3D "A" (or b, c)'  is=
- to prevent errors if someone forgets to define PLUGIN_RECIPES in local.con=
-f?=0A=
-=0A=
-I was hoping to do something like this in an image recipe:=0A=
-my-image.bb:=0A=
-   IMAGE_INSTALL_append =3D " recipeA  recipeB recipeC recipeD"=0A=
-and have the rest happen automatically based on the contents of those recip=
-es.=0A=
-=0A=
-However, maybe I could at least do:=0A=
-my-image.bb:=0A=
-   IMAGE_INSTALL_append =3D " ${PLUGIN_RECIPES} recipeD  other..."=0A=
-=0A=
-and have everything controlled from local.conf by one variable. I'd rather =
-have it the other way around (defined once in my-image.bb), but I can live =
-with this. Thanks again!=0A=
-=0A=
--Bob=0A=
-________________________________________=0A=
-From: Robert Yang [liezhi.yang@windriver.com]=0A=
-Sent: Monday, December 12, 2016 6:33 PM=0A=
-To: openembedded-devel@lists.openembedded.org; Robert Cagle=0A=
-Subject: Re: [oe] bitbake dependency question=0A=
-=0A=
-Hi Robert=0A=
-=0A=
-On 12/13/2016 10:10 AM, Robert Cagle wrote:=0A=
-> I'm trying to figure out a reasonable way to specify dependencies on an u=
-nknown/virtual set of other recipes.=0A=
-> For example,=0A=
->=0A=
-> Recipe A: Plugin #1 (installs a plugin spec somewhere in /usr/share)=0A=
-> Recipe B: Plugin #2 (same)=0A=
-> Recipe C: Plugin #3 (same).=0A=
-> Recipe D: Host Application (C based), which needs to be compiled last sin=
-ce it generates C code based on the spec files.=0A=
->=0A=
-> I'd rather not hard-code dependencies in Recipe D since the specific set =
-of plugins may be different depending on the specified distribution layer o=
-r machine type. I can define a variable in local.conf and use it to define =
-D's dependencies, but that means I'll have to define the set twice: in the =
-distribution layer and in local.conf. Based on what I've read and experimen=
-ted with, this seems be my only choice (other than restructuring the applic=
-ation).=0A=
->=0A=
-=0A=
-Try something like:=0A=
-In recipeD.bb:=0A=
-PLUGIN_RECIPES ??=3D "A" (or b, c)=0A=
-DEPENDS =3D "${PLUGIN_RECIPES} other..."=0A=
-=0A=
-In local.conf:=0A=
-PLUGIN_RECIPES =3D "A" (or b, c).=0A=
-=0A=
-// Robert=0A=
-=0A=
-> I really just wanted to expand a variable in each of A,B,C=0A=
->    PLUGIN_RECIPES +=3D "${PN}"=0A=
->=0A=
-> And have D declare=0A=
->   DEPENDS =3D "${PLUGIN_RECIPES} other..."=0A=
->=0A=
-> But that doesn't seem possible. Am I missing another way? (Python datasto=
-re maybe?)=0A=
->=0A=
-> Thanks,=0A=
-> Bob=0A=
->=0A=
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+
+1)add php_7.1.0.bb
+2)Delete php_5.5.38.bb,since it is Replaced by php_5.6.26.bb.
+3)Delete pthread-check-threads-m4.patch, since it is integrated upstream.
+---
+ .../change-AC_TRY_RUN-to-AC_TRY_LINK.patch         | 56 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/php/php.inc               |  3 +-
+ .../php/php/pthread-check-threads-m4.patch         | 30 ------------
+ meta-oe/recipes-devtools/php/php_5.5.38.bb         |  6 ---
+ meta-oe/recipes-devtools/php/php_7.0.1.bb          |  8 ++++
+ 5 files changed, 65 insertions(+), 38 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+ delete mode 100644 meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch
+ delete mode 100644 meta-oe/recipes-devtools/php/php_5.5.38.bb
+ create mode 100644 meta-oe/recipes-devtools/php/php_7.0.1.bb
+
+diff --git a/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch b/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+new file mode 100644
+index 0000000..39c334f
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+@@ -0,0 +1,56 @@
++[PATCH] config.m4: change AC_TRY_RUN to AC_TRY_LINK
++
++Upstream-Status: Pending
++
++AC_TRY_RUN is not suitable for cross-compile
++
++Signed-off-by: Roy Li <rongqing.li@windriver.com>
++---
++ ext/fileinfo/config.m4 | 31 ++++++-------------------------
++ 1 file changed, 6 insertions(+), 25 deletions(-)
++
++diff --git a/ext/fileinfo/config.m4 b/ext/fileinfo/config.m4
++index 7e98d62..8a8ea0e 100644
++--- a/ext/fileinfo/config.m4
+++++ b/ext/fileinfo/config.m4
++@@ -14,31 +14,12 @@ if test "$PHP_FILEINFO" != "no"; then
++     libmagic/readcdf.c libmagic/softmagic.c"
++ 
++   AC_MSG_CHECKING([for strcasestr])
++-  AC_TRY_RUN([
++-#include <string.h>
++-#include <strings.h>
++-#include <stdlib.h>
++-
++-int main(void)
++-{
++-        char *s0, *s1, *ret;
++-
++-        s0 = (char *) malloc(42);
++-        s1 = (char *) malloc(8);
++-
++-        memset(s0, 'X', 42);
++-        s0[24] = 'Y';
++-        s0[26] = 'Z';
++-        s0[41] = '\0';
++-        memset(s1, 'x', 8);
++-        s1[0] = 'y';
++-        s1[2] = 'Z';
++-        s1[7] = '\0';
++-
++-        ret = strcasestr(s0, s1);
++-
++-        return !(NULL != ret);
++-}
+++  AC_TRY_COMPILE([
+++     #include <string.h>
+++     #include <strings.h>
+++     #include <stdlib.h>
+++  ],[
+++     strcasestr(NULL, NULL);
++   ],[
++     dnl using the platform implementation
++     AC_MSG_RESULT(yes)
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index cd91940..191005f 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -24,7 +24,6 @@ SRC_URI_append_class-target = " \
+             file://php-fpm.conf \
+             file://php-fpm-apache.conf \
+             file://configure.patch \
+-            file://pthread-check-threads-m4.patch \
+             file://70_mod_php5.conf \
+             file://php-fpm.service \
+           "
+@@ -218,7 +217,7 @@ FILES_${PN}-doc += "${PHP_LIBDIR}/php/doc"
+ FILES_${PN}-cli = "${bindir}/php"
+ FILES_${PN}-phar = "${bindir}/phar*"
+ FILES_${PN}-cgi = "${bindir}/php-cgi"
+-FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service"
++FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service /etc/*"
+ FILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
+ CONFFILES_${PN}-fpm = "${sysconfdir}/php-fpm.conf"
+ CONFFILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
+diff --git a/meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch b/meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch
+deleted file mode 100644
+index 0c564cd..0000000
+--- a/meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From d8067ceacbf54e79c9c6b68675332c09eaa0b55d Mon Sep 17 00:00:00 2001
+-From: Jackie Huang <jackie.huang@windriver.com>
+-Date: Mon, 8 Apr 2013 14:29:51 +0800
+-Subject: [PATCH] pthread-check
+-
+-Enable pthreads support when cross-compiling
+-
+-Upstream-Status: Inapproprate [config]
+-
+-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+----
+- TSRM/threads.m4 |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/TSRM/threads.m4 b/TSRM/threads.m4
+-index 38494ce..15d9454 100644
+---- a/TSRM/threads.m4
+-+++ b/TSRM/threads.m4
+-@@ -86,7 +86,7 @@ int main() {
+-   pthreads_working=no
+-   ], [
+-   dnl For cross compiling running this test is of no use. NetWare supports pthreads
+--  pthreads_working=no
+-+  pthreads_working=yes
+-   case $host_alias in
+-   *netware*)
+-     pthreads_working=yes
+--- 
+-1.7.4.1
+-
+diff --git a/meta-oe/recipes-devtools/php/php_5.5.38.bb b/meta-oe/recipes-devtools/php/php_5.5.38.bb
+deleted file mode 100644
+index 26f35b1..0000000
+--- a/meta-oe/recipes-devtools/php/php_5.5.38.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require php.inc
+-
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=464ca70af214d2407f6b7d4458158afd"
+-
+-SRC_URI[md5sum] = "312244a0eecad602a1555ed2434e223f"
+-SRC_URI[sha256sum] = "473c81ebb2e48ca468caee031762266651843d7227c18a824add9b07b9393e38"
+diff --git a/meta-oe/recipes-devtools/php/php_7.0.1.bb b/meta-oe/recipes-devtools/php/php_7.0.1.bb
+new file mode 100644
+index 0000000..899acf9
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php_7.0.1.bb
+@@ -0,0 +1,8 @@
++require php.inc
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b602636d46a61c0ac0432bbf5c078fe4"
++
++SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch"
++SRC_URI[md5sum] = "54e364b60a88db77adb96aacb10f10a4"
++SRC_URI[sha256sum] = "68bcfd7deed5b3474d81dec9f74d122058327e2bed0ac25bbc9ec70995228e61"
++
+-- 
+2.7.4
+
+
+
 
