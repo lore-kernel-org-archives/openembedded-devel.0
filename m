@@ -1,46 +1,49 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 78D967723B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-vk0-f65.google.com (mail-vk0-f65.google.com
+	[209.85.213.65])
+	by mail.openembedded.org (Postfix) with ESMTP id C705171D86
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Dec 2016 16:18:25 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id g23so213311wme.1
+	Wed, 14 Dec 2016 20:22:40 +0000 (UTC)
+Received: by mail-vk0-f65.google.com with SMTP id p9so5090395vkd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Dec 2016 08:18:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id;
-	bh=7cIYQdEWPaAAvEJwn0zXN3UomK1xupYEs3O/a0a6IpU=;
-	b=hEUJgUpXN1pW/C0OqjZBqiTsW2UCxSlOROGMniPz6/2JZUewO4/cc3X5lF/B+b3qFR
-	pgebP38GqUloYK9OKbcOleqcxpTn1u+om0479pZYHsy/dSYGtfAWJ0nR94RKK4r/GEO5
-	5gdIE+T5BxXht0XlorOf+mG3sSIHvZUyVG5AobggMaCQEkOJITYj/WTmtKg7nv3/Kv+x
-	WuY/yFYF4n6tGqTyXyEtR6NYexKpnPWVIHoxx2aElp7/qGhgXumLlcjxUwujEzKZqV98
-	sZEcpaELjfR9qpIfQ60Jrmbkw1yhjcPF3YX08ZSVJvvmTvsNmP+uAcltF6XqIfct7zcc
-	qSnA==
+	Wed, 14 Dec 2016 12:22:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=7eq55WSVVuVrjh9mhFFPTh9119HXn9EXzsOO0lWt/V8=;
+	b=I2AfSHUmrQKClpzExx/JFIYKbsN7EqmQk3XjLZx6hAQgD3DnnKXBejqBsvLsJ+/kKo
+	ZJigrMd42xK6RztCWNA4KHruVqdmSnFZ0ZDF+S4w5fl+52XLFuFsDRZXafb9D5HPLtjI
+	U/mBwazmmbVzbz6EFm9U/ymAbSdYAjiISP6Hns/Wm+OubWBTMAg60UlB+7+R6yncJJLW
+	AoWuqos1oJ0c4Tko2+py4p3vOClyXRUFvt9+YleLFaXBo7d8ctDP9JvIWwK+WAxORzhm
+	9P0BdRee7t0+JsZ/4kFCXVrH6cB00I3uIy4PtaBt2rMscyEwYv+Dmoo3eWKbVE0MX3DQ
+	O2nA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=7cIYQdEWPaAAvEJwn0zXN3UomK1xupYEs3O/a0a6IpU=;
-	b=Dj5rS7P9wn3KKEHOSZKu2uvPp2F1CKN/Tzxee2uvuDa4vV+uckgkPIR69AAbvtbcnS
-	sH0mZ63mIpOMw+5stfQjdFsoxN5VGfwkQEYzGZ+HH/oiBm67KTdeUTPXhLGRYeVMMxXZ
-	xTOk9UkZL1B3UieSdegcys+969qCyqykmiIDqMisSxPGdJP24nzQoJ0CdcmlaSglLHC0
-	JbQmELlsFah+ZU0a6s8HF960g4O4o0HfOY1zrB16IpQwPi8LsM3NSR5yOGv8Q0kKE9J9
-	k/r2zJhV2M3KJcPV72dVvXDirHTPAiisNEFgs+15cbE2RNnDj/3cbc+jBMaA28LWcEYY
-	tJWQ==
-X-Gm-Message-State: AKaTC03rfNdhFXuBYzWbaeVZF7ud85u+Wfla/rLWmozPoI2Lqllhbg7uRTDstQFa0k18yw==
-X-Received: by 10.28.144.70 with SMTP id s67mr7664814wmd.138.1481732306022;
-	Wed, 14 Dec 2016 08:18:26 -0800 (PST)
-Received: from linuxdev.toradex.int ([46.140.72.82])
-	by smtp.gmail.com with ESMTPSA id
-	ba10sm67884295wjb.32.2016.12.14.08.18.25
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 14 Dec 2016 08:18:25 -0800 (PST)
-From: Max Krummenacher <max.oss.09@gmail.com>
-X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 14 Dec 2016 17:17:43 +0100
-Message-Id: <1481732263-17049-1-git-send-email-max.krummenacher@toradex.com>
-X-Mailer: git-send-email 2.5.5
-Cc: Max Krummenacher <max.krummenacher@toradex.com>
-Subject: [meta-oe][PATCH] tinymembench: fix QA warning for GNU_HASH
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=7eq55WSVVuVrjh9mhFFPTh9119HXn9EXzsOO0lWt/V8=;
+	b=udDPhcvd/+EbYC8jB+ruot9HHXeKrXJKncn4yQYqq9lUQyPdrvUFp80HKp+caBQCNy
+	rwLqYTUKk6Ri/FvhraDV6H2ATKcUCW/b2+XoCetKhlFMw1QXnoVjvq4iPhyrpPtvwyLb
+	n0Fu2Ja+9p4ss5tK2cyVetrDf9yITs7jSpZ4O4cbSszuh2y0KumzLqm9eb01oNpZPMet
+	gTat3IljAjgTcWYAEDxD7PSeUgA6hm7Q+MFbnIGIoGuPHAlnLO/n/dC1cGx7B3dNM5Uk
+	JY+soSZhfm7+NJ+1FHR3eGSPQ5ay+PXTWm8GqHJvVAf8f4GXsiNByoQy7UORIW09vOwP
+	N/0w==
+X-Gm-Message-State: AKaTC03iy0+0VT3fc/CFibvrMSTF4hZEFzvTpMPuQ94XGhIqf+/Dr0y5Gjya+vTidqHRtcomuzQRYhBkgxvcLA==
+X-Received: by 10.159.32.99 with SMTP id 90mr78002363uam.138.1481746962017;
+	Wed, 14 Dec 2016 12:22:42 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.159.48.87 with HTTP; Wed, 14 Dec 2016 12:22:11 -0800 (PST)
+In-Reply-To: <44E60BE3F360494194A33E0B8411CB9A62BEDC@oscar.ostdom.com>
+References: <44E60BE3F360494194A33E0B8411CB9A62ADD8@oscar.ostdom.com>
+	<eb581f04-c965-f26c-97c2-3b04fd639515@windriver.com>
+	<44E60BE3F360494194A33E0B8411CB9A62AE16@oscar.ostdom.com>
+	<2668593.4cPb1u5Jh3@peggleto-mobl.ger.corp.intel.com>
+	<44E60BE3F360494194A33E0B8411CB9A62BEDC@oscar.ostdom.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 14 Dec 2016 12:22:11 -0800
+Message-ID: <CAMKF1soi+D3OBPeJkBYAyGxAhGw6ua8qhCX_TttT1quh9ZGWnQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
+Subject: Re: bitbake dependency question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,27 +56,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Dec 2016 16:18:25 -0000
+X-List-Received-Date: Wed, 14 Dec 2016 20:22:42 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
----
- meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+On Tue, Dec 13, 2016 at 3:39 PM, Robert Cagle
+<rcagle@omnitron-systems.com> wrote:
+> Hi Paul,
+> Thanks for the response.
+>
+>> Another way to handle this kind of situation with plugins is to simply build
+>> them all with all dependencies, and have the runtime design such that it's
+>> fully flexible as to which plugins are installed - then you just make the
+>> choice in the image. (Perhaps what you're building is already that way and
+>> you're just trying to save on build time?)
+>
+> Unfortunately in this particular case it is more of a "compile-time plugin". RecipeD
+> generates and compiles a C file based on artifacts left in /usr/share by its
+> dependencies (Recipes A, B, and/or C), so runtime configuration isn't an option.
+> In this case including unused plugins would cause incorrect results.
 
-diff --git a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
-index 38e71be..5968d82 100644
---- a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
-+++ b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
-@@ -13,6 +13,8 @@ SRC_URI = "git://github.com/ssvb/tinymembench.git"
- 
- S = "${WORKDIR}/git"
- 
-+TARGET_CC_ARCH += "${LDFLAGS}"
-+
- do_install() {
-     install -d ${D}${bindir}
-     install -m755 tinymembench ${D}${bindir}/
--- 
-2.5.5
+you can insert the DEPENDS from distribution layer via a bbappend into recipe
+of packageD and ensure that plugin packages install the needed spec files during
+do_install so they get staged into staging sysroot before packageD
+starts to configure
+itself. you might even use PACKAGECONFIG to control it.
 
+>
+> It appears this form of dependency isn't supported in OE, so I'll either use a
+> variable defined in local.conf or more likely restructure the app so the plugins
+> and their host are all built within a single recipe/build.
+>
+> Thanks for the info though, it is all very interesting.
+>
+>> Cheers,
+>> Paul
+>>
+>> --
+>>
+>> Paul Eggleton
+>> Intel Open Source Technology Centre
+>
+> -Bob
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
