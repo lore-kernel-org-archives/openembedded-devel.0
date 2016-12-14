@@ -1,50 +1,39 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lf0-f65.google.com (mail-lf0-f65.google.com
-	[209.85.215.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E81171E14
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B75C731DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2016 23:46:28 +0000 (UTC)
-Received: by mail-lf0-f65.google.com with SMTP id p100so216543lfg.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Dec 2016 15:46:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=N52pKrg0Ee2heh8tT3vkMf84VZ9/WBnFJHz4pZHoRlg=;
-	b=U160mY9quPYT4oJuJhXAXsHPuBjRg/Cj604BAXYAQywp/4kXhoi9iQBrl5yTyPoFI/
-	sVUK2bXUkS+E/IxytWK9aBodxKJMH8Vgv3geMictlMJ6noI0qc7aYSQBo/JY4Qn3kYf7
-	y3vkCo2+2+W5g1cWgD8+s+L2lE1ME4v3cksB62pG+WHVaUssV6jOn/EmyzrjvaPhWLYA
-	F/No7/x2Uf2OuY78RaOh2iyJ6yNsoFBGRzt3yhlsl+C+Fu1i1E5MIa8qcmNa8z5FZBLj
-	N4ADkFCraoYsxdvNT/Gej+pn30FfUuo+Wg48Tf0w/kC07ZJXriguQjK+Ngpsv0gFwpls
-	DFEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20130820;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=N52pKrg0Ee2heh8tT3vkMf84VZ9/WBnFJHz4pZHoRlg=;
-	b=Q/mGizHyqFieUV+JZnaMfB2VZFSOA8olS6Vyx2AaCoNpjdqWgJWCrjcTBHMTfGGT4f
-	UIaFDdwbn1lsYLbRbLDkdP8EUslz7TJVoFziOg3dKzs/5SB8y5MANL8OJlCX/aIrqx0T
-	0UujuDZCjahKB/tlqi+qDTT7h4OzU5qO2W05u5mtxpJyfGgsGlSSEib0LHrEj/s1+Nja
-	3Ccnvz1rRJJ4G61dfnUo9Iyl1KIS4zbvCfC+/NDBTiJNUZDOu5d52nG1CQVkllat+Pzl
-	Z/NPs1apWh+iYe7rvO2Q46lnt0Wp21rY/aw+FfzkBnqmAmTyYt32Cg37NCftRUGTWqfg
-	Qy1A==
-X-Gm-Message-State: AKaTC036Qmp7XipKVHufYFJpOTNgSYd5bTP2lod3WQbUEWybZNMjw6mf13z+9jU8LsRcoQ==
-X-Received: by 10.46.0.218 with SMTP id e87mr39436729lji.54.1481672789132;
-	Tue, 13 Dec 2016 15:46:29 -0800 (PST)
-Received: from neopili.qtec.com
-	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id
-	z26sm10269595lja.49.2016.12.13.15.46.27
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 13 Dec 2016 15:46:28 -0800 (PST)
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-To: openembedded-devel@lists.openembedded.org, Martin.Jansa@gmail.com,
-	ross.burton@intel.com, raj.khem@gmail.com
-Date: Wed, 14 Dec 2016 00:46:18 +0100
-Message-Id: <20161213234618.31312-8-ricardo.ribalda@gmail.com>
-X-Mailer: git-send-email 2.10.2
-In-Reply-To: <20161213234618.31312-1-ricardo.ribalda@gmail.com>
-References: <20161213234618.31312-1-ricardo.ribalda@gmail.com>
-Subject: [meta-oe][PATCH v2 8/8] opencv: Merge dbg packages and Fix QA Issues
+	Wed, 14 Dec 2016 02:25:00 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 5606620A37;
+	Wed, 14 Dec 2016 02:25:02 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id U13AwHIbNe9o; Wed, 14 Dec 2016 02:25:02 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
+	[100.15.95.79])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3665F204AF;
+	Wed, 14 Dec 2016 02:25:01 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id A95651621D8; Tue, 13 Dec 2016 21:25:00 -0500 (EST)
+Date: Tue, 13 Dec 2016 21:25:00 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: akuster808 <akuster808@gmail.com>
+Message-ID: <20161214022500.GE30576@denix.org>
+References: <1477587755-24666-1-git-send-email-denis@denix.org>
+	<271f87f6-ac90-2389-3499-9c3bb8d80fa6@gmail.com>
+	<20161114190940.GB22657@denix.org>
+	<20161117035859.GB26131@denix.org>
+	<af58f301-6a21-6f9b-3c87-26fa8d44935b@gmail.com>
+	<20161207174015.GC30576@denix.org>
+	<8248cf6d-4dd5-debc-78fc-47987411b660@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <8248cf6d-4dd5-debc-78fc-47987411b660@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][krogoth][PATCH] syslog-ng: expand service file @variables@ earlier
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,76 +46,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Dec 2016 23:46:28 -0000
+X-List-Received-Date: Wed, 14 Dec 2016 02:25:07 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-The presence of more than on -dbg file made completely unusable the
-rest, and there is no big win by having more than one.
+On Mon, Dec 12, 2016 at 07:55:40PM -0800, akuster808 wrote:
+> Denys,
+> 
+> 
+> 
+> On 12/07/2016 09:40 AM, Denys Dmytriyenko wrote:
+> >On Fri, Nov 18, 2016 at 07:25:48AM -0800, akuster808 wrote:
+> >>
+> >>On 11/16/2016 07:58 PM, Denys Dmytriyenko wrote:
+> >>>On Mon, Nov 14, 2016 at 02:09:40PM -0500, Denys Dmytriyenko wrote:
+> >>>>On Thu, Nov 03, 2016 at 08:20:53AM -0700, akuster808 wrote:
+> >>>>>On 10/27/2016 10:02 AM, Denys Dmytriyenko wrote:
+> >>>>>>From: Ian Ray <ian.ray@ge.com>
+> >>>>>>
+> >>>>>>Move variable expansion of @SBINDIR@, @LOCALSTATEDIR@, and @BASEBINDIR@
+> >>>>>>earlier during install, to before the systemd service file is installed
+> >>>>>>by an automake rule.
+> >>>>>>
+> >>>>>>Signed-off-by: Ian Ray <ian.ray@ge.com>
+> >>>>>>Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> >>>>>merged to staging.
+> >>>>Armin,
+> >>>>
+> >>>>Any updates on this? Also, I don't see it in krogoth-next - what staging you
+> >>>>are referring to?
+> >>>Ping again, this time copy Armin directly.
+> >>oops, Had it sitting on my system forgot to push to contrib. Pull
+> >>request sent.
+> >Armin,
+> >
+> >Thanks, this hasn't been merged yet, it appears... Any ETA?
+> 
+> is this the commit you are looking for?
+> http://cgit.openembedded.org/meta-openembedded/commit/?h=krogoth&id=5882ba7f378acc75385e8a3ab00a6bdbc7a0ef93
 
-Also this qa issue is fixed:
+Yeah, I saw it merged few days ago, thanks!
 
-QA Issue: opencv-samples-dbg: found library in wrong location:
-/usr/share/OpenCV/java/.debug/libopencv_java310.so [libdir]
-
-Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
----
- meta-oe/recipes-support/opencv/opencv_3.1.bb | 19 +++++++++----------
- 1 file changed, 9 insertions(+), 10 deletions(-)
-
-diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-index 26749ee3a143..2851233c01de 100644
---- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
-@@ -85,15 +85,15 @@ export ANT_DIR="${STAGING_DIR_NATIVE}/usr/share/ant/"
- 
- TARGET_CC_ARCH += "-I${S}/include "
- 
--PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'oracle-java', '${PN}-java-dbg ${PN}-java', '', d)} \
--    ${@bb.utils.contains('PACKAGECONFIG', 'java', '${PN}-java-dbg ${PN}-java', '', d)} \
-+PACKAGES += "${@bb.utils.contains('PACKAGECONFIG', 'samples', '${PN}-samples', '', d)} \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'oracle-java', '${PN}-java', '', d)} \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'java', '${PN}-java', '', d)} \
-     ${@bb.utils.contains('PACKAGECONFIG', 'python2', 'python-${PN}', '', d)} \
-     ${@bb.utils.contains('PACKAGECONFIG', 'python3', 'python3-${PN}', '', d)} \
--    ${PN}-samples-dbg ${PN}-samples ${PN}-apps"
-+    ${PN}-apps"
- 
- python populate_packages_prepend () {
-     cv_libdir = d.expand('${libdir}')
--    cv_libdir_dbg = d.expand('${libdir}/.debug')
-     do_split_packages(d, cv_libdir, '^lib(.*)\.so$', 'lib%s-dev', 'OpenCV %s development package', extra_depends='${PN}-dev', allow_links=True)
-     do_split_packages(d, cv_libdir, '^lib(.*)\.la$', 'lib%s-dev', 'OpenCV %s development package', extra_depends='${PN}-dev')
-     do_split_packages(d, cv_libdir, '^lib(.*)\.a$', 'lib%s-dev', 'OpenCV %s development package', extra_depends='${PN}-dev')
-@@ -111,6 +111,7 @@ python populate_packages_prepend () {
-     d.setVar('RRECOMMENDS_' + metapkg, ' '.join(metapkg_rdepends))
- 
-     metapkg =  pn
-+    d.setVar('ALLOW_EMPTY_' + metapkg, "1")
-     blacklist = [ metapkg ]
-     metapkg_rdepends = [ ]
-     for pkg in packages[1:]:
-@@ -123,17 +124,15 @@ python populate_packages_prepend () {
- PACKAGES_DYNAMIC += "^libopencv-.*"
- 
- FILES_${PN} = ""
-+FILES_${PN}-dbg += "${datadir}/OpenCV/java/.debug/* ${datadir}/OpenCV/samples/bin/.debug/*"
-+FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig ${datadir}/OpenCV/*.cmake"
-+FILES_${PN}-staticdev += "${datadir}/OpenCV/3rdparty/lib/*.a"
- FILES_${PN}-apps = "${bindir}/* ${datadir}/OpenCV"
--FILES_${PN}-dev = "${includedir} ${libdir}/pkgconfig ${datadir}/OpenCV/*.cmake ${datadir}/OpenCV/3rdparty/${baselib}/*.a"
--FILES_${PN}-doc = "${datadir}/OpenCV/doc"
- FILES_${PN}-java = "${datadir}/OpenCV/java"
--FILES_${PN}-java-dbg = "${datadir}/OpenCV/java/.debug/"
- FILES_${PN}-samples = "${datadir}/OpenCV/samples/"
--FILES_${PN}-samples-dbg = "${datadir}/OpenCV/samples/bin/.debug"
- 
--INSANE_SKIP_${PN}-dev = "staticdev"
- INSANE_SKIP_${PN}-java = "libdir"
--INSANE_SKIP_${PN}-java-dbg = "libdir"
-+INSANE_SKIP_${PN}-dbg = "libdir"
- 
- ALLOW_EMPTY_${PN} = "1"
- 
 -- 
-2.10.2
-
+Denys
 
