@@ -1,49 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-vk0-f65.google.com (mail-vk0-f65.google.com
-	[209.85.213.65])
-	by mail.openembedded.org (Postfix) with ESMTP id C705171D86
+Return-Path: <jose.a.lamego@linux.intel.com>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 45A7273204
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Dec 2016 20:22:40 +0000 (UTC)
-Received: by mail-vk0-f65.google.com with SMTP id p9so5090395vkd.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Dec 2016 12:22:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=7eq55WSVVuVrjh9mhFFPTh9119HXn9EXzsOO0lWt/V8=;
-	b=I2AfSHUmrQKClpzExx/JFIYKbsN7EqmQk3XjLZx6hAQgD3DnnKXBejqBsvLsJ+/kKo
-	ZJigrMd42xK6RztCWNA4KHruVqdmSnFZ0ZDF+S4w5fl+52XLFuFsDRZXafb9D5HPLtjI
-	U/mBwazmmbVzbz6EFm9U/ymAbSdYAjiISP6Hns/Wm+OubWBTMAg60UlB+7+R6yncJJLW
-	AoWuqos1oJ0c4Tko2+py4p3vOClyXRUFvt9+YleLFaXBo7d8ctDP9JvIWwK+WAxORzhm
-	9P0BdRee7t0+JsZ/4kFCXVrH6cB00I3uIy4PtaBt2rMscyEwYv+Dmoo3eWKbVE0MX3DQ
-	O2nA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=7eq55WSVVuVrjh9mhFFPTh9119HXn9EXzsOO0lWt/V8=;
-	b=udDPhcvd/+EbYC8jB+ruot9HHXeKrXJKncn4yQYqq9lUQyPdrvUFp80HKp+caBQCNy
-	rwLqYTUKk6Ri/FvhraDV6H2ATKcUCW/b2+XoCetKhlFMw1QXnoVjvq4iPhyrpPtvwyLb
-	n0Fu2Ja+9p4ss5tK2cyVetrDf9yITs7jSpZ4O4cbSszuh2y0KumzLqm9eb01oNpZPMet
-	gTat3IljAjgTcWYAEDxD7PSeUgA6hm7Q+MFbnIGIoGuPHAlnLO/n/dC1cGx7B3dNM5Uk
-	JY+soSZhfm7+NJ+1FHR3eGSPQ5ay+PXTWm8GqHJvVAf8f4GXsiNByoQy7UORIW09vOwP
-	N/0w==
-X-Gm-Message-State: AKaTC03iy0+0VT3fc/CFibvrMSTF4hZEFzvTpMPuQ94XGhIqf+/Dr0y5Gjya+vTidqHRtcomuzQRYhBkgxvcLA==
-X-Received: by 10.159.32.99 with SMTP id 90mr78002363uam.138.1481746962017;
-	Wed, 14 Dec 2016 12:22:42 -0800 (PST)
+	Wed, 14 Dec 2016 20:27:35 +0000 (UTC)
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+	by orsmga103.jf.intel.com with ESMTP; 14 Dec 2016 12:27:37 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.33,348,1477983600"; 
+	d="asc'?scan'208";a="202642268"
+Received: from jalamego-mobl2.zpn.intel.com (HELO [10.219.5.137])
+	([10.219.5.137])
+	by fmsmga004.fm.intel.com with ESMTP; 14 Dec 2016 12:27:36 -0800
+Reply-To: openembedded-devel@lists.openembedded.org
+References: <4717571.f7GXZOAcRz@peggleto-mobl.ger.corp.intel.com>
+	<20161129204327.GG2546@bill-the-cat>
+	<d93f4841-0154-2232-1802-2b8fcc85a81c@linux.intel.com>
+	<19E9BF3F-664F-42A4-A170-5B7BB473ED80@gmail.com>
+	<53ca2ead-1b75-ff6d-30c1-abb16330bad3@linux.intel.com>
+	<20161202083009.GB3721@jama> <20161202122923.GI2546@bill-the-cat>
+	<3a262190-a720-7901-5ab0-8023ecf2521f@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org,
+	Martin Jansa <martin.jansa@gmail.com>
+From: Jose Lamego <jose.a.lamego@linux.intel.com>
+Message-ID: <2f3da309-df26-78e8-0d5b-d62f71b529cd@linux.intel.com>
+Date: Wed, 14 Dec 2016 14:27:40 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.5.1
 MIME-Version: 1.0
-Received: by 10.159.48.87 with HTTP; Wed, 14 Dec 2016 12:22:11 -0800 (PST)
-In-Reply-To: <44E60BE3F360494194A33E0B8411CB9A62BEDC@oscar.ostdom.com>
-References: <44E60BE3F360494194A33E0B8411CB9A62ADD8@oscar.ostdom.com>
-	<eb581f04-c965-f26c-97c2-3b04fd639515@windriver.com>
-	<44E60BE3F360494194A33E0B8411CB9A62AE16@oscar.ostdom.com>
-	<2668593.4cPb1u5Jh3@peggleto-mobl.ger.corp.intel.com>
-	<44E60BE3F360494194A33E0B8411CB9A62BEDC@oscar.ostdom.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 14 Dec 2016 12:22:11 -0800
-Message-ID: <CAMKF1soi+D3OBPeJkBYAyGxAhGw6ua8qhCX_TttT1quh9ZGWnQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
-Subject: Re: bitbake dependency question
+In-Reply-To: <3a262190-a720-7901-5ab0-8023ecf2521f@linux.intel.com>
+Cc: Patrick Ohly <patrick.ohly@intel.com>,
+	Michael Halstead <michael@yoctoproject.org>
+Subject: Re: meta-openembedded patchwork git hook
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,50 +43,182 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Dec 2016 20:22:42 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 14 Dec 2016 20:27:36 -0000
+X-Groupsio-MsgNum: 64319
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="GXO7nWgu5GTJesWMMSq9QcG2htvmO9eFa"
 
-On Tue, Dec 13, 2016 at 3:39 PM, Robert Cagle
-<rcagle@omnitron-systems.com> wrote:
-> Hi Paul,
-> Thanks for the response.
->
->> Another way to handle this kind of situation with plugins is to simply build
->> them all with all dependencies, and have the runtime design such that it's
->> fully flexible as to which plugins are installed - then you just make the
->> choice in the image. (Perhaps what you're building is already that way and
->> you're just trying to save on build time?)
->
-> Unfortunately in this particular case it is more of a "compile-time plugin". RecipeD
-> generates and compiles a C file based on artifacts left in /usr/share by its
-> dependencies (Recipes A, B, and/or C), so runtime configuration isn't an option.
-> In this case including unused plugins would cause incorrect results.
+--GXO7nWgu5GTJesWMMSq9QcG2htvmO9eFa
+Content-Type: multipart/mixed; boundary="6swn80pTSrPr5LhQio8uRXAFbV2d18fjo";
+ protected-headers="v1"
+From: Jose Lamego <jose.a.lamego@linux.intel.com>
+Reply-To: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@lists.openembedded.org,
+ Martin Jansa <martin.jansa@gmail.com>
+Cc: Patrick Ohly <patrick.ohly@intel.com>,
+ Michael Halstead <michael@yoctoproject.org>
+Message-ID: <2f3da309-df26-78e8-0d5b-d62f71b529cd@linux.intel.com>
+Subject: Re: [oe] meta-openembedded patchwork git hook
+References: <4717571.f7GXZOAcRz@peggleto-mobl.ger.corp.intel.com>
+ <20161129204327.GG2546@bill-the-cat>
+ <d93f4841-0154-2232-1802-2b8fcc85a81c@linux.intel.com>
+ <19E9BF3F-664F-42A4-A170-5B7BB473ED80@gmail.com>
+ <53ca2ead-1b75-ff6d-30c1-abb16330bad3@linux.intel.com>
+ <20161202083009.GB3721@jama> <20161202122923.GI2546@bill-the-cat>
+ <3a262190-a720-7901-5ab0-8023ecf2521f@linux.intel.com>
+In-Reply-To: <3a262190-a720-7901-5ab0-8023ecf2521f@linux.intel.com>
 
-you can insert the DEPENDS from distribution layer via a bbappend into recipe
-of packageD and ensure that plugin packages install the needed spec files during
-do_install so they get staged into staging sysroot before packageD
-starts to configure
-itself. you might even use PACKAGECONFIG to control it.
+--6swn80pTSrPr5LhQio8uRXAFbV2d18fjo
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
->
-> It appears this form of dependency isn't supported in OE, so I'll either use a
-> variable defined in local.conf or more likely restructure the app so the plugins
-> and their host are all built within a single recipe/build.
->
-> Thanks for the info though, it is all very interesting.
->
->> Cheers,
->> Paul
+
+
+On 12/02/2016 09:45 AM, Jose Lamego wrote:
+> I'm looking into this right now. I've filed a bug for tracking:
+> https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D10759
+>=20
+>=20
+> On 12/02/2016 06:29 AM, Tom Rini wrote:
+>> On Fri, Dec 02, 2016 at 09:30:09AM +0100, Martin Jansa wrote:
+>>> On Wed, Nov 30, 2016 at 12:41:20PM -0600, Jose Lamego wrote:
+>>>>
+>>>>
+>>>> On 11/29/2016 07:50 PM, Khem Raj wrote:
+>>>>>
+>>>>>> On Nov 29, 2016, at 2:34 PM, Jose Lamego <jose.a.lamego@linux.inte=
+l.com> wrote:
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>> On 11/29/2016 02:43 PM, Tom Rini wrote:
+>>>>>>> On Wed, Nov 30, 2016 at 06:52:46AM +1300, Paul Eggleton wrote:
+>>>>>>>
+>>>>>>>> Hi folks,
+>>>>>>>>
+>>>>>>>> Martin just brought to my attention that the git hook for the=20
+>>>>>>>> meta-openembedded repository that's supposed to update patchwork=
+ still isn't=20
+>>>>>>>> working and hasn't done so for a very long time. I thought we'd =
+fixed this so=20
+>>>>>>>> that merged patches get marked as "Accepted", but at least for m=
+eta-
+>>>>>>>> openembedded it seems like that's not the case.
+>>>>>>>>
+>>>>>>>> Jose / Michael - can you look into this if you haven't already? =
+Please let me=20
+>>>>>>>> know if you need any help.
+>>>>>>
+>>>>>> The git hook was configured to update OE-core only, Michael will h=
+elp us
+>>>>>> to include meta-openembedded.
+>>>>>>
+>>>>>
+>>>>> There are more repos using patchwork beyond OE-core and meta-opemeb=
+edded
+>>>>> please enable it for all of them  as well.
+>>>>>
+>>>>
+>>>> Now all of the projects are enabled to receive automatic updates fro=
+m
+>>>> the git-hook (Thanks Michael). Please let me know if any undesired
+>>>> behavior is detected.
+>>>
+>>> Still doesn't mark anything as accepted:
+>>>
+>>> OE @ ~/meta-openembedded $ git push origin master
+>>> Counting objects: 293, done.
+>>> Delta compression using up to 8 threads.
+>>> Compressing objects: 100% (257/257), done.
+>>> Writing objects: 100% (293/293), 48.83 KiB | 0 bytes/s, done.
+>>> Total 293 (delta 179), reused 68 (delta 18)
+>>> remote: E: failed to find patch for rev efd3696e70a6603f1a45faa4a1724=
+33514f0a487.
+>>> remote: E: failed to find patch for rev 8c720146b718aae3bc194621f3e09=
+5cf11ecb2ed.
+>>> remote: E: failed to find patch for rev fc2fc9097b2fa437d4af0338e4186=
+92b4dd6c989.
+>>> remote: E: failed to find patch for rev 533826b7652a2cf86ca7b665c25b9=
+8c89afc266e.
+>>> remote: E: failed to find patch for rev 6afb85d29286aaa4cdd892460f6ad=
+f68912917a5.
+>>> remote: E: failed to find patch for rev a7f3ec87f957ff35b8a853cd0e04c=
+6b18bac0ece.
+>>> remote: E: failed to find patch for rev 877e52fd75c7d3b88add94691df3b=
+eb5e0c54529.
+>>> remote: E: failed to find patch for rev 2f6e45baba961629bfe023599144b=
+e6cfcd45728.
+>>> remote: E: failed to find patch for rev 86fed80d80bc33f0a3cdbf719c00e=
+e5f05ed4d19.
+>>> remote: E: failed to find patch for rev 41d7bac5d50091cab835eac0a5eaa=
+6c431fb2023.
+>>> remote: E: failed to find patch for rev a85e12928131fce057f777daa76a7=
+f0c75cffa14.
+>>> remote: E: failed to find patch for rev 45837e6c567b1b9ff9d152a7e2a75=
+2488d313455.
+>>> remote: E: failed to find patch for rev 119e75e48dbf0539b4e4404179014=
+58ffff79b38.
+>>> remote: E: failed to find patch for rev a4251575f41fa5aafe5072e562497=
+b05c11b6702.
+>>> remote: E: failed to find patch for rev b6ea2c0bacb21b83bae3605ef4da0=
+80de0cad15e.
+>>> remote: E: failed to find patch for rev 4580e5ae201b320ed407eae26f586=
+55b8768b387.
+>>> remote: E: failed to find patch for rev c476219e845934f767927e81fe60d=
+baa157df9ee.
+>>> remote: E: failed to find patch for rev 0288b204f3c12af1561218fa0cfcd=
+fb9a5508b47.
+>>> remote: E: failed to find patch for rev 5596b52d64c30d8e66ec6e379cf69=
+a9fc9407fb1.
+>>> remote: E: failed to find patch for rev 24e51a6a106bc10a8838b23e4bf9e=
+a6304314bca.
+>>> remote: E: failed to find patch for rev aac6bf8bf911c3f14ff9dce08f0f0=
+11838f5a426.
+>>> remote: I: 0 patch(es) updated to state Accepted.
+>>> remote: Sending notification emails to: openembedded-commits@lists.op=
+enembedded.org.
+>>> To git.openembedded.org:meta-openembedded
+>>>    761639b..aac6bf8  master -> master
 >>
->> --
->>
->> Paul Eggleton
->> Intel Open Source Technology Centre
->
-> -Bob
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> I don't know how far apart the freedesktop.org one is from ozlabs but
+>> when I was seeing that problem locally as part of what I was working o=
+n
+>> it was because of some missing host deps (that are now not required).
+>> FWIW you can pretty easily turn the hook into a script to run manually=
 
+>> and sh -x it to see _why_ it's not hashing out those patches.
+>>
+Now all of the patchwork projects/repositories are using the
+asynchronous githook that was previously only used by oe-core. This hook
+version features some response time improvements (maintainers will
+regain control of their machines sooner) but mainly it should solve the
+automatic updating issue. We are waiting for pushes to confirm.
+>=20
+>=20
+>=20
+
+--=20
+Jose Lamego | OTC Embedded Platforms & Tools | GDC
+
+
+--6swn80pTSrPr5LhQio8uRXAFbV2d18fjo--
+
+--GXO7nWgu5GTJesWMMSq9QcG2htvmO9eFa
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iQEcBAEBAgAGBQJYUas/AAoJEFJAtowlSEbnMy0H+wY/uKuHra5FaoGNXxC/pjfv
+rxyPoXXQUWNMVqhMZxbye8ZvwWJg74KE7/1dCJ/MoA51aaRBk8UvP8QK0gmBVjNY
+3ujwMzFNg4Zm9WN5tqC0sdba2y2inhHeKVvXlAjdD3iyeRDcG//4A2pqx/4Y+cAV
+k1Eo+cWAF1oy0q4F7kfspxrBA04VMq6AgHSp930VWJmEG1TllrpaCjEU+mMSjoyc
+O4Anenl9iWzQ/x7+g5erz0fjsUb9lMcyAU+Ek91kHpb/vUtHsaT8x0ouGh4J5nhO
+7aF7d7PbM6160IKzj+J0lU9IQ838NxEg0TQeIyime1IcNch5HE9f6XQtcdzx8qE=
+=Y5x5
+-----END PGP SIGNATURE-----
+
+--GXO7nWgu5GTJesWMMSq9QcG2htvmO9eFa--
