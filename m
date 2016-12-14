@@ -1,34 +1,50 @@
-Return-Path: <rcagle@omnitron-systems.com>
-Received: from mail01.omnitron-systems.com (mail01.omnitron-systems.com
-	[70.169.247.114])
-	by mail.openembedded.org (Postfix) with ESMTP id 59D5E7321C
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wj0-f173.google.com (mail-wj0-f173.google.com
+	[209.85.210.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 992847721D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Dec 2016 21:02:39 +0000 (UTC)
-Received: from OSCAR.ostdom.com ([fe80::2158:4d9b:82b3:313d]) by
-	oscar.ostdom.com ([fe80::2158:4d9b:82b3:313d%14]) with mapi id
-	14.03.0319.002; Wed, 14 Dec 2016 13:02:39 -0800
-From: Robert Cagle <rcagle@omnitron-systems.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, "raj.khem@gmail.com"
-	<raj.khem@gmail.com>
-Thread-Topic: [oe] bitbake dependency question
-Thread-Index: AdJU5iU1LANZZXXMQKOKaHr7Dnu+lQARkN2A//+VNKuAAZypgP//hYX5gAIFaID//4R5fg==
-Date: Wed, 14 Dec 2016 21:02:39 +0000
-Message-ID: <44E60BE3F360494194A33E0B8411CB9A62C002@oscar.ostdom.com>
-References: <44E60BE3F360494194A33E0B8411CB9A62ADD8@oscar.ostdom.com>
-	<eb581f04-c965-f26c-97c2-3b04fd639515@windriver.com>
-	<44E60BE3F360494194A33E0B8411CB9A62AE16@oscar.ostdom.com>
-	<2668593.4cPb1u5Jh3@peggleto-mobl.ger.corp.intel.com>
-	<44E60BE3F360494194A33E0B8411CB9A62BEDC@oscar.ostdom.com>,
-	<CAMKF1soi+D3OBPeJkBYAyGxAhGw6ua8qhCX_TttT1quh9ZGWnQ@mail.gmail.com>
-In-Reply-To: <CAMKF1soi+D3OBPeJkBYAyGxAhGw6ua8qhCX_TttT1quh9ZGWnQ@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [192.168.25.105]
+	Wed, 14 Dec 2016 22:49:55 +0000 (UTC)
+Received: by mail-wj0-f173.google.com with SMTP id tk12so50778049wjb.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Dec 2016 14:49:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=ijWMeW7aCRz5oIQiT5qBC35LHg0TyIbDaCsSP4KHAJs=;
+	b=XOxrysMu/5m5YCxI8t9AsGxe2elWjehr77EYEijoD7c+qP7UmsLQCQibwBH+udawkx
+	/6M7Mp+U+Y9L5g2hN76qphIqLbcVtWoaL9pg823+76GyvTcw0qBQJ35dehvqujhNqgv+
+	6sHbHRTsQYA7kTRVTUpyFFxMkiop1ABAI/n2fb0WrujX//yCqTvQ5CedpwKRbDiHQFx4
+	tg29lenhcdbNmAXj3lc0aEEbzc3+0/A53p0PinXxMH6FKUT1mWxFz21mQtcu+S+qIgKx
+	12hI1/+z55BQynAEGpNaNId5itcpU8s7B/5KybOU4IHfv0b7g89/PeqyQ2zmDUAonp2X
+	Z+vA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=ijWMeW7aCRz5oIQiT5qBC35LHg0TyIbDaCsSP4KHAJs=;
+	b=D0/F1LJXrAvVSmt/t7PPZuNxYoZTCufZnmGuclWcMFOfAGcv50+oRW9FxaUB6LxdrV
+	P522t7uk+b544A/xt/ULq25WGBk61SuqAiVYx6sBZ7MWo0LYcVaeOlTnbG6pF4YmQjY5
+	fAyAmgjVeixavg7pusPqd3nEhFMPmnkB3ynPGrS6fsuXBbF80o8ZFYvSyQolZ3WUCtw6
+	eUstgvn2RUFI0sWtd0KCQV9Y2XH/qDoPgtRMxtmsU43Zyd4xQe7krKl+pfk3y2Qv2Ohk
+	imX5y7+wYAkOZsF4BSP3MwV9OKU6G96aH6N+eOs/gnldWuikpu0a3okn/Uxsgogh0zvu
+	hEnw==
+X-Gm-Message-State: AKaTC03TWRUX6o6q8nr8EMHFbYiDt8YmbKNn5HL3wrN158YmeEi+IYNe9PCkWb11cZSd2Q==
+X-Received: by 10.194.171.200 with SMTP id aw8mr88595675wjc.79.1481755796110; 
+	Wed, 14 Dec 2016 14:49:56 -0800 (PST)
+Received: from localhost.localdomain (p579CE070.dip0.t-ipconnect.de.
+	[87.156.224.112]) by smtp.googlemail.com with ESMTPSA id
+	d64sm9625699wmh.3.2016.12.14.14.49.55
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 14 Dec 2016 14:49:55 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 14 Dec 2016 23:49:36 +0100
+Message-Id: <1481755778-16443-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.5
 MIME-Version: 1.0
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
-Subject: Re: bitbake dependency question
+Subject: [meta-browser][PATCH 0/2] firefox fix build on oe-core master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,81 +57,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Dec 2016 21:02:40 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 14 Dec 2016 22:49:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-That's a great idea, I hadn't thought of bbappending my own package.
-I'll give that a try. Thanks!
+* recent 'use system's nss/nspr' broke firefox
+* to build properly patch just sent to oe-core is necessary [1]
 
---Bob=20
+[1] http://lists.openembedded.org/pipermail/openembedded-core/2016-December/130211.html
 
-________________________________________
-From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
--bounces@lists.openembedded.org] on behalf of Khem Raj [raj.khem@gmail.com]
-Sent: Wednesday, December 14, 2016 12:22 PM
-To: openembeded-devel
-Cc: Paul Eggleton
-Subject: Re: [oe] bitbake dependency question
+Andreas Müller (2):
+  firefox: fix configure with oe-core master - there is no nss-config
+  firefox: use pkg-config to find nspr
 
-On Tue, Dec 13, 2016 at 3:39 PM, Robert Cagle
-<rcagle@omnitron-systems.com> wrote:
-> Hi Paul,
-> Thanks for the response.
->
->> Another way to handle this kind of situation with plugins is to simply b=
-uild
->> them all with all dependencies, and have the runtime design such that it=
-'s
->> fully flexible as to which plugins are installed - then you just make th=
-e
->> choice in the image. (Perhaps what you're building is already that way a=
-nd
->> you're just trying to save on build time?)
->
-> Unfortunately in this particular case it is more of a "compile-time plugi=
-n". RecipeD
-> generates and compiles a C file based on artifacts left in /usr/share by =
-its
-> dependencies (Recipes A, B, and/or C), so runtime configuration isn't an =
-option.
-> In this case including unused plugins would cause incorrect results.
+ .../firefox/0001-use-pkg-config-to-find-nss.patch  | 47 ++++++++++++++++++++++
+ .../firefox/0002-use-pkg-config-to-find-nspr.patch | 37 +++++++++++++++++
+ recipes-mozilla/firefox/firefox_45.5.1esr.bb       |  2 +
+ 3 files changed, 86 insertions(+)
+ create mode 100644 recipes-mozilla/firefox/firefox/0001-use-pkg-config-to-find-nss.patch
+ create mode 100644 recipes-mozilla/firefox/firefox/0002-use-pkg-config-to-find-nspr.patch
 
-you can insert the DEPENDS from distribution layer via a bbappend into reci=
-pe
-of packageD and ensure that plugin packages install the needed spec files d=
-uring
-do_install so they get staged into staging sysroot before packageD
-starts to configure
-itself. you might even use PACKAGECONFIG to control it.
+-- 
+2.5.5
 
->
-> It appears this form of dependency isn't supported in OE, so I'll either =
-use a
-> variable defined in local.conf or more likely restructure the app so the =
-plugins
-> and their host are all built within a single recipe/build.
->
-> Thanks for the info though, it is all very interesting.
->
->> Cheers,
->> Paul
->>
->> --
->>
->> Paul Eggleton
->> Intel Open Source Technology Centre
->
-> -Bob
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
---
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
