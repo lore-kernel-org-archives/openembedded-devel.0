@@ -1,39 +1,46 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B75C731DA
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 78D967723B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Dec 2016 02:25:00 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 5606620A37;
-	Wed, 14 Dec 2016 02:25:02 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id U13AwHIbNe9o; Wed, 14 Dec 2016 02:25:02 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
-	[100.15.95.79])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3665F204AF;
-	Wed, 14 Dec 2016 02:25:01 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id A95651621D8; Tue, 13 Dec 2016 21:25:00 -0500 (EST)
-Date: Tue, 13 Dec 2016 21:25:00 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: akuster808 <akuster808@gmail.com>
-Message-ID: <20161214022500.GE30576@denix.org>
-References: <1477587755-24666-1-git-send-email-denis@denix.org>
-	<271f87f6-ac90-2389-3499-9c3bb8d80fa6@gmail.com>
-	<20161114190940.GB22657@denix.org>
-	<20161117035859.GB26131@denix.org>
-	<af58f301-6a21-6f9b-3c87-26fa8d44935b@gmail.com>
-	<20161207174015.GC30576@denix.org>
-	<8248cf6d-4dd5-debc-78fc-47987411b660@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <8248cf6d-4dd5-debc-78fc-47987411b660@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][krogoth][PATCH] syslog-ng: expand service file @variables@ earlier
+	Wed, 14 Dec 2016 16:18:25 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id g23so213311wme.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Dec 2016 08:18:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113;
+	h=from:to:cc:subject:date:message-id;
+	bh=7cIYQdEWPaAAvEJwn0zXN3UomK1xupYEs3O/a0a6IpU=;
+	b=hEUJgUpXN1pW/C0OqjZBqiTsW2UCxSlOROGMniPz6/2JZUewO4/cc3X5lF/B+b3qFR
+	pgebP38GqUloYK9OKbcOleqcxpTn1u+om0479pZYHsy/dSYGtfAWJ0nR94RKK4r/GEO5
+	5gdIE+T5BxXht0XlorOf+mG3sSIHvZUyVG5AobggMaCQEkOJITYj/WTmtKg7nv3/Kv+x
+	WuY/yFYF4n6tGqTyXyEtR6NYexKpnPWVIHoxx2aElp7/qGhgXumLlcjxUwujEzKZqV98
+	sZEcpaELjfR9qpIfQ60Jrmbkw1yhjcPF3YX08ZSVJvvmTvsNmP+uAcltF6XqIfct7zcc
+	qSnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=7cIYQdEWPaAAvEJwn0zXN3UomK1xupYEs3O/a0a6IpU=;
+	b=Dj5rS7P9wn3KKEHOSZKu2uvPp2F1CKN/Tzxee2uvuDa4vV+uckgkPIR69AAbvtbcnS
+	sH0mZ63mIpOMw+5stfQjdFsoxN5VGfwkQEYzGZ+HH/oiBm67KTdeUTPXhLGRYeVMMxXZ
+	xTOk9UkZL1B3UieSdegcys+969qCyqykmiIDqMisSxPGdJP24nzQoJ0CdcmlaSglLHC0
+	JbQmELlsFah+ZU0a6s8HF960g4O4o0HfOY1zrB16IpQwPi8LsM3NSR5yOGv8Q0kKE9J9
+	k/r2zJhV2M3KJcPV72dVvXDirHTPAiisNEFgs+15cbE2RNnDj/3cbc+jBMaA28LWcEYY
+	tJWQ==
+X-Gm-Message-State: AKaTC03rfNdhFXuBYzWbaeVZF7ud85u+Wfla/rLWmozPoI2Lqllhbg7uRTDstQFa0k18yw==
+X-Received: by 10.28.144.70 with SMTP id s67mr7664814wmd.138.1481732306022;
+	Wed, 14 Dec 2016 08:18:26 -0800 (PST)
+Received: from linuxdev.toradex.int ([46.140.72.82])
+	by smtp.gmail.com with ESMTPSA id
+	ba10sm67884295wjb.32.2016.12.14.08.18.25
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 14 Dec 2016 08:18:25 -0800 (PST)
+From: Max Krummenacher <max.oss.09@gmail.com>
+X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 14 Dec 2016 17:17:43 +0100
+Message-Id: <1481732263-17049-1-git-send-email-max.krummenacher@toradex.com>
+X-Mailer: git-send-email 2.5.5
+Cc: Max Krummenacher <max.krummenacher@toradex.com>
+Subject: [meta-oe][PATCH] tinymembench: fix QA warning for GNU_HASH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,47 +53,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Dec 2016 02:25:07 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 14 Dec 2016 16:18:25 -0000
 
-On Mon, Dec 12, 2016 at 07:55:40PM -0800, akuster808 wrote:
-> Denys,
-> 
-> 
-> 
-> On 12/07/2016 09:40 AM, Denys Dmytriyenko wrote:
-> >On Fri, Nov 18, 2016 at 07:25:48AM -0800, akuster808 wrote:
-> >>
-> >>On 11/16/2016 07:58 PM, Denys Dmytriyenko wrote:
-> >>>On Mon, Nov 14, 2016 at 02:09:40PM -0500, Denys Dmytriyenko wrote:
-> >>>>On Thu, Nov 03, 2016 at 08:20:53AM -0700, akuster808 wrote:
-> >>>>>On 10/27/2016 10:02 AM, Denys Dmytriyenko wrote:
-> >>>>>>From: Ian Ray <ian.ray@ge.com>
-> >>>>>>
-> >>>>>>Move variable expansion of @SBINDIR@, @LOCALSTATEDIR@, and @BASEBINDIR@
-> >>>>>>earlier during install, to before the systemd service file is installed
-> >>>>>>by an automake rule.
-> >>>>>>
-> >>>>>>Signed-off-by: Ian Ray <ian.ray@ge.com>
-> >>>>>>Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> >>>>>merged to staging.
-> >>>>Armin,
-> >>>>
-> >>>>Any updates on this? Also, I don't see it in krogoth-next - what staging you
-> >>>>are referring to?
-> >>>Ping again, this time copy Armin directly.
-> >>oops, Had it sitting on my system forgot to push to contrib. Pull
-> >>request sent.
-> >Armin,
-> >
-> >Thanks, this hasn't been merged yet, it appears... Any ETA?
-> 
-> is this the commit you are looking for?
-> http://cgit.openembedded.org/meta-openembedded/commit/?h=krogoth&id=5882ba7f378acc75385e8a3ab00a6bdbc7a0ef93
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+---
+ meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Yeah, I saw it merged few days ago, thanks!
-
+diff --git a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
+index 38e71be..5968d82 100644
+--- a/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
++++ b/meta-oe/recipes-benchmark/tinymembench/tinymembench_git.bb
+@@ -13,6 +13,8 @@ SRC_URI = "git://github.com/ssvb/tinymembench.git"
+ 
+ S = "${WORKDIR}/git"
+ 
++TARGET_CC_ARCH += "${LDFLAGS}"
++
+ do_install() {
+     install -d ${D}${bindir}
+     install -m755 tinymembench ${D}${bindir}/
 -- 
-Denys
+2.5.5
+
 
