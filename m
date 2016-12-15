@@ -1,54 +1,46 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wj0-f196.google.com (mail-wj0-f196.google.com
-	[209.85.210.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D94A772BF
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wj0-f194.google.com (mail-wj0-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 6198160107
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Dec 2016 09:52:57 +0000 (UTC)
-Received: by mail-wj0-f196.google.com with SMTP id j10so8787924wjb.3
+	Thu, 15 Dec 2016 13:18:53 +0000 (UTC)
+Received: by mail-wj0-f194.google.com with SMTP id he10so9750849wjc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Dec 2016 01:52:59 -0800 (PST)
+	Thu, 15 Dec 2016 05:18:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=l14YFW0d0BJu44hmeKhFWKMQ206axHUXmVU0P4us//8=;
-	b=laqaOfi9niAi5E7+4ck6nCWXU75oD97pRt4r4UtBRciuKqcz51RKkiKftw9oZAzxBh
-	F2pDEZMyUlMVE9owYWhZXQYurNnLiqmOURYhN0mQih9dV3UA5S3Q41g5+la/VkBuxT1I
-	3FWEkDuvuoQa3xYbhzxhusV7JBHHyoDcDaaJATla0KJ3rBhUqiEHJQleYIy4enG5VdzN
-	nQZ8WlLJlHtL3pZ4AhaE4jMto3HnE/jSwKx22GjiS6yoUBFaZkE9i6zFNhql5R2+hWTU
-	HX4JxHrNltPurXyDVgkRYmQz4My0H2G3mQL8npdPaVbwR6BTIhMLEjPebcWoLID0uKdX
-	4LzA==
+	h=from:to:cc:subject:date:message-id;
+	bh=t96M/B0T83Nxra1YYOKkcCuChkiAKlbMT6hZuccuhy4=;
+	b=scw8826Ehz6hOUQlm0XJJYMdoKItkldZD6ofzohjqy2SeWafwrM6kfDyEoHbBXx8xq
+	yE0kkeAHBpF25uMKZL9O6irbnBmSGo0LAq0+qHOhSJ+I7iotgbhrFc7mh1RT8qApvooI
+	CT6qLqdkRTjjVqlUwX+UXLCZMVSlqdF4BOwF7s1zKn+x9WpYGgjYLk5Iw+UraKw0Emuf
+	/sfBaI8NtGN/AJ5nIcmh5rpqLM4rrN6GZTr29Q64G71J8yH8BAojgVgVPCTvapyyk4Z8
+	5QgO28ry7I8RDF9ruS2YYUzvQaNTk2aVdoQ0/WtN1a3JS++uFTuToHcdmlbD12ACEUQp
+	2aFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=l14YFW0d0BJu44hmeKhFWKMQ206axHUXmVU0P4us//8=;
-	b=e2jy4MDpleu0Rn5QflcItklpUBNhrSaf3sQtj50fmNQstuyNXhREUu0DjFVSzydEjJ
-	59e57Kgc1yW8GGJAmWjtUmkwBbjOMbhvNR7yyLQ8v93TLaUVeU+TLvYmn98qQeJt94LR
-	mMNVw0USPYrdq4obaKOBX4/TqrHj4H1Sccc98mkeN3Mqzke5PAHSiPFOK6PAkS4ZEmt3
-	K3WLgwesrzMovCCD5x+1DTTa0YgPor9FBvzVcBoxNr0NcZTn7IoQhktkfkxseX5B+WnK
-	oVm6qSeqf3lAsR/pAE5Wwa5a1Z771l09Hhgu2pmOIiGV8FQpIOCwo6U60bMOks+m31nV
-	dUVw==
-X-Gm-Message-State: AKaTC02f6UkmmnARJ30u452fR24mr0+9j8h95LgwLySVenU/WUC5vOCyitmkoh9NUyaH4A==
-X-Received: by 10.194.122.65 with SMTP id lq1mr558052wjb.12.1481795577868;
-	Thu, 15 Dec 2016 01:52:57 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	u81sm1639100wmu.10.2016.12.15.01.52.56
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 15 Dec 2016 01:52:56 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 15 Dec 2016 10:53:00 +0100
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=t96M/B0T83Nxra1YYOKkcCuChkiAKlbMT6hZuccuhy4=;
+	b=aTb4St0Mv/RdNvM954mVXV0q48MiPPT7VjLsf58J2QXtm6YYvfJfW2pg+Ci+xmiB2/
+	aH19bVM61+glObXcsXTHexbfHFivl9opXXL2rDXQP5OrW8Hb4SvH9T7S3hCu8l2jq6mr
+	olVzeYAMSg3Z23DSRRxUp5LlcXd/B3R1s2kq6nFZ0vIm8A67k+7m4DIKw9LBvOd3dZY/
+	+57JuR/5AKHMPvwPd6nr5NTuc8PiChvPLj8NeIvgq87+ySjgl/uU7fjnsD5YfeREvY85
+	CfYrqs0F8R554w1YOYMU4JU/owfGi/Xwc0m/3IiPX1bsGonrVUfA9o2+PXI+iqDN3KcZ
+	GK+Q==
+X-Gm-Message-State: AKaTC02j5UD/YD9xJLGXbxbhGP9AFNqlC1/3M+ayW4rV3NwF3/W6l1fYLE4z4D+/tWWdpA==
+X-Received: by 10.194.22.41 with SMTP id a9mr1612660wjf.30.1481807934540;
+	Thu, 15 Dec 2016 05:18:54 -0800 (PST)
+Received: from localhost.localdomain
+	(ip-217-103-177-37.ip.prioritytelecom.net. [217.103.177.37])
+	by smtp.gmail.com with ESMTPSA id
+	c202sm3449224wme.1.2016.12.15.05.18.53
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 15 Dec 2016 05:18:53 -0800 (PST)
+From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161215095300.GA3244@jama>
-References: <20161123092209.23699-1-raj.khem@gmail.com>
-	<20161123092209.23699-8-raj.khem@gmail.com>
-	<20161126001515.GB8369@jama>
-	<B4055432-E49F-46E0-9612-D07BA01D5781@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <B4055432-E49F-46E0-9612-D07BA01D5781@gmail.com>
-User-Agent: Mutt/1.7.2 (2016-11-26)
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-multimedia][PATCH 08/49] kodi: Add krypton/17.x Jarvis/16.x recipes
+Date: Thu, 15 Dec 2016 05:18:46 -0800
+Message-Id: <1481807926-8204-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] gtest, gmock: update 1.7.0 -> 1.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,127 +53,442 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Dec 2016 09:52:58 -0000
-X-Groupsio-MsgNum: 64338
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="bp/iNruPH9dso1Pn"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 15 Dec 2016 13:18:54 -0000
 
---bp/iNruPH9dso1Pn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Starting from the 1.8.0 release, GoogleTest and GoogleMock are
+maintained in the same repository and released together.
 
-On Mon, Nov 28, 2016 at 04:57:31PM -0800, Khem Raj wrote:
->=20
-> > On Nov 25, 2016, at 4:15 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> >=20
-> > On Wed, Nov 23, 2016 at 01:21:28AM -0800, Khem Raj wrote:
-> >> 16.x is the default since its the latest released version
-> >>=20
-> >> remove obsoleted xbmc recipes
-> >> rename to recipes-mediacenter
-> >> +S =3D "${WORKDIR}/git"
-> >> +
-> >> +# breaks compilation
-> >> +ASNEEDED =3D ""
-> >> +
-> >> +ACCEL ?=3D ""
-> >> +ACCEL_x86 =3D "vaapi vdpau"
-> >> +ACCEL_x86-64 =3D "vaapi vdpau"
-> >> +
-> >> +PACKAGECONFIG ??=3D "${ACCEL}"
-> >> +PACKAGECONFIG_append +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'x=
-11', ' x11', '', d)}"
-> >> +PACKAGECONFIG_append +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'o=
-pengl', ' opengl', ' openglesv2', d)}"
-> >> +
-> >> +PACKAGECONFIG[opengl] =3D "--enable-gl,--enable-gles,"
-> >> +PACKAGECONFIG[openglesv2] =3D "--enable-gles,--enable-gl,virtual/egl"
-> >> +PACKAGECONFIG[vaapi] =3D "--enable-vaapi,--disable-vaapi,libva"
-> >> +PACKAGECONFIG[vdpau] =3D "--enable-vdpau,--disable-vdpau,libvdpau"
-> >> +PACKAGECONFIG[mysql] =3D "--enable-mysql,--disable-mysql,mysql5"
-> >> +PACKAGECONFIG[x11] =3D "--enable-x11,--disable-x11,libxinerama libxmu=
- libxrandr libxtst"
-> >> +PACKAGECONFIG[pulseaudio] =3D "--enable-pulse,--disable-pulse,pulseau=
-dio"
-> >=20
-> > Did I overlook libva recipe somewhere?
-> >=20
-> > It doesn't even start building for qemux86* because of this libva and
-> > for qemuarm it fails to configure:
-> > http://lists.openembedded.org/pipermail/openembedded-devel/2016-Novembe=
-r/110050.html
->=20
-> Sent a patch for libva which should help with x86 issue. For arm issue, I=
- see that error is due to java installation on build machine. I have sent a=
-nother patch for kodi-17
-> to fix build for qemuarm but thats not needed for kodi-16 which is defaul=
-t.
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ ...install-command-for-libraries-and-headers.patch |  40 --------
+ .../cmake-gmock.pc.in-Add-pkg-config-support.patch |  56 -----------
+ meta-oe/recipes-test/gmock/gmock_1.7.0.bb          |  23 -----
+ ...install-command-for-libraries-and-headers.patch |  32 -------
+ ...gtest.pc.in-Add-pkg-config-support-to-gte.patch |  55 -----------
+ .../gtest/gtest/Add-pkg-config-support.patch       | 106 +++++++++++++++++++++
+ meta-oe/recipes-test/gtest/gtest_1.7.0.bb          |  23 -----
+ meta-oe/recipes-test/gtest/gtest_1.8.0.bb          |  27 ++++++
+ 8 files changed, 133 insertions(+), 229 deletions(-)
+ delete mode 100644 meta-oe/recipes-test/gmock/gmock/cmake-Add-install-command-for-libraries-and-headers.patch
+ delete mode 100644 meta-oe/recipes-test/gmock/gmock/cmake-gmock.pc.in-Add-pkg-config-support.patch
+ delete mode 100644 meta-oe/recipes-test/gmock/gmock_1.7.0.bb
+ delete mode 100644 meta-oe/recipes-test/gtest/gtest/0001-Add-install-command-for-libraries-and-headers.patch
+ delete mode 100644 meta-oe/recipes-test/gtest/gtest/0002-CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch
+ create mode 100644 meta-oe/recipes-test/gtest/gtest/Add-pkg-config-support.patch
+ delete mode 100644 meta-oe/recipes-test/gtest/gtest_1.7.0.bb
+ create mode 100644 meta-oe/recipes-test/gtest/gtest_1.8.0.bb
 
-kodi-16 is still default, but fails because of this java issue :/
+diff --git a/meta-oe/recipes-test/gmock/gmock/cmake-Add-install-command-for-libraries-and-headers.patch b/meta-oe/recipes-test/gmock/gmock/cmake-Add-install-command-for-libraries-and-headers.patch
+deleted file mode 100644
+index 0dac998..0000000
+--- a/meta-oe/recipes-test/gmock/gmock/cmake-Add-install-command-for-libraries-and-headers.patch
++++ /dev/null
+@@ -1,40 +0,0 @@
+-From ba0a7d65c918cb7e3f2073553c4cc7af5858ed03 Mon Sep 17 00:00:00 2001
+-From: Otavio Salvador <otavio@ossystems.com.br>
+-Date: Thu, 31 Jul 2014 16:54:00 -0300
+-Subject: [PATCH] cmake: Add install command for libraries and headers
+-Organization: O.S. Systems Software LTDA.
+-
+-Upstream-Status: Inappropriate [embedded specific]
+-
+-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+----
+- CMakeLists.txt | 6 ++++++
+- 1 file changed, 6 insertions(+)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 572d044..90e797a 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -63,6 +63,8 @@ include_directories("${gmock_SOURCE_DIR}/include"
+-                     # Test sources.
+-                     "${gtest_SOURCE_DIR}")
+- 
+-+install(DIRECTORY ${gmock_SOURCE_DIR}/include/gmock DESTINATION include)
+-+
+- ########################################################################
+- #
+- # Defines the gmock & gmock_main libraries.  User tests should link
+-@@ -82,6 +84,10 @@ cxx_library(gmock_main
+-             src/gmock-all.cc
+-             src/gmock_main.cc)
+- 
+-+
+-+install(TARGETS gmock DESTINATION ${CMAKE_INSTALL_LIBDIR})
+-+install(TARGETS gmock_main DESTINATION ${CMAKE_INSTALL_LIBDIR})
+-+
+- ########################################################################
+- #
+- # Google Mock's own tests.
+--- 
+-1.9.1
+-
+diff --git a/meta-oe/recipes-test/gmock/gmock/cmake-gmock.pc.in-Add-pkg-config-support.patch b/meta-oe/recipes-test/gmock/gmock/cmake-gmock.pc.in-Add-pkg-config-support.patch
+deleted file mode 100644
+index 8ffe1a6..0000000
+--- a/meta-oe/recipes-test/gmock/gmock/cmake-gmock.pc.in-Add-pkg-config-support.patch
++++ /dev/null
+@@ -1,56 +0,0 @@
+-From 45661183a7c78d8c4f75adcf53c6ddd663dc8b2d Mon Sep 17 00:00:00 2001
+-From: Mario Domenech Goulart <mario@ossystems.com.br>
+-Date: Mon, 20 Oct 2014 17:12:58 -0200
+-Subject: [PATCH] CMakeLists, gmock.pc.in: Add pkg-config support
+-Organization: O.S. Systems Software LTDA.
+-
+-Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
+----
+- CMakeLists.txt | 7 ++++++-
+- gmock.pc.in    | 9 +++++++++
+- 2 files changed, 15 insertions(+), 1 deletion(-)
+- create mode 100644 gmock.pc.in
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 90e797a..98fd824 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -27,6 +27,9 @@ if (COMMAND pre_project_set_up_hermetic_build)
+-   pre_project_set_up_hermetic_build()
+- endif()
+- 
+-+# pkg-config support
+-+configure_file("gmock.pc.in" "gmock.pc" @ONLY)
+-+
+- ########################################################################
+- #
+- # Project-wide settings
+-@@ -87,7 +90,9 @@ cxx_library(gmock_main
+- 
+- install(TARGETS gmock DESTINATION ${CMAKE_INSTALL_LIBDIR})
+- install(TARGETS gmock_main DESTINATION ${CMAKE_INSTALL_LIBDIR})
+--
+-+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/gmock.pc"
+-+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig/"
+-+)  
+- ########################################################################
+- #
+- # Google Mock's own tests.
+-diff --git a/gmock.pc.in b/gmock.pc.in
+-new file mode 100644
+-index 0000000..08ad8d2
+---- /dev/null
+-+++ b/gmock.pc.in
+-@@ -0,0 +1,9 @@
+-+Name: libgmock
+-+Version: 1.7.0
+-+Description: Google's framework for writing C++ tests on a variety of platforms
+-+ 
+-+prefix=@CMAKE_INSTALL_PREFIX@
+-+includedir=${prefix}/include
+-+libdir=${prefix}/lib
+-+Cflags:-I${includedir}/gmock
+-+Libs: -L${libdir} -lgmock -lgmock_main
+--- 
+-1.9.1
+-
+diff --git a/meta-oe/recipes-test/gmock/gmock_1.7.0.bb b/meta-oe/recipes-test/gmock/gmock_1.7.0.bb
+deleted file mode 100644
+index a537f4c..0000000
+--- a/meta-oe/recipes-test/gmock/gmock_1.7.0.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-DESCRIPTION = "Google C++ Mocking Framework"
+-SECTION = "libs"
+-HOMEPAGE = "http://code.google.com/p/googlemock/"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=cbbd27594afd089daa160d3a16dd515a"
+-
+-SRC_URI = "\
+-    http://googlemock.googlecode.com/files/${BPN}-${PV}.zip \
+-    file://cmake-Add-install-command-for-libraries-and-headers.patch \
+-    file://cmake-gmock.pc.in-Add-pkg-config-support.patch \
+-"
+-
+-SRC_URI[md5sum] = "073b984d8798ea1594f5e44d85b20d66"
+-SRC_URI[sha256sum] = "26fcbb5925b74ad5fc8c26b0495dfc96353f4d553492eb97e85a8a6d2f43095b"
+-
+-inherit lib_package cmake
+-
+-ALLOW_EMPTY_${PN} = "1"
+-ALLOW_EMPTY_${PN}-dbg = "1"
+-
+-RDEPENDS_${PN}-dev += "${PN}-staticdev"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-test/gtest/gtest/0001-Add-install-command-for-libraries-and-headers.patch b/meta-oe/recipes-test/gtest/gtest/0001-Add-install-command-for-libraries-and-headers.patch
+deleted file mode 100644
+index b8f5d6f..0000000
+--- a/meta-oe/recipes-test/gtest/gtest/0001-Add-install-command-for-libraries-and-headers.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From bdcbef7b8adde424ee29e7eddc3b0570cc336449 Mon Sep 17 00:00:00 2001
+-From: Frederico Cadete <frederico.cadete@awtce.be>
+-Date: Tue, 21 Jun 2016 10:55:38 +0200
+-Subject: [PATCH 1/2] Add install command for libraries and headers
+-
+-Signed-off-by: Frederico Cadete <frederico.cadete@awtce.be>
+----
+- CMakeLists.txt | 8 ++++++++
+- 1 file changed, 8 insertions(+)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 57470c8..e969648 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -73,6 +73,14 @@ target_link_libraries(gtest_main gtest)
+- 
+- ########################################################################
+- #
+-+# Install rules
+-+install(TARGETS gtest gtest_main
+-+  DESTINATION ${CMAKE_INSTALL_LIBDIR})
+-+install(DIRECTORY ${gtest_SOURCE_DIR}/include/gtest
+-+  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+-+
+-+########################################################################
+-+#
+- # Samples on how to link user tests with gtest or gtest_main.
+- #
+- # They are not built by default.  To build them, set the
+--- 
+-2.5.0
+-
+diff --git a/meta-oe/recipes-test/gtest/gtest/0002-CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch b/meta-oe/recipes-test/gtest/gtest/0002-CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch
+deleted file mode 100644
+index 7a19f72..0000000
+--- a/meta-oe/recipes-test/gtest/gtest/0002-CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch
++++ /dev/null
+@@ -1,55 +0,0 @@
+-From 89639e76d5ee039a55004e5e910d565e6e84ed35 Mon Sep 17 00:00:00 2001
+-From: Rodrigo Caimi <caimi@datacom.ind.br>
+-Date: Tue, 7 Oct 2014 15:37:10 -0300
+-Subject: [PATCH 2/2] CMakeLists, gtest.pc.in: Add pkg-config support to gtest
+- 1.7.0
+-
+-Signed-off-by: Rodrigo Caimi <caimi@datacom.ind.br>
+----
+- CMakeLists.txt | 6 ++++++
+- gtest.pc.in    | 9 +++++++++
+- 2 files changed, 15 insertions(+)
+- create mode 100644 gtest.pc.in
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index e969648..0038826 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -29,6 +29,9 @@ if (COMMAND pre_project_set_up_hermetic_build)
+-   pre_project_set_up_hermetic_build()
+- endif()
+- 
+-+# pkg-config support
+-+configure_file("gtest.pc.in" "gtest.pc" @ONLY)
+-+
+- ########################################################################
+- #
+- # Project-wide settings
+-@@ -78,6 +81,9 @@ install(TARGETS gtest gtest_main
+-   DESTINATION ${CMAKE_INSTALL_LIBDIR})
+- install(DIRECTORY ${gtest_SOURCE_DIR}/include/gtest
+-   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+-+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/gtest.pc"
+-+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig/"
+-+)
+- 
+- ########################################################################
+- #
+-diff --git a/gtest.pc.in b/gtest.pc.in
+-new file mode 100644
+-index 0000000..52e622b
+---- /dev/null
+-+++ b/gtest.pc.in
+-@@ -0,0 +1,9 @@
+-+Name: libgtest
+-+Version: 1.7.0
+-+Description: Google's framework for writing C++ tests on a variety of platforms
+-+
+-+prefix=@CMAKE_INSTALL_PREFIX@
+-+includedir=@CMAKE_INSTALL_INCLUDEDIR@
+-+libdir=@CMAKE_INSTALL_LIBDIR@
+-+Cflags:-I${includedir}/gtest
+-+Libs: -L${libdir} -lgtest -lgtest_main
+--- 
+-2.5.0
+-
+diff --git a/meta-oe/recipes-test/gtest/gtest/Add-pkg-config-support.patch b/meta-oe/recipes-test/gtest/gtest/Add-pkg-config-support.patch
+new file mode 100644
+index 0000000..4c8977b
+--- /dev/null
++++ b/meta-oe/recipes-test/gtest/gtest/Add-pkg-config-support.patch
+@@ -0,0 +1,106 @@
++From ec9256bb704e94f41407fc8ace6a580491430196 Mon Sep 17 00:00:00 2001
++From: Andre McCurdy <armccurdy@gmail.com>
++Date: Thu, 15 Dec 2016 04:35:41 -0800
++Subject: [PATCH] Add pkg-config support
++
++Signed-off-by: Mario Domenech Goulart <mario@ossystems.com.br>
++Signed-off-by: Rodrigo Caimi <caimi@datacom.ind.br>
++Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
++---
++ googlemock/CMakeLists.txt | 9 +++++++--
++ googlemock/gmock.pc.in    | 9 +++++++++
++ googletest/CMakeLists.txt | 9 +++++++--
++ googletest/gtest.pc.in    | 9 +++++++++
++ 4 files changed, 32 insertions(+), 4 deletions(-)
++ create mode 100644 googlemock/gmock.pc.in
++ create mode 100644 googletest/gtest.pc.in
++
++diff --git a/googlemock/CMakeLists.txt b/googlemock/CMakeLists.txt
++index beb259a..f17e2d7 100644
++--- a/googlemock/CMakeLists.txt
+++++ b/googlemock/CMakeLists.txt
++@@ -27,6 +27,9 @@ if (COMMAND pre_project_set_up_hermetic_build)
++   pre_project_set_up_hermetic_build()
++ endif()
++ 
+++# pkg-config support
+++configure_file("gmock.pc.in" "gmock.pc" @ONLY)
+++
++ ########################################################################
++ #
++ # Project-wide settings
++@@ -104,9 +107,11 @@ endif()
++ #
++ # Install rules
++ install(TARGETS gmock gmock_main
++-  DESTINATION lib)
+++  DESTINATION ${CMAKE_INSTALL_LIBDIR})
++ install(DIRECTORY ${gmock_SOURCE_DIR}/include/gmock
++-  DESTINATION include)
+++  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+++install(FILES "${CMAKE_CURRENT_BINARY_DIR}/gmock.pc"
+++  DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig/")
++ 
++ ########################################################################
++ #
++diff --git a/googlemock/gmock.pc.in b/googlemock/gmock.pc.in
++new file mode 100644
++index 0000000..04bc0b4
++--- /dev/null
+++++ b/googlemock/gmock.pc.in
++@@ -0,0 +1,9 @@
+++Name: libgmock
+++Version: 1.8.0
+++Description: Google's framework for writing C++ tests on a variety of platforms
+++
+++prefix=@CMAKE_INSTALL_PREFIX@
+++includedir=@CMAKE_INSTALL_INCLUDEDIR@
+++libdir=@CMAKE_INSTALL_LIBDIR@
+++Cflags:-I${includedir}/gmock
+++Libs: -L${libdir} -lgmock -lgmock_main
++diff --git a/googletest/CMakeLists.txt b/googletest/CMakeLists.txt
++index 621d0f0..58aaf54 100644
++--- a/googletest/CMakeLists.txt
+++++ b/googletest/CMakeLists.txt
++@@ -34,6 +34,9 @@ if (COMMAND pre_project_set_up_hermetic_build)
++   pre_project_set_up_hermetic_build()
++ endif()
++ 
+++# pkg-config support
+++configure_file("gtest.pc.in" "gtest.pc" @ONLY)
+++
++ ########################################################################
++ #
++ # Project-wide settings
++@@ -103,9 +106,11 @@ endif()
++ #
++ # Install rules
++ install(TARGETS gtest gtest_main
++-  DESTINATION lib)
+++  DESTINATION ${CMAKE_INSTALL_LIBDIR})
++ install(DIRECTORY ${gtest_SOURCE_DIR}/include/gtest
++-  DESTINATION include)
+++  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+++install(FILES "${CMAKE_CURRENT_BINARY_DIR}/gtest.pc"
+++  DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig/")
++ 
++ ########################################################################
++ #
++diff --git a/googletest/gtest.pc.in b/googletest/gtest.pc.in
++new file mode 100644
++index 0000000..fb95152
++--- /dev/null
+++++ b/googletest/gtest.pc.in
++@@ -0,0 +1,9 @@
+++Name: libgtest
+++Version: 1.8.0
+++Description: Google's framework for writing C++ tests on a variety of platforms
+++
+++prefix=@CMAKE_INSTALL_PREFIX@
+++includedir=@CMAKE_INSTALL_INCLUDEDIR@
+++libdir=@CMAKE_INSTALL_LIBDIR@
+++Cflags:-I${includedir}/gtest
+++Libs: -L${libdir} -lgtest -lgtest_main
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-test/gtest/gtest_1.7.0.bb b/meta-oe/recipes-test/gtest/gtest_1.7.0.bb
+deleted file mode 100644
+index 5bacf6c..0000000
+--- a/meta-oe/recipes-test/gtest/gtest_1.7.0.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-DESCRIPTION = "Google's framework for writing C++ tests"
+-HOMEPAGE = "http://code.google.com/p/googletest/"
+-SECTION = "libs"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=cbbd27594afd089daa160d3a16dd515a"
+-
+-SRC_URI = "\
+-    http://googletest.googlecode.com/files/${BPN}-${PV}.zip \
+-    file://0001-Add-install-command-for-libraries-and-headers.patch \
+-    file://0002-CMakeLists-gtest.pc.in-Add-pkg-config-support-to-gte.patch \
+-"
+-
+-SRC_URI[md5sum] = "2d6ec8ccdf5c46b05ba54a9fd1d130d7"
+-SRC_URI[sha256sum] = "247ca18dd83f53deb1328be17e4b1be31514cedfc1e3424f672bf11fd7e0d60d"
+-
+-inherit lib_package cmake
+-
+-ALLOW_EMPTY_${PN} = "1"
+-ALLOW_EMPTY_${PN}-dbg = "1"
+-
+-RDEPENDS_${PN}-dev += "${PN}-staticdev"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-test/gtest/gtest_1.8.0.bb b/meta-oe/recipes-test/gtest/gtest_1.8.0.bb
+new file mode 100644
+index 0000000..483dc1f
+--- /dev/null
++++ b/meta-oe/recipes-test/gtest/gtest_1.8.0.bb
+@@ -0,0 +1,27 @@
++DESCRIPTION = "Google's framework for writing C++ tests"
++HOMEPAGE = "https://github.com/google/googletest"
++SECTION = "libs"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://googlemock/LICENSE;md5=cbbd27594afd089daa160d3a16dd515a \
++                    file://googletest/LICENSE;md5=cbbd27594afd089daa160d3a16dd515a"
++
++PROVIDES += "gmock"
++
++SRC_URI = "\
++    https://github.com/google/googletest/archive/release-${PV}.tar.gz \
++    file://Add-pkg-config-support.patch \
++"
++
++SRC_URI[md5sum] = "16877098823401d1bf2ed7891d7dce36"
++SRC_URI[sha256sum] = "58a6f4277ca2bc8565222b3bbd58a177609e9c488e8a72649359ba51450db7d8"
++
++S = "${WORKDIR}/googletest-release-${PV}"
++
++inherit cmake
++
++ALLOW_EMPTY_${PN} = "1"
++ALLOW_EMPTY_${PN}-dbg = "1"
++
++RDEPENDS_${PN}-dev += "${PN}-staticdev"
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+1.9.1
 
-There is also another issue with kodi-17 detected in qemux86* builds:
 
-ERROR: Following files are installed in sysroot, but not tracked by sstate:
-qemux86-64/usr/include/guid.h
-qemux86-64/usr/lib/libcrossguid.a
-INFO: Output written in: /home/jenkins/oe/world/shr-core/tmp-glibc/sysroot.=
-cruft.1481664087
-
-I believe both these files are installed by kodi, this looks suspicious:
-    make -C tools/depends/target/crossguid PREFIX=3D${STAGING_DIR_HOST}${pr=
-efix}
-
->=20
-> | /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/bin=
-/swig -w401 -c++ -o xbmc/interfaces/python/generated/AddonModuleXbmc.xml -x=
-ml -I./xbmc -xmllang python xbmc/interfaces/swig/AddonModuleXbmc.i
-> | # Work around potential groovy bug reported at: http://bugs.debian.org/=
-cgi-bin/bugreport.cgi?bug=3D733234
-> | /usr/bin/java -cp "./tools/codegenerator/groovy/groovy-all-2.4.4.jar:./=
-tools/codegenerator/groovy/commons-lang-2.6.jar:./tools/codegenerator:xbmc/=
-interfaces/python" \
-> |           org.codehaus.groovy.tools.FileSystemCompiler -d ./tools/codeg=
-enerator ./tools/codegenerator/Helper.groovy  ./tools/codegenerator/SwigTyp=
-eParser.groovy xbmc/interfaces/python/MethodType.groovy xbmc/interfaces/pyt=
-hon/PythonTools.groovy
-> | Error occurred during initialization of VM
-> | Could not reserve enough space for object heap
-> | Error: Could not create the Java Virtual Machine.
-> | Error: A fatal exception has occurred. Program will exit.
-> | codegenerator.mk:44: recipe for target 'xbmc/interfaces/python/generate=
-d/AddonModuleXbmc.cpp' failed
-> | make: *** [xbmc/interfaces/python/generated/AddonModuleXbmc.cpp] Error 1
->=20
->=20
->=20
->=20
-> > --=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---bp/iNruPH9dso1Pn
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWFJn+wAKCRA3VSO3ZXaA
-HI9PAJwK2bzg+ppgKkue/NtEL3gguBy5SgCbBWMVkTBRdbtz2r2Xi/JoMzd1w10=
-=iz98
------END PGP SIGNATURE-----
-
---bp/iNruPH9dso1Pn--
