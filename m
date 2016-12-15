@@ -1,44 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-vk0-f51.google.com (mail-vk0-f51.google.com
-	[209.85.213.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 84D8D71DAE
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wj0-f179.google.com (mail-wj0-f179.google.com
+	[209.85.210.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 7BCA5772E5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Dec 2016 16:41:48 +0000 (UTC)
-Received: by mail-vk0-f51.google.com with SMTP id 137so74569278vkl.0
+	Thu, 15 Dec 2016 17:52:21 +0000 (UTC)
+Received: by mail-wj0-f179.google.com with SMTP id tk12so73248948wjb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Dec 2016 08:41:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=4junqTOqMEH7qM1KnuMxf94wyQY9N6eNJ3Zk4dbdbec=;
-	b=FmlEBZboB9KUMZOVC3Ea4KXh+A9FRaf/18+TswuKi8gTWNMMh4thnkXWhshKyu01tO
-	l5ybSj4VYCAhOiqlCydYhi+Xpdcm8VRcG5IYip/9wBe9XuhR1PD9lv1FAB0vHqhW8G/D
-	osMGCK+WBfF4zVSwQZt8C731vWrHlzrowG4aY/mxd1yOqzj7oJHXAYlCj30/g0RHorT8
-	GZ3PlIHS0NZGVjaQyKDCJo9O5STHRpiPUgi/7dFt4SeoAgET9Zun87I0U/qhYyZ0PlK5
-	yYJ29ntuKKEAqlaXJkmGoY2wN/kY/lGoV7vzfPDRXOwJu1c7O56tbbYCzerTiEznHZq+
-	+0wg==
+	Thu, 15 Dec 2016 09:52:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=CoOxD9CFyJER6G7JoMiGSJEiAAwBNn63jN2Ro7ULF4o=;
+	b=U5lagoOmOuWqXZrArxqzmMxp8O1QH8G2oAZdQxndnfI1YmVSWfZ1orWP+1i7dGVQy3
+	vlef86wxa5XXrWtB7LauUjxwidUDIaUfCh9MbYJX37crevpDz3s4GTN3TI767+tnBA5W
+	eXw+kS34ajrv3vA4Mt0TXR942RtAW0GaNy8wr717+TC6lBrysG45vlRGBtiUQlREvyvR
+	g4u3ZNO7aOzL8ANcoC2uTSaZJZBK+hAUff2V2YCq8s+sp0ZWQUVKNXhTMNQQbzkSPJbf
+	7F2hEK8Vx+KJqlx86yTLx6FCYD1WyggzffmmHpCOxQpo8kMS7XD0c1lyhyM1PQhWOiWr
+	csFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=4junqTOqMEH7qM1KnuMxf94wyQY9N6eNJ3Zk4dbdbec=;
-	b=ZDbDEmbk+Tyh9L6DXYZqElDG3g9mLOlc0LWXU/TjL4pY6FSTVGDorPhWwK7+MBP5Cc
-	fMF1lpap44Qs4c51VtUz4I5eFJjnHDjVi6xbIV2NfeNs+wOhE5Ew3K1tRerURfn/R1MX
-	XtCBQPLinhTqLKS1aZtAa3nDjmUGlOEde39IlwULCVZb1gVNFZLApnyHvYCeqeysA4kF
-	xkHSAJ7A587K4hFvVXtF607XQ3kI2GcKlSIVLxjHGzbZAysgn0pBlIAF2C87uHJliK8P
-	73EiZNcoBRKGJk+If41WoZ/8e1+4eXe6l5ZoCZ3NoPQs7ivf1GvUP6/5be62KQjyE1KK
-	NHbQ==
-X-Gm-Message-State: AKaTC033GqtdmwNHIv4KLLu2MTkN47kySE12+Oob+/67QVES1ohNDqdxi0tPHZDDfZ03jFvE02/PuMi9QK//rw==
-X-Received: by 10.31.168.7 with SMTP id r7mr1630550vke.148.1481820109198; Thu,
-	15 Dec 2016 08:41:49 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=CoOxD9CFyJER6G7JoMiGSJEiAAwBNn63jN2Ro7ULF4o=;
+	b=AMlepZBUgOEl2Bh9i/ftvAY3+SfLrKnIB7lFAn32X6gAz5bgB+nmCEinT5OBzJjLAK
+	b1nBRMuNoT0aholV+W31XdlUSPCqALmCfd/Ng5pgAgNk9Sr3ONk8mOKgoYXM/GbsmMAj
+	nkE75RYT6LDqqzYP08i5Qki4TwCwMqJ1vwwJvyLWDky4M+du95cyaaxeJu62foFFsHDF
+	aMv5NQALeGISDi+7TV9ijZWmObKDQIEJWX8CVtuWcwLx9eWe778+uqR8e/ri9zeZ673Q
+	zFH0EcrNaYx7wcHB7sBDYAKwNVBRj26eayxu1+sW6aNWiQ9+pb8w9kjHD5UDzJBW7KJW
+	/oAg==
+X-Gm-Message-State: AKaTC02Wkk6lxDxg/xKhs5qFiNZa6FuC11Ss7f9Ma3Km+LVw1vDn/hYTBaI5GXvl6SVO+w==
+X-Received: by 10.194.148.134 with SMTP id ts6mr2618239wjb.220.1481824342007; 
+	Thu, 15 Dec 2016 09:52:22 -0800 (PST)
+Received: from mueller-a-nb-linux.zera.local
+	(ip-109-90-226-171.hsi11.unitymediagroup.de. [109.90.226.171])
+	by smtp.googlemail.com with ESMTPSA id
+	e5sm13482891wma.12.2016.12.15.09.52.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 15 Dec 2016 09:52:21 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 15 Dec 2016 18:52:08 +0100
+Message-Id: <1481824331-347-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Received: by 10.159.48.87 with HTTP; Thu, 15 Dec 2016 08:41:18 -0800 (PST)
-In-Reply-To: <1481817851-17771-1-git-send-email-armccurdy@gmail.com>
-References: <1481817851-17771-1-git-send-email-armccurdy@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 15 Dec 2016 08:41:18 -0800
-Message-ID: <CAMKF1sq9Rk1W-8x9JyA9ARvLCkQoQzHcjVdyYPj05e6buvjjsA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] dibbler: add initial recipe, dibbler 1.0.1
+Subject: [meta-browser][PATCH V2 0/3] firefox fix build on oe-core master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,76 +58,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Dec 2016 16:41:48 -0000
+X-List-Received-Date: Thu, 15 Dec 2016 17:52:23 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Dec 15, 2016 at 8:04 AM, Andre McCurdy <armccurdy@gmail.com> wrote:
-> Dibbler is a portable DHCPv6 implementation.
->
->   http://klub.com.pl/dhcpv6/
->
-> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
-> ---
->  .../recipes-connectivity/dibbler/dibbler_1.0.1.bb  | 40 ++++++++++++++++++++++
->  1 file changed, 40 insertions(+)
->  create mode 100644 meta-oe/recipes-connectivity/dibbler/dibbler_1.0.1.bb
->
-> diff --git a/meta-oe/recipes-connectivity/dibbler/dibbler_1.0.1.bb b/meta-oe/recipes-connectivity/dibbler/dibbler_1.0.1.bb
-> new file mode 100644
-> index 0000000..41bb78f
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/dibbler/dibbler_1.0.1.bb
-> @@ -0,0 +1,40 @@
-> +SUMMARY = "A portable DHCPv6 implementation"
-> +DESCRIPTION = "Dibbler is a portable DHCPv6 implementation. It supports stateful \
-> +(i.e. IPv6 address granting and IPv6 prefix delegation) as well as stateless (i.e. \
-> +option granting) autoconfiguration for IPv6."
-> +HOMEPAGE = "http://klub.com.pl/dhcpv6"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=7236695bb6d4461c105d685a8b61c4e3 \
-> +                    file://bison++/COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
-> +
-> +DEPENDS = "flex-native bison-native"
-> +
-> +SRC_URI = "http://klub.com.pl/dhcpv6/dibbler/dibbler-${PV}.tar.gz"
+* recent 'use system's nss/nspr' broke firefox
+* to build properly patch sent to oe-core is necessary [1]
 
-its also on sourceforge. perhaps better to use that for SRC_URI
-https://sourceforge.net/projects/dibbler/
+V1 -> V2: 0003-.. added to really fix build
 
-> +
-> +SRC_URI[md5sum] = "93357bea3ec35b0c1d11242055361409"
-> +SRC_URI[sha256sum] = "27869877e060c039cbc24a5f6a9dd69006bf67de0ffdf29a645a80aef6e476a1"
-> +
-> +inherit autotools
-> +
-> +PACKAGECONFIG ?= "auth bind-reuse dns-update dst-addr-filter link-state"
-> +
-> +PACKAGECONFIG[auth] = "--enable-auth,--disable-auth"
-> +PACKAGECONFIG[bind-reuse] = "--enable-bind-reuse,--disable-bind-reuse"
-> +PACKAGECONFIG[debug] = "--enable-debug,--disable-debug"
-> +PACKAGECONFIG[dns-update] = "--enable-dns-update,--disable-dns-update"
-> +PACKAGECONFIG[dst-addr-filter] = "--enable-dst-addr-filter,--disable-dst-addr-filter"
-> +PACKAGECONFIG[link-state] = "--enable-link-state,--disable-link-state"
-> +PACKAGECONFIG[remote-autoconf] = "--enable-remote-autoconf,--disable-remote-autoconf"
-> +PACKAGECONFIG[resolvconf] = "--enable-resolvconf,--disable-resolvconf"
-> +
-> +EXTRA_OECONF += " \
-> +    --disable-efence \
-> +    --with-gtest=no \
-> +"
-> +
-> +PACKAGES =+ "${PN}-client ${PN}-relay ${PN}-requestor ${PN}-server"
-> +
-> +FILES_${PN}-client = "${sbindir}/${PN}-client"
-> +FILES_${PN}-relay = "${sbindir}/${PN}-relay"
-> +FILES_${PN}-requestor = "${sbindir}/${PN}-requestor"
-> +FILES_${PN}-server = "${sbindir}/${PN}-server"
-> --
-> 1.9.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+[1] http://lists.openembedded.org/pipermail/openembedded-core/2016-December/130211.html
+
+Andreas Müller (3):
+  firefox: fix configure with oe-core master - there is no nss-config
+  firefox: use pkg-config to find nspr
+  firefox: do not link against crmf library it is not there
+
+ .../firefox/0001-use-pkg-config-to-find-nss.patch  | 47 ++++++++++++++++++++++
+ .../firefox/0002-use-pkg-config-to-find-nspr.patch | 37 +++++++++++++++++
+ ...link-against-crmf-library-it-is-not-there.patch | 47 ++++++++++++++++++++++
+ recipes-mozilla/firefox/firefox_45.5.1esr.bb       |  3 ++
+ 4 files changed, 134 insertions(+)
+ create mode 100644 recipes-mozilla/firefox/firefox/0001-use-pkg-config-to-find-nss.patch
+ create mode 100644 recipes-mozilla/firefox/firefox/0002-use-pkg-config-to-find-nspr.patch
+ create mode 100644 recipes-mozilla/firefox/firefox/0003-do-not-link-against-crmf-library-it-is-not-there.patch
+
+-- 
+2.7.4
+
 
