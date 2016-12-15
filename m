@@ -1,39 +1,44 @@
-Return-Path: <contact@jgueytat.fr>
-X-Greylist: delayed 1357 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 15 Dec 2016 15:36:04 UTC
-Received: from slow1-d.mail.gandi.net (slow1-d.mail.gandi.net [217.70.178.86])
-	by mail.openembedded.org (Postfix) with ESMTP id 32C54772B5
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id B64BA71E54
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Dec 2016 15:36:04 +0000 (UTC)
-Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net
-	[217.70.183.194])
-	by slow1-d.mail.gandi.net (Postfix) with ESMTP id 457B8536B25
+	Thu, 15 Dec 2016 16:04:20 +0000 (UTC)
+Received: by mail-wm0-f49.google.com with SMTP id a197so170745438wmd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Dec 2016 16:06:12 +0100 (CET)
-Received: from mfilter33-d.gandi.net (mfilter33-d.gandi.net [217.70.178.164])
-	by relay2-d.mail.gandi.net (Postfix) with ESMTP id 0D677C5AA2;
-	Thu, 15 Dec 2016 16:06:11 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mfilter33-d.gandi.net
-Received: from relay2-d.mail.gandi.net ([IPv6:::ffff:217.70.183.194])
-	by mfilter33-d.gandi.net (mfilter33-d.gandi.net [::ffff:10.0.15.180])
-	(amavisd-new, port 10024)
-	with ESMTP id icuOdRjA6d04; Thu, 15 Dec 2016 16:06:08 +0100 (CET)
-X-Originating-IP: 10.58.1.142
-Received: from webmail.gandi.net (webmail2-d.mgt.gandi.net [10.58.1.142])
-	(Authenticated sender: contact@jgueytat.fr)
-	by relay2-d.mail.gandi.net (Postfix) with ESMTPA id 884DFC5AAF;
-	Thu, 15 Dec 2016 16:05:39 +0100 (CET)
-MIME-Version: 1.0
-Date: Thu, 15 Dec 2016 16:05:39 +0100
-From: Julien Gueytat <contact@jgueytat.fr>
+	Thu, 15 Dec 2016 08:04:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=7RyxC8WbBlDXnDnkTVjPhrzYDq4rtnL1mrdL3xvUo2U=;
+	b=imChcTIq4PeTCjbL8+ZwZDK6k/Fe9FAQSIaqGmbqMljTh1CwyaA/leSuB5aNXTK9SL
+	CsugVqkdgBAkqoDtFhscHVj4FJGhHqW8iMFaTEfFLiIUS74JUgredXn/jTlnQMPoz5Aj
+	M0xtEYxeqUirILIqIp1hMAkbV+qlbC5FphHV1vImX0vWtBwl16Vv8Cbp/dfJl3UVICbr
+	/4l3sYUwtQ6mgBlHKEKQ8geYhAxcJRSZqxiVDFgC4wdlRedKRQeucdsbh6+piderAhz5
+	CR8OFsPhbU7P0F7RXEg8y1ARMaQsTYzdywWXkAYJuwvbqbvo22HOzZ0oQzgCWPZfpzxg
+	hP4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=7RyxC8WbBlDXnDnkTVjPhrzYDq4rtnL1mrdL3xvUo2U=;
+	b=PYl4GKpgK7ENOMjQNECe0ANF9RTr1GoF2U0/HurS48bi8KkHHid/ZM47m1/LzDP4nb
+	jpoZTfxowxmvtmBXytEvOw6P3wJIPNJajmOmaQ+HjZfNllXVntwmy0phBHq236qTQ8Il
+	C7tiGKzl5Ikfidazql2OMmnCspQ3pYKbVQ9XukRDVSa8nnLWqHnxAp2j4EtEhbwRnzgu
+	SRei2b+60mC9pt3DAEL6TMGDiRzwhDTkegdsvyupGKzgwLzOTwE8yobhZtF2wCWY3JNh
+	hTs8rGcFgnbRnUkIkasyr002TA5FS5Iy+4rky5uw1vhDhZab6VqaghNdLmMdh0XCnSu8
+	ZTQQ==
+X-Gm-Message-State: AIkVDXKbBnUvb8Ibl9t8zxblv1nHgH5fRDJeWocvlrInk+Easa7b6e0sX5W4sHbe7HLv8w==
+X-Received: by 10.28.193.199 with SMTP id r190mr2076854wmf.58.1481817861128;
+	Thu, 15 Dec 2016 08:04:21 -0800 (PST)
+Received: from localhost.localdomain
+	(ip-217-103-177-37.ip.prioritytelecom.net. [217.103.177.37])
+	by smtp.gmail.com with ESMTPSA id w8sm13039585wmw.4.2016.12.15.08.04.19
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 15 Dec 2016 08:04:20 -0800 (PST)
+From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <d4453d09-2112-0a1e-2812-0c63c932ca6a@gmail.com>
-References: <1481809716-24451-1-git-send-email-samuli.piippo@qt.io>
-	<d4453d09-2112-0a1e-2812-0c63c932ca6a@gmail.com>
-Message-ID: <b71d5e25dfb662edef6fb77a58c3b211@jgueytat.fr>
-X-Sender: contact@jgueytat.fr
-User-Agent: Roundcube Webmail/1.1.2
-Subject: Re: [meta-qt5][PATCH v4] Upgrade to Qt 5.8
+Date: Thu, 15 Dec 2016 08:04:11 -0800
+Message-Id: <1481817851-17771-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] dibbler: add initial recipe, dibbler 1.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,62 +51,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Dec 2016 15:36:05 -0000
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 15 Dec 2016 16:04:21 -0000
 
-Hi,
+Dibbler is a portable DHCPv6 implementation.
 
-thanks for the job!
-Is this on the master of meta-qt5? If so I will be able to check if this 
-patch 0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch is 
-still needed or not. I hope not.
+  http://klub.com.pl/dhcpv6/
 
-Regards,
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ .../recipes-connectivity/dibbler/dibbler_1.0.1.bb  | 40 ++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/dibbler/dibbler_1.0.1.bb
 
-
-On 2016-12-15 15:49, Samuli Piippo wrote:
-> Changes from v3 patch:
-> - sha1s updated to expected RC content
-> - fixed the qt3d assimp build-deps issue
-> - the new Qt configuration system taken into use where applicable
-> 
-> webengine build problem with x86_64 host and x86 target is still there.
-> 
-> -samuli
-> 
-> On 15.12.2016 15:48, Samuli Piippo wrote:
->> The linux-oe-g++ mkspec is changed to use $$(...) operator to obtain
->> the contents of an environment value when qmake is run instead of when
->> Makefile is processed. All OE_QMAKE_xxx variables need to be exported
->> for qmake to find them. configure's setBootstrapVariable function 
->> needs
->> to change $$(..) to normal $(...) operator to work with qmake's 
->> Makefile.
->> 
->> qt.conf generation for qtbase recipes is not needed, as configure will
->> generate its own version based on configure arguments. Skip running
->> qmake, since configure is now automatically invoked when it's run in
->> qtbase's root folder.
->> 
->> Update PACKAGECONFIGs for qtbase to match current configure options.
->> 
->> The new Qt configuration system [1] can be used with a new variable
->> EXTRA_QMAKEVARS_CONFIGURE, which takes both command line and feature
->> arguments.
->> 
->> Merge the two qtwayland recipes to one that supports all three targets
->> (target, native, nativesdk) without need for additional patch.
->> 
->> [1] 
->> https://www.mail-archive.com/development@qt-project.org/msg25257.html
->> 
-
+diff --git a/meta-oe/recipes-connectivity/dibbler/dibbler_1.0.1.bb b/meta-oe/recipes-connectivity/dibbler/dibbler_1.0.1.bb
+new file mode 100644
+index 0000000..41bb78f
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/dibbler/dibbler_1.0.1.bb
+@@ -0,0 +1,40 @@
++SUMMARY = "A portable DHCPv6 implementation"
++DESCRIPTION = "Dibbler is a portable DHCPv6 implementation. It supports stateful \
++(i.e. IPv6 address granting and IPv6 prefix delegation) as well as stateless (i.e. \
++option granting) autoconfiguration for IPv6."
++HOMEPAGE = "http://klub.com.pl/dhcpv6"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=7236695bb6d4461c105d685a8b61c4e3 \
++                    file://bison++/COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
++
++DEPENDS = "flex-native bison-native"
++
++SRC_URI = "http://klub.com.pl/dhcpv6/dibbler/dibbler-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "93357bea3ec35b0c1d11242055361409"
++SRC_URI[sha256sum] = "27869877e060c039cbc24a5f6a9dd69006bf67de0ffdf29a645a80aef6e476a1"
++
++inherit autotools
++
++PACKAGECONFIG ?= "auth bind-reuse dns-update dst-addr-filter link-state"
++
++PACKAGECONFIG[auth] = "--enable-auth,--disable-auth"
++PACKAGECONFIG[bind-reuse] = "--enable-bind-reuse,--disable-bind-reuse"
++PACKAGECONFIG[debug] = "--enable-debug,--disable-debug"
++PACKAGECONFIG[dns-update] = "--enable-dns-update,--disable-dns-update"
++PACKAGECONFIG[dst-addr-filter] = "--enable-dst-addr-filter,--disable-dst-addr-filter"
++PACKAGECONFIG[link-state] = "--enable-link-state,--disable-link-state"
++PACKAGECONFIG[remote-autoconf] = "--enable-remote-autoconf,--disable-remote-autoconf"
++PACKAGECONFIG[resolvconf] = "--enable-resolvconf,--disable-resolvconf"
++
++EXTRA_OECONF += " \
++    --disable-efence \
++    --with-gtest=no \
++"
++
++PACKAGES =+ "${PN}-client ${PN}-relay ${PN}-requestor ${PN}-server"
++
++FILES_${PN}-client = "${sbindir}/${PN}-client"
++FILES_${PN}-relay = "${sbindir}/${PN}-relay"
++FILES_${PN}-requestor = "${sbindir}/${PN}-requestor"
++FILES_${PN}-server = "${sbindir}/${PN}-server"
 -- 
-"Yesterday is history, Tomorrow is a mystery, But today is a gift. That 
-is why it is called the "present"."
+1.9.1
 
-Adress: 29 Boulevard Joseph Garnier 06100 Nice FRANCE
-Mobile: +33 6 17 98 03 83
 
