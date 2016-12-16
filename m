@@ -1,37 +1,44 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 50A646FF0E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f46.google.com (mail-pg0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 49D3C60938
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Dec 2016 01:50:45 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="13969258"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 16 Dec 2016 09:50:41 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id C29054670481
+	Fri, 16 Dec 2016 03:59:55 +0000 (UTC)
+Received: by mail-pg0-f46.google.com with SMTP id p66so27325521pga.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Dec 2016 09:50:40 +0800 (CST)
-Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0319.002; Fri, 16 Dec 2016 09:50:39 +0800
-From: "Huang, Qiyu" <huangqy.fnst@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe] [PATCH] add php 7.1.0
-Thread-Index: AQHSVQGvmIFnk3OxZk6cnOigpyrz5qEJ02Ng
-Date: Fri, 16 Dec 2016 01:50:38 +0000
-Message-ID: <97F7C8E70D26E94FA7E05578493F65C6D6BCA5@G08CNEXMBPEKD03.g08.fujitsu.local>
-References: <1481635683-62635-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-In-Reply-To: <1481635683-62635-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.81]
-MIME-Version: 1.0
-X-yoursite-MailScanner-ID: C29054670481.A7DA2
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: Re: [meta-oe] [PATCH] add php 7.1.0
+	Thu, 15 Dec 2016 19:59:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=c7f0TLVUt4b6iFxVJ4B5gIv9Bk5+nG+IbUJKN55oV0c=;
+	b=KoFQCOQ15+BjLGk2x8AVTCwtyqOO4/NslqHpa8KBgS/kS2ByGn1eKeiwBRqduuhtvk
+	axZsvSCXFUaBXF1VNxlw3aFsZbvvWSVaDJnfuR84vCnXh2sY7WffHd7kuVllCGMqHObG
+	9szWrQY2TRqCEUIDenxUtmjmnWQkB0/CCrWHqRdXhP1TWJ4x1Dn6LTb/P/M5WXBnj1Gx
+	kwLXAeT22zeFeO0G2sZrSevioVJzs6IwFrlIdvBC5hdFPYaDmdDz/Zft34V3HQwuTV9O
+	uxPv8nlYLtUDwlr86Q0dd4ULChSg0ZY9MEgEYaWhks18Axpbfvdiz0JA9b0ke+96La+4
+	wROQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=c7f0TLVUt4b6iFxVJ4B5gIv9Bk5+nG+IbUJKN55oV0c=;
+	b=k4YDwKnVl+ErOrlokWqMgckb0nOunIqP12bGPX45vK0RM5y4nlG2m6u+HRvgYR2nAW
+	x/QoCZXUluFVpd6dZIUgZd8DxZBy8jTcCEmi0cN5RGpYY1BmbymaYVz6DyymxktycU8t
+	T6BxNHOEZx5Cih1SuLVoRBminRhQj0XbCl54Vp51NXol8gxgU9GPCCAI36ZFdeUfxJ07
+	hFMg9Z76oJayRDRS8mzcBmqDBR1c3PeBf5aBiURk6la8E5FQbSqbn54dsGNYhfrbqgAA
+	bYajtIz46jZhvezMlM5dRqiuxEKZKJhf+bBSlFHLcBavBCzMTNfjWBgJ4DWyDC3Ud3S4
+	HqTA==
+X-Gm-Message-State: AKaTC00Dn/SlqsAYmaH4AYOgMa1czoaMZ3etPdUKdeB5o/at3f/A/0m3mQOIk1v/qgvzJQ==
+X-Received: by 10.99.174.75 with SMTP id e11mr1844881pgp.89.1481860797327;
+	Thu, 15 Dec 2016 19:59:57 -0800 (PST)
+Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192])
+	by smtp.gmail.com with ESMTPSA id z9sm7629146pfd.29.2016.12.15.19.59.56
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 15 Dec 2016 19:59:56 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 15 Dec 2016 19:59:45 -0800
+Message-Id: <20161216035947.18909-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.10.2
+Subject: [meta-oe][PATCH 1/3] zlog: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,159 +51,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2016 01:50:48 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 16 Dec 2016 03:59:56 -0000
 
-cGluZw0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206
-IEh1YW5nLCBRaXl1IA0KPiBTZW50OiBUdWVzZGF5LCBEZWNlbWJlciAxMywg
-MjAxNiA5OjI4IFBNDQo+IFRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMu
-b3BlbmVtYmVkZGVkLm9yZw0KPiBDYzogSHVhbmcsIFFpeXUgPGh1YW5ncXku
-Zm5zdEBjbi5mdWppdHN1LmNvbT4NCj4gU3ViamVjdDogW29lXSBbbWV0YS1v
-ZV0gW1BBVENIXSBhZGQgcGhwIDcuMS4wDQo+IA0KPiBTaWduZWQtb2ZmLWJ5
-OiBIdWFuZyBRaXl1IDxodWFuZ3F5LmZuc3RAY24uZnVqaXRzdS5jb20+DQo+
-IA0KPiAxKWFkZCBwaHBfNy4xLjAuYmINCj4gMilEZWxldGUgcGhwXzUuNS4z
-OC5iYixzaW5jZSBpdCBpcyBSZXBsYWNlZCBieSBwaHBfNS42LjI2LmJiLg0K
-PiAzKURlbGV0ZSBwdGhyZWFkLWNoZWNrLXRocmVhZHMtbTQucGF0Y2gsIHNp
-bmNlIGl0IGlzIGludGVncmF0ZWQgdXBzdHJlYW0uDQo+IC0tLQ0KPiAgLi4u
-L2NoYW5nZS1BQ19UUllfUlVOLXRvLUFDX1RSWV9MSU5LLnBhdGNoICAgICAg
-ICAgfCA1Ng0KPiArKysrKysrKysrKysrKysrKysrKysrDQo+ICBtZXRhLW9l
-L3JlY2lwZXMtZGV2dG9vbHMvcGhwL3BocC5pbmMgICAgICAgICAgICAgICB8
-ICAzICstDQo+ICAuLi4vcGhwL3BocC9wdGhyZWFkLWNoZWNrLXRocmVhZHMt
-bTQucGF0Y2ggICAgICAgICB8IDMwIC0tLS0tLS0tLS0tLQ0KPiAgbWV0YS1v
-ZS9yZWNpcGVzLWRldnRvb2xzL3BocC9waHBfNS41LjM4LmJiICAgICAgICAg
-fCAgNiAtLS0NCj4gIG1ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9waHAvcGhw
-XzcuMC4xLmJiICAgICAgICAgIHwgIDggKysrKw0KPiAgNSBmaWxlcyBjaGFu
-Z2VkLCA2NSBpbnNlcnRpb25zKCspLCAzOCBkZWxldGlvbnMoLSkgIGNyZWF0
-ZSBtb2RlIDEwMDY0NA0KPiBtZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvcGhw
-L3BocC03LjEuMC9jaGFuZ2UtQUNfVFJZX1JVTi10by1BQ19UUllfTEkNCj4g
-TksucGF0Y2gNCj4gIGRlbGV0ZSBtb2RlIDEwMDY0NA0KPiBtZXRhLW9lL3Jl
-Y2lwZXMtZGV2dG9vbHMvcGhwL3BocC9wdGhyZWFkLWNoZWNrLXRocmVhZHMt
-bTQucGF0Y2gNCj4gIGRlbGV0ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lw
-ZXMtZGV2dG9vbHMvcGhwL3BocF81LjUuMzguYmINCj4gIGNyZWF0ZSBtb2Rl
-IDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvcGhwL3BocF83LjAu
-MS5iYg0KPiANCj4gZGlmZiAtLWdpdA0KPiBhL21ldGEtb2UvcmVjaXBlcy1k
-ZXZ0b29scy9waHAvcGhwLTcuMS4wL2NoYW5nZS1BQ19UUllfUlVOLXRvLUFD
-X1RSWV9MDQo+IElOSy5wYXRjaA0KPiBiL21ldGEtb2UvcmVjaXBlcy1kZXZ0
-b29scy9waHAvcGhwLTcuMS4wL2NoYW5nZS1BQ19UUllfUlVOLXRvLUFDX1RS
-WV9MDQo+IElOSy5wYXRjaA0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBp
-bmRleCAwMDAwMDAwLi4zOWMzMzRmDQo+IC0tLSAvZGV2L251bGwNCj4gKysr
-DQo+IGIvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL3BocC9waHAtNy4xLjAv
-Y2hhbmdlLUFDX1RSWV9SVU4tdG8tQUNfVFJZDQo+ICsrKyBfTElOSy5wYXRj
-aA0KPiBAQCAtMCwwICsxLDU2IEBADQo+ICtbUEFUQ0hdIGNvbmZpZy5tNDog
-Y2hhbmdlIEFDX1RSWV9SVU4gdG8gQUNfVFJZX0xJTksNCj4gKw0KPiArVXBz
-dHJlYW0tU3RhdHVzOiBQZW5kaW5nDQo+ICsNCj4gK0FDX1RSWV9SVU4gaXMg
-bm90IHN1aXRhYmxlIGZvciBjcm9zcy1jb21waWxlDQo+ICsNCj4gK1NpZ25l
-ZC1vZmYtYnk6IFJveSBMaSA8cm9uZ3FpbmcubGlAd2luZHJpdmVyLmNvbT4N
-Cj4gKy0tLQ0KPiArIGV4dC9maWxlaW5mby9jb25maWcubTQgfCAzMSArKysr
-KystLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQo+ICsgMSBmaWxlIGNoYW5n
-ZWQsIDYgaW5zZXJ0aW9ucygrKSwgMjUgZGVsZXRpb25zKC0pDQo+ICsNCj4g
-K2RpZmYgLS1naXQgYS9leHQvZmlsZWluZm8vY29uZmlnLm00IGIvZXh0L2Zp
-bGVpbmZvL2NvbmZpZy5tNCBpbmRleA0KPiArN2U5OGQ2Mi4uOGE4ZWEwZSAx
-MDA2NDQNCj4gKy0tLSBhL2V4dC9maWxlaW5mby9jb25maWcubTQNCj4gKysr
-KyBiL2V4dC9maWxlaW5mby9jb25maWcubTQNCj4gK0BAIC0xNCwzMSArMTQs
-MTIgQEAgaWYgdGVzdCAiJFBIUF9GSUxFSU5GTyIgIT0gIm5vIjsgdGhlbg0K
-PiArICAgICBsaWJtYWdpYy9yZWFkY2RmLmMgbGlibWFnaWMvc29mdG1hZ2lj
-LmMiDQo+ICsNCj4gKyAgIEFDX01TR19DSEVDS0lORyhbZm9yIHN0cmNhc2Vz
-dHJdKQ0KPiArLSAgQUNfVFJZX1JVTihbDQo+ICstI2luY2x1ZGUgPHN0cmlu
-Zy5oPg0KPiArLSNpbmNsdWRlIDxzdHJpbmdzLmg+DQo+ICstI2luY2x1ZGUg
-PHN0ZGxpYi5oPg0KPiArLQ0KPiArLWludCBtYWluKHZvaWQpDQo+ICstew0K
-PiArLSAgICAgICAgY2hhciAqczAsICpzMSwgKnJldDsNCj4gKy0NCj4gKy0g
-ICAgICAgIHMwID0gKGNoYXIgKikgbWFsbG9jKDQyKTsNCj4gKy0gICAgICAg
-IHMxID0gKGNoYXIgKikgbWFsbG9jKDgpOw0KPiArLQ0KPiArLSAgICAgICAg
-bWVtc2V0KHMwLCAnWCcsIDQyKTsNCj4gKy0gICAgICAgIHMwWzI0XSA9ICdZ
-JzsNCj4gKy0gICAgICAgIHMwWzI2XSA9ICdaJzsNCj4gKy0gICAgICAgIHMw
-WzQxXSA9ICdcMCc7DQo+ICstICAgICAgICBtZW1zZXQoczEsICd4JywgOCk7
-DQo+ICstICAgICAgICBzMVswXSA9ICd5JzsNCj4gKy0gICAgICAgIHMxWzJd
-ID0gJ1onOw0KPiArLSAgICAgICAgczFbN10gPSAnXDAnOw0KPiArLQ0KPiAr
-LSAgICAgICAgcmV0ID0gc3RyY2FzZXN0cihzMCwgczEpOw0KPiArLQ0KPiAr
-LSAgICAgICAgcmV0dXJuICEoTlVMTCAhPSByZXQpOw0KPiArLX0NCj4gKysg
-IEFDX1RSWV9DT01QSUxFKFsNCj4gKysgICAgICNpbmNsdWRlIDxzdHJpbmcu
-aD4NCj4gKysgICAgICNpbmNsdWRlIDxzdHJpbmdzLmg+DQo+ICsrICAgICAj
-aW5jbHVkZSA8c3RkbGliLmg+DQo+ICsrICBdLFsNCj4gKysgICAgIHN0cmNh
-c2VzdHIoTlVMTCwgTlVMTCk7DQo+ICsgICBdLFsNCj4gKyAgICAgZG5sIHVz
-aW5nIHRoZSBwbGF0Zm9ybSBpbXBsZW1lbnRhdGlvbg0KPiArICAgICBBQ19N
-U0dfUkVTVUxUKHllcykNCj4gKy0tDQo+ICsxLjkuMQ0KPiArDQo+IGRpZmYg
-LS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvcGhwL3BocC5pbmMN
-Cj4gYi9tZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvcGhwL3BocC5pbmMNCj4g
-aW5kZXggY2Q5MTk0MC4uMTkxMDA1ZiAxMDA2NDQNCj4gLS0tIGEvbWV0YS1v
-ZS9yZWNpcGVzLWRldnRvb2xzL3BocC9waHAuaW5jDQo+ICsrKyBiL21ldGEt
-b2UvcmVjaXBlcy1kZXZ0b29scy9waHAvcGhwLmluYw0KPiBAQCAtMjQsNyAr
-MjQsNiBAQCBTUkNfVVJJX2FwcGVuZF9jbGFzcy10YXJnZXQgPSAiIFwNCj4g
-ICAgICAgICAgICAgIGZpbGU6Ly9waHAtZnBtLmNvbmYgXA0KPiAgICAgICAg
-ICAgICAgZmlsZTovL3BocC1mcG0tYXBhY2hlLmNvbmYgXA0KPiAgICAgICAg
-ICAgICAgZmlsZTovL2NvbmZpZ3VyZS5wYXRjaCBcDQo+IC0gICAgICAgICAg
-ICBmaWxlOi8vcHRocmVhZC1jaGVjay10aHJlYWRzLW00LnBhdGNoIFwNCj4g
-ICAgICAgICAgICAgIGZpbGU6Ly83MF9tb2RfcGhwNS5jb25mIFwNCj4gICAg
-ICAgICAgICAgIGZpbGU6Ly9waHAtZnBtLnNlcnZpY2UgXA0KPiAgICAgICAg
-ICAgICINCj4gQEAgLTIxOCw3ICsyMTcsNyBAQCBGSUxFU18ke1BOfS1kb2Mg
-Kz0gIiR7UEhQX0xJQkRJUn0vcGhwL2RvYyINCj4gIEZJTEVTXyR7UE59LWNs
-aSA9ICIke2JpbmRpcn0vcGhwIg0KPiAgRklMRVNfJHtQTn0tcGhhciA9ICIk
-e2JpbmRpcn0vcGhhcioiDQo+ICBGSUxFU18ke1BOfS1jZ2kgPSAiJHtiaW5k
-aXJ9L3BocC1jZ2kiDQo+IC1GSUxFU18ke1BOfS1mcG0gPSAiJHtzYmluZGly
-fS9waHAtZnBtICR7c3lzY29uZmRpcn0vcGhwLWZwbS5jb25mDQo+ICR7ZGF0
-YWRpcn0vZnBtICR7c3lzY29uZmRpcn0vaW5pdC5kL3BocC1mcG0NCj4gJHtz
-eXN0ZW1kX3VuaXRkaXJ9L3N5c3RlbS9waHAtZnBtLnNlcnZpY2UiDQo+ICtG
-SUxFU18ke1BOfS1mcG0gPSAiJHtzYmluZGlyfS9waHAtZnBtICR7c3lzY29u
-ZmRpcn0vcGhwLWZwbS5jb25mDQo+ICR7ZGF0YWRpcn0vZnBtICR7c3lzY29u
-ZmRpcn0vaW5pdC5kL3BocC1mcG0NCj4gJHtzeXN0ZW1kX3VuaXRkaXJ9L3N5
-c3RlbS9waHAtZnBtLnNlcnZpY2UgL2V0Yy8qIg0KPiAgRklMRVNfJHtQTn0t
-ZnBtLWFwYWNoZTIgPSAiJHtzeXNjb25mZGlyfS9hcGFjaGUyL2NvbmYuZC9w
-aHAtZnBtLmNvbmYiDQo+ICBDT05GRklMRVNfJHtQTn0tZnBtID0gIiR7c3lz
-Y29uZmRpcn0vcGhwLWZwbS5jb25mIg0KPiAgQ09ORkZJTEVTXyR7UE59LWZw
-bS1hcGFjaGUyID0NCj4gIiR7c3lzY29uZmRpcn0vYXBhY2hlMi9jb25mLmQv
-cGhwLWZwbS5jb25mIg0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVz
-LWRldnRvb2xzL3BocC9waHAvcHRocmVhZC1jaGVjay10aHJlYWRzLW00LnBh
-dGNoDQo+IGIvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL3BocC9waHAvcHRo
-cmVhZC1jaGVjay10aHJlYWRzLW00LnBhdGNoDQo+IGRlbGV0ZWQgZmlsZSBt
-b2RlIDEwMDY0NA0KPiBpbmRleCAwYzU2NGNkLi4wMDAwMDAwDQo+IC0tLSBh
-L21ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9waHAvcGhwL3B0aHJlYWQtY2hl
-Y2stdGhyZWFkcy1tNC5wYXRjaA0KPiArKysgL2Rldi9udWxsDQo+IEBAIC0x
-LDMwICswLDAgQEANCj4gLUZyb20gZDgwNjdjZWFjYmY1NGU3OWM5YzZiNjg2
-NzUzMzJjMDllYWEwYjU1ZCBNb24gU2VwIDE3IDAwOjAwOjAwDQo+IDIwMDEN
-Cj4gLUZyb206IEphY2tpZSBIdWFuZyA8amFja2llLmh1YW5nQHdpbmRyaXZl
-ci5jb20+DQo+IC1EYXRlOiBNb24sIDggQXByIDIwMTMgMTQ6Mjk6NTEgKzA4
-MDANCj4gLVN1YmplY3Q6IFtQQVRDSF0gcHRocmVhZC1jaGVjaw0KPiAtDQo+
-IC1FbmFibGUgcHRocmVhZHMgc3VwcG9ydCB3aGVuIGNyb3NzLWNvbXBpbGlu
-Zw0KPiAtDQo+IC1VcHN0cmVhbS1TdGF0dXM6IEluYXBwcm9wcmF0ZSBbY29u
-ZmlnXQ0KPiAtDQo+IC1TaWduZWQtb2ZmLWJ5OiBKYWNraWUgSHVhbmcgPGph
-Y2tpZS5odWFuZ0B3aW5kcml2ZXIuY29tPg0KPiAtLS0tDQo+IC0gVFNSTS90
-aHJlYWRzLm00IHwgICAgMiArLQ0KPiAtIDEgZmlsZXMgY2hhbmdlZCwgMSBp
-bnNlcnRpb25zKCspLCAxIGRlbGV0aW9ucygtKQ0KPiAtDQo+IC1kaWZmIC0t
-Z2l0IGEvVFNSTS90aHJlYWRzLm00IGIvVFNSTS90aHJlYWRzLm00IC1pbmRl
-eCAzODQ5NGNlLi4xNWQ5NDU0DQo+IDEwMDY0NA0KPiAtLS0tIGEvVFNSTS90
-aHJlYWRzLm00DQo+IC0rKysgYi9UU1JNL3RocmVhZHMubTQNCj4gLUBAIC04
-Niw3ICs4Niw3IEBAIGludCBtYWluKCkgew0KPiAtICAgcHRocmVhZHNfd29y
-a2luZz1ubw0KPiAtICAgXSwgWw0KPiAtICAgZG5sIEZvciBjcm9zcyBjb21w
-aWxpbmcgcnVubmluZyB0aGlzIHRlc3QgaXMgb2Ygbm8gdXNlLiBOZXRXYXJl
-IHN1cHBvcnRzDQo+IHB0aHJlYWRzDQo+IC0tICBwdGhyZWFkc193b3JraW5n
-PW5vDQo+IC0rICBwdGhyZWFkc193b3JraW5nPXllcw0KPiAtICAgY2FzZSAk
-aG9zdF9hbGlhcyBpbg0KPiAtICAgKm5ldHdhcmUqKQ0KPiAtICAgICBwdGhy
-ZWFkc193b3JraW5nPXllcw0KPiAtLS0NCj4gLTEuNy40LjENCj4gLQ0KPiBk
-aWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL3BocC9waHBf
-NS41LjM4LmJiDQo+IGIvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL3BocC9w
-aHBfNS41LjM4LmJiDQo+IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPiBp
-bmRleCAyNmYzNWIxLi4wMDAwMDAwDQo+IC0tLSBhL21ldGEtb2UvcmVjaXBl
-cy1kZXZ0b29scy9waHAvcGhwXzUuNS4zOC5iYg0KPiArKysgL2Rldi9udWxs
-DQo+IEBAIC0xLDYgKzAsMCBAQA0KPiAtcmVxdWlyZSBwaHAuaW5jDQo+IC0N
-Cj4gLUxJQ19GSUxFU19DSEtTVU0gPQ0KPiAiZmlsZTovL0xJQ0VOU0U7bWQ1
-PTQ2NGNhNzBhZjIxNGQyNDA3ZjZiN2Q0NDU4MTU4YWZkIg0KPiAtDQo+IC1T
-UkNfVVJJW21kNXN1bV0gPSAiMzEyMjQ0YTBlZWNhZDYwMmExNTU1ZWQyNDM0
-ZTIyM2YiDQo+IC1TUkNfVVJJW3NoYTI1NnN1bV0gPQ0KPiAiNDczYzgxZWJi
-MmU0OGNhNDY4Y2FlZTAzMTc2MjI2NjY1MTg0M2Q3MjI3YzE4YTgyNGFkZDli
-MDdiOTM5M2UzDQo+IDgiDQo+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lw
-ZXMtZGV2dG9vbHMvcGhwL3BocF83LjAuMS5iYg0KPiBiL21ldGEtb2UvcmVj
-aXBlcy1kZXZ0b29scy9waHAvcGhwXzcuMC4xLmJiDQo+IG5ldyBmaWxlIG1v
-ZGUgMTAwNjQ0DQo+IGluZGV4IDAwMDAwMDAuLjg5OWFjZjkNCj4gLS0tIC9k
-ZXYvbnVsbA0KPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvcGhw
-L3BocF83LjAuMS5iYg0KPiBAQCAtMCwwICsxLDggQEANCj4gK3JlcXVpcmUg
-cGhwLmluYw0KPiArDQo+ICtMSUNfRklMRVNfQ0hLU1VNID0NCj4gImZpbGU6
-Ly9MSUNFTlNFO21kNT1iNjAyNjM2ZDQ2YTYxYzBhYzA0MzJiYmY1YzA3OGZl
-NCINCj4gKw0KPiArU1JDX1VSSSArPSAiZmlsZTovL2NoYW5nZS1BQ19UUllf
-UlVOLXRvLUFDX1RSWV9MSU5LLnBhdGNoIg0KPiArU1JDX1VSSVttZDVzdW1d
-ID0gIjU0ZTM2NGI2MGE4OGRiNzdhZGI5NmFhY2IxMGYxMGE0Ig0KPiArU1JD
-X1VSSVtzaGEyNTZzdW1dID0NCj4gIjY4YmNmZDdkZWVkNWIzNDc0ZDgxZGVj
-OWY3NGQxMjIwNTgzMjdlMmJlZDBhYzI1YmJjOWVjNzA5OTUyMjhlNjEiDQo+
-ICsNCj4gLS0NCj4gMi43LjQNCg0KCgo=
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-extended/zlog/zlog_git.bb | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/zlog/zlog_git.bb
+
+diff --git a/meta-oe/recipes-extended/zlog/zlog_git.bb b/meta-oe/recipes-extended/zlog/zlog_git.bb
+new file mode 100644
+index 0000000..51c746f
+--- /dev/null
++++ b/meta-oe/recipes-extended/zlog/zlog_git.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "Zlog is a pure C logging library"
++HOMEPAGE = "https://github.com/HardySimpson/zlog"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
++
++PV = "1.2.12+git${SRCPV}"
++
++SRCREV = "13904dab2878aa2654d0c20fb8600a3dc5f2dd68"
++SRC_URI = "git://github.com/HardySimpson/zlog"
++
++S = "${WORKDIR}/git"
++
++inherit pkgconfig
++
++EXTRA_OEMAKE = "CC='${CC}' LD='${LD}'"
++
++do_install() {
++    oe_runmake install PREFIX=${D}${exec_prefix} INSTALL=install
++}
+-- 
+2.10.2
+
 
