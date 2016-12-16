@@ -1,47 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id BDEA377357
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vk0-f49.google.com (mail-vk0-f49.google.com
+	[209.85.213.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E42277389
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Dec 2016 03:59:57 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id p66so8240186pga.2
+	Fri, 16 Dec 2016 09:21:31 +0000 (UTC)
+Received: by mail-vk0-f49.google.com with SMTP id p9so85783333vkd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Dec 2016 19:59:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=u1ACy/XiyoZJWRxnJnW3d+roRW76QlfGg6CLzGP8asI=;
-	b=qg+P26TYO2fDQczmBlDoJXQDt4NQTJOMPtEhQUimLU7u24SB5o5JTqn9Bzk7r8+HP6
-	jIo6idoB0818wl5df7liyG+e6RktS7Wphml/gNOLLAMz1m1m/u6Snb/kqLiGV7CWYDLb
-	8BKXUEKFG/6Kk2h1gGiMnhMbrW8pv26lBvuUFRtczOsRSEInWdBc2HKAyPu4t9hEsWiO
-	paa9cSoEEMdf6I68d0i/QlEj1VzYW62o88dnIgW6BHcZZJywWx8aIdUtt/Qx19UNM0ol
-	5Wvo75ZC4alUXnfswoDnV6BaJcWm6Ruh3Xt7vM/txjO6BxioRo0dqbZrYGFxZ2Xs0lGW
-	EM6g==
+	Fri, 16 Dec 2016 01:21:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=Dcis1gO9bPlCMchDvWm0dWPewRbt+Ac1ZwSUkXFlqYc=;
+	b=CuqaENNg+zfgXT+5CGfWd/9v1a7oJQ7y5O+iwhhlCgKd/cUcAPCWGErmlDzXa8n/dt
+	VUrtSyEZzaSCRn6/RA0zrOIcH/spOZF8b7S8a2gcLDuldqxefoj65ydbDeGGHwetNFEC
+	kgI358DQFodOIfjz0B4b8+eN8PRIjvJJ/VRBE7sVGghWjQZ8bImnIiEY6hLWZb80jkxr
+	p/20LyZePv1wzkIq0hfE4E41vRg7bSe5J+SY8p4L0tPomXsJl1TUITrOOengwNdd874g
+	+1X4XxtpHLfVlMe9MOTSJxMPtt04fqEoki5rj5Bzt2qwc9xqHqdVYJ0LMgB2uP82HHt/
+	US9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=u1ACy/XiyoZJWRxnJnW3d+roRW76QlfGg6CLzGP8asI=;
-	b=J0Dur4D0CydvbFHRruWDSLRdW/F1mvAPzMthjssSeAdm0mlTaZWhCNptWizfQVhHsj
-	6/1azSjksZpKhTVpmK/r3ghlBRbFcuvdz6KkMpurOH93d2inZYlBODgCosjyPRj5Ls5I
-	K2VFBwbyPOnNTEYgF514lYzBiCQ6XIgUSsw6M/EpXx/3owaNl17qyIU2N6Mtbyg2iOie
-	vlVS7v3hGMObJjYWoJaxAatOnGe27mDl8qOrH06QFzvcpmmZ294LtbP5M7WrL1Hx8Fzi
-	q2Q8I+8ONOGWWRRGODR+y3GYg4L6vj0LFLfaPKk4AdQOhejSJst96/L3qEVEp3XeAzbJ
-	VrHA==
-X-Gm-Message-State: AKaTC00NtQZpOke8gF876Y2se8jkXYSvvoyYaZYM3SV3I/Oopp8bcq0v492WQCOzqgeePA==
-X-Received: by 10.98.211.67 with SMTP id q64mr984844pfg.173.1481860798847;
-	Thu, 15 Dec 2016 19:59:58 -0800 (PST)
-Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
-	[76.102.32.192])
-	by smtp.gmail.com with ESMTPSA id z9sm7629146pfd.29.2016.12.15.19.59.58
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 15 Dec 2016 19:59:58 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Dec 2016 19:59:47 -0800
-Message-Id: <20161216035947.18909-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.10.2
-In-Reply-To: <20161216035947.18909-1-raj.khem@gmail.com>
-References: <20161216035947.18909-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/3] popplet: Disable PIE, it does not compile
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=Dcis1gO9bPlCMchDvWm0dWPewRbt+Ac1ZwSUkXFlqYc=;
+	b=qO7WmV0CJJQMixYQpQbdLGTGTiwKux3m/lj7sCw8uHGJWW4qdH/UbkTgnj/gW6eTjX
+	eQsnFjB+UDf8Q4dtrLZYPLQcxfcq0DoFCcsH9q/yAFPctTDmzM9iLg2MNdvEDHQLIC/w
+	OUifD/LmFCy9um4utTdbVVy/Uo+BNRXmeDSvDsHThjb+7HODCVk8YVuPAtkfhHznarqA
+	O+Uw5N94bvfRS5G0uBqUvjK8SaiH4jwyFShuWoL2jFtJxuOoHbU/E3eT7I/wXs0x+zR9
+	GpvnVLlXApT+FbT4k6oeLow50ojZQKRWLkNgptn0Cwcl3I0PoZl3Udq9DPqVoCdFkmGY
+	C//w==
+X-Gm-Message-State: AIkVDXLGzgx9WdMYfh8QGNEw0U6knLoSkmDKBV5F6LX3l9LAAPkSiTWAqjA9W5xBlJJYanRTVo+rGAz4G9UkXQ==
+X-Received: by 10.31.88.1 with SMTP id m1mr796410vkb.83.1481880092269; Fri, 16
+	Dec 2016 01:21:32 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.176.85.157 with HTTP; Fri, 16 Dec 2016 01:21:31 -0800 (PST)
+In-Reply-To: <CALbNGRSD5thQE61ov3Jqrj1aHFWavqGD-Q_0vhTAJ7Jn-3rodQ@mail.gmail.com>
+References: <1481755778-16443-1-git-send-email-schnitzeltony@googlemail.com>
+	<CALbNGRSX7gZwpAAKp0jiPp4CT+xUXHr6wU_Zs2n+ug7xwp2hHg@mail.gmail.com>
+	<CALbNGRSD5thQE61ov3Jqrj1aHFWavqGD-Q_0vhTAJ7Jn-3rodQ@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 16 Dec 2016 10:21:31 +0100
+Message-ID: <CALbNGRR76z4YUXGWK6sJJrkYhkn3Pff2nTP=XFGF9ORDuGn1Xw@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser][PATCH 0/2] firefox fix build on oe-core master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,31 +55,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Dec 2016 03:59:58 -0000
+X-List-Received-Date: Fri, 16 Dec 2016 09:21:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-support/poppler/poppler_0.49.0.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+>> And again sent out too early firefox still fails - continue with V2 :/
+>>
+> really wonder how the last system nss/nspr patch was tested...
+>
+commit 7093c4fd1a131f99810423404ce11d554d6aae78
+Author: Takuro Ashie <ashie@clear-code.com>
+Date:   Thu Dec 15 09:43:36 2016 +0900
 
-diff --git a/meta-oe/recipes-support/poppler/poppler_0.49.0.bb b/meta-oe/recipes-support/poppler/poppler_0.49.0.bb
-index ebb16d6..e8f8e65 100644
---- a/meta-oe/recipes-support/poppler/poppler_0.49.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_0.49.0.bb
-@@ -27,6 +27,12 @@ PACKAGECONFIG[nss] = "--enable-libnss,--disable-libnss,nss"
- # Needed for qt5
- CXXFLAGS += "--std=c++11"
- 
-+#| /usr/src/debug/glibc/2.25-r0/git/csu/elf-init.c:87: undefined reference to `__init_array_end'
-+#| /usr/src/debug/glibc/2.25-r0/git/csu/elf-init.c:87: undefined reference to `__init_array_start'
-+#| /mnt/a/build/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/6.2.0/ld: .libs/libpoppler.so.65.0.0: hidden symbol `__init_array_end' isn't defined 
-+
-+SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
-+
- EXTRA_OECONF = "\
-     --enable-xpdf-headers \
-     --disable-gtk-test \
--- 
-2.10.2
+    firefox: Use system-wide cairo instead of built-in one
 
+    Signed-off-by: Takuro Ashie <ashie@clear-code.com>
+
+Seems tghis one turns fonts in address field invisible...
+
+Andreas
 
