@@ -1,51 +1,51 @@
 Return-Path: <joe@deserted.net>
 Received: from mail-io0-f194.google.com (mail-io0-f194.google.com
 	[209.85.223.194])
-	by mail.openembedded.org (Postfix) with ESMTP id EBA166025E
+	by mail.openembedded.org (Postfix) with ESMTP id A37CD7743B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Dec 2016 16:04:46 +0000 (UTC)
-Received: by mail-io0-f194.google.com with SMTP id p13so14995219ioi.0
+	Sat, 17 Dec 2016 16:04:47 +0000 (UTC)
+Received: by mail-io0-f194.google.com with SMTP id y124so15014632iof.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Dec 2016 08:04:48 -0800 (PST)
+	Sat, 17 Dec 2016 08:04:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=deserted-net.20150623.gappssmtp.com; s=20150623;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=fxSZhUUcYL5NjmHZuY9yIWkTe0QK/e/41CBABL4IY44=;
-	b=BlKOjfkBkYPWEJZ+933b2//240kprFupNgnQzrKikMoSrv8yYev5E+Pi9vTsgsYy16
-	KKA7vNPGhTD6FdWCpZefKgeNWEHcCerQbLaOUxgEYzV+CPhklDslLzbct4NLnSN9GOgA
-	Mhj/zS1o+q6GhF+Hj8rK0Hm+MpVioOlUncBSdPw3O5Y3FNWfmcu/mxNCwGYKso06khX8
-	QSspjgDYP2Z86Kl2tWzpDPT6Q0YuHdsusVjgqtWNuM92Ie5yNbYUx0499Lw66hf3+q1/
-	0nOkveh6jBslwVVpB933Vyc33U5eAjfwZLnBCTUk48I4m0wkk1rmdQZGTT5vMQNNxfj/
-	zEBQ==
+	bh=ouAX8PefsCwH2MPsZAnNHhGaoDQJsRW4XvqwoGik4Ec=;
+	b=VcqRSEw2lffCrCm68DPwCyXtq/vJbjAjZts09UWzyRwaXDmtK9eaM41h8yhvX/0vlk
+	T4XIhV3Ej2D2r00Ek9y5FvlYtvXev7utbPkeaSq0SVIkq4xHYNQD4JxupQQUjfUD04wy
+	oFDbEaoMwaN37bU7SffC0wstKSSVDIcymVhY4jXc1zG8whIDqTtXo+lLdECuyNivwcVj
+	rtp7GeT7LyZdpEpg2yJNAJneaIs5NrWgeql2KFv4NeDwdToqDIhZZbxxzkeVfwI/sikr
+	uQjdytqLxkkc91ujDv1xsEfAmmZMqwhvd7EiyLdmTqf4EZx0lJAWSqSJl8dx3BIJ8ZFL
+	R2ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:in-reply-to:references;
-	bh=fxSZhUUcYL5NjmHZuY9yIWkTe0QK/e/41CBABL4IY44=;
-	b=QJQfdWwFu/yil0XAVIa8aVZ1XikGAEvGUIuZ0A15b+j0FnZd3KuG+05FaavA3NX0zd
-	2RhycCBhQAcL2UfJ/Qg7zMOf69THWpKJ6sKv47Ds5dyzbOHHSD/qE9hsFT/XVCFCw1RR
-	2JaDkrefZrbebTZ+b6T14tF0wVSrtCLbKLUXz54SWADE/rxN/fGTKD7cF+nbK9/Rhziv
-	ZUTuzt+ebdZoCoozFVh1c2Ea2wvYYWDepXZA+nchNbpSoj2TrC0LZaeXw5wAulyBPf3d
-	ShVXzJezWHsUj2xBFs9lfhTxv4KU9x4RG0keVyTzEMzk3eDGwGkUmAsShV55gbFpNh51
-	35YQ==
-X-Gm-Message-State: AIkVDXKnWnAWfYCdnMQWiDoY1T4Qp537A6DbaI6bHeZO0X9caTuNTsG7964nGsdFKXJ6TA==
-X-Received: by 10.107.132.74 with SMTP id g71mr8395942iod.19.1481990688142;
-	Sat, 17 Dec 2016 08:04:48 -0800 (PST)
+	bh=ouAX8PefsCwH2MPsZAnNHhGaoDQJsRW4XvqwoGik4Ec=;
+	b=G6392u19qrMmAkKJZgguBe2DBXGUaaYh//PZlS7Q1I9aHYa2NklN71Z3oVYfb4B9b7
+	lvc/IfUFOsa0td2Up65eLp1xxEP3uCy3Ko+1A7PDngmrphLw+/qT1gDBtfwLdFZX51Sr
+	EQEVT5f4bwDj5qGyKAeymMBVxZcXX8yPKPGa7YktulnUDSt6A13H099N5EtNAuWHg5D4
+	T9PAv064eVOScunQUPPCP4UmHV0C/FyEzfJ9H4UBHctHhoTriU9zjeEdJV70hpAD1dlR
+	ve9R+PjtXP4ZFs29xgoMLYf53dmzJ0caD1ClaGNiQioGT8A+SIRvZSQiEP/wm7YgiU/z
+	JK/A==
+X-Gm-Message-State: AIkVDXKIcKHsQQi7ROWY1xlPoNbx/hzguWGyZqnrTd0DK46oduGmH5+4NdK8RfwUHZPiIA==
+X-Received: by 10.107.35.73 with SMTP id j70mr8458340ioj.195.1481990689074;
+	Sat, 17 Dec 2016 08:04:49 -0800 (PST)
 Received: from mir.deserted.net (23-233-31-74.cpe.pppoe.ca. [23.233.31.74])
 	by smtp.gmail.com with ESMTPSA id
-	c36sm3371303itd.18.2016.12.17.08.04.47
+	c36sm3371303itd.18.2016.12.17.08.04.48
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 17 Dec 2016 08:04:47 -0800 (PST)
+	Sat, 17 Dec 2016 08:04:48 -0800 (PST)
 Sender: Joe MacDonald <joe@deserted.net>
 From: Joe MacDonald <joe_macdonald@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 17 Dec 2016 11:04:49 -0500
-Message-Id: <1481990698-15962-2-git-send-email-joe_macdonald@mentor.com>
+Date: Sat, 17 Dec 2016 11:04:50 -0500
+Message-Id: <1481990698-15962-3-git-send-email-joe_macdonald@mentor.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1481990698-15962-1-git-send-email-joe_macdonald@mentor.com>
 References: <1481940923-12914-1-git-send-email-joe_macdonald@mentor.com>
 	<1481990698-15962-1-git-send-email-joe_macdonald@mentor.com>
-Subject: [meta-networking][PATCH 01/10] samba: rename initscript from 'samba.sh' to more common 'samba'
+Subject: [meta-networking][PATCH 02/10] samba: install systemd units and initscripts unconditionally
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,48 +62,48 @@ X-List-Received-Date: Sat, 17 Dec 2016 16:04:47 -0000
 
 From: Andreas Oberritter <obi@opendreambox.org>
 
-This gets masked automatically by samba.service if systemd is running.
+Fixes hybrid systemd/sysvinit setups.
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 ---
- meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ .../recipes-connectivity/samba/samba_4.4.5.bb       | 21 ++++++++++-----------
+ 1 file changed, 10 insertions(+), 11 deletions(-)
 
 diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-index 6d62481..783a7cd 100644
+index 783a7cd..aabc043 100644
 --- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
 +++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-@@ -41,7 +41,7 @@ LDFLAGS_append_libc-musl = " -ltirpc"
- SYSVINITTYPE_linuxstdbase = "lsb"
- SYSVINITTYPE = "sysv"
+@@ -98,19 +98,18 @@ DISABLE_STATIC = ""
+ LDFLAGS += "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
  
--INITSCRIPT_NAME = "samba.sh"
-+INITSCRIPT_NAME = "samba"
- INITSCRIPT_PARAMS = "start 20 3 5 . stop 20 0 1 6 ."
- 
- PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${SYSVINITTYPE}', '', d)} \
-@@ -109,16 +109,16 @@ do_install_append() {
-             >> ${D}${sysconfdir}/tmpfiles.d/samba.conf
-     elif ${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'true', 'false', d)}; then
+ do_install_append() {
+-    if ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'true', 'false', d)}; then
+-        install -d ${D}${systemd_system_unitdir}
+-        install -m 0644 packaging/systemd/*.service ${D}${systemd_system_unitdir}
+-        sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' ${D}${systemd_system_unitdir}/*.service
+-
+-        install -d ${D}${sysconfdir}/tmpfiles.d
+-        install -m644 packaging/systemd/samba.conf.tmp ${D}${sysconfdir}/tmpfiles.d/samba.conf
+-        echo "d ${localstatedir}/log/samba 0755 root root -" \
+-            >> ${D}${sysconfdir}/tmpfiles.d/samba.conf
+-    elif ${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'true', 'false', d)}; then
++    install -d ${D}${systemd_system_unitdir}
++    install -m 0644 packaging/systemd/*.service ${D}${systemd_system_unitdir}
++    sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' ${D}${systemd_system_unitdir}/*.service
++
++    install -d ${D}${sysconfdir}/tmpfiles.d
++    install -m644 packaging/systemd/samba.conf.tmp ${D}${sysconfdir}/tmpfiles.d/samba.conf
++    echo "d ${localstatedir}/log/samba 0755 root root -" \
++        >> ${D}${sysconfdir}/tmpfiles.d/samba.conf
++    if ${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'true', 'false', d)}; then
          install -d ${D}${sysconfdir}/init.d
--        install -m 0755 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d
-+        install -m 0755 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d/samba
-     elif ${@bb.utils.contains('PACKAGECONFIG', 'sysv', 'true', 'false', d)}; then
+         install -m 0755 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d/samba
+-    elif ${@bb.utils.contains('PACKAGECONFIG', 'sysv', 'true', 'false', d)}; then
++    else
          install -d ${D}${sysconfdir}/init.d
--        install -m 0755 packaging/sysv/samba.init ${D}${sysconfdir}/init.d/samba.sh
-+        install -m 0755 packaging/sysv/samba.init ${D}${sysconfdir}/init.d/samba
+         install -m 0755 packaging/sysv/samba.init ${D}${sysconfdir}/init.d/samba
          sed -e 's,/opt/samba/bin,${sbindir},g' \
-             -e 's,/opt/samba/smb.conf,${sysconfdir}/samba/smb.conf,g' \
-             -e 's,/opt/samba/log,${localstatedir}/log/samba,g' \
--            -e 's,/etc/init.d/samba.server,${sysconfdir}/init.d/samba.sh,g' \
-+            -e 's,/etc/init.d/samba.server,${sysconfdir}/init.d/samba,g' \
-             -e 's,/usr/bin,${base_bindir},g' \
--            -i ${D}${sysconfdir}/init.d/samba.sh
-+            -i ${D}${sysconfdir}/init.d/samba
-     fi
- 
-     install -d ${D}${sysconfdir}/samba
 -- 
 1.9.1
 
