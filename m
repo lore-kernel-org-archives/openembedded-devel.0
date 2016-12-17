@@ -1,49 +1,49 @@
 Return-Path: <joe@deserted.net>
 Received: from mail-it0-f67.google.com (mail-it0-f67.google.com
 	[209.85.214.67])
-	by mail.openembedded.org (Postfix) with ESMTP id D0AAD77429
+	by mail.openembedded.org (Postfix) with ESMTP id 5C88D773F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Dec 2016 02:15:22 +0000 (UTC)
-Received: by mail-it0-f67.google.com with SMTP id n68so4527009itn.3
+	Sat, 17 Dec 2016 02:15:23 +0000 (UTC)
+Received: by mail-it0-f67.google.com with SMTP id 75so4543401ite.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Dec 2016 18:15:24 -0800 (PST)
+	Fri, 16 Dec 2016 18:15:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=deserted-net.20150623.gappssmtp.com; s=20150623;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=856xK+porufJoPaKtvWIf3Qva+rABzllDhhW94LwXF8=;
-	b=h5UONALoymXDF7em1M+RwkOjVzAeE+prleZbGAFj83JdUgfFqP9iR+6APfATv7sQ7a
-	dTa4A6ulvGEkYbTnGC3JXPY7RacUP75VkVq9S7DjuD2KioLBPDZwCNAkDF4z57v28OB5
-	XQ74J3Iz4brl+pdlkk/T/hyQ3MCjfD5Um2fziDcK/Zu2+JTBxEgEGgW7+SvxRM8JaslV
-	FZ1NTMA6t+xjqXK7+/UuWQrYmKfAMcc8GRHBWKR5z27XgmQuJZLm6DyhH/Yqj4v9BY26
-	SSdw3WSk7F/5Yz3e+up1KPe1UfzdtfCNn7DvynZJS2z3c+40OGgudqQk4isgOZ5KxUzh
-	Z16w==
+	bh=7hNnTHTUAP9P/TVeR23LuCoD2/Wel8WfLKxJWF6eg9s=;
+	b=euGCV5KFUDqaSn6hwLuNHWY7VG7cKhpXzXj57GDgKth6MMCTWVjBUUxuYITzQVm97L
+	I6+0WX3XlpGY1j14SRE8MAYDgiOpI370bsoru/e2Kjst0XSeM8J0J3wCD9xpeTGMfrMm
+	ZKZ02VGRuKiKmfAHrd9t71EMFxLvPiUr5WGgEhg/2IikRersxt1AyWKR+M+aK5i3zJX3
+	9F5k0NCOld/vyfbWFKJYBZmY2oDMU37PSM0Asq1bvgpJ6FGUL/c77PwhzFejDjnt5i5q
+	B2Z2/x0I3QMw4MZfm7ax3bxtE+CO6u0TWkZvNcfe8wfOIhQ8eRdVxE5+7f6uL1kBUWmi
+	wYHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:in-reply-to:references;
-	bh=856xK+porufJoPaKtvWIf3Qva+rABzllDhhW94LwXF8=;
-	b=W8+b8Erduqe47MWau4jM0hi3KUoHbNWmXYgJHrAyYMJxKcKmhvKPrt9F9WeoWptX1d
-	9p18l9jOnCSBPkcE9VldiZvhOREedoIOzXV5qO4FvhHUEIVEcHkM3k/TIpLDjagjAZwq
-	zQdx4EzOokiEsb5uTkLjio7AODxjLSrMNdg4WFwhdFYzRfkImMvQzuvoDVeBNiT+SJLG
-	jzgOowAUhQ15z0uyGLu1+FXxqb2qT/3UsET7Ep/pdzOQRsaNwSAX4kS0l/DgROkCr1Z0
-	0YCMijz2KYBS75id4Xpp9GkvO+sbw1SahaoN5kJdCYiMepYTlm9YfS/TliwgIbzzqScP
-	04Cw==
-X-Gm-Message-State: AKaTC00dzzlih+lD+0iXMCbMwfmOFXqfSD870HQgJNcnilIypD8AFhGlFdkdzWVrTb5XcQ==
-X-Received: by 10.36.82.85 with SMTP id d82mr6874788itb.95.1481940923974;
-	Fri, 16 Dec 2016 18:15:23 -0800 (PST)
+	bh=7hNnTHTUAP9P/TVeR23LuCoD2/Wel8WfLKxJWF6eg9s=;
+	b=s2MzI4fTnX9OEC9957tVIgdwULWBYB6lm29B6GGA2C58pCyz3vpS2a12AYBDVV30ml
+	zSu3Cd/xsSFinPUP+ZL9K+3rEDt4p1j8u/DvV3g8xWrLKSYrUANGGrpF3MEK6W7Maa70
+	+khKO+dYgT+uLBPkQshaY0Fdzcq2IkZXMhiqta2jYuiEIREC9g+P8y0vyIrh95A1lMwe
+	OBMjyw9OypkZ0pNBtpOkjogreAQs62qLDOinmvQ64arGsdwZQrvyLtNdxnNSOlmerRik
+	/O7gLboiBWmmQ3nfCXf411g3nxPZrUhv2S2VCkUmPJ2VcGKSg1edmAbvYDI9jp32WTSC
+	9jJw==
+X-Gm-Message-State: AKaTC02hxDtOOM5zefL+GUvuNnnOxJ7rHXkRT1kneEII/M4xqaKIo6IA3vK/cOh3rNCnGw==
+X-Received: by 10.36.159.3 with SMTP id c3mr6813713ite.50.1481940924967;
+	Fri, 16 Dec 2016 18:15:24 -0800 (PST)
 Received: from mir.deserted.net (23-233-31-74.cpe.pppoe.ca. [23.233.31.74])
-	by smtp.gmail.com with ESMTPSA id l73sm3804122ioe.1.2016.12.16.18.15.23
+	by smtp.gmail.com with ESMTPSA id l73sm3804122ioe.1.2016.12.16.18.15.24
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 16 Dec 2016 18:15:23 -0800 (PST)
+	Fri, 16 Dec 2016 18:15:24 -0800 (PST)
 Sender: Joe MacDonald <joe@deserted.net>
 From: Joe MacDonald <joe_macdonald@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Dec 2016 21:15:20 -0500
-Message-Id: <1481940923-12914-9-git-send-email-joe_macdonald@mentor.com>
+Date: Fri, 16 Dec 2016 21:15:21 -0500
+Message-Id: <1481940923-12914-10-git-send-email-joe_macdonald@mentor.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1481940923-12914-1-git-send-email-joe_macdonald@mentor.com>
 References: <1481940923-12914-1-git-send-email-joe_macdonald@mentor.com>
-Subject: [meta-networking][PATCH 08/11] samba: add packages samba-dsdb-modules, samba-testsuite and registry-tools
+Subject: [meta-networking][PATCH 09/11] samba: move /etc/sysconfig to more common /etc/default, package tmpfiles.d in samba-common
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,46 +60,46 @@ X-List-Received-Date: Sat, 17 Dec 2016 02:15:23 -0000
 
 From: Andreas Oberritter <obi@opendreambox.org>
 
-Inspired by Debian.
-
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 ---
- meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
 diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-index ac090c2..a678578 100644
+index a678578..1caf8af 100644
 --- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
 +++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-@@ -153,6 +153,7 @@ do_install_append() {
- }
+@@ -108,7 +108,9 @@ do_install_append() {
  
- PACKAGES =+ "${PN}-python ${PN}-pidl \
-+             ${PN}-dsdb-modules ${PN}-testsuite registry-tools \
-              winbind \
-              ${PN}-common ${PN}-base ${PN}-ctdb-tests \
-              smbclient"
-@@ -209,6 +210,19 @@ FILES_${PN} += "${libdir}/vfs/*.so \
-                 ${libdir}/auth/*.so \
+     install -d ${D}${systemd_system_unitdir}
+     install -m 0644 packaging/systemd/*.service ${D}${systemd_system_unitdir}
+-    sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' ${D}${systemd_system_unitdir}/*.service
++    sed -e 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' \
++        -e 's,/etc/sysconfig/samba,${sysconfdir}/default/samba,' \
++        -i ${D}${systemd_system_unitdir}/*.service
+ 
+     install -d ${D}${sysconfdir}/tmpfiles.d
+     install -m644 packaging/systemd/samba.conf.tmp ${D}${sysconfdir}/tmpfiles.d/samba.conf
+@@ -133,8 +135,8 @@ do_install_append() {
+     install -m644 packaging/LSB/smb.conf ${D}${sysconfdir}/samba/smb.conf
+     install -D -m 644 ${WORKDIR}/volatiles.03_samba ${D}${sysconfdir}/default/volatiles/03_samba
+ 
+-    install -d ${D}${sysconfdir}/sysconfig/
+-    install -m644 packaging/systemd/samba.sysconfig ${D}${sysconfdir}/sysconfig/samba
++    install -d ${D}${sysconfdir}/default
++    install -m644 packaging/systemd/samba.sysconfig ${D}${sysconfdir}/default/samba
+ 
+     # install ctdb config file and test cases
+     install -D -m 0644 ${S}/ctdb/tests/onnode/nodes ${D}${sysconfdir}/ctdb/nodes
+@@ -202,6 +204,7 @@ FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
+ 
+ FILES_${BPN}-common = "${sysconfdir}/default \
+                        ${sysconfdir}/samba \
++                       ${sysconfdir}/tmpfiles.d \
  "
  
-+FILES_${PN}-dsdb-modules = "${libdir}/samba/ldb"
-+
-+FILES_${PN}-testsuite = "${bindir}/gentest \
-+                         ${bindir}/locktest \
-+                         ${bindir}/masktest \
-+                         ${bindir}/ndrdump \
-+                         ${bindir}/smbtorture"
-+
-+FILES_registry-tools = "${bindir}/regdiff \
-+                        ${bindir}/regpatch \
-+                        ${bindir}/regshell \
-+                        ${bindir}/regtree"
-+
- FILES_winbind = "${sbindir}/winbindd \
-                  ${bindir}/wbinfo \
-                  ${bindir}/ntlm_auth \
+ FILES_${PN} += "${libdir}/vfs/*.so \
 -- 
 1.9.1
 
