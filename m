@@ -1,49 +1,31 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-io0-f194.google.com (mail-io0-f194.google.com
-	[209.85.223.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 025B077433
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id D149B773F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Dec 2016 02:15:25 +0000 (UTC)
-Received: by mail-io0-f194.google.com with SMTP id f73so13707054ioe.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Dec 2016 18:15:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=deserted-net.20150623.gappssmtp.com; s=20150623;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=9o0l+Zady5hcueEWdYA0Ve8jQ0FwNk4YCJI5LvcyWwI=;
-	b=qmt/9ebjQGV84FUTUlWIqA6M5v/Jhy0wGYICBXgg6at0W32PbNVO4E3+WbelVtVPCo
-	zLQghaWJRddRxH+KiO5KJu3gBNX2sgqKGMHYt2N0DItaExNBw+74TCzByj7BFOxzvhn/
-	g7nc+X+ULUwVcY0JYiAxCJJaorBxRW08jYJz8iFi/WDrmTGdVMU3IOlbHnsCA8/tOotd
-	ugyGb/5TTwH/EnORX1UQz5UQGoDLLwTkYse2SYiYC5DSFz6SzREOIeKvVbOyquq1ssvj
-	L43+683+CdPeHiAM78M9GdIfFW6sDznG0MaylA4khId7KY6xm6tWB3BbGQvL0bwzbizm
-	WZyg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
-	:in-reply-to:references;
-	bh=9o0l+Zady5hcueEWdYA0Ve8jQ0FwNk4YCJI5LvcyWwI=;
-	b=gKR3FV71KRBMdvMvbRdfw3fllLdKy4b484gA5DRQ59kCFkIzQjpFsAeiUAfc9Ery4Y
-	kN9E0jkEIb02hiBdzB4Y8iS82m4+A2kDwSpsdDW/su4duLmNU4rlxkMkUdAZLldRdgEC
-	3eKYay9qbJs/ucsCKNQGgPMCF+8v458aj8EVJUdMTjqWssFqzRtbezeRk+FThN68ol5D
-	MnjKWixfa+nvserSv+IM/ri9EwcKEZ/mLmA2r+kJtFyOBDubqSPFq3xzzdQD/ArwcPB3
-	1EvohSRV3aXnS3C80D0aT3WiTJpFy5f83oghJ9ZowzrYx59NFFLda8LV16GzeEXHlC0R
-	pbqA==
-X-Gm-Message-State: AIkVDXJ/EXkgGJbe0wrhgBagcR48VPcl7MOqQ1J8ESKTjVB49sh6zcMKVZI8u2CofJvAGQ==
-X-Received: by 10.107.172.134 with SMTP id v128mr6629681ioe.49.1481940926668; 
-	Fri, 16 Dec 2016 18:15:26 -0800 (PST)
-Received: from mir.deserted.net (23-233-31-74.cpe.pppoe.ca. [23.233.31.74])
-	by smtp.gmail.com with ESMTPSA id l73sm3804122ioe.1.2016.12.16.18.15.25
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 16 Dec 2016 18:15:26 -0800 (PST)
-Sender: Joe MacDonald <joe@deserted.net>
-From: Joe MacDonald <joe_macdonald@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Dec 2016 21:15:23 -0500
-Message-Id: <1481940923-12914-12-git-send-email-joe_macdonald@mentor.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1481940923-12914-1-git-send-email-joe_macdonald@mentor.com>
+	Sat, 17 Dec 2016 03:05:20 +0000 (UTC)
+Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
+	by relay1.mentorg.com with esmtp 
+	id 1cI5JJ-0007fF-BN from Joe_MacDonald@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Dec 2016 19:05:21 -0800
+Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
+	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 16 Dec 2016 19:05:20 -0800
+Received: by burninator (Postfix, from userid 1000)	id DD6605802CD; Fri, 16
+	Dec 2016 22:05:19 -0500 (EST)
+Date: Fri, 16 Dec 2016 22:05:19 -0500
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+Message-ID: <20161217030519.GA16746@mentor.com>
 References: <1481940923-12914-1-git-send-email-joe_macdonald@mentor.com>
-Subject: [meta-networking][PATCH 11/11] samba: simplify LSB handling
+	<1481940923-12914-4-git-send-email-joe_macdonald@mentor.com>
+MIME-Version: 1.0
+In-Reply-To: <1481940923-12914-4-git-send-email-joe_macdonald@mentor.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-networking][PATCH 03/11] samba: remove unused variable DISABLE_STATIC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,63 +38,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Dec 2016 02:15:25 -0000
+X-List-Received-Date: Sat, 17 Dec 2016 03:05:22 -0000
+X-Groupsio-MsgNum: 64373
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="ibTvN161/egqYuK8"
+Content-Disposition: inline
 
-From: Andreas Oberritter <obi@opendreambox.org>
+--ibTvN161/egqYuK8
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
----
- meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 13 +++++--------
- 1 file changed, 5 insertions(+), 8 deletions(-)
+Oh, I just realized this one sneaked back in despite my having thrown it
+out at least twice now.  I've already rejected it in patchwork, but if
+anyone is picking this up off the mailing list, DISABLE_STATIC is very
+much still needed AFAICT.
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-index eb3038d..a126ac9 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-@@ -38,8 +38,8 @@ DEPENDS_append_libc-musl = " libtirpc"
- CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
- LDFLAGS_append_libc-musl = " -ltirpc"
- 
--SYSVINITTYPE_linuxstdbase = "lsb"
--SYSVINITTYPE = "sysv"
-+LSB = ""
-+LSB_linuxstdbase = "lsb"
- 
- INITSCRIPT_NAME = "samba"
- INITSCRIPT_PARAMS = "start 20 3 5 . stop 20 0 1 6 ."
-@@ -48,19 +48,16 @@ SYSTEMD_PACKAGES = "${PN}-base winbind"
- SYSTEMD_SERVICE_${PN}-base = "nmb.service smb.service"
- SYSTEMD_SERVICE_winbind = "winbind.service"
- 
--PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', '${SYSVINITTYPE}', '', d)} \
--                   ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
-+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
-                    ${@bb.utils.contains('DISTRO_FEATURES', 'zeroconf', 'zeroconf', '', d)} \
-                    acl cups ldap \
- "
- 
--RDEPENDS_${PN}-base += "${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'lsb', '', d)}"
-+RDEPENDS_${PN}-base += "${LSB}"
- RDEPENDS_${PN}-ctdb-tests += "bash util-linux-getopt"
- 
- PACKAGECONFIG[acl] = "--with-acl-support,--without-acl-support,acl"
- PACKAGECONFIG[fam] = "--with-fam,--without-fam,gamin"
--PACKAGECONFIG[lsb] = ",,lsb"
--PACKAGECONFIG[sysv] = ",,sysvinit"
- PACKAGECONFIG[cups] = "--enable-cups,--disable-cups,cups"
- PACKAGECONFIG[ldap] = "--with-ldap,--without-ldap,openldap"
- PACKAGECONFIG[sasl] = ",,cyrus-sasl"
-@@ -120,7 +117,7 @@ do_install_append() {
-     install -m644 packaging/systemd/samba.conf.tmp ${D}${sysconfdir}/tmpfiles.d/samba.conf
-     echo "d ${localstatedir}/log/samba 0755 root root -" \
-         >> ${D}${sysconfdir}/tmpfiles.d/samba.conf
--    if ${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'true', 'false', d)}; then
-+    if [ "${LSB}" = "lsb" ]; then
-         install -d ${D}${sysconfdir}/init.d
-         install -m 0755 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d/samba
-     else
--- 
-1.9.1
+-J.
 
+[[oe] [meta-networking][PATCH 03/11] samba: remove unused variable DISABLE_=
+STATIC] On 16.12.16 (Fri 21:15) Joe MacDonald wrote:
 
+> From: Andreas Oberritter <obi@opendreambox.org>
+>=20
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+> ---
+>  meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 1 -
+>  1 file changed, 1 deletion(-)
+>=20
+> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/=
+meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> index aabc043..c9e0953 100644
+> --- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> +++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+> @@ -93,7 +93,6 @@ EXTRA_OECONF +=3D "--enable-fhs \
+>                   --with-libiconv=3D${STAGING_DIR_HOST}${prefix} \
+>                   --with-pam --with-pammodulesdir=3D${base_libdir}/securi=
+ty \
+>                  "
+> -DISABLE_STATIC =3D ""
+> =20
+>  LDFLAGS +=3D "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES'=
+, 'ld-is-gold', ' -fuse-ld=3Dbfd ', '', d)}"
+> =20
+> --=20
+> 1.9.1
+>=20
+--=20
+-Joe MacDonald.
+:wq
+
+--ibTvN161/egqYuK8
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJYVKtvAAoJEEn8ffcsOfaWG0YIAK0ltz6XCoLXGmbAoZJwx+Nc
+g8hrfRubPXzqYI4HPTIvcF1VllT0V/ioNhXm/GyVdsstknLVWmTusKyPUfc4Ayuk
+NnGMrrzgDwyMV7vjXXpLszS2kzI925F5ogyMMCh6dLsb5s4SmOcy/hjYvs/I0Put
+rKJd9GNpeZKtA7J6bdN7755q2xxN/aHcs4gfYTk/DqcXDZGGEef8fGyfbxkAJv8Q
+7nIMF+SOr/yavfnkKdGT2a8ESVzlREgtiRFpVjjNbKy3dtXsIKnJq6DRBEoPnwWG
+3ArAXN51sP/WYEMj8gliNuU8ooomqeKoDDj5WAeUuPGwnaXWBvPePpOZq1/TVGA=
+=r09X
+-----END PGP SIGNATURE-----
+
+--ibTvN161/egqYuK8--
