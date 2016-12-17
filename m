@@ -1,49 +1,49 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-io0-f194.google.com (mail-io0-f194.google.com
-	[209.85.223.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 84D9D7741B
+Received: from mail-it0-f67.google.com (mail-it0-f67.google.com
+	[209.85.214.67])
+	by mail.openembedded.org (Postfix) with ESMTP id D0AAD77429
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Dec 2016 02:15:21 +0000 (UTC)
-Received: by mail-io0-f194.google.com with SMTP id b194so13700022ioa.3
+	Sat, 17 Dec 2016 02:15:22 +0000 (UTC)
+Received: by mail-it0-f67.google.com with SMTP id n68so4527009itn.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Dec 2016 18:15:23 -0800 (PST)
+	Fri, 16 Dec 2016 18:15:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=deserted-net.20150623.gappssmtp.com; s=20150623;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=IAm2I6GPxOUkUf3/KkBZHwkhtiuFEZbUL7CrmWOn0Kw=;
-	b=nAHqtXLNFC8GASJeK5t162qY88hbKVeA2tNhOcQ1FKfoCXRHYpNu8tZXk1qJqrXE+f
-	gWVZrzHUu0/W3BGMGt9Xc4EfRaG99KtzPrEsop6Aj2VfIFzjGGqOR2UxSoiI6So3BAfm
-	s7LIOcjIFpwGU93IVLBFbiHicvk3AFPb4szAjSbwP89HaleAyk9ZBmXj41hrXOS19QIb
-	+A+lkXgbxDTYZlWLHLfWIA9b9qqyPuZzIWg3c2Td6wc/OT7LfixPBPHvRRuZG8m6SSO1
-	oYcJ3CH2RkkxWRHbjYgqYvfqz79hlkKQWa9NfURaY86fxFPdhJrwCvsmkusbUH5vHR5l
-	lLeQ==
+	bh=856xK+porufJoPaKtvWIf3Qva+rABzllDhhW94LwXF8=;
+	b=h5UONALoymXDF7em1M+RwkOjVzAeE+prleZbGAFj83JdUgfFqP9iR+6APfATv7sQ7a
+	dTa4A6ulvGEkYbTnGC3JXPY7RacUP75VkVq9S7DjuD2KioLBPDZwCNAkDF4z57v28OB5
+	XQ74J3Iz4brl+pdlkk/T/hyQ3MCjfD5Um2fziDcK/Zu2+JTBxEgEGgW7+SvxRM8JaslV
+	FZ1NTMA6t+xjqXK7+/UuWQrYmKfAMcc8GRHBWKR5z27XgmQuJZLm6DyhH/Yqj4v9BY26
+	SSdw3WSk7F/5Yz3e+up1KPe1UfzdtfCNn7DvynZJS2z3c+40OGgudqQk4isgOZ5KxUzh
+	Z16w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:in-reply-to:references;
-	bh=IAm2I6GPxOUkUf3/KkBZHwkhtiuFEZbUL7CrmWOn0Kw=;
-	b=oPO351NCbfsglDLk8swLaMsv7xSkYIMOgWafA3YshJ5OCux8mGSCGRS86xUI0YbD+h
-	PT7y5Lk0r2j1nV4WeN92AGVIlOgRre9k9gFNTEy3pKMwY7u9QQsJf4MQXwmIfBehkbY9
-	XtXCZSO96bHzpga/2cV2WGEYLxIZXCUfxfLw+dUI3kpP5gB/NawFg6iLP0LPxeqW1csx
-	4EaNc8MSUICW0BUIgwM202VMTrR3Qo/FDgHhBoKvgWCQFRwiJDH6HS9oPZ6JovO2CBNA
-	h0koSnQiilraHOxcd6BCqRii1xVEtOdx7P+wSUM1i3SCtT5v81XOeIk8wHm46Y8l7jeZ
-	GjNQ==
-X-Gm-Message-State: AIkVDXIo70CkqlqZqH0+7i6ZcG3AeMyjSjA8DX3AXJBT3MgRxRlCzn5AM+W37nWzzgzGjg==
-X-Received: by 10.107.156.67 with SMTP id f64mr6464895ioe.173.1481940923136;
+	bh=856xK+porufJoPaKtvWIf3Qva+rABzllDhhW94LwXF8=;
+	b=W8+b8Erduqe47MWau4jM0hi3KUoHbNWmXYgJHrAyYMJxKcKmhvKPrt9F9WeoWptX1d
+	9p18l9jOnCSBPkcE9VldiZvhOREedoIOzXV5qO4FvhHUEIVEcHkM3k/TIpLDjagjAZwq
+	zQdx4EzOokiEsb5uTkLjio7AODxjLSrMNdg4WFwhdFYzRfkImMvQzuvoDVeBNiT+SJLG
+	jzgOowAUhQ15z0uyGLu1+FXxqb2qT/3UsET7Ep/pdzOQRsaNwSAX4kS0l/DgROkCr1Z0
+	0YCMijz2KYBS75id4Xpp9GkvO+sbw1SahaoN5kJdCYiMepYTlm9YfS/TliwgIbzzqScP
+	04Cw==
+X-Gm-Message-State: AKaTC00dzzlih+lD+0iXMCbMwfmOFXqfSD870HQgJNcnilIypD8AFhGlFdkdzWVrTb5XcQ==
+X-Received: by 10.36.82.85 with SMTP id d82mr6874788itb.95.1481940923974;
 	Fri, 16 Dec 2016 18:15:23 -0800 (PST)
 Received: from mir.deserted.net (23-233-31-74.cpe.pppoe.ca. [23.233.31.74])
-	by smtp.gmail.com with ESMTPSA id l73sm3804122ioe.1.2016.12.16.18.15.22
+	by smtp.gmail.com with ESMTPSA id l73sm3804122ioe.1.2016.12.16.18.15.23
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 16 Dec 2016 18:15:22 -0800 (PST)
+	Fri, 16 Dec 2016 18:15:23 -0800 (PST)
 Sender: Joe MacDonald <joe@deserted.net>
 From: Joe MacDonald <joe_macdonald@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Dec 2016 21:15:19 -0500
-Message-Id: <1481940923-12914-8-git-send-email-joe_macdonald@mentor.com>
+Date: Fri, 16 Dec 2016 21:15:20 -0500
+Message-Id: <1481940923-12914-9-git-send-email-joe_macdonald@mentor.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1481940923-12914-1-git-send-email-joe_macdonald@mentor.com>
 References: <1481940923-12914-1-git-send-email-joe_macdonald@mentor.com>
-Subject: [meta-networking][PATCH 07/11] samba: split libraries into their own packages
+Subject: [meta-networking][PATCH 08/11] samba: add packages samba-dsdb-modules, samba-testsuite and registry-tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,189 +56,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Dec 2016 02:15:22 -0000
+X-List-Received-Date: Sat, 17 Dec 2016 02:15:23 -0000
 
 From: Andreas Oberritter <obi@opendreambox.org>
 
-It's quite hard to track library dependencies manually between
-releases. Splitting libraries into their own packages creates
-some overhead but effectively uses less storage in minimal
-installations.
+Inspired by Debian.
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 ---
- .../recipes-connectivity/samba/samba_4.4.5.bb      | 134 +++++----------------
- 1 file changed, 30 insertions(+), 104 deletions(-)
+ meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
 diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-index 1b855c3..ac090c2 100644
+index ac090c2..a678578 100644
 --- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
 +++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-@@ -152,11 +152,33 @@ do_install_append() {
-     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
+@@ -153,6 +153,7 @@ do_install_append() {
  }
  
--PACKAGES =+ "${PN}-python ${PN}-pidl libwinbind libwinbind-krb5-locator \
--             libwbclient libnss-winbind winbind libnetapi libsmbsharemodes \
--             libsmbclient lib${PN}-base ${PN}-base ${PN}-ctdb-tests \
-+PACKAGES =+ "${PN}-python ${PN}-pidl \
-+             winbind \
-+             ${PN}-common ${PN}-base ${PN}-ctdb-tests \
+ PACKAGES =+ "${PN}-python ${PN}-pidl \
++             ${PN}-dsdb-modules ${PN}-testsuite registry-tools \
+              winbind \
+              ${PN}-common ${PN}-base ${PN}-ctdb-tests \
               smbclient"
- 
-+python samba_populate_packages() {
-+    def module_hook(file, pkg, pattern, format, basename):
-+        pn = d.getVar('PN', True)
-+        d.appendVar('RRECOMMENDS_%s-base' % pn, ' %s' % pkg)
-+
-+    mlprefix = d.getVar('MLPREFIX', True) or ''
-+    pam_libdir = d.expand('${base_libdir}/security')
-+    pam_pkgname = mlprefix + 'pam-plugin%s'
-+    do_split_packages(d, pam_libdir, '^pam_(.*)\.so$', pam_pkgname, 'PAM plugin for %s', extra_depends='', prepend=True)
-+
-+    libdir = d.getVar('libdir', True)
-+    do_split_packages(d, libdir, '^lib(.*)\.so\..*$', 'lib%s', 'Samba %s library', extra_depends='${PN}-common', prepend=True, allow_links=True)
-+    pkglibdir = '%s/samba' % libdir
-+    do_split_packages(d, pkglibdir, '^lib(.*)\.so$', 'lib%s', 'Samba %s library', extra_depends='${PN}-common', prepend=True)
-+    moduledir = '%s/samba/auth' % libdir
-+    do_split_packages(d, moduledir, '^(.*)\.so$', 'samba-auth-%s', 'Samba %s authentication backend', hook=module_hook, extra_depends='', prepend=True)
-+    moduledir = '%s/samba/pdb' % libdir
-+    do_split_packages(d, moduledir, '^(.*)\.so$', 'samba-pdb-%s', 'Samba %s password backend', hook=module_hook, extra_depends='', prepend=True)
-+}
-+
-+PACKAGESPLITFUNCS_prepend = "samba_populate_packages "
-+
- RDEPENDS_${PN} += "${PN}-base"
- 
- FILES_${PN}-base = "${sbindir}/nmbd \
-@@ -177,121 +199,25 @@ FILES_${PN}-ctdb-tests = "${bindir}/ctdb_run_tests \
-                           /run/ctdb \
-                          "
- 
--# figured out by
--# FILES="tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/samba/4.1.12-r0/image/usr/sbin/smbd tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/samba/4.1.12-r0/image/usr/sbin/nmbd"
--#
--# while [ "${FILES}" != "${OLDFILES}" ]
--# do
--#     OLDFILES="${FILES}"
--#     NEEDED=`tmp/sysroots/x86_64-linux/usr/libexec/arm-poky-linux-gnueabi.gcc-cross-initial-arm/gcc/arm-poky-linux-gnueabi/5.2.0/objdump -x ${FILES} | grep NEEDED | egrep -E 'so(.[0-9]|$)' | sort -u | perl -MData::Dumper -le 'while (<>) {chomp; push @lib, (split)[1]}; print "(", join("|", @lib), ")"'`
--#     NF=`find tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/samba/4.1.12-r0/image/usr/lib -type f | egrep "${NEEDED}" | sort -u`
--#
--#     FILES=`perl -le 'foreach (@ARGV) { $f{$_}++ }; print join(" ", sort keys %f)' ${FILES} ${NF}`
--# done
--#
--# LIBS=`echo ${FILES} | sed -e 's,tmp/work/cortexa9hf-vfp-neon-poky-linux-gnueabi/samba/4.1.12-r0/image/usr/lib,${libdir},g' -e 's,.so.[0-9]+.*$,.so.*,g'`
--# for l in ${LIBS}
--# do
--#     echo $l
--# done
--
--FILES_lib${BPN}-base = "\
--                    ${sysconfdir}/default \
--                    ${sysconfdir}/samba \
--                    ${libdir}/libdcerpc-binding.so.* \
--                    ${libdir}/libgensec.so.* \
--                    ${libdir}/libndr-krb5pac.so.* \
--                    ${libdir}/libndr-nbt.so.* \
--                    ${libdir}/libndr-standard.so.* \
--                    ${libdir}/libndr.so.* \
--                    ${libdir}/libnetapi.so.* \
--                    ${libdir}/libpdb.so.* \
--                    ${libdir}/libsamba-credentials.so.* \
--                    ${libdir}/libsamba-hostconfig.so.* \
--                    ${libdir}/libsamba-util.so.* \
--                    ${libdir}/libsamdb.so.* \
--                    ${libdir}/libsmbconf.so.* \
--                    ${libdir}/libtevent-util.so.* \
--                    ${libdir}/samba/libCHARSET3.so \
--                    ${libdir}/samba/libaddns.so \
--                    ${libdir}/samba/libads.so \
--                    ${libdir}/samba/libasn1util.so \
--                    ${libdir}/samba/libauth.so \
--                    ${libdir}/samba/libauth_sam_reply.so \
--                    ${libdir}/samba/libauthkrb5.so \
--                    ${libdir}/samba/libccan.so \
--                    ${libdir}/samba/libcli-ldap-common.so \
--                    ${libdir}/samba/libcli-nbt.so \
--                    ${libdir}/samba/libcli_cldap.so \
--                    ${libdir}/samba/libcli_smb_common.so \
--                    ${libdir}/samba/libcli_spoolss.so \
--                    ${libdir}/samba/libcliauth.so \
--                    ${libdir}/samba/libdbwrap.so \
--                    ${libdir}/samba/libdcerpc-samba.so \
--                    ${libdir}/samba/liberrors.so \
--                    ${libdir}/samba/libflag_mapping.so \
--                    ${libdir}/samba/libgse.so \
--                    ${libdir}/samba/libinterfaces.so \
--                    ${libdir}/samba/libkrb5samba.so \
--                    ${libdir}/samba/libldbsamba.so \
--                    ${libdir}/samba/liblibcli_lsa3.so \
--                    ${libdir}/samba/liblibcli_netlogon3.so \
--                    ${libdir}/samba/liblibsmb.so \
--                    ${libdir}/samba/libmsrpc3.so \
--                    ${libdir}/samba/libndr-samba.so \
--                    ${libdir}/samba/libndr-samba4.so \
--                    ${libdir}/samba/libnpa_tstream.so \
--                    ${libdir}/samba/libntdb.so.* \
--                    ${libdir}/samba/libpopt_samba3.so \
--                    ${libdir}/samba/libprinting_migrate.so \
--                    ${libdir}/samba/libsamba-modules.so \
--                    ${libdir}/samba/libsamba-security.so \
--                    ${libdir}/samba/libsamba-sockets.so \
--                    ${libdir}/samba/libsamba3-util.so \
--                    ${libdir}/samba/libsamdb-common.so \
--                    ${libdir}/samba/libsecrets3.so \
--                    ${libdir}/samba/libserver-role.so \
--                    ${libdir}/samba/libsmb_transport.so \
--                    ${libdir}/samba/libsmbd_base.so \
--                    ${libdir}/samba/libsmbd_conn.so \
--                    ${libdir}/samba/libsmbd_shim.so \
--                    ${libdir}/samba/libsmbregistry.so \
--                    ${libdir}/samba/libtdb-wrap.so \
--                    ${libdir}/samba/libutil_cmdline.so \
--                    ${libdir}/samba/libutil_ntdb.so \
--                    ${libdir}/samba/libutil_reg.so \
--                    ${libdir}/samba/libutil_setid.so \
--                    ${libdir}/samba/libutil_tdb.so \
--                    ${libdir}/samba/pdb/smbpasswd.so \
--                    ${libdir}/samba/pdb/tdbsam.so \
--                    ${libdir}/samba/pdb/wbc_sam.so \
-+FILES_${BPN}-common = "${sysconfdir}/default \
-+                       ${sysconfdir}/samba \
- "
- 
- FILES_${PN} += "${libdir}/vfs/*.so \
-                 ${libdir}/charset/*.so \
-                 ${libdir}/*.dat \
+@@ -209,6 +210,19 @@ FILES_${PN} += "${libdir}/vfs/*.so \
                  ${libdir}/auth/*.so \
--                ${base_libdir}/security/pam_smbpass.so \
  "
  
--FILES_libwbclient = "${libdir}/libwbclient.so.* ${libdir}/samba/libwinbind-client.so"
--FILES_libnetapi = "${libdir}/libnetapi.so.*"
--FILES_libsmbsharemodes = "${libdir}/libsmbsharemodes.so.*"
--FILES_libsmbclient = "${libdir}/libsmbclient.so.*"
++FILES_${PN}-dsdb-modules = "${libdir}/samba/ldb"
++
++FILES_${PN}-testsuite = "${bindir}/gentest \
++                         ${bindir}/locktest \
++                         ${bindir}/masktest \
++                         ${bindir}/ndrdump \
++                         ${bindir}/smbtorture"
++
++FILES_registry-tools = "${bindir}/regdiff \
++                        ${bindir}/regpatch \
++                        ${bindir}/regshell \
++                        ${bindir}/regtree"
++
  FILES_winbind = "${sbindir}/winbindd \
                   ${bindir}/wbinfo \
                   ${bindir}/ntlm_auth \
-+                 ${libdir}/samba/idmap \
-+                 ${libdir}/samba/nss_info \
-+                 ${libdir}/winbind_krb5_locator.so \
-                  ${sysconfdir}/init.d/winbind \
-                  ${systemd_system_unitdir}/winbind.service"
- 
--FILES_libnss-winbind = "${libdir}/libnss_*${SOLIBS} \
--                        ${libdir}/nss_info \
--"
--
--FILES_libwinbind = "${base_libdir}/security/pam_winbind.so \
--                    ${systemd_system_unitdir}/winbind.service"
--FILES_libwinbind-krb5-locator = "${libdir}/winbind_krb5_locator.so"
--
- FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
- 
- FILES_smbclient = "${bindir}/cifsdd \
 -- 
 1.9.1
 
