@@ -1,45 +1,45 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 12D7671BB6
+	by mail.openembedded.org (Postfix) with ESMTP id AC1227742C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Dec 2016 23:04:04 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id g1so2063119pgn.0
+	Sat, 17 Dec 2016 23:06:27 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id g1so2067136pgn.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Dec 2016 15:04:06 -0800 (PST)
+	Sat, 17 Dec 2016 15:06:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=X2XesCy9PlLVWr8J/wkWrbro+sKHdqhc4Fyy7ceTLfs=;
-	b=gdDklI+Cz10dHWYRpbx00Fae31lfRvTHJ6Gj8HEFmnt7nlyS4NT5LGmyrA/hTb+QgJ
-	ev9WZxV+oRnndc7D+XoDtoaTJUJh5ey851czyNx/rH6tNen3B+YUkAnE6xqsathrDJpy
-	PW+t11Mjqn8TI7tGM5Gz1VZJKiZrur4q2wsnXVb0VdNb3vFERD9KEz/6RV2c1lzuezv6
-	IB9LK+eBJcoFT2tWB51aG2PEoDMxT/S4lgrMvmNJ3J6rgqBqpspbqcn1P4xpWrpZCBUR
-	b7HeVeDgaqai7GII3fhEM0hnXRJGrnsLONGz5zYcQOWsKY417LMSTyEoAapm6wntYWu+
-	MZtQ==
+	bh=MtO4N8J8+EVlNGK13TSZJsA2oYCux8W7g4vH59tBrs0=;
+	b=XjIq7hubdYTGGC6f7/0j8U8mJTpCf105SGL8sYha3tKH4M37wveRHqSWVlwVBw/Ozi
+	tMyVmpmwBmLXzZ2nH3T0bBVFvzISLMZlmTczteno1HkMTGgLZtorfpwC6xt0UZwmAyDw
+	RS6xMifDj67kzHDSh/Jg0VHAxWs+u5tpclI8Zq1/weeuRgdiT5uX3FFs6BYRYAa5hbwE
+	201/B1hx0TqxIYHVNC66MRWULIUBF1h4lfu8qj9Jh/q5UFRcvvTvXJgpdqpXOk7gbV7p
+	uCR1u4fcf+h38YAfxuP1MqcHvCAdJV9efdBu53JtwSHRCixJPYz2BWcUHBxI9sPjqTfO
+	BkwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=X2XesCy9PlLVWr8J/wkWrbro+sKHdqhc4Fyy7ceTLfs=;
-	b=HjL7OXSUOQRtcmPRNi/cKlrBo3OxY372TB0rvqYn0vZOPT3vlgryWDGcA3+zxowzrh
-	n3rr0jZpRw7WN4WO/+TanPuY8p5TolF9EQCUsxdKV93gqCH8QDiXDePfDiLWgySJ8Zeq
-	ygskmsPxCqzX+9XjNe9XiNRXbGeSHy1D1UapIfzqmX8rn9NBmB4oewHZuFl0FxUcgWJR
-	edMc+86b9YhAaN3u1FyVlaQlFcvFcRFKJIjSxumdLTl4BqvtkL+zyH4dlEz2xKKERExo
-	9Gpjfg8esYIz8cE6TTHPar8byWDPDcQQypqorWthT6eok/myBMVY59jObn4qmjelZnzT
-	vphQ==
-X-Gm-Message-State: AKaTC01kI+vQ6U0agG4Io1KatPZr4fh6RrmfzjSH+Z+ackPw6qjuccXux8h+O/b68CuU8w==
-X-Received: by 10.99.164.9 with SMTP id c9mr17474585pgf.141.1482015846433;
-	Sat, 17 Dec 2016 15:04:06 -0800 (PST)
+	bh=MtO4N8J8+EVlNGK13TSZJsA2oYCux8W7g4vH59tBrs0=;
+	b=YwxrRKEGyauaiGwr+6ARZAgYdyAY326gB1ZTwXQIJI+gthXA9W5bYIt0q1lqMO+UvH
+	eNzaDzPHEwLMh3y0+NfprmjLrvHxUQ181Wgo7FOm2nx952SB/+vI9PC/cmY5ymYfO/V3
+	d2LJjnP+EfeIzVF69LJzhqYTOtPVOGHnQ39/rX8bBvq+Dcr5SZjzsYxW4J4gzm8GI3Z4
+	1bUR1ypMf5GazSSWge/s1Q563oVNr7daR+WdSZoKTlMB34sStL74G/Q21kT+bYXWPB10
+	FOg8Rltef6v3Fjxbu1Kla4uF6Q0pPoGbS7k+j7n0zO8etqC+wcJVlmCQGOXBeltXih+U
+	9xww==
+X-Gm-Message-State: AKaTC01zPlAgRs+T7sbkYGQnFOzmj0BS134znGwPw7uS6bKVq4inq+ufKXrQX+5oREDrZQ==
+X-Received: by 10.84.175.234 with SMTP id t97mr20823926plb.145.1482015989412; 
+	Sat, 17 Dec 2016 15:06:29 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
-	[76.102.32.192])
-	by smtp.gmail.com with ESMTPSA id f5sm4583384pgg.5.2016.12.17.15.04.05
+	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
+	y20sm21115886pfj.26.2016.12.17.15.06.28
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 17 Dec 2016 15:04:05 -0800 (PST)
+	Sat, 17 Dec 2016 15:06:28 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	obi@opendreambox.org
-Date: Sat, 17 Dec 2016 15:03:59 -0800
-Message-Id: <20161217230359.25183-1-raj.khem@gmail.com>
+Date: Sat, 17 Dec 2016 15:06:22 -0800
+Message-Id: <20161217230622.26063-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.11.0
-Subject: [meta-filesystems][PATCH] xfsprogs: Fix parallel install and Make dependencies
+Subject: [meta-filesystems][PATCH V2] xfsprogs: Fix parallel install and Make dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,7 +52,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Dec 2016 23:04:06 -0000
+X-List-Received-Date: Sat, 17 Dec 2016 23:06:28 -0000
 
 This should fix build issues due to missing dependencies
 e.g. libuuid in Makefiles.
@@ -63,9 +63,13 @@ Dont do parallel install its broken
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
+Changes from
+v1 -> v2
+- Drop locking toolchain to gcc it compiles fine with clang too
+
  .../xfsprogs/files/link_needed_libs.patch          | 76 +++++++++++++++++++++-
- .../recipes-utils/xfsprogs/xfsprogs_4.8.0.bb       |  8 ++-
- 2 files changed, 81 insertions(+), 3 deletions(-)
+ .../recipes-utils/xfsprogs/xfsprogs_4.8.0.bb       |  6 +-
+ 2 files changed, 79 insertions(+), 3 deletions(-)
 
 diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch b/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch
 index 18b95c1c3..a3c699ce6 100644
@@ -167,7 +171,7 @@ index 18b95c1c3..a3c699ce6 100644
 + install-dev: default
 + 	$(INSTALL_LTLIB_DEV)
 diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
-index 9959f0d85..7ee693ada 100644
+index 9959f0d85..1032fb89b 100644
 --- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
 +++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
 @@ -22,7 +22,7 @@ FILES_${PN}-fsck = "${base_sbindir}/fsck.xfs"
@@ -188,14 +192,12 @@ index 9959f0d85..7ee693ada 100644
  
  do_configure_prepend () {
      export BUILD_CC="${BUILD_CC} ${BUILD_CFLAGS}"
-@@ -54,3 +54,7 @@ do_configure_prepend () {
+@@ -54,3 +54,5 @@ do_configure_prepend () {
  do_install_append() {
          oe_runmake 'DESTDIR=${D}' install install-dev
  }
 +
 +PARALLEL_MAKEINST = ""
-+
-+TOOLCHAIN = "gcc"
 -- 
 2.11.0
 
