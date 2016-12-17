@@ -1,51 +1,51 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-io0-f194.google.com (mail-io0-f194.google.com
-	[209.85.223.194])
-	by mail.openembedded.org (Postfix) with ESMTP id A37CD7743B
+Received: from mail-io0-f193.google.com (mail-io0-f193.google.com
+	[209.85.223.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C69D7744D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Dec 2016 16:04:47 +0000 (UTC)
-Received: by mail-io0-f194.google.com with SMTP id y124so15014632iof.1
+	Sat, 17 Dec 2016 16:04:48 +0000 (UTC)
+Received: by mail-io0-f193.google.com with SMTP id p13so14995271ioi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Dec 2016 08:04:49 -0800 (PST)
+	Sat, 17 Dec 2016 08:04:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=deserted-net.20150623.gappssmtp.com; s=20150623;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=ouAX8PefsCwH2MPsZAnNHhGaoDQJsRW4XvqwoGik4Ec=;
-	b=VcqRSEw2lffCrCm68DPwCyXtq/vJbjAjZts09UWzyRwaXDmtK9eaM41h8yhvX/0vlk
-	T4XIhV3Ej2D2r00Ek9y5FvlYtvXev7utbPkeaSq0SVIkq4xHYNQD4JxupQQUjfUD04wy
-	oFDbEaoMwaN37bU7SffC0wstKSSVDIcymVhY4jXc1zG8whIDqTtXo+lLdECuyNivwcVj
-	rtp7GeT7LyZdpEpg2yJNAJneaIs5NrWgeql2KFv4NeDwdToqDIhZZbxxzkeVfwI/sikr
-	uQjdytqLxkkc91ujDv1xsEfAmmZMqwhvd7EiyLdmTqf4EZx0lJAWSqSJl8dx3BIJ8ZFL
-	R2ng==
+	bh=7TYKJw7vj9qvGkT7dfYIMZ9bidUF8Shees4JND/RJpM=;
+	b=UU0dkt405monDDSl0HU9pOqReJx+J9B2a29+dcFkZvBm3DNtpW0+KT6gMqw2EYI7cI
+	481g8j4I32o/GUYjJs2kaDN/Dg4ST5ldV7HBDRL78FQalt5sZPHExURlC7B4EegFhkk7
+	R8408MyAjbEkFqGyusoCo/e1qIArct52EsoBxDbVN7SBE2jjx+N3KQjnMY+rUbH+Lxqq
+	p56ZB455p7kcgD0xKyISJ7jTFq+Ne1h8YyWC8r8OfSg5gKq1YXZCjo4hsSb2azkmh/fN
+	oGFqLmBicUikMqGrapDYEYeP6Cpd37Fc4TCjjNOvKzSMqa1U7A1slEHw26TLAP62fX4y
+	4LxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:in-reply-to:references;
-	bh=ouAX8PefsCwH2MPsZAnNHhGaoDQJsRW4XvqwoGik4Ec=;
-	b=G6392u19qrMmAkKJZgguBe2DBXGUaaYh//PZlS7Q1I9aHYa2NklN71Z3oVYfb4B9b7
-	lvc/IfUFOsa0td2Up65eLp1xxEP3uCy3Ko+1A7PDngmrphLw+/qT1gDBtfwLdFZX51Sr
-	EQEVT5f4bwDj5qGyKAeymMBVxZcXX8yPKPGa7YktulnUDSt6A13H099N5EtNAuWHg5D4
-	T9PAv064eVOScunQUPPCP4UmHV0C/FyEzfJ9H4UBHctHhoTriU9zjeEdJV70hpAD1dlR
-	ve9R+PjtXP4ZFs29xgoMLYf53dmzJ0caD1ClaGNiQioGT8A+SIRvZSQiEP/wm7YgiU/z
-	JK/A==
-X-Gm-Message-State: AIkVDXKIcKHsQQi7ROWY1xlPoNbx/hzguWGyZqnrTd0DK46oduGmH5+4NdK8RfwUHZPiIA==
-X-Received: by 10.107.35.73 with SMTP id j70mr8458340ioj.195.1481990689074;
-	Sat, 17 Dec 2016 08:04:49 -0800 (PST)
+	bh=7TYKJw7vj9qvGkT7dfYIMZ9bidUF8Shees4JND/RJpM=;
+	b=hnXCkuWZl2BXALNtLiY6Cx5dcNKUAuge8ltjPJnSPdJ+EaUJM3H4JNkurIG4l3zcuF
+	b8YsEn5tXBA+25Yn6v0pbIAozpXp/jkK7aM+oT5l29avUFvRUPI4OHsRrQ8DgTECJpEi
+	MbyaeJivuZhtJHMjIGXEsATf6myTDFXv3XSTtGJHL53rBcL01V0nJ8QQcMCmMs+S47l4
+	oZEoSCie3Q6cRFzuaz3Yvpi38o+vqFwxKV/+J1QZ+R3Vx6E6hvsAxbNLapA0KmKyQtef
+	d1CL4ZTn5HN5fqAW9U/dlzjLeKFo9HgI1tg7Z85oIfJ8R/tmj75XX9HbKgdC9ZHJ+CgY
+	DH7A==
+X-Gm-Message-State: AIkVDXKb4GVhGgYXCaHKnyBrtrS8mLJJ7+++sf454At0+VXvOkIy9yMwWl7X+Dooa1bKBw==
+X-Received: by 10.107.37.6 with SMTP id l6mr8054301iol.218.1481990690142;
+	Sat, 17 Dec 2016 08:04:50 -0800 (PST)
 Received: from mir.deserted.net (23-233-31-74.cpe.pppoe.ca. [23.233.31.74])
 	by smtp.gmail.com with ESMTPSA id
-	c36sm3371303itd.18.2016.12.17.08.04.48
+	c36sm3371303itd.18.2016.12.17.08.04.49
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 17 Dec 2016 08:04:48 -0800 (PST)
+	Sat, 17 Dec 2016 08:04:49 -0800 (PST)
 Sender: Joe MacDonald <joe@deserted.net>
 From: Joe MacDonald <joe_macdonald@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 17 Dec 2016 11:04:50 -0500
-Message-Id: <1481990698-15962-3-git-send-email-joe_macdonald@mentor.com>
+Date: Sat, 17 Dec 2016 11:04:51 -0500
+Message-Id: <1481990698-15962-4-git-send-email-joe_macdonald@mentor.com>
 X-Mailer: git-send-email 1.9.1
 In-Reply-To: <1481990698-15962-1-git-send-email-joe_macdonald@mentor.com>
 References: <1481940923-12914-1-git-send-email-joe_macdonald@mentor.com>
 	<1481990698-15962-1-git-send-email-joe_macdonald@mentor.com>
-Subject: [meta-networking][PATCH 02/10] samba: install systemd units and initscripts unconditionally
+Subject: [meta-networking][PATCH 03/10] samba: add smbclient package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,52 +58,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Dec 2016 16:04:47 -0000
+X-List-Received-Date: Sat, 17 Dec 2016 16:04:49 -0000
 
 From: Andreas Oberritter <obi@opendreambox.org>
-
-Fixes hybrid systemd/sysvinit setups.
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 ---
- .../recipes-connectivity/samba/samba_4.4.5.bb       | 21 ++++++++++-----------
- 1 file changed, 10 insertions(+), 11 deletions(-)
+ .../recipes-connectivity/samba/samba_4.4.5.bb         | 19 +++++++++++++++----
+ 1 file changed, 15 insertions(+), 4 deletions(-)
 
 diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-index 783a7cd..aabc043 100644
+index aabc043..1d9d75b 100644
 --- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
 +++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-@@ -98,19 +98,18 @@ DISABLE_STATIC = ""
- LDFLAGS += "-Wl,-z,relro,-z,now ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
+@@ -144,10 +144,10 @@ do_install_append() {
+     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
+ }
  
- do_install_append() {
--    if ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'true', 'false', d)}; then
--        install -d ${D}${systemd_system_unitdir}
--        install -m 0644 packaging/systemd/*.service ${D}${systemd_system_unitdir}
--        sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' ${D}${systemd_system_unitdir}/*.service
+-PACKAGES =+ "${PN}-python ${PN}-pidl libwinbind libwinbind-krb5-locator"
+-PACKAGES =+ "libwbclient libnss-winbind winbind libnetapi libsmbsharemodes \
+-             libsmbclient lib${BPN}-base ${PN}-base ${PN}-ctdb-tests"
 -
--        install -d ${D}${sysconfdir}/tmpfiles.d
--        install -m644 packaging/systemd/samba.conf.tmp ${D}${sysconfdir}/tmpfiles.d/samba.conf
--        echo "d ${localstatedir}/log/samba 0755 root root -" \
--            >> ${D}${sysconfdir}/tmpfiles.d/samba.conf
--    elif ${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'true', 'false', d)}; then
-+    install -d ${D}${systemd_system_unitdir}
-+    install -m 0644 packaging/systemd/*.service ${D}${systemd_system_unitdir}
-+    sed -i 's,\(ExecReload=\).*\(/kill\),\1${base_bindir}\2,' ${D}${systemd_system_unitdir}/*.service
++PACKAGES =+ "${PN}-python ${PN}-pidl libwinbind libwinbind-krb5-locator \
++             libwbclient libnss-winbind winbind libnetapi libsmbsharemodes \
++             libsmbclient lib${BPN}-base ${PN}-base ${PN}-ctdb-tests \
++             smbclient"
+ 
+ RDEPENDS_${PN} += "${PN}-base"
+ 
+@@ -302,5 +302,16 @@ FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*.so \
+                       ${libdir}/python${PYTHON_BASEVERSION}/site-packages/samba/web_server/* \
+ "
+ 
++FILES_smbclient = "${bindir}/cifsdd \
++                   ${bindir}/rpcclient \
++                   ${bindir}/smbcacls \
++                   ${bindir}/smbclient \
++                   ${bindir}/smbcquotas \
++                   ${bindir}/smbget \
++                   ${bindir}/smbspool \
++                   ${bindir}/smbtar \
++                   ${bindir}/smbtree \
++                   ${libdir}/samba/smbspool_krb5_wrapper"
 +
-+    install -d ${D}${sysconfdir}/tmpfiles.d
-+    install -m644 packaging/systemd/samba.conf.tmp ${D}${sysconfdir}/tmpfiles.d/samba.conf
-+    echo "d ${localstatedir}/log/samba 0755 root root -" \
-+        >> ${D}${sysconfdir}/tmpfiles.d/samba.conf
-+    if ${@bb.utils.contains('PACKAGECONFIG', 'lsb', 'true', 'false', d)}; then
-         install -d ${D}${sysconfdir}/init.d
-         install -m 0755 packaging/LSB/samba.sh ${D}${sysconfdir}/init.d/samba
--    elif ${@bb.utils.contains('PACKAGECONFIG', 'sysv', 'true', 'false', d)}; then
-+    else
-         install -d ${D}${sysconfdir}/init.d
-         install -m 0755 packaging/sysv/samba.init ${D}${sysconfdir}/init.d/samba
-         sed -e 's,/opt/samba/bin,${sbindir},g' \
+ RDEPENDS_${PN}-pidl_append = " perl"
+ FILES_${PN}-pidl = "${bindir}/pidl ${datadir}/perl5/Parse"
 -- 
 1.9.1
 
