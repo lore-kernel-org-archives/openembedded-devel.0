@@ -1,36 +1,30 @@
-Return-Path: <obi@opendreambox.org>
-Received: from mail.dream-property.net (mail.dream-property.net
-	[82.149.226.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E4AD71B13
+Return-Path: <s.mueller-klieser@phytec.de>
+X-Greylist: delayed 320 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sun, 18 Dec 2016 17:54:59 UTC
+Received: from root.phytec.de (mail.phytec.de [217.6.246.34])
+	by mail.openembedded.org (Postfix) with ESMTP id A85126093D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Dec 2016 14:08:06 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id 7E87431C2F8B
+	Sun, 18 Dec 2016 17:54:59 +0000 (UTC)
+Received: from idefix.phytec.de (idefix.phytec.de [172.16.0.10])
+	by root.phytec.de (Postfix) with ESMTP id 3CE5EA002F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Dec 2016 15:08:06 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id 2G8jdmY-D0_1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Dec 2016 15:08:04 +0100 (CET)
-Received: from [172.22.22.61] (55d47b99.access.ecotel.net [85.212.123.153])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id 5C05931C3100
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Dec 2016 15:08:04 +0100 (CET)
+	Sun, 18 Dec 2016 18:50:31 +0100 (CET)
+Received: from lws-mklieser.phytec.de ([172.16.26.57])
+	by idefix.phytec.de (IBM Domino Release 9.0.1FP5 HF413)
+	with ESMTP id 2016121818493977-222771 ;
+	Sun, 18 Dec 2016 18:49:39 +0100 
+From: =?UTF-8?q?Stefan=20M=C3=BCller-Klieser?= <s.mueller-klieser@phytec.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1481940923-12914-1-git-send-email-joe_macdonald@mentor.com>
-	<ef51199a-f11d-ecad-0211-bb966df53d77@gmail.com>
-From: Andreas Oberritter <obi@opendreambox.org>
-Message-ID: <2bd9da81-0d71-390b-90b3-b97fb1cda937@opendreambox.org>
-Date: Sun, 18 Dec 2016 15:08:03 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.5.1
+Date: Sun, 18 Dec 2016 18:49:28 +0100
+Message-Id: <1482083368-9718-1-git-send-email-s.mueller-klieser@phytec.de>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <ef51199a-f11d-ecad-0211-bb966df53d77@gmail.com>
-Subject: Re: [meta-networking][PATCH 00/11] samba: refresh pending patches
+X-MIMETrack: Itemize by SMTP Server on Idefix/Phytec(Release 9.0.1FP5
+	HF413|March 21, 2016) at 18.12.2016 18:49:39,
+	Serialize by Router on Idefix/Phytec(Release 9.0.1FP5 HF413|March 21,
+	2016) at 18.12.2016 18:49:39
+X-TNEFEvaluated: 1
+Subject: [meta-oe][PATCH] pmbw: add recipe for ram benchmarks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,28 +37,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Dec 2016 14:08:07 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 18 Dec 2016 17:54:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 17.12.2016 18:33, akuster808 wrote:
-> 
-> 
-> On 12/16/2016 06:15 PM, Joe MacDonald wrote:
->> As I mentioned earlier this week, I'm taking a stab at updating the samba
->> patches from Andreas Oberritter that now have conflicts due to other
->> changes queued up for samba.  Quite a few of them actually applied cleanly
->> after resolving earlier conflicts and the basic smoke tests seem to pass
->> for me, but this definitely needs a bit of soak time in master-next and if
->> you're around, Andreas, and can double-check my work on your patches,
->> that'd be much appreciated.
->>
-> 
-> Are some of these changes appropriate for Morty?
+This adds the Parallel Memory Bandwidth Benchmark tool to the layer. It
+consists of a collection of assembly routines for testing cache and
+memory access performance. It also contains a converter to generate
+gnuplot scripts for the results.
 
-Not necessarily, but I'd consider commit bb2cbb9 (samba: Avoid timeout
-for nmbd if started offline with systemd), which was sent separately.
+Signed-off-by: Stefan M=C3=BCller-Klieser <s.mueller-klieser@phytec.de>
+---
+ meta-oe/recipes-benchmark/pmbw/pmbw=5Fgit.bb | 28 ++++++++++++++++++++++++=
+++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/pmbw/pmbw=5Fgit.bb
 
-Regards,
-Andreas
+diff --git a/meta-oe/recipes-benchmark/pmbw/pmbw=5Fgit.bb b/meta-oe/recipes=
+-benchmark/pmbw/pmbw=5Fgit.bb
+new file mode 100644
+index 0000000..7a69395
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/pmbw/pmbw=5Fgit.bb
+@@ -0,0 +1,28 @@
++SUMMERY =3D "Parallel Memory Bandwidth Measurement / Benchmark"
++DESCRIPTION =3D "\
++The tool pmbw is a set of assembler routines to measure the parallel memor=
+y \
++(cache and RAM) bandwidth of modern multi-core machines."
++HOMEPAGE =3D "http://panthema.net/2013/pmbw/"
++SECTION =3D "benchmark/tests"
++AUTHOR =3D "Timo Bingmann"
++LICENSE =3D "GPLv3"
++LIC=5FFILES=5FCHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47f=
+ae504"
++
++SRC=5FURI =3D "git://github.com/bingmann/pmbw;protocol=3Dhttps"
++
++PV =3D "0.6.2+git${SRCPV}"
++SRCREV =3D "4a3b37728060a8aba06fc83f157a1965088d79d6"
++
++S =3D "${WORKDIR}/git"
++
++inherit autotools
++
++# the hand coded asm uses r11, which therefore cannot be used for storing
++# the frame pointer when debugging on arm
++SELECTED=5FOPTIMIZATION=5Fremove=5Farm =3D "-fno-omit-frame-pointer"
++
++PACKAGES =3D+ "${PN}-stats2gnuplot"
++
++FILES=5F${PN}-stats2gnuplot =3D "${bindir}/stats2gnuplot"
++
++RRECOMMENDS=5F${PN} =3D "${PN}-stats2gnuplot"
+--=20
+1.9.1
+
 
