@@ -1,46 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 174E160762
+Return-Path: <obi@opendreambox.org>
+Received: from mail.dream-property.net (mail.dream-property.net
+	[82.149.226.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E4AD71B13
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Dec 2016 23:53:19 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id g23so12134552wme.1
+	Sun, 18 Dec 2016 14:08:06 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 7E87431C2F8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Dec 2016 15:53:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=NOQGqaT7SkLCDPSbNK50vV7FRrP7pnH0yYloyJw+rU0=;
-	b=g8ey/qNRO5/1fCnoQ14zOdxR44JHVLadRxCafOqW20p1iYQ9Mzed8EJvXdxeWEJLO6
-	63MdOAARxjNpBMWfkUNidysGC7yimauKm1wH4YNS68PC3Bhjj8jnJoCmy6sdhRiSuXJW
-	czhpB/2x/63SCJT8fgGRpIZq95s7wFKyNwpCYnU0JR3uRppfPUnh6a2VyN122pz9Oe7H
-	rk06swWXXp3P76yp514OxJe5j8K9aEt+RYH8utcb6PumpDmzkSGm05zlnPu4jUbDTien
-	FiPmpD7Sl0ri2EbMRKmyEdOFIMDwpW9ryHNyDzZ+s2kESXroJ0QTC0kCXWEaqvIhA5Zg
-	NJqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=NOQGqaT7SkLCDPSbNK50vV7FRrP7pnH0yYloyJw+rU0=;
-	b=gtfxdo5jUxi8Vil/uPdkwWeABVTEZyfIdFEA22dd37w5Q0Y/hScwfnRxTUjQB+hH+w
-	QfsE7n8eslWKPc7KaadjK3jsC6ygPzKZep9v38VgVjWHyv7zxolSvbYp2ItEEnTkA/+M
-	c4g4SxRoIVXKd1UJxP6Eb+RGsXyDqmDs+/hA29mbcRvO68n8HTVOR/f92GdXbLpKHOj6
-	krm2m+Kiz+09noiieB4t4UUlSQowwSdDHGmYYXePpl6/9BcQMrFGYaTL0SqV6Qr175KM
-	fjixy8VNYB+oAIlaSlMS/uugBUpT8EClYQ5qtNv9TQ3oYm2xcK0Z1aW0KV0wnwMYs7TB
-	ScPw==
-X-Gm-Message-State: AIkVDXJ38eqGlHsfWOszHT2SgtPuQmniZvXuGcCEgAstAKexcfMdQBl3PiiCrkL7Ag3zrYnc6oQIu3q1v4nRcA==
-X-Received: by 10.28.16.65 with SMTP id 62mr9085158wmq.81.1482018800213; Sat,
-	17 Dec 2016 15:53:20 -0800 (PST)
+	Sun, 18 Dec 2016 15:08:06 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id 2G8jdmY-D0_1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 Dec 2016 15:08:04 +0100 (CET)
+Received: from [172.22.22.61] (55d47b99.access.ecotel.net [85.212.123.153])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 5C05931C3100
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 Dec 2016 15:08:04 +0100 (CET)
+To: openembedded-devel@lists.openembedded.org
+References: <1481940923-12914-1-git-send-email-joe_macdonald@mentor.com>
+	<ef51199a-f11d-ecad-0211-bb966df53d77@gmail.com>
+From: Andreas Oberritter <obi@opendreambox.org>
+Message-ID: <2bd9da81-0d71-390b-90b3-b97fb1cda937@opendreambox.org>
+Date: Sun, 18 Dec 2016 15:08:03 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.5.1
 MIME-Version: 1.0
-Received: by 10.80.134.144 with HTTP; Sat, 17 Dec 2016 15:53:19 -0800 (PST)
-In-Reply-To: <20161123092209.23699-10-raj.khem@gmail.com>
-References: <20161123092209.23699-1-raj.khem@gmail.com>
-	<20161123092209.23699-10-raj.khem@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 18 Dec 2016 00:53:19 +0100
-Message-ID: <CA+chaQeVHj6iwyku+wz5fiSg-R55r0msjwGsLSiYUR=2U35mcA@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Koen Kooi <koen@dominion.thruhere.net>
-Subject: Re: [meta-oe][PATCH 10/49] libvdpau: Add recipe
+In-Reply-To: <ef51199a-f11d-ecad-0211-bb966df53d77@gmail.com>
+Subject: Re: [meta-networking][PATCH 00/11] samba: refresh pending patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,76 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Dec 2016 23:53:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 18 Dec 2016 14:08:07 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-directfb seems to autodetect this as well:
+On 17.12.2016 18:33, akuster808 wrote:
+> 
+> 
+> On 12/16/2016 06:15 PM, Joe MacDonald wrote:
+>> As I mentioned earlier this week, I'm taking a stab at updating the samba
+>> patches from Andreas Oberritter that now have conflicts due to other
+>> changes queued up for samba.  Quite a few of them actually applied cleanly
+>> after resolving earlier conflicts and the basic smoke tests seem to pass
+>> for me, but this definitely needs a bit of soak time in master-next and if
+>> you're around, Andreas, and can double-check my work on your patches,
+>> that'd be much appreciated.
+>>
+> 
+> Are some of these changes appropriate for Morty?
 
-directfb-1.7.7: directfb rdepends on libvdpau, but it isn't a build
-dependency, missing libvdpau in DEPENDS or PACKAGECONFIG? [build-deps]
-directfb-1.7.7: directfb rdepends on libx11, but it isn't a build
-dependency, missing libx11 in DEPENDS or PACKAGECONFIG? [build-deps]
-directfb-1.7.7: directfb rdepends on libxau, but it isn't a build
-dependency, missing libxau in DEPENDS or PACKAGECONFIG? [build-deps]
-directfb-1.7.7: directfb rdepends on libxcb, but it isn't a build
-dependency, missing libxcb in DEPENDS or PACKAGECONFIG? [build-deps]
-directfb-1.7.7: directfb rdepends on libxdmcp, but it isn't a build
-dependency, missing libxdmcp in DEPENDS or PACKAGECONFIG? [build-deps]
-directfb-1.7.7: directfb rdepends on libxext, but it isn't a build
-dependency, missing libxext in DEPENDS or PACKAGECONFIG? [build-deps]
+Not necessarily, but I'd consider commit bb2cbb9 (samba: Avoid timeout
+for nmbd if started offline with systemd), which was sent separately.
 
-
-On Wed, Nov 23, 2016 at 10:21 AM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> From: Koen Kooi <koen@dominion.thruhere.net>
->
-> Needed for x86 machines
->
-> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-graphics/vdpau/libvdpau_git.bb | 23
-> +++++++++++++++++++++++
->  1 file changed, 23 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
->
-> diff --git a/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
-> b/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
-> new file mode 100644
-> index 0000000..31f4df4
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
-> @@ -0,0 +1,23 @@
-> +SUMMARY = "Video Decode and Presentation API for UNIX"
-> +
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=83af8811a28727a13f04132cc33b7f58"
-> +
-> +DEPENDS = "virtual/libx11 libxext dri2proto"
-> +
-> +PV = "1.1.1+git${SRCPV}"
-> +
-> +SRCREV = "a21bf7aa438f5dd40d0a300a3167aa3d6f26dccc"
-> +SRC_URI = "git://anongit.freedesktop.org/vdpau/libvdpau"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit autotools pkgconfig
-> +
-> +do_install_append() {
-> +    rm -f ${D}${libdir}/*/*.la
-> +}
-> +
-> +FILES_${PN}-dbg += "${libdir}/vdpau/.debug"
-> +FILES_${PN}-dev += "${libdir}/vdpau/lib*${SOLIBSDEV}"
-> +FILES_${PN} += "${libdir}/vdpau/lib*${SOLIBS}"
-> --
-> 2.10.2
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Regards,
+Andreas
 
