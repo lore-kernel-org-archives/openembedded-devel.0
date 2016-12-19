@@ -1,51 +1,46 @@
 Return-Path: <armccurdy@gmail.com>
-Received: from mail-wj0-f170.google.com (mail-wj0-f170.google.com
-	[209.85.210.170])
-	by mail.openembedded.org (Postfix) with ESMTP id BFC10772DB
+Received: from mail-wj0-f194.google.com (mail-wj0-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 055D077330
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Dec 2016 16:51:20 +0000 (UTC)
-Received: by mail-wj0-f170.google.com with SMTP id tk12so155574450wjb.3
+	Mon, 19 Dec 2016 16:56:41 +0000 (UTC)
+Received: by mail-wj0-f194.google.com with SMTP id j10so24397821wjb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Dec 2016 08:51:22 -0800 (PST)
+	Mon, 19 Dec 2016 08:56:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=fTu3aF/GrS+yR8ZuT0WKRYLGLMRdMGA9iA9lt1qgrXU=;
-	b=hMlXByJTIJ13pYfJFJxV0lWwGhxheCmTyqhZhQUdKIypk9PlAUBvIAx6hbU2Gp9OTC
-	mTLPdAPyN+svzNwoV60V36Z7JD3mGUGkT10oBXaZqUxCFDWx0jFrA5Yggo0U/AyXK2Y9
-	kTkpwrQeNS9oU0H+ZOU1uFjd3qlW63e3aJkIURQza77i3jcb7NVnK9hvP2e4DlwlPFCj
-	ZQ5fPB7BZ744d7StgCYVOVVi4ImqSMEXqr/faC5c+xN7bC14JFAACfkuxr1depzayc5v
-	xzZNoHprNAgxxLHjORHIZsHQzyomj1ku2ZlOpxsu7NaJW7B1Kmxlu+B5VMBIN1rseDCf
-	6z7Q==
+	h=from:to:cc:subject:date:message-id;
+	bh=XFDfA50H/PxdUjMlofW470m1b86c89CuptYZoOPrSEE=;
+	b=qvg6+gvO1z/BX2WTswOL2Ie+HTLCmwGWjubMXK0nl/6bniQXNqebvVuw93Gea6zcCP
+	JFXxqA6fJBnprU3s9nXP2gZNpYCIA2W2+JLNOMjEainB4ZzkCFGH3kzmAUsvXM5jFTFV
+	bIE2S625H1GuWILwVanIfLaFRn6haAR5c7BpMqklRM4CE8BGYJWJFPrSQbP467ZIiom6
+	M65YaN/5DGZV7Aldnho3NkGxn8KXIHBXtqKJRgnQU0O7BB9gfRMhhZYMnmatPNC0QT/j
+	uM0K2luwHaOC5mw6Er32RbftUErGo8lAHxtvKcx9vxpoCGn/8zQVltySVctci4B8OfCr
+	Dyqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=fTu3aF/GrS+yR8ZuT0WKRYLGLMRdMGA9iA9lt1qgrXU=;
-	b=WMW1GrruKkhWhLyjwOVLLkbkgEdEnRvKu8MVcefRICiaRf1ryLYzAqdYjlChizwSM7
-	3Kfvb/EdhZxCPvD2fWif6p3zahknfUINjg+NhpUXFBRqkj8ztsCbzb7zZTqayIOd372Q
-	HLQxSRAgk0j6POlLmhxCVyAZYt/Jgu8jlX6uFehriw6pQjxw5soaGVDNtfkAYAFE1FYD
-	mCPJ8LyeEkDWPYjx30nOFBCuI4GNh1+vSqD/a7d7oJUwgkjF9Wd1Sm5niNBNfppc6I81
-	1uc4oSL/n7wAGDLUZ202iqaCXgKsbkDeojy/AFNkwDDKqKzVQunmR9IJRc2LrbvGcRnt
-	U1Sg==
-X-Gm-Message-State: AKaTC017wmsVaWiYIHjzFyIS6c6pIDPpmQI0BtOb62irs81efqkF6EcDVuy7Wq1BWHWcnIrSQlpk0cQHlGEHvA==
-X-Received: by 10.194.112.170 with SMTP id ir10mr14012068wjb.190.1482166281589;
-	Mon, 19 Dec 2016 08:51:21 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.194.162.33 with HTTP; Mon, 19 Dec 2016 08:51:21 -0800 (PST)
-In-Reply-To: <CAJ86T=WJRG7XTeo-MQ-3t+F0O1YNQHGzyQR-o-6N6sEdzqHJcg@mail.gmail.com>
-References: <1482148888-3127-1-git-send-email-armccurdy@gmail.com>
-	<CA+chaQeBUTnQQnVEGDhae8opjobSAPF=BU2R-772ECPf8KA4Pg@mail.gmail.com>
-	<CAJ86T=UB6T+LpTNRy6_pZ5f0P7FzyJ+qMdgS=8FvDE5HcaG41w@mail.gmail.com>
-	<CAJ86T=XDvJk93+Jc4-v5H+3nTSFJ1KcQbyeUt8yvhJwfTA=pnA@mail.gmail.com>
-	<20161219142620.4hpmfdo3w3kk2zlu@ad.chargestorm.se>
-	<CAJ86T=WzTb-z-WzdHc6Ke4uck_M9zOWWq35bo3qGyc59hQuUmg@mail.gmail.com>
-	<20161219145857.hg35ivv5vidlzdmf@ad.chargestorm.se>
-	<CAJ86T=WJRG7XTeo-MQ-3t+F0O1YNQHGzyQR-o-6N6sEdzqHJcg@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=XFDfA50H/PxdUjMlofW470m1b86c89CuptYZoOPrSEE=;
+	b=BFIUX253mWCile07PgN0RbLRfP/+YWsQdFvkoJGMJz6k49tm23sy5qMrML8iZi0bon
+	sYYuCYgXDJZmzlOIg1P4yhqvK82pOpUYpb1i8XwXJvS2IwmpXM9sf5YYjVUTPhkC47YK
+	xxaGljOpVRGXJ6nImBvRe6lNkqVu8A/l3ftOwi9HTkyrA1M+AP6WqXhrsnji0VMi1w+V
+	42c632qDZB1y7Va/Xrh4mz1tPjRn6ov9/JiwHhtvJEx7WatJ/S4BaBdaouEqt8tMYxW+
+	wTRdJnEBX3A9t1gfNrqZphzKMyJvxeUiMSUKIeCBrPhomd6qPgAgVVrdSSZWqgIOB2SG
+	+tlQ==
+X-Gm-Message-State: AIkVDXIbRKOEKEegoVeSQLtMIdi+FH+LDj319gEwz4ph24OqqXCFylAoap52gkJii335JA==
+X-Received: by 10.194.86.165 with SMTP id q5mr14303608wjz.178.1482166602453;
+	Mon, 19 Dec 2016 08:56:42 -0800 (PST)
+Received: from localhost.localdomain
+	(ip-217-103-177-37.ip.prioritytelecom.net. [217.103.177.37])
+	by smtp.gmail.com with ESMTPSA id
+	cl10sm21440622wjb.4.2016.12.19.08.56.41
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 19 Dec 2016 08:56:41 -0800 (PST)
 From: Andre McCurdy <armccurdy@gmail.com>
-Date: Mon, 19 Dec 2016 08:51:21 -0800
-Message-ID: <CAJ86T=Xo3AYHMzJ=QEk_9QG9S4F83VJ_dyeMeUrZ6iz9Zg3v-Q@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] rapidjson: add initial recipe
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 19 Dec 2016 08:56:33 -0800
+Message-Id: <1482166593-14228-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH v2] rapidjson: add initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,52 +53,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Dec 2016 16:51:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 19 Dec 2016 16:56:42 -0000
 
-On Mon, Dec 19, 2016 at 8:42 AM, Andre McCurdy <armccurdy@gmail.com> wrote:
-> On Mon, Dec 19, 2016 at 6:58 AM, Anders Darander <anders@chargestorm.se> wrote:
->> * Andre McCurdy <armccurdy@gmail.com> [161219 15:46]:
->>
->>> On Mon, Dec 19, 2016 at 6:26 AM, Anders Darander <anders@chargestorm.se> wrote:
->>> > * Andre McCurdy <armccurdy@gmail.com> [161219 15:12]:
->>
->>> >> On Mon, Dec 19, 2016 at 6:08 AM, Andre McCurdy <armccurdy@gmail.com> wrote:
->>> >> > On Mon, Dec 19, 2016 at 5:11 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
->>> >> >> Please don't use github archives.
->>
->>> >> What's the recommended way to fetch from a git tag which doesn't sit
->>> >> on a branch?
->>
->>> > Use nobranch=1, see eg
->>> > meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb.
->>
->>> That seems to query the server on every do_fetch, so doesn't work so
->>> well with BB_NO_NETWORK.
->>
->> It shouldn't do that. The problem with android-tools_5.1.1.r37.bb is
->> that they're not checking out a SHA1, but a tag...
->>
->> ANDROID_TAG = "android-5.1.1_r37"
->>
->> That's not working without querying the server, due to how bitbake's git
->> fetcher is implemented.
->
-> Right. So is there a combination of tag, nobranch and SRCREV which can
-> fetch from a tag which doesn't sit on a branch without querying the
-> server on every do_fetch? I didn't find one yet.
+A fast JSON parser/generator for C++ with both SAX/DOM style API.
 
-Never mind. SRCREV with nobranch does seem to be working now.
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ .../Fix-gcc-strict-overflow-warning.patch          | 30 ++++++++++++++++++++
+ .../remove-march-native-from-CMAKE_CXX_FLAGS.patch | 33 ++++++++++++++++++++++
+ .../recipes-devtools/rapidjson/rapidjson_1.0.2.bb  | 24 ++++++++++++++++
+ 3 files changed, 87 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/rapidjson/rapidjson/Fix-gcc-strict-overflow-warning.patch
+ create mode 100644 meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from-CMAKE_CXX_FLAGS.patch
+ create mode 100644 meta-oe/recipes-devtools/rapidjson/rapidjson_1.0.2.bb
 
->> Cheers,
->> Anders
->>
->> --
->> Anders Darander, Senior System Architect
->> ChargeStorm AB / eStorm AB
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson/Fix-gcc-strict-overflow-warning.patch b/meta-oe/recipes-devtools/rapidjson/rapidjson/Fix-gcc-strict-overflow-warning.patch
+new file mode 100644
+index 0000000..6ce3933
+--- /dev/null
++++ b/meta-oe/recipes-devtools/rapidjson/rapidjson/Fix-gcc-strict-overflow-warning.patch
+@@ -0,0 +1,30 @@
++From f5560d9557ee48fb79810180ddfd3ec386e2a7b5 Mon Sep 17 00:00:00 2001
++From: Milo Yip <miloyip@gmail.com>
++Date: Wed, 2 Mar 2016 01:01:17 +0800
++Subject: [PATCH] Fix gcc strict-overflow warning
++
++Fix #566 #568
++
++Upstream-Status: Backport [Partial merge of upstream commit 928caf92e]
++
++Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
++---
++ include/rapidjson/internal/dtoa.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/include/rapidjson/internal/dtoa.h b/include/rapidjson/internal/dtoa.h
++index 2d8d2e4..15571e1 100644
++--- a/include/rapidjson/internal/dtoa.h
+++++ b/include/rapidjson/internal/dtoa.h
++@@ -148,7 +148,7 @@ inline char* WriteExponent(int K, char* buffer) {
++ inline char* Prettify(char* buffer, int length, int k) {
++     const int kk = length + k;  // 10^(kk-1) <= v < 10^kk
++ 
++-    if (length <= kk && kk <= 21) {
+++    if (0 <= k && kk <= 21) {
++         // 1234e7 -> 12340000000
++         for (int i = length; i < kk; i++)
++             buffer[i] = '0';
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from-CMAKE_CXX_FLAGS.patch b/meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from-CMAKE_CXX_FLAGS.patch
+new file mode 100644
+index 0000000..1716428
+--- /dev/null
++++ b/meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from-CMAKE_CXX_FLAGS.patch
+@@ -0,0 +1,33 @@
++From 827155e5e659b2a5065b00d701bc59b57feab2bf Mon Sep 17 00:00:00 2001
++From: Andre McCurdy <armccurdy@gmail.com>
++Date: Mon, 19 Dec 2016 01:37:11 -0800
++Subject: [PATCH] remove -march=native from CMAKE_CXX_FLAGS
++
++Not appropriate when cross compiling.
++
++Upstream-Status: Inappropriate [configuration]
++
++Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
++---
++ CMakeLists.txt | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 68139ba..cae7c9b 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -26,9 +26,9 @@ if(RAPIDJSON_HAS_STDSTRING)
++ endif()
++ 
++ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
++-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -Wall -Wextra")
+++    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
++ elseif (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
++-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -Wall -Wextra")
+++    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
++ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
++     add_definitions(-D_CRT_SECURE_NO_WARNINGS=1)
++ endif()
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson_1.0.2.bb b/meta-oe/recipes-devtools/rapidjson/rapidjson_1.0.2.bb
+new file mode 100644
+index 0000000..1a9abc8
+--- /dev/null
++++ b/meta-oe/recipes-devtools/rapidjson/rapidjson_1.0.2.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "A fast JSON parser/generator for C++ with both SAX/DOM style API"
++HOMEPAGE = "http://rapidjson.org/"
++SECTION = "libs"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://license.txt;md5=cff54e417a17b4b77465198254970cd2"
++
++SRC_URI = "git://github.com/miloyip/rapidjson.git;nobranch=1 \
++           file://remove-march-native-from-CMAKE_CXX_FLAGS.patch \
++           file://Fix-gcc-strict-overflow-warning.patch \
++"
++
++SRCREV = "3d5848a7cd3367c5cb451c6493165b7745948308"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
++
++EXTRA_OECMAKE += "-DRAPIDJSON_BUILD_DOC=OFF"
++
++# RapidJSON is a header-only C++ library, so the main package will be empty.
++
++FILES_${PN}-dev += "${libdir}/cmake"
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+1.9.1
+
 
