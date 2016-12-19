@@ -1,46 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f193.google.com (mail-ua0-f193.google.com
-	[209.85.217.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 9758171D60
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wj0-f196.google.com (mail-wj0-f196.google.com
+	[209.85.210.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 78058731F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Dec 2016 22:42:03 +0000 (UTC)
-Received: by mail-ua0-f193.google.com with SMTP id 50so9919044uae.2
+	Mon, 19 Dec 2016 12:01:34 +0000 (UTC)
+Received: by mail-wj0-f196.google.com with SMTP id kp2so23278145wjc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Dec 2016 14:42:05 -0800 (PST)
+	Mon, 19 Dec 2016 04:01:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=ireQaNe8MnfjvajU046hRydQ/apxRtInsOpLOiUyfhY=;
-	b=K9sCaESYWxH7BBY/JcawEyUEUdsTHZzinduqkLRc2EEwxFnSCnvS8ysSfddU0S+CYU
-	CvTcJjMim460NK1aNJiDIUY/d3gPti8pH4UUQFyTRMwsDg0vbH8RTbxtataBcFcVy3te
-	X86N0yBdaJpLbDTBwrsrYbk86Ys63+HXwh6GZVR2uWZvBbps/vIdKFhlkzAWKV9C4b5R
-	hODMEysMpsquka1/3gy/wOfV+7czt8ln9zTK2MeDQc7nE1DsNoY1jEAnhxHi6Bz/winM
-	lzlQSfHvR927w90JdhTnD4d4UMJqsSOiG7BQlRSYdxl66glN3jGpoM4OjekIv7mMeh4G
-	+IMw==
+	h=from:to:cc:subject:date:message-id;
+	bh=DcP2fp2jk0qxuBxP/C0q2RUT0C00HCLORONboWTfTVU=;
+	b=V+gv2AgUczk0vwr1PNc8+ivMY6zwZD2ySXnyRFXx6qKSYRUA8FgtSiMUmvVOOlC84h
+	xeMi739oY/3NR3kGDj/cnoWKGh9/Pmjvh2X2Wqy8A9dwgAqy6TAM5siddkMzLSWVltkx
+	PwFXfpl83UAX9nSLU8949wMUYzC3uaIeniYrloP8oAXe38TA2QAHO1WxnIqussywU0kE
+	R6mXjqFaZRrhcSbviR2nzDrOGhB/kn+JsqnIAMZk0WkHR7kwk0B/UCVxrk2MnvAz/ahr
+	2yjXrMcoDl2VJoWoGiDmS6sjTJmrgr2Rv4F9XzD6CU+VSBPEoppNYcSewEO7CcSRbd0T
+	PJ8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=ireQaNe8MnfjvajU046hRydQ/apxRtInsOpLOiUyfhY=;
-	b=e1C1Re8sRQXRbMlxUdZxgABY6G5+JCX3ymHvVcuKrRlEw55JdtYH6LF1JpSndwDOe6
-	fBGS7e/FINP5ta0Vtsaqn3Q7zfXq0KHNnpOv5orLTTGNqo2/QdNj882GhqUCPOR7K+lt
-	AVKVlfFzuHeILZLb4WQxOl1hIVJWDuCx6gZolEZLKLqQfh36b62Q5/zWSF0dlODBbRLJ
-	O4tI0KTQZ546/1k54gzs31TtlR+6bmA+6KNlCnjQbjGsf5th6vNT630zhGNJNiwl24DD
-	C/2xjVJZuDXw//cJNoN+wDUJslfWadW3g68I4pjG+vC/V7AXogdsX6vkxuz2SM90Fgve
-	lRrg==
-X-Gm-Message-State: AIkVDXJa0+h4priifxHy3uZrvhBUDVnN9ao5Yg4qy4sZIrn2+W8ydEZ/llWTh6XHFjgC4pxKAmhODKqXTodmRQ==
-X-Received: by 10.176.71.89 with SMTP id i25mr5273734uac.31.1482100924531;
-	Sun, 18 Dec 2016 14:42:04 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.159.48.87 with HTTP; Sun, 18 Dec 2016 14:41:34 -0800 (PST)
-In-Reply-To: <da506bbc-1928-669c-22b8-6edcd8368268@opendreambox.org>
-References: <20161217230622.26063-1-raj.khem@gmail.com>
-	<da506bbc-1928-669c-22b8-6edcd8368268@opendreambox.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 18 Dec 2016 14:41:34 -0800
-Message-ID: <CAMKF1sqj7AtS4su0UnkB5fW-HuSe2H9Vy5ZqfOC-HKwygMq2Jg@mail.gmail.com>
-To: Andreas Oberritter <obi@opendreambox.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-filesystems][PATCH V2] xfsprogs: Fix parallel install and Make dependencies
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=DcP2fp2jk0qxuBxP/C0q2RUT0C00HCLORONboWTfTVU=;
+	b=MxT5WmNvfbWvBZDpRaVCAYxwxV3wTp6AKLgpgBqoWAArhdJ/3BCVCLNcfRo0H006Ys
+	zGsiKnfX1ycSLs+bWTfqYcceNPuKtGZJIdRtFKTB0iq/XOxGy3zEAzN66y5RX8Vunl0V
+	V0r8WRi0JWrHMY3IenRfJ+nTTKYU2ipitLYwkcTJM0+oJrjaZdz7bmGzzpXbUHXkqb4V
+	E4W8bFVLB+kr4yMD4h0OZh5lY4evDs130v4mXq68MRozKSZEpcNWd3ItvV0DA4gtgUC4
+	YVd0WLVGom/NLDpTAVpSoTDJ+rT/KgrGCUGi4Fqlbjjn9fL8DN6Thm/is1cssGSQcN32
+	GCpw==
+X-Gm-Message-State: AIkVDXL9Da28eUX4eHUFNDjdIdbxhjLTDb+csB9GiCLRC0Qr/XuKl1jS8+M5ZhA/XCrFWQ==
+X-Received: by 10.194.65.74 with SMTP id v10mr15475025wjs.168.1482148895940;
+	Mon, 19 Dec 2016 04:01:35 -0800 (PST)
+Received: from localhost.localdomain
+	(ip-217-103-177-37.ip.prioritytelecom.net. [217.103.177.37])
+	by smtp.gmail.com with ESMTPSA id
+	w197sm16898299wmd.11.2016.12.19.04.01.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 19 Dec 2016 04:01:35 -0800 (PST)
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 19 Dec 2016 04:01:28 -0800
+Message-Id: <1482148888-3127-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] rapidjson: add initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,171 +53,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Dec 2016 22:42:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 19 Dec 2016 12:01:35 -0000
 
-On Sun, Dec 18, 2016 at 1:47 PM, Andreas Oberritter
-<obi@opendreambox.org> wrote:
-> Hi Khem,
->
-> On 18.12.2016 00:06, Khem Raj wrote:
->> This should fix build issues due to missing dependencies
->> e.g. libuuid in Makefiles.
->
-> this patch doesn't resolve the issue. I'm using the default linker.
-> Maybe you could apply link_needed_libs.patch only if clang is used.
+A fast JSON parser/generator for C++ with both SAX/DOM style API.
 
-its really not clang specific either  I checked. Its cross-compile specific
-whats best way to reproduce it. I do not get the errors you see. I wonder
-if there is some host contamination still going on. Can you check on
-these lines.
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ .../Fix-gcc-strict-overflow-warning.patch          | 30 ++++++++++++++++++++
+ .../remove-march-native-from-CMAKE_CXX_FLAGS.patch | 33 ++++++++++++++++++++++
+ .../recipes-devtools/rapidjson/rapidjson_1.0.2.bb  | 23 +++++++++++++++
+ 3 files changed, 86 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/rapidjson/rapidjson/Fix-gcc-strict-overflow-warning.patch
+ create mode 100644 meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from-CMAKE_CXX_FLAGS.patch
+ create mode 100644 meta-oe/recipes-devtools/rapidjson/rapidjson_1.0.2.bb
 
->
-> Regards,
-> Andreas
->
->>
->> correct libhandle paths
->>
->> Dont do parallel install its broken
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->> Changes from
->> v1 -> v2
->> - Drop locking toolchain to gcc it compiles fine with clang too
->>
->>  .../xfsprogs/files/link_needed_libs.patch          | 76 +++++++++++++++++++++-
->>  .../recipes-utils/xfsprogs/xfsprogs_4.8.0.bb       |  6 +-
->>  2 files changed, 79 insertions(+), 3 deletions(-)
->>
->> diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch b/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch
->> index 18b95c1c3..a3c699ce6 100644
->> --- a/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch
->> +++ b/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch
->> @@ -1,3 +1,9 @@
->> +use libtool to package install.  do not use the manual file install as
->> +that'll copy files directly from the .libs/ subdir which might have rpaths
->> +pointing to build area.
->> +
->> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> +
->>  Index: xfsprogs-4.8.0/libxcmd/Makefile
->>  ===================================================================
->>  --- xfsprogs-4.8.0.orig/libxcmd/Makefile
->> @@ -37,11 +43,28 @@ Index: xfsprogs-4.8.0/libxfs/Makefile
->>
->>   install-headers: $(addsuffix -hdrs, $(PKGHFILES))
->>
->> +@@ -144,6 +145,7 @@ install-headers: $(addsuffix -hdrs, $(PK
->> +     $(Q)$(LN_S) -f $(CURDIR)/$* $(TOPDIR)/include/xfs/$*
->> +
->> + install-dev: install
->> ++    $(INSTALL_LTLIB_DEV)
->> +     $(INSTALL) -m 644 $(PKGHFILES) $(PKG_INC_DIR)
->> +
->> + # We need to install the headers before building the dependencies.  If we
->>  Index: xfsprogs-4.8.0/libxlog/Makefile
->>  ===================================================================
->>  --- xfsprogs-4.8.0.orig/libxlog/Makefile
->>  +++ xfsprogs-4.8.0/libxlog/Makefile
->> -@@ -19,6 +19,10 @@ default: ltdepend $(LTLIBRARY)
->> +@@ -12,6 +12,8 @@ LT_AGE = 0
->> +
->> + CFILES = xfs_log_recover.c util.c
->> +
->> ++LTLIBS = $(LIBUUID) $(LIBXFS)
->> ++
->> + # don't want to link xfs_repair with a debug libxlog.
->> + DEBUG = -DNDEBUG
->> +
->> +@@ -19,6 +21,10 @@ default: ltdepend $(LTLIBRARY)
->>
->>   include $(BUILDRULES)
->>
->> @@ -53,3 +76,54 @@ Index: xfsprogs-4.8.0/libxlog/Makefile
->>  +    $(INSTALL_LTLIB_DEV)
->>
->>   -include .ltdep
->> +Index: xfsprogs-4.8.0/include/buildmacros
->> +===================================================================
->> +--- xfsprogs-4.8.0.orig/include/buildmacros
->> ++++ xfsprogs-4.8.0/include/buildmacros
->> +@@ -70,18 +70,9 @@ endif
->> + # /usr/lib.
->> + ifeq ($(ENABLE_SHARED),yes)
->> + INSTALL_LTLIB_DEV = \
->> +-    cd $(TOPDIR)/$(LIBNAME)/.libs; \
->> +-    ../$(INSTALL) -m 755 -d $(PKG_LIB_DIR); \
->> +-    ../$(INSTALL) -m 644 -T old_lib $(LIBNAME).lai $(PKG_LIB_DIR); \
->> +-    ../$(INSTALL) -m 644 $(LIBNAME).lai $(PKG_LIB_DIR)/$(LIBNAME).la ; \
->> +-    ../$(INSTALL) -m 755 -d $(PKG_ROOT_LIB_DIR); \
->> +-    ../$(INSTALL) -T so_base $(LIBNAME).lai $(PKG_ROOT_LIB_DIR); \
->> +-    if [ "x$(shell readlink -f $(PKG_LIB_DIR))" != \
->> +-         "x$(shell readlink -f $(PKG_ROOT_LIB_DIR))" ]; then \
->> +-            ../$(INSTALL) -S $(PKG_LIB_DIR)/$(LIBNAME).a $(PKG_ROOT_LIB_DIR)/$(LIBNAME).a; \
->> +-            ../$(INSTALL) -S $(PKG_LIB_DIR)/$(LIBNAME).la $(PKG_ROOT_LIB_DIR)/$(LIBNAME).la; \
->> +-            ../$(INSTALL) -S $(PKG_ROOT_LIB_DIR)/$(LIBNAME).so $(PKG_LIB_DIR)/$(LIBNAME).so; \
->> +-    fi
->> ++    set -e; cd $(TOPDIR)/$(LIBNAME); \
->> ++    $(INSTALL) -m 755 -d $(PKG_LIB_DIR); \
->> ++    env -uDIST_ROOT $(LTINSTALL) $(TOPDIR)/$(LIBNAME)/$(LIBNAME).la $(DIST_ROOT)$(PKG_LIB_DIR)/$(LIBNAME).la
->> + else
->> + INSTALL_LTLIB_DEV = $(INSTALL_LTLIB_STATIC)
->> + endif
->> +Index: xfsprogs-4.8.0/Makefile
->> +===================================================================
->> +--- xfsprogs-4.8.0.orig/Makefile
->> ++++ xfsprogs-4.8.0/Makefile
->> +@@ -83,6 +83,8 @@ quota: libxcmd
->> + repair: libxlog libxcmd
->> + copy: libxlog
->> + mkfs: libxcmd
->> ++libxlog: libxfs
->> ++libxlog-install-dev: libxfs-install-dev
->> +
->> + ifeq ($(HAVE_BUILDDEFS), yes)
->> + include $(BUILDRULES)
->> +Index: xfsprogs-4.8.0/libhandle/Makefile
->> +===================================================================
->> +--- xfsprogs-4.8.0.orig/libhandle/Makefile
->> ++++ xfsprogs-4.8.0/libhandle/Makefile
->> +@@ -24,7 +24,6 @@ default: ltdepend $(LTLIBRARY)
->> + include $(BUILDRULES)
->> +
->> + install: default
->> +-    $(INSTALL_LTLIB)
->> +
->> + install-dev: default
->> +     $(INSTALL_LTLIB_DEV)
->> diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
->> index 9959f0d85..1032fb89b 100644
->> --- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
->> +++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
->> @@ -22,7 +22,7 @@ FILES_${PN}-fsck = "${base_sbindir}/fsck.xfs"
->>  FILES_${PN}-mkfs = "${base_sbindir}/mkfs.xfs"
->>  FILES_${PN}-repair = "${base_sbindir}/xfs_repair"
->>
->> -FILES_libhandle = "${base_libdir}/libhandle${SOLIBS}"
->> +FILES_libhandle = "${libdir}/libhandle${SOLIBS}"
->>
->>  EXTRA_OECONF = "--enable-gettext=no \
->>                  INSTALL_USER=root \
->> @@ -40,7 +40,7 @@ PACKAGECONFIG[blkid] = "--enable-blkid=yes,--enable-blkid=no,util-linux"
->>
->>  export DEBUG="-DNDEBUG"
->>
->> -EXTRA_OEMAKE = "DIST_ROOT='${D}'"
->> +#EXTRA_OEMAKE = "DIST_ROOT='${D}'"
->>
->>  do_configure_prepend () {
->>      export BUILD_CC="${BUILD_CC} ${BUILD_CFLAGS}"
->> @@ -54,3 +54,5 @@ do_configure_prepend () {
->>  do_install_append() {
->>          oe_runmake 'DESTDIR=${D}' install install-dev
->>  }
->> +
->> +PARALLEL_MAKEINST = ""
->>
->
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson/Fix-gcc-strict-overflow-warning.patch b/meta-oe/recipes-devtools/rapidjson/rapidjson/Fix-gcc-strict-overflow-warning.patch
+new file mode 100644
+index 0000000..6ce3933
+--- /dev/null
++++ b/meta-oe/recipes-devtools/rapidjson/rapidjson/Fix-gcc-strict-overflow-warning.patch
+@@ -0,0 +1,30 @@
++From f5560d9557ee48fb79810180ddfd3ec386e2a7b5 Mon Sep 17 00:00:00 2001
++From: Milo Yip <miloyip@gmail.com>
++Date: Wed, 2 Mar 2016 01:01:17 +0800
++Subject: [PATCH] Fix gcc strict-overflow warning
++
++Fix #566 #568
++
++Upstream-Status: Backport [Partial merge of upstream commit 928caf92e]
++
++Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
++---
++ include/rapidjson/internal/dtoa.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/include/rapidjson/internal/dtoa.h b/include/rapidjson/internal/dtoa.h
++index 2d8d2e4..15571e1 100644
++--- a/include/rapidjson/internal/dtoa.h
+++++ b/include/rapidjson/internal/dtoa.h
++@@ -148,7 +148,7 @@ inline char* WriteExponent(int K, char* buffer) {
++ inline char* Prettify(char* buffer, int length, int k) {
++     const int kk = length + k;  // 10^(kk-1) <= v < 10^kk
++ 
++-    if (length <= kk && kk <= 21) {
+++    if (0 <= k && kk <= 21) {
++         // 1234e7 -> 12340000000
++         for (int i = length; i < kk; i++)
++             buffer[i] = '0';
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from-CMAKE_CXX_FLAGS.patch b/meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from-CMAKE_CXX_FLAGS.patch
+new file mode 100644
+index 0000000..1716428
+--- /dev/null
++++ b/meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from-CMAKE_CXX_FLAGS.patch
+@@ -0,0 +1,33 @@
++From 827155e5e659b2a5065b00d701bc59b57feab2bf Mon Sep 17 00:00:00 2001
++From: Andre McCurdy <armccurdy@gmail.com>
++Date: Mon, 19 Dec 2016 01:37:11 -0800
++Subject: [PATCH] remove -march=native from CMAKE_CXX_FLAGS
++
++Not appropriate when cross compiling.
++
++Upstream-Status: Inappropriate [configuration]
++
++Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
++---
++ CMakeLists.txt | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 68139ba..cae7c9b 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -26,9 +26,9 @@ if(RAPIDJSON_HAS_STDSTRING)
++ endif()
++ 
++ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
++-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -Wall -Wextra")
+++    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
++ elseif (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
++-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -Wall -Wextra")
+++    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
++ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
++     add_definitions(-D_CRT_SECURE_NO_WARNINGS=1)
++ endif()
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson_1.0.2.bb b/meta-oe/recipes-devtools/rapidjson/rapidjson_1.0.2.bb
+new file mode 100644
+index 0000000..1dcd8e0
+--- /dev/null
++++ b/meta-oe/recipes-devtools/rapidjson/rapidjson_1.0.2.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "A fast JSON parser/generator for C++ with both SAX/DOM style API"
++HOMEPAGE = "http://rapidjson.org/"
++SECTION = "libs"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://license.txt;md5=cff54e417a17b4b77465198254970cd2"
++
++SRC_URI = "https://github.com/miloyip/rapidjson/archive/v${PV}.tar.gz \
++           file://remove-march-native-from-CMAKE_CXX_FLAGS.patch \
++           file://Fix-gcc-strict-overflow-warning.patch \
++"
++
++SRC_URI[md5sum] = "97cc60d01282a968474c97f60714828c"
++SRC_URI[sha256sum] = "c3711ed2b3c76a5565ee9f0128bb4ec6753dbcc23450b713842df8f236d08666"
++
++inherit cmake
++
++EXTRA_OECMAKE += "-DRAPIDJSON_BUILD_DOC=OFF"
++
++# RapidJSON is a header-only C++ library, so the main package will be empty.
++
++FILES_${PN}-dev += "${libdir}/cmake"
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+1.9.1
+
 
