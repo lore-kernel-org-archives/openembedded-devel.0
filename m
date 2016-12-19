@@ -1,48 +1,45 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 6FCCB772F0
+Received: from mail-io0-f169.google.com (mail-io0-f169.google.com
+	[209.85.223.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 43E86601A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Dec 2016 19:11:03 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id c4so7888548pfb.3
+	Mon, 19 Dec 2016 20:56:35 +0000 (UTC)
+Received: by mail-io0-f169.google.com with SMTP id d9so162844597ioe.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Dec 2016 11:11:05 -0800 (PST)
+	Mon, 19 Dec 2016 12:56:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=6WbqpVHblLLEQnLWPJPHIG/I5exI2nBnUa7S+VXb4NE=;
-	b=pasWKTgwz+0UjDWk+UfZuqdlZJ6gDtbXDNGjJwvpBIQ+V9Oamy/QXCUPDvYa0ne2kI
-	llNq2V2Er098suoVXU6oCpfXKCnsLvmoEqu4D2+qEnX8S2l1nwKLgJUaVy721GZIZCSS
-	3Pkz3Ckhiv3b3bccCGasy4WxQZjYpJ5jkhYKTyaTA4JO66kHHokIGgfNxwFluwiruUDn
-	EaeQn4mWcxFl0M45bi0Lb+e2kkrnAFaX66SlZzjjSA/2vAagQmDWnR/b2kgv+TDyleC+
-	KqAOCzgxe1V1xFWHl5a+4bcCA8gn2ReptLyhUD+wUgZ3j+TN/xQiZiweUWmyHVueexOy
-	jOKA==
+	h=from:to:cc:subject:date:message-id;
+	bh=ckgqleBafJwqh3m5wRMiAugrU4kcS+1n3BD0GDCr0fs=;
+	b=G7Pv0T0SLn6u3zLWt2pErlJV893zo/S5DCAzy6drCKCTvlDCkB95+IMHxc8CzvaKGl
+	bHBKbahV6HXMZWmJFiNH21BLhfCeTGKqY+ifpfHX1siydLMRFQVP+AMCjoKLPRizjl8O
+	HShHyZGHnnarQprnArWXcO+FsoSRlEtV53GaPSk6lCqDyVSsmCGcmsxHcY374AIZA4CT
+	l3yFY2zZDeL6Ftevl1IZmNZ925y1nsIwW1vZblBNGTRtn0GzUMtXiYtZHqADJwbp63oU
+	4Pkit15g/QKFcmZiate97EFajB1qZfQn1acuU8BHTTgXWd+aC17W9hId2i9XzHT9ZES+
+	A2dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=6WbqpVHblLLEQnLWPJPHIG/I5exI2nBnUa7S+VXb4NE=;
-	b=Iw/RGnWlBHILBBYPKbr3QR7eIftKt1Y6m+6uszIEYkzqJmi8hJvnUNJJPUFAewChxG
-	YVPWuI9UoIchUFCCz/4gDZHyJkeN4rzHQGrULwS0SAd8u9g37LSOwsZiClXIgt//JweA
-	rDtNT6nYwIDsiEwbUsFs/kDZ40Z95RufQ2QKHgsM6EEZzO53EyAAKgCxHyJtqLqX2CUg
-	1mk/ezHK883xrtMEWhK10IhqC3Jq5MmYFU5CifrP3mPM5q+bavYL0Iq5jJMOMpJYDYX/
-	dJx/qbV4F5R+qXSLVS5mnX6Zc50KX8Uy6xKobuNDXWPyu712XgDstnP29/lghwHD/O8I
-	8IVQ==
-X-Gm-Message-State: AKaTC03mhKLmQmMGPUQq2SBtUs9E9+sbMyeIdYrOf4NKOm0Wd348fUU8I6AJ3S+M88MnSA==
-X-Received: by 10.99.171.10 with SMTP id p10mr31312498pgf.36.1482174664670;
-	Mon, 19 Dec 2016 11:11:04 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ckgqleBafJwqh3m5wRMiAugrU4kcS+1n3BD0GDCr0fs=;
+	b=lTtod4lacJuRosaK1BLcdXPM7vu4WcQ2AKKW+a05iR77QnnMwrMvm87X6xyyZXWslu
+	8oodb8UUF+QzVoTQxqtpfYwQHsMSa9hs+vTeHNda+QyAbjkxNyjTUNk736fItDxMEUhS
+	AKAfq8B1cbPA2EcEY4N4lASSSXbecVoV90ZG6sCerBuwe2DzDKike0fI02AmnG337KxQ
+	gz+HFu1QZUcECWxFtCh8hJ0wkttZRdizuRe/uhHq6g2zh7kphZUN4Cb+U6q20yyZ9uWj
+	HCrGGYZiZxcRk8MbV90+P+CaxlkrichL0KWB891VS10QhComyRxvk5yRXQgoirOQzut4
+	iTcQ==
+X-Gm-Message-State: AIkVDXLTUZrVjPT3qyvEvSGDdgus+KHzeENEGWTVIw24el4IqLY8NcA1tEE98aojAEeOUA==
+X-Received: by 10.107.184.214 with SMTP id i205mr16291177iof.167.1482180996635;
+	Mon, 19 Dec 2016 12:56:36 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
-	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	p67sm33309939pfb.2.2016.12.19.11.11.04
+	[76.102.32.192])
+	by smtp.gmail.com with ESMTPSA id 19sm8912949ion.9.2016.12.19.12.56.35
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 19 Dec 2016 11:11:04 -0800 (PST)
+	Mon, 19 Dec 2016 12:56:36 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 19 Dec 2016 11:10:53 -0800
-Message-Id: <20161219191053.17952-2-raj.khem@gmail.com>
+Date: Mon, 19 Dec 2016 12:56:29 -0800
+Message-Id: <20161219205629.7768-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20161219191053.17952-1-raj.khem@gmail.com>
-References: <20161219191053.17952-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] directfb: Disable vdpau x11 spport
+Subject: [PATCH] yajl_1.0.12: Add recipe for yajl1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,26 +52,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Dec 2016 19:11:03 -0000
+X-List-Received-Date: Mon, 19 Dec 2016 20:56:36 -0000
+
+yajl1 and yajl2 are not ABI compatible, therefore
+add a recipe for latest release of yajl1
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-graphics/directfb/directfb.inc | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
 
-diff --git a/meta-oe/recipes-graphics/directfb/directfb.inc b/meta-oe/recipes-graphics/directfb/directfb.inc
-index fc272bd28..bfbd9c29e 100644
---- a/meta-oe/recipes-graphics/directfb/directfb.inc
-+++ b/meta-oe/recipes-graphics/directfb/directfb.inc
-@@ -51,6 +51,8 @@ EXTRA_OECONF = "\
-   --disable-sdl \
-   --disable-vnc \
-   --disable-x11 \
-+  --disable-x11vdpau \
-+  --disable-xine-vdpau \
- "
- 
- #Once -fno-omit-frame-pointer option of gcc is added into TARGET_CLFAGS as default
+diff --git a/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb b/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
+new file mode 100644
+index 000000000..ed62bb25d
+--- /dev/null
++++ b/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "Yet Another JSON Library."
++
++DESCRIPTION = "YAJL is a small event-driven (SAX-style) JSON parser \
++written in ANSI C, and a small validating JSON generator."
++
++HOMEPAGE = "http://lloyd.github.com/yajl/"
++
++LICENSE = "ISC"
++LIC_FILES_CHKSUM = "file://COPYING;md5=da2e9aa80962d54e7c726f232a2bd1e8"
++
++SRC_URI = "https://github.com/lloyd/${BPN}/archive/${PV}.tar.gz"
++SRC_URI[md5sum] = "792672a75c3aa87a283b8714545a0bd0"
++SRC_URI[sha256sum] = "5f0d297154da89f0131b71110c0e95af78b6127d6252930441fd20671bb28167"
++
++inherit cmake lib_package
++
++EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
 -- 
 2.11.0
 
