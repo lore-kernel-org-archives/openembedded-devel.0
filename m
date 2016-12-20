@@ -1,44 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 22FE877306
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id B5DDE77236
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Dec 2016 00:38:56 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id a197so107325539wmd.0
+	Tue, 20 Dec 2016 05:33:57 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id c4so8372307pfb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Dec 2016 16:38:58 -0800 (PST)
+	Mon, 19 Dec 2016 21:33:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=x3fxtZWrLya/mbvpfD/JG4/ZtzgyN2rvOBO3N67CkFk=;
-	b=jkKpzz89Mnx/lEbAuxn9gnSem6nKddFJGlcT5sfp0gOSEjMVhi0UaG00QslOLBijxV
-	fGhvYVGmTR3WBbKH+ppKUGyqgL8uEi39iFAblMM9rpwBhMYcxO8xJMXwyy7iLbyaCBab
-	XWZNgezgO3zMqZZmW4akZBkQKz3YkV6R0tYUxA1N/jM6vv0V4AxFBi7v1pr6XjtXBsUn
-	zCz5DYSkCqRcMjaoGe4uV2goTU5+Ipe2vPzichR7pTpLaHuyfcgcZ67ARbtKZyj1XpxT
-	ekHWSa5k9Y86crBOb63A/LBrhI14pswuVcpGENOm2KbgXegUDHKDvDxmlJv53n5bqtr+
-	ivTg==
+	h=from:to:cc:subject:date:message-id;
+	bh=qEAd7hR9moI52sU0rEAPnc9NZl3YBwGbjtyyRbTjQTY=;
+	b=ZSbOrLutGbSzegyaDssSBR6VSYnecAOmRrnVJ+DNx+UKIDnXI9mUMI3P4pkF5lAp3+
+	7m4Vii3cwyjDHTB6KQp0HlyWSmqJBdWVJ9PMJj4D3D5yJUeirGV6389QIUqJgFmm7a/h
+	CTF3O0kx2iJ3lDDj/EesUUBweK31vBxWhGwetxeE+Z9WlSL/+2EYrnNe5UjTTYVwKXVu
+	RzDigqnO0n3uY7zLBeuhYVRzo8NlLjcobTkj8oe/p41wazaE3IItWhT8pb24nk2UxgG6
+	40MhGm8zltCecH07dPB/KPJPThOnOZme6iwOi9Efzm4K44Nvjlz8uKqZ04tS9KlWlZra
+	U8hA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=x3fxtZWrLya/mbvpfD/JG4/ZtzgyN2rvOBO3N67CkFk=;
-	b=IWcblurFVHKgqs4K9H3YUEeCrr9CH50HwvzlHr9JGJlivMo4KWPNgFhtS9rvkrjTka
-	4KJLmLGfRYdJcEUKDTsPMkQRg7SpojQBIVZl7fRReN8mf9wY1AyrAWOrVK/kPJCXThgD
-	jBs82Zv701O/T7AnkwAshZAu9lJRx9xhS8+qu8P2qb70rO1c/kSTzYDf14TSgMpips6y
-	VNiLnKLNErOhrR4SOhgKsE0bzw0GJwluKeCCwcnh+hqwgd3jCOCfyXYL1mFYOBeFQQfA
-	FvJXz5Y4EvEpw6pijxeHj3g/fSkBrHv5+h+X1YXcW0vZrPvw+aq3BykVegbwzhKC7eYS
-	vBfw==
-X-Gm-Message-State: AIkVDXImJq0scAkF8aVaOggUiMg5foQeEZ0Lj5PFk9spQRnlbXrP0kgbhhqY8PFKMcpp6gD6+mAM6kcaqSQA4Q==
-X-Received: by 10.28.184.88 with SMTP id i85mr14704600wmf.49.1482194337667;
-	Mon, 19 Dec 2016 16:38:57 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.80.134.144 with HTTP; Mon, 19 Dec 2016 16:38:57 -0800 (PST)
-In-Reply-To: <20161219205629.7768-1-raj.khem@gmail.com>
-References: <20161219205629.7768-1-raj.khem@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 20 Dec 2016 01:38:57 +0100
-Message-ID: <CA+chaQffPQBehWQBuB=_5ckq006zsiWPjzc970g1nK_God8C+w@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH] yajl_1.0.12: Add recipe for yajl1
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=qEAd7hR9moI52sU0rEAPnc9NZl3YBwGbjtyyRbTjQTY=;
+	b=G9YpVmor9+RXUNlFLQukto0bz3NPNIFonA8i52ZMYKoUWUuE3Q/1VpeXAH3yvRrVcL
+	0qI6RwLfNORKVPstI+fKdoBhjEfyYxcm70G+VKpB2auN9yFzzggcVQ3pQyGGbm6z3JpX
+	XlTvQZzT+0mgFODvvas5gx/7NCuOEm9FoqPJ/Kfqo1PTvXGp5mYh1GYEwRdMUNabQDLi
+	WioNJCyUovw80I+1uvCbk8Ja3c8tGfpOEdSJdWfqLoRt0NAY1bfEcsvWREq7ze/rv6L3
+	JCl8mpg1wVYw5MhMei520aA2ppJrLi+qImQc1E/WsY4Lvw1oOkeM/ekBa7xV4cBeyn+q
+	+z1w==
+X-Gm-Message-State: AIkVDXKnGDnuCpuZB8ybhp5I/g2Nz0wdvLXAQyZcRcBP9gs+qBTF0h0MknYEECebo74qow==
+X-Received: by 10.84.217.10 with SMTP id o10mr2954711pli.132.1482212038607;
+	Mon, 19 Dec 2016 21:33:58 -0800 (PST)
+Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
+	y89sm35200123pfk.83.2016.12.19.21.33.57
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 19 Dec 2016 21:33:58 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 19 Dec 2016 21:33:51 -0800
+Message-Id: <20161220053351.4499-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-oe][PATCH V2] yajl_1.0.12: Add recipe for yajl1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,55 +52,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Dec 2016 00:38:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 20 Dec 2016 05:33:58 -0000
 
-Please don't use github archives which might be regenerated with different
-checksums.
+yajl1 and yajl2 are not ABI compatible, therefore
+add a recipe for latest release of yajl1
 
-On Mon, Dec 19, 2016 at 9:56 PM, Khem Raj <raj.khem@gmail.com> wrote:
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../yajl-1.0.12/0001-bump-version-to-1.0.12.patch  | 25 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb       | 21 ++++++++++++++++++
+ 2 files changed, 46 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/yajl/yajl-1.0.12/0001-bump-version-to-1.0.12.patch
+ create mode 100644 meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
 
-> yajl1 and yajl2 are not ABI compatible, therefore
-> add a recipe for latest release of yajl1
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
->
-> diff --git a/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
-> b/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
-> new file mode 100644
-> index 000000000..ed62bb25d
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
-> @@ -0,0 +1,17 @@
-> +SUMMARY = "Yet Another JSON Library."
-> +
-> +DESCRIPTION = "YAJL is a small event-driven (SAX-style) JSON parser \
-> +written in ANSI C, and a small validating JSON generator."
-> +
-> +HOMEPAGE = "http://lloyd.github.com/yajl/"
-> +
-> +LICENSE = "ISC"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=da2e9aa80962d54e7c726f232a2bd1e8"
-> +
-> +SRC_URI = "https://github.com/lloyd/${BPN}/archive/${PV}.tar.gz"
-> +SRC_URI[md5sum] = "792672a75c3aa87a283b8714545a0bd0"
-> +SRC_URI[sha256sum] = "5f0d297154da89f0131b71110c0e95
-> af78b6127d6252930441fd20671bb28167"
-> +
-> +inherit cmake lib_package
-> +
-> +EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
-> --
-> 2.11.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-oe/recipes-devtools/yajl/yajl-1.0.12/0001-bump-version-to-1.0.12.patch b/meta-oe/recipes-devtools/yajl/yajl-1.0.12/0001-bump-version-to-1.0.12.patch
+new file mode 100644
+index 000000000..5e8aef051
+--- /dev/null
++++ b/meta-oe/recipes-devtools/yajl/yajl-1.0.12/0001-bump-version-to-1.0.12.patch
+@@ -0,0 +1,25 @@
++From 17b1790fb9c8abbb3c0f7e083864a6a014191d56 Mon Sep 17 00:00:00 2001
++From: Lloyd Hilaiel <lloyd@hilaiel.com>
++Date: Mon, 25 Apr 2011 12:56:24 -0600
++Subject: [PATCH] bump version to 1.0.12
++
++---
++ CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 727a488..c703244 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -34,7 +34,7 @@ PROJECT(YetAnotherJSONParser C)
++ 
++ SET (YAJL_MAJOR 1)
++ SET (YAJL_MINOR 0)
++-SET (YAJL_MICRO 11)
+++SET (YAJL_MICRO 12)
++ 
++ SET (YAJL_DIST_NAME "yajl-${YAJL_MAJOR}.${YAJL_MINOR}.${YAJL_MICRO}")
++ 
++-- 
++2.11.0
++
+diff --git a/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb b/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
+new file mode 100644
+index 000000000..f8451a406
+--- /dev/null
++++ b/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "Yet Another JSON Library."
++
++DESCRIPTION = "YAJL is a small event-driven (SAX-style) JSON parser \
++written in ANSI C, and a small validating JSON generator."
++
++HOMEPAGE = "http://lloyd.github.com/yajl/"
++
++LICENSE = "ISC"
++LIC_FILES_CHKSUM = "file://COPYING;md5=da2e9aa80962d54e7c726f232a2bd1e8"
++
++SRCREV = "6a8906d409dfe6dd3f1e01ed066aa162b1729cec"
++
++SRC_URI = "git://github.com/lloyd/yajl;branch=1.x \
++           file://0001-bump-version-to-1.0.12.patch \
++          "
++
++inherit cmake lib_package
++
++S = "${WORKDIR}/git"
++
++EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
+-- 
+2.11.0
+
 
