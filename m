@@ -1,46 +1,44 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f195.google.com (mail-ua0-f195.google.com
-	[209.85.217.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 2639777317
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 22FE877306
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Dec 2016 21:11:51 +0000 (UTC)
-Received: by mail-ua0-f195.google.com with SMTP id b35so9907216uaa.0
+	Tue, 20 Dec 2016 00:38:56 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id a197so107325539wmd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Dec 2016 13:11:53 -0800 (PST)
+	Mon, 19 Dec 2016 16:38:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=hySn1sUrZclS+sJ3l/+T/0augvVi4ugYiHWLnRH+ok8=;
-	b=UHt3DozI6iwcROmFTjaFokR+WaKaEVh+KfA3ZPkfQo8CptkAWuw7SjpOWjzC5+Y1u5
-	S8AoWN3XxecKHLj0bIMxK+zXNfRF2Y3MPgx70Xt+J1dqRDwQSbw4A9yAtepJHyR4z2n7
-	pfSgB0BbJ/3Nnel/wqbmKzsUYN9lXf2+q1uXjyJJ5FdzQJTwSnxy0yLVCn9ccp6c84z5
-	GS+gDm+cHmQLiV8UYnfRsnJE2uTptveu/3uc3FmxEauy7O8bGgqgWReXsMKsCkyEOMzY
-	LG1CPn3rtHEo2VE8co1om6bhDOfbLSlG/vAG6Zfr7sJlQAWVw6r+eUOdjkjobAX/a1t9
-	mmdA==
+	bh=x3fxtZWrLya/mbvpfD/JG4/ZtzgyN2rvOBO3N67CkFk=;
+	b=jkKpzz89Mnx/lEbAuxn9gnSem6nKddFJGlcT5sfp0gOSEjMVhi0UaG00QslOLBijxV
+	fGhvYVGmTR3WBbKH+ppKUGyqgL8uEi39iFAblMM9rpwBhMYcxO8xJMXwyy7iLbyaCBab
+	XWZNgezgO3zMqZZmW4akZBkQKz3YkV6R0tYUxA1N/jM6vv0V4AxFBi7v1pr6XjtXBsUn
+	zCz5DYSkCqRcMjaoGe4uV2goTU5+Ipe2vPzichR7pTpLaHuyfcgcZ67ARbtKZyj1XpxT
+	ekHWSa5k9Y86crBOb63A/LBrhI14pswuVcpGENOm2KbgXegUDHKDvDxmlJv53n5bqtr+
+	ivTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=hySn1sUrZclS+sJ3l/+T/0augvVi4ugYiHWLnRH+ok8=;
-	b=X9PRZISZTecIpw4Rs6RTCGKMPQqcuppKa0TUsECcLJC3/72QRVP/BkozEjxu2sSKJ6
-	56e6o2Q3/QxSvuG0q9eIraUu1HArWJOPJaZk899Y8IeHbXg2DtphEyEIJHKabOQEHmck
-	2BphbdrcSROEAkue/xWmlokWO+0Rmt3vzhyS9hLWqVASFRyXrejQHdKd7AHmW0cEGNSu
-	4BY1tFGOdZOGsMD2MyHSd1n+tYPC7sKMps6L4b9oAHUtiEo9XIyvAB2+NXeqRq+XFcE0
-	9P4A/Q05G+wo0eM5USRn8gJ0jHQhcSAFXjYbcu49Uh6iXn9vtZCCP36wldXKG1tbQ+ZS
-	0R8A==
-X-Gm-Message-State: AKaTC01+IAqejL8z7EFqM/e/c8TDO3HWG02xmMAjXO53vo4Iwo2cZoV9dI0LA1mYa8RsnU8+mdmd4srPNSShog==
-X-Received: by 10.176.1.17 with SMTP id 17mr11742955uak.143.1482181912914;
-	Mon, 19 Dec 2016 13:11:52 -0800 (PST)
+	bh=x3fxtZWrLya/mbvpfD/JG4/ZtzgyN2rvOBO3N67CkFk=;
+	b=IWcblurFVHKgqs4K9H3YUEeCrr9CH50HwvzlHr9JGJlivMo4KWPNgFhtS9rvkrjTka
+	4KJLmLGfRYdJcEUKDTsPMkQRg7SpojQBIVZl7fRReN8mf9wY1AyrAWOrVK/kPJCXThgD
+	jBs82Zv701O/T7AnkwAshZAu9lJRx9xhS8+qu8P2qb70rO1c/kSTzYDf14TSgMpips6y
+	VNiLnKLNErOhrR4SOhgKsE0bzw0GJwluKeCCwcnh+hqwgd3jCOCfyXYL1mFYOBeFQQfA
+	FvJXz5Y4EvEpw6pijxeHj3g/fSkBrHv5+h+X1YXcW0vZrPvw+aq3BykVegbwzhKC7eYS
+	vBfw==
+X-Gm-Message-State: AIkVDXImJq0scAkF8aVaOggUiMg5foQeEZ0Lj5PFk9spQRnlbXrP0kgbhhqY8PFKMcpp6gD6+mAM6kcaqSQA4Q==
+X-Received: by 10.28.184.88 with SMTP id i85mr14704600wmf.49.1482194337667;
+	Mon, 19 Dec 2016 16:38:57 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.159.48.87 with HTTP; Mon, 19 Dec 2016 13:11:22 -0800 (PST)
-In-Reply-To: <CA+chaQckEo=6jbW19-Fvv1Uy_pMminwEVg=3PSyCdXA3imOh7w@mail.gmail.com>
-References: <20161215020940.10105-1-raj.khem@gmail.com>
-	<20161215020940.10105-3-raj.khem@gmail.com>
-	<CA+chaQckEo=6jbW19-Fvv1Uy_pMminwEVg=3PSyCdXA3imOh7w@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 19 Dec 2016 13:11:22 -0800
-Message-ID: <CAMKF1spCLOGTMH2XpC6quBjFZQOWoy6XLBBPNHU1gyE=HTzr6w@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH V2 3/6] zbar: Add recipe
+Received: by 10.80.134.144 with HTTP; Mon, 19 Dec 2016 16:38:57 -0800 (PST)
+In-Reply-To: <20161219205629.7768-1-raj.khem@gmail.com>
+References: <20161219205629.7768-1-raj.khem@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 20 Dec 2016 01:38:57 +0100
+Message-ID: <CA+chaQffPQBehWQBuB=_5ckq006zsiWPjzc970g1nK_God8C+w@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH] yajl_1.0.12: Add recipe for yajl1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,14 +51,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Dec 2016 21:11:52 -0000
+X-List-Received-Date: Tue, 20 Dec 2016 00:38:57 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Sat, Dec 17, 2016 at 3:51 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> gst-plugins-bad-0.10.23: gst-plugins-bad-zbar rdepends on zbar, but it
-> isn't a build dependency, missing zbar in DEPENDS or PACKAGECONFIG?
-> [build-deps]
->
+Please don't use github archives which might be regenerated with different
+checksums.
 
-sent a patch for this.
+On Mon, Dec 19, 2016 at 9:56 PM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> yajl1 and yajl2 are not ABI compatible, therefore
+> add a recipe for latest release of yajl1
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb | 17 +++++++++++++++++
+>  1 file changed, 17 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
+>
+> diff --git a/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
+> b/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
+> new file mode 100644
+> index 000000000..ed62bb25d
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
+> @@ -0,0 +1,17 @@
+> +SUMMARY = "Yet Another JSON Library."
+> +
+> +DESCRIPTION = "YAJL is a small event-driven (SAX-style) JSON parser \
+> +written in ANSI C, and a small validating JSON generator."
+> +
+> +HOMEPAGE = "http://lloyd.github.com/yajl/"
+> +
+> +LICENSE = "ISC"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=da2e9aa80962d54e7c726f232a2bd1e8"
+> +
+> +SRC_URI = "https://github.com/lloyd/${BPN}/archive/${PV}.tar.gz"
+> +SRC_URI[md5sum] = "792672a75c3aa87a283b8714545a0bd0"
+> +SRC_URI[sha256sum] = "5f0d297154da89f0131b71110c0e95
+> af78b6127d6252930441fd20671bb28167"
+> +
+> +inherit cmake lib_package
+> +
+> +EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
