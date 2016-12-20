@@ -1,32 +1,51 @@
-Return-Path: <mike.looijmans@topic.nl>
-X-Greylist: delayed 361 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 20 Dec 2016 10:26:21 UTC
-Received: from atl4mhfb03.myregisteredsite.com
-	(atl4mhfb03.myregisteredsite.com [209.17.115.119])
-	by mail.openembedded.org (Postfix) with ESMTP id A88E8772E6
+Return-Path: <prvs=01629de410=mike.looijmans@topicproducts.com>
+X-Greylist: delayed 5220 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 20 Dec 2016 11:21:26 UTC
+Received: from mx26-01.smtp.antispamcloud.com (mx26-01.smtp.antispamcloud.com
+	[148.251.71.1])
+	by mail.openembedded.org (Postfix) with ESMTP id 335DA772CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Dec 2016 10:26:21 +0000 (UTC)
-Received: from atl4mhob15.myregisteredsite.com
-	(atl4mhob15.myregisteredsite.com [209.17.115.53])
-	by atl4mhfb03.myregisteredsite.com (8.14.4/8.14.4) with ESMTP id
-	uBKAKN9m006611 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Dec 2016 05:20:23 -0500
-Received: from mailpod.hostingplatform.com ([10.30.71.207])
-	by atl4mhob15.myregisteredsite.com (8.14.4/8.14.4) with ESMTP id
-	uBKAKKeX027999 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Dec 2016 05:20:20 -0500
-Received: (qmail 17309 invoked by uid 0); 20 Dec 2016 10:20:20 -0000
-X-TCPREMOTEIP: 37.74.225.130
-X-Authenticated-UID: mike@milosoftware.com
-Received: from unknown (HELO mikebuntu.TOPIC.LOCAL)
-	(mike@milosoftware.com@37.74.225.130)
-	by 0 with ESMTPA; 20 Dec 2016 10:20:19 -0000
+	Tue, 20 Dec 2016 11:21:26 +0000 (UTC)
+Received: from [37.74.225.130] (helo=TOP-EX01.TOPIC.LOCAL)
+	by mx26.antispamcloud.com with esmtps (TLSv1:ECDHE-RSA-AES128-SHA:128)
+	(Exim 4.86) (envelope-from <mike.looijmans@topicproducts.com>)
+	id 1cJH7q-0006q8-4W for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Dec 2016 10:54:27 +0100
+Received: from [192.168.80.121] (192.168.80.121) by webmail.topic.nl
+	(192.168.10.102) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 20 Dec 2016 10:54:25 +0100
+To: <openembedded-devel@lists.openembedded.org>
 From: Mike Looijmans <mike.looijmans@topic.nl>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Dec 2016 11:20:06 +0100
-Message-Id: <1482229206-7475-1-git-send-email-mike.looijmans@topic.nl>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][morty][PATCH] libwnck3: Resurrect recipe
+Organization: TOPIC
+Message-ID: <15daa04b-92db-cc3f-f0f9-14ac92764641@topic.nl>
+Date: Tue, 20 Dec 2016 10:54:25 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.4.0
+MIME-Version: 1.0
+X-Originating-IP: [192.168.80.121]
+X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
+X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
+X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W6KAUC/fjyuDn
+	NXFr4uarw8GIk4znw5EcwHHi+ra9lypEmJCbamfqLB4wH/k+k+Tftor9O5jjWZI633McN2M/OUXR
+	4XktS92Fqq3Qa0exZrH30SrPk8tfaSF+RZrpk8YKU12d2pmLLkAmzasehlwbl/aIcThYggqwk0fw
+	rocOZc8+DKA2NNvQHVv9U39IvZ21x85OM4GWP9JQ/hHPc9c4dspy46MY4AXC06EFbOC1uAqsezUv
+	r8ZdfHp9IY+ISmZYIrv3F28sfojuZI3S+Bdc3hgDAO6Wxjgeje/Q4ZW83RHrjuU3A3io6xJmD59i
+	FVkb1lD23a/ycTR6eGRVCSDNgUl4yqLUstazOFLceEbe5fqs6OwHFKjc65DtZENSFvGnQ+CW+UYD
+	fWNcm6W9yD2WUwLOpN2OM4Xa3O5lTE7F6lJKuhvn4rEavP9bL8mZck1R7l9uV9ZupfreGYe03ZZO
+	eOKQ13p36RF/RfTGYNqrxWxehOgMaMvh5vK4PS5ksw+HmdySlZou9qHIGOZDEEo7O5nGh/AcrRHu
+	AEr3RcauwfEcYOLCr1ZlHUTPufZxGzhOhtLdG8aCgUsX8Ujfe6oce0XUNc+M5+7Fw3thpBwakssk
+	l+/U7XvoRKwZup9IBj1f9jihx+Za/cV70jOJzN2r4A==
+X-Report-Abuse-To: spam@quarantine2.antispamcloud.com
+X-Originating-IP: 37.74.225.130
+X-SpamExperts-Domain: topic.nl
+X-SpamExperts-Username: 37.74.225.128/28
+Authentication-Results: antispamcloud.com;
+	auth=pass smtp.auth=37.74.225.128/28@topic.nl
+X-SpamExperts-Outgoing-Class: unsure
+X-SpamExperts-Outgoing-Evidence: Combined (0.21)
+X-Classification: unsure/combined
+X-Recommended-Action: accept
+Subject: morty branch XFCE no longer builds, missing libwnck3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,44 +58,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Dec 2016 10:26:21 -0000
+X-List-Received-Date: Tue, 20 Dec 2016 11:21:27 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-libwnck3 moved to OE-core, then OE-core removed all dependencies on it
-and removed the recipe, so now it's gone. Bring back the recipe into
-meta-openembedded.
+=EF=BB=BFWith current "morty" branches of OE-core and meta-openembedded, a =
+build of an=20
+xfce desktop image fails:
 
-Signed-off-by: Mike Looijmans <mike.looijmans@topic.nl>
----
- meta-gnome/recipes-gnome/libwnck/libwnck3_3.20.1.bb | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/libwnck/libwnck3_3.20.1.bb
+NOTE: Resolving any missing task queue dependencies
+ERROR: Nothing PROVIDES 'libwnck3' (but=20
+/.../meta-oe/meta-xfce/recipes-panel-plugins/hotcorner/xfce4-hotcorner-plug=
+in_0.0.2.bb=20
+DEPENDS on or otherwise requires it). Close matches:
+   libwnck
+NOTE: Runtime target 'xfce4-hotcorner-plugin' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['xfce4-hotcorner-plugin',=20
+'libwnck3']
+NOTE: Runtime target 'packagegroup-xfce-extended' is unbuildable, removing.=
+..
+Missing or unbuildable dependency chain was: ['packagegroup-xfce-extended',=
+=20
+'xfce4-hotcorner-plugin', 'libwnck3']
+NOTE: Runtime target 'desktop-image' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['desktop-image',=20
+'packagegroup-xfce-extended', 'xfce4-hotcorner-plugin', 'libwnck3']
 
-diff --git a/meta-gnome/recipes-gnome/libwnck/libwnck3_3.20.1.bb b/meta-gnome/recipes-gnome/libwnck/libwnck3_3.20.1.bb
-new file mode 100644
-index 0000000..d3c3a86
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/libwnck/libwnck3_3.20.1.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "Window navigation construction toolkit"
-+LICENSE = "LGPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
-+
-+BPN = "libwnck"
-+
-+SECTION = "x11/libs"
-+DEPENDS = "intltool-native gtk+3 gdk-pixbuf-native libxres"
-+
-+PACKAGECONFIG ??= "startup-notification"
-+PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
-+
-+inherit gnomebase gobject-introspection
-+SRC_URI[archive.md5sum] = "487938d65d4bfae1f2501052b1bd7492"
-+SRC_URI[archive.sha256sum] = "1cb03716bc477058dfdf3ebfa4f534de3b13b1aa067fcd064d0b7813291cba72"
-+
-+inherit distro_features_check
-+# libxres means x11 only
-+REQUIRED_DISTRO_FEATURES = "x11"
--- 
-1.9.1
+
+
+
+Kind regards,
+
+Mike Looijmans
+System Expert
+
+TOPIC Products
+Materiaalweg 4, NL-5681 RJ Best
+Postbus 440, NL-5680 AK Best
+Telefoon: +31 (0) 499 33 69 79
+E-mail: mike.looijmans@topicproducts.com
+Website: www.topicproducts.com
+
+Please consider the environment before printing this e-mail
+
+
+
+
 
 
