@@ -1,51 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 88785607A4
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f177.google.com (mail-qk0-f177.google.com
+	[209.85.220.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D7A47724D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Dec 2016 19:16:25 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id w68so7202063pgw.3
+	Tue, 20 Dec 2016 20:38:17 +0000 (UTC)
+Received: by mail-qk0-f177.google.com with SMTP id n21so55844048qka.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Dec 2016 11:16:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:content-transfer-encoding:mime-version:subject:date:references
-	:to:in-reply-to:message-id;
-	bh=E1nbZ7GbSUmdZR2ORoTiL+9O9HpDf9X491CkOeRUcZc=;
-	b=LZ2I8s+7GKbTUuZK73CEeKT0rfiloA1W2uXoMcY6mHoPSPTlj8uMj1OCvt3Fmg+alI
-	flMP5FRi+1RHoUXlei8bu3t4OUqG+Xv8ruWDG8U3ZAaUTcW4zY72CtJC5hK62zFy4e/H
-	eYLHpQbHCkmdjYkASA3Dw2uQN9k/qhSKBUJaHhJCYHX2NFllxgKZWRg6QoefChRZA9/D
-	U9O2FGNoDxLw6HsynTwKVMHgOtyYvZu4BHp2BL49HOj2mmDOLZ0hyhNSDKEI80y77bUj
-	6EgJnzavPQzV2ihfbY3rqDvnkkLpaOSzE3K+vXBnJwNzsEJMggkH0BB+6Ug7GpbrFrwl
-	BWUw==
+	Tue, 20 Dec 2016 12:38:19 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:content-transfer-encoding:mime-version
-	:subject:date:references:to:in-reply-to:message-id;
-	bh=E1nbZ7GbSUmdZR2ORoTiL+9O9HpDf9X491CkOeRUcZc=;
-	b=ZbCzzNYThkpq+xPquYvZNqG2TkKmEmm3ia6aFkGuhFHBbU5V0Mi2I80+t3lTRIwjls
-	58s6O4ifQNtIkmTuzaFmVri5/d7fZ4wNBgKhgZ40K+3Ab6XOP+f4Ll9tBvyA8cK6CkeA
-	pTap4wa+DpRVaeIGJl4bmL9y5fUvWwr6Vb1269+dPwBFFPvITz9sA8ZIcKBLfhBDUQBu
-	QtY8/1hdzyLkcB+MX7i5Tlb6evQJOBOdk5PWWiQQwznik3DYB51QzK1rNpnxh2WZVr0B
-	+ZfBgksfQppeoP+wNP7e58AvSfttL65C6lsrP0pMY5PE2o7KyhXGflSgACemnYLdCGUc
-	BRfg==
-X-Gm-Message-State: AIkVDXJmGbh8nk5w0dGPXSQHEk8PqoQXCt2RNJKkYW2VSvCgyp+WLJGxkU317QDQmzvzOg==
-X-Received: by 10.98.7.151 with SMTP id 23mr735635pfh.5.1482261387274;
-	Tue, 20 Dec 2016 11:16:27 -0800 (PST)
-Received: from ?IPv6:2601:647:4c00:23ec:d91a:25a3:ce34:6bad?
-	([2601:647:4c00:23ec:d91a:25a3:ce34:6bad])
-	by smtp.gmail.com with ESMTPSA id
-	w125sm40949216pfb.8.2016.12.20.11.16.26
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 20 Dec 2016 11:16:26 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-Mime-Version: 1.0 (Mac OS X Mail 10.2 \(3259\))
-Date: Tue, 20 Dec 2016 11:16:25 -0800
-References: <CAHQecY48gVbt4S+88MHivSbv-Xdn29WRq5RPL6+QDVGYUPCwYw@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=b3zt+uuL+czCj7PLnBu5aHYMLbxGwI2p4l+h3LQW62o=;
+	b=H1cPC6hVj+vSaIo0/VWQ3FDzqmd1JdPX3cqDX6kuWvabJeqxdHqtHmQalTTLvX/VaU
+	YHXjDjTGkX55GNq12pcDRXiGuz2Gz+uTiS5NwgoV7AXeGVTp3eLq6/WxjrGK88guq7iC
+	xUEHs6pXHCoVNrRnVMreU80LUky13wPlOQ/fnWEVCMyoeZOpt3NN+YPAjaE+cn16OxFn
+	P9nhIwem+VFB15Z/IVeGt1/XKRQa670nTYw/t74TWMGV/JSxbfenH12SKksCj+IKdR5q
+	sAWwavDVxArboKNDxv90qv0a/ifpKUxUjJLaiPZemfgjdD4da5OxfIS1noQBnoTSK0pC
+	/qQQ==
+X-Gm-Message-State: AIkVDXKZMU0JR81wbDzOiDhOHcbSeRDZiOm84saFs69CJCwoCfkBkjAvlRF0UsL8QkVkrA==
+X-Received: by 10.55.210.131 with SMTP id f125mr1503514qkj.98.1482266298603;
+	Tue, 20 Dec 2016 12:38:18 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
+	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
+	x127sm13871963qkd.37.2016.12.20.12.38.17
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 20 Dec 2016 12:38:18 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <CAHQecY48gVbt4S+88MHivSbv-Xdn29WRq5RPL6+QDVGYUPCwYw@mail.gmail.com>
-Message-Id: <E628426E-84F8-4EA4-A296-D32C3339DF1C@gmail.com>
-X-Mailer: Apple Mail (2.3259)
-Subject: Re: Infra Full Stop 12/26-12/29
+Date: Tue, 20 Dec 2016 15:37:49 -0500
+Message-Id: <1482266269-19166-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-urllib3: update to version 1.19.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,37 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Dec 2016 19:16:27 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 20 Dec 2016 20:38:18 -0000
 
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-urllib3.inc                | 4 ++--
+ .../python/{python-urllib3_1.19.bb => python-urllib3_1.19.1.bb}       | 0
+ .../python/{python3-urllib3_1.19.bb => python3-urllib3_1.19.1.bb}     | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-urllib3_1.19.bb => python-urllib3_1.19.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-urllib3_1.19.bb => python3-urllib3_1.19.1.bb} (100%)
 
-> On Dec 20, 2016, at 10:50 AM, Tom King <ka6sox@gmail.com> wrote:
-> 
-> Hi All,
-> 
-> We have been looking for a time when we could do a full stop of the infra
-> to upgrade some bits and clear out some faults.
-> 
-> This will involve shutting down the main machine that we use for *most* of
-> the OE infra.
-> 
-> Our goal is to put up a backup git master but other services such as: wiki,
-> patches, etc will be offline for some or all of that period.
-> 
-> We have delayed doing this much needed maintenance to try to work around
-> Yocto and OE release schedules and it is necessary that we take this time
-> to do the work.
-> 
-
-I guess, you need to come up with a tentative down-time schedule. 
-
-> Tom
-> (for the OE Infra Team)
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-python/recipes-devtools/python/python-urllib3.inc b/meta-python/recipes-devtools/python/python-urllib3.inc
+index 70035af..ef0b3ae 100644
+--- a/meta-python/recipes-devtools/python/python-urllib3.inc
++++ b/meta-python/recipes-devtools/python/python-urllib3.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ea114851ad9a8c311aac8728a681a067"
+ 
+-SRC_URI[md5sum] = "4aa7c6c310cd938683e9b1831e110bac"
+-SRC_URI[sha256sum] = "87f362d061184191d07ced0b947d8526f3e1884f21b0fe97fab313dedcb895be"
++SRC_URI[md5sum] = "7c4edfc86680c8467cfab204ed4ab2dc"
++SRC_URI[sha256sum] = "53bc34c8ee268c3bd83ecf5e9c80fa783f3148484579bd4e20f4a7c1bb2dd6a0"
+ 
+ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-certifi \
+diff --git a/meta-python/recipes-devtools/python/python-urllib3_1.19.bb b/meta-python/recipes-devtools/python/python-urllib3_1.19.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-urllib3_1.19.bb
+rename to meta-python/recipes-devtools/python/python-urllib3_1.19.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.19.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.19.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-urllib3_1.19.bb
+rename to meta-python/recipes-devtools/python/python3-urllib3_1.19.1.bb
+-- 
+2.7.4
 
 
