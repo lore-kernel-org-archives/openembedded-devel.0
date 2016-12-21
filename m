@@ -1,36 +1,49 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 15C706E688
+Return-Path: <kergoth@gmail.com>
+Received: from mail-oi0-f49.google.com (mail-oi0-f49.google.com
+	[209.85.218.49])
+	by mail.openembedded.org (Postfix) with ESMTP id EB376700F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Dec 2016 22:12:45 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id 3so1360478qtr.2
+	Wed, 21 Dec 2016 22:27:04 +0000 (UTC)
+Received: by mail-oi0-f49.google.com with SMTP id 3so42004056oih.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Dec 2016 14:12:47 -0800 (PST)
+	Wed, 21 Dec 2016 14:27:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc;
+	bh=z0msrt7yJuP3Wz09Bo1Ez3JaEHN0/w/+Oh4Vnd8509E=;
+	b=j7bTDktA1UOLvhfRkNuzghD+P2kM/M0EJ5scV4EozTyYYJ08P9h3y+2mi1maCSz0KZ
+	IlyXWpfNvSJYIhbfWXTkjDKbFdexxa+jWoXBrmd3n4JLfm19iAE6cVzsG6WVf6RMChDm
+	ycDs/qLoobS0CzosNiq62T+PoLkZide3wPOGHthVCtWyUiCXY2cHZQR1r1CuXKMDsOcq
+	3GJdm+Mi67Ri8VpMdftHMJkNWqr6vklECclKMKEJQ6CLSYacsRLiJ+ADMysnQsuRbdlc
+	CbF2DYSJRTm6e8UZgt4anaxw/Ubvgj6dcTIKuEWTF2g4anUKjwj/CHGb0ByIVCOsjuzK
+	JdPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=5Bv6KquvBPfJVLm7FNb/eDuldBYDtgJdaNsrIlIPdJE=;
-	b=n2UCkdtGpNMV2H5aOuIjKuMxS4lXtR/NIORamGf++p3ccptrmqhr+4uAPUult721xh
-	N1wG9pmsotiWriG6+xG9ff1Z1vGg/OODDX7MQ+5a9Tlo4gB50Qtsf/CubDKTLLVliHqX
-	CAz4P5y01HC9kuZFFJIoKmpKvRh81g40F+e92JtFIUbsUbUxABB+Sh9+Be7e67NboeFR
-	xMhRmoYnrpPBFPdSzCol2kJ1B9r/0AH06J5cK/bVRfsx9J44j9520eiAhev1HwvRVElc
-	DZ5jcWhKntOchm3u1OCjPdi+VKdJ1ViWa1R6Gohi34J16i6v6+YsoRZwBb3xkqd/GcBt
-	76gA==
-X-Gm-Message-State: AIkVDXLy+ltcU7aTI26GMkMjPHTkBz/E5pTqiODawNHGOTCYOtXMU1+eIEXPPGkmQtDe1A==
-X-Received: by 10.237.33.173 with SMTP id l42mr6778497qtc.271.1482358366848;
-	Wed, 21 Dec 2016 14:12:46 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
-	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
-	h43sm16540520qth.29.2016.12.21.14.12.46
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 21 Dec 2016 14:12:46 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Dec 2016 17:12:17 -0500
-Message-Id: <1482358337-11521-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-lxml: update to version 3.7.0
+	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
+	:date:message-id:subject:to:cc;
+	bh=z0msrt7yJuP3Wz09Bo1Ez3JaEHN0/w/+Oh4Vnd8509E=;
+	b=mVucCQVzvsPV+v7qEo9uOQdXzNZd5vCaTzn8zv9xrueHhmnYjIRuS+95IhYk/FtSrc
+	6sKyqB0McINzb9sonvVIzioRgC5zHw1PW2K8YpVUcepwYGZBcg7fQ1ziLR+30E4c6l/l
+	9hpi4nHZOzygkN3PgmAuKb9wc3zv+JjyOY1nmaWwevbiQF1IFZXAbo3WZ1BJ9DX0g4YH
+	AICTjZJL/W7lg8bHpYWtNlx8ee1uQrnTn9VFekgyNXxSxR3aSUsjOsiwfwAqmSIJeyIl
+	8hrGLBn1F+6IsdFhsTqBnHOS/EIUEPWDmLoriytBFkGQn2aLNWNUOMda6Bf3PGD+/wKM
+	j+UQ==
+X-Gm-Message-State: AIkVDXIqBgfguC0ZEeJvuDsRk04PHzpdBx3WdPPb12ceoUUWFmNjUBqNraXhQ16qVqMSU4qpd8mZx7+GcE+ysw==
+X-Received: by 10.202.228.139 with SMTP id b133mr3688726oih.111.1482359226063; 
+	Wed, 21 Dec 2016 14:27:06 -0800 (PST)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.157.19.10 with HTTP; Wed, 21 Dec 2016 14:26:45 -0800 (PST)
+In-Reply-To: <1482357220-422-1-git-send-email-mark.asselstine@windriver.com>
+References: <1482357220-422-1-git-send-email-mark.asselstine@windriver.com>
+From: Christopher Larson <clarson@kergoth.com>
+Date: Wed, 21 Dec 2016 15:26:45 -0700
+X-Google-Sender-Auth: Nl-5c32uifrdL1x6Rd7hJp6X4lw
+Message-ID: <CABcZANmtther94ZrkEwVn=JYgvLkT2CdTkCLSJPDo7gEHFdaCA@mail.gmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "paul.eggleton@linux.intel.com" <paul.eggleton@linux.intel.com>
+Subject: Re: [meta-webserver][PATCH] apache2: the download has been moved to the 'archives'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,41 +56,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Dec 2016 22:12:46 -0000
+X-List-Received-Date: Wed, 21 Dec 2016 22:27:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-lxml.inc                   | 4 ++--
- .../python/{python-lxml_3.6.4.bb => python-lxml_3.7.0.bb}             | 0
- .../python/{python3-lxml_3.6.4.bb => python3-lxml_3.7.0.bb}           | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-lxml_3.6.4.bb => python-lxml_3.7.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-lxml_3.6.4.bb => python3-lxml_3.7.0.bb} (100%)
+On Wed, Dec 21, 2016 at 2:53 PM, Mark Asselstine <
+mark.asselstine@windriver.com> wrote:
 
-diff --git a/meta-python/recipes-devtools/python/python-lxml.inc b/meta-python/recipes-devtools/python/python-lxml.inc
-index 7481b98..8319799 100644
---- a/meta-python/recipes-devtools/python/python-lxml.inc
-+++ b/meta-python/recipes-devtools/python/python-lxml.inc
-@@ -18,8 +18,8 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=f9f1dc24f720c143c2240df41fe5073b \
- 
- DEPENDS += "libxml2 libxslt"
- 
--SRC_URI[md5sum] = "6dd7314233029d9dab0156e7b1c7830b"
--SRC_URI[sha256sum] = "61d5d3e00b5821e6cda099b3b4ccfea4527bf7c595e0fb3a7a760490cedd6172"
-+SRC_URI[md5sum] = "b78e6f7e859c2ff57add7f63a5e387b7"
-+SRC_URI[sha256sum] = "9c62eb2a1862e1ae285d7e7e3b7dc8772d387b19258086afcec143c6b7b8a5c9"
- 
- DISTUTILS_BUILD_ARGS += " \
-                      --with-xslt-config='pkg-config libxslt' \
-diff --git a/meta-python/recipes-devtools/python/python-lxml_3.6.4.bb b/meta-python/recipes-devtools/python/python-lxml_3.7.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-lxml_3.6.4.bb
-rename to meta-python/recipes-devtools/python/python-lxml_3.7.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-lxml_3.6.4.bb b/meta-python/recipes-devtools/python/python3-lxml_3.7.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-lxml_3.6.4.bb
-rename to meta-python/recipes-devtools/python/python3-lxml_3.7.0.bb
--- 
-2.7.4
+> This release of apache2 is no longer found in the main downloads area
+> but has been moved to the 'archives'. We should uprev apache2 but for
+> now this will at least get the builds working again.
+>
+> Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+>
 
+Wouldn=E2=80=99t it make sense to do a recipe-local addition to MIRRORS to
+automatically fall back to the apache archive?
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
