@@ -1,52 +1,44 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 49E366FFCD
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 78FCE71BE5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Dec 2016 01:33:19 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id b1so14179074pgc.1
+	Wed, 21 Dec 2016 06:03:11 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id i5so5389756pgh.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Dec 2016 17:33:21 -0800 (PST)
+	Tue, 20 Dec 2016 22:03:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=PcK9K+D88nRcTf4cpwv8lYHLpVx8JVHo4Uj/yjmD/bs=;
-	b=ccAqY7VzR9gDHC3kkbsnLmizHpe6vH5Mo46LvVjqtOnQejZK8TQp2Dz0DZ23XcSj2i
-	Q4fi/0Eh3k7xYazYnn9EKliKnsNOic+oAM8WuNa1OJ2qjFP1pYunESfp7qJk0Iyn6SOL
-	Tr4j4ov5dzJg0RPg4jYnSyGTzTXvq3JSDQBD3kJUhhg0ZGT3rExvjllK5kK60eo/+7c0
-	iJZjamAnAaolQFGXV+4BeluLWFzLgkrhRLP3MYOwPUjuRjobF41VTY9VKObe0ZCGiFmb
-	zl1bBuP4NWLqNILqhI8ERg7wedcTqeyQ0+EYgVlI8NKw9sXgrFTLB4nQuftjUVveikjm
-	7ddQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=vNszciFR9p47I+NOKa/adK+Fl/xK/qUmGC8Pf9MMbGY=;
+	b=JYFSHWMQ2mnQtPWvCClaRRyS4TzpgjBWdgg8U0lOCs9AJZkxYCXririFW23FSmboJN
+	idaL157K0qorCfJfsnhGkic8JRh2utbDi7I0VqQ9oXX+2E6laYwOIMZFv0fEyJTmRFn6
+	zp5JbaacQ+Go5O2L71sFyu6KJzE7SeE16N5GhtcOivasOH7ji/ES99MYB2u68hCezODu
+	Ye4BwBM5RJa+lgUssArsbawUmgcSEvSPS6YnlJMqP1az85LiZMljESFMGicVDQBIwKti
+	tV/KXzqsVWZ8Kd/WhirmzXNmJCPr9KlKb8lUc5ZRXbINtylIiZoUuar8Ju9urcdzDgH5
+	eaMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=PcK9K+D88nRcTf4cpwv8lYHLpVx8JVHo4Uj/yjmD/bs=;
-	b=RjdA34aqhUFltZ/UTAWt1mvFXR1B5efXrppefxSTVhBInTiczKB6jjhg1DOBqhJldf
-	hJzOImgmvhioVpTmcSnIXNOEnR/Uszt+MN3ArHDR64WVAxppvlnWRs4rjMQOA3sCtm8i
-	mmeUGqx+qp/ICAXjBqEuqndrYDQsBwGghhFfdoAChcBLnMm6Iu6fAjS67VNiZ8/0c93t
-	AyyNrT1ubSN39gmFzx4GueV1isn11zx7X8B35FANdtEgY+qnYs1oIs3GbVRv24OE0Vs0
-	SPCMg5A27oFINwr+6Crl/vqCKviR7YNfOVSFSono85BgHDmjSPQU881wN6A28JB0WtGs
-	IRFg==
-X-Gm-Message-State: AIkVDXI+1wtl/0oR/xPIa2u9XVAUbez00T06OmC2YanuH+E5PV7ACuwytYe+SsdZKXrZVw==
-X-Received: by 10.99.132.194 with SMTP id k185mr3432367pgd.171.1482284000788; 
-	Tue, 20 Dec 2016 17:33:20 -0800 (PST)
-Received: from [10.22.11.123] (50-233-148-156-static.hfc.comcastbusiness.net.
-	[50.233.148.156]) by smtp.gmail.com with ESMTPSA id
-	p25sm41833535pfk.20.2016.12.20.17.33.20
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=vNszciFR9p47I+NOKa/adK+Fl/xK/qUmGC8Pf9MMbGY=;
+	b=dCuFI1Ay6OfwXphEM7LpGp4KCT0/ZZH6y08Yc6XQ2srm9AmnhVzHR2nlB1TboAoVFs
+	8HfbE7B/CTsgjauMb6v30DstHzt6YWsZ7+OpB14MLdyyMc+Akvr7BSRTyq6ESWdq1heX
+	NMFt4Sxi8DDRtCXBfAKv7svsqIcxeK4cRHNdPYPJfeYlny+rZuO+q1C8Rvm9BGm8ft46
+	vpIQJyXtwfzoZ0YNs2GwQA5fLE7Nj8H4PFKF56ke5nfXzm+Rlz1PeRKbmCqAcw8P+BMU
+	jWv8168YqnYtvyodyekW2BYGC7MG6MbmJ82kh3icfm9glEUntB5DEr2MRyfVwnqg0lNV
+	kSdg==
+X-Gm-Message-State: AIkVDXKfInc8q8XYlAfdxz6UuhhHxQymI9VoKBFuxIa4YrpS/PCdxTWUEAlOhHgGkpUwJg==
+X-Received: by 10.98.68.84 with SMTP id r81mr2620243pfa.174.1482300193537;
+	Tue, 20 Dec 2016 22:03:13 -0800 (PST)
+Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
+	s197sm43526435pgc.38.2016.12.20.22.03.12
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 20 Dec 2016 17:33:20 -0800 (PST)
+	Tue, 20 Dec 2016 22:03:13 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <15daa04b-92db-cc3f-f0f9-14ac92764641@topic.nl>
-	<CALbNGRTvDGuegSZPiV1E7WteGqjdYQkjfdHtB-dU0B=PT8xzxg@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <2fe8322b-11d9-8e04-09ed-77c78cda59b1@gmail.com>
-Date: Tue, 20 Dec 2016 17:33:19 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.5.1
-MIME-Version: 1.0
-In-Reply-To: <CALbNGRTvDGuegSZPiV1E7WteGqjdYQkjfdHtB-dU0B=PT8xzxg@mail.gmail.com>
-Subject: Re: morty branch XFCE no longer builds, missing libwnck3
+Date: Tue, 20 Dec 2016 22:03:04 -0800
+Message-Id: <20161221060306.19798-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-oe][PATCH V2] hplip: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,88 +51,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Dec 2016 01:33:20 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 21 Dec 2016 06:03:12 -0000
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...de-cups-ppd.h-for-missing-ppd-definitions.patch | 40 ++++++++++++++++++++++
+ meta-oe/recipes-extended/hplip/hplip_3.12.6.bb     |  1 +
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/hplip/hplip-3.12.6/0001-include-cups-ppd.h-for-missing-ppd-definitions.patch
 
-
-On 12/20/2016 03:53 AM, Andreas Müller wrote:
-> On Tue, Dec 20, 2016 at 10:54 AM, Mike Looijmans
-> <mike.looijmans@topic.nl> wrote:
->> With current "morty" branches of OE-core and meta-openembedded, a build of
->> an xfce desktop image fails:
-There is a patch pending merge to Morty sitting in my morty-next
-
-http://git.yoctoproject.org/cgit/cgit.cgi/poky-contrib/commit/?h=akuster/morty-next&id=4cb131f10885a84489cbcd3750a45f64f0547cda
-
-I will send a pull request.
-
-- armin
->>
->> NOTE: Resolving any missing task queue dependencies
->> ERROR: Nothing PROVIDES 'libwnck3' (but
->> /.../meta-oe/meta-xfce/recipes-panel-plugins/hotcorner/xfce4-hotcorner-plugin_0.0.2.bb
->> DEPENDS on or otherwise requires it). Close matches:
->>    libwnck
->> NOTE: Runtime target 'xfce4-hotcorner-plugin' is unbuildable, removing...
->> Missing or unbuildable dependency chain was: ['xfce4-hotcorner-plugin',
->> 'libwnck3']
->> NOTE: Runtime target 'packagegroup-xfce-extended' is unbuildable,
->> removing...
->> Missing or unbuildable dependency chain was: ['packagegroup-xfce-extended',
->> 'xfce4-hotcorner-plugin', 'libwnck3']
->> NOTE: Runtime target 'desktop-image' is unbuildable, removing...
->> Missing or unbuildable dependency chain was: ['desktop-image',
->> 'packagegroup-xfce-extended', 'xfce4-hotcorner-plugin', 'libwnck3']
->>
->>
->>
->>
->> Kind regards,
->>
->> Mike Looijmans
->> System Expert
->>
->> TOPIC Products
->> Materiaalweg 4, NL-5681 RJ Best
->> Postbus 440, NL-5680 AK Best
->> Telefoon: +31 (0) 499 33 69 79
->> E-mail: mike.looijmans@topicproducts.com
->> Website: www.topicproducts.com
->>
->> Please consider the environment before printing this e-mail
->>
->>
-> So we need in morty at least
->
-> commit 5b0060bbbacf405405e292e8a8e5db9589f63325
-> Author: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-> Date:   Tue Nov 1 17:28:21 2016 +0200
->
->      libwnck3: add a recipe
->
->      It is no longer needed in oe-core.
->
->      Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
->      Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->
->
-> and maybe (don't know the status of gnome.bbclass in morty) - but
-> should not do any harm
->
-> commit 3be9eea720ba70fd3a9e4744401fd268e31731f8
-> Author: Khem Raj <raj.khem@gmail.com>
-> Date:   Mon Dec 5 18:36:21 2016 -0800
->
->      libwnck3: Add missing dependency on gnome-common-native
->
->      Fixes configure errors
->      ../libwnck-3.20.1/configure: line 13391: syntax error near
-> unexpected token `maximum'
->      ../libwnck-3.20.1/configure: line 13391: `GNOME_COMPILE_WARNINGS(maximum)'
->
->      Signed-off-by: Khem Raj <raj.khem@gmail.com>
->      Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+diff --git a/meta-oe/recipes-extended/hplip/hplip-3.12.6/0001-include-cups-ppd.h-for-missing-ppd-definitions.patch b/meta-oe/recipes-extended/hplip/hplip-3.12.6/0001-include-cups-ppd.h-for-missing-ppd-definitions.patch
+new file mode 100644
+index 000000000..84a39aeb8
+--- /dev/null
++++ b/meta-oe/recipes-extended/hplip/hplip-3.12.6/0001-include-cups-ppd.h-for-missing-ppd-definitions.patch
+@@ -0,0 +1,40 @@
++From 7ef9c040dd959105c16d4dc67e14f3bbea25e77f Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 16 Dec 2016 19:51:19 +0000
++Subject: [PATCH] include cups/ppd.h for missing ppd definitions
++
++Fixes errors spotted by clang
++
++| prnt/hpcups/HPCupsFilter.cpp:365:18: error: use of undeclared identifier 'ppdFindAttr'
++|     if (((attr = ppdFindAttr(m_ppd, "hpPrinterLanguage", NULL)) == NULL) ||
++|                  ^
++| prnt/hpcups/HPCupsFilter.cpp:368:13: error: use of undeclared identifier 'ppdClose'
++|             ppdClose(m_ppd);
++|             ^
++| prnt/hpcups/HPCupsFilter.cpp:444:9: error: use of undeclared identifier 'ppdClose'
++|         ppdClose(m_ppd);
++|         ^
++| prnt/hpcups/HPCupsFilter.cpp:497:13: error: use of undeclared identifier 'ppdOpenFile'
++|     m_ppd = ppdOpenFile(getenv("PPD"));
++|             ^
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++Upstream-Status: Pending
++
++ prnt/hpcups/HPCupsFilter.h | 1 +
++ 1 file changed, 1 insertion(+)
++
++Index: hplip-3.12.6/prnt/hpcups/HPCupsFilter.h
++===================================================================
++--- hplip-3.12.6.orig/prnt/hpcups/HPCupsFilter.h
+++++ hplip-3.12.6/prnt/hpcups/HPCupsFilter.h
++@@ -37,7 +37,7 @@
++ #include "Job.h"
++ 
++ #include "dbuscomm.h"
++-
+++#include <cups/ppd.h>
++ #define		DBITMAPFILEHEADER		14
++ #define		DBITMAPINFOHEADER		40
++ 
+diff --git a/meta-oe/recipes-extended/hplip/hplip_3.12.6.bb b/meta-oe/recipes-extended/hplip/hplip_3.12.6.bb
+index 9848e5ac1..1f1e80ce8 100644
+--- a/meta-oe/recipes-extended/hplip/hplip_3.12.6.bb
++++ b/meta-oe/recipes-extended/hplip/hplip_3.12.6.bb
+@@ -9,6 +9,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
+            file://fix-libusb-paths.patch \
+            file://cups-1.6.patch \
+            file://configure.patch \
++           file://0001-include-cups-ppd.h-for-missing-ppd-definitions.patch \
+ "
+ 
+ DEPENDS += "cups python libusb"
+-- 
+2.11.0
 
 
