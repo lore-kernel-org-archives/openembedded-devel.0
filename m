@@ -1,36 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f176.google.com (mail-qk0-f176.google.com
-	[209.85.220.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 70C15773DE
+Received: from mail-qt0-f172.google.com (mail-qt0-f172.google.com
+	[209.85.216.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 43A9577424
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Dec 2016 23:25:07 +0000 (UTC)
-Received: by mail-qk0-f176.google.com with SMTP id t184so97436869qkd.0
+	Wed, 21 Dec 2016 23:39:04 +0000 (UTC)
+Received: by mail-qt0-f172.google.com with SMTP id w33so220491442qtc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Dec 2016 15:25:08 -0800 (PST)
+	Wed, 21 Dec 2016 15:39:06 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ykZM2YUxpS64TIZ50QMujFvb97CldpY00SCjiwnrhv4=;
-	b=C0aVtASBLR5HiEhTDGKa8dwpT8Q+Kg0i0Ec3FrAuTHv268l4OCBr4+A3mruDng8kup
-	DClcffcpjbEPAsSgvIynEiFZp3dldHsFaAD1Jyv35gNxjGZdzxNPgbdYDfyLk/OrzL4K
-	B567MK6BkmQ2v67t+DWlbRa5WZsMKcQZqOY6nxYP3ZQh1oikMRNDfO6ZptAyvlLj0akS
-	5vycnOaHDmZFGUUt0Ky1odSmOIJsL4CJlZfIaEDAEXewsmO8ZO+OBHE1OOi0D+aM4Uw3
-	lqZTr3slT2AGYuD91dyc7Em68zFtjCp1/bBOTSB1waOYy1VsMf4XPr6m4Y9QtgFkL0Pw
-	TIAg==
-X-Gm-Message-State: AIkVDXI9dZAAjKxInu2jm2jA+0jRi2qhmO7Yu1+bbwvBJVTKBA7YUh2dLqPdkUroarfVrQ==
-X-Received: by 10.55.46.69 with SMTP id u66mr7219452qkh.88.1482362708418;
-	Wed, 21 Dec 2016 15:25:08 -0800 (PST)
+	bh=XqvPw8Kdd+yWdGiH0+leVR8g8ZohasytL1Rm1iM8tIs=;
+	b=VmNM9oxjuUvpJ+rcGhYvSOPEDSVGETvxsZXbuR67zELPiXL8bYW9ixdgihnmpZjtoL
+	1tDnogWGH1QtRbN/yLOFHlUq8upAuI8AwGBhd8tIiBqPpL61MF/tY4m2ibMHJB+2YZP7
+	y3UoHwxOJGkN275/+3c7YHbQcGmqUz6tPs9YUtyBt9usEOKPsYhHkaGjdjljHdIHA+Xn
+	w+8FnTjk3axVVzdL9AR+hVvqY47L2xNc0U3QqOsbSkTmFO0++8r7U2eAd4gLmo1m38mt
+	Nb4JtNySdeGp1QYlXh+cfBMm2ty8PMw+fGXLgg9RhMk8ms1TR91FSU72E+SOM8NV4DKp
+	O3Jw==
+X-Gm-Message-State: AIkVDXJoKr0O7VJ97Ryzup0D6jk0x7W75mpT0ynV8hsnqR38bug8f/eCXiiLkaxiScn29g==
+X-Received: by 10.200.50.209 with SMTP id a17mr7172461qtb.41.1482363545860;
+	Wed, 21 Dec 2016 15:39:05 -0800 (PST)
 Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
 	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
-	g46sm16660557qtb.44.2016.12.21.15.25.07
+	s89sm16647056qkl.27.2016.12.21.15.39.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 21 Dec 2016 15:25:07 -0800 (PST)
+	Wed, 21 Dec 2016 15:39:05 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Dec 2016 18:24:53 -0500
-Message-Id: <1482362693-19714-1-git-send-email-derek@asterius.io>
+Date: Wed, 21 Dec 2016 18:38:58 -0500
+Message-Id: <1482363538-28271-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-dominate: update to version 2.3.1
+Subject: [meta-webserver][PATCH] apache2: update to version 2.4.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,58 +43,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Dec 2016 23:25:07 -0000
-
-  * Updated the license file and validated the license terms still apply
+X-List-Received-Date: Wed, 21 Dec 2016 23:39:07 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-dominate_2.2.1.bb      | 15 ---------------
- .../recipes-devtools/python/python-dominate_2.3.1.bb      | 13 +++++++++++++
- 2 files changed, 13 insertions(+), 15 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-dominate_2.2.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python-dominate_2.3.1.bb
+ ...2-native_2.4.23.bb => apache2-native_2.4.25.bb} |  4 ++--
+ .../apache2/apache2/cve-2016-5387.patch            | 25 ----------------------
+ .../{apache2_2.4.23.bb => apache2_2.4.25.bb}       |  5 ++---
+ 3 files changed, 4 insertions(+), 30 deletions(-)
+ rename meta-webserver/recipes-httpd/apache2/{apache2-native_2.4.23.bb => apache2-native_2.4.25.bb} (91%)
+ delete mode 100644 meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch
+ rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.23.bb => apache2_2.4.25.bb} (97%)
 
-diff --git a/meta-python/recipes-devtools/python/python-dominate_2.2.1.bb b/meta-python/recipes-devtools/python/python-dominate_2.2.1.bb
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
+similarity index 91%
+rename from meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
+index b227f19..ca8ebaf 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
+@@ -15,8 +15,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
+ S = "${WORKDIR}/httpd-${PV}"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
+-SRC_URI[md5sum] = "04f19c60e810c028f5240a062668a688"
+-SRC_URI[sha256sum] = "0c1694b2aad7765896faf92843452ee2555b9591ae10d4f19b245f2adfe85e58"
++SRC_URI[md5sum] = "2826f49619112ad5813c0be5afcc7ddb"
++SRC_URI[sha256sum] = "f87ec2df1c9fee3e6bfde3c8b855a3ddb7ca1ab20ca877bd0e2b6bf3f05c80b2"
+ 
+ EXTRA_OECONF = "--with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \
+                 --with-apr-util=${STAGING_BINDIR_CROSS}/apu-1-config \
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch b/meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch
 deleted file mode 100644
-index dc6e41c..0000000
---- a/meta-python/recipes-devtools/python/python-dominate_2.2.1.bb
+index dbcdfc6..0000000
+--- a/meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch
 +++ /dev/null
-@@ -1,15 +0,0 @@
--SUMMARY = "Dominate is a Python library for creating and manipulating HTML documents using an elegant DOM API."
--LICENSE = "LGPLv3"
--LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=a30b9a8d0a5585c482c6c5a6d54aaebc"
+@@ -1,25 +0,0 @@
+-This patch has been copied from https://www.apache.org/security/asf-httpoxy-response.txt
+-as a mitigation of CVE-2016-5387.
 -
--SRC_URI[md5sum] = "cd156b5b290f49f2bb5814ea8acc12a3"
--SRC_URI[sha256sum] = "4aa6a2f458461541f9ceeb58b49da9b42320f80aa2a6f692baea2817431d9953"
+-Upstream-Status: Backport - fixed in 2.4.24
 -
--PYPI_PACKAGE_EXT = "zip"
+-Signed-off-by: Joe Slater<jslater@windriver.com>
 -
--inherit pypi setuptools
 -
--RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-numbers \
--    ${PYTHON_PN}-threading \
--    "
-diff --git a/meta-python/recipes-devtools/python/python-dominate_2.3.1.bb b/meta-python/recipes-devtools/python/python-dominate_2.3.1.bb
-new file mode 100644
-index 0000000..13ebf92
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-dominate_2.3.1.bb
-@@ -0,0 +1,13 @@
-+SUMMARY = "Dominate is a Python library for creating and manipulating HTML documents using an elegant DOM API."
-+LICENSE = "LGPLv3"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
-+
-+SRC_URI[md5sum] = "45bd97e6f7888aac24ae86013c57638e"
-+SRC_URI[sha256sum] = "4b8ce6f33633c9dd9175b228d21c00c801b6bd0327747cd5e17fc2da934c3a69"
-+
-+inherit pypi setuptools
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-numbers \
-+    ${PYTHON_PN}-threading \
-+    "
+---- a/server/util_script.c	(revision 1752426)
+-+++ b/server/util_script.c	(working copy)
+-@@ -186,6 +186,14 @@ AP_DECLARE(void) ap_add_common_vars(request_rec *r
+-         else if (!strcasecmp(hdrs[i].key, "Content-length")) {
+-             apr_table_addn(e, "CONTENT_LENGTH", hdrs[i].val);
+-         }
+-+        /* HTTP_PROXY collides with a popular envvar used to configure
+-+         * proxies, don't let clients set/override it.  But, if you must...
+-+         */
+-+#ifndef SECURITY_HOLE_PASS_PROXY
+-+        else if (!strcasecmp(hdrs[i].key, "Proxy")) {
+-+            ;
+-+        }
+-+#endif
+-         /*
+-          * You really don't want to disable this check, since it leaves you
+-          * wide open to CGIs stealing passwords and people viewing them
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
+similarity index 97%
+rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
+rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
+index b78ff51..3bd8579 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
+@@ -17,15 +17,14 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
+            file://httpd-2.4.3-fix-race-issue-of-dir-install.patch \
+            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
+            file://configure-allow-to-disable-selinux-support.patch \
+-           file://cve-2016-5387.patch \
+            file://init \
+            file://apache2-volatile.conf \
+            file://apache2.service \
+           "
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
+-SRC_URI[md5sum] = "04f19c60e810c028f5240a062668a688"
+-SRC_URI[sha256sum] = "0c1694b2aad7765896faf92843452ee2555b9591ae10d4f19b245f2adfe85e58"
++SRC_URI[md5sum] = "2826f49619112ad5813c0be5afcc7ddb"
++SRC_URI[sha256sum] = "f87ec2df1c9fee3e6bfde3c8b855a3ddb7ca1ab20ca877bd0e2b6bf3f05c80b2"
+ 
+ S = "${WORKDIR}/httpd-${PV}"
+ 
 -- 
 2.7.4
 
