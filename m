@@ -1,24 +1,36 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E38F1607B3
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 15C706E688
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Dec 2016 21:53:49 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uBLLrndg011478
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 21 Dec 2016 13:53:49 -0800 (PST)
-Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 21 Dec 2016 13:53:49 -0800
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>,
-	<paul.eggleton@linux.intel.com>
-Date: Wed, 21 Dec 2016 16:53:40 -0500
-Message-ID: <1482357220-422-1-git-send-email-mark.asselstine@windriver.com>
+	Wed, 21 Dec 2016 22:12:45 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id 3so1360478qtr.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Dec 2016 14:12:47 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=5Bv6KquvBPfJVLm7FNb/eDuldBYDtgJdaNsrIlIPdJE=;
+	b=n2UCkdtGpNMV2H5aOuIjKuMxS4lXtR/NIORamGf++p3ccptrmqhr+4uAPUult721xh
+	N1wG9pmsotiWriG6+xG9ff1Z1vGg/OODDX7MQ+5a9Tlo4gB50Qtsf/CubDKTLLVliHqX
+	CAz4P5y01HC9kuZFFJIoKmpKvRh81g40F+e92JtFIUbsUbUxABB+Sh9+Be7e67NboeFR
+	xMhRmoYnrpPBFPdSzCol2kJ1B9r/0AH06J5cK/bVRfsx9J44j9520eiAhev1HwvRVElc
+	DZ5jcWhKntOchm3u1OCjPdi+VKdJ1ViWa1R6Gohi34J16i6v6+YsoRZwBb3xkqd/GcBt
+	76gA==
+X-Gm-Message-State: AIkVDXLy+ltcU7aTI26GMkMjPHTkBz/E5pTqiODawNHGOTCYOtXMU1+eIEXPPGkmQtDe1A==
+X-Received: by 10.237.33.173 with SMTP id l42mr6778497qtc.271.1482358366848;
+	Wed, 21 Dec 2016 14:12:46 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
+	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
+	h43sm16540520qth.29.2016.12.21.14.12.46
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 21 Dec 2016 14:12:46 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 21 Dec 2016 17:12:17 -0500
+Message-Id: <1482358337-11521-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-Subject: [meta-webserver][PATCH] apache2: the download has been moved to the 'archives'
+Subject: [meta-python][PATCH] python-lxml: update to version 3.7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,45 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Dec 2016 21:53:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 21 Dec 2016 22:12:46 -0000
 
-This release of apache2 is no longer found in the main downloads area
-but has been moved to the 'archives'. We should uprev apache2 but for
-now this will at least get the builds working again.
-
-Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb | 2 +-
- meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb        | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ meta-python/recipes-devtools/python/python-lxml.inc                   | 4 ++--
+ .../python/{python-lxml_3.6.4.bb => python-lxml_3.7.0.bb}             | 0
+ .../python/{python3-lxml_3.6.4.bb => python3-lxml_3.7.0.bb}           | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-lxml_3.6.4.bb => python-lxml_3.7.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-lxml_3.6.4.bb => python3-lxml_3.7.0.bb} (100%)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
-index b227f19..aa26cc7 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
-@@ -8,7 +8,7 @@ LICENSE = "Apache-2.0"
+diff --git a/meta-python/recipes-devtools/python/python-lxml.inc b/meta-python/recipes-devtools/python/python-lxml.inc
+index 7481b98..8319799 100644
+--- a/meta-python/recipes-devtools/python/python-lxml.inc
++++ b/meta-python/recipes-devtools/python/python-lxml.inc
+@@ -18,8 +18,8 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=f9f1dc24f720c143c2240df41fe5073b \
  
- inherit autotools pkgconfig native
+ DEPENDS += "libxml2 libxslt"
  
--SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-+SRC_URI = "http://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
-           "
+-SRC_URI[md5sum] = "6dd7314233029d9dab0156e7b1c7830b"
+-SRC_URI[sha256sum] = "61d5d3e00b5821e6cda099b3b4ccfea4527bf7c595e0fb3a7a760490cedd6172"
++SRC_URI[md5sum] = "b78e6f7e859c2ff57add7f63a5e387b7"
++SRC_URI[sha256sum] = "9c62eb2a1862e1ae285d7e7e3b7dc8772d387b19258086afcec143c6b7b8a5c9"
  
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-index b78ff51..79f6295 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-@@ -6,7 +6,7 @@ DEPENDS = "libtool-native apache2-native openssl expat pcre apr apr-util"
- SECTION = "net"
- LICENSE = "Apache-2.0"
- 
--SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-+SRC_URI = "http://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://server-makefile.patch \
-            file://httpd-2.4.1-corelimit.patch \
-            file://httpd-2.4.4-export.patch \
+ DISTUTILS_BUILD_ARGS += " \
+                      --with-xslt-config='pkg-config libxslt' \
+diff --git a/meta-python/recipes-devtools/python/python-lxml_3.6.4.bb b/meta-python/recipes-devtools/python/python-lxml_3.7.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-lxml_3.6.4.bb
+rename to meta-python/recipes-devtools/python/python-lxml_3.7.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-lxml_3.6.4.bb b/meta-python/recipes-devtools/python/python3-lxml_3.7.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-lxml_3.6.4.bb
+rename to meta-python/recipes-devtools/python/python3-lxml_3.7.0.bb
 -- 
 2.7.4
 
