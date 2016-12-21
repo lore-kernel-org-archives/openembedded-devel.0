@@ -1,44 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 78FCE71BE5
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 2464171BE5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Dec 2016 06:03:11 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id i5so5389756pgh.2
+	Wed, 21 Dec 2016 06:03:12 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id w68so8996409pgw.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Dec 2016 22:03:13 -0800 (PST)
+	Tue, 20 Dec 2016 22:03:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=vNszciFR9p47I+NOKa/adK+Fl/xK/qUmGC8Pf9MMbGY=;
-	b=JYFSHWMQ2mnQtPWvCClaRRyS4TzpgjBWdgg8U0lOCs9AJZkxYCXririFW23FSmboJN
-	idaL157K0qorCfJfsnhGkic8JRh2utbDi7I0VqQ9oXX+2E6laYwOIMZFv0fEyJTmRFn6
-	zp5JbaacQ+Go5O2L71sFyu6KJzE7SeE16N5GhtcOivasOH7ji/ES99MYB2u68hCezODu
-	Ye4BwBM5RJa+lgUssArsbawUmgcSEvSPS6YnlJMqP1az85LiZMljESFMGicVDQBIwKti
-	tV/KXzqsVWZ8Kd/WhirmzXNmJCPr9KlKb8lUc5ZRXbINtylIiZoUuar8Ju9urcdzDgH5
-	eaMQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=da8zYE+YkPXg2XzMSl+DjfePd9YezSwvzETIzAwx7Lw=;
+	b=XbCjcy58Vo8zGSOEy3i+KB+YLxOkv1EoR1fjlcPulOF5VW8brD0gOEbRY1EoaH+oX6
+	u6x3PFAmGJUIKfhCRnfHZFBtKGDQRsDgsQqRKOI/Pjh52OAg0PZW27GiQi0MDs909cZA
+	qdpCgTDhKzoCFLBjAkLS7uqg1CsETwF1MCdeK++nIbXrf34woH5KIfSLw7DuMpZw/dFF
+	vqorBrURKNL23MPYCPU0y4mf9OZNJ8YqSKP8wm8wT9j0rxE06TUY7LPHpyBsLfV85+OI
+	W6nhOBkwRI5M10nY8cIZOXv/szytnokSsJkgPThbUsgpWdL2/S8oP94Jwpk7labNfWKR
+	eEew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=vNszciFR9p47I+NOKa/adK+Fl/xK/qUmGC8Pf9MMbGY=;
-	b=dCuFI1Ay6OfwXphEM7LpGp4KCT0/ZZH6y08Yc6XQ2srm9AmnhVzHR2nlB1TboAoVFs
-	8HfbE7B/CTsgjauMb6v30DstHzt6YWsZ7+OpB14MLdyyMc+Akvr7BSRTyq6ESWdq1heX
-	NMFt4Sxi8DDRtCXBfAKv7svsqIcxeK4cRHNdPYPJfeYlny+rZuO+q1C8Rvm9BGm8ft46
-	vpIQJyXtwfzoZ0YNs2GwQA5fLE7Nj8H4PFKF56ke5nfXzm+Rlz1PeRKbmCqAcw8P+BMU
-	jWv8168YqnYtvyodyekW2BYGC7MG6MbmJ82kh3icfm9glEUntB5DEr2MRyfVwnqg0lNV
-	kSdg==
-X-Gm-Message-State: AIkVDXKfInc8q8XYlAfdxz6UuhhHxQymI9VoKBFuxIa4YrpS/PCdxTWUEAlOhHgGkpUwJg==
-X-Received: by 10.98.68.84 with SMTP id r81mr2620243pfa.174.1482300193537;
-	Tue, 20 Dec 2016 22:03:13 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=da8zYE+YkPXg2XzMSl+DjfePd9YezSwvzETIzAwx7Lw=;
+	b=nblx3GOuDRmdYgwNMMwcPA4JrHH+wL/8ERFUP1xdjwhe0y3d0EIBLw5xy81KJP/wQd
+	t+pDH3CyXZxNK6G0sMhtghj8De7EKRYEAcv1YEiWWDVA7Mi4fPcCTb3OTNVxNS9GkKG4
+	61lVc2Elj+EM5MffqBpz50MMTFwFqelT0GRgKrsrQaBTyeHLH7hHmo7QqK5VjscpQ5f9
+	lVtZgVYGzF3Rp1AMd4b/C6jhwz5vPzg97vyijR1cGc4xx3f2yBCz26A7KJ0ntsFH1i26
+	hW8HITgw7Ax83uUa0HP7ScTtZ/D9duX3cF31ZFkW7eDjOz9/mxHk59J8SRr1DFqYp8gP
+	iYMw==
+X-Gm-Message-State: AIkVDXIEMcK/kYXrdCb86VBzhXq5KoIFCsMn+iTlZkWcFFwT/3exp5dFFZaLXhnCgoZkvg==
+X-Received: by 10.98.220.75 with SMTP id t72mr2665441pfg.164.1482300194243;
+	Tue, 20 Dec 2016 22:03:14 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	s197sm43526435pgc.38.2016.12.20.22.03.12
+	s197sm43526435pgc.38.2016.12.20.22.03.13
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Tue, 20 Dec 2016 22:03:13 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Dec 2016 22:03:04 -0800
-Message-Id: <20161221060306.19798-1-raj.khem@gmail.com>
+Date: Tue, 20 Dec 2016 22:03:05 -0800
+Message-Id: <20161221060306.19798-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.11.0
-Subject: [meta-oe][PATCH V2] hplip: Fix build with clang
+In-Reply-To: <20161221060306.19798-1-raj.khem@gmail.com>
+References: <20161221060306.19798-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH V3] yajl_1.0.12: Add recipe for yajl1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,73 +54,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Dec 2016 06:03:12 -0000
+X-List-Received-Date: Wed, 21 Dec 2016 06:03:13 -0000
+
+yajl1 and yajl2 are not ABI compatible, therefore
+add a recipe for latest release of yajl1
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...de-cups-ppd.h-for-missing-ppd-definitions.patch | 40 ++++++++++++++++++++++
- meta-oe/recipes-extended/hplip/hplip_3.12.6.bb     |  1 +
- 2 files changed, 41 insertions(+)
- create mode 100644 meta-oe/recipes-extended/hplip/hplip-3.12.6/0001-include-cups-ppd.h-for-missing-ppd-definitions.patch
+ .../yajl-1.0.12/0001-bump-version-to-1.0.12.patch  | 25 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb       | 19 ++++++++++++++++
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/yajl/yajl-1.0.12/0001-bump-version-to-1.0.12.patch
+ create mode 100644 meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
 
-diff --git a/meta-oe/recipes-extended/hplip/hplip-3.12.6/0001-include-cups-ppd.h-for-missing-ppd-definitions.patch b/meta-oe/recipes-extended/hplip/hplip-3.12.6/0001-include-cups-ppd.h-for-missing-ppd-definitions.patch
+diff --git a/meta-oe/recipes-devtools/yajl/yajl-1.0.12/0001-bump-version-to-1.0.12.patch b/meta-oe/recipes-devtools/yajl/yajl-1.0.12/0001-bump-version-to-1.0.12.patch
 new file mode 100644
-index 000000000..84a39aeb8
+index 000000000..5e8aef051
 --- /dev/null
-+++ b/meta-oe/recipes-extended/hplip/hplip-3.12.6/0001-include-cups-ppd.h-for-missing-ppd-definitions.patch
-@@ -0,0 +1,40 @@
-+From 7ef9c040dd959105c16d4dc67e14f3bbea25e77f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 16 Dec 2016 19:51:19 +0000
-+Subject: [PATCH] include cups/ppd.h for missing ppd definitions
++++ b/meta-oe/recipes-devtools/yajl/yajl-1.0.12/0001-bump-version-to-1.0.12.patch
+@@ -0,0 +1,25 @@
++From 17b1790fb9c8abbb3c0f7e083864a6a014191d56 Mon Sep 17 00:00:00 2001
++From: Lloyd Hilaiel <lloyd@hilaiel.com>
++Date: Mon, 25 Apr 2011 12:56:24 -0600
++Subject: [PATCH] bump version to 1.0.12
 +
-+Fixes errors spotted by clang
-+
-+| prnt/hpcups/HPCupsFilter.cpp:365:18: error: use of undeclared identifier 'ppdFindAttr'
-+|     if (((attr = ppdFindAttr(m_ppd, "hpPrinterLanguage", NULL)) == NULL) ||
-+|                  ^
-+| prnt/hpcups/HPCupsFilter.cpp:368:13: error: use of undeclared identifier 'ppdClose'
-+|             ppdClose(m_ppd);
-+|             ^
-+| prnt/hpcups/HPCupsFilter.cpp:444:9: error: use of undeclared identifier 'ppdClose'
-+|         ppdClose(m_ppd);
-+|         ^
-+| prnt/hpcups/HPCupsFilter.cpp:497:13: error: use of undeclared identifier 'ppdOpenFile'
-+|     m_ppd = ppdOpenFile(getenv("PPD"));
-+|             ^
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+Upstream-Status: Pending
++ CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+ prnt/hpcups/HPCupsFilter.h | 1 +
-+ 1 file changed, 1 insertion(+)
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 727a488..c703244 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -34,7 +34,7 @@ PROJECT(YetAnotherJSONParser C)
++ 
++ SET (YAJL_MAJOR 1)
++ SET (YAJL_MINOR 0)
++-SET (YAJL_MICRO 11)
+++SET (YAJL_MICRO 12)
++ 
++ SET (YAJL_DIST_NAME "yajl-${YAJL_MAJOR}.${YAJL_MINOR}.${YAJL_MICRO}")
++ 
++-- 
++2.11.0
 +
-+Index: hplip-3.12.6/prnt/hpcups/HPCupsFilter.h
-+===================================================================
-+--- hplip-3.12.6.orig/prnt/hpcups/HPCupsFilter.h
-++++ hplip-3.12.6/prnt/hpcups/HPCupsFilter.h
-+@@ -37,7 +37,7 @@
-+ #include "Job.h"
-+ 
-+ #include "dbuscomm.h"
-+-
-++#include <cups/ppd.h>
-+ #define		DBITMAPFILEHEADER		14
-+ #define		DBITMAPINFOHEADER		40
-+ 
-diff --git a/meta-oe/recipes-extended/hplip/hplip_3.12.6.bb b/meta-oe/recipes-extended/hplip/hplip_3.12.6.bb
-index 9848e5ac1..1f1e80ce8 100644
---- a/meta-oe/recipes-extended/hplip/hplip_3.12.6.bb
-+++ b/meta-oe/recipes-extended/hplip/hplip_3.12.6.bb
-@@ -9,6 +9,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://fix-libusb-paths.patch \
-            file://cups-1.6.patch \
-            file://configure.patch \
-+           file://0001-include-cups-ppd.h-for-missing-ppd-definitions.patch \
- "
- 
- DEPENDS += "cups python libusb"
+diff --git a/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb b/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
+new file mode 100644
+index 000000000..8ced7b84f
+--- /dev/null
++++ b/meta-oe/recipes-devtools/yajl/yajl_1.0.12.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "Yet Another JSON Library."
++
++DESCRIPTION = "YAJL is a small event-driven (SAX-style) JSON parser \
++written in ANSI C, and a small validating JSON generator."
++
++HOMEPAGE = "http://lloyd.github.com/yajl/"
++
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://COPYING;md5=da2e9aa80962d54e7c726f232a2bd1e8"
++
++# Use 1.0.12 tag
++SRCREV = "17b1790fb9c8abbb3c0f7e083864a6a014191d56"
++SRC_URI = "git://github.com/lloyd/yajl;nobranch=1"
++
++inherit cmake lib_package
++
++S = "${WORKDIR}/git"
++
++EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
 -- 
 2.11.0
 
