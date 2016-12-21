@@ -1,49 +1,36 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-oi0-f49.google.com (mail-oi0-f49.google.com
-	[209.85.218.49])
-	by mail.openembedded.org (Postfix) with ESMTP id EB376700F3
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f176.google.com (mail-qk0-f176.google.com
+	[209.85.220.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 70C15773DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Dec 2016 22:27:04 +0000 (UTC)
-Received: by mail-oi0-f49.google.com with SMTP id 3so42004056oih.1
+	Wed, 21 Dec 2016 23:25:07 +0000 (UTC)
+Received: by mail-qk0-f176.google.com with SMTP id t184so97436869qkd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Dec 2016 14:27:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=z0msrt7yJuP3Wz09Bo1Ez3JaEHN0/w/+Oh4Vnd8509E=;
-	b=j7bTDktA1UOLvhfRkNuzghD+P2kM/M0EJ5scV4EozTyYYJ08P9h3y+2mi1maCSz0KZ
-	IlyXWpfNvSJYIhbfWXTkjDKbFdexxa+jWoXBrmd3n4JLfm19iAE6cVzsG6WVf6RMChDm
-	ycDs/qLoobS0CzosNiq62T+PoLkZide3wPOGHthVCtWyUiCXY2cHZQR1r1CuXKMDsOcq
-	3GJdm+Mi67Ri8VpMdftHMJkNWqr6vklECclKMKEJQ6CLSYacsRLiJ+ADMysnQsuRbdlc
-	CbF2DYSJRTm6e8UZgt4anaxw/Ubvgj6dcTIKuEWTF2g4anUKjwj/CHGb0ByIVCOsjuzK
-	JdPQ==
+	Wed, 21 Dec 2016 15:25:08 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to:cc;
-	bh=z0msrt7yJuP3Wz09Bo1Ez3JaEHN0/w/+Oh4Vnd8509E=;
-	b=mVucCQVzvsPV+v7qEo9uOQdXzNZd5vCaTzn8zv9xrueHhmnYjIRuS+95IhYk/FtSrc
-	6sKyqB0McINzb9sonvVIzioRgC5zHw1PW2K8YpVUcepwYGZBcg7fQ1ziLR+30E4c6l/l
-	9hpi4nHZOzygkN3PgmAuKb9wc3zv+JjyOY1nmaWwevbiQF1IFZXAbo3WZ1BJ9DX0g4YH
-	AICTjZJL/W7lg8bHpYWtNlx8ee1uQrnTn9VFekgyNXxSxR3aSUsjOsiwfwAqmSIJeyIl
-	8hrGLBn1F+6IsdFhsTqBnHOS/EIUEPWDmLoriytBFkGQn2aLNWNUOMda6Bf3PGD+/wKM
-	j+UQ==
-X-Gm-Message-State: AIkVDXIqBgfguC0ZEeJvuDsRk04PHzpdBx3WdPPb12ceoUUWFmNjUBqNraXhQ16qVqMSU4qpd8mZx7+GcE+ysw==
-X-Received: by 10.202.228.139 with SMTP id b133mr3688726oih.111.1482359226063; 
-	Wed, 21 Dec 2016 14:27:06 -0800 (PST)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.157.19.10 with HTTP; Wed, 21 Dec 2016 14:26:45 -0800 (PST)
-In-Reply-To: <1482357220-422-1-git-send-email-mark.asselstine@windriver.com>
-References: <1482357220-422-1-git-send-email-mark.asselstine@windriver.com>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Wed, 21 Dec 2016 15:26:45 -0700
-X-Google-Sender-Auth: Nl-5c32uifrdL1x6Rd7hJp6X4lw
-Message-ID: <CABcZANmtther94ZrkEwVn=JYgvLkT2CdTkCLSJPDo7gEHFdaCA@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "paul.eggleton@linux.intel.com" <paul.eggleton@linux.intel.com>
-Subject: Re: [meta-webserver][PATCH] apache2: the download has been moved to the 'archives'
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ykZM2YUxpS64TIZ50QMujFvb97CldpY00SCjiwnrhv4=;
+	b=C0aVtASBLR5HiEhTDGKa8dwpT8Q+Kg0i0Ec3FrAuTHv268l4OCBr4+A3mruDng8kup
+	DClcffcpjbEPAsSgvIynEiFZp3dldHsFaAD1Jyv35gNxjGZdzxNPgbdYDfyLk/OrzL4K
+	B567MK6BkmQ2v67t+DWlbRa5WZsMKcQZqOY6nxYP3ZQh1oikMRNDfO6ZptAyvlLj0akS
+	5vycnOaHDmZFGUUt0Ky1odSmOIJsL4CJlZfIaEDAEXewsmO8ZO+OBHE1OOi0D+aM4Uw3
+	lqZTr3slT2AGYuD91dyc7Em68zFtjCp1/bBOTSB1waOYy1VsMf4XPr6m4Y9QtgFkL0Pw
+	TIAg==
+X-Gm-Message-State: AIkVDXI9dZAAjKxInu2jm2jA+0jRi2qhmO7Yu1+bbwvBJVTKBA7YUh2dLqPdkUroarfVrQ==
+X-Received: by 10.55.46.69 with SMTP id u66mr7219452qkh.88.1482362708418;
+	Wed, 21 Dec 2016 15:25:08 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
+	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
+	g46sm16660557qtb.44.2016.12.21.15.25.07
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 21 Dec 2016 15:25:07 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 21 Dec 2016 18:24:53 -0500
+Message-Id: <1482362693-19714-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-dominate: update to version 2.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,26 +43,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Dec 2016 22:27:06 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 21 Dec 2016 23:25:07 -0000
 
-On Wed, Dec 21, 2016 at 2:53 PM, Mark Asselstine <
-mark.asselstine@windriver.com> wrote:
+  * Updated the license file and validated the license terms still apply
 
-> This release of apache2 is no longer found in the main downloads area
-> but has been moved to the 'archives'. We should uprev apache2 but for
-> now this will at least get the builds working again.
->
-> Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
->
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../recipes-devtools/python/python-dominate_2.2.1.bb      | 15 ---------------
+ .../recipes-devtools/python/python-dominate_2.3.1.bb      | 13 +++++++++++++
+ 2 files changed, 13 insertions(+), 15 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-dominate_2.2.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-dominate_2.3.1.bb
 
-Wouldn=E2=80=99t it make sense to do a recipe-local addition to MIRRORS to
-automatically fall back to the apache archive?
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+diff --git a/meta-python/recipes-devtools/python/python-dominate_2.2.1.bb b/meta-python/recipes-devtools/python/python-dominate_2.2.1.bb
+deleted file mode 100644
+index dc6e41c..0000000
+--- a/meta-python/recipes-devtools/python/python-dominate_2.2.1.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-SUMMARY = "Dominate is a Python library for creating and manipulating HTML documents using an elegant DOM API."
+-LICENSE = "LGPLv3"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=a30b9a8d0a5585c482c6c5a6d54aaebc"
+-
+-SRC_URI[md5sum] = "cd156b5b290f49f2bb5814ea8acc12a3"
+-SRC_URI[sha256sum] = "4aa6a2f458461541f9ceeb58b49da9b42320f80aa2a6f692baea2817431d9953"
+-
+-PYPI_PACKAGE_EXT = "zip"
+-
+-inherit pypi setuptools
+-
+-RDEPENDS_${PN} += "\
+-    ${PYTHON_PN}-numbers \
+-    ${PYTHON_PN}-threading \
+-    "
+diff --git a/meta-python/recipes-devtools/python/python-dominate_2.3.1.bb b/meta-python/recipes-devtools/python/python-dominate_2.3.1.bb
+new file mode 100644
+index 0000000..13ebf92
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-dominate_2.3.1.bb
+@@ -0,0 +1,13 @@
++SUMMARY = "Dominate is a Python library for creating and manipulating HTML documents using an elegant DOM API."
++LICENSE = "LGPLv3"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b52f2d57d10c4f7ee67a7eb9615d5d24"
++
++SRC_URI[md5sum] = "45bd97e6f7888aac24ae86013c57638e"
++SRC_URI[sha256sum] = "4b8ce6f33633c9dd9175b228d21c00c801b6bd0327747cd5e17fc2da934c3a69"
++
++inherit pypi setuptools
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-numbers \
++    ${PYTHON_PN}-threading \
++    "
+-- 
+2.7.4
+
 
