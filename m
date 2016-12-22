@@ -1,54 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B89277685
+Return-Path: <ka6sox@gmail.com>
+Received: from mail-yw0-f178.google.com (mail-yw0-f178.google.com
+	[209.85.161.178])
+	by mail.openembedded.org (Postfix) with ESMTP id B56EF776A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2016 17:17:50 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id i88so12690501pfk.2
+	Thu, 22 Dec 2016 17:19:24 +0000 (UTC)
+Received: by mail-yw0-f178.google.com with SMTP id t125so118279326ywc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2016 09:17:52 -0800 (PST)
+	Thu, 22 Dec 2016 09:19:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:message-id:mime-version:subject:date:in-reply-to:cc:to
-	:references; bh=O+mTTLEvCybl1f96E6E78BrhLme4VHG+UZTvBNI6Qec=;
-	b=aNn6P5IOnfokRP22Qv8Nf0Yd0NXS/k1ID5a6jeEf/CSq3qmi0AHBWK1bDZwQ2wbqvj
-	yOXLpq6Qkk94Wzym3Mg3UCaxcnCFYGj+onkDzUj6MlyQ0tKZ/ifSE+hLSrkysGGAYihk
-	AFEKQGAJbG3bFp6Hgd/tMKuEHDfYOmGHE4ZuUnUTca3eI2P/CNXPWgfwyUsTqcfv1E8z
-	4/oW92t/Gc3xxxnwNj5ytgXR+rSvxzwzLwayQ/4n1o4JWn21djEEVBEK8MwgEA5uAsrP
-	XbD1dmZ2iSQnNI308AOnuA+xbaqLSOHHoNevg3LCamu9Jy0uezxgIe/7eM3rDDPVmtle
-	YZcQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=EG1SB2cfezOAXiYRIdZYjYKETyRKMZuSOchl7LQh6N8=;
+	b=crRcGB9QzkAhoyRgeoyqya71hc04T2UswHw7OjsdHCg/ylvAne0/vtVOEleutUsiXu
+	MFVNTmkIF8srOofsfAw9QJOdDeZTdDcMVki9da3svIt5fVl5oFpZ9M6uT+Oaoj1+xXan
+	MYmungxQd7evV3RYTbLOzOXMv6BLVkXtCXO2FvrXQhK29d2gAM5f3tAJU3tAJib/V46/
+	7ToCovvvg7ztj76rwv4KiJUD8UQUmgfa+scrSQ5qwXWzcEHe7ykmDYT382VVfeJZ8/Th
+	HOVgv2eIBXAgQkMyYERWFRU0jGQ3cXPbJLZQTUA3R2N9o5WtiwNr2ym06mqOYvrp+KqO
+	RReA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:message-id:mime-version:subject:date
-	:in-reply-to:cc:to:references;
-	bh=O+mTTLEvCybl1f96E6E78BrhLme4VHG+UZTvBNI6Qec=;
-	b=jepwguXu2xyeis4oGO0xBdUknK5HcvjiNmqIHNz1m1GfndwneXz8hJPm2rrvb8+K1Z
-	QM83Ewuq8Nh0Uw/gzTLr3STvADUN48IlwDzK2PZTj1h9Ji7GN4e4cyxefoz5JcLCha/f
-	i4vJA2vebGJYlFQn5+mg9Q4Lf7i16CoKztX/HDwrCM8SH/zcz6ZE7PD0oW+zfkkI3fvT
-	C977cF1w8CD6jHGzHOLKhtBPuiWKO8D/FlrXKUY9tJeXTYurV8E0mzMOTzvBVnM+Lhv+
-	63yZawzrXIT51KUvDOZWu31sBUqa2f6Cm24tyN+hN3HzpQ66IYOzmAdoza59Kca1kSai
-	SP2g==
-X-Gm-Message-State: AIkVDXJRdYhgSdPgh10QR+YPRMsQumBhbyzBafdbAA0VEqDLJ3OAEDlqon37i/8sGcQZ+Q==
-X-Received: by 10.84.210.233 with SMTP id a96mr21198049pli.72.1482427072297;
-	Thu, 22 Dec 2016 09:17:52 -0800 (PST)
-Received: from ?IPv6:2601:646:8882:b8c:dc6c:df58:7743:431c?
-	([2601:646:8882:b8c:dc6c:df58:7743:431c])
-	by smtp.gmail.com with ESMTPSA id
-	c142sm56124596pfb.23.2016.12.22.09.17.51
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 22 Dec 2016 09:17:51 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-Message-Id: <B2EC9E23-FB3F-44F0-9711-1589CEF1C21A@gmail.com>
-Mime-Version: 1.0 (Mac OS X Mail 10.2 \(3259\))
-Date: Thu, 22 Dec 2016 09:17:52 -0800
-In-Reply-To: <20161222165029.GE3544@jama>
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <20161213234618.31312-1-ricardo.ribalda@gmail.com>
-	<20161213234618.31312-3-ricardo.ribalda@gmail.com>
-	<20161222165029.GE3544@jama>
-X-Mailer: Apple Mail (2.3259)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=EG1SB2cfezOAXiYRIdZYjYKETyRKMZuSOchl7LQh6N8=;
+	b=O8iMOcEfrLBtWBpDpsF3OquqdBs8pXhda2iAqZUfsC0heM+t0+HCVfm76OKaHGyRAN
+	Vw5kMPvE3qSPE7JJEOClJaA8jCuaLVopwaBdJ9zA1f2euOpOfCBOR/0pQWGmpXy1nigM
+	2IrEOTpGdAZBUYs6FjYfjMEyaxHJ4G2Df4GTCsj0ZvkTRBwuHQQGkrlp8wDCYHUalyex
+	F6cnqALdILB8CgIkxn/oTQcQx4QhEbzVJgPE+D1Fz7T+NolV6OdZ6JxeT2UQFS9rtvf6
+	0vo1cwOddyZJvpS6gjgom5NHaFnUhvcfkebPOwQ+3+FDQyr/zpo5iowjV1yhm38p9oC8
+	WDjg==
+X-Gm-Message-State: AIkVDXJgb3YByaL+kmZ0EyFEF3cw1vLizCK89CGgpcVdKK8FkPMNssF3cYSfVvJuNHYsQ+FQ2Gz+sFFugsDXFA==
+X-Received: by 10.129.169.132 with SMTP id g126mr8472115ywh.92.1482427165749; 
+	Thu, 22 Dec 2016 09:19:25 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.37.170.43 with HTTP; Thu, 22 Dec 2016 09:19:25 -0800 (PST)
+In-Reply-To: <E628426E-84F8-4EA4-A296-D32C3339DF1C@gmail.com>
+References: <CAHQecY48gVbt4S+88MHivSbv-Xdn29WRq5RPL6+QDVGYUPCwYw@mail.gmail.com>
+	<E628426E-84F8-4EA4-A296-D32C3339DF1C@gmail.com>
+From: Tom King <ka6sox@gmail.com>
+Date: Thu, 22 Dec 2016 09:19:25 -0800
+Message-ID: <CAHQecY4oXXwGeLsdXrgjFmouTiwvsJXa6K1Qbp--9WZ0=3O5CQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v2 3/8] opencv: Add missing depends
+Subject: Re: Infra Full Stop 12/26-12/29
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,70 +53,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2016 17:17:51 -0000
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 22 Dec 2016 17:19:25 -0000
+Content-Type: text/plain; charset=UTF-8
 
+Schedule is  06:00UTC 27DEC16 for the full stop.  Things will start coming
+back (estimated) about 48hrs later.
 
-> On Dec 22, 2016, at 8:50 AM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
->=20
-> On Wed, Dec 14, 2016 at 12:46:13AM +0100, Ricardo Ribalda Delgado =
-wrote:
->> contrib/modules/sfm depends on glog, gflags and libeigen. The =
-CmakeList
->> does not seem to provide a way to disable/enable its build.
->=20
-> There is also floating dependency on tesseract as shown in last test
-> dependencies build:
->=20
-> opencv-3.1+gitAUTOINC+92387b1ef8: libopencv-text rdepends on =
-tesseract,
-> but it isn't a build dependency, missing tesseract in DEPENDS or
-> PACKAGECONFIG? [build-deps]
+Tom
 
-There seems to be no knob for tesseract in openCVs build system. but =
-extensions modules needs it may be
-adding a knob for OPENCV_FIND_TESSERACT will solve it. I also notices =
-that SRC_URI should be changed as well
-git://github.com/Itseez/ <git://github.com/Itseez/> has moved to =
-git://github.com/opencv <git://github.com/opencv>
+On Tue, Dec 20, 2016 at 11:16 AM, Khem Raj <raj.khem@gmail.com> wrote:
 
->=20
->>=20
->> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
->> ---
->> meta-oe/recipes-support/opencv/opencv_3.1.bb | 2 +-
->> 1 file changed, 1 insertion(+), 1 deletion(-)
->>=20
->> diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb =
-b/meta-oe/recipes-support/opencv/opencv_3.1.bb
->> index cf41d894cf7f..a5d681e79ca2 100644
->> --- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
->> +++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
->> @@ -53,7 +53,7 @@ PACKAGECONFIG ??=3D "eigen jpeg png tiff v4l libv4l =
-gstreamer samples tbb  gphoto2
->>=20
->> PACKAGECONFIG[amdblas] =3D =
-"-DWITH_OPENCLAMDBLAS=3DON,-DWITH_OPENCLAMDBLAS=3DOFF,libclamdblas,"
->> PACKAGECONFIG[amdfft] =3D =
-"-DWITH_OPENCLAMDFFT=3DON,-DWITH_OPENCLAMDFFT=3DOFF,libclamdfft,"
->> -PACKAGECONFIG[eigen] =3D =
-"-DWITH_EIGEN=3DON,-DWITH_EIGEN=3DOFF,libeigen,"
->> +PACKAGECONFIG[eigen] =3D "-DWITH_EIGEN=3DON,-DWITH_EIGEN=3DOFF,libeige=
-n gflags glog,"
->> PACKAGECONFIG[gphoto2] =3D =
-"-DWITH_GPHOTO2=3DON,-DWITH_GPHOTO2=3DOFF,libgphoto2,"
->> PACKAGECONFIG[gstreamer] =3D =
-"-DWITH_GSTREAMER=3DON,-DWITH_GSTREAMER=3DOFF,gstreamer1.0 =
-gstreamer1.0-plugins-base,"
->> PACKAGECONFIG[gtk] =3D "-DWITH_GTK=3DON,-DWITH_GTK=3DOFF,gtk+3,"
->> --=20
->> 2.10.2
->>=20
->=20
-> --=20
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com =
-<mailto:Martin.Jansa@gmail.com>
+>
+> > On Dec 20, 2016, at 10:50 AM, Tom King <ka6sox@gmail.com> wrote:
+> >
+> > Hi All,
+> >
+> > We have been looking for a time when we could do a full stop of the infra
+> > to upgrade some bits and clear out some faults.
+> >
+> > This will involve shutting down the main machine that we use for *most*
+> of
+> > the OE infra.
+> >
+> > Our goal is to put up a backup git master but other services such as:
+> wiki,
+> > patches, etc will be offline for some or all of that period.
+> >
+> > We have delayed doing this much needed maintenance to try to work around
+> > Yocto and OE release schedules and it is necessary that we take this time
+> > to do the work.
+> >
+>
+> I guess, you need to come up with a tentative down-time schedule.
+>
+> > Tom
+> > (for the OE Infra Team)
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
