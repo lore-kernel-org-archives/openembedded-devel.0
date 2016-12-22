@@ -1,39 +1,36 @@
-Return-Path: <f.suligoi@asem.it>
-Received: from smtp.asem.it (smtp.asem.it [151.22.69.122])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E25A7762B
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f172.google.com (mail-qt0-f172.google.com
+	[209.85.216.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 49CC2774E6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2016 13:18:49 +0000 (UTC)
-Received: from webmail.asem.it by asem.it (smtp.asem.it)
-	(SecurityGateway 4.0.1) with ESMTP id SG002482162.MSG 
+	Thu, 22 Dec 2016 14:24:56 +0000 (UTC)
+Received: by mail-qt0-f172.google.com with SMTP id c47so235870198qtc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2016 14:18:47 +0100S
-Received: from ASAS044.asem.intra (172.16.16.44) by ASAS044.asem.intra
-	(172.16.16.44) with Microsoft SMTP Server (TLS) id 15.1.225.42;
-	Thu, 22 Dec 2016 14:18:48 +0100
-Received: from ASAS044.asem.intra ([::1]) by ASAS044.asem.intra ([::1]) with
-	mapi id 15.01.0225.041; Thu, 22 Dec 2016 14:18:48 +0100
-From: Flavio Suligoi <f.suligoi@asem.it>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [OE][meta-qt5] Runtime error with qt5.7
-Thread-Index: AQHSW31TdqiV16rJ006UbtWQtIMkqaETaYgAgACKCIw=
-Date: Thu, 22 Dec 2016 13:18:48 +0000
-Message-ID: <4a4f95b4feb6470aa17f9fbe6c841038@asem.it>
-References: <32e1bacb35684936a5f570af7030495a@asem.it>,
-	<65F88FD8-A243-4EC7-83FE-B59F8DF721FE@gmail.com>
-In-Reply-To: <65F88FD8-A243-4EC7-83FE-B59F8DF721FE@gmail.com>
-Accept-Language: it-IT, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [172.16.17.75]
-MIME-Version: 1.0
-X-SGHeloLookup-Result: hardfail smtp.helo=webmail.asem.it (does not match
-	172.16.16.44)
-X-SGSPF-Result: none (smtp.asem.it)
-X-SGOP-RefID: str=0001.0A0B0206.585BD2B9.0027, ss=1, re=0.000, recu=0.000,
-	reip=0.000, cl=1, cld=1, fgs=0 (_st=1 _vt=0 _iwf=0)
-Subject: Re: [meta-qt5] Runtime error with qt5.7
+	Thu, 22 Dec 2016 06:24:58 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Nk5YP8hkcEuUpsfnQT9y5UncIANFob3MMPrfqJU1ZBA=;
+	b=aFsMhmdGbhh/XuXDrHKYQzYg00lh9rpYIz8bRBhwZ7wxxWUQ6wOSS7nLT3HIzFNMyR
+	2XmEsqyxvAYYv4CJvwaopDcKVzk7x/q7TQch/oriaLLKBx2o87slYsQh9RNRifD2UsJI
+	/RaykB2Xxy0vISxsLTbCZbdkFi5fpyihU1Wxx21Hx7S5qwL5xD4ZXZs7TxAveZ3kAiQT
+	pv36s0LSpfDsmVbz+d5Rflc+oGsoyogsOSKM4FFBqJxPYESIpfFdcFL/gDhwSIDNqkW+
+	hu9LtDIWdInY06KjWw6kuqYXlwvJEadfJy1tUfMFvkqRMkl1CujaNHETE872lpP6qakM
+	JPHw==
+X-Gm-Message-State: AIkVDXL+x/wR8lHoMmBpg71Akxye21ff7zc/NTuVKMOUd/W8lgpwL/mpaDztgAt0KBBd9g==
+X-Received: by 10.200.57.71 with SMTP id t7mr10911831qtb.59.1482416697570;
+	Thu, 22 Dec 2016 06:24:57 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
+	[69.124.217.3])
+	by smtp.gmail.com with ESMTPSA id 33sm18097778qtq.1.2016.12.22.06.24.56
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 22 Dec 2016 06:24:57 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 22 Dec 2016 09:24:16 -0500
+Message-Id: <1482416656-27059-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-cffi: update to version 1.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,50 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2016 13:18:50 -0000
-Content-Language: it-IT
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 22 Dec 2016 14:24:57 -0000
 
-Hi Raj,
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-cffi.inc               | 8 ++++++--
+ .../python/{python-cffi_1.8.3.bb => python-cffi_1.9.1.bb}         | 0
+ .../python/{python3-cffi_1.8.3.bb => python3-cffi_1.9.1.bb}       | 0
+ 3 files changed, 6 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cffi_1.8.3.bb => python-cffi_1.9.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-cffi_1.8.3.bb => python3-cffi_1.9.1.bb} (100%)
 
-I've already used in my image .bb recipe the parameter:
+diff --git a/meta-python/recipes-devtools/python/python-cffi.inc b/meta-python/recipes-devtools/python/python-cffi.inc
+index d24d6ff..12da19f 100644
+--- a/meta-python/recipes-devtools/python/python-cffi.inc
++++ b/meta-python/recipes-devtools/python/python-cffi.inc
+@@ -3,7 +3,11 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
+ DEPENDS = "libffi ${PYTHON_PN}-pycparser"
+ 
+-SRC_URI[md5sum] = "c8e877fe0426a99d0cf5872cf2f95b27"
+-SRC_URI[sha256sum] = "c321bd46faa7847261b89c0469569530cad5a41976bb6dba8202c0159f476568"
++SRC_URI[md5sum] = "b8fa7ccb87790531db3316ab17aa8244"
++SRC_URI[sha256sum] = "563e0bd53fda03c151573217b3a49b3abad8813de9dd0632e10090f6190fdaf8"
++
++RDEPENDS_${PN}_class-target = " \
++    ${PYTHON_PN}-io \
++"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-cffi_1.8.3.bb b/meta-python/recipes-devtools/python/python-cffi_1.9.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-cffi_1.8.3.bb
+rename to meta-python/recipes-devtools/python/python-cffi_1.9.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cffi_1.8.3.bb b/meta-python/recipes-devtools/python/python3-cffi_1.9.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-cffi_1.8.3.bb
+rename to meta-python/recipes-devtools/python/python3-cffi_1.9.1.bb
+-- 
+2.7.4
 
-DISTRO_FEATURES +=3D "x11 opengl"
-
-to enable the "-opengl desktop" swith in qtbase_git.bb receipe, but It does=
-n't work, I always have this error.
-
-Any other idea or other point where start to investigate?
-Or do you have a image recipe with x11 and the QT5.7 ?
-
-Thanks,
-
-Flavio
-
-________________________________________
-Da: openembedded-devel-bounces@lists.openembedded.org <openembedded-devel-b=
-ounces@lists.openembedded.org> per conto di Khem Raj <raj.khem@gmail.com>
-Inviato: gioved=EC 22 dicembre 2016 07:00
-A: openembedded-devel@lists.openembedded.org
-Oggetto: Re: [oe] [OE][meta-qt5] Runtime error with qt5.7
-
-> On Dec 21, 2016, at 4:50 AM, Flavio Suligoi <f.suligoi@asem.it> wrote:
->
-> QXcbIntegration: Cannot create platform OpenGL context, neither GLX nor E=
-GL are enabled
-> Failed to create OpenGL context for format QSurfaceFormat(version 2.0, op=
-tions QFlags(), depthBufferSize 24, redBufferSize -1, greenBufferSize -1, b=
-lueBufferSize -1, alphaBufferSize -1, stencilBufferSize 8, samples -1, swap=
-Behavior 2, swapInterval 1, profile  0)
-> Aborted
-
-You might want to check if you have enabled egl in PACKAGECONFIG for qtbase=
- may be you need to enable opengl in DISTRO_FEATURES and/or set
-packageconfig for qtbase
---
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
