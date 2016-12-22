@@ -1,36 +1,51 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f173.google.com (mail-qt0-f173.google.com
-	[209.85.216.173])
-	by mail.openembedded.org (Postfix) with ESMTP id D4ED0776A1
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id A13A477684
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2016 15:49:54 +0000 (UTC)
-Received: by mail-qt0-f173.google.com with SMTP id p16so235512886qta.0
+	Thu, 22 Dec 2016 16:50:28 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id g23so37227862wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2016 07:49:56 -0800 (PST)
+	Thu, 22 Dec 2016 08:50:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=IypA3P/8cnZhtmhdwJ5dCz46KvUhqlaGdCRMCeEVlmY=;
+	b=tx2OoXj/mJ8vfDO5w2oDAv4JWphOIOu0T52bhGuDrC9HgeSZ8w7aB1PFhjSMOtaTSU
+	WkPA2DGESfFyQE+434xnfJRGW60pmn1AFeqgfLpL73hc0hG4+2YKQH3h7EAzWOJEXPb4
+	jLrtty/5FW+vkOyCq2sAZsEvmvF1OIa5IbDdnIRJnOgWXZYrjpR9PC4pUXLLD+TxfyS7
+	wHnf+x7QhyDVjZR0KYKnxdnKmL142yMeWZ6G+9ryz+X5jWqx6KzbiRTjFnnF5vpGMxm8
+	zaZ+q2TolcHYbiQ9wJZwiKszOemjoe/QGvCjIpkkkaHKhvrEk9pbw0ELagq+MjwjL2bg
+	nfFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=t92xW5zlWtX5M531bZoLIJ3poIy/s6gf7LK6OFdgBpI=;
-	b=Q83CzHXULs5A9I8l8GYzMrKgnAX7Kf89JHsiTYv6UUx3esBtw9NRHgBn+frSPegSHg
-	7IfQqCyZQyYnWQ0c9JYdcv8BXxiQsidzq01btZZqisFNdbP9qvb/Q9iRVKpZR9MS80vW
-	jK7ciaiHEtHmiij9nNdGc1ZoWhpGzXGjRS02Kd+SBDdARYtgNJ4QPp5jI82bF8nmHpwi
-	akt0jli/MnHMCs7ZCqg1VxF4nWBJiu3iX1X7gHv0SN2BEcmQahKK4oDTi1zC8Sx/p14I
-	PJ+HayhEd3Zz2inXlNu8OT3KMI8+6JU7HdvSAllcWggNwRtETwN1nnUzHgUc/SYQ5f4B
-	x1Mg==
-X-Gm-Message-State: AIkVDXJC6A6AlSbsm4X1lesZ9CKupZpoW0TBDufte1UDO/mK7+hC/++C68gMgcGbOWaDnA==
-X-Received: by 10.237.38.33 with SMTP id z30mr4434405qtc.285.1482421795983;
-	Thu, 22 Dec 2016 07:49:55 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
-	[69.124.217.3])
-	by smtp.gmail.com with ESMTPSA id o44sm2772703qtc.8.2016.12.22.07.49.55
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 22 Dec 2016 07:49:55 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Dec 2016 10:49:47 -0500
-Message-Id: <1482421787-29905-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-flask-login: update to version 0.4.0
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=IypA3P/8cnZhtmhdwJ5dCz46KvUhqlaGdCRMCeEVlmY=;
+	b=e0NitirfKBuGvdzc3qOHfCb3FYOEr+R8uDUUWeCSQG6MGVCrm97UoDMdRBBt+F3LKZ
+	OQs0Wm3XASC0wygfzFRZvaOU+OtfGS7Jl0FqKMuWxzrxncub2kt/HC60aI2p5pbXrya6
+	v5WVl+9guRJ8ydHOsrZE7Oy9sEX7yg5VgG22hpTnsH5LbMf94qrJCE7buH9u72/++Kjm
+	c9WRH+ms+wk39MknHVGY7lR5xgor2JlJVABsicKutZmDwoKlYyZ/huQo5Xe5oeQcrf7e
+	B1migvh2BgdPn67RnAy/aMNyyW/FWGBR/bQDgkwqICqfCcZAy8LTifKJhTODoPTvfIkR
+	hNLQ==
+X-Gm-Message-State: AIkVDXL/3zLXXbKr6FAQmioC35VKjAzYD2z1WW9ry9HVh6mare6IEn+IH4dWQ6EpGTNImw==
+X-Received: by 10.28.153.10 with SMTP id b10mr11962696wme.103.1482425429939;
+	Thu, 22 Dec 2016 08:50:29 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	i15sm36373185wjs.16.2016.12.22.08.50.29
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 22 Dec 2016 08:50:29 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 22 Dec 2016 17:50:29 +0100
+To: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Message-ID: <20161222165029.GE3544@jama>
+References: <20161213234618.31312-1-ricardo.ribalda@gmail.com>
+	<20161213234618.31312-3-ricardo.ribalda@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <20161213234618.31312-3-ricardo.ribalda@gmail.com>
+User-Agent: Mutt/1.7.2 (2016-11-26)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v2 3/8] opencv: Add missing depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,43 +58,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2016 15:49:55 -0000
+X-List-Received-Date: Thu, 22 Dec 2016 16:50:30 -0000
+X-Groupsio-MsgNum: 64484
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="LSp5EJdfMPwZcMS1"
+Content-Disposition: inline
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-flask-login.inc          | 6 +++---
- .../{python-flask-login_0.3.2.bb => python-flask-login_0.4.0.bb}    | 0
- .../{python3-flask-login_0.3.2.bb => python3-flask-login_0.4.0.bb}  | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-flask-login_0.3.2.bb => python-flask-login_0.4.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-flask-login_0.3.2.bb => python3-flask-login_0.4.0.bb} (100%)
+--LSp5EJdfMPwZcMS1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-python/recipes-devtools/python/python-flask-login.inc b/meta-python/recipes-devtools/python/python-flask-login.inc
-index 6d4db48..7dddba0 100644
---- a/meta-python/recipes-devtools/python/python-flask-login.inc
-+++ b/meta-python/recipes-devtools/python/python-flask-login.inc
-@@ -6,9 +6,9 @@ HOMEPAGE = " https://github.com/maxcountryman/flask-login"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8aa87a1cd9fa41d969ad32cfdac2c596"
- 
--SRC_URI[md5sum] = "d95c2275d3e1c755145910077366dc45"
--SRC_URI[sha256sum] = "e72eff5c35e5a31db1aeca1db5d2501be702674ea88e8f223b5d2b11644beee6"
-+SRC_URI[md5sum] = "e050efaa2c4dbc2d97f480a70f4d44aa"
-+SRC_URI[sha256sum] = "d25e356b14a59f52da0ab30c31c2ad285fa23a840f0f6971df7ed247c77082a7"
- 
- PYPI_PACKAGE = "Flask-Login"
- 
--RDEPENDS_${PN} = "${PYTHON_PN}-flask"
-+RDEPENDS_${PN}_class-target = "${PYTHON_PN}-flask"
-diff --git a/meta-python/recipes-devtools/python/python-flask-login_0.3.2.bb b/meta-python/recipes-devtools/python/python-flask-login_0.4.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-flask-login_0.3.2.bb
-rename to meta-python/recipes-devtools/python/python-flask-login_0.4.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-flask-login_0.3.2.bb b/meta-python/recipes-devtools/python/python3-flask-login_0.4.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-flask-login_0.3.2.bb
-rename to meta-python/recipes-devtools/python/python3-flask-login_0.4.0.bb
--- 
-2.7.4
+On Wed, Dec 14, 2016 at 12:46:13AM +0100, Ricardo Ribalda Delgado wrote:
+> contrib/modules/sfm depends on glog, gflags and libeigen. The CmakeList
+> does not seem to provide a way to disable/enable its build.
 
+There is also floating dependency on tesseract as shown in last test
+dependencies build:
 
+opencv-3.1+gitAUTOINC+92387b1ef8: libopencv-text rdepends on tesseract,
+but it isn't a build dependency, missing tesseract in DEPENDS or
+PACKAGECONFIG? [build-deps]
+
+>=20
+> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+> ---
+>  meta-oe/recipes-support/opencv/opencv_3.1.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/meta-oe/recipes-support/opencv/opencv_3.1.bb b/meta-oe/recip=
+es-support/opencv/opencv_3.1.bb
+> index cf41d894cf7f..a5d681e79ca2 100644
+> --- a/meta-oe/recipes-support/opencv/opencv_3.1.bb
+> +++ b/meta-oe/recipes-support/opencv/opencv_3.1.bb
+> @@ -53,7 +53,7 @@ PACKAGECONFIG ??=3D "eigen jpeg png tiff v4l libv4l gst=
+reamer samples tbb  gphoto2
+> =20
+>  PACKAGECONFIG[amdblas] =3D "-DWITH_OPENCLAMDBLAS=3DON,-DWITH_OPENCLAMDBL=
+AS=3DOFF,libclamdblas,"
+>  PACKAGECONFIG[amdfft] =3D "-DWITH_OPENCLAMDFFT=3DON,-DWITH_OPENCLAMDFFT=
+=3DOFF,libclamdfft,"
+> -PACKAGECONFIG[eigen] =3D "-DWITH_EIGEN=3DON,-DWITH_EIGEN=3DOFF,libeigen,"
+> +PACKAGECONFIG[eigen] =3D "-DWITH_EIGEN=3DON,-DWITH_EIGEN=3DOFF,libeigen =
+gflags glog,"
+>  PACKAGECONFIG[gphoto2] =3D "-DWITH_GPHOTO2=3DON,-DWITH_GPHOTO2=3DOFF,lib=
+gphoto2,"
+>  PACKAGECONFIG[gstreamer] =3D "-DWITH_GSTREAMER=3DON,-DWITH_GSTREAMER=3DO=
+FF,gstreamer1.0 gstreamer1.0-plugins-base,"
+>  PACKAGECONFIG[gtk] =3D "-DWITH_GTK=3DON,-DWITH_GTK=3DOFF,gtk+3,"
+> --=20
+> 2.10.2
+>=20
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--LSp5EJdfMPwZcMS1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWFwEVAAKCRA3VSO3ZXaA
+HGtUAJsHPmNamCRiyIGm1/La6nYiKmZTPQCdFGuF4II0K4kh4efQLn72HGTZ2bA=
+=WJNq
+-----END PGP SIGNATURE-----
+
+--LSp5EJdfMPwZcMS1--
