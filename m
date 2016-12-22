@@ -1,32 +1,49 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A6AE77666
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 33097775EF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2016 22:14:52 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 0910420A48;
-	Thu, 22 Dec 2016 22:14:54 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id 4s-f1GVIqmCW; Thu, 22 Dec 2016 22:14:53 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
-	[100.15.95.79])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id C777C207BD;
-	Thu, 22 Dec 2016 22:14:50 +0000 (UTC)
-Received: from sam.denix (sam [192.168.0.5])
-	by mail.denix.org (Postfix) with ESMTP id 05F901621ED;
-	Thu, 22 Dec 2016 17:14:50 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 22 Dec 2016 22:33:57 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id c85so419445wmi.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Dec 2016 14:33:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=GeqkPAioM7VgVblalXaHV9uWLY2lEYJv5DkP4HTuIsM=;
+	b=Q0F0wPtFA01p9044x8m2asleS41b49kZy9AUHqVFbSgo+ywx5e1oCtDn4xqoQNNIs1
+	GOnUjrE34oGX8IGB6fpYMyniWLVarRytIaH0GwiCVgOQ4kFII4G6dDCXUhUFgVUAOUxL
+	eWwRpHGNQgwy7eDIMvjXEB+4zYOxUt6P7ddRq54SIUIOczQsm/UmtrvwNkf5TVy7KhHH
+	eE/GadpEBV8qjrl8dZbWsvPwR0I3aO6ztsj332EyAchoZeF+0ytk+s3Mlfyii7UGhDTa
+	CkJqXtbaxMdyL/3UcGGyWa9/vslHaXQyX56s4NZrzz/NFThOwGdue3gzRsy0f3SvPoWV
+	XKIg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=GeqkPAioM7VgVblalXaHV9uWLY2lEYJv5DkP4HTuIsM=;
+	b=EU2ctN0+xVnds5eJBAfaGY3XtBk0wHvldUmKBkurgS1kfyiAXAhi/F5/ARabTLT8tA
+	DEFMDNLHHC74h+qdrjrDy5AfpCVeEz0YOp8jWaDlTycNg7q8bni0m5lPlS+Y1urzP5dH
+	Np/cdprCJc/ERNQY62z/hmjOsPJFepL5GhpKxHmynCaeDZdl9OPIb+MTDznld/te1uyK
+	QfAMNdBgfYOLMWMgLY/dgGf3M8p4OqWIV+D3uvq1pH9r+MrW8F0iJI12ZYkMYw6DOPdm
+	JS5tDjLh91QJRtJhE++5rDKK71e5O8gtQhfxADrBYRtMLkuvMJSRCp1gcKvGH6QMqwZ1
+	v8DA==
+X-Gm-Message-State: AIkVDXK7qvUvnc1bwK4hmS8lCIlROm1tQZbkh0u52FLTGMgALVAGduXN1y5nLWSoRZfj4Q==
+X-Received: by 10.28.159.143 with SMTP id i137mr2836309wme.75.1482446038660;
+	Thu, 22 Dec 2016 14:33:58 -0800 (PST)
+Received: from localhost.localdomain (p579F7B0D.dip0.t-ipconnect.de.
+	[87.159.123.13]) by smtp.googlemail.com with ESMTPSA id
+	m145sm34179574wma.3.2016.12.22.14.33.57
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 22 Dec 2016 14:33:58 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Dec 2016 17:14:49 -0500
-Message-Id: <1482444889-16856-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
+Date: Thu, 22 Dec 2016 23:33:32 +0100
+Message-Id: <1482446018-17187-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.5
 MIME-Version: 1.0
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [meta-qt5][morty][PATCH] qtwayland: Fix building of QWaylandIntegration if some Qt5 features are disabled.
+Subject: [PATCH 1/7] poppler: update to 0.50.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,215 +56,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2016 22:14:53 -0000
+X-List-Received-Date: Thu, 22 Dec 2016 22:33:58 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Vesa Jääskeläinen <dachaac@gmail.com>
-
-QPlatformIntegration's interface methods are disabled based on QT_NO_OPENGL,
-QT_NO_CLIPBOARD, QT_NO_DRAGANDDROP, QT_NO_ACCESSIBILITY and
-QT_NO_SESSIONMANAGER, these has to be taken into account when compiling
-QtWayland.
-
-Signed-off-by: Vesa Jääskeläinen <dachaac@gmail.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- recipes-qt/qt5/qtwayland-native_git.bb             |   1 +
- ...g-of-QWaylandIntegration-if-some-Qt5-feat.patch | 156 +++++++++++++++++++++
- recipes-qt/qt5/qtwayland_git.bb                    |   1 +
- 3 files changed, 158 insertions(+)
- create mode 100644 recipes-qt/qt5/qtwayland/0001-Fix-building-of-QWaylandIntegration-if-some-Qt5-feat.patch
+ .../poppler/{poppler_0.49.0.bb => poppler_0.50.0.bb}                | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/poppler/{poppler_0.49.0.bb => poppler_0.50.0.bb} (91%)
 
-diff --git a/recipes-qt/qt5/qtwayland-native_git.bb b/recipes-qt/qt5/qtwayland-native_git.bb
-index a214346..1149aa5 100644
---- a/recipes-qt/qt5/qtwayland-native_git.bb
-+++ b/recipes-qt/qt5/qtwayland-native_git.bb
-@@ -18,6 +18,7 @@ DEPENDS = "qtbase-native wayland-native"
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.49.0.bb b/meta-oe/recipes-support/poppler/poppler_0.50.0.bb
+similarity index 91%
+rename from meta-oe/recipes-support/poppler/poppler_0.49.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_0.50.0.bb
+index ebb16d6..ec88e8d 100644
+--- a/meta-oe/recipes-support/poppler/poppler_0.49.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_0.50.0.bb
+@@ -7,8 +7,8 @@ SRC_URI = " \
+     file://0001-add-manadatory-options-to-find-qt4-qt5-moc.patch \
+     file://0002-fix-gcc-6-math-ambiguous-errors.patch \
+ "
+-SRC_URI[md5sum] = "9e057ed8eee1f9979fa75d8f044783b8"
+-SRC_URI[sha256sum] = "14485f0e1e43dcddf49cfc02c2ccb92910ba3e0e91e06f4bd2642ec00cb3a79f"
++SRC_URI[md5sum] = "1a4c0cd873bddd8f266b85ab8d799962"
++SRC_URI[sha256sum] = "c9c93318b789d3933f6e0bad3bc65110280c28eac3f0666284bb9c9a0ab4bc36"
  
- SRC_URI += " \
-     file://0001-Install-the-qtwaylandscanner-tool-to-the-native-side.patch \
-+    file://0001-Fix-building-of-QWaylandIntegration-if-some-Qt5-feat.patch \
+ DEPENDS = "fontconfig zlib cairo lcms"
+ 
+@@ -34,7 +34,7 @@ EXTRA_OECONF = "\
  "
  
- do_configure() {
-diff --git a/recipes-qt/qt5/qtwayland/0001-Fix-building-of-QWaylandIntegration-if-some-Qt5-feat.patch b/recipes-qt/qt5/qtwayland/0001-Fix-building-of-QWaylandIntegration-if-some-Qt5-feat.patch
-new file mode 100644
-index 0000000..d173e67
---- /dev/null
-+++ b/recipes-qt/qt5/qtwayland/0001-Fix-building-of-QWaylandIntegration-if-some-Qt5-feat.patch
-@@ -0,0 +1,156 @@
-+From de85e1c1ee76be845a21b441d9e4ea12a30d84c7 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Vesa=20J=C3=A4=C3=A4skel=C3=A4inen?= <dachaac@gmail.com>
-+Date: Sun, 18 Sep 2016 11:51:59 +0300
-+Subject: [PATCH] Fix building of QWaylandIntegration if some Qt5 features are
-+ disabled.
-+
-+QPlatformIntegration's interface methods are disabled based on QT_NO_OPENGL,
-+QT_NO_CLIPBOARD, QT_NO_DRAGANDDROP, QT_NO_ACCESSIBILITY and
-+QT_NO_SESSIONMANAGER, these has to be taken into account when compiling
-+QtWayland.
-+---
-+ src/client/qwaylandintegration.cpp | 21 ++++++++++++++++++---
-+ src/client/qwaylandintegration_p.h | 12 ++++++++++++
-+ 2 files changed, 30 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/client/qwaylandintegration.cpp b/src/client/qwaylandintegration.cpp
-+index 39fff53..481e3d6 100644
-+--- a/src/client/qwaylandintegration.cpp
-++++ b/src/client/qwaylandintegration.cpp
-+@@ -39,7 +39,9 @@
-+ #include "qwaylandinputcontext_p.h"
-+ #include "qwaylandshmbackingstore_p.h"
-+ #include "qwaylandnativeinterface_p.h"
-++#ifndef QT_NO_CLIPBOARD
-+ #include "qwaylandclipboard_p.h"
-++#endif
-+ #include "qwaylanddnd_p.h"
-+ #include "qwaylandwindowmanagerintegration_p.h"
-+ #include "qwaylandscreen_p.h"
-+@@ -57,7 +59,9 @@
-+ #include <QSocketNotifier>
-+ 
-+ #include <qpa/qplatforminputcontextfactory_p.h>
-++#ifndef QT_NO_ACCESSIBILITY
-+ #include <qpa/qplatformaccessibility.h>
-++#endif
-+ #include <qpa/qplatforminputcontext.h>
-+ 
-+ #include "qwaylandhardwareintegration_p.h"
-+@@ -117,8 +121,6 @@ QWaylandIntegration::QWaylandIntegration()
-+     , mNativeInterface(new QWaylandNativeInterface(this))
-+ #ifndef QT_NO_ACCESSIBILITY
-+     , mAccessibility(new QPlatformAccessibility())
-+-#else
-+-    , mAccessibility(0)
-+ #endif
-+     , mClientBufferIntegrationInitialized(false)
-+     , mServerBufferIntegrationInitialized(false)
-+@@ -126,9 +128,12 @@ QWaylandIntegration::QWaylandIntegration()
-+ {
-+     initializeInputDeviceIntegration();
-+     mDisplay = new QWaylandDisplay(this);
-++#ifndef QT_NO_CLIPBOARD
-+     mClipboard = new QWaylandClipboard(mDisplay);
-++#endif
-++#ifndef QT_NO_DRAGANDDROP
-+     mDrag = new QWaylandDrag(mDisplay);
-+-
-++#endif
-+     QString icStr = QPlatformInputContextFactory::requested();
-+     icStr.isNull() ? mInputContext.reset(new QWaylandInputContext(mDisplay))
-+                    : mInputContext.reset(QPlatformInputContextFactory::create(icStr));
-+@@ -136,8 +141,12 @@ QWaylandIntegration::QWaylandIntegration()
-+ 
-+ QWaylandIntegration::~QWaylandIntegration()
-+ {
-++#ifndef QT_NO_DRAGANDDROP
-+     delete mDrag;
-++#endif
-++#ifndef QT_NO_CLIPBOARD
-+     delete mClipboard;
-++#endif
-+ #ifndef QT_NO_ACCESSIBILITY
-+     delete mAccessibility;
-+ #endif
-+@@ -213,15 +222,19 @@ QPlatformFontDatabase *QWaylandIntegration::fontDatabase() const
-+     return mFontDb;
-+ }
-+ 
-++#ifndef QT_NO_CLIPBOARD
-+ QPlatformClipboard *QWaylandIntegration::clipboard() const
-+ {
-+     return mClipboard;
-+ }
-++#endif
-+ 
-++#ifndef QT_NO_DRAGANDDROP
-+ QPlatformDrag *QWaylandIntegration::drag() const
-+ {
-+     return mDrag;
-+ }
-++#endif
-+ 
-+ QPlatformInputContext *QWaylandIntegration::inputContext() const
-+ {
-+@@ -243,10 +256,12 @@ QVariant QWaylandIntegration::styleHint(StyleHint hint) const
-+     return QPlatformIntegration::styleHint(hint);
-+ }
-+ 
-++#ifndef QT_NO_ACCESSIBILITY
-+ QPlatformAccessibility *QWaylandIntegration::accessibility() const
-+ {
-+     return mAccessibility;
-+ }
-++#endif
-+ 
-+ QPlatformServices *QWaylandIntegration::services() const
-+ {
-+diff --git a/src/client/qwaylandintegration_p.h b/src/client/qwaylandintegration_p.h
-+index 987d805..b50ad95 100644
-+--- a/src/client/qwaylandintegration_p.h
-++++ b/src/client/qwaylandintegration_p.h
-+@@ -80,15 +80,21 @@ public:
-+ 
-+     QPlatformNativeInterface *nativeInterface() const Q_DECL_OVERRIDE;
-+ 
-++#ifndef QT_NO_CLIPBOARD
-+     QPlatformClipboard *clipboard() const Q_DECL_OVERRIDE;
-++#endif
-+ 
-++#ifndef QT_NO_DRAGANDDROP
-+     QPlatformDrag *drag() const Q_DECL_OVERRIDE;
-++#endif
-+ 
-+     QPlatformInputContext *inputContext() const Q_DECL_OVERRIDE;
-+ 
-+     QVariant styleHint(StyleHint hint) const Q_DECL_OVERRIDE;
-+ 
-++#ifndef QT_NO_ACCESSIBILITY
-+     QPlatformAccessibility *accessibility() const Q_DECL_OVERRIDE;
-++#endif
-+ 
-+     QPlatformServices *services() const Q_DECL_OVERRIDE;
-+ 
-+@@ -117,12 +123,18 @@ private:
-+     void initializeInputDeviceIntegration();
-+ 
-+     QPlatformFontDatabase *mFontDb;
-++#ifndef QT_NO_CLIPBOARD
-+     QPlatformClipboard *mClipboard;
-++#endif
-++#ifndef QT_NO_DRAGANDDROP
-+     QPlatformDrag *mDrag;
-++#endif
-+     QWaylandDisplay *mDisplay;
-+     QPlatformNativeInterface *mNativeInterface;
-+     QScopedPointer<QPlatformInputContext> mInputContext;
-++#ifndef QT_NO_ACCESSIBILITY
-+     QPlatformAccessibility *mAccessibility;
-++#endif
-+     bool mClientBufferIntegrationInitialized;
-+     bool mServerBufferIntegrationInitialized;
-+     bool mShellIntegrationInitialized;
-+-- 
-+2.7.4
-+
-diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
-index b208961..e315924 100644
---- a/recipes-qt/qt5/qtwayland_git.bb
-+++ b/recipes-qt/qt5/qtwayland_git.bb
-@@ -46,6 +46,7 @@ FILES_${PN}-plugins-dbg += " \
+ do_compile_prepend() {
+-        export GIR_EXTRA_LIBS_PATH="${B}/poppler/.libs"
++    export GIR_EXTRA_LIBS_PATH="${B}/poppler/.libs"
+ }
  
- SRC_URI += " \
-     file://0001-examples-wayland-include-server-buffer-only-when-bui.patch \
-+    file://0001-Fix-building-of-QWaylandIntegration-if-some-Qt5-feat.patch \
- "
- 
- SRCREV = "a172672484b9496819e588b51ac2ff9fb4a21941"
+ # Adjust library names when building for QT4e
 -- 
-2.7.4
+2.5.5
 
 
