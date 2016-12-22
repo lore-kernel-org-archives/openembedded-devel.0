@@ -1,36 +1,51 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f175.google.com (mail-qk0-f175.google.com
-	[209.85.220.175])
-	by mail.openembedded.org (Postfix) with ESMTP id BA9AA774E3
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id A58E6774E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2016 02:45:09 +0000 (UTC)
-Received: by mail-qk0-f175.google.com with SMTP id t184so100939542qkd.0
+	Thu, 22 Dec 2016 05:53:31 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id b1so18847368pgc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Dec 2016 18:45:11 -0800 (PST)
+	Wed, 21 Dec 2016 21:53:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:content-transfer-encoding:mime-version:subject:date:references
+	:to:in-reply-to:message-id;
+	bh=QUuPC3Sv1Wh3KKKiDoPeh6/54Rj+Ia2dszxEkPSzAvM=;
+	b=hoNpIUfdhMWcJr9bfk9f4ImLFUtu4PWw1FF0Uy93n4XXEAkTG3X50XpTgznN0gv1aN
+	3HMODLX7MXabbOLIazzvxdOXqALyd9ui+/9XgGVSb2hh/lfyClLSE4UXBJU8ju4vKpgO
+	ozvKqp8Fx/fw6NKxr8555V0mZiPFXpT+SoIDkY1uf5vDQlkH7tKh+iCL4DqxrMGUTPo2
+	vCjRL0eocmvViMBH6D/RGVj7AZivVCF0IrSg5cUZYaAkPFFHUGFHfkDybf8n9PZnAFaD
+	hz4PT48LO6C8UxtiOmjELoa0SHa3okY9ebZsWDnSg/6aworlYDlgV7tbvSCsSKD7pWQX
+	+HNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=oy5pr1aCzXx/lbNAG4vxaBsDWICVLC/IGlFGv2CZ494=;
-	b=UvIwJcloXlUQMQzwqG9YZg3FXRSgAY4rjlf0kXm6QvzM5NOWyDO0Yt0jo8VdpevuUj
-	bleqYACBN4zZIozv6SzaxTlSo71QUP5voFInzTNZK4J46kuyfgzkPggFsz0nYIHVVijA
-	Vn04LZqi8o7k9qtUUobyNkprT5meWf2bxXgZM+XpJ3YCuiEhxdh9mc157/Hy/VW0ryMk
-	Bbu/4se9SxsAcrI9SuDCBMDieRBfD0VSsFTLXSafGVu5o7UzptxYWzPbZ0uXaPSaYKI4
-	xJcX/mo3zrK4EEniXLpc1M+ZY5gYTl/WOGtZTeufeaHMR+Tr1/pJsN/jHW47Dvy4Axnw
-	8hFA==
-X-Gm-Message-State: AIkVDXLbZTKHCa+jv4b9mFcPFrOXTgdd9E/4S7y5ws0wOS4tr3G19ShnE4l6OHrP25u4MA==
-X-Received: by 10.55.144.6 with SMTP id s6mr8157704qkd.266.1482374710842;
-	Wed, 21 Dec 2016 18:45:10 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
-	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
-	g13sm17024947qtg.15.2016.12.21.18.45.10
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 21 Dec 2016 18:45:10 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Dec 2016 21:44:58 -0500
-Message-Id: <1482374698-3996-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-astroid: update to version 1.4.9
+	h=x-gm-message-state:from:content-transfer-encoding:mime-version
+	:subject:date:references:to:in-reply-to:message-id;
+	bh=QUuPC3Sv1Wh3KKKiDoPeh6/54Rj+Ia2dszxEkPSzAvM=;
+	b=QzWsqt0SHWqAAnFkpFJKRvxk8RYwN4eb5RoJAxpAj02Kj8xybpfQRK6Cmj8tkYzVCi
+	3QoZ1wpOED7JfsvxPyFfTh+Uud56c5BGTVW7UZgmmQWD/pHP7JkJ6N/5v0UPNiUVtgSh
+	GbDVVgIhD7a8axmgCP+m0KBSkkIAGjTIqGkdEV0E4AKqYRtxSesltABSGjpWhTgX751X
+	fEX+n8+eHU13oh148lKFfhHQs1QuAiIncpNHwBUn6zouaDJTyClLhCa2uZJ9b4O1jG9u
+	3lEYr8rdrMPYlVfyBMy6cvqDd0ewazLpkWkX9MkLG0wXylCsk9sUVCeJ2mou9q1VmybL
+	wsWw==
+X-Gm-Message-State: AIkVDXJieCs0Ao4+uoMeMcjYYc5nZ5/+q3CWy9Du9EZI7LzayG1D756MfDBWAYEbPB6Xug==
+X-Received: by 10.99.164.9 with SMTP id c9mr14173605pgf.141.1482386012308;
+	Wed, 21 Dec 2016 21:53:32 -0800 (PST)
+Received: from ?IPv6:2601:646:8882:b8c:5557:8c89:3c84:75f1?
+	([2601:646:8882:b8c:5557:8c89:3c84:75f1])
+	by smtp.gmail.com with ESMTPSA id
+	s2sm50953527pfi.10.2016.12.21.21.53.31
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 21 Dec 2016 21:53:31 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+Mime-Version: 1.0 (Mac OS X Mail 10.2 \(3259\))
+Date: Wed, 21 Dec 2016 21:53:30 -0800
+References: <1482309754-1281-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <1482309754-1281-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+Message-Id: <FB7117A4-E946-4B3B-B6ED-0657F79BF136@gmail.com>
+X-Mailer: Apple Mail (2.3259)
+Subject: Re: [meta-networking] [PATCH] opensaf: 5.0.0 -> 5.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,56 +58,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2016 02:45:10 -0000
+X-List-Received-Date: Thu, 22 Dec 2016 05:53:31 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../recipes-devtools/python/python-astroid_1.4.8.bb     | 10 ----------
- .../recipes-devtools/python/python-astroid_1.4.9.bb     | 17 +++++++++++++++++
- 2 files changed, 17 insertions(+), 10 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-astroid_1.4.8.bb
- create mode 100644 meta-python/recipes-devtools/python/python-astroid_1.4.9.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-astroid_1.4.8.bb b/meta-python/recipes-devtools/python/python-astroid_1.4.8.bb
-deleted file mode 100644
-index 63401aa..0000000
---- a/meta-python/recipes-devtools/python/python-astroid_1.4.8.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--SUMMARY = "An abstract syntax tree for Python with inference support."
--HOMEPAGE = "https://pypi.python.org/pypi/astroid/1.4.8"
--SECTION = "devel/python"
--LICENSE = "LGPL"
--LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
--
--SRC_URI[md5sum] = "3def6c80afcd38b4ca4aca6aea71cbde"
--SRC_URI[sha256sum] = "5f064785a7e45ed519285f2eb30b795e58a4932a0736b32030da6fef3394ddb3" 
--
--inherit setuptools pypi
-diff --git a/meta-python/recipes-devtools/python/python-astroid_1.4.9.bb b/meta-python/recipes-devtools/python/python-astroid_1.4.9.bb
-new file mode 100644
-index 0000000..cee1291
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-astroid_1.4.9.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "An abstract syntax tree for Python with inference support."
-+HOMEPAGE = "https://pypi.python.org/pypi/astroid"
-+SECTION = "devel/python"
-+LICENSE = "LGPL"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+
-+SRC_URI[md5sum] = "a57438971de05eb801b82eae59c05217"
-+SRC_URI[sha256sum] = "a483e7891ce3a06dadfc6cb9095b0938aca58940d43576d72e4502b480c085d7"
-+
-+inherit setuptools pypi
-+
-+RDEPENDS_${PN}_class-target += "\
-+    ${PYTHON_PN}-distutils \
-+    ${PYTHON_PN}-lazy-object-proxy \
-+    ${PYTHON_PN}-six \
-+    ${PYTHON_PN}-wrapt \
-+"
--- 
-2.7.4
+> On Dec 21, 2016, at 12:42 AM, Huang Qiyu <huangqy.fnst@cn.fujitsu.com> =
+wrote:
+>=20
+> 1)Upgrade opensaf from 5.0.0 to 5.1.0.
+> 2)Modify meta_oe_security_flags.inc to fix error:
+>  /
+>  | collect2: error: ld returned 1 exit status
+>  | Makefile:542: recipe for target 'librda.la' failed
+>  | make[6]: *** [librda.la] Error 1
+>  \
+>=20
+> Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+> ---
+> .../recipes-daemons/opensaf/{opensaf_5.0.0.bb =3D> opensaf_5.1.0.bb}   =
+ | 4 ++--
+> meta-oe/conf/distro/include/meta_oe_security_flags.inc                =
+| 1 +
+> 2 files changed, 3 insertions(+), 2 deletions(-)
+> rename meta-networking/recipes-daemons/opensaf/{opensaf_5.0.0.bb =3D> =
+opensaf_5.1.0.bb} (94%)
+>=20
+> diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb =
+b/meta-networking/recipes-daemons/opensaf/opensaf_5.1.0.bb
+> similarity index 94%
+> rename from meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb
+> rename to meta-networking/recipes-daemons/opensaf/opensaf_5.1.0.bb
+> index 6ceb225..be903a0 100644
+> --- a/meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb
+> +++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.1.0.bb
+> @@ -21,8 +21,8 @@ SRC_URI =3D =
+"${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
+>            file://0001-plmcd-error-fix.patch \
+>            "
+>=20
+> -SRC_URI[md5sum] =3D "94cd1a4c0406e6a45bb04c003f8690e7"
+> -SRC_URI[sha256sum] =3D =
+"4b4188a0f3d0ed1ed0e3d77de27c45e2c96b437401de08e7df2ed9ecd54bb999"
+> +SRC_URI[md5sum] =3D "821391311c73bc2f2dc5a7d867f732e0"
+> +SRC_URI[sha256sum] =3D =
+"f687c883a0d50517c33cb445d9177a9e2b07f5bb077bcc0235ffc0fc99af5cb6"
+>=20
+> inherit autotools useradd systemd pkgconfig
+>=20
+> diff --git a/meta-oe/conf/distro/include/meta_oe_security_flags.inc =
+b/meta-oe/conf/distro/include/meta_oe_security_flags.inc
+> index 815fb16..01ee4d4 100644
+> --- a/meta-oe/conf/distro/include/meta_oe_security_flags.inc
+> +++ b/meta-oe/conf/distro/include/meta_oe_security_flags.inc
+> @@ -25,3 +25,4 @@ SECURITY_CFLAGS_pn-libvdpau =3D =
+"${SECURITY_NO_PIE_CFLAGS}"
+> #| make[1]: *** [Makefile:675: libluajit.so] Error 1
+> SECURITY_CFLAGS_pn-luajit =3D "${SECURITY_NO_PIE_CFLAGS}"
+>=20
+> +SECURITY_CFLAGS_pn-opensaf =3D "${SECURITY_NO_PIE_CFLAGS}=E2=80=9D
+
+I was wondering if it would make sense to move tweaking SECURITY_FLAGS =
+in the recipe proper
+for all the exceptions that we manage in the conf metadata=20
+
+> --=20
+> 2.7.4
+>=20
+>=20
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
