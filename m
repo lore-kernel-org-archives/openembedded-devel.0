@@ -1,43 +1,30 @@
-Return-Path: <fathi.boudra@linaro.org>
-Received: from mail-lf0-f52.google.com (mail-lf0-f52.google.com
-	[209.85.215.52])
-	by mail.openembedded.org (Postfix) with ESMTP id A218B77505
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 18E0B774D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2016 06:19:30 +0000 (UTC)
-Received: by mail-lf0-f52.google.com with SMTP id y21so112182785lfa.1
+	Thu, 22 Dec 2016 08:37:09 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="14170535"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 22 Dec 2016 16:37:04 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 12ABF477B1CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Dec 2016 22:19:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=1xH+yvrZTr9UfQAuLopb38UbHHJBvkJEE5/lK66GovE=;
-	b=RNjok+c+SU7iDXbDxe02OiFccMNLuyPyE8yPedrPCAedBgw6aJLSiLrXR6YJG7jBsm
-	vhp6TKuLPRYgxnKfpmeCHg51fqqY2sv8kIA8k2h6Yee7yv2iOoEVxr0UGhbI3v7Fq0zU
-	2S5gVeexkwkjiKs2ifYv7TcxaRr7bVu7otJtM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=1xH+yvrZTr9UfQAuLopb38UbHHJBvkJEE5/lK66GovE=;
-	b=jDWflWQKvTEb4+fB6KioPm2nMPgnHbg96qRN5U2Hpy02i0e1qDMtxpJOAxTgaK82FF
-	3w8QbxyJByDzv80UicHzVK8MMOXzBX96c49dKvqcAyA9ots1/i4/MmiAVIRpdJpXo9GG
-	oP8OcsdC1BWbZHx9cwR6YnZSuVpf94aGPmmKaYZSIwuHHptymDxXGOZCDom8Exwb/Ydf
-	N5X1QwCoBufmC8QBYodsKynHIkMWh0OUmuKjob43+y/rDscvZestj1p6SPSvsP6xRFbF
-	HGBcnM5zd+85Mii+W4fQmhHp5plbXTivspzd+/3ASEYMK8hA1ZKxFu0Po1A72B5PAUSo
-	nSNg==
-X-Gm-Message-State: AIkVDXLC301nsY4uAt23EmeeoKrEqv7sdEncMeJ3U6gq86pxHzIXd6V57HG2HhwqA+GxMC8X
-X-Received: by 10.25.26.136 with SMTP id a130mr2110214lfa.154.1482387570986;
-	Wed, 21 Dec 2016 22:19:30 -0800 (PST)
-Received: from localhost.localdomain (a91-156-68-16.elisa-laajakaista.fi.
-	[91.156.68.16]) by smtp.gmail.com with ESMTPSA id
-	t126sm6647731lff.26.2016.12.21.22.19.29
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 21 Dec 2016 22:19:29 -0800 (PST)
-From: Fathi Boudra <fathi.boudra@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Dec 2016 08:19:30 +0200
-Message-Id: <20161222061930.8821-1-fathi.boudra@linaro.org>
-X-Mailer: git-send-email 2.11.0
-Cc: koen@dominion.thruhere.net
-Subject: [meta-oe][PATCH] fwts: upgrade to 16.12.00 release
+	Thu, 22 Dec 2016 16:37:03 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.81) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.319.2; Thu, 22 Dec 2016 16:37:03 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 22 Dec 2016 16:36:45 +0800
+Message-ID: <1482395805-2971-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.81]
+X-yoursite-MailScanner-ID: 12ABF477B1CE.A8535
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH v2] add php 7.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,156 +37,174 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2016 06:19:31 -0000
+X-List-Received-Date: Thu, 22 Dec 2016 08:37:11 -0000
+Content-Type: text/plain
 
-* update PV and SRCREV to match 16.12.00 release
-* refresh 0001-ignore-constant-logical-operand-warning-with-clang.patch
+1)add php_7.1.0.bb
+2)Delete php_5.5.38.bb,since it is Replaced by php_5.6.26.bb.
+3)Delete pthread-check-threads-m4.patch, since it is integrated upstream.
 
-Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 ---
- ...nstant-logical-operand-warning-with-clang.patch | 92 +++++++++++-----------
- meta-oe/recipes-test/fwts/fwts_git.bb              |  4 +-
- 2 files changed, 49 insertions(+), 47 deletions(-)
+ .../change-AC_TRY_RUN-to-AC_TRY_LINK.patch         | 56 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/php/php.inc               |  3 +-
+ .../php/php/pthread-check-threads-m4.patch         | 30 ------------
+ meta-oe/recipes-devtools/php/php_5.5.38.bb         |  6 ---
+ meta-oe/recipes-devtools/php/php_7.1.0.bb          |  8 ++++
+ 5 files changed, 65 insertions(+), 38 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+ delete mode 100644 meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch
+ delete mode 100644 meta-oe/recipes-devtools/php/php_5.5.38.bb
+ create mode 100644 meta-oe/recipes-devtools/php/php_7.1.0.bb
 
-diff --git a/meta-oe/recipes-test/fwts/fwts/0001-ignore-constant-logical-operand-warning-with-clang.patch b/meta-oe/recipes-test/fwts/fwts/0001-ignore-constant-logical-operand-warning-with-clang.patch
-index ccfe580c1..a3cc1ff8e 100644
---- a/meta-oe/recipes-test/fwts/fwts/0001-ignore-constant-logical-operand-warning-with-clang.patch
-+++ b/meta-oe/recipes-test/fwts/fwts/0001-ignore-constant-logical-operand-warning-with-clang.patch
-@@ -5,37 +5,37 @@ Subject: [PATCH] ignore constant-logical-operand warning with clang
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-+ src/dmi/dmicheck/dmicheck.c            | 3 +++
-+ src/lib/src/fwts_acpi_tables.c         | 5 +++++
-  src/uefi/uefirtauthvar/uefirtauthvar.c | 5 +++++
-- 1 file changed, 5 insertions(+)
-+ 3 files changed, 13 insertions(+)
- 
--Index: git/src/uefi/uefirtauthvar/uefirtauthvar.c
--===================================================================
----- git.orig/src/uefi/uefirtauthvar/uefirtauthvar.c
--+++ git/src/uefi/uefirtauthvar/uefirtauthvar.c
--@@ -142,6 +142,9 @@ static int uefirtauthvar_deinit(fwts_fra
-- 	return FWTS_OK;
-- }
-- 
-+diff --git a/src/dmi/dmicheck/dmicheck.c b/src/dmi/dmicheck/dmicheck.c
-+index ecd98223..7fca4a64 100644
-+--- a/src/dmi/dmicheck/dmicheck.c
-++++ b/src/dmi/dmicheck/dmicheck.c
-+@@ -209,6 +209,8 @@ static const char *uuid_patterns[] = {
-+ 	"0A0A0A0A-0A0A-0A0A-0A0A-0A0A0A0A0A0A",
-+ 	NULL,
-+ };
- +#pragma clang diagnostic push
--+#pragma clang diagnostic ignored "-Wconstant-logical-operand"
--+
-- static int check_fw_support(fwts_framework *fw, uint64_t status)
-- {
-- 	if ((status == EFI_INVALID_PARAMETER) &&
--@@ -172,6 +175,8 @@ static int check_fw_support(fwts_framewo
-- 	return FWTS_OK;
-- }
-++#pragma clang diagnostic ignored "-Wunneeded-internal-declaration"
-  
-+ static const fwts_chassis_type_map fwts_dmi_chassis_type[] = {
-+ 	{ "Invalid",		FWTS_SMBIOS_CHASSIS_INVALID },
-+@@ -245,6 +247,7 @@ static const fwts_chassis_type_map fwts_dmi_chassis_type[] = {
-+ 	{ "Convertible",	FWTS_SMBIOS_CHASSIS_CONVERTIBLE },
-+ 	{ "Detachable",		FWTS_SMBIOS_CHASSIS_DETACHABLE },
-+ };
- +#pragma clang diagnostic pop
--+
-- /*
--  * Set the created authenticated variable, AuthVarCreate,
--  * and checking the data size and data.
--Index: git/src/lib/src/fwts_acpi_tables.c
--===================================================================
----- git.orig/src/lib/src/fwts_acpi_tables.c
--+++ git/src/lib/src/fwts_acpi_tables.c
--@@ -392,10 +392,14 @@ static int fwts_acpi_handle_fadt(
+diff --git a/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch b/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+new file mode 100644
+index 0000000..39c334f
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+@@ -0,0 +1,56 @@
++[PATCH] config.m4: change AC_TRY_RUN to AC_TRY_LINK
++
++Upstream-Status: Pending
++
++AC_TRY_RUN is not suitable for cross-compile
++
++Signed-off-by: Roy Li <rongqing.li@windriver.com>
++---
++ ext/fileinfo/config.m4 | 31 ++++++-------------------------
++ 1 file changed, 6 insertions(+), 25 deletions(-)
++
++diff --git a/ext/fileinfo/config.m4 b/ext/fileinfo/config.m4
++index 7e98d62..8a8ea0e 100644
++--- a/ext/fileinfo/config.m4
+++++ b/ext/fileinfo/config.m4
++@@ -14,31 +14,12 @@ if test "$PHP_FILEINFO" != "no"; then
++     libmagic/readcdf.c libmagic/softmagic.c"
 + 
-+ /* Remapping table from buggy version numbers to correct values */
-+ static const fwts_dmi_version dmi_versions[] = {
-+diff --git a/src/lib/src/fwts_acpi_tables.c b/src/lib/src/fwts_acpi_tables.c
-+index 30b4060e..d5339bf7 100644
-+--- a/src/lib/src/fwts_acpi_tables.c
-++++ b/src/lib/src/fwts_acpi_tables.c
-+@@ -394,10 +394,14 @@ static int fwts_acpi_handle_fadt(
-  	/* Determine FACS addr and load it.
-  	 * Will ignore the missing FACS in the hardware-reduced mode.
-  	 */
-@@ -50,7 +50,7 @@ Index: git/src/lib/src/fwts_acpi_tables.c
-  	if (result != FWTS_OK) {
-  		if ((result == FWTS_NULL_POINTER) &&
-  				fwts_acpi_is_reduced_hardware(fadt)) {
--@@ -414,6 +418,7 @@ static int fwts_acpi_handle_fadt(
-+@@ -416,6 +420,7 @@ static int fwts_acpi_handle_fadt(
-  		return FWTS_ERROR;
-  	}
-  	return FWTS_OK;
-@@ -58,24 +58,26 @@ Index: git/src/lib/src/fwts_acpi_tables.c
-  }
-  
-  /*
--Index: git/src/dmi/dmicheck/dmicheck.c
--===================================================================
----- git.orig/src/dmi/dmicheck/dmicheck.c
--+++ git/src/dmi/dmicheck/dmicheck.c
--@@ -209,6 +209,8 @@ static const char *uuid_patterns[] = {
-- 	"0A0A0A0A-0A0A-0A0A-0A0A-0A0A0A0A0A0A",
-- 	NULL,
-- };
-+diff --git a/src/uefi/uefirtauthvar/uefirtauthvar.c b/src/uefi/uefirtauthvar/uefirtauthvar.c
-+index cdfd7aa3..001e8cc8 100644
-+--- a/src/uefi/uefirtauthvar/uefirtauthvar.c
-++++ b/src/uefi/uefirtauthvar/uefirtauthvar.c
-+@@ -142,6 +142,9 @@ static int uefirtauthvar_deinit(fwts_framework *fw)
-+ 	return FWTS_OK;
-+ }
-+ 
- +#pragma clang diagnostic push
--+#pragma clang diagnostic ignored "-Wunneeded-internal-declaration"
-++#pragma clang diagnostic ignored "-Wconstant-logical-operand"
-++
-+ static int check_fw_support(fwts_framework *fw, uint64_t status)
-+ {
-+ 	if ((status == EFI_INVALID_PARAMETER) &&
-+@@ -172,6 +175,8 @@ static int check_fw_support(fwts_framework *fw, uint64_t status)
-+ 	return FWTS_OK;
-+ }
-  
-- static const fwts_chassis_type_map fwts_dmi_chassis_type[] = {
-- 	{ "Invalid",		FWTS_SMBIOS_CHASSIS_INVALID },
--@@ -245,6 +247,7 @@ static const fwts_chassis_type_map fwts_
-- 	{ "Convertible",	FWTS_SMBIOS_CHASSIS_CONVERTIBLE },
-- 	{ "Detachable",		FWTS_SMBIOS_CHASSIS_DETACHABLE },
-- };
- +#pragma clang diagnostic pop
-- 
-- /* Remapping table from buggy version numbers to correct values */
-- static const fwts_dmi_version dmi_versions[] = {
-++
-+ /*
-+  * Set the created authenticated variable, AuthVarCreate,
-+  * and checking the data size and data.
-diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb b/meta-oe/recipes-test/fwts/fwts_git.bb
-index b04be021b..82ed5ecf0 100644
---- a/meta-oe/recipes-test/fwts/fwts_git.bb
-+++ b/meta-oe/recipes-test/fwts/fwts_git.bb
-@@ -5,9 +5,9 @@ HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd34dcdb9e4db568519"
- 
--PV = "16.09.00"
-+PV = "16.12.00"
- 
--SRCREV = "15386283ad55e2a5b9366c1f43f4531ef79b01cb"
-+SRCREV = "d38fced7db86e5483d5c2e634ee1eec98620d5b8"
- SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git \
-            file://0001-ignore-constant-logical-operand-warning-with-clang.patch \
-            "
++   AC_MSG_CHECKING([for strcasestr])
++-  AC_TRY_RUN([
++-#include <string.h>
++-#include <strings.h>
++-#include <stdlib.h>
++-
++-int main(void)
++-{
++-        char *s0, *s1, *ret;
++-
++-        s0 = (char *) malloc(42);
++-        s1 = (char *) malloc(8);
++-
++-        memset(s0, 'X', 42);
++-        s0[24] = 'Y';
++-        s0[26] = 'Z';
++-        s0[41] = '\0';
++-        memset(s1, 'x', 8);
++-        s1[0] = 'y';
++-        s1[2] = 'Z';
++-        s1[7] = '\0';
++-
++-        ret = strcasestr(s0, s1);
++-
++-        return !(NULL != ret);
++-}
+++  AC_TRY_COMPILE([
+++     #include <string.h>
+++     #include <strings.h>
+++     #include <stdlib.h>
+++  ],[
+++     strcasestr(NULL, NULL);
++   ],[
++     dnl using the platform implementation
++     AC_MSG_RESULT(yes)
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index cd91940..191005f 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -24,7 +24,6 @@ SRC_URI_append_class-target = " \
+             file://php-fpm.conf \
+             file://php-fpm-apache.conf \
+             file://configure.patch \
+-            file://pthread-check-threads-m4.patch \
+             file://70_mod_php5.conf \
+             file://php-fpm.service \
+           "
+@@ -218,7 +217,7 @@ FILES_${PN}-doc += "${PHP_LIBDIR}/php/doc"
+ FILES_${PN}-cli = "${bindir}/php"
+ FILES_${PN}-phar = "${bindir}/phar*"
+ FILES_${PN}-cgi = "${bindir}/php-cgi"
+-FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service"
++FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service /etc/*"
+ FILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
+ CONFFILES_${PN}-fpm = "${sysconfdir}/php-fpm.conf"
+ CONFFILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
+diff --git a/meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch b/meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch
+deleted file mode 100644
+index 0c564cd..0000000
+--- a/meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From d8067ceacbf54e79c9c6b68675332c09eaa0b55d Mon Sep 17 00:00:00 2001
+-From: Jackie Huang <jackie.huang@windriver.com>
+-Date: Mon, 8 Apr 2013 14:29:51 +0800
+-Subject: [PATCH] pthread-check
+-
+-Enable pthreads support when cross-compiling
+-
+-Upstream-Status: Inapproprate [config]
+-
+-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+----
+- TSRM/threads.m4 |    2 +-
+- 1 files changed, 1 insertions(+), 1 deletions(-)
+-
+-diff --git a/TSRM/threads.m4 b/TSRM/threads.m4
+-index 38494ce..15d9454 100644
+---- a/TSRM/threads.m4
+-+++ b/TSRM/threads.m4
+-@@ -86,7 +86,7 @@ int main() {
+-   pthreads_working=no
+-   ], [
+-   dnl For cross compiling running this test is of no use. NetWare supports pthreads
+--  pthreads_working=no
+-+  pthreads_working=yes
+-   case $host_alias in
+-   *netware*)
+-     pthreads_working=yes
+--- 
+-1.7.4.1
+-
+diff --git a/meta-oe/recipes-devtools/php/php_5.5.38.bb b/meta-oe/recipes-devtools/php/php_5.5.38.bb
+deleted file mode 100644
+index 26f35b1..0000000
+--- a/meta-oe/recipes-devtools/php/php_5.5.38.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require php.inc
+-
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=464ca70af214d2407f6b7d4458158afd"
+-
+-SRC_URI[md5sum] = "312244a0eecad602a1555ed2434e223f"
+-SRC_URI[sha256sum] = "473c81ebb2e48ca468caee031762266651843d7227c18a824add9b07b9393e38"
+diff --git a/meta-oe/recipes-devtools/php/php_7.1.0.bb b/meta-oe/recipes-devtools/php/php_7.1.0.bb
+new file mode 100644
+index 0000000..eeca0cb
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php_7.1.0.bb
+@@ -0,0 +1,8 @@
++require php.inc
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b602636d46a61c0ac0432bbf5c078fe4"
++
++SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch"
++
++SRC_URI[md5sum] = "54e364b60a88db77adb96aacb10f10a4"
++SRC_URI[sha256sum] = "68bcfd7deed5b3474d81dec9f74d122058327e2bed0ac25bbc9ec70995228e61"
 -- 
-2.11.0
+2.7.4
+
+
 
 
