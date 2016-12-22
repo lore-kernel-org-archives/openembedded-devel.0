@@ -1,52 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wj0-f194.google.com (mail-wj0-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D31E77715
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 837F877711
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2016 22:34:03 +0000 (UTC)
-Received: by mail-wj0-f194.google.com with SMTP id hb5so4869783wjc.2
+	Thu, 22 Dec 2016 22:34:04 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id m203so38498132wma.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2016 14:34:05 -0800 (PST)
+	Thu, 22 Dec 2016 14:34:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=W8/g8ksdM5pNWWBCB+FQXsRytpc2DJV13WMSFgltJcw=;
-	b=fhv+Zpcs6Y3U25XcPh0TqQxMNC24itbqUKPQ7BtrW9kOIbXECJm76sjXjiGMD05jWG
-	YoTYZMjDw4Il4tfOIWL54iZgUmELZhfdXKA6cQN/mPzHD5uIYR5Xp/qgZ5kTFFdvf6Rm
-	i9DxhGmaVSsy7WZyRMsqKre1YQ2ItWbi4yI5lPoFPlZYvPJ3dB0HRRiJtWs/q2N8h/Qr
-	bw7FIyNWZJG7fqza2WCF2KVVQCXNOI3A9qz8Kg22P/dGFPePXYIJMD9P/4Tw5v41NDc7
-	oeenb6iVsSNoeMylnna6fOvgijAOtSEA8yLfkgQYrHKdxsxcNg7wv/B0ExCXc1Cd/dy0
-	Zzgg==
+	bh=oSmhQ/hWAK7DeMrEb2jCMIimm4VmxwCuPlJcu1GOwV4=;
+	b=bSl+e5QvcbGdDvpJE1bUU1sNZmFrC0AjRLxcz6pATd8Dp6NEaItg82fzsZJ32sRCte
+	qYRLeEgPOs14DTUto57aOfsb615o5jkUE/MF9EKgCt4yBN50fvUH9SeRYtv54vX2SyO+
+	PfwKzvlgI/0Pe4WcQ/R1hRuyRzX4m7/L1bVWbGlUUwOKT1aCOLDHS7BmqU/liYsZpShx
+	U0QeoyzZhg3rIRND3AFGWcY2IYlxOSLmVSIU1mS5Sa6W4Gw5JGZDi6h1ETcT0N/wQI8Q
+	CTO626WPxgy1Hn65+tqKXBo/mztgoYB0VlGAq+teB2Ww3qAc1qYjaWBqdwhb+adJ4ePD
+	tVuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=W8/g8ksdM5pNWWBCB+FQXsRytpc2DJV13WMSFgltJcw=;
-	b=VOvM+ntZevsFNtl/XPAd+ZIUDQxfErgFHO0Yz6A7ekvy5AmHR8/qM8TXmh3RRqL8tI
-	es0HL5oaZyIJNenhhnLOzmAx1aArV6Lk74siXaD1B5Cnba20d/Y+e0xopK4FpQfCay+F
-	WL/Fi+iHxsPzhoPEc2peYVaX2sdCxF3m0T6lgJwnmn6yeNT0E3gPL/mJHNYv2AcErAVU
-	afZD55q6Ga8IrtVyDf2D9Tpl0X9duRJkxUCXg8qr0soQxnv66FZUKkWF4QQRRpRnFIZ7
-	4mgE4CUjcYSV8dmt1+pla6HqyVEhepAoPPaQdMQUAFpQldiVZRwfOqLq1dR9QJbGU70W
-	PDzQ==
-X-Gm-Message-State: AIkVDXI/aio//QVu5xb+96MjuBlQY4fh5TfL9uZ1JMNHpD/A/BvOI5kv/dOO2OtVC4cF3Q==
-X-Received: by 10.194.191.201 with SMTP id ha9mr10834810wjc.205.1482446044593; 
-	Thu, 22 Dec 2016 14:34:04 -0800 (PST)
+	bh=oSmhQ/hWAK7DeMrEb2jCMIimm4VmxwCuPlJcu1GOwV4=;
+	b=AEkrAX87fRkhPj4GqlTyGWC5XYzrD8Z3WiKLIeTrfmDm9Zq4CFTHk/mBSPO7hw1uP6
+	tp3sWqNmkNoJTGyoTZJ8KfKYrYIO0yezLh/wswM6WtCEr4pVa9sjkIwf6jPQcgzFEQDM
+	odTIMwK2U5UNraTF+qBBnFsZWQ5iAFfhYXn9XZxD7wOcWBfMM9yJvqPDZTk+WALmsCKy
+	auZ2cBpUWAeot9Tyek03srz3ZcksTe/T9M/u9LwXP1pdPliObsGxrQ9rQQmr6q/GIrW9
+	E+8IQ5CT7zJ3HnHpgz8oPocH0mIUAehi+222YADe/q8hcafsdO/Gvi29M2DaoKzdO51o
+	zZzA==
+X-Gm-Message-State: AIkVDXLHQ9D3EvYiZoPMzmh7yylCBlog3k+F0xsk59GwjUQsJkEZ3mBmc71fszKBCbDmog==
+X-Received: by 10.28.107.77 with SMTP id g74mr12874232wmc.109.1482446045562;
+	Thu, 22 Dec 2016 14:34:05 -0800 (PST)
 Received: from localhost.localdomain (p579F7B0D.dip0.t-ipconnect.de.
 	[87.159.123.13]) by smtp.googlemail.com with ESMTPSA id
-	m145sm34179574wma.3.2016.12.22.14.34.03
+	m145sm34179574wma.3.2016.12.22.14.34.04
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 22 Dec 2016 14:34:03 -0800 (PST)
+	Thu, 22 Dec 2016 14:34:04 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Dec 2016 23:33:37 +0100
-Message-Id: <1482446018-17187-6-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 22 Dec 2016 23:33:38 +0100
+Message-Id: <1482446018-17187-7-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
 In-Reply-To: <1482446018-17187-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1482446018-17187-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 6/7] mpd: update to 0.19.21
+Subject: [PATCH 7/7] mpd: add PACKAGECONFIG for libcdio-paranoia
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,30 +62,25 @@ X-List-Received-Date: Thu, 22 Dec 2016 22:34:04 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+| WARNING: mpd-0.19.21-r0 do_package_qa: QA Issue: mpd rdepends on libcdio-paranoia, but it isn't a build dependency, missing libcdio-paranoia in DEPENDS or PACKAGECONFIG? [build-deps]
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../recipes-multimedia/musicpd/{mpd_0.19.15.bb => mpd_0.19.21.bb}     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-multimedia/recipes-multimedia/musicpd/{mpd_0.19.15.bb => mpd_0.19.21.bb} (94%)
+ meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.21.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.15.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.21.bb
-similarity index 94%
-rename from meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.15.bb
-rename to meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.21.bb
-index f0b5c88..0071b89 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.15.bb
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.21.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.21.bb
+index 0071b89..82518d6 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.21.bb
 +++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.21.bb
-@@ -9,8 +9,8 @@ SRC_URI = " \
-     http://www.musicpd.org/download/${BPN}/0.19/${BP}.tar.xz \
-     file://mpd.conf.in \
- "
--SRC_URI[md5sum] = "bb855b1689c9e863c2dd214ab1cb9344"
--SRC_URI[sha256sum] = "0cb9a223894b038ce966ce6d651d9b3ea3bdc7d7b9bec8d1e9e7e091cbc29b8b"
-+SRC_URI[md5sum] = "fc19f76b512bd471b6af5214965ff7c5"
-+SRC_URI[sha256sum] = "8305b8bc026f4b6bde28b8dd09bfdddbe5590acf36358eed4d083a396e301730"
+@@ -18,6 +18,7 @@ EXTRA_OECONF = "enable_bzip2=yes"
+ EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
  
- inherit autotools useradd systemd
- 
+ PACKAGECONFIG[audiofile] = "--enable-audiofile,--disable-audiofile,audiofile"
++PACKAGECONFIG[cdioparanoia] = "--enable-cdio-paranoia,--disable-cdio-paranoia,libcdio-paranoia"
+ PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
+ PACKAGECONFIG[id3tag] = "--enable-id3,--disable-id3,libid3tag"
+ PACKAGECONFIG[lame] = "--enable-lame-encoder,--disable-lame-encoder,lame"
 -- 
 2.5.5
 
