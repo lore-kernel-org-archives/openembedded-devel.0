@@ -1,36 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f172.google.com (mail-qt0-f172.google.com
-	[209.85.216.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 43A9577424
+Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
+	[209.85.220.193])
+	by mail.openembedded.org (Postfix) with ESMTP id BC72B774DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Dec 2016 23:39:04 +0000 (UTC)
-Received: by mail-qt0-f172.google.com with SMTP id w33so220491442qtc.3
+	Thu, 22 Dec 2016 01:37:48 +0000 (UTC)
+Received: by mail-qk0-f193.google.com with SMTP id h201so10419732qke.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Dec 2016 15:39:06 -0800 (PST)
+	Wed, 21 Dec 2016 17:37:50 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=XqvPw8Kdd+yWdGiH0+leVR8g8ZohasytL1Rm1iM8tIs=;
-	b=VmNM9oxjuUvpJ+rcGhYvSOPEDSVGETvxsZXbuR67zELPiXL8bYW9ixdgihnmpZjtoL
-	1tDnogWGH1QtRbN/yLOFHlUq8upAuI8AwGBhd8tIiBqPpL61MF/tY4m2ibMHJB+2YZP7
-	y3UoHwxOJGkN275/+3c7YHbQcGmqUz6tPs9YUtyBt9usEOKPsYhHkaGjdjljHdIHA+Xn
-	w+8FnTjk3axVVzdL9AR+hVvqY47L2xNc0U3QqOsbSkTmFO0++8r7U2eAd4gLmo1m38mt
-	Nb4JtNySdeGp1QYlXh+cfBMm2ty8PMw+fGXLgg9RhMk8ms1TR91FSU72E+SOM8NV4DKp
-	O3Jw==
-X-Gm-Message-State: AIkVDXJoKr0O7VJ97Ryzup0D6jk0x7W75mpT0ynV8hsnqR38bug8f/eCXiiLkaxiScn29g==
-X-Received: by 10.200.50.209 with SMTP id a17mr7172461qtb.41.1482363545860;
-	Wed, 21 Dec 2016 15:39:05 -0800 (PST)
+	bh=JtfrgoMPBHrCFYWqhyoSIlZ+VSydlNRAyZBwqHqxd2w=;
+	b=DYR/QCaOAAsJIcn1aUe3LbLMo3Zadv2dLZeSFUBjY3WZLD2xvPsEqmi2ArfFIt1JIH
+	1jx1Kl4mqI5rCrfT2YT5R8onr5bVUhDxmKMteGG8E0eyFxBQHyWw6sDN0KAwvj6NoKVj
+	9rrfdZsoc6Xo4JhM8K2YSrUPRZzzFsYsEh8vVksW+zMOIQYQMnjOGXofI/Xqqxiv6O1e
+	Zd5IBwuNn3wOSYv1UTGUbQZBqDCzr3UTDGMbVzxEpvGlzRAwB5CgqtoqwmhG+2eyliNP
+	Y7xd5ubwbLRv1zujd5A1+Zniu5ejZQqdCYE4n3hIjZbNvajvTIthCnwEDRexbClulgDm
+	swYg==
+X-Gm-Message-State: AIkVDXJzQMymPYWW1cDFwgs9v6Yx1dhuCV07tXY3GNClRKQIoQV0aCe5vahgGOKOVpUDkw==
+X-Received: by 10.55.7.2 with SMTP id 2mr6796214qkh.228.1482370669286;
+	Wed, 21 Dec 2016 17:37:49 -0800 (PST)
 Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
-	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
-	s89sm16647056qkl.27.2016.12.21.15.39.05
+	[69.124.217.3])
+	by smtp.gmail.com with ESMTPSA id 33sm16924491qtq.1.2016.12.21.17.37.48
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 21 Dec 2016 15:39:05 -0800 (PST)
+	Wed, 21 Dec 2016 17:37:48 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Dec 2016 18:38:58 -0500
-Message-Id: <1482363538-28271-1-git-send-email-derek@asterius.io>
+Date: Wed, 21 Dec 2016 20:37:36 -0500
+Message-Id: <1482370656-19274-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-webserver][PATCH] apache2: update to version 2.4.25
+Subject: [meta-python][PATCH] python-passlib: update to version 1.7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,92 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Dec 2016 23:39:07 -0000
+X-List-Received-Date: Thu, 22 Dec 2016 01:37:49 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- ...2-native_2.4.23.bb => apache2-native_2.4.25.bb} |  4 ++--
- .../apache2/apache2/cve-2016-5387.patch            | 25 ----------------------
- .../{apache2_2.4.23.bb => apache2_2.4.25.bb}       |  5 ++---
- 3 files changed, 4 insertions(+), 30 deletions(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2-native_2.4.23.bb => apache2-native_2.4.25.bb} (91%)
- delete mode 100644 meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.23.bb => apache2_2.4.25.bb} (97%)
+ meta-python/recipes-devtools/python/python-passlib.inc              | 6 +++---
+ .../python/{python-passlib_1.6.5.bb => python-passlib_1.7.0.bb}     | 0
+ .../python/{python3-passlib_1.6.5.bb => python3-passlib_1.7.0.bb}   | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-passlib_1.6.5.bb => python-passlib_1.7.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-passlib_1.6.5.bb => python3-passlib_1.7.0.bb} (100%)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-similarity index 91%
-rename from meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-index b227f19..ca8ebaf 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-@@ -15,8 +15,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
- S = "${WORKDIR}/httpd-${PV}"
+diff --git a/meta-python/recipes-devtools/python/python-passlib.inc b/meta-python/recipes-devtools/python/python-passlib.inc
+index 3cd2c0a..b1e214a 100644
+--- a/meta-python/recipes-devtools/python/python-passlib.inc
++++ b/meta-python/recipes-devtools/python/python-passlib.inc
+@@ -7,7 +7,7 @@ tasks, from verifying a hash found in /etc/shadow, to providing full-strength pa
+ hashing for multi-user applications."
+ HOMEPAGE = "https://bitbucket.org/ecollins/passlib"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=bae8faa3e2689ee0df3f2127fc4517f5"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=7ed8269648e55f7d37532503de04d3fe"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
--SRC_URI[md5sum] = "04f19c60e810c028f5240a062668a688"
--SRC_URI[sha256sum] = "0c1694b2aad7765896faf92843452ee2555b9591ae10d4f19b245f2adfe85e58"
-+SRC_URI[md5sum] = "2826f49619112ad5813c0be5afcc7ddb"
-+SRC_URI[sha256sum] = "f87ec2df1c9fee3e6bfde3c8b855a3ddb7ca1ab20ca877bd0e2b6bf3f05c80b2"
- 
- EXTRA_OECONF = "--with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \
-                 --with-apr-util=${STAGING_BINDIR_CROSS}/apu-1-config \
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch b/meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch
-deleted file mode 100644
-index dbcdfc6..0000000
---- a/meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch
-+++ /dev/null
-@@ -1,25 +0,0 @@
--This patch has been copied from https://www.apache.org/security/asf-httpoxy-response.txt
--as a mitigation of CVE-2016-5387.
--
--Upstream-Status: Backport - fixed in 2.4.24
--
--Signed-off-by: Joe Slater<jslater@windriver.com>
--
--
----- a/server/util_script.c	(revision 1752426)
--+++ b/server/util_script.c	(working copy)
--@@ -186,6 +186,14 @@ AP_DECLARE(void) ap_add_common_vars(request_rec *r
--         else if (!strcasecmp(hdrs[i].key, "Content-length")) {
--             apr_table_addn(e, "CONTENT_LENGTH", hdrs[i].val);
--         }
--+        /* HTTP_PROXY collides with a popular envvar used to configure
--+         * proxies, don't let clients set/override it.  But, if you must...
--+         */
--+#ifndef SECURITY_HOLE_PASS_PROXY
--+        else if (!strcasecmp(hdrs[i].key, "Proxy")) {
--+            ;
--+        }
--+#endif
--         /*
--          * You really don't want to disable this check, since it leaves you
--          * wide open to CGIs stealing passwords and people viewing them
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-similarity index 97%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-index b78ff51..3bd8579 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-@@ -17,15 +17,14 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://httpd-2.4.3-fix-race-issue-of-dir-install.patch \
-            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
-            file://configure-allow-to-disable-selinux-support.patch \
--           file://cve-2016-5387.patch \
-            file://init \
-            file://apache2-volatile.conf \
-            file://apache2.service \
-           "
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
--SRC_URI[md5sum] = "04f19c60e810c028f5240a062668a688"
--SRC_URI[sha256sum] = "0c1694b2aad7765896faf92843452ee2555b9591ae10d4f19b245f2adfe85e58"
-+SRC_URI[md5sum] = "2826f49619112ad5813c0be5afcc7ddb"
-+SRC_URI[sha256sum] = "f87ec2df1c9fee3e6bfde3c8b855a3ddb7ca1ab20ca877bd0e2b6bf3f05c80b2"
- 
- S = "${WORKDIR}/httpd-${PV}"
- 
+-SRC_URI[md5sum] = "d2edd6c42cde136a538b48d90a06ad67"
+-SRC_URI[sha256sum] = "a83d34f53dc9b17aa42c9a35c3fbcc5120f3fcb07f7f8721ec45e6a27be347fc"
++SRC_URI[md5sum] = "3c3c5733f2ada427060c33b5ece0560f"
++SRC_URI[sha256sum] = "0be4f6053357c4ebba5578a065fbdad75a844501d4c6d91d4a3a0c1594c6abed"
+diff --git a/meta-python/recipes-devtools/python/python-passlib_1.6.5.bb b/meta-python/recipes-devtools/python/python-passlib_1.7.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-passlib_1.6.5.bb
+rename to meta-python/recipes-devtools/python/python-passlib_1.7.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-passlib_1.6.5.bb b/meta-python/recipes-devtools/python/python3-passlib_1.7.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-passlib_1.6.5.bb
+rename to meta-python/recipes-devtools/python/python3-passlib_1.7.0.bb
 -- 
 2.7.4
 
