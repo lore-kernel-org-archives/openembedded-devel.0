@@ -1,46 +1,48 @@
-Return-Path: <ka6sox@gmail.com>
-Received: from mail-yw0-f178.google.com (mail-yw0-f178.google.com
-	[209.85.161.178])
-	by mail.openembedded.org (Postfix) with ESMTP id B56EF776A8
+Return-Path: <ricardo.ribalda@gmail.com>
+Received: from mail-wj0-f195.google.com (mail-wj0-f195.google.com
+	[209.85.210.195])
+	by mail.openembedded.org (Postfix) with ESMTP id A7A027768B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2016 17:19:24 +0000 (UTC)
-Received: by mail-yw0-f178.google.com with SMTP id t125so118279326ywc.1
+	Thu, 22 Dec 2016 17:36:54 +0000 (UTC)
+Received: by mail-wj0-f195.google.com with SMTP id hb5so4018667wjc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2016 09:19:26 -0800 (PST)
+	Thu, 22 Dec 2016 09:36:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=EG1SB2cfezOAXiYRIdZYjYKETyRKMZuSOchl7LQh6N8=;
-	b=crRcGB9QzkAhoyRgeoyqya71hc04T2UswHw7OjsdHCg/ylvAne0/vtVOEleutUsiXu
-	MFVNTmkIF8srOofsfAw9QJOdDeZTdDcMVki9da3svIt5fVl5oFpZ9M6uT+Oaoj1+xXan
-	MYmungxQd7evV3RYTbLOzOXMv6BLVkXtCXO2FvrXQhK29d2gAM5f3tAJU3tAJib/V46/
-	7ToCovvvg7ztj76rwv4KiJUD8UQUmgfa+scrSQ5qwXWzcEHe7ykmDYT382VVfeJZ8/Th
-	HOVgv2eIBXAgQkMyYERWFRU0jGQ3cXPbJLZQTUA3R2N9o5WtiwNr2ym06mqOYvrp+KqO
-	RReA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=/JNPgo8FWVmDblMo8I+d2BpIiHQ9fa+ErApW7F2d6D4=;
+	b=laRyFINBYR49Hp9Kynw3zrs2uA8uLke1tJHFEhWM/8pl4j7XQkIcbgsKhKniHcypXr
+	VieV+ERqsuF3ec63+F6BAyo3AqVLhieNC0AtqBSyw242m2sGaSF0C9ut8bGlIsgLAqq4
+	Cvdo3pbNXmi/NdwLzcmzHya0wUysOLeoz6iBZ5TEhXtfYqvEM/opAUInIeDTpquviyZx
+	9/qwW/GPRkTy4h7//2FeSDnqKVbAjFBEMc0z+QWOduCOQh6QsMD8vW+cGCsn1HE7zhCS
+	9nmf1XoqU9KNIqXkDCGYomlMOmtu0VzSx5hAUmJJgeSJXeaa8mI4/iB+5tmSL9Rt+fJy
+	Mjlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=EG1SB2cfezOAXiYRIdZYjYKETyRKMZuSOchl7LQh6N8=;
-	b=O8iMOcEfrLBtWBpDpsF3OquqdBs8pXhda2iAqZUfsC0heM+t0+HCVfm76OKaHGyRAN
-	Vw5kMPvE3qSPE7JJEOClJaA8jCuaLVopwaBdJ9zA1f2euOpOfCBOR/0pQWGmpXy1nigM
-	2IrEOTpGdAZBUYs6FjYfjMEyaxHJ4G2Df4GTCsj0ZvkTRBwuHQQGkrlp8wDCYHUalyex
-	F6cnqALdILB8CgIkxn/oTQcQx4QhEbzVJgPE+D1Fz7T+NolV6OdZ6JxeT2UQFS9rtvf6
-	0vo1cwOddyZJvpS6gjgom5NHaFnUhvcfkebPOwQ+3+FDQyr/zpo5iowjV1yhm38p9oC8
-	WDjg==
-X-Gm-Message-State: AIkVDXJgb3YByaL+kmZ0EyFEF3cw1vLizCK89CGgpcVdKK8FkPMNssF3cYSfVvJuNHYsQ+FQ2Gz+sFFugsDXFA==
-X-Received: by 10.129.169.132 with SMTP id g126mr8472115ywh.92.1482427165749; 
-	Thu, 22 Dec 2016 09:19:25 -0800 (PST)
+	:message-id:subject:to:cc;
+	bh=/JNPgo8FWVmDblMo8I+d2BpIiHQ9fa+ErApW7F2d6D4=;
+	b=fWm71+PlulARpzJn+xo6JyhnZ7KP6aP7uJMLr4Ej5HBcZeGlbDhNhgmPPNFTOWJVBM
+	d55PFilEMwFvCfDi8Kg7mIpLUIz6rNSWABYQIe43di+pYJ5/pQzudRZuaUMRhDUzPPPB
+	P9AMaRwCyGodThnGUiISldbyUUxaBjVHe/RFljzk8GzKgOq8b8t7V7jAJZ3E+ITnf7z4
+	zz2Ix6Pg0xOSqNDy5nudClhiWZxetkOY6ABvngeT6eNrhP6fkuZLi4mAIZgtRliQJ7rU
+	V4j3MSlhQDe0T4koCOzdN2MTFre9M8QBi/ZaGT7qANIAD5X+vMdTDz0wxhkaSFwRP2V2
+	FnCg==
+X-Gm-Message-State: AIkVDXL0iElrNHL1y4gfRQjXplvazO4IMCzEAftIlu0bcIfJFfZniQALOGCau8stzxUSVhN/IiT/OvSdYUVpRw==
+X-Received: by 10.194.113.169 with SMTP id iz9mr11505893wjb.57.1482428215249; 
+	Thu, 22 Dec 2016 09:36:55 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.37.170.43 with HTTP; Thu, 22 Dec 2016 09:19:25 -0800 (PST)
-In-Reply-To: <E628426E-84F8-4EA4-A296-D32C3339DF1C@gmail.com>
-References: <CAHQecY48gVbt4S+88MHivSbv-Xdn29WRq5RPL6+QDVGYUPCwYw@mail.gmail.com>
-	<E628426E-84F8-4EA4-A296-D32C3339DF1C@gmail.com>
-From: Tom King <ka6sox@gmail.com>
-Date: Thu, 22 Dec 2016 09:19:25 -0800
-Message-ID: <CAHQecY4oXXwGeLsdXrgjFmouTiwvsJXa6K1Qbp--9WZ0=3O5CQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: Infra Full Stop 12/26-12/29
+Received: by 10.194.126.38 with HTTP; Thu, 22 Dec 2016 09:36:34 -0800 (PST)
+In-Reply-To: <B2EC9E23-FB3F-44F0-9711-1589CEF1C21A@gmail.com>
+References: <20161213234618.31312-1-ricardo.ribalda@gmail.com>
+	<20161213234618.31312-3-ricardo.ribalda@gmail.com>
+	<20161222165029.GE3544@jama>
+	<B2EC9E23-FB3F-44F0-9711-1589CEF1C21A@gmail.com>
+From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Date: Thu, 22 Dec 2016 18:36:34 +0100
+Message-ID: <CAPybu_1mPNJEnwOMfXauUQyN3u3v2DrqzdODCCqRhMgOZh-rCg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2 3/8] opencv: Add missing depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,51 +55,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2016 17:19:25 -0000
+X-List-Received-Date: Thu, 22 Dec 2016 17:36:55 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Schedule is  06:00UTC 27DEC16 for the full stop.  Things will start coming
-back (estimated) about 48hrs later.
+Hi Khem
 
-Tom
 
-On Tue, Dec 20, 2016 at 11:16 AM, Khem Raj <raj.khem@gmail.com> wrote:
 
+On Thu, Dec 22, 2016 at 6:17 PM, Khem Raj <raj.khem@gmail.com> wrote:
 >
-> > On Dec 20, 2016, at 10:50 AM, Tom King <ka6sox@gmail.com> wrote:
-> >
-> > Hi All,
-> >
-> > We have been looking for a time when we could do a full stop of the infra
-> > to upgrade some bits and clear out some faults.
-> >
-> > This will involve shutting down the main machine that we use for *most*
-> of
-> > the OE infra.
-> >
-> > Our goal is to put up a backup git master but other services such as:
-> wiki,
-> > patches, etc will be offline for some or all of that period.
-> >
-> > We have delayed doing this much needed maintenance to try to work around
-> > Yocto and OE release schedules and it is necessary that we take this time
-> > to do the work.
-> >
+> On Dec 22, 2016, at 8:50 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
 >
-> I guess, you need to come up with a tentative down-time schedule.
+> On Wed, Dec 14, 2016 at 12:46:13AM +0100, Ricardo Ribalda Delgado wrote:
 >
-> > Tom
-> > (for the OE Infra Team)
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> contrib/modules/sfm depends on glog, gflags and libeigen. The CmakeList
+> does not seem to provide a way to disable/enable its build.
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
+> There is also floating dependency on tesseract as shown in last test
+> dependencies build:
+>
+> opencv-3.1+gitAUTOINC+92387b1ef8: libopencv-text rdepends on tesseract,
+> but it isn't a build dependency, missing tesseract in DEPENDS or
+> PACKAGECONFIG? [build-deps]
+>
+>
+> There seems to be no knob for tesseract in openCVs build system. but
+> extensions modules needs it may be
+> adding a knob for OPENCV_FIND_TESSERACT will solve it. I also notices that
+
+What about doing somthing simlar to:
+http://git.openembedded.org/meta-openembedded/commit/?h=master-next&id=b9946087985e011a71a63cdf47d5496c3c5e2a9c
+
+but with the modules that uses tesseact.?
+
+I can take a look to it tomorrow morning.
+
+> SRC_URI should be changed as well
+> git://github.com/Itseez/ has moved to git://github.com/opencv
+
+I have already send a patch for that:
+http://git.openembedded.org/meta-openembedded/commit/?h=master-next&id=a1f5340a025c2e75330ef3b9940bb8aced39fa00
+
+
+
+
+Regards!!!
 
