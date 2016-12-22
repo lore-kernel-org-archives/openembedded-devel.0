@@ -1,36 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f172.google.com (mail-qt0-f172.google.com
-	[209.85.216.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 49CC2774E6
+Received: from mail-qt0-f178.google.com (mail-qt0-f178.google.com
+	[209.85.216.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 43DBD77681
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2016 14:24:56 +0000 (UTC)
-Received: by mail-qt0-f172.google.com with SMTP id c47so235870198qtc.2
+	Thu, 22 Dec 2016 14:30:40 +0000 (UTC)
+Received: by mail-qt0-f178.google.com with SMTP id w33so235870500qtc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2016 06:24:58 -0800 (PST)
+	Thu, 22 Dec 2016 06:30:42 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Nk5YP8hkcEuUpsfnQT9y5UncIANFob3MMPrfqJU1ZBA=;
-	b=aFsMhmdGbhh/XuXDrHKYQzYg00lh9rpYIz8bRBhwZ7wxxWUQ6wOSS7nLT3HIzFNMyR
-	2XmEsqyxvAYYv4CJvwaopDcKVzk7x/q7TQch/oriaLLKBx2o87slYsQh9RNRifD2UsJI
-	/RaykB2Xxy0vISxsLTbCZbdkFi5fpyihU1Wxx21Hx7S5qwL5xD4ZXZs7TxAveZ3kAiQT
-	pv36s0LSpfDsmVbz+d5Rflc+oGsoyogsOSKM4FFBqJxPYESIpfFdcFL/gDhwSIDNqkW+
-	hu9LtDIWdInY06KjWw6kuqYXlwvJEadfJy1tUfMFvkqRMkl1CujaNHETE872lpP6qakM
-	JPHw==
-X-Gm-Message-State: AIkVDXL+x/wR8lHoMmBpg71Akxye21ff7zc/NTuVKMOUd/W8lgpwL/mpaDztgAt0KBBd9g==
-X-Received: by 10.200.57.71 with SMTP id t7mr10911831qtb.59.1482416697570;
-	Thu, 22 Dec 2016 06:24:57 -0800 (PST)
+	bh=00M9mFwe/OR1clduCK9GwECdz4EQYOmMs/p7UwpMdJc=;
+	b=BfyBoJyUPO6hIz/GuIs5UmxrqaEBKnLhb5up/iiFOanDcFyvm5Kf1mKVm8aMyFiZrC
+	swgciTtlJKWA7uc0nWklOv2ya8dn+i800lBYR9RRg9S5ZpK8N5Smy8vWleMKx/9/s75R
+	x35wxr5IA9mjO8sZC08Dr/eEKFBvfeNmbiWCXNNxrVYI4TyVkEyzyfoq+YmbJq9rNRfk
+	QpLWMm+qdHsptLoG4LzKSwNZDXmPjUcNFRLdlS3jbhgEKPFrv4fNUVK04kGzUv52mxsi
+	o/mm9eWfQSDwKQBM/AE7+n41zNy1OaLHWg5EhwqCq24c5y5g+bG2wqSxzvK4ZDjxKUtf
+	BVdw==
+X-Gm-Message-State: AIkVDXIMU7+lhCKFA5kFIcS2mPcARZl9+tFmQGRpwyqLFr1rMYaEtt/4HPLAQygFnYdchQ==
+X-Received: by 10.237.41.129 with SMTP id o1mr9783683qtd.10.1482417042095;
+	Thu, 22 Dec 2016 06:30:42 -0800 (PST)
 Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
-	[69.124.217.3])
-	by smtp.gmail.com with ESMTPSA id 33sm18097778qtq.1.2016.12.22.06.24.56
+	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
+	z29sm18115323qtz.16.2016.12.22.06.30.41
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 22 Dec 2016 06:24:57 -0800 (PST)
+	Thu, 22 Dec 2016 06:30:41 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Dec 2016 09:24:16 -0500
-Message-Id: <1482416656-27059-1-git-send-email-derek@asterius.io>
+Date: Thu, 22 Dec 2016 09:30:32 -0500
+Message-Id: <1482417032-7430-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-cffi: update to version 1.9.1
+Subject: [meta-python][PATCH] python-cython: update to version 0.25.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,43 +43,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Dec 2016 14:24:57 -0000
+X-List-Received-Date: Thu, 22 Dec 2016 14:30:41 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-cffi.inc               | 8 ++++++--
- .../python/{python-cffi_1.8.3.bb => python-cffi_1.9.1.bb}         | 0
- .../python/{python3-cffi_1.8.3.bb => python3-cffi_1.9.1.bb}       | 0
- 3 files changed, 6 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cffi_1.8.3.bb => python-cffi_1.9.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-cffi_1.8.3.bb => python3-cffi_1.9.1.bb} (100%)
+ meta-python/recipes-devtools/python/python-cython.inc            | 7 +++----
+ meta-python/recipes-devtools/python/python-cython_0.24.1.bb      | 6 ------
+ meta-python/recipes-devtools/python/python-cython_0.25.2.bb      | 9 +++++++++
+ .../{python3-cython_0.24.1.bb => python3-cython_0.25.2.bb}       | 0
+ 4 files changed, 12 insertions(+), 10 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-cython_0.24.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-cython_0.25.2.bb
+ rename meta-python/recipes-devtools/python/{python3-cython_0.24.1.bb => python3-cython_0.25.2.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-cffi.inc b/meta-python/recipes-devtools/python/python-cffi.inc
-index d24d6ff..12da19f 100644
---- a/meta-python/recipes-devtools/python/python-cffi.inc
-+++ b/meta-python/recipes-devtools/python/python-cffi.inc
-@@ -3,7 +3,11 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
- DEPENDS = "libffi ${PYTHON_PN}-pycparser"
+diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-python/recipes-devtools/python/python-cython.inc
+index de8a1a9..1ecdcc9 100644
+--- a/meta-python/recipes-devtools/python/python-cython.inc
++++ b/meta-python/recipes-devtools/python/python-cython.inc
+@@ -7,14 +7,13 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
+ PYPI_PACKAGE = "Cython"
+ BBCLASSEXTEND = "native"
  
--SRC_URI[md5sum] = "c8e877fe0426a99d0cf5872cf2f95b27"
--SRC_URI[sha256sum] = "c321bd46faa7847261b89c0469569530cad5a41976bb6dba8202c0159f476568"
-+SRC_URI[md5sum] = "b8fa7ccb87790531db3316ab17aa8244"
-+SRC_URI[sha256sum] = "563e0bd53fda03c151573217b3a49b3abad8813de9dd0632e10090f6190fdaf8"
+-SRC_URI[md5sum] = "890b494a12951f1d6228c416a5789554"
+-SRC_URI[sha256sum] = "84808fda00508757928e1feadcf41c9f78e9a9b7167b6649ab0933b76f75e7b9"
++SRC_URI[md5sum] = "642c81285e1bb833b14ab3f439964086"
++SRC_URI[sha256sum] = "f141d1f9c27a07b5a93f7dc5339472067e2d7140d1c5a9e20112a5665ca60306"
+ 
+ inherit pypi
+ 
+-RDEPENDS_${PN} += "\
++RDEPENDS_${PN}_class-target += "\
+     ${PYTHON_PN}-netserver \
+     ${PYTHON_PN}-subprocess \
+     ${PYTHON_PN}-shell \
+ "
+-RDEPENDS_${PN}_class-native = ""
+diff --git a/meta-python/recipes-devtools/python/python-cython_0.24.1.bb b/meta-python/recipes-devtools/python/python-cython_0.24.1.bb
+deleted file mode 100644
+index 6be0b1e..0000000
+--- a/meta-python/recipes-devtools/python/python-cython_0.24.1.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-inherit setuptools
+-require python-cython.inc
+-
+-RDEPENDS_${PN} += "\
+-    python-distribute \
+-"
+diff --git a/meta-python/recipes-devtools/python/python-cython_0.25.2.bb b/meta-python/recipes-devtools/python/python-cython_0.25.2.bb
+new file mode 100644
+index 0000000..bdf9490
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-cython_0.25.2.bb
+@@ -0,0 +1,9 @@
++inherit setuptools
++require python-cython.inc
 +
-+RDEPENDS_${PN}_class-target = " \
-+    ${PYTHON_PN}-io \
++UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/Cython/"
++UPSTREAM_CHECK_REGEX = "/Cython/(?P<pver>(\d+[\.\-_]*)+)"
++
++RDEPENDS_${PN} += "\
++    python-distribute \
 +"
- 
- BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-cffi_1.8.3.bb b/meta-python/recipes-devtools/python/python-cffi_1.9.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cython_0.24.1.bb b/meta-python/recipes-devtools/python/python3-cython_0.25.2.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-cffi_1.8.3.bb
-rename to meta-python/recipes-devtools/python/python-cffi_1.9.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-cffi_1.8.3.bb b/meta-python/recipes-devtools/python/python3-cffi_1.9.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-cffi_1.8.3.bb
-rename to meta-python/recipes-devtools/python/python3-cffi_1.9.1.bb
+rename from meta-python/recipes-devtools/python/python3-cython_0.24.1.bb
+rename to meta-python/recipes-devtools/python/python3-cython_0.25.2.bb
 -- 
 2.7.4
 
