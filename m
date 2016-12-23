@@ -1,38 +1,59 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id E513477752
+Return-Path: <anders@chargestorm.se>
+Received: from mail-lf0-f46.google.com (mail-lf0-f46.google.com
+	[209.85.215.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 24DDE7775D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Dec 2016 04:58:00 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="14203264"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 23 Dec 2016 12:58:01 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 4093C477B1D4;
-	Fri, 23 Dec 2016 12:57:58 +0800 (CST)
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0319.002; Fri, 23 Dec 2016 12:57:58 +0800
-From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
-To: "akuster808@gmail.com" <akuster808@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe-jethro] [meta-xfce][PATCH] imsettings: move to correct
-	directory
-Thread-Index: AQHSXNiMdTdEPC0UpUW5vlxSwZ5KLqEU921A
-Date: Fri, 23 Dec 2016 04:57:58 +0000
-Message-ID: <1B56A49860EB2D45ADE3731B15C959FDFE5B81EC@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1482468166-33076-1-git-send-email-leimaohui@cn.fujitsu.com>
-In-Reply-To: <1482468166-33076-1-git-send-email-leimaohui@cn.fujitsu.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.93]
+	Fri, 23 Dec 2016 06:06:47 +0000 (UTC)
+Received: by mail-lf0-f46.google.com with SMTP id c13so132348202lfg.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Dec 2016 22:06:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=chargestorm-se.20150623.gappssmtp.com; s=20150623;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-disposition:in-reply-to:organization
+	:user-agent; bh=NCes3hsOoz72cYOnX3MdZRoc4VufB/7O/HkOh8EMxB8=;
+	b=u/vPm/n1qq81YJKzjUFvc2ZUoUj8+ScInsAOcQ4EVDDNMIqRm3N3KTKHKjh6okdafF
+	gWF38PZqTesNTIfDQDb/LpApJ8PEmTYiJrLW26D2G2JRYB/h7U7DLEIR37xo3QU+UQ89
+	6xLiLMKljawVPJb3Vk43gz6sxoxCn0ROa+ttmjtgcDFrzEbBhsRNGrxgR3CiUHcA9vM4
+	3FgwqYyhYDF8rDehc15JEprrGambta02a4SXRq3ftTZgMXIRZa7S76Ty1lPUp7B8+C+G
+	iZwr7mGXS+D/sTAke9B7CGT8eySXALN2I/1oVZ2DvqYq9z9r+in6Q3xOc9DZGT5m4Uob
+	ZObg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
+	:references:mime-version:content-disposition:in-reply-to
+	:organization:user-agent;
+	bh=NCes3hsOoz72cYOnX3MdZRoc4VufB/7O/HkOh8EMxB8=;
+	b=E2KVNqS1Dj5rJAPLCiL9zdhFMXxhNxFk6cBIl2zvfLudGA4l194cX2IEG7Yt7jdx9Y
+	xSxeV70Yi2XZPeoZBuxtGu9wZBCdZpHYELdTAWkzpMjLSPjfsNy28jsg+qUi+t3GHiLU
+	py/OmhdsxsDV+obxfOsgaFmnkzSDnDpbtaUhXNbLaHv5IAN/5eWDYF+dF6y+dMRqIFnn
+	k3Mt84AqVCYlboR/mxKLg5sP6q+OTt/DxlDGvbOZz+pqWgN/Zpxzt7IK19BmRUaZ6Fzl
+	haycKVrRDD5ZUgf3C4/k9qcA+DGRFrHOqPWgAodHrEdp7wAQWLYJKHxGjYpOywG7KEGI
+	dzBQ==
+X-Gm-Message-State: AIkVDXIX4YtkQxgfaTqq+alzMOJP8DlNKHclf+uTamRSolxpRvwjqu4bD8MkKR4x65lyUg==
+X-Received: by 10.25.133.135 with SMTP id h129mr3835310lfd.127.1482473207875; 
+	Thu, 22 Dec 2016 22:06:47 -0800 (PST)
+Received: from ad.chargestorm.se (h83-209-191-235.cust.se.alltele.net.
+	[83.209.191.235])
+	by smtp.gmail.com with ESMTPSA id 9sm7517481ljn.20.2016.12.22.22.06.46
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 22 Dec 2016 22:06:46 -0800 (PST)
+Date: Fri, 23 Dec 2016 07:06:45 +0100
+From: Anders Darander <anders@chargestorm.se>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20161223060645.zxhknpoqi7bkfo43@ad.chargestorm.se>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <1482421531-29836-1-git-send-email-derek@asterius.io>
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 4093C477B1D4.AA40D
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
-X-Spam-Status: No
-Subject: Re: [oe-jethro] [meta-xfce][PATCH] imsettings: move to correct directory
+In-Reply-To: <1482421531-29836-1-git-send-email-derek@asterius.io>
+X-Accept-Language: sv, en, de
+X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
+X-GPG-Key-Id: 0x920E938C
+X-GPG-Keyserver: hkp://keys.gnupg.net
+Organization: ChargeStorm AB
+User-Agent: NeoMutt/20161126 (1.7.1)
+Subject: Re: [meta-python][PATCH] python3-wekzeug: update RDEPENDS to pull in http module
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,59 +66,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Dec 2016 04:58:01 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 23 Dec 2016 06:06:51 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-SGkgYXJtaW4NCg0KUGxlYXNlIG1lcmdlIHRoaXMgcGF0Y2ggdG8gamV0aHJv
-Lg0KDQpCZXN0IHJlZ2FyZHMuDQpMZWkNCg0KPiAtLS0tLU9yaWdpbmFsIE1l
-c3NhZ2UtLS0tLQ0KPiBGcm9tOiBMZWksIE1hb2h1aQ0KPiBTZW50OiBGcmlk
-YXksIERlY2VtYmVyIDIzLCAyMDE2IDEyOjQzIFBNDQo+IFRvOiBvcGVuZW1i
-ZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBDYzogTGVp
-LCBNYW9odWkNCj4gU3ViamVjdDogW29lLWpldGhyb10gW21ldGEteGZjZV1b
-UEFUQ0hdIGltc2V0dGluZ3M6IG1vdmUgdG8gY29ycmVjdCBkaXJlY3RvcnkN
-Cj4gDQo+IFNpZ25lZC1vZmYtYnk6IExlaSBNYW9odWkgPGxlaW1hb2h1aUBj
-bi5mdWppdHN1LmNvbT4NCj4gLS0tDQo+ICAuLi4vaW1zZXR0aW5ncy97ID0+
-IGltc2V0dGluZ3N9L2d0ay1pcy1yZXF1aXJlZC1ieS1ub3RpZnkucGF0Y2gg
-ICAgICAgICAgIHwgMA0KPiAgLi4uL211bHRpLWxpbmUtQUNMT0NBTF9BTUZM
-QUdTLWlzbm90LXN1cHBvcnRlZC1ieS1hdXRvcmVjb25mLnBhdGNoICAgICAg
-ICB8IDANCj4gIG1ldGEteGZjZS9yZWNpcGVzLWV4dGVuZGVkL3sgPT4gaW1z
-ZXR0aW5nc30vaW1zZXR0aW5nc18xLjYuOC5iYiAgICAgICAgICAgfCAwDQo+
-ICAzIGZpbGVzIGNoYW5nZWQsIDAgaW5zZXJ0aW9ucygrKSwgMCBkZWxldGlv
-bnMoLSkgIHJlbmFtZSBtZXRhLXhmY2UvcmVjaXBlcy0NCj4gZXh0ZW5kZWQv
-aW1zZXR0aW5ncy97ID0+IGltc2V0dGluZ3N9L2d0ay1pcy1yZXF1aXJlZC1i
-eS1ub3RpZnkucGF0Y2ggKDEwMCUpDQo+IHJlbmFtZSBtZXRhLXhmY2UvcmVj
-aXBlcy1leHRlbmRlZC9pbXNldHRpbmdzL3sgPT4gaW1zZXR0aW5nc30vbXVs
-dGktbGluZS0NCj4gQUNMT0NBTF9BTUZMQUdTLWlzbm90LXN1cHBvcnRlZC1i
-eS1hdXRvcmVjb25mLnBhdGNoICgxMDAlKSAgcmVuYW1lIG1ldGEtDQo+IHhm
-Y2UvcmVjaXBlcy1leHRlbmRlZC97ID0+IGltc2V0dGluZ3N9L2ltc2V0dGlu
-Z3NfMS42LjguYmIgKDEwMCUpDQo+IA0KPiBkaWZmIC0tZ2l0IGEvbWV0YS14
-ZmNlL3JlY2lwZXMtZXh0ZW5kZWQvaW1zZXR0aW5ncy9ndGstaXMtcmVxdWly
-ZWQtYnktDQo+IG5vdGlmeS5wYXRjaCBiL21ldGEteGZjZS9yZWNpcGVzLWV4
-dGVuZGVkL2ltc2V0dGluZ3MvaW1zZXR0aW5ncy9ndGstaXMtDQo+IHJlcXVp
-cmVkLWJ5LW5vdGlmeS5wYXRjaA0KPiBzaW1pbGFyaXR5IGluZGV4IDEwMCUN
-Cj4gcmVuYW1lIGZyb20gbWV0YS14ZmNlL3JlY2lwZXMtZXh0ZW5kZWQvaW1z
-ZXR0aW5ncy9ndGstaXMtcmVxdWlyZWQtYnktDQo+IG5vdGlmeS5wYXRjaA0K
-PiByZW5hbWUgdG8gbWV0YS14ZmNlL3JlY2lwZXMtZXh0ZW5kZWQvaW1zZXR0
-aW5ncy9pbXNldHRpbmdzL2d0ay1pcy1yZXF1aXJlZC1ieS0NCj4gbm90aWZ5
-LnBhdGNoDQo+IGRpZmYgLS1naXQgYS9tZXRhLXhmY2UvcmVjaXBlcy1leHRl
-bmRlZC9pbXNldHRpbmdzL211bHRpLWxpbmUtQUNMT0NBTF9BTUZMQUdTLQ0K
-PiBpc25vdC1zdXBwb3J0ZWQtYnktYXV0b3JlY29uZi5wYXRjaCBiL21ldGEt
-eGZjZS9yZWNpcGVzLQ0KPiBleHRlbmRlZC9pbXNldHRpbmdzL2ltc2V0dGlu
-Z3MvbXVsdGktbGluZS1BQ0xPQ0FMX0FNRkxBR1MtaXNub3Qtc3VwcG9ydGVk
-LWJ5LQ0KPiBhdXRvcmVjb25mLnBhdGNoDQo+IHNpbWlsYXJpdHkgaW5kZXgg
-MTAwJQ0KPiByZW5hbWUgZnJvbSBtZXRhLXhmY2UvcmVjaXBlcy1leHRlbmRl
-ZC9pbXNldHRpbmdzL211bHRpLWxpbmUtQUNMT0NBTF9BTUZMQUdTLQ0KPiBp
-c25vdC1zdXBwb3J0ZWQtYnktYXV0b3JlY29uZi5wYXRjaA0KPiByZW5hbWUg
-dG8gbWV0YS14ZmNlL3JlY2lwZXMtZXh0ZW5kZWQvaW1zZXR0aW5ncy9pbXNl
-dHRpbmdzL211bHRpLWxpbmUtDQo+IEFDTE9DQUxfQU1GTEFHUy1pc25vdC1z
-dXBwb3J0ZWQtYnktYXV0b3JlY29uZi5wYXRjaA0KPiBkaWZmIC0tZ2l0IGEv
-bWV0YS14ZmNlL3JlY2lwZXMtZXh0ZW5kZWQvaW1zZXR0aW5nc18xLjYuOC5i
-YiBiL21ldGEtDQo+IHhmY2UvcmVjaXBlcy1leHRlbmRlZC9pbXNldHRpbmdz
-L2ltc2V0dGluZ3NfMS42LjguYmINCj4gc2ltaWxhcml0eSBpbmRleCAxMDAl
-DQo+IHJlbmFtZSBmcm9tIG1ldGEteGZjZS9yZWNpcGVzLWV4dGVuZGVkL2lt
-c2V0dGluZ3NfMS42LjguYmINCj4gcmVuYW1lIHRvIG1ldGEteGZjZS9yZWNp
-cGVzLWV4dGVuZGVkL2ltc2V0dGluZ3MvaW1zZXR0aW5nc18xLjYuOC5iYg0K
-PiAtLQ0KPiAxLjguNC4yDQoNCgoK
+* Derek Straka <derek@asterius.io> [161222 16:46]:
+
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+>  meta-python/recipes-devtools/python/python3-werkzeug_0.11.11.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+
+> diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_0.11.11.bb b/meta-python/recipes-devtools/python/python3-werkzeug_0.11.11.bb
+> index af2d86a..145a1de 100644
+> --- a/meta-python/recipes-devtools/python/python3-werkzeug_0.11.11.bb
+> +++ b/meta-python/recipes-devtools/python/python3-werkzeug_0.11.11.bb
+> @@ -1,2 +1,4 @@
+>  inherit pypi setuptools3
+>  require python-werkzeug.inc
+> +
+> +RDEPENDS_${PN} += "${PYTHON_PN}-misc"
+
+How much of python3-misc is actually needed? Just running du -sh gave
+me:
+4.2M tmp/work/armv5e-oe-linux-gnueabi/python3/3.5.1-r1.0/packages-split/python3-misc/usr/lib/python3.5/
+
+If `http` doesn't require much of the other stuf in python3-misc, could
+you split out python3-http?
+
+Not that I'm using python3-werkzeug, but I've been contemplating it...
+
+Cheers,
+Anders
+
+-- 
+Anders Darander, Senior System Architect
+ChargeStorm AB / eStorm AB
 
