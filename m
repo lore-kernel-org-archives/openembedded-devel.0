@@ -1,36 +1,48 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id E080A7723B
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E7F87723F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Dec 2016 22:25:27 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id h201so18240024qke.3
+	Fri, 23 Dec 2016 23:24:36 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1482535477; h=Content-Type: To: Subject: Message-ID: Date:
+	From: References: In-Reply-To: MIME-Version: Sender;
+	bh=Hu3o5m1AcbQZuTeHIfqAQKXoExK37afPGI4yojq8RAg=;
+	b=Ks7hu1TYFNiixZU6s8jDgOgtWF2dPGkAkQZ7bZfIGDQL/W2MPT8A13ym4W+WfPSEm0bJSDGR
+	pS4Seu/Pj3hPpAEGLHP1DQ9bxsin0zDiyRcNsZArnVDH62CDY9pnYFOLuSarwvivR4P1KLUQ
+	35hZq4cf88T6Vdze9LiuEWRFqNo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
+	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
+	Message-ID: Subject: To: Content-Type;
+	b=Rx53g+UnMY5lllKYgNuFZRUFeRcEiM/5v44dHQZympktwfhRJ9CMlleGRlZuygFjuskNtq
+	tt1w7nUoNnh/BDkze8IWmIFvqXHCuUKnexAo0Tx6f9iHB1idPSOlUt3079/luQ0Gp3JYj5fU
+	y3OJiHmsoALm+wfz2gY+DXn/eYddk=
+Sender: derek@asterius.io
+X-Mailgun-Sending-Ip: 104.130.122.4
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Received: from mail-io0-f176.google.com (mail-io0-f176.google.com
+	[209.85.223.176])
+	by mxa.mailgun.org with ESMTP id 585db235.7fa0d8798330-in06;
+	Fri, 23 Dec 2016 23:24:37 -0000 (UTC)
+Received: by mail-io0-f176.google.com with SMTP id d9so263519608ioe.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Dec 2016 14:25:29 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=KPUkH0qEv/RlW5ccbF8ihKLs1MPBtUtH9H07OsJM2x0=;
-	b=CpC4XE1cjLCVSH6vWZBQ79++i8bx61jOgKi9tzG7HH6cik6dPLB6j7utDx3GOvmix5
-	rCKa8wlOeVB9rQNHlViHxUgtqyciZuuH31y8Y9u0PglYHb8eWs2ala+RRCuw+x0NeGmI
-	C3qk/bsMMtovLaLmfP5w1RWdqLYrituhOLJGNp/Ck5Qma8pz93/Q+gtIvlnOCC5MjCPw
-	AktLOZtXsEEhIDB5RjMW+ToVYUlgeEAAlkzvKYHn4XeAKtSTeja1xpvFd/rT9sBwHr3s
-	I+T8DZhiwcfgA4TkNTOHVt2LM+JWYI/tsSjldtO54PyF4KyWYsD91LvJGZthadjc594O
-	tRWg==
-X-Gm-Message-State: AIkVDXKAWeynKG/20Kt4QpdKQm1dhPDXHobjxMbjRMWpKu0KzwFeQpQ3DxWOaJUI7pnoQA==
-X-Received: by 10.55.4.19 with SMTP id 19mr16869745qke.320.1482531929170;
-	Fri, 23 Dec 2016 14:25:29 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
-	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
-	f142sm8041176qke.19.2016.12.23.14.25.28
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 23 Dec 2016 14:25:28 -0800 (PST)
+	Fri, 23 Dec 2016 15:24:36 -0800 (PST)
+X-Gm-Message-State: AIkVDXLVIqdGBHl8t1LSE2WnJKdSbnzwFNbBTs/y6CTVj58y5nB+A6wfbAD5vkTJnz05+4kffzTyz0Ics7pilw==
+X-Received: by 10.107.131.195 with SMTP id n64mr17980277ioi.161.1482535476663; 
+	Fri, 23 Dec 2016 15:24:36 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.107.191.2 with HTTP; Fri, 23 Dec 2016 15:24:36 -0800 (PST)
+In-Reply-To: <CADNbA1rGRKuck_s=uvsntmWTiErEOTEzQc_SebnjVu-ZBevKdQ@mail.gmail.com>
+References: <1482421531-29836-1-git-send-email-derek@asterius.io>
+	<20161223060645.zxhknpoqi7bkfo43@ad.chargestorm.se>
+	<CADNbA1rGRKuck_s=uvsntmWTiErEOTEzQc_SebnjVu-ZBevKdQ@mail.gmail.com>
 From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Dec 2016 17:25:19 -0500
-Message-Id: <1482531919-26391-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-webserver][PATCH] apache2: always use the archive.apache.org to ensure older releases are always available
+Date: Fri, 23 Dec 2016 18:24:36 -0500
+X-Gmail-Original-Message-ID: <CADNbA1pF-JAD5jKi9rYFj=Pqf6xECoZSmW-H8-Q1svb_SkUQgQ@mail.gmail.com>
+Message-ID: <CADNbA1pF-JAD5jKi9rYFj=Pqf6xECoZSmW-H8-Q1svb_SkUQgQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-python][PATCH] python3-wekzeug: update RDEPENDS to pull in http module
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,41 +55,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Dec 2016 22:25:29 -0000
+X-List-Received-Date: Fri, 23 Dec 2016 23:24:37 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb | 2 +-
- meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb        | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+Created patch to place it in a sane existing package, netclient (
+http://lists.openembedded.org/pipermail/openembedded-core/2016-December/130597.html).
+If accepted, python3-werkzeug needs to be updated with 'RDEPENDS_${PN} +=
+"${PYTHON_PN}-html ${PYTHON_PN}-netclient"'
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-index ca8ebaf..7a2b236 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-@@ -8,7 +8,7 @@ LICENSE = "Apache-2.0"
- 
- inherit autotools pkgconfig native
- 
--SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-+SRC_URI = "http://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
-           "
- 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-index 3bd8579..9446082 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-@@ -6,7 +6,7 @@ DEPENDS = "libtool-native apache2-native openssl expat pcre apr apr-util"
- SECTION = "net"
- LICENSE = "Apache-2.0"
- 
--SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-+SRC_URI = "http://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://server-makefile.patch \
-            file://httpd-2.4.1-corelimit.patch \
-            file://httpd-2.4.4-export.patch \
--- 
-2.7.4
+On Fri, Dec 23, 2016 at 9:16 AM, Derek Straka <derek@asterius.io> wrote:
 
+> Agreed.  It is self-contained.  It looks like it just fell through into
+> misc. I can submit a patch tomorrow to oe-core to create a new package.
+> Until that gets accepted, depending on misc will be a necessary evil to use
+> the full functionality.
+>
+> -Derek
+>
+> On Fri, Dec 23, 2016 at 1:06 AM, Anders Darander <anders@chargestorm.se>
+> wrote:
+>
+>> * Derek Straka <derek@asterius.io> [161222 16:46]:
+>>
+>> > Signed-off-by: Derek Straka <derek@asterius.io>
+>> > ---
+>> >  meta-python/recipes-devtools/python/python3-werkzeug_0.11.11.bb | 2 ++
+>> >  1 file changed, 2 insertions(+)
+>>
+>> > diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_0.11.
+>> 11.bb b/meta-python/recipes-devtools/python/python3-werkzeug_0.11.11.bb
+>> > index af2d86a..145a1de 100644
+>> > --- a/meta-python/recipes-devtools/python/python3-werkzeug_0.11.11.bb
+>> > +++ b/meta-python/recipes-devtools/python/python3-werkzeug_0.11.11.bb
+>> > @@ -1,2 +1,4 @@
+>> >  inherit pypi setuptools3
+>> >  require python-werkzeug.inc
+>> > +
+>> > +RDEPENDS_${PN} += "${PYTHON_PN}-misc"
+>>
+>> How much of python3-misc is actually needed? Just running du -sh gave
+>> me:
+>> 4.2M tmp/work/armv5e-oe-linux-gnueabi/python3/3.5.1-r1.0/packages
+>> -split/python3-misc/usr/lib/python3.5/
+>>
+>> If `http` doesn't require much of the other stuf in python3-misc, could
+>> you split out python3-http?
+>>
+>> Not that I'm using python3-werkzeug, but I've been contemplating it...
+>>
+>> Cheers,
+>> Anders
+>>
+>> --
+>> Anders Darander, Senior System Architect
+>> ChargeStorm AB / eStorm AB
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>
+>
 
