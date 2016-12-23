@@ -1,50 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id CCDFF773EC
+Return-Path: <marcel@ziswiler.com>
+X-Greylist: delayed 305 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 23 Dec 2016 10:27:48 UTC
+Received: from mout.perfora.net (mout.perfora.net [74.208.4.196])
+	by mail.openembedded.org (Postfix) with ESMTP id D7EAD7767A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Dec 2016 10:15:57 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id c85so2557838wmi.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Dec 2016 02:15:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=DrPrBjGdRk+fI+nAqDV8AHYovv6yi8PD4jEsUtS6N8M=;
-	b=Fiun6bi/o8aehyi0IENegWuNBNW3I6kvqn54+ADJZ4TFS4V1Oy37ZRhVpJjRw0d3we
-	ITWEC6YqNi6G8+sOLNCGoo4oH0T6rHcB8tWLIR1HgWJKkUOSgkEY9zZUKZpUcmWNmsTZ
-	npD6JsiFyOetKsBgR9zk90ZBaDGWSaejoLOjO+F9LfqdM/RdpTqBB7qIUHeYJN5+kBpV
-	PEHT23ghcXc0EczrwwywrYjofwjvmkaJB4k9c66BjLG0Z9canlrE+QNdmYw+2ctpg8Wz
-	6X7H22gvT/BOcaHpFCN2UEOKUYZoCmlpdQYCy85WFDaL8T3VrmfCPhbB1d+BIXyI/ddu
-	aw7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=DrPrBjGdRk+fI+nAqDV8AHYovv6yi8PD4jEsUtS6N8M=;
-	b=kUzV+0m5MqLkJckSQGE6mwOtzj7VDe4xQH1yx+9XIQ6T3mY7519qT6ugn6fqH8rFZf
-	nDDSdznbSLFazNB/iQ8r87S+97uSN8+LBCHbZxT2QMac2Y2ynlJiybfu+cUgl9GINBB8
-	+LJWYeujPvCMLLv/WwzgP6wKOHlcI+hjGCVLKwgzNrMCk9NYE/NvqvvfHF4ZmZhSsMck
-	Ocfx4yhFVY8J60x/kIQdTjC0efYCsIGJxThDP+2iV1bSSyi8uiKitsD81e6q02bdLmwE
-	EcaTkNZWfIc93NDoG6oy+p0jgtuprW8mMydxAv3jCpj3P9Es1D3xjPN3D7J5FtDtt8TA
-	QvVg==
-X-Gm-Message-State: AIkVDXJfPY+36dDPEdc8n7fkhc9h5mTq4DCYYJV8Xn8EEaGHquXnOmYSEQFY27nNj43W2g==
-X-Received: by 10.28.72.3 with SMTP id v3mr16522569wma.20.1482488158590;
-	Fri, 23 Dec 2016 02:15:58 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	c187sm36320584wmd.13.2016.12.23.02.15.57
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 23 Dec 2016 02:15:57 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 23 Dec 2016 11:15:58 +0100
+	Fri, 23 Dec 2016 10:27:48 +0000 (UTC)
+Received: from marcel-pc.toradex.int.net ([84.227.37.153]) by
+	mrelay.perfora.net (mreueus001 [74.208.5.2]) with ESMTPA (Nemesis) id
+	0Lm5HL-1cthoS0kqn-00ZdIJ; Fri, 23 Dec 2016 11:22:37 +0100
+From: Marcel Ziswiler <marcel@ziswiler.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161223101558.GA3294@jama>
-References: <1482468166-33076-1-git-send-email-leimaohui@cn.fujitsu.com>
-	<1B56A49860EB2D45ADE3731B15C959FDFE5B81EC@G08CNEXMBPEKD01.g08.fujitsu.local>
-MIME-Version: 1.0
-In-Reply-To: <1B56A49860EB2D45ADE3731B15C959FDFE5B81EC@G08CNEXMBPEKD01.g08.fujitsu.local>
-User-Agent: Mutt/1.7.2 (2016-11-26)
-Subject: Re: [oe-jethro] [meta-xfce][PATCH] imsettings: move to correct directory
+Date: Fri, 23 Dec 2016 11:22:30 +0100
+Message-Id: <20161223102230.16697-1-marcel@ziswiler.com>
+X-Mailer: git-send-email 2.9.3
+X-Provags-ID: V03:K0:ucf0wlDI9Rd3+kdPm9ugDUvC2rAKSK3C2aGhqW7OV8+7lPT5Pd5
+	wwVr+wNCURRHsIQFQuAzov34lCNNYZbfaTuU8DrOHuYqWk+qqUBsyjCGQUUI8ZRrE9SEXCH
+	wcFGGRQs34FN3BoyszbuOq3Juf9W7okIH4epUgx+Fd+vI/gtJPnDikRJzkS3e+orIC6YhCL
+	kGm5sb2VkpH1hyFOVca/w==
+X-UI-Out-Filterresults: notjunk:1;V01:K0:GqUl7ouEGuI=:hOJUD9oLGxeYR3f3lB1yXd
+	bM72QMANjWMGFjUGa3r/c4nJB+k+cRPzdAgYudpAhhZis3EOuYEwZdWmQWWYAb/2Q+75mNG/G
+	y7HnWm527mi1vkJOGTlTfvrnU5vyvxL71xDHVDOYVPEm+XWhc2JtSeqD8ALhSrJDC29ao2wcn
+	Hfd4sfC3y6jjxF3qW7sHGlZEJ4yItidvokqp96LCbTa+yR6y2Rg21qOl+5VdEoJhRNRH/GJVq
+	plykQ3sGm82rFX3W3BLtPcFm4uWvgtjhI5H0DAgj4Eo5DgSnYVeH/mUyCe7M95bsALWEHWPfH
+	IRNpv5yzBGLE5XtpHMq+ZlVc0/x/GHm1VYS7Y+kZu4uHQ3o//HCTk00F1gXkiiLq1hLBA8zWh
+	Q/iAFa2mZhPlJrGSI0vtCjBttg0iFUFBer1yqExdSjhJus3vbPxMGqO34jKMx5cM2zEfzhGbu
+	otKyWk5QI6NJ8ittVnk+DQp0fj1j3hk2GyYQEF4UtAwp5O+pzRQNVRu8ZxmtwuuTW4CGs5hVb
+	lZ6fCVWs0zd1QBza9hEhfW1qvlLOHMEnC9pPTukk4hq4BEH7o9C4cY3/mBQHexsgdeYHpHC7j
+	r4WdobGjNchN6Y49DteNHQiD8iGKhjEVOHspYLcmjArbzQjS/g/x9GdB6jBjJUD6j4ayHAL//
+	l/+tjl3uT4Mv3jRxuGg+1shdSxKEsoXF93BOpNBq83qsgiE3XyjCTzROXthUuQJX8jTg=
+Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+	Jonathan David <jonathan.david@ni.com>,
+	Stefan Agner <stefan.agner@toradex.com>,
+	Max Krummenacher <max.krummenacher@toradex.com>
+Subject: [PATCH] xinput-calibrator: fix operation on multihead configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,102 +45,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Dec 2016 10:15:58 -0000
-X-Groupsio-MsgNum: 64509
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="C7zPtVaVf+AK4Oqc"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 23 Dec 2016 10:27:55 -0000
 
---C7zPtVaVf+AK4Oqc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 
-On Fri, Dec 23, 2016 at 04:57:58AM +0000, Lei, Maohui wrote:
-> Hi armin
->=20
-> Please merge this patch to jethro.
+As e.g. the Toradex Colibri T20, Apalis/Colibri T30 and Apalis TK1
+modules are multihead capable and if HDMI is plugged in while the xinput
+calibrator was run this led to the following error message:
 
-It's needed in krogoth as well, isn't it?
+root@apalis-t30:~# xinput_calibrator_once.sh
+Unknown option: 640x480
 
->=20
-> Best regards.
-> Lei
->=20
-> > -----Original Message-----
-> > From: Lei, Maohui
-> > Sent: Friday, December 23, 2016 12:43 PM
-> > To: openembedded-devel@lists.openembedded.org
-> > Cc: Lei, Maohui
-> > Subject: [oe-jethro] [meta-xfce][PATCH] imsettings: move to correct dir=
-ectory
-> >=20
-> > Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
-> > ---
-> >  .../imsettings/{ =3D> imsettings}/gtk-is-required-by-notify.patch     =
-      | 0
-> >  .../multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch    =
-    | 0
-> >  meta-xfce/recipes-extended/{ =3D> imsettings}/imsettings_1.6.8.bb     =
-      | 0
-> >  3 files changed, 0 insertions(+), 0 deletions(-)  rename meta-xfce/rec=
-ipes-
-> > extended/imsettings/{ =3D> imsettings}/gtk-is-required-by-notify.patch =
-(100%)
-> > rename meta-xfce/recipes-extended/imsettings/{ =3D> imsettings}/multi-l=
-ine-
-> > ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch (100%)  rename meta-
-> > xfce/recipes-extended/{ =3D> imsettings}/imsettings_1.6.8.bb (100%)
-> >=20
-> > diff --git a/meta-xfce/recipes-extended/imsettings/gtk-is-required-by-
-> > notify.patch b/meta-xfce/recipes-extended/imsettings/imsettings/gtk-is-
-> > required-by-notify.patch
-> > similarity index 100%
-> > rename from meta-xfce/recipes-extended/imsettings/gtk-is-required-by-
-> > notify.patch
-> > rename to meta-xfce/recipes-extended/imsettings/imsettings/gtk-is-requi=
-red-by-
-> > notify.patch
-> > diff --git a/meta-xfce/recipes-extended/imsettings/multi-line-ACLOCAL_A=
-MFLAGS-
-> > isnot-supported-by-autoreconf.patch b/meta-xfce/recipes-
-> > extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-support=
-ed-by-
-> > autoreconf.patch
-> > similarity index 100%
-> > rename from meta-xfce/recipes-extended/imsettings/multi-line-ACLOCAL_AM=
-FLAGS-
-> > isnot-supported-by-autoreconf.patch
-> > rename to meta-xfce/recipes-extended/imsettings/imsettings/multi-line-
-> > ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
-> > diff --git a/meta-xfce/recipes-extended/imsettings_1.6.8.bb b/meta-
-> > xfce/recipes-extended/imsettings/imsettings_1.6.8.bb
-> > similarity index 100%
-> > rename from meta-xfce/recipes-extended/imsettings_1.6.8.bb
-> > rename to meta-xfce/recipes-extended/imsettings/imsettings_1.6.8.bb
-> > --
-> > 1.8.4.2
->=20
->=20
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Fix this by just using the first detected heads geometry definition.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 
---C7zPtVaVf+AK4Oqc
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+---
 
------BEGIN PGP SIGNATURE-----
+ .../add-geometry-input-when-calibrating.patch                 | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWFz5XQAKCRA3VSO3ZXaA
-HP/FAKCkIS2Sdxy9SAKL7NDs/4Ll2bIPbwCfaKQzkuA+qVRmNRnriBU7bnIp8DE=
-=K+to
------END PGP SIGNATURE-----
+diff --git a/meta/recipes-graphics/xinput-calibrator/xinput-calibrator/add-geometry-input-when-calibrating.patch b/meta/recipes-graphics/xinput-calibrator/xinput-calibrator/add-geometry-input-when-calibrating.patch
+index 9dc94ae..296b075 100644
+--- a/meta/recipes-graphics/xinput-calibrator/xinput-calibrator/add-geometry-input-when-calibrating.patch
++++ b/meta/recipes-graphics/xinput-calibrator/xinput-calibrator/add-geometry-input-when-calibrating.patch
+@@ -1,6 +1,6 @@
+-From 1cb83759632bb218559c4d0d65ff79f868c03dc5 Mon Sep 17 00:00:00 2001
+-From: "Maxin B. John" <maxin.john@intel.com>
+-Date: Tue, 9 Aug 2016 17:03:31 +0300
++From d4699c60c773e75a68227f82afea0b607667a4c0 Mon Sep 17 00:00:00 2001
++From: "Marcel Ziswiler" <marcel.ziswiler@toradex.com>>
++Date: Thu, 22 Dec 2016 11:34:31 +0100
+ Subject: [PATCH] add geometry input when calibrating
+ 
+ Send monitor geometry to xinput_calibrator when running the script
+@@ -9,8 +9,11 @@ Update:
+ 
+ Upstream-Status: Inappropriate [no longer maintained]
+ 
++Multihead capability update curtsy Toradex.
++
+ Signed-off-by: Jonathan David <jonathan.david@ni.com>
+ Signed-off-by: Maxin B. John <maxin.john@intel.com>
++Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+ ---
+  scripts/xinput_calibrator_pointercal.sh | 3 ++-
+  1 file changed, 2 insertions(+), 1 deletion(-)
+@@ -24,7 +27,7 @@ index fccb197..fea7c2f 100755
+  fi
+  
+ -CALDATA=`$BINARY --output-type xinput -v | tee $LOGFILE | grep '    xinput set' | sed 's/^    //g; s/$/;/g'`
+-+RESOLUTION=$(xrandr | awk -F '[[:space:]+]' '/ connected/ { if ($3 != "primary") print $3; if ($3 == "primary") print $4 }')
+++RESOLUTION=$(xrandr | awk -F '[[:space:]+]' '/ connected/ { if ($3 != "primary") print $3; if ($3 == "primary") print $4 }' | sed q)
+ +CALDATA=`$BINARY --geometry $RESOLUTION --output-type xinput -v | tee $LOGFILE | grep '    xinput set' | sed 's/^    //g; s/$/;/g'`
+  if [ ! -z "$CALDATA" ] ; then
+    echo $CALDATA > $CALFILE
+-- 
+2.9.3
 
---C7zPtVaVf+AK4Oqc--
+
