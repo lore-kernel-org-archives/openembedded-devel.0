@@ -1,59 +1,50 @@
-Return-Path: <anders@chargestorm.se>
-Received: from mail-lf0-f46.google.com (mail-lf0-f46.google.com
-	[209.85.215.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 24DDE7775D
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id CCDFF773EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Dec 2016 06:06:47 +0000 (UTC)
-Received: by mail-lf0-f46.google.com with SMTP id c13so132348202lfg.0
+	Fri, 23 Dec 2016 10:15:57 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id c85so2557838wmi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Dec 2016 22:06:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=chargestorm-se.20150623.gappssmtp.com; s=20150623;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-disposition:in-reply-to:organization
-	:user-agent; bh=NCes3hsOoz72cYOnX3MdZRoc4VufB/7O/HkOh8EMxB8=;
-	b=u/vPm/n1qq81YJKzjUFvc2ZUoUj8+ScInsAOcQ4EVDDNMIqRm3N3KTKHKjh6okdafF
-	gWF38PZqTesNTIfDQDb/LpApJ8PEmTYiJrLW26D2G2JRYB/h7U7DLEIR37xo3QU+UQ89
-	6xLiLMKljawVPJb3Vk43gz6sxoxCn0ROa+ttmjtgcDFrzEbBhsRNGrxgR3CiUHcA9vM4
-	3FgwqYyhYDF8rDehc15JEprrGambta02a4SXRq3ftTZgMXIRZa7S76Ty1lPUp7B8+C+G
-	iZwr7mGXS+D/sTAke9B7CGT8eySXALN2I/1oVZ2DvqYq9z9r+in6Q3xOc9DZGT5m4Uob
-	ZObg==
+	Fri, 23 Dec 2016 02:15:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=DrPrBjGdRk+fI+nAqDV8AHYovv6yi8PD4jEsUtS6N8M=;
+	b=Fiun6bi/o8aehyi0IENegWuNBNW3I6kvqn54+ADJZ4TFS4V1Oy37ZRhVpJjRw0d3we
+	ITWEC6YqNi6G8+sOLNCGoo4oH0T6rHcB8tWLIR1HgWJKkUOSgkEY9zZUKZpUcmWNmsTZ
+	npD6JsiFyOetKsBgR9zk90ZBaDGWSaejoLOjO+F9LfqdM/RdpTqBB7qIUHeYJN5+kBpV
+	PEHT23ghcXc0EczrwwywrYjofwjvmkaJB4k9c66BjLG0Z9canlrE+QNdmYw+2ctpg8Wz
+	6X7H22gvT/BOcaHpFCN2UEOKUYZoCmlpdQYCy85WFDaL8T3VrmfCPhbB1d+BIXyI/ddu
+	aw7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
-	:references:mime-version:content-disposition:in-reply-to
-	:organization:user-agent;
-	bh=NCes3hsOoz72cYOnX3MdZRoc4VufB/7O/HkOh8EMxB8=;
-	b=E2KVNqS1Dj5rJAPLCiL9zdhFMXxhNxFk6cBIl2zvfLudGA4l194cX2IEG7Yt7jdx9Y
-	xSxeV70Yi2XZPeoZBuxtGu9wZBCdZpHYELdTAWkzpMjLSPjfsNy28jsg+qUi+t3GHiLU
-	py/OmhdsxsDV+obxfOsgaFmnkzSDnDpbtaUhXNbLaHv5IAN/5eWDYF+dF6y+dMRqIFnn
-	k3Mt84AqVCYlboR/mxKLg5sP6q+OTt/DxlDGvbOZz+pqWgN/Zpxzt7IK19BmRUaZ6Fzl
-	haycKVrRDD5ZUgf3C4/k9qcA+DGRFrHOqPWgAodHrEdp7wAQWLYJKHxGjYpOywG7KEGI
-	dzBQ==
-X-Gm-Message-State: AIkVDXIX4YtkQxgfaTqq+alzMOJP8DlNKHclf+uTamRSolxpRvwjqu4bD8MkKR4x65lyUg==
-X-Received: by 10.25.133.135 with SMTP id h129mr3835310lfd.127.1482473207875; 
-	Thu, 22 Dec 2016 22:06:47 -0800 (PST)
-Received: from ad.chargestorm.se (h83-209-191-235.cust.se.alltele.net.
-	[83.209.191.235])
-	by smtp.gmail.com with ESMTPSA id 9sm7517481ljn.20.2016.12.22.22.06.46
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=DrPrBjGdRk+fI+nAqDV8AHYovv6yi8PD4jEsUtS6N8M=;
+	b=kUzV+0m5MqLkJckSQGE6mwOtzj7VDe4xQH1yx+9XIQ6T3mY7519qT6ugn6fqH8rFZf
+	nDDSdznbSLFazNB/iQ8r87S+97uSN8+LBCHbZxT2QMac2Y2ynlJiybfu+cUgl9GINBB8
+	+LJWYeujPvCMLLv/WwzgP6wKOHlcI+hjGCVLKwgzNrMCk9NYE/NvqvvfHF4ZmZhSsMck
+	Ocfx4yhFVY8J60x/kIQdTjC0efYCsIGJxThDP+2iV1bSSyi8uiKitsD81e6q02bdLmwE
+	EcaTkNZWfIc93NDoG6oy+p0jgtuprW8mMydxAv3jCpj3P9Es1D3xjPN3D7J5FtDtt8TA
+	QvVg==
+X-Gm-Message-State: AIkVDXJfPY+36dDPEdc8n7fkhc9h5mTq4DCYYJV8Xn8EEaGHquXnOmYSEQFY27nNj43W2g==
+X-Received: by 10.28.72.3 with SMTP id v3mr16522569wma.20.1482488158590;
+	Fri, 23 Dec 2016 02:15:58 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	c187sm36320584wmd.13.2016.12.23.02.15.57
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 22 Dec 2016 22:06:46 -0800 (PST)
-Date: Fri, 23 Dec 2016 07:06:45 +0100
-From: Anders Darander <anders@chargestorm.se>
+	Fri, 23 Dec 2016 02:15:57 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 23 Dec 2016 11:15:58 +0100
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20161223060645.zxhknpoqi7bkfo43@ad.chargestorm.se>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1482421531-29836-1-git-send-email-derek@asterius.io>
+Message-ID: <20161223101558.GA3294@jama>
+References: <1482468166-33076-1-git-send-email-leimaohui@cn.fujitsu.com>
+	<1B56A49860EB2D45ADE3731B15C959FDFE5B81EC@G08CNEXMBPEKD01.g08.fujitsu.local>
 MIME-Version: 1.0
-In-Reply-To: <1482421531-29836-1-git-send-email-derek@asterius.io>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: NeoMutt/20161126 (1.7.1)
-Subject: Re: [meta-python][PATCH] python3-wekzeug: update RDEPENDS to pull in http module
+In-Reply-To: <1B56A49860EB2D45ADE3731B15C959FDFE5B81EC@G08CNEXMBPEKD01.g08.fujitsu.local>
+User-Agent: Mutt/1.7.2 (2016-11-26)
+Subject: Re: [oe-jethro] [meta-xfce][PATCH] imsettings: move to correct directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,40 +57,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Dec 2016 06:06:51 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 23 Dec 2016 10:15:58 -0000
+X-Groupsio-MsgNum: 64509
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="C7zPtVaVf+AK4Oqc"
 Content-Disposition: inline
 
-* Derek Straka <derek@asterius.io> [161222 16:46]:
+--C7zPtVaVf+AK4Oqc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Signed-off-by: Derek Straka <derek@asterius.io>
-> ---
->  meta-python/recipes-devtools/python/python3-werkzeug_0.11.11.bb | 2 ++
->  1 file changed, 2 insertions(+)
+On Fri, Dec 23, 2016 at 04:57:58AM +0000, Lei, Maohui wrote:
+> Hi armin
+>=20
+> Please merge this patch to jethro.
 
-> diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_0.11.11.bb b/meta-python/recipes-devtools/python/python3-werkzeug_0.11.11.bb
-> index af2d86a..145a1de 100644
-> --- a/meta-python/recipes-devtools/python/python3-werkzeug_0.11.11.bb
-> +++ b/meta-python/recipes-devtools/python/python3-werkzeug_0.11.11.bb
-> @@ -1,2 +1,4 @@
->  inherit pypi setuptools3
->  require python-werkzeug.inc
-> +
-> +RDEPENDS_${PN} += "${PYTHON_PN}-misc"
+It's needed in krogoth as well, isn't it?
 
-How much of python3-misc is actually needed? Just running du -sh gave
-me:
-4.2M tmp/work/armv5e-oe-linux-gnueabi/python3/3.5.1-r1.0/packages-split/python3-misc/usr/lib/python3.5/
+>=20
+> Best regards.
+> Lei
+>=20
+> > -----Original Message-----
+> > From: Lei, Maohui
+> > Sent: Friday, December 23, 2016 12:43 PM
+> > To: openembedded-devel@lists.openembedded.org
+> > Cc: Lei, Maohui
+> > Subject: [oe-jethro] [meta-xfce][PATCH] imsettings: move to correct dir=
+ectory
+> >=20
+> > Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
+> > ---
+> >  .../imsettings/{ =3D> imsettings}/gtk-is-required-by-notify.patch     =
+      | 0
+> >  .../multi-line-ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch    =
+    | 0
+> >  meta-xfce/recipes-extended/{ =3D> imsettings}/imsettings_1.6.8.bb     =
+      | 0
+> >  3 files changed, 0 insertions(+), 0 deletions(-)  rename meta-xfce/rec=
+ipes-
+> > extended/imsettings/{ =3D> imsettings}/gtk-is-required-by-notify.patch =
+(100%)
+> > rename meta-xfce/recipes-extended/imsettings/{ =3D> imsettings}/multi-l=
+ine-
+> > ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch (100%)  rename meta-
+> > xfce/recipes-extended/{ =3D> imsettings}/imsettings_1.6.8.bb (100%)
+> >=20
+> > diff --git a/meta-xfce/recipes-extended/imsettings/gtk-is-required-by-
+> > notify.patch b/meta-xfce/recipes-extended/imsettings/imsettings/gtk-is-
+> > required-by-notify.patch
+> > similarity index 100%
+> > rename from meta-xfce/recipes-extended/imsettings/gtk-is-required-by-
+> > notify.patch
+> > rename to meta-xfce/recipes-extended/imsettings/imsettings/gtk-is-requi=
+red-by-
+> > notify.patch
+> > diff --git a/meta-xfce/recipes-extended/imsettings/multi-line-ACLOCAL_A=
+MFLAGS-
+> > isnot-supported-by-autoreconf.patch b/meta-xfce/recipes-
+> > extended/imsettings/imsettings/multi-line-ACLOCAL_AMFLAGS-isnot-support=
+ed-by-
+> > autoreconf.patch
+> > similarity index 100%
+> > rename from meta-xfce/recipes-extended/imsettings/multi-line-ACLOCAL_AM=
+FLAGS-
+> > isnot-supported-by-autoreconf.patch
+> > rename to meta-xfce/recipes-extended/imsettings/imsettings/multi-line-
+> > ACLOCAL_AMFLAGS-isnot-supported-by-autoreconf.patch
+> > diff --git a/meta-xfce/recipes-extended/imsettings_1.6.8.bb b/meta-
+> > xfce/recipes-extended/imsettings/imsettings_1.6.8.bb
+> > similarity index 100%
+> > rename from meta-xfce/recipes-extended/imsettings_1.6.8.bb
+> > rename to meta-xfce/recipes-extended/imsettings/imsettings_1.6.8.bb
+> > --
+> > 1.8.4.2
+>=20
+>=20
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-If `http` doesn't require much of the other stuf in python3-misc, could
-you split out python3-http?
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Not that I'm using python3-werkzeug, but I've been contemplating it...
+--C7zPtVaVf+AK4Oqc
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Cheers,
-Anders
+-----BEGIN PGP SIGNATURE-----
 
--- 
-Anders Darander, Senior System Architect
-ChargeStorm AB / eStorm AB
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWFz5XQAKCRA3VSO3ZXaA
+HP/FAKCkIS2Sdxy9SAKL7NDs/4Ll2bIPbwCfaKQzkuA+qVRmNRnriBU7bnIp8DE=
+=K+to
+-----END PGP SIGNATURE-----
 
+--C7zPtVaVf+AK4Oqc--
