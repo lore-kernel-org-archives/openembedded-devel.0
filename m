@@ -1,53 +1,37 @@
-Return-Path: <asselsm@gmail.com>
-Received: from mail-yb0-f174.google.com (mail-yb0-f174.google.com
-	[209.85.213.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 391C177230
+Return-Path: <marcel@ziswiler.com>
+Received: from mout.perfora.net (mout.perfora.net [74.208.4.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 81EF977238
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Dec 2016 16:17:18 +0000 (UTC)
-Received: by mail-yb0-f174.google.com with SMTP id d59so89942578ybi.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Dec 2016 08:17:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-transfer-encoding;
-	bh=wuLCKKVxQBthoz6s3kdjbEhnmlhmHi+GdoT0dnKVxts=;
-	b=i0rD5ePvIPvd5/P1xjeZcFG+YQdZwXRV+jWVn02F/kJtPQQJRfzfL4ia8t/7nwHzBf
-	f7jT4/wx7gPp56xex4qT2WqI/c6nTQ9HZEuy2ie9Gq7UhdTjOl37qhg4/WZDIHehUo6S
-	4us5zpHWs9PNl7gS71fh4Mht6oJDDUojJRAmQNBP/xcXtnx3UtkKQQzh3TfvaLXYV93S
-	tGZyo4CG1cxZ0KmK0Uflo6XhW12mJI9IRhH/YzhJlHXYvPNILQOmScGQOUsZ1tvQ/0L9
-	jpRqf+Ao/cWLf/4IPDZYM6+kbVsfFoXbDSaB0Ik4SrUWFrOIkPZ2ZYsjPH3w18k5gjXl
-	W3tQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to:cc:content-transfer-encoding;
-	bh=wuLCKKVxQBthoz6s3kdjbEhnmlhmHi+GdoT0dnKVxts=;
-	b=SzIf9xus+Vr0iX/jDfqdagzWsYzhasphzkjX1awwFTL4mlcGIl2QWevVjmoDVOywI7
-	hC7kJLE+Wc0LAk8HphQRQ6cmc+05vWOBYrdycVYYREciHNZyQ7Um8793mBOUZDKjUSIC
-	HQgoUkC0cJ919YAWFTTy7xw/cOL6ggPoNKAFPMFjt5uSgzm2L8MVs/7QMK7+rucZy6ZX
-	Uh5DcLGkm+6+2eDvDTPkNTWn9zJ8QjOXDvmbeth7XaMtPfNAFloq0HWMFZFkFi7Xipgt
-	IVlIlx74GkEHQ5AOmHkwy2lGmtxurn5dBxVXpoEiDFjphxSDRwNDIiLRkYC86wzWps2x
-	8Tpg==
-X-Gm-Message-State: AIkVDXJgxvIes1dVOdpci3RD0ioakYZLd4ydOYD2C0nkZ6U7hjOmo3EpNIDtbZDuh+XdtpnyOh3tLe2BJPWu2Q==
-X-Received: by 10.37.119.146 with SMTP id s140mr4103824ybc.173.1482509839950; 
-	Fri, 23 Dec 2016 08:17:19 -0800 (PST)
-MIME-Version: 1.0
-Sender: asselsm@gmail.com
-Received: by 10.37.171.82 with HTTP; Fri, 23 Dec 2016 08:17:19 -0800 (PST)
-In-Reply-To: <CADNbA1rKM35TzdhXLrwiARRQxQ4p93Ck6oBSR9awjnU6C-524Q@mail.gmail.com>
-References: <1482357220-422-1-git-send-email-mark.asselstine@windriver.com>
-	<CABcZANmtther94ZrkEwVn=JYgvLkT2CdTkCLSJPDo7gEHFdaCA@mail.gmail.com>
-	<be954776-5d12-dbfb-c782-3f58f1d13361@windriver.com>
-	<CAPuovELANjs1goqXCb3RBSKLcwV3PLT+KqokjDxRGdXnEFp=kg@mail.gmail.com>
-	<CA+chaQeJ_YTOc3xjSKr=_yoafO-=U2mAxQnxRrd02hjT6YhH2w@mail.gmail.com>
-	<CADNbA1rKM35TzdhXLrwiARRQxQ4p93Ck6oBSR9awjnU6C-524Q@mail.gmail.com>
-From: "M. Asselstine" <asselsm@mcmaster.ca>
-Date: Fri, 23 Dec 2016 11:17:19 -0500
-X-Google-Sender-Auth: 0HAqZ8HS9-n0x7Fl7sfKzibSaQk
-Message-ID: <CAPuovE+o7ac3gd67rTpUfHgsmQKj8s4mXdGkJ9C2+5P_2Senug@mail.gmail.com>
+	Fri, 23 Dec 2016 22:15:34 +0000 (UTC)
+Received: from marcel-pc.toradex.int.net ([84.227.37.153]) by
+	mrelay.perfora.net (mreueus002 [74.208.5.2]) with ESMTPA (Nemesis) id
+	0MJlXG-1cJSBz42L6-00186O; Fri, 23 Dec 2016 23:15:24 +0100
+From: Marcel Ziswiler <marcel@ziswiler.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: "paul.eggleton@linux.intel.com" <paul.eggleton@linux.intel.com>
-Subject: Re: [meta-webserver][PATCH] apache2: the download has been moved to the 'archives'
+Date: Fri, 23 Dec 2016 23:15:14 +0100
+Message-Id: <20161223221514.29547-1-marcel@ziswiler.com>
+X-Mailer: git-send-email 2.9.3
+X-Provags-ID: V03:K0:k71j/ZTfnBcOsbTZdVGg4TrNPSYFyi7ULr1QX/hjkeW40Dwcrvx
+	LiD0gMcymIF9oCxLhmQJ2k2HvATMD7HOHX0H598WXYy9Cse3XiPZGs1oczOx/mi0Pf2TnG8
+	Vk2/VR32Vn1gO+p0gOmVPioPG1w1k1aH7B59q0IAmUtxrBxQh8CA6l3YioMgYjsxa18mMwY
+	AugreYxX/md7+M8mawQsQ==
+X-UI-Out-Filterresults: notjunk:1;V01:K0:rofOcMGmHFU=:AYjTMSJEEuLKXX0idgK/jK
+	xg5VvTsCzXtEYv4zgskYz2pp2iXcHkh+B9hbocNZEaz0gVYRkJxh7AZx6CoBhlonFbtAvquBw
+	4kxD4kow31P44QaPvGSYJ0UztljOELfMkogn2wyTIZIRGYve9j6pbAyPI7NDbgtulIhJRXx9s
+	c2QQULTdCWgHET/yLyloxrLvztvIXSzsHBxtovyyTmwIw+6pCFlS+nxGSjsLMkZyVvV1V14cE
+	yC7uhaXY5ZE9ZZVjDMKqEVypP6gAjo8BgPDaxvEZTNfvOWvGtA4I2q2wAbE2VBn1G9wz2inpf
+	ajBVO2/s2Ar63GQbLpuz8yCCOXfbdmiY9ssfqmHXO6xXWCzPKeFQWkYAKhXFE9ddwqdkKdJQn
+	blwgnKvRrIZx8NVyhxEHwHZnKdkj2smggq9Bvxuv9+GE5HvZ6HrykbmBU+I15zRts0ArAmyq0
+	cV6FWk7Jdd3Q4leSrPZXO0F8BeyhEmdwkrJCDWpK6dz5ecPjwqUnUu6DTN6cAFiUsLX4UiFaq
+	rkZ8gSUHvi50zsxY/M5pU/XpRGA7kIWA63SDnG47TlkjHfdkGCPZ1KwyOEN3BntyUQy1LBQbI
+	p25j5+Y7Na2yKk5g9WZY3dVVfHcGMW4JaUv259sLC8u+hEN0WvnOtvJas71hOMzKPJXvdMhK9
+	E/+Z97CZxZD9Oz8JX43wWrCZbq6SnCGFi4Y54RSjn3PXpNVKMBDEqnmRtNpU1kFWGKF0=
+Cc: Otavio Salvador <otavio@ossystems.com.br>,
+	Stefan Agner <stefan.agner@toradex.com>,
+	Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+	Max Krummenacher <max.krummenacher@toradex.com>,
+	Denys Dmytriyenko <denys@ti.com>, Lauren Post <lauren.post@freescale.com>
+Subject: [PATCH] linuxptp: fix cross compilation not using host headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,104 +44,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Dec 2016 16:17:19 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 23 Dec 2016 22:15:34 -0000
 
-On Fri, Dec 23, 2016 at 11:04 AM, Derek Straka <derek@asterius.io> wrote:
-> It seems like we could always pull out of
-> http://archive.apache.org/dist/httpd
-> <http://archive.apache.org/dist/httpd/httpd-$%7BPV> in this case and avoi=
-d
-> the maintenance headache Martin is alluding to.
+From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 
-Sounds good. I see your uprev RR so all is fine with me, glad to see
-this corrected, on to other distractions.
+Previously my morty build failed as follows:
 
-Thanks,
-MarkA
+| arm-angstrom-linux-gnueabi-gcc  -march=armv7-a -mthumb -mfpu=neon  -mfloat-abi
+=hard --sysroot=/data/build/oe_core-V2.7/build/tmp-glibc/sysroots/apalis-tk1-mai
+nline -Wall -DVER=1.6  -D_GNU_SOURCE -DHAVE_CLOCK_ADJTIME -DHAVE_POSIX_SPAWN -I/
+lib/modules/4.8.13/build/usr/include -DHAVE_ONESTEP_SYNC  -D_GNU_SOURCE -DHAVE_C
+LOCK_ADJTIME -DHAVE_ONESTEP_SYNC -O2 -pipe -g -feliminate-unused-debug-types -fd
+ebug-prefix-map=/data/build/oe_core-V2.7/build/tmp-glibc/work/armv7at2hf-neon-an
+gstrom-linux-gnueabi/linuxptp/1.6-r0=/usr/src/debug/linuxptp/1.6-r0 -fdebug-pref
+ix-map=/data/build/oe_core-V2.7/build/tmp-glibc/sysroots/x86_64-linux= -fdebug-p
+refix-map=/data/build/oe_core-V2.7/build/tmp-glibc/sysroots/apalis-tk1-mainline=
+   -c -o msg.o msg.c
+| {standard input}: Assembler messages:
+| {standard input}:39: Error: bad instruction `bswapq r0'
+| <builtin>: recipe for target 'msg.o' failed
+| make: *** [msg.o] Error 1
 
+As it tried using the kernel headers from my Fedora 23 build server
+located at /lib/modules/4.8.13/build/usr/include.
 
->
-> On Fri, Dec 23, 2016 at 10:59 AM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
->
->> Your original change was already supersedded by the upgrade sent by some=
-one
->> else.
->>
->> On Fri, Dec 23, 2016 at 4:56 PM, M. Asselstine <asselsm@mcmaster.ca>
->> wrote:
->>
->> > On Fri, Dec 23, 2016 at 10:51 AM, Mark Hatle <mark.hatle@windriver.com=
->
->> > wrote:
->> > > On 12/21/16 4:26 PM, Christopher Larson wrote:
->> > >> On Wed, Dec 21, 2016 at 2:53 PM, Mark Asselstine <
->> > >> mark.asselstine@windriver.com> wrote:
->> > >>
->> > >>> This release of apache2 is no longer found in the main downloads a=
-rea
->> > >>> but has been moved to the 'archives'. We should uprev apache2 but =
-for
->> > >>> now this will at least get the builds working again.
->> > >>>
->> > >>> Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
->> > >>>
->> > >>
->> > >> Wouldn=E2=80=99t it make sense to do a recipe-local addition to MIR=
-RORS to
->> > >> automatically fall back to the apache archive?
->> > >>
->> > >
->> > > That seems wrong to me.  The recipe should point to the proper upstr=
-eam
->> > location
->> > > for the archive.  If the archive moves, then the recipe should be
->> > updated to match.
->> > >
->> > > I know you can easily do local workarounds for mirrors and such, but=
- I
->> > wouldn't
->> > > consider putting them into a recipe directly as a good approach as i=
-t
->> > will hide
->> > > problems from people and make it unclear where the official download
->> > location is.
->> > >
->> > > --Mark
->> >
->> > Agreed. I also think that the concept is a bad one as if our apache2
->> > recipe is so far behind that the upstream has moved it to archived
->> > that things should break just to give us a kick in the pants to get on
->> > top of things and complete and uprev. So rather than mess around to
->> > paper this over I hope my original change can be merged to allow
->> > builds to complete and I will look to getting a review out for an
->> > uprev after the holidays.
->> >
->> > MarkA
->> >
->> >
->> > > --
->> > > _______________________________________________
->> > > Openembedded-devel mailing list
->> > > Openembedded-devel@lists.openembedded.org
->> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> > --
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> >
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Fix this by no longer calling the incdefs.sh shell script from the
+makefile.
+
+Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+
+---
+
+ .../linuxptp/no-incdefs-using-host-headers.patch   | 29 ++++++++++++++++++++++
+ .../recipes-connectivity/linuxptp/linuxptp_1.6.bb  |  5 ++--
+ 2 files changed, 32 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
+
+diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch b/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
+new file mode 100644
+index 0000000..02dbb23
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
+@@ -0,0 +1,29 @@
++From 8a4cad5e2f2cbb6a34bdc6e877fe499502b8c4c8 Mon Sep 17 00:00:00 2001
++From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
++Date: Fri, 23 Dec 2016 18:12:29 +0100
++Subject: [PATCH] linuxptp: no incdefs using host headers
++
++Avoid using host headers via incdefs.sh shell script.
++
++Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
++---
++
++ makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/makefile b/makefile
++index 8cdbd15..85174b8 100644
++--- a/makefile
+++++ b/makefile
++@@ -33,7 +33,7 @@ OBJECTS	= $(OBJ) hwstamp_ctl.o phc2sys.o phc_ctl.o pmc.o pmc_common.o \
++ SRC	= $(OBJECTS:.o=.c)
++ DEPEND	= $(OBJECTS:.o=.d)
++ srcdir	:= $(dir $(lastword $(MAKEFILE_LIST)))
++-incdefs := $(shell $(srcdir)/incdefs.sh)
+++#incdefs := $(shell $(srcdir)/incdefs.sh)
++ version := $(shell $(srcdir)/version.sh $(srcdir))
++ VPATH	= $(srcdir)
++ 
++-- 
++2.9.3
++
+diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.6.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.6.bb
+index 0939d17..2e28644 100644
+--- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.6.bb
++++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.6.bb
+@@ -3,13 +3,14 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.tgz \
+-           file://build-Allow-CC-and-prefix-to-be-overriden.patch"
++           file://build-Allow-CC-and-prefix-to-be-overriden.patch \
++           file://no-incdefs-using-host-headers.patch"
+ 
+ SRC_URI[md5sum] = "6aa15d83f5a35f1fd076ba9adc4e7285"
+ SRC_URI[sha256sum] = "e7fd16a9f235b059be527bd512e86f0c1d9f2e7c36736e6d6d9727a4427ac14c"
+ 
+ EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} \
+-    EXTRA_CFLAGS='-D_GNU_SOURCE -DHAVE_CLOCK_ADJTIME -DHAVE_ONESTEP_SYNC ${CFLAGS}'"
++    EXTRA_CFLAGS='-D_GNU_SOURCE -DHAVE_CLOCK_ADJTIME -DHAVE_POSIX_SPAWN -DHAVE_ONESTEP_SYNC ${CFLAGS}'"
+ 
+ do_install () {
+     install -d ${D}/${bindir}
+-- 
+2.9.3
+
 
