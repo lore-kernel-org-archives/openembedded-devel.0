@@ -1,37 +1,36 @@
-Return-Path: <marcel@ziswiler.com>
-Received: from mout.perfora.net (mout.perfora.net [74.208.4.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 81EF977238
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id E080A7723B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Dec 2016 22:15:34 +0000 (UTC)
-Received: from marcel-pc.toradex.int.net ([84.227.37.153]) by
-	mrelay.perfora.net (mreueus002 [74.208.5.2]) with ESMTPA (Nemesis) id
-	0MJlXG-1cJSBz42L6-00186O; Fri, 23 Dec 2016 23:15:24 +0100
-From: Marcel Ziswiler <marcel@ziswiler.com>
+	Fri, 23 Dec 2016 22:25:27 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id h201so18240024qke.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Dec 2016 14:25:29 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=KPUkH0qEv/RlW5ccbF8ihKLs1MPBtUtH9H07OsJM2x0=;
+	b=CpC4XE1cjLCVSH6vWZBQ79++i8bx61jOgKi9tzG7HH6cik6dPLB6j7utDx3GOvmix5
+	rCKa8wlOeVB9rQNHlViHxUgtqyciZuuH31y8Y9u0PglYHb8eWs2ala+RRCuw+x0NeGmI
+	C3qk/bsMMtovLaLmfP5w1RWdqLYrituhOLJGNp/Ck5Qma8pz93/Q+gtIvlnOCC5MjCPw
+	AktLOZtXsEEhIDB5RjMW+ToVYUlgeEAAlkzvKYHn4XeAKtSTeja1xpvFd/rT9sBwHr3s
+	I+T8DZhiwcfgA4TkNTOHVt2LM+JWYI/tsSjldtO54PyF4KyWYsD91LvJGZthadjc594O
+	tRWg==
+X-Gm-Message-State: AIkVDXKAWeynKG/20Kt4QpdKQm1dhPDXHobjxMbjRMWpKu0KzwFeQpQ3DxWOaJUI7pnoQA==
+X-Received: by 10.55.4.19 with SMTP id 19mr16869745qke.320.1482531929170;
+	Fri, 23 Dec 2016 14:25:29 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-457cd903.dyn.optonline.net.
+	[69.124.217.3]) by smtp.gmail.com with ESMTPSA id
+	f142sm8041176qke.19.2016.12.23.14.25.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 23 Dec 2016 14:25:28 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Dec 2016 23:15:14 +0100
-Message-Id: <20161223221514.29547-1-marcel@ziswiler.com>
-X-Mailer: git-send-email 2.9.3
-X-Provags-ID: V03:K0:k71j/ZTfnBcOsbTZdVGg4TrNPSYFyi7ULr1QX/hjkeW40Dwcrvx
-	LiD0gMcymIF9oCxLhmQJ2k2HvATMD7HOHX0H598WXYy9Cse3XiPZGs1oczOx/mi0Pf2TnG8
-	Vk2/VR32Vn1gO+p0gOmVPioPG1w1k1aH7B59q0IAmUtxrBxQh8CA6l3YioMgYjsxa18mMwY
-	AugreYxX/md7+M8mawQsQ==
-X-UI-Out-Filterresults: notjunk:1;V01:K0:rofOcMGmHFU=:AYjTMSJEEuLKXX0idgK/jK
-	xg5VvTsCzXtEYv4zgskYz2pp2iXcHkh+B9hbocNZEaz0gVYRkJxh7AZx6CoBhlonFbtAvquBw
-	4kxD4kow31P44QaPvGSYJ0UztljOELfMkogn2wyTIZIRGYve9j6pbAyPI7NDbgtulIhJRXx9s
-	c2QQULTdCWgHET/yLyloxrLvztvIXSzsHBxtovyyTmwIw+6pCFlS+nxGSjsLMkZyVvV1V14cE
-	yC7uhaXY5ZE9ZZVjDMKqEVypP6gAjo8BgPDaxvEZTNfvOWvGtA4I2q2wAbE2VBn1G9wz2inpf
-	ajBVO2/s2Ar63GQbLpuz8yCCOXfbdmiY9ssfqmHXO6xXWCzPKeFQWkYAKhXFE9ddwqdkKdJQn
-	blwgnKvRrIZx8NVyhxEHwHZnKdkj2smggq9Bvxuv9+GE5HvZ6HrykbmBU+I15zRts0ArAmyq0
-	cV6FWk7Jdd3Q4leSrPZXO0F8BeyhEmdwkrJCDWpK6dz5ecPjwqUnUu6DTN6cAFiUsLX4UiFaq
-	rkZ8gSUHvi50zsxY/M5pU/XpRGA7kIWA63SDnG47TlkjHfdkGCPZ1KwyOEN3BntyUQy1LBQbI
-	p25j5+Y7Na2yKk5g9WZY3dVVfHcGMW4JaUv259sLC8u+hEN0WvnOtvJas71hOMzKPJXvdMhK9
-	E/+Z97CZxZD9Oz8JX43wWrCZbq6SnCGFi4Y54RSjn3PXpNVKMBDEqnmRtNpU1kFWGKF0=
-Cc: Otavio Salvador <otavio@ossystems.com.br>,
-	Stefan Agner <stefan.agner@toradex.com>,
-	Marcel Ziswiler <marcel.ziswiler@toradex.com>,
-	Max Krummenacher <max.krummenacher@toradex.com>,
-	Denys Dmytriyenko <denys@ti.com>, Lauren Post <lauren.post@freescale.com>
-Subject: [PATCH] linuxptp: fix cross compilation not using host headers
+Date: Fri, 23 Dec 2016 17:25:19 -0500
+Message-Id: <1482531919-26391-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-webserver][PATCH] apache2: always use the archive.apache.org to ensure older releases are always available
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,99 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Dec 2016 22:15:34 -0000
+X-List-Received-Date: Fri, 23 Dec 2016 22:25:29 -0000
 
-From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-
-Previously my morty build failed as follows:
-
-| arm-angstrom-linux-gnueabi-gcc  -march=armv7-a -mthumb -mfpu=neon  -mfloat-abi
-=hard --sysroot=/data/build/oe_core-V2.7/build/tmp-glibc/sysroots/apalis-tk1-mai
-nline -Wall -DVER=1.6  -D_GNU_SOURCE -DHAVE_CLOCK_ADJTIME -DHAVE_POSIX_SPAWN -I/
-lib/modules/4.8.13/build/usr/include -DHAVE_ONESTEP_SYNC  -D_GNU_SOURCE -DHAVE_C
-LOCK_ADJTIME -DHAVE_ONESTEP_SYNC -O2 -pipe -g -feliminate-unused-debug-types -fd
-ebug-prefix-map=/data/build/oe_core-V2.7/build/tmp-glibc/work/armv7at2hf-neon-an
-gstrom-linux-gnueabi/linuxptp/1.6-r0=/usr/src/debug/linuxptp/1.6-r0 -fdebug-pref
-ix-map=/data/build/oe_core-V2.7/build/tmp-glibc/sysroots/x86_64-linux= -fdebug-p
-refix-map=/data/build/oe_core-V2.7/build/tmp-glibc/sysroots/apalis-tk1-mainline=
-   -c -o msg.o msg.c
-| {standard input}: Assembler messages:
-| {standard input}:39: Error: bad instruction `bswapq r0'
-| <builtin>: recipe for target 'msg.o' failed
-| make: *** [msg.o] Error 1
-
-As it tried using the kernel headers from my Fedora 23 build server
-located at /lib/modules/4.8.13/build/usr/include.
-
-Fix this by no longer calling the incdefs.sh shell script from the
-makefile.
-
-Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
+ meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb | 2 +-
+ meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb        | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
- .../linuxptp/no-incdefs-using-host-headers.patch   | 29 ++++++++++++++++++++++
- .../recipes-connectivity/linuxptp/linuxptp_1.6.bb  |  5 ++--
- 2 files changed, 32 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
-
-diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch b/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
-new file mode 100644
-index 0000000..02dbb23
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp/no-incdefs-using-host-headers.patch
-@@ -0,0 +1,29 @@
-+From 8a4cad5e2f2cbb6a34bdc6e877fe499502b8c4c8 Mon Sep 17 00:00:00 2001
-+From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-+Date: Fri, 23 Dec 2016 18:12:29 +0100
-+Subject: [PATCH] linuxptp: no incdefs using host headers
-+
-+Avoid using host headers via incdefs.sh shell script.
-+
-+Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-+---
-+
-+ makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/makefile b/makefile
-+index 8cdbd15..85174b8 100644
-+--- a/makefile
-++++ b/makefile
-+@@ -33,7 +33,7 @@ OBJECTS	= $(OBJ) hwstamp_ctl.o phc2sys.o phc_ctl.o pmc.o pmc_common.o \
-+ SRC	= $(OBJECTS:.o=.c)
-+ DEPEND	= $(OBJECTS:.o=.d)
-+ srcdir	:= $(dir $(lastword $(MAKEFILE_LIST)))
-+-incdefs := $(shell $(srcdir)/incdefs.sh)
-++#incdefs := $(shell $(srcdir)/incdefs.sh)
-+ version := $(shell $(srcdir)/version.sh $(srcdir))
-+ VPATH	= $(srcdir)
-+ 
-+-- 
-+2.9.3
-+
-diff --git a/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.6.bb b/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.6.bb
-index 0939d17..2e28644 100644
---- a/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.6.bb
-+++ b/meta-oe/recipes-connectivity/linuxptp/linuxptp_1.6.bb
-@@ -3,13 +3,14 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
+index ca8ebaf..7a2b236 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
+@@ -8,7 +8,7 @@ LICENSE = "Apache-2.0"
  
- SRC_URI = "http://sourceforge.net/projects/linuxptp/files/v${PV}/linuxptp-${PV}.tgz \
--           file://build-Allow-CC-and-prefix-to-be-overriden.patch"
-+           file://build-Allow-CC-and-prefix-to-be-overriden.patch \
-+           file://no-incdefs-using-host-headers.patch"
+ inherit autotools pkgconfig native
  
- SRC_URI[md5sum] = "6aa15d83f5a35f1fd076ba9adc4e7285"
- SRC_URI[sha256sum] = "e7fd16a9f235b059be527bd512e86f0c1d9f2e7c36736e6d6d9727a4427ac14c"
+-SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
++SRC_URI = "http://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
+            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
+           "
  
- EXTRA_OEMAKE = "ARCH=${TARGET_ARCH} \
--    EXTRA_CFLAGS='-D_GNU_SOURCE -DHAVE_CLOCK_ADJTIME -DHAVE_ONESTEP_SYNC ${CFLAGS}'"
-+    EXTRA_CFLAGS='-D_GNU_SOURCE -DHAVE_CLOCK_ADJTIME -DHAVE_POSIX_SPAWN -DHAVE_ONESTEP_SYNC ${CFLAGS}'"
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
+index 3bd8579..9446082 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
+@@ -6,7 +6,7 @@ DEPENDS = "libtool-native apache2-native openssl expat pcre apr apr-util"
+ SECTION = "net"
+ LICENSE = "Apache-2.0"
  
- do_install () {
-     install -d ${D}/${bindir}
+-SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
++SRC_URI = "http://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
+            file://server-makefile.patch \
+            file://httpd-2.4.1-corelimit.patch \
+            file://httpd-2.4.4-export.patch \
 -- 
-2.9.3
+2.7.4
 
 
