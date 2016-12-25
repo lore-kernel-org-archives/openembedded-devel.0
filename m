@@ -1,49 +1,44 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wj0-f195.google.com (mail-wj0-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 7092C71A05
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 8019971A05
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Dec 2016 23:55:54 +0000 (UTC)
-Received: by mail-wj0-f195.google.com with SMTP id kp2so47006609wjc.0
+	Sun, 25 Dec 2016 23:57:05 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id l2so25590189wml.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Dec 2016 15:55:56 -0800 (PST)
+	Sun, 25 Dec 2016 15:57:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=sQHdHI2L3I/x+xjw5qw70Ss9B+DBbk0cnOW8Q4O6+YU=;
-	b=CT4kuYl5t/NXqRJG8yTa6CkOFM4r6x/dmgVTdlJNQSEG65GTaG86A+xfv7yXGD0lQK
-	DOH+O2Cqifo+5zGDqbX43CwYRP/98tgY7ntAqcsZv4ozjnO8YxKYKJawrLx8J41wL1bb
-	YiXkpzAmhmGFnW5c3oRp9itWE4XrTXhNpjK+KWLufpk+Uz1TwNdnQPUaVDVZzMkLh5xl
-	EwRjZI1EJO+1/xWGDUklrxIooeaiJ1Rt5jDAZEyichYp4RwdqJvzfi6D3rWFHwdbrdwb
-	dw73rRxzJ1GGnvEHWs8StodwJaWKAtQQpgr/wPQg8crjk8JyfiFBhYCkq5bXNFccJKfm
-	9LIw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=ASKJUAplC0OAbvWiqF+z04bhZmefgBotkPnngavBeUs=;
+	b=vMtRYtxBGsLfutn1kLGQpkEiR1kO9MWFTax5EOyjvgBF9bcbySFwKTC0DnWGEH4fzR
+	fYxeqJb96ubcfcdqSHvsISTSYXUmfPk9fA1c9Pt2YSufxlK4ypbZYeNVbHcforV7Y40d
+	6NnckUHr9+wws6pxFOTtV/PyEizDmLomXGLczGNdQF4BfupGkXErfeHu60PQDfhsdzDl
+	QKlV7GbOi4wVa6wYkZafSX+SnygpcGHmUUtsG25KpDbRSRaCdAaDPP+BOFT9OqH0IfuR
+	a2pf19wLk8z9F2cwXUX2eT386ta3d7lIVU6SziX6xQgw2cHxxuxRGByWsz35GPc3UuIH
+	98Zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=sQHdHI2L3I/x+xjw5qw70Ss9B+DBbk0cnOW8Q4O6+YU=;
-	b=AbYVrn6PMyd81Dgtq7l/M45MHqpKIrqQDA922jz+KwTjl3m+K5wta3xk5wLYm8UAHu
-	23gGrfhSkMPi2B4ZeDAl4NASU9+vUNry1tH3Mzrfb0yPy4c/82CrEjJXjQRz76f6ndfJ
-	MzsFJ5E8ZaNQE7MXwSDLsoRxdmz4j7tVrSlNjs0xbZUdGcxO4WooMJqeIsMeCPSO6zFx
-	J7/jIGv8J6fvyfxUhbNt716Wr3amvK+etzxC8fCbtv0fe4uwetELCPdA5/uBBsgsCXc/
-	AAS1UB9DEi7TUscO0ZVKOUgKCfs0TDX448usC+iTi6toJTSmxuPrvpGTItuVUT/IrRCb
-	PTVg==
-X-Gm-Message-State: AIkVDXIBpGuPwtc4/dr9hnUIGkAdKGmcpnDUq4gCHH2WbgHext9q63jQK7nBbU4AdU0+wq+UCJUOjxOKmZASeQ==
-X-Received: by 10.194.41.163 with SMTP id g3mr20992859wjl.162.1482710155206;
-	Sun, 25 Dec 2016 15:55:55 -0800 (PST)
+	:message-id:subject:to;
+	bh=ASKJUAplC0OAbvWiqF+z04bhZmefgBotkPnngavBeUs=;
+	b=nbO+DjJlBr8cSqQgVv2JpJZNYIyYU2PoosAWlosVxdTBSiNoiFp86KoB37PTBRFWNh
+	zGj11VMVwEVHoxejxjhrEheEKS0j4fQdkzLh+c4ePlGqweiC19BK/tqjAVq1f7rTTQX9
+	C0vaIaqEsuSMNidqkzVVXIpcoLxP2t/EYersGcANhDn8zS06oaRsZYmtIsoTGzJP3Kmu
+	W6jbDO1iwwv+D/sujSWELkD4PcOSDpBEN3Io+OKv0HpweLa+6eqcoswlb76NeTlC5zIF
+	pgFtmmjjZTnriQu0ieXTpdzJYGirpXl0faC9MFtij/v/YZ3nGo60oRFZD6AEL22etqBb
+	bAWQ==
+X-Gm-Message-State: AIkVDXILsPsrnoem24FRz69D9lvQvSMxHkQDt9PsAqrnu9VsR7zwUI7kGE1STUDUlwrlbwNonkxH9cQm5gl1wA==
+X-Received: by 10.28.0.210 with SMTP id 201mr22439691wma.49.1482710226057;
+	Sun, 25 Dec 2016 15:57:06 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.80.148.174 with HTTP; Sun, 25 Dec 2016 15:55:54 -0800 (PST)
-In-Reply-To: <CAMKF1srxNFSR2sr1akxGsFCMM38PWHK+WoL63GL1=HshneOYLA@mail.gmail.com>
-References: <20161222200250.23273-1-haris.okanovic@ni.com>
-	<CA+chaQd3YPtvxY7CN82m86v5V=fyaYk3pWs4fF9TqFknWzE7HA@mail.gmail.com>
-	<CABcZANm4R2Lg5oNLbYihDjH-cxCq-=sKt6BXBcF6es-8z=khuw@mail.gmail.com>
-	<CAMKF1srxNFSR2sr1akxGsFCMM38PWHK+WoL63GL1=HshneOYLA@mail.gmail.com>
+Received: by 10.80.148.174 with HTTP; Sun, 25 Dec 2016 15:57:05 -0800 (PST)
+In-Reply-To: <1482552258-852-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+References: <1482552258-852-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 26 Dec 2016 00:55:54 +0100
-Message-ID: <CA+chaQesRK_aTrcYM5Ow+TeNXtLkvzr3+dAxjKFvoLaQn_Fbuw@mail.gmail.com>
+Date: Mon, 26 Dec 2016 00:57:05 +0100
+Message-ID: <CA+chaQeh1FrBsAUPuoKkZYX+VrjAtaEw0rccBMs14kbPjNa3Lg@mail.gmail.com>
 To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Haris Okanovic <haris.okanovic@ni.com>
-Subject: Re: [PATCH] hwloc: Add
+Subject: Re: [meta-oe] [PATCH v3] add php 7.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,220 +51,205 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Dec 2016 23:56:02 -0000
+X-List-Received-Date: Sun, 25 Dec 2016 23:57:05 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-Missing dependencies and PACKAGES_prepend breaks hwloc-dbg, because of
-missing space at the end of the prepended value.
-
+php-7.1.0: php: configure was passed unrecognised options:
+--with-mysql [unknown-configure-option]
 
 
-hwloc-1.11.5: hwloc: Files/directories were installed but not shipped
-in any package:
-  /usr/src
-  /usr/src/debug
-  /usr/src/debug/hwloc
-  /usr/src/debug/hwloc/1.11.5-r0
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5
-  /usr/src/debug/hwloc/1.11.5-r0/build
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/include
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/lstopo
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/hwloc
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/lstopo/lstopo.h
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/lstopo/lstopo.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/lstopo/lstopo-xml.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/lstopo/lstopo-text.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/lstopo/lstopo-fig.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/lstopo/lstopo-draw.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/lstopo/lstopo-color.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/lstopo/lstopo-cairo.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/lstopo/lstopo-ascii.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/hwloc/misc.h
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/hwloc/hwloc-ps.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/hwloc/hwloc-patch.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/hwloc/hwloc-info.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/hwloc/hwloc-dump-hwdata=
-.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/hwloc/hwloc-dump-hwdata=
--knl.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/hwloc/hwloc-distrib.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/hwloc/hwloc-distances.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/hwloc/hwloc-diff.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/hwloc/hwloc-calc.h
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/hwloc/hwloc-calc.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/hwloc/hwloc-bind.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/hwloc/hwloc-assembler.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/utils/hwloc/hwloc-annotate.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/traversal.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/topology.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/topology-xml.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/topology-xml-nolibxml.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/topology-xml-libxml.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/topology-x86.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/topology-synthetic.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/topology-pci.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/topology-noos.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/topology-linux.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/topology-hardwired.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/topology-custom.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/pci-common.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/misc.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/distances.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/diff.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/components.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/bitmap.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/bind.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/src/base64.c
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/include/hwloc.h
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/include/private
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/include/hwloc
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/include/private/xml.h
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/include/private/private.h
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/include/private/misc.h
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/include/private/debug.h
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/include/private/cpuid-x86.h
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/include/private/components.h
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/include/hwloc/plugins.h
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/include/hwloc/linux.h
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/include/hwloc/inlines.h
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/include/hwloc/helper.h
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/include/hwloc/diff.h
-  /usr/src/debug/hwloc/1.11.5-r0/hwloc-1.11.5/include/hwloc/bitmap.h
-  /usr/src/debug/hwloc/1.11.5-r0/build/src
-  /usr/src/debug/hwloc/1.11.5-r0/build/include
-  /usr/src/debug/hwloc/1.11.5-r0/build/src/static-components.h
-  /usr/src/debug/hwloc/1.11.5-r0/build/include/hwloc
-  /usr/src/debug/hwloc/1.11.5-r0/build/include/hwloc/autogen
-  /usr/src/debug/hwloc/1.11.5-r0/build/include/hwloc/autogen/config.h
-Please set FILES such that these items are packaged. Alternatively if
-they are unneeded, avoid installing them or delete them within
-do_install.
-hwloc: 75 installed and not shipped files. [installed-vs-shipped]
-hwloc-1.11.5: hwloc rdepends on numactl, but it isn't a build
-dependency, missing numactl in DEPENDS or PACKAGECONFIG? [build-deps]
-hwloc-1.11.5: hwloc rdepends on cairo, but it isn't a build
-dependency, missing cairo in DEPENDS or PACKAGECONFIG? [build-deps]
-hwloc-1.11.5: hwloc rdepends on libpciaccess, but it isn't a build
-dependency, missing libpciaccess in DEPENDS or PACKAGECONFIG?
-[build-deps]
-hwloc-1.11.5: hwloc rdepends on libx11, but it isn't a build
-dependency, missing libx11 in DEPENDS or PACKAGECONFIG? [build-deps]
-hwloc-1.11.5: hwloc rdepends on libcap, but it isn't a build
-dependency, missing libcap in DEPENDS or PACKAGECONFIG? [build-deps]
-hwloc-1.11.5: hwloc rdepends on zlib, but it isn't a build dependency,
-missing zlib in DEPENDS or PACKAGECONFIG? [build-deps]
-hwloc-1.11.5: hwloc rdepends on ncurses-libtinfo, but it isn't a build
-dependency, missing ncurses in DEPENDS or PACKAGECONFIG? [build-deps]
-hwloc-1.11.5: hwloc rdepends on libxml2, but it isn't a build
-dependency, missing libxml2 in DEPENDS or PACKAGECONFIG? [build-deps]
-hwloc-1.11.5: hwloc rdepends on libudev, but it isn't a build
-dependency, missing systemd in DEPENDS or PACKAGECONFIG? [build-deps]
+On Sat, Dec 24, 2016 at 5:04 AM, Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+wrote:
 
-
-On Thu, Dec 22, 2016 at 11:56 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> On Thu, Dec 22, 2016 at 2:35 PM, Christopher Larson <clarson@kergoth.com>
-> wrote:
-> > On Thu, Dec 22, 2016 at 2:34 PM, Martin Jansa <martin.jansa@gmail.com>
-> > wrote:
-> >
-> >> SUMMARY is for short summary, put long one into DESCRIPTION and create
-> >> short one for SUMMARY.
-> >>
-> >> Also missing sha265sum, so I doubt it was tested properly.
-> >>
-> >> On Thu, Dec 22, 2016 at 9:02 PM, Haris Okanovic <haris.okanovic@ni.com=
+> 1)add php_7.1.0.bb
+> 2)Delete php_5.5.38.bb,since it is Replaced by php_5.6.26.bb.
+> 3)Delete pthread-check-threads-m4.patch, since it is integrated upstream.
 >
-> >> wrote:
-> >>
-> >> > https://www.open-mpi.org/projects/hwloc/
-> >> >
-> >> > "The Portable Hardware Locality (hwloc) software package provides a
-> >> > portable abstraction (across OS, versions, architectures, ...) of th=
-e
-> >> > hierarchical topology of modern architectures, including NUMA memory
-> >> > nodes, sockets, shared caches, cores and simultaneous multithreading=
-.
-> >> > It also gathers various system attributes such as cache and memory
-> >> > information as well as the locality of I/O devices such as network
-> >> > interfaces, InfiniBand HCAs or GPUs."
-> >> >
-> >> > This recipe adds libhwloc and lstopo utility as two packages.
-> >> >
-> >> > Testing: Built in OE/Krogoth. Installed to x86_64 machine.
-> Successfully
-> >> > ran `lstopo` and verified it printed correct CPU and cache info.
-> >> >
-> >> > Signed-off-by: Haris Okanovic <haris.okanovic@ni.com>
-> >> > ---
-> >> >  meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb | 25
-> >> > +++++++++++++++++++++++++
-> >> >  1 file changed, 25 insertions(+)
-> >> >  create mode 100644 meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-> >> >
-> >> > diff --git a/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-> >> > b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-> >> > new file mode 100644
-> >> > index 0000000..3a88f5b
-> >> > --- /dev/null
-> >> > +++ b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-> >> > @@ -0,0 +1,25 @@
-> >> > +SUMMARY =3D "The Portable Hardware Locality (hwloc) software packag=
-e \
-> >> > + provides a portable abstraction of the hierarchical topology of
-> modern
-> >> \
-> >> > + architectures."
-> >> > +HOMEPAGE =3D "https://www.open-mpi.org/software/hwloc/"
-> >> > +SECTION =3D "base"
-> >> > +LICENSE =3D "BSD"
-> >> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D
-> 3282e20dc3cec311deda3c6d4b1f99
-> >> 0b"
-> >> > +
-> >> > +SRC_URI =3D "https://www.open-mpi.org/software/${PN}/v1.11/
-> >> > downloads/${BP}.tar.bz2"
-> >> > +SRC_URI[md5sum] =3D "96c34136ff416d2b13a7821c27477bed"
-> >> > +
-> >> > +inherit autotools
-> >> > +
-> >> > +# Split hwloc library into separate subpackage
-> >> > +PACKAGES_prepend =3D "lib${PN}"
-> >> > +FILES_lib${PN} +=3D "${libdir}/lib${PN}.so*"
-> >> > +${PN}_RDEPENDS +=3D "lib${PN}"
-> >> > +
-> >> > +do_install_append() {
-> >> > +    # Let ldconfig do it's thing, no need for these symlinks
-> >> > +    test -L "${D}${libdir}/lib${PN}.so.5"
-> >> > +    test -L "${D}${libdir}/lib${PN}.so"
-> >> > +    rm "${D}${libdir}/lib${PN}.so.5"
-> >> > +    rm "${D}${libdir}/lib${PN}.so"
-> >>
-> >
-> > This link manipulation is also inconsistent with every other recipe. It=
-=E2=80=99s
-> > not appropriate. If your distro wants to rely on ldconfig to handle the
-> > links, then your distro could do this for all recipes rather than just
-> one.
-> > This isn=E2=80=99t how things are done in our existing recipes.
+> Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+> ---
+>  .../change-AC_TRY_RUN-to-AC_TRY_LINK.patch         | 56
+> ++++++++++++++++++++++
+>  meta-oe/recipes-devtools/php/php.inc               |  3 +-
+>  .../php/php/pthread-check-threads-m4.patch         | 30 ------------
+>  meta-oe/recipes-devtools/php/php_5.5.38.bb         |  6 ---
+>  meta-oe/recipes-devtools/php/php_7.1.0.bb          |  8 ++++
+>  5 files changed, 65 insertions(+), 38 deletions(-)
+>  create mode 100644 meta-oe/recipes-devtools/php/
+> php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+>  delete mode 100644 meta-oe/recipes-devtools/php/
+> php/pthread-check-threads-m4.patch
+>  delete mode 100644 meta-oe/recipes-devtools/php/php_5.5.38.bb
+>  create mode 100644 meta-oe/recipes-devtools/php/php_7.1.0.bb
 >
-> There is global knob USE_LDCONFIG, perhaps thats what could be used
-> but generally I agree with Chris here.
+> diff --git a/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+> b/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_
+> RUN-to-AC_TRY_LINK.patch
+> new file mode 100644
+> index 0000000..39c334f
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_
+> RUN-to-AC_TRY_LINK.patch
+> @@ -0,0 +1,56 @@
+> +[PATCH] config.m4: change AC_TRY_RUN to AC_TRY_LINK
+> +
+> +Upstream-Status: Pending
+> +
+> +AC_TRY_RUN is not suitable for cross-compile
+> +
+> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
+> +---
+> + ext/fileinfo/config.m4 | 31 ++++++-------------------------
+> + 1 file changed, 6 insertions(+), 25 deletions(-)
+> +
+> +diff --git a/ext/fileinfo/config.m4 b/ext/fileinfo/config.m4
+> +index 7e98d62..8a8ea0e 100644
+> +--- a/ext/fileinfo/config.m4
+> ++++ b/ext/fileinfo/config.m4
+> +@@ -14,31 +14,12 @@ if test "$PHP_FILEINFO" != "no"; then
+> +     libmagic/readcdf.c libmagic/softmagic.c"
+> +
+> +   AC_MSG_CHECKING([for strcasestr])
+> +-  AC_TRY_RUN([
+> +-#include <string.h>
+> +-#include <strings.h>
+> +-#include <stdlib.h>
+> +-
+> +-int main(void)
+> +-{
+> +-        char *s0, *s1, *ret;
+> +-
+> +-        s0 = (char *) malloc(42);
+> +-        s1 = (char *) malloc(8);
+> +-
+> +-        memset(s0, 'X', 42);
+> +-        s0[24] = 'Y';
+> +-        s0[26] = 'Z';
+> +-        s0[41] = '\0';
+> +-        memset(s1, 'x', 8);
+> +-        s1[0] = 'y';
+> +-        s1[2] = 'Z';
+> +-        s1[7] = '\0';
+> +-
+> +-        ret = strcasestr(s0, s1);
+> +-
+> +-        return !(NULL != ret);
+> +-}
+> ++  AC_TRY_COMPILE([
+> ++     #include <string.h>
+> ++     #include <strings.h>
+> ++     #include <stdlib.h>
+> ++  ],[
+> ++     strcasestr(NULL, NULL);
+> +   ],[
+> +     dnl using the platform implementation
+> +     AC_MSG_RESULT(yes)
+> +--
+> +1.9.1
+> +
+> diff --git a/meta-oe/recipes-devtools/php/php.inc
+> b/meta-oe/recipes-devtools/php/php.inc
+> index cd91940..5e6b16a 100644
+> --- a/meta-oe/recipes-devtools/php/php.inc
+> +++ b/meta-oe/recipes-devtools/php/php.inc
+> @@ -24,7 +24,6 @@ SRC_URI_append_class-target = " \
+>              file://php-fpm.conf \
+>              file://php-fpm-apache.conf \
+>              file://configure.patch \
+> -            file://pthread-check-threads-m4.patch \
+>              file://70_mod_php5.conf \
+>              file://php-fpm.service \
+>            "
+> @@ -218,7 +217,7 @@ FILES_${PN}-doc += "${PHP_LIBDIR}/php/doc"
+>  FILES_${PN}-cli = "${bindir}/php"
+>  FILES_${PN}-phar = "${bindir}/phar*"
+>  FILES_${PN}-cgi = "${bindir}/php-cgi"
+> -FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf
+> ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-
+> fpm.service"
+> +FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf
+> ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service
+> ${sysconfdir}/php-fpm.d ${sysconfdir}/php-fpm.d/www.conf.default"
 >
-> > --
-> > Christopher Larson
-> > clarson at kergoth dot com
-> > Founder - BitBake, OpenEmbedded, OpenZaurus
-> > Maintainer - Tslib
-> > Senior Software Engineer, Mentor Graphics
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+The second added entry is already included by the first one, isn't it?
+
+
+>  FILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
+>  CONFFILES_${PN}-fpm = "${sysconfdir}/php-fpm.conf"
+>  CONFFILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
+> diff --git a/meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch
+> b/meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch
+> deleted file mode 100644
+> index 0c564cd..0000000
+> --- a/meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch
+> +++ /dev/null
+> @@ -1,30 +0,0 @@
+> -From d8067ceacbf54e79c9c6b68675332c09eaa0b55d Mon Sep 17 00:00:00 2001
+> -From: Jackie Huang <jackie.huang@windriver.com>
+> -Date: Mon, 8 Apr 2013 14:29:51 +0800
+> -Subject: [PATCH] pthread-check
+> -
+> -Enable pthreads support when cross-compiling
+> -
+> -Upstream-Status: Inapproprate [config]
+> -
+> -Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ----
+> - TSRM/threads.m4 |    2 +-
+> - 1 files changed, 1 insertions(+), 1 deletions(-)
+> -
+> -diff --git a/TSRM/threads.m4 b/TSRM/threads.m4
+> -index 38494ce..15d9454 100644
+> ---- a/TSRM/threads.m4
+> -+++ b/TSRM/threads.m4
+> -@@ -86,7 +86,7 @@ int main() {
+> -   pthreads_working=no
+> -   ], [
+> -   dnl For cross compiling running this test is of no use. NetWare
+> supports pthreads
+> --  pthreads_working=no
+> -+  pthreads_working=yes
+> -   case $host_alias in
+> -   *netware*)
+> -     pthreads_working=yes
+> ---
+> -1.7.4.1
+> -
+> diff --git a/meta-oe/recipes-devtools/php/php_5.5.38.bb
+> b/meta-oe/recipes-devtools/php/php_5.5.38.bb
+> deleted file mode 100644
+> index 26f35b1..0000000
+> --- a/meta-oe/recipes-devtools/php/php_5.5.38.bb
+> +++ /dev/null
+> @@ -1,6 +0,0 @@
+> -require php.inc
+> -
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=464ca70af214d2407f6b7d4458158afd"
+> -
+> -SRC_URI[md5sum] = "312244a0eecad602a1555ed2434e223f"
+> -SRC_URI[sha256sum] = "473c81ebb2e48ca468caee03176226
+> 6651843d7227c18a824add9b07b9393e38"
+> diff --git a/meta-oe/recipes-devtools/php/php_7.1.0.bb
+> b/meta-oe/recipes-devtools/php/php_7.1.0.bb
+> new file mode 100644
+> index 0000000..899acf9
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/php/php_7.1.0.bb
+> @@ -0,0 +1,8 @@
+> +require php.inc
+> +
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b602636d46a61c0ac0432bbf5c078fe4"
+> +
+> +SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch"
+> +SRC_URI[md5sum] = "54e364b60a88db77adb96aacb10f10a4"
+> +SRC_URI[sha256sum] = "68bcfd7deed5b3474d81dec9f74d12
+> 2058327e2bed0ac25bbc9ec70995228e61"
+> +
+> --
+> 2.7.4
+>
+>
+>
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
