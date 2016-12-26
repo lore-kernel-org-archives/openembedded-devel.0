@@ -1,40 +1,26 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id D575D60290
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id DEDF471E2E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Dec 2016 01:43:47 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="14253462"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 26 Dec 2016 09:43:38 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id EDF2F46704BE
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Dec 2016 09:43:37 +0800 (CST)
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
-	14.03.0319.002; Mon, 26 Dec 2016 09:43:42 +0800
-From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [oe-jethro] [meta-xfce][PATCH] imsettings: move to
-	correct directory
-Thread-Index: AQHSXNiMdTdEPC0UpUW5vlxSwZ5KLqEU921A///T4ACABKzm0A==
-Date: Mon, 26 Dec 2016 01:43:41 +0000
-Message-ID: <1B56A49860EB2D45ADE3731B15C959FDFE5B87B9@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1482468166-33076-1-git-send-email-leimaohui@cn.fujitsu.com>
-	<1B56A49860EB2D45ADE3731B15C959FDFE5B81EC@G08CNEXMBPEKD01.g08.fujitsu.local>
-	<20161223101558.GA3294@jama>
-In-Reply-To: <20161223101558.GA3294@jama>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.93]
+	Mon, 26 Dec 2016 03:48:03 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id uBQ3luZi022634
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 25 Dec 2016 19:47:56 -0800 (PST)
+Received: from [128.224.162.160] (128.224.162.160) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
+	Sun, 25 Dec 2016 19:47:55 -0800
+To: <openembedded-devel@lists.openembedded.org>, <obi@opendreambox.org>
+References: <20161217230622.26063-1-raj.khem@gmail.com>
+From: Robert Yang <liezhi.yang@windriver.com>
+Message-ID: <cf62d5db-2bae-8cec-8a87-9fcf53d26a0c@windriver.com>
+Date: Mon, 26 Dec 2016 11:47:54 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.2.0
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: EDF2F46704BE.ACADA
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
-X-Spam-Status: No
-Subject: Re: [oe-jethro] [meta-xfce][PATCH] imsettings: move to correct directory
+In-Reply-To: <20161217230622.26063-1-raj.khem@gmail.com>
+Subject: Re: [meta-filesystems][PATCH V2] xfsprogs: Fix parallel install and Make dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,86 +33,189 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Dec 2016 01:43:52 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 26 Dec 2016 03:48:06 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-DQo+IEl0J3MgbmVlZGVkIGluIGtyb2dvdGggYXMgd2VsbCwgaXNuJ3QgaXQ/
-DQoNCkknbSBzb3JyeSBJIGRpZG4ndCBub3RpY2Uga3JvZ290aC4gWWVzLCBU
-aGlzIHBhdGNoJ3MgbmVlZGVkIGluIGtyb2dvdGggYXMgd2VsbC4NCg0KDQpC
-ZXN0IHJlZ2FyZHMNCkxlaQ0KDQoNCg0KDQoNCj4gLS0tLS1PcmlnaW5hbCBN
-ZXNzYWdlLS0tLS0NCj4gRnJvbTogb3BlbmVtYmVkZGVkLWRldmVsLWJvdW5j
-ZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyBbbWFpbHRvOm9wZW5lbWJlZGRl
-ZC0NCj4gZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnXSBP
-biBCZWhhbGYgT2YgTWFydGluIEphbnNhDQo+IFNlbnQ6IEZyaWRheSwgRGVj
-ZW1iZXIgMjMsIDIwMTYgNjoxNiBQTQ0KPiBUbzogb3BlbmVtYmVkZGVkLWRl
-dmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6IFtv
-ZV0gW29lLWpldGhyb10gW21ldGEteGZjZV1bUEFUQ0hdIGltc2V0dGluZ3M6
-IG1vdmUgdG8gY29ycmVjdA0KPiBkaXJlY3RvcnkNCj4gDQo+IE9uIEZyaSwg
-RGVjIDIzLCAyMDE2IGF0IDA0OjU3OjU4QU0gKzAwMDAsIExlaSwgTWFvaHVp
-IHdyb3RlOg0KPiA+IEhpIGFybWluDQo+ID4NCj4gPiBQbGVhc2UgbWVyZ2Ug
-dGhpcyBwYXRjaCB0byBqZXRocm8uDQo+IA0KPiBJdCdzIG5lZWRlZCBpbiBr
-cm9nb3RoIGFzIHdlbGwsIGlzbid0IGl0Pw0KPiANCj4gPg0KPiA+IEJlc3Qg
-cmVnYXJkcy4NCj4gPiBMZWkNCj4gPg0KPiA+ID4gLS0tLS1PcmlnaW5hbCBN
-ZXNzYWdlLS0tLS0NCj4gPiA+IEZyb206IExlaSwgTWFvaHVpDQo+ID4gPiBT
-ZW50OiBGcmlkYXksIERlY2VtYmVyIDIzLCAyMDE2IDEyOjQzIFBNDQo+ID4g
-PiBUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5v
-cmcNCj4gPiA+IENjOiBMZWksIE1hb2h1aQ0KPiA+ID4gU3ViamVjdDogW29l
-LWpldGhyb10gW21ldGEteGZjZV1bUEFUQ0hdIGltc2V0dGluZ3M6IG1vdmUg
-dG8gY29ycmVjdA0KPiA+ID4gZGlyZWN0b3J5DQo+ID4gPg0KPiA+ID4gU2ln
-bmVkLW9mZi1ieTogTGVpIE1hb2h1aSA8bGVpbWFvaHVpQGNuLmZ1aml0c3Uu
-Y29tPg0KPiA+ID4gLS0tDQo+ID4gPiAgLi4uL2ltc2V0dGluZ3MveyA9PiBp
-bXNldHRpbmdzfS9ndGstaXMtcmVxdWlyZWQtYnktbm90aWZ5LnBhdGNoDQo+
-IHwgMA0KPiA+ID4gIC4uLi9tdWx0aS1saW5lLUFDTE9DQUxfQU1GTEFHUy1p
-c25vdC1zdXBwb3J0ZWQtYnktYXV0b3JlY29uZi5wYXRjaA0KPiB8IDANCj4g
-PiA+ICBtZXRhLXhmY2UvcmVjaXBlcy1leHRlbmRlZC97ID0+IGltc2V0dGlu
-Z3N9L2ltc2V0dGluZ3NfMS42LjguYmINCj4gfCAwDQo+ID4gPiAgMyBmaWxl
-cyBjaGFuZ2VkLCAwIGluc2VydGlvbnMoKyksIDAgZGVsZXRpb25zKC0pICBy
-ZW5hbWUNCj4gPiA+IG1ldGEteGZjZS9yZWNpcGVzLSBleHRlbmRlZC9pbXNl
-dHRpbmdzL3sgPT4NCj4gPiA+IGltc2V0dGluZ3N9L2d0ay1pcy1yZXF1aXJl
-ZC1ieS1ub3RpZnkucGF0Y2ggKDEwMCUpIHJlbmFtZQ0KPiA+ID4gbWV0YS14
-ZmNlL3JlY2lwZXMtZXh0ZW5kZWQvaW1zZXR0aW5ncy97ID0+IGltc2V0dGlu
-Z3N9L211bHRpLWxpbmUtDQo+ID4gPiBBQ0xPQ0FMX0FNRkxBR1MtaXNub3Qt
-c3VwcG9ydGVkLWJ5LWF1dG9yZWNvbmYucGF0Y2ggKDEwMCUpICByZW5hbWUN
-Cj4gPiA+IG1ldGEtIHhmY2UvcmVjaXBlcy1leHRlbmRlZC97ID0+IGltc2V0
-dGluZ3N9L2ltc2V0dGluZ3NfMS42LjguYmINCj4gPiA+ICgxMDAlKQ0KPiA+
-ID4NCj4gPiA+IGRpZmYgLS1naXQNCj4gPiA+IGEvbWV0YS14ZmNlL3JlY2lw
-ZXMtZXh0ZW5kZWQvaW1zZXR0aW5ncy9ndGstaXMtcmVxdWlyZWQtYnktDQo+
-ID4gPiBub3RpZnkucGF0Y2gNCj4gPiA+IGIvbWV0YS14ZmNlL3JlY2lwZXMt
-ZXh0ZW5kZWQvaW1zZXR0aW5ncy9pbXNldHRpbmdzL2d0ay1pcy0NCj4gPiA+
-IHJlcXVpcmVkLWJ5LW5vdGlmeS5wYXRjaA0KPiA+ID4gc2ltaWxhcml0eSBp
-bmRleCAxMDAlDQo+ID4gPiByZW5hbWUgZnJvbQ0KPiA+ID4gbWV0YS14ZmNl
-L3JlY2lwZXMtZXh0ZW5kZWQvaW1zZXR0aW5ncy9ndGstaXMtcmVxdWlyZWQt
-YnktDQo+ID4gPiBub3RpZnkucGF0Y2gNCj4gPiA+IHJlbmFtZSB0bw0KPiA+
-ID4gbWV0YS14ZmNlL3JlY2lwZXMtZXh0ZW5kZWQvaW1zZXR0aW5ncy9pbXNl
-dHRpbmdzL2d0ay1pcy1yZXF1aXJlZC1ieS0NCj4gPiA+IG5vdGlmeS5wYXRj
-aA0KPiA+ID4gZGlmZiAtLWdpdA0KPiA+ID4gYS9tZXRhLXhmY2UvcmVjaXBl
-cy1leHRlbmRlZC9pbXNldHRpbmdzL211bHRpLWxpbmUtQUNMT0NBTF9BTUZM
-QUdTLQ0KPiA+ID4gaXNub3Qtc3VwcG9ydGVkLWJ5LWF1dG9yZWNvbmYucGF0
-Y2ggYi9tZXRhLXhmY2UvcmVjaXBlcy0NCj4gPiA+IGV4dGVuZGVkL2ltc2V0
-dGluZ3MvaW1zZXR0aW5ncy9tdWx0aS1saW5lLUFDTE9DQUxfQU1GTEFHUy1p
-c25vdC1zdXBwDQo+ID4gPiBvcnRlZC1ieS0NCj4gPiA+IGF1dG9yZWNvbmYu
-cGF0Y2gNCj4gPiA+IHNpbWlsYXJpdHkgaW5kZXggMTAwJQ0KPiA+ID4gcmVu
-YW1lIGZyb20NCj4gPiA+IG1ldGEteGZjZS9yZWNpcGVzLWV4dGVuZGVkL2lt
-c2V0dGluZ3MvbXVsdGktbGluZS1BQ0xPQ0FMX0FNRkxBR1MtDQo+ID4gPiBp
-c25vdC1zdXBwb3J0ZWQtYnktYXV0b3JlY29uZi5wYXRjaA0KPiA+ID4gcmVu
-YW1lIHRvDQo+ID4gPiBtZXRhLXhmY2UvcmVjaXBlcy1leHRlbmRlZC9pbXNl
-dHRpbmdzL2ltc2V0dGluZ3MvbXVsdGktbGluZS0NCj4gPiA+IEFDTE9DQUxf
-QU1GTEFHUy1pc25vdC1zdXBwb3J0ZWQtYnktYXV0b3JlY29uZi5wYXRjaA0K
-PiA+ID4gZGlmZiAtLWdpdCBhL21ldGEteGZjZS9yZWNpcGVzLWV4dGVuZGVk
-L2ltc2V0dGluZ3NfMS42LjguYmIgYi9tZXRhLQ0KPiA+ID4geGZjZS9yZWNp
-cGVzLWV4dGVuZGVkL2ltc2V0dGluZ3MvaW1zZXR0aW5nc18xLjYuOC5iYg0K
-PiA+ID4gc2ltaWxhcml0eSBpbmRleCAxMDAlDQo+ID4gPiByZW5hbWUgZnJv
-bSBtZXRhLXhmY2UvcmVjaXBlcy1leHRlbmRlZC9pbXNldHRpbmdzXzEuNi44
-LmJiDQo+ID4gPiByZW5hbWUgdG8gbWV0YS14ZmNlL3JlY2lwZXMtZXh0ZW5k
-ZWQvaW1zZXR0aW5ncy9pbXNldHRpbmdzXzEuNi44LmJiDQo+ID4gPiAtLQ0K
-PiA+ID4gMS44LjQuMg0KPiA+DQo+ID4NCj4gPg0KPiA+IC0tDQo+ID4gX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18N
-Cj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+ID4gT3Bl
-bmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBo
-dHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L29wZW5lbWJlZGRlZC1kZXZlbA0KPiANCj4gLS0NCj4gTWFydGluICdKYU1h
-JyBKYW5zYSAgICAgamFiYmVyOiBNYXJ0aW4uSmFuc2FAZ21haWwuY29tDQoK
-Cg==
+Hi,
+
+I still get errors after applied this patch, we can see that there is no -luuid
+on command line:
+
+../i586-wrs-linux-libtool --quiet --tag=CC --mode=link i586-wrs-linux-gcc  -m32 
+-march=i586 
+--sysroot=/buildarea/lyang1/build_rebase/test_qemux86/tmp/sysroots/qemux86 -o 
+xfs_io -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-O1 -Wl,--hash-style=gnu 
+-Wl,--as-needed  -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -Wl,-O1 
+-Wl,--hash-style=gnu -Wl,--as-needed -static-libtool-libs  init.o attr.o bmap.o 
+file.o freeze.o fsync.o getrusage.o imap.o link.o mmap.o open.o parent.o pread.o 
+prealloc.o pwrite.o seek.o shutdown.o sync.o truncate.o reflink.o fadvise.o 
+madvise.o mincore.o sendfile.o fiemap.o inject.o resblks.o copy_file_range.o 
+sync_file_range.o readdir.o   ../libxcmd/libxcmd.la ../libhandle/libhandle.la 
+-lreadline
+/buildarea/lyang1/build_rebase/test_qemux86/tmp/work/i586-wrs-linux/xfsprogs/4.8.0-r0/xfsprogs-4.8.0/libxfs/.libs/libxfs.a(xfs_alloc.o): 
+In function `platform_uuid_compare':
+/buildarea/lyang1/build_rebase/test_qemux86/tmp/work/i586-wrs-linux/xfsprogs/4.8.0-r0/xfsprogs-4.8.0/libxfs/../include/xfs/linux.h:89: 
+undefined reference to `uuid_compare'
+/buildarea/lyang1/build_rebase/test_qemux86/tmp/work/i586-wrs-linux/xfsprogs/4.8.0-r0/xfsprogs-4.8.0/libxfs/../include/xfs/linux.h:89: 
+undefined reference to `uuid_compare'
+/buildarea/lyang1/build_rebase/test_qemux86/tmp/work/i586-wrs-linux/xfsprogs/4.8.0-r0/xfsprogs-4.8.0/libxfs/.libs/libxfs.a(xfs_bmap_btree.o): 
+In function `platform_uuid_compare':
+/buildarea/lyang1/build_rebase/test_qemux86/tmp/work/i586-wrs-linux/xfsprogs/4.8.0-r0/xfsprogs-4.8.0/libxfs/../include/xfs/linux.h:89: 
+undefined reference to `uuid_compare'
+/buildarea/lyang1/build_rebase/test_qemux86/tmp/work/i586-wrs-linux/xfsprogs/4.8.0-r0/xfsprogs-4.8.0/libxfs/.libs/libxfs.a(xfs_btree.o): 
+In function `platform_uuid_compare':
+/buildarea/lyang1/build_rebase/test_qemux86/tmp/work/i586-wrs-linux/xfsprogs/4.8.0-r0/xfsprogs-4.8.0/libxfs/../include/xfs/linux.h:89: 
+undefined reference to `uuid_compare'
+/buildarea/lyang1/build_rebase/test_qemux86/tmp/work/i586-wrs-linux/xfsprogs/4.8.0-r0/xfsprogs-4.8.0/libxfs/../include/xfs/linux.h:89: 
+undefined reference to `uuid_compare'
+
+// Robert
+
+On 12/18/2016 07:06 AM, Khem Raj wrote:
+> This should fix build issues due to missing dependencies
+> e.g. libuuid in Makefiles.
+>
+> correct libhandle paths
+>
+> Dont do parallel install its broken
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+> Changes from
+> v1 -> v2
+> - Drop locking toolchain to gcc it compiles fine with clang too
+>
+>  .../xfsprogs/files/link_needed_libs.patch          | 76 +++++++++++++++++++++-
+>  .../recipes-utils/xfsprogs/xfsprogs_4.8.0.bb       |  6 +-
+>  2 files changed, 79 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch b/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch
+> index 18b95c1c3..a3c699ce6 100644
+> --- a/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch
+> +++ b/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch
+> @@ -1,3 +1,9 @@
+> +use libtool to package install.  do not use the manual file install as
+> +that'll copy files directly from the .libs/ subdir which might have rpaths
+> +pointing to build area.
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +
+>  Index: xfsprogs-4.8.0/libxcmd/Makefile
+>  ===================================================================
+>  --- xfsprogs-4.8.0.orig/libxcmd/Makefile
+> @@ -37,11 +43,28 @@ Index: xfsprogs-4.8.0/libxfs/Makefile
+>
+>   install-headers: $(addsuffix -hdrs, $(PKGHFILES))
+>
+> +@@ -144,6 +145,7 @@ install-headers: $(addsuffix -hdrs, $(PK
+> + 	$(Q)$(LN_S) -f $(CURDIR)/$* $(TOPDIR)/include/xfs/$*
+> +
+> + install-dev: install
+> ++	$(INSTALL_LTLIB_DEV)
+> + 	$(INSTALL) -m 644 $(PKGHFILES) $(PKG_INC_DIR)
+> +
+> + # We need to install the headers before building the dependencies.  If we
+>  Index: xfsprogs-4.8.0/libxlog/Makefile
+>  ===================================================================
+>  --- xfsprogs-4.8.0.orig/libxlog/Makefile
+>  +++ xfsprogs-4.8.0/libxlog/Makefile
+> -@@ -19,6 +19,10 @@ default: ltdepend $(LTLIBRARY)
+> +@@ -12,6 +12,8 @@ LT_AGE = 0
+> +
+> + CFILES = xfs_log_recover.c util.c
+> +
+> ++LTLIBS = $(LIBUUID) $(LIBXFS)
+> ++
+> + # don't want to link xfs_repair with a debug libxlog.
+> + DEBUG = -DNDEBUG
+> +
+> +@@ -19,6 +21,10 @@ default: ltdepend $(LTLIBRARY)
+>
+>   include $(BUILDRULES)
+>
+> @@ -53,3 +76,54 @@ Index: xfsprogs-4.8.0/libxlog/Makefile
+>  +	$(INSTALL_LTLIB_DEV)
+>
+>   -include .ltdep
+> +Index: xfsprogs-4.8.0/include/buildmacros
+> +===================================================================
+> +--- xfsprogs-4.8.0.orig/include/buildmacros
+> ++++ xfsprogs-4.8.0/include/buildmacros
+> +@@ -70,18 +70,9 @@ endif
+> + # /usr/lib.
+> + ifeq ($(ENABLE_SHARED),yes)
+> + INSTALL_LTLIB_DEV = \
+> +-	cd $(TOPDIR)/$(LIBNAME)/.libs; \
+> +-	../$(INSTALL) -m 755 -d $(PKG_LIB_DIR); \
+> +-	../$(INSTALL) -m 644 -T old_lib $(LIBNAME).lai $(PKG_LIB_DIR); \
+> +-	../$(INSTALL) -m 644 $(LIBNAME).lai $(PKG_LIB_DIR)/$(LIBNAME).la ; \
+> +-	../$(INSTALL) -m 755 -d $(PKG_ROOT_LIB_DIR); \
+> +-	../$(INSTALL) -T so_base $(LIBNAME).lai $(PKG_ROOT_LIB_DIR); \
+> +-	if [ "x$(shell readlink -f $(PKG_LIB_DIR))" != \
+> +-	     "x$(shell readlink -f $(PKG_ROOT_LIB_DIR))" ]; then \
+> +-		../$(INSTALL) -S $(PKG_LIB_DIR)/$(LIBNAME).a $(PKG_ROOT_LIB_DIR)/$(LIBNAME).a; \
+> +-		../$(INSTALL) -S $(PKG_LIB_DIR)/$(LIBNAME).la $(PKG_ROOT_LIB_DIR)/$(LIBNAME).la; \
+> +-		../$(INSTALL) -S $(PKG_ROOT_LIB_DIR)/$(LIBNAME).so $(PKG_LIB_DIR)/$(LIBNAME).so; \
+> +-	fi
+> ++	set -e; cd $(TOPDIR)/$(LIBNAME); \
+> ++	$(INSTALL) -m 755 -d $(PKG_LIB_DIR); \
+> ++	env -uDIST_ROOT $(LTINSTALL) $(TOPDIR)/$(LIBNAME)/$(LIBNAME).la $(DIST_ROOT)$(PKG_LIB_DIR)/$(LIBNAME).la
+> + else
+> + INSTALL_LTLIB_DEV = $(INSTALL_LTLIB_STATIC)
+> + endif
+> +Index: xfsprogs-4.8.0/Makefile
+> +===================================================================
+> +--- xfsprogs-4.8.0.orig/Makefile
+> ++++ xfsprogs-4.8.0/Makefile
+> +@@ -83,6 +83,8 @@ quota: libxcmd
+> + repair: libxlog libxcmd
+> + copy: libxlog
+> + mkfs: libxcmd
+> ++libxlog: libxfs
+> ++libxlog-install-dev: libxfs-install-dev
+> +
+> + ifeq ($(HAVE_BUILDDEFS), yes)
+> + include $(BUILDRULES)
+> +Index: xfsprogs-4.8.0/libhandle/Makefile
+> +===================================================================
+> +--- xfsprogs-4.8.0.orig/libhandle/Makefile
+> ++++ xfsprogs-4.8.0/libhandle/Makefile
+> +@@ -24,7 +24,6 @@ default: ltdepend $(LTLIBRARY)
+> + include $(BUILDRULES)
+> +
+> + install: default
+> +-	$(INSTALL_LTLIB)
+> +
+> + install-dev: default
+> + 	$(INSTALL_LTLIB_DEV)
+> diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
+> index 9959f0d85..1032fb89b 100644
+> --- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
+> +++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
+> @@ -22,7 +22,7 @@ FILES_${PN}-fsck = "${base_sbindir}/fsck.xfs"
+>  FILES_${PN}-mkfs = "${base_sbindir}/mkfs.xfs"
+>  FILES_${PN}-repair = "${base_sbindir}/xfs_repair"
+>
+> -FILES_libhandle = "${base_libdir}/libhandle${SOLIBS}"
+> +FILES_libhandle = "${libdir}/libhandle${SOLIBS}"
+>
+>  EXTRA_OECONF = "--enable-gettext=no \
+>                  INSTALL_USER=root \
+> @@ -40,7 +40,7 @@ PACKAGECONFIG[blkid] = "--enable-blkid=yes,--enable-blkid=no,util-linux"
+>
+>  export DEBUG="-DNDEBUG"
+>
+> -EXTRA_OEMAKE = "DIST_ROOT='${D}'"
+> +#EXTRA_OEMAKE = "DIST_ROOT='${D}'"
+>
+>  do_configure_prepend () {
+>      export BUILD_CC="${BUILD_CC} ${BUILD_CFLAGS}"
+> @@ -54,3 +54,5 @@ do_configure_prepend () {
+>  do_install_append() {
+>          oe_runmake 'DESTDIR=${D}' install install-dev
+>  }
+> +
+> +PARALLEL_MAKEINST = ""
+>
 
