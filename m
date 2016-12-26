@@ -1,44 +1,40 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 8019971A05
+Return-Path: <leimaohui@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id D575D60290
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Dec 2016 23:57:05 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id l2so25590189wml.2
+	Mon, 26 Dec 2016 01:43:47 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="14253462"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 26 Dec 2016 09:43:38 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id EDF2F46704BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Dec 2016 15:57:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=ASKJUAplC0OAbvWiqF+z04bhZmefgBotkPnngavBeUs=;
-	b=vMtRYtxBGsLfutn1kLGQpkEiR1kO9MWFTax5EOyjvgBF9bcbySFwKTC0DnWGEH4fzR
-	fYxeqJb96ubcfcdqSHvsISTSYXUmfPk9fA1c9Pt2YSufxlK4ypbZYeNVbHcforV7Y40d
-	6NnckUHr9+wws6pxFOTtV/PyEizDmLomXGLczGNdQF4BfupGkXErfeHu60PQDfhsdzDl
-	QKlV7GbOi4wVa6wYkZafSX+SnygpcGHmUUtsG25KpDbRSRaCdAaDPP+BOFT9OqH0IfuR
-	a2pf19wLk8z9F2cwXUX2eT386ta3d7lIVU6SziX6xQgw2cHxxuxRGByWsz35GPc3UuIH
-	98Zg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=ASKJUAplC0OAbvWiqF+z04bhZmefgBotkPnngavBeUs=;
-	b=nbO+DjJlBr8cSqQgVv2JpJZNYIyYU2PoosAWlosVxdTBSiNoiFp86KoB37PTBRFWNh
-	zGj11VMVwEVHoxejxjhrEheEKS0j4fQdkzLh+c4ePlGqweiC19BK/tqjAVq1f7rTTQX9
-	C0vaIaqEsuSMNidqkzVVXIpcoLxP2t/EYersGcANhDn8zS06oaRsZYmtIsoTGzJP3Kmu
-	W6jbDO1iwwv+D/sujSWELkD4PcOSDpBEN3Io+OKv0HpweLa+6eqcoswlb76NeTlC5zIF
-	pgFtmmjjZTnriQu0ieXTpdzJYGirpXl0faC9MFtij/v/YZ3nGo60oRFZD6AEL22etqBb
-	bAWQ==
-X-Gm-Message-State: AIkVDXILsPsrnoem24FRz69D9lvQvSMxHkQDt9PsAqrnu9VsR7zwUI7kGE1STUDUlwrlbwNonkxH9cQm5gl1wA==
-X-Received: by 10.28.0.210 with SMTP id 201mr22439691wma.49.1482710226057;
-	Sun, 25 Dec 2016 15:57:06 -0800 (PST)
+	Mon, 26 Dec 2016 09:43:37 +0800 (CST)
+Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
+	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
+	14.03.0319.002; Mon, 26 Dec 2016 09:43:42 +0800
+From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [oe-jethro] [meta-xfce][PATCH] imsettings: move to
+	correct directory
+Thread-Index: AQHSXNiMdTdEPC0UpUW5vlxSwZ5KLqEU921A///T4ACABKzm0A==
+Date: Mon, 26 Dec 2016 01:43:41 +0000
+Message-ID: <1B56A49860EB2D45ADE3731B15C959FDFE5B87B9@G08CNEXMBPEKD01.g08.fujitsu.local>
+References: <1482468166-33076-1-git-send-email-leimaohui@cn.fujitsu.com>
+	<1B56A49860EB2D45ADE3731B15C959FDFE5B81EC@G08CNEXMBPEKD01.g08.fujitsu.local>
+	<20161223101558.GA3294@jama>
+In-Reply-To: <20161223101558.GA3294@jama>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.226.93]
 MIME-Version: 1.0
-Received: by 10.80.148.174 with HTTP; Sun, 25 Dec 2016 15:57:05 -0800 (PST)
-In-Reply-To: <1482552258-852-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-References: <1482552258-852-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 26 Dec 2016 00:57:05 +0100
-Message-ID: <CA+chaQeh1FrBsAUPuoKkZYX+VrjAtaEw0rccBMs14kbPjNa3Lg@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe] [PATCH v3] add php 7.1.0
+X-yoursite-MailScanner-ID: EDF2F46704BE.ACADA
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
+X-Spam-Status: No
+Subject: Re: [oe-jethro] [meta-xfce][PATCH] imsettings: move to correct directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,209 +47,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Dec 2016 23:57:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 26 Dec 2016 01:43:52 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="shift_jis"
+Content-Transfer-Encoding: base64
 
-php-7.1.0: php: configure was passed unrecognised options:
---with-mysql [unknown-configure-option]
-
-
-On Sat, Dec 24, 2016 at 5:04 AM, Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-wrote:
-
-> 1)add php_7.1.0.bb
-> 2)Delete php_5.5.38.bb,since it is Replaced by php_5.6.26.bb.
-> 3)Delete pthread-check-threads-m4.patch, since it is integrated upstream.
->
-> Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-> ---
->  .../change-AC_TRY_RUN-to-AC_TRY_LINK.patch         | 56
-> ++++++++++++++++++++++
->  meta-oe/recipes-devtools/php/php.inc               |  3 +-
->  .../php/php/pthread-check-threads-m4.patch         | 30 ------------
->  meta-oe/recipes-devtools/php/php_5.5.38.bb         |  6 ---
->  meta-oe/recipes-devtools/php/php_7.1.0.bb          |  8 ++++
->  5 files changed, 65 insertions(+), 38 deletions(-)
->  create mode 100644 meta-oe/recipes-devtools/php/
-> php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
->  delete mode 100644 meta-oe/recipes-devtools/php/
-> php/pthread-check-threads-m4.patch
->  delete mode 100644 meta-oe/recipes-devtools/php/php_5.5.38.bb
->  create mode 100644 meta-oe/recipes-devtools/php/php_7.1.0.bb
->
-> diff --git a/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
-> b/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_
-> RUN-to-AC_TRY_LINK.patch
-> new file mode 100644
-> index 0000000..39c334f
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_
-> RUN-to-AC_TRY_LINK.patch
-> @@ -0,0 +1,56 @@
-> +[PATCH] config.m4: change AC_TRY_RUN to AC_TRY_LINK
-> +
-> +Upstream-Status: Pending
-> +
-> +AC_TRY_RUN is not suitable for cross-compile
-> +
-> +Signed-off-by: Roy Li <rongqing.li@windriver.com>
-> +---
-> + ext/fileinfo/config.m4 | 31 ++++++-------------------------
-> + 1 file changed, 6 insertions(+), 25 deletions(-)
-> +
-> +diff --git a/ext/fileinfo/config.m4 b/ext/fileinfo/config.m4
-> +index 7e98d62..8a8ea0e 100644
-> +--- a/ext/fileinfo/config.m4
-> ++++ b/ext/fileinfo/config.m4
-> +@@ -14,31 +14,12 @@ if test "$PHP_FILEINFO" != "no"; then
-> +     libmagic/readcdf.c libmagic/softmagic.c"
-> +
-> +   AC_MSG_CHECKING([for strcasestr])
-> +-  AC_TRY_RUN([
-> +-#include <string.h>
-> +-#include <strings.h>
-> +-#include <stdlib.h>
-> +-
-> +-int main(void)
-> +-{
-> +-        char *s0, *s1, *ret;
-> +-
-> +-        s0 = (char *) malloc(42);
-> +-        s1 = (char *) malloc(8);
-> +-
-> +-        memset(s0, 'X', 42);
-> +-        s0[24] = 'Y';
-> +-        s0[26] = 'Z';
-> +-        s0[41] = '\0';
-> +-        memset(s1, 'x', 8);
-> +-        s1[0] = 'y';
-> +-        s1[2] = 'Z';
-> +-        s1[7] = '\0';
-> +-
-> +-        ret = strcasestr(s0, s1);
-> +-
-> +-        return !(NULL != ret);
-> +-}
-> ++  AC_TRY_COMPILE([
-> ++     #include <string.h>
-> ++     #include <strings.h>
-> ++     #include <stdlib.h>
-> ++  ],[
-> ++     strcasestr(NULL, NULL);
-> +   ],[
-> +     dnl using the platform implementation
-> +     AC_MSG_RESULT(yes)
-> +--
-> +1.9.1
-> +
-> diff --git a/meta-oe/recipes-devtools/php/php.inc
-> b/meta-oe/recipes-devtools/php/php.inc
-> index cd91940..5e6b16a 100644
-> --- a/meta-oe/recipes-devtools/php/php.inc
-> +++ b/meta-oe/recipes-devtools/php/php.inc
-> @@ -24,7 +24,6 @@ SRC_URI_append_class-target = " \
->              file://php-fpm.conf \
->              file://php-fpm-apache.conf \
->              file://configure.patch \
-> -            file://pthread-check-threads-m4.patch \
->              file://70_mod_php5.conf \
->              file://php-fpm.service \
->            "
-> @@ -218,7 +217,7 @@ FILES_${PN}-doc += "${PHP_LIBDIR}/php/doc"
->  FILES_${PN}-cli = "${bindir}/php"
->  FILES_${PN}-phar = "${bindir}/phar*"
->  FILES_${PN}-cgi = "${bindir}/php-cgi"
-> -FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf
-> ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-
-> fpm.service"
-> +FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf
-> ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service
-> ${sysconfdir}/php-fpm.d ${sysconfdir}/php-fpm.d/www.conf.default"
->
-
-The second added entry is already included by the first one, isn't it?
-
-
->  FILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
->  CONFFILES_${PN}-fpm = "${sysconfdir}/php-fpm.conf"
->  CONFFILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
-> diff --git a/meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch
-> b/meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch
-> deleted file mode 100644
-> index 0c564cd..0000000
-> --- a/meta-oe/recipes-devtools/php/php/pthread-check-threads-m4.patch
-> +++ /dev/null
-> @@ -1,30 +0,0 @@
-> -From d8067ceacbf54e79c9c6b68675332c09eaa0b55d Mon Sep 17 00:00:00 2001
-> -From: Jackie Huang <jackie.huang@windriver.com>
-> -Date: Mon, 8 Apr 2013 14:29:51 +0800
-> -Subject: [PATCH] pthread-check
-> -
-> -Enable pthreads support when cross-compiling
-> -
-> -Upstream-Status: Inapproprate [config]
-> -
-> -Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ----
-> - TSRM/threads.m4 |    2 +-
-> - 1 files changed, 1 insertions(+), 1 deletions(-)
-> -
-> -diff --git a/TSRM/threads.m4 b/TSRM/threads.m4
-> -index 38494ce..15d9454 100644
-> ---- a/TSRM/threads.m4
-> -+++ b/TSRM/threads.m4
-> -@@ -86,7 +86,7 @@ int main() {
-> -   pthreads_working=no
-> -   ], [
-> -   dnl For cross compiling running this test is of no use. NetWare
-> supports pthreads
-> --  pthreads_working=no
-> -+  pthreads_working=yes
-> -   case $host_alias in
-> -   *netware*)
-> -     pthreads_working=yes
-> ---
-> -1.7.4.1
-> -
-> diff --git a/meta-oe/recipes-devtools/php/php_5.5.38.bb
-> b/meta-oe/recipes-devtools/php/php_5.5.38.bb
-> deleted file mode 100644
-> index 26f35b1..0000000
-> --- a/meta-oe/recipes-devtools/php/php_5.5.38.bb
-> +++ /dev/null
-> @@ -1,6 +0,0 @@
-> -require php.inc
-> -
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=464ca70af214d2407f6b7d4458158afd"
-> -
-> -SRC_URI[md5sum] = "312244a0eecad602a1555ed2434e223f"
-> -SRC_URI[sha256sum] = "473c81ebb2e48ca468caee03176226
-> 6651843d7227c18a824add9b07b9393e38"
-> diff --git a/meta-oe/recipes-devtools/php/php_7.1.0.bb
-> b/meta-oe/recipes-devtools/php/php_7.1.0.bb
-> new file mode 100644
-> index 0000000..899acf9
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/php/php_7.1.0.bb
-> @@ -0,0 +1,8 @@
-> +require php.inc
-> +
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b602636d46a61c0ac0432bbf5c078fe4"
-> +
-> +SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch"
-> +SRC_URI[md5sum] = "54e364b60a88db77adb96aacb10f10a4"
-> +SRC_URI[sha256sum] = "68bcfd7deed5b3474d81dec9f74d12
-> 2058327e2bed0ac25bbc9ec70995228e61"
-> +
-> --
-> 2.7.4
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+DQo+IEl0J3MgbmVlZGVkIGluIGtyb2dvdGggYXMgd2VsbCwgaXNuJ3QgaXQ/
+DQoNCkknbSBzb3JyeSBJIGRpZG4ndCBub3RpY2Uga3JvZ290aC4gWWVzLCBU
+aGlzIHBhdGNoJ3MgbmVlZGVkIGluIGtyb2dvdGggYXMgd2VsbC4NCg0KDQpC
+ZXN0IHJlZ2FyZHMNCkxlaQ0KDQoNCg0KDQoNCj4gLS0tLS1PcmlnaW5hbCBN
+ZXNzYWdlLS0tLS0NCj4gRnJvbTogb3BlbmVtYmVkZGVkLWRldmVsLWJvdW5j
+ZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyBbbWFpbHRvOm9wZW5lbWJlZGRl
+ZC0NCj4gZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnXSBP
+biBCZWhhbGYgT2YgTWFydGluIEphbnNhDQo+IFNlbnQ6IEZyaWRheSwgRGVj
+ZW1iZXIgMjMsIDIwMTYgNjoxNiBQTQ0KPiBUbzogb3BlbmVtYmVkZGVkLWRl
+dmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6IFtv
+ZV0gW29lLWpldGhyb10gW21ldGEteGZjZV1bUEFUQ0hdIGltc2V0dGluZ3M6
+IG1vdmUgdG8gY29ycmVjdA0KPiBkaXJlY3RvcnkNCj4gDQo+IE9uIEZyaSwg
+RGVjIDIzLCAyMDE2IGF0IDA0OjU3OjU4QU0gKzAwMDAsIExlaSwgTWFvaHVp
+IHdyb3RlOg0KPiA+IEhpIGFybWluDQo+ID4NCj4gPiBQbGVhc2UgbWVyZ2Ug
+dGhpcyBwYXRjaCB0byBqZXRocm8uDQo+IA0KPiBJdCdzIG5lZWRlZCBpbiBr
+cm9nb3RoIGFzIHdlbGwsIGlzbid0IGl0Pw0KPiANCj4gPg0KPiA+IEJlc3Qg
+cmVnYXJkcy4NCj4gPiBMZWkNCj4gPg0KPiA+ID4gLS0tLS1PcmlnaW5hbCBN
+ZXNzYWdlLS0tLS0NCj4gPiA+IEZyb206IExlaSwgTWFvaHVpDQo+ID4gPiBT
+ZW50OiBGcmlkYXksIERlY2VtYmVyIDIzLCAyMDE2IDEyOjQzIFBNDQo+ID4g
+PiBUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5v
+cmcNCj4gPiA+IENjOiBMZWksIE1hb2h1aQ0KPiA+ID4gU3ViamVjdDogW29l
+LWpldGhyb10gW21ldGEteGZjZV1bUEFUQ0hdIGltc2V0dGluZ3M6IG1vdmUg
+dG8gY29ycmVjdA0KPiA+ID4gZGlyZWN0b3J5DQo+ID4gPg0KPiA+ID4gU2ln
+bmVkLW9mZi1ieTogTGVpIE1hb2h1aSA8bGVpbWFvaHVpQGNuLmZ1aml0c3Uu
+Y29tPg0KPiA+ID4gLS0tDQo+ID4gPiAgLi4uL2ltc2V0dGluZ3MveyA9PiBp
+bXNldHRpbmdzfS9ndGstaXMtcmVxdWlyZWQtYnktbm90aWZ5LnBhdGNoDQo+
+IHwgMA0KPiA+ID4gIC4uLi9tdWx0aS1saW5lLUFDTE9DQUxfQU1GTEFHUy1p
+c25vdC1zdXBwb3J0ZWQtYnktYXV0b3JlY29uZi5wYXRjaA0KPiB8IDANCj4g
+PiA+ICBtZXRhLXhmY2UvcmVjaXBlcy1leHRlbmRlZC97ID0+IGltc2V0dGlu
+Z3N9L2ltc2V0dGluZ3NfMS42LjguYmINCj4gfCAwDQo+ID4gPiAgMyBmaWxl
+cyBjaGFuZ2VkLCAwIGluc2VydGlvbnMoKyksIDAgZGVsZXRpb25zKC0pICBy
+ZW5hbWUNCj4gPiA+IG1ldGEteGZjZS9yZWNpcGVzLSBleHRlbmRlZC9pbXNl
+dHRpbmdzL3sgPT4NCj4gPiA+IGltc2V0dGluZ3N9L2d0ay1pcy1yZXF1aXJl
+ZC1ieS1ub3RpZnkucGF0Y2ggKDEwMCUpIHJlbmFtZQ0KPiA+ID4gbWV0YS14
+ZmNlL3JlY2lwZXMtZXh0ZW5kZWQvaW1zZXR0aW5ncy97ID0+IGltc2V0dGlu
+Z3N9L211bHRpLWxpbmUtDQo+ID4gPiBBQ0xPQ0FMX0FNRkxBR1MtaXNub3Qt
+c3VwcG9ydGVkLWJ5LWF1dG9yZWNvbmYucGF0Y2ggKDEwMCUpICByZW5hbWUN
+Cj4gPiA+IG1ldGEtIHhmY2UvcmVjaXBlcy1leHRlbmRlZC97ID0+IGltc2V0
+dGluZ3N9L2ltc2V0dGluZ3NfMS42LjguYmINCj4gPiA+ICgxMDAlKQ0KPiA+
+ID4NCj4gPiA+IGRpZmYgLS1naXQNCj4gPiA+IGEvbWV0YS14ZmNlL3JlY2lw
+ZXMtZXh0ZW5kZWQvaW1zZXR0aW5ncy9ndGstaXMtcmVxdWlyZWQtYnktDQo+
+ID4gPiBub3RpZnkucGF0Y2gNCj4gPiA+IGIvbWV0YS14ZmNlL3JlY2lwZXMt
+ZXh0ZW5kZWQvaW1zZXR0aW5ncy9pbXNldHRpbmdzL2d0ay1pcy0NCj4gPiA+
+IHJlcXVpcmVkLWJ5LW5vdGlmeS5wYXRjaA0KPiA+ID4gc2ltaWxhcml0eSBp
+bmRleCAxMDAlDQo+ID4gPiByZW5hbWUgZnJvbQ0KPiA+ID4gbWV0YS14ZmNl
+L3JlY2lwZXMtZXh0ZW5kZWQvaW1zZXR0aW5ncy9ndGstaXMtcmVxdWlyZWQt
+YnktDQo+ID4gPiBub3RpZnkucGF0Y2gNCj4gPiA+IHJlbmFtZSB0bw0KPiA+
+ID4gbWV0YS14ZmNlL3JlY2lwZXMtZXh0ZW5kZWQvaW1zZXR0aW5ncy9pbXNl
+dHRpbmdzL2d0ay1pcy1yZXF1aXJlZC1ieS0NCj4gPiA+IG5vdGlmeS5wYXRj
+aA0KPiA+ID4gZGlmZiAtLWdpdA0KPiA+ID4gYS9tZXRhLXhmY2UvcmVjaXBl
+cy1leHRlbmRlZC9pbXNldHRpbmdzL211bHRpLWxpbmUtQUNMT0NBTF9BTUZM
+QUdTLQ0KPiA+ID4gaXNub3Qtc3VwcG9ydGVkLWJ5LWF1dG9yZWNvbmYucGF0
+Y2ggYi9tZXRhLXhmY2UvcmVjaXBlcy0NCj4gPiA+IGV4dGVuZGVkL2ltc2V0
+dGluZ3MvaW1zZXR0aW5ncy9tdWx0aS1saW5lLUFDTE9DQUxfQU1GTEFHUy1p
+c25vdC1zdXBwDQo+ID4gPiBvcnRlZC1ieS0NCj4gPiA+IGF1dG9yZWNvbmYu
+cGF0Y2gNCj4gPiA+IHNpbWlsYXJpdHkgaW5kZXggMTAwJQ0KPiA+ID4gcmVu
+YW1lIGZyb20NCj4gPiA+IG1ldGEteGZjZS9yZWNpcGVzLWV4dGVuZGVkL2lt
+c2V0dGluZ3MvbXVsdGktbGluZS1BQ0xPQ0FMX0FNRkxBR1MtDQo+ID4gPiBp
+c25vdC1zdXBwb3J0ZWQtYnktYXV0b3JlY29uZi5wYXRjaA0KPiA+ID4gcmVu
+YW1lIHRvDQo+ID4gPiBtZXRhLXhmY2UvcmVjaXBlcy1leHRlbmRlZC9pbXNl
+dHRpbmdzL2ltc2V0dGluZ3MvbXVsdGktbGluZS0NCj4gPiA+IEFDTE9DQUxf
+QU1GTEFHUy1pc25vdC1zdXBwb3J0ZWQtYnktYXV0b3JlY29uZi5wYXRjaA0K
+PiA+ID4gZGlmZiAtLWdpdCBhL21ldGEteGZjZS9yZWNpcGVzLWV4dGVuZGVk
+L2ltc2V0dGluZ3NfMS42LjguYmIgYi9tZXRhLQ0KPiA+ID4geGZjZS9yZWNp
+cGVzLWV4dGVuZGVkL2ltc2V0dGluZ3MvaW1zZXR0aW5nc18xLjYuOC5iYg0K
+PiA+ID4gc2ltaWxhcml0eSBpbmRleCAxMDAlDQo+ID4gPiByZW5hbWUgZnJv
+bSBtZXRhLXhmY2UvcmVjaXBlcy1leHRlbmRlZC9pbXNldHRpbmdzXzEuNi44
+LmJiDQo+ID4gPiByZW5hbWUgdG8gbWV0YS14ZmNlL3JlY2lwZXMtZXh0ZW5k
+ZWQvaW1zZXR0aW5ncy9pbXNldHRpbmdzXzEuNi44LmJiDQo+ID4gPiAtLQ0K
+PiA+ID4gMS44LjQuMg0KPiA+DQo+ID4NCj4gPg0KPiA+IC0tDQo+ID4gX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18N
+Cj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+ID4gT3Bl
+bmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBo
+dHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L29wZW5lbWJlZGRlZC1kZXZlbA0KPiANCj4gLS0NCj4gTWFydGluICdKYU1h
+JyBKYW5zYSAgICAgamFiYmVyOiBNYXJ0aW4uSmFuc2FAZ21haWwuY29tDQoK
+Cg==
 
