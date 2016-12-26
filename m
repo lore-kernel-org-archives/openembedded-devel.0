@@ -1,30 +1,30 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 017626059F
+Return-Path: <philip@balister.org>
+X-Greylist: delayed 401 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 26 Dec 2016 17:18:52 UTC
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with ESMTP id 23BE271DB1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Dec 2016 14:39:31 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="14271492"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 26 Dec 2016 22:39:24 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 2C35B4818553
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Dec 2016 22:39:22 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.81) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Mon, 26 Dec 2016 22:39:27 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 26 Dec 2016 22:39:08 +0800
-Message-ID: <1482763148-5077-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
+	Mon, 26 Dec 2016 17:18:52 +0000 (UTC)
+Received: (qmail 12090 invoked by uid 1003); 26 Dec 2016 17:12:13 -0000
+Received: from unknown (HELO ?10.0.0.98?) (philip@opensdr.com@73.148.15.238)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	26 Dec 2016 17:12:13 -0000
+To: openembedded-devel@lists.openembedded.org,
+	bitbake-devel@lists.openembedded.org,
+	yocto-infrastructure@yoctoproject.org, yocto@yoctoproject.org
+References: <CAHQecY48gVbt4S+88MHivSbv-Xdn29WRq5RPL6+QDVGYUPCwYw@mail.gmail.com>
+	<E628426E-84F8-4EA4-A296-D32C3339DF1C@gmail.com>
+	<CAHQecY4oXXwGeLsdXrgjFmouTiwvsJXa6K1Qbp--9WZ0=3O5CQ@mail.gmail.com>
+	<74b16359-8b63-4f34-b9b7-618bd8aa4cb6@linuxfoundation.org>
+From: Philip Balister <philip@balister.org>
+Message-ID: <c3f72389-1727-a279-1cfc-1341ffacdb37@balister.org>
+Date: Mon, 26 Dec 2016 12:12:08 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.5.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.81]
-X-yoursite-MailScanner-ID: 2C35B4818553.A4F39
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH v4] add php 7.1.0
+In-Reply-To: <74b16359-8b63-4f34-b9b7-618bd8aa4cb6@linuxfoundation.org>
+Subject: Re: Infra Full Stop 12/26-12/29
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,148 +37,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Dec 2016 14:39:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 26 Dec 2016 17:18:54 -0000
+X-Groupsio-MsgNum: 64535
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="NPtPn8wNJQG4VRRUpR4F0vqVsnIX6t6iI"
 
-1)Add php_7.1.0.bb
-2)Delete php_5.5.38.bb,since it is Replaced by php_5.6.26.bb.
-3)Move pthread-check-threads-m4.patch out of 7.1.0, since it is integrated upstream.
+--NPtPn8wNJQG4VRRUpR4F0vqVsnIX6t6iI
+Content-Type: multipart/mixed; boundary="FLsfQnga6UCU70XIFHIGwxGQHT5i9GC06";
+ protected-headers="v1"
+From: Philip Balister <philip@balister.org>
+To: openembedded-devel@lists.openembedded.org,
+ bitbake-devel@lists.openembedded.org, yocto-infrastructure@yoctoproject.org,
+ yocto@yoctoproject.org
+Message-ID: <c3f72389-1727-a279-1cfc-1341ffacdb37@balister.org>
+Subject: Re: [oe] Infra Full Stop 12/26-12/29
+References: <CAHQecY48gVbt4S+88MHivSbv-Xdn29WRq5RPL6+QDVGYUPCwYw@mail.gmail.com>
+ <E628426E-84F8-4EA4-A296-D32C3339DF1C@gmail.com>
+ <CAHQecY4oXXwGeLsdXrgjFmouTiwvsJXa6K1Qbp--9WZ0=3O5CQ@mail.gmail.com>
+ <74b16359-8b63-4f34-b9b7-618bd8aa4cb6@linuxfoundation.org>
+In-Reply-To: <74b16359-8b63-4f34-b9b7-618bd8aa4cb6@linuxfoundation.org>
 
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
----
- .../change-AC_TRY_RUN-to-AC_TRY_LINK.patch         | 56 ++++++++++++++++++++++
- meta-oe/recipes-devtools/php/php.inc               |  1 -
- meta-oe/recipes-devtools/php/php_5.5.38.bb         |  6 ---
- meta-oe/recipes-devtools/php/php_5.6.26.bb         |  4 +-
- meta-oe/recipes-devtools/php/php_7.1.0.bb          | 14 ++++++
- 5 files changed, 73 insertions(+), 8 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
- delete mode 100644 meta-oe/recipes-devtools/php/php_5.5.38.bb
- create mode 100644 meta-oe/recipes-devtools/php/php_7.1.0.bb
+--FLsfQnga6UCU70XIFHIGwxGQHT5i9GC06
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch b/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
-new file mode 100644
-index 0000000..39c334f
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
-@@ -0,0 +1,56 @@
-+[PATCH] config.m4: change AC_TRY_RUN to AC_TRY_LINK
-+
-+Upstream-Status: Pending
-+
-+AC_TRY_RUN is not suitable for cross-compile
-+
-+Signed-off-by: Roy Li <rongqing.li@windriver.com>
-+---
-+ ext/fileinfo/config.m4 | 31 ++++++-------------------------
-+ 1 file changed, 6 insertions(+), 25 deletions(-)
-+
-+diff --git a/ext/fileinfo/config.m4 b/ext/fileinfo/config.m4
-+index 7e98d62..8a8ea0e 100644
-+--- a/ext/fileinfo/config.m4
-++++ b/ext/fileinfo/config.m4
-+@@ -14,31 +14,12 @@ if test "$PHP_FILEINFO" != "no"; then
-+     libmagic/readcdf.c libmagic/softmagic.c"
-+ 
-+   AC_MSG_CHECKING([for strcasestr])
-+-  AC_TRY_RUN([
-+-#include <string.h>
-+-#include <strings.h>
-+-#include <stdlib.h>
-+-
-+-int main(void)
-+-{
-+-        char *s0, *s1, *ret;
-+-
-+-        s0 = (char *) malloc(42);
-+-        s1 = (char *) malloc(8);
-+-
-+-        memset(s0, 'X', 42);
-+-        s0[24] = 'Y';
-+-        s0[26] = 'Z';
-+-        s0[41] = '\0';
-+-        memset(s1, 'x', 8);
-+-        s1[0] = 'y';
-+-        s1[2] = 'Z';
-+-        s1[7] = '\0';
-+-
-+-        ret = strcasestr(s0, s1);
-+-
-+-        return !(NULL != ret);
-+-}
-++  AC_TRY_COMPILE([
-++     #include <string.h>
-++     #include <strings.h>
-++     #include <stdlib.h>
-++  ],[
-++     strcasestr(NULL, NULL);
-+   ],[
-+     dnl using the platform implementation
-+     AC_MSG_RESULT(yes)
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index cd91940..c4fb1d9 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -24,7 +24,6 @@ SRC_URI_append_class-target = " \
-             file://php-fpm.conf \
-             file://php-fpm-apache.conf \
-             file://configure.patch \
--            file://pthread-check-threads-m4.patch \
-             file://70_mod_php5.conf \
-             file://php-fpm.service \
-           "
-diff --git a/meta-oe/recipes-devtools/php/php_5.5.38.bb b/meta-oe/recipes-devtools/php/php_5.5.38.bb
-deleted file mode 100644
-index 26f35b1..0000000
---- a/meta-oe/recipes-devtools/php/php_5.5.38.bb
-+++ /dev/null
-@@ -1,6 +0,0 @@
--require php.inc
--
--LIC_FILES_CHKSUM = "file://LICENSE;md5=464ca70af214d2407f6b7d4458158afd"
--
--SRC_URI[md5sum] = "312244a0eecad602a1555ed2434e223f"
--SRC_URI[sha256sum] = "473c81ebb2e48ca468caee031762266651843d7227c18a824add9b07b9393e38"
-diff --git a/meta-oe/recipes-devtools/php/php_5.6.26.bb b/meta-oe/recipes-devtools/php/php_5.6.26.bb
-index cbd0615..ddc7ce3 100644
---- a/meta-oe/recipes-devtools/php/php_5.6.26.bb
-+++ b/meta-oe/recipes-devtools/php/php_5.6.26.bb
-@@ -2,6 +2,8 @@ require php.inc
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b602636d46a61c0ac0432bbf5c078fe4"
- 
--SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch"
-+SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
-+            file://pthread-check-threads-m4.patch \
-+           "
- SRC_URI[md5sum] = "cb424b705cfb715fc04f499f8a8cf52e"
- SRC_URI[sha256sum] = "d47aab8083a4284b905777e1b45dd7735adc53be827b29f896684750ac8b6236"
-diff --git a/meta-oe/recipes-devtools/php/php_7.1.0.bb b/meta-oe/recipes-devtools/php/php_7.1.0.bb
-new file mode 100644
-index 0000000..210d91f
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php_7.1.0.bb
-@@ -0,0 +1,14 @@
-+require php.inc
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b602636d46a61c0ac0432bbf5c078fe4"
-+
-+SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch"
-+SRC_URI[md5sum] = "54e364b60a88db77adb96aacb10f10a4"
-+SRC_URI[sha256sum] = "68bcfd7deed5b3474d81dec9f74d122058327e2bed0ac25bbc9ec70995228e61"
-+
-+PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
-+                        --with-pdo-mysql=${STAGING_BINDIR_CROSS}/mysql_config \
-+                        ,--without-mysqli --without-pdo-mysql \
-+                        ,mysql5"
-+
-+FILES_${PN}-fpm += "${sysconfdir}/php-fpm.d/www.conf.default"
--- 
-2.7.4
+On 12/25/2016 11:06 PM, Michael Halstead wrote:
+> In preparation for the scheduled maintenance I have moved
+> git.openembedded.org to a new server temporarily. E-mail and Patchwork
+> hooks may not work correctly. All other git operations as well as
+> listings at http://git.openembedded.org/ should continue working.
+>=20
+> If you have a git remote pointed directly at openembedded.org it will
+> fail. Please update your remote to point at git.openembedded.org and tr=
+y
+> again.
+>=20
+> Other services that will stay up during the maintenance are:
+>=20
+> Layerindex https://layers.openembedded.org/
+> Mailman http://lists.openembedded.org/
+> Patchwork https://patchwork.openembedded.org/
+>=20
+> I'd like the share my appreciation for the OpenEmbedded volunteer
+> sysadmins who are taking time away from their holiday celebrations to
+> make this downtime as convenient for the rest of us as possible.
+
+I'd like to thank everyone working on this project for their hard work
+through out the year keeping OpenEmbeded up to date and moving it
+forward as the premier embedded Linux (and possibly other OS') build syst=
+em.
+
+Here's to a good New Year!
+
+Philip
+
+>=20
+>=20
+> On 12/22/2016 09:19 AM, Tom King wrote:
+>> Schedule is  06:00UTC 27DEC16 for the full stop.  Things will start co=
+ming
+>> back (estimated) about 48hrs later.
+>>
+>> Tom
+>>
+>> On Tue, Dec 20, 2016 at 11:16 AM, Khem Raj <raj.khem@gmail.com> wrote:=
+
+>>
+>>>> On Dec 20, 2016, at 10:50 AM, Tom King <ka6sox@gmail.com> wrote:
+>>>>
+>>>> Hi All,
+>>>>
+>>>> We have been looking for a time when we could do a full stop of the =
+infra
+>>>> to upgrade some bits and clear out some faults.
+>>>>
+>>>> This will involve shutting down the main machine that we use for *mo=
+st*
+>>> of
+>>>> the OE infra.
+>>>>
+>>>> Our goal is to put up a backup git master but other services such as=
+:
+>>> wiki,
+>>>> patches, etc will be offline for some or all of that period.
+>>>>
+>>>> We have delayed doing this much needed maintenance to try to work ar=
+ound
+>>>> Yocto and OE release schedules and it is necessary that we take this=
+ time
+>>>> to do the work.
+>>>>
+>>> I guess, you need to come up with a tentative down-time schedule.
+>>>
+>>>> Tom
+>>>> (for the OE Infra Team)
+>>>> --
+>>>> _______________________________________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.openembedded.org
+>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>=20
+>=20
+>=20
 
 
+--FLsfQnga6UCU70XIFHIGwxGQHT5i9GC06--
 
+--NPtPn8wNJQG4VRRUpR4F0vqVsnIX6t6iI
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iQExBAEBCAAbBQJYYU9sFBxwaGlsaXBAYmFsaXN0ZXIub3JnAAoJEMDJd4rr0mer
+SOkIAIpMnJJ8yaDiGjXchoZXWlCRxkvg1eoFRGGX93CNnJKfv+tCpXZP6A2U0dx4
+2sb7BpmDSelIVZ6k32Dek/tzd3OpVjo71tVuod6MoBRZI1sla1mSeT+zc5luSYor
+/Wp+3qxTrBlxB3oYxYPy/UT/WdDuQbn62pm0ZOtu35WVa9oZsmcGCH17hNmtz4Tw
+kCWMl/KkLZdayJAMFR7MKs8owmslyWzMsG+4c4kR3i6ZQJN5yPl07L9x6uW/H4Ig
+kEEr3XG+NsWa9SHxN4gpmT+NW1jL4Qv8GndpRmgXRlAgf0rHC9Pgrg8McqHpJ0bB
+0k5upfGJyPsNq/yPFVkB38FBc6w=
+=pryV
+-----END PGP SIGNATURE-----
+
+--NPtPn8wNJQG4VRRUpR4F0vqVsnIX6t6iI--
