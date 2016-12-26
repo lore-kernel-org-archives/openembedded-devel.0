@@ -1,45 +1,30 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id BE310731A1
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 017626059F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Dec 2016 10:35:51 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id c85so14368141wmi.1
+	Mon, 26 Dec 2016 14:39:31 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="14271492"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 26 Dec 2016 22:39:24 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 2C35B4818553
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Dec 2016 02:35:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=XRpRKVy1HSJWIKACqaAaaOU3obj0J79g+xLDbboHAHI=;
-	b=D6aGgnRFFO5I6oPaTQ6AgIsFdz++in/+AIAdFLUxtVgC1vfm/axc0D+BI1+IWR97Qf
-	09hs3cibmrpJfDKMwlFy9GOMG2XxBal8Ts6orj0cJvPfnhjpNOeilJrehNAFR9xjCPkJ
-	klwN1lIztPU+bDeS62aY7LMD2uAoNeo/qQTdpUMrwCqfnSq/BBgSp5UI967k/pbh6AEH
-	YDWUyHXyVAlpP+DL2QZ25USZkGXieQordwYVPBs+4BALh0bRdOS0wWebH155j4ejMuf/
-	RbTxTAFqIWoQtn99KjiKG1cWvU3Fn2kYzKLzCKapOe0WaWBaxjHk36UV/bVtUamgY7hH
-	sy7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=XRpRKVy1HSJWIKACqaAaaOU3obj0J79g+xLDbboHAHI=;
-	b=JRS57ykQFc4FNMvLLAEzZb4ceLxPoGQAZsRJvUTyTYJLTIcSU4wObRMpIv9lswbJfu
-	52dM8ZdfLB3FdlZqhCWNmWR8mrX+KEDLjyuuzQMQEled/iIatDDUisIHpuWBiUgkRZvj
-	x2uaVHPFwAXHNwYZln/mtSEfUfa2ad3WKqTt5IpXgDZTpdlCYcUvRwDPogOa0MXO5yIR
-	IUt/OTiaD+Xr98oNb0Xw2WASnRu062Qu9ioJkbAfjbaHF2mWQuGvvc2kqSAEI23LN4VW
-	9F1WN40Q85QRLVvwjF8RYB9XEdtjMOOc7RKPxWT2LO7B6Kw8ILijItEZZCg8g8f49lCc
-	TPFA==
-X-Gm-Message-State: AIkVDXIuTkbxHwEJpDHHyjwEKRWfPXnaHPVLS9iaC7b0q0O52ZWpa0XEFbl1bBYMrdlCCLFLCvVU+E+gOsVD2g==
-X-Received: by 10.28.97.139 with SMTP id v133mr24293543wmb.117.1482748552320; 
-	Mon, 26 Dec 2016 02:35:52 -0800 (PST)
+	Mon, 26 Dec 2016 22:39:22 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.81) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.319.2; Mon, 26 Dec 2016 22:39:27 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 26 Dec 2016 22:39:08 +0800
+Message-ID: <1482763148-5077-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Received: by 10.194.248.129 with HTTP; Mon, 26 Dec 2016 02:35:51 -0800 (PST)
-In-Reply-To: <CA+chaQd3YPtvxY7CN82m86v5V=fyaYk3pWs4fF9TqFknWzE7HA@mail.gmail.com>
-References: <20161222200250.23273-1-haris.okanovic@ni.com>
-	<CA+chaQd3YPtvxY7CN82m86v5V=fyaYk3pWs4fF9TqFknWzE7HA@mail.gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Mon, 26 Dec 2016 02:35:51 -0800
-Message-ID: <CAJ86T=VT1midOLopXwankwWo3HY5DSfCpbRZSF-vPLvinNf0CA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: Haris Okanovic <haris.okanovic@ni.com>
-Subject: Re: [PATCH] hwloc: Add
+X-Originating-IP: [10.167.226.81]
+X-yoursite-MailScanner-ID: 2C35B4818553.A4F39
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH v4] add php 7.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,16 +37,148 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Dec 2016 10:35:52 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 26 Dec 2016 14:39:33 -0000
+Content-Type: text/plain
 
-On Thu, Dec 22, 2016 at 1:34 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> SUMMARY is for short summary, put long one into DESCRIPTION and create
-> short one for SUMMARY.
->
-> Also missing sha265sum, so I doubt it was tested properly.
+1)Add php_7.1.0.bb
+2)Delete php_5.5.38.bb,since it is Replaced by php_5.6.26.bb.
+3)Move pthread-check-threads-m4.patch out of 7.1.0, since it is integrated upstream.
 
-A single hash doesn't generate a warning since:
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+---
+ .../change-AC_TRY_RUN-to-AC_TRY_LINK.patch         | 56 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/php/php.inc               |  1 -
+ meta-oe/recipes-devtools/php/php_5.5.38.bb         |  6 ---
+ meta-oe/recipes-devtools/php/php_5.6.26.bb         |  4 +-
+ meta-oe/recipes-devtools/php/php_7.1.0.bb          | 14 ++++++
+ 5 files changed, 73 insertions(+), 8 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+ delete mode 100644 meta-oe/recipes-devtools/php/php_5.5.38.bb
+ create mode 100644 meta-oe/recipes-devtools/php/php_7.1.0.bb
 
-  http://git.openembedded.org/bitbake/commit/?id=43358a9b595b2928458a5f463cf1949394160c3a
+diff --git a/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch b/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+new file mode 100644
+index 0000000..39c334f
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php-7.1.0/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+@@ -0,0 +1,56 @@
++[PATCH] config.m4: change AC_TRY_RUN to AC_TRY_LINK
++
++Upstream-Status: Pending
++
++AC_TRY_RUN is not suitable for cross-compile
++
++Signed-off-by: Roy Li <rongqing.li@windriver.com>
++---
++ ext/fileinfo/config.m4 | 31 ++++++-------------------------
++ 1 file changed, 6 insertions(+), 25 deletions(-)
++
++diff --git a/ext/fileinfo/config.m4 b/ext/fileinfo/config.m4
++index 7e98d62..8a8ea0e 100644
++--- a/ext/fileinfo/config.m4
+++++ b/ext/fileinfo/config.m4
++@@ -14,31 +14,12 @@ if test "$PHP_FILEINFO" != "no"; then
++     libmagic/readcdf.c libmagic/softmagic.c"
++ 
++   AC_MSG_CHECKING([for strcasestr])
++-  AC_TRY_RUN([
++-#include <string.h>
++-#include <strings.h>
++-#include <stdlib.h>
++-
++-int main(void)
++-{
++-        char *s0, *s1, *ret;
++-
++-        s0 = (char *) malloc(42);
++-        s1 = (char *) malloc(8);
++-
++-        memset(s0, 'X', 42);
++-        s0[24] = 'Y';
++-        s0[26] = 'Z';
++-        s0[41] = '\0';
++-        memset(s1, 'x', 8);
++-        s1[0] = 'y';
++-        s1[2] = 'Z';
++-        s1[7] = '\0';
++-
++-        ret = strcasestr(s0, s1);
++-
++-        return !(NULL != ret);
++-}
+++  AC_TRY_COMPILE([
+++     #include <string.h>
+++     #include <strings.h>
+++     #include <stdlib.h>
+++  ],[
+++     strcasestr(NULL, NULL);
++   ],[
++     dnl using the platform implementation
++     AC_MSG_RESULT(yes)
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index cd91940..c4fb1d9 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -24,7 +24,6 @@ SRC_URI_append_class-target = " \
+             file://php-fpm.conf \
+             file://php-fpm-apache.conf \
+             file://configure.patch \
+-            file://pthread-check-threads-m4.patch \
+             file://70_mod_php5.conf \
+             file://php-fpm.service \
+           "
+diff --git a/meta-oe/recipes-devtools/php/php_5.5.38.bb b/meta-oe/recipes-devtools/php/php_5.5.38.bb
+deleted file mode 100644
+index 26f35b1..0000000
+--- a/meta-oe/recipes-devtools/php/php_5.5.38.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require php.inc
+-
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=464ca70af214d2407f6b7d4458158afd"
+-
+-SRC_URI[md5sum] = "312244a0eecad602a1555ed2434e223f"
+-SRC_URI[sha256sum] = "473c81ebb2e48ca468caee031762266651843d7227c18a824add9b07b9393e38"
+diff --git a/meta-oe/recipes-devtools/php/php_5.6.26.bb b/meta-oe/recipes-devtools/php/php_5.6.26.bb
+index cbd0615..ddc7ce3 100644
+--- a/meta-oe/recipes-devtools/php/php_5.6.26.bb
++++ b/meta-oe/recipes-devtools/php/php_5.6.26.bb
+@@ -2,6 +2,8 @@ require php.inc
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b602636d46a61c0ac0432bbf5c078fe4"
+ 
+-SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch"
++SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
++            file://pthread-check-threads-m4.patch \
++           "
+ SRC_URI[md5sum] = "cb424b705cfb715fc04f499f8a8cf52e"
+ SRC_URI[sha256sum] = "d47aab8083a4284b905777e1b45dd7735adc53be827b29f896684750ac8b6236"
+diff --git a/meta-oe/recipes-devtools/php/php_7.1.0.bb b/meta-oe/recipes-devtools/php/php_7.1.0.bb
+new file mode 100644
+index 0000000..210d91f
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php_7.1.0.bb
+@@ -0,0 +1,14 @@
++require php.inc
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b602636d46a61c0ac0432bbf5c078fe4"
++
++SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch"
++SRC_URI[md5sum] = "54e364b60a88db77adb96aacb10f10a4"
++SRC_URI[sha256sum] = "68bcfd7deed5b3474d81dec9f74d122058327e2bed0ac25bbc9ec70995228e61"
++
++PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
++                        --with-pdo-mysql=${STAGING_BINDIR_CROSS}/mysql_config \
++                        ,--without-mysqli --without-pdo-mysql \
++                        ,mysql5"
++
++FILES_${PN}-fpm += "${sysconfdir}/php-fpm.d/www.conf.default"
+-- 
+2.7.4
+
+
+
 
