@@ -1,52 +1,39 @@
-Return-Path: <piotr.lewicki@elfin.de>
-Received: from mail-wj0-f174.google.com (mail-wj0-f174.google.com
-	[209.85.210.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C80D71B37
+Return-Path: <haris.okanovic@ni.com>
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id 4DCFD60234
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Dec 2016 12:35:08 +0000 (UTC)
-Received: by mail-wj0-f174.google.com with SMTP id sd9so132191370wjb.1
+	Tue, 27 Dec 2016 19:06:21 +0000 (UTC)
+Received: from us-aus-exch1.ni.corp.natinst.com
+	(us-aus-exch1.ni.corp.natinst.com [130.164.68.11])
+	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTPS id
+	uBRJ6MLq007798
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Dec 2016 04:35:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=elfin.de; s=google;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=kJOLPTvfRsIacYdyMN024Bzu0C7OL2ZzeHI3kN4O97Q=;
-	b=Pc9Hiw/ctXqbP1xuoM1UgVy/sjn9Y60/wfw53cqDLmxENHqAW9vNcfydl7CPPHDrto
-	ABTKoybMINXTnMTG+aY39i1LKX0wjwTyvKOL78YBmzgdX0AgHP+S+71q/uPpl9N0T1r3
-	qaNjfTyrDcHEUczoQwFt01sf+UQxMyrGM4Rj+RaffB0ErSbfX4LwJNebjot3iJm+RFg5
-	8HszyxnkDtwVRiwy+6917d6eob7dfIJZUmlxyBXwNANc/i6G8jBRposhRlhRhCCk+tNU
-	6r/wDhzJSJUAXiBnbnM/BAPeU+atycp7ENbwa9OBLB3Ww9rTLS+Mu+h5tgt3lBqYScx4
-	fByg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=kJOLPTvfRsIacYdyMN024Bzu0C7OL2ZzeHI3kN4O97Q=;
-	b=dMNrc6DBVomHzC3Tcft4rjiLL62j3tcyYFcbOcVB9Qh5pI9RmrMeE26gMeHomHCqgK
-	mc24isTf+jK9S+goEStwZ6nDc7XWMmht++IDx0tL6Tp+4ka66nO9XTDBnQES2GAilAC0
-	VP2mePkGyouuMXR/KsBhe0CT0eus7esH7vwjY6khO8hmcn8g99Vixi6yBoUmatfASqFG
-	ko4hN7o0MpMKEY2PU8/QYVyXuyedxXRlhUnb3TCiTtrntdSXmE+GJJ4l18wf3jnr0r19
-	DghTx7c4bzWb8ZikDSstlno6VOfAJ9PMRVhw0QL0fvlxAgZySEgR65M5FfC0ATpnTyJ7
-	NkNA==
-X-Gm-Message-State: AIkVDXKzrxOT/MgRZgOnrL1w5ED87rVi6TQgvqH1rjqWF6+YAh+n4NfU+nPT+hoQRRBJ/w==
-X-Received: by 10.194.78.179 with SMTP id c19mr17516548wjx.72.1482842109825;
-	Tue, 27 Dec 2016 04:35:09 -0800 (PST)
-Received: from [192.168.2.176] (b2b-94-79-174-114.unitymedia.biz.
-	[94.79.174.114]) by smtp.gmail.com with ESMTPSA id
-	197sm55828573wmy.16.2016.12.27.04.35.09
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 27 Dec 2016 04:35:09 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <1482531919-26391-1-git-send-email-derek@asterius.io>
-From: Piotr Lewicki <piotr.lewicki@elfin.de>
-Message-ID: <453469e0-21ec-6bb0-d87d-0e298613ccbc@elfin.de>
-Date: Tue, 27 Dec 2016 13:35:08 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.5.1
+	Tue, 27 Dec 2016 13:06:22 -0600
+Received: from us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) by
+	us-aus-exch1.ni.corp.natinst.com (130.164.68.11) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Tue, 27 Dec 2016 13:06:22 -0600
+Received: from harisdt.amer.corp.natinst.com (130.164.49.7) by
+	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
+	Server
+	id 15.0.1156.6 via Frontend Transport; Tue, 27 Dec 2016 13:06:22 -0600
+From: Haris Okanovic <haris.okanovic@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 27 Dec 2016 13:06:17 -0600
+Message-ID: <20161227190617.6358-1-haris.okanovic@ni.com>
+X-Mailer: git-send-email 2.10.1
+In-Reply-To: <20161222200250.23273-1-haris.okanovic@ni.com>
+References: <20161222200250.23273-1-haris.okanovic@ni.com>
 MIME-Version: 1.0
-In-Reply-To: <1482531919-26391-1-git-send-email-derek@asterius.io>
-Subject: Re: [meta-webserver][PATCH] apache2: always use the archive.apache.org to ensure older releases are always available
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2016-12-27_15:, , signatures=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	suspectscore=1
+	malwarescore=0 phishscore=0 adultscore=0 bulkscore=0 classifier=spam
+	adjust=0 reason=mlx scancount=1 engine=8.0.1-1612050000
+	definitions=main-1612270307
+Cc: haris.okanovic@ni.com
+Subject: [meta-oe][PATCH v2] hwloc: Add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,54 +46,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Dec 2016 12:35:10 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 27 Dec 2016 19:06:23 -0000
+Content-Type: text/plain
 
-Hi,
+https://www.open-mpi.org/projects/hwloc/
 
-Can this also be merged to "morty" branch?
+"The Portable Hardware Locality (hwloc) software package provides a
+portable abstraction (across OS, versions, architectures, ...) of the
+hierarchical topology of modern architectures, including NUMA memory
+nodes, sockets, shared caches, cores and simultaneous multithreading.
+It also gathers various system attributes such as cache and memory
+information as well as the locality of I/O devices such as network
+interfaces, InfiniBand HCAs or GPUs."
 
-Currently build of morty branch fails because of this.
+This recipe adds libhwloc and lstopo utility as two packages.
 
+Testing: Built in OE/Krogoth. Installed to x86_64 machine. Successfully
+ran `lstopo` and verified it printed correct CPU and cache info.
 
-BR,
+Signed-off-by: Haris Okanovic <haris.okanovic@ni.com>
+---
+ meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
 
-Piotr
-
-
-On 23.12.2016 23:25, Derek Straka wrote:
-> Signed-off-by: Derek Straka <derek@asterius.io>
-> ---
->   meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb | 2 +-
->   meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb        | 2 +-
->   2 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-> index ca8ebaf..7a2b236 100644
-> --- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-> +++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-> @@ -8,7 +8,7 @@ LICENSE = "Apache-2.0"
->   
->   inherit autotools pkgconfig native
->   
-> -SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-> +SRC_URI = "http://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
->              file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
->             "
->   
-> diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-> index 3bd8579..9446082 100644
-> --- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-> +++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-> @@ -6,7 +6,7 @@ DEPENDS = "libtool-native apache2-native openssl expat pcre apr apr-util"
->   SECTION = "net"
->   LICENSE = "Apache-2.0"
->   
-> -SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-> +SRC_URI = "http://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
->              file://server-makefile.patch \
->              file://httpd-2.4.1-corelimit.patch \
->              file://httpd-2.4.4-export.patch \
+diff --git a/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
+new file mode 100644
+index 0000000..812f70d
+--- /dev/null
++++ b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "Portable Hardware Locality (hwloc) software package"
++DESCRIPTION = "The Portable Hardware Locality (hwloc) software package \
++ provides a portable abstraction of the hierarchical topology of modern \
++ architectures."
++HOMEPAGE = "https://www.open-mpi.org/software/hwloc/"
++SECTION = "base"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=3282e20dc3cec311deda3c6d4b1f990b"
++
++SRC_URI = "https://www.open-mpi.org/software/${PN}/v1.11/downloads/${BP}.tar.bz2"
++SRC_URI[md5sum] = "96c34136ff416d2b13a7821c27477bed"
++SRC_URI[sha256sum] = "95d80286dfe658a3f79e2ac90698782bb36e5504f4bac1bba2394ba14dbbad24"
++
++inherit autotools
++
++# Split hwloc library into separate subpackage
++PACKAGES_prepend = " lib${PN} "
++FILES_lib${PN} += "${libdir}/lib${PN}.so*"
++${PN}_RDEPENDS += "lib${PN}"
++
++# XXX dev-so QA check doesn't like soname symlinks in non-dev packages
++INSANE_SKIP_lib${PN} += "dev-so"
+-- 
+2.10.1
 
 
