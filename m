@@ -1,24 +1,24 @@
-Return-Path: <Qi.Chen@windriver.com>
+Return-Path: <Jackie.Huang@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BC3D66E5CB
+	by mail.openembedded.org (Postfix) with ESMTP id 0724F60765
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Dec 2016 07:50:51 +0000 (UTC)
+	Wed, 28 Dec 2016 10:38:02 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id uBS7or9q008506
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id uBSAc3mq011943
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Dec 2016 23:50:53 -0800
+	Wed, 28 Dec 2016 02:38:03 -0800
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Tue, 27 Dec 2016 23:50:52 -0800
-From: Chen Qi <Qi.Chen@windriver.com>
+	14.3.294.0; Wed, 28 Dec 2016 02:38:02 -0800
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 28 Dec 2016 15:46:40 +0800
-Message-ID: <20161228074640.21371-1-Qi.Chen@windriver.com>
+Date: Wed, 28 Dec 2016 18:33:51 +0800
+Message-ID: <20161228103351.863-1-jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.8.3
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] rsyslog: use atomic builtins to avoid race issue
+Subject: [PATCH] python-pygobject: empty the RDEPENDS for native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,37 +31,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2016 07:50:53 -0000
+X-List-Received-Date: Wed, 28 Dec 2016 10:38:04 -0000
 Content-Type: text/plain
 
-rsyslog uses a small program to check if compiler has atomic builtins
-or not. This does not work when cross compiling, resulting in potential
-race issue. In fact, when running ptest on intel-x86-64 board, we have
-met the race problem.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-As our compiler gcc, has atomic builtins, we force ap_cv_atomic_builtins
-to be 'yes' so that rsyslog could make use of the atomic builtins and avoid
-the race issue.
+The RDEPENDS for native package is not needed,
+and it will fail since there is no provider for
+python-importlib-native:
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+| ERROR: Nothing RPROVIDES 'python-importlib-native'
+
+so empty the RDEPENDS for native package.
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-devtools/python/python-pygobject_3.20.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
-index 4e2c122..27162e1 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
-@@ -31,7 +31,7 @@ SRC_URI[sha256sum] = "06e2884181333dccecceaca82827ae24ca7a258b4fbf7b1e07a80d4caa
+diff --git a/meta-oe/recipes-devtools/python/python-pygobject_3.20.1.bb b/meta-oe/recipes-devtools/python/python-pygobject_3.20.1.bb
+index e490ae5..f02c62a 100644
+--- a/meta-oe/recipes-devtools/python/python-pygobject_3.20.1.bb
++++ b/meta-oe/recipes-devtools/python/python-pygobject_3.20.1.bb
+@@ -26,6 +26,7 @@ BBCLASSEXTEND = "native"
+ EXTRA_OECONF = "--disable-cairo --with-python=${PYTHON}"
  
- inherit autotools pkgconfig systemd update-rc.d update-alternatives ptest
+ RDEPENDS_${PN} += "python-setuptools python-importlib"
++RDEPENDS_${PN}_class-native = ""
  
--EXTRA_OECONF += "--disable-generate-man-pages"
-+EXTRA_OECONF += "--disable-generate-man-pages ap_cv_atomic_builtins=yes"
- 
- # first line is default yes in configure
- PACKAGECONFIG ??= " \
+ do_install_append() {
+     # Remove files that clash with python3-pygobject; their content is same
 -- 
-2.8.3
+2.7.4
 
 
