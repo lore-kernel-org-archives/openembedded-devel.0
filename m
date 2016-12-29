@@ -1,29 +1,47 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F6CF601A4
+Return-Path: <ricardo.ribalda@gmail.com>
+Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
+	[209.85.215.68])
+	by mail.openembedded.org (Postfix) with ESMTP id CC6B46069D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Dec 2016 06:50:27 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id uBT6oSGY002840
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 29 Dec 2016 13:35:10 +0000 (UTC)
+Received: by mail-lf0-f68.google.com with SMTP id d16so19999937lfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Dec 2016 22:50:28 -0800 (PST)
-Received: from [128.224.162.184] (128.224.162.184) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.294.0;
-	Wed, 28 Dec 2016 22:50:27 -0800
-To: <openembedded-devel@lists.openembedded.org>
-References: <20161228074640.21371-1-Qi.Chen@windriver.com>
-	<CAMKF1soFTQKwwz6BicXfguD722ZCq34hhad0RWqRGaDZVZYAww@mail.gmail.com>
-From: ChenQi <Qi.Chen@windriver.com>
-Message-ID: <f7e5c7e7-9266-ac46-229c-909e56d00d3c@windriver.com>
-Date: Thu, 29 Dec 2016 14:51:56 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.4.0
-MIME-Version: 1.0
-In-Reply-To: <CAMKF1soFTQKwwz6BicXfguD722ZCq34hhad0RWqRGaDZVZYAww@mail.gmail.com>
-X-Originating-IP: [128.224.162.184]
-Subject: Re: [meta-oe][PATCH] rsyslog: use atomic builtins to avoid race issue
+	Thu, 29 Dec 2016 05:35:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=/colFihh/QgdUWaFuepAaWI8f0obxLq6fShQWX+4y3Q=;
+	b=aipy6oiL2oTsh7ELMrHee6uiM4fBilsUa0B2Q4zSpUPlDjoY8GaWk2T/jJOQWRvvdb
+	wIuAcmicWo53xSkWlzTWkqTk8f+iJHxT9YZ82aVNxWRKFPk1zucOlyFVvHpbx9KAT976
+	LmayLqHcV1mY7I2Nqkc2TlbPsiKjYj+7+zqbiFrX9fExvBCI2+PmryfQhhzrtlaGt0sU
+	2UJM5Y54lqWwoar8O/hM9IfFfCOVUDJGrYum1wwVuFykmysNZx4lU8lDhRPzHYgtz4mK
+	cWRG53ue+vTrj0pKABh6xekDewyCMWSpWfcjO9XGBXXBqfBAPXbgLpU7SaV+BqRHtBT9
+	N8kw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=/colFihh/QgdUWaFuepAaWI8f0obxLq6fShQWX+4y3Q=;
+	b=B0DJd30uhA6sQzolSKJV2dYLF4XyEqOyw5KEPlhUcEAc6NeGe/wVI0bHfvKUActGe8
+	RDzq8o3hPFxK4+54seAMljlsNvH132qXinXLj8Rj+Oi59Gugi0loKExTvMFSlVpLcSCH
+	9fTVPNT6wrOZijRwIEDjRYkucQLF3JPyo33lmUiu2io2SBlOrJwI6Du2eO4MT+UbNmPa
+	fRMPGQ9s9Xy73v7GJ6oCtk1UfgepesHk6ZPMv2csnFEcpmbo6BJZvY4vWW+Bhdmu2N7J
+	xOmhx0nrDWspd7J8Ha9ZYn5YQAFm17G+kNGkb/xt3mlQTndfmOr2HrslHp5T1NoKZ3NS
+	Bylw==
+X-Gm-Message-State: AIkVDXLJSzHp+O4KpV1tc+84ZUwpwmnSdXa+/zf+eMn3X0CBijMGh1xpEYjT7xWZmjNfcw==
+X-Received: by 10.46.0.4 with SMTP id 4mr10512469lja.34.1483018511620;
+	Thu, 29 Dec 2016 05:35:11 -0800 (PST)
+Received: from neopili.qtec.com
+	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
+	by smtp.gmail.com with ESMTPSA id
+	x10sm12988446lja.15.2016.12.29.05.35.09
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 29 Dec 2016 05:35:10 -0800 (PST)
+From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+To: openembedded-devel@lists.openembedded.org, martin.jansa@gmail.com,
+	raj.khem@gmail.com
+Date: Thu, 29 Dec 2016 14:35:07 +0100
+Message-Id: <20161229133508.5584-1-ricardo.ribalda@gmail.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [PATCH 1/2] protobuf: Update to latest version 3.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,62 +54,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Dec 2016 06:50:28 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 29 Dec 2016 13:35:12 -0000
 
-On 12/29/2016 07:20 AM, Khem Raj wrote:
-> On Tue, Dec 27, 2016 at 11:46 PM, Chen Qi <Qi.Chen@windriver.com> wrote:
->> rsyslog uses a small program to check if compiler has atomic builtins
->> or not. This does not work when cross compiling, resulting in potential
->> race issue. In fact, when running ptest on intel-x86-64 board, we have
->> met the race problem.
->>
->> As our compiler gcc, has atomic builtins, we force ap_cv_atomic_builtins
->> to be 'yes' so that rsyslog could make use of the atomic builtins and avoid
->> the race issue.
->>
->> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
->> ---
->>   meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
->> index 4e2c122..27162e1 100644
->> --- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
->> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
->> @@ -31,7 +31,7 @@ SRC_URI[sha256sum] = "06e2884181333dccecceaca82827ae24ca7a258b4fbf7b1e07a80d4caa
->>
->>   inherit autotools pkgconfig systemd update-rc.d update-alternatives ptest
->>
->> -EXTRA_OECONF += "--disable-generate-man-pages"
->> +EXTRA_OECONF += "--disable-generate-man-pages ap_cv_atomic_builtins=yes"
-> Does this also cover 64bit builtins ? secondly, a note for
-> architectures not supporting atomics to disable this would be good.
+Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+---
+ .../protobuf/{protobuf_2.6.1.bb => protobuf_3.1.0.bb}               | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/protobuf/{protobuf_2.6.1.bb => protobuf_3.1.0.bb} (83%)
 
-No. When looking at the source, I think it's not critical.
-When I made this patch, my criteria is:
-1) ptest of rsyslog does not hang because of race issue on intel-x86-64 
-board
-2) rsyslog works well on qemux86, qemux86-64, qemuarm, qemumips, 
-qemumips64, qemuppc
-
-I searched the doc and the internet, I could not find related 
-information on which arch gcc does not support atomic builtins.
-
-Best Regards,
-Chen Qi
-
->>   # first line is default yes in configure
->>   PACKAGECONFIG ??= " \
->> --
->> 2.8.3
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.1.0.bb
+similarity index 83%
+rename from meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb
+rename to meta-oe/recipes-devtools/protobuf/protobuf_3.1.0.bb
+index 7b8f62986a41..18210b1e5c8f 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf_2.6.1.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.1.0.bb
+@@ -12,11 +12,11 @@ DEPENDS = "zlib"
+ RDEPENDS_${PN}-compiler = "${PN}"
+ RDEPENDS_${PN}-dev += "${PN}-compiler"
+ 
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=af6809583bfde9a31595a58bb4a24514"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=35953c752efc9299b184f91bef540095"
+ 
+-SRCREV = "bba83652e1be610bdb7ee1566ad18346d98b843c"
++SRCREV = "a428e42072765993ff674fda72863c9f1aa2d268"
+ 
+-PV = "2.6.1+git${SRCPV}"
++PV = "3.1.0+git${SRCPV}"
+ 
+ SRC_URI = "git://github.com/google/protobuf.git"
+ 
+-- 
+2.11.0
 
 
