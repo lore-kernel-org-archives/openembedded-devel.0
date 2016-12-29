@@ -1,45 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
-	[209.85.217.196])
-	by mail.openembedded.org (Postfix) with ESMTP id E457271987
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id C434E6093B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Dec 2016 23:25:50 +0000 (UTC)
-Received: by mail-ua0-f196.google.com with SMTP id 96so14575388uaq.2
+	Thu, 29 Dec 2016 00:37:53 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id l2so38692797wml.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Dec 2016 15:25:52 -0800 (PST)
+	Wed, 28 Dec 2016 16:37:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=27Ds2cK0e8EveUeWk2KVPHghx3VKsWkBDAEo8CkMSnI=;
-	b=jldH5soaP5mEDOrvTKVXvjSfT2m1V7j+0sQPOHB1peKCA/5LvIloM4msgrPdA/fJ0K
-	ed4vZdyJ0fev2xvbuad0Y7tY9XUuNgmRNXZfvCdzU5r9v0Psgm/rrRugw/Qh8s4zrzOB
-	bCHvd2TamlaI+GMQZzipJutYMu5BGwVkbeskA2sOjPRiK67Z+FGc9u4uMQ/9xKajPF1Y
-	+YEbPKmiS+gcUaVGPPHG57sDy9s83Vr2Fm2Un4K3JvvmvJtmAODhU0QQA8WCXRzYXdkw
-	0qnuDeCoRNJJ7U/eNLCik+H2RHK3UWTA5T9qJAJ8jiKq1cBTgM8LL391QFxcvq27KMJv
-	V93w==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=NZQblcMgryAGltk7qJKjyi/4w6Oc/3OnvfjYhEFgVIg=;
+	b=eKl+QYX9/V/wbq2ZDp/TNYzOmlDW3BqpuknqPlJjs9xOuIN6b+NWAVWdQMP1+MT/7S
+	cLOMa139Rn7FF15zO8E8GhDyLetIet235bp1SBO7TlGEWDFBEmARpmHj24WwsDa6UIEx
+	Frv6U7nXBrII4BSmUSQj2yLeEUM41/eRX9Zdz7iE9r3LzxWLofG8NM/SjlvxG+sX4LHa
+	6H/Wkn2oRT2/Y4SAXBraR7/URmXIdC35inUPlCgEO+w072KKJAcP46XUq/7prJA5i4lW
+	MTs792ebR4hi2H+DlN04KOLpJND/WjwOAfxuuQAOOjdGCFXgUhZnXLVXYwQYGdIazH9f
+	vHsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=27Ds2cK0e8EveUeWk2KVPHghx3VKsWkBDAEo8CkMSnI=;
-	b=gWO0C+FJkJUR4/qHbhs548wTSKSrs7GwICQ2X2X82shiZczNNWW9HnZVv8LjpR+xGC
-	ZRLUl+WoY+kEELdrRIlA9/lAF13vTtFRu5/F/traYsroSE/HhHzZWKx2GsuHAJqyS7wg
-	Mw+99wjPV599Z96sZ45vDfW9cSVqV7BFLEQhFSpQuj/AYH/V3ZHSVhTf+zCjFfHcFE0C
-	Yj2y2kH3owTxX0I5MStI+7F7uRr/fCFCFKCOVJTVCY364PQC1ymPMz8DoXGSOL2AZPE6
-	BOXOh+5Jm3EfM+v0hYldiKSeKL31O9d/2fZiy6Dzt2AhBf8Pm7AO6uYU4SBQmIutp3vy
-	usnQ==
-X-Gm-Message-State: AIkVDXIDukSh74R7AJPliIwdIQbUkq6jrKbqdyjej283zPnH9SZr1QvgDgsBXDH3Ca86dIh0kh0WJrE+6ibJrw==
-X-Received: by 10.159.48.147 with SMTP id j19mr26160411uab.6.1482967551747;
-	Wed, 28 Dec 2016 15:25:51 -0800 (PST)
+	:message-id:subject:to;
+	bh=NZQblcMgryAGltk7qJKjyi/4w6Oc/3OnvfjYhEFgVIg=;
+	b=q9p7gysih36YYB6bYZARbgbjpwENosmgusj9kIDGy9LG6ELwO93XqzjasBUnsUKQuA
+	5R/zcHv5wff87335BkQLjnEmYWCcLeBN6UByduEgpgDMjw2HUoGtiIRSC3ogg3DskbXe
+	+sv2geMypdzaNjKaLfYGxaIXPgNB82iaUibckut3EF2WG8FNts338/U8XsD41NqBW9Ci
+	aQM7hoSYhe1HnfSQJCgAlCR+ZIejIK5Az7YaIqN9e/jkyBVOHgYUi7TT0BL3g5ZZ9WS6
+	sNlucoSxUNAtWzat0hq52lD7LXMnwW560ZBgUSQNZvugFV5GErEZLglCAwC5WYyVh8Ci
+	ZODw==
+X-Gm-Message-State: AIkVDXL5ojEQPNpxF9nWm5DG0EEdQif5oBuC3dZJ5KK/b4uzoBIkw1ZpQSxjL6276SmvN0kSMsYLNzX7E+VPJg==
+X-Received: by 10.28.109.29 with SMTP id i29mr27253361wmc.124.1482971874396;
+	Wed, 28 Dec 2016 16:37:54 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.159.48.87 with HTTP; Wed, 28 Dec 2016 15:25:21 -0800 (PST)
-In-Reply-To: <1482949868-19842-1-git-send-email-moritz.fischer@ettus.com>
-References: <1482949868-19842-1-git-send-email-moritz.fischer@ettus.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 28 Dec 2016 15:25:21 -0800
-Message-ID: <CAMKF1sprcT_VSdif3q8v78awE4Zv4FO6gdgdA1=WL=085ijVYA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: mdf@kernel.org, philip@opensdr.com
-Subject: Re: [PATCH] devtools: Add recipe for Chromium Embedded Controller utilities
+Received: by 10.80.148.174 with HTTP; Wed, 28 Dec 2016 16:37:53 -0800 (PST)
+In-Reply-To: <CAMKF1srmFh83WsKAptTGtCiphnY6+hDzRbvZjVhNQBEpORx1eQ@mail.gmail.com>
+References: <1482926435-13846-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
+	<CA+chaQcgfRj827K4kSZog6-jDsMu3EX9dGCWT-QCaJihEp23aw@mail.gmail.com>
+	<CAKuJqM8AC2pi7y8xGE9o5yJnCkD3GbkLz8RD9y1YSFigwJjKGw@mail.gmail.com>
+	<CAMKF1srmFh83WsKAptTGtCiphnY6+hDzRbvZjVhNQBEpORx1eQ@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 29 Dec 2016 01:37:53 +0100
+Message-ID: <CA+chaQeuGNX53YonpVMz5cA4EJwaaSOEWgVYpj1FjAFmCoC0Jg@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH] devmem2: fix broken SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,102 +54,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Dec 2016 23:25:51 -0000
+X-List-Received-Date: Thu, 29 Dec 2016 00:37:54 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, Dec 28, 2016 at 10:31 AM, Moritz Fischer
-<moritz.fischer@ettus.com> wrote:
-> Add a recipe to build 'ectool', a utility to interact with the embedded
-> controller on Google's Chromebooks (and other platforms using it).
+It's already on OE src mirror (which is populated by my world builds for
+last couple months):
+
+http://sources.openembedded.org/devmem2.c
+
+But this mirror is already in default MIRRORS variable, so it's searched
+when original SRC_URI doesn't work.
+
+I assume Oleksandr got this error while sources.openembedded.org was down
+because of planned OE infrastructure downtime this week.
+
+On Thu, Dec 29, 2016 at 12:21 AM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> On Wed, Dec 28, 2016 at 4:17 AM, Oleksandr Kravchuk
+> <oleksandr.kravchuk@pelagicore.com> wrote:
+> > This is a reasonable question. I can only say that the header is
+> > slightly different, therefore I had to modify the checksums.
+> >
+> > I could use another mirror that contains original devmem2.c, but I am
+> > unfortunately not confident in their longevity.
 >
-> Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
-> ---
->  .../chromium-utils/chromium-utils.bb               | 26 ++++++++++++++++++++++
->  .../0001-build-Add-HOST_LDFLAGS.patch              | 26 ++++++++++++++++++++++
->  2 files changed, 52 insertions(+)
->  create mode 100644 meta/recipes-devtools/chromium-utils/chromium-utils.bb
->  create mode 100644 meta/recipes-devtools/chromium-utils/chromium-utils/0001-build-Add-HOST_LDFLAGS.patch
+> Can we just store these files on OE src mirror ?
+> may be send the original files to Tom and he should be able to help
+> to host them
 >
-> diff --git a/meta/recipes-devtools/chromium-utils/chromium-utils.bb b/meta/recipes-devtools/chromium-utils/chromium-utils.bb
-> new file mode 100644
-> index 0000000..c351717
-> --- /dev/null
-> +++ b/meta/recipes-devtools/chromium-utils/chromium-utils.bb
-> @@ -0,0 +1,26 @@
-> +DESCRIPTION = "Chromium EC utilities"
-> +DEPENDS = "libftdi"
-> +LICENSE = "BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=562c740877935f40b262db8af30bca36"
-> +
-> +FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
-
-this is probably not needed. Move the files to pre-defined search
-paths e.g. files/
-
-> +
-> +SRCREV = "b19bb1f22a3fd0102030485d324c0321a18827e8"
-> +SRC_URI = "git://chromium.googlesource.com/chromiumos/platform/ec;protocol=https \
-> +           file://0001-build-Add-HOST_LDFLAGS.patch \
-> +         "
-> +
-> +PV="1.1.9999-${SRCPV}"
-
-why minus ? usually we say 1.1.9999+${SRCPV}
-
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +do_compile() {
-> +       oe_runmake HOSTCC="${CC}" HOSTCFLAGS="${CFLAGS}" HOST_LDFLAGS="${LDFLAGS}" utils
-> +}
-> +
-> +do_install() {
-> +       install -m 0755 -d ${D}${bindir}
-> +       install -m 0755 ${S}/build/bds/util/ectool ${D}${bindir}/ectool
-> +}
-> +
-> +FILES_${PN} = "${bindir}"
-
-this should not be needed.
-
-> diff --git a/meta/recipes-devtools/chromium-utils/chromium-utils/0001-build-Add-HOST_LDFLAGS.patch b/meta/recipes-devtools/chromium-utils/chromium-utils/0001-build-Add-HOST_LDFLAGS.patch
-> new file mode 100644
-> index 0000000..46e8cad
-> --- /dev/null
-> +++ b/meta/recipes-devtools/chromium-utils/chromium-utils/0001-build-Add-HOST_LDFLAGS.patch
-> @@ -0,0 +1,26 @@
-> +From 56ffeeffea735a6a8f69fc111278ebabe3c7e2d8 Mon Sep 17 00:00:00 2001
-> +From: Moritz Fischer <moritz.fischer@ettus.com>
-> +Date: Tue, 27 Dec 2016 22:24:07 -0800
-> +Subject: [PATCH] build Add HOST_LDFLAGS
-> +
-> +Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
-> +---
-> + Makefile.rules | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/Makefile.rules b/Makefile.rules
-> +index 404454d..0057ba9 100644
-> +--- a/Makefile.rules
-> ++++ b/Makefile.rules
-> +@@ -60,7 +60,7 @@ cmd_c_to_build = $(BUILDCC) $(BUILD_CFLAGS) \
-> +                $(sort $(foreach c,$($(*F)-objs),util/$(c:%.o=%.c)) $*.c) \
-> +                $(BUILD_LDFLAGS) \
-> +                -MMD -MF $@.d -o $@
-> +-cmd_c_to_host = $(HOSTCC) $(HOST_CFLAGS) -MMD -MF $@.d  -o $@ \
-> ++cmd_c_to_host = $(HOSTCC) $(HOST_CFLAGS) $(HOST_LDFLAGS) -MMD -MF $@.d  -o $@ \
-> +                $(sort $(foreach c,$($(*F)-objs),util/$(c:%.o=%.c)) $*.c)
-> + cmd_cxx_to_host = $(HOSTCXX) -std=c++0x $(COMMON_WARN) $(HOST_CXXFLAGS)\
-> +       -I ./$($(notdir $@)_ROOT) -o $@ $(filter %.cc,$^) $($(notdir $@)_LIBS)
-> +--
-> +2.4.11
-> +
-> --
-> 2.7.4
->
+> >
+> > On 28 December 2016 at 13:10, Martin Jansa <martin.jansa@gmail.com>
+> wrote:
+> >> If it's a mirror, then why would there be different LIC_FILES_CHKSUM and
+> >> SRC_URI checksums?
+> >>
+> >> On Wed, Dec 28, 2016 at 1:00 PM, Oleksandr Kravchuk <
+> >> oleksandr.kravchuk@pelagicore.com> wrote:
+> >>
+> >>> Original SRC_URI for devmem2 source code is accessible. Use the mirror
+> >>> provided by free-electrons instead.
+> >>>
+> >>> Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+> >>> ---
+> >>>  meta-oe/recipes-support/devmem2/devmem2.bb | 8 ++++----
+> >>>  1 file changed, 4 insertions(+), 4 deletions(-)
+> >>>
+> >>> diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb
+> >>> b/meta-oe/recipes-support/devmem2/devmem2.bb
+> >>> index e48cc92..ba9d4cb 100644
+> >>> --- a/meta-oe/recipes-support/devmem2/devmem2.bb
+> >>> +++ b/meta-oe/recipes-support/devmem2/devmem2.bb
+> >>> @@ -1,9 +1,9 @@
+> >>>  SUMMARY = "Simple program to read/write from/to any location in
+> memory"
+> >>>  LICENSE = "GPLv2+"
+> >>> -LIC_FILES_CHKSUM = "file://devmem2.c;endline=28;md5=
+> >>> dd68f2b0a5184b3db3dc25c99e0bd0cd"
+> >>> +LIC_FILES_CHKSUM = "file://devmem2.c;endline=38;md5=
+> >>> a9eb9f3890384519f435aedf986297cf"
+> >>>  PR = "r7"
+> >>>
+> >>> -SRC_URI = "http://www.lartmaker.nl/lartware/port/devmem2.c \
+> >>> +SRC_URI = "http://free-electrons.com/pub/mirror/devmem2.c \
+> >>>             file://devmem2-fixups-2.patch;apply=yes;striplevel=0"
+> >>>  S = "${WORKDIR}"
+> >>>
+> >>> @@ -18,5 +18,5 @@ do_install() {
+> >>>      install devmem2 ${D}${bindir}
+> >>>  }
+> >>>
+> >>> -SRC_URI[md5sum] = "be12c0132a1ae118cbf5e79d98427c1d"
+> >>> -SRC_URI[sha256sum] = "ec382c90af3ef2f49695ff14a4d652
+> >>> 1e58ac482c4e29d6c9ebca8768f699c191"
+> >>> +SRC_URI[md5sum] = "e23f236e94be4c429aa1ceac0f01544b"
+> >>> +SRC_URI[sha256sum] = "3b15515693bae1ebd14d914e46d388
+> >>> edfec2175829ea1576a7a0c8606ebbe639"
+> >>> --
+> >>> 2.7.4
+> >>>
+> >>> --
+> >>> _______________________________________________
+> >>> Openembedded-devel mailing list
+> >>> Openembedded-devel@lists.openembedded.org
+> >>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>>
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> >
+> >
+> > --
+> > echo "EOF" >> /var/tmp/email
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
