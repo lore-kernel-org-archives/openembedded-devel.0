@@ -1,46 +1,45 @@
 Return-Path: <oleksandr.kravchuk@pelagicore.com>
-Received: from mail-wj0-f178.google.com (mail-wj0-f178.google.com
-	[209.85.210.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 456046FFA4
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 05E3460589
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Dec 2016 06:59:18 +0000 (UTC)
-Received: by mail-wj0-f178.google.com with SMTP id v7so373015480wjy.2
+	Fri, 30 Dec 2016 07:17:36 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id a197so316549686wmd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Dec 2016 22:59:20 -0800 (PST)
+	Thu, 29 Dec 2016 23:17:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=q5dCytxbjIIGl0+20xRZNSi0JooCckvIpLk3k1xCvVM=;
-	b=WPbZmu6fZhGFWa8WLYa/6SKUbmBxAIrdVaHdZTSyI61UnnZz5w3sO7rq+Ai/hKzD5J
-	++h58h7pO+W30X8SNe3jvfBmA87TwhGhpjDW5plwm0YtCFbrIew8k2KGRp3OcgNSoNsR
-	1UBKMasgd/V3I2ef+EwDOy802Nv2r7bQli8MjRYjhICpkwbUvX+fdBbwV1JIVYoTgmu1
-	1GW+UtWVhzB7RCrQxMeYMZ29meWsQenkGV0IqTsnVywDzRy/kzlImV+h67lT6tev/1GZ
-	1s0hruvtUxyodArJ4F3LV6k2vzbxVJZ6PK0/TUf6hpjh2vPo9FtZDjQ9gzhcNuqznPzI
-	l7TA==
+	bh=AgKughV9rKgEc6jpg6dbcJbXcKILlhOMjATzvItmsdA=;
+	b=ox0+Y7Hz0j31u8RYtDTmHIhKtMGjOnhTalqHYz3rb+5/+oqxNp3CsWKwJ3PlFs68pT
+	XJT69SjqoZO8xD1Q7wbAbxp4BGZtXugxndM5OJGM7wt4PeAEu43G27x+RQ0iQ9KZktMV
+	y8+qcWoHv64/4v90cy9zvu4vW9oiuA3Nk3F/L32vQWC9ovnL+HFtwNuTvMlOw7hOi9ME
+	HHV52NVelhI7HDTwgBzsEo/5oDJBk3BkzYOYt8K+lcPxVdmu4LGJzsuB3oDBABKPJaMb
+	RfLXmn7+OSqKcszBt0R/LAn2532Ch4zZYlgQAaMlq+0AbguSoC3okYIJCyR6p75DPk1V
+	EwPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=q5dCytxbjIIGl0+20xRZNSi0JooCckvIpLk3k1xCvVM=;
-	b=ZJBpvOb56/GvvQ3DRL77y4H4Da0bBpOjISo4PBGSummE+Ws4iYYR6qQVpd/skUNlzW
-	ClwqdnckTN3ByAxTU/ahBi4U1fhk9zEq1z4Woc7OFdTJkvmt3o5h9KIllnGeUfuoutSz
-	z/P9qttpYy+7On7KepNWFBs71+YqmgiL1w2nqZTMBVFJql0SW8wlvsKpMn3yhz3T6+8W
-	vaQeThB/10hoGN5hDG6/D20kekZ+7LQR0WpxzjmhwFcUm201Y4lHbp+0bJkU41+EQ6xM
-	ehBmku3j5VC6GWK/PSQIonM1Vm6RK9AFYh33cAWpKdn28JOGRxosF0v4RA/iUeLQS09U
-	9UtQ==
-X-Gm-Message-State: AIkVDXL2PMCU7HLUTpEnAk5uut9F23pTwNgj6YlPHarSncskN3GnEqiZDAuPCH3/ZsbWrCGW
-X-Received: by 10.194.185.146 with SMTP id fc18mr38616573wjc.45.1483081159818; 
-	Thu, 29 Dec 2016 22:59:19 -0800 (PST)
+	bh=AgKughV9rKgEc6jpg6dbcJbXcKILlhOMjATzvItmsdA=;
+	b=M5OWdM5KUSo9YSjxe+HC04gqJNeNg8v6dR79c0HrYcyAQA9oG2JrIWTLthP2USI0aE
+	NdpBpBm19LnhEVTwpwmWX4k768ff0Q+BJ7Cso3GaC5LPwM4gmQUOdzguGTkJ3AVdsU97
+	eN6G+ljUzIFdnEtalPY4n1PKVk5IFsqzEAiqztrIMH0RBoI4JqYuDdCjlxERXV2GWBvE
+	BplwXQTDXcbtwRdVr5BVn4NvXqfdOkWrE5FoCgwdAFrq4thl5dBzSp5UUAQUUgxlMz3g
+	PX/4eiBpMz4rHgZGIJvAYgnWl5Vgs2EeXXil7Opm2i4Y3wApn7H7kN29FnSp05d4LISG
+	swRg==
+X-Gm-Message-State: AIkVDXLiUUBYKxy3N0iT//ppMvqlsFXh5QlvBkJDUoE171jURUWPE5/9o6SyBDktwL+CFJSC
+X-Received: by 10.28.20.70 with SMTP id 67mr37590261wmu.102.1483082257755;
+	Thu, 29 Dec 2016 23:17:37 -0800 (PST)
 Received: from stout.office.pelagicore.net ([83.218.80.242])
 	by smtp.gmail.com with ESMTPSA id
-	f67sm68512741wmd.13.2016.12.29.22.59.18
+	z6sm72032840wjt.24.2016.12.29.23.17.36
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 29 Dec 2016 22:59:19 -0800 (PST)
+	Thu, 29 Dec 2016 23:17:37 -0800 (PST)
 From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Dec 2016 07:58:51 +0100
-Message-Id: <1483081131-3857-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
+Date: Fri, 30 Dec 2016 08:17:03 +0100
+Message-Id: <1483082223-18646-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] pimd: update SRC_URI with new source
+Subject: [meta-networking][PATCH] lftp: update to 4.7.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,25 +52,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Dec 2016 06:59:19 -0000
+X-List-Received-Date: Fri, 30 Dec 2016 07:17:37 -0000
+
+Upgraded package to v4.7.4 and changed source code archive format from
+tar.gz to tar.bz2 which is significantly smaller in size.
 
 Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
 ---
- meta-networking/recipes-support/pimd/pimd_2.1.8.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-connectivity/lftp/{lftp_4.7.3.bb => lftp_4.7.4.bb}      | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-connectivity/lftp/{lftp_4.7.3.bb => lftp_4.7.4.bb} (85%)
 
-diff --git a/meta-networking/recipes-support/pimd/pimd_2.1.8.bb b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
-index 41b8f6d..cbedea1 100644
---- a/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
-+++ b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
-@@ -4,7 +4,7 @@ SECTION = "net"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=94f108f91fab720d62425770b70dd790"
+diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.7.4.bb
+similarity index 85%
+rename from meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
+rename to meta-networking/recipes-connectivity/lftp/lftp_4.7.4.bb
+index b0cd399..36fee56 100644
+--- a/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
++++ b/meta-networking/recipes-connectivity/lftp/lftp_4.7.4.bb
+@@ -6,11 +6,11 @@ SECTION = "console/network"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
--SRC_URI = "ftp://troglobit.com/pimd/${BP}.tar.bz2"
-+SRC_URI = "http://ftp.troglobit.com/pimd/${BP}.tar.bz2"
- SRC_URI[md5sum] = "a12448bc7c9bfcebf51a13ebf1ffa962"
- SRC_URI[sha256sum] = "01016940543a0a6131d4e6c91b595d47e187012c59a298eec14c3dbc38564b3a"
+-SRC_URI = "http://fossies.org/linux/misc/lftp-${PV}.tar.gz \
++SRC_URI = "http://fossies.org/linux/misc/lftp-${PV}.tar.bz2 \
+            file://fix-gcc-6-conflicts-signbit.patch \
+           "
+-SRC_URI[md5sum] = "8eb1fe5f113126b60f172643c7f6c2e6"
+-SRC_URI[sha256sum] = "ce6519831603c19c2cf2e3c10b41d6ddc87a16049b99383e7b9b77fbc7707214"
++SRC_URI[md5sum] = "7b54407ab24c1e78b45fe445d83eb5fd"
++SRC_URI[sha256sum] = "95e7acfd9d0a2addeded1f00794aeeac43952ebc4924043965a5e1619df29128"
+ 
+ inherit autotools gettext pkgconfig
  
 -- 
 2.7.4
