@@ -1,49 +1,45 @@
 Return-Path: <oleksandr.kravchuk@pelagicore.com>
-Received: from mail-it0-f43.google.com (mail-it0-f43.google.com
-	[209.85.214.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 7074D6093F
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 0EAAA6FF7F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Dec 2016 08:02:56 +0000 (UTC)
-Received: by mail-it0-f43.google.com with SMTP id o141so206766544itc.0
+	Fri, 30 Dec 2016 08:24:15 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id t79so350461065wmt.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Dec 2016 00:02:58 -0800 (PST)
+	Fri, 30 Dec 2016 00:24:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=liSDrwKVlSf2PMRsM9Abig0fQtDFkHD66qypdYnCOko=;
-	b=Xc1OkC4o3sLP541VC0GYr5U2YW3qnHpzPWA9e+e4IDhmfNGnryfoYgOukUt3nLd8ah
-	+zccDmFJkKa5aN3lNTC1/IKZ64/sHIKp/DqlO1zpq8ph7Z0sq/fX40mamDiadJmB/uDB
-	vJmTMbFm1VUhRHIuXHiWa15ftWNvqwFFoAOniteJQhQAuq2RqazvWblNajCoX10KOhO3
-	qLn/2IwBJCMofmCt545pvcwpI3dLdkUbvqWChvfOIuSV7IiqnJTWJ4RI+pEjAgSRhKKD
-	qd3c3Tix9lycTgZWmnDzrmwt18gfnN6OHn9w4asTh9DaCLwH/lTrab71NwgJqsIWH06E
-	Y6hg==
+	h=from:to:cc:subject:date:message-id;
+	bh=h1VYelYM3UJbqIj1dXvvBgRA/JyVUjCWjgtAqPmwTm8=;
+	b=juXjX3CABNN7/tLI/V0amXwr902Wlyx6p969g1Z3Geg6Wfo7D8SB+UfOj7RZBOLlny
+	X4sDLSYJPAhmw5ad9ECr4SVF0a9ZMlDb4Mi8d9faq0/+gHthgNRmQ4vBf34sG37FPYcF
+	u5ZoiN3Nm4wDm9Lowgv04+tQQZYp1BbgFWtOYbv71/gxHcsekomw+UiNbK8I9RDqxABK
+	9e1BmmocRmqypOslKLVNPhyC7CG21L9/9gXU7vhLJshH+vCa+XovDnF7tE/cg0vr37+l
+	3PxOLuh9rKq7utfHrLOrM7pk0PPsWvKeWN1vxWXWAzBncvuA1AAhZUEDf4RviM4Zg/k4
+	1+Tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=liSDrwKVlSf2PMRsM9Abig0fQtDFkHD66qypdYnCOko=;
-	b=SHaNXIMyxfZ+REt6jShlJFJBZZrsCq7yiTcOf2i/7Ra+yR7dzZdytx0GCLMuo0RF1A
-	9J8KEctQJhC29lqhJtlZLTJzKCJbZDIy5vk7xRm4ImoApntLmgnlUBNAr7sJv3WhWJKU
-	to8RvgwCJo6NAkHOgWFNEinvuf6NJs3A5rPfLEuJB50X2/nBTt8ooOuelnNXVGRpgf3h
-	Em+Railk811yWy9eThmW3zG0Tq9tMcBBYCIFJLHmor7vl6C7VawzVAACSgMnMEz2Ff6I
-	XhQ6Vq8PEjEKUYDocscQ+X0CbBLbV7kIiU+VqfgOQTBFsKn969VQKyWfw9KKQCTRs7ip
-	3BPw==
-X-Gm-Message-State: AIkVDXJWr3CERzyReTGK0iydx1Jwj1OB2CZR2u6YuLsk62EY+4t8SgXocqR7VxKAqOFoX8boH/apsYPm53aQ00CV
-X-Received: by 10.36.76.85 with SMTP id a82mr36573277itb.67.1483084977283;
-	Fri, 30 Dec 2016 00:02:57 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.64.144.99 with HTTP; Fri, 30 Dec 2016 00:02:36 -0800 (PST)
-In-Reply-To: <CA+chaQeuGNX53YonpVMz5cA4EJwaaSOEWgVYpj1FjAFmCoC0Jg@mail.gmail.com>
-References: <1482926435-13846-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
-	<CA+chaQcgfRj827K4kSZog6-jDsMu3EX9dGCWT-QCaJihEp23aw@mail.gmail.com>
-	<CAKuJqM8AC2pi7y8xGE9o5yJnCkD3GbkLz8RD9y1YSFigwJjKGw@mail.gmail.com>
-	<CAMKF1srmFh83WsKAptTGtCiphnY6+hDzRbvZjVhNQBEpORx1eQ@mail.gmail.com>
-	<CA+chaQeuGNX53YonpVMz5cA4EJwaaSOEWgVYpj1FjAFmCoC0Jg@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=h1VYelYM3UJbqIj1dXvvBgRA/JyVUjCWjgtAqPmwTm8=;
+	b=K3m3/lw8CMMgOlqE2kSbP1WCnZGcPNaxmDa7Zqe/DN+PoDD5yceY0fltpMqKEsl91b
+	4XkCyi3+t1k30dHvWROVca+xKj5mc5UUsz6Gi6tsLXj8nP9E+xImlMLX7WT58wIK/dd6
+	KLK1J3nDzNvfyJIaMnEyezHuOa/uTKsUI3CxLyjqSt+pr7VbuGzA0k9CeuNM+Vpor9Hr
+	1RT8QX9K52V9N6O86qI21IF7hQXkzBxmruW9DSx/ZKY7XWxn6Ev4JigMmcN61ep1WjQL
+	51FbcPab5K2CZ6HFkSD8PVeS5Zeh1/noUXXhZAZnC9nmHQ0KK2f7CMi7GBhCnqDg5Owt
+	4RKw==
+X-Gm-Message-State: AIkVDXKvfTT1H5q7mu14LQUt5JTxv8+quGd0oFksBks4OMGwYs2P1Nqq7v4RZhmN4mu5LzTQ
+X-Received: by 10.28.173.4 with SMTP id w4mr37070483wme.70.1483086256565;
+	Fri, 30 Dec 2016 00:24:16 -0800 (PST)
+Received: from stout.office.pelagicore.net ([83.218.80.242])
+	by smtp.gmail.com with ESMTPSA id
+	z6sm72272957wjt.24.2016.12.30.00.24.15
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 30 Dec 2016 00:24:15 -0800 (PST)
 From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
-Date: Fri, 30 Dec 2016 09:02:36 +0100
-Message-ID: <CAKuJqM8+zriHux8KZL_oxzDeubXd917tEBGJv8H=5gNqEAP_=w@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] devmem2: fix broken SRC_URI
+Date: Fri, 30 Dec 2016 09:23:30 +0100
+Message-Id: <1483086210-28756-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] cppunit: update to 1.13.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,121 +52,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Dec 2016 08:02:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 30 Dec 2016 08:24:16 -0000
 
-Thank you for the clarifications, Martin!
+Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+---
+ .../recipes-devtools/cppunit/{cppunit_1.13.1.bb => cppunit_1.13.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/cppunit/{cppunit_1.13.1.bb => cppunit_1.13.2.bb} (78%)
 
-I can confirm that bitbake now manages to successfully obtain the
-source code file, devmem2.c from the openembedded.org's mirror,
-therefore my patch can be safely rejected.
+diff --git a/meta-oe/recipes-devtools/cppunit/cppunit_1.13.1.bb b/meta-oe/recipes-devtools/cppunit/cppunit_1.13.2.bb
+similarity index 78%
+rename from meta-oe/recipes-devtools/cppunit/cppunit_1.13.1.bb
+rename to meta-oe/recipes-devtools/cppunit/cppunit_1.13.2.bb
+index 9420294..65b08b0 100644
+--- a/meta-oe/recipes-devtools/cppunit/cppunit_1.13.1.bb
++++ b/meta-oe/recipes-devtools/cppunit/cppunit_1.13.2.bb
+@@ -8,7 +8,7 @@ SRC_URI = " \
+     http://dev-www.libreoffice.org/src/cppunit-${PV}.tar.gz \
+     file://0001-doc-Makefile.am-do-not-preserve-file-flags-when-copy.patch \
+ "
+-SRC_URI[md5sum] = "fa9aa839145cdf860bf596532bb8af97"
+-SRC_URI[sha256sum] = "d5b9f3ffc9f1634d75b20b54f48c02e0817bca6afa1d5160b244889d6bff8e0f"
++SRC_URI[md5sum] = "d1c6bdd5a76c66d2c38331e2d287bc01"
++SRC_URI[sha256sum] = "3f47d246e3346f2ba4d7c9e882db3ad9ebd3fcbd2e8b732f946e0e3eeb9f429f"
+ 
+ inherit autotools
+-- 
+2.7.4
 
-On 29 December 2016 at 01:37, Martin Jansa <martin.jansa@gmail.com> wrote:
-> It's already on OE src mirror (which is populated by my world builds for
-> last couple months):
->
-> http://sources.openembedded.org/devmem2.c
->
-> But this mirror is already in default MIRRORS variable, so it's searched
-> when original SRC_URI doesn't work.
->
-> I assume Oleksandr got this error while sources.openembedded.org was down
-> because of planned OE infrastructure downtime this week.
->
-> On Thu, Dec 29, 2016 at 12:21 AM, Khem Raj <raj.khem@gmail.com> wrote:
->
->> On Wed, Dec 28, 2016 at 4:17 AM, Oleksandr Kravchuk
->> <oleksandr.kravchuk@pelagicore.com> wrote:
->> > This is a reasonable question. I can only say that the header is
->> > slightly different, therefore I had to modify the checksums.
->> >
->> > I could use another mirror that contains original devmem2.c, but I am
->> > unfortunately not confident in their longevity.
->>
->> Can we just store these files on OE src mirror ?
->> may be send the original files to Tom and he should be able to help
->> to host them
->>
->> >
->> > On 28 December 2016 at 13:10, Martin Jansa <martin.jansa@gmail.com>
->> wrote:
->> >> If it's a mirror, then why would there be different LIC_FILES_CHKSUM and
->> >> SRC_URI checksums?
->> >>
->> >> On Wed, Dec 28, 2016 at 1:00 PM, Oleksandr Kravchuk <
->> >> oleksandr.kravchuk@pelagicore.com> wrote:
->> >>
->> >>> Original SRC_URI for devmem2 source code is accessible. Use the mirror
->> >>> provided by free-electrons instead.
->> >>>
->> >>> Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
->> >>> ---
->> >>>  meta-oe/recipes-support/devmem2/devmem2.bb | 8 ++++----
->> >>>  1 file changed, 4 insertions(+), 4 deletions(-)
->> >>>
->> >>> diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb
->> >>> b/meta-oe/recipes-support/devmem2/devmem2.bb
->> >>> index e48cc92..ba9d4cb 100644
->> >>> --- a/meta-oe/recipes-support/devmem2/devmem2.bb
->> >>> +++ b/meta-oe/recipes-support/devmem2/devmem2.bb
->> >>> @@ -1,9 +1,9 @@
->> >>>  SUMMARY = "Simple program to read/write from/to any location in
->> memory"
->> >>>  LICENSE = "GPLv2+"
->> >>> -LIC_FILES_CHKSUM = "file://devmem2.c;endline=28;md5=
->> >>> dd68f2b0a5184b3db3dc25c99e0bd0cd"
->> >>> +LIC_FILES_CHKSUM = "file://devmem2.c;endline=38;md5=
->> >>> a9eb9f3890384519f435aedf986297cf"
->> >>>  PR = "r7"
->> >>>
->> >>> -SRC_URI = "http://www.lartmaker.nl/lartware/port/devmem2.c \
->> >>> +SRC_URI = "http://free-electrons.com/pub/mirror/devmem2.c \
->> >>>             file://devmem2-fixups-2.patch;apply=yes;striplevel=0"
->> >>>  S = "${WORKDIR}"
->> >>>
->> >>> @@ -18,5 +18,5 @@ do_install() {
->> >>>      install devmem2 ${D}${bindir}
->> >>>  }
->> >>>
->> >>> -SRC_URI[md5sum] = "be12c0132a1ae118cbf5e79d98427c1d"
->> >>> -SRC_URI[sha256sum] = "ec382c90af3ef2f49695ff14a4d652
->> >>> 1e58ac482c4e29d6c9ebca8768f699c191"
->> >>> +SRC_URI[md5sum] = "e23f236e94be4c429aa1ceac0f01544b"
->> >>> +SRC_URI[sha256sum] = "3b15515693bae1ebd14d914e46d388
->> >>> edfec2175829ea1576a7a0c8606ebbe639"
->> >>> --
->> >>> 2.7.4
->> >>>
->> >>> --
->> >>> _______________________________________________
->> >>> Openembedded-devel mailing list
->> >>> Openembedded-devel@lists.openembedded.org
->> >>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> >>>
->> >> --
->> >> _______________________________________________
->> >> Openembedded-devel mailing list
->> >> Openembedded-devel@lists.openembedded.org
->> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> >
->> >
->> >
->> > --
->> > echo "EOF" >> /var/tmp/email
->> > --
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
