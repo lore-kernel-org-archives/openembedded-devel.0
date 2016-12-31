@@ -1,44 +1,44 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f193.google.com (mail-ua0-f193.google.com
-	[209.85.217.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 2AC9B6022F
+Received: from mail-vk0-f43.google.com (mail-vk0-f43.google.com
+	[209.85.213.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 503C3601D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Dec 2016 18:33:16 +0000 (UTC)
-Received: by mail-ua0-f193.google.com with SMTP id i68so27777680uad.1
+	Sat, 31 Dec 2016 18:45:23 +0000 (UTC)
+Received: by mail-vk0-f43.google.com with SMTP id p9so252347398vkd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Dec 2016 10:33:18 -0800 (PST)
+	Sat, 31 Dec 2016 10:45:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=XaKgRC+o9UBdRKZd0m8d/kr4Y3HTyYenZHYY+3tIQeA=;
-	b=VdRcpu6Dpss0cDY4B11oQH6Eq8v3DGqrub1vbqAvEhPZqILLQemBqPhM2O+1Fp/+3Z
-	cWFTR6A43a9Ur6isr8Dtjr8rdI5Rdl9BHCcMo6zPsrI+9kNi9GXV9Ah6se8QFHLEyzYv
-	BPu/HignpxUs3d57JLeEAkeAYDrlqPSDLBf69ttGakwc4mTTnu54VrRqPFJ+VX4/+J8H
-	imZCzze/2GbWfCsci0LspwsUDIAKrQEgNIT4HN8Iv2RF22sqbyTLcqSg10be0fGV/5nJ
-	TLANvriKACb+XBnVTugi6bDUQ1wKStjKlgIaLCuFDG/17X4locVkhT98Rro1olk6jL4n
-	MC/Q==
+	bh=uzdf/HAfqdg4o8G/j5sdPLKfOQxF9nj5bMlaUAhBPs4=;
+	b=HjngafwEjj+sEUpJreq6HUHJMEgo2RxqrYjWwGJwJRDU/KHjs0cH7YmIqTcTOZ3vVF
+	fEF1g0I8/ffTY1AQ3ql4b8sjKAH5pp7TsjDS5FD+W2WdhsEyvEdvlHvhhzsh1S4OP/2V
+	TIjh0ZEQsooVJKlL6cXDU3FZreC0T1GlTG39jbmWgFH3OpOJKPyb5l1/2gs/eUxXMpcb
+	DBv+ngP6vk0PCPgi1k6YzIGdCgWRbIByZjVQVKM/JY0/pUWuAHG6tFDLBZwSHIxBWo+7
+	mqpEJF9ICuIYPtC6OzDZZN8EV9QUQcsHAkY0gVH2zY3bLhMXTIbhAm0TB17Dmwss1w3o
+	9HfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=XaKgRC+o9UBdRKZd0m8d/kr4Y3HTyYenZHYY+3tIQeA=;
-	b=WRZGvYWVOQViDXtEp+WfZVUaFBpSR4piIzucO3UNzamaHBULf4+CYfaGszdAe7YO6d
-	Fs+KbRdr69yIwRumEIVHcmvAioCL9XyR0+zYO4NVbBxOFaYxyDrEJwau1tYQK2GEtLmi
-	sw/PP6/0Qr6lk1hRFqRkuv6cvSHNAXRp4yzmomBjg74ODJVA5jjGhftCPIgztFc5/Wo5
-	IyCrJuVuYlBLWeYYDqZpxXubyjj8oHjsfOohIbK9NMB86BQ8Ra9keU/UJy805IAz5Wx/
-	ANH/yBK17+XO4HKGQYRV6tm9wE3KwRiAwTMtk7udqt4bpAAqVcAExYfXm1awPXCpysqE
-	IvAg==
-X-Gm-Message-State: AIkVDXKR54frngF1DbrbvA1GveX5k4916BBQ2shMtKrKf2W8suLFdhqPej9to/D3qp8Kw9cHEcRN4T/UziQHYw==
-X-Received: by 10.159.32.99 with SMTP id 90mr32723767uam.138.1483209197488;
-	Sat, 31 Dec 2016 10:33:17 -0800 (PST)
+	bh=uzdf/HAfqdg4o8G/j5sdPLKfOQxF9nj5bMlaUAhBPs4=;
+	b=gPg2jXFGe1LRR76e9Eis7YgX5JQsET3sjyGsokGK/hI0DI9Z6sE/p6EcNVrDadYZqD
+	rR8vjCTSiAjfXuduFTEG+58b5cIx6xdRarA4kpuqmlG9yFsGrPFt5LjLi95Vkyoo466n
+	Ywkm3mVHsiEGGwSKyvThbKMQvr3/1WS8/gXCpC9gQUfx6j3d/FhT+hIDgggUse+/vm96
+	k06jisyXwJgBC32iLo/oMx+4FxP2c7RpUfhEXyBBjNe//31dQPNDkbsaEBWoDMbkU+5A
+	mtI8NIJC80rGh69sbubH9wDJu3/8aeAUhGKh32U/+jz34+LpjqO/VvCPVaODWSuzlyAf
+	ijJA==
+X-Gm-Message-State: AIkVDXItAMCKgIHPTa5XBUKhrN+5xkC/t6SH6elA1NXcLUYEzNUaBJKITJtC4gxxNAsUbpSZ9TulSKIzcotf1w==
+X-Received: by 10.31.115.205 with SMTP id o196mr18685823vkc.139.1483209924622; 
+	Sat, 31 Dec 2016 10:45:24 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.159.48.87 with HTTP; Sat, 31 Dec 2016 10:32:47 -0800 (PST)
-In-Reply-To: <20161230181124.3531-1-twoerner@gmail.com>
-References: <20161230181124.3531-1-twoerner@gmail.com>
+Received: by 10.159.48.87 with HTTP; Sat, 31 Dec 2016 10:44:54 -0800 (PST)
+In-Reply-To: <1483077771-28877-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
+References: <1483077771-28877-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 31 Dec 2016 10:32:47 -0800
-Message-ID: <CAMKF1so+SskdmYtW_p9E_5CJQPeZ+45V_+1O6WQSM7E9pwNhjA@mail.gmail.com>
+Date: Sat, 31 Dec 2016 10:44:54 -0800
+Message-ID: <CAMKF1srr_XS4X8QOVs6f_YvKs_F7=h0Ng-+9CLHToz9ufu2_1w@mail.gmail.com>
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-browser] chromium: add i586 (qemux86) support
+Subject: Re: [meta-networking][PATCH] tcpreplay: upgrade to 4.1.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,93 +51,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Dec 2016 18:33:19 -0000
+X-List-Received-Date: Sat, 31 Dec 2016 18:45:24 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Fri, Dec 30, 2016 at 10:11 AM, Trevor Woerner <twoerner@gmail.com> wrote:
-> Build and run tested on qemux86 (i586) and turbot (x86-64).
->
-> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
-> ---
->  recipes-browser/chromium/chromium_52.0.2743.76.bb |  2 ++
->  recipes-browser/chromium/files/i586/x86-m32.patch | 42 +++++++++++++++++++++++
->  2 files changed, 44 insertions(+)
->  create mode 100644 recipes-browser/chromium/files/i586/x86-m32.patch
->
-> diff --git a/recipes-browser/chromium/chromium_52.0.2743.76.bb b/recipes-browser/chromium/chromium_52.0.2743.76.bb
-> index 5be3c32..bba1549 100644
-> --- a/recipes-browser/chromium/chromium_52.0.2743.76.bb
-> +++ b/recipes-browser/chromium/chromium_52.0.2743.76.bb
-> @@ -14,6 +14,8 @@ SRC_URI += "\
->          ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \
->  "
->
-> +SRC_URI_append_i586 = "file://x86-m32.patch"
-> +
+On Thu, Dec 29, 2016 at 10:02 PM, Oleksandr Kravchuk
+<oleksandr.kravchuk@pelagicore.com> wrote:
+> +SRC_URI[md5sum] = "3105b10b07dbc0b07ce2da07a2368359"
+> +SRC_URI[sha256sum] = "da483347e83a9b5df0e0dbb0f822a2d37236e79dda35f4bc4e6684fa827f25ea"
 
-it this 32bit x86 specific or i586 specific ? If its former then using
-x86 override would be more
-appropriate.secondly, what does removing -m32 fix ? I thought it would
-just be nop in case of
-32bit
-
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=0fca02217a5d49a14dfe2d11837bb34d"
->  SRC_URI[md5sum] = "0fee71466e1f2dc39ed4549d04b58ee2"
->  SRC_URI[sha256sum] = "c54cdc11c3324152f3d5be98dcb4eae2bda0fc9dac7dd5f9010150458d68c18c"
-> diff --git a/recipes-browser/chromium/files/i586/x86-m32.patch b/recipes-browser/chromium/files/i586/x86-m32.patch
-> new file mode 100644
-> index 0000000..be08071
-> --- /dev/null
-> +++ b/recipes-browser/chromium/files/i586/x86-m32.patch
-> @@ -0,0 +1,42 @@
-> +Index: chromium-52.0.2743.76/build/common.gypi
-> +===================================================================
-> +--- chromium-52.0.2743.76.orig/build/common.gypi
-> ++++ chromium-52.0.2743.76/build/common.gypi
-> +@@ -3849,10 +3849,6 @@
-> +                   '-msse2',
-> +                   '-mfpmath=sse',
-> +                   '-mmmx',  # Allows mmintrin.h for MMX intrinsics.
-> +-                  '-m32',
-> +-                ],
-> +-                'ldflags': [
-> +-                  '-m32',
-> +                 ],
-> +                 'conditions': [
-> +                   # Use gold linker for Android ia32 target.
-> +Index: chromium-52.0.2743.76/build/config/compiler/BUILD.gn
-> +===================================================================
-> +--- chromium-52.0.2743.76.orig/build/config/compiler/BUILD.gn
-> ++++ chromium-52.0.2743.76/build/config/compiler/BUILD.gn
-> +@@ -502,8 +502,6 @@ config("compiler_cpu_abi") {
-> +       ]
-> +       ldflags += [ "-m64" ]
-> +     } else if (current_cpu == "x86") {
-> +-      cflags += [ "-m32" ]
-> +-      ldflags += [ "-m32" ]
-> +       if (!is_nacl) {
-> +         cflags += [
-> +           "-msse2",
-> +Index: chromium-52.0.2743.76/third_party/icu/icu.gyp
-> +===================================================================
-> +--- chromium-52.0.2743.76.orig/third_party/icu/icu.gyp
-> ++++ chromium-52.0.2743.76/third_party/icu/icu.gyp
-> +@@ -48,9 +48,6 @@
-> +          target_arch=="mipsel")', {
-> +         'target_conditions': [
-> +           ['_toolset=="host"', {
-> +-            'cflags': [ '-m32' ],
-> +-            'ldflags': [ '-m32' ],
-> +-            'asflags': [ '-32' ],
-> +             'xcode_settings': {
-> +               'ARCHS': [ 'i386' ],
-> +             },
-> --
-> 2.10.2
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+explain this change in commit message as well. what change is causing
+the checksum change
 
