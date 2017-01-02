@@ -1,56 +1,51 @@
-Return-Path: <prvs=01751883be=mike.looijmans@topicproducts.com>
-X-Greylist: delayed 1113 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 02 Jan 2017 08:37:14 UTC
-Received: from mx12-14.smtp.antispamcloud.com (mx12-14.smtp.antispamcloud.com
-	[46.165.232.184])
-	by mail.openembedded.org (Postfix) with ESMTP id 51117605BE
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wj0-f194.google.com (mail-wj0-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id AF4B86093B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Jan 2017 08:37:14 +0000 (UTC)
-Received: from [37.74.225.130] (helo=TOP-EX01.TOPIC.LOCAL)
-	by mx12.antispamcloud.com with esmtps (TLSv1:ECDHE-RSA-AES128-SHA:128)
-	(Exim 4.86) (envelope-from <mike.looijmans@topicproducts.com>)
-	id 1cNxpE-0007cI-VI for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Jan 2017 09:18:41 +0100
-Received: from [192.168.80.121] (192.168.80.121) by webmail.topic.nl
-	(192.168.10.102) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 2 Jan 2017 09:18:35 +0100
-To: <openembedded-devel@lists.openembedded.org>
-References: <15daa04b-92db-cc3f-f0f9-14ac92764641@topic.nl>
-	<CALbNGRTvDGuegSZPiV1E7WteGqjdYQkjfdHtB-dU0B=PT8xzxg@mail.gmail.com>
-	<2fe8322b-11d9-8e04-09ed-77c78cda59b1@gmail.com>
-From: Mike Looijmans <mike.looijmans@topic.nl>
-Organization: TOPIC
-Message-ID: <45e5bbb8-6e17-d030-cf2c-f54e2c2e30ba@topic.nl>
-Date: Mon, 2 Jan 2017 09:18:35 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.4.0
+	Mon,  2 Jan 2017 10:50:52 +0000 (UTC)
+Received: by mail-wj0-f194.google.com with SMTP id j10so68183496wjb.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Jan 2017 02:50:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=JaVUTlYgACBlF6+nEehfZCLzEOPVchWQhVr1eToZ62U=;
+	b=lGImN37SOlYvLzou/iWZfwqvWxRm7ixT2+9mjz+Mrabz2qFYZo+UGAHqN57AqPCkp1
+	bfqlwDzbJhX+tIoQfDfyLMPHMyN4oFbdkuUJZ2thkoigVsfdZvratoJO8ltrynIGfUBw
+	xJd4PhZw/tizodf9IaqZUMGLB7cfTqbMbwIvv2qUUrJNyjgWcJ3plRHUdur7OTjbovxN
+	ciueQG5qgRoUN9AyBsl8mKumEUPno0v96obRGs1Za3jh3tweQVhfxsdbpcpImmzYOYRl
+	1LhfKUHfXu6+6NT89WpEPpb3Q/ouvee+9N2rB5zAzFbwkrB486SHa6Dk6NpfsZTGcN3C
+	ISyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=JaVUTlYgACBlF6+nEehfZCLzEOPVchWQhVr1eToZ62U=;
+	b=Z7rFONSeEDfA+9hC9BZXrwTkTh7wlB1jgYpAV1n26+0EyMNi3MpoYbGh42oVDQ52a3
+	sYOOmAh/gwDjwX3tKCR0TI0kgVgKUkO6k0UfSL9D2uzB2W83PuIStgZiRamH46jPKzz/
+	6mo13ZkTUdDv3lLdDcQJ+mUSRkUVyy/TOUDSfTNZbfkjcNlrIkx/pP42Q6rJF3FFXgGJ
+	QDGDzQoMaTTZAAgjc+2E3Aoh16IvqgIcaTIdRvgMN/Nyzh5pgO5eR3dmBxfPjt8GVYe6
+	sfGM19v60yWovapMjn0f1jg9/0aED1ri1dIYRTHgIuhRNoukiPCxriBbNk/UbFj8E7gY
+	pI7A==
+X-Gm-Message-State: AIkVDXKHVdq4/krC0pYs1hRwlRAwQ2dE1t2ibWEZLXodzWUsIaMplyGeuoWB/tqp80qYeA==
+X-Received: by 10.194.187.103 with SMTP id fr7mr47546565wjc.99.1483354252325; 
+	Mon, 02 Jan 2017 02:50:52 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	r7sm87195821wjp.43.2017.01.02.02.50.51
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Mon, 02 Jan 2017 02:50:51 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 2 Jan 2017 11:50:51 +0100
+To: Denys Dmytriyenko <denis@denix.org>
+Message-ID: <20170102105051.GA3954@jama>
+References: <1482444889-16856-1-git-send-email-denis@denix.org>
 MIME-Version: 1.0
-In-Reply-To: <2fe8322b-11d9-8e04-09ed-77c78cda59b1@gmail.com>
-X-Originating-IP: [192.168.80.121]
-X-EXCLAIMER-MD-CONFIG: 9833cda7-5b21-4d34-9a38-8d025ddc3664
-X-EXCLAIMER-MD-BIFURCATION-INSTANCE: 0
-X-Originating-IP: 37.74.225.130
-X-SpamExperts-Domain: topic.nl
-X-SpamExperts-Username: 37.74.225.128/28
-Authentication-Results: antispamcloud.com;
-	auth=pass smtp.auth=37.74.225.128/28@topic.nl
-X-SpamExperts-Outgoing-Class: unsure
-X-SpamExperts-Outgoing-Evidence: Combined (0.14)
-X-Filter-ID: s0sct1PQhAABKnZB5plbIbbvfIHzQjPVmPLZeVYSu3xU9luQrU+8/8qthi+0Jd/W/95+6ZE6dI+d
-	FNTaLLKrTD4PkK8WOoKuw32u9iEtZmisSr42qUwvK7U11fJ5smF5bE7GwnNXTE7JFCR1ojdwNJNy
-	fAtzNcQaY16WG8aJmVdvbigrrkTr49qoeP/l2xtwxbyHK+mQf/AhU8EdGN3y42bjO41FyBEqIaDu
-	dcVplPGNaieKxw/vh63RdlaW2Zj1hcQD6Dxo9kokFZNwiacNPxeTCKssqlJePCDBHWfCYUvWOATT
-	vnG+QUCcfrSs6FZc7tZ3vKwSN7Mv0HNteAusUZ8BuYwGqmI8Tx/Ism0pnCcmlWACu0WC7nIKSPYV
-	aBAAdpU0oUDqng6Dyy2mQeofiRZ6bDagNV+isswM9A9WkuZ1el35jO+WJBgrWGjAavfuifnL+9wg
-	oTj4ygNPw1XfN1IUJ2+rCMPpQhII5VkEVC//8GRISD+lYCwA5l6/Q4nfg8y63jKKBrO1BroJmvb9
-	eUfeSxHoryR0VpaMOdjZtRaRVYKU9W9tbmVXJBqdHHDml2fQHaY9hVoT9jGvxqBU4l5OTHLiyLVU
-	tMfloK+xuF/fUy6xfZdyLRnwP1q5wC1e/tSnyqajZaK8dQ0opDJmuuoTXqzhUy5RQKuGT/+BppTN
-	UHLGlF9+0lBb/Of/XUMf2YI5PogHEGUWoL6eStEYApwKXoD4iJBsNfB/QPOzo3NC59y3EFXUwBcT
-	DQ0nlghOTckC4oN5XN7BzTWQhrf/s85ue82Of6DOWXDur+kZQrtbjQufD6LSY+mCDBRQSXg12O7e
-	xZs3WniBPxy5Jg8b6QDuUevekYUa3+GyU0mcIF0=
-X-Report-Abuse-To: spam@quarantine2.antispamcloud.com
-X-Recommended-Action: accept
-Subject: Re: morty branch XFCE no longer builds, missing libwnck3
+In-Reply-To: <1482444889-16856-1-git-send-email-denis@denix.org>
+User-Agent: Mutt/1.7.2 (2016-11-26)
+Cc: openembedded-devel@lists.openembedded.org, Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [meta-qt5][morty][PATCH] qtwayland: Fix building of QWaylandIntegration if some Qt5 features are disabled.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,124 +58,265 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jan 2017 08:37:15 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
+X-List-Received-Date: Mon, 02 Jan 2017 10:51:05 -0000
+X-Groupsio-MsgNum: 64591
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="tThc/1wpZn/ma/RB"
+Content-Disposition: inline
+
+--tThc/1wpZn/ma/RB
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-=EF=BB=BFThere's no trace of any attempt to bring back 'libwnck3' in the mo=
-rty branch,=20
-am I the only one in the world using morty to build an XCFE image?
+On Thu, Dec 22, 2016 at 05:14:49PM -0500, Denys Dmytriyenko wrote:
+> From: Vesa J=E4=E4skel=E4inen <dachaac@gmail.com>
+>=20
+> QPlatformIntegration's interface methods are disabled based on QT_NO_OPEN=
+GL,
+> QT_NO_CLIPBOARD, QT_NO_DRAGANDDROP, QT_NO_ACCESSIBILITY and
+> QT_NO_SESSIONMANAGER, these has to be taken into account when compiling
+> QtWayland.
 
+Is this still needed with:
+[oe] [meta-qt5][morty][PATCH] qt5: update submodule SRCREVs to 5.7.1 release
 
-On 21-12-16 02:33, akuster808 wrote:
->
->
-> On 12/20/2016 03:53 AM, Andreas M=C3=BCller wrote:
->> On Tue, Dec 20, 2016 at 10:54 AM, Mike Looijmans
->> <mike.looijmans@topic.nl> wrote:
->>> With current "morty" branches of OE-core and meta-openembedded, a build=
- of
->>> an xfce desktop image fails:
-> There is a patch pending merge to Morty sitting in my morty-next
->
-> http://git.yoctoproject.org/cgit/cgit.cgi/poky-contrib/commit/?h=3Dakuste=
-r/morty-next&id=3D4cb131f10885a84489cbcd3750a45f64f0547cda
->
->
-> I will send a pull request.
->
-> - armin
->>>
->>> NOTE: Resolving any missing task queue dependencies
->>> ERROR: Nothing PROVIDES 'libwnck3' (but
->>> /.../meta-oe/meta-xfce/recipes-panel-plugins/hotcorner/xfce4-hotcorner-=
-plugin_0.0.2.bb
->>>
->>> DEPENDS on or otherwise requires it). Close matches:
->>>    libwnck
->>> NOTE: Runtime target 'xfce4-hotcorner-plugin' is unbuildable, removing.=
-..
->>> Missing or unbuildable dependency chain was: ['xfce4-hotcorner-plugin',
->>> 'libwnck3']
->>> NOTE: Runtime target 'packagegroup-xfce-extended' is unbuildable,
->>> removing...
->>> Missing or unbuildable dependency chain was: ['packagegroup-xfce-extend=
-ed',
->>> 'xfce4-hotcorner-plugin', 'libwnck3']
->>> NOTE: Runtime target 'desktop-image' is unbuildable, removing...
->>> Missing or unbuildable dependency chain was: ['desktop-image',
->>> 'packagegroup-xfce-extended', 'xfce4-hotcorner-plugin', 'libwnck3']
->>>
->>>
->>>
->>>
->>> Kind regards,
->>>
->>> Mike Looijmans
->>> System Expert
->>>
->>> TOPIC Products
->>> Materiaalweg 4, NL-5681 RJ Best
->>> Postbus 440, NL-5680 AK Best
->>> Telefoon: +31 (0) 499 33 69 79
->>> E-mail: mike.looijmans@topicproducts.com
->>> Website: www.topicproducts.com
->>>
->>> Please consider the environment before printing this e-mail
->>>
->>>
->> So we need in morty at least
->>
->> commit 5b0060bbbacf405405e292e8a8e5db9589f63325
->> Author: Alexander Kanavin <alexander.kanavin@linux.intel.com>
->> Date:   Tue Nov 1 17:28:21 2016 +0200
->>
->>      libwnck3: add a recipe
->>
->>      It is no longer needed in oe-core.
->>
->>      Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com=
->
->>      Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->>
->>
->> and maybe (don't know the status of gnome.bbclass in morty) - but
->> should not do any harm
->>
->> commit 3be9eea720ba70fd3a9e4744401fd268e31731f8
->> Author: Khem Raj <raj.khem@gmail.com>
->> Date:   Mon Dec 5 18:36:21 2016 -0800
->>
->>      libwnck3: Add missing dependency on gnome-common-native
->>
->>      Fixes configure errors
->>      ../libwnck-3.20.1/configure: line 13391: syntax error near
->> unexpected token `maximum'
->>      ../libwnck-3.20.1/configure: line 13391: `GNOME_COMPILE_WARNINGS(ma=
-ximum)'
->>
->>      Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>      Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->
+The .patch doesn't apply in 5.7.1 anymore and I haven't had time to find
+out why.
 
+> Signed-off-by: Vesa J=E4=E4skel=E4inen <dachaac@gmail.com>
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> ---
+>  recipes-qt/qt5/qtwayland-native_git.bb             |   1 +
+>  ...g-of-QWaylandIntegration-if-some-Qt5-feat.patch | 156 +++++++++++++++=
+++++++
+>  recipes-qt/qt5/qtwayland_git.bb                    |   1 +
+>  3 files changed, 158 insertions(+)
+>  create mode 100644 recipes-qt/qt5/qtwayland/0001-Fix-building-of-QWaylan=
+dIntegration-if-some-Qt5-feat.patch
+>=20
+> diff --git a/recipes-qt/qt5/qtwayland-native_git.bb b/recipes-qt/qt5/qtwa=
+yland-native_git.bb
+> index a214346..1149aa5 100644
+> --- a/recipes-qt/qt5/qtwayland-native_git.bb
+> +++ b/recipes-qt/qt5/qtwayland-native_git.bb
+> @@ -18,6 +18,7 @@ DEPENDS =3D "qtbase-native wayland-native"
+> =20
+>  SRC_URI +=3D " \
+>      file://0001-Install-the-qtwaylandscanner-tool-to-the-native-side.pat=
+ch \
+> +    file://0001-Fix-building-of-QWaylandIntegration-if-some-Qt5-feat.pat=
+ch \
+>  "
+> =20
+>  do_configure() {
+> diff --git a/recipes-qt/qt5/qtwayland/0001-Fix-building-of-QWaylandIntegr=
+ation-if-some-Qt5-feat.patch b/recipes-qt/qt5/qtwayland/0001-Fix-building-o=
+f-QWaylandIntegration-if-some-Qt5-feat.patch
+> new file mode 100644
+> index 0000000..d173e67
+> --- /dev/null
+> +++ b/recipes-qt/qt5/qtwayland/0001-Fix-building-of-QWaylandIntegration-i=
+f-some-Qt5-feat.patch
+> @@ -0,0 +1,156 @@
+> +From de85e1c1ee76be845a21b441d9e4ea12a30d84c7 Mon Sep 17 00:00:00 2001
+> +From: =3D?UTF-8?q?Vesa=3D20J=3DC3=3DA4=3DC3=3DA4skel=3DC3=3DA4inen?=3D <=
+dachaac@gmail.com>
+> +Date: Sun, 18 Sep 2016 11:51:59 +0300
+> +Subject: [PATCH] Fix building of QWaylandIntegration if some Qt5 feature=
+s are
+> + disabled.
+> +
+> +QPlatformIntegration's interface methods are disabled based on QT_NO_OPE=
+NGL,
+> +QT_NO_CLIPBOARD, QT_NO_DRAGANDDROP, QT_NO_ACCESSIBILITY and
+> +QT_NO_SESSIONMANAGER, these has to be taken into account when compiling
+> +QtWayland.
+> +---
+> + src/client/qwaylandintegration.cpp | 21 ++++++++++++++++++---
+> + src/client/qwaylandintegration_p.h | 12 ++++++++++++
+> + 2 files changed, 30 insertions(+), 3 deletions(-)
+> +
+> +diff --git a/src/client/qwaylandintegration.cpp b/src/client/qwaylandint=
+egration.cpp
+> +index 39fff53..481e3d6 100644
+> +--- a/src/client/qwaylandintegration.cpp
+> ++++ b/src/client/qwaylandintegration.cpp
+> +@@ -39,7 +39,9 @@
+> + #include "qwaylandinputcontext_p.h"
+> + #include "qwaylandshmbackingstore_p.h"
+> + #include "qwaylandnativeinterface_p.h"
+> ++#ifndef QT_NO_CLIPBOARD
+> + #include "qwaylandclipboard_p.h"
+> ++#endif
+> + #include "qwaylanddnd_p.h"
+> + #include "qwaylandwindowmanagerintegration_p.h"
+> + #include "qwaylandscreen_p.h"
+> +@@ -57,7 +59,9 @@
+> + #include <QSocketNotifier>
+> +=20
+> + #include <qpa/qplatforminputcontextfactory_p.h>
+> ++#ifndef QT_NO_ACCESSIBILITY
+> + #include <qpa/qplatformaccessibility.h>
+> ++#endif
+> + #include <qpa/qplatforminputcontext.h>
+> +=20
+> + #include "qwaylandhardwareintegration_p.h"
+> +@@ -117,8 +121,6 @@ QWaylandIntegration::QWaylandIntegration()
+> +     , mNativeInterface(new QWaylandNativeInterface(this))
+> + #ifndef QT_NO_ACCESSIBILITY
+> +     , mAccessibility(new QPlatformAccessibility())
+> +-#else
+> +-    , mAccessibility(0)
+> + #endif
+> +     , mClientBufferIntegrationInitialized(false)
+> +     , mServerBufferIntegrationInitialized(false)
+> +@@ -126,9 +128,12 @@ QWaylandIntegration::QWaylandIntegration()
+> + {
+> +     initializeInputDeviceIntegration();
+> +     mDisplay =3D new QWaylandDisplay(this);
+> ++#ifndef QT_NO_CLIPBOARD
+> +     mClipboard =3D new QWaylandClipboard(mDisplay);
+> ++#endif
+> ++#ifndef QT_NO_DRAGANDDROP
+> +     mDrag =3D new QWaylandDrag(mDisplay);
+> +-
+> ++#endif
+> +     QString icStr =3D QPlatformInputContextFactory::requested();
+> +     icStr.isNull() ? mInputContext.reset(new QWaylandInputContext(mDisp=
+lay))
+> +                    : mInputContext.reset(QPlatformInputContextFactory::=
+create(icStr));
+> +@@ -136,8 +141,12 @@ QWaylandIntegration::QWaylandIntegration()
+> +=20
+> + QWaylandIntegration::~QWaylandIntegration()
+> + {
+> ++#ifndef QT_NO_DRAGANDDROP
+> +     delete mDrag;
+> ++#endif
+> ++#ifndef QT_NO_CLIPBOARD
+> +     delete mClipboard;
+> ++#endif
+> + #ifndef QT_NO_ACCESSIBILITY
+> +     delete mAccessibility;
+> + #endif
+> +@@ -213,15 +222,19 @@ QPlatformFontDatabase *QWaylandIntegration::fontDa=
+tabase() const
+> +     return mFontDb;
+> + }
+> +=20
+> ++#ifndef QT_NO_CLIPBOARD
+> + QPlatformClipboard *QWaylandIntegration::clipboard() const
+> + {
+> +     return mClipboard;
+> + }
+> ++#endif
+> +=20
+> ++#ifndef QT_NO_DRAGANDDROP
+> + QPlatformDrag *QWaylandIntegration::drag() const
+> + {
+> +     return mDrag;
+> + }
+> ++#endif
+> +=20
+> + QPlatformInputContext *QWaylandIntegration::inputContext() const
+> + {
+> +@@ -243,10 +256,12 @@ QVariant QWaylandIntegration::styleHint(StyleHint =
+hint) const
+> +     return QPlatformIntegration::styleHint(hint);
+> + }
+> +=20
+> ++#ifndef QT_NO_ACCESSIBILITY
+> + QPlatformAccessibility *QWaylandIntegration::accessibility() const
+> + {
+> +     return mAccessibility;
+> + }
+> ++#endif
+> +=20
+> + QPlatformServices *QWaylandIntegration::services() const
+> + {
+> +diff --git a/src/client/qwaylandintegration_p.h b/src/client/qwaylandint=
+egration_p.h
+> +index 987d805..b50ad95 100644
+> +--- a/src/client/qwaylandintegration_p.h
+> ++++ b/src/client/qwaylandintegration_p.h
+> +@@ -80,15 +80,21 @@ public:
+> +=20
+> +     QPlatformNativeInterface *nativeInterface() const Q_DECL_OVERRIDE;
+> +=20
+> ++#ifndef QT_NO_CLIPBOARD
+> +     QPlatformClipboard *clipboard() const Q_DECL_OVERRIDE;
+> ++#endif
+> +=20
+> ++#ifndef QT_NO_DRAGANDDROP
+> +     QPlatformDrag *drag() const Q_DECL_OVERRIDE;
+> ++#endif
+> +=20
+> +     QPlatformInputContext *inputContext() const Q_DECL_OVERRIDE;
+> +=20
+> +     QVariant styleHint(StyleHint hint) const Q_DECL_OVERRIDE;
+> +=20
+> ++#ifndef QT_NO_ACCESSIBILITY
+> +     QPlatformAccessibility *accessibility() const Q_DECL_OVERRIDE;
+> ++#endif
+> +=20
+> +     QPlatformServices *services() const Q_DECL_OVERRIDE;
+> +=20
+> +@@ -117,12 +123,18 @@ private:
+> +     void initializeInputDeviceIntegration();
+> +=20
+> +     QPlatformFontDatabase *mFontDb;
+> ++#ifndef QT_NO_CLIPBOARD
+> +     QPlatformClipboard *mClipboard;
+> ++#endif
+> ++#ifndef QT_NO_DRAGANDDROP
+> +     QPlatformDrag *mDrag;
+> ++#endif
+> +     QWaylandDisplay *mDisplay;
+> +     QPlatformNativeInterface *mNativeInterface;
+> +     QScopedPointer<QPlatformInputContext> mInputContext;
+> ++#ifndef QT_NO_ACCESSIBILITY
+> +     QPlatformAccessibility *mAccessibility;
+> ++#endif
+> +     bool mClientBufferIntegrationInitialized;
+> +     bool mServerBufferIntegrationInitialized;
+> +     bool mShellIntegrationInitialized;
+> +--=20
+> +2.7.4
+> +
+> diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_g=
+it.bb
+> index b208961..e315924 100644
+> --- a/recipes-qt/qt5/qtwayland_git.bb
+> +++ b/recipes-qt/qt5/qtwayland_git.bb
+> @@ -46,6 +46,7 @@ FILES_${PN}-plugins-dbg +=3D " \
+> =20
+>  SRC_URI +=3D " \
+>      file://0001-examples-wayland-include-server-buffer-only-when-bui.pat=
+ch \
+> +    file://0001-Fix-building-of-QWaylandIntegration-if-some-Qt5-feat.pat=
+ch \
+>  "
+> =20
+>  SRCREV =3D "a172672484b9496819e588b51ac2ff9fb4a21941"
+> --=20
+> 2.7.4
+>=20
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-Kind regards,
+--tThc/1wpZn/ma/RB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Mike Looijmans
-System Expert
+-----BEGIN PGP SIGNATURE-----
 
-TOPIC Products
-Materiaalweg 4, NL-5681 RJ Best
-Postbus 440, NL-5680 AK Best
-Telefoon: +31 (0) 499 33 69 79
-E-mail: mike.looijmans@topicproducts.com
-Website: www.topicproducts.com
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWGowigAKCRA3VSO3ZXaA
+HGhTAJ94Nv9fIf6nXPHGAAsJdG+02/BTuACfZbDM7S4gk2lGSbPhbRDibKL9TdE=
+=4J2l
+-----END PGP SIGNATURE-----
 
-Please consider the environment before printing this e-mail
-
-
-
-
-
-
+--tThc/1wpZn/ma/RB--
