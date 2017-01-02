@@ -1,56 +1,51 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wj0-f193.google.com (mail-wj0-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E5996071F
+Return-Path: <matti.kaasinen@gmail.com>
+Received: from mail-ua0-f175.google.com (mail-ua0-f175.google.com
+	[209.85.217.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 43F20606A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Jan 2017 18:47:52 +0000 (UTC)
-Received: by mail-wj0-f193.google.com with SMTP id hb5so36238883wjc.2
+	Mon,  2 Jan 2017 18:58:05 +0000 (UTC)
+Received: by mail-ua0-f175.google.com with SMTP id i68so202321896uad.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Jan 2017 10:47:53 -0800 (PST)
+	Mon, 02 Jan 2017 10:58:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=QabVxaWFMYKjusBnDpW1LOyuG0bu1vysa//7L/WjYKs=;
-	b=kjcwsDCtWpJl1oTW0Fo8j44KcZbwrgHomCWdCZ+OObBLAlhlo0IV3g0cQKbrOTNmZ7
-	rA6ea+oL0x/pcbxC0V++3mN6z8Ni7wK1KoefnLvME7/2CgSdNftKti8HbFmOHBKkvpxk
-	VlcITf+iYFkhF9durmitXehKarwMUB0Q+O4/nTbQhsM+EAx8e1mzAkFI96EZ5QZmuvoB
-	CIUkv9IOBk9Q6ABdNV6SzTw7RKGrTIEviUt/Xj1WA906ZJWzc/fgKKBCA5MFWae1R8Uk
-	YoSFwZd2Sjv0dwIQdIRdIafrgIJa+p9qOOZpEoXPipG6z8+hKimv4JPTOmGPUHyGH7H3
-	Ir/g==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=J85ms7SPGUXRmGCvpUICA9BmEijvAi0OfvL/eO3TDo8=;
+	b=L7OsItTxq1XDbfN4TKD7T9c0ci1dKZ0p9+Iirjd4sxI106D0izEqQSfahGq8GeBmF6
+	HDKra2KeVnN3mFVRlOSWzFGT8+yLpTuhjip5nZnS7aQtO7skggx1diq/59sGiw/QDs/W
+	KwyDzYJiQ9lfm72BbXswm9Gz654Q11BLBU37sXXEQ9rWk9IAjAqzTjIca8JkvhMQOSXQ
+	MUMvA8XxrArW3HKNvD5emoBd6EEtrqG+dwBzuVm5pEqVz/XJm7St7vMrNjyw5jWfum8F
+	grZehU68kBqGEn3WjI3r/virSUcoey40A99i8utAA7fD0U46iM0XB1EjnaMMJIWSVksY
+	SdQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=QabVxaWFMYKjusBnDpW1LOyuG0bu1vysa//7L/WjYKs=;
-	b=Jkbd6Pufext0adk64dtAFmaiJSZxv5MwPb2nkM+XzmiDO4bQZap6dyjkMcGrwWvoxB
-	XwnYHEhfIH7E2sywSyl0ZtXvHq9OijX65caBwwGXg2JkuUoBr46sg7hAE23A2jqwuTg4
-	dkM5yW85FcA9ca4TyH+gaxIxuAHheX5Uc4MdIcQUe+9hydOAehItvOwMQzafHAsPsANs
-	75rPINswa4l93QEmun99Zi3TJ1qzjmCaenca4J1n8aT/HLUZL97RNIwTVszpabLyUoj0
-	IY7Pc06ieVx0yAIj27I1OniiGsNShdiK60tpm4Y89it/HFrPOuLZvrlYUgNwWlkgw0eS
-	rMgg==
-X-Gm-Message-State: AIkVDXIhKx1UU1KXeKLhuSJIS5QMSDXG0jex0I+drkbqvn1UqkE6hu6RH+jlkdrVRlgg3Q==
-X-Received: by 10.194.98.208 with SMTP id ek16mr60574968wjb.94.1483382872478; 
-	Mon, 02 Jan 2017 10:47:52 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	i10sm89335379wjd.15.2017.01.02.10.47.51
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 02 Jan 2017 10:47:51 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 2 Jan 2017 19:47:51 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170102184751.GC3954@jama>
-References: <1481809716-24451-1-git-send-email-samuli.piippo@qt.io>
-	<d4453d09-2112-0a1e-2812-0c63c932ca6a@gmail.com>
-	<20161220143047.GF3275@jama>
-	<2c948f51-9a0d-e74d-e5bc-1bf581530c4e@gmail.com>
-	<20161220150507.GH3275@jama>
-	<bc4be429-a64c-ba6d-163b-79c791fa7dfe@gmail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=J85ms7SPGUXRmGCvpUICA9BmEijvAi0OfvL/eO3TDo8=;
+	b=kxJ/8uez6uhfOvz59QacVYJnMYzwHoz1U9tBilwVDvsPkMiKT4T44Zz4rYJ7LDcXSx
+	UUIZy74118dfg1Gzl/3Rh6Ccpp4BaEZuJnqTdZSt2Y50TkOBRJRwXFyOz6UlURr13gqF
+	YJodsURGZjw17Ze1TQN4M5fz9NeOCyOYcEgouqq/B8237cmdhZDI4T3JyDT1dZn3ivCj
+	EuTgLTPKK2n7w1OCuM+EE8Xzhf8mLD0VZJXOXmpylBIIDL2j8yDzHjg5wTVWcX49RxbY
+	1J0WDPcJZ7TdgY42q1p0s1jVa4t64mxto/0rnF8c80nc1nRplOLax5QTacFFiawpAr44
+	KS2g==
+X-Gm-Message-State: AIkVDXLAsrTQpy4pzNx7sJIC7UNFWCO2o1ORtLWPwOiu061+XZsRrmvbHm+E6eSUH6mhGIQNlCsUzlJb4Vtyjg==
+X-Received: by 10.176.2.145 with SMTP id 17mr36519880uah.38.1483383485437;
+	Mon, 02 Jan 2017 10:58:05 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <bc4be429-a64c-ba6d-163b-79c791fa7dfe@gmail.com>
-User-Agent: Mutt/1.7.2 (2016-11-26)
-Subject: Re: [meta-qt5][PATCH v4] Upgrade to Qt 5.8
+Received: by 10.103.14.2 with HTTP; Mon, 2 Jan 2017 10:58:04 -0800 (PST)
+In-Reply-To: <8d2d2e87-8d6e-bf4c-4555-73e266971f11@elfin.de>
+References: <CADnUhn2STGnqzDuYoAo8yLvDnPFcmm+4M+xq387oxdhwF_pFMQ@mail.gmail.com>
+	<CAKuJqM9sse_hCpGQBbfQrcCThtichn=WLeuA2iEEU=NP9N_nMw@mail.gmail.com>
+	<CADnUhn16Dyc2tnRgQtGMwy6xuBKchjWP3oCtnRdpg4GK1L0BcQ@mail.gmail.com>
+	<20170102142908.GB3954@jama>
+	<94a0855e-a1a5-dd20-9854-c16fd17f2da9@elfin.de>
+	<CA+chaQcezBrHioSU6SsVt_NzLgqhVx2+ZG5+2UPXT9vgL1P7nQ@mail.gmail.com>
+	<8d2d2e87-8d6e-bf4c-4555-73e266971f11@elfin.de>
+From: matti kaasinen <matti.kaasinen@gmail.com>
+Date: Mon, 2 Jan 2017 20:58:04 +0200
+Message-ID: <CADnUhn2472gx8N_KUh=9L=8pANy6W8iWKYOxFdvf7s8j=zTG=g@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: apache2_2.4.23.bb fetcher crashes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,153 +58,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jan 2017 18:47:53 -0000
-X-Groupsio-MsgNum: 64602
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="6zdv2QT/q3FMhpsV"
-Content-Disposition: inline
-
---6zdv2QT/q3FMhpsV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 02 Jan 2017 18:58:07 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 20, 2016 at 05:30:11PM +0200, Samuli Piippo wrote:
-> On 20.12.2016 17:05, Martin Jansa wrote:
-> > On Tue, Dec 20, 2016 at 04:58:49PM +0200, Samuli Piippo wrote:
-> >> On 20.12.2016 16:30, Martin Jansa wrote:
-> >>> On Thu, Dec 15, 2016 at 04:49:55PM +0200, Samuli Piippo wrote:
-> >>>> Changes from v3 patch:
-> >>>> - sha1s updated to expected RC content
-> >>>> - fixed the qt3d assimp build-deps issue
-> >>>> - the new Qt configuration system taken into use where applicable
-> >>>>
-> >>>> webengine build problem with x86_64 host and x86 target is still the=
-re.
-> >>>
-> >>> This version seems to fail in qtwayland:
-> >>>
-> >>> http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.dependencies.=
-qemuarm.20161218_140914.log//2_max/failed/qtwayland.log
-> >>>
-> >>> | ERROR: Feature 'xcomposite-glx' was enabled, but the pre-condition
-> >>> 'features.wayland-client && features.opengl && !features.opengles2 &&
-> >>> libs.xcomposite && libs.glx' failed.
-> >>
-> >> What kind of configuration is used for qtbase?
-> >> To me it seems that one of these checks fail: features.opengl &&
-> >> !features.opengles2
-> >
-> > The same as when building previous version of this patch.
-> >
-> > on top of meta-qt5 default there is:
-> >
-> > PACKAGECONFIG_GL =3D "gles2 eglfs"
->=20
-> The gles2 here causes the failure, since xcomposite-glx checks for=20
-> "!features.opengles2"
-> This makes sense since you want to have desktop opengl enabled together=
-=20
-> with wayland GLX.
+Thanks for your advices Martin.
+So Armin, could you please backport this
+https://patchwork.openembedded.org/patch/135494/ to krogoth or actually
+backport patched apache2_2.4.25.bb, if possible?
+-Matti
 
-Then is it correct to enable both xcomposite-egl and xcomposite-glx for
-x11 in DISTRO_FEATUREs?
+2017-01-02 16:52 GMT+02:00 Piotr Lewicki <piotr.lewicki@elfin.de>:
 
-Without this change in qtwayland_git.bb:
-
--    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xcompositor xkb glx', =
-'', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xcomposite-egl xcompos=
-ite-glx', '', d)} \
-
-I can build again with that configuration.
-
-> > PACKAGECONFIG_DISTRO =3D "sql-sqlite icu glib accessibility mtdev examp=
-les
-> > fontconfig"
-> >
-> > QT_CONFIG_FLAGS +=3D "-qpa wayland-egl"
-> >
-> > from meta-luneui/recipes-qt/qt5/qtbase_git.bbappend
-> >
-> > and
-> > PACKAGECONFIG_append_pn-qtbase =3D " freetype fontconfig"
-> > from world_fixes.inc
-> > http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.world.qemuarm.2=
-0161217_135213.log/world_fixes.inc
-> >>
-> >>>
-> >>> Is the configure more strict in new version or do we need to change t=
-he
-> >>> default config for qtwayland builds?
-> >>>
-> >>>>
-> >>>> -samuli
-> >>>>
-> >>>> On 15.12.2016 15:48, Samuli Piippo wrote:
-> >>>>> The linux-oe-g++ mkspec is changed to use $$(...) operator to obtain
-> >>>>> the contents of an environment value when qmake is run instead of w=
-hen
-> >>>>> Makefile is processed. All OE_QMAKE_xxx variables need to be export=
-ed
-> >>>>> for qmake to find them. configure's setBootstrapVariable function n=
-eeds
-> >>>>> to change $$(..) to normal $(...) operator to work with qmake's Mak=
-efile.
-> >>>>>
-> >>>>> qt.conf generation for qtbase recipes is not needed, as configure w=
-ill
-> >>>>> generate its own version based on configure arguments. Skip running
-> >>>>> qmake, since configure is now automatically invoked when it's run in
-> >>>>> qtbase's root folder.
-> >>>>>
-> >>>>> Update PACKAGECONFIGs for qtbase to match current configure options.
-> >>>>>
-> >>>>> The new Qt configuration system [1] can be used with a new variable
-> >>>>> EXTRA_QMAKEVARS_CONFIGURE, which takes both command line and feature
-> >>>>> arguments.
-> >>>>>
-> >>>>> Merge the two qtwayland recipes to one that supports all three targ=
-ets
-> >>>>> (target, native, nativesdk) without need for additional patch.
-> >>>>>
-> >>>>> [1] https://www.mail-archive.com/development@qt-project.org/msg2525=
-7.html
-> >>>>>
-> >>>> --
-> >>>> _______________________________________________
-> >>>> Openembedded-devel mailing list
-> >>>> Openembedded-devel@lists.openembedded.org
-> >>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>>
-> >>>
-> >>>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> >
-> >
-> --=20
+> Ok. Thanks
+>
+> @Armin? Can you include this?
+>
+>
+> On 02.01.2017 15:47, Martin Jansa wrote:
+>
+>> You need to ask armin to include it in next pull request for morty and
+>> krogoth.
+>>
+>> On Mon, Jan 2, 2017 at 3:31 PM, Piotr Lewicki <piotr.lewicki@elfin.de>
+>> wrote:
+>>
+>> On 02.01.2017 15:29, Martin Jansa wrote:
+>>>
+>>> On Mon, Jan 02, 2017 at 04:20:37PM +0200, matti kaasinen wrote:
+>>>>
+>>>> Olkesandr,
+>>>>> Actually it was regarding that jquery library that I patched today.
+>>>>> That
+>>>>> really was pretty trivial fix if fix at all =C2=AD- just to make it m=
+ore
+>>>>> formal.
+>>>>> However, I really do not know if it is just to update Apache version =
+or
+>>>>> is
+>>>>> there something else to do. Pure revision change would be trivial for
+>>>>> me,
+>>>>> too, or actually a new recipe should be made. Other choice would be
+>>>>> trying
+>>>>> to find that older version of Apache and fix source URL accordingly.
+>>>>> It seems that old version is in archive:
+>>>>> https://archive.apache.org/dist/httpd/
+>>>>> I'm fine making the patch to update SRC to point to apache archive.
+>>>>> However, recipe seems using several patches that I do not care creati=
+ng
+>>>>> for
+>>>>> the new release now. That should do someone more devoted to apache
+>>>>> functionality, I suppose.
+>>>>> -Matti
+>>>>>
+>>>>> Or just read last 2 weeks on this ML to find:
+>>>> https://patchwork.openembedded.org/patch/135494/
+>>>> and related discussion and just ask for backporting this to krogoth
+>>>> branch
+>>>>
+>>>> @Martin: Could I ask you to also port it to morty?
+>>>
+>>>
+>>>
+>>>
+>>> 2017-01-02 15:46 GMT+02:00 Oleksandr Kravchuk <
+>>>>> oleksandr.kravchuk@pelagicore.com>:
+>>>>>
+>>>>> Matti -
+>>>>>
+>>>>>> As I have previously suggested, you can make a patch and send it to
+>>>>>> this mailing list. Here is an instruction:
+>>>>>> http://www.openembedded.org/wiki/How_to_submit_a_patch_to_Op
+>>>>>> enEmbedded
+>>>>>>
+>>>>>> Would you like to try to do it yourself or you actually want us to f=
+ix
+>>>>>> it?
+>>>>>>
+>>>>>> On 2 January 2017 at 14:15, matti kaasinen <matti.kaasinen@gmail.com=
+>
+>>>>>> wrote:
+>>>>>>
+>>>>>> Hi!
+>>>>>>>
+>>>>>>> http://www.apache.org/dist/httpd/httpd-2.4.23.tar.bz2 has been
+>>>>>>> removed.
+>>>>>>> Latest/current version on http://www.apache.org/dist/httpd/ page is
+>>>>>>> httpd-2.4.25.tar.bz2. This crashes fetcher of
+>>>>>>> meta-openembedded/meta-webserver/recipes-httpd/apache2/apach
+>>>>>>> e2_2.4.23.bb
+>>>>>>> that is Krogoth recipe for apache2.
+>>>>>>>
+>>>>>>> Thanks,
+>>>>>>> Matti
+>>>>>>> --
+>>>>>>> _______________________________________________
+>>>>>>> Openembedded-devel mailing list
+>>>>>>> Openembedded-devel@lists.openembedded.org
+>>>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>>>>>
+>>>>>>> --
+>>>>>> _______________________________________________
+>>>>>> Openembedded-devel mailing list
+>>>>>> Openembedded-devel@lists.openembedded.org
+>>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>>>>
+>>>>>> --
+>>>>>>
+>>>>> _______________________________________________
+>>>>> Openembedded-devel mailing list
+>>>>> Openembedded-devel@lists.openembedded.org
+>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>>>
+>>>>>
+>>>> --
+>>>>
+>>> Piotr Lewicki
+>>>
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>>> --
+> Piotr Lewicki
+> --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---6zdv2QT/q3FMhpsV
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iFwEARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWGqgVwAKCRA3VSO3ZXaA
-HIfgAJQPP0LDsDqKOM/BA9oKeXbTJeXTAKCmaDq5vASIgSTxwL3pzrE4EkJVHQ==
-=mxq3
------END PGP SIGNATURE-----
-
---6zdv2QT/q3FMhpsV--
