@@ -1,55 +1,56 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id D2CD0606D0
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wj0-f193.google.com (mail-wj0-f193.google.com
+	[209.85.210.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 2E5996071F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Jan 2017 17:07:25 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id n5so30922220pgh.3
+	Mon,  2 Jan 2017 18:47:52 +0000 (UTC)
+Received: by mail-wj0-f193.google.com with SMTP id hb5so36238883wjc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Jan 2017 09:07:26 -0800 (PST)
+	Mon, 02 Jan 2017 10:47:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=umpwtSmJ9ZCQ78GufwNt85AIBAM74vCtyfRH4YMlKFU=;
-	b=NKjYx/aUtulNmWbKEI4vFzbw+V9A1OiElJUYbGIOxvRWtg/OywzGS6EK0F5zd+XuRi
-	qT4+USPsy53HhKN6VXEA+tWaSDdPJ4liaVd8/ZXiq3DGwYb8aRDS8VwMG7HPtCic9vwY
-	Dunyi65AWPuCoukAsF6+mKc6baitjMRL4Bwn3wz474vtLMqA1SE0fQEmrDKkaYM9DzUt
-	DcCmEPXO1AkmuRwVy+5X1eSqAtFsCKnpaIg3VRdlR1HksDYvLislNzj3iyxu4wuy/Cix
-	ZNf1N8MGjQp7uHEYI6VhfqY9X9WznpaEQVX30v5RPb+6OAo9xCPMcUuhY3W+Prk7TQPn
-	/buQ==
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=QabVxaWFMYKjusBnDpW1LOyuG0bu1vysa//7L/WjYKs=;
+	b=kjcwsDCtWpJl1oTW0Fo8j44KcZbwrgHomCWdCZ+OObBLAlhlo0IV3g0cQKbrOTNmZ7
+	rA6ea+oL0x/pcbxC0V++3mN6z8Ni7wK1KoefnLvME7/2CgSdNftKti8HbFmOHBKkvpxk
+	VlcITf+iYFkhF9durmitXehKarwMUB0Q+O4/nTbQhsM+EAx8e1mzAkFI96EZ5QZmuvoB
+	CIUkv9IOBk9Q6ABdNV6SzTw7RKGrTIEviUt/Xj1WA906ZJWzc/fgKKBCA5MFWae1R8Uk
+	YoSFwZd2Sjv0dwIQdIRdIafrgIJa+p9qOOZpEoXPipG6z8+hKimv4JPTOmGPUHyGH7H3
+	Ir/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=umpwtSmJ9ZCQ78GufwNt85AIBAM74vCtyfRH4YMlKFU=;
-	b=WrMk1WGYxgcDVSjp7ogsX6OjVc9eUl7QEnvQ3JSeMxq71D65QSvk6lrVx6+gIGC8C+
-	BqI7MP+7Y/aER97sL5BCocLFxWX09P3kfPYp1pODJBVZuRT+W3L5yPcVFncwuZTrgAfX
-	xVG0JITWQEpxv3FUSi7V0t7vVXxJH94wXKtRVOcGOMmMXKkConiXFHdfiKLT6yb406pP
-	Pox+94V+8qVh0og6hLQCi/v+PQkr0wjZx4E6wWktYJbnY5vdcnwLpgVx88PLulmRc2LR
-	QWrHF4VI9SkXSiHO0WVaWdXEB6xDrSpcD0Hd+Vhlflaf3AWDBeIAZdVACY63NpOha/AC
-	oEew==
-X-Gm-Message-State: AIkVDXIh6+gnaaTFqC3vjT4kwO1PL2/gXb/+aiiJEikO7byQm8qF3jB3sKInsTUMoJUnKw==
-X-Received: by 10.99.164.9 with SMTP id c9mr109930445pgf.141.1483376845648;
-	Mon, 02 Jan 2017 09:07:25 -0800 (PST)
-Received: from ?IPv6:2601:202:4001:9ea0:ea2a:eaff:fe0e:629e?
-	([2601:202:4001:9ea0:ea2a:eaff:fe0e:629e])
-	by smtp.gmail.com with ESMTPSA id
-	r2sm133655903pfi.67.2017.01.02.09.07.25
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=QabVxaWFMYKjusBnDpW1LOyuG0bu1vysa//7L/WjYKs=;
+	b=Jkbd6Pufext0adk64dtAFmaiJSZxv5MwPb2nkM+XzmiDO4bQZap6dyjkMcGrwWvoxB
+	XwnYHEhfIH7E2sywSyl0ZtXvHq9OijX65caBwwGXg2JkuUoBr46sg7hAE23A2jqwuTg4
+	dkM5yW85FcA9ca4TyH+gaxIxuAHheX5Uc4MdIcQUe+9hydOAehItvOwMQzafHAsPsANs
+	75rPINswa4l93QEmun99Zi3TJ1qzjmCaenca4J1n8aT/HLUZL97RNIwTVszpabLyUoj0
+	IY7Pc06ieVx0yAIj27I1OniiGsNShdiK60tpm4Y89it/HFrPOuLZvrlYUgNwWlkgw0eS
+	rMgg==
+X-Gm-Message-State: AIkVDXIhKx1UU1KXeKLhuSJIS5QMSDXG0jex0I+drkbqvn1UqkE6hu6RH+jlkdrVRlgg3Q==
+X-Received: by 10.194.98.208 with SMTP id ek16mr60574968wjb.94.1483382872478; 
+	Mon, 02 Jan 2017 10:47:52 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	i10sm89335379wjd.15.2017.01.02.10.47.51
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Jan 2017 09:07:25 -0800 (PST)
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Mon, 02 Jan 2017 10:47:51 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 2 Jan 2017 19:47:51 +0100
 To: openembedded-devel@lists.openembedded.org
-References: <15daa04b-92db-cc3f-f0f9-14ac92764641@topic.nl>
-	<CALbNGRTvDGuegSZPiV1E7WteGqjdYQkjfdHtB-dU0B=PT8xzxg@mail.gmail.com>
-	<2fe8322b-11d9-8e04-09ed-77c78cda59b1@gmail.com>
-	<45e5bbb8-6e17-d030-cf2c-f54e2c2e30ba@topic.nl>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <24baf650-5877-aa72-06ae-436a8e6e9a11@gmail.com>
-Date: Mon, 2 Jan 2017 09:07:24 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.5.1
+Message-ID: <20170102184751.GC3954@jama>
+References: <1481809716-24451-1-git-send-email-samuli.piippo@qt.io>
+	<d4453d09-2112-0a1e-2812-0c63c932ca6a@gmail.com>
+	<20161220143047.GF3275@jama>
+	<2c948f51-9a0d-e74d-e5bc-1bf581530c4e@gmail.com>
+	<20161220150507.GH3275@jama>
+	<bc4be429-a64c-ba6d-163b-79c791fa7dfe@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <45e5bbb8-6e17-d030-cf2c-f54e2c2e30ba@topic.nl>
-Subject: Re: morty branch XFCE no longer builds, missing libwnck3
+In-Reply-To: <bc4be429-a64c-ba6d-163b-79c791fa7dfe@gmail.com>
+User-Agent: Mutt/1.7.2 (2016-11-26)
+Subject: Re: [meta-qt5][PATCH v4] Upgrade to Qt 5.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,142 +63,153 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jan 2017 17:07:26 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 02 Jan 2017 18:47:53 -0000
+X-Groupsio-MsgNum: 64602
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="6zdv2QT/q3FMhpsV"
+Content-Disposition: inline
 
+--6zdv2QT/q3FMhpsV
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Tue, Dec 20, 2016 at 05:30:11PM +0200, Samuli Piippo wrote:
+> On 20.12.2016 17:05, Martin Jansa wrote:
+> > On Tue, Dec 20, 2016 at 04:58:49PM +0200, Samuli Piippo wrote:
+> >> On 20.12.2016 16:30, Martin Jansa wrote:
+> >>> On Thu, Dec 15, 2016 at 04:49:55PM +0200, Samuli Piippo wrote:
+> >>>> Changes from v3 patch:
+> >>>> - sha1s updated to expected RC content
+> >>>> - fixed the qt3d assimp build-deps issue
+> >>>> - the new Qt configuration system taken into use where applicable
+> >>>>
+> >>>> webengine build problem with x86_64 host and x86 target is still the=
+re.
+> >>>
+> >>> This version seems to fail in qtwayland:
+> >>>
+> >>> http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.dependencies.=
+qemuarm.20161218_140914.log//2_max/failed/qtwayland.log
+> >>>
+> >>> | ERROR: Feature 'xcomposite-glx' was enabled, but the pre-condition
+> >>> 'features.wayland-client && features.opengl && !features.opengles2 &&
+> >>> libs.xcomposite && libs.glx' failed.
+> >>
+> >> What kind of configuration is used for qtbase?
+> >> To me it seems that one of these checks fail: features.opengl &&
+> >> !features.opengles2
+> >
+> > The same as when building previous version of this patch.
+> >
+> > on top of meta-qt5 default there is:
+> >
+> > PACKAGECONFIG_GL =3D "gles2 eglfs"
+>=20
+> The gles2 here causes the failure, since xcomposite-glx checks for=20
+> "!features.opengles2"
+> This makes sense since you want to have desktop opengl enabled together=
+=20
+> with wayland GLX.
 
-On 01/02/2017 12:18 AM, Mike Looijmans wrote:
-> There's no trace of any attempt to bring back 'libwnck3' in the morty 
-> branch, am I the only one in the world using morty to build an XCFE 
-> image?
+Then is it correct to enable both xcomposite-egl and xcomposite-glx for
+x11 in DISTRO_FEATUREs?
 
-there are a few traces:
-http://lists.openembedded.org/pipermail/openembedded-core/2016-December/129529.html
-http://lists.openembedded.org/pipermail/openembedded-core/2016-December/130155.html
+Without this change in qtwayland_git.bb:
 
+-    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xcompositor xkb glx', =
+'', d)} \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xcomposite-egl xcompos=
+ite-glx', '', d)} \
 
-The revert fix in Core has been sitting in my staging branch
-https://git.yoctoproject.org/cgit/cgit.cgi/poky-contrib/log/?h=akuster/morty-next 
-since Dec 11th.
+I can build again with that configuration.
 
-- Armin
+> > PACKAGECONFIG_DISTRO =3D "sql-sqlite icu glib accessibility mtdev examp=
+les
+> > fontconfig"
+> >
+> > QT_CONFIG_FLAGS +=3D "-qpa wayland-egl"
+> >
+> > from meta-luneui/recipes-qt/qt5/qtbase_git.bbappend
+> >
+> > and
+> > PACKAGECONFIG_append_pn-qtbase =3D " freetype fontconfig"
+> > from world_fixes.inc
+> > http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.world.qemuarm.2=
+0161217_135213.log/world_fixes.inc
+> >>
+> >>>
+> >>> Is the configure more strict in new version or do we need to change t=
+he
+> >>> default config for qtwayland builds?
+> >>>
+> >>>>
+> >>>> -samuli
+> >>>>
+> >>>> On 15.12.2016 15:48, Samuli Piippo wrote:
+> >>>>> The linux-oe-g++ mkspec is changed to use $$(...) operator to obtain
+> >>>>> the contents of an environment value when qmake is run instead of w=
+hen
+> >>>>> Makefile is processed. All OE_QMAKE_xxx variables need to be export=
+ed
+> >>>>> for qmake to find them. configure's setBootstrapVariable function n=
+eeds
+> >>>>> to change $$(..) to normal $(...) operator to work with qmake's Mak=
+efile.
+> >>>>>
+> >>>>> qt.conf generation for qtbase recipes is not needed, as configure w=
+ill
+> >>>>> generate its own version based on configure arguments. Skip running
+> >>>>> qmake, since configure is now automatically invoked when it's run in
+> >>>>> qtbase's root folder.
+> >>>>>
+> >>>>> Update PACKAGECONFIGs for qtbase to match current configure options.
+> >>>>>
+> >>>>> The new Qt configuration system [1] can be used with a new variable
+> >>>>> EXTRA_QMAKEVARS_CONFIGURE, which takes both command line and feature
+> >>>>> arguments.
+> >>>>>
+> >>>>> Merge the two qtwayland recipes to one that supports all three targ=
+ets
+> >>>>> (target, native, nativesdk) without need for additional patch.
+> >>>>>
+> >>>>> [1] https://www.mail-archive.com/development@qt-project.org/msg2525=
+7.html
+> >>>>>
+> >>>> --
+> >>>> _______________________________________________
+> >>>> Openembedded-devel mailing list
+> >>>> Openembedded-devel@lists.openembedded.org
+> >>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>>
+> >>>
+> >>>
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> >
+> >
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
->
->
-> On 21-12-16 02:33, akuster808 wrote:
->>
->>
->> On 12/20/2016 03:53 AM, Andreas Müller wrote:
->>> On Tue, Dec 20, 2016 at 10:54 AM, Mike Looijmans
->>> <mike.looijmans@topic.nl> wrote:
->>>> With current "morty" branches of OE-core and meta-openembedded, a 
->>>> build of
->>>> an xfce desktop image fails:
->> There is a patch pending merge to Morty sitting in my morty-next
->>
->> http://git.yoctoproject.org/cgit/cgit.cgi/poky-contrib/commit/?h=akuster/morty-next&id=4cb131f10885a84489cbcd3750a45f64f0547cda 
->>
->>
->>
->> I will send a pull request.
->>
->> - armin
->>>>
->>>> NOTE: Resolving any missing task queue dependencies
->>>> ERROR: Nothing PROVIDES 'libwnck3' (but
->>>> /.../meta-oe/meta-xfce/recipes-panel-plugins/hotcorner/xfce4-hotcorner-plugin_0.0.2.bb 
->>>>
->>>>
->>>> DEPENDS on or otherwise requires it). Close matches:
->>>>    libwnck
->>>> NOTE: Runtime target 'xfce4-hotcorner-plugin' is unbuildable, 
->>>> removing...
->>>> Missing or unbuildable dependency chain was: 
->>>> ['xfce4-hotcorner-plugin',
->>>> 'libwnck3']
->>>> NOTE: Runtime target 'packagegroup-xfce-extended' is unbuildable,
->>>> removing...
->>>> Missing or unbuildable dependency chain was: 
->>>> ['packagegroup-xfce-extended',
->>>> 'xfce4-hotcorner-plugin', 'libwnck3']
->>>> NOTE: Runtime target 'desktop-image' is unbuildable, removing...
->>>> Missing or unbuildable dependency chain was: ['desktop-image',
->>>> 'packagegroup-xfce-extended', 'xfce4-hotcorner-plugin', 'libwnck3']
->>>>
->>>>
->>>>
->>>>
->>>> Kind regards,
->>>>
->>>> Mike Looijmans
->>>> System Expert
->>>>
->>>> TOPIC Products
->>>> Materiaalweg 4, NL-5681 RJ Best
->>>> Postbus 440, NL-5680 AK Best
->>>> Telefoon: +31 (0) 499 33 69 79
->>>> E-mail: mike.looijmans@topicproducts.com
->>>> Website: www.topicproducts.com
->>>>
->>>> Please consider the environment before printing this e-mail
->>>>
->>>>
->>> So we need in morty at least
->>>
->>> commit 5b0060bbbacf405405e292e8a8e5db9589f63325
->>> Author: Alexander Kanavin <alexander.kanavin@linux.intel.com>
->>> Date:   Tue Nov 1 17:28:21 2016 +0200
->>>
->>>      libwnck3: add a recipe
->>>
->>>      It is no longer needed in oe-core.
->>>
->>>      Signed-off-by: Alexander Kanavin 
->>> <alexander.kanavin@linux.intel.com>
->>>      Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->>>
->>>
->>> and maybe (don't know the status of gnome.bbclass in morty) - but
->>> should not do any harm
->>>
->>> commit 3be9eea720ba70fd3a9e4744401fd268e31731f8
->>> Author: Khem Raj <raj.khem@gmail.com>
->>> Date:   Mon Dec 5 18:36:21 2016 -0800
->>>
->>>      libwnck3: Add missing dependency on gnome-common-native
->>>
->>>      Fixes configure errors
->>>      ../libwnck-3.20.1/configure: line 13391: syntax error near
->>> unexpected token `maximum'
->>>      ../libwnck-3.20.1/configure: line 13391: 
->>> `GNOME_COMPILE_WARNINGS(maximum)'
->>>
->>>      Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>>      Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->>
->
->
->
-> Kind regards,
->
-> Mike Looijmans
-> System Expert
->
-> TOPIC Products
-> Materiaalweg 4, NL-5681 RJ Best
-> Postbus 440, NL-5680 AK Best
-> Telefoon: +31 (0) 499 33 69 79
-> E-mail: mike.looijmans@topicproducts.com
-> Website: www.topicproducts.com
->
-> Please consider the environment before printing this e-mail
->
->
->
->
->
+--6zdv2QT/q3FMhpsV
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
+-----BEGIN PGP SIGNATURE-----
 
+iFwEARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWGqgVwAKCRA3VSO3ZXaA
+HIfgAJQPP0LDsDqKOM/BA9oKeXbTJeXTAKCmaDq5vASIgSTxwL3pzrE4EkJVHQ==
+=mxq3
+-----END PGP SIGNATURE-----
+
+--6zdv2QT/q3FMhpsV--
