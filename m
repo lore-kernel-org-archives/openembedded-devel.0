@@ -1,46 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 244F260248
+Return-Path: <oleksandr.kravchuk@pelagicore.com>
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 702DD605C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Jan 2017 22:33:40 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id l2so58571593wml.2
+	Tue,  3 Jan 2017 07:14:09 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id c85so192922850wmi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Jan 2017 14:33:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=SISu6Gn4uEzKHYb++ugRdBs7GLbiq5svEdWeA/Ow9Oc=;
-	b=H50Gt8Jx8/YhKv1AbYdtfQZOlRkjfjxOc4jz7OuONEWH/Yy/x7NviLTPAxt8jJ9NDE
-	U+sLcaYExTYMiy6GtLoxWWReSFS4hcboykI4iQ77ot0NwEi0yTp4Jqs2G0WWBcYha17B
-	nEIqmM4t9EQEt1WI17Ick4kkphMV4yYGvrR2hOHD7wJ2fipCK3eSfeNmhsEj5lo5jUWh
-	r2qZB2nXGjNvP/jRX93CaXO3hM0L2ADZWac91+oJ19feW+S09lIKfHLqajzGkrAgBbcc
-	fTGfqwvGf9t/0GNlkzXf6gBWSfVsV8yx+XpCn+EMn5P2ooWWq4iSaq6jtrXfWg+yBVSW
-	R8nQ==
+	Mon, 02 Jan 2017 23:14:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=hqQchCzhdCSXCpyE0oaqjj6Z/ek2DgCz64oAnZyvl1k=;
+	b=EbzextQ3ci90YQ/ISWFcnbHxxki5TQnq+d5zBBNJrXdkxPHRASKQr1XCRDT0UFJg/y
+	paqscNMSj00NdJauKOPYhn/hIlByL1DCycac+raX7DdDAWiKzy++XqMVGUq3LSSfuMAz
+	/HE6F45JKmGTg/jPKUeU4jPcSBNPo54Mjc0yOeHmqygkAf2ibGhk3iPF7ERUFRoKsH+B
+	Hlo7WDH769fQhXKj0AR2l92oQ6m4AeNFYjXxyLmzi+Mc+3SC0LUgIDfiHpbEKgqipqHi
+	Op8opcWf1DkP8EA7FAKC3gKdnyKLEcEp+ypW2Wf89Wkp8bDn2DNlh6jGjRE/tRwbDfPO
+	3qKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=SISu6Gn4uEzKHYb++ugRdBs7GLbiq5svEdWeA/Ow9Oc=;
-	b=KSUNYj5hJd/WjBtdhXGGsPJxIukpYA2pj+GfR4miqCQMXUbX0NRRICFUVW00A4ndBs
-	gAowRqVpqaH3Jk11AuDMI0oKC38wsgXJh073ePkGvBr4xQzx1dhQ1MDHP5wQQDbcjGLI
-	yJ1A63DALETfoiKdqK+7KAIxzbrzxOYZORqZVKPyRqVf+E1GCMhS+QVvYb+eoBx72CYx
-	T9LCzn+otAJdIX+x6iwJdXtFLZad19QEVRh7DPgeJA/p/Qz2ta9e2G9eokROUAb5b0Gp
-	mbs9nWj+0LXCnIH35/y6MTLIk/wvEswx26HicDbIhq+qwDROTii5Du3ylLp1x2MlYm7y
-	udKw==
-X-Gm-Message-State: AIkVDXK63j+8y1nGJTdE0W42E65zcTQknYMi3fTJIGpUDu3gis9V2jHcIxzB5KU800kY/w0FliglPFAM1COMYA==
-X-Received: by 10.28.18.194 with SMTP id 185mr50351860wms.124.1483396420772;
-	Mon, 02 Jan 2017 14:33:40 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.80.148.174 with HTTP; Mon, 2 Jan 2017 14:33:40 -0800 (PST)
-In-Reply-To: <20161227190617.6358-1-haris.okanovic@ni.com>
-References: <20161222200250.23273-1-haris.okanovic@ni.com>
-	<20161227190617.6358-1-haris.okanovic@ni.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 2 Jan 2017 23:33:40 +0100
-Message-ID: <CA+chaQc2H42_1M5Asu8XDJnRW=SWgWSjn=yGCaL4+vBbJ2DcvQ@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Haris Okanovic <haris.okanovic@ni.com>
-Subject: Re: [meta-oe][PATCH v2] hwloc: Add
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=hqQchCzhdCSXCpyE0oaqjj6Z/ek2DgCz64oAnZyvl1k=;
+	b=rtSgtGUBd6DSkLBg6/177nbj9JoHwQcMPCwBNkz+5Z1pEx2lmvdfiNtJk16ly0d9Ek
+	3cSyniFvoMCbCzYwH5DSHC2XstJk0dRfarKYJhUkV1NB6m4jLdAAjxSpSDFy3w0HffNt
+	PEiLa6i3VilV5ac+DOgQ7yREVv/vYfRQK0UzShpQLnwcZpvZzaKR4pFmsxZWJIxAeGzJ
+	rf3IQgIH6Y1bQF4HENkNx/JqZ9IiBq8UqYzhq/WP/Zl1fIc+w70inYkz2VzgzjJhat3/
+	+iNONQxCoeUfi/jMY0NhAKHUYUc36iL6uo9Mx/5MWqjE+Pq0qtvmNgpgYL5qVkeTjI3e
+	x49w==
+X-Gm-Message-State: AIkVDXKxfc/7kz+gwkjGaIc3FAl6jnVhClui7kw5P0vGKsP3t0kVWpR/48KcJoBob/HSxdMi
+X-Received: by 10.28.7.197 with SMTP id 188mr41287608wmh.26.1483427649643;
+	Mon, 02 Jan 2017 23:14:09 -0800 (PST)
+Received: from stout.office.pelagicore.net ([83.218.80.242])
+	by smtp.gmail.com with ESMTPSA id
+	l187sm88299065wml.6.2017.01.02.23.14.08
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 02 Jan 2017 23:14:08 -0800 (PST)
+From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  3 Jan 2017 08:13:53 +0100
+Message-Id: <1483427633-28539-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-devtools][PATCH] mercurial: upgrade to 4.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,74 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Jan 2017 22:33:41 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 03 Jan 2017 07:14:12 -0000
 
-By ${PN}_RDEPENDS you probably meant RDEPENDS_${PN}.
+Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+---
+ .../{mercurial-native_3.8.4.bb => mercurial-native_4.0.1.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/mercurial/{mercurial-native_3.8.4.bb => mercurial-native_4.0.1.bb} (82%)
 
-On Tue, Dec 27, 2016 at 8:06 PM, Haris Okanovic <haris.okanovic@ni.com>
-wrote:
+diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_3.8.4.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb
+similarity index 82%
+rename from meta-oe/recipes-devtools/mercurial/mercurial-native_3.8.4.bb
+rename to meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb
+index 0526fc2..028bb42 100644
+--- a/meta-oe/recipes-devtools/mercurial/mercurial-native_3.8.4.bb
++++ b/meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ DEPENDS = "python-native"
+ 
+ SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz"
+-SRC_URI[md5sum] = "cec2c3db688cb87142809089c6ae13e9"
+-SRC_URI[sha256sum] = "4b2e3ef19d34fa1d781cb7425506a05d4b6b1172bab69d6ea78874175fdf3da6"
++SRC_URI[md5sum] = "22a9b1d7c0c06a53f0ae5b386d536d08"
++SRC_URI[sha256sum] = "6aa4ade93c1b5e11937820880a466ebf1c824086d443cd799fc46e2617250d40"
+ 
+ S = "${WORKDIR}/mercurial-${PV}"
+ 
+-- 
+2.7.4
 
-> https://www.open-mpi.org/projects/hwloc/
->
-> "The Portable Hardware Locality (hwloc) software package provides a
-> portable abstraction (across OS, versions, architectures, ...) of the
-> hierarchical topology of modern architectures, including NUMA memory
-> nodes, sockets, shared caches, cores and simultaneous multithreading.
-> It also gathers various system attributes such as cache and memory
-> information as well as the locality of I/O devices such as network
-> interfaces, InfiniBand HCAs or GPUs."
->
-> This recipe adds libhwloc and lstopo utility as two packages.
->
-> Testing: Built in OE/Krogoth. Installed to x86_64 machine. Successfully
-> ran `lstopo` and verified it printed correct CPU and cache info.
->
-> Signed-off-by: Haris Okanovic <haris.okanovic@ni.com>
-> ---
->  meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb | 22
-> ++++++++++++++++++++++
->  1 file changed, 22 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
->
-> diff --git a/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-> b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-> new file mode 100644
-> index 0000000..812f70d
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-> @@ -0,0 +1,22 @@
-> +SUMMARY = "Portable Hardware Locality (hwloc) software package"
-> +DESCRIPTION = "The Portable Hardware Locality (hwloc) software package \
-> + provides a portable abstraction of the hierarchical topology of modern \
-> + architectures."
-> +HOMEPAGE = "https://www.open-mpi.org/software/hwloc/"
-> +SECTION = "base"
-> +LICENSE = "BSD"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=3282e20dc3cec311deda3c6d4b1f990b"
-> +
-> +SRC_URI = "https://www.open-mpi.org/software/${PN}/v1.11/
-> downloads/${BP}.tar.bz2"
-> +SRC_URI[md5sum] = "96c34136ff416d2b13a7821c27477bed"
-> +SRC_URI[sha256sum] = "95d80286dfe658a3f79e2ac9069878
-> 2bb36e5504f4bac1bba2394ba14dbbad24"
-> +
-> +inherit autotools
-> +
-> +# Split hwloc library into separate subpackage
-> +PACKAGES_prepend = " lib${PN} "
-> +FILES_lib${PN} += "${libdir}/lib${PN}.so*"
-> +${PN}_RDEPENDS += "lib${PN}"
-> +
-> +# XXX dev-so QA check doesn't like soname symlinks in non-dev packages
-> +INSANE_SKIP_lib${PN} += "dev-so"
-> --
-> 2.10.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
