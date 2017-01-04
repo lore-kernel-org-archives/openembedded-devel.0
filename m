@@ -1,51 +1,31 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CB2A71987
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 6B8C16FFA1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jan 2017 01:27:37 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id c85so50921186wmi.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Jan 2017 17:27:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=QgzrCC2olezYWTIVJdFdAedZzWB+d1ea8vq0l8Ewt7Y=;
-	b=jOTi/db5QsteDp3/yFgoflkxGg+Z6XI/jgzx8Tb29z87q8pK3cWFqfGO3SQB9vynM8
-	JTsyI0YfEKluLjBPKnI3P+XjgMpxGonZExcoM1byeA8uW/wWma3OpNtd5RxTj43u+zDE
-	5M77L9BCFQ5v6sN/e+O6lKBCpgSUdd4o0RKYV0pP67RkNwu50Q033qKuhjzMDhSf6SET
-	Q83W60TKXWn5ri3uCLCfzLRakg/UX6AbpKop4sPtJW7R/vbKMsNAc/suYJ1MYzCQfBfo
-	NkCRy084/LWs5YV5kq86wR9WPSVMkxcME0MYhCDlidUiwTUu8jah2ka/SCVWYDOPUCz7
-	UT/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=QgzrCC2olezYWTIVJdFdAedZzWB+d1ea8vq0l8Ewt7Y=;
-	b=H+N+kZzklURQvDeiW7/IiUMfooy8WJCO47Xqr7Znm6Drb6Xg0bfTit9UegHJt3t5q3
-	AmQhjolDh1yPUD+H+h9SlG6nYDzo39QDasAYfl6qjtixXaKlOf6OzlMZYgmThB0c7kUJ
-	HtiZPLlFG/8Koze6UddtsO93fTVkLAKbClyKJQMH9OAcXb8/5vsyxe1WiyLZ6oI4im0a
-	HaIF7uhTzlMoVkb5PzvZ7j80cPkmlMkmTUusunu6iCAF+afuGFBQ4MJsxMRGpC1aIx/B
-	ni4o2cwU1aed/ahC0jXoDupUe0D5lUTw94b1LxSLAU9O1TQVYaom3HCdvauotdyztKAF
-	3fHg==
-X-Gm-Message-State: AIkVDXJQl+iWeCLyPKtxfAlvTRMpLNv6VAgnzir/ws3bKXofzHFkM99EVlbV5Wmxy1bhnw==
-X-Received: by 10.28.139.131 with SMTP id n125mr56505217wmd.116.1483493257921; 
-	Tue, 03 Jan 2017 17:27:37 -0800 (PST)
-Received: from localhost.localdomain (p579CE4CA.dip0.t-ipconnect.de.
-	[87.156.228.202]) by smtp.googlemail.com with ESMTPSA id
-	i15sm95427825wjs.16.2017.01.03.17.27.36
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 03 Jan 2017 17:27:37 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Jan 2017 02:27:23 +0100
-Message-Id: <1483493243-30984-3-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.5.5
-In-Reply-To: <1483493243-30984-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1483493243-30984-1-git-send-email-schnitzeltony@googlemail.com>
+	Wed,  4 Jan 2017 15:38:26 +0000 (UTC)
+Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
+	by relay1.mentorg.com with esmtps (TLSv1:AES128-SHA:128)
+	id 1cOndy-00017t-NW from Joe_MacDonald@mentor.com ;
+	Wed, 04 Jan 2017 07:38:26 -0800
+Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
+	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
+	Wed, 4 Jan 2017 07:37:46 -0800
+Received: by burninator (Postfix, from userid 1000)	id 8AB01580AAC; Wed,  4
+	Jan 2017 10:37:45 -0500 (EST)
+Date: Wed, 4 Jan 2017 10:37:45 -0500
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20170104153745.GB28577@mentor.com>
+References: <1482309754-1281-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+	<FB7117A4-E946-4B3B-B6ED-0657F79BF136@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH][V2 2/2] raptor2: initial add 2.0.15
+In-Reply-To: <FB7117A4-E946-4B3B-B6ED-0657F79BF136@gmail.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking] [PATCH] opensaf: 5.0.0 -> 5.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,94 +38,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jan 2017 01:27:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 04 Jan 2017 15:38:29 -0000
+X-Groupsio-MsgNum: 64618
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Yylu36WmvOXNoKYn"
+Content-Disposition: inline
 
-* it is it in meta-office for a while. Now I need it in meta-qt5-extra too
-* LICENSE.txt summarizes all licenses and explains that ot is user's choice
-  which one to use
+--Yylu36WmvOXNoKYn
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- ...c-do-additional-checks-on-libxml2-also-wh.patch | 34 ++++++++++++++++++++++
- meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb  | 25 ++++++++++++++++
- 2 files changed, 59 insertions(+)
- create mode 100644 meta-oe/recipes-support/raptor2/files/0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch
- create mode 100644 meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb
+[Re: [oe] [meta-networking] [PATCH] opensaf: 5.0.0 -> 5.1.0] On 16.12.21 (W=
+ed 21:53) Khem Raj wrote:
 
-diff --git a/meta-oe/recipes-support/raptor2/files/0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch b/meta-oe/recipes-support/raptor2/files/0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch
-new file mode 100644
-index 0000000..7faeb13
---- /dev/null
-+++ b/meta-oe/recipes-support/raptor2/files/0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch
-@@ -0,0 +1,34 @@
-+From 3f97aac5a1f43ef57b02fb9ccdcadd41a6b69fa9 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Tue, 27 Oct 2015 10:21:24 +0100
-+Subject: [PATCH] configure.ac: do additional checks on libxml2 also when
-+ detected by pkg-config
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Upstream-Status: Applied [1]
-+
-+[1] https://github.com/dajobe/raptor/pull/33
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ configure.ac | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 10ff870..35fa08e 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -601,7 +601,7 @@ have_libxml=0
-+ need_libxml=0
-+ 
-+ oCPPFLAGS="$CPPFLAGS"
-+-if test "X$XML_CONFIG" != X; then
-++if test "X$libxml_source" != X; then
-+   CPPFLAGS="$LIBXML_CFLAGS $CPPFLAGS"
-+   LIBS="$LIBS $LIBXML_LIBS"
-+   AC_CHECK_FUNC(xmlCreatePushParserCtxt, have_xmlCreatePushParserCtxt=yes, have_xmlCreatePushParserCtxt=no)
-+-- 
-+2.1.0
-+
-diff --git a/meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb b/meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb
-new file mode 100644
-index 0000000..8c6d008
---- /dev/null
-+++ b/meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "Library for parsing and serializing RDF syntaxes"
-+LICENSE = "GPLv2 | LGPLv2.1 | Apache-2.0"
-+LIC_FILES_CHKSUM = " \
-+    file://LICENSE.txt;md5=2d5025d4aa3495befef8f17206a5b0a1 \
-+    file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
-+    file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
-+    file://LICENSE-2.0.txt;md5=2d5025d4aa3495befef8f17206a5b0a1 \
-+"
-+
-+DEPENDS = "libxml2 libxslt curl yajl"
-+
-+SRC_URI = " \
-+    http://download.librdf.org/source/${BPN}-${PV}.tar.gz \
-+    file://0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch \
-+"
-+SRC_URI[md5sum] = "a39f6c07ddb20d7dd2ff1f95fa21e2cd"
-+SRC_URI[sha256sum] = "ada7f0ba54787b33485d090d3d2680533520cd4426d2f7fb4782dd4a6a1480ed"
-+
-+inherit autotools pkgconfig
-+
-+EXTRA_OECONF = " \
-+    --without-xml2-config \
-+    --without-curl-config \
-+    --without-xslt-config \
-+"
--- 
-2.5.5
+>=20
+> > On Dec 21, 2016, at 12:42 AM, Huang Qiyu <huangqy.fnst@cn.fujitsu.com> =
+wrote:
+> >=20
+> > 1)Upgrade opensaf from 5.0.0 to 5.1.0.
+> > 2)Modify meta_oe_security_flags.inc to fix error:
+> >  /
+> >  | collect2: error: ld returned 1 exit status
+> >  | Makefile:542: recipe for target 'librda.la' failed
+> >  | make[6]: *** [librda.la] Error 1
+> >  \
+> >=20
+> > Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+> > ---
+> > .../recipes-daemons/opensaf/{opensaf_5.0.0.bb =3D> opensaf_5.1.0.bb}   =
+ | 4 ++--
+> > meta-oe/conf/distro/include/meta_oe_security_flags.inc                |=
+ 1 +
+> > 2 files changed, 3 insertions(+), 2 deletions(-)
+> > rename meta-networking/recipes-daemons/opensaf/{opensaf_5.0.0.bb =3D> o=
+pensaf_5.1.0.bb} (94%)
+> >=20
+> > diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb b=
+/meta-networking/recipes-daemons/opensaf/opensaf_5.1.0.bb
+> > similarity index 94%
+> > rename from meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb
+> > rename to meta-networking/recipes-daemons/opensaf/opensaf_5.1.0.bb
+> > index 6ceb225..be903a0 100644
+> > --- a/meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb
+> > +++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.1.0.bb
+> > @@ -21,8 +21,8 @@ SRC_URI =3D "${SOURCEFORGE_MIRROR}/${BPN}/releases/${=
+BPN}-${PV}.tar.gz \
+> >            file://0001-plmcd-error-fix.patch \
+> >            "
+> >=20
+> > -SRC_URI[md5sum] =3D "94cd1a4c0406e6a45bb04c003f8690e7"
+> > -SRC_URI[sha256sum] =3D "4b4188a0f3d0ed1ed0e3d77de27c45e2c96b437401de08=
+e7df2ed9ecd54bb999"
+> > +SRC_URI[md5sum] =3D "821391311c73bc2f2dc5a7d867f732e0"
+> > +SRC_URI[sha256sum] =3D "f687c883a0d50517c33cb445d9177a9e2b07f5bb077bcc=
+0235ffc0fc99af5cb6"
+> >=20
+> > inherit autotools useradd systemd pkgconfig
+> >=20
+> > diff --git a/meta-oe/conf/distro/include/meta_oe_security_flags.inc b/m=
+eta-oe/conf/distro/include/meta_oe_security_flags.inc
+> > index 815fb16..01ee4d4 100644
+> > --- a/meta-oe/conf/distro/include/meta_oe_security_flags.inc
+> > +++ b/meta-oe/conf/distro/include/meta_oe_security_flags.inc
+> > @@ -25,3 +25,4 @@ SECURITY_CFLAGS_pn-libvdpau =3D "${SECURITY_NO_PIE_CF=
+LAGS}"
+> > #| make[1]: *** [Makefile:675: libluajit.so] Error 1
+> > SECURITY_CFLAGS_pn-luajit =3D "${SECURITY_NO_PIE_CFLAGS}"
+> >=20
+> > +SECURITY_CFLAGS_pn-opensaf =3D "${SECURITY_NO_PIE_CFLAGS}=E2=80=9D
+>=20
+> I was wondering if it would make sense to move tweaking SECURITY_FLAGS
+> in the recipe proper for all the exceptions that we manage in the conf
+> metadata=20
 
+Makes sense to me, having it over in meta_oe_security_flags.inc seems a
+little confusing for someone who doesn't know to look there.  If there's
+no objection, I'll just tweak this patch appropriately during the merge.
 
+-J.
+
+>=20
+> > --=20
+> > 2.7.4
+> >=20
+> >=20
+> >=20
+> > --=20
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+--=20
+-Joe MacDonald.
+:wq
+
+--Yylu36WmvOXNoKYn
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJYbRbJAAoJEEn8ffcsOfaW9EIH/jT4IU/eoxDbFDurX/aN65Ps
+Q0oYpk5wpxSyGqe4oVGuAgccwMIuSfxsDHofGQRsO9yNMDyK7c/DLLhGveUjdjsF
+XYTdAafyJ0kNMzhiLwXW0NDw1qVSSpMu7rKkYHbE0WlCIRGZGeHSycar+JHMLYjl
+IHU+nMi9gjLTq22rPjuliV68Rf5ueZLX1gMQFGJv76xQGoverZ6ozuoLkgvwimsz
+9Pxppc7y3KnqU3IMwE9+6CqJOHJXCzTumBqppJwHhNxUqD0UrElCpZ2L20L6emp2
+XHY01k/Jf6vRoq1XnTVl/WprzCG6RY4qaxioCGE9yUrvnP4w/6BuCep2TdFOo80=
+=JXiU
+-----END PGP SIGNATURE-----
+
+--Yylu36WmvOXNoKYn--
