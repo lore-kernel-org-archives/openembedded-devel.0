@@ -1,45 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-vk0-f41.google.com (mail-vk0-f41.google.com
-	[209.85.213.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 74F6B6E668
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ua0-f174.google.com (mail-ua0-f174.google.com
+	[209.85.217.174])
+	by mail.openembedded.org (Postfix) with ESMTP id E23F06010B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Jan 2017 17:07:39 +0000 (UTC)
-Received: by mail-vk0-f41.google.com with SMTP id 137so276944946vkl.0
+	Wed,  4 Jan 2017 00:56:41 +0000 (UTC)
+Received: by mail-ua0-f174.google.com with SMTP id 34so298034951uac.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Jan 2017 09:07:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	Tue, 03 Jan 2017 16:56:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-transfer-encoding;
-	bh=phLlsJrV9nqNvmOBYB9y4toWJEc/QdtkqJ5xLY19ggE=;
-	b=dVGDOzbRxo6dyADP3LfdRwxUKogmUNMPm3RoRhtjCAVSDGflSkRSZpd/ROgLutwJqD
-	ZnfOAfbI/KdYz22m7YU5rAcgzvbUh9n6LkLXaYA69WrQboVn8eiV1+US8QKEH8eJz6Mg
-	uV+3+HIX0rui2I2QwjB9Y8sfpDk5cL/wWhXBg5Jn4gN1gSHgTNE0KdxsHRvfWlaM66Jy
-	G2eAkNQUyiamq+ExF7xYUGpUw5noaE0DYszycBu1QuJLezJgew9EQwtnByRUHrbVwgNQ
-	i+43QkydfafFvUL3fn/6vF3AOvdqBoTqquBWvw118w4Uh/sBxI3qT/1xmOgv1/ZhXJTl
-	c3pQ==
+	bh=vSLFtOJGoCZ7/F8E3bDS7E3Pvk4UmmK4ibSStz41NOc=;
+	b=sb/scMQMjh5JyhUIfL5+GQme8QHFYOKrMfG40Uji6JQpe+zZqhL4NH4TTgTug3ujrj
+	JQn3rQ73huvA/WQDEeLYGDhsxnPcx5bnvBWu5ldU1mrV3H8lljUCeroS4GyME3sMxqvF
+	eEnwhIms7qVP5Q23gI43/ZSXoDjFvXEwZzRJQUiZTfvcdRI7qcvB4hMuernuAFhgbDJw
+	uMknbNfXcLIpQ6wa5W9vbARQxpEG2Qgl/fujY8UgF76MZzBdubDs4kamZ55k/ui/NvBF
+	91yWBTDCX5sxmWd7txfXSjO9Y6nm0khn/50ZTYo6dqy5IPjMuKmHdAWP9LtqvU1vtPOQ
+	iaCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:content-transfer-encoding;
-	bh=phLlsJrV9nqNvmOBYB9y4toWJEc/QdtkqJ5xLY19ggE=;
-	b=qeYnjbcZKdgAJAajGbFb0E8ASlqZ026dAPP5tpSgFB57YvyRXr0yBIvsFfE5VXq88Q
-	/ZG6U6SMeKuFPGfO1PKlTg3SC1vJlPYXbZkkTsLithsjXvasCAuTF/f4LYJjsFVZXW68
-	STofcPj9ct/JTBZHz6cehzGntzFtrOLFOfmPaCM1PuHq15lkMQqbIkyR2V4hbUmjeQLG
-	FZUjlmlwnF9utXTGSz/OOSTDuTr7pKHuqirXGaLJ36lHyVZlfdprgSz1sC6uft7almaD
-	O9Fr+NzHsHQytNXJgeSBmquL0wwWrPyER6lcbalBUIAjjmIhcloHYBOk6oCyxmUSbGtQ
-	p8kQ==
-X-Gm-Message-State: AIkVDXJKRg2gTt7RtCdz//DgZEf3hpVrTNmYNlbjBdDBsr+OwvNpeALokW7SPbxK9X4Cv7P/h0M2YDbuo0uuOg==
-X-Received: by 10.31.234.199 with SMTP id i190mr21725063vkh.31.1483463259687; 
-	Tue, 03 Jan 2017 09:07:39 -0800 (PST)
+	bh=vSLFtOJGoCZ7/F8E3bDS7E3Pvk4UmmK4ibSStz41NOc=;
+	b=TXSzcWAMU88wQ1DFZpEa5jea6OSycicHeTYyICm32dzLLMBqgOeO+GCRN0v/iMR9xO
+	ZJScAU32OS0ZGV7SyeArdM6yggoV8Y6aephipbyeB6kWNeEuRZCOwraPHQNSEz1cs89w
+	xJvPwATYYIcrLA+Ip1McZqHDXwAlandjgefHn3xJlWIkzMZGznx9tsEv7UnSPUSNN1So
+	RPdpp0CLpeqOXPmpna+T31ieUO8FQpRbf2HpYqF1esVPuP31/T0H/xZuQV1qUEB8Sm9F
+	nKApoIvHbwf5LxhkKHEw0Xwc4anJjnB1xk6Lyg/uak9jK58XsNiJLYTU6w+epHwlzxOa
+	yX1Q==
+X-Gm-Message-State: AIkVDXI82wRRiSDEBfN/ZwfHNULpH8h5v3PvwtDQPuWz3FYebDmd4kK6KuJkuQynXnVzM7GktKdX+aQFcpNU6g==
+X-Received: by 10.159.35.19 with SMTP id 19mr48946585uae.47.1483491401549;
+	Tue, 03 Jan 2017 16:56:41 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.159.48.87 with HTTP; Tue, 3 Jan 2017 09:07:09 -0800 (PST)
-In-Reply-To: <1483462910-24912-2-git-send-email-schnitzeltony@googlemail.com>
+Received: by 10.176.85.157 with HTTP; Tue, 3 Jan 2017 16:56:41 -0800 (PST)
+In-Reply-To: <CAMKF1so8B_AXK4AyB4YTveyRe23Z-hoq7c-C5xSa9E3KrcykMA@mail.gmail.com>
 References: <1483462910-24912-1-git-send-email-schnitzeltony@googlemail.com>
 	<1483462910-24912-2-git-send-email-schnitzeltony@googlemail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 3 Jan 2017 09:07:09 -0800
-Message-ID: <CAMKF1so8B_AXK4AyB4YTveyRe23Z-hoq7c-C5xSa9E3KrcykMA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+	<CAMKF1so8B_AXK4AyB4YTveyRe23Z-hoq7c-C5xSa9E3KrcykMA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Wed, 4 Jan 2017 01:56:41 +0100
+Message-ID: <CALbNGRREnqfg_MQE3awdgALu=4RYMh+uqc7Zn7gj_mXBYoa=YQ@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH 2/2] raptor2: initial add 2.0.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -53,13 +56,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Jan 2017 17:07:40 -0000
+X-List-Received-Date: Wed, 04 Jan 2017 00:56:42 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 3, 2017 at 9:01 AM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> +LICENSE =3D "GPLv2 | LGPLv2"
+On Tue, Jan 3, 2017 at 6:07 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Tue, Jan 3, 2017 at 9:01 AM, Andreas M=C3=BCller
+> <schnitzeltony@googlemail.com> wrote:
+>> +LICENSE =3D "GPLv2 | LGPLv2"
+>
+> minor nit. It should be LGPL-2.1
+> --
+Correct & thanks. A here and there polished V2 comes after final test.
 
-minor nit. It should be LGPL-2.1
+Andreas
 
