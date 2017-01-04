@@ -1,42 +1,61 @@
-Return-Path: <haris.okanovic@ni.com>
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mail.openembedded.org (Postfix) with ESMTP id 0413B6B6EA
+Return-Path: <jaragunde@igalia.com>
+X-Greylist: delayed 587 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 04 Jan 2017 18:21:37 UTC
+Received: from smtp4.mundo-r.com (smtp3.mundo-r.com [212.51.32.191])
+	by mail.openembedded.org (Postfix) with ESMTP id D830C7199F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jan 2017 16:20:48 +0000 (UTC)
-Received: from us-aus-exch2.ni.corp.natinst.com
-	(us-aus-exch2.ni.corp.natinst.com [130.164.68.12])
-	by us-aus-skprod2.natinst.com (8.15.0.59/8.15.0.59) with ESMTPS id
-	v04GKmFg009910
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 4 Jan 2017 10:20:48 -0600
-Received: from us-aus-exch4.ni.corp.natinst.com (130.164.68.14) by
-	us-aus-exch2.ni.corp.natinst.com (130.164.68.12) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Wed, 4 Jan 2017 10:20:48 -0600
-Received: from us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) by
-	us-aus-exch4.ni.corp.natinst.com (130.164.68.14) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Wed, 4 Jan 2017 10:20:47 -0600
-Received: from harisdt.amer.corp.natinst.com (130.164.49.7) by
-	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Wed, 4 Jan 2017 10:20:48 -0600
-From: Haris Okanovic <haris.okanovic@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 4 Jan 2017 10:20:43 -0600
-Message-ID: <20170104162043.15103-1-haris.okanovic@ni.com>
-X-Mailer: git-send-email 2.10.1
-In-Reply-To: <CA+chaQc2H42_1M5Asu8XDJnRW=SWgWSjn=yGCaL4+vBbJ2DcvQ@mail.gmail.com>
-References: <CA+chaQc2H42_1M5Asu8XDJnRW=SWgWSjn=yGCaL4+vBbJ2DcvQ@mail.gmail.com>
+	Wed,  4 Jan 2017 18:21:37 +0000 (UTC)
+IronPort-PHdr: =?us-ascii?q?9a23=3AJo1XQBJ9HjXsvSIlytmcpTZWNBhigK39O0sv0rFi?=
+	=?us-ascii?q?tYgXKvz5rarrMEGX3/hxlliBBdydsKMYzbOL+Pm4CSQp2tWoiDg6aptCVhsI24?=
+	=?us-ascii?q?09vjcLJ4q7M3D9N+PgdCcgHc5PBxdP9nC/NlVJSo6lPwWB6nK94iQPFRrhKAF7?=
+	=?us-ascii?q?Ovr6GpLIj8Swyuu+54Dfbx9GiTe5br5+Ngi6oAXeusULnYdvKbs6xwfUrHdPZ+?=
+	=?us-ascii?q?lY335jK0iJnxb76Mew/Zpj/DpVtvk86cNOUrj0crohQ7BAAzsoL2465MvwtRne?=
+	=?us-ascii?q?VgSP/WcTUn8XkhVTHQfI6gzxU4rrvSv7sup93zSaPdHzQLspVzmu87tnRRn1gy?=
+	=?us-ascii?q?oBKjU38nzYitZogaxbvhyvuhJxzY3Tbo6aKPVwcbjQfc8ZSGdbQspcTTBND4G6?=
+	=?us-ascii?q?YoASD+QBJ+FYr4zlqlUKtxSxGQ6sC/joyjRVmnL2x7c10+s8EQHAwQMvAc8Fvm?=
+	=?us-ascii?q?7Oq9XvKqgTUP2+wa7KzTrZdfNZwzj96JXOch88v/6BRrNwccXLxkkrFgPKlE+c?=
+	=?us-ascii?q?ppDiPzOQz+kAtXWQ4eRnVeKqkWEnqgdxryCgxsctlonJhp8VxUve+Splx4Y1IN?=
+	=?us-ascii?q?u1Q1N4b968CJZdszyWO5FrTs8/QWxkoiI3x7kctZKmfCUHyJIqzAPFZfOdaYiH?=
+	=?us-ascii?q?+BfjWf6UITd/mX1qZqqyhw238Ui80u38UdS00EpSoipFjNbMsncN2gTd6sedTP?=
+	=?us-ascii?q?t8/0ah2TCR2AzJ6+FELlo7la7aK5E72LI/ip0TsUHbEi/3nkX5krOWe10g9+S1?=
+	=?us-ascii?q?8ejrf6jqq52GO4JwjgzyKLkil8y/DOggNwgBRWmb+eCy1L35+k35Ra1Hjv8sna?=
+	=?us-ascii?q?nDqp/aKtkbpqikDABLyYsj6hm/AC2i0NQZh3YLNk5KeBWCj4TxIVHBPOj4Deuj?=
+	=?us-ascii?q?g1SriDprwOjGMaPnAprTK3jMi6nucqtg5EFC1QU/1M1Q6IxKCr4fJPL+QUvxtN?=
+	=?us-ascii?q?3DDh8lKAy42eHnCM1j2YMYR22PB7SWP73PvlCV+O0gPvOAZIgPuDbyM/Il/eLh?=
+	=?us-ascii?q?jWclmV8BeqmkxYUYaGq5Hvt6OEiWf2fsgtQbEWgUpAUyVvDliFqHUTRLfXa9Q7?=
+	=?us-ascii?q?o85i0nCIKhFYrMW56igLqA3CegBZBZeH1GClOWEXj2bYqIQesDaCWXIsV5iDwL?=
+	=?us-ascii?q?SaChS5M91RGprAL6zKZnIfDK+i0ZspLuz9915/bIlRAy7jx0E9qS02SWT21ugm?=
+	=?us-ascii?q?wIQDo20LpkrkxnmR+/1v1/m/FeGNlZ6v9FXwt/OZPCwuhSD9HpRhmHec+ETluj?=
+	=?us-ascii?q?SNiqDTw9CNUrzIwgeUF4TverhRfJ2GKDGbYairqHCdQMc7jRzTClJc9nwnnb0q?=
+	=?us-ascii?q?Usp1gpS89OPCutgasppFubPJLAj0jMz/XiTq8bxiOYrGo=3D?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: =?us-ascii?q?A2DhAQBFOm1Y/5tjdVteHAEBBAEBCgEBF?=
+	=?us-ascii?q?wEBBAEBCgEBgw0BAQEBAR9fgQyNV3KkJoJCgg+CCBoMhXyBWD8UAQEBAQEBAQE?=
+	=?us-ascii?q?BAQFiKIIzGIJHDwFGNQImAnKIdAEJr0WCJYoqMoELhTqJc4IACy6CXgWbCYZWi?=
+	=?us-ascii?q?msCgkWOEkiReB84hXaBRz00AQGIMAEBAQ?=
+X-IPAS-Result: =?us-ascii?q?A2DhAQBFOm1Y/5tjdVteHAEBBAEBCgEBFwEBBAEBCgEBgw0?=
+	=?us-ascii?q?BAQEBAR9fgQyNV3KkJoJCgg+CCBoMhXyBWD8UAQEBAQEBAQEBAQFiKIIzGIJHD?=
+	=?us-ascii?q?wFGNQImAnKIdAEJr0WCJYoqMoELhTqJc4IACy6CXgWbCYZWimsCgkWOEkiReB8?=
+	=?us-ascii?q?4hXaBRz00AQGIMAEBAQ?=
+X-IronPort-AV: E=Sophos;i="5.33,459,1477954800"; d="scan'208";a="96000759"
+Received: from fanzine.igalia.com ([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 04 Jan 2017 19:11:49 +0100
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+	by fanzine.igalia.com with esmtps 
+	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
+	id 1cOq2P-00078p-Pk; Wed, 04 Jan 2017 19:11:49 +0100
+Received: from fanzine.local.igalia.com ([192.168.10.13]
+	helo=goomba.local.igalia.com) by mail.igalia.com with esmtps 
+	(Cipher TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim)
+	id 1cOq2N-0005HI-FV; Wed, 04 Jan 2017 19:11:47 +0100
+From: =?UTF-8?q?Jacobo=20Aragunde=20P=C3=A9rez?= <jaragunde@igalia.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  4 Jan 2017 19:11:32 +0100
+Message-Id: <1483553494-5687-1-git-send-email-jaragunde@igalia.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2017-01-04_12:, , signatures=0
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	suspectscore=1
-	malwarescore=0 phishscore=0 adultscore=0 bulkscore=0 classifier=spam
-	adjust=0 reason=mlx scancount=1 engine=8.0.1-1612050000
-	definitions=main-1701040255
-Cc: haris.okanovic@ni.com
-Subject: [meta-oe][PATCH v3] hwloc: Add
+Cc: denis@eukrea.com, otavio@ossystems.com.br, eric@eukrea.com
+Subject: [meta-browser][PATCH 1/3] chromium-wayland: always enable CHROMIUM_ENABLE_WAYLAND flag
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,59 +68,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jan 2017 16:20:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 04 Jan 2017 18:21:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-https://www.open-mpi.org/projects/hwloc/
+It makes no sense to trigger a build of chromium-wayland and not
+enable CHROMIUM_ENABLE_WAYLAND, so we are doing it directly in the
+recipe now.
 
-"The Portable Hardware Locality (hwloc) software package provides a
-portable abstraction (across OS, versions, architectures, ...) of the
-hierarchical topology of modern architectures, including NUMA memory
-nodes, sockets, shared caches, cores and simultaneous multithreading.
-It also gathers various system attributes such as cache and memory
-information as well as the locality of I/O devices such as network
-interfaces, InfiniBand HCAs or GPUs."
+Now we know the value of the flag beforehand, we are allowed to
+remove some conditionals. Additionally, we check if Wayland is
+available before building.
 
-This recipe adds libhwloc and lstopo utility as two packages.
-
-Testing: Built in OE/Krogoth. Installed to x86_64 machine. Successfully
-ran `lstopo` and verified it printed correct CPU and cache info.
-
-Signed-off-by: Haris Okanovic <haris.okanovic@ni.com>
+Signed-off-by: Jacobo Aragunde Pérez <jaragunde@igalia.com>
 ---
- meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
+ recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-new file mode 100644
-index 0000000..1bf7a55
---- /dev/null
-+++ b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "Portable Hardware Locality (hwloc) software package"
-+DESCRIPTION = "The Portable Hardware Locality (hwloc) software package \
-+ provides a portable abstraction of the hierarchical topology of modern \
-+ architectures."
-+HOMEPAGE = "https://www.open-mpi.org/software/hwloc/"
-+SECTION = "base"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=3282e20dc3cec311deda3c6d4b1f990b"
+diff --git a/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb b/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
+index bbba147..0db8f7d 100644
+--- a/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
++++ b/recipes-browser/chromium/chromium-wayland_48.0.2548.0.bb
+@@ -1,3 +1,5 @@
++CHROMIUM_ENABLE_WAYLAND = "1"
 +
-+SRC_URI = "https://www.open-mpi.org/software/${PN}/v1.11/downloads/${BP}.tar.bz2"
-+SRC_URI[md5sum] = "96c34136ff416d2b13a7821c27477bed"
-+SRC_URI[sha256sum] = "95d80286dfe658a3f79e2ac90698782bb36e5504f4bac1bba2394ba14dbbad24"
-+
-+inherit autotools
-+
-+# Split hwloc library into separate subpackage
-+PACKAGES_prepend = " lib${PN} "
-+FILES_lib${PN} += "${libdir}/lib${PN}.so*"
-+RDEPENDS_${PN} += "lib${PN} (= ${EXTENDPKGV})"
-+
-+# XXX dev-so QA check doesn't like soname symlinks in non-dev packages
-+INSANE_SKIP_lib${PN} += "dev-so"
+ include chromium-browser.inc
+ 
+ DEPENDS += "wayland libxkbcommon"
+@@ -21,15 +23,14 @@ SRC_URI[sha256sum] = "4ca4e2adb340b3fb4d502266ad7d6bda45fa3519906dbf63cce11a63f6
+ OZONE_WAYLAND_GIT_BRANCH = "Milestone-SouthSister"
+ OZONE_WAYLAND_GIT_SRCREV = "c605505044af3345a276abbd7c29fd53db1dea40"
+ 
+-SRC_URI += "${@base_conditional('CHROMIUM_ENABLE_WAYLAND', '1', 'git://github.com/01org/ozone-wayland.git;destsuffix=${OZONE_WAYLAND_GIT_DESTSUFFIX};branch=${OZONE_WAYLAND_GIT_BRANCH};rev=${OZONE_WAYLAND_GIT_SRCREV} file://chromium-wayland/0006-Remove-GBM-support-from-wayland.gyp.patch', '', d)}"
++SRC_URI += "git://github.com/01org/ozone-wayland.git;destsuffix=${OZONE_WAYLAND_GIT_DESTSUFFIX};branch=${OZONE_WAYLAND_GIT_BRANCH};rev=${OZONE_WAYLAND_GIT_SRCREV} file://chromium-wayland/0006-Remove-GBM-support-from-wayland.gyp.patch"
+ 
+ # Component build is unsupported in ozone-wayland for Chromium 48
+ python() {
+-    if (d.getVar('CHROMIUM_ENABLE_WAYLAND', True) == '1'):
+-        if bb.utils.contains('PACKAGECONFIG', 'component-build', True, False, d):
+-            bb.fatal("Chromium 48 Wayland version cannot be built in component-mode")
+-    else:
+-        raise bb.parse.SkipPackage("CHROMIUM_ENABLE_WAYLAND isn't enabled")
++    if not bb.utils.contains('DISTRO_FEATURES', 'wayland', True, False, d):
++        raise bb.parse.SkipPackage("Wayland is not available")
++    if bb.utils.contains('PACKAGECONFIG', 'component-build', True, False, d):
++        bb.fatal("Chromium 48 Wayland version cannot be built in component-mode")
+ }
+ 
+ CHROMIUM_WAYLAND_GYP_DEFINES = "use_ash=1 use_aura=1 chromeos=0 use_ozone=1 use_xkbcommon=1"
 -- 
-2.10.1
+2.7.4
 
 
