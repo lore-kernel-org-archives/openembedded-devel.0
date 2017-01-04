@@ -1,61 +1,61 @@
 Return-Path: <jaragunde@igalia.com>
 Received: from smtp4.mundo-r.com (smtp3.mundo-r.com [212.51.32.191])
-	by mail.openembedded.org (Postfix) with ESMTP id F1B187199F
+	by mail.openembedded.org (Postfix) with ESMTP id C56847199F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Jan 2017 18:21:38 +0000 (UTC)
-IronPort-PHdr: =?us-ascii?q?9a23=3AV/i5uhNHrFMDyIBHs6Yl6mtUPXoX/o7sNwtQ0KIM?=
-	=?us-ascii?q?zox0I/rzrarrMEGX3/hxlliBBdydsKMYzbOL+Pm4CSQp2tWoiDg6aptCVhsI24?=
-	=?us-ascii?q?09vjcLJ4q7M3D9N+PgdCcgHc5PBxdP9nC/NlVJSo6lPwWB6nK94iQPFRrhKAF7?=
-	=?us-ascii?q?Ovr6GpLIj8Swyuu+54Dfbx9GiTe5br5+Ngi6oAXeusULnYdvKbs6xwfUrHdPZ+?=
-	=?us-ascii?q?lY335jK0iJnxb76Mew/Zpj/DpVtvk86cNOUrj0crohQ7BAAzsoL2465MvwtRne?=
-	=?us-ascii?q?VgSP/WcTUn8XkhVTHQfI6gzxU4rrvSv7sup93zSaPdHzQLspVzmu87tnRRn1gy?=
-	=?us-ascii?q?oBKjU38nzYitZogaxbvhyvuhJxzY3Tbo6XOvpxcb/Sc9wBSGpdXctcTTBND5mg?=
-	=?us-ascii?q?Y4YNCecKIOZWr5P6p1sLtRawAROjC//oyjBTgX/9wLE30/47HgHJwQwgGc8Bv2?=
-	=?us-ascii?q?rJp9vvLqASS/66zajVxjjEbfNZwy3955LHchA8p/GDQKx/fNHQyUkgDQzFilSQ?=
-	=?us-ascii?q?ppb/MzyJ0eQNtnGW4ux9Xuysk24qswV8riW1yssxl4XEhJgZx1TA+Clj3Yo4Jd?=
-	=?us-ascii?q?21RUhmatC+CpRQrTuVN45uT8MnRGFnpTg1x6UduZ6+YCgK0JMnxwPDa/Cfc4iH?=
-	=?us-ascii?q?/BbjVOGJLDd2nn1lfrO+hxe08Ue+0OH8V8a030xOripEiNbArGwC1xvW6sSfS/?=
-	=?us-ascii?q?t9+Fmu2SqX2g3X9+1IO104mbfZJpI7xrM9koAfvVnDEyL2gEn2ibWZdkQg+uim?=
-	=?us-ascii?q?8eTnZbDmq4eeN4BukAHxKKsumtG5AeslLAcDRGmb+eum273n/E32Wq9GgeExkq?=
-	=?us-ascii?q?ncqJzaP9gUpralAw9J1YYu8xG/Dy+439Qeg3YHKUlKdwyagIf0JV7BPen0Auqh?=
-	=?us-ascii?q?jFSyjjhrw+vLPrngApXWMnjDi63tfbFl60FCzgo809Vf6IlKBb4cPf38RFL+uM?=
-	=?us-ascii?q?bfDh8jPAy+2/znB8ll1oMCRWKPBbeUP73IsV+J+u0iOPeDZJIWuDbnNfcq/eTi?=
-	=?us-ascii?q?gmM+mV8YZaOpx4cYaGikHvR6JEWUeWfjjckHEWcLpQozV/LliECBUT5JeXm9Rb?=
-	=?us-ascii?q?gw6S08CIKjFY3DXJyigKSd3CenGZ1bfmdGCkyWHnf2doWEXOwBaCWJIs96kj0E?=
-	=?us-ascii?q?TqShRJEk1RG1rgP1171nLu/O9iIDr5KwnORysurLmBc/8DZ5A8iQ3ySBQn95mk?=
-	=?us-ascii?q?sMRiQqx+Z4uUF7x1KJ3KR0jvAeEsZctN1TVQJvF5fXyOZ9Q/noUw3ceNuEAG4n?=
-	=?us-ascii?q?WNi0SWUzR8g4zMIIb0tVGtqrihHKmSGtBulGxPSwGJUo//eEjDDKLMFnxiOe2Q?=
-	=?us-ascii?q?=3D=3D?=
+	Wed,  4 Jan 2017 18:21:42 +0000 (UTC)
+IronPort-PHdr: =?us-ascii?q?9a23=3AfodIjxxj2/SE49XXCy+O+j09IxM/srCxBDY+r6Qd?=
+	=?us-ascii?q?2uweIJqq85mqBkHD//Il1AaPBtSHrasZwLOO4+jJYi8p2d65qncMcZhBBVcuqP?=
+	=?us-ascii?q?49uEgeOvODElDxN/XwbiY3T4xoXV5h+GynYwAOQJ6tL1LdrWev4jEMBx7xKRR6?=
+	=?us-ascii?q?JvjvGo7Vks+7y/2+94fdbghMizexe65+IRW5oQnMqsUbgpZpJ7osxBfOvnZGYf?=
+	=?us-ascii?q?ldy3lyJVKUkRb858Ow84Bm/i9Npf8v9NNOXLvjcaggQrNWEDopM2Yu5M32rhbD?=
+	=?us-ascii?q?VheA5mEdUmoNjBVFBRXO4QzgUZfwtiv6sfd92DWfMMbrQ704RSiu4qF2QxLulS?=
+	=?us-ascii?q?wJNSM28HvPh8JwkqxVvRyvqR94zYHWboGaO+ZxcKzGcNMGRmdMRNpdWjZdDo6+?=
+	=?us-ascii?q?aYYEEuoPPfxfr4n4v1YAqQGxChWrBOz0zT9Dm2P73bcg3OQuDAHG2hEvEMwTu3?=
+	=?us-ascii?q?rOttL1LrkdUOGox6TPzzXMdelW1i3y6IjVdBAuvO+DUKlxccre00YvEwLFgU+K?=
+	=?us-ascii?q?pYP5ODOV0/0Avm6G5ORjTeKik2oqpxxrrjSy28shiJPFi4YRx1ze6Cl0wIY4KN?=
+	=?us-ascii?q?ulQ0Bhe9GkCoFftySCOotzRcMtXn9ntT4hyr0DpZ67ZC8KyIk7xxLHa/yIbYyI?=
+	=?us-ascii?q?4hX7WeafOzh4gnNkeLO5hxms60Sgy+L8WdOw0FZLtCVJiMXDtncI1xDL68iHTO?=
+	=?us-ascii?q?Vy/lu51DuLygzf8PxILV02mKbBL5MsxqQ8mocTvEnDBiP2nV/5jK6SdkUq4Oio?=
+	=?us-ascii?q?7OHnb63kppCGLY97kA7+MrkomsOiH+s1KQkOX2eB9uS41b3s51f1T6lNjv0ziq?=
+	=?us-ascii?q?XZqozVJdwHpq6lBA9YyoEj6w6hADegztsYmGIII0xYdx2akYfmJkjCL+3mAveh?=
+	=?us-ascii?q?nVuslCxmx/THPr36HpXNNWLPkLD5fblj7U5T1g8zwstB6J1JF74OPu/8VlX2tN?=
+	=?us-ascii?q?zCAR8zKxa0zPr/CNVhyoMeXnqCDbGDMKPTrVCF/fwgI/SPZI8PpjnyMeIp6OLp?=
+	=?us-ascii?q?jX88gVUdZ7Wm3YMLaHCkGfRrO1iWbmTqgtcACmcHpRQxTPHpiF2YTzFcfWy+UL?=
+	=?us-ascii?q?475jE+EIimF5vMRpixgLyd2ye2BppWZnxcBVCSEHfocJ6JW/AXaCKJIs5hiSAE?=
+	=?us-ascii?q?WqakS486zx2hqAj6y799IuXP4C1L/a7kgd9t6uvekBs/+TB5A4GR3n+AS0lwn3?=
+	=?us-ascii?q?gUXHkxxK15rEl3x1uP3KQ+hOZXRvJJ4PYccA4xMpTbh8VgAt/vXA7MNu8IUlu0?=
+	=?us-ascii?q?CoGkCCs4Qc83z9ImYkl0H9SryBvE2nz5UPcui7WXCclsoern1H/rKpMlxg=3D?=
+	=?us-ascii?q?=3D?=
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: =?us-ascii?q?A2CCBQBFOm1Y/5tjdVteHAEBBAEBCgEBF?=
-	=?us-ascii?q?wEBBAEBCgEBgw0BAQEBAR9fgQyOSZMCkSSCQoIPgggaDIV8AoFWQRIBAQEBAQE?=
-	=?us-ascii?q?BAQEBAWIogjMYgh4GIw8BRhAlAiYCAlcZiHQBr06CJYoqAQEBAQEFAQEBASSBC?=
-	=?us-ascii?q?4U6iXOCAAsugl4FmwmGVoprApBXSJF4JgEwhUMbGIFHPTQBAYgwAQEB?=
-X-IPAS-Result: =?us-ascii?q?A2CCBQBFOm1Y/5tjdVteHAEBBAEBCgEBFwEBBAEBCgEBgw0?=
-	=?us-ascii?q?BAQEBAR9fgQyOSZMCkSSCQoIPgggaDIV8AoFWQRIBAQEBAQEBAQEBAWIogjMYg?=
-	=?us-ascii?q?h4GIw8BRhAlAiYCAlcZiHQBr06CJYoqAQEBAQEFAQEBASSBC4U6iXOCAAsugl4?=
-	=?us-ascii?q?FmwmGVoprApBXSJF4JgEwhUMbGIFHPTQBAYgwAQEB?=
-X-IronPort-AV: E=Sophos;i="5.33,459,1477954800"; d="scan'208";a="96000760"
+X-IronPort-Anti-Spam-Result: =?us-ascii?q?A2DhAQBFOm1Y/5tjdVteHAEBBAEBCgEBF?=
+	=?us-ascii?q?wEBBAEBCgEBgw0BAQEBAR+Ba41XcqQmgkKCD4IIGoYIAoFWPxQBAQEBAQEBAQE?=
+	=?us-ascii?q?BAWIogjMYgh4GIw8BRhAlAiYCAlcZiHQBr06CJYoqAQEBAQYBAQEBJIELhTqJc?=
+	=?us-ascii?q?4IACy6CXgWPD4t6kUECkFdIkXgfOIV2gUc9NIgyAQEB?=
+X-IPAS-Result: =?us-ascii?q?A2DhAQBFOm1Y/5tjdVteHAEBBAEBCgEBFwEBBAEBCgEBgw0?=
+	=?us-ascii?q?BAQEBAR+Ba41XcqQmgkKCD4IIGoYIAoFWPxQBAQEBAQEBAQEBAWIogjMYgh4GI?=
+	=?us-ascii?q?w8BRhAlAiYCAlcZiHQBr06CJYoqAQEBAQYBAQEBJIELhTqJc4IACy6CXgWPD4t?=
+	=?us-ascii?q?6kUECkFdIkXgfOIV2gUc9NIgyAQEB?=
+X-IronPort-AV: E=Sophos;i="5.33,459,1477954800"; d="scan'208";a="96000767"
 Received: from fanzine.igalia.com ([91.117.99.155])
 	by smtp4.mundo-r.com with ESMTP; 04 Jan 2017 19:11:50 +0100
 Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
 	by fanzine.igalia.com with esmtps 
 	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
-	id 1cOq2Q-00078t-5x; Wed, 04 Jan 2017 19:11:50 +0100
+	id 1cOq2Q-00078x-Me; Wed, 04 Jan 2017 19:11:50 +0100
 Received: from fanzine.local.igalia.com ([192.168.10.13]
 	helo=goomba.local.igalia.com) by mail.igalia.com with esmtps 
 	(Cipher TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim)
-	id 1cOq2O-0005HI-2h; Wed, 04 Jan 2017 19:11:48 +0100
+	id 1cOq2O-0005HI-Kt; Wed, 04 Jan 2017 19:11:48 +0100
 From: =?UTF-8?q?Jacobo=20Aragunde=20P=C3=A9rez?= <jaragunde@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Jan 2017 19:11:33 +0100
-Message-Id: <1483553494-5687-2-git-send-email-jaragunde@igalia.com>
+Date: Wed,  4 Jan 2017 19:11:34 +0100
+Message-Id: <1483553494-5687-3-git-send-email-jaragunde@igalia.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1483553494-5687-1-git-send-email-jaragunde@igalia.com>
 References: <1483553494-5687-1-git-send-email-jaragunde@igalia.com>
 MIME-Version: 1.0
 Cc: denis@eukrea.com, otavio@ossystems.com.br, eric@eukrea.com
-Subject: [meta-browser][PATCH 2/3] chromium: disable CHROMIUM_ENABLE_WAYLAND in the x11 recipe
+Subject: [meta-browser][PATCH 3/3] chromium: remove conditional detection of CHROMIUM_ENABLE_WAYLAND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,42 +68,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Jan 2017 18:21:39 -0000
+X-List-Received-Date: Wed, 04 Jan 2017 18:21:43 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The chromium x11 recipe may crash when run with CHROMIUM_ENABLE_WAYLAND
-enabled, because it misses some steps that are performed in the
-chromium-wayland recipe. Doing this change, we eliminate one possible
-failure point.
-
-Also adds a check for x11 in DISTRO_FEATURES.
+It can be a source of problems, because you must have chosen the
+correct recipe to build the wayland or x11 version of chromium.
 
 Signed-off-by: Jacobo Aragunde Pérez <jaragunde@igalia.com>
 ---
- recipes-browser/chromium/chromium_52.0.2743.76.bb | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ recipes-browser/chromium/chromium-browser.inc | 6 ------
+ 1 file changed, 6 deletions(-)
 
-diff --git a/recipes-browser/chromium/chromium_52.0.2743.76.bb b/recipes-browser/chromium/chromium_52.0.2743.76.bb
-index 14b519c..a3270e9 100644
---- a/recipes-browser/chromium/chromium_52.0.2743.76.bb
-+++ b/recipes-browser/chromium/chromium_52.0.2743.76.bb
-@@ -1,3 +1,5 @@
-+CHROMIUM_ENABLE_WAYLAND = "0"
-+
- include chromium-browser.inc
+diff --git a/recipes-browser/chromium/chromium-browser.inc b/recipes-browser/chromium/chromium-browser.inc
+index 4fb47fd..8c73207 100644
+--- a/recipes-browser/chromium/chromium-browser.inc
++++ b/recipes-browser/chromium/chromium-browser.inc
+@@ -102,12 +102,6 @@ PACKAGECONFIG[kiosk-mode] = ""
+ PACKAGECONFIG[proprietary-codecs] = ""
  
- DEPENDS += "xextproto gtk+ libxi libxss"
-@@ -16,3 +18,9 @@ SRC_URI += "\
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0fca02217a5d49a14dfe2d11837bb34d"
- SRC_URI[md5sum] = "0fee71466e1f2dc39ed4549d04b58ee2"
- SRC_URI[sha256sum] = "c54cdc11c3324152f3d5be98dcb4eae2bda0fc9dac7dd5f9010150458d68c18c"
-+
-+# X11 must be available for this flavor of Chromium
-+python() {
-+    if not bb.utils.contains('DISTRO_FEATURES', 'x11', True, False, d):
-+        raise bb.parse.SkipPackage("X11 is not available")
-+}
+ 
+-# Conditionally add ozone-wayland and its patches to the Chromium sources
+-# You can override this by setting CHROMIUM_ENABLE_WAYLAND=1 or CHROMIUM_ENABLE_WAYLAND=0 in local.conf
+-CHROMIUM_ENABLE_WAYLAND ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', '0', \
+-                     bb.utils.contains('DISTRO_FEATURES', 'wayland', '1', \
+-                     '0', d),d)}"
+-
+ # ozone-wayland will be cloned into a directory with this name
+ OZONE_WAYLAND_GIT_DESTSUFFIX ?= "ozone-wayland-git"
+ # Use glob to filter out the patches that shall be applied against ozone-wayland.
 -- 
 2.7.4
 
