@@ -1,47 +1,49 @@
-Return-Path: <matti.kaasinen@gmail.com>
-Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
-	[209.85.217.196])
-	by mail.openembedded.org (Postfix) with ESMTP id C564971B30
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id E5ABB71B2F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Jan 2017 20:09:37 +0000 (UTC)
-Received: by mail-ua0-f196.google.com with SMTP id d5so33630469uag.0
+	Thu,  5 Jan 2017 20:09:39 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id l2so84063wml.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Jan 2017 12:09:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=X6DOWBgjVLsT0OAOpxOYaKhln13CId3A5O0jEB61yyA=;
-	b=rWnxWvZy02Vwa+fQt8X33CUrlg+2tsFy6GpNgY6RjRcXwPLqWQLNt6cvKCHQox1Io9
-	q9G/ueRfBGWLdBO3JWi12OP/j5sZSMRo/koIMagWs+fN8bCStP5cmnXOsudiettRhG7Q
-	yMrvqwn/YZcASQzcRo51SFDMciw9DNl6VzB3LZdDZptAex0ZiFuNHv78SoKfIC1cE0G+
-	decNYSm3tA8hxCazvgvAP4MqfmyTgZsww95qnNwXd7qU2I8gQkEqoNA69SUquKNO50mJ
-	SuQoqSJkCqsDmC8yaA8bFoNfxRJTGp/6g9y6wMp//j2UeM6rF7iaxVd3dL1meVniUase
-	8jYw==
+	Thu, 05 Jan 2017 12:09:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=R3jPJLjR6h3gvxNTdCFcazA2J8X7NSpgl5ckAEJMM+U=;
+	b=FH3Gt+mCDwxeazdQV1hdCVHgYr1AJOZ+OFVdtZmBMhYyQCxr1OKXwPtD7soJ83TIaI
+	kxA/C6JGOP2IckfcZCYG25eMMIL84Bl4RUdcAOaRJ7tfJvAFu2/b2rvusdHpQx0zQmnS
+	AFG0+IaaFju4/WkNj0rhWa/DjibCplJTyl1r6YFv2TJZeRU7NYWiwI7WV7eVzF4pBOYh
+	e1vUFkrwlIFLVBKf5pcuduEf/7J5lza5wNFfJAb5PMXGELkvWzZHZbE+Fq5EkyU6LxH6
+	qmXItd4xU0bGpfluJZ1TtNmeCFicvp3HRMxNung4xRAL9XO/fZsHQUN6T+fTliQzwPun
+	0g/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=X6DOWBgjVLsT0OAOpxOYaKhln13CId3A5O0jEB61yyA=;
-	b=em8Xp33ZPqJMqWAzmMMW90DW0h0+Qj9XIdadx6yLNLD+WuoRL/AwLk/cRP2noUTFAJ
-	mTlqximkdJYYtosofXwTm7/SRF2CYDH5ITAjihcHmStlNoMGdZDLqNTYrvqifeaIBptx
-	dMwPtNDa6vKVWqkTd6Cnuf9NrsoVlCIEd7bBxKkRcKMkngbrQieBHAT2R70+lH68bDA1
-	mn1/BJ4gmwC642YXWsTHbqq1VXYBsdg3tUhAbOp/cz8oM5bkgpY2i0Smpi4PsthPGu0U
-	Gw4NgTC0MHCFGKSGHnGaX3PIwBIpa3P+hSVU4H/yybv/grASTqU19IROGFzEzrmlEzmn
-	wBxw==
-X-Gm-Message-State: AIkVDXKuaJE8ZWdAsfCphfbQW7s9mRfIpkPr2Vs3yj3tRbRfvP8AtjoFPJ66A4zelHIoXaYinxv/wtXXFkkkDg==
-X-Received: by 10.176.81.97 with SMTP id f30mr56077916uaa.55.1483646977281;
-	Thu, 05 Jan 2017 12:09:37 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.103.14.2 with HTTP; Thu, 5 Jan 2017 12:09:36 -0800 (PST)
-In-Reply-To: <CADnUhn16Dyc2tnRgQtGMwy6xuBKchjWP3oCtnRdpg4GK1L0BcQ@mail.gmail.com>
-References: <CADnUhn2STGnqzDuYoAo8yLvDnPFcmm+4M+xq387oxdhwF_pFMQ@mail.gmail.com>
-	<CAKuJqM9sse_hCpGQBbfQrcCThtichn=WLeuA2iEEU=NP9N_nMw@mail.gmail.com>
-	<CADnUhn16Dyc2tnRgQtGMwy6xuBKchjWP3oCtnRdpg4GK1L0BcQ@mail.gmail.com>
-From: matti kaasinen <matti.kaasinen@gmail.com>
-Date: Thu, 5 Jan 2017 22:09:36 +0200
-Message-ID: <CADnUhn06UBk_+gUUtHiWojjjbthEDS+BQZ=CBy3nZ33EOmbfmQ@mail.gmail.com>
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=R3jPJLjR6h3gvxNTdCFcazA2J8X7NSpgl5ckAEJMM+U=;
+	b=eRKuHISt7XqQxIS3WuLdAF3kp8jCmZf7EDffnsAbMjshTWKV+/lA03jlHrZgZ/+e9F
+	xAg9s11jwhGPNMKRkwDNHIV8BvCK+GAuYHUW5ryKGPe6oqW8H13plYKfVUTtyF2mG3mS
+	eOcM6irlniYm1fxtqNe3aDMBpy3vd9yyyvVaAXst9j8ccAwpus70IeyhZv2N/zXQJkUS
+	Z4WNsodQJ8Uy1feCTVppD22NGyQamQ+uBhJ0OENorzalLKH9Jf9QBtaaraVbapwtjsjw
+	0RkB0YpUV6sb9IzAw9b2x+BxIpDaogtzhqa9Vjhu2Iwlq+qcroZdOcmM0/ohMTaEOKYV
+	XnYw==
+X-Gm-Message-State: AIkVDXIEhKlW8l5FAiWtljQ4fFmfjTh71EuaF0zI4sKqXK4rMrRZ5PVrUGbqBLvs0SfeQQ==
+X-Received: by 10.28.60.5 with SMTP id j5mr69531051wma.119.1483646979118;
+	Thu, 05 Jan 2017 12:09:39 -0800 (PST)
+Received: from localhost.localdomain (p579F79CC.dip0.t-ipconnect.de.
+	[87.159.121.204]) by smtp.googlemail.com with ESMTPSA id
+	81sm61557wmw.7.2017.01.05.12.09.38
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 05 Jan 2017 12:09:38 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: apache2_2.4.23.bb fetcher crashes
+Date: Thu,  5 Jan 2017 21:09:26 +0100
+Message-Id: <1483646966-4946-1-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.5.5
+MIME-Version: 1.0
+Subject: [PATCH V3] raptor2: initial add 2.0.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,44 +58,92 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 05 Jan 2017 20:09:41 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-2017-01-02 16:20 GMT+02:00 matti kaasinen <matti.kaasinen@gmail.com>:
+* it is it in meta-office for a while. Now I need it in meta-qt5-extra too
+* LICENSE.txt summarizes all licenses and explains that ot is user's choice
+  which one to use
 
-> Actually it was regarding that jquery library that I patched today.
-
-
-
-No, very big mistake. I just found message below arrived three days ago to
-my "advertisements and marketing" folder:
-
-
-This mailinglist requires people to subscribe before posting.
-
-Your posting was automatically rejected, please subscribe at
-http://lists.openembedded.org/mailman/listinfo/openembedded-core
-
-Date: Mon, 2 Jan 2017 14:34:19 +0200
-Subject: [meta-oe][PATCH] Recipe refers to jquery library folder with
-JQUERYDIR variable except once, where literal string is used, instead. This
-patch fixes that deviation.
-Signed-off-by: Matti Kaasinen <matti.kaasinen@gmail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-support/libjs/libjs-jquery_1.7.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...c-do-additional-checks-on-libxml2-also-wh.patch | 34 ++++++++++++++++++++++
+ meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb  | 25 ++++++++++++++++
+ 2 files changed, 59 insertions(+)
+ create mode 100644 meta-oe/recipes-support/raptor2/files/0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch
+ create mode 100644 meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb
 
-diff --git a/meta-oe/recipes-support/libjs/libjs-jquery_1.7.2.bb
-b/meta-oe/recipes-support/libjs/libjs-jquery_1.7.2.bb
-index ec8f360..a047a20 100644
---- a/meta-oe/recipes-support/libjs/libjs-jquery_1.7.2.bb
-+++ b/meta-oe/recipes-support/libjs/libjs-jquery_1.7.2.bb
-@@ -21,4 +21,4 @@ do_install() {
-     install -m 0644 ${S}${JQUERYDOCDIR}/copyright ${D}${JQUERYDOCDIR}/
- }
+diff --git a/meta-oe/recipes-support/raptor2/files/0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch b/meta-oe/recipes-support/raptor2/files/0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch
+new file mode 100644
+index 0000000..7faeb13
+--- /dev/null
++++ b/meta-oe/recipes-support/raptor2/files/0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch
+@@ -0,0 +1,34 @@
++From 3f97aac5a1f43ef57b02fb9ccdcadd41a6b69fa9 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Tue, 27 Oct 2015 10:21:24 +0100
++Subject: [PATCH] configure.ac: do additional checks on libxml2 also when
++ detected by pkg-config
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Upstream-Status: Applied [1]
++
++[1] https://github.com/dajobe/raptor/pull/33
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++---
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index 10ff870..35fa08e 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -601,7 +601,7 @@ have_libxml=0
++ need_libxml=0
++ 
++ oCPPFLAGS="$CPPFLAGS"
++-if test "X$XML_CONFIG" != X; then
+++if test "X$libxml_source" != X; then
++   CPPFLAGS="$LIBXML_CFLAGS $CPPFLAGS"
++   LIBS="$LIBS $LIBXML_LIBS"
++   AC_CHECK_FUNC(xmlCreatePushParserCtxt, have_xmlCreatePushParserCtxt=yes, have_xmlCreatePushParserCtxt=no)
++-- 
++2.1.0
++
+diff --git a/meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb b/meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb
+new file mode 100644
+index 0000000..dd00c14
+--- /dev/null
++++ b/meta-oe/recipes-support/raptor2/raptor2_2.0.15.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "Library for parsing and serializing RDF syntaxes"
++LICENSE = "GPLv2 | LGPLv2.1 | Apache-2.0"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.txt;md5=b840e5ae3aeb897f45b473341348cd9c \
++    file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
++    file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
++    file://LICENSE-2.0.txt;md5=3b83ef96387f14655fc854ddc3c6bd57 \
++"
++
++DEPENDS = "libxml2 libxslt curl yajl"
++
++SRC_URI = " \
++    http://download.librdf.org/source/${BPN}-${PV}.tar.gz \
++    file://0001-configure.ac-do-additional-checks-on-libxml2-also-wh.patch \
++"
++SRC_URI[md5sum] = "a39f6c07ddb20d7dd2ff1f95fa21e2cd"
++SRC_URI[sha256sum] = "ada7f0ba54787b33485d090d3d2680533520cd4426d2f7fb4782dd4a6a1480ed"
++
++inherit autotools pkgconfig
++
++EXTRA_OECONF = " \
++    --without-xml2-config \
++    --without-curl-config \
++    --without-xslt-config \
++"
+-- 
+2.5.5
 
-I don't know my OE registration details or I made some mistake in setting
-up git-mail.
-But please find my patch above if you wish.
-
-Cheer,
-Matti
 
