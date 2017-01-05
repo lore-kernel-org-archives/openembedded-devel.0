@@ -1,49 +1,32 @@
-Return-Path: <piotr.lewicki@elfin.de>
-Received: from mail-wj0-f171.google.com (mail-wj0-f171.google.com
-	[209.85.210.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 315DB71A82
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with ESMTP id 91C2771A74
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Jan 2017 11:05:45 +0000 (UTC)
-Received: by mail-wj0-f171.google.com with SMTP id i20so31858014wjn.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Jan 2017 03:05:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=elfin.de; s=google;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=uCfAGZpLKkwUWL3JWrZqhq5lBt2LDy7+wq7GddOF2yI=;
-	b=LiT56x1M1G5vA9CmivSB+RwaBnWqqbqjjeYhg2jzU4bQeghEw4zGoSlxui3xSx4CAU
-	lyrwAW2VnRo1HzWT9DfWZBEGNWzFJlMUrEeTzpsmLr5tK4Ou/cTRsuw62Bkr0Z87XOsh
-	5/NnHTz/XXojm9MuhiDi2fZY4bgzm7S5CuXI10+lDSgsDeeX2O3VSfPTVc8IjtXN2uGd
-	JPRjzlZthaRBahdq1nkei2zXXz66Ds5lUKY289vcH9toHd3p1pqHBrSxcQlXedzgCX8d
-	68HQB5siFevbLYZyiRQZwMjftkCppqRz8ChNNaYvFU0Y3l4uIRV66pcs23pdepYEzyAc
-	G96Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=uCfAGZpLKkwUWL3JWrZqhq5lBt2LDy7+wq7GddOF2yI=;
-	b=eduYXrpryD8/oSn4gevNkcBc1FYGi4mibb51uLnmQAxcZspgDl1sUE9UKwg7JjgEOx
-	6vwo9Mv/hBUt5JQIae6OcRAzllPncPbm+2UJRwTMVlI7EDmz4m54UlmEgQU++U0lkVyA
-	yDjWZGr3YRpD/h9YxCbCLv7Z7lAutVZ5wlZuQKD4X0B8bqpyxuspUrsrLosx646wS4sl
-	FaleFTm36vfwSQmBnyAKbHS8A6CWI4Qx93RKo9iF/SSXKzBi45CSjAsV7dEg33bRunhQ
-	FcHFzfqs3uitWCWHZRe89fVLJ7yfjPP+hBjP7gDtpcTEKBD95+H/DA2xwL0O90bYFJ+h
-	r6vw==
-X-Gm-Message-State: AIkVDXJ0SFcsh510xMaocoYTqEy1U805uEFkLW3YQFj6M0XPjaKaVbLXCeD3wB24FodTJg==
-X-Received: by 10.194.172.42 with SMTP id az10mr62407432wjc.145.1483614345739; 
-	Thu, 05 Jan 2017 03:05:45 -0800 (PST)
-Received: from piotr-ideapad.elnet (b2b-94-79-174-114.unitymedia.biz.
-	[94.79.174.114]) by smtp.gmail.com with ESMTPSA id
-	w18sm99851787wme.9.2017.01.05.03.05.45
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 05 Jan 2017 03:05:45 -0800 (PST)
-From: Piotr Lewicki <piotr.lewicki@elfin.de>
-To: openembedded-devel@lists.openembedded.org,
-	akuster808@gmail.com
-Date: Thu,  5 Jan 2017 12:05:26 +0100
-Message-Id: <1483614326-25468-2-git-send-email-piotr.lewicki@elfin.de>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1483614326-25468-1-git-send-email-piotr.lewicki@elfin.de>
-References: <1483614326-25468-1-git-send-email-piotr.lewicki@elfin.de>
-Subject: [OE-core][morty][PATCH 1/1] apache2: always use the archive.apache.org to ensure older releases are always available
+	Thu,  5 Jan 2017 15:30:15 +0000 (UTC)
+Received: (qmail 30289 invoked by uid 1003); 5 Jan 2017 15:30:15 -0000
+Received: from unknown (HELO ?192.168.11.142?)
+	(philip@opensdr.com@108.4.175.67)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	5 Jan 2017 15:30:15 -0000
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@googlemail.com>
+References: <65082de4-2ba6-3b18-1845-00b2d637404e@balister.org>
+	<CALbNGRSrXLdfUK3U2bXr20P+fFm4ROArGPRi9Ag=AhXbGjUv+g@mail.gmail.com>
+From: Philip Balister <philip@balister.org>
+Message-ID: <bbd8fb9d-8215-c73f-f4aa-b20523291ec0@balister.org>
+Date: Thu, 5 Jan 2017 10:30:14 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.5.1
+MIME-Version: 1.0
+In-Reply-To: <CALbNGRSrXLdfUK3U2bXr20P+fFm4ROArGPRi9Ag=AhXbGjUv+g@mail.gmail.com>
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	"openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>, openembedded-architecture
+	<openembedded-architecture@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] OpenEmbedded Stand at FOSDEM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,45 +39,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2017 11:05:46 -0000
+X-List-Received-Date: Thu, 05 Jan 2017 15:30:17 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-From: Derek Straka <derek@asterius.io>
+On 01/03/2017 08:13 PM, Andreas Müller wrote:
+> On Tue, Jan 3, 2017 at 4:32 PM, Philip Balister <philip@balister.org> wrote:
+>> Every year since 2007, OpenEmbedded has a stand at FOSDEM
+>> (http://www.fosdem.org)
+>>
+>> From the first year:
+>>
+>> https://www.flickr.com/photos/32615155@N00/405229708/in/album-72157594561002629/
+>>
+>> Belen and I are sort of organizing this, but both of us are also
+>> involved in devrooms, so we will need a lot of help manning the stand
+>> and getting some demos together.
+>>
+>> Demos should try and show how the project makes embedded work easier, by
+>> showing tools and/or cool examples of devices using Linux built with
+>> OpenEmbedded. In previous years, we've shown toaster with data collected
+>> from demos on the table. Collections of devices running images built
+>> from the same recipe and interesting products using Linux by OpenEmbedded.
+>>
+>> I'm happy to try and organize demos and staffing, but I could really use
+>> some help this year, so if you are in a position to tak ethe lead on
+>> operating the stand, that would be a huge help to me and the rest of the
+>> project.
+>>
+>> Thanks,
+>>
+>> Philip
+>> --
+> I could bring along
+> 
+> 1. Raspi2 + Hifiberry + Speakers + Midi-Keyboard + Xbox-controller
+> 2. a SDCard full of desktops/multimedia/office/games using 1.
+> 3. 2 days time
+> 4. ?? - let me know
 
-Signed-off-by: Derek Straka <derek@asterius.io>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Piotr Lewicki <piotr.lewicki@elfin.de>
----
- meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb | 2 +-
- meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb        | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+I've created a wiki page:
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
-index b227f19..aa26cc7 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
-@@ -8,7 +8,7 @@ LICENSE = "Apache-2.0"
- 
- inherit autotools pkgconfig native
- 
--SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-+SRC_URI = "http://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
-           "
- 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-index 96f21dd..0cd762e 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-@@ -6,7 +6,7 @@ DEPENDS = "libtool-native apache2-native openssl expat pcre apr apr-util"
- SECTION = "net"
- LICENSE = "Apache-2.0"
- 
--SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-+SRC_URI = "http://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://server-makefile.patch \
-            file://httpd-2.4.1-corelimit.patch \
-            file://httpd-2.4.4-export.patch \
--- 
-2.7.4
+http://www.openembedded.org/wiki/FOSDEM_2017
 
+to help get things organized. If you need an account sign up and ping me
+to approve it.
+
+Philip
+
+
+> 
+> Andreas
+> 
 
