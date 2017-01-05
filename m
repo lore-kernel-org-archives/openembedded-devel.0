@@ -1,51 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id C42B571A92
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 10C5F71A8D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Jan 2017 17:11:42 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id m203so97671491wma.3
+	Thu,  5 Jan 2017 17:11:43 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id k184so296749502wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Jan 2017 09:11:43 -0800 (PST)
+	Thu, 05 Jan 2017 09:11:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=R8FrdoLO69vt8geDO3+o7AK/HKuic8h992A3whBON08=;
-	b=ZOHps6gE6m/fR7KbNBGDA/FLZaYEj3zDd78GB40y2/esQi4Q/HFJoUB+LXXIUfVDni
-	EfX4QNOKCJTB8Tf+UImzv+ro3LLsuH7CTMrAuNmcqXZHWE9zSg0MHh9FBU59MXnQ6xRy
-	+nyLITz2B4M1J6w+4qOFXaDcCcCpsDSAW/LEjsDxhZOMK+T7eMFhFOsLvryehcDOYVch
-	thz+2aggE3FT5ko9FKDZH1Hvych6KAaewvxM9xLzdUjaIE6fwsmdBTP4wEl3f+O6WF0d
-	mNFQnQZuw7/F7ATMinMV6kxu2HBgiLWoO9O+gB++OBXv4aQaD62GY4tVqgbf/+AaKeg+
-	0KsA==
+	bh=hqJGaXeVaveHdAg3iqKdUsxfC0znSXrmsrjHBovWLjM=;
+	b=q6Z5AeKQYCzagYnAXHDTzxqlYkU9wGj/7F+T/J/44E2avO4FWqR+GfaGMpGYnljHfC
+	FRzYlFM5HoeO6SOpdUPTIEjHz6QJSsWogbmR/UcJ1j7nUUAggSryX2XTgRo3z4agVGu5
+	M8p560tt2W2tz2ojjpf8C67vTiIKYzL07Bo4+Vx26hZk9LGVg9kzTplzhUDY913YC5Io
+	xBVcmI869/GnIhgvqmSHxL3YB5UC8DNx98gzL23CnDHfKLwlJJkRWbCsSnVp8X+yQSQN
+	EtoIEBBiOzc0oA6DA2cC7ZuCHEuo8S8juyBc7w0s6STkMyT3QBHlwOCIz7RNMzrDz5CY
+	AsQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=R8FrdoLO69vt8geDO3+o7AK/HKuic8h992A3whBON08=;
-	b=L5zOCY2TZbZavLGpLQ6cuwGWNErd1WVIeYWeJ80vxK8AU0GOrEEcKvxZ5O0+Bdlw2V
-	zLzsyzdBBmM9qdbcZSfOZKESj/ZaFNQelwh42auIPfkRAJ1JBrRMhFsJ/ZHC5wfVz2Z1
-	F+oqCg+VMJdAx0VrxGqVhptBlIhTjtlS4qw+3AlfFlP1fWiyTnQPZgqiXQmQrlStqEGj
-	kacUHfjcj2lY8um61oEigurh8RAN8mPEaCKaBqVuDvjid5vpL/u9HSR5Oig41cIYji+C
-	W18wJi9Pu72ry2J9mNcVfs4ejNcxm7lSY3JK+axtI7IL8RAylqmilDmmpOCIJC3WLktA
-	jh+w==
-X-Gm-Message-State: AIkVDXI4r+bzU9ZTtq8sp+iNRn/ocjL7FNRgTD85jFewYJXtCJ/YbOIvynPkDvrhmfSfnQ==
-X-Received: by 10.28.134.146 with SMTP id i140mr66072057wmd.100.1483636302813; 
-	Thu, 05 Jan 2017 09:11:42 -0800 (PST)
+	bh=hqJGaXeVaveHdAg3iqKdUsxfC0znSXrmsrjHBovWLjM=;
+	b=NjKWYV78OgyvqwJFENew4Hgm7NzOuEtxKGbQhVlvndJMS0Nqep8/EnHCNuZBfig7XL
+	ObxVFHL4W1uvmRI4abs7tb8nOPAxjYYulFQHiMEKpdnbus7CaMGCaJPRJiStl+b+JycB
+	vAj5PzneH9IGMpV3MaRbZs+cs7960nKNkzqDNtrDJgAXhG13n5mY627aGWP9rXhVgDvj
+	IazkXJNLZA+o4K+Ccn8a2fDqp1U+pF2njjzUua/lCgkVXlAPthLoqKpS5n0b3YnurlIu
+	EIY45lgj4N8PeSr9M/u6mSOmki8o2XyY7QRZULzStRv5sM39ePMgjx9tjJPmBDvM3NFw
+	pOhQ==
+X-Gm-Message-State: AIkVDXLLzvVOIYiImJdMqr1QsQyLsMxWhRxrd7wBZR+koP8IEb1o9ZQHi1L3QG71bSRCSA==
+X-Received: by 10.28.60.5 with SMTP id j5mr68608835wma.119.1483636303619;
+	Thu, 05 Jan 2017 09:11:43 -0800 (PST)
 Received: from localhost.localdomain (p579F79CC.dip0.t-ipconnect.de.
 	[87.159.121.204]) by smtp.googlemail.com with ESMTPSA id
 	81sm101153107wmw.7.2017.01.05.09.11.42
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 05 Jan 2017 09:11:42 -0800 (PST)
+	Thu, 05 Jan 2017 09:11:43 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Jan 2017 18:11:19 +0100
-Message-Id: <1483636284-6351-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu,  5 Jan 2017 18:11:20 +0100
+Message-Id: <1483636284-6351-4-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
 In-Reply-To: <1483636284-6351-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1483636284-6351-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 3/8] glibmm: update 2.44.0 -> 2.50.0
+Subject: [PATCH 4/8] cairomm: update 1.11.2 -> 1.12.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,34 +58,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2017 17:11:43 -0000
+X-List-Received-Date: Thu, 05 Jan 2017 17:11:44 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Sources are found at gnome so use gnomebase.
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-core/glib-2.0/{glibmm_2.44.0.bb => glibmm_2.50.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-core/glib-2.0/{glibmm_2.44.0.bb => glibmm_2.50.0.bb} (87%)
+ meta-oe/recipes-graphics/cairo/cairomm_1.11.2.bb | 16 ----------------
+ meta-oe/recipes-graphics/cairo/cairomm_1.12.0.bb | 15 +++++++++++++++
+ 2 files changed, 15 insertions(+), 16 deletions(-)
+ delete mode 100644 meta-oe/recipes-graphics/cairo/cairomm_1.11.2.bb
+ create mode 100644 meta-oe/recipes-graphics/cairo/cairomm_1.12.0.bb
 
-diff --git a/meta-oe/recipes-core/glib-2.0/glibmm_2.44.0.bb b/meta-oe/recipes-core/glib-2.0/glibmm_2.50.0.bb
-similarity index 87%
-rename from meta-oe/recipes-core/glib-2.0/glibmm_2.44.0.bb
-rename to meta-oe/recipes-core/glib-2.0/glibmm_2.50.0.bb
-index d9cffff..ebe7747 100644
---- a/meta-oe/recipes-core/glib-2.0/glibmm_2.44.0.bb
-+++ b/meta-oe/recipes-core/glib-2.0/glibmm_2.50.0.bb
-@@ -14,8 +14,8 @@ SRC_URI = " \
-     ftp://ftp.gnome.org/pub/GNOME/sources/glibmm/${SHRT_VER}/glibmm-${PV}.tar.xz \
-     file://remove-examples.patch \
- "
--SRC_URI[md5sum] = "32ee4150b436d097fe2506d0b0b13a75"
--SRC_URI[sha256sum] = "1b0ac0425d24895507c0e0e8088a464c7ae2d289c47afa1c11f63278fc672ea8"
-+SRC_URI[md5sum] = "e7416beff6cba1f38c2bccd0dc8c3278"
-+SRC_URI[sha256sum] = "df726e3c6ef42b7621474b03b644a2e40ec4eef94a1c5a932c1e740a78f95e94"
- 
- do_install_append() {
-     install -d ${D}${datadir}/glibmm-2.4
+diff --git a/meta-oe/recipes-graphics/cairo/cairomm_1.11.2.bb b/meta-oe/recipes-graphics/cairo/cairomm_1.11.2.bb
+deleted file mode 100644
+index a330458..0000000
+--- a/meta-oe/recipes-graphics/cairo/cairomm_1.11.2.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-SUMMARY = "C++ bindings for Cairo graphics library"
+-
+-LICENSE = "LGPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=c46bda00ffbb0ba1dac22f8d087f54d9"
+-
+-inherit autotools pkgconfig
+-
+-DEPENDS = "cairo libsigc++-2.0"
+-
+-SRC_URI = "http://cairographics.org/releases/cairomm-${PV}.tar.gz;name=archive"
+-SRC_URI[archive.md5sum] = "732a3ff5b57401eb5dfeef795a2a0c52"
+-SRC_URI[archive.sha256sum] = "ccf677098c1e08e189add0bd146f78498109f202575491a82f1815b6bc28008d"
+-
+-FILES_${PN}-doc += "${datadir}/devhelp"
+-FILES_${PN}-dev += "${libdir}/cairomm-*/"
+-
+diff --git a/meta-oe/recipes-graphics/cairo/cairomm_1.12.0.bb b/meta-oe/recipes-graphics/cairo/cairomm_1.12.0.bb
+new file mode 100644
+index 0000000..d49a509
+--- /dev/null
++++ b/meta-oe/recipes-graphics/cairo/cairomm_1.12.0.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "C++ bindings for Cairo graphics library"
++
++LICENSE = "LGPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=c46bda00ffbb0ba1dac22f8d087f54d9"
++
++inherit gnomebase
++
++DEPENDS = "cairo libsigc++-2.0"
++
++SRC_URI[archive.md5sum] = "c62b476b61bd0abf7e9851f417d73291"
++SRC_URI[archive.sha256sum] = "a54ada8394a86182525c0762e6f50db6b9212a2109280d13ec6a0b29bfd1afe6"
++
++FILES_${PN}-doc += "${datadir}/devhelp"
++FILES_${PN}-dev += "${libdir}/cairomm-*/"
++
 -- 
 2.5.5
 
