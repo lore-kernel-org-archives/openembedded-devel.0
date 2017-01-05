@@ -1,51 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id C716671A92
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A7C071A92
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Jan 2017 17:11:44 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id l2so72337469wml.2
+	Thu,  5 Jan 2017 17:11:45 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id u144so97698300wmu.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Jan 2017 09:11:45 -0800 (PST)
+	Thu, 05 Jan 2017 09:11:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=Oqu9uFuEg4Kwhj1bI4SxBVs7VUxVPvO52atVCYNLdqE=;
-	b=KM7tXAE3skLbFVgyXFcyDG4JpduWlukogtWv1u/yZFGTNxN2AGbrTMAKVzMZZSeCNq
-	2c7wV9Bgv8wyIAA7hlussBk0FeWVKHLls1kpAFsCaBnc22BsoWHztFxbQbjqHFhIYhI4
-	V9fC9CwP2hmqxLnkhsrckpJXeAIyCZ4Y81osJdAjJKqdPWjXRwnAeIQVppu3mFEaBiV2
-	clL5LSR7fWS9bF9ZNKeTEbVreaRvrSGrJ5OqpSCD3CV888NKveKV1LCY0umQN9CFzp0B
-	+zbFLpMAbDkAGIxT2kfAKTAcOjMtBgPtFrKgX638QcTpUYF0zhO1YcagsDt06SMH3PCn
-	lttQ==
+	bh=hf5p8gYRvBmf8LAgSFc7WP8ygfFeiiRCyxsKqOy+0/g=;
+	b=TTGmvbH8/56GYvqCq025sL/xj1xXLCwhAp5l98g/2Kwzhwb6APw+RIyqE/MQ9kbfBX
+	H8A+UcyK/zqsv2P0RdeNY0mzppJha4vsu4cebVj716lUII3Z/sjY3PzLa0MmpfZrx6Nj
+	RSLlDim7qWDjihwYRvKjpcFNgMxKmbw2cG7Rv8iG++Yb0o0Ev48rhJuBOZts897RJ1M3
+	sRRZC6ca9gCFhRBnvjrdSoKwfAkzT8k5Xo+zHBMSj+A4HGaKTeDlyMD+LdfJUesL9SdE
+	GruO146GU3cWsSmiPOM2fmgjBjCHq+VxcnekFsYiA0ddAwZEG5tDK7fBOGbHqGJ7BM6y
+	+vCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=Oqu9uFuEg4Kwhj1bI4SxBVs7VUxVPvO52atVCYNLdqE=;
-	b=VgSiur0I27iq3G40+UhRMHzTt2bvaktSWfvEZZHRT8wAx4ZuaNO6acyjLVebRxYjtj
-	4a1H3N5tBIe6AZs00yksG5IbP3gVxpvT0YNajWomrc1cwJlekkGN6anbfW1HcfPyJPW7
-	+aXVwtRVi0ykGaftMAstW5JsTlhRrQhEknhKQk/1YQLhfUODUvWOxGpKZ3HbPb+uyoyg
-	rg14KoM/Z/nrCgiK/vNBQW1TLCUFqkT4weje1dHzdkVyew5ZhBFvSx/iG4+Z+uwdUyMn
-	z3WVAseCXHIywlQ4S+JjZKfhDzG29Lev7ccop4v7sEWhDXRYClICio+r7GHueCOQ4zXJ
-	bkKQ==
-X-Gm-Message-State: AIkVDXKF3uAN7oNU9psGJmQXGearVoxnmosGTs0ctsWDRslv3laJJBm24idgp4JeT9u9Pw==
-X-Received: by 10.28.8.202 with SMTP id 193mr58893241wmi.101.1483636304497;
-	Thu, 05 Jan 2017 09:11:44 -0800 (PST)
+	bh=hf5p8gYRvBmf8LAgSFc7WP8ygfFeiiRCyxsKqOy+0/g=;
+	b=aGwu+EpXf5wsN6bHTqxuOGql9HAi6nasd4ymABOKxxe4a7h/1tAXRYsD+KsIvRAnf5
+	qA3hUX4bkE6IAFrRRf6+w8RGcxabLCId07mPrtnqH3IoIVJl5mToq2nctep5ZRxh5K1P
+	/y5w5liZTDARbYNcKZewm0YBsIscKlPG+cglBB2ekWszEWLytgKEoOn6c+HSBff3CGl2
+	j840Xn2xfCxZnlAwtAPlp5yiQHkbdMkqNrCwg0qjxLzYMJl694rNdLkShcu1N4eNlc62
+	Zi1zaGDiwwN0Ij0ExEHoRhKf0UlAjpGJzmMdkTak2sRs6uYAMSssjt/LaYgFmZTsD6kI
+	7bEQ==
+X-Gm-Message-State: AIkVDXKRsdx/uPu6c0/6PFvwLmft7zXl4UmZP8yvqL34wtLz9zWcTEEfx/3CZwDc2HQ4Dg==
+X-Received: by 10.28.234.66 with SMTP id i63mr2603897wmh.43.1483636305258;
+	Thu, 05 Jan 2017 09:11:45 -0800 (PST)
 Received: from localhost.localdomain (p579F79CC.dip0.t-ipconnect.de.
 	[87.159.121.204]) by smtp.googlemail.com with ESMTPSA id
-	81sm101153107wmw.7.2017.01.05.09.11.43
+	81sm101153107wmw.7.2017.01.05.09.11.44
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 05 Jan 2017 09:11:43 -0800 (PST)
+	Thu, 05 Jan 2017 09:11:44 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Jan 2017 18:11:21 +0100
-Message-Id: <1483636284-6351-5-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu,  5 Jan 2017 18:11:22 +0100
+Message-Id: <1483636284-6351-6-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
 In-Reply-To: <1483636284-6351-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1483636284-6351-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 5/8] pangomm: update 2.36.0 -> 2.40.1
+Subject: [PATCH 6/8] atkmm: update 2.22.7 -> 2.24.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,27 +64,29 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../recipes-graphics/pango/{pangomm_2.36.0.bb => pangomm_2.40.1.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/pango/{pangomm_2.36.0.bb => pangomm_2.40.1.bb} (81%)
+ meta-oe/recipes-gnome/atk/{atkmm_2.22.7.bb => atkmm_2.24.2.bb} | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-gnome/atk/{atkmm_2.22.7.bb => atkmm_2.24.2.bb} (68%)
 
-diff --git a/meta-oe/recipes-graphics/pango/pangomm_2.36.0.bb b/meta-oe/recipes-graphics/pango/pangomm_2.40.1.bb
-similarity index 81%
-rename from meta-oe/recipes-graphics/pango/pangomm_2.36.0.bb
-rename to meta-oe/recipes-graphics/pango/pangomm_2.40.1.bb
-index f738153..7ff7b20 100644
---- a/meta-oe/recipes-graphics/pango/pangomm_2.36.0.bb
-+++ b/meta-oe/recipes-graphics/pango/pangomm_2.40.1.bb
-@@ -9,8 +9,8 @@ DEPENDS = "mm-common cairomm glibmm pango"
- SHRT_VER = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
+diff --git a/meta-oe/recipes-gnome/atk/atkmm_2.22.7.bb b/meta-oe/recipes-gnome/atk/atkmm_2.24.2.bb
+similarity index 68%
+rename from meta-oe/recipes-gnome/atk/atkmm_2.22.7.bb
+rename to meta-oe/recipes-gnome/atk/atkmm_2.24.2.bb
+index 6f51e34..30ac90a 100644
+--- a/meta-oe/recipes-gnome/atk/atkmm_2.22.7.bb
++++ b/meta-oe/recipes-gnome/atk/atkmm_2.24.2.bb
+@@ -9,10 +9,8 @@ DEPENDS = "atk glibmm"
  
- SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/pangomm/${SHRT_VER}/pangomm-${PV}.tar.xz"
--SRC_URI[md5sum] = "62910723211d86ab825b666b479871c9"
--SRC_URI[sha256sum] = "a8d96952c708d7726bed260d693cece554f8f00e48b97cccfbf4f5690b6821f0"
-+SRC_URI[md5sum] = "874eadd9434613dbacf0272c82c3ac23"
-+SRC_URI[sha256sum] = "9762ee2a2d5781be6797448d4dd2383ce14907159b30bc12bf6b08e7227be3af"
+ inherit gnome autotools pkgconfig
  
- inherit autotools pkgconfig
+-GNOME_COMPRESS_TYPE = "xz"
+-
+-SRC_URI[archive.md5sum] = "fec7db3fc47ba2e0c95d130ec865a236"
+-SRC_URI[archive.sha256sum] = "bfbf846b409b4c5eb3a52fa32a13d86936021969406b3dcafd4dd05abd70f91b"
++SRC_URI[archive.md5sum] = "d53b60b0f1be597e86070954a49cf0c3"
++SRC_URI[archive.sha256sum] = "ff95385759e2af23828d4056356f25376cfabc41e690ac1df055371537e458bd"
+ 
+ EXTRA_OECONF = " --disable-documentation "
  
 -- 
 2.5.5
