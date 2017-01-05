@@ -1,24 +1,45 @@
-Return-Path: <Chunguang.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1550D60111
+Return-Path: <piotr.lewicki@elfin.de>
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id E507C71A6B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Jan 2017 09:44:32 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v059iSkN018830
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 5 Jan 2017 01:44:28 -0800 (PST)
-Received: from pek-lpggp3.wrs.com (128.224.153.76) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 5 Jan 2017 01:44:27 -0800
-From: <chunguang.yang@windriver.com>
-To: <ting.liu@freescale.com>, <Martin.Jansa@gmail.com>
-Date: Thu, 5 Jan 2017 04:44:26 -0500
-Message-ID: <20170105094426.138799-1-chunguang.yang@windriver.com>
-X-Mailer: git-send-email 2.11.0
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 1/1] lcov: fix env command argument pass issue
+	Thu,  5 Jan 2017 11:05:32 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id c85so244013620wmi.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Jan 2017 03:05:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=elfin.de; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=cx2OZjKca9ST/AsWi+VIaKpkp+LA7evhgN6gyuUVqq0=;
+	b=Pc4AQWYs/JL/Rm1XtmcNQY9fU14FxtGkipldkLpvHocCaZ3PPsMrz7aShU2hPn8XYp
+	OMV/h4HvZDXMIEnW887AzgZg2+5/aFvxINXnnPQQD0DUQ1pFt0C2ecWCL7P5JB0R5yWC
+	//3rt9w+Na3xBt8pjdYb7wH4plurf1z7UDX0jl4q36ERHreQbdSC5TDC6ZeVwn+gdrjG
+	c3GGklZQl6PnC7+98B8RuRyV5XiMUx9Jlzh01ZUXsmIYl8kRrZa+UEQGColyJ11C6oWJ
+	c92zf2WCneS1gU7WW7cOaFEenuy71cIXnQmKGEJDNJzMyn4lHDabDWTWl/3aJM3p2hrh
+	3JXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=cx2OZjKca9ST/AsWi+VIaKpkp+LA7evhgN6gyuUVqq0=;
+	b=fTrhCkMsTcbIoZkIzCmdg+EfjFCHDyJwx/vwKGSraXyD0/+nLkfy329DFBHMFeRIWm
+	K0y9jevb4tuc+lzMuKR+f6cq6idCje4xXllAyKpghw7o9Jv0OI6PIMbceT6NpZY2NG8V
+	KDR/peohoWQlM826zhf9JnUZJ1tOxHBHF/UVv+eYrz58Zx2AApWupeoX5O+cV35VrJLf
+	GkyFiamdtkgz5ivcISDzaJSiKH0HAj0xYA84BndsbUun6R6Lel95fd7Qjvpxvj1ifdv6
+	j//30mvOpOPIyLei4sunbuG98JwTgyVJ2hiH9GU/cFTGNmszydVwAPaPTs7iB9pHckt9
+	Ijkw==
+X-Gm-Message-State: AIkVDXLd59WTc93QZaI01NfRYzfeOe+LQZu6ogkpYYlMDTS4yL4HkNfQdYTGtqf3HzQQRQ==
+X-Received: by 10.28.174.76 with SMTP id x73mr64760777wme.25.1483614332560;
+	Thu, 05 Jan 2017 03:05:32 -0800 (PST)
+Received: from piotr-ideapad.elnet (b2b-94-79-174-114.unitymedia.biz.
+	[94.79.174.114]) by smtp.gmail.com with ESMTPSA id
+	w18sm99851787wme.9.2017.01.05.03.05.31
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 05 Jan 2017 03:05:32 -0800 (PST)
+From: Piotr Lewicki <piotr.lewicki@elfin.de>
+To: openembedded-devel@lists.openembedded.org,
+	akuster808@gmail.com
+Date: Thu,  5 Jan 2017 12:05:25 +0100
+Message-Id: <1483614326-25468-1-git-send-email-piotr.lewicki@elfin.de>
+X-Mailer: git-send-email 2.7.4
+Subject: [OE-core][morty][PATCH 0/1] Fix building apache2 on morty branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,37 +52,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2017 09:44:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 05 Jan 2017 11:05:33 -0000
 
-From: chunguang yang <chunguang.yang@windriver.com>
+Patch from master that fixes building of apache2 on morty.
 
-when exec lcov in bash, the following error will appear:
+Derek Straka (1):
+  apache2: always use the archive.apache.org to ensure older releases
+    are always available
 
-/usr/bin/env: 'perl -w': No such file or directory
+ meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb | 2 +-
+ meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb        | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-perl uses the -w option to enable many warnings. But the
-env command can't pass the argument to perl, instead it
-treate perl -w as a file. To fix this issue, just keep
-the origin perl path and not use env command.
-
-Signed-off-by: chunguang yang <chunguang.yang@windriver.com>
----
- meta-oe/recipes-support/lcov/lcov_1.11.bb | 1 -
- 1 file changed, 1 deletion(-)
-
-diff --git a/meta-oe/recipes-support/lcov/lcov_1.11.bb b/meta-oe/recipes-support/lcov/lcov_1.11.bb
-index 114bd84cd..2f9ac336e 100644
---- a/meta-oe/recipes-support/lcov/lcov_1.11.bb
-+++ b/meta-oe/recipes-support/lcov/lcov_1.11.bb
-@@ -23,6 +23,5 @@ SRC_URI[sha256sum] = "c282de8d678ecbfda32ce4b5c85fc02f77c2a39a062f068bd8e774d29d
- 
- do_install() {
-     oe_runmake install PREFIX=${D}
--    sed -i -e '1s,#!.*perl,#! ${USRBINPATH}/env perl,' ${D}${bindir}/*
- }
- 
 -- 
-2.11.0
+2.7.4
 
 
