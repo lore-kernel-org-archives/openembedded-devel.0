@@ -1,51 +1,26 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id E4B2571A8D
+Return-Path: <pascal.bach@siemens.com>
+X-Greylist: delayed 354 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 05 Jan 2017 17:18:31 UTC
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+	by mail.openembedded.org (Postfix) with ESMTP id F304271984
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Jan 2017 17:11:47 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id u144so97698605wmu.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Jan 2017 09:11:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=WvI2jWrTcR21CE6aMhgZhAzsW05/sB1w+xpBsiGI32Y=;
-	b=SHet4shM7YrBLAn0mt6lfGEFXQctEo9vQ6GdH3ee0UKcg6XuJ27JBWVx5aCeRxdusw
-	0R0+Ih4uf5rbR9qjIRoPung5VZCW6k5H45khohiFFfB4bF7ZY33gfTBGjsyRxyDyfeeM
-	8u5C15OS8wFPCP/1I7A2YZcbeRD/wzS1o57p/jzAzU4j8h0FEF0LxagundTFsh9JlUYp
-	fRH4p0boqdvvBcWh+s6YpocAxziWxDYeXMCXorFi4uGs3pcD2euAgIj8ndGU9wrdyiy1
-	WlvghOxexxLqYBgWqiizADmhMoOrH4DvxOeNqCoTkZGLCUSqjaa+LL2PYrJMetysFNfu
-	CMtg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=WvI2jWrTcR21CE6aMhgZhAzsW05/sB1w+xpBsiGI32Y=;
-	b=gVgojydC9fOXBxUb2uvs3atK/Ec3O1tvp7eOSuJDQ354RG1ityIgKaSsf1CckQO2pM
-	qUGhmKk4coIeSV/Hbj/+tUqzo/OFi3Hfe6g9y3vV3gQvnYPhc09ExCZEZ8TA59L88xeg
-	PUqBpDtXsaHcbEYFHRot4KgbtoAbZdQqUn6oXfN+bVkb6+SsGquEJszGTNvmKzPgTUnH
-	1ienF/970DEf8eVWrOCW+IeBDJoD9lzYCnfQq1NL62f7rKGF8vG+0F1alaVSP5VUdkK8
-	F2+saMR3gnJ4WMixryiZEhj8tGQCpU+KMMNqASEQ/ahgp0yQsGu7B4v0qeK/BapRncj1
-	ECNw==
-X-Gm-Message-State: AIkVDXJBz7bFJX0jXvOBYn8pGcbEiS/XnrWvvQwfYjPKxlyo/HBCAiszwCb2z5PDyc2gfg==
-X-Received: by 10.28.142.16 with SMTP id q16mr58393609wmd.35.1483636307980;
-	Thu, 05 Jan 2017 09:11:47 -0800 (PST)
-Received: from localhost.localdomain (p579F79CC.dip0.t-ipconnect.de.
-	[87.159.121.204]) by smtp.googlemail.com with ESMTPSA id
-	81sm101153107wmw.7.2017.01.05.09.11.47
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 05 Jan 2017 09:11:47 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Thu,  5 Jan 2017 17:18:31 +0000 (UTC)
+Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id v05HCnow007084
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
+	Thu, 5 Jan 2017 18:12:49 +0100
+Received: from dev.sbt.siemens.com ([139.16.29.3])
+	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id v05HCaHE005092;
+	Thu, 5 Jan 2017 18:12:49 +0100
+From: Pascal Bach <pascal.bach@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Jan 2017 18:11:24 +0100
-Message-Id: <1483636284-6351-8-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.5.5
-In-Reply-To: <1483636284-6351-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1483636284-6351-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [PATCH 8/8] gnome-system-monitor: fix build after update of gnome c++ bindings
+Date: Thu,  5 Jan 2017 18:12:31 +0100
+Message-Id: <1483636352-22096-3-git-send-email-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.1.4
+In-Reply-To: <1483636352-22096-1-git-send-email-pascal.bach@siemens.com>
+References: <1483636352-22096-1-git-send-email-pascal.bach@siemens.com>
+Cc: Pascal Bach <pascal.bach@nextrem.ch>
+Subject: [meta-python][PATCH 3/4] python-yaml: provide both python2 and python3 package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,43 +33,157 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Jan 2017 17:11:48 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 05 Jan 2017 17:18:32 -0000
 
-In file included from <staging>/usr/include/c++/6.2.0/type_traits:35:0,
-                 from <staging>/usr/include/sigc++-2.0/sigc++/visit_each.h:22,
-                 from <staging>/usr/include/sigc++-2.0/sigc++/functors/slot.h:6,
-                 from <staging>/usr/include/sigc++-2.0/sigc++/signal_base.h:27,
-                 from <staging>/usr/include/sigc++-2.0/sigc++/signal.h:8,
-                 from <staging>/usr/include/sigc++-2.0/sigc++/sigc++.h:104,
-                 from <staging>/usr/include/glibmm-2.4/glibmm/thread.h:50,
-                 from <staging>/usr/include/glibmm-2.4/glibmm.h:89,
-                 from <staging>/usr/include/gtkmm-2.4/gtkmm.h:87,
-                 from ../../gnome-system-monitor-2.28.2/src/procman.cpp:26:
-<staging>/usr/include/c++/6.2.0/bits/c++0x_warning.h:32:2: error: #error This file requires compiler and library support for the ISO C++ 2011 standard. This support must be enabled with the -std=c++11 or -std=gnu++11 compiler options.
- #error This file requires compiler and library support \
-  ^~~~~
+From: Pascal Bach <pascal.bach@nextrem.ch>
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Further the recipe is simplified by using the pypi and setuptools class.
+The custom setup.py is no onger necessary.
+
+Signed-off-by: Pascal Bach <pascal.bach@nextrem.ch>
 ---
- .../recipes-gnome/gnome-system-monitor/gnome-system-monitor_2.28.2.bb   | 2 ++
- 1 file changed, 2 insertions(+)
+ .../recipes-devtools/python/python-pyyaml.inc      | 14 +++++
+ .../recipes-devtools/python/python-pyyaml/setup.py | 64 ----------------------
+ .../recipes-devtools/python/python-pyyaml_3.12.bb  | 26 +--------
+ .../recipes-devtools/python/python3-pyyaml_3.12.bb |  2 +
+ 4 files changed, 18 insertions(+), 88 deletions(-)
+ create mode 100755 meta-python/recipes-devtools/python/python-pyyaml.inc
+ delete mode 100644 meta-python/recipes-devtools/python/python-pyyaml/setup.py
+ mode change 100644 => 100755 meta-python/recipes-devtools/python/python-pyyaml_3.12.bb
+ create mode 100755 meta-python/recipes-devtools/python/python3-pyyaml_3.12.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_2.28.2.bb b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_2.28.2.bb
-index d5fab62..7518bbb 100644
---- a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_2.28.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_2.28.2.bb
-@@ -20,6 +20,8 @@ do_configure_prepend() {
-     sed -i -e s:help::g ${S}/Makefile.am
- }
- 
-+CXXFLAGS += "--std=c++11"
+diff --git a/meta-python/recipes-devtools/python/python-pyyaml.inc b/meta-python/recipes-devtools/python/python-pyyaml.inc
+new file mode 100755
+index 0000000..41321ca
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pyyaml.inc
+@@ -0,0 +1,14 @@
++SUMMARY = "Python support for YAML"
++HOMEPAGE = "http://www.pyyaml.org"
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=6015f088759b10e0bc2bf64898d4ae17"
++DEPENDS = "libyaml ${PYTHON_PN}-cython-native"
 +
- RRECOMMENDS_${PN} = "adwaita-icon-theme"
- 
- FILES_${PN} += "${datadir}/icons \
++PYPI_PACKAGE = "PyYAML"
++inherit pypi
++
++SRC_URI[md5sum] = "4c129761b661d181ebf7ff4eb2d79950"
++SRC_URI[sha256sum] = "592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab"
++
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-pyyaml/setup.py b/meta-python/recipes-devtools/python/python-pyyaml/setup.py
+deleted file mode 100644
+index 2ed1c94..0000000
+--- a/meta-python/recipes-devtools/python/python-pyyaml/setup.py
++++ /dev/null
+@@ -1,64 +0,0 @@
+-NAME = 'PyYAML'
+-VERSION = '3.10'
+-DESCRIPTION = "YAML parser and emitter for Python"
+-LONG_DESCRIPTION = """\
+-YAML is a data serialization format designed for human readability and
+-interaction with scripting languages.  PyYAML is a YAML parser and
+-emitter for Python.
+-
+-PyYAML features a complete YAML 1.1 parser, Unicode support, pickle
+-support, capable extension API, and sensible error messages.  PyYAML
+-supports standard YAML tags and provides Python-specific tags that allow
+-to represent an arbitrary Python object.
+-
+-PyYAML is applicable for a broad range of tasks from complex
+-configuration files to object serialization and persistance."""
+-AUTHOR = "Kirill Simonov"
+-AUTHOR_EMAIL = 'xi@resolvent.net'
+-LICENSE = "MIT"
+-PLATFORMS = "Any"
+-URL = "http://pyyaml.org/wiki/PyYAML"
+-DOWNLOAD_URL = "http://pyyaml.org/download/pyyaml/%s-%s.tar.gz" % (NAME, VERSION)
+-CLASSIFIERS = [
+-    "Development Status :: 5 - Production/Stable",
+-    "Intended Audience :: Developers",
+-    "License :: OSI Approved :: MIT License",
+-    "Operating System :: OS Independent",
+-    "Programming Language :: Python",
+-    "Topic :: Software Development :: Libraries :: Python Modules",
+-    "Topic :: Text Processing :: Markup",
+-]
+-
+-from distutils.core import setup
+-from distutils.extension import Extension
+-from Cython.Distutils import build_ext
+-
+-import sys, os.path
+-
+-
+-if __name__ == '__main__':
+-
+-    setup(
+-        name=NAME,
+-        version=VERSION,
+-        description=DESCRIPTION,
+-        long_description=LONG_DESCRIPTION,
+-        author=AUTHOR,
+-        author_email=AUTHOR_EMAIL,
+-        license=LICENSE,
+-        platforms=PLATFORMS,
+-        url=URL,
+-        download_url=DOWNLOAD_URL,
+-        classifiers=CLASSIFIERS,
+-
+-        package_dir={'': 'lib'},
+-        packages=['yaml'],
+-
+-        ext_modules = [
+-        Extension( "_yaml", ["ext/_yaml.pyx"], libraries = ["yaml"] )
+-        ],
+-
+-        cmdclass={
+-            'build_ext': build_ext,
+-        },
+-    )
+diff --git a/meta-python/recipes-devtools/python/python-pyyaml_3.12.bb b/meta-python/recipes-devtools/python/python-pyyaml_3.12.bb
+old mode 100644
+new mode 100755
+index 0899a2e..6d9f3e9
+--- a/meta-python/recipes-devtools/python/python-pyyaml_3.12.bb
++++ b/meta-python/recipes-devtools/python/python-pyyaml_3.12.bb
+@@ -1,24 +1,2 @@
+-SUMMARY = "Python support for YAML"
+-HOMEPAGE = "http://www.pyyaml.org"
+-SECTION = "devel/python"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=6015f088759b10e0bc2bf64898d4ae17"
+-DEPENDS = "libyaml python-cython-native"
+-
+-SRC_URI = "http://pyyaml.org/download/pyyaml/PyYAML-${PV}.tar.gz \
+-           file://setup.py \
+-"
+-
+-SRC_URI[md5sum] = "4c129761b661d181ebf7ff4eb2d79950"
+-SRC_URI[sha256sum] = "592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab"
+-
+-S = "${WORKDIR}/PyYAML-${PV}"
+-
+-inherit distutils
+-
+-do_configure_prepend() {
+-    # upstream setup.py overcomplicated, use ours
+-    install -m 0644 ${WORKDIR}/setup.py ${S}
+-}
+-
+-BBCLASSEXTEND = "native nativesdk"
++inherit setuptools
++require python-pyyaml.inc
+diff --git a/meta-python/recipes-devtools/python/python3-pyyaml_3.12.bb b/meta-python/recipes-devtools/python/python3-pyyaml_3.12.bb
+new file mode 100755
+index 0000000..470aca6
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pyyaml_3.12.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-pyyaml.inc
 -- 
-2.5.5
+2.1.4
 
 
