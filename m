@@ -1,47 +1,44 @@
-Return-Path: <moritz.fischer@ettus.com>
-Received: from mail-pg0-f46.google.com (mail-pg0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D57171C5A
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wj0-f193.google.com (mail-wj0-f193.google.com
+	[209.85.210.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 69D6C6093A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Jan 2017 19:47:17 +0000 (UTC)
-Received: by mail-pg0-f46.google.com with SMTP id 14so9999349pgg.1
+	Fri,  6 Jan 2017 21:19:19 +0000 (UTC)
+Received: by mail-wj0-f193.google.com with SMTP id dh1so331997wjb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Jan 2017 11:47:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ettus-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=a/mwEIn55J1sVL6EUHaScCm1SJK7qihor/Fm0Bd/8BI=;
-	b=QHrkVPtj8+gPG3DnUVhRUm24+GPiMAtkJyYBGlniM7g8yMw5YEpLrMHQjsSvsfmubf
-	IZ4ZXHZheVe/fkXU4XxCaADq2G46tIqGmzfwV+oqVfemgJ4+B9sPVord3SGLaKkxHliV
-	zxY3WfFKhliSWMF+oBncJQWJag1SS5poaCYhggpQ9ct8VVQCmhR6MyIKffpqRGVH+gea
-	JMdA80yM24+efrUFPLA4wiLFgM38EfxJIO5/6sO2NwlvZrhvnHhlUU8IuVu2xGqNj6ou
-	ysmlEk35hCOX+XoCbEo1m6N6yRIWff6bc5t58fKOdTQPVoKg34I6twCJEJdXVFitMw4g
-	rsFQ==
+	Fri, 06 Jan 2017 13:19:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=EqvnigbrObEbWsmIr/W/YkK5Urp3ZPfTOdEb9ZBwedA=;
+	b=Ao0m65jXm3yZCFI8Pt3f9mI4tj7qcTYXOq0P9z+ZbdbQkTsKxYx5Jhfi4+VCgPqxV0
+	Pi7Gyx1lG4Ie9cyyzi1/Q7KXNJTvF+bkTHjBkdu63L9O36zXgGKynWJJoiLYfE35huHq
+	08xk8MpyNorkgfDHO6NUt7uW9PnklfJOQCOpwdrI2lEQ6CV97Envq4R6OjG6lRbdmMul
+	fCKoAZfAM6jd5AS2qrB6PErIqVGEkaL8WwFApWmSLpdmqMQI+Dk+akR2Z7XjHQzvPEjb
+	zUMSziKXyEo4annkTedqzIiW+KuRVYxPC0KFzwlPK1fP+LwMEmXmBKuswKHRJCvMtciu
+	c/Kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=a/mwEIn55J1sVL6EUHaScCm1SJK7qihor/Fm0Bd/8BI=;
-	b=HJrUq6w+9ePK47ToDebsd3nFwvUfY9Gj4YEwBb+bBD2W4gnPDnSddcozOaEKHm+SRC
-	4m+3beGRqt5U2B5lpI8AAUya0SwM2u419rKzTv54ybls+FRLnyOVxy4mptN6K0zDDi5J
-	VgAhN3o6CblNIoTWLrLSc5YbCuCdNDovdRSpocO8PSCTKuLsGdS58gdM7ECJHcQ6WGP3
-	uGQiFCPYlkrUtMN4ojXxfdLVlAOa6HMi9WdhLaS3QSoOQalZ0K5jLu9mXLDh/NhWJ6f+
-	yQP37wXQtR6BfWKSQtkwDT7CJLENugZxxZru3bbKq6crwCGstpjVsvQAJvDgqo3t7O9K
-	wtVA==
-X-Gm-Message-State: AIkVDXLtnmn5kzBEYzeRrQo2tYwdaIz4FOWbg6uvbS6FGpkAZGiWinaEyoooBebhKtlYehFm
-X-Received: by 10.84.210.130 with SMTP id a2mr171005412pli.106.1483732038164; 
-	Fri, 06 Jan 2017 11:47:18 -0800 (PST)
-Received: from tyrael.amer.corp.natinst.com
-	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
-	by smtp.gmail.com with ESMTPSA id
-	n84sm112337370pfk.25.2017.01.06.11.47.17
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 06 Jan 2017 11:47:17 -0800 (PST)
-From: Moritz Fischer <moritz.fischer@ettus.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 Jan 2017 11:47:00 -0800
-Message-Id: <1483732020-31128-1-git-send-email-moritz.fischer@ettus.com>
-X-Mailer: git-send-email 2.7.4
-Cc: koen@dominion.thruhere.net, mdf@kernel.org
-Subject: [meta-oe][PATCH v4] devtools: Add recipe for Chromium Embedded Controller utilities
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=EqvnigbrObEbWsmIr/W/YkK5Urp3ZPfTOdEb9ZBwedA=;
+	b=Z5OaIwg01wby5z/vWIJxoq6aM/4Hu63CHOPp1Xbb4k0E03B2uRMCx2ADm/6t1+M+tL
+	xXotJXXREyvdoiceNQUmdzHAXxKF2IeZzJLJclOqx0FBOSut4F+cbfhaHkQaeMoSa1zB
+	qoMJe2mglMdfpvOaDZPlfFZogtIxRxge+mtzZOlB/a2iiSnwE2yGk7u4YH3sG5Qx7E0i
+	BJdHRP35bCDlyIpqGfvCVv97IpbsdXlvpYnH6pffO32B3mam8zYvO6SFOMHV7i5qC9Ox
+	LX5fWX07QgLoLJGyEPZa4x4VFylKyIlZethKhFV8wmVdFiChAsayKfQOncvs5zQYJrSi
+	mB6g==
+X-Gm-Message-State: AIkVDXL9k5PGajj0zCG6E2ccViVKYrRq3Ojs/44VBN4wmfCoOUr2hpBTS1WkVumR9FCyQe5ESbXEbTS9P1A2yw==
+X-Received: by 10.195.30.165 with SMTP id kf5mr60621363wjd.41.1483737558737;
+	Fri, 06 Jan 2017 13:19:18 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.194.248.129 with HTTP; Fri, 6 Jan 2017 13:19:18 -0800 (PST)
+In-Reply-To: <1482152989-3982-1-git-send-email-armccurdy@gmail.com>
+References: <1482152989-3982-1-git-send-email-armccurdy@gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Fri, 6 Jan 2017 13:19:18 -0800
+Message-ID: <CAJ86T=Wtt8-cgQE32cjz83GkBjHMtNcd-RAamkiMtZCO7dFyxQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libconfig: add support for libconfig-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,65 +51,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jan 2017 19:47:18 -0000
+X-List-Received-Date: Fri, 06 Jan 2017 21:19:19 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Add a recipe to build 'ectool' a utility to interact with the embedded
-controller on Google's chromebooks (and other platforms using it).
+On Mon, Dec 19, 2016 at 5:09 AM, Andre McCurdy <armccurdy@gmail.com> wrote:
+> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+> ---
+>  meta-oe/recipes-extended/libconfig/libconfig_1.5.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb b/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
+> index fb6e50e..94daa88 100644
+> --- a/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
+> +++ b/meta-oe/recipes-extended/libconfig/libconfig_1.5.bb
+> @@ -12,3 +12,5 @@ inherit autotools-brokensep pkgconfig
+>
+>  SRC_URI[md5sum] = "a939c4990d74e6fc1ee62be05716f633"
+>  SRC_URI[sha256sum] = "e31daa390d8e4461c8830512fe2e13ba1a3d6a02a2305a02429eec61e68703f6"
+> +
+> +BBCLASSEXTEND = "native"
+> --
+> 1.9.1
+>
 
-Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
----
-Changes from v1:
-
-- Replaced DESCRIPTION with SUMMARY (Martin)
-- Use EXTRA_OEMAKE (Martin)
-- Removed FILESEXTRAPATHS (Martin)
-- Changed PV (Martin / Khem)
-- Removed FILES_PN (Khem)
-
-Changes from v2:
-
-- Changed PV (Martin)
-
-Changes from v3:
-
-- Patch now against meta-oe (Khem, Ross)
-- No longer need patch for HOST_LDFLAGS since merged upstream
-
----
- .../chromium-utils/chromium-utils.bb               | 23 ++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb
-
-diff --git a/meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb b/meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb
-new file mode 100644
-index 0000000..49d2647
---- /dev/null
-+++ b/meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "Chromium EC utilities"
-+DEPENDS = "libftdi"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=562c740877935f40b262db8af30bca36"
-+
-+SRCREV = "a7bf207add71cfb20308ed6858b1b028c866304a"
-+SRC_URI = "git://chromium.googlesource.com/chromiumos/platform/ec;protocol=https \
-+          "
-+
-+PV = "1.1.9999+gitr${SRCPV}"
-+
-+S = "${WORKDIR}/git"
-+
-+EXTRA_OEMAKE = "'HOSTCC=${CC}' 'HOSTCFLAGS=${CFLAGS}' 'HOST_LDFLAGS=${LDFLAGS}'"
-+
-+do_compile() {
-+    oe_runmake utils
-+}
-+
-+do_install() {
-+    install -m 0755 -d ${D}${bindir}
-+    install -m 0755 ${S}/build/bds/util/ectool ${D}${bindir}/ectool
-+}
--- 
-2.7.4
-
+Ping.
 
