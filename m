@@ -1,25 +1,47 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8424F600BC
+Return-Path: <moritz.fischer@ettus.com>
+Received: from mail-pg0-f46.google.com (mail-pg0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D57171C5A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Jan 2017 02:05:34 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v0625ZqN013072
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri,  6 Jan 2017 19:47:17 +0000 (UTC)
+Received: by mail-pg0-f46.google.com with SMTP id 14so9999349pgg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 5 Jan 2017 18:05:35 -0800 (PST)
-Received: from localhost (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.294.0;
-	Thu, 5 Jan 2017 18:05:33 -0800
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 6 Jan 2017 10:04:53 +0800
-Message-ID: <1483668293-22057-1-git-send-email-yi.zhao@windriver.com>
+	Fri, 06 Jan 2017 11:47:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ettus-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=a/mwEIn55J1sVL6EUHaScCm1SJK7qihor/Fm0Bd/8BI=;
+	b=QHrkVPtj8+gPG3DnUVhRUm24+GPiMAtkJyYBGlniM7g8yMw5YEpLrMHQjsSvsfmubf
+	IZ4ZXHZheVe/fkXU4XxCaADq2G46tIqGmzfwV+oqVfemgJ4+B9sPVord3SGLaKkxHliV
+	zxY3WfFKhliSWMF+oBncJQWJag1SS5poaCYhggpQ9ct8VVQCmhR6MyIKffpqRGVH+gea
+	JMdA80yM24+efrUFPLA4wiLFgM38EfxJIO5/6sO2NwlvZrhvnHhlUU8IuVu2xGqNj6ou
+	ysmlEk35hCOX+XoCbEo1m6N6yRIWff6bc5t58fKOdTQPVoKg34I6twCJEJdXVFitMw4g
+	rsFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=a/mwEIn55J1sVL6EUHaScCm1SJK7qihor/Fm0Bd/8BI=;
+	b=HJrUq6w+9ePK47ToDebsd3nFwvUfY9Gj4YEwBb+bBD2W4gnPDnSddcozOaEKHm+SRC
+	4m+3beGRqt5U2B5lpI8AAUya0SwM2u419rKzTv54ybls+FRLnyOVxy4mptN6K0zDDi5J
+	VgAhN3o6CblNIoTWLrLSc5YbCuCdNDovdRSpocO8PSCTKuLsGdS58gdM7ECJHcQ6WGP3
+	uGQiFCPYlkrUtMN4ojXxfdLVlAOa6HMi9WdhLaS3QSoOQalZ0K5jLu9mXLDh/NhWJ6f+
+	yQP37wXQtR6BfWKSQtkwDT7CJLENugZxxZru3bbKq6crwCGstpjVsvQAJvDgqo3t7O9K
+	wtVA==
+X-Gm-Message-State: AIkVDXLtnmn5kzBEYzeRrQo2tYwdaIz4FOWbg6uvbS6FGpkAZGiWinaEyoooBebhKtlYehFm
+X-Received: by 10.84.210.130 with SMTP id a2mr171005412pli.106.1483732038164; 
+	Fri, 06 Jan 2017 11:47:18 -0800 (PST)
+Received: from tyrael.amer.corp.natinst.com
+	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
+	by smtp.gmail.com with ESMTPSA id
+	n84sm112337370pfk.25.2017.01.06.11.47.17
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 06 Jan 2017 11:47:17 -0800 (PST)
+From: Moritz Fischer <moritz.fischer@ettus.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  6 Jan 2017 11:47:00 -0800
+Message-Id: <1483732020-31128-1-git-send-email-moritz.fischer@ettus.com>
 X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-X-Originating-IP: [128.224.162.198]
-Subject: [meta-oe][PATCH] makedumpfile: update to 1.6.1
+Cc: koen@dominion.thruhere.net, mdf@kernel.org
+Subject: [meta-oe][PATCH v4] devtools: Add recipe for Chromium Embedded Controller utilities
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,122 +54,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Jan 2017 02:05:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 06 Jan 2017 19:47:18 -0000
 
-* Support 4.8 kernel
-* Add a patch to fix vmcore compressing for ppc64
+Add a recipe to build 'ectool' a utility to interact with the embedded
+controller on Google's chromebooks (and other platforms using it).
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
 ---
- ...-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch | 73 ++++++++++++++++++++++
- ...makedumpfile_1.6.0.bb => makedumpfile_1.6.1.bb} |  5 +-
- 2 files changed, 76 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-kernel/makedumpfile/makedumpfile/0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch
- rename meta-oe/recipes-kernel/makedumpfile/{makedumpfile_1.6.0.bb => makedumpfile_1.6.1.bb} (87%)
+Changes from v1:
 
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch
+- Replaced DESCRIPTION with SUMMARY (Martin)
+- Use EXTRA_OEMAKE (Martin)
+- Removed FILESEXTRAPATHS (Martin)
+- Changed PV (Martin / Khem)
+- Removed FILES_PN (Khem)
+
+Changes from v2:
+
+- Changed PV (Martin)
+
+Changes from v3:
+
+- Patch now against meta-oe (Khem, Ross)
+- No longer need patch for HOST_LDFLAGS since merged upstream
+
+---
+ .../chromium-utils/chromium-utils.bb               | 23 ++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb
+
+diff --git a/meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb b/meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb
 new file mode 100644
-index 0000000..e0c3d9a
+index 0000000..49d2647
 --- /dev/null
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile/0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch
-@@ -0,0 +1,73 @@
-+From 653fe8e724081d2f289c2245d1220d5f7170538d Mon Sep 17 00:00:00 2001
-+From: Alexandru Moise <alexandru.moise@windriver.com>
-+Date: Fri, 29 Apr 2016 07:40:46 +0000
-+Subject: [PATCH] mem_section: Support only 46 bit for MAX_PHYSMEM_BITS on
-+ PPC64
++++ b/meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "Chromium EC utilities"
++DEPENDS = "libftdi"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=562c740877935f40b262db8af30bca36"
 +
-+Related to change:
-+http://lists.infradead.org/pipermail/kexec/2013-January/007849.html
++SRCREV = "a7bf207add71cfb20308ed6858b1b028c866304a"
++SRC_URI = "git://chromium.googlesource.com/chromiumos/platform/ec;protocol=https \
++          "
 +
-+Linux on PPC64 has supported only 46 bit MAX_PHYSMEM_BITS since commit:
-+048ee0993ec8360abb0b51bdf8f8721e9ed62ec4
++PV = "1.1.9999+gitr${SRCPV}"
 +
-+Also remove set_ppc64_max_physmem_bits and set info->max_physmem_bits in
-+get_machdep_info_ppc64 instead. set_ppc64_max_physmem_bits is broken
-+for all kernels compiled with CONFIG_SPARSEMEM=n. makedumpfile is
-+unable to get mem_section field from powerpc kernel since commit:
-+fd59d231f81cb02870b9cf15f456a897f3669b4e
++S = "${WORKDIR}/git"
 +
-+Upstream-Status: Pending
++EXTRA_OEMAKE = "'HOSTCC=${CC}' 'HOSTCFLAGS=${CFLAGS}' 'HOST_LDFLAGS=${LDFLAGS}'"
 +
-+Signed-off-by: Alexandru Moise <alexandru.moise@windriver.com>
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+---
-+ arch/ppc64.c | 28 ++--------------------------
-+ 1 file changed, 2 insertions(+), 26 deletions(-)
++do_compile() {
++    oe_runmake utils
++}
 +
-+diff --git a/arch/ppc64.c b/arch/ppc64.c
-+index 89a7f05..6c928ab 100644
-+--- a/arch/ppc64.c
-++++ b/arch/ppc64.c
-+@@ -302,37 +302,13 @@ ppc64_vtop_level4(unsigned long vaddr)
-+ }
-+ 
-+ int
-+-set_ppc64_max_physmem_bits(void)
-+-{
-+-	long array_len = ARRAY_LENGTH(mem_section);
-+-	/*
-+-	 * The older ppc64 kernels uses _MAX_PHYSMEM_BITS as 42 and the
-+-	 * newer kernels 3.7 onwards uses 46 bits.
-+-	 */
-+-
-+-	info->max_physmem_bits  = _MAX_PHYSMEM_BITS_ORIG ;
-+-	if ((array_len == (NR_MEM_SECTIONS() / _SECTIONS_PER_ROOT_EXTREME()))
-+-		|| (array_len == (NR_MEM_SECTIONS() / _SECTIONS_PER_ROOT())))
-+-		return TRUE;
-+-
-+-	info->max_physmem_bits  = _MAX_PHYSMEM_BITS_3_7;
-+-	if ((array_len == (NR_MEM_SECTIONS() / _SECTIONS_PER_ROOT_EXTREME()))
-+-		|| (array_len == (NR_MEM_SECTIONS() / _SECTIONS_PER_ROOT())))
-+-		return TRUE;
-+-
-+-	return FALSE;
-+-}
-+-
-+-int
-+ get_machdep_info_ppc64(void)
-+ {
-+ 	unsigned long vmlist, vmap_area_list, vmalloc_start;
-+ 
-+ 	info->section_size_bits = _SECTION_SIZE_BITS;
-+-	if (!set_ppc64_max_physmem_bits()) {
-+-		ERRMSG("Can't detect max_physmem_bits.\n");
-+-		return FALSE;
-+-	}
-++	info->max_physmem_bits = _MAX_PHYSMEM_BITS_3_7;
-++
-+ 	info->page_offset = __PAGE_OFFSET;
-+ 
-+ 	if (SYMBOL(_stext) == NOT_FOUND_SYMBOL) {
-+-- 
-+2.5.0
-+
-diff --git a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.1.bb
-similarity index 87%
-rename from meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
-rename to meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.1.bb
-index 93a6f62..dacc76b 100644
---- a/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.0.bb
-+++ b/meta-oe/recipes-kernel/makedumpfile/makedumpfile_1.6.1.bb
-@@ -20,12 +20,13 @@ FILES_${PN}-tools = "${bindir}/*.pl"
- SRC_URI = "\
-     ${SOURCEFORGE_MIRROR}/makedumpfile/${BPN}-${PV}.tar.gz \
-     file://0001-makedumpfile-replace-hardcode-CFLAGS.patch \
-+    file://0002-mem_section-Support-only-46-bit-for-MAX_PHYSMEM_BITS.patch \
- "
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- LICENSE = "GPLv2.0"
- 
--SRC_URI[md5sum] = "041c5c6de2c3066600e4ca646c2397d6"
--SRC_URI[sha256sum] = "e3147abc52df2ceac1e9affef45bf37e2f2e1d9979bc94a761ee11e4044072ac"
-+SRC_URI[md5sum] = "16c0ae9902ae57be4a603a6ab1e86c53"
-+SRC_URI[sha256sum] = "0b6e73106998670407887de9e1a505b3a2dbb2fb517a4b968a665eda8fb097ce"
- 
- SECTION = "base"
- 
++do_install() {
++    install -m 0755 -d ${D}${bindir}
++    install -m 0755 ${S}/build/bds/util/ectool ${D}${bindir}/ectool
++}
 -- 
 2.7.4
 
