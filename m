@@ -1,45 +1,51 @@
-Return-Path: <oleksandr.kravchuk@pelagicore.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CA1671C1F
+Return-Path: <koen@dominion.thruhere.net>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id F3CE360621
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Jan 2017 08:32:25 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id k184so58713612wme.1
+	Sat,  7 Jan 2017 08:50:45 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id m203so9878763wma.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Jan 2017 00:32:26 -0800 (PST)
+	Sat, 07 Jan 2017 00:50:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=DsikvF0fWZWdCQrimHteDZ5KYYdoqn8vVMYl9tEvTGE=;
-	b=uPw2tykz6b5049hdg/zKq4Mm1CnpO30ZY2bBkzbonN5gU3Zm5ejAoV55d5mpCYHmnr
-	Aj8YjIZryflV52EwIDk+7wp5NdnGyH6cSREJN8idGLk3gZP05CYcEL+SkzZ5sV2LcYWN
-	eew15EkCmIIAfpzaUp92g5zuOmusV7z4ZYADQzg6qPLXsVTDtJ5wIrl3VMuAzHUD2PBI
-	cC0hUxLzRTHn2unYbkMf8CEZOjZnZ3Ftat3FyeSiku8OBm802bNzT9oS1kS2tGvFiY9B
-	HvqWYQnCyHPXRx6GkEwKepZgan8zym4HrUUiPbUe0cQSyc4b9eTSlY1LCambgqAF+b70
-	ecFw==
+	d=dominion-thruhere-net.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=05fZCbkuc5WY2vSa2inITMJWAsnrdwEin2GGCylQsvk=;
+	b=UeW9UqS09CqHV+nBZravGkrB51nQXBxfACeR8uhbkWi5KYGLxTq6n0ig9wMyjd4Qa3
+	P948HRuvmFqfLfUt6IaFbOKgqdBTGLMdhRorj18F9GP7JR9+Keu7Kmk4zQupFAa9TfKo
+	9mcP7sobF4XT1d95wYN3H3hqlaC5/n9xjidCqilsgrcUEIvjBmoeFUIijssfaPneiuuZ
+	ZspVxahN3SrdujhnogYsO6kQvXvlE9wwT5WUNnvqwzPd5CCM0h2qLDAIvgXcQIWF1bAJ
+	zOxZLUsmA6ELQwiL1O1wLotU87AG39EQSpHAGZPYa6FH265oRAKKiNQrgsYVJ5l5zEFC
+	skLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=DsikvF0fWZWdCQrimHteDZ5KYYdoqn8vVMYl9tEvTGE=;
-	b=K3bHDm20KPasB8t7Rnia8Rz8wCczLm6P/W+VkGD2eyq3xzNe6fmj7BIBFD5GRPhZei
-	szQBSsrk1Ll9y5sjgRd6x5Mj0y+B7aN9wH/2H9TsIo70YSSiZAhi9Z2N92r80d9vfIm3
-	UEkdvVFklOygAnpaYNvDFkVpxsmVPisHHyWZtz83mQe1DKk9na4rOfqM2tU4LeGSVAoZ
-	pHQi4x61y/+RyaXVRN9aRkrtmRKpb/ishAoLjVVyYpp4BxBAOiJqZDaFfdzDv78oqYn4
-	5Hake7/rJu+LG4x5fNDPoupHOpGN3NfBCNwhEFOD+8za8Ly+SNmab13iwUJmyuc/IiHV
-	GgGA==
-X-Gm-Message-State: AIkVDXLF+JAGQpa9zRYox5I/crQgpboKjfFZS4f6Ce4qbuk6f4B3w4ZcOfvVMm9p/wakyzo8
-X-Received: by 10.28.153.10 with SMTP id b10mr829111wme.103.1483777945622;
-	Sat, 07 Jan 2017 00:32:25 -0800 (PST)
-Received: from stout.office.pelagicore.net ([83.218.80.242])
+	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=05fZCbkuc5WY2vSa2inITMJWAsnrdwEin2GGCylQsvk=;
+	b=s2GZHEkOiadvAxnXc6vjGTwi7QPeaeEb09AlMlFXdgX9HpXmg73rHIj+YCq+BUJ9ZT
+	yrT92lizwGActwASJq5b+VWdnf/loX3OMi2/T/yhVWWP2cAULUxqCTj2S7EAbR8GYQog
+	X7bQqTLnbI+w750uxq8NQTHT5nu3yLg4d4RR/wMuf89EMvksM/7x/QMiP3UjzS2a4WiB
+	6OGy0ILKEd/TxGzGHQlrEYhBm0JBFttK7UMDsFAbMww/vePYHvd7lnny6H4HcuoXBQyw
+	CJe/qD2TGx7xH6cgsPLL1Arxrj6jwftoreoojQ92El2ycBmmjk2jaSku1bh67uzeczm2
+	yMFQ==
+X-Gm-Message-State: AIkVDXJbJd5JLqt4dL+zUyEPmb3WfjCTWCfssVGClrm+IapypExNn09onEDBa+VuMvkCfg==
+X-Received: by 10.223.174.1 with SMTP id x1mr4370312wrc.113.1483779045474;
+	Sat, 07 Jan 2017 00:50:45 -0800 (PST)
+Received: from [172.20.0.85] (ip4da29576.direct-adsl.nl. [77.162.149.118])
 	by smtp.gmail.com with ESMTPSA id
-	d10sm112304240wja.20.2017.01.07.00.32.24
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 07 Jan 2017 00:32:25 -0800 (PST)
-From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Jan 2017 09:31:43 +0100
-Message-Id: <1483777903-9531-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] lftp: update SRC_URI with new source
+	i15sm112344994wjs.16.2017.01.07.00.50.44
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 07 Jan 2017 00:50:44 -0800 (PST)
+Mime-Version: 1.0 (Mac OS X Mail 10.2 \(3259\))
+From: Koen Kooi <koen@dominion.thruhere.net>
+In-Reply-To: <1483732020-31128-1-git-send-email-moritz.fischer@ettus.com>
+Date: Sat, 7 Jan 2017 09:50:43 +0100
+Message-Id: <7F119B05-00F0-4502-84FE-161CB0F15CAE@dominion.thruhere.net>
+References: <1483732020-31128-1-git-send-email-moritz.fischer@ettus.com>
+To: Moritz Fischer <moritz.fischer@ettus.com>
+X-Mailer: Apple Mail (2.3259)
+Cc: mdf@kernel.org, openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH v4] devtools: Add recipe for Chromium Embedded Controller utilities
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,29 +58,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Jan 2017 08:32:28 -0000
+X-List-Received-Date: Sat, 07 Jan 2017 08:50:46 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Use official web-site of lftp, which keeps tarballs with old versions.
 
-Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
----
- meta-networking/recipes-connectivity/lftp/lftp_4.7.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> Op 6 jan. 2017, om 20:47 heeft Moritz Fischer =
+<moritz.fischer@ettus.com> het volgende geschreven:
+>=20
+> Add a recipe to build 'ectool' a utility to interact with the embedded
+> controller on Google's chromebooks (and other platforms using it).
+>=20
+> Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
+> ---
+> Changes from v1:
+>=20
+> - Replaced DESCRIPTION with SUMMARY (Martin)
+> - Use EXTRA_OEMAKE (Martin)
+> - Removed FILESEXTRAPATHS (Martin)
+> - Changed PV (Martin / Khem)
+> - Removed FILES_PN (Khem)
+>=20
+> Changes from v2:
+>=20
+> - Changed PV (Martin)
+>=20
+> Changes from v3:
+>=20
+> - Patch now against meta-oe (Khem, Ross)
+> - No longer need patch for HOST_LDFLAGS since merged upstream
 
-diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.7.4.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.7.4.bb
-index b627963..0b44abc 100644
---- a/meta-networking/recipes-connectivity/lftp/lftp_4.7.4.bb
-+++ b/meta-networking/recipes-connectivity/lftp/lftp_4.7.4.bb
-@@ -6,7 +6,7 @@ SECTION = "console/network"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
--SRC_URI = "http://fossies.org/linux/misc/lftp-${PV}.tar.bz2 \
-+SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.bz2 \
-            file://fix-gcc-6-conflicts-signbit.patch \
-           "
- SRC_URI[md5sum] = "7b54407ab24c1e78b45fe445d83eb5fd"
--- 
-2.7.4
+For v4: Adapt commit message to patch guidelines, e.g.
 
+Chromium-utils: add recipe for Chromium Embedded Controller utilities
+
+
+>=20
+> ---
+> .../chromium-utils/chromium-utils.bb               | 23 =
+++++++++++++++++++++++
+> 1 file changed, 23 insertions(+)
+> create mode 100644 =
+meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb
+>=20
+> diff --git a/meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb =
+b/meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb
+> new file mode 100644
+> index 0000000..49d2647
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb
+> @@ -0,0 +1,23 @@
+> +SUMMARY =3D "Chromium EC utilities"
+> +DEPENDS =3D "libftdi"
+> +LICENSE =3D "BSD-3-Clause"
+> +LIC_FILES_CHKSUM =3D =
+"file://LICENSE;md5=3D562c740877935f40b262db8af30bca36"
+> +
+> +SRCREV =3D "a7bf207add71cfb20308ed6858b1b028c866304a"
+> +SRC_URI =3D =
+"git://chromium.googlesource.com/chromiumos/platform/ec;protocol=3Dhttps =
+\
+> +          "
+> +
+> +PV =3D "1.1.9999+gitr${SRCPV}"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +EXTRA_OEMAKE =3D "'HOSTCC=3D${CC}' 'HOSTCFLAGS=3D${CFLAGS}' =
+'HOST_LDFLAGS=3D${LDFLAGS}'"
+> +
+> +do_compile() {
+> +    oe_runmake utils
+> +}
+> +
+> +do_install() {
+> +    install -m 0755 -d ${D}${bindir}
+> +    install -m 0755 ${S}/build/bds/util/ectool ${D}${bindir}/ectool
+> +}
+
+nitpick: sbindir instead since it it (hopefully) requires root to talk =
+to hardware.=
 
