@@ -1,51 +1,45 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id F3CE360621
+Return-Path: <oleksandr.kravchuk@pelagicore.com>
+Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id A025B65D00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Jan 2017 08:50:45 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id m203so9878763wma.3
+	Sat,  7 Jan 2017 09:10:09 +0000 (UTC)
+Received: by mail-wm0-f52.google.com with SMTP id c85so50494994wmi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Jan 2017 00:50:46 -0800 (PST)
+	Sat, 07 Jan 2017 01:10:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=dominion-thruhere-net.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=05fZCbkuc5WY2vSa2inITMJWAsnrdwEin2GGCylQsvk=;
-	b=UeW9UqS09CqHV+nBZravGkrB51nQXBxfACeR8uhbkWi5KYGLxTq6n0ig9wMyjd4Qa3
-	P948HRuvmFqfLfUt6IaFbOKgqdBTGLMdhRorj18F9GP7JR9+Keu7Kmk4zQupFAa9TfKo
-	9mcP7sobF4XT1d95wYN3H3hqlaC5/n9xjidCqilsgrcUEIvjBmoeFUIijssfaPneiuuZ
-	ZspVxahN3SrdujhnogYsO6kQvXvlE9wwT5WUNnvqwzPd5CCM0h2qLDAIvgXcQIWF1bAJ
-	zOxZLUsmA6ELQwiL1O1wLotU87AG39EQSpHAGZPYa6FH265oRAKKiNQrgsYVJ5l5zEFC
-	skLg==
+	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=ujlP+qHetzn+yqXgyJ1WnVojtTBrAmn2bz0ZxEjTG9g=;
+	b=xIz81EA6kagnCWbzV4t2py5fMbVni68VFxZo7spmHCs6hd844SkHa0q3ECRfqIee/X
+	FD+FjM8djiFJWlgkZXHVyqg+1kuZlMzexJ/HdKkWWCWkG+Xb7avfJhS6s4QEPwivuxEk
+	CQBv1OWLcGDmxBrS9z+vh3TucTro9AVmUsmw2yiAX5DT9P3mYwztMBFOgBHJrLxInZCU
+	EjD5zs/aJhL1wFW4KIQQNm/tGafZhQodD2MhEhiIHNlK9bVchud1ZdtuhIcB0+CSvYC2
+	CaZm6DaGBbJDD+dB9krjXxYEaOpLXFKQYLQNTnpJZoLOLDCGbn3MyKXIhkELCe0WRDPe
+	Ihww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=05fZCbkuc5WY2vSa2inITMJWAsnrdwEin2GGCylQsvk=;
-	b=s2GZHEkOiadvAxnXc6vjGTwi7QPeaeEb09AlMlFXdgX9HpXmg73rHIj+YCq+BUJ9ZT
-	yrT92lizwGActwASJq5b+VWdnf/loX3OMi2/T/yhVWWP2cAULUxqCTj2S7EAbR8GYQog
-	X7bQqTLnbI+w750uxq8NQTHT5nu3yLg4d4RR/wMuf89EMvksM/7x/QMiP3UjzS2a4WiB
-	6OGy0ILKEd/TxGzGHQlrEYhBm0JBFttK7UMDsFAbMww/vePYHvd7lnny6H4HcuoXBQyw
-	CJe/qD2TGx7xH6cgsPLL1Arxrj6jwftoreoojQ92El2ycBmmjk2jaSku1bh67uzeczm2
-	yMFQ==
-X-Gm-Message-State: AIkVDXJbJd5JLqt4dL+zUyEPmb3WfjCTWCfssVGClrm+IapypExNn09onEDBa+VuMvkCfg==
-X-Received: by 10.223.174.1 with SMTP id x1mr4370312wrc.113.1483779045474;
-	Sat, 07 Jan 2017 00:50:45 -0800 (PST)
-Received: from [172.20.0.85] (ip4da29576.direct-adsl.nl. [77.162.149.118])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ujlP+qHetzn+yqXgyJ1WnVojtTBrAmn2bz0ZxEjTG9g=;
+	b=dXDJhV/eHxGAGiiTz2EnRP1LzkC0I6jOcjJbQZo6SNGhxZV99K5CTYK0ZfjzWq+Hj1
+	UPRZCEqYTtkyiDE+Tv7RjEz2zVdFhhwFWrj1ngseUakBfSDRrsUU0rQ7eUJzdiTMOM4b
+	XQOOMa4VfoetnvPGUKBnnynosL0DXa0UUPEJomtvsjifQSEj/HY2SG7plhr4prNRIYwS
+	TP+zgRctQNwAAsoFtCD9Y5cnI12uvcXF8mvY7NfdPAv9DuIkStT37htOy6WdqogUBXog
+	zYNwKFx6M6v1E3qZppPu8zNlfBoGam0bt5Stomh9mv+Z3PsMq4BSPylqY23di1rkBwYz
+	/cow==
+X-Gm-Message-State: AIkVDXLmAXpPt3GRBIWWhDeYTfdsiQE8BhuA2xTL5m3jBlmdATOA/lYBu8kb+bIAHLTElKsZ
+X-Received: by 10.28.143.20 with SMTP id r20mr912752wmd.2.1483780209914;
+	Sat, 07 Jan 2017 01:10:09 -0800 (PST)
+Received: from stout.office.pelagicore.net ([83.218.80.242])
 	by smtp.gmail.com with ESMTPSA id
-	i15sm112344994wjs.16.2017.01.07.00.50.44
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 07 Jan 2017 00:50:44 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 10.2 \(3259\))
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1483732020-31128-1-git-send-email-moritz.fischer@ettus.com>
-Date: Sat, 7 Jan 2017 09:50:43 +0100
-Message-Id: <7F119B05-00F0-4502-84FE-161CB0F15CAE@dominion.thruhere.net>
-References: <1483732020-31128-1-git-send-email-moritz.fischer@ettus.com>
-To: Moritz Fischer <moritz.fischer@ettus.com>
-X-Mailer: Apple Mail (2.3259)
-Cc: mdf@kernel.org, openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v4] devtools: Add recipe for Chromium Embedded Controller utilities
+	203sm7363630wmf.21.2017.01.07.01.10.08
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 07 Jan 2017 01:10:09 -0800 (PST)
+From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  7 Jan 2017 10:09:59 +0100
+Message-Id: <1483780199-22045-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-networking][PATCH] tcpdump: remove obsolete enable-ipv6 configure flag
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,84 +52,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Jan 2017 08:50:46 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 07 Jan 2017 09:10:11 -0000
 
+--enable-ipv6 configure flag has been removed from tcpdump v4.8.1:
+https://github.com/the-tcpdump-group/tcpdump/commit/572684c34837f4a.
 
-> Op 6 jan. 2017, om 20:47 heeft Moritz Fischer =
-<moritz.fischer@ettus.com> het volgende geschreven:
->=20
-> Add a recipe to build 'ectool' a utility to interact with the embedded
-> controller on Google's chromebooks (and other platforms using it).
->=20
-> Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
-> ---
-> Changes from v1:
->=20
-> - Replaced DESCRIPTION with SUMMARY (Martin)
-> - Use EXTRA_OEMAKE (Martin)
-> - Removed FILESEXTRAPATHS (Martin)
-> - Changed PV (Martin / Khem)
-> - Removed FILES_PN (Khem)
->=20
-> Changes from v2:
->=20
-> - Changed PV (Martin)
->=20
-> Changes from v3:
->=20
-> - Patch now against meta-oe (Khem, Ross)
-> - No longer need patch for HOST_LDFLAGS since merged upstream
+Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+---
+ meta-networking/recipes-support/tcpdump/tcpdump_4.8.1.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-For v4: Adapt commit message to patch guidelines, e.g.
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.8.1.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.8.1.bb
+index 18efb9b..35a5cfe 100644
+--- a/meta-networking/recipes-support/tcpdump/tcpdump_4.8.1.bb
++++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.8.1.bb
+@@ -19,9 +19,8 @@ export LIBS=" -lpcap"
+ inherit autotools-brokensep ptest
+ CACHED_CONFIGUREVARS = "ac_cv_linux_vers=${ac_cv_linux_vers=2}"
+ 
+-PACKAGECONFIG ??= "openssl ipv6"
++PACKAGECONFIG ??= "openssl"
+ PACKAGECONFIG[openssl] = "--with-crypto=yes, --without-openssl --without-crypto, openssl"
+-PACKAGECONFIG[ipv6] = "--enable-ipv6, --disable-ipv6,"
+ PACKAGECONFIG[smi] = "--with-smi, --without-smi,libsmi"
+ PACKAGECONFIG[libcap-ng] = "--with-cap-ng=yes,--with-cap-ng=no,libcap-ng"
+ 
+-- 
+2.7.4
 
-Chromium-utils: add recipe for Chromium Embedded Controller utilities
-
-
->=20
-> ---
-> .../chromium-utils/chromium-utils.bb               | 23 =
-++++++++++++++++++++++
-> 1 file changed, 23 insertions(+)
-> create mode 100644 =
-meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb
->=20
-> diff --git a/meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb =
-b/meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb
-> new file mode 100644
-> index 0000000..49d2647
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb
-> @@ -0,0 +1,23 @@
-> +SUMMARY =3D "Chromium EC utilities"
-> +DEPENDS =3D "libftdi"
-> +LICENSE =3D "BSD-3-Clause"
-> +LIC_FILES_CHKSUM =3D =
-"file://LICENSE;md5=3D562c740877935f40b262db8af30bca36"
-> +
-> +SRCREV =3D "a7bf207add71cfb20308ed6858b1b028c866304a"
-> +SRC_URI =3D =
-"git://chromium.googlesource.com/chromiumos/platform/ec;protocol=3Dhttps =
-\
-> +          "
-> +
-> +PV =3D "1.1.9999+gitr${SRCPV}"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +EXTRA_OEMAKE =3D "'HOSTCC=3D${CC}' 'HOSTCFLAGS=3D${CFLAGS}' =
-'HOST_LDFLAGS=3D${LDFLAGS}'"
-> +
-> +do_compile() {
-> +    oe_runmake utils
-> +}
-> +
-> +do_install() {
-> +    install -m 0755 -d ${D}${bindir}
-> +    install -m 0755 ${S}/build/bds/util/ectool ${D}${bindir}/ectool
-> +}
-
-nitpick: sbindir instead since it it (hopefully) requires root to talk =
-to hardware.=
 
