@@ -1,50 +1,53 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wj0-f182.google.com (mail-wj0-f182.google.com
-	[209.85.210.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C19371ABF
+Return-Path: <oleksandr.kravchuk@pelagicore.com>
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 679C471A5E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Jan 2017 01:19:34 +0000 (UTC)
-Received: by mail-wj0-f182.google.com with SMTP id tn15so44463751wjb.1
+	Sat,  7 Jan 2017 02:35:21 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id t79so53120916wmt.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Jan 2017 17:19:35 -0800 (PST)
+	Fri, 06 Jan 2017 18:35:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=ksdTPGr9204nAfwK4ZHUBvMBtFWusLM3jB62mNRxa7Q=;
-	b=YQC7pPNxH8LTJEj+V08Qxw3qW0Zhg8UTvLpyXpgsyMdZaAz4KJYU5bfPWb3mQFSetm
-	Ag0q4bRSzl9TUfczx5XsptsXwwFQ9pbwDysQvQlpyIcZb4idfYzljapZkNA5UfKQTu2P
-	tDbOpFdUMJ34D3aMCsiafNWPjSIbq209EATLsFon08ZFR2mzYJEdnoQtJlNsFhKx9E1u
-	r1JDoeeXbwUB/g038TCnuLQRaSrPVGZk6YtvVpX6j3bgU5XzEBcqAeg8KY6RJV63JqG0
-	/0oa9N+4t10t3qPTVqsLDMhwEkb779gASe22gn30nmMZq2oR+9wdtQmIVjWLsBiFqqGF
-	/lnA==
+	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
+	h=from:content-transfer-encoding:mime-version:subject:date:references
+	:to:in-reply-to:message-id;
+	bh=14cNMA9vy86mRIwZz5Je4UQge16L9hFLfviWc34U5xo=;
+	b=tpWEBiF0ETO17lyqAqnmqWkxLRhYV2ugDcpzZbpjsbqft2xYFQ0K7ioDUo7vp9qubO
+	YY6YJ6xDjapTgvF7JQWEgkLho6z0/d5wwp0yhPkTuq3R7kK3x7xXdB92q1ixapUw+gvj
+	QcFFnjZa/BpqPPFGNz7hzfKM0FcMir/88OlUyo9gre+j4HI1dBxEYpvYLH68ng+4jIE3
+	yK5TqfYzxUkQ3eizAu3ozArwiKuUKHD1iYfHfwWIuJUMXSWRAGUdj8stqJjF+VODiOof
+	7Rtt2w9mSYNpAVaDkXP0eRWq+JRtrIqmKtIJZ9nJoj5Z6Kn8NZ7gr3Wxh8yfUdX+J/Vo
+	pCOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=ksdTPGr9204nAfwK4ZHUBvMBtFWusLM3jB62mNRxa7Q=;
-	b=T+UB3JAFXRrxv+bn3RnucB9fHL2mkV5Fd5vMF1BRN1+ikyRbpCiSDny1ZwJCH9xG2o
-	nSfoAlCUJDWFvnoYw2PgoTTwIbvGkWZDt7j1yZ9Fe2arcKARzNiO0GMGH9qzUOrmbLTI
-	3b7TAVXhxFkSgM3KPqxL9LXRLAcUWyxU9vQDSqDuvyRzS1G1l5+JMFHkgGcnJCB4K3mO
-	yfbw/L7OSq7GqRc3x/A+aFu2CkwNUhrQCgBVmL4mQt1xTLFVgD2+YlEuMC9t/IM1W9Tp
-	n+dfHk3Ynb7cckDDQ13jzz6jIOmP5EUAhKeozhLeWx6dkUqCmBLD9aMqbW7L1jU6WzOu
-	QLWQ==
-X-Gm-Message-State: AIkVDXIq2+ZpxRVEz5M6qkcq5EzMUbCzAQzIDPLQNNc7yzGE4fbIMPb53Zkz991/kOaKZg==
-X-Received: by 10.194.238.163 with SMTP id vl3mr60216430wjc.169.1483751974501; 
-	Fri, 06 Jan 2017 17:19:34 -0800 (PST)
-Received: from localhost.localdomain (p579CEF09.dip0.t-ipconnect.de.
-	[87.156.239.9]) by smtp.googlemail.com with ESMTPSA id
-	v202sm5880675wmv.8.2017.01.06.17.19.33
+	h=x-gm-message-state:from:content-transfer-encoding:mime-version
+	:subject:date:references:to:in-reply-to:message-id;
+	bh=14cNMA9vy86mRIwZz5Je4UQge16L9hFLfviWc34U5xo=;
+	b=cO3d2gO0l5YCEM/TbXz0HGUYSYV78cKfc4XpKrSbQrk1v5n0Oow52h3/R0xRDpelcX
+	15/6vPttcNBncdxqJ8O8ySPEBg5++47k7Tsmkw3ivRzctmyfpLqvjYQK5PVCPVnP499M
+	TOnrhwOItEn3W0M0KcC63urqw0PDKYiO3ix05TX+fokg2pg1jBc3QriMSUFLx41y+uOo
+	7ggrfo6SCJlDfHSneDQ4pp4bzRygkkKkYjnPLASzHnmPDMoSAJnT7nvUhjM+GuPhOSrw
+	WbMA7He89alc4N2DdD/P9g25VmVdfXeP9qhV6Yc8UGx8kiDNGHX1RdA4jEGSYbu3gOda
+	G2gA==
+X-Gm-Message-State: AIkVDXJparsesCRxPt5CkhRvaQKG3LUI8rfaBKnyys2Qh79+HgCLuRj1FcAE3cIYblik4Kiz
+X-Received: by 10.223.154.85 with SMTP id z79mr3351944wrb.184.1483756521315;
+	Fri, 06 Jan 2017 18:35:21 -0800 (PST)
+Received: from [192.168.10.201]
+	(c-37f7e155.018-216-6762674.cust.bredbandsbolaget.se.
+	[85.225.247.55]) by smtp.gmail.com with ESMTPSA id
+	b3sm111451118wjy.40.2017.01.06.18.35.20
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 06 Jan 2017 17:19:33 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Fri, 06 Jan 2017 18:35:20 -0800 (PST)
+From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+Mime-Version: 1.0 (Mac OS X Mail 10.2 \(3259\))
+Date: Sat, 7 Jan 2017 03:35:19 +0100
+References: <1483082223-18646-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
+	<CA+chaQf9vRvzagN=OsKYHj4U7+ZvqZCfGJeQ8mXLL9f26QovkA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Jan 2017 02:19:17 +0100
-Message-Id: <1483751957-32088-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.5.5
-MIME-Version: 1.0
-Subject: [PATCH] sip: re-add 4.19
+In-Reply-To: <CA+chaQf9vRvzagN=OsKYHj4U7+ZvqZCfGJeQ8mXLL9f26QovkA@mail.gmail.com>
+Message-Id: <947668E3-C518-42C9-A676-BE34668BC8ED@pelagicore.com>
+X-Mailer: Apple Mail (2.3259)
+Subject: Re: [meta-networking][PATCH] lftp: update to 4.7.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,72 +60,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Jan 2017 01:19:36 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 07 Jan 2017 02:35:22 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-* This recipe is based upon the version in meta-qt4 but that one requires qmake
-  for configuration and qt4-x11 in dependencies.
-  It was tested by building sip-native and sip from scratch: There is no need for
-  a dependency on Qt.
-* Since pyqt5 will be added in meta-qt5-extra and meta-qt4
-  needs sip too: add it to a more common place.
+Martin -
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-oe/recipes-devtools/sip/sip_4.19.bb | 42 ++++++++++++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/sip/sip_4.19.bb
+Thanks for letting me know.
 
-diff --git a/meta-oe/recipes-devtools/sip/sip_4.19.bb b/meta-oe/recipes-devtools/sip/sip_4.19.bb
-new file mode 100644
-index 0000000..82feebb
---- /dev/null
-+++ b/meta-oe/recipes-devtools/sip/sip_4.19.bb
-@@ -0,0 +1,42 @@
-+SUMMARY = "SIP is a C++/Python Wrapper Generator"
-+HOMEPAGE = "http://www.riverbankcomputing.co.uk/sip"
-+SECTION = "devel"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
-+
-+inherit python-dir
-+
-+DEPENDS = "python"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${PV}.tar.gz"
-+SRC_URI[md5sum] = "be51a05065c9323b98a2ec2966c64e6a"
-+SRC_URI[sha256sum] = "014bf55f653e0d8bcc582705ef4fbd61e0859a36e959ab46d8fa060cdf0b5e27"
-+
-+BBCLASSEXTEND = "native"
-+
-+PACKAGES += "python-sip"
-+
-+do_configure_prepend_class-target() {
-+    echo "py_platform = linux" > sip.cfg
-+    echo "py_inc_dir = %(sysroot)/${includedir}/python%(py_major).%(py_minor)" >> sip.cfg
-+    echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
-+    echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
-+    echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
-+    echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
-+    python configure.py --configuration sip.cfg --sysroot ${STAGING_DIR_HOST} CC="${CC}" CXX="${CXX}" LINK="${CXX}" STRIP="" LINK_SHLIB="${CXX}" CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LFLAGS="${LDFLAGS}"
-+}
-+do_configure_prepend_class-native() {
-+    echo "py_platform = linux" > sip.cfg
-+    echo "py_inc_dir = ${includedir}/python%(py_major).%(py_minor)" >> sip.cfg
-+    echo "sip_bin_dir = ${D}/${bindir}" >> sip.cfg
-+    echo "sip_inc_dir = ${D}/${includedir}" >> sip.cfg
-+    echo "sip_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> sip.cfg
-+    echo "sip_sip_dir = ${D}/${datadir}/sip" >> sip.cfg
-+    python configure.py --configuration sip.cfg --sysroot ${STAGING_DIR_NATIVE}
-+}
-+do_install() {
-+    oe_runmake install
-+}
-+
-+FILES_python-sip = "${libdir}/${PYTHON_DIR}/site-packages/"
-+FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/.debug"
--- 
-2.5.5
+It appears that old packages are removed once new version comes out. I =
+found another official source which keeps old packages and will update =
+SRC_URI with the following patch.
+
+> On 5 Jan 2017, at 19:11, Martin Jansa <martin.jansa@gmail.com> wrote:
+>=20
+> Resolving fossies.org (fossies.org)... 138.201.17.217
+> Connecting to fossies.org (fossies.org)|138.201.17.217|:80... =
+connected.
+> HTTP request sent, awaiting response... 301 Moved Permanently
+> Location: https://fossies.org/linux/misc/lftp-4.7.4.tar.bz2 =
+[following]
+> --2017-01-05 11:21:20--  =
+https://fossies.org/linux/misc/lftp-4.7.4.tar.bz2
+> Connecting to fossies.org (fossies.org)|138.201.17.217|:443... =
+connected.
+> HTTP request sent, awaiting response... 410 Gone
+> 2017-01-05 11:21:20 ERROR 410: Gone.
+>=20
+>=20
+>=20
+> On Fri, Dec 30, 2016 at 8:17 AM, Oleksandr Kravchuk <
+> oleksandr.kravchuk@pelagicore.com> wrote:
+>=20
+>> Upgraded package to v4.7.4 and changed source code archive format =
+from
+>> tar.gz to tar.bz2 which is significantly smaller in size.
+>>=20
+>> Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+>> ---
+>> .../recipes-connectivity/lftp/{lftp_4.7.3.bb =3D> lftp_4.7.4.bb}      =
+| 6
+>> +++---
+>> 1 file changed, 3 insertions(+), 3 deletions(-)
+>> rename meta-networking/recipes-connectivity/lftp/{lftp_4.7.3.bb =3D>
+>> lftp_4.7.4.bb} (85%)
+>>=20
+>> diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
+>> b/meta-networking/recipes-connectivity/lftp/lftp_4.7.4.bb
+>> similarity index 85%
+>> rename from meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
+>> rename to meta-networking/recipes-connectivity/lftp/lftp_4.7.4.bb
+>> index b0cd399..36fee56 100644
+>> --- a/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
+>> +++ b/meta-networking/recipes-connectivity/lftp/lftp_4.7.4.bb
+>> @@ -6,11 +6,11 @@ SECTION =3D "console/network"
+>> LICENSE =3D "GPLv3"
+>> LIC_FILES_CHKSUM =3D =
+"file://COPYING;md5=3Dd32239bcb673463ab874e80d47fae504"
+>>=20
+>> -SRC_URI =3D "http://fossies.org/linux/misc/lftp-${PV}.tar.gz \
+>> +SRC_URI =3D "http://fossies.org/linux/misc/lftp-${PV}.tar.bz2 \
+>>            file://fix-gcc-6-conflicts-signbit.patch \
+>>           "
+>> -SRC_URI[md5sum] =3D "8eb1fe5f113126b60f172643c7f6c2e6"
+>> -SRC_URI[sha256sum] =3D "ce6519831603c19c2cf2e3c10b41d6
+>> ddc87a16049b99383e7b9b77fbc7707214"
+>> +SRC_URI[md5sum] =3D "7b54407ab24c1e78b45fe445d83eb5fd"
+>> +SRC_URI[sha256sum] =3D "95e7acfd9d0a2addeded1f00794aee
+>> ac43952ebc4924043965a5e1619df29128"
+>>=20
+>> inherit autotools gettext pkgconfig
+>>=20
+>> --
+>> 2.7.4
+>>=20
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
