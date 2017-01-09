@@ -1,22 +1,32 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from david.siemens.de (david.siemens.de [192.35.17.14])
-	by mail.openembedded.org (Postfix) with ESMTP id 15E3C60123
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id C491C719DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jan 2017 09:33:22 +0000 (UTC)
-Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
-	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id v099XMad015452
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
-	Mon, 9 Jan 2017 10:33:23 +0100
-Received: from dev.sbt.siemens.com (MD1FZU9C.ad001.siemens.net [139.16.79.145])
-	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id v099XMMx007595;
-	Mon, 9 Jan 2017 10:33:22 +0100
-From: Pascal Bach <pascal.bach@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Jan 2017 10:33:17 +0100
-Message-Id: <1483954397-4175-1-git-send-email-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.1.4
-Cc: Pascal Bach <pascal.bach@nextrem.ch>
-Subject: [meta-python][PATCH] python-sqlalchemy: update to 1.1.4 and provide python2 and python3 package
+	Mon,  9 Jan 2017 13:38:31 +0000 (UTC)
+Received: from svr-orw-fem-05.mgc.mentorg.com ([147.34.97.43])
+	by relay1.mentorg.com with esmtp 
+	id 1cQa9f-0001xY-6W from Joe_MacDonald@mentor.com ;
+	Mon, 09 Jan 2017 05:38:31 -0800
+Received: from burninator (147.34.91.1) by svr-orw-fem-05.mgc.mentorg.com
+	(147.34.97.43) with Microsoft SMTP Server id 14.3.224.2; Mon, 9 Jan 2017
+	05:38:30 -0800
+Received: by burninator (Postfix, from userid 1000)	id D1A785805F6; Mon,  9
+	Jan 2017 08:38:29 -0500 (EST)
+Date: Mon, 9 Jan 2017 08:38:29 -0500
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+Message-ID: <20170109133828.GB21527@mentor.com>
+References: <1483345698-2761-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
+	<20170105180258.GA3243@jama>
+	<CAKuJqM83ELOk+n=gGNzdqqNLHFXwdB0=gWe-67hLVWV=pbx+Dg@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAKuJqM83ELOk+n=gGNzdqqNLHFXwdB0=gWe-67hLVWV=pbx+Dg@mail.gmail.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] tcpdump: upgrade to 4.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,80 +39,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jan 2017 09:33:23 -0000
+X-List-Received-Date: Mon, 09 Jan 2017 13:38:32 -0000
+X-Groupsio-MsgNum: 64663
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="uQr8t48UFsdbeI+V"
+Content-Disposition: inline
 
-From: Pascal Bach <pascal.bach@nextrem.ch>
+--uQr8t48UFsdbeI+V
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The license hash change is due to a bump in the copyright year
+[Re: [oe] [meta-networking][PATCH] tcpdump: upgrade to 4.8.1] On 17.01.07 (=
+Sat 10:12) Oleksandr Kravchuk wrote:
 
-Signed-off-by: Pascal Bach <pascal.bach@nextrem.ch>
----
- meta-python/recipes-devtools/python/python-sqlalchemy.inc  | 13 +++++++++++++
- .../recipes-devtools/python/python-sqlalchemy_0.7.9.bb     | 14 --------------
- .../recipes-devtools/python/python-sqlalchemy_1.1.4.bb     |  2 ++
- .../recipes-devtools/python/python3-sqlalchemy_1.1.4.bb    |  2 ++
- 4 files changed, 17 insertions(+), 14 deletions(-)
- create mode 100755 meta-python/recipes-devtools/python/python-sqlalchemy.inc
- delete mode 100644 meta-python/recipes-devtools/python/python-sqlalchemy_0.7.9.bb
- create mode 100755 meta-python/recipes-devtools/python/python-sqlalchemy_1.1.4.bb
- create mode 100755 meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.4.bb
+> Martin -
+>=20
+> Thank you for the comment. I will try to pay closer attention to
+> warnings during testing in the future.
+>=20
+> I have sent a fix to the mailing list, "[meta-networking][PATCH]
+> tcpdump: remove obsolete enable-ipv6 configure flag".
 
-diff --git a/meta-python/recipes-devtools/python/python-sqlalchemy.inc b/meta-python/recipes-devtools/python/python-sqlalchemy.inc
-new file mode 100755
-index 0000000..471c109
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-sqlalchemy.inc
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "Python SQL toolkit and Object Relational Mapper that gives \
-+application developers the full power and flexibility of SQL"
-+HOMEPAGE = "http://www.sqlalchemy.org/"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d7dba1721bc8ce05d421f7279cb87971"
-+
-+PYPI_PACKAGE = "SQLAlchemy"
-+inherit pypi
-+
-+SRC_URI[md5sum] = "be5af1bebe595206b71b513a14836e4f"
-+SRC_URI[sha256sum] = "701b57d628b9fa1cfb82f10665e7214d5d2db23251ca6f23b91c5f56fcdbdeb5"
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-numbers"
-diff --git a/meta-python/recipes-devtools/python/python-sqlalchemy_0.7.9.bb b/meta-python/recipes-devtools/python/python-sqlalchemy_0.7.9.bb
-deleted file mode 100644
-index 43b4b7e..0000000
---- a/meta-python/recipes-devtools/python/python-sqlalchemy_0.7.9.bb
-+++ /dev/null
-@@ -1,14 +0,0 @@
--DESCRIPTION = "Python SQL toolkit and Object Relational Mapper that gives \
--application developers the full power and flexibility of SQL"
--HOMEPAGE = "http://www.sqlalchemy.org/"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=baffc5e5f4804c92fc9be155fed70d41"
--RDEPENDS_${PN} += "python-numbers"
--
--SRCNAME = "SQLAlchemy"
--SRC_URI = "${SOURCEFORGE_MIRROR}/sqlalchemy/${SRCNAME}-${PV}.tar.gz"
--SRC_URI[md5sum] = "c4852d586d95a59fbc9358f4467875d5"
--SRC_URI[sha256sum] = "f7a305ad122144f364ce09a2d9ed5159d5f46ec43650653593e7dfa05d3294a1"
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
--inherit setuptools
-diff --git a/meta-python/recipes-devtools/python/python-sqlalchemy_1.1.4.bb b/meta-python/recipes-devtools/python/python-sqlalchemy_1.1.4.bb
-new file mode 100755
-index 0000000..53c8fec
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-sqlalchemy_1.1.4.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools
-+require python-sqlalchemy.inc
-diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.4.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.4.bb
-new file mode 100755
-index 0000000..86cf9ed
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.4.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-sqlalchemy.inc
--- 
-2.1.4
+As far as I can tell, --disable-ipv6 is still a valid option for 4.7.4
+and since your patch doing the update hasn't been merged yet, please
+just send a v2 of the single patch.  There's no need for two.
 
+Thanks.
+-J.
 
+>=20
+> On 5 January 2017 at 19:02, Martin Jansa <martin.jansa@gmail.com> wrote:
+> > On Mon, Jan 02, 2017 at 09:28:18AM +0100, Oleksandr Kravchuk wrote:
+> >> Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+> >
+> > Causes:
+> > ERROR: tcpdump-4.8.1-r0 do_configure: QA Issue: tcpdump: configure was =
+passed unrecognised options: --enable-ipv6 [unknown-configure-option]
+> > ERROR: tcpdump-4.8.1-r0 do_configure: Fatal QA errors found, failing ta=
+sk.
+> > ERROR: tcpdump-4.8.1-r0 do_configure: Function failed: do_qa_configure
+> >
+> >> ---
+> >>  .../recipes-support/tcpdump/{tcpdump_4.7.4.bb =3D> tcpdump_4.8.1.bb} =
+   | 4 ++--
+> >>  1 file changed, 2 insertions(+), 2 deletions(-)
+> >>  rename meta-networking/recipes-support/tcpdump/{tcpdump_4.7.4.bb =3D>=
+ tcpdump_4.8.1.bb} (91%)
+> >>
+> >> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb =
+b/meta-networking/recipes-support/tcpdump/tcpdump_4.8.1.bb
+> >> similarity index 91%
+> >> rename from meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
+> >> rename to meta-networking/recipes-support/tcpdump/tcpdump_4.8.1.bb
+> >> index e18228f..18efb9b 100644
+> >> --- a/meta-networking/recipes-support/tcpdump/tcpdump_4.7.4.bb
+> >> +++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.8.1.bb
+> >> @@ -12,8 +12,8 @@ SRC_URI =3D " \
+> >>      file://add-ptest.patch \
+> >>      file://run-ptest \
+> >>  "
+> >> -SRC_URI[md5sum] =3D "58af728de36f499341918fc4b8e827c3"
+> >> -SRC_URI[sha256sum] =3D "6be520269a89036f99c0b2126713a60965953eab92100=
+2b07608ccfc0c47d9af"
+> >> +SRC_URI[md5sum] =3D "32f57943649f276e09236ba66622bb0c"
+> >> +SRC_URI[sha256sum] =3D "20e4341ec48fcf72abcae312ea913e6ba6b958617b2f3=
+fb496d51f0ae88d831c"
+> >>  export LIBS=3D" -lpcap"
+> >>
+> >>  inherit autotools-brokensep ptest
+> >> --
+> >> 2.7.4
+> >>
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> > --
+> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+>=20
+>=20
+>=20
+> --=20
+> echo "EOF" >> /var/tmp/email
+--=20
+-Joe MacDonald.
+:wq
+
+--uQr8t48UFsdbeI+V
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJYc5JSAAoJEEn8ffcsOfaWo54IAMJ0u3qF7/P424mrhB7djXss
+ZpMPju+eIX7ciJ3XfP9ed1RoPoNgQ7YJtZkczjBwy6yRgXczj1JIj4pK0qXG2e3I
+lbryYxYwgDemlGVTc+VXQNOtDXu6X5eKTDJXhcOoQH52UTyjjhf1gwcE4vMn6OJU
+AlkD8tnnqMn9+Ig7KsB6s57Wh5AG0EYzdd2KqbVnnTlyAO6mOv+CtlQjv41HyhAI
+ztHPtEYidgY9Rdi5SIwTU2I8eqmL1mu3+gsI+OmiwtmU79t6uLZEFXCyG/Dv1syt
+OiXoBWNeCClY1iOjZv8CJl2k2v8M+uS0eX+i5UpBP5lUbcTil2+Q9e2chaplJhI=
+=ra0g
+-----END PGP SIGNATURE-----
+
+--uQr8t48UFsdbeI+V--
