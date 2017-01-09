@@ -1,44 +1,44 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-vk0-f48.google.com (mail-vk0-f48.google.com
-	[209.85.213.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B15771ABF
+Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
+	[209.85.213.66])
+	by mail.openembedded.org (Postfix) with ESMTP id E10C671B23
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jan 2017 18:30:25 +0000 (UTC)
-Received: by mail-vk0-f48.google.com with SMTP id t8so13342741vke.3
+	Mon,  9 Jan 2017 18:58:52 +0000 (UTC)
+Received: by mail-vk0-f66.google.com with SMTP id j12so4250372vkd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Jan 2017 10:30:26 -0800 (PST)
+	Mon, 09 Jan 2017 10:58:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=uI5VdB8WDoygAjzhrA0xLHTm3c3yHta11ZrRx3lolUY=;
-	b=NHzrFK4xLcin98f13J3c5vtrPuQWO0L2yLYOwrQcPpHm96xWHSVFcLyBpn1w3j0aC5
-	EaPwWBPwH4BCy7fKWbcGczMwAEvdFcT4MnfR6CgNA1R/MCGdnjNizef9OhpADBSBxfAR
-	26SHE+hRpm8SKnp/G56hvWXcb+MMWtGiuJoFiusYUkyqqTGtx2uXa9JEod9GP/CzpdbE
-	fqrNEwzHheVp+xBoIx7cNhaGFjBAHMv8y/IVFvM1vN6ELNda/7x0JQbbaOK1KM1w8g91
-	HH8dYvOSTJf2mKW1ROd4J+B1honSsgKO6vC+7asFR15R4vJfnCiN9MMP2A3QypQzwarU
-	kZSA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=b7zIUJNoUDYojBFlW0h3xuya/0EfjbNZywDhrhWQsBE=;
+	b=UsF9qTUL8ZuDvhG9VQWs4L4Q2ENaZNXR3vmUm3FcM0LxwbPZkWKTLV0Wd5GkPFkZ/O
+	P3h3Aq8su0kmHXTiBloEq0fFCZf+zjHKQs2wTBPduZJpeel7FSoeHN/n5v/M1uC0KqeF
+	SWK0ylUlM3Y1EkJEYtJ0zmLDUfEXVWKwMzLBfpBYozmgjpnp+WWJ+Zb4vzat50W5btqC
+	ronmH429sMuvVZ+JvWK3w7aL/oA2ivM6p61m04gJtjIqCpT2rMGFuNg3J7CAohP6fABn
+	wDVOYwt+PYZuGdqhHuzkH8csPNTgU9sNHs6MW5QHGn4bonLabUJSPFtJRstDVIgNVPxZ
+	6TBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=uI5VdB8WDoygAjzhrA0xLHTm3c3yHta11ZrRx3lolUY=;
-	b=LDhXPxHvAQixfyfPy8ql1SRgJIP9X/6U+dWrWpOEm2pWYNAlmaJBLeSTgr3aiw1isC
-	/8X45Gp5L9m6tGVEgHQZAlhEV6rKufSMbrqC4VJgfkk3mNANxDDzgPUhzEbUrVIUyCIt
-	5L+qFwxmSwD+qmbT6Q+WCEpq6wbPuxv2GTeKV7upbkmpsyFs66q3/NrDZKKiwWzI26xp
-	NnBBG7BdLuASv7Wh/VlM7uOClcPK5v8iQxICFT3Slb5bRUubQnXaj8IfYzzoT0H9pXRi
-	DnO45HwjAw2pVI1s4zoZCm5KJpoRu1XVShbOyt8hGejh9DN0xDlOiy5U+eZMk2zcQ8yK
-	v1TQ==
-X-Gm-Message-State: AIkVDXLiFHzDipvWHu8Ukeb/VmtHT1q9CulRIzbGgpgqWF6KA1JOU/lEkHJnivr17kHdx4K94pqFH4sU/ROvyA==
-X-Received: by 10.31.234.199 with SMTP id i190mr31798504vkh.31.1483986625942; 
-	Mon, 09 Jan 2017 10:30:25 -0800 (PST)
+	:message-id:subject:to:cc;
+	bh=b7zIUJNoUDYojBFlW0h3xuya/0EfjbNZywDhrhWQsBE=;
+	b=uKhWv/6bCQ9yhgyXziMbZN0E1XLGP2m1dcPltSnpVFNzgxaH7Nm2mgaQdtvNwFEwd+
+	ZSdLR8JwbOozNuJtmdE54LMm7tMQAm8FhxMOgMcvgxRLQUZNWJH7Odp3Y3GS3eeRIG0n
+	0+QAyVXAwnjeZ3tIwDC0eP8Mdm9Ns5ea+uVK6vDwgwDa0qx9ihqUi2rc2Gji8wBpkwtO
+	o1Vmz0nBi9kMCsOLcE67nhc5bYmwn2urL0MuyRicqTv3ftWgZc4onE2zIQVf/Tz/M3eM
+	XnRzicNesZg8gRjyj0WaAwYDZOTCkAkajgXa3kUVuf7cvRG3ZPAiiimDyEd5kBtJvcH2
+	eN2g==
+X-Gm-Message-State: AIkVDXJYTrB8q1DnNlcqQsJmdRgnfzvaO4TxPf5h31lwUWsx1oC3ZyyyfoUTno24Dj4D5v5qCITmDTlJ+7f7YA==
+X-Received: by 10.31.197.195 with SMTP id v186mr32033169vkf.84.1483988332911; 
+	Mon, 09 Jan 2017 10:58:52 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.159.48.222 with HTTP; Mon, 9 Jan 2017 10:29:55 -0800 (PST)
-In-Reply-To: <CAJ86T=WKT4CVhFh2s8cxNcqg4L6nhFTWxMnqaTLPh4M5b2TLYA@mail.gmail.com>
-References: <CAJ86T=WKT4CVhFh2s8cxNcqg4L6nhFTWxMnqaTLPh4M5b2TLYA@mail.gmail.com>
+Received: by 10.159.48.222 with HTTP; Mon, 9 Jan 2017 10:58:22 -0800 (PST)
+In-Reply-To: <20170105094426.138799-1-chunguang.yang@windriver.com>
+References: <20170105094426.138799-1-chunguang.yang@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 9 Jan 2017 10:29:55 -0800
-Message-ID: <CAMKF1srk+oeBbTG5a-BMY0B+cNbqqTjJpn8ja_axnMvEiJEJag@mail.gmail.com>
+Date: Mon, 9 Jan 2017 10:58:22 -0800
+Message-ID: <CAMKF1spNmcULe_BLZZ-PQD8vM71yc-hb_XKi-XF7jY_Ecx9oCg@mail.gmail.com>
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: Testing meta-efl?
+Subject: Re: [meta-oe][PATCH 1/1] lcov: fix env command argument pass issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,16 +51,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jan 2017 18:30:27 -0000
+X-List-Received-Date: Mon, 09 Jan 2017 18:58:54 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Fri, Jan 6, 2017 at 8:13 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
-> Is there a recommended image for testing changes/updates to efl?
+On Thu, Jan 5, 2017 at 1:44 AM,  <chunguang.yang@windriver.com> wrote:
+> From: chunguang yang <chunguang.yang@windriver.com>
+>
+> when exec lcov in bash, the following error will appear:
+>
+> /usr/bin/env: 'perl -w': No such file or directory
+>
+> perl uses the -w option to enable many warnings. But the
+> env command can't pass the argument to perl, instead it
+> treate perl -w as a file. To fix this issue, just keep
+> the origin perl path and not use env command.
+>
 
-in angstrom we have https://layers.openembedded.org/layerindex/recipe/3160/
+I would suggest that we get rid of -w as well, since the fix to use perl
+via /usr/bin/env is to get rid of absolute paths.
 
-but I havent tested this image in atleast 6 months
-
+> Signed-off-by: chunguang yang <chunguang.yang@windriver.com>
+> ---
+>  meta-oe/recipes-support/lcov/lcov_1.11.bb | 1 -
+>  1 file changed, 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-support/lcov/lcov_1.11.bb b/meta-oe/recipes-support/lcov/lcov_1.11.bb
+> index 114bd84cd..2f9ac336e 100644
+> --- a/meta-oe/recipes-support/lcov/lcov_1.11.bb
+> +++ b/meta-oe/recipes-support/lcov/lcov_1.11.bb
+> @@ -23,6 +23,5 @@ SRC_URI[sha256sum] = "c282de8d678ecbfda32ce4b5c85fc02f77c2a39a062f068bd8e774d29d
+>
+>  do_install() {
+>      oe_runmake install PREFIX=${D}
+> -    sed -i -e '1s,#!.*perl,#! ${USRBINPATH}/env perl,' ${D}${bindir}/*
+>  }
+>
+> --
+> 2.11.0
+>
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
