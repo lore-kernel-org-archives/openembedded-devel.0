@@ -1,22 +1,47 @@
-Return-Path: <vincent.libre@cryostase.eu>
-Received: from smtp1-g21.free.fr (smtp1-g21.free.fr [212.27.42.1])
-	by mail.openembedded.org (Postfix) with ESMTP id 1EDA371A62
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ua0-f175.google.com (mail-ua0-f175.google.com
+	[209.85.217.175])
+	by mail.openembedded.org (Postfix) with ESMTP id EAC2160125
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jan 2017 22:35:50 +0000 (UTC)
-Received: from [22.64.25.32] (unknown [208.54.80.158])
-	(Authenticated sender: vincent.rubiolo)
-	by smtp1-g21.free.fr (Postfix) with ESMTPSA id 21A8CB00350
+	Tue, 10 Jan 2017 10:57:53 +0000 (UTC)
+Received: by mail-ua0-f175.google.com with SMTP id i68so379972565uad.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Jan 2017 23:35:46 +0100 (CET)
-Date: Mon, 09 Jan 2017 23:35:34 +0100
-User-Agent: K-9 Mail for Android
-In-Reply-To: <8a55e15b-21d5-8dfa-5adb-09f84b7809fe@cryostase.eu>
-References: <8a55e15b-21d5-8dfa-5adb-09f84b7809fe@cryostase.eu>
+	Tue, 10 Jan 2017 02:57:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=GdhWi0U8lEOO3dKYcRS1rIVWI/pO5mNxNOp3UbexKuc=;
+	b=TniWqctU8BQ2qbQ0nVfwawLZ1zkc7ctQ9GX4iBRH7vOGKNgTriQlLKnepXyuRjZhE6
+	V4QSD7HtFpMbmVya0IoDcYVEgf2G1N0+1gwrYe5Oi4GRRBy0r4hJhmxXo/W8Io5E82vS
+	O2rK4/oMfA7ApM4e2y+4sq8cWOuXZDG9+mGfON5dASkuzut4UrKfwULCmWPCPN2ISqs1
+	nXFzNzXVSLMQU6k6CyXS7M5I2w03lqROo7803eOfweP2fazbaZ5e+sLQGtDjwsZDXUT4
+	jTlwq8MsJ+82LhjliRYEK375wQxGVbXWB9x7BGw1JurLzHzEFaskcxTBkkoi0GJOVXVD
+	A/Ug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-transfer-encoding;
+	bh=GdhWi0U8lEOO3dKYcRS1rIVWI/pO5mNxNOp3UbexKuc=;
+	b=HUdxhl+83Q2tLpDrQK4/73sPjpF7zYFx5dWiyvkGr/tryJ4VLQh6635WWuylf9oDAr
+	khPMRQwLZP2oiZnLABLNv0uyZTQxCLIvBf0MSomvtlBmJ9q7/p/x0sQzsYigoWvRZciB
+	MCl45NQGcKtuzE/orydMbYSJuzHbreU/hDGiHPzUPdHts4MCQk2274Vu7dBnbSQNhnqT
+	l7OA/tTNIp3g75Il7eMFdeThK7TJ3qw2Pb7J3E7HfHTp6xqUm9IxR4c9zBt5SOLRJ33z
+	oB3vJxOtmRx+SCW9/CwyjEaU1hC93AoPdT8AAqbXDIVcDETWoz2Ki8Mh3ovWInK00p5g
+	xEog==
+X-Gm-Message-State: AIkVDXKiC7JPAsmHznK1dRPoUOVUJvvwH74fWyESbcDnUJAqtQaC3jljl68uQfuE78W0euQhLPZS6x6ycEq5HA==
+X-Received: by 10.176.69.71 with SMTP id r65mr968577uar.77.1484045872342; Tue,
+	10 Jan 2017 02:57:52 -0800 (PST)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-From: Vincent Rubiolo <vincent.libre@cryostase.eu>
-Message-ID: <4366BC62-AA8B-412F-92CB-23B8EE1DA412@cryostase.eu>
-Subject: Re: [meta-maker] Octoprint on Intel Edison (yocto dizzy): failed python-flask RDEPENDS
+Received: by 10.176.69.246 with HTTP; Tue, 10 Jan 2017 02:57:51 -0800 (PST)
+In-Reply-To: <1481824331-347-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1481824331-347-1-git-send-email-schnitzeltony@googlemail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Tue, 10 Jan 2017 11:57:51 +0100
+Message-ID: <CALbNGRSLsKm2hbeMLCt7eng9MfgaovQmpHoT8w-S3VxOO6__WA@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser][PATCH V2 0/3] firefox fix build on oe-core master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,107 +54,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Jan 2017 22:35:51 -0000
-Content-Type: text/plain;
- charset=utf-8
+X-List-Received-Date: Tue, 10 Jan 2017 10:57:55 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-
-
-On December 30, 2016 7:14:28 AM CET, Vincent Rubiolo <vincent=2Elibre@cryo=
-stase=2Eeu> wrote:
->Hi everyone,
+On Thu, Dec 15, 2016 at 6:52 PM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> * recent 'use system's nss/nspr' broke firefox
+> * to build properly patch sent to oe-core is necessary [1]
 >
->I am trying to include the meta-maker layer to enable octoprint on the=20
->Intel Edison=2E I am using the Yocto project drop that Intel provides[1]=
-=20
->and successfully built it (with a reduced set of packages, I am=20
->interested only in the bits necessary to enable Octoprint)=2E
+> V1 -> V2: 0003-.. added to really fix build
 >
->Intel drop appears to be based on the yocto daisy branch (bitbake=20
->reports so during a build + I diffed the meta-openembedded daisy git=20
->tree against the Intel drop)=2E I have thus checked out that branch of=20
->meta-maker and added it under my poky subdirectory + added it to=20
->bblayers=2Econf=2E
+> [1] http://lists.openembedded.org/pipermail/openembedded-core/2016-Decemb=
+er/130211.html
 >
->The problem I have is that the build fails because of a missing
->RDEPENDS:
->+++
->$ bitbake octoprint -c fetchall
->WARNING: Host distribution "Fedora-23" has not been validated with this
+> Andreas M=C3=BCller (3):
+>   firefox: fix configure with oe-core master - there is no nss-config
+>   firefox: use pkg-config to find nspr
+>   firefox: do not link against crmf library it is not there
 >
->version of the build system; you may possibly experience unexpected=20
->failures=2E It is recommended that you use a tested distribution=2E
->Loading cache: 100%=20
->|####################################################################|=20
->ETA:  00:00:00
->Loaded 2170 entries from dependency cache=2E
->NOTE: Resolving any missing task queue dependencies
->NOTE: multiple providers are available for python-distribute-native=20
->(python-distribute-native, python-setuptools-native)
->NOTE: consider defining a PREFERRED_PROVIDER entry to match=20
->python-distribute-native
->ERROR: Nothing RPROVIDES 'python-flask' (but=20
->/yocto/iot-devkit-yp-poky-edison-20160606/build_edison/=2E=2E/poky/meta-o=
-penembedded/meta-maker/recipes-webui/octoprint/octoprint_git=2Ebb
+>  .../firefox/0001-use-pkg-config-to-find-nss.patch  | 47 ++++++++++++++++=
+++++++
+>  .../firefox/0002-use-pkg-config-to-find-nspr.patch | 37 ++++++++++++++++=
++
+>  ...link-against-crmf-library-it-is-not-there.patch | 47 ++++++++++++++++=
+++++++
+>  recipes-mozilla/firefox/firefox_45.5.1esr.bb       |  3 ++
+>  4 files changed, 134 insertions(+)
+>  create mode 100644 recipes-mozilla/firefox/firefox/0001-use-pkg-config-t=
+o-find-nss.patch
+>  create mode 100644 recipes-mozilla/firefox/firefox/0002-use-pkg-config-t=
+o-find-nspr.patch
+>  create mode 100644 recipes-mozilla/firefox/firefox/0003-do-not-link-agai=
+nst-crmf-library-it-is-not-there.patch
 >
->RDEPENDS on or otherwise requires it)
->NOTE: Runtime target 'python-flask' is unbuildable, removing=2E=2E=2E
->Missing or unbuildable dependency chain was: ['python-flask']
->ERROR: Required build target 'octoprint' has no buildable providers=2E
->Missing or unbuildable dependency chain was: ['octoprint',
->'python-flask']
+> --
+> 2.7.4
 >
->Summary: There was 1 WARNING message shown=2E
->Summary: There were 2 ERROR messages shown, returning a non-zero exit
->code=2E
->+++
->
->In the meta-maker and meta-openembedded trees dizzy branches, I see no=20
->python-flask recipe/package=2E It looks to me the patch for octoprint=20
->1=2E2=2E10 has been merged into the meta-maker dizzy branch with the=20
->RDEPENDS list still matching that of the newest meta-openembedded (but
->I=20
->might be wrong)=2E
->
->Is my analysis correct? If so, is there a way to know which RDEPEND I=20
->should use for octoprint in the dizzy branch to match the=20
->meta-openembedded one?
->
->Another possibility could be to use the meta-intel-edison from the
->yocto=20
->project git repo[2] with meta-openembedded & meta-maker on master but I
->
->have yet to try that=2E
->
->Thanks a lot for your help!
->
->Vincent
->
->[1]=20
->http://iotdk=2Eintel=2Ecom/src/3=2E5/edison/iot-devkit-yp-poky-edison-201=
-60606=2Ezip
->[2] http://git=2Eyoctoproject=2Eorg/cgit/cgit=2Ecgi/meta-intel-edison/
->
->To reproduce:
->get=20
->http://iotdk=2Eintel=2Ecom/src/3=2E5/edison/iot-devkit-yp-poky-edison-201=
-60606=2Ezip
->
->and unzip
->cd iot-devkit-yp-poky-edison-20160606/poky/meta-openembedded
->git clone git://git=2Eyoctoproject=2Eorg/meta-maker -b dizzy
->add meta-maker layer to=20
->iot-devkit-yp-poky-edison-20160606/build_edison/conf/bblayers=2Econf
->cd iot-devkit-yp-poky-edison-20160606/poky/
->source oe-init-build-env =2E=2E/build_edison/
->bitbake octoprint -c fetchall
-
-Hello,
-
-Would somebody have some advice here?
-
-Thanks much,
-
-Vincent
+ping?
 
