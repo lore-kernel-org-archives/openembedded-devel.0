@@ -1,46 +1,48 @@
-Return-Path: <steven.vanderschoot@solarteameindhoven.nl>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E035A71A40
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-lf0-f44.google.com (mail-lf0-f44.google.com
+	[209.85.215.44])
+	by mail.openembedded.org (Postfix) with ESMTP id EB05B719F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jan 2017 13:45:06 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id r144so21040331wme.0
+	Tue, 10 Jan 2017 16:16:41 +0000 (UTC)
+Received: by mail-lf0-f44.google.com with SMTP id m78so97489214lfg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jan 2017 05:45:07 -0800 (PST)
+	Tue, 10 Jan 2017 08:16:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=solarteameindhoven-nl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=odFrxJFcCxl8zW63g3NTcqYCGbwyDcqyTab28o/IBDk=;
-	b=hQ4hY5A6sWLOXqNofS4ZuWf8dvRU9lHg/0Hm471wfEbAfzwn9k/tK3nW44EjlUbrp0
-	Lgha3qDxgCFY1p1+xX7S9FkpqpExl/GyGZ9dBkZ8+/z0oa8VslwHAfDT2se0cchWViiu
-	zoeaBinq7ZIo1DPjqHqqBm7AjaK2EfDPLPFJhf+x1lWFCDax3WHi4wa0/k9TeGkJ39eF
-	JmKmI2WtP4m99LSQ2QMfQ7xDYIsSwey0xcvhDRYrifwHv7m8veljqzs6Zk8bpi6Urzoq
-	pWMeE31sEmAE/Hrd4LBlEvjFnoki9eSam/h0rgOBuA+9qlsfCE8rWwj5J3hHHWKZO/n5
-	Bgjw==
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=pUNrnwgMQ1KzWFiH1oYj8w1a1hmNrl5T8B0Lgn+iXFM=;
+	b=gKL4SsTi8qz71UKk1LWq6idhn4UwCnCYrSynzHz1oxPESKKruolDRXBVr7SnaGoETT
+	4852XOkPhebOLrqiNUnaDCMT+TabTDm/fXH3ofqRDOw71KM79+IcmAwzMwT/w+5oveeC
+	MPPVGc8kFiNfEQJPLcnSmPOQdFlCm6R1Gh2HtLm0TSPm5D65KOtd0vQSvunT1KHNPrOU
+	58/sYyJGa0+4IlmV9OT6Vjv/1tmYOW9ONQ0BAQF90Wb18LtZ6eHv6FbnfnAv41MVyhO9
+	8b7fyXs5BikOHnWyer2J//hEqLYSdiDNviZm95Kn5/4/Zu98J82609RvcZyB6whsBPTr
+	x1AQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=odFrxJFcCxl8zW63g3NTcqYCGbwyDcqyTab28o/IBDk=;
-	b=MBg8OxjQj/yYg7rf3TNVMOJABCIj5oiRzv7nWjObEWGdTIkVdwGVE0YhLvC/jdEts2
-	ddvWFUU5XwCo22LVym9jei3fLzp7lgTkxkyrdX9W7m6dKCEc97XojCe7TtGsK5pzzAOW
-	9vj6qC4QOweo9wHMvjE6LVVdqKRLQ/9QrNnnJJiMYyMvuI287l8LRlmTR7kwEa/AKywt
-	Wk+VUzoai8qkmACaUQK7fpAaX2i5wabcE0KoLos0wqVTVWvWd8P++hbnx5pXMN8ejjN3
-	LsYRzdMFOIj/DpslJ8A9ajFONiGrE0PH9iy+8bRI4O5fgqBBrnNLTOtWa/N99QMu6cY0
-	Ujzw==
-X-Gm-Message-State: AIkVDXKZCpArW5v/yaFXPbBXk9y76QFdnuuJbvkATwJMVCTj7izup0/bMnKHm+TtwkDG8g==
-X-Received: by 10.28.203.6 with SMTP id b6mr37186wmg.2.1484055906929;
-	Tue, 10 Jan 2017 05:45:06 -0800 (PST)
-Received: from Byteservers-Customer.byteservers.nl
-	(customer-5-196-140-39.byteservers.eu. [5.196.140.39])
-	by smtp.gmail.com with ESMTPSA id
-	gj6sm3364202wjb.29.2017.01.10.05.45.06
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 10 Jan 2017 05:45:06 -0800 (PST)
-From: Steven van der Schoot <steven.vanderschoot@solarteameindhoven.nl>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=pUNrnwgMQ1KzWFiH1oYj8w1a1hmNrl5T8B0Lgn+iXFM=;
+	b=DUxjtx5JYcJHgpWgG5pNjbUO5CCB5K5Evcz9wqkpxnPngmbdKo0xOnQxjkxoV3n041
+	1M8UQkBj8VoIiy40L8BzatbGMNIlEmCRIhE5SkmXZvLfLgJBUfclAOezsrtx8NmKZg7s
+	iP9ARs7IycTqarJ72tpZVif10eqgKtu5u32z8zwxKQf8YDFrQ73bUCbYVBkVP3DC68Wj
+	EvMPKKLJ9hboCyaDMCDDoQESp+pu1FGHIK5Be8oq++T2dR3cCh5QSzeUJM51AjZJBeUV
+	rN9eWT4SnQwr22g2CujspdwnFmtQG8nzp0qAd+en8nqFARSuyzHxt8Fh4NgO50DKtzIN
+	m6Fw==
+X-Gm-Message-State: AIkVDXJ4FFuCzj+1Q5hG7SRDErXCNhlRQBnrYNfkTAzKPett/4vzGTKQeDMCT+tNMFv5gpaGLkpG+pRJOtbmjw==
+X-Received: by 10.25.195.151 with SMTP id t145mr1537291lff.149.1484065001420; 
+	Tue, 10 Jan 2017 08:16:41 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.25.41.70 with HTTP; Tue, 10 Jan 2017 08:16:10 -0800 (PST)
+X-Originating-IP: [189.114.111.135]
+In-Reply-To: <CALbNGRSLsKm2hbeMLCt7eng9MfgaovQmpHoT8w-S3VxOO6__WA@mail.gmail.com>
+References: <1481824331-347-1-git-send-email-schnitzeltony@googlemail.com>
+	<CALbNGRSLsKm2hbeMLCt7eng9MfgaovQmpHoT8w-S3VxOO6__WA@mail.gmail.com>
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+Date: Tue, 10 Jan 2017 14:16:10 -0200
+Message-ID: <CAAPZna30_rbUmZdEuR19oB9wa3pJ+iN7Pf82iLu8Yj1rU5LmaA@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Jan 2017 14:44:56 +0100
-Message-Id: <1484055896-8677-1-git-send-email-steven.vanderschoot@solarteameindhoven.nl>
-X-Mailer: git-send-email 2.5.5
-Subject: [meta-oe][PATCH] libiio: Update to 0.8
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-browser][PATCH V2 0/3] firefox fix build on oe-core master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,29 +55,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jan 2017 13:45:08 -0000
+X-List-Received-Date: Tue, 10 Jan 2017 16:16:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Steven van der Schoot <steven.vanderschoot@solarteameindhoven.nl>
----
- meta-oe/recipes-support/libiio/libiio_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Hi Andreas!
 
-diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/recipes-support/libiio/libiio_git.bb
-index 28a1073..d66ac58 100644
---- a/meta-oe/recipes-support/libiio/libiio_git.bb
-+++ b/meta-oe/recipes-support/libiio/libiio_git.bb
-@@ -4,8 +4,8 @@ SECTION = "libs"
- LICENSE = "LGPLv2.1+"
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=7c13b3376cea0ce68d2d2da0a1b3a72c"
- 
--SRCREV = "e0fc3845506ccb19ab02e4b1d81cddeeee0805ab"
--PV = "0.7+git${SRCPV}"
-+SRCREV = "08f947d5e40600259bb698c3b95538e9f2bfecc2"
-+PV = "0.8+git${SRCPV}"
- 
- SRC_URI = "git://github.com/analogdevicesinc/libiio.git"
- 
--- 
-2.5.5
+Firefox was updated to version 45.6.0, please update your patches and send
+a v3.
 
+Thanks.
+
+On Tue, Jan 10, 2017 at 8:57 AM, Andreas M=C3=BCller <
+schnitzeltony@googlemail.com> wrote:
+
+> On Thu, Dec 15, 2016 at 6:52 PM, Andreas M=C3=BCller
+> <schnitzeltony@googlemail.com> wrote:
+> > * recent 'use system's nss/nspr' broke firefox
+> > * to build properly patch sent to oe-core is necessary [1]
+> >
+> > V1 -> V2: 0003-.. added to really fix build
+> >
+> > [1] http://lists.openembedded.org/pipermail/openembedded-core/
+> 2016-December/130211.html
+> >
+> > Andreas M=C3=BCller (3):
+> >   firefox: fix configure with oe-core master - there is no nss-config
+> >   firefox: use pkg-config to find nspr
+> >   firefox: do not link against crmf library it is not there
+> >
+> >  .../firefox/0001-use-pkg-config-to-find-nss.patch  | 47
+> ++++++++++++++++++++++
+> >  .../firefox/0002-use-pkg-config-to-find-nspr.patch | 37
+> +++++++++++++++++
+> >  ...link-against-crmf-library-it-is-not-there.patch | 47
+> ++++++++++++++++++++++
+> >  recipes-mozilla/firefox/firefox_45.5.1esr.bb       |  3 ++
+> >  4 files changed, 134 insertions(+)
+> >  create mode 100644 recipes-mozilla/firefox/firefox/0001-use-pkg-config=
+-
+> to-find-nss.patch
+> >  create mode 100644 recipes-mozilla/firefox/firefox/0002-use-pkg-config=
+-
+> to-find-nspr.patch
+> >  create mode 100644 recipes-mozilla/firefox/firefox/0003-do-not-link-
+> against-crmf-library-it-is-not-there.patch
+> >
+> > --
+> > 2.7.4
+> >
+> ping?
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
