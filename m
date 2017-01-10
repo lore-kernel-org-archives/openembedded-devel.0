@@ -1,43 +1,44 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id BE09A719C4
-	for <Openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jan 2017 22:27:17 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id r144so8922692wme.1
-	for <Openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jan 2017 14:27:18 -0800 (PST)
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 61E0C60851
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Jan 2017 22:48:02 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id y143so9654696pfb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Jan 2017 14:48:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=A25znkuCv55ncLqrg0AoQVuHO/+mvvh0Z5TSaslO8AA=;
-	b=M6DVM+cPWjrBFA2ADvqOF+hvqYN9qIDP5ywdIQQpKkk5S1rROOBtIbnYgHUwANslgI
-	E+Z0O3oCD4ioZYAmXpVggryJB5TAuaS+vi7mkECA0GdKZo2gh/SyGtDwfC6KqPiqDNB2
-	Ait0jddfxkfrx/A7iqSne0TThUQjqAgVC1HAyG5H1eeEYp8bhFG+8Vsn6Nof8FFcP20I
-	PSv8x5i232rfzZVuvOZcF8+KOv9MXqEpSseOyg41GHva7q8JvN7PFd12AJUvNhM2AxnT
-	pKH8vu/uLAG6FmBls2yJDH6heThIyseCCMMz+OI8Puvp+qOGkuvHutnq4a5gSb6+2O5Y
-	HAFg==
+	h=from:to:cc:subject:date:message-id;
+	bh=ckMH6Cj4uV/nKSDAKX6DDouUCkJUEx2s0Ynsdp2fZRE=;
+	b=JAzX7vi8ogBNhyUAEyXSXseOJuNtSrnVNV18hCSm3paMgPnu9cA3bidBHWmy57GA2K
+	zIhdaGD/Ox61SYN0EvfmNrzKoUVUT6eByGXzNy39ThmfC70tXvUQxY67h6DVGluMn32t
+	sTq3gypMg9ANEBMeurkTJ17hNxpWuW0CSJLzkkfVRWqdO668gB0FmB0PjlbHcZFQcc1g
+	GkzK0Gj4WnKSfDiSpvV06Auowfp0bn83IwMS5KaJ2Ot3Q6AE4R3U4NoZBXeajd8GqB4f
+	pllpOHvBHYtssn2YHeidIlUOng+wnUrMD/6vkcjVBgRX2mD0O2VLNXoBPIJIylisgq8F
+	Lyhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=A25znkuCv55ncLqrg0AoQVuHO/+mvvh0Z5TSaslO8AA=;
-	b=psSQ7tI22JRjElHHOds2z1VKJBQFUwt2FwBNcM4RZvaO8YjemLp2k5Q/yY/DZGkzZF
-	eWhcFrzRIL+5cc8A26wSwyJWJGjA+xvCWFVQX98xbKvbVVzBo+jLiF0a4RmiXvuyO5/+
-	pw2zQJ+W1rCRxp8YlzQ/Dj5Xteuw/IkJRoVgt/82+nG5AjOHNmf6teU8iWF0QcrjyDpV
-	4geGfTOZXSBrFPeoTftSfy2hm31cmTL0d5vGDPy5x7Rs4DD6emsBCy2lFSyA8oZaFqax
-	k0UGbIw2oD09nBMj09nHYdjFaRu5lGnwYJdra27PewT8GIrkAziekafhuLHFNl4m6jhX
-	AhuA==
-X-Gm-Message-State: AIkVDXI8rbQkmXZCvCJVZCejz/yqkBez/ObyRMt0tvA81NLWSQHxbNU/lVq8AGB+4d2PWdWSyhZZCySBv2dqSw==
-X-Received: by 10.28.8.12 with SMTP id 12mr1211375wmi.46.1484087237322; Tue,
-	10 Jan 2017 14:27:17 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.194.44.227 with HTTP; Tue, 10 Jan 2017 14:27:16 -0800 (PST)
-In-Reply-To: <CAFZh4h8iVD+ddmhzuBgcen4AhFhCVGE36z5KZaEBs9uOROsHgA@mail.gmail.com>
-References: <CAFZh4h8iVD+ddmhzuBgcen4AhFhCVGE36z5KZaEBs9uOROsHgA@mail.gmail.com>
-From: Brian Hutchinson <b.hutchman@gmail.com>
-Date: Tue, 10 Jan 2017 17:27:16 -0500
-Message-ID: <CAFZh4h-SxdE7Vu1YbRYwiAostz1mB9h=XC6mqfCvQ6qwuDBQag@mail.gmail.com>
-To: Openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-webserver]
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ckMH6Cj4uV/nKSDAKX6DDouUCkJUEx2s0Ynsdp2fZRE=;
+	b=okibMtEqDtmn/t0QSrlqCdbFA6oi1UQpz2vxr/jRWotIzaqINRAqV/Fx53At1zKRb0
+	4tKCkIXpGBS7CedcYfBRr5XfBIJgA9ZR7eybJCMftzOfuLwQgKJKxEwUBL0GnPOCseay
+	jiHDDoC9EeUybjMCYrhgen4Jn4mB8RTXV8c2iye6zr+Hy5RXfVT3KnGkBx0/3KgX3QA3
+	7O+5kF8OzZXMzdvV4MoeOMh30xJo/T+t9vScrdMxS6QaZP+Xte3htq6WpOYG+tZGr7Ud
+	lMBn9sbkAaWCp7+qp/XVUxmTNPWDVkFsiCoJuVRpcTo5XOz32yAEsZQDJoKnnqQLlBTJ
+	cU2w==
+X-Gm-Message-State: AIkVDXIMmmM4t420S7FqWOXTT6JlgI+vZ+KoMZn5KiJglOrarKLG1jQYzyVb09ITBCR4Ww==
+X-Received: by 10.99.1.132 with SMTP id 126mr6749725pgb.129.1484088483240;
+	Tue, 10 Jan 2017 14:48:03 -0800 (PST)
+Received: from e6520.guest-wifi.scl.liberty.com ([4.16.80.121])
+	by smtp.gmail.com with ESMTPSA id f65sm8169671pfk.5.2017.01.10.14.48.01
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 10 Jan 2017 14:48:01 -0800 (PST)
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 10 Jan 2017 14:47:56 -0800
+Message-Id: <1484088476-2468-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] log4c: add support for log4c-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,53 +51,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jan 2017 22:27:18 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 10 Jan 2017 22:48:03 -0000
 
-On Tue, Jan 10, 2017 at 5:07 PM, Brian Hutchinson <b.hutchman@gmail.com> wrote:
-> In both krogoth and morty I get the following error trying to build apache2:
->
-> WARNING: apache2-native-2.4.23-r0 do_fetch: Failed to fetch URL
-> http://www.apache.org/dist/httpd/httpd-2.4.23.tar.bz2, attempting
-> MIRRORS if available
-> ERROR: apache2-native-2.4.23-r0 do_fetch: Fetcher failure: Fetch
-> command failed with exit code 8, output:
-> http://www.apache.org/dist/httpd/httpd-2.4.23.tar.bz2:
-> 2017-01-10 16:47:16 ERROR 404: Not Found.
->
-> ERROR: apache2-native-2.4.23-r0 do_fetch: Function failed: Fetcher
-> failure for URL:
-> 'http://www.apache.org/dist/httpd/httpd-2.4.23.tar.bz2'. Unable to
-> fetch URL from any source.
-> ERROR: Logfile of failure stored in:
-> /home/hutch/yocto_2.1.2_bbb/layers/poky/build/tmp/work/x86_64-linux/apache2-native/2.4.23-r0/temp/log.do_fetch.17534
-> ERROR: Task 1098
-> (/home/hutch/yocto_2.1.2_bbb/layers/meta-openembedded/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb,
-> do_fetch) failed with exit code '1'
-> NOTE: Tasks Summary: Attempted 1033 tasks of which 0 didn't need to be
-> rerun and 1 failed.
-> Waiting for 0 running tasks to finish:
->
-> Summary: 1 task failed:
->   /home/hutch/yocto_2.1.2_bbb/layers/meta-openembedded/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb,
-> do_fetch
->
->
-> If I go to the URL in the recipe there is no httpd-2.4.23.tar.bz2.
-> Looks like it's been replaced with 2.4.25.
->
-> Regards,
->
-> Brian
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ meta-oe/recipes-support/log4c/log4c_1.2.4.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
+diff --git a/meta-oe/recipes-support/log4c/log4c_1.2.4.bb b/meta-oe/recipes-support/log4c/log4c_1.2.4.bb
+index 3286b08..a028f2b 100644
+--- a/meta-oe/recipes-support/log4c/log4c_1.2.4.bb
++++ b/meta-oe/recipes-support/log4c/log4c_1.2.4.bb
+@@ -15,3 +15,5 @@ PACKAGECONFIG[expat] = "--with-expat,--without-expat,expat"
+ BINCONFIG = "${bindir}/log4c-config"
+ 
+ inherit autotools binconfig-disabled
++
++BBCLASSEXTEND = "native"
+-- 
+1.9.1
 
-Ooops, I see this was recently talked about.  Sorry for the noise.  I
-just modified my recipe to use archive to get around the problem as I
-don't know what's involved with updating to 2.4.25 ... I've never
-found cross compiling Apache for an embedded device (anything other
-than x86) trivial.
-
-Regards,
-
-Brian
 
