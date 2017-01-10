@@ -1,49 +1,52 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 58AB47199A
+Received: from mail-wj0-f181.google.com (mail-wj0-f181.google.com
+	[209.85.210.181])
+	by mail.openembedded.org (Postfix) with ESMTP id A321B7199A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jan 2017 18:48:59 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id c206so84957977wme.0
+	Tue, 10 Jan 2017 18:49:01 +0000 (UTC)
+Received: by mail-wj0-f181.google.com with SMTP id tn15so88056602wjb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Jan 2017 10:49:00 -0800 (PST)
+	Tue, 10 Jan 2017 10:49:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=u04Iv25A56s7AxUYs51BpCv7VKsjVv8aLE6N0BElTHc=;
-	b=a0VeYVOzgwIck8lwI+qTU7W0CMNAxRlPVa3XeBvbK8HzqAvGIf8qyLzmt0BDDYhV1h
-	ALZHnSH+2ucTZeo5ETwh1eNj3BiYCLguZriLDk4ym82qjK8XdcETyqDWNtk4D34+AR0i
-	penHGh49d9Ly0hfwEZJAW+jPqAhmS639JcWjTQ/aBB+peszg8d3u1igA5vI7ECdCfaca
-	egngsmlod5pxDgjTxcoSKPrpavYCyqvzwgu0BSpTkYrgTGFKM3oX0q97FsCqmns7utXc
-	2szen9KQEAeiBtFW3mEIUg6avzD+YIYwt81ERvqr3JoZSMqC8adcmKHdPk5FQoYkahx9
-	aiVw==
+	bh=YcGxYKG7LRLfkZVV6759C51Foh+MVxfiVT7Au4vVZ8Q=;
+	b=PtOlpJiJ0cZmiWN0+HzndJU5vRt9VANweqJA5QHpnHyPwqHj6Ki0rdBdVpiuUw6kOI
+	2EmEWgQf52CWcXEYjaE7Iguz16oyt+qDbZjdylYqqNpckIOFRkeViF+ruyC78RfwCnCk
+	zoWyScQ/bS3ciu6kBclOtSyQCk1uBkkGDF9jUEMo3HC8egWyfcShX5s50qi0Zs5l8M9h
+	khEwl6K5xA7uq4D5/oFg9Dj+xWcnri09QLYrSjYXKQm0I4QSiIAut1fgNKkUQzPatxXH
+	0CPyaJsLbGThlPOTn362d7tLtQ+KyQ4YzWE1ebuhuCOWIWxMzMCMzJy0V35ohoVFBclI
+	WVJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=u04Iv25A56s7AxUYs51BpCv7VKsjVv8aLE6N0BElTHc=;
-	b=XNyk3yjKn/0HyN8S4Vj7zYUfTuYA0KqzfahZ1C/U0GtrxXt7N8+We1lBvaVrtzqcL/
-	mQqVvlphloM1uFQ/723qD5aQ27G/zfr1UMSgDFxyhJOvTGppL1grkMX7QCLzpQCsiut7
-	PWS8OqRRQnc2qnXAv2th2NJ27qUN3+MqMbaHMLOEwA6N4co4mbztAUCUj6sgtmp4EISA
-	qcAYUgk3k4qwjeKYcrRCjR119qzLwx/iW6Gn+EgnyhxzT3Qi9r4ycRdSpvZ2o/QKCBgJ
-	v/ZDKeUKnA72VwflR4osv6Q60YUwdkuPgFT7QgnSjms+dkhhtdbUAAZnS51C751L5RrQ
-	5zng==
-X-Gm-Message-State: AIkVDXKeSzvXbz1emz84GQ4OFw2WQ03yxw4hmrEsBI2gFbdYznx9pN7S7n/pwTQIQkNAbQ==
-X-Received: by 10.28.165.82 with SMTP id o79mr2588421wme.129.1484074139105;
-	Tue, 10 Jan 2017 10:48:59 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=YcGxYKG7LRLfkZVV6759C51Foh+MVxfiVT7Au4vVZ8Q=;
+	b=YftY+JMOhZuW6TOOS9ByH0i6Us25phF3o4JzsnaD0v9pkNdIkFWfVr3Ji+k9MTCz96
+	sD/96MnBVd0XOyACiLnwPaK4kX5D5A+EuiOFC4DL/HMusKnXkQItMxy+bZSBZsHkQKKR
+	JtWpFCUs3cD4CT1aScPLPJyFUVbFWv+3YZHOVTZ9cKAN3X3UjsqJVnzJ/qRCa5N0gRyQ
+	J1StdKUci4HtczoeqGE5HxEsP66IjvJHUVJTpZxgnatAshebc1jcGpn6vS0DH5BkeNKH
+	oexxVCbli5tsnqmAfWGfRbO4E+URJ+ItGxZoHFwrEYJQcYwQz5pTsIfYlIWDxyyryVDR
+	jwoA==
+X-Gm-Message-State: AIkVDXK4FVHaXwTOdPAD9bbVEmwniw998WPGnWygV6LMCEh8BUa/q879xQbiTVRdNgxwZQ==
+X-Received: by 10.194.234.193 with SMTP id ug1mr2641987wjc.68.1484074141210;
+	Tue, 10 Jan 2017 10:49:01 -0800 (PST)
 Received: from localhost.localdomain (p579F7DD6.dip0.t-ipconnect.de.
 	[87.159.125.214]) by smtp.googlemail.com with ESMTPSA id
-	r5sm9007071wme.23.2017.01.10.10.48.58
+	r5sm9007071wme.23.2017.01.10.10.48.59
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 10 Jan 2017 10:48:58 -0800 (PST)
+	Tue, 10 Jan 2017 10:48:59 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Jan 2017 19:48:45 +0100
-Message-Id: <1484074127-21458-1-git-send-email-schnitzeltony@googlemail.com>
+Date: Tue, 10 Jan 2017 19:48:46 +0100
+Message-Id: <1484074127-21458-2-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.5.5
+In-Reply-To: <1484074127-21458-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1484074127-21458-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-browser][PATCH V2 1/3] firefox: fix configure with oe-core master - there is no nss-config
+Subject: [meta-browser][PATCH V2 2/3] firefox: use pkg-config to find nspr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,30 +59,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Jan 2017 18:49:00 -0000
+X-List-Received-Date: Tue, 10 Jan 2017 18:49:01 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-| configure:15633: checking for NSS - version >= 3.21.3
-| configure: error: you don't have NSS installed or your version is too old
+nspr-config adds path /usr/include
+
+which causes lots of
+
+| cc1plus: warning: include location "/usr/include" is unsafe for cross-compilation [-Wpoison-system-directories]
+
+and finally fails with
+
+| In file included from /usr/include/sys/syscall.h:31:0,
+|                  from <workdir>/cortexa7hf-neon-vfpv4-angstrom-linux-gnueabi/firefox/45.5.1esr-r0/firefox-45.5.1esr/firefox-build-dir/dist/system_wrappers/sys/syscall.h:4,
+|                  from <workdir>/cortexa7hf-neon-vfpv4-angstrom-linux-gnueabi/firefox/45.5.1esr-r0/firefox-45.5.1esr/memory/mozjemalloc/jemalloc.c:397:
+| <workdir>/cortexa7hf-neon-vfpv4-angstrom-linux-gnueabi/firefox/45.5.1esr-r0/firefox-45.5.1esr/memory/mozjemalloc/jemalloc.c: In function '_mmap':
+| <workdir>/cortexa7hf-neon-vfpv4-angstrom-linux-gnueabi/firefox/45.5.1esr-r0/firefox-45.5.1esr/memory/mozjemalloc/jemalloc.c:417:26: error: '__NR_mmap2' undeclared (first use in this function)
+|   return (void *) syscall(SYS_mmap2, addr, length, prot, flags,
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../firefox/0001-use-pkg-config-to-find-nss.patch  | 47 ++++++++++++++++++++++
+ .../firefox/0002-use-pkg-config-to-find-nspr.patch | 37 ++++++++++++++++++++++
  recipes-mozilla/firefox/firefox_45.6.0esr.bb       |  1 +
- 2 files changed, 48 insertions(+)
- create mode 100644 recipes-mozilla/firefox/firefox/0001-use-pkg-config-to-find-nss.patch
+ 2 files changed, 38 insertions(+)
+ create mode 100644 recipes-mozilla/firefox/firefox/0002-use-pkg-config-to-find-nspr.patch
 
-diff --git a/recipes-mozilla/firefox/firefox/0001-use-pkg-config-to-find-nss.patch b/recipes-mozilla/firefox/firefox/0001-use-pkg-config-to-find-nss.patch
+diff --git a/recipes-mozilla/firefox/firefox/0002-use-pkg-config-to-find-nspr.patch b/recipes-mozilla/firefox/firefox/0002-use-pkg-config-to-find-nspr.patch
 new file mode 100644
-index 0000000..8bb6c55
+index 0000000..d97570b
 --- /dev/null
-+++ b/recipes-mozilla/firefox/firefox/0001-use-pkg-config-to-find-nss.patch
-@@ -0,0 +1,47 @@
-+From f5533e4f2ac147256f7c41166ae1ef98f41d7f39 Mon Sep 17 00:00:00 2001
++++ b/recipes-mozilla/firefox/firefox/0002-use-pkg-config-to-find-nspr.patch
+@@ -0,0 +1,37 @@
++From cdb21594b814af82c4128ccd1179267de2e0e780 Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Wed, 14 Dec 2016 21:37:03 +0100
-+Subject: [PATCH] use pkg-config to find nss
++Date: Wed, 14 Dec 2016 22:57:55 +0100
++Subject: [PATCH] use pkg-config to find nspr
 +MIME-Version: 1.0
 +Content-Type: text/plain; charset=UTF-8
 +Content-Transfer-Encoding: 8bit
@@ -88,50 +103,40 @@ index 0000000..8bb6c55
 +
 +Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 +---
-+ configure | 9 +++++----
-+ 1 file changed, 5 insertions(+), 4 deletions(-)
++ configure | 4 +++-
++ 1 file changed, 3 insertions(+), 1 deletion(-)
 +
 +diff --git a/configure b/configure
-+index c27acdd..16133bf 100755
++index 16133bf..806896a 100755
 +--- a/configure
 ++++ b/configure
-+@@ -15630,7 +15630,8 @@ fi
-+ 	min_nss_version=3.21.3
-+ 	echo $ac_n "checking for NSS - version >= $min_nss_version""... $ac_c" 1>&6
-+ echo "configure:15633: checking for NSS - version >= $min_nss_version" >&5
-+-
-++    NSS_CONFIG="pkg-config nss"
-++    nss_config_args=
-+ 	no_nss=""
-+ 	if test "$NSS_CONFIG" = "no"; then
-+ 		no_nss="yes"
-+@@ -15638,11 +15639,11 @@ echo "configure:15633: checking for NSS - version >= $min_nss_version" >&5
-+ 		NSS_CFLAGS=`$NSS_CONFIG $nss_config_args --cflags`
-+ 		NSS_LIBS=`$NSS_CONFIG $nss_config_args --libs`
++@@ -15153,10 +15153,13 @@ fi
++ echo "configure:15154: checking for NSPR - version >= $min_nspr_version" >&5
 + 
-+-		nss_config_major_version=`$NSS_CONFIG $nss_config_args --version | \
-++		nss_config_major_version=`$NSS_CONFIG $nss_config_args --modversion | \
-+ 			sed 's/\([0-9]*\)\.\([0-9]*\)\(\.\([0-9]*\)\)\{0,1\}/\1/'`
-+-		nss_config_minor_version=`$NSS_CONFIG $nss_config_args --version | \
-++		nss_config_minor_version=`$NSS_CONFIG $nss_config_args --modversion | \
-+ 			sed 's/\([0-9]*\)\.\([0-9]*\)\(\.\([0-9]*\)\)\{0,1\}/\2/'`
-+-		nss_config_micro_version=`$NSS_CONFIG $nss_config_args --version | \
-++		nss_config_micro_version=`$NSS_CONFIG $nss_config_args --modversion | \
-+ 			sed 's/\([0-9]*\)\.\([0-9]*\)\(\.\([0-9]*\)\)\{0,1\}/\4/'`
-+ 		if test -z "$nss_config_micro_version"; then
-+ 			nss_config_micro_version="0"
++ 	no_nspr=""
+++    NSPR_CONFIG="pkg-config nspr"
+++    nspr_config_args=
++ 	if test "$NSPR_CONFIG" != "no"; then
++ 		NSPR_CFLAGS=`$NSPR_CONFIG $nspr_config_args --cflags`
++ 		NSPR_LIBS=`$NSPR_CONFIG $nspr_config_args --libs`
++-		NSPR_VERSION_STRING=`$NSPR_CONFIG $nspr_config_args --version`	
+++		NSPR_VERSION_STRING=`$NSPR_CONFIG $nspr_config_args --modversion`	
+++		echo -n "$NSPR_VERSION_STRING... "
++ 	elif test -n "${NO_NSPR_CONFIG_SYSTEM_VERSION}"; then
++ 	    NSPR_CFLAGS="${NO_NSPR_CONFIG_SYSTEM_CFLAGS}"
++ 		NSPR_LIBS="${NO_NSPR_CONFIG_SYSTEM_LDFLAGS}"
 +-- 
 +2.5.5
 +
 diff --git a/recipes-mozilla/firefox/firefox_45.6.0esr.bb b/recipes-mozilla/firefox/firefox_45.6.0esr.bb
-index b3c839c..6ca6633 100644
+index 6ca6633..a4ae32f 100644
 --- a/recipes-mozilla/firefox/firefox_45.6.0esr.bb
 +++ b/recipes-mozilla/firefox/firefox_45.6.0esr.bb
-@@ -39,6 +39,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}/source/firefox
-            file://debian-hacks/Avoid-wrong-sessionstore-data-to-keep-windows-out-of.patch \
+@@ -40,6 +40,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}/source/firefox
             file://Fix-firefox-install-dir.patch \
             file://fixes/Correct-the-source-to-be-compatible-with-gcc6-by-pre.patch \
-+           file://0001-use-pkg-config-to-find-nss.patch \
+            file://0001-use-pkg-config-to-find-nss.patch \
++           file://0002-use-pkg-config-to-find-nspr.patch \
             "
  
  SRC_URI[archive.md5sum] = "ee3cf2401a5716cebacaae5fb70d133f"
