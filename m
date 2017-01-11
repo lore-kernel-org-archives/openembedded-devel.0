@@ -1,44 +1,44 @@
-Return-Path: <oleksandr.kravchuk@pelagicore.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id E8EEE600E2
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
+	[209.85.213.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 00F9660116
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jan 2017 14:29:27 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id r144so30186230wme.1
+	Wed, 11 Jan 2017 18:34:15 +0000 (UTC)
+Received: by mail-vk0-f66.google.com with SMTP id j12so8819198vkd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jan 2017 06:29:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=1jVVXGDOtQ+HCSoK166bBrNf6mt5T8B5tTcnWN7WYYQ=;
-	b=rjFUKcNKtllA8HDVLa4bvBkZnjrlpZtzvFDa+1KO7gqAa3BGBBdYZMNGVC2v1ts1HG
-	GV6ps4LYvskFpi7g5CescdUo5iPT5SmVVQ9yCA8JS0VzOt6BwhNVfLVYgEqU/cErzPqu
-	zJHHTxhs3N5Yjm2UUjqXZcCR/qfVPfe7mqiaDHMrLjo6hY7ifaw/951GJS0bQJhFkK5X
-	+RfG9neR0tNxWuHJKRNSVy4yeWlT2HPY95x5RBmO5o1R0qPdAeTm38PCK8+xo3pIW45i
-	QSvf8xNoSeHSOdqYNn17QKwHhdV8pq90kqrH+qSdxpEP7GzMLd5apEx2be28eQa26nk/
-	FafA==
+	Wed, 11 Jan 2017 10:34:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=R7XJs2tHocyuR0+36FReQLZUkDxEFUVkGF8/yluhq6w=;
+	b=EtnHe1v0WXq6uJHZRGJgbouSQEYCHUPmTOIv6MiMZ5D1pEtqvYJdBBdZTDwUpQcfWa
+	/ui0iOweahL4nwEPZlv1s4VE+znf2kVwxpEywQ/DcGUDHAOOOZYuL4pmUP7ig5xwAZZj
+	fCw2Rb/3CWbAXnsh59AhH1KTgT9gegEWlvSGfW+h/LABEDlEvuZkICi7X0jGCqocHuzQ
+	7MUGHy7mFgjqaLMyNGzPBXuE+vj7yue+oVX0Yt6v+6wCJ8/ci1IMnxAAgifbI1HVc5xa
+	QGhlJhKp4Za/2esr1jmGqfg3klg5n3jljI9Bg8bqoFTmN6jOeNLGuP0v3BKr/y84aq8/
+	BYLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=1jVVXGDOtQ+HCSoK166bBrNf6mt5T8B5tTcnWN7WYYQ=;
-	b=gNIq5x3KF23tCFBpIpRSxnCaQ5rRQ0B0m9ZgxohCe7ZxLZP/7taXgDhNoxO71WxmPP
-	Vli9Qr2KoaHPNOuaFM3zJrqMSE/M8yeslQmon5i3j138rVzE8BPU+L/Y/55RF70gRnlt
-	mrEb9ob37wPC5WJsbqcauAaFm4VEydrZBTaibCEiJDEpaXOY8EfIEdS5Pdd09v+8S0fN
-	eLZWm0xHBbfOJoc1PMnANALR9uNdhUGYqZZlFcbW7Yzhvu4YfnjF73EGvbqC7kYmhncI
-	RaYo9849OaRk5hJ20q14MtO5KVBh9dRLPe7ExjczN2xPaeD4BTQQPQ6jSVNmcs95djGE
-	BoTw==
-X-Gm-Message-State: AIkVDXKBIS9O9bdE2+jXptvpW1NxDa0Qdqha4C+vHUd8/qZgJ6eOUqmxq1ZYAnSencXCFnff
-X-Received: by 10.28.147.147 with SMTP id v141mr3640216wmd.110.1484144967987; 
-	Wed, 11 Jan 2017 06:29:27 -0800 (PST)
-Received: from stout.office.pelagicore.net ([83.218.80.242])
-	by smtp.gmail.com with ESMTPSA id y4sm8843713wjp.0.2017.01.11.06.29.26
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 11 Jan 2017 06:29:27 -0800 (PST)
-From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Jan 2017 15:24:58 +0100
-Message-Id: <1484144698-21339-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] jsoncpp: upgrade to 1.8.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=R7XJs2tHocyuR0+36FReQLZUkDxEFUVkGF8/yluhq6w=;
+	b=o5770V9qEys/eAItCbnCNci9nS2pnlbzyxa5Cc3z+i41lPCcncAeliOH8X9y5Mj8W8
+	P2i1DW1O2CMxNX+8heO6JS0f2Rls5yoBfoUaldynheLjzNKyYhmFP8KEK73LPOy3cpie
+	eEdDYvTn7irgMUt8w6rqGSCKzDcJEr8YkqsnqME/SqJ5o2GAYNQeU0Th9pdtEQ1GqAhg
+	7ZhK+vw5hihx+sCHs6SRq6xrGwIdX3i8FPGIn449IO7/zhfeHxE5Fa9PnLJ7HU4LNAtC
+	Ey0uBDvz9Z6gZ4hwP8c6aIA0+DJpzM/7nL6pTDuZ9hpWAWhYN3EL7GC7btixRn69fEth
+	lr0Q==
+X-Gm-Message-State: AIkVDXKJ5F9+SjujN2091uZ6W7AWLoKwPNJdA3z6j2F1VtrXoabbXMKsnAkzTO05ur69RQwDakztmqyEhjTEPw==
+X-Received: by 10.31.115.142 with SMTP id o136mr4886029vkc.139.1484159655175; 
+	Wed, 11 Jan 2017 10:34:15 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.159.48.222 with HTTP; Wed, 11 Jan 2017 10:33:44 -0800 (PST)
+In-Reply-To: <1484134588-15143-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
+References: <1484134588-15143-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 11 Jan 2017 10:33:44 -0800
+Message-ID: <CAMKF1sqFQ+q-GDgWG0aqSqE2khKe6P=XGD4aF6hb6bgseJS+WA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] nano: upgrade to 2.7.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,47 +51,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2017 14:29:29 -0000
+X-List-Received-Date: Wed, 11 Jan 2017 18:34:16 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Upgraded jsoncpp to version 1.8.0 and changed home page to the new one.
+On Wed, Jan 11, 2017 at 3:36 AM, Oleksandr Kravchuk
+<oleksandr.kravchuk@pelagicore.com> wrote:
+> Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+> ---
+>  .../nano/nano-2.2.5/ncursesw.includedir.patch                | 12 ------------
+>  meta-oe/recipes-support/nano/nano.inc                        |  6 +++---
+>  meta-oe/recipes-support/nano/nano_2.2.5.bb                   |  8 --------
+>  meta-oe/recipes-support/nano/nano_2.7.4.bb                   |  6 ++++++
+>  4 files changed, 9 insertions(+), 23 deletions(-)
+>  delete mode 100644 meta-oe/recipes-support/nano/nano-2.2.5/ncursesw.includedir.patch
+>  delete mode 100644 meta-oe/recipes-support/nano/nano_2.2.5.bb
+>  create mode 100644 meta-oe/recipes-support/nano/nano_2.7.4.bb
+>
+> diff --git a/meta-oe/recipes-support/nano/nano-2.2.5/ncursesw.includedir.patch b/meta-oe/recipes-support/nano/nano-2.2.5/ncursesw.includedir.patch
+> deleted file mode 100644
+> index 0f224be..0000000
+> --- a/meta-oe/recipes-support/nano/nano-2.2.5/ncursesw.includedir.patch
+> +++ /dev/null
+> @@ -1,12 +0,0 @@
+> -diff -uNr nano-2.2.5.orig//configure.ac nano-2.2.5/configure.ac
+> ---- nano-2.2.5.orig//configure.ac      2010-08-06 03:00:51.000000000 +0200
+> -+++ nano-2.2.5/configure.ac    2010-08-10 14:11:52.000000000 +0200
+> -@@ -442,7 +442,7 @@
+> -     AC_CHECK_HEADERS(ncurses.h)
+> -
+> -     if test x$enable_utf8 != xno; then
+> --      AC_CHECK_LIB(ncursesw, get_wch, [CURSES_LIB="-lncursesw" CPPFLAGS="-I/usr/include/ncursesw $CPPFLAGS" CURSES_LIB_NAME=ncursesw CURSES_LIB_WIDE=yes])
+> -+      AC_CHECK_LIB(ncursesw, get_wch, [CURSES_LIB="-lncursesw" CURSES_LIB_NAME=ncursesw CURSES_LIB_WIDE=yes])
+> -     fi
+> -
+> -     if eval "test x$CURSES_LIB_NAME = x"; then
+> diff --git a/meta-oe/recipes-support/nano/nano.inc b/meta-oe/recipes-support/nano/nano.inc
+> index 0f31c6c..8a9f1e8 100644
+> --- a/meta-oe/recipes-support/nano/nano.inc
+> +++ b/meta-oe/recipes-support/nano/nano.inc
+> @@ -12,8 +12,8 @@ INC_PR = "r3"
+>
+>  PV_MAJOR = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
+>
+> -SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.gz"
+> +SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
+>
+> -inherit autotools gettext
+> +inherit autotools gettext pkgconfig
+>
+> -PACKAGECONFIG[tiny] = "--enable-tiny,--enable-all,"
+> +PACKAGECONFIG[tiny] = "--enable-tiny,"
+> diff --git a/meta-oe/recipes-support/nano/nano_2.2.5.bb b/meta-oe/recipes-support/nano/nano_2.2.5.bb
+> deleted file mode 100644
+> index e656f46..0000000
+> --- a/meta-oe/recipes-support/nano/nano_2.2.5.bb
+> +++ /dev/null
+> @@ -1,8 +0,0 @@
+> -include nano.inc
+> -
+> -PR = "${INC_PR}.0"
+> -
+> -SRC_URI += "file://ncursesw.includedir.patch"
+> -
+> -SRC_URI[md5sum] = "77a10a49589f975ce98350a4527a2ebf"
+> -SRC_URI[sha256sum] = "9015945d1badabbada203b37c4779d3dd1066234235c714deb439989c5cd7d9e"
+> diff --git a/meta-oe/recipes-support/nano/nano_2.7.4.bb b/meta-oe/recipes-support/nano/nano_2.7.4.bb
+> new file mode 100644
+> index 0000000..5016f2e
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/nano/nano_2.7.4.bb
+> @@ -0,0 +1,6 @@
+> +include nano.inc
+> +
+> +PR = "${INC_PR}.0"
+> +
 
-Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
----
- .../jsoncpp/{jsoncpp_1.7.7.bb => jsoncpp_1.8.0.bb}                | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-devtools/jsoncpp/{jsoncpp_1.7.7.bb => jsoncpp_1.8.0.bb} (77%)
+Get rid of PR and INC_PR setting would be good
 
-diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.7.7.bb b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.0.bb
-similarity index 77%
-rename from meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.7.7.bb
-rename to meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.0.bb
-index 17947e3..fe6ae24 100644
---- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.7.7.bb
-+++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.0.bb
-@@ -4,18 +4,18 @@ DESCRIPTION = "Jsoncpp is an implementation of a JSON (http://json.org) reader \
-                lightweight data-interchange format. It is easy for humans to \
-                read and write. It is easy for machines to parse and generate."
- 
--HOMEPAGE = "http://sourceforge.net/projects/jsoncpp/"
-+HOMEPAGE = "https://github.com/open-source-parsers/jsoncpp"
- 
- SECTION = "libs"
- 
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c56ee55c03a55f8105b969d8270632ce"
- 
--SRCREV = "d8cd848ede1071a25846cd90b4fddf269d868ff1"
--SRC_URI = "git://github.com/open-source-parsers/jsoncpp \
--"
-+SRCREV = "f700fe455940d4d325c088b9174a173e130e0fa8"
-+SRC_URI = "git://github.com/open-source-parsers/jsoncpp"
- 
- S = "${WORKDIR}/git"
-+
- inherit cmake
- 
- EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON -DJSONCPP_WITH_TESTS=OFF"
--- 
-2.7.4
-
+> +SRC_URI[md5sum] = "c011c7f9e47cb1da27d4e7cc8b56ec6a"
+> +SRC_URI[sha256sum] = "752170643039e2c95a433de357f0c70a8c4c4c561a90a7e7259a63e225b659b9"
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
