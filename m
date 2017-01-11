@@ -1,47 +1,49 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f43.google.com (mail-vk0-f43.google.com
-	[209.85.213.43])
-	by mail.openembedded.org (Postfix) with ESMTP id EEA2271A1A
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
+	[209.85.215.66])
+	by mail.openembedded.org (Postfix) with ESMTP id EE93E71A54
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jan 2017 12:07:42 +0000 (UTC)
-Received: by mail-vk0-f43.google.com with SMTP id 137so378641642vkl.0
+	Wed, 11 Jan 2017 12:11:22 +0000 (UTC)
+Received: by mail-lf0-f66.google.com with SMTP id q89so11273057lfi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jan 2017 04:07:43 -0800 (PST)
+	Wed, 11 Jan 2017 04:11:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=N7FDzVj0ZucvDA0h+9HFG4Xw34KQPIQVuaCir2SVBHc=;
-	b=G8GtRtXTATS73oxNZFbFSljI7XPx+Gtt+1kr+dk/k1kFd0M3vqA8hvJcxl35rvD5yT
-	hMpFjc+PmGbTDXy8mvsj98BsMRqFB1rvGpRQryOBGxcgX0veNQ2UlwE0ROiWtlogrV+7
-	QptlnwhsLqN8g+xS+AEvOBmGiMoixz5DAzFUX6w9bFusGbt7snXJFHTyi76f27AZml02
-	Sdj8wdoHQJGJ07Hi+E9pMF0wkR5JOOGl7mQx2zpKaIsVmYVcu0n0ZqdJ038hHm700aWZ
-	KpAwngHFIpsWOBXW+zOaYsLL7cRcwUxlxGfQNC32HK61UwFx51Ng8bfKZGaUR3f7l965
-	mLyA==
+	bh=3ZAHDThdfTdvKTsJZZt01f073bCetD1zczd8v+ibV0k=;
+	b=Xtr2zSlQOKoZNYFCAq+tD7mO2g+FxB27aHRB2abrMF7VI5a9zRwOHZcr5IjFY1Vzte
+	+e3tluT/V/VwaUQWPB1BxZFkYuiIu5N5wjGWk/g2AXcCXFdQ4Z2a9kBQqWF/HGc4zgR8
+	uutZQvnycbZhgq4C0WNp68gP6KSlSTxDDL7goRSYcugUR8J8DILqdvgqP8cBPY03RFh2
+	pOVytDjKUXb23zDgjSenewmry6LCwd3bJhEA3KOTFKN2jZnEY+jAws70WkVhseoU54tv
+	sWf31NkwssjoXt02HDGYLkQi9b8zZHqIc2X3nd9Ps56VrfaM7AG6Qedktlqoyirt0AxO
+	sQlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=N7FDzVj0ZucvDA0h+9HFG4Xw34KQPIQVuaCir2SVBHc=;
-	b=q3IOAwENSUgZYhQ6cPaWg5oCYsqcZrYE8LnCr5VG/U8b/malm8mOAfsDSM/vBvk9Sr
-	xIMjykJCq9aXjDfIXeQHG5pVkL3Wta03yrrkRBm5oPiaJ8uFW42Ih7ZwT9zYluN+uZSX
-	gnm5NzQLUHy4FC/6Oo/GP5augWEugt4uZHcT8AXgTHdwoY57hotYSQrAefdGj94UsCZo
-	JJHu2EXOD8L1zlIrGmPOz0HSUBIIfiX2dC5bMcLR2ewD0OAONZ/Err+9xtmP0X1913sQ
-	uicSlLSgLvxZ7cA045V/yV24zVOgkCb4CXjVjj01suKSd8o1ATtrD3RnKWqnmYAWUYM+
-	drSQ==
-X-Gm-Message-State: AIkVDXKDBV4bkf0ra/01oCnl4LvzYAm15UeubEFeiZ8rxP8TnCIsekbOv60O1Bwp3hSGOy9jj5lhxRIXbM8N7w==
-X-Received: by 10.31.88.1 with SMTP id m1mr4082038vkb.83.1484136462310; Wed,
-	11 Jan 2017 04:07:42 -0800 (PST)
+	bh=3ZAHDThdfTdvKTsJZZt01f073bCetD1zczd8v+ibV0k=;
+	b=B1UA9lUw/QwUyEcgoHSJTJWMdpgMcWRzvdwfg6S8DVMofhe88YinkYnXUwlRl5SuC2
+	wZTjw2+7CSRn2fhmvHvOzxRvUMKEYx5VRkp4PoOXOkN3ezGuWsSWeQlnwmc2a6vOtBKl
+	1d7r148lgKHfJD1KJIeL89q2B5nQO4ZlNhyEyFv3zl6DZOROTgAGW064F3G5cfKWJy0k
+	MKK+W25qnNbUgiGFWKasezuajc6qEYrH66edm6hX9M+JzhLXaaDEPLP+Ik5oAuZY7Iv4
+	XPoOC71aku9zsB+Q1zwZIqasy0KwV5LuKO5hNOgHDLyTmQQTPt4svya5/GbCZLVJFn0w
+	XI3w==
+X-Gm-Message-State: AIkVDXLdVd945QuU4Uf2J+4JcNwHqusbQRlQjWZnzqegYYbyMLkaGuqoYV2jsJmyM+U/y8MpuvULSXPZ31lJfQ==
+X-Received: by 10.46.72.18 with SMTP id v18mr3047023lja.12.1484136682434; Wed,
+	11 Jan 2017 04:11:22 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.176.69.246 with HTTP; Wed, 11 Jan 2017 04:07:41 -0800 (PST)
-In-Reply-To: <CAAPZna1k+N+gbqb2n+fOLpmE6=RLasGku9rR7zebHvJRex-Htw@mail.gmail.com>
+Received: by 10.25.41.70 with HTTP; Wed, 11 Jan 2017 04:10:51 -0800 (PST)
+X-Originating-IP: [189.114.111.135]
+In-Reply-To: <CALbNGRSOCgDRk+Md_FcJSGrdDjrTMoDw6mKcS-M39yx9hbg5ww@mail.gmail.com>
 References: <1484074127-21458-1-git-send-email-schnitzeltony@googlemail.com>
 	<1484074127-21458-2-git-send-email-schnitzeltony@googlemail.com>
 	<CAAPZna1k+N+gbqb2n+fOLpmE6=RLasGku9rR7zebHvJRex-Htw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Wed, 11 Jan 2017 13:07:41 +0100
-Message-ID: <CALbNGRSOCgDRk+Md_FcJSGrdDjrTMoDw6mKcS-M39yx9hbg5ww@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
+	<CALbNGRSOCgDRk+Md_FcJSGrdDjrTMoDw6mKcS-M39yx9hbg5ww@mail.gmail.com>
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+Date: Wed, 11 Jan 2017 10:10:51 -0200
+Message-ID: <CAAPZna3QY9=4KbBter73oCrYwjC2d8Cs_gVoJwY_6aWGWm57sg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: [meta-browser][PATCH V2 2/3] firefox: use pkg-config to find nspr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -55,16 +57,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2017 12:07:43 -0000
+X-List-Received-Date: Wed, 11 Jan 2017 12:11:24 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jan 11, 2017 at 12:57 PM, Fabio Berton
-<fabio.berton@ossystems.com.br> wrote:
-> This patch doesn't apply.
+Yes.
 
-is git://github.com/OSSystems/meta-browser.git
+On Wed, Jan 11, 2017 at 10:07 AM, Andreas M=C3=BCller <
+schnitzeltony@googlemail.com> wrote:
 
-still correct repo for meta-browser?
-
-Andreas
+> On Wed, Jan 11, 2017 at 12:57 PM, Fabio Berton
+> <fabio.berton@ossystems.com.br> wrote:
+> > This patch doesn't apply.
+>
+> is git://github.com/OSSystems/meta-browser.git
+>
+> still correct repo for meta-browser?
+>
+> Andreas
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
