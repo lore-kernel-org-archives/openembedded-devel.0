@@ -1,44 +1,44 @@
-Return-Path: <b.hutchman@gmail.com>
-Received: from mail-yb0-f193.google.com (mail-yb0-f193.google.com
-	[209.85.213.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 221BE71A19
+Return-Path: <oleksandr.kravchuk@pelagicore.com>
+Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id E8EEE600E2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jan 2017 13:52:08 +0000 (UTC)
-Received: by mail-yb0-f193.google.com with SMTP id w194so71ybe.1
+	Wed, 11 Jan 2017 14:29:27 +0000 (UTC)
+Received: by mail-wm0-f52.google.com with SMTP id r144so30186230wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jan 2017 05:52:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=poiLGsuNIwPVBSD9YM0Rt3b9Q6xRA6Ocj78IN7uk/CY=;
-	b=XfWOyMYl8h2nue3bByXNLig5zakEqjIWQ+YObJ26rMsdoELRrcC81CmaD/KlzTKbYY
-	whXm+AjAeDZEZygRc8fuyhKhNsj4pJjMj95q6OThF+k14wT7KPjnAZeiQQijweh+ZTnH
-	ihbXa5L5gHalntIkroOKV3IBCEurmhA+ioc3fzL1Sa1rSvJ7hCXL8fpvuYPebWbXbsTL
-	Yg6NSbSjRMBYH9OXDUmtYSKIhPsCy317Q0q22LilQqjMAZ+h0atZF59cOF+DZvEpdHkz
-	Qqa2pxVcg/2IJE6L1eiNNJFnbER3KE4yaXlcx4Gn/erfTWjBN2/gaZ2aqidyuSilWVcy
-	mSjg==
+	Wed, 11 Jan 2017 06:29:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=1jVVXGDOtQ+HCSoK166bBrNf6mt5T8B5tTcnWN7WYYQ=;
+	b=rjFUKcNKtllA8HDVLa4bvBkZnjrlpZtzvFDa+1KO7gqAa3BGBBdYZMNGVC2v1ts1HG
+	GV6ps4LYvskFpi7g5CescdUo5iPT5SmVVQ9yCA8JS0VzOt6BwhNVfLVYgEqU/cErzPqu
+	zJHHTxhs3N5Yjm2UUjqXZcCR/qfVPfe7mqiaDHMrLjo6hY7ifaw/951GJS0bQJhFkK5X
+	+RfG9neR0tNxWuHJKRNSVy4yeWlT2HPY95x5RBmO5o1R0qPdAeTm38PCK8+xo3pIW45i
+	QSvf8xNoSeHSOdqYNn17QKwHhdV8pq90kqrH+qSdxpEP7GzMLd5apEx2be28eQa26nk/
+	FafA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=poiLGsuNIwPVBSD9YM0Rt3b9Q6xRA6Ocj78IN7uk/CY=;
-	b=kOqV4IgVLezpvi+aiAOf0i6vH8wfEJAXUJdQOCrEEYUDkQiZIa04R5wvo1+IKRm5v8
-	9qsPFs0qB1520Iw+Fxbe8GkeIQe15tQb3ccGYAZr3hLNkwWRKX512Mnu5BZT8hzexTJ7
-	1yJN4YoWFuA3HP9eyj5NeXsZ2lCzq+99uPM+WOvKiF+ldxNDNuuVYGiVovxkqcBMdzLE
-	3U+thYopGZBwvMfIBrTdDdNF+tVkpLB4yzlV3FqUsB+PQcgilbk6G4mXOfb/OHggALCG
-	caFvDTYuZ8PwYLuhaNchPs6m+2Q4Vf3XDULrjr7vx8gsjTDMDBy5rgfTBdgBLk4nzGKa
-	tanQ==
-X-Gm-Message-State: AIkVDXIm2dXVLjhQWKfvnzen2ZAY0MNXghKNxWAQ7TaEZLeXCMGciVu0rJ06xWkjfBpuwcCQehPAmBaEXVG1Ww==
-X-Received: by 10.37.37.81 with SMTP id l78mr4354837ybl.53.1484142728849; Wed,
-	11 Jan 2017 05:52:08 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.13.221.143 with HTTP; Wed, 11 Jan 2017 05:52:08 -0800 (PST)
-In-Reply-To: <1482363538-28271-1-git-send-email-derek@asterius.io>
-References: <1482363538-28271-1-git-send-email-derek@asterius.io>
-From: Brian Hutchinson <b.hutchman@gmail.com>
-Date: Wed, 11 Jan 2017 08:52:08 -0500
-Message-ID: <CAFZh4h81OfiN9UXDM-cZyqUexaBStK16LHSg8zPu00d9t4+27w@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=1jVVXGDOtQ+HCSoK166bBrNf6mt5T8B5tTcnWN7WYYQ=;
+	b=gNIq5x3KF23tCFBpIpRSxnCaQ5rRQ0B0m9ZgxohCe7ZxLZP/7taXgDhNoxO71WxmPP
+	Vli9Qr2KoaHPNOuaFM3zJrqMSE/M8yeslQmon5i3j138rVzE8BPU+L/Y/55RF70gRnlt
+	mrEb9ob37wPC5WJsbqcauAaFm4VEydrZBTaibCEiJDEpaXOY8EfIEdS5Pdd09v+8S0fN
+	eLZWm0xHBbfOJoc1PMnANALR9uNdhUGYqZZlFcbW7Yzhvu4YfnjF73EGvbqC7kYmhncI
+	RaYo9849OaRk5hJ20q14MtO5KVBh9dRLPe7ExjczN2xPaeD4BTQQPQ6jSVNmcs95djGE
+	BoTw==
+X-Gm-Message-State: AIkVDXKBIS9O9bdE2+jXptvpW1NxDa0Qdqha4C+vHUd8/qZgJ6eOUqmxq1ZYAnSencXCFnff
+X-Received: by 10.28.147.147 with SMTP id v141mr3640216wmd.110.1484144967987; 
+	Wed, 11 Jan 2017 06:29:27 -0800 (PST)
+Received: from stout.office.pelagicore.net ([83.218.80.242])
+	by smtp.gmail.com with ESMTPSA id y4sm8843713wjp.0.2017.01.11.06.29.26
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 11 Jan 2017 06:29:27 -0800 (PST)
+From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-webserver][PATCH] apache2: update to version 2.4.25
+Date: Wed, 11 Jan 2017 15:24:58 +0100
+Message-Id: <1484144698-21339-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] jsoncpp: upgrade to 1.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,111 +51,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2017 13:52:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 11 Jan 2017 14:29:29 -0000
 
-On Wed, Dec 21, 2016 at 6:38 PM, Derek Straka <derek@asterius.io> wrote:
-> Signed-off-by: Derek Straka <derek@asterius.io>
-> ---
->  ...2-native_2.4.23.bb => apache2-native_2.4.25.bb} |  4 ++--
->  .../apache2/apache2/cve-2016-5387.patch            | 25 ----------------------
->  .../{apache2_2.4.23.bb => apache2_2.4.25.bb}       |  5 ++---
->  3 files changed, 4 insertions(+), 30 deletions(-)
->  rename meta-webserver/recipes-httpd/apache2/{apache2-native_2.4.23.bb => apache2-native_2.4.25.bb} (91%)
->  delete mode 100644 meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch
->  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.23.bb => apache2_2.4.25.bb} (97%)
->
-> diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-> similarity index 91%
-> rename from meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
-> rename to meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-> index b227f19..ca8ebaf 100644
-> --- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
-> +++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-> @@ -15,8 +15,8 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
->  S = "${WORKDIR}/httpd-${PV}"
->
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
-> -SRC_URI[md5sum] = "04f19c60e810c028f5240a062668a688"
-> -SRC_URI[sha256sum] = "0c1694b2aad7765896faf92843452ee2555b9591ae10d4f19b245f2adfe85e58"
-> +SRC_URI[md5sum] = "2826f49619112ad5813c0be5afcc7ddb"
-> +SRC_URI[sha256sum] = "f87ec2df1c9fee3e6bfde3c8b855a3ddb7ca1ab20ca877bd0e2b6bf3f05c80b2"
->
->  EXTRA_OECONF = "--with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \
->                  --with-apr-util=${STAGING_BINDIR_CROSS}/apu-1-config \
-> diff --git a/meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch b/meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch
-> deleted file mode 100644
-> index dbcdfc6..0000000
-> --- a/meta-webserver/recipes-httpd/apache2/apache2/cve-2016-5387.patch
-> +++ /dev/null
-> @@ -1,25 +0,0 @@
-> -This patch has been copied from https://www.apache.org/security/asf-httpoxy-response.txt
-> -as a mitigation of CVE-2016-5387.
-> -
-> -Upstream-Status: Backport - fixed in 2.4.24
-> -
-> -Signed-off-by: Joe Slater<jslater@windriver.com>
-> -
-> -
-> ---- a/server/util_script.c     (revision 1752426)
-> -+++ b/server/util_script.c     (working copy)
-> -@@ -186,6 +186,14 @@ AP_DECLARE(void) ap_add_common_vars(request_rec *r
-> -         else if (!strcasecmp(hdrs[i].key, "Content-length")) {
-> -             apr_table_addn(e, "CONTENT_LENGTH", hdrs[i].val);
-> -         }
-> -+        /* HTTP_PROXY collides with a popular envvar used to configure
-> -+         * proxies, don't let clients set/override it.  But, if you must...
-> -+         */
-> -+#ifndef SECURITY_HOLE_PASS_PROXY
-> -+        else if (!strcasecmp(hdrs[i].key, "Proxy")) {
-> -+            ;
-> -+        }
-> -+#endif
-> -         /*
-> -          * You really don't want to disable this check, since it leaves you
-> -          * wide open to CGIs stealing passwords and people viewing them
-> diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-> similarity index 97%
-> rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-> rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-> index b78ff51..3bd8579 100644
-> --- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
-> +++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-> @@ -17,15 +17,14 @@ SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
->             file://httpd-2.4.3-fix-race-issue-of-dir-install.patch \
->             file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
->             file://configure-allow-to-disable-selinux-support.patch \
-> -           file://cve-2016-5387.patch \
->             file://init \
->             file://apache2-volatile.conf \
->             file://apache2.service \
->            "
->
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
-> -SRC_URI[md5sum] = "04f19c60e810c028f5240a062668a688"
-> -SRC_URI[sha256sum] = "0c1694b2aad7765896faf92843452ee2555b9591ae10d4f19b245f2adfe85e58"
-> +SRC_URI[md5sum] = "2826f49619112ad5813c0be5afcc7ddb"
-> +SRC_URI[sha256sum] = "f87ec2df1c9fee3e6bfde3c8b855a3ddb7ca1ab20ca877bd0e2b6bf3f05c80b2"
->
->  S = "${WORKDIR}/httpd-${PV}"
->
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Upgraded jsoncpp to version 1.8.0 and changed home page to the new one.
 
+Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+---
+ .../jsoncpp/{jsoncpp_1.7.7.bb => jsoncpp_1.8.0.bb}                | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-devtools/jsoncpp/{jsoncpp_1.7.7.bb => jsoncpp_1.8.0.bb} (77%)
 
-How long does it typically take for something like this to show up in
-the Krogoth (2.1.2) and Morty (2.2) branch?
+diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.7.7.bb b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.0.bb
+similarity index 77%
+rename from meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.7.7.bb
+rename to meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.0.bb
+index 17947e3..fe6ae24 100644
+--- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.7.7.bb
++++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.0.bb
+@@ -4,18 +4,18 @@ DESCRIPTION = "Jsoncpp is an implementation of a JSON (http://json.org) reader \
+                lightweight data-interchange format. It is easy for humans to \
+                read and write. It is easy for machines to parse and generate."
+ 
+-HOMEPAGE = "http://sourceforge.net/projects/jsoncpp/"
++HOMEPAGE = "https://github.com/open-source-parsers/jsoncpp"
+ 
+ SECTION = "libs"
+ 
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c56ee55c03a55f8105b969d8270632ce"
+ 
+-SRCREV = "d8cd848ede1071a25846cd90b4fddf269d868ff1"
+-SRC_URI = "git://github.com/open-source-parsers/jsoncpp \
+-"
++SRCREV = "f700fe455940d4d325c088b9174a173e130e0fa8"
++SRC_URI = "git://github.com/open-source-parsers/jsoncpp"
+ 
+ S = "${WORKDIR}/git"
++
+ inherit cmake
+ 
+ EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON -DJSONCPP_WITH_TESTS=OFF"
+-- 
+2.7.4
 
-Just wondering because I did a fresh checked of both yesterday and
-they didn't have this fix yet.
-
-Regards,
-
-Brian
 
