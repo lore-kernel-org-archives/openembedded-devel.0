@@ -1,48 +1,53 @@
-Return-Path: <moritz.fischer@ettus.com>
-Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com
-	[209.85.192.175])
-	by mail.openembedded.org (Postfix) with ESMTP id DF85260290
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jan 2017 22:50:25 +0000 (UTC)
-Received: by mail-pf0-f175.google.com with SMTP id 127so1246601pfg.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jan 2017 14:50:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ettus-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=E5aEZn/DJvp9g2apMm4PdmGskzKg1r9oSrrncDvIi9M=;
-	b=knvIqIvLzwCs6cusmTItszGDhw4XtvfYKQ81xGRYt9H1YkQA77w4qcsaj2T6vR1/3H
-	0O08xTOkl86vGpvrzxhvo6xgeqgF81sM5RgYbneHa5W5Laf2G7yu9hIrC3KYfVfpwR6o
-	DIB5Pn/a4aYGlbH4/lm45XZPwFvzdfqJzhQ7x/Zq/DimmIVSthUnOthgCiwIvyeORHhz
-	ygahm4XR87LFq+EfHcWRxmMpxG1Yh5jJ7RLyoQqaAPQmcBlI/iO//asU1sC+6ja0K+Bd
-	KUddfvvipfpAyrLHOfSoB1rgQyZx5PNo+wso/Yf/LBJUE9RrmUPZsg/JMsSayHOZJSlk
-	v4kg==
+Return-Path: <jefro.net@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 8BBED60053;
+	Thu, 12 Jan 2017 01:02:42 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id c85so493895wmi.1;
+	Wed, 11 Jan 2017 17:02:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc;
+	bh=sxa1XgTN8h2xh4iBVDSh+4O7xkiSF5rNMGGViMDKbHg=;
+	b=oPcV7DGarZYJDrQctMqPRMvLkM3rQoER/XEV77XZkzSdbPVimvFZl53HjGsw1zq/OX
+	xnB4eNow5uSZcEalOTyN+MhvzlzimWKLs/VXi/ps8fb5R14bpTX6VNMp3xu4W3DvkXG6
+	kk148/DeLTbThOubnj4oi7zKtR2soKfA7nHZfskkl5JTCXL4kxux2tpCcqytBAYcTHLs
+	MgR7/DF95iheVQa66l3tOZAxbyj5MH3qxc+pOiSIqXjQU+xRYcbQC89xpuid1AG1n1RM
+	2HGJYX2R51Bi7qfpV173OaGhe9aDVdCaE1Cl5/TC9SxfMEcKIlNXUawNudO+OKPJdPY3
+	b0Pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=E5aEZn/DJvp9g2apMm4PdmGskzKg1r9oSrrncDvIi9M=;
-	b=eyjqHM+GK1uv8MW0poOQ4/BiVUWA5YWHIKvAv+F9ZfA27zIsDcQ++b85NYtZHc92eM
-	ujly+gQMxcmW4hf6uqP/64l1LwTtZRVnqzFq13Yt7MuDSIwj1Zgt+d1U+napu2KJcms/
-	B0uUzfSqf956CjX6cZRmUbam4fX/VoRGneCSWi7UL6Sedu5M9C4SawrPbdZRrhXOvDop
-	OIINdwCW2QyaXPMcWivu7MAiB1AD3WLFeN4X5CwKN5XZeZCt80OsL88bnfukt9Fugo/3
-	l9nQxCNKXx4DGXglBw/AZU2oqrfLr8vgSUM0imbsVoMgQuBGST27cvfkAUbb0BHYKKRc
-	zJWg==
-X-Gm-Message-State: AIkVDXKhBilY2UUqeEydMOxf1m32T1eCnx79GreK9rXU816EHfQmvH3Dp29Wj/i54kEbbKG6
-X-Received: by 10.84.232.141 with SMTP id i13mr13371166plk.119.1484175025618; 
-	Wed, 11 Jan 2017 14:50:25 -0800 (PST)
-Received: from tyrael.amer.corp.natinst.com
-	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
-	by smtp.gmail.com with ESMTPSA id
-	q145sm16150519pfq.22.2017.01.11.14.50.24
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 11 Jan 2017 14:50:25 -0800 (PST)
-From: Moritz Fischer <moritz.fischer@ettus.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Jan 2017 14:50:13 -0800
-Message-Id: <1484175013-360-1-git-send-email-moritz.fischer@ettus.com>
-X-Mailer: git-send-email 2.7.4
-Cc: koen@dominion.thruhere.net, mdf@kernel.org
-Subject: [meta-oe][PATCH v5] Chromium-utils: add recipe for Chromium Embedded Controller utilities
+	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
+	:date:message-id:subject:to:cc;
+	bh=sxa1XgTN8h2xh4iBVDSh+4O7xkiSF5rNMGGViMDKbHg=;
+	b=RmE67PElJeaZxOO9TzZ9MjeMr0oHT63d+/+Qw9I5XVWatuwiHvGdAC9uKscpjp+nvx
+	JUfeNH+PlSnatS0z0/HjfSxgjJdgUNUFc1qETUnYGB82mFBpClbD6uT9vnppRKNyhFgi
+	l8TZXEg3HlhtaAdWzY3Hez1xoMyeKhrDYfFR50/V9szZaNOVeCOw24vr4nS0iu8vUnIl
+	+nK/td0Ke87a10dykKzy+LQ8u4Oek+kI/Hij6lPqRVVhEXj0Puk26eEDM1VUqBcLMRVO
+	cgwZphaMUCxRGX6/pTt0XiIhkN36nOselR9YDYsmRgPiffdywAuMjC3brnZQYWifbALG
+	wgdg==
+X-Gm-Message-State: AIkVDXJpgd94Hi22BkJpE0sruymqcsVWon4AVbPgGHvOckiR1KJ2Eu6XeS1zSxxvQKXakSxGHsxh750dOTblqw==
+X-Received: by 10.28.189.134 with SMTP id n128mr4575024wmf.77.1484182962535;
+	Wed, 11 Jan 2017 17:02:42 -0800 (PST)
+MIME-Version: 1.0
+Sender: jefro.net@gmail.com
+Received: by 10.194.186.232 with HTTP; Wed, 11 Jan 2017 17:02:22 -0800 (PST)
+In-Reply-To: <CAKP9-Sh2bM9Qwet0FyeLBHAexkoNN089Xrr2ryQktPY5t7fQoA@mail.gmail.com>
+References: <c93f2baf-e05d-fc8a-0789-9651dc5a1fd4@balister.org>
+	<CAKP9-Sh2bM9Qwet0FyeLBHAexkoNN089Xrr2ryQktPY5t7fQoA@mail.gmail.com>
+From: Jeff Osier-Mixon <jefro@jefro.net>
+Date: Wed, 11 Jan 2017 17:02:22 -0800
+X-Google-Sender-Auth: Clzu9EXcOCJYFIW7hbJtlMujUUg
+Message-ID: <CA+YB3rb5QBEES7VCTT23t9BFOuzzspakbsvutA4ATn2sVjmS0A@mail.gmail.com>
+To: "Sandeep G.R" <grsandeep85@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Yocto Project <yocto@yoctoproject.org>,
+	"openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, openembedded-architecture
+	<openembedded-architecture@lists.openembedded.org>
+Subject: Re: [yocto] OpenEmbedded Developers Meeting in Portland before ELC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,70 +60,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Jan 2017 22:50:26 -0000
+X-List-Received-Date: Thu, 12 Jan 2017 01:02:44 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Add a recipe to build 'ectool' a utility to interact with the embedded
-controller on Google's chromebooks (and other platforms using it).
+Hi Sandeep - yes, there is a DevDay planned for Friday Feb 24, after ELC.
+Details and registration links are here:
 
-Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
----
-Changes from v1:
+https://www.yoctoproject.org/devday
 
-- Replaced DESCRIPTION with SUMMARY (Martin)
-- Use EXTRA_OEMAKE (Martin)
-- Removed FILESEXTRAPATHS (Martin)
-- Changed PV (Martin / Khem)
-- Removed FILES_PN (Khem)
+On Wed, Jan 11, 2017 at 4:43 PM, Sandeep G.R <grsandeep85@gmail.com> wrote:
 
-Changes from v2:
+> Hi Philip,
+>
+> Is Yocto developer day planned during ELC-2017 Portland, USA. Can you
+> share the registration details if any?
+>
+> On Mon, Jan 9, 2017 at 2:04 PM, Philip Balister <philip@balister.org>
+> wrote:
+>
+>> As we do around each Embedded Linux Conference, OpenEmbedded will host a
+>> developer meeting to discuss the state of OpenEmbedded and what efforts
+>> we should focus on over the next six months or so.
+>>
+>> All developers and users are welcome to attend. We like to hear feedback
+>> from a variety of people over what works, doesn't work, and is useful to
+>> people using OpenEmbedded for all sort of applications.
+>>
+>> The meeting will be held Monday, Feb 20 at a location we can almost
+>> announce. Based on prior years, the meeting will run from 9AM to 5PM.
+>>
+>> If you are going to attend add your name to:
+>>
+>> http://openembedded.org/wiki/OEDAM_2017
+>>
+>> Also, go ahead and add ideas for the agenda. We'll organize them better
+>> just before the actual meeting.
+>>
+>> See you all in Portland,
+>>
+>> Philip
+>> --
+>> _______________________________________________
+>> yocto mailing list
+>> yocto@yoctoproject.org
+>> https://lists.yoctoproject.org/listinfo/yocto
+>>
+>
+>
+>
+> --
+> *Thanks & Regards,*
+> *Sandeep G R*
+>
+>
+> --
+> _______________________________________________
+> yocto mailing list
+> yocto@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/yocto
+>
+>
 
-- Changed PV (Martin)
 
-Changes from v3:
-
-- Patch now against meta-oe (Khem, Ross)
-- No longer need patch for HOST_LDFLAGS since merged upstream
-
-Changes from v4:
-- Change commitmsg (Koen)
-- Install to ${sbindir} vs ${bindir} (Koen)
-
----
-
- .../chromium-utils/chromium-utils.bb               | 23 ++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb
-
-diff --git a/meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb b/meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb
-new file mode 100644
-index 0000000..c3c465e
---- /dev/null
-+++ b/meta-oe/recipes-devtools/chromium-utils/chromium-utils.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "Chromium EC utilities"
-+DEPENDS = "libftdi"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=562c740877935f40b262db8af30bca36"
-+
-+SRCREV = "a7bf207add71cfb20308ed6858b1b028c866304a"
-+SRC_URI = "git://chromium.googlesource.com/chromiumos/platform/ec;protocol=https \
-+          "
-+
-+PV = "1.1.9999+gitr${SRCPV}"
-+
-+S = "${WORKDIR}/git"
-+
-+EXTRA_OEMAKE = "'HOSTCC=${CC}' 'HOSTCFLAGS=${CFLAGS}' 'HOST_LDFLAGS=${LDFLAGS}'"
-+
-+do_compile() {
-+    oe_runmake utils
-+}
-+
-+do_install() {
-+    install -m 0755 -d ${D}${sbindir}
-+    install -m 0755 ${S}/build/bds/util/ectool ${D}${sbindir}/ectool
-+}
 -- 
-2.7.4
-
+Jeff Osier-Mixon - Open Source Community Engineer, Intel Corporation
 
