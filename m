@@ -1,42 +1,48 @@
-Return-Path: <Sean_Hudson@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F12E71974;
-	Thu, 12 Jan 2017 14:18:07 +0000 (UTC)
-Received: from svr-orw-mbx-02.mgc.mentorg.com ([147.34.90.202])
-	by relay1.mentorg.com with esmtp 
-	id 1cRgCc-0001eP-OT from Sean_Hudson@mentor.com ;
-	Thu, 12 Jan 2017 06:18:06 -0800
-Received: from svr-orw-mbx-01.mgc.mentorg.com (147.34.90.201) by
-	svr-orw-mbx-02.mgc.mentorg.com (147.34.90.202) with Microsoft SMTP
-	Server (TLS) id 15.0.1210.3; Thu, 12 Jan 2017 06:18:04 -0800
-Received: from svr-orw-mbx-01.mgc.mentorg.com ([fe80::7525:7282:f67a:970f]) by
-	svr-orw-mbx-01.mgc.mentorg.com ([fe80::7525:7282:f67a:970f%22]) with
-	mapi id 15.00.1210.000; Thu, 12 Jan 2017 06:18:04 -0800
-From: "Hudson, Sean" <Sean_Hudson@mentor.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>, Philip Balister
-	<philip@balister.org>
-Thread-Topic: [Openembedded-architecture] [yocto] OpenEmbedded Developers
-	Meeting in Portland before ELC
-Thread-Index: AQHSbHXfTVaBgF1IRkaDJPHz1lPUGKE04v7Q
-Date: Thu, 12 Jan 2017 14:18:04 +0000
-Message-ID: <bb9a299e3834488f8c033f7e07515afe@svr-orw-mbx-01.mgc.mentorg.com>
-References: <c93f2baf-e05d-fc8a-0789-9651dc5a1fd4@balister.org>
-	<2377449.YFeu6CDXkj@peggleto-mobl.ger.corp.intel.com>
-In-Reply-To: <2377449.YFeu6CDXkj@peggleto-mobl.ger.corp.intel.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [147.34.91.1]
+Return-Path: <twoerner@gmail.com>
+Received: from mail-io0-f175.google.com (mail-io0-f175.google.com
+	[209.85.223.175])
+	by mail.openembedded.org (Postfix) with ESMTP id DE8DD60807
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Jan 2017 14:44:16 +0000 (UTC)
+Received: by mail-io0-f175.google.com with SMTP id j13so19691028iod.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Jan 2017 06:44:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=date:from:to:subject:message-id:mime-version:content-disposition
+	:user-agent; bh=2TmrHZte+kyan9VNVmMMxc6XmCwj27EyzJbCRNr7xS4=;
+	b=ej6RcbdJfO40gdyv3F4vH3lQzZI0bTz0e7SoQv5isS5YpKNlC+28cQviXoehUl1NpW
+	fH+vRKWuWV0Fsx2eU4kqc8dte5uJE+PdqOOPQqXod7dU7c7/I0+/EWVNdE/u9mAxuXnp
+	Ca6GVEomtGtzYnYWCMGorJvatxmcm9kjHawdjL/dr0GqnjBmlJMmGRwRnUYAEKfGcAaf
+	2AykOjJ+NNbDBqCDlJnAaSkPg37MFZ8jFYljM15bseTGUMK2WGCBC4qsqhTf/5IgysbJ
+	/l2x0CAslO5GNWdQ+YRR/KThURsUDS5mW4b7tmXMQpgf+A3pJLb2qXGGtZQZ3+vLnZPC
+	DpmA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:subject:message-id:mime-version
+	:content-disposition:user-agent;
+	bh=2TmrHZte+kyan9VNVmMMxc6XmCwj27EyzJbCRNr7xS4=;
+	b=OO+zgi1kak0CkLmUv/ZpbQcijx08xCAnmcHeIPyfh7nQHK2q2uIzCxhcJoEGqJh5tf
+	3JsSvaR+h/SJx5ZMUKOgNnRrM7F96bLf0vvm+96P1wlE9L33mGCv/CXw0eNQvmmc5V9x
+	CQD/b5Jr+58r1e6TXYZQ3QtpIo5QRsQGYJyZhlfDM7gSkybO6Oy6F4W0wkCoISU7JV/N
+	fWtOPlBY61faZomfuaviNtexz+vkr4uqUJyLR8C8sBudj/3caDSGwzKIOwx2CZVJt7mg
+	spdWSJIL83vaRhCVEpUKRSKIQwDBR4VcCg5f5aE3xalXAP3Y9PVot5d39nHICouDpJva
+	YElg==
+X-Gm-Message-State: AIkVDXKdhc79ZnR4XCNRKPYJxEn/IaLwug2xFK7o3Jg5rdm4lYIkamb1FoTflvyhSKZt6w==
+X-Received: by 10.107.179.215 with SMTP id c206mr12749201iof.35.1484232256584; 
+	Thu, 12 Jan 2017 06:44:16 -0800 (PST)
+Received: from linux-uys3 (dsl-67-55-28-109.acanac.net. [67.55.28.109])
+	by smtp.gmail.com with ESMTPSA id
+	a18sm1147665itd.18.2017.01.12.06.44.15
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 12 Jan 2017 06:44:16 -0800 (PST)
+Date: Thu, 12 Jan 2017 09:44:14 -0500
+From: Trevor Woerner <twoerner@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20170112144413.GA7854@linux-uys3>
 MIME-Version: 1.0
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	"openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>, openembedded-architecture
-	<openembedded-architecture@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [Openembedded-architecture] [yocto] OpenEmbedded Developers	Meeting in Portland before ELC
+User-Agent: Mutt/1.6.0 (2016-04-01)
+Subject: meta-browser duplicate patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,83 +55,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jan 2017 14:18:07 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 12 Jan 2017 14:44:17 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Paul,
+Does the do_patch logic now ignore the same patch being applied twice? I was
+quite sure this was a problem in the past (and if it isn't, maybe it should
+be?)
 
-  It's a great point.  I have volunteered Mentor's teleconference, but the =
-onsite pickup is always a challenge.  Once we've finalized the location, I'=
-ll focus on making sure that we have a high quality pickup(s) in the room. =
- If possible, I'll get a true video-conference setup.
+In commit fb4e542079958b6afde324a1e9bfdd695842aeeb
+the patch recipes-browser/chromium/chromium/chromium/Do-not-depend-on-Linux-4.5.patch
 
---
-Sean
+and in commit c6fc9da7be64af7cd08c2bbb026e4c3ffc760687
+the patch recipes-browser/chromium/chromium/chromium/unset-madv-free.patch
 
-
-> -----Original Message-----
-> From: openembedded-architecture-bounces@lists.openembedded.org
-> [mailto:openembedded-architecture-bounces@lists.openembedded.org] On
-> Behalf Of Paul Eggleton
-> Sent: Wednesday, January 11, 2017 07:47 PM
-> To: Philip Balister <philip@balister.org>
-> Cc: yocto@yoctoproject.org; openembedded-
-> members@lists.openembedded.org; openembedded-architecture
-> <openembedded-architecture@lists.openembedded.org>; openembedded-
-> devel@lists.openembedded.org; openembedded-core <openembedded-
-> core@lists.openembedded.org>
-> Subject: Re: [Openembedded-architecture] [yocto] OpenEmbedded Developers
-> Meeting in Portland before ELC
->=20
-> On Mon, 09 Jan 2017 16:04:57 Philip Balister wrote:
-> > As we do around each Embedded Linux Conference, OpenEmbedded will
-> host a
-> > developer meeting to discuss the state of OpenEmbedded and what efforts
-> > we should focus on over the next six months or so.
-> >
-> > All developers and users are welcome to attend. We like to hear feedbac=
-k
-> > from a variety of people over what works, doesn't work, and is useful t=
-o
-> > people using OpenEmbedded for all sort of applications.
-> >
-> > The meeting will be held Monday, Feb 20 at a location we can almost
-> > announce. Based on prior years, the meeting will run from 9AM to 5PM.
-> >
-> > If you are going to attend add your name to:
-> >
-> > http://openembedded.org/wiki/OEDAM_2017
-> >
-> > Also, go ahead and add ideas for the agenda. We'll organize them better
-> > just before the actual meeting.
->=20
-> So it's great that this is happening, but unfortunately I'm not going to =
-be
-> able to make it to this one, and I suspect there will be many others who =
-would
-> like to participate but can't be present in person. In previous meetings =
-we
-> have really struggled with practical means for remote participation. I do=
-n't
-> expect effective real-time two-way communication, but last time the audio
-> was
-> so poor I wasn't even able to hear what was being said.
->=20
-> Is there a chance that given advance notice we will be able to set someth=
-ing
-> up that could improve this?
->=20
-> Cheers,
-> Paul
->=20
-> --
->=20
-> Paul Eggleton
-> Intel Open Source Technology Centre
-> _______________________________________________
-> Openembedded-architecture mailing list
-> Openembedded-architecture@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-architecture
+are exactly the same. Yet they're both happily applied without so much as a
+warning, not even in temp/log.do_patch.
 
