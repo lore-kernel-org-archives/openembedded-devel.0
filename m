@@ -1,52 +1,47 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-it0-f67.google.com (mail-it0-f67.google.com
-	[209.85.214.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 5854A71C0F
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
+	[209.85.215.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 1FCCA71C28
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jan 2017 15:20:12 +0000 (UTC)
-Received: by mail-it0-f67.google.com with SMTP id o138so2121773ito.3
+	Thu, 12 Jan 2017 16:02:22 +0000 (UTC)
+Received: by mail-lf0-f68.google.com with SMTP id v186so2466227lfa.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jan 2017 07:20:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=9LK3tw/9mU5FKF3zzV9TgfS7NXDkyq8mOzcdfver43I=;
-	b=IEHbAI+H/DnIgGVPCayovIFWqV1KOVMirXks3WTAtUt/jdrHdTH0L8N39vmr+3w4qk
-	gjs5tZn99zSWtItXQ3Om5046oxr8ApfYg1EUQFptvWvD2toctmT5GQT2VO0rJ5KWY6wt
-	pHC+yE1w8hUJzjo4Q5nq5Kw1FuRPMmeqGR569aNwZQW15VLrDIX/Tw5E10CZ6AtoZ2GF
-	bghpsNz8kG8K3U+usdT15gwGJgt8GWFZMycNZ6KnytXxbqdt+QOyltRD4zzuMQ6mnka/
-	04L1uoaHQP2aEjxiMeJbz4W3KXxHc17jWwpHFOkR1nBrmHohZkfIrR9AUCUsZytK5Q+a
-	LxLA==
+	Thu, 12 Jan 2017 08:02:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=dZRZwDu6K1tUwMF3YGcLf1L+WQvF7EAcDnpRj+1+IdQ=;
+	b=eMuACVGEop0PvA4KrHDWUweDghTwX00SsTCZ++k18HuPdxBrlAm6D+NNJDYegNxgz+
+	PT9vbZXzSrOFNRBSrrHH/KsjKzMBu5QPQutKe5qiGnxcRyaD2Vjnd+vFjyVPOb/9cJUp
+	PZ2KR9v5O7p7WCaA0qZLtI6mJWnm+J+EHpSxXTQhg5DQzj+8mybCAfVBkG8hg4jh1lp7
+	uAfvU1GeWxVteQl39ukKPdrGOMkoxAFqyAgeAuuWtO26rLW0ZscPsSDTPJ38FbpFUg8Y
+	kxQmflKqiKamcvxEMNrF+4WQ7ojLKHJt7d4SFsXPxnITGJ02KpW2k4WMbtzoweqY+LpB
+	gp1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=9LK3tw/9mU5FKF3zzV9TgfS7NXDkyq8mOzcdfver43I=;
-	b=Udata6z7KK2A/Frs6pPIvQ+YAWYpg+uABwNDjPoCYhD+fDoJDx/4tgnhb8Pz8u+Y1h
-	QKV7RHenzpYXsjYnVVgPoB32eZAGY38QF6s/012VsbmKroSX5v/g1ojsWBz+11b1OBlg
-	s26GNBpLv+U78hamhUStC/clZ51Zzl5fqOZ6tx0pEcnKpAosQ9G5GaPjDvtqri5OIOON
-	MaJH2nyDLR1EmbucNqHRIMwJIIazfzUqOvvdiISQit/E+1cn3qZmBYt/WfQcmzqOtueg
-	GwUXpYSc/LG5dYXgRdNG4qPxV30CUdyuALVh9RHu7WbggJZxHen5Hz8VOr4GtRaBcw8h
-	PN4A==
-X-Gm-Message-State: AIkVDXIyXAHpEpqQPEviHmvN4vY+ZY6xUc0RQMXxyQTI4Gr+ZoEiBkQ0xez69tIOSLV0Qg==
-X-Received: by 10.36.23.18 with SMTP id 18mr10272427ith.48.1484234412415;
-	Thu, 12 Jan 2017 07:20:12 -0800 (PST)
-Received: from linux-uys3 (dsl-67-55-28-109.acanac.net. [67.55.28.109])
-	by smtp.gmail.com with ESMTPSA id
-	w188sm1206272itc.9.2017.01.12.07.20.11
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 12 Jan 2017 07:20:11 -0800 (PST)
-Date: Thu, 12 Jan 2017 10:20:09 -0500
-From: Trevor Woerner <twoerner@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170112152009.GA15330@linux-uys3>
-References: <20170112144413.GA7854@linux-uys3>
-	<8801566a-4012-0323-dc60-6833ab0079a7@linux.intel.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=dZRZwDu6K1tUwMF3YGcLf1L+WQvF7EAcDnpRj+1+IdQ=;
+	b=W9jOOv+J7ft5ZwE9pUH2nsPy6fiPnmEKxBOcGoPBOM3PK7yFDTjyJftyOgkG/HSs10
+	Tp2Kdm2A5g5xvmDctN5dFfqZBxhVxL+bRwW2pHkr4OmM7fDZidfiJEOf0nNyN8SL622T
+	QqA0JSE7+HAZY+59qB+EbugKap2m3xTcwFXY1QgMlrO614g9qXjzQtVkvZJOJ3L/lXuD
+	OKT05YQ3s2orECV1fq6QdUXgxHqS91fS8Usb4PSiQkY+e1kavotuFMpkCE/OpGda/FHY
+	Q3ml1SoyHxclwZ3W+87Z0u4CR4jh19B5Qcc6tNOhMT9TingArxn0DdE3ABxerQjWS3Mu
+	/abQ==
+X-Gm-Message-State: AIkVDXIOey0H9e8t2HWq6dyMZHxWxM1yYCuAt+tgIhpfkHFQ1Tb3Y+9X2fHYxsULi8jyJ0lsK4H559nwW+XDIg==
+X-Received: by 10.25.44.66 with SMTP id s63mr5833505lfs.159.1484236941820;
+	Thu, 12 Jan 2017 08:02:21 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <8801566a-4012-0323-dc60-6833ab0079a7@linux.intel.com>
-User-Agent: Mutt/1.6.0 (2016-04-01)
-Subject: Re: meta-browser duplicate patch
+Received: by 10.25.41.70 with HTTP; Thu, 12 Jan 2017 08:01:51 -0800 (PST)
+X-Originating-IP: [189.114.111.135]
+In-Reply-To: <1484207068-21151-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1484207068-21151-1-git-send-email-schnitzeltony@googlemail.com>
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+Date: Thu, 12 Jan 2017 14:01:51 -0200
+Message-ID: <CAAPZna1K6bhZkE0=i+rnNAz1byr9_N2xEpQRA0EifU9JQrkr1A@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-browser][PATCH V3 0/3] firefox build fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,43 +54,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jan 2017 15:20:13 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 12 Jan 2017 16:02:24 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thu 2017-01-12 @ 04:59:20 PM, Alexander Kanavin wrote:
-> On 01/12/2017 04:44 PM, Trevor Woerner wrote:
-> > Does the do_patch logic now ignore the same patch being applied twice? I was
-> > quite sure this was a problem in the past (and if it isn't, maybe it should
-> > be?)
-> > 
-> > In commit fb4e542079958b6afde324a1e9bfdd695842aeeb
-> > the patch recipes-browser/chromium/chromium/chromium/Do-not-depend-on-Linux-4.5.patch
-> > 
-> > and in commit c6fc9da7be64af7cd08c2bbb026e4c3ffc760687
-> > the patch recipes-browser/chromium/chromium/chromium/unset-madv-free.patch
-> > 
-> > are exactly the same. Yet they're both happily applied without so much as a
-> > warning, not even in temp/log.do_patch.
-> 
-> Can you inspect the resulting file? Are the changes being applied twice in
-> two *different* locations in the file?
+Hi Andreas!
 
-Ah yes, there it is, applied twice:
+The problem was in git am command. When I ran git am, git changes files to
+fix whitespace errors and patch 0002-use-pkg-config-to-find-nspr.patch
+doesn't apply in firefox source, failing when running bitbake firefox -c
+patch. So, I used git am --whitespace=3Dwarn and works fine. Patches are go=
+od
+and firefox build succesfully.
 
-	 44 #if OS(LINUX) && defined(MADV_FREE)
-	 45 // Added in Linux 4.5, but it breaks the sandbox.
-	 46 #undef MADV_FREE
-	 47 #endif
-	 48 
-	 49 #if OS(LINUX) && defined(MADV_FREE)
-	 50 // Added in Linux 4.5, but we don't want to depend on 4.5 at runtime
-	 51 #undef MADV_FREE
-	 52 #endif
+Thanks!
 
+On Thu, Jan 12, 2017 at 5:44 AM, Andreas M=C3=BCller <
+schnitzeltony@googlemail.com> wrote:
 
-> We have a bug to fix this issue:
-> https://bugzilla.yoctoproject.org/show_bug.cgi?id=10450
-
-Great, thanks :-)
+> Hope patches apply now...
+>
+> Andreas M=C3=BCller (3):
+>   firefox: fix configure with oe-core master - there is no nss-config
+>   firefox: use pkg-config to find nspr
+>   firefox: do not link against crmf library it is not there
+>
+>  .../firefox/0001-use-pkg-config-to-find-nss.patch  | 47
+> +++++++++++++++++++++
+>  .../firefox/0002-use-pkg-config-to-find-nspr.patch | 37 ++++++++++++++++=
++
+>  ...link-against-crmf-library-it-is-not-there.patch | 48
+> ++++++++++++++++++++++
+>  recipes-mozilla/firefox/firefox_45.6.0esr.bb       |  3 ++
+>  4 files changed, 135 insertions(+)
+>  create mode 100644 recipes-mozilla/firefox/firefox/0001-use-pkg-config-
+> to-find-nss.patch
+>  create mode 100644 recipes-mozilla/firefox/firefox/0002-use-pkg-config-
+> to-find-nspr.patch
+>  create mode 100644 recipes-mozilla/firefox/firefox/0003-do-not-link-
+> against-crmf-library-it-is-not-there.patch
+>
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
