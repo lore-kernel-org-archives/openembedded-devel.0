@@ -1,53 +1,52 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wj0-f173.google.com (mail-wj0-f173.google.com
-	[209.85.210.173])
-	by mail.openembedded.org (Postfix) with ESMTP id C59E6719E7
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 69314719E7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jan 2017 07:44:45 +0000 (UTC)
-Received: by mail-wj0-f173.google.com with SMTP id kq3so6339916wjc.0
+	Thu, 12 Jan 2017 07:44:46 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id c85so8746025wmi.1
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 11 Jan 2017 23:44:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=dC/szj3GfWj+5GJNhG13z2qmxah6ZCtCT5XatWDGpZY=;
-	b=jsK7dgszB/aaB5Xh5GHkS/6lsNaUVswkks6ntIchoMu2Eh8J1FvEoH+nKogzinJaJo
-	TBSnD/JYBT8mU3LAcRHD77QzVcmdqt54PI/4BocnFyZOF++zc3WBB6qUpWA8gEQchdXY
-	XSHeD0QlmkJRsCIgLoF1mVIPNoL/y+Wy1maVjrGWQItb6uOH8su8MJs34Hs02Ojvefsv
-	70Za3ey29BR/D9tFbyRBwUVXuvMj16D3ABNqMQwDpV3gv94dnHNZiPQ5EfWM60nOTuSL
-	IbHXJhZgn/dI/khjNnygm31ilxH3cbYBos3P5WTNfCg1VI1n0W1xmA5Ulmid8Ss8TIYz
-	PjKw==
+	bh=w/D9R/CzrsUz61IgTr9Q2PvN3/9shA5akR410Ok3K+Q=;
+	b=EALVVVxfi+uw/oqW/b0NZtFv1l1LGC5PsRdl2r+rF2tplzpdKMZChlrKi9Mp5E1R9k
+	iSYPM9HIs/wxQs+8ElBnp0vUlUTJGhNuqyS3aswN3Kg6MFg/VYfxnNfzCbUd2MXyxxcR
+	m/TtlowBZTePxMJ8w4JV5fOo1iUOnxj8VssrXYP9aJQUtfqk/dUjJykh5/h/6qWwyeBk
+	TDUBGy/CbEk3DmRNp4q3wmv6Ro0+x3BrVkuYY5PdHK+yWKk9nNdTIISmyVvDH12sTmGC
+	vRb0Duus4ywpbrhsfQkeVhvBKA6MevT7VaDvWfsB3enl2BHe9yco7xQuz7vKDYcxYwd6
+	8qkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=dC/szj3GfWj+5GJNhG13z2qmxah6ZCtCT5XatWDGpZY=;
-	b=S3n2zUygcHRS6Qn1Y3BjqDSbQRIhX4Dzi2ALmNSf4oKJTxNyQH1H5RDNbBD2yG3rxi
-	Nnq4he8ALjupvrlJfROOJwckTvo2SraIZX2q4UX0TC7xFuaoQLFQmisu2nIeTgXkLkHf
-	6FCliaeL6tLszbuziIEsjSYESSEbVM2yoKVYLy1XQq4Z2ieZAqeck8DCYUV9Iwth7jC/
-	CcD9erbWMDLf6CCtZDWJ45ap+adSI530bR3HiIfaXPms1PLY8WP6vuguVarzDSWfMQuL
-	rW0FAKYALIrVgeIjmEmYlaXl4Tqn5fgx4knZt7b25vKAE0ZVsXXKkKCD6hyBr4dgldb0
-	BsyA==
-X-Gm-Message-State: AIkVDXKXQa5rNZbMVFJID8AGAzh8Qpt9kpBGKIaXwsUaaNSP8N7LtAigj+qYgr53ZeuzBQ==
-X-Received: by 10.194.76.193 with SMTP id m1mr8480513wjw.70.1484207085180;
-	Wed, 11 Jan 2017 23:44:45 -0800 (PST)
+	bh=w/D9R/CzrsUz61IgTr9Q2PvN3/9shA5akR410Ok3K+Q=;
+	b=Vl9n/e62G6lUWuY5qtKZH9bYkTdqju3a55+vESTm/2Kb4jonY0JhRpFLEBgmIDh9rY
+	mcFTjuVLtLWATVdHscUAn8rK3liiKoDwKppXrnl8UdQxPGHXMidhGfK8dHfoJNglpbdc
+	3OlLF8zOaWhrwH9NHUcubmbL/Yzz+/LJj5bZ33S5QqqjJNQleHX+3zXJ9cax8IrlVyj5
+	43/6ZkXptuuWehGAGvHd/z8xJdBNDV8mQY0EPauFyuGwpKtw93i71xV7yP0Y0v6s1q42
+	Qx1YP21gIQPYUjWC6UUAvud/O0uvJaPa2Nwr/geRfue/ERR1xQ+ZpLJPUo+0rj33cFjk
+	sBGA==
+X-Gm-Message-State: AIkVDXJgZkWq3cSJ6qiObU6vwyM/5+3v0fCR2gjylE+7F2wvnLWXXIkQi1tzpqDfSvVFdw==
+X-Received: by 10.223.177.195 with SMTP id r3mr6084464wra.68.1484207086025;
+	Wed, 11 Jan 2017 23:44:46 -0800 (PST)
 Received: from mueller-a-nb-linux.zera.local
 	(ip-109-91-251-48.hsi12.unitymediagroup.de. [109.91.251.48])
 	by smtp.googlemail.com with ESMTPSA id
-	wp2sm12186778wjc.35.2017.01.11.23.44.44
+	wp2sm12186778wjc.35.2017.01.11.23.44.45
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 11 Jan 2017 23:44:44 -0800 (PST)
+	Wed, 11 Jan 2017 23:44:45 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Jan 2017 08:44:27 +0100
-Message-Id: <1484207068-21151-3-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 12 Jan 2017 08:44:28 +0100
+Message-Id: <1484207068-21151-4-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1484207068-21151-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1484207068-21151-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [meta-browser][PATCH V3 2/3] firefox: use pkg-config to find nspr
+Subject: [meta-browser][PATCH V3 3/3] firefox: do not link against crmf library it is not there
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,38 +63,29 @@ X-List-Received-Date: Thu, 12 Jan 2017 07:44:46 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-nspr-config adds path /usr/include
+and build succeeds without it
 
-which causes lots of
+fixes:
 
-| cc1plus: warning: include location "/usr/include" is unsafe for cross-compilation [-Wpoison-system-directories]
-
-and finally fails with
-
-| In file included from /usr/include/sys/syscall.h:31:0,
-|                  from <workdir>/cortexa7hf-neon-vfpv4-angstrom-linux-gnueabi/firefox/45.5.1esr-r0/firefox-45.5.1esr/firefox-build-dir/dist/system_wrappers/sys/syscall.h:4,
-|                  from <workdir>/cortexa7hf-neon-vfpv4-angstrom-linux-gnueabi/firefox/45.5.1esr-r0/firefox-45.5.1esr/memory/mozjemalloc/jemalloc.c:397:
-| <workdir>/cortexa7hf-neon-vfpv4-angstrom-linux-gnueabi/firefox/45.5.1esr-r0/firefox-45.5.1esr/memory/mozjemalloc/jemalloc.c: In function '_mmap':
-| <workdir>/cortexa7hf-neon-vfpv4-angstrom-linux-gnueabi/firefox/45.5.1esr-r0/firefox-45.5.1esr/memory/mozjemalloc/jemalloc.c:417:26: error: '__NR_mmap2' undeclared (first use in this function)
-|   return (void *) syscall(SYS_mmap2, addr, length, prot, flags,
+| <...>/arm-angstrom-linux-gnueabi/gcc/arm-angstrom-linux-gnueabi/6.2.0/ld: error: cannot find -lcrmf
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../firefox/0002-use-pkg-config-to-find-nspr.patch | 37 ++++++++++++++++++++++
+ ...link-against-crmf-library-it-is-not-there.patch | 48 ++++++++++++++++++++++
  recipes-mozilla/firefox/firefox_45.6.0esr.bb       |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 recipes-mozilla/firefox/firefox/0002-use-pkg-config-to-find-nspr.patch
+ 2 files changed, 49 insertions(+)
+ create mode 100644 recipes-mozilla/firefox/firefox/0003-do-not-link-against-crmf-library-it-is-not-there.patch
 
-diff --git a/recipes-mozilla/firefox/firefox/0002-use-pkg-config-to-find-nspr.patch b/recipes-mozilla/firefox/firefox/0002-use-pkg-config-to-find-nspr.patch
+diff --git a/recipes-mozilla/firefox/firefox/0003-do-not-link-against-crmf-library-it-is-not-there.patch b/recipes-mozilla/firefox/firefox/0003-do-not-link-against-crmf-library-it-is-not-there.patch
 new file mode 100644
-index 0000000..d02b904
+index 0000000..7444be0
 --- /dev/null
-+++ b/recipes-mozilla/firefox/firefox/0002-use-pkg-config-to-find-nspr.patch
-@@ -0,0 +1,37 @@
-+From cdb21594b814af82c4128ccd1179267de2e0e780 Mon Sep 17 00:00:00 2001
++++ b/recipes-mozilla/firefox/firefox/0003-do-not-link-against-crmf-library-it-is-not-there.patch
+@@ -0,0 +1,48 @@
++From 82862c9be8e1c87d32b639403f1f5715c8f4be59 Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Wed, 14 Dec 2016 22:57:55 +0100
-+Subject: [PATCH] use pkg-config to find nspr
++Date: Thu, 15 Dec 2016 00:23:41 +0100
++Subject: [PATCH] do not link against crmf library - it is not there
 +MIME-Version: 1.0
 +Content-Type: text/plain; charset=UTF-8
 +Content-Transfer-Encoding: 8bit
@@ -104,40 +94,51 @@ index 0000000..d02b904
 +
 +Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 +---
-+ configure | 5 ++++-
-+ 1 file changed, 4 insertions(+), 1 deletion(-)
++ config/external/nss/crmf/moz.build | 1 -
++ configure                          | 6 +-----
++ 2 files changed, 1 insertion(+), 6 deletions(-)
 +
++diff --git a/config/external/nss/crmf/moz.build b/config/external/nss/crmf/moz.build
++index 9b8005f..4bfcc81 100644
++--- a/config/external/nss/crmf/moz.build
+++++ b/config/external/nss/crmf/moz.build
++@@ -8,7 +8,6 @@ Library('crmf')
++ 
++ if CONFIG['MOZ_NATIVE_NSS']:
++     OS_LIBS += [l for l in CONFIG['NSS_LIBS'] if l.startswith('-L')]
++-    OS_LIBS += ['-lcrmf']
++ else:
++     USE_LIBS += [
++         # The dependency on nss is not real, but is required to force the
 +diff --git a/configure b/configure
-+index 9b68803..312c8a3 100755
++index 312c8a3..2f77843 100755
 +--- a/configure
 ++++ b/configure
-+@@ -15153,10 +15153,13 @@ fi
-+ echo "configure:15154: checking for NSPR - version >= $min_nspr_version" >&5
++@@ -15689,11 +15689,7 @@ echo "configure:15633: checking for NSS - version >= $min_nss_version" >&5
 + 
-+ 	no_nspr=""
-++	NSPR_CONFIG="pkg-config nspr"
-++	nspr_config_args=
-+ 	if test "$NSPR_CONFIG" != "no"; then
-+ 		NSPR_CFLAGS=`$NSPR_CONFIG $nspr_config_args --cflags`
-+ 		NSPR_LIBS=`$NSPR_CONFIG $nspr_config_args --libs`
-+-		NSPR_VERSION_STRING=`$NSPR_CONFIG $nspr_config_args --version`	
-++		NSPR_VERSION_STRING=`$NSPR_CONFIG $nspr_config_args --modversion`	
-++		echo -n "$NSPR_VERSION_STRING... "
-+ 	elif test -n "${NO_NSPR_CONFIG_SYSTEM_VERSION}"; then
-+ 	    NSPR_CFLAGS="${NO_NSPR_CONFIG_SYSTEM_CFLAGS}"
-+ 		NSPR_LIBS="${NO_NSPR_CONFIG_SYSTEM_LDFLAGS}"
++ fi
++ 
++-if test -n "$MOZ_NATIVE_NSS"; then
++-   NSS_LIBS="$NSS_LIBS -lcrmf"
++-else
++-   NSS_CFLAGS="-I${DIST}/include/nss"
++-fi
+++
++ 
++ 
++ echo $ac_n "checking for YASM assembler""... $ac_c" 1>&6
 +-- 
 +2.7.4
 +
 diff --git a/recipes-mozilla/firefox/firefox_45.6.0esr.bb b/recipes-mozilla/firefox/firefox_45.6.0esr.bb
-index 6ca6633..a4ae32f 100644
+index a4ae32f..bed50dd 100644
 --- a/recipes-mozilla/firefox/firefox_45.6.0esr.bb
 +++ b/recipes-mozilla/firefox/firefox_45.6.0esr.bb
-@@ -40,6 +40,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}/source/firefox
-            file://Fix-firefox-install-dir.patch \
+@@ -41,6 +41,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}/source/firefox
             file://fixes/Correct-the-source-to-be-compatible-with-gcc6-by-pre.patch \
             file://0001-use-pkg-config-to-find-nss.patch \
-+           file://0002-use-pkg-config-to-find-nspr.patch \
+            file://0002-use-pkg-config-to-find-nspr.patch \
++           file://0003-do-not-link-against-crmf-library-it-is-not-there.patch \
             "
  
  SRC_URI[archive.md5sum] = "ee3cf2401a5716cebacaae5fb70d133f"
