@@ -1,53 +1,52 @@
-Return-Path: <jefro.net@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 1272360116;
-	Thu, 12 Jan 2017 01:52:41 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id c85so642926wmi.1;
-	Wed, 11 Jan 2017 17:52:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=1pC+BUC5Mapp7/5UiN6XaVH/k8ilccNJbnQXOJySRDs=;
-	b=AaIuixVtsLJzQqsp4MQfRiylVtUx6kmVe83yyo5/mQT0lzWSGi+PLt/vwS8OAYQI+f
-	hA7zPO3XSCGxDEQG/wQ+D0m1hd8Cx+RELdh85IMWMP4t0RUVFRExG6age7iqxmuvNDJ6
-	aESDGonbtxIlfI9LutYU9JAZvlPT7ocEDzXSqXGND9Z5np325qG0fnK0w5BPVciGJCut
-	XmLPMprY8hJoV2Sprc9C61n4CMdsupqkQGn0/VkYewExeL0BK5RsJf/3HN8uuJrsNYXl
-	aJMmLWyoBnMeH3yG0u6+bELIHzy52Lj6togCkn71wEZBgpArU1J3Ix3dH5erX9oL57dn
-	CD6Q==
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id A142F719E7
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Jan 2017 07:44:44 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id c85so1831337wmi.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Jan 2017 23:44:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	:content-transfer-encoding;
+	bh=W5u0DZrSQ8qC7c3N3vgKhc5CZw9yJZRqLFRBN112jP4=;
+	b=a7xzN3eqI8nvOi2PR09CO0i3KPLOj3QEmU8zktWfz/6vuvOlUMnQxng92noztwhj3H
+	y1AE034aco2OOdVWgUyYO4oefFoG2CqNZGXmGVENhyAGSN4JJvyv99r3mEl0oXADElko
+	RO77ttxgfigr872TmSqwsKLENOME77F9+8GWUZLmgKSuRHujIhqOKHshb5i38XMYM2qQ
+	OnarCwUhe/ZOy5e2gmT0NRQiEsFVmH1984PcCajdI/y/qwF1oQKPfFFDu9gBYkuW6VmY
+	Ou0j987jBYmAYvzIH04Rq1iPateW2I/MZM0NvJeycTVGAxCKBZQD6Zbv8Cblhp9/IKze
+	tuCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to:cc;
-	bh=1pC+BUC5Mapp7/5UiN6XaVH/k8ilccNJbnQXOJySRDs=;
-	b=AZJcb7LzXn04wtRgJn9zPf3amvtmtsyoQpfbCe0kvW8R2289DaN1D9uMrWd5aOUCFb
-	9hFJ1YCUiRVfi2rbTzh7v6MvoPVOwH9y2YxxniS0E0X/Vc0Oa3TiUi2Zh0TlVfa20BI1
-	XVs1S0HS0o8SbcVd39kpp0cCQ9s40V0yKfb4lWbhK50YDQs0xnsCcojimL4ID2+6awLE
-	sNln1G2BmMz06ZuG7SuokkGjmRI4aq2AOtJYvompIpmsmiqQN8tLrw2Dx3KSmqqDkj6M
-	juELSg8vJ4Ert5sMdfH27dXi5IzYpMWycITddGFFQCUgLNNoi1qUCRyDv+WxMGpBTm/h
-	+8lw==
-X-Gm-Message-State: AIkVDXIARvzS9hFi4M/d2jkWBDaMiwlpPSuiU7oE1JakEc+V9Fg29XKRNlFeuLDzXDQKEBvdy9f3qtaA3tmgDQ==
-X-Received: by 10.223.150.118 with SMTP id c51mr6506263wra.190.1484185961760; 
-	Wed, 11 Jan 2017 17:52:41 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=W5u0DZrSQ8qC7c3N3vgKhc5CZw9yJZRqLFRBN112jP4=;
+	b=EzJkXPK0mdMbKDjZFpmbkP5bywVLJS5Snj/Y2/pZUqn7y3uw9xQjQ0O4eDnylboOZD
+	miK/77hW7y5uYrTeO1vQlHr/01gYl3s+1zf0Ia2YoQ4hFMwhs1YiS7u7R+3LKwyOUJBx
+	j3F12QWHX0EEkQojyS0iwru+6q2JklDNS0sWtgWuGuOrdmRhADsHE7Qv4+6XNLgbTlAT
+	PvlOLovdV8qzElNBXy7EQ8EcQY2gDZLw/FMcB/q41NQPAiCVwREbnIiivb3if4HCQpGI
+	HMnYCibJ2/AGqC4S1fy5SsOhtuDF8AgdSwJOwegFK98gPikg/D8AGQadspnSvzK0UEMx
+	UqAg==
+X-Gm-Message-State: AIkVDXKG/GO076EL7YB5PU5tT3mSuNRfzGkd0nmOhDo9K56/6vkSChogtpb2l9IVNWsGUQ==
+X-Received: by 10.223.139.154 with SMTP id o26mr6217051wra.28.1484207084302;
+	Wed, 11 Jan 2017 23:44:44 -0800 (PST)
+Received: from mueller-a-nb-linux.zera.local
+	(ip-109-91-251-48.hsi12.unitymediagroup.de. [109.91.251.48])
+	by smtp.googlemail.com with ESMTPSA id
+	wp2sm12186778wjc.35.2017.01.11.23.44.43
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 11 Jan 2017 23:44:43 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 12 Jan 2017 08:44:26 +0100
+Message-Id: <1484207068-21151-2-git-send-email-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1484207068-21151-1-git-send-email-schnitzeltony@googlemail.com>
+References: <1484207068-21151-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Sender: jefro.net@gmail.com
-Received: by 10.194.186.232 with HTTP; Wed, 11 Jan 2017 17:52:21 -0800 (PST)
-In-Reply-To: <2377449.YFeu6CDXkj@peggleto-mobl.ger.corp.intel.com>
-References: <c93f2baf-e05d-fc8a-0789-9651dc5a1fd4@balister.org>
-	<2377449.YFeu6CDXkj@peggleto-mobl.ger.corp.intel.com>
-From: Jeff Osier-Mixon <jefro@jefro.net>
-Date: Wed, 11 Jan 2017 17:52:21 -0800
-X-Google-Sender-Auth: BO5c1Zs7funFtqhIdUqfrXXFdrI
-Message-ID: <CA+YB3rZi0p1LgNzVi-o9n+-ZDaZCar-18oTbuUS5iq-x-D0JrQ@mail.gmail.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	"openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, openembedded-architecture
-	<openembedded-architecture@lists.openembedded.org>
-Subject: Re: [OE-core] [yocto] OpenEmbedded Developers Meeting in Portland before ELC
+Subject: [meta-browser][PATCH V3 1/3] firefox: fix configure with oe-core master - there is no nss-config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,73 +59,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jan 2017 01:52:42 -0000
+X-List-Received-Date: Thu, 12 Jan 2017 07:44:45 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-That is an excellent question. The main issue is that the room usually
-contains 20-25 people who are spread too far apart for many solutions to
-hear effectively. This is compounded by normally not having any access to
-the room until the morning of the event, so it is always a mad scramble.
+| configure:15633: checking for NSS - version >= 3.21.3
+| configure: error: you don't have NSS installed or your version is too old
 
-This year I am focusing on using a regular conference phone rather than a
-fancy solution, so there will be no video but hopefully there will be good
-audio. I wish I had a permanent solution, but the room is completely
-different at every event. I will keep working on it.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../firefox/0001-use-pkg-config-to-find-nss.patch  | 47 ++++++++++++++++++++++
+ recipes-mozilla/firefox/firefox_45.6.0esr.bb       |  1 +
+ 2 files changed, 48 insertions(+)
+ create mode 100644 recipes-mozilla/firefox/firefox/0001-use-pkg-config-to-find-nss.patch
 
-Stay tuned for dialup info (no, it won't be google hangout).
-
-On Wed, Jan 11, 2017 at 5:47 PM, Paul Eggleton <
-paul.eggleton@linux.intel.com> wrote:
-
-> On Mon, 09 Jan 2017 16:04:57 Philip Balister wrote:
-> > As we do around each Embedded Linux Conference, OpenEmbedded will host a
-> > developer meeting to discuss the state of OpenEmbedded and what efforts
-> > we should focus on over the next six months or so.
-> >
-> > All developers and users are welcome to attend. We like to hear feedback
-> > from a variety of people over what works, doesn't work, and is useful to
-> > people using OpenEmbedded for all sort of applications.
-> >
-> > The meeting will be held Monday, Feb 20 at a location we can almost
-> > announce. Based on prior years, the meeting will run from 9AM to 5PM.
-> >
-> > If you are going to attend add your name to:
-> >
-> > http://openembedded.org/wiki/OEDAM_2017
-> >
-> > Also, go ahead and add ideas for the agenda. We'll organize them better
-> > just before the actual meeting.
->
-> So it's great that this is happening, but unfortunately I'm not going to be
-> able to make it to this one, and I suspect there will be many others who
-> would
-> like to participate but can't be present in person. In previous meetings we
-> have really struggled with practical means for remote participation. I
-> don't
-> expect effective real-time two-way communication, but last time the audio
-> was
-> so poor I wasn't even able to hear what was being said.
->
-> Is there a chance that given advance notice we will be able to set
-> something
-> up that could improve this?
->
-> Cheers,
-> Paul
->
-> --
->
-> Paul Eggleton
-> Intel Open Source Technology Centre
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
->
-
-
-
+diff --git a/recipes-mozilla/firefox/firefox/0001-use-pkg-config-to-find-nss.patch b/recipes-mozilla/firefox/firefox/0001-use-pkg-config-to-find-nss.patch
+new file mode 100644
+index 0000000..eac2783
+--- /dev/null
++++ b/recipes-mozilla/firefox/firefox/0001-use-pkg-config-to-find-nss.patch
+@@ -0,0 +1,47 @@
++From f5533e4f2ac147256f7c41166ae1ef98f41d7f39 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Wed, 14 Dec 2016 21:37:03 +0100
++Subject: [PATCH] use pkg-config to find nss
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++---
++ configure | 9 +++++----
++ 1 file changed, 5 insertions(+), 4 deletions(-)
++
++diff --git a/configure b/configure
++index c27acdd..9b68803 100755
++--- a/configure
+++++ b/configure
++@@ -15630,7 +15630,8 @@ fi
++ 	min_nss_version=3.21.3
++ 	echo $ac_n "checking for NSS - version >= $min_nss_version""... $ac_c" 1>&6
++ echo "configure:15633: checking for NSS - version >= $min_nss_version" >&5
++-
+++	NSS_CONFIG="pkg-config nss"
+++	nss_config_args=
++ 	no_nss=""
++ 	if test "$NSS_CONFIG" = "no"; then
++ 		no_nss="yes"
++@@ -15638,11 +15639,11 @@ echo "configure:15633: checking for NSS - version >= $min_nss_version" >&5
++ 		NSS_CFLAGS=`$NSS_CONFIG $nss_config_args --cflags`
++ 		NSS_LIBS=`$NSS_CONFIG $nss_config_args --libs`
++ 
++-		nss_config_major_version=`$NSS_CONFIG $nss_config_args --version | \
+++		nss_config_major_version=`$NSS_CONFIG $nss_config_args --modversion | \
++ 			sed 's/\([0-9]*\)\.\([0-9]*\)\(\.\([0-9]*\)\)\{0,1\}/\1/'`
++-		nss_config_minor_version=`$NSS_CONFIG $nss_config_args --version | \
+++		nss_config_minor_version=`$NSS_CONFIG $nss_config_args --modversion | \
++ 			sed 's/\([0-9]*\)\.\([0-9]*\)\(\.\([0-9]*\)\)\{0,1\}/\2/'`
++-		nss_config_micro_version=`$NSS_CONFIG $nss_config_args --version | \
+++		nss_config_micro_version=`$NSS_CONFIG $nss_config_args --modversion | \
++ 			sed 's/\([0-9]*\)\.\([0-9]*\)\(\.\([0-9]*\)\)\{0,1\}/\4/'`
++ 		if test -z "$nss_config_micro_version"; then
++ 			nss_config_micro_version="0"
++-- 
++2.7.4
++
+diff --git a/recipes-mozilla/firefox/firefox_45.6.0esr.bb b/recipes-mozilla/firefox/firefox_45.6.0esr.bb
+index b3c839c..6ca6633 100644
+--- a/recipes-mozilla/firefox/firefox_45.6.0esr.bb
++++ b/recipes-mozilla/firefox/firefox_45.6.0esr.bb
+@@ -39,6 +39,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}/source/firefox
+            file://debian-hacks/Avoid-wrong-sessionstore-data-to-keep-windows-out-of.patch \
+            file://Fix-firefox-install-dir.patch \
+            file://fixes/Correct-the-source-to-be-compatible-with-gcc6-by-pre.patch \
++           file://0001-use-pkg-config-to-find-nss.patch \
+            "
+ 
+ SRC_URI[archive.md5sum] = "ee3cf2401a5716cebacaae5fb70d133f"
 -- 
-Jeff Osier-Mixon - Open Source Community Engineer, Intel Corporation
+2.7.4
+
 
