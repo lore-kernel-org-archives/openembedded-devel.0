@@ -1,52 +1,46 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 69314719E7
+Return-Path: <oleksandr.kravchuk@pelagicore.com>
+Received: from mail-wj0-f175.google.com (mail-wj0-f175.google.com
+	[209.85.210.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 712DF719B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jan 2017 07:44:46 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id c85so8746025wmi.1
+	Thu, 12 Jan 2017 09:19:51 +0000 (UTC)
+Received: by mail-wj0-f175.google.com with SMTP id ew7so7612076wjc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Jan 2017 23:44:46 -0800 (PST)
+	Thu, 12 Jan 2017 01:19:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=w/D9R/CzrsUz61IgTr9Q2PvN3/9shA5akR410Ok3K+Q=;
-	b=EALVVVxfi+uw/oqW/b0NZtFv1l1LGC5PsRdl2r+rF2tplzpdKMZChlrKi9Mp5E1R9k
-	iSYPM9HIs/wxQs+8ElBnp0vUlUTJGhNuqyS3aswN3Kg6MFg/VYfxnNfzCbUd2MXyxxcR
-	m/TtlowBZTePxMJ8w4JV5fOo1iUOnxj8VssrXYP9aJQUtfqk/dUjJykh5/h/6qWwyeBk
-	TDUBGy/CbEk3DmRNp4q3wmv6Ro0+x3BrVkuYY5PdHK+yWKk9nNdTIISmyVvDH12sTmGC
-	vRb0Duus4ywpbrhsfQkeVhvBKA6MevT7VaDvWfsB3enl2BHe9yco7xQuz7vKDYcxYwd6
-	8qkg==
+	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=8YHWgkA0GIHSk0WreiSaJPd8CvDX/2JjAqMdArBNVfQ=;
+	b=vYOKv6ZV4Yex5tY7PxyZvp2ndDxhNTbpKM7bKxy6p6g92jLBPCdJTpes13ohiQg43L
+	aF1xDOrQcDcfk9KNQ6IcScP02umwDSu4yJwlvSS6E/rtjSdhzRavCho3MmuIW/PHJE1u
+	/TADqzBg7fewyrgm8oI7lQUysWjJqXGc1NrjsrUiIaGfA4be9mm9+t6X9V7BByfNmyuR
+	INpW+ptaJLf6ARqn/T+C64RozUD/4c/Pz+/Xu65jS/Ov7FZ2+Kdbz2IObs6tbrgM1BGj
+	MTcobZHSNzxb2TRSGxnsn8HvZ5YzHLgPYdUrkGiBwlVtBtVPiAsOCAKFZUraLZhHUz/q
+	GYfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=w/D9R/CzrsUz61IgTr9Q2PvN3/9shA5akR410Ok3K+Q=;
-	b=Vl9n/e62G6lUWuY5qtKZH9bYkTdqju3a55+vESTm/2Kb4jonY0JhRpFLEBgmIDh9rY
-	mcFTjuVLtLWATVdHscUAn8rK3liiKoDwKppXrnl8UdQxPGHXMidhGfK8dHfoJNglpbdc
-	3OlLF8zOaWhrwH9NHUcubmbL/Yzz+/LJj5bZ33S5QqqjJNQleHX+3zXJ9cax8IrlVyj5
-	43/6ZkXptuuWehGAGvHd/z8xJdBNDV8mQY0EPauFyuGwpKtw93i71xV7yP0Y0v6s1q42
-	Qx1YP21gIQPYUjWC6UUAvud/O0uvJaPa2Nwr/geRfue/ERR1xQ+ZpLJPUo+0rj33cFjk
-	sBGA==
-X-Gm-Message-State: AIkVDXJgZkWq3cSJ6qiObU6vwyM/5+3v0fCR2gjylE+7F2wvnLWXXIkQi1tzpqDfSvVFdw==
-X-Received: by 10.223.177.195 with SMTP id r3mr6084464wra.68.1484207086025;
-	Wed, 11 Jan 2017 23:44:46 -0800 (PST)
-Received: from mueller-a-nb-linux.zera.local
-	(ip-109-91-251-48.hsi12.unitymediagroup.de. [109.91.251.48])
-	by smtp.googlemail.com with ESMTPSA id
-	wp2sm12186778wjc.35.2017.01.11.23.44.45
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 11 Jan 2017 23:44:45 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=8YHWgkA0GIHSk0WreiSaJPd8CvDX/2JjAqMdArBNVfQ=;
+	b=sI/pKT3Mrv7NQFBTojTwqVBlT2//xDNa4cmKpqw8v8MqyodKAtwSZFRGmxRFvyJ79s
+	Bo6u9H1PlfiirEnAsgTJkbN4by3XEzj5K1jD+acCR7l/H0NzwHpa7ddGcJ2GeSq7OMTV
+	/1EAC3msnDW913hgW3dbMNmbjiFq1/JTIwS+sy+qL6Ov6CpNldDbVLlk6xEQXthuoCN8
+	xcvoJDOL33R8aIUOcGD8LeoEL3GY7fN5pqeEJ/aP9G6w5iv+Am8QzkJlQFo9pc5nSqIV
+	dvj1470iXDoJWaI8BasM456UhfO2TIebXjufqPqyVjc2BiCZ3USFTKaW+ME7/1GHyWgu
+	XKOg==
+X-Gm-Message-State: AIkVDXJFlgd3S2Pm/bSS6+PYRraQLw27WUK79AHjgeRK9UCCUaSqXeDdPalLrTvW14fJZKd0
+X-Received: by 10.194.246.69 with SMTP id xu5mr7983845wjc.85.1484212791057;
+	Thu, 12 Jan 2017 01:19:51 -0800 (PST)
+Received: from stout.office.pelagicore.net ([83.218.80.242])
+	by smtp.gmail.com with ESMTPSA id
+	f67sm2118835wmd.13.2017.01.12.01.19.49
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 12 Jan 2017 01:19:50 -0800 (PST)
+From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Jan 2017 08:44:28 +0100
-Message-Id: <1484207068-21151-4-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 12 Jan 2017 10:19:47 +0100
+Message-Id: <1484212787-20341-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1484207068-21151-1-git-send-email-schnitzeltony@googlemail.com>
-References: <1484207068-21151-1-git-send-email-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [meta-browser][PATCH V3 3/3] firefox: do not link against crmf library it is not there
+Subject: [meta-oe][PATCH v2] nano: upgrade to 2.7.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,89 +53,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jan 2017 07:44:46 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 12 Jan 2017 09:19:53 -0000
 
-and build succeeds without it
-
-fixes:
-
-| <...>/arm-angstrom-linux-gnueabi/gcc/arm-angstrom-linux-gnueabi/6.2.0/ld: error: cannot find -lcrmf
-
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
 ---
- ...link-against-crmf-library-it-is-not-there.patch | 48 ++++++++++++++++++++++
- recipes-mozilla/firefox/firefox_45.6.0esr.bb       |  1 +
- 2 files changed, 49 insertions(+)
- create mode 100644 recipes-mozilla/firefox/firefox/0003-do-not-link-against-crmf-library-it-is-not-there.patch
+ .../nano/nano-2.2.5/ncursesw.includedir.patch                | 12 ------------
+ meta-oe/recipes-support/nano/nano.inc                        |  8 +++-----
+ meta-oe/recipes-support/nano/nano_2.2.5.bb                   |  8 --------
+ meta-oe/recipes-support/nano/nano_2.7.4.bb                   |  4 ++++
+ 4 files changed, 7 insertions(+), 25 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/nano/nano-2.2.5/ncursesw.includedir.patch
+ delete mode 100644 meta-oe/recipes-support/nano/nano_2.2.5.bb
+ create mode 100644 meta-oe/recipes-support/nano/nano_2.7.4.bb
 
-diff --git a/recipes-mozilla/firefox/firefox/0003-do-not-link-against-crmf-library-it-is-not-there.patch b/recipes-mozilla/firefox/firefox/0003-do-not-link-against-crmf-library-it-is-not-there.patch
-new file mode 100644
-index 0000000..7444be0
---- /dev/null
-+++ b/recipes-mozilla/firefox/firefox/0003-do-not-link-against-crmf-library-it-is-not-there.patch
-@@ -0,0 +1,48 @@
-+From 82862c9be8e1c87d32b639403f1f5715c8f4be59 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-+Date: Thu, 15 Dec 2016 00:23:41 +0100
-+Subject: [PATCH] do not link against crmf library - it is not there
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-+---
-+ config/external/nss/crmf/moz.build | 1 -
-+ configure                          | 6 +-----
-+ 2 files changed, 1 insertion(+), 6 deletions(-)
-+
-+diff --git a/config/external/nss/crmf/moz.build b/config/external/nss/crmf/moz.build
-+index 9b8005f..4bfcc81 100644
-+--- a/config/external/nss/crmf/moz.build
-++++ b/config/external/nss/crmf/moz.build
-+@@ -8,7 +8,6 @@ Library('crmf')
-+ 
-+ if CONFIG['MOZ_NATIVE_NSS']:
-+     OS_LIBS += [l for l in CONFIG['NSS_LIBS'] if l.startswith('-L')]
-+-    OS_LIBS += ['-lcrmf']
-+ else:
-+     USE_LIBS += [
-+         # The dependency on nss is not real, but is required to force the
-+diff --git a/configure b/configure
-+index 312c8a3..2f77843 100755
-+--- a/configure
-++++ b/configure
-+@@ -15689,11 +15689,7 @@ echo "configure:15633: checking for NSS - version >= $min_nss_version" >&5
-+ 
-+ fi
-+ 
-+-if test -n "$MOZ_NATIVE_NSS"; then
-+-   NSS_LIBS="$NSS_LIBS -lcrmf"
-+-else
-+-   NSS_CFLAGS="-I${DIST}/include/nss"
-+-fi
-++
-+ 
-+ 
-+ echo $ac_n "checking for YASM assembler""... $ac_c" 1>&6
-+-- 
-+2.7.4
-+
-diff --git a/recipes-mozilla/firefox/firefox_45.6.0esr.bb b/recipes-mozilla/firefox/firefox_45.6.0esr.bb
-index a4ae32f..bed50dd 100644
---- a/recipes-mozilla/firefox/firefox_45.6.0esr.bb
-+++ b/recipes-mozilla/firefox/firefox_45.6.0esr.bb
-@@ -41,6 +41,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}/source/firefox
-            file://fixes/Correct-the-source-to-be-compatible-with-gcc6-by-pre.patch \
-            file://0001-use-pkg-config-to-find-nss.patch \
-            file://0002-use-pkg-config-to-find-nspr.patch \
-+           file://0003-do-not-link-against-crmf-library-it-is-not-there.patch \
-            "
+diff --git a/meta-oe/recipes-support/nano/nano-2.2.5/ncursesw.includedir.patch b/meta-oe/recipes-support/nano/nano-2.2.5/ncursesw.includedir.patch
+deleted file mode 100644
+index 0f224be..0000000
+--- a/meta-oe/recipes-support/nano/nano-2.2.5/ncursesw.includedir.patch
++++ /dev/null
+@@ -1,12 +0,0 @@
+-diff -uNr nano-2.2.5.orig//configure.ac nano-2.2.5/configure.ac
+---- nano-2.2.5.orig//configure.ac	2010-08-06 03:00:51.000000000 +0200
+-+++ nano-2.2.5/configure.ac	2010-08-10 14:11:52.000000000 +0200
+-@@ -442,7 +442,7 @@
+-     AC_CHECK_HEADERS(ncurses.h)
+- 
+-     if test x$enable_utf8 != xno; then
+--	AC_CHECK_LIB(ncursesw, get_wch, [CURSES_LIB="-lncursesw" CPPFLAGS="-I/usr/include/ncursesw $CPPFLAGS" CURSES_LIB_NAME=ncursesw CURSES_LIB_WIDE=yes])
+-+	AC_CHECK_LIB(ncursesw, get_wch, [CURSES_LIB="-lncursesw" CURSES_LIB_NAME=ncursesw CURSES_LIB_WIDE=yes])
+-     fi
+- 
+-     if eval "test x$CURSES_LIB_NAME = x"; then
+diff --git a/meta-oe/recipes-support/nano/nano.inc b/meta-oe/recipes-support/nano/nano.inc
+index 0f31c6c..e17b16e 100644
+--- a/meta-oe/recipes-support/nano/nano.inc
++++ b/meta-oe/recipes-support/nano/nano.inc
+@@ -8,12 +8,10 @@ SECTION = "console/utils"
+ DEPENDS = "ncurses"
+ RDEPENDS_${PN} = "ncurses-terminfo"
  
- SRC_URI[archive.md5sum] = "ee3cf2401a5716cebacaae5fb70d133f"
+-INC_PR = "r3"
+-
+ PV_MAJOR = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
+ 
+-SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.gz"
++SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
+ 
+-inherit autotools gettext
++inherit autotools gettext pkgconfig
+ 
+-PACKAGECONFIG[tiny] = "--enable-tiny,--enable-all,"
++PACKAGECONFIG[tiny] = "--enable-tiny,"
+diff --git a/meta-oe/recipes-support/nano/nano_2.2.5.bb b/meta-oe/recipes-support/nano/nano_2.2.5.bb
+deleted file mode 100644
+index e656f46..0000000
+--- a/meta-oe/recipes-support/nano/nano_2.2.5.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-include nano.inc
+-
+-PR = "${INC_PR}.0"
+-
+-SRC_URI += "file://ncursesw.includedir.patch"
+-
+-SRC_URI[md5sum] = "77a10a49589f975ce98350a4527a2ebf"
+-SRC_URI[sha256sum] = "9015945d1badabbada203b37c4779d3dd1066234235c714deb439989c5cd7d9e"
+diff --git a/meta-oe/recipes-support/nano/nano_2.7.4.bb b/meta-oe/recipes-support/nano/nano_2.7.4.bb
+new file mode 100644
+index 0000000..eaf393e
+--- /dev/null
++++ b/meta-oe/recipes-support/nano/nano_2.7.4.bb
+@@ -0,0 +1,4 @@
++include nano.inc
++
++SRC_URI[md5sum] = "c011c7f9e47cb1da27d4e7cc8b56ec6a"
++SRC_URI[sha256sum] = "752170643039e2c95a433de357f0c70a8c4c4c561a90a7e7259a63e225b659b9"
 -- 
 2.7.4
 
