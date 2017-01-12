@@ -1,46 +1,59 @@
-Return-Path: <oleksandr.kravchuk@pelagicore.com>
-Received: from mail-wj0-f175.google.com (mail-wj0-f175.google.com
-	[209.85.210.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 712DF719B4
+Return-Path: <samuli.piippo@gmail.com>
+Received: from mail-lf0-f43.google.com (mail-lf0-f43.google.com
+	[209.85.215.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 90CFA719A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jan 2017 09:19:51 +0000 (UTC)
-Received: by mail-wj0-f175.google.com with SMTP id ew7so7612076wjc.3
+	Thu, 12 Jan 2017 11:20:35 +0000 (UTC)
+Received: by mail-lf0-f43.google.com with SMTP id z134so7210601lff.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jan 2017 01:19:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=8YHWgkA0GIHSk0WreiSaJPd8CvDX/2JjAqMdArBNVfQ=;
-	b=vYOKv6ZV4Yex5tY7PxyZvp2ndDxhNTbpKM7bKxy6p6g92jLBPCdJTpes13ohiQg43L
-	aF1xDOrQcDcfk9KNQ6IcScP02umwDSu4yJwlvSS6E/rtjSdhzRavCho3MmuIW/PHJE1u
-	/TADqzBg7fewyrgm8oI7lQUysWjJqXGc1NrjsrUiIaGfA4be9mm9+t6X9V7BByfNmyuR
-	INpW+ptaJLf6ARqn/T+C64RozUD/4c/Pz+/Xu65jS/Ov7FZ2+Kdbz2IObs6tbrgM1BGj
-	MTcobZHSNzxb2TRSGxnsn8HvZ5YzHLgPYdUrkGiBwlVtBtVPiAsOCAKFZUraLZhHUz/q
-	GYfw==
+	Thu, 12 Jan 2017 03:20:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=hVT9BsCBMGZ5bpRjCRqLnqnL204TrazOshOFmdFle4U=;
+	b=PLCGAIk8EazraTSdu9CRX3czA2TvwPxYLxqv3Dv0dT8oMidYG+/HkJHUvjySNIiZDC
+	l+d8Qsvkc5ENNHj9DUI1snea7+VCviFdQT22Vvo9JHHzEIb80khB5GRMdk1X66EFYlum
+	IzDavRWq+9h+KJv7d7dDBNU91idfIthyVLGAPNApyr6wQWm1bviQNFB1JHP74ElBHaGL
+	pH0vyIygIfaiYncUGo9tQroII+m7syI8tpdf9UolUHQ38/CJdsSwwKXjfiO0FWVX+3rN
+	vRFzb1Amblyfq6F1mSWyTA5YGVxJy80W3CYUccf4FKvy4ulkZr+MTCC930izI/SXUe8/
+	nXoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=8YHWgkA0GIHSk0WreiSaJPd8CvDX/2JjAqMdArBNVfQ=;
-	b=sI/pKT3Mrv7NQFBTojTwqVBlT2//xDNa4cmKpqw8v8MqyodKAtwSZFRGmxRFvyJ79s
-	Bo6u9H1PlfiirEnAsgTJkbN4by3XEzj5K1jD+acCR7l/H0NzwHpa7ddGcJ2GeSq7OMTV
-	/1EAC3msnDW913hgW3dbMNmbjiFq1/JTIwS+sy+qL6Ov6CpNldDbVLlk6xEQXthuoCN8
-	xcvoJDOL33R8aIUOcGD8LeoEL3GY7fN5pqeEJ/aP9G6w5iv+Am8QzkJlQFo9pc5nSqIV
-	dvj1470iXDoJWaI8BasM456UhfO2TIebXjufqPqyVjc2BiCZ3USFTKaW+ME7/1GHyWgu
-	XKOg==
-X-Gm-Message-State: AIkVDXJFlgd3S2Pm/bSS6+PYRraQLw27WUK79AHjgeRK9UCCUaSqXeDdPalLrTvW14fJZKd0
-X-Received: by 10.194.246.69 with SMTP id xu5mr7983845wjc.85.1484212791057;
-	Thu, 12 Jan 2017 01:19:51 -0800 (PST)
-Received: from stout.office.pelagicore.net ([83.218.80.242])
-	by smtp.gmail.com with ESMTPSA id
-	f67sm2118835wmd.13.2017.01.12.01.19.49
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 12 Jan 2017 01:19:50 -0800 (PST)
-From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=hVT9BsCBMGZ5bpRjCRqLnqnL204TrazOshOFmdFle4U=;
+	b=R3W6WzmUiTiUWTmpnwtOZaX2GeOEOsviCdscbmKs4y/JgYw0wInaKXm8Kij5KbcaAo
+	kbvTLclKNpzS0b4nddYEySNWSWA/0opcTFM7C6Pl+acW63HEqgxFHp/OkCLb1ZhYx5r7
+	E7WagTXfEgeYMVbgsyItSnMsM5VNxTnMQeyPPQNKGRPgssMF2kMW/m54xn6y9aZ4OsaD
+	+7vJv1sSTlynJWVcnGaINOfVc00nr7+xTgc8h3nn5CIfFp334wn9o39iSsacdER34zNw
+	IS8LCLHgGiYcoTwgDZBLseXwT0Kw9hRebkj/UBm8462Z5lvZWtZ3ZxtDgnpdax/csI+e
+	Ebpg==
+X-Gm-Message-State: AIkVDXLfE+apsqKKdkJOPQzuKd0AOfQrcrYnKc14sOWagpRkFqUCcDdHoB5Ful5Rgxunmw==
+X-Received: by 10.46.5.196 with SMTP id 187mr4862114ljf.36.1484220034757;
+	Thu, 12 Jan 2017 03:20:34 -0800 (PST)
+Received: from [10.9.21.21] ([192.89.120.53])
+	by smtp.googlemail.com with ESMTPSA id
+	g201sm2221094lfe.21.2017.01.12.03.20.32
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 12 Jan 2017 03:20:33 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Jan 2017 10:19:47 +0100
-Message-Id: <1484212787-20341-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH v2] nano: upgrade to 2.7.4
+References: <1481809716-24451-1-git-send-email-samuli.piippo@qt.io>
+	<d4453d09-2112-0a1e-2812-0c63c932ca6a@gmail.com>
+	<20161220143047.GF3275@jama>
+	<2c948f51-9a0d-e74d-e5bc-1bf581530c4e@gmail.com>
+	<20161220150507.GH3275@jama>
+	<bc4be429-a64c-ba6d-163b-79c791fa7dfe@gmail.com>
+	<20170102184751.GC3954@jama>
+	<CABXoSoUXF7y7w76bH7pWZa6oPwXzOtcSKeyRhoy-dHWQqb+ikQ@mail.gmail.com>
+From: Samuli Piippo <samuli.piippo@gmail.com>
+Message-ID: <d4475f50-e24b-6326-6f4c-c7fd21155e6d@gmail.com>
+Date: Thu, 12 Jan 2017 13:20:32 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.5.1
+MIME-Version: 1.0
+In-Reply-To: <CABXoSoUXF7y7w76bH7pWZa6oPwXzOtcSKeyRhoy-dHWQqb+ikQ@mail.gmail.com>
+Subject: Re: [meta-qt5][PATCH v4] Upgrade to Qt 5.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,82 +66,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jan 2017 09:19:53 -0000
+X-List-Received-Date: Thu, 12 Jan 2017 11:20:35 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
----
- .../nano/nano-2.2.5/ncursesw.includedir.patch                | 12 ------------
- meta-oe/recipes-support/nano/nano.inc                        |  8 +++-----
- meta-oe/recipes-support/nano/nano_2.2.5.bb                   |  8 --------
- meta-oe/recipes-support/nano/nano_2.7.4.bb                   |  4 ++++
- 4 files changed, 7 insertions(+), 25 deletions(-)
- delete mode 100644 meta-oe/recipes-support/nano/nano-2.2.5/ncursesw.includedir.patch
- delete mode 100644 meta-oe/recipes-support/nano/nano_2.2.5.bb
- create mode 100644 meta-oe/recipes-support/nano/nano_2.7.4.bb
+The release date for Qt 5.8.0 is fast approaching (current target 17th 
+of January).
+Would you prefer a v5 patch of this one or a new patch on top of v4?
 
-diff --git a/meta-oe/recipes-support/nano/nano-2.2.5/ncursesw.includedir.patch b/meta-oe/recipes-support/nano/nano-2.2.5/ncursesw.includedir.patch
-deleted file mode 100644
-index 0f224be..0000000
---- a/meta-oe/recipes-support/nano/nano-2.2.5/ncursesw.includedir.patch
-+++ /dev/null
-@@ -1,12 +0,0 @@
--diff -uNr nano-2.2.5.orig//configure.ac nano-2.2.5/configure.ac
----- nano-2.2.5.orig//configure.ac	2010-08-06 03:00:51.000000000 +0200
--+++ nano-2.2.5/configure.ac	2010-08-10 14:11:52.000000000 +0200
--@@ -442,7 +442,7 @@
--     AC_CHECK_HEADERS(ncurses.h)
-- 
--     if test x$enable_utf8 != xno; then
---	AC_CHECK_LIB(ncursesw, get_wch, [CURSES_LIB="-lncursesw" CPPFLAGS="-I/usr/include/ncursesw $CPPFLAGS" CURSES_LIB_NAME=ncursesw CURSES_LIB_WIDE=yes])
--+	AC_CHECK_LIB(ncursesw, get_wch, [CURSES_LIB="-lncursesw" CURSES_LIB_NAME=ncursesw CURSES_LIB_WIDE=yes])
--     fi
-- 
--     if eval "test x$CURSES_LIB_NAME = x"; then
-diff --git a/meta-oe/recipes-support/nano/nano.inc b/meta-oe/recipes-support/nano/nano.inc
-index 0f31c6c..e17b16e 100644
---- a/meta-oe/recipes-support/nano/nano.inc
-+++ b/meta-oe/recipes-support/nano/nano.inc
-@@ -8,12 +8,10 @@ SECTION = "console/utils"
- DEPENDS = "ncurses"
- RDEPENDS_${PN} = "ncurses-terminfo"
- 
--INC_PR = "r3"
--
- PV_MAJOR = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).split('.')[1]}"
- 
--SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.gz"
-+SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
- 
--inherit autotools gettext
-+inherit autotools gettext pkgconfig
- 
--PACKAGECONFIG[tiny] = "--enable-tiny,--enable-all,"
-+PACKAGECONFIG[tiny] = "--enable-tiny,"
-diff --git a/meta-oe/recipes-support/nano/nano_2.2.5.bb b/meta-oe/recipes-support/nano/nano_2.2.5.bb
-deleted file mode 100644
-index e656f46..0000000
---- a/meta-oe/recipes-support/nano/nano_2.2.5.bb
-+++ /dev/null
-@@ -1,8 +0,0 @@
--include nano.inc
--
--PR = "${INC_PR}.0"
--
--SRC_URI += "file://ncursesw.includedir.patch"
--
--SRC_URI[md5sum] = "77a10a49589f975ce98350a4527a2ebf"
--SRC_URI[sha256sum] = "9015945d1badabbada203b37c4779d3dd1066234235c714deb439989c5cd7d9e"
-diff --git a/meta-oe/recipes-support/nano/nano_2.7.4.bb b/meta-oe/recipes-support/nano/nano_2.7.4.bb
-new file mode 100644
-index 0000000..eaf393e
---- /dev/null
-+++ b/meta-oe/recipes-support/nano/nano_2.7.4.bb
-@@ -0,0 +1,4 @@
-+include nano.inc
-+
-+SRC_URI[md5sum] = "c011c7f9e47cb1da27d4e7cc8b56ec6a"
-+SRC_URI[sha256sum] = "752170643039e2c95a433de357f0c70a8c4c4c561a90a7e7259a63e225b659b9"
--- 
-2.7.4
-
+-samuli
 
