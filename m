@@ -1,45 +1,53 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-pf0-f181.google.com (mail-pf0-f181.google.com
-	[209.85.192.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 407FB60069
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 3473C65CBB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jan 2017 00:40:56 +0000 (UTC)
-Received: by mail-pf0-f181.google.com with SMTP id 189so21207763pfu.3
+	Fri, 13 Jan 2017 04:35:56 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id f144so6449203pfa.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jan 2017 16:40:57 -0800 (PST)
+	Thu, 12 Jan 2017 20:35:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=fWrg0O/uShJRe+PdYXKZUL9kFj2/envxbPwqUSOU0+s=;
-	b=VkZZx/sML39m9O62ZzdX+7xXkYQyTaT3cicCAg5C9f632mlRn0Bew6Xn1GhuYB2P6z
-	ohrT0Gf51AR8RBXDXBsd1KY2T7BvP5GVK4JX1u1DDcXoS8MnsR8eVl9aySjKMTvlfUDG
-	NHmNslOjCIDTZP+XWjQGHala+WXlU+9kGN6Ez4cUMzcSLxVQjieFaci+Ja/q28xHK2lC
-	t+RdE1PoH1W4zjxzrZLCUncr/t8uJgx+HvXOdQxk715ulEpwXJUMsyFBBzAVOn7oupFU
-	fA/YITPS/1jsg/xxLb1PSVlSHfnmnn+sW8Z8fIPEaod5ausuQI9pa/7BpwbjTSIqCKeY
-	54Uw==
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-language:content-transfer-encoding;
+	bh=niVSPkz1miCUX8NINh6nZwZuRD2z+reFpaFHpiYH7dY=;
+	b=ukLyi78N4xJNAYKo1v3t7cFNwFCJCRfcZMVp6yIq1nfxmPGEVhiZ7JFOdXw1g8GT4V
+	ggqa+AByOMDcIQPtoraRu+4fJW3HmaVtNFDFjIy+J4uENyRFz5nZJkUqEiuyHrMbI4BS
+	5VdHR3jdciFSMLF1yHSub1/bsaRELXR6UCTPOye/7FtjRI1Nci4rVuWZgFeYFEvf7gAP
+	ILWCxc3HszRCx20khmsMd7Ayz/4UKNiLlycyde8XTvZDeDF69Y5+W/nJIySQQPgDdHZZ
+	r+Rzlxx7tMlu+jQuad9RbO6Hml9Gb3wXjAYx9wcYN7rvyQ6R9ZT2zOl1UnWiRBBGtadT
+	kIcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=fWrg0O/uShJRe+PdYXKZUL9kFj2/envxbPwqUSOU0+s=;
-	b=iF3xqp1FDD8yCZpUinT0PqSfTxT9CsqAGTjm40UXzQVUJMpNkMM3Dk/FAjt34tjYAB
-	7onFNQS4nWtpN5m073FiAu8FoL+fbVPaXNbpVTq6Z7IVd/nV3wIla9ZSt0Ru/yjok+NU
-	z6KAgpqDP1pTVuOb6hKh9rAc8xF+NFoAoTRbx7IGpZsl+3hTmhkx5tJdiKmp3jl5OQro
-	gP9KN+7qXj944TPIDEvt/QgLdQPpU1W7WVuThmSeTTBWOgvp+QDRKn2quEC3rhHyUC9x
-	dianxRvZGNad0IQACyIv79Z+spGvOkXRzVjBakgw/6xpXdVB9LmBkNF7wACihVd1z4Hj
-	HtJg==
-X-Gm-Message-State: AIkVDXJdnMEK2plLjXGcaPjYYe/hr2vPRMw8F6bkiGIj7INNgO7m3kXgifDmIVKdU1giBQ==
-X-Received: by 10.84.132.129 with SMTP id e1mr25482551ple.167.1484268057231;
-	Thu, 12 Jan 2017 16:40:57 -0800 (PST)
-Received: from e6520.guest-wifi.scl.liberty.com ([4.16.80.121])
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=niVSPkz1miCUX8NINh6nZwZuRD2z+reFpaFHpiYH7dY=;
+	b=IfqFIa7ZXv2n9cmllKcTY4GgBbQzOfTz5QPG2MQTa7pfH/XCMq5Nw3JaubF1WQ/Mqg
+	GBzwcY/K5cghIfYVPVW5l775F17eskJeKrPdsUgXfLnDe0utLz0fsmsCQLWyI6XqAUtc
+	2/59mYSYBfwBsv4+gZtqBZh4mkih4yZSux30Taj4/p4XESAtCEXrKDwjHdX4b0I7fT69
+	OU0ROS6IlOxEphEttf7jhKPTDYwo2LSPhdo8XZW7IYulrA1ZnFhpoJBr+KLfa0Vr6mlr
+	qE8D3O4cSiSfSajXge/MxeDTa2lLNJQ7fNhcDHO6T27jYdoDdF21E1j9Jn/8RaJ1f79y
+	SFFw==
+X-Gm-Message-State: AIkVDXION8BiNtMvNM9VuDP4fLORe51UNRxIzSmYoF3ZkcdCQck/feOxWk65EscLwAy3KQ==
+X-Received: by 10.84.129.131 with SMTP id b3mr26317671plb.54.1484282156811;
+	Thu, 12 Jan 2017 20:35:56 -0800 (PST)
+Received: from CACSVMO-14452.local ([2601:646:8882:b8c:fd99:2908:b743:c6c])
 	by smtp.gmail.com with ESMTPSA id
-	16sm24261658pfk.54.2017.01.12.16.40.55
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 12 Jan 2017 16:40:56 -0800 (PST)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Jan 2017 16:40:50 -0800
-Message-Id: <1484268050-23566-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] syslog-ng: drop obsolete pcre PACKAGECONFIG option
+	f65sm25089597pfk.5.2017.01.12.20.35.55
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 12 Jan 2017 20:35:56 -0800 (PST)
+To: openembedded-devel@lists.openembedded.org,
+	Andre McCurdy <armccurdy@gmail.com>
+References: <1484267158-15077-1-git-send-email-armccurdy@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Message-ID: <da346d5f-3311-468c-bf56-46dd55d65115@gmail.com>
+Date: Thu, 12 Jan 2017 20:35:55 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:50.0)
+	Gecko/20100101 Thunderbird/50.0
+MIME-Version: 1.0
+In-Reply-To: <1484267158-15077-1-git-send-email-armccurdy@gmail.com>
+Subject: Re: [meta-oe][PATCH] syslog-ng: drop attempts to disable LFS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,28 +60,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jan 2017 00:40:58 -0000
+X-List-Received-Date: Fri, 13 Jan 2017 04:36:00 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-pcre is a hard dependency from syslog-ng 3.6 onwards.
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 1 -
- 1 file changed, 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-index 4a66272..21d1748 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-@@ -48,7 +48,6 @@ PACKAGECONFIG[openssl] = "--enable-ssl,--disable-ssl,openssl,"
- PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,,"
- PACKAGECONFIG[systemd] = "--enable-systemd --with-systemdsystemunitdir=${systemd_unitdir}/system/,--disable-systemd --without-systemdsystemunitdir,systemd,"
- PACKAGECONFIG[linux-caps] = "--enable-linux-caps,--disable-linux-caps,libcap,"
--PACKAGECONFIG[pcre] = "--enable-pcre,--disable-pcre,libpcre,"
- PACKAGECONFIG[dbi] = "--enable-sql,--disable-sql,libdbi,"
- PACKAGECONFIG[libnet] = "--enable-libnet --with-libnet=${STAGING_BINDIR_CROSS},--disable-libnet,libnet,"
- PACKAGECONFIG[smtp] = "--enable-smtp --with-libesmtp=${STAGING_LIBDIR},--disable-smtp,libesmtp,"
--- 
-1.9.1
+On 1/12/17 4:25 PM, Andre McCurdy wrote:
+> Forcefully disabling Large File Support in packages which enable it
+> by default is probably not the right thing to do anymore. Since the
+> syslog-ng configure.in file has been renamed to configure.ac, the
+> existing sed command would fail anyway.
 
+Yes, moreover I think largefile support is more or less core feature now
+a days.
+
+> 
+> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+> ---
+>  meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 4 ----
+>  1 file changed, 4 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> index 0acdd73..4a66272 100644
+> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> @@ -56,10 +56,6 @@ PACKAGECONFIG[json] = "--enable-json,--disable-json,json-c,"
+>  PACKAGECONFIG[tcp-wrapper] = "--enable-tcp-wrapper,--disable-tcp-wrapper,tcp-wrappers,"
+>  PACKAGECONFIG[geoip] = "--enable-geoip,--disable-geoip,geoip,"
+>  
+> -do_configure_prepend() {
+> -    eval "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
+> -}
+> -
+>  do_install_prepend() {
+>      sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
+>      sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
+> 
 
