@@ -1,52 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 54C916B6EA
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id CB3E862134
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jan 2017 19:08:06 +0000 (UTC)
-Received: by mail-wm0-f42.google.com with SMTP id c85so33196100wmi.1
+	Fri, 13 Jan 2017 00:26:04 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id 127so5540645pfg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jan 2017 11:08:07 -0800 (PST)
+	Thu, 12 Jan 2017 16:26:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=m5IxKBkSdB8TaXcR3BD9uqpvjVnKHV7pr/2FUgfBJas=;
-	b=Ik46Y/68ehKBGoQmaCpA3q7Yh4PdnsUfz6/NVNxx/zg1MAWLzkZhVgFUHiSDQNaqzH
-	K6+uyk5h/3w8+y2xd1BT4LBV3fkh5u7p16uT6jdcoihBrqvIveoHW7KmEZwSBfA9dk8f
-	HibczTyGd6XXGdKhGnILSyPNOxosjDEUiqMiAx9ENJmVDe3Jpqf4ZXidTjqsrk04E3o3
-	LK4xU5TcnyHwFBfUAaXAUXIyK25qMq6Ouh9yD3WqNpZWzZAimQEPIX2BfLWeoaPqKiNy
-	9ygdGSs5ARmb3MDFRD+t0d8V1c0Sn6rid4fsfuzbpGl18BsjD5uhJ1sNFCKuSUdVYKoP
-	NWqA==
+	h=from:to:cc:subject:date:message-id;
+	bh=/Rg/XByGhwB1KMay7PDa6XrflzrmdmIKoGzBAsFKS5A=;
+	b=va28HQeMd9w9CO5DTGx1ZcXup4QonXnf76Nj/9313Rbhhc4vyYjC4pl5hj1/Ru937V
+	O0qnrkhFn3Yv4A9zRL8mEiWUXnalIJ/7WUuPfWXwV4ZY78lELEbdg1LznH3uipzcnKs5
+	ldqQpcebnu3PLtX70kIF7MgsFjilbq5UE/j6PBJa88dyasLfOsJ6mZ+QruR36wq8X/6J
+	8mI+1ISJB2sHDGKk+L2L98dPl2fp2U7XlERupyibBzn6vnXcRdZSthUEu/3vcn2Mqvnl
+	fvqFhkpV+wcY40ExDrgdIXTMfuc/UzT8BJLvXnuO4gLWjLlulqXMWAm+B+9f6BTnZ1xp
+	eVVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=m5IxKBkSdB8TaXcR3BD9uqpvjVnKHV7pr/2FUgfBJas=;
-	b=KmL85AqGF4Qd+TXAnJ3YIbMcOeMtiWhYK5flStiDLIovbHCC8oF34/GYMIIxKeLkIV
-	2C7cqdt0pihk7ewwe5txKkoc+g9URVpd0xs435UY5/DWDmEoxmw01iBssSDLXhjhQMtw
-	zfxgZw986zXQ4YgQNUK8DOuyYfxFezBOrk6M2UG4agLSfK3HCA7Ju5IMDfzwxrcXVRqC
-	VC5AvyJjGMZJVvIkKnCOqxVrbUDZjjLmQeB79GjxpA6DbYF9pgqy9a2Z0ToquRhoshV8
-	qn7viU+u4hKcrQV7zHo1CC/beuEGzUwpdaAtcHzdFoCkmaZZBt2T1FyFcTrZviDHUwfY
-	fUtA==
-X-Gm-Message-State: AIkVDXLPOpg7pWyLbw7JBZRj/xxsFD46uy17NJhEPng4QlBjByXMjWaKnTn3tEKN9aDwSZ9tGNSf+wYwFRv6oA==
-X-Received: by 10.28.184.133 with SMTP id i127mr157562wmf.49.1484248086727;
-	Thu, 12 Jan 2017 11:08:06 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.80.148.174 with HTTP; Thu, 12 Jan 2017 11:08:06 -0800 (PST)
-In-Reply-To: <d4475f50-e24b-6326-6f4c-c7fd21155e6d@gmail.com>
-References: <1481809716-24451-1-git-send-email-samuli.piippo@qt.io>
-	<d4453d09-2112-0a1e-2812-0c63c932ca6a@gmail.com>
-	<20161220143047.GF3275@jama>
-	<2c948f51-9a0d-e74d-e5bc-1bf581530c4e@gmail.com>
-	<20161220150507.GH3275@jama>
-	<bc4be429-a64c-ba6d-163b-79c791fa7dfe@gmail.com>
-	<20170102184751.GC3954@jama>
-	<CABXoSoUXF7y7w76bH7pWZa6oPwXzOtcSKeyRhoy-dHWQqb+ikQ@mail.gmail.com>
-	<d4475f50-e24b-6326-6f4c-c7fd21155e6d@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 12 Jan 2017 20:08:06 +0100
-Message-ID: <CA+chaQfEh=VfEvF_1HAZJinRC+ddsvYHC+X=jf46J2_STd4VKg@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt5][PATCH v4] Upgrade to Qt 5.8
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=/Rg/XByGhwB1KMay7PDa6XrflzrmdmIKoGzBAsFKS5A=;
+	b=ZG7Kvy0UkEJFdtrJ84qztSSwg9AuD2Mn3/t9izO0bj4UPsgQASPFxpGJUV/2qrJXNu
+	m1KHAoijDL9tc+2r/vpxr9OafeVoENrTJQGE+A9EzB/Tb55E7DrewNSoSJVYCRuG6L6F
+	EM/CdvgTiCWa3Jvesf574at/PH2HkIHK6G/lSNXFhPQkUHlwg2PzHJbSPAU5ApKRxoNo
+	J7wRTJ914qd0ulDDxIizWSy2uWTVs7h78Uti4cNM9UIVmUVmIrbAlpQ05A6geiOR9SZS
+	04IS74I7hypMZCuPHp5obxld4Qbn5LaST81AgMXJZWU0n7K1T3JbAXesYqzoECoQcmW1
+	kuaA==
+X-Gm-Message-State: AIkVDXJ3WjtQViuCNBEFZL55a3pE3mSSpwaVx47pUiJDS5t7fm8z7hJKuzmtIc3nDNkYVw==
+X-Received: by 10.84.133.1 with SMTP id 1mr25433472plf.151.1484267164793;
+	Thu, 12 Jan 2017 16:26:04 -0800 (PST)
+Received: from e6520.guest-wifi.scl.liberty.com ([4.16.80.121])
+	by smtp.gmail.com with ESMTPSA id
+	t129sm24343805pgc.32.2017.01.12.16.26.03
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 12 Jan 2017 16:26:03 -0800 (PST)
+From: Andre McCurdy <armccurdy@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 12 Jan 2017 16:25:58 -0800
+Message-Id: <1484267158-15077-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] syslog-ng: drop attempts to disable LFS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,26 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Jan 2017 19:08:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 13 Jan 2017 00:26:05 -0000
 
-v5 is fine, will you also include the fix for qtwebengine on qemux86?
+Forcefully disabling Large File Support in packages which enable it
+by default is probably not the right thing to do anymore. Since the
+syslog-ng configure.in file has been renamed to configure.ac, the
+existing sed command would fail anyway.
 
-Thanks
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 4 ----
+ 1 file changed, 4 deletions(-)
 
-On Thu, Jan 12, 2017 at 12:20 PM, Samuli Piippo <samuli.piippo@gmail.com>
-wrote:
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+index 0acdd73..4a66272 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+@@ -56,10 +56,6 @@ PACKAGECONFIG[json] = "--enable-json,--disable-json,json-c,"
+ PACKAGECONFIG[tcp-wrapper] = "--enable-tcp-wrapper,--disable-tcp-wrapper,tcp-wrappers,"
+ PACKAGECONFIG[geoip] = "--enable-geoip,--disable-geoip,geoip,"
+ 
+-do_configure_prepend() {
+-    eval "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
+-}
+-
+ do_install_prepend() {
+     sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
+     sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
+-- 
+1.9.1
 
-> The release date for Qt 5.8.0 is fast approaching (current target 17th of
-> January).
-> Would you prefer a v5 patch of this one or a new patch on top of v4?
->
-> -samuli
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
