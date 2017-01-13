@@ -1,53 +1,53 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 3473C65CBB
+Return-Path: <samuli.piippo@gmail.com>
+Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
+	[209.85.215.67])
+	by mail.openembedded.org (Postfix) with ESMTP id A6FE460765
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Jan 2017 04:35:56 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id f144so6449203pfa.2
+	Fri, 13 Jan 2017 07:33:47 +0000 (UTC)
+Received: by mail-lf0-f67.google.com with SMTP id v186so4430426lfa.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Jan 2017 20:35:57 -0800 (PST)
+	Thu, 12 Jan 2017 23:33:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-language:content-transfer-encoding;
-	bh=niVSPkz1miCUX8NINh6nZwZuRD2z+reFpaFHpiYH7dY=;
-	b=ukLyi78N4xJNAYKo1v3t7cFNwFCJCRfcZMVp6yIq1nfxmPGEVhiZ7JFOdXw1g8GT4V
-	ggqa+AByOMDcIQPtoraRu+4fJW3HmaVtNFDFjIy+J4uENyRFz5nZJkUqEiuyHrMbI4BS
-	5VdHR3jdciFSMLF1yHSub1/bsaRELXR6UCTPOye/7FtjRI1Nci4rVuWZgFeYFEvf7gAP
-	ILWCxc3HszRCx20khmsMd7Ayz/4UKNiLlycyde8XTvZDeDF69Y5+W/nJIySQQPgDdHZZ
-	r+Rzlxx7tMlu+jQuad9RbO6Hml9Gb3wXjAYx9wcYN7rvyQ6R9ZT2zOl1UnWiRBBGtadT
-	kIcQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=fZMHgpSlUBGEytv2bqj8vYR0H+C8qkzj4BZkftGSEqI=;
+	b=swcw4o/f2XKdplxScJnf2coSSRblGVKe6t/02QNVSRXZmrNfqpNs5PJxu3N2syjCdB
+	goLQEiTpx9pZU5l6tcMkUS0sSIbq+3Al6CbMaESwiIErb2166xDqZmW0e0bGeoidLyvZ
+	A1qfRV3NlxgRSEDpLEiI+yRRj8TVeZ2ngSxKWmTXQp0Q6WTj0JAVpT+FatTyntWVLvLB
+	n2I7dfKJYl+Sjm6GCgEm7OAWj93pKdciOPQMfcQeUhHNoz7AZA3tF10566Cce2xLJWuc
+	yfKigpPWX4J0culCoqRYU0widJ4Ty+Xd7Vvs1cRJqI1Ct5/GtxNocIgTXSDyuo0b8E5o
+	7DNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=niVSPkz1miCUX8NINh6nZwZuRD2z+reFpaFHpiYH7dY=;
-	b=IfqFIa7ZXv2n9cmllKcTY4GgBbQzOfTz5QPG2MQTa7pfH/XCMq5Nw3JaubF1WQ/Mqg
-	GBzwcY/K5cghIfYVPVW5l775F17eskJeKrPdsUgXfLnDe0utLz0fsmsCQLWyI6XqAUtc
-	2/59mYSYBfwBsv4+gZtqBZh4mkih4yZSux30Taj4/p4XESAtCEXrKDwjHdX4b0I7fT69
-	OU0ROS6IlOxEphEttf7jhKPTDYwo2LSPhdo8XZW7IYulrA1ZnFhpoJBr+KLfa0Vr6mlr
-	qE8D3O4cSiSfSajXge/MxeDTa2lLNJQ7fNhcDHO6T27jYdoDdF21E1j9Jn/8RaJ1f79y
-	SFFw==
-X-Gm-Message-State: AIkVDXION8BiNtMvNM9VuDP4fLORe51UNRxIzSmYoF3ZkcdCQck/feOxWk65EscLwAy3KQ==
-X-Received: by 10.84.129.131 with SMTP id b3mr26317671plb.54.1484282156811;
-	Thu, 12 Jan 2017 20:35:56 -0800 (PST)
-Received: from CACSVMO-14452.local ([2601:646:8882:b8c:fd99:2908:b743:c6c])
-	by smtp.gmail.com with ESMTPSA id
-	f65sm25089597pfk.5.2017.01.12.20.35.55
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 12 Jan 2017 20:35:56 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org,
-	Andre McCurdy <armccurdy@gmail.com>
-References: <1484267158-15077-1-git-send-email-armccurdy@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Message-ID: <da346d5f-3311-468c-bf56-46dd55d65115@gmail.com>
-Date: Thu, 12 Jan 2017 20:35:55 -0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:50.0)
-	Gecko/20100101 Thunderbird/50.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=fZMHgpSlUBGEytv2bqj8vYR0H+C8qkzj4BZkftGSEqI=;
+	b=r8kG+F2VI9h90xeMZJtmYh59e9c3u3oL+VUk5MRrknnJqx5FbHSHvr2pERaKYSPDwQ
+	2lHKkavb/qxY+pDWO7j/87B1RRbc4URKtCqmELRJki3ssyoObrKA+yTU4QTMCvP+8Y0s
+	cCCQIZSiwd4X6w2/j81oN5GqS3czUQ1WNWlB4NMn3OLtvDOgKm2xnM3g/ZRx9uu8S3YE
+	Vg7fchube/xstZmPJjieLnggf3FBKxBpIuv2FelA4jTRp4GamVlc3rDNQcLPvjDEmWHh
+	9w/9ARaI0SpseOa9B46XxqzElfcn4x1aEe71moN7v+xRXYBry6JqhKbppvvekLJ/Ss1D
+	YxqQ==
+X-Gm-Message-State: AIkVDXKtamddmIUE/YcQq1QKCFsrLCAUE42mnjsllZhktlH71C1PYEWJy462GQbSBTd7NDkNW9odrWgXRXVCxQ==
+X-Received: by 10.46.74.26 with SMTP id x26mr6352476lja.51.1484292827485; Thu,
+	12 Jan 2017 23:33:47 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1484267158-15077-1-git-send-email-armccurdy@gmail.com>
-Subject: Re: [meta-oe][PATCH] syslog-ng: drop attempts to disable LFS
+Received: by 10.25.215.102 with HTTP; Thu, 12 Jan 2017 23:33:46 -0800 (PST)
+In-Reply-To: <CA+chaQfEh=VfEvF_1HAZJinRC+ddsvYHC+X=jf46J2_STd4VKg@mail.gmail.com>
+References: <1481809716-24451-1-git-send-email-samuli.piippo@qt.io>
+	<d4453d09-2112-0a1e-2812-0c63c932ca6a@gmail.com>
+	<20161220143047.GF3275@jama>
+	<2c948f51-9a0d-e74d-e5bc-1bf581530c4e@gmail.com>
+	<20161220150507.GH3275@jama>
+	<bc4be429-a64c-ba6d-163b-79c791fa7dfe@gmail.com>
+	<20170102184751.GC3954@jama>
+	<CABXoSoUXF7y7w76bH7pWZa6oPwXzOtcSKeyRhoy-dHWQqb+ikQ@mail.gmail.com>
+	<d4475f50-e24b-6326-6f4c-c7fd21155e6d@gmail.com>
+	<CA+chaQfEh=VfEvF_1HAZJinRC+ddsvYHC+X=jf46J2_STd4VKg@mail.gmail.com>
+From: Samuli Piippo <samuli.piippo@gmail.com>
+Date: Fri, 13 Jan 2017 09:33:46 +0200
+Message-ID: <CABXoSoWThbkW2-kE=x1JHZD3g5zhB2thPMWNjv8KX0X27_yRnA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt5][PATCH v4] Upgrade to Qt 5.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,42 +60,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Jan 2017 04:36:00 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 13 Jan 2017 07:33:49 -0000
+Content-Type: text/plain; charset=UTF-8
 
+The webengine bug has been reported, but it's still unresolved:
+https://bugreports.qt.io/browse/QTBUG-57705
 
-
-On 1/12/17 4:25 PM, Andre McCurdy wrote:
-> Forcefully disabling Large File Support in packages which enable it
-> by default is probably not the right thing to do anymore. Since the
-> syslog-ng configure.in file has been renamed to configure.ac, the
-> existing sed command would fail anyway.
-
-Yes, moreover I think largefile support is more or less core feature now
-a days.
-
-> 
-> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
-> ---
->  meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 4 ----
->  1 file changed, 4 deletions(-)
-> 
-> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> index 0acdd73..4a66272 100644
-> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> @@ -56,10 +56,6 @@ PACKAGECONFIG[json] = "--enable-json,--disable-json,json-c,"
->  PACKAGECONFIG[tcp-wrapper] = "--enable-tcp-wrapper,--disable-tcp-wrapper,tcp-wrappers,"
->  PACKAGECONFIG[geoip] = "--enable-geoip,--disable-geoip,geoip,"
->  
-> -do_configure_prepend() {
-> -    eval "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', '', 'sed -i -e "s/-D_LARGEFILE_SOURCE//" -e "s/-D_FILE_OFFSET_BITS=64//" ${S}/configure.in', d)}"
-> -}
-> -
->  do_install_prepend() {
->      sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
->      sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/systemd/*.service
-> 
+On Thu, Jan 12, 2017 at 9:08 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> v5 is fine, will you also include the fix for qtwebengine on qemux86?
+>
+> Thanks
+>
+> On Thu, Jan 12, 2017 at 12:20 PM, Samuli Piippo <samuli.piippo@gmail.com>
+> wrote:
+>
+>> The release date for Qt 5.8.0 is fast approaching (current target 17th of
+>> January).
+>> Would you prefer a v5 patch of this one or a new patch on top of v4?
+>>
+>> -samuli
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
