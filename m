@@ -1,30 +1,48 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E35E6022F
+Return-Path: <jussi.kukkonen@intel.com>
+Received: from mail-yw0-f171.google.com (mail-yw0-f171.google.com
+	[209.85.161.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 1615B60602
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jan 2017 05:52:40 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="14792824"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 16 Jan 2017 13:52:38 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id D138A47B0CA7
+	Mon, 16 Jan 2017 12:52:49 +0000 (UTC)
+Received: by mail-yw0-f171.google.com with SMTP id l75so67679119ywb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jan 2017 13:52:34 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.81) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Mon, 16 Jan 2017 13:52:39 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 16 Jan 2017 13:52:24 +0800
-Message-ID: <1484545944-24805-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
+	Mon, 16 Jan 2017 04:52:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=H7gAbdp6frbC9MlBgCb8PFCG+rClzfgcdGvFO+SEOww=;
+	b=y9JWkQphKV/nAfQEsyOWAnhWJab8GGTO4FzhvckbMIK5Et1ceyzajiLCoxAeYPeFzp
+	9+SwyXPGBDf+9+cxsqeONIprxnFnu/btXbKBmTq2qbXKWwJ9YoxChTNzkjpC2ERxQlq4
+	5X6dKXVicbfsZweXaE4ino8l8qlzU56TLL9jpXPtKyvVntR4d291dYlkPQwuZ+L2RKYt
+	b5koA3bRCybqRI04ktwBSfF+D9QkJ37NfrlMGJzRwmVexXxJgcwBPAV/DB1PyjGiUJqv
+	Dn1iibMsY/YZLZ2a2R8iMnM8jVFqN0aRnSreAT7bswqazNs8k9lgtiAoxJJnRIqAnmW/
+	Z1Zw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=H7gAbdp6frbC9MlBgCb8PFCG+rClzfgcdGvFO+SEOww=;
+	b=ptVNlEABgFRDUCass4bzfreVSfqCPPjOsOoIP7jLSFkKxPfmlZiQ0uL7RNh4PrQMIm
+	dZJ06Zf8T+hSRX1AOHOBz11OOdCdy7v/LzPPK5xp5qKT7iprrCYMWRbVu5TueYuiGwoW
+	OTiW+ixlK+GigRd/qDuUMrzQylgsk6j2nEfhQpQQ5hAcvB9nVenG+axbvSXh4kCqHWkA
+	9YzXbxnT8PVYPZUr9Y89t49dfXVnzl1uZISbK+sZ0NCicPopRIVabRRdVXxyBJIet5+3
+	2s8OVARZOO0arwSa8hjzMs4kZ1iGGYl+ZsEQAcokYuYTuIi2wbnzy8fnmP5mjyPkNFBf
+	lZrw==
+X-Gm-Message-State: AIkVDXJS2u8WZsY+6s1GIFHo3b+apbrr12kKsgzj2z/d6V9jzMuJPpyJO92/1LuKP3lgdcZnhIovSI6QSgH5HjNW
+X-Received: by 10.129.110.133 with SMTP id j127mr25475373ywc.214.1484571169866;
+	Mon, 16 Jan 2017 04:52:49 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.81]
-X-yoursite-MailScanner-ID: D138A47B0CA7.A8054
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-jsonpatch: 1.14 -> 1.15
+Received: by 10.13.234.11 with HTTP; Mon, 16 Jan 2017 04:52:19 -0800 (PST)
+In-Reply-To: <CAMjhiJg64VtLByh0sv2=d+xu7LJ6LHBccP-0A8Y7Q54XGAa91Q@mail.gmail.com>
+References: <CAMjhiJiu5isiTgwjrQtigKrvY7NzgdB5bsrn8bbxXu8q7W=bKw@mail.gmail.com>
+	<7c171e1a-7151-6e6a-cfb9-7a06b9dec0df@gmail.com>
+	<CAMjhiJg64VtLByh0sv2=d+xu7LJ6LHBccP-0A8Y7Q54XGAa91Q@mail.gmail.com>
+From: Jussi Kukkonen <jussi.kukkonen@intel.com>
+Date: Mon, 16 Jan 2017 14:52:19 +0200
+Message-ID: <CAHiDW_F9_OwNakT-Jt=oAP6Pbc0XbZebqRVsEonSEck-Zd9orw@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: /usr merge, stateless systems and atomic updates w/ OpenEmbedded?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,38 +55,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Jan 2017 05:52:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 16 Jan 2017 12:52:50 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Upgrade python-jsonpatch from 1.14 to 1.15.
+On 15 January 2017 at 01:41, Leon Woestenberg <leon@sidebranch.com> wrote:
 
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
----
- .../python/{python-jsonpatch_1.14.bb => python-jsonpatch_1.15.bb}     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-jsonpatch_1.14.bb => python-jsonpatch_1.15.bb} (71%)
+> Hello Khem,
+>
+> I know outside of OE it is more and more common place, such as Project
+> Atomic.
+>
+> Re-reading some of the material I have found, I found that Chen Qi of Wind
+> River had something going.
+>
+> http://lists.openembedded.org/pipermail/openembedded-core/
+> 2014-December/099616.html
+>
+> >* > Several days ago, I tried to do /usr merge in OE (like what Fedora and
+> *>* > Arch does). It turned out that we need to patch several packages to
+> make
+> *>* > things work.
+> *>* >
+> *>* > (I haven't sent out the patches because it's just some initial
+> *>* > investigation and I'm not sure if people want this feature or not.)
+> *>* >
+> *>* > If you want this feature in OE, please open a bug/enhancement in
+> *>* > bugzilla https://bugzilla.yoctoproject.org/
+> <https://bugzilla.yoctoproject.org/> to see if the community
+> *>* > wants it or not.
+> *>* >
+> *>* > Regards,
+> *>* > Chen Qi*
+>
+> and in Yocto an enhancement is going for usrmerge:
+> https://bugzilla.yoctoproject.org/show_bug.cgi?id=7040
 
-diff --git a/meta-python/recipes-devtools/python/python-jsonpatch_1.14.bb b/meta-python/recipes-devtools/python/python-jsonpatch_1.15.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python-jsonpatch_1.14.bb
-rename to meta-python/recipes-devtools/python/python-jsonpatch_1.15.bb
-index c845eda..f214bf2 100644
---- a/meta-python/recipes-devtools/python/python-jsonpatch_1.14.bb
-+++ b/meta-python/recipes-devtools/python/python-jsonpatch_1.15.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
- 
- inherit pypi setuptools
- 
--SRC_URI[md5sum] = "cf4fbad8188f1389363433dbf867109f"
--SRC_URI[sha256sum] = "776d828d6f7b4581862529cf413439a652d74b9e3a0261fa08c36fd761a78b4a"
-+SRC_URI[md5sum] = "818d36e05d68ba90ca2b26597bd82975"
-+SRC_URI[sha256sum] = "ae23cd08b2f7246f8f2475363501e740c4ef93f08f2a3b7b9bcfac0cc37fceb1"
- 
- RDEPENDS_${PN} += "${PYTHON_PN}-json ${PYTHON_PN}-jsonpointer ${PYTHON_PN}-netclient ${PYTHON_PN}-re ${PYTHON_PN}-stringold"
- 
--- 
-2.7.4
 
+Hi Leon,
 
+Me and Amarnath Valluri have been testing "merged /usr" this month: I
+expect there will be a oe-core patchset for review later this week -- I'll
+CC you when that happens.
 
+The possible approaches seem to be:
+ 1) Modify $base_bindir (et al) so that all recipes actually install under
+/usr/, fix recipes that misbehave
+ 2) Don't modify $base_bindir (et al), just make sure the symlinks (like
+/bin -> /usr/bin) are there when packages are installed on the rootfs
+
+Both approaches have some package management related issues but can be made
+to work (we're leaning towards #1 at the moment).
+
+I'm not promising anything about Stateless yet.
+
+Jussi
 
