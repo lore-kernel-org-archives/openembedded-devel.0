@@ -1,24 +1,30 @@
-Return-Path: <Zhe.He@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4617071A17
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id D8A1471C0C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jan 2017 03:27:46 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v0H3RkXg003945
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Tue, 17 Jan 2017 03:32:56 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="14825282"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 17 Jan 2017 11:32:55 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id A5EAC47B0CB1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Jan 2017 19:27:47 -0800
-Received: from PEK-ZHE-D1.wrs.com (128.224.162.137) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 16 Jan 2017 19:27:46 -0800
-From: <zhe.he@windriver.com>
+	Tue, 17 Jan 2017 11:32:54 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.81) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.319.2; Tue, 17 Jan 2017 11:32:54 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 17 Jan 2017 11:27:41 +0800
-Message-ID: <1484623661-7017-1-git-send-email-zhe.he@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Tue, 17 Jan 2017 11:33:04 +0800
+Message-ID: <1484623984-26415-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] iscsitarget: Fix call trace of ahash API calling
+X-Originating-IP: [10.167.226.81]
+X-yoursite-MailScanner-ID: A5EAC47B0CB1.A9CD0
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-pyparsing: 2.1.4 -> 2.1.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,122 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Jan 2017 03:27:47 -0000
+X-List-Received-Date: Tue, 17 Jan 2017 03:32:57 -0000
 Content-Type: text/plain
 
-From: He Zhe <zhe.he@windriver.com>
+Upgrade python-pyparsing from 2.1.4 to 2.1.10.
 
-The orignal patch does not alloc struct ahash_request before using it.
-This will cause the kernel call trace below when calling gen_scsiid on
-kernel 4.8 or later version.
-
-This patch normalizes the calling of ahash API according to the example
-in kernel doc Documentation/crypto/api-intro.txt.
-
-BUG: unable to handle kernel NULL pointer dereference at 0000000000000020
-IP: [<ffffffffa0008d45>] volume_add+0x625/0x7f0 [iscsi_trgt]
-PGD dd77067 PUD dd7c067 PMD 0 
-Oops: 0000 [#1] PREEMPT SMP
-Modules linked in: iscsi_trgt(O)
-CPU: 0 PID: 350 Comm: ietd Tainted: G           O    4.8.12-yocto-standard #1
-Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.9.3-0-ge2fc41e-prebuilt.qemu-project.org 04/01/2014
-task: ffff88000dfe2c00 task.stack: ffff88000de88000
-RIP: 0010:[<ffffffffa0008d45>]  [<ffffffffa0008d45>] volume_add+0x625/0x7f0 [iscsi_trgt]
-RSP: 0018:ffff88000de8bd90  EFLAGS: 00000206
-RAX: 000000000000ddfa RBX: ffff88000ddd1d78 RCX: ffffea0000000000
-RDX: 0000000000000600 RSI: 0000000000000000 RDI: ffff88000ddd1c14
-RBP: ffff88000de8be38 R08: ffff88000de44180 R09: ffff88000de8bdd0
-R10: 000000000000002c R11: 0000000000000000 R12: ffff88000ddfa600
-R13: 0000000000000000 R14: 0000000000000000 R15: ffff88000de92200
-FS:  00007f767548b700(0000) GS:ffff88000fc00000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 0000000000000020 CR3: 000000000dd2d000 CR4: 00000000000006f0
-Stack:
- ffff88000de8bdd0 ffff88000dc1b3d0 ffff88000ddfa650 ffff88000ddfa660
- ffff88000df8f000 ffff88000ddd1c00 ffff88000de44180 0000000000000000
- ffffea0000377440 0000000f00000c14 0000000000000000 0000000000000000
-Call Trace:
- [<ffffffffa0006547>] ioctl+0x217/0x390 [iscsi_trgt]
- [<ffffffff81192574>] do_vfs_ioctl+0x94/0x5c0
- [<ffffffff8117ff73>] ? vfs_read+0xf3/0x120
- [<ffffffff81192b19>] SyS_ioctl+0x79/0x90
- [<ffffffff8191a45b>] entry_SYSCALL_64_fastpath+0x13/0x8f
-Code: 4c 01 e0 0f 82 a2 01 00 00 48 b9 00 00 00 80 ff 77 00 00 48 01
-c8 45 31 f6 48 b9 00 00 00 00 00 ea ff ff 89 54 24 68 48 c1 e8 0c <49>
-8b 56 20 4c 89 44 24 20 4c 89 f7 48 c1 e0 06 c7 44 24 6c 04 
-RIP  [<ffffffffa0008d45>] volume_add+0x625/0x7f0 [iscsi_trgt]
- RSP <ffff88000de8bd90>
-CR2: 0000000000000020
-end trace cd2016297df21635 ]
-ietd_response_recv 200 0 -5
-Input/output error.
-
-Signed-off-by: He Zhe <zhe.he@windriver.com>
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 ---
- ...ith_updated_interfaces_of_linux_v4.8_and_above.patch | 17 ++++++++++++-----
- 1 file changed, 12 insertions(+), 5 deletions(-)
+ .../python/{python-pyparsing_2.1.4.bb => python-pyparsing_2.1.10.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyparsing_2.1.4.bb => python-pyparsing_2.1.10.bb} (58%)
 
-diff --git a/meta-networking/recipes-extended/iscsitarget/files/build_with_updated_interfaces_of_linux_v4.8_and_above.patch b/meta-networking/recipes-extended/iscsitarget/files/build_with_updated_interfaces_of_linux_v4.8_and_above.patch
-index e55c407..c83b080 100644
---- a/meta-networking/recipes-extended/iscsitarget/files/build_with_updated_interfaces_of_linux_v4.8_and_above.patch
-+++ b/meta-networking/recipes-extended/iscsitarget/files/build_with_updated_interfaces_of_linux_v4.8_and_above.patch
-@@ -89,6 +89,9 @@ Upstream-Status: Pending
+diff --git a/meta-python/recipes-devtools/python/python-pyparsing_2.1.4.bb b/meta-python/recipes-devtools/python/python-pyparsing_2.1.10.bb
+similarity index 58%
+rename from meta-python/recipes-devtools/python/python-pyparsing_2.1.4.bb
+rename to meta-python/recipes-devtools/python/python-pyparsing_2.1.10.bb
+index 9aa5473..06f9845 100644
+--- a/meta-python/recipes-devtools/python/python-pyparsing_2.1.4.bb
++++ b/meta-python/recipes-devtools/python/python-pyparsing_2.1.10.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://pyparsing.wikispaces.com/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fb46329938e6bc829b256e37d5c1e31a"
  
- Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+-SRC_URI[md5sum] = "322059c57f0c9f11da1c6c06a2ba2197"
+-SRC_URI[sha256sum] = "a9234dea79b50d49b92a994132cd1c84e873f3936db94977a66f0a4159b1797c"
++SRC_URI[md5sum] = "065908b92904e0d3634eb156f44cc80e"
++SRC_URI[sha256sum] = "811c3e7b0031021137fc83e051795025fcb98674d07eb8fe922ba4de53d39188"
  
-+Correct and normalize the calling of ahash APIs
-+Signed-off-by: Zhe He <zhe.he@windriver.com>
-+
- diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c iscsitarget-1.4.20.3+svn502/kernel/block-io.c
- --- iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c	2016-09-25 19:45:01.814641016 +0530
- +++ iscsitarget-1.4.20.3+svn502/kernel/block-io.c	2016-09-25 19:47:59.666474094 +0530
-@@ -477,7 +480,7 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c iscsitarget-1.4.20.
- diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/volume.c iscsitarget-1.4.20.3+svn502/kernel/volume.c
- --- iscsitarget-1.4.20.3+svn502_org/kernel/volume.c	2016-09-25 19:45:01.734641099 +0530
- +++ iscsitarget-1.4.20.3+svn502/kernel/volume.c	2016-09-25 19:47:59.666474094 +0530
--@@ -84,12 +84,25 @@ static int set_scsisn(struct iet_volume
-+@@ -84,12 +84,26 @@ static int set_scsisn(struct iet_volume
-  /* Generate a MD5 hash of the target IQN and LUN number */
-  static void gen_scsiid(struct iet_volume *volume)
-  {
-@@ -490,28 +493,32 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/volume.c iscsitarget-1.4.20.3
-  
- +#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
- +	tfm = crypto_alloc_ahash("md5", 0, CRYPTO_ALG_ASYNC);
-++	hash = ahash_request_alloc(tfm, GFP_ATOMIC);
- +#else
-  	hash.tfm = crypto_alloc_hash("md5", 0, CRYPTO_ALG_ASYNC);
-  	hash.flags = 0;
- +#endif
-  
- +#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
--+	if (!IS_ERR(tfm)) {
-++	if (tfm && !IS_ERR(tfm)) {
- +#else
-  	if (!IS_ERR(hash.tfm)) {
- +#endif
-  		struct scatterlist sg[2];
-  		unsigned int nbytes = 0;
-  
--@@ -102,11 +115,19 @@ static void gen_scsiid(struct iet_volume
-+@@ -102,11 +115,22 @@ static void gen_scsiid(struct iet_volume
-  		sg_set_buf(&sg[1], &volume->lun, sizeof(volume->lun));
-  		nbytes += sizeof(volume->lun);
-  
- +#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
--+		crypto_ahash_init(hash);
-++		ahash_request_set_callback(hash, 0, NULL, NULL);
- +		ahash_request_set_crypt(hash, sg, volume->scsi_id, nbytes);
--+		crypto_ahash_update(hash);
- +		crypto_ahash_digest(hash);
-++		crypto_ahash_init(hash);
-++		crypto_ahash_update(hash);
-++		crypto_ahash_final(hash);
-++		ahash_request_free(hash);
- +		crypto_free_ahash(tfm);
- +#else
-  		crypto_hash_init(&hash);
+ inherit pypi setuptools
 -- 
-2.9.3
+2.7.4
+
+
 
 
