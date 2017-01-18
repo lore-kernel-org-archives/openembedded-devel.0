@@ -1,52 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 510F871A54
+Return-Path: <Zhe.He@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 868F071A9B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jan 2017 01:27:20 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id r126so280686wmr.3
+	Wed, 18 Jan 2017 01:34:16 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v0I1YF6b019479
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Jan 2017 17:27:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=hbSWMUTcYjeLPm6v4KMQXOW/LwWPfcuNdT4IF3VwCkI=;
-	b=efVR371I9kyHEKqQI9w0xyBYWPwICP4dTjKBdZLPIP9v8JEue84XNDyo6lhVou4SeI
-	nf7oPQAMDsOuXbTTeF0R70ouPiyz9Np+xOaVzGNlTkYLMbUwdYrrlbbQJ01buTcZ/wom
-	KXwC8wGFHzJjxX9C75ymdciVvKn5/+nHkhj6Vsk3mUiaSrejotSnLl94V7fG0IkBj3R4
-	c+nKM7XBY4CeXtjzPLTJwIO4Z+ZELsPMlnVlenScH1RSd7togYwcNbfDsZjGxo7mB/wa
-	ffcmh+dOyJZWF1cH7OkTe9Q3DQoh+BZWfqZmI91ek5/fhI7tkTamaowipHzWS5KjOpBl
-	p1FQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=hbSWMUTcYjeLPm6v4KMQXOW/LwWPfcuNdT4IF3VwCkI=;
-	b=A8b4tyxDZU8LqFWwsoZ8gE+OKc6zdmZ22N8QDr2YYF4n3ZWUeo3jwCO8DUFsce3B9s
-	DWzmrMPTD0mzjTtLrXQZNRqThPoF+LvY/32TrxbZM4+s9QQk3XXdVGRdDPKwN4HYsdBg
-	amHjruXRW7ggPe+6b3Ny8mr14g9gJSf61tSjP6MvG3A0qO63VXoVs0ozPj+Au9ekPCN/
-	TPlqXtgxpQF+kHAyOPClZtzUHKB6RHE1XQBD6H/8pThv2GEHmqiaPEcFgllzgQ50qvMv
-	8idTJTeF7XARyQMLylQ3pEBl+cE3VoRRtyzGkJItdvUNPi+9Ap+E+SF+V/sqQnZyNrGx
-	+J8w==
-X-Gm-Message-State: AIkVDXKsid98aMD25I5Xi5N0QSzNoeJ3r9pnYp+G8h8y9hBscX8fe4k7vXB/IAgUGQPjDw==
-X-Received: by 10.223.171.141 with SMTP id s13mr410416wrc.23.1484702840526;
-	Tue, 17 Jan 2017 17:27:20 -0800 (PST)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id 81sm696318wmw.7.2017.01.17.17.27.19
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 17 Jan 2017 17:27:19 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 18 Jan 2017 02:27:20 +0100
-To: Denys Dmytriyenko <denis@denix.org>
-Message-ID: <20170118012720.GA3279@jama>
-References: <1484363626-12770-1-git-send-email-denis@denix.org>
-	<72187853-9f6e-e0a0-b09c-c87060ae182e@qt.io>
-	<20170117174621.GQ15833@denix.org>
+	Tue, 17 Jan 2017 17:34:16 -0800 (PST)
+Received: from PEK-ZHE-D1.wrs.com (128.224.162.137) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 17 Jan 2017 17:34:15 -0800
+From: <zhe.he@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 18 Jan 2017 09:34:09 +0800
+Message-ID: <1484703249-24359-1-git-send-email-zhe.he@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <20170117174621.GQ15833@denix.org>
-User-Agent: Mutt/1.7.2 (2016-11-26)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-qt5][morty-next][PATCH] qtwebengine: update SRCREV due to old commit no longer being available
+Subject: [meta-networking][PATCH v2] iscsitarget: Fix call trace of ahash API calling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,105 +31,170 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jan 2017 01:27:23 -0000
-X-Groupsio-MsgNum: 64765
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="WIyZ46R2i8wDzkSu"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 18 Jan 2017 01:34:16 -0000
+Content-Type: text/plain
 
---WIyZ46R2i8wDzkSu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: He Zhe <zhe.he@windriver.com>
 
-On Tue, Jan 17, 2017 at 12:46:21PM -0500, Denys Dmytriyenko wrote:
-> Mikko,
->=20
-> Are there any estimatest when this commit is finally coming?
->=20
->=20
-> Currently, morty is broken for me because it doesn't have the correspondi=
-ng=20
-> QWaylandIntegration patch from master and Martin doesn't want to apply it=
-,=20
-> since Qt 5.7.1 is coming any day now. And while 5.7.1 is already in=20
-> morty-next, it is also broken for me, because it points to a missing comm=
-it=20
-> in qtwebengine, which is also coming any day now.
->=20
-> I'd like to get unblocked on either of this issues ASAP, as it's been in =
-the=20
-> limbo for quite some time!
->=20
->=20
-> Martin,
->=20
-> Would you mind applying the old QWaylandIntegration patch to morty, while=
- we=20
-> are still waiting for 5.7.1 update to finalize? You already have the modi=
-fied=20
-> and squashed version for 5.7.1 in morty-next, so should be easy to rebase=
- and=20
-> merge it in the future... Please let me know, thanks.
+The previous build_with_updated_interfaces_of_linux_v4.8_and_above.patch
+does not alloc struct ahash_request before using it. This will cause the
+kernel call trace below when calling gen_scsiid on kernel 4.8 or later
+version.
 
-ok, I've pushed your change from morty-next to morty.
+This patch normalizes the calling of ahash API according to the example
+in kernel doc Documentation/crypto/api-intro.txt.
 
-> --=20
-> Denys
->=20
->=20
-> On Mon, Jan 16, 2017 at 02:43:05PM +0200, Mikko Gronoff wrote:
-> > This one commit was missing a merge from 5.7.1 branch to 5.7 but
-> > it's coming very soon. The merge commit is already done, it's just a
-> > matter of author submitting it in. Should be available very soon.
-> >=20
-> > -Mikko
-> >=20
-> >=20
-> > On 01/14/2017 05:13 AM, Denys Dmytriyenko wrote:
-> > >From: Denys Dmytriyenko <denys@ti.com>
-> > >
-> > >Previous commit used for 5.7.1 baseline is no longer available on 5.7 =
-branch.
-> > >
-> > >Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > >---
-> > >  recipes-qt/qt5/qtwebengine_git.bb | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >
-> > >diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebe=
-ngine_git.bb
-> > >index 4712441..210f791 100644
-> > >--- a/recipes-qt/qt5/qtwebengine_git.bb
-> > >+++ b/recipes-qt/qt5/qtwebengine_git.bb
-> > >@@ -122,7 +122,7 @@ SRC_URI +=3D " \
-> > >      file://0002-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw=
-=2Epatch \
-> > >  "
-> > >-SRCREV_qtwebengine =3D "9cc97f0c63049a8076476acc89c875c9e240abfb"
-> > >+SRCREV_qtwebengine =3D "6766290699acd0d73c81cf690012d52729e518b9"
-> > >  # This is in git submodule, but we're using the latest in 49-based
-> > >  # SRCREV_chromium =3D "c109a95a067af783e48f93d1cdeca870cda98878"
-> > >  SRCREV_chromium =3D "b3c79e92f0a631273b639af171e59f4c367ae02e"
-> >=20
-> > --=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+BUG: unable to handle kernel NULL pointer dereference at 0000000000000020
+IP: [<ffffffffa0008d45>] volume_add+0x625/0x7f0 [iscsi_trgt]
+PGD dd77067 PUD dd7c067 PMD 0
+Oops: 0000 [#1] PREEMPT SMP
+Modules linked in: iscsi_trgt(O)
+CPU: 0 PID: 350 Comm: ietd Tainted: G           O    4.8.12-yocto-standard #1
+Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.9.3-0-ge2fc41e-prebuilt.qemu-project.org 04/01/2014
+task: ffff88000dfe2c00 task.stack: ffff88000de88000
+RIP: 0010:[<ffffffffa0008d45>]  [<ffffffffa0008d45>] volume_add+0x625/0x7f0 [iscsi_trgt]
+RSP: 0018:ffff88000de8bd90  EFLAGS: 00000206
+RAX: 000000000000ddfa RBX: ffff88000ddd1d78 RCX: ffffea0000000000
+RDX: 0000000000000600 RSI: 0000000000000000 RDI: ffff88000ddd1c14
+RBP: ffff88000de8be38 R08: ffff88000de44180 R09: ffff88000de8bdd0
+R10: 000000000000002c R11: 0000000000000000 R12: ffff88000ddfa600
+R13: 0000000000000000 R14: 0000000000000000 R15: ffff88000de92200
+FS:  00007f767548b700(0000) GS:ffff88000fc00000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000000000020 CR3: 000000000dd2d000 CR4: 00000000000006f0
+Stack:
+ ffff88000de8bdd0 ffff88000dc1b3d0 ffff88000ddfa650 ffff88000ddfa660
+ ffff88000df8f000 ffff88000ddd1c00 ffff88000de44180 0000000000000000
+ ffffea0000377440 0000000f00000c14 0000000000000000 0000000000000000
+Call Trace:
+ [<ffffffffa0006547>] ioctl+0x217/0x390 [iscsi_trgt]
+ [<ffffffff81192574>] do_vfs_ioctl+0x94/0x5c0
+ [<ffffffff8117ff73>] ? vfs_read+0xf3/0x120
+ [<ffffffff81192b19>] SyS_ioctl+0x79/0x90
+ [<ffffffff8191a45b>] entry_SYSCALL_64_fastpath+0x13/0x8f
+Code: 4c 01 e0 0f 82 a2 01 00 00 48 b9 00 00 00 80 ff 77 00 00 48 01
+c8 45 31 f6 48 b9 00 00 00 00 00 ea ff ff 89 54 24 68 48 c1 e8 0c <49>
+8b 56 20 4c 89 44 24 20 4c 89 f7 48 c1 e0 06 c7 44 24 6c 04
+RIP  [<ffffffffa0008d45>] volume_add+0x625/0x7f0 [iscsi_trgt]
+ RSP <ffff88000de8bd90>
+CR2: 0000000000000020
+end trace cd2016297df21635 ]
+ietd_response_recv 200 0 -5
+Input/output error.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Signed-off-by: He Zhe <zhe.he@windriver.com>
+---
+ .../fix-call-trace-of-ahash-API-calling.patch      | 85 ++++++++++++++++++++++
+ .../iscsitarget/iscsitarget_1.4.20.3+svn502.bb     |  3 +-
+ 2 files changed, 87 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-extended/iscsitarget/files/fix-call-trace-of-ahash-API-calling.patch
 
---WIyZ46R2i8wDzkSu
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+diff --git a/meta-networking/recipes-extended/iscsitarget/files/fix-call-trace-of-ahash-API-calling.patch b/meta-networking/recipes-extended/iscsitarget/files/fix-call-trace-of-ahash-API-calling.patch
+new file mode 100644
+index 0000000..c996834
+--- /dev/null
++++ b/meta-networking/recipes-extended/iscsitarget/files/fix-call-trace-of-ahash-API-calling.patch
+@@ -0,0 +1,85 @@
++The previous build_with_updated_interfaces_of_linux_v4.8_and_above.patch
++does not alloc struct ahash_request before using it. This will cause the
++kernel call trace below when calling gen_scsiid on kernel 4.8 or later
++version.
++
++This patch normalizes the calling of ahash API according to the example
++in kernel doc Documentation/crypto/api-intro.txt.
++
++BUG: unable to handle kernel NULL pointer dereference at 0000000000000020
++IP: [<ffffffffa0008d45>] volume_add+0x625/0x7f0 [iscsi_trgt]
++PGD dd77067 PUD dd7c067 PMD 0 
++Oops: 0000 [#1] PREEMPT SMP
++Modules linked in: iscsi_trgt(O)
++CPU: 0 PID: 350 Comm: ietd Tainted: G           O    4.8.12-yocto-standard #1
++Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.9.3-0-ge2fc41e-prebuilt.qemu-project.org 04/01/2014
++task: ffff88000dfe2c00 task.stack: ffff88000de88000
++RIP: 0010:[<ffffffffa0008d45>]  [<ffffffffa0008d45>] volume_add+0x625/0x7f0 [iscsi_trgt]
++RSP: 0018:ffff88000de8bd90  EFLAGS: 00000206
++RAX: 000000000000ddfa RBX: ffff88000ddd1d78 RCX: ffffea0000000000
++RDX: 0000000000000600 RSI: 0000000000000000 RDI: ffff88000ddd1c14
++RBP: ffff88000de8be38 R08: ffff88000de44180 R09: ffff88000de8bdd0
++R10: 000000000000002c R11: 0000000000000000 R12: ffff88000ddfa600
++R13: 0000000000000000 R14: 0000000000000000 R15: ffff88000de92200
++FS:  00007f767548b700(0000) GS:ffff88000fc00000(0000) knlGS:0000000000000000
++CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
++CR2: 0000000000000020 CR3: 000000000dd2d000 CR4: 00000000000006f0
++Stack:
++ ffff88000de8bdd0 ffff88000dc1b3d0 ffff88000ddfa650 ffff88000ddfa660
++ ffff88000df8f000 ffff88000ddd1c00 ffff88000de44180 0000000000000000
++ ffffea0000377440 0000000f00000c14 0000000000000000 0000000000000000
++Call Trace:
++ [<ffffffffa0006547>] ioctl+0x217/0x390 [iscsi_trgt]
++ [<ffffffff81192574>] do_vfs_ioctl+0x94/0x5c0
++ [<ffffffff8117ff73>] ? vfs_read+0xf3/0x120
++ [<ffffffff81192b19>] SyS_ioctl+0x79/0x90
++ [<ffffffff8191a45b>] entry_SYSCALL_64_fastpath+0x13/0x8f
++Code: 4c 01 e0 0f 82 a2 01 00 00 48 b9 00 00 00 80 ff 77 00 00 48 01
++c8 45 31 f6 48 b9 00 00 00 00 00 ea ff ff 89 54 24 68 48 c1 e8 0c <49>
++8b 56 20 4c 89 44 24 20 4c 89 f7 48 c1 e0 06 c7 44 24 6c 04 
++RIP  [<ffffffffa0008d45>] volume_add+0x625/0x7f0 [iscsi_trgt]
++ RSP <ffff88000de8bd90>
++CR2: 0000000000000020
++end trace cd2016297df21635 ]
++ietd_response_recv 200 0 -5
++Input/output error.
++
++Upstream-Status: Pending [This patch is based on the previous one which
++has not been merged upstream.]
++
++Signed-off-by: Zhe He <zhe.he@windriver.com>
++
++--- iscsitarget-1.4.20.3+svn502_orig/kernel/volume.c	2017-01-18 08:57:56.752187402 +0800
+++++ iscsitarget-1.4.20.3+svn502/kernel/volume.c	2017-01-18 09:02:44.164195234 +0800
++@@ -93,13 +93,14 @@ static void gen_scsiid(struct iet_volume
++ 
++ #if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
++ 	tfm = crypto_alloc_ahash("md5", 0, CRYPTO_ALG_ASYNC);
+++	hash = ahash_request_alloc(tfm, GFP_ATOMIC);
++ #else
++ 	hash.tfm = crypto_alloc_hash("md5", 0, CRYPTO_ALG_ASYNC);
++ 	hash.flags = 0;
++ #endif
++ 
++ #if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
++-	if (!IS_ERR(tfm)) {
+++	if (tfm && !IS_ERR(tfm)) {
++ #else
++ 	if (!IS_ERR(hash.tfm)) {
++ #endif
++@@ -116,10 +117,13 @@ static void gen_scsiid(struct iet_volume
++ 		nbytes += sizeof(volume->lun);
++ 
++ #if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
++-		crypto_ahash_init(hash);
+++		ahash_request_set_callback(hash, 0, NULL, NULL);
++ 		ahash_request_set_crypt(hash, sg, volume->scsi_id, nbytes);
++-		crypto_ahash_update(hash);
++ 		crypto_ahash_digest(hash);
+++		crypto_ahash_init(hash);
+++		crypto_ahash_update(hash);
+++		crypto_ahash_final(hash);
+++		ahash_request_free(hash);
++ 		crypto_free_ahash(tfm);
++ #else
++ 		crypto_hash_init(&hash);
+diff --git a/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
+index 7279bc6..5c1e38e 100644
+--- a/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
++++ b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
+@@ -13,7 +13,8 @@ SRC_URI = "http://ftp.heanet.ie/mirrors/ubuntu/pool/universe/i/${BPN}/${BPN}_${P
+            file://fix-errors-observed-with-linux-3.19-and-greater.patch \
+            file://access-sk_v6_daddr-iff-IPV6-defined.patch \
+            file://build_with_updated_bio_struct_of_linux_v4.3_and_above.patch \
+-           file://build_with_updated_interfaces_of_linux_v4.8_and_above.patch"
++           file://build_with_updated_interfaces_of_linux_v4.8_and_above.patch \
++           file://fix-call-trace-of-ahash-API-calling.patch"
+ 
+ SRC_URI[md5sum] = "ef9bc823bbabd3c772208c00d5f2d089"
+ SRC_URI[sha256sum] = "d3196ccb78a43266dce28587bfe30d8ab4db7566d7bce96057dfbb84100babb5"
+-- 
+2.9.3
 
------BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWH7EdwAKCRA3VSO3ZXaA
-HCqJAJ9MOSSrmgVMk6zQ3HyJ4hq33pXN/wCfQgbgWn2Y/eS+la1j6Ua6HVlYOKI=
-=1BlE
------END PGP SIGNATURE-----
-
---WIyZ46R2i8wDzkSu--
