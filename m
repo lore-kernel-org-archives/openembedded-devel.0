@@ -1,24 +1,24 @@
 Return-Path: <joe.slater@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id C76447197E
+	by mail.openembedded.org (Postfix) with ESMTP id 11A9D7197B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jan 2017 22:39:39 +0000 (UTC)
+	Wed, 18 Jan 2017 22:59:26 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v0IMddMR000985
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v0IMxQj7001734
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jan 2017 14:39:39 -0800
+	Wed, 18 Jan 2017 14:59:26 -0800
 Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Wed, 18 Jan 2017 14:39:38 -0800
+	14.3.294.0; Wed, 18 Jan 2017 14:59:25 -0800
 From: Joe Slater <jslater@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 18 Jan 2017 14:39:38 -0800
-Message-ID: <1484779178-11124-1-git-send-email-jslater@windriver.com>
+Date: Wed, 18 Jan 2017 14:59:25 -0800
+Message-ID: <1484780365-11240-1-git-send-email-jslater@windriver.com>
 X-Mailer: git-send-email 1.7.3.4
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/1] libubox: derive PV from SRCPV
+Subject: [meta-webserver][PATCH 1/1] netdata: derive PV from SRCPV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,28 +31,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jan 2017 22:39:40 -0000
+X-List-Received-Date: Wed, 18 Jan 2017 22:59:27 -0000
 Content-Type: text/plain
 
 Currently, PV is "git" and contains no version information.
 
 Signed-off-by: Joe Slater <jslater@windriver.com>
 ---
- meta-oe/recipes-devtools/libubox/libubox_git.bb |    1 +
+ .../recipes-webadmin/netdata/netdata_git.bb        |    1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-devtools/libubox/libubox_git.bb b/meta-oe/recipes-devtools/libubox/libubox_git.bb
-index 609281a..4d3ffae 100644
---- a/meta-oe/recipes-devtools/libubox/libubox_git.bb
-+++ b/meta-oe/recipes-devtools/libubox/libubox_git.bb
-@@ -19,6 +19,7 @@ SRC_URI = "\
- "
+diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_git.bb b/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
+index 317ddcc..bd43cea 100644
+--- a/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
++++ b/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
+@@ -5,6 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=747afe070ea9d6c2be0a31353609a35b"
  
- SRCREV = "155bf39896f126b1ba121b816922a88dc34c31e3"
+ SRC_URI = "git://github.com/firehol/netdata.git;protocol=https"
+ SRCREV = "36c1304e37094174ea51001903058e65053107ca"
 +PV = "git+${SRCPV}"
  
- S = "${WORKDIR}/git"
- 
+ # patch to disable timeout because timeout are not available with actual version
+ # of core-utils
 -- 
 1.7.9.5
 
