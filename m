@@ -1,46 +1,35 @@
-Return-Path: <anton@advancedtelematic.com>
-Received: from mail-lf0-f49.google.com (mail-lf0-f49.google.com
-	[209.85.215.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 161D57199D
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 106367198D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jan 2017 13:44:04 +0000 (UTC)
-Received: by mail-lf0-f49.google.com with SMTP id z134so11841818lff.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jan 2017 05:44:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=advancedtelematic.com; s=google;
-	h=to:cc:from:subject:message-id:date:user-agent:mime-version
-	:content-transfer-encoding;
-	bh=v3pUcHFC0x/yYWQ5BoyTj7g7ecKNaABmDuLW4EIHPE8=;
-	b=UX1y2w9dCW+TvgQqYltkm7xtuF5W8HU1JD8nougljdq5Xqhl+qaaRh0ncST0WjzNBs
-	J3mjvAJ6JmRvQ5OkGq1t5tphk522xzc6cmh/RD2V3Pq+Vi8MIn7kH7NW775UToQEIlXF
-	Yu95KC0pNIdXFj/PJ5o8wcAPGWv+V0TGKhd+w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:to:cc:from:subject:message-id:date:user-agent
-	:mime-version:content-transfer-encoding;
-	bh=v3pUcHFC0x/yYWQ5BoyTj7g7ecKNaABmDuLW4EIHPE8=;
-	b=To4cvXc9qnEDilwAgYUbckXu9ccIzuwuskujFvLo2ZsOhCq6Q4ht7K0vIiH7senpUD
-	PyKNow+0og2f4OnQxTchIFF1GNKhJUpUvn1WPZbZrD1gOagBmRNa6qsgwYj4uEflvbPL
-	bOOkxamOfbFrZVRCfzs24GIQWFsqHFhlxQZP/l5Mta8w6+RRtZ9TeSTjykweSoN98SnP
-	Gj7Y6x+l8C1BEzqHCScNIa7+QKoStZzc3tOpBQqo6MxgxQWD5uCxdXZ++8ErolKMPa4a
-	n9t5sujDM461y9f5AmdnvALBeHKKUiSaN+niczovv5OciAeLwPxFQlvKqFj9hj32GXTC
-	PIRg==
-X-Gm-Message-State: AIkVDXIjb4DnKQLRF4b0crU2yXMsT6ltHC721BqxNmLKh6heipS/8C06Th3bVS1axBVl0w==
-X-Received: by 10.46.5.130 with SMTP id 124mr1638766ljf.17.1484747044637;
-	Wed, 18 Jan 2017 05:44:04 -0800 (PST)
-Received: from [192.168.1.52] (p57bf9f95.dip0.t-ipconnect.de. [87.191.159.149])
-	by smtp.gmail.com with ESMTPSA id s20sm203731lfg.29.2017.01.18.05.44.03
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 18 Jan 2017 05:44:04 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-From: Anton Gerasimov <anton@advancedtelematic.com>
-Message-ID: <4415c776-cf62-377d-1756-3a559b6afba6@advancedtelematic.com>
-Date: Wed, 18 Jan 2017 14:38:14 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.3.0
+	Wed, 18 Jan 2017 20:55:23 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 878C220AAE;
+	Wed, 18 Jan 2017 20:55:23 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id bshAqGWxfzoe; Wed, 18 Jan 2017 20:55:23 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
+	[100.15.95.79])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 629332078F;
+	Wed, 18 Jan 2017 20:55:16 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id D389D162321; Wed, 18 Jan 2017 15:55:15 -0500 (EST)
+Date: Wed, 18 Jan 2017 15:55:15 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20170118205515.GS15833@denix.org>
+References: <1484363626-12770-1-git-send-email-denis@denix.org>
+	<72187853-9f6e-e0a0-b09c-c87060ae182e@qt.io>
+	<20170117174621.GQ15833@denix.org> <20170118012720.GA3279@jama>
 MIME-Version: 1.0
-Subject: /usr merge, stateless systems and atomic updates w/ OpenEmbedded?
+In-Reply-To: <20170118012720.GA3279@jama>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt5][morty-next][PATCH] qtwebengine: update SRCREV due to old commit no longer being available
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,27 +42,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Jan 2017 13:44:05 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 18 Jan 2017 20:55:25 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi Jussi,
+On Wed, Jan 18, 2017 at 02:27:20AM +0100, Martin Jansa wrote:
+> On Tue, Jan 17, 2017 at 12:46:21PM -0500, Denys Dmytriyenko wrote:
+> > Mikko,
+> > 
+> > Are there any estimatest when this commit is finally coming?
+> > 
+> > 
+> > Currently, morty is broken for me because it doesn't have the corresponding 
+> > QWaylandIntegration patch from master and Martin doesn't want to apply it, 
+> > since Qt 5.7.1 is coming any day now. And while 5.7.1 is already in 
+> > morty-next, it is also broken for me, because it points to a missing commit 
+> > in qtwebengine, which is also coming any day now.
+> > 
+> > I'd like to get unblocked on either of this issues ASAP, as it's been in the 
+> > limbo for quite some time!
+> > 
+> > 
+> > Martin,
+> > 
+> > Would you mind applying the old QWaylandIntegration patch to morty, while we 
+> > are still waiting for 5.7.1 update to finalize? You already have the modified 
+> > and squashed version for 5.7.1 in morty-next, so should be easy to rebase and 
+> > merge it in the future... Please let me know, thanks.
+> 
+> ok, I've pushed your change from morty-next to morty.
 
-in meta-updater we were using the second approach, because it didn't requ=
-ire
-any interfering in oe-core. But first one seems a lot cleaner to me. I am=
- looking
-forward to seeing your patch.
-
-Best regards,
-Anton Gerasimov
+Great, thanks a lot!
 
 
---=20
-Anton Gerasimov, ATS Advanced Telematic Systems GmbH
-Kantstrasse 162, 10623 Berlin
-Managing Directors: Dirk P=C3=B6schl, Armin G. Schmidt
-Register Court: HRB 151501 B, Amtsgericht Charlottenburg
+> > On Mon, Jan 16, 2017 at 02:43:05PM +0200, Mikko Gronoff wrote:
+> > > This one commit was missing a merge from 5.7.1 branch to 5.7 but
+> > > it's coming very soon. The merge commit is already done, it's just a
+> > > matter of author submitting it in. Should be available very soon.
+> > > 
+> > > -Mikko
+> > > 
+> > > 
+> > > On 01/14/2017 05:13 AM, Denys Dmytriyenko wrote:
+> > > >From: Denys Dmytriyenko <denys@ti.com>
+> > > >
+> > > >Previous commit used for 5.7.1 baseline is no longer available on 5.7 branch.
+> > > >
+> > > >Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> > > >---
+> > > >  recipes-qt/qt5/qtwebengine_git.bb | 2 +-
+> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > >
+> > > >diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
+> > > >index 4712441..210f791 100644
+> > > >--- a/recipes-qt/qt5/qtwebengine_git.bb
+> > > >+++ b/recipes-qt/qt5/qtwebengine_git.bb
+> > > >@@ -122,7 +122,7 @@ SRC_URI += " \
+> > > >      file://0002-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch \
+> > > >  "
+> > > >-SRCREV_qtwebengine = "9cc97f0c63049a8076476acc89c875c9e240abfb"
+> > > >+SRCREV_qtwebengine = "6766290699acd0d73c81cf690012d52729e518b9"
+> > > >  # This is in git submodule, but we're using the latest in 49-based
+> > > >  # SRCREV_chromium = "c109a95a067af783e48f93d1cdeca870cda98878"
+> > > >  SRCREV_chromium = "b3c79e92f0a631273b639af171e59f4c367ae02e"
+> > > 
+> > > -- 
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+> -- 
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
 
