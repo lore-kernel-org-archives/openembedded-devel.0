@@ -1,46 +1,24 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 80B57608B7
+Return-Path: <marex@denx.de>
+X-Greylist: delayed 399 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 19 Jan 2017 15:28:03 UTC
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+	by mail.openembedded.org (Postfix) with ESMTP id 1769971B86
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jan 2017 14:21:35 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id c85so290645155wmi.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jan 2017 06:21:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=J7O3QVNYyyQub9kqZq6ccDqnNwz353heJApRMzKz3EE=;
-	b=C+M5pas+4A9NrsRNpY8w9h/Dw4NNcgnFvlYWcL16o3SHrRweKdfkrlZSnHqUDEp/2O
-	hhbivzQSpDd9PZVW8TSmK/CbpRnFVRVr6RZ1GU89krJ8Z9SL8do7EBSd16HHG9fbvxik
-	CirMjsxiztkvLbqbPBgWbgmlFNelaJZKAR25aH4tM/xGsG+ivZ+bpyEwdwCGhVhlnETW
-	9JtLRR4szAhBuqgL5G/k/HMJDyywXxID70Xc1FpZLinNP4JPytP9qurTwz/YfdeQexnV
-	HCpLCvuAP5sQNF0O/AN8MD28wHOIvmzjnqSiXNkk1svuoJuG6fj5RNLBgDHxxodq+Gju
-	uCjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=J7O3QVNYyyQub9kqZq6ccDqnNwz353heJApRMzKz3EE=;
-	b=pfcDiW16ybCqQ1CWQ9anZJ7JtH4DM7mx1+CiQNiCVCaDYJj9k9H5oPu7f8RMQETvIU
-	4Dh68i6be3LktT3FjKYiecZrkLCHc+HroDzkLrImLKshMLJqsArg0bLGkR3Yg7aNU4hw
-	zZ9CgqLLM+DE6mnJHSr+OLmLVgLcIFMqBDRoca96Jf2j5mSnWHYF/P+eHPZB2vn1lbym
-	L2sVlVDClAYgCh4kwjv+U5JrAPgm5oSrKVp6fgQ7ebYRJlx4YVMviGTOHbJk46u08gr7
-	Nh7SSwggW3zl3JZ2NlulvobwX2YjAwfe2PMz7lluZ1WCkyhzgKV0FkVKAxGbWXLkA/Lb
-	593Q==
-X-Gm-Message-State: AIkVDXJtfqbQPSQGuJS7HOc1L1+0JNcXgpIC4ThLBThcZlkoTkr2kfEl0XieaJHxwhgELPHnsq8vTbgH3tihnQ==
-X-Received: by 10.28.136.68 with SMTP id k65mr27149740wmd.48.1484835695928;
-	Thu, 19 Jan 2017 06:21:35 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.194.164.227 with HTTP; Thu, 19 Jan 2017 06:21:15 -0800 (PST)
-In-Reply-To: <20170119114529.GG3265@jama>
-References: <20161229133508.5584-1-ricardo.ribalda@gmail.com>
-	<20161229133508.5584-2-ricardo.ribalda@gmail.com>
-	<20170119114529.GG3265@jama>
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Thu, 19 Jan 2017 15:21:15 +0100
-Message-ID: <CAPybu_32sRCZGtLQgTzX7bUtqrzfUWawhQy+LJXOCTtO7Q0o3w@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 2/2] opencv: Update to version 3.2
+	Thu, 19 Jan 2017 15:28:03 +0000 (UTC)
+Received: from mail.nefkom.net (unknown [192.168.6.184])
+	by mail-out.m-online.net (Postfix) with ESMTP id 3v46xb5sh9z3hmys;
+	Thu, 19 Jan 2017 16:21:23 +0100 (CET)
+X-Auth-Info: 7jRUFGcQTIi3L5JF/WgYm7C9SnoQUndY+rgTNRUv9+o=
+Received: from kurokawa.lan (unknown [195.140.253.167])
+	by smtp-auth.mnet-online.de (Postfix) with ESMTPA id 3v46xb4rtmzvdWV;
+	Thu, 19 Jan 2017 16:21:23 +0100 (CET)
+From: Marek Vasut <marex@denx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 19 Jan 2017 16:21:09 +0100
+Message-Id: <20170119152109.15745-1-marex@denx.de>
+X-Mailer: git-send-email 2.11.0
+Cc: Marek Vasut <marex@denx.de>
+Subject: [PATCH] picocom: Fix build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,28 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Jan 2017 14:21:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 19 Jan 2017 15:28:03 -0000
 
-Hi Martin
+The picocom complains about missing GNU_HASH from the binary during
+QA stage, this is because the picocom Makefile overrides CPPFLAGS,
+CFLAGS and LDFLAGS. Fix this by passing those as an argument to make.
+Moreover, since picocom 1.7 now accepts VERSION variable and the
+UUCP_LOCK_DIR is set to /var/lock by default, drop the CPPFLAGS
+override altogether and replace it simply with passing VERSION
+argument to make to precisely retain the original intention.
 
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+ meta-oe/recipes-support/picocom/picocom_1.7.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
+diff --git a/meta-oe/recipes-support/picocom/picocom_1.7.bb b/meta-oe/recipes-support/picocom/picocom_1.7.bb
+index dbee65609..0f85b3ec8 100644
+--- a/meta-oe/recipes-support/picocom/picocom_1.7.bb
++++ b/meta-oe/recipes-support/picocom/picocom_1.7.bb
+@@ -9,7 +9,10 @@ SRC_URI = "http://picocom.googlecode.com/files/picocom-${PV}.tar.gz"
+ SRC_URI[md5sum] = "8eaba1d31407e8408674d6e57af447ef"
+ SRC_URI[sha256sum] = "d0f31c8f7a215a76922d30c81a52b9a2348c89e02a84935517002b3bc2c1129e"
+ 
+-CPPFLAGS_append = '-DVERSION_STR=\\"${PV}\\" -DUUCP_LOCK_DIR=\\"/var/lock\\" -DHIGH_BAUD'
++do_compile () {
++    oe_runmake 'CC=${CC}' 'LD=${LD}' 'VERSION=${PV}' \
++               'CFLAGS=${CFLAGS}' 'LDFLAGS=${LDFLAGS}'
++}
+ 
+ do_install () {
+     install -d ${D}${bindir}
+-- 
+2.11.0
 
-On Thu, Jan 19, 2017 at 12:45 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Thu, Dec 29, 2016 at 02:35:08PM +0100, Ricardo Ribalda Delgado wrote:
->> -Only enable protobuf as dependency if dnn module is enabled
->> -Download manually xfeatures from 3rd party repo
->> -Remove uneeded fixgcc60patch
->
-> Fails to build now:
-> http://errors.yoctoproject.org/Errors/Details/117456/
->
-
-
-I have not been able to replicate it in for qemux86. By looking at the
-error message it looks like something on the freetype module. Until we
-figure out what is going on, maybe we could pakcageconfig that module
-and disable it by default (it is part of contrib)
-
-What do you think?
 
