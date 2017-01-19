@@ -1,52 +1,52 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 616C06FFCC
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 6D1A071A73
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jan 2017 07:53:43 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id r126so9993044wmr.3
+	Thu, 19 Jan 2017 07:53:44 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id r126so9993100wmr.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Jan 2017 23:53:44 -0800 (PST)
+	Wed, 18 Jan 2017 23:53:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=SE9c71iu0mvpi8oJ0kxPtR/ZtQkmDzNQVccRRjAj49A=;
-	b=ffyGfOPleSjjfAymiNpsxHt8heQxRn+RbUZQBmeToKKEfYaWjYcryNFT85QUnDJ1Lp
-	aI7O2OP6D5iwjP3HLOdkze5gDXGPXZberFTlyBYudyk1fuqdlc/v/7Rmjza2lNDUXowi
-	EgtExpI1kv/n9Q3Yk0ioXsMX1fp0S7bJbHo4epX5hCssNAqIzbsaa6K1hFj+q8fs5Nzl
-	iqzfNaRdLbyJGWCa1X1shvDgSAAPtR5vpqDo6GG0xd2S3LB3s9VZc58ajU2lN/QRsLKi
-	04GvQna+WC9up0opFrnUF/5EucJbIsKwHgZonsCW8L9TmutS7AxIpojUUX7zRstYKOdG
-	kuZw==
+	bh=Fw86QLlRan5IzYJi9qx/ehaLwbHTLXIuFqELhor8u08=;
+	b=L5/8lUVkRe43hSz78Wh7kLIAvsRm6Q2V6BPEqGK1DF5+ZxQm+3tCdLdE8jJQfIm4zL
+	030rtcC7Up7wlSW0tOcw+E5RUUxj1siWxTgPHhG/6u4Pd32mkt8SauedI9PRochSoG6L
+	+FhfK/9uFZtYi6zp/vl+0NhJF2t58mx8MDeoOigafTmWfr4WNl+GlFY7J6pd1LFsJqmK
+	9TcfgCXLy9X8BHPA7+XTAQECnvQZMTNjXCgEjmxmQzGEMzUcUCrWkqnWPy05aUfyFhcU
+	R9za+TeAYBdwKZr3zGlh5DlEVL7Tzx2uuRPj5JvFeQC5Jm75waNCYc1gUDT1jrpjMhDh
+	bM6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=SE9c71iu0mvpi8oJ0kxPtR/ZtQkmDzNQVccRRjAj49A=;
-	b=tAdF/fdajWFKcOXFqgnVEc71Y1WbGVC/7QyTATckb4iDB1v1JVPjeUA76maqO5be5p
-	ev/H55Q6JdHY1T4OFTaGHSjOpEjc0yPVYhODqkl+8uNruEcmPBjrorNTggnUZ/QB1+dh
-	eH0H3O24Dw5Xl0mDNpSroPKXLNWZJ8q5XeyOi8H9qY25MEmKPToJe/S5JkuYH4H/f5NT
-	o+W6JBsBFyi3Ok7gUjQ5WLVWVl/1DGLRrCKa0EaeP/oAcsr44MW9K6JMqM8TreEnUbnL
-	hVl5DxqIcfuN+IezbUEaa2LDWttGPfqpCv+TviulSotuYTiKh47K8E6LotniIuMD1kM6
-	zTVQ==
-X-Gm-Message-State: AIkVDXJjjupwpn48fRE9Hot6/Af0qfonhDRUJuEq+9HDSLVrYRCxvTLVGVveOqVhXZ181w==
-X-Received: by 10.28.147.72 with SMTP id v69mr6078329wmd.51.1484812423787;
-	Wed, 18 Jan 2017 23:53:43 -0800 (PST)
+	bh=Fw86QLlRan5IzYJi9qx/ehaLwbHTLXIuFqELhor8u08=;
+	b=RWPfZ1hN2gZdOTN63nQW//hKn18egIKaNqXQ2W//3u6FwSqxsJWzwgVl92iEkJdvq4
+	jitRzi7t1hCCXK9OKJGJGricDY54YAn2f2GDC70yqTVZY4f82Ce1e0vMVYZuCLVUSe31
+	LBjXHVc+a8UsaT2d5s+Hls5BA482OfUrVOS1JvIezlpK259cDxy5kALr7k8wyFLXkqMF
+	qNiRw6weMuc9JfkXmllPc/rqiWJp9HkUI7Vo6DBJL8PB1yGRrY3Zigxo/EjXMxlXmP/b
+	AXw2CuMOobncTo8C7kN39WnRsdbZ90HZ7hznaqtTqBDJccJaJckl33gfePJTQA9np/qX
+	qS3w==
+X-Gm-Message-State: AIkVDXJnjqubfPG+2lSb+ecSoINpl/Csi6/sqXEe4if0MTltpG65+/M2mmK8UmOLMa8Ixg==
+X-Received: by 10.223.141.133 with SMTP id o5mr7176253wrb.100.1484812424545;
+	Wed, 18 Jan 2017 23:53:44 -0800 (PST)
 Received: from mueller-a-nb-linux.zera.local
 	(ip-109-91-251-48.hsi12.unitymediagroup.de. [109.91.251.48])
 	by smtp.googlemail.com with ESMTPSA id
-	l67sm11050656wmf.1.2017.01.18.23.53.42
+	l67sm11050656wmf.1.2017.01.18.23.53.43
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 18 Jan 2017 23:53:43 -0800 (PST)
+	Wed, 18 Jan 2017 23:53:44 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Jan 2017 08:53:27 +0100
-Message-Id: <1484812412-26806-4-git-send-email-schnitzeltony@googlemail.com>
+Date: Thu, 19 Jan 2017 08:53:28 +0100
+Message-Id: <1484812412-26806-5-git-send-email-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1484812412-26806-1-git-send-email-schnitzeltony@googlemail.com>
 References: <1484812412-26806-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 4/9] libopus: update 1.1.2 -> 1.1.3
+Subject: [PATCH 5/9] libopus: add --enable-custom-modes to EXTRA_OECONF
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,30 +63,37 @@ X-List-Received-Date: Thu, 19 Jan 2017 07:53:44 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+* this is what jack is looking for
+* while we are here do some polishing
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../recipes-multimedia/libopus/{libopus_1.1.2.bb => libopus_1.1.3.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-multimedia/libopus/{libopus_1.1.2.bb => libopus_1.1.3.bb} (94%)
+ meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.1.2.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
-similarity index 94%
-rename from meta-oe/recipes-multimedia/libopus/libopus_1.1.2.bb
-rename to meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
-index e5882e8..b5eef82 100644
---- a/meta-oe/recipes-multimedia/libopus/libopus_1.1.2.bb
+diff --git a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
+index b5eef82..a24f5e3 100644
+--- a/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
 +++ b/meta-oe/recipes-multimedia/libopus/libopus_1.1.3.bb
-@@ -9,8 +9,8 @@ LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e304cdf74c2a1b0a33a5084c128a23a3"
+@@ -20,11 +20,13 @@ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[fixed-point] = "--enable-fixed-point,,"
+ PACKAGECONFIG[float-approx] = "--enable-float-approx,,"
  
- SRC_URI = "http://downloads.xiph.org/releases/opus/opus-${PV}.tar.gz"
--SRC_URI[md5sum] = "1f08a661bc72930187893a07f3741a91"
--SRC_URI[sha256sum] = "0e290078e31211baa7b5886bcc8ab6bc048b9fc83882532da4a1a45e58e907fd"
-+SRC_URI[md5sum] = "32bbb6b557fe1b6066adc0ae1f08b629"
-+SRC_URI[sha256sum] = "58b6fe802e7e30182e95d0cde890c0ace40b6f125cffc50635f0ad2eef69b633"
+-EXTRA_OECONF = "--with-NE10-includes=${STAGING_DIR_TARGET}${includedir} \
+-                --with-NE10-libraries=${STAGING_DIR_TARGET}${libdir} \
+-                --enable-asm \
+-                --enable-intrinsics \
+-               "
++EXTRA_OECONF = " \
++    --with-NE10-includes=${STAGING_DIR_TARGET}${includedir} \
++    --with-NE10-libraries=${STAGING_DIR_TARGET}${libdir} \
++    --enable-asm \
++    --enable-intrinsics \
++    --enable-custom-modes \
++"
  
- S = "${WORKDIR}/opus-${PV}"
- 
+ python () {
+     if d.getVar('TARGET_FPU') in [ 'soft' ]:
 -- 
 2.7.4
 
