@@ -1,46 +1,43 @@
-Return-Path: <jkrishnanjanappa@mvista.com>
-Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C7EE71E12
+Return-Path: <olof.johansson@axis.com>
+X-Greylist: delayed 477 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 20 Jan 2017 09:39:10 UTC
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4242C719A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 08:38:49 +0000 (UTC)
-Received: by mail-wm0-f50.google.com with SMTP id r144so32501613wme.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 00:38:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mvista-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=GMluE1BEtAC5qR+ycN1TEhpVfhfEmKes2Fr9RZv+Fbs=;
-	b=ys3N/r42q1qpX8OM+t5iFS9T+/xZfYWYqfk/6BNlo8WGZn6KBKTuCFbcxXJGyspoIx
-	fJjkHdjoRBryShtF/vmxo5hid2R8b7yJNlcKNzSoZDgHEUWZKxxpn7SZNhM1HRm8eIdV
-	vURTuuTPQC+ejVdodQr07QOgxdZC9tQjfNQwJOYFpT1TRvqEXkSL4k5IXrgz2DBqt9m7
-	mrSsOMsDMY1eZfZScglCnAKPXPnkM64oTNFOtbIsRySmbEXYtPoYveUnH22GCjwqnsVl
-	oE1jFi9DX/GOzqvgMFILQ0o2ts2Funa6TFqhDFvydcVeYQmUNYTczXLLAeZ6XgMnTfOL
-	PSkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=GMluE1BEtAC5qR+ycN1TEhpVfhfEmKes2Fr9RZv+Fbs=;
-	b=PyUx2Rhkt4eCQFBYgE4QE9O3N2nflgvA0ZAChS0jDlnGnSVC99IthPZSAoOGnXJoRf
-	FEXES3BueuURvNoFtIc7Gtg1siRlFtZTvcQWAdRQg3tTwx/vS7ZaZKKAowpwxX10ZUKQ
-	pH46ZpBRfW4PV6v8QvEU5f7pLPcIZop4+E1dvQSt1v24vpWfWs26GZSklcrMZVBKQ61N
-	jJjrTL5XDrx4zGJMxYI/Pa1LU5Gw6+UXpCNdLG56ZpcVX6vMdloXtpwvNcslLTcqCp2x
-	3uRyzJpRN0ogbMDUeX4BpoW489ZZ1NRLxOh1KyLeUSDzvyCFsu0UA30RlzDz6Gk2rz4A
-	5zQA==
-X-Gm-Message-State: AIkVDXLMAKpFOyBOBeNBcHTHad/jM1iwpU7WgW7d0r1tQT8WKq234/CFtJzJ5uTC5aJSdnkOrLBhOdJbJ78klhKS
-X-Received: by 10.28.141.78 with SMTP id p75mr2181926wmd.114.1484901529595;
-	Fri, 20 Jan 2017 00:38:49 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.28.226.133 with HTTP; Fri, 20 Jan 2017 00:38:49 -0800 (PST)
-In-Reply-To: <1484900677-11893-3-git-send-email-jkrishnanjanappa@mvista.com>
-References: <1484900677-11893-1-git-send-email-jkrishnanjanappa@mvista.com>
-	<1484900677-11893-3-git-send-email-jkrishnanjanappa@mvista.com>
-From: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
-Date: Fri, 20 Jan 2017 14:08:49 +0530
-Message-ID: <CAD3vsf4y9uwBqbCM2VxW88FMof7M_XiOhxshSnjyWfaa6z1QNA@mail.gmail.com>
+	Fri, 20 Jan 2017 09:39:10 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id CB65A1813E;
+	Fri, 20 Jan 2017 10:31:12 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id r+yhW7ahEgQA; Fri, 20 Jan 2017 10:31:12 +0100 (CET)
+Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
+	by bastet.se.axis.com (Postfix) with ESMTPS id 12CB718136;
+	Fri, 20 Jan 2017 10:31:12 +0100 (CET)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id E0A2D1E079;
+	Fri, 20 Jan 2017 10:31:11 +0100 (CET)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id D5B811E077;
+	Fri, 20 Jan 2017 10:31:11 +0100 (CET)
+Received: from seth.se.axis.com (unknown [10.0.2.172])
+	by boulder03.se.axis.com (Postfix) with ESMTP;
+	Fri, 20 Jan 2017 10:31:11 +0100 (CET)
+Received: from lnxolofjn.se.axis.com (lnxolofjn.se.axis.com [10.92.17.1])
+	by seth.se.axis.com (Postfix) with ESMTP id C9E205CA;
+	Fri, 20 Jan 2017 10:31:11 +0100 (CET)
+Received: by lnxolofjn.se.axis.com (Postfix, from userid 20466)
+	id B46BF9C09F; Fri, 20 Jan 2017 10:31:11 +0100 (CET)
+From: Olof Johansson <olof.johansson@axis.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-networking][PATCH 3/3] iscsitarget: update patch to contain changes required to build with only linux v4.8 and above
+Date: Fri, 20 Jan 2017 10:31:11 +0100
+Message-Id: <1484904671-9257-1-git-send-email-olofjn@axis.com>
+X-Mailer: git-send-email 2.1.4
+X-TM-AS-GCONF: 00
+Cc: Olof Johansson <olofjn@axis.com>
+Subject: [meta-webserver][krogoth][PATCH] apache2: always use the archive.apache.org to ensure older releases are always available
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,276 +50,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2017 08:38:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 20 Jan 2017 09:39:11 -0000
 
-The above patch builds fine on top of the recent change
-http://lists.openembedded.org/pipermail/openembedded-devel/2017-January/110775.html
-submitted to iscsitarget recipe (which is not in master branch yet).
+From: Derek Straka <derek@asterius.io>
 
-Regards,
-Jagadeesh
+Signed-off-by: Derek Straka <derek@asterius.io>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Olof Johansson <olofjn@axis.com>
+---
+ meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb | 2 +-
+ meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb        | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-On Fri, Jan 20, 2017 at 1:54 PM, Jagadeesh Krishnanjanappa <
-jkrishnanjanappa@mvista.com> wrote:
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
+index b227f19..aa26cc7 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb
+@@ -8,7 +8,7 @@ LICENSE = "Apache-2.0"
+ 
+ inherit autotools pkgconfig native
+ 
+-SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
++SRC_URI = "http://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
+            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
+           "
+ 
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
+index 5bea876..9459766 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb
+@@ -6,7 +6,7 @@ DEPENDS = "libtool-native apache2-native openssl expat pcre apr apr-util"
+ SECTION = "net"
+ LICENSE = "Apache-2.0"
+ 
+-SRC_URI = "http://www.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
++SRC_URI = "http://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
+            file://server-makefile.patch \
+            file://httpd-2.4.1-corelimit.patch \
+            file://httpd-2.4.4-export.patch \
+-- 
+2.1.4
 
-> 1. Removes lines related "LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)",
->    as they are included in recent
->    build_with_updated_bio_struct_of_linux_v4.3_and_above.patch.
->
-> 2. Updated incorrect "#if 0//LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8,
-> 0)" line.
->
-> 3. Updated patch to have in compliance with recent
->    build_with_updated_bio_struct_of_linux_v4.3_and_above.patch.
->
-> Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
-> ---
->  ...pdated_interfaces_of_linux_v4.8_and_above.patch | 96
-> ++++++----------------
->  1 file changed, 23 insertions(+), 73 deletions(-)
->
-> diff --git a/meta-networking/recipes-extended/iscsitarget/files/
-> build_with_updated_interfaces_of_linux_v4.8_and_above.patch
-> b/meta-networking/recipes-extended/iscsitarget/files/
-> build_with_updated_interfaces_of_linux_v4.8_and_above.patch
-> index e55c407..e508a5e 100644
-> --- a/meta-networking/recipes-extended/iscsitarget/files/
-> build_with_updated_interfaces_of_linux_v4.8_and_above.patch
-> +++ b/meta-networking/recipes-extended/iscsitarget/files/
-> build_with_updated_interfaces_of_linux_v4.8_and_above.patch
-> @@ -90,25 +90,9 @@ Upstream-Status: Pending
->  Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
->
->  diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c
-> iscsitarget-1.4.20.3+svn502/kernel/block-io.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c  2016-09-25
-> 19:45:01.814641016 +0530
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/block-io.c      2016-09-25
-> 19:47:59.666474094 +0530
-> -@@ -57,7 +57,6 @@ static int
-> - blockio_make_request(struct iet_volume *volume, struct tio *tio, int rw)
-> - {
-> -       struct blockio_data *bio_data = volume->private;
-> --      struct request_queue *bdev_q = bdev_get_queue(bio_data->bdev);
-> -       struct tio_work *tio_work;
-> -       struct bio *tio_bio = NULL, *bio = NULL, *biotail = NULL;
-> -       struct blk_plug plug;
-> -@@ -69,6 +68,7 @@ blockio_make_request(struct iet_volume *
-> -       int err = 0;
-> -       loff_t ppos = tio->offset;
-> - #else
-> -+      struct request_queue *bdev_q = bdev_get_queue(bio_data->bdev);
-> -       int max_pages = 1;
-> -       int err = 0;
-> -
-> -@@ -102,7 +102,11 @@ blockio_make_request(struct iet_volume *
-> +--- iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c  2017-01-19
-> 20:19:27.400507354 -0800
-> ++++ iscsitarget-1.4.20.3+svn502/kernel/block-io.c      2017-01-19
-> 20:32:22.977988593 -0800
-> +@@ -104,7 +104,11 @@ blockio_make_request(struct iet_volume *
->                 /* bi_sector is ALWAYS in units of 512 bytes */
->                 bio->bi_iter.bi_sector = ppos >> 9;
->                 bio->bi_bdev = bio_data->bdev;
-> @@ -120,7 +104,7 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c
-> iscsitarget-1.4.20
->                 bio->bi_private = tio_work;
->
->                 if (tio_bio)
-> -@@ -137,7 +141,12 @@ blockio_make_request(struct iet_volume *
-> +@@ -139,7 +143,12 @@ blockio_make_request(struct iet_volume *
->                 tio_bio = tio_bio->bi_next;
->                 bio->bi_next = NULL;
->
-> @@ -134,36 +118,14 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c
-> iscsitarget-1.4.20
->
->         blk_finish_plug(&plug);
->  diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/conn.c
-> iscsitarget-1.4.20.3+svn502/kernel/conn.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/conn.c      2016-09-25
-> 19:45:01.774641057 +0530
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/conn.c  2016-09-25
-> 19:47:59.666474094 +0530
-> -@@ -89,13 +89,21 @@ static void iet_state_change(struct sock
-> -       target->nthread_info.old_state_change(sk);
-> - }
-> -
-> -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)
-> -+static void iet_data_ready(struct sock *sk)
-> -+#else
-> - static void iet_data_ready(struct sock *sk, int len)
-> -+#endif
-> - {
-> -       struct iscsi_conn *conn = sk->sk_user_data;
-> -       struct iscsi_target *target = conn->session->target;
-> -
-> -       nthread_wakeup(target);
-> -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)
-> -+      target->nthread_info.old_data_ready(sk);
-> -+#else
-> -       target->nthread_info.old_data_ready(sk, len);
-> -+#endif
-> - }
-> -
-> - /*
-> -@@ -140,8 +148,14 @@ static void iet_socket_bind(struct iscsi
-> +--- iscsitarget-1.4.20.3+svn502_org/kernel/conn.c      2017-01-19
-> 20:19:27.400507354 -0800
-> ++++ iscsitarget-1.4.20.3+svn502/kernel/conn.c  2017-01-19
-> 20:32:22.978988614 -0800
-> +@@ -148,8 +148,14 @@ static void iet_socket_bind(struct iscsi
->         target->nthread_info.old_state_change = conn->sock->sk->sk_state_
-> change;
->         conn->sock->sk->sk_state_change = iet_state_change;
->
-> -+#if 0//LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> -+      target->nthread_info.old_data_ready = (void (*) (struct sock *,
-> int )) \
-> ++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
-> ++      target->nthread_info.old_data_ready = (void (*) (struct sock *)) \
->  +
-> conn->sock->sk->sk_data_ready;
->  +      conn->sock->sk->sk_data_ready = (void (*) (struct sock *))
-> iet_data_ready;
->  +#else
-> @@ -174,8 +136,8 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/conn.c
-> iscsitarget-1.4.20.3+s
->         target->nthread_info.old_write_space = conn->sock->sk->sk_write_
-> space;
->         conn->sock->sk->sk_write_space = iet_write_space;
->  diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/digest.c
-> iscsitarget-1.4.20.3+svn502/kernel/digest.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/digest.c    2014-05-07
-> 02:29:55.000000000 +0530
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/digest.c        2016-09-25
-> 19:47:59.666474094 +0530
-> +--- iscsitarget-1.4.20.3+svn502_org/kernel/digest.c    2014-05-06
-> 13:59:55.000000000 -0700
-> ++++ iscsitarget-1.4.20.3+svn502/kernel/digest.c        2017-01-19
-> 20:32:22.978988614 -0800
->  @@ -30,6 +30,9 @@ void digest_alg_available(unsigned int *
->   int digest_init(struct iscsi_conn *conn)
->   {
-> @@ -374,8 +336,8 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/digest.c
-> iscsitarget-1.4.20.3
->  +#endif
->   }
->  diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h
-> iscsitarget-1.4.20.3+svn502/kernel/iscsi.h
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h     2016-09-25
-> 19:45:01.734641099 +0530
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/iscsi.h 2016-09-25
-> 19:47:59.666474094 +0530
-> +--- iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h     2017-01-19
-> 20:19:27.400507354 -0800
-> ++++ iscsitarget-1.4.20.3+svn502/kernel/iscsi.h 2017-01-19
-> 20:32:22.979988634 -0800
->  @@ -14,6 +14,7 @@
->   #include <linux/pagemap.h>
->   #include <linux/seq_file.h>
-> @@ -384,19 +346,7 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h
-> iscsitarget-1.4.20.3+
->   #include <linux/crypto.h>
->   #include <linux/scatterlist.h>
->   #include <net/sock.h>
-> -@@ -81,7 +82,11 @@ struct network_thread_info {
-> -       spinlock_t nthread_lock;
-> -
-> -       void (*old_state_change)(struct sock *);
-> -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)
-> -+      void (*old_data_ready)(struct sock *);
-> -+#else
-> -       void (*old_data_ready)(struct sock *, int);
-> -+#endif
-> -       void (*old_write_space)(struct sock *);
-> - };
-> -
-> -@@ -275,8 +280,13 @@ struct iscsi_conn {
-> +@@ -275,8 +276,13 @@ struct iscsi_conn {
->         u32 write_offset;
->         int write_state;
->
-> @@ -410,7 +360,7 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h
-> iscsitarget-1.4.20.3+
->         struct scatterlist hash_sg[ISCSI_CONN_IOV_MAX];
->   };
->
-> -@@ -552,4 +562,10 @@ enum cmnd_flags {
-> +@@ -552,4 +558,10 @@ enum cmnd_flags {
->   #define PRODUCT_ID    "VIRTUAL-DISK"
->   #define PRODUCT_REV   "0"
->
-> @@ -422,9 +372,9 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h
-> iscsitarget-1.4.20.3+
->  +
->   #endif        /* __ISCSI_H__ */
->  diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c
-> iscsitarget-1.4.20.3+svn502/kernel/nthread.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c   2016-09-25
-> 19:45:01.734641099 +0530
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/nthread.c       2016-09-25
-> 19:47:59.666474094 +0530
-> -@@ -126,7 +126,12 @@ static int do_recv(struct iscsi_conn *co
-> +--- iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c   2017-01-19
-> 20:19:27.276504928 -0800
-> ++++ iscsitarget-1.4.20.3+svn502/kernel/nthread.c       2017-01-19
-> 20:32:22.979988634 -0800
-> +@@ -155,7 +155,12 @@ static int do_recv(struct iscsi_conn *co
->
->         oldfs = get_fs();
->         set_fs(get_ds());
-> @@ -437,7 +387,7 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c
-> iscsitarget-1.4.20.
->         set_fs(oldfs);
->
->         if (res <= 0) {
-> -@@ -347,7 +352,11 @@ static int write_data(struct iscsi_conn
-> +@@ -376,7 +381,11 @@ static int write_data(struct iscsi_conn
->                         ;
->                 oldfs = get_fs();
->                 set_fs(KERNEL_DS);
-> @@ -449,7 +399,7 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c
-> iscsitarget-1.4.20.
->                 set_fs(oldfs);
->                 dprintk(D_DATA, "%#Lx:%u: %d(%ld)\n",
->                         (unsigned long long) conn->session->sid, conn->cid,
-> -@@ -478,7 +487,11 @@ static int tx_ddigest(struct iscsi_cmnd
-> +@@ -503,7 +512,11 @@ static int tx_ddigest(struct iscsi_cmnd
->         iov.iov_base = (char *) (&cmnd->ddigest) + (sizeof(u32) - rest);
->         iov.iov_len = rest;
->
-> @@ -461,7 +411,7 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c
-> iscsitarget-1.4.20.
->
->         if (res > 0) {
->                 cmnd->conn->write_size -= res;
-> -@@ -677,7 +690,12 @@ static void close_conn(struct iscsi_conn
-> +@@ -702,7 +715,12 @@ static void close_conn(struct iscsi_conn
->
->         write_lock_bh(&conn->sock->sk->sk_callback_lock);
->         conn->sock->sk->sk_state_change = target->nthread_info.old_
-> state_change;
-> @@ -475,8 +425,8 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c
-> iscsitarget-1.4.20.
->         write_unlock_bh(&conn->sock->sk->sk_callback_lock);
->
->  diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/volume.c
-> iscsitarget-1.4.20.3+svn502/kernel/volume.c
-> ---- iscsitarget-1.4.20.3+svn502_org/kernel/volume.c    2016-09-25
-> 19:45:01.734641099 +0530
-> -+++ iscsitarget-1.4.20.3+svn502/kernel/volume.c        2016-09-25
-> 19:47:59.666474094 +0530
-> +--- iscsitarget-1.4.20.3+svn502_org/kernel/volume.c    2017-01-19
-> 20:19:27.276504928 -0800
-> ++++ iscsitarget-1.4.20.3+svn502/kernel/volume.c        2017-01-19
-> 20:32:22.979988634 -0800
->  @@ -84,12 +84,25 @@ static int set_scsisn(struct iet_volume
->   /* Generate a MD5 hash of the target IQN and LUN number */
->   static void gen_scsiid(struct iet_volume *volume)
-> --
-> 2.7.4
->
->
 
