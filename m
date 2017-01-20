@@ -1,51 +1,22 @@
-Return-Path: <olof.johansson@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 496D5719B5
+Return-Path: <marex@denx.de>
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+	by mail.openembedded.org (Postfix) with ESMTP id E754D6AC3C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 10:21:15 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id D00EA180E6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 11:21:15 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id mTK535f95XYE
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 11:21:11 +0100 (CET)
-Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
-	by bastet.se.axis.com (Postfix) with ESMTPS id 6D2FC18119
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 11:21:11 +0100 (CET)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 5B1C91A064
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 11:21:11 +0100 (CET)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 505391A060
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 11:21:11 +0100 (CET)
-Received: from thoth.se.axis.com (unknown [10.0.2.173])
-	by boulder02.se.axis.com (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 11:21:11 +0100 (CET)
-Received: from lnxolofjn.se.axis.com (lnxolofjn.se.axis.com [10.92.17.1])
-	by thoth.se.axis.com (Postfix) with ESMTP id 44DEF2C6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 11:21:11 +0100 (CET)
-Received: by lnxolofjn.se.axis.com (Postfix, from userid 20466)
-	id 2ADED9C09F; Fri, 20 Jan 2017 11:21:11 +0100 (CET)
-Date: Fri, 20 Jan 2017 11:21:11 +0100
-From: Olof Johansson <olof.johansson@axis.com>
+	Fri, 20 Jan 2017 10:59:17 +0000 (UTC)
+Received: from mail.nefkom.net (unknown [192.168.6.184])
+	by mail-out.m-online.net (Postfix) with ESMTP id 3v4d4h6fH2z3hjTn;
+	Fri, 20 Jan 2017 11:59:16 +0100 (CET)
+X-Auth-Info: gBbehnXi01SxDUKSw5uhzu5mxlXMuoB/J4Cw6opZzq0=
+Received: from kurokawa.lan (unknown [195.140.253.167])
+	by smtp-auth.mnet-online.de (Postfix) with ESMTPA id 3v4d4h5VVPzvdWV;
+	Fri, 20 Jan 2017 11:59:16 +0100 (CET)
+From: Marek Vasut <marex@denx.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170120102110.GR31993@axis.com>
-References: <1482363538-28271-1-git-send-email-derek@asterius.io>
-	<CAFZh4h81OfiN9UXDM-cZyqUexaBStK16LHSg8zPu00d9t4+27w@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAFZh4h81OfiN9UXDM-cZyqUexaBStK16LHSg8zPu00d9t4+27w@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-X-TM-AS-GCONF: 00
-Subject: Re: [meta-webserver][PATCH] apache2: update to version 2.4.25
+Date: Fri, 20 Jan 2017 11:59:08 +0100
+Message-Id: <20170120105908.857-1-marex@denx.de>
+X-Mailer: git-send-email 2.11.0
+Cc: Marek Vasut <marex@denx.de>
+Subject: [PATCH] picocom: Fix build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,33 +29,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2017 10:21:16 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 20 Jan 2017 10:59:18 -0000
 
-On 17-01-11 08:52 -0500, Brian Hutchinson wrote:
-> On Wed, Dec 21, 2016 at 6:38 PM, Derek Straka <derek@asterius.io> wrote:
-> >  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.23.bb => apache2_2.4.25.bb} (97%)
-> 
-> How long does it typically take for something like this to show up in
-> the Krogoth (2.1.2) and Morty (2.2) branch?
-> 
-> Just wondering because I did a fresh checked of both yesterday and
-> they didn't have this fix yet.
+The picocom complains about missing GNU_HASH from the binary during
+QA stage, this is because the picocom Makefile overrides CPPFLAGS,
+CFLAGS and LDFLAGS. Fix this by passing those as an argument to make.
+Moreover, since picocom 1.7 now accepts VERSION variable and the
+UUCP_LOCK_DIR is set to /var/lock by default, drop the CPPFLAGS
+override altogether and replace it simply with passing VERSION
+argument to make to precisely retain the original intention.
 
-The change bumps to a newer version (even skipping one
-intermediate release). This is typically not something that would
-be integrated to a stable branch (although I haven't looked
-closer at the difference between the versions).
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+V2: Use EXTRA_OEMAKE instead of custom do_configure
+V3: Use EXTRA_OEMAKE instead of EXTRA_OEMAKE_append
+---
+ meta-oe/recipes-support/picocom/picocom_1.7.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-But I just sent patches for krogoth and morty to change the
-SRC_URI to point to archive.apache.org instead as the 2.4.23
-tarball has been moved.
-
-If you want the later upstream version while still staying on
-Krogoth/Morty, I think you'll have to make a local backport.
-
-Hope this helps,
+diff --git a/meta-oe/recipes-support/picocom/picocom_1.7.bb b/meta-oe/recipes-support/picocom/picocom_1.7.bb
+index dbee65609..d2a76c0a9 100644
+--- a/meta-oe/recipes-support/picocom/picocom_1.7.bb
++++ b/meta-oe/recipes-support/picocom/picocom_1.7.bb
+@@ -9,7 +9,8 @@ SRC_URI = "http://picocom.googlecode.com/files/picocom-${PV}.tar.gz"
+ SRC_URI[md5sum] = "8eaba1d31407e8408674d6e57af447ef"
+ SRC_URI[sha256sum] = "d0f31c8f7a215a76922d30c81a52b9a2348c89e02a84935517002b3bc2c1129e"
+ 
+-CPPFLAGS_append = '-DVERSION_STR=\\"${PV}\\" -DUUCP_LOCK_DIR=\\"/var/lock\\" -DHIGH_BAUD'
++EXTRA_OEMAKE = "'CC=${CC}' 'LD=${LD}' 'VERSION=${PV}' \
++		'CFLAGS=${CFLAGS}' 'LDFLAGS=${LDFLAGS}' "
+ 
+ do_install () {
+     install -d ${D}${bindir}
 -- 
-olofjn
+2.11.0
+
 
