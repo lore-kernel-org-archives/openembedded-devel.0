@@ -1,49 +1,43 @@
-Return-Path: <kergoth@gmail.com>
-Received: from mail-ot0-f195.google.com (mail-ot0-f195.google.com
-	[74.125.82.195])
-	by mail.openembedded.org (Postfix) with ESMTP id DB07071DEE
+Return-Path: <fathi.boudra@linaro.org>
+Received: from mail-lf0-f43.google.com (mail-lf0-f43.google.com
+	[209.85.215.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 20CA2719B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 02:07:38 +0000 (UTC)
-Received: by mail-ot0-f195.google.com with SMTP id 65so6196947otq.2
+	Fri, 20 Jan 2017 06:03:56 +0000 (UTC)
+Received: by mail-lf0-f43.google.com with SMTP id n124so50697702lfd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jan 2017 18:07:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=aByg4MQ2i9UbGb9U1jsq+BekEhP751KA47sPEFLxPaw=;
-	b=vR30B9kfzAf86ITG38iobxQWWbu8/iOt+FtYhrRe1YKlwgDqWw4WQ0KGUPxOZkQaH1
-	yhlQGuMWPNRtSIBxI+l7spn4XqzxFWczzXU0PIptt4/PR0FtyPjW+ItmwuZBdw9Q0bTv
-	BGI8WwZXS5Mt6ekUKetgdn1b23kqX4t0JLSRgRVvp9zVoevYXGPplXBCt631p8zXANt/
-	1CIYLxOrmyFSBrtP0A5Xia+eseLjxOF6tqj0n7qHGlPCNMkftwZb490AN/TOlLGeCywP
-	I/6eWajXrwXP5wBaZMHctf9VUlkUrXQuGvFTHIbQS2EehHDM5G3bBjp1lNby3AQcraOb
-	sn3w==
+	Thu, 19 Jan 2017 22:03:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=HWFf5sJbFr0e1JGcR1QEAKFMOypgTJkB10x+knV96Kg=;
+	b=hM/KfYc0Rw4K1/CztSAITAxHjPTHh0y3vXtruCsrwC5pStYhy38fPFmTla52JuCM7E
+	aHIR9G+uvV08NbqW/zkXYX0J09xl94YJ6K+pE0inG0PtuB9U9QTd8bHAshLkKnERtiTQ
+	29msuQNfdZ3KXY2nuPA3nzlH2Lu54+/nlGy4w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to:cc;
-	bh=aByg4MQ2i9UbGb9U1jsq+BekEhP751KA47sPEFLxPaw=;
-	b=j7mIS1yqnESseKnConMZQFNmHbZBrK6pwTkoi3zBFJsoW35J4PtLVYYB8APF73C2qD
-	yTwwzqH2Sl5s9GDAqG/nHqgORy4kQoFNpxuuemJB3bd48LgvNEqDdWBvzkYmEk5R/xLd
-	zZcO3bRJ+5kgu2GGpNfOejmQk98HEoCY2uhqMWlm3rmpnywi5fAagUmzCHYWxusAX3jv
-	0ndA2ViwaaY+fl3bJewrFjg04tMIhnvODf5rbOJvhT5MzuDsPUxfEE0rkttrhgOxVu4/
-	x98obkoOF0xtf3djb1nQPN0afapXVdooSuN+cdQTwEQZmrbQar7F5r9Z9g+tqJE4/EmA
-	SVrg==
-X-Gm-Message-State: AIkVDXIiNgcqDGpdaBqMQTrhEWKHpOmJqhNjHKe9ghMHOpw1mFNWAhBdQU3Q4n1k4vHj3/zVtLBfaI/QwLfXfA==
-X-Received: by 10.157.44.153 with SMTP id p25mr5472730otb.27.1484878058751;
-	Thu, 19 Jan 2017 18:07:38 -0800 (PST)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.157.5.8 with HTTP; Thu, 19 Jan 2017 18:07:18 -0800 (PST)
-In-Reply-To: <20170120001516.1625-1-marex@denx.de>
-References: <20170120001516.1625-1-marex@denx.de>
-From: Christopher Larson <clarson@kergoth.com>
-Date: Thu, 19 Jan 2017 19:07:18 -0700
-X-Google-Sender-Auth: JvkhWWu2vxrlZ3jL-so9y7rKnPw
-Message-ID: <CABcZANnpob1SagRbdCuAo7Uy=uZeqgYvTAfna_ZTC4g2hv1Wcg@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH V2] picocom: Fix build
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=HWFf5sJbFr0e1JGcR1QEAKFMOypgTJkB10x+knV96Kg=;
+	b=tZ2mysHDcqIWF+tC9P63YOjteq+sgeo+jQzwRGb0b1eegqdalrHUkU8NQbov/bS9Z1
+	VNGbZjSd8+UsrA6ldxgigCYZny/CpV2CDb3lel7tn/q17QJcUNj4JY0VFAgFXNzoJXkb
+	pxgoZoQjmxgy3/w7p4mthKxCYNToDL8xs4OVoqyFB/YmwvCNuOAlwCFo5jK9g8Ojj1ys
+	XPzonVu7aBXEYS7InBGKA7u6zjkYLiuVi8M5BjBmN4fL2Ng8oQp+0Kx+WoFSvGjSdzJA
+	Ad15ADCq45i9Mg0k4ICob9gtHz1PbIQiJrm0b0JcO+kLKMASiKqi5J2yyF8MMp6DkV0m
+	3/OA==
+X-Gm-Message-State: AIkVDXL/gWMdCUwiBCyjfcJWHwrYXdkhIP8XYSHlOmRVu+TnkEocxgk1BnioQf3HbToNwXxj
+X-Received: by 10.46.87.73 with SMTP id r9mr6021647ljd.22.1484892235891;
+	Thu, 19 Jan 2017 22:03:55 -0800 (PST)
+Received: from localhost.localdomain (a91-156-68-16.elisa-laajakaista.fi.
+	[91.156.68.16])
+	by smtp.gmail.com with ESMTPSA id k7sm2869161lfe.26.2017.01.19.22.03.54
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 19 Jan 2017 22:03:54 -0800 (PST)
+From: Fathi Boudra <fathi.boudra@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 20 Jan 2017 08:03:49 +0200
+Message-Id: <20170120060349.15051-1-fathi.boudra@linaro.org>
+X-Mailer: git-send-email 2.11.0
+Cc: koen@dominion.thruhere.net
+Subject: [meta-oe][PATCH] fwts: upgrade to 17.01.00 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,48 +50,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2017 02:07:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 20 Jan 2017 06:03:57 -0000
 
-On Thu, Jan 19, 2017 at 5:15 PM, Marek Vasut <marex@denx.de> wrote:
+Update PV and SRCREV to match 17.01.00 release
 
-> The picocom complains about missing GNU_HASH from the binary during
-> QA stage, this is because the picocom Makefile overrides CPPFLAGS,
-> CFLAGS and LDFLAGS. Fix this by passing those as an argument to make.
-> Moreover, since picocom 1.7 now accepts VERSION variable and the
-> UUCP_LOCK_DIR is set to /var/lock by default, drop the CPPFLAGS
-> override altogether and replace it simply with passing VERSION
-> argument to make to precisely retain the original intention.
->
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> V2: Use EXTRA_OEMAKE instead of custom do_configure
-> ---
->  meta-oe/recipes-support/picocom/picocom_1.7.bb | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-support/picocom/picocom_1.7.bb
-> b/meta-oe/recipes-support/picocom/picocom_1.7.bb
-> index dbee65609..ca0b8f419 100644
-> --- a/meta-oe/recipes-support/picocom/picocom_1.7.bb
-> +++ b/meta-oe/recipes-support/picocom/picocom_1.7.bb
-> @@ -9,7 +9,8 @@ SRC_URI = "http://picocom.googlecode.
-> com/files/picocom-${PV}.tar.gz"
->  SRC_URI[md5sum] = "8eaba1d31407e8408674d6e57af447ef"
->  SRC_URI[sha256sum] = "d0f31c8f7a215a76922d30c81a52b9
-> a2348c89e02a84935517002b3bc2c1129e"
->
-> -CPPFLAGS_append = '-DVERSION_STR=\\"${PV}\\"
-> -DUUCP_LOCK_DIR=\\"/var/lock\\" -DHIGH_BAUD'
-> +EXTRA_OEMAKE_append = "'CC=${CC}' 'LD=${LD}' 'VERSION=${PV}' \
+Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+---
+ meta-oe/recipes-test/fwts/fwts_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-
-I'd suggest ditching the pointless _append while you're at it (just use =
-or +=). Besides, the use of _append was missing a space separator, so the
-CC wouldn't be obeyed.
+diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb b/meta-oe/recipes-test/fwts/fwts_git.bb
+index 82ed5ecf0..6c4cd483e 100644
+--- a/meta-oe/recipes-test/fwts/fwts_git.bb
++++ b/meta-oe/recipes-test/fwts/fwts_git.bb
+@@ -5,9 +5,9 @@ HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd34dcdb9e4db568519"
+ 
+-PV = "16.12.00"
++PV = "17.01.00"
+ 
+-SRCREV = "d38fced7db86e5483d5c2e634ee1eec98620d5b8"
++SRCREV = "0d44a57aab82c9861b6d36d73dc2c7c8a6696c21"
+ SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git \
+            file://0001-ignore-constant-logical-operand-warning-with-clang.patch \
+            "
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Senior Software Engineer, Mentor Graphics
+2.11.0
+
 
