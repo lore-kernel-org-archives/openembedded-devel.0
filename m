@@ -1,45 +1,48 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 2569A7316D
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id B14717316D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 14:43:56 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id c206so46841550wme.0
+	Fri, 20 Jan 2017 14:43:57 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id r144so46685104wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 06:43:57 -0800 (PST)
+	Fri, 20 Jan 2017 06:43:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id;
-	bh=I6fl9llHYJiuX+Rjiewsj7oSQG5H/3pyd59orsJAmHw=;
-	b=SkvWDBU9QipJB/7tJ5QwFA1gmY3sTZprskyXUKrp0xxVmYimJERBpf+O7EIgTmvAGN
-	OGckc9q77p/CSwJMH8Y5Q6xCgWMNJxtRcrwl4cpQL3+yroY92lAl+fcNnzMdNB5NblTs
-	FEGhWlTvEz1Rv8u8N7VxedqBHqjFBCGPIRPvkFxxRmNYufFn6vb0hikR4NRJJcSVWIEf
-	JE+0LR5rbRxH82sruwvIxXIHCncLEzbqwZdlVZopOOGeKy3JvxpJWWVft5gtWFctqO8m
-	d0Ds5PkBHxDCFDZczmJUfudnO4ptRuPGSnmlnD15QdgNrKMhqJiaLDHmIjkyN3vLfOJj
-	sNXw==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=/i4AfErCXBIrG6wS3JfwPCN++HiWqqPUNrjLOvL6wPg=;
+	b=nF6gQgxq3hmm7RGAYTs4PK5ZcDk29l0RH0k2+WgLRHPnPfl5ziM0OKdR5nn5X+5thV
+	5kr6zxDQpvRRJNaCdgOimkJJJuq/YqiSX14PlC5kGiZFXQMSTI/afghtDxE/ypb4J84n
+	oEiVWCL/vcg9jmdJPRbYpewr1sR9VxLRRBorLu1HZVEWy/lqhKS1lu+jeiZQP4K/QSEp
+	szkNo+uyS+myubUUAg18aDtxPU+7z4cmAEjD8la4z8Kwdnk1XfBsUf0Ml6ZGt089sSjF
+	+49XHaRJ8G4iOv4d1wOCh7mrXsqaOrvw0566GXBRrYUtXbDWO3+4ALloqbS6b+2XgKDw
+	QrdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=I6fl9llHYJiuX+Rjiewsj7oSQG5H/3pyd59orsJAmHw=;
-	b=Wbe75ztjy4Cpg2vxaJokWCcNDng/4pm2ocVIOrXlnMYOW7tcJohQIdOIoLJ/HRYNT9
-	MG3We7Kg6PvIv2K5mqaTfP2m/TUk8Sd+N+Qw695BDP83DwdpAC2UCQDbn8f0krfSvRHa
-	UF8Nw67BRTDy0/6sESYos/wGzy5DSvVeaKdcf2gh9WvlyGdPjHmPx2GD3ukkf8z2gWpV
-	xxZswMyntqLGZhAq8CktkfFGQMkTfyQnzIIV5v7MuGDfdkZ5vTRzo3tPoen1Z3StW1bH
-	uDBm8FaZaWAG5g9C2WjlG+SH9lRPNdrpym950GTOC1cTnnMAWroQqK0BJmS2K8KWpB/R
-	iACA==
-X-Gm-Message-State: AIkVDXL35LUsMJeKfXwzV1Fw5QFG/8CppBq8ECb/sVlA6Tu2i1B2zM5nzP2fXOD431PVT0Hl
-X-Received: by 10.223.176.142 with SMTP id i14mr14490148wra.4.1484923436299;
-	Fri, 20 Jan 2017 06:43:56 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references;
+	bh=/i4AfErCXBIrG6wS3JfwPCN++HiWqqPUNrjLOvL6wPg=;
+	b=PRpj8fPy7SNlz/tZnkL9Q+FPWj1QihQUkUIDyA+TmCoyFK1J6d60UngBzj05HwKXR/
+	e0i8xxJOXj+5yiAPEBymdq49/6qeMi2sZmdE1W3Y1xdBXyFYvqMomTfq1cfqyvBNlhuF
+	YAoLOHSpZZxLm3841SOAp5LkUZj42h/54y9GSqs5Fb+z8lYgYMIHFAF4t4o4RqnabHFO
+	ALquWjQoMQ8vBeyvJfLbRUjtwwiBWZ7d9opaAXrYIu1hMQSQfHpyJm+qarYeOW/ETH3p
+	d0FUN8lxos46Yz4LQ6nkuPd/5XE9zk5PJiZivCkYdYhv7LVMFsqC0EOhhCig8eKmkYvD
+	uIKw==
+X-Gm-Message-State: AIkVDXKMfPn5p8vboCvbnG+BRYGUgbnucrhr/91W9I0OmVwSl5xD5cpMnK4ceHa/YBJKnXaG
+X-Received: by 10.28.228.87 with SMTP id b84mr3612479wmh.0.1484923437216;
+	Fri, 20 Jan 2017 06:43:57 -0800 (PST)
 Received: from flashheart.burtonini.com (home.burtonini.com. [81.2.106.35])
-	by smtp.gmail.com with ESMTPSA id d29sm70220wrc.42.2017.01.20.06.43.55
+	by smtp.gmail.com with ESMTPSA id d29sm70220wrc.42.2017.01.20.06.43.56
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 20 Jan 2017 06:43:55 -0800 (PST)
+	Fri, 20 Jan 2017 06:43:56 -0800 (PST)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Jan 2017 14:43:49 +0000
-Message-Id: <1484923430-3222-1-git-send-email-ross.burton@intel.com>
+Date: Fri, 20 Jan 2017 14:43:50 +0000
+Message-Id: <1484923430-3222-2-git-send-email-ross.burton@intel.com>
 X-Mailer: git-send-email 2.8.1
-Subject: [meta-oe][PATCH 1/2] calibrateproto: add, from oe-core
+In-Reply-To: <1484923430-3222-1-git-send-email-ross.burton@intel.com>
+References: <1484923430-3222-1-git-send-email-ross.burton@intel.com>
+Subject: [meta-oe][PATCH 2/2] libxcalibrate: add, from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,87 +57,76 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 20 Jan 2017 14:43:57 -0000
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- .../xorg-proto/calibrateproto/fix.patch            | 42 ++++++++++++++++++++++
- .../xorg-proto/calibrateproto_git.bb               | 19 ++++++++++
- 2 files changed, 61 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/xorg-proto/calibrateproto/fix.patch
- create mode 100644 meta-oe/recipes-graphics/xorg-proto/calibrateproto_git.bb
+ .../xorg-lib/libxcalibrate/fix-xcb.patch           | 29 ++++++++++++++++++++++
+ .../recipes-graphics/xorg-lib/libxcalibrate_git.bb | 22 ++++++++++++++++
+ 2 files changed, 51 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/xorg-lib/libxcalibrate/fix-xcb.patch
+ create mode 100644 meta-oe/recipes-graphics/xorg-lib/libxcalibrate_git.bb
 
-diff --git a/meta-oe/recipes-graphics/xorg-proto/calibrateproto/fix.patch b/meta-oe/recipes-graphics/xorg-proto/calibrateproto/fix.patch
+diff --git a/meta-oe/recipes-graphics/xorg-lib/libxcalibrate/fix-xcb.patch b/meta-oe/recipes-graphics/xorg-lib/libxcalibrate/fix-xcb.patch
 new file mode 100644
-index 0000000..ff8cb25
+index 0000000..d614883
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-proto/calibrateproto/fix.patch
-@@ -0,0 +1,42 @@
++++ b/meta-oe/recipes-graphics/xorg-lib/libxcalibrate/fix-xcb.patch
+@@ -0,0 +1,29 @@
 +Upstream-Status: Pending
 +
-+Add missing length fields to the replies. Without these, sanity checking in recent X
-+breaks things.
++There is no extra reply data and if we say not to disgard it, xcb
++throws fatal asserts.
 +
-+RP 11/2/10
++RP - 26/11/09
 +
-+
-+Index: git/xcalibrateproto.h
++Index: git/xcalibrate.c
 +===================================================================
-+--- git.orig/xcalibrateproto.h	2010-02-11 11:47:45.711985932 +0000
-++++ git/xcalibrateproto.h	2010-02-11 11:40:21.000000000 +0000
-+@@ -67,13 +67,13 @@
-+     BYTE    type;   /* X_Reply */
-+     BYTE    pad1;
-+     CARD16  sequenceNumber B16;
-++    CARD32  length;
-+     CARD32  status;
-+     CARD32  pad2 B32;
-+     CARD32  pad3 B32;
-+     CARD32  pad4 B32;
-+     CARD32  pad5 B32;
-+     CARD32  pad6 B32;
-+-    CARD32  pad7 B32;
-+ } xXCalibrateRawModeReply;
-+ 
-+ #define sz_xXCalibrateRawModeReply	32
-+@@ -92,13 +92,13 @@
-+     BYTE    type;   /* X_Reply */
-+     BYTE    pad1;
-+     CARD16  sequenceNumber B16;
-++    CARD32  length;
-+     CARD32  x;
-+     CARD32  y;
-+     CARD32  pad2 B32;
-+     CARD32  pad3 B32;
-+     CARD32  pad4 B32;
-+     CARD32  pad5 B32;
-+-    CARD32  pad6 B32;
-+ } xXCalibrateScreenToCoordReply;
-+ 
-+ #define sz_xXCalibrateScreenToCoordReply	32
-diff --git a/meta-oe/recipes-graphics/xorg-proto/calibrateproto_git.bb b/meta-oe/recipes-graphics/xorg-proto/calibrateproto_git.bb
++--- git.orig/xcalibrate.c	2009-11-26 08:11:48.000000000 +0000
+++++ git/xcalibrate.c	2009-11-26 08:09:55.000000000 +0000
++@@ -216,7 +216,7 @@
++   req->reqType = info->codes->major_opcode;
++   req->xCalibrateReqType = X_XCalibrateRawMode;
++   req->on = enable;
++-  if (!_XReply (dpy, (xReply *) &rep, 0, xFalse)) 
+++  if (!_XReply (dpy, (xReply *) &rep, 0, xTrue)) 
++     {
++       UnlockDisplay (dpy);
++       SyncHandle ();
++@@ -240,7 +240,7 @@
++   req->xCalibrateReqType = X_XCalibrateScreenToCoord;
++   req->x = *x;
++   req->y = *y;
++-  if (!_XReply (dpy, (xReply *) &rep, 0, xFalse)) 
+++  if (!_XReply (dpy, (xReply *) &rep, 0, xTrue)) 
++     {
++       UnlockDisplay (dpy);
++       SyncHandle ();
+diff --git a/meta-oe/recipes-graphics/xorg-lib/libxcalibrate_git.bb b/meta-oe/recipes-graphics/xorg-lib/libxcalibrate_git.bb
 new file mode 100644
-index 0000000..b88d157
+index 0000000..455e869
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-proto/calibrateproto_git.bb
-@@ -0,0 +1,19 @@
-+require xorg-proto-common.inc
++++ b/meta-oe/recipes-graphics/xorg-lib/libxcalibrate_git.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "XCalibrate: Touchscreen calibration library"
 +
-+SUMMARY = "XCalibrate: Touchscreen calibration headers"
++DESCRIPTION = "libXCalibrate is a library for performing touchscreen \
++calibration with the kdrive tslib touchscreen driver."
 +
-+DESCRIPTION = "This package provides the wire protocol for the \
-+Touchscreen calibration extension."
++require xorg-lib-common.inc
 +
 +LICENSE = "MIT-style"
-+LIC_FILES_CHKSUM = "file://xcalibratewire.h;endline=23;md5=7f86ef7b03cce6c4c9ebd59d20ca485f \
-+                    file://xcalibrateproto.h;endline=23;md5=e4490491edcc171ca24f98569ee580db"
++LIC_FILES_CHKSUM = "file://xcalibrate.h;endline=21;md5=fa572df6439f0f235f2612f370f153d7 \
++                    file://xcalibrate.c;endline=21;md5=fa572df6439f0f235f2612f370f153d7"
 +
-+SRCREV = "1da6fd1e2c7a49648245c98481fabea8b9690a8c"
++DEPENDS = "virtual/libx11 calibrateproto libxext"
 +
++SRCREV = "209d83af61ed38a002c8096377deac292b3e396c"
 +PV = "0.0+git${SRCPV}"
-+PR = "r2"
 +
-+SRC_URI = "git://anongit.freedesktop.org/git/xorg/proto/calibrateproto \
-+           file://fix.patch;apply=yes"
++SRC_URI = "git://anongit.freedesktop.org/git/xorg/lib/libXCalibrate \
++           file://fix-xcb.patch"
++
 +S = "${WORKDIR}/git"
++
++FILES_${PN}-locale += "${datadir}/X11/locale"
 -- 
 2.8.1
 
