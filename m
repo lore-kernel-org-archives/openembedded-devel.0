@@ -1,43 +1,44 @@
-Return-Path: <fathi.boudra@linaro.org>
-Received: from mail-lf0-f43.google.com (mail-lf0-f43.google.com
-	[209.85.215.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 20CA2719B5
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ua0-f195.google.com (mail-ua0-f195.google.com
+	[209.85.217.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 74D10719A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 06:03:56 +0000 (UTC)
-Received: by mail-lf0-f43.google.com with SMTP id n124so50697702lfd.2
+	Fri, 20 Jan 2017 06:52:07 +0000 (UTC)
+Received: by mail-ua0-f195.google.com with SMTP id i68so6377683uad.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Jan 2017 22:03:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=HWFf5sJbFr0e1JGcR1QEAKFMOypgTJkB10x+knV96Kg=;
-	b=hM/KfYc0Rw4K1/CztSAITAxHjPTHh0y3vXtruCsrwC5pStYhy38fPFmTla52JuCM7E
-	aHIR9G+uvV08NbqW/zkXYX0J09xl94YJ6K+pE0inG0PtuB9U9QTd8bHAshLkKnERtiTQ
-	29msuQNfdZ3KXY2nuPA3nzlH2Lu54+/nlGy4w=
+	Thu, 19 Jan 2017 22:52:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=k+bAseu2VvJ22HwK3yvKTKrqVO4ZC6idzI4ILoAqbsw=;
+	b=Wth2kgAfH/fg287dm1z7NnpCJMK3yaZWNSoYIqTArzONAOExdzQMea65zzxLkh9FUw
+	lBhET/ksGQybDvaHr0Y7P0wEHWE7kkUcq0HnhI0rOATUTH3MdzQTMxEkIyHH06XGwH1w
+	XCq+ZTTnCWlWdLsRvhUvyVDKM41UF8heRfkbES+x3wHlZeSz1aRwidPpkuxs6G2QXdhJ
+	NuxAoMftQBPL3ermLMLO8/bGwPPs/FwsXrKpjkoDdUpAp+KVyrPKMja02PJhg+GxkzWI
+	QF2bnu6EkMtGzh7jjoSz1abJsDA0CJq0hWverqbNLwxl2S+WCxC9EAlFoOZsvFg4uV3W
+	lb1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=HWFf5sJbFr0e1JGcR1QEAKFMOypgTJkB10x+knV96Kg=;
-	b=tZ2mysHDcqIWF+tC9P63YOjteq+sgeo+jQzwRGb0b1eegqdalrHUkU8NQbov/bS9Z1
-	VNGbZjSd8+UsrA6ldxgigCYZny/CpV2CDb3lel7tn/q17QJcUNj4JY0VFAgFXNzoJXkb
-	pxgoZoQjmxgy3/w7p4mthKxCYNToDL8xs4OVoqyFB/YmwvCNuOAlwCFo5jK9g8Ojj1ys
-	XPzonVu7aBXEYS7InBGKA7u6zjkYLiuVi8M5BjBmN4fL2Ng8oQp+0Kx+WoFSvGjSdzJA
-	Ad15ADCq45i9Mg0k4ICob9gtHz1PbIQiJrm0b0JcO+kLKMASiKqi5J2yyF8MMp6DkV0m
-	3/OA==
-X-Gm-Message-State: AIkVDXL/gWMdCUwiBCyjfcJWHwrYXdkhIP8XYSHlOmRVu+TnkEocxgk1BnioQf3HbToNwXxj
-X-Received: by 10.46.87.73 with SMTP id r9mr6021647ljd.22.1484892235891;
-	Thu, 19 Jan 2017 22:03:55 -0800 (PST)
-Received: from localhost.localdomain (a91-156-68-16.elisa-laajakaista.fi.
-	[91.156.68.16])
-	by smtp.gmail.com with ESMTPSA id k7sm2869161lfe.26.2017.01.19.22.03.54
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 19 Jan 2017 22:03:54 -0800 (PST)
-From: Fathi Boudra <fathi.boudra@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Jan 2017 08:03:49 +0200
-Message-Id: <20170120060349.15051-1-fathi.boudra@linaro.org>
-X-Mailer: git-send-email 2.11.0
-Cc: koen@dominion.thruhere.net
-Subject: [meta-oe][PATCH] fwts: upgrade to 17.01.00 release
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=k+bAseu2VvJ22HwK3yvKTKrqVO4ZC6idzI4ILoAqbsw=;
+	b=efQGtbPzzL9GsYsaYlOc7RsiH2O6RPhLb4ZiIkQDoxacU9QWTVsXudRG8Ecwl9Ssfh
+	n5yy5FjMurHTJ7tajNTHM9041FO8HWcffy7Gl9lykano8azTVG95qMduvbpp3oTJ4Dx5
+	DylBwalZnTjLw8ahB0GkvDd9mrTbIaO0eVG5u1eggYWgzza9yGeA8NS5VmuQX6hlct4F
+	tjmeG7Axw7myhU1MwpmChRfAmpxFilQCYhcTpR+oVmfLt+o9051LjKF8y/b5mLxtqW2F
+	JWCzsC3PJxW/gCxRD0hyoUxxEAGrCxezv/J9xsxuXPG4uZFG7ztoYaJearDs785Ik7Uc
+	baLQ==
+X-Gm-Message-State: AIkVDXJbUVUQ5hiLoLpgNZYutKYgxDSCUK/7pfhlB7PcxC0d/QFVyudAS0C9lBc/2hqyvTY1wA0bVLJfGvvYXw==
+X-Received: by 10.176.66.66 with SMTP id i60mr7035248uai.131.1484895127297;
+	Thu, 19 Jan 2017 22:52:07 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.159.48.222 with HTTP; Thu, 19 Jan 2017 22:51:36 -0800 (PST)
+In-Reply-To: <1484831267-76876-1-git-send-email-herve.jourdain@neuf.fr>
+References: <1484831267-76876-1-git-send-email-herve.jourdain@neuf.fr>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 19 Jan 2017 22:51:36 -0800
+Message-ID: <CAMKF1spnG0SjdGk8rb8oR4G__vdj5xhdDdMTDw_bgtBkYr4W7A@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] Minor improvements: configure complains it can't find oe-device-extra.pri, and add libxkbcommon in the dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,32 +51,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2017 06:03:57 -0000
+X-List-Received-Date: Fri, 20 Jan 2017 06:52:12 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Update PV and SRCREV to match 17.01.00 release
+On Thu, Jan 19, 2017 at 5:07 AM, Herve Jourdain <herve.jourdain@neuf.fr> wrote:
+> During configure, it complains it can't find oe-device-extra.pri, but it doesn't result in any error. Fix it, though, just in case.
+> In qtwayland, xkb should be optional, but it's not for the moment, so add it to the dependencies.
 
-Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
----
- meta-oe/recipes-test/fwts/fwts_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Does this also mean that now we need to enable x11 along with wayland
+for distro features ?
 
-diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb b/meta-oe/recipes-test/fwts/fwts_git.bb
-index 82ed5ecf0..6c4cd483e 100644
---- a/meta-oe/recipes-test/fwts/fwts_git.bb
-+++ b/meta-oe/recipes-test/fwts/fwts_git.bb
-@@ -5,9 +5,9 @@ HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd34dcdb9e4db568519"
- 
--PV = "16.12.00"
-+PV = "17.01.00"
- 
--SRCREV = "d38fced7db86e5483d5c2e634ee1eec98620d5b8"
-+SRCREV = "0d44a57aab82c9861b6d36d73dc2c7c8a6696c21"
- SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git \
-            file://0001-ignore-constant-logical-operand-warning-with-clang.patch \
-            "
--- 
-2.11.0
-
+>
+> Signed-off-by: Herve Jourdain <herve.jourdain@neuf.fr>
+> ---
+>  recipes-qt/qt5/qtbase_git.bb    | 3 +++
+>  recipes-qt/qt5/qtwayland_git.bb | 1 +
+>  2 files changed, 4 insertions(+)
+>
+> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+> index 6541973..258c7ed 100644
+> --- a/recipes-qt/qt5/qtbase_git.bb
+> +++ b/recipes-qt/qt5/qtbase_git.bb
+> @@ -173,6 +173,9 @@ do_configure() {
+>          ln -sf ${OE_QMAKE_QMAKE_ORIG} ${B}/bin/qmake
+>      fi
+>
+> +    # Avoid qmake error "Cannot read [...]/usr/lib/qt5/mkspecs/oe-device-extra.pri: No such file or directory" during configuration
+> +    touch ${S}/mkspecs/oe-device-extra.pri
+> +
+>      ${S}/configure -v \
+>          -opensource -confirm-license \
+>          -sysroot ${STAGING_DIR_TARGET} \
+> diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
+> index e315924..51421d5 100644
+> --- a/recipes-qt/qt5/qtwayland_git.bb
+> +++ b/recipes-qt/qt5/qtwayland_git.bb
+> @@ -18,6 +18,7 @@ LIC_FILES_CHKSUM = " \
+>
+>  #FIXME: xkb should be optional; we add it here to fix the build error without it
+>  #       (https://bugreports.qt.io/browse/QTBUG-54851)
+> +DEPENDS += "libxkbcommon"
+>  PACKAGECONFIG ?= " \
+>      compositor-api \
+>      wayland-egl \
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
