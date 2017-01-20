@@ -1,33 +1,46 @@
-Return-Path: <herve.jourdain@neuf.fr>
-Received: from smtp26.services.sfr.fr (smtp26.services.sfr.fr [93.17.128.163])
-	by mail.openembedded.org (Postfix) with ESMTP id 697CE71E12
+Return-Path: <jkrishnanjanappa@mvista.com>
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 3C7EE71E12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 08:37:15 +0000 (UTC)
-Received: from nbhjo (36-225-57-150.dynamic-ip.hinet.net [36.225.57.150])
-	by msfrf2603.sfr.fr (SMTP Server) with ESMTP id 2626A1C000421
+	Fri, 20 Jan 2017 08:38:49 +0000 (UTC)
+Received: by mail-wm0-f50.google.com with SMTP id r144so32501613wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 09:37:14 +0100 (CET)
-Received: from nbhjo (36-225-57-150.dynamic-ip.hinet.net
-	[36.225.57.150])	(using TLSv1.2
-	with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))	(No client
-	certificate requested)	(Authenticated sender: herve.jourdain@neuf.fr)
-	by msfrf2603.sfr.fr (SMTP Server) with ESMTPSA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Jan 2017 09:37:12 +0100 (CET)
-Authentication-Results: sfr.fr; auth=pass (LOGIN)
-	smtp.auth=herve.jourdain@neuf.fr
-From: Herve Jourdain <herve.jourdain@neuf.fr>
-To: openembedded-devel@lists.openembedded.org
-References: <1484831267-76876-1-git-send-email-herve.jourdain@neuf.fr>
-	<CAMKF1spnG0SjdGk8rb8oR4G__vdj5xhdDdMTDw_bgtBkYr4W7A@mail.gmail.com>
-In-Reply-To: <CAMKF1spnG0SjdGk8rb8oR4G__vdj5xhdDdMTDw_bgtBkYr4W7A@mail.gmail.com>
-Date: Fri, 20 Jan 2017 09:37:06 +0100
-Message-ID: <008f01d272f8$64cfc6c0$2e6f5440$@neuf.fr>
+	Fri, 20 Jan 2017 00:38:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=mvista-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=GMluE1BEtAC5qR+ycN1TEhpVfhfEmKes2Fr9RZv+Fbs=;
+	b=ys3N/r42q1qpX8OM+t5iFS9T+/xZfYWYqfk/6BNlo8WGZn6KBKTuCFbcxXJGyspoIx
+	fJjkHdjoRBryShtF/vmxo5hid2R8b7yJNlcKNzSoZDgHEUWZKxxpn7SZNhM1HRm8eIdV
+	vURTuuTPQC+ejVdodQr07QOgxdZC9tQjfNQwJOYFpT1TRvqEXkSL4k5IXrgz2DBqt9m7
+	mrSsOMsDMY1eZfZScglCnAKPXPnkM64oTNFOtbIsRySmbEXYtPoYveUnH22GCjwqnsVl
+	oE1jFi9DX/GOzqvgMFILQ0o2ts2Funa6TFqhDFvydcVeYQmUNYTczXLLAeZ6XgMnTfOL
+	PSkg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=GMluE1BEtAC5qR+ycN1TEhpVfhfEmKes2Fr9RZv+Fbs=;
+	b=PyUx2Rhkt4eCQFBYgE4QE9O3N2nflgvA0ZAChS0jDlnGnSVC99IthPZSAoOGnXJoRf
+	FEXES3BueuURvNoFtIc7Gtg1siRlFtZTvcQWAdRQg3tTwx/vS7ZaZKKAowpwxX10ZUKQ
+	pH46ZpBRfW4PV6v8QvEU5f7pLPcIZop4+E1dvQSt1v24vpWfWs26GZSklcrMZVBKQ61N
+	jJjrTL5XDrx4zGJMxYI/Pa1LU5Gw6+UXpCNdLG56ZpcVX6vMdloXtpwvNcslLTcqCp2x
+	3uRyzJpRN0ogbMDUeX4BpoW489ZZ1NRLxOh1KyLeUSDzvyCFsu0UA30RlzDz6Gk2rz4A
+	5zQA==
+X-Gm-Message-State: AIkVDXLMAKpFOyBOBeNBcHTHad/jM1iwpU7WgW7d0r1tQT8WKq234/CFtJzJ5uTC5aJSdnkOrLBhOdJbJ78klhKS
+X-Received: by 10.28.141.78 with SMTP id p75mr2181926wmd.114.1484901529595;
+	Fri, 20 Jan 2017 00:38:49 -0800 (PST)
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 15.0
-Thread-Index: AQIY1yKFu/CZdx0jMPjKqKBEIcNN5wN83tqWoJhaGLA=
-X-sfr-mailing: LEGIT
-Subject: Re: ***SPAM*** Re: [meta-qt5][PATCH] Minor improvements: configure complains it can't find oe-device-extra.pri, and add libxkbcommon in the dependencies
+Received: by 10.28.226.133 with HTTP; Fri, 20 Jan 2017 00:38:49 -0800 (PST)
+In-Reply-To: <1484900677-11893-3-git-send-email-jkrishnanjanappa@mvista.com>
+References: <1484900677-11893-1-git-send-email-jkrishnanjanappa@mvista.com>
+	<1484900677-11893-3-git-send-email-jkrishnanjanappa@mvista.com>
+From: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+Date: Fri, 20 Jan 2017 14:08:49 +0530
+Message-ID: <CAD3vsf4y9uwBqbCM2VxW88FMof7M_XiOhxshSnjyWfaa6z1QNA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-networking][PATCH 3/3] iscsitarget: update patch to contain changes required to build with only linux v4.8 and above
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,87 +53,276 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Jan 2017 08:37:17 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Content-Language: fr
+X-List-Received-Date: Fri, 20 Jan 2017 08:38:50 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi Khem,
+The above patch builds fine on top of the recent change
+http://lists.openembedded.org/pipermail/openembedded-devel/2017-January/110775.html
+submitted to iscsitarget recipe (which is not in master branch yet).
 
-It seems not, since I disabled X11. Only libxkbcommon is needed, and it
-doesn't pull the whole X11 AFAIK.
+Regards,
+Jagadeesh
 
-Cheers,
-Herve
+On Fri, Jan 20, 2017 at 1:54 PM, Jagadeesh Krishnanjanappa <
+jkrishnanjanappa@mvista.com> wrote:
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of Khem
-Raj
-Sent: vendredi 20 janvier 2017 07:52
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: ***SPAM*** Re: [oe] [meta-qt5][PATCH] Minor improvements: configure
-complains it can't find oe-device-extra.pri, and add libxkbcommon in the
-dependencies
-
-On Thu, Jan 19, 2017 at 5:07 AM, Herve Jourdain <herve.jourdain@neuf.fr>
-wrote:
-> During configure, it complains it can't find oe-device-extra.pri, but it
-doesn't result in any error. Fix it, though, just in case.
-> In qtwayland, xkb should be optional, but it's not for the moment, so add
-it to the dependencies.
-
-Does this also mean that now we need to enable x11 along with wayland for
-distro features ?
-
+> 1. Removes lines related "LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)",
+>    as they are included in recent
+>    build_with_updated_bio_struct_of_linux_v4.3_and_above.patch.
 >
-> Signed-off-by: Herve Jourdain <herve.jourdain@neuf.fr>
+> 2. Updated incorrect "#if 0//LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8,
+> 0)" line.
+>
+> 3. Updated patch to have in compliance with recent
+>    build_with_updated_bio_struct_of_linux_v4.3_and_above.patch.
+>
+> Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 > ---
->  recipes-qt/qt5/qtbase_git.bb    | 3 +++
->  recipes-qt/qt5/qtwayland_git.bb | 1 +
->  2 files changed, 4 insertions(+)
+>  ...pdated_interfaces_of_linux_v4.8_and_above.patch | 96
+> ++++++----------------
+>  1 file changed, 23 insertions(+), 73 deletions(-)
 >
-> diff --git a/recipes-qt/qt5/qtbase_git.bb 
-> b/recipes-qt/qt5/qtbase_git.bb index 6541973..258c7ed 100644
-> --- a/recipes-qt/qt5/qtbase_git.bb
-> +++ b/recipes-qt/qt5/qtbase_git.bb
-> @@ -173,6 +173,9 @@ do_configure() {
->          ln -sf ${OE_QMAKE_QMAKE_ORIG} ${B}/bin/qmake
->      fi
+> diff --git a/meta-networking/recipes-extended/iscsitarget/files/
+> build_with_updated_interfaces_of_linux_v4.8_and_above.patch
+> b/meta-networking/recipes-extended/iscsitarget/files/
+> build_with_updated_interfaces_of_linux_v4.8_and_above.patch
+> index e55c407..e508a5e 100644
+> --- a/meta-networking/recipes-extended/iscsitarget/files/
+> build_with_updated_interfaces_of_linux_v4.8_and_above.patch
+> +++ b/meta-networking/recipes-extended/iscsitarget/files/
+> build_with_updated_interfaces_of_linux_v4.8_and_above.patch
+> @@ -90,25 +90,9 @@ Upstream-Status: Pending
+>  Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 >
-> +    # Avoid qmake error "Cannot read
-[...]/usr/lib/qt5/mkspecs/oe-device-extra.pri: No such file or directory"
-during configuration
-> +    touch ${S}/mkspecs/oe-device-extra.pri
-> +
->      ${S}/configure -v \
->          -opensource -confirm-license \
->          -sysroot ${STAGING_DIR_TARGET} \ diff --git 
-> a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb 
-> index e315924..51421d5 100644
-> --- a/recipes-qt/qt5/qtwayland_git.bb
-> +++ b/recipes-qt/qt5/qtwayland_git.bb
-> @@ -18,6 +18,7 @@ LIC_FILES_CHKSUM = " \
+>  diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c
+> iscsitarget-1.4.20.3+svn502/kernel/block-io.c
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c  2016-09-25
+> 19:45:01.814641016 +0530
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/block-io.c      2016-09-25
+> 19:47:59.666474094 +0530
+> -@@ -57,7 +57,6 @@ static int
+> - blockio_make_request(struct iet_volume *volume, struct tio *tio, int rw)
+> - {
+> -       struct blockio_data *bio_data = volume->private;
+> --      struct request_queue *bdev_q = bdev_get_queue(bio_data->bdev);
+> -       struct tio_work *tio_work;
+> -       struct bio *tio_bio = NULL, *bio = NULL, *biotail = NULL;
+> -       struct blk_plug plug;
+> -@@ -69,6 +68,7 @@ blockio_make_request(struct iet_volume *
+> -       int err = 0;
+> -       loff_t ppos = tio->offset;
+> - #else
+> -+      struct request_queue *bdev_q = bdev_get_queue(bio_data->bdev);
+> -       int max_pages = 1;
+> -       int err = 0;
+> -
+> -@@ -102,7 +102,11 @@ blockio_make_request(struct iet_volume *
+> +--- iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c  2017-01-19
+> 20:19:27.400507354 -0800
+> ++++ iscsitarget-1.4.20.3+svn502/kernel/block-io.c      2017-01-19
+> 20:32:22.977988593 -0800
+> +@@ -104,7 +104,11 @@ blockio_make_request(struct iet_volume *
+>                 /* bi_sector is ALWAYS in units of 512 bytes */
+>                 bio->bi_iter.bi_sector = ppos >> 9;
+>                 bio->bi_bdev = bio_data->bdev;
+> @@ -120,7 +104,7 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c
+> iscsitarget-1.4.20
+>                 bio->bi_private = tio_work;
 >
->  #FIXME: xkb should be optional; we add it here to fix the build error
-without it
->  #       (https://bugreports.qt.io/browse/QTBUG-54851)
-> +DEPENDS += "libxkbcommon"
->  PACKAGECONFIG ?= " \
->      compositor-api \
->      wayland-egl \
+>                 if (tio_bio)
+> -@@ -137,7 +141,12 @@ blockio_make_request(struct iet_volume *
+> +@@ -139,7 +143,12 @@ blockio_make_request(struct iet_volume *
+>                 tio_bio = tio_bio->bi_next;
+>                 bio->bi_next = NULL;
+>
+> @@ -134,36 +118,14 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/block-io.c
+> iscsitarget-1.4.20
+>
+>         blk_finish_plug(&plug);
+>  diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/conn.c
+> iscsitarget-1.4.20.3+svn502/kernel/conn.c
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/conn.c      2016-09-25
+> 19:45:01.774641057 +0530
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/conn.c  2016-09-25
+> 19:47:59.666474094 +0530
+> -@@ -89,13 +89,21 @@ static void iet_state_change(struct sock
+> -       target->nthread_info.old_state_change(sk);
+> - }
+> -
+> -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)
+> -+static void iet_data_ready(struct sock *sk)
+> -+#else
+> - static void iet_data_ready(struct sock *sk, int len)
+> -+#endif
+> - {
+> -       struct iscsi_conn *conn = sk->sk_user_data;
+> -       struct iscsi_target *target = conn->session->target;
+> -
+> -       nthread_wakeup(target);
+> -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)
+> -+      target->nthread_info.old_data_ready(sk);
+> -+#else
+> -       target->nthread_info.old_data_ready(sk, len);
+> -+#endif
+> - }
+> -
+> - /*
+> -@@ -140,8 +148,14 @@ static void iet_socket_bind(struct iscsi
+> +--- iscsitarget-1.4.20.3+svn502_org/kernel/conn.c      2017-01-19
+> 20:19:27.400507354 -0800
+> ++++ iscsitarget-1.4.20.3+svn502/kernel/conn.c  2017-01-19
+> 20:32:22.978988614 -0800
+> +@@ -148,8 +148,14 @@ static void iet_socket_bind(struct iscsi
+>         target->nthread_info.old_state_change = conn->sock->sk->sk_state_
+> change;
+>         conn->sock->sk->sk_state_change = iet_state_change;
+>
+> -+#if 0//LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
+> -+      target->nthread_info.old_data_ready = (void (*) (struct sock *,
+> int )) \
+> ++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 8, 0)
+> ++      target->nthread_info.old_data_ready = (void (*) (struct sock *)) \
+>  +
+> conn->sock->sk->sk_data_ready;
+>  +      conn->sock->sk->sk_data_ready = (void (*) (struct sock *))
+> iet_data_ready;
+>  +#else
+> @@ -174,8 +136,8 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/conn.c
+> iscsitarget-1.4.20.3+s
+>         target->nthread_info.old_write_space = conn->sock->sk->sk_write_
+> space;
+>         conn->sock->sk->sk_write_space = iet_write_space;
+>  diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/digest.c
+> iscsitarget-1.4.20.3+svn502/kernel/digest.c
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/digest.c    2014-05-07
+> 02:29:55.000000000 +0530
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/digest.c        2016-09-25
+> 19:47:59.666474094 +0530
+> +--- iscsitarget-1.4.20.3+svn502_org/kernel/digest.c    2014-05-06
+> 13:59:55.000000000 -0700
+> ++++ iscsitarget-1.4.20.3+svn502/kernel/digest.c        2017-01-19
+> 20:32:22.978988614 -0800
+>  @@ -30,6 +30,9 @@ void digest_alg_available(unsigned int *
+>   int digest_init(struct iscsi_conn *conn)
+>   {
+> @@ -374,8 +336,8 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/digest.c
+> iscsitarget-1.4.20.3
+>  +#endif
+>   }
+>  diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h
+> iscsitarget-1.4.20.3+svn502/kernel/iscsi.h
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h     2016-09-25
+> 19:45:01.734641099 +0530
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/iscsi.h 2016-09-25
+> 19:47:59.666474094 +0530
+> +--- iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h     2017-01-19
+> 20:19:27.400507354 -0800
+> ++++ iscsitarget-1.4.20.3+svn502/kernel/iscsi.h 2017-01-19
+> 20:32:22.979988634 -0800
+>  @@ -14,6 +14,7 @@
+>   #include <linux/pagemap.h>
+>   #include <linux/seq_file.h>
+> @@ -384,19 +346,7 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h
+> iscsitarget-1.4.20.3+
+>   #include <linux/crypto.h>
+>   #include <linux/scatterlist.h>
+>   #include <net/sock.h>
+> -@@ -81,7 +82,11 @@ struct network_thread_info {
+> -       spinlock_t nthread_lock;
+> -
+> -       void (*old_state_change)(struct sock *);
+> -+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 3, 0)
+> -+      void (*old_data_ready)(struct sock *);
+> -+#else
+> -       void (*old_data_ready)(struct sock *, int);
+> -+#endif
+> -       void (*old_write_space)(struct sock *);
+> - };
+> -
+> -@@ -275,8 +280,13 @@ struct iscsi_conn {
+> +@@ -275,8 +276,13 @@ struct iscsi_conn {
+>         u32 write_offset;
+>         int write_state;
+>
+> @@ -410,7 +360,7 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h
+> iscsitarget-1.4.20.3+
+>         struct scatterlist hash_sg[ISCSI_CONN_IOV_MAX];
+>   };
+>
+> -@@ -552,4 +562,10 @@ enum cmnd_flags {
+> +@@ -552,4 +558,10 @@ enum cmnd_flags {
+>   #define PRODUCT_ID    "VIRTUAL-DISK"
+>   #define PRODUCT_REV   "0"
+>
+> @@ -422,9 +372,9 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/iscsi.h
+> iscsitarget-1.4.20.3+
+>  +
+>   #endif        /* __ISCSI_H__ */
+>  diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c
+> iscsitarget-1.4.20.3+svn502/kernel/nthread.c
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c   2016-09-25
+> 19:45:01.734641099 +0530
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/nthread.c       2016-09-25
+> 19:47:59.666474094 +0530
+> -@@ -126,7 +126,12 @@ static int do_recv(struct iscsi_conn *co
+> +--- iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c   2017-01-19
+> 20:19:27.276504928 -0800
+> ++++ iscsitarget-1.4.20.3+svn502/kernel/nthread.c       2017-01-19
+> 20:32:22.979988634 -0800
+> +@@ -155,7 +155,12 @@ static int do_recv(struct iscsi_conn *co
+>
+>         oldfs = get_fs();
+>         set_fs(get_ds());
+> @@ -437,7 +387,7 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c
+> iscsitarget-1.4.20.
+>         set_fs(oldfs);
+>
+>         if (res <= 0) {
+> -@@ -347,7 +352,11 @@ static int write_data(struct iscsi_conn
+> +@@ -376,7 +381,11 @@ static int write_data(struct iscsi_conn
+>                         ;
+>                 oldfs = get_fs();
+>                 set_fs(KERNEL_DS);
+> @@ -449,7 +399,7 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c
+> iscsitarget-1.4.20.
+>                 set_fs(oldfs);
+>                 dprintk(D_DATA, "%#Lx:%u: %d(%ld)\n",
+>                         (unsigned long long) conn->session->sid, conn->cid,
+> -@@ -478,7 +487,11 @@ static int tx_ddigest(struct iscsi_cmnd
+> +@@ -503,7 +512,11 @@ static int tx_ddigest(struct iscsi_cmnd
+>         iov.iov_base = (char *) (&cmnd->ddigest) + (sizeof(u32) - rest);
+>         iov.iov_len = rest;
+>
+> @@ -461,7 +411,7 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c
+> iscsitarget-1.4.20.
+>
+>         if (res > 0) {
+>                 cmnd->conn->write_size -= res;
+> -@@ -677,7 +690,12 @@ static void close_conn(struct iscsi_conn
+> +@@ -702,7 +715,12 @@ static void close_conn(struct iscsi_conn
+>
+>         write_lock_bh(&conn->sock->sk->sk_callback_lock);
+>         conn->sock->sk->sk_state_change = target->nthread_info.old_
+> state_change;
+> @@ -475,8 +425,8 @@ diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/nthread.c
+> iscsitarget-1.4.20.
+>         write_unlock_bh(&conn->sock->sk->sk_callback_lock);
+>
+>  diff -Naurp iscsitarget-1.4.20.3+svn502_org/kernel/volume.c
+> iscsitarget-1.4.20.3+svn502/kernel/volume.c
+> ---- iscsitarget-1.4.20.3+svn502_org/kernel/volume.c    2016-09-25
+> 19:45:01.734641099 +0530
+> -+++ iscsitarget-1.4.20.3+svn502/kernel/volume.c        2016-09-25
+> 19:47:59.666474094 +0530
+> +--- iscsitarget-1.4.20.3+svn502_org/kernel/volume.c    2017-01-19
+> 20:19:27.276504928 -0800
+> ++++ iscsitarget-1.4.20.3+svn502/kernel/volume.c        2017-01-19
+> 20:32:22.979988634 -0800
+>  @@ -84,12 +84,25 @@ static int set_scsisn(struct iet_volume
+>   /* Generate a MD5 hash of the target IQN and LUN number */
+>   static void gen_scsiid(struct iet_volume *volume)
 > --
 > 2.7.4
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
---
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+>
 
