@@ -1,89 +1,50 @@
-Return-Path: <tom.hochstein@nxp.com>
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
-	(mail-db5eur01on0050.outbound.protection.outlook.com [104.47.2.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 41865772EA
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E28371E4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jan 2017 06:16:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=UqKoCmkfCMMiI404ac9TJfPZlHUPFImnK7pqnXG/K4Y=;
-	b=jjpBfmMStNj8Y1MZftSgAhvPUAZbrX/sY6uh/FgNcRjaL/qZSG18oGBFdJ1ppdOV3RkSBD93mwPyhsspFhjtso0mejKNobvFx/wsvZeadC3eqhVSaJ0kkpgII2ovHJuLAssipqNHL7LaN3k9sIeBEbm8wPbfABQtEyydrPe+gqA=
-Authentication-Results: spf=none (sender IP is )
-	smtp.mailfrom=tom.hochstein@nxp.com; 
-Received: from tx30imx-01.am.freescale.net (192.88.168.1) by
-	AMSPR04MB310.eurprd04.prod.outlook.com (10.242.107.20) with Microsoft
-	SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P384) id
-	15.1.845.12; Fri, 20 Jan 2017 23:42:06 +0000
-From: Tom Hochstein <tom.hochstein@nxp.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 20 Jan 2017 17:35:30 -0600
-Message-ID: <1484955330-9726-1-git-send-email-tom.hochstein@nxp.com>
-X-Mailer: git-send-email 1.9.1
+	Sat, 21 Jan 2017 11:04:29 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id r144so12907240wme.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 21 Jan 2017 03:04:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=GXbVDkopVLNz4WpNRFxk5XLMmwthVytU1cJrUxDXXkM=;
+	b=awYb7LyxKFq9tNLZ+wCs5jK+JLJFtQS3/xCjsXQI4Gc3SBNs34BmGOCm/81YLi4bDv
+	/jno7Mh+XQya79exrFCM73yhF7y1lGM/eOAI6eWPgnFoFkZGckGguiH6melGiNEZUjyu
+	+SHTuXvM/8PLgvXfnz+ht3Q2+n3anNK88/TQ1bSZytyR6awNIhY4XmQzWwppjwhvrX2n
+	KeXVrxxqDPdWVgeVw5IMbbNkLg3fSzOxZHbc8RLdOcCP0PnbTR9B0NAhBzMN3i32jDMv
+	4y2K3x0uLDICiwZ6Hv815sGGlT0ee3A4FNQcwXSsyf073s22ac2/EcseLtkAfHpNZPJ8
+	rNeg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=GXbVDkopVLNz4WpNRFxk5XLMmwthVytU1cJrUxDXXkM=;
+	b=CHP187PRUVHq4WtHATGdmIkiE57G9mbpd3GWLyQgjrGFUmjwLA0L7v4E4Pnr/Of+39
+	UIW3RxMLOMsop/a+A+zUPqR4bRnZX+pLlUlM6QIhkiS0zKPfX7yljLTsqXlr8y7ir4vD
+	YLCyeRJzx3gjzjodsvVRg/Xb6n0sUTXm8oIzW07Qj3hGRLmx7J2d3C3oLsA5XpcIMdrT
+	zrd8XhaWaXbLWORJQBq/3wVVXIIbJwRtJPZjeyDYjVgRn+PQYxwvWDOw+AJRBFrrufGK
+	OuDZc/MNU5U2mJQMS1Ykel4jEOuLibWsw6ljjrauQwE1EQiZPVIUW/pRtjhGFi0eOXn4
+	N8tA==
+X-Gm-Message-State: AIkVDXJhnExSZBP8naqPNJXIFFst6jEUC76eohCj5Xm3ENa/Lhj0zuVJCiVDCUWniQ+kGA==
+X-Received: by 10.223.150.183 with SMTP id u52mr15439689wrb.180.1484996669787; 
+	Sat, 21 Jan 2017 03:04:29 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	l74sm10425910wmg.2.2017.01.21.03.04.28
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sat, 21 Jan 2017 03:04:28 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sat, 21 Jan 2017 12:04:29 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20170121110429.GA3026@jama>
+References: <1484812412-26806-1-git-send-email-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-X-Originating-IP: [192.88.168.1]
-X-ClientProxiedBy: BN6PR15CA0024.namprd15.prod.outlook.com (10.172.204.162) To
-	AMSPR04MB310.eurprd04.prod.outlook.com (10.242.107.20)
-X-MS-Office365-Filtering-Correlation-Id: 6fc57710-8f8a-4b31-fb1e-08d4418df205
-X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:(22001);SRVR:AMSPR04MB310;
-X-Microsoft-Exchange-Diagnostics: 1; AMSPR04MB310;
-	3:eXg0J4m+5G4+o06ahPjsOhiJ6Vu5YYLxRDc/aT61taJkPcy1vyoipYxIWA7OvCbro39ilGm4sCDHmWZo/bOBihHV2azN7lPjex3NXpPDCKM+RgoQuQxw4PTOhUq457kUqAnDKiFOcevxwHSzwAOVr/6fB6s09cmJSMhyVQKk5+dc1wuDVFDv4SM4KmmWM7oprmEkwHRXy9WqiBwz/JEaQMG4hJQgOwGpeUeLigqQJOutjgy+yKFgzOqB2LTA5r0eXut/La2IR77tXaKZOCEpKA==
-X-Microsoft-Exchange-Diagnostics: 1; AMSPR04MB310;
-	25:z1AYJM+O4mJNoUyXfoxWSlQhmFe0xguzhRQqe6e8vZSktCyTKdBXxdZBMk8sOVDhNN/KPKBtmF/ntiBWjzvnC6zY7KWOA/NHd6496J8YLxy46XrEIbPIJngLfdtLnYGzw3SBDcKcSkDVeOvqUQISwIpyKXfUc2V7ootwaH9iud3EXctWDg28mk7YrJgsuOCI2a9xEUWLH5SQQfayZsiEuNA3VOx65LxwIg1iy10+dy4FqC8l7Ue4Aik++i6bNu2FqjFk/2xC2eorMXGaUBC+plMsW+wZ4qMNJvnZ8WbDdQ+UUmPXkWMSV0g0k1YwyK1Mpcma099VEiJ3/pOvry1ZoB2CTo7O23q/jg+PS8yKbGcd/pvVtApZhPkQF98t7kx2FTKlgypIzOyO9MLwmO8AqyTalUyB9whtMAw6L+nH/Ef2ehmRl5hbobKE8Oy465V1L2gEoc47PdpgNHPkZigiDRBLNAPj3u6sGu/H69lrQKrim8tSY916XU13xJKj/RAyFILR1+KuSAhh9JJKon7CIddh1HhQtVrrU1z3vHmsnrzF7ESvVs0rffzcanS7KVMh/GTCx5RHfBX022kIgtspVM/LXzs0vcB3K6CA90n2cPyudeodCVr+o512Glucnzx3FcuU7qSgrcxJgPItY4tnYt3xQ+6oCOoKHCfRFSg9+4RoCXljZLHkzl3yJLTskVqwy4WCTz1zJABxtp0seZdPa+GRnVpaFXQgSVxr2mNuYessD7k13FD52yBjfq7VHiG+
-X-Microsoft-Exchange-Diagnostics: 1; AMSPR04MB310;
-	31:BIythla3px97CSpTLQJTkakLUnYE4RwN6b4pVc7l/t4fcKAD4rL01EvNQQZuVYvkM/hFeTK3I5j9CSjGqDiPrrsUwx1SLkdGQ61kJFnBfvHXz502cLpnM7EuVyQBwNoVfeplYJUxL0FIWi7Rftgw5BsUoizSIPibl3dH5lAjHE6GIQZttioJH5iEYUb5ZAfwfKHw2doYPuNoMku4aVDxmWbpNs2ayZuMUe2yDAPpPFZ8G3pb6m7Nnf5e2nnpW09n8zabJijbhFFRXRxB27YtkA==;
-	20:iK9I/5C4kyWHs/l/7SQQlWgP2TFgrUwDraUWs761qq1U4AmnrgnAo1sxkVrk2S9XWPbUxxclxTCDWvAugA2MQZrguxNJidpVt1Yk5NRIgVzoU6fYZY1rvLEXIcHB3NFSa4Et4qPtE64MJqQ6xYkFDAoWzwOJjuZ0YKAo5ASjPFJVrg0axj8KedC8nbe9n8KEqgP2VuKJOfG5Fdca4NvmbSC+g/8z/+l3oecpT6HCBQ+igtET3iY+5uicB0TQ2m03qlgT6qZ6NbQ89S8EfMGkQnuR0Aulks/LbE0+EoSF8l63tQbmYqRFbTHIgcQwJSShr8uONXyFePDeGNEvIrXbpktwK/P9nNDdUZUWIlBG+C1oxGfgXpIP/a/e0pMYk8INpuyNewYXe6UemfX6kBFbopLtwcWoghhQq3GWjGosjEIRTecboe1FHOmv5volsu/uNbaklfvgaQi4O5+9Aq2aIEtqWUD2mmS9yTfTpuRMxUIlSsRVO+REmbYTxHIQSjnj
-X-Microsoft-Antispam-PRVS: <AMSPR04MB310219F0BD7C13E452E0AEFE2710@AMSPR04MB310.eurprd04.prod.outlook.com>
-X-Exchange-Antispam-Report-Test: UriScan:(185117386973197);
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(6040375)(601004)(2401047)(5005006)(8121501046)(3002001)(10201501046)(6055026)(6041248)(20161123562025)(20161123560025)(20161123564025)(20161123555025)(6072148)(6047074);
-	SRVR:AMSPR04MB310; BCL:0; PCL:0; RULEID:; SRVR:AMSPR04MB310; 
-X-Microsoft-Exchange-Diagnostics: 1; AMSPR04MB310;
-	4:wwsz5s0HTRaTRYZFhAehTCrZ7VI0gFOxhYROetvbiyA+czMemfbyUDUiwEz/hYiYCcR4SMb2K5GwfU0U7QRsdBveC9OrWoVDNnn+YCP8kpdWT0tcoM/i0tn7bmpfC0AWZiquvRpS6rSW7DsrlbgfUVCe56Ak7JCWbv4VUx5qGObZbSPxvRxyXvoFTqbQmvCNjALzBmm+MDhaR1a6EnHpMMdT30QUijLjr4DIGMMTpzP910Qlzbag6B8SnnQaw/EPbfontjGcv10OteehG6bMXXldp7LR35bN0qA42NHv2KsRbeu4xSJNV1xTh2dqGESVfJ1OQeSDvQeXuxtR3nPZd8pDwz7a/40yMdWYTc8XPsveNYs8PzK95XgXgB+zFFzmRSkPkbzMICetb94fVK9XOqJ9SBcG1h8gCUzUXYYa3eMW9wIof86Q+Ie3FjOIMVhkMun+QsbH/n3bimJkLqfLd3p1piYJ1Cc7DeCJYnThYOkY+j6yyZ1QjiE+F7pbkdZjpdC/8hTuzwJLuOzL/bkAiBMxmmnEUXhHu8zv3YTg7UGlvXzytbgNDrjsaBIT3eH3B9QD+w+DYPpM99TQPVA3CF3dclkK5sLH5jCLvgGTiBw/HCtGP0oyYgluisf9Ou/VsRMXbsaZSFRnuiWKso901w==
-X-Forefront-PRVS: 01930B2BA8
-X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10009020)(4630300001)(6009001)(7916002)(39410400002)(39450400003)(39860400002)(39850400002)(39840400002)(189002)(199003)(81166006)(86362001)(189998001)(6916009)(5660300001)(6666003)(110136003)(6506006)(6486002)(7736002)(33646002)(42186005)(2351001)(305945005)(25786008)(105586002)(6512007)(5003940100001)(36756003)(106356001)(66066001)(50466002)(50226002)(47776003)(450100001)(97736004)(38730400001)(81156014)(92566002)(68736007)(50986999)(2906002)(4326007)(3846002)(8676002)(6116002)(53936002)(101416001)(48376002)(32563001);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:AMSPR04MB310;
-	H:tx30imx-01.am.freescale.net; FPR:; SPF:None; PTR:InfoNoRecords;
-	MX:1; A:1; LANG:en; 
-Received-SPF: None (protection.outlook.com: nxp.com does not designate
-	permitted sender hosts)
-X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; AMSPR04MB310;
-	23:Wd+LVqGf6z+EGbWD6msy9DsbRWmvoyEPf0Krzjyy/2?=
-	=?us-ascii?Q?OuXrwseXYH0eY4F1iz/XEUPA1UcmTGJ4j5p3cTV2Mt1oY4B/54MI2tlQbZg+?=
-	=?us-ascii?Q?+Z1SUiUswFbPKJKPOUPO0iuYvSrG54Wv3jDjfqHBvVFgv9VYY/jwMP6qDs0k?=
-	=?us-ascii?Q?hkmLolqzyNKw/rZZg6a8E5S4mSTPFyiWzguyiTrnLqR3Tw63RWDllUj+H3lL?=
-	=?us-ascii?Q?j1hy8olk+oQnHOqOLJiImQFak1DX4baXu1BlfMOVBu8W6F+BpfqG1mlqmOik?=
-	=?us-ascii?Q?4ofIhwGxgi8zZXq9UjHuePSiteOBviqdNJRDeITaSl5ZfkPzC7QxFoE4MAmj?=
-	=?us-ascii?Q?h2ACbk41PMBdjj7U+nTW/biL+3BPHJ410XjXCZf/yS8dmdqtnbZ/+JrHA0T/?=
-	=?us-ascii?Q?tQojTaWqN8doFNCqq7edmzuv5QmzN3uYQXAb9aHuDEvshnxJBT6EXmLYCGYj?=
-	=?us-ascii?Q?rJiAME36rgmf+ymFqQ8+ZYXAuPtBrTmO4rRniM1iJf5FdQcqAh9gri335t1t?=
-	=?us-ascii?Q?1G2HpaHo6g0zChSLsA1It2jTN1GCJw8QHkHmZpEKpO+UkcEkvgxkW6W9UMTe?=
-	=?us-ascii?Q?Coc3sbBNBX8Ze0IwZVv5JtJpgECbcZVPo5+CI/CUD/huGNVHGtCv/TgBquW3?=
-	=?us-ascii?Q?mQ+c7u4DRUBaXMeKO1pwM9tBv197MqRJ5I0ngWcmqanCb42ryrR+axaRKcnR?=
-	=?us-ascii?Q?uvd3CmW6WMp7IwLYZG6IbA2WTt/n7gBAhr4KtaxVmc13/ti2hhejZqYOpKsH?=
-	=?us-ascii?Q?+GgOZ7J3wBXPyoAC2uYJkf99i825i7j0bO24yjzOWH+y3RDA+sxYDUXV9VN4?=
-	=?us-ascii?Q?vmOHowtz7SbaLyMrJVycNWMzFo60hgjhkuqJNqTmf0OQUr5sCJAFOeEOtvkt?=
-	=?us-ascii?Q?DIBcPd8WkivVP91dOZ2FPndWSmIcCHpdqM07MyXSWPSG3cqXkb1qWArE+EO4?=
-	=?us-ascii?Q?a5i7mfbaN8Ud/HNVARb6/pbBCJ46snL9N8rS4q1h6qIoamCj7r9X6jfwAqAi?=
-	=?us-ascii?Q?PTAp6m52nBtuoxBb2e3eBBzID1oWedhHWLxVGME1WJyaDvApYs2gFTGWqeXE?=
-	=?us-ascii?Q?4CsOf/VJDzFCnRRPoD5HWRKyP1/CwexnuqGO8Zx0kAlTd8w+uS9UlGTplrG/?=
-	=?us-ascii?Q?9KGUDVuaPWHu/8msP//DzNwa5IToiYlIJGFyJSAifEedXFRm8V4BR5Ig2qFl?=
-	=?us-ascii?Q?Mg2koU/8cTwhr/o8FpC9b1IXN68b12yszi1xEiuk/AlMRNiy6M+HEMkw=3D?=
-	=?us-ascii?Q?=3D?=
-X-Microsoft-Exchange-Diagnostics: 1; AMSPR04MB310;
-	6:pEs44qCmhC9dm/myn9puaz8qjTi2frOVCV0xGyHbAEzKz+yjKNKPmKq6lAFuOXVuf5FLEIiD1rtu/FhFQKpc+mBjHlgrT1Vv7iHF5QK5X35/vcsgilf6wxVKqgYu6QtJmsqPpimYFCnQMVdUbfGOhAT+1OVsdA3KOJb9W0zKjUXCvOVRr5crJTlHNtjRGOUbwKacVzdS6rsxjjegE2uzAZqu9XLUIF64rd1LA51dZToq3H4QA+O/xGrHkc35KFjXEAVbeibu6gJ+2oodnMv/tv/PNef/BONsFqIMZmWL0X0n5Q0ZpH6j6lqAAYtzOYYQXH8RKb6ParkWhQfurittIUUFmZIhIzopIGJhznRmQrBaZ6QVKkkOF0PCkY7cLXeCRs+E5i/N/QZ8uyTnCO4MyHs2EChU3aDb0U09NtM4owwkBRuLdSyIdaq/c4cGaL0rZe/+G2BajnEj/C/BFVs4dw==;
-	5:6AZ2ClTGgG7et1SkIDAykYMiqc9xXv+RFhQBpClLpWpAS6enEvNcFuOvZj/oHSmNyTxIFPWgE1G9rbOAdEPH7Qrq5bkNCDZutTor8lkwxkVpo7taMO4DBt1FD/SGkhOhdCrfg0weuT7O7A/iWFr62w==;
-	24:cDokwO6fKWvwgH0BfInefSnKcBspGvXn1tOJneQW8XRz43Fa+o0DN3ZaFe4UswL863bWwT21xsE2qA/IRsMGhFqKUa4JTHgGLmFispWoGUk=
-SpamDiagnosticOutput: 1:99
-SpamDiagnosticMetadata: NSPM
-X-Microsoft-Exchange-Diagnostics: 1; AMSPR04MB310;
-	7:/XVTHIWQYxgqVGw1r7vn3r141UqZLOnMbf2lCY1fwDZvKoLdEAQoJPgSX8wxaOTWsgAdhZ6LuQYd83FNosqgH36f+lpXUo5flwZC4yLVL4ESbVoBaIf+r40FJj4xPTojCy6gD7XCRDTlek8B2z6mZoyogz4ft3v738bjCla3l2ub6RP99Efh59VxQi8XvsyhTQroBOoU8dv33pX7GpyI1j970aojFiuSJKqbbtzPPN+uS/TAGGhHtkyRB422tbEiBgIY7NfGatCB8uMzGBUvgA/y8bOlRjASpbRfTVRF2n6Xi0yGKwfHfV+RnJb3XjDAXUHET2MonSX8d2bUNpyUPAY0fQgGO76bd47W1dzKJ7FrcdQawvW56FiFNC8Xjhqj55Rp+jigue0KNo3FewkuPtmVe0E+KoRLVmxbISPKrl87XU7Ojts4WlAIuQn8Uu7/sbqncwHok6cQ5X8z6OpqIA==
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jan 2017 23:42:06.7598 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMSPR04MB310
-Subject: [meta-qt5][PATCH] qt3d: Add assimp dependency
+In-Reply-To: <1484812412-26806-1-git-send-email-schnitzeltony@googlemail.com>
+User-Agent: Mutt/1.7.2 (2016-11-26)
+Subject: Re: [PATCH 1/9] onboard: initial add 1.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -96,32 +57,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jan 2017 06:16:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 21 Jan 2017 11:04:30 -0000
+X-Groupsio-MsgNum: 64822
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="BOKacYhQ+x31HxR3"
+Content-Disposition: inline
 
-Fix build error:
+--BOKacYhQ+x31HxR3
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-fatal error: assimp/Importer.hpp: No such file or directory
+On Thu, Jan 19, 2017 at 08:53:24AM +0100, Andreas M=FCller wrote:
+> Signed-off-by: Andreas M=FCller <schnitzeltony@googlemail.com>
+> ---
+>  meta-oe/recipes-support/onboard/onboard_1.3.0.bb | 25 ++++++++++++++++++=
+++++++
+>  1 file changed, 25 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/onboard/onboard_1.3.0.bb
+>=20
+> diff --git a/meta-oe/recipes-support/onboard/onboard_1.3.0.bb b/meta-oe/r=
+ecipes-support/onboard/onboard_1.3.0.bb
+> new file mode 100644
+> index 0000000..82393c3
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/onboard/onboard_1.3.0.bb
+> @@ -0,0 +1,25 @@
+> +SUMMARY =3D "An onscreen keyboard"
+> +LICENSE =3D "GPLv3"
+> +LIC_FILES_CHKSUM =3D "file://COPYING.GPL3;md5=3D8521fa4dd51909b407c51504=
+98d34f4e"
+> +
+> +DEPENDS +=3D "gtk+3 hunspell libcanberra libxkbfile dconf"
 
-Signed-off-by: Tom Hochstein <tom.hochstein@nxp.com>
----
- recipes-qt/qt5/qt3d_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+It depends on dconf which is in meta-gnome and meta-oe cannot depend on
+meta-gnome.
 
-diff --git a/recipes-qt/qt5/qt3d_git.bb b/recipes-qt/qt5/qt3d_git.bb
-index 9708ec9..d8f943f 100644
---- a/recipes-qt/qt5/qt3d_git.bb
-+++ b/recipes-qt/qt5/qt3d_git.bb
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
- "
- 
- DEPENDS += "qtbase"
--DEPENDS_class-target += "qtdeclarative qt3d-native"
-+DEPENDS_class-target += "qtdeclarative qt3d-native assimp"
- 
- SRC_URI += " \
-     file://0001-Allow-a-tools-only-build.patch \
--- 
-1.9.1
+Can you move this to meta-gnome as well?
 
+> +SRC_URI =3D "https://launchpad.net/onboard/1.3/${PV}/+download/${BPN}-${=
+PV}.tar.gz"
+> +SRC_URI[md5sum] =3D "8000df3e789512a90fcb227580fd60ff"
+> +SRC_URI[sha256sum] =3D "fd74b54b8bd7a075cf5f6e1a8ca3e6de5cd2663507adb690=
+d7b1a85e71afa2e4"
+> +
+> +inherit setuptools3 pkgconfig gtk-icon-cache gsettings
+> +
+> +FILES_${PN} +=3D " \
+> +    ${datadir}/dbus-1 \
+> +    ${datadir}/icons \
+> +    ${datadir}/gnome-shell \
+> +    ${datadir}/help \
+> +"
+> +
+> +RDEPENDS_${PN} +=3D " \
+> +    ncurses \
+> +    python3-dbus \
+> +    python3-pycairo \
+> +    python3-pygobject \
+> +"
+> --=20
+> 2.7.4
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--BOKacYhQ+x31HxR3
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWINAPAAKCRA3VSO3ZXaA
+HOC/AKC3I+dEAFIj7ErKA/X/SoDzD823GwCglOf4z87heQz4/08iDuTYGxvDSRo=
+=qIAe
+-----END PGP SIGNATURE-----
+
+--BOKacYhQ+x31HxR3--
