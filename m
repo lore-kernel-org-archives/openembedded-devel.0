@@ -1,47 +1,45 @@
-Return-Path: <torcolato@gmail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 40FFC6010B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ua0-f177.google.com (mail-ua0-f177.google.com
+	[209.85.217.177])
+	by mail.openembedded.org (Postfix) with ESMTP id AAA137199E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Jan 2017 18:04:33 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id c206so121283204wme.0
+	Sun, 22 Jan 2017 21:17:34 +0000 (UTC)
+Received: by mail-ua0-f177.google.com with SMTP id 96so97624849uaq.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Jan 2017 10:04:34 -0800 (PST)
+	Sun, 22 Jan 2017 13:17:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:content-transfer-encoding:mime-version:subject:message-id:date
-	:to; bh=vk3V2GjkQ1Y0Zl+Yy0hiCgh6uTUrJ7wXTaOkNtRw5D4=;
-	b=bZ7+TSjH4X8cC7VoX1/Jh1yDDpMNvKTD1oVLCBPoX91zMqmr4Ewc7IlOyXe0n3Q1WX
-	CEpezCv87VVHwQ+DlnAZcmAECBzex9e9WLuFhPBL+FYdVsanMXoqExF58ADqQh99rVeX
-	Kd5H6ZQdx1/x3iSkRp5lqICyc99Yir65tSDULwJwslHRXxdS7t8Xvn+AV6gAmAz0VrEY
-	x4fPw+kDNXAqZp3j6rvf0n8CsA0i0rAwe0BiWJJNVziiUd4JG4pMBBRN99p0kPrci5K6
-	r3KqmaBmm3vvjMU5NDkozSWXK+u/CsGlS2JAjrmOZci8ZOAPFlUm/PyT3wYXZeSNuXta
-	MURA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=XoZLSWnKBQ2XUhxXRhxB+/bwt389wckIR/IOrNtyzZM=;
+	b=QOh9RhNZMfXN2/sNW8gmIROmWAglAe8dGX/gbDuGrbXgh25qOMSvmavkEd4OVLwttu
+	0cjC7WpPSXnkK3VE8Cpl5sn8GKYD0ynCe0nOQrT8zrp0K0qPr5kUPyas1nDFNyQr9cqm
+	RF2JZY2MvkTMkVPt7wZAKgXTFfU1L+Epnmp7fnfV96A16Dpjz7hACd4hPOJcC/al8lVQ
+	3nb4Of0KI8T2xpQbwxet1iFLc5Bi3tEVqizktdfUTUHOvb+SeRqBRr+UX7Wk7ZivYbps
+	7VHni6Ti6u7mOBXNBlh3KkOXK6rjxYn+YCDA2E2aqW0EdLS/v9syf2cuGRtYPpGRySkB
+	l88w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:content-transfer-encoding:mime-version
-	:subject:message-id:date:to;
-	bh=vk3V2GjkQ1Y0Zl+Yy0hiCgh6uTUrJ7wXTaOkNtRw5D4=;
-	b=ixwxSfAfF5V/vzj19KbePH0RWiLcSowyepJxMEg7uPJZvfR8VIyt8qjrFNPssJ4/A7
-	6sfAjPl9xW7NFga/xlSQBhNkrJ0GK7Lfk6ANdpTsodgJ5J6xVTV5tk9UlgtJgH9/a6lL
-	oIzei+Mv4PCzj4jM+BMXon12ewpsgSu/sZ1WbOJnSPod/v70H0jmlDMJGb9P+92dAx1k
-	B3qkDFDlFgr7WLTR6LNLqLhYbL2HmSl9DgepvCslXIC9Ol4qBkz0QdR02Dopv9mE7AMG
-	wRW7B2LU6vWtkm/j2vhhPPI2bbonFwgmMwayPFntEvPmICnrGG1VxkmqBwY9Wy4II9Lp
-	/7VA==
-X-Gm-Message-State: AIkVDXIdTJX6YKLXc6xnVGKMpBuKtcDu1xGayyhVURdJ62rLuFosCt5BwcyD1eE9b6ekpQ==
-X-Received: by 10.223.138.172 with SMTP id y41mr20141453wry.118.1485108273735; 
-	Sun, 22 Jan 2017 10:04:33 -0800 (PST)
-Received: from [192.168.202.100] (p5B20D9E6.dip0.t-ipconnect.de.
-	[91.32.217.230]) by smtp.gmail.com with ESMTPSA id
-	n13sm7101677wrn.40.2017.01.22.10.04.32
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 22 Jan 2017 10:04:33 -0800 (PST)
-From: Christian Lox <torcolato@gmail.com>
-Mime-Version: 1.0 (Mac OS X Mail 10.0 \(3226\))
-Message-Id: <37E7CB14-F61B-4421-8E21-7F190EC293EB@gmail.com>
-Date: Sun, 22 Jan 2017 19:04:32 +0100
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.3226)
-Subject: Python pty module
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-transfer-encoding;
+	bh=XoZLSWnKBQ2XUhxXRhxB+/bwt389wckIR/IOrNtyzZM=;
+	b=uYttV644SxdexuBcXz4zyS7XI3VTH8zuyur8mjwDKeZHE2BVD5yfiz7gL2dG31Uh2t
+	CgNJVQB7YEEVoIcNWzOM2Cj79rDi08rK02Cb0F6AdQMBO1uC5yHmdwb6HAExgaNXpyD8
+	qg9oTY86Qlv+usW9l0+EYDqiiObqsMq+VOBEmSPpn6jBZ3rs403BTLLgnhmVj9Au30tu
+	y27IfMzJ0q8lE40LGHR7yYJGgH/UembZgMSAnXgbowc4sR4NkTyXcHs8+3iWxfrVWmqr
+	h+zHL55JPsUPCwrtD5jARGdzfFmpA//qzZx4gYgwJyEK56Zy79H2XZrUn/l8nhBIrZ2U
+	8Sbw==
+X-Gm-Message-State: AIkVDXKauCDCmH63531hFutQX/gPHG3DV3P8jbVWG4OKHZ5ASPe7Vq177BhZQA0yOf17UwtWrJDAtOQX8M5MWA==
+X-Received: by 10.176.83.153 with SMTP id k25mr11734192uaa.141.1485119854950; 
+	Sun, 22 Jan 2017 13:17:34 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.159.48.222 with HTTP; Sun, 22 Jan 2017 13:17:04 -0800 (PST)
+In-Reply-To: <37E7CB14-F61B-4421-8E21-7F190EC293EB@gmail.com>
+References: <37E7CB14-F61B-4421-8E21-7F190EC293EB@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 22 Jan 2017 13:17:04 -0800
+Message-ID: <CAMKF1srGJ855_wA70ELLZJ104PPxbs9tK-Jzj4PJfwZefFEiRg@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: Python pty module
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,20 +52,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Jan 2017 18:04:34 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Sun, 22 Jan 2017 21:17:37 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi all.
+On Sun, Jan 22, 2017 at 10:04 AM, Christian Lox <torcolato@gmail.com> wrote=
+:
+> Hi all.
+>
+> Hope this is the correct list to ask such questions=E2=80=A6.
+>
+> I am in need of the python pty module but have no idea what I have to bit=
+bake to get it.
+>
+> Any hint highly appreciated!
 
-Hope this is the correct list to ask such questions=E2=80=A6.
+Add following to your image bb
 
-I am in need of the python pty module but have no idea what I have to =
-bitbake to get it.
+IMAGE_INSTALL +=3D "python-terminal"
 
-Any hint highly appreciated!
-
-Thanks
-Christian
-
+>
+> Thanks
+> Christian
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
