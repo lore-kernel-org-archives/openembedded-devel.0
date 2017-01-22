@@ -1,49 +1,47 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 1947A601F2
+Return-Path: <torcolato@gmail.com>
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 40FFC6010B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jan 2017 20:21:39 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id r126so15619135wmr.3
+	Sun, 22 Jan 2017 18:04:33 +0000 (UTC)
+Received: by mail-wm0-f47.google.com with SMTP id c206so121283204wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Jan 2017 12:21:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=7YPjp4geK1hLmc7JdaELo9BQgkCDsYErczM4eUk3vYQ=;
-	b=XFAuLEZ/j+fMT3hLDZv1AhSzaCIRgs142uX5floFafvLQ6pLsaptYnfN9OVjVsk6RW
-	8TfDvOAoaFjoetXIdtRPr/4lq5aQz+StHac6gnHOFtFrav5c9OPLNge6eUvfbVmX8X0I
-	p75FtJshfVmu2ji2pyunMnA0Qf5rq5BEA36LhHNWGysweZlZPFPYT8vVPida5t+qE1yf
-	lFWjnE/IQoFvKrvkXJ4fm3ZeC7BKBSxfwCUWr+AvhLaFBnnNo1tpDtJuVH4B4kEDR9bP
-	vXs6z3BrD/q1ABqTCugJ/XUZpfPRlV7aM797hmUlJJMsIJxzdsviQ8eq812PpuI7qZJ5
-	jv1w==
+	Sun, 22 Jan 2017 10:04:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:content-transfer-encoding:mime-version:subject:message-id:date
+	:to; bh=vk3V2GjkQ1Y0Zl+Yy0hiCgh6uTUrJ7wXTaOkNtRw5D4=;
+	b=bZ7+TSjH4X8cC7VoX1/Jh1yDDpMNvKTD1oVLCBPoX91zMqmr4Ewc7IlOyXe0n3Q1WX
+	CEpezCv87VVHwQ+DlnAZcmAECBzex9e9WLuFhPBL+FYdVsanMXoqExF58ADqQh99rVeX
+	Kd5H6ZQdx1/x3iSkRp5lqICyc99Yir65tSDULwJwslHRXxdS7t8Xvn+AV6gAmAz0VrEY
+	x4fPw+kDNXAqZp3j6rvf0n8CsA0i0rAwe0BiWJJNVziiUd4JG4pMBBRN99p0kPrci5K6
+	r3KqmaBmm3vvjMU5NDkozSWXK+u/CsGlS2JAjrmOZci8ZOAPFlUm/PyT3wYXZeSNuXta
+	MURA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=7YPjp4geK1hLmc7JdaELo9BQgkCDsYErczM4eUk3vYQ=;
-	b=NQE7neHVOgvsTLQNlnMLLhlK8q7mYrrnnNTc029jMtJ+TGJ1PvE2KFsdy/gdthxlMs
-	42ZTCKPH5FZZjqxmL3BZz+Qr5Kk96sSOGZDXEADl5oVBiFN+VZmGcjH5wyyPSjT5hoPD
-	t3TNb/pW1toJqsKBLQi/dLLAEAntMQ2eG4T+HdXDCFB4sgMecMxLCWt5mmTXkKUO5boB
-	AWcMt/rOU2OGC0Bb9EKdAHA7j0BfjrsG2hsjg86ktI8ZyicjJCY+QDB+aRiLSdmgtfRF
-	PbZTs9SzbQ9cKAXQBaHIGhoewaFV/Apo/ljRjDNVX5QqemZVb/054uhInM4jmrPUy5Ay
-	f5Yw==
-X-Gm-Message-State: AIkVDXKHsonWHYJmgEwcS5absIE2LgehGqg5N9dphaRPWnoDKy3/eCXjwH7CVIJyltIUqQ==
-X-Received: by 10.28.51.205 with SMTP id z196mr7786940wmz.22.1485030099113;
-	Sat, 21 Jan 2017 12:21:39 -0800 (PST)
-Received: from localhost.localdomain (p579F7403.dip0.t-ipconnect.de.
-	[87.159.116.3]) by smtp.googlemail.com with ESMTPSA id
-	u198sm12448350wmf.9.2017.01.21.12.21.38
+	h=x-gm-message-state:from:content-transfer-encoding:mime-version
+	:subject:message-id:date:to;
+	bh=vk3V2GjkQ1Y0Zl+Yy0hiCgh6uTUrJ7wXTaOkNtRw5D4=;
+	b=ixwxSfAfF5V/vzj19KbePH0RWiLcSowyepJxMEg7uPJZvfR8VIyt8qjrFNPssJ4/A7
+	6sfAjPl9xW7NFga/xlSQBhNkrJ0GK7Lfk6ANdpTsodgJ5J6xVTV5tk9UlgtJgH9/a6lL
+	oIzei+Mv4PCzj4jM+BMXon12ewpsgSu/sZ1WbOJnSPod/v70H0jmlDMJGb9P+92dAx1k
+	B3qkDFDlFgr7WLTR6LNLqLhYbL2HmSl9DgepvCslXIC9Ol4qBkz0QdR02Dopv9mE7AMG
+	wRW7B2LU6vWtkm/j2vhhPPI2bbonFwgmMwayPFntEvPmICnrGG1VxkmqBwY9Wy4II9Lp
+	/7VA==
+X-Gm-Message-State: AIkVDXIdTJX6YKLXc6xnVGKMpBuKtcDu1xGayyhVURdJ62rLuFosCt5BwcyD1eE9b6ekpQ==
+X-Received: by 10.223.138.172 with SMTP id y41mr20141453wry.118.1485108273735; 
+	Sun, 22 Jan 2017 10:04:33 -0800 (PST)
+Received: from [192.168.202.100] (p5B20D9E6.dip0.t-ipconnect.de.
+	[91.32.217.230]) by smtp.gmail.com with ESMTPSA id
+	n13sm7101677wrn.40.2017.01.22.10.04.32
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 21 Jan 2017 12:21:38 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Sun, 22 Jan 2017 10:04:33 -0800 (PST)
+From: Christian Lox <torcolato@gmail.com>
+Mime-Version: 1.0 (Mac OS X Mail 10.0 \(3226\))
+Message-Id: <37E7CB14-F61B-4421-8E21-7F190EC293EB@gmail.com>
+Date: Sun, 22 Jan 2017 19:04:32 +0100
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Jan 2017 21:21:22 +0100
-Message-Id: <1485030082-4808-1-git-send-email-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.5.5
-MIME-Version: 1.0
-Subject: [PATCH V2] onboard: initial add 1.3.0
+X-Mailer: Apple Mail (2.3226)
+Subject: Python pty module
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,51 +54,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Jan 2017 20:21:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 22 Jan 2017 18:04:34 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
+Hi all.
 
-V1 -> V2: move recipe to meta-gnome
+Hope this is the correct list to ask such questions=E2=80=A6.
 
- .../recipes-support/onboard/onboard_1.3.0.bb       | 25 ++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-gnome/recipes-support/onboard/onboard_1.3.0.bb
+I am in need of the python pty module but have no idea what I have to =
+bitbake to get it.
 
-diff --git a/meta-gnome/recipes-support/onboard/onboard_1.3.0.bb b/meta-gnome/recipes-support/onboard/onboard_1.3.0.bb
-new file mode 100644
-index 0000000..82393c3
---- /dev/null
-+++ b/meta-gnome/recipes-support/onboard/onboard_1.3.0.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "An onscreen keyboard"
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING.GPL3;md5=8521fa4dd51909b407c5150498d34f4e"
-+
-+DEPENDS += "gtk+3 hunspell libcanberra libxkbfile dconf"
-+
-+SRC_URI = "https://launchpad.net/onboard/1.3/${PV}/+download/${BPN}-${PV}.tar.gz"
-+SRC_URI[md5sum] = "8000df3e789512a90fcb227580fd60ff"
-+SRC_URI[sha256sum] = "fd74b54b8bd7a075cf5f6e1a8ca3e6de5cd2663507adb690d7b1a85e71afa2e4"
-+
-+inherit setuptools3 pkgconfig gtk-icon-cache gsettings
-+
-+FILES_${PN} += " \
-+    ${datadir}/dbus-1 \
-+    ${datadir}/icons \
-+    ${datadir}/gnome-shell \
-+    ${datadir}/help \
-+"
-+
-+RDEPENDS_${PN} += " \
-+    ncurses \
-+    python3-dbus \
-+    python3-pycairo \
-+    python3-pygobject \
-+"
--- 
-2.5.5
+Any hint highly appreciated!
+
+Thanks
+Christian
 
 
