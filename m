@@ -1,36 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-yb0-f193.google.com (mail-yb0-f193.google.com
-	[209.85.213.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 30B4673204
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 80CF671DD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jan 2017 16:18:53 +0000 (UTC)
-Received: by mail-yb0-f193.google.com with SMTP id w194so11824088ybe.1
+	Mon, 23 Jan 2017 16:27:50 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id l7so18420027qtd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jan 2017 08:18:54 -0800 (PST)
+	Mon, 23 Jan 2017 08:27:51 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=gTanSRf/Jq2dOivP2HNxvT3aZd18+0Usu7cnt4hJVWk=;
-	b=fd+Js7CI/jFO6AZYfjCfi9n5Zsh+JIioI4fUZsdwlTyyerEfKXRDYL5FaBSCiEYIZw
-	IzE36o1nsrN4IZ903pfIcCIIFJvLitw6SYcpI8x1jpLpAKHeHKcauac6kTAwnphtPifE
-	GJqzUietC3rxe4TkYeE77dPzwSITd3SsSuejLgcWcBZnyov9QFBgbzURuTIAWOPD01OR
-	RPhpaZFFt3dD2Ml/9V7MLMYW9bpyfIdIGNE2pwgD6Wj1+os0Zrhif+Aa3ljFuygqnWtm
-	Lxh4HR7nkOfJb/0gmRuWpgfQuKbaG7tDFf68i/t59YjgnFSLXAcPd6rX+6cGgJCC4jJO
-	UCGA==
-X-Gm-Message-State: AIkVDXKPevLBI3oePQDdkwQNfWQ705fGoWDgRWRMCO8juv/f4IUwXtd4wrdoS3R4GJmLzQ==
-X-Received: by 10.55.198.149 with SMTP id s21mr26998871qkl.196.1485188333829; 
-	Mon, 23 Jan 2017 08:18:53 -0800 (PST)
+	bh=vkHTX5k0o5QscB1iJQM9Xc+egrr5uILVW4ErkGwfVgM=;
+	b=AYhmg9riprkiJd/gZAThqQCLKvNkUl8FfPomwd8rFXEnwnURwRqkhqF5XFt5koTC03
+	7asDM+Mg/o2Kz1Lr1Jmnz5MSatQXH5TPxWPfcXHwJ6F6ez0bl0xnE2+fQyVEHieHgsET
+	r2zvyb+U5VUvENPB4n+V+M5287H87DPi2pzsoN5tG9Ugf3E9liBuItj0VYCBPFckADcL
+	DsYbGniUhL3RL1E58MsMjLGJfRTOx/cdMp8HvsTOByJ9tXOJgDjHfTEzY8vykSnu/mlH
+	G61htAEGBXG74TgrtEh06MAWb44ToB9FmGDC0iWKo30MYJLqq5GVC8reYdo950fyTRVm
+	rvDg==
+X-Gm-Message-State: AIkVDXIXwU0eYk386Rjtd3P8DjS8g3YfMIG+kdU9Z5lYn0QnUrYa7oP5cFYTYsN4jErOcQ==
+X-Received: by 10.55.135.197 with SMTP id j188mr25518683qkd.71.1485188871252; 
+	Mon, 23 Jan 2017 08:27:51 -0800 (PST)
 Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
 	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
-	c198sm13472195qka.48.2017.01.23.08.18.53
+	m12sm10979967qtm.45.2017.01.23.08.27.50
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 23 Jan 2017 08:18:53 -0800 (PST)
+	Mon, 23 Jan 2017 08:27:50 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Jan 2017 11:18:40 -0500
-Message-Id: <1485188320-8255-1-git-send-email-derek@asterius.io>
+Date: Mon, 23 Jan 2017 11:27:38 -0500
+Message-Id: <1485188858-12081-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-webserver][PATCH] nginx: update to version 1.11.8
+Subject: [meta-python][PATCH] python-flask-bootstrap: update to version 3.3.7.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,29 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2017 16:18:54 -0000
+X-List-Received-Date: Mon, 23 Jan 2017 16:27:52 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-httpd/nginx/{nginx_1.11.6.bb => nginx_1.11.8.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-webserver/recipes-httpd/nginx/{nginx_1.11.6.bb => nginx_1.11.8.bb} (64%)
+ ...ask-bootstrap_3.3.6.0.bb => python-flask-bootstrap_3.3.7.1.bb} | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-flask-bootstrap_3.3.6.0.bb => python-flask-bootstrap_3.3.7.1.bb} (51%)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.11.6.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.11.8.bb
-similarity index 64%
-rename from meta-webserver/recipes-httpd/nginx/nginx_1.11.6.bb
-rename to meta-webserver/recipes-httpd/nginx/nginx_1.11.8.bb
-index 18b7017..44249a9 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.11.6.bb
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.11.8.bb
-@@ -6,5 +6,5 @@ DEFAULT_PREFERENCE = "-1"
+diff --git a/meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.6.0.bb b/meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.7.1.bb
+similarity index 51%
+rename from meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.6.0.bb
+rename to meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.7.1.bb
+index a115f23..05a02c6 100644
+--- a/meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.6.0.bb
++++ b/meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.7.1.bb
+@@ -1,15 +1,15 @@
+ DESCRIPTION = "An extension that includes Bootstrap in your project, without any boilerplate code."
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=3452e378337a5cc2092d32a140178d5a"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=a03749709f06118a17349deb5a210619"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0bb58ed0dfd4f5dbece3b52aba79f023"
+-SRC_URI[md5sum] = "b8aedbe51f2bf511af955f2bc288cd8c"
+-SRC_URI[sha256sum] = "3a7b71e22596a6d559965e059958960e0bb671adc131537a79edb491a8f31714"
++SRC_URI[md5sum] = "e40d50f5c5b6438c1c6200a6f2871f81"
++SRC_URI[sha256sum] = "cb08ed940183f6343a64e465e83b3a3f13c53e1baabb8d72b5da4545ef123ac8"
  
--SRC_URI[md5sum] = "4e29a07a7c74376fa032e5af0d1c5369"
--SRC_URI[sha256sum] = "3153abbb518e2d9c032e1b127da3dc0028ad36cd4679e5f3be0b8afa33bc85bd"
-+SRC_URI[md5sum] = "8f68f49b6db510e567bba9e0c271a3ac"
-+SRC_URI[sha256sum] = "53aef3715d79015314c2dcb18f2b185a0c64368cc01b30bdf0737a215f666b34"
+ PYPI_PACKAGE = "Flask-Bootstrap"
+ 
+ inherit pypi setuptools
+ 
+-RDEPENDS_${PN} += "\
++RDEPENDS_${PN}_class-target += "\
+     ${PYTHON_PN}-dominate \
+     ${PYTHON_PN}-flask \
+     ${PYTHON_PN}-visitor \
 -- 
 2.7.4
 
