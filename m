@@ -1,47 +1,36 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 06DB677225
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 7BAB7731D8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jan 2017 17:24:47 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1485192287; h=Content-Type: To: Subject: Message-ID: Date:
-	From: References: In-Reply-To: MIME-Version: Sender;
-	bh=czBjUxYAIm0EW6IdfzcKJeNsq9zgfm41NrpzAX6VUms=;
-	b=KnDb1BQlVB7zdK5kzj8um/fqo+YOVEfsti4HyZ06od71jAtjmNH6FbpWkBQYShDyeClw1mhv
-	wfyZ+qfrB+xy9pRvsaGb8h3EVlGQVDDB7ssYZ063Izic7qf4XlegBy78V2VtdU7QQzGfnIW4
-	+Y1Z+HUIDo3HEJyruFL3vaZhbvI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
-	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
-	Message-ID: Subject: To: Content-Type;
-	b=qfweR4xAw/DL9L2B86k9oeTfGgO3OP3PiuwtZY5P+Hcmy3LUQCGTRcp/I5nc+vv5As41AJ
-	yOdXFlzovcyJuUy870ycJPaQ7bzeTk/EDqwRV98twAX4Kx876K7rTFl94RMXcGiBJUQb+z34
-	fA3RK4hCYms3zuffxPYsmpz7FcsDo=
-Sender: derek@asterius.io
-X-Mailgun-Sending-Ip: 104.130.122.4
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Received: from mail-it0-f47.google.com (mail-it0-f47.google.com
-	[209.85.214.47])
-	by mxa.mailgun.org with ESMTP id 58863c5e.7f16a872d130-smtp-out-n03;
-	Mon, 23 Jan 2017 17:24:46 -0000 (UTC)
-Received: by mail-it0-f47.google.com with SMTP id c7so71079773itd.1
+	Mon, 23 Jan 2017 17:31:54 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id f4so18783152qte.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jan 2017 09:24:46 -0800 (PST)
-X-Gm-Message-State: AIkVDXLzBMAr0l40rZE7EWklrT0Lq/XVi9sbvaOOUbDW5TWb8MgWrgK3AX0sK+03TzFmggc/vWznsFKCikueGQ==
-X-Received: by 10.36.108.15 with SMTP id w15mr15294732itb.73.1485192286381;
-	Mon, 23 Jan 2017 09:24:46 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.107.156.85 with HTTP; Mon, 23 Jan 2017 09:24:46 -0800 (PST)
-In-Reply-To: <CAMKF1sru-NCscOLHy-qSNJEhj9kV8p8awEhsmOK2N5sMWxnGQA@mail.gmail.com>
-References: <1485188858-12081-1-git-send-email-derek@asterius.io>
-	<CAMKF1sru-NCscOLHy-qSNJEhj9kV8p8awEhsmOK2N5sMWxnGQA@mail.gmail.com>
+	Mon, 23 Jan 2017 09:31:55 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=L0xvQQA7+KvtClShh7K/dNNtvZGCHwoLAfq2LTxIkDE=;
+	b=fc/FI8RzSJXny11TseFGIVeC3yfMTEtJRcarDTEUmcXRDhFzyIOYjxF6MeRoGpQJ+G
+	ItJ/WIp8ToDZdR+IP/D6hG5jvjTEcKP8OzNeOnphl//l5A7XHw8hi3eg6SYU3KwT+vj0
+	4VUpCbWG6ysIabkumyD+P63WSxmf0pRbwqIaLsVpGb//xwiuTHtR8VqrUn9lFNiwLoTv
+	vXnRVY7/iYpEJbWjL0XkBiEYHl+uSM9xJO6xYh/DImkExutmTQMTFgtAvljMbo1q2O28
+	JSNSn1fXKtfTA/uNQyh84fQ+sNQndl550nLaEKCeOKYncY6+GWzZ7Pjhx2XfG4ag034S
+	Ckzw==
+X-Gm-Message-State: AIkVDXKcAohcAOFQnLGh+RKCA8jrPVcjKyNfX06q6e9sczbHWQPhV+r8wPRyzRchgCWq5g==
+X-Received: by 10.55.82.84 with SMTP id g81mr26489670qkb.235.1485192714976;
+	Mon, 23 Jan 2017 09:31:54 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
+	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
+	r131sm13695875qke.14.2017.01.23.09.31.54
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 23 Jan 2017 09:31:54 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
-Date: Mon, 23 Jan 2017 12:24:46 -0500
-X-Gmail-Original-Message-ID: <CADNbA1psTQ=ctFNOpbsCx4hwvzB=i-f3HYq6aJN0YwBPL3-49A@mail.gmail.com>
-Message-ID: <CADNbA1psTQ=ctFNOpbsCx4hwvzB=i-f3HYq6aJN0YwBPL3-49A@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-python][PATCH] python-flask-bootstrap: update to version 3.3.7.1
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 23 Jan 2017 12:31:41 -0500
+Message-Id: <1485192701-13956-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCHv2] python-flask-bootstrap: update to version 3.3.7.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,77 +43,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2017 17:24:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 23 Jan 2017 17:31:56 -0000
 
-It isn't needed.  That was a poor merge on my part.  Thanks for the catch.
+  * Updated license checksum for new release revision
 
-On Mon, Jan 23, 2017 at 12:06 PM, Khem Raj <raj.khem@gmail.com> wrote:
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ ...flask-bootstrap_3.3.6.0.bb => python-flask-bootstrap_3.3.7.1.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-flask-bootstrap_3.3.6.0.bb => python-flask-bootstrap_3.3.7.1.bb} (56%)
 
-> On Mon, Jan 23, 2017 at 8:27 AM, Derek Straka <derek@asterius.io> wrote:
-> > Signed-off-by: Derek Straka <derek@asterius.io>
-> > ---
-> >  ...ask-bootstrap_3.3.6.0.bb => python-flask-bootstrap_3.3.7.1.bb} | 8
-> ++++----
-> >  1 file changed, 4 insertions(+), 4 deletions(-)
-> >  rename meta-python/recipes-devtools/python/{python-flask-
-> bootstrap_3.3.6.0.bb => python-flask-bootstrap_3.3.7.1.bb} (51%)
-> >
-> > diff --git a/meta-python/recipes-devtools/python/python-flask-
-> bootstrap_3.3.6.0.bb b/meta-python/recipes-devtools/python/python-flask-
-> bootstrap_3.3.7.1.bb
-> > similarity index 51%
-> > rename from meta-python/recipes-devtools/python/python-flask-bootstrap_
-> 3.3.6.0.bb
-> > rename to meta-python/recipes-devtools/python/python-flask-bootstrap_
-> 3.3.7.1.bb
-> > index a115f23..05a02c6 100644
-> > --- a/meta-python/recipes-devtools/python/python-flask-
-> bootstrap_3.3.6.0.bb
-> > +++ b/meta-python/recipes-devtools/python/python-flask-
-> bootstrap_3.3.7.1.bb
-> > @@ -1,15 +1,15 @@
-> >  DESCRIPTION = "An extension that includes Bootstrap in your project,
-> without any boilerplate code."
-> >  LICENSE = "BSD"
-> > -LIC_FILES_CHKSUM = "file://PKG-INFO;md5=3452e378337a5cc2092d32a140178d
-> 5a"
-> > +LIC_FILES_CHKSUM = "file://PKG-INFO;md5=a03749709f06118a17349deb5a2106
-> 19"
-> >
-> > -SRC_URI[md5sum] = "b8aedbe51f2bf511af955f2bc288cd8c"
-> > -SRC_URI[sha256sum] = "3a7b71e22596a6d559965e05995896
-> 0e0bb671adc131537a79edb491a8f31714"
-> > +SRC_URI[md5sum] = "e40d50f5c5b6438c1c6200a6f2871f81"
-> > +SRC_URI[sha256sum] = "cb08ed940183f6343a64e465e83b3a
-> 3f13c53e1baabb8d72b5da4545ef123ac8"
-> >
-> >  PYPI_PACKAGE = "Flask-Bootstrap"
-> >
-> >  inherit pypi setuptools
-> >
-> > -RDEPENDS_${PN} += "\
-> > +RDEPENDS_${PN}_class-target += "\
->
-> why is this change needed ?
-> if its needed so that its only done for target recipes then use
-> _append instead of +=
->
-> >      ${PYTHON_PN}-dominate \
-> >      ${PYTHON_PN}-flask \
-> >      ${PYTHON_PN}-visitor \
-> > --
-> > 2.7.4
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.6.0.bb b/meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.7.1.bb
+similarity index 56%
+rename from meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.6.0.bb
+rename to meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.7.1.bb
+index a115f23..2b2a6f9 100644
+--- a/meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.6.0.bb
++++ b/meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.7.1.bb
+@@ -1,9 +1,9 @@
+ DESCRIPTION = "An extension that includes Bootstrap in your project, without any boilerplate code."
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=3452e378337a5cc2092d32a140178d5a"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=a03749709f06118a17349deb5a210619"
+ 
+-SRC_URI[md5sum] = "b8aedbe51f2bf511af955f2bc288cd8c"
+-SRC_URI[sha256sum] = "3a7b71e22596a6d559965e059958960e0bb671adc131537a79edb491a8f31714"
++SRC_URI[md5sum] = "e40d50f5c5b6438c1c6200a6f2871f81"
++SRC_URI[sha256sum] = "cb08ed940183f6343a64e465e83b3a3f13c53e1baabb8d72b5da4545ef123ac8"
+ 
+ PYPI_PACKAGE = "Flask-Bootstrap"
+ 
+-- 
+2.7.4
+
 
