@@ -1,36 +1,44 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f170.google.com (mail-qt0-f170.google.com
-	[209.85.216.170])
-	by mail.openembedded.org (Postfix) with ESMTP id B589A73214
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ua0-f182.google.com (mail-ua0-f182.google.com
+	[209.85.217.182])
+	by mail.openembedded.org (Postfix) with ESMTP id AD026760AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jan 2017 16:31:19 +0000 (UTC)
-Received: by mail-qt0-f170.google.com with SMTP id l7so133367173qtd.1
+	Mon, 23 Jan 2017 17:07:15 +0000 (UTC)
+Received: by mail-ua0-f182.google.com with SMTP id y9so115088886uae.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Jan 2017 08:31:20 -0800 (PST)
+	Mon, 23 Jan 2017 09:07:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=noythChd5eJXzYl7CQ0ZWTS/1usGFgyyT7DVIq2BSPA=;
+	b=p/wAloEMdyoCCxqLJSN/FjllxHXEzGF/I6UW55M77nH92cBKryLg0j/CrJmoFYKLxi
+	to5O4o0NDfkdjOfNrMfe53gggnuEm+RHqL7GyMGk0f7ms3QmiQAQHHdLt26oSzwl6yiu
+	sRtz/54jlS8oK0FYPe1jAtUDfMiNKGc1AtflgQxeqmXNM6RwNjk+tf1KIYGn9Fl/teMr
+	lV2REV8tsPvFRQBYjamFnk9OmQnm/JYMfYiHdnhuqnuvoEvoODtAQK5WILC2+8+PnVmb
+	HkZB14mPCxUWHG2ApJR1OY9MOScfqBtTk0F/bS3tYL67ipugjjiCEAEFXC9R4pjJ8SOF
+	f4UA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=WYDTOZMdikp81epkD085PmR6XZShwLOeSfqgDjAVxh4=;
-	b=ttaWJtOs3bfUn8UtIureb+pwiuoQYouvtBSCjUrb1npktcwIppzs3wo173fTEgxXPn
-	rWgDxFHL1p2pQXf/rufD2YjBk5qCjl9rqjd0ro9FDAZ2pmueUxlAXFAxXusf496TqDwG
-	gcUwndlZPuLep+MLwClS/gxb9PbpUA/vnugDgEO4FnPvjBPulz773ApDkGaCkzC10KMj
-	DjbxAYd7N3+W6D67R2oWGJ3lzbKAlzk9wby3vldxDWLy0Lp+P1qLTTPiEp/XqnqOa2Wn
-	v7YdkOkFt1vcio1Gi3VhIJBIehzer42zvzYquJNzx79MDjnNA1+IR4nIlpRk7hQMpVxI
-	x2wQ==
-X-Gm-Message-State: AIkVDXIvS+Xvr/a/c3xxuM9WqT7mz3iway8pB3l/O3X9HjimSv9O7dRmfQj5EBetMcJ0sQ==
-X-Received: by 10.200.36.219 with SMTP id t27mr25943206qtt.255.1485189079369; 
-	Mon, 23 Jan 2017 08:31:19 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
-	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
-	t62sm13545024qkc.33.2017.01.23.08.31.18
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 23 Jan 2017 08:31:18 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Jan 2017 11:31:12 -0500
-Message-Id: <1485189072-13789-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-ipaddress: update to version 1.0.18
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=noythChd5eJXzYl7CQ0ZWTS/1usGFgyyT7DVIq2BSPA=;
+	b=ZkVKlvioH5pCHFev7pUuHCjgJKKb0rO1rawTyo3PeRbiy/nxFga+UlyiJ9ef7GBA3x
+	RQeY+zmVj0A1slBZdTkieSccrFLYDtm/36148SQLW/eODFg1WOV3oVkTtftdcPhIAyUB
+	1wOtcsMetLA7fxxo/zOMVWo2v6R4rK+MLITrhCB7ItKmCd5rbFKhH2/cFapi33Wa5Vxa
+	72oQrOAaxc4yVTXWbJFeRM54w26zsHXbPMr2NgcSciq/cxjty+Enc0LFJYDRSpe3Czdd
+	M5eulJ8yAyx49Rifo3G1zn2x8jdDZjh6bVR1aw0SbGtWh+u5XEPEKHUkqqXy+esbNWEo
+	9V9A==
+X-Gm-Message-State: AIkVDXIoho9K/MX+Grm0TTszT3xtY3NT6jyU0Xu/9X1rf4aWC+OLNNESCgIdQ77+RVUJ7fVAntXU8TaTAZc73g==
+X-Received: by 10.176.64.168 with SMTP id i37mr15315758uad.60.1485191235174;
+	Mon, 23 Jan 2017 09:07:15 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.159.48.222 with HTTP; Mon, 23 Jan 2017 09:06:44 -0800 (PST)
+In-Reply-To: <1485188858-12081-1-git-send-email-derek@asterius.io>
+References: <1485188858-12081-1-git-send-email-derek@asterius.io>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 23 Jan 2017 09:06:44 -0800
+Message-ID: <CAMKF1sru-NCscOLHy-qSNJEhj9kV8p8awEhsmOK2N5sMWxnGQA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] python-flask-bootstrap: update to version 3.3.7.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,33 +51,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Jan 2017 16:31:25 -0000
+X-List-Received-Date: Mon, 23 Jan 2017 17:07:16 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../python/{python-ipaddress_1.0.17.bb => python-ipaddress_1.0.18.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-ipaddress_1.0.17.bb => python-ipaddress_1.0.18.bb} (67%)
+On Mon, Jan 23, 2017 at 8:27 AM, Derek Straka <derek@asterius.io> wrote:
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+>  ...ask-bootstrap_3.3.6.0.bb => python-flask-bootstrap_3.3.7.1.bb} | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python-flask-bootstrap_3.3.6.0.bb => python-flask-bootstrap_3.3.7.1.bb} (51%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.6.0.bb b/meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.7.1.bb
+> similarity index 51%
+> rename from meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.6.0.bb
+> rename to meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.7.1.bb
+> index a115f23..05a02c6 100644
+> --- a/meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.6.0.bb
+> +++ b/meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.7.1.bb
+> @@ -1,15 +1,15 @@
+>  DESCRIPTION = "An extension that includes Bootstrap in your project, without any boilerplate code."
+>  LICENSE = "BSD"
+> -LIC_FILES_CHKSUM = "file://PKG-INFO;md5=3452e378337a5cc2092d32a140178d5a"
+> +LIC_FILES_CHKSUM = "file://PKG-INFO;md5=a03749709f06118a17349deb5a210619"
+>
+> -SRC_URI[md5sum] = "b8aedbe51f2bf511af955f2bc288cd8c"
+> -SRC_URI[sha256sum] = "3a7b71e22596a6d559965e059958960e0bb671adc131537a79edb491a8f31714"
+> +SRC_URI[md5sum] = "e40d50f5c5b6438c1c6200a6f2871f81"
+> +SRC_URI[sha256sum] = "cb08ed940183f6343a64e465e83b3a3f13c53e1baabb8d72b5da4545ef123ac8"
+>
+>  PYPI_PACKAGE = "Flask-Bootstrap"
+>
+>  inherit pypi setuptools
+>
+> -RDEPENDS_${PN} += "\
+> +RDEPENDS_${PN}_class-target += "\
 
-diff --git a/meta-python/recipes-devtools/python/python-ipaddress_1.0.17.bb b/meta-python/recipes-devtools/python/python-ipaddress_1.0.18.bb
-similarity index 67%
-rename from meta-python/recipes-devtools/python/python-ipaddress_1.0.17.bb
-rename to meta-python/recipes-devtools/python/python-ipaddress_1.0.18.bb
-index bfee254..cc4f589 100644
---- a/meta-python/recipes-devtools/python/python-ipaddress_1.0.17.bb
-+++ b/meta-python/recipes-devtools/python/python-ipaddress_1.0.18.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7f538584cc3407bf76042def7168548a"
- 
- DEPENDS += "python-pip"
- 
--SRC_URI[md5sum] = "8bbf0326719fafb1f453921ef96729fe"
--SRC_URI[sha256sum] = "3a21c5a15f433710aaa26f1ae174b615973a25182006ae7f9c26de151cd51716"
-+SRC_URI[md5sum] = "310c2dfd64eb6f0df44aa8c59f2334a7"
-+SRC_URI[sha256sum] = "5d8534c8e185f2d8a1fda1ef73f2c8f4b23264e8e30063feeb9511d492a413e1"
- 
- inherit pypi setuptools
- 
--- 
-2.7.4
+why is this change needed ?
+if its needed so that its only done for target recipes then use
+_append instead of +=
 
+>      ${PYTHON_PN}-dominate \
+>      ${PYTHON_PN}-flask \
+>      ${PYTHON_PN}-visitor \
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
