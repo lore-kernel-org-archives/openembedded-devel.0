@@ -1,44 +1,51 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 9AE6071CA6
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id BBC9671CBF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jan 2017 19:19:35 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id e4so12622589pfg.0
+	Tue, 24 Jan 2017 19:26:20 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id 194so17379937pgd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Jan 2017 11:19:36 -0800 (PST)
+	Tue, 24 Jan 2017 11:26:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=Erpcb9tXuuXf72w7nKjHPt0OvWnmz/n5vhU0shOmxMs=;
-	b=CPICa8nGPCLTDPdDfb42PfmJNdms5r1FrHPw1HCPmKBVqjUbnm4uCQs/PIWlbx4B17
-	SANJxIYjVlaTWKxZbO5Lj2W+36SJbms5Gx/pcHA95OuBRba0d8UcQkSv8sJZ1eC/VT8+
-	vwURjI3gH6KpMhxw62f8DTiS5ZP3GUYNFPSpqD8XppfG/arwH9SakNHwyJmjIvIEhexu
-	6xwdjEnSN4zfK/cDoyZVzFQy0OV137LHW7pNp9tTMy4UVspA/ETQbc+DtELfrGi2YxOV
-	+im/m2/9U4hqkmNsPPd1OVJ97iCpCZLSJHzBkU0rdhu85jg4K+w3uUJ0kjhYT0Bcf7EZ
-	o2Ew==
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=102jvbzHyLwPy827fPEJeOEYtcDvCkiTU3eU5FKB0js=;
+	b=dI4uG/PTDXigNU0e0D8q8aaQaFPVHHknJN8JC1asNZt0oCmM7q50JzoPYf/Jm//JB9
+	0Q1dyzL1OwctvP9Qb8fbqMv/cw5DzKJJ9gGzaTKgx4EJtxVITgqrtvmDfbwrLSLgW0vh
+	KkXYoOk4WGi+Mf7xpvYc5KFtIWxgoke3h+NSkUJ/X9gLSXVmxG3RwDI7f7sKEnEHjU4X
+	PbEdkWMDYqs9vrfdJW6SYJbGtYd0BQrTWCZkdusNoaTsEDWa3BnxtqupNlPEV4bMcpiQ
+	ISty7fn9Hym1GSJxUATNryjF2cromcsXew6+P9AjjY+CZpmqTHmy59GsUFcuzvOU7jv3
+	9BeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Erpcb9tXuuXf72w7nKjHPt0OvWnmz/n5vhU0shOmxMs=;
-	b=gNUDfkA/0g7agsOC8zSucKnKyx3IQOw6A/V+lSNYMB+3BjV1mJ6F43nNvw0a4LfNL6
-	GIevm6NIRX0BNpVJSOW5BdccvpGcC13iAkZ0y1gWXxm/fpdRtGv26bKWh9DTB6u8rr+n
-	g52XayhONJDkxlK1y66NphxHybMKcLd0lRDrB06fDMPnu/MBr6HzFYI7Ays3nN35y3tI
-	0vVu+pneLwhLFVfFCTa+gPVMn5/5xn8kcEHX03i+U3FIoyZj215HhiKGnV0V5k8izZKH
-	pRiAHoZpLBbSEdiRvwJOVrWzxWz2SHLAdOli4uebhg/UAdHwxodRJ7qqr4gu8+rmThJP
-	j+eA==
-X-Gm-Message-State: AIkVDXJFYY9l+xxVnAIx5FnIs7hKu9yNtDmeuIF/Gb6N7ztQ2ynKX6cqsUlw/Lv+GdaPgw==
-X-Received: by 10.99.4.71 with SMTP id 68mr41806572pge.77.1485285575717;
-	Tue, 24 Jan 2017 11:19:35 -0800 (PST)
-Received: from e6520.guest-wifi.scl.liberty.com ([4.16.80.121])
-	by smtp.gmail.com with ESMTPSA id l3sm894125pgn.10.2017.01.24.11.19.35
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 24 Jan 2017 11:19:35 -0800 (PST)
-From: Andre McCurdy <armccurdy@gmail.com>
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=102jvbzHyLwPy827fPEJeOEYtcDvCkiTU3eU5FKB0js=;
+	b=au9TZpmy68DlNpptj28UC26RTic4XepHbmG/jnSdRQaG5h6Y+9v0h4mdsXwXngksPD
+	b+CQffjxkumc6JFfaY3prcTdb1jMZwHOra0YKev3ATVJz+T3ksai3q0PlBTFYB/+E7o4
+	u3TKCL4fzNy98KSq4ReA1Fb0AiRkOAuXzeLNXlekJt6l0kV/flgDgp77CaDsorNSmcMB
+	vg9TjL6poiOfK1xdGOImRsqWpvJs4SnizLH5jR0OBm1Q71KVwPOJelgqW3uYWJ2o1r7Q
+	IvA/l/kGXOhgX5yapNZuQiZ8e0kYf6/uxXLRdF/6S5gfj/Qh+NMPrkEVXMPVaeh70355
+	SggA==
+X-Gm-Message-State: AIkVDXLVqpglLXHX5nLw6l+L67wVlyy+GBdKqMUwJN2tiNaaOOBrSd4pIHdKzgqWm6sTCQ==
+X-Received: by 10.99.135.195 with SMTP id i186mr41805051pge.105.1485285981039; 
+	Tue, 24 Jan 2017 11:26:21 -0800 (PST)
+Received: from CACSVMO-14452.local ([2601:646:8882:b8c:c8b8:641d:6d81:476d])
+	by smtp.gmail.com with ESMTPSA id
+	s17sm7580305pgo.27.2017.01.24.11.26.20
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 24 Jan 2017 11:26:20 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Jan 2017 11:19:30 -0800
-Message-Id: <1485285570-27494-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] luajit: mips and mipsel are 32bit targets too
+References: <1485285570-27494-1-git-send-email-armccurdy@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Message-ID: <86fff81d-24d5-68d8-5f56-34c828564f55@gmail.com>
+Date: Tue, 24 Jan 2017 11:26:18 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
+	Gecko/20100101 Thunderbird/45.6.0
+MIME-Version: 1.0
+In-Reply-To: <1485285570-27494-1-git-send-email-armccurdy@gmail.com>
+Subject: Re: [meta-oe][PATCH] luajit: mips and mipsel are 32bit targets too
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,36 +58,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Jan 2017 19:19:37 -0000
+X-List-Received-Date: Tue, 24 Jan 2017 19:26:24 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-When cross compiling, the word size of the compiler set via HOST_CC
-must match the word size of the target. That's achieved by appending
-"-m32" to BUILD_CC_ARCH if the target word size is known to be 32bits.
 
-Unfortunately the current list of over-rides (powerpc, x86 and arm)
-does not cover all cases. Add mips and mipsel to the list too (which
-is still not enough to cover all targets or corner cases such as x32,
-but better than before).
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb | 2 ++
- 1 file changed, 2 insertions(+)
+On 1/24/17 11:19 AM, Andre McCurdy wrote:
+> When cross compiling, the word size of the compiler set via HOST_CC
+> must match the word size of the target. That's achieved by appending
+> "-m32" to BUILD_CC_ARCH if the target word size is known to be 32bits.
+> 
+> Unfortunately the current list of over-rides (powerpc, x86 and arm)
+> does not cover all cases. Add mips and mipsel to the list too (which
+> is still not enough to cover all targets or corner cases such as x32,
+> but better than before).
 
-diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
-index 964dc1d..2049846 100644
---- a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
-+++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
-@@ -24,6 +24,8 @@ BBCLASSEXTEND = "native"
- BUILD_CC_ARCH_append_powerpc = ' -m32'
- BUILD_CC_ARCH_append_x86 = ' -m32'
- BUILD_CC_ARCH_append_arm = ' -m32'
-+BUILD_CC_ARCH_append_mips = ' -m32'
-+BUILD_CC_ARCH_append_mipsel = ' -m32'
- 
- # The lua makefiles expect the TARGET_SYS to be from uname -s
- # Values: Windows, Linux, Darwin, iOS, SunOS, PS3, GNU/kFreeBSD
--- 
-1.9.1
+x32 ABI is not supported in luaJIT
 
+> 
+> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+> ---
+>  meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+> index 964dc1d..2049846 100644
+> --- a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+> +++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+> @@ -24,6 +24,8 @@ BBCLASSEXTEND = "native"
+>  BUILD_CC_ARCH_append_powerpc = ' -m32'
+>  BUILD_CC_ARCH_append_x86 = ' -m32'
+>  BUILD_CC_ARCH_append_arm = ' -m32'
+> +BUILD_CC_ARCH_append_mips = ' -m32'
+> +BUILD_CC_ARCH_append_mipsel = ' -m32'
+>  
+>  # The lua makefiles expect the TARGET_SYS to be from uname -s
+>  # Values: Windows, Linux, Darwin, iOS, SunOS, PS3, GNU/kFreeBSD
+> 
 
