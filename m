@@ -1,47 +1,20 @@
-Return-Path: <anders@chargestorm.se>
-Received: from mail-lf0-f41.google.com (mail-lf0-f41.google.com
-	[209.85.215.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 78F1E71E53
+Return-Path: <ismo.puustinen@intel.com>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 23C13731C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2017 12:26:17 +0000 (UTC)
-Received: by mail-lf0-f41.google.com with SMTP id z134so127735353lff.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2017 04:26:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=chargestorm-se.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=WpVHbFuWuwaDNwo8SzAwB+ODQ7MFhIU+DFU9faXYlJ0=;
-	b=QxPmiskN9kQ7wfvcx0eQWIUM64S/F5HEQBTG1HwoUuhCs3mNht4nbJSRSoNsumdN24
-	AK/ZwEcB79axoiWK9nXuT4+nyE0wcmpaF1KfqQjJHYZ4GZ2L28RNoOyyhTsr6p3bpxns
-	USsr8cIUWRYH8E4W11iC+n3SgdeMcUU/D9vOzv7NpiK1YUGTJOx/NrJ4738DG0f3heYx
-	ClmjTeuR2V+PLMhDfcxB6cO3b33eLB9SwaHBotVooAnyx8WD2LVQQSgEL6SA8RlV4w9Y
-	H9HwvBofIrjlOSLU1z2Q3CSlKvFhpnB4YBTY1ywXAWIryLeDaeXFyGkl0wktAgyydxbn
-	Iz1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=WpVHbFuWuwaDNwo8SzAwB+ODQ7MFhIU+DFU9faXYlJ0=;
-	b=lFYCp0Ak9wiB8pbovEkP/93/EczXhHISu3004K09RlMxnH6bRK8bMMmUyCyXYtlrkZ
-	HbDWuud4jIGnfjgc9GgEcZhv4+3bVCQNpeqTxALQRcvPgbX674H2FuzXWI64LcQAMyap
-	Ql3H6fGr6wM7xcO0riHN+4RqDgxLrdSbfLlDzmgKFC5dQWDHVymC/e/D94ypVaI/LeLG
-	kqZDeY7qwqNVjeg1muoowEzspn3oNqIQYVvtpZg+7IXT4GllgM4Wad4ch83EPv9HgPP3
-	5U2qpe+Twd0MhRLeNJJYOzrQvkJnLw4y1IozHiZ4goFs/TUX4chlVG2X8Pa0FCLig5i5
-	PAwg==
-X-Gm-Message-State: AIkVDXIO9cCzzjiF1GwnChZWywoMlYxPOIID5dh/pNcLV/9Mh3UAtSuIXoT+0XtW27udFg==
-X-Received: by 10.25.76.196 with SMTP id z187mr12889756lfa.60.1485347177648;
-	Wed, 25 Jan 2017 04:26:17 -0800 (PST)
-Received: from localhost (h83-209-191-235.cust.se.alltele.net.
-	[83.209.191.235]) by smtp.gmail.com with ESMTPSA id
-	y10sm8428830lja.22.2017.01.25.04.26.16
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 25 Jan 2017 04:26:16 -0800 (PST)
-From: Anders Darander <anders@chargestorm.se>
+	Wed, 25 Jan 2017 13:25:15 +0000 (UTC)
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+	by orsmga103.jf.intel.com with ESMTP; 25 Jan 2017 05:25:15 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.33,283,1477983600"; d="scan'208";a="217467116"
+Received: from ipuustin-desk.fi.intel.com ([10.237.72.72])
+	by fmsmga004.fm.intel.com with ESMTP; 25 Jan 2017 05:25:14 -0800
+From: Ismo Puustinen <ismo.puustinen@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Jan 2017 13:26:13 +0100
-Message-Id: <20170125122613.6776-1-anders@chargestorm.se>
-X-Mailer: git-send-email 2.11.0
-Cc: Anders Darander <anders@chargestorm.se>
-Subject: [meta-qt5][PATCH] cmake_qt5.bbclass: add qtbase-native to DEPENDS
+Date: Wed, 25 Jan 2017 15:23:03 +0200
+Message-Id: <20170125132303.22183-1-ismo.puustinen@intel.com>
+X-Mailer: git-send-email 2.9.3
+Subject: [PATCH] libgphoto2: remove bash runtime dependency.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,55 +27,194 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2017 12:26:19 -0000
+X-List-Received-Date: Wed, 25 Jan 2017 13:25:16 -0000
 
-When building with recipe-specific-sysroot's, qmake can't be found:
+The bash scripts in upstream were converted to sh scripts. This allows
+dropping the strict bash runtime dependency.
 
-| CMake Error at WORKDIR/recipe-sysroot/usr/lib/cmake/Qt5Core/Qt5CoreConfig.cmake:32 (message):
-|   The imported target Qt5::Core references the file
-|
-|      WORKDIR/recipe-sysroot-native/usr/bin/qt5/qmake
-|
-|   but this file does not exist.  Possible reasons include:
-|
-|   * The file was deleted, renamed, or moved to another location.
-|
-|   * An install or uninstall procedure did not complete successfully.
-|
-|   * The installation package was faulty and contained
-|
-|      WORKDIR/recipe-sysroot/usr/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake
-|
-|   but not all the files it references.
-|
-| Call Stack (most recent call first):
-|   WORKDIR/recipe-sysroot/usr/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake:6 (_qt5_Core_check_file_exists)
-|   WORKDIR/recipe-sysroot/usr/lib/cmake/Qt5Core/Qt5CoreConfig.cmake:163 (include)
-|   WORKDIR/recipe-sysroot/usr/lib/cmake/Qt5/Qt5Config.cmake:31 (find_package)
-|   CMakeLists.txt:56 (find_package)
-|
-
-This is solved by adding qtbase-native to the exported DEPENDS.
-
-Signed-off-by: Anders Darander <anders@chargestorm.se>
+Signed-off-by: Ismo Puustinen <ismo.puustinen@intel.com>
 ---
- classes/cmake_qt5.bbclass | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../0001-scripts-remove-bashisms.patch             | 149 +++++++++++++++++++++
+ .../recipes-graphics/gphoto2/libgphoto2_2.5.8.bb   |   2 +-
+ 2 files changed, 150 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/0001-scripts-remove-bashisms.patch
 
-diff --git a/classes/cmake_qt5.bbclass b/classes/cmake_qt5.bbclass
-index 3180fd6..5d605a6 100644
---- a/classes/cmake_qt5.bbclass
-+++ b/classes/cmake_qt5.bbclass
-@@ -1,7 +1,7 @@
- inherit cmake
- inherit qmake5_paths
+diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/0001-scripts-remove-bashisms.patch b/meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/0001-scripts-remove-bashisms.patch
+new file mode 100644
+index 0000000..0e0dc87
+--- /dev/null
++++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/0001-scripts-remove-bashisms.patch
+@@ -0,0 +1,149 @@
++From c00e63e97d8718836ba011d9172128732eecf001 Mon Sep 17 00:00:00 2001
++From: Ismo Puustinen <ismo.puustinen@intel.com>
++Date: Tue, 24 Jan 2017 22:24:05 +0200
++Subject: [PATCH] scripts: remove bashisms.
++
++Convert bash scripts to more generic shell scripts. This removes the
++strict bash dependency and the scripts should now run with any posix
++shell. Also fix the issues reported by shellcheck while at it.
++
++Upstream-status: Accepted [https://github.com/gphoto/libgphoto2/commit/39b4395532058c0edb9a56d0ff04e48a472e4743]
++
++---
++ packaging/generic/check-ptp-camera          | 12 ++++++------
++ packaging/linux-hotplug/gphoto-set-procperm | 14 +++++++-------
++ packaging/linux-hotplug/usbcam.console      |  4 ++--
++ packaging/linux-hotplug/usbcam.group        |  2 +-
++ packaging/linux-hotplug/usbcam.user         |  2 +-
++ packaging/linux-hotplug/usbcam.x11-app      |  4 ++--
++ 6 files changed, 19 insertions(+), 19 deletions(-)
++
++diff --git a/packaging/generic/check-ptp-camera b/packaging/generic/check-ptp-camera
++index 1793fc8..bc3c6ac 100644
++--- a/packaging/generic/check-ptp-camera
+++++ b/packaging/generic/check-ptp-camera
++@@ -1,4 +1,4 @@
++-#!/bin/bash
+++#!/bin/sh
++ # This program is free software; you can redistribute it and/or
++ # modify it under the terms of the GNU Lesser General Public
++ # License as published by the Free Software Foundation; either
++@@ -20,13 +20,13 @@ INTERFACE="${1:-06/01/01}"
++ 
++ BASENAME=${DEVPATH##*/}
++ for d in /sys/${DEVPATH}/${BASENAME}:*; do
++-	[[ -d ${d} ]] || continue
++-	INTERFACEID="$(< ${d}/bInterfaceClass)"
++-	INTERFACEID="${INTERFACEID}/$(< ${d}/bInterfaceSubClass)"
++-	INTERFACEID="${INTERFACEID}/$(< ${d}/bInterfaceProtocol)"
+++	[ -d "${d}" ] || continue
+++	INTERFACEID="$(cat "${d}"/bInterfaceClass)"
+++	INTERFACEID="${INTERFACEID}/$(cat "${d}"/bInterfaceSubClass)"
+++	INTERFACEID="${INTERFACEID}/$(cat "${d}"/bInterfaceProtocol)"
++ 
++ 	#echo ${d}: ${INTERFACEID}
++-	if [[ ${INTERFACE} == ${INTERFACEID} ]]; then
+++	if [ "${INTERFACE}" = "${INTERFACEID}" ]; then
++ 		# Found interface
++ 		exit 0
++ 	fi
++diff --git a/packaging/linux-hotplug/gphoto-set-procperm b/packaging/linux-hotplug/gphoto-set-procperm
++index d72ee68..977cbf5 100644
++--- a/packaging/linux-hotplug/gphoto-set-procperm
+++++ b/packaging/linux-hotplug/gphoto-set-procperm
++@@ -1,4 +1,4 @@
++-#!/bin/bash
+++#!/bin/sh
++ # This program is free software; you can redistribute it and/or
++ # modify it under the terms of the GNU Lesser General Public
++ # License as published by the Free Software Foundation; either
++@@ -18,22 +18,22 @@
++ # This is taken from Fedora Core gphoto2 package.
++ # http://cvs.fedora.redhat.com/viewcvs/*checkout*/devel/gphoto2/gphoto-set-procperm
++ 
++-console_user=`cat /var/run/console/console.lock` 
+++console_user=$(cat /var/run/console/console.lock)
++ 
++ if [ -z "$console_user" ] ; then
++   exit 1 
++ fi
++ 
++-if [ -z "$HAL_PROP_USB_BUS_NUMBER" -o -z "$HAL_PROP_USB_LINUX_DEVICE_NUMBER" ] ; then
+++if [ -z "$HAL_PROP_USB_BUS_NUMBER" ] || [ -z "$HAL_PROP_USB_LINUX_DEVICE_NUMBER" ] ; then
++   exit 1 
++ fi
++ 
++-if [ $HAL_PROP_USB_BUS_NUMBER -lt 0 -o  $HAL_PROP_USB_LINUX_DEVICE_NUMBER -lt 0 ] ; then
+++if [ "$HAL_PROP_USB_BUS_NUMBER" -lt 0 ] || [ "$HAL_PROP_USB_LINUX_DEVICE_NUMBER" -lt 0 ] ; then
++   exit 1 
++ fi
++ 
++ 
++-bus_num=`printf %.3u $HAL_PROP_USB_BUS_NUMBER`
++-dev_num=`printf %.3u $HAL_PROP_USB_LINUX_DEVICE_NUMBER`
+++bus_num=$(printf %.3u "$HAL_PROP_USB_BUS_NUMBER")
+++dev_num=$(printf %.3u "$HAL_PROP_USB_LINUX_DEVICE_NUMBER")
++ 
++-chown $console_user /proc/bus/usb/$bus_num/$dev_num 
+++chown "$console_user" /proc/bus/usb/"$bus_num"/"$dev_num"
++diff --git a/packaging/linux-hotplug/usbcam.console b/packaging/linux-hotplug/usbcam.console
++index d72128f..7ac6dc5 100755
++--- a/packaging/linux-hotplug/usbcam.console
+++++ b/packaging/linux-hotplug/usbcam.console
++@@ -1,4 +1,4 @@
++-#!/bin/bash
+++#!/bin/sh
++ # This program is free software; you can redistribute it and/or
++ # modify it under the terms of the GNU Lesser General Public
++ # License as published by the Free Software Foundation; either
++@@ -50,7 +50,7 @@ then
++         /var/lock/console.lock
++     do
++         if [ -f "$conlock" ]; then
++-	    CONSOLEOWNER=`cat $conlock`
+++            CONSOLEOWNER=$(cat $conlock)
++         fi
++     done
++     if [ -n "$CONSOLEOWNER" ]
++diff --git a/packaging/linux-hotplug/usbcam.group b/packaging/linux-hotplug/usbcam.group
++index f96c33d..8761fac 100755
++--- a/packaging/linux-hotplug/usbcam.group
+++++ b/packaging/linux-hotplug/usbcam.group
++@@ -1,4 +1,4 @@
++-#!/bin/bash
+++#!/bin/sh
++ # This program is free software; you can redistribute it and/or
++ # modify it under the terms of the GNU Lesser General Public
++ # License as published by the Free Software Foundation; either
++diff --git a/packaging/linux-hotplug/usbcam.user b/packaging/linux-hotplug/usbcam.user
++index c46f155..a3ba71a 100644
++--- a/packaging/linux-hotplug/usbcam.user
+++++ b/packaging/linux-hotplug/usbcam.user
++@@ -1,4 +1,4 @@
++-#!/bin/bash
+++#!/bin/sh
++ # This program is free software; you can redistribute it and/or
++ # modify it under the terms of the GNU Lesser General Public
++ # License as published by the Free Software Foundation; either
++diff --git a/packaging/linux-hotplug/usbcam.x11-app b/packaging/linux-hotplug/usbcam.x11-app
++index 023ae9b..618e7db 100644
++--- a/packaging/linux-hotplug/usbcam.x11-app
+++++ b/packaging/linux-hotplug/usbcam.x11-app
++@@ -1,4 +1,4 @@
++-#!/bin/bash
+++#!/bin/sh
++ # This program is free software; you can redistribute it and/or
++ # modify it under the terms of the GNU Lesser General Public
++ # License as published by the Free Software Foundation; either
++@@ -69,7 +69,7 @@ then
++     if [ "${USER}" != "root" ]
++     then
++ 	# we don't want to run this as root. definitely not.
++-	cd "${DIRECTORY}"
+++	cd "${DIRECTORY}" || exit 1
++ 	usrhome=~${USER}
++ 	"${SU}" "${USER}" -c "${ENV} DISPLAY=${DISPLAY} HOME=${usrhome} ${X11_APP}"
++     fi
++-- 
++2.9.3
++
+diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb
+index 098da79..e251567 100644
+--- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb
++++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb
+@@ -16,6 +16,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2
+            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
+            file://0002-correct-jpeg-memsrcdest-support.patch \
+            file://avoid_using_sprintf.patch \
++           file://0001-scripts-remove-bashisms.patch \
+ "
  
--DEPENDS_prepend = "qtbase "
-+DEPENDS_prepend = "qtbase qtbase-native "
+ SRC_URI[libgphoto2.md5sum] = "873ab01aced49c6b92a98e515db5dcef"
+@@ -47,7 +48,6 @@ do_install_append() {
+ PACKAGES =+ "libgphotoport libgphoto2-camlibs"
+ FILES_libgphoto2-camlibs = "${libdir}/libgphoto2*/*/*.so*"
+ RRECOMMENDS_${PN} = "libgphoto2-camlibs"
+-RDEPENDS_${PN} = "bash"
  
- EXTRA_OECMAKE_prepend = " \
-     -DOE_QMAKE_PATH_PREFIX=${OE_QMAKE_PATH_PREFIX} \
+ FILES_libgphotoport = "${libdir}/libgphoto2_port.so.*"
+ 
 -- 
-2.11.0
+2.9.3
 
 
