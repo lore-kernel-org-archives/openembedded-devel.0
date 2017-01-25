@@ -1,50 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 7DA4D71B31
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qt0-f180.google.com (mail-qt0-f180.google.com
+	[209.85.216.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 941B671E06
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2017 16:18:53 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id c85so43446832wmi.1
+	Wed, 25 Jan 2017 16:38:31 +0000 (UTC)
+Received: by mail-qt0-f180.google.com with SMTP id x49so25549302qtc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2017 08:18:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=p4kJ5Qbde+A41TCdwzaqq1u5+hZTrG6Y7BkOkT2+Ink=;
-	b=CTp1Xr0nEb1DabBGiOLaDZw1fJONhzTtA8mg7U5yoaZS7d1nb8B7Kt4CwZgm1m5nO6
-	AOnTGXefPDa1ox0rS2Ho9Cy8miktGgTdQ7RaQzzLggqrONTgL25mWmxpORCjKZ3553ot
-	S1dD1bKS1KGEc68jwYYjV6qVyR7B4WgDCRoVEb+xzHGbC6hqNc2zRphwisLwCJung1bQ
-	2Q//vTglgHANOPxaacVOKGjCrxpYqyz0e+yLVVY8bVuBAlc1MGTFDYSF0K2GfNXya3/U
-	KfVnLS0PHTkNHuEk44dSFKYF8buIMSP2lF+EM5WOe9eIzG6ZbXlNoWkWMJ3Yea9V6XA6
-	bOXw==
+	Wed, 25 Jan 2017 08:38:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=L8w16vWN3EjpIcRK1LYjJcYGEHTtkVbC9dYjbgE9dZE=;
+	b=ashUs2H/pAf+OJhsjGv+Y5K1rk4kur7JQcQrts2gy9otR//uRd3ZKCbUmssXlSDO03
+	2oCmpahwiTlOsXmbnYHCnyhqyTgEEFduexoDZlbQTVY0lmIuX8YGY51c0pg4dDlqCbRA
+	2pLkzTE1v0R0G2/nfzQ6yQ93RSfCN3NKgDHbcEegy5Y+bU5dQP/A2vbhvWa+Z2aZvbyn
+	ZDHdS8CEB3a5cEDLJtpTWGcnESPtehVR7MXDP8wpOYuKPoZUTYI4VU3EtJiRZY1y30Gi
+	qZRum4aB7Bu9ZPkOFcmqgz3w7E5oBMrfKtHUyt7F4G2fMgw8jYZ8CaTlF98dbdu1n3Lw
+	qW2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=p4kJ5Qbde+A41TCdwzaqq1u5+hZTrG6Y7BkOkT2+Ink=;
-	b=M5m9gQlaArOv9QTiZscS3BtDHNpZT+tzrPg/VzJQuV0sEiGOmxM+OxcopnBddEdU0x
-	1tVKIlWeUM1AQ5LNk0ZhI+LFTX6FI6JG1uAgkJ9hqkNiGu7m2O4dDtBQV/1iFfrvobrv
-	ze9LmIRYvf+j+kv0sLI9n57mMEwkYS0YVvPQAIPpguZV2QOz2qx1MfGiE3SaQ88wHSTr
-	pYvy0l9mnbZzKVVW0Fbk2UKftLFFk/iD9OhS40nnW5Li091NYcYqPQNA3WMLzuF9g+hy
-	QcJh0zZQhWP29N7m72hD3XWbivkpSpDdBkKhF2K1mz6yCfvyzSwQvVxC35+Dg99umgxp
-	d0dg==
-X-Gm-Message-State: AIkVDXKsS0IzqxYguuitkaSzQ6L9CIlDrubAsM0IJi4Nr/fDTHHr1ooXUnHfi5QKlgP2Mw==
-X-Received: by 10.223.164.66 with SMTP id e2mr33691144wra.47.1485361133187;
-	Wed, 25 Jan 2017 08:18:53 -0800 (PST)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id g75sm1363253wme.5.2017.01.25.08.18.52
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 25 Jan 2017 08:18:52 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 25 Jan 2017 17:18:55 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170125161855.GG3260@jama>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=L8w16vWN3EjpIcRK1LYjJcYGEHTtkVbC9dYjbgE9dZE=;
+	b=df31oNjTibP+nkFebtOiRYDgm4oN0pKwoxCZ8hn8ft7zdq1g2fKCQeaABw0oWqpX1H
+	BsPK8gq2zuwtZX9lh45gln0M5eENfnFeYmaQn51jjZDswKKO4Xx/IOqvZp6QG7PsV1z9
+	O8ukorkvc1kQTGWsnVgsHWJcOfOkanbxi9Hu4WVSbgXi6hMbgh9Z5JOEbIydVdeUWTbZ
+	sPYp7ehgxZovKJK0CUxG3Cn/85FKQjDWkLw9iErG4aS6e6X8/3a5YfnpEOUYc3GWJwHR
+	1wXofq5EJPy9NoGKrjmrG3hYISovQ2SOt7cdjMWZl+MWtjm0s8dr0J/kR5XrnuhHwRGF
+	GTuA==
+X-Gm-Message-State: AIkVDXIa0XD2tBS6IuN7/FDeWuGwFNqCUTWJ6SguQ4dlMv6ul/nDGJPgyew/d+HbBM6U0YaQHUueuqWQ7MkREEoe
+X-Received: by 10.237.54.1 with SMTP id e1mr33537113qtb.68.1485362311428; Wed,
+	25 Jan 2017 08:38:31 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.140.103.233 with HTTP; Wed, 25 Jan 2017 08:38:11 -0800 (PST)
+In-Reply-To: <20170125161855.GG3260@jama>
 References: <1484923430-3222-1-git-send-email-ross.burton@intel.com>
 	<1484923430-3222-2-git-send-email-ross.burton@intel.com>
-MIME-Version: 1.0
-In-Reply-To: <1484923430-3222-2-git-send-email-ross.burton@intel.com>
-User-Agent: Mutt/1.7.2 (2016-11-26)
+	<20170125161855.GG3260@jama>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 25 Jan 2017 16:38:11 +0000
+Message-ID: <CAJTo0LYG+T4yc1uzDrMW4GirKpdmyU887K4RJWd9pxwULg+qEg@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: [meta-oe][PATCH 2/2] libxcalibrate: add, from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -58,128 +55,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2017 16:18:54 -0000
-X-Groupsio-MsgNum: 64855
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="7lMq7vMTJT4tNk0a"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 25 Jan 2017 16:38:31 -0000
+Content-Type: text/plain; charset=UTF-8
 
---7lMq7vMTJT4tNk0a
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 25 January 2017 at 16:18, Martin Jansa <martin.jansa@gmail.com> wrote:
 
-On Fri, Jan 20, 2017 at 02:43:50PM +0000, Ross Burton wrote:
-> ---
->  .../xorg-lib/libxcalibrate/fix-xcb.patch           | 29 ++++++++++++++++=
-++++++
->  .../recipes-graphics/xorg-lib/libxcalibrate_git.bb | 22 ++++++++++++++++
->  2 files changed, 51 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/xorg-lib/libxcalibrate/fix-x=
-cb.patch
->  create mode 100644 meta-oe/recipes-graphics/xorg-lib/libxcalibrate_git.bb
->=20
-> diff --git a/meta-oe/recipes-graphics/xorg-lib/libxcalibrate/fix-xcb.patc=
-h b/meta-oe/recipes-graphics/xorg-lib/libxcalibrate/fix-xcb.patch
-> new file mode 100644
-> index 0000000..d614883
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/xorg-lib/libxcalibrate/fix-xcb.patch
-> @@ -0,0 +1,29 @@
-> +Upstream-Status: Pending
-> +
-> +There is no extra reply data and if we say not to disgard it, xcb
-> +throws fatal asserts.
-> +
-> +RP - 26/11/09
-> +
-> +Index: git/xcalibrate.c
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- git.orig/xcalibrate.c	2009-11-26 08:11:48.000000000 +0000
-> ++++ git/xcalibrate.c	2009-11-26 08:09:55.000000000 +0000
-> +@@ -216,7 +216,7 @@
-> +   req->reqType =3D info->codes->major_opcode;
-> +   req->xCalibrateReqType =3D X_XCalibrateRawMode;
-> +   req->on =3D enable;
-> +-  if (!_XReply (dpy, (xReply *) &rep, 0, xFalse))=20
-> ++  if (!_XReply (dpy, (xReply *) &rep, 0, xTrue))=20
-> +     {
-> +       UnlockDisplay (dpy);
-> +       SyncHandle ();
-> +@@ -240,7 +240,7 @@
-> +   req->xCalibrateReqType =3D X_XCalibrateScreenToCoord;
-> +   req->x =3D *x;
-> +   req->y =3D *y;
-> +-  if (!_XReply (dpy, (xReply *) &rep, 0, xFalse))=20
-> ++  if (!_XReply (dpy, (xReply *) &rep, 0, xTrue))=20
-> +     {
-> +       UnlockDisplay (dpy);
-> +       SyncHandle ();
-> diff --git a/meta-oe/recipes-graphics/xorg-lib/libxcalibrate_git.bb b/met=
-a-oe/recipes-graphics/xorg-lib/libxcalibrate_git.bb
-> new file mode 100644
-> index 0000000..455e869
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/xorg-lib/libxcalibrate_git.bb
-> @@ -0,0 +1,22 @@
-> +SUMMARY =3D "XCalibrate: Touchscreen calibration library"
-> +
-> +DESCRIPTION =3D "libXCalibrate is a library for performing touchscreen \
-> +calibration with the kdrive tslib touchscreen driver."
-> +
-> +require xorg-lib-common.inc
-> +
-> +LICENSE =3D "MIT-style"
-> +LIC_FILES_CHKSUM =3D "file://xcalibrate.h;endline=3D21;md5=3Dfa572df6439=
-f0f235f2612f370f153d7 \
-> +                    file://xcalibrate.c;endline=3D21;md5=3Dfa572df6439f0=
-f235f2612f370f153d7"
-> +
-> +DEPENDS =3D "virtual/libx11 calibrateproto libxext"
-> +
-> +SRCREV =3D "209d83af61ed38a002c8096377deac292b3e396c"
-> +PV =3D "0.0+git${SRCPV}"
-> +
-> +SRC_URI =3D "git://anongit.freedesktop.org/git/xorg/lib/libXCalibrate \
-> +           file://fix-xcb.patch"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +FILES_${PN}-locale +=3D "${datadir}/X11/locale"
+> Why do we need this in meta-oe? Just because xtscal was dumped here as
+> well?
+>
 
-Why do we need this in meta-oe? Just because xtscal was dumped here as
-well?
+Yes.  xtscal etc are the only users, so they're in oe-core with nothing
+using them.  They should have moved to meta-oe along with xtscal, but were
+missed.
 
-Both are broken because of the path to .inc file:
-Parsing recipes...ERROR: ParseError at
-/OE/build/oe-core/meta-openembedded/meta-oe/recipes-graphics/xorg-lib/libxc=
-alibrate_git.bb:6:
-Could not include required file xorg-lib-common.inc
+The alternative is to delete xtscal from meta-oe and then we can just drop
+these from oe-core as they're not used at all, but that's not my call.
 
 
-> --=20
-> 2.8.1
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Both are broken because of the path to .inc file:
+> Parsing recipes...ERROR: ParseError at
+> /OE/build/oe-core/meta-openembedded/meta-oe/recipes-graphics/xorg-lib/
+> libxcalibrate_git.bb:6:
+> Could not include required file xorg-lib-common.inc
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Damnit, sorry.
 
---7lMq7vMTJT4tNk0a
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+Ross
 
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWIjP7gAKCRA3VSO3ZXaA
-HF9OAJ9pTsskf9jZA0uA1XFE08RFpdSBjgCcCKqlb54bvWUrTlq0OM2D+ThrnuU=
-=0Njx
------END PGP SIGNATURE-----
-
---7lMq7vMTJT4tNk0a--
