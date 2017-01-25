@@ -1,59 +1,36 @@
-Return-Path: <jaragunde@igalia.com>
-Received: from smtp4.mundo-r.com (smtp3.mundo-r.com [212.51.32.191])
-	by mail.openembedded.org (Postfix) with ESMTP id 69FB1719DA
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 6ADD471E1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2017 15:10:35 +0000 (UTC)
-IronPort-PHdr: =?us-ascii?q?9a23=3AwDVDvhw3BxqBZkzXCy+O+j09IxM/srCxBDY+r6Qd?=
-	=?us-ascii?q?2+ofIJqq85mqBkHD//Il1AaPBtSHra8fwLSH+4nbGkU4qa6bt34DdJEeHzQksu?=
-	=?us-ascii?q?4x2zIaPcieFEfgJ+TrZSFpVO5LVVti4m3peRMNQJW2aFLduGC94iAPERvjKwV1?=
-	=?us-ascii?q?Ov71GonPhMiryuy+4ZPebgFHiTanYb5/Ihq6oATVu8ILnYZsN6E9xwfTrHBVYe?=
-	=?us-ascii?q?pW32RoJVySnxb4+Mi9+YNo/jpTtfw86cNOSL32cKskQ7NWCjQmKH0169bwtRbf?=
-	=?us-ascii?q?VwuP52ATXXsQnxFVHgXK9hD6XpP2sivnqupw3TSRMMPqQbwoXzmp8qFmQwLqhi?=
-	=?us-ascii?q?gaLT406HzZhNJ+jKxboxyvqRJwzIHWb46JO/RzZb/dcNEASGZdQspcWS5MD4Wh?=
-	=?us-ascii?q?ZIUPFeoBOuNYopH5qVQUsRS+AhKjBOT3xTJUnH/5x6I60/knEQ7bwgMvB8gAt2?=
-	=?us-ascii?q?7OrNrrNaYZTOe4zKvSwjXZdfxW1ir96I7VfR8/uvyMXL1wftDVyUkuDQzJlEmf?=
-	=?us-ascii?q?qYvgPz6M0OkGrmuV7/J4WO+rlmIrsRx9riWty8s2joTEgpgZxk3E+Ch5xos+OM?=
-	=?us-ascii?q?e2R1RhYdG+FZtdrySaN4xrTcw8W2xooyM6yqEeuZ68YSgK1Iwrxx7BZPyDdIiF?=
-	=?us-ascii?q?+hzjW/yXITZ5hXJlfqywiwyz8Uiv0OL8Usi030xQoiVZldnMs2gB1x3V6seZVv?=
-	=?us-ascii?q?tw5kOs1SuV2wzO9+1JI1o4mK7fJpI737I9lpoevVzGHiDsmUX2iKGWdl8j+uit?=
-	=?us-ascii?q?8+nnYK/ppoWGOI97lwH+NLkhldKkDOQ5PQgBRWyb+eWm27H54UL5R7BKguUskq?=
-	=?us-ascii?q?bFqJDaOdgbpqmhDg9SyoYs9RC/ACmj0NsDg3YIMU9KdwyagITwJl7BPu74Aum7?=
-	=?us-ascii?q?g1m3lDdrxuvGPqH6ApnXKXjDiKnufbBj5E5Z0wU8081Q6I9KBb4cOv7zXVXxtN?=
-	=?us-ascii?q?OLRiM+ZguszuDqDd9w2o8TVSeDD7GUNIvWsESU/aQoO+SKaYoftTrxJvRj4OTh?=
-	=?us-ascii?q?3lEjnlpIX6Ci2pEQX1miF/t7JUmUVkJtmNoTWTMItxA3Q/HshFCqUDFaY3e7Ga?=
-	=?us-ascii?q?k742doW8qdEY7fS9X10/S61yChE8gOaw=3D=3D?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: =?us-ascii?q?A2DeMAAyv4hY/5tjdVteGxgHDBgHgwABA?=
-	=?us-ascii?q?QEBAR+BCoQzinqRGJMfgjcZgUyCbIM2AoIaQxQBAQEBAQEBAQEBAWEoQg4BgWI?=
-	=?us-ascii?q?Zgh4BBSNmCxgCAiYCAlcTCAEBiRwBrkuCJYphATGBC4VAggWCaoUVgjqCXwWbT?=
-	=?us-ascii?q?pFzgV8BF454iCOKVzYhgUiHCj2Fa4J2AQEB?=
-X-IPAS-Result: =?us-ascii?q?A2DeMAAyv4hY/5tjdVteGxgHDBgHgwABAQEBAR+BCoQzinq?=
-	=?us-ascii?q?RGJMfgjcZgUyCbIM2AoIaQxQBAQEBAQEBAQEBAWEoQg4BgWIZgh4BBSNmCxgCA?=
-	=?us-ascii?q?iYCAlcTCAEBiRwBrkuCJYphATGBC4VAggWCaoUVgjqCXwWbTpFzgV8BF454iCO?=
-	=?us-ascii?q?KVzYhgUiHCj2Fa4J2AQEB?=
-X-IronPort-AV: E=Sophos;i="5.33,284,1477954800"; d="scan'208";a="102914111"
-Received: from fanzine.igalia.com ([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 25 Jan 2017 16:10:34 +0100
-Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
-	by fanzine.igalia.com with esmtps 
-	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
-	id 1cWPDW-0000wC-UP for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2017 16:10:34 +0100
-Received: from ip162.dynamic.igalia.com ([192.168.10.162])
-	by mail.igalia.com with esmtps 
-	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
-	id 1cWPDU-00064O-Sc; Wed, 25 Jan 2017 16:10:32 +0100
+	Wed, 25 Jan 2017 15:23:34 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id e1so10658216qkh.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Jan 2017 07:23:35 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=WKQnFXCtqMOb/A88DkoRdi9gAJXCn/scNHii4wEVEB4=;
+	b=m4ya2wYJKBpNXLYe+DWQtMv7ALMCEsNyoLD7zQhmhjVOImgvithct1Pz2AjbCDKa5s
+	ERsFQGCRrBf0tXpw/KLWZPaIzrXRWPpfiROd4ywzSD/OIvqdKvPwvsaV3kRXii/nL7S0
+	i5RKaEoSwvZKzFyqyBG/AkaF7BKEKjGrCOSZH9eilnuvPByitF6BvG5ii/UBTBv8/kGs
+	nbeT8ATX7mqbShc9PEw3lfr2H0+pFfZAMxn9zVZDOLslUMsDiavDWxY/NedfC15J3FXn
+	WOoAddEso/XMcRE8xaNtMfeJvkq9fiR38okwWUlGpB52wfgupfa6t0THP42ykf61DDbC
+	T0MA==
+X-Gm-Message-State: AIkVDXLMh5vfWfzzXaDIQq29TPkMc5l2Kqu/qf977hw2rsEfoQ/D5/zyJtEGeBO/IFmQ8Q==
+X-Received: by 10.55.180.129 with SMTP id d123mr33427785qkf.158.1485357815173; 
+	Wed, 25 Jan 2017 07:23:35 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
+	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
+	y189sm517294qky.39.2017.01.25.07.23.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 25 Jan 2017 07:23:34 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-References: <1484311074-14030-1-git-send-email-jaragunde@igalia.com>
-	<3c7713c0-10cd-fe2b-3a99-c93841471753@pseudoterminal.org>
-From: =?UTF-8?Q?Jacobo_Aragunde_P=c3=a9rez?= <jaragunde@igalia.com>
-Message-ID: <67a782cc-b074-de9e-88dc-cf59a7c56669@igalia.com>
-Date: Wed, 25 Jan 2017 16:10:32 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.6.0
-MIME-Version: 1.0
-In-Reply-To: <3c7713c0-10cd-fe2b-3a99-c93841471753@pseudoterminal.org>
-Subject: Re: [meta-browser][PATCH] chromium-wayland: update to 53.0.2785.14
+Date: Wed, 25 Jan 2017 10:22:55 -0500
+Message-Id: <1485357777-6007-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH 1/3] python-selectors34: add new recipe for version 1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,19 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2017 15:10:37 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 25 Jan 2017 15:23:35 -0000
 
-On 20/01/17 12:37, Carlos Rafael Giani wrote:
-> Looks okay overall. A few details need to be addressed:
-> 
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../recipes-devtools/python/python-selectors34_1.1.bb        | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-selectors34_1.1.bb
 
-Thank you again for the review. I've sent a new version of the patch to
-the ML, addressing your comments.
-
-Best,
+diff --git a/meta-python/recipes-devtools/python/python-selectors34_1.1.bb b/meta-python/recipes-devtools/python/python-selectors34_1.1.bb
+new file mode 100644
+index 0000000..1982418
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-selectors34_1.1.bb
+@@ -0,0 +1,12 @@
++SUMMARY = "Backport of the selectors module from Python 3.4"
++LICENSE = "PSF"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1cfbbf590d8d5b7fe937516217b778b3"
++
++SRC_URI[md5sum] = "403194b10f35a5258e0642712fdd3753"
++SRC_URI[sha256sum] = "84b3743b9046461aebbcd13c15e79ab91e79acfb6e030b54a0ec6360ae0bbc52"
++
++inherit pypi setuptools
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-six \
++    "    
 -- 
-Jacobo Aragunde
-Software Engineer at Igalia
+2.7.4
+
 
