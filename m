@@ -1,46 +1,49 @@
 Return-Path: <philip.balister@gmail.com>
 Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
 	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 49D9671AE6
+	by mail.openembedded.org (Postfix) with ESMTP id B76EB71BF2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2017 18:06:51 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id a29so32636067qtb.1
+	Wed, 25 Jan 2017 18:06:53 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id l7so32709488qtd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Jan 2017 10:06:52 -0800 (PST)
+	Wed, 25 Jan 2017 10:06:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=1rQBOu0tRybb5Mg5UTtsAcBLNBtNoaEBn2TMif/PFn8=;
-	b=oOhvYYYpQph6HlET74xZnlV2uCvfSZZBt22iwuEOHvWXi8sUvEOMtJ6E9QifHWjgcd
-	hqIjRLkaXE/S3i5+C6sFe9N5DHendS+S8CZWps8LL6UhzHKAqlb2TKovQAAXu5hJtXNA
-	UFj8nYCQQfC/4Q36qyaWcn3ql7zfxWE0ffh1Rb6hD7PsfJL15sFloUKYABkt3wvt1pWQ
-	C3qyn5ZmrOEzXg3FqEk3iWTDaz7cL9EPF0o9Atjfmmvgdpg67AcKNrQHk8iAIPjeIg4N
-	hCJd+VxKgVMc/UV7PGS77pmvsax7IwH7PeXj6cuZ6vlzNWqlnAtnsOl28F3gQ0xyh/+R
-	fIfw==
+	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=wBkLWD849rPhSTXoxSafANJwGPIKdDd5GQg3Km0iZ9Y=;
+	b=iI/R/313oO3CKeZQy7LWVn6h3inUImgdAq1uGlam6jivzgWBW48fwb7hrT4JbpAVSf
+	IUqkaG7baaknNbS0DsOOG+fTjEfSZL1bIjcCt6wuFBMVSNacR4+BCLpZPOFxNAfTy1W+
+	Uwkzz8UdWgb04vJwl3yb0WKmJ7YVg7m6h2g6JJDe/hRaJmOBjL8NuArPYJP/4+HA3gXh
+	pAguZSI3zRGPK5L19aO3VQVSbVoXuOWaZC6ktJA0XTqYMSxTfHVgdZlBEDam4GR97IJE
+	479BxvGiEIVUsLyMzKgad3tr99dwMCYnE9qckzya3vZAtH9mwTl6jATzlYxlCP0UNLyG
+	8/zQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=1rQBOu0tRybb5Mg5UTtsAcBLNBtNoaEBn2TMif/PFn8=;
-	b=JPy6+KqxZflIliVhnxHjbsH/oiciQX88TgjRnTiy6qeYeNsHLkjDiKWh729GaMVi9s
-	1XMQKRjdI75NyPnXDvqI1ZmGaTy+7zRBfFoLsYFUtCjzNANA+n3CgEwfMOHLDSNW2bFf
-	LLwHGbXuhBSpsuTnda3/wVRqCpD40eXsc75UxNzIJke5hNxv7jIgBzSDIdTPE56GTBwb
-	aMNjHj8moWgKr2mhlCHKJO0po8xYlVIMenS72gs1Lvpf6igOGYZfsdKy/ci3C3j42542
-	gjU0GHSHYMOb+1VvAOL0iyJvSttKIx0yIwvm5Z4y6mnkeNafFw60s/vb2HWHBs/QIeKH
-	Dbvg==
-X-Gm-Message-State: AIkVDXIaa+DALRKgjavhzy7uTJD+FM5AXsBo2lW/N2En2syP6UWJcvK4zca8ZkGVluikQQ==
-X-Received: by 10.237.53.77 with SMTP id b13mr36622121qte.151.1485367612243;
-	Wed, 25 Jan 2017 10:06:52 -0800 (PST)
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+	:in-reply-to:references;
+	bh=wBkLWD849rPhSTXoxSafANJwGPIKdDd5GQg3Km0iZ9Y=;
+	b=FYj8g3QXjbTN4jbhwoSlT56bYLQeGG7x0MYqMQdPILSwg2h48NYQede4+nrzVCoZHm
+	/8F8byyFQva3SW/DuxAjxpg22voKW5jssK3mpmEf9CvwXFUyiZgxygW2MYxYR0VR60P4
+	DUCXfcNxA4NnEfaeo+LaX0nDP1aTZs66vyP6KR67PMuITHkhoWT821HNOtV1eEheHpNi
+	kQvHCEu8E/b3cAd8KISgSVeP9UGaIkXSQL3wzKAs9Ppo3wwpq692CCHwv+3s2pFlyDPL
+	Xt4c0n2CIak1ukLF+D3po+BncsbRT23+Z/14C0089cTZjAIFTGNNIY0Z2iP/chZBAr+q
+	Fljw==
+X-Gm-Message-State: AIkVDXI1OsC6EiXy+pQIs2BVlMBxhgaVWuuUcjjC6qcoEAxDp+jrwNW7acL0Ckeq8tyCeA==
+X-Received: by 10.55.195.148 with SMTP id r20mr35312011qkl.45.1485367614295;
+	Wed, 25 Jan 2017 10:06:54 -0800 (PST)
 Received: from thuvia.localdomain (pool-108-4-175-67.ronkva.east.verizon.net.
 	[108.4.175.67])
-	by smtp.gmail.com with ESMTPSA id 140sm924624qkj.19.2017.01.25.10.06.50
+	by smtp.gmail.com with ESMTPSA id 140sm924624qkj.19.2017.01.25.10.06.53
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 25 Jan 2017 10:06:50 -0800 (PST)
+	Wed, 25 Jan 2017 10:06:53 -0800 (PST)
 Sender: Philip Balister <philip.balister@gmail.com>
 From: Philip Balister <philip@balister.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Jan 2017 13:06:42 -0500
-Message-Id: <1485367604-27736-1-git-send-email-philip@balister.org>
+Date: Wed, 25 Jan 2017 13:06:43 -0500
+Message-Id: <1485367604-27736-2-git-send-email-philip@balister.org>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH 1/3] python-cffi: Fix build for per-recipe sysroot.
+In-Reply-To: <1485367604-27736-1-git-send-email-philip@balister.org>
+References: <1485367604-27736-1-git-send-email-philip@balister.org>
+Subject: [meta-python][PATCH 2/3] python-ndg-httpsclient: Fix build for per recipe sysroot.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,23 +56,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Jan 2017 18:06:52 -0000
+X-List-Received-Date: Wed, 25 Jan 2017 18:06:54 -0000
 
-Reverse the include and inherit to prevent the DEPENDS= in .inc from
-overwriting the one from inherit.
+Reverse order of include and inherit to prevent DEPENDS=
+being overwritten.
 
 Signed-off-by: Philip Balister <philip@balister.org>
 ---
- meta-python/recipes-devtools/python/python-cffi_1.9.1.bb | 2 +-
+ meta-python/recipes-devtools/python/python-ndg-httpsclient_0.4.2.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-cffi_1.9.1.bb b/meta-python/recipes-devtools/python/python-cffi_1.9.1.bb
-index 1d2d241..3cd62d1 100644
---- a/meta-python/recipes-devtools/python/python-cffi_1.9.1.bb
-+++ b/meta-python/recipes-devtools/python/python-cffi_1.9.1.bb
+diff --git a/meta-python/recipes-devtools/python/python-ndg-httpsclient_0.4.2.bb b/meta-python/recipes-devtools/python/python-ndg-httpsclient_0.4.2.bb
+index 2da1112..ca0eb32 100644
+--- a/meta-python/recipes-devtools/python/python-ndg-httpsclient_0.4.2.bb
++++ b/meta-python/recipes-devtools/python/python-ndg-httpsclient_0.4.2.bb
 @@ -1,2 +1,2 @@
 -inherit pypi setuptools
- require python-cffi.inc
+ require python-ndg-httpsclient.inc
 +inherit pypi setuptools
 -- 
 2.7.4
