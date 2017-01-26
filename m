@@ -1,46 +1,47 @@
-Return-Path: <h4nn35.work@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E0D671C5F
+Return-Path: <oleksandr.kravchuk@pelagicore.com>
+Received: from mail-it0-f50.google.com (mail-it0-f50.google.com
+	[209.85.214.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 32B36731CD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jan 2017 15:22:37 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id c85so50976857wmi.1
+	Thu, 26 Jan 2017 18:24:51 +0000 (UTC)
+Received: by mail-it0-f50.google.com with SMTP id c7so39447905itd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jan 2017 07:22:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	Thu, 26 Jan 2017 10:24:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=mFUY57gxPnnmbO0/HJ0XRYEwt48A2LrpkyCYXK6goQw=;
-	b=PipmOJG4UPPZ6A5cSeqTehYMaLzWBlB3w5GKMU1vQE4tGrDIW+W7FwfMenYvea3kwf
-	37wejxhIEqLnev4mNBfD2nc1iAwYAV2jE+ts7YZhUnjboSNedzDtCckii+13j8Vb2lS8
-	F0Y3f5HzoI9LlyavYVL3sIOYXoA8o1yfGsha6RZ4DqyXCEJkhyO7r6WuD/dO2DmX2LOd
-	eVH0O74GTtXkGl53hn1HDUjqeGR0j2dGYd8xOYbs6M1GmAEo3fZpioq81yrvCvJZRyS1
-	rIIWPFHXaweKxsH3Z7dspoUQZS1MNHbd6a4a31DLlRQN/1hjyAF88rr/NTf6MrNwKl+o
-	B64w==
+	bh=fh7V0kqXWo0b5qLOpISOr/y4usIGrAPwtmDqQQZAoZw=;
+	b=mTc6gYLwhcGKg77UB1SKUpuID06GM2sfe5NVsO8YPXuYHzBNJJf5Ehu61cKo5AYUPm
+	xESAbvWdAlsocLPPh3QvURWw9f4FMQA6nun5g+wgEgz9250w9v7xX/g4Kf5TtjZLXYtA
+	EzJd2d8G9kTjwGHJ7VhaX7+uDandY+G8ClIh0r3YfcXVz9llOZ4iFq0JhxfUJV55QF9o
+	PaHqEY1oYngEQIonQgSiczHN0TuTkstfbxtNBuoeKRNZS1fmxWwvFA6+Wp3+I8daH9ig
+	oNIIWuYOt0kcx7VwvOeCzsPIzsrcfjs4+/tQDc+M2wTanfgdRZSMUDECkyMoUywx8dOZ
+	S3Vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=mFUY57gxPnnmbO0/HJ0XRYEwt48A2LrpkyCYXK6goQw=;
-	b=ZCU5jIc0P/jW/dwf8whgA6DwuNioV7K97cGB3AzNq70KYl7zYz6JC8THoMpT6vj99h
-	PTQH2kW1kBtoxeE/qC7dqMJKHbk9QLqwEL+G2zhNSiaWmGPqXgMTGDPPvV9cwqGR1zvt
-	eDuLC9SQgHBQ8BfWjiVagyDG0pEGgnRFpdhfYPnhaqN6fVEKUdUUoIFtEtTDKjhFop1r
-	EcqZ9gWFxu5UcOqMqj6EIDyLIwpc7ZUfd3ro5+C4KuJlJoph5rFXWS3u5zzfSXJ+qdVB
-	oWbGg1g1dNiWEXqE2/8fgFRVmid22KgLQ0e5iP/4RFm9ed/G+Xmv5ppIszKkFapUREDs
-	Ij6Q==
-X-Gm-Message-State: AIkVDXJ1aFgP3ZHQQG2Vx2pJ93pZpRrnK+WmTzxDdQLRDEN37iYmJ9EmHzeMYh3NEx/qHLVZ9ifsmLvUrB8MSA==
-X-Received: by 10.28.189.134 with SMTP id n128mr25874596wmf.77.1485444156764; 
-	Thu, 26 Jan 2017 07:22:36 -0800 (PST)
+	bh=fh7V0kqXWo0b5qLOpISOr/y4usIGrAPwtmDqQQZAoZw=;
+	b=sG3rEamusBLGOB929Ay2yQA+Zg/htMPcVyuGBX7ya0SDdTBQtBZFEZUODC7zP3b7WM
+	WdiLIEBLWVBo8u7Ts831jYkQ9E/UAXYXA8c6DqcRfghO951d9PDFq4JwB59w8LD56yk6
+	napnIj+vFR9muUGHwvhoaEi0YaujzTttFL3ZVdPk46pVsmx1jNs+iSnRY9G8FdZiXrFT
+	nVkcCqv5vtZQx5p6PGbAxmhO9vbP2lJh4SiJ3MyB54EVmSSsXjNxYK/mHWxyQpuApL+J
+	z1uArvyGy7mfFL7Bn2Hv2gGPAkyJDiPLrZ/B0xVQPaytbunEuRMy3GAmqOF1WkSOTBjW
+	Yhtg==
+X-Gm-Message-State: AIkVDXJ18ONMsLbU4+spXIzLhg6CM15wJ5qubuZ7/WaNxVlgxFHtvuIOGDvapSXXgWknpmE8Iwj32g0bFD930r4y
+X-Received: by 10.36.123.136 with SMTP id q130mr30081776itc.25.1485455091438; 
+	Thu, 26 Jan 2017 10:24:51 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.28.152.19 with HTTP; Thu, 26 Jan 2017 07:22:35 -0800 (PST)
-In-Reply-To: <20170126125414.GA3016@jama>
-References: <1485160227-29998-1-git-send-email-samuli.piippo@qt.io>
-	<20170125160207.GF3260@jama>
-	<CAHvQdo3_+YfdZN_MYmZQLOW7uDnE-=LuXUwL8SR7sXLCG8VVyA@mail.gmail.com>
-	<20170126125414.GA3016@jama>
-From: Johannes Pointner <h4nn35.work@gmail.com>
-Date: Thu, 26 Jan 2017 16:22:35 +0100
-Message-ID: <CAHvQdo1SNOuWuyeAQU_sC88cU_vMbd=PRWt4fVSaQAq3OhM7jw@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH v5] Upgrade to Qt 5.8
+Received: by 10.64.144.99 with HTTP; Thu, 26 Jan 2017 10:24:31 -0800 (PST)
+In-Reply-To: <20170125145422.GB3260@jama>
+References: <1484134588-15143-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
+	<20170125145422.GB3260@jama>
+From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+Date: Thu, 26 Jan 2017 19:24:31 +0100
+Message-ID: <CAKuJqM-N4+vnast8zJZGyY3kn0R1R3ThEiU8OnnVbHxoe3_Rmw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH] nano: upgrade to 2.7.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,51 +54,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jan 2017 15:22:38 -0000
+X-List-Received-Date: Thu, 26 Jan 2017 18:24:52 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Did you also see the issue with the QMAKE_INCDIR_EGL, QMAKE_LIBS_EGL
-and QMAKE_CFLAGS_EGL variables?
+Martin -
 
-2017-01-26 13:54 GMT+01:00 Martin Jansa <martin.jansa@gmail.com>:
-> On Thu, Jan 26, 2017 at 11:00:59AM +0100, Johannes Pointner wrote:
->> Hello,
->>
->> I tried to build qtbase after this update, but it failed to configure
->> because of PACKAGECONFIG options which are no longer available or
->> moved to another part (qtmultimedia):
->> PACKAGECONFIG[mitshm] = "-mitshm,-no-mitshm,mitshm"
->>
->> PACKAGECONFIG[alsa] = "-alsa,-no-alsa,alsa-lib"
->> PACKAGECONFIG[pulseaudio] = "-pulseaudio,-no-pulseaudio,pulseaudio"
+May I ask you how it was built? I cannot reproduce this with poky 2.2 and
+oe's 'master' and 'master-next' branches. The package builds perfectly
+fine, without any errors or warnings.
+
+Thanks.
+
+On 25 January 2017 at 15:54, Martin Jansa <martin.jansa@gmail.com> wrote:
+
+> On Wed, Jan 11, 2017 at 12:36:28PM +0100, Oleksandr Kravchuk wrote:
+> > Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
 >
-> Yes, I'm seeing the same issue, the flags were removed in:
+> nano-2.7.4: nano rdepends on file, but it isn't a build dependency,
+> missing file in DEPENDS or PACKAGECONFIG? [build-deps]
 >
-> commit 90c425642dfeae4564b43dacf15f80479962e910
-> Merge: 1a43199 9808b53
-> Author: Liang Qi <liang.qi@qt.io>
-> Date:   Wed Nov 16 07:37:38 2016 +0100
+> > ---
+> >  .../nano/nano-2.2.5/ncursesw.includedir.patch                | 12
+> ------------
+> >  meta-oe/recipes-support/nano/nano.inc                        |  6
+> +++---
+> >  meta-oe/recipes-support/nano/nano_2.2.5.bb                   |  8
+> --------
+> >  meta-oe/recipes-support/nano/nano_2.7.4.bb                   |  6
+> ++++++
+> >  4 files changed, 9 insertions(+), 23 deletions(-)
+> >  delete mode 100644 meta-oe/recipes-support/nano/nano-2.2.5/ncursesw.
+> includedir.patch
+> >  delete mode 100644 meta-oe/recipes-support/nano/nano_2.2.5.bb
+> >  create mode 100644 meta-oe/recipes-support/nano/nano_2.7.4.bb
+> >
+> > diff --git a/meta-oe/recipes-support/nano/nano-2.2.5/ncursesw.includedir.patch
+> b/meta-oe/recipes-support/nano/nano-2.2.5/ncursesw.includedir.patch
+> > deleted file mode 100644
+> > index 0f224be..0000000
+> > --- a/meta-oe/recipes-support/nano/nano-2.2.5/ncursesw.includedir.patch
+> > +++ /dev/null
+> > @@ -1,12 +0,0 @@
+> > -diff -uNr nano-2.2.5.orig//configure.ac nano-2.2.5/configure.ac
+> > ---- nano-2.2.5.orig//configure.ac    2010-08-06 03:00:51.000000000
+> +0200
+> > -+++ nano-2.2.5/configure.ac  2010-08-10 14:11:52.000000000 +0200
+> > -@@ -442,7 +442,7 @@
+> > -     AC_CHECK_HEADERS(ncurses.h)
+> > -
+> > -     if test x$enable_utf8 != xno; then
+> > --    AC_CHECK_LIB(ncursesw, get_wch, [CURSES_LIB="-lncursesw"
+> CPPFLAGS="-I/usr/include/ncursesw $CPPFLAGS" CURSES_LIB_NAME=ncursesw
+> CURSES_LIB_WIDE=yes])
+> > -+    AC_CHECK_LIB(ncursesw, get_wch, [CURSES_LIB="-lncursesw"
+> CURSES_LIB_NAME=ncursesw CURSES_LIB_WIDE=yes])
+> > -     fi
+> > -
+> > -     if eval "test x$CURSES_LIB_NAME = x"; then
+> > diff --git a/meta-oe/recipes-support/nano/nano.inc
+> b/meta-oe/recipes-support/nano/nano.inc
+> > index 0f31c6c..8a9f1e8 100644
+> > --- a/meta-oe/recipes-support/nano/nano.inc
+> > +++ b/meta-oe/recipes-support/nano/nano.inc
+> > @@ -12,8 +12,8 @@ INC_PR = "r3"
+> >
+> >  PV_MAJOR = "${@d.getVar('PV',1).split('.')[0]}.${@d.getVar('PV',1).
+> split('.')[1]}"
+> >
+> > -SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.gz"
+> > +SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
+> >
+> > -inherit autotools gettext
+> > +inherit autotools gettext pkgconfig
+> >
+> > -PACKAGECONFIG[tiny] = "--enable-tiny,--enable-all,"
+> > +PACKAGECONFIG[tiny] = "--enable-tiny,"
+> > diff --git a/meta-oe/recipes-support/nano/nano_2.2.5.bb
+> b/meta-oe/recipes-support/nano/nano_2.2.5.bb
+> > deleted file mode 100644
+> > index e656f46..0000000
+> > --- a/meta-oe/recipes-support/nano/nano_2.2.5.bb
+> > +++ /dev/null
+> > @@ -1,8 +0,0 @@
+> > -include nano.inc
+> > -
+> > -PR = "${INC_PR}.0"
+> > -
+> > -SRC_URI += "file://ncursesw.includedir.patch"
+> > -
+> > -SRC_URI[md5sum] = "77a10a49589f975ce98350a4527a2ebf"
+> > -SRC_URI[sha256sum] = "9015945d1badabbada203b37c4779d
+> 3dd1066234235c714deb439989c5cd7d9e"
+> > diff --git a/meta-oe/recipes-support/nano/nano_2.7.4.bb
+> b/meta-oe/recipes-support/nano/nano_2.7.4.bb
+> > new file mode 100644
+> > index 0000000..5016f2e
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-support/nano/nano_2.7.4.bb
+> > @@ -0,0 +1,6 @@
+> > +include nano.inc
+> > +
+> > +PR = "${INC_PR}.0"
+> > +
+> > +SRC_URI[md5sum] = "c011c7f9e47cb1da27d4e7cc8b56ec6a"
+> > +SRC_URI[sha256sum] = "752170643039e2c95a433de357f0c7
+> 0a8c4c4c561a90a7e7259a63e225b659b9"
+> > --
+> > 2.7.4
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
->     Merge remote-tracking branch 'origin/5.7' into 5.8
->
-> but there is still PACKAGECONFIG in qtbase recipe, so this needs be
-> fixed in v6.
->
->>
->> After removing them I was able to configure, but I saw following
->> warnings during the configure process:| WARNING: Unable to find file
->> /mnt/raid/yocto_env/poky/morty/ppt50/build/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/git/mkspecs/linux-oe-g++/../oe-device-extra.pri
->> | WARNING: Unable to find file
->
-> These warnings were there before as well, since oe-device-extra.pri
-> support was added in:
->
-> commit 37693b5357e790665bce4957cb7a8d5d2423390d
-> Author: Samuli Piippo <samuli.piippo@theqtcompany.com>
-> Date:   Thu Oct 15 13:00:31 2015 +0300
->
->     qt5: use extra .pri file from linux-oe-g++ mkspec
->
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 >
 > --
 > _______________________________________________
@@ -105,4 +177,9 @@ and QMAKE_CFLAGS_EGL variables?
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
+>
+
+
+-- 
+Yes, this is my signature
 
