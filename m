@@ -1,47 +1,51 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-ot0-f194.google.com (mail-ot0-f194.google.com
-	[74.125.82.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 5507C772E5
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 4131671ADD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jan 2017 22:27:21 +0000 (UTC)
-Received: by mail-ot0-f194.google.com with SMTP id 36so28996199otx.3
+	Thu, 26 Jan 2017 22:41:26 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id 3so5600458pgj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jan 2017 14:27:21 -0800 (PST)
+	Thu, 26 Jan 2017 14:41:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=XYpeu6ZG5K9fqSMtJmJuLAUT/nZ5hwsP6G66xiJMNcQ=;
-	b=EFcMeZ7LGQAATdOXsDdMR0CShDFcW1Dp5yPYIQdHJqLFj1DrqtJzVsVpT/GYUJFpit
-	Xr09sbyosevmH4LVw6Zrj51bW9wS2ZOAEGBB0bp2rXZkyJ3NgjqVaezMZ3ePpdw6YVKR
-	MjfJ16sd6G2vUEcvJB3Fx0InjBlpzcA+/t7bSUlD9INEvvuPWII4ym9ipLYcY0pOBOQP
-	MwqCpNV/Hfvs9b6OB8+FddWdKrBVwYrdtYqOYnf11M9nKDcYeNuOFUNgfyIlmfVD2CFy
-	nyNmYQZD4vMjUwNHFiha6ijUDROjLABt3FZok0o/bSr4D4hidwwb74B5bpYa0iNIIyBY
-	5nag==
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=4vaqlcFvHk6ne8boLFr55HhkZKWH68sNPC8LpPR3rKY=;
+	b=rNBWj5+v1d+u5815KC7tJGeUrZ95fSv7yzc34Y/V3tGhbCBbY3T6Vn5gNsYX1b5SVd
+	dvPUNq8qiDhC4isg/AdUIlxLUh+e8a0uL4zqoB9bUAoCfcRLiU0b2oXh7/vBuXly8CtN
+	yRPqcIF9kkUrb6MNUKPe7OmN1sfyachYsTJHnYTDkDtSucVZURjTWK88wWe9NOGA2GGk
+	dquoilhEjJtAgdjem2ng+ke7wjlsGZjdoLwDauk4htaKD4uKad/UXgBL8RGe8c7W+DV3
+	0mbWKmPTWquTa3+BvtK/7yWbdwnK1wYQsnMae5UW71bFZPmD9mEFcnj0qc74nXARTCsh
+	XnoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=XYpeu6ZG5K9fqSMtJmJuLAUT/nZ5hwsP6G66xiJMNcQ=;
-	b=TtJTE2kvChYU7QeuhFcu7bEyQmox0oLL1uRnWFSXcBVIa8DehA1hNrTSkiLh4OCRn4
-	dDyQEpNchTPl2szf1ys338RMwzfaTJsyfWmPx8viqlQLHQc5UaXvLIXqacqprfRSwbRf
-	iosktNYYR7NOjQ2SkKW5J+YkRMXPK03BRnFxm/vv4vOYFSR81leTgnxd7RkJnP1NI7j2
-	p5IIhNzKmDCwwvnQ/JDEIT31AZME1mukV3ZsASJy44A3YP9fDzxYb6DeqKDkEohfYV8K
-	qnRAeZIPIPdKXHBK3j3rqEq1Gs+ekKpnrpmed6UxRb0O5lvIkoZYh6XkFc3rroLKk5TW
-	SX5A==
-X-Gm-Message-State: AIkVDXKM8w7Wx9fmjErvW772PoxqeQrXkR6LZqUhCFM/ghXIzgAqOsJfW2RKcLe0V0wXh/Wy//o3NSWAqVsrdg==
-X-Received: by 10.157.27.3 with SMTP id l3mr2699923otl.15.1485469641468; Thu,
-	26 Jan 2017 14:27:21 -0800 (PST)
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=4vaqlcFvHk6ne8boLFr55HhkZKWH68sNPC8LpPR3rKY=;
+	b=s5rTyAlVrAHPAL7uNqfSMFEuIv2Mbj82HqwLu5YMN18YttT1ls9GS9P3XPfCsjSpW1
+	H9K4MQ/WQ0mYg6Pl4PWIrtsJuiPyJu35pl07xkCCNatQ85TdpUixWTBv7MZ0mMzKLUI8
+	RDAJbBJB+i0DPb9ZZreU2zfXuBqrNWQ21JnqoB0YzRUcoErh5Wd2xvkkJTiloPgXfwx5
+	y0onWoGBmrJjLqqBLne9FWG+whrT5Ggq6U5IHEXz0+n2GObkv1nN0850mmZoW5ssQy9B
+	s5xa6ZxlLWDwJiPSLYhXxybx/ckBd5rCsxQA+iuPp64Pp3eVVQtiDOquqsQ/TOOPMTJD
+	nzJA==
+X-Gm-Message-State: AIkVDXKivJPhS2U7tA+xlRQ8tvWK3UX2ZbN4+TQODWT/97+NEFay2v4vi2N213QAB7XBOQ==
+X-Received: by 10.84.211.137 with SMTP id c9mr7462806pli.8.1485470486983;
+	Thu, 26 Jan 2017 14:41:26 -0800 (PST)
+Received: from CACSVMO-14452.local (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192])
+	by smtp.gmail.com with ESMTPSA id x2sm5757351pfa.71.2017.01.26.14.41.26
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 26 Jan 2017 14:41:26 -0800 (PST)
+To: openembedded-devel@lists.openembedded.org
+References: <1485380601-6226-1-git-send-email-armccurdy@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Message-ID: <e981be87-9ea5-83df-6ee1-a52ffda3fb1e@gmail.com>
+Date: Thu, 26 Jan 2017 14:41:24 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
+	Gecko/20100101 Thunderbird/45.6.0
 MIME-Version: 1.0
-Received: by 10.157.1.56 with HTTP; Thu, 26 Jan 2017 14:27:21 -0800 (PST)
-In-Reply-To: <1484608187-28597-2-git-send-email-max.krummenacher@toradex.com>
-References: <1484608187-28597-1-git-send-email-max.krummenacher@toradex.com>
-	<1484608187-28597-2-git-send-email-max.krummenacher@toradex.com>
-From: Max Krummenacher <max.oss.09@gmail.com>
-Date: Thu, 26 Jan 2017 23:27:21 +0100
-Message-ID: <CAEHkU3UX4NhOVvg6QXcuWgw_H5Z1EaOgih3Lsj9D+hfvC1s44A@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Max Krummenacher <max.krummenacher@toradex.com>
-Subject: Re: [meta-browser][PATCH 2/2] README: add -s to git send-email example
+In-Reply-To: <1485380601-6226-1-git-send-email-armccurdy@gmail.com>
+Subject: Re: [meta-oe][PATCH] luajit: test SITEINFO_BITS instead of maintaining a list of 32bit targets
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,40 +58,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jan 2017 22:27:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 26 Jan 2017 22:41:27 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-ping
 
-Any comments on this one?
 
-Max
-
-2017-01-17 0:09 GMT+01:00 Max Krummenacher <max.oss.09@gmail.com>:
-> Prevent missing Signed-off-by lines.
->
-> Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+On 1/25/17 1:43 PM, Andre McCurdy wrote:
+> When cross compiling, the word size of the compiler set via HOST_CC
+> must match the word size of the target. That's achieved by appending
+> "-m32" to BUILD_CC_ARCH if the target word size is known to be 32bits.
+> 
+> Unfortunately the current list of over-rides (powerpc, x86 and arm)
+> does not cover all cases (e.g. it ignores MIPS). Using SITEINFO_BITS
+> is a more generic solution.
+> 
+> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 > ---
->  README | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/README b/README
-> index 647404b..effe2f9 100644
-> --- a/README
-> +++ b/README
-> @@ -26,7 +26,7 @@ Maintainers: Eric B=C3=A9nard <eric@eukrea.com>
->               Otavio Salvador <otavio@ossystems.com.br>
->
->  When sending single patches, please use something like :
-> -git send-email -1 --to openembedded-devel@lists.openembedded.org --subje=
-ct-prefix=3D'meta-browser][PATCH'
-> +git send-email -1 -s --to openembedded-devel@lists.openembedded.org --su=
-bject-prefix=3D'meta-browser][PATCH'
->
->  TODO
->  ----
-> --
-> 2.6.6
->
+>  meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb | 6 ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+> index 964dc1d..430279f 100644
+> --- a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+> +++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+> @@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "620fa4eb12375021bef6e4f237cbd2dd5d49e56beb414bee052c746bee
+>  
+>  S = "${WORKDIR}/LuaJIT-${PV}"
+>  
+> -inherit pkgconfig binconfig
+> +inherit pkgconfig binconfig siteinfo
+>  
+>  BBCLASSEXTEND = "native"
+>  
+> @@ -21,9 +21,7 @@ BBCLASSEXTEND = "native"
+>  # you need to install the multilib development package (e.g.
+>  # libc6-dev-i386 on Debian/Ubuntu) and build a 32 bit host part
+>  # (HOST_CC="gcc -m32").
+> -BUILD_CC_ARCH_append_powerpc = ' -m32'
+> -BUILD_CC_ARCH_append_x86 = ' -m32'
+> -BUILD_CC_ARCH_append_arm = ' -m32'
+> +BUILD_CC_ARCH_append = " ${@['-m32',''][d.getVar('SITEINFO_BITS') != '32']}"
+>  
+
+not related but
+This makes me think about another issue, will it work on non-x86 build
+machines, currently we do have aarch64 based boxes
+
+>  # The lua makefiles expect the TARGET_SYS to be from uname -s
+>  # Values: Windows, Linux, Darwin, iOS, SunOS, PS3, GNU/kFreeBSD
+> 
 
