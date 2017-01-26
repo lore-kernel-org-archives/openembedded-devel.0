@@ -1,53 +1,45 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f194.google.com (mail-ua0-f194.google.com
-	[209.85.217.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F6706003C;
-	Thu, 26 Jan 2017 21:39:17 +0000 (UTC)
-Received: by mail-ua0-f194.google.com with SMTP id 96so23186476uaq.2;
-	Thu, 26 Jan 2017 13:39:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-ot0-f179.google.com (mail-ot0-f179.google.com
+	[74.125.82.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 79EA071ADD
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Jan 2017 22:27:01 +0000 (UTC)
+Received: by mail-ot0-f179.google.com with SMTP id 65so185678790otq.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Jan 2017 14:27:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=5qp0jFO8uKNptB5l3gwMrNOHwahflaawd+bmPe6X2aQ=;
-	b=qN4/c7ZcMkxXvqdnhVudVmiVSu0wznyL10xWZwAiSPFOI87irpU6+a7xfU9nfEvdEe
-	fL/ZrDs8WnoNxd8HG09TwgtAnHClo925szGtVOnElv9IRpdCXzU8y1zxl1JerdWktzGF
-	Irpofxkkdo3YiVXtCMcIMA83Ds6cvghTg4oKkmrZW4JLPFTh+PkmOTIVR62HxIZ4eD3o
-	S+iG7RTN8cgbiQLH2IZCGMdv+854BVg99BxZNPAtxFYeI5kuzfD6Mbk7jle55h8qOjMy
-	A0upJRrwROEpZdEK9ySCotcv7vn7rqoJjZiliBYIPBAEfWPTch6DpU1hqfQqVs5H83P+
-	OfPQ==
+	:cc; bh=/8FoJDDAp94FIthpvexMdxoUgkgH7BM1TlelvFtHIC8=;
+	b=QT3d48d/xKfWqL8lbqujX8sKKJzX7AhiNXyy2GsFLJQ/lkZ/OwPpDL/ric/joG9Csd
+	yLgYwAmyZhk0H196o5D/IQvCm9L5cGuM89Xi2sFyh1RSn2frw3Nb72mJjMOh9mNAVOCU
+	oKN3LxWiV1poFzFRlOlKENiwAWYjpvt7yySVb+Vpi3ZwIpBipLe77nQdvQq2fkXxNGwk
+	vyvs5I0/sf/DVsKzF8xRScbCMurVjOn/bohwg3ZmIDdLFTHb8jJL3G7DREozFwd2yqP4
+	5+2QY8UiNooNw74qUd73qG0z/7ahG2XzZmL8yWdjSam0rdN60svVywT81WEZuCgd2pwa
+	HgwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=5qp0jFO8uKNptB5l3gwMrNOHwahflaawd+bmPe6X2aQ=;
-	b=GnZDWr0neJRs7lnmrQcRA5HV0FDsDyl8jq4igxu2bOgYquT6OVfmy/qF6o84ooU+GA
-	kol+L2/6NCGoopocyV9u5TpXo3fG/Nhn8Jc2lzCSaA2P3BX8J4Ugx+BK71I5DeFkSjjl
-	LjZllZDk9yPoleVQSAz7VALOpOQjeqmX++OqiiTq+j9xEb9XYQsK/tkDXkXkejUuF/vh
-	iubH/SSx0Vb1dnme8XLlg8fPpE+cJBKeo0HTewYAAMT/y0zAaiJx7BjZ8F1P+YmjEGJO
-	1JC9OUJbyoZwg4nKm9lwRTIobsO621Pigo6bv/W71iDJFC2Xb4Q+IsVBZ0u6t2Rzhxxk
-	NCwQ==
-X-Gm-Message-State: AIkVDXIENqpKyrgyFZvI+tCw4xQDiXQsD6OpumpYLpeylWN8DSbtYvJtWO6pyMzwcSmbQ6UQJSXQecnR0ZOiBg==
-X-Received: by 10.176.0.149 with SMTP id 21mr2760698uaj.81.1485466758020; Thu,
-	26 Jan 2017 13:39:18 -0800 (PST)
+	:message-id:subject:to:cc;
+	bh=/8FoJDDAp94FIthpvexMdxoUgkgH7BM1TlelvFtHIC8=;
+	b=M23WUdiT4XcjM7p8xmD/l1nf2kb5/FA57qS3TNMIaII1xJbO6qo9Jkk54OJ+vir5Sk
+	2X2UiXQONmmjswxbMBlPnlPdZdN27ZlIMsELeQuQ96vtyZd8fFdMGysQn7Vz+1w7OnGZ
+	hshIKubXZiwepgFNq+TIXVPIIYj37snlNm7Eq8nnoRZviZocQM67uSL6JC2DXHYb7C4G
+	GNPThFZ9r/D3GNPDOlN6t5EJQE5emzAjYcbu0MZkoDbASP1KaVU+DUQ/uze/MLvLb4ud
+	xiNLkek0P/FhdggqCtVadJEzqeeMdFHO4fFBQ+Rj/GxKKBKIuPl1cPc7ajsUmdB1k2Xl
+	hkcw==
+X-Gm-Message-State: AIkVDXKPGfhEK+9ccjJFq4DuVX0kNidwJpnEXJyA8fkNrEjUqM54p++8sUQbJWgHekjEBQQuk18h5bS10QV7iQ==
+X-Received: by 10.157.42.19 with SMTP id t19mr2330149ota.257.1485469621373;
+	Thu, 26 Jan 2017 14:27:01 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.176.91.68 with HTTP; Thu, 26 Jan 2017 13:39:17 -0800 (PST)
-In-Reply-To: <bbd8fb9d-8215-c73f-f4aa-b20523291ec0@balister.org>
-References: <65082de4-2ba6-3b18-1845-00b2d637404e@balister.org>
-	<CALbNGRSrXLdfUK3U2bXr20P+fFm4ROArGPRi9Ag=AhXbGjUv+g@mail.gmail.com>
-	<bbd8fb9d-8215-c73f-f4aa-b20523291ec0@balister.org>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Thu, 26 Jan 2017 22:39:17 +0100
-Message-ID: <CALbNGRT_H_Vz8b6vcfgJGWYEyVw6og4+zKmLjLZ6P+2O0oY6eA@mail.gmail.com>
-To: Philip Balister <philip@balister.org>
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	"openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>, openembedded-architecture
-	<openembedded-architecture@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] OpenEmbedded Stand at FOSDEM
+Received: by 10.157.1.56 with HTTP; Thu, 26 Jan 2017 14:27:01 -0800 (PST)
+In-Reply-To: <1484608187-28597-1-git-send-email-max.krummenacher@toradex.com>
+References: <1484608187-28597-1-git-send-email-max.krummenacher@toradex.com>
+From: Max Krummenacher <max.oss.09@gmail.com>
+Date: Thu, 26 Jan 2017 23:27:01 +0100
+Message-ID: <CAEHkU3V3UUhzJEeYmNTAqzCWMnq6nbw1PNM12L6cxKmHz5HkRw@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Cc: Max Krummenacher <max.krummenacher@toradex.com>
+Subject: Re: [meta-browser][PATCH 1/2] firefox: remove nss private libs setting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,47 +52,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jan 2017 21:39:18 -0000
+X-List-Received-Date: Thu, 26 Jan 2017 22:27:01 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 5, 2017 at 4:30 PM, Philip Balister <philip@balister.org> wrote=
-:
-> On 01/03/2017 08:13 PM, Andreas M=C3=BCller wrote:
->> On Tue, Jan 3, 2017 at 4:32 PM, Philip Balister <philip@balister.org> wr=
-ote:
->>> Every year since 2007, OpenEmbedded has a stand at FOSDEM
->>> (http://www.fosdem.org)
->>>
->>> From the first year:
->>>
->>> https://www.flickr.com/photos/32615155@N00/405229708/in/album-721575945=
-61002629/
->>>
->>> Belen and I are sort of organizing this, but both of us are also
->>> involved in devrooms, so we will need a lot of help manning the stand
->>> and getting some demos together.
->>>
->>> Demos should try and show how the project makes embedded work easier, b=
-y
->>> showing tools and/or cool examples of devices using Linux built with
->>> OpenEmbedded. In previous years, we've shown toaster with data collecte=
-d
->>> from demos on the table. Collections of devices running images built
->>> from the same recipe and interesting products using Linux by OpenEmbedd=
-ed.
->>>
->>> I'm happy to try and organize demos and staffing, but I could really us=
-e
->>> some help this year, so if you are in a position to tak ethe lead on
->>> operating the stand, that would be a huge help to me and the rest of th=
-e
->>> project.
->>>
->>> Thanks,
->>>
->>> Philip
-Nobody?
+ping
 
-Andreas
+Any comments on this one?
+
+Max
+
+
+2017-01-17 0:09 GMT+01:00 Max Krummenacher <max.oss.09@gmail.com>:
+> Commit 8cc038d uses the system's nss rather than building a private
+> one. So one should remove the nss libs from PRIVATE_LIBS also.
+> Otherwise bitbake does not add nss to RDEPENDS automatically resulting
+> in a potentially missing nss package in an image.
+> Additianlly bitbake shows the following warning:
+>
+> | WARNING: firefox-45.6.0esr-r0 do_package_qa: QA Issue: /usr/lib/firefox/libxul.so
+> |   contained in package firefox requires libnss3.so(NSS_3.12),
+> |   but no providers found in RDEPENDS_firefox? [file-rdeps]
+>
+> Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+> ---
+>  recipes-mozilla/firefox/firefox_45.6.0esr.bb | 12 ------------
+>  1 file changed, 12 deletions(-)
+>
+> diff --git a/recipes-mozilla/firefox/firefox_45.6.0esr.bb b/recipes-mozilla/firefox/firefox_45.6.0esr.bb
+> index bed50dd..31b3353 100644
+> --- a/recipes-mozilla/firefox/firefox_45.6.0esr.bb
+> +++ b/recipes-mozilla/firefox/firefox_45.6.0esr.bb
+> @@ -95,15 +95,3 @@ PRIVATE_LIBS = "libmozjs.so \
+>                  libmozsqlite3.so \
+>                  libbrowsercomps.so \
+>                  libclearkey.so"
+> -
+> -# mark libraries also provided by nss as private too
+> -PRIVATE_LIBS += " \
+> -    libfreebl3.so \
+> -    libnss3.so \
+> -    libnssckbi.so \
+> -    libsmime3.so \
+> -    libnssutil3.so \
+> -    libnssdbm3.so \
+> -    libssl3.so \
+> -    libsoftokn3.so \
+> -"
+> --
+> 2.6.6
+>
 
