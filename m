@@ -1,44 +1,52 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 32E8171DDE
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id B8C1A7198A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jan 2017 23:43:53 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id r144so54154870wme.0
+	Fri, 27 Jan 2017 01:03:13 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id 75so23594407pgf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jan 2017 15:43:54 -0800 (PST)
+	Thu, 26 Jan 2017 17:03:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=d+bHR+U35zz55b4Rgv7wLMfgGwuDR6N33/cXYv+g7bs=;
-	b=lfL3E6leW+mN/rLrl7iifmKuaGpqgb7J81P9vyZ5HN0ZBE+biomdkOiecsHO2GAag6
-	f/ECY1F6EqLvX8oSMx60PZ6eErlZIE9FF/S5sp6hoyi0qveSWfyuW4CsPIRElbPx+A9u
-	NAweQPpFe4GRkPOmCNT4GcRkjCwoYhUF5ZhdHR0oxF1qwYvTZHWVirQRhDQ90w+LfIw+
-	9EGCthGitZEgUgqgJUKyht7xvFIX/j6LqMGiTCgq5T4cg+FfaTp9SzjhxEppercfm4up
-	dGR/pMrZfL7CxOxGzGzxjzsoIAz7Nt9IIzPa4jYIPX/RTqK4lGC/dlnJSNAGlo5eXabL
-	gPoA==
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=N/Esvog3yQDlwpNLISuY1/zbr8i/N0vBW4gBgQ0cCq0=;
+	b=Wf/znAXdKl0K5rHMSTstNpHKzRL08m0vZH/SRhyP0JbjteP2E0eYkJtbJtwX7rmgOB
+	yg8/WuFsxnbxrHSNTxw8w4K6PqXZ3sVLb1tAHmiMt59UZxQ4W0SodHzEL8JGaPgi4j7G
+	4m+GDFQCuoEHXzbzeJ/dF3fG4VkktaGgG4xspBvy5cqbn3UEPKNzHBLHyTUlkvn2zKgE
+	dnBjuVkzAnag24PXzcDflPaRyGpsl3gzV5vdiZ7fnyDvgKBP92Y4GJlG6JGzTqNOviU5
+	owz6Jxy5+akpTsduc2/wznkXeNwK3C3voaGAEEQUH8YuHf1ROmJg+YLroOVPmAHB/gGI
+	X5PA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=d+bHR+U35zz55b4Rgv7wLMfgGwuDR6N33/cXYv+g7bs=;
-	b=UY70o2vWdrBxxycL/JaytqbndOe8Cjs+q9CWIse/lDYWuhFgCUdAXCWfNPr5IIqzRX
-	wdUbee7otinvpJjQuLooDklaoKfgtDaEVKNerlSUF1cUedGwD5uhYJHn6OlfAkVwy6db
-	ljKlvPokKiA4MRNK9fK3kSdbHJW/MlwsFj2xar9bVMxmQ8q/hBqpd3eE+ToQseYt9Vnz
-	bB+HPRtgGWYXC+SheiCMi+POVSO7UsWWxhCI+BiEhoQ8o2Yf41ud6TGr6EZSzCNxI/Co
-	TH1U0Or5U4Z7yruEOvUQDS+6Lj7ihfSZ6o4z9XfUzkUQuKtfy0iYYeIHMIhJMoCBxLfI
-	OZIg==
-X-Gm-Message-State: AIkVDXJMQ2MAe4C9xvc5WzSdf/KB4Aw7wWeICBuphQq9UC1nQWNnib1jY2ZHyeugIXLf+xQgErEoZ5gLZDAScw==
-X-Received: by 10.28.225.215 with SMTP id y206mr653450wmg.138.1485474233473;
-	Thu, 26 Jan 2017 15:43:53 -0800 (PST)
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=N/Esvog3yQDlwpNLISuY1/zbr8i/N0vBW4gBgQ0cCq0=;
+	b=pCCd5wJpXfO39puKzyksWAg1g7U9GjUT2Uz8VoPJ184Rzq4XT0WZ0DQLRvO2YrAUf3
+	B6u8sFHeIfyAEut1myazkXjzkYOuYotyBNS4RXmQ3es7uIrKtp10ZowJtr3r2RcoegDM
+	pQeMonX+I1DZctL3gYOU95Ugzk1bWstG4SLFs1mHjJ5ma8IPvTaV2UdcQ//kREG+BZr1
+	3WkSsk306vec+BNr/lZF1hdzzvMMN3WuY0doDx/0U3K/nPaOfL2RIe0icN5Ndf8oSP/1
+	4qabAwBf4fmDhaeO9LO+/sLnlMjQ6ZK8Fo01gTgv3RmRIFxwtdwtAM8pr1vOy/hEQTaK
+	CcaQ==
+X-Gm-Message-State: AIkVDXJHjDfizTRDvxDBG5crH9NBzuY0v51A6WBn93DXH0IT8S34/4Ttfl1rDdEunTc+Ww==
+X-Received: by 10.84.231.139 with SMTP id g11mr5308793plk.110.1485478993680;
+	Thu, 26 Jan 2017 17:03:13 -0800 (PST)
+Received: from CACSVMO-14452.local (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
+	w76sm6067139pfd.74.2017.01.26.17.03.12
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 26 Jan 2017 17:03:13 -0800 (PST)
+To: openembedded-devel@lists.openembedded.org
+References: <1484608187-28597-1-git-send-email-max.krummenacher@toradex.com>
+	<CAEHkU3V3UUhzJEeYmNTAqzCWMnq6nbw1PNM12L6cxKmHz5HkRw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Message-ID: <44845cb5-d36c-80a8-a5cd-94238289fb9a@gmail.com>
+Date: Thu, 26 Jan 2017 17:02:24 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
+	Gecko/20100101 Thunderbird/45.6.0
 MIME-Version: 1.0
-Received: by 10.194.98.164 with HTTP; Thu, 26 Jan 2017 15:43:52 -0800 (PST)
-In-Reply-To: <e981be87-9ea5-83df-6ee1-a52ffda3fb1e@gmail.com>
-References: <1485380601-6226-1-git-send-email-armccurdy@gmail.com>
-	<e981be87-9ea5-83df-6ee1-a52ffda3fb1e@gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Thu, 26 Jan 2017 15:43:52 -0800
-Message-ID: <CAJ86T=WxBVjhFMED3Y6tFnSjjdXbU9A-sYBfpfj5JUjMa9L7mg@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] luajit: test SITEINFO_BITS instead of maintaining a list of 32bit targets
+In-Reply-To: <CAEHkU3V3UUhzJEeYmNTAqzCWMnq6nbw1PNM12L6cxKmHz5HkRw@mail.gmail.com>
+Subject: Re: [meta-browser][PATCH 1/2] firefox: remove nss private libs setting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,60 +59,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Jan 2017 23:43:54 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 27 Jan 2017 01:03:14 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jan 26, 2017 at 2:41 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On 1/25/17 1:43 PM, Andre McCurdy wrote:
->> When cross compiling, the word size of the compiler set via HOST_CC
->> must match the word size of the target. That's achieved by appending
->> "-m32" to BUILD_CC_ARCH if the target word size is known to be 32bits.
+this is ok to install.
+
+On 1/26/17 2:27 PM, Max Krummenacher wrote:
+> ping
+> 
+> Any comments on this one?
+> 
+> Max
+> 
+> 
+> 2017-01-17 0:09 GMT+01:00 Max Krummenacher <max.oss.09@gmail.com>:
+>> Commit 8cc038d uses the system's nss rather than building a private
+>> one. So one should remove the nss libs from PRIVATE_LIBS also.
+>> Otherwise bitbake does not add nss to RDEPENDS automatically resulting
+>> in a potentially missing nss package in an image.
+>> Additianlly bitbake shows the following warning:
 >>
->> Unfortunately the current list of over-rides (powerpc, x86 and arm)
->> does not cover all cases (e.g. it ignores MIPS). Using SITEINFO_BITS
->> is a more generic solution.
+>> | WARNING: firefox-45.6.0esr-r0 do_package_qa: QA Issue: /usr/lib/firefox/libxul.so
+>> |   contained in package firefox requires libnss3.so(NSS_3.12),
+>> |   but no providers found in RDEPENDS_firefox? [file-rdeps]
 >>
->> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+>> Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
 >> ---
->>  meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb | 6 ++----
->>  1 file changed, 2 insertions(+), 4 deletions(-)
+>>  recipes-mozilla/firefox/firefox_45.6.0esr.bb | 12 ------------
+>>  1 file changed, 12 deletions(-)
 >>
->> diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
->> index 964dc1d..430279f 100644
->> --- a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
->> +++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
->> @@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "620fa4eb12375021bef6e4f237cbd2dd5d49e56beb414bee052c746bee
+>> diff --git a/recipes-mozilla/firefox/firefox_45.6.0esr.bb b/recipes-mozilla/firefox/firefox_45.6.0esr.bb
+>> index bed50dd..31b3353 100644
+>> --- a/recipes-mozilla/firefox/firefox_45.6.0esr.bb
+>> +++ b/recipes-mozilla/firefox/firefox_45.6.0esr.bb
+>> @@ -95,15 +95,3 @@ PRIVATE_LIBS = "libmozjs.so \
+>>                  libmozsqlite3.so \
+>>                  libbrowsercomps.so \
+>>                  libclearkey.so"
+>> -
+>> -# mark libraries also provided by nss as private too
+>> -PRIVATE_LIBS += " \
+>> -    libfreebl3.so \
+>> -    libnss3.so \
+>> -    libnssckbi.so \
+>> -    libsmime3.so \
+>> -    libnssutil3.so \
+>> -    libnssdbm3.so \
+>> -    libssl3.so \
+>> -    libsoftokn3.so \
+>> -"
+>> --
+>> 2.6.6
 >>
->>  S = "${WORKDIR}/LuaJIT-${PV}"
->>
->> -inherit pkgconfig binconfig
->> +inherit pkgconfig binconfig siteinfo
->>
->>  BBCLASSEXTEND = "native"
->>
->> @@ -21,9 +21,7 @@ BBCLASSEXTEND = "native"
->>  # you need to install the multilib development package (e.g.
->>  # libc6-dev-i386 on Debian/Ubuntu) and build a 32 bit host part
->>  # (HOST_CC="gcc -m32").
->> -BUILD_CC_ARCH_append_powerpc = ' -m32'
->> -BUILD_CC_ARCH_append_x86 = ' -m32'
->> -BUILD_CC_ARCH_append_arm = ' -m32'
->> +BUILD_CC_ARCH_append = " ${@['-m32',''][d.getVar('SITEINFO_BITS') != '32']}"
->
-> not related but
-> This makes me think about another issue, will it work on non-x86 build
-> machines, currently we do have aarch64 based boxes
-
-Right (unless aarch64 host toolchains accept "-m32"?)
-
-Building on 32bit x86 is probably broken too.
-
->>  # The lua makefiles expect the TARGET_SYS to be from uname -s
->>  # Values: Windows, Linux, Darwin, iOS, SunOS, PS3, GNU/kFreeBSD
->>
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
