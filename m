@@ -1,52 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id B8C1A7198A
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A545772F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 01:03:13 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id 75so23594407pgf.3
+	Fri, 27 Jan 2017 01:03:19 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id 194so23603291pgd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Jan 2017 17:03:14 -0800 (PST)
+	Thu, 26 Jan 2017 17:03:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:message-id:date:user-agent:mime-version
 	:in-reply-to:content-transfer-encoding;
-	bh=N/Esvog3yQDlwpNLISuY1/zbr8i/N0vBW4gBgQ0cCq0=;
-	b=Wf/znAXdKl0K5rHMSTstNpHKzRL08m0vZH/SRhyP0JbjteP2E0eYkJtbJtwX7rmgOB
-	yg8/WuFsxnbxrHSNTxw8w4K6PqXZ3sVLb1tAHmiMt59UZxQ4W0SodHzEL8JGaPgi4j7G
-	4m+GDFQCuoEHXzbzeJ/dF3fG4VkktaGgG4xspBvy5cqbn3UEPKNzHBLHyTUlkvn2zKgE
-	dnBjuVkzAnag24PXzcDflPaRyGpsl3gzV5vdiZ7fnyDvgKBP92Y4GJlG6JGzTqNOviU5
-	owz6Jxy5+akpTsduc2/wznkXeNwK3C3voaGAEEQUH8YuHf1ROmJg+YLroOVPmAHB/gGI
-	X5PA==
+	bh=xjANKtCdeE/SRvpp84v0elFElKn44TTv1O+R6rJ9jPg=;
+	b=mZHZRVUZGCdPQ1b8iPABdHOS31vvCnhS8iYr/kYKm2wRRd0OzXgwNfC7GohWqZ0NlF
+	wFHGKQsR0X7RSRxLQ0whAfG1U0uzRl3Y8HrTIf03wXZ9Pbp98pMwOejZ30fHTzgLNvgO
+	jvJxRpg4kgH3Ko/jrbEVvUjoACYqiDJauWihVtJUvqsQH2WBMrCESWeW0sukeKbd6Mow
+	vr6hTIZ6DlEPXB+nv4J3xiLKfTrujWegJ1tqcm8SQdN522H3xmmNopf+PRA0fttajm4Z
+	qJLqEggdLrMqcWswAIGrxAujxEjwVaPn6TCKcsmqzgozulduCIgc+XpcM+M/0UZ6I9BS
+	Wiig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=N/Esvog3yQDlwpNLISuY1/zbr8i/N0vBW4gBgQ0cCq0=;
-	b=pCCd5wJpXfO39puKzyksWAg1g7U9GjUT2Uz8VoPJ184Rzq4XT0WZ0DQLRvO2YrAUf3
-	B6u8sFHeIfyAEut1myazkXjzkYOuYotyBNS4RXmQ3es7uIrKtp10ZowJtr3r2RcoegDM
-	pQeMonX+I1DZctL3gYOU95Ugzk1bWstG4SLFs1mHjJ5ma8IPvTaV2UdcQ//kREG+BZr1
-	3WkSsk306vec+BNr/lZF1hdzzvMMN3WuY0doDx/0U3K/nPaOfL2RIe0icN5Ndf8oSP/1
-	4qabAwBf4fmDhaeO9LO+/sLnlMjQ6ZK8Fo01gTgv3RmRIFxwtdwtAM8pr1vOy/hEQTaK
-	CcaQ==
-X-Gm-Message-State: AIkVDXJHjDfizTRDvxDBG5crH9NBzuY0v51A6WBn93DXH0IT8S34/4Ttfl1rDdEunTc+Ww==
-X-Received: by 10.84.231.139 with SMTP id g11mr5308793plk.110.1485478993680;
-	Thu, 26 Jan 2017 17:03:13 -0800 (PST)
+	bh=xjANKtCdeE/SRvpp84v0elFElKn44TTv1O+R6rJ9jPg=;
+	b=pt7LUTK4vkaw+T1XfQyMbwiUM7HkzSibRtmEClzTJ1Ri+c1VgVG6jyJ3m7r8BbA+n7
+	qr/y7Z1vBu3V3yGT5g5PaxsL/RaDsiEY1C+0rFSSOa52VjqJWRUn7W8/3JTed9Jp9lgf
+	5arft8x5gS1hLckVO8WFQJVhZX0i2H30Ly9mCB+FhJijc7OYqbDxKoRmZe7d/PFLCIhC
+	LdDfltLM8FkkNZ2FU/gommuyztZaWdzAdOEQwktplbMedWYnJRAsdnf8EZyn4Pc+p+TZ
+	7eEnt+uDYog1tLbyApjYD1hxKnMsDdRBxnPmN674UEc0+cFKPC7wzIVm3YeRyWcy6BFd
+	uBNg==
+X-Gm-Message-State: AIkVDXJNUFhDPpZTEDFi+PuJbXGJu3FrvAr+/RAeb341FSBwMUfeoJuVqgrf6TseoG7Gqw==
+X-Received: by 10.98.215.27 with SMTP id b27mr6230955pfh.70.1485479000073;
+	Thu, 26 Jan 2017 17:03:20 -0800 (PST)
 Received: from CACSVMO-14452.local (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	w76sm6067139pfd.74.2017.01.26.17.03.12
+	x81sm6067774pff.69.2017.01.26.17.03.19
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 26 Jan 2017 17:03:13 -0800 (PST)
+	Thu, 26 Jan 2017 17:03:19 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
 References: <1484608187-28597-1-git-send-email-max.krummenacher@toradex.com>
-	<CAEHkU3V3UUhzJEeYmNTAqzCWMnq6nbw1PNM12L6cxKmHz5HkRw@mail.gmail.com>
+	<1484608187-28597-2-git-send-email-max.krummenacher@toradex.com>
+	<CAEHkU3UX4NhOVvg6QXcuWgw_H5Z1EaOgih3Lsj9D+hfvC1s44A@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Message-ID: <44845cb5-d36c-80a8-a5cd-94238289fb9a@gmail.com>
-Date: Thu, 26 Jan 2017 17:02:24 -0800
+Message-ID: <5dfb289d-2a44-1233-3761-f7e372c6dafc@gmail.com>
+Date: Thu, 26 Jan 2017 17:03:18 -0800
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
 	Gecko/20100101 Thunderbird/45.6.0
 MIME-Version: 1.0
-In-Reply-To: <CAEHkU3V3UUhzJEeYmNTAqzCWMnq6nbw1PNM12L6cxKmHz5HkRw@mail.gmail.com>
-Subject: Re: [meta-browser][PATCH 1/2] firefox: remove nss private libs setting
+In-Reply-To: <CAEHkU3UX4NhOVvg6QXcuWgw_H5Z1EaOgih3Lsj9D+hfvC1s44A@mail.gmail.com>
+Subject: Re: [meta-browser][PATCH 2/2] README: add -s to git send-email example
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,11 +60,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2017 01:03:14 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Jan 2017 01:03:20 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-this is ok to install.
+what happens if commits are already having a sign-off ?
 
 On 1/26/17 2:27 PM, Max Krummenacher wrote:
 > ping
@@ -72,43 +73,27 @@ On 1/26/17 2:27 PM, Max Krummenacher wrote:
 > 
 > Max
 > 
-> 
 > 2017-01-17 0:09 GMT+01:00 Max Krummenacher <max.oss.09@gmail.com>:
->> Commit 8cc038d uses the system's nss rather than building a private
->> one. So one should remove the nss libs from PRIVATE_LIBS also.
->> Otherwise bitbake does not add nss to RDEPENDS automatically resulting
->> in a potentially missing nss package in an image.
->> Additianlly bitbake shows the following warning:
->>
->> | WARNING: firefox-45.6.0esr-r0 do_package_qa: QA Issue: /usr/lib/firefox/libxul.so
->> |   contained in package firefox requires libnss3.so(NSS_3.12),
->> |   but no providers found in RDEPENDS_firefox? [file-rdeps]
+>> Prevent missing Signed-off-by lines.
 >>
 >> Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
 >> ---
->>  recipes-mozilla/firefox/firefox_45.6.0esr.bb | 12 ------------
->>  1 file changed, 12 deletions(-)
+>>  README | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
 >>
->> diff --git a/recipes-mozilla/firefox/firefox_45.6.0esr.bb b/recipes-mozilla/firefox/firefox_45.6.0esr.bb
->> index bed50dd..31b3353 100644
->> --- a/recipes-mozilla/firefox/firefox_45.6.0esr.bb
->> +++ b/recipes-mozilla/firefox/firefox_45.6.0esr.bb
->> @@ -95,15 +95,3 @@ PRIVATE_LIBS = "libmozjs.so \
->>                  libmozsqlite3.so \
->>                  libbrowsercomps.so \
->>                  libclearkey.so"
->> -
->> -# mark libraries also provided by nss as private too
->> -PRIVATE_LIBS += " \
->> -    libfreebl3.so \
->> -    libnss3.so \
->> -    libnssckbi.so \
->> -    libsmime3.so \
->> -    libnssutil3.so \
->> -    libnssdbm3.so \
->> -    libssl3.so \
->> -    libsoftokn3.so \
->> -"
+>> diff --git a/README b/README
+>> index 647404b..effe2f9 100644
+>> --- a/README
+>> +++ b/README
+>> @@ -26,7 +26,7 @@ Maintainers: Eric Bénard <eric@eukrea.com>
+>>               Otavio Salvador <otavio@ossystems.com.br>
+>>
+>>  When sending single patches, please use something like :
+>> -git send-email -1 --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-browser][PATCH'
+>> +git send-email -1 -s --to openembedded-devel@lists.openembedded.org --subject-prefix='meta-browser][PATCH'
+>>
+>>  TODO
+>>  ----
 >> --
 >> 2.6.6
 >>
