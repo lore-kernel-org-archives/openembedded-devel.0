@@ -1,48 +1,49 @@
-Return-Path: <h4nn35.work@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 60683606A8
+Return-Path: <patrick.ohly@intel.com>
+Received: from mail-it0-f41.google.com (mail-it0-f41.google.com
+	[209.85.214.41])
+	by mail.openembedded.org (Postfix) with ESMTP id B23CC606A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 10:11:47 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id r126so57104768wmr.3
+	Fri, 27 Jan 2017 10:11:56 +0000 (UTC)
+Received: by mail-it0-f41.google.com with SMTP id 203so148005916ith.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 02:11:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=djNTgZFiBqYjkL7MQQihgbSkSe5E/YaiBPAlm530TmU=;
-	b=ll7/GkKrjr9yjTR56/WnwuRApkbImm4SDvJyP8Knu2UWDgJaQaX24/58vzs9Crxr2q
-	t/3UEUbLLYbney1ipY3evb6iZYV38iMYRuJ94X0eHt3DwRPj95on4EKE9RcOBAIrgm3d
-	YKrJ099bpdxA8BawoD9ivcuEtHSoX9Pom/p78rwEKXp3BUYN+n6Sv6PcH3ewR5fhuQY0
-	qCBG5qzgpjLqO8G/ZV+IVNR5yBBcnw+Ti28Sy4IuYuisCGFi5lVPXItIeaYMUnPpplXg
-	1AJ/S1nHW3JOlgXmcjypmHttrt6mDtNvK0G3EB595N7Uv84O7LvqkL//NHBAynNzWk0Q
-	LsiQ==
+	Fri, 27 Jan 2017 02:11:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=e09Iy7fKDN+g1S+d8umjwAK5m1WB5+UtElBrBayrGcA=;
+	b=sCKYd0XQxPU6wM73fkS+6INhelsLmvHQ1LRE2W7hMbZ1Z25XJD99Muv4+NI7jRLA6F
+	MSI6SfwdmuB11eRGihpcF1SurVpkSK5HEeLu9BCe4F+zptP523TpYycSaJV3qYuU9okI
+	QPm7J8/NLuy8rNXcCmODPxOArHpWePmoiTj/pw+Om4piB7FsiQx2SeWdxGFgSTb+dAT8
+	NyyIpXRpxVnzXHK2rui2emJjlmhWmeuVzOWzYwQI6lMwfozht55dndg6NT7ei5ycZXvj
+	5nY5VRTuAtKDW6jwUZZiWZp2RQ4a/HjM+8L/1Llc7kLJdxq/k4EjY/hjNVzICs4rBz/W
+	erpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=djNTgZFiBqYjkL7MQQihgbSkSe5E/YaiBPAlm530TmU=;
-	b=saxaqryxAbBBgsLxRMHTAkjKUou9mrFsffMVyNYD90umEbAJMza5j5QEcPbASqmd8/
-	nCUXByO1NHTwU7M0DbP0+xbFCMH4RNlvgcg4SHQq4tGLRqXJA8LzKbj/Tj0mf8PI/PgQ
-	wreY2oy2zW1i3uXnhUyqV00FC9u/IuVV3MBEkWS8VqZC0j/MxL7O//TzfO8oaQprTO2Y
-	4cYl4N5M3B5lUzjzOf59H9twGmBYo5JAu3ZMwPnqL3rOyZbbPsjV1qjfA2MEd0Zsnms2
-	yh9lc8cnoOyoDCsM2AWTW5d3iBBxLyZS9YlRfkiJpBgPUayKo7GYFY4XY5+BZG8+1uOU
-	5yPA==
-X-Gm-Message-State: AIkVDXKhal5GneWNPhGrzRGugGmR/Btl+iR//RDAh8JY1p2mviUXrJ5mcvLePE6plg8JooPpdcT3KWY09+RWrA==
-X-Received: by 10.28.189.134 with SMTP id n128mr2207304wmf.77.1485511907648;
-	Fri, 27 Jan 2017 02:11:47 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.28.152.19 with HTTP; Fri, 27 Jan 2017 02:11:47 -0800 (PST)
-In-Reply-To: <fe240a61-4206-750d-c913-9073d79c1245@gmail.com>
-References: <1485160227-29998-1-git-send-email-samuli.piippo@qt.io>
-	<20170125160207.GF3260@jama>
-	<CAHvQdo3_+YfdZN_MYmZQLOW7uDnE-=LuXUwL8SR7sXLCG8VVyA@mail.gmail.com>
-	<20170126125414.GA3016@jama>
-	<CAHvQdo1SNOuWuyeAQU_sC88cU_vMbd=PRWt4fVSaQAq3OhM7jw@mail.gmail.com>
-	<fe240a61-4206-750d-c913-9073d79c1245@gmail.com>
-From: Johannes Pointner <h4nn35.work@gmail.com>
-Date: Fri, 27 Jan 2017 11:11:47 +0100
-Message-ID: <CAHvQdo2064s02qfdg0_hn8nwF6urBuuSNSw8ro7fDhKCfqdyCQ@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH v5] Upgrade to Qt 5.8
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=e09Iy7fKDN+g1S+d8umjwAK5m1WB5+UtElBrBayrGcA=;
+	b=iueYElgp+Ni09F+Ss1qHxm1FDuCNi1bmflqvvaLNp+SpQPkr9N4fXwLDT5MxbIINGw
+	xCDYCczhuiulbgD683vcU3fq22jJH3Z+b7AbUsWk9wJIrtCf7NJt6/IBj0NV8OGu1fNp
+	6fi66ncWz8qHrhFcSH0cAFnMQoxA20r80OIi1Ua0Pi2Hb4wvkgzEJb0AEp0PZ26Y48nB
+	3+I0HvImwMLX4AFbgCdTH0f1odb67j/yRi0wmRVouW6MM9wUO6PEmHbAbugaQ6DtrAy4
+	RQuofRcuu3DD4heOiqbMeGlvkEo4P4tiplZPdKkmNlqvs3F4e+XA8FHzFyERD03v0bOg
+	rgEQ==
+X-Gm-Message-State: AIkVDXKjkmP02pVWbvaC6a5FtY2JmbSTMI2Ok45QVY2LJfZSY9y4edsAlYzhvAaA5NGfDFh/
+X-Received: by 10.36.86.4 with SMTP id o4mr2383697itb.83.1485511916577;
+	Fri, 27 Jan 2017 02:11:56 -0800 (PST)
+Received: from pohly-desktop.fritz.box (p5DE8DB2E.dip0.t-ipconnect.de.
+	[93.232.219.46])
+	by smtp.gmail.com with ESMTPSA id y71sm1172175itb.1.2017.01.27.02.11.54
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 27 Jan 2017 02:11:55 -0800 (PST)
+From: Patrick Ohly <patrick.ohly@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 27 Jan 2017 11:11:21 +0100
+Message-Id: <259d5f21f2259aab042bae1076a53975c7dc8caf.1485511836.git-series.patrick.ohly@intel.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <cover.c0833b943acf2f997b54ea7a5284afcdeaf3b924.1485511836.git-series.patrick.ohly@intel.com>
+References: <cover.c0833b943acf2f997b54ea7a5284afcdeaf3b924.1485511836.git-series.patrick.ohly@intel.com>
+Subject: [meta-oe][PATCH 1/2] multipath-tools: fix building of shared objects
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,71 +56,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2017 10:11:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 27 Jan 2017 10:11:56 -0000
 
-I'm building for i.MX6. The problem is that the build is failing
-because the egl CFLAGS are not set:
+When -pie is in CFLAGS, it overrides the -shared compiler
+flag, leading to link errors (undefined main) for shared
+objects. Parameters must be ordered so that -shared comes
+last.
 
-| In file included from
-/mnt/raid/yocto_env/poky/morty/ppt50/build/tmp/sysroots/ppt50/usr/include/EGL/eglplatform.h:38:0,
-|                  from
-/mnt/raid/yocto_env/poky/morty/ppt50/build/tmp/sysroots/ppt50/usr/include/EGL/egl.h:39,
-|                  from
-../../../include/QtEglSupport/5.8.0/QtEglSupport/private/../../../../../../git/src/platformsupport/eglconvenience/qt_egl_p.h:63,
-|                  from
-../../../include/QtEglSupport/5.8.0/QtEglSupport/private/qt_egl_p.h:1,
-|                  from
-/mnt/raid/yocto_env/poky/morty/ppt50/build/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/git/src/platformsupport/eglconvenience/qeglstreamconvenience_p.h:55,
-|                  from
-/mnt/raid/yocto_env/poky/morty/ppt50/build/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/git/src/platformsupport/eglconvenience/qeglstreamconvenience.cpp:40:
-| /mnt/raid/yocto_env/poky/morty/ppt50/build/tmp/sysroots/ppt50/usr/include/EGL/eglvivante.h:266:2:
-error: #error "Platform not recognized"
-|  #error "Platform not recognized"
+Signed-off-by: Patrick Ohly <patrick.ohly@intel.com>
+---
+ meta-oe/recipes-support/multipath-tools/files/shared-libs-avoid-linking-.so-as-executable.patch | 49 +++++++++++++++++++++++++++++++++++++++++++++++++
+ meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb                                  |  1 +
+ 2 files changed, 50 insertions(+)
+ create mode 100644 meta-oe/recipes-support/multipath-tools/files/shared-libs-avoid-linking-.so-as-executable.patch
 
-This flags are used inside the eglvivante.h to get the correct
-platform. There is a pkconfig file which defines them: Cflags:
--I${includedir} -DLINUX -DEGL_API_FB -DWL_EGL_PLATFORM
-
-Before the update to Qt5.8 there were a patch for the configure file
-to set these variables:
-
-+ if [ -n "$PKG_CONFIG" ] && $PKG_CONFIG --exists egl 2>/dev/null; then
-+ QMAKE_INCDIR_EGL=`$PKG_CONFIG --cflags-only-I egl 2>/dev/null | sed
--e 's,^-I,,g' -e 's, -I, ,g'`
-+ QMAKE_LIBS_EGL=`$PKG_CONFIG --libs egl 2>/dev/null`
-+ QMAKE_CFLAGS_EGL=`$PKG_CONFIG --cflags egl 2>/dev/null`
-+ QMakeVar set QMAKE_INCDIR_EGL "$QMAKE_INCDIR_EGL"
-+ QMakeVar set QMAKE_LIBS_EGL "$QMAKE_LIBS_EGL"
-+ QMakeVar set QMAKE_CFLAGS_EGL "`echo " $QMAKE_CFLAGS_EGL " | sed -e
-'s, -I[^ ]* , ,g;s,^ ,,;s, $,,'`"
-+ fi
-
-This patch was removed, so my question is how should this work now?
-A workaround is to set this variables in the linux-oe-g++.
-I also tried to use the device option: -device linux-imx6-g++ but this
-failed with the following error even if the path was correct.
-
-| Project ERROR: CROSS_COMPILE needs to be set via -device-option
-CROSS_COMPILE=<path>
-| Could not read qmake configuration file
-/mnt/raid/yocto_env/poky/morty/ppt50/build/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/git/mkspecs/devices/linux-imx6-g++/qmake.conf.
-
-
-
-2017-01-27 10:06 GMT+01:00 Samuli Piippo <samuli.piippo@gmail.com>:
-> On 01/26/2017 05:22 PM, Johannes Pointner wrote:
->>
->> Did you also see the issue with the QMAKE_INCDIR_EGL, QMAKE_LIBS_EGL
->> and QMAKE_CFLAGS_EGL variables?
->
->
-> What's the target and configuration you using for the build and what's the
-> actual error you are seeing?
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-support/multipath-tools/files/shared-libs-avoid-linking-.so-as-executable.patch b/meta-oe/recipes-support/multipath-tools/files/shared-libs-avoid-linking-.so-as-executable.patch
+new file mode 100644
+index 0000000..ae6bb89
+--- /dev/null
++++ b/meta-oe/recipes-support/multipath-tools/files/shared-libs-avoid-linking-.so-as-executable.patch
+@@ -0,0 +1,49 @@
++From 4311856200480288494df8df737f71ea316592d0 Mon Sep 17 00:00:00 2001
++From: Patrick Ohly <patrick.ohly@intel.com>
++Date: Thu, 26 Jan 2017 15:28:34 +0100
++Subject: [PATCH] shared libs: avoid linking .so as executable
++
++When the OE build systems sets CFLAGS including -pie, gcc overrides
++the earlier -shared parameter and tries to link a binary, leading to
++errors about missing functions like main().
++
++Reordering the parameters so that -shared comes after CFLAGS
++fixes this.
++
++Upstream-Status: Inappropriate [OE specific, -pie shouldn't be in CFLAGS?!]
++
++Signed-off-by: Patrick Ohly <patrick.ohly@intel.com>
++---
++ libmpathpersist/Makefile | 2 +-
++ libmultipath/Makefile    | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/libmpathpersist/Makefile b/libmpathpersist/Makefile
++index c4ec1c5..790692a 100644
++--- a/libmpathpersist/Makefile
+++++ b/libmpathpersist/Makefile
++@@ -20,7 +20,7 @@ all: $(LIBS)
++ 
++ $(LIBS): 
++ 	$(CC) -Wall -fPIC -c $(CFLAGS) *.c 
++-	$(CC)  -shared $(LIBDEPS) -Wl,-soname=$@ $(CFLAGS) -o $@ $(OBJS)
+++	$(CC) $(LIBDEPS) $(CFLAGS) $(SHARED_FLAGS) -Wl,-soname=$@ -o $@ $(OBJS)
++ 	ln -s $(LIBS) $(DEVLIB)
++ 	$(GZIP) mpath_persistent_reserve_in.3 > mpath_persistent_reserve_in.3.gz	
++ 	$(GZIP) mpath_persistent_reserve_out.3 > mpath_persistent_reserve_out.3.gz	
++diff --git a/libmultipath/Makefile b/libmultipath/Makefile
++index fc0f3d6..2287d91 100644
++--- a/libmultipath/Makefile
+++++ b/libmultipath/Makefile
++@@ -55,7 +55,7 @@ endif
++ all: $(LIBS)
++ 
++ $(LIBS): $(OBJS)
++-	$(CC) $(LDFLAGS) $(SHARED_FLAGS) -Wl,-soname=$@ $(CFLAGS) -o $@ $(OBJS) $(LIBDEPS)
+++	$(CC) $(LDFLAGS) $(CFLAGS) $(SHARED_FLAGS) -Wl,-soname=$@ -o $@ $(OBJS) $(LIBDEPS)
++ 	ln -sf $@ $(DEVLIB)
++ 
++ install:
++-- 
++2.11.0
++
+diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
+index 6bd6118..2ab4dad 100644
+--- a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
++++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
+@@ -11,6 +11,7 @@ SRC_URI = "git://git.opensvc.com/multipath-tools/.git;protocol=http \
+            file://always-use-libdevmapper-kpartx.patch \
+            file://do-not-link-libmpathpersist-to-TMPDIR.patch \
+            file://0001-multipathd.service-Error-fix.patch \
++           file://shared-libs-avoid-linking-.so-as-executable.patch \
+            "
+ # 0.5.0
+ #
+-- 
+git-series 0.9.1
 
