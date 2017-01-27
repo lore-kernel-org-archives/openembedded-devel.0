@@ -1,55 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F84371A19
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wj0-f195.google.com (mail-wj0-f195.google.com
+	[209.85.210.195])
+	by mail.openembedded.org (Postfix) with ESMTP id B873C7746D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 17:51:20 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id y143so19002443pfb.1
+	Fri, 27 Jan 2017 18:10:55 +0000 (UTC)
+Received: by mail-wj0-f195.google.com with SMTP id un2so6535423wjb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 09:51:21 -0800 (PST)
+	Fri, 27 Jan 2017 10:10:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=dI18KpeuYDzu/yJ0w9cgy8z1VfzVrKxnqPALaE2ZoSc=;
-	b=HMgRP+EA7M4yJRxbO/i/bcR1SNLQH3CmqEibtbJd11b9F+M1ILkIoexxvY82sE3pQE
-	Sthmt83cl2Xoc1N3pdfoENMpIgIgUtC1MdQ4i0b6+XQqXgN9U/MDfMOTGLGeVUYGOdSH
-	60b0iT4MHIHnK3Ew0NULY2ZtOS26/s2QdQRKCZwMSrNXCZitkz9ZA/qtunKNmfewrkxx
-	RRspZ6HZJkWWnrPl5rVk7014NvQDxdNuvFzAFmo1yBe3mkC4oHitIgDlOfgBjBReS1tm
-	YFt0ZZXM7QHz5etXR8pHXQB1M14DlIFR+zSD3nuZlmSPQMrMhD0vRjea+rM+Vifx1kut
-	SHqQ==
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=RfWh8u9YkxuHV3RKk0bKA9u154vUfgwQRYf2Cerwvqk=;
+	b=Wz09UPL9+mu7v7yfASZ5UydFozLx0Hkcuo7oZF7gUtSTgcCUTGvo2kUlHNXH3yqlel
+	ZPxyOwRNzVafQxP7dKn9dO3/UIkaiVO8UWHKPP6C7hY1P4ZUgmRGuU5B6gmR3tL7g12I
+	hUxWaKA1fuhp1k9DxQ9VuBNaHLmo6zfm8278rBZEu9poEsTuMdxQhWlFguKOMdfaLuBq
+	vBtZPZk2ClqHDpPJMrTcPBGq8teE2DhWLHZwfTSorLaWo8oWP21mFYN+4M72hFUnbuAU
+	Es2LtHePJAcHqklgSSJL9mE3911kmaaS6OnyNT4Mi7qcUwN1djL/jlEGR90TmoHU366O
+	FC8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=dI18KpeuYDzu/yJ0w9cgy8z1VfzVrKxnqPALaE2ZoSc=;
-	b=OGeYp33wlg19eWgNOelyZLYe4xfVj6RcL+TehWcvV2sb+cfX+1ef83Tdx6adLcxpCX
-	0FOgQ+6LlaGCM73AwPnr/TkMoPdvoUKjA7JSKx8zQ0wGfhWVg9hFrLynXXce4Wmvkqmv
-	sGVRznesxo4srqGXbJPl8Q1vHKJ6IaZrmOyAUN4MjSUlIl5TfcURJHZKoGrafAFaiEB9
-	ULNWdlh3bvmxwtg6H9fRHVdPYa49bpr6nDoK1p39R+M2z9VtPH0NR1RrClap9Wt4mcyt
-	R23FfOwUp3W3cn730O3b1z6dNazFNeINFMvRhOrx0FcC+DfteXWJl47euWw38S8aUnuE
-	Eqvw==
-X-Gm-Message-State: AIkVDXKdggT8Q2ZvvAbDJ2CtyChnm35aPi7YVFA/4w5ZzznPOLP84XEE571Mgwy3n34NVg==
-X-Received: by 10.98.110.194 with SMTP id j185mr10710232pfc.157.1485539481114; 
-	Fri, 27 Jan 2017 09:51:21 -0800 (PST)
-Received: from CACSVMO-14452.local ([2601:646:8882:b8c:6d8d:a1ec:12d:52de])
-	by smtp.gmail.com with ESMTPSA id
-	u24sm12938781pfi.25.2017.01.27.09.51.20
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=RfWh8u9YkxuHV3RKk0bKA9u154vUfgwQRYf2Cerwvqk=;
+	b=DjzETrJ05k6g3Ufssd8OyzPV6KWcacv2i8awV1JXGPF1cf+eBPBEjf52A3UwI1lxL9
+	4QXOKjM7t/42c9CtH9Os8Oxz6XnXpyw0OGbCCX4WSpeChhVFxAUjCA9Z84CZdHRNzP+J
+	Tx+CGBX6AyRXEieeDEPucKiPIlz+/3+cHM1kDdafeWh+YS/IAGn/OZ3t1DdbDBck7MaG
+	kPGTK1eo0XfICzrXlt//hcbPl9Ier1WX+6Wb8XPP4qLwN9t2ywsdxuk689YE392rcOb9
+	dHtJez+Fv587v0cWONGzqJoIEpIifqzF17Y25fTJtbUYzaaZAyO4iyDGgh1mwbUWeJgi
+	12VA==
+X-Gm-Message-State: AIkVDXJazaKvPel14dalOlIYWwKkRgcenqjT5rRgVL7Dfdcdtn4WoQdOgelQnWXMNMU3Bw==
+X-Received: by 10.223.164.207 with SMTP id h15mr8442455wrb.142.1485540655244; 
+	Fri, 27 Jan 2017 10:10:55 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	m84sm5054993wmf.10.2017.01.27.10.10.54
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 27 Jan 2017 09:51:20 -0800 (PST)
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 27 Jan 2017 10:10:54 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 27 Jan 2017 19:10:55 +0100
 To: openembedded-devel@lists.openembedded.org
-References: <1485356812-8436-1-git-send-email-jaragunde@igalia.com>
-	<008601d27798$272e3640$758aa2c0$@neuf.fr>
-	<8c7129f5-43e3-3b2d-f4e9-9dfbad7e6ebc@gmail.com>
-	<a5a24703cc0a4dd6be923dac9cc6e129@XCH-ALN-008.cisco.com>
-From: Khem Raj <raj.khem@gmail.com>
-Message-ID: <529a997b-8ebf-28c7-5dad-1411de15dcf7@gmail.com>
-Date: Fri, 27 Jan 2017 09:51:19 -0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
-	Gecko/20100101 Thunderbird/45.7.0
+Message-ID: <20170127181055.GB9282@jama>
+References: <1484831267-76876-1-git-send-email-herve.jourdain@neuf.fr>
 MIME-Version: 1.0
-In-Reply-To: <a5a24703cc0a4dd6be923dac9cc6e129@XCH-ALN-008.cisco.com>
-Subject: Re: [meta-browser][PATCH v2] chromium-wayland: update to 53.0.2785.14
+In-Reply-To: <1484831267-76876-1-git-send-email-herve.jourdain@neuf.fr>
+User-Agent: Mutt/1.7.2 (2016-11-26)
+Subject: Re: [meta-qt5][PATCH] Minor improvements: configure complains it can't find oe-device-extra.pri, and add libxkbcommon in the dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,64 +58,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2017 17:51:21 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Jan 2017 18:10:56 -0000
+X-Groupsio-MsgNum: 64911
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="jho1yZJdad60DJr+"
+Content-Disposition: inline
 
+--jho1yZJdad60DJr+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Thu, Jan 19, 2017 at 09:07:47PM +0800, Herve Jourdain wrote:
+> During configure, it complains it can't find oe-device-extra.pri, but it =
+doesn't result in any error. Fix it, though, just in case.
+> In qtwayland, xkb should be optional, but it's not for the moment, so add=
+ it to the dependencies.
 
-On 1/27/17 6:06 AM, Julien Brianceau (jbriance) wrote:
->> -----Original Message-----
->> From: openembedded-devel-bounces@lists.openembedded.org
->> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
->> Khem Raj
->> Sent: vendredi 27 janvier 2017 02:47
->> To: openembedded-devel@lists.openembedded.org
->> Subject: Re: [oe] [meta-browser][PATCH v2] chromium-wayland: update to
->> 53.0.2785.14
->>
->>
->>
->> On 1/25/17 9:50 PM, Herve Jourdain wrote:
->>> Hi Jacob,
->>>
->>> I've been able to compile chromium-wayland 53.0.2785.14 on
->> RaspberryPi, with Wayland only (no X11), BUT I had to add an additional
->> patch for it to work, or else I get an error in
->> ui/events/keycodes/keyboard_code_conversion_xkb.cc.
->>> I'm using VC4, which has a DRM/KMS interface (it seems that DRM
->> interface is required by ozone-wayland), but this patch seems to not be
->> related to RaspberryPi itself.
->>> Basically, it seems that USE_XKBCOMMON is not defined when compiling
->> keycodes.
->>>
->>> Is it something that you saw as well? Or do you have a different
->> setting/experience?
->>>
->>> Just for reference, here is the patch I need (right now, I'm
->> triggering it from meta-raspberrypi, but I believe it may be needed in
->> meta-browser).
->>>
->>> --- a/ui/events/keycodes/events_keycodes.gyp	2017-01-23
->> 19:12:01.767271256 +0800
->>> +++ b/ui/events/keycodes/events_keycodes.gyp	2017-01-23
->> 19:12:11.503048216 +0800
->>> @@ -21,6 +21,9 @@
->>>          'scoped_xkb.h',
->>>          'xkb_keysym.h',
->>>        ],
->>> +      'defines': [
->>> +        'USE_XKBCOMMON',
->>
->> This seems fine to me. It should also be proposed upstream as well I
->> think.
->>
-> 
-> For the record, I've already tried to upstream a similar change (see Patch Set 1 of review https://codereview.chromium.org/2239833003/), but only the GN part has been accepted as gyp support has been removed in Chromium 54.
-> 
+Can you please check if both of these are still needed for 5.8 (in
+master-next) and if so, send rebased version (preferably 2 separate
+commits) with proper commit summary?
 
-thats we should make a note of this in patch header. We will have to
-remove it or replace it as well when we upgrade chromium.
-> Julien
-> 
+See:
+http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
 
+>=20
+> Signed-off-by: Herve Jourdain <herve.jourdain@neuf.fr>
+> ---
+>  recipes-qt/qt5/qtbase_git.bb    | 3 +++
+>  recipes-qt/qt5/qtwayland_git.bb | 1 +
+>  2 files changed, 4 insertions(+)
+>=20
+> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+> index 6541973..258c7ed 100644
+> --- a/recipes-qt/qt5/qtbase_git.bb
+> +++ b/recipes-qt/qt5/qtbase_git.bb
+> @@ -173,6 +173,9 @@ do_configure() {
+>          ln -sf ${OE_QMAKE_QMAKE_ORIG} ${B}/bin/qmake
+>      fi
+> =20
+> +    # Avoid qmake error "Cannot read [...]/usr/lib/qt5/mkspecs/oe-device=
+-extra.pri: No such file or directory" during configuration
+> +    touch ${S}/mkspecs/oe-device-extra.pri
+> +
+>      ${S}/configure -v \
+>          -opensource -confirm-license \
+>          -sysroot ${STAGING_DIR_TARGET} \
+> diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_g=
+it.bb
+> index e315924..51421d5 100644
+> --- a/recipes-qt/qt5/qtwayland_git.bb
+> +++ b/recipes-qt/qt5/qtwayland_git.bb
+> @@ -18,6 +18,7 @@ LIC_FILES_CHKSUM =3D " \
+> =20
+>  #FIXME: xkb should be optional; we add it here to fix the build error wi=
+thout it
+>  #       (https://bugreports.qt.io/browse/QTBUG-54851)
+> +DEPENDS +=3D "libxkbcommon"
+>  PACKAGECONFIG ?=3D " \
+>      compositor-api \
+>      wayland-egl \
+> --=20
+> 2.7.4
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--jho1yZJdad60DJr+
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWIuNLgAKCRA3VSO3ZXaA
+HIuVAJ9YucBTpW4VibLVZ1TJZqU/eouGSgCgkiry7fwiT9u9UHHEv+WTfhRHreU=
+=vxX7
+-----END PGP SIGNATURE-----
+
+--jho1yZJdad60DJr+--
