@@ -1,46 +1,56 @@
-Return-Path: <paul@paulbarker.me.uk>
-X-Greylist: delayed 1384 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 27 Jan 2017 08:09:40 UTC
-Received: from slow1-d.mail.gandi.net (slow1-d.mail.gandi.net [217.70.178.86])
-	by mail.openembedded.org (Postfix) with ESMTP id DF52971A92;
-	Fri, 27 Jan 2017 08:09:40 +0000 (UTC)
-Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net
-	[217.70.183.197])
-	by slow1-d.mail.gandi.net (Postfix) with ESMTP id 20B0D535E09;
-	Fri, 27 Jan 2017 08:45:03 +0100 (CET)
-Received: from mfilter2-d.gandi.net (mfilter2-d.gandi.net [217.70.178.140])
-	by relay5-d.mail.gandi.net (Postfix) with ESMTP id 9832541C09F;
-	Fri, 27 Jan 2017 08:45:00 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mfilter2-d.gandi.net
-Received: from relay5-d.mail.gandi.net ([IPv6:::ffff:217.70.183.197])
-	by mfilter2-d.gandi.net (mfilter2-d.gandi.net [::ffff:10.0.15.180])
-	(amavisd-new, port 10024)
-	with ESMTP id syel-XyGicKM; Fri, 27 Jan 2017 08:44:59 +0100 (CET)
-X-Originating-IP: 86.24.150.36
-Received: from host0.betafive.co.uk
-	(cpc15-shep11-2-0-cust35.8-3.cable.virginm.net [86.24.150.36])
-	(Authenticated sender: paul@paulbarker.me.uk)
-	by relay5-d.mail.gandi.net (Postfix) with ESMTPSA id 2E39841C07E;
-	Fri, 27 Jan 2017 08:44:58 +0100 (CET)
-Date: Fri, 27 Jan 2017 07:44:56 +0000
-From: Paul Barker <paul@paulbarker.me.uk>
-To: Andreas =?UTF-8?B?TcO8bGxlcg==?= <schnitzeltony@googlemail.com>
-Message-ID: <20170127074456.04009ae6@host0.betafive.co.uk>
-In-Reply-To: <CALbNGRT_H_Vz8b6vcfgJGWYEyVw6og4+zKmLjLZ6P+2O0oY6eA@mail.gmail.com>
-References: <65082de4-2ba6-3b18-1845-00b2d637404e@balister.org>
-	<CALbNGRSrXLdfUK3U2bXr20P+fFm4ROArGPRi9Ag=AhXbGjUv+g@mail.gmail.com>
-	<bbd8fb9d-8215-c73f-f4aa-b20523291ec0@balister.org>
-	<CALbNGRT_H_Vz8b6vcfgJGWYEyVw6og4+zKmLjLZ6P+2O0oY6eA@mail.gmail.com>
-X-Mailer: Claws Mail 3.14.1 (GTK+ 2.24.31; x86_64-pc-linux-gnu)
+Return-Path: <samuli.piippo@gmail.com>
+Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
+	[209.85.215.66])
+	by mail.openembedded.org (Postfix) with ESMTP id B3BB371D7F
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Jan 2017 09:06:08 +0000 (UTC)
+Received: by mail-lf0-f66.google.com with SMTP id h65so25409127lfi.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Jan 2017 01:06:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=HY0PB3bY7mRArT0ZNAb22vxaTjlUYUJ86ZdWi+3UBe4=;
+	b=P2wapRJZ5iXrgY8e2Co5nI0rk8CbhRlv10azncRmOMaZSobgxV5DQq/raXZgAc/RWY
+	V8BIcV1IJ/HondgWOnpyHu5+Xp0tL+lVtufr1MqBrsXOH8xna5dd5v1PmD0NXkr+jihG
+	Bal0rLt1lTVe2wnnM24uwHxAzQ1iY1oy5wd21ji+uiCrX+6ng85wf756yDcxdeXWyf3J
+	3tih0gsPiyhmt+4SzuEozPWw0W0N4yK0PO5Z5r4oHCCozWJZMdlMprloBtZyGMwTMsF3
+	aNkGCuBJbVMsKjVdjGVcU5KqD4wS9Ufnv3WavmkCJmCkorgAZom5b2B6vs/cO8gJmoL1
+	eSsA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=HY0PB3bY7mRArT0ZNAb22vxaTjlUYUJ86ZdWi+3UBe4=;
+	b=jMkDwn+oLighephpOx7IZCaZ/eGotIw2M9ByiCw0vD5Rskw/LD79qIrjcnSce8Ym5M
+	vDua4eau5mu9Cn31bCx8kKpkCv1JwkW5xwl3BgTCZxj3SZDcyse0n/dzK+c/N/7XndHd
+	MEiEx337bMwYHvkuNg8mC13NGYeGsxjlvZOZPpCXtEpecZNrxNuTGTq/6PwGoPWFny5k
+	WO0Svk98Y8cTsQLYqiFd/KYFXmca8208M+suTo/TFmWELzCfKX528hCz4nl4IJGNas2O
+	Cjb9Og7w9Fu/xNxgOg3jyZYFctB3O1UZDcBuBq24UOHSm7i3+FYsC8EbvG9uyhpFd+PP
+	aSUQ==
+X-Gm-Message-State: AIkVDXLLaA8cUkzQ/KvhZLHajKz6XPP/LqKFdxgd3YL6HbCLPF9QiH5O1BXu8SaP3/+Fvw==
+X-Received: by 10.25.216.93 with SMTP id p90mr2016548lfg.59.1485507967703;
+	Fri, 27 Jan 2017 01:06:07 -0800 (PST)
+Received: from [10.9.21.21] ([192.89.120.53])
+	by smtp.googlemail.com with ESMTPSA id
+	187sm1154003ljf.12.2017.01.27.01.06.06
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 27 Jan 2017 01:06:06 -0800 (PST)
+To: openembedded-devel@lists.openembedded.org
+References: <1485160227-29998-1-git-send-email-samuli.piippo@qt.io>
+	<20170125160207.GF3260@jama>
+	<CAHvQdo3_+YfdZN_MYmZQLOW7uDnE-=LuXUwL8SR7sXLCG8VVyA@mail.gmail.com>
+	<20170126125414.GA3016@jama>
+	<CAHvQdo1SNOuWuyeAQU_sC88cU_vMbd=PRWt4fVSaQAq3OhM7jw@mail.gmail.com>
+From: Samuli Piippo <samuli.piippo@gmail.com>
+Message-ID: <fe240a61-4206-750d-c913-9073d79c1245@gmail.com>
+Date: Fri, 27 Jan 2017 11:06:05 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.5.1
 MIME-Version: 1.0
-Cc: Yocto Project <yocto@yoctoproject.org>,
-	"openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, openembedded-architecture
-	<openembedded-architecture@lists.openembedded.org>
-Subject: Re: [Openembedded-architecture] [OE-core] OpenEmbedded Stand at FOSDEM
+In-Reply-To: <CAHvQdo1SNOuWuyeAQU_sC88cU_vMbd=PRWt4fVSaQAq3OhM7jw@mail.gmail.com>
+Subject: Re: [meta-qt5][PATCH v5] Upgrade to Qt 5.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,63 +63,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2017 08:09:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 27 Jan 2017 09:06:09 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, 26 Jan 2017 22:39:17 +0100
-Andreas M=C3=BCller <schnitzeltony@googlemail.com> wrote:
+On 01/26/2017 05:22 PM, Johannes Pointner wrote:
+> Did you also see the issue with the QMAKE_INCDIR_EGL, QMAKE_LIBS_EGL
+> and QMAKE_CFLAGS_EGL variables?
 
-> On Thu, Jan 5, 2017 at 4:30 PM, Philip Balister <philip@balister.org>
-> wrote:
-> > On 01/03/2017 08:13 PM, Andreas M=C3=BCller wrote: =20
-> >> On Tue, Jan 3, 2017 at 4:32 PM, Philip Balister
-> >> <philip@balister.org> wrote: =20
-> >>> Every year since 2007, OpenEmbedded has a stand at FOSDEM
-> >>> (http://www.fosdem.org)
-> >>>
-> >>> From the first year:
-> >>>
-> >>> https://www.flickr.com/photos/32615155@N00/405229708/in/album-7215759=
-4561002629/
-> >>>
-> >>> Belen and I are sort of organizing this, but both of us are also
-> >>> involved in devrooms, so we will need a lot of help manning the
-> >>> stand and getting some demos together.
-> >>>
-> >>> Demos should try and show how the project makes embedded work
-> >>> easier, by showing tools and/or cool examples of devices using
-> >>> Linux built with OpenEmbedded. In previous years, we've shown
-> >>> toaster with data collected from demos on the table. Collections
-> >>> of devices running images built from the same recipe and
-> >>> interesting products using Linux by OpenEmbedded.
-> >>>
-> >>> I'm happy to try and organize demos and staffing, but I could
-> >>> really use some help this year, so if you are in a position to
-> >>> tak ethe lead on operating the stand, that would be a huge help
-> >>> to me and the rest of the project.
-> >>>
-> >>> Thanks,
-> >>>
-> >>> Philip =20
-> Nobody?
->=20
-> Andreas
-
-There's 3 of us from Tog=C3=A1n Labs who'll be able to help out manning the
-stand. I know I can do all day Saturday and up to about 4pm on Sunday
-and I'm happy to be at the stand all day (with the obvious caffeine
-breaks!). Let me know if you need help setting things up and what time
-you need people to turn up on Saturday morning.
-
-If you need anything printing then send it to me.
-
-I can bring 2x 4-way UK power strips plus 2x EU->UK power adaptors for
-our gear. I've got 2 laptops plus a few embedded devices. I don't have
-any EU power strips though.
-
-I've updated the wiki page.
-
-Thanks,
-Paul
+What's the target and configuration you using for the build and what's 
+the actual error you are seeing?
 
