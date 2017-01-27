@@ -1,63 +1,52 @@
-Return-Path: <anders@chargestorm.se>
-Received: from mail-lf0-f53.google.com (mail-lf0-f53.google.com
-	[209.85.215.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 74C2F7732B
+Return-Path: <patrick.ohly@intel.com>
+Received: from mail-it0-f48.google.com (mail-it0-f48.google.com
+	[209.85.214.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 51BEA7732B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 10:28:53 +0000 (UTC)
-Received: by mail-lf0-f53.google.com with SMTP id n124so159269310lfd.2
+	Fri, 27 Jan 2017 10:44:52 +0000 (UTC)
+Received: by mail-it0-f48.google.com with SMTP id k200so8485380itb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 02:28:53 -0800 (PST)
+	Fri, 27 Jan 2017 02:44:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=chargestorm-se.20150623.gappssmtp.com; s=20150623;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-disposition:in-reply-to:organization
-	:user-agent; bh=M1SOpoCXVgw6XdVn9mY6C+XhN6AkriYwNvwO2Md/Q6Y=;
-	b=TpTWYYM39a8DEBIOaeV08IeHie4Lo+85eEA9PJd9yOhEDprHToqqbNn2NkLvVrAZC/
-	FQyKBVTPaLpH2TsfxMlpc1G2Jj+VfW6pkKDxP80fgxeXSfyCiRGcwUSe4Nums7UIBAkP
-	2yr/i9Mgr/XNz/qbAbWEMEsR7RhLZ1D+lxh+upymC9jP0GlYM7pCo60tsl748O7HyCDw
-	Y9KpZ4kG6LqPRqac/TN9k7ZdypTtrSUIvj1qQ3Ib+YgcIWF7iLWeZN6TG1UY8Ni/FfjS
-	xRwmVI5iCD718nZRkACHlm2aXY1P0/opBWeoIlpJcUJyHY4as2frnN1xor2HbYM+ZRN/
-	+4jg==
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=message-id:subject:from:to:date:in-reply-to:references:organization
+	:mime-version:content-transfer-encoding;
+	bh=465VQe5oZhGuPgaBO3IvjnegoUaKTPdx9IvoJPvSR5E=;
+	b=Mz6ZIqnKE+SEP8/i3jmJF0SOo1Rjcb2zkc9S0m3T5+nRRWh0q3VlZv4o5f5mhS3hXH
+	0zoIyU/wP+xJ6NpD5jdqOrTVIQaxbyF2PBCnGEfrwBcRBPOAoSfFS465oe0FmeN+ygjA
+	GhnQZeJfrDm7v25h8KiKhuDJwt28QE+iAMK7mv70xIPz2H4ItJDYtJ0dDfbY+j8MC0FO
+	c7ApvPmpJxXOV1RvTpfTdBafCR/A189Ma8PJb3sXRCnHhMALjvNPQ3WS5pV4g3BTDT3A
+	Xzaa+/LXDQFcpR1e0XMMEyABq9md01kzoOXj5CkJEwyfjoXUvmYvAkM7swDwLLJXvM3N
+	hfug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
-	:references:mime-version:content-disposition:in-reply-to
-	:organization:user-agent;
-	bh=M1SOpoCXVgw6XdVn9mY6C+XhN6AkriYwNvwO2Md/Q6Y=;
-	b=PtHuwE0cZwr4OhZWCgjZ+UHTm31Gdhd5XJ+HrjBf+pouo3a5XsWBjvT66wrr57ghUF
-	GqiGtHN6yAeiJXaUwW6ZTaPqPAPvAJiCemwFeAg0INY1Z4ad1x3wtejpHpC+kKmJIZRT
-	W0rlMVXsxIT+wEDrHPdNtYI1DVeCYdvPgjXGFs7nnCoZgQbkS7eila5KYVTWivMsyeqZ
-	MobdVQUfAV1s60HMgM1kcdFGLBvpTHUdc1dFhq9/PzbFf/+V4cGiO3md2EJqXvMW65rl
-	imDl6K033yfg2UKmnJXA4+VqFsZG7oKqdHNf7wRtV1FzoL8pjGmq6OFUfJ/1jXemR6j2
-	suBQ==
-X-Gm-Message-State: AIkVDXJYC3HMee2DWip6cH1/gkoNsXc7T13kfBE4yZ3lcILfNe/0iRWA2jk39rIiUo2JLA==
-X-Received: by 10.25.169.67 with SMTP id s64mr2426594lfe.133.1485512932630;
-	Fri, 27 Jan 2017 02:28:52 -0800 (PST)
-Received: from ad.chargestorm.se (194-237-220-218.customer.telia.com.
-	[194.237.220.218]) by smtp.gmail.com with ESMTPSA id
-	h76sm1171472lfg.39.2017.01.27.02.28.51
+	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+	:references:organization:mime-version:content-transfer-encoding;
+	bh=465VQe5oZhGuPgaBO3IvjnegoUaKTPdx9IvoJPvSR5E=;
+	b=M27M9PyyVh5N7ucoZfakR3N+T/xrGOZ30KX1eo3Pi+av3z1vDPuNAOu7GagUz+NCtf
+	jD/spzgw/S7oTiXDTAt+Q/phnr4noioulIVnFWLbJufQnFjbVLSmlHTuu8oD8RI9h8Uo
+	h3LkiZvsmmSHwkw6MkRqB396cBSnPIGT0B7OSTApWicGs0ydL3vKPrBTEwVgop0e8RIE
+	LMFHb/zYCPDQIg0etsz/k2TZXhc41cpHUMsYWftZH5MUzWsmtptPEFqJbvTXlC6GRSxv
+	+TYDrdp59dozAaMkNcoph9wbvL+0F++QCwTHfxlFM/MW2+k5s+W74A/a9rn0SfzX58vE
+	fmCQ==
+X-Gm-Message-State: AIkVDXLWyH1sq44iNLlF8pEtkTfDfqj25Y95BOQQHtGFG6KXfdkovRUYfHwPvBex7VGejgOL
+X-Received: by 10.36.175.23 with SMTP id t23mr2439714ite.18.1485513893062;
+	Fri, 27 Jan 2017 02:44:53 -0800 (PST)
+Received: from pohly-mobl1 (p5DE8DB2E.dip0.t-ipconnect.de. [93.232.219.46])
+	by smtp.gmail.com with ESMTPSA id k66sm1200025itg.8.2017.01.27.02.44.51
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 27 Jan 2017 02:28:51 -0800 (PST)
-Date: Fri, 27 Jan 2017 11:28:50 +0100
-From: Anders Darander <anders@chargestorm.se>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 27 Jan 2017 02:44:51 -0800 (PST)
+Message-ID: <1485513889.20333.102.camel@intel.com>
+From: Patrick Ohly <patrick.ohly@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170127102850.dv7ytzoaltcruump@ad.chargestorm.se>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1484608187-28597-1-git-send-email-max.krummenacher@toradex.com>
-	<1484608187-28597-2-git-send-email-max.krummenacher@toradex.com>
-	<CAEHkU3UX4NhOVvg6QXcuWgw_H5Z1EaOgih3Lsj9D+hfvC1s44A@mail.gmail.com>
-	<5dfb289d-2a44-1233-3761-f7e372c6dafc@gmail.com>
-	<CAP9ODKoPaq_wxJCBQk=o0d03uDUbmsJcYj7M34X3StNpJy7NwQ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAP9ODKoPaq_wxJCBQk=o0d03uDUbmsJcYj7M34X3StNpJy7NwQ@mail.gmail.com>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: NeoMutt/20170113 (1.7.2)
-Subject: Re: [meta-browser][PATCH 2/2] README: add -s to git send-email example
+Date: Fri, 27 Jan 2017 11:44:49 +0100
+In-Reply-To: <20170127101200.25785-1-patrick.ohly@intel.com>
+References: <20170127101200.25785-1-patrick.ohly@intel.com>
+Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
+X-Mailer: Evolution 3.12.9-1+b1 
+Mime-Version: 1.0
+Subject: Re: [PATCH] multipath-tools: update to 0.6.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,23 +59,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2017 10:28:54 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 27 Jan 2017 10:44:56 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-* Otavio Salvador <otavio.salvador@ossystems.com.br> [170127 11:12]:
+On Fri, 2017-01-27 at 11:11 +0100, Patrick Ohly wrote:
+> No particular reason for updating besides following upstream.
 
-> On Thu, Jan 26, 2017 at 11:03 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> > what happens if commits are already having a sign-off ?
-
-> A new one is added.
-
-Then I don't think this change should be made.
-
-Cheers,
-Anders
+Please ignore. It's a duplicate of the same patch from the patch series.
 
 -- 
-Anders Darander, Senior System Architect
-ChargeStorm AB / eStorm AB
+Best Regards, Patrick Ohly
+
+The content of this message is my personal opinion only and although
+I am an employee of Intel, the statements I make here in no way
+represent Intel's position on the issue, nor am I authorized to speak
+on behalf of Intel on this matter.
+
+
+
 
