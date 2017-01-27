@@ -1,59 +1,51 @@
-Return-Path: <jaragunde@igalia.com>
-Received: from smtp4.mundo-r.com (smtp3.mundo-r.com [212.51.32.191])
-	by mail.openembedded.org (Postfix) with ESMTP id 1DD297740C
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id C72D477357
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 16:06:00 +0000 (UTC)
-IronPort-PHdr: =?us-ascii?q?9a23=3AttVvmxAUpwstyDKla89LUyQJP3N1i/DPJgcQr6Af?=
-	=?us-ascii?q?oPdwSPT8rsbcNUDSrc9gkEXOFd2CrakV16yL7OuwAyQp2tWoiDg6aptCVhsI24?=
-	=?us-ascii?q?09vjcLJ4q7M3D9N+PgdCcgHc5PBxdP9nC/NlVJSo6lPwWB6nK94iQPFRrhKAF7?=
-	=?us-ascii?q?Ovr6GpLIj8Swyuu+54Dfbx9GiTe5br5+NhW7oAfeusQVn4dpN7o8xAbOrnZUYe?=
-	=?us-ascii?q?pd2HlmJUiUnxby58ew+IBs/iFNsP8/9MBOTLv3cb0gQbNXEDopPWY15Nb2tRbY?=
-	=?us-ascii?q?VguA+mEcUmQNnRVWBQXO8Qz3UY3wsiv+sep9xTWaMMjrRr06RTiu86FmQwLuhS?=
-	=?us-ascii?q?waNTA27XvXh9RtgqxFrhKvpx9xzYDab46aNvVxYqzTcMgGRWdDRMtdSzBND428?=
-	=?us-ascii?q?YoYJEuEPPfxYr474p1YWqRWxHxWjBOT0xT9PnnD7wbc63P4uEQHb2gwvAswBv2?=
-	=?us-ascii?q?zOotLvLqcdT+G0x7TPwDXBdfxWwy3y6IfVchAnvP6DQ6l9ccveyUY1EwPFj0+f?=
-	=?us-ascii?q?pZb5MDOS0+QAqm6W5PduW+Kojm4osQBxoj63y8gwionJnIUVylXF9SVkxYY5P9?=
-	=?us-ascii?q?q4SFR0YdOiDZBetDmaOpNyT88/WW1kpTs2x78ctZO/eCUG0okryh7fZvCfboSF?=
-	=?us-ascii?q?4RHuWPySLDp5nn5oeq+ziwys/UWvyuDxUNS/3kxQoSpfiNbMs2gA1xnU6seaVP?=
-	=?us-ascii?q?Rw5lyh2TOT1wDL7eFEPFw0mbLbK5E/xr4wkYIesUrZES/wmUT2jamWeVs+9uip?=
-	=?us-ascii?q?5OToeLHmpp6GOINulg7+NaEultS+AeQ+LAcOQ3CW9OCh2LH54EH1XbdHgucyn6?=
-	=?us-ascii?q?TdqpzWOMQWq66hDw9QyIkj6hK/Dzm80NQfmHkKNFBFdwidj4fzNFHOPfb4Auqh?=
-	=?us-ascii?q?jFm3kTdryOrJPrngAprXNHTMjLDhfbNl505G1AUz1cxf545TCrwZJ/LzQlH+tN?=
-	=?us-ascii?q?rGAR88KAO73fvoB8hj2YwDQG6AH7GWML3Mvl+M/e8vJ+iMZJQJuDbmMfQl4Obu?=
-	=?us-ascii?q?gmE/mVADeKmmxoUYZ22lEft4PkqVe33sgs0OETRCgg1rS/TnjlCHWzNfa3u+Gq?=
-	=?us-ascii?q?4x+Dw/IIanFpvYAIe1jbqM2S22EpFbaiZBEF/fP23vctCmUvwLYiWlC9VonSEC?=
-	=?us-ascii?q?WbWWcw472APm4A3z0bNoM+zY9wUZupvn1dEz7OrWw0JhvQdoBtiQhjneB1p/mX?=
-	=?us-ascii?q?kFEmc7?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: =?us-ascii?q?A2DVBQBOb4tY/5tjdVteGwEBAQMBAQEJA?=
-	=?us-ascii?q?QEBFwEBBAEBCgEBgwoBAR9hAydfn2CTIIIPggwqhXgCgh9BFgEBAQEBAQEBAQE?=
-	=?us-ascii?q?BYSiCMxmCHgEFgQkLGC5XEwgBAYlhAQmvUIpsAQEBAQYBAQEBAQEihkuCBYJqh?=
-	=?us-ascii?q?RWFGQWbUYZnixKBeYg8hj+IJYpZJgYrgUuHCnSJAAEBAQ?=
-X-IPAS-Result: =?us-ascii?q?A2DVBQBOb4tY/5tjdVteGwEBAQMBAQEJAQEBFwEBBAEBCgE?=
-	=?us-ascii?q?BgwoBAR9hAydfn2CTIIIPggwqhXgCgh9BFgEBAQEBAQEBAQEBYSiCMxmCHgEFg?=
-	=?us-ascii?q?QkLGC5XEwgBAYlhAQmvUIpsAQEBAQYBAQEBAQEihkuCBYJqhRWFGQWbUYZnixK?=
-	=?us-ascii?q?BeYg8hj+IJYpZJgYrgUuHCnSJAAEBAQ?=
-X-IronPort-AV: E=Sophos;i="5.33,296,1477954800"; d="scan'208";a="154404160"
-Received: from fanzine.igalia.com ([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 27 Jan 2017 17:05:58 +0100
-Received: from [188.86.71.245] (helo=[192.168.1.6])
-	by fanzine.igalia.com with esmtpsa 
-	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
-	id 1cX92E-0001yB-N0 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 17:05:58 +0100
+	Fri, 27 Jan 2017 16:36:42 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id r126so59366191wmr.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Jan 2017 08:36:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=ErsIB2M9hZ16/iuv601Pnv0wKn+RMop0h9R/FncRWNs=;
+	b=mIWsvMmPyJKeDAaRz//KqVtKwm5Jfou5NNU7KvV5oRSz7poPIqQRhI79qb5YSuuytQ
+	fYMdjr5e8feYYk3AUAxa4jwB6QjTVLS+fdwcCbXdiw5rpzpX4jc14xtUcyEOCXzTxIT4
+	tkx6Xw0jqUXDMAL20L1NWMer0hNVtoxamFuPiB3H3YOaZTNDdugLmcZOL4DougQS5cP6
+	Vt+3dP/bUDLVfft+fCkKIc0g3aRoKBaw/C2MyViJBhzrctR0BecQCc8h1SZ133A7M+ZL
+	quVk+hWWFsFvIMTvBw8WYriiJEUkUxSCdw0cEsLwxFKHji8/94pzzUzsOv8YFKKTqLKi
+	xtJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=ErsIB2M9hZ16/iuv601Pnv0wKn+RMop0h9R/FncRWNs=;
+	b=JN+KeLiFskRowaT9Q4Y5N+Xh9pF4I71maPzl62BJcUxkIu2Onc/w25j3lDJe6Eikic
+	mWO9a3b26wzsC9JyTdLlLpziKBVnA0BJgRvvCKNjneEqlU9z/hOg5WUfq4BuJAp1q8F6
+	YP6HOj4CkurVtr4ctsCcqntLmM8RFgkuLGONY61Aot3Vvxw+nn3LCAsSYtkpjGH/nFxO
+	l8yWOn1pLM5+Srh6PW6S3WqSYDlbKsbRhfVQrSfawDXxQ3Dt70ve+oR9OvT6yb2I2Ieg
+	vn39ekpcOh+SoLYNLy8HHhpyCCe9tcCogzcRRMKvjDPhjQj32TydA23EGXbf5bnVoJqJ
+	tDcQ==
+X-Gm-Message-State: AIkVDXKiR7aLMPSC6Pug/k408pMkNE2GCjYg4BXNTIvH5ez8XfvvZsvflW4l4osISkjDmg==
+X-Received: by 10.28.109.218 with SMTP id b87mr3701628wmi.52.1485535002309;
+	Fri, 27 Jan 2017 08:36:42 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	l37sm8687692wrc.41.2017.01.27.08.36.41
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 27 Jan 2017 08:36:41 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 27 Jan 2017 17:36:42 +0100
 To: openembedded-devel@lists.openembedded.org
-References: <1485356812-8436-1-git-send-email-jaragunde@igalia.com>
-	<008601d27798$272e3640$758aa2c0$@neuf.fr>
-	<8c7129f5-43e3-3b2d-f4e9-9dfbad7e6ebc@gmail.com>
-	<a5a24703cc0a4dd6be923dac9cc6e129@XCH-ALN-008.cisco.com>
-From: =?UTF-8?Q?Jacobo_Aragunde_P=c3=a9rez?= <jaragunde@igalia.com>
-Message-ID: <af85ea87-57e1-d529-9dcb-e31b6f922d1b@igalia.com>
-Date: Fri, 27 Jan 2017 17:05:48 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.6.0
+Message-ID: <20170127163642.GA9282@jama>
+References: <1485442490-2464-1-git-send-email-samuli.piippo@qt.io>
+	<20170126200338.GC3016@jama>
 MIME-Version: 1.0
-In-Reply-To: <a5a24703cc0a4dd6be923dac9cc6e129@XCH-ALN-008.cisco.com>
-Subject: Re: [meta-browser][PATCH v2] chromium-wayland: update to 53.0.2785.14
+In-Reply-To: <20170126200338.GC3016@jama>
+User-Agent: Mutt/1.7.2 (2016-11-26)
+Subject: Re: [meta-qt5][PATCH v6] Upgrade to Qt 5.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,58 +58,148 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2017 16:06:07 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Jan 2017 16:36:43 -0000
+X-Groupsio-MsgNum: 64908
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="OgqxwSJOaUobr8KG"
+Content-Disposition: inline
 
-On 27/01/17 15:06, Julien Brianceau (jbriance) wrote:
->> ...
->> On 1/25/17 9:50 PM, Herve Jourdain wrote:
->>> Hi Jacob,
->>>
->>> I've been able to compile chromium-wayland 53.0.2785.14 on
->> RaspberryPi, with Wayland only (no X11), BUT I had to add an additional
->> patch for it to work, or else I get an error in
->> ui/events/keycodes/keyboard_code_conversion_xkb.cc.
->>> I'm using VC4, which has a DRM/KMS interface (it seems that DRM
->> interface is required by ozone-wayland), but this patch seems to not be
->> related to RaspberryPi itself.
->>> Basically, it seems that USE_XKBCOMMON is not defined when compiling
->> keycodes.
->>>
->>> Is it something that you saw as well? Or do you have a different
->> setting/experience?
->>>
->>> Just for reference, here is the patch I need (right now, I'm
->> triggering it from meta-raspberrypi, but I believe it may be needed in
->> meta-browser).
->>>
->>> --- a/ui/events/keycodes/events_keycodes.gyp	2017-01-23
->> 19:12:01.767271256 +0800
->>> +++ b/ui/events/keycodes/events_keycodes.gyp	2017-01-23
->> 19:12:11.503048216 +0800
->>> @@ -21,6 +21,9 @@
->>>          'scoped_xkb.h',
->>>          'xkb_keysym.h',
->>>        ],
->>> +      'defines': [
->>> +        'USE_XKBCOMMON',
->>
->> This seems fine to me. It should also be proposed upstream as well I
->> think.
->>
-> 
-> For the record, I've already tried to upstream a similar change (see Patch Set 1 of review https://codereview.chromium.org/2239833003/), but only the GN part has been accepted as gyp support has been removed in Chromium 54.
-> 
+--OgqxwSJOaUobr8KG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This error definitely rings a bell to me, although I haven't reproduced
-it in my latest builds for minnowboard. It could happen with certain
-build flags, maybe some of those are enabled for arm builds but not for
-intel ones.
+On Thu, Jan 26, 2017 at 09:03:38PM +0100, Martin Jansa wrote:
+> On Thu, Jan 26, 2017 at 04:54:50PM +0200, Samuli Piippo wrote:
+> > The linux-oe-g++ mkspec is changed to use $$(...) operator to obtain
+> > the contents of an environment value when qmake is run instead of when
+> > Makefile is processed. All OE_QMAKE_xxx variables need to be exported
+> > for qmake to find them. configure's setBootstrapVariable function needs
+> > to change $$(..) to normal $(...) operator to work with qmake's Makefil=
+e.
+> >=20
+> > qt.conf generation for qtbase recipes is not needed, as configure will
+> > generate its own version based on configure arguments. Skip running
+> > qmake, since configure is now automatically invoked when it's run in
+> > qtbase's root folder.
+> >=20
+> > Update PACKAGECONFIGs for qtbase to match current configure options.
+> >=20
+> > The new Qt configuration system [1] can be used with a new variable
+> > EXTRA_QMAKEVARS_CONFIGURE, which takes both command line and feature
+> > arguments.
+> >=20
+> > Merge the two qtwayland recipes to one that supports all three targets
+> > (target, native, nativesdk) without need for additional patch.
+> >=20
+> > Recipes for new Qt modules: QtSCXML, QtNetworkAuth, QtGamepad.
+> > Removes qtdeclarative-render2d
+>=20
+> Thanks this resolved the -no-alsa issue, now it failing a bit further
+> with:
+>=20
+> |
+> /OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtwebkit/5.8.0+gitAUTOINC+=
+74ac5b0f34-r0/git/Source/ThirdParty/ANGLE/src/compiler/preprocessor/Tokeniz=
+er.l:2779:26:
+> error: 'yylex_destroy' was not declared in this scope
+>=20
+> which might be caused by flex upgrade as I'm seeing similar issues in
+> other recipes and Khem reported the same here:
+> http://lists.openembedded.org/pipermail/openembedded-core/2017-January/13=
+1555.html
+> and Patrick here:
+> http://lists.openembedded.org/pipermail/openembedded-core/2017-January/13=
+1326.html
+>=20
+> Hopefully there will be upgrade to flex-2.6.3 to test this completely.
 
-The patch looks definitely good, and because gyp is deprecated in
-upstream master, I think it's ok to keep it downstream. Thank you :)
+After reverting flex-2.6.2 upgrade I was able to build most of the qt
+recipes for qemux86 (the complete bitbake world build is still running
+on jenkins slaves will send report e-mail someday next week).
 
--- 
-Jacobo
+The only exception is qtwebengine which fails like this:
+| [12/10222] LINK character_data_generator
+| FAILED: character_data_generator
+| g++ -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -Wl,-z,now -Wl,-z,relr=
+o -Wl,-z,defs -pthread -Wl,-z,noexecstack -fPIC -Wl,--disable-new-dtags -Wl=
+,-O1 -Wl,--as-needed -Wl,--gc-sections -Wl,--no-as-needed -lpthread -Wl,--a=
+s-needed -o character_data_generator -Wl,--start-group obj.host/src/3rdpart=
+y/chromium/third_party/WebKit/Source/platform/text/character_data_generator=
+=2ECharacterPropertyDataGenerator.o obj.host/src/3rdparty/chromium/third_pa=
+rty/icu/libicuuc.a -Wl,--end-group
+| /usr/lib/gcc/x86_64-pc-linux-gnu/6.2.0/../../../../x86_64-pc-linux-gnu/bi=
+n/ld: i386 architecture of input file `obj.host/src/3rdparty/chromium/third=
+_party/icu/source/common/icuuc.utrie2_builder.o' is incompatible with i386:=
+x86-64 output
+| /usr/lib/gcc/x86_64-pc-linux-gnu/6.2.0/../../../../x86_64-pc-linux-gnu/bi=
+n/ld: i386 architecture of input file `obj.host/src/3rdparty/chromium/third=
+_party/icu/source/common/icuuc.utrie2.o' is incompatible with i386:x86-64 o=
+utput
+| /usr/lib/gcc/x86_64-pc-linux-gnu/6.2.0/../../../../x86_64-pc-linux-gnu/bi=
+n/ld: i386 architecture of input file `obj.host/src/3rdparty/chromium/third=
+_party/icu/source/common/icuuc.utrie.o' is incompatible with i386:x86-64 ou=
+tput
+| /usr/lib/gcc/x86_64-pc-linux-gnu/6.2.0/../../../../x86_64-pc-linux-gnu/bi=
+n/ld: i386 architecture of input file `obj.host/src/3rdparty/chromium/third=
+_party/icu/source/common/icuuc.cmemory.o' is incompatible with i386:x86-64 =
+output
+| /usr/lib/gcc/x86_64-pc-linux-gnu/6.2.0/../../../../x86_64-pc-linux-gnu/bi=
+n/ld: i386 architecture of input file `obj.host/src/3rdparty/chromium/third=
+_party/icu/source/common/icuuc.ucol_swp.o' is incompatible with i386:x86-64=
+ output
+| /usr/lib/gcc/x86_64-pc-linux-gnu/6.2.0/../../../../x86_64-pc-linux-gnu/bi=
+n/ld: i386 architecture of input file `obj.host/src/3rdparty/chromium/third=
+_party/icu/source/common/icuuc.udataswp.o' is incompatible with i386:x86-64=
+ output
+| /usr/lib/gcc/x86_64-pc-linux-gnu/6.2.0/../../../../x86_64-pc-linux-gnu/bi=
+n/ld: i386 architecture of input file `obj.host/src/3rdparty/chromium/third=
+_party/icu/source/common/icuuc.uinvchar.o' is incompatible with i386:x86-64=
+ output
+| /usr/lib/gcc/x86_64-pc-linux-gnu/6.2.0/../../../../x86_64-pc-linux-gnu/bi=
+n/ld: i386 architecture of input file `obj.host/src/3rdparty/chromium/third=
+_party/icu/source/common/icuuc.ustring.o' is incompatible with i386:x86-64 =
+output
+| /usr/lib/gcc/x86_64-pc-linux-gnu/6.2.0/../../../../x86_64-pc-linux-gnu/bi=
+n/ld: i386 architecture of input file `obj.host/src/3rdparty/chromium/third=
+_party/icu/source/common/icuuc.utf_impl.o' is incompatible with i386:x86-64=
+ output
+| /usr/lib/gcc/x86_64-pc-linux-gnu/6.2.0/../../../../x86_64-pc-linux-gnu/bi=
+n/ld: i386 architecture of input file `obj.host/src/3rdparty/chromium/third=
+_party/icu/source/common/icuuc.cstring.o' is incompatible with i386:x86-64 =
+output
+| obj.host/src/3rdparty/chromium/third_party/icu/source/common/icuuc.cstrin=
+g.o: In function `T_CString_int64ToString_56':
+| cstring.c:(.text.T_CString_int64ToString_56+0x76): undefined reference to=
+ `__umoddi3'
+| cstring.c:(.text.T_CString_int64ToString_56+0xa1): undefined reference to=
+ `__udivdi3'
+| collect2: error: ld returned 1 exit status
+| ERROR: oe_runmake failed
 
+So either disable character_data_generator for make sure that the build won=
+'t mix target's i386 and host's x86-64 objects.
+
+> > [1] https://www.mail-archive.com/development@qt-project.org/msg25257.ht=
+ml
+> >=20
+> > Change-Id: Ib37c4d7323e8b45aa2b171e8427b6ec15aaee213
+> > Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
+
+
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--OgqxwSJOaUobr8KG
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWIt3GQAKCRA3VSO3ZXaA
+HPZlAJ96SEvPjk4MLJ9DF4MRR9mf+kKpWACdHawglW1ZquEp2oWpsom+amlnnGI=
+=qKkr
+-----END PGP SIGNATURE-----
+
+--OgqxwSJOaUobr8KG--
