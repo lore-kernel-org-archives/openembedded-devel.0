@@ -1,56 +1,60 @@
-Return-Path: <samuli.piippo@gmail.com>
-Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
-	[209.85.215.66])
-	by mail.openembedded.org (Postfix) with ESMTP id B3BB371D7F
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 958D96069C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 09:06:08 +0000 (UTC)
-Received: by mail-lf0-f66.google.com with SMTP id h65so25409127lfi.3
+	Fri, 27 Jan 2017 10:10:10 +0000 (UTC)
+Received: by mail-wm0-f43.google.com with SMTP id c85so109555972wmi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 01:06:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=HY0PB3bY7mRArT0ZNAb22vxaTjlUYUJ86ZdWi+3UBe4=;
-	b=P2wapRJZ5iXrgY8e2Co5nI0rk8CbhRlv10azncRmOMaZSobgxV5DQq/raXZgAc/RWY
-	V8BIcV1IJ/HondgWOnpyHu5+Xp0tL+lVtufr1MqBrsXOH8xna5dd5v1PmD0NXkr+jihG
-	Bal0rLt1lTVe2wnnM24uwHxAzQ1iY1oy5wd21ji+uiCrX+6ng85wf756yDcxdeXWyf3J
-	3tih0gsPiyhmt+4SzuEozPWw0W0N4yK0PO5Z5r4oHCCozWJZMdlMprloBtZyGMwTMsF3
-	aNkGCuBJbVMsKjVdjGVcU5KqD4wS9Ufnv3WavmkCJmCkorgAZom5b2B6vs/cO8gJmoL1
-	eSsA==
+	Fri, 27 Jan 2017 02:10:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to; 
+	bh=8nKudHZMmoMRCR2I/OFFvXbm/yK92293zyJQrRvxMCU=;
+	b=TT7mDPHOY68nuMi++9VcMSsT/Q0FiSQP+rvbSYIyBRxsIHez2cXHI2fWbWhLL3Va5I
+	FS/y1GUm9ovqbB8PU7fRSaiEBK/km6prAOaS4ZFRg1qo5B9FocwbzQ41BnkcApnot+Yj
+	zwAwpBfTwLkWUm9c3R9V/txJV+xdUArXAX2xItu6DozXcPmR9bw9nu5/aD1QHD+rNIMs
+	vilrAd14LcTqlzPTGdtrJYO6GSdqzHgxe2kZ6UXDtIQZPJBtTtIINbu71hvs7hfh+Pbu
+	IsInQhraUglmM2d/O9eReo0TQvVjRpYc/L2+86o84SnVYbq5q61XtzFYS8xqPrFbk1nI
+	dYFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=HY0PB3bY7mRArT0ZNAb22vxaTjlUYUJ86ZdWi+3UBe4=;
-	b=jMkDwn+oLighephpOx7IZCaZ/eGotIw2M9ByiCw0vD5Rskw/LD79qIrjcnSce8Ym5M
-	vDua4eau5mu9Cn31bCx8kKpkCv1JwkW5xwl3BgTCZxj3SZDcyse0n/dzK+c/N/7XndHd
-	MEiEx337bMwYHvkuNg8mC13NGYeGsxjlvZOZPpCXtEpecZNrxNuTGTq/6PwGoPWFny5k
-	WO0Svk98Y8cTsQLYqiFd/KYFXmca8208M+suTo/TFmWELzCfKX528hCz4nl4IJGNas2O
-	Cjb9Og7w9Fu/xNxgOg3jyZYFctB3O1UZDcBuBq24UOHSm7i3+FYsC8EbvG9uyhpFd+PP
-	aSUQ==
-X-Gm-Message-State: AIkVDXLLaA8cUkzQ/KvhZLHajKz6XPP/LqKFdxgd3YL6HbCLPF9QiH5O1BXu8SaP3/+Fvw==
-X-Received: by 10.25.216.93 with SMTP id p90mr2016548lfg.59.1485507967703;
-	Fri, 27 Jan 2017 01:06:07 -0800 (PST)
-Received: from [10.9.21.21] ([192.89.120.53])
-	by smtp.googlemail.com with ESMTPSA id
-	187sm1154003ljf.12.2017.01.27.01.06.06
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to;
+	bh=8nKudHZMmoMRCR2I/OFFvXbm/yK92293zyJQrRvxMCU=;
+	b=ZtPXYcND5ZmFsdhfhRGRan++IrPiLcuh9MIoJW9qAy1Ux3mGKVjPfHkgo6wXzbMMuf
+	nIhr/MAsRRsUEPW5zkbdPcvkCUuMNR0yP1MFuj/DXwBpFq5PYiK7f+tb09PIE0kkB4iF
+	39AnJ9CJ+kthljlRhL3gMJVBBDn+QXoeLseNfKL31shtz5HUnonqKzN4PQpLdADrpR56
+	+/e7DIndjE6s1i9L4eWwHWP+SP9tav82iUxHhlF9DaePdCtAQpTh3esD6ffAxxXqX61r
+	jh4gCHWVyD9jrQwsWDfMLOQUrzweCwm59unq8S5tmErO8OzRveRecnkrmo9iKo8dVIu1
+	8lnw==
+X-Gm-Message-State: AIkVDXIoEOtpvlzpFNNMkhU6B3v7Cd6oVYA4r9I/iPC4N9P68Nf7fLxf9Uym/axuziIb1Q==
+X-Received: by 10.28.141.78 with SMTP id p75mr2209774wmd.114.1485511810593;
+	Fri, 27 Jan 2017 02:10:10 -0800 (PST)
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com.
+	[74.125.82.53]) by smtp.gmail.com with ESMTPSA id
+	o143sm3060588wmd.3.2017.01.27.02.10.09
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 27 Jan 2017 01:06:06 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <1485160227-29998-1-git-send-email-samuli.piippo@qt.io>
-	<20170125160207.GF3260@jama>
-	<CAHvQdo3_+YfdZN_MYmZQLOW7uDnE-=LuXUwL8SR7sXLCG8VVyA@mail.gmail.com>
-	<20170126125414.GA3016@jama>
-	<CAHvQdo1SNOuWuyeAQU_sC88cU_vMbd=PRWt4fVSaQAq3OhM7jw@mail.gmail.com>
-From: Samuli Piippo <samuli.piippo@gmail.com>
-Message-ID: <fe240a61-4206-750d-c913-9073d79c1245@gmail.com>
-Date: Fri, 27 Jan 2017 11:06:05 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.5.1
+	Fri, 27 Jan 2017 02:10:09 -0800 (PST)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-wm0-f53.google.com with SMTP id c206so128916268wme.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Jan 2017 02:10:09 -0800 (PST)
+X-Received: by 10.223.130.204 with SMTP id 70mr6500660wrc.128.1485511809012;
+	Fri, 27 Jan 2017 02:10:09 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CAHvQdo1SNOuWuyeAQU_sC88cU_vMbd=PRWt4fVSaQAq3OhM7jw@mail.gmail.com>
-Subject: Re: [meta-qt5][PATCH v5] Upgrade to Qt 5.8
+Received: by 10.28.69.17 with HTTP; Fri, 27 Jan 2017 02:10:08 -0800 (PST)
+In-Reply-To: <5dfb289d-2a44-1233-3761-f7e372c6dafc@gmail.com>
+References: <1484608187-28597-1-git-send-email-max.krummenacher@toradex.com>
+	<1484608187-28597-2-git-send-email-max.krummenacher@toradex.com>
+	<CAEHkU3UX4NhOVvg6QXcuWgw_H5Z1EaOgih3Lsj9D+hfvC1s44A@mail.gmail.com>
+	<5dfb289d-2a44-1233-3761-f7e372c6dafc@gmail.com>
+Date: Fri, 27 Jan 2017 08:10:08 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKoPaq_wxJCBQk=o0d03uDUbmsJcYj7M34X3StNpJy7NwQ@mail.gmail.com>
+Message-ID: <CAP9ODKoPaq_wxJCBQk=o0d03uDUbmsJcYj7M34X3StNpJy7NwQ@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser][PATCH 2/2] README: add -s to git send-email example
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,14 +67,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2017 09:06:09 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Jan 2017 10:10:12 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 01/26/2017 05:22 PM, Johannes Pointner wrote:
-> Did you also see the issue with the QMAKE_INCDIR_EGL, QMAKE_LIBS_EGL
-> and QMAKE_CFLAGS_EGL variables?
+On Thu, Jan 26, 2017 at 11:03 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> what happens if commits are already having a sign-off ?
 
-What's the target and configuration you using for the build and what's 
-the actual error you are seeing?
+A new one is added.
+
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
