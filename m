@@ -1,24 +1,26 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B892773C0
+Return-Path: <alexandre.belloni@free-electrons.com>
+X-Greylist: delayed 337 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 27 Jan 2017 19:11:48 UTC
+Received: from mail.free-electrons.com (mail.free-electrons.com [62.4.15.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 33F02773C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 19:10:21 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v0RJAL3B009709
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 11:10:21 -0800 (PST)
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Fri, 27 Jan 2017 11:10:20 -0800
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 27 Jan 2017 11:10:20 -0800
-Message-ID: <1485544220-11017-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/1] chrony: fix build failure for arma9
+	Fri, 27 Jan 2017 19:11:48 +0000 (UTC)
+Received: by mail.free-electrons.com (Postfix, from userid 110)
+	id 8DFF920DE5; Fri, 27 Jan 2017 20:06:15 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	mail.free-electrons.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED,SHORTCIRCUIT,
+	URIBL_BLOCKED shortcircuit=ham autolearn=disabled version=3.4.0
+Received: from localhost (unknown [88.191.26.124])
+	by mail.free-electrons.com (Postfix) with ESMTPSA id 692BF20CC9;
+	Fri, 27 Jan 2017 20:06:15 +0100 (CET)
+From: Alexandre Belloni <alexandre.belloni@free-electrons.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 27 Jan 2017 20:06:06 +0100
+Message-Id: <20170127190606.9365-1-alexandre.belloni@free-electrons.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [PATCH][meta-webserver] nginx: handle systemd service file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,105 +33,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2017 19:10:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 27 Jan 2017 19:11:50 -0000
 
-Issue: LIN9-3096
+Inherit the systemd class so the service file is properly handled.
+Note that by default, the service file will be installed but not enabled.
 
-Eliminate references to syscalls not available
-for ARM_EABI.  Also add a dependency on libseccomp
-which is needed for scfilter to work.
-
-Set PACKAGECONFIG to not enable scfilter, since
-kernel CONFIG_SECCOMP is unlikely to be set.  This
-aligns the usage of libseccomp with that of other packages.
-
-Signed-off-by: Joe Slater <jslater@windriver.com>
+Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>
 ---
- .../recipes-support/chrony/chrony/arm_eabi.patch   |   43 ++++++++++++++++++++
- .../recipes-support/chrony/chrony_2.4.bb           |    5 ++-
- 2 files changed, 46 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
+ meta-webserver/recipes-httpd/nginx/nginx.inc | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
-new file mode 100644
-index 0000000..f38e651
---- /dev/null
-+++ b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
-@@ -0,0 +1,43 @@
-+--- a/sys_linux.c
-++++ b/sys_linux.c
-+@@ -453,13 +453,12 @@ SYS_Linux_EnableSystemCallFilter(int lev
-+   const int syscalls[] = {
-+     /* Clock */
-+     SCMP_SYS(adjtimex), SCMP_SYS(gettimeofday), SCMP_SYS(settimeofday),
-+-    SCMP_SYS(time),
-+     /* Process */
-+-    SCMP_SYS(clone), SCMP_SYS(exit), SCMP_SYS(exit_group), SCMP_SYS(getrlimit),
-++    SCMP_SYS(clone), SCMP_SYS(exit), SCMP_SYS(exit_group),
-+     SCMP_SYS(rt_sigaction), SCMP_SYS(rt_sigreturn), SCMP_SYS(rt_sigprocmask),
-+     SCMP_SYS(set_tid_address), SCMP_SYS(sigreturn), SCMP_SYS(wait4),
-+     /* Memory */
-+-    SCMP_SYS(brk), SCMP_SYS(madvise), SCMP_SYS(mmap), SCMP_SYS(mmap2),
-++    SCMP_SYS(brk), SCMP_SYS(madvise), SCMP_SYS(mmap2),
-+     SCMP_SYS(mprotect), SCMP_SYS(mremap), SCMP_SYS(munmap), SCMP_SYS(shmdt),
-+     /* Filesystem */
-+     SCMP_SYS(access), SCMP_SYS(chmod), SCMP_SYS(chown), SCMP_SYS(chown32),
-+@@ -470,14 +469,21 @@ SYS_Linux_EnableSystemCallFilter(int lev
-+     SCMP_SYS(bind), SCMP_SYS(connect), SCMP_SYS(getsockname),
-+     SCMP_SYS(recvfrom), SCMP_SYS(recvmsg), SCMP_SYS(sendmmsg),
-+     SCMP_SYS(sendmsg), SCMP_SYS(sendto),
-+-    /* TODO: check socketcall arguments */
-+-    SCMP_SYS(socketcall),
-+     /* General I/O */
-+     SCMP_SYS(_newselect), SCMP_SYS(close), SCMP_SYS(open), SCMP_SYS(pipe),
-+-    SCMP_SYS(poll), SCMP_SYS(read), SCMP_SYS(futex), SCMP_SYS(select),
-++    SCMP_SYS(poll), SCMP_SYS(read), SCMP_SYS(futex),
-+     SCMP_SYS(set_robust_list), SCMP_SYS(write),
-+     /* Miscellaneous */
-+     SCMP_SYS(uname),
-++    /* not always available */
-++#if ! defined(__ARM_EABI__)
-++    SCMP_SYS(time),
-++    SCMP_SYS(getrlimit),
-++    SCMP_SYS(select),
-++    SCMP_SYS(mmap),
-++    /* TODO: check socketcall arguments */
-++    SCMP_SYS(socketcall),
-++#endif
-+   };
-+ 
-+   const int socket_domains[] = {
-diff --git a/meta-networking/recipes-support/chrony/chrony_2.4.bb b/meta-networking/recipes-support/chrony/chrony_2.4.bb
-index deb2148..088708f 100644
---- a/meta-networking/recipes-support/chrony/chrony_2.4.bb
-+++ b/meta-networking/recipes-support/chrony/chrony_2.4.bb
-@@ -33,6 +33,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- SRC_URI = "https://download.tuxfamily.org/chrony/chrony-${PV}.tar.gz \
-     file://chrony.conf \
-     file://chronyd \
-+    file://arm_eabi.patch \
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
+index 36f2ac6d71e8..fe943d7c290c 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx.inc
++++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+@@ -20,7 +20,10 @@ SRC_URI = " \
+     file://nginx.service \
  "
- SRC_URI[md5sum] = "d0598aa8a9be8faccef9386f6fc0d5f2"
- SRC_URI[sha256sum] = "8d04e7cda2333289c2104b731d39c3c1db94816e43bae35d7ee4e7ae8af6391f"
-@@ -58,14 +59,14 @@ inherit update-rc.d systemd
- #     chrony.conf and init script.
- #   - 'scfilter' enables support for system call filtering, but requires the
- #     kernel to have CONFIG_SECCOMP enabled.
--PACKAGECONFIG ??= "editline scfilter \
-+PACKAGECONFIG ??= "editline \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
- "
- PACKAGECONFIG[readline] = "--without-editline,--without-readline,readline"
- PACKAGECONFIG[editline] = ",--without-editline,libedit"
- PACKAGECONFIG[sechash] = "--without-tomcrypt,--disable-sechash,nss"
- PACKAGECONFIG[privdrop] = ",--disable-privdrop,libcap"
--PACKAGECONFIG[scfilter] = "--enable-scfilter,--without-seccomp"
-+PACKAGECONFIG[scfilter] = "--enable-scfilter,--without-seccomp,libseccomp"
- PACKAGECONFIG[ipv6] = ",--disable-ipv6,"
- PACKAGECONFIG[nss] = "--with-nss,--without-nss,nss"
- PACKAGECONFIG[libcap] = "--with-libcap,--without-libcap,libcap"
+ 
+-inherit update-rc.d useradd
++inherit update-rc.d useradd systemd
++
++SYSTEMD_SERVICE_${PN} = "nginx.service"
++SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+ 
+ CFLAGS_append = " -fPIE -pie"
+ CXXFLAGS_append = " -fPIE -pie"
 -- 
-1.7.9.5
+2.11.0
 
 
