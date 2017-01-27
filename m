@@ -1,52 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 1B2877746C
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 25F5B77471
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 19:14:42 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id f144so19109562pfa.2
+	Fri, 27 Jan 2017 20:07:52 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id 194so25750410pgd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 11:14:43 -0800 (PST)
+	Fri, 27 Jan 2017 12:07:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:message-id:date:user-agent:mime-version
 	:in-reply-to:content-transfer-encoding;
-	bh=eO+MXt4TTwRMDI7ZnLcDhK8QgbJJ104Oejz0p0EE0F8=;
-	b=WaVM2513xgUy7QNkpkdXfr77wGFHn/APO/Rewg1wd4XP8AMkfTBTOTofjPIhfmPe+7
-	adS3X/iKy/7sNgJEtopDuXzi2rpz8QkPJC7F9IsTTCRn4d+q4jTztm9y8E88+4sITHjU
-	XniagAnNKNEpJpEjTfd7DymT8E1FO+QnfiNzZ35ZwDl6Okx2TMx1QZ2IBLmJxGa8jzak
-	oVtxaZZe7XB0WIbQbaM5qROfywiY/nCqdltRbZbCOecwRwakOn6mwjnu/KK+pv/o1xH6
-	0pe4EnDemb5gO8UCINjxWLvSOaTlJHpBwASnAPMlX4Uq28hJSXD7s7K3dm3Nl90zFwgu
-	8P1Q==
+	bh=fpewGaifDEgDnq1A0G8TGsCdCtDZmcS2ZwOkFtuux6s=;
+	b=of5T9gP9cyhvDqjIRIYKfG2PHhbWR1WKbv6x/GOUdQwQqu9w2m4lO1Uv+XCTlLwOI8
+	x3+SWNz1xuDtV2cpxzoIuW3R3HNE5tAuRmNCrpUXIiWe+E66+/pHE6wo0XqI4nX/9fJ0
+	BdwADQlUYbhMC7PYQbQg5DxqOy1cULvsSmUDNKWaf+g7VJJRrtx8PGDJ73NeJ+Xt+7AE
+	r6u1A1zwnM4wFe9dTtoyyM+LRRZTNnaBKbmKRg8mEgRSbMBvjMw418ciW2oxv166+PkP
+	CyWAJOvToNHyEAEFrvv9TvNPHr3bHxytIZhnWrwqO9RLqHfs6N2M+rR7+7nUMr3rfaB+
+	MDKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=eO+MXt4TTwRMDI7ZnLcDhK8QgbJJ104Oejz0p0EE0F8=;
-	b=NnQyhpEoTII2f/sJuYVkkr3bJtn67HI2c9H6rqiSzkFrqnsKxgVjhkE407H9nB5nok
-	HVTSO0xhTRGrfpDuQjSE8rnAsirLzkUC3tH+5CRkYbLILVasZTg9XpqmgZqIO2SUlZq3
-	BrqPE7IjYEJPjxSJSA7hqPTdFa8qVJtux+PDeEEDDatT2OUljSRvcmiJSNhHZXHEwJJv
-	HQZXg1IZzl/Yb/ugGNVU8kImxqHjZKYVwU0gIQNPIO+UxEHz/zI4euGAG593peWN6SOM
-	PKw3/MkCs3q6lHK5oOz66zqTMYRS7CTbQZWeOq26IX+34hrPADd1VgvEuEAUGLPgTcqS
-	LXaA==
-X-Gm-Message-State: AIkVDXKrQc4ZKQORhRKCQdUZdpHSBkVLcQpZkAMbrrsa7PhWScAFDKoKxx2+qp9SnkN7rA==
-X-Received: by 10.98.97.68 with SMTP id v65mr10861078pfb.124.1485544483095;
-	Fri, 27 Jan 2017 11:14:43 -0800 (PST)
+	bh=fpewGaifDEgDnq1A0G8TGsCdCtDZmcS2ZwOkFtuux6s=;
+	b=P38tf1SPckk7eXFAGUnR5vPcbSebr5l1Hf649+mEa7xb7nSiz/cpZpzn/6iKjtNBcW
+	lJGDkmHIyZagGrBP5Tr2UTRy9wKk30AC25JMa82tV5wt0sg23/OJNzPocKrW4C/YFFfA
+	YFdge6cUnsXoWMAOImYaZS7FaOFRvB+bX1oU9ywHgCGCE+ZiUMAJHj86kXe5Ue4axLT6
+	MG4eb7P8rSPo2lDLtK8wCxI38ykP7DOeRh7f0WzjHXDnWcG4KbFFc/fJ/FGYc2K2MYJU
+	RO0X3Umd8Xr8KfzeI0G6h7UCy5uJfQKZddjUOH/liScWTgG04RPY0iKrbuQvXUMTeIoL
+	AihQ==
+X-Gm-Message-State: AIkVDXKx/vQEgh96qQ6MAvQE/heXbmpuDnxKBE0+TQCzI+0yaHD84D/6GtxGMc83rfO0Dw==
+X-Received: by 10.84.254.74 with SMTP id a10mr14762859pln.57.1485547673255;
+	Fri, 27 Jan 2017 12:07:53 -0800 (PST)
 Received: from CACSVMO-14452.local ([2601:646:8882:b8c:6d8d:a1ec:12d:52de])
 	by smtp.gmail.com with ESMTPSA id
-	e127sm13164090pfh.89.2017.01.27.11.14.42
-	for <openembedded-devel@lists.openembedded.org>
+	d124sm13321849pga.30.2017.01.27.12.07.52
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 27 Jan 2017 11:14:42 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <20170127190606.9365-1-alexandre.belloni@free-electrons.com>
+	Fri, 27 Jan 2017 12:07:52 -0800 (PST)
+To: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>,
+	Martin Jansa <martin.jansa@gmail.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <20170127152157.15342-1-ricardo.ribalda@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Message-ID: <dde007b9-0769-58ad-86ee-62829b6821c1@gmail.com>
-Date: Fri, 27 Jan 2017 11:14:41 -0800
+Message-ID: <ba9f9b77-b2d7-5f10-3b48-14f3c8ea53e7@gmail.com>
+Date: Fri, 27 Jan 2017 12:07:51 -0800
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
 	Gecko/20100101 Thunderbird/45.7.0
 MIME-Version: 1.0
-In-Reply-To: <20170127190606.9365-1-alexandre.belloni@free-electrons.com>
-Subject: Re: [PATCH][meta-webserver] nginx: handle systemd service file
+In-Reply-To: <20170127152157.15342-1-ricardo.ribalda@gmail.com>
+Subject: Re: [PATCH] opencv: Configure freetype via PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,40 +59,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2017 19:14:43 -0000
+X-List-Received-Date: Fri, 27 Jan 2017 20:07:54 -0000
 Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: 7bit
 
 
 
-On 1/27/17 11:06 AM, Alexandre Belloni wrote:
-> Inherit the systemd class so the service file is properly handled.
-> Note that by default, the service file will be installed but not enabled.
+On 1/27/17 7:21 AM, Ricardo Ribalda Delgado wrote:
+> Since: http://errors.yoctoproject.org/Errors/Details/117456/ opencv
+> freetype module fails to build.
 > 
-> Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>
+
+I wonder if we need to export RANLIB in configure
+along with CC and CXX
+
+> This patch disables that module by default via PACKAGECONFIG until we
+> find out a better way to do it.
+> 
+> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 > ---
->  meta-webserver/recipes-httpd/nginx/nginx.inc | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
+>  meta-oe/recipes-support/opencv/opencv_3.2.bb | 1 +
+>  1 file changed, 1 insertion(+)
 > 
-> diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> index 36f2ac6d71e8..fe943d7c290c 100644
-> --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> @@ -20,7 +20,10 @@ SRC_URI = " \
->      file://nginx.service \
->  "
->  
-> -inherit update-rc.d useradd
-> +inherit update-rc.d useradd systemd
-> +
-> +SYSTEMD_SERVICE_${PN} = "nginx.service"
-> +SYSTEMD_AUTO_ENABLE_${PN} = "disable"
-
-why disabled by default if someone is including nginx he/she might be
-interested in using it.
-
->  
->  CFLAGS_append = " -fPIE -pie"
->  CXXFLAGS_append = " -fPIE -pie"
+> diff --git a/meta-oe/recipes-support/opencv/opencv_3.2.bb b/meta-oe/recipes-support/opencv/opencv_3.2.bb
+> index f18aa796f9aa..f47347ab4455 100644
+> --- a/meta-oe/recipes-support/opencv/opencv_3.2.bb
+> +++ b/meta-oe/recipes-support/opencv/opencv_3.2.bb
+> @@ -61,6 +61,7 @@ PACKAGECONFIG[amdblas] = "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libcl
+>  PACKAGECONFIG[amdfft] = "-DWITH_OPENCLAMDFFT=ON,-DWITH_OPENCLAMDFFT=OFF,libclamdfft,"
+>  PACKAGECONFIG[dnn] = "-DBUILD_opencv_dnn=ON -DUPDATE_PROTO_FILES=ON -DBUILD_PROTOBUF=OFF,-DBUILD_opencv_dnn=OFF,lapack protobuf protobuf-native,"
+>  PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen gflags glog,"
+> +PACKAGECONFIG[freetype] = "-DBUILD_opencv_freetype=ON,-DBUILD_opencv_freetype=OFF,freetype,"
+>  PACKAGECONFIG[gphoto2] = "-DWITH_GPHOTO2=ON,-DWITH_GPHOTO2=OFF,libgphoto2,"
+>  PACKAGECONFIG[gstreamer] = "-DWITH_GSTREAMER=ON,-DWITH_GSTREAMER=OFF,gstreamer1.0 gstreamer1.0-plugins-base,"
+>  PACKAGECONFIG[gtk] = "-DWITH_GTK=ON,-DWITH_GTK=OFF,gtk+3,"
 > 
 
