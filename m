@@ -1,46 +1,48 @@
-Return-Path: <patrick.ohly@intel.com>
-Received: from mail-io0-f172.google.com (mail-io0-f172.google.com
-	[209.85.223.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 73DF7606A8
+Return-Path: <h4nn35.work@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 60683606A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 10:11:38 +0000 (UTC)
-Received: by mail-io0-f172.google.com with SMTP id j18so57198209ioe.2
+	Fri, 27 Jan 2017 10:11:47 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id r126so57104768wmr.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 02:11:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=fH9Zqq6Vog9YQ0lfNzR6ywJcjYfVe3C/DpqGqQwRnWo=;
-	b=MMUpqmGKNSlk72zlkmDb/L5GMEW00Rqchjd7eF7Q3JCgebkPzcl7/1AwWd42dvWhD+
-	5kHkB64PkP11/XQRkmsUFm8EjhP8Y0FnyKJH1zcU3IoM6GX3JN3CGKjo+8fH/cryfPv0
-	Nd5s4b/4W4rMQyGrKufjAAegeOiMICDpT94WeHqLOwVtbwqf1UEklvbkJIz5Zgdv9+Tp
-	15dF0ekxnn2tme1APClkFvSOtmufSEvyW1/rb3Cx/lRhls6FYjUsHRFMKOWaSv9pT96D
-	FCTcrnHr5CXU5I2edA2vAANxfVWBRDgJ3WWXJNSuW8DV5+TkcHoKjju1CBZfsPgbX3VB
-	UGZg==
+	Fri, 27 Jan 2017 02:11:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=djNTgZFiBqYjkL7MQQihgbSkSe5E/YaiBPAlm530TmU=;
+	b=ll7/GkKrjr9yjTR56/WnwuRApkbImm4SDvJyP8Knu2UWDgJaQaX24/58vzs9Crxr2q
+	t/3UEUbLLYbney1ipY3evb6iZYV38iMYRuJ94X0eHt3DwRPj95on4EKE9RcOBAIrgm3d
+	YKrJ099bpdxA8BawoD9ivcuEtHSoX9Pom/p78rwEKXp3BUYN+n6Sv6PcH3ewR5fhuQY0
+	qCBG5qzgpjLqO8G/ZV+IVNR5yBBcnw+Ti28Sy4IuYuisCGFi5lVPXItIeaYMUnPpplXg
+	1AJ/S1nHW3JOlgXmcjypmHttrt6mDtNvK0G3EB595N7Uv84O7LvqkL//NHBAynNzWk0Q
+	LsiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=fH9Zqq6Vog9YQ0lfNzR6ywJcjYfVe3C/DpqGqQwRnWo=;
-	b=WM7RQejwESbpTHcpROYuq+gFewjetiMCRz+lBgmBtAMkaYGlT+ZOwns9Wamw5WaJlZ
-	oCg4SUGPdmz+QvsBNSnWYCjfUlYsCtlzo68Fl2wrmbjHLLZN89yrS4KqYybNLec/qkWs
-	M1OTQygVz090pEYA9AXoU8kkypHdpvtALje7R2BdpH5qCa7JmWgLdqQLUeBzHqhKBtiJ
-	/Pdcq78JDgXH0cQBt9rwSOxFfiNR874q4vMEd8uzqy5lzvzZ9OjzUueNtaq6WhxpzYIz
-	o7hZ6zkZHMWoNdAUCWyFt7J8AKWBJBBVU/hxNwwCgXIBJfYjvvb6s5SMM6RINL5/bbKy
-	O0nw==
-X-Gm-Message-State: AIkVDXIEZVnWMJllKHCCa+55CdYiL2SBiJDa0TTkpUbFW0quWkJ92xPC1bbMedW5HjCsrXj5
-X-Received: by 10.107.162.194 with SMTP id l185mr7300270ioe.184.1485511898265; 
-	Fri, 27 Jan 2017 02:11:38 -0800 (PST)
-Received: from pohly-desktop.fritz.box (p5DE8DB2E.dip0.t-ipconnect.de.
-	[93.232.219.46])
-	by smtp.gmail.com with ESMTPSA id y71sm1172175itb.1.2017.01.27.02.11.36
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 27 Jan 2017 02:11:37 -0800 (PST)
-From: Patrick Ohly <patrick.ohly@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Jan 2017 11:11:20 +0100
-Message-Id: <cover.c0833b943acf2f997b54ea7a5284afcdeaf3b924.1485511836.git-series.patrick.ohly@intel.com>
-X-Mailer: git-send-email 2.11.0
-Subject: [meta-oe][PATCH 0/2] multipath: fix build and update
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=djNTgZFiBqYjkL7MQQihgbSkSe5E/YaiBPAlm530TmU=;
+	b=saxaqryxAbBBgsLxRMHTAkjKUou9mrFsffMVyNYD90umEbAJMza5j5QEcPbASqmd8/
+	nCUXByO1NHTwU7M0DbP0+xbFCMH4RNlvgcg4SHQq4tGLRqXJA8LzKbj/Tj0mf8PI/PgQ
+	wreY2oy2zW1i3uXnhUyqV00FC9u/IuVV3MBEkWS8VqZC0j/MxL7O//TzfO8oaQprTO2Y
+	4cYl4N5M3B5lUzjzOf59H9twGmBYo5JAu3ZMwPnqL3rOyZbbPsjV1qjfA2MEd0Zsnms2
+	yh9lc8cnoOyoDCsM2AWTW5d3iBBxLyZS9YlRfkiJpBgPUayKo7GYFY4XY5+BZG8+1uOU
+	5yPA==
+X-Gm-Message-State: AIkVDXKhal5GneWNPhGrzRGugGmR/Btl+iR//RDAh8JY1p2mviUXrJ5mcvLePE6plg8JooPpdcT3KWY09+RWrA==
+X-Received: by 10.28.189.134 with SMTP id n128mr2207304wmf.77.1485511907648;
+	Fri, 27 Jan 2017 02:11:47 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.28.152.19 with HTTP; Fri, 27 Jan 2017 02:11:47 -0800 (PST)
+In-Reply-To: <fe240a61-4206-750d-c913-9073d79c1245@gmail.com>
+References: <1485160227-29998-1-git-send-email-samuli.piippo@qt.io>
+	<20170125160207.GF3260@jama>
+	<CAHvQdo3_+YfdZN_MYmZQLOW7uDnE-=LuXUwL8SR7sXLCG8VVyA@mail.gmail.com>
+	<20170126125414.GA3016@jama>
+	<CAHvQdo1SNOuWuyeAQU_sC88cU_vMbd=PRWt4fVSaQAq3OhM7jw@mail.gmail.com>
+	<fe240a61-4206-750d-c913-9073d79c1245@gmail.com>
+From: Johannes Pointner <h4nn35.work@gmail.com>
+Date: Fri, 27 Jan 2017 11:11:47 +0100
+Message-ID: <CAHvQdo2064s02qfdg0_hn8nwF6urBuuSNSw8ro7fDhKCfqdyCQ@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH v5] Upgrade to Qt 5.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,42 +55,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2017 10:11:40 -0000
+X-List-Received-Date: Fri, 27 Jan 2017 10:11:49 -0000
+Content-Type: text/plain; charset=UTF-8
 
-I recently started using kpartx from multipath-tools. The build failed
-for me when linking shared objects as executables. Changing the order
-of compiler parameter avoids that (first patch).
+I'm building for i.MX6. The problem is that the build is failing
+because the egl CFLAGS are not set:
 
-I have a problem where "kpartx -d" does not do anything, so I wanted
-to try out the latest upstream. Unfortunately, that has the same
-issue. 0.5.0 is fairly old, so it may be worthwhile to update the
-recipe just for the sake of it.
+| In file included from
+/mnt/raid/yocto_env/poky/morty/ppt50/build/tmp/sysroots/ppt50/usr/include/EGL/eglplatform.h:38:0,
+|                  from
+/mnt/raid/yocto_env/poky/morty/ppt50/build/tmp/sysroots/ppt50/usr/include/EGL/egl.h:39,
+|                  from
+../../../include/QtEglSupport/5.8.0/QtEglSupport/private/../../../../../../git/src/platformsupport/eglconvenience/qt_egl_p.h:63,
+|                  from
+../../../include/QtEglSupport/5.8.0/QtEglSupport/private/qt_egl_p.h:1,
+|                  from
+/mnt/raid/yocto_env/poky/morty/ppt50/build/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/git/src/platformsupport/eglconvenience/qeglstreamconvenience_p.h:55,
+|                  from
+/mnt/raid/yocto_env/poky/morty/ppt50/build/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/git/src/platformsupport/eglconvenience/qeglstreamconvenience.cpp:40:
+| /mnt/raid/yocto_env/poky/morty/ppt50/build/tmp/sysroots/ppt50/usr/include/EGL/eglvivante.h:266:2:
+error: #error "Platform not recognized"
+|  #error "Platform not recognized"
 
-However, beware that I have done absolutely no testing of anything
-besides kpartx! But as the recipe didn't even build, it's probably
-currently unused and further testing can be done once someone starts
-using it again.
+This flags are used inside the eglvivante.h to get the correct
+platform. There is a pkconfig file which defines them: Cflags:
+-I${includedir} -DLINUX -DEGL_API_FB -DWL_EGL_PLATFORM
 
-If you disagree, then please at least merge the compile fix.
+Before the update to Qt5.8 there were a patch for the configure file
+to set these variables:
 
-Patrick Ohly (2):
-  multipath-tools: fix building of shared objects
-  multipath-tools: update to 0.6.4
++ if [ -n "$PKG_CONFIG" ] && $PKG_CONFIG --exists egl 2>/dev/null; then
++ QMAKE_INCDIR_EGL=`$PKG_CONFIG --cflags-only-I egl 2>/dev/null | sed
+-e 's,^-I,,g' -e 's, -I, ,g'`
++ QMAKE_LIBS_EGL=`$PKG_CONFIG --libs egl 2>/dev/null`
++ QMAKE_CFLAGS_EGL=`$PKG_CONFIG --cflags egl 2>/dev/null`
++ QMakeVar set QMAKE_INCDIR_EGL "$QMAKE_INCDIR_EGL"
++ QMakeVar set QMAKE_LIBS_EGL "$QMAKE_LIBS_EGL"
++ QMakeVar set QMAKE_CFLAGS_EGL "`echo " $QMAKE_CFLAGS_EGL " | sed -e
+'s, -I[^ ]* , ,g;s,^ ,,;s, $,,'`"
++ fi
 
- meta-oe/recipes-support/multipath-tools/files/0001-multipathd.service-Error-fix.patch           | 10 +++++-----
- meta-oe/recipes-support/multipath-tools/files/always-use-libdevmapper-kpartx.patch              | 25 ++++++++++++++++---------
- meta-oe/recipes-support/multipath-tools/files/always-use-libdevmapper.patch                     | 53 +++++++++++++++++++++++++++++++++--------------------
- meta-oe/recipes-support/multipath-tools/files/checkers-disable-libcheckrbd.so.patch             | 31 +++++++++++++++++++++++++++++++
- meta-oe/recipes-support/multipath-tools/files/do-not-link-libmpathpersist-to-TMPDIR.patch       | 30 ------------------------------
- meta-oe/recipes-support/multipath-tools/files/makefile_inc.patch                                | 38 +++++++++++++++++++++++++++++---------
- meta-oe/recipes-support/multipath-tools/files/shared-libs-avoid-linking-.so-as-executable.patch | 55 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
- meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb                                  | 33 ++++++++-------------------------
- 8 files changed, 177 insertions(+), 98 deletions(-)
- create mode 100644 meta-oe/recipes-support/multipath-tools/files/checkers-disable-libcheckrbd.so.patch
- delete mode 100644 meta-oe/recipes-support/multipath-tools/files/do-not-link-libmpathpersist-to-TMPDIR.patch
- create mode 100644 meta-oe/recipes-support/multipath-tools/files/shared-libs-avoid-linking-.so-as-executable.patch
+This patch was removed, so my question is how should this work now?
+A workaround is to set this variables in the linux-oe-g++.
+I also tried to use the device option: -device linux-imx6-g++ but this
+failed with the following error even if the path was correct.
 
-base-commit: fa65be9ba7943a68b988b5e1a3a37cda7ac74c37
--- 
-git-series 0.9.1
+| Project ERROR: CROSS_COMPILE needs to be set via -device-option
+CROSS_COMPILE=<path>
+| Could not read qmake configuration file
+/mnt/raid/yocto_env/poky/morty/ppt50/build/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/git/mkspecs/devices/linux-imx6-g++/qmake.conf.
+
+
+
+2017-01-27 10:06 GMT+01:00 Samuli Piippo <samuli.piippo@gmail.com>:
+> On 01/26/2017 05:22 PM, Johannes Pointner wrote:
+>>
+>> Did you also see the issue with the QMAKE_INCDIR_EGL, QMAKE_LIBS_EGL
+>> and QMAKE_CFLAGS_EGL variables?
+>
+>
+> What's the target and configuration you using for the build and what's the
+> actual error you are seeing?
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
