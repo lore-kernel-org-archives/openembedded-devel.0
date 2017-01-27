@@ -1,20 +1,18 @@
 Return-Path: <nicolas.ferre@atmel.com>
-X-Greylist: delayed 314 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 27 Jan 2017 14:31:42 UTC
 Received: from email.microchip.com (smtpout.microchip.com [198.175.253.82])
-	by mail.openembedded.org (Postfix) with ESMTP id 06ACA773E9
+	by mail.openembedded.org (Postfix) with ESMTP id CD0B3773F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 14:31:42 +0000 (UTC)
+	Fri, 27 Jan 2017 14:31:45 +0000 (UTC)
 Received: from tenerife.corp.atmel.com (10.10.76.4) by
-	chn-sv-exch05.mchp-main.com (10.10.76.106) with Microsoft SMTP Server
-	id 14.3.181.6; Fri, 27 Jan 2017 07:26:38 -0700
+	chn-sv-exch06.mchp-main.com (10.10.76.107) with Microsoft SMTP Server
+	id 14.3.181.6; Fri, 27 Jan 2017 07:26:27 -0700
 From: Nicolas Ferre <nicolas.ferre@atmel.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 27 Jan 2017 15:26:39 +0100
-Message-ID: <20170127142639.24159-1-nicolas.ferre@atmel.com>
+Date: Fri, 27 Jan 2017 15:26:28 +0100
+Message-ID: <20170127142628.24092-1-nicolas.ferre@atmel.com>
 X-Mailer: git-send-email 2.9.0
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAC+NgFvrFIsWRWlGSWpSXmKPExsXCxeXDojsvojvC4Mahh+c4LL5dbma3uHh4KbMDk8eCX1tZPM5tXMEYwBTFmpmXlF+RwJrxat5TpoL7XBXrNs1lamBczdnFyMUhJLCeUaL71QH2LkZODjYBXYmzE56wgdgiQPbHD3MZQWxmAW2JrwuWsYDYwgK2Ev+3rQaq5+BgEVCVuP+TA8TkFbCROPVBHqRCQkBOouH8fWYQm1dAUOLkzCcsEFMkJA6+eAEWFxJQkeh7388OUR8oMWXhf0YI20li5/KpLBC2ncTh6Rehahwklv6eww5T0770DSuErS2x/dU+KFtHYtvBfqheW4k9MyYyQdjuEg8eLYeyfSVmPWyAqomSeDvvFMsERrFZSE6dheTUBYxMqxilnT38dIPDdF0jnD0MTPVykzMKdHMTM/P0kvNzNzFCIiJrB+PvzohDjJIcTEqivNwW3RFCfEn5KZUZicUZ8UWlOanFhxhlODiUJHg3hgPlBItS01Mr0jJzgLEJk2bi4DzEKMHBoyTCuwukhre4IDG3ODMdIn+KUVJKnHdCGFBCACSRUZoH13uJUVRKmFfeDyjHU5BalJtZAhG/xSjM8ZBJiCUvPy9VCuhOBiDQYHzFKM7BqCTMuxBkCU9mXgncjldA65mA1ov/6AJZX5KIkJJqYDSV+JC06KjZ1LAbzh7HO6sLPboddodm5jfd05rkGfUhhWuW/8YKp03fjXiiN7Zx6+dPfrRRLGD2jCtTjH00bjuwL3DmDeyaUCjJq3257MMP7d5exhIzh2y1k0tqFtulLcs6f2JLbGqj6IK8MNk5Fru/TSjj9RE+uvd99NNqs7jZAmHZfHtmK7EUZyQaajEXFScCAFg3f90NAwAA
+X-Brightmail-Tracker: H4sIAAAAAAAAC+NgFvrNIsWRWlGSWpSXmKPExsXCxeXDojs5ojvCoOXzxre8Ft8uN7NbXDy8lNmByWPBr60sHuc2rmAMYIpizcxLyq9IYM14Ne8pU8F9rop1m+YyNTCu5uxi5OQQEljPKPFqaz2IzSagK3F2whM2EFsEyP74YS4jiM0soC3xdcEyFhBbWMBW4v+21ewgNouAqsScb3fA4rwCNhITe6aygtgSAnISDefvM0PEBSVOznzCAjFHQuLgixfMEHtVJPre97ND1AdK9F/8wQhhO0n8XzkTKm4ncXj6RSjbQeL+/RlsMDUHtz6HsrUltr/aB7VXR2LbwX4WCNtWYs+MiUwQtrvEg0fLoWxfiVkPG6BqoiRO9X9mncAoNgvJqbOQnLqAkWkVo7Szh59ucJiua4Szh4GZXm5yRoFubmJmnl5yfu4mRkhMZO9gPDI/4hCjJAeTkigvt0V3hBBfUn5KZUZicUZ8UWlOavEhRhkODiUJ3o3hQDnBotT01Iq0zBxgdMKkmTg4DzFKcPAoifA6gtTwFhck5hZnpkPkTzFKSonzbgJJCIAkMkrz4HovMYpKCfPK+wHleApSi3IzSyDitxiFOR4yCbHk5eelSgHdyQAEGoyvGMU5GJWEeReCzOLJzCuB2/EKaD0T0HrxH10g60sSEVJSDYzHZV6K2rr0av2VztxbeGnmHwl/56NJYQVPSttP/t684GW1C8O6yE8vapdopmVsfPF3htDOpdKHOuJfPJE6Hv/g2OeqmNBg358LpDYYruh/WSz6/WdOgOd+x+eHsriu/HiU/dxus0aKl1rAc0O+4PDjV2Ust1++aX702AZxBhUjtt8vGbZ15koqsRRnJBpqMRcVJwIAcDJcTQ4DAAA=
 Cc: Nicolas Ferre <nicolas.ferre@atmel.com>
 Subject: [meta-oe][morty][PATCH] nbench-byte: fix project URL
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -29,7 +27,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2017 14:31:42 -0000
+X-List-Received-Date: Fri, 27 Jan 2017 14:31:46 -0000
 Content-Type: text/plain
 
 www.tux.org/~mayer/linux/ location can't be found anymore. It seems that the
