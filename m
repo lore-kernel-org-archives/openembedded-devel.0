@@ -1,49 +1,46 @@
 Return-Path: <patrick.ohly@intel.com>
-Received: from mail-io0-f173.google.com (mail-io0-f173.google.com
-	[209.85.223.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 438B1606A8
+Received: from mail-io0-f172.google.com (mail-io0-f172.google.com
+	[209.85.223.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 5BA09606A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 10:11:59 +0000 (UTC)
-Received: by mail-io0-f173.google.com with SMTP id v96so57250460ioi.0
+	Fri, 27 Jan 2017 10:12:08 +0000 (UTC)
+Received: by mail-io0-f172.google.com with SMTP id j18so57205641ioe.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 02:12:00 -0800 (PST)
+	Fri, 27 Jan 2017 02:12:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=v5hc2WNc4vzJ5ME9tEhL1sj+ywO0xbWmqxx6voalS04=;
-	b=M7bo06FcDHndDQMSXs+CL6YMkE9tlOQzZ88VByMPdg3k75LE7m+Xj/djZDwb/MBC4z
-	YthsqK6CC/uWfs6O/Fvi0anY55YN+UBiUJfuOxRZ6Qy10mw9kj6jzd3N7vZre959JDyj
-	xLch4NqoDWPCAV+haMRtlZMDRqG9KyaoW3SPSjUgQTb9/zmB214QW3DvrSDlbXpO6aki
-	jtNfbNe+DX41MbC4nqvM0osIzh6dgXNyDwe7DKOnLZ3wmKjIq2ef0wZ42ejqIEjI8Eyh
-	0LEXHdBMmt1vy4QD33yTn8FFNgFz5mjYzkJoZT/XeyNDdwoe2Dg4HxzytleVtv1eDMqs
-	X9tw==
+	h=from:to:cc:subject:date:message-id;
+	bh=YOXjJaKQSyRiXMS1TnMfEqlAHRtiGUntJl9n2fG/2V0=;
+	b=S9THTBvduWPFHPSnpWR3NVMlbqkKqGwm58XsI20CRbFuz9e/n0LfHo03fK0E+YIrN6
+	JVYMk2PtOrT5ru6x4QWiWtTOMcsAPHO51ypSvwE7q02ZAyOg68Kmb8l4GA14YR2bBBuc
+	PWmWlgjjvoiulJdGA/PJ58sb8PxeRsGOs01PZDEFj4s3WeF9slW3FHBLsNwTXpOCj4OM
+	vmAnXVeZh6BREYEqlVusWpKltnmdmEKCVspHmilT+bQ2ZE3/k/GOeq6UouUa7pL44enp
+	6VGzBhBC9MprliiT92NbK9sLMDu8Y8Np2u6GT52bK4mXbe6vC9x7xzEiB7/oosVjg3cU
+	BnLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=v5hc2WNc4vzJ5ME9tEhL1sj+ywO0xbWmqxx6voalS04=;
-	b=aAKx6eDUKAcKPFF1HlZ6+EWvlXk2LHFfTySqlkDnU5PaWZanN0q/NBtVe1xnOnca+M
-	yflGj1J1R2w03iRApKUDqaHBbw4v5SMAgY38z2dbzxh1JnMPTZqn7wPzZ7cFTj1XBLHl
-	zVAeOTQ/VdTwiduCbAy/PYFUYEm0QefyPqPIHwckFv96pPwy5VcsTd7PkqgEnNRFJEdi
-	dBGJC8jhWkcUXkXBwZrJq3TQUMiAQYy/9baK0YRQ3NNvcvHfIV9DTW01NmpUATyjGN6L
-	LebP2R62wyYFfInokGZZbZ12IrF7I1m76pHAwliZDosSHMomn5FdPFrpnoybuwshjI1/
-	r1lA==
-X-Gm-Message-State: AIkVDXJxX6obxyzm71e6bfoocIzXUilPInkvQc2zEm9tSsy9Uvjxi5sYFjf0zQU2ma49XxR7
-X-Received: by 10.107.44.74 with SMTP id s71mr7307091ios.111.1485511920269;
-	Fri, 27 Jan 2017 02:12:00 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=YOXjJaKQSyRiXMS1TnMfEqlAHRtiGUntJl9n2fG/2V0=;
+	b=jMx7pwt6n2ewvoGUV1IiBBlf6ZVufbAXLaouYT4NNG08S26b1wBDjqrCDaVRi2QjN3
+	/2VPWDccIhijgEnmhKAkwBHnjgqtb8LZcR1UnX3kgYvslikN5ZFlZYMBI5tQWLnV1dZX
+	wjARxKPNvei9PFjVDYJqjKqugGaMxY5szdbRBj4YiDkZoN8+XT3ZRKLCvr3wr1lNJvGY
+	lKHiWeoQuQLpITDtdxERJQtsmTQcxCh6Cz9r02EEWInW/XXMRojyWAo9U2pxAKSDHmsS
+	ZjYibWGKHs+xKsOC5ibJsym+W/4ktENdL9mxHQADIvhH2VwvlqgzrCIbFwVfQ320nWVo
+	lTsQ==
+X-Gm-Message-State: AIkVDXLP/9aYXRnIPQGFcKhMZLdYXSuI/G3btrfwxDNdbLc8Yg7aByikwIV+VRy/lx5+7Q8R
+X-Received: by 10.107.56.6 with SMTP id f6mr7332809ioa.58.1485511928317;
+	Fri, 27 Jan 2017 02:12:08 -0800 (PST)
 Received: from pohly-desktop.fritz.box (p5DE8DB2E.dip0.t-ipconnect.de.
 	[93.232.219.46])
-	by smtp.gmail.com with ESMTPSA id y71sm1172175itb.1.2017.01.27.02.11.58
+	by smtp.gmail.com with ESMTPSA id y71sm1172175itb.1.2017.01.27.02.12.06
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 27 Jan 2017 02:11:59 -0800 (PST)
+	Fri, 27 Jan 2017 02:12:07 -0800 (PST)
 From: Patrick Ohly <patrick.ohly@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Jan 2017 11:11:22 +0100
-Message-Id: <598b040880601e5fc0b349e4d5cea32d22fcfe48.1485511836.git-series.patrick.ohly@intel.com>
+Date: Fri, 27 Jan 2017 11:11:23 +0100
+Message-Id: <20170127101200.25785-1-patrick.ohly@intel.com>
 X-Mailer: git-send-email 2.11.0
-In-Reply-To: <cover.c0833b943acf2f997b54ea7a5284afcdeaf3b924.1485511836.git-series.patrick.ohly@intel.com>
-References: <cover.c0833b943acf2f997b54ea7a5284afcdeaf3b924.1485511836.git-series.patrick.ohly@intel.com>
-Subject: [meta-oe][PATCH 2/2] multipath-tools: update to 0.6.4
+Subject: [PATCH] multipath-tools: update to 0.6.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,7 +53,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2017 10:12:00 -0000
+X-List-Received-Date: Fri, 27 Jan 2017 10:12:08 -0000
 
 No particular reason for updating besides following upstream.
 
@@ -80,20 +77,20 @@ The other patches had to be refreshed.
 
 Signed-off-by: Patrick Ohly <patrick.ohly@intel.com>
 ---
- meta-oe/recipes-support/multipath-tools/files/0001-multipathd.service-Error-fix.patch           | 10 +++++-----
- meta-oe/recipes-support/multipath-tools/files/always-use-libdevmapper-kpartx.patch              | 25 ++++++++++++++++---------
- meta-oe/recipes-support/multipath-tools/files/always-use-libdevmapper.patch                     | 53 +++++++++++++++++++++++++++++++++--------------------
- meta-oe/recipes-support/multipath-tools/files/checkers-disable-libcheckrbd.so.patch             | 31 +++++++++++++++++++++++++++++++
- meta-oe/recipes-support/multipath-tools/files/do-not-link-libmpathpersist-to-TMPDIR.patch       | 30 ------------------------------
- meta-oe/recipes-support/multipath-tools/files/makefile_inc.patch                                | 38 +++++++++++++++++++++++++++++---------
- meta-oe/recipes-support/multipath-tools/files/shared-libs-avoid-linking-.so-as-executable.patch | 44 +++++++++++++++++++++++++-------------------
- meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb                                  | 32 +++++++-------------------------
+ .../files/0001-multipathd.service-Error-fix.patch  | 10 ++--
+ .../files/always-use-libdevmapper-kpartx.patch     | 25 ++++++----
+ .../files/always-use-libdevmapper.patch            | 53 ++++++++++++++--------
+ .../files/checkers-disable-libcheckrbd.so.patch    | 31 +++++++++++++
+ .../do-not-link-libmpathpersist-to-TMPDIR.patch    | 30 ------------
+ .../multipath-tools/files/makefile_inc.patch       | 38 ++++++++++++----
+ ...ared-libs-avoid-linking-.so-as-executable.patch | 44 ++++++++++--------
+ .../multipath-tools/multipath-tools_git.bb         | 32 +++----------
  8 files changed, 146 insertions(+), 117 deletions(-)
  create mode 100644 meta-oe/recipes-support/multipath-tools/files/checkers-disable-libcheckrbd.so.patch
  delete mode 100644 meta-oe/recipes-support/multipath-tools/files/do-not-link-libmpathpersist-to-TMPDIR.patch
 
 diff --git a/meta-oe/recipes-support/multipath-tools/files/0001-multipathd.service-Error-fix.patch b/meta-oe/recipes-support/multipath-tools/files/0001-multipathd.service-Error-fix.patch
-index 1e48e1c..60c3c0a 100644
+index 1e48e1c5f..60c3c0aec 100644
 --- a/meta-oe/recipes-support/multipath-tools/files/0001-multipathd.service-Error-fix.patch
 +++ b/meta-oe/recipes-support/multipath-tools/files/0001-multipathd.service-Error-fix.patch
 @@ -1,4 +1,4 @@
@@ -131,7 +128,7 @@ index 1e48e1c..60c3c0a 100644
 +2.11.0
  
 diff --git a/meta-oe/recipes-support/multipath-tools/files/always-use-libdevmapper-kpartx.patch b/meta-oe/recipes-support/multipath-tools/files/always-use-libdevmapper-kpartx.patch
-index a16a854..803e52c 100644
+index a16a85405..803e52c10 100644
 --- a/meta-oe/recipes-support/multipath-tools/files/always-use-libdevmapper-kpartx.patch
 +++ b/meta-oe/recipes-support/multipath-tools/files/always-use-libdevmapper-kpartx.patch
 @@ -1,4 +1,7 @@
@@ -180,7 +177,7 @@ index a16a854..803e52c 100644
 +2.11.0
 +
 diff --git a/meta-oe/recipes-support/multipath-tools/files/always-use-libdevmapper.patch b/meta-oe/recipes-support/multipath-tools/files/always-use-libdevmapper.patch
-index 89d2352..33834f6 100644
+index 89d2352da..33834f6b8 100644
 --- a/meta-oe/recipes-support/multipath-tools/files/always-use-libdevmapper.patch
 +++ b/meta-oe/recipes-support/multipath-tools/files/always-use-libdevmapper.patch
 @@ -1,4 +1,7 @@
@@ -262,7 +259,7 @@ index 89d2352..33834f6 100644
 +
 diff --git a/meta-oe/recipes-support/multipath-tools/files/checkers-disable-libcheckrbd.so.patch b/meta-oe/recipes-support/multipath-tools/files/checkers-disable-libcheckrbd.so.patch
 new file mode 100644
-index 0000000..908a516
+index 000000000..908a5162e
 --- /dev/null
 +++ b/meta-oe/recipes-support/multipath-tools/files/checkers-disable-libcheckrbd.so.patch
 @@ -0,0 +1,31 @@
@@ -299,7 +296,7 @@ index 0000000..908a516
 +
 diff --git a/meta-oe/recipes-support/multipath-tools/files/do-not-link-libmpathpersist-to-TMPDIR.patch b/meta-oe/recipes-support/multipath-tools/files/do-not-link-libmpathpersist-to-TMPDIR.patch
 deleted file mode 100644
-index 86d5e0e..0000000
+index 86d5e0e9c..000000000
 --- a/meta-oe/recipes-support/multipath-tools/files/do-not-link-libmpathpersist-to-TMPDIR.patch
 +++ /dev/null
 @@ -1,30 +0,0 @@
@@ -334,7 +331,7 @@ index 86d5e0e..0000000
 -1.8.4.2
 -
 diff --git a/meta-oe/recipes-support/multipath-tools/files/makefile_inc.patch b/meta-oe/recipes-support/multipath-tools/files/makefile_inc.patch
-index 71963e0..5b7b696 100644
+index 71963e0c4..5b7b6966a 100644
 --- a/meta-oe/recipes-support/multipath-tools/files/makefile_inc.patch
 +++ b/meta-oe/recipes-support/multipath-tools/files/makefile_inc.patch
 @@ -1,4 +1,8 @@
@@ -398,7 +395,7 @@ index 71963e0..5b7b696 100644
 +2.11.0
 +
 diff --git a/meta-oe/recipes-support/multipath-tools/files/shared-libs-avoid-linking-.so-as-executable.patch b/meta-oe/recipes-support/multipath-tools/files/shared-libs-avoid-linking-.so-as-executable.patch
-index ae6bb89..88579e6 100644
+index ae6bb89a7..88579e6aa 100644
 --- a/meta-oe/recipes-support/multipath-tools/files/shared-libs-avoid-linking-.so-as-executable.patch
 +++ b/meta-oe/recipes-support/multipath-tools/files/shared-libs-avoid-linking-.so-as-executable.patch
 @@ -14,36 +14,42 @@ Upstream-Status: Inappropriate [OE specific, -pie shouldn't be in CFLAGS?!]
@@ -464,7 +461,7 @@ index ae6bb89..88579e6 100644
 -2.11.0
 -
 diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
-index 2ab4dad..e107c8f 100644
+index 2ab4dad23..e107c8f73 100644
 --- a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
 +++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
 @@ -1,6 +1,6 @@
@@ -532,5 +529,6 @@ index 2ab4dad..e107c8f 100644
  
  }
 -- 
-git-series 0.9.1
+2.11.0
+
 
