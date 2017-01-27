@@ -1,51 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wj0-f195.google.com (mail-wj0-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id B873C7746D
+Return-Path: <joe.slater@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B892773C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 18:10:55 +0000 (UTC)
-Received: by mail-wj0-f195.google.com with SMTP id un2so6535423wjb.0
+	Fri, 27 Jan 2017 19:10:21 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v0RJAL3B009709
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 10:10:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=RfWh8u9YkxuHV3RKk0bKA9u154vUfgwQRYf2Cerwvqk=;
-	b=Wz09UPL9+mu7v7yfASZ5UydFozLx0Hkcuo7oZF7gUtSTgcCUTGvo2kUlHNXH3yqlel
-	ZPxyOwRNzVafQxP7dKn9dO3/UIkaiVO8UWHKPP6C7hY1P4ZUgmRGuU5B6gmR3tL7g12I
-	hUxWaKA1fuhp1k9DxQ9VuBNaHLmo6zfm8278rBZEu9poEsTuMdxQhWlFguKOMdfaLuBq
-	vBtZPZk2ClqHDpPJMrTcPBGq8teE2DhWLHZwfTSorLaWo8oWP21mFYN+4M72hFUnbuAU
-	Es2LtHePJAcHqklgSSJL9mE3911kmaaS6OnyNT4Mi7qcUwN1djL/jlEGR90TmoHU366O
-	FC8Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=RfWh8u9YkxuHV3RKk0bKA9u154vUfgwQRYf2Cerwvqk=;
-	b=DjzETrJ05k6g3Ufssd8OyzPV6KWcacv2i8awV1JXGPF1cf+eBPBEjf52A3UwI1lxL9
-	4QXOKjM7t/42c9CtH9Os8Oxz6XnXpyw0OGbCCX4WSpeChhVFxAUjCA9Z84CZdHRNzP+J
-	Tx+CGBX6AyRXEieeDEPucKiPIlz+/3+cHM1kDdafeWh+YS/IAGn/OZ3t1DdbDBck7MaG
-	kPGTK1eo0XfICzrXlt//hcbPl9Ier1WX+6Wb8XPP4qLwN9t2ywsdxuk689YE392rcOb9
-	dHtJez+Fv587v0cWONGzqJoIEpIifqzF17Y25fTJtbUYzaaZAyO4iyDGgh1mwbUWeJgi
-	12VA==
-X-Gm-Message-State: AIkVDXJazaKvPel14dalOlIYWwKkRgcenqjT5rRgVL7Dfdcdtn4WoQdOgelQnWXMNMU3Bw==
-X-Received: by 10.223.164.207 with SMTP id h15mr8442455wrb.142.1485540655244; 
-	Fri, 27 Jan 2017 10:10:55 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	m84sm5054993wmf.10.2017.01.27.10.10.54
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 27 Jan 2017 10:10:54 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 27 Jan 2017 19:10:55 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170127181055.GB9282@jama>
-References: <1484831267-76876-1-git-send-email-herve.jourdain@neuf.fr>
+	Fri, 27 Jan 2017 11:10:21 -0800 (PST)
+Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.294.0; Fri, 27 Jan 2017 11:10:20 -0800
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 27 Jan 2017 11:10:20 -0800
+Message-ID: <1485544220-11017-1-git-send-email-jslater@windriver.com>
+X-Mailer: git-send-email 1.7.3.4
 MIME-Version: 1.0
-In-Reply-To: <1484831267-76876-1-git-send-email-herve.jourdain@neuf.fr>
-User-Agent: Mutt/1.7.2 (2016-11-26)
-Subject: Re: [meta-qt5][PATCH] Minor improvements: configure complains it can't find oe-device-extra.pri, and add libxkbcommon in the dependencies
+Subject: [meta-networking][PATCH 1/1] chrony: fix build failure for arma9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,87 +31,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2017 18:10:56 -0000
-X-Groupsio-MsgNum: 64911
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="jho1yZJdad60DJr+"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 27 Jan 2017 19:10:22 -0000
+Content-Type: text/plain
 
---jho1yZJdad60DJr+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Issue: LIN9-3096
 
-On Thu, Jan 19, 2017 at 09:07:47PM +0800, Herve Jourdain wrote:
-> During configure, it complains it can't find oe-device-extra.pri, but it =
-doesn't result in any error. Fix it, though, just in case.
-> In qtwayland, xkb should be optional, but it's not for the moment, so add=
- it to the dependencies.
+Eliminate references to syscalls not available
+for ARM_EABI.  Also add a dependency on libseccomp
+which is needed for scfilter to work.
 
-Can you please check if both of these are still needed for 5.8 (in
-master-next) and if so, send rebased version (preferably 2 separate
-commits) with proper commit summary?
+Set PACKAGECONFIG to not enable scfilter, since
+kernel CONFIG_SECCOMP is unlikely to be set.  This
+aligns the usage of libseccomp with that of other packages.
 
-See:
-http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
+Signed-off-by: Joe Slater <jslater@windriver.com>
+---
+ .../recipes-support/chrony/chrony/arm_eabi.patch   |   43 ++++++++++++++++++++
+ .../recipes-support/chrony/chrony_2.4.bb           |    5 ++-
+ 2 files changed, 46 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
 
->=20
-> Signed-off-by: Herve Jourdain <herve.jourdain@neuf.fr>
-> ---
->  recipes-qt/qt5/qtbase_git.bb    | 3 +++
->  recipes-qt/qt5/qtwayland_git.bb | 1 +
->  2 files changed, 4 insertions(+)
->=20
-> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-> index 6541973..258c7ed 100644
-> --- a/recipes-qt/qt5/qtbase_git.bb
-> +++ b/recipes-qt/qt5/qtbase_git.bb
-> @@ -173,6 +173,9 @@ do_configure() {
->          ln -sf ${OE_QMAKE_QMAKE_ORIG} ${B}/bin/qmake
->      fi
-> =20
-> +    # Avoid qmake error "Cannot read [...]/usr/lib/qt5/mkspecs/oe-device=
--extra.pri: No such file or directory" during configuration
-> +    touch ${S}/mkspecs/oe-device-extra.pri
-> +
->      ${S}/configure -v \
->          -opensource -confirm-license \
->          -sysroot ${STAGING_DIR_TARGET} \
-> diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_g=
-it.bb
-> index e315924..51421d5 100644
-> --- a/recipes-qt/qt5/qtwayland_git.bb
-> +++ b/recipes-qt/qt5/qtwayland_git.bb
-> @@ -18,6 +18,7 @@ LIC_FILES_CHKSUM =3D " \
-> =20
->  #FIXME: xkb should be optional; we add it here to fix the build error wi=
-thout it
->  #       (https://bugreports.qt.io/browse/QTBUG-54851)
-> +DEPENDS +=3D "libxkbcommon"
->  PACKAGECONFIG ?=3D " \
->      compositor-api \
->      wayland-egl \
-> --=20
-> 2.7.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
+new file mode 100644
+index 0000000..f38e651
+--- /dev/null
++++ b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
+@@ -0,0 +1,43 @@
++--- a/sys_linux.c
+++++ b/sys_linux.c
++@@ -453,13 +453,12 @@ SYS_Linux_EnableSystemCallFilter(int lev
++   const int syscalls[] = {
++     /* Clock */
++     SCMP_SYS(adjtimex), SCMP_SYS(gettimeofday), SCMP_SYS(settimeofday),
++-    SCMP_SYS(time),
++     /* Process */
++-    SCMP_SYS(clone), SCMP_SYS(exit), SCMP_SYS(exit_group), SCMP_SYS(getrlimit),
+++    SCMP_SYS(clone), SCMP_SYS(exit), SCMP_SYS(exit_group),
++     SCMP_SYS(rt_sigaction), SCMP_SYS(rt_sigreturn), SCMP_SYS(rt_sigprocmask),
++     SCMP_SYS(set_tid_address), SCMP_SYS(sigreturn), SCMP_SYS(wait4),
++     /* Memory */
++-    SCMP_SYS(brk), SCMP_SYS(madvise), SCMP_SYS(mmap), SCMP_SYS(mmap2),
+++    SCMP_SYS(brk), SCMP_SYS(madvise), SCMP_SYS(mmap2),
++     SCMP_SYS(mprotect), SCMP_SYS(mremap), SCMP_SYS(munmap), SCMP_SYS(shmdt),
++     /* Filesystem */
++     SCMP_SYS(access), SCMP_SYS(chmod), SCMP_SYS(chown), SCMP_SYS(chown32),
++@@ -470,14 +469,21 @@ SYS_Linux_EnableSystemCallFilter(int lev
++     SCMP_SYS(bind), SCMP_SYS(connect), SCMP_SYS(getsockname),
++     SCMP_SYS(recvfrom), SCMP_SYS(recvmsg), SCMP_SYS(sendmmsg),
++     SCMP_SYS(sendmsg), SCMP_SYS(sendto),
++-    /* TODO: check socketcall arguments */
++-    SCMP_SYS(socketcall),
++     /* General I/O */
++     SCMP_SYS(_newselect), SCMP_SYS(close), SCMP_SYS(open), SCMP_SYS(pipe),
++-    SCMP_SYS(poll), SCMP_SYS(read), SCMP_SYS(futex), SCMP_SYS(select),
+++    SCMP_SYS(poll), SCMP_SYS(read), SCMP_SYS(futex),
++     SCMP_SYS(set_robust_list), SCMP_SYS(write),
++     /* Miscellaneous */
++     SCMP_SYS(uname),
+++    /* not always available */
+++#if ! defined(__ARM_EABI__)
+++    SCMP_SYS(time),
+++    SCMP_SYS(getrlimit),
+++    SCMP_SYS(select),
+++    SCMP_SYS(mmap),
+++    /* TODO: check socketcall arguments */
+++    SCMP_SYS(socketcall),
+++#endif
++   };
++ 
++   const int socket_domains[] = {
+diff --git a/meta-networking/recipes-support/chrony/chrony_2.4.bb b/meta-networking/recipes-support/chrony/chrony_2.4.bb
+index deb2148..088708f 100644
+--- a/meta-networking/recipes-support/chrony/chrony_2.4.bb
++++ b/meta-networking/recipes-support/chrony/chrony_2.4.bb
+@@ -33,6 +33,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ SRC_URI = "https://download.tuxfamily.org/chrony/chrony-${PV}.tar.gz \
+     file://chrony.conf \
+     file://chronyd \
++    file://arm_eabi.patch \
+ "
+ SRC_URI[md5sum] = "d0598aa8a9be8faccef9386f6fc0d5f2"
+ SRC_URI[sha256sum] = "8d04e7cda2333289c2104b731d39c3c1db94816e43bae35d7ee4e7ae8af6391f"
+@@ -58,14 +59,14 @@ inherit update-rc.d systemd
+ #     chrony.conf and init script.
+ #   - 'scfilter' enables support for system call filtering, but requires the
+ #     kernel to have CONFIG_SECCOMP enabled.
+-PACKAGECONFIG ??= "editline scfilter \
++PACKAGECONFIG ??= "editline \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
+ "
+ PACKAGECONFIG[readline] = "--without-editline,--without-readline,readline"
+ PACKAGECONFIG[editline] = ",--without-editline,libedit"
+ PACKAGECONFIG[sechash] = "--without-tomcrypt,--disable-sechash,nss"
+ PACKAGECONFIG[privdrop] = ",--disable-privdrop,libcap"
+-PACKAGECONFIG[scfilter] = "--enable-scfilter,--without-seccomp"
++PACKAGECONFIG[scfilter] = "--enable-scfilter,--without-seccomp,libseccomp"
+ PACKAGECONFIG[ipv6] = ",--disable-ipv6,"
+ PACKAGECONFIG[nss] = "--with-nss,--without-nss,nss"
+ PACKAGECONFIG[libcap] = "--with-libcap,--without-libcap,libcap"
+-- 
+1.7.9.5
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---jho1yZJdad60DJr+
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWIuNLgAKCRA3VSO3ZXaA
-HIuVAJ9YucBTpW4VibLVZ1TJZqU/eouGSgCgkiry7fwiT9u9UHHEv+WTfhRHreU=
-=vxX7
------END PGP SIGNATURE-----
-
---jho1yZJdad60DJr+--
