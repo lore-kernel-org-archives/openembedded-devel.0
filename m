@@ -1,46 +1,59 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-yw0-f194.google.com (mail-yw0-f194.google.com
-	[209.85.161.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 5433A773EE
+Return-Path: <jaragunde@igalia.com>
+Received: from smtp4.mundo-r.com (smtp3.mundo-r.com [212.51.32.191])
+	by mail.openembedded.org (Postfix) with ESMTP id 1DD297740C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 15:22:03 +0000 (UTC)
-Received: by mail-yw0-f194.google.com with SMTP id u68so24335099ywg.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Jan 2017 07:22:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=NxCvcl78U+uE0Eg1xmuc29qZksD1a378My7bXii915A=;
-	b=FYNe65vhmVwafe+CT+eLmrj+HTt2GJ/If0iJ0mPE1FUX+d9WjgzrFpq+KwwVp/rrMp
-	ne3BbZfj+eErLJJOl7aG2TctnRjhJOe7aQFQyr2wnsSDj0FaxUVlP6RjtCKD2X48Kwr8
-	aq6Nzvf5BM2FuydaNSL90EfVUEyaz5eYimLfVzprgu2KEPJR/qj5Pkhm3ZC+Kc9M53G6
-	NuE6tLXOEGGTWjLCdGBlfa8EtjdSh891OWVsfcmMimFQsaHRgVAEuBbQFifnkhWr53+o
-	Ewp4TAzgbwpp2S4nXDyEeEzikmjcB073bPinxpZ2Lvr/Ne1P184xze4zjBUXDWNuM0Q1
-	ic8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=NxCvcl78U+uE0Eg1xmuc29qZksD1a378My7bXii915A=;
-	b=sO5P7B7j3Tp/4+zfe5w+K4J4wIAf6SE8PeF7KVE5QpFbWy8FbUUNT3uZarHAdWhzAZ
-	KVEm7KOn3M/ZNKf+xQwITn5gZpgsxxVXZU/Qrtz65aBR/RC09FeX42Jrm7iuU8QoI2tR
-	8JcaXHWgy4EKwhtEVk+sxajs2HfEtV31UhXoBAnmZa2eWQSH2TaXFNPZaQhtaFE7aKZD
-	KzGKiuROwqkVBDWPjHPUJfN2t8SoG+rWzaKW8JkDwX24IvlLhsNkPeNymToCYarqgubA
-	0x0w5tQM21kL5D3+rvJYeDTizwb8STW1lAbyun0OYYqLUfRTFNXNe+rdzn62HyTFm3Vn
-	+uhQ==
-X-Gm-Message-State: AIkVDXLD8dCNPhJl+wnr/SLYRN0oIF4V3PvPaACBq9iBncLkCBhc3dpAIlWjLo1K2xMWRg==
-X-Received: by 10.55.113.193 with SMTP id m184mr8472696qkc.57.1485530523618;
-	Fri, 27 Jan 2017 07:22:03 -0800 (PST)
-Received: from localhost.localdomain (pc-37-24-239-201.cm.vtr.net.
-	[201.239.24.37]) by smtp.gmail.com with ESMTPSA id
-	q145sm4355726qke.37.2017.01.27.07.22.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 27 Jan 2017 07:22:02 -0800 (PST)
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>, Martin Jansa <martin.jansa@gmail.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Date: Fri, 27 Jan 2017 16:21:57 +0100
-Message-Id: <20170127152157.15342-1-ricardo.ribalda@gmail.com>
-X-Mailer: git-send-email 2.11.0
-Subject: [PATCH] opencv: Configure freetype via PACKAGECONFIG
+	Fri, 27 Jan 2017 16:06:00 +0000 (UTC)
+IronPort-PHdr: =?us-ascii?q?9a23=3AttVvmxAUpwstyDKla89LUyQJP3N1i/DPJgcQr6Af?=
+	=?us-ascii?q?oPdwSPT8rsbcNUDSrc9gkEXOFd2CrakV16yL7OuwAyQp2tWoiDg6aptCVhsI24?=
+	=?us-ascii?q?09vjcLJ4q7M3D9N+PgdCcgHc5PBxdP9nC/NlVJSo6lPwWB6nK94iQPFRrhKAF7?=
+	=?us-ascii?q?Ovr6GpLIj8Swyuu+54Dfbx9GiTe5br5+NhW7oAfeusQVn4dpN7o8xAbOrnZUYe?=
+	=?us-ascii?q?pd2HlmJUiUnxby58ew+IBs/iFNsP8/9MBOTLv3cb0gQbNXEDopPWY15Nb2tRbY?=
+	=?us-ascii?q?VguA+mEcUmQNnRVWBQXO8Qz3UY3wsiv+sep9xTWaMMjrRr06RTiu86FmQwLuhS?=
+	=?us-ascii?q?waNTA27XvXh9RtgqxFrhKvpx9xzYDab46aNvVxYqzTcMgGRWdDRMtdSzBND428?=
+	=?us-ascii?q?YoYJEuEPPfxYr474p1YWqRWxHxWjBOT0xT9PnnD7wbc63P4uEQHb2gwvAswBv2?=
+	=?us-ascii?q?zOotLvLqcdT+G0x7TPwDXBdfxWwy3y6IfVchAnvP6DQ6l9ccveyUY1EwPFj0+f?=
+	=?us-ascii?q?pZb5MDOS0+QAqm6W5PduW+Kojm4osQBxoj63y8gwionJnIUVylXF9SVkxYY5P9?=
+	=?us-ascii?q?q4SFR0YdOiDZBetDmaOpNyT88/WW1kpTs2x78ctZO/eCUG0okryh7fZvCfboSF?=
+	=?us-ascii?q?4RHuWPySLDp5nn5oeq+ziwys/UWvyuDxUNS/3kxQoSpfiNbMs2gA1xnU6seaVP?=
+	=?us-ascii?q?Rw5lyh2TOT1wDL7eFEPFw0mbLbK5E/xr4wkYIesUrZES/wmUT2jamWeVs+9uip?=
+	=?us-ascii?q?5OToeLHmpp6GOINulg7+NaEultS+AeQ+LAcOQ3CW9OCh2LH54EH1XbdHgucyn6?=
+	=?us-ascii?q?TdqpzWOMQWq66hDw9QyIkj6hK/Dzm80NQfmHkKNFBFdwidj4fzNFHOPfb4Auqh?=
+	=?us-ascii?q?jFm3kTdryOrJPrngAprXNHTMjLDhfbNl505G1AUz1cxf545TCrwZJ/LzQlH+tN?=
+	=?us-ascii?q?rGAR88KAO73fvoB8hj2YwDQG6AH7GWML3Mvl+M/e8vJ+iMZJQJuDbmMfQl4Obu?=
+	=?us-ascii?q?gmE/mVADeKmmxoUYZ22lEft4PkqVe33sgs0OETRCgg1rS/TnjlCHWzNfa3u+Gq?=
+	=?us-ascii?q?4x+Dw/IIanFpvYAIe1jbqM2S22EpFbaiZBEF/fP23vctCmUvwLYiWlC9VonSEC?=
+	=?us-ascii?q?WbWWcw472APm4A3z0bNoM+zY9wUZupvn1dEz7OrWw0JhvQdoBtiQhjneB1p/mX?=
+	=?us-ascii?q?kFEmc7?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: =?us-ascii?q?A2DVBQBOb4tY/5tjdVteGwEBAQMBAQEJA?=
+	=?us-ascii?q?QEBFwEBBAEBCgEBgwoBAR9hAydfn2CTIIIPggwqhXgCgh9BFgEBAQEBAQEBAQE?=
+	=?us-ascii?q?BYSiCMxmCHgEFgQkLGC5XEwgBAYlhAQmvUIpsAQEBAQYBAQEBAQEihkuCBYJqh?=
+	=?us-ascii?q?RWFGQWbUYZnixKBeYg8hj+IJYpZJgYrgUuHCnSJAAEBAQ?=
+X-IPAS-Result: =?us-ascii?q?A2DVBQBOb4tY/5tjdVteGwEBAQMBAQEJAQEBFwEBBAEBCgE?=
+	=?us-ascii?q?BgwoBAR9hAydfn2CTIIIPggwqhXgCgh9BFgEBAQEBAQEBAQEBYSiCMxmCHgEFg?=
+	=?us-ascii?q?QkLGC5XEwgBAYlhAQmvUIpsAQEBAQYBAQEBAQEihkuCBYJqhRWFGQWbUYZnixK?=
+	=?us-ascii?q?BeYg8hj+IJYpZJgYrgUuHCnSJAAEBAQ?=
+X-IronPort-AV: E=Sophos;i="5.33,296,1477954800"; d="scan'208";a="154404160"
+Received: from fanzine.igalia.com ([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 27 Jan 2017 17:05:58 +0100
+Received: from [188.86.71.245] (helo=[192.168.1.6])
+	by fanzine.igalia.com with esmtpsa 
+	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
+	id 1cX92E-0001yB-N0 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Jan 2017 17:05:58 +0100
+To: openembedded-devel@lists.openembedded.org
+References: <1485356812-8436-1-git-send-email-jaragunde@igalia.com>
+	<008601d27798$272e3640$758aa2c0$@neuf.fr>
+	<8c7129f5-43e3-3b2d-f4e9-9dfbad7e6ebc@gmail.com>
+	<a5a24703cc0a4dd6be923dac9cc6e129@XCH-ALN-008.cisco.com>
+From: =?UTF-8?Q?Jacobo_Aragunde_P=c3=a9rez?= <jaragunde@igalia.com>
+Message-ID: <af85ea87-57e1-d529-9dcb-e31b6f922d1b@igalia.com>
+Date: Fri, 27 Jan 2017 17:05:48 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.6.0
+MIME-Version: 1.0
+In-Reply-To: <a5a24703cc0a4dd6be923dac9cc6e129@XCH-ALN-008.cisco.com>
+Subject: Re: [meta-browser][PATCH v2] chromium-wayland: update to 53.0.2785.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,32 +66,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Jan 2017 15:22:05 -0000
+X-List-Received-Date: Fri, 27 Jan 2017 16:06:07 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-Since: http://errors.yoctoproject.org/Errors/Details/117456/ opencv
-freetype module fails to build.
+On 27/01/17 15:06, Julien Brianceau (jbriance) wrote:
+>> ...
+>> On 1/25/17 9:50 PM, Herve Jourdain wrote:
+>>> Hi Jacob,
+>>>
+>>> I've been able to compile chromium-wayland 53.0.2785.14 on
+>> RaspberryPi, with Wayland only (no X11), BUT I had to add an additional
+>> patch for it to work, or else I get an error in
+>> ui/events/keycodes/keyboard_code_conversion_xkb.cc.
+>>> I'm using VC4, which has a DRM/KMS interface (it seems that DRM
+>> interface is required by ozone-wayland), but this patch seems to not be
+>> related to RaspberryPi itself.
+>>> Basically, it seems that USE_XKBCOMMON is not defined when compiling
+>> keycodes.
+>>>
+>>> Is it something that you saw as well? Or do you have a different
+>> setting/experience?
+>>>
+>>> Just for reference, here is the patch I need (right now, I'm
+>> triggering it from meta-raspberrypi, but I believe it may be needed in
+>> meta-browser).
+>>>
+>>> --- a/ui/events/keycodes/events_keycodes.gyp	2017-01-23
+>> 19:12:01.767271256 +0800
+>>> +++ b/ui/events/keycodes/events_keycodes.gyp	2017-01-23
+>> 19:12:11.503048216 +0800
+>>> @@ -21,6 +21,9 @@
+>>>          'scoped_xkb.h',
+>>>          'xkb_keysym.h',
+>>>        ],
+>>> +      'defines': [
+>>> +        'USE_XKBCOMMON',
+>>
+>> This seems fine to me. It should also be proposed upstream as well I
+>> think.
+>>
+> 
+> For the record, I've already tried to upstream a similar change (see Patch Set 1 of review https://codereview.chromium.org/2239833003/), but only the GN part has been accepted as gyp support has been removed in Chromium 54.
+> 
 
-This patch disables that module by default via PACKAGECONFIG until we
-find out a better way to do it.
+This error definitely rings a bell to me, although I haven't reproduced
+it in my latest builds for minnowboard. It could happen with certain
+build flags, maybe some of those are enabled for arm builds but not for
+intel ones.
 
-Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
----
- meta-oe/recipes-support/opencv/opencv_3.2.bb | 1 +
- 1 file changed, 1 insertion(+)
+The patch looks definitely good, and because gyp is deprecated in
+upstream master, I think it's ok to keep it downstream. Thank you :)
 
-diff --git a/meta-oe/recipes-support/opencv/opencv_3.2.bb b/meta-oe/recipes-support/opencv/opencv_3.2.bb
-index f18aa796f9aa..f47347ab4455 100644
---- a/meta-oe/recipes-support/opencv/opencv_3.2.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_3.2.bb
-@@ -61,6 +61,7 @@ PACKAGECONFIG[amdblas] = "-DWITH_OPENCLAMDBLAS=ON,-DWITH_OPENCLAMDBLAS=OFF,libcl
- PACKAGECONFIG[amdfft] = "-DWITH_OPENCLAMDFFT=ON,-DWITH_OPENCLAMDFFT=OFF,libclamdfft,"
- PACKAGECONFIG[dnn] = "-DBUILD_opencv_dnn=ON -DUPDATE_PROTO_FILES=ON -DBUILD_PROTOBUF=OFF,-DBUILD_opencv_dnn=OFF,lapack protobuf protobuf-native,"
- PACKAGECONFIG[eigen] = "-DWITH_EIGEN=ON,-DWITH_EIGEN=OFF,libeigen gflags glog,"
-+PACKAGECONFIG[freetype] = "-DBUILD_opencv_freetype=ON,-DBUILD_opencv_freetype=OFF,freetype,"
- PACKAGECONFIG[gphoto2] = "-DWITH_GPHOTO2=ON,-DWITH_GPHOTO2=OFF,libgphoto2,"
- PACKAGECONFIG[gstreamer] = "-DWITH_GSTREAMER=ON,-DWITH_GSTREAMER=OFF,gstreamer1.0 gstreamer1.0-plugins-base,"
- PACKAGECONFIG[gtk] = "-DWITH_GTK=ON,-DWITH_GTK=OFF,gtk+3,"
 -- 
-2.11.0
-
+Jacobo
 
