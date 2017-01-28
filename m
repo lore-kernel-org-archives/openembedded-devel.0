@@ -1,46 +1,18 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id D04DC7199A
+Return-Path: <obi@opendreambox.org>
+X-Greylist: delayed 324 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 28 Jan 2017 20:25:27 UTC
+Received: from mail.saftware.de (mail.saftware.de [83.141.3.46])
+	by mail.openembedded.org (Postfix) with ESMTP id A48A271AFA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Jan 2017 20:09:54 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id 204so27845519pge.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Jan 2017 12:09:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=a3C9EaF7ov/p3wDJLtL0X0DVwg3URWpi8tzLqjWi+YU=;
-	b=SaEvhbiSY+BBdAYzXiRnsqfvx3LjsGbFcWdrRC5itJ6MTPxPaDYlwWS3b5DTCk4JtV
-	XoOcAyZNMUg5+VRqK+BYDPeHdxiAe2qcoiip1nMRD8x5gGMxLo/e+pXYQjWz5tsztsDc
-	E8Pe7XNGU4ln/OtP/NnN5qRPxFynTbBAdW7MCUjhxDVhzIQ1tFkLmYXYLn4PBXSysbbJ
-	QbKPcFrR6HYsOP/b7P0QGc29bLd858YqZkl9lR9f95/t4MQ64TgKj7wqzvgSV3pL3pMd
-	yfxROUrK5e7qCkdGmnaVjd1woQAVvtUHpg1hvPlp2CEgMN7Djx13CYSIqncsE0z9QpAM
-	fBlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=a3C9EaF7ov/p3wDJLtL0X0DVwg3URWpi8tzLqjWi+YU=;
-	b=sjkkpKyHLdUuSxSiAPE/73woV/esuuxepQkzHi3PKH4FNlKoF+hEU6sbFLGxgthM0B
-	L32xNuFKiU4EXn3J7qMRWZgEW0Cy2W9USPvCjk1FRZKtExEdX1DFdGmuXQB7OKIF4t2u
-	ASXlv3JQsIsgzUTBmiva3gPT9Xm0YOkQ4guFLHk28cKhvr5hvUYIEuZ6R7oHW0Q0GO+Q
-	KXzgX4COBHhr6cp6LXF+gYwAasi4Dn/1bw49SIpnV0VObMsKtCg4hOB4nlqXPeyHLjIW
-	YphCq9gwHfxlkLD0z51X9xgxvsTtz+L7NTzTvFnARLVj3P8KjJ5n0KwVvXQa2+WH/GKm
-	xz8A==
-X-Gm-Message-State: AIkVDXKortlPu+NcyPKE88e8wEF2Y+2BPHygKV2AZHrcV9iomvLpBUdpQj3JIXcHGXB2Bw==
-X-Received: by 10.84.199.194 with SMTP id d2mr21314968plh.134.1485634195023;
-	Sat, 28 Jan 2017 12:09:55 -0800 (PST)
-Received: from akuster-ThinkPad-X240.mvista.com
-	([2601:202:4001:9ea0:a85d:1e1f:8a34:2074])
-	by smtp.gmail.com with ESMTPSA id
-	v4sm20830960pfb.36.2017.01.28.12.09.54
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 28 Jan 2017 12:09:54 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster@mvista.com,
-	openembedded-devel@lists.openembedded.org
-Date: Sat, 28 Jan 2017 12:09:53 -0800
-Message-Id: <1485634193-30863-1-git-send-email-akuster808@gmail.com>
+	Sat, 28 Jan 2017 20:25:27 +0000 (UTC)
+Received: by p910.zcs.saftware.de (Postfix, from userid 1000)
+	id 66FD0AD00571; Sat, 28 Jan 2017 21:18:46 +0100 (CET)
+From: Andreas Oberritter <obi@opendreambox.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 28 Jan 2017 21:18:26 +0100
+Message-Id: <1485634706-24848-1-git-send-email-obi@opendreambox.org>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-perl][PATCH] libnet-ssleay-perl: fix build error
+Subject: [meta-python][PATCH] python-cffi: Don't overwrite inherited dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,32 +25,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Jan 2017 20:09:57 -0000
+X-List-Received-Date: Sat, 28 Jan 2017 20:25:29 -0000
 
-../../libexec/i586-oe-linux/gcc/i586-oe-linux/6.3.0/ld: cannot find -lssl -lcrypto -lz
-| collect2: error: ld returned 1 exit status
-| Makefile:492: recipe for target 'blib/arch/auto/Net/SSLeay/SSLeay.so' failed
-| make: *** [blib/arch/auto/Net/SSLeay/SSLeay.so] Error 1
+Otherwise setuptools won't be found.
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ meta-python/recipes-devtools/python/python-cffi.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
-index cfd6f51..f347942 100644
---- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
-+++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
-@@ -32,8 +32,7 @@ inherit cpan ptest
+diff --git a/meta-python/recipes-devtools/python/python-cffi.inc b/meta-python/recipes-devtools/python/python-cffi.inc
+index 12da19f..21e41c1 100644
+--- a/meta-python/recipes-devtools/python/python-cffi.inc
++++ b/meta-python/recipes-devtools/python/python-cffi.inc
+@@ -1,7 +1,7 @@
+ SUMMARY = "Foreign Function Interface for Python calling C code"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
+-DEPENDS = "libffi ${PYTHON_PN}-pycparser"
++DEPENDS += "libffi ${PYTHON_PN}-pycparser"
  
- EXTRA_CPANFLAGS = "LIBS='-L=${STAGING_LIBDIR} -L=${STAGING_BASELIBDIR}' \
-                    INC=-I=${STAGING_INCDIR} \
--                   'EXTRALIBS=-lssl -lcrypto -lz' \
--                   'LDLOADLIBS=-lssl -lcrypto -lz' \
-+                   '-lssl -lcrypto -lz' \
-                   "
- 
- do_configure_prepend() {
+ SRC_URI[md5sum] = "b8fa7ccb87790531db3316ab17aa8244"
+ SRC_URI[sha256sum] = "563e0bd53fda03c151573217b3a49b3abad8813de9dd0632e10090f6190fdaf8"
 -- 
 2.7.4
 
