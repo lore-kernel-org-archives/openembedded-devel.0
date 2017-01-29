@@ -1,29 +1,45 @@
-Return-Path: <alexandre.belloni@free-electrons.com>
-Received: from mail.free-electrons.com (mail.free-electrons.com [62.4.15.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 2747E71C90
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 6716C71974
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Jan 2017 02:00:34 +0000 (UTC)
-Received: by mail.free-electrons.com (Postfix, from userid 110)
-	id 7C10F21D02; Sun, 29 Jan 2017 03:00:37 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
-	mail.free-electrons.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED,SHORTCIRCUIT
-	shortcircuit=ham autolearn=disabled version=3.4.0
-Received: from localhost (unknown [88.191.26.124])
-	by mail.free-electrons.com (Postfix) with ESMTPSA id 54E3920E37
+	Sun, 29 Jan 2017 09:21:53 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id c85so69526119wmi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Jan 2017 03:00:37 +0100 (CET)
-Date: Sun, 29 Jan 2017 03:00:32 +0100
-From: Alexandre Belloni <alexandre.belloni@free-electrons.com>
+	Sun, 29 Jan 2017 01:21:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=edC2nfTcQb+Gg/g4bs003UzSUs4H2ukJ1UVuJ8f1NY8=;
+	b=eyj8HemkzFJSJN9r7p5AlsKGNm6BV8NFykgAO5kmzvr6p6bI6O6Jpc0FPNfRyiBwkA
+	A312RhEZZL+42Unxv5WMQliCnNYkRGkfWs20GNvx3CqmM+gQLm9S6JXXAUT1hi7pqagl
+	WUz6DnleGaRqo0RnZhB0qjTIfBsnmA9pQIOuRFMu3AIOZDoyWazjgxujwYJICVGun+ar
+	+lRnO6Yttkkc9bYSeQahmhDhmTbmKeCMKKSwlNxNdD+7ZnOZCgUrvV9pzYb/JIZpgS6d
+	OPIwjKmtF9eahvnSPkiuFw2BAGEHL3OjJyl/UIZP6ufiRW1Kt1AXtL07ExGf59ae0RFD
+	GMCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=edC2nfTcQb+Gg/g4bs003UzSUs4H2ukJ1UVuJ8f1NY8=;
+	b=h56W7udXhpOW9/VCgSUZYeTRKJUjibNa6odeIQrIZS8Tuk1LWFUFWuRWw26VJXcr1I
+	UYZuUCm1T0Hh8wntm5CsHGkBfaeIB8iv3mq2dl9xNc6Rr25tcGLcWsbDrk6HtgTAkF3s
+	wg436Oxfh3qft1cAM7Kxo6t1NJggP7dUFifixnIq1H/+2xLEX4Ohhs5C85UI08VM803o
+	O3XUpAJpcKcrMTdj2N3bV7NEwU3AtfMyiaQHODLLhWU7wf7pfbcN+5WvYAFGJXChZPMC
+	Mj2J3/O2+xJG3xoQIuNJMTupaE7krBiGs6hxQ8MXvkUl4vwwNUcAI1LCrAM3fzDO1GAC
+	udcA==
+X-Gm-Message-State: AIkVDXKK6N7bahRHv33IqO2Pb1a+seQYFKj0KnaEj9XxcFMZclqkXsjzD9WsBzJjRqqc5Q==
+X-Received: by 10.28.175.138 with SMTP id y132mr10400044wme.86.1485681713782; 
+	Sun, 29 Jan 2017 01:21:53 -0800 (PST)
+Received: from ThinkPad-T520.homenet.telecomitalia.it
+	(host49-62-dynamic.24-79-r.retail.telecomitalia.it. [79.24.62.49])
+	by smtp.gmail.com with ESMTPSA id
+	a13sm9471896wma.13.2017.01.29.01.21.52
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 29 Jan 2017 01:21:53 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170129020032.t6pwviyuc5xbfazk@piout.net>
-References: <20170127190606.9365-1-alexandre.belloni@free-electrons.com>
-	<dde007b9-0769-58ad-86ee-62829b6821c1@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <dde007b9-0769-58ad-86ee-62829b6821c1@gmail.com>
-User-Agent: NeoMutt/20161126 (1.7.1)
-Subject: Re: [PATCH][meta-webserver] nginx: handle systemd service file
+Date: Sun, 29 Jan 2017 10:21:44 +0100
+Message-Id: <1485681704-4762-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-handheld] Pull Request 20160129
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,48 +52,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Jan 2017 02:00:35 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 29 Jan 2017 09:21:58 -0000
 
-On 27/01/2017 at 11:14:41 -0800, Khem Raj wrote:
-> 
-> 
-> On 1/27/17 11:06 AM, Alexandre Belloni wrote:
-> > Inherit the systemd class so the service file is properly handled.
-> > Note that by default, the service file will be installed but not enabled.
-> > 
-> > Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>
-> > ---
-> >  meta-webserver/recipes-httpd/nginx/nginx.inc | 5 ++++-
-> >  1 file changed, 4 insertions(+), 1 deletion(-)
-> > 
-> > diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> > index 36f2ac6d71e8..fe943d7c290c 100644
-> > --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> > +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> > @@ -20,7 +20,10 @@ SRC_URI = " \
-> >      file://nginx.service \
-> >  "
-> >  
-> > -inherit update-rc.d useradd
-> > +inherit update-rc.d useradd systemd
-> > +
-> > +SYSTEMD_SERVICE_${PN} = "nginx.service"
-> > +SYSTEMD_AUTO_ENABLE_${PN} = "disable"
-> 
-> why disabled by default if someone is including nginx he/she might be
-> interested in using it.
-> 
+The following changes since commit 3bf35a8a1da5b1ef63acd70988fcb89128297d97:
 
-I mimicked what is done for apache2. I would also prefer that it is
-started automatically when selected. I simply didn't know what was the
-preference for meta-webserver.
+  linux-handheld_4.4: update from 4.4.8 to 4.4.10 (2016-05-11 22:33:22 +0200)
 
-I'll resend without disabling if that is fine for everybody.
+are available in the git repository at:
+
+  git://github.com/LinuxPDA/meta-handheld 
+
+for you to fetch changes up to ab58a164d0638b98f221641135a619a602c7de6c:
+
+  meta-handheld: remove unneeded noexec tasks (2017-01-29 10:18:29 +0100)
+
+----------------------------------------------------------------
+Andrea Adami (8):
+      linux-kexecboot_4.4: fix KERNEL_IMAGE_BASE_NAME
+      linux-gcw0-kexecboot_4.0: fix KERNEL_IMAGE_BASE_NAME
+      gcw0.conf: catch up with renaming of KERNEL_OUTPUT in oe-core
+      linux-gcw0: provide recipe for the 4.7 kernel.
+      linux-gcw0-kexecboot: update to 4.17
+      linux-gcw0_4.0: remove old recipe
+      linux-gcw0-kexecboot_4.0: remove old recipe
+      meta-handheld: remove unneeded noexec tasks
+
+ conf/machine/gcw0.conf                             |  2 +-
+ recipes-bsp/zaurus-utils/zaurus-legacy-tar.bb      |  4 +-
+ .../gcw0/defconfig                                 | 54 +++++++++++++++-------
+ .../gcw0/defconfig                                 | 52 +++++++++++++++------
+ recipes-kernel/linux/linux-gcw0-kexecboot_4.0.bb   | 30 ------------
+ recipes-kernel/linux/linux-gcw0-kexecboot_4.7.bb   | 30 ++++++++++++
+ .../linux/{linux-gcw0_4.0.bb => linux-gcw0_4.7.bb} |  5 +-
+ recipes-kernel/linux/linux-kexecboot_4.4.bb        | 32 ++++++-------
+ 8 files changed, 126 insertions(+), 83 deletions(-)
+ rename recipes-kernel/linux/{linux-gcw0-4.0 => linux-gcw0-4.7}/gcw0/defconfig (82%)
+ rename recipes-kernel/linux/{linux-gcw0-kexecboot-4.0 => linux-gcw0-kexecboot-4.7}/gcw0/defconfig (83%)
+ delete mode 100644 recipes-kernel/linux/linux-gcw0-kexecboot_4.0.bb
+ create mode 100644 recipes-kernel/linux/linux-gcw0-kexecboot_4.7.bb
+ rename recipes-kernel/linux/{linux-gcw0_4.0.bb => linux-gcw0_4.7.bb} (60%)
 
 -- 
-Alexandre Belloni, Free Electrons
-Embedded Linux and Kernel engineering
-http://free-electrons.com
+2.7.4
+
 
