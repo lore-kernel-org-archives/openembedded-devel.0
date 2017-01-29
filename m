@@ -1,45 +1,29 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
-	[209.85.217.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 914E2773A2
+Return-Path: <alexandre.belloni@free-electrons.com>
+Received: from mail.free-electrons.com (mail.free-electrons.com [62.4.15.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 2747E71C90
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Jan 2017 01:16:19 +0000 (UTC)
-Received: by mail-ua0-f196.google.com with SMTP id 96so27665418uaq.2
+	Sun, 29 Jan 2017 02:00:34 +0000 (UTC)
+Received: by mail.free-electrons.com (Postfix, from userid 110)
+	id 7C10F21D02; Sun, 29 Jan 2017 03:00:37 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	mail.free-electrons.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED,SHORTCIRCUIT
+	shortcircuit=ham autolearn=disabled version=3.4.0
+Received: from localhost (unknown [88.191.26.124])
+	by mail.free-electrons.com (Postfix) with ESMTPSA id 54E3920E37
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Jan 2017 17:16:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=maSMvZ+yEsqG5GmjxdSdT3RAEdXPMVx7sJwLZGSfhxI=;
-	b=oi/W5rYdUEg4XJHnUbpF98AcQ7zcDywYnP54ectoCsijUN9wBqMqtiuJEQYJxENOog
-	0VanDPWh/FSg/b9f6084CWLn5sa+7ADSxmkCFUKHhpTAn9biMh8EVUHqMGEowJ5h3TiU
-	UjTAknUadNyE2i766Y0lTwSIxrNmjHpUfiObE3E8UAcgWPgxCUzyu5nYSrT4/1hTSxaI
-	NmzMYq5LTNbz/5ztJWRX8ZIhayDDhx/rc+Q7tLHNHzUjtI3ttX6nrR2ZNMJNIo/1tWul
-	lc1xV3zFj7B2+WbTQZuI25/BRnKMHJCqm/10xZq3jDi7+MFiTRN9yUYWnfuSN8bZPBvQ
-	wH8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=maSMvZ+yEsqG5GmjxdSdT3RAEdXPMVx7sJwLZGSfhxI=;
-	b=CoH6Gu4HDtfHmqoOXc9N4xqGwGqD7iXgLwhHIjbopW+RLAwOmV9CGSeCWQZGCP7Pf+
-	UFVNUTvHhFUlXoDWo72b1H9dGtczjWW8yfxHRHoRBgXjt0LcLTxbdn/JseuzzU3v1sqs
-	WiaZhwiDj8HDZMuyyqy7mf3hSPHJQcsLDCS5hsWUX9dp6PVMNlGGDbQEsfp6TeCz4cUs
-	TEdKFK72LAW6lhl2C49WgNLdZcmPvL8G34kZF+8j82h0f6rN54YRA2mpbkKKdMp26KYC
-	nL9Brx770P/UISRGhNmxT+qFe0CZrBTFqVS8PTQ/mvxuJ28yXjyRDggi0W4VjrRq0lDl
-	QPxw==
-X-Gm-Message-State: AIkVDXJ75iZH+WJKbaah+1GM1KGYAPdCvMPoASkaAqiQabNlrTXb9QoYnu98QMAiyCwE4uNCXnKSaOTnmTM5aA==
-X-Received: by 10.176.66.66 with SMTP id i60mr8335025uai.131.1485652579894;
-	Sat, 28 Jan 2017 17:16:19 -0800 (PST)
+	Sun, 29 Jan 2017 03:00:37 +0100 (CET)
+Date: Sun, 29 Jan 2017 03:00:32 +0100
+From: Alexandre Belloni <alexandre.belloni@free-electrons.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20170129020032.t6pwviyuc5xbfazk@piout.net>
+References: <20170127190606.9365-1-alexandre.belloni@free-electrons.com>
+	<dde007b9-0769-58ad-86ee-62829b6821c1@gmail.com>
 MIME-Version: 1.0
-Received: by 10.159.48.222 with HTTP; Sat, 28 Jan 2017 17:15:49 -0800 (PST)
-In-Reply-To: <1485634193-30863-1-git-send-email-akuster808@gmail.com>
-References: <1485634193-30863-1-git-send-email-akuster808@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 28 Jan 2017 17:15:49 -0800
-Message-ID: <CAMKF1soqDfNtAaJYKzuoqz7fpKZ=ps2R26sjiXYZ=t=kO6mD4A@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Cc: akuster <akuster@mvista.com>
-Subject: Re: [meta-perl][PATCH] libnet-ssleay-perl: fix build error
+In-Reply-To: <dde007b9-0769-58ad-86ee-62829b6821c1@gmail.com>
+User-Agent: NeoMutt/20161126 (1.7.1)
+Subject: Re: [PATCH][meta-webserver] nginx: handle systemd service file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,45 +36,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Jan 2017 01:16:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 29 Jan 2017 02:00:35 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sat, Jan 28, 2017 at 12:09 PM, Armin Kuster <akuster808@gmail.com> wrote:
-> ../../libexec/i586-oe-linux/gcc/i586-oe-linux/6.3.0/ld: cannot find -lssl -lcrypto -lz
-> | collect2: error: ld returned 1 exit status
-> | Makefile:492: recipe for target 'blib/arch/auto/Net/SSLeay/SSLeay.so' failed
-> | make: *** [blib/arch/auto/Net/SSLeay/SSLeay.so] Error 1
->
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
->
-> diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
-> index cfd6f51..f347942 100644
-> --- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
-> +++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
-> @@ -32,8 +32,7 @@ inherit cpan ptest
->
->  EXTRA_CPANFLAGS = "LIBS='-L=${STAGING_LIBDIR} -L=${STAGING_BASELIBDIR}' \
->                     INC=-I=${STAGING_INCDIR} \
-> -                   'EXTRALIBS=-lssl -lcrypto -lz' \
-> -                   'LDLOADLIBS=-lssl -lcrypto -lz' \
-> +                   '-lssl -lcrypto -lz' \
+On 27/01/2017 at 11:14:41 -0800, Khem Raj wrote:
+> 
+> 
+> On 1/27/17 11:06 AM, Alexandre Belloni wrote:
+> > Inherit the systemd class so the service file is properly handled.
+> > Note that by default, the service file will be installed but not enabled.
+> > 
+> > Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>
+> > ---
+> >  meta-webserver/recipes-httpd/nginx/nginx.inc | 5 ++++-
+> >  1 file changed, 4 insertions(+), 1 deletion(-)
+> > 
+> > diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
+> > index 36f2ac6d71e8..fe943d7c290c 100644
+> > --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
+> > +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+> > @@ -20,7 +20,10 @@ SRC_URI = " \
+> >      file://nginx.service \
+> >  "
+> >  
+> > -inherit update-rc.d useradd
+> > +inherit update-rc.d useradd systemd
+> > +
+> > +SYSTEMD_SERVICE_${PN} = "nginx.service"
+> > +SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+> 
+> why disabled by default if someone is including nginx he/she might be
+> interested in using it.
+> 
 
-Similar to LIBS and INC, there should be a LDFLAGS or some such flag.
-I guess it needs
-to go there.
+I mimicked what is done for apache2. I would also prefer that it is
+started automatically when selected. I simply didn't know what was the
+preference for meta-webserver.
 
->                    "
->
->  do_configure_prepend() {
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+I'll resend without disabling if that is fine for everybody.
+
+-- 
+Alexandre Belloni, Free Electrons
+Embedded Linux and Kernel engineering
+http://free-electrons.com
 
