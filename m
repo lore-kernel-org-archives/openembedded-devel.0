@@ -1,45 +1,22 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 2059271C84
+Return-Path: <pascal.bach@siemens.com>
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+	by mail.openembedded.org (Postfix) with ESMTP id 88FF8772E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jan 2017 01:15:57 +0000 (UTC)
-Received: by mail-wm0-f45.google.com with SMTP id r141so11868907wmg.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Jan 2017 17:15:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=V1QZf+iJBDE2DLBIKVKVTBFg20I3dLanJKtM+OrtrOc=;
-	b=mZjGHJS0emsy5WK0XvQCy6HqAajX0WnCyAlxeKXPKEys4KfcgmNU/dEYC4udkVzhZt
-	HTM2bh2QaRVPPE338oN9LTQebsHIjpOzOU4xPShom344nNbEDiHIYxmQvnw++qRqW7dl
-	iSElpSD4GLJdbDpT7hiaf+y1cr66b6GnCCc1vr4Sa9CtfdkD7ZmrlnaNKiCvPKupxpgZ
-	b63iByvx/NcFiaz8YvcwVpkY8rFcL5tEIpbZiEiCS5ImYZJJqXuu0iYAWm5e2csyDMV0
-	xSjALPrJH+6FobcSV3W0sheUTVFYsv14/+BhXt2eaZYnBMQ3ON51xaAiVbWHIVJYohKv
-	yUEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=V1QZf+iJBDE2DLBIKVKVTBFg20I3dLanJKtM+OrtrOc=;
-	b=sk6T4ZKWh4g9XplnsPKCT7+6/SXokVw+IIfE4gRwg7M3sFkTse+CdlVhUGebbRw5lf
-	Lotvo2ZZYTlAqYRg+LiXt0I+XCWyR6JSKkvxL7Tl4QXMeSHA+Z0bMGeUv3+PykrinOXv
-	VMSl2ntkKFrRyIW3jKWPuK/xXzcGbJDgISLl5QJ7eA5Jto52SBe/E7fmAvIdF6DqM3BW
-	hIMLs/JPNDFsn8a/36x7Pwfq224I8Tiq2azLvZLLVTwP6meyBk5Vtyri0Guz1/ChUJse
-	uVX3iR83PLP4OVN90G/Y1qd0i3Pfg76ii+ep7/OgXHwEM4v+J2TvAf0sIoYLa5CBB5Pj
-	bSsA==
-X-Gm-Message-State: AIkVDXLJG6120pDBnCJeM9fizPN9CER/j1VnKAv1LQh9VLnPG1QIzt6Uv1hXEncTpQLpl1ezuIChqNZQTFkX5A==
-X-Received: by 10.223.154.165 with SMTP id a34mr15952421wrc.193.1485738957577; 
-	Sun, 29 Jan 2017 17:15:57 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.194.164.227 with HTTP; Sun, 29 Jan 2017 17:15:37 -0800 (PST)
-In-Reply-To: <ba9f9b77-b2d7-5f10-3b48-14f3c8ea53e7@gmail.com>
-References: <20170127152157.15342-1-ricardo.ribalda@gmail.com>
-	<ba9f9b77-b2d7-5f10-3b48-14f3c8ea53e7@gmail.com>
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Mon, 30 Jan 2017 02:15:37 +0100
-Message-ID: <CAPybu_3Zgc216GEvkczZjgC+d9PhAN=J-By5HaPM84448X_CTg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] opencv: Configure freetype via PACKAGECONFIG
+	Mon, 30 Jan 2017 08:02:30 +0000 (UTC)
+Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id v0U82R5e001276
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
+	Mon, 30 Jan 2017 09:02:27 +0100
+Received: from dev.sbt.siemens.com (MD1FZU9C.ad001.siemens.net [139.16.79.32])
+	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id v0U82RZs031593;
+	Mon, 30 Jan 2017 09:02:27 +0100
+From: Pascal Bach <pascal.bach@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 30 Jan 2017 09:01:59 +0100
+Message-Id: <1485763319-26390-1-git-send-email-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.1.4
+Cc: Pascal Bach <pascal.bach@nextrem.ch>
+Subject: [meta-python][PATCH] python3-multidict: make repeated builds work even without sphinx
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,27 +29,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2017 01:15:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 30 Jan 2017 08:02:32 -0000
 
-Hi Raj
+From: Pascal Bach <pascal.bach@nextrem.ch>
 
+Make clean was implicitly calling sphinx which lead to errors.
 
-On Fri, Jan 27, 2017 at 9:07 PM, Khem Raj <raj.khem@gmail.com> wrote:
->
->
-> On 1/27/17 7:21 AM, Ricardo Ribalda Delgado wrote:
->> Since: http://errors.yoctoproject.org/Errors/Details/117456/ opencv
->> freetype module fails to build.
->>
->
-> I wonder if we need to export RANLIB in configure
-> along with CC and CXX
+Signed-off-by: Pascal Bach <pascal.bach@nextrem.ch>
+---
+ ...w-calling-make-clean-without-sphinx-build.patch | 34 ++++++++++++++++++++++
+ .../python/python3-multidict_2.1.4.bb              |  2 ++
+ 2 files changed, 36 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-multidict/0001-Allow-calling-make-clean-without-sphinx-build.patch
 
-I would definitely like to try that out, but I am out of the office
-until the 15th. If you do not want to wait for me, you are more than
-welcome to send a patch. If I keep sending patched during our holidays
-my wife will have a valid excuse to escape with the barman :)
+diff --git a/meta-python/recipes-devtools/python/python3-multidict/0001-Allow-calling-make-clean-without-sphinx-build.patch b/meta-python/recipes-devtools/python/python3-multidict/0001-Allow-calling-make-clean-without-sphinx-build.patch
+new file mode 100644
+index 0000000..d1d7ef5
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-multidict/0001-Allow-calling-make-clean-without-sphinx-build.patch
+@@ -0,0 +1,34 @@
++From 39e13b4e3f7a1d1dd748e80cee241d511865d4e8 Mon Sep 17 00:00:00 2001
++From: Pascal Bach <pascal.bach@nextrem.ch>
++Date: Mon, 16 Jan 2017 21:29:12 +0100
++Subject: [PATCH] Allow calling make clean without sphinx-build
++
++Currently make clean fails without sphinx-build installed
++However sphinx-build is not really necessary to do a clean.
++This trick makes the docs/Makefile use the false binary instead of
++sphinx-build for the check when a clean is done.
++
++Upstream-Status: Submitted https://github.com/aio-libs/multidict/pull/41
++
++---
++ Makefile | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index 8f525f3..6d601e5 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -51,8 +51,8 @@ clean:
++ 	rm -rf coverage
++ 	rm -rf build
++ 	rm -rf cover
++-	make -C docs clean
++-	python setup.py clean
+++	make -C docs clean SPHINXBUILD=false
+++	python3 setup.py clean
++ 	rm -f multidict/_multidict.html
++ 	rm -f multidict/_multidict.c
++ 	rm -f multidict/_multidict.*.so
++-- 
++2.7.4
++
+diff --git a/meta-python/recipes-devtools/python/python3-multidict_2.1.4.bb b/meta-python/recipes-devtools/python/python3-multidict_2.1.4.bb
+index 4a36a3d..62895d2 100644
+--- a/meta-python/recipes-devtools/python/python3-multidict_2.1.4.bb
++++ b/meta-python/recipes-devtools/python/python3-multidict_2.1.4.bb
+@@ -5,5 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
+ 
+ inherit pypi setuptools3
+ 
++SRC_URI += "file://0001-Allow-calling-make-clean-without-sphinx-build.patch"
++
+ SRC_URI[md5sum] = "051d92edec87fd98e43ea83f3ce6072d"
+ SRC_URI[sha256sum] = "a77aa8c9f68846c3b5db43ff8ed2a7a884dbe845d01f55113a3fba78518c4cd7"
+-- 
+2.1.4
 
-Regards!
 
