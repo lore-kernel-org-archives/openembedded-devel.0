@@ -1,47 +1,52 @@
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-lf0-f46.google.com (mail-lf0-f46.google.com
-	[209.85.215.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 0CC4A7731D
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f48.google.com (mail-pg0-f48.google.com [74.125.83.48])
+	by mail.openembedded.org (Postfix) with ESMTP id EBBD47731D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jan 2017 16:33:43 +0000 (UTC)
-Received: by mail-lf0-f46.google.com with SMTP id z134so197325398lff.3
+	Mon, 30 Jan 2017 16:56:12 +0000 (UTC)
+Received: by mail-pg0-f48.google.com with SMTP id 3so43838587pgj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jan 2017 08:33:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=psKbJzLzxPvwmfNz0ecqy3L2KIbGPzurh8pfePVa2hk=;
-	b=cFV4lRu+IDeELT/WWzBpzuYjBnNbG6Rn6lCvGiJNjAeN5J7KeA5NMRRxT9PLteZQYf
-	/PdCw9vifCl3QvP8nHx8LYn6owvKpXsBeAJ61STFmFdfelrWz5wzujz3ZQ2D44zGbUq2
-	DgRMV7AEPrlMbWTXfWcjljvJUEKWJsysS0mIGV5Vea0O2kFNYVuEeTXJy7abErWDbR/c
-	C6mDVx7wQ/pLSEzhvNNx1j5A/j+6br6lX8RWsv89tQ4g+OsBRdHA0H/lmRJVjKbzpiCv
-	BelB4lA2W+pcFCcmjFCj3FZiYbjfdl0eS5/iyxUw8JAjfvO3yzDuf1ne10bwrxn2mls3
-	+YCg==
+	Mon, 30 Jan 2017 08:56:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:cc:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding;
+	bh=PWzDpctvVKXAIy4MvGSdNiRgVXmOMwfyzDKrkGsodxI=;
+	b=n9iGmQ05cDiwnP1EXy44DxrNarh8IspAMqDdv8U/i9h2PAtrbcJnQsxcgfLcs6qjlT
+	v8no54/SyFi9LNWBjNxfVirxhDsU27sVt4yQg0j8AQErEugblrPweE0YIz8L4SJNO0OY
+	SV6ALJ7HWBk6C3HXAM06areGejglFdJj/AcvZuty3V5vtbxToE/7UeBbifRnwCq52Yu8
+	KIry8sD16oOH6heLC077Sl3uoUE9PfyVh9kr9Oxl0pznVrv3j061uRFf8M9k9Q3skiOt
+	UZezWCvmLbfnsz1VThfYmZLg1v9AwQrJqlCL756kDIYJ7FxppD73n4Q87YMEiSLsl/KL
+	+6bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=psKbJzLzxPvwmfNz0ecqy3L2KIbGPzurh8pfePVa2hk=;
-	b=aYE2XX09wAR9DYwl/t872yDgh9+/OmwWpnasv8KDr2FOiJrttueZwspBNSNldFcsi0
-	tsIrc3SlLizphu1oejYW3P1cr91+eIjmriiUQobf42yRs5sPLFk83Yufp2TNbvy5GjqP
-	otHP7aGJEnlB7K+34UhCIz79zSW1CPKWDPeevlBIBgwp+ou/AuaJRLEl7not5/6IClzJ
-	wt4TqPsN2cgGb0Al69CHtuvi3wUCMcpbejYieEXmOodrtDNZVXBUw1P80IQSkpqkfkJO
-	b+To+gnhEJqQiQHApuxFmmDCqHVXs5DjUeZ2wW45kKy1GyQJy8k2wyBtneB8J3nmrQn/
-	Nxzw==
-X-Gm-Message-State: AIkVDXI9651dx5CVYwWaXnMyiHBoWS5SfM3s8RUpb8VHE0I6okJjtiw0gILEhX9kW3RarXYvK5xr/djkoqVrMg==
-X-Received: by 10.46.1.201 with SMTP id f70mr362722lji.21.1485794023090; Mon,
-	30 Jan 2017 08:33:43 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.25.163.200 with HTTP; Mon, 30 Jan 2017 08:33:22 -0800 (PST)
-X-Originating-IP: [189.114.111.135]
-In-Reply-To: <20170130162926.28180-1-fabio.berton@ossystems.com.br>
-References: <20170130162926.28180-1-fabio.berton@ossystems.com.br>
-From: Fabio Berton <fabio.berton@ossystems.com.br>
-Date: Mon, 30 Jan 2017 14:33:22 -0200
-Message-ID: <CAAPZna2+AQA1SbqdAg9P+hiu_QUAe+2wxQubED717v9-rdvBKw@mail.gmail.com>
+	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=PWzDpctvVKXAIy4MvGSdNiRgVXmOMwfyzDKrkGsodxI=;
+	b=F3Z++6+mNiSErgOrv+ydXb/rF2Djv/Z2nXplrZ4fl24y53B4vgoO1CEBGf3n/Mj7Mo
+	hv7FFOXK6EytM9reQSPXkGQElh4qthVlghgzMp5LUWo+iYZLVemJs/zg871Bk1GqkmWw
+	Kbhyf1RGZ2VaoPrky7/9Xl1kO7Hts/kN1NCR1eAqqmS7vcPPAXGjKVljpD1bDkRUDoSz
+	qe8Zu3gh2JHcqmheCphGPmbwMNu1EnmOv8aJhKyM1z0TU237pWKfWtZ5tu+4LW1yzxpg
+	rcOVFWHV+Lz8SJUqNknc4oNZdy683YaaBf+rBY+l2qsyUjrIH6pBTULiWFEwnp2a0TeH
+	23UA==
+X-Gm-Message-State: AIkVDXLjqcSAASO3BiLgz6NA+U/Mt28h9TX5Cy0jInH6a2nfR83Zua/yNtLmqBxdGjWJOw==
+X-Received: by 10.99.100.3 with SMTP id y3mr24791071pgb.36.1485795372698;
+	Mon, 30 Jan 2017 08:56:12 -0800 (PST)
+Received: from ?IPv6:2601:202:4001:9ea0:d8f8:ce4a:79c4:7a9d?
+	([2601:202:4001:9ea0:d8f8:ce4a:79c4:7a9d])
+	by smtp.gmail.com with ESMTPSA id
+	m12sm34143139pgc.46.2017.01.30.08.56.11
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 30 Jan 2017 08:56:12 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-networking][PATCH] lldpd: Update to version 0.9.6
+References: <20170127142639.24159-1-nicolas.ferre@atmel.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <e4c57405-7efd-8b06-634e-4a17615ad659@gmail.com>
+Date: Mon, 30 Jan 2017 08:56:11 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.5.1
+MIME-Version: 1.0
+In-Reply-To: <20170127142639.24159-1-nicolas.ferre@atmel.com>
+Cc: Nicolas Ferre <nicolas.ferre@atmel.com>
+Subject: Re: [meta-oe][morty][PATCH] nbench-byte: fix project URL
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,102 +59,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2017 16:33:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 30 Jan 2017 16:56:14 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Note:
-This [1] patch should be applied to build lldpd.
 
-[1] https://patchwork.openembedded.org/patch/136616/
 
-On Mon, Jan 30, 2017 at 2:29 PM, Fabio Berton <fabio.berton@ossystems.com.br
-> wrote:
+On 01/27/2017 06:26 AM, Nicolas Ferre wrote:
+> www.tux.org/~mayer/linux/ location can't be found anymore. It seems that the
+> www.math.utah.edu website gives an alternative to reach nbench-byte tool: use
+> this one to fix the issue.
 
-> This update includes following changes:
+In my morty-next
+
+thanks,
+Armin
 >
-> lldpd (0.9.6)
->   * Changes:
->     + Add a compile-time option to restore pre-0.9.2 JSON format (when
->       using json-c). Use `--enable-json0` to enable this option.
->     + Support for newer ethtool interface on Linux
->       (ETHTOOL_GLINKSETTINGS) and additional speed settings.
->     + Current MAU type is displayed even when autoneg is off.
->     + Increase netlink receive buffer by default. Can be changed at
->       compile-time through ./configure.
->   * Fixes:
->     + Correctly parse LLDP-MED civic address when the length of the
->       TLV exceeds the length of the address.
->     + Fix 100% CPU on some rare error condition.
->     + Fix lost timer when an interface is enslaved on Linux.
->
-> lldpd (0.9.5)
->   * Changes:
->     + More Ethernet media supported. However, RFC4836 is quite
->       out-of-date with respected to 10G+ speeds, bringing some
->       inaccuracies.
->     + Directly get media information for an interface without using
->       the privileged process.
->     + LLDP-MED capability TLV is not sent when LLDP-MED is not
->     enabled,
->       even if other LLDP-MED TLV are present.
->   * Fixes:
->     + Compilation fix with older versions of GCC.
->     + Don't use ethtool at all to get real MAC address for enslaved
->       devices (always use /proc).
->
-> lldpd (0.9.4)
->   * Changes:
->     + Make lldpd accepts a `-p` option to specify the PID file.
->     + Ability to change multicast MAC address to two additional values
->       to reach customer bridges.
->     + lldpcli will now display chassis TTL when detailed view is
->     enabled.
->   * Fixes:
->     + Fix setting of local value for port ID.
->     + Fix compilation with BSD make.
->     + Ensure lldpcli returns an error code on invalid commands.
->
-> lldpd (0.9.3)
->   * Changes:
->     + Do not rely on support of constructors for liblldpctl.
->     + Always log to stderr (even in addition to syslog).
->     + `lldpcli watch` accepts a limit on the number of received
->     events.
->   * Fixes:
->     + `lldpcli -f {xml,json} watch` should work now.
->     + Consider `veth` interfaces as physical interfaces.
->
-> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+> Signed-off-by: Nicolas Ferre <nicolas.ferre@microchip.com>
 > ---
->  .../recipes-daemons/lldpd/{lldpd_0.9.2.bb => lldpd_0.9.6.bb}          |
-> 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-networking/recipes-daemons/lldpd/{lldpd_0.9.2.bb =>
-> lldpd_0.9.6.bb} (94%)
+>   meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_0.9.2.bb
-> b/meta-networking/recipes-daemons/lldpd/lldpd_0.9.6.bb
-> similarity index 94%
-> rename from meta-networking/recipes-daemons/lldpd/lldpd_0.9.2.bb
-> rename to meta-networking/recipes-daemons/lldpd/lldpd_0.9.6.bb
-> index 77ed09f54..0cd063720 100644
-> --- a/meta-networking/recipes-daemons/lldpd/lldpd_0.9.2.bb
-> +++ b/meta-networking/recipes-daemons/lldpd/lldpd_0.9.6.bb
-> @@ -11,8 +11,8 @@ SRC_URI = "\
->      file://lldpd.default \
->      "
->
-> -SRC_URI[md5sum] = "b809887bc927fb558fd5dd64b6c0a494"
-> -SRC_URI[sha256sum] = "6054f29d41faf32186a22331853a29
-> 9c87f4419b4332df4a564f76a139305a32"
-> +SRC_URI[md5sum] = "0dcdee7c1b3c62362d73f6508c11edae"
-> +SRC_URI[sha256sum] = "e74e2dd7e2a233ca1ff385c925ddae
-> 2a916d302819d1433741407d2f8fb0ddd8"
->
->  inherit autotools update-rc.d useradd systemd pkgconfig bash-completion
->
-> --
-> 2.11.0
->
->
+> diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+> index 56272d9852ce..4ec1c63751be 100644
+> --- a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+> +++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+> @@ -1,12 +1,12 @@
+>   DESCRIPTION = "BYTE Magazine's native benchmarks (also called BYTEmark) \
+>   designed to expose the capabilities of a system's CPU, FPU, \
+>   and memory system."
+> -HOMEPAGE = "http://www.tux.org/~mayer/linux/"
+> +HOMEPAGE = "http://www.math.utah.edu/~mayer/linux/"
+>   LICENSE = "nbench-byte"
+>   LIC_FILES_CHKSUM = "file://README;beginline=57;endline=66;md5=020ef579f8fa5746b7e307a54707834f"
+>   SECTION = "console/utils"
+>   
+> -SRC_URI = "http://www.tux.org/~mayer/linux/${BP}.tar.gz \
+> +SRC_URI = "http://www.math.utah.edu/~mayer/linux/${BP}.tar.gz \
+>              file://nbench_32bits.patch \
+>              file://Makefile-add-more-dependencies-to-pointer.h.patch"
+>   
+
 
