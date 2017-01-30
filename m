@@ -1,45 +1,45 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id D685C77355
+Return-Path: <ricardo.ribalda@gmail.com>
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 2059271C84
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Jan 2017 09:48:45 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id c85so69640552wmi.1
+	Mon, 30 Jan 2017 01:15:57 +0000 (UTC)
+Received: by mail-wm0-f45.google.com with SMTP id r141so11868907wmg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Jan 2017 01:48:46 -0800 (PST)
+	Sun, 29 Jan 2017 17:15:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=AfXAsqgSeGkDclAAsRdh4d8VshguMvv7Lc7BLO7pTEk=;
-	b=GKc00tFAZ/fgmuG8jSXOPdfPNS7k8TaWvLmHg1xQ9DLvkMKvoPgH8FunEObrp/HOBV
-	feHJwwamsaMBt7+XnUk7JKjBtiJ01DbQyK8qyCpU3qlWE++OHdKMOcCDThbw/lRTtdE2
-	wqDLISNsk1FUlBb5gtp9EclxcLpq7MohiFLGPWADyfFwQ58G8lHqb8qfHxeSz43/X0U+
-	UmHOYZYsIitShiAMm6kJUQjGgkNvry1VFf4N/Xtc9W5j3VPke08SBps3/rjvfRS3KF0L
-	Mh2BabB5/2WFqQKjRl4frXvs8nq1adbUeH4m6D2yDDX84YL23AyXWNVO/moWIAnVh05V
-	UBMQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=V1QZf+iJBDE2DLBIKVKVTBFg20I3dLanJKtM+OrtrOc=;
+	b=mZjGHJS0emsy5WK0XvQCy6HqAajX0WnCyAlxeKXPKEys4KfcgmNU/dEYC4udkVzhZt
+	HTM2bh2QaRVPPE338oN9LTQebsHIjpOzOU4xPShom344nNbEDiHIYxmQvnw++qRqW7dl
+	iSElpSD4GLJdbDpT7hiaf+y1cr66b6GnCCc1vr4Sa9CtfdkD7ZmrlnaNKiCvPKupxpgZ
+	b63iByvx/NcFiaz8YvcwVpkY8rFcL5tEIpbZiEiCS5ImYZJJqXuu0iYAWm5e2csyDMV0
+	xSjALPrJH+6FobcSV3W0sheUTVFYsv14/+BhXt2eaZYnBMQ3ON51xaAiVbWHIVJYohKv
+	yUEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=AfXAsqgSeGkDclAAsRdh4d8VshguMvv7Lc7BLO7pTEk=;
-	b=E8tecrDThA+ueOyL9DlRjdFKEyWkMQQ1rdSBJzHrzt1BvxUEvrvQU/4WA7lT/C3oM6
-	aOAXJ33uMWMmCg0U/KX+i3vQ76vsoiUcJcr1eyw3eGwvGqw02dXenIYPB/gVCfnzMjJf
-	2wwixEVXhsXi0qZagb91a96DJnilf84XWrBE19Hp+HN+lr9tlpgcKGHEdxTdUi8Gvrwg
-	XhewyaAmO5M/ztSqFJuY//qtkxjSEc8InxtO5KHRr5426DEOktb5P7JU3fioS0GfyusE
-	0Y+yWWC8EWgWsbmx50J2DwJOLWZjknr8gGT32OcYFcKhZKiCoq/7eJZfGRaVeZ/ams0k
-	3L8A==
-X-Gm-Message-State: AIkVDXJbjjzyATjZIvtSbmuYQWsOO9Hp1CrvE4S8Qz7rqjHLnzD5Dt6mm3zO2DuoHosvEg==
-X-Received: by 10.28.103.3 with SMTP id b3mr9053602wmc.99.1485683325562;
-	Sun, 29 Jan 2017 01:48:45 -0800 (PST)
-Received: from ThinkPad-T520.homenet.telecomitalia.it
-	(host49-62-dynamic.24-79-r.retail.telecomitalia.it. [79.24.62.49])
-	by smtp.gmail.com with ESMTPSA id
-	198sm12919092wmn.11.2017.01.29.01.48.44
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 29 Jan 2017 01:48:44 -0800 (PST)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 Jan 2017 10:48:34 +0100
-Message-Id: <1485683314-5788-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-handheld] Pull Request 20170129
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=V1QZf+iJBDE2DLBIKVKVTBFg20I3dLanJKtM+OrtrOc=;
+	b=sk6T4ZKWh4g9XplnsPKCT7+6/SXokVw+IIfE4gRwg7M3sFkTse+CdlVhUGebbRw5lf
+	Lotvo2ZZYTlAqYRg+LiXt0I+XCWyR6JSKkvxL7Tl4QXMeSHA+Z0bMGeUv3+PykrinOXv
+	VMSl2ntkKFrRyIW3jKWPuK/xXzcGbJDgISLl5QJ7eA5Jto52SBe/E7fmAvIdF6DqM3BW
+	hIMLs/JPNDFsn8a/36x7Pwfq224I8Tiq2azLvZLLVTwP6meyBk5Vtyri0Guz1/ChUJse
+	uVX3iR83PLP4OVN90G/Y1qd0i3Pfg76ii+ep7/OgXHwEM4v+J2TvAf0sIoYLa5CBB5Pj
+	bSsA==
+X-Gm-Message-State: AIkVDXLJG6120pDBnCJeM9fizPN9CER/j1VnKAv1LQh9VLnPG1QIzt6Uv1hXEncTpQLpl1ezuIChqNZQTFkX5A==
+X-Received: by 10.223.154.165 with SMTP id a34mr15952421wrc.193.1485738957577; 
+	Sun, 29 Jan 2017 17:15:57 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.194.164.227 with HTTP; Sun, 29 Jan 2017 17:15:37 -0800 (PST)
+In-Reply-To: <ba9f9b77-b2d7-5f10-3b48-14f3c8ea53e7@gmail.com>
+References: <20170127152157.15342-1-ricardo.ribalda@gmail.com>
+	<ba9f9b77-b2d7-5f10-3b48-14f3c8ea53e7@gmail.com>
+From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Date: Mon, 30 Jan 2017 02:15:37 +0100
+Message-ID: <CAPybu_3Zgc216GEvkczZjgC+d9PhAN=J-By5HaPM84448X_CTg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] opencv: Configure freetype via PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,47 +52,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Jan 2017 09:48:46 -0000
+X-List-Received-Date: Mon, 30 Jan 2017 01:15:58 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The following changes since commit 3bf35a8a1da5b1ef63acd70988fcb89128297d97:
+Hi Raj
 
-  linux-handheld_4.4: update from 4.4.8 to 4.4.10 (2016-05-11 22:33:22 +0200)
 
-are available in the git repository at:
+On Fri, Jan 27, 2017 at 9:07 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>
+>
+> On 1/27/17 7:21 AM, Ricardo Ribalda Delgado wrote:
+>> Since: http://errors.yoctoproject.org/Errors/Details/117456/ opencv
+>> freetype module fails to build.
+>>
+>
+> I wonder if we need to export RANLIB in configure
+> along with CC and CXX
 
-  git://github.com/LinuxPDA/meta-handheld 
+I would definitely like to try that out, but I am out of the office
+until the 15th. If you do not want to wait for me, you are more than
+welcome to send a patch. If I keep sending patched during our holidays
+my wife will have a valid excuse to escape with the barman :)
 
-for you to fetch changes up to 9c85edecd3793d8c031ec79ecd8906413a7a3f95:
-
-  meta-handheld: remove unneeded noexec tasks (2017-01-29 10:40:46 +0100)
-
-----------------------------------------------------------------
-Andrea Adami (8):
-      linux-kexecboot_4.4: fix KERNEL_IMAGE_BASE_NAME
-      linux-gcw0-kexecboot_4.0: fix KERNEL_IMAGE_BASE_NAME
-      gcw0.conf: catch up with renaming of KERNEL_OUTPUT in oe-core
-      linux-gcw0: provide recipe for the 4.7 kernel.
-      linux-gcw0-kexecboot: update to 4.7
-      linux-gcw0_4.0: remove old recipe
-      linux-gcw0-kexecboot_4.0: remove old recipe
-      meta-handheld: remove unneeded noexec tasks
-
- conf/machine/gcw0.conf                             |  2 +-
- recipes-bsp/zaurus-utils/zaurus-legacy-tar.bb      |  4 +-
- .../gcw0/defconfig                                 | 54 +++++++++++++++-------
- .../gcw0/defconfig                                 | 52 +++++++++++++++------
- recipes-kernel/linux/linux-gcw0-kexecboot_4.0.bb   | 30 ------------
- recipes-kernel/linux/linux-gcw0-kexecboot_4.7.bb   | 30 ++++++++++++
- .../linux/{linux-gcw0_4.0.bb => linux-gcw0_4.7.bb} |  5 +-
- recipes-kernel/linux/linux-kexecboot_4.4.bb        | 32 ++++++-------
- 8 files changed, 126 insertions(+), 83 deletions(-)
- rename recipes-kernel/linux/{linux-gcw0-4.0 => linux-gcw0-4.7}/gcw0/defconfig (82%)
- rename recipes-kernel/linux/{linux-gcw0-kexecboot-4.0 => linux-gcw0-kexecboot-4.7}/gcw0/defconfig (83%)
- delete mode 100644 recipes-kernel/linux/linux-gcw0-kexecboot_4.0.bb
- create mode 100644 recipes-kernel/linux/linux-gcw0-kexecboot_4.7.bb
- rename recipes-kernel/linux/{linux-gcw0_4.0.bb => linux-gcw0_4.7.bb} (60%)
-
--- 
-2.7.4
-
+Regards!
 
