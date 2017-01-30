@@ -1,64 +1,50 @@
-Return-Path: <Mike.Nicholson@viavisolutions.com>
-X-Greylist: delayed 5481 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 30 Jan 2017 21:54:50 UTC
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
-	(mail-sn1nam02on0114.outbound.protection.outlook.com [104.47.36.114])
-	by mail.openembedded.org (Postfix) with ESMTP id 39AE86007A
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id A64276022F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jan 2017 21:54:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=viavisolutions.onmicrosoft.com; s=selector1-viavisolutions-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=voqXTrD2OVZJ87q8C9rOEtsUUc/VedsHE59bznZu2I8=;
-	b=uiOa62bJyd8Fe5SO+ebTsBAqCimp2QQYFtbcbYSeekWblp+1Ig38M+8+vK2sdq3vlzgcHIjQ5jGPv426ju0Tg6hsN5EKOsJe9wkf64BBRGT2rMkismbid+HBhJo/keKFtvN62NCPZAxIfFSeLG16uLinX+qWKSdZyHw86qaVmgE=
-Received: from MWHPR18MB1535.namprd18.prod.outlook.com (10.173.243.141) by
-	MWHPR18MB1533.namprd18.prod.outlook.com (10.173.243.139) with Microsoft
-	SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P384) id
-	15.1.874.12; Mon, 30 Jan 2017 20:23:28 +0000
-Received: from MWHPR18MB1535.namprd18.prod.outlook.com ([10.173.243.141]) by
-	MWHPR18MB1535.namprd18.prod.outlook.com ([10.173.243.141]) with mapi id
-	15.01.0874.019; Mon, 30 Jan 2017 20:23:28 +0000
-From: Mike Nicholson <Mike.Nicholson@viavisolutions.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-qt5]  populate_sdk_ext fails
-Thread-Index: AQHSeza3StUu0s7lgkSN8dinj1LB5Q==
-Date: Mon, 30 Jan 2017 20:23:28 +0000
-Message-ID: <F44878C7-F939-43ED-A849-F9392C7B604D@viavisolutions.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=Mike.Nicholson@viavisolutions.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [38.140.22.3]
-x-ms-office365-filtering-correlation-id: 4efba5a3-8582-4192-e5a6-08d4494dd9e7
-x-microsoft-antispam: UriScan:;BCL:0;PCL:0;RULEID:(22001);SRVR:MWHPR18MB1533;
-x-microsoft-exchange-diagnostics: 1; MWHPR18MB1533;
-	7:RLYHckqCvWGayr8P8DCwmnoPCVNAkdL8/I162+ZAFN/1Ro1VGnkvohjWp63BOWnd5ayUC4kBeOn6/9vG1mFRZHlSGffYrdiq0DJDq911C1aD0y8hEo9YepSg5vockkxS/ww5eO/7+GLKfOeqNVKs4yjWH2fkyXHLQubgf78B1shwaaVyxhM8xF2n/GNeCLhyFIBpg9QJGf/Z44Woz03QU/gKsj65TSOa2zYybnjjSYizE3YCT6r8TyEUrRkqHypqN0eEGu+JFeoadWhkBBxuySdEE7goLbn+NkhCkzCXGxtkqyOhzm0oit2k0IFKiffiDiHXPipCIInIImiMHAbpRU3ZPEOJyeoCyPZ75ZqcOKTT8iTR1CQ/b6PRFAMQBxzMxtqZ8/iMCOxRTjDiv5C2m2kBlcll4WRw+qJ50k83pvjF85ikgrdCFETwiTg0kUWjJQU2hKnYuJaGp+M5gvV/9A==
-x-microsoft-antispam-prvs: <MWHPR18MB153398164FDA938FC07F852EE74B0@MWHPR18MB1533.namprd18.prod.outlook.com>
-x-exchange-antispam-report-test: UriScan:(166708455590820)(5213294742642);
-x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(6040375)(601004)(2401047)(8121501046)(5005006)(10201501046)(3002001)(6055026)(6041248)(20161123564025)(20161123560025)(20161123555025)(20161123562025)(6072148);
-	SRVR:MWHPR18MB1533; BCL:0; PCL:0; RULEID:; SRVR:MWHPR18MB1533; 
-x-forefront-prvs: 0203C93D51
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(6009001)(7916002)(39860400002)(39840400002)(39850400002)(39410400002)(39450400003)(504964003)(199003)(189002)(8936002)(3846002)(33656002)(102836003)(81156014)(81166006)(6116002)(2351001)(106116001)(305945005)(106356001)(6506006)(54356999)(7736002)(101416001)(8676002)(6436002)(2501003)(3280700002)(82746002)(105586002)(2906002)(66066001)(110136003)(6916009)(5640700003)(25786008)(5660300001)(122556002)(53936002)(3660700001)(50986999)(38730400001)(92566002)(68736007)(450100001)(6512007)(2900100001)(97736004)(189998001)(6306002)(107886002)(83716003)(77096006)(6486002)(99286003)(86362001)(36756003)(104396002);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:MWHPR18MB1533;
-	H:MWHPR18MB1535.namprd18.prod.outlook.com; FPR:; SPF:None;
-	PTR:InfoNoRecords; A:1; MX:1; LANG:en; 
-received-spf: None (protection.outlook.com: viavisolutions.com does not
-	designate permitted sender hosts)
-spamdiagnosticoutput: 1:99
-spamdiagnosticmetadata: NSPM
+	Mon, 30 Jan 2017 22:13:17 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id u63so11590376wmu.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Jan 2017 14:13:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=0tJPBF8j4G9kw9ikY4k8z4DWGfN9x6NuehD6L+4E9HE=;
+	b=exbcW4jKy35c159/SBLtlV6sgf5vcaaYKuijh0D65iM4XBO8zkTXWGQdeNiw2jX/1G
+	5smuYR22QtonCW1+VqGiC/jsPUWltxvvEcXuUS59B3vnnlEy/eKE1QXvZZ4HwUk9+GjE
+	feywm6C4eKeFJ9F3klhh+2ShVFPuf0MiGlUF/h+iwoggqBPR/uKYiLKDL9TVxiw4Wrvi
+	EzRTJ9LG/fg4hdVGQnZHDc7LvU9lOAoLnKJPIyuF+k+qjkgE2YOwigpI+3wfFB1r23nH
+	C+8EzzkA96FKa3D7w3JTqZkNNKyOq4b7eugu+EwCwspqTUfn1XT4TQyAl7uFHWTmJJeD
+	xdjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:date:to:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=0tJPBF8j4G9kw9ikY4k8z4DWGfN9x6NuehD6L+4E9HE=;
+	b=AmUHxK0H6ORCDgnzLGItsFOQ/iRfJCkKPmxy+BO62gm+upErk1vc6mnZHy2GbN4mkv
+	39AHa9n+kO9e4f7xbEwF+EamnbmLwh3Y+mZYfg0OJLhVTRpuHhwP3KhRci/E54gYi3T8
+	uDjePvsBGmiKLGHCZoufyk7yEwkmuSAyv9t4kJkzlTfmRORoXlmqNHQz3mao+wbl7LDo
+	8bYgnT6+hyIBCz7pPiUQJ87fsYOPURmf0KFvks9B22N84Hk0+jExotzUXWMXYT23odr8
+	9psLZsEF5aB04pNzy8lYfzqdEiB+YoJ1/UMKyujoi/Ffk2StYc2b05zJh3HI0gno1TXb
+	iecg==
+X-Gm-Message-State: AIkVDXJ6LuOz6RHcvaHWOB/HwtBFrZVIZ9IVb5VegytqwzeNtOFg41N6hTsCmC5O8ymBzQ==
+X-Received: by 10.28.87.19 with SMTP id l19mr16528703wmb.95.1485814397130;
+	Mon, 30 Jan 2017 14:13:17 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	x25sm24947411wrx.27.2017.01.30.14.13.16
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Mon, 30 Jan 2017 14:13:16 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Mon, 30 Jan 2017 23:13:17 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20170130221317.GD13746@jama>
+References: <F44878C7-F939-43ED-A849-F9392C7B604D@viavisolutions.com>
 MIME-Version: 1.0
-X-OriginatorOrg: viavisolutions.com
-X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Jan 2017 20:23:28.0212 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: c44ec86f-d007-4b6c-8795-8ea75e4a6f9b
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR18MB1533
-Subject: [meta-qt5] populate_sdk_ext fails
+In-Reply-To: <F44878C7-F939-43ED-A849-F9392C7B604D@viavisolutions.com>
+User-Agent: Mutt/1.7.2 (2016-11-26)
+Subject: Re: [meta-qt5] populate_sdk_ext fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,42 +57,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2017 21:54:51 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <E955FAED42202443BD08C49A22EC303A@namprd18.prod.outlook.com>
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 30 Jan 2017 22:13:18 -0000
+X-Groupsio-MsgNum: 64943
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="uxuisgdDHaNETlh8"
+Content-Disposition: inline
 
-SGVsbG8sDQoNCkkgc2VudCB0aGUgZm9sbG93aW5nIHRoZSB0aGUgb3BlbmVtYmVkZGVkLWlzc3Vl
-cyBlbWFpbCBsaXN0IGxhc3QgbW9udGggd2l0aCBubyByZXNwb25zZS4gIEkgd2FudGVkIHRvIGZv
-bGxvdyB1cCB3aXRoIG9wZW5lbWJlZGRlZC1kZXZlbCBpbiBjYXNlIOKAmGlzc3Vlc+KAmSB3YXNu
-4oCZdCB0aGUgcmlnaHQgbWFpbGluZyBsaXN0Lg0KDQpJ4oCZbSBhdHRlbXB0aW5nIHRvIGdlbmVy
-YXRlIGFuIGV4dGVuc2libGUgU0RLIHRoYXQgaW5jbHVkZXMgdGhlIG1ldGEtcXQ1IGxheWVyLiAg
-R2VuZXJhdGluZyBhIHN0YW5kYXJkIHNkayB2aWEgWW9jdG8gd29ya3MganVzdCBmaW5lIGJ1dCBn
-ZW5lcmF0aW5nIHRoZSBleHRlbnNpYmxlIHNkayBmYWlscyB3aXRoIHRoZSBmb2xsb3dpbmcgZXJy
-b3I6DQogDQp8IE5PVEU6IEV4ZWN1dGluZyBjcmVhdGVfc2RrX2ZpbGVzIC4uLg0KfCBERUJVRzog
-RXhlY3V0aW5nIHNoZWxsIGZ1bmN0aW9uIGNyZWF0ZV9zZGtfZmlsZXMNCnwgdG91Y2g6IGNhbm5v
-dCB0b3VjaCAnL2hvbWUvbmljNDcyMjIvUHJvamVjdHMvdmlhdmktcGxhdGZvcm0vdmlhdmktYnNw
-L2J1aWxkL3RtcC93b3JrL210cy1wb2t5LWxpbnV4LWdudWVhYmkvdmlhdmktaW1hZ2UtcXQ1LzEu
-MC1yMC9zZGstZXh0L2ltYWdlLy9vcHQvcG9reS8yLjEuMS9zeXNyb290cy94ODZfNjQtcG9reXNk
-ay1saW51eC91c3IvYmluL3F0NS9xdC5jb25mJzogTm8gc3VjaCBmaWxlIG9yIGRpcmVjdG9yeQ0K
-IA0KSXQgYXBwZWFycyB0aGF0IGhlcmUgaHR0cHM6Ly9naXRodWIuY29tL21ldGEtcXQ1L21ldGEt
-cXQ1L2Jsb2IvOWFhODcwZWVjZjZkYzdhODc2NzgzOTNiZDU1Yjk3ZTIxMDMzYWI0OC9jbGFzc2Vz
-L3BvcHVsYXRlX3Nka19xdDVfYmFzZS5iYmNsYXNzI0w3IHRoZSBkaXJlY3RvcnkgdGhhdCBzaG91
-bGQgY29udGFpbiB0aGUgcXQuY29uZiBmaWxlIGRvZXMgbm90IGV4aXN0Lg0KIA0KQXJlIHRoZXJl
-IGtub3duIGlzc3VlcyB3aXRoIHRoZSBwb3B1bGF0ZV9zZGtfZXh0IGNvbW1hbmQgYW5kIHRoZSBt
-ZXRhLXF0NSBsYXllcj8NCiANCkkgY2FuIGdldCBnZW5lcmF0ZSB0aGUgZXh0ZW5zaWJsZSBTREsg
-anVzdCBmaW5lIGlmIEkgbWFrZSB0aGUgZm9sbG93aW5nIGNoYW5nZXM6DQogDQpkaWZmIC0tZ2l0
-IGEvY2xhc3Nlcy9wb3B1bGF0ZV9zZGtfcXQ1X2Jhc2UuYmJjbGFzcyBiL2NsYXNzZXMvcG9wdWxh
-dGVfc2RrX3F0NV9iYXNlLmJiY2xhc3MNCmluZGV4IGI2Y2U1OTYuLmI2NmZlMjUgMTAwNjQ0DQot
-LS0gYS9jbGFzc2VzL3BvcHVsYXRlX3Nka19xdDVfYmFzZS5iYmNsYXNzDQorKysgYi9jbGFzc2Vz
-L3BvcHVsYXRlX3Nka19xdDVfYmFzZS5iYmNsYXNzDQpAQCAtNCw2ICs0LDcgQEAgaW5oZXJpdCBx
-bWFrZTVfcGF0aHMNCmNyZWF0ZV9zZGtfZmlsZXNfcHJlcGVuZCAoKSB7DQogICAgICMgR2VuZXJh
-dGUgYSBxdC5jb25mIGZpbGUgdG8gYmUgZGVwbG95ZWQgd2l0aCB0aGUgU0RLDQogICAgIHF0Y29u
-Zj0ke1NES19PVVRQVVR9LyR7U0RLUEFUSE5BVElWRX0ke09FX1FNQUtFX1BBVEhfSE9TVF9CSU5T
-fS9xdC5jb25mDQorICAgIG1rZGlyIC1wICR7U0RLX09VVFBVVH0vJHtTREtQQVRITkFUSVZFfSR7
-T0VfUU1BS0VfUEFUSF9IT1NUX0JJTlN9DQogICAgIHRvdWNoICRxdGNvbmYNCiAgICAgZWNobyAn
-W1BhdGhzXScgPj4gJHF0Y29uZg0KICAgICBlY2hvICdQcmVmaXggPSAke09FX1FNQUtFX1BBVEhf
-UFJFRklYfScgPj4gJHF0Y29uZg0KLS0NCjIuNy40DQogDQogDQpUaGFuayB5b3UgaW4gYWR2YW5j
-ZSBmb3IgYW55IGhlbHAuDQoNCg0K
+--uxuisgdDHaNETlh8
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Mon, Jan 30, 2017 at 08:23:28PM +0000, Mike Nicholson wrote:
+> Hello,
+>=20
+> I sent the following the the openembedded-issues email list last month wi=
+th no response.  I wanted to follow up with openembedded-devel in case =E2=
+=80=98issues=E2=80=99 wasn=E2=80=99t the right mailing list.
+
+This ML is correct one, openembedded-issues is quite dead with only 3
+e-mails in last 5 years.
+
+> I=E2=80=99m attempting to generate an extensible SDK that includes the me=
+ta-qt5 layer.  Generating a standard sdk via Yocto works just fine but gene=
+rating the extensible sdk fails with the following error:
+> =20
+> | NOTE: Executing create_sdk_files ...
+> | DEBUG: Executing shell function create_sdk_files
+> | touch: cannot touch '/home/nic47222/Projects/viavi-platform/viavi-bsp/b=
+uild/tmp/work/mts-poky-linux-gnueabi/viavi-image-qt5/1.0-r0/sdk-ext/image//=
+opt/poky/2.1.1/sysroots/x86_64-pokysdk-linux/usr/bin/qt5/qt.conf': No such =
+file or directory
+> =20
+> It appears that here https://github.com/meta-qt5/meta-qt5/blob/9aa870eecf=
+6dc7a87678393bd55b97e21033ab48/classes/populate_sdk_qt5_base.bbclass#L7 the=
+ directory that should contain the qt.conf file does not exist.
+> =20
+> Are there known issues with the populate_sdk_ext command and the meta-qt5=
+ layer?
+> =20
+> I can get generate the extensible SDK just fine if I make the following c=
+hanges:
+
+This looks OK to me, not sure why you're first one to report that (I'm
+not using extensible SDKs), could you please send proper patch with this
+(as described in README file)?
+
+> diff --git a/classes/populate_sdk_qt5_base.bbclass b/classes/populate_sdk=
+_qt5_base.bbclass
+> index b6ce596..b66fe25 100644
+> --- a/classes/populate_sdk_qt5_base.bbclass
+> +++ b/classes/populate_sdk_qt5_base.bbclass
+> @@ -4,6 +4,7 @@ inherit qmake5_paths
+> create_sdk_files_prepend () {
+>      # Generate a qt.conf file to be deployed with the SDK
+>      qtconf=3D${SDK_OUTPUT}/${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}/qt=
+=2Econf
+> +    mkdir -p ${SDK_OUTPUT}/${SDKPATHNATIVE}${OE_QMAKE_PATH_HOST_BINS}
+>      touch $qtconf
+>      echo '[Paths]' >> $qtconf
+>      echo 'Prefix =3D ${OE_QMAKE_PATH_PREFIX}' >> $qtconf
+> --
+> 2.7.4
+> =20
+> =20
+> Thank you in advance for any help.
+>=20
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--uxuisgdDHaNETlh8
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWI+6fQAKCRA3VSO3ZXaA
+HN91AKCmxqnRybhf9eYSUEpaytNM8UzdRwCgibGkBJiShDskFvnIkqmZX/LPNlg=
+=eL1s
+-----END PGP SIGNATURE-----
+
+--uxuisgdDHaNETlh8--
