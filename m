@@ -1,49 +1,52 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 607A9772CF
+Return-Path: <patrick.ohly@intel.com>
+Received: from mail-io0-f177.google.com (mail-io0-f177.google.com
+	[209.85.223.177])
+	by mail.openembedded.org (Postfix) with ESMTP id B3338772CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jan 2017 12:18:04 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id r18so5500500wmd.3
+	Mon, 30 Jan 2017 13:29:44 +0000 (UTC)
+Received: by mail-io0-f177.google.com with SMTP id j13so106532120iod.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Jan 2017 04:18:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=sLYxhDRYBjNSDRmHEW8SIAxeE2e1SxJGy7FiAz0KPAo=;
-	b=ku6G6YkTTC0QViuMO7qifQyGL4NhwWB5q1qdR2psQWBMfQ8QHeY575gAYclU0KbaNn
-	bzS4CWhlxNZ/V6B7aOTtmm6A/GFcpnd9ryd9Gp+C4Olv/OTiUbB3jvCQrj9Cr9xEL3hy
-	uj0q5sKh1jIYjQjrvXMg2nyIu5k88MZP2IABluS811pqZ1DxkrGDyRjTABF7jvdi/eLy
-	O/ISOGhcHVOZkxecYuHZb6f3rutu//UUkbbEyRrz/p/Zp5WhkIESVJAnw9eiHtVRCdvn
-	UkIx8fWeSS52LcqQPZxbf773Pwe0JiNuR+Uu/zzr4Vjn8VcnOfNXtL+mReI1QtWTyxrS
-	eUXA==
+	Mon, 30 Jan 2017 05:29:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=message-id:subject:from:to:date:in-reply-to:references:organization
+	:mime-version:content-transfer-encoding;
+	bh=nDiA4CnNydSQh/QV6l+YTnxtht24Y4nd534GMaxDfuc=;
+	b=fGEvt/Bl67j2kU2bjAuK+FQAtJjyba2nKlL8WTZp5bqXn+09pB1aK/xImb0HaGL/vO
+	QHRJ1MQmaYV60oPQNZe42DZZY7uZYZlsxrfVop2Fd5EkBGm5TEUOs6Rx3lnUcka8TwVg
+	bbSD+1t9KHREIKyR0VwdDeOy8aUzaIWCMaQ2Efbkie19sVV5DqJEBTN28iS/UZxzjssl
+	fh3EhcsaBu921vaWuFm8AAhqiNe1N8irpQPy0fupXcMVEQIU/Gh5Rsw46RJppfYCc/ax
+	BpP7aiijDWV2cfC1TNMrpuLJ3vGeNqQuodN8D4QTnpKxght0HPGMpclnuyLYZq9Rw+OT
+	ZgrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=sLYxhDRYBjNSDRmHEW8SIAxeE2e1SxJGy7FiAz0KPAo=;
-	b=IZht1jLRpY7QREbf36C/Q6n5rSzr2OQjeEericdyt7cT4NzpxfAwWbRDLmB61GgnDJ
-	rxhh9U3WP/fL98mor7rzMr7foKY8cZNDGlrJgy+PIEGdYGnweTgQKv3bnTaVXVtWntLm
-	FB3k/2XhEsaUumU9Jh4YrCZ/Ck+z1UpzudOjpHRzj2Uwlf2CTsPLIYQQhxj5JcnalR8w
-	t+htDGgAezSebi3kSc9qtipTcv0mlIzyK81Ju+s35CHxyheiYUbzU32EeQ7OCJGr93fG
-	x5hMmsusVEACR4e7lQQBcxs9/L5qflOu/pMVqBXQLt/ImVElpNNQo8C/HJeQYujN1pDa
-	5FpQ==
-X-Gm-Message-State: AIkVDXLDO5UUOW9KurytcO/DzK/Xu/4sCHf2SMnC1wcj36oIaKN1XkBT4CmSMWP1GZT+Ug==
-X-Received: by 10.28.158.82 with SMTP id h79mr14944187wme.30.1485778684904;
-	Mon, 30 Jan 2017 04:18:04 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	u47sm22615063wrb.15.2017.01.30.04.18.03
+	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+	:references:organization:mime-version:content-transfer-encoding;
+	bh=nDiA4CnNydSQh/QV6l+YTnxtht24Y4nd534GMaxDfuc=;
+	b=QTDiNzvIatxBcotneT8Ja8U7LrljBRegH9VAmcb7KBGCGt3FqbCMYzjs6pl+mzEQ0B
+	+UU/yZf5CP6C8i9obtlV2VpwfLs6UGGX7s1BVjrA1SlOhclnGe5i96ENfImqCM2tE9Uw
+	fbecpFnyQKPnyLbNmqZQmtI2nYUm0xNIXSsbsInRggPqk81cVgq+xpjS9HHRCzPYcJAl
+	hq6JJhaYVi9Xkk4o2f/+P2b27EGEdLMmjS64UAXhCNVYo2sR8DWDw+EaUa48DzbWD+Ls
+	m99ZNatO+oh4GdcPSVB6ftiB0BhyT3TRBZTP+I3+zzzLm5OJagOG1Acqf0boXjpJv/oN
+	caoQ==
+X-Gm-Message-State: AIkVDXKvyEOB2L/zz6bryBbd3mTKlJ0Gdku77etAg8PKOUE5od0XYsE5EQ4zzWGueSFE+aJW
+X-Received: by 10.107.173.133 with SMTP id m5mr19079575ioo.186.1485782984277; 
+	Mon, 30 Jan 2017 05:29:44 -0800 (PST)
+Received: from pohly-mobl1 (p5DE8CDEB.dip0.t-ipconnect.de. [93.232.205.235])
+	by smtp.gmail.com with ESMTPSA id l3sm8174011ioa.31.2017.01.30.05.29.42
 	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 30 Jan 2017 04:18:04 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 30 Jan 2017 13:18:05 +0100
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 30 Jan 2017 05:29:43 -0800 (PST)
+Message-ID: <1485782980.20333.132.camel@intel.com>
+From: Patrick Ohly <patrick.ohly@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170130121805.GA13746@jama>
+Date: Mon, 30 Jan 2017 14:29:40 +0100
+In-Reply-To: <20170130121805.GA13746@jama>
 References: <20170127101200.25785-1-patrick.ohly@intel.com>
-MIME-Version: 1.0
-In-Reply-To: <20170127101200.25785-1-patrick.ohly@intel.com>
-User-Agent: Mutt/1.7.2 (2016-11-26)
+	<20170130121805.GA13746@jama>
+Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
+X-Mailer: Evolution 3.12.9-1+b1 
+Mime-Version: 1.0
 Subject: Re: [PATCH] multipath-tools: update to 0.6.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -57,54 +60,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Jan 2017 12:18:05 -0000
-X-Groupsio-MsgNum: 64933
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="huq684BweRXVnRxX"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 30 Jan 2017 13:29:46 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
---huq684BweRXVnRxX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, 2017-01-30 at 13:18 +0100, Martin Jansa wrote:
+> On Fri, Jan 27, 2017 at 11:11:23AM +0100, Patrick Ohly wrote:
+> > No particular reason for updating besides following upstream.
+> > 
+> > Only kpartx has been tested after updating! Seems to work as before;
+> > unfortunately that means that as in 0.5.0, "kpartx -d" doesn't do
+> > anything.
+> > 
+> > Upstream refreshed the COPYING file, hence the checksum change:
+> > $ git log --oneline 0.5.0..HEAD COPYING
+> > bf05f63 multipath-tools: replace COPYING with a fresh copy from gnu.org
+> > 1d6c88a Update FSF address
+> > 
+> > The QA error that do-not-link-libmpathpersist-to-TMPDIR.patch fixes
+> > no longer occurs because upstream changed that particular part of
+> > the Makefile.
+> > 
+> > A new patch is needed to avoid building libcheckerrdb, which depends
+> > on the (currently) unavailable librados.
+> 
+> FWIW: it would be even better if you mark
+> https://patchwork.openembedded.org/patch/136518/
+> as Superseded as patchwork is where I take patches for master-next and I
+> need to remember that there was e-mail reply for this one that it should
+> be ignored.
 
-On Fri, Jan 27, 2017 at 11:11:23AM +0100, Patrick Ohly wrote:
-> No particular reason for updating besides following upstream.
->=20
-> Only kpartx has been tested after updating! Seems to work as before;
-> unfortunately that means that as in 0.5.0, "kpartx -d" doesn't do
-> anything.
->=20
-> Upstream refreshed the COPYING file, hence the checksum change:
-> $ git log --oneline 0.5.0..HEAD COPYING
-> bf05f63 multipath-tools: replace COPYING with a fresh copy from gnu.org
-> 1d6c88a Update FSF address
->=20
-> The QA error that do-not-link-libmpathpersist-to-TMPDIR.patch fixes
-> no longer occurs because upstream changed that particular part of
-> the Makefile.
->=20
-> A new patch is needed to avoid building libcheckerrdb, which depends
-> on the (currently) unavailable librados.
+Thanks, I'll try to remember that going forward. Would have been a nice
+testcase for
 
-FWIW: it would be even better if you mark
-https://patchwork.openembedded.org/patch/136518/
-as Superseded as patchwork is where I take patches for master-next and I
-need to remember that there was e-mail reply for this one that it should
-be ignored.
+[Patchwork-Status: Superseded]
 
-Thanks
+-- 
+Best Regards, Patrick Ohly
+
+The content of this message is my personal opinion only and although
+I am an employee of Intel, the statements I make here in no way
+represent Intel's position on the issue, nor am I authorized to speak
+on behalf of Intel on this matter.
 
 
---huq684BweRXVnRxX
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWI8u/AAKCRA3VSO3ZXaA
-HCnuAKCCzDO/kBraXoJQJR3vsIGg3t0uXQCfelqLnSm98VnQE59byT1iB3BkeQ4=
-=Lf9r
------END PGP SIGNATURE-----
-
---huq684BweRXVnRxX--
