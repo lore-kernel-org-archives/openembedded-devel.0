@@ -1,57 +1,72 @@
 Return-Path: <jaragunde@igalia.com>
 Received: from smtp4.mundo-r.com (smtp3.mundo-r.com [212.51.32.191])
-	by mail.openembedded.org (Postfix) with ESMTP id CDAD071DD7
+	by mail.openembedded.org (Postfix) with ESMTP id A7E3771C5F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Jan 2017 18:18:39 +0000 (UTC)
-IronPort-PHdr: =?us-ascii?q?9a23=3A9gKwlxH0phF6o1I0ip+cxJ1GYnF86YWxBRYc798d?=
-	=?us-ascii?q?s5kLTJ7zoMywAkXT6L1XgUPTWs2DsrQf2raQ7f2rADVYqb+681k6OKRWUBEEjc?=
-	=?us-ascii?q?hE1ycBO+WiTXPBEfjxciYhF95DXlI2t1uyMExSBdqsLwaK+i764jEdAAjwOhRo?=
-	=?us-ascii?q?LerpBIHSk9631+ev8JHPfglEnjSwbLd9IRmsrAjctsYajZZ/Jqot1xDEvmZGd+?=
-	=?us-ascii?q?NKyG1yOFmdhQz85sC+/J5i9yRfpfcs/NNeXKv5Yqo1U6VWACwpPG4p6sLrswLD?=
-	=?us-ascii?q?TRaU6XsHTmoWiBtIDBPb4xz8Q5z8rzH1tut52CmdIM32UbU5Uims4qt3VBPljj?=
-	=?us-ascii?q?oMOjgk+2/Vl8NwlrpWrhK/qRJizYDaY4abO/Vica3SZt4aWWlMU9xNWyFbHo+x?=
-	=?us-ascii?q?bY0CBPcBM+ZCqIn9okMDox+kCgawA+Pg0ThIjWLq0K0gyeshHhzG3Ao9EN0QrX?=
-	=?us-ascii?q?/ats/yNL0MXuG00aLFyjfDYOlM2Tjn54jIbxYhruySUr9rcMrRxlMgFwfEjlqK?=
-	=?us-ascii?q?s4DqIzSV1uEUvmWd8uFuVvqvhnYjpg1suDSj29ogh4vTio8Rzl3I7zh1zYY1KN?=
-	=?us-ascii?q?C+VUV1e8SrEIFKuCGfL4Z2R8QiTHx2tysi0b0GvIK7fDANyJQ62x7Tc/yHfJaM?=
-	=?us-ascii?q?4hLkTOuRLy13hHRkebK+gRa971KsyuzzVsau1FZKrzBKnsPQuXAK0hzf8smHSv?=
-	=?us-ascii?q?1j8Ue9wTuC0x3f5vtZLUwpl6fXMZosz7oqmpYOsUnOHjf6mEDsg6+XckUk9PKo?=
-	=?us-ascii?q?6+PiYrj+pJ+TLZV0hRvxMqQznMywHPo3PxMPX2iU4+u80Lzj8lfjTLpWif02l7?=
-	=?us-ascii?q?HVsIrGKsQDuq65HwhV354k6xanETim1soXnXwcI11bZR2IkpbmNEzXLP/lE/i/?=
-	=?us-ascii?q?nUqjkDNwyvDCP73hGYnNLmPZnLfmZbZy9UhcxxQ2zd9E+Z1bF6wOL+zuVUPrs9?=
-	=?us-ascii?q?zYFBA5ORSuw+n7ENV9yp8eWWWXD6+eLKPdq0GI5uMoI+SXY48Voy39Kvg+5/7y?=
-	=?us-ascii?q?k3A5nEQdcbO10psQbXC0BO9pI1/KKUbr19AZHGEHuwAzQODnhBiOXCBeY162Xr?=
-	=?us-ascii?q?kg/Xc8EI+gAILJS4yhjbDH2z20TbNMYWUTKFmHFn3vP6yeUvgRbi6favfgiDEW?=
-	=?us-ascii?q?HeyjQpUo2gyouALSyrVuKuvdvCYfsMSwh5BO++TPmERqpnRPBMOH3jTVQg=3D?=
-	=?us-ascii?q?=3D?=
+	Tue, 31 Jan 2017 18:24:55 +0000 (UTC)
+IronPort-PHdr: =?us-ascii?q?9a23=3AUIb8JRaSkBOg8mekIqQl5ID/LSx+4OfEezUN459i?=
+	=?us-ascii?q?sYplN5qZr8m+bnLW6fgltlLVR4KTs6sC0LuK9f69EjVZud6oizMrSNR0TRgLiM?=
+	=?us-ascii?q?EbzUQLIfWuLgnFFsPsdDEwB89YVVVorDmROElRH9viNRWJ+iXhpTEdFQ/iOgVr?=
+	=?us-ascii?q?O+/7BpDdj9it1+C15pbffxhEiCCzbL52Ixi6twTcu8kZjYd/N6o91gbCr2dVde?=
+	=?us-ascii?q?hR2W5mP0+YkQzm5se38p5j8iBQtOwk+sVdT6j0fLk2QKJBAjg+PG87+MPktR/Y?=
+	=?us-ascii?q?TQuS/XQcSXkZkgBJAwfe8h73WIr6vzbguep83CmaOtD2TawxVD+/4apnVAPkhS?=
+	=?us-ascii?q?EaPDM/7WrZiNF/jLhDrRy8uRJ/zY7aboKbOvVwcazSf88VS2VaU8ZNVCFMGJ+w?=
+	=?us-ascii?q?Y5cBAuQdO+tTsonzp0EJrRu7HQSiAPngxSNPhnDt2q01y/gsERvc0wwvAtIOtm?=
+	=?us-ascii?q?nbo8vtO6kIS+e11rfHzDTeZP5R2zfy8pLIfQouofGRW7J/bNTexFIuFwPKlFqQ?=
+	=?us-ascii?q?rY3lMCmP2usRtGib6vNtWOSygGAprAFxpyKgxsYqioTRmo0VykrE9SJ8wIY0ON?=
+	=?us-ascii?q?24TVR3Ydm+EJtfsSyRKoh4Qts6TmxspSo20KAKtYO5cSQQzJkqwwTTZ+GHfoWI?=
+	=?us-ascii?q?5B/oSfyfLi1ihH1/fbKynxOy8U+9xeLiTsS0y1NKrjZdktnLq3ANywTf6siZRf?=
+	=?us-ascii?q?t5+UeswTiP2BrV6uBFIEA0k7TUJ4Qgwr4/jJUTtUXDETXslErqi6+Wc10o+umu?=
+	=?us-ascii?q?6+v5frXrvpuRO5Juhg3jL6gjmNazDOA8PwQUQmSW+eSx2KXm/ULjQbVKivM2kr?=
+	=?us-ascii?q?PesJDfPckbpLS2AxVP3YYs9ha/CSqp38oDkHkGI1JKYhaHj4nzNF3UPP/4CvK/?=
+	=?us-ascii?q?j0y2kDh33/DGIqHhApLVI3jEiLfuY7B95FBZyAUo099Q+o9bBa8cL/7qR0D+qs?=
+	=?us-ascii?q?LYAQE9MwGvx+bnCc591p8FWW6VBa+ZKL3dsVmW6eIqOOaDepIatyvjJPc4/fLu?=
+	=?us-ascii?q?imU5mVBONZWuiJwPZXa1G/5rL0mUbT/gj8kMFU8OvxEiV6rtkFCEXDtZanq+Uq?=
+	=?us-ascii?q?564Ss0W6y8CoKWZImmh7aG6w6hF5JLYGxLPWgNC3r6P9GGUu0FZz+ULsJJkzMN?=
+	=?us-ascii?q?UbmoDYQm0Ef950fB17N7I7+MqWUjvpX52Y0t6g=3D=3D?=
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: =?us-ascii?q?A2CgBgCn1JBY/5tjdVtdHAEBBAEBCgEBF?=
-	=?us-ascii?q?wEBBAEBCgEBgyhhgQmDVop7pDmEHBoQhXiCN0MUAQEBAQEBAQEBAQFhKIIzGYI?=
-	=?us-ascii?q?dASkPAUYsAwECAwImAlEhiXIBCawXgiWLMgEBAQcCJoELhUCMBzqCXwWJA5JUh?=
-	=?us-ascii?q?meLFwKQdpJ/NiGBS4VBgUk/NQEBiCgBAQE?=
-X-IPAS-Result: =?us-ascii?q?A2CgBgCn1JBY/5tjdVtdHAEBBAEBCgEBFwEBBAEBCgEBgyh?=
-	=?us-ascii?q?hgQmDVop7pDmEHBoQhXiCN0MUAQEBAQEBAQEBAQFhKIIzGYIdASkPAUYsAwECA?=
-	=?us-ascii?q?wImAlEhiXIBCawXgiWLMgEBAQcCJoELhUCMBzqCXwWJA5JUhmeLFwKQdpJ/NiG?=
-	=?us-ascii?q?BS4VBgUk/NQEBiCgBAQE?=
-X-IronPort-AV: E=Sophos;i="5.33,315,1477954800"; d="scan'208";a="234696618"
+X-IronPort-Anti-Spam-Result: =?us-ascii?q?A2AUFgDm1ZBY/5tjdVtdHAYMGQYMgyphK?=
+	=?us-ascii?q?l+DVop7kHYfiAqNKSgZgUUHHwuCQoJsSgKCNUAXAQEBAQEBAQEBAQFhKIIzGYI?=
+	=?us-ascii?q?dAQEBAQMBATABOxcECxEEAQEBBCMFAiEGAR4JCBMGAgEBF4k7AxkBCY5NnUgIg?=
+	=?us-ascii?q?iOHPQ2DaAEBAQEBBQEBAQEBAQEBAR+BB4VEggUIgVmBCYJRhEc2gmMFmx84hme?=
+	=?us-ascii?q?GA4EAhBSBeVOEQolqiCaCAYhYIQE1gUtQhDwcgWI/NYgqAQEB?=
+X-IPAS-Result: =?us-ascii?q?A2AUFgDm1ZBY/5tjdVtdHAYMGQYMgyphKl+DVop7kHYfiAq?=
+	=?us-ascii?q?NKSgZgUUHHwuCQoJsSgKCNUAXAQEBAQEBAQEBAQFhKIIzGYIdAQEBAQMBATABO?=
+	=?us-ascii?q?xcECxEEAQEBBCMFAiEGAR4JCBMGAgEBF4k7AxkBCY5NnUgIgiOHPQ2DaAEBAQE?=
+	=?us-ascii?q?BBQEBAQEBAQEBAR+BB4VEggUIgVmBCYJRhEc2gmMFmx84hmeGA4EAhBSBeVOEQ?=
+	=?us-ascii?q?olqiCaCAYhYIQE1gUtQhDwcgWI/NYgqAQEB?=
+X-IronPort-AV: E=Sophos;i="5.33,315,1477954800"; d="scan'208";a="234698941"
 Received: from fanzine.igalia.com ([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 31 Jan 2017 19:18:27 +0100
+	by smtp4.mundo-r.com with ESMTP; 31 Jan 2017 19:24:55 +0100
 Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
 	by fanzine.igalia.com with esmtps 
 	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
-	id 1cYd0d-00025r-Vg; Tue, 31 Jan 2017 19:18:28 +0100
-Received: from ip162.dynamic.igalia.com ([192.168.10.162]
-	helo=goomba.local.igalia.com) by mail.igalia.com with esmtps 
-	(Cipher TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim)
-	id 1cYd0b-0007yR-Mu; Tue, 31 Jan 2017 19:18:25 +0100
-From: =?UTF-8?q?Jacobo=20Aragunde=20P=C3=A9rez?= <jaragunde@igalia.com>
+	id 1cYd6t-0002CF-5b for <openembedded-devel@lists.openembedded.org>;
+	Tue, 31 Jan 2017 19:24:55 +0100
+Received: from ip162.dynamic.igalia.com ([192.168.10.162])
+	by mail.igalia.com with esmtps 
+	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
+	id 1cYd6t-0000me-2G for <openembedded-devel@lists.openembedded.org>;
+	Tue, 31 Jan 2017 19:24:55 +0100
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 31 Jan 2017 19:18:16 +0100
-Message-Id: <1485886696-23616-1-git-send-email-jaragunde@igalia.com>
-X-Mailer: git-send-email 2.7.4
+References: <1485356812-8436-1-git-send-email-jaragunde@igalia.com>
+	<008601d27798$272e3640$758aa2c0$@neuf.fr>
+	<8c7129f5-43e3-3b2d-f4e9-9dfbad7e6ebc@gmail.com>
+	<a5a24703cc0a4dd6be923dac9cc6e129@XCH-ALN-008.cisco.com>
+	<529a997b-8ebf-28c7-5dad-1411de15dcf7@gmail.com>
+	<1F119876-0AF6-4918-AE7A-0C2809A0C5C9@neuf.fr>
+	<CAMKF1srK12QsoH0Xw_68U5EgJ37B2fTMPWK_SKPQ-Cwy=mh5NQ@mail.gmail.com>
+	<000e7909-80c8-6f48-a35b-b3ccda7a82fe@igalia.com>
+	<CAMKF1soJMZ+xtn8juW8n-MiKEB5zhTiWfPGAPtS6qs-sSUs6nA@mail.gmail.com>
+	<71f15770-9aad-30aa-006c-63efb124e531@igalia.com>
+	<120E29E8-A60B-4CC3-8B2B-F22C2340D724@neuf.fr>
+From: =?UTF-8?Q?Jacobo_Aragunde_P=c3=a9rez?= <jaragunde@igalia.com>
+Message-ID: <02a1d637-8af8-3246-c78d-11701e9721c2@igalia.com>
+Date: Tue, 31 Jan 2017 19:24:55 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.6.0
 MIME-Version: 1.0
-Cc: otavio@ossystems.com.br
-Subject: [meta-browser][PATCH] Split patch 'Remove hard coded values for CC and CXX' in two versions
+In-Reply-To: <120E29E8-A60B-4CC3-8B2B-F22C2340D724@neuf.fr>
+Subject: Re: [meta-browser][PATCH v2] chromium-wayland: update to 53.0.2785.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,114 +79,151 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Jan 2017 18:18:42 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 31 Jan 2017 18:24:57 -0000
+Content-Type: text/plain; charset=gbk
 Content-Transfer-Encoding: 8bit
 
-Chromium and chromium-wayland recipes cannot share this patch any
-more due to diverging code bases. We create a new version of the
-patch only for chromium-wayland and revert the existing patch to
-its previous state.
+Hi again,
 
-Signed-off-by: Jacobo Aragunde PÃ©rez <jaragunde@igalia.com>
----
- .../chromium/chromium-wayland_53.0.2785.143.bb     |  2 +-
- .../Remove-hard-coded-values-for-CC-and-CXX.patch  | 42 ++++++++++++++++++++++
- ...3-Remove-hard-coded-values-for-CC-and-CXX.patch | 11 +++---
- 3 files changed, 49 insertions(+), 6 deletions(-)
- create mode 100644 recipes-browser/chromium/chromium/chromium-wayland/Remove-hard-coded-values-for-CC-and-CXX.patch
+Otavio already merged the v2 of the update patch (thanks!), so I'll send
+the change we are discussing as a separate patch.
 
-diff --git a/recipes-browser/chromium/chromium-wayland_53.0.2785.143.bb b/recipes-browser/chromium/chromium-wayland_53.0.2785.143.bb
-index c8aea27..a75918b 100644
---- a/recipes-browser/chromium/chromium-wayland_53.0.2785.143.bb
-+++ b/recipes-browser/chromium/chromium-wayland_53.0.2785.143.bb
-@@ -6,9 +6,9 @@ DEPENDS += "wayland libxkbcommon"
- 
- SRC_URI += "\
-         file://chromium-wayland/add_missing_stat_h_include.patch \
--        file://0003-Remove-hard-coded-values-for-CC-and-CXX.patch \
-         file://0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch \
-         file://0005-Override-root-filesystem-access-restriction.patch \
-+        file://chromium-wayland/Remove-hard-coded-values-for-CC-and-CXX.patch \
- 	file://chromium-wayland/0007-Workaround-for-glib-related-build-error-with-ozone-w.patch \
-         file://chromium-wayland/0011-Replace-readdir_r-with-readdir.patch \
-         file://chromium-wayland/remove-Werror.patch \
-diff --git a/recipes-browser/chromium/chromium/chromium-wayland/Remove-hard-coded-values-for-CC-and-CXX.patch b/recipes-browser/chromium/chromium/chromium-wayland/Remove-hard-coded-values-for-CC-and-CXX.patch
-new file mode 100644
-index 0000000..63de68a
---- /dev/null
-+++ b/recipes-browser/chromium/chromium/chromium-wayland/Remove-hard-coded-values-for-CC-and-CXX.patch
-@@ -0,0 +1,42 @@
-+From 518135b0cd6878e91e5fcf489f3185740ec307c0 Mon Sep 17 00:00:00 2001
-+From: Carlos Rafael Giani <dv@pseudoterminal.org>
-+Date: Sun, 12 Oct 2014 19:31:47 +0200
-+Subject: [PATCH] Remove hard coded values for CC and CXX
-+
-+In spite of what the comment says, the environment variables do *not*
-+override the variables; "which which arm-linux-gnueabihf-gcc" etc. are
-+always called. To undo this, remove the change.
-+
-+Upstream-Status: Pending
-+
-+The default values cannot be overriden without the patch; upstream
-+might be interested in this.
-+
-+Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
-+---
-+ build/common.gypi | 10 ----------
-+ 1 file changed, 10 deletions(-)
-+
-+diff --git a/build/common.gypi b/build/common.gypi
-+index 7ec5ae2..11e8d1d 100644
-+--- a/build/common.gypi
-++++ b/build/common.gypi
-+@@ -6027,16 +6027,6 @@
-+         ['CXX.host', '<(host_cxx)'],
-+       ],
-+     }],
-+-    ['OS=="linux" and target_arch=="arm" and host_arch!="arm" and chromeos==0 and clang==0', {
-+-      # Set default ARM cross tools on linux.  These can be overridden
-+-      # using CC,CXX,CC.host and CXX.host environment variables.
-+-      'make_global_settings': [
-+-        ['CC', '<!(which arm-linux-gnueabihf-gcc)'],
-+-        ['CXX', '<!(which arm-linux-gnueabihf-g++)'],
-+-        ['CC.host', '<(host_cc)'],
-+-        ['CXX.host', '<(host_cxx)'],
-+-      ],
-+-    }],
-+     ['use_goma==1', {
-+       'make_global_settings': [
-+        ['CC_wrapper', '<(gomadir)/gomacc'],
-+-- 
-+2.1.4
-diff --git a/recipes-browser/chromium/files/0003-Remove-hard-coded-values-for-CC-and-CXX.patch b/recipes-browser/chromium/files/0003-Remove-hard-coded-values-for-CC-and-CXX.patch
-index 63de68a..7bc8d14 100644
---- a/recipes-browser/chromium/files/0003-Remove-hard-coded-values-for-CC-and-CXX.patch
-+++ b/recipes-browser/chromium/files/0003-Remove-hard-coded-values-for-CC-and-CXX.patch
-@@ -21,7 +21,7 @@ diff --git a/build/common.gypi b/build/common.gypi
- index 7ec5ae2..11e8d1d 100644
- --- a/build/common.gypi
- +++ b/build/common.gypi
--@@ -6027,16 +6027,6 @@
-+@@ -6047,16 +6047,6 @@
-          ['CXX.host', '<(host_cxx)'],
-        ],
-      }],
-@@ -35,8 +35,9 @@ index 7ec5ae2..11e8d1d 100644
- -        ['CXX.host', '<(host_cxx)'],
- -      ],
- -    }],
--     ['use_goma==1', {
--       'make_global_settings': [
--        ['CC_wrapper', '<(gomadir)/gomacc'],
-+     # TODO(yyanagisawa): supports GENERATOR==make
-+     #  make generator doesn't support CC_wrapper without CC
-+     #  in make_global_settings yet.
- -- 
--2.1.4
-+1.9.1
-+
+Best,
 -- 
-2.7.4
+Jacobo Aragunde
+Software Engineer at Igalia
+
+
+On 31/01/17 09:56, Herve Jourdain wrote:
+> Hi Jacobo, Khem,
+> 
+> I'm traveling, so not able to access my build system for a few more days.
+> I didn't check Julien's patch yet, so as long as it does at least what mine does, it should be OK for me.
+> I'm open to whatever solution, whether I regenerate a patch or Jacobo integrates it in his.
+> One thing I will do, though, is test the resulting recipe on my build platform, to see if it's still working in my configuration.
+> 
+> Cheers,
+> Herve
+> 
+>> On 31 Jan 2017, at 03:04, Jacobo Aragunde P¨¦rez <jaragunde@igalia.com> wrote:
+>>
+>>> On 30/01/17 19:36, Khem Raj wrote:
+>>> On Mon, Jan 30, 2017 at 10:33 AM, Jacobo Aragunde P¨¦rez
+>>> <jaragunde@igalia.com> wrote:
+>>>> Hi Khem Raj,
+>>>>
+>>>> sorry, I didn't understand your response. Do you prefer I send a new
+>>>> version of the rebase patch, including Herve's fix? In that case, Herve,
+>>>> I think I could use jbriance's upstream patch so you don't need to
+>>>> generate it, if you all agree. I'd use the one that didn't get merged
+>>>> [1], because we need the .gyp part too.
+>>>>
+>>>> Future rebases will require changes to use GN, at that point we should
+>>>> probably get rid of this custom patch. That's a problem for another day,
+>>>> though :)
+>>>
+>>> I was thinking both of Herve and you will send your patches
+>>> independently after rework but if you can integrate both that would be
+>>> wonderful.
+>>>
+>>
+>> I definitely can, it's easy enough by picking Julien's diff from
+>> Chromium code review. I've updated my patch and just triggered a build
+>> to make sure everything is in place, it will compile overnight. I just
+>> don't want to "steal" Herve's idea, so I'll wait for his blessing :)
+>>
+>> Best,
+>> -- 
+>> Jacobo Aragunde
+>> Software Engineer at Igalia
+>>
+>>>>
+>>>> [1] https://codereview.chromium.org/2239833003/#ps1
+>>>>
+>>>> Thank you all,
+>>>> --
+>>>> Jacobo Aragunde
+>>>> Software Engineer at Igalia
+>>>>
+>>>>
+>>>>> On 29/01/17 02:13, Khem Raj wrote:
+>>>>> Hi Herve
+>>>>>
+>>>>> Yes please send a V2 with suggested changes.
+>>>>>
+>>>>>> On Sat, Jan 28, 2017 at 7:05 AM, Herve Jourdain <herve.jourdain@neuf.fr> wrote:
+>>>>>> Hi Khem,
+>>>>>>
+>>>>>> Shall I generate a proper patch with the proper header? Or should Jacobo add that to his patch?
+>>>>>> I'm not even sure the patch is accepted on master yet.
+>>>>>>
+>>>>>> Cheers,
+>>>>>> Herve
+>>>>>>
+>>>>>>> On 28 Jan 2017, at 01:51, Khem Raj <raj.khem@gmail.com> wrote:
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>> On 1/27/17 6:06 AM, Julien Brianceau (jbriance) wrote:
+>>>>>>>>> -----Original Message-----
+>>>>>>>>> From: openembedded-devel-bounces@lists.openembedded.org
+>>>>>>>>> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+>>>>>>>>> Khem Raj
+>>>>>>>>> Sent: vendredi 27 janvier 2017 02:47
+>>>>>>>>> To: openembedded-devel@lists.openembedded.org
+>>>>>>>>> Subject: Re: [oe] [meta-browser][PATCH v2] chromium-wayland: update to
+>>>>>>>>> 53.0.2785.14
+>>>>>>>>>
+>>>>>>>>>
+>>>>>>>>>
+>>>>>>>>>> On 1/25/17 9:50 PM, Herve Jourdain wrote:
+>>>>>>>>>> Hi Jacob,
+>>>>>>>>>>
+>>>>>>>>>> I've been able to compile chromium-wayland 53.0.2785.14 on
+>>>>>>>>> RaspberryPi, with Wayland only (no X11), BUT I had to add an additional
+>>>>>>>>> patch for it to work, or else I get an error in
+>>>>>>>>> ui/events/keycodes/keyboard_code_conversion_xkb.cc.
+>>>>>>>>>> I'm using VC4, which has a DRM/KMS interface (it seems that DRM
+>>>>>>>>> interface is required by ozone-wayland), but this patch seems to not be
+>>>>>>>>> related to RaspberryPi itself.
+>>>>>>>>>> Basically, it seems that USE_XKBCOMMON is not defined when compiling
+>>>>>>>>> keycodes.
+>>>>>>>>>>
+>>>>>>>>>> Is it something that you saw as well? Or do you have a different
+>>>>>>>>> setting/experience?
+>>>>>>>>>>
+>>>>>>>>>> Just for reference, here is the patch I need (right now, I'm
+>>>>>>>>> triggering it from meta-raspberrypi, but I believe it may be needed in
+>>>>>>>>> meta-browser).
+>>>>>>>>>>
+>>>>>>>>>> --- a/ui/events/keycodes/events_keycodes.gyp    2017-01-23
+>>>>>>>>> 19:12:01.767271256 +0800
+>>>>>>>>>> +++ b/ui/events/keycodes/events_keycodes.gyp    2017-01-23
+>>>>>>>>> 19:12:11.503048216 +0800
+>>>>>>>>>> @@ -21,6 +21,9 @@
+>>>>>>>>>>        'scoped_xkb.h',
+>>>>>>>>>>        'xkb_keysym.h',
+>>>>>>>>>>      ],
+>>>>>>>>>> +      'defines': [
+>>>>>>>>>> +        'USE_XKBCOMMON',
+>>>>>>>>>
+>>>>>>>>> This seems fine to me. It should also be proposed upstream as well I
+>>>>>>>>> think.
+>>>>>>>>>
+>>>>>>>>
+>>>>>>>> For the record, I've already tried to upstream a similar change (see Patch Set 1 of review https://codereview.chromium.org/2239833003/), but only the GN part has been accepted as gyp support has been removed in Chromium 54.
+>>>>>>>>
+>>>>>>>
+>>>>>>> thats we should make a note of this in patch header. We will have to
+>>>>>>> remove it or replace it as well when we upgrade chromium.
+>>>>>>>> Julien
+>>>>>>>>
+>> -- 
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+
 
 
