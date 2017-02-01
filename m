@@ -1,50 +1,44 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 821EA600EA;
-	Wed,  1 Feb 2017 17:48:55 +0000 (UTC)
-Received: by mail-wm0-f44.google.com with SMTP id c85so50015216wmi.1;
-	Wed, 01 Feb 2017 09:48:55 -0800 (PST)
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 8BE3A71C64
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Feb 2017 18:10:22 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id r18so7295091wmd.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Feb 2017 10:10:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=9gbOcWhGD1huV5Zc1lYVy/shzAByJGJwI2VSggp8KW4=;
-	b=KGj9Kp3T3hjrxEiTw9NEreqv7fkKBA3MhAaQMsRENDNM9cgUi0de6mvIBIQfRQ0LPO
-	yd6sAZlgHgrOAqvRE3Qq8kfdiSbrB3jschsW1WanitqLj5FFEAu3qYm14HOb6JiV8VQe
-	Rq55RFalQWdsWERUdkXrqP8ZPenAmFuYUR8M+BbqO4h50ByJ6eHa5U2dGB7M2GsdeRIe
-	yANkOSfU/cFT+bH1tciry54A1fBUdZKQLBM+KLrBByAErZSA+QKTNYE2qWEO1YbK5IQW
-	JyTMcA2//y6WRlrON5svhorvuzRaT8nfT+zmscuQRmhM0BTjCVl1ykyv5yBDTkINU6u2
-	8O4A==
+	h=from:to:cc:subject:date:message-id;
+	bh=/5tgPdV0u43ntXoh8AzzfePPk4IZfhY0Ts9ILzsnjTo=;
+	b=NHYIMlG3hiPRONz1k7wIFyTxssYuR+CAclPcGGDUyFtsv3kBA6N9IRX1MsLoNhWJtf
+	so/UMCeR5WkY7eB11fCVDrdcLQxF1oxs/EvrSNsCHpZcOJIckwVAeqYq9KkNMPIgv4bs
+	QzOo/zm2aSDIlCy/tVltprOINRrMtZV70N3ni/TeYmnNruR+dGZHvJ5HPHxF/kIl1130
+	xOsC8MhOGLyAYFn4La6mLigUOuifTo15zv/B+EtWQOo7/mhUSFF5b9N7rmmB+93p0zJA
+	IFfWCA1uqmDDQWyQmmo10F5oph0hNP/ouO8RMSZ3romb8Lt/dBAsrmosT1jn6a3JhHq+
+	Ba+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=9gbOcWhGD1huV5Zc1lYVy/shzAByJGJwI2VSggp8KW4=;
-	b=MY7ENiitslZHhlSVubHCrRP/nAnW3DIPD+ax46Qri5r+5w2hrP2CSj9mo803iquVi4
-	lFjy64eiZnVu2JqQWUDoq0O4Y9G6gMn13RPZVt+9/j6n/hMTZIQgcD8WiBM8rAMu/dZG
-	BSXn/4L8fZqRsqDehDV0S0rZghnOn9zN9qj+YaOMMfG2DjPGj/0qcWe9M3Ul2Dl/Osus
-	A0LuGa36u3kimgFrIv+0lyAncZT94bITshAGJFP3G2KHcdlTE3ThRuYaUpW+vYDv/1yw
-	TPGoDq20bL/82P7YHVnjaWe140EOWcJFH+mXavf9B2vtMkldZJuFR4CJdpNSZYW1MGHz
-	PJ0w==
-X-Gm-Message-State: AIkVDXJoorFO1NGwpHNn3weD4X5qCsLfCwvbVerA4vUqjmdFcLrIMcru9fWx0PNzZvg7mA==
-X-Received: by 10.223.133.226 with SMTP id 31mr3633249wru.137.1485971335133;
-	Wed, 01 Feb 2017 09:48:55 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=/5tgPdV0u43ntXoh8AzzfePPk4IZfhY0Ts9ILzsnjTo=;
+	b=RYkrTR1M9H0NdVNgxyxQTsG9/YouQN6QEJYDsJ8axMzPpJdl31bsmDoh7uOLYJlIAd
+	7KCgZOgMUVir6HT4/wJWMGMcGj1C97LAujorgeuTjbSpqLIzss+ys8kMgpCvgzL4RVB+
+	etZfDdRDyTXTJxfHl+doTgGkZnqTMWt3ubUN7SEatqWvKJ7//l+xz+XCKTdUp9+xPVS5
+	Z2ED6yTgRnoGTacWE8pzSE4axditLro2I07Wg+F3ImYSaRaGr9GWbIsCk6OzMB5wwUv+
+	qgvOuFQbo6Qjz+4eRSWCLGhuGp8gSoDiYfFJ6hhE7gl/qjr9S/36ZMKiam39pojle3AT
+	ZZmw==
+X-Gm-Message-State: AIkVDXL12CdGuaaMbUlFXOEI9AY6HDiArhQrjiCCxfhfyqemnJ7vZC1AXAWQnlB1vFNfag==
+X-Received: by 10.28.20.144 with SMTP id 138mr18695698wmu.41.1485972622284;
+	Wed, 01 Feb 2017 10:10:22 -0800 (PST)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	x25sm35369948wrx.27.2017.02.01.09.48.54
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 01 Feb 2017 09:48:54 -0800 (PST)
+	m29sm35321336wrm.38.2017.02.01.10.10.21
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 01 Feb 2017 10:10:21 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 1 Feb 2017 18:48:55 +0100
-To: "Burton, Ross" <ross.burton@intel.com>
-Message-ID: <20170201174855.GC4362@jama>
-References: <20170131171049.GA3273@jama>
-	<CAJTo0LYxg6dt6bmDg_x2_X4L9GTK5dBzBic7K41=seDNUFts3Q@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAJTo0LYxg6dt6bmDg_x2_X4L9GTK5dBzBic7K41=seDNUFts3Q@mail.gmail.com>
-User-Agent: Mutt/1.7.2 (2016-11-26)
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-01-31
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  1 Feb 2017 19:10:17 +0100
+Message-Id: <20170201181018.12894-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.10.2
+Subject: [PATCH][meta-oe 1/2] vboxguestdrivers: upgrade to 5.1.14 to fix compatibility with 4.9 kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,43 +51,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Feb 2017 17:48:56 -0000
-X-Groupsio-MsgNum: 64955
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="UnaWdueM1EBWVRzC"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 01 Feb 2017 18:10:23 -0000
 
---UnaWdueM1EBWVRzC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../{vboxguestdrivers_5.1.6.bb => vboxguestdrivers_5.1.14.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_5.1.6.bb => vboxguestdrivers_5.1.14.bb} (93%)
 
-On Tue, Jan 31, 2017 at 08:08:20PM +0000, Burton, Ross wrote:
-> On 31 January 2017 at 17:10, Martin Jansa <martin.jansa@gmail.com> wrote:
->=20
-> > There is a lot more failures this time (mostly because of RSS), but
-> > I wanted to share it anyway, to be clear about the current state of
-> > other layers.
-> >
->=20
-> I presume you'll be changing this script as the minimal/maximal build runs
-> are redundant now that recipe-specific-sysroots has landed?
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.1.6.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.1.14.bb
+similarity index 93%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.1.6.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.1.14.bb
+index 8665267..dde5b0b 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.1.6.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.1.14.bb
+@@ -14,8 +14,8 @@ VBOX_NAME = "VirtualBox-${PV}"
+ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
+            file://Makefile.utils \
+ "
+-SRC_URI[md5sum] = "8c2331a718cfc038963c1214c2ba9811"
+-SRC_URI[sha256sum] = "2e0112b0d85841587b8f212e6ba8f6c35b31e1cce6b6999497dc917cd37e6911"
++SRC_URI[md5sum] = "21eaec9f21477d555559a63761779880"
++SRC_URI[sha256sum] = "8267bb026717c6e55237eb798210767d9c703cfcdf01224d9bc26f7dac9f228a"
+ 
+ S = "${WORKDIR}/vbox_module"
+ 
+-- 
+2.10.2
 
-Yes, I've changed it so next time it won't show the results from
-test-dependencies jobs.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---UnaWdueM1EBWVRzC
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWJIfhgAKCRA3VSO3ZXaA
-HH9TAJ9zzwRKMx3oCaRZ2FwmYXdg9OgLVgCgmPsk9pVyGMkJlpi6JEvZQu8IHQc=
-=bTKi
------END PGP SIGNATURE-----
-
---UnaWdueM1EBWVRzC--
