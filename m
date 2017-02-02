@@ -1,24 +1,44 @@
-Return-Path: <Paul.Gortmaker@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id AF7DA6025F
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id B8499605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Feb 2017 21:46:05 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v12Lk4oc014827
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu,  2 Feb 2017 23:54:07 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id c85so430419wmi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 2 Feb 2017 13:46:05 -0800 (PST)
-Received: from localhost.localdomain (128.224.56.212) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Thu, 2 Feb 2017 13:46:04 -0800
-From: Paul Gortmaker <paul.gortmaker@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 2 Feb 2017 16:45:59 -0500
-Message-ID: <20170202214559.4126-1-paul.gortmaker@windriver.com>
-X-Mailer: git-send-email 2.11.0
-MIME-Version: 1.0
-Subject: [PATCH] udisks2: add libxslt-native to DEPENDS for xsltproc to be in sysroot
+	Thu, 02 Feb 2017 15:54:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=HQClPtsq8I/5jm5eFW0Lmn8RH9YeAwellLJPEMhXUII=;
+	b=SVWXW6oqg+C/H1MwFSGdc1tbiF4YlRa9FFRMnvl01ksobdHKUHkgiqMPvyXlMxFfA2
+	Y+HHwt8xF1VjFQZV0kZRQ5QYMn+DlFiG8BIxrtWk7zfIOscZB9sXamzDVpCEeO+OQmrN
+	6qBNw05mCQ1fSu03X5NPPwmRmsXCo5O0WhgeShdY+VPJb8t2lzrupWsERZwaC6MA50J/
+	lj7qJX3NU+UZxGH7vCTQZ9aRQ4oLcovcdYhTnybcnT6QGdOVYIyqwBvvXsDNFkZHTwmJ
+	vr944NW/z17q/ecwCnMGfd6k9yRm849MP7kM+1QM24gb0/DFAY9mwn11tlp1oZ9aL0V9
+	4m+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=HQClPtsq8I/5jm5eFW0Lmn8RH9YeAwellLJPEMhXUII=;
+	b=dsxgIQf9+3gBgng9a+RJ4x3cqaz6AUvDDNKl4LXnuNV/lGXrvbvjZeW5v1FMNQ0FiK
+	nSnmHH3Dz+ASILoV+YaL6jpBbGb2P+99+kYyrz8KrXBk5i+xKX3AEkp+evwHVP8xnV6Y
+	lu9Xevwl/W3h9dhFprbwYzs4xBrimlxz7emXN7i8dC7YuhDA1UKOLQzvt/GjPhMbW7/y
+	U2sUlqjw4n6gOsfPZyo73XDuUo228MiMz5u0vndq6K6xdXqek4IrK+nOK1w529EQgrkD
+	Ixi5lOT8GSnPMrpVeWUhhj+YlKADXF/k4+lbraTPlCiZhww88+TvIjjADS4MJz//e80y
+	jnhg==
+X-Gm-Message-State: AMke39lqPuVSGGmlarVgNB4amonSQFvvw9EAHg5ipzH2Bgm5fQTQ69POiO+aHFfeTUF2qA==
+X-Received: by 10.28.105.68 with SMTP id e65mr108136wmc.44.1486079647083;
+	Thu, 02 Feb 2017 15:54:07 -0800 (PST)
+Received: from localhost ([217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id e14sm143469wmd.14.2017.02.02.15.54.06
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 02 Feb 2017 15:54:06 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  3 Feb 2017 00:53:58 +0100
+Message-Id: <20170202235401.10297-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.10.2
+Subject: [PATCH][meta-qt5 1/4] qtbase: create empty oe-device-extra.pri
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,38 +51,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2017 21:46:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 02 Feb 2017 23:54:09 -0000
 
-This started showing up recently on machines w/o xsltproc in
-their path:
+From: Herve Jourdain <herve.jourdain@neuf.fr>
 
-| checking for xsltproc... no
-| configure: error: xsltproc is needed
-| WARNING: udisks2/2.1.7-r0/temp/run.do_configure.29255:1 exit 1
-| ERROR: Function failed: do_configure (log file is located at
-| build/tmp/work/core2-64-overc-linux/udisks2/2.1.7-r0/temp/log.do_configure.29255)
+During configure, it complains it can't find oe-device-extra.pri,
+but it doesn't result in any error. Fix it, though, just in case.
 
-Presumably the splitting of the sysroot made this happen more
-frequently on such machines that didn't have a host install of the
-xsltproc binary.
+Signed-off-by: Herve Jourdain <herve.jourdain@neuf.fr>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes-qt/qt5/qtbase_git.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
-
-diff --git a/meta-oe/recipes-support/udisks/udisks2_2.1.7.bb b/meta-oe/recipes-support/udisks/udisks2_2.1.7.bb
-index fbf6701ac3ad..976d36a2ba99 100644
---- a/meta-oe/recipes-support/udisks/udisks2_2.1.7.bb
-+++ b/meta-oe/recipes-support/udisks/udisks2_2.1.7.bb
-@@ -2,7 +2,7 @@ SUMMARY = "udisks provides dbus interfaces for disks and storage devices"
- LICENSE = "GPLv2+ & LGPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=dd79f6dbbffdbc8e86b086a8f0c0ef43"
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index 354a01c..5db9aad 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -130,6 +130,9 @@ QT_CONFIG_FLAGS += " \
+ "
  
--DEPENDS = "acl libatasmart polkit libgudev dbus-glib glib-2.0 intltool-native gnome-common-native"
-+DEPENDS = "acl libatasmart polkit libgudev dbus-glib glib-2.0 intltool-native gnome-common-native libxslt-native"
- DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
- 
- RDEPENDS_${PN} = "acl"
+ do_configure() {
++    # Avoid qmake error "Cannot read [...]/usr/lib/qt5/mkspecs/oe-device-extra.pri: No such file or directory" during configuration
++    touch ${S}/mkspecs/oe-device-extra.pri
++
+     ${S}/configure -v \
+         -opensource -confirm-license \
+         -sysroot ${STAGING_DIR_TARGET} \
 -- 
-2.11.0
+2.10.2
 
 
