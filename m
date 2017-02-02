@@ -1,45 +1,34 @@
-Return-Path: <andreas.kling@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 31D1A71D97
+Return-Path: <herve.jourdain@neuf.fr>
+Received: from smtp26.services.sfr.fr (smtp26.services.sfr.fr [93.17.128.20])
+	by mail.openembedded.org (Postfix) with ESMTP id BA03871D9D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Feb 2017 14:09:05 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id u63so4461996wmu.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Feb 2017 06:09:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=ZQRCVqjwb2F+RWmkaU2jyRsaq1i2P2Q5J3ZiAtxo4qY=;
-	b=MMl67VJ+fmmjgvLCr57rdQ3qRiyUBZN/TPeJkq9Sp7zEzJgk60wJxe/q64ewwyjTaO
-	m+pSLlzZtHyjOUQdlFwqhPRXVI00rMJzRWu4cSa/kgjbCYn8xwt2mUHszvxhdPaebVaK
-	fnV3iGkOOLQHmt56k5GVDEGmMxR+kGacRt90Jitj84s6JBaKCG2Uvx+YFxf6COzZOMOg
-	u7V5153Tklu85PrD76NZPbdulzEGFL9GYJ2p1MPcboe5K+oM94nosWLThEOXT8dGFf/Z
-	WRF6zx7KoUCtmA7G3LMhgCY0QwFXp+2eA2Rb6FN/NQXksKS9kAdYGrqcCrjCm98QUlLW
-	6bkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=ZQRCVqjwb2F+RWmkaU2jyRsaq1i2P2Q5J3ZiAtxo4qY=;
-	b=sAhxgOua9ylVVirb8Mw7aXYDR4Ywub3o6UVFnzR6Bkrx6mrC5G0IiOLqdkDBXDvCXr
-	upvfUDMcLT+8SygX2Ta7HSUWDGOQpHMoRIVH+nqCyFig54gnOzNyEMiIUW4oRumdSZ0l
-	MMW8jWtiK1+/1cf32xbzXTzbuQS+T3JLqVZkhIguzA6iPXk3RDS4qliryjG8eAyCyI3C
-	cnlcTgZJzqTO3lL2yAp3JnEC2Uq1X6Jqa11RI+NrUxF/yuNywM3Inds9AXbcXIXUuLKN
-	RO89yTFnPsguvWxZiJjtngB05IgXOPeGfU/AbEsv06bnRqfz5kpaSWJqNeyKOn1gKMO6
-	mpfQ==
-X-Gm-Message-State: AIkVDXI8X4J6mLkun5I6XzlGvig9IaGvPF5AMu6M4KHONJHU21onC1/tDEJt6pjNME3+Ji4x9Bu+r7DPZkzWeg==
-X-Received: by 10.28.46.74 with SMTP id u71mr7425591wmu.136.1486044545921;
-	Thu, 02 Feb 2017 06:09:05 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.28.150.194 with HTTP; Thu, 2 Feb 2017 06:09:05 -0800 (PST)
-In-Reply-To: <CADNbA1pRhAGixv0xkf1+08f7FvFOdfhYwjeCmZ3B5mgQeHG+3g@mail.gmail.com>
-References: <20170202134911.23234-1-andreas.kling@gmail.com>
-	<20170202134911.23234-2-andreas.kling@gmail.com>
-	<CADNbA1pRhAGixv0xkf1+08f7FvFOdfhYwjeCmZ3B5mgQeHG+3g@mail.gmail.com>
-From: Andy <andreas.kling@gmail.com>
-Date: Thu, 2 Feb 2017 15:09:05 +0100
-Message-ID: <CAE-gg=78meVcZ7Z7YdHS5_LZ5OojpWxyvBTAaMPR052_E2C7CA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-python][PATCH 2/2] m2crypto: depend on typing
+	Thu,  2 Feb 2017 15:33:24 +0000 (UTC)
+Received: from [192.168.1.13] (114-44-143-118.dynamic.hinet.net
+	[114.44.143.118])
+	by msfrf2631.sfr.fr (SMTP Server) with ESMTP id E1D371C001C2A;
+	Thu,  2 Feb 2017 16:33:24 +0100 (CET)
+Received: from [192.168.1.13] (114-44-143-118.dynamic.hinet.net
+	[114.44.143.118])	(using TLSv1
+	with cipher ECDHE-RSA-AES256-SHA (256/256 bits))	(No client certificate
+	requested)	(Authenticated sender: herve.jourdain@neuf.fr)
+	by msfrf2631.sfr.fr (SMTP Server) with ESMTPSA;
+	Thu,  2 Feb 2017 16:33:23 +0100 (CET)
+Authentication-Results: sfr.fr; auth=pass (PLAIN)
+	smtp.auth=herve.jourdain@neuf.fr
+Mime-Version: 1.0 (1.0)
+From: Herve Jourdain <herve.jourdain@neuf.fr>
+X-Mailer: iPhone Mail (14C92)
+In-Reply-To: <8a8cfdfa-a4bd-186d-cf2f-3c4b85e97444@igalia.com>
+Date: Thu, 2 Feb 2017 23:33:18 +0800
+Message-Id: <6D9FE7AD-421A-4989-AB98-68A80D401138@neuf.fr>
+References: <1486037824-303-1-git-send-email-jaragunde@igalia.com>
+	<417f4579-bbbf-2996-ed75-9a9b3fc71a35@igalia.com>
+	<021701d27d52$70efce00$52cf6a00$@neuf.fr>
+	<8a8cfdfa-a4bd-186d-cf2f-3c4b85e97444@igalia.com>
+To: Jacobo Aragunde =?iso-8859-1?b?UOlyZXo=?= <jaragunde@igalia.com>
+X-sfr-mailing: LEGIT
+Cc: openembedded-devel@lists.openembedded.org, otavio@ossystems.com.br
+Subject: Re: [meta-browser][PATCH] chromium-wayland: fix compilation problem on non-X11 builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,58 +41,178 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2017 14:09:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 02 Feb 2017 15:33:26 -0000
+Content-Type: text/plain; charset=gb2312
+Content-Transfer-Encoding: quoted-printable
 
-you are right, this was a dependency during runtime of native, my
-build of crda failed with
-ERROR: Failed to import the "M2Crypto" module: No module named typing
-How should the the RDPENDS look like? Obviously I was to stupid to
-write it down correctly.
+Hi Jacobo,
 
-2017-02-02 15:00 GMT+01:00 Derek Straka <derek@asterius.io>:
-> Is this meant to be a build time dependency?  If it were required to build,
-> I would have expected to see a build failure.
->
-> -Derek
->
-> On Thu, Feb 2, 2017 at 8:49 AM, <andreas.kling@gmail.com> wrote:
->
->> From: Andy Kling <andreas.kling@peiker-cee.de>
->>
->>   m2crypto requires typing since 0.24.0-38-g8bbd0ec
->> ---
->>  meta-python/recipes-devtools/python/python-m2crypto_0.25.1.bb | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/meta-python/recipes-devtools/python/python-m2crypto_0.25.1.bb
->> b/meta-python/recipes-devtools/python/python-m2crypto_0.25.1.bb
->> index 5a9594f07..ca462229e 100644
->> --- a/meta-python/recipes-devtools/python/python-m2crypto_0.25.1.bb
->> +++ b/meta-python/recipes-devtools/python/python-m2crypto_0.25.1.bb
->> @@ -12,7 +12,7 @@ SRC_URI += "file://0001-setup.py-link-in-
->> sysroot-not-in-host-directories.patch "
->>  PYPI_PACKAGE = "M2Crypto"
->>  inherit pypi setuptools siteinfo
->>
->> -DEPENDS += "openssl swig-native"
->> +DEPENDS += "openssl swig-native python-typing"
->>
->>  DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_DIR_HOST}
->> -I${STAGING_INCDIR}"
->>  DISTUTILS_INSTALL_ARGS += "build_ext --openssl=${STAGING_DIR_HOST}"
+OK, I will send those extra patched to the meta-raspberry list tomorrow then=
+.
+
+Cheers,
+Herve
+
+> On 2 Feb 2017, at 21:28, Jacobo Aragunde P=A8=A6rez <jaragunde@igalia.com>=
+ wrote:
+>=20
+>> On 02/02/17 13:46, Herve Jourdain wrote:
+>> Hi Jacobo,
+>>=20
+>> I'm using "master", and I do have patches for enabling armv7ve. But since=
+
+>> they're needed only for raspberrypi, I planned to submit them only for
+>> meta-raspberrypi.
+>> If you think it could be useful in meta-browser, though, I can submit the=
+m there.
+>>=20
+>=20
+> Oh, I think sending them to meta-rpi would be good enough, thank you!
+> I'll keep an eye on it.
+>=20
+> Best regards,
+> --=20
+> Jacobo Aragunde
+> Software Engineer at Igalia
+>=20
+>=20
+>> -----Original Message-----
+>> From: Jacobo Aragunde P=A8=A6rez [mailto:jaragunde@igalia.com]=20
+>> Sent: jeudi 2 f=A8=A6vrier 2017 13:30
+>> To: openembedded-devel@lists.openembedded.org
+>> Cc: otavio@ossystems.com.br; Herve Jourdain <herve.jourdain@neuf.fr>
+>> Subject: Re: [meta-browser][PATCH] chromium-wayland: fix compilation prob=
+lem on non-X11 builds
+>>=20
+>> Thank you all for your reviews. This should be the last patch, it address=
+es Herve's problem when building on a Raspberry Pi.
+>>=20
+>> Unfortunately, I haven't been able to reproduce his problem myself, but t=
+his patch is actually a backport of an upstream patch, so it makes no harm i=
+n my opinion.
+>>=20
+>> Another question, are you using krogoth in you rpi build? I found problem=
+s with the declared architecture in releases newer than jethro, it is called=
+ "armv7ve" and chromium doesn't build because it expects "armv7a". We could u=
+se a patch if you have worked around this problem :)
+>>=20
+>> Thanks again,
 >> --
->> 2.11.0
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> Jacobo Aragunde
+>> Software Engineer at Igalia
+>>=20
+>>=20
+>>> On 02/02/17 13:17, Jacobo Aragunde P=A8=A6rez wrote:
+>>> Certain build configurations enable a code path that includes
+>>> keyboard_code_conversion_xkb.cc, but it eventually fails in non-X11
+>>> environments because of a missing patch that is present upstream.
+>>>=20
+>>> This commit adds the missing patch from
+>>> https://codereview.chromium.org/2239833003
+>>>=20
+>>> There are two versions of the patch in the code review URL above.
+>>> The first version fixes the problem both under the gyp and GN build
+>>> systems. That patch was rejected because gyp is considered deprecated
+>>> upstream. The second version fixes the problem only on GN and it was
+>>> merged upstream. We are picking the first version because our recipes
+>>> still use gyp to build.
+>>>=20
+>>> Signed-off-by: Jacobo Aragunde P=A8=A6rez <jaragunde@igalia.com>
+>>> ---
+>>> .../chromium/chromium-wayland_53.0.2785.143.bb     |  1 +
+>>> .../fix-non-x11-build-when-use_xkbcommon-1.patch   | 51 ++++++++++++++++=
+++++++
+>>> 2 files changed, 52 insertions(+)
+>>> create mode 100644 recipes-browser/chromium/chromium/chromium-wayland/fi=
+x-non-x11-build-when-use_xkbcommon-1.patch
+>>>=20
+>>> diff --git a/recipes-browser/chromium/chromium-wayland_53.0.2785.143.bb b=
+/recipes-browser/chromium/chromium-wayland_53.0.2785.143.bb
+>>> index a75918b..ef913a7 100644
+>>> --- a/recipes-browser/chromium/chromium-wayland_53.0.2785.143.bb
+>>> +++ b/recipes-browser/chromium/chromium-wayland_53.0.2785.143.bb
+>>> @@ -13,6 +13,7 @@ SRC_URI +=3D "\
+>>>         file://chromium-wayland/0011-Replace-readdir_r-with-readdir.patc=
+h \
+>>>         file://chromium-wayland/remove-Werror.patch \
+>>>         file://chromium-wayland/guard-x11_desktop_handler-inclusion.patc=
+h \
+>>> +        file://chromium-wayland/fix-non-x11-build-when-use_xkbcommon-1.=
+patch \
+>>>         ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file:/=
+/component-build.gypi', '', d)} \
+>>>         ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'fi=
+le://0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \=
+
+>>> "
+>>> diff --git a/recipes-browser/chromium/chromium/chromium-wayland/fix-non-=
+x11-build-when-use_xkbcommon-1.patch b/recipes-browser/chromium/chromium/chr=
+omium-wayland/fix-non-x11-build-when-use_xkbcommon-1.patch
+>>> new file mode 100644
+>>> index 0000000..976ece9
+>>> --- /dev/null
+>>> +++ b/recipes-browser/chromium/chromium/chromium-wayland/fix-non-x11-bui=
+ld-when-use_xkbcommon-1.patch
+>>> @@ -0,0 +1,51 @@
+>>> +From: jbriance <jbriance@cisco.com>
+>>> +Subject: keycodes: Fix non-X11 build when use_xkbcommon=3D1
+>>> +
+>>> +Since M51, ui/events/keycodes/xkb_keysym.h follows X11 path, even if
+>>> +use_xkbcommon=3D1 is set because USE_XKBCOMMON is not defined, leading
+>>> +to the following compilation error in this case:
+>>> +
+>>> +  In file included from ../../ui/events/keycodes/keyboard_code_conversi=
+on_xkb.h:12:0,
+>>> +                   from ../../ui/events/keycodes/keyboard_code_conversi=
+on_xkb.cc:5:
+>>> +  ../../ui/events/keycodes/xkb_keysym.h:19:19: fatal error: X11/X.h: No=
+ such file or directory
+>>> +
+>>> +BUG=3Dnone
+>>> +
+>>> +Review-Url: https://codereview.chromium.org/2239833003
+>>> +--
+>>> +
+>>> +Index: ui/events/keycodes/BUILD.gn
+>>> +diff --git a/ui/events/keycodes/BUILD.gn b/ui/events/keycodes/BUILD.gn
+>>> +index 4f2d47c2497d321332c79d0dd4e9007b50c319c7..716c7ed17cc8049ea65b95a=
+5062e7c6e0adc6e48 100644
+>>> +--- a/ui/events/keycodes/BUILD.gn
+>>> ++++ b/ui/events/keycodes/BUILD.gn
+>>> +@@ -17,6 +17,10 @@ source_set("xkb") {
+>>> +     "//base",
+>>> +     "//ui/events:dom_keycode_converter",
+>>> +   ]
+>>> ++
+>>> ++  if (use_xkbcommon) {
+>>> ++    defines =3D [ "USE_XKBCOMMON" ]
+>>> ++  }
+>>> + }
+>>> +=20
+>>> + if (use_x11 || ozone_platform_x11) {
+>>> +Index: ui/events/keycodes/events_keycodes.gyp
+>>> +diff --git a/ui/events/keycodes/events_keycodes.gyp b/ui/events/keycode=
+s/events_keycodes.gyp
+>>> +index b0796b4e2ead8bffe88fb01ed136814be505d967..248e961bad2ad3996ca9962=
+4b6c489c7835f6241 100644
+>>> +--- a/ui/events/keycodes/events_keycodes.gyp
+>>> ++++ b/ui/events/keycodes/events_keycodes.gyp
+>>> +@@ -21,6 +21,13 @@
+>>> +         'scoped_xkb.h',
+>>> +         'xkb_keysym.h',
+>>> +       ],
+>>> ++      'conditions': [
+>>> ++        ['use_xkbcommon=3D=3D1', {
+>>> ++          'defines': [
+>>> ++            'USE_XKBCOMMON',
+>>> ++          ],
+>>> ++        }],
+>>> ++      ],
+>>> +     },
+>>> +   ],
+>>> +   'conditions': [
+>>>=20
+>>=20
+>>=20
+
 
