@@ -1,47 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C5FC71DDD
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 9CB8471DDA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Feb 2017 23:54:10 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id c85so430792wmi.1
+	Fri,  3 Feb 2017 00:00:16 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id r18so440844wmd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Feb 2017 15:54:11 -0800 (PST)
+	Thu, 02 Feb 2017 16:00:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=YMQELozVdjs3zP/wwFMLoBh/NWsV2VGeELaNIA5H2Y8=;
-	b=hAu3PfJw5Bholvd51xBiDazJYuameyokYf5wVKPHcI5i5K1x6CMRdSxsUu41adZajD
-	SLcF3hUnL52ug5Dz0hm1Ed6KN5WI+dY917LdGvtV1ypJsz3YrT6jfR+Wb4Pdejv5BwWd
-	kIAxhM81ib7S/cH19qT10D2sWEWFQwvFI6GPR1uswiVXKvWbdRgbDcSM/4BdNsP7lgYr
-	Zupf99iuIklYJt9y2sljCZ9+0/7bTICLgHUsbWXJgYSa/51KgGIfXUe9K/snWKom74Si
-	5C6IcgpIp9EBBpfWSwQtmio+Am1PkRxmWKLQd5HCmUEkTeDupalOZrDEWk1G6vxGFVDe
-	ULkg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=zJaEzCxo/0N4cdbgW8NB8c4PDwcE+yLJ4mxMLiTTpvA=;
+	b=LJSX3RGvx3gYmme1BnQP7wE/LnRGihrhyoxd6Fi211Z6zO269LrZG+NjGJ0uOmT8kG
+	thqOnMV0XEbLetCq6ypK2SK0ST3OAbwjRC0qaM287ERo1QioLMj4taieJms/jt2+Tz3M
+	XmBEfwYm0N0ryAJd/U/UBpI56+drPf6faKvsHc5IkGpl0Nv7V+yBBaQ+YAlyWgIBJJet
+	ysHIDQKFKUL8cyWyOsMr8ifuN9+u5GLlOTPAsYOsrHVYKpaWF80ZylWMZJ/JyOyXOh3h
+	QltwtUlTl9es3CMX1aQMMP7dIUVl5JiSJtJsuMjymnXVeMJFOTip8dpVaoHijTVS8n9C
+	qH9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=YMQELozVdjs3zP/wwFMLoBh/NWsV2VGeELaNIA5H2Y8=;
-	b=bViT/JXz1sQvWa2OpQ9n23C74hQWudKPEWstiV8yBCB3RM4j+g6kEIhCJ3UNS7ARCR
-	GwYbeckJD+Fr403KNPC52uLWcRpLE/DrYwtjNTavTpPnUdEHFr/ocduU8g12Z94ht+hw
-	mDGEBXHHjaXq1QoV3Cu6Jgh8whkeK82Pxf22aorbhXnJYXJsqVWAE+xCCDjfwgk+TAOt
-	3oqGlUWC6/b9/X5Uzm936iKvyRvRVkPVNUJMQOAL0i7F6XmGSMhxJVcoYXD2l1VDZT32
-	GnObvocNNxJzb/Ut3Bb+j5nuSmteIsu+52Czk1KIoxKYZVskQqCL0GrKSe6VG5ZHFuXm
-	W3qg==
-X-Gm-Message-State: AIkVDXLxTCpkqvan/Ac/EfTst++qsKd4E5FXRCaN0dD+J49fEUO2jQ65XC6P8BUx2qMwkQ==
-X-Received: by 10.223.177.18 with SMTP id l18mr9671154wra.96.1486079650478;
-	Thu, 02 Feb 2017 15:54:10 -0800 (PST)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id e74sm180700wmd.2.2017.02.02.15.54.09
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 02 Feb 2017 15:54:09 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  3 Feb 2017 00:54:01 +0100
-Message-Id: <20170202235401.10297-4-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.10.2
-In-Reply-To: <20170202235401.10297-1-Martin.Jansa@gmail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=zJaEzCxo/0N4cdbgW8NB8c4PDwcE+yLJ4mxMLiTTpvA=;
+	b=s6Wx/cG62vJn30p8wyqyWCJFgUALzXYGNmp9Z/CoP5tD3Y1wX3b8L3kS/ERZbirgm0
+	fvC+BYRKAKDe/CV/Qz+bHv0EJnjnwCIuYhWo0Pc1lC9QxXiAN5+HBWJfpsUYfh/i8UVN
+	tqLrwmcAu0sODRDnS4Avx5Lk1aQAY4gmH21/4Y2AtZNYCr6+91q+KmwyqW/XfOoTmjod
+	i8vDNA4Jzps/h/NLU98XM5A031H5MNETy5gxkw0uqiD3EOEAKgR/R37WKSDAyvttyrLV
+	nKjSARvw5cKGVZy5cDqdC+XZlzGCRUICjbP7HEnmDBk+Pu+cex0GOipaPsAYLVbtiNI+
+	fCsg==
+X-Gm-Message-State: AMke39m9oBmv1oM3CEbcQSQx16RGOizRMK3nnfpiOOE8f8fpzSUr3F/Kk1apnBviBks8PzuXTmNdSVBk+HX7lQ==
+X-Received: by 10.28.96.130 with SMTP id u124mr109235wmb.81.1486080017056;
+	Thu, 02 Feb 2017 16:00:17 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.80.148.174 with HTTP; Thu, 2 Feb 2017 16:00:16 -0800 (PST)
+In-Reply-To: <20170202235401.10297-3-Martin.Jansa@gmail.com>
 References: <20170202235401.10297-1-Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-qt5 4/4] qtwebengine: disable generate_character_data
+	<20170202235401.10297-3-Martin.Jansa@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 3 Feb 2017 01:00:16 +0100
+Message-ID: <CA+chaQfmX5Kvi6f+mUwK3rpRE80yF5KtYF_=-YSSqM0Gix0eyw@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH][meta-qt5 3/4] qtwayland: fix build without xkbcommon-evdev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,30 +52,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Feb 2017 23:54:10 -0000
+X-List-Received-Date: Fri, 03 Feb 2017 00:00:17 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* qtwebengine 5.8 fails to build it, because it mixes binaries for x86_64 host and x86 target when building for qemux86 on 64bit host
-  https://bugreports.qt.io/browse/QTBUG-57705
+This isn't enough at least in some setups, but it's good start (it works
+after you add -lxkbcommon in 2 incorrectly generated Makefiles) and at
+least it documents that xkbcommon-evdev is now needed to be set in qtbase
+PACKAGECONFIG.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-qt/qt5/qtwebengine_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Fri, Feb 3, 2017 at 12:54 AM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
 
-diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index 4ab30ea..3d139d0 100644
---- a/recipes-qt/qt5/qtwebengine_git.bb
-+++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -24,7 +24,7 @@ DEPENDS += " \
- "
- 
- DEPENDS += "yasm-native"
--EXTRA_QMAKEVARS_PRE += "GYP_CONFIG+=use_system_yasm"
-+EXTRA_QMAKEVARS_PRE += "GYP_CONFIG+=use_system_yasm GYP_CONFIG+=generate_character_data=0"
- 
- # To use system ffmpeg you need to enable also libwebp, opus, vpx											    
- # Only depenedencies available in oe-core are enabled by default
--- 
-2.10.2
-
+> * xkbcommon-evdev isn't enabled in default qtbase PACKAGECONFIG
+> * use patch from https://bugreports.qt.io/browse/QTBUG-57767
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  .../0001-fix-build-without-xkbcommon-evdev.patch   | 44
+> ++++++++++++++++++++++
+>  recipes-qt/qt5/qtwayland_git.bb                    |  3 ++
+>  2 files changed, 47 insertions(+)
+>  create mode 100644 recipes-qt/qt5/qtwayland/0001-
+> fix-build-without-xkbcommon-evdev.patch
+>
+> diff --git a/recipes-qt/qt5/qtwayland/0001-fix-build-without-xkbcommon-evdev.patch
+> b/recipes-qt/qt5/qtwayland/0001-fix-build-without-xkbcommon-evdev.patch
+> new file mode 100644
+> index 0000000..e1e978e
+> --- /dev/null
+> +++ b/recipes-qt/qt5/qtwayland/0001-fix-build-without-
+> xkbcommon-evdev.patch
+> @@ -0,0 +1,44 @@
+> +From c93dbe53e8a1b2203c750a66c7efe6fc9a326903 Mon Sep 17 00:00:00 2001
+> +From: Raphael Freudiger <raphael.freudiger@siemens.com>
+> +Date: Thu, 22 Dec 2016 13:54:31 +0100
+> +Subject: [PATCH] fix build without xkbcommon-evdev
+> +
+> +Signed-off-by: Raphael Freudiger <raphael.freudiger@siemens.com>
+> +---
+> + src/compositor/compositor_api/qwaylandkeyboard.cpp | 13 +++++++------
+> + 1 file changed, 7 insertions(+), 6 deletions(-)
+> +
+> +diff --git a/src/compositor/compositor_api/qwaylandkeyboard.cpp
+> b/src/compositor/compositor_api/qwaylandkeyboard.cpp
+> +index 55381b4..5c054c6 100644
+> +--- a/src/compositor/compositor_api/qwaylandkeyboard.cpp
+> ++++ b/src/compositor/compositor_api/qwaylandkeyboard.cpp
+> +@@ -338,12 +338,6 @@ void QWaylandKeyboardPrivate::createXKBState(xkb_keymap
+> *keymap)
+> +     xkb_state = xkb_state_new(keymap);
+> + }
+> +
+> +-uint QWaylandKeyboardPrivate::toWaylandXkbV1Key(const uint
+> nativeScanCode)
+> +-{
+> +-    const uint offset = 8;
+> +-    Q_ASSERT(nativeScanCode >= offset);
+> +-    return nativeScanCode - offset;
+> +-}
+> +
+> + void QWaylandKeyboardPrivate::createXKBKeymap()
+> + {
+> +@@ -373,6 +367,13 @@ void QWaylandKeyboardPrivate::createXKBKeymap()
+> + }
+> + #endif
+> +
+> ++uint QWaylandKeyboardPrivate::toWaylandXkbV1Key(const uint
+> nativeScanCode)
+> ++{
+> ++    const uint offset = 8;
+> ++    Q_ASSERT(nativeScanCode >= offset);
+> ++    return nativeScanCode - offset;
+> ++}
+> ++
+> + void QWaylandKeyboardPrivate::sendRepeatInfo()
+> + {
+> +     Q_FOREACH (Resource *resource, resourceMap()) {
+> +--
+> +2.1.4
+> +
+> diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_
+> git.bb
+> index 21abd54..d42d80a 100644
+> --- a/recipes-qt/qt5/qtwayland_git.bb
+> +++ b/recipes-qt/qt5/qtwayland_git.bb
+> @@ -43,4 +43,7 @@ EXTRA_QMAKEVARS_CONFIGURE += "${PACKAGECONFIG_CONFARGS}"
+>
+>  SRCREV = "0e2a950895805457a45abe860bc91a7cc4ba405e"
+>
+> +# From https://bugreports.qt.io/browse/QTBUG-57767
+> +SRC_URI += "file://0001-fix-build-without-xkbcommon-evdev.patch"
+> +
+>  BBCLASSEXTEND =+ "native nativesdk"
+> --
+> 2.10.2
+>
+>
 
