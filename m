@@ -1,36 +1,25 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f182.google.com (mail-qk0-f182.google.com
-	[209.85.220.182])
-	by mail.openembedded.org (Postfix) with ESMTP id AB46260053
+Return-Path: <Michael_Powell@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 2DC5160053
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Feb 2017 17:30:46 +0000 (UTC)
-Received: by mail-qk0-f182.google.com with SMTP id s186so5117218qkb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Feb 2017 09:30:47 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=NdJtTakx/dwuwoqRgych/rFTYFPlEp/rEt12w2u97oU=;
-	b=KN4gEXi3PNFL++ZnkvZbNbccpYvu91WR4cnHTVY21E5yZAWiZmHQ+nQPmPCuzhcsAi
-	zVeD2sfjxAU/vaYw5rrnYgbJTBYP2gSuPuO3CR4/rrL1biQ5T0nWPWtJcF3dNLrG82Ki
-	na7yu+2brPDjyesbtpRdthk9aYu+nhsXkxaTRc1V3AR9Jr73NkZcn2H9DpmBmMQnTUQz
-	oeT+lVwAFkMY6zXRfyiN69qjzyKMtkoof0FAVslQDLENyQZnTZ1SsOc1q7GYMQHjomWk
-	Dr/QVt/D+yGEtobNYIt39cnLO9iTVF80J3Ie6HZz5cSQyqriGesGIbn+7n4hzDXMhvsN
-	7qqQ==
-X-Gm-Message-State: AMke39k+H2Sp1AeleDX20InRMjy303+Vq+XUzMpWoYyp2JIVL0dfJfYQGM7cf7a/eICCpA==
-X-Received: by 10.55.89.196 with SMTP id n187mr14417843qkb.17.1486143047296;
-	Fri, 03 Feb 2017 09:30:47 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
-	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
-	r24sm24861520qkl.5.2017.02.03.09.30.46
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 03 Feb 2017 09:30:46 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  3 Feb 2017 12:30:40 -0500
-Message-Id: <1486143040-14351-1-git-send-email-derek@asterius.io>
+	Fri,  3 Feb 2017 17:46:16 +0000 (UTC)
+Received: from svr-orw-mbx-04.mgc.mentorg.com ([147.34.90.204])
+	by relay1.mentorg.com with esmtp 
+	id 1cZhw9-0007Q2-El from Michael_Powell@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 03 Feb 2017 09:46:17 -0800
+Received: from ALM-MPOWELL-DT.localdomain (147.34.91.1) by
+	SVR-ORW-MBX-04.mgc.mentorg.com (147.34.90.204) with Microsoft SMTP
+	Server (TLS) id 15.0.1210.3; Fri, 3 Feb 2017 09:46:14 -0800
+From: Michael Powell <michael_powell@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 3 Feb 2017 10:45:55 -0700
+Message-ID: <1486143955-8226-1-git-send-email-michael_powell@mentor.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pyudev: update to version 0.21.0
+MIME-Version: 1.0
+X-ClientProxiedBy: svr-orw-mbx-03.mgc.mentorg.com (147.34.90.203) To
+	SVR-ORW-MBX-04.mgc.mentorg.com (147.34.90.204)
+Subject: [meta-oe][morty][PATCH] fltk: fix undefined Fl_XFont_On_Demand
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,47 +32,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Feb 2017 17:30:48 -0000
+X-List-Received-Date: Fri, 03 Feb 2017 17:46:17 -0000
+Content-Type: text/plain
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+http://www.fltk.org/str.php?L3156
+
+Signed-off-by: Michael Powell <michael_powell@mentor.com>
 ---
- .../{python-pyudev_0.20.0.bb => python-pyudev_0.21.0.bb}   | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyudev_0.20.0.bb => python-pyudev_0.21.0.bb} (50%)
+ .../fltk/fix-undefined-Fl-XFont-On-Demand.patch    | 42 ++++++++++++++++++++++
+ meta-oe/recipes-support/fltk/fltk_1.3.3.bb         |  1 +
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-oe/recipes-support/fltk/fltk/fix-undefined-Fl-XFont-On-Demand.patch
 
-diff --git a/meta-python/recipes-devtools/python/python-pyudev_0.20.0.bb b/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb
-similarity index 50%
-rename from meta-python/recipes-devtools/python/python-pyudev_0.20.0.bb
-rename to meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb
-index e403d4e..7253f88 100644
---- a/meta-python/recipes-devtools/python/python-pyudev_0.20.0.bb
-+++ b/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb
-@@ -2,8 +2,8 @@ SUMMARY = "A libudev binding"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
- 
--SRC_URI[md5sum] = "30c19f94dba43b6f5a010285838a3f45"
--SRC_URI[sha256sum] = "14d85bc9611dbf798732996cb7107858f58a3a1b9d246e4063c7a20ade65842a"
-+SRC_URI[md5sum] = "cf4d9db7d772622144ca1be6b5d9353b"
-+SRC_URI[sha256sum] = "094b7a100150114748aaa3b70663485dd360457a709bfaaafe5a977371033f2b"
- 
- inherit pypi setuptools
- 
-@@ -13,8 +13,10 @@ do_configure_prepend() {
- }
- 
- RDEPENDS_${PN} = "\
--    python-ctypes \
--    python-subprocess \
--    python-misc \
--    python-contextlib \
-+    ${PYTHON_PN}-contextlib \
-+    ${PYTHON_PN}-ctypes \
-+    ${PYTHON_PN}-misc \
-+    ${PYTHON_PN}-six \
-+    ${PYTHON_PN}-subprocess \
-+    ${PYTHON_PN}-threading \
+diff --git a/meta-oe/recipes-support/fltk/fltk/fix-undefined-Fl-XFont-On-Demand.patch b/meta-oe/recipes-support/fltk/fltk/fix-undefined-Fl-XFont-On-Demand.patch
+new file mode 100644
+index 0000000..7820324
+--- /dev/null
++++ b/meta-oe/recipes-support/fltk/fltk/fix-undefined-Fl-XFont-On-Demand.patch
+@@ -0,0 +1,42 @@
++diff --git a/FL/x.H b/FL/x.H
++index 85c6f6c..96f198a 100644
++--- a/FL/x.H
+++++ b/FL/x.H
++@@ -132,6 +132,7 @@ private:
++   XFontStruct *ptr;
++ };
++ extern FL_EXPORT Fl_XFont_On_Demand fl_xfont;
+++extern FL_EXPORT XFontStruct* fl_X_core_font();
++ 
++ // this object contains all X-specific stuff about a window:
++ // Warning: this object is highly subject to change!  
++diff --git a/src/fl_font.cxx b/src/fl_font.cxx
++index 48a5bb5..3786ce7 100644
++--- a/src/fl_font.cxx
+++++ b/src/fl_font.cxx
++@@ -55,6 +55,12 @@
++ #  include "fl_font_x.cxx"
++ #endif // WIN32
++ 
+++#if ! (defined(WIN32) || defined(__APPLE__))
+++XFontStruct *fl_X_core_font()
+++{
+++  return fl_xfont.value();
+++}
+++#endif
++ 
++ double fl_width(const char* c) {
++   if (c) return fl_width(c, (int) strlen(c));
++diff --git a/src/gl_draw.cxx b/src/gl_draw.cxx
++index 5f78902..8059254 100644
++--- a/src/gl_draw.cxx
+++++ b/src/gl_draw.cxx
++@@ -84,7 +84,7 @@ void  gl_font(int fontid, int size) {
++  * then sorting through them at draw time (for normal X rendering) to find which one can
++  * render the current glyph... But for now, just use the first font in the list for GL...
++  */
++-    XFontStruct *font = fl_xfont;
+++    XFontStruct *font = fl_X_core_font();
++     int base = font->min_char_or_byte2;
++     int count = font->max_char_or_byte2-base+1;
++     fl_fontsize->listbase = glGenLists(256);
+diff --git a/meta-oe/recipes-support/fltk/fltk_1.3.3.bb b/meta-oe/recipes-support/fltk/fltk_1.3.3.bb
+index 117ecc3..487d278 100644
+--- a/meta-oe/recipes-support/fltk/fltk_1.3.3.bb
++++ b/meta-oe/recipes-support/fltk/fltk_1.3.3.bb
+@@ -10,6 +10,7 @@ SRC_URI = "http://fltk.org/pub/fltk/${PV}/${BP}-source.tar.gz \
+            file://disable_test.patch \
+            file://fltk-no-freetype-config.patch \
+            file://fix-boolean-issue-with-jpeg9.patch \
++           file://fix-undefined-Fl-XFont-On-Demand.patch \
  "
+ 
+ SRC_URI[md5sum] = "9ccdb0d19dc104b87179bd9fd10822e3"
 -- 
 2.7.4
 
