@@ -1,36 +1,25 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f178.google.com (mail-qk0-f178.google.com
-	[209.85.220.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 2398A60765
+Return-Path: <alexandre.belloni@free-electrons.com>
+Received: from mail.free-electrons.com (mail.free-electrons.com [62.4.15.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D9BE6076F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Feb 2017 18:35:11 +0000 (UTC)
-Received: by mail-qk0-f178.google.com with SMTP id 11so7014141qkl.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Feb 2017 10:35:12 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Myy1pa/BfnzdJqupnD2hpwpoWxaQOrDebkdkAVQmxR8=;
-	b=cVfNwSLhEfj7pnzqXtmVqn2gXhNXtwz267zrj980hjkkY7J4pNwq08do5Ti5tzk7ja
-	3QSuox0++q0EbtMBXN3/XFp6I7sZYZDsFr21QHNIFTmT5Jrlv54qAE+dJuKBL8Dbdcbc
-	lAOFxlZQKebIZpD4V4vOCFT5zv9qhHqr632pJG0jGY1FQ5+P1qksYvPIIcjTtMtrBGhi
-	4HJDxfVcVV1JduxBAOQBuQ0JaSr1V2Hg1GehTNUrshid5mSJ7/Tqdsj9U21TeSq43Y2J
-	RQc3mo4UCRq/5ZpjckVC9SqNFlgYbxEsVc2Fl0Imdc5cIJBleZUhpum/Hiip24+VJUqJ
-	sE/Q==
-X-Gm-Message-State: AMke39m266M9b2WvIrgP8VXHS2gZbq3Mf4oqsMUKq0v9g7xy99EiWfBM7O1wzmQeLsZORw==
-X-Received: by 10.55.77.216 with SMTP id a207mr16000001qkb.63.1486146911535;
-	Fri, 03 Feb 2017 10:35:11 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
-	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
-	r10sm25105085qte.1.2017.02.03.10.35.10
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 03 Feb 2017 10:35:11 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
+	Fri,  3 Feb 2017 23:01:01 +0000 (UTC)
+Received: by mail.free-electrons.com (Postfix, from userid 110)
+	id 52EBD20BBE; Sat,  4 Feb 2017 00:01:00 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	mail.free-electrons.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED,SHORTCIRCUIT,
+	URIBL_BLOCKED shortcircuit=ham autolearn=disabled version=3.4.0
+Received: from localhost (unknown [88.191.26.124])
+	by mail.free-electrons.com (Postfix) with ESMTPSA id 2A65220BAC;
+	Sat,  4 Feb 2017 00:00:50 +0100 (CET)
+From: Alexandre Belloni <alexandre.belloni@free-electrons.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  3 Feb 2017 13:35:01 -0500
-Message-Id: <1486146901-3114-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pytest: update version to 3.0.6
+Date: Sat,  4 Feb 2017 00:00:48 +0100
+Message-Id: <20170203230048.11568-1-alexandre.belloni@free-electrons.com>
+X-Mailer: git-send-email 2.11.0
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
+Subject: [PATCH v2][meta-webserver] nginx: handle systemd service file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,41 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Feb 2017 18:35:12 -0000
+X-List-Received-Date: Fri, 03 Feb 2017 23:01:03 -0000
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Inherit the systemd class so the service file is properly handled.
+Note that by default, the service file will be installed but not enabled.
+
+Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>
 ---
- meta-python/recipes-devtools/python/python-pytest.inc                 | 4 ++--
- .../python/{python-pytest_3.0.4.bb => python-pytest_3.0.6.bb}         | 0
- .../python/{python3-pytest_3.0.4.bb => python3-pytest_3.0.6.bb}       | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pytest_3.0.4.bb => python-pytest_3.0.6.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pytest_3.0.4.bb => python3-pytest_3.0.6.bb} (100%)
+Changes in v2:
+ - let nginx be started automatically by default
 
-diff --git a/meta-python/recipes-devtools/python/python-pytest.inc b/meta-python/recipes-devtools/python/python-pytest.inc
-index 27f6c27..c9c9bbf 100644
---- a/meta-python/recipes-devtools/python/python-pytest.inc
-+++ b/meta-python/recipes-devtools/python/python-pytest.inc
-@@ -2,8 +2,8 @@ SUMMARY = "Simple powerful teting with python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d8a5609608d9a5a180705b0fa298ae01"
+ meta-webserver/recipes-httpd/nginx/nginx.inc | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
+index 36f2ac6d71e8..e4e5f63100c2 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx.inc
++++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+@@ -20,7 +20,9 @@ SRC_URI = " \
+     file://nginx.service \
+ "
  
--SRC_URI[md5sum] = "0fbf3cf9f127ae34300e2c8bb002b6a6"
--SRC_URI[sha256sum] = "879fee2c1fdbaacd1bf2c0047677c6dd4aee05b9c1e64330b34d130a584fa40d"
-+SRC_URI[md5sum] = "6639592fa430567d024189f097fcdbd7"
-+SRC_URI[sha256sum] = "643434a9f1a188271da35e20064cb8b6c5440976c5bb541dc7b5b0e3cf75d940"
+-inherit update-rc.d useradd
++inherit update-rc.d useradd systemd
++
++SYSTEMD_SERVICE_${PN} = "nginx.service"
  
- RDEPENDS_${PN}_class-target += " \
-     ${PYTHON_PN}-argparse \
-diff --git a/meta-python/recipes-devtools/python/python-pytest_3.0.4.bb b/meta-python/recipes-devtools/python/python-pytest_3.0.6.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pytest_3.0.4.bb
-rename to meta-python/recipes-devtools/python/python-pytest_3.0.6.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pytest_3.0.4.bb b/meta-python/recipes-devtools/python/python3-pytest_3.0.6.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pytest_3.0.4.bb
-rename to meta-python/recipes-devtools/python/python3-pytest_3.0.6.bb
+ CFLAGS_append = " -fPIE -pie"
+ CXXFLAGS_append = " -fPIE -pie"
 -- 
-2.7.4
+2.11.0
 
 
