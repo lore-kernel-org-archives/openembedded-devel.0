@@ -1,25 +1,46 @@
-Return-Path: <alexandre.belloni@free-electrons.com>
-Received: from mail.free-electrons.com (mail.free-electrons.com [62.4.15.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D9BE6076F
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f53.google.com (mail-pg0-f53.google.com [74.125.83.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 661D371996
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Feb 2017 23:01:01 +0000 (UTC)
-Received: by mail.free-electrons.com (Postfix, from userid 110)
-	id 52EBD20BBE; Sat,  4 Feb 2017 00:01:00 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
-	mail.free-electrons.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED,SHORTCIRCUIT,
-	URIBL_BLOCKED shortcircuit=ham autolearn=disabled version=3.4.0
-Received: from localhost (unknown [88.191.26.124])
-	by mail.free-electrons.com (Postfix) with ESMTPSA id 2A65220BAC;
-	Sat,  4 Feb 2017 00:00:50 +0100 (CET)
-From: Alexandre Belloni <alexandre.belloni@free-electrons.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  4 Feb 2017 00:00:48 +0100
-Message-Id: <20170203230048.11568-1-alexandre.belloni@free-electrons.com>
-X-Mailer: git-send-email 2.11.0
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>
-Subject: [PATCH v2][meta-webserver] nginx: handle systemd service file
+	Sat,  4 Feb 2017 02:35:03 +0000 (UTC)
+Received: by mail-pg0-f53.google.com with SMTP id 204so11383160pge.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 03 Feb 2017 18:35:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=dNagTfXzX/zu/TFqEQnl5MEXaQ023s9y2+R1ib3sTvE=;
+	b=HJREJDuC5GapcUMpjfmh5rfV8HYYXvtSyBw7IBLrVz1Z6cJ6nWLpkW9f55AcOryZxc
+	UpzeZ7YmlAPrEzNlLJG2oUm1ePwjUUwTkjH8d2XC1HXM0HDKcdSrfzooXcDVCjJWhhA5
+	gG1sn2OxHt5IlGqRWzMCO113w3VpJlzECWOJ/t7YaH5PSgnin8At7+foXnK8G3XMwnuF
+	EaP1AgVHj5bg4GF/ebtaD+sHSjhoYqPBk+o9zWmfjINKoK8D3ULq0BPnI+vyF9U4cS89
+	1GxsARSp+08lajjDqX+blrJfXl6ozKqk6Wji0Sor+gP0KWNrUgLd1+i/HXnTrwdyiDty
+	eQqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=dNagTfXzX/zu/TFqEQnl5MEXaQ023s9y2+R1ib3sTvE=;
+	b=saxZlqL/hljmzSDhLdBWQqlTH5qT0gUHmkdxLAdt4HnBAvnySGi9XLLuU5viTKBtKs
+	q45WZus4mDGQ7jl256qC230ZdmXwTkNSQTvd1xmyrLoNRPgyhja5f/XE6HQDUhumr+Yd
+	gXsFVEO+/vkK73b2OcqPLgmIMFHby7jGdtwAEZayirdyk4SpnvHuj9/6WVqdfH5ZckjX
+	rwyBvSibZDMGPnl9Qfx22mm0SoCDLSzviQ4sWl0bpLkzuCsXAde0QKvvekBTUSmzi0ei
+	r8OBYAKxtdg/5yuOBcJkBYY0//yhHoMxeuJgXOhMgR9TEO732Qwd1p+zi9a4QoXdvKVe
+	lEsA==
+X-Gm-Message-State: AIkVDXJQu4iukbL9GJqPyDnBP47aJ+vCP18h0KB3CfVu4+C+Mh7fYocoSMOXJDtr0yCgfA==
+X-Received: by 10.99.51.76 with SMTP id z73mr202890pgz.137.1486175703634;
+	Fri, 03 Feb 2017 18:35:03 -0800 (PST)
+Received: from akuster-ThinkPad-X240.hsd1.ca.comcast.net
+	([2601:202:4001:9ea0:d531:58a3:5f79:edad])
+	by smtp.gmail.com with ESMTPSA id
+	i21sm70201153pfi.94.2017.02.03.18.35.02
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 03 Feb 2017 18:35:03 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster@mvista.com,
+	openembedded-devel@lists.openembedded.org
+Date: Fri,  3 Feb 2017 18:35:02 -0800
+Message-Id: <1486175702-32039-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] postgresgl: update to 9.4.10 and build fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,35 +53,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Feb 2017 23:01:03 -0000
+X-List-Received-Date: Sat, 04 Feb 2017 02:35:03 -0000
 
-Inherit the systemd class so the service file is properly handled.
-Note that by default, the service file will be installed but not enabled.
+9.4.10 contains:
+CVE-2016-5423, CVE-2016-5424
+see https://www.postgresql.org/docs/current/static/release-9-4-10.html
 
-Signed-off-by: Alexandre Belloni <alexandre.belloni@free-electrons.com>
+and build failure:
+ checking for tcl.h... no
+| configure: error: header file <tcl.h> is required for Tcl
+
+drop hardcoded PR
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
-Changes in v2:
- - let nginx be started automatically by default
+ meta-oe/recipes-support/postgresql/postgresql.inc                  | 3 +--
+ .../postgresql/{postgresql_9.4.8.bb => postgresql_9.4.10.bb}       | 7 ++-----
+ 2 files changed, 3 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-support/postgresql/{postgresql_9.4.8.bb => postgresql_9.4.10.bb} (55%)
 
- meta-webserver/recipes-httpd/nginx/nginx.inc | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index 36f2ac6d71e8..e4e5f63100c2 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -20,7 +20,9 @@ SRC_URI = " \
-     file://nginx.service \
+diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
+index f720cbc..7164bc0 100644
+--- a/meta-oe/recipes-support/postgresql/postgresql.inc
++++ b/meta-oe/recipes-support/postgresql/postgresql.inc
+@@ -20,7 +20,6 @@ DESCRIPTION = "\
+ HOMEPAGE = "http://www.postgresql.com"
+ LICENSE = "BSD"
+ DEPENDS = "zlib readline tzcode-native"
+-INC_PR = "r0"
+ 
+ ARM_INSTRUCTION_SET = "arm"
+ 
+@@ -40,7 +39,7 @@ export LDFLAGS_SL = "${LDFLAGS}"
+ 
+ inherit autotools pkgconfig perlnative pythonnative useradd update-rc.d systemd
+ 
+-CFLAGS += "-I${STAGING_INCDIR}/${PYTHON_DIR}"
++CFLAGS += "-I${STAGING_INCDIR}/${PYTHON_DIR} -I${STAGING_INCDIR}/tcl8.6"
+ 
+ SYSTEMD_SERVICE_${PN} = "postgresql.service"
+ SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+diff --git a/meta-oe/recipes-support/postgresql/postgresql_9.4.8.bb b/meta-oe/recipes-support/postgresql/postgresql_9.4.10.bb
+similarity index 55%
+rename from meta-oe/recipes-support/postgresql/postgresql_9.4.8.bb
+rename to meta-oe/recipes-support/postgresql/postgresql_9.4.10.bb
+index 7dba92c..5498350 100644
+--- a/meta-oe/recipes-support/postgresql/postgresql_9.4.8.bb
++++ b/meta-oe/recipes-support/postgresql/postgresql_9.4.10.bb
+@@ -2,13 +2,10 @@ require postgresql.inc
+ 
+ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3a9c1120056a102a8c8c4013cd828dce"
+ 
+-PR = "${INC_PR}.0"
+-
+ SRC_URI += "\
+     file://remove.autoconf.version.check.patch \
+     file://not-check-libperl.patch \
  "
  
--inherit update-rc.d useradd
-+inherit update-rc.d useradd systemd
-+
-+SYSTEMD_SERVICE_${PN} = "nginx.service"
- 
- CFLAGS_append = " -fPIE -pie"
- CXXFLAGS_append = " -fPIE -pie"
+-SRC_URI[md5sum] = "a1a2e8014b2b4c49fc58fe2e2fe83681"
+-SRC_URI[sha256sum] = "4a10640e180e0d9adb587bc25a82dcce6bf507b033637e7fb9d4eeffa33a6b4c"
+-
++SRC_URI[md5sum] = "1171df0426fe4da5a29f6cdaf2e8b812"
++SRC_URI[sha256sum] = "7061678bed1981c681ce54c76b98b6ec17743f090a9775104a45e7e1a8826ecf"
 -- 
-2.11.0
+2.7.4
 
 
