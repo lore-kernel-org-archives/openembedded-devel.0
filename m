@@ -1,49 +1,52 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C00A60766
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wj0-f193.google.com (mail-wj0-f193.google.com
+	[209.85.210.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 970977199A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Feb 2017 17:56:37 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id b65so131268221wmf.0
+	Mon,  6 Feb 2017 20:00:50 +0000 (UTC)
+Received: by mail-wj0-f193.google.com with SMTP id i7so4331452wjf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Feb 2017 09:56:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=ZhRcAHGJqcplv1ZuusFD+mYWsJ4i6O7GmQzZeSz9rLU=;
-	b=cd5VqPdlrmzgo8K15ALLl18yAPHXp9Lf9K4IbVWVGXeZt5BqVP12Uz0uTcafCal01T
-	wm2zptZgbNIajxQyk3bPpoJCPHlQHNX0IfcbtfIV4UEv9W39+1ng3pwSgKczB4P6kEll
-	AVu74xhEPyWDvZXFbLq4DgfflsTxrT9KKwL1hDPXheVaBjB3xEu3FdfKrYVeq+1sgTng
-	1rWRKWSsomLciWwNCBIjsn1RnqYK8OrC3aUgIi8gokqgZiPUnFX8AcVFM9PoS4iQF/oX
-	u7LshUtDIBQ+RNf2ECsRIpXa/By677HMUaiz8u60Bk0LoxPCLT7edv/xEF+hHS4T3eVk
-	WzDQ==
+	Mon, 06 Feb 2017 12:00:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=rb6Jik9t9aMxNTjYmsuCxbhnoIHyhBouEwQ9bz1EzWo=;
+	b=JkJ7uj+xZjCJw/ogHlxbR1xsZOxGtHcMAHsnIW7sfNGes7cnhrujoPzWVtFSVLM2Lb
+	qRd13nJAgz4Or6uzDRgDkD2nGKpw86DexiuWEoYX5KcFDOkPjttF+ZhCIId4L+7ZwOZl
+	ronHoBw+/N/WwjTa3+ewmhL6s2Ogw/eAvbWYiNspgs1CyO94AccgPGmNN+D+4veKF6xT
+	BaAwCQsUdcS7XbSzkl/RaohayQxXDEUKtYWfXidi4Ids94L0nX0RxYvqbsjmNFzdGjj2
+	TeBB5+7izT1BivShS4Kssz0m0Bc7211ON78OP+tJG+1DEK1n103vunzsmAL9pJmRaTvU
+	OEuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=ZhRcAHGJqcplv1ZuusFD+mYWsJ4i6O7GmQzZeSz9rLU=;
-	b=Ugwz90++UQFcBM/cKyZwhkRXnUopSBCLX1fg6B72/Y2G8CmSE6FZR9u/HCTNg54HRt
-	zCv2TI5Vu277hUNiIBzRw/n5wToH6rgr1RBUHnHG/3EE51T3N1Dwv6ZYIlFaVtj1OlYj
-	4DzOaDrmU014EJotM4Q5KPiCFGP4/9JcQs4iMz7eGBwebuaYVFBnA53zu4I36HZ016UE
-	+ymabRGbnbvZiqD/WH7y2ARX+SbcYaKTUTqMKZeKvSpixYHefyMEiutcVcRmf4TtxZf4
-	XjN4Ii2dPL3qvpkkZAL/kugmDnVhsB9Cp+t4R/p4Bre6IvM5iDkEgusSoi1Gop5YDPvI
-	Q1pw==
-X-Gm-Message-State: AMke39mfdprBfAA48Ja4FPDJjYP0LkQAMn6S8zjaMmYHtJgEXLkaAj4KwxJ0TVj9uJRQoVBmZzQDhVS6ThdCKA==
-X-Received: by 10.28.211.205 with SMTP id k196mr9055571wmg.124.1486403797300; 
-	Mon, 06 Feb 2017 09:56:37 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=rb6Jik9t9aMxNTjYmsuCxbhnoIHyhBouEwQ9bz1EzWo=;
+	b=Y/G1u7qLmU5NvJ68qGioGE9hTPkbGGI2BimrWgfCGidkEa3klkcZFSeXEk++ILmcc+
+	tBScF6SpHY/bC4/A1GtpFyt42W+x/W1HDrxooaYzEHVmp8o6oeA+/psWC3kkFzzA99dx
+	3dwacr6nlmAoFtv9mHaDUYPOzwwW6IqjLkG/dpWBAL3qsvLTHGLmzTd2LYVaWfbThi4B
+	b9mL7AdrZM6LbjVM9BE3x073mLJqhqWX2AxolCl58iVoms9coIVNneyqycMswkg+ctzf
+	JPyGQt1EY9lpS1ycRZ8iGBwbR1SXsU2Qzr7LZtlbd7PmgeUk/FUaZ3+cEEIIXqLwAle3
+	/K5g==
+X-Gm-Message-State: AIkVDXJES/yf9ZWLi3+I6QL1ouCyxbTgA4P6L2wyL95S2hNDQvyFhgTGsfsLFV71DCxXrg==
+X-Received: by 10.223.138.172 with SMTP id y41mr10632746wry.118.1486411250157; 
+	Mon, 06 Feb 2017 12:00:50 -0800 (PST)
+Received: from PC192-168-2-116.speedport.ip
+	(p20030046E97DF1461E6F65FFFE3E7F61.dip0.t-ipconnect.de.
+	[2003:46:e97d:f146:1e6f:65ff:fe3e:7f61])
+	by smtp.googlemail.com with ESMTPSA id
+	b8sm3328308wrb.17.2017.02.06.12.00.49
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 06 Feb 2017 12:00:49 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  6 Feb 2017 21:00:38 +0100
+Message-Id: <20170206200039.32123-1-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.9.3
 MIME-Version: 1.0
-Received: by 10.80.148.174 with HTTP; Mon, 6 Feb 2017 09:56:36 -0800 (PST)
-In-Reply-To: <CALbNGRTbQ5xN+Y+NvyVZRd_MTN4ofosx=Of3i+=sLwj=qm=UnQ@mail.gmail.com>
-References: <1485374763-7114-1-git-send-email-schnitzeltony@googlemail.com>
-	<1485374763-7114-2-git-send-email-schnitzeltony@googlemail.com>
-	<CALbNGRRVcvt1JdHiaL4AswX1UUSTCjHgUPJXbXtUmQdRRQmUag@mail.gmail.com>
-	<CALbNGRTbQ5xN+Y+NvyVZRd_MTN4ofosx=Of3i+=sLwj=qm=UnQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 6 Feb 2017 18:56:36 +0100
-Message-ID: <CA+chaQe_fOuM3i2TRn+PF5BvErCxEjUTC8LcV7Ekbm7RmVqc8g@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 2/2] fluidsynth: add ARM NEON support for sample interpolation
+Subject: [PATCH 1/2] libtdb: fix SRC_URI - http has gone
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,41 +59,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Feb 2017 17:56:38 -0000
+X-List-Received-Date: Mon, 06 Feb 2017 20:00:51 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Thanks, I've just dropped it from my local master-next, so I won't forget
-next time.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-networking/recipes-support/libtdb/libtdb_1.3.12.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Mon, Feb 6, 2017 at 6:40 PM, Andreas M=C3=BCller <schnitzeltony@googlema=
-il.com
-> wrote:
+diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.3.12.bb b/meta-networking/recipes-support/libtdb/libtdb_1.3.12.bb
+index 3296bee..fa1f0c5 100644
+--- a/meta-networking/recipes-support/libtdb/libtdb_1.3.12.bb
++++ b/meta-networking/recipes-support/libtdb/libtdb_1.3.12.bb
+@@ -5,7 +5,7 @@ LICENSE = "LGPL-3.0+ & GPL-3.0+"
+ LIC_FILES_CHKSUM = "file://tools/tdbdump.c;endline=18;md5=b59cd45aa8624578126a8c98f48018c4 \
+                     file://include/tdb.h;endline=27;md5=f5bb544641d3081821bcc1dd58310be6"
+ 
+-SRC_URI = "http://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
++SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
+            file://do-not-check-xsltproc-manpages.patch \
+            file://tdb-Add-configure-options-for-packages.patch \
+ "
+-- 
+2.9.3
 
-> On Mon, Jan 30, 2017 at 10:41 PM, Andreas M=C3=BCller
-> <schnitzeltony@googlemail.com> wrote:
-> > On Wed, Jan 25, 2017 at 9:06 PM, Andreas M=C3=BCller
-> > <schnitzeltony@googlemail.com> wrote:
-> >> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> >> ---
-> >>  ...e_dsp_interpolate_4th_order-make-use-of-A.patch | 158
-> +++++++++++++++++++++
-> >>  .../fluidsynth/fluidsynth_1.1.6.bb                 |   5 +-
-> >>  2 files changed, 162 insertions(+), 1 deletion(-)
-> >>  create mode 100644 meta-multimedia/recipes-
-> multimedia/fluidsynth/files/0001-fluid_rvoice_dsp_
-> interpolate_4th_order-make-use-of-A.patch
-> >
-> > Sorry but I get the feeling that this patch does not accelerate
-> > interpolation. I need to write some performance test to check (don't
-> > trust optimizations without performance numbers) So for please ignore
-> > this patch.
-> >
-> Just saw that this is still in master-next: Please take care that it
-> won't be applied in master accidentally. I could create a test case
-> meanwhile: This patch is crap and slows things down instead of
-> accelerating.
->
-> Andreas
->
 
