@@ -1,24 +1,46 @@
-Return-Path: <Mingli.Yu@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 90F2F71987
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f45.google.com (mail-pg0-f45.google.com [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 71B7F60043
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Feb 2017 03:46:21 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v163kLcm006033
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon,  6 Feb 2017 04:49:14 +0000 (UTC)
+Received: by mail-pg0-f45.google.com with SMTP id 204so24805183pge.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 5 Feb 2017 19:46:21 -0800 (PST)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Sun, 5 Feb 2017 19:46:20 -0800
-From: <mingli.yu@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 6 Feb 2017 11:41:00 +0800
-Message-ID: <20170206034100.31898-1-mingli.yu@windriver.com>
-X-Mailer: git-send-email 2.11.0
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libatasmart: unify the complier and CFLAGS for host build
+	Sun, 05 Feb 2017 20:49:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=QLgd+S2IPzF5/1v4FzkHfJQ+KjGKCKKZukonPismaMI=;
+	b=pvYfRkjuO/TDBrT+shU1y52AE7OUir5bVFOthQt0xfmikKQ/6+qB9U93VUyKDQjFI/
+	Vx7vF6AJwjsNlutuzI5xKI7cyqOIfuJVgpGfUZ/FgHu1h+qPQ6vg0f43fHpmr9fiPvP5
+	3hzvch2A0qyGvBPYn2h7CJjjmaMFu9LFqLWRFzo87L/f4570jJWII1gKX88E7lnQucTv
+	c0WILo2h9qxCclk4Z1/JQ2NoNOQP6SZ+ca94cAfzmv1iQLMAvPJTDDnCnTxtgwknqnb3
+	xhnrKVv36kOHi+yyKQWtXdiNagWmNwnjV1zAAy3m6ty5pVYaB03S3bXit3Lc5OhtqjmC
+	lPNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=QLgd+S2IPzF5/1v4FzkHfJQ+KjGKCKKZukonPismaMI=;
+	b=GQENb7B5Fo97djoarVB7bC6qdvv70ayjUrS/yAJRLJq/J2mVhxts2fj04JzOM+/20Z
+	E0/ifS10m8qDb5jNpiANB1dOVoTwqM3zdH5B8Ag237UxhDzeePjCugezc+w5es4D8eRH
+	JuuZv5W0O/M36QqW05gFtJLt/bRlJSuQrMLtsjruVqRBcSJO3iQaHrCSHeJKZ3YW0Rqh
+	JLq0vMnT/lZBAETD7AigAyr3Zk+U2yNYP2bqPa7qC/Q4ln+9ur6kSoGK9NlXCzLKTEhl
+	Th9hlHwXwmy5UBI+ysLavhwpctbZO1GPMwQlc64cMBoazN5wHWnvgw2nGPUMZPpcvZOF
+	FUYw==
+X-Gm-Message-State: AIkVDXLs5wylU2KOzzusyofjnRyOlK/6xbv8oc6QnEo+0U7+iFtFc2UhOUxV1uUS5zM5hA==
+X-Received: by 10.84.229.143 with SMTP id c15mr14705618plk.177.1486356554546; 
+	Sun, 05 Feb 2017 20:49:14 -0800 (PST)
+Received: from akuster-ThinkPad-X240.hsd1.ca.comcast.net
+	([2601:202:4001:9ea0:ac48:9a90:c71a:12ad])
+	by smtp.gmail.com with ESMTPSA id
+	t133sm85392137pgc.24.2017.02.05.20.49.13
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 05 Feb 2017 20:49:13 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  5 Feb 2017 20:49:12 -0800
+Message-Id: <1486356552-12363-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] ipmiutil: fix build issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,92 +53,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Feb 2017 03:46:21 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 06 Feb 2017 04:49:14 -0000
 
-From: Mingli Yu <Mingli.Yu@windriver.com>
+| In file included from lanplus.c:78:0:
+| ./inc/ipmitool/ipmi.h:51:25: fatal error: openssl/evp.h: No such file or directory
+|  #include <openssl/evp.h>
+|                          ^
+| compilation terminated.
 
-* When build libatasmart, we need first build strpool in host
-  env. To build strpool, the compiler is host compiler, but
-  the CFLAGS and LDFLAGS are for cross-compiler, so unify them
-  to fix below error.
-  | make -C strpool strpool
-  | make[1]: Entering directory '../libatasmart/0.19-r0/build/strpool'
-  | gcc  -DHAVE_CONFIG_H -I. -I../../git/strpool -I..    -isystem../build/tmp/sysroots/x86_64-linux/usr/include -O2 -pipe -O2 -pipe -g -fstack-protector-strong -pie -fpie -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -c -o strpool.o `test -f '../strpool.c' || echo '../../git/strpool/'`../strpool.c
-  | gcc: error: unrecognized command line option ‘-fstack-protector-strong’
-  | make[1]: *** [Makefile:404: strpool.o] Error 1
-
-Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...efile.am-add-CFLAGS-and-LDFLAGS-definiton.patch | 41 ++++++++++++++++++++++
- .../libatasmart/libatasmart_0.19.bb                |  4 ++-
- 2 files changed, 44 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/libatasmart/files/0001-Makefile.am-add-CFLAGS-and-LDFLAGS-definiton.patch
+ meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/libatasmart/files/0001-Makefile.am-add-CFLAGS-and-LDFLAGS-definiton.patch b/meta-oe/recipes-support/libatasmart/files/0001-Makefile.am-add-CFLAGS-and-LDFLAGS-definiton.patch
-new file mode 100644
-index 0000000000..8c867accaa
---- /dev/null
-+++ b/meta-oe/recipes-support/libatasmart/files/0001-Makefile.am-add-CFLAGS-and-LDFLAGS-definiton.patch
-@@ -0,0 +1,41 @@
-+From 75c1d3b8667328d874590a5321eb244256b7d932 Mon Sep 17 00:00:00 2001
-+From: Mingli Yu <Mingli.Yu@windriver.com>
-+Date: Wed, 18 Jan 2017 07:35:58 +0000
-+Subject: [PATCH] Makefile.am: add CFLAGS and LDFLAGS definiton
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+* When build libatasmart, we need first build strpool in host
-+  env. To build strpool, the compiler is host compiler, but
-+  the CFLAGS and LDFLAGS are for cross-compiler, so unify them
-+  to fix below error.
-+  | make -C strpool strpool
-+  | make[1]: Entering directory '../libatasmart/0.19-r0/build/strpool'
-+  | gcc  -DHAVE_CONFIG_H -I. -I../../git/strpool -I..    -isystem../build/tmp/sysroots/x86_64-linux/usr/include -O2 -pipe -O2 -pipe -g -fstack-protector-strong -pie -fpie -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -c -o strpool.o `test -f '../strpool.c' || echo '../../git/strpool/'`../strpool.c
-+  | gcc: error: unrecognized command line option ‘-fstack-protector-strong’
-+  | make[1]: *** [Makefile:404: strpool.o] Error 1
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
-+---
-+ strpool/Makefile.am | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/strpool/Makefile.am b/strpool/Makefile.am
-+index b041cea..013fcd3 100644
-+--- a/strpool/Makefile.am
-++++ b/strpool/Makefile.am
-+@@ -17,6 +17,8 @@
-+ # <http://www.gnu.org/licenses/>.
-+ 
-+ CC = @CC_FOR_BUILD@
-++CFLAGS = @BUILD_CFLAGS@
-++LDFLAGS = @BUILD_LDFLAGS@
-+ AM_CFLAGS = @BUILD_CFLAGS@
-+ AM_LDFLAGS = @BUILD_LDFLAGS@
-+ 
-+-- 
-+2.11.0
-+
-diff --git a/meta-oe/recipes-support/libatasmart/libatasmart_0.19.bb b/meta-oe/recipes-support/libatasmart/libatasmart_0.19.bb
-index 16657b4b13..4cfb732932 100644
---- a/meta-oe/recipes-support/libatasmart/libatasmart_0.19.bb
-+++ b/meta-oe/recipes-support/libatasmart/libatasmart_0.19.bb
-@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://LGPL;md5=2d5025d4aa3495befef8f17206a5b0a1"
- DEPENDS = "udev"
+diff --git a/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb b/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb
+index bdb3d47..8d36a32 100644
+--- a/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb
++++ b/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb
+@@ -15,6 +15,8 @@ HOMEPAGE = "http://ipmiutil.sourceforge.net"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5f9372493401f309e6149dd2ce0a044b"
  
- SRCREV = "de6258940960443038b4c1651dfda3620075e870"
--SRC_URI = "git://git.0pointer.de/libatasmart.git"
-+SRC_URI = "git://git.0pointer.de/libatasmart.git \
-+           file://0001-Makefile.am-add-CFLAGS-and-LDFLAGS-definiton.patch \
-+"
++DEPENDS = "openssl"
++
+ PARALLEL_MAKE = ""
  
- S = "${WORKDIR}/git"
- 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/ipmiutil/ipmiutil-${PV}.tar.gz \
 -- 
-2.11.0
+2.7.4
 
 
