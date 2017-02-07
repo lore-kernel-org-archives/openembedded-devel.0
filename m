@@ -1,54 +1,24 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D295600EA
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D6BC3600EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Feb 2017 21:57:02 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id 194so13147465pgd.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Feb 2017 13:57:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=bKxXkD10BmtLDXOk/d8yFF8sTCbez1JYmFgefjQTCGo=;
-	b=uYUWSeLP8VNlc/O7CRNYtleVMKSg0MtqrnNH5Aw2Gj8wwOjn5hLpNXUoMRa2RwOX3L
-	EpEgy+U/EQR2CPymLgO/Am20660+QEbmyWm8RJfyURdQ3Uc0WH//CuSM7qsLydch+hIB
-	EYHpu1zmRrvbyXqXHj7BCnOyjJK4WbbTPdhztwl3hWQjWRpvpRLmchWq20rjyFGjWlK3
-	M5zpWBpQ2sQCUt6YGQoaLoLlRN1w28S6KBlMvtntO5ohwGE+PQFJJXXyjI8LzSM04oMr
-	isjGYBqE6ojNfCqoJuYNHjEQ6LI0bB5QijxSkZLbjCrK7wkjfNSwsWay/jVazjtkoVyP
-	6vqA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=bKxXkD10BmtLDXOk/d8yFF8sTCbez1JYmFgefjQTCGo=;
-	b=M8d7VkEdk6oidWDLPq9c9+t0nYRrI2SX5Mb+aoeVEmUCnFX62H2fZ6ut6dsyBQ6Y/t
-	5sZRNOmpKdz57oa2InYq89Nk7K0VFNadCMFlzJHDaN3WX4M/qJwd/+y11ohzm4GQA3ts
-	qBjAckVqRf3jkb8lzNuvnkaaMetj2ahSZPPESufe2lVpddSoamS+J0x3aIkwzCRx8j8W
-	0QKrZ4T/Ftsl9f3B0fXzAOka0pjQbo/JSEqUNfIgyZiKimOU8a7ADDaDY35sklnLocBK
-	rNhm8B0c8IyE4eRJyTSg1odKTOuXV78Wr1d6427Hv7AuPXLtST5KClAo4YaOxnvI83ff
-	4aEA==
-X-Gm-Message-State: AIkVDXJaCdVG1+8zK4Ne9IBKE97TqqRKKlkSjr+6LQsuqrexTt6xhUcLhYj8ZMdtcS7ihQ==
-X-Received: by 10.99.177.6 with SMTP id r6mr22765132pgf.61.1486504622936;
-	Tue, 07 Feb 2017 13:57:02 -0800 (PST)
-Received: from [10.43.100.166] (50-233-148-156-static.hfc.comcastbusiness.net.
-	[50.233.148.156]) by smtp.gmail.com with ESMTPSA id
-	j28sm14032811pfj.2.2017.02.07.13.57.02
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 07 Feb 2017 13:57:02 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <1486399174-28949-1-git-send-email-akuster808@gmail.com>
-	<caa1a269-b4e4-9909-967f-c637146fc4ba@gmail.com>
-	<1486453274.14889.135.camel@intel.com> <20170207102518.GA3276@jama>
-	<1486465148.14889.140.camel@intel.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <198657c0-9cc4-ebad-7ce3-fece22b73c18@gmail.com>
-Date: Tue, 7 Feb 2017 13:57:01 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.7.0
+	Tue,  7 Feb 2017 22:10:30 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v17MASIh007129
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 7 Feb 2017 14:10:28 -0800 (PST)
+Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 7 Feb 2017 14:10:27 -0800
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: <koen@dominion.thruhere.net>, <martin.jansa@gmail.com>
+Date: Tue, 7 Feb 2017 17:10:20 -0500
+Message-ID: <1486505420-14626-1-git-send-email-mark.asselstine@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <1486465148.14889.140.camel@intel.com>
-Subject: Re: Patchwork-Status via email
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] udisks: add missing hard dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,54 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2017 21:57:07 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 07 Feb 2017 22:10:31 -0000
+Content-Type: text/plain
 
+Because do_compile() makes calls to dbus-binding-tool we have to make
+this tool available via the dbus-glib-native package. Failing this we
+get errors:
 
+  | dbus-binding-tool --prefix=port --mode=glib-server --output=port-glue.h ...
+  | /bin/bash: dbus-binding-tool: command not found
+  | Makefile:1150: recipe for target 'daemon-glue.h' failed
 
-On 02/07/2017 02:59 AM, Patrick Ohly wrote:
-> On Tue, 2017-02-07 at 11:25 +0100, Martin Jansa wrote:
->> On Tue, Feb 07, 2017 at 08:41:14AM +0100, Patrick Ohly wrote:
->>> On Mon, 2017-02-06 at 09:10 -0800, akuster808 wrote:
->>>> please drop. this is fixed via a change in master-next.
->>>>
->>>> http://cgit.openembedded.org/meta-openembedded/commit/?h=master-next&id=2e83e33c592543045a7761907d8cd62937e1e60d
->>> Let's see whether the magic keyword works :-)
->>>
->>> [Patchwork-Status: Superseded]
->>>
->>> https://patchwork.openembedded.org/patch/136794/
->>>
->>> -- 
->>> Best Regards, Patrick Ohly
->>>
->>> The content of this message is my personal opinion only and although
->>> I am an employee of Intel, the statements I make here in no way
->>> represent Intel's position on the issue, nor am I authorized to speak
->>> on behalf of Intel on this matter.
->> If it was supposed to update status on Patchwork, then it didn't work
->> it's still in "New" state.
-> Jose, in your "parsemail: Set patch state from email metadata" patch you
-> said that it "allows project maintainers to change a patch status
-> directly from an email message".
->
-> Can you clarify who the "project maintainers" are who can use this email
-> interface?
+This becomes a hard build failure when per recipe sysroots are used.
 
-The list of maintainers (if its the same list) can be found on
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+---
+ meta-oe/recipes-support/udisks/udisks_1.0.5.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-https://patchwork.openembedded.org/project/oe/
-
-BTW, is there any doc on the keywords?
-
-- armin
-> What about this use case here: the original author wants to retract a
-> patch. Can he do that via email and/or the web interface?
->
-> I wasn't the original author and probably also no project maintainer, so
-> I guess that's why my email had no effect. Can we enable some kind of
-> error response for such cases?
->
+diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
+index eec6933..d79033b 100644
+--- a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
++++ b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
+@@ -2,7 +2,9 @@ DESCRIPTION = "A storage daemon that implements well-defined D-Bus interfaces th
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=73d83aebe7e4b62346afde80e0e94273"
+ 
+-DEPENDS = "libatasmart sg3-utils polkit libgudev dbus-glib glib-2.0 intltool-native lvm2"
++DEPENDS = "libatasmart sg3-utils polkit libgudev dbus-glib glib-2.0 intltool-native lvm2 \
++    dbus-glib-native \
++"
+ # optional dependencies: device-mapper parted
+ 
+ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+-- 
+2.7.4
 
 
