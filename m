@@ -1,53 +1,46 @@
-Return-Path: <patrick.ohly@intel.com>
-Received: from mail-it0-f51.google.com (mail-it0-f51.google.com
-	[209.85.214.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A02E71A99
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 49C8071A82
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Feb 2017 07:41:18 +0000 (UTC)
-Received: by mail-it0-f51.google.com with SMTP id c7so71404776itd.1
+	Tue,  7 Feb 2017 07:56:13 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id o16so4954464wra.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Feb 2017 23:41:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=message-id:subject:from:to:cc:date:in-reply-to:references
-	:organization:mime-version:content-transfer-encoding;
-	bh=XzIGXKa6z7cEt7axtNK9pEqAoVeUFMaFWC66Y4QKRp8=;
-	b=qcwWHr6Ewgl5W+uPKYlddG2k1cIO2b3CAvbLJp5O4iv7oTJYRTx6XM15SUFFityyJ+
-	MC1DxL9zuVQJjz9LOWSQfMnj/s0LnAJJBdi+9R9gjvEIZexaEZ9oD+qaxqoSaYtvrqMb
-	U+Vs0ZUO/crIHZTwkkZxfRla4ezzNJltjm/ZfXoz6Q4Kl8R4zigpgIhu+t2qOSOd+GRf
-	blFHW6N5+3A3ArWS3wAMrQqrKBQsiHXnjKjBoENPZfLB1mV191nwSPDwkkibOjz81pPO
-	VxFjf2wJj3sse1fBhdgq7lIJ9OXAD7h9J7FvcEvu12mzR/DJ1E8splV7hPP9Zmz2E7ch
-	2+iQ==
+	Mon, 06 Feb 2017 23:56:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=Yho2958oR4kTAGFN4iO46VVMgqKRa9LgT65V9lCnRgc=;
+	b=fNV0sGecZOAcPRLzmbh2Bzcsi/pcCqk98Tis1UI3UVAgckzuLMgIkJ7yrajBko4JMz
+	JfZ/RePdc6KFcFJdiQDp/6lk65RDnHRLAoZtWt+n5A2bZzlUA9ZBDbKOn7b+lj4/A7T3
+	vfe1COm9LGx5jSDLrvar32Wb/0rqIytJ4a5B74jnmmNsfZWQxtlJPgrOXsUuJf8+GcoJ
+	CbPGbHW9llyy1EFVh5dGnTW7RL1VfvTP/nSZ6c+3JdhAJ3zGPaTuvmtXw3MSxQdrEbJ+
+	13Y6S16Mhd9CwDr9eeHTPPn7xd5WwFdv8RUqFkj/SiifUhPRIgywvy9008OKH2JG+C6D
+	4+Xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
-	:references:organization:mime-version:content-transfer-encoding;
-	bh=XzIGXKa6z7cEt7axtNK9pEqAoVeUFMaFWC66Y4QKRp8=;
-	b=CuEsBDFBTIuHbsTQJThbIdW6pFXelahtC/bL+f2VEOfkO/7/mtpzahnSpwBRmui2OK
-	kTb1eYkCkn5mg/lhoubUvFcUT0SxabikrbUGvJ66O91OkEEXpUQ4IVozhgulpZWojKtC
-	fYxEcptbc2xRt3a9oBysMYqIW4c0f/DsP/BjssVEuMwYS0reUDdlC9u9l4hj+jr2gWVk
-	br7iS0LwYdt06SbS/nxT9n33/TIAgqruTo9jjWi3akw5irbXReFXYgeY7yd/W9SyZ29p
-	ejMiDtNyS+lVuOk+v/+vxdzV+bC22z/U0NmSDqzr5rMv8ItJxD6+7VhH2BzHt/3oG9kg
-	2X+A==
-X-Gm-Message-State: AIkVDXJheFbqNO7FtxAPfZrLxCUHFNZ/3pFw6O9+zZ0Kc1KvD8/2Hgxiwrt9BzwfL/u0eNcV
-X-Received: by 10.36.120.73 with SMTP id p70mr10329817itc.115.1486453278460;
-	Mon, 06 Feb 2017 23:41:18 -0800 (PST)
-Received: from pohly-mobl1 (p5DE8DF93.dip0.t-ipconnect.de. [93.232.223.147])
-	by smtp.gmail.com with ESMTPSA id
-	x197sm5660947ite.17.2017.02.06.23.41.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 06 Feb 2017 23:41:17 -0800 (PST)
-Message-ID: <1486453274.14889.135.camel@intel.com>
-From: Patrick Ohly <patrick.ohly@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 07 Feb 2017 08:41:14 +0100
-In-Reply-To: <caa1a269-b4e4-9909-967f-c637146fc4ba@gmail.com>
-References: <1486399174-28949-1-git-send-email-akuster808@gmail.com>
-	<caa1a269-b4e4-9909-967f-c637146fc4ba@gmail.com>
-Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
-X-Mailer: Evolution 3.12.9-1+b1 
-Mime-Version: 1.0
-Subject: Re: [meta-networking][PATCH] crda: fix build issue do to missing python module
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=Yho2958oR4kTAGFN4iO46VVMgqKRa9LgT65V9lCnRgc=;
+	b=kY3yGt++MOZAj/1dkdDzBoRsWt3kp+Mj2e2ioAUwb0JKeldvUyEECON+hbG46/MKGY
+	I1vmaxdu327h7Zs4xgIAdBRoeu+iAaXbYlAglApQdi0hQpRJXWLd2yv46/ONSXM8PaPf
+	oUxLa6FVdn3B8tgf6jjOINGIkG0o9Zvls3BGeBzW6Q8im97N3B2ulDOXXsUpgH+/hZ7t
+	+kxRpzV8jfScFQctf5h17lb/NMpks9f2LELnPlGHD/whfgPLNjvZ86Xa/qbcECgX6Q27
+	Txaw/dzieTI7Ab/Th05/b2TM8csNPzbQG7rwBpWV7si84mEwXKKsO2OidW2oCye6pvxx
+	GccA==
+X-Gm-Message-State: AIkVDXJOGv7Q1SPEFmV/JX3xOquuEELh9PMQGv53FKIHTwL9YlCWKynqcbALrlowuXVahdAWXxgoeYwYBNSXqg==
+X-Received: by 10.223.154.109 with SMTP id z100mr12517593wrb.145.1486454173802;
+	Mon, 06 Feb 2017 23:56:13 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.80.148.174 with HTTP; Mon, 6 Feb 2017 23:56:13 -0800 (PST)
+In-Reply-To: <20170207052133.1791-1-akuster808@gmail.com>
+References: <20170207052133.1791-1-akuster808@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 7 Feb 2017 08:56:13 +0100
+Message-ID: <CA+chaQcvE1mRdBDg9WiKnLPQ2+F5p+jF6hbEYv8x5_iABEVCJw@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "akuster@mvista" <akuster@mvista.com>
+Subject: Re: [meta-networking][PATCH] netkit-ruser: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,29 +53,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2017 07:41:18 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 07 Feb 2017 07:56:14 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, 2017-02-06 at 09:10 -0800, akuster808 wrote:
-> please drop. this is fixed via a change in master-next.
-> 
-> http://cgit.openembedded.org/meta-openembedded/commit/?h=master-next&id=2e83e33c592543045a7761907d8cd62937e1e60d
+Shouldn't we fix DEBIAN_MIRROR instead or does it influence only this
+archive?
 
-Let's see whether the magic keyword works :-)
+On Tue, Feb 7, 2017 at 6:21 AM, Armin Kuster <akuster808@gmail.com> wrote:
 
-[Patchwork-Status: Superseded]
-
-https://patchwork.openembedded.org/patch/136794/
-
--- 
-Best Regards, Patrick Ohly
-
-The content of this message is my personal opinion only and although
-I am an employee of Intel, the statements I make here in no way
-represent Intel's position on the issue, nor am I authorized to speak
-on behalf of Intel on this matter.
-
-
-
+> ERROR: netkit-telnet-0.17-r0 do_checkuri: Fetcher failure for URL: '
+> ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/
+> netkit-telnet-0.17.tar.gz'. URL ftp://ftp.uk.linux.org/pub/
+> linux/Networking/netkit/netkit-telnet-0.17.tar.gz doesn't work
+> ERROR: netkit-telnet-0.17-r0 do_checkuri: Function failed: do_checkuri
+>
+> Debian moved these sources
+>
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>  meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb | 4
+> ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-networking/recipes-netkit/netkit-rusers/netkit-
+> rusers_0.17.bb b/meta-networking/recipes-netkit/netkit-rusers/netkit-
+> rusers_0.17.bb
+> index 24eb96f..459e39e 100644
+> --- a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
+> +++ b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
+> @@ -6,8 +6,8 @@ LICENSE = "BSD"
+>  LIC_FILES_CHKSUM = "file://rusers/rusers.c;beginline=2;endline=3;md5=
+> f4fc634a4ce8c569911196b72b10770e"
+>  DEPENDS = " tcp-wrappers libtirpc rpcbind"
+>
+> -SRC_URI = "${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}.orig.tar.gz;name=archive
+> \
+> -           ${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}-8.diff.gz;name=patch8
+> \
+> +SRC_URI = "http://http.debian.net/debian/pool/main/n/${BPN}/${
+> BPN}_${PV}.orig.tar.gz;name=archive \
+> +           http://http.debian.net/debian/pool/main/n/${BPN}/${BPN}_${
+> PV}-8.diff.gz;name=patch8 \
+>             file://rpc.rusersd-Makefile-fix-parallel-build-issue.patch \
+>  "
+>
+> --
+> 2.9.3
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
