@@ -1,46 +1,28 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f169.google.com (mail-ua0-f169.google.com
-	[209.85.217.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C7896B6EA
+Return-Path: <jose.a.lamego@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 09FC460110
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Feb 2017 15:56:22 +0000 (UTC)
-Received: by mail-ua0-f169.google.com with SMTP id y9so87980230uae.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Feb 2017 07:56:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=KeJNb3nsNbZjyWBGLyR2naMOjFUU5sbeoeNijrslyrY=;
-	b=XeIuU7ZsOgpTYRsQSpDdZ/qOSn4oNyPbg3v4GbtQDoaLtBliDAiFFo58Krj0P2k7TJ
-	mle0q/Jk1ZQihcpQIqZCrpjcFI9QT6M4ytSNA0Hjvmv2ZNVM4iAq1sefKJD8eKjsFSXu
-	ryO+EeRV6wmRBipV4SeYvC/jV6MRru552MOuVynfpHwJj/rltKLnfVknIscG0mDUZoJh
-	ZCcszi7sCCrfZavyBSAUs4AyfUkfiKozT5HqKG/6MsBr/k3+dj+D2+AnY1sdU1+L1aHe
-	zgQdl00Bw8zqaYp3FfXOY1KQ8THOWgxAVOYuiXe7ABi2/i+qxhIjb6eUHs8OyaYhsCBM
-	Vkaw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=KeJNb3nsNbZjyWBGLyR2naMOjFUU5sbeoeNijrslyrY=;
-	b=rQ5rr5cbmLRhN3UMhR2gI/fEkMzHrgwg6qSiPegnkH4U9GY7atpgpUdF2NbyPlAkZa
-	KkSPCpqVnRUZrY55or4PJDFWpLfwGy/qZTTGdAHF0uZJOfFiE06MJAUnkEWbaSu6lgkq
-	0zH4dds8LH7bnxdY1DTKZaKCY0ghD3AAtYVoIQYCvZKvJaFpp5xqVhOSXQH4JHxuZjW4
-	nrPeD4167S37FtgHxFGcLKbdHHY9y5vS3lwqZNvuAy97vJ2lJ/xk4V05PI7hHl0pmXED
-	yYYdGlzmMlFOUZ95CeGMLRg/bHilNTZP5BH+iBlcP3uZjqg+Nt1h/DPJRDcjgpkbzgyl
-	dbug==
-X-Gm-Message-State: AIkVDXLhAQuwTACNkEQ0zMRY/Jg793MHQzNC2qBwPy7AzR++GGkSat6pZSf+4AHxA62sJbYChXfpX97vnUxJsw==
-X-Received: by 10.176.3.46 with SMTP id 43mr8377474uat.79.1486482982381; Tue,
-	07 Feb 2017 07:56:22 -0800 (PST)
+	Tue,  7 Feb 2017 18:32:46 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP; 07 Feb 2017 10:32:46 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.33,346,1477983600"; 
+	d="asc'?scan'208";a="1123379735"
+Received: from unknown (HELO [10.219.128.137]) ([10.219.128.137])
+	by fmsmga002.fm.intel.com with ESMTP; 07 Feb 2017 10:32:46 -0800
+To: openembedded-devel@lists.openembedded.org
+References: <1486399174-28949-1-git-send-email-akuster808@gmail.com>
+	<caa1a269-b4e4-9909-967f-c637146fc4ba@gmail.com>
+	<1486453274.14889.135.camel@intel.com> <20170207102518.GA3276@jama>
+	<1486465148.14889.140.camel@intel.com>
+From: Jose Lamego <jose.a.lamego@linux.intel.com>
+Message-ID: <17a923eb-ec4b-1401-8277-cba1ddd1aae0@linux.intel.com>
+Date: Tue, 7 Feb 2017 12:32:40 -0600
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.0
 MIME-Version: 1.0
-Received: by 10.176.91.68 with HTTP; Tue, 7 Feb 2017 07:56:21 -0800 (PST)
-In-Reply-To: <1485442490-2464-1-git-send-email-samuli.piippo@qt.io>
-References: <1485442490-2464-1-git-send-email-samuli.piippo@qt.io>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Tue, 7 Feb 2017 16:56:21 +0100
-Message-ID: <CALbNGRQbxuLx-T0BEyoFCDuyM00zef5wQieEF-Rv6Sht-KMorQ@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH v6] Upgrade to Qt 5.8
+In-Reply-To: <1486465148.14889.140.camel@intel.com>
+Subject: Re: Patchwork-Status via email
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,58 +35,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2017 15:56:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 07 Feb 2017 18:32:47 -0000
+X-Groupsio-MsgNum: 65024
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="RPB7FoVNlG45vxSGjFwghd1spqmioxw44"
 
-On Thu, Jan 26, 2017 at 3:54 PM, Samuli Piippo <samuli.piippo@qt.io> wrote:
-> The linux-oe-g++ mkspec is changed to use $$(...) operator to obtain
-> the contents of an environment value when qmake is run instead of when
-> Makefile is processed. All OE_QMAKE_xxx variables need to be exported
-> for qmake to find them. configure's setBootstrapVariable function needs
-> to change $$(..) to normal $(...) operator to work with qmake's Makefile.
->
-> qt.conf generation for qtbase recipes is not needed, as configure will
-> generate its own version based on configure arguments. Skip running
-> qmake, since configure is now automatically invoked when it's run in
-> qtbase's root folder.
->
-> Update PACKAGECONFIGs for qtbase to match current configure options.
->
-> The new Qt configuration system [1] can be used with a new variable
-> EXTRA_QMAKEVARS_CONFIGURE, which takes both command line and feature
-> arguments.
->
-> Merge the two qtwayland recipes to one that supports all three targets
-> (target, native, nativesdk) without need for additional patch.
->
-> Recipes for new Qt modules: QtSCXML, QtNetworkAuth, QtGamepad.
-> Removes qtdeclarative-render2d
->
-> [1] https://www.mail-archive.com/development@qt-project.org/msg25257.html
->
-I have two issues/questions regarding this patch;
+--RPB7FoVNlG45vxSGjFwghd1spqmioxw44
+Content-Type: multipart/mixed; boundary="KjWl8VDubRThMnp69M9vtpW6xAour3OEX";
+ protected-headers="v1"
+From: Jose Lamego <jose.a.lamego@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <17a923eb-ec4b-1401-8277-cba1ddd1aae0@linux.intel.com>
+Subject: Re: Patchwork-Status via email
+References: <1486399174-28949-1-git-send-email-akuster808@gmail.com>
+ <caa1a269-b4e4-9909-967f-c637146fc4ba@gmail.com>
+ <1486453274.14889.135.camel@intel.com> <20170207102518.GA3276@jama>
+ <1486465148.14889.140.camel@intel.com>
+In-Reply-To: <1486465148.14889.140.camel@intel.com>
 
-1. This patch changes the way qmake finds qt.conf. For 5.7 qmake was
-checking if QT_CONF_PATH was set in environment and if so did the
-right thing without further quirks. This is gone now and we have to
-pass with -qtconf ${OE_QMAKE_QTCONF_PATH}. This causes additional
-efforts for packages using qmake from within autotools e.g all the
-synth-stuff found at [1]. Is this change really necessary?
+--KjWl8VDubRThMnp69M9vtpW6xAour3OEX
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-2.
->+generate_qt_config_file_effective_paths() {
->+    cat >> ${OE_QMAKE_QTCONF_PATH} <<EOF
->+[EffectivePaths]
->+HostBinaries = ${OE_QMAKE_PATH_EXTERNAL_HOST_BINS}
->+HostData = ${OE_QMAKE_PATH_HOST_DATA}
->+HostPrefix = ${STAGING_DIR_NATIVE}${prefix_native}
 
-^^ This does not look sane to me - shouldn't this be
-HostPrefix = ${STAGING_DIR_HOST}${prefix}
 
-Sorry for entering this late but I had other tasks the recent weeks
+On 02/07/2017 04:59 AM, Patrick Ohly wrote:
+> On Tue, 2017-02-07 at 11:25 +0100, Martin Jansa wrote:
+>> On Tue, Feb 07, 2017 at 08:41:14AM +0100, Patrick Ohly wrote:
+>>> On Mon, 2017-02-06 at 09:10 -0800, akuster808 wrote:
+>>>> please drop. this is fixed via a change in master-next.
+>>>>
+>>>> http://cgit.openembedded.org/meta-openembedded/commit/?h=3Dmaster-ne=
+xt&id=3D2e83e33c592543045a7761907d8cd62937e1e60d
+>>>
+>>> Let's see whether the magic keyword works :-)
+>>>
+>>> [Patchwork-Status: Superseded]
+>>>
+>>> https://patchwork.openembedded.org/patch/136794/
+>>>
+>>> --=20
+>>> Best Regards, Patrick Ohly
+>>>
+>>> The content of this message is my personal opinion only and although
+>>> I am an employee of Intel, the statements I make here in no way
+>>> represent Intel's position on the issue, nor am I authorized to speak=
 
-Andreas
+>>> on behalf of Intel on this matter.
+>>
+>> If it was supposed to update status on Patchwork, then it didn't work
+>> it's still in "New" state.
+>=20
+> Jose, in your "parsemail: Set patch state from email metadata" patch yo=
+u
+> said that it "allows project maintainers to change a patch status
+> directly from an email message".
+>=20
+> Can you clarify who the "project maintainers" are who can use this emai=
+l
+> interface?
+>=20
+Correct, the patch status change through email is available only for
+those registered as project maintainers in Patchwork. These are listed
+under "About this project" section at the web interface.
 
-[1] http://www.rncbc.org/drupal/
+> What about this use case here: the original author wants to retract a
+> patch. Can he do that via email and/or the web interface?
+>=20
+Patch submitter (and project maintainers) can update status manually
+through the web interface.
 
+> I wasn't the original author and probably also no project maintainer, s=
+o
+> I guess that's why my email had no effect. Can we enable some kind of
+> error response for such cases?
+>=20
+Good idea. I've filed a request to track this:
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D11027
+
+--=20
+Jose Lamego | OTC Embedded Platforms & Tools | GDC
+
+
+--KjWl8VDubRThMnp69M9vtpW6xAour3OEX--
+
+--RPB7FoVNlG45vxSGjFwghd1spqmioxw44
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.22 (GNU/Linux)
+
+iQEcBAEBAgAGBQJYmhLNAAoJEFJAtowlSEbnH/cH+wVRqkT89biZIDWlRb8hZT9W
+61riaKWX0s6ldUikVIDIeDK/bAKNGp4TaqztFzUAcPp7eivCUVSsd4XhnJPw6OCW
+ZZQLVZYEOHLs9Ao+XNiN/yPBNfhP5sinueZJf/VkArN/1D4BSK6FiJoWFIjlRlQO
+Z2g9tNckGtwZHcwEeS9ASiIu3hEi8KLBeSt9yLe47gdehXKDkTrlGsjyVX11j8XV
+OiZgHZU0rc/3kS5zJLbLtVjzYfbPKwctoQdgQEjW3vBPd1w9RAcyLL0Ypq+IPqtn
+3DmGJbe0N/Xu7AoOXG1ca3qP7mInKQS5oHAqv9J9XXq1KM7Lybow4iaM+LawuAY=
+=pG/Z
+-----END PGP SIGNATURE-----
+
+--RPB7FoVNlG45vxSGjFwghd1spqmioxw44--
