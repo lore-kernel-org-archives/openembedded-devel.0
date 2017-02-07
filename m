@@ -1,27 +1,56 @@
-Return-Path: <jose.a.lamego@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 09FC460110
+Return-Path: <patrick.ohly@intel.com>
+Received: from mail-io0-f170.google.com (mail-io0-f170.google.com
+	[209.85.223.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 3862A600EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Feb 2017 18:32:46 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga101.fm.intel.com with ESMTP; 07 Feb 2017 10:32:46 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.33,346,1477983600"; 
-	d="asc'?scan'208";a="1123379735"
-Received: from unknown (HELO [10.219.128.137]) ([10.219.128.137])
-	by fmsmga002.fm.intel.com with ESMTP; 07 Feb 2017 10:32:46 -0800
+	Tue,  7 Feb 2017 19:10:50 +0000 (UTC)
+Received: by mail-io0-f170.google.com with SMTP id v96so98053533ioi.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Feb 2017 11:10:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=message-id:subject:from:to:date:in-reply-to:references:organization
+	:mime-version:content-transfer-encoding;
+	bh=dQmVb+rn22PkkU2GoL1aKjyCBOyIe/JzyP9nUSWhCBA=;
+	b=0yWLFB8cUaa47l4oCtTQYb81DOiYVtVvOrnbbZIqBpVZNQxaxZ9kMJ1PQZT+S8f6Un
+	K1yWbZjz3TJRR6y8cbhdA9ySrz3TXf8ZvuK9PRR+6DKNTyks4h9LbJU+sWP4F05/flO5
+	CH2MrZo9ub+9VGormwQG13YqjF3s6V7NH/wmfD0EjG9fqkVLZHDL/2/O7fW618usAymg
+	ENR7MfOtQTMAkD/GUb5m1Z1n2Pf/AEarWEyCXgixuiLRuNhtdsx3/ESktiJXCMAzbLgV
+	mS6OwiLsvKIRLP+2utwVOIcZw5PJD2vxCNsBPLM0mpvnLcmsNvdrRV9Eky4eSofmJJdG
+	wVYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+	:references:organization:mime-version:content-transfer-encoding;
+	bh=dQmVb+rn22PkkU2GoL1aKjyCBOyIe/JzyP9nUSWhCBA=;
+	b=I8DO2ghfq2AV7CfYXLrRHQTVFNzztYE5CVXLnyrtFZeqM5Lw81WSoLbJIXdR0Edqrj
+	x5MKh7CoKDYa11tBQTZqvJIjvCl7MsLSh8geSPRm0ndBV07FGUqTvXWBHdCRqtJ7jZAv
+	pvgsramMwA/KApl6iTFg18nrptSEkkxwz/RBtr5midopi+C5YOPp1xGl7zIYLAbXVdiQ
+	mkcamojFsy74AYbh9H+SZ2bZcbf0FUke+ajQa0YnBEySHac+gekxYjDG76YFZ1oeCGpb
+	Db87vVD2FhVuk5NAsQLyrPMtijkPdXV4S2za21XA3w5Y38dQ0167pMUOCxHJpHAHnEtA
+	72nw==
+X-Gm-Message-State: AMke39n+egNlXQLIAGJQqk2O3CrQP+GzUbImuP62/Qyoa4yL0khkC5rcWXVlWI/7j9TRKihG
+X-Received: by 10.107.186.136 with SMTP id k130mr5599538iof.195.1486494650585; 
+	Tue, 07 Feb 2017 11:10:50 -0800 (PST)
+Received: from pohly-mobl1 (p5DE8DF93.dip0.t-ipconnect.de. [93.232.223.147])
+	by smtp.gmail.com with ESMTPSA id
+	j74sm9976125iod.44.2017.02.07.11.10.48
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 07 Feb 2017 11:10:49 -0800 (PST)
+Message-ID: <1486494646.14889.144.camel@intel.com>
+From: Patrick Ohly <patrick.ohly@intel.com>
 To: openembedded-devel@lists.openembedded.org
+Date: Tue, 07 Feb 2017 20:10:46 +0100
+In-Reply-To: <17a923eb-ec4b-1401-8277-cba1ddd1aae0@linux.intel.com>
 References: <1486399174-28949-1-git-send-email-akuster808@gmail.com>
 	<caa1a269-b4e4-9909-967f-c637146fc4ba@gmail.com>
 	<1486453274.14889.135.camel@intel.com> <20170207102518.GA3276@jama>
 	<1486465148.14889.140.camel@intel.com>
-From: Jose Lamego <jose.a.lamego@linux.intel.com>
-Message-ID: <17a923eb-ec4b-1401-8277-cba1ddd1aae0@linux.intel.com>
-Date: Tue, 7 Feb 2017 12:32:40 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.7.0
-MIME-Version: 1.0
-In-Reply-To: <1486465148.14889.140.camel@intel.com>
+	<17a923eb-ec4b-1401-8277-cba1ddd1aae0@linux.intel.com>
+Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
+X-Mailer: Evolution 3.12.9-1+b1 
+Mime-Version: 1.0
 Subject: Re: Patchwork-Status via email
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -35,106 +64,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2017 18:32:47 -0000
-X-Groupsio-MsgNum: 65024
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="RPB7FoVNlG45vxSGjFwghd1spqmioxw44"
+X-List-Received-Date: Tue, 07 Feb 2017 19:10:51 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
---RPB7FoVNlG45vxSGjFwghd1spqmioxw44
-Content-Type: multipart/mixed; boundary="KjWl8VDubRThMnp69M9vtpW6xAour3OEX";
- protected-headers="v1"
-From: Jose Lamego <jose.a.lamego@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <17a923eb-ec4b-1401-8277-cba1ddd1aae0@linux.intel.com>
-Subject: Re: Patchwork-Status via email
-References: <1486399174-28949-1-git-send-email-akuster808@gmail.com>
- <caa1a269-b4e4-9909-967f-c637146fc4ba@gmail.com>
- <1486453274.14889.135.camel@intel.com> <20170207102518.GA3276@jama>
- <1486465148.14889.140.camel@intel.com>
-In-Reply-To: <1486465148.14889.140.camel@intel.com>
+On Tue, 2017-02-07 at 12:32 -0600, Jose Lamego wrote:
+> 
+> On 02/07/2017 04:59 AM, Patrick Ohly wrote:
+> > What about this use case here: the original author wants to retract a
+> > patch. Can he do that via email and/or the web interface?
+> > 
+> Patch submitter (and project maintainers) can update status manually
+> through the web interface.
 
---KjWl8VDubRThMnp69M9vtpW6xAour3OEX
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+I suspect that this makes the email interface less useful that it could
+be. May I suggest that we relax the permission check so that also patch
+authors can change the status of a patch?
 
+-- 
+Best Regards, Patrick Ohly
 
-
-On 02/07/2017 04:59 AM, Patrick Ohly wrote:
-> On Tue, 2017-02-07 at 11:25 +0100, Martin Jansa wrote:
->> On Tue, Feb 07, 2017 at 08:41:14AM +0100, Patrick Ohly wrote:
->>> On Mon, 2017-02-06 at 09:10 -0800, akuster808 wrote:
->>>> please drop. this is fixed via a change in master-next.
->>>>
->>>> http://cgit.openembedded.org/meta-openembedded/commit/?h=3Dmaster-ne=
-xt&id=3D2e83e33c592543045a7761907d8cd62937e1e60d
->>>
->>> Let's see whether the magic keyword works :-)
->>>
->>> [Patchwork-Status: Superseded]
->>>
->>> https://patchwork.openembedded.org/patch/136794/
->>>
->>> --=20
->>> Best Regards, Patrick Ohly
->>>
->>> The content of this message is my personal opinion only and although
->>> I am an employee of Intel, the statements I make here in no way
->>> represent Intel's position on the issue, nor am I authorized to speak=
-
->>> on behalf of Intel on this matter.
->>
->> If it was supposed to update status on Patchwork, then it didn't work
->> it's still in "New" state.
->=20
-> Jose, in your "parsemail: Set patch state from email metadata" patch yo=
-u
-> said that it "allows project maintainers to change a patch status
-> directly from an email message".
->=20
-> Can you clarify who the "project maintainers" are who can use this emai=
-l
-> interface?
->=20
-Correct, the patch status change through email is available only for
-those registered as project maintainers in Patchwork. These are listed
-under "About this project" section at the web interface.
-
-> What about this use case here: the original author wants to retract a
-> patch. Can he do that via email and/or the web interface?
->=20
-Patch submitter (and project maintainers) can update status manually
-through the web interface.
-
-> I wasn't the original author and probably also no project maintainer, s=
-o
-> I guess that's why my email had no effect. Can we enable some kind of
-> error response for such cases?
->=20
-Good idea. I've filed a request to track this:
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=3D11027
-
---=20
-Jose Lamego | OTC Embedded Platforms & Tools | GDC
+The content of this message is my personal opinion only and although
+I am an employee of Intel, the statements I make here in no way
+represent Intel's position on the issue, nor am I authorized to speak
+on behalf of Intel on this matter.
 
 
---KjWl8VDubRThMnp69M9vtpW6xAour3OEX--
 
---RPB7FoVNlG45vxSGjFwghd1spqmioxw44
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.22 (GNU/Linux)
-
-iQEcBAEBAgAGBQJYmhLNAAoJEFJAtowlSEbnH/cH+wVRqkT89biZIDWlRb8hZT9W
-61riaKWX0s6ldUikVIDIeDK/bAKNGp4TaqztFzUAcPp7eivCUVSsd4XhnJPw6OCW
-ZZQLVZYEOHLs9Ao+XNiN/yPBNfhP5sinueZJf/VkArN/1D4BSK6FiJoWFIjlRlQO
-Z2g9tNckGtwZHcwEeS9ASiIu3hEi8KLBeSt9yLe47gdehXKDkTrlGsjyVX11j8XV
-OiZgHZU0rc/3kS5zJLbLtVjzYfbPKwctoQdgQEjW3vBPd1w9RAcyLL0Ypq+IPqtn
-3DmGJbe0N/Xu7AoOXG1ca3qP7mInKQS5oHAqv9J9XXq1KM7Lybow4iaM+LawuAY=
-=pG/Z
------END PGP SIGNATURE-----
-
---RPB7FoVNlG45vxSGjFwghd1spqmioxw44--
