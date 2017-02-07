@@ -1,46 +1,45 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f177.google.com (mail-pf0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id E554371A6B
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E8EC600E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Feb 2017 05:21:34 +0000 (UTC)
-Received: by mail-pf0-f177.google.com with SMTP id y143so30023960pfb.0
+	Tue,  7 Feb 2017 05:35:26 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id 204so11078660pge.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Feb 2017 21:21:35 -0800 (PST)
+	Mon, 06 Feb 2017 21:35:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id;
-	bh=k1MLKUycKNPttS3qngtrsMQ2u8uAKYKrwds15kDx34o=;
-	b=s9AFh9ytqsDum9hsRR3SHDlrpwX2xdhIaGTefCZbtcbRJS01PlVHRtgvecGsgL4zs8
-	X5RjHYu0ZhXLhFDRgBpxmO5ERD0P5DFEd3Y+663O6XjsEaszrLl8Ctk/i2wNWCzhQJTr
-	IdH0+/gmdeeZhq8hXeBHIxER8/kbPzbGWeG0Jr/pdlKYeB5unklIxnAyKilFtWuyrxBt
-	nfr6WulJoVzqHWNVBVQ9xbw23bSTiT4DDGaYD+4Z6ogOkS+CTgYpsZ7DO6+ayrBKc6ak
-	9i1I6IvA2gp9rRDoY9PuAloWLYcMYlF2om0IhUobXLpOsP8v4Qtah/uxb24pnH8GkSSZ
-	apIw==
+	bh=CfQxYzEh7ej+M2HvFoJdvTSvuEU4fevdcGPPn9FW48s=;
+	b=HDmaHLzjd5yQuV5CZMOtGSg9uTpfYMY4iARoeJoaGiSwr6/ny1y70JrF+qb8M3RcR7
+	4vOG79iqxYKLA/NwRz1ATQVWp0qGrAPRo7MTcLc/XIWapztZ9DK6oNrwYgKHZWjLSnj9
+	82xXKE6gfZiaWKZKtSsA6niQYbHTp3flUFzJX/fWHB5cbdNwW+kPfKoiOqQLsVBhcDSN
+	ESZGRvTe2JMhvO8LZbxsnRApeV5N7dQcB7Ys5tKtqeErXNA9oPyHWYVlAkDhTXofTJs3
+	9aQWBkEPgtt5FuUNHK+LEvpXofmiwv85g4laM8MYU34H3KstwmRhsKq1cGhf8Gn8CQGe
+	KOXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=k1MLKUycKNPttS3qngtrsMQ2u8uAKYKrwds15kDx34o=;
-	b=SsYpDi9QefTvpKSz5Pm3+7mXC7qtSOeyUWBtzG5Eza7J/5SVDzs5sE3ObIRJqma/bZ
-	p9jGN83xab0O3R59Xa74lrPt8djuq2Z2FzHpnIBSs0++AwVkc9ou/3Rgs/qz3TUZMd7w
-	nV5DiRDm/01uqfjl+1WkiJVhtFVKDtB8tC05vCoagfOjVS8qQJ8Su16gWZhbOSGVGypk
-	XfvvQutbb4YDssvFqlWQA7dMhHaolLnMFPbodSYIEz9W9aFSQR7Tf+w/KmP6vSLIzaKm
-	/ssRR1jYPEAyabhIAC1T4WjADZXgW+Dx9JJ+UGwyvYy8N6SIBj7BljeeEhn9NdT8iLLC
-	CLGg==
-X-Gm-Message-State: AIkVDXLu8AZZoBP0jqhc9dqJfmEEcjDdp8OGAU+tpyBjwepUiXcPe0bq0PsfCaNLqay8Wg==
-X-Received: by 10.99.146.7 with SMTP id o7mr17793008pgd.6.1486444895355;
-	Mon, 06 Feb 2017 21:21:35 -0800 (PST)
+	bh=CfQxYzEh7ej+M2HvFoJdvTSvuEU4fevdcGPPn9FW48s=;
+	b=lsNF7CPwwFo10tSQMV6t27MZv+hYJVvZHEVIuiGcU6vv8nNYg6GLTb7hbeIPABcQD+
+	BjCVHzYpMFXAB+dOUhGV2RYfUiiSiJ0qWmTr0/I6+68FMaZ7OcBQHulybdNFEctLqaLG
+	05Tpxq3ECKBQ5qRgKJQujOD9z/OBVkZ35Wexd87gzLV0d/A9lr+jHjxC9jRjxUNQA5Tf
+	4jWZ7yPY5k2JwU+Vgjv8tN1+hOaVVltJhSUpvN1WC6rP5SRkyFkh3+jROxpBFolDyiob
+	/KOR6xHs5vw35gmeHLoQQGkhLeZyqRMimwvBmnhMWoxZy4aLel7BNdAzw1eA2/MufxUp
+	Zabg==
+X-Gm-Message-State: AIkVDXKn4+okqF7Xm8+9ysWNfnIrQj+c7HLqQqd26g6QQ2s/wh8iYPnvsDhSaAVhIi8Yqg==
+X-Received: by 10.99.154.9 with SMTP id o9mr17960057pge.69.1486445727060;
+	Mon, 06 Feb 2017 21:35:27 -0800 (PST)
 Received: from localhost.localdomain ([2601:202:4001:9ea0:c634:6bff:fe01:a196])
 	by smtp.gmail.com with ESMTPSA id
-	h14sm6779677pgn.41.2017.02.06.21.21.34
+	t15sm7006086pgn.18.2017.02.06.21.35.26
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 06 Feb 2017 21:21:34 -0800 (PST)
+	Mon, 06 Feb 2017 21:35:26 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	akuster@mvista.com
-Date: Tue,  7 Feb 2017 00:21:33 -0500
-Message-Id: <20170207052133.1791-1-akuster808@gmail.com>
+Date: Tue,  7 Feb 2017 00:35:25 -0500
+Message-Id: <20170207053525.2194-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.9.3
-Subject: [meta-networking][PATCH] netkit-ruser: update SRC_URI
+Subject: [meta-networking][PATCH] ipsec-tools: change SRC_URI fetcher.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,33 +52,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2017 05:21:41 -0000
+X-List-Received-Date: Tue, 07 Feb 2017 05:35:27 -0000
 
-ERROR: netkit-telnet-0.17-r0 do_checkuri: Fetcher failure for URL: 'ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/netkit-telnet-0.17.tar.gz'. URL ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/netkit-telnet-0.17.tar.gz doesn't work
-ERROR: netkit-telnet-0.17-r0 do_checkuri: Function failed: do_checkuri
+ERROR: ipsec-tools-0.8.2-r0 do_checkuri: Fetcher failure for URL: 'ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-tools-0.8.2.tar.bz2'. URL ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-tools-0.8.2.tar.bz2 doesn't work
+ERROR: ipsec-tools-0.8.2-r0 do_checkuri: Function failed: do_checkuri
 
-Debian moved these sources
+https seems more reliable.
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-index 24eb96f..459e39e 100644
---- a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-@@ -6,8 +6,8 @@ LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://rusers/rusers.c;beginline=2;endline=3;md5=f4fc634a4ce8c569911196b72b10770e"
- DEPENDS = " tcp-wrappers libtirpc rpcbind"
+diff --git a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+index a9b5b95..bf89927 100644
+--- a/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
++++ b/meta-networking/recipes-support/ipsec-tools/ipsec-tools_0.8.2.bb
+@@ -9,7 +9,7 @@ DEPENDS = "virtual/kernel openssl readline flex-native bison-native"
  
--SRC_URI = "${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}.orig.tar.gz;name=archive \
--           ${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}-8.diff.gz;name=patch8 \
-+SRC_URI = "http://http.debian.net/debian/pool/main/n/${BPN}/${BPN}_${PV}.orig.tar.gz;name=archive \
-+           http://http.debian.net/debian/pool/main/n/${BPN}/${BPN}_${PV}-8.diff.gz;name=patch8 \
-            file://rpc.rusersd-Makefile-fix-parallel-build-issue.patch \
- "
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
+-SRC_URI = "ftp://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-tools-${PV}.tar.bz2 \
++SRC_URI = "http://ftp.netbsd.org/pub/NetBSD/misc/ipsec-tools/0.8/ipsec-tools-${PV}.tar.bz2 \
+            file://0002-Don-t-link-against-libfl.patch \
+            file://configure.patch \
+            file://0001-racoon-pfkey-avoid-potential-null-pointer-dereferenc.patch \
 -- 
 2.9.3
 
