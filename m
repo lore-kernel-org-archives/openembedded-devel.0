@@ -1,24 +1,44 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id D6BC3600EA
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F1F371A3E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Feb 2017 22:10:30 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v17MASIh007129
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 7 Feb 2017 14:10:28 -0800 (PST)
-Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 7 Feb 2017 14:10:27 -0800
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: <koen@dominion.thruhere.net>, <martin.jansa@gmail.com>
-Date: Tue, 7 Feb 2017 17:10:20 -0500
-Message-ID: <1486505420-14626-1-git-send-email-mark.asselstine@windriver.com>
+	Tue,  7 Feb 2017 23:56:40 +0000 (UTC)
+Received: by mail-wm0-f47.google.com with SMTP id v186so32068899wmd.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Feb 2017 15:56:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=M+94zLaU8offTnuXU0Fylb0bNJfI4MlBmpNL6fEcnno=;
+	b=IJSTjEZxHwHlYK517LfyB5fgxOn0h37XEAV7sLAEhIDj12TSN+S1/D02X21BePaAhe
+	Sg/RQoKUG2Exun18ZNKgrsnJhPhUMSF7SCTFub6llodvzSlXj4dSQIChklzvv7qRSTKQ
+	GolyV8cCvwVDIHwSIY6P8YpBA38jGHUti8qNVV4gAR8kupBE+8k4wRu4bmdQsOYrFtAh
+	LtdJ15zZUKpwUbEPlEJVXzSez0Lcuyz7f61pLdOMsNMYbFSPAM5b7IylnD76R7Nmj6K4
+	8gITmvWOzZSmHqMeqEVuBIwEM+eruKNeGoodNmvVtzr7PGKhRPKoOYmF7fPn36h65CGP
+	GNVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=M+94zLaU8offTnuXU0Fylb0bNJfI4MlBmpNL6fEcnno=;
+	b=nHMpjazm7pO+WlYieyrzOz4ysHBqdybspuNn6fyOkM3GUOyW4rfalB4/74jQ6tbeQ4
+	mgwX3GkHJMZZriATCVGD9VNMQdIgbzECeGhUvz/lZgoDQhIViTNMUruH5UpBMFqpyX/q
+	6RpmXIo3y+YRok1mZmKsQ9bgVbOzP5lKQFJBmB2KaBGzC2oPZ3WCUVtueTqmA7r0D+wp
+	l4cHS0TbRxF6QwtA4bX+w1QdEeURTjdrpHXR+sRXVYXGbEpZLMhq3wMkDzcm3pb2FYNX
+	UvbCaTZTdjyxztADmFAu6ulsgDR5iB8k+1vIRLrnQSXW1WHslJiMlhIDgpwmlouMI+9P
+	YgAw==
+X-Gm-Message-State: AMke39lbkq6pHIghij4xjHXDhQSW2Edt/PTg4nGB6VIMGkUlK7LQSuCTzakC8ddSIE5VqA==
+X-Received: by 10.28.84.88 with SMTP id p24mr14476310wmi.52.1486511800025;
+	Tue, 07 Feb 2017 15:56:40 -0800 (PST)
+Received: from ThinkPad-T520.homenet.telecomitalia.it
+	(host13-229-dynamic.20-79-r.retail.telecomitalia.it. [79.20.229.13])
+	by smtp.gmail.com with ESMTPSA id e74sm284462wmd.2.2017.02.07.15.56.38
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 07 Feb 2017 15:56:38 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  8 Feb 2017 00:56:24 +0100
+Message-Id: <1486511784-32175-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] udisks: add missing hard dependency
+Subject: [meta-initramfs][PATCH] initramfs-kexecboot-image: disable runtime dependency on run-postinsts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,39 +51,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Feb 2017 22:10:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 07 Feb 2017 23:56:45 -0000
 
-Because do_compile() makes calls to dbus-binding-tool we have to make
-this tool available via the dbus-glib-native package. Failing this we
-get errors:
+The runtime dependency chain leads to the install of unneeded files:
 
-  | dbus-binding-tool --prefix=port --mode=glib-server --output=port-glue.h ...
-  | /bin/bash: dbus-binding-tool: command not found
-  | Makefile:1150: recipe for target 'daemon-glue.h' failed
+ /usr/sbin/run-postinsts
+ /usr/sbin/update-rc.d
 
-This becomes a hard build failure when per recipe sysroots are used.
+This comes from the default value of ROOTFS_BOOTSTRAP_INSTALL='run-postinsts'
+To fix this, for this image we need an empty var.
 
-Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+While there, do the same for KERNELDEPMODDEPEND as suggested in image.bbclass.
+
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-oe/recipes-support/udisks/udisks_1.0.5.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-index eec6933..d79033b 100644
---- a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-+++ b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-@@ -2,7 +2,9 @@ DESCRIPTION = "A storage daemon that implements well-defined D-Bus interfaces th
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=73d83aebe7e4b62346afde80e0e94273"
+diff --git a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
+index 45ff50d..835b307 100644
+--- a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
++++ b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
+@@ -3,10 +3,13 @@ DESCRIPTION = "This image provides kexecboot (linux as bootloader) and helpers."
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
  
--DEPENDS = "libatasmart sg3-utils polkit libgudev dbus-glib glib-2.0 intltool-native lvm2"
-+DEPENDS = "libatasmart sg3-utils polkit libgudev dbus-glib glib-2.0 intltool-native lvm2 \
-+    dbus-glib-native \
-+"
- # optional dependencies: device-mapper parted
++inherit image
++
+ IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
  
- DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+ # avoid circular dependencies
+ EXTRA_IMAGEDEPENDS = ""
++KERNELDEPMODDEPEND = ""
+ 
+ # We really need just kexecboot, kexec and ubiattach
+ IMAGE_INSTALL = "kexecboot kexec mtd-utils-ubifs"
+@@ -18,7 +21,8 @@ IMAGE_LINGUAS = ""
+ 
+ FEED_DEPLOYDIR_BASE_URI = ""
+ LDCONFIGDEPEND = ""
+-
+ IMAGE_ROOTFS_EXTRA_SPACE = "0"
+ 
+-inherit image
++# disable runtime dependency on run-postinsts -> update-rc.d
++ROOTFS_BOOTSTRAP_INSTALL = ""
++
 -- 
 2.7.4
 
