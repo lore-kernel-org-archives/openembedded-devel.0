@@ -1,33 +1,49 @@
-Return-Path: <obi@opendreambox.org>
-X-Greylist: delayed 433 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 06 Feb 2017 21:35:28 UTC
-Received: from mail.dream-property.net (mail.dream-property.net
-	[82.149.226.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 27FCB719DC
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Feb 2017 21:35:28 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id 9F7A331E053A;
-	Mon,  6 Feb 2017 22:28:14 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id 4oJj0Zk4DDlO; Mon,  6 Feb 2017 22:28:12 +0100 (CET)
-Received: from t510.zcs.saftware.de (p57A61890.dip0.t-ipconnect.de
-	[87.166.24.144])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id 82A2031E0537;
-	Mon,  6 Feb 2017 22:28:12 +0100 (CET)
-Date: Mon, 6 Feb 2017 22:28:11 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170206222811.149afc17@t510.zcs.saftware.de>
-In-Reply-To: <1485682404-2336-1-git-send-email-obi@opendreambox.org>
-References: <1485682404-2336-1-git-send-email-obi@opendreambox.org>
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f172.google.com (mail-pf0-f172.google.com
+	[209.85.192.172])
+	by mail.openembedded.org (Postfix) with ESMTP id B1AFA6025F;
+	Tue,  7 Feb 2017 02:25:22 +0000 (UTC)
+Received: by mail-pf0-f172.google.com with SMTP id y143so28692418pfb.0;
+	Mon, 06 Feb 2017 18:25:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=to:from:subject:message-id:date:user-agent:mime-version
+	:content-transfer-encoding;
+	bh=Tgf6grSAR0yutRkj4M1pJ8Yl5P2/frbKZvh375KSy64=;
+	b=gkFg0OXXovWZUUkfJNkHc8MCiRkAjL9qyTvxLX464FnGr2rMaPyiq5mehiEb6bT0ql
+	51YtU5oOr9dPzoGQjxjb+p3jsRorJysrSXg50M9zFyrP5HBY/EYz/XD2TnBloA1XaWBu
+	MO6BQFSUvEXdQwe2uM1gcJg76DP8/oCtiAmBqfhSS1fxPcYmj5fqg943NJh6yC88YCS1
+	7GhRG+GloawmgnVwys1XJzJ/b6LKKyfatjWx1NiNgIVGqH2jbi3fKn93srr26S4gGfXn
+	NR0oI62Q3jU6V/EX2UVYcd4QHjmIzuglaOpUTeEbnJTlLNjUeaPXRglQuhrR59WvU/tY
+	CdpQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+	:mime-version:content-transfer-encoding;
+	bh=Tgf6grSAR0yutRkj4M1pJ8Yl5P2/frbKZvh375KSy64=;
+	b=nRdS0BfN3/iAPKEKBQzqbKi/z4z4pxPi0ScHG5b7E4FctUOq1pWsTI4206PbDA3ylC
+	/n11RymGG/BsjJmo1hRcQgnwKkbnHm+S1E4ZrbP7CJwvR/X1LI7A7kANrOgIdfRWbSSd
+	YNo8L993Tf1LHss7EWG18eK/Uz5Q43X83kR55vYIN0prM4sp2YWzSD9H1V1Fkv8kjL6C
+	/1pKM5nQIPf5qSOATiwvkwFwQsCR0Qu9PwLYyKEnqjUVa9x9Ks9GUfC8YRLs9XGXU2Dh
+	MHC3Wud/QjNt/SBwZa9kl0G7A5dPaOM1XFv1/PsdywX8UlPVztkuNyynlmgSQMnpsjCu
+	V4DQ==
+X-Gm-Message-State: AIkVDXJfOfZWgBnl1ay5vu11zakEs2LYRyxgvhqpuhCOb0zTQgPAGau/M3f5gqum+InYlA==
+X-Received: by 10.84.137.37 with SMTP id 34mr22252307plm.29.1486434322437;
+	Mon, 06 Feb 2017 18:25:22 -0800 (PST)
+Received: from ?IPv6:2601:202:4001:9ea0:988e:cef8:265c:2d?
+	([2601:202:4001:9ea0:988e:cef8:265c:2d])
+	by smtp.gmail.com with ESMTPSA id 75sm5680648pfp.80.2017.02.06.18.25.21
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 06 Feb 2017 18:25:21 -0800 (PST)
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <2c536609-989f-240e-cb4a-c77815898d8f@gmail.com>
+Date: Mon, 6 Feb 2017 18:25:20 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.0
 MIME-Version: 1.0
-Subject: Re: [meta-qt5][PATCH] qtwebkit: add necessary dependency on gperf-native
+Subject: OEDAM - Portland 2017
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,34 +56,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Feb 2017 21:35:30 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Tue, 07 Feb 2017 02:25:23 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Ping. In Patchwork this was archived, but it's not in master-next.
+Aloha all,
 
-On Sun, 29 Jan 2017 10:33:24 +0100
-Andreas Oberritter <obi@opendreambox.org> wrote:
+We are looking for fresh agenda Items or ideas for OEDAM 2017 in 
+Portland. If anyone has any, please send them to the list or add them to 
+the wiki.
 
-> QtWebKit refuses to build if gperf is not found in PATH.
-> 
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> ---
->  recipes-qt/qt5/qtwebkit_git.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/recipes-qt/qt5/qtwebkit_git.bb b/recipes-qt/qt5/qtwebkit_git.bb
-> index 2d69bb8..4845d0f 100644
-> --- a/recipes-qt/qt5/qtwebkit_git.bb
-> +++ b/recipes-qt/qt5/qtwebkit_git.bb
-> @@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
->      file://Source/JavaScriptCore/parser/Parser.h;endline=21;md5=bd69f72183a7af673863f057576e21ee \
->  "
->  
-> -DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt"
-> +DEPENDS += "qtbase qtdeclarative icu ruby-native sqlite3 glib-2.0 libxslt gperf-native"
->  
->  # qemuarm build fails with:
->  # | {standard input}: Assembler messages:
+If you want to be anonymous, you can send them to me.
+
+Mahalo,
+
+Armin
 
 
