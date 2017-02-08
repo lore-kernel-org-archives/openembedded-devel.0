@@ -1,45 +1,49 @@
 Return-Path: <andreas.kling@gmail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 837936079E
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 9A26C6079E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2017 14:08:25 +0000 (UTC)
-Received: by mail-wm0-f49.google.com with SMTP id v77so191893605wmv.0
+	Wed,  8 Feb 2017 14:08:26 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id r18so33503998wmd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2017 06:08:26 -0800 (PST)
+	Wed, 08 Feb 2017 06:08:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=ocy9st4fIWtY0ko9eHiNqE4+T/ip8jnazcY0wi6olcI=;
-	b=jcvATYc8LD676ChjC0C95i32AhmODBjg3ZTVibpqm+Eu82lBQywk7J9hn3nhfce8FM
-	fLggMo5s8IZYSXM8IMHsusHXtrzM+Rhvi0fv43iK6AeYgJxG8H4ij8dzAS87wfpwRtcP
-	tCz0lFo+J5uWHMAncICNJ4elgcfcJJipGHHjyVkWSClRsUIOuMlN/ec17fYBq7VlU3CR
-	po/ZB34GdSWdjTWT4N07xnAcV8ib03fg9+sLb1Eq83mRsor5d0agwPpqOqDqiNYbSLq9
-	kW2ALhmFxcOcOg0+l3YaPRS1DOyiERtwMjUAuBNUp/cKA68zpsD+Zv17e0QSOMtytnfH
-	vLjw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=KrMm4C+euvxPKoHs7UB4sqxDk2fTcfKWnpOwtIRHLzU=;
+	b=JRKQDJqTYZy2gFxOUEz7MMV8CpeIHcz8UalbZs4raNWyc3k+lk2JfhrkdgKTN3z8cb
+	CjBTs8QpqD2Xg+JojqEY5uyk5hwJRgtwWjfBDDcmITjkYo4IUyK05CGalNJZJ1dAnXbm
+	gSxuCmXuhODt9cDPqcnsETOXvmfL1KSENqr0/xBPbT/FasSlfDixdOzS1ujyjOT4MtoO
+	e491TPIUBX9X85/kOq8oSL3XbOfoWPc7tlvwQic+lH8wRviT1BrMSrOrt40LIqO0rw9u
+	OAWqglrr1IJFvfd24DNp46cPd0nmmvjZ+omXu8/gsh0BvG2dXWm84DDehtgg9O3DUlBC
+	ETQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ocy9st4fIWtY0ko9eHiNqE4+T/ip8jnazcY0wi6olcI=;
-	b=PDOknYzgvqsn5Zq2KNh1o+0ySN8R3Gok6Jaxanv6d/4zhubrqp6zoUNhT9OSvfjtv6
-	S+1yg5gSEnDE5WU0LnMmoQJW2R2yldd+66gR/fxQiHDEY3UFKMjIuXnzfEU6itr1wNpj
-	cRM6BvA8Ngkf8GGqWHPlbSbW4TZTKUzP9NzI1T0xrehg0NkHbvW6+27hsHjjFrbvChX1
-	ANfJP6v4O9lPAb/akF5SAprGjpStupP1dfQQc3nGGnQr1fLwCYVW2VLi33CckOiPyQEg
-	qWYN0bzWG12BlV2kPfVjkiuQXOOKmA17FcpCWvQ1eW3ul996WHZnRkxw/JPWHGVIxHg2
-	TFBw==
-X-Gm-Message-State: AMke39kjNn2nzyB5peZcJhLp5RiE8s0VxfTQcTD2HWAHTbDqtLTKUpIHf649WNzCjyWIoA==
-X-Received: by 10.28.206.199 with SMTP id e190mr18441909wmg.98.1486562905296; 
-	Wed, 08 Feb 2017 06:08:25 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=KrMm4C+euvxPKoHs7UB4sqxDk2fTcfKWnpOwtIRHLzU=;
+	b=sZhGWGQz7VLLNBkgO5oL6yaRU8PAtJm9uqo5Rfi0p/L4VrlzqYbjHMZ6FWOS5Xgk8F
+	CUOUut7ZDrvWeqGfVZQJXixeACrRHRyupsdBIezXGU/RYYdCsVUDszaA9k7jxFjlQ9/e
+	FpCiv6PZvE7UTyQ+x2xdwz8e5db8HHOrJcMnoFKIGOZhzOXUuujZwADrFLDghW/U8NFA
+	ipZGecvkuMioK4MXKDu2LBYbPxlN0FrZZmce44t3VHorHX0dlK3trcQlqmSbUSCivYpe
+	YnyYdG2vDfobClnOJxrS5MEd0bUGE4T0juxHRybJbuYvYYx5MHfFO3c2X/UTmYnQkelE
+	u0Eg==
+X-Gm-Message-State: AMke39lCtxoFf/xSQETGBaMJNrrJZdahfVWu+d+2BRZkH1sdJEpelTGbYnyaQbGKDpISOg==
+X-Received: by 10.28.182.70 with SMTP id g67mr18394841wmf.131.1486562906511;
+	Wed, 08 Feb 2017 06:08:26 -0800 (PST)
 Received: from nb-lx-hgc-001.peiker-cee.de
 	(business-176-094-229-202.static.arcor-ip.net. [176.94.229.202])
 	by smtp.gmail.com with ESMTPSA id
-	a72sm13143357wrc.48.2017.02.08.06.08.23
+	a72sm13143357wrc.48.2017.02.08.06.08.25
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 08 Feb 2017 06:08:23 -0800 (PST)
+	Wed, 08 Feb 2017 06:08:25 -0800 (PST)
 From: andreas.kling@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Feb 2017 15:07:52 +0100
-Message-Id: <20170208140755.12812-1-andreas.kling@gmail.com>
+Date: Wed,  8 Feb 2017 15:07:53 +0100
+Message-Id: <20170208140755.12812-2-andreas.kling@gmail.com>
 X-Mailer: git-send-email 2.11.0
-Subject: dconf: conditionally depend on gtk+3
+In-Reply-To: <20170208140755.12812-1-andreas.kling@gmail.com>
+References: <20170208140755.12812-1-andreas.kling@gmail.com>
+Cc: Andy Kling <andreas.kling@peiker-cee.de>
+Subject: [meta-gnome][PATCH 1/3] dconf: depends on dbus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,10 +56,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2017 14:08:25 -0000
+X-List-Received-Date: Wed, 08 Feb 2017 14:08:26 -0000
 
-dconf only uses gtk for dconf-editor. compiling editor conditionally allows to remove the hard dependency. so dconf can be used on systems without GUI.
+From: Andy Kling <andreas.kling@peiker-cee.de>
 
-while writing this patch I came across some minor bugs that are also fixed with this series.
+  configure of dconf requires dbus
+
+  | checking for dbus... no
+  | configure: error: Package requirements (dbus-1) were not met:
+  |
+  | No package 'dbus-1' found
+---
+ meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
+index f38be880f..2830e717b 100644
+--- a/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
++++ b/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
+@@ -9,7 +9,7 @@ SRC_URI[archive.md5sum] = "69a12ed68893f2e1e81ac4e531bc1515"
+ SRC_URI[archive.sha256sum] = "109b1bc6078690af1ed88cb144ef5c5aee7304769d8bdc82ed48c3696f10c955"
+ GNOME_COMPRESS_TYPE = "xz"
+ 
+-DEPENDS = "glib-2.0 gtk+3 libxml2 intltool-native"
++DEPENDS = "dbus glib-2.0 gtk+3 libxml2 intltool-native"
+ 
+ inherit vala gtk-doc distro_features_check
+ 
+-- 
+2.11.0
 
 
