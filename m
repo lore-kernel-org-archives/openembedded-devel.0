@@ -1,28 +1,44 @@
-Return-Path: <Zhe.He@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F9A4719DE
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-vk0-f67.google.com (mail-vk0-f67.google.com
+	[209.85.213.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 4ADF660620
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2017 03:01:01 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v18310ii020859
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Wed,  8 Feb 2017 06:30:16 +0000 (UTC)
+Received: by mail-vk0-f67.google.com with SMTP id n125so4020380vke.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 7 Feb 2017 19:01:00 -0800
-Received: from [128.224.162.169] (128.224.162.169) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.294.0;
-	Tue, 7 Feb 2017 19:00:59 -0800
-To: <openembedded-devel@lists.openembedded.org>
-References: <1486522685-22052-1-git-send-email-zhe.he@windriver.com>
-From: He Zhe <zhe.he@windriver.com>
-Message-ID: <23ce5471-c077-6911-eb15-21e56aff6ac3@windriver.com>
-Date: Wed, 8 Feb 2017 11:00:50 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.5.1
+	Tue, 07 Feb 2017 22:30:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=N59pRHJcP0FVpb/wyyi1ZLS9DYGfx83c+KEIe4G895o=;
+	b=mV9aPjmBS8+AoVE6gs5crvY0e8zIYmZaboSsWnBXhSseY4TxTJY5HC+zr7JN1OMqiS
+	xYDokPnAZ60yoeLc0U0rtUGpil7NKi93ZEKTCt6FbIp02Dkd6wAVBSuE2qjSfCwrnX+z
+	15DHceSm3QRstjOJ8ElviHwbCxqRUFFvjcYDQAfpepbDsQC2wL9rQVxr0KqFz6cxaPhA
+	jXMEVSDPJDqRX/hyU1jobsDOeo+mka97zsJ7eFyyYLnvNUP/RMUrdO7uePF6uCVHpU8f
+	VpvxtBZEG+xXFYInxACjLhqSCbgrGp4NJj29QK/eHZ3zEqSJpmOJOxAUYVz1FyTzpOHi
+	xwXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=N59pRHJcP0FVpb/wyyi1ZLS9DYGfx83c+KEIe4G895o=;
+	b=fi7KkmJj8259nYg0FGwOBV+9LS1V835KwKnAXpyaY1MW/SQipYTJSw01i/xMQOfgBP
+	m1+oKZjktPA+ko15QTWb8pmQsX+ipwJOA0VxRgBylOcWe5MrYn0nHdeU4hO9Fxi37Dfa
+	ti1VLtCnobNgNRccSlb8yThp1Enoz1Kqai/yjxuPUI+xkI8Uj4i7sjvJcsHBP/lEKO2r
+	P5Hi185bAtutA7/kpQQRE6IbDtRjQleEATeEXV6XZ+AkOTiRzxnhSdrHITcfUfDOo+Q2
+	kOLG2fz1Y42v59Qh/iKhD7I9NiQp/xTF0xH6NUE3kDYAfjm7yC9MsBS3WAFcxexEIuIj
+	nuSA==
+X-Gm-Message-State: AMke39kIZHpOFTlf2HpV05R2koHuum5eXN5jN24GZKh1BCi6HBfhow0szVIqAtxbzu6WKSTnFxcWJyVx9FA2qA==
+X-Received: by 10.31.28.193 with SMTP id c184mr8940797vkc.173.1486535417114;
+	Tue, 07 Feb 2017 22:30:17 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1486522685-22052-1-git-send-email-zhe.he@windriver.com>
-X-Originating-IP: [128.224.162.169]
-Subject: Re: [OE-core] [PATCH] ltp: Fix containers/userns05 failure for lib32
+Received: by 10.159.48.222 with HTTP; Tue, 7 Feb 2017 22:29:46 -0800 (PST)
+In-Reply-To: <20170207193208.5051-1-fabio.berton@ossystems.com.br>
+References: <20170207193208.5051-1-fabio.berton@ossystems.com.br>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 7 Feb 2017 22:29:46 -0800
+Message-ID: <CAMKF1soMAwn1rkQmEoduLS7GFZtFviwepgTaa73-kWee0OhUzA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/3] libev: Add recipe for version 4.24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,119 +51,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2017 03:01:09 -0000
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 08 Feb 2017 06:30:17 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Please ignore, has been sent to oe-coremailing list
+There are some shortcomings in this recipe
 
+Please merge the changes from
 
-On 02/08/2017 10:58 AM, zhe.he@windriver.com wrote:
-> From: He Zhe <zhe.he@windriver.com>
->
-> Backport a patch to fix userns05 case:
-> <<<test_output>>>
-> user_namespace5 1 TFAIL : userns05.c:95: userns:parent should be not equal to cpid2
-> user_namespace5 1 TFAIL : userns05.c:95: userns:parent should be not equal to cpid2
-> user_namespace5 0 TINFO : Child process returned TPASS
-> user_namespace5 0 TINFO : Child process returned TPASS
-> user_namespace5 0 TINFO : Child process returned TFAIL
-> incrementing stop
->
-> Rename the previous patch to add a number prefix
->
-> Signed-off-by: He Zhe <zhe.he@windriver.com>
+https://github.com/kraj/meta-openembedded/blob/kraj/master/meta-oe/recipes-extended/libev/libev_4.24.bb
+
+On Tue, Feb 7, 2017 at 11:32 AM, Fabio Berton
+<fabio.berton@ossystems.com.br> wrote:
+> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 > ---
->  ...039-fcntl-fix-the-time-def-to-use-time_t.patch} |  0
->  ...iners-userns05-use-unsigned-int-for-ns-id.patch | 60 ++++++++++++++++++++++
->  meta/recipes-extended/ltp/ltp_20160126.bb          |  3 +-
->  3 files changed, 62 insertions(+), 1 deletion(-)
->  rename meta/recipes-extended/ltp/ltp/{fcntl-fix-the-time-def-to-use-time_t.patch => 0039-fcntl-fix-the-time-def-to-use-time_t.patch} (100%)
->  create mode 100644 meta/recipes-extended/ltp/ltp/0040-containers-userns05-use-unsigned-int-for-ns-id.patch
+>  meta-oe/recipes-connectivity/libev/libev_4.24.bb | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
+>  create mode 100644 meta-oe/recipes-connectivity/libev/libev_4.24.bb
 >
-> diff --git a/meta/recipes-extended/ltp/ltp/fcntl-fix-the-time-def-to-use-time_t.patch b/meta/recipes-extended/ltp/ltp/0039-fcntl-fix-the-time-def-to-use-time_t.patch
-> similarity index 100%
-> rename from meta/recipes-extended/ltp/ltp/fcntl-fix-the-time-def-to-use-time_t.patch
-> rename to meta/recipes-extended/ltp/ltp/0039-fcntl-fix-the-time-def-to-use-time_t.patch
-> diff --git a/meta/recipes-extended/ltp/ltp/0040-containers-userns05-use-unsigned-int-for-ns-id.patch b/meta/recipes-extended/ltp/ltp/0040-containers-userns05-use-unsigned-int-for-ns-id.patch
+> diff --git a/meta-oe/recipes-connectivity/libev/libev_4.24.bb b/meta-oe/recipes-connectivity/libev/libev_4.24.bb
 > new file mode 100644
-> index 0000000..4dee1f5
+> index 000000000..40f7dc710
 > --- /dev/null
-> +++ b/meta/recipes-extended/ltp/ltp/0040-containers-userns05-use-unsigned-int-for-ns-id.patch
-> @@ -0,0 +1,60 @@
-> +From 3b63d350e9fe9e4271916cc0abfac65a5d6419ff Mon Sep 17 00:00:00 2001
-> +From: Jiri Jaburek <jjaburek@redhat.com>
-> +Date: Tue, 7 Feb 2017 07:58:16 +0000
-> +Subject: [PATCH] containers/userns05: use unsigned int for ns id
+> +++ b/meta-oe/recipes-connectivity/libev/libev_4.24.bb
+> @@ -0,0 +1,14 @@
+> +SUMMARY = "A full-featured and high-performance event loop that is loosely \
+> +modelled after libevent."
+> +HOMEPAGE = "http://software.schmorp.de/pkg/libev.html"
+> +LICENSE = "GPLv2+"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=d6ad416afd040c90698edcdf1cbee347"
 > +
-> +The kernel defines it as 'unsigned int' in 'struct ns_common'
-> +and formats it as
+> +SRC_URI = "http://dist.schmorp.de/${PN}/${PN}-${PV}.tar.gz"
 > +
-> +  snprintf(buf, size, "%s:[%u]", ns_ops->name, ns->inum);
+> +SRC_URI[md5sum] = "94459a5a22db041dec6f98424d6efe54"
+> +SRC_URI[sha256sum] = "973593d3479abdf657674a55afe5f78624b0e440614e2b8cb3a07f16d4d7f821"
 > +
-> +This change makes the test work on 32bit systems where LONG_MAX
-> +is smaller than UINT_MAX.
+> +S = "${WORKDIR}/${PN}-${PV}"
 > +
-> +Signed-off-by: Jiri Jaburek <jjaburek@redhat.com>
-> +
-> +Upstream-Status: Backport
-> +
-> +Signed-off-by: He Zhe <zhe.he@windriver.com>
-> +---
-> + testcases/kernel/containers/userns/userns05.c | 8 ++++----
-> + 1 file changed, 4 insertions(+), 4 deletions(-)
-> +
-> +diff --git a/testcases/kernel/containers/userns/userns05.c b/testcases/kernel/containers/userns/userns05.c
-> +index 8d8c40a..8eac729 100644
-> +--- a/testcases/kernel/containers/userns/userns05.c
-> ++++ b/testcases/kernel/containers/userns/userns05.c
-> +@@ -49,18 +49,18 @@ static int child_fn1(void)
-> + 	return 0;
-> + }
-> + 
-> +-static long getusernsidbypid(int pid)
-> ++static unsigned int getusernsidbypid(int pid)
-> + {
-> + 	char path[BUFSIZ];
-> + 	char userid[BUFSIZ];
-> +-	long id = 0;
-> ++	unsigned int id = 0;
-> + 
-> + 	sprintf(path, "/proc/%d/ns/user", pid);
-> + 
-> + 	if (readlink(path, userid, BUFSIZ) == -1)
-> + 		tst_resm(TFAIL | TERRNO, "readlink failure.");
-> + 
-> +-	if (sscanf(userid, "user:[%ld]", &id) != 1)
-> ++	if (sscanf(userid, "user:[%u]", &id) != 1)
-> + 		tst_resm(TFAIL, "sscanf failure.");
-> + 	return id;
-> + }
-> +@@ -68,7 +68,7 @@ static long getusernsidbypid(int pid)
-> + static void test_userns_id(void)
-> + {
-> + 	int cpid1, cpid2, cpid3;
-> +-	long parentuserns, cpid1userns, cpid2userns, newparentuserns;
-> ++	unsigned int parentuserns, cpid1userns, cpid2userns, newparentuserns;
-> + 
-> + 	parentuserns = getusernsidbypid(getpid());
-> + 	cpid1 = ltp_clone_quick(SIGCHLD, (void *)child_fn1,
-> +-- 
-> +2.9.3
-> +
-> diff --git a/meta/recipes-extended/ltp/ltp_20160126.bb b/meta/recipes-extended/ltp/ltp_20160126.bb
-> index 72d465b..aaa63c2 100644
-> --- a/meta/recipes-extended/ltp/ltp_20160126.bb
-> +++ b/meta/recipes-extended/ltp/ltp_20160126.bb
-> @@ -65,7 +65,8 @@ SRC_URI = "git://github.com/linux-test-project/ltp.git \
->             file://0036-testcases-network-nfsv4-acl-acl1.c-Security-fix-on-s.patch \
->             file://0037-containers-netns_netlink-Avoid-segmentation-fault.patch \
->             file://0038-run-posix-option-group-test-replace-CWD-qith-PWD.patch \
-> -           file://fcntl-fix-the-time-def-to-use-time_t.patch \
-> +           file://0039-fcntl-fix-the-time-def-to-use-time_t.patch \
-> +           file://0040-containers-userns05-use-unsigned-int-for-ns-id.patch \
->             "
->  
->  S = "${WORKDIR}/git"
-
+> +inherit autotools
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
