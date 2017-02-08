@@ -1,21 +1,20 @@
 Return-Path: <amarnath.valluri@intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 6CB7C71C7B
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id E399A71B0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2017 13:06:41 +0000 (UTC)
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	08 Feb 2017 05:06:28 -0800
+	Wed,  8 Feb 2017 13:06:53 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga103.jf.intel.com with ESMTP; 08 Feb 2017 05:06:54 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.33,346,1477983600"; d="scan'208";a="222792701"
+X-IronPort-AV: E=Sophos;i="5.33,346,1477983600"; d="scan'208";a="1123740414"
 Received: from avallurigigabyte.fi.intel.com ([10.237.72.170])
-	by fmsmga004.fm.intel.com with ESMTP; 08 Feb 2017 05:06:27 -0800
+	by fmsmga002.fm.intel.com with ESMTP; 08 Feb 2017 05:06:52 -0800
 From: Amarnath Valluri <amarnath.valluri@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Feb 2017 15:07:15 +0200
-Message-Id: <1486559235-22891-1-git-send-email-amarnath.valluri@intel.com>
+Date: Wed,  8 Feb 2017 15:07:39 +0200
+Message-Id: <1486559259-22981-1-git-send-email-amarnath.valluri@intel.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe] openct: Replace /lib/udev with ${nonarch_base_libdir}/udev.
+Subject: [meta-oe] lvm2: Replace 'lib' with ${nonarch_base_libdir} for placing udev rules.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,44 +27,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2017 13:06:41 -0000
+X-List-Received-Date: Wed, 08 Feb 2017 13:06:54 -0000
 
 Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
 ---
- meta-oe/recipes-support/openct/openct_0.6.20.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-oe/recipes-support/lvm2/lvm2.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/openct/openct_0.6.20.bb b/meta-oe/recipes-support/openct/openct_0.6.20.bb
-index d4ad9c1..85ca851 100644
---- a/meta-oe/recipes-support/openct/openct_0.6.20.bb
-+++ b/meta-oe/recipes-support/openct/openct_0.6.20.bb
-@@ -34,7 +34,7 @@ EXTRA_OECONF=" \
-     --enable-pcsc \
-     --enable-doc \
-     --enable-api-doc \
--    --with-udev=/lib/udev \
-+    --with-udev=${nonarch_base_libdir}/udev \
-     --with-bundle=${libdir}/pcsc/drivers \
- "
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index 7bd26c0..bd20390 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -37,7 +37,7 @@ EXTRA_OECONF = "--with-user= \
+                 --enable-pkgconfig \
+                 --enable-dmeventd \
+                 --enable-lvmetad \
+-                --with-udev-prefix= \
++                --with-udevidir=${nonarch_base_libdir}/udev/rules.d \
+                 --with-usrlibdir=${libdir} \
+                 --with-systemdsystemunitdir=${systemd_system_unitdir} \
+                 --disable-thin_check_needs_check \
+@@ -70,7 +70,7 @@ SYSTEMD_AUTO_ENABLE = "disable"
  
-@@ -42,7 +42,7 @@ inherit autotools pkgconfig
+ TARGET_CC_ARCH += "${LDFLAGS}"
  
- FILES_${PN} += " \
-     ${libdir}/ctapi \
--    /lib/udev \
-+    ${nonarch_base_libdir}/udev \
-     ${libdir}/openct-ifd.so \
-     ${libdir}/pcsc \
-     /run/openct/status \
-@@ -62,7 +62,7 @@ do_install_append() {
- do_install () {
-     rm -rf ${D}
-     install -d ${D}/etc
--    install -dm 755 ${D}/lib/udev
-+    install -dm 755 ${D}${nonarch_base_libdir}/udev
-     # fix up hardcoded paths
-     sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir}/,' \
-         ${WORKDIR}/openct.service ${WORKDIR}/openct.init
+-FILES_${PN} += "${libdir}/device-mapper/*.so ${base_libdir}/udev"
++FILES_${PN} += "${libdir}/device-mapper/*.so ${nonarch_base_libdir}/udev"
+ FILES_${PN}-dbg += "${libdir}/device-mapper/.debug"
+ 
+ RDEPENDS_${PN} = "bash"
 -- 
 2.7.4
 
