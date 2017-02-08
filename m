@@ -1,45 +1,44 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-vk0-f68.google.com (mail-vk0-f68.google.com
-	[209.85.213.68])
-	by mail.openembedded.org (Postfix) with ESMTP id BF9E671CB1
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 4750271D86
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2017 20:21:38 +0000 (UTC)
-Received: by mail-vk0-f68.google.com with SMTP id n125so5628584vke.3
+	Wed,  8 Feb 2017 20:28:00 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id r18so35186591wmd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2017 12:21:39 -0800 (PST)
+	Wed, 08 Feb 2017 12:28:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=cs60UU1c82oUiRNy5DZLHhFi710lENU6UXkK+DOTWu4=;
-	b=XOGUWu/QDE/LItzOpbO66WONoIuquzBo/yzXPqkh6XALo/tG+guNH31IHbO/IU2WBP
-	AcfLLB69sBnZBmHPCKvYfu7iJxa+8doiBySissVyfTYaiAseb3BUH4iDs1VXcTMI9jXw
-	yuoJ2F1bQ3sw/mdhuKFvX1hUpfmkqXkA637LX0o2Yehy/iskcv2XPoiT3eJvluBGLue9
-	10uwrk51PqZI1Ah1/g1WKa6juSWS3NSK3hVj8DC1bpdq+a/Y3rfh+H8I+KBDchy9UPtw
-	sjz7cX4LZo3wwEkOoxRXd5G4y9Jo6+hIdTVnSUJvzCCGYDNeU64Xgjk6YcyMfi/cmgxt
-	50xA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=xoxlUaNAddhNm9rRMyoQYdmEcpROrOIuSTCJYOiFUD4=;
+	b=ql0SQpu6oE50shztcaKPeB/oprmUaD0+1bXBNrwJOTD8gqpD6kdqIoRNxWlBTVe2KB
+	WEmR4Zqtap96upyPtiHZCh/XnfTFDBxnfXlCyIeUR5HriG3yMESERZfWjf+fRFZgGhUe
+	v8pj5P+tnWRI4AQ3uCbowJKY2lWofFfCzmqutLa1eVzSsXb/vWrWnpquGECpOYJ3zv1F
+	+Ca7CnQDbFS/Nr/I4FNqbWBH/biDIXdp8ijVxHlga4kA4sfhO5R0M2rQy3L8etRVwBwB
+	d2sgCgwQPkHH1yKvOmTgkDR0m2+ozmXIdTN5XNC+7qcKqofExAv0dLi6VCYavSBTLbX7
+	88Ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=cs60UU1c82oUiRNy5DZLHhFi710lENU6UXkK+DOTWu4=;
-	b=L8bZkC0zLco/oaSKbBRayQuvTm7XZ9P23M5IggOntBQOeQcepqPIKdQ/ECWh7IzI76
-	U6QWJkSkEpGquQ+O8ze8X4QV2kYk0OWH5W3db56e9gTA7ZtUkKqekoUrrGx2Q//omrTJ
-	X9EpcFwxBYni8zjVvvRUZKwytizvZufJh7kuUZhvbRzyEY77VekjfDMGS38+M3pmX+mX
-	E3INCTOvLkJGaO4aRUS7iPYOi7Sd50HSiIC3ksQVHkJMfkdRbxRdusioaiHSklNrS7yf
-	gMhsEo6wcrs2t0BuIZ1f0H6WLwMjyRgajc4hsdx1/zn8BKnNjPw6gfi1ympgcpo8cWUn
-	V5Kw==
-X-Gm-Message-State: AMke39nXCX7mvv5yPupavVEYHwLWOshMBj5mSzKHj2XMmL6ybcDrhpIwlmvrQS3M8yQekb6eJc4olbqGC/dolQ==
-X-Received: by 10.31.168.145 with SMTP id r139mr11064515vke.148.1486585298441; 
-	Wed, 08 Feb 2017 12:21:38 -0800 (PST)
+	bh=xoxlUaNAddhNm9rRMyoQYdmEcpROrOIuSTCJYOiFUD4=;
+	b=MwqmU68a9dlOcMTiRrf7zZUvS5p2D0+CfmXKBVzQI4kJc+WUOJ2gVo31hXGQb9Ir9U
+	1jQHG3LZuP62Plfc2mCyKDycnV19RbF6Nw5gz5H3uEjbBmi4wYsi1WYv61LYRi6+J+iC
+	A7+Pi5dxW1Ifqdc1vP5WaRd8+ULRvqL52fDtvRT6Tu7H7GOOjwRtRDzOZdokT6Za/Ml7
+	e7L6vfRAFHjXfWHrFEPb08VOTwnnY5cdFvEg1p0pkFp/Rd6IyF1VnwLqYwA4h40rgWBN
+	P0KWmK3gprTs5UFJjpzyw0w0pj1oC8YLuuJ+PehJBCJcQYyYOK72+4T5emKISgaUjONo
+	Xclw==
+X-Gm-Message-State: AMke39mul3FMXI487PJLxoJWU0caLbDufIcFQhBzfUxHLHqQ+57PAsPzxjoUSx06j7EJMqj5Be5drRMdCZf0cA==
+X-Received: by 10.28.170.213 with SMTP id t204mr18223363wme.29.1486585681020; 
+	Wed, 08 Feb 2017 12:28:01 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.05852f1b820c067f96dd93729e6fdb949d51579d.1486546542.git-series.patrick.ohly@intel.com>
-	<c480e4bea612959118bcdbc09e129084fd1d5866.1486546542.git-series.patrick.ohly@intel.com>
-In-Reply-To: <c480e4bea612959118bcdbc09e129084fd1d5866.1486546542.git-series.patrick.ohly@intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 08 Feb 2017 20:21:27 +0000
-Message-ID: <CAMKF1spq2eiKHXrz19ZzRWmwzWUKsSSHbunLfqRND98SjkHgVg@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH 1/4] lvm2: remove unbuildable 2.02.138
+Received: by 10.195.17.228 with HTTP; Wed, 8 Feb 2017 12:28:00 -0800 (PST)
+In-Reply-To: <CAMKF1sr8UGiK8OHaPfw1ArJoRNBV3Qsy8NxoVuB5V4Xv6=8ouA@mail.gmail.com>
+References: <20170208181320.21119-1-fabio.berton@ossystems.com.br>
+	<CAMKF1sr8UGiK8OHaPfw1ArJoRNBV3Qsy8NxoVuB5V4Xv6=8ouA@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Wed, 8 Feb 2017 12:28:00 -0800
+Message-ID: <CAJ86T=X_CqvAb1G5t+_v2H8CHf0Po+ACg9PnbirvxRYCb1rp-w@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2 1/3] libev: Add recipe for version 4.24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,42 +51,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2017 20:21:39 -0000
+X-List-Received-Date: Wed, 08 Feb 2017 20:28:01 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Can you check if this is the last gpl2 version
-
-
-On Wed, Feb 8, 2017 at 1:39 AM Patrick Ohly <patrick.ohly@intel.com> wrote:
-
-> The patches defined in lvm2.inc no longer apply cleanly to 2.02.138
-> and as no-one has complained, the old version is probably obsolete
-> and can be removed.
+On Wed, Feb 8, 2017 at 10:53 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Wed, Feb 8, 2017 at 10:13 AM, Fabio Berton
+> <fabio.berton@ossystems.com.br> wrote:
+>> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+>> ---
+>>  meta-oe/recipes-connectivity/libev/libev_4.24.bb | 16 ++++++++++++++++
+>>  1 file changed, 16 insertions(+)
+>>  create mode 100644 meta-oe/recipes-connectivity/libev/libev_4.24.bb
+>>
+>> diff --git a/meta-oe/recipes-connectivity/libev/libev_4.24.bb b/meta-oe/recipes-connectivity/libev/libev_4.24.bb
+>> new file mode 100644
+>> index 000000000..f236eacab
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-connectivity/libev/libev_4.24.bb
+>> @@ -0,0 +1,16 @@
+>> +SUMMARY = "A full-featured and high-performance event loop that is loosely \
+>> +modelled after libevent."
+>> +HOMEPAGE = "http://software.schmorp.de/pkg/libev.html"
+>> +LICENSE = "BSD-2-Clause | GPL-2.0+"
+>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=d6ad416afd040c90698edcdf1cbee347"
+>> +
+>> +SRC_URI = "http://dist.schmorp.de/libev/Attic/${BP}.tar.gz"
+>> +
+>> +SRC_URI[md5sum] = "94459a5a22db041dec6f98424d6efe54"
+>> +SRC_URI[sha256sum] = "973593d3479abdf657674a55afe5f78624b0e440614e2b8cb3a07f16d4d7f821"
+>> +
+>> +S = "${WORKDIR}/${PN}-${PV}"
+>> +
+>> +inherit autotools
+>> +
+>> +EXTRA_OECONF += "--with-pic"
 >
-> Signed-off-by: Patrick Ohly <patrick.ohly@intel.com>
-> ---
->  meta-oe/recipes-support/lvm2/lvm2_2.02.138.bb | 4 ----
->  1 file changed, 4 deletions(-)
->  delete mode 100644 meta-oe/recipes-support/lvm2/lvm2_2.02.138.bb
->
-> diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.02.138.bb
-> b/meta-oe/recipes-support/lvm2/lvm2_2.02.138.bb
-> deleted file mode 100644
-> index 13a866e..0000000
-> --- a/meta-oe/recipes-support/lvm2/lvm2_2.02.138.bb
-> +++ /dev/null
-> @@ -1,4 +0,0 @@
-> -require lvm2.inc
-> -
-> -SRC_URI[md5sum] = "c660e02ad4586a1d297b6befbe85556d"
-> -SRC_URI[sha256sum] =
-> "93878a4ba4f70d9f2d0d919eb85bc51652a58776b5428ec8e7e32769d332f596"
-> --
-> git-series 0.9.1
+> this looks good. I also have an after thought where libevent will
+> conflict with libev when it comes to who provides event.h file.
+
+The libevent header <event.h> is deprecated and everything should be
+using <event2/event.h> instead. So the simple fix would be for
+libevent to stop installing the legacy header.
+
+> So we
+> need to note that conflict down as well. May be a follow up. It wont
+> show up as much when we have rss now however SDKs and dev images will
+> show this up where we will unify the rootfs.
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
