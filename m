@@ -1,20 +1,20 @@
 Return-Path: <amarnath.valluri@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D7E671C87
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 14AB960621
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2017 13:07:27 +0000 (UTC)
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by fmsmga101.fm.intel.com with ESMTP; 08 Feb 2017 05:07:27 -0800
+	Wed,  8 Feb 2017 13:16:11 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by orsmga101.jf.intel.com with ESMTP; 08 Feb 2017 05:16:07 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.33,346,1477983600"; d="scan'208";a="931503275"
+X-IronPort-AV: E=Sophos;i="5.33,346,1477983600"; d="scan'208";a="1104645062"
 Received: from avallurigigabyte.fi.intel.com ([10.237.72.170])
-	by orsmga003.jf.intel.com with ESMTP; 08 Feb 2017 05:07:26 -0800
+	by fmsmga001.fm.intel.com with ESMTP; 08 Feb 2017 05:16:05 -0800
 From: Amarnath Valluri <amarnath.valluri@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Feb 2017 15:08:04 +0200
-Message-Id: <1486559284-23081-1-git-send-email-amarnath.valluri@intel.com>
+Date: Wed,  8 Feb 2017 15:16:51 +0200
+Message-Id: <1486559811-23341-1-git-send-email-amarnath.valluri@intel.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe] libgphoto: Replace 'lib' with ${nonarch_base_libdir}
+Subject: [meta-networking] netcf_git: Check if src != dst while moving files.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,29 +27,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2017 13:07:27 -0000
-
-Make use of bitbake variable for udev ruls folder. This change makes the recipe
-more portable.
+X-List-Received-Date: Wed, 08 Feb 2017 13:16:13 -0000
 
 Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
 ---
- meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-support/netcf/netcf_git.bb | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb
-index 098da79..fa07cd3 100644
---- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb
-+++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb
-@@ -23,7 +23,7 @@ SRC_URI[libgphoto2.sha256sum] = "031a262e342fae43f724afe66787947ce1fb483277dfe5a
- 
- inherit autotools pkgconfig gettext lib_package
- 
--EXTRA_OECONF = " --with-drivers=all udevscriptdir=/lib/udev ac_cv_lib_ltdl_lt_dlcaller_register=yes"
-+EXTRA_OECONF = " --with-drivers=all udevscriptdir=${nonarch_base_libdir}/udev ac_cv_lib_ltdl_lt_dlcaller_register=yes"
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[gd] = ",--without-gdlib,gd"
+diff --git a/meta-networking/recipes-support/netcf/netcf_git.bb b/meta-networking/recipes-support/netcf/netcf_git.bb
+index ed713ac..4ffd3db 100644
+--- a/meta-networking/recipes-support/netcf/netcf_git.bb
++++ b/meta-networking/recipes-support/netcf/netcf_git.bb
+@@ -47,9 +47,11 @@ do_install_append() {
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+        install -d ${D}${systemd_unitdir}/system
+        if [ -d "${D}${libdir}/systemd/system" ]; then
+-           mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
+-           rm -rf ${D}${libdir}/systemd/
+-       else
++           if [ "${systemd_unitdir}" != "${libdir}/systemd" ] ; then 
++               mv ${D}${libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
++               rm -rf ${D}${libdir}/systemd/
++	   fi
++       elif [ "${systemd_unitdir}" != "${nonarch_libdir}/systemd" ] ; then 
+            mv ${D}${nonarch_libdir}/systemd/system/* ${D}${systemd_unitdir}/system/
+            rm -rf ${D}${nonarch_libdir}/systemd/
+        fi
 -- 
 2.7.4
 
