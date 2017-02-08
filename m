@@ -1,49 +1,46 @@
 Return-Path: <patrick.ohly@intel.com>
-Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
-	[209.85.223.179])
-	by mail.openembedded.org (Postfix) with ESMTP id D0E6371AD8
+Received: from mail-it0-f43.google.com (mail-it0-f43.google.com
+	[209.85.214.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 87C0871BA1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2017 09:38:07 +0000 (UTC)
-Received: by mail-io0-f179.google.com with SMTP id j18so111294600ioe.2
+	Wed,  8 Feb 2017 09:40:03 +0000 (UTC)
+Received: by mail-it0-f43.google.com with SMTP id c7so98982171itd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2017 01:38:08 -0800 (PST)
+	Wed, 08 Feb 2017 01:40:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=8dagH9cL0FMA33nsCSVq0I2XEj4Ag32uNCJQbn7pdfc=;
-	b=CRMy/kQlRAF3dTJQWg7iwnLQs3xa/AWsiJ6M8VhQFbALbb/rKBeceFf73+a49M1IZh
-	OjFSLTTZNEw7p3YUCTf+Ixk55gnRVAADNG0PxAUkVzuq7MwIwKCunLUUg6cdPfoCdlkX
-	DuHrrsffzlLyOjMnO2PvZN8DIP0+p+7BlDpQ+C8snuhJFBJJH5UFGzkST9nQNcv+wYfb
-	BZSqoFLEsFSYCncG/mVX3T+ravqQOhyXbxYoHDk4yEkt5F//4KeLvgT1sELyYK3uggba
-	wbRpCxNytU3DtEdwCghU1l9hKFVifLTyxyqrU8cVwuuiFJTa3Jx6L5o2Tnlgh7wrTwH+
-	KHig==
+	h=from:to:cc:subject:date:message-id;
+	bh=SNsafjynOlhAKmuJZMP+GHe5Br/F7iZo/20/GmgIxfA=;
+	b=ogbl3t+tPCq0Sa8LC8FgGsu8oVHFVC0w6Swqkenit+g5bLmTjcrTxfKIrw42/cR8ip
+	OQ0MOd2LA2MrQLNWf++OAqRDR0a9SjarVyg0SQLOQ8r46K9hCTdCBxI6qiDXDC7aorha
+	CRH2Jeu1UI7XwavqVOpLb4RLOzcpbzjPfe5TF8wOzvXSptiKWWNSdb+KvnKIfsxwcQw7
+	419qfrGfpIz9sBbxO7IVg/NC9ElpUAcFmvZ8mlHJrSHNq14Gp707jlt24Ze9W/Ylr4t3
+	26UGPZemmIqmmAtB6cUUutz2Q/bg5BjW2BQxZcBamwnhRQ9q9GFHgnGCgInRiHV64rcq
+	ttYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=8dagH9cL0FMA33nsCSVq0I2XEj4Ag32uNCJQbn7pdfc=;
-	b=eIHUcIaTdiBZX7e7lf0BCGRZ6CvcE+u7CsH1+PJPjExYTx7O55gUBdrlQmq4OmxyL+
-	GrwO4Yy1jbQRWvaS6e1LsV3GJqb4amsBruIiTRiUT3R9jlrIfF76W8nkBr/M5u1PY346
-	JzdGXtj/Q3kuQrc63jgifnG2H+7hbQr5MTmvPfLnn+iyZFnU/zgllPuHxqXsTanPUxp/
-	maGQjEZnTEL7haxCVztuB1cJ06TM025CVC4lNZBZ1Rq6gWFBM3tom1DwhzwVktbzyo00
-	C+GalPrrpCiLHG5auzrf87IvYjkgn2bUpaNkmTfO5Vnj9Iz8h6dQSmaEuasUjPXLe7NR
-	CCTQ==
-X-Gm-Message-State: AMke39m00bI8+WwhoWFXw0YLEpPkuUPgadhkr1yRGBccWYdKW98phXTSwwgHSZdsRzPFd9tc
-X-Received: by 10.107.15.104 with SMTP id x101mr7367265ioi.225.1486546687915; 
-	Wed, 08 Feb 2017 01:38:07 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=SNsafjynOlhAKmuJZMP+GHe5Br/F7iZo/20/GmgIxfA=;
+	b=r9K3BBelIGAMrh7V/sbMbcMjZRtXapV0m29oCII2ntX2bMCgiX+SsGBZu5Uv843EMM
+	KPSD1vCMIIjSB8WctUvq2sxNVfgphXsJHQCg7hYuw3XOjomAcnJwNG1TybbziHilGrWd
+	YbcXZx4Zh2u4MmdK4NFuTe5CaM2sfTqUaaCfBiHAI8MgMKmqkQV8b/5roBZNEZo+PaUp
+	loxyPDB5gBXhTIH//Dn7bi+ucGIWjhXq01LUCwloUHBQlPNjiAmDlIGy6GLj3MbFTzvt
+	LDKhTbTbovQuktk40jufSMYEM2DdGFinSAzOWRlZdz/FCOx6U1Ewm7eSNUoExe385k9/
+	rAzg==
+X-Gm-Message-State: AIkVDXKMrxZmO7+Rtfc/cHKRXRhVupvwYGrj8cLjGxjGvaGXZOT5PW4oiz8A6YXFHk+/fPXb
+X-Received: by 10.36.91.17 with SMTP id g17mr14305458itb.70.1486546803420;
+	Wed, 08 Feb 2017 01:40:03 -0800 (PST)
 Received: from pohly-desktop.fritz.box (p5DE8DEB3.dip0.t-ipconnect.de.
 	[93.232.222.179]) by smtp.gmail.com with ESMTPSA id
-	x67sm11039035iod.22.2017.02.08.01.38.05
+	v68sm10998207ioi.20.2017.02.08.01.40.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 08 Feb 2017 01:38:06 -0800 (PST)
+	Wed, 08 Feb 2017 01:40:02 -0800 (PST)
 From: Patrick Ohly <patrick.ohly@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Feb 2017 10:37:41 +0100
-Message-Id: <dd0494206e2ad08f5b9e969c94da66fd10c51e9c.1486546542.git-series.patrick.ohly@intel.com>
+Date: Wed,  8 Feb 2017 10:39:50 +0100
+Message-Id: <453ff67db942cb3206edcaa6c7ab47e0aff2e5ce.1486546779.git-series.patrick.ohly@intel.com>
 X-Mailer: git-send-email 2.11.0
-In-Reply-To: <cover.05852f1b820c067f96dd93729e6fdb949d51579d.1486546542.git-series.patrick.ohly@intel.com>
-References: <cover.05852f1b820c067f96dd93729e6fdb949d51579d.1486546542.git-series.patrick.ohly@intel.com>
-Subject: [meta-oe][PATCH 4/4] cryptsetup: enable native compilation
+Subject: [meta-oe][PATCH] procmail: avoid bashism in do_install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,28 +53,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2017 09:38:08 -0000
+X-List-Received-Date: Wed, 08 Feb 2017 09:40:03 -0000
 
-Useful for setting up dm-verity during a build.
-
-"native-sdk" gets added just in case that this may also be used in an
-SDK.
+Found with verify-bashisms.
 
 Signed-off-by: Patrick Ohly <patrick.ohly@intel.com>
 ---
- meta-oe/recipes-support/cryptsetup/cryptsetup_1.7.2.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-support/procmail/procmail_3.22.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.7.2.bb b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.7.2.bb
-index d560625..38470ac 100644
---- a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.7.2.bb
-+++ b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.7.2.bb
-@@ -32,3 +32,5 @@ RRECOMMENDS_${PN} = "kernel-module-aes-generic \
- "
+diff --git a/meta-oe/recipes-support/procmail/procmail_3.22.bb b/meta-oe/recipes-support/procmail/procmail_3.22.bb
+index 1063654..9bbd410 100644
+--- a/meta-oe/recipes-support/procmail/procmail_3.22.bb
++++ b/meta-oe/recipes-support/procmail/procmail_3.22.bb
+@@ -38,7 +38,8 @@ do_compile() {
  
- EXTRA_OECONF = "--enable-static"
-+
-+BBCLASSEXTEND = "native nativesdk"
+ do_install() {
+     install -d ${D}${bindir}
+-    install -d ${D}${mandir}/man{1,5}
++    install -d ${D}${mandir}/man1
++    install -d ${D}${mandir}/man5
+     oe_runmake -i BASENAME=${D}/usr MANDIR=${D}${mandir} install
+     install -m 0644 debian/mailstat.1 ${D}${mandir}/man1
+ }
+
+base-commit: dd0494206e2ad08f5b9e969c94da66fd10c51e9c
 -- 
 git-series 0.9.1
 
