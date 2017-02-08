@@ -1,20 +1,45 @@
-Return-Path: <amarnath.valluri@intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id AF22860621
+Return-Path: <andreas.kling@gmail.com>
+Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 837936079E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2017 13:21:04 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by orsmga103.jf.intel.com with ESMTP; 08 Feb 2017 05:21:04 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.33,346,1477983600"; d="scan'208";a="41467153"
-Received: from avallurigigabyte.fi.intel.com ([10.237.72.170])
-	by orsmga002.jf.intel.com with ESMTP; 08 Feb 2017 05:21:03 -0800
-From: Amarnath Valluri <amarnath.valluri@intel.com>
+	Wed,  8 Feb 2017 14:08:25 +0000 (UTC)
+Received: by mail-wm0-f49.google.com with SMTP id v77so191893605wmv.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 08 Feb 2017 06:08:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=ocy9st4fIWtY0ko9eHiNqE4+T/ip8jnazcY0wi6olcI=;
+	b=jcvATYc8LD676ChjC0C95i32AhmODBjg3ZTVibpqm+Eu82lBQywk7J9hn3nhfce8FM
+	fLggMo5s8IZYSXM8IMHsusHXtrzM+Rhvi0fv43iK6AeYgJxG8H4ij8dzAS87wfpwRtcP
+	tCz0lFo+J5uWHMAncICNJ4elgcfcJJipGHHjyVkWSClRsUIOuMlN/ec17fYBq7VlU3CR
+	po/ZB34GdSWdjTWT4N07xnAcV8ib03fg9+sLb1Eq83mRsor5d0agwPpqOqDqiNYbSLq9
+	kW2ALhmFxcOcOg0+l3YaPRS1DOyiERtwMjUAuBNUp/cKA68zpsD+Zv17e0QSOMtytnfH
+	vLjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ocy9st4fIWtY0ko9eHiNqE4+T/ip8jnazcY0wi6olcI=;
+	b=PDOknYzgvqsn5Zq2KNh1o+0ySN8R3Gok6Jaxanv6d/4zhubrqp6zoUNhT9OSvfjtv6
+	S+1yg5gSEnDE5WU0LnMmoQJW2R2yldd+66gR/fxQiHDEY3UFKMjIuXnzfEU6itr1wNpj
+	cRM6BvA8Ngkf8GGqWHPlbSbW4TZTKUzP9NzI1T0xrehg0NkHbvW6+27hsHjjFrbvChX1
+	ANfJP6v4O9lPAb/akF5SAprGjpStupP1dfQQc3nGGnQr1fLwCYVW2VLi33CckOiPyQEg
+	qWYN0bzWG12BlV2kPfVjkiuQXOOKmA17FcpCWvQ1eW3ul996WHZnRkxw/JPWHGVIxHg2
+	TFBw==
+X-Gm-Message-State: AMke39kjNn2nzyB5peZcJhLp5RiE8s0VxfTQcTD2HWAHTbDqtLTKUpIHf649WNzCjyWIoA==
+X-Received: by 10.28.206.199 with SMTP id e190mr18441909wmg.98.1486562905296; 
+	Wed, 08 Feb 2017 06:08:25 -0800 (PST)
+Received: from nb-lx-hgc-001.peiker-cee.de
+	(business-176-094-229-202.static.arcor-ip.net. [176.94.229.202])
+	by smtp.gmail.com with ESMTPSA id
+	a72sm13143357wrc.48.2017.02.08.06.08.23
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 08 Feb 2017 06:08:23 -0800 (PST)
+From: andreas.kling@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Feb 2017 15:17:45 +0200
-Message-Id: <1486559865-23488-1-git-send-email-amarnath.valluri@intel.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-filesystem] aufs-utils: Replace install paths with appropriate bitbake environment
+Date: Wed,  8 Feb 2017 15:07:52 +0100
+Message-Id: <20170208140755.12812-1-andreas.kling@gmail.com>
+X-Mailer: git-send-email 2.11.0
+Subject: dconf: conditionally depend on gtk+3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,36 +52,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2017 13:21:05 -0000
+X-List-Received-Date: Wed, 08 Feb 2017 14:08:25 -0000
 
-autf-utils Makefile is using hardcoded /bin, /sbin paths, instead we should
-respect the bitbake environment. This change makes the recipe portable to
-environments where ${base_bindir} != /bin or ${base_sbindir} != /sbin.
+dconf only uses gtk for dconf-editor. compiling editor conditionally allows to remove the hard dependency. so dconf can be used on systems without GUI.
 
-Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
----
- meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb | 7 +++++++
- 1 file changed, 7 insertions(+)
-
-diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-index 8980980..3d59e50 100644
---- a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-+++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-@@ -18,6 +18,13 @@ PV = "3.14+git${SRCPV}"
- 
- S = "${WORKDIR}/git"
- 
-+do_configure_prepend() {
-+   # Replace sbin,bin paths with bitbake environment
-+   sed -i -e 's;install_sbin: Tgt = ${DESTDIR}/sbin;install_sbin: Tgt = ${DESTDIR}/${base_sbindir};' \
-+          -e 's;install_ubin: Tgt = ${DESTDIR}/usr/sbin;install_sbin: Tgt = ${DESTDIR}/${bindir};' \
-+	  ${S}/Makefile
-+}
-+
- do_configure_append () {
-     install -d ${S}/include/linux/
-     cp ${WORKDIR}/aufs_type.h ${S}/include/linux/
--- 
-2.7.4
+while writing this patch I came across some minor bugs that are also fixed with this series.
 
 
