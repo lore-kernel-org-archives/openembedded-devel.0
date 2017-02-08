@@ -1,36 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f171.google.com (mail-qt0-f171.google.com
-	[209.85.216.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 5A043601F1
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 5CED3719B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2017 21:41:12 +0000 (UTC)
-Received: by mail-qt0-f171.google.com with SMTP id x49so178636190qtc.2
+	Wed,  8 Feb 2017 22:38:11 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id u25so19835432qki.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2017 13:41:13 -0800 (PST)
+	Wed, 08 Feb 2017 14:38:12 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=O+F4xfQKHmjCay+7fqH1oieTjGDGcDmDA/QJLASr4jA=;
-	b=dz7fDaDc8JpVffFjyGQ2xq3DmDubAaKy4SLUjuWxFatZRp2edAD0T9kRyRUwLF7mDS
-	WvvOUEm3TKTsv4ASzfqBaVsdT2gyAsRH8lnv9RdjAzkE2WbAOz1Tnie8YmRokv8FKcfW
-	rvzG3QXd3Wj/H3DZ6vicUPbS+KKSxhhNxkw0eoyYn+/iPhLuDe0rILAtObjH8GdUreYP
-	PghgxlbE2ZAZ25eGARjuerKMb8Lj6DwDRFyUa8sp5PBtblztiqqe+Ve2FiU9hXhY2CJh
-	PXLiqJ7Cco84rBuEsFSdMy+d90fsFc5U4pi2IgXejLOTNWLJXqYqyRW39kTpqbN1EKgB
-	3nYA==
-X-Gm-Message-State: AMke39mZ+6ZHOwSTwwks5OvHe7o0Hcp3p0c8KvCbUHakclwRi5hv8c0jPe6y6PgGF6H/KA==
-X-Received: by 10.200.41.198 with SMTP id 6mr23461269qtt.130.1486590072531;
-	Wed, 08 Feb 2017 13:41:12 -0800 (PST)
+	bh=3mP4805heQ6o2R+Yhs5k7Z4PYfzL92I8cCrumCnqg20=;
+	b=tGPmOU6Igr9rq2x1eX+RswW77GvihDMgBbGEgQ1Inn1uaXQX3LBvk03u1EWNghwY66
+	pcx+uIs9bMBK4RCPO1ugjm/X8ivPv+mCF/Zizj6aLeq15qbtuGqK2FI5nF8j4xJ04oUo
+	GwWEQjnW4REy3dqC4GrK8qkbj4YQR7WZ5q6mAYGXp0sELu6afrPfIcv76pIu+koGGXMr
+	7qPB866n6uGPLgRXQGgI8D21ej9FQiFOW797t7jVplrg0ikaqfB9qOlvpDzrUbr3fsrH
+	j6P0Iy0DUgUJhMZy4hITDRoPBPLdkwwl98yFHzWVa4dVkU5xYYNr2+g0qCA/t8gLDcK9
+	tcXw==
+X-Gm-Message-State: AMke39nVNGSp1eYjY/kWzXHmHVd8SlqA8uFhFE0pmdxkHX62Mpi9Tm9LK1gY101c27S6fw==
+X-Received: by 10.55.174.3 with SMTP id x3mr21007173qke.162.1486593492131;
+	Wed, 08 Feb 2017 14:38:12 -0800 (PST)
 Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
-	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
-	f128sm7267517qkb.3.2017.02.08.13.41.11
+	[67.85.97.224])
+	by smtp.gmail.com with ESMTPSA id 11sm7394170qke.38.2017.02.08.14.38.11
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 08 Feb 2017 13:41:12 -0800 (PST)
+	Wed, 08 Feb 2017 14:38:11 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Feb 2017 16:41:05 -0500
-Message-Id: <1486590065-18082-1-git-send-email-derek@asterius.io>
+Date: Wed,  8 Feb 2017 17:38:04 -0500
+Message-Id: <1486593484-11400-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-thrift: update to version 0.10.0
+Subject: [meta-python][PATCH] python-werkzeug: update to version 0.11.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,56 +43,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2017 21:41:17 -0000
-
- * Verified license remains the same
- * Added a set of RDEPENDS for minimal environments
+X-List-Received-Date: Wed, 08 Feb 2017 22:38:12 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python-thrift/python-thrift_0.10.0.bb               | 17 +++++++++++++++++
- .../python-thrift/python-thrift_0.9.3.bb                |  8 --------
- 2 files changed, 17 insertions(+), 8 deletions(-)
- create mode 100644 meta-python/recipes-connectivity/python-thrift/python-thrift_0.10.0.bb
- delete mode 100644 meta-python/recipes-connectivity/python-thrift/python-thrift_0.9.3.bb
+ meta-python/recipes-devtools/python/python-werkzeug.inc              | 5 +++--
+ .../{python-werkzeug_0.11.11.bb => python-werkzeug_0.11.15.bb}       | 0
+ .../{python3-werkzeug_0.11.11.bb => python3-werkzeug_0.11.15.bb}     | 0
+ 3 files changed, 3 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-werkzeug_0.11.11.bb => python-werkzeug_0.11.15.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-werkzeug_0.11.11.bb => python3-werkzeug_0.11.15.bb} (100%)
 
-diff --git a/meta-python/recipes-connectivity/python-thrift/python-thrift_0.10.0.bb b/meta-python/recipes-connectivity/python-thrift/python-thrift_0.10.0.bb
-new file mode 100644
-index 0000000..e6f61bd
---- /dev/null
-+++ b/meta-python/recipes-connectivity/python-thrift/python-thrift_0.10.0.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "Python bindings for the Apache Thrift RPC system"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=26a2009ddcb7c4162f8bafd5ef73c670"
-+
-+SRC_URI[md5sum] = "76bb768a210257dd203923110042e560"
-+SRC_URI[sha256sum] = "b7f6c09155321169af03f9fb20dc15a4a0c7481e7c334a5ba8f7f0d864633209"
-+
-+PYPI_PACKAGE_EXT = "zip"
-+
-+inherit pypi setuptools
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-logging \
-+    ${PYTHON_PN}-six \
-+    ${PYTHON_PN}-stringold \
-+    ${PYTHON_PN}-threading \
-+"
-diff --git a/meta-python/recipes-connectivity/python-thrift/python-thrift_0.9.3.bb b/meta-python/recipes-connectivity/python-thrift/python-thrift_0.9.3.bb
-deleted file mode 100644
-index 652de95..0000000
---- a/meta-python/recipes-connectivity/python-thrift/python-thrift_0.9.3.bb
-+++ /dev/null
-@@ -1,8 +0,0 @@
--SUMMARY = "Python bindings for the Apache Thrift RPC system"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1203b6a05c3bff3229710e3f063ddca7"
--
--SRC_URI[md5sum] = "b519551d7a086bb0b4f222a8f566b7e8"
--SRC_URI[sha256sum] = "dfbc3d3bd19d396718dab05abaf46d93ae8005e2df798ef02e32793cd963877e"
--
--inherit pypi setuptools
+diff --git a/meta-python/recipes-devtools/python/python-werkzeug.inc b/meta-python/recipes-devtools/python/python-werkzeug.inc
+index 91c47ae..e469bf3 100644
+--- a/meta-python/recipes-devtools/python/python-werkzeug.inc
++++ b/meta-python/recipes-devtools/python/python-werkzeug.inc
+@@ -10,8 +10,8 @@ HOMEPAGE = "http://werkzeug.pocoo.org/"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a68f5361a2b2ca9fdf26b38aaecb6faa"
+ 
+-SRC_URI[md5sum] = "1d34afa1f19abcef4c0da51ebc2c4ea7"
+-SRC_URI[sha256sum] = "e72c46bc14405cba7a26bd2ce28df734471bc9016bc8b4cb69466c2c14c2f7e5"
++SRC_URI[md5sum] = "cb4010478dd33905f95920e4880204a2"
++SRC_URI[sha256sum] = "455d7798ac263266dbd38d4841f7534dd35ca9c3da4a8df303f8488f38f3bcc0"
+ 
+ PYPI_PACKAGE = "Werkzeug"
+ 
+@@ -25,6 +25,7 @@ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-netserver \
+     ${PYTHON_PN}-numbers \
+     ${PYTHON_PN}-pkgutil \
++    ${PYTHON_PN}-pprint \
+     ${PYTHON_PN}-subprocess \
+     ${PYTHON_PN}-threading \
+     ${PYTHON_PN}-unixadmin \
+diff --git a/meta-python/recipes-devtools/python/python-werkzeug_0.11.11.bb b/meta-python/recipes-devtools/python/python-werkzeug_0.11.15.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-werkzeug_0.11.11.bb
+rename to meta-python/recipes-devtools/python/python-werkzeug_0.11.15.bb
+diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_0.11.11.bb b/meta-python/recipes-devtools/python/python3-werkzeug_0.11.15.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-werkzeug_0.11.11.bb
+rename to meta-python/recipes-devtools/python/python3-werkzeug_0.11.15.bb
 -- 
 2.7.4
 
