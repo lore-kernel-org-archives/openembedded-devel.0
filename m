@@ -1,49 +1,49 @@
 Return-Path: <andreas.kling@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A26C6079E
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id A8EA871C90
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2017 14:08:26 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id r18so33503998wmd.3
+	Wed,  8 Feb 2017 14:08:27 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id c85so33419964wmi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2017 06:08:27 -0800 (PST)
+	Wed, 08 Feb 2017 06:08:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=KrMm4C+euvxPKoHs7UB4sqxDk2fTcfKWnpOwtIRHLzU=;
-	b=JRKQDJqTYZy2gFxOUEz7MMV8CpeIHcz8UalbZs4raNWyc3k+lk2JfhrkdgKTN3z8cb
-	CjBTs8QpqD2Xg+JojqEY5uyk5hwJRgtwWjfBDDcmITjkYo4IUyK05CGalNJZJ1dAnXbm
-	gSxuCmXuhODt9cDPqcnsETOXvmfL1KSENqr0/xBPbT/FasSlfDixdOzS1ujyjOT4MtoO
-	e491TPIUBX9X85/kOq8oSL3XbOfoWPc7tlvwQic+lH8wRviT1BrMSrOrt40LIqO0rw9u
-	OAWqglrr1IJFvfd24DNp46cPd0nmmvjZ+omXu8/gsh0BvG2dXWm84DDehtgg9O3DUlBC
-	ETQQ==
+	bh=RT0AFngnHJk2qaSScXzVg+jorrRG/VFdZCQbeqtwTto=;
+	b=Q2v2Pz9SHc3eVDV+3ZUapNjBsUHsg3UHx2k0/vjRj7wY4klVGSt1wxNxW067QWzkne
+	SXVUTeAWU9hjC7IngtkOD+lMj1I/5ug/itQfRnjT4uZzfdBgZeJXy0Zudc7d8/rmbbN8
+	Cm7DhEKq8ml2+FcpkKC2jToKJLSJAtrDOfK30p2Xyb/CSOS65yGyOyEat+ATXnEZs4Qf
+	1XLNy+gfLoM24w422yf3fcuDiKAindFqqUklJXD7RRiJL3J/lIpw+Gt3bH2Fm6a0IJkN
+	LvOJprcnVwYhO5mG6Br+F4qVPnaf7FIc65stgaLsffSmvD/Q753+4jvUkhJa8qO2vyvQ
+	ECuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=KrMm4C+euvxPKoHs7UB4sqxDk2fTcfKWnpOwtIRHLzU=;
-	b=sZhGWGQz7VLLNBkgO5oL6yaRU8PAtJm9uqo5Rfi0p/L4VrlzqYbjHMZ6FWOS5Xgk8F
-	CUOUut7ZDrvWeqGfVZQJXixeACrRHRyupsdBIezXGU/RYYdCsVUDszaA9k7jxFjlQ9/e
-	FpCiv6PZvE7UTyQ+x2xdwz8e5db8HHOrJcMnoFKIGOZhzOXUuujZwADrFLDghW/U8NFA
-	ipZGecvkuMioK4MXKDu2LBYbPxlN0FrZZmce44t3VHorHX0dlK3trcQlqmSbUSCivYpe
-	YnyYdG2vDfobClnOJxrS5MEd0bUGE4T0juxHRybJbuYvYYx5MHfFO3c2X/UTmYnQkelE
-	u0Eg==
-X-Gm-Message-State: AMke39lCtxoFf/xSQETGBaMJNrrJZdahfVWu+d+2BRZkH1sdJEpelTGbYnyaQbGKDpISOg==
-X-Received: by 10.28.182.70 with SMTP id g67mr18394841wmf.131.1486562906511;
-	Wed, 08 Feb 2017 06:08:26 -0800 (PST)
+	bh=RT0AFngnHJk2qaSScXzVg+jorrRG/VFdZCQbeqtwTto=;
+	b=mRl9ftq1g41PwuL+IT9+1xeqAw5mRa9IbJljOcBDbWLUKUf1KP3mBezQefIBydDdoB
+	JvRzExwO07IiS8X0jos54c0RNdwokrhAkvtqEPfLTH5aTd5wBddPckuG24gSBvSxr+Ce
+	V85chreZQe+SEQps6Kgz9DAQFNd6phYjTPlqoqgHxbA5B8MirtVmzqx+BT9OYSA2pVj/
+	LCt9zMuzgIpQhoJqjTJmX6hQS0iF1JeBEk6Q6V0JygJHcAsumVhcMjj/rzGiqLRAqmEW
+	BcVLkQjwX3eZ4i+APN3s5eKdLsQNmhQzyJJUJgZ5BqKmtDmIc/CoSFMDHjhCS4LItqj1
+	NVVg==
+X-Gm-Message-State: AMke39lu/7MJeB9aP3jxzFerce7kF3HiXGCEGZufWVl7vcK1f7uCv/obUirWayJ9ttKTLw==
+X-Received: by 10.28.127.13 with SMTP id a13mr17053918wmd.96.1486562907485;
+	Wed, 08 Feb 2017 06:08:27 -0800 (PST)
 Received: from nb-lx-hgc-001.peiker-cee.de
 	(business-176-094-229-202.static.arcor-ip.net. [176.94.229.202])
 	by smtp.gmail.com with ESMTPSA id
-	a72sm13143357wrc.48.2017.02.08.06.08.25
+	a72sm13143357wrc.48.2017.02.08.06.08.26
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 08 Feb 2017 06:08:25 -0800 (PST)
+	Wed, 08 Feb 2017 06:08:26 -0800 (PST)
 From: andreas.kling@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Feb 2017 15:07:53 +0100
-Message-Id: <20170208140755.12812-2-andreas.kling@gmail.com>
+Date: Wed,  8 Feb 2017 15:07:54 +0100
+Message-Id: <20170208140755.12812-3-andreas.kling@gmail.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20170208140755.12812-1-andreas.kling@gmail.com>
 References: <20170208140755.12812-1-andreas.kling@gmail.com>
 Cc: Andy Kling <andreas.kling@peiker-cee.de>
-Subject: [meta-gnome][PATCH 1/3] dconf: depends on dbus
+Subject: [meta-gnome][PATCH 2/3] dconf: fix bash completion in wrong package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,33 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2017 14:08:26 -0000
+X-List-Received-Date: Wed, 08 Feb 2017 14:08:28 -0000
 
 From: Andy Kling <andreas.kling@peiker-cee.de>
 
-  configure of dconf requires dbus
-
-  | checking for dbus... no
-  | configure: error: Package requirements (dbus-1) were not met:
-  |
-  | No package 'dbus-1' found
+  bash completion is used by dconf itself not by editor.
+  move file to main package.
 ---
  meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
-index f38be880f..2830e717b 100644
+index 2830e717b..f7666cc0f 100644
 --- a/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
 +++ b/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
-@@ -9,7 +9,7 @@ SRC_URI[archive.md5sum] = "69a12ed68893f2e1e81ac4e531bc1515"
- SRC_URI[archive.sha256sum] = "109b1bc6078690af1ed88cb144ef5c5aee7304769d8bdc82ed48c3696f10c955"
- GNOME_COMPRESS_TYPE = "xz"
- 
--DEPENDS = "glib-2.0 gtk+3 libxml2 intltool-native"
-+DEPENDS = "dbus glib-2.0 gtk+3 libxml2 intltool-native"
- 
- inherit vala gtk-doc distro_features_check
- 
+@@ -22,10 +22,10 @@ PACKAGES =+ "dconf-editor"
+ FILES_${PN} += " \
+     ${datadir}/dbus-1 \
+     ${libdir}/gio/modules/*.so \
++    ${datadir}/bash-completion \
+ "
+ FILES_dconf-editor = " \
+     ${bindir}/dconf-editor \
+     ${datadir}/icons \
+-    ${datadir}/bash-completion \
+ "
+ FILES_${PN}-dbg += "${libdir}/gio/modules/.debug/libdconfsettings.so"
 -- 
 2.11.0
 
