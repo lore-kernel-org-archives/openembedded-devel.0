@@ -1,44 +1,44 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-vk0-f67.google.com (mail-vk0-f67.google.com
-	[209.85.213.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 342A871999
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 7BABA6079E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2017 18:53:46 +0000 (UTC)
-Received: by mail-vk0-f67.google.com with SMTP id n125so5436654vke.3
+	Wed,  8 Feb 2017 19:13:37 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id r141so198594924wmg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2017 10:53:47 -0800 (PST)
+	Wed, 08 Feb 2017 11:13:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=tbmFMmAe0hMFK0Irfswk35OaxWrPrXLPR4CQE+RKJ0Y=;
-	b=e/rRq8/u4/1O1XYGHDwtii098W6sTF9qR3h9jr6DHVFzWYdgq8d/cyF0qeROaB3kEp
-	6XVzWs8eh1ul9imPJlfFIzOYJKSEDimoVV38NCDl9GRkQVjPSUNwf5th7NIeE/+RAYdS
-	mgHaYEGvfqBBNB6rydjeIMTp5LOOxdwV9Rfj/mr3+Uh1Z9tyID4B6rTW3JuMmTfDAAdF
-	GFUR6nzMxcrQOzETD3HLqfbNcQp91mg+ytLEcmAGqQUxDpbB+eq1OQ7ufl2YE2vSWLog
-	Y6PCNZKXqK4wqTuqhIIsn+ZB+CK2mHoc7MfqgCI8yd/ytePl5zDlD254kDqs0ChgBNfT
-	b7SA==
+	bh=ct1TL4+FkjWfuhY/8QLqjyeiF+5sT1oC90fDvhz2BhU=;
+	b=fTxxdRXTVwI9tgrMxcNvcdq3gPyLFq1UivAu/TUyppUXiMN2VE5tNfscoO+LlF49Oy
+	94n70iEuwTYZ5zgbmOW9QtklxezW+V6EWkI1BPpZ6ajkW7XdF03WOjxfcg+Sa5b31oHA
+	PRUmKZ5TGzX/v0Bkq3GJLbZEqV+aC21hakyx1EFfWtYW0syootKwWUJTgVyidcEPne4s
+	PxpcNeaK8a7CvScxuq7OJQ1FRMyTU3ZsgY8nEVMj0puigDno76dTk9givw0RYZCppwYl
+	OInw3KOPsPlI08wJ3NN8rEopB8PiS5BvcvSQKDF+NfOKldWAcN2xspYJHvssRQdH/gZd
+	XhDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=tbmFMmAe0hMFK0Irfswk35OaxWrPrXLPR4CQE+RKJ0Y=;
-	b=ARZAWdhIKo5h3eofu1BoilqQYmjkjRCNH+yvh85JeAUOCTb/gytHwD1xOP+GLjLiBY
-	dDtfBJ28GEVfUdg5rKyqlxrDZmXpJB1afn7zr3Y05/taPmtk9TewXxKGMGKKfxKEA34o
-	VvBQAa+75IFBIMjghTHydqKIQGV4S66HzYRe62m+CBWM2O4dQXrJ2vwGCTFl8GFXDxvs
-	KvLwMQt5Z9RFIZcOxkrwQgrhWunmJr4sLFCF33/EKPkM03nD27YRZ/u0xDCyz68F5PWq
-	JolRpvwoHtW9hdlkeh1ITM0P9SN0kix8Pn/v0IC3fkzAIB5LnXCemim/UVTEDkzFqLU8
-	x9Yw==
-X-Gm-Message-State: AMke39k0/KKZenLUVExEbhR3bg9ihhza7YAdkao4O7PSBK5ISLYrs/LLDz0mTbL+DdZGyx/zsNDf1d36Y+gjnA==
-X-Received: by 10.31.28.193 with SMTP id c184mr10418656vkc.173.1486580026905; 
-	Wed, 08 Feb 2017 10:53:46 -0800 (PST)
+	bh=ct1TL4+FkjWfuhY/8QLqjyeiF+5sT1oC90fDvhz2BhU=;
+	b=epRJAUvJKswD3KcJ60LxBEQIaNpI3Gjyx0EDi3I6V4Ek2DllL5PHpLjsxt+KrCTjL8
+	AOxdyLXUEbU/JR7uyj/Vwqs3cMIPdkXsiKTLX6FNI17VBiPhX6GCn8FPxnlSLPRFEDjb
+	pEEJILVh/Hsm+RdwyWVdDvseun3FNK2ZVtQCgBkLU27C1kqsxT68tqBUhEdw34tYKft0
+	icGTCXtYzp1/RFwNQ6CTHRxOjUL459BGFql6rRfqBJKtmDctk08JpyNL5lrxTRAsWhzY
+	EUd5jOcLJQZ1gYX7eg6OjDIsk1v5rbFHrNBiwhQiJsxVHhphyHY03kebvgJrHZn4jL9Y
+	RWow==
+X-Gm-Message-State: AMke39nxGle4E1GT2eEJ9UNOzaz7xNuLI9kwUCSfQqWj3gnj1I0abzZlsyT010XU9+DvsQRn/cWeQRcXCRvFYQ==
+X-Received: by 10.28.184.133 with SMTP id i127mr17768177wmf.49.1486581217311; 
+	Wed, 08 Feb 2017 11:13:37 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.159.48.222 with HTTP; Wed, 8 Feb 2017 10:53:16 -0800 (PST)
-In-Reply-To: <20170208181320.21119-1-fabio.berton@ossystems.com.br>
-References: <20170208181320.21119-1-fabio.berton@ossystems.com.br>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 8 Feb 2017 10:53:16 -0800
-Message-ID: <CAMKF1sr8UGiK8OHaPfw1ArJoRNBV3Qsy8NxoVuB5V4Xv6=8ouA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2 1/3] libev: Add recipe for version 4.24
+Received: by 10.80.148.174 with HTTP; Wed, 8 Feb 2017 11:13:36 -0800 (PST)
+In-Reply-To: <alpine.LFD.2.20.1702081254110.22066@localhost.localdomain>
+References: <alpine.LFD.2.20.1702081254110.22066@localhost.localdomain>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 8 Feb 2017 20:13:36 +0100
+Message-ID: <CA+chaQdnQDBex2wHG6EYqzpkzE1-XBr5fy+xKfMfKqeyxDNSjw@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: why is the current version of netdata "1.0.1+git${SRCPV}"?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,43 +51,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2017 18:53:47 -0000
+X-List-Received-Date: Wed, 08 Feb 2017 19:13:39 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, Feb 8, 2017 at 10:13 AM, Fabio Berton
-<fabio.berton@ossystems.com.br> wrote:
-> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
-> ---
->  meta-oe/recipes-connectivity/libev/libev_4.24.bb | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
->  create mode 100644 meta-oe/recipes-connectivity/libev/libev_4.24.bb
->
-> diff --git a/meta-oe/recipes-connectivity/libev/libev_4.24.bb b/meta-oe/recipes-connectivity/libev/libev_4.24.bb
-> new file mode 100644
-> index 000000000..f236eacab
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/libev/libev_4.24.bb
-> @@ -0,0 +1,16 @@
-> +SUMMARY = "A full-featured and high-performance event loop that is loosely \
-> +modelled after libevent."
-> +HOMEPAGE = "http://software.schmorp.de/pkg/libev.html"
-> +LICENSE = "BSD-2-Clause | GPL-2.0+"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=d6ad416afd040c90698edcdf1cbee347"
-> +
-> +SRC_URI = "http://dist.schmorp.de/libev/Attic/${BP}.tar.gz"
-> +
-> +SRC_URI[md5sum] = "94459a5a22db041dec6f98424d6efe54"
-> +SRC_URI[sha256sum] = "973593d3479abdf657674a55afe5f78624b0e440614e2b8cb3a07f16d4d7f821"
-> +
-> +S = "${WORKDIR}/${PN}-${PV}"
-> +
-> +inherit autotools
-> +
-> +EXTRA_OECONF += "--with-pic"
+http://lists.openembedded.org/pipermail/openembedded-devel/2017-January/110784.html
 
-this looks good. I also have an after thought where libevent will
-conflict with libev when it comes to who provides event.h file. So we
-need to note that conflict down as well. May be a follow up. It wont
-show up as much when we have rss now however SDKs and dev images will
-show this up where we will unify the rootfs.
+On Wed, Feb 8, 2017 at 6:57 PM, Robert P. J. Day <rpjday@crashcourse.ca>
+wrote:
+
+>
+>   just noticed recipe file "netdata_git.bb", with the above setting
+> for PV ... apparently, there was a very recent tagging with "v1.5.0",
+> is there any value in upgrading(?) to that newer version? or at least
+> adding a fixed version of the recipe to go with the git version?
+> rday
+>
+> --
+>
+> ========================================================================
+> Robert P. J. Day                                 Ottawa, Ontario, CANADA
+>                         http://crashcourse.ca
+>
+> Twitter:                                       http://twitter.com/rpjday
+> LinkedIn:                               http://ca.linkedin.com/in/rpjday
+> ========================================================================
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
