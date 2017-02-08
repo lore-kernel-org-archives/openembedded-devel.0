@@ -1,49 +1,47 @@
 Return-Path: <andreas.kling@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id A36D071C5F
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 86CC86022F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2017 14:08:28 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id u63so33421833wmu.2
+	Wed,  8 Feb 2017 14:31:53 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id t18so50739429wmt.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2017 06:08:29 -0800 (PST)
+	Wed, 08 Feb 2017 06:31:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=R03wJNmG3pw4Dc4WPab+6gWy+wEYet8uw9Ie8C+cONw=;
-	b=oB+EN6+UscTU9mYgxTsCXpojaNkCEn3AlnnH6n6jWSAb8CBrLlJ/J4hhbr9sfm1ZhR
-	jobb4h29ZLgFs472cx9mpZfStZYjwN4weA0E6Yf4319C3KTqqx73JN2auw3nuRvbYR25
-	u9WVazATfMd+rB0foCCQgzujj/41zLqTGaPAC1tkvlGNNdBBbwvdEo6vsSlDuBhakoTA
-	jAGwEKzRsuqEVmE8bZ9kteFtFqM3KroNoWG8ybqumvNS5lPvUkBWIul5q6hVMQgYB4IJ
-	C2UL0+d1x+sskun1WUVpJR/NISsTxLsE+Teh+EGMMHwqzkHN7MVzZqMcQeyWL/euAak7
-	VgMA==
+	bh=Tsp5VdvnyW8YKGz6fiuovgXp00ZV2K9X8n0dHA7GVeQ=;
+	b=camKVKYz75HX8NVAYdWimU3p5zPgDIdOj4MUoSopDP0Q8BL0cHJEE/xWnwk9Y3Um4B
+	PNnSA4sxkiOFq0DrroYCG4tYH6jXM3azvQHmKUB3h4zRqVVQENo7KzvEvKgsTSLOMN+u
+	zAfq1uWU0H+4HGJBBeCQoDmHvCCWOTtmkpcN2ZV3CQu2/BbRQ8DYrLb+/gE2g+hBHphB
+	031da5c5vC+ds/W/LVUQqXsaXb64PBygp6QFEXbd/hLPbUMSwFMVbgsRw0Peg4i/HRFR
+	R/qx6UVhG4lWQ22+7don5WczyY8BMd84/0hLOWHuFs/wYSr0hn1nvZibS6BWHQugV6cm
+	Q08Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=R03wJNmG3pw4Dc4WPab+6gWy+wEYet8uw9Ie8C+cONw=;
-	b=IBxI2EDYhl71bMgt09uW05Boo7X50uJYL0PE7TPeibteNRYLy2NcufXucwpoRpIcqP
-	o7RGcMkd3R2mrGBMFB/G3hz92JwEGYY59SsowUjgw75xaMc2+bPYOIMLkr1bSU0U1B0K
-	dU6TqkcpDI8OYX42NJEB5gYx97jTJPQgEEYp9PBhPDCWKS6rlEx1L1MgtH6RcqsrCTrP
-	XnpXcY+YL238IuQc1njcdq1rK61b2t4R0/1VHapekCBMiCTxbddJdVYe+cDkGr4KSDB9
-	d2iyQfCgG070qiNtwx2AVMo1pJ0oZcKZNPrINuxjEU+qjFqQGx+qyHKQHUz3dCObnjFg
-	osDg==
-X-Gm-Message-State: AMke39mjvnSCHyf1+09DllK2ladUqO30zkDQKqcFH3UyMycLbbA8zRVWXNfPJIMttFt17A==
-X-Received: by 10.28.214.144 with SMTP id n138mr16776709wmg.136.1486562908542; 
-	Wed, 08 Feb 2017 06:08:28 -0800 (PST)
+	bh=Tsp5VdvnyW8YKGz6fiuovgXp00ZV2K9X8n0dHA7GVeQ=;
+	b=rfteLbxbfiilh4roMotvxevLlaFxcjgu8w3tntRdHeHjre3hXWMtowTxXwO+pF6zi3
+	ARral3c2RNHgU91ssZe56GLclUR9JODo+5KxayVmuVubNICycxYGcpnqeKqdqkm4oysD
+	DXdi8vDfUymlgolxBeg8oXs68LIZhMWw2AT460E9s2s2aqT9qhxvw8gGc0fMyhGqX2S1
+	ebpPfyk2V1WziHO/k2yLeGBp+0U+U/Wno6kt+lqwVKLRzqbc2+CqmhsAh5QtVXkqoGl6
+	1HjgaEY9ZaUL3BjHRnriJPMZukitGa4n/k/EVgpMkJJjWO9OhD8tnd/iPMa6pWBzx09j
+	0PGw==
+X-Gm-Message-State: AMke39mKr1pca5qQNC8lXRWfcjbDX2v2GSrrtItsrixq9g25ZQEKHFd2Fck+HeIEpBLUiA==
+X-Received: by 10.28.148.76 with SMTP id w73mr18523624wmd.43.1486564313541;
+	Wed, 08 Feb 2017 06:31:53 -0800 (PST)
 Received: from nb-lx-hgc-001.peiker-cee.de
 	(business-176-094-229-202.static.arcor-ip.net. [176.94.229.202])
-	by smtp.gmail.com with ESMTPSA id
-	a72sm13143357wrc.48.2017.02.08.06.08.27
+	by smtp.gmail.com with ESMTPSA id 36sm13283196wrz.8.2017.02.08.06.31.51
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 08 Feb 2017 06:08:27 -0800 (PST)
+	Wed, 08 Feb 2017 06:31:52 -0800 (PST)
 From: andreas.kling@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Feb 2017 15:07:55 +0100
-Message-Id: <20170208140755.12812-4-andreas.kling@gmail.com>
+Date: Wed,  8 Feb 2017 15:31:37 +0100
+Message-Id: <20170208143140.22903-1-andreas.kling@gmail.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20170208140755.12812-1-andreas.kling@gmail.com>
 References: <20170208140755.12812-1-andreas.kling@gmail.com>
-Cc: Andy Kling <andreas.kling@peiker-cee.de>
-Subject: [meta-gnome][PATCH 3/3] dconf: make gtk+3 dependency optional
+Subject: dconf: conditionally depend on gtk+3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,54 +54,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2017 14:08:28 -0000
+X-List-Received-Date: Wed, 08 Feb 2017 14:31:56 -0000
 
-From: Andy Kling <andreas.kling@peiker-cee.de>
-
-  dconf requires gtk+3 only for dconf-editor and is useful
-  even on systems without gui.
-
-  add PACKAGECONFIG for editor, enable it by default if x11
-  is present in DISTRO_FEATURES
-
-  add gtk+3 to DEPENDS only if editor is present in PACKAGECONFIG
-
-  add x11 to REQUIRED_DISTRO_FEATURES only if editor is enabled
-
-  Note: editor will be dropped from dconf in version 0.23.1
----
- meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
-
-diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
-index f7666cc0f..0b5970ec1 100644
---- a/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
-+++ b/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
-@@ -9,15 +9,20 @@ SRC_URI[archive.md5sum] = "69a12ed68893f2e1e81ac4e531bc1515"
- SRC_URI[archive.sha256sum] = "109b1bc6078690af1ed88cb144ef5c5aee7304769d8bdc82ed48c3696f10c955"
- GNOME_COMPRESS_TYPE = "xz"
- 
--DEPENDS = "dbus glib-2.0 gtk+3 libxml2 intltool-native"
-+DEPENDS = "dbus glib-2.0 gtk+3 libxml2 intltool-native ${@bb.utils.contains("DISTRO_FEATURES", "x11", "gtk+3", "", d)}"
- 
- inherit vala gtk-doc distro_features_check
- 
--REQUIRED_DISTRO_FEATURES = "x11"
-+PACKAGECONFIG ??= " ${@bb.utils.contains("DISTRO_FEATURES", "x11", "editor", "", d)}"
-+
-+#note: editor will be removed in version 0.23.1
-+PACKAGECONFIG[editor] = "--enable-editor,--disable-editor,gtk+3"
-+
-+REQUIRED_DISTRO_FEATURES = ${@bb.utils.contains("PACKAGECONFIG", "editor", "x11", "", d)}"
- 
- EXTRA_OECONF += "--disable-man"
- 
--PACKAGES =+ "dconf-editor"
-+PACKAGES =+ "${@bb.utils.contains("DISTRO_FEATURES", "x11", "dconf-editor", "", d)}"
- 
- FILES_${PN} += " \
-     ${datadir}/dbus-1 \
--- 
-2.11.0
+v02 fix typo introduced during rebase
+sorry for the noise :/
 
 
