@@ -1,44 +1,45 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id BDCD571D06
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-vk0-f68.google.com (mail-vk0-f68.google.com
+	[209.85.213.68])
+	by mail.openembedded.org (Postfix) with ESMTP id BF9E671CB1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2017 20:16:51 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id u63so35056969wmu.2
+	Wed,  8 Feb 2017 20:21:38 +0000 (UTC)
+Received: by mail-vk0-f68.google.com with SMTP id n125so5628584vke.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2017 12:16:51 -0800 (PST)
+	Wed, 08 Feb 2017 12:21:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=yjm4z3/FNoe7Uvpmk1BVyusLdhxU0HZhmqL19GdZHQo=;
-	b=vMdPnOxBM0MPC/u6EZnUya9mjJdaFCDs1LMWIiG/6hUpQoSJ5c2AoRkz6nuiIm+ZmQ
-	hynnR1jNHoO8Y7+rKkO68PY4pn6qlcT3TokmasOFs4VtnzoN6RtJcALItxBXO3o+5NCs
-	SNBVlQdwDjpw2Mz/kc18mKwwVwYo4OEmrFvuCKyZy7514EJNUSjU92Aw6+a2tUnhdins
-	DZeJMGxEfACtqrXKQAwgCYQdHc+Hrw0Hs8Y8h7uAriY4lfK9ICRRREs14dBr2hsHLOyD
-	NQZRbnvWu76FDLsH2AwtTx9sMrqn8VIqrMo/yjFpDV3tCEthnYwztZL6GA1uD67fmQ7a
-	R9gw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=cs60UU1c82oUiRNy5DZLHhFi710lENU6UXkK+DOTWu4=;
+	b=XOGUWu/QDE/LItzOpbO66WONoIuquzBo/yzXPqkh6XALo/tG+guNH31IHbO/IU2WBP
+	AcfLLB69sBnZBmHPCKvYfu7iJxa+8doiBySissVyfTYaiAseb3BUH4iDs1VXcTMI9jXw
+	yuoJ2F1bQ3sw/mdhuKFvX1hUpfmkqXkA637LX0o2Yehy/iskcv2XPoiT3eJvluBGLue9
+	10uwrk51PqZI1Ah1/g1WKa6juSWS3NSK3hVj8DC1bpdq+a/Y3rfh+H8I+KBDchy9UPtw
+	sjz7cX4LZo3wwEkOoxRXd5G4y9Jo6+hIdTVnSUJvzCCGYDNeU64Xgjk6YcyMfi/cmgxt
+	50xA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to;
-	bh=yjm4z3/FNoe7Uvpmk1BVyusLdhxU0HZhmqL19GdZHQo=;
-	b=EMElOkq+/0uWoTN3LhzaoWXFAEH3oF7A+ZCgwaHC2zaLzZdykYor8OM29QalqxD5wO
-	BwYlGbTNty1Avdg6GthCojYjC3rtkcrhA95SkRjJRAsabBlhCSoVwS0TIoi0tCYfg+YW
-	nLnKeXQeGjHIyZRUjpkSqhrHiqYAwJsDJqpH1WX+fj/LZXEMRbjs5bn5kJn7H9wqt46G
-	FoCe7wyuIzh9+bSYtTXD3cFqMbwNP2qJgRXhQ1jQjNRyitF1MWAOJi9SgT89kCHvTgY7
-	ga6WM3F9UrG37T6fwwneOaSGqT0HOz2KJ9PflGeejrB6+MwjztK1mJ3S4t3gqhE7jRNa
-	/Lxg==
-X-Gm-Message-State: AMke39kS8kw+Znh7w0E8mt3psgmp+ZPlziPSQ+ank5QFtpWBfzgze+k7TKqqbpYpDhP/ekaT6aSZconbHVwTDg==
-X-Received: by 10.28.191.208 with SMTP id o77mr18530836wmi.117.1486585011096; 
-	Wed, 08 Feb 2017 12:16:51 -0800 (PST)
+	bh=cs60UU1c82oUiRNy5DZLHhFi710lENU6UXkK+DOTWu4=;
+	b=L8bZkC0zLco/oaSKbBRayQuvTm7XZ9P23M5IggOntBQOeQcepqPIKdQ/ECWh7IzI76
+	U6QWJkSkEpGquQ+O8ze8X4QV2kYk0OWH5W3db56e9gTA7ZtUkKqekoUrrGx2Q//omrTJ
+	X9EpcFwxBYni8zjVvvRUZKwytizvZufJh7kuUZhvbRzyEY77VekjfDMGS38+M3pmX+mX
+	E3INCTOvLkJGaO4aRUS7iPYOi7Sd50HSiIC3ksQVHkJMfkdRbxRdusioaiHSklNrS7yf
+	gMhsEo6wcrs2t0BuIZ1f0H6WLwMjyRgajc4hsdx1/zn8BKnNjPw6gfi1ympgcpo8cWUn
+	V5Kw==
+X-Gm-Message-State: AMke39nXCX7mvv5yPupavVEYHwLWOshMBj5mSzKHj2XMmL6ybcDrhpIwlmvrQS3M8yQekb6eJc4olbqGC/dolQ==
+X-Received: by 10.31.168.145 with SMTP id r139mr11064515vke.148.1486585298441; 
+	Wed, 08 Feb 2017 12:21:38 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.195.17.228 with HTTP; Wed, 8 Feb 2017 12:16:50 -0800 (PST)
-In-Reply-To: <20170208181320.21119-3-fabio.berton@ossystems.com.br>
-References: <20170208181320.21119-1-fabio.berton@ossystems.com.br>
-	<20170208181320.21119-3-fabio.berton@ossystems.com.br>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Wed, 8 Feb 2017 12:16:50 -0800
-Message-ID: <CAJ86T=XRqVLSk7U3hTcUC-pRkoyZAhF0wng7eWQtcSxwCEin+A@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2 3/3] libwebsockets: Add recipe for version 2.1.0
+References: <cover.05852f1b820c067f96dd93729e6fdb949d51579d.1486546542.git-series.patrick.ohly@intel.com>
+	<c480e4bea612959118bcdbc09e129084fd1d5866.1486546542.git-series.patrick.ohly@intel.com>
+In-Reply-To: <c480e4bea612959118bcdbc09e129084fd1d5866.1486546542.git-series.patrick.ohly@intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 08 Feb 2017 20:21:27 +0000
+Message-ID: <CAMKF1spq2eiKHXrz19ZzRWmwzWUKsSSHbunLfqRND98SjkHgVg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH 1/4] lvm2: remove unbuildable 2.02.138
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,82 +52,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2017 20:16:52 -0000
+X-List-Received-Date: Wed, 08 Feb 2017 20:21:39 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, Feb 8, 2017 at 10:13 AM, Fabio Berton
-<fabio.berton@ossystems.com.br> wrote:
-> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+Can you check if this is the last gpl2 version
+
+
+On Wed, Feb 8, 2017 at 1:39 AM Patrick Ohly <patrick.ohly@intel.com> wrote:
+
+> The patches defined in lvm2.inc no longer apply cleanly to 2.02.138
+> and as no-one has complained, the old version is probably obsolete
+> and can be removed.
+>
+> Signed-off-by: Patrick Ohly <patrick.ohly@intel.com>
 > ---
->  .../libwebsockets/libwebsockets_2.1.0.bb           | 32 ++++++++++++++++++++++
->  1 file changed, 32 insertions(+)
->  create mode 100644 meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb
+>  meta-oe/recipes-support/lvm2/lvm2_2.02.138.bb | 4 ----
+>  1 file changed, 4 deletions(-)
+>  delete mode 100644 meta-oe/recipes-support/lvm2/lvm2_2.02.138.bb
 >
-> diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb
-> new file mode 100644
-> index 000000000..316b38d3b
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb
-> @@ -0,0 +1,32 @@
-> +SUMMARY = "Canonical libwebsockets.org websocket library"
-> +HOMEPAGE = "https://libwebsockets.org/"
-> +LICENSE = "LGPL-2.1"
-> +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
-
-GPL-2.0 looks wrong given that LICENSE is LGPL and not GPL?
-
-Define LIC_FILES_CHKSUM in terms of a file from within the
-libwebsockets source tree instead.
-
-> +
-> +DEPENDS = "zlib"
-> +
-> +SRC_URI = "https://github.com/warmcat/libwebsockets/archive/v${PV}.tar.gz"
-> +
-> +SRC_URI[md5sum] = "4df3be57dee43aeebd54a3ed56568f50"
-> +SRC_URI[sha256sum] = "bcc96aaa609daae4d3f7ab1ee480126709ef4f6a8bf9c85de40aae48e38cce66"
-> +
-> +S = "${WORKDIR}/${PN}-${PV}"
-
-That's the default, so doesn't need to be specified.
-
-> +inherit cmake pkgconfig
-> +
-> +PACKAGECONFIG ?= "libuv client server http2 ssl"
-> +PACKAGECONFIG[libev] = "-DLWS_WITH_LIBEV=ON,-DLWS_WITH_LIBEV=OFF,libev"
-> +PACKAGECONFIG[libuv] = "-DLWS_WITH_LIBUV=ON,-DLWS_WITH_LIBUV=OFF,libuv"
-> +PACKAGECONFIG[client] = "-DLWS_WITHOUT_CLIENT=OFF,-DLWS_WITHOUT_CLIENT=ON,"
-> +PACKAGECONFIG[server] = "-DLWS_WITHOUT_SERVER=OFF,-DLWS_WITHOUT_SERVER=ON,"
-> +PACKAGECONFIG[http2] = "-DLWS_WITH_HTTP2=ON,-DLWS_WITH_HTTP2=OFF,"
-> +PACKAGECONFIG[ipv6] = "-DLWS_IPV6=ON,-DLWS_IPV6=OFF,"
-> +PACKAGECONFIG[ssl] = "-DLWS_WITH_SSL=ON,-DLWS_WITH_SSL=OFF,openssl"
-> +PACKAGECONFIG[testapps] = "-DLWS_WITHOUT_TESTAPPS=OFF,-DLWS_WITHOUT_TESTAPPS=ON,"
-
-Maybe sort this list of PACKAGECONFIG options (unless the current
-order has some special significance?).
-
-> +
-> +PACKAGES =+ "${PN}-testapps"
-> +
-> +FILES_${PN}-dev += "${libdir}/cmake/libwebsockets/*.cmake"
-
-The "convention" in various other recipes seems to be simply:
-
-  FILES_${PN}-dev += "${libdir}/cmake"
-
-> +FILES_${PN}-testapps += "${datadir}/libwebsockets-test-server/*"
-> +
-> +RDEPENDS_${PN} += "zlib"
-
-Explicitly defining a runtime dependency on a library isn't normally
-required since it will be detected automatically. If it is required in
-this case then please explain why in the commit message.
-
-> 2.11.0
->
+> diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.02.138.bb
+> b/meta-oe/recipes-support/lvm2/lvm2_2.02.138.bb
+> deleted file mode 100644
+> index 13a866e..0000000
+> --- a/meta-oe/recipes-support/lvm2/lvm2_2.02.138.bb
+> +++ /dev/null
+> @@ -1,4 +0,0 @@
+> -require lvm2.inc
+> -
+> -SRC_URI[md5sum] = "c660e02ad4586a1d297b6befbe85556d"
+> -SRC_URI[sha256sum] =
+> "93878a4ba4f70d9f2d0d919eb85bc51652a58776b5428ec8e7e32769d332f596"
+> --
+> git-series 0.9.1
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
