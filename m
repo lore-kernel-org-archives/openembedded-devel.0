@@ -1,36 +1,52 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f174.google.com (mail-qk0-f174.google.com
-	[209.85.220.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 55BF271D87
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id B254D60589
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Feb 2017 00:35:25 +0000 (UTC)
-Received: by mail-qk0-f174.google.com with SMTP id s140so141411128qke.0
+	Thu,  9 Feb 2017 06:08:49 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id 19so13074577pfo.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2017 16:35:26 -0800 (PST)
+	Wed, 08 Feb 2017 22:08:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=F8esD0Q8tYmmVcmPW++R2C1c/0k1p1VJ9xavIjltAL8=;
+	b=WuIJleM9ebOTGVHp6jemVuf6cznFnappoM6rE4N5TTjJwgk2MCS+MfMfop4k2GBXv/
+	IWiKD97kRT45pJreM3pExQiny1p8hIh88CfL886bygYAiqhc3by7NdBueTwYoTlh0V+3
+	dnq2fQV7Dz5l3OaKAlUJky3yimNqgGQZt4DQEmg+K04eC/RBb/pSagNvypjHAAFqqzH6
+	osNeIpuJ4R5MEl+KePJVXvfolF+z1oVsaManNfNUToIUFLoAW3GZx7a+D2V7IiOnXAAk
+	2HSHOzDZbjJEJKmvF7vFqGTkGVd4joOy95fFitJClQTJHXi43oXRuW0U4z9d5AEUvcBv
+	/kKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=G5sgob7iafAbfK8roZvsCdbv+Ly+Rwks5uGlTh9O2OQ=;
-	b=ou7lWc2TVM6HDfKZln2N+4WcawGjA0ayZ4APE3/YPfmhvDe05oDauRbk31HYUodukt
-	jcqHXluvKHyiUALWBZrATQYECkfdsc+6D7g5nMHlV0tBcPfK6fc1CX/tw/yZZNPdqd1S
-	M8ELulbzc3zOg6Lx/suqoBVZ1cizNRu6hwMKgprZwBlhrTDi1UyMsbDRYpnIX2rMFwsX
-	/pXcmM5hc4FBAq53McnBYKXw6zgmPsw8FMk10p4NwrtcphpLAOswjP7ss/w95nAMsU4n
-	c+qiwUGbATb0qIhQ17I0rkWwarYBpEPplPxEXH4iYKnZG1x1ZOUOXcqAF1N/CQUHIZUg
-	iHbA==
-X-Gm-Message-State: AMke39mGJpBUp1P/8CvDWzEmchkBn9KOKm+Gxo1N4QGYFtpSxjrOe3AWbeozM5q1Zlig+A==
-X-Received: by 10.55.81.136 with SMTP id f130mr315909qkb.75.1486600525932;
-	Wed, 08 Feb 2017 16:35:25 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
-	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
-	n75sm7639207qkl.26.2017.02.08.16.35.24
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 08 Feb 2017 16:35:24 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=F8esD0Q8tYmmVcmPW++R2C1c/0k1p1VJ9xavIjltAL8=;
+	b=nymsToNMHG/ruf8+O9j1f0gjs0pwLkyHZmOIcGCGo1cgpEpQcSmHmv+r1JhM+H+5WV
+	yAmy9rxrwiS9NfTATjJN+DjUbGDDmPQ314d61qxBd/hS3EwFjzrloUgiT5Li+UaM1bzI
+	eUZkjxOScdgic2UMBHJ0ch1E4N7HvY7DhYakHOp8w4QKW2ehQtdZMbAM0RNbVRFp4WKr
+	qfw3UpRPS1vRFbKYnzQ5kLkvZ6X/RTH+CFZ7781yr5uE6PkY9SbeWLREjhQrsaRkwSYW
+	NagyFAnpa5+BuReS6v5yrcUVr2P1mAcH83/5xyrfURZazgxgdyPIg75eI9p0zDAGhCLK
+	zvQA==
+X-Gm-Message-State: AMke39nlemuXUTC9WoJtYwirHBaMSmOeNGHWQ7ihlgXA+r1/YkifC+b1bniJLFMrUkDShA==
+X-Received: by 10.98.19.12 with SMTP id b12mr1779216pfj.150.1486620529626;
+	Wed, 08 Feb 2017 22:08:49 -0800 (PST)
+Received: from CACSVMO-14452.local ([2601:646:8882:b8c:54db:1f6:93cd:24b0])
+	by smtp.gmail.com with ESMTPSA id
+	y184sm24962694pfg.86.2017.02.08.22.08.48
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 08 Feb 2017 22:08:48 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Feb 2017 19:35:11 -0500
-Message-Id: <1486600511-30582-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-webserver][PATCH] apache: use the APACHE_MIRROR variable in the SRC_URI
+References: <1486559196-22835-1-git-send-email-amarnath.valluri@intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Message-ID: <64d88352-15e2-ddbb-a746-bd790e87fd4e@gmail.com>
+Date: Wed, 8 Feb 2017 22:09:22 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
+	Gecko/20100101 Thunderbird/45.7.0
+MIME-Version: 1.0
+In-Reply-To: <1486559196-22835-1-git-send-email-amarnath.valluri@intel.com>
+Subject: Re: [meta-oe] udisks: Make use of bitbake variables for sbin, lib locations.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,41 +59,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2017 00:35:26 -0000
+X-List-Received-Date: Thu, 09 Feb 2017 06:08:50 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb | 2 +-
- meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb        | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-index 7a2b236..fc84872 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-@@ -8,7 +8,7 @@ LICENSE = "Apache-2.0"
- 
- inherit autotools pkgconfig native
- 
--SRC_URI = "http://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-+SRC_URI = "${APACHE_MIRROR}/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
-           "
- 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-index 9446082..b3a2dfd 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-@@ -6,7 +6,7 @@ DEPENDS = "libtool-native apache2-native openssl expat pcre apr apr-util"
- SECTION = "net"
- LICENSE = "Apache-2.0"
- 
--SRC_URI = "http://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
-+SRC_URI = "${APACHE_MIRROR}/dist/httpd/httpd-${PV}.tar.bz2 \
-            file://server-makefile.patch \
-            file://httpd-2.4.1-corelimit.patch \
-            file://httpd-2.4.4-export.patch \
--- 
-2.7.4
 
+On 2/8/17 5:06 AM, Amarnath Valluri wrote:
+> Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
+> ---
+>  meta-oe/recipes-support/udisks/udisks_1.0.5.bb | 6 ++++++
+>  1 file changed, 6 insertions(+)
+> 
+> diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
+> index eec6933..81533a2 100644
+> --- a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
+> +++ b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
+> @@ -24,6 +24,12 @@ PACKAGECONFIG[parted] = "--enable-parted,--disable-parted,parted"
+>  
+>  EXTRA_OECONF = "--disable-man-pages"
+>  
+> +do_configure_prepend() {
+> +   #Point to right lib,sbin directories
+> +   sed -i -e 's;slashlibdir=/lib;slashlibdir=${base_libdir};g' \
+> +          -e 's;slashsbindir=/sbin;slashsbindir=${base_sbindir};g' ${S}/configure.ac
+> +}
+> +
+
+perhaps this should be turned into a static patch.
+
+>  FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
+>                  ${datadir}/dbus-1/ \
+>                  ${datadir}/polkit-1 \
+> 
 
