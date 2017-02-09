@@ -1,50 +1,50 @@
 Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-qk0-f171.google.com (mail-qk0-f171.google.com
-	[209.85.220.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 70EE2771DE
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id E93E6771F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Feb 2017 19:47:57 +0000 (UTC)
-Received: by mail-qk0-f171.google.com with SMTP id s140so16420255qke.0
+	Thu,  9 Feb 2017 19:47:59 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id w20so1927720qtb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Feb 2017 11:47:57 -0800 (PST)
+	Thu, 09 Feb 2017 11:48:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:organization; bh=qcBQZhEsralMPXcMWiTZwWVK8qnojcjTee4P6JxQK7A=;
-	b=h+Pf6xpz5PektZP1Uf4phNOVIEq6R5waqptiw3A3sZTxsCphOYygO/OC3hEfnT05ct
-	Cgly8RIrhlCYeqFYDVFesGECNZXOWLbRLBmbbV9c23wPNLQDsXxe7pXG0KmvFSVDyt/4
-	sbEb7NM9G0yD4gT+VRBPIdDZdgzR7jfT9RxXScOPio0cGuP2nDbbzJATZ+lT2ZHkiI+3
-	kcgLCmo9pCY/U76wo/pEaGJpBl1BiiUk3HKeBd2HytkqtJ22XawT1OOdCaXW2tM0S5V9
-	j+Extkgc7N+BsHwRL5W3ySe2Keu6JRf/OESnV4wQiMTlvqOZMGQpxCdB/kjILq/Ho6gi
-	TU7Q==
+	:organization; bh=fI9aknM4n4UIcnWQprV3N8ue4th98lbyz5Gv5i3ceW8=;
+	b=rA4YbfbE+NhtKjZ/zAtQbHKkRODifey/3E/hAsmZqLx1sjr1kHTADjfoYHXHTEXxjM
+	fKgzC1kCPuyS5AUAyEJFoSUCUr8Kl/I3MiwesC0qzPQdmPq5WLeRfnuhsLexVOHc38YE
+	V7UUE4Nqi83KDGieaDBekjxAPtoRd2KvTVU4bnoYHmnTYT9zTOBQlqv3gihDYLQf5juM
+	JFCnI+DFXCtdQEopeaoQBTx/DiY1ATh7fJ+c1Aygj+QTOm76eCOEXiowizWxSafbhSHF
+	06YzMc1qKPgtlvLIbPGV7IMzg9r/xCqMBeZM7cE+q+EzINQ9g/q+mjERiXWq4F5F0o8A
+	3UWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:organization;
-	bh=qcBQZhEsralMPXcMWiTZwWVK8qnojcjTee4P6JxQK7A=;
-	b=gS7QN19IeSI1AOb9sepc9YhT2QWg5Ujp0UVob/jWZF86hSHut+U+Ef1z40ko8R6HDr
-	F03DZghHEpfRRTwKqAxA4XW9ARRx12WYOOVbChU66wGeUjbcJHuvFCjux50qlRvCKN3T
-	U+z2QCxl0S3yJzpFQo/pGPzpuehtAkPzxdWmSJojugDKAk7SIx4TMdMh8HiA3z4SkoZ4
-	zszM77kNeT8eOfQtJ7I1wbcoY47mp9ec2DCRNYMAzw47A/a6lvHppAIH4/AhINmXcA8j
-	LABDQZ07WHNv/FXUa1vlzqQGMtNOAQgv3Kw64hllEtC5lHi0hdGJ+7RAqJ8VEs4vvl38
-	jEew==
-X-Gm-Message-State: AMke39nymtbS7Dw5Dnoj4lXLUGVWEM7j73nsgia9p1Vp5XgT/Bqh7x7/EwKoseE5nFJImg==
-X-Received: by 10.55.100.130 with SMTP id y124mr4474136qkb.108.1486669677181; 
-	Thu, 09 Feb 2017 11:47:57 -0800 (PST)
+	bh=fI9aknM4n4UIcnWQprV3N8ue4th98lbyz5Gv5i3ceW8=;
+	b=mi0xYn5YZTHewqkBbLFIpXPHiNSJTYxrJWes7y1lHLn5aII7XoMxA1J7vY3kodaHaS
+	5IYcnPK9ScNLWhFhC5UW5NSlLrxJlJCkNGJ3uBDDZIwIC/heLZBb03SdV6Tw0IddFJMm
+	Kl26q6gJjL31Edi9o2SWoEtkRWlpm1jU6tB7mErmD9XsccA6HZPqvcWDnDAN/Shp0Baz
+	ZcyVQ+wYT5HFDtxNk6vJR7sb07sKRKwnXsCOnzBTXhZf4vUPF0v2F6HwSlIrpjxYqsMN
+	5qdOW6XjwAkx6VwVuRQ3j7jAJYPTEwzYK+vWw6TW257P1pbTwokpMRfINI/29NLR1URL
+	fr4A==
+X-Gm-Message-State: AMke39mDPhF3NlcQKWcdEZb2e1nhQBZmJYGInt8wVZNsTA2nR9RwfOK9oF91svCb7dfHwA==
+X-Received: by 10.200.49.41 with SMTP id g38mr4478019qtb.175.1486669679639;
+	Thu, 09 Feb 2017 11:47:59 -0800 (PST)
 Received: from centrium.lab.ossystems.com.br ([189.114.111.135])
 	by smtp.gmail.com with ESMTPSA id
-	h40sm10055850qtb.6.2017.02.09.11.47.54
+	h40sm10055850qtb.6.2017.02.09.11.47.57
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 09 Feb 2017 11:47:56 -0800 (PST)
+	Thu, 09 Feb 2017 11:47:58 -0800 (PST)
 From: Fabio Berton <fabio.berton@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 Feb 2017 17:48:20 -0200
-Message-Id: <20170209194821.30766-2-fabio.berton@ossystems.com.br>
+Date: Thu,  9 Feb 2017 17:48:21 -0200
+Message-Id: <20170209194821.30766-3-fabio.berton@ossystems.com.br>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20170209194821.30766-1-fabio.berton@ossystems.com.br>
 References: <20170209194821.30766-1-fabio.berton@ossystems.com.br>
 Organization: O.S. Systems Software LTDA.
-Subject: [meta-oe][PATCH v3 2/3] libuv: Add recipe for version 1.10.2
+Subject: [meta-oe][PATCH v3 3/3] libwebsockets: Add recipe for version 2.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,39 +57,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2017 19:47:57 -0000
+X-List-Received-Date: Thu, 09 Feb 2017 19:48:00 -0000
 
 Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 ---
- meta-oe/recipes-connectivity/libuv/libuv_1.10.2.bb | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/libuv/libuv_1.10.2.bb
+ .../libwebsockets/libwebsockets_2.1.0.bb           | 28 ++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb
 
-diff --git a/meta-oe/recipes-connectivity/libuv/libuv_1.10.2.bb b/meta-oe/recipes-connectivity/libuv/libuv_1.10.2.bb
+diff --git a/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb
 new file mode 100644
-index 000000000..fbdbeaa89
+index 000000000..ffade88ac
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/libuv/libuv_1.10.2.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "A multi-platform support library with a focus on asynchronous I/O"
-+HOMEPAGE = "https://github.com/libuv/libuv"
-+BUGTRACKER = "https://github.com/libuv/libuv/issues"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=bb5ea0d651f4c3519327171906045775"
++++ b/meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "Canonical libwebsockets.org websocket library"
++HOMEPAGE = "https://libwebsockets.org/"
++LICENSE = "LGPL-2.1"
++LIC_FILES_CHKSUM = "file://LICENSE;;md5=e3393a657830d4a118c5a6ed35ba53d0"
 +
-+SRC_URI = "https://github.com/libuv/${PN}/archive/v${PV}.tar.gz"
++DEPENDS = "zlib"
 +
-+SRC_URI[md5sum] = "6e16d1d1ca464add0730d637effb1c1c"
-+SRC_URI[sha256sum] = "2d740a2adea0f1a19058626f55a076ac41a4ac1f95d4e57cae0c8a634a6cd63b"
++SRC_URI = "https://github.com/warmcat/libwebsockets/archive/v${PV}.tar.gz"
 +
-+S = "${WORKDIR}/${PN}-${PV}"
++SRC_URI[md5sum] = "4df3be57dee43aeebd54a3ed56568f50"
++SRC_URI[sha256sum] = "bcc96aaa609daae4d3f7ab1ee480126709ef4f6a8bf9c85de40aae48e38cce66"
 +
-+inherit autotools
++inherit cmake pkgconfig
 +
-+do_configure() {
-+    ${S}/autogen.sh || bbnote "${PN} failed to autogen.sh"
-+    oe_runconf
-+}
++PACKAGECONFIG ?= "libuv client server http2 ssl"
++PACKAGECONFIG[client] = "-DLWS_WITHOUT_CLIENT=OFF,-DLWS_WITHOUT_CLIENT=ON,"
++PACKAGECONFIG[http2] = "-DLWS_WITH_HTTP2=ON,-DLWS_WITH_HTTP2=OFF,"
++PACKAGECONFIG[ipv6] = "-DLWS_IPV6=ON,-DLWS_IPV6=OFF,"
++PACKAGECONFIG[libev] = "-DLWS_WITH_LIBEV=ON,-DLWS_WITH_LIBEV=OFF,libev"
++PACKAGECONFIG[libuv] = "-DLWS_WITH_LIBUV=ON,-DLWS_WITH_LIBUV=OFF,libuv"
++PACKAGECONFIG[server] = "-DLWS_WITHOUT_SERVER=OFF,-DLWS_WITHOUT_SERVER=ON,"
++PACKAGECONFIG[ssl] = "-DLWS_WITH_SSL=ON,-DLWS_WITH_SSL=OFF,openssl"
++PACKAGECONFIG[testapps] = "-DLWS_WITHOUT_TESTAPPS=OFF,-DLWS_WITHOUT_TESTAPPS=ON,"
++
++PACKAGES =+ "${PN}-testapps"
++
++FILES_${PN}-dev += "${libdir}/cmake"
++FILES_${PN}-testapps += "${datadir}/libwebsockets-test-server/*"
 -- 
 2.11.0
 
