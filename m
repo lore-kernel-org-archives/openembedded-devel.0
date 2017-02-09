@@ -1,20 +1,54 @@
-Return-Path: <amarnath.valluri@intel.com>
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by mail.openembedded.org (Postfix) with ESMTP id 9026271E4F
+Return-Path: <patrick.ohly@intel.com>
+Received: from mail-it0-f50.google.com (mail-it0-f50.google.com
+	[209.85.214.50])
+	by mail.openembedded.org (Postfix) with ESMTP id B7BED601D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Feb 2017 15:21:02 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga105.jf.intel.com with ESMTP; 09 Feb 2017 07:21:02 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.35,349,1484035200"; d="scan'208";a="1105169135"
-Received: from avallurigigabyte.fi.intel.com ([10.237.72.170])
-	by fmsmga001.fm.intel.com with ESMTP; 09 Feb 2017 07:21:01 -0800
-From: Amarnath Valluri <amarnath.valluri@intel.com>
+	Thu,  9 Feb 2017 17:12:02 +0000 (UTC)
+Received: by mail-it0-f50.google.com with SMTP id c7so20884226itd.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 09 Feb 2017 09:12:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=message-id:subject:from:to:date:in-reply-to:references:organization
+	:mime-version:content-transfer-encoding;
+	bh=adS7mEszfHvlaBHWeQD85h3i+M6T6ScEQnFd9pgSrSw=;
+	b=fSDuvuxBpnPS4pT49/Z24OC7hD9xdnipXvKH3a+RMYKY3wzY0qrjjFfkx7E6S0TCab
+	8HmnKLkKA3JF0qe0QRVCPu6KHyI4cjDtlpXzdR1iNRel71hbyra3y7pMB3YveszKkjq0
+	6Y89BmrAEhvzNNi8AzUDXlkxbI6Oxc9mtr0XyoC3l//M6/fRu/CGolxAQu06haJiJ8zk
+	7zU7OkHaMdVZf+Djc03XdH9NtyAXMYOcHcyRRYro9ogEJ0CAB7/Ep4q3YNIcWigiAN/L
+	vlMScFjvfz1M64/SgCcmIC0zYBFRjs7bX78xUZy5Kfka6OE1RMsb9v+k9wGeUA6aNqVg
+	nCxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+	:references:organization:mime-version:content-transfer-encoding;
+	bh=adS7mEszfHvlaBHWeQD85h3i+M6T6ScEQnFd9pgSrSw=;
+	b=opCmDYpNoOuw4LvZ1kb0HiAo0UGG3XkTI7qjO1X1NLS2x8qisEvs06EXnshxik/KFv
+	EwwwK/YPb4LX329YcD8a+iSXJCqsFPv9yyBtu473aFU8H07QUnMzQqOp9XjPDNMff+k4
+	sE8zEYxY8yn8FRVb2Fir1qG8Owt4VAjUb/EyJqv14+47tAS9A2bM8fdRV7Al0ZXsQZPV
+	V3Y7e+qiCB59fqiMtZ98Zpvvy+NW1XOKyHdN4+SKBJKT7Z4PL+ZioRlHzmPS98bq1CJU
+	VbPzIh1SK0J+rT8OeoMzCxqe/ak100GxNn2NJyrO0vPGYFwbTG5ttZMJONUQAWI8sONe
+	fjhw==
+X-Gm-Message-State: AIkVDXIilZweEmfYg+MpiPrYHqutEWWWJfTggy12tR0yyXUPHQP4tqiS+K4H5e87YMZ99VcA
+X-Received: by 10.36.107.194 with SMTP id v185mr22277112itc.59.1486660322220; 
+	Thu, 09 Feb 2017 09:12:02 -0800 (PST)
+Received: from pohly-mobl1 (p5DE8DC0B.dip0.t-ipconnect.de. [93.232.220.11])
+	by smtp.gmail.com with ESMTPSA id o13sm3184778ith.5.2017.02.09.09.12.00
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 09 Feb 2017 09:12:00 -0800 (PST)
+Message-ID: <1486660318.13854.105.camel@intel.com>
+From: Patrick Ohly <patrick.ohly@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 Feb 2017 17:17:51 +0200
-Message-Id: <1486653471-20252-1-git-send-email-amarnath.valluri@intel.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH v2] udisks: Make use of bitbake variables for sbin, lib locations.
+Date: Thu, 09 Feb 2017 18:11:58 +0100
+In-Reply-To: <CAMKF1spq2eiKHXrz19ZzRWmwzWUKsSSHbunLfqRND98SjkHgVg@mail.gmail.com>
+References: <cover.05852f1b820c067f96dd93729e6fdb949d51579d.1486546542.git-series.patrick.ohly@intel.com>
+	<c480e4bea612959118bcdbc09e129084fd1d5866.1486546542.git-series.patrick.ohly@intel.com>
+	<CAMKF1spq2eiKHXrz19ZzRWmwzWUKsSSHbunLfqRND98SjkHgVg@mail.gmail.com>
+Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
+X-Mailer: Evolution 3.12.9-1+b1 
+Mime-Version: 1.0
+Subject: Re: [meta-oe][PATCH 1/4] lvm2: remove unbuildable 2.02.138
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,138 +61,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2017 15:21:02 -0000
+X-List-Received-Date: Thu, 09 Feb 2017 17:12:02 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Took the opportunity to patch the source to accepet the udev rules directory
-from make variables.
+On Wed, 2017-02-08 at 20:21 +0000, Khem Raj wrote:
+> Can you check if this is the last gpl2 version
 
-Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
----
- ...01-Make-udev-rules-directory-configurable.patch | 91 ++++++++++++++++++++++
- meta-oe/recipes-support/udisks/udisks_1.0.5.bb     |  4 +-
- 2 files changed, 94 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/udisks/udisks/0001-Make-udev-rules-directory-configurable.patch
+According to the recipe, both 2.02.138 and 2.02.166 are under LICENSE =
+"GPLv2 & LGPLv2", and that also seems to be what the current code is
+licensed under: https://git.fedorahosted.org/cgit/lvm2.git/tree/
 
-diff --git a/meta-oe/recipes-support/udisks/udisks/0001-Make-udev-rules-directory-configurable.patch b/meta-oe/recipes-support/udisks/udisks/0001-Make-udev-rules-directory-configurable.patch
-new file mode 100644
-index 0000000..3cc0400
---- /dev/null
-+++ b/meta-oe/recipes-support/udisks/udisks/0001-Make-udev-rules-directory-configurable.patch
-@@ -0,0 +1,91 @@
-+From 32278297170ffb49116b5789e4a0588b99d02bd0 Mon Sep 17 00:00:00 2001
-+From: Amarnath Valluri <amarnath.valluri@intel.com>
-+Date: Thu, 9 Feb 2017 11:02:53 +0200
-+Subject: [PATCH] Make udev rules directory configurable.
-+
-+udev rules directory can be configurable via undevrulesdir variable. And use
-+libdir, sbindir for installing librares and binaries.
-+
-+Upstream-Status: Inappropriate[Embedded specific]
-+
-+Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
-+---
-+ configure.ac            | 14 +++-----------
-+ data/Makefile.am        |  1 -
-+ src/probers/Makefile.am |  2 +-
-+ tools/Makefile.am       |  2 +-
-+ 4 files changed, 5 insertions(+), 14 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 8c4e4c2..a143397 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -227,15 +227,8 @@ if test "x$GCC" = "xyes"; then
-+   LDFLAGS="-Wl,--as-needed $LDFLAGS"
-+ fi
-+ 
-+-if test "$prefix" = "/usr" -o "$prefix" = "/usr/local" ; then
-+-  slashlibdir=/lib
-+-  slashsbindir=/sbin
-+-else
-+-  slashlibdir=$prefix/lib
-+-  slashsbindir=$prefix/sbin
-+-fi
-+-AC_SUBST(slashlibdir)
-+-AC_SUBST(slashsbindir)
-++udevrulesdir=/lib/udev/udev.d
-++AC_SUBST(udevrulesdir)
-+ 
-+ # *************
-+ # Remote Access
-+@@ -299,8 +292,7 @@ echo "
-+         sysconfdir:                 ${sysconfdir}
-+         localstatedir:              ${localstatedir}
-+         docdir:                     ${docdir}
-+-        slashlibdir:                ${slashlibdir}
-+-        slashsbindir:               ${slashsbindir}
-++        udevrulesdir:               ${udevrulesdir}
-+         systemdsystemunitdir:       ${systemdsystemunitdir}
-+ 
-+         compiler:                   ${CC}
-+diff --git a/data/Makefile.am b/data/Makefile.am
-+index 411ea0f..4834960 100644
-+--- a/data/Makefile.am
-++++ b/data/Makefile.am
-+@@ -34,7 +34,6 @@ $(systemdservice_DATA): $(systemdservice_in_files) Makefile
-+ 	@sed -e "s|\@libexecdir\@|$(prefix)/lib/udisks|" $< > $@
-+ endif
-+ 
-+-udevrulesdir = $(slashlibdir)/udev/rules.d
-+ udevrules_DATA = 80-udisks.rules
-+ 
-+ pkgconfigdir = $(datadir)/pkgconfig
-+diff --git a/src/probers/Makefile.am b/src/probers/Makefile.am
-+index 01c693b..6a0361a 100644
-+--- a/src/probers/Makefile.am
-++++ b/src/probers/Makefile.am
-+@@ -20,7 +20,7 @@ INCLUDES = \
-+ # TODO: ideally move most of this to udev and/or util-linux
-+ #
-+ 
-+-udevhelperdir = $(slashlibdir)/udev
-++udevhelperdir = $(libdir)/udev
-+ udevhelper_PROGRAMS =	udisks-part-id 			\
-+ 			udisks-probe-sas-expander 	\
-+ 			$(NULL)
-+diff --git a/tools/Makefile.am b/tools/Makefile.am
-+index 18325f7..0aaec11 100644
-+--- a/tools/Makefile.am
-++++ b/tools/Makefile.am
-+@@ -54,7 +54,7 @@ udisks_LDADD = 						\
-+ 	$(DBUS_GLIB_LIBS)				\
-+ 	$(POLKIT_DBUS_LIBS)
-+ 
-+-slashsbin_PROGRAMS = umount.udisks
-++sbin_PROGRAMS = umount.udisks
-+ 
-+ umount_udisks_SOURCES = umount-udisks.c
-+ umount_udisks_LDADD = $(DBUS_GLIB_LIBS) $(POLKIT_DBUS_LIBS)
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-index eec6933..3757919 100644
---- a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-+++ b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-@@ -12,6 +12,7 @@ SRC_URI = " \
-     file://optional-depends.patch \
-     file://0001-fix-build-with-newer-glibc-versions.patch \
-     file://udisks-1.0.5-fix-service-file.patch \
-+    file://0001-Make-udev-rules-directory-configurable.patch \
- "
- 
- SRC_URI[udisks.md5sum] = "70d48dcfe523a74cd7c7fbbc2847fcdd"
-@@ -22,7 +23,8 @@ inherit autotools-brokensep systemd gtk-doc
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[parted] = "--enable-parted,--disable-parted,parted"
- 
--EXTRA_OECONF = "--disable-man-pages"
-+EXTRA_OECONF = "--disable-man-pages --libdir=${base_libdir} --sbindir=${base_sbindir}"
-+EXTRA_OEMAKE = "udevrulesdir=${nonarch_base_libdir}/udev/rules.d/"
- 
- FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
-                 ${datadir}/dbus-1/ \
+So GPLv2 vs. GPLv3 wasn't the reason for keeping the old version.
+
+BTW, do all mails from openembedded-devel have Reply-To:
+<openembedded-devel@lists.openembedded.org> set? openembedded-core
+doesn't seem to have that.
+
+I have a mail filter in place which will bring personal replies to my
+attention sooner, but Reply-To to the list defeats that.
+
 -- 
-2.7.4
+Best Regards, Patrick Ohly
+
+The content of this message is my personal opinion only and although
+I am an employee of Intel, the statements I make here in no way
+represent Intel's position on the issue, nor am I authorized to speak
+on behalf of Intel on this matter.
+
+
 
 
