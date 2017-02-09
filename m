@@ -1,46 +1,36 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 53D6571DB8
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f174.google.com (mail-qk0-f174.google.com
+	[209.85.220.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 55BF271D87
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Feb 2017 23:42:02 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id 194so16102162pgd.0
+	Thu,  9 Feb 2017 00:35:25 +0000 (UTC)
+Received: by mail-qk0-f174.google.com with SMTP id s140so141411128qke.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Feb 2017 15:42:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=ObktIlsql5LKkDXpnaBmrb9XfKLdioX6cvPKmli7XR4=;
-	b=rhxXMnYl2JCsaYupBdCelmV8/Xycd0LMFCjcS2OrgCH3EIZUccbnNl1kvLHYLHvDIV
-	Uv5mOgHPmx9+LEgBpX4rx11tqDhIBkf9y4h6RXmeZw1nJs4mGUxwHqsVs/Igj7yuox5f
-	fKGT7bLeOJ+MvDTpQ9nkrmlPGBwtxQiwv+tX50mytKcvsjY4lZh526TdqNQbQwrGb4I4
-	RgGaNx8RovisjgP5OC9pYO1V8d9Z2BOsDCvLv0Q/M6h4sKwwgMwAwijxu9+n1K4kW3qB
-	oNLMzaDx420glOroGX6aWTpdl+w2ZKnUJK2ZOmPUQVcgtW8kls6SMaN0cEEwLTnaiyDa
-	Ps0w==
+	Wed, 08 Feb 2017 16:35:26 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=ObktIlsql5LKkDXpnaBmrb9XfKLdioX6cvPKmli7XR4=;
-	b=j9jLUF1Zr8rlcX9NhwyDhNwSFNHAHN6A0rg7FKrzNUpBX5ARrty/ouuudQE4WTAk01
-	dyChWejleTyYUHTgb5xFWSemDX4Rg4Ydax9hhsJopylpV+N/ffrLr6+GjlbdOHtYQa/p
-	WrSoH2miodY9kIFnQZCqmPcfR5usHpw8z/pqx2NsQ0oRyDuUgwZjSzq8pcyazGj2Zion
-	DkfRifqdxhZRkSOmukp5J0RurRj6tbxAV0aGsSYzYdmSie4hGeJpA7fHRo7RbE8xGFW/
-	8h7MWNJ4Jf4xc56tpDk7yvzqmjmdo6pJjH75iLFvDPIB+iMzIY5NN47yPiSiFZW7qBan
-	CsOg==
-X-Gm-Message-State: AMke39lZdV0THJvZEd/2lEyqh3GgNjo8Uw55j4pZSuMS4+u786zOaISuYTxFohMaJWPKjA==
-X-Received: by 10.84.224.134 with SMTP id s6mr180462plj.49.1486597323485;
-	Wed, 08 Feb 2017 15:42:03 -0800 (PST)
-Received: from akuster-ThinkPad-X240.mvista.com
-	(50-233-148-156-static.hfc.comcastbusiness.net. [50.233.148.156])
-	by smtp.gmail.com with ESMTPSA id
-	75sm22968823pfp.80.2017.02.08.15.42.02
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=G5sgob7iafAbfK8roZvsCdbv+Ly+Rwks5uGlTh9O2OQ=;
+	b=ou7lWc2TVM6HDfKZln2N+4WcawGjA0ayZ4APE3/YPfmhvDe05oDauRbk31HYUodukt
+	jcqHXluvKHyiUALWBZrATQYECkfdsc+6D7g5nMHlV0tBcPfK6fc1CX/tw/yZZNPdqd1S
+	M8ELulbzc3zOg6Lx/suqoBVZ1cizNRu6hwMKgprZwBlhrTDi1UyMsbDRYpnIX2rMFwsX
+	/pXcmM5hc4FBAq53McnBYKXw6zgmPsw8FMk10p4NwrtcphpLAOswjP7ss/w95nAMsU4n
+	c+qiwUGbATb0qIhQ17I0rkWwarYBpEPplPxEXH4iYKnZG1x1ZOUOXcqAF1N/CQUHIZUg
+	iHbA==
+X-Gm-Message-State: AMke39mGJpBUp1P/8CvDWzEmchkBn9KOKm+Gxo1N4QGYFtpSxjrOe3AWbeozM5q1Zlig+A==
+X-Received: by 10.55.81.136 with SMTP id f130mr315909qkb.75.1486600525932;
+	Wed, 08 Feb 2017 16:35:25 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
+	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
+	n75sm7639207qkl.26.2017.02.08.16.35.24
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 08 Feb 2017 15:42:02 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster@mvista.com, joe_macdonald@mentor.com,
-	openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Feb 2017 15:42:02 -0800
-Message-Id: <1486597322-1483-1-git-send-email-akuster808@gmail.com>
+	Wed, 08 Feb 2017 16:35:24 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  8 Feb 2017 19:35:11 -0500
+Message-Id: <1486600511-30582-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] tcpdump: update to 4.9.0 for security fixes
+Subject: [meta-webserver][PATCH] apache: use the APACHE_MIRROR variable in the SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,94 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Feb 2017 23:42:05 -0000
+X-List-Received-Date: Thu, 09 Feb 2017 00:35:26 -0000
 
-From: Armin Kuster <akuster@mvista.com>
-
-CVE included in this release:
-CVE-2016-7922 CVE-2016-7923 CVE-2016-7924 CVE-2016-7925
-CVE-2016-7926 CVE-2016-7927 CVE-2016-7928 CVE-2016-7929
-CVE-2016-7930 CVE-2016-7931 CVE-2016-7932 CVE-2016-7933
-CVE-2016-7934 CVE-2016-7935 CVE-2016-7936 CVE-2016-7937
-CVE-2016-7938 CVE-2016-7939 CVE-2016-7940 CVE-2016-7973
-CVE-2016-7974 CVE-2016-7975 CVE-2016-7983 CVE-2016-7984
-CVE-2016-7985 CVE-2016-7986 CVE-2016-7992 CVE-2016-7993
-CVE-2016-8574 CVE-2016-8575 CVE-2017-5202 CVE-2017-5203
-CVE-2017-5204 CVE-2017-5205 CVE-2017-5341 CVE-2017-5342
-CVE-2017-5482 CVE-2017-5483 CVE-2017-5484 CVE-2017-5485
-CVE-2017-5486
-
-updated add-ptest patch to apply to Makefile.in
-
-Signed-off-by: Armin Kuster <akuster@mvista.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../tcpdump/tcpdump/add-ptest.patch                | 25 ++++++++++------------
- .../tcpdump/{tcpdump_4.8.1.bb => tcpdump_4.9.0.bb} |  6 ++++--
- 2 files changed, 15 insertions(+), 16 deletions(-)
- rename meta-networking/recipes-support/tcpdump/{tcpdump_4.8.1.bb => tcpdump_4.9.0.bb} (90%)
+ meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb | 2 +-
+ meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb        | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch b/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
-index 358f605..196cec7 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump/add-ptest.patch
-@@ -10,11 +10,11 @@ Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
-  Makefile.in | 10 +++++++++-
-  1 file changed, 9 insertions(+), 1 deletion(-)
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
+index 7a2b236..fc84872 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
+@@ -8,7 +8,7 @@ LICENSE = "Apache-2.0"
  
--diff --git a/Makefile.in b/Makefile.in
--index 8c35a45..4fb8ae6 100644
----- a/Makefile.in
--+++ b/Makefile.in
--@@ -428,9 +428,17 @@ distclean:
-+Index: tcpdump-4.9.0/Makefile.in
-+===================================================================
-+--- tcpdump-4.9.0.orig/Makefile.in
-++++ tcpdump-4.9.0/Makefile.in
-+@@ -436,9 +436,17 @@ distclean:
-  	    tests/failure-outputs.txt
-  	rm -rf autom4te.cache tests/DIFF tests/NEW
-  
-@@ -25,14 +25,11 @@ index 8c35a45..4fb8ae6 100644
-  	(cd tests && ./TESTrun.sh)
-  
- +install-ptest:
--+	cp -r tests			$(DESTDIR) 
--+	cp -r config.h			$(DESTDIR)
--+	install -m 0755 Makefile 	$(DESTDIR)
--+	ln -sf /usr/sbin/tcpdump	$(DESTDIR)/tcpdump
-++	cp -r tests                     $(DESTDIR)
-++	cp -r config.h                  $(DESTDIR)
-++	install -m 0755 Makefile        $(DESTDIR)
-++	ln -sf /usr/sbin/tcpdump        $(DESTDIR)/tcpdump
- +
-- tags: $(TAGFILES)
-- 	ctags -wtd $(TAGFILES)
-+ extags: $(TAGFILES)
-+ 	ctags $(TAGFILES)
-  
---- 
--1.9.1
--
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.8.1.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.0.bb
-similarity index 90%
-rename from meta-networking/recipes-support/tcpdump/tcpdump_4.8.1.bb
-rename to meta-networking/recipes-support/tcpdump/tcpdump_4.9.0.bb
-index 35a5cfe..43e388c 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump_4.8.1.bb
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.0.bb
-@@ -12,8 +12,10 @@ SRC_URI = " \
-     file://add-ptest.patch \
-     file://run-ptest \
- "
--SRC_URI[md5sum] = "32f57943649f276e09236ba66622bb0c"
--SRC_URI[sha256sum] = "20e4341ec48fcf72abcae312ea913e6ba6b958617b2f3fb496d51f0ae88d831c"
-+
-+SRC_URI[md5sum] = "2b83364eef53b63ca3181b4eb56dab0c"
-+SRC_URI[sha256sum] = "eae98121cbb1c9adbedd9a777bf2eae9fa1c1c676424a54740311c8abcee5a5e"
-+
- export LIBS=" -lpcap"
+ inherit autotools pkgconfig native
  
- inherit autotools-brokensep ptest
+-SRC_URI = "http://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
++SRC_URI = "${APACHE_MIRROR}/dist/httpd/httpd-${PV}.tar.bz2 \
+            file://0001-configure-use-pkg-config-for-PCRE-detection.patch \
+           "
+ 
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
+index 9446082..b3a2dfd 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
+@@ -6,7 +6,7 @@ DEPENDS = "libtool-native apache2-native openssl expat pcre apr apr-util"
+ SECTION = "net"
+ LICENSE = "Apache-2.0"
+ 
+-SRC_URI = "http://archive.apache.org/dist/httpd/httpd-${PV}.tar.bz2 \
++SRC_URI = "${APACHE_MIRROR}/dist/httpd/httpd-${PV}.tar.bz2 \
+            file://server-makefile.patch \
+            file://httpd-2.4.1-corelimit.patch \
+            file://httpd-2.4.4-export.patch \
 -- 
 2.7.4
 
