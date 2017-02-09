@@ -1,56 +1,47 @@
-Return-Path: <patrick.ohly@intel.com>
-Received: from mail-io0-f176.google.com (mail-io0-f176.google.com
-	[209.85.223.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 03276731C2
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id E1B9A73200
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Feb 2017 19:21:33 +0000 (UTC)
-Received: by mail-io0-f176.google.com with SMTP id j18so26631501ioe.2
+	Thu,  9 Feb 2017 19:47:54 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id w20so1927291qtb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Feb 2017 11:21:34 -0800 (PST)
+	Thu, 09 Feb 2017 11:47:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=message-id:subject:from:to:date:in-reply-to:references:organization
-	:mime-version:content-transfer-encoding;
-	bh=P8mfIyTHOXDGHwQ1+emWbNGODDL83nNXlQWUwTTrObs=;
-	b=1KFK/obB7CJIl967MRvYrjvzGHPAIFLslxW2pCSlzUYaxiZfcVszV+LWQmgQg4L75u
-	mu1eho4GDh8/Nc05OwccGeV6PExU43F7lAagFcMOaqhdW7NvrU4b8d86HZJFlWImTuSl
-	w1OcjIkjJq2sQS3Ph8npd5Hims88OW1AdtRk0xWosr+DaAjlUh1RzdW6MDoo9Vej7yAp
-	94uqvYWqPh60eIO7Omb7evj2sNCnOII7T9gOf+G3zMYlmS3KzLOvLDGxmismk+Zh8efU
-	Fd/GC61N1ajdCpvuhssAJPukwFkRNHkrJ3UXnHwqwVF45Slg7zj6CwJ9oBxEunLxAnjE
-	TFRQ==
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:organization;
+	bh=fwJNo+pLNkn1FM87b0Ld9PY2V+UZ5LBsUgxDXuDgw3w=;
+	b=JXy/kF1k0THD/SrxGcAj6F5KSASAmRXIPglF5VKzfA8U4b+eSFc5jL/luJWCWGKD9t
+	8nsHm8Icz5La8BI0dF22oXBpc0bZJ7OEOhC5+DPItVinc2a1qRMbglGsd4SHv1T2kRKu
+	HbozyJmN5H44ukbk0yJHJm4ODHbKUudL7qkvzmLyBqq4mfH8KSdV7KUguhjWXOm5elvB
+	BKfup/ob+V2FaBqm82dZc9GI3ITHQxlwaIE5ziQiCrxmu7hNpBqtGhT/20dqPu8X90ul
+	RmwcswSCEZrFkvkycsdJnE3IIz3L4qbK2BuVwLaNGr0KUWH6Fh5AHDy55ynH9jIpkSBM
+	rlDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-	:references:organization:mime-version:content-transfer-encoding;
-	bh=P8mfIyTHOXDGHwQ1+emWbNGODDL83nNXlQWUwTTrObs=;
-	b=NgEbPfszT9QTW6Zz1AVtVguyZbKh6A/YAtsvwa3deeAS2YGxE18Vw/RMeeSeuqjDLm
-	X2Vbq9gaQOlD8zr8A9/P9DkC7IQvZIO/B3E1RDvsEpP/t/46nQpp7pUH/PNRDMT5uKMw
-	joNdTeG40hliMHkkwYEK68LpFdvasUWeZeVJQ3RDJO6Bjzy2NbtvJ1XoShTO8nuBRHiU
-	qAya5KwIWqTK62uSlf100HcYjfb2CVTKNwhgzFJHFOb25BErJ0WOOmGkdnOLtRmiVlWc
-	JwbRCD5Bmkpu5XWMqLRBnIrj+l+WfZEjL6YIpUDtrIIeG07kJnpSwhdctljJen3lgAZl
-	8/Ng==
-X-Gm-Message-State: AMke39kXzQhCkzi9PlLFtjWzgdT7QDDE/frZlc6WnR0ZIoWOT/g9a3PFMGKsCkb7s7RcBN9B
-X-Received: by 10.107.132.81 with SMTP id g78mr4890184iod.227.1486668093469;
-	Thu, 09 Feb 2017 11:21:33 -0800 (PST)
-Received: from pohly-mobl1 (p5DE8DC0B.dip0.t-ipconnect.de. [93.232.220.11])
-	by smtp.gmail.com with ESMTPSA id w75sm45203itc.21.2017.02.09.11.21.31
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 09 Feb 2017 11:21:32 -0800 (PST)
-Message-ID: <1486668089.13854.119.camel@intel.com>
-From: Patrick Ohly <patrick.ohly@intel.com>
-To: openembedded-devel@lists.openembedded.org, Michael Halstead
-	<mhalstead@linuxfoundation.org>
-Date: Thu, 09 Feb 2017 20:21:29 +0100
-In-Reply-To: <CAMKF1sqH1XGcG47CGp-CcgE5EYJ2_JE6wBw9V3=XDJ9-=LUHsw@mail.gmail.com>
-References: <cover.05852f1b820c067f96dd93729e6fdb949d51579d.1486546542.git-series.patrick.ohly@intel.com>
-	<c480e4bea612959118bcdbc09e129084fd1d5866.1486546542.git-series.patrick.ohly@intel.com>
-	<CAMKF1spq2eiKHXrz19ZzRWmwzWUKsSSHbunLfqRND98SjkHgVg@mail.gmail.com>
-	<1486660318.13854.105.camel@intel.com>
-	<CAMKF1sqH1XGcG47CGp-CcgE5EYJ2_JE6wBw9V3=XDJ9-=LUHsw@mail.gmail.com>
-Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
-X-Mailer: Evolution 3.12.9-1+b1 
-Mime-Version: 1.0
-Subject: Reply-To (was: Re: [meta-oe][PATCH 1/4] lvm2: remove unbuildable 2.02.138)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=fwJNo+pLNkn1FM87b0Ld9PY2V+UZ5LBsUgxDXuDgw3w=;
+	b=sisq/mqZ8/xg0BjleAIVQRNlrR0wJaHAGpwIRQ4SVnhAW3YIt1SSPJrBGwCAd/TW4J
+	DQaxGEI29UkvL4z70tyl+zFlkCwiUFizBdYQ1VP2gJduwZ7yTT4mIz4mDinY+uF90bdA
+	bvlZuePSnPmAegTBj0Xwvb8QPv9nWXGrnxJAM/YPsWawXzGV3rQnT5N+QJlya1FRicrU
+	XsZvmvweyxUM91Cq1lkqU9DaQKgeEy9sOLeq9uH65R8NZeEjlwJCXTMh5R1WwxQ+EJgk
+	FqZDSQWZmSTPOTrmP6Al1jM8W6CVnvEM01i7aLTVUSEWU1jp+2BzbW2sKlEZmxy7FG/W
+	fR9w==
+X-Gm-Message-State: AMke39mdQcCkFKVYjvqw3QzAEb7dNx4dSJenbo+lcSB8ljjve+SaqJk1s8fxEgeNZUgqGQ==
+X-Received: by 10.237.41.229 with SMTP id o92mr4270387qtd.223.1486669674704;
+	Thu, 09 Feb 2017 11:47:54 -0800 (PST)
+Received: from centrium.lab.ossystems.com.br ([189.114.111.135])
+	by smtp.gmail.com with ESMTPSA id
+	h40sm10055850qtb.6.2017.02.09.11.47.52
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 09 Feb 2017 11:47:53 -0800 (PST)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  9 Feb 2017 17:48:19 -0200
+Message-Id: <20170209194821.30766-1-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.11.0
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-oe][PATCH v3 1/3] libev: Add recipe for version 4.24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,36 +54,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Feb 2017 19:21:34 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 09 Feb 2017 19:47:55 -0000
 
-On Thu, 2017-02-09 at 09:17 -0800, Khem Raj wrote:
-> On Thu, Feb 9, 2017 at 9:11 AM, Patrick Ohly <patrick.ohly@intel.com> wrote:
-> > BTW, do all mails from openembedded-devel have Reply-To:
-> > <openembedded-devel@lists.openembedded.org> set? openembedded-core
-> > doesn't seem to have that.
-> 
-> yeah I guess reply-all will send to all but I never tried that
+The provided compatibility layer with libevent is still basic,
+so we need to drop event.h for now to avoid conflicting with libevent.
 
-Depends on the client, but typically "Reply-To" sends a very strong
-message that the only intended reply is to the given address. For
-example, I always do group-reply in Evolution, and for this list it only
-picks the list address, as it should.
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+---
+ meta-oe/recipes-connectivity/libev/libev_4.24.bb | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/libev/libev_4.24.bb
 
-See
-http://www.unicom.com/pw/reply-to-harmful.html
-
-Does anyone remember why the list is set up this way?
-
+diff --git a/meta-oe/recipes-connectivity/libev/libev_4.24.bb b/meta-oe/recipes-connectivity/libev/libev_4.24.bb
+new file mode 100644
+index 000000000..5e0f3a5ed
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/libev/libev_4.24.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "A full-featured and high-performance event loop that is loosely \
++modelled after libevent."
++HOMEPAGE = "http://software.schmorp.de/pkg/libev.html"
++LICENSE = "BSD-2-Clause | GPL-2.0+"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d6ad416afd040c90698edcdf1cbee347"
++
++SRC_URI = "http://dist.schmorp.de/libev/Attic/${BP}.tar.gz"
++
++SRC_URI[md5sum] = "94459a5a22db041dec6f98424d6efe54"
++SRC_URI[sha256sum] = "973593d3479abdf657674a55afe5f78624b0e440614e2b8cb3a07f16d4d7f821"
++
++S = "${WORKDIR}/${PN}-${PV}"
++
++inherit autotools
++
++EXTRA_OECONF += "--with-pic"
++
++do_install_append() {
++    # Avoid conflicting with libevent. The provided compatibility layer is
++    # still basic so drop it for now.
++    rm ${D}${includedir}/event.h
++}
 -- 
-Best Regards, Patrick Ohly
-
-The content of this message is my personal opinion only and although
-I am an employee of Intel, the statements I make here in no way
-represent Intel's position on the issue, nor am I authorized to speak
-on behalf of Intel on this matter.
-
-
+2.11.0
 
 
