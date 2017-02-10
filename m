@@ -1,48 +1,48 @@
 Return-Path: <andreas.kling@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 65B1777317
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id F3C1777317
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Feb 2017 09:07:39 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id r18so6413177wmd.3
+	Fri, 10 Feb 2017 09:07:40 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id c85so254145511wmi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Feb 2017 01:07:40 -0800 (PST)
+	Fri, 10 Feb 2017 01:07:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=RT0AFngnHJk2qaSScXzVg+jorrRG/VFdZCQbeqtwTto=;
-	b=dWtY1NaIGB0iwe+G7916rqPFOuDvkDdnmsr+lgGiXCd5xa449Jrgx5C3e5FFhr+FVC
-	E5lo8KXoemVswdiqcdZwelLL1J+wcbSHFnoAsFXHnrP2UPJZ7ooykXALPVxz20OSS/Kc
-	+wBf7TbDNv1LMb9dhS/T1noEjjOJ9rTIFXxrAIQgCAn1rXF7jRi9YhPVLHyAJCWTCKjh
-	RtPhCv08MRiLLdYXB18Nt38a1QEv6b5oz0tTkFt4CAvBxfoN4EeS4gn2zQnAr4Gp+JKw
-	UohujfIWbxT7U9scV4r9kzGVrEshj0ZfDO6A4gpWycd5OZIDUnjNE5Ww/LhpIdPxNCL4
-	Llew==
+	bh=IPeobukaQ9TPS4t90/itGg1SKNsTRam9ZSyA/mnZ0dw=;
+	b=MQoj+OrChMaHh6AH8B6U0zKGfUgWdpj6GooIr3i2ihhIfcbrObodMZ0+k/wMOCkvL/
+	n5wOKmY8JdTKf3P7s1oJzYG+Df3E4B9upba8ATJUAMWYPUaWQ+RXDvzNNK/jntQU260C
+	i5o11VyKiwaQ/yZJsyFsRAxcL0td6uDslofSI+j8F7YG9vIDV1wwg8YCb5gY0K6RnZOT
+	AlxFEzMBx9KRa0Wjf9Jl1G8aRmVY5kBHLfqLHCrIfnOW3e79N0Aiz+gukmsXi3vv3gmU
+	XZHDpCafv4oWFlZJWazUkwT0s0nBbSNUj1961AlN1XqDNI4+BiHDjwkKaq5eNYADbqLh
+	igXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=RT0AFngnHJk2qaSScXzVg+jorrRG/VFdZCQbeqtwTto=;
-	b=US0nLZoNE0IzSpcOTNCuij7f58lK6gEj8lOvp3nSccOO3FwzBfKSrT62RElNecOABi
-	89hVUaaGva+Rba80/JrTMTazxSHsRnOlk7m7HT0QL7CaVpOK7xR3yjK9exQ7hRER+GlY
-	/c4ZU6ORLvLDxvHVlz6vnxzZPBXG/5fYHwScaZnuxifD93Sr6OYtQn9aR/rPwxdNzvWh
-	JRfknzG4JrXrm+yZpkpj+e/sA+lkt8w01l/ttFKpjCr1c8XkBTcxetFmy34S8YQ4F2ot
-	QrU9ThVQq3QFx5lEzoQ8s8wYwlPvGypiQBdt/l/Si3a4vJk3XJ6VQLflenIP/6PelrV8
-	WHSA==
-X-Gm-Message-State: AMke39mI2Qrj3EL1hz97eplARfzbW3CUvS+jGQF4A05nYYVKGSH1dCpnyitYx9x+rNcGAA==
-X-Received: by 10.28.181.145 with SMTP id e139mr6292321wmf.103.1486717659788; 
-	Fri, 10 Feb 2017 01:07:39 -0800 (PST)
+	bh=IPeobukaQ9TPS4t90/itGg1SKNsTRam9ZSyA/mnZ0dw=;
+	b=rHCkO5X0dDhUM0RPcoTScllvx2mLgaDouiT5zLc1hf+UzgNHaVXvo6V5EknREIG5e0
+	nSkbVTDkmYCbqMC54V/NxejhLs7+oW4laetJZGJ7NCEHuypoSCJpzuZ975WFoIaYHK1+
+	PhUl9uh/1t4joiIBsvtM+cuqDR5zBppXiQx4iSx4BaYnjvqc1Fq1kgV4ON77snpA8Ts3
+	UAsc19F3VhCIq6pPxgzJZFrWOKfsoXQY6R24w9zgPxfxwKPE/Z+6c0oN8KyFEQ2hn0Qn
+	9cnGM7dkq+d3/e8h/GGI3j1lw7z1F2/Z0G87tNJm8uUepR8iEJz95AZlvAnxvfK+35oC
+	Rr/Q==
+X-Gm-Message-State: AMke39nPkFzKrw1bZCSIOa2NA8CeIS9CZfr8GKnIPuED9/aBm74kY89c81JAmyPoNqiNow==
+X-Received: by 10.28.153.196 with SMTP id b187mr24592477wme.53.1486717660898; 
+	Fri, 10 Feb 2017 01:07:40 -0800 (PST)
 Received: from nb-lx-hgc-001.peiker-cee.de
 	(business-176-094-229-202.static.arcor-ip.net. [176.94.229.202])
-	by smtp.gmail.com with ESMTPSA id v128sm565618wmv.2.2017.02.10.01.07.37
+	by smtp.gmail.com with ESMTPSA id v128sm565618wmv.2.2017.02.10.01.07.39
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 10 Feb 2017 01:07:38 -0800 (PST)
+	Fri, 10 Feb 2017 01:07:40 -0800 (PST)
 From: andreas.kling@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Feb 2017 10:07:21 +0100
-Message-Id: <20170210090722.11753-3-andreas.kling@gmail.com>
+Date: Fri, 10 Feb 2017 10:07:22 +0100
+Message-Id: <20170210090722.11753-4-andreas.kling@gmail.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20170210090722.11753-1-andreas.kling@gmail.com>
 References: <CALbNGRQAEX5aBsvsb3rY3CQ1C0V-WFzsJKxnNnLos8LdJJxA9g@mail.gmail.com>
 	<20170210090722.11753-1-andreas.kling@gmail.com>
-Subject: [meta-gnome][PATCH v03 2/3] dconf: fix bash completion in wrong package
+Subject: [meta-gnome][PATCH v03 3/3] dconf: make gtk+3 dependency optional
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,32 +55,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Feb 2017 09:07:40 -0000
+X-List-Received-Date: Fri, 10 Feb 2017 09:07:41 -0000
 
 From: Andy Kling <andreas.kling@peiker-cee.de>
 
-  bash completion is used by dconf itself not by editor.
-  move file to main package.
+  dconf requires gtk+3 only for dconf-editor and is useful
+  even on systems without gui.
+
+  add PACKAGECONFIG for editor, enable it by default if x11
+  is present in DISTRO_FEATURES
+
+  add x11 to REQUIRED_DISTRO_FEATURES only if editor is enabled
+
+  Note: editor will be dropped from dconf in version 0.23.1
 ---
- meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
 diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
-index 2830e717b..f7666cc0f 100644
+index f7666cc0f..e24bde449 100644
 --- a/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
 +++ b/meta-gnome/recipes-gnome/dconf/dconf_0.18.0.bb
-@@ -22,10 +22,10 @@ PACKAGES =+ "dconf-editor"
+@@ -9,15 +9,20 @@ SRC_URI[archive.md5sum] = "69a12ed68893f2e1e81ac4e531bc1515"
+ SRC_URI[archive.sha256sum] = "109b1bc6078690af1ed88cb144ef5c5aee7304769d8bdc82ed48c3696f10c955"
+ GNOME_COMPRESS_TYPE = "xz"
+ 
+-DEPENDS = "dbus glib-2.0 gtk+3 libxml2 intltool-native"
++DEPENDS = "dbus glib-2.0 libxml2 intltool-native"
+ 
+ inherit vala gtk-doc distro_features_check
+ 
+-REQUIRED_DISTRO_FEATURES = "x11"
++PACKAGECONFIG ??= "${@bb.utils.contains("DISTRO_FEATURES", "x11", "editor", "", d)}"
++
++#note: editor will be removed in version 0.23.1
++PACKAGECONFIG[editor] = "--enable-editor,--disable-editor,gtk+3"
++
++REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains("PACKAGECONFIG", "editor", "x11", "", d)}"
+ 
+ EXTRA_OECONF += "--disable-man"
+ 
+-PACKAGES =+ "dconf-editor"
++PACKAGES =+ "${@bb.utils.contains("DISTRO_FEATURES", "x11", "dconf-editor", "", d)}"
+ 
  FILES_${PN} += " \
      ${datadir}/dbus-1 \
-     ${libdir}/gio/modules/*.so \
-+    ${datadir}/bash-completion \
- "
- FILES_dconf-editor = " \
-     ${bindir}/dconf-editor \
-     ${datadir}/icons \
--    ${datadir}/bash-completion \
- "
- FILES_${PN}-dbg += "${libdir}/gio/modules/.debug/libdconfsettings.so"
 -- 
 2.11.0
 
