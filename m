@@ -1,45 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id AE8D86067D
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id E5925773A1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Feb 2017 23:14:25 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id v77so9350856wmv.0
+	Fri, 10 Feb 2017 23:15:45 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id u63so9389231wmu.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Feb 2017 15:14:26 -0800 (PST)
+	Fri, 10 Feb 2017 15:15:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=3hYiR9UO9HshACgDEF5fWHlYFtlquJtO/MQx4v3g5hY=;
-	b=Oxkzf7M+wdRM8RIncvBEDGoDD6qiHZNnQa7o1aURlePgnGVN7l5P4wZBV0aXX8xUgb
-	L+9HuHcLrLUvxwlQ4YwbRzmQN3Gyc+4UNmGU2XP0R3W/3M1rVXyexXIjIB6yIyEC6iz0
-	uTG34xCjeVU7o2S70K0vjQPDfwGpOKIIUUBMeeghILC1jRyEl+i8CwU/JgN41VN+T2rp
-	kShlnuVt1drCSd2nZayXIOdn8zKMWk5hvKtAmQFzabxsyQJxJzGhdOcayb6ptzI+ez4e
-	1vSptYzk8WkI6zJYMhjBPaiTDNSvCkSFDs6FXQIXzJRIg98aoCQVqDH79c+jRChj/e6R
-	6GaA==
+	bh=7AUEoRWVKfqJc1Uy1rxqL4Z05XeUXC85sgN30ue3tu8=;
+	b=eMiWS3t46orgoCGmCJKzQuD5iHfE+3w31CHxPiyqZZ1bKx5RC7p1dB6lwe28bHhEeq
+	G7/uGjRWXR56XzXevJgYbTETgtxhmenfbaGSErBMj5148JB13rGIRBXz/C3qYBDgws3G
+	NO26PTdmSLcyGdsbvffIGIF5E4gzvc17mYt5NDeuz92xsDXPoEsRKvLQ/QdkUlBrvmZw
+	A0A+jRH6cKjixvzkayG/DNnsdbGwzq5XNsPb0Nq7PyUIKpO0L3yXjGFn7OEcJVWFgziv
+	OnkrDbR5ziIdR1+4kbhiy6soFyOn9GLUEdW+SppCam42ZrRHqrk0oF3Al6W4U9gZHuOc
+	G8Qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=3hYiR9UO9HshACgDEF5fWHlYFtlquJtO/MQx4v3g5hY=;
-	b=nNFnuRn4FLsy+zIAVEXXD/fioSuB3iT+kvLW07FWwPtYfM72++pGUnXpSuaG2TVpzF
-	/KHd7AhqaMNZutucSNiNQsnPBwXt4n7XVmMmodIxMtcPYNQPfeDjYkizzdlXbPHn9z0N
-	txV3tKtjqTG0WbXX0n837jY2grArQXn6LsSQA5UZDbk+UnkJND/9w97pX9cpSDCT8ZMF
-	LsueE/kryeDXztVWkGlv+ZI2UWn0G4Ot/SUNUxcZWi/OyIOuIEGXTfQarWT9b93FuVto
-	o5vMgHmswwm68uEsp8Q4msWei1+Ow6ZR1MkZXyxb4e0jXcMN11Nxfhr87JYLmgwvA069
-	A/YQ==
-X-Gm-Message-State: AMke39lYv1arZ118Gl55RSCaADTR6qq6y++mutO+nYLiX5kYLvhR0fJFdOZ1j7vmM6OlL1uX3bO8aAqFJN6a5w==
-X-Received: by 10.28.74.69 with SMTP id x66mr9019058wma.124.1486768465156;
-	Fri, 10 Feb 2017 15:14:25 -0800 (PST)
+	bh=7AUEoRWVKfqJc1Uy1rxqL4Z05XeUXC85sgN30ue3tu8=;
+	b=WHVeMAwhcJTQt6xaU2P7/jrY04FSsGvoYDWCznSlDXmDjjOOnTTBOrohXwQ8azoUpJ
+	y5hrIX6jpWVAxAyD10txTz5CeCW8UdEc820gMukMyRbGoBwKaJwAgBDtLsNoihgWbxWz
+	BZ72h8+32KIbbZ4EAjcrrzxegqQFKCIMCz3dwpXxZE/NqNYnqXaOHgncRFfMWkTfKvuy
+	AWmKtOaFB/N9orbsohCl6z1p5DNC9ilCwTw0thb6j6LB0Z9X2z7uTJWCkc7gpOWJ3rDV
+	SvZ9wyUKL0XVbWiLEhDAszEWf8bpz7XRnkrUiA+GjAUYNL0d7zvrC5y5Pzy/rTbdO79q
+	QUGA==
+X-Gm-Message-State: AMke39kx0jXapBx49h7f1M8MoPdB3VZnbHKDsQ/DY5w9cgzKIMjEHcURXBMePmv7JP4TAeu7kNHbavbTgYOXIQ==
+X-Received: by 10.28.6.78 with SMTP id 75mr10100008wmg.81.1486768545736; Fri,
+	10 Feb 2017 15:15:45 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.80.148.174 with HTTP; Fri, 10 Feb 2017 15:14:24 -0800 (PST)
-In-Reply-To: <1486399036-28846-2-git-send-email-akuster808@gmail.com>
-References: <1486399036-28846-1-git-send-email-akuster808@gmail.com>
-	<1486399036-28846-2-git-send-email-akuster808@gmail.com>
+Received: by 10.80.148.174 with HTTP; Fri, 10 Feb 2017 15:15:45 -0800 (PST)
+In-Reply-To: <CAMKF1sqH1XGcG47CGp-CcgE5EYJ2_JE6wBw9V3=XDJ9-=LUHsw@mail.gmail.com>
+References: <cover.05852f1b820c067f96dd93729e6fdb949d51579d.1486546542.git-series.patrick.ohly@intel.com>
+	<c480e4bea612959118bcdbc09e129084fd1d5866.1486546542.git-series.patrick.ohly@intel.com>
+	<CAMKF1spq2eiKHXrz19ZzRWmwzWUKsSSHbunLfqRND98SjkHgVg@mail.gmail.com>
+	<1486660318.13854.105.camel@intel.com>
+	<CAMKF1sqH1XGcG47CGp-CcgE5EYJ2_JE6wBw9V3=XDJ9-=LUHsw@mail.gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 11 Feb 2017 00:14:24 +0100
-Message-ID: <CA+chaQc2TgGJvYYzW3UZG3tOfpw3nKokdX6WYBkQ11fFeMtuBg@mail.gmail.com>
+Date: Sat, 11 Feb 2017 00:15:45 +0100
+Message-ID: <CA+chaQdusR+PaaJNB8gp0nqrmV+rRUos+SCiXN1Z3aCUiKHGFw@mail.gmail.com>
 To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-python][PATCH 2/2] python3-pycrypto: add python3 version of pycrypto
+Subject: Re: [meta-oe][PATCH 1/4] lvm2: remove unbuildable 2.02.138
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,57 +55,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Feb 2017 23:14:26 -0000
+X-List-Received-Date: Fri, 10 Feb 2017 23:15:53 -0000
 Content-Type: text/plain; charset=UTF-8
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-from the .inc file doesn't help to find cross-compiling.patch (because it
-still poinst to python3-pycrypto not python-pycrypto
+It seems to be buildable when you add:
 
-Parsing recipes...WARNING: meta-oe/meta-python/recipes-devtools/python/
-python3-pycrypto_2.6.1.bb: Unable to get checksum for
-nativesdk-python3-pycrypto SRC_URI entry cross-compiling.patch: file could
-not be found
-WARNING: meta-oe/meta-python/recipes-devtools/python/
-python3-pycrypto_2.6.1.bb: Unable to get checksum for
-python3-pycrypto-native SRC_URI entry cross-compiling.patch: file could not
-be found
-WARNING: meta-oe/meta-python/recipes-devtools/python/
-python3-pycrypto_2.6.1.bb: Unable to get checksum for python3-pycrypto
-SRC_URI entry cross-compiling.patch: file could not be found
+EXTRA_OECONF += "--disable-selinux \
+                 --with-cluster=none \
+                "
+at least that's what one of my .bbappends does.
 
+On Thu, Feb 9, 2017 at 6:17 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-On Mon, Feb 6, 2017 at 5:37 PM, Armin Kuster <akuster808@gmail.com> wrote:
-
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  meta-python/recipes-devtools/python/python3-pycrypto_2.6.1.bb | 11
-> +++++++++++
->  1 file changed, 11 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/
-> python3-pycrypto_2.6.1.bb
+> On Thu, Feb 9, 2017 at 9:11 AM, Patrick Ohly <patrick.ohly@intel.com>
+> wrote:
+> > On Wed, 2017-02-08 at 20:21 +0000, Khem Raj wrote:
+> >> Can you check if this is the last gpl2 version
+> >
+> > According to the recipe, both 2.02.138 and 2.02.166 are under LICENSE =
+> > "GPLv2 & LGPLv2", and that also seems to be what the current code is
+> > licensed under: https://git.fedorahosted.org/cgit/lvm2.git/tree/
+> >
+> > So GPLv2 vs. GPLv3 wasn't the reason for keeping the old version.
+> >
 >
-> diff --git a/meta-python/recipes-devtools/python/python3-pycrypto_2.6.1.bb
-> b/meta-python/recipes-devtools/python/python3-pycrypto_2.6.1.bb
-> new file mode 100644
-> index 0000000..00ea5d0
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-pycrypto_2.6.1.bb
-> @@ -0,0 +1,11 @@
-> +inherit distutils3
-> +require python-pycrypto.inc
-> +
-> +SRC_URI += "file://cross-compiling.patch"
-> +
-> +# We explicitly call distutils_do_install, since we want it to run, but
-> +# *don't* want the autotools install to run, since this package doesn't
-> +# provide a "make install" target.
-> +do_install() {
-> +       distutils3_do_install
-> +}
-> --
-> 2.7.4
+> Thanks for confirming.
 >
+> > BTW, do all mails from openembedded-devel have Reply-To:
+> > <openembedded-devel@lists.openembedded.org> set? openembedded-core
+> > doesn't seem to have that.
+>
+> yeah I guess reply-all will send to all but I never tried that
+> >
+> > I have a mail filter in place which will bring personal replies to my
+> > attention sooner, but Reply-To to the list defeats that.
+> >
+> > --
+> > Best Regards, Patrick Ohly
+> >
+> > The content of this message is my personal opinion only and although
+> > I am an employee of Intel, the statements I make here in no way
+> > represent Intel's position on the issue, nor am I authorized to speak
+> > on behalf of Intel on this matter.
+> >
+> >
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
