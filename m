@@ -1,46 +1,43 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f169.google.com (mail-ua0-f169.google.com
-	[209.85.217.169])
-	by mail.openembedded.org (Postfix) with ESMTP id BE71965CBB
+Return-Path: <sujith.h@gmail.com>
+Received: from mail-ot0-f176.google.com (mail-ot0-f176.google.com
+	[74.125.82.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 183D977332
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Feb 2017 11:57:58 +0000 (UTC)
-Received: by mail-ua0-f169.google.com with SMTP id 35so26174762uak.1
+	Fri, 10 Feb 2017 13:05:51 +0000 (UTC)
+Received: by mail-ot0-f176.google.com with SMTP id f9so27429132otd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Feb 2017 03:57:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to:cc
-	:content-transfer-encoding;
-	bh=U8TFIKZ56muehR3YL1N+VnLqZvI0rMLtQXp1shXPuYs=;
-	b=a40BXIzbP1piGnidAhSwhXkeGelaTMqSmfjWynO62KksiLh4caDrndtbdwtwefSioz
-	tkA2/SX8+4J+SzdI3k6DklJDp89xdt+UOOhydyw81PQRfz2ee7lO/TlPuhj/sYRbhjyY
-	5zNnKdZnTJ36ZgQbZZSIPMNdQd0X6AMx0iluM+DXjIUvwR9L2li9+0qyOMIHBSOhKFYq
-	PzfYfYQAsS1XnnuOecs1EkD0wNGne6K1Tb7kbwtgmKyH85p5hsNVeSaQqN9BjOqWa37H
-	qPA5CfobMfxnzrRB/lGt7qL22zE/qbWBaYGAqVIH4ho+r5cG9XRt0Iz9SHodkSHIlmtj
-	aZTQ==
+	Fri, 10 Feb 2017 05:05:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=REx+P1J1jApd0tYC55UmbUJ112bMjar33g4e8o9uDjg=;
+	b=jYFbVwUyrat208kLuDvR+LpV5QRXKZs+29RbGsUIWU9zK+hkz3WRlFio+heA2mHkS9
+	RC/Js5hYa9mb++GHvsetLn+XTsh7iCf0NInp2zYxZB+0f78v5F73ndQBN2SLgmrcet0l
+	vbIMcki8Q/6rfJyCcLS2B2VKtGtj7B6xLCOVqnE95iwWR5h9Ttr4/KNr+GxdtKHgn8LT
+	ph6mE6mpf8+HE7xIyoHWxiHsfymps1UryShddhNUITwqlKv27n1u2gxKFumetJjZJSSt
+	P1VTKxBmg07UcqZyConDlw1Dy5yVVU6Dtsv8ZUOqiTk5pf44pOh+KEfDEvKu8IFv+QO4
+	Uv5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc
-	:content-transfer-encoding;
-	bh=U8TFIKZ56muehR3YL1N+VnLqZvI0rMLtQXp1shXPuYs=;
-	b=Z9FT5+B1KF111H8EsN+a8JEY/Ug1jPjEyfQKOrdZ8uZGv2wfseu/GaXKWHlSAIJcGT
-	Pd5D4WZcDFsVa6YZj62bNVvkH4mtXgspsxhq0Pzx3Itkw/AWgpW/NZU042uueYRFyU1j
-	flw9wTSWJf7WO/dmvgwElACsTS5YOBtAZcAArBJ2I5/GBIvAYcCJGIhwzLEEcrA+6jUr
-	5QQ1J/RLuXdWxWXEBeLNQnKWtFrf4M8Et+qsCy1uRuGcIs6ZJmDmGs9dFK/zTSlmHN1g
-	gpaOALMFiuPx7pPpkvLxGm5lZEwnoTRnkJxANgoL68Y56fwG7VE5AWWzU26xiSgGASiT
-	/BLw==
-X-Gm-Message-State: AMke39nmHkdbEMKEpF351TwBOHVce+rpuH9OsVO0jPz0EbD77O39ZRFPMfE9Rs0Wcg8cZZ5yqwVaYArO+puoNw==
-X-Received: by 10.176.3.46 with SMTP id 43mr4429147uat.79.1486727878484; Fri,
-	10 Feb 2017 03:57:58 -0800 (PST)
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=REx+P1J1jApd0tYC55UmbUJ112bMjar33g4e8o9uDjg=;
+	b=AwYAIVMNnQX4G2pO9eaK2edLxgo31Gt07qZ/BYzJG1kfhU2kP3ZAubw/1/GUBf3PAS
+	ACajYwy0noxD4QH41H5cHZwRVD6Y1Juojjv/gU6lwwff9ijhr6dWVs2tQYs9OMnulQrm
+	FkrsQXZke2A7CSCa/uYxR3Lg/HsyN/EQlWyTDutZUQe+8GpnJwQXYvggwKORiMNPkBgb
+	qCSxxywQZcv37xp5KwrJkqk8lf8r2KGH5c3W2bqeDMxntPaTSxiDA1GwF8ItECZO7Qn/
+	3ZliJx9wSE4KhRM1YmLqO1uvq2j+4BkfqXJMnVqlgb9R3Y+S16iP/s4um+tYKK00ap/l
+	fKnQ==
+X-Gm-Message-State: AMke39lfQ7OMMQSz9sms3T1biMEUJgOMhWlpb82BoyUqsRc6oxhAN/D2tb8F1V//LNa3s2g0Q8boMuVk6EYdNw==
+X-Received: by 10.157.47.234 with SMTP id b39mr4531705otd.0.1486731952039;
+	Fri, 10 Feb 2017 05:05:52 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.176.91.68 with HTTP; Fri, 10 Feb 2017 03:57:58 -0800 (PST)
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Fri, 10 Feb 2017 12:57:58 +0100
-Message-ID: <CALbNGRTmi8JOaeLgBONgkMTgYcBVoTp_L6u54NsLU3+Qqh9wYg@mail.gmail.com>
-To: development@qt-project.org
-Cc: "openembedded-devel@lists.openembedded.org"
+Received: by 10.74.67.210 with HTTP; Fri, 10 Feb 2017 05:05:31 -0800 (PST)
+From: sujith h <sujith.h@gmail.com>
+Date: Fri, 10 Feb 2017 18:35:31 +0530
+Message-ID: <CADyYWLn3C_SBJ-t0fJe1kR5-+VE46dYcGcedeA-_3wafAvYnWQ@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] Qt5.8 qdbuscpp2xml broken for kde baloo?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-qt5] Query regarding segmentation fault for Qt5 opengl examples
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,72 +50,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Feb 2017 11:57:58 -0000
+X-List-Received-Date: Fri, 10 Feb 2017 13:05:59 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 10, 2017 at 11:19 AM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> Hi,
->
-> I am cross building Qt and KDE with yocto environment. After Update to
-> Qt 5.8 the package baloo from KDE KF5 is broken. After investigation I
-> found that qdbuscpp2xml 5.8 build misses some public slots.
->
-> I get for Qt5.8 build by yocto:
->
-> qdbuscpp2xml -a filecontentindexer.h
-> Unregistered input type in parameter list: QDBusMessage
-> Unregistered input type in parameter list: QDBusMessage
-> <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection
-> 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
-> <node>
->   <interface name=3D"org.kde.baloo.fileindexer">
->     <property name=3D"currentFile" type=3D"s" access=3D"read"/>
->     <signal name=3D"startedIndexingFile">
->       <arg name=3D"filePath" type=3D"s" direction=3D"out"/>
->     </signal>
->     <signal name=3D"finishedIndexingFile">
->       <arg name=3D"filePath" type=3D"s" direction=3D"out"/>
->     </signal>
->   </interface>
-> </node>
->
-> On my local fedora Qt5.7.1
-> qdbuscpp2xml -a filecontentindexer.h
-> <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection
-> 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
-> <node>
->   <interface name=3D"org.kde.baloo.fileindexer">
->     <property name=3D"currentFile" type=3D"s" access=3D"read"/>
->     <signal name=3D"startedIndexingFile">
->       <arg name=3D"filePath" type=3D"s" direction=3D"out"/>
->     </signal>
->     <signal name=3D"finishedIndexingFile">
->       <arg name=3D"filePath" type=3D"s" direction=3D"out"/>
->     </signal>
->     <method name=3D"registerMonitor">
->     </method>
->     <method name=3D"unregisterMonitor">
->     </method>
->   </interface>
-> </node>
->
-> You can see that qdbuscpp2xml complains for unregistered QDBusMessage
-> and the slots 'registerMonitor' and 'unregisterMonitor' having
-> QDBusMessage in parameter are missing.
->
-> Since yocto builds also native qdbuscpp2xml it might be possible that
-> there is something missing for qdbuscpp2xml.
->
-> Pointers how to get around or even confirmation of a bug are welcome -
-> baloo's filecontentindexer.h is attached
->
-I have straced qdbuscpp2xml build with Qt 5.7/5.8
+Hi,
 
-My 5.8 qdbuscpp2xml does not try to load a single Qt library. 5.7
-qdbuscpp2xml loads libQt5DBus.so.5 right after start. This let's me
-assume there's something wrong with our build of qdbuscpp2xml.
+I am trying to use poky master + meta-qt5 ( krogoth branch revision :
+2ae48d180aebf5bf5137a1828765d41198b5ab1a). I have made the changes to the
+local.conf as mentioned in "4.6.3. Using x32 Right Now" from
+http://www.yoctoproject.org/docs/2.2/ref-manual/ref-manual.html. Once I got
+the core-image-sato built I installed the qtbase-examples to the target. I
+noticed that except contextinfo examples all other examples in opengl
+directory are failing with segmentation fault. Can any one help me with
+some pointers regarding the failure. If so that would be great.
 
-Andreas
+Thanks,
+Sujith H
+
+--=20
+=E0=B4=B8=E0=B5=81=E0=B4=9C=E0=B4=BF=E0=B4=A4=E0=B5=8D =E0=B4=B9=E0=B4=B0=
+=E0=B4=BF=E0=B4=A6=E0=B4=BE=E0=B4=B8=E0=B4=A8=E0=B5=8D
+Bangalore
+<Project>Contributor to KDE project
+<Project>Contributor to Yocto project
+http://fci.wikia.com/wiki/Anti-DRM-Campaign
+<Blog> http://sujithh.info
+C-x C-c
 
