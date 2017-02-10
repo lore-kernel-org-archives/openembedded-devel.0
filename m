@@ -1,46 +1,48 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wr0-f174.google.com (mail-wr0-f174.google.com
-	[209.85.128.174])
-	by mail.openembedded.org (Postfix) with ESMTP id EECD6774A9
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Feb 2017 18:53:00 +0000 (UTC)
-Received: by mail-wr0-f174.google.com with SMTP id o16so114728881wra.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Feb 2017 10:53:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=qxWpcSMvF3fDbYxGg8lb9oqothf1LT/sqRWTUF6U3ok=;
-	b=omzEVOnymwjAFDr63lrOdKlzHWxR9H3nbBG1aPqZplq30KQ6Ezl8/c1yGxl/hUKC9/
-	I/TSQsvBa4MxevUrM0mCfsuC/kf4/tR6abNy+xjTlUIemLWOCitPIs1dc1VzdySsqjxm
-	I4pAuBtP02LR13Bxp53eUXiAgVoi8x09+l4fa7D/a1KAgJThv77WghtMoC8ceSgNEEkL
-	s8jZjT6KkQUb8kvlcg3laTWGOJs9shnqgGsRTOsDGiu78V+d7F3wza4VUb7MKb+/79A5
-	bHAkcdduFLZawvXiX/6CXjVkz8w8QlhQqbcyg2e25Na5Vx0HAIV8PpsDbkfKc+xENYW9
-	4ofA==
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ua0-f169.google.com (mail-ua0-f169.google.com
+	[209.85.217.169])
+	by mail.openembedded.org (Postfix) with ESMTP id DD2C8771D4;
+	Fri, 10 Feb 2017 20:20:02 +0000 (UTC)
+Received: by mail-ua0-f169.google.com with SMTP id y9so36867348uae.2;
+	Fri, 10 Feb 2017 12:20:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=Q2Mj440SPDC2zboavs1lzWKinxtSAB3D3wphy5KTwQo=;
+	b=FMvAZIHWqpAjPP5PbuS5pCKSIDMl1EZm+RQjtm471v2rAtWAb5HmxfOAb/N7WE7Mtc
+	jZ3k/cL9CDlkb78QwKtg2W3TJqp46iGpOaYREXIZ7Is/hst/GfGl+UhKBCtkED4y7rl1
+	OVmfQmrrnvW4XgL3vHYcihgg6znyLfu5zzpIuHvTaRewM0FUbBykKLi6OzUnnV+B8E60
+	CmyGXeFavb0bYq9rmfdAGbaFEjojL3qQw02nc3ptjyXbuhQjJo87QF6SnFoMmw/kqzha
+	JtTjFHFSCCar2HdWVNvV425/uc9gHJh4cfcd/KKSH59jgnKEbABgP+KuNO4gnBnn83S3
+	UUYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=qxWpcSMvF3fDbYxGg8lb9oqothf1LT/sqRWTUF6U3ok=;
-	b=SbbxAAXUG6cU12SwDRHWdavUtywMonqGk7wL+V1P5cOMsxS87Giau5heUE5miKocZ/
-	vv/Occt9+YRF9ZvwFPj7Q/uqXuXX+IS83CvOXVnSyN9sc8toNIBrMrM/6Ygh/dEmCeVd
-	Zert8Cs/UEllgP/ahtIAYqkx91elMRFhaZTO6a2ukNCiloxJWyx57aYoAZJKgO5EIHnj
-	5ercNjg5g6t30iSUEfaIL8LwY5Lvwg34wSR0otNt0FBQ2BV6CyV3NlwNCbxhjxGJnueo
-	5A4XhiALXS+jYnirb8KdaRyisQnNWs/IPR0MgbXVhG/OD+gQjsRcJ5pOGTM0D862WQGd
-	sr2A==
-X-Gm-Message-State: AMke39mbx2XF/AGi4lzI8Xm7rv4DLN0e+ahj8JsCn6Q7/plZHyowhnX0pYPckyb/N9V8OA==
-X-Received: by 10.223.168.111 with SMTP id l102mr8923222wrc.150.1486752780325; 
-	Fri, 10 Feb 2017 10:53:00 -0800 (PST)
-Received: from linuxdev.toradex.int ([46.140.72.82])
-	by smtp.gmail.com with ESMTPSA id g6sm928921wmc.30.2017.02.10.10.52.59
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 10 Feb 2017 10:52:59 -0800 (PST)
-From: Max Krummenacher <max.oss.09@gmail.com>
-X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Feb 2017 19:52:39 +0100
-Message-Id: <1486752759-5996-1-git-send-email-max.krummenacher@toradex.com>
-X-Mailer: git-send-email 2.5.5
-Cc: Max Krummenacher <max.krummenacher@toradex.com>
-Subject: [meta-qt5][PATCH][master][morty]] populate_sdk_qt5: use _append operator
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=Q2Mj440SPDC2zboavs1lzWKinxtSAB3D3wphy5KTwQo=;
+	b=DwqYBXs5XXWJX5c0aBeFyMnRhairpTF04inoKkz0ptfVoO9oCeSyOvkMNQLZvpAOCY
+	/wZ6Vz4pXp4FqTbJO/ncTUP9Zfq0IHDe9JdyltMOv1spXnd2xtBKkEKGAyklb/04UyiP
+	VCTsy+79eNUp6RDsGqjJNQk6Y7WAokzfoTLiV5wULf5+7Yof/nA6EeyiA4F1YE8be+Ib
+	e2Mdl2MomC9ZwdOy9oujKIBIYE4G21Vh4SSjX3CxWcSi0JEHOoP9rmq/PKeYBa/Zl45y
+	GGLxSmwhwvl7I7O81f/VJkTD6n+dnBpoUE+B9nmm5v5jcZSoSwTKqU2Cmp1Gj6RV7yi4
+	9ugw==
+X-Gm-Message-State: AMke39n/w6BgqAMm5Lf104PsQqdNS8lcTjWM+B2ikUIIaUcj3e1mSYN0n6b3KSkJvvbQt+d/tgOlv/i8MwZ2/Q==
+X-Received: by 10.176.0.149 with SMTP id 21mr5545373uaj.81.1486758002962; Fri,
+	10 Feb 2017 12:20:02 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.176.91.68 with HTTP; Fri, 10 Feb 2017 12:20:02 -0800 (PST)
+In-Reply-To: <20170210162637.GB3021@jama>
+References: <20170210082811.GA3021@jama> <20170210162637.GB3021@jama>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 10 Feb 2017 21:20:02 +0100
+Message-ID: <CALbNGRTfzBgfDRuwNk93KYMNgWWio6X+kmYdg71+M+MdCkMZuA@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-02-08
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,33 +55,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Feb 2017 18:53:01 -0000
+X-List-Received-Date: Fri, 10 Feb 2017 20:20:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-populate_sdk assigns TOOLCHAIN_HOST_TASK and TOOLCHAIN_TARGET_TASK with ?=.
-Thus depending on the order in which populate_sdk and populate_sdk-qt5 get
-parsed the assignments from populate_sdk are discarded and the resulting sdk
-is missing among others the environment-setup script.
+On Fri, Feb 10, 2017 at 5:26 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Fri, Feb 10, 2017 at 09:28:11AM +0100, Martin Jansa wrote:
+>> =3D=3D Number of issues - stats =3D=3D
+>> {| class=3D'wikitable'
+>> !|Date                     !!colspan=3D'3'|Failed tasks                 =
+    !!colspan=3D'6'|Failed depencencies                    !!|Signatures   =
+         !!colspan=3D'12'|QA !!Comment
+>> |-
+>> ||            ||qemuarm       ||qemux86       ||qemux86_64    ||qemuarm|=
+|max||min     ||qemux86||max||min     ||all   ||already-stripped      ||lib=
+dir        ||textrel       ||build-deps    ||file-rdeps    ||version-going-=
+backwards       ||host-user-contaminated        ||installed-vs-shipped  ||u=
+nknown-configure-option      ||symlink-to-sysroot    ||invalid-pkgconfig   =
+  ||pkgname       ||
+>> |-
+>> ||2017-02-08  ||96    ||100   ||100   ||N/A   ||N/A   ||N/A   ||N/A   ||=
+N/A   ||N/A   ||0     ||0             ||0             ||2             ||0  =
+           ||6             ||36            ||0             ||0             =
+||0             ||0             ||0             ||0             ||
+>> |}
+>
+> During this weekend I plan to start adding PNBLACKLISTs to failed recipes=
+.
+>
+> With this number of failures the builds don't help to spot new issues.
+>
+> If you care about some of the listed recipes, please send patches or at
+> least send e-mail saying that you plan to fix them soonish.
+>
+> Many of these failures aren't hard to fix, I have already fixed all
+> recipes I care about (which are included in some images I'm building),
+> but I don't want to spend more time fixing (or even building) recipes
+> nobody uses (or cares about).
+>
+> If you don't send the fixes before Sunday evening, than no big deal,
+> you will just need to update commit with the fix to also remove the
+> PNBLACKLIST from the recipe before sending it to ML.
+>
+OK I'll give my images a try this weekend.
 
-Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
----
- classes/populate_sdk_qt5.bbclass | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/classes/populate_sdk_qt5.bbclass b/classes/populate_sdk_qt5.bbclass
-index bbf137d..a10341d 100644
---- a/classes/populate_sdk_qt5.bbclass
-+++ b/classes/populate_sdk_qt5.bbclass
-@@ -2,7 +2,7 @@
- 
- inherit populate_sdk_qt5_base
- 
--TOOLCHAIN_HOST_TASK += "nativesdk-packagegroup-qt5-toolchain-host"
--TOOLCHAIN_TARGET_TASK += "packagegroup-qt5-toolchain-target"
-+TOOLCHAIN_HOST_TASK_append = " nativesdk-packagegroup-qt5-toolchain-host"
-+TOOLCHAIN_TARGET_TASK_append = " packagegroup-qt5-toolchain-target"
- 
- FEATURE_PACKAGES_qtcreator-debug = "packagegroup-qt5-qtcreator-debug"
--- 
-2.5.5
-
+Andreas
 
