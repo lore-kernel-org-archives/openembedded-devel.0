@@ -1,47 +1,47 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 036457198A
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F1C07198A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Feb 2017 18:33:54 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id r18so11750802wmd.3
+	Sat, 11 Feb 2017 18:33:55 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id v77so11684402wmv.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Feb 2017 10:33:55 -0800 (PST)
+	Sat, 11 Feb 2017 10:33:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=WxZzU9iZZgytBKx4LVCEe3OoFMs5Ht4QPyUCsyqdaqA=;
-	b=lG+B9fsuKt8odfFOK8dVyL9z/4b3bAgbvigkSXE4+0jtw/WrFHIq67mFi5Bk9YQn7S
-	D8WJaaUHBCU4an1rEplGF4psgZE7cN03fwZxdw2b1NQ6/bIYu8N5AoIOGXEZ+nkBVOUL
-	W4ZTWIBYNA6BbBo1CTONSHCy2+QyHSO7PGavwsytPQsZ792PfBPmDOsmy86GTZGanMDj
-	we5JnI3obll3EJuF8zDMkYDmiG7LLyVaX/2OygUVwfBHNo7D8uKMj2OJYHymPRp+4kJo
-	Aer2RMlnMcnpJSt9i0a5ibnAFjLHP0qzYki+L3SpCHuVcPs2Bj4+3E/VPpAsRWv+ddUx
-	/Osw==
+	bh=akjZ2wuFu8SfP+kzEedgVuJwUKahH00lGIppdUVz0RE=;
+	b=vZPvPzlIDsIuCKcOJVae2S4DpXp2H60ZxUV95anZJPBWdYEtbqmePr42DxH5hk3UHg
+	TgTAdYcXu77pJ0I6b7qC9zl+VC4TYYhPudBRscb3shdYJERY2icwjHx6OmLf1uDNQFIS
+	aQZ/PCe6YXbgcCIQYBW0/Zr3f6LxbLys/pS3Xcu1JuI2Ugd516PxKekbC2zvygCQ6V1M
+	CCtJ8p48M7VykSl3gKw58FucrVVrN0R7hmrWUc0ZKMkhXl7jZh/wXSrP/150q8LIlXhA
+	L4hLSSOzVqM9uV4s8yj08y3g4gHfW8psDeNGIfi6yLQQ+8S4V+qtHYEE5AO7H58QfBhb
+	izjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=WxZzU9iZZgytBKx4LVCEe3OoFMs5Ht4QPyUCsyqdaqA=;
-	b=Hj83K8rgtYEvEWVmATiezJ9eJfW5XZE5dGwkHgnCJDtEYPPi1mUgqftsS92TD3CXh1
-	qGC6Zjh+EnAK6cTdgKCtTNn1QI6sagj65bHOw7gt34/3ad2i7bavCXFFuDkIgoC9VXhx
-	ZHHvviiDG75o7qRW1McmJe08DJEwcoxi7lGuPC4jC+mDaXruarMXO/8/r8b001QLjavE
-	SI1sNcBWS1Yn3yxVGp4ve10GXD4+Wuldy++ArBzzTJcy9SOwPpagacNmcv9MZ9Tz1BH4
-	nAS8BxFkStX5761kZGUq675SL3fNRAVr9UnGYcRPEMcPh5xZF7RqhekTgEO+JbPWYCYr
-	hlnw==
-X-Gm-Message-State: AMke39lxyYmF+DG5yQbaK+rgWgw7ou/r1q8/REZRJEADbroB1u5t50+Ff6yI+aeE3f97YA==
-X-Received: by 10.28.147.72 with SMTP id v69mr12498685wmd.51.1486838033787;
-	Sat, 11 Feb 2017 10:33:53 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	y30sm7224057wrc.23.2017.02.11.10.33.52
+	bh=akjZ2wuFu8SfP+kzEedgVuJwUKahH00lGIppdUVz0RE=;
+	b=JmTDSpfyDpDXft/bd+PDC2JYh4/J9Pnrk37icDEdZ7+YLMAXp2XlmOpdO0jHjGBhJU
+	TNjP0ExwBSq4xWR58atw8wKrbXH0UtUz+u+cR6cwzKl4h3U1dOAQS6DAbqqeCxogofMG
+	1sfk7VskA/bpWB0agWYqgecNIGamyEMtIE8seHSCspioNyfqjHFKD/8iMH0hIwH73aS+
+	q4Nm3NS/85WAL3ezUQ1JcIu61OhWjNQELrhc6AO5vdatKVv0CbpyGHUgo9NQVk2ImINS
+	jzWK3m7SwQ95rMTvPFWQ7KS/JESzjUaux5wtZprpy5LDsAUtknhxNm4D4OPN+eekyQM/
+	WNlw==
+X-Gm-Message-State: AMke39mP1e+/W2lbG1r/OFnuCjwpm1FeGcm6BO7qOHrG7qDlGt2HyZWKfX647mIXkV8OKw==
+X-Received: by 10.28.214.144 with SMTP id n138mr29764405wmg.136.1486838035282; 
+	Sat, 11 Feb 2017 10:33:55 -0800 (PST)
+Received: from localhost ([217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id q1sm6038722wmd.6.2017.02.11.10.33.54
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 11 Feb 2017 10:33:52 -0800 (PST)
+	Sat, 11 Feb 2017 10:33:54 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 11 Feb 2017 19:33:48 +0100
-Message-Id: <20170211183350.4889-2-Martin.Jansa@gmail.com>
+Date: Sat, 11 Feb 2017 19:33:49 +0100
+Message-Id: <20170211183350.4889-3-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.10.2
 In-Reply-To: <20170211183350.4889-1-Martin.Jansa@gmail.com>
 References: <20170211183350.4889-1-Martin.Jansa@gmail.com>
-Subject: [PATCHv2][meta-oe 2/4] python-edbus exquisite elementary libeweather unionfs-fuse xfsprogs gmtk devilspie2 gnome-backgrounds gnome-desktop gnome-mime-data gtk-engines gtksourceview2 libgnomekbd libidl-native onboard libgpewidget ubi-utils-klibc kexec-tools-klibc gupnp-igd gupnp-tools dvb-apps gstreamer mpd crda openconnect openflow netcat-openbsd wireshark gnokii libmbim mosh networkmanager-openvpn libtelepathy dbus-daemon-proxy libdbus-c++ glibmm geany php vala-dbus-binding-tool collectd libgxim pywbem gtkhtml2 libglade fbida fontforge libsexy wayland-fits xstdcmap xf86-video-glamo font-adobe-100dpi font-adobe-utopia-100dpi font-bh-100dpi font-bh-lucidatypewriter-100dpi font-misc-misc crash audiofile a2jmidid libsdl2-mixer libsdl-mixer minidlna sylpheed libsdl2-ttf libsdl-ttf ode pidgin poppler postgresql syslog-ng usb-modeswitch xdg-user-dirs gateone python3-cryptography-vectors python3-ndg-httpsclient python-cryptography-vectors python-pbr bundler nostromo sthttpd netdata menulibre xfce4-notifyd openzone xfce4-verve-plugin iperf terminus-font xf86-video-nouveau ipmiutil klibc-utils pmbw gegl multipath-tools: Blacklist
+Subject: [PATCHv2][meta-oe 3/4] recipes: blacklist recipes depending on blacklisted recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,1004 +54,862 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Feb 2017 18:33:55 -0000
-
-* fails repeatedly as reported in:
-  http://lists.openembedded.org/pipermail/openembedded-devel/2017-February/111112.html
+X-List-Received-Date: Sat, 11 Feb 2017 18:33:56 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-efl/recipes-devtools/python/python-edbus_1.7.0.bb                 | 2 ++
- meta-efl/recipes-efl/e17/exquisite_svn.bb                              | 2 ++
- meta-efl/recipes-efl/efl/elementary_1.15.1.bb                          | 2 ++
- meta-efl/recipes-efl/efl/libeweather_svn.bb                            | 2 ++
- meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_0.26.bb | 2 ++
- meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb              | 2 ++
- meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb                    | 2 ++
- meta-gnome/recipes-gnome/devilspie/devilspie2_0.33.bb                  | 2 ++
- meta-gnome/recipes-gnome/gnome-backgrounds/gnome-backgrounds_2.32.0.bb | 2 ++
- meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb         | 2 ++
- meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb     | 2 ++
- meta-gnome/recipes-gnome/gtk-engines/gtk-engines_2.20.2.bb             | 2 ++
- meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb        | 2 ++
- meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb                | 2 ++
- meta-gnome/recipes-gnome/libidl/libidl-native_0.8.14.bb                | 2 ++
- meta-gnome/recipes-support/onboard/onboard_1.3.0.bb                    | 2 ++
- meta-gpe/recipes-graphics/libgpewidget/libgpewidget_0.117.bb           | 2 ++
- meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb             | 2 ++
- meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb           | 2 ++
- meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb         | 2 ++
- meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_0.2.2.bb          | 2 ++
- meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.10.bb       | 2 ++
- meta-multimedia/recipes-dvb/dvb-apps/dvb-apps_1.1.1.bb                 | 2 ++
- meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb | 2 ++
- meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.21.bb              | 2 ++
- meta-networking/recipes-connectivity/crda/crda_3.18.bb                 | 2 ++
- meta-networking/recipes-connectivity/openconnect/openconnect_git.bb    | 2 ++
- meta-networking/recipes-protocols/openflow/openflow_git.bb             | 2 ++
- meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb         | 2 ++
- meta-networking/recipes-support/wireshark/wireshark_2.2.4.bb           | 2 ++
- meta-oe/recipes-benchmark/pmbw/pmbw_git.bb                             | 2 ++
- meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb                   | 2 ++
- meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb                 | 2 ++
- meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb                        | 2 ++
- .../networkmanager/networkmanager-openvpn_1.2.6.bb                     | 2 ++
- meta-oe/recipes-connectivity/telepathy/libtelepathy_0.3.3.bb           | 2 ++
- meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb                     | 2 ++
- meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb                         | 2 ++
- meta-oe/recipes-devtools/geany/geany_1.29.bb                           | 2 ++
- meta-oe/recipes-devtools/php/php_7.1.0.bb                              | 2 ++
- .../vala-dbus-binding-tool/vala-dbus-binding-tool_git.bb               | 2 ++
- meta-oe/recipes-extended/collectd/collectd_5.5.0.bb                    | 2 ++
- meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb                      | 2 ++
- meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb                        | 3 +++
- meta-oe/recipes-gnome/gtkhtml2/gtkhtml2_svn.bb                         | 2 ++
- meta-oe/recipes-gnome/libglade/libglade_2.6.4.bb                       | 2 ++
- meta-oe/recipes-graphics/fbida/fbida_2.10.bb                           | 2 ++
- meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb               | 2 ++
- meta-oe/recipes-graphics/gegl/gegl_0.3.4.bb                            | 2 ++
- meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb                     | 2 ++
- meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb           | 2 ++
- meta-oe/recipes-graphics/wayland/wayland-fits_git.bb                   | 2 ++
- meta-oe/recipes-graphics/xorg-app/xstdcmap_1.0.3.bb                    | 2 ++
- meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb           | 2 ++
- meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.12.bb      | 2 ++
- meta-oe/recipes-graphics/xorg-font/font-adobe-100dpi_1.0.3.bb          | 2 ++
- meta-oe/recipes-graphics/xorg-font/font-adobe-utopia-100dpi_1.0.4.bb   | 2 ++
- meta-oe/recipes-graphics/xorg-font/font-bh-100dpi_1.0.3.bb             | 2 ++
- .../xorg-font/font-bh-lucidatypewriter-100dpi_1.0.3.bb                 | 2 ++
- meta-oe/recipes-graphics/xorg-font/font-misc-misc_1.1.2.bb             | 2 ++
- meta-oe/recipes-kernel/crash/crash_7.1.5.bb                            | 2 ++
- meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb                | 2 ++
- meta-oe/recipes-multimedia/jack/a2jmidid_8.bb                          | 2 ++
- meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer_1.2.12.bb         | 2 ++
- meta-oe/recipes-multimedia/libsdl-mixer/libsdl2-mixer_2.0.1.bb         | 2 ++
- meta-oe/recipes-multimedia/minidlna/minidlna_1.1.5.bb                  | 2 ++
- meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb                      | 2 ++
- meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb                     | 2 ++
- meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.11.bb                | 2 ++
- meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf_2.0.14.bb               | 2 ++
- meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb         | 2 ++
- meta-oe/recipes-support/ode/ode_0.13.bb                                | 3 +++
- meta-oe/recipes-support/pidgin/pidgin_2.11.0.bb                        | 2 ++
- meta-oe/recipes-support/poppler/poppler_0.51.0.bb                      | 2 ++
- meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb                   | 2 ++
- meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.bb         | 2 ++
- meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.15.bb            | 2 ++
- meta-python/recipes-connectivity/gateone/gateone_git.bb                | 2 ++
- meta-python/recipes-devtools/python/python-cryptography-vectors_1.6.bb | 2 ++
- meta-python/recipes-devtools/python/python-pbr_1.10.0.bb               | 2 ++
- .../recipes-devtools/python/python3-cryptography-vectors_1.6.bb        | 2 ++
- meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.2.bb   | 2 ++
- meta-ruby/recipes-devtools/ruby/bundler_git.bb                         | 2 ++
- meta-webserver/recipes-httpd/nostromo/nostromo_1.9.6.bb                | 2 ++
- meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.0.bb                 | 2 ++
- meta-webserver/recipes-webadmin/netdata/netdata_git.bb                 | 2 ++
- meta-xfce/recipes-apps/menulibre/menulibre_2.1.3.bb                    | 2 ++
- meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.3.4.bb            | 2 ++
- meta-xfce/recipes-art/cursor-themes/openzone_1.2.3.bb                  | 2 ++
- meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_1.1.0.bb      | 2 ++
- 90 files changed, 182 insertions(+)
+ meta-efl/recipes-devtools/python/python-efl_1.15.0.bb                 | 2 ++
+ meta-efl/recipes-devtools/python/python-efl_git.bb                    | 2 ++
+ meta-efl/recipes-efl/e17/cpu_svn.bb                                   | 2 ++
+ meta-efl/recipes-efl/e17/e-tasks_git.bb                               | 2 ++
+ meta-efl/recipes-efl/e17/e-wm_0.18.8.bb                               | 2 ++
+ meta-efl/recipes-efl/e17/e-wm_0.19.10.bb                              | 2 ++
+ meta-efl/recipes-efl/e17/e-wm_git.bb                                  | 2 ++
+ meta-efl/recipes-efl/e17/edje-viewer_svn.bb                           | 2 ++
+ meta-efl/recipes-efl/e17/elfe_git.bb                                  | 2 ++
+ meta-efl/recipes-efl/e17/enjoy_git.bb                                 | 2 ++
+ meta-efl/recipes-efl/e17/ephoto_svn.bb                                | 2 ++
+ meta-efl/recipes-efl/e17/exalt-client_svn.bb                          | 3 ++-
+ meta-efl/recipes-efl/e17/exalt_svn.bb                                 | 2 ++
+ meta-efl/recipes-efl/e17/flame_svn.bb                                 | 2 ++
+ meta-efl/recipes-efl/e17/forecasts_svn.bb                             | 2 ++
+ meta-efl/recipes-efl/e17/places_svn.bb                                | 2 ++
+ meta-efl/recipes-efl/e17/rain_svn.bb                                  | 2 ++
+ meta-efl/recipes-efl/e17/terminology_0.9.1.bb                         | 2 ++
+ meta-efl/recipes-efl/e17/uptime_svn.bb                                | 2 ++
+ meta-efl/recipes-efl/efl/epdf_svn.bb                                  | 2 ++
+ meta-efl/recipes-efl/efl/libeflvala_svn.bb                            | 2 ++
+ meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb                       | 4 ++++
+ meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb                     | 2 ++
+ meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb                   | 2 ++
+ meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.5.bb                 | 2 ++
+ meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb             | 2 ++
+ meta-gnome/recipes-gnome/evince/evince_3.18.2.bb                      | 2 ++
+ meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb                        | 2 ++
+ .../gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb             | 4 ++++
+ meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb                | 2 ++
+ meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb                      | 2 ++
+ meta-gnome/recipes-gnome/libgnome/libgnome_2.32.1.bb                  | 3 +++
+ meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb            | 2 ++
+ meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.5.bb                | 3 +++
+ meta-gnome/recipes-gnome/libidl/libidl_0.8.14.bb                      | 2 ++
+ meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb                  | 2 ++
+ meta-gnome/recipes-gnome/orbit2/orbit2_2.14.19.bb                     | 2 ++
+ meta-gnome/recipes-gnome/pimlico/contacts_0.9.bb                      | 2 ++
+ meta-gnome/recipes-gnome/pimlico/contacts_git.bb                      | 2 +-
+ meta-gnome/recipes-gnome/pimlico/dates_git.bb                         | 2 ++
+ meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb                | 2 ++
+ meta-gnome/recipes-support/florence/florence_0.5.4.bb                 | 4 ++++
+ meta-gpe/recipes-graphics/gpe-scap/gpe-scap_1.4.bb                    | 3 +++
+ meta-gpe/recipes-graphics/minilite/minilite_0.50.bb                   | 2 ++
+ meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb                 | 2 ++
+ meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb                | 2 ++
+ meta-multimedia/recipes-mediacenter/kodi/kodi-addon-pvr-hts_git.bb    | 2 ++
+ meta-multimedia/recipes-mediacenter/kodi/kodi-platform_git.bb         | 1 +
+ meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb                   | 2 ++
+ .../recipes-multimedia/gstreamer-0.10/gst-fluendo-mp3_0.10.31.bb      | 2 ++
+ .../gstreamer-0.10/gst-fluendo-mpegdemux_0.10.85.bb                   | 2 ++
+ .../recipes-multimedia/gstreamer-0.10/gst-meta-base_0.10.bb           | 2 ++
+ .../recipes-multimedia/gstreamer-0.10/gst-openmax_0.10.1.bb           | 2 ++
+ .../recipes-multimedia/gstreamer-0.10/gst-plugins-bad_0.10.23.bb      | 2 ++
+ .../recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb     | 2 ++
+ .../recipes-multimedia/gstreamer-0.10/gst-plugins-gl_0.10.3.bb        | 2 ++
+ .../recipes-multimedia/gstreamer-0.10/gst-plugins-good_0.10.31.bb     | 2 ++
+ .../recipes-multimedia/gstreamer-0.10/gst-plugins-ugly_0.10.19.bb     | 2 ++
+ meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-rtsp_0.10.8.bb  | 2 ++
+ meta-oe/recipes-connectivity/libqmi/libqmi_1.16.0.bb                  | 2 ++
+ meta-oe/recipes-connectivity/modemmanager/modemmanager_1.6.4.bb       | 2 ++
+ .../telepathy/telepathy-mission-control_5.16.1.bb                     | 2 ++
+ meta-oe/recipes-devtools/geany/geany-plugins_1.29.bb                  | 2 ++
+ meta-oe/recipes-devtools/glade/glade3_3.8.5.bb                        | 2 ++
+ meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.1.bb             | 2 ++
+ meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb              | 2 ++
+ meta-oe/recipes-graphics/gimp/gimp_2.8.18.bb                          | 4 ++++
+ meta-oe/recipes-multimedia/esound/esound_0.2.36.bb                    | 2 ++
+ meta-oe/recipes-navigation/geoclue/geoclue_2.4.4.bb                   | 2 ++
+ meta-oe/recipes-support/farsight/farsight2_0.0.22.bb                  | 4 ++++
+ meta-oe/recipes-support/farsight/libnice_0.0.13.bb                    | 2 ++
+ meta-oe/recipes-support/xchat/xchat_2.8.8.bb                          | 2 ++
+ meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb                     | 2 ++
+ meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.11.0.bb              | 2 ++
+ meta-xfce/recipes-extended/imsettings/imsettings_1.7.1.bb             | 2 ++
+ meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb                      | 2 ++
+ 76 files changed, 163 insertions(+), 2 deletions(-)
 
-diff --git a/meta-efl/recipes-devtools/python/python-edbus_1.7.0.bb b/meta-efl/recipes-devtools/python/python-edbus_1.7.0.bb
-index 9e5ff0a..ce7de83 100644
---- a/meta-efl/recipes-devtools/python/python-edbus_1.7.0.bb
-+++ b/meta-efl/recipes-devtools/python/python-edbus_1.7.0.bb
-@@ -4,3 +4,5 @@ PR = "r1"
+diff --git a/meta-efl/recipes-devtools/python/python-efl_1.15.0.bb b/meta-efl/recipes-devtools/python/python-efl_1.15.0.bb
+index 7abbc32..5018d9b 100644
+--- a/meta-efl/recipes-devtools/python/python-efl_1.15.0.bb
++++ b/meta-efl/recipes-devtools/python/python-efl_1.15.0.bb
+@@ -2,3 +2,5 @@ require ${BPN}.inc
  
- SRC_URI[md5sum] = "40b479444bb06147429a276127981890"
- SRC_URI[sha256sum] = "78e5ca334ee25185748660b4e612f984f4d3bced018f062278701429868f117b"
+ SRC_URI[md5sum] = "f7c5d557336ea9df69bcca09c420711a"
+ SRC_URI[sha256sum] = "11e607b465cb66dafe05c66e02d61e09335b370fe9fd2a74d88282b3ee597bcc"
 +
-+PNBLACKLIST[python-edbus] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130600/"
-diff --git a/meta-efl/recipes-efl/e17/exquisite_svn.bb b/meta-efl/recipes-efl/e17/exquisite_svn.bb
-index 8f2d25d..1b1c659 100644
---- a/meta-efl/recipes-efl/e17/exquisite_svn.bb
-+++ b/meta-efl/recipes-efl/e17/exquisite_svn.bb
-@@ -39,3 +39,5 @@ INITSCRIPT_NAME = "exquisite"
- INITSCRIPT_PARAMS = "start 01 S . stop 20 0 1 6 ."
++PNBLACKLIST[python-efl] ?= "Depends on blacklisted elementary"
+diff --git a/meta-efl/recipes-devtools/python/python-efl_git.bb b/meta-efl/recipes-devtools/python/python-efl_git.bb
+index 83a01ac..4bff50f 100644
+--- a/meta-efl/recipes-devtools/python/python-efl_git.bb
++++ b/meta-efl/recipes-devtools/python/python-efl_git.bb
+@@ -7,3 +7,5 @@ DEFAULT_PREFERENCE = "-1"
+ SRC_URI = "git://git.enlightenment.org/bindings/python/${BPN}.git;branch=python-efl-1.12"
  
- FILES_${PN} += "/mnt/.splash/"
+ S = "${WORKDIR}/git"
 +
-+PNBLACKLIST[exquisite] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130619/"
-diff --git a/meta-efl/recipes-efl/efl/elementary_1.15.1.bb b/meta-efl/recipes-efl/efl/elementary_1.15.1.bb
-index f53eb44..894abc5 100644
---- a/meta-efl/recipes-efl/efl/elementary_1.15.1.bb
-+++ b/meta-efl/recipes-efl/efl/elementary_1.15.1.bb
-@@ -14,3 +14,5 @@ SRC_URI[sha256sum] = "ae5540c2103fcdc69fd7469277ce25a8a00a0f701fc2c20771dc010840
- # autotools-brokensep - configure updates Elementary.h correctly in ${B}, but then build is using Elementary.h from ${S}
- # which includes #define ELM_EMAP (instead of #undef ELM_EMAP) and building fails
++PNBLACKLIST[python-efl] ?= "Depends on blacklisted elementary"
+diff --git a/meta-efl/recipes-efl/e17/cpu_svn.bb b/meta-efl/recipes-efl/e17/cpu_svn.bb
+index 14eb08f..15d1eb4 100644
+--- a/meta-efl/recipes-efl/e17/cpu_svn.bb
++++ b/meta-efl/recipes-efl/e17/cpu_svn.bb
+@@ -8,3 +8,5 @@ PR = "${INC_PR}.0"
+ require e-module.inc
+ 
+ SRC_URI += "file://configure.patch"
++
++PNBLACKLIST[cpu] ?= "Depends on blacklisted e-wm"
+diff --git a/meta-efl/recipes-efl/e17/e-tasks_git.bb b/meta-efl/recipes-efl/e17/e-tasks_git.bb
+index 6065157..540df5f 100644
+--- a/meta-efl/recipes-efl/e17/e-tasks_git.bb
++++ b/meta-efl/recipes-efl/e17/e-tasks_git.bb
+@@ -30,3 +30,5 @@ do_install_append() {
+ }
+ 
+ FILES_${PN} += "/usr/share/e-tasks/* /usr/share/applications/* /usr/share/pixmaps/*"
++
++PNBLACKLIST[e-tasks] ?= "Depends on blacklisted elementary"
+diff --git a/meta-efl/recipes-efl/e17/e-wm_0.18.8.bb b/meta-efl/recipes-efl/e17/e-wm_0.18.8.bb
+index 6b4c9fc..819d1b0 100644
+--- a/meta-efl/recipes-efl/e17/e-wm_0.18.8.bb
++++ b/meta-efl/recipes-efl/e17/e-wm_0.18.8.bb
+@@ -13,3 +13,5 @@ SRC_URI = "\
+ 
+ SRC_URI[md5sum] = "79c9f524e1d0510061c62c4b038a8ece"
+ SRC_URI[sha256sum] = "14c9bde4334d2f8b0776c6113d02b923ab159eea1cbf7013489e4f3bf37a51bb"
++
++PNBLACKLIST[e-wm] ?= "Depends on blacklisted elementary"
+diff --git a/meta-efl/recipes-efl/e17/e-wm_0.19.10.bb b/meta-efl/recipes-efl/e17/e-wm_0.19.10.bb
+index 86ce03d..62408b8 100644
+--- a/meta-efl/recipes-efl/e17/e-wm_0.19.10.bb
++++ b/meta-efl/recipes-efl/e17/e-wm_0.19.10.bb
+@@ -17,3 +17,5 @@ SRC_URI = "\
+ 
+ SRC_URI[md5sum] = "9063617760329445ada8635270a4e627"
+ SRC_URI[sha256sum] = "484d305bcf403303b18c46a3a498445b93689cd325010ae8d0601551926469d8"
++
++PNBLACKLIST[e-wm] ?= "Depends on blacklisted elementary"
+diff --git a/meta-efl/recipes-efl/e17/e-wm_git.bb b/meta-efl/recipes-efl/e17/e-wm_git.bb
+index 9eb839b..95572fa 100644
+--- a/meta-efl/recipes-efl/e17/e-wm_git.bb
++++ b/meta-efl/recipes-efl/e17/e-wm_git.bb
+@@ -12,3 +12,5 @@ SRC_URI = " \
+ S = "${WORKDIR}/git"
+ 
+ SRCREV = "4545d4a70031e0b2565b8d83d5f756bff1a584d0"
++
++PNBLACKLIST[e-wm] ?= "Depends on blacklisted elementary"
+diff --git a/meta-efl/recipes-efl/e17/edje-viewer_svn.bb b/meta-efl/recipes-efl/e17/edje-viewer_svn.bb
+index 2b927a0..8746f09 100644
+--- a/meta-efl/recipes-efl/e17/edje-viewer_svn.bb
++++ b/meta-efl/recipes-efl/e17/edje-viewer_svn.bb
+@@ -14,3 +14,5 @@ SRC_URI = "${E_SVN}/trunk;module=${SRCNAME};protocol=http;scmdata=keep"
+ S = "${WORKDIR}/${SRCNAME}"
+ 
+ FILES_${PN} += "${datadir}"
++
++PNBLACKLIST[edje-viewer] ?= "Depends on blacklisted elementary"
+diff --git a/meta-efl/recipes-efl/e17/elfe_git.bb b/meta-efl/recipes-efl/e17/elfe_git.bb
+index fcb97a9..bdec107 100644
+--- a/meta-efl/recipes-efl/e17/elfe_git.bb
++++ b/meta-efl/recipes-efl/e17/elfe_git.bb
+@@ -13,3 +13,5 @@ S = "${WORKDIR}/git"
+ SRCREV = "1ec0e7713c3ca901014811ff78277d9e2aaac981"
+ 
+ DEPENDS += "elementary"
++
++PNBLACKLIST[elfe] ?= "Depends on blacklisted elementary"
+diff --git a/meta-efl/recipes-efl/e17/enjoy_git.bb b/meta-efl/recipes-efl/e17/enjoy_git.bb
+index 297cbd5..cab1bd4 100644
+--- a/meta-efl/recipes-efl/e17/enjoy_git.bb
++++ b/meta-efl/recipes-efl/e17/enjoy_git.bb
+@@ -46,3 +46,5 @@ pkg_postinst_${PN} () {
+     echo "enjoy:"
+     echo "enjoy:    Use test-lms -P to see available formats that can be scanned"
+ }
++
++PNBLACKLIST[enjoy] ?= "Depends on blacklisted elementary"
+diff --git a/meta-efl/recipes-efl/e17/ephoto_svn.bb b/meta-efl/recipes-efl/e17/ephoto_svn.bb
+index 5cecda5..c7b2d7c 100644
+--- a/meta-efl/recipes-efl/e17/ephoto_svn.bb
++++ b/meta-efl/recipes-efl/e17/ephoto_svn.bb
+@@ -17,3 +17,5 @@ SRCNAME = "${PN}"
  B = "${S}"
+ 
+ SRC_URI += "file://configure.patch"
 +
-+PNBLACKLIST[elementary] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130584/"
-diff --git a/meta-efl/recipes-efl/efl/libeweather_svn.bb b/meta-efl/recipes-efl/efl/libeweather_svn.bb
-index eff8586..a2f4d57 100644
---- a/meta-efl/recipes-efl/efl/libeweather_svn.bb
-+++ b/meta-efl/recipes-efl/efl/libeweather_svn.bb
-@@ -44,3 +44,5 @@ RRECOMMENDS_${PN} = "\
-     ${PN}-themes \
-     ${PN}-plugins \
- "
++PNBLACKLIST[ephoto] ?= "Depends on blacklisted elementary"
+diff --git a/meta-efl/recipes-efl/e17/exalt-client_svn.bb b/meta-efl/recipes-efl/e17/exalt-client_svn.bb
+index afed0e8..f294736 100644
+--- a/meta-efl/recipes-efl/e17/exalt-client_svn.bb
++++ b/meta-efl/recipes-efl/e17/exalt-client_svn.bb
+@@ -22,4 +22,5 @@ FILES_${PN}-staticdev += "${libdir}/enlightenment/modules/*/*/*.a"
+ FILES_${PN}-dev += "${libdir}/enlightenment/modules/*/*/*.la"
+ FILES_${PN}-dbg += "${libdir}/enlightenment/modules/*/*/.debug"
+ 
+-SRC_URI += "file://configure.patch"
+\ No newline at end of file
++SRC_URI += "file://configure.patch"
++PNBLACKLIST[exalt-client] ?= "Depends on blacklisted elementary"
+diff --git a/meta-efl/recipes-efl/e17/exalt_svn.bb b/meta-efl/recipes-efl/e17/exalt_svn.bb
+index 1f1c850..e52c987 100644
+--- a/meta-efl/recipes-efl/e17/exalt_svn.bb
++++ b/meta-efl/recipes-efl/e17/exalt_svn.bb
+@@ -32,3 +32,5 @@ do_install_append() {
+ 
+ FILES_${PN} += "${datadir}/dbus-1"
+ 
 +
-+PNBLACKLIST[libeweather] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130649/"
-diff --git a/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_0.26.bb b/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_0.26.bb
-index d98d35a..18b9d6f 100644
---- a/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_0.26.bb
-+++ b/meta-filesystems/recipes-filesystems/unionfs-fuse/unionfs-fuse_0.26.bb
-@@ -15,3 +15,5 @@ do_install() {
++PNBLACKLIST[exalt] ?= "Depends on blacklisted elementary"
+diff --git a/meta-efl/recipes-efl/e17/flame_svn.bb b/meta-efl/recipes-efl/e17/flame_svn.bb
+index 58c79a8..026c63c 100644
+--- a/meta-efl/recipes-efl/e17/flame_svn.bb
++++ b/meta-efl/recipes-efl/e17/flame_svn.bb
+@@ -13,3 +13,5 @@ do_configure_prepend() {
  }
  
- RDEPENDS_${PN} += "bash"
+ SRC_URI += "file://configure.patch"
 +
-+PNBLACKLIST[unionfs-fuse] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130648/"
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
-index 9959f0d..b4c50a2 100644
---- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
-+++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
-@@ -54,3 +54,5 @@ do_configure_prepend () {
- do_install_append() {
-         oe_runmake 'DESTDIR=${D}' install install-dev
- }
-+
-+PNBLACKLIST[xfsprogs] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130663/"
-diff --git a/meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb b/meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb
-index d455f14..ddc10aa 100644
---- a/meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb
-+++ b/meta-gnome/recipes-apps/gnome-mplayer/gmtk_1.0.5.bb
-@@ -14,3 +14,5 @@ SRC_URI[sha256sum] = "a07130d62719e8c1244f8405dd97445798df5204fc0f3f2f2b669b1251
- EXTRA_OECONF = "--disable-gconf --with-gio --with-alsa --enable-keystore"
++PNBLACKLIST[flame] ?= "Depends on blacklisted e-wm"
+diff --git a/meta-efl/recipes-efl/e17/forecasts_svn.bb b/meta-efl/recipes-efl/e17/forecasts_svn.bb
+index 473bdb9..d919179 100644
+--- a/meta-efl/recipes-efl/e17/forecasts_svn.bb
++++ b/meta-efl/recipes-efl/e17/forecasts_svn.bb
+@@ -8,3 +8,5 @@ PR = "${INC_PR}.0"
+ require e-module.inc
  
- inherit gettext pkgconfig autotools gconf
+ SRC_URI += "file://configure.patch"
 +
-+PNBLACKLIST[gmtk] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130661/"
-diff --git a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.33.bb b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.33.bb
-index b00a449..ab0ed4f 100644
---- a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.33.bb
-+++ b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.33.bb
-@@ -28,3 +28,5 @@ do_install() {
-     install -d ${D}/${sysconfdir}/xdg/autostart
-     install -m 644 ${WORKDIR}/devilspie2.desktop ${D}/${sysconfdir}/xdg/autostart
- }
-+
-+PNBLACKLIST[devilspie2] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130666/"
-diff --git a/meta-gnome/recipes-gnome/gnome-backgrounds/gnome-backgrounds_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-backgrounds/gnome-backgrounds_2.32.0.bb
-index 2adb81b..eeddcb7 100644
---- a/meta-gnome/recipes-gnome/gnome-backgrounds/gnome-backgrounds_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-backgrounds/gnome-backgrounds_2.32.0.bb
-@@ -17,3 +17,5 @@ GNOME_COMPRESS_TYPE="bz2"
++PNBLACKLIST[forecasts] ?= "Depends on blacklisted e-wm"
+diff --git a/meta-efl/recipes-efl/e17/places_svn.bb b/meta-efl/recipes-efl/e17/places_svn.bb
+index 54f0e01..915baf6 100644
+--- a/meta-efl/recipes-efl/e17/places_svn.bb
++++ b/meta-efl/recipes-efl/e17/places_svn.bb
+@@ -14,3 +14,5 @@ do_configure_prepend() {
+ RRECOMMENDS_${PN} += "eject"
  
- FILES_${PN} += "${datadir}/gnome-background-properties"
- 
+ SRC_URI += "file://configure.patch"
 +
-+PNBLACKLIST[gnome-backgrounds] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130647/"
-diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-index 17950fc..c94b659 100644
---- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop_2.32.1.bb
-@@ -24,3 +24,5 @@ do_configure_prepend () {
- PACKAGES =+ "libgnome-desktop"
- FILES_libgnome-desktop = "${libdir}/lib*${SOLIBS} ${datadir}/libgnome-desktop/pnp.ids"
- FILES_${PN} += "${datadir}/gnome-about"
-+
-+PNBLACKLIST[gnome-desktop] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130595/"
-diff --git a/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb b/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb
-index a31eb55..6dc80b5 100644
---- a/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb
-@@ -17,3 +17,5 @@ GNOME_COMPRESS_TYPE="bz2"
- 
- DEPENDS += "shared-mime-info intltool-native"
- RDEPENDS_${PN} = "shared-mime-info"
-+
-+PNBLACKLIST[gnome-mime-data] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130589/"
-diff --git a/meta-gnome/recipes-gnome/gtk-engines/gtk-engines_2.20.2.bb b/meta-gnome/recipes-gnome/gtk-engines/gtk-engines_2.20.2.bb
-index 90ed5a4..2a0022b 100644
---- a/meta-gnome/recipes-gnome/gtk-engines/gtk-engines_2.20.2.bb
-+++ b/meta-gnome/recipes-gnome/gtk-engines/gtk-engines_2.20.2.bb
-@@ -53,3 +53,5 @@ SRC_URI += "file://glib-2.32.patch \
-             file://substitute-tests.patch"
- SRC_URI[archive.md5sum] = "5deb287bc6075dc21812130604c7dc4f"
- SRC_URI[archive.sha256sum] = "15b680abca6c773ecb85253521fa100dd3b8549befeecc7595b10209d62d66b5"
-+
-+PNBLACKLIST[gtk-engines] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130602/"
-diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
-index 06ae4b1..ac7540e 100644
---- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
-+++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
-@@ -29,3 +29,5 @@ do_configure_prepend() {
++PNBLACKLIST[places] ?= "Depends on blacklisted e-wm"
+diff --git a/meta-efl/recipes-efl/e17/rain_svn.bb b/meta-efl/recipes-efl/e17/rain_svn.bb
+index 7e85442..6d14eef 100644
+--- a/meta-efl/recipes-efl/e17/rain_svn.bb
++++ b/meta-efl/recipes-efl/e17/rain_svn.bb
+@@ -14,3 +14,5 @@ do_configure_prepend() {
  }
  
- FILES_${PN} += " ${datadir}/gtksourceview-2.0"
+ SRC_URI += "file://configure.patch"
 +
-+PNBLACKLIST[gtksourceview2] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130597/"
-diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
-index e5914e0..7735627 100644
---- a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
-@@ -16,3 +16,5 @@ do_configure_append() {
-     find ${B} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
-     find ${B} -name Makefile | xargs sed -i s:'-I/usr/include':'-I${STAGING_INCDIR}':g
++PNBLACKLIST[rain] ?= "Depends on blacklisted e-wm"
+diff --git a/meta-efl/recipes-efl/e17/terminology_0.9.1.bb b/meta-efl/recipes-efl/e17/terminology_0.9.1.bb
+index 482bd60..37ebe0b 100644
+--- a/meta-efl/recipes-efl/e17/terminology_0.9.1.bb
++++ b/meta-efl/recipes-efl/e17/terminology_0.9.1.bb
+@@ -6,3 +6,5 @@ SRC_URI = "\
+ 
+ SRC_URI[md5sum] = "c7ce2e8ebc5f311d3d3f59ecfdf18f61"
+ SRC_URI[sha256sum] = "7fb864a14202490e9181c5f254a7e772019216a3aa75c3952d0f12cd32113896"
++
++PNBLACKLIST[terminology] ?= "Depends on blacklisted elementary"
+diff --git a/meta-efl/recipes-efl/e17/uptime_svn.bb b/meta-efl/recipes-efl/e17/uptime_svn.bb
+index 5c9bfa9..15d3878 100644
+--- a/meta-efl/recipes-efl/e17/uptime_svn.bb
++++ b/meta-efl/recipes-efl/e17/uptime_svn.bb
+@@ -8,3 +8,5 @@ PR = "${INC_PR}.0"
+ require e-module.inc
+ 
+ SRC_URI += "file://configure.patch"
++
++PNBLACKLIST[uptime] ?= "Depends on blacklisted e-wm"
+diff --git a/meta-efl/recipes-efl/efl/epdf_svn.bb b/meta-efl/recipes-efl/efl/epdf_svn.bb
+index e32a5fd..1073bd1 100644
+--- a/meta-efl/recipes-efl/efl/epdf_svn.bb
++++ b/meta-efl/recipes-efl/efl/epdf_svn.bb
+@@ -25,3 +25,5 @@ EXTRA_OECONF = "\
+ 
+ # Some upgrade path tweaking, as in evas
+ AUTO_LIBNAME_PKGS = ""
++
++PNBLACKLIST[epdf] ?= "Depends on blacklisted poppler"
+diff --git a/meta-efl/recipes-efl/efl/libeflvala_svn.bb b/meta-efl/recipes-efl/efl/libeflvala_svn.bb
+index 4922b1b..87ea66b 100644
+--- a/meta-efl/recipes-efl/efl/libeflvala_svn.bb
++++ b/meta-efl/recipes-efl/efl/libeflvala_svn.bb
+@@ -19,3 +19,5 @@ S = "${WORKDIR}/${SRCNAME}"
+ 
+ PACKAGES =+ "${PN}-examples"
+ FILES_${PN}-examples = "${datadir}/libeflvala ${bindir}/*"
++
++PNBLACKLIST[libeflvala] ?= "Depends on blacklisted elementary"
+diff --git a/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb b/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
+index 6e0e0aa..682c6fa 100644
+--- a/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
++++ b/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
+@@ -20,3 +20,7 @@ EXTRA_OECONF += "--disable-scrollkeeper"
+ do_configure_prepend() {
+     sed -i -e "s: help : :g" ${S}/Makefile.am
  }
 +
-+PNBLACKLIST[libgnomekbd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130608/"
-diff --git a/meta-gnome/recipes-gnome/libidl/libidl-native_0.8.14.bb b/meta-gnome/recipes-gnome/libidl/libidl-native_0.8.14.bb
-index a27da5e..dc126cd 100644
---- a/meta-gnome/recipes-gnome/libidl/libidl-native_0.8.14.bb
-+++ b/meta-gnome/recipes-gnome/libidl/libidl-native_0.8.14.bb
-@@ -8,3 +8,5 @@ DEPENDS = "bison-native glib-2.0-native"
++PNBLACKLIST[cheese] ?= "Depends on blacklisted gstreamer"
++
++PNBLACKLIST[cheese] ?= "Depends on blacklisted gnome-desktop"
+diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb b/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
+index 07b4831..6edd4b3 100644
+--- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
++++ b/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
+@@ -123,3 +123,5 @@ python populate_packages_prepend () {
+ }
+ 
+ FILES_${PN}-plugin-openxml += "${datadir}/${PN}-${SHRT_VER}/omml_xslt"
++
++PNBLACKLIST[abiword] ?= "Depends on blacklisted libglade"
+diff --git a/meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb b/meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb
+index 8e00eb4..a9014e2 100644
+--- a/meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb
+@@ -7,3 +7,5 @@ SRC_URI += "file://0001-Remove-use-of-G_DISABLE_DEPRECATED.patch \
+ SRC_URI[archive.md5sum] = "27fa902d4fdf6762ee010e7053aaf77b"
+ SRC_URI[archive.sha256sum] = "9160d4f277646400d3bb6b4fa73636cc6d1a865a32b9d0760e1e9e6ee624976b"
+ GNOME_COMPRESS_TYPE="bz2"
++
++PNBLACKLIST[libbonobo] ?= "Depends on blacklisted orbit2"
+diff --git a/meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.5.bb b/meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.5.bb
+index 627f37e..b26630a 100644
+--- a/meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.5.bb
++++ b/meta-gnome/recipes-gnome/bonobo/libbonoboui_2.24.5.bb
+@@ -19,3 +19,5 @@ FILES_${PN}-dev += "${libdir}/libglade/2.0/*.la ${datadir}/gnome-2.0/ui \
+ FILES_${PN}-staticdev += "${libdir}/libglade/2.0/*.a"
+ FILES_${PN}-dbg += "${libdir}/bonobo-2.0/samples/.debug \
+                     ${libdir}/libglade/2.0/.debug"
++
++PNBLACKLIST[libbonoboui] ?= "Depends on blacklisted libglade"
+diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb b/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
+index aecf6a7..13453bd 100644
+--- a/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
++++ b/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
+@@ -114,3 +114,5 @@ FILES_libedataserverui = "${libdir}/libedataserverui-*.so.* ${datadir}/evolution
+ FILES_libedataserverui-dev = "${libdir}/libedataserverui-*.so \
+                               ${libdir}/pkgconfig/libedataserverui-*.pc \
+                               ${includedir}/evolution-data-server-*/libedataserverui/*.h"
++
++PNBLACKLIST[evolution-data-server] ?= "Depends on blacklisted libglade"
+diff --git a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb b/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
+index 4e3e0f0..09e0d7b 100644
+--- a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
++++ b/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
+@@ -50,3 +50,5 @@ FILES_${PN}-staticdev += "${libdir}/nautilus/extensions-2.0/*.a \
+                           ${libdir}/evince/*/backends/*.a"
+ FILES_${PN}-nautilus-extension = "${libdir}/nautilus/*/*so"
+ FILES_${PN}-browser-plugin = "${libdir}/mozilla/*/*so"
++
++PNBLACKLIST[evince] ?= "Depends on blacklisted poppler"
+diff --git a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
+index 175b832..cc85a81 100644
+--- a/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
++++ b/meta-gnome/recipes-gnome/gedit/gedit_2.30.4.bb
+@@ -22,3 +22,5 @@ EXTRA_OECONF = "--disable-scrollkeeper \
+ 
+ FILES_${PN} += "${libdir}/gedit-2/plugin* ${datadir}/gedit-2"
+ FILES_${PN}-dbg += "${libdir}/gedit-2/plugin-loaders/.debug ${libdir}/gedit-2/plugins/.debug"
++
++PNBLACKLIST[gedit] ?= "Depends on blacklisted gtksourceview2"
+diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
+index 393eb25..8a7425a 100644
+--- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
+@@ -40,3 +40,7 @@ FILES_${PN}-dbg += "${libdir}/gnome-settings-daemon-2.0/.debug"
+ FILES_${PN}-dev += "${libdir}/gnome-settings-daemon-2.0/*.la"
+ FILES_${PN}-staticdev += "${libdir}/gnome-settings-daemon-2.0/*.a"
+ 
++
++PNBLACKLIST[gnome-settings-daemon] ?= "Depends on blacklisted libgnomekbd"
++
++PNBLACKLIST[gnome-settings-daemon] ?= "Depends on blacklisted gnome-desktop"
+diff --git a/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb b/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb
+index 3ec6466..edf5bfc 100644
+--- a/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb
++++ b/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb
+@@ -56,3 +56,5 @@ python populate_packages_prepend () {
+     plugindir = d.expand('${libdir}/gnome-vfs-2.0/modules/')
+     do_split_packages(d, plugindir, '^lib(.*)\.so$', 'gnome-vfs-plugin-%s', 'GNOME VFS plugin for %s')
+ }
++
++PNBLACKLIST[gnome-vfs] ?= "Depends on blacklisted gnome-mime-data"
+diff --git a/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb b/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb
+index 13c027c..94a14c8 100644
+--- a/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb
++++ b/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb
+@@ -31,3 +31,5 @@ FILES_${PN} += "${libdir}/${BPN}/extensions/*.so \
+ FILES_${PN}-dev += "${libdir}/${BPN}/extensions/*.la"
+ FILES_${PN}-dbg += "${libdir}/${BPN}/extensions/.debug/"
+ 
++
++PNBLACKLIST[gthumb] ?= "Depends on blacklisted gstreamer"
+diff --git a/meta-gnome/recipes-gnome/libgnome/libgnome_2.32.1.bb b/meta-gnome/recipes-gnome/libgnome/libgnome_2.32.1.bb
+index 0055ba4..c6da2a4 100644
+--- a/meta-gnome/recipes-gnome/libgnome/libgnome_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/libgnome/libgnome_2.32.1.bb
+@@ -34,3 +34,6 @@ FILES_gnome-common-schemas = "${datadir}/gnome-background-properties ${datadir}/
+ RDEPENDS_${PN} = "gnome-common-schemas"
+ 
+ FILES_${PN}-dbg += "${libdir}/bonobo/monikers/.debug"
++
++PNBLACKLIST[libgnome] ?= "Depends on blacklisted gnome-vfs"
++PNBLACKLIST[libgnome] ?= "Depends on blacklisted esound"
+diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb b/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb
+index 41a89ce..6bca4bd 100644
+--- a/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb
++++ b/meta-gnome/recipes-gnome/libgnome/libgnomecanvas_2.30.3.bb
+@@ -18,3 +18,5 @@ FILES_${PN} += "${libdir}/libglade/*/libcanvas.so"
+ FILES_${PN}-dbg += "${libdir}/libglade/*/.debug/"
+ FILES_${PN}-dev += "${libdir}/libglade/*/libcanvas*.la"
+ FILES_${PN}-staticdev += "${libdir}/libglade/*/libcanvas*.a"
++
++PNBLACKLIST[libgnomecanvas] ?= "Depends on blacklisted libglade"
+diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.5.bb b/meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.5.bb
+index c4801a9..ccc75f1 100644
+--- a/meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.5.bb
++++ b/meta-gnome/recipes-gnome/libgnome/libgnomeui_2.24.5.bb
+@@ -27,3 +27,6 @@ EXTRA_OECONF = "--disable-gtk-doc"
+ do_configure_prepend() {
+     install -m 0644 ${WORKDIR}/gnome-stock-pixbufs.h ${S}/libgnomeui/pixmaps/gnome-stock-pixbufs.h
+ }
++
++PNBLACKLIST[libgnomeui] ?= "Depends on blacklisted libbonoboui"
++PNBLACKLIST[libgnomeui] ?= "Depends on blacklisted libgnomecanvas"
+diff --git a/meta-gnome/recipes-gnome/libidl/libidl_0.8.14.bb b/meta-gnome/recipes-gnome/libidl/libidl_0.8.14.bb
+index 86dfcf2..6a3ac55 100644
+--- a/meta-gnome/recipes-gnome/libidl/libidl_0.8.14.bb
++++ b/meta-gnome/recipes-gnome/libidl/libidl_0.8.14.bb
+@@ -11,3 +11,5 @@ inherit autotools pkgconfig binconfig
  
  SRC_URI[md5sum] = "bb8e10a218fac793a52d404d14adedcb"
  SRC_URI[sha256sum] = "c5d24d8c096546353fbc7cedf208392d5a02afe9d56ebcc1cccb258d7c4d2220"
 +
-+PNBLACKLIST[libidl-native] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130582/"
-diff --git a/meta-gnome/recipes-support/onboard/onboard_1.3.0.bb b/meta-gnome/recipes-support/onboard/onboard_1.3.0.bb
-index 82393c3..3b4a0b4 100644
---- a/meta-gnome/recipes-support/onboard/onboard_1.3.0.bb
-+++ b/meta-gnome/recipes-support/onboard/onboard_1.3.0.bb
-@@ -23,3 +23,5 @@ RDEPENDS_${PN} += " \
-     python3-pycairo \
-     python3-pygobject \
- "
-+
-+PNBLACKLIST[onboard] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130637/"
-diff --git a/meta-gpe/recipes-graphics/libgpewidget/libgpewidget_0.117.bb b/meta-gpe/recipes-graphics/libgpewidget/libgpewidget_0.117.bb
-index 87a3ed0..28fc1e3 100644
---- a/meta-gpe/recipes-graphics/libgpewidget/libgpewidget_0.117.bb
-+++ b/meta-gpe/recipes-graphics/libgpewidget/libgpewidget_0.117.bb
-@@ -21,3 +21,5 @@ EXTRA_OECONF = "--enable-cairo --disable-gtk-doc"
- LDFLAGS += " -L${STAGING_LIBDIR}"
++PNBLACKLIST[libidl] ?= "Depends on blacklisted libidl-native"
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb
+index d29385e..9a57d2c 100644
+--- a/meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb
++++ b/meta-gnome/recipes-gnome/nautilus/nautilus_2.32.2.bb
+@@ -39,3 +39,5 @@ FILES_${PN} += "${datadir}/icons"
+ # Don't make nautils3 drag us in
+ PRIVATE_LIBS = "libnautilus-extension.so.1"
  
- PACKAGES =+ "${PN}-bin"
 +
-+PNBLACKLIST[libgpewidget] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130594/"
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb b/meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb
-index 06e71cb..ebf43bd 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc-utils_2.0.4.bb
-@@ -12,3 +12,5 @@ require klibc-utils.inc
- require klibc.inc
++PNBLACKLIST[nautilus] ?= "Depends on blacklisted gnome-desktop"
+diff --git a/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.19.bb b/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.19.bb
+index f9af2ee..414bcf1 100644
+--- a/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.19.bb
++++ b/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.19.bb
+@@ -39,3 +39,5 @@ inherit autotools pkgconfig gtk-doc
  
- DEPENDS = "klibc"
+ EXTRA_OEMAKE = "IDL_COMPILER='${STAGING_BINDIR_NATIVE}/orbit-idl-2'"
+ EXTRA_OEMAKE_class-native = " "
 +
-+PNBLACKLIST[klibc-utils] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130679/"
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb
-index 8ca1ca7..81fae97 100644
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb
-@@ -48,3 +48,5 @@ FILES_ubirename-klibc = "${sbindir}/ubirename"
- FILES_ubirmvol-klibc = "${sbindir}/ubirmvol"
- FILES_ubirsvol-klibc = "${sbindir}/ubirsvol"
- FILES_ubiupdatevol-klibc = "${sbindir}/ubiupdatevol"
-+
-+PNBLACKLIST[ubi-utils-klibc] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130665/"
-diff --git a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
-index c9fec25..0e97046 100644
---- a/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
-+++ b/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb
-@@ -38,3 +38,5 @@ PACKAGES =+ "kexec-klibc kdump-klibc"
- 
- FILES_kexec-klibc = "${sbindir}/kexec"
- FILES_kdump-klibc = "${sbindir}/kdump"
-+
-+PNBLACKLIST[kexec-tools-klibc] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130674/"
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_0.2.2.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_0.2.2.bb
-index 0cc4a3a..97680bf 100644
---- a/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_0.2.2.bb
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-igd_0.2.2.bb
-@@ -12,3 +12,5 @@ SRC_URI[sha256sum] = "73b6a98a0f13b29b34c3bfc07f99f78b1319211cb95a8585752873af2b
- inherit autotools pkgconfig gtk-doc gobject-introspection
- 
- EXTRA_OECONF = "--disable-python"
-+
-+PNBLACKLIST[gupnp-igd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130645/"
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.10.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.10.bb
-index eda70e8..d42e3ff 100644
---- a/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.10.bb
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp-tools_0.8.10.bb
-@@ -10,3 +10,5 @@ SRC_URI[md5sum] = "ad8423d036e98bc6f877528d6b846f6a"
- SRC_URI[sha256sum] = "592c53289ff1cd70e676405c56ca87b28d2da37a385d34a3bb9b944ba9108d17"
- 
- inherit autotools pkgconfig
-+
-+PNBLACKLIST[gupnp-tools] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130670/"
-diff --git a/meta-multimedia/recipes-dvb/dvb-apps/dvb-apps_1.1.1.bb b/meta-multimedia/recipes-dvb/dvb-apps/dvb-apps_1.1.1.bb
-index 0b4b72d..29e7396 100644
---- a/meta-multimedia/recipes-dvb/dvb-apps/dvb-apps_1.1.1.bb
-+++ b/meta-multimedia/recipes-dvb/dvb-apps/dvb-apps_1.1.1.bb
-@@ -132,3 +132,5 @@ RDEPENDS_dvb-scan =+ "libdvbapi libdvbcfg libdvbsec"
- RDEPENDS_dvb-apps =+ "libdvbapi libdvbcfg libdvbsec libdvben50221 libucsi"
- RDEPENDS_dvb-femon =+ "libdvbapi"
- RDEPENDS_dvbnet =+ "libdvbapi"
-+
-+PNBLACKLIST[dvb-apps] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130603/"
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb
-index 512a28f..fa80dda 100644
---- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb
-+++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gstreamer_0.10.36.bb
-@@ -51,3 +51,5 @@ RRECOMMENDS_${PN}_qemux86-64 += "kernel-module-snd-ens1370 kernel-module-snd-raw
- FILES_${PN} += " ${libdir}/gstreamer-0.10/*.so"
- FILES_${PN}-dev += " ${libdir}/gstreamer-0.10/*.la ${libdir}/gstreamer-0.10/*.a"
- FILES_${PN}-dbg += " ${libdir}/gstreamer-0.10/.debug/ ${libexecdir}/gstreamer-0.10/.debug/"
-+
-+PNBLACKLIST[gstreamer] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130583/"
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.21.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.21.bb
-index 82518d6..a2b85b8 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.21.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.21.bb
-@@ -63,3 +63,5 @@ USERADD_PARAM_${PN} = " \
-     --home ${localstatedir}/lib/mpd \
-     --groups audio \
-     --user-group mpd"
-+
-+PNBLACKLIST[mpd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130612/"
-diff --git a/meta-networking/recipes-connectivity/crda/crda_3.18.bb b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-index dbddd55..2aa9a09 100644
---- a/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-+++ b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-@@ -34,3 +34,5 @@ do_install() {
++PNBLACKLIST[orbit2] ?= "Depends on blacklisted libidl-native"
+diff --git a/meta-gnome/recipes-gnome/pimlico/contacts_0.9.bb b/meta-gnome/recipes-gnome/pimlico/contacts_0.9.bb
+index bdc7f48..06153d2 100644
+--- a/meta-gnome/recipes-gnome/pimlico/contacts_0.9.bb
++++ b/meta-gnome/recipes-gnome/pimlico/contacts_0.9.bb
+@@ -16,3 +16,5 @@ do_configure_prepend () {
+     # It used 8 spaces to instead of a tab, but it doesn't work for us
+     sed -i 's/^        $(MAKE) dist distdir=/\t$(MAKE) dist distdir/' Makefile.am
  }
++
++PNBLACKLIST[contacts] ?= "Depends on blacklisted evolution-data-server"
+diff --git a/meta-gnome/recipes-gnome/pimlico/contacts_git.bb b/meta-gnome/recipes-gnome/pimlico/contacts_git.bb
+index 8a4a071..57ad78e 100644
+--- a/meta-gnome/recipes-gnome/pimlico/contacts_git.bb
++++ b/meta-gnome/recipes-gnome/pimlico/contacts_git.bb
+@@ -16,4 +16,4 @@ SRC_URI =+ "git://git.gnome.org/${BPN} \
  
- RDEPENDS_${PN} = "udev wireless-regdb"
-+
-+PNBLACKLIST[crda] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130675/"
-diff --git a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
-index 60e7e6e..d5fe22f 100644
---- a/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
-+++ b/meta-networking/recipes-connectivity/openconnect/openconnect_git.bb
-@@ -25,3 +25,5 @@ inherit autotools pkgconfig
- 
- EXTRA_OECONF += "--with-vpnc-script=${SYSROOT_DESTDIR}${sysconfdir}/vpnc/vpnc-script \
-                  --disable-static"
-+
-+PNBLACKLIST[openconnect] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130672/"
-diff --git a/meta-networking/recipes-protocols/openflow/openflow_git.bb b/meta-networking/recipes-protocols/openflow/openflow_git.bb
-index 6403bfb..4fb3e4f 100644
---- a/meta-networking/recipes-protocols/openflow/openflow_git.bb
-+++ b/meta-networking/recipes-protocols/openflow/openflow_git.bb
-@@ -2,3 +2,5 @@ include ${BPN}.inc
- 
- SRCREV = "c84f33f09d5dbcfc9b489f64cb30475bf36f653a"
- PV = "1.0+git${SRCPV}"
-+
-+PNBLACKLIST[openflow] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130643/"
-diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb b/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-index 0afe10c..bb21e0c 100644
---- a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-+++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-@@ -42,3 +42,5 @@ do_install() {
-     install -m 755 ${S}/nc ${D}${bindir}/nc.${BPN}
- }
- ALTERNATIVE_PRIORITY = "60"
-+
-+PNBLACKLIST[netcat-openbsd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130673/"
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.4.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.4.bb
-index 29dfbfe..a012d84 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_2.2.4.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.4.bb
-@@ -69,3 +69,5 @@ do_install_append () {
- }
- 
- FILES_${PN} += "${datadir}*"
-+
-+PNBLACKLIST[wireshark] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130671/"
-diff --git a/meta-oe/recipes-benchmark/pmbw/pmbw_git.bb b/meta-oe/recipes-benchmark/pmbw/pmbw_git.bb
-index 7a69395..9cdaa96 100644
---- a/meta-oe/recipes-benchmark/pmbw/pmbw_git.bb
-+++ b/meta-oe/recipes-benchmark/pmbw/pmbw_git.bb
-@@ -26,3 +26,5 @@ PACKAGES =+ "${PN}-stats2gnuplot"
- FILES_${PN}-stats2gnuplot = "${bindir}/stats2gnuplot"
- 
- RRECOMMENDS_${PN} = "${PN}-stats2gnuplot"
-+
-+PNBLACKLIST[pmbw] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130568/"
-diff --git a/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb b/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
-index 2de547a..1d367ad 100644
---- a/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
-+++ b/meta-oe/recipes-connectivity/gnokii/gnokii_0.6.31.bb
-@@ -32,3 +32,5 @@ FILES_libgnokii = "${libdir}/libgnokii.so.*"
- 
- SRC_URI[md5sum] = "d9627f4a1152d3ea7806df4532850d5f"
- SRC_URI[sha256sum] = "8f5a083b05c1a66a3402ca5cd80084e14c2c0632c991bb53b03c78e9adb02501"
-+
-+PNBLACKLIST[gnokii] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130662/"
-diff --git a/meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb b/meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb
-index 02a1788..0f18112 100644
---- a/meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb
-+++ b/meta-oe/recipes-connectivity/libmbim/libmbim_1.14.0.bb
-@@ -16,3 +16,5 @@ SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
- "
- SRC_URI[md5sum] = "2ed809e65c85353d3ab59e372890e549"
- SRC_URI[sha256sum] = "ca8d52a95a18cbabae8f15f83f1572316e888b6504f946e6645d24405127ab5b"
-+
-+PNBLACKLIST[libmbim] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130590/"
-diff --git a/meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb b/meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb
-index 4bf238d..91b8763 100644
---- a/meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb
-+++ b/meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb
-@@ -45,3 +45,5 @@ RDEPENDS_${PN}-server += "openssh-sshd ${NEEDED_PERL_MODULES}"
- #| {standard input}:2103: Error: instruction not supported in Thumb16 mode -- `adcs r7,r7,r7'
- #| {standard input}:2104: Error: selected processor does not support Thumb mode `it cs'
- ARM_INSTRUCTION_SET = "arm"
-+
-+PNBLACKLIST[mosh] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130653/"
-diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager-openvpn_1.2.6.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager-openvpn_1.2.6.bb
-index 7ae566e..e2b28dd 100644
---- a/meta-oe/recipes-connectivity/networkmanager/networkmanager-openvpn_1.2.6.bb
-+++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager-openvpn_1.2.6.bb
-@@ -33,3 +33,5 @@ RDEPENDS_${PN} = " \
-     networkmanager \
-     openvpn \
- "
-+
-+PNBLACKLIST[networkmanager-openvpn] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130667/"
-diff --git a/meta-oe/recipes-connectivity/telepathy/libtelepathy_0.3.3.bb b/meta-oe/recipes-connectivity/telepathy/libtelepathy_0.3.3.bb
-index c398dc1..9fb69a1 100644
---- a/meta-oe/recipes-connectivity/telepathy/libtelepathy_0.3.3.bb
-+++ b/meta-oe/recipes-connectivity/telepathy/libtelepathy_0.3.3.bb
-@@ -22,3 +22,5 @@ inherit autotools pkgconfig pythonnative
- 
- FILES_${PN} += "${datadir}/telepathy \
-     ${datadir}/dbus-1"
-+
-+PNBLACKLIST[libtelepathy] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130609/"
-diff --git a/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb b/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
-index 205e1d1..da94138 100644
---- a/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
-+++ b/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
-@@ -20,3 +20,5 @@ do_install() {
-     install -m 0755 dbus-daemon-proxy ${D}${bindir}
- }
- 
-+
-+PNBLACKLIST[dbus-daemon-proxy] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130613/"
-diff --git a/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb b/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
-index 9b053fe..3a62c3d 100644
---- a/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
-+++ b/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
-@@ -27,3 +27,5 @@ PACKAGE_BEFORE_PN = "${PN}-tools"
- FILES_${PN}-tools = "${bindir}"
- 
- BBCLASSEXTEND = "native"
-+
-+PNBLACKLIST[libdbus-c++] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130644/"
-diff --git a/meta-oe/recipes-devtools/geany/geany_1.29.bb b/meta-oe/recipes-devtools/geany/geany_1.29.bb
-index db6a34a..7a7ef7d 100644
---- a/meta-oe/recipes-devtools/geany/geany_1.29.bb
-+++ b/meta-oe/recipes-devtools/geany/geany_1.29.bb
-@@ -13,3 +13,5 @@ SRC_URI[sha256sum] = "394307596bc908419617e4c33e93eae8b5b733dfc8d01161677b8cbd3a
- FILES_${PN} += "${datadir}/icons"
- 
- EXTRA_OECONF = "--disable-html-docs"
-+
-+PNBLACKLIST[geany] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130611/"
-diff --git a/meta-oe/recipes-devtools/php/php_7.1.0.bb b/meta-oe/recipes-devtools/php/php_7.1.0.bb
-index 210d91f..ee8155c 100644
---- a/meta-oe/recipes-devtools/php/php_7.1.0.bb
-+++ b/meta-oe/recipes-devtools/php/php_7.1.0.bb
-@@ -12,3 +12,5 @@ PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
-                         ,mysql5"
- 
- FILES_${PN}-fpm += "${sysconfdir}/php-fpm.d/www.conf.default"
-+
-+PNBLACKLIST[php] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130601/"
-diff --git a/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool_git.bb b/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool_git.bb
-index 02a869f..bcc6c98 100644
---- a/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool_git.bb
-+++ b/meta-oe/recipes-devtools/vala-dbus-binding-tool/vala-dbus-binding-tool_git.bb
-@@ -16,3 +16,5 @@ SRC_URI = "git://github.com/freesmartphone/vala-dbus-binding-tool.git;protocol=h
-     file://0001-configure.ac-don-t-use-dash-in-m4-macro-names.patch \
- "
  S = "${WORKDIR}/git"
-+
-+PNBLACKLIST[vala-dbus-binding-tool] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130581/"
-diff --git a/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb b/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
-index 34edecf..b544b92 100644
---- a/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
-+++ b/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
-@@ -86,3 +86,5 @@ INITSCRIPT_PARAMS = "defaults"
- # threshold.so load.so are also provided by gegl
- # disk.so is also provided by libgphoto2-camlibs
- PRIVATE_LIBS = "threshold.so load.so disk.so"
-+
-+PNBLACKLIST[collectd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130654/"
-diff --git a/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb b/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
-index 2e002f3..26da755 100644
---- a/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
-+++ b/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
-@@ -23,3 +23,5 @@ EXTRA_OECONF = " --disable-static --disable-rebuilds --enable-compile-warnings=m
- DEPENDS += "gtk+ glib-2.0 ruby-native intltool-native gnome-common-native"
  
- inherit autotools pkgconfig gettext
-+
-+PNBLACKLIST[libgxim] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130604/"
-diff --git a/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
-index 2f9a5bd..8b5394e 100644
---- a/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
-+++ b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
-@@ -34,3 +34,6 @@ do_install_append() {
- }
- 
- BBCLASSEXTEND = "native"
-+
-+PNBLACKLIST[pywbem] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130596/"
-+PNBLACKLIST[pywbem] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130681/"
-diff --git a/meta-oe/recipes-gnome/gtkhtml2/gtkhtml2_svn.bb b/meta-oe/recipes-gnome/gtkhtml2/gtkhtml2_svn.bb
-index cd22576..86265bb 100644
---- a/meta-oe/recipes-gnome/gtkhtml2/gtkhtml2_svn.bb
-+++ b/meta-oe/recipes-gnome/gtkhtml2/gtkhtml2_svn.bb
-@@ -37,3 +37,5 @@ S = "${WORKDIR}/trunk"
- inherit pkgconfig autotools
- 
- EXTRA_OECONF = " --disable-accessibility"
-+
-+PNBLACKLIST[gtkhtml2] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130633/"
-diff --git a/meta-oe/recipes-gnome/libglade/libglade_2.6.4.bb b/meta-oe/recipes-gnome/libglade/libglade_2.6.4.bb
-index 8cd023a..8fbc68a 100644
---- a/meta-oe/recipes-gnome/libglade/libglade_2.6.4.bb
-+++ b/meta-oe/recipes-gnome/libglade/libglade_2.6.4.bb
-@@ -29,3 +29,5 @@ FILES_${PN} = "${libdir}/lib*.so.*"
- FILES_${PN}-data = "${datadir}/xml/libglade/glade-2.0.dtd"
- FILES_${PN}-dev += "${bindir}/libglade-convert"
- #RDEPENDS_${PN} = "${PN}-data"
-+
-+PNBLACKLIST[libglade] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130585/"
-diff --git a/meta-oe/recipes-graphics/fbida/fbida_2.10.bb b/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-index c14fc9b..6e786f2 100644
---- a/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-+++ b/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-@@ -64,3 +64,5 @@ do_install() {
- }
- 
- RDEPENDS_${PN} = "ttf-dejavu-sans-mono bash"
-+
-+PNBLACKLIST[fbida] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130677/"
-diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
-index 544149d..7d30312 100644
---- a/meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
-+++ b/meta-oe/recipes-graphics/fontforge/fontforge_20150824.bb
-@@ -58,3 +58,5 @@ RDEPENDS_${PN}-python = "python"
- 
- # for e.g kde's oxygen-fonts
- BBCLASSEXTEND = "native"
-+
-+PNBLACKLIST[fontforge] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130639/"
-diff --git a/meta-oe/recipes-graphics/gegl/gegl_0.3.4.bb b/meta-oe/recipes-graphics/gegl/gegl_0.3.4.bb
-index 9de8489..5e1f2e2 100644
---- a/meta-oe/recipes-graphics/gegl/gegl_0.3.4.bb
-+++ b/meta-oe/recipes-graphics/gegl/gegl_0.3.4.bb
-@@ -28,3 +28,5 @@ FILES_${PN}-dev_remove = "${libdir}/lib*.so"
- # gegl-0.2.0/operations/common/matting-global.c: In function 'matting_process':
- # gegl-0.2.0/operations/common/matting-global.c:463:1: internal compiler error: in patch_jump_insn, at cfgrtl.c:1275
- ARM_INSTRUCTION_SET = "arm"
-+
-+PNBLACKLIST[gegl] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130509/"
-diff --git a/meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb b/meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb
-index 86b4958..e96edd2 100644
---- a/meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb
-+++ b/meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb
-@@ -4,3 +4,5 @@ PR = "r2"
- 
- SRC_URI[md5sum] = "33c079a253270ec8bfb9508e4bb30754"
- SRC_URI[sha256sum] = "8c4101a8cda5fccbba85ba1a15f46f2cf75deaa8b3c525ce5b135b9e1a8fe49e"
-+
-+PNBLACKLIST[libsexy] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130607/"
-diff --git a/meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb b/meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb
-index e5bea97..de8038a 100644
---- a/meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb
-+++ b/meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb
-@@ -43,3 +43,5 @@ PACKAGES += "${PN}-consolefonts ${PN}-consoletrans ${PN}-pcf"
- FILES_${PN}-consolefonts = "${datadir}/consolefonts"
- FILES_${PN}-consoletrans = "${datadir}/consoletrans"
- FILES_${PN}-pcf = "${datadir}/fonts/terminus"
-+
-+PNBLACKLIST[terminus-font] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130638/"
-diff --git a/meta-oe/recipes-graphics/wayland/wayland-fits_git.bb b/meta-oe/recipes-graphics/wayland/wayland-fits_git.bb
-index d060c47..ea7c750 100755
---- a/meta-oe/recipes-graphics/wayland/wayland-fits_git.bb
-+++ b/meta-oe/recipes-graphics/wayland/wayland-fits_git.bb
-@@ -31,3 +31,5 @@ do_install_append() {
- 
- FILES_${PN} += "${bindir}/wfits ${libdir}/weston/*.so"
- FILES_${PN}-dbg += "${bindir}/.debug ${libdir}/weston/.debug ${prefix}/src"
-+
-+PNBLACKLIST[wayland-fits] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130632/"
-diff --git a/meta-oe/recipes-graphics/xorg-app/xstdcmap_1.0.3.bb b/meta-oe/recipes-graphics/xorg-app/xstdcmap_1.0.3.bb
-index 3f5511e..db902d9 100644
---- a/meta-oe/recipes-graphics/xorg-app/xstdcmap_1.0.3.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xstdcmap_1.0.3.bb
-@@ -13,3 +13,5 @@ BBCLASSEXTEND = "native"
- 
- SRC_URI[md5sum] = "eb5473acaef15a5db9b50df29c6a7f90"
- SRC_URI[sha256sum] = "f648e2b0cf16aa29856de998e2c7204be39dc1f8daeda9464d32288e0b580fc1"
-+
-+PNBLACKLIST[xstdcmap] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130660/"
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb
-index 74c066f..97d80c2 100644
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-glamo_git.bb
-@@ -21,3 +21,5 @@ S = "${WORKDIR}/git"
- SRCREV = "cb9ed17035a79e49dde26a1e7e2bc5f10fd8144b"
- 
- EXTRA_OECONF = " --disable-kms "
-+
-+PNBLACKLIST[xf86-video-glamo] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130629/"
-diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.12.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.12.bb
-index 3a7507c..436c92c 100644
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.12.bb
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-nouveau_1.0.12.bb
-@@ -15,3 +15,5 @@ COMPATIBLE_HOST = '(i.86|x86_64).*-linux'
- SRC_URI[md5sum] = "dc79910c7b9e32321cefc7af250c7765"
- SRC_URI[sha256sum] = "0ea057ad7fc31caba2d4e46c7e418fe2b3c762b04fb8d382f53383397fd8391e"
- 
-+
-+PNBLACKLIST[xf86-video-nouveau] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130657/"
-diff --git a/meta-oe/recipes-graphics/xorg-font/font-adobe-100dpi_1.0.3.bb b/meta-oe/recipes-graphics/xorg-font/font-adobe-100dpi_1.0.3.bb
-index 85a4466..03ee525 100644
---- a/meta-oe/recipes-graphics/xorg-font/font-adobe-100dpi_1.0.3.bb
-+++ b/meta-oe/recipes-graphics/xorg-font/font-adobe-100dpi_1.0.3.bb
-@@ -16,3 +16,5 @@ REQUIRED_DISTRO_FEATURES = "x11"
- 
- SRC_URI[md5sum] = "1347c3031b74c9e91dc4dfa53b12f143"
- SRC_URI[sha256sum] = "b2c08433eab5cb202470aa9f779efefce8d9cab2534f34f3aa4a31d05671c054"
-+
-+PNBLACKLIST[font-adobe-100dpi] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130621/"
-diff --git a/meta-oe/recipes-graphics/xorg-font/font-adobe-utopia-100dpi_1.0.4.bb b/meta-oe/recipes-graphics/xorg-font/font-adobe-utopia-100dpi_1.0.4.bb
-index 16e3d2c..54be284 100644
---- a/meta-oe/recipes-graphics/xorg-font/font-adobe-utopia-100dpi_1.0.4.bb
-+++ b/meta-oe/recipes-graphics/xorg-font/font-adobe-utopia-100dpi_1.0.4.bb
-@@ -16,3 +16,5 @@ REQUIRED_DISTRO_FEATURES = "x11"
- 
- SRC_URI[md5sum] = "66fb6de561648a6dce2755621d6aea17"
- SRC_URI[sha256sum] = "d16f5e3f227cc6dd07a160a71f443559682dbc35f1c056a5385085aaec4fada5"
-+
-+PNBLACKLIST[font-adobe-utopia-100dpi] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130623/"
-diff --git a/meta-oe/recipes-graphics/xorg-font/font-bh-100dpi_1.0.3.bb b/meta-oe/recipes-graphics/xorg-font/font-bh-100dpi_1.0.3.bb
-index 08ed6b6..d32a47b 100644
---- a/meta-oe/recipes-graphics/xorg-font/font-bh-100dpi_1.0.3.bb
-+++ b/meta-oe/recipes-graphics/xorg-font/font-bh-100dpi_1.0.3.bb
-@@ -16,3 +16,5 @@ REQUIRED_DISTRO_FEATURES = "x11"
- 
- SRC_URI[md5sum] = "9f11ade089d689b9d59e0f47d26f39cd"
- SRC_URI[sha256sum] = "23c07162708e4b79eb33095c8bfa62c783717a9431254bbf44863734ea239481"
-+
-+PNBLACKLIST[font-bh-100dpi] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130624/"
-diff --git a/meta-oe/recipes-graphics/xorg-font/font-bh-lucidatypewriter-100dpi_1.0.3.bb b/meta-oe/recipes-graphics/xorg-font/font-bh-lucidatypewriter-100dpi_1.0.3.bb
-index 5ded41a..bffeb95 100644
---- a/meta-oe/recipes-graphics/xorg-font/font-bh-lucidatypewriter-100dpi_1.0.3.bb
-+++ b/meta-oe/recipes-graphics/xorg-font/font-bh-lucidatypewriter-100dpi_1.0.3.bb
-@@ -16,3 +16,5 @@ REQUIRED_DISTRO_FEATURES = "x11"
- 
- SRC_URI[md5sum] = "c8b73a53dcefe3e8d3907d3500e484a9"
- SRC_URI[sha256sum] = "62a83363c2536095fda49d260d21e0847675676e4e3415054064cbdffa641fbb"
-+
-+PNBLACKLIST[font-bh-lucidatypewriter-100dpi] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130625/"
-diff --git a/meta-oe/recipes-graphics/xorg-font/font-misc-misc_1.1.2.bb b/meta-oe/recipes-graphics/xorg-font/font-misc-misc_1.1.2.bb
-index a7c284a..342572a 100644
---- a/meta-oe/recipes-graphics/xorg-font/font-misc-misc_1.1.2.bb
-+++ b/meta-oe/recipes-graphics/xorg-font/font-misc-misc_1.1.2.bb
-@@ -15,3 +15,5 @@ REQUIRED_DISTRO_FEATURES = "x11"
- 
- SRC_URI[md5sum] = "c88eb44b3b903d79fb44b860a213e623"
- SRC_URI[sha256sum] = "b8e77940e4e1769dc47ef1805918d8c9be37c708735832a07204258bacc11794"
-+
-+PNBLACKLIST[font-misc-misc] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130628/"
-diff --git a/meta-oe/recipes-kernel/crash/crash_7.1.5.bb b/meta-oe/recipes-kernel/crash/crash_7.1.5.bb
-index 936438b..3ea5820 100644
---- a/meta-oe/recipes-kernel/crash/crash_7.1.5.bb
-+++ b/meta-oe/recipes-kernel/crash/crash_7.1.5.bb
-@@ -111,3 +111,5 @@ RDEPENDS_${PN}_class-cross = ""
- # Causes gcc to get stuck and eat all available memory in qemuarm builds
- # jenkins  15161  100 12.5 10389596 10321284 ?   R    11:40  28:17 /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.2/cc1 -quiet -I . -I . -I ./common -I ./config -I ./../include/opcode -I ./../opcodes/.. -I ./../readline/.. -I ../bfd -I ./../bfd -I ./../include -I ../libdecnumber -I ./../libdecnumber -I ./gnulib/import -I build-gnulib/import -isysroot /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm -MMD eval.d -MF .deps/eval.Tpo -MP -MT eval.o -D LOCALEDIR="/usr/local/share/locale" -D CRASH_MERGE -D HAVE_CONFIG_H -D TUI=1 eval.c -quiet -dumpbase eval.c -march=armv5te -mthumb -mthumb-interwork -mtls-dialect=gnu -auxbase-strip eval.o -g -O2 -Wall -Wpointer-arith -Wformat-nonliteral -Wno-pointer-sign -Wno-unused -Wunused-value -Wunused-function -Wno-switch -Wno-char-subscripts -Wmissing-prototypes -Wdeclaration-after-statement -Wempty-body -feliminate-unused-debug-types -o -
- ARM_INSTRUCTION_SET = "arm"
-+
-+PNBLACKLIST[crash] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130678/"
-diff --git a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-index 2d67b5a..b33038e 100644
---- a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-+++ b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
-@@ -20,3 +20,5 @@ SRC_URI[sha256sum] = "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8c
- inherit autotools lib_package binconfig
- 
- DEPENDS = "asciidoc-native libogg flac"
-+
-+PNBLACKLIST[audiofile] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130588/"
-diff --git a/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb b/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
-index d7e93b6..325140e 100644
---- a/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
-+++ b/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
-@@ -20,3 +20,5 @@ inherit waf
- export LINKFLAGS="${LDFLAGS}"
- 
- FILES_${PN} += "${datadir}/dbus-1/services"
-+
-+PNBLACKLIST[a2jmidid] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130646/"
-diff --git a/meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer_1.2.12.bb b/meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer_1.2.12.bb
-index f1a01b9..06623f8 100644
---- a/meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer_1.2.12.bb
-+++ b/meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer_1.2.12.bb
-@@ -38,3 +38,5 @@ do_configure () {
-     done
- }
- 
-+
-+PNBLACKLIST[libsdl-mixer] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130592/"
-diff --git a/meta-oe/recipes-multimedia/libsdl-mixer/libsdl2-mixer_2.0.1.bb b/meta-oe/recipes-multimedia/libsdl-mixer/libsdl2-mixer_2.0.1.bb
-index 2dc48e4..3080d59 100644
---- a/meta-oe/recipes-multimedia/libsdl-mixer/libsdl2-mixer_2.0.1.bb
-+++ b/meta-oe/recipes-multimedia/libsdl-mixer/libsdl2-mixer_2.0.1.bb
-@@ -25,3 +25,5 @@ do_configure_prepend () {
-         rm -f acinclude/$i
-     done
- }
-+
-+PNBLACKLIST[libsdl2-mixer] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130659/"
-diff --git a/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.5.bb b/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.5.bb
-index 7c6db62..9892e35 100644
---- a/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.5.bb
-+++ b/meta-oe/recipes-multimedia/minidlna/minidlna_1.1.5.bb
-@@ -2,3 +2,5 @@ require ${BPN}.inc
- 
- SRCREV = "v1_1_5"
- LIC_FILES_CHKSUM = "file://LICENCE.miniupnpd;md5=b0dabf9d8e0f871554e309d62ead8d2b"
-+
-+PNBLACKLIST[minidlna] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130630/"
-diff --git a/meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb b/meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb
-index 304b654..4e4fe68 100644
---- a/meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb
-+++ b/meta-oe/recipes-sato/claws-mail/sylpheed_2.7.1.bb
-@@ -29,3 +29,5 @@ do_configure_prepend() {
- 
- inherit autotools pkgconfig
- 
-+
-+PNBLACKLIST[sylpheed] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130651/"
-diff --git a/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb b/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb
-index 8d36a32..925a8f7 100644
---- a/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb
-+++ b/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb
-@@ -60,3 +60,5 @@ do_install () {
- }
- 
- COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
-+
-+PNBLACKLIST[ipmiutil] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130641/"
-diff --git a/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.11.bb b/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.11.bb
-index 0249abe..091d6ef 100644
---- a/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.11.bb
-+++ b/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.11.bb
-@@ -25,3 +25,5 @@ do_configure_prepend() {
-         rm -f ${S}/acinclude/$i
-     done
- }
-+
-+PNBLACKLIST[libsdl-ttf] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130598/"
-diff --git a/meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf_2.0.14.bb b/meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf_2.0.14.bb
-index af5a55c..da74fba 100644
---- a/meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf_2.0.14.bb
-+++ b/meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf_2.0.14.bb
-@@ -25,3 +25,5 @@ do_configure_prepend() {
-         rm -f ${S}/acinclude/$i
-     done
- }
-+
-+PNBLACKLIST[libsdl2-ttf] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130656/"
-diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
-index e107c8f..6706bec 100644
---- a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
-+++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
-@@ -59,3 +59,5 @@ FILES_kpartx = "${base_sbindir}/kpartx \
-                "
- 
- RDEPENDS_${PN} += "kpartx"
-+
-+PNBLACKLIST[multipath-tools] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130529/"
-diff --git a/meta-oe/recipes-support/ode/ode_0.13.bb b/meta-oe/recipes-support/ode/ode_0.13.bb
-index 2dc82a8..5d47a66 100644
---- a/meta-oe/recipes-support/ode/ode_0.13.bb
-+++ b/meta-oe/recipes-support/ode/ode_0.13.bb
-@@ -26,3 +26,6 @@ PACKAGECONFIG ?= ""
- # if it isn't explicitly selected and "$build_os" == "$target_os", then configure will run
- # series of AC_TRY_RUN which won't work for cross-compilation and configure fails
- PACKAGECONFIG[double-precision] = "--enable-double-precision,--disable-double-precision"
-+
-+PNBLACKLIST[ode] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130599/"
-+PNBLACKLIST[ode] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130620/"
-diff --git a/meta-oe/recipes-support/pidgin/pidgin_2.11.0.bb b/meta-oe/recipes-support/pidgin/pidgin_2.11.0.bb
-index e997146..aacb30a 100644
---- a/meta-oe/recipes-support/pidgin/pidgin_2.11.0.bb
-+++ b/meta-oe/recipes-support/pidgin/pidgin_2.11.0.bb
-@@ -118,3 +118,5 @@ python populate_packages_prepend () {
-         description='Finch plugin %s',
-         prepend=True, extra_depends='')
- }
-+
-+PNBLACKLIST[pidgin] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130634/"
-diff --git a/meta-oe/recipes-support/poppler/poppler_0.51.0.bb b/meta-oe/recipes-support/poppler/poppler_0.51.0.bb
-index 4aa2dba..90c2056 100644
---- a/meta-oe/recipes-support/poppler/poppler_0.51.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_0.51.0.bb
-@@ -60,3 +60,5 @@ FILES_libpoppler = "${libdir}/libpoppler.so.*"
- FILES_libpoppler-glib = "${libdir}/libpoppler-glib.so.*"
- 
- RDEPENDS_libpoppler = "poppler-data"
-+
-+PNBLACKLIST[poppler] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130593/"
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-index 73609af..bee1e19 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-@@ -13,3 +13,5 @@ SRC_URI += " \
- 
- SRC_URI[md5sum] = "e9f401615e92e5eb27396c995c1446ba"
- SRC_URI[sha256sum] = "7be11df31ac7d716f1f952e22b5ae8e2049edd633a41b223776a853d9106f4e7"
-+
-+PNBLACKLIST[syslog-ng] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130631/"
-diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.bb
-index 425f66b..5211d7b 100644
---- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.bb
-+++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.bb
-@@ -17,3 +17,5 @@ RRECOMMENDS_${PN} = "usb-modeswitch-data"
- do_install() {
-     oe_runmake DESTDIR=${D} install
- }
-+
-+PNBLACKLIST[usb-modeswitch] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130620/"
-diff --git a/meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.15.bb b/meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.15.bb
-index b94e0cc..22b4bb6 100644
---- a/meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.15.bb
-+++ b/meta-oe/recipes-support/xdg-user-dirs/xdg-user-dirs_0.15.bb
-@@ -20,3 +20,5 @@ CONFFILES_${PN} += " \
-     ${sysconfdir}/xdg/user-dirs.conf \
-     ${sysconfdir}/xdg/user-dirs.defaults \
+-
++PNBLACKLIST[contacts] ?= "Depends on blacklisted evolution-data-server"
+diff --git a/meta-gnome/recipes-gnome/pimlico/dates_git.bb b/meta-gnome/recipes-gnome/pimlico/dates_git.bb
+index a4a572f..6a9804f 100644
+--- a/meta-gnome/recipes-gnome/pimlico/dates_git.bb
++++ b/meta-gnome/recipes-gnome/pimlico/dates_git.bb
+@@ -17,3 +17,5 @@ SRC_URI = "git://git.gnome.org/${BPN} \
+     file://uclibc-NL_TIME_FIRST_WEEKDAY-absent.patch \
+     file://0001-Update-to-new-evolution-data-server-e_source_-color-.patch \
  "
 +
-+PNBLACKLIST[xdg-user-dirs] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130635/"
-diff --git a/meta-python/recipes-connectivity/gateone/gateone_git.bb b/meta-python/recipes-connectivity/gateone/gateone_git.bb
-index 8b2a192..ba9a799 100644
---- a/meta-python/recipes-connectivity/gateone/gateone_git.bb
-+++ b/meta-python/recipes-connectivity/gateone/gateone_git.bb
-@@ -86,3 +86,5 @@ RDEPENDS_${PN} = "mime-support \
++PNBLACKLIST[dates] ?= "Depends on blacklisted libglade"
+diff --git a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
+index 8c39ad7..89b63e9 100644
+--- a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
+@@ -31,3 +31,5 @@ SRC_URI += "file://iconpath-option.patch \
+ SRC_URI[archive.md5sum] = "41db9e3cb25d35af2675c599e67944d1"
+ SRC_URI[archive.sha256sum] = "8601ee24c2e096593221cbd6ebdb6686042225a03c02a01c0d67c163f9febd1a"
+ GNOME_COMPRESS_TYPE="bz2"
++
++PNBLACKLIST[gnome-themes] ?= "Depends on blacklisted gtk-engines"
+diff --git a/meta-gnome/recipes-support/florence/florence_0.5.4.bb b/meta-gnome/recipes-support/florence/florence_0.5.4.bb
+index dfdb6bd..032422e 100644
+--- a/meta-gnome/recipes-support/florence/florence_0.5.4.bb
++++ b/meta-gnome/recipes-support/florence/florence_0.5.4.bb
+@@ -18,3 +18,7 @@ SRC_URI[sha256sum] = "26d33aa20d5fbf34ceeded4c41cb922d2988b6082e33d9acc46dd7bfe5
+ inherit gettext autotools gconf pkgconfig
  
- SYSTEMD_SERVICE_${PN} = "gateone.service"
- INITSCRIPT_NAME = "gateone"
+ EXTRA_OECONF = "--disable-scrollkeeper --without-docs --without-at-spi --without-panelapplet --without-xrecord"
 +
-+PNBLACKLIST[gateone] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130642/"
-diff --git a/meta-python/recipes-devtools/python/python-cryptography-vectors_1.6.bb b/meta-python/recipes-devtools/python/python-cryptography-vectors_1.6.bb
-index 4975278..92b4907 100644
---- a/meta-python/recipes-devtools/python/python-cryptography-vectors_1.6.bb
-+++ b/meta-python/recipes-devtools/python/python-cryptography-vectors_1.6.bb
-@@ -1,2 +1,4 @@
- inherit pypi setuptools
- require python-cryptography-vectors.inc
++PNBLACKLIST[florence] ?= "Depends on blacklisted libglade"
 +
-+PNBLACKLIST[python-cryptography-vectors] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130664/"
-diff --git a/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb b/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
-index 7fddf7a..74d7866 100644
---- a/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
-+++ b/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
-@@ -14,3 +14,5 @@ RDEPENDS_${PN}_class-target += " \
-         "
++PNBLACKLIST[florence] ?= "Depends on blacklisted gstreamer"
+diff --git a/meta-gpe/recipes-graphics/gpe-scap/gpe-scap_1.4.bb b/meta-gpe/recipes-graphics/gpe-scap/gpe-scap_1.4.bb
+index 3f1e27e..4316a81 100644
+--- a/meta-gpe/recipes-graphics/gpe-scap/gpe-scap_1.4.bb
++++ b/meta-gpe/recipes-graphics/gpe-scap/gpe-scap_1.4.bb
+@@ -21,3 +21,6 @@ SRC_URI += "file://0001-Fix-the-ordering-of-LDADD-options-to-fix-a-compilati.pat
  
- BBCLASSEXTEND = "native"
-+
-+PNBLACKLIST[python-pbr] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130650/"
-diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_1.6.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_1.6.bb
-index 58994ff..909bbb4 100644
---- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_1.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_1.6.bb
-@@ -1,2 +1,4 @@
- inherit pypi setuptools3
- require python-cryptography-vectors.inc
-+
-+PNBLACKLIST[python3-cryptography-vectors] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130626/"
-diff --git a/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.2.bb b/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.2.bb
-index 3f07b2e..c8fb94e 100644
---- a/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.2.bb
-@@ -1,2 +1,4 @@
- inherit pypi setuptools3
- require python-ndg-httpsclient.inc
-+
-+PNBLACKLIST[python3-ndg-httpsclient] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130615/"
-diff --git a/meta-ruby/recipes-devtools/ruby/bundler_git.bb b/meta-ruby/recipes-devtools/ruby/bundler_git.bb
-index 31e72e5..f2d8f3c 100644
---- a/meta-ruby/recipes-devtools/ruby/bundler_git.bb
-+++ b/meta-ruby/recipes-devtools/ruby/bundler_git.bb
-@@ -29,3 +29,5 @@ inherit ruby
- RDEPENDS_${PN} = "git"
- 
- BBCLASSEXTEND = "native"
-+
-+PNBLACKLIST[bundler] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130640/"
-diff --git a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.6.bb b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.6.bb
-index 5493c12..cefcb8a 100644
---- a/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.6.bb
-+++ b/meta-webserver/recipes-httpd/nostromo/nostromo_1.9.6.bb
-@@ -62,3 +62,5 @@ pkg_postinst_${PN} () {
-         fi
-     fi
- }
-+
-+PNBLACKLIST[nostromo] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130655/"
-diff --git a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.0.bb b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.0.bb
-index efa533a..74363ce 100644
---- a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.0.bb
-+++ b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.0.bb
-@@ -50,3 +50,5 @@ SYSTEMD_SERVICE_${PN} = "thttpd.service"
- FILES_${PN} += "${SRV_DIR}"
- FILES_${PN}-dbg += "${SRV_DIR}/cgi-bin/.debug"
+ RREPLACES_${PN} = "gpe-screenshot"
  
 +
-+PNBLACKLIST[sthttpd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130676/"
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_git.bb b/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
-index 40b32ad..ec74320 100644
---- a/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
-@@ -51,3 +51,5 @@ do_install_append() {
++PNBLACKLIST[gpe-scap] ?= "Depends on blacklisted libglade"
++PNBLACKLIST[gpe-scap] ?= "Depends on blacklisted libgpewidget"
+diff --git a/meta-gpe/recipes-graphics/minilite/minilite_0.50.bb b/meta-gpe/recipes-graphics/minilite/minilite_0.50.bb
+index 90960a2..830ea07 100644
+--- a/meta-gpe/recipes-graphics/minilite/minilite_0.50.bb
++++ b/meta-gpe/recipes-graphics/minilite/minilite_0.50.bb
+@@ -14,3 +14,5 @@ SRC_URI[md5sum] = "d81cecf269ad7bab0da960e6e7228332"
+ SRC_URI[sha256sum] = "2b299425203246090a4949e034f1d0efb3ff99cd1591d0e16c57370a530b361e"
  
- FILES_${PN}-dbg += "${libexecdir}/netdata/plugins.d/.debug"
- RDEPENDS_${PN} = "bash zlib"
+ export CVSBUILD="no"
 +
-+PNBLACKLIST[netdata] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130636/"
-diff --git a/meta-xfce/recipes-apps/menulibre/menulibre_2.1.3.bb b/meta-xfce/recipes-apps/menulibre/menulibre_2.1.3.bb
-index e945f01..73af1a8 100644
---- a/meta-xfce/recipes-apps/menulibre/menulibre_2.1.3.bb
-+++ b/meta-xfce/recipes-apps/menulibre/menulibre_2.1.3.bb
-@@ -34,3 +34,5 @@ RDEPENDS_${PN} += " \
-     python3-unixadmin \
-     python3-psutil \
- "
-+
-+PNBLACKLIST[menulibre] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130617/"
-diff --git a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.3.4.bb b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.3.4.bb
-index 6310a17..80cb591 100644
---- a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.3.4.bb
-+++ b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.3.4.bb
-@@ -19,3 +19,5 @@ FILES_${PN} += " \
-     ${datadir}/themes \
-     ${datadir}/dbus-1 \
- "
-+
-+PNBLACKLIST[xfce4-notifyd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130616/"
-diff --git a/meta-xfce/recipes-art/cursor-themes/openzone_1.2.3.bb b/meta-xfce/recipes-art/cursor-themes/openzone_1.2.3.bb
-index 9547736..bf4b0d8 100644
---- a/meta-xfce/recipes-art/cursor-themes/openzone_1.2.3.bb
-+++ b/meta-xfce/recipes-art/cursor-themes/openzone_1.2.3.bb
-@@ -27,3 +27,5 @@ python populate_packages_prepend () {
++PNBLACKLIST[minilite] ?= "Depends on blacklisted libgpewidget"
+diff --git a/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb b/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
+index f8ecc93..6f14af5 100644
+--- a/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
++++ b/meta-gpe/recipes-support/fbreader/fbreader_0.12.10.bb
+@@ -42,3 +42,5 @@ do_install() {
  
- PACKAGES_DYNAMIC += "^openzone-.*"
+ SRC_URI[md5sum] = "da9ec4721efdb0ec0aaa182bff16ad82"
+ SRC_URI[sha256sum] = "328aec454db80e225aa0b5c31adef74bf62a14357482947e87e9731686b3c624"
++
++PNBLACKLIST[fbreader] ?= "Depends on blacklisted libgpewidget"
+diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+index 300daa5..06dbce3 100644
+--- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
++++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
+@@ -39,3 +39,5 @@ do_install() {
+ FILES_${PN} += "${datadir}/${BPN}"
+ 
+ RDEPENDS_${PN} += "libdvben50221 libucsi libdvbapi"
++
++PNBLACKLIST[tvheadend] ?= "Depends on blacklisted dvb-apps"
+diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi-addon-pvr-hts_git.bb b/meta-multimedia/recipes-mediacenter/kodi/kodi-addon-pvr-hts_git.bb
+index 1f33a8a..adff73b 100644
+--- a/meta-multimedia/recipes-mediacenter/kodi/kodi-addon-pvr-hts_git.bb
++++ b/meta-multimedia/recipes-mediacenter/kodi/kodi-addon-pvr-hts_git.bb
+@@ -53,3 +53,5 @@ RDEPENDS_${PN} = "libkodiplatform"
+ INSANE_SKIP_${PN} = "dev-so"
+ FILES_${PN} += "${datadir}/kodi"
+ FILES_${PN}-dbg += "${datadir}/kodi/addons/*/.debug/"
++
++PNBLACKLIST[kodi-addon-pvr-hts] ?= "Depends on blacklisted kodi"
+diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi-platform_git.bb b/meta-multimedia/recipes-mediacenter/kodi/kodi-platform_git.bb
+index 802259d..ea739c2 100644
+--- a/meta-multimedia/recipes-mediacenter/kodi/kodi-platform_git.bb
++++ b/meta-multimedia/recipes-mediacenter/kodi/kodi-platform_git.bb
+@@ -36,3 +36,4 @@ do_compile_prepend() {
+ RPROVIDES_${PN} += "libkodiplatform"
+ FILES_${PN}-dev += "${libdir}/*platform"
+ 
++PNBLACKLIST[kodi-platform] ?= "Depends on blacklisted kodi"
+diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
+index 6d8f2a2..e3a117e 100644
+--- a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
++++ b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
+@@ -192,3 +192,5 @@ RPROVIDES_${PN} += "xbmc"
+ 
+ TOOLCHAIN = "gcc"
+ 
++
++PNBLACKLIST[kodi] ?= "Depends on blacklisted libsdl-mixer"
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-fluendo-mp3_0.10.31.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-fluendo-mp3_0.10.31.bb
+index 1e2cd2a..e7c7c21 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-fluendo-mp3_0.10.31.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-fluendo-mp3_0.10.31.bb
+@@ -12,3 +12,5 @@ acpaths = "-I ${S}/common/m4 -I ${S}/m4"
+ 
+ SRC_URI[md5sum] = "adf0390f3416bb72f91c358528be0c38"
+ SRC_URI[sha256sum] = "dae0d0559a4e159c0dd92b7e18de059a5783f8d038904c7de4ca6393f7d55c7d"
++
++PNBLACKLIST[gst-fluendo-mp3] ?= "Depends on blacklisted gstreamer"
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-fluendo-mpegdemux_0.10.85.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-fluendo-mpegdemux_0.10.85.bb
+index 7bba41a..9787dba 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-fluendo-mpegdemux_0.10.85.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-fluendo-mpegdemux_0.10.85.bb
+@@ -10,3 +10,5 @@ acpaths = "-I ${S}/common/m4 -I ${S}/m4"
+ 
+ SRC_URI[md5sum] = "7c4fb993f80b9ae631b11897733f0970"
+ SRC_URI[sha256sum] = "df04c91cc8e5d9a892c2492ed989974b4547beaa2a3647649e85113317897424"
++
++PNBLACKLIST[gst-fluendo-mpegdemux] ?= "Depends on blacklisted gstreamer"
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-meta-base_0.10.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-meta-base_0.10.bb
+index 039abe1..afd6a58 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-meta-base_0.10.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-meta-base_0.10.bb
+@@ -71,3 +71,5 @@ RDEPENDS_gst-meta-video = "\
+ 
+ RRECOMMENDS_gst-meta-video = "\
+     gst-meta-audio"
++
++PNBLACKLIST[gst-meta-base] ?= "Depends on blacklisted gstreamer"
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-openmax_0.10.1.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-openmax_0.10.1.bb
+index 2e01579..8b2bf75 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-openmax_0.10.1.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-openmax_0.10.1.bb
+@@ -33,3 +33,5 @@ FILES_${PN}-dbg += "${libdir}/gstreamer-0.10/.debug/"
+ 
+ SRC_URI[md5sum] = "4d0370bfe99dea20918c84347abadb4e"
+ SRC_URI[sha256sum] = "9074d5a0591995133d19cfb15144f19664f902c1623f996595695cf2c2070e1f"
++
++PNBLACKLIST[gst-openmax] ?= "Depends on blacklisted gstreamer"
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-bad_0.10.23.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-bad_0.10.23.bb
+index 38fccc8..8abd63a 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-bad_0.10.23.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-bad_0.10.23.bb
+@@ -59,3 +59,5 @@ do_configure_prepend() {
+ 
+ SRC_URI[md5sum] = "fcb09798114461955260e4d940db5987"
+ SRC_URI[sha256sum] = "0eae7d1a1357ae8377fded6a1b42e663887beabe0e6cc336e2ef9ada42e11491"
++
++PNBLACKLIST[gst-plugins-bad] ?= "Depends on blacklisted gstreamer"
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
+index eefd993..02252bf 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-base_0.10.36.bb
+@@ -42,3 +42,5 @@ CACHED_CONFIGUREVARS_append_x86 = " ac_cv_header_emmintrin_h=no ac_cv_header_xmm
+ 
+ # /usr/bin/gst-visualise-0.10 is a perl script.
+ RDEPENDS_${PN}-apps += "perl"
++
++PNBLACKLIST[gst-plugins-base] ?= "Depends on blacklisted gstreamer"
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-gl_0.10.3.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-gl_0.10.3.bb
+index 6859f33..62a6754 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-gl_0.10.3.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-gl_0.10.3.bb
+@@ -23,3 +23,5 @@ EXTRA_OECONF += "ac_cv_header_GL_gl_h=no"
+ ALLOW_EMPTY_${PN} = "1"
+ ALLOW_EMPTY_${PN}-apps = "1"
+ ALLOW_EMPTY_${PN}-glib = "1"
++
++PNBLACKLIST[gst-plugins-gl] ?= "Depends on blacklisted gstreamer"
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-good_0.10.31.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-good_0.10.31.bb
+index 7e4a525..cabbca5 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-good_0.10.31.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-good_0.10.31.bb
+@@ -46,3 +46,5 @@ SRC_URI[sha256sum] = "7e27840e40a7932ef2dc032d7201f9f41afcaf0b437daf5d1d44dc96d9
+ 
+ FILES_${PN}-gconfelements += "${sysconfdir}/gconf/schemas/gstreamer-0.10.schemas"
+ FILES_${PN}-equalizer += "${datadir}/gstreamer-0.10/presets/*.prs"
++
++PNBLACKLIST[gst-plugins-good] ?= "Depends on blacklisted gstreamer"
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-ugly_0.10.19.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-ugly_0.10.19.bb
+index 199b47d..d8a8fd5 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-ugly_0.10.19.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-plugins-ugly_0.10.19.bb
+@@ -33,3 +33,5 @@ SRC_URI += "file://0001-cdio-compensate-for-libcdio-s-recent-cd-text-api-cha.pat
+             file://0002-Fix-opencore-include-paths.patch"
+ 
+ FILES_${PN}-amrnb += "${datadir}/gstreamer-0.10/presets/GstAmrnbEnc.prs"
++
++PNBLACKLIST[gst-plugins-ugly] ?= "Depends on blacklisted gstreamer"
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-rtsp_0.10.8.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-rtsp_0.10.8.bb
+index b78bcaf..b31a7ee 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-rtsp_0.10.8.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-rtsp_0.10.8.bb
+@@ -16,3 +16,5 @@ EXTRA_OECONF = "--disable-introspection"
+ inherit autotools pythonnative gettext
+ 
+ FILES_${PN}-dev += "${datadir}/vala/vapi/"
++
++PNBLACKLIST[gst-rtsp] ?= "Depends on blacklisted gstreamer"
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.16.0.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.16.0.bb
+index 679b102..fa2e67d 100644
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.16.0.bb
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.16.0.bb
+@@ -16,3 +16,5 @@ SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
+            "
+ SRC_URI[md5sum] = "4970c110f160b33637a3515004c637b2"
+ SRC_URI[sha256sum] = "7ab6bb47fd23bf4d3fa17424e40ea5552d08b19e5ee4f125f21f316c8086ba2a"
++
++PNBLACKLIST[libqmi] ?= "Depends on blacklisted libmbim"
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.6.4.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.6.4.bb
+index 5e4e220..cde9bf6 100644
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.6.4.bb
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.6.4.bb
+@@ -49,3 +49,5 @@ FILES_${PN}-staticdev += " \
+ FILES_${PN}-dbg += "${libdir}/ModemManager/.debug"
+ 
+ SYSTEMD_SERVICE_${PN} = "ModemManager.service"
++
++PNBLACKLIST[modemmanager] ?= "Depends on blacklisted libmbim"
+diff --git a/meta-oe/recipes-connectivity/telepathy/telepathy-mission-control_5.16.1.bb b/meta-oe/recipes-connectivity/telepathy/telepathy-mission-control_5.16.1.bb
+index 582783c..09841a4 100644
+--- a/meta-oe/recipes-connectivity/telepathy/telepathy-mission-control_5.16.1.bb
++++ b/meta-oe/recipes-connectivity/telepathy/telepathy-mission-control_5.16.1.bb
+@@ -49,3 +49,5 @@ FILES_libmissioncontrol-server-dev = "${libdir}/libmissioncontrol-server.*"
+ FILES_libmissioncontrol-dbg = "${libdir}/.debug/libmissioncontrol.so.*"
+ FILES_libmissioncontrol-config-dbg = "${libdir}/.debug/libmissioncontrol-config.so.*"
+ FILES_libmissioncontrol-server-dbg = "${libdir}/.debug/libmissioncontrol-server.so.*"
++
++PNBLACKLIST[telepathy-mission-control] ?= "Depends on blacklisted libtelepathy"
+diff --git a/meta-oe/recipes-devtools/geany/geany-plugins_1.29.bb b/meta-oe/recipes-devtools/geany/geany-plugins_1.29.bb
+index 89bb966..34a6d5d 100644
+--- a/meta-oe/recipes-devtools/geany/geany-plugins_1.29.bb
++++ b/meta-oe/recipes-devtools/geany/geany-plugins_1.29.bb
+@@ -261,3 +261,5 @@ RDEPENDS_${PN}-xmlsnippets = "${PN}"
+ PACKAGES =+ "${PLUGINS}"
+ RDEPENDS_${PN} = "${PLUGINS}"
  ALLOW_EMPTY_${PN} = "1"
 +
-+PNBLACKLIST[openzone] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130682/"
-diff --git a/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_1.1.0.bb b/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_1.1.0.bb
-index 65503a4..e11c433 100644
---- a/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_1.1.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/verve/xfce4-verve-plugin_1.1.0.bb
-@@ -7,3 +7,5 @@ inherit xfce-panel-plugin
++PNBLACKLIST[geany-plugins] ?= "Depends on blacklisted geany"
+diff --git a/meta-oe/recipes-devtools/glade/glade3_3.8.5.bb b/meta-oe/recipes-devtools/glade/glade3_3.8.5.bb
+index fd65536..403edd6 100644
+--- a/meta-oe/recipes-devtools/glade/glade3_3.8.5.bb
++++ b/meta-oe/recipes-devtools/glade/glade3_3.8.5.bb
+@@ -22,3 +22,5 @@ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[gnome] = "--enable-gnome,--disable-gnome,libbonoboui libgnomeui"
  
- SRC_URI[md5sum] = "ddd0190ae56f6117dbcf9ff2bf5a8cbf"
- SRC_URI[sha256sum] = "a3196f818c7ad57d19cd6581e168fd2b9f96de070246aea70c35ce2e5f9d9c84"
+ FILES_${PN} += "${datadir}/icons"
 +
-+PNBLACKLIST[xfce4-verve-plugin] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130622/"
++PNBLACKLIST[glade3] ?= "Depends on blacklisted libbonoboui"
+diff --git a/meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.1.bb b/meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.1.bb
+index 015d803..5facde6 100644
+--- a/meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.1.bb
++++ b/meta-oe/recipes-extended/openlmi/openlmi-storage_0.8.1.bb
+@@ -30,3 +30,5 @@ do_install_append() {
+ }
+ 
+ FILES_${PN} =+ "${sysconfdir}/openlmi/storage/storage.conf ${datadir}/${BPN}/*"
++
++PNBLACKLIST[openlmi-storage] ?= "Depends on blacklisted pywbem"
+diff --git a/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb b/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
+index b23869d..cc8e829 100644
+--- a/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
++++ b/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
+@@ -21,3 +21,5 @@ do_compile_prepend() {
+ do_install_prepend() {
+     cd cli
+ }
++
++PNBLACKLIST[openlmi-tools] ?= "Depends on blacklisted pywbem"
+diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.18.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.18.bb
+index 38e10ef..2ab63af 100644
+--- a/meta-oe/recipes-graphics/gimp/gimp_2.8.18.bb
++++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.18.bb
+@@ -47,3 +47,7 @@ CFLAGS += "-fPIC"
+ 
+ FILES_${PN}-dbg += "${libdir}/gimp/2.0/*/.debug"
+ FILES_${PN}  += "${datadir}/appdata"
++
++PNBLACKLIST[gimp] ?= "Depends on blacklisted poppler"
++
++PNBLACKLIST[gimp] ?= "Depends on blacklisted gegl"
+diff --git a/meta-oe/recipes-multimedia/esound/esound_0.2.36.bb b/meta-oe/recipes-multimedia/esound/esound_0.2.36.bb
+index dc6c366..9e5061b 100644
+--- a/meta-oe/recipes-multimedia/esound/esound_0.2.36.bb
++++ b/meta-oe/recipes-multimedia/esound/esound_0.2.36.bb
+@@ -34,3 +34,5 @@ FILES_esddsp = "${bindir}/esddsp ${libdir}/libesddsp.so.*"
+ FILES_esd = "${bindir}/esd"
+ FILES_esd-utils = "${bindir}/*"
+ 
++
++PNBLACKLIST[esound] ?= "Depends on blacklisted audiofile"
+diff --git a/meta-oe/recipes-navigation/geoclue/geoclue_2.4.4.bb b/meta-oe/recipes-navigation/geoclue/geoclue_2.4.4.bb
+index 1d531ae..3e66ce1 100644
+--- a/meta-oe/recipes-navigation/geoclue/geoclue_2.4.4.bb
++++ b/meta-oe/recipes-navigation/geoclue/geoclue_2.4.4.bb
+@@ -51,3 +51,5 @@ FILES_${PN}-dev += " \
+     ${datadir}/dbus-1/interfaces \
+     ${datadir}/gir-1.0 \
+ "
++
++PNBLACKLIST[geoclue] ?= "Depends on blacklisted modemmanager"
+diff --git a/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb b/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
+index 2989850..a9ed091 100644
+--- a/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
++++ b/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
+@@ -28,3 +28,7 @@ FILES_${PN}-dbg += "${libdir}/*/.debug"
+ 
+ SRC_URI[md5sum] = "e1f540cf3ebab06c3d7db1f46b44ac88"
+ SRC_URI[sha256sum] = "3ae59aa61a8071c9fad111e5fd606aabc27961eb4192f8729987a27dae6b3974"
++
++PNBLACKLIST[farsight2] ?= "Depends on blacklisted gstreamer"
++PNBLACKLIST[farsight2] ?= "Depends on blacklisted libnice"
++PNBLACKLIST[farsight2] ?= "Depends on blacklisted gst-plugins-base"
+diff --git a/meta-oe/recipes-support/farsight/libnice_0.0.13.bb b/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
+index 3c2a054..c4d4cd2 100644
+--- a/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
++++ b/meta-oe/recipes-support/farsight/libnice_0.0.13.bb
+@@ -40,3 +40,5 @@ do_compile_append() {
+ 
+ SRC_URI[md5sum] = "e5b9f799a57cb939ea2658ec35253ab9"
+ SRC_URI[sha256sum] = "d8dd260c486a470a6052a5323920878a084e44a19df09b15728b85c9e3d6edf0"
++
++PNBLACKLIST[libnice] ?= "Depends on blacklisted gstreamer"
+diff --git a/meta-oe/recipes-support/xchat/xchat_2.8.8.bb b/meta-oe/recipes-support/xchat/xchat_2.8.8.bb
+index 6da11cd..f7d8cfd 100644
+--- a/meta-oe/recipes-support/xchat/xchat_2.8.8.bb
++++ b/meta-oe/recipes-support/xchat/xchat_2.8.8.bb
+@@ -35,3 +35,5 @@ FILES_${PN}-dbg += "${libdir}/xchat/plugins/.debug"
+ 
+ SRC_URI[md5sum] = "6775c44f38e84d06c06c336b32c4a452"
+ SRC_URI[sha256sum] = "0d6d69437b5e1e45f3e66270fe369344943de8a1190e498fafa5296315a27db0"
++
++PNBLACKLIST[xchat] ?= "Depends on blacklisted libsexy"
+diff --git a/meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb b/meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb
+index e87dea7..f0cb7f0 100644
+--- a/meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb
++++ b/meta-xfce/recipes-apps/mousepad/mousepad_0.4.0.bb
+@@ -18,3 +18,5 @@ EXTRA_OECONF = "--disable-gtk3"
+ 
+ FILES_${PN} += "${datadir}/glib-2.0/schemas"
+ 
++
++PNBLACKLIST[mousepad] ?= "Depends on blacklisted gtksourceview2"
+diff --git a/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.11.0.bb b/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.11.0.bb
+index bdbec45..2c91fa9 100644
+--- a/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.11.0.bb
++++ b/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.11.0.bb
+@@ -12,3 +12,5 @@ SRC_URI[md5sum] = "1b3753b91224867a3a2dfddda239c28d"
+ SRC_URI[sha256sum] = "fb0c1df201ed1130f54f15b914cbe5a59286e994a137acda5609570c57112de2"
+ 
+ RDEPENDS_${PN} = "gst-meta-audio"
++
++PNBLACKLIST[xfce4-mixer] ?= "Depends on blacklisted gst-plugins-base"
+diff --git a/meta-xfce/recipes-extended/imsettings/imsettings_1.7.1.bb b/meta-xfce/recipes-extended/imsettings/imsettings_1.7.1.bb
+index 8c04db6..590d9b9 100644
+--- a/meta-xfce/recipes-extended/imsettings/imsettings_1.7.1.bb
++++ b/meta-xfce/recipes-extended/imsettings/imsettings_1.7.1.bb
+@@ -28,3 +28,5 @@ DEPENDS = "gtk+ gconf libnotify dbus-glib libgxim xfconf intltool-native"
+ RDEPENDS_${PN} += "bash"
+ 
+ FILES_${PN} += "${datadir}/dbus-1/* ${datadir}/gir-1.0/* ${libdir}/girepository-1.0/*"
++
++PNBLACKLIST[imsettings] ?= "Depends on blacklisted libgxim"
+diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
+index 66385a4..45cc586 100644
+--- a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
++++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
+@@ -27,3 +27,5 @@ FILES_${PN}-dbg += "${libdir}/tumbler-1/.debug \
+                     ${libdir}/tumbler-1/plugins/.debug \
+                     ${libdir}/tumbler-1/plugins/cache/.debug \
+ "
++
++PNBLACKLIST[tumbler] ?= "Depends on blacklisted poppler"
 -- 
 2.10.2
 
