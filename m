@@ -1,25 +1,45 @@
-Return-Path: <gyurco@freemail.hu>
-Received: from primary.intra.htm-hungary.hu (mail.htm-hungary.hu [80.98.98.89])
-	by mail.openembedded.org (Postfix) with ESMTP id D79716093B
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 46F4D772BD
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Feb 2017 14:17:52 +0000 (UTC)
-Received: from localhost (primary [127.0.0.1])
-	by primary.intra.htm-hungary.hu (Postfix) with ESMTP id 0BED8800CC;
-	Sat, 11 Feb 2017 15:17:53 +0100 (CET)
-X-Virus-Scanned: amavisd-new at htm-hungary.com
-Received: from primary.intra.htm-hungary.hu ([127.0.0.1])
-	by localhost (primary.intra.htm-hungary.hu [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id 10l9aToE30yL; Sat, 11 Feb 2017 15:17:51 +0100 (CET)
-Received: from gyurco.lan (unknown [10.8.0.14])
-	by primary.intra.htm-hungary.hu (Postfix) with ESMTPA id A2F81800A7;
-	Sat, 11 Feb 2017 15:17:51 +0100 (CET)
-From: Gyorgy Szombathelyi <gyurco@freemail.hu>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 11 Feb 2017 15:17:45 +0100
-Message-Id: <20170211141745.3380-1-gyurco@freemail.hu>
+	Sat, 11 Feb 2017 17:34:34 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id 68so2189316pfx.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Feb 2017 09:34:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=J5Kg2WJ2sTZS2pDz888OotI98DDTs8CEgPuMUXPN/5w=;
+	b=NSP4cuFIY4+e7PYFNn1eIKmMXH2ByWKI+fyyiCvc1SfnPplm8TMI5a3Q48kEh4Cywo
+	oBwG04ukUARVrK533jMrK/3UDDZlnJqgGhFK/UyvGfJVUBRJP1LOZrfN4GxHECnM5qCa
+	ZVWI5nzicSKmMAZru13Zk9UZshfKJHcL/dJfuCIUf/ek4pHa0Pbga2xbA/btpzZZnFgM
+	icWNUMY15VU3qDxI1Y3hhAsLUtxL++BNKlBWhvUcQ4jBASY7xun79ZtctdKMGPlAyKAL
+	yMHPDtWqrMa2lUXiOSYekL4ZH+uznkRKeBg0Wd//pMNST2/3abMDGDzexfqwpHjEjJ1S
+	cGTw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=J5Kg2WJ2sTZS2pDz888OotI98DDTs8CEgPuMUXPN/5w=;
+	b=YNBfn5Q6bHCV6eIS3F1Ovbi6Bcs5CBC955Cc2D8bwW/xX8B8s1w3B8XmxJitomNHG9
+	hI6P83d5qkurCW4G6OYjReP/4gE+lrzIeFm3Vpvc2yvNW6lvkJgmUxHIczFtbkjy+UJU
+	4z4u3SCTRuZ+HtwwaAGz2H/2z0hZkAcY394dp1We+THLWslISLLDEeK9XJIsJRDqI1UI
+	K+eS8EUd9X2qcHkPKan3bdNZnq3FSG3TEzdxfCBecyKXkgSJZZGYnV2OPZfp0KOqB26K
+	YxYKkdf6UA7OmSyWHWIQZE79tzAEibfojFf0Fp2aRNXzqKUiadRtiCkwUN5AXSrkn95z
+	h07A==
+X-Gm-Message-State: AMke39kdCjZmN09aPZywr/flYoiwnipHnbAccJg3G4334lc5PGT03biec02LGRld4b9idw==
+X-Received: by 10.99.104.133 with SMTP id d127mr17780697pgc.52.1486834475168; 
+	Sat, 11 Feb 2017 09:34:35 -0800 (PST)
+Received: from localhost.localdomain ([2601:202:4001:9ea0:c634:6bff:fe01:a196])
+	by smtp.gmail.com with ESMTPSA id 9sm5813346pfk.121.2017.02.11.09.34.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 11 Feb 2017 09:34:34 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org, akuster@mvista.com,
+	joe_macdonald@mentor.com
+Date: Sat, 11 Feb 2017 12:34:33 -0500
+Message-Id: <20170211173433.10306-1-akuster808@gmail.com>
 X-Mailer: git-send-email 2.9.3
-Subject: [meta-networking][PATCH v2] Samba: use built-in libtevent
+Subject: [meta-networking][PATCH] fetchmail: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,39 +52,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Feb 2017 14:17:54 -0000
+X-List-Received-Date: Sat, 11 Feb 2017 17:34:35 -0000
 
-Since Samba uses libtevent-internal.h in some places, it is
-incompatible with external libtevent versions if they're not
-the same as the built-in, and just crashes.
+ERROR: fetchmail-6.3.26-r0 do_checkuri: Fetcher failure for URL: 'http://download.berlios.de/fetchmail/fetchmail-6.3.26.tar.xz'. URL http://download.berlios.de/fetchmail/fetchmail-6.3.26.tar.xz doesn't work
+ERROR: fetchmail-6.3.26-r0 do_checkuri: Function failed: do_checkuri
+ERROR: Logfile of failure stored in: /home/akuster/oss/maint/poky/build/tmp/work/i586-poky-linux/fetchmail/6.3.26-r0/temp/log.do_checkuri.28438
+ERROR: Task (/home/akuster/oss/maint/meta-openembedded/meta-networking/recipes-support/fetchmail/fetchmail_6.3.26.bb:do_checkuri) failed with exit code '1'
 
-Signed-off-by: Gyorgy Szombathelyi <gyurco@freemail.hu>
+per homepage:
+NEWS: NOW HOSTED BY SOURCEFORGE.NET AFTER BERLIOS SHUTDOWN
+
+The BerliOS developer's website has shut down in the week following 2014 May 12th, and most of the fetchmail contents have been moved to SourceForge.net, including mailing list subscriptions, archives back to 2004, web site contents, download and Git repository. See http://sourceforge.net/projects/fetchmail/.
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-networking/recipes-support/fetchmail/fetchmail_6.3.26.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-index 0ba59c7..754455e 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-@@ -33,7 +33,7 @@ inherit systemd waf-samba cpan-base perlnative update-rc.d
- # remove default added RDEPENDS on perl
- RDEPENDS_${PN}_remove = "perl"
+diff --git a/meta-networking/recipes-support/fetchmail/fetchmail_6.3.26.bb b/meta-networking/recipes-support/fetchmail/fetchmail_6.3.26.bb
+index 909d7cf..359911e 100644
+--- a/meta-networking/recipes-support/fetchmail/fetchmail_6.3.26.bb
++++ b/meta-networking/recipes-support/fetchmail/fetchmail_6.3.26.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbb509e0303f5ded1cbfc0cc8705f28c"
  
--DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb krb5 libbsd libaio libpam"
-+DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libldb krb5 libbsd libaio libpam"
- DEPENDS_append_libc-musl = " libtirpc"
- CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
- LDFLAGS_append_libc-musl = " -ltirpc"
-@@ -74,7 +74,7 @@ SAMBA4_PDB_MODULES="pdb_tdbsam,${@bb.utils.contains('PACKAGECONFIG', 'ldap', 'pd
- SAMBA4_AUTH_MODULES="auth_unix,auth_wbc,auth_server,auth_netlogond,auth_script,auth_samba4"
- SAMBA4_MODULES="${SAMBA4_IDMAP_MODULES},${SAMBA4_PDB_MODULES},${SAMBA4_AUTH_MODULES}"
+ DEPENDS = "openssl"
  
--SAMBA4_LIBS="heimdal,!zlib,!popt,!talloc,!pytalloc,!pytalloc-util,!tevent,!pytevent,!tdb,!pytdb,!ldb,!pyldb"
-+SAMBA4_LIBS="heimdal,!zlib,!popt,!talloc,!pytalloc,!pytalloc-util,tevent,!pytevent,!tdb,!pytdb,!ldb,!pyldb"
+-SRC_URI = "http://download.berlios.de/fetchmail/fetchmail-${PV}.tar.xz"
++SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz"
+ SRC_URI[md5sum] = "61b66faad044afa26e142bb1791aa2b3"
+ SRC_URI[sha256sum] = "79b4c54cdbaf02c1a9a691d9948fcb1a77a1591a813e904283a8b614b757e850"
  
- EXTRA_OECONF += "--enable-fhs \
-                  --with-piddir=/run \
 -- 
 2.9.3
 
