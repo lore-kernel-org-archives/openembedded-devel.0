@@ -1,48 +1,50 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E5925773A1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Feb 2017 23:15:45 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id u63so9389231wmu.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Feb 2017 15:15:46 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f169.google.com (mail-pf0-f169.google.com
+	[209.85.192.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 4DC9571A8C;
+	Sat, 11 Feb 2017 01:14:31 +0000 (UTC)
+Received: by mail-pf0-f169.google.com with SMTP id 189so13092379pfu.3;
+	Fri, 10 Feb 2017 17:14:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=7AUEoRWVKfqJc1Uy1rxqL4Z05XeUXC85sgN30ue3tu8=;
-	b=eMiWS3t46orgoCGmCJKzQuD5iHfE+3w31CHxPiyqZZ1bKx5RC7p1dB6lwe28bHhEeq
-	G7/uGjRWXR56XzXevJgYbTETgtxhmenfbaGSErBMj5148JB13rGIRBXz/C3qYBDgws3G
-	NO26PTdmSLcyGdsbvffIGIF5E4gzvc17mYt5NDeuz92xsDXPoEsRKvLQ/QdkUlBrvmZw
-	A0A+jRH6cKjixvzkayG/DNnsdbGwzq5XNsPb0Nq7PyUIKpO0L3yXjGFn7OEcJVWFgziv
-	OnkrDbR5ziIdR1+4kbhiy6soFyOn9GLUEdW+SppCam42ZrRHqrk0oF3Al6W4U9gZHuOc
-	G8Qg==
+	h=to:from:subject:message-id:date:user-agent:mime-version
+	:content-transfer-encoding;
+	bh=yW/cKSXp8S0xHdVk8VnNfGHBBY7FRgx7ggMy3dEjn7k=;
+	b=NmVDamvYIzjb6Nejq80v9HX8RrohbosVuEr+3lpYDgh1BpMt+6CoJT1kJ48S/Gixax
+	7m6WCyZJZx/LzvXLSGvg9hiDlfQDkD/Y/dxs8bV1JiyIJaFXxXVq6x+axBbFUaegSnsc
+	A8qWEoxGDqcR/05J/lzJIPKnO6sWxh97JaQd/A+sVfezAhYujU9r/dvjshPFny367XPg
+	yyEDbSE0v0M/+gY3mHFqDpI9dvJoLsEjatfiOCEY2uYMBM4NN6tMwEYg1/4uqITiRhmR
+	Mw8S6D5V2odJsHEt2Z4uXuPDb72c9KdgHlvjMupUBT2mPb8CV5CPVXA3pNRQWHaD8icl
+	FppQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=7AUEoRWVKfqJc1Uy1rxqL4Z05XeUXC85sgN30ue3tu8=;
-	b=WHVeMAwhcJTQt6xaU2P7/jrY04FSsGvoYDWCznSlDXmDjjOOnTTBOrohXwQ8azoUpJ
-	y5hrIX6jpWVAxAyD10txTz5CeCW8UdEc820gMukMyRbGoBwKaJwAgBDtLsNoihgWbxWz
-	BZ72h8+32KIbbZ4EAjcrrzxegqQFKCIMCz3dwpXxZE/NqNYnqXaOHgncRFfMWkTfKvuy
-	AWmKtOaFB/N9orbsohCl6z1p5DNC9ilCwTw0thb6j6LB0Z9X2z7uTJWCkc7gpOWJ3rDV
-	SvZ9wyUKL0XVbWiLEhDAszEWf8bpz7XRnkrUiA+GjAUYNL0d7zvrC5y5Pzy/rTbdO79q
-	QUGA==
-X-Gm-Message-State: AMke39kx0jXapBx49h7f1M8MoPdB3VZnbHKDsQ/DY5w9cgzKIMjEHcURXBMePmv7JP4TAeu7kNHbavbTgYOXIQ==
-X-Received: by 10.28.6.78 with SMTP id 75mr10100008wmg.81.1486768545736; Fri,
-	10 Feb 2017 15:15:45 -0800 (PST)
+	h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+	:mime-version:content-transfer-encoding;
+	bh=yW/cKSXp8S0xHdVk8VnNfGHBBY7FRgx7ggMy3dEjn7k=;
+	b=G5QnrOh0M0PieFYogv5L4jaWfzS/Dglcja1l0PE6DsixpLHIddHcfV4Tn3qELjyS8K
+	K/GKuC8dqIKtNEszh6o8zsg2vw16kR6rPTpBny6tBdd+8Y1OOHSwE4y2Bn+fq1KENxK2
+	enHHHPMH9VNsiGaWyg3JGDDteKPbySzH8C925Nkj42Vc1GmWJllWwjf4FmcbUYSw88v4
+	EyUDpPuPTY+LZ7cTZtYgk412kkEfVGikbjigUgf8iCTM6txhP+Mlrybz8E1pWQA0M1Fl
+	50fTeGN03WegnMlxQgzM0lT4yfr4Ri5mpF2bjEyrq2VbpJs/nPy4RsNxVKfE8Ua/SIn8
+	5j4Q==
+X-Gm-Message-State: AMke39k4J7iW/j4aBpNrq/2y6q962qBXIuA/YqAcf937+1FXVf6P+QOJGWgBcvgQu5p6aQ==
+X-Received: by 10.98.214.73 with SMTP id r70mr13522299pfg.89.1486775672233;
+	Fri, 10 Feb 2017 17:14:32 -0800 (PST)
+Received: from ?IPv6:2601:202:4001:9ea0:d8b8:aa9e:752b:a51?
+	([2601:202:4001:9ea0:d8b8:aa9e:752b:a51])
+	by smtp.gmail.com with ESMTPSA id
+	x15sm1433694pgo.56.2017.02.10.17.14.31
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 10 Feb 2017 17:14:31 -0800 (PST)
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <601dddcf-ae0f-22fb-d169-bdc5bb6f37f8@gmail.com>
+Date: Fri, 10 Feb 2017 17:14:30 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.0
 MIME-Version: 1.0
-Received: by 10.80.148.174 with HTTP; Fri, 10 Feb 2017 15:15:45 -0800 (PST)
-In-Reply-To: <CAMKF1sqH1XGcG47CGp-CcgE5EYJ2_JE6wBw9V3=XDJ9-=LUHsw@mail.gmail.com>
-References: <cover.05852f1b820c067f96dd93729e6fdb949d51579d.1486546542.git-series.patrick.ohly@intel.com>
-	<c480e4bea612959118bcdbc09e129084fd1d5866.1486546542.git-series.patrick.ohly@intel.com>
-	<CAMKF1spq2eiKHXrz19ZzRWmwzWUKsSSHbunLfqRND98SjkHgVg@mail.gmail.com>
-	<1486660318.13854.105.camel@intel.com>
-	<CAMKF1sqH1XGcG47CGp-CcgE5EYJ2_JE6wBw9V3=XDJ9-=LUHsw@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 11 Feb 2017 00:15:45 +0100
-Message-ID: <CA+chaQdusR+PaaJNB8gp0nqrmV+rRUos+SCiXN1Z3aCUiKHGFw@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH 1/4] lvm2: remove unbuildable 2.02.138
+Subject: OEDAM Feb 20th - Portland
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,60 +57,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Feb 2017 23:15:53 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 11 Feb 2017 01:14:33 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-It seems to be buildable when you add:
+Hello all,
 
-EXTRA_OECONF += "--disable-selinux \
-                 --with-cluster=none \
-                "
-at least that's what one of my .bbappends does.
+If you plan on attending the OEDAM in Portland, please ensure you have 
+signed up on the wiki. We need a head count.
 
-On Thu, Feb 9, 2017 at 6:17 PM, Khem Raj <raj.khem@gmail.com> wrote:
+It is a week from this Monday.
 
-> On Thu, Feb 9, 2017 at 9:11 AM, Patrick Ohly <patrick.ohly@intel.com>
-> wrote:
-> > On Wed, 2017-02-08 at 20:21 +0000, Khem Raj wrote:
-> >> Can you check if this is the last gpl2 version
-> >
-> > According to the recipe, both 2.02.138 and 2.02.166 are under LICENSE =
-> > "GPLv2 & LGPLv2", and that also seems to be what the current code is
-> > licensed under: https://git.fedorahosted.org/cgit/lvm2.git/tree/
-> >
-> > So GPLv2 vs. GPLv3 wasn't the reason for keeping the old version.
-> >
->
-> Thanks for confirming.
->
-> > BTW, do all mails from openembedded-devel have Reply-To:
-> > <openembedded-devel@lists.openembedded.org> set? openembedded-core
-> > doesn't seem to have that.
->
-> yeah I guess reply-all will send to all but I never tried that
-> >
-> > I have a mail filter in place which will bring personal replies to my
-> > attention sooner, but Reply-To to the list defeats that.
-> >
-> > --
-> > Best Regards, Patrick Ohly
-> >
-> > The content of this message is my personal opinion only and although
-> > I am an employee of Intel, the statements I make here in no way
-> > represent Intel's position on the issue, nor am I authorized to speak
-> > on behalf of Intel on this matter.
-> >
-> >
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+please respond to this email or add your name to the wiki.
+
+
+kind regards,
+
+Armin
+
 
