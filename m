@@ -1,53 +1,48 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 91C6771E4C
+Received: from mail-vk0-f44.google.com (mail-vk0-f44.google.com
+	[209.85.213.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 190BE731CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Feb 2017 21:02:38 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id v77so15952204wmv.0
+	Sun, 12 Feb 2017 21:10:26 +0000 (UTC)
+Received: by mail-vk0-f44.google.com with SMTP id t8so51268360vke.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Feb 2017 13:02:39 -0800 (PST)
+	Sun, 12 Feb 2017 13:10:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-transfer-encoding;
-	bh=Yq/TO9LatU+8vvNIuWDk172wUn7FG0vxbsPM2J5vw4o=;
-	b=oLWbhRA7oY0N7GGS+nNjJ88ptnPEldxc00K5456ignVKEeSW/k43MyP2ve1uIOUJe/
-	xDchD/bab7E69FE5y3w/UL+D3OYmMIU9sPrK/W1/BFr01FMfsLnmWSbLJNxgtc8r8LD1
-	Lo+A1iueOJ5WjR6wpUG/lZi+kqhtXnzI+Y44jWdhWnBEBEuGGyknbVD92QEe2BUxq7vc
-	+GujNY1/YPsWGHTVNYjMH3KLqaubV7v8k6OBWtLJuzcUFuXnq+B6BVYVIMUnjHjce9y4
-	G8ts+YteeQEZM0g2HeVpDjqlY/VodGvj26TwaTLJrZROw+RE+SnNPYQOVgv9kHpPLhKV
-	aoYg==
+	bh=h+tgaIBeE8k/BGpUD8TN9hSdFbot8aCxlZA1p25URKo=;
+	b=BUzV/qeLfyFmM5MIo9ik8lCseUXJvbN1GnuD8I/aM2lPho4/HBkudeAWGAxI6nMTK5
+	6ybJFRA5iG0g1LuStj7UDx5mnIethhX8iLbQ0xP+mdJnswgim+InW0K3BC9FCPp2nAA7
+	BPfDXcxjmuu+IgJbHhmjrTefFRIS9XF0JKl1e84sFbZe9dlPjcKsaVKPUAg1I+mmKy07
+	hwig+CgT3z2tLJV0zR1DIdFqNxvJ9LBAkTKciMu41p1l5OtzTy+79fWXX2s4qboIV5C8
+	d3Gh1pxW8hlUeaA1MfXzQs7iomnIplv2crdL63XFxtjcw7paQKeEsH8scX8L+axg8A21
+	/twA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=Yq/TO9LatU+8vvNIuWDk172wUn7FG0vxbsPM2J5vw4o=;
-	b=VX3ZVdv0F9drmoxbkpmxjG8NsbeE1mYgDoUK0RUQ7BJ2fTMDlBhdxCSLmTBfzjqNvK
-	o+tV5YxIDoRri6fKOmFqj6MjJ0fZ4zNIiAU9RDVe2vRz87TR0ff4y8dNtpEdtNMVDZ7r
-	/6WZWNsGqg3ZF+IjUx2c14mjfelxgev2g+uYvW5tWfCVHB2NQjwUNmm9lTLkXZFVb/ep
-	twdPkaryh/ObrbjWZEc46AxN2+LWMKlSh70dZ9sJcSeFW4EOuDhsEIUSH7byJ0zW+e2O
-	aiPXChf3xFc/Rq43mqala7CAKoLUoCFomTqXhDIF6RFmMyeyHTzIMbk3z8wmI0kQmnBq
-	A9HQ==
-X-Gm-Message-State: AMke39nYuTBD9VSaVm8eKlaaAeXmqx3QzHKh+1sB6MP66qu1fAOOKJlhb7zExDa5utRV4w==
-X-Received: by 10.28.128.205 with SMTP id b196mr15767097wmd.21.1486933358258; 
-	Sun, 12 Feb 2017 13:02:38 -0800 (PST)
-Received: from PC192-168-2-116.speedport.ip
-	(p20030046E91173851E6F65FFFE3E7F61.dip0.t-ipconnect.de.
-	[2003:46:e911:7385:1e6f:65ff:fe3e:7f61])
-	by smtp.googlemail.com with ESMTPSA id
-	s18sm2688541wmb.18.2017.02.12.13.02.37
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 12 Feb 2017 13:02:37 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 12 Feb 2017 22:02:16 +0100
-Message-Id: <20170212210216.867-12-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.9.3
-In-Reply-To: <20170212210216.867-1-schnitzeltony@googlemail.com>
-References: <20170212210216.867-1-schnitzeltony@googlemail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-transfer-encoding;
+	bh=h+tgaIBeE8k/BGpUD8TN9hSdFbot8aCxlZA1p25URKo=;
+	b=mdz0oYzDyjN4/+FE9V1mzDVEDUXNWt0bAM6qdm+BhjkxPZjIpFdGLBiS0sTSqO4nP4
+	1bgzXpdf+ohroVQn2peMRdiZwjrJVc5cWN8WXAAzLWOjuKHqDaGDEgxWlmeYtXkg+6w9
+	GQ6gjM/WTIFcyPCoYT68cAq6rxDm4U56xUhTrMUaZDC4BYXuZVchY5RQcfXoVMGz/dZs
+	gbQyWifzFbvG+QxAW2Wq2YF9UTnwOgOjGXkX/ZX6N+x7R0L5UWmbHy0Rx8K7yHAB22+T
+	JeOBd19cSXBPcX6onHivt+4STggHhu7edNBOfU0Fgv7QGPhlFzVqh8Zl6eQhzigAJ8kk
+	BLiQ==
+X-Gm-Message-State: AMke39lD7oadGxrAer/NSfVa3GsJctupgXD+BmI5ygL9tgQ+BQt68fk0aXOjJ13KmeEK0PmJlZ3EZjc4+HONww==
+X-Received: by 10.31.167.70 with SMTP id q67mr9835153vke.135.1486933826858;
+	Sun, 12 Feb 2017 13:10:26 -0800 (PST)
 MIME-Version: 1.0
-Subject: [PATCH 11/11] geany: fix build
+Received: by 10.176.91.68 with HTTP; Sun, 12 Feb 2017 13:10:26 -0800 (PST)
+In-Reply-To: <20170212210216.867-4-schnitzeltony@googlemail.com>
+References: <20170212210216.867-1-schnitzeltony@googlemail.com>
+	<20170212210216.867-4-schnitzeltony@googlemail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Sun, 12 Feb 2017 22:10:26 +0100
+Message-ID: <CALbNGRR5SdvVDbB5vKvPSEkqj+yuZ5fYkXommM5uG02xGdyoHg@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 03/11] glibmm: add dependency on glib-2.0-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,30 +55,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Feb 2017 21:02:39 -0000
+X-List-Received-Date: Sun, 12 Feb 2017 21:10:27 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-oe/recipes-devtools/geany/geany_1.29.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+On Sun, Feb 12, 2017 at 10:02 PM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> From: Martin Jansa <martin.jansa@gmail.com>
+>
+Oops - this one slipped into my series. It is already in master-next
+so please ignore.
 
-diff --git a/meta-oe/recipes-devtools/geany/geany_1.29.bb b/meta-oe/recipes-devtools/geany/geany_1.29.bb
-index db6a34a..f979b71 100644
---- a/meta-oe/recipes-devtools/geany/geany_1.29.bb
-+++ b/meta-oe/recipes-devtools/geany/geany_1.29.bb
-@@ -2,7 +2,8 @@ SUMMARY = "A fast and lightweight IDE"
- HOMEPAGE = "http://www.geany.org/"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=bd7b2c994af21d318bd2cd3b3f80c2d5"
--DEPENDS = "gtk+ python3-docutils-native"
-+
-+DEPENDS = "gtk+ libxml-parser-perl-native python3-docutils-native"
- 
- inherit autotools pkgconfig perlnative pythonnative
- 
--- 
-2.9.3
-
+Andreas
 
