@@ -1,49 +1,49 @@
 Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C746731F6
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 7BB2C71DEF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Feb 2017 21:05:10 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id c85so350859wmi.1
+	Mon, 13 Feb 2017 21:05:12 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id v77so358832wmv.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Feb 2017 13:05:11 -0800 (PST)
+	Mon, 13 Feb 2017 13:05:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=krxzeRGrl9hUeMWZB9UL3aBS26Cg/fgl4CU8BHNaLSw=;
-	b=DqHCcWj0TCAYUYMuYB1un+AQnfryU7vYoDFpvJz5FjnGZVEpKjOcoSkFik8kxtpzB9
-	K1rTr00EBHOGMSb5BNTg/jFeTxLMYGxHwFyO1/UNu8OrOco5QAlCmKLaMSH9b1Hmb8/K
-	bRbSfOaJtcGLHjGi2KDEVjYl/3lFNS/mmtVyJcs0lxVjdRIBRyIgRSQlKH6eFw/hACAn
-	F1hBLR/I/8+mpxLc8ueR7yybDjdvXHjoAWW8gSj9gJzz8GxqAMR5FwUEwlRViiJldo+s
-	kMITaMSEE/u1knDsTOu7fW9QGBAkM75lkAPlzQVx7uA/Gf/+mZflZ4VrQhrqwr9VyPWh
-	7Xdg==
+	bh=EqbGUr9WalG7/tx2WTbZQsll9HWdphhAsVX51xRT6nM=;
+	b=KDBeFNFMW5IAeKRe86ktPXS9MdLcC7e+ljb7tSjL82kM67SIBLymb6kU8e9ci0AX61
+	QwdJeDk9GaZlBQsPmAeHC8E+kV29HzDjIoyQUwpAKxRVuxSUShz5u/5LLQ6a9iRwy5BO
+	WSqDKWnlw7ms42CQQ3NgLgD1chJDT3RkigPdRg9bwwo8XcCVIptGHaw7k7E5+m6VFWCd
+	tOBhmUg2OMyb6nsCTWmXbttvTgjdSMLvqydVeLL/4VM1V2PKg42w7ayeZyoMyJI7yWuj
+	wsz8IyTQIkU1uyLcm1sgprEeNUP13slNemsKwgG0TYl/Qkpd8qSksR4shKE7YHDP1rWd
+	zXJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=krxzeRGrl9hUeMWZB9UL3aBS26Cg/fgl4CU8BHNaLSw=;
-	b=qIoecSuENNwArfrRh5DgjJDTSoufRnRfi8vIF7UBR0Mx9xJzf0jsFAxc0zRUKF5SNa
-	ykK9GZ7MaQtTviNLxVX4TvSJEAkY56u3+26qjWUmoGC06eb8KxJiBtmdw/Eso236oRbf
-	sItHAq9fSf3J8YFee4RM2Fu5uvHzm92XIHDZ1PFCTEcwlA0E4E9umHdSH1kmaQYvK/yh
-	Ple+ZDtZdN7kukfPa3t7kjMz8C0kUzsFTh5uuWA11PvN74coR9mgg3/MR1Ugbp8k2HgX
-	7LoIhiz0mRtKr6OBbNTLpqiDhXjWrzuzcgY6n6wGujmpCyEGKBoke4YXcc2gLbyBtS1+
-	rM+A==
-X-Gm-Message-State: AMke39mg1ulqMaklL8CntsH4wwlqsn+qDAcz5eehS6T+d5IJrDf8MPgFj1fkZt3EI9cHhQ==
-X-Received: by 10.28.229.73 with SMTP id c70mr238697wmh.82.1487019910375;
-	Mon, 13 Feb 2017 13:05:10 -0800 (PST)
+	bh=EqbGUr9WalG7/tx2WTbZQsll9HWdphhAsVX51xRT6nM=;
+	b=LXxViK5IWPXDiGYyTOHE+1+VfV7lfv1I7aoomJuun2hSFSlBYHoNhyiUvA0h0Wr2om
+	ZNS5qjB+VZ8qiEVMcEdGZJwa6/UPI7Bb2y/DixIDfngYf+KPld2KJJMGHeLSps7+aXOt
+	8l3aRly3d2oAiMl2ZxdJWkJ9Ltdfij9apFZlq8+eoqcZDcpwFwcdB9olSL6jHutpm7pK
+	F1aegw0Zw0yAOMx6Eofude1Gqq14jFQb3LmfcQmnrC5buQ8apqsrPSB1aeXn0xmRMFd/
+	ywa6We39SNR6cGEUWLCo4rlQNqFwle3T8ugY1I01jZ4KqqoNB919O8kRm114pDCZtN6z
+	aV0A==
+X-Gm-Message-State: AMke39mWcN7PMuLkIfZzjrsIILyx17P+9y6mTy7tZlI3ngnQXUcGQiecq2IV6BVxbEVnUA==
+X-Received: by 10.28.236.79 with SMTP id k76mr224121wmh.79.1487019912560;
+	Mon, 13 Feb 2017 13:05:12 -0800 (PST)
 Received: from Saturn.local.all ([194.191.225.83])
 	by smtp.gmail.com with ESMTPSA id
-	g11sm12212764wrb.63.2017.02.13.13.05.09
+	g11sm12212764wrb.63.2017.02.13.13.05.11
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 13 Feb 2017 13:05:09 -0800 (PST)
+	Mon, 13 Feb 2017 13:05:12 -0800 (PST)
 From: Max Krummenacher <max.oss.09@gmail.com>
 X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Feb 2017 22:02:06 +0100
-Message-Id: <1487019728-19329-2-git-send-email-max.krummenacher@toradex.com>
+Date: Mon, 13 Feb 2017 22:02:07 +0100
+Message-Id: <1487019728-19329-3-git-send-email-max.krummenacher@toradex.com>
 X-Mailer: git-send-email 2.6.6
 In-Reply-To: <1487019728-19329-1-git-send-email-max.krummenacher@toradex.com>
 References: <1487019728-19329-1-git-send-email-max.krummenacher@toradex.com>
 Cc: Max Krummenacher <max.krummenacher@toradex.com>
-Subject: [meta-oe][PATCH][master-next 2/4] crda: add rdepends of python-m2crypto-native
+Subject: [meta-oe][PATCH][master-next 3/4] pywbem: depend on python-m2crypto-native and its rdepends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,45 +56,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Feb 2017 21:05:10 -0000
+X-List-Received-Date: Mon, 13 Feb 2017 21:05:12 -0000
 
 This fixed the build, remove blacklist also.
-While at it, cleanup DEPENDS of python stuff already added by inherit.
 
 Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
 ---
- meta-networking/recipes-connectivity/crda/crda_3.18.bb | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+ meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/crda/crda_3.18.bb b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-index 2aa9a09..45ecdd7 100644
---- a/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-+++ b/meta-networking/recipes-connectivity/crda/crda_3.18.bb
-@@ -4,7 +4,7 @@ SECTION = "net"
- LICENSE = "copyleft-next-0.3.0"
- LIC_FILES_CHKSUM = "file://copyleft-next-0.3.0;md5=8743a2c359037d4d329a31e79eabeffe"
+diff --git a/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
+index 8b5394e..14d4e69 100644
+--- a/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
++++ b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
+@@ -16,14 +16,13 @@ HOMEPAGE = "http://pywbem.sf.net/"
+ LICENSE = "LGPLv2"
+ LIC_FILES_CHKSUM = "file://pywbem/LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
+ SECTION = "Development/Libraries"
+-DEPENDS = "python-m2crypto-native"
+ SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BPN}/${BP}/${BP}-dev.r704.zip"
+ SRC_URI[md5sum] = "84072451dcdd1aa9ee82363848faf7ad"
+ SRC_URI[sha256sum] = "898035866d3cc741bbcd62c4ac26e633ad07b7c11d89db2472b9f923f3fd3ed8"
  
--DEPENDS = "python-m2crypto-native python-native libgcrypt libnl openssl"
-+DEPENDS = "libgcrypt libnl openssl"
+ S = "${WORKDIR}/${BP}-dev"
  
- SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz \
-            file://do-not-run-ldconfig-if-destdir-is-set.patch \
-@@ -18,7 +18,8 @@ SRC_URI = "https://www.kernel.org/pub/software/network/${BPN}/${BP}.tar.xz \
- SRC_URI[md5sum] = "0431fef3067bf503dfb464069f06163a"
- SRC_URI[sha256sum] = "43fcb9679f8b75ed87ad10944a506292def13e4afb194afa7aa921b01e8ecdbf"
+-inherit setuptools python-dir
++inherit setuptools python-m2crypto-native
  
--inherit python-dir pythonnative
-+inherit python-m2crypto-native
-+
- # Recursive make problem
- EXTRA_OEMAKE = "MAKEFLAGS= DESTDIR=${D} LIBDIR=${libdir}/crda LDLIBREG='-Wl,-rpath,${libdir}/crda -lreg'"
- EXTRA_OEMAKE_append = " USE_OPENSSL=1"
-@@ -34,5 +35,3 @@ do_install() {
+ do_install_append() {
+     mv ${D}${bindir}/wbemcli.py ${D}${bindir}/pywbemcli
+@@ -34,6 +33,3 @@ do_install_append() {
  }
  
- RDEPENDS_${PN} = "udev wireless-regdb"
+ BBCLASSEXTEND = "native"
 -
--PNBLACKLIST[crda] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130675/"
+-PNBLACKLIST[pywbem] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130596/"
+-PNBLACKLIST[pywbem] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130681/"
 -- 
 2.6.6
 
