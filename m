@@ -1,25 +1,25 @@
 Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9836371E53
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F39171E53
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Feb 2017 10:04:40 +0000 (UTC)
+	Mon, 13 Feb 2017 10:04:41 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v1DA4eT4000379
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Mon, 13 Feb 2017 02:04:40 -0800
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v1DA4fYH001930
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 13 Feb 2017 02:04:41 -0800 (PST)
 Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 13 Feb 2017 02:04:39 -0800
+	Mon, 13 Feb 2017 02:04:41 -0800
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>, <martin.jansa@gmail.com>
-Date: Mon, 13 Feb 2017 02:04:26 -0800
-Message-ID: <7409ff5520c93603b627cd0c67bec1f57e27f038.1486980187.git.liezhi.yang@windriver.com>
+Date: Mon, 13 Feb 2017 02:04:27 -0800
+Message-ID: <db602c87c0d88a7dc7cf5a37d9c2316532ccd0ac.1486980187.git.liezhi.yang@windriver.com>
 X-Mailer: git-send-email 2.9.0
 In-Reply-To: <cover.1486980186.git.liezhi.yang@windriver.com>
 References: <cover.1486980186.git.liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 12/13] gnome-disk-utility: add dbus-glib-native to DEPENDS
+Subject: [PATCH 13/13] libnet-ssleay-perl: fix EXTRALIBS and LDLOADLIBS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,34 +32,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Feb 2017 10:04:40 -0000
+X-List-Received-Date: Mon, 13 Feb 2017 10:04:41 -0000
 Content-Type: text/plain
 
 Fixed:
-make[3]: dbus-binding-tool: Command not found
-make[3]: *** [udisks-daemon-glue.h] Error 127
+recipe-sysroot-native/usr/bin/i586-wrs-linux/../../libexec/i586-wrs-linux/gcc/i586-wrs-linux/6.3.0/ld: cannot find -lssl -lcrypto -lz
+collect2: error: ld returned 1 exit status
+make: *** [blib/arch/auto/Net/SSLeay/SSLeay.so] Error 1
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- .../recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb    | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
-index dced48d..c167214 100644
---- a/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-disk-utility/gnome-disk-utility_2.32.0.bb
-@@ -3,7 +3,10 @@ SUMMARY = "GNOME disk utility"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e9115d11797a5e6b746b4e9b90194564"
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
+index cfd6f51..4695ae4 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.65.bb
+@@ -32,8 +32,8 @@ inherit cpan ptest
  
--DEPENDS = "glib-2.0 gtk+ libnotify libunique udisks avahi-ui virtual/libx11 libatasmart gnome-doc-utils intltool-native gnome-common-native libgnome-keyring"
-+DEPENDS = "glib-2.0 gtk+ libnotify libunique udisks avahi-ui \
-+    virtual/libx11 libatasmart gnome-doc-utils intltool-native \
-+    gnome-common-native libgnome-keyring dbus-glib-native \
-+"
+ EXTRA_CPANFLAGS = "LIBS='-L=${STAGING_LIBDIR} -L=${STAGING_BASELIBDIR}' \
+                    INC=-I=${STAGING_INCDIR} \
+-                   'EXTRALIBS=-lssl -lcrypto -lz' \
+-                   'LDLOADLIBS=-lssl -lcrypto -lz' \
++                   'EXTRALIBS=-L=${STAGING_LIBDIR} -lssl -lcrypto -lz' \
++                   'LDLOADLIBS=-L=${STAGING_LIBDIR} -lssl -lcrypto -lz' \
+                   "
  
- PR = "r4"
- 
+ do_configure_prepend() {
 -- 
 2.9.0
 
