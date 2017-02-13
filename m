@@ -1,53 +1,45 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 953D760053
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 9049A73200
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Feb 2017 22:05:02 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id o16so25885210wra.2
+	Mon, 13 Feb 2017 22:32:48 +0000 (UTC)
+Received: by mail-wm0-f52.google.com with SMTP id v77so3092841wmv.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Feb 2017 14:05:02 -0800 (PST)
+	Mon, 13 Feb 2017 14:32:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=message-id:subject:from:to:cc:date:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=CBoZrWsmqtY5p2+yQjT4DuRz3LieeK/GXfJb6V/oaec=;
-	b=im7mhDlFv4/TSku3v50e8kKJ/LQ57QV65HhRc5/pQiqLB2dbDBs4WxNJDZl1Xt12G9
-	jy10sgMxiQ6xDkkAYsrMDgYWY6Sdc2OCFZMyUVjeKBrkm1RbD3YUwKk80pOosYP6TTtt
-	MRbk8TvcP/Z0g2e5Nhi5YNkgKMnvI8WFZoIY2Y0Q2jbmWDH/YXgBWw/77GjpRUa9CfP2
-	7DRJ0T0MxRvZQhh+CguYjpcYLhk4BW5FOdGD4UBCKEfTJga9K8ncmDuiohGX4/MzTKI1
-	casgTZLtqtyddcbjkOk5MUH0sLspHxFGLgyigSzY842k5crpcHgyPVVtJYPdpKvwCCMk
-	CZXA==
+	h=from:to:cc:subject:date:message-id;
+	bh=1Nn0G6XHiGx6BSHv9+1I2dhYSzaShy+ao41Lnx2DSMw=;
+	b=ppg/641nQ6ItoerMD08hEjPzsOcqJxvsGPU8VjkTQxzKb1iZ9qAO+2uemP7NLJ92W8
+	JQWsC23wI9KwpUf7YzTwf/nYJ5JMX7+SMt3a5+Mfsb4zo48ry1Bd7lgzlP9pxMy6pt2Y
+	M/xpfFhB9pcXw5WmoPNdawqB7oDa1NARj+q/uggb5a/jXQ+kWdZRRkFdSfOOVcqvRTqn
+	FoPG0xrEZaDbVi9xu9qFl0djqI6JK4PIJ2WAlEW6DoR4BFpreQht4Kj3XZoiVpNMU2LH
+	W1sRru3L4a95S7mMys5rSdNGM2tIOS6gv1MlkmKVBMUdtnviHAtroFPr2s/7JuiPFhhX
+	7OwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=CBoZrWsmqtY5p2+yQjT4DuRz3LieeK/GXfJb6V/oaec=;
-	b=cHOeBLEZOaxEO0eS18HG18P9GpS1RcPFF8RYBCKhOY0lXLOcd98OjRX8tDG912jbA6
-	gvp36SqXKOqYEyFUGTPwnw2CS2sTU6kuBp7OVlst03eOESuzu0rOEqdiy/pUtC6oT4oe
-	kRmp1f3cnpMSGjixB3TzvIpIUayOpvThi6Bfd7ze2hJSRREr9rVFCnJWc02UQSqtUh1+
-	wA37404T2ZnhjwvyT8HXrgC0Cus2zYim1q1ng27djhhfq/Ze2eP+rNou+61DvVZmeWZ3
-	bX1kxlHlzSshwfn1VbDYjsMTE42FRDOXHX2haezYqHdkdJ+IsVsRqLjHonw7Iyef8OdN
-	YZPQ==
-X-Gm-Message-State: AMke39kVxFKmIZH4U0yl0ZS0t9ZduMXSN5zPAdG0PzQvhOpfhzdA7XfuZ9QZCKj+zs0oqQ==
-X-Received: by 10.223.162.205 with SMTP id t13mr23852848wra.155.1487023501838; 
-	Mon, 13 Feb 2017 14:05:01 -0800 (PST)
-Received: from Saturn.local.all ([194.191.225.83])
-	by smtp.gmail.com with ESMTPSA id s18sm907210wmb.18.2017.02.13.14.05.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 13 Feb 2017 14:05:01 -0800 (PST)
-Message-ID: <1487023500.2100.15.camel@gmail.com>
-From: Max Krummenacher <max.oss.09@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=1Nn0G6XHiGx6BSHv9+1I2dhYSzaShy+ao41Lnx2DSMw=;
+	b=AgBkKn1yGpqDGyHIoJfVxTyZIseLB9PrPD0s36JIj1AUEH4Heem6QeMIuxwcAFs19r
+	C4vX6uaJFxq9jreYggbFR6KK7rdp2ablxA64X7BUSpp2GM+eWJTcc3jD3u9NoIdYv7BA
+	OhmQKCOVQVdWgTOeUkd4ui+B5bbVTjaE5g5s2VN6ZLTDTdrR7LLSPuQzRuzCKKP/QyQA
+	cNTj18sJt3hmdmp6y9Jz6Hsiqyd7/EM5yhrNqaYexkfuYsHRB8/ul4Ms9NsNlDDNpqkr
+	RKLdibzLF7MiWddHwtZjcxO3Bh3op5DGrcrh9vAtBAbtMyU3z6w8LIOe9HzRMuXZFl+X
+	t7kw==
+X-Gm-Message-State: AMke39lQzcl82TwWfWx6fFFHilyeq99AmNFLWMBuEJ+M0/s9uvvUi0iIzJ/8r9B7YgBT9g==
+X-Received: by 10.28.62.144 with SMTP id l138mr466977wma.50.1487025168213;
+	Mon, 13 Feb 2017 14:32:48 -0800 (PST)
+Received: from ThinkPad-T520.homenet.telecomitalia.it
+	(host13-229-dynamic.20-79-r.retail.telecomitalia.it. [79.20.229.13])
+	by smtp.gmail.com with ESMTPSA id
+	r100sm15550944wrb.20.2017.02.13.14.32.46
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 13 Feb 2017 14:32:47 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Feb 2017 23:05:00 +0100
-In-Reply-To: <CA+chaQdeBHucjgvjgff=kudTnTX1+cxxGv6yMnGb39UjuOxSaA@mail.gmail.com>
-References: <1487019728-19329-1-git-send-email-max.krummenacher@toradex.com>
-	<1487019728-19329-3-git-send-email-max.krummenacher@toradex.com>
-	<CA+chaQe+tq9r35iW6JMgLDuPV+v82zmPrPTaK359NQeTdzRodw@mail.gmail.com>
-	<CA+chaQdeBHucjgvjgff=kudTnTX1+cxxGv6yMnGb39UjuOxSaA@mail.gmail.com>
-X-Mailer: Evolution 3.16.5 
-Mime-Version: 1.0
-Cc: Max Krummenacher <max.krummenacher@toradex.com>
-Subject: Re: [meta-oe][PATCH][master-next 3/4] pywbem: depend on python-m2crypto-native and its rdepends
+Date: Mon, 13 Feb 2017 23:32:34 +0100
+Message-Id: <1487025163-21628-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-initramfs][PATCH 0/9] fixes after Recipe Specific Sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,93 +52,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Feb 2017 22:05:03 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 13 Feb 2017 22:32:49 -0000
 
-Hi
+This patchset adds fixes to the klcc-cross recipe which was not behaving
+after rebuild from sstate for multimachine build (machines of the same arch).
 
-Am Montag, den 13.02.2017, 22:40 +0100 schrieb Martin Jansa:
-> Oh, I see what you did in master-next 1/4, but is it worth creating
-> .bbclass for just 2 dependencies which probably won't be used by so many
-> recipes?
+There are small improvements to the recipe as seen in libtool-cross in oe-core.
 
-That's how I understand Richard here:
-http://lists.openembedded.org/pipermail/openembedded-core/2017-February/132693.html
+Other than this we do remove the blacklisting for the recipes in meta-initramfs.
 
-Actually it is not 2 dependencies, it is 1 dependency on
-python-m2crypto-native and the run time dependency that python-m2crypto-native
-needs since it upgrade to 0.25.1.
+Andrea Adami (9):
+  klcc-cross: fixes for recipe specific sysroot
+  klcc-cross: disable packaging using appropriate
+  klcc-cross: restrict scope of SSTATE_SCAN_FILES
+  klcc-cross: Use SYSROOT_DIRS to add dirs to stage in sysroot
+  ubi-utils-klibc_1.5.1: remove blacklisting
+  kexecboot(-klibc)_0.6: remove blacklisting
+  initramfs-kexecboot-klibc-image: remove blacklisting
+  klibc-utils_2.0.4: remove blacklisting
+  kexec-tools-klibc_2.0.2: remove blacklisting
 
-So the issue here is that if some time in the future there is another
-RDEPENDS that python-m2crypto-native needs we will have to track down
-all the users of it and add the new dependency there too.
+ .../images/initramfs-kexecboot-klibc-image.bb      |  2 --
+ .../recipes-bsp/kexecboot/kexecboot_0.6.bb         |  3 --
+ .../recipes-devtools/klibc/klcc-cross_2.0.4.bb     | 32 +++++++++-------------
+ .../recipes-devtools/klibc/klibc-utils_2.0.4.bb    |  2 --
+ .../recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb  |  2 --
+ .../kexec/kexec-tools-klibc_2.0.2.bb               |  2 --
+ 6 files changed, 13 insertions(+), 30 deletions(-)
 
-If you think this does not merit a new class I can substitute the new
-class by adding python-typing-native to crda and pywbem to fix the build
-in the current setup and resend the patch series.
+-- 
+2.7.4
 
-Max
-
-
-
-On Mon, Feb 13, 2017 at 10:39 PM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
-> 
-> > Did you test this change? You added it to inherit not DEPENDS..
-> > 
-> > On Mon, Feb 13, 2017 at 10:02 PM, Max Krummenacher <max.oss.09@gmail.com>
-> > wrote:
-> > 
-> > > This fixed the build, remove blacklist also.
-> > > 
-> > > Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
-> > > ---
-> > >  meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb | 6 +-----
-> > >  1 file changed, 1 insertion(+), 5 deletions(-)
-> > > 
-> > > diff --git a/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
-> > > b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
-> > > index 8b5394e..14d4e69 100644
-> > > --- a/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
-> > > +++ b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
-> > > @@ -16,14 +16,13 @@ HOMEPAGE = "http://pywbem.sf.net/"
-> > >  LICENSE = "LGPLv2"
-> > >  LIC_FILES_CHKSUM = "file://pywbem/LICENSE.txt;md5
-> > > =fbc093901857fcd118f065f900982c24"
-> > >  SECTION = "Development/Libraries"
-> > > -DEPENDS = "python-m2crypto-native"
-> > >  SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BPN}/${BP}
-> > > /${BP}-dev.r704.zip"
-> > >  SRC_URI[md5sum] = "84072451dcdd1aa9ee82363848faf7ad"
-> > >  SRC_URI[sha256sum] = "898035866d3cc741bbcd62c4ac26e
-> > > 633ad07b7c11d89db2472b9f923f3fd3ed8"
-> > > 
-> > >  S = "${WORKDIR}/${BP}-dev"
-> > > 
-> > > -inherit setuptools python-dir
-> > > +inherit setuptools python-m2crypto-native
-> > > 
-> > >  do_install_append() {
-> > >      mv ${D}${bindir}/wbemcli.py ${D}${bindir}/pywbemcli
-> > > @@ -34,6 +33,3 @@ do_install_append() {
-> > >  }
-> > > 
-> > >  BBCLASSEXTEND = "native"
-> > > -
-> > > -PNBLACKLIST[pywbem] ?= "Fails to build with RSS
-> > > http://errors.yoctoproject.org/Errors/Details/130596/"
-> > > -PNBLACKLIST[pywbem] ?= "Fails to build with RSS
-> > > http://errors.yoctoproject.org/Errors/Details/130681/"
-> > > --
-> > > 2.6.6
-> > > 
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > > 
-> > 
-> > 
 
