@@ -1,49 +1,47 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 12C1171DAD
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f172.google.com (mail-wr0-f172.google.com
+	[209.85.128.172])
+	by mail.openembedded.org (Postfix) with ESMTP id AB3F871E5F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Feb 2017 21:05:14 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id u63so345538wmu.2
+	Mon, 13 Feb 2017 21:39:36 +0000 (UTC)
+Received: by mail-wr0-f172.google.com with SMTP id i10so159712085wrb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Feb 2017 13:05:15 -0800 (PST)
+	Mon, 13 Feb 2017 13:39:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=LsfZD6Tc6uKQxX/4TSS187uy6lHiGa4jnr/WGYMwgkk=;
-	b=Y4JAyfRIobabBIUZZY/m0lZcP0jywAE0691nMqkYNrnxFRxUBSpzgZ4MfFDFcpo4lj
-	QUTJ5Qz3FFsXAB3EqycjPwolrwFUM2zrdT5a9K6QrIKIbj4C3232FO1QJTMw/x6gBq9b
-	AyGurpfCNEqsrqdybWP0VTtwSdT+ztwphxUU4eYHJqHZv44PJCPPztMqERIabNYntydU
-	twXRkRKsP4bFPaJ/Q0n5u2ftzpTyG/OOXebv6niWg5Ej+zyMbxVX7KVftr5XwItcfRWi
-	RYI7F3rLF66+cOG4DRY0WX2sBMhhzCiK8LzgFYjVXgXZgA4TY8oqifM7qlgtOwLfBE5l
-	QaRg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=GdpA+IY26Uk85cHvsgztQgsX7ZfRJ4dQrg1Mw4lJ83Q=;
+	b=Ld8ESBKfg8L7Sa2cMMg73vcwk5aR8aVrWRobRNeaVkl5kfdgZdPhEYyr2nq49eIB3U
+	UAvKMoH9NJ+vCHV+sx9pn4LUKAwue3UsljGbZfhRNyBFY7e013gjTNWKC2rPFGDtSHXJ
+	p/CxFcVQhrSRLqHMCZ/vfQoXlLMoijRcgsbh1uO96zHWZdVs5QlURoaeE8AFqYu4iAOO
+	gaFWcr9xP0z75IhWa8mien2KymXrQvtnGE1i4DET/N4IgGy9yPhCXKphTjFKhKHERXy5
+	AITgTBBJVu4fYlD3Q2QsrhnnBobYEqD9Me+ymhWOKBbV/JhOiUD2Mv6ghTM5k6+rTiBu
+	SGHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=LsfZD6Tc6uKQxX/4TSS187uy6lHiGa4jnr/WGYMwgkk=;
-	b=jceq3RE/f3fy85N4ss+YMz1qY9SDDx03KW0+jmUbBJIyi6iExh2M2Hi7DbCSJBk15N
-	i2QOM7qZXGxwWbd86GaOzv8TLYIi8ku/nt7vVON7dgn4Wnu6xLVLI8QZq6X4mHoFzjXN
-	ziMtw+R2wCzpnYCj0XCI7+7jVvSs4yKc37S6XmoAre9mKq361yPuRuvq0QScKL5LDulU
-	S/B04VJDQ1ixCDfom4zlG5howOz9AlmtG8Y9hY7m9CThaAE5QFu6B7Zu5BsTzpObhADf
-	Fts4Lp0d3h6cmRWBJkBxGD2G3DkRqXm8HSMxnK9oXufrwpEB7//N3cKvDLGtVcC/aMo/
-	UErw==
-X-Gm-Message-State: AMke39mfObn3zMYlHk/LW/DiKtW5+PCeTMZAZP0ZjP87RU6qQrEWR7VYX60YcUxC+E+D6A==
-X-Received: by 10.28.68.10 with SMTP id r10mr266810wma.68.1487019914595;
-	Mon, 13 Feb 2017 13:05:14 -0800 (PST)
-Received: from Saturn.local.all ([194.191.225.83])
-	by smtp.gmail.com with ESMTPSA id
-	g11sm12212764wrb.63.2017.02.13.13.05.13
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 13 Feb 2017 13:05:14 -0800 (PST)
-From: Max Krummenacher <max.oss.09@gmail.com>
-X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Feb 2017 22:02:08 +0100
-Message-Id: <1487019728-19329-4-git-send-email-max.krummenacher@toradex.com>
-X-Mailer: git-send-email 2.6.6
-In-Reply-To: <1487019728-19329-1-git-send-email-max.krummenacher@toradex.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=GdpA+IY26Uk85cHvsgztQgsX7ZfRJ4dQrg1Mw4lJ83Q=;
+	b=FOo52cGFeXB66gDBEyTLtZjf7iCJATdbQ0G025q/oZK6EX9p0r9uxpr6FmU3y3fmbV
+	cWBhe5S8m4QUuqyFVfyVkAm0nWz7Y72MG6/+iu3YLlvK5WaCy7zMvvMZZo0jxCMqyGn1
+	q+EycMkCglXocq8+0i+paRbN0f1VyUE7Bh07GJbY+3EXexj6AU/QRczUl35zepJZUl6i
+	7ywU3u4SpRxkRqc903wQp06r8qZSlE8QAstyGXwybT7ErqBldkxii/DFRPEOuqLnKkgT
+	pyTWlQuCvbWcnZg6KPrEIVslLAPhhv2mEwQNGQ+WjGuWLvdIwOsXZQhSR2ZwalIO4ZNK
+	+amQ==
+X-Gm-Message-State: AMke39mQkk3r517qHB/opUtvMX4JH/pO9QK/uyG05CxvRlmlBQ0a2imIHJuau8u/M/OaCZwfkOMz5YuakiMRxg==
+X-Received: by 10.223.150.34 with SMTP id b31mr22349159wra.196.1487021976335; 
+	Mon, 13 Feb 2017 13:39:36 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.80.148.174 with HTTP; Mon, 13 Feb 2017 13:39:35 -0800 (PST)
+In-Reply-To: <1487019728-19329-3-git-send-email-max.krummenacher@toradex.com>
 References: <1487019728-19329-1-git-send-email-max.krummenacher@toradex.com>
+	<1487019728-19329-3-git-send-email-max.krummenacher@toradex.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 13 Feb 2017 22:39:35 +0100
+Message-ID: <CA+chaQe+tq9r35iW6JMgLDuPV+v82zmPrPTaK359NQeTdzRodw@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: Max Krummenacher <max.krummenacher@toradex.com>
-Subject: [meta-oe][PATCH][master-next 4/4] openlmi-tools: remove blacklist
+Subject: Re: [meta-oe][PATCH][master-next 3/4] pywbem: depend on python-m2crypto-native and its rdepends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,26 +54,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Feb 2017 21:05:15 -0000
+X-List-Received-Date: Mon, 13 Feb 2017 21:39:36 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Build is fixed for bywbem, bywbem-native.
+Did you test this change? You added it to inherit not DEPENDS..
 
-Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
----
- meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb | 2 --
- 1 file changed, 2 deletions(-)
+On Mon, Feb 13, 2017 at 10:02 PM, Max Krummenacher <max.oss.09@gmail.com>
+wrote:
 
-diff --git a/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb b/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
-index cc8e829..b23869d 100644
---- a/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
-+++ b/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
-@@ -21,5 +21,3 @@ do_compile_prepend() {
- do_install_prepend() {
-     cd cli
- }
--
--PNBLACKLIST[openlmi-tools] ?= "Depends on blacklisted pywbem"
--- 
-2.6.6
-
+> This fixed the build, remove blacklist also.
+>
+> Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+> ---
+>  meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb | 6 +-----
+>  1 file changed, 1 insertion(+), 5 deletions(-)
+>
+> diff --git a/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
+> b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
+> index 8b5394e..14d4e69 100644
+> --- a/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
+> +++ b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
+> @@ -16,14 +16,13 @@ HOMEPAGE = "http://pywbem.sf.net/"
+>  LICENSE = "LGPLv2"
+>  LIC_FILES_CHKSUM = "file://pywbem/LICENSE.txt;md5=
+> fbc093901857fcd118f065f900982c24"
+>  SECTION = "Development/Libraries"
+> -DEPENDS = "python-m2crypto-native"
+>  SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BPN}/${
+> BP}/${BP}-dev.r704.zip"
+>  SRC_URI[md5sum] = "84072451dcdd1aa9ee82363848faf7ad"
+>  SRC_URI[sha256sum] = "898035866d3cc741bbcd62c4ac26e6
+> 33ad07b7c11d89db2472b9f923f3fd3ed8"
+>
+>  S = "${WORKDIR}/${BP}-dev"
+>
+> -inherit setuptools python-dir
+> +inherit setuptools python-m2crypto-native
+>
+>  do_install_append() {
+>      mv ${D}${bindir}/wbemcli.py ${D}${bindir}/pywbemcli
+> @@ -34,6 +33,3 @@ do_install_append() {
+>  }
+>
+>  BBCLASSEXTEND = "native"
+> -
+> -PNBLACKLIST[pywbem] ?= "Fails to build with RSS
+> http://errors.yoctoproject.org/Errors/Details/130596/"
+> -PNBLACKLIST[pywbem] ?= "Fails to build with RSS
+> http://errors.yoctoproject.org/Errors/Details/130681/"
+> --
+> 2.6.6
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
