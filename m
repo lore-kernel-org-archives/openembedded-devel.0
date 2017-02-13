@@ -1,25 +1,25 @@
 Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 4DB9671DD0
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 45E8771DCF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Feb 2017 10:04:30 +0000 (UTC)
+	Mon, 13 Feb 2017 10:04:31 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v1DA4UCq004020
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 13 Feb 2017 02:04:30 -0800 (PST)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v1DA4Uha000370
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Mon, 13 Feb 2017 02:04:31 -0800
 Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 13 Feb 2017 02:04:30 -0800
+	Mon, 13 Feb 2017 02:04:31 -0800
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>, <martin.jansa@gmail.com>
-Date: Mon, 13 Feb 2017 02:04:16 -0800
-Message-ID: <abf3f0e694f9e82a95de8916198967f9d2b1583c.1486980187.git.liezhi.yang@windriver.com>
+Date: Mon, 13 Feb 2017 02:04:17 -0800
+Message-ID: <4502f5146236ff1ef94fc8b46c4fc8458f58c79b.1486980187.git.liezhi.yang@windriver.com>
 X-Mailer: git-send-email 2.9.0
 In-Reply-To: <cover.1486980186.git.liezhi.yang@windriver.com>
 References: <cover.1486980186.git.liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 02/13] postgresql: add gettext-native and tcl-native to DEPENDS
+Subject: [PATCH 03/13] udisks: add dbus-glib-native to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,41 +36,29 @@ X-List-Received-Date: Mon, 13 Feb 2017 10:04:32 -0000
 Content-Type: text/plain
 
 Fixed:
-| checking for msgfmt... no
-| configure: error: msgfmt is required for NLS
-
-And:
-| checking for tclsh83... no
-| configure: error: Tcl shell not found
+| dbus-binding-tool --prefix=daemon --mode=glib-server --output=daemon-glue.h ../data/org.freedesktop.UDisks.xml
+| make[2]: dbus-binding-tool: Command not found
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-oe/recipes-support/postgresql/postgresql.inc | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ meta-oe/recipes-support/udisks/udisks_1.0.5.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/postgresql/postgresql.inc b/meta-oe/recipes-support/postgresql/postgresql.inc
-index f720cbc..0c3af0f 100644
---- a/meta-oe/recipes-support/postgresql/postgresql.inc
-+++ b/meta-oe/recipes-support/postgresql/postgresql.inc
-@@ -19,7 +19,7 @@ DESCRIPTION = "\
- "
- HOMEPAGE = "http://www.postgresql.com"
- LICENSE = "BSD"
--DEPENDS = "zlib readline tzcode-native"
-+DEPENDS = "zlib readline tzcode-native gettext-native"
- INC_PR = "r0"
+diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
+index eec6933..9d3716a 100644
+--- a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
++++ b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
+@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=73d83aebe7e4b62346afde80e0e94273"
+ DEPENDS = "libatasmart sg3-utils polkit libgudev dbus-glib glib-2.0 intltool-native lvm2"
+ # optional dependencies: device-mapper parted
  
- ARM_INSTRUCTION_SET = "arm"
-@@ -61,8 +61,7 @@ PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam,"
- PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl,"
- PACKAGECONFIG[python] = "--with-python,--without-python,python,python"
- PACKAGECONFIG[uuid] = "--with-ossp-uuid,--without-ossp-uuid,ossp-uuid,"
--# when tcl native package  is fixed change WORKDIR to STAGING_BINDIR_CROSS
--PACKAGECONFIG[tcl] = "--with-tcl --with-tclconfig=${STAGING_BINDIR_CROSS},--without-tcl,tcl,"
-+PACKAGECONFIG[tcl] = "--with-tcl --with-tclconfig=${STAGING_BINDIR_CROSS},--without-tcl,tcl tcl-native,"
- PACKAGECONFIG[nls] = "--enable-nls,--disable-nls,,"
- PACKAGECONFIG[libxml] = "--with-libxml,--without-libxml,libxml2,libxml2"
- PACKAGECONFIG[perl] = "--with-perl,--without-perl,perl,perl"
+-DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
++DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)} \
++    dbus-glib-native \
++"
+ 
+ SRC_URI = " \
+     http://hal.freedesktop.org/releases/${BPN}-${PV}.tar.gz;name=${BPN} \
 -- 
 2.9.0
 
