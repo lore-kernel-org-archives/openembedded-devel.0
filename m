@@ -1,25 +1,25 @@
 Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8CC2C71DCF
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B534671DCF
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 13 Feb 2017 10:04:36 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v1DA4Zc9001849
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v1DA4arj004026
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
 	Mon, 13 Feb 2017 02:04:36 -0800 (PST)
 Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 13 Feb 2017 02:04:34 -0800
+	Mon, 13 Feb 2017 02:04:36 -0800
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>, <martin.jansa@gmail.com>
-Date: Mon, 13 Feb 2017 02:04:21 -0800
-Message-ID: <bd1abb0df0ae55a993e31271116e291f07281dcf.1486980187.git.liezhi.yang@windriver.com>
+Date: Mon, 13 Feb 2017 02:04:22 -0800
+Message-ID: <28bffa52634fe38d797555dc8f6355692e89ad8a.1486980187.git.liezhi.yang@windriver.com>
 X-Mailer: git-send-email 2.9.0
 In-Reply-To: <cover.1486980186.git.liezhi.yang@windriver.com>
 References: <cover.1486980186.git.liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 07/13] python-pbr: add python-setuptools-native to DEPENDS
+Subject: [PATCH 08/13] sthttpd: add base-passwd to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,29 +36,28 @@ X-List-Received-Date: Mon, 13 Feb 2017 10:04:36 -0000
 Content-Type: text/plain
 
 Fixed:
-ERROR: python setup.py build execution failed.
-Traceback (most recent call last):
-  File "setup.py", line 17, in <module>
-    import setuptools
-ImportError: No module named setuptools
+chgrp www-data tmp/work/i586-wrs-linux/sthttpd/2.27.0-r0/image/usr/sbin/makeweb
+chgrp: invalid group: www-data
+make[3]: *** [install-exec-hook] Error 1
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-pbr_1.10.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb b/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
-index fd35197..3a57b45 100644
---- a/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
-+++ b/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
-@@ -11,6 +11,7 @@ inherit pypi setuptools
+diff --git a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.0.bb b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.0.bb
+index efa533a..860c986 100644
+--- a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.0.bb
++++ b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.0.bb
+@@ -4,6 +4,8 @@ HOMEPAGE = "http://opensource.dyc.edu/sthttpd"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://src/thttpd.c;beginline=1;endline=26;md5=0c5762c2c34dcbe9eb18815516502872"
  
- DEPENDS_class-target += " \
-         python-pip \
-+        python-setuptools-native \
-         "
- 
- BBCLASSEXTEND = "native"
++DEPENDS += "base-passwd"
++
+ SRC_URI = "http://opensource.dyc.edu/pub/sthttpd/sthttpd-${PV}.tar.gz \
+            file://thttpd.service \
+            file://thttpd.conf \
 -- 
 2.9.0
 
