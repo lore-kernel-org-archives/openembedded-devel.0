@@ -1,50 +1,36 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 0DF2977227
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id CDE93760A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2017 21:49:33 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id c4so3613105wrd.1
+	Tue, 14 Feb 2017 22:24:29 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id p22so13354363qka.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2017 13:49:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=UrXvWc0votf4myiqfDZVRDratlakp0A3fkXZukNRFgA=;
-	b=kQITnf2u3Q8r4vBY6FeSW4C5Z8Bz8jzUOozwmCUpbjx11M8mSmp9F8C/mwAjwaBiKu
-	8h+irdatwrOgQ9mlaPeIZ9qS4xDVs8oCqOda47L+JlwImSQs7CB0VBNCb7yz9N0397qw
-	aWHCoO7Ey4eqx2t6Br+/Tl8XuIaaXwG2bzovDLMY9MRn6Fc8gSG+4BpiXFYxnv5d1rHx
-	j3cOZ2uXl19xN9EXan2XFJUyxq6XrsmLB+QTEETBBm3ibQgsHTMfp6yy0kwWcputHwyD
-	mGN/K+jwYvRULeUbYbUOj2iqWU4pCpUJt+5VnLwrsQx9MGRgCpsmBfhV7/PI4oi2lh+J
-	t3oQ==
+	Tue, 14 Feb 2017 14:24:29 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=UrXvWc0votf4myiqfDZVRDratlakp0A3fkXZukNRFgA=;
-	b=lsVvntZjuDmOjj65hUp7DyYDuYx9nyJ1YgYbatA4aT1FDPHsNFOzqoAxSngTd/DSeQ
-	nuOfmJ1k30v2s3agYeqWAzAgBF19KJzttd2PbosTc9RDu8LJyclTLJ8cDYiMuYzzM6o5
-	sbP/HWqOgVNj2osdChE1YX1WKOZlCogpAJemFEUaGonsVWJwj3GG/muYyEEal72qpHYS
-	0lL96IU/v9ddUq+H+pt4554Aies0jhb4oIHkzXH2IwZRWhwgLHKc9mhFEMoxRqRLx65O
-	LGdY2z9RwFRQFmBUfSS7n+OBRERAQTDTTkJAbZLSG/xk3mzDJWZ7CL76iryZprLOYwQf
-	GY/Q==
-X-Gm-Message-State: AMke39kOvZLJLfxH3d5Xb3fvU46oyKW/jURS9kXGTjPidDjWK2y/u+uV1vy5f0X5AFZMbw==
-X-Received: by 10.223.167.71 with SMTP id e7mr27334796wrd.154.1487108973987;
-	Tue, 14 Feb 2017 13:49:33 -0800 (PST)
-Received: from Saturn.local.all ([194.191.225.83])
-	by smtp.gmail.com with ESMTPSA id
-	u47sm2355480wrb.15.2017.02.14.13.49.33
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=h5abAxn2ihu1tNxcyb5S57rjIujRqMkXKmRBwY4Bj5I=;
+	b=lbw0ga5MM7MLmVRbCEIWmmfdYR3AIwblVgPruBWvnK7zSS2bgGuSLu3vppQcJIOJgr
+	eDxy1MwSsxHLLdhgYkXn9znhLDU9KrauMOZWQ16TV3GfqJOeM5EvvsYxT8+jBRThN92V
+	UGLBVSu0bDHIgSwhnmy7K2eQ3Vy+7nheP3cGAgyOGpM5q/C50qmRHNjHRGSZVEsY7ver
+	YqjVq5FRjjP8nJUdxxhKu5KnxEChnOyq48+iB2lbP9ij56v2ZxBtWIMxAo6MODIfIotz
+	HE1jVqbiWe2lLIXCrhLHefOAh8ncHncHxqRUfyvJ3bfGf/ZZuRTogHWQHJb29aRxkMS6
+	2Duw==
+X-Gm-Message-State: AMke39lg1Q8leP6BVr8fKECbkHFTlKu2wd/JWNBuxt4MWVEQxS0tzlFXE1S4Gt9x8tjmbQ==
+X-Received: by 10.55.110.6 with SMTP id j6mr30208748qkc.67.1487111069216;
+	Tue, 14 Feb 2017 14:24:29 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
+	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
+	n42sm1121414qtn.58.2017.02.14.14.24.28
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 14 Feb 2017 13:49:33 -0800 (PST)
-From: Max Krummenacher <max.oss.09@gmail.com>
-X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
+	Tue, 14 Feb 2017 14:24:28 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Feb 2017 22:49:01 +0100
-Message-Id: <1487108941-20285-5-git-send-email-max.krummenacher@toradex.com>
-X-Mailer: git-send-email 2.6.6
-In-Reply-To: <1487108941-20285-1-git-send-email-max.krummenacher@toradex.com>
-References: <1487108941-20285-1-git-send-email-max.krummenacher@toradex.com>
-Cc: Max Krummenacher <max.krummenacher@toradex.com>
-Subject: [meta-oe][PATCH v2][master-next 4/4] openlmi-tools: remove blacklist
+Date: Tue, 14 Feb 2017 17:24:11 -0500
+Message-Id: <1487111051-19305-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] Remove blacklists of python packages where build issues have been resolved
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,26 +43,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Feb 2017 21:49:34 -0000
+X-List-Received-Date: Tue, 14 Feb 2017 22:24:30 -0000
 
-Build is fixed for pywbem, pywbem-native.
-
-Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb | 2 --
- 1 file changed, 2 deletions(-)
+ meta-python/recipes-connectivity/gateone/gateone_git.bb               | 2 --
+ .../recipes-devtools/python/python-cryptography-vectors_1.6.bb        | 2 --
+ meta-python/recipes-devtools/python/python-pbr_1.10.0.bb              | 2 --
+ .../recipes-devtools/python/python3-cryptography-vectors_1.6.bb       | 2 --
+ meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.2.bb  | 2 --
+ meta-python/recipes-devtools/python/python3-pymisp_2.4.54.bb          | 4 ----
+ meta-python/recipes-devtools/python/python3-requests_2.13.0.bb        | 4 ----
+ 7 files changed, 18 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb b/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
-index cc8e829..b23869d 100644
---- a/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
-+++ b/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
-@@ -21,5 +21,3 @@ do_compile_prepend() {
- do_install_prepend() {
-     cd cli
- }
+diff --git a/meta-python/recipes-connectivity/gateone/gateone_git.bb b/meta-python/recipes-connectivity/gateone/gateone_git.bb
+index ba9a799..8b2a192 100644
+--- a/meta-python/recipes-connectivity/gateone/gateone_git.bb
++++ b/meta-python/recipes-connectivity/gateone/gateone_git.bb
+@@ -86,5 +86,3 @@ RDEPENDS_${PN} = "mime-support \
+ 
+ SYSTEMD_SERVICE_${PN} = "gateone.service"
+ INITSCRIPT_NAME = "gateone"
 -
--PNBLACKLIST[openlmi-tools] ?= "Depends on blacklisted pywbem"
+-PNBLACKLIST[gateone] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130642/"
+diff --git a/meta-python/recipes-devtools/python/python-cryptography-vectors_1.6.bb b/meta-python/recipes-devtools/python/python-cryptography-vectors_1.6.bb
+index 92b4907..4975278 100644
+--- a/meta-python/recipes-devtools/python/python-cryptography-vectors_1.6.bb
++++ b/meta-python/recipes-devtools/python/python-cryptography-vectors_1.6.bb
+@@ -1,4 +1,2 @@
+ inherit pypi setuptools
+ require python-cryptography-vectors.inc
+-
+-PNBLACKLIST[python-cryptography-vectors] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130664/"
+diff --git a/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb b/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
+index 74d7866..7fddf7a 100644
+--- a/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
++++ b/meta-python/recipes-devtools/python/python-pbr_1.10.0.bb
+@@ -14,5 +14,3 @@ RDEPENDS_${PN}_class-target += " \
+         "
+ 
+ BBCLASSEXTEND = "native"
+-
+-PNBLACKLIST[python-pbr] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130650/"
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_1.6.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_1.6.bb
+index 909bbb4..58994ff 100644
+--- a/meta-python/recipes-devtools/python/python3-cryptography-vectors_1.6.bb
++++ b/meta-python/recipes-devtools/python/python3-cryptography-vectors_1.6.bb
+@@ -1,4 +1,2 @@
+ inherit pypi setuptools3
+ require python-cryptography-vectors.inc
+-
+-PNBLACKLIST[python3-cryptography-vectors] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130626/"
+diff --git a/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.2.bb b/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.2.bb
+index c8fb94e..3f07b2e 100644
+--- a/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.2.bb
++++ b/meta-python/recipes-devtools/python/python3-ndg-httpsclient_0.4.2.bb
+@@ -1,4 +1,2 @@
+ inherit pypi setuptools3
+ require python-ndg-httpsclient.inc
+-
+-PNBLACKLIST[python3-ndg-httpsclient] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130615/"
+diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.54.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.54.bb
+index 582d01d..4523d9e 100644
+--- a/meta-python/recipes-devtools/python/python3-pymisp_2.4.54.bb
++++ b/meta-python/recipes-devtools/python/python3-pymisp_2.4.54.bb
+@@ -1,6 +1,2 @@
+ inherit pypi setuptools3
+ require python-pymisp.inc
+-
+-PNBLACKLIST[python3-pymisp] ?= "Runtime depends on blacklisted python3-pymisp"
+-
+-PNBLACKLIST[python3-pymisp] ?= "Runtime depends on blacklisted python3-pymisp-dev"
+diff --git a/meta-python/recipes-devtools/python/python3-requests_2.13.0.bb b/meta-python/recipes-devtools/python/python3-requests_2.13.0.bb
+index bbfbfeb..5e869b7 100644
+--- a/meta-python/recipes-devtools/python/python3-requests_2.13.0.bb
++++ b/meta-python/recipes-devtools/python/python3-requests_2.13.0.bb
+@@ -3,7 +3,3 @@ require python-requests.inc
+ 
+ # Add the runtime depends for selectors.py
+ RDEPENDS_${PN} += "${PYTHON_PN}-misc"
+-
+-PNBLACKLIST[python3-requests] ?= "Runtime depends on blacklisted python3-ndg-httpsclient"
+-
+-PNBLACKLIST[python3-requests] ?= "Runtime depends on blacklisted python3-requests-dev"
 -- 
-2.6.6
+2.7.4
 
 
