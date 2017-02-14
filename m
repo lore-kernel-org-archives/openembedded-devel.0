@@ -1,20 +1,53 @@
-Return-Path: <ml@embed.me.uk>
-X-Greylist: delayed 2294 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 14 Feb 2017 14:56:07 UTC
-Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 24CBF731D1
+Return-Path: <patrick.ohly@intel.com>
+Received: from mail-it0-f43.google.com (mail-it0-f43.google.com
+	[209.85.214.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 1192B71A91
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2017 14:56:07 +0000 (UTC)
-To: openembedded-devel@lists.openembedded.org
-References: <alpine.LFD.2.20.1702131159380.3464@uk63952.mitel.com>
-From: Jack Mitchell <ml@embed.me.uk>
-Message-ID: <358e792e-f48d-5880-1842-aecb4b54275d@embed.me.uk>
-Date: Tue, 14 Feb 2017 14:19:36 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.7.1
-MIME-Version: 1.0
-In-Reply-To: <alpine.LFD.2.20.1702131159380.3464@uk63952.mitel.com>
-Subject: Re: building netdata: "No package 'zlib' found"
+	Tue, 14 Feb 2017 15:35:12 +0000 (UTC)
+Received: by mail-it0-f43.google.com with SMTP id 203so37759988ith.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Feb 2017 07:35:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=message-id:subject:from:to:cc:date:in-reply-to:references
+	:organization:mime-version:content-transfer-encoding;
+	bh=cW73Yro1FnMi+OazwcRnUCFGPdTbI17FqNmFubsEoHk=;
+	b=03DiqPt194YXELV/dd//Ji02MwDuol70TuTmsgO6jXQDPhYNS3Ui0yChaH6vAkVX5P
+	Qh7+OT3GxG/7EQo8Nw1mEZn73NBnoB/xWmeNoWrghri/VgS1L+6MTEfIa9TGOPJY4B5N
+	nbEp3uTvFb8sfAx0JmPouD2VU5O5gESAekF/U2unR6puW7p9lsM6s0fOnGyxPxByQ3DC
+	yqqh4pYDyG/G82bqyDz2yyCLQop3AOK2Dj5ihWgw6EZcjwmlVJdvMHK31n0T35Q9c/sy
+	T5dWaMNwNhwcui0nHthQiWX6xHpYnTWGVmPbI635p1UBrrdrUh4Q/FRVNaV6dcGWORbl
+	82UA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+	:references:organization:mime-version:content-transfer-encoding;
+	bh=cW73Yro1FnMi+OazwcRnUCFGPdTbI17FqNmFubsEoHk=;
+	b=WemMUbzbSXQZvZIyRsjoubt3QJETETgCO1t4krnJlcVwsX4zLRosoT1cIP97NqULwe
+	uOVfDahCszkzjRQTuCE59npoQ/0dhnSqaqYL/+KnZRT8UUb0h5N9eOQiY2gTm4dr8/fV
+	d3/ZoofpHnKTpgMHaVd+8UdtBmgFJGcC4ebXoE3g2O3HmFi+58t8gID1OjMvxTUSWzUo
+	AKjnmJY95c1sgDBuHLgiG+htpMTX87wufHBixbwqTUWVfdxtmi5SHshixlOQa5+mMKEb
+	djxy2Okcw5eh6hso8CUaDoi3NT+eeW+ZXiLcZZZWuFUE5I8v/bNq6gkARjxUBnEoo8TS
+	FhaA==
+X-Gm-Message-State: AMke39lqZ5FC5ChI5pSqjzbj0Ysub1NRRWmoKEOYdcMhkWHRUzVmobRxTkeDUb2Cf2ulk2E+
+X-Received: by 10.36.33.135 with SMTP id e129mr3889396ita.9.1487086512959;
+	Tue, 14 Feb 2017 07:35:12 -0800 (PST)
+Received: from pohly-mobl1 (p5DE8E015.dip0.t-ipconnect.de. [93.232.224.21])
+	by smtp.gmail.com with ESMTPSA id m6sm459783ioa.57.2017.02.14.07.35.10
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 14 Feb 2017 07:35:11 -0800 (PST)
+Message-ID: <1487086509.13854.347.camel@intel.com>
+From: Patrick Ohly <patrick.ohly@intel.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 14 Feb 2017 16:35:09 +0100
+In-Reply-To: <20170210082811.GA3021@jama>
+References: <20170210082811.GA3021@jama>
+Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
+X-Mailer: Evolution 3.12.9-1+b1 
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: multipath-tools on arm (was: Re: [OE-core] State of bitbake world, Failed tasks 2017-02-08)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,43 +60,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Feb 2017 14:56:08 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
+X-List-Received-Date: Tue, 14 Feb 2017 15:35:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On 13/02/17 17:01, Robert P. J. Day wrote:
->
->   i'm building a totally stock core-image-minimal for qemuppc with
-> latest poky checkout, and when i try to add the existing "netdata"
-> recipe to the mix, i get:
->
-> | configure: error: Package requirements (zlib) were not met:
-> |
-> | No package 'zlib' found
-> |
-> | Consider adjusting the PKG_CONFIG_PATH environment variable if you
-> | installed software in a non-standard prefix.
-> |
-> | Alternatively, you may set the environment variables ZLIB_CFLAGS
-> | and ZLIB_LIBS to avoid the need to call pkg-config.
-> | See the pkg-config man page for more details.
->
->   apart from fixing this, how could this recipe ever have built
-> before? i realize the current recipe for netdata is almost a year old,
-> but should it still not build?
->
-> rday
+On Fri, 2017-02-10 at 09:28 +0100, Martin Jansa wrote:
+>     *
+> meta-openembedded/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb:do_compile
 
-Recipe specific sysroots. Zlib is so common that it was probably already 
-available in the shared sysroot to be compiled against, now there is no 
-access to the shared sysroot it can't be found and fails. So this was 
-always a dependency bug but one that was probably never triggered.
+This is http://errors.yoctoproject.org/Errors/Details/130529/ and now
+blacklisted with the comment "Fails to build with RSS
+http://errors.yoctoproject.org/Errors/Details/130529/"
 
-Cheers,
-Jack
+However, the error isn't about RSS. It looks like an inline-assembler or
+compiler bug:
 
----
-Tuxable Ltd
-http://www.tuxable.co.uk
-Embedded Linux Consultancy
+{standard input}: Assembler messages:
+{standard input}:80: Error: shifts in CMP/MOV instructions are only supported in unified syntax -- `mov r12,r12,ror#3'
+{standard input}:80: Error: shifts in CMP/MOV instructions are only supported in unified syntax -- `mov r12,r12,ror#13'
+...
+../Makefile.inc:66: recipe for target 'debug.o' failed
+make[1]: *** [debug.o] Error 1
+
+Does anyone know what this could be? I'll also fire up a build in the
+meantime.
+
+-- 
+Best Regards, Patrick Ohly
+
+The content of this message is my personal opinion only and although
+I am an employee of Intel, the statements I make here in no way
+represent Intel's position on the issue, nor am I authorized to speak
+on behalf of Intel on this matter.
+
+
+
 
