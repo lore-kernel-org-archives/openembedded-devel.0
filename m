@@ -1,50 +1,47 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-ot0-f170.google.com (mail-ot0-f170.google.com
-	[74.125.82.170])
-	by mail.openembedded.org (Postfix) with ESMTP id E110F731D1
+Return-Path: <linus.svensson@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5ECFC601F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2017 12:22:24 +0000 (UTC)
-Received: by mail-ot0-f170.google.com with SMTP id 73so90590693otj.0
+	Tue, 14 Feb 2017 13:08:50 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id 5BD5B183C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2017 04:22:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=FVMQq6714Z/LAwOUs/t8OLpJMLJL6MVP78zL5QcYQSI=;
-	b=KS+PFtDT2eHVxJVHpa+0UzEDXVo0262FJU3n2vl6zgL3ApEExpm1ujw2LD8rqOWqsw
-	eS6Go2c4bfOONROw2sVFes6Rm4ut0yCOE70SnmkxoPSls+fwZH8xYKxpnWUjl3aByUh0
-	Uw7ZcdLBQ/mmvgdVnyu31BRWJJLifnDk1rvLk1aVLlpmYEICH0tosdamoRpxUTgkZcx3
-	EdWyHieVAA9RXpFIbB4hA3aRUlTs2mSqw4ea9boj6Wcy9i2dq5i1KyKyZeP7N1yCitC7
-	r+Dw4gj8VoiCNiAJ0dH1Dp5t7dPUr2s9Oak4rQyVWYJkk80WWSHobbxIQFB86GKh/34z
-	qGAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=FVMQq6714Z/LAwOUs/t8OLpJMLJL6MVP78zL5QcYQSI=;
-	b=b5v497X3PahP7B2riZxymOVLCPQSenWTIVCzGNjeVewcZZqQ/umuu7k/BRmlVq0bCO
-	HuzPtp7FeQCiPSfWn+8gm2P5CQaCP6S1bLz/YYpl+pRX6kVUxiYgTmgajYaPH7YeYXUZ
-	tDbmM8TFDu2HgjlwNeg9k3dv+epQXsCRiBGiGs0uvdjdDSPpGn1GxTHmdx4H6/AqJ28H
-	VhREE1ZQgRN9LY6SzYKujgIWUqjw6wK9SyN+Gpe9rHPZO3r+xjv2xUe1X/ZFYzhpeO77
-	3U5rX8CY+NiIJbQEZ+HR3CoUzn5pwjL094PTeNvAN8FU6pUuw52Ach6CfDf43W5jdRxT
-	NxoQ==
-X-Gm-Message-State: AMke39li4ZiBs2V0ONs+isFYMNtcHO+f/7ulcLcxF50Oog4hIC04y/x+w3dB8ucSkrw3anlvC+FJuQqXs9jG1w==
-X-Received: by 10.157.42.19 with SMTP id t19mr14807661ota.257.1487074945010;
-	Tue, 14 Feb 2017 04:22:25 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.157.1.56 with HTTP; Tue, 14 Feb 2017 04:22:24 -0800 (PST)
-In-Reply-To: <CA+chaQfPjR2wNPeAqsU1rLkoaPms81hgZd28+4hALm5M9nJKnQ@mail.gmail.com>
-References: <1487019728-19329-1-git-send-email-max.krummenacher@toradex.com>
-	<1487019728-19329-3-git-send-email-max.krummenacher@toradex.com>
-	<CA+chaQe+tq9r35iW6JMgLDuPV+v82zmPrPTaK359NQeTdzRodw@mail.gmail.com>
-	<CA+chaQdeBHucjgvjgff=kudTnTX1+cxxGv6yMnGb39UjuOxSaA@mail.gmail.com>
-	<1487023500.2100.15.camel@gmail.com>
-	<CA+chaQfPjR2wNPeAqsU1rLkoaPms81hgZd28+4hALm5M9nJKnQ@mail.gmail.com>
-From: Max Krummenacher <max.oss.09@gmail.com>
-Date: Tue, 14 Feb 2017 13:22:24 +0100
-Message-ID: <CAEHkU3XmNHaiyUno-wTA0dMh9zCeoVFWJi0kC9NaP_rZKT-gEg@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Cc: Max Krummenacher <max.krummenacher@toradex.com>
-Subject: Re: [meta-oe][PATCH][master-next 3/4] pywbem: depend on python-m2crypto-native and its rdepends
+	Tue, 14 Feb 2017 14:03:34 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id sV60Cj2HIqlJ
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Feb 2017 14:03:32 +0100 (CET)
+Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
+	by bastet.se.axis.com (Postfix) with ESMTPS id B5C31180F0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Feb 2017 14:03:32 +0100 (CET)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 9EB6E1E178
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Feb 2017 14:03:32 +0100 (CET)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 938561E177
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Feb 2017 14:03:32 +0100 (CET)
+Received: from thoth.se.axis.com (unknown [10.0.2.173])
+	by boulder03.se.axis.com (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Feb 2017 14:03:32 +0100 (CET)
+Received: from lnxlinussn.se.axis.com (lnxlinussn.se.axis.com [10.94.48.1])
+	by thoth.se.axis.com (Postfix) with ESMTP id 881CC799
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Feb 2017 14:03:32 +0100 (CET)
+Received: by lnxlinussn.se.axis.com (Postfix, from userid 21014)
+	id 631463A099; Tue, 14 Feb 2017 14:03:32 +0100 (CET)
+From: linus.svensson@axis.com
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 14 Feb 2017 14:03:29 +0100
+Message-Id: <1487077410-32299-1-git-send-email-linus.svensson@axis.com>
+X-Mailer: git-send-email 2.1.4
+X-TM-AS-GCONF: 00
+Subject: [meta-oe][PATCH 1/2] meson: Add recipe for the meson build system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,24 +54,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Feb 2017 12:22:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 14 Feb 2017 13:08:51 -0000
 
-2017-02-13 23:58 GMT+01:00 Martin Jansa <martin.jansa@gmail.com>:
-> Yes, I guessed that Richard answer was the motivation for what you did, but
-> the original issue reported by Andreas was about "many recipes depending on
-> kdoctool".
->
-> Here I see only 2 cases of such dependency, so I think we can live without
-> the bbclass - unless someone says that he has many recipes in internal
-> layers which depend on python-m2crypto-native.
->
-> Just my 2c (I'm not familiar with python-m2crypto so I cannot say how
-> common this use-case is).
+From: Linus Svensson <linussn@axis.com>
 
-I don't know either.
+Meson is a build system designed to be fast and as user firendly as
+possible. Find out more about meson at mesonbuild.com.
 
-I rework the patches to only use DEPENDS and send a v2.
+This patch is based on a prototype patch by
+Ross Burton <ross.burton@intel.com>.
 
-Max
+Signed-off-by: Linus Svensson <linussn@axis.com>
+---
+ meta/recipes-devtools/meson/meson_0.36.0.bb | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta/recipes-devtools/meson/meson_0.36.0.bb
+
+diff --git a/meta/recipes-devtools/meson/meson_0.36.0.bb b/meta/recipes-devtools/meson/meson_0.36.0.bb
+new file mode 100644
+index 0000000..1ec7e3e
+--- /dev/null
++++ b/meta/recipes-devtools/meson/meson_0.36.0.bb
+@@ -0,0 +1,15 @@
++HOMEPAGE = "http://mesonbuild.com"
++SUMMARY = "A high performance build system"
++
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
++
++SRC_URI = "https://github.com/mesonbuild/meson/releases/download/${PV}/${BP}.tar.gz"
++SRC_URI[md5sum] = "dfdd190c5f10a67bb40e6cf93944dd43"
++SRC_URI[sha256sum] = "dc087ec40dacb5e256e6ee6467f2d004faf4ef284d3c1ce5e89faa1e16540950"
++
++inherit setuptools3
++
++RDEPENDS_${PN} = "ninja python3-core python3-modules"
++
++BBCLASSEXTEND = "native"
+-- 
+2.1.4
+
 
