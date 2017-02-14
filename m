@@ -1,51 +1,20 @@
-Return-Path: <linus.svensson@axis.com>
-X-Greylist: delayed 316 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 14 Feb 2017 13:08:50 UTC
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5FF9D71E5F
+Return-Path: <ml@embed.me.uk>
+X-Greylist: delayed 2294 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 14 Feb 2017 14:56:07 UTC
+Received: from owm.eumx.net (eumx.net [91.82.101.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 24CBF731D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2017 13:08:50 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id B741F183C2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2017 14:03:35 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id Cp+xioby5a9B
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2017 14:03:34 +0100 (CET)
-Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
-	by bastet.se.axis.com (Postfix) with ESMTPS id CC6FE180F0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2017 14:03:34 +0100 (CET)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id B90F71A17F
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2017 14:03:34 +0100 (CET)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id AE2061A17E
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2017 14:03:34 +0100 (CET)
-Received: from thoth.se.axis.com (unknown [10.0.2.173])
-	by boulder02.se.axis.com (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2017 14:03:34 +0100 (CET)
-Received: from lnxlinussn.se.axis.com (lnxlinussn.se.axis.com [10.94.48.1])
-	by thoth.se.axis.com (Postfix) with ESMTP id A2596799
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2017 14:03:34 +0100 (CET)
-Received: by lnxlinussn.se.axis.com (Postfix, from userid 21014)
-	id 926A33A099; Tue, 14 Feb 2017 14:03:34 +0100 (CET)
-From: linus.svensson@axis.com
+	Tue, 14 Feb 2017 14:56:07 +0000 (UTC)
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Feb 2017 14:03:30 +0100
-Message-Id: <1487077410-32299-2-git-send-email-linus.svensson@axis.com>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1487077410-32299-1-git-send-email-linus.svensson@axis.com>
-References: <1487077410-32299-1-git-send-email-linus.svensson@axis.com>
-X-TM-AS-GCONF: 00
-Subject: [meta-oe][PATCH 2/2] meson.bbclass: Add meson.bbclass
+References: <alpine.LFD.2.20.1702131159380.3464@uk63952.mitel.com>
+From: Jack Mitchell <ml@embed.me.uk>
+Message-ID: <358e792e-f48d-5880-1842-aecb4b54275d@embed.me.uk>
+Date: Tue, 14 Feb 2017 14:19:36 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.1
+MIME-Version: 1.0
+In-Reply-To: <alpine.LFD.2.20.1702131159380.3464@uk63952.mitel.com>
+Subject: Re: building netdata: "No package 'zlib' found"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,120 +27,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Feb 2017 13:08:51 -0000
+X-List-Received-Date: Tue, 14 Feb 2017 14:56:08 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Linus Svensson <linussn@axis.com>
+On 13/02/17 17:01, Robert P. J. Day wrote:
+>
+>   i'm building a totally stock core-image-minimal for qemuppc with
+> latest poky checkout, and when i try to add the existing "netdata"
+> recipe to the mix, i get:
+>
+> | configure: error: Package requirements (zlib) were not met:
+> |
+> | No package 'zlib' found
+> |
+> | Consider adjusting the PKG_CONFIG_PATH environment variable if you
+> | installed software in a non-standard prefix.
+> |
+> | Alternatively, you may set the environment variables ZLIB_CFLAGS
+> | and ZLIB_LIBS to avoid the need to call pkg-config.
+> | See the pkg-config man page for more details.
+>
+>   apart from fixing this, how could this recipe ever have built
+> before? i realize the current recipe for netdata is almost a year old,
+> but should it still not build?
+>
+> rday
 
-Add a class for packages that uses the meson build system.
+Recipe specific sysroots. Zlib is so common that it was probably already 
+available in the shared sysroot to be compiled against, now there is no 
+access to the shared sysroot it can't be found and fails. So this was 
+always a dependency bug but one that was probably never triggered.
 
-Meson uses a cross-file that contain needed tools and information about
-the host and target system. Such a file will be created in {WORKDIR}.
+Cheers,
+Jack
 
-Meson only allows installation directories to be specified as relative
-to prefix, except for sysconfdir, which can be absolute.
-
-This patch is based on a prototype patch by
-Ross Burton <ross.burton@intel.com>.
-
-Signed-off-by: Linus Svensson <linussn@axis.com>
 ---
- meta/classes/meson.bbclass | 86 ++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 86 insertions(+)
- create mode 100644 meta/classes/meson.bbclass
-
-diff --git a/meta/classes/meson.bbclass b/meta/classes/meson.bbclass
-new file mode 100644
-index 0000000..5a04134
---- /dev/null
-+++ b/meta/classes/meson.bbclass
-@@ -0,0 +1,86 @@
-+inherit python3native
-+
-+DEPENDS_append = " meson-native ninja-native"
-+
-+# As Meson enforces out-of-tree builds we can just use cleandirs
-+B = "${WORKDIR}/build"
-+do_configure[cleandirs] = "${B}"
-+
-+# Where the meson.build build configuration is
-+MESON_SOURCEPATH = "${S}"
-+
-+# These variables in the environment override the *native* tools not the cross,
-+# so they need to be unexported.
-+CC[unexport] = "1"
-+
-+def noprefix(var, d):
-+    return d.getVar(var, True).replace(d.getVar('prefix', True) + '/', '', 1)
-+
-+MESONOPTS = " --prefix ${prefix} \
-+              --bindir ${@noprefix('bindir', d)} \
-+              --datadir ${@noprefix('datadir', d)} \
-+              --libdir ${@noprefix('libdir', d)} \
-+              --libexecdir ${@noprefix('libexecdir', d)} \
-+              --includedir ${@noprefix('includedir', d)} \
-+              --mandir ${@noprefix('mandir', d)} \
-+              --localedir ${@noprefix('localedir', d)} \
-+              --sysconfdir ${sysconfdir}"
-+
-+MESON_C_ARGS = "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}"
-+
-+MESON_HOST_ENDIAN = "${@bb.utils.contains('SITEINFO_ENDIANNESS', 'be', 'big', 'little', d)}"
-+MESON_TARGET_ENDIAN = "${@bb.utils.contains('TUNE_FEATURES', 'bigendian', 'big', 'little', d)}"
-+
-+EXTRA_OEMESON += "${PACKAGECONFIG_CONFARGS}"
-+
-+def meson_array(var, d):
-+    return "', '".join(d.getVar(var, True).split()).join(("'", "'"))
-+
-+addtask write_config before do_configure
-+do_write_config[vardeps] += "MESON_C_ARGS TOOLCHAIN_OPTIONS"
-+do_write_config() {
-+    # This needs to be Py to split the args into single-element lists
-+    cat >${WORKDIR}/meson.cross <<EOF
-+[binaries]
-+c = '${HOST_PREFIX}gcc'
-+cpp = '${HOST_PREFIX}gcc'
-+ar = '${HOST_PREFIX}ar'
-+ld = '${HOST_PREFIX}ld'
-+strip = '${HOST_PREFIX}strip'
-+readelf = '${HOST_PREFIX}readelf'
-+pkgconfig = 'pkg-config'
-+
-+[properties]
-+c_args = [${@meson_array('MESON_C_ARGS', d)}]
-+c_link_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
-+
-+[host_machine]
-+system = '${HOST_OS}'
-+cpu_family = '${HOST_ARCH}'
-+cpu = '${HOST_ARCH}'
-+endian = '${MESON_HOST_ENDIAN}'
-+
-+[target_machine]
-+system = '${TARGET_OS}'
-+cpu_family = '${TARGET_ARCH}'
-+cpu = '${TARGET_ARCH}'
-+endian = '${MESON_TARGET_ENDIAN}'
-+EOF
-+}
-+
-+meson_do_configure() {
-+    if ! meson ${MESONOPTS} "${MESON_SOURCEPATH}" "${B}" --cross-file ${WORKDIR}/meson.cross ${EXTRA_OEMESON}; then
-+        cat ${B}/meson-logs/meson-log.txt
-+        bbfatal_log meson failed
-+    fi
-+}
-+
-+meson_do_compile() {
-+    ninja ${PARALLEL_MAKE}
-+}
-+
-+meson_do_install() {
-+    DESTDIR='${D}' ninja ${PARALLEL_MAKEINST} install
-+}
-+
-+EXPORT_FUNCTIONS do_configure do_compile do_install
--- 
-2.1.4
-
+Tuxable Ltd
+http://www.tuxable.co.uk
+Embedded Linux Consultancy
 
