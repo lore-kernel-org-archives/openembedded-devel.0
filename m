@@ -1,31 +1,32 @@
-Return-Path: <ed.bartosh@linux.intel.com>
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 6BAD3772D0
+Return-Path: <rpjday@crashcourse.ca>
+Received: from smtp684.redcondor.net (smtp684.redcondor.net [208.80.206.84])
+	by mail.openembedded.org (Postfix) with ESMTP id 02A6771E06
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Feb 2017 09:21:17 +0000 (UTC)
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-	by fmsmga105.fm.intel.com with ESMTP; 15 Feb 2017 01:21:18 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.35,165,1484035200"; d="scan'208";a="225525099"
-Received: from linux.intel.com ([10.54.29.200])
-	by fmsmga004.fm.intel.com with ESMTP; 15 Feb 2017 01:21:17 -0800
-Received: from linux.intel.com (vmed.fi.intel.com [10.237.72.38])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by linux.intel.com (Postfix) with ESMTP id 31EF56A4006;
-	Wed, 15 Feb 2017 01:20:14 -0800 (PST)
-Date: Wed, 15 Feb 2017 10:58:49 +0200
-From: Ed Bartosh <ed.bartosh@linux.intel.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20170215085849.GA6218@linux.intel.com>
-Reply-To: ed.bartosh@linux.intel.com
-References: <CA+chaQegXmqfE=3TmnYXvLdCW00QpinkXk=L27OQS5-1DnJYAQ@mail.gmail.com>
+	Wed, 15 Feb 2017 12:23:45 +0000 (UTC)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
+	by smtp684.redcondor.net ({700db0a8-6fb7-4c8b-9b2a-6812225182d8})
+	via TCP (outbound) with ESMTPS id 20170215122344409_0684
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Feb 2017 12:23:44 +0000
+X-RC-FROM: <rpjday@crashcourse.ca>
+X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
+Received: from [216.191.234.70] (port=32467 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1cdycU-0007Fl-8W for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Feb 2017 07:23:38 -0500
+Date: Wed, 15 Feb 2017 07:23:36 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@uk63952.mitel.com
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <358e792e-f48d-5880-1842-aecb4b54275d@embed.me.uk>
+Message-ID: <alpine.LFD.2.20.1702141000250.29338@uk63952.mitel.com>
+References: <alpine.LFD.2.20.1702131159380.3464@uk63952.mitel.com>
+	<358e792e-f48d-5880-1842-aecb4b54275d@embed.me.uk>
+User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQegXmqfE=3TmnYXvLdCW00QpinkXk=L27OQS5-1DnJYAQ@mail.gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] core-image-tiny-initramfs failing to parse because of WIC (WKS_FULL_PATH, )
+X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
+Subject: Re: building netdata: "No package 'zlib' found"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,79 +39,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2017 09:21:22 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 15 Feb 2017 12:23:46 -0000
+Content-Type: text/plain; charset=US-ASCII
 
-Hi Martin,
 
-Sorry for the delay. I missedd your message somehow.
+  i was going to start a new thread for this, then remembered this
+post i was going to respond to:
 
-I can't reproduce this. Tried with latest poky and latest oe-core +
-bitbake. I built core-image-tiny-initramfs from scratch and bitbake -e
-busybox works for me just fine.
+On Tue, 14 Feb 2017, Jack Mitchell wrote:
 
-Can you provide more details about your setup, please?
+> On 13/02/17 17:01, Robert P. J. Day wrote:
+> >
+> >   i'm building a totally stock core-image-minimal for qemuppc with
+> > latest poky checkout, and when i try to add the existing "netdata"
+> > recipe to the mix, i get:
+> >
+> > | configure: error: Package requirements (zlib) were not met:
+> > |
+> > | No package 'zlib' found
+> > |
+> > | Consider adjusting the PKG_CONFIG_PATH environment variable if you
+> > | installed software in a non-standard prefix.
+> > |
+> > | Alternatively, you may set the environment variables ZLIB_CFLAGS
+> > | and ZLIB_LIBS to avoid the need to call pkg-config.
+> > | See the pkg-config man page for more details.
+> >
+> >   apart from fixing this, how could this recipe ever have built
+> > before? i realize the current recipe for netdata is almost a year
+> > old, but should it still not build?
+>
+> Recipe specific sysroots. Zlib is so common that it was probably
+> already available in the shared sysroot to be compiled against, now
+> there is no access to the shared sysroot it can't be found and
+> fails. So this was always a dependency bug but one that was probably
+> never triggered.
 
-On Thu, Feb 09, 2017 at 09:39:30AM +0100, Martin Jansa wrote:
-> Running e.g. bitbake -e busybox with latest oe-core triggers this badly
-> looking exception:
-> 
-> Can we add some weak assignment for people who don't care about wic
-> or core-image-tiny-initramfs to continue using oe-core?
-> 
-> ERROR: ExpansionError during parsing /OE/oe-core/meta/recipes-core/images/
-> core-image-tiny-initramfs.bb
-> Traceback (most recent call last):
->   File "/OE/bitbake/lib/bb/data_smart.py", line 412, in
-> DataSmart.expandWithRefs(s='\tout="${IMGDEPLOYDIR}/${IMAGE_NAME}"\n\twks="${WKS_FULL_PATH}"\n\tif
-> [ -z "$wks" ]; then\n\t\tbbfatal "No kickstart files from WKS_FILES were
-> found: ${WKS_FILES}. Please set WKS_FILE or WKS_FILES
-> appropriately."\n\tfi\n\n\tBUILDDIR="${TOPDIR}" wic create "$wks" --vars
-> "${STAGING_DIR}/${MACHINE}/imgdata/" -e "${IMAGE_BASENAME}" -o "$out/"
-> ${WIC_CREATE_EXTRA_ARGS}\n\tmv "$out/$(basename "${wks%.wks}")"*.direct
-> "$out${IMAGE_NAME_SUFFIX}.wic"\n\trm -rf "$out/"\n', varname='IMAGE_CMD'):
->                  try:
->     >                s = __expand_var_regexp__.sub(varparse.var_sub, s)
->                      try:
->   File "/OE/bitbake/lib/bb/data_smart.py", line 111, in
-> VariableParse.var_sub(match=<_sre.SRE_Match object; span=(43, 59),
-> match='${WKS_FULL_PATH}'>):
->                  else:
->     >                var = self.d.getVarFlag(key, "_content")
->                  self.references.add(key)
->   File "/OE/bitbake/lib/bb/data_smart.py", line 773, in
-> DataSmart.getVarFlag(var='WKS_FULL_PATH', flag='_content', expand=True,
-> noweakdefault=False, parsing=False):
->                      cachename = var + "[" + flag + "]"
->     >            value = self.expand(value, cachename)
-> 
->   File "/OE/bitbake/lib/bb/data_smart.py", line 436, in
-> DataSmart.expand(s="${@wks_search('${WKS_FILES}'.split(),
-> '${WKS_SEARCH_PATH}') or ''}", varname='WKS_FULL_PATH'):
->          def expand(self, s, varname = None):
->     >        return self.expandWithRefs(s, varname).value
-> 
->   File "/OE/bitbake/lib/bb/data_smart.py", line 426, in
-> DataSmart.expandWithRefs(s="${@wks_search('directdisk.wks
-> core-image-tiny-initramfs.wks'.split(),
-> '/OE/oe-core/meta/recipes-core/images:${@':'.join('%s/wic' % p for p in
-> '/OE:${TMPDIR}:/OE/oe-core/meta'.split(':'))}:${@':'.join('%s/scripts/lib/wic/canned-wks'
-> % l for l in '/OE:${TMPDIR}:/OE/oe-core/meta:/OE/oe-core'.split(':'))}') or
-> ''}", varname='WKS_FULL_PATH'):
->                  except Exception as exc:
->     >                raise ExpansionError(varname, s, exc) from exc
-> 
-> bb.data_smart.ExpansionError: Failure expanding variable WKS_FULL_PATH,
-> expression was ${@wks_search('directdisk.wks
-> core-image-tiny-initramfs.wks'.split(),
-> '/OE/oe-core/meta/recipes-core/images:${@':'.join('%s/wic' % p for p in
-> '/OE:${TMPDIR}:/OE/oe-core/meta'.split(':'))}:${@':'.join('%s/scripts/lib/wic/canned-wks'
-> % l for l in '/OE:${TMPDIR}:/OE/oe-core/meta:/OE/oe-core'.split(':'))}') or
-> ''} which triggered exception SyntaxError: invalid syntax (WKS_FULL_PATH,
-> line 1)
+  a couple questions. a couple days ago, all i did was add the line:
 
---
-Regards,
-Ed
+  DEPENDS = "zlib"
+
+to the netdata_git.bb recipe file, and that trivially solved the
+problem. i just updated my poky checkout, built again, and the build
+failed since, as i notice from monday, a bunch of recipes (including
+netdata) have been blacklisted because of (unsurprisingly) failure to
+build:
+
+  $ git show b7f480c
+
+so what should one do here?
+
+  for that recipe, i can submit a patch which adds the DEPENDS line
+and removes the blacklisting. or is there a more wide-sweeping plan to
+fix recipes that are now missing build-time dependencies based on
+recipe-specific sysroots?
+
+  also, if there's no objection, i can submit a patch that adds a
+recipe for the far more recent netdata-1.5.0.
+
+  thoughts?
+
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
+
+
 
