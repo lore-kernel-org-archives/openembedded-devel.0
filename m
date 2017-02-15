@@ -1,47 +1,49 @@
 Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 919BD60079
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 6CF1B7722B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Feb 2017 00:23:25 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id k90so29297314wrc.3
+	Wed, 15 Feb 2017 00:23:29 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id r18so5897565wmd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Feb 2017 16:23:26 -0800 (PST)
+	Tue, 14 Feb 2017 16:23:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=2QIqFNNWYBXqhzuskur+hnjChYiLt4Tx19PR/PdW5vo=;
-	b=QC1Bz56RRVZY2fJr9TkPiOqz4Sf8YIN8jzKJ3dlhJYFb4oOwtxlMSi6ZPeQ5mEk9fV
-	pwY9VlUSbvTlONkJA0PTiAORWK3xfNak6Hxy8zudNz1ISjXgW8VR/unk6RlKxTv2A3bQ
-	J+AD98ga9tdUXYX4H2cgfBnrgs8MTDQt7S68eEgoLfiMh5D7zxYxo/bgffcyfVmiX2RR
-	MKZRqMpUulSSj1jFYoqSfjPObdKB2P5aIAMoRMTG0L64cWw6jUDIGhGJb8OrRr6p9ix8
-	4e1FLKGftjKuw+roAHfdf+rWkfaSf+mTMCFmmrVJngAV34gN0YyyqUhHX2NNrqZiViSg
-	758A==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=baYDt+OQIsJpz0DqHy1kc9s5OZ0/wA201JlpS9vJ6Gw=;
+	b=pBYeivixy/radox+PQi/+sra1RTrZciLqEbxGaXkagljbmIBHKuyDKCBH+ntsroRUz
+	Us8bvbP0+NZWrX5ahixkg3BP1cvEhHQ7vvDY4Z14uxnq155HFr8ewVOlLn01FWaTriZn
+	gil/D67Aiyu5vf/xzA43zIcnwAVq4LzcSIbOjdygYs9voIVio11G02CRxO+HMnGtsxo3
+	MpVNYaHnN4fOcjIfgoV/04066dUmxpnyFCuLKZUj37CQVUx1aAhezWPzZCBIiJSgyYey
+	u2JARNtvM3NT/snWdSQ1+/2a/c/2E5MiorA3GiexKCipJrd/lLWR+UfndgugdO9qW7Mv
+	rFjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=2QIqFNNWYBXqhzuskur+hnjChYiLt4Tx19PR/PdW5vo=;
-	b=e0INIHPesCwPSGiNB30DyLDgBe8gWGQzScoVxPpGrJIWilzI9mXgcNqZhrUBrPFa79
-	4FVQrI75EqN7gIJeF0KFqDQZNuEEEjkchrkA5fc52/AWVWQp+vDQW5Q55xdJYv+iVxce
-	1CTNJMwUCMPcvOaIkdHAsEKaPy6jzqB460RLLkyWc/TerWct2ZU7Bc3jkPC1oh1v4SeX
-	45DbX73USE8MsF+0jef8kdYv7nkQ7CryivQ0YBJXNjG6YThGSzmQ4PJH+pDg6apdqN7K
-	7PnjOzkMMsaXvp5kA+mWX0Vo3zIBEHY2PpUm/+VqeLfcKW/Ls/u6wbAi+PuDgDi3jSEH
-	G6Pw==
-X-Gm-Message-State: AMke39n+V4X5M/OjfrAu6f/bOccVLFrkYbKI6MaNlegXnXE5gOJ0SAv1DZhHdYEPVVSgQw==
-X-Received: by 10.223.134.104 with SMTP id 37mr25490849wrw.121.1487118206004; 
-	Tue, 14 Feb 2017 16:23:26 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=baYDt+OQIsJpz0DqHy1kc9s5OZ0/wA201JlpS9vJ6Gw=;
+	b=sA5HowwdMiM7q9IXu2zG4Ivh90JdvHaWYgQOOhmG/Ywyix35FjwmmOTVZFwJ/P9Jgl
+	8rEUel1Hjop6NHHzMz9CMaKgDhBw6jV4/T24sxsNfpu3xn2QCt7YuK/qt37ZxgqQFNh+
+	TL7yCo9V/jWk60ameQnFBewHGJa8tIMzLUnZfMNwy0Jn1fdnr9zeIEmFVfAt8tKTbCT0
+	XQaSgcd0xjEt6Rr0Xcg+dH9C5hkXnAXLe2P/syq0CTXyIomz23se8SrJjjVd5AvQ8sis
+	79IY4dk6ijzyu9QWJpAB2Wjl+z6pB3dEdE5sOssODH4zzGOkuz1I6maW4KNmXL2WcO3M
+	wc1Q==
+X-Gm-Message-State: AMke39nj8jw/U9mikq783eihLj1t+yb/S6HW1fVlWRuymuL/XJ/TwyJaMPxze02hOmQh7w==
+X-Received: by 10.28.144.135 with SMTP id s129mr5479900wmd.18.1487118208882;
+	Tue, 14 Feb 2017 16:23:28 -0800 (PST)
 Received: from Saturn.local.all ([194.191.225.83])
 	by smtp.gmail.com with ESMTPSA id
-	g40sm2716232wrg.19.2017.02.14.16.23.24
+	g40sm2716232wrg.19.2017.02.14.16.23.28
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 14 Feb 2017 16:23:25 -0800 (PST)
+	Tue, 14 Feb 2017 16:23:28 -0800 (PST)
 From: Max Krummenacher <max.oss.09@gmail.com>
 X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Feb 2017 01:22:53 +0100
-Message-Id: <1487118174-23647-1-git-send-email-max.krummenacher@toradex.com>
+Date: Wed, 15 Feb 2017 01:22:54 +0100
+Message-Id: <1487118174-23647-2-git-send-email-max.krummenacher@toradex.com>
 X-Mailer: git-send-email 2.6.6
+In-Reply-To: <1487118174-23647-1-git-send-email-max.krummenacher@toradex.com>
+References: <1487118174-23647-1-git-send-email-max.krummenacher@toradex.com>
 Cc: Max Krummenacher <max.krummenacher@toradex.com>
-Subject: [meta-gnome][PATCH][master-next 1/2] gnome-mime-data: add depends on glib-2.0-native
+Subject: [meta-gnome][PATCH][master-next 2/2] gnome-vfs: remove blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,36 +58,23 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 15 Feb 2017 00:23:29 -0000
 
-This installs the needed glib-gettextize.
-Remove blacklist.
+Build is fixed for gnome-mime-data.
 
 Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
 ---
+ meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-Note that this is badly tested. On my host the build did pickup
-glib-gettextize from /usr/bin/glib-gettextize..
-
-I inspected the native sysroot with devshell. The binary was missing
-without the patch and got installed with it.
-
-Max
-
- meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
-
-diff --git a/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb b/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb
-index 6dc80b5..eeac1bb 100644
---- a/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb
-@@ -15,7 +15,5 @@ SRC_URI[archive.md5sum] = "541858188f80090d12a33b5a7c34d42c"
- SRC_URI[archive.sha256sum] = "37196b5b37085bbcd45c338c36e26898fe35dd5975295f69f48028b1e8436fd7"
- GNOME_COMPRESS_TYPE="bz2"
- 
--DEPENDS += "shared-mime-info intltool-native"
-+DEPENDS += "shared-mime-info intltool-native glib-2.0-native"
- RDEPENDS_${PN} = "shared-mime-info"
+diff --git a/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb b/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb
+index edf5bfc..3ec6466 100644
+--- a/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb
++++ b/meta-gnome/recipes-gnome/gnome-vfs/gnome-vfs_2.24.4.bb
+@@ -56,5 +56,3 @@ python populate_packages_prepend () {
+     plugindir = d.expand('${libdir}/gnome-vfs-2.0/modules/')
+     do_split_packages(d, plugindir, '^lib(.*)\.so$', 'gnome-vfs-plugin-%s', 'GNOME VFS plugin for %s')
+ }
 -
--PNBLACKLIST[gnome-mime-data] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130589/"
+-PNBLACKLIST[gnome-vfs] ?= "Depends on blacklisted gnome-mime-data"
 -- 
 2.6.6
 
