@@ -1,20 +1,47 @@
-Return-Path: <ml@embed.me.uk>
-Received: from owm.eumx.net (eumx.net [91.82.101.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 195E271ABD
+Return-Path: <linus.svensson@axis.com>
+Received: from bes.se.axis.com (bes.se.axis.com [195.60.68.10])
+	by mail.openembedded.org (Postfix) with ESMTP id DEE2771AB9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Feb 2017 12:48:09 +0000 (UTC)
+	Wed, 15 Feb 2017 13:42:16 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bes.se.axis.com (Postfix) with ESMTP id 566FA2E0D0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Feb 2017 14:42:16 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at bes.se.axis.com
+Received: from bes.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bes.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id lOSQomLQN7No
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Feb 2017 14:42:16 +0100 (CET)
+Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
+	by bes.se.axis.com (Postfix) with ESMTPS id 3A30F2E0BD
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Feb 2017 14:42:16 +0100 (CET)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 26D931A063
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Feb 2017 14:42:16 +0100 (CET)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 1C1661A05F
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Feb 2017 14:42:16 +0100 (CET)
+Received: from seth.se.axis.com (unknown [10.0.2.172])
+	by boulder02.se.axis.com (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Feb 2017 14:42:16 +0100 (CET)
+Received: from lnxlinussn.se.axis.com (lnxlinussn.se.axis.com [10.94.48.1])
+	by seth.se.axis.com (Postfix) with ESMTP id 10EF83AB
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Feb 2017 14:42:16 +0100 (CET)
+Received: by lnxlinussn.se.axis.com (Postfix, from userid 21014)
+	id 066A33A099; Wed, 15 Feb 2017 14:42:15 +0100 (CET)
+From: linus.svensson@axis.com
 To: openembedded-devel@lists.openembedded.org
-References: <alpine.LFD.2.20.1702131159380.3464@uk63952.mitel.com>
-	<358e792e-f48d-5880-1842-aecb4b54275d@embed.me.uk>
-	<alpine.LFD.2.20.1702141000250.29338@uk63952.mitel.com>
-From: Jack Mitchell <ml@embed.me.uk>
-Message-ID: <15032f82-81ea-3f4a-e39d-26c63629f6ec@embed.me.uk>
-Date: Wed, 15 Feb 2017 12:49:58 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.7.1
-MIME-Version: 1.0
-In-Reply-To: <alpine.LFD.2.20.1702141000250.29338@uk63952.mitel.com>
-Subject: Re: building netdata: "No package 'zlib' found"
+Date: Wed, 15 Feb 2017 14:41:53 +0100
+Message-Id: <1487166114-3845-1-git-send-email-linus.svensson@axis.com>
+X-Mailer: git-send-email 2.1.4
+X-TM-AS-GCONF: 00
+Subject: [meta-oe][PATCH 1/2] meson: Add recipe for the meson build system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,80 +54,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2017 12:48:10 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 15 Feb 2017 13:42:17 -0000
 
+From: Linus Svensson <linussn@axis.com>
 
+Meson is a build system designed to be fast and as user firendly as
+possible. Find out more about meson at mesonbuild.com.
 
-On 15/02/17 12:23, Robert P. J. Day wrote:
->
->   i was going to start a new thread for this, then remembered this
-> post i was going to respond to:
->
-> On Tue, 14 Feb 2017, Jack Mitchell wrote:
->
->> On 13/02/17 17:01, Robert P. J. Day wrote:
->>>
->>>   i'm building a totally stock core-image-minimal for qemuppc with
->>> latest poky checkout, and when i try to add the existing "netdata"
->>> recipe to the mix, i get:
->>>
->>> | configure: error: Package requirements (zlib) were not met:
->>> |
->>> | No package 'zlib' found
->>> |
->>> | Consider adjusting the PKG_CONFIG_PATH environment variable if you
->>> | installed software in a non-standard prefix.
->>> |
->>> | Alternatively, you may set the environment variables ZLIB_CFLAGS
->>> | and ZLIB_LIBS to avoid the need to call pkg-config.
->>> | See the pkg-config man page for more details.
->>>
->>>   apart from fixing this, how could this recipe ever have built
->>> before? i realize the current recipe for netdata is almost a year
->>> old, but should it still not build?
->>
->> Recipe specific sysroots. Zlib is so common that it was probably
->> already available in the shared sysroot to be compiled against, now
->> there is no access to the shared sysroot it can't be found and
->> fails. So this was always a dependency bug but one that was probably
->> never triggered.
->
->   a couple questions. a couple days ago, all i did was add the line:
->
->   DEPENDS = "zlib"
->
-> to the netdata_git.bb recipe file, and that trivially solved the
-> problem. i just updated my poky checkout, built again, and the build
-> failed since, as i notice from monday, a bunch of recipes (including
-> netdata) have been blacklisted because of (unsurprisingly) failure to
-> build:
->
->   $ git show b7f480c
->
-> so what should one do here?
->
->   for that recipe, i can submit a patch which adds the DEPENDS line
-> and removes the blacklisting. or is there a more wide-sweeping plan to
-> fix recipes that are now missing build-time dependencies based on
-> recipe-specific sysroots?
+This patch is based on a prototype patch by
+Ross Burton <ross.burton@intel.com>.
 
-Submit the patch which fixes the recipe and removes the blacklist. As 
-for a wide sweeping plan, I imagine recipes will get blacklisted until 
-someone who is actively using them notices and submits the patch to fix. 
-There isn't the time available to fix all the recipes and then run-time 
-test them to make sure that the fix has actually worked.
+Signed-off-by: Linus Svensson <linussn@axis.com>
+---
+ meta-oe/recipes-devtools/meson/meson_0.36.0.bb | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/meson/meson_0.36.0.bb
 
->
->   also, if there's no objection, i can submit a patch that adds a
-> recipe for the far more recent netdata-1.5.0.
+diff --git a/meta-oe/recipes-devtools/meson/meson_0.36.0.bb b/meta-oe/recipes-devtools/meson/meson_0.36.0.bb
+new file mode 100644
+index 0000000..1ec7e3e
+--- /dev/null
++++ b/meta-oe/recipes-devtools/meson/meson_0.36.0.bb
+@@ -0,0 +1,15 @@
++HOMEPAGE = "http://mesonbuild.com"
++SUMMARY = "A high performance build system"
++
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
++
++SRC_URI = "https://github.com/mesonbuild/meson/releases/download/${PV}/${BP}.tar.gz"
++SRC_URI[md5sum] = "dfdd190c5f10a67bb40e6cf93944dd43"
++SRC_URI[sha256sum] = "dc087ec40dacb5e256e6ee6467f2d004faf4ef284d3c1ce5e89faa1e16540950"
++
++inherit setuptools3
++
++RDEPENDS_${PN} = "ninja python3-core python3-modules"
++
++BBCLASSEXTEND = "native"
+-- 
+2.1.4
 
-I'm sure this would be welcomed.
-
->
->   thoughts?
->
-> rday
->
 
