@@ -1,45 +1,46 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C2B6772DB
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C81F772D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Feb 2017 13:43:50 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id c4so5780287wrd.1
+	Wed, 15 Feb 2017 13:45:34 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id u63so8282526wmu.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Feb 2017 05:43:51 -0800 (PST)
+	Wed, 15 Feb 2017 05:45:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=IbK/L2rrsjl8N7VwJTgXxYHlNBnWNAeHbI+QOo5xgFQ=;
-	b=of7Vy2pCKElNo00jghvTRwr9ur75hm192bMb5vvS+my7Zd8rWBvX38B8H2XvuOQmn+
-	DovlgNrrMqG5n8FksTu7u3duqcQgUM1CKRdbU4iCLgROZHID2tw/IyJWbOdWqeD7fwZ5
-	G0MeGMEJMhWXj+GBMqCBetmQ4pyTY3c6ZibrOhOGMoiJ19UMwwCiHMfHzyVEGy2UeD7x
-	7P9mEfQF0M7Cg71lHaeScLQdwiWnWYIqI4iCVEFtzBKVF6xVSrGqIXREuI2lqjSJrP4g
-	XUSuqmbPcW7Daf26oFydQ31qEKKhTPMSML/uSQqn6B7b1sORnbUMeFMlWf8Bc4P6aDle
-	yPxg==
+	bh=aNK27+KO8ezGIw85ECT9SnRD8IiXId7O+bTOEkN/hpY=;
+	b=euPrnKdmHZLrn6mTsPLiJmiZBiB/nmMoOUoFwdIEGhFZjvoO/6vFXYhbLCRx3NCo6e
+	KgAdQLdRBKOuybZc64HknMbdlF4pP3SAb154PiYlALGkDIxGLyLnxF2EOPQH6e7/EXgo
+	KdbDgEJF0AE0MoHPcaSrIdvssxaREhWV5U7dyJAt2dVQZJWKNEsuCAX6BjDosoRSkGXf
+	X9ArCWJodEWfR8WEup9TDu68MIg6l+xLsnJm3sMqA4Oxf9XarN95TW4QWzm/qqel4kft
+	sfwYIStpl2JHsg0fJ0QnvC+IDYpOZ3d9GJUMaSpo4IB9y+tWZhgrQ0tzx1NWQwM3XQU9
+	DitQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=IbK/L2rrsjl8N7VwJTgXxYHlNBnWNAeHbI+QOo5xgFQ=;
-	b=VOLyvzjmT61cr1c4PnL/azmHD7LnOhVsOwTqxv21KaPelkpnC+0MBJK3Xx3KDyuCfT
-	Yvj68FQst9i9JrPeLFqzBQmLE0k908hQXHEq8bGqwxqE3rirMYDsDiMnYLdL1IbpxBz9
-	8VoV6E3U9ccllJNSmhGvf3C6H0CX1k6398+fVCWUc3M8/hTbs4LR/xk0APmxZA/e+PYg
-	EQnvhyzjfslgBfQz4Um7HlnO5oE/N2dt82yrjAH/fa4u16gjQ6qKZ0SR+RVnnWs/hry6
-	41KwK9SHbw+r6MrJliTssls58sT+2l/kPu2GXqtJkGVbt5SkBLYuFl95G+Ji6JHbgNSR
-	XH7g==
-X-Gm-Message-State: AMke39lLfcIXE9B/Dde/bEATMeFN9PZrDosFJjLkbqz7EYzCN3ZanuH7Z00/uuH6qDrt7eMH01AysYS+iUJrkg==
-X-Received: by 10.223.136.109 with SMTP id e42mr30510261wre.14.1487166230250; 
-	Wed, 15 Feb 2017 05:43:50 -0800 (PST)
+	bh=aNK27+KO8ezGIw85ECT9SnRD8IiXId7O+bTOEkN/hpY=;
+	b=rfO54+gVtP2xHqUo8KR/Xn6Ps8C8uiFymQ0lH7fF648Hrz+d3EsjQJl/jyC46Pj172
+	VrOp9oFRg9wmKBv/XZBy4rpyn75PlNSnt6GatjdyJ6osgj7RC8pyC80oWmUF+btkoBoi
+	i1Ha/nIyrq3TycHXAfbIwbgkCdhbNFIEd9aVaIbRhQ8wJFzO24p18bW5O8ACgHoNzKfX
+	xVOoQsBqXK7BMPxXh67Xy/7VDzw1NjRuV+13lUZH8wsQQx09sHz1+5uu2t+s7SbW0WoG
+	6gDsaWZb26cVUNvTYOGY+vR3B20Yf8C/00+5ObEy6QoZNOB6ELzo+ObjpR6NUoZNSrHH
+	oqwA==
+X-Gm-Message-State: AMke39mhi+Sbj43kJkBTMQr2qea2pNXfqmJiMIi9w/MyGdUVHPgesAClEJOlCPQti4HT6hrW1366/Us/KLwkBw==
+X-Received: by 10.28.211.205 with SMTP id k196mr7740871wmg.124.1487166334071; 
+	Wed, 15 Feb 2017 05:45:34 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.80.148.174 with HTTP; Wed, 15 Feb 2017 05:43:49 -0800 (PST)
-In-Reply-To: <1487166114-3845-1-git-send-email-linus.svensson@axis.com>
-References: <1487166114-3845-1-git-send-email-linus.svensson@axis.com>
+Received: by 10.80.148.174 with HTTP; Wed, 15 Feb 2017 05:45:33 -0800 (PST)
+In-Reply-To: <alpine.LFD.2.20.1702141000250.29338@uk63952.mitel.com>
+References: <alpine.LFD.2.20.1702131159380.3464@uk63952.mitel.com>
+	<358e792e-f48d-5880-1842-aecb4b54275d@embed.me.uk>
+	<alpine.LFD.2.20.1702141000250.29338@uk63952.mitel.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 15 Feb 2017 14:43:49 +0100
-Message-ID: <CA+chaQeGCbp-LDyJjpqsLV+LpQVc9p7dd_T8m9a+KXEN+vRxhQ@mail.gmail.com>
+Date: Wed, 15 Feb 2017 14:45:33 +0100
+Message-ID: <CA+chaQeHGf0oeUHRawau7PhnnWAACo9X3gBwXHeDqsf8=u03eQ@mail.gmail.com>
 To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH 1/2] meson: Add recipe for the meson build system
+Subject: Re: building netdata: "No package 'zlib' found"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,59 +53,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Feb 2017 13:43:51 -0000
+X-List-Received-Date: Wed, 15 Feb 2017 13:45:34 -0000
 Content-Type: text/plain; charset=UTF-8
 
-> SRC_URI = "https://github.com/mesonbuild/meson/releases/
-download/${PV}/${BP}.tar.gz"
+http://lists.openembedded.org/pipermail/openembedded-devel/2017-February/111123.html
 
-I'm still not persuaded that the github tarballs aren't regenerated from
-time to time.
+On Wed, Feb 15, 2017 at 1:23 PM, Robert P. J. Day <rpjday@crashcourse.ca>
+wrote:
 
-Can you please use git fetcher instead of tarball?
-
-On Wed, Feb 15, 2017 at 2:41 PM, <linus.svensson@axis.com> wrote:
-
-> From: Linus Svensson <linussn@axis.com>
 >
-> Meson is a build system designed to be fast and as user firendly as
-> possible. Find out more about meson at mesonbuild.com.
+>   i was going to start a new thread for this, then remembered this
+> post i was going to respond to:
 >
-> This patch is based on a prototype patch by
-> Ross Burton <ross.burton@intel.com>.
+> On Tue, 14 Feb 2017, Jack Mitchell wrote:
 >
-> Signed-off-by: Linus Svensson <linussn@axis.com>
-> ---
->  meta-oe/recipes-devtools/meson/meson_0.36.0.bb | 15 +++++++++++++++
->  1 file changed, 15 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/meson/meson_0.36.0.bb
+> > On 13/02/17 17:01, Robert P. J. Day wrote:
+> > >
+> > >   i'm building a totally stock core-image-minimal for qemuppc with
+> > > latest poky checkout, and when i try to add the existing "netdata"
+> > > recipe to the mix, i get:
+> > >
+> > > | configure: error: Package requirements (zlib) were not met:
+> > > |
+> > > | No package 'zlib' found
+> > > |
+> > > | Consider adjusting the PKG_CONFIG_PATH environment variable if you
+> > > | installed software in a non-standard prefix.
+> > > |
+> > > | Alternatively, you may set the environment variables ZLIB_CFLAGS
+> > > | and ZLIB_LIBS to avoid the need to call pkg-config.
+> > > | See the pkg-config man page for more details.
+> > >
+> > >   apart from fixing this, how could this recipe ever have built
+> > > before? i realize the current recipe for netdata is almost a year
+> > > old, but should it still not build?
+> >
+> > Recipe specific sysroots. Zlib is so common that it was probably
+> > already available in the shared sysroot to be compiled against, now
+> > there is no access to the shared sysroot it can't be found and
+> > fails. So this was always a dependency bug but one that was probably
+> > never triggered.
 >
-> diff --git a/meta-oe/recipes-devtools/meson/meson_0.36.0.bb
-> b/meta-oe/recipes-devtools/meson/meson_0.36.0.bb
-> new file mode 100644
-> index 0000000..1ec7e3e
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/meson/meson_0.36.0.bb
-> @@ -0,0 +1,15 @@
-> +HOMEPAGE = "http://mesonbuild.com"
-> +SUMMARY = "A high performance build system"
-> +
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
-> +
-> +SRC_URI = "https://github.com/mesonbuild/meson/releases/
-> download/${PV}/${BP}.tar.gz"
-> +SRC_URI[md5sum] = "dfdd190c5f10a67bb40e6cf93944dd43"
-> +SRC_URI[sha256sum] = "dc087ec40dacb5e256e6ee6467f2d0
-> 04faf4ef284d3c1ce5e89faa1e16540950"
-> +
-> +inherit setuptools3
-> +
-> +RDEPENDS_${PN} = "ninja python3-core python3-modules"
-> +
-> +BBCLASSEXTEND = "native"
+>   a couple questions. a couple days ago, all i did was add the line:
+>
+>   DEPENDS = "zlib"
+>
+> to the netdata_git.bb recipe file, and that trivially solved the
+> problem. i just updated my poky checkout, built again, and the build
+> failed since, as i notice from monday, a bunch of recipes (including
+> netdata) have been blacklisted because of (unsurprisingly) failure to
+> build:
+>
+>   $ git show b7f480c
+>
+> so what should one do here?
+>
+>   for that recipe, i can submit a patch which adds the DEPENDS line
+> and removes the blacklisting. or is there a more wide-sweeping plan to
+> fix recipes that are now missing build-time dependencies based on
+> recipe-specific sysroots?
+>
+>   also, if there's no objection, i can submit a patch that adds a
+> recipe for the far more recent netdata-1.5.0.
+>
+>   thoughts?
+>
+> rday
+>
 > --
-> 2.1.4
+>
+> ========================================================================
+> Robert P. J. Day                                 Ottawa, Ontario, CANADA
+>                         http://crashcourse.ca
+>
+> Twitter:                                       http://twitter.com/rpjday
+> LinkedIn:                               http://ca.linkedin.com/in/rpjday
+> ========================================================================
+>
 >
 > --
 > _______________________________________________
