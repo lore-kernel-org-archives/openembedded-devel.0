@@ -1,46 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f171.google.com (mail-wr0-f171.google.com
-	[209.85.128.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 7519971CA5;
-	Tue, 14 Feb 2017 23:48:38 +0000 (UTC)
-Received: by mail-wr0-f171.google.com with SMTP id o16so180768253wra.1;
-	Tue, 14 Feb 2017 15:48:38 -0800 (PST)
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 919BD60079
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Feb 2017 00:23:25 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id k90so29297314wrc.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Feb 2017 16:23:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:subject:message-id:mime-version:content-disposition
-	:user-agent; bh=ujslJjJ+vI7jhB2mAKewtMNYtAAMnwdl5QLEYXO4M+c=;
-	b=aM0kI+hhaexrtXi5q1YMcP5W9FxgDcBrSA/dSOD5ilj3aEreTAQji3yK0t3H87DvVx
-	K5eYJgH28r6hlKkzBpsDidRO5bUNy4h1eX+52rpWUIaCXyanNJZHwj5N0SccKg/RNfo4
-	qqvaQ2ktuWJd0pzWX3l1DUGKjCclmuh7d01BIhzWrpfVBgheauewIL/QPTeABQXUducR
-	UD7CxHUX4sz5CHSb9l84kDh3VnGPKVVg1lvknouNpJAeunjn0X4FvPstd3wkxFE7Np05
-	UFApjHH99GfdDpnuqNQt5CNO0b+0Q9hSX0tvvhljnZLXKd+3ZSuk5uhd3dcsVYMU/PE4
-	ATlw==
+	h=from:to:cc:subject:date:message-id;
+	bh=2QIqFNNWYBXqhzuskur+hnjChYiLt4Tx19PR/PdW5vo=;
+	b=QC1Bz56RRVZY2fJr9TkPiOqz4Sf8YIN8jzKJ3dlhJYFb4oOwtxlMSi6ZPeQ5mEk9fV
+	pwY9VlUSbvTlONkJA0PTiAORWK3xfNak6Hxy8zudNz1ISjXgW8VR/unk6RlKxTv2A3bQ
+	J+AD98ga9tdUXYX4H2cgfBnrgs8MTDQt7S68eEgoLfiMh5D7zxYxo/bgffcyfVmiX2RR
+	MKZRqMpUulSSj1jFYoqSfjPObdKB2P5aIAMoRMTG0L64cWw6jUDIGhGJb8OrRr6p9ix8
+	4e1FLKGftjKuw+roAHfdf+rWkfaSf+mTMCFmmrVJngAV34gN0YyyqUhHX2NNrqZiViSg
+	758A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:subject:message-id:mime-version
-	:content-disposition:user-agent;
-	bh=ujslJjJ+vI7jhB2mAKewtMNYtAAMnwdl5QLEYXO4M+c=;
-	b=W/bSgJ5pYrpn01M+A7w7gBuL89gAc2OlvTTLAYEdx5PHixwazS5lpINeRmSoLsS2pr
-	z02D5P3zcquKxfO4Kq1zjX3TcnGMWf3Ilz1dY5Bg+m4vXg2FnnzcLour6bNFeJNiwfhH
-	WVIL8cKaaOsohfx3Shn+8MdZb543fHIar+Yn3Wi93q09M5wJSuloLcVlh6etxgPaJeWA
-	0e8FCj0jIeEK4PHVn0NYisCNVeuiK3BNIWrzf+2QUf6B3ntCdjBciScIhTACerncRQFi
-	qy1ZDE4DJsaGmFxSv0yyagmHXN/Iww+sz1Hg87U8i/KkRhcckUSLj+J4RLE1uK7IqHpb
-	eEvw==
-X-Gm-Message-State: AMke39nVoDrC/eXbof9aoCtZ3v1LKryH3eugqbTtNLbAUd8ghdEMBsP/wtrFctRbxXab9A==
-X-Received: by 10.223.170.154 with SMTP id h26mr26570896wrc.29.1487116117986; 
-	Tue, 14 Feb 2017 15:48:37 -0800 (PST)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id e6sm2620436wrc.30.2017.02.14.15.48.36
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 14 Feb 2017 15:48:36 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 15 Feb 2017 00:48:38 +0100
-To: openembedded-core@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20170214234838.GB3023@jama>
-MIME-Version: 1.0
-User-Agent: Mutt/1.7.2 (2016-11-26)
-Subject: State of bitbake world, Failed tasks 2017-02-14
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=2QIqFNNWYBXqhzuskur+hnjChYiLt4Tx19PR/PdW5vo=;
+	b=e0INIHPesCwPSGiNB30DyLDgBe8gWGQzScoVxPpGrJIWilzI9mXgcNqZhrUBrPFa79
+	4FVQrI75EqN7gIJeF0KFqDQZNuEEEjkchrkA5fc52/AWVWQp+vDQW5Q55xdJYv+iVxce
+	1CTNJMwUCMPcvOaIkdHAsEKaPy6jzqB460RLLkyWc/TerWct2ZU7Bc3jkPC1oh1v4SeX
+	45DbX73USE8MsF+0jef8kdYv7nkQ7CryivQ0YBJXNjG6YThGSzmQ4PJH+pDg6apdqN7K
+	7PnjOzkMMsaXvp5kA+mWX0Vo3zIBEHY2PpUm/+VqeLfcKW/Ls/u6wbAi+PuDgDi3jSEH
+	G6Pw==
+X-Gm-Message-State: AMke39n+V4X5M/OjfrAu6f/bOccVLFrkYbKI6MaNlegXnXE5gOJ0SAv1DZhHdYEPVVSgQw==
+X-Received: by 10.223.134.104 with SMTP id 37mr25490849wrw.121.1487118206004; 
+	Tue, 14 Feb 2017 16:23:26 -0800 (PST)
+Received: from Saturn.local.all ([194.191.225.83])
+	by smtp.gmail.com with ESMTPSA id
+	g40sm2716232wrg.19.2017.02.14.16.23.24
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 14 Feb 2017 16:23:25 -0800 (PST)
+From: Max Krummenacher <max.oss.09@gmail.com>
+X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 15 Feb 2017 01:22:53 +0100
+Message-Id: <1487118174-23647-1-git-send-email-max.krummenacher@toradex.com>
+X-Mailer: git-send-email 2.6.6
+Cc: Max Krummenacher <max.krummenacher@toradex.com>
+Subject: [meta-gnome][PATCH][master-next 1/2] gnome-mime-data: add depends on glib-2.0-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,126 +54,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Feb 2017 23:48:39 -0000
-X-Groupsio-MsgNum: 65212
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="2B/JsCI69OhZNC5r"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 15 Feb 2017 00:23:29 -0000
 
---2B/JsCI69OhZNC5r
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This installs the needed glib-gettextize.
+Remove blacklist.
 
-Finally something short again.
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+---
 
-Now someone should really notice that chromium-wayland got broken again sho=
-rtly after Trevor fixed it in:
-https://github.com/OSSystems/meta-browser/commit/22bc9604102f177a46230ddebd=
-582158dd67239d
-but it could be different issue this time, my guess is that disabling gener=
-ate_character_data as in qtwebengine
-https://github.com/meta-qt5/meta-qt5/commit/aa6551d14987e10d9c49b0d04f55294=
-01e3cb936
-would be enough to work around this.
+Note that this is badly tested. On my host the build did pickup
+glib-gettextize from /usr/bin/glib-gettextize..
 
-=3D=3D Number of issues - stats =3D=3D
-{| class=3D'wikitable'
-!|Date		     !!colspan=3D'3'|Failed tasks			    !!colspan=3D'6'|Failed depe=
-ncencies			 !!|Signatures		  !!colspan=3D'12'|QA !!Comment
-|-
-||		||qemuarm	||qemux86	||qemux86_64	||qemuarm||max||min	||qemux86||max||mi=
-n	||all 	||already-stripped	||libdir	||textrel	||build-deps	||file-rdeps	||=
-version-going-backwards	||host-user-contaminated	||installed-vs-shipped	||u=
-nknown-configure-option	||symlink-to-sysroot	||invalid-pkgconfig	||pkgname	=
-||=09
-|-
-||2017-02-14	||0	||1	||0	||N/A	||N/A	||N/A	||N/A	||N/A	||N/A	||0	||0		||0		=
-||1		||0		||0		||8		||0		||0		||0		||0		||0		||0		||=09
-|}
+I inspected the native sysroot with devshell. The binary was missing
+without the patch and got installed with it.
 
-http://www.openembedded.org/wiki/Bitbake_World_Status
+Max
 
-=3D=3D Failed tasks 2017-02-14 =3D=3D
+ meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-INFO: jenkins-job.sh-1.8.17 Complete log available at http://logs.nslu2-lin=
-ux.org/buildlogs/oe/world/pyro/log.report.20170214_134258.log
-
-=3D=3D=3D common () =3D=3D=3D
-
-=3D=3D=3D common-x86 (0) =3D=3D=3D
-
-=3D=3D=3D qemuarm (0) =3D=3D=3D
-
-=3D=3D=3D qemux86 (1) =3D=3D=3D
-    * meta-browser/recipes-browser/chromium/chromium-wayland_53.0.2785.143.=
-bb:do_compile
-
-=3D=3D=3D qemux86_64 (0) =3D=3D=3D
-
-=3D=3D=3D Number of failed tasks (1) =3D=3D=3D
-{| class=3Dwikitable
-|-
-|| qemuarm 	|| 0	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/lo=
-g.world.qemuarm.20170213_095743.log/ ||=20
-|-
-|| qemux86 	|| 1	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/lo=
-g.world.qemux86.20170213_110945.log/ || http://errors.yoctoproject.org/Erro=
-rs/Build/32356/
-|-
-|| qemux86_64 	|| 0	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro=
-/log.world.qemux86-64.20170214_123631.log/ ||=20
-|}
-
-=3D=3D=3D PNBLACKLISTs (463) =3D=3D=3D
-
-=3D=3D=3D QA issues (9) =3D=3D=3D
-{| class=3Dwikitable
-!| Count		||Issue
-|-
-||0	||already-stripped
-|-
-||0	||build-deps
-|-
-||0	||file-rdeps
-|-
-||0	||host-user-contaminated
-|-
-||0	||installed-vs-shipped
-|-
-||0	||invalid-pkgconfig
-|-
-||0	||libdir
-|-
-||0	||pkgname
-|-
-||0	||symlink-to-sysroot
-|-
-||0	||unknown-configure-option
-|-
-||1	||textrel
-|-
-||8	||version-going-backwards
-|}
+diff --git a/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb b/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb
+index 6dc80b5..eeac1bb 100644
+--- a/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-mime-data/gnome-mime-data_2.18.0.bb
+@@ -15,7 +15,5 @@ SRC_URI[archive.md5sum] = "541858188f80090d12a33b5a7c34d42c"
+ SRC_URI[archive.sha256sum] = "37196b5b37085bbcd45c338c36e26898fe35dd5975295f69f48028b1e8436fd7"
+ GNOME_COMPRESS_TYPE="bz2"
+ 
+-DEPENDS += "shared-mime-info intltool-native"
++DEPENDS += "shared-mime-info intltool-native glib-2.0-native"
+ RDEPENDS_${PN} = "shared-mime-info"
+-
+-PNBLACKLIST[gnome-mime-data] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130589/"
+-- 
+2.6.6
 
 
-
-=3D=3D=3D Incorrect PACKAGE_ARCH or sstate signatures (0) =3D=3D=3D
-
-Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.signa=
-tures.20170213_110747.log/
-
-No issues detected
-
---2B/JsCI69OhZNC5r
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWKOXVgAKCRA3VSO3ZXaA
-HAq2AKCI/38BeQL87msDrnxtsjx1+fVkWACeJrT2B4Lab60nCzMlcN049cGWbWo=
-=jKVH
------END PGP SIGNATURE-----
-
---2B/JsCI69OhZNC5r--
