@@ -1,36 +1,46 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 293B0772BB
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id E22A57727F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 22:14:56 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id e1so4367855qkh.1
+	Thu, 16 Feb 2017 22:34:10 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id z61so2814304wrc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 14:14:57 -0800 (PST)
+	Thu, 16 Feb 2017 14:34:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=oSIulUvtIWkhJgSjnOstFtSkRBzPfKzgSWcvs+uOhv0=;
+	b=SY6oST+Hfvsznkcj84idcLHrypVLHAtP4iaV0YYdiH7G8LEJnup2WsLqPSy3rRBwjt
+	IvlQ749CkSNAbiBz2idZKF5awQVNFJWouPcMEYKCD0JdajBTLQVwRh2wY/NQV3SIrIKZ
+	gxeGDtyDK9UMIZZ/OzPecq/N97EJmVUwIzDry3FFz/h3qMg4c4WXGJ7z27RQ41hAyz5Z
+	L5K9M73bQHm4yDWbyzbFBCH1oWr0xvA7YsgecysWogOgmXVnh8uRYTttz2Uw6ZeodcGU
+	rX+C5+fF3KhUbTFvtTtw1s8LhJBKZQPAzR09EYCkv/0g4rH7mDc+MWOld+9DrRla80Hf
+	ouVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=997wiBajH4n5hsYHr+zj6e0IskvRWZctA/+HI9O+D4M=;
-	b=PJzXMTo+izg+13OVLYN7SiC3+PXJQxutiqYNLYFISdvJ1G1J5VzRw42OqGeT+cACVq
-	kJfu6Fip+4bN+7d79NYQze4k62Ql7Gx9A/2RkAHQCulH0tMKPcm3dJHsNCbMRLui+B9f
-	QH5lVqzgRPCPOiZKa+JSJrSzjKpKFuqT+41kpD7TeNlOvrRPBw1Z5GMlnbJx3apv302N
-	H7qGaGczZUE7M1sZCcfRU9kldYsRtsnukrX9AUgVI+w67b2euNDTvXyZ5lcrv1BF9e3n
-	kpF37tHcuk2VXsdVHhL0adMrje+Ps+VM/2w64dfZSq52maDJ5C2iGdY7CPUwS3OG+upp
-	c7dg==
-X-Gm-Message-State: AMke39mO3lLPdBst5JWi23yi+IFEDWuYgF2kL4WzK8zgKz1IbEF8MxtzljYceJlbFxyiZA==
-X-Received: by 10.55.23.135 with SMTP id 7mr4871353qkx.125.1487283297037;
-	Thu, 16 Feb 2017 14:14:57 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
-	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
-	a54sm5249460qta.48.2017.02.16.14.14.56
+	bh=oSIulUvtIWkhJgSjnOstFtSkRBzPfKzgSWcvs+uOhv0=;
+	b=SdPBUOz1X6JGuDDwUvroDUezdeDdJ0Y3nvED5XCK84nxvjMrb1+uZuctxdLEE+hKdX
+	X4jZ2g1gn7t2u7AicyfxWP07t6fh7chJqL7LRGjkzGx4rAxF6/A7ml+ZfQJwtHsmRVpK
+	CqK3DIXXv8FucjzPSxBY/An/yYA1cx39ICkdKcmYL3J//XupNpPLZqgq2YJd+ydr4Ykz
+	IfAL4/OD/TxL/NbAXHzgNaPYht8LG6lSoZ9wGegbrVPig9KgLn6M5PExvHiFYlzEOAct
+	54jVAqhpNMLCvfKzGOl9wvFsWZjDYjYiqSY3Uj0wjl1yy54Mp0+na570Yv1o3EyauJL/
+	cPyQ==
+X-Gm-Message-State: AMke39lwkB06gBQMVAWA/ipbVXhNDrAP40VarJx11GCwTa7lN3qEAMUOmiuIT95SJNrgOQ==
+X-Received: by 10.223.155.221 with SMTP id e29mr4263421wrc.107.1487284450852; 
+	Thu, 16 Feb 2017 14:34:10 -0800 (PST)
+Received: from ThinkPad-T520.homenet.telecomitalia.it
+	(host8-253-dynamic.25-79-r.retail.telecomitalia.it. [79.25.253.8])
+	by smtp.gmail.com with ESMTPSA id
+	186sm1931696wmw.24.2017.02.16.14.34.09
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 16 Feb 2017 14:14:56 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
+	Thu, 16 Feb 2017 14:34:10 -0800 (PST)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Feb 2017 17:14:50 -0500
-Message-Id: <1487283290-9919-1-git-send-email-derek@asterius.io>
+Date: Thu, 16 Feb 2017 23:34:07 +0100
+Message-Id: <1487284447-4913-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-certifi: update to version 2017.1.23
+Subject: [meta-initramfs][PATCH] initramfs-kexecboot-klibc-image: remove blacklisting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,40 +53,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2017 22:14:58 -0000
+X-List-Received-Date: Thu, 16 Feb 2017 22:34:11 -0000
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Ex patch 7/9 of the 2017-02-13 serie, not landed in patchwork.
+Recipe does build with the recent changes for meta-initramfs.
+
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-certifi.inc               | 5 ++---
- .../{python-certifi_2016.9.26.bb => python-certifi_2017.1.23.bb}     | 0
- .../{python3-certifi_2016.9.26.bb => python3-certifi_2017.1.23.bb}   | 0
- 3 files changed, 2 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-certifi_2016.9.26.bb => python-certifi_2017.1.23.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-certifi_2016.9.26.bb => python3-certifi_2017.1.23.bb} (100%)
+ meta-initramfs/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-certifi.inc b/meta-python/recipes-devtools/python/python-certifi.inc
-index 894154d..1df23cf 100644
---- a/meta-python/recipes-devtools/python/python-certifi.inc
-+++ b/meta-python/recipes-devtools/python/python-certifi.inc
-@@ -7,8 +7,7 @@ HOMEPAGE = " http://certifi.io/"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f77f61d14ee6feac4228d3ebd26cc1f1"
- 
--SRC_URI[md5sum] = "baa81e951a29958563689d868ef1064d"
--SRC_URI[sha256sum] = "8275aef1bbeaf05c53715bfc5d8569bd1e04ca1e8e69608cc52bcaac2604eb19"
-+SRC_URI[md5sum] = "b72521a8badff5e89a8eabea586d79ab"
-+SRC_URI[sha256sum] = "81877fb7ac126e9215dfb15bfef7115fdc30e798e0013065158eed0707fd99ce"
- 
- BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb
+index 8010c91..6b845bd 100644
+--- a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb
++++ b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-klibc-image.bb
+@@ -10,5 +10,3 @@ python () {
+     if d.getVar('TARGET_ARCH') == "nios2":
+         raise bb.parse.SkipPackage("'nios2' not supported arch")
+ }
 -
-diff --git a/meta-python/recipes-devtools/python/python-certifi_2016.9.26.bb b/meta-python/recipes-devtools/python/python-certifi_2017.1.23.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-certifi_2016.9.26.bb
-rename to meta-python/recipes-devtools/python/python-certifi_2017.1.23.bb
-diff --git a/meta-python/recipes-devtools/python/python3-certifi_2016.9.26.bb b/meta-python/recipes-devtools/python/python3-certifi_2017.1.23.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-certifi_2016.9.26.bb
-rename to meta-python/recipes-devtools/python/python3-certifi_2017.1.23.bb
+-PNBLACKLIST[initramfs-kexecboot-klibc-image] ?= "Runtime depends on blacklisted kexecboot-klibc"
 -- 
 2.7.4
 
