@@ -1,35 +1,36 @@
-Return-Path: <obi@opendreambox.org>
-Received: from mail.dream-property.net (mail.dream-property.net
-	[82.149.226.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D04371E4C
+Return-Path: <adrian.ratiu@ni.com>
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mail.openembedded.org (Postfix) with ESMTP id CF7B9730BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 10:55:59 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id D372D31E0FAB
+	Thu, 16 Feb 2017 11:31:46 +0000 (UTC)
+Received: from us-aus-exhub2.ni.corp.natinst.com
+	(us-aus-exhub2.ni.corp.natinst.com [130.164.68.32])
+	by us-aus-skprod3.natinst.com (8.16.0.17/8.16.0.17) with ESMTPS id
+	v1GBVkTd031205
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 11:55:58 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id KBKjIz3cX3gg
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 11:55:56 +0100 (CET)
-Received: from t510.zcs.saftware.de (p57A61904.dip0.t-ipconnect.de
-	[87.166.25.4])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id AF92131E045A
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 11:55:56 +0100 (CET)
-Date: Thu, 16 Feb 2017 11:55:55 +0100
-From: Andreas Oberritter <obi@opendreambox.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170216115555.454fd3a0@t510.zcs.saftware.de>
-In-Reply-To: <CALbNGRRKU-bYBOUqtUsEqP4vM097qqdXgGk-27LHPaFVCXfsmA@mail.gmail.com>
-References: <1487241365-6326-1-git-send-email-obi@opendreambox.org>
-	<CALbNGRRKU-bYBOUqtUsEqP4vM097qqdXgGk-27LHPaFVCXfsmA@mail.gmail.com>
+	Thu, 16 Feb 2017 05:31:46 -0600
+Received: from us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) by
+	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Thu, 16 Feb 2017 05:31:45 -0600
+Received: from adi-pc-linux.natinst.com (130.164.49.7) by
+	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
+	Server
+	id 15.0.1156.6 via Frontend Transport; Thu, 16 Feb 2017 05:31:45 -0600
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 16 Feb 2017 13:29:51 +0200
+Message-ID: <20170216112951.6961-1-adrian.ratiu@ni.com>
+X-Mailer: git-send-email 2.11.1
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] libmikmod: create packageconfig option for pulseaudio
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2017-02-16_08:, , signatures=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	suspectscore=1
+	malwarescore=0 phishscore=0 adultscore=0 bulkscore=0 classifier=spam
+	adjust=0 reason=mlx scancount=1 engine=8.0.1-1612050000
+	definitions=main-1702160116
+Subject: [meta-python][PATCH] python-pyconnman: rdepend on connman
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,58 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2017 10:56:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 16 Feb 2017 11:31:48 -0000
+Content-Type: text/plain
 
-On Thu, 16 Feb 2017 11:42:43 +0100
-Andreas M=C3=BCller <schnitzeltony@googlemail.com> wrote:
+Having pyconnman installed without connman is useless, so make sure
+it's pulled at runtime. Connman can also be installed via a 'base'
+image packagegroup, but let's also add it to rdepend to be safe.
 
-> On Thu, Feb 16, 2017 at 11:36 AM, Andreas Oberritter
-> <obi@opendreambox.org> wrote:
-> > Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> > ---
-> >  meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb | 4 +++-
-> >  1 file changed, 3 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb b/met=
-a-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
-> > index 2e1b9bf..9d31c92 100644
-> > --- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
-> > +++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
-> > @@ -3,7 +3,7 @@ SECTION =3D "libs"
-> >  LICENSE =3D "LGPLv2.1"
-> >  LIC_FILES_CHKSUM =3D "file://COPYING.LESSER;md5=3D4fbd65380cdd25595107=
-9008b364516c"
-> >
-> > -DEPENDS =3D "alsa-lib texinfo pulseaudio"
-> > +DEPENDS =3D "alsa-lib texinfo"
-> >
-> >  SRC_URI =3D "\
-> >      ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar=
-.gz \
-> > @@ -24,3 +24,5 @@ EXTRA_OECONF =3D "\
-> >      --enable-threads \
-> >  "
-> >
-> > +PACKAGECONFIG ??=3D "${@bb.utils.contains('DISTRO_FEATURES', 'pulseaud=
-io', 'pulseaudio', '', d)}"
-> > +PACKAGECONFIG[pulseaudio] =3D "--enable-pulseaudio,--disable-pulseaudi=
-o,pulseaudio"
-> > -- =20
-> Does pulseaudio do something useful without pulseaudio-server in the
-> image? Something like
->=20
-> PACKAGECONFIG[pulseaudio] =3D
-> "--enable-pulseaudio,--disable-pulseaudio,pulseaudio,pulseaudio-server"
+Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+---
+ .../recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I have no idea, because I never used pulseaudio. This patch just tries to
-fix a broken dependency chain for another recipe depending on libmikmod.
+diff --git a/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb b/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb
+index 6eeab7e47..4d76cc536 100644
+--- a/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb
++++ b/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb
+@@ -11,4 +11,4 @@ PYPI_PACKAGE = "pyconnman"
+ 
+ inherit pypi setuptools
+ 
+-RDEPENDS_${PN} = "python-dbus python-pprint"
+\ No newline at end of file
++RDEPENDS_${PN} = "connman python-dbus python-pprint"
+-- 
+2.11.1
 
-FWIW, I guess you could include pulseaudio support in libmikmod without
-forcing its use, so adding a runtime dependency on the server seems to be
-a bit too much.
-
-Regards,
-Andreas
 
