@@ -1,32 +1,24 @@
-Return-Path: <daniel@zonque.org>
-X-Greylist: delayed 387 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 16 Feb 2017 07:32:26 UTC
-Received: from mail.zonque.de (svenfoo.org [82.94.215.22])
-	by mail.openembedded.org (Postfix) with ESMTP id C71DF65CBF
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EFA5160557
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 07:32:26 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.zonque.de (Postfix) with ESMTP id 51C67C0093;
-	Thu, 16 Feb 2017 08:25:59 +0100 (CET)
-Received: from mail.zonque.de ([127.0.0.1])
-	by localhost (rambrand.bugwerft.de [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id ACAGHTq665NW; Thu, 16 Feb 2017 08:25:59 +0100 (CET)
-Received: from [192.168.178.170] (pD9F6BF3A.dip0.t-ipconnect.de
-	[217.246.191.58])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.zonque.de (Postfix) with ESMTPSA id B401AC002A;
-	Thu, 16 Feb 2017 08:25:58 +0100 (CET)
-To: openembedded-devel@lists.openembedded.org, martin.jansa@gmail.com,
-	samuli.piippo@gmail.com
-From: Daniel Mack <daniel@zonque.org>
-Message-ID: <23527d9e-d36f-e9ef-1742-0510074920fc@zonque.org>
-Date: Thu, 16 Feb 2017 08:25:57 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.7.0
+	Thu, 16 Feb 2017 08:10:45 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v1G8AjiK004439
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Feb 2017 00:10:45 -0800
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Thu, 16 Feb 2017 00:10:44 -0800
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 16 Feb 2017 16:04:37 +0800
+Message-ID: <20170216080438.31466-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.10.1
 MIME-Version: 1.0
-Subject: qt5: qtbase fails to populate SDK
+Subject: [meta-networking][PATCH 1/2] inetutils: update files for -dbg packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,23 +31,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2017 07:32:28 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 16 Feb 2017 08:10:53 -0000
+Content-Type: text/plain
 
-Hi,
+From: Kai Kang <kai.kang@windriver.com>
 
-I'm using poky from the morty branch and meta-qt5 layer from master-next
-for Qt5.8 support. While the image creation works fine, 'bitbake myimage
--c populate_sdk' fails with
+All .debug directories are packaged in inetutils-rshd-dbg which caused
+by AUTOPACKAGEDEBUG. Disable it and split .debug directories and files
+to right -dbg package.
 
-error: qtbase-mkspecs-5.8.0+git0+49dc9aa409-r0 conflicts with /usr/bin/perl
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-This is also the case after build/tmp was wiped out.
+diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+index a8c40254b..68e914c40 100644
+--- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
++++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
+@@ -104,7 +104,8 @@ ${PN}-rsh ${PN}-rshd"
+ # provided by netkit, so add the corresponding -dbg packages
+ # for them to avoid the confliction between the dbg package
+ # of inetutils and netkit.
+-PACKAGES += "${PN}-tftpd-dbg ${PN}-telnetd-dbg ${PN}-rshd-dbg"
++PACKAGES =+ "${PN}-tftpd-dbg ${PN}-telnetd-dbg ${PN}-rshd-dbg"
++NOAUTOPACKAGEDEBUG = "1"
+ 
+ ALTERNATIVE_PRIORITY = "80"
+ ALTERNATIVE_${PN} = "talk whois"
+@@ -153,6 +154,7 @@ ALTERNATIVE_${PN}-ping6 = "${@bb.utils.contains('PACKAGECONFIG', 'ping6', 'ping6
+ ALTERNATIVE_LINK_NAME[ping6]  = "${base_bindir}/ping6"
+ 
+ 
++FILES_${PN}-dbg += "${base_bindir}/.debug ${base_sbindir}/.debug ${bindir}/.debug ${sbindir}/.debug"
+ FILES_${PN}-ping = "${base_bindir}/ping.${BPN}"
+ FILES_${PN}-ping6 = "${base_bindir}/ping6.${BPN}"
+ FILES_${PN}-hostname = "${base_bindir}/hostname.${BPN}"
+-- 
+2.11.0
 
-Any idea?
-
-
-Thanks,
-Daniel
 
