@@ -1,36 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id A4B0F77240
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 818F977240
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 22:59:50 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id h53so4076677qth.3
+	Thu, 16 Feb 2017 23:09:41 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id p22so4498554qka.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 14:59:51 -0800 (PST)
+	Thu, 16 Feb 2017 15:09:42 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=AKbAh5Quadbcqf81x/mdEJFkVX6+qNEthrEGF1rdyBE=;
-	b=l2sdMqlnR+Zxu9yzyRPUaazWtujhETE9W0hwPc6GuQM4Jf18iVCzJgYnHYltbeiHst
-	cxqm8OY0NUixEjM4YdqyYRCJoAsXUwbE1lo/rwY+i9BmEOznSUQ6v2ffSplcdS2vXRPT
-	G6ktDCBCINW75hznxIK83FaANK0xLY1WWFqyeGBpYGsWBGJNImbtBy77CfOx/OU5PAWE
-	DzPn0EXankUcnyqRjIOMGy79O57rAXNgIn7LCkNMxxVRiktdx+pHGz3WvjrBhX9kcjWl
-	ucVvZdi+8CQXelsn9i3RaxS+LgmYATzEJY252T+mnxZMBrlPLCh4uNueqjwPK0s7ezWz
-	eosw==
-X-Gm-Message-State: AMke39kUgcLuGdXAIyww88bRv1rfI11CWKMnfQaGEQLpgf7JJJDoqMsGZeJSZRtg39ME6A==
-X-Received: by 10.237.34.38 with SMTP id n35mr4369917qtc.253.1487285991310;
-	Thu, 16 Feb 2017 14:59:51 -0800 (PST)
+	bh=98dFDOwonuEUSrrJpXEzq1jULAtcANhVB1KgVgJ1Ylw=;
+	b=jwAMlCTT5cSPjeLb60R7Kiz1PIDnQ0QT53hM4hQv5061tifIZJddKn5BFem0ppleMM
+	rspgjmlgVe1+thz0C0VgGYJCKgk1mz6OIO6RV310A83RHGaCHYIWRJQZep1EzLrYnb36
+	V7o45g/x/mRyBtgY5wKxmB/h3hkjKkfDG7pXAXeZhsmFJt05ogxyuhtdfYhsZURmW/nI
+	OgANH1CSRH8xUc8HVXWWKHbk9LYibkz2hTqC+yPPMhaUIgwFSr7I2ALMg7tIMtKd6VOZ
+	AABAGsSwALF4cmP+AkUr+QstZhfWL6cY2KbASZBXFpmOHtlFg2sfopmXnfWSZmhA7gYg
+	i3mQ==
+X-Gm-Message-State: AMke39kehRG6oxSNXqFkL1mJ5P7YShWS5bkM3OmXHWl/M5EXzzv8qJ63K/ssXlSaL3LvKA==
+X-Received: by 10.233.216.68 with SMTP id u65mr4602836qkf.68.1487286581507;
+	Thu, 16 Feb 2017 15:09:41 -0800 (PST)
 Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
-	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
-	b28sm5297900qkj.59.2017.02.16.14.59.50
+	[67.85.97.224])
+	by smtp.gmail.com with ESMTPSA id w44sm5358339qta.4.2017.02.16.15.09.40
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 16 Feb 2017 14:59:50 -0800 (PST)
+	Thu, 16 Feb 2017 15:09:41 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Feb 2017 17:59:44 -0500
-Message-Id: <1487285984-7526-1-git-send-email-derek@asterius.io>
+Date: Thu, 16 Feb 2017 18:09:34 -0500
+Message-Id: <1487286574-29847-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-decorator: update to version 4.0.11
+Subject: [meta-python][PATCH] python-jsonschema: update to version 2.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,61 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2017 22:59:51 -0000
+X-List-Received-Date: Thu, 16 Feb 2017 23:09:42 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-decorator.inc            | 6 +++---
- .../{python-decorator_4.0.10.bb => python-decorator_4.0.11.bb}      | 0
- meta-python/recipes-devtools/python/python3-decorator_4.0.10.bb     | 2 --
- meta-python/recipes-devtools/python/python3-decorator_4.0.11.bb     | 6 ++++++
- 4 files changed, 9 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python-decorator_4.0.10.bb => python-decorator_4.0.11.bb} (100%)
- delete mode 100644 meta-python/recipes-devtools/python/python3-decorator_4.0.10.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-decorator_4.0.11.bb
+ meta-python/recipes-devtools/python/python-jsonschema.inc             | 4 ++--
+ .../python/{python-jsonschema_2.5.1.bb => python-jsonschema_2.6.0.bb} | 0
+ .../{python3-jsonschema_2.5.1.bb => python3-jsonschema_2.6.0.bb}      | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-jsonschema_2.5.1.bb => python-jsonschema_2.6.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-jsonschema_2.5.1.bb => python3-jsonschema_2.6.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-decorator.inc b/meta-python/recipes-devtools/python/python-decorator.inc
-index 9264cef..aeae231 100644
---- a/meta-python/recipes-devtools/python/python-decorator.inc
-+++ b/meta-python/recipes-devtools/python/python-decorator.inc
-@@ -7,10 +7,10 @@ can be abused and you should not try to solve every problem with a \
- decorator, just because you can."
+diff --git a/meta-python/recipes-devtools/python/python-jsonschema.inc b/meta-python/recipes-devtools/python/python-jsonschema.inc
+index 3466457..74933f5 100644
+--- a/meta-python/recipes-devtools/python/python-jsonschema.inc
++++ b/meta-python/recipes-devtools/python/python-jsonschema.inc
+@@ -2,8 +2,8 @@ SUMMARY = "An implementation of JSON Schema validation for Python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=7a60a81c146ec25599a3e1dabb8610a8"
  
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=41e24e0e235a97e60cdb5c4137fa2cd0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=893f896413826096ce5270c700a498fd"
+-SRC_URI[md5sum] = "374e848fdb69a3ce8b7e778b47c30640"
+-SRC_URI[sha256sum] = "36673ac378feed3daa5956276a829699056523d7961027911f064b52255ead41"
++SRC_URI[md5sum] = "50c6b69a373a8b55ff1e0ec6e78f13f4"
++SRC_URI[sha256sum] = "6ff5f3180870836cae40f06fa10419f557208175f13ad7bc26caa77beb1f6e02"
  
--SRC_URI[md5sum] = "434b57fdc3230c500716c5aff8896100"
--SRC_URI[sha256sum] = "9c6e98edcb33499881b86ede07d9968c81ab7c769e28e9af24075f0a5379f070"
-+SRC_URI[md5sum] = "73644c8f0bd4983d1b6a34b49adec0ae"
-+SRC_URI[sha256sum] = "953d6bf082b100f43229cf547f4f97f97e970f5ad645ee7601d55ff87afdfe76"
- 
- inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python-decorator_4.0.10.bb b/meta-python/recipes-devtools/python/python-decorator_4.0.11.bb
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-core \
+diff --git a/meta-python/recipes-devtools/python/python-jsonschema_2.5.1.bb b/meta-python/recipes-devtools/python/python-jsonschema_2.6.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-decorator_4.0.10.bb
-rename to meta-python/recipes-devtools/python/python-decorator_4.0.11.bb
-diff --git a/meta-python/recipes-devtools/python/python3-decorator_4.0.10.bb b/meta-python/recipes-devtools/python/python3-decorator_4.0.10.bb
-deleted file mode 100644
-index 844cbdc..0000000
---- a/meta-python/recipes-devtools/python/python3-decorator_4.0.10.bb
-+++ /dev/null
-@@ -1,2 +0,0 @@
--inherit setuptools3
--require python-decorator.inc
-diff --git a/meta-python/recipes-devtools/python/python3-decorator_4.0.11.bb b/meta-python/recipes-devtools/python/python3-decorator_4.0.11.bb
-new file mode 100644
-index 0000000..7840b20
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-decorator_4.0.11.bb
-@@ -0,0 +1,6 @@
-+inherit setuptools3
-+require python-decorator.inc
-+
-+RDEPENDS_${PN}_class-target += "\
-+    ${PYTHON_PN}-enum \
-+"
+rename from meta-python/recipes-devtools/python/python-jsonschema_2.5.1.bb
+rename to meta-python/recipes-devtools/python/python-jsonschema_2.6.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-jsonschema_2.5.1.bb b/meta-python/recipes-devtools/python/python3-jsonschema_2.6.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-jsonschema_2.5.1.bb
+rename to meta-python/recipes-devtools/python/python3-jsonschema_2.6.0.bb
 -- 
 2.7.4
 
