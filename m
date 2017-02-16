@@ -1,45 +1,34 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
-	[209.85.217.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F11F77236
+Return-Path: <obi@opendreambox.org>
+Received: from mail.dream-property.net (mail.dream-property.net
+	[82.149.226.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D04371E4C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 10:42:43 +0000 (UTC)
-Received: by mail-ua0-f196.google.com with SMTP id d5so1059161uag.0
+	Thu, 16 Feb 2017 10:55:59 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id D372D31E0FAB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 02:42:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=kagKkq2GP+zN0sfvtZcVnPi6UgYrlnEkgWGIwEl+OGs=;
-	b=r/dBTgLNM8naFbUKExkdDLbkZUeEALDtmjeQktZi6ccX//zPe9VLJYGzaPgkhl2S10
-	UJ6UKX5/FI5tlaYkQLod/QAgHA2tevMtm9mUpyg7IOrHPkYqBf9kaoceFiHdJOeasZhS
-	ZaLCHq89uu4fECWS96NWYqRIxWqNC2z5P16+2mQ6tkOt/ZHVZrhFhLRDf8NcHCrWWzbW
-	phc5WOhFdVmRr+uZnMiyIjjy0WnMh8X5by6+v1Z/7eEzCyA+0h3hh1tWgs/+tZBOuQHi
-	dztRobEJqvmxeZ4FrANsZ1qjLMWU5qnrBy6oGtaqUsCybUgDMf8VHnapULIFi8eoAP/9
-	yBnQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=kagKkq2GP+zN0sfvtZcVnPi6UgYrlnEkgWGIwEl+OGs=;
-	b=LTiFxWyfuOdK/proN8c7i7NfvLosd61PTHAnLWxfC7jTghaQZgiWPuI66xFIg/7aP5
-	93NjYZjInW2DAhG2ecIcRvJ+xxViiV783AqWBwfwxSsbk/uYmVrCsDHZuXGwjA+0goXH
-	2XvUJ5SseR6L3oyWhteosFc8bCKWcesN40R7LeYNgB4V+0AXXiw/k2PV4k9KJHlTvM3t
-	YMW1rGmG9nk3Lpo4QQDZoWRVeKik2amPLFq2dJRBjwny0wEgz9tdZpVRYo8ndiE+r47J
-	ELcziij6uC0c1hScKDuVIeJhISCrP/FsX9/zDwWSp2xEZKXC1PynWZ/nmAEomHUaWsEF
-	qDXg==
-X-Gm-Message-State: AMke39ntVMYMrKkgokKpAKnhw4zygv5gnnhSZAjioLR/SrDKHCbg/ewbPtKj0iN2XJuFL88ZWmYXzEA00li9mQ==
-X-Received: by 10.176.24.152 with SMTP id t24mr708954uag.79.1487241763543;
-	Thu, 16 Feb 2017 02:42:43 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.176.91.68 with HTTP; Thu, 16 Feb 2017 02:42:43 -0800 (PST)
-In-Reply-To: <1487241365-6326-1-git-send-email-obi@opendreambox.org>
+	Thu, 16 Feb 2017 11:55:58 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id KBKjIz3cX3gg
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Feb 2017 11:55:56 +0100 (CET)
+Received: from t510.zcs.saftware.de (p57A61904.dip0.t-ipconnect.de
+	[87.166.25.4])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id AF92131E045A
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Feb 2017 11:55:56 +0100 (CET)
+Date: Thu, 16 Feb 2017 11:55:55 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20170216115555.454fd3a0@t510.zcs.saftware.de>
+In-Reply-To: <CALbNGRRKU-bYBOUqtUsEqP4vM097qqdXgGk-27LHPaFVCXfsmA@mail.gmail.com>
 References: <1487241365-6326-1-git-send-email-obi@opendreambox.org>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Thu, 16 Feb 2017 11:42:43 +0100
-Message-ID: <CALbNGRRKU-bYBOUqtUsEqP4vM097qqdXgGk-27LHPaFVCXfsmA@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
+	<CALbNGRRKU-bYBOUqtUsEqP4vM097qqdXgGk-27LHPaFVCXfsmA@mail.gmail.com>
+MIME-Version: 1.0
 Subject: Re: [meta-oe][PATCH] libmikmod: create packageconfig option for pulseaudio
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -53,41 +42,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2017 10:42:44 -0000
+X-List-Received-Date: Thu, 16 Feb 2017 10:56:01 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 16, 2017 at 11:36 AM, Andreas Oberritter
-<obi@opendreambox.org> wrote:
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> ---
->  meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
-> index 2e1b9bf..9d31c92 100644
-> --- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
-> +++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
-> @@ -3,7 +3,7 @@ SECTION = "libs"
->  LICENSE = "LGPLv2.1"
->  LIC_FILES_CHKSUM = "file://COPYING.LESSER;md5=4fbd65380cdd255951079008b364516c"
->
-> -DEPENDS = "alsa-lib texinfo pulseaudio"
-> +DEPENDS = "alsa-lib texinfo"
->
->  SRC_URI = "\
->      ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
-> @@ -24,3 +24,5 @@ EXTRA_OECONF = "\
->      --enable-threads \
->  "
->
-> +PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)}"
-> +PACKAGECONFIG[pulseaudio] = "--enable-pulseaudio,--disable-pulseaudio,pulseaudio"
-> --
-Does pulseaudio do something useful without pulseaudio-server in the
-image? Something like
+On Thu, 16 Feb 2017 11:42:43 +0100
+Andreas M=C3=BCller <schnitzeltony@googlemail.com> wrote:
 
-PACKAGECONFIG[pulseaudio] =
-"--enable-pulseaudio,--disable-pulseaudio,pulseaudio,pulseaudio-server"
+> On Thu, Feb 16, 2017 at 11:36 AM, Andreas Oberritter
+> <obi@opendreambox.org> wrote:
+> > Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> > ---
+> >  meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb | 4 +++-
+> >  1 file changed, 3 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb b/met=
+a-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
+> > index 2e1b9bf..9d31c92 100644
+> > --- a/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
+> > +++ b/meta-oe/recipes-multimedia/mikmod/libmikmod_3.3.6.bb
+> > @@ -3,7 +3,7 @@ SECTION =3D "libs"
+> >  LICENSE =3D "LGPLv2.1"
+> >  LIC_FILES_CHKSUM =3D "file://COPYING.LESSER;md5=3D4fbd65380cdd25595107=
+9008b364516c"
+> >
+> > -DEPENDS =3D "alsa-lib texinfo pulseaudio"
+> > +DEPENDS =3D "alsa-lib texinfo"
+> >
+> >  SRC_URI =3D "\
+> >      ${SOURCEFORGE_MIRROR}/project/mikmod/${BPN}/${PV}/${BPN}-${PV}.tar=
+.gz \
+> > @@ -24,3 +24,5 @@ EXTRA_OECONF =3D "\
+> >      --enable-threads \
+> >  "
+> >
+> > +PACKAGECONFIG ??=3D "${@bb.utils.contains('DISTRO_FEATURES', 'pulseaud=
+io', 'pulseaudio', '', d)}"
+> > +PACKAGECONFIG[pulseaudio] =3D "--enable-pulseaudio,--disable-pulseaudi=
+o,pulseaudio"
+> > -- =20
+> Does pulseaudio do something useful without pulseaudio-server in the
+> image? Something like
+>=20
+> PACKAGECONFIG[pulseaudio] =3D
+> "--enable-pulseaudio,--disable-pulseaudio,pulseaudio,pulseaudio-server"
 
+I have no idea, because I never used pulseaudio. This patch just tries to
+fix a broken dependency chain for another recipe depending on libmikmod.
+
+FWIW, I guess you could include pulseaudio support in libmikmod without
+forcing its use, so adding a runtime dependency on the server seems to be
+a bit too much.
+
+Regards,
 Andreas
 
