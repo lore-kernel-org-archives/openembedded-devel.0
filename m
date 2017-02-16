@@ -1,45 +1,44 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-vk0-f68.google.com (mail-vk0-f68.google.com
-	[209.85.213.68])
-	by mail.openembedded.org (Postfix) with ESMTP id EE2C977248
+Received: from mail-vk0-f48.google.com (mail-vk0-f48.google.com
+	[209.85.213.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 33611731F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 15:24:28 +0000 (UTC)
-Received: by mail-vk0-f68.google.com with SMTP id t8so1597841vke.0
+	Thu, 16 Feb 2017 15:41:16 +0000 (UTC)
+Received: by mail-vk0-f48.google.com with SMTP id x75so12463673vke.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 07:24:29 -0800 (PST)
+	Thu, 16 Feb 2017 07:41:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=vGcs2nmA4xrYJvDGRDHlwiKKBe4IQmgoj/xYM40KOic=;
-	b=uCUWFWWYQQ+H1S5pDL9CZIFqfwLJpZDLipSrMsHf0kYq8kLn8pLYmZsafCnYEA8ItV
-	drw3iNqq/Uihx5VqItQnZy3Cc4lfTSPsOVtP6KETiSK/IjCht0M2A7GJ+7WEsOa9sxk9
-	K9yOolkkzeVwIs5tkwzpeRB9jtYLdbneYqeQu/LvZAfYFIwb2fkWGzaxMfkPU4LRdcow
-	fw3P34957pvCSKpCRqi0l/RuJAcI9rJm2bCZCcCmC94snRP8AlsB6Vfo2BkVBfDa2shY
-	KPRlu79LapEIZ5P/mvn0gACSvIGgFrWkd2MxMo8jUQR/CTAl+BnnMYAe4MlhaUtMvHcJ
-	53ZA==
+	bh=6EieWefUwUcR0NxSiBxZauK/tuVFokeFReagxjxqOWM=;
+	b=qnUMvEogEd7uQZoJYg+uWa6gCunFUvrGzZaqqm3Am7Ms8RPQ7GwFbCqU3M4bR6MGwa
+	OJ0kWjnJiSDMcThf8N3oD3b6iqh+83T/J0dh4wwN1XGoFMxXmjymArvoSqTY79MjR9Wc
+	bjfVWo254dAUw7Kq+tFGOdR7yCk3UXdtf/MGyWzUt7TqYAEJOPxOTLnVrJ9/bvLxFWh9
+	J5EEVdpU/lFjG0WrtoPZVe9SKT2ouZ1B17EJbKAR+CZERLWFT1cvMXWuNOQqFNo15ufP
+	Nln52lavk1N0Q77t3/4atqDTR8/DarziOBJrz5eXmLfIUJVPpvH22Y1Q+x5DLPYznu7e
+	H2uA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=vGcs2nmA4xrYJvDGRDHlwiKKBe4IQmgoj/xYM40KOic=;
-	b=FDgg4KspfCw8Xm+8wLpRcLiGNyDSAVSqVyWYIgOF5gWdC6lHp+eXhMp/aoZ1OWVecz
-	GGlJNmLMlsE0T/X+19J9os0qO9ZwcwTsg7jWniU1AWqU7TQgIkcseMX8glnqitv5bUfv
-	Um4VunZn8JiWd9pI/GIjvE/vilF3KlKJuT9ND8ZRT2OG1HCe6jTaS+KKn3thpfSe0SYb
-	Ct7tocxT/tNCcOBFptzur5TGQ9B+AgOjn/zfTPAUeW8/D48Wq4clhFUi/CsTjE8LM/j2
-	2S7ItkDRFsJPtxzGG1+KUl5x2Dx6hCshy1wAart24g/K4ZqHZmmFtoGuD/1qNFYIjbe/
-	pzwQ==
-X-Gm-Message-State: AMke39l41MpGYL04c3YqVadPahQHiXQcDHQ2J+iGE97GDyv0oyfkhKMI1rbmeuXkrPR44rb7vNZiBnSRc9ES3A==
-X-Received: by 10.31.153.8 with SMTP id b8mr1393553vke.140.1487258668666; Thu,
-	16 Feb 2017 07:24:28 -0800 (PST)
+	bh=6EieWefUwUcR0NxSiBxZauK/tuVFokeFReagxjxqOWM=;
+	b=ZJ69ZV34ZHURGCnFSKiL6jd8byLjiUXNt5ojfLMp1RzvEiw1Wx0aW0PNOS3R+DZw9Y
+	hu9y9pVEg9BlA1GTnQnaIsMjsaTQUz7yUDdQ2v1UTdQoIHzpn87t9xi27Bxq+6gsfn6M
+	BV27yzRffsMtGLoxBVCtRyV3yk9Za071zYRNft41Sb4EJmh877WqS4Bh6q08KoVmw+D7
+	IpZPoT1yNQ8Q727oTUK/yC6XALgRGear3y7dREtJ7ubcJpE2r1BlFBpPzZ8oWxFY65Vo
+	+abbpvsECPuNjnFvcAuEK9fNrVh0c1GFl5oDdHdXwev314U6JoqMfoyyTXWc5NqipKG/
+	jhXQ==
+X-Gm-Message-State: AMke39mw3e4LjwKH4+f731TZrH9iZUdS2OSLLsRI6/RvyHHORBvdGF18DG4dKRFwNh1PtJPQLxdLsB1yO+2cJw==
+X-Received: by 10.31.204.197 with SMTP id c188mr1440012vkg.31.1487259676631;
+	Thu, 16 Feb 2017 07:41:16 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.159.48.222 with HTTP; Thu, 16 Feb 2017 07:23:58 -0800 (PST)
-In-Reply-To: <1487246039-9185-2-git-send-email-linus.svensson@axis.com>
-References: <1487246039-9185-1-git-send-email-linus.svensson@axis.com>
-	<1487246039-9185-2-git-send-email-linus.svensson@axis.com>
+Received: by 10.159.48.222 with HTTP; Thu, 16 Feb 2017 07:40:46 -0800 (PST)
+In-Reply-To: <CALwQErrncghs0kw=JXCHHFbwZWN4f=9K4t2nH+Qdv=d1zf1WPw@mail.gmail.com>
+References: <CALwQErrncghs0kw=JXCHHFbwZWN4f=9K4t2nH+Qdv=d1zf1WPw@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 16 Feb 2017 07:23:58 -0800
-Message-ID: <CAMKF1sq5aLAgjciAfGmr6G1-qQU4fU6Ng_Dni0hVH8u0KZdSrw@mail.gmail.com>
+Date: Thu, 16 Feb 2017 07:40:46 -0800
+Message-ID: <CAMKF1spszaA1G0aMSzDXZ0uA56nFty4L=XPakXTd-O6_fExyEQ@mail.gmail.com>
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2 2/2] meson.bbclass: Add meson.bbclass
+Subject: Re: Query regarding segfault during gstreamer playback with libx32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,130 +51,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2017 15:24:29 -0000
+X-List-Received-Date: Thu, 16 Feb 2017 15:41:17 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Thu, Feb 16, 2017 at 3:53 AM,  <linus.svensson@axis.com> wrote:
-> From: Linus Svensson <linussn@axis.com>
+On Thu, Feb 16, 2017 at 2:28 AM, Shrikant Bobade
+<bobadeshrikant@gmail.com> wrote:
+> Hi All,
 >
-> Add a class for packages that uses the meson build system.
+> I have prepared core-image-sato from poky: morty:
+> 6a1f33cc40bfac33cf030fe41e1a8efd1e5fad6f HEAD with libx32 support w.r.to
+> section 4.6.3 under
+> http://www.yoctoproject.org/docs/2.2/ref-manual/ref-manual.html#support ,
+> while using gst. playback I am getting segfault, below are the setup
+> details & logs. Dose anyone else faced similar issue?
 >
-> Meson uses a cross-file that contain needed tools and information about
-> the host and target system. Such a file will be created in {WORKDIR}.
+> Thanks
+> Shrikant
 >
-> Meson only allows installation directories to be specified as relative
-> to prefix, except for sysconfdir, which can be absolute.
 >
-> This patch is based on a prototype patch by
-> Ross Burton <ross.burton@intel.com>.
+> 1.with libx32 support: added below stuff to local.conf
 >
-> Signed-off-by: Linus Svensson <linussn@axis.com>
-> ---
->  meta-oe/classes/meson.bbclass | 86 +++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 86 insertions(+)
->  create mode 100644 meta-oe/classes/meson.bbclass
+> MACHINE = "qemux86-64"
+> DEFAULTTUNE = "x86-64-x32"
+> baselib = "${@d.getVar('BASE_LIB_tune-' + (d.getVar('DEFAULTTUNE', True) \
+>          or 'INVALID'), True) or 'lib'}"
 >
-> diff --git a/meta-oe/classes/meson.bbclass b/meta-oe/classes/meson.bbclass
-> new file mode 100644
-> index 0000000..5a04134
-> --- /dev/null
-> +++ b/meta-oe/classes/meson.bbclass
-> @@ -0,0 +1,86 @@
-> +inherit python3native
-> +
-> +DEPENDS_append = " meson-native ninja-native"
-> +
-> +# As Meson enforces out-of-tree builds we can just use cleandirs
-> +B = "${WORKDIR}/build"
-> +do_configure[cleandirs] = "${B}"
-> +
-> +# Where the meson.build build configuration is
-> +MESON_SOURCEPATH = "${S}"
-> +
-> +# These variables in the environment override the *native* tools not the cross,
-> +# so they need to be unexported.
-> +CC[unexport] = "1"
-> +
-> +def noprefix(var, d):
-> +    return d.getVar(var, True).replace(d.getVar('prefix', True) + '/', '', 1)
-> +
-> +MESONOPTS = " --prefix ${prefix} \
-> +              --bindir ${@noprefix('bindir', d)} \
-> +              --datadir ${@noprefix('datadir', d)} \
-> +              --libdir ${@noprefix('libdir', d)} \
-> +              --libexecdir ${@noprefix('libexecdir', d)} \
-> +              --includedir ${@noprefix('includedir', d)} \
-> +              --mandir ${@noprefix('mandir', d)} \
-> +              --localedir ${@noprefix('localedir', d)} \
-> +              --sysconfdir ${sysconfdir}"
-> +
-> +MESON_C_ARGS = "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}"
-> +
-> +MESON_HOST_ENDIAN = "${@bb.utils.contains('SITEINFO_ENDIANNESS', 'be', 'big', 'little', d)}"
-> +MESON_TARGET_ENDIAN = "${@bb.utils.contains('TUNE_FEATURES', 'bigendian', 'big', 'little', d)}"
-> +
-> +EXTRA_OEMESON += "${PACKAGECONFIG_CONFARGS}"
-> +
-> +def meson_array(var, d):
-> +    return "', '".join(d.getVar(var, True).split()).join(("'", "'"))
-> +
-> +addtask write_config before do_configure
-> +do_write_config[vardeps] += "MESON_C_ARGS TOOLCHAIN_OPTIONS"
-> +do_write_config() {
-> +    # This needs to be Py to split the args into single-element lists
-> +    cat >${WORKDIR}/meson.cross <<EOF
-> +[binaries]
-> +c = '${HOST_PREFIX}gcc'
-> +cpp = '${HOST_PREFIX}gcc'
-> +ar = '${HOST_PREFIX}ar'
-> +ld = '${HOST_PREFIX}ld'
-> +strip = '${HOST_PREFIX}strip'
-> +readelf = '${HOST_PREFIX}readelf'
-> +pkgconfig = 'pkg-config'
+> 2. gstreamer1.0-plugins-good/base/bad available with image.
+>
+> 3. build conf:
+> Build Configuration:
+> BB_VERSION        = "1.32.0"
+> BUILD_SYS         = "x86_64-linux"
+> NATIVELSBSTRING   = "universal-4.8"
+> TARGET_SYS        = "x86_64-poky-linux-gnux32"
+> MACHINE           = "qemux86-64"
+> DISTRO            = "poky"
+> DISTRO_VERSION    = "2.2.1"
+> TUNE_FEATURES     = "mx32"
+> TARGET_FPU        = ""
+> meta
+> meta-poky
+> meta-yocto-bsp    = "morty:6a1f33cc40bfac33cf030fe41e1a8efd1e5fad6f"
+>
+> 4. bt log
+> #0  0xf67ef8fd in poll () from /libx32/libc.so.6
+> #1  0xf6d04eb5 in ?? () from /usr/libx32/libglib-2.0.so.0
+> #2  0xf6d05222 in g_main_loop_run () from /usr/libx32/libglib-2.0.so.0
+> #3  0xf724f01e in gst_bus_poll () from /usr/libx32/libgstreamer-1.0.so.0
+> #4  0x00403a78 in ?? ()
+> #5  0x00402a25 in ?? ()
+> #6  0xf672e54d in __libc_start_main () from /libx32/libc.so.6
+> #7  0x00403048 in ?? ()
+>
 
-Perhaps inehriting  pkgconfig would be required too.
-
-> +
-> +[properties]
-> +c_args = [${@meson_array('MESON_C_ARGS', d)}]
-> +c_link_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
-> +
-> +[host_machine]
-> +system = '${HOST_OS}'
-> +cpu_family = '${HOST_ARCH}'
-> +cpu = '${HOST_ARCH}'
-> +endian = '${MESON_HOST_ENDIAN}'
-> +
-> +[target_machine]
-> +system = '${TARGET_OS}'
-> +cpu_family = '${TARGET_ARCH}'
-> +cpu = '${TARGET_ARCH}'
-> +endian = '${MESON_TARGET_ENDIAN}'
-> +EOF
-> +}
-> +
-> +meson_do_configure() {
-> +    if ! meson ${MESONOPTS} "${MESON_SOURCEPATH}" "${B}" --cross-file ${WORKDIR}/meson.cross ${EXTRA_OEMESON}; then
-> +        cat ${B}/meson-logs/meson-log.txt
-> +        bbfatal_log meson failed
-> +    fi
-> +}
-> +
-> +meson_do_compile() {
-> +    ninja ${PARALLEL_MAKE}
-> +}
-> +
-> +meson_do_install() {
-> +    DESTDIR='${D}' ninja ${PARALLEL_MAKEINST} install
-> +}
-> +
-> +EXPORT_FUNCTIONS do_configure do_compile do_install
-> --
-> 2.1.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+may be you can add debug info to image to get better trace.
 
