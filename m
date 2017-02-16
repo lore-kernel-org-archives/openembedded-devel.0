@@ -1,26 +1,28 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 455AD71AFA
+Return-Path: <Wenzong.Fan@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7DBA0731AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 08:10:46 +0000 (UTC)
+	Thu, 16 Feb 2017 09:50:48 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v1G8AlUX020694
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v1G9omMl006710
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 00:10:47 -0800 (PST)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Thu, 16 Feb 2017 00:10:46 -0800
-From: <kai.kang@windriver.com>
+	Thu, 16 Feb 2017 01:50:49 -0800
+Received: from [128.224.162.194] (128.224.162.194) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 16 Feb 2017 01:50:47 -0800
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 16 Feb 2017 16:04:38 +0800
-Message-ID: <20170216080438.31466-2-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.10.1
-In-Reply-To: <20170216080438.31466-1-kai.kang@windriver.com>
-References: <20170216080438.31466-1-kai.kang@windriver.com>
+References: <1487209321-200180-1-git-send-email-wenzong.fan@windriver.com>
+	<CAMKF1srP4fx93ndPMNSEc1r+9C4+mnsNk18srTyOhCajQg1XqQ@mail.gmail.com>
+From: wenzong fan <wenzong.fan@windriver.com>
+Message-ID: <ccd3be81-62af-e5ac-cc8f-e0c06f0941bc@windriver.com>
+Date: Thu, 16 Feb 2017 17:50:46 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 2/2] libldb: update package split rules
+In-Reply-To: <CAMKF1srP4fx93ndPMNSEc1r+9C4+mnsNk18srTyOhCajQg1XqQ@mail.gmail.com>
+Subject: Re: [PATCH][meta-python] python-networkx: add package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,51 +35,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2017 08:10:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 16 Feb 2017 09:50:49 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Kai Kang <kai.kang@windriver.com>
+On 02/16/2017 10:54 AM, Khem Raj wrote:
+> On Wed, Feb 15, 2017 at 5:42 PM,  <wenzong.fan@windriver.com> wrote:
+>> From: Wenzong Fan <wenzong.fan@windriver.com>
+>>
+>> Python package for creating and manipulating graphs and networks.
+>>
+>> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+>> ---
+>>  meta-python/recipes-devtools/python/python-networkx_1.11.bb | 8 ++++++++
+>>  1 file changed, 8 insertions(+)
+>>  create mode 100644 meta-python/recipes-devtools/python/python-networkx_1.11.bb
+>>
+>> diff --git a/meta-python/recipes-devtools/python/python-networkx_1.11.bb b/meta-python/recipes-devtools/python/python-networkx_1.11.bb
+>> new file mode 100644
+>> index 0000000..5bc062f
+>> --- /dev/null
+>> +++ b/meta-python/recipes-devtools/python/python-networkx_1.11.bb
+>> @@ -0,0 +1,8 @@
+>> +DESCRIPTION = "Python package for creating and manipulating graphs and networks"
+>> +LICENSE = "BSD"
+>
+> would be nice if we could say BSD with clause
 
-Update packages split rules:
-* make libpyldb-util.so* are really packaged into pyldb and pyldb-dev
-* set NOAUTOPACKAGEDEBUG which causes all .debug directories are
-  packaged into pyldb-dbg
+Ok, I'll update it and send V2.
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- meta-networking/recipes-support/libldb/libldb_1.1.29.bb | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
+Thanks
+Wenzong
 
-diff --git a/meta-networking/recipes-support/libldb/libldb_1.1.29.bb b/meta-networking/recipes-support/libldb/libldb_1.1.29.bb
-index 2269a5726..28cb8479f 100644
---- a/meta-networking/recipes-support/libldb/libldb_1.1.29.bb
-+++ b/meta-networking/recipes-support/libldb/libldb_1.1.29.bb
-@@ -45,16 +45,19 @@ EXTRA_OECONF += "--disable-rpath \
-                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
-                 "
- 
--PACKAGES += "pyldb pyldb-dbg pyldb-dev"
-+PACKAGES =+ "pyldb pyldb-dbg pyldb-dev"
-+
-+NOAUTOPACKAGEDEBUG = "1"
- 
- FILES_${PN} += "${libdir}/ldb/*"
--FILES_${PN}-dbg += "${libdir}/ldb/.debug/* \
-+FILES_${PN}-dbg += "${bindir}/.debug/* \
-+                    ${libdir}/.debug/* \
-+                    ${libdir}/ldb/.debug/* \
-                     ${libdir}/ldb/modules/ldb/.debug/*"
- 
- FILES_pyldb = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
--               ${libdir}/libpyldb-util.so.1 \
--               ${libdir}/libpyldb-util.so.1.1.17 \
-+               ${libdir}/libpyldb-util.so.* \
-               "
- FILES_pyldb-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug \
--                   ${libdir}/.debug/libpyldb-util.so.1.1.17"
-+                   ${libdir}/.debug/libpyldb-util.so.*"
- FILES_pyldb-dev = "${libdir}/libpyldb-util.so"
--- 
-2.11.0
-
+>
+>> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=925586ea588eb990de840dc71ea3752f"
+>> +
+>> +SRC_URI[md5sum] = "6ef584a879e9163013e9a762e1cf7cd1"
+>> +SRC_URI[sha256sum] = "0d0e70e10dfb47601cbb3425a00e03e2a2e97477be6f80638fef91d54dd1e4b8"
+>> +
+>> +inherit pypi setuptools
+>> --
+>> 2.7.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
