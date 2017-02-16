@@ -1,26 +1,32 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 63CDE71E14
+Return-Path: <daniel@zonque.org>
+X-Greylist: delayed 387 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 16 Feb 2017 07:32:26 UTC
+Received: from mail.zonque.de (svenfoo.org [82.94.215.22])
+	by mail.openembedded.org (Postfix) with ESMTP id C71DF65CBF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 05:29:11 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v1G5TBgv009027
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Feb 2017 21:29:11 -0800 (PST)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Wed, 15 Feb 2017 21:29:11 -0800
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 16 Feb 2017 13:21:31 +0800
-Message-ID: <fbcd120da0251deeb3a27b471f6c60ec3aa1388d.1487222337.git.jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.8.3
-In-Reply-To: <cover.1487222337.git.jackie.huang@windriver.com>
-References: <cover.1487222337.git.jackie.huang@windriver.com>
+	Thu, 16 Feb 2017 07:32:26 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.zonque.de (Postfix) with ESMTP id 51C67C0093;
+	Thu, 16 Feb 2017 08:25:59 +0100 (CET)
+Received: from mail.zonque.de ([127.0.0.1])
+	by localhost (rambrand.bugwerft.de [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id ACAGHTq665NW; Thu, 16 Feb 2017 08:25:59 +0100 (CET)
+Received: from [192.168.178.170] (pD9F6BF3A.dip0.t-ipconnect.de
+	[217.246.191.58])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.zonque.de (Postfix) with ESMTPSA id B401AC002A;
+	Thu, 16 Feb 2017 08:25:58 +0100 (CET)
+To: openembedded-devel@lists.openembedded.org, martin.jansa@gmail.com,
+	samuli.piippo@gmail.com
+From: Daniel Mack <daniel@zonque.org>
+Message-ID: <23527d9e-d36f-e9ef-1742-0510074920fc@zonque.org>
+Date: Thu, 16 Feb 2017 08:25:57 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.0
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 2/2 v2] python-mock: add RDEPENDS on python-pbr and python-funcsigs
+Subject: qt5: qtbase fails to populate SDK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,51 +39,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2017 05:29:11 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 16 Feb 2017 07:32:28 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-From: Jackie Huang <jackie.huang@windriver.com>
+Hi,
 
-python-pbr and python-funcsigs are required by python-mock,
-or it fails with:
+I'm using poky from the morty branch and meta-qt5 layer from master-next
+for Qt5.8 support. While the image creation works fine, 'bitbake myimage
+-c populate_sdk' fails with
 
->>> import mock
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-  File "/usr/lib64/python2.7/site-packages/mock/__init__.py", line 2, in <module>
-    import mock.mock as _mock
-  File "/usr/lib64/python2.7/site-packages/mock/mock.py", line 69, in <module>
-    from pbr.version import VersionInfo
-ImportError: No module named pbr.version
+error: qtbase-mkspecs-5.8.0+git0+49dc9aa409-r0 conflicts with /usr/bin/perl
 
->>> import mock
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-  File "/usr/lib64/python2.7/site-packages/mock/__init__.py", line 2, in <module>
-    import mock.mock as _mock
-  File "/usr/lib64/python2.7/site-packages/mock/mock.py", line 80, in <module>
-    import funcsigs
-ImportError: No module named funcsigs
+This is also the case after build/tmp was wiped out.
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- meta-python/recipes-devtools/python/python-mock_2.0.0.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+Any idea?
 
-diff --git a/meta-python/recipes-devtools/python/python-mock_2.0.0.bb b/meta-python/recipes-devtools/python/python-mock_2.0.0.bb
-index b4557b7..840c36e 100644
---- a/meta-python/recipes-devtools/python/python-mock_2.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python-mock_2.0.0.bb
-@@ -16,4 +16,7 @@ RDEPENDS_${PN} += " \
-     python-pyparsing \
-     python-mccabe \
-     python-pep8 \
--    python-pyflakes"
-+    python-pyflakes \
-+    python-pbr \
-+    python-funcsigs \
-+"
--- 
-2.8.3
 
+Thanks,
+Daniel
 
