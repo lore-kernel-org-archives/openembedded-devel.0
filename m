@@ -1,24 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EFA5160557
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 455AD71AFA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 08:10:45 +0000 (UTC)
+	Thu, 16 Feb 2017 08:10:46 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v1G8AjiK004439
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v1G8AlUX020694
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 00:10:45 -0800
+	Thu, 16 Feb 2017 00:10:47 -0800 (PST)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Thu, 16 Feb 2017 00:10:44 -0800
+	14.3.294.0; Thu, 16 Feb 2017 00:10:46 -0800
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 16 Feb 2017 16:04:37 +0800
-Message-ID: <20170216080438.31466-1-kai.kang@windriver.com>
+Date: Thu, 16 Feb 2017 16:04:38 +0800
+Message-ID: <20170216080438.31466-2-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.10.1
+In-Reply-To: <20170216080438.31466-1-kai.kang@windriver.com>
+References: <20170216080438.31466-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/2] inetutils: update files for -dbg packages
+Subject: [meta-networking][PATCH 2/2] libldb: update package split rules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,37 +38,45 @@ Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-All .debug directories are packaged in inetutils-rshd-dbg which caused
-by AUTOPACKAGEDEBUG. Disable it and split .debug directories and files
-to right -dbg package.
+Update packages split rules:
+* make libpyldb-util.so* are really packaged into pyldb and pyldb-dev
+* set NOAUTOPACKAGEDEBUG which causes all .debug directories are
+  packaged into pyldb-dbg
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ meta-networking/recipes-support/libldb/libldb_1.1.29.bb | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
-index a8c40254b..68e914c40 100644
---- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
-@@ -104,7 +104,8 @@ ${PN}-rsh ${PN}-rshd"
- # provided by netkit, so add the corresponding -dbg packages
- # for them to avoid the confliction between the dbg package
- # of inetutils and netkit.
--PACKAGES += "${PN}-tftpd-dbg ${PN}-telnetd-dbg ${PN}-rshd-dbg"
-+PACKAGES =+ "${PN}-tftpd-dbg ${PN}-telnetd-dbg ${PN}-rshd-dbg"
+diff --git a/meta-networking/recipes-support/libldb/libldb_1.1.29.bb b/meta-networking/recipes-support/libldb/libldb_1.1.29.bb
+index 2269a5726..28cb8479f 100644
+--- a/meta-networking/recipes-support/libldb/libldb_1.1.29.bb
++++ b/meta-networking/recipes-support/libldb/libldb_1.1.29.bb
+@@ -45,16 +45,19 @@ EXTRA_OECONF += "--disable-rpath \
+                  --with-libiconv=${STAGING_DIR_HOST}${prefix}\
+                 "
+ 
+-PACKAGES += "pyldb pyldb-dbg pyldb-dev"
++PACKAGES =+ "pyldb pyldb-dbg pyldb-dev"
++
 +NOAUTOPACKAGEDEBUG = "1"
  
- ALTERNATIVE_PRIORITY = "80"
- ALTERNATIVE_${PN} = "talk whois"
-@@ -153,6 +154,7 @@ ALTERNATIVE_${PN}-ping6 = "${@bb.utils.contains('PACKAGECONFIG', 'ping6', 'ping6
- ALTERNATIVE_LINK_NAME[ping6]  = "${base_bindir}/ping6"
+ FILES_${PN} += "${libdir}/ldb/*"
+-FILES_${PN}-dbg += "${libdir}/ldb/.debug/* \
++FILES_${PN}-dbg += "${bindir}/.debug/* \
++                    ${libdir}/.debug/* \
++                    ${libdir}/ldb/.debug/* \
+                     ${libdir}/ldb/modules/ldb/.debug/*"
  
- 
-+FILES_${PN}-dbg += "${base_bindir}/.debug ${base_sbindir}/.debug ${bindir}/.debug ${sbindir}/.debug"
- FILES_${PN}-ping = "${base_bindir}/ping.${BPN}"
- FILES_${PN}-ping6 = "${base_bindir}/ping6.${BPN}"
- FILES_${PN}-hostname = "${base_bindir}/hostname.${BPN}"
+ FILES_pyldb = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/* \
+-               ${libdir}/libpyldb-util.so.1 \
+-               ${libdir}/libpyldb-util.so.1.1.17 \
++               ${libdir}/libpyldb-util.so.* \
+               "
+ FILES_pyldb-dbg = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug \
+-                   ${libdir}/.debug/libpyldb-util.so.1.1.17"
++                   ${libdir}/.debug/libpyldb-util.so.*"
+ FILES_pyldb-dev = "${libdir}/libpyldb-util.so"
 -- 
 2.11.0
 
