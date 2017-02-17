@@ -1,30 +1,30 @@
 Return-Path: <rpjday@crashcourse.ca>
 Received: from smtp685.redcondor.net (smtp685.redcondor.net [208.80.206.85])
-	by mail.openembedded.org (Postfix) with ESMTP id 08D9771BD4
+	by mail.openembedded.org (Postfix) with ESMTP id 84C946093E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Feb 2017 10:40:02 +0000 (UTC)
+	Fri, 17 Feb 2017 11:12:25 +0000 (UTC)
 Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by smtp685.redcondor.net ({20c8e40f-6b6c-4c9e-abff-1640ea7bf404})
-	via TCP (outbound) with ESMTPS id 20170217104001566_0685
+	via TCP (outbound) with ESMTPS id 20170217111224233_0685
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Feb 2017 02:40:01 -0800
+	Fri, 17 Feb 2017 03:12:24 -0800
 X-RC-FROM: <rpjday@crashcourse.ca>
 X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
-Received: from [216.191.234.70] (port=17204 helo=crashcourse.ca)
+Received: from [216.191.234.70] (port=34479 helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1cefxD-000464-G4 for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Feb 2017 05:39:55 -0500
-Date: Fri, 17 Feb 2017 05:39:53 -0500 (EST)
+	id 1cegSY-0006t0-Lk for openembedded-devel@lists.openembedded.org;
+	Fri, 17 Feb 2017 06:12:18 -0500
+Date: Fri, 17 Feb 2017 06:12:16 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@uk63952.mitel.com
 To: OpenEmbedded Development mailing list
 	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.20.1702170515100.11041@uk63952.mitel.com>
+Message-ID: <alpine.LFD.2.20.1702170559480.1649@uk63952.mitel.com>
 User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
 MIME-Version: 1.0
 X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
-Subject: DEPENDS += "module-build-perl-native" versus "libmodule-build-perl-native"?
+Subject: SUMMARY/DESCRIPTION for "libmodule-build-perl_0.31.bb" refers to "tiny" version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,69 +37,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2017 10:40:03 -0000
+X-List-Received-Date: Fri, 17 Feb 2017 11:12:27 -0000
 Content-Type: text/plain; charset=US-ASCII
 
 
-  i'm sure i asked about this before, but i currently have a hacky
-workaround in a build because of the mixture of DEPENDS mentioned in
-the subject line.
+  just noticed that in meta-openembedded/meta-perl layer, there are
+two recipes for perl module building:
 
-  first, i've pulled down the meta-cpan layer, where you can see the
-consistency of recipes that depend on a native build of the perl build
-module:
+  * libmodule-build-perl_0.31.bb
+  * libmodule-build-tiny-perl_0.036.bb
 
-$ grep -rh "DEPENDS.*module-build-perl-native" *
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-DEPENDS += "module-build-perl-native"
-$
+but the SUMMARY and DESCRIPTION for the first (non-tiny) version
+clearly was copied and pasted from the second (tiny) version:
 
-and, predictably, the meta-cpan layer provides that very recipe:
+SUMMARY = "Module::Build::Tiny - A tiny replacement for Module::Build"
+DESCRIPTION = "Many Perl distributions use a Build.PL file instead of a \
+Makefile.PL file to drive distribution configuration, build, test and \
+installation. Traditionally, Build.PL uses Module::Build as the underlying \
+build system. This module provides a simple, lightweight, drop-in replacement. \
+Whereas Module::Build has over 6,700 lines of code; this module has less than \
+120, yet supports the features needed by most distributions."
 
-  module-build-perl_0.4216.bb
-
-OTOH, the meta-openembedded/meta-perl layer takes a slightly
-different approach:
-
-$ grep -r "DEPENDS.*module-build-perl-native" *
-recipes-perl/libhtml/libhtml-tree-perl_5.03.bb:DEPENDS += "libmodule-build-perl-native \
-$
-
-and provides the equivalent(?) recipe:
-
-  libmodule-build-perl_0.31.bb
-
-the last time i checked, trying to mix those two layers verbatim
-generated a build error, since i include recipes which combine the two
-dependencies, and try to install the identical content at the same
-location. clearly(?), i should restrict the build-time dependencies to one or
-the other of those recipes for the native perl build module.
-
-  is this even considered an issue that should be resolved? it seems
-that if layers are catalogued at the https://layers.openembedded.org/,
-they should be compatible and play nicely together. in this case, it's
-just a naming convention incompatibility -- as i recall, the OE naming
-convention for perl modules is "lib....-perl", while the meta-cpan
-does something different; hence, the problem.
-
-  thoughts? should some names be cleaned up to prevent this?
+  i'm going to let someone higher up the food chain deal with that.
 
 rday
 
@@ -112,5 +71,6 @@ Robert P. J. Day                                 Ottawa, Ontario, CANADA
 Twitter:                                       http://twitter.com/rpjday
 LinkedIn:                               http://ca.linkedin.com/in/rpjday
 ========================================================================
+
 
 
