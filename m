@@ -1,47 +1,30 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f169.google.com (mail-ua0-f169.google.com
-	[209.85.217.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 8033A71DDE
+Return-Path: <rpjday@crashcourse.ca>
+Received: from smtp685.redcondor.net (smtp685.redcondor.net [208.80.206.85])
+	by mail.openembedded.org (Postfix) with ESMTP id 08D9771BD4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Feb 2017 08:37:12 +0000 (UTC)
-Received: by mail-ua0-f169.google.com with SMTP id y9so26243643uae.2
+	Fri, 17 Feb 2017 10:40:02 +0000 (UTC)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
+	by smtp685.redcondor.net ({20c8e40f-6b6c-4c9e-abff-1640ea7bf404})
+	via TCP (outbound) with ESMTPS id 20170217104001566_0685
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Feb 2017 00:37:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=o+lNLYRlnYgRjbUaa0PWf59+TmRjDWe5gL4RIb5Vh/I=;
-	b=NmZXLR7nTOsb8rDiT+NNKlJjY7jPQjJXx+eMUkM/3Zo4SJyyW8uV6ySaax+80MWv0q
-	/dRc2LUKWDHCp6O50UHQSr9MZ6uMtrEup5RF53rFUnc2jUcIWvWsf7P5yygDNm04+cqS
-	tdrQBFhchavCe86+pKAVaf3JqeGJbuBel7SaFm0YsJr24hL66VqnttPPzBFFL5ovS1PI
-	kTiBICBgH4froF8Ropn0gVPwFMJrBy2RT5vwV9FF84SG15e3R+M7yKVk8+jFlZ1NV5Lv
-	8LysD7EyobswzglVJwCtM19Fbvn/Inj4hzfBfM+7CsasrDmVJD2xAomLbs+/h7V+nCRr
-	Jhlg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=o+lNLYRlnYgRjbUaa0PWf59+TmRjDWe5gL4RIb5Vh/I=;
-	b=ZJNFw+uog6aJcp/J7EkJWXWtOEONH0qmFqsXP78KDHasqgxo/MDmeSdGYpISx/Cezu
-	O+mSSHGu39rI/ocpzQnTytAsNxyOM4nWNJy5NNaZBLvbZ/HJhLd8JDPF4C8ToS2Yy1K2
-	cnLM3ChG0jmTmZeIfvPYT2URrzklPL6TENa/uhstHTXXSdWjQv513NzHpaadc52CUCht
-	NGQvLKCJsIqP+kIoYKk3fJ+DwN4u0wM1JQpmQBR/sopE9m/rEjGfgEFJ4ArdDg5n9oKZ
-	5mrO/6SHmtd/VpAOMCdW6EM7Ly7wDMx9ZoCzsbbV5M29b3i9aAq5VwD30D+AJSXL8zcC
-	LlEw==
-X-Gm-Message-State: AMke39mX4Q+KMz13aZagXVXR2seV0Q3UMSgp630LcSXxKJ2ZncqCthbGNKOkW73498EAyIFNOsTulcBj5uoTkw==
-X-Received: by 10.176.92.26 with SMTP id q26mr2900947uaf.88.1487320632285;
-	Fri, 17 Feb 2017 00:37:12 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.176.91.68 with HTTP; Fri, 17 Feb 2017 00:37:11 -0800 (PST)
-In-Reply-To: <20170206200039.32123-1-schnitzeltony@googlemail.com>
-References: <20170206200039.32123-1-schnitzeltony@googlemail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Fri, 17 Feb 2017 09:37:11 +0100
-Message-ID: <CALbNGRTd+UJdyorVKAMi=FBccmjb0YyXPvZpZwVnWfYiurH7YQ@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
+	Fri, 17 Feb 2017 02:40:01 -0800
+X-RC-FROM: <rpjday@crashcourse.ca>
+X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
+Received: from [216.191.234.70] (port=17204 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1cefxD-000464-G4 for openembedded-devel@lists.openembedded.org;
+	Fri, 17 Feb 2017 05:39:55 -0500
+Date: Fri, 17 Feb 2017 05:39:53 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@uk63952.mitel.com
+To: OpenEmbedded Development mailing list
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/2] libtdb: fix SRC_URI - http has gone
+Message-ID: <alpine.LFD.2.20.1702170515100.11041@uk63952.mitel.com>
+User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
+MIME-Version: 1.0
+X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
+Subject: DEPENDS += "module-build-perl-native" versus "libmodule-build-perl-native"?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,18 +37,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2017 08:37:12 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 17 Feb 2017 10:40:03 -0000
+Content-Type: text/plain; charset=US-ASCII
 
-On Mon, Feb 6, 2017 at 9:00 PM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> ---
->  meta-networking/recipes-support/libtdb/libtdb_1.3.12.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-ping - seems this series got lost - shall I resend?
 
-Andreas
+  i'm sure i asked about this before, but i currently have a hacky
+workaround in a build because of the mixture of DEPENDS mentioned in
+the subject line.
+
+  first, i've pulled down the meta-cpan layer, where you can see the
+consistency of recipes that depend on a native build of the perl build
+module:
+
+$ grep -rh "DEPENDS.*module-build-perl-native" *
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+DEPENDS += "module-build-perl-native"
+$
+
+and, predictably, the meta-cpan layer provides that very recipe:
+
+  module-build-perl_0.4216.bb
+
+OTOH, the meta-openembedded/meta-perl layer takes a slightly
+different approach:
+
+$ grep -r "DEPENDS.*module-build-perl-native" *
+recipes-perl/libhtml/libhtml-tree-perl_5.03.bb:DEPENDS += "libmodule-build-perl-native \
+$
+
+and provides the equivalent(?) recipe:
+
+  libmodule-build-perl_0.31.bb
+
+the last time i checked, trying to mix those two layers verbatim
+generated a build error, since i include recipes which combine the two
+dependencies, and try to install the identical content at the same
+location. clearly(?), i should restrict the build-time dependencies to one or
+the other of those recipes for the native perl build module.
+
+  is this even considered an issue that should be resolved? it seems
+that if layers are catalogued at the https://layers.openembedded.org/,
+they should be compatible and play nicely together. in this case, it's
+just a naming convention incompatibility -- as i recall, the OE naming
+convention for perl modules is "lib....-perl", while the meta-cpan
+does something different; hence, the problem.
+
+  thoughts? should some names be cleaned up to prevent this?
+
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
+
 
