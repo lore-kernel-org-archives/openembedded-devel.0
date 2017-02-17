@@ -1,52 +1,49 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 72FB47199B
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vk0-f68.google.com (mail-vk0-f68.google.com
+	[209.85.213.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 9CD4C71A5A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Feb 2017 20:10:31 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id i10so6358881wrb.0
+	Fri, 17 Feb 2017 20:54:29 +0000 (UTC)
+Received: by mail-vk0-f68.google.com with SMTP id r136so4580513vke.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Feb 2017 12:10:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=SUO+CtIRYoGQT27Tmap3oRn+WTDrmZjiP221bQYwq1Y=;
-	b=WAuLd6XzNovVDBHzkIe6iTsTMJ2SX4+37/CVxMJcLAgA8eUytxwLWgf3/3MQT546YN
-	HZpBfef4Qa/3hgWCWLeRcaBR2EBF6JVZ61iWBdSipoAJiT7ZXiWkJR1ateg3ag+HSKWv
-	J7yz8PaveqzLF8JN2PPkaZxeHZM6htcDPbGO4O037WfcEs3xl+jYzheXjy6TAvtxF9/Q
-	vp6yNlV0gqzEVz/lObb6baaFA0ypJ5KQPBLiVZsNsL3yLhaIwPfzi7sPvC/KUjoz1+ec
-	YmQkW9YJLcyy98Jl1l0ZOzjrAEn3p8d+fj2eXekEB27eF2EgovNpvifYlS0FgiHMWElA
-	HHag==
+	Fri, 17 Feb 2017 12:54:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=lwBmffiYBGA/VTfH4ipqFHSSoetC4a8OaTsFjJOj6bE=;
+	b=BdTpxgPlFbO++HoEPaseVd7n0U/IF1OfN4rkeyCNu7bacQd3psGirSDhqoankCGcel
+	+xg4A5w8+xE5tTD4IzlpDNTU9uQ4gHs4kv+hrUJ3ZBBX9yLDqcJBcaXEN3tq+ZTFbiCu
+	YIqRDsswFvYeE4SqnkWuDVgYDmsDoV+gAvDDffTGtggNTAY0c6XxD8YOv6/qJiF/a/Ds
+	6EEdav3Nvjpi5q1IKO4+knKOKZ9lcKIpE8iIo5KDqUWBYf5R/+7aYVj4QI2if5P2J58U
+	o+Mhy81FDnCDGyWq9TxDpdnjj8rh109GSLD+xIiW2z9CyJ9D6/bSNH8vsbvMwOkG4n9a
+	WYBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=SUO+CtIRYoGQT27Tmap3oRn+WTDrmZjiP221bQYwq1Y=;
-	b=htG9kERdpQB4PxciX2OIXC3YnNnDSITWRHyyxQni1QmWfLsmbO/wRq8wi9ag7i2k9/
-	n9EMfc54IMUglNx9UUb3sG6Txa9MKM8UW29jncVNo4Vs2D5k4Ip9lUu6YrsAB1cKXP01
-	oXn35El/5TBxRu61d8OL+Gg/W39eaLe7XZTpfuqG9ZwmWTNBLx8Q/JSrgwPASf5bpn/b
-	J9vnOhHC97jdUEERkzWvMBAm03kechiAHlWwTqJXfml+r9zUT0QSBkBKZDwzubyGjoaK
-	gNgF9+WmVh31srJV4gUrI2lLpnvthT6/sQC4ZCr8szG0Y8HP6ovtmvjP/P6rIo3LlQK3
-	wDdQ==
-X-Gm-Message-State: AMke39k3DXR2nsf/I4TLSUy59L3D5N5se2ftzVTsGhHz1j4UOZo+yQlqmfLO7a6LA8tsDg==
-X-Received: by 10.223.164.66 with SMTP id e2mr7498951wra.47.1487362231268;
-	Fri, 17 Feb 2017 12:10:31 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	191sm2909094wmo.21.2017.02.17.12.10.29
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 17 Feb 2017 12:10:30 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 17 Feb 2017 21:10:30 +0100
-To: Frieder Schrempf <frieder.schrempf@exceet.de>
-Message-ID: <20170217201030.GB3276@jama>
-References: <CA+chaQd_O8+rQ10gRJqgXZt9zYdR7CowTKXD3trYPn-hXNZEhg@mail.gmail.com>
-	<1487257558-3384-1-git-send-email-frieder.schrempf@exceet.de>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-transfer-encoding;
+	bh=lwBmffiYBGA/VTfH4ipqFHSSoetC4a8OaTsFjJOj6bE=;
+	b=HjFNV2aHynEu3KpC2v1AfCzvJvvWTwXnymOBGAoyiBnr7ZAY4NT0qRYRkplj5qkDXM
+	8bL0EG5oGZNJDE65Bt0n5OTjv6Cz00UnXbeJte94wTM0uWTtC+CZZoua0cInkGS4XRvZ
+	8SJYCSw4wQY3RD4HoKGKOk7TMOVJ/LnyiWgpr75k6+kLQQI+ZyqjIJKxvzvjdJ+64wXo
+	KLsdVgm3JbAGo6g3rc5n4F20S3DjU0vsZ7Cp8NXIOm1CH83TVthKpT29clGib72WvBSL
+	3ZdvxcuoJtHEXhgh4dYr+0IcsoJry7M8Tz8KDThBYdexIjzq/aiFsmQn4FmbKv7uaCrq
+	MfMA==
+X-Gm-Message-State: AMke39kO7zKA+VWy9VB5+Kl9arE7JvTuPRl17/w03CDKIwRKPhBGpAmXkzEwluw45PXhq4ox1oBBH9p6g7EVWQ==
+X-Received: by 10.31.3.83 with SMTP id 80mr4237189vkd.64.1487364869612; Fri,
+	17 Feb 2017 12:54:29 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1487257558-3384-1-git-send-email-frieder.schrempf@exceet.de>
-User-Agent: Mutt/1.7.2 (2016-11-26)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-qt5][PATCH] qtbase-native: nativesdk-qtbase: remove patch that breaks mkspec setting for SDK
+Received: by 10.176.91.68 with HTTP; Fri, 17 Feb 2017 12:54:29 -0800 (PST)
+In-Reply-To: <20170217182816.GD8436@mentor.com>
+References: <CAJTo0LZRyFFJC8nSTa=xDiAPFcOYGU5MHW04nEoPezydBz+3oA@mail.gmail.com>
+	<CALbNGRSPZw+LL3JXv4+D+k2C3DAV=5_U=44M8fcSU50V_-7KEw@mail.gmail.com>
+	<20170217180254.GA3276@jama> <20170217182816.GD8436@mentor.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 17 Feb 2017 21:54:29 +0100
+Message-ID: <CALbNGRRFQd7duFQZzx5tMv-yqgQt+Ch8LDxKPUh3gY2QU=M-1Q@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: Splitting meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,102 +56,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2017 20:10:31 -0000
-X-Groupsio-MsgNum: 65293
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="PmA2V3Z32TCmWXqI"
-Content-Disposition: inline
-
---PmA2V3Z32TCmWXqI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 17 Feb 2017 20:54:31 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 16, 2017 at 04:05:58PM +0100, Frieder Schrempf wrote:
-> The patch 0008-configure-paths-for-target-qmake-properly.patch seems
-> to be intended for the target, not for native/nativesdk, as it breaks
-> the mkspec setting (sets linux-g++ instead of linux-oe-g++) by default.
->=20
-> This issue is also described here:
-> https://github.com/graugans/meta-udoo/issues/20#issuecomment-261241783
+On Fri, Feb 17, 2017 at 7:28 PM, Joe MacDonald <Joe_MacDonald@mentor.com> w=
+rote:
+> [Re: [oe] Splitting meta-oe?] On 17.02.17 (Fri 19:02) Martin Jansa wrote:
+>
+>> On Fri, Feb 17, 2017 at 06:24:09PM +0100, Andreas M=C3=BCller wrote:
+>> > On Fri, Feb 17, 2017 at 6:07 PM, Burton, Ross <ross.burton@intel.com> =
+wrote:
+>> > > The recent storm of breakage in meta-oe caused by recipe specific sy=
+sroots
+>> > > was quite dramatic:
+>> > >
+>> > > ross@flashheart ~/Yocto/meta-oe ((044e518...))
+>> > > $ git grep PNBLACKLIST| wc -l
+>> > > 320
+>> > >
+>> > > Is it time to talk about splitting meta-oe into smaller real reposit=
+ories
+>> > > so they can be maintained at their own pace by more maintainers?
+>> > >
+>> > > Ross
+>> > What exactly gets better by splitting?
+>>
+>> I agree with Andreas.
+>
+> And I agree with both of you.
+>
+>> 1) RSS is good thing.
+>>
+>> 2) The breakage wasn't caused by lack of maintainers (at least I don't
+>>    think that I or Joe were the bottleneck for integrating the fixes).
+>
+> My schedule is highly variable but I do try to be responsive to
+> breakages and I do my best to watch and digest the state of the world
+> messages, those are extremely valuable IMO.
+>
+>> 3) More maintainers doesn't mean more contributions from people actually
+>>    using now broken components, it's actually easier to just send a fix
+>>    than to be a maintainer of some layer just to be able to also merge
+>>    your fix yourself.
+>>
+>> 4) It doesn't look so dramatic if it turns out that 200 of those
+>>    blacklisted recipes weren't actually used by anyone still active in
+>>    OE ecosystem.
+>
+> Agreed.  And if those blacklisted recipes are something that someone
+> in the ecosystem cares about, they really should be sending fixes back
+> upstream.  Breaking meta-oe up into smaller parts doesn't seem likely to
+> make them more likely to send patches, AFAICT.  Probably won't make them
+> less-so, either, but I don't see changing the structure to be a
+> significant win.
+>
+> And do note that when we first created meta-networking I was proposing
+> it be separate from meta-oe, I'm now completely on the other side of
+> that argument, for what that's worth.
+>
+>> 5) If someone wants to replace me as meta-oe maintainer, go ahead, it
+>>    stopped being fun for me long time ago, now it's just slightly annoyi=
+ng
+>>    routine which takes my free time I would rather invest in something
+>>    cooler
+>
+> I frankly think that'd be a loss for everyone, but it's understandable.
+> That's a big, largely thankless job you've taken on.  Obviously I can't
+> offer to take on more of the job than I already have with
+> meta-networking or I would, but maybe someone else with a similarly "big
+> picture" view will be able to share some of the workload.
+Agreed. Martin you are doing a great job and without you projects
+would break into 'private' layers. This cannot be the target. Coming
+to blacklisting: This is the only way for you to force people start
+fixing things. Nobody expects you fixing things out of your interest.
 
-On which branch was this tested?
+From my personal perspective as 'maintainer' of e.g
+meta-xfce/meta-office/meta-qt5-extra:
 
-It doesn't apply for master:
+* there is only very limited community - I take care for these layers
+more or less myself (ok meta-xfce has seen more than the others)
 
-OE @ ~/meta-qt5 $ pwam 137257
-2017-02-17 21:07:37 URL:https://patchwork.openembedded.org/patch/137257/mbo=
-x/ [2388] -> "pw-am-137257.patch" [1]
-Applying: qtbase-native: nativesdk-qtbase: remove patch that breaks mkspec =
-setting for SDK
-error: patch failed: recipes-qt/qt5/nativesdk-qtbase_git.bb:33
-error: recipes-qt/qt5/nativesdk-qtbase_git.bb: patch does not apply
-error: patch failed: recipes-qt/qt5/qtbase-native_git.bb:28
-error: recipes-qt/qt5/qtbase-native_git.bb: patch does not apply
-Patch failed at 0001 qtbase-native: nativesdk-qtbase: remove patch that bre=
-aks mkspec setting for SDK
-The copy of the patch that failed is found in: .git/rebase-apply/patch
-When you have resolved this problem, run "git am --continue".
-If you prefer to skip this patch, run "git am --skip" instead.
-To restore the original branch and stop patching, run "git am --abort".
+* due to many oddities as
+    * Cmake is cross mess
+    * Qt-people write small C++ tools for each and every build-job
+    * libreoffice has more or less tailored build system and builds take ag=
+es
+  caused me to use dirty hacks. Most of those are terribly broken now
+- I need to rethink a lot and that takes time.
 
-I've applied it manually for master, but next time please send patches reba=
-sed and tested on recent master.
+Coming back to Ross' suggestion: Why panic and break things apart? As
+soon as somebody needs an environment requiring current oe-core and
+blacklisted recipes in meta-openembedded that person will (hopefully)
+send patches. If that lasts - so be it. If there is some pressing for
+release cycle - feel free to send patches.
 
-> Signed-off-by: Frieder Schrempf <frieder.schrempf@exceet.de>
-> ---
->  recipes-qt/qt5/nativesdk-qtbase_git.bb | 1 -
->  recipes-qt/qt5/qtbase-native_git.bb    | 1 -
->  2 files changed, 2 deletions(-)
->=20
-> diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nati=
-vesdk-qtbase_git.bb
-> index 47e204b..e64c30e 100644
-> --- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
-> +++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-> @@ -33,7 +33,6 @@ SRC_URI +=3D "\
->      file://0005-configure-bump-path-length-from-256-to-512-character.pat=
-ch \
->      file://0006-QOpenGLPaintDevice-sub-area-support.patch \
->      file://0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.pat=
-ch \
-> -    file://0008-configure-paths-for-target-qmake-properly.patch \
->      file://0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch \
->      file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.pat=
-ch \
->  "
-> diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-=
-native_git.bb
-> index ec4a9b6..c6a847a 100644
-> --- a/recipes-qt/qt5/qtbase-native_git.bb
-> +++ b/recipes-qt/qt5/qtbase-native_git.bb
-> @@ -28,7 +28,6 @@ SRC_URI +=3D "\
->      file://0005-configure-bump-path-length-from-256-to-512-character.pat=
-ch \
->      file://0006-QOpenGLPaintDevice-sub-area-support.patch \
->      file://0007-linux-oe-g-Invert-conditional-for-defining-QT_SOCKLE.pat=
-ch \
-> -    file://0008-configure-paths-for-target-qmake-properly.patch \
->      file://0009-Reorder-EGL-libraries-from-pkgconfig-and-defaults.patch \
->      file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.pat=
-ch \
->  "
-> --=20
-> 2.7.4
->=20
+One final note on splitting - has anybody taken a look on layer index
+in recent past? I think that shows what will happen if we split.
+People come 'yeah I have a great layer', publish that in layer index
+and leave after a while. How shall a newbie get into that?
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Andreas
 
---PmA2V3Z32TCmWXqI
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWKdYtQAKCRA3VSO3ZXaA
-HCh8AJ4sRxkxGmbPTmcQvBlm9tmcGGIGUgCfco+EMvRiw0CdCMmQO/VuIZN8Uf0=
-=zL66
------END PGP SIGNATURE-----
-
---PmA2V3Z32TCmWXqI--
