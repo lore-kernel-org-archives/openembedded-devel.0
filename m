@@ -1,48 +1,25 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qt0-f179.google.com (mail-qt0-f179.google.com
-	[209.85.216.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 406CC77317
+Return-Path: <timothy.t.orling@linux.intel.com>
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+	by mail.openembedded.org (Postfix) with ESMTP id BFE6271B27
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Feb 2017 14:39:44 +0000 (UTC)
-Received: by mail-qt0-f179.google.com with SMTP id w20so41578554qtb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Feb 2017 06:39:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=zLj7plkDn46meKJ+VSWohaTgWTZDKip+ZKmHCbDeVjU=;
-	b=W7aWg+Ue39d0jHjLEiFm2ZdNC593pv37a6GKhO+3L7fjOTe0G6LXawESAEQ5zqc2NJ
-	SPhbLxlEd0BV7Zm+Ekfc4J3duNTE0M6NUi4id2yEF/kg441+9wwfx8IZVd5likGKQ2Kz
-	Pl6/UNsZBCaevtMw1RzAElvxpR+weK7BECi7lvR8FhTAi3pdOF9eEDHkBN15WvUMN6dk
-	dwQyc7g6tcjIestpC8jnIGG9x9ttg+1WOV5TWtZUVXZea6UOGPre8IBiaux3wfEvveuX
-	/qnvGx5o4K/tmrt8VYhLwGhhL+eCHBNH9OTv0rSOnSCYUjy7tC5BIHCMMeUa9pPGjK+w
-	oSvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=zLj7plkDn46meKJ+VSWohaTgWTZDKip+ZKmHCbDeVjU=;
-	b=HQD7hB/QkvID8hDmWMrvelmYxtS/UlCWdWJJnyOxw8juFyXSSwMTYSHtgKoc9yLekK
-	nIibnKbiQfQh3tkY/5+lRGDn3Fiu/zq8Y7Vgk2yORU993J+/lYwB7vwPHl++XOtZzylJ
-	jbinpKRDkm5KTI5iSM5PRx7XEH8zJXOj+pq2gzIl57vExbWGN3sLgsAXjLd79WnN5sPg
-	FM3hMGwsWTYNs/Sqtwj6YRMFeGnfOrL623EdBiwMoldpdcd3/8U+3dLT1/Ck+nW/VTcV
-	1Ln0aeWq5hfEkQ1dk9CLwhLo9f4Suh5Jz4UrqH96Kc4gdm6rBjOolDpELkuzCYKjenqG
-	XETw==
-X-Gm-Message-State: AMke39lH2EF/YUQDNFhpm4BVGtHNg2Kzw//NxtaAQ/sToitL1prN81pTqg2Mv8sNaZR/CXQucVqmyTPuseY97QGM
-X-Received: by 10.237.36.208 with SMTP id u16mr8225327qtc.105.1487342385179;
-	Fri, 17 Feb 2017 06:39:45 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.140.103.233 with HTTP; Fri, 17 Feb 2017 06:39:24 -0800 (PST)
-In-Reply-To: <CAMKF1sq5aLAgjciAfGmr6G1-qQU4fU6Ng_Dni0hVH8u0KZdSrw@mail.gmail.com>
-References: <1487246039-9185-1-git-send-email-linus.svensson@axis.com>
-	<1487246039-9185-2-git-send-email-linus.svensson@axis.com>
-	<CAMKF1sq5aLAgjciAfGmr6G1-qQU4fU6Ng_Dni0hVH8u0KZdSrw@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Fri, 17 Feb 2017 14:39:24 +0000
-Message-ID: <CAJTo0LbjPJjme-+MXPvHE+Ba1GZieHZTAbuY=Rc_BjKfov1wUQ@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+	Fri, 17 Feb 2017 16:19:29 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by orsmga105.jf.intel.com with ESMTP; 17 Feb 2017 08:19:30 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.35,172,1484035200"; 
+	d="scan'208,217";a="824497508"
+Received: from guptarav-mobl.amr.corp.intel.com ([10.254.77.251])
+	by FMSMGA003.fm.intel.com with ESMTP; 17 Feb 2017 08:19:29 -0800
+From: Tim Orling <timothy.t.orling@linux.intel.com>
+Mime-Version: 1.0 (Mac OS X Mail 10.2 \(3259\))
+Date: Fri, 17 Feb 2017 08:19:30 -0800
+References: <alpine.LFD.2.20.1702170515100.11041@uk63952.mitel.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <alpine.LFD.2.20.1702170515100.11041@uk63952.mitel.com>
+Message-Id: <FF18C4F5-59F1-4164-B656-1FCEB7349D4D@linux.intel.com>
+X-Mailer: Apple Mail (2.3259)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH v2 2/2] meson.bbclass: Add meson.bbclass
+Subject: Re: DEPENDS += "module-build-perl-native" versus "libmodule-build-perl-native"?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,16 +32,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2017 14:39:45 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 17 Feb 2017 16:19:30 -0000
+Content-Type: text/plain;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 16 February 2017 at 15:23, Khem Raj <raj.khem@gmail.com> wrote:
 
-> Perhaps inehriting  pkgconfig would be required too
->
+> On Feb 17, 2017, at 2:39 AM, Robert P. J. Day <rpjday@crashcourse.ca> =
+wrote:
 
-Unless Meson *always* uses pkgconfig, I think this should be something done
-in the recipe instead.
+> and, predictably, the meta-cpan layer provides that very recipe:
+>=20
+>  module-build-perl_0.4216.bb
+>=20
 
-Ross
+The meta-perl layer follows Debian naming of perl modules:
+=
+https://www.debian.org/doc/packaging-manuals/perl-policy/ch-module_package=
+s.html =
+<https://www.debian.org/doc/packaging-manuals/perl-policy/ch-module_packag=
+es.html>
+
+>=20
+>  thoughts? should some names be cleaned up to prevent this?
+>=20
+
+There are many other places in the wild where the metadata is not =
+consistent. The meta-openembedded/meta-perl layer-- being moderated on a =
+mailing list =E2=80=94 has some consistency. The meta-cpan layer =E2=80=94=
+ being authored by a NetBSD contributor and perl module author, on his =
+own =E2=80=94 does not follow the same guidelines. This by no means =
+diminishes the value of the work Jens has done. But it is still Jen=E2=80=99=
+s layer, not an officially supported OpenEmbedded layer.
+
+IMHO, the best solution is to add perl module support to the recipetool =
+so that we have an easier way to generate consistent metadata. And then =
+try to convince everyone else to use the tool and follow the guidelines. =
+We should also take a look at the existing metadata and clean it up.
+
+Another option would be to have the OE community get involved in support =
+of the meta-cpan layer and change the module generation code there =
+appropriately to be in sync with the Debian naming guidelines.
+
+The challenge for me personally is the same one I always have: TIME.
+
+=E2=80=94Tim
+
+
+> rday
+>=20
+> --=20
+>=20
+> =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> Robert P. J. Day                                 Ottawa, Ontario, =
+CANADA
+>                        http://crashcourse.ca
+>=20
+> Twitter:                                       =
+http://twitter.com/rpjday
+> LinkedIn:                               =
+http://ca.linkedin.com/in/rpjday
+> =
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 
