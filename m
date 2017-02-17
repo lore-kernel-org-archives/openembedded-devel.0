@@ -1,26 +1,43 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C32971B27
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qk0-f177.google.com (mail-qk0-f177.google.com
+	[209.85.220.177])
+	by mail.openembedded.org (Postfix) with ESMTP id E5AAB719DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Feb 2017 16:28:48 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	17 Feb 2017 08:28:49 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.35,172,1484035200"; 
-	d="scan'208,217";a="824507765"
-Received: from guptarav-mobl.amr.corp.intel.com ([10.254.77.251])
-	by FMSMGA003.fm.intel.com with ESMTP; 17 Feb 2017 08:28:49 -0800
-From: Tim Orling <timothy.t.orling@linux.intel.com>
-Mime-Version: 1.0 (Mac OS X Mail 10.2 \(3259\))
-Date: Fri, 17 Feb 2017 08:28:49 -0800
-References: <alpine.LFD.2.20.1702170559480.1649@uk63952.mitel.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <alpine.LFD.2.20.1702170559480.1649@uk63952.mitel.com>
-Message-Id: <3162C416-70A3-4043-B713-A7AD57FAF9B8@linux.intel.com>
-X-Mailer: Apple Mail (2.3259)
+	Fri, 17 Feb 2017 17:07:42 +0000 (UTC)
+Received: by mail-qk0-f177.google.com with SMTP id u25so49603635qki.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Feb 2017 09:07:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=LtLuEnCE4zNUnPzlcrJg92f0F3JmnxDWpltmHVYZ7yM=;
+	b=i0p7oDMmMqsS/F9KT6Eb2yBXMaKSVZ665sDINlxTUIeobXRkrBwv3w+hnkLYhK1aKZ
+	PGr8jN1zJ+SdEU+qIAAj1Mu/NJfGCn8GJZfQE1zFBtPvpFoJSepLDNqhPI+jYJchodJc
+	6FOQcjiZRmwjloruPqKzwf66/QOaIHzBIm8FAS4MnDHUXeFifWS/wxuViTNxeoJdtHya
+	o5KJ+H2SQsOcaonfGuXtd6PSyPB6CWnzaCp8usEMYNLALyf9bQbfAEFN2v1yrYj0K9Ud
+	0TOM8tQLZFTQb2UJ6hxayutz6Ysvo6p1HlJdQKHlmeyM+cgHWLQeiAv7A9RBCKG/Y7+5
+	Thiw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=LtLuEnCE4zNUnPzlcrJg92f0F3JmnxDWpltmHVYZ7yM=;
+	b=XCPp4mFF9rBJDdunTrXDVnACO2cs/0WaPlvXwic1O9yS0W8pPMoEtJJfl6V4dBk/5u
+	ZHSsECmhviewuIJooz1uASH0dTcRkRAnr8HLI9DHGSOvm++p0totm8aZQONCUzqRN6Dt
+	WlfqKPdhZiuAlEG+pmLvLUYKKVEKdY5t7Fsi013Jhavz92J8OulNQUtJEhBfFfvZobxv
+	E3h8wsL+alhsli9HjoJv8Ucm2ZOF2Xu7XXoXNYRjQkBZ4nlVlX1NyF3+CFZAvKz5EKoE
+	GMbVWBTJYoDNmb/Llle+oXS36vbAGh2gvGpXqHgAcZ/vqNOeJci7AfDISHw/2k6luK0I
+	FifQ==
+X-Gm-Message-State: AMke39ma0QxqYpvV2DMuXiJJosk6Dn3h+EzLyTrcRALmjhCxU4fO621nCWUDY1QrKJfbqu4fDjgW+Ek0my0gKHzw
+X-Received: by 10.55.3.18 with SMTP id 18mr7949582qkd.244.1487351262682; Fri,
+	17 Feb 2017 09:07:42 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.140.103.233 with HTTP; Fri, 17 Feb 2017 09:07:22 -0800 (PST)
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 17 Feb 2017 17:07:22 +0000
+Message-ID: <CAJTo0LZRyFFJC8nSTa=xDiAPFcOYGU5MHW04nEoPezydBz+3oA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: SUMMARY/DESCRIPTION for "libmodule-build-perl_0.31.bb" refers to "tiny" version
+Subject: Splitting meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,80 +50,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2017 16:28:50 -0000
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 17 Feb 2017 17:07:43 -0000
+Content-Type: text/plain; charset=UTF-8
 
+The recent storm of breakage in meta-oe caused by recipe specific sysroots
+was quite dramatic:
 
-> On Feb 17, 2017, at 3:12 AM, Robert P. J. Day <rpjday@crashcourse.ca> =
-wrote:
->=20
->=20
->  just noticed that in meta-openembedded/meta-perl layer, there are
-> two recipes for perl module building:
->=20
->  * libmodule-build-perl_0.31.bb
->  * libmodule-build-tiny-perl_0.036.bb
->=20
-> but the SUMMARY and DESCRIPTION for the first (non-tiny) version
-> clearly was copied and pasted from the second (tiny) version:
->=20
-> SUMMARY =3D "Module::Build::Tiny - A tiny replacement for =
-Module::Build"
-> DESCRIPTION =3D "Many Perl distributions use a Build.PL file instead =
-of a \
-> Makefile.PL file to drive distribution configuration, build, test and =
-\
-> installation. Traditionally, Build.PL uses Module::Build as the =
-underlying \
-> build system. This module provides a simple, lightweight, drop-in =
-replacement. \
-> Whereas Module::Build has over 6,700 lines of code; this module has =
-less than \
-> 120, yet supports the features needed by most distributions.=E2=80=9D
->=20
+ross@flashheart ~/Yocto/meta-oe ((044e518...))
+$ git grep PNBLACKLIST| wc -l
+320
 
-I authored the libmodule-build-tiny-perl recipe. I can=E2=80=99t speak =
-for the libmodule-build-perl recipe=E2=80=99s creation process, but it =
-does seem your hypothesis is likely.
+Is it time to talk about splitting meta-oe into smaller real repositories
+so they can be maintained at their own pace by more maintainers?
 
->  i'm going to let someone higher up the food chain deal with that.
->=20
-
-Perhaps you should consider submitting a patch? Here is where the data =
-should come from:
-https://metacpan.org/pod/Module::Build#DESCRIPTION =
-<https://metacpan.org/pod/Module::Build#DESCRIPTION>
-
-
-
-> rday
->=20
-> --=20
->=20
-> =
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> Robert P. J. Day                                 Ottawa, Ontario, =
-CANADA
->                        http://crashcourse.ca
->=20
-> Twitter:                                       =
-http://twitter.com/rpjday
-> LinkedIn:                               =
-http://ca.linkedin.com/in/rpjday
-> =
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->=20
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+Ross
 
