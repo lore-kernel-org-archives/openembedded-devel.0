@@ -1,36 +1,51 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 8111B77240
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f42.google.com (mail-pg0-f42.google.com [74.125.83.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 03131772E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 23:20:15 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id n13so4160763qtc.0
+	Fri, 17 Feb 2017 00:13:03 +0000 (UTC)
+Received: by mail-pg0-f42.google.com with SMTP id y6so6573401pgy.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Feb 2017 15:20:16 -0800 (PST)
+	Thu, 16 Feb 2017 16:13:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=8pvJTDy/53439QJmnof7acmHbS7yYMoXHx2ooaIIph4=;
+	b=Fo6Cy3sLLJKKhmW3M3UUGYRDlhL87LMgBATXDN6cNvutxYySvDxriWD2HiAkUAYWWn
+	qJXs4PFyjEyJoBU2vBd0UfMKU6cYGck9KeOlkT9Y+qqxfDZk5I5531a2juhxN9q/d4iB
+	vN39b+1gUkWcOSH89eyG1ODmCFOo/BF9D419ExGP+ZIkM4sslDjdeFtA1hsgbOVjFZNW
+	i2MfgWIrqpL0AlM2+Wmdsv7Stgq3CEXOupesj8IsDhGqxc3nuVtuNgXgVd/syzbXxCxY
+	eTXYi3quteqXvLtihtCLbX7z4vud0xJg5+PQIsDZVbYwEXKH0zW0KXm/mhEexs7TqKSv
+	EDhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=YxX29710DTb4RRnj9mhJC7omNOfpPskeAhYu+1Ri1Ek=;
-	b=A639Ls6PcGR12MgZMxGSsXsnUes276QvJZQl65Jum01+DOY/tRE9TP0tVGgt6f4vb+
-	N45DNCxM4+48T0L5sWEJD6bxwMUXFQQmH0XblmJFWEXNUJsq1/5gIGbgloOeLceIWp62
-	+Z6WrMtDLPiHX3qpxNYMtj7gT3yamhuPeiNZlERCcRB/bO3xF49vQVqCH02WbwpPonE0
-	+nuQnvXEZ+QHEi5/CaLUYP/tvlUpAJ+esA8eUbGFPRtqqCDyp5mG9H8XcWfuDIPzhimi
-	xywZJyzZcR+lYaNcAgqF8XEjLb+pUqO1OID5MQ9NHODz1J5IqwR31M29QqSpBNgZIgTx
-	ci5w==
-X-Gm-Message-State: AMke39kq/ZAsoauavhIn6RL+pdd2IECs8rHBHag1PK6KB8oq3qEdno4FBskf+/FeHwe6HA==
-X-Received: by 10.200.0.213 with SMTP id d21mr4620520qtg.44.1487287215551;
-	Thu, 16 Feb 2017 15:20:15 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
-	[67.85.97.224])
-	by smtp.gmail.com with ESMTPSA id 23sm5354913qtp.20.2017.02.16.15.20.14
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 16 Feb 2017 15:20:15 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=8pvJTDy/53439QJmnof7acmHbS7yYMoXHx2ooaIIph4=;
+	b=FLvfQhiuJcG8X67tHqDCUKd7tJlMQeEF2TKyUK0oOVxM0socHYBjN2dJ1SUAKr+ADA
+	sEvaOekTuHBrYa5Xi0ui36t1iuk4SGfS4wmvHQYXJ+Hh0MCyrKB6FgBA6xn8oKK9rE7e
+	91qzLc4KWxtozrQUi7Wzyzqp0+B7mfFCqJ7ywl7C84gAgEi/zneEgi4ejlHHUgkRcOiM
+	09qzZFukubp6obK6J9OLAt8fe9traYBAnYBUnJBvVfOEQqGm7cncVRnF64rOVbUlfj3z
+	VIdcY0GiqCuKe+JAWsfjOCnYLBywo6K0//JCE+OUcXbjJdhX1Jv2zMFM6c9r5x9/3gk0
+	dkGg==
+X-Gm-Message-State: AMke39mYDFVCko/b6uDRWPT9P/Ek66ebfatf2iVw7ASYGxfsB0EUT0J6c2uRRsTOfWaInw==
+X-Received: by 10.99.4.210 with SMTP id 201mr6396200pge.77.1487290383625;
+	Thu, 16 Feb 2017 16:13:03 -0800 (PST)
+Received: from CACSVMO-14452.local ([2601:646:8882:b8c:dcfa:13bf:34d0:bc6f])
+	by smtp.gmail.com with ESMTPSA id
+	e129sm15635526pfe.8.2017.02.16.16.13.02
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 16 Feb 2017 16:13:03 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Feb 2017 18:20:06 -0500
-Message-Id: <1487287206-16873-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-flask: update to version 0.12
+References: <1487285523-25674-1-git-send-email-derek@asterius.io>
+From: Khem Raj <raj.khem@gmail.com>
+Message-ID: <ea336b89-d159-da29-3374-7eadf7effaa6@gmail.com>
+Date: Thu, 16 Feb 2017 16:13:02 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
+	Gecko/20100101 Thunderbird/45.7.1
+MIME-Version: 1.0
+In-Reply-To: <1487285523-25674-1-git-send-email-derek@asterius.io>
+Subject: Re: [meta-python][PATCH] python-urllib3: update to version 1.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,41 +58,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Feb 2017 23:20:15 -0000
+X-List-Received-Date: Fri, 17 Feb 2017 00:13:04 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-flask.inc                  | 4 ++--
- .../python/{python-flask_0.11.1.bb => python-flask_0.12.bb}           | 0
- .../python/{python3-flask_0.11.1.bb => python3-flask_0.12.bb}         | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-flask_0.11.1.bb => python-flask_0.12.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-flask_0.11.1.bb => python3-flask_0.12.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-flask.inc b/meta-python/recipes-devtools/python/python-flask.inc
-index 87d020e..fe8d388 100644
---- a/meta-python/recipes-devtools/python/python-flask.inc
-+++ b/meta-python/recipes-devtools/python/python-flask.inc
-@@ -6,8 +6,8 @@ HOMEPAGE = "https://github.com/mitsuhiko/flask/"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=19866b76b054ab30c270c0eb9d7e43d7"
- 
--SRC_URI[md5sum] = "d2af95d8fe79cf7da099f062dd122a08"
--SRC_URI[sha256sum] = "b4713f2bfb9ebc2966b8a49903ae0d3984781d5c878591cf2f7b484d28756b0e"
-+SRC_URI[md5sum] = "c1d30f51cff4a38f9454b23328a15c5a"
-+SRC_URI[sha256sum] = "93e803cdbe326a61ebd5c5d353959397c85f829bec610d59cb635c9f97d7ca8b"
- 
- PYPI_PACKAGE = "Flask"
- 
-diff --git a/meta-python/recipes-devtools/python/python-flask_0.11.1.bb b/meta-python/recipes-devtools/python/python-flask_0.12.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-flask_0.11.1.bb
-rename to meta-python/recipes-devtools/python/python-flask_0.12.bb
-diff --git a/meta-python/recipes-devtools/python/python3-flask_0.11.1.bb b/meta-python/recipes-devtools/python/python3-flask_0.12.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-flask_0.11.1.bb
-rename to meta-python/recipes-devtools/python/python3-flask_0.12.bb
--- 
-2.7.4
 
+On 2/16/17 2:52 PM, Derek Straka wrote:
+> -LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ea114851ad9a8c311aac8728a681a067"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=06dfcbb88fb0787a2039e26af11276f5"
+
+what changed here ? please add that info to commit message.
 
