@@ -1,44 +1,55 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f182.google.com (mail-ua0-f182.google.com
-	[209.85.217.182])
-	by mail.openembedded.org (Postfix) with ESMTP id DF20971D9E
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bes.se.axis.com (bes.se.axis.com [195.60.68.10])
+	by mail.openembedded.org (Postfix) with ESMTP id 35C5D71D8C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Feb 2017 00:54:22 +0000 (UTC)
-Received: by mail-ua0-f182.google.com with SMTP id k3so4377225uak.2
+	Sat, 18 Feb 2017 02:10:13 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bes.se.axis.com (Postfix) with ESMTP id AB5B911A038
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Feb 2017 16:54:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=l8N1QqF319UMMy/ywgQOgndVa9eXvK9EInCYq6N4gEw=;
-	b=AgLSZDaQHhvtcRQYe0sLt3Rcq8y5fcN9G961VdjhefCW8e6wOXgTst4cXJ36AkA8KQ
-	8wsI0v8tdBewevopHKqEDoQ0tYdxCQ48zuJkQLnM/31atGarCl9tZuyL+Hy8lg08W8EC
-	5pgxtO6tqS9nUV8op5s6L0lFyn76kFeXl/eyXxsEDtXVBbM+apV3NepGKLx8JXyDFWqz
-	704tEWLk2m8RMXdIdws6fxNMKOvsBzyZD5/IUIzzgwyLnogRCyRhLiqlAXoMfcPgPHVS
-	jmbsVlrUXcT6zjoa4SyA39EMwcnG8o8ThFfUjyAVtXPvNVk3L2t16BYg6C99i0mYrekF
-	EoIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=l8N1QqF319UMMy/ywgQOgndVa9eXvK9EInCYq6N4gEw=;
-	b=Cr01CF/qzD9woKY+QvQJgGQUw9+ApeR2nRWwz7ahzSe1hk633bRulmB4wfci2k3Qaa
-	quirEptdIvBWoMRirz6G3JK3UKfBQNbL2bauyYOKY4C1+Uq4QA+rTN4+RQM+ztCFNLXb
-	DGZypgr1jcivWOtWz0DQSw+GWCUpSfa2uzLuc6uMGQXh8JEvV4+5sT2N+/aLtVVpm6GB
-	OkGPAwDuxlk4+Lkf5jbQOmFcxz6B5gFX0SG+NWMkFPpeJkFWobTSFLNYSYZlveh8crz5
-	uGEOxbU4asa52/kV+EUYxXPZM0mFmP9RmjdJgncu0UsXhkF03Zc/9BWTKJNao1pvmjMN
-	psUQ==
-X-Gm-Message-State: AMke39ldXo2ReKMMBv1xqrDLOKFLunNs2F21Bi6mCuGbptWXN4R1mYpIqjq26UNaaBsUkiRDf0lr3T8/oB8GeA==
-X-Received: by 10.176.6.130 with SMTP id g2mr4485973uag.91.1487379262544; Fri,
-	17 Feb 2017 16:54:22 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.159.48.222 with HTTP; Fri, 17 Feb 2017 16:53:52 -0800 (PST)
-In-Reply-To: <CAJTo0LZRyFFJC8nSTa=xDiAPFcOYGU5MHW04nEoPezydBz+3oA@mail.gmail.com>
-References: <CAJTo0LZRyFFJC8nSTa=xDiAPFcOYGU5MHW04nEoPezydBz+3oA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 17 Feb 2017 16:53:52 -0800
-Message-ID: <CAMKF1sokUFzXYv1+7gGQQtiJQP2Oz2cE24FBJhi3RdP9io6TBQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: Splitting meta-oe?
+	Sat, 18 Feb 2017 03:10:13 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at bes.se.axis.com
+Received: from bes.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bes.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id ozrnYEv46yCc
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 18 Feb 2017 03:10:12 +0100 (CET)
+Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
+	by bes.se.axis.com (Postfix) with ESMTPS id BC7162E698
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 18 Feb 2017 03:10:12 +0100 (CET)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id AA6D81A064
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 18 Feb 2017 03:10:12 +0100 (CET)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 9EB851A05B
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 18 Feb 2017 03:10:12 +0100 (CET)
+Received: from seth.se.axis.com (unknown [10.0.2.172])
+	by boulder02.se.axis.com (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 18 Feb 2017 03:10:12 +0100 (CET)
+Received: from saur-2.se.axis.com (saur-2.se.axis.com [10.92.3.2])
+	by seth.se.axis.com (Postfix) with ESMTP id 9257C5E3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 18 Feb 2017 03:10:12 +0100 (CET)
+Received: from saur-2.se.axis.com (localhost [127.0.0.1])
+	by saur-2.se.axis.com (8.14.5/8.14.5) with ESMTP id v1I2ACTR032038
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 18 Feb 2017 03:10:12 +0100
+Received: (from pkj@localhost)
+	by saur-2.se.axis.com (8.14.5/8.14.5/Submit) id v1I2ACf1032037
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 18 Feb 2017 03:10:12 +0100
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 18 Feb 2017 03:10:07 +0100
+Message-Id: <20170218021012.31978-3-pkj@axis.com>
+X-Mailer: git-send-email 2.9.0
+In-Reply-To: <20170218021012.31978-1-pkj@axis.com>
+References: <20170218021012.31978-1-pkj@axis.com>
+X-TM-AS-GCONF: 00
+Subject: [meta-oe][PATCH 3/8] lvm2: Standardize how PACKAGECONFIG is defined
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,29 +62,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Feb 2017 00:54:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 18 Feb 2017 02:10:14 -0000
 
-On Fri, Feb 17, 2017 at 9:07 AM, Burton, Ross <ross.burton@intel.com> wrote:
-> The recent storm of breakage in meta-oe caused by recipe specific sysroots
-> was quite dramatic:
->
-> ross@flashheart ~/Yocto/meta-oe ((044e518...))
-> $ git grep PNBLACKLIST| wc -l
-> 320
->
-> Is it time to talk about splitting meta-oe into smaller real repositories
-> so they can be maintained at their own pace by more maintainers?
->
+The change in 4071e6b4b0 broke support for redefining PACKAGECONFIG in
+a bbappend without having to resort to use PACKAGECONFIG_class-target.
 
-I think thats a fine idea, however, it needs maintainers to sign up
-first before any of this can be sustained. I think it was forewarned
-that such a change is coming. recipe maintainers or users should have
-risen up and sent patches. This can not be solved even if you divide
-the layer into smaller layers. Problems still remains. Whats required
-is to look other way, where we have
-faster infrastructure to test meta-openemebedded layers and ease out
-maintainer's job by testing and working though the changes. Blacklist
-is infact the better way to disable the recipes instead of shuffling
-layers. One still has a good base to start and fix it.
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+---
+ meta-oe/recipes-support/lvm2/lvm2.inc | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index f69acde..7c4bbb9 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -16,11 +16,14 @@ S = "${WORKDIR}/LVM2.${PV}"
+ 
+ inherit autotools-brokensep pkgconfig systemd
+ 
+-PACKAGECONFIG_class-target ??= " \
+-                   ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
+-                   thin-provisioning-tools \
++LVM2_PACKAGECONFIG = ""
++LVM2_PACKAGECONFIG_append_class-target = " \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
++    thin-provisioning-tools \
+ "
+ 
++PACKAGECONFIG ??= "${LVM2_PACKAGECONFIG}"
++
+ # odirect is always enabled because there currently is a bug in
+ # lib/device/dev-io.c which prevents compiling without it. It is
+ # better to stick to configurations that were actually tested by
+-- 
+2.9.0
+
 
