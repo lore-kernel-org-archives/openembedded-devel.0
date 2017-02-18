@@ -1,21 +1,20 @@
-Return-Path: <sjl@vctlabs.com>
-X-Greylist: delayed 356 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 18 Feb 2017 03:14:28 UTC
-Received: from dent.vctlabs.com (net-cf9a4187.iis.impulse.net [207.154.65.135])
-	by mail.openembedded.org (Postfix) with ESMTP id EF40A77332
+Return-Path: <dv@pseudoterminal.org>
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F2316078E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Feb 2017 03:14:28 +0000 (UTC)
-Received: by dent.vctlabs.com (Postfix, from userid 1000)
-	id 9B8872805B1; Fri, 17 Feb 2017 19:08:46 -0800 (PST)
-Date: Fri, 17 Feb 2017 19:08:46 -0800
-From: "S. Lockwood-Childs" <sjl@vctlabs.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170218030846.GR25952@vctlabs.com>
-Mail-Followup-To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
-	openembedded-devel@lists.openembedded.org
+	Sat, 18 Feb 2017 20:08:33 +0000 (UTC)
+Received: from [172.16.1.14] (62-178-118-86.cable.dynamic.surfer.at
+	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 53E8330F37
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 18 Feb 2017 21:08:32 +0100 (CET)
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+Message-ID: <ace37025-faef-4ffe-1e02-e3a1ad52ff03@pseudoterminal.org>
+Date: Sat, 18 Feb 2017 21:08:31 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.0
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: [meta-oe] gitpkgv.bbclass: fix versioning with multiple repos
+Subject: [morty][meta-openembedded] Commit backport required
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,58 +27,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Feb 2017 03:14:29 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 18 Feb 2017 20:08:35 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-gitpkgv class is supposed to use SRCREV_FORMAT variable to define
-how to smoosh together revision info from multiple repos that are
-used in a single recipe. It is incorrectly repeating the rev hash
-for the first repo instead of including the rev from each listed repo.
+Hello,
 
-Example:
-
-  SRC_URI = "git://some-server/purple.git;destsuffix=git/purple;name=purple"
-  SRC_URI += "git://other-server/blue.git;destsuffix=git/blue;name=blue"
-  SRCREV_purple = "${AUTOREV}"
-  SRCREV_blue = "${AUTOREV}"
-  SRCREV_FORMAT = "purple_blue"
-
-Suppose gitpkgv calculates "67+ea121ea" for purple repo,
-and "123+feef001" for blue repo. This should result in a
-package version with them joined together like so:
-
-"67+ea121ea_123+feef001"
-
-It didn't. Instead the git hash part for the first repo got repeated:
-
-"67+ea121ea_123+ea121ea"
-
-Fix this by looking in the right place for the git revisions of 2nd
-(and following) repos when assembling the full version string.
-
-Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
----
- meta-oe/classes/gitpkgv.bbclass | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/classes/gitpkgv.bbclass b/meta-oe/classes/gitpkgv.bbclass
-index 8cd4bfd..26a758f 100644
---- a/meta-oe/classes/gitpkgv.bbclass
-+++ b/meta-oe/classes/gitpkgv.bbclass
-@@ -110,9 +110,9 @@ def get_git_pkgv(d, use_tags):
-                             d, quiet=True).strip()
-                         ver = gitpkgv_drop_tag_prefix(output)
-                     except Exception:
--                        ver = "0.0-%s-g%s" % (commits, rev[:7])
-+                        ver = "0.0-%s-g%s" % (commits, vars['rev'][:7])
-                 else:
--                    ver = "%s+%s" % (commits, rev[:7])
-+                    ver = "%s+%s" % (commits, vars['rev'][:7])
- 
-                 format = format.replace(name, ver)
- 
--- 
-1.9.4
+commit d361ef01a9a61cd8a83f7728f7d3e9f118233cb8 "nis, opencv: Update 
+getVar/setVar syntax" needs to be backported to meta-openembedded's 
+morty branch. Otherwise builds break, because the deprecated bb.data API 
+was removed also in morty.
 
 
