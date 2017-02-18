@@ -1,45 +1,44 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id E97B077337
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ua0-f182.google.com (mail-ua0-f182.google.com
+	[209.85.217.182])
+	by mail.openembedded.org (Postfix) with ESMTP id DF20971D9E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Feb 2017 22:02:40 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id v77so19181113wmv.0
+	Sat, 18 Feb 2017 00:54:22 +0000 (UTC)
+Received: by mail-ua0-f182.google.com with SMTP id k3so4377225uak.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Feb 2017 14:02:41 -0800 (PST)
+	Fri, 17 Feb 2017 16:54:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=qXZrogKcNnGD+PQMWwTn8iyn2dpefRi7vM8BKZbptyo=;
-	b=VuEVl48LdsIzjZGTBjkuhNfVotSFbUmCOYQroc4v4hMlgyMamE3lAPEuYRJiyNnlXI
-	ougpG7w2XYN/Fqxts41o3GbCeosLAqoYExyXKCWBAHENUjriADASJg003HbiBbge1dP4
-	rfFoWopr190vuZI/SN2Fa0eQJaKooJ6gJT0NIzNuuZk+al5xLuM6hZAzRWWBVq49Lyk5
-	6+DzAi3wi+T3Q4nDS9Kve6ozxgvvV/J9chSxPi5YWYzWAhdfkVZna/v1oZHTeEgQPFYC
-	nqN3pUkOhP5fTtXg3NQWpzNpvWXjdTB3uER2tfE4kdHyOsCgzOCpTEUw50zS/U/Pqp0L
-	nxUg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=l8N1QqF319UMMy/ywgQOgndVa9eXvK9EInCYq6N4gEw=;
+	b=AgLSZDaQHhvtcRQYe0sLt3Rcq8y5fcN9G961VdjhefCW8e6wOXgTst4cXJ36AkA8KQ
+	8wsI0v8tdBewevopHKqEDoQ0tYdxCQ48zuJkQLnM/31atGarCl9tZuyL+Hy8lg08W8EC
+	5pgxtO6tqS9nUV8op5s6L0lFyn76kFeXl/eyXxsEDtXVBbM+apV3NepGKLx8JXyDFWqz
+	704tEWLk2m8RMXdIdws6fxNMKOvsBzyZD5/IUIzzgwyLnogRCyRhLiqlAXoMfcPgPHVS
+	jmbsVlrUXcT6zjoa4SyA39EMwcnG8o8ThFfUjyAVtXPvNVk3L2t16BYg6C99i0mYrekF
+	EoIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=qXZrogKcNnGD+PQMWwTn8iyn2dpefRi7vM8BKZbptyo=;
-	b=gqyYytyKVabEszb/b83P6DluvHmN9LcrKWKOmhZRFBwgrtoGxY44KfyFipc5asXpzv
-	8FEOdPwMQk5fuatmbXgoTboGXzr0Y+gZepOLsFHizMBNsyEyy48nCfD+bGbX3X8Ihe4H
-	X6wPrzYJwP2Bq//2REH4H7Z1n6DBu0aQnTTK4wNAldUfMFMEK69IiX93NQ+Cgfj90Xca
-	xaD1MVn4ji/kvXFvDF8tJvHmLodSQcA9rm+1W9ZEhCB1bZgjTOF4Y2N3q4GksdWYfsCj
-	/DDkUJ7fW0Tx177GP4hpA0cBIwapxf2tH9CgiM4zvOKHXM+MNaE9Ygz3jKo4zHCLs1bX
-	SdYw==
-X-Gm-Message-State: AMke39lOPWrkyT0YV7Ker+VrPIxiDLLhApl/BECAftY1mx+AWtqeONzipeorz6UdIJdIr77NAh/UgZVsgHATaA==
-X-Received: by 10.28.211.205 with SMTP id k196mr5616494wmg.124.1487368960173; 
-	Fri, 17 Feb 2017 14:02:40 -0800 (PST)
+	:message-id:subject:to;
+	bh=l8N1QqF319UMMy/ywgQOgndVa9eXvK9EInCYq6N4gEw=;
+	b=Cr01CF/qzD9woKY+QvQJgGQUw9+ApeR2nRWwz7ahzSe1hk633bRulmB4wfci2k3Qaa
+	quirEptdIvBWoMRirz6G3JK3UKfBQNbL2bauyYOKY4C1+Uq4QA+rTN4+RQM+ztCFNLXb
+	DGZypgr1jcivWOtWz0DQSw+GWCUpSfa2uzLuc6uMGQXh8JEvV4+5sT2N+/aLtVVpm6GB
+	OkGPAwDuxlk4+Lkf5jbQOmFcxz6B5gFX0SG+NWMkFPpeJkFWobTSFLNYSYZlveh8crz5
+	uGEOxbU4asa52/kV+EUYxXPZM0mFmP9RmjdJgncu0UsXhkF03Zc/9BWTKJNao1pvmjMN
+	psUQ==
+X-Gm-Message-State: AMke39ldXo2ReKMMBv1xqrDLOKFLunNs2F21Bi6mCuGbptWXN4R1mYpIqjq26UNaaBsUkiRDf0lr3T8/oB8GeA==
+X-Received: by 10.176.6.130 with SMTP id g2mr4485973uag.91.1487379262544; Fri,
+	17 Feb 2017 16:54:22 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.80.148.174 with HTTP; Fri, 17 Feb 2017 14:02:39 -0800 (PST)
-In-Reply-To: <CALbNGRTd+UJdyorVKAMi=FBccmjb0YyXPvZpZwVnWfYiurH7YQ@mail.gmail.com>
-References: <20170206200039.32123-1-schnitzeltony@googlemail.com>
-	<CALbNGRTd+UJdyorVKAMi=FBccmjb0YyXPvZpZwVnWfYiurH7YQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 17 Feb 2017 23:02:39 +0100
-Message-ID: <CA+chaQcpaCeBRzOdz9YHafiz4ry5cvKbe+Hf+L1PODDhGaafkg@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH 1/2] libtdb: fix SRC_URI - http has gone
+Received: by 10.159.48.222 with HTTP; Fri, 17 Feb 2017 16:53:52 -0800 (PST)
+In-Reply-To: <CAJTo0LZRyFFJC8nSTa=xDiAPFcOYGU5MHW04nEoPezydBz+3oA@mail.gmail.com>
+References: <CAJTo0LZRyFFJC8nSTa=xDiAPFcOYGU5MHW04nEoPezydBz+3oA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 17 Feb 2017 16:53:52 -0800
+Message-ID: <CAMKF1sokUFzXYv1+7gGQQtiJQP2Oz2cE24FBJhi3RdP9io6TBQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: Splitting meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,38 +51,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Feb 2017 22:02:41 -0000
+X-List-Received-Date: Sat, 18 Feb 2017 00:54:23 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-It's not lost, at least not completely, it waits in master-next for Joe to
-merge it, because it's for meta-networking.
-
-Maybe Joe missed it because he scans for [meta-networking] and your patches
-are missing that in subject (I've noticed that you also often if not always
-don't use [meta-oe] or [meta-xfce] which usually doesn't cause me troubles
-to notice your patches, because I sort them all on patchwork, but it's
-easier to miss for Joe.
-
-Adding Joe to CC.
-
-On Fri, Feb 17, 2017 at 9:37 AM, Andreas M=C3=BCller <
-schnitzeltony@googlemail.com> wrote:
-
-> On Mon, Feb 6, 2017 at 9:00 PM, Andreas M=C3=BCller
-> <schnitzeltony@googlemail.com> wrote:
-> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> > ---
-> >  meta-networking/recipes-support/libtdb/libtdb_1.3.12.bb | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> ping - seems this series got lost - shall I resend?
+On Fri, Feb 17, 2017 at 9:07 AM, Burton, Ross <ross.burton@intel.com> wrote:
+> The recent storm of breakage in meta-oe caused by recipe specific sysroots
+> was quite dramatic:
 >
-> Andreas
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> ross@flashheart ~/Yocto/meta-oe ((044e518...))
+> $ git grep PNBLACKLIST| wc -l
+> 320
 >
+> Is it time to talk about splitting meta-oe into smaller real repositories
+> so they can be maintained at their own pace by more maintainers?
+>
+
+I think thats a fine idea, however, it needs maintainers to sign up
+first before any of this can be sustained. I think it was forewarned
+that such a change is coming. recipe maintainers or users should have
+risen up and sent patches. This can not be solved even if you divide
+the layer into smaller layers. Problems still remains. Whats required
+is to look other way, where we have
+faster infrastructure to test meta-openemebedded layers and ease out
+maintainer's job by testing and working though the changes. Blacklist
+is infact the better way to disable the recipes instead of shuffling
+layers. One still has a good base to start and fix it.
 
