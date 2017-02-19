@@ -1,43 +1,44 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-qk0-f172.google.com (mail-qk0-f172.google.com
-	[209.85.220.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 920B07198D;
-	Sun, 19 Feb 2017 12:12:54 +0000 (UTC)
-Received: by mail-qk0-f172.google.com with SMTP id s186so76559600qkb.1;
-	Sun, 19 Feb 2017 04:12:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+Return-Path: <msm-oss@mcclintock.net>
+Received: from mail-wr0-f179.google.com (mail-wr0-f179.google.com
+	[209.85.128.179])
+	by mail.openembedded.org (Postfix) with ESMTP id CAD5771CA3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 19 Feb 2017 16:57:27 +0000 (UTC)
+Received: by mail-wr0-f179.google.com with SMTP id 35so12252646wrw.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 19 Feb 2017 08:57:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=mcclintock.net; s=google;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=Vyct/5h7gZWvA3RQwd7QnB7TmDf7IMrzaB1lMWEsVPc=;
-	b=JXpxM552lrmDqAtYkbqdv1V57gkdj43NL3+kXhuFA7wf7tM1uYoTAFoyhX+WJ47JzT
-	1NnMfb85e9cHj/klguq/FT3mlJL4ZX6qaRHwk9yELY+C5t6jdqabu2xgm60pUuQFJ63v
-	C2d/zTnMgl0DoYmCVVz5th5+5IBj6kWm6a6aNaVJVDJtSAFi11UHFkmEdN4tnQrBIQCN
-	KZKF3Y+NguK2Y6y00YVn0F5pSr98T9iolVvj0J3ylVgyXHu1WHtOtAGuuxoxYo44tFru
-	+wGyC8EQY38OIrdRBNtMMr+LOIE2D7Ae9Qk2LTQ3UVP5aD/li6vnxk+H7K+kBdc3tu4+
-	RK0A==
+	:cc; bh=Tdutvxs0Ax39vvOjdH9uxpymPil0tdGpaJQT56q4Z+w=;
+	b=S1v6bBundYPsopeaW+hI4165UDkAAiX4uuR62ZR5fpGkWsAqYGY04q1VIYKbcshJPH
+	MlQ3E8QkKVYpaN8qmD2OXENgG6BEBvisfdnNaS/xGkg1e6I70ymmzPdQGKoYcJ65QlGD
+	9JCj5G2mZ24Rnv7NnN24shfEAqoCkt7xcenQo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=Vyct/5h7gZWvA3RQwd7QnB7TmDf7IMrzaB1lMWEsVPc=;
-	b=FUnj7ZYKUs19Oj/p7f/SU9m0+JTjW3HPfoKiNAW4UqkkpTS/hDax8rj4lSW72skn2Q
-	irQyROc6I3YLgY/WtwnJqt0Jk1VzhyR+beywT4JDgoFtividsUoBI/dMncQF0Zj/ECZI
-	S39gZDi1jEJ24XXepJuh6GhxLbxSBdOdi7Zs7XhG5MgXa4OwP0tgeDOgVckVcHMuNlkY
-	jqSf0NjkWSqB/0uKlMYHdtnszvfhUsE8WqwLCqH0kip3AvCPqgjrQz93hRcqya7g3EdH
-	lCCz+KUHbirLCSgp7DLhKcc+tX7AGqTZMm04NNDaTaH/L+KQKnk3lJwMTS8GU7f4umWn
-	beYw==
-X-Gm-Message-State: AMke39mc5saKF733/ViUZyrW2h+q+tbbZAu6RjHZ+JN6f/ljq74j27cX+Lqy3DAsCtf5VlO3zzW84CNNUaLmmw==
-X-Received: by 10.55.44.197 with SMTP id s188mr15052510qkh.131.1487506374661; 
-	Sun, 19 Feb 2017 04:12:54 -0800 (PST)
+	bh=Tdutvxs0Ax39vvOjdH9uxpymPil0tdGpaJQT56q4Z+w=;
+	b=HEzQyigMo5m98TZNtQPL9kPcyJNc+Y/fK0o/TO39MbTf4ZIzHZsYBEDTFhcZCNua5X
+	jKjAYEVbpSQe9rAbYYqacyHbXvEOtjT8CRyTUOTHftL5YYqRwo/hIG5/dk1kmHHACfO5
+	5PHxG5QwgSWnQBZJC3S1pHn+wwwLLMNDo1NKUQXxhQvvXrO3fOEjTAYKHd4SLmJJ4c6p
+	d4l0Ev1tkHkOdR8uZnMBtnBY0St3ZKPQonb90fik7Wc0GoKc+gIfrw5LFw28LV25P9TK
+	OWXVbp+irlhR9t/0NTfCHIH++JYiJ/xK4yim1kXkznWdCOj4CuGwkeJRaNEui7KK/wBX
+	6fow==
+X-Gm-Message-State: AMke39mgbiReW678WOYQBl10V1UVBuXs9B/onDb6ZXfF4BGZ93YpRE74y70oKLvhRm/Zaj60bIMvRZE9kgW0oQ==
+X-Received: by 10.223.138.235 with SMTP id z40mr1084422wrz.130.1487523447387; 
+	Sun, 19 Feb 2017 08:57:27 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.200.39.252 with HTTP; Sun, 19 Feb 2017 04:12:54 -0800 (PST)
-In-Reply-To: <2c536609-989f-240e-cb4a-c77815898d8f@gmail.com>
+Received: by 10.28.7.4 with HTTP; Sun, 19 Feb 2017 08:57:07 -0800 (PST)
+In-Reply-To: <CAHUNapRHuTXG2zZCn0iNe+soUY-vFgQ0UXA74zLrSfaOCR39YA@mail.gmail.com>
 References: <2c536609-989f-240e-cb4a-c77815898d8f@gmail.com>
-From: Trevor Woerner <twoerner@gmail.com>
-Date: Sun, 19 Feb 2017 07:12:54 -0500
-Message-ID: <CAHUNapRHuTXG2zZCn0iNe+soUY-vFgQ0UXA74zLrSfaOCR39YA@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
+	<CAHUNapRHuTXG2zZCn0iNe+soUY-vFgQ0UXA74zLrSfaOCR39YA@mail.gmail.com>
+From: Matthew McClintock <msm-oss@mcclintock.net>
+Date: Sun, 19 Feb 2017 08:57:07 -0800
+Message-ID: <CAEsOVNcckNyTDaBwiQ=h_rSUUWAGe=XZiWKyOhJyGF5u0dCjrA@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Cc: Patches and discussions about the oe-core layer
 	<openembedded-core@lists.openembedded.org>
 Subject: Re: [OE-core] OEDAM - Portland 2017
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -52,9 +53,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Feb 2017 12:12:55 -0000
+X-List-Received-Date: Sun, 19 Feb 2017 16:57:28 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Does anyone have any recommendations for how to get from the
-conference venue to the Mentor Graphics office?
+I think some folks where going to try to get a ride share from the HIlton hotel.
+
+-M
+
+On Sun, Feb 19, 2017 at 4:12 AM, Trevor Woerner <twoerner@gmail.com> wrote:
+> Does anyone have any recommendations for how to get from the
+> conference venue to the Mentor Graphics office?
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
