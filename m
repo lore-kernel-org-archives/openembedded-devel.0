@@ -1,46 +1,30 @@
-Return-Path: <msm-oss@mcclintock.net>
-Received: from mail-wr0-f179.google.com (mail-wr0-f179.google.com
-	[209.85.128.179])
-	by mail.openembedded.org (Postfix) with ESMTP id CAD5771CA3
+Return-Path: <rpjday@crashcourse.ca>
+Received: from smtp486.redcondor.net (smtp486.redcondor.net [208.80.204.86])
+	by mail.openembedded.org (Postfix) with ESMTP id D4ABA71C9E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Feb 2017 16:57:27 +0000 (UTC)
-Received: by mail-wr0-f179.google.com with SMTP id 35so12252646wrw.0
+	Sun, 19 Feb 2017 18:36:44 +0000 (UTC)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
+	by smtp486.redcondor.net ({6695537a-536a-45f9-a249-877c85428649})
+	via TCP (outbound) with ESMTPS id 20170219183643615_0486
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Feb 2017 08:57:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mcclintock.net; s=google;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=Tdutvxs0Ax39vvOjdH9uxpymPil0tdGpaJQT56q4Z+w=;
-	b=S1v6bBundYPsopeaW+hI4165UDkAAiX4uuR62ZR5fpGkWsAqYGY04q1VIYKbcshJPH
-	MlQ3E8QkKVYpaN8qmD2OXENgG6BEBvisfdnNaS/xGkg1e6I70ymmzPdQGKoYcJ65QlGD
-	9JCj5G2mZ24Rnv7NnN24shfEAqoCkt7xcenQo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=Tdutvxs0Ax39vvOjdH9uxpymPil0tdGpaJQT56q4Z+w=;
-	b=HEzQyigMo5m98TZNtQPL9kPcyJNc+Y/fK0o/TO39MbTf4ZIzHZsYBEDTFhcZCNua5X
-	jKjAYEVbpSQe9rAbYYqacyHbXvEOtjT8CRyTUOTHftL5YYqRwo/hIG5/dk1kmHHACfO5
-	5PHxG5QwgSWnQBZJC3S1pHn+wwwLLMNDo1NKUQXxhQvvXrO3fOEjTAYKHd4SLmJJ4c6p
-	d4l0Ev1tkHkOdR8uZnMBtnBY0St3ZKPQonb90fik7Wc0GoKc+gIfrw5LFw28LV25P9TK
-	OWXVbp+irlhR9t/0NTfCHIH++JYiJ/xK4yim1kXkznWdCOj4CuGwkeJRaNEui7KK/wBX
-	6fow==
-X-Gm-Message-State: AMke39mgbiReW678WOYQBl10V1UVBuXs9B/onDb6ZXfF4BGZ93YpRE74y70oKLvhRm/Zaj60bIMvRZE9kgW0oQ==
-X-Received: by 10.223.138.235 with SMTP id z40mr1084422wrz.130.1487523447387; 
-	Sun, 19 Feb 2017 08:57:27 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.28.7.4 with HTTP; Sun, 19 Feb 2017 08:57:07 -0800 (PST)
-In-Reply-To: <CAHUNapRHuTXG2zZCn0iNe+soUY-vFgQ0UXA74zLrSfaOCR39YA@mail.gmail.com>
-References: <2c536609-989f-240e-cb4a-c77815898d8f@gmail.com>
-	<CAHUNapRHuTXG2zZCn0iNe+soUY-vFgQ0UXA74zLrSfaOCR39YA@mail.gmail.com>
-From: Matthew McClintock <msm-oss@mcclintock.net>
-Date: Sun, 19 Feb 2017 08:57:07 -0800
-Message-ID: <CAEsOVNcckNyTDaBwiQ=h_rSUUWAGe=XZiWKyOhJyGF5u0dCjrA@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
+	Sun, 19 Feb 2017 18:36:43 +0000
+X-RC-FROM: <rpjday@crashcourse.ca>
+X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
+Received: from [174.118.92.171] (port=42488 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1cfWLd-0006gE-Qn for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Feb 2017 13:36:37 -0500
+Date: Sun, 19 Feb 2017 13:36:35 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost.localdomain
+To: OpenEmbedded Development mailing list
 	<openembedded-devel@lists.openembedded.org>
-Cc: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] OEDAM - Portland 2017
+Message-ID: <alpine.LFD.2.20.1702191333140.31844@localhost.localdomain>
+User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
+MIME-Version: 1.0
+X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
+Subject: are you allowed to have an underscore in a recipes directory?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,19 +37,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Feb 2017 16:57:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 19 Feb 2017 18:36:49 -0000
+Content-Type: text/plain; charset=US-ASCII
 
-I think some folks where going to try to get a ride share from the HIlton hotel.
 
--M
+  i just noticed this in meta-oe/recipes-support:
 
-On Sun, Feb 19, 2017 at 4:12 AM, Trevor Woerner <twoerner@gmail.com> wrote:
-> Does anyone have any recommendations for how to get from the
-> conference venue to the Mentor Graphics office?
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+$ ls
+...
+lm_sensors
+...
+
+  is there any issue with that directory name containing an
+underscore? i know that has special meaning in a recipe file name, but
+i've never noticed an underscore being used as above.
+
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
+
 
