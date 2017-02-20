@@ -1,54 +1,53 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id F1CB171D9C
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id CA37C71DEE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 18:07:28 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id q39so12810384wrb.2
+	Mon, 20 Feb 2017 18:07:30 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id r18so15743975wmd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 10:07:29 -0800 (PST)
+	Mon, 20 Feb 2017 10:07:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=KDjUyn4vrnpjr8P/6kyX6g/bOvUC2IE3/5LRXJHsztw=;
-	b=SKDlhi0SRMz1gpxZGLk/dlM4Y3wbbanD8VZkpDtO9K5FQEveQQb0PI55wNWUyLW9QV
-	OKhHOVuZ6uNPlp2BIgNSBXKgejSc1ntMZp9MlEhRyToi29ATAUf6F2yRvfU9VD64FT3a
-	LiI3TnnfKq5ibRBLe2NUSJFtaQCtU3QchOHQGrdpHe1aHn8OMVXN1ylo1tAml5LI8PbK
-	oLOMF4y43BthsB+pkck0ilTAIN5mxjwXqfQZk5iEu/+RZeMokU0zAXD7vEuLSYmehBsG
-	UEbg69Pie5Lvgg2RTRzyxvAvO9MMwzw890aphMbMTUWvRZ41w9pSsS4Xks59MpPv4lt6
-	7K2w==
+	bh=m/m0IKELFtAiFcpKqKmSNJjrzzHiOKhWcebqou6KuEQ=;
+	b=paldOXoH2MTYfqqIgpa29P8AF0dwIMJ18QSxAFCrXZ/mfBh8StgttvTS33yfpoFGGa
+	r3JauOfPNiLfex45BnqvhhJYQnTQwFWHOSwclqLilMWIfQ+BR8pQ9i3+ttLBpj6KgD0v
+	9TcylK1zjTiQ653h6QtcTtBCFW3iODaNDcWDQmcIzhVzFgItdM0WNGUVWei88RIb6DGD
+	LIfVBdp5yY/rvwO1sc7tQDJoiCkktlHxCRh4fXib7jLZJwXk/bbwmoo/0Eoeb5X8ebG/
+	RaqCXcrixtsjsD+QJ3RQCvX1VwBHEQk8sf3UURUWxWZ5Q/wSV+IAHsps3a/oJMpcROVu
+	EUhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=KDjUyn4vrnpjr8P/6kyX6g/bOvUC2IE3/5LRXJHsztw=;
-	b=QpCpnypQWKxd2rqQZXVT3KwV0q/1NjWXf1J5u0azdyZvSx3L50gv22ZHlwcaWpTjsO
-	tYGO/8hVPERDxqbySQzhIBpGUjSPwH9VJP95DYUhfY6Bj0m/bljKULHsGrHohlzKEI99
-	2jXErWiO9vmuq0TwYSvF38zuYwFYkvgleZoeK6h1BshA8prqrRgpp9HlwsrBg5L2LtZ7
-	MYM7RuQPeptC6f0esxNYyCCrqe0pwk5doyiKnBp3+NIy3GUiVI8AaKKpI9kgxntagLXL
-	LXgQvDg2jR0y2sDT0dSOeNlCLDU7NZR0cvjnKDXVslx+RniK7bSk4lZazjfeOg4qSuR+
-	FOTg==
-X-Gm-Message-State: AMke39l+FSkEsc+cD+0EraX6KtI6bW3JJtVlPdDMAsg52GbaiKoOW1SMVhz+ZuGOvLXcfg==
-X-Received: by 10.223.173.148 with SMTP id w20mr14250246wrc.164.1487614048799; 
-	Mon, 20 Feb 2017 10:07:28 -0800 (PST)
+	bh=m/m0IKELFtAiFcpKqKmSNJjrzzHiOKhWcebqou6KuEQ=;
+	b=MPqsVIN+obwLY+0TEx1gF40SW2XXS6v+NW/zs9mm3hiD+LOFqexeUUOHdTCJKw0EB2
+	81AwgYxS9QlgkgSBLNQtY31XkSosHW7Ejb9qeuJLy4crSHd7P5G7GZUwTTc3xashLp1r
+	51ZlZRpeXLrdeuhWimAVKZKq+JnSO7tfnw9CBnXzveVHfLC5GpagKgTG85qDWEY0YrSp
+	7JaGU5GE2Vto6j63TN3SyNbpjEE4fhEYVCOWhUT5YwGtc6nM521L+4YsySRl1Vr3iQmi
+	y5eTdKpfWwBDcN8gcCZFFkpCu0Ee/pthxT3pzpEe19YBl+fEDxyuk6PMEmy5m8syTxud
+	dVcw==
+X-Gm-Message-State: AMke39ktRGiZRR6A96k5exPdhNugbc7LDY3o9NgqvhHQBvqHEzLB7I85aPJmLgfxNJWrhw==
+X-Received: by 10.28.45.213 with SMTP id t204mr20864377wmt.113.1487614050457; 
+	Mon, 20 Feb 2017 10:07:30 -0800 (PST)
 Received: from PC192-168-2-116.speedport.ip
 	(p20030046E911DE631E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:46:e911:de63:1e6f:65ff:fe3e:7f61])
 	by smtp.googlemail.com with ESMTPSA id
-	96sm2863710wrb.14.2017.02.20.10.07.27
+	96sm2863710wrb.14.2017.02.20.10.07.28
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 20 Feb 2017 10:07:28 -0800 (PST)
+	Mon, 20 Feb 2017 10:07:29 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Feb 2017 19:06:29 +0100
-Message-Id: <20170220180700.29836-14-schnitzeltony@googlemail.com>
+Date: Mon, 20 Feb 2017 19:06:30 +0100
+Message-Id: <20170220180700.29836-15-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.3
 In-Reply-To: <20170220180700.29836-1-schnitzeltony@googlemail.com>
 References: <20170220180700.29836-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 13/44] xfce4-mpc-plugin: unblacklist - all dependencies are back
+Subject: [PATCH 14/44] libgxim: add glib-2.0 to DEPENDS and unblacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,29 +60,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Feb 2017 18:07:29 -0000
+X-List-Received-Date: Mon, 20 Feb 2017 18:07:31 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.0.bb   | 6 ------
- 1 file changed, 6 deletions(-)
+ meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.0.bb b/meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.0.bb
-index 105302e..f709e4d 100644
---- a/meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.0.bb
-+++ b/meta-xfce/recipes-multimedia/xfce4-mpc-plugin/xfce4-mpc-plugin_0.5.0.bb
-@@ -13,9 +13,3 @@ RRECOMMENDS_${PN} = "mpd"
+diff --git a/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb b/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
+index 26da755..44b7531 100644
+--- a/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
++++ b/meta-oe/recipes-extended/libgxim/libgxim_0.5.0.bb
+@@ -20,8 +20,6 @@ LIC_FILES_CHKSUM = "\
+ file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
  
- SRC_URI[md5sum] = "13d5d95ef0c305bac45fde6231258e5d"
- SRC_URI[sha256sum] = "f1320916ae3112e6825699652a502cebfa78bb006c649b42d3d331dfe57b6cb0"
+ EXTRA_OECONF = " --disable-static --disable-rebuilds --enable-compile-warnings=minimum"
+-DEPENDS += "gtk+ glib-2.0 ruby-native intltool-native gnome-common-native"
++DEPENDS += "gtk+ glib-2.0 glib-2.0-native ruby-native intltool-native gnome-common-native"
+ 
+ inherit autotools pkgconfig gettext
 -
--PNBLACKLIST[xfce4-mpc-plugin] ?= "Runtime depends on blacklisted mpd"
--
--PNBLACKLIST[xfce4-mpc-plugin] ?= "Runtime depends on blacklisted xfce4-mpc-plugin"
--
--PNBLACKLIST[xfce4-mpc-plugin] ?= "Runtime depends on blacklisted xfce4-mpc-plugin-dev"
+-PNBLACKLIST[libgxim] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130604/"
 -- 
 2.9.3
 
