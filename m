@@ -1,25 +1,48 @@
-Return-Path: <Paul.Gortmaker@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 2699872F08
+Return-Path: <mhalstead@linuxfoundation.org>
+Received: from mail-pg0-f51.google.com (mail-pg0-f51.google.com [74.125.83.51])
+	by mail.openembedded.org (Postfix) with ESMTP id E010771E02
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 19:17:11 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v1KJHBXU027393
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 20 Feb 2017 11:17:11 -0800 (PST)
-Received: from yow-cube1.wrs.com (128.224.56.98) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 20 Feb 2017 11:17:10 -0800
-From: Paul Gortmaker <paul.gortmaker@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 20 Feb 2017 14:17:03 -0500
-Message-ID: <1487618223-3895-1-git-send-email-paul.gortmaker@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <CA+chaQfUYBZUrPMgTqGy_8N-pbPJqJ3nN=pEG3aqMQBvH6axWA@mail.gmail.com>
-References: <CA+chaQfUYBZUrPMgTqGy_8N-pbPJqJ3nN=pEG3aqMQBvH6axWA@mail.gmail.com>
+	Mon, 20 Feb 2017 20:37:24 +0000 (UTC)
+Received: by mail-pg0-f51.google.com with SMTP id a123so21798530pgc.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Feb 2017 12:37:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linuxfoundation.org; s=google;
+	h=to:from:subject:organization:message-id:date:user-agent
+	:mime-version:content-transfer-encoding;
+	bh=QHus5XEYla2MF3Y68UFRY7l5B/f5tUj3HriU7m2H6Ds=;
+	b=fVMbjt5rr3ls+ZD5UYa5u4etzW393PqtgYuqZZZ1L0o50E26Io6aDMf7yrLcBgGzxJ
+	78NaWSI9KcoqUpPkVUSqKqxP1V6PFD6mXpTHzQNpwXlWMlwsydL00aSGcuihmzS8b12e
+	kwb0RUvm1OQ/u3Vh+TkHHMDB4mQB2PhglXRIA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:to:from:subject:organization:message-id:date
+	:user-agent:mime-version:content-transfer-encoding;
+	bh=QHus5XEYla2MF3Y68UFRY7l5B/f5tUj3HriU7m2H6Ds=;
+	b=YYR+4N3WuPEQePa9j9hN6p5JVWJwnfWl+ILWqBWGo4RSERUI92s8+bVwBm9C39Uwt7
+	PndPInHyFHXt/i1VLSDd6dxX/gMcLq1e8hkBoqsYQ2qkvUDS4hQvsh/smQYx5CY453hn
+	AGyvxBuVnoIXsI0BbHnbhGWuZMiZ8z2SpsurFEj9zxJYLv70sErjlaP9JMq/2z5zisil
+	2tlIgebPnQL/jaOxATMxLd4HIJS8j/PAp81U/ZtTiJ0eMq7igq2y4BuxPiJG9HBdQCSE
+	YzPyjvo3weYs4I+b3uIX/FQeaZhLmtvp3Ido8PPZt8RQuyL3lJl/UdpK/WSJFp13K7OI
+	AarA==
+X-Gm-Message-State: AMke39khlw16TwIjKZDanIMTNUUvRv6YRSQXDjbLcxfmEHMaTbBlo9fC4wP56sRE4X11etJH
+X-Received: by 10.98.152.219 with SMTP id d88mr6595850pfk.153.1487623045538;
+	Mon, 20 Feb 2017 12:37:25 -0800 (PST)
+Received: from yct-lpt.lan (nat-wv.mentorg.com. [192.94.38.34])
+	by smtp.gmail.com with ESMTPSA id
+	c204sm36646497pfb.51.2017.02.20.12.37.24
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 20 Feb 2017 12:37:24 -0800 (PST)
+To: openembedded-devel@lists.openembedded.org
+From: Michael Halstead <mhalstead@linuxfoundation.org>
+Organization: Linux Foundation
+Message-ID: <1ff4cca2-6472-848d-1971-4f707577a125@linuxfoundation.org>
+Date: Mon, 20 Feb 2017 12:37:23 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.0
 MIME-Version: 1.0
-Subject: [PATCH] gthumb: fix implict dependency on gconf causing configure fail
+Subject: List reply reverted to default setting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,36 +55,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Feb 2017 19:17:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 20 Feb 2017 20:37:27 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-Currently we see:
 
-  | checking for gconftool-2... no
-  | configure: error: gconftool-2 executable not found in your path - should be installed with GConf
-  | ERROR: Function failed: do_configure (log file is located at gthumb/2.12.4-r4/temp/log.do_configure.5243)
-  ERROR: Task (meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb:do_configure) failed with exit code '1'
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
 
-Presumably this now happens more regularly with demise of the shared
-sysroot.  Adding gconf-native to the dependency list fixes it.
+Hello subscribers,
 
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
+This list is now set back to the default of replying to the poster
+instead of the list. This is the configuration used on all of the other
+OE lists. Please use your mail client's reply all feature in order to
+reply to the list.
 
-diff --git a/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb b/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb
-index 4a1313c544c2..62bbc5bd1ccb 100644
---- a/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb
-+++ b/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb
-@@ -2,7 +2,7 @@ SUMMARY = "gThumb is an image viewer and browser for the GNOME Desktop"
- SECTION = "x11/gnome"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
--DEPENDS = "gnome-common-native glib-2.0 gtk+ libxml2 gnome-doc-utils libunique gconf libpng gstreamer jpeg tiff gst-plugins-base intltool-native"
-+DEPENDS = "gnome-common-native glib-2.0 gtk+ libxml2 gnome-doc-utils libunique gconf libpng gstreamer jpeg tiff gst-plugins-base intltool-native gconf-native"
- 
- PR = "r4"
- 
--- 
-2.7.4
+
+- -- 
+Michael Halstead
+Linux Foundation / SysAdmin
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iQIcBAEBCAAGBQJYq1OCAAoJEGpkljW6QlqV1yQQAI1QAvp2LeWXQ1SvtRNWoCRy
+DtQ6bnlwI1xp9yrObvZFaTKxg6domUplAbNH/aC9nkt8G9FY0cQ/dV/IpKyyKUta
+GFib9AZhhQBWmi5JMWdvXt1n0aLg01MmtjHooSgaoosX737jLdqBRycXUD2F5Zd5
++7j94lspZrgwXASTSgwaSzyEvqXBo0U3tUex3v9TxejjFYyLmnsz0aloouMbwwxV
+Ci1M/hnCb+lAtScSz0sE2hJPofrSrWg27wwVQHabo9d7nxPlL9UAxLRQMb5xmwlS
+07HaRipTrgsKBko7Z63NO210v/fbQjOoQwsMr9MaUzH0kqQSWnSV8mTTIwqQCxi/
+GcIzKsMavMJBNJdv50O/JipF2FgnV5P2pn7iWFlqys44VmKQGF2xvUsfEuccSIC8
+vwF7ejVGluEmJ6IMqrCXTUR2hNofA0plHxt7LTpAVvMAmC8ypU5W0eX0FWGlBBjh
+EBDVGOqVpg3uAB9bixgrPAmdPtGQj5luo6uZ3FFed300pUgIDk9OzT7HVyOBguh0
+dA66KoWCkhPKuJ1SJmqc5cFQkF33/4iiwzI/1xJfkIpSIiFaLU3DSNsKt/6tlFz4
+rT10Zd8w1I3cbwygfCUYueiGuQP/UO5W5Te18Z+195bg3X5edd/1sbXv2AH44D37
+oro2syhCg8JheLnIWf+x
+=iFxw
+-----END PGP SIGNATURE-----
 
 
