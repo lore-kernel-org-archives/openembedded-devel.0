@@ -1,44 +1,26 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f176.google.com (mail-ua0-f176.google.com
-	[209.85.217.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 26225600B3
+Return-Path: <Paul.Gortmaker@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id F410960111
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 00:56:28 +0000 (UTC)
-Received: by mail-ua0-f176.google.com with SMTP id 62so1180264uar.0
+	Mon, 20 Feb 2017 01:15:51 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v1K1Fo2E024870
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Feb 2017 16:56:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=wuKE3OG4LU+OPtAHcUDTrYrq/ablCJMbtVCTZzZfzVw=;
-	b=Y4ruc/BpXf/9Z+R60pS29gB3R9p/qIfkAidNUTTHYvPj6Jw+pKazBXzgnmZdY1Grvh
-	H3Gu16/EjNV6RCteSvxxV0R3g7kubUPZx1bumjey0gJ/Xmj38AKZDJcYHBKouCcUn/Dc
-	IcZ0j6ByBzTkNBj8PzflYQRSnGER91dM8+EOwj5glxrW8mw4B4QjrynB3fKlZ3WvSa95
-	Wqc4ewfVfKMUdCbSFDK6jNLQVjpRt/hsuS2C7/ujhE2/CRa6ms6/f4i61Fpja2dfXQ66
-	4GMwb0MLlL177yppUpIrUTCn8dGn+kHV9PrMGTd+ap+rDQorQvxYWqOqKliV7Tv7qcLj
-	7KUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=wuKE3OG4LU+OPtAHcUDTrYrq/ablCJMbtVCTZzZfzVw=;
-	b=XenKWGr3oDCX2L4L6s02GqukZQj2a+aOoegzMOBQSJGIik7VuBRL6uXO92X5kUOuY4
-	bYMpaym5479D/NFizYSch3MlhEcvOBguFNWHITBeqe3ChbYruwILx865Ep3Nqlibpau1
-	Ax/lAg8YnmIcq28ugPVxVkEl977f1PAuaDhYsrMJ68wh0YQhhRuKdPhhJNE03i+4aviR
-	mizdKiLIG2g71eyjFMU6/ErqHBUmrKgO8BzCq0vu1oyMgoUdA7oUM4JM0XkISiZGn/CA
-	NGZ3rYSIEnwdTR4VRsacV0NLlWcU6mozsJRvsFmYpMTQ08e915J+3kr+FqCdsdvsDMr1
-	vqCg==
-X-Gm-Message-State: AMke39njv51d+4qnppQ9FsFseRoYXN8nf5NVe67bRJe4Ax3/i6j0oPQdH7AGeVtAv6Wkg3qd/3izM8QV704BQQ==
-X-Received: by 10.176.90.144 with SMTP id w16mr9287473uae.101.1487552188797;
-	Sun, 19 Feb 2017 16:56:28 -0800 (PST)
+	Sun, 19 Feb 2017 17:15:51 -0800 (PST)
+Received: from yow-cube1.wrs.com (128.224.56.98) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
+	Sun, 19 Feb 2017 17:15:50 -0800
+From: Paul Gortmaker <paul.gortmaker@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 19 Feb 2017 20:15:49 -0500
+Message-ID: <1487553349-22706-1-git-send-email-paul.gortmaker@windriver.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <CAMKF1sqyxtRoLsi1QvABn7kVsskgLcUXXb7N_0JFct5ukiqUwg@mail.gmail.com>
+References: <CAMKF1sqyxtRoLsi1QvABn7kVsskgLcUXXb7N_0JFct5ukiqUwg@mail.gmail.com>
 MIME-Version: 1.0
-References: <alpine.LFD.2.20.1702191333140.31844@localhost.localdomain>
-In-Reply-To: <alpine.LFD.2.20.1702191333140.31844@localhost.localdomain>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 20 Feb 2017 00:56:17 +0000
-Message-ID: <CAMKF1so-WgaN+PvoQmKrwH6E8mEikRvsPoZszSk4_gzH+ZK8og@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: are you allowed to have an underscore in a recipes directory?
+Subject: [PATCH v2] netcat-openbsd: fix implicit dependency on pkg-config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,46 +33,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Feb 2017 00:56:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 20 Feb 2017 01:15:53 -0000
+Content-Type: text/plain
 
-On Sun, Feb 19, 2017 at 10:37 AM Robert P. J. Day <rpjday@crashcourse.ca>
-wrote:
+In the report at http://errors.yoctoproject.org/Errors/Details/130673/
+we see the following:
 
->
->   i just noticed this in meta-oe/recipes-support:
->
-> $ ls
-> ...
-> lm_sensors
+i586-oe-linux-gcc  -m32 -march=i586 <snip> netcat.o atomicio.o socks.o `pkg-config --libs libbsd` -lresolv -o nc
+/bin/sh: 1: pkg-config: not found
 
+What follows is a bunch of link errors for BSD library functions, as
+the backtick didn't return anything but an empty string and hence no
+BSD library was involved in the link.
 
-Its directory name I believe and not recipe name that you are talking about
-here in this case it is fine
+I was able to reproduce this by temporarily removing my host version
+of pkg-config, and then validated that this fix solves it while still
+having the host binary removed.  So it should fix the reported issue.
+I also confirmed pkg-config was in the sysroot after the change.
 
->
-> ...
->
->   is there any issue with that directory name containing an
-> underscore? i know that has special meaning in a recipe file name, but
-> i've never noticed an underscore being used as above.
->
-> rday
->
-> --
->
-> ========================================================================
-> Robert P. J. Day                                 Ottawa, Ontario, CANADA
->                         http://crashcourse.ca
->
-> Twitter:                                       http://twitter.com/rpjday
-> LinkedIn:                               http://ca.linkedin.com/in/rpjday
-> ========================================================================
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Cc: Khem Raj <raj.khem@gmail.com>
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
+---
+
+[v2: use inherit pkgconfig vs. depending on it, as per what
+ Khem suggested as being the more conventional route. ]
+
+ meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb b/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
+index bb21e0cfeede..e0a0328eccfc 100644
+--- a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
++++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
+@@ -14,6 +14,8 @@ SRC_URI[netcat.sha256sum] = "40653fe66c1516876b61b07e093d826e2a5463c5d994f1b7e6c
+ SRC_URI[netcat-patch.md5sum] = "e914f8eb7eda5c75c679dd77787ac76b"
+ SRC_URI[netcat-patch.sha256sum] = "eee759327ffea293e81d0dde67921b7fcfcad279ffd7a2c9d037bbc8f882b363"
+ 
++inherit pkgconfig
++
+ S = "${WORKDIR}/${BPN}-${PV}"
+ 
+ EXTRA_OEMAKE += "'LDFLAGS=${LDFLAGS}'"
+@@ -42,5 +44,3 @@ do_install() {
+     install -m 755 ${S}/nc ${D}${bindir}/nc.${BPN}
+ }
+ ALTERNATIVE_PRIORITY = "60"
+-
+-PNBLACKLIST[netcat-openbsd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130673/"
+-- 
+2.7.4
+
 
