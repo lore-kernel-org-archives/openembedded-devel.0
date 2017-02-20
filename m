@@ -1,36 +1,25 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id E358D71DA3
+Return-Path: <Paul.Gortmaker@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id A863371E52
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 18:44:43 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id n13so15038453qtc.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 10:44:44 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=VlJJjGuA7Qh5CjxDCkJdd0eKr4VEEXp279nt4ELz94Q=;
-	b=jdew3gqyuxg19kP3SFs0vQUdKJ4nnhEHZYxvrJuv16jxqYWk+9X35VajyjVV6vbkT/
-	lt/zuXlLEHADC+aWXrqBtz9q4EBMiek67S9f7VKvZe/HEmx7nR1DkjyVNDhs7s8gfXiG
-	sSzum9pqk2BU9/Wto8819YqMkAxQSm1OOY0ZYMzgJxX9JP8yQIYvlEhr/LZXrRIdpAr7
-	c8ZQfDFivW3bR46Eesvu4uzwDNo1VTmaMSpyKRhYjFLpDC2Pnck1WaMyE9TL9htSIYHV
-	sIGOCducUAAad9XkAiLinzPsXh3kUoP4d0qjOs4VkX8etQKlSdjgS7HxTiNtz6La7fLL
-	3Omw==
-X-Gm-Message-State: AMke39mY0qnfqjX1tVpXy69IoH2ebpfXXaYmIXkEzyvl+nVdaK7KbtcNYlCW6PGLkD8YjQ==
-X-Received: by 10.237.55.169 with SMTP id j38mr19761735qtb.286.1487616283702; 
-	Mon, 20 Feb 2017 10:44:43 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
-	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
-	h40sm12504158qtb.6.2017.02.20.10.44.43
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 20 Feb 2017 10:44:43 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Feb 2017 13:44:25 -0500
-Message-Id: <1487616265-24853-1-git-send-email-derek@asterius.io>
+	Mon, 20 Feb 2017 19:16:53 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v1KJGqid019731
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Mon, 20 Feb 2017 11:16:52 -0800
+Received: from yow-cube1.wrs.com (128.224.56.98) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 20 Feb 2017 11:16:51 -0800
+From: Paul Gortmaker <paul.gortmaker@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 20 Feb 2017 14:16:14 -0500
+Message-ID: <1487618174-3842-1-git-send-email-paul.gortmaker@windriver.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] nodejs: update to version 4.7.3
+In-Reply-To: <CA+chaQfUYBZUrPMgTqGy_8N-pbPJqJ3nN=pEG3aqMQBvH6axWA@mail.gmail.com>
+References: <CA+chaQfUYBZUrPMgTqGy_8N-pbPJqJ3nN=pEG3aqMQBvH6axWA@mail.gmail.com>
+MIME-Version: 1.0
+Subject: [PATCH] florence: add explicit dependency on gconf-native to fix install error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,32 +32,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Feb 2017 18:44:44 -0000
+X-List-Received-Date: Mon, 20 Feb 2017 19:16:55 -0000
+Content-Type: text/plain
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-oe/recipes-devtools/nodejs/{nodejs_4.7.2.bb => nodejs_4.7.3.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_4.7.2.bb => nodejs_4.7.3.bb} (96%)
+We currently see:
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_4.7.2.bb b/meta-oe/recipes-devtools/nodejs/nodejs_4.7.3.bb
-similarity index 96%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_4.7.2.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_4.7.3.bb
-index 4f4b43a..d4166f5 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_4.7.2.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.7.3.bb
-@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
- SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-     file://no-registry.patch \
- "
--SRC_URI[md5sum] = "eb55fc7700acb7d65fa8cbbbecf4ebb0"
--SRC_URI[sha256sum] = "ad1b8309a621f725b5d8205f0fc5bbb7b396a438c108e6fba417c1a914932dfc"
-+SRC_URI[md5sum] = "80db1fad0224f6f44a630ef4abea333a"
-+SRC_URI[sha256sum] = "7f35dc7adf0b348857b98e543a54c2b2cafb92c27d9d32799a81ac66cbf035f0"
+  | /bin/bash: gconftool-2: command not found
+  | Makefile:841: recipe for target 'install-data-local' failed
+  | make[3]: *** [install-data-local] Error 127
+
+Presumably this now happens more regularly with demise of the shared
+sysroot.  Adding gconf-native to the dependency list fixes it.
+
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
+
+diff --git a/meta-gnome/recipes-support/florence/florence_0.5.4.bb b/meta-gnome/recipes-support/florence/florence_0.5.4.bb
+index dfdb6bdb8c4d..8ce85c9670fe 100644
+--- a/meta-gnome/recipes-support/florence/florence_0.5.4.bb
++++ b/meta-gnome/recipes-support/florence/florence_0.5.4.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
  
- S = "${WORKDIR}/node-v${PV}"
+ PR = "r1"
  
+-DEPENDS = "gtk+ libxml2 libglade librsvg libxtst gconf cairo intltool-native gnome-doc-utils libnotify gstreamer"
++DEPENDS = "gtk+ libxml2 libglade librsvg libxtst gconf gconf-native cairo intltool-native gnome-doc-utils libnotify gstreamer"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/florence/florence/${PV}-gtk2/florence-${PV}.tar.bz2 \
+            file://fix-no-atspi-compile.patch"
 -- 
 2.7.4
 
