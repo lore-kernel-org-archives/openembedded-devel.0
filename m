@@ -1,37 +1,36 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 5FEC871D87
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 1391A71D42
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 18:07:18 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id z61so12067378wrc.3
+	Mon, 20 Feb 2017 18:07:19 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id v77so15738277wmv.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 10:07:19 -0800 (PST)
+	Mon, 20 Feb 2017 10:07:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=knA8vYDusFcV7cSq2Qaf+TVRtp+Q2+DjaILAMmc63TQ=;
-	b=GB7tw+BDRlL40jxIAmz4Aa4XWG8gUezRPO90Paf3buDDxta0KBgl8RbSlkNDlnN++b
-	TIXhPUPlZMbV4f7fBue8i3O0lw5hCr7SJFHgDkmnw7TMC6eVGBxzash00NAYnvWhmZP3
-	7pOLQH/vZYOnIzEltc7KQfYts9HtBOn37hmw3pR69pOK7QKi8IFkIHUJ0v49WjbsGGD+
-	/5Wggmemxt6MXGANmoUSTBwQL0H4Ok3TYQC8iKSWPYcIRI4zjQd7J+KAHGokP9RYRbRK
-	sW4i7S09cIXoYAEfjeaSwsdb9b90Kqeg77X2fMe1EigHKJ+NBG6Tc2Jgw+/RRIYDgouK
-	qYHQ==
+	bh=na77rYBPTWdAaymTd55foMVJrJc8O/ziss5Cmkm3tk4=;
+	b=n/2JVr38rVU282mFLsL1GC+nDiHzWGNtToNw011gG771gycW4pl7dgnVpUGAZu4jJe
+	bQ8iJWUnwGZLSPIEFT1fas/kwfVaur8EpofkG+vBRtzqMXuHN/3086aMLZKlSJeHdOoM
+	vuAmLe/1GUousCQmyCCGiz9RQLuXZxcuaVye2XSH71qxlcz1od5gHwxlHhOZazfsmES7
+	i603rDCjN9RoPN4FAVFV3Whdr69cjrIDghpuuzHyjhRK3KLSzFDnGtbpiz+2HtI3Qwaa
+	gkznWT1unHnc9oFciZ2PGr5D21bPGK/8M54Zt+3l/4GB/8FuHdBvySs9YZHd1ghG0Ybt
+	/66A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=knA8vYDusFcV7cSq2Qaf+TVRtp+Q2+DjaILAMmc63TQ=;
-	b=gPO4F98xu1Akptea4779b5Nwi/ChQBJa1ZfKQTlS66h50X38f+jvZkZ9yJsgyoR2OE
-	n3H/rpGprvEXjdXu2nfjVFkhEnaj518ad+zNWUQ6o99/KvlA4OQtyNzwFeK3JvCBbO71
-	ugwBfgFUKH7CQ9PMHnb1aJ4fR+fddOZ9RZHK/H87HwoWwORuVlGgdY8eJZqg6LPSdKfN
-	kU0hzrYubgZ84eh/qtg9jYPIRnwd13iucbV9iVHDk5EQG9AwLVl7tUffw70eBIxB69Jr
-	1hL/pdJqen0QWXtzgHzI8L6z4Z1HyjkzMv31718a0cAQLnNjKf50ep0aJ6fFrUUeIciI
-	/uqQ==
-X-Gm-Message-State: AMke39mImqvZGw12FgFgYcxQbkxTbhjbUwTwRSurjKhSMETkvdaM/UYazB0+PtQYAU59Kw==
-X-Received: by 10.223.181.129 with SMTP id c1mr1685933wre.147.1487614038900;
-	Mon, 20 Feb 2017 10:07:18 -0800 (PST)
+	bh=na77rYBPTWdAaymTd55foMVJrJc8O/ziss5Cmkm3tk4=;
+	b=cDrzJ+FkkI9bA6HqlA5IFD4lYOmU+yB71B630fkHn7twpFgXWp0GFgD0uFrXPyD4FM
+	kWq49px0atvJNSM0chyQQNAMB2GcgWo70hFhqvBfTHTkv/2v54tnKvZWEsS2Cp9nWI8G
+	GDLqOmJpbt22KKTCc800G72cu8c10GMm9kHP+17EoCQKhA3SNczmCaqKmnF+quxx32mx
+	ghdAnP4EK36IDx0eXC+P9R4O68oQQgsBOj2EDA1yB1E4qO/XsHSwm44AGWXiFLhN6dJb
+	9gn8Y2j+/Wf3hDVXyn1cRftRMKCineBamWLpx+JE84Dd8QmBGxdPu+ubGqWKp+udSZ83
+	uKXw==
+X-Gm-Message-State: AMke39kTOAv+z5XjJt3V2Po1w6QVovcGY+M+hLHSm6WDwA9VXems3ubbrps0Hy5M4YYbKg==
+X-Received: by 10.28.216.130 with SMTP id p124mr11367957wmg.58.1487614039755; 
+	Mon, 20 Feb 2017 10:07:19 -0800 (PST)
 Received: from PC192-168-2-116.speedport.ip
 	(p20030046E911DE631E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:46:e911:de63:1e6f:65ff:fe3e:7f61])
@@ -39,16 +38,16 @@ Received: from PC192-168-2-116.speedport.ip
 	96sm2863710wrb.14.2017.02.20.10.07.18
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 20 Feb 2017 10:07:18 -0800 (PST)
+	Mon, 20 Feb 2017 10:07:19 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Feb 2017 19:06:19 +0100
-Message-Id: <20170220180700.29836-4-schnitzeltony@googlemail.com>
+Date: Mon, 20 Feb 2017 19:06:20 +0100
+Message-Id: <20170220180700.29836-5-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.3
 In-Reply-To: <20170220180700.29836-1-schnitzeltony@googlemail.com>
 References: <20170220180700.29836-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 03/44] libidl: unblacklist - libidl-native is back
+Subject: [PATCH 04/44] orbit2: unblacklist - libidl-native is back
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,25 +60,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Feb 2017 18:07:19 -0000
+X-List-Received-Date: Mon, 20 Feb 2017 18:07:20 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-gnome/recipes-gnome/libidl/libidl_0.8.14.bb | 2 --
+ meta-gnome/recipes-gnome/orbit2/orbit2_2.14.19.bb | 2 --
  1 file changed, 2 deletions(-)
 
-diff --git a/meta-gnome/recipes-gnome/libidl/libidl_0.8.14.bb b/meta-gnome/recipes-gnome/libidl/libidl_0.8.14.bb
-index 6a3ac55..86dfcf2 100644
---- a/meta-gnome/recipes-gnome/libidl/libidl_0.8.14.bb
-+++ b/meta-gnome/recipes-gnome/libidl/libidl_0.8.14.bb
-@@ -11,5 +11,3 @@ inherit autotools pkgconfig binconfig
+diff --git a/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.19.bb b/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.19.bb
+index 414bcf1..f9af2ee 100644
+--- a/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.19.bb
++++ b/meta-gnome/recipes-gnome/orbit2/orbit2_2.14.19.bb
+@@ -39,5 +39,3 @@ inherit autotools pkgconfig gtk-doc
  
- SRC_URI[md5sum] = "bb8e10a218fac793a52d404d14adedcb"
- SRC_URI[sha256sum] = "c5d24d8c096546353fbc7cedf208392d5a02afe9d56ebcc1cccb258d7c4d2220"
+ EXTRA_OEMAKE = "IDL_COMPILER='${STAGING_BINDIR_NATIVE}/orbit-idl-2'"
+ EXTRA_OEMAKE_class-native = " "
 -
--PNBLACKLIST[libidl] ?= "Depends on blacklisted libidl-native"
+-PNBLACKLIST[orbit2] ?= "Depends on blacklisted libidl-native"
 -- 
 2.9.3
 
