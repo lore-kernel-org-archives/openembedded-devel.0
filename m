@@ -1,25 +1,36 @@
-Return-Path: <Paul.Gortmaker@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 709D871D99
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 02D4F71D99
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 18:25:35 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v1KIPYDW006449
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 20 Feb 2017 10:25:35 -0800 (PST)
-Received: from yow-cube1.wrs.com (128.224.56.98) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 20 Feb 2017 10:25:34 -0800
-From: Paul Gortmaker <paul.gortmaker@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 20 Feb 2017 13:24:52 -0500
-Message-ID: <1487615092-14989-1-git-send-email-paul.gortmaker@windriver.com>
+	Mon, 20 Feb 2017 18:26:21 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id x35so4293551qtc.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Feb 2017 10:26:22 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=BKCjNCycTtZ4DIuWrNs23tbAXZuYKuxDZoCqxg+Y5Sc=;
+	b=iZgrbsl1eE0GpzBWRFnrZqVmLVu+SwOc6bggUUZ3wXuUf9+0AiiMlMNtMSOYoyVPzx
+	MGeDOEexKK2oSiHnP+aaiyM84H05bLJqBA5Zkt/bgieKWaLMySiS2Y+1/C9lgFA5wWTE
+	6eE5jlDof4jD0cl+NuaambhYNxrFgZ3XQ5S4vMtJ3auJanzZwgXUurrP2PywNFEmyYYN
+	hu+I5SWHVafal2Fmc4QBU+gT2imwmLTKjqhI3KcfOl0YJU0ilKMYoAptRLXHmwyD00Mo
+	eHsEOYag4xqRC7+XMEUCY22jXWkycPqt5RQySOgqs00rys4+DGZpgHIyMqhr2zWVk09M
+	dNLg==
+X-Gm-Message-State: AMke39kNsA96ge2c4QOO0DcUaQjgZoux3YMsxBVVtXKnp9I73RzTxPY9QESr1Ox4wAT2Ow==
+X-Received: by 10.200.34.206 with SMTP id g14mr9451348qta.43.1487615181942;
+	Mon, 20 Feb 2017 10:26:21 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
+	[67.85.97.224])
+	by smtp.gmail.com with ESMTPSA id 45sm7165735qts.40.2017.02.20.10.26.21
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 20 Feb 2017 10:26:21 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 20 Feb 2017 13:26:08 -0500
+Message-Id: <1487615168-3295-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <CA+chaQdDMYNGa7KC2-Rgoz-+DXh0v7cfUZRx5W1FcP4rcSdbFQ@mail.gmail.com>
-References: <CA+chaQdDMYNGa7KC2-Rgoz-+DXh0v7cfUZRx5W1FcP4rcSdbFQ@mail.gmail.com>
-MIME-Version: 1.0
-Subject: [PATCH] farsight: fix implicit pkgconfig dependency causing configure fail
+Subject: [meta-oe][PATCH] python-simplejson: update to version 3.10.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,45 +43,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Feb 2017 18:25:37 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 20 Feb 2017 18:26:30 -0000
 
-In the config log we see:
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../{python-simplejson_3.8.2.bb => python-simplejson_3.10.0.bb}    | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-devtools/python/{python-simplejson_3.8.2.bb => python-simplejson_3.10.0.bb} (64%)
 
-  configure:12277: checking whether to build static libraries
-  configure:12281: result: yes
-  configure:12419: checking for x86_64-overc-linux-pkg-config
-  configure:12452: result: no
-  configure:12462: checking for pkg-config
-  configure:12495: result: no
-  configure:12801: Using Farsight2 source release as package name
-  configure:12825: Using Unknown package origin as package origin
-  configure:12879: Using /usr/libexec/gst-install-plugins-helper as plugin install helper
-  configure:12953: checking for NICE
-  configure:13022: error: Need libnice >= 0.0.9
-
-While it libnice that fails configure, it is the absence of pkg-config
-several lines above that causes the failure, as libnice is in the sysroot.
-
-For most build hosts, you'll have to remove the default binary that
-lives in /usr/bin/pkg-config in order to see this failure.
-
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
-
-diff --git a/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb b/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
-index 2989850e9875..7d88b5405e16 100644
---- a/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
-+++ b/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
-@@ -9,7 +9,7 @@ PR = "r3"
+diff --git a/meta-oe/recipes-devtools/python/python-simplejson_3.8.2.bb b/meta-oe/recipes-devtools/python/python-simplejson_3.10.0.bb
+similarity index 64%
+rename from meta-oe/recipes-devtools/python/python-simplejson_3.8.2.bb
+rename to meta-oe/recipes-devtools/python/python-simplejson_3.10.0.bb
+index 0c9112e..75ec2dc 100644
+--- a/meta-oe/recipes-devtools/python/python-simplejson_3.8.2.bb
++++ b/meta-oe/recipes-devtools/python/python-simplejson_3.10.0.bb
+@@ -4,13 +4,12 @@ SECTION = "devel/python"
  
- DEPENDS = "libnice glib-2.0 libxml2 zlib dbus gstreamer gst-plugins-base"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c6338d7abd321c0b50a2a547e441c52e"
+-PR = "r1"
  
--inherit autotools
-+inherit autotools pkgconfig
+ SRCNAME = "simplejson"
  
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[gupnp] = "--enable-gupnp,--disable-gupnp,gupnp-igd"
+-SRC_URI = "http://cheeseshop.python.org/packages/source/s/simplejson/${SRCNAME}-${PV}.tar.gz"
+-SRC_URI[md5sum] = "53b1371bbf883b129a12d594a97e9a18"
+-SRC_URI[sha256sum] = "d58439c548433adcda98e695be53e526ba940a4b9c44fb9a05d92cd495cdd47f"
++SRC_URI = "https://files.pythonhosted.org/packages/source/s/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
++SRC_URI[md5sum] = "426a9631d22851a7a970b1a677368b15"
++SRC_URI[sha256sum] = "953be622e88323c6f43fad61ffd05bebe73b9fd9863a46d68b052d2aa7d71ce2"
+ 
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
+ 
 -- 
 2.7.4
 
