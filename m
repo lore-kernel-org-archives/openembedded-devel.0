@@ -1,54 +1,53 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 66DEB7723D
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 118CD77247
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 18:07:47 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id s27so3690409wrb.0
+	Mon, 20 Feb 2017 18:07:48 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id u63so15684390wmu.2
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 20 Feb 2017 10:07:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=2I6JBGL/i64Dh0uOWnWgi5aZMS2M1pYwmEg8T4eOcxU=;
-	b=gjRRsFlfl5sMDP5FGBmOaQ6PkJZ2nxcCDSZ9F4+t069GRV7jD99W5nH5OG9jPydnVd
-	7q0OOvAFTLlewNtlz3ujKSAe62UaLfZTlb7yXTnGXmxYwMWK1RE8yYvukPnAfWe5kQjb
-	sqwLY5RnI+ZOGQMdmd2MDacS3aESu+qpmhf3dPnAIxPjOvpq1mrqR6K0B6Q3DCPzUsgR
-	CCN/8eyUpsaraMoxzJYC3Pkg4/psNJBoRd7l7hBfRTT6FuFJhYKJxmi0NN/JyATD+kkg
-	joVGpl66QTxbKwRS3CU2B/A2j6yrnhdBDdqZyK5AxKxgcgf0jC1eRMZFlLGK2Lf+Se1N
-	Vmkg==
+	bh=Vsy8eKgCV1L6xr1ghgEEloygq0uZsnX+RgMqgV0rjkk=;
+	b=CDUfMGV/czIEhQff9RVs1XZ7oorow2QgpWJvLNaaHbniZiRciL4WBgSDd5MQxZD2Rd
+	T6z/n2nFwHXhCtLuq9SbHv3SF7Xntm5Ipc5B+xw8iYNVswHPrCVes2YaqceBRqyWr7jW
+	qvbZCAfLGJi85AEUbU8vyWXLw9ucDYYaPDwnXmKrLECyUmLPHEEN3JD91AeSMCOo9q9H
+	McWn24crQqfVw6t4hqoHyZxKCO5XbixrHTsC6VqEK4Aieejf3sSS2Wf+0YIPrk7FRq75
+	hp4nP2EpwZthQVxYCgicBb5cvJDeSeRoz6wZz2E3YwO+/2CWrO+hzYyRYs+h+MIXdjAj
+	dKiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=2I6JBGL/i64Dh0uOWnWgi5aZMS2M1pYwmEg8T4eOcxU=;
-	b=GuxbwzqACEJxApMQTzqcQbyJg7bcqQ0KudpLtxRHV+uSgHszZHJR+VjGPtXr9UAoyk
-	24I+X45uYGuJv4F2pQ4VeAnhQOcjfdftLnYImFavTu8B3zRq8GVAOH87KfRaeou6q9+0
-	bB70W2BF7LqmDI4Og5G0J3RfbvpFPkXMdZMxEwAYi6tlhEtdFRFn1pf4kPLZsGHd5Zv5
-	dGLG4ngBKxaswF9q7GpuS/UvCaf6eRGeNFaENfJnjB/PtxTGj7V6Huw9fN319EgXfkLY
-	msk/WVp2Lb9f1VY74l6ewkRvN3B0qlxY8PYJ49vVo5rbNnBUN7wFTFQ4Le/vbAlPAFof
-	2/XQ==
-X-Gm-Message-State: AMke39kKLn/qL2RoTbFP/OXa53ULB22O50Q7VJSFwjXVheUwI2jgxfnjfgR/snqY1Y1HVg==
-X-Received: by 10.223.165.17 with SMTP id i17mr19045730wrb.62.1487614067289;
-	Mon, 20 Feb 2017 10:07:47 -0800 (PST)
+	bh=Vsy8eKgCV1L6xr1ghgEEloygq0uZsnX+RgMqgV0rjkk=;
+	b=EzTypQ1ogTw24t2aKeQ/cS+k+rhoNBVnMoCANYIXPKRN1HIufWlF9FPNOG0ZyKTzqL
+	ZDYjluHQ5dObqj18eCaRjFGdYP1RiMTTKslggSI5e3+v1zgcIonqpOEv1Yxc4NBz1Vx6
+	R+cjiZ6Th0OiFNjZnIitepT1xNSeg5/QaxeFKhI5/P9VpIlPPzi7I24lRPoncAcyx2em
+	PPL4XmBELGHyK+X8N3qz/DebZ5SDVsL6vkkxsI1jKd/hdGOa6AJlYReFm+HtLYRpGZQ6
+	r5vSrrULX1eobhNegCQAsxvM+XMOnFXl2o1iGxnXAeg2k2RP6/dbHHBanOMSyLBhg9G8
+	9Weg==
+X-Gm-Message-State: AMke39lxMTVMn8/lQMye21eqtYNdPX3dfKn0vOdz97bHiGSFSZCcEzFnush+1+rLBre2vA==
+X-Received: by 10.28.88.6 with SMTP id m6mr11764044wmb.4.1487614068216;
+	Mon, 20 Feb 2017 10:07:48 -0800 (PST)
 Received: from PC192-168-2-116.speedport.ip
 	(p20030046E911DE631E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:46:e911:de63:1e6f:65ff:fe3e:7f61])
 	by smtp.googlemail.com with ESMTPSA id
-	96sm2863710wrb.14.2017.02.20.10.07.46
+	96sm2863710wrb.14.2017.02.20.10.07.47
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 20 Feb 2017 10:07:46 -0800 (PST)
+	Mon, 20 Feb 2017 10:07:47 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Feb 2017 19:06:48 +0100
-Message-Id: <20170220180700.29836-33-schnitzeltony@googlemail.com>
+Date: Mon, 20 Feb 2017 19:06:49 +0100
+Message-Id: <20170220180700.29836-34-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.3
 In-Reply-To: <20170220180700.29836-1-schnitzeltony@googlemail.com>
 References: <20170220180700.29836-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 32/44] gst-fluendo-mp3: unblacklist - gstreamer is back
+Subject: [PATCH 33/44] gst-fluendo-mpegdemux: unblacklist - gstreamer is back
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,19 +66,19 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../recipes-multimedia/gstreamer-0.10/gst-fluendo-mp3_0.10.31.bb        | 2 --
+ .../recipes-multimedia/gstreamer-0.10/gst-fluendo-mpegdemux_0.10.85.bb  | 2 --
  1 file changed, 2 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-fluendo-mp3_0.10.31.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-fluendo-mp3_0.10.31.bb
-index e7c7c21..1e2cd2a 100644
---- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-fluendo-mp3_0.10.31.bb
-+++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-fluendo-mp3_0.10.31.bb
-@@ -12,5 +12,3 @@ acpaths = "-I ${S}/common/m4 -I ${S}/m4"
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-fluendo-mpegdemux_0.10.85.bb b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-fluendo-mpegdemux_0.10.85.bb
+index 9787dba..7bba41a 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-fluendo-mpegdemux_0.10.85.bb
++++ b/meta-multimedia/recipes-multimedia/gstreamer-0.10/gst-fluendo-mpegdemux_0.10.85.bb
+@@ -10,5 +10,3 @@ acpaths = "-I ${S}/common/m4 -I ${S}/m4"
  
- SRC_URI[md5sum] = "adf0390f3416bb72f91c358528be0c38"
- SRC_URI[sha256sum] = "dae0d0559a4e159c0dd92b7e18de059a5783f8d038904c7de4ca6393f7d55c7d"
+ SRC_URI[md5sum] = "7c4fb993f80b9ae631b11897733f0970"
+ SRC_URI[sha256sum] = "df04c91cc8e5d9a892c2492ed989974b4547beaa2a3647649e85113317897424"
 -
--PNBLACKLIST[gst-fluendo-mp3] ?= "Depends on blacklisted gstreamer"
+-PNBLACKLIST[gst-fluendo-mpegdemux] ?= "Depends on blacklisted gstreamer"
 -- 
 2.9.3
 
