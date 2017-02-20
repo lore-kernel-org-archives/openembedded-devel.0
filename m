@@ -1,33 +1,30 @@
-Return-Path: <daniel@zonque.org>
-Received: from mail.zonque.de (svenfoo.org [82.94.215.22])
-	by mail.openembedded.org (Postfix) with ESMTP id 015F371C54
+Return-Path: <rpjday@crashcourse.ca>
+Received: from smtp486.redcondor.net (smtp486.redcondor.net [208.80.204.86])
+	by mail.openembedded.org (Postfix) with ESMTP id 6889871C54
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 11:45:34 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.zonque.de (Postfix) with ESMTP id 114E4C00BC;
-	Mon, 20 Feb 2017 12:45:35 +0100 (CET)
-Received: from mail.zonque.de ([127.0.0.1])
-	by localhost (rambrand.bugwerft.de [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id ng9kN4srLDUv; Mon, 20 Feb 2017 12:45:34 +0100 (CET)
-Received: from [192.168.10.79] (pd95c9a6f.dip0.t-ipconnect.de [217.92.154.111])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.zonque.de (Postfix) with ESMTPSA id A3C65C0019;
-	Mon, 20 Feb 2017 12:45:34 +0100 (CET)
-Reply-To: openembedded-devel@lists.openembedded.org
-References: <23527d9e-d36f-e9ef-1742-0510074920fc@zonque.org>
-	<7007b6f2-ef90-886b-699c-a69c47f0668a@zonque.org>
-To: openembedded-devel@lists.openembedded.org
-From: Daniel Mack <daniel@zonque.org>
-Message-ID: <13fc3dcc-fc11-e154-c241-7c2a0f602f50@zonque.org>
-Date: Mon, 20 Feb 2017 12:45:28 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.7.0
+	Mon, 20 Feb 2017 11:48:00 +0000 (UTC)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
+	by smtp486.redcondor.net ({6695537a-536a-45f9-a249-877c85428649})
+	via TCP (outbound) with ESMTPS id 20170220114758887_0486
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Feb 2017 11:47:58 +0000
+X-RC-FROM: <rpjday@crashcourse.ca>
+X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
+Received: from [174.118.92.171] (port=53906 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1cfmRd-00028E-A1 for openembedded-devel@lists.openembedded.org;
+	Mon, 20 Feb 2017 06:47:53 -0500
+Date: Mon, 20 Feb 2017 06:47:51 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost.localdomain
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.20.1702200641270.22953@localhost.localdomain>
+User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
 MIME-Version: 1.0
-In-Reply-To: <7007b6f2-ef90-886b-699c-a69c47f0668a@zonque.org>
-Cc: frieder.schrempf@exceet.de
-Subject: Re: qt5: qtbase fails to populate SDK
+X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
+Subject: "Can't install krb5-dev-1.13.6-r0@ppc7400: no package provides krb5 = 1.13.6-r0"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,35 +37,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Feb 2017 11:45:35 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-On 02/16/2017 05:02 PM, Daniel Mack wrote:
-> On 02/16/2017 08:25 AM, Daniel Mack wrote:
->> I'm using poky from the morty branch and meta-qt5 layer from master-next
->> for Qt5.8 support. While the image creation works fine, 'bitbake myimage
->> -c populate_sdk' fails with
->>
->> error: qtbase-mkspecs-5.8.0+git0+49dc9aa409-r0 conflicts with /usr/bin/perl
->>
->> This is also the case after build/tmp was wiped out.
-> 
-> Ah, perfect timing - the patch Frieder just posted seem to fix this issue :)
-
-Hmm, no, I spoke too soon. In my tests, I disabled qtwebkit in
-'myimage', but after I switched it back on, the issue reappeared.
-
-I have a patch that fixes the /usr/bin/perl in
-qt5/mkspecs/features/uikit/devices.pl, but with that applied, I'm
-getting errors like this for hundreds of packages:
-
-  error: package acl-2.2.52-r0.aarch64 is already installed
-
-With only qtbase, but not qtwebkit, this doesn't happen. Any hint where
-to start digging?
+X-List-Received-Date: Mon, 20 Feb 2017 11:48:00 -0000
+Content-Type: text/plain; charset=US-ASCII
 
 
-Thanks,
-Daniel
+  ok, i hope this issue is not trivially simple. i'm building
+core-image-minimal for qemuppc, and tossing in a bunch of other
+recipes, everything builds until:
+
+///// start /////
+ERROR: core-image-minimal-1.0-r0 do_rootfs: Unable to install
+packages. Command
+'/home/rpjday/oe/builds/qemuppc_oe_small/tmp/work/qemuppc-poky-linux/core-image-minimal/1.0-r0/recipe-sysroot-native/usr/bin/smart
+--log-level=info
+--data-dir=/home/rpjday/oe/builds/qemuppc_oe_small/tmp/work/qemuppc-poky-linux/core-image-minimal/1.0-r0/rootfs/var/lib/smart
+install -y packagegroup-core-boot@qemuppc rpm@ppc7400
+packagegroup-wrl-regular-recipes@all smartpm@ppc7400
+run-postinsts@all' returned 1:
+Loading cache...
+Updating cache...
+######################################## [100%]
+
+Computing transaction...error: Can't install
+krb5-dev-1.13.6-r0@ppc7400: no package provides krb5 = 1.13.6-r0
+
+
+ERROR: core-image-minimal-1.0-r0 do_rootfs: Function failed: do_rootfs
+ERROR: Logfile of failure stored in:
+/home/rpjday/oe/builds/qemuppc_oe_small/tmp/work/qemuppc-poky-linux/core-image-minimal/1.0-r0/temp/log.do_rootfs.22573
+ERROR: Task
+(/home/rpjday/oe/dist/layers/poky/meta/recipes-core/images/core-image-minimal.bb:do_rootfs)
+failed with exit code '1'
+///// end /////
+
+  a quick check shows the following rpms:
+
+$ find tmp/deploy/rpm/ -name "*krb*"
+tmp/deploy/rpm/qemuppc/kernel-module-rpcsec-gss-krb5-4.8.18-yocto-standard-4.8.18+git0+ea8a679c95_d2c3ea488f-r0.qemuppc.rpm
+tmp/deploy/rpm/ppc7400/libgssapi-krb5-2-1.13.6-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/krb5-kdc-1.13.6-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/krb5-doc-1.13.6-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/krb5-dev-1.13.6-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/krb5-admin-server-1.13.6-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/libkrb5samba-samba4-4.4.5-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/krb5-gss-samples-1.13.6-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/libkrb5-3-1.13.6-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/krb5-locale-en-us-1.13.6-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/krb5-otp-1.13.6-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/libndr-krb5pac0-4.4.5-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/krb5-user-1.13.6-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/libauthkrb5-samba4-4.4.5-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/krb5-dbg-1.13.6-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/krb5-kpropd-1.13.6-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/libkrb5support0-1.13.6-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/krb5-pkinit-1.13.6-r0.ppc7400.rpm
+tmp/deploy/rpm/ppc7400/krb5-k5tls-1.13.6-r0.ppc7400.rpm
+$
+
+and, sure enough, there's no krb5 rpm. why not? if i check the recipe,
+i see:
+
+  PACKAGES =+ "${PN}-admin-server \
+             ${PN}-gss-samples \
+             ${PN}-k5tls \
+             ${PN}-kdc \
+             ${PN}-kdc-ldap \
+             ${PN}-kpropd \
+             ${PN}-otp \
+             ${PN}-pkinit \
+             ${PN}-user \
+             libgssapi-krb5 \
+             libgssrpc \
+             libk5crypto \
+             libkadm5clnt-mit \
+             libkadm5srv-mit \
+             libkdb5 \
+             libkrad \
+             libkrb5 \
+             libkrb5support \
+             libverto"
+
+  FILES_${PN} = ""
+
+so ... while the recipe introduces a pile of new output packages, it
+empties the base "krb5" package. does that mean it needs to be
+identified as allowing empty just to exist?
+
+  i've built a lot of qemu/core-image-minimal images, and this is the
+first time i've seen this krb5-related issue.
+
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
+
 
