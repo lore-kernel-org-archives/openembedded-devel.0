@@ -1,53 +1,53 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 0AD337731C
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id C3B7771E39
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 20 Feb 2017 18:07:57 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id v77so15741504wmv.0
+Received: by mail-wm0-f65.google.com with SMTP id r18so15746282wmd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 10:07:57 -0800 (PST)
+	Mon, 20 Feb 2017 10:07:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=oVUDkj4EGYy02VMNba9UuYeVZ2G5dlR89lRYAjpX088=;
-	b=nlnbc2TaNnjD8zoDRmgZijBXcOKEDINc76vrB5shPGMUGBxpEdDJarTmIjl+oM95dk
-	muLr1RV6S1BN2G7PbMixwCqoF4AFNVjffuUtyAxnliVcQjqkev+zEXt1+FGVLafqr7mO
-	p1CcuJGT7gx+ZcBZvpB6SEQv1ArBuFT1wv76YDk2KhmNG6RJOYpNzsS4s5AEwT5LHRMU
-	0aaRSmELK72GHMe2+xrMWOKSvkzGvnYDlPhEQ5aJHFw8KYq27F5wsqGfVvrF4x6lj4d9
-	jmbQ6oWIbIOVAR9xehwBEXnmBr+ze+vy3XgpkZOur/8yiUvQeixoeZGM3qi8n1lN6Umv
-	ApEg==
+	bh=seW23slcnpsHdqeB09WAM6qWlTgXaXuOsGND/jdWl4A=;
+	b=jlw0nFiFH6yKEDBmLFqmxX02w6kz+s8qtSibQcOii2hZNoZs6kRg3vx9FwgJfU1ezS
+	fEYeayy9BhBQX60FbkDChxg86dLLLpq5J0kmqq3ntT0ppnez3CGJ8eDmsbO2lKMu24kM
+	fltB0cX+qlKuF9tkzayYfvkk3yuApGTI26ZnuxK9wHpE0pGs4vWRDadqMOm2sGLg2wPY
+	YRAYfhjZsx1Ru8k/QkCH/rm0ehsVEBdZzWF4cYbojStKn7smzAyTtcqsrs/eJsaEJSd1
+	CviLdVG9zEVbER7jOVd5V6sEZKxm6V31px3SMSRmhmrleishu2zbKqoCf+fs165GnwBn
+	N8IQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=oVUDkj4EGYy02VMNba9UuYeVZ2G5dlR89lRYAjpX088=;
-	b=CN7PfL/WQWDFMwjSzJmkhRUgoJ3na7qXb17BVrqCU2GiMqF/+ee24O4okd/uICQdn1
-	I8yaLrlDYT/kElTAb4EDeZBPuuRiV8K9L7UQ7sW3DWYf7cUtFzQVKYlJPlhGPtRL2gqF
-	UdtFWpEcrI7rwgr2qxdtCXFdC7pku/Wa3co/BKXolsVEUl764CxqCZ7COk9oEB7aTujN
-	YY0jWAG4v7Dr1CuOs1nhpfCGQOnJ5IRXTZi34B9lZNjN+eiDD7RbWR3RtTw6pzGTFGw3
-	4kZOu0iI5XUP4unifRL9IlW87OXML42UA0DSJBi5Djhck5eFeTkPj1mQE6Sk0RdVw7v6
-	vcoQ==
-X-Gm-Message-State: AMke39n21KZ/nO7d39gqApZyTV8pGKmQ1PnZrY5i7BuqOr8iDmz1RoHECn/h73npBNPMkg==
-X-Received: by 10.28.181.145 with SMTP id e139mr11497109wmf.103.1487614077173; 
+	bh=seW23slcnpsHdqeB09WAM6qWlTgXaXuOsGND/jdWl4A=;
+	b=lzX+2hiUHgy2BQtdAXNu9V3nXVixcQMESzO+HOCek7Zl52Fp0BzM4klEEYvxUUHb5+
+	bzUdzbIav2dYpqGgtGZdyGIZza0W/0bNvWbqDNvQnzXuXzp0es86ku0OTPs+MfGYlXO1
+	rcAvhhN8xvXy77bVKc07q8T+usckJHMBmeA49Yk8UeUEFbKT9fnVVLtCVn63U8NyYkGg
+	zx2bfMCIH5mf6X0ihm+xT+bjzPBxSPTChqx4f8AVMpuhInfH6jaFSvbR1StB0JvSjwOQ
+	yGpExtPpT3Du6RLm4wVl94ji+J7Nb6SEePYMcFGAl7fHPbReqk4YB8gnZLpJ6g7bo31w
+	3i9w==
+X-Gm-Message-State: AMke39kGtRQen5gr7vpNZgtQpPrddL13y9zWFu+d5c6JrZqOkmiIdz/4PS9Mv2am07wpRg==
+X-Received: by 10.28.71.220 with SMTP id m89mr18983520wmi.120.1487614077939;
 	Mon, 20 Feb 2017 10:07:57 -0800 (PST)
 Received: from PC192-168-2-116.speedport.ip
 	(p20030046E911DE631E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:46:e911:de63:1e6f:65ff:fe3e:7f61])
 	by smtp.googlemail.com with ESMTPSA id
-	96sm2863710wrb.14.2017.02.20.10.07.56
+	96sm2863710wrb.14.2017.02.20.10.07.57
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 20 Feb 2017 10:07:56 -0800 (PST)
+	Mon, 20 Feb 2017 10:07:57 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Feb 2017 19:06:59 +0100
-Message-Id: <20170220180700.29836-44-schnitzeltony@googlemail.com>
+Date: Mon, 20 Feb 2017 19:07:00 +0100
+Message-Id: <20170220180700.29836-45-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.3
 In-Reply-To: <20170220180700.29836-1-schnitzeltony@googlemail.com>
 References: <20170220180700.29836-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 43/44] packagegroup-xfce-multimedia: unblacklist - dependencies are back
+Subject: [PATCH 44/44] packagegroup-xfce-extended: unblacklist - all dependencies are back
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,23 +66,23 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../packagegroups/packagegroup-xfce-multimedia.bb                   | 6 ------
+ meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb | 6 ------
  1 file changed, 6 deletions(-)
 
-diff --git a/meta-xfce/recipes-multimedia/packagegroups/packagegroup-xfce-multimedia.bb b/meta-xfce/recipes-multimedia/packagegroups/packagegroup-xfce-multimedia.bb
-index 9377798..72a96f3 100644
---- a/meta-xfce/recipes-multimedia/packagegroups/packagegroup-xfce-multimedia.bb
-+++ b/meta-xfce/recipes-multimedia/packagegroups/packagegroup-xfce-multimedia.bb
-@@ -9,9 +9,3 @@ RDEPENDS_${PN} = " \
-     xfmpc \
-     xfce4-mpc-plugin \
+diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
+index 9aaa2f3..c07188f 100644
+--- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
++++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
+@@ -66,9 +66,3 @@ RRECOMMENDS_${PN} = " \
+     xfce4-taskmanager \
+     gigolo \
  "
 -
--PNBLACKLIST[packagegroup-xfce-multimedia] ?= "Runtime depends on blacklisted xfce4-mpc-plugin"
+-PNBLACKLIST[packagegroup-xfce-extended] ?= "Runtime depends on blacklisted xfce4-mixer"
 -
--PNBLACKLIST[packagegroup-xfce-multimedia] ?= "Runtime depends on blacklisted packagegroup-xfce-multimedia"
+-PNBLACKLIST[packagegroup-xfce-extended] ?= "Runtime depends on blacklisted xfce4-verve-plugin"
 -
--PNBLACKLIST[packagegroup-xfce-multimedia] ?= "Runtime depends on blacklisted xfmpc"
+-PNBLACKLIST[packagegroup-xfce-extended] ?= "Runtime depends on blacklisted ristretto"
 -- 
 2.9.3
 
