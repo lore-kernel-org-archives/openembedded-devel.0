@@ -1,53 +1,25 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id C3B7771E39
+Return-Path: <Paul.Gortmaker@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 709D871D99
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 18:07:57 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id r18so15746282wmd.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 10:07:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=seW23slcnpsHdqeB09WAM6qWlTgXaXuOsGND/jdWl4A=;
-	b=jlw0nFiFH6yKEDBmLFqmxX02w6kz+s8qtSibQcOii2hZNoZs6kRg3vx9FwgJfU1ezS
-	fEYeayy9BhBQX60FbkDChxg86dLLLpq5J0kmqq3ntT0ppnez3CGJ8eDmsbO2lKMu24kM
-	fltB0cX+qlKuF9tkzayYfvkk3yuApGTI26ZnuxK9wHpE0pGs4vWRDadqMOm2sGLg2wPY
-	YRAYfhjZsx1Ru8k/QkCH/rm0ehsVEBdZzWF4cYbojStKn7smzAyTtcqsrs/eJsaEJSd1
-	CviLdVG9zEVbER7jOVd5V6sEZKxm6V31px3SMSRmhmrleishu2zbKqoCf+fs165GnwBn
-	N8IQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=seW23slcnpsHdqeB09WAM6qWlTgXaXuOsGND/jdWl4A=;
-	b=lzX+2hiUHgy2BQtdAXNu9V3nXVixcQMESzO+HOCek7Zl52Fp0BzM4klEEYvxUUHb5+
-	bzUdzbIav2dYpqGgtGZdyGIZza0W/0bNvWbqDNvQnzXuXzp0es86ku0OTPs+MfGYlXO1
-	rcAvhhN8xvXy77bVKc07q8T+usckJHMBmeA49Yk8UeUEFbKT9fnVVLtCVn63U8NyYkGg
-	zx2bfMCIH5mf6X0ihm+xT+bjzPBxSPTChqx4f8AVMpuhInfH6jaFSvbR1StB0JvSjwOQ
-	yGpExtPpT3Du6RLm4wVl94ji+J7Nb6SEePYMcFGAl7fHPbReqk4YB8gnZLpJ6g7bo31w
-	3i9w==
-X-Gm-Message-State: AMke39kGtRQen5gr7vpNZgtQpPrddL13y9zWFu+d5c6JrZqOkmiIdz/4PS9Mv2am07wpRg==
-X-Received: by 10.28.71.220 with SMTP id m89mr18983520wmi.120.1487614077939;
-	Mon, 20 Feb 2017 10:07:57 -0800 (PST)
-Received: from PC192-168-2-116.speedport.ip
-	(p20030046E911DE631E6F65FFFE3E7F61.dip0.t-ipconnect.de.
-	[2003:46:e911:de63:1e6f:65ff:fe3e:7f61])
-	by smtp.googlemail.com with ESMTPSA id
-	96sm2863710wrb.14.2017.02.20.10.07.57
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 20 Feb 2017 10:07:57 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Feb 2017 19:07:00 +0100
-Message-Id: <20170220180700.29836-45-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.9.3
-In-Reply-To: <20170220180700.29836-1-schnitzeltony@googlemail.com>
-References: <20170220180700.29836-1-schnitzeltony@googlemail.com>
+	Mon, 20 Feb 2017 18:25:35 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v1KIPYDW006449
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 20 Feb 2017 10:25:35 -0800 (PST)
+Received: from yow-cube1.wrs.com (128.224.56.98) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 20 Feb 2017 10:25:34 -0800
+From: Paul Gortmaker <paul.gortmaker@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 20 Feb 2017 13:24:52 -0500
+Message-ID: <1487615092-14989-1-git-send-email-paul.gortmaker@windriver.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <CA+chaQdDMYNGa7KC2-Rgoz-+DXh0v7cfUZRx5W1FcP4rcSdbFQ@mail.gmail.com>
+References: <CA+chaQdDMYNGa7KC2-Rgoz-+DXh0v7cfUZRx5W1FcP4rcSdbFQ@mail.gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 44/44] packagegroup-xfce-extended: unblacklist - all dependencies are back
+Subject: [PATCH] farsight: fix implicit pkgconfig dependency causing configure fail
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,30 +32,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Feb 2017 18:07:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 20 Feb 2017 18:25:37 -0000
+Content-Type: text/plain
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb | 6 ------
- 1 file changed, 6 deletions(-)
+In the config log we see:
 
-diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-index 9aaa2f3..c07188f 100644
---- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-+++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
-@@ -66,9 +66,3 @@ RRECOMMENDS_${PN} = " \
-     xfce4-taskmanager \
-     gigolo \
- "
--
--PNBLACKLIST[packagegroup-xfce-extended] ?= "Runtime depends on blacklisted xfce4-mixer"
--
--PNBLACKLIST[packagegroup-xfce-extended] ?= "Runtime depends on blacklisted xfce4-verve-plugin"
--
--PNBLACKLIST[packagegroup-xfce-extended] ?= "Runtime depends on blacklisted ristretto"
+  configure:12277: checking whether to build static libraries
+  configure:12281: result: yes
+  configure:12419: checking for x86_64-overc-linux-pkg-config
+  configure:12452: result: no
+  configure:12462: checking for pkg-config
+  configure:12495: result: no
+  configure:12801: Using Farsight2 source release as package name
+  configure:12825: Using Unknown package origin as package origin
+  configure:12879: Using /usr/libexec/gst-install-plugins-helper as plugin install helper
+  configure:12953: checking for NICE
+  configure:13022: error: Need libnice >= 0.0.9
+
+While it libnice that fails configure, it is the absence of pkg-config
+several lines above that causes the failure, as libnice is in the sysroot.
+
+For most build hosts, you'll have to remove the default binary that
+lives in /usr/bin/pkg-config in order to see this failure.
+
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
+
+diff --git a/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb b/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
+index 2989850e9875..7d88b5405e16 100644
+--- a/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
++++ b/meta-oe/recipes-support/farsight/farsight2_0.0.22.bb
+@@ -9,7 +9,7 @@ PR = "r3"
+ 
+ DEPENDS = "libnice glib-2.0 libxml2 zlib dbus gstreamer gst-plugins-base"
+ 
+-inherit autotools
++inherit autotools pkgconfig
+ 
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[gupnp] = "--enable-gupnp,--disable-gupnp,gupnp-igd"
 -- 
-2.9.3
+2.7.4
 
 
