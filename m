@@ -1,53 +1,53 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id E55B573173
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id D586171D87
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 18:07:39 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id u63so15683724wmu.2
+	Mon, 20 Feb 2017 18:07:40 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id c85so15749223wmi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 10:07:40 -0800 (PST)
+	Mon, 20 Feb 2017 10:07:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=d0e8DNdjfclxEIZ10t5HExRlXu/e2jt5QSXnfl49Xxs=;
-	b=YnCOlaT5Y3QbA2BAbB/pHpN5t3zbkMm60Ogr9gEG1hSVeiYoa53Nw3sEKKwOXpNgqY
-	fUr6UPHZKZXg1cnuqkKXOG4nkz3gtI0VCcdUgB5CypqJEs8W5U5yZLyT9qj7grQLsAKx
-	kqcfJqcmVMbBK5qQkKN5IuxJf3sWOc5yDFuafRbQAhsUYyyq65zNV5U9gKtPhEL6yFV/
-	jan42iQw0QehcWj38XVbZ4BEfgysHX2sGZ5cTOeIaaOEBH38RrLLelWcJWBiLy7fpxdl
-	4s+q64xZXdyCWegcpHeOPk4Aw+Jo9kOKwVz0QilGDumMsoorlR2UciwFYdPVHfoMjQAO
-	DK9g==
+	bh=8kLvcXLoXGMMGyUdVi5YI1yvv9tt1nFUVP/NWksMgbQ=;
+	b=fmS63sxOi/TVpnRIlfQKMLAvEaMBcWuWjK4Iw3evAyb3Pucwjol3V5/dApLuNxf0PD
+	3ge5DYihB8biZpFqnQPMCeg3hhyxTUHwE70vZ2MQfy2mkWDgZWFiN29mtNXi8d0QxhJc
+	zR0kNh65pj58niUPEXa1RSMM8aVphqDdfcsAQN7xUhlS7CAxbxwJLDFqr+MGzm4Sxb0E
+	1jbUN1iEXUaJEjbJlmg1LeXffmflOF7lpUz+2XtW5yHq4Gr8WvWHbCasu/0CExbV1ML+
+	HAcVUlyLGFIQxYHLSHOVFobiJjJHrSOQk7cPQdNsSQvrmt9Y7Q0kk4J04A5UtkeanTr+
+	nYCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=d0e8DNdjfclxEIZ10t5HExRlXu/e2jt5QSXnfl49Xxs=;
-	b=IRwUlR1L6QZUSrN+c6Hg5Zc5y4yFTCYSYYpzIPz96WA5gRhxaKnano2lu+UbsPneA/
-	ipNeu4TlQztSEEj+gpfOeONQDeGdU1HJWjOL6R3d1fbrfR+SEuXb4Y+UDx8eI1F7/1Jf
-	JDARyVHnm3R2RXXvO2mIbmIYxgqb39SmdccFfCu+Z8KhOGTeUjGql8dwL3S59cHdiCGh
-	gX7U9q1jwkmyxhlfiqlZVvwLg/r7idRPUQ9/f8bkZBalG+gs9sVHXrP0i8j/wviHkczy
-	Y4v7EGVtyTrHlc3aQ/DO9EbyNWL9lFc/gWLnvADzxURwpFnOvFEvlc39rNc23u7/chiJ
-	1d6w==
-X-Gm-Message-State: AMke39lEdd59vpZGWtPljJwzRRxiLaAPlcntlG4FyDJ/lGBXuEkIm2+o6NnZSaFbEvqGwQ==
-X-Received: by 10.28.141.193 with SMTP id p184mr20381688wmd.122.1487614060075; 
+	bh=8kLvcXLoXGMMGyUdVi5YI1yvv9tt1nFUVP/NWksMgbQ=;
+	b=o9ixdYbdm4tFlAuHDFhgBUvzWjsWNuniZiFWWHRrVTevQj+8r7+/gHMHqeNKysj1NF
+	JyA9qQs/sFDqrXXZu2gBwrFIEGYcaxt8aNnZEHE8OFa/0iXevdf3ezIOMfn4fTT2fJmC
+	GQ1jOnoY/TenUATHF33mETD37PN6fDLJgWaV+FKpXjQ1Qd0uVTd+m+0NjLcOu+uFuHWJ
+	70j/NjRR9+U8F2tjt+jF9zlIeSvhr8ZUeQp+fuDmIReJKoPDBTo+EZLXjDEDP3Q5PFkD
+	lX+5+65jvRi1EYw1xY6TIIUeRehVlCM37bEDBHQq5w974xnPrhSU4AzRILvMGBu0qK9l
+	Ew2g==
+X-Gm-Message-State: AMke39kp+eBKMTQXGWtu6u+O5ePuZgOJvIyA+eeRQVlbLQNUAVKycIzb6ep897kUf4evjA==
+X-Received: by 10.28.132.2 with SMTP id g2mr20041594wmd.103.1487614060989;
 	Mon, 20 Feb 2017 10:07:40 -0800 (PST)
 Received: from PC192-168-2-116.speedport.ip
 	(p20030046E911DE631E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:46:e911:de63:1e6f:65ff:fe3e:7f61])
 	by smtp.googlemail.com with ESMTPSA id
-	96sm2863710wrb.14.2017.02.20.10.07.39
+	96sm2863710wrb.14.2017.02.20.10.07.40
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 20 Feb 2017 10:07:39 -0800 (PST)
+	Mon, 20 Feb 2017 10:07:40 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Feb 2017 19:06:40 +0100
-Message-Id: <20170220180700.29836-25-schnitzeltony@googlemail.com>
+Date: Mon, 20 Feb 2017 19:06:41 +0100
+Message-Id: <20170220180700.29836-26-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.3
 In-Reply-To: <20170220180700.29836-1-schnitzeltony@googlemail.com>
 References: <20170220180700.29836-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 24/44] xfce4-sensors-plugin: unblacklist - lmsensors is back
+Subject: [PATCH 25/44] gtksourceview2: add glib-2.0-native to DEPENDS and unblacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,25 +60,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Feb 2017 18:07:40 -0000
+X-List-Received-Date: Mon, 20 Feb 2017 18:07:41 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.2.6.bb | 2 --
- 1 file changed, 2 deletions(-)
+ meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.2.6.bb b/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.2.6.bb
-index a7c8dee..c2e0ed9 100644
---- a/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.2.6.bb
-+++ b/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.2.6.bb
-@@ -25,5 +25,3 @@ PACKAGECONFIG[netcat]     = "--enable-netcat,--disable-netcat, netcat"
- PACKAGECONFIG[libnotify]  = "--enable-notification,--disable-notification, libnotify"
+diff --git a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
+index ac7540e..e3bf551 100644
+--- a/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
++++ b/meta-gnome/recipes-gnome/gtksourceview/gtksourceview2_2.10.5.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://projects.gnome.org/gtksourceview/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
  
- FILES_SOLIBSDEV = "${libdir}/xfce4/modules/lib*${SOLIBSDEV}"
+-DEPENDS = "gtk+ libxml2 intltool-native gnome-common-native"
++DEPENDS = "gtk+ libxml2 intltool-native gnome-common-native glib-2.0-native"
+ 
+ PNAME = "gtksourceview"
+ 
+@@ -29,5 +29,3 @@ do_configure_prepend() {
+ }
+ 
+ FILES_${PN} += " ${datadir}/gtksourceview-2.0"
 -
--PNBLACKLIST[xfce4-sensors-plugin] ?= "Depends on blacklisted lmsensors"
+-PNBLACKLIST[gtksourceview2] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130597/"
 -- 
 2.9.3
 
