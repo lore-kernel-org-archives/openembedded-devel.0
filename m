@@ -1,26 +1,46 @@
-Return-Path: <Paul.Gortmaker@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id F410960111
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Feb 2017 01:15:51 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v1K1Fo2E024870
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Feb 2017 17:15:51 -0800 (PST)
-Received: from yow-cube1.wrs.com (128.224.56.98) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Sun, 19 Feb 2017 17:15:50 -0800
-From: Paul Gortmaker <paul.gortmaker@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 19 Feb 2017 20:15:49 -0500
-Message-ID: <1487553349-22706-1-git-send-email-paul.gortmaker@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <CAMKF1sqyxtRoLsi1QvABn7kVsskgLcUXXb7N_0JFct5ukiqUwg@mail.gmail.com>
-References: <CAMKF1sqyxtRoLsi1QvABn7kVsskgLcUXXb7N_0JFct5ukiqUwg@mail.gmail.com>
+Return-Path: <twoerner@gmail.com>
+Received: from mail-qt0-f174.google.com (mail-qt0-f174.google.com
+	[209.85.216.174])
+	by mail.openembedded.org (Postfix) with ESMTP id C1CC971C42;
+	Mon, 20 Feb 2017 03:03:10 +0000 (UTC)
+Received: by mail-qt0-f174.google.com with SMTP id n21so9993954qta.1;
+	Sun, 19 Feb 2017 19:03:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=b+raTu9j6yhsuHsmliucn9Ib2b3FLcVQ4dfcKCYZH6I=;
+	b=YuyX1/PN6TKz8HJAl9RScOrNSDbYzdJs17aB6r2gKVdjGXSf5kPnXO1+YBHyUaP+Oq
+	ssccY6JjxfC6lCI5WAdIBQwME7IWRKo30lArPrz9RnYXLBlb95BNE97GWmWd1KJ42rBQ
+	fIYdth81rsvlAoE7thMeB+pHjcdagc2OwT6/5YMTHSDauJdAJ5/In1qCTr/yEu8NV0WO
+	sV8235FIge3ZXoIdGNxc4XJHRRNLF1ec1BIfnlNA7wWi7rpxB8nt7EKS8sE6kNv2p6a1
+	38GbNbG92so2bHWEfsLdk+59bt1JRHlGn71faTx7B41arSdIKpT4STM7woreT1pzIepg
+	+rhA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=b+raTu9j6yhsuHsmliucn9Ib2b3FLcVQ4dfcKCYZH6I=;
+	b=DjNymdr2SK3IlZD9dszF8StlZGbagdG6vUZZToAv4cgT1b8CWaQr4WveqhPzLBQYJB
+	vy6N4Ha2sAbMza8ZmBGldJjjZlWz2CA8gOa5REfswbAZygNfP4jDuz5STl15qeVXTGEY
+	piOUdlT7EZMt6FQwaGU6sUCJEg1ddtbPn005QKnh5AX6QoV/N1YZAyGLw1H43m/2Qm8G
+	aDKbpWodPPPlIZxKojhmwa4YL4Vug/zm3Mv/5BbZO4u1HdKaAQ07ub0nhwCT7y15z19c
+	SLfqTGD3FRXwtx+2R6katDvfEf9PG8b2dWtWEkWMftCsAOhOECMgK1kclObhGs3O+1gX
+	je4Q==
+X-Gm-Message-State: AMke39mFI6mz6Ts82gUKo7TGlaaBTPvhR/b2DeNJrLN+RwsoU3iOpHrHn30QM+8E3lVDmbifvjevOFy+YBxhSQ==
+X-Received: by 10.200.38.50 with SMTP id u47mr19276044qtu.293.1487559790598;
+	Sun, 19 Feb 2017 19:03:10 -0800 (PST)
 MIME-Version: 1.0
-Subject: [PATCH v2] netcat-openbsd: fix implicit dependency on pkg-config
+Received: by 10.200.39.252 with HTTP; Sun, 19 Feb 2017 19:03:10 -0800 (PST)
+In-Reply-To: <1fa71323-bd61-8c71-d6e7-d462bb9b9f25@balister.org>
+References: <2c536609-989f-240e-cb4a-c77815898d8f@gmail.com>
+	<CAHUNapRHuTXG2zZCn0iNe+soUY-vFgQ0UXA74zLrSfaOCR39YA@mail.gmail.com>
+	<1fa71323-bd61-8c71-d6e7-d462bb9b9f25@balister.org>
+From: Trevor Woerner <twoerner@gmail.com>
+Date: Sun, 19 Feb 2017 22:03:10 -0500
+Message-ID: <CAHUNapRdZ=v-7WsBHoNeih3UWcL86DeriHvW-ERqAPegQeAORg@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Cc: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] OEDAM - Portland 2017
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,55 +53,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Feb 2017 01:15:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 20 Feb 2017 03:03:11 -0000
+Content-Type: text/plain; charset=UTF-8
 
-In the report at http://errors.yoctoproject.org/Errors/Details/130673/
-we see the following:
+Okay thanks, sounds good.
+See you then.
 
-i586-oe-linux-gcc  -m32 -march=i586 <snip> netcat.o atomicio.o socks.o `pkg-config --libs libbsd` -lresolv -o nc
-/bin/sh: 1: pkg-config: not found
-
-What follows is a bunch of link errors for BSD library functions, as
-the backtick didn't return anything but an empty string and hence no
-BSD library was involved in the link.
-
-I was able to reproduce this by temporarily removing my host version
-of pkg-config, and then validated that this fix solves it while still
-having the host binary removed.  So it should fix the reported issue.
-I also confirmed pkg-config was in the sysroot after the change.
-
-Cc: Khem Raj <raj.khem@gmail.com>
-Cc: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
----
-
-[v2: use inherit pkgconfig vs. depending on it, as per what
- Khem suggested as being the more conventional route. ]
-
- meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb b/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-index bb21e0cfeede..e0a0328eccfc 100644
---- a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-+++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
-@@ -14,6 +14,8 @@ SRC_URI[netcat.sha256sum] = "40653fe66c1516876b61b07e093d826e2a5463c5d994f1b7e6c
- SRC_URI[netcat-patch.md5sum] = "e914f8eb7eda5c75c679dd77787ac76b"
- SRC_URI[netcat-patch.sha256sum] = "eee759327ffea293e81d0dde67921b7fcfcad279ffd7a2c9d037bbc8f882b363"
- 
-+inherit pkgconfig
-+
- S = "${WORKDIR}/${BPN}-${PV}"
- 
- EXTRA_OEMAKE += "'LDFLAGS=${LDFLAGS}'"
-@@ -42,5 +44,3 @@ do_install() {
-     install -m 755 ${S}/nc ${D}${bindir}/nc.${BPN}
- }
- ALTERNATIVE_PRIORITY = "60"
--
--PNBLACKLIST[netcat-openbsd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130673/"
--- 
-2.7.4
-
+On Sun, Feb 19, 2017 at 5:49 PM, Philip Balister <philip@balister.org> wrote:
+> It sounds like a bunch of us will meet in the Hilton lobby at 0800 and
+> use Lyft/Uber/other.
+>
+> Philip
+>
+> On 02/19/2017 07:12 AM, Trevor Woerner wrote:
+>> Does anyone have any recommendations for how to get from the
+>> conference venue to the Mentor Graphics office?
+>>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
