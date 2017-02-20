@@ -1,28 +1,44 @@
-Return-Path: <Paul.Gortmaker@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E4566FFF7
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ua0-f176.google.com (mail-ua0-f176.google.com
+	[209.85.217.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 26225600B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Feb 2017 22:56:38 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v1JMuZS5017936
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 19 Feb 2017 14:56:37 -0800 (PST)
-Received: from yow-pgortmak-d1.corp.ad.wrs.com (128.224.56.57) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Sun, 19 Feb 2017 14:56:35 -0800
-Received: by yow-pgortmak-d1.corp.ad.wrs.com (Postfix, from userid 1000)	id
-	C819A2804BE; Sun, 19 Feb 2017 17:56:34 -0500 (EST)
-Date: Sun, 19 Feb 2017 17:56:34 -0500
-From: Paul Gortmaker <paul.gortmaker@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Message-ID: <20170219225634.GA9356@windriver.com>
-References: <1487466684-16593-1-git-send-email-paul.gortmaker@windriver.com>
-	<CAMKF1sqyxtRoLsi1QvABn7kVsskgLcUXXb7N_0JFct5ukiqUwg@mail.gmail.com>
+	Mon, 20 Feb 2017 00:56:28 +0000 (UTC)
+Received: by mail-ua0-f176.google.com with SMTP id 62so1180264uar.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 19 Feb 2017 16:56:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=wuKE3OG4LU+OPtAHcUDTrYrq/ablCJMbtVCTZzZfzVw=;
+	b=Y4ruc/BpXf/9Z+R60pS29gB3R9p/qIfkAidNUTTHYvPj6Jw+pKazBXzgnmZdY1Grvh
+	H3Gu16/EjNV6RCteSvxxV0R3g7kubUPZx1bumjey0gJ/Xmj38AKZDJcYHBKouCcUn/Dc
+	IcZ0j6ByBzTkNBj8PzflYQRSnGER91dM8+EOwj5glxrW8mw4B4QjrynB3fKlZ3WvSa95
+	Wqc4ewfVfKMUdCbSFDK6jNLQVjpRt/hsuS2C7/ujhE2/CRa6ms6/f4i61Fpja2dfXQ66
+	4GMwb0MLlL177yppUpIrUTCn8dGn+kHV9PrMGTd+ap+rDQorQvxYWqOqKliV7Tv7qcLj
+	7KUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=wuKE3OG4LU+OPtAHcUDTrYrq/ablCJMbtVCTZzZfzVw=;
+	b=XenKWGr3oDCX2L4L6s02GqukZQj2a+aOoegzMOBQSJGIik7VuBRL6uXO92X5kUOuY4
+	bYMpaym5479D/NFizYSch3MlhEcvOBguFNWHITBeqe3ChbYruwILx865Ep3Nqlibpau1
+	Ax/lAg8YnmIcq28ugPVxVkEl977f1PAuaDhYsrMJ68wh0YQhhRuKdPhhJNE03i+4aviR
+	mizdKiLIG2g71eyjFMU6/ErqHBUmrKgO8BzCq0vu1oyMgoUdA7oUM4JM0XkISiZGn/CA
+	NGZ3rYSIEnwdTR4VRsacV0NLlWcU6mozsJRvsFmYpMTQ08e915J+3kr+FqCdsdvsDMr1
+	vqCg==
+X-Gm-Message-State: AMke39njv51d+4qnppQ9FsFseRoYXN8nf5NVe67bRJe4Ax3/i6j0oPQdH7AGeVtAv6Wkg3qd/3izM8QV704BQQ==
+X-Received: by 10.176.90.144 with SMTP id w16mr9287473uae.101.1487552188797;
+	Sun, 19 Feb 2017 16:56:28 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqyxtRoLsi1QvABn7kVsskgLcUXXb7N_0JFct5ukiqUwg@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-Subject: Re: [PATCH] netcat-openbsd: fix implicit dependency on pkg-config
+References: <alpine.LFD.2.20.1702191333140.31844@localhost.localdomain>
+In-Reply-To: <alpine.LFD.2.20.1702191333140.31844@localhost.localdomain>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 20 Feb 2017 00:56:17 +0000
+Message-ID: <CAMKF1so-WgaN+PvoQmKrwH6E8mEikRvsPoZszSk4_gzH+ZK8og@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: are you allowed to have an underscore in a recipes directory?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,58 +51,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Feb 2017 22:56:43 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 20 Feb 2017 00:56:32 -0000
+Content-Type: text/plain; charset=UTF-8
 
-[Re: [oe] [PATCH] netcat-openbsd: fix implicit dependency on pkg-config] On 19/02/2017 (Sun 06:07) Khem Raj wrote:
+On Sun, Feb 19, 2017 at 10:37 AM Robert P. J. Day <rpjday@crashcourse.ca>
+wrote:
 
-> On Sat, Feb 18, 2017 at 5:12 PM Paul Gortmaker <paul.gortmaker@windriver.com>
-> wrote:
-> 
-[...]
+>
+>   i just noticed this in meta-oe/recipes-support:
+>
+> $ ls
+> ...
+> lm_sensors
 
-> >
-> > -DEPENDS += "glib-2.0 libbsd"
-> > +DEPENDS += "glib-2.0 libbsd pkgconfig-native"
-> 
-> 
-> I think inherit pkgconfig should be the way to go here
 
-That seems reasonable and would explain why I wasn't seeing a lot of
-pre-existing depends on pkgconfig.  I'll test that and send a v2.
+Its directory name I believe and not recipe name that you are talking about
+here in this case it is fine
 
-Thanks,
-Paul.
---
-
-> 
-> >
-> >
-> >  SRC_URI =
-> > "${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_${PV}.orig.tar.gz;name=netcat
-> > \
-> >
-> > ${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_${PV}-7.debian.tar.gz;name=netcat-patch"
-> > @@ -42,5 +42,3 @@ do_install() {
-> >      install -m 755 ${S}/nc ${D}${bindir}/nc.${BPN}
-> >  }
-> >  ALTERNATIVE_PRIORITY = "60"
-> > -
-> > -PNBLACKLIST[netcat-openbsd] ?= "Fails to build with RSS
-> > http://errors.yoctoproject.org/Errors/Details/130673/"
-> > --
-> > 2.7.4
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> -- 
+>
+> ...
+>
+>   is there any issue with that directory name containing an
+> underscore? i know that has special meaning in a recipe file name, but
+> i've never noticed an underscore being used as above.
+>
+> rday
+>
+> --
+>
+> ========================================================================
+> Robert P. J. Day                                 Ottawa, Ontario, CANADA
+>                         http://crashcourse.ca
+>
+> Twitter:                                       http://twitter.com/rpjday
+> LinkedIn:                               http://ca.linkedin.com/in/rpjday
+> ========================================================================
+>
+> --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
