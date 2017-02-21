@@ -1,51 +1,20 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f179.google.com (mail-ua0-f179.google.com
-	[209.85.217.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E5D572F0A
+Return-Path: <ray.kinsella@intel.com>
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B1A572F9C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Feb 2017 12:40:58 +0000 (UTC)
-Received: by mail-ua0-f179.google.com with SMTP id x24so11541993uae.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Feb 2017 04:40:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=f2FtdWWfd+llU3wdV5RNunMbGAEniVWq6MSNduAHeBU=;
-	b=fsxXFN3VnayQqvDEmMwCpnMs7kmsVVwzPAdS9CrSTJWuk8plIWWtbndeewslU6EAkx
-	+GGZItY4ovugQK1+I9HT2N/3kfQW5h2YhAgU0B3cpBAbf5XNyYkG3V0uilQG2HwxV00c
-	9ArA6TcygdYzZnbN2AmZf8zn8fXk0dNeTFcgeRhGxUPHPAH6U5qvC5fKprHhKgXeEXWH
-	LuxXLmVHrV7tHepEeYMPe26xF17NvDBol/C644PCLAfXCNSVH7vhIRrjuy0NHKSXYM7Z
-	Rp96YzQ1ozY2zOYKmC2uqJ3bOZzTFjq2XYlmQoTcGkbiKA3AL+0gwmTodTJu8SEjXFRH
-	E0kQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=f2FtdWWfd+llU3wdV5RNunMbGAEniVWq6MSNduAHeBU=;
-	b=dLV+05RXVKRQ2UZvyTnXB0CLakFYmB9FsQtZGGW7vdZbjclm8ajqJfncsv0fCjvzVi
-	DU+E1hUG+8VZxMrAefIy7TXaoKr0U5L7nifxEjmUNiD4kCdJBqM0/nfw5c5sogn5CEch
-	pLyPPhhbq4ojr4CoHk5+dpGUNT4eIDYwXJEWyrJBRCEynRAXL9IyuP0Lj2zoao0H7cCP
-	gg1j2jD2d/ah1zCbZhG9QCr1+jl41TooW8tQzFExlOfQbuB3J3fJM5r/4+fSi+8TwyQl
-	/1c1OogXLfmhaiUCWxzux5OGQM+oqLpxgyj0NVFPNn3v59TiPYAfY0EfM59EUHv5PrLU
-	P6hQ==
-X-Gm-Message-State: AMke39lrmjLQwhB35FJaHb1wSur+aFC4626t/BB/8/+3yv+M2BrqBl+qzqNY7tG4JrdEp+1sfEslUYeqfotU4Q==
-X-Received: by 10.176.1.167 with SMTP id 36mr10258571ual.44.1487680859371;
-	Tue, 21 Feb 2017 04:40:59 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.176.71.72 with HTTP; Tue, 21 Feb 2017 04:40:58 -0800 (PST)
-In-Reply-To: <CA+chaQd4gHT+8BZ8ncPcZfApw-kVd5gPBd_SCrn_ohcBc3CqyA@mail.gmail.com>
-References: <20170220180700.29836-1-schnitzeltony@googlemail.com>
-	<20170220180700.29836-9-schnitzeltony@googlemail.com>
-	<CALbNGRSktvJjZj42x1uX+YjYC=E9ZjmnBVeoSjKa1p1j1Q9h1Q@mail.gmail.com>
-	<CALbNGRQN5vrCT8C-aRV3NQUBiZ6O80fA_SyznjfMUy5rmmx8Kw@mail.gmail.com>
-	<CA+chaQd4gHT+8BZ8ncPcZfApw-kVd5gPBd_SCrn_ohcBc3CqyA@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Tue, 21 Feb 2017 13:40:58 +0100
-Message-ID: <CALbNGRR7kvv6odmskDxYEPkHP6iTu2RHSE3FppQfA3twK5zdng@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 08/44] mpd: rework DEPENDS and unblacklist
+	Tue, 21 Feb 2017 17:13:32 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga104.jf.intel.com with ESMTP; 21 Feb 2017 09:13:34 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.35,190,1484035200"; d="scan'208";a="1100675426"
+Received: from silpixa00395806.ir.intel.com ([10.237.222.218])
+	by orsmga001.jf.intel.com with ESMTP; 21 Feb 2017 09:13:33 -0800
+From: Ray Kinsella <ray.kinsella@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 21 Feb 2017 17:13:30 +0000
+Message-Id: <1487697210-29779-1-git-send-email-ray.kinsella@intel.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [PATCH] [meta-networking] ddclient: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,21 +27,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2017 12:40:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 21 Feb 2017 17:13:33 -0000
 
-On Tue, Feb 21, 2017 at 10:44 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> The V1 for mpd fails in do_compile:
-> http://errors.yoctoproject.org/Errors/Details/133835/
->
-> will test it with V2.
->
-> I'll update the libqmi and geany with extra dependencies before triggering
-> new builds so you don't need to resend them.
->
-Thanks and let's hope this is it for this series. FWIW: Hope I banned
-all -dev packets from my build machine (pkg-config is still there..)
-to get closer to your autobuilder.
+Adding the package ddclient. DDClient updates Dynamic DNS servers with an IP address.
+Recipe is based on the original OE recipe found here.
 
-Andreas
+http://cgit.openembedded.org/openembedded/tree/recipes/ddclient/ddclient_3.6.3.bb
+
+DDClient version has been updated to 3.8.3.
+
+Signed-off-by: Ray Kinsella <ray.kinsella@intel.com>
+---
+ .../recipes-daemons/ddclient/ddclient_3.8.3.bb     | 45 ++++++++++++++++++++++
+ .../recipes-daemons/ddclient/files/ip-up           |  4 ++
+ 2 files changed, 49 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb
+ create mode 100644 meta-networking/recipes-daemons/ddclient/files/ip-up
+
+diff --git a/meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb b/meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb
+new file mode 100644
+index 0000000..723eb67
+--- /dev/null
++++ b/meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb
+@@ -0,0 +1,45 @@
++SECTION = "net/misc"
++DESCRIPTION = "Ddclient is a Perl client used to update dynamic DNS entries for accounts on Dynamic DNS Network Services"
++HOMEPAGE = "http://ddclient.sourceforge.net/"
++LICENSE = "GPLv2"
++PR = "r4"
++
++SRC_URI = "\
++    ${SOURCEFORGE_MIRROR}/ddclient/ddclient-${PV}.tar.bz2 \
++    file://ip-up"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
++
++RDEPENDS_${PN} = "\
++    perl-module-getopt-long \
++    perl-module-sys-hostname \
++    perl-module-io-socket \
++    perl-module-vars \
++    perl-module-overload \
++    perl-module-overloading \
++    perl-module-config \
++    perl-module-integer \
++    perl-module-exporter-heavy \
++    perl-module-symbol \
++    perl-module-selectsaver \
++    bash \
++    perl \
++    libio-socket-ssl-perl"
++
++do_install() {
++    install -d ${D}${sbindir} ${D}${sysconfdir}/ddclient ${D}${sysconfdir}/init.d
++    install -d ${D}${sysconfdir}/ppp/ip-up.d/ install -d ${D}${docdir}/ddclient
++    install -m 755 ${S}/ddclient ${D}${sbindir}
++    install ${S}/sample-etc_ddclient.conf ${D}${sysconfdir}/ddclient/ddclient.conf
++    install -m 755 ${WORKDIR}/ip-up ${D}${sysconfdir}/ppp/ip-up.d/ddclient
++    sed -e 's|/etc/ddclient.conf|/etc/ddclient/ddclient.conf|g' ${S}/sample-etc_rc.d_init.d_ddclient > ${S}/rc_init
++    install -m 755 ${S}/rc_init ${D}${sysconfdir}/init.d/ddclient
++    install ${S}/README* ${D}${docdir}/ddclient
++    install ${S}/COPY* ${D}${docdir}/ddclient
++    install ${S}/sample* ${D}${docdir}/ddclient
++}
++
++CONFFILES_${PN} = "${sysconfdir}/ddclient/ddclient.conf"
++
++SRC_URI[md5sum] = "3b426ae52d509e463b42eeb08fb89e0b"
++SRC_URI[sha256sum] = "d40e2f1fd3f4bff386d27bbdf4b8645199b1995d27605a886b8c71e44d819591"
+diff --git a/meta-networking/recipes-daemons/ddclient/files/ip-up b/meta-networking/recipes-daemons/ddclient/files/ip-up
+new file mode 100644
+index 0000000..52a44f8
+--- /dev/null
++++ b/meta-networking/recipes-daemons/ddclient/files/ip-up
+@@ -0,0 +1,4 @@
++#!/bin/sh
++
++logger -t ddclient $PPP_IFACE $PPP_LOCAL
++ddclient -daemon=0 -syslog -use=if -if=$PPP_IFACE >/dev/null 2>&1
+\ No newline at end of file
+-- 
+1.9.1
+
 
