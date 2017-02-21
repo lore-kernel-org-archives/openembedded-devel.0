@@ -1,28 +1,18 @@
-Return-Path: <gthomas@mlbassoc.com>
-Received: from mail.analogue-micro.com (mail.analogue-micro.com
-	[217.144.149.242])
-	by mail.openembedded.org (Postfix) with ESMTP id 50CFD71DEF
+Return-Path: <ml@embed.me.uk>
+Received: from owm.eumx.net (eumx.net [91.82.101.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 2ACAB6E64A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Feb 2017 12:04:55 +0000 (UTC)
-Received: by mail.analogue-micro.com (Postfix, from userid 999)
-	id 07F6E68A019; Tue, 21 Feb 2017 12:04:56 +0000 (GMT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	loki.analogue-micro-ltd.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.2 required=5.0 tests=ALL_TRUSTED,BAYES_00,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
-	by mail.analogue-micro.com (Postfix) with ESMTP id 751E368A019;
-	Tue, 21 Feb 2017 12:04:56 +0000 (GMT)
-Received: by zeus.mlbassoc.com (Postfix, from userid 1000)
-	id 1918C6740442; Tue, 21 Feb 2017 13:04:55 +0100 (CET)
-From: Gary Thomas <gary@mlbassoc.com>
+	Tue, 21 Feb 2017 12:34:12 +0000 (UTC)
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Feb 2017 13:04:51 +0100
-Message-Id: <1487678691-21715-1-git-send-email-gary@mlbassoc.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Gary Thomas <gary@mlbassoc.com>
-Subject: [meta-oe][PATCH v2] fbgrab: Update to latest version
+References: <21359dca-07af-b556-a589-a6a81ce65260@embed.me.uk>
+From: Jack Mitchell <ml@embed.me.uk>
+Message-ID: <48e918a7-edf9-5e9b-048e-96b98fc5f579@embed.me.uk>
+Date: Tue, 21 Feb 2017 12:36:06 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.1
+MIME-Version: 1.0
+In-Reply-To: <21359dca-07af-b556-a589-a6a81ce65260@embed.me.uk>
+Subject: Re: [meta-clang] target triple issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,38 +25,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2017 12:04:57 -0000
+X-List-Received-Date: Tue, 21 Feb 2017 12:34:14 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Update to version 1.3 (2015-06-06)
-Drop setting ${S} - not needed since package now uses standard path
+On 20/02/17 17:38, Jack Mitchell wrote:
+> I'm trying to install clang to my aarch64 target and receiving this
+> error when attempting to compile
+>
+> test.c:1:1: warning: type specifier missing, defaults to 'int'
+> [-Wimplicit-int]
+> main() {
+> ^
+> error: unable to create target: 'No available targets are compatible
+> with this triple.'
+> 1 warning and 1 error generated.
+>
+> The version of clang built is as follows:
+>
+> clang version 4.0.0 (git://github.com/llvm-mirror/clang.git
+> ee02028a97bfbce4d63787dd05366fafdda445c5)
+> (git://github.com/llvm-mirror/llvm.git
+> 6af4d1ac2acfc8c22db959f2b7b11d68688b2425)
+> Target: x86_64-unknown-linux-gnu
+> Thread model: posix
+> InstalledDir: /usr/bin
+>
+> Is it wrong that the target is x86_64-unknown-linux-gnu? Should it not
+> be something aarch64 related? The configure log seems to have passed the
+> right values
+>
+> 201 -- Native target architecture is AArch64
+>
+> ...
+>
+> 495 -- Constructing LLVMBuild project information
+> 496 -- Targeting AArch64
+>
+> Any ideas, would any of the logs be useful?
+>
+> Regards,
+> Jack.
 
-Signed-off-by: Gary Thomas <gary@mlbassoc.com>
----
- meta-oe/recipes-graphics/fbgrab/{fbgrab_1.2.bb => fbgrab_1.3.bb} | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-graphics/fbgrab/{fbgrab_1.2.bb => fbgrab_1.3.bb} (71%)
+Turns out I just needed to specify a target, seems odd though as 
+shouldn't the default target be the one it was built for?
 
-diff --git a/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb b/meta-oe/recipes-graphics/fbgrab/fbgrab_1.3.bb
-similarity index 71%
-rename from meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb
-rename to meta-oe/recipes-graphics/fbgrab/fbgrab_1.3.bb
-index 1d87b86..e12bc09 100644
---- a/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb
-+++ b/meta-oe/recipes-graphics/fbgrab/fbgrab_1.3.bb
-@@ -8,10 +8,8 @@ SRC_URI = "http://fbgrab.monells.se/${BP}.tar.gz"
- 
- inherit autotools-brokensep
- 
--S = "${WORKDIR}/${BPN}"
--
--SRC_URI[md5sum] = "15b432735d6efd0373722bb96577b945"
--SRC_URI[sha256sum] = "61e0772ad6ea744ee597ae478398ddd0ba6fceee2cf343859bebde2c15bafb91"
-+SRC_URI[md5sum] = "7d8c24081c681dfbba21f2934c1ac656"
-+SRC_URI[sha256sum] = "5fab478cbf8731fbacefaa76236a8f8b38ccff920c53b3a8253bc35509fba8ed"
- 
- do_configure_prepend() {
-     sed -i 's|$(DESTDIR)/usr/man/|$(DESTDIR)${mandir}/|g' ${S}/Makefile
--- 
-2.7.4
-
+clang -target arm64 test.c
 
