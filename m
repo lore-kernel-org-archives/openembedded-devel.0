@@ -1,50 +1,30 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f171.google.com (mail-wr0-f171.google.com
-	[209.85.128.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CC1371E16
+Return-Path: <gthomas@mlbassoc.com>
+X-Greylist: delayed 542 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 21 Feb 2017 11:10:35 UTC
+Received: from mail.analogue-micro.com (mail.analogue-micro.com
+	[217.144.149.242])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EABC71A84
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Feb 2017 09:44:21 +0000 (UTC)
-Received: by mail-wr0-f171.google.com with SMTP id s27so31620771wrb.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Feb 2017 01:44:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=hR/5XpRuXHsNhqdUfrL5ULg0lPZ+bRbMQQGIDsGSX5Y=;
-	b=FTtAW6aS6qST6F6RdlPQJm8SVLHRX1HARPGFWujYNXPgVpQwV93m/zdoe3yL7YNFil
-	s9a8MeQLdhaNVr/K8gxwTENkmKtXl5lI4JIS7BmFwmU5+EM1cSMBa/95IX7nFzVAT1bL
-	awr1tWCE803QD8Sniq0XHplmTy6dh6rrYjAAhJJ20rHVeiVpMoDHF1/3EMRYh4KJob07
-	07vhH+i0Q6WkeN40D2bvxAlUcky+dL1fnZsb9oqHUxxaj+sVmpOb+MiAl/zWF4WFgXAJ
-	q6sI+D0OziWH+UYgynJ6bb66Ii/fR+GDNunIVTaWfHSmDfsjbhxgk0uysc3sfcBZt/9+
-	NN3w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=hR/5XpRuXHsNhqdUfrL5ULg0lPZ+bRbMQQGIDsGSX5Y=;
-	b=QfSU7BUxZHOcu2UN5YE/NkPsOwC0tXTaRmTTPl1URe58EHbFVXJ8I7ua1HgHfKfDAP
-	qRLViPRerPR66wTPiYfgLERYvIcgm/k4GXY7llKxRbt2yRLWpoI8cEXrBF9A2D0VLB4G
-	a8X8Y4EQG6+/vEsWrc8HmzusMghSdw6mO8gZDgYnPeP01UyfC70gDl8yjFCRBRDXf/0L
-	Ujhr29LLMW0BNNHMEO1DDQChzIBpU6N6bsrKPTB2SXwz8S6jfgbYFhP1VrymVsQLowAk
-	Rn9ICIv77jSMphybXGPpoUFLJwP2O7RxSZrLOCetOpz3XK8WFSIYVujDtl5PRls8Rn1J
-	uOnw==
-X-Gm-Message-State: AMke39noKI8Rev2STCX0O6dQS/0O6Y9T8uF/x/YFx5tx/H7ZNSvdJBVk3hToC1I/dCmT4yLeCLY4J56N8mmt/A==
-X-Received: by 10.223.153.55 with SMTP id x52mr16738176wrb.196.1487670263122; 
-	Tue, 21 Feb 2017 01:44:23 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.80.212.30 with HTTP; Tue, 21 Feb 2017 01:44:22 -0800 (PST)
-In-Reply-To: <CALbNGRQN5vrCT8C-aRV3NQUBiZ6O80fA_SyznjfMUy5rmmx8Kw@mail.gmail.com>
-References: <20170220180700.29836-1-schnitzeltony@googlemail.com>
-	<20170220180700.29836-9-schnitzeltony@googlemail.com>
-	<CALbNGRSktvJjZj42x1uX+YjYC=E9ZjmnBVeoSjKa1p1j1Q9h1Q@mail.gmail.com>
-	<CALbNGRQN5vrCT8C-aRV3NQUBiZ6O80fA_SyznjfMUy5rmmx8Kw@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 21 Feb 2017 10:44:22 +0100
-Message-ID: <CA+chaQd4gHT+8BZ8ncPcZfApw-kVd5gPBd_SCrn_ohcBc3CqyA@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 08/44] mpd: rework DEPENDS and unblacklist
+	Tue, 21 Feb 2017 11:10:35 +0000 (UTC)
+Received: by mail.analogue-micro.com (Postfix, from userid 999)
+	id 8F5E668A01C; Tue, 21 Feb 2017 11:01:33 +0000 (GMT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	loki.analogue-micro-ltd.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.2 required=5.0 tests=ALL_TRUSTED,BAYES_00,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
+	by mail.analogue-micro.com (Postfix) with ESMTP id 0BD6168A019;
+	Tue, 21 Feb 2017 11:01:33 +0000 (GMT)
+Received: by zeus.mlbassoc.com (Postfix, from userid 1000)
+	id BF65E6740331; Tue, 21 Feb 2017 12:01:32 +0100 (CET)
+From: Gary Thomas <gary@mlbassoc.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 21 Feb 2017 12:01:29 +0100
+Message-Id: <1487674889-17516-1-git-send-email-gary@mlbassoc.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Gary Thomas <gary@mlbassoc.com>
+Subject: [meta-oe][PATCH] fbgrab: Update to latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,39 +37,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2017 09:44:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 21 Feb 2017 11:10:36 -0000
 
-The V1 for mpd fails in do_compile:
-http://errors.yoctoproject.org/Errors/Details/133835/
+Update to version 1.3 (2015-06-16), fix recipe for different directory name
 
-will test it with V2.
+Signed-off-by: Gary Thomas <gary@mlbassoc.com>
+---
+ meta-oe/recipes-graphics/fbgrab/{fbgrab_1.2.bb => fbgrab_1.3.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-graphics/fbgrab/{fbgrab_1.2.bb => fbgrab_1.3.bb} (71%)
 
-I'll update the libqmi and geany with extra dependencies before triggering
-new builds so you don't need to resend them.
+diff --git a/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb b/meta-oe/recipes-graphics/fbgrab/fbgrab_1.3.bb
+similarity index 71%
+rename from meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb
+rename to meta-oe/recipes-graphics/fbgrab/fbgrab_1.3.bb
+index 1d87b86..905c1e5 100644
+--- a/meta-oe/recipes-graphics/fbgrab/fbgrab_1.2.bb
++++ b/meta-oe/recipes-graphics/fbgrab/fbgrab_1.3.bb
+@@ -8,10 +8,10 @@ SRC_URI = "http://fbgrab.monells.se/${BP}.tar.gz"
+ 
+ inherit autotools-brokensep
+ 
+-S = "${WORKDIR}/${BPN}"
++S = "${WORKDIR}/${BP}"
+ 
+-SRC_URI[md5sum] = "15b432735d6efd0373722bb96577b945"
+-SRC_URI[sha256sum] = "61e0772ad6ea744ee597ae478398ddd0ba6fceee2cf343859bebde2c15bafb91"
++SRC_URI[md5sum] = "7d8c24081c681dfbba21f2934c1ac656"
++SRC_URI[sha256sum] = "5fab478cbf8731fbacefaa76236a8f8b38ccff920c53b3a8253bc35509fba8ed"
+ 
+ do_configure_prepend() {
+     sed -i 's|$(DESTDIR)/usr/man/|$(DESTDIR)${mandir}/|g' ${S}/Makefile
+-- 
+2.7.4
 
-On Tue, Feb 21, 2017 at 9:42 AM, Andreas M=C3=BCller <
-schnitzeltony@googlemail.com> wrote:
-
-> On Mon, Feb 20, 2017 at 11:24 PM, Andreas M=C3=BCller
-> <schnitzeltony@googlemail.com> wrote:
-> > On Mon, Feb 20, 2017 at 7:06 PM, Andreas M=C3=BCller
-> > <schnitzeltony@googlemail.com> wrote:
-> >> To be honest: Have no idea why it failed detecting icu-i18n
-> >>
-> >> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> > ...
-> >> +inherit autotools useradd systemd
-> > ^ I bet it still fails. Guess pkgconfig is missing here...
-> >
-> I have rebased rss-fixes-andmore branch and send V2 for both mpd patches
->
-> Andreas
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
