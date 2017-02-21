@@ -1,49 +1,51 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
-	[209.85.213.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 928AD71989
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id CEADB719A9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Feb 2017 08:42:53 +0000 (UTC)
-Received: by mail-vk0-f66.google.com with SMTP id 23so10020533vkc.2
+	Tue, 21 Feb 2017 08:45:48 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id 89so7740849wrr.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Feb 2017 00:42:55 -0800 (PST)
+	Tue, 21 Feb 2017 00:45:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	h=from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=lSS2wmwLpMNRPcfhWM/mqtKwcrxixrXSEky/Evyk+vk=;
-	b=sxqOebrtb2hpB3OIPG1bTaaerJhSgvcekTZ3U55jGTCQBEtmce/34ukkkpok/lEEhH
-	VQXoaJk+eMOXsu/WpRPd6etAH4B7+wC0zW0pJaMHP9z3hFgtDhfep2e/PYAyxDbBTW29
-	27oJCLbrT9lcbRnH8M4cyjoGDT9BK1Cdesccc7JjiEfMqTdqoDbXDchYHW+8sAWqmU2V
-	oNR2meWw/iK0CR801WmEIX0scTC/H+HuOv8bt/Ay4IJxFk824PDbCNLystWaeMFskbh/
-	YDsFYW+Uifyr9ZW6c6iRUw8NaGlARhtI+hrSR4yfGwfeBlaEO0Qcif/JRFuMuP+JmHB9
-	ML/w==
+	bh=I4cS8oTVAStoODjFxwp6lMm5C5xwxaf31DRIZX+hUw4=;
+	b=pH7L977/LbjXzgJsWeIokM9cX4HvZi8Wv/kmftrhbrOULMXhBCfdqbpXyuvifD8z98
+	z7RFeVUw7RBNk4k6E91cgzVr4lR4qx7/5JDyw70W71mqvZfKPpHOWwOuknxfnVfvwgqI
+	ESetF/rYCOeiufW/fg89VBk/Mm1jiAJfs3XK4Fdwtc06Q3uOESZP6bZXZh80jXg5NWrG
+	+iqCzIkrCgG7H6MvBPd2UEGon5+XAka9vneLd9k3pDthhxLeBOjLzX+18CY2Da6f0bhx
+	9yn23Po1TMsmIStMJs4RGd7uAKCbye3w0Q/lmv+ZPEGqo1QG8gDUM31zwIcAkqT+sVEb
+	e+Ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=lSS2wmwLpMNRPcfhWM/mqtKwcrxixrXSEky/Evyk+vk=;
-	b=D0pTVOFnwyM+k3jeWov5jSw7dwdcolJk22qdH0uqHKtb6tmzdnCjZm9M6haVP+C5bF
-	jYk40DbzOkeSDCfqC1JU4P93Hq0Au0XWkqljW/AB8GNod1jZknieXX+/EI3KfSOw5hbz
-	G15nZRGoknr+SfkkLD9qvzr5772PCy2oY4CjwWw9vzfr0OmSQdpCxDbJGk4HQpHWZqyY
-	Qv2X4JlPpOqAAZDugWqdHSEnD2xMOFfCF0G74ZxHV71s0vEZRoyUvWDNXKszQPmtr0rZ
-	Zfm2GkuQotoMKW5SbGigAXZKCCBCtOwu3eavFXheSWp3rp7WgiM/MgU5JMm1bXenq6Il
-	WwlQ==
-X-Gm-Message-State: AMke39lC+In+WQ6q/yGS5+9NS303I6z10cbG9xLtQ99mq11Wr2TzLBLWSz8+s4jSK2ju1tP7jdFhGTO6B1h37Q==
-X-Received: by 10.31.8.147 with SMTP id 141mr12987445vki.111.1487666574240;
-	Tue, 21 Feb 2017 00:42:54 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=I4cS8oTVAStoODjFxwp6lMm5C5xwxaf31DRIZX+hUw4=;
+	b=ZibS8TQdosE0XoW+If2cPnTj5QdOZAl+JUPDE3PW0XGDCKxxDSSiqjoKpPP6ieI/US
+	iJGjXa6TOPdvm+L6j3jf1+Et3XlaMtczqsLxL7VpcFTst3UWNxr8SafFlU+MpnHfL0TW
+	GQ9igf7b4EL0YeeNkwNPjWGXvBobGNy40w/LU6+osSG34ucvqsmemOKkJBJTQNURKbrP
+	NhX0fd1WadSH7/wdTV4S4IMKqXst6gRZd/R/Z5wIcwzIv/Z03HkGmN3CxlQOzdA/r6oV
+	9tr155p6cKETMjiK+kiBLxg9ZsbWYX/MosmCOers2bLBHLx6Oo7HU37g3WFgvhPFHaxt
+	3lsg==
+X-Gm-Message-State: AMke39mUae7moWrplTfMxdR7rekPHevT6qdER0s2s19H9OknRWI3xmfp73RVLYClUaJR1Q==
+X-Received: by 10.223.129.163 with SMTP id 32mr17964905wra.140.1487666749245; 
+	Tue, 21 Feb 2017 00:45:49 -0800 (PST)
+Received: from localhost.localdomain
+	(ip-109-91-251-48.hsi12.unitymediagroup.de. [109.91.251.48])
+	by smtp.googlemail.com with ESMTPSA id
+	h23sm18953962wrc.48.2017.02.21.00.45.48
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 21 Feb 2017 00:45:48 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 21 Feb 2017 09:45:13 +0100
+Message-Id: <20170221084514.27766-1-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.9.3
 MIME-Version: 1.0
-Received: by 10.176.71.72 with HTTP; Tue, 21 Feb 2017 00:42:53 -0800 (PST)
-In-Reply-To: <CALbNGRSktvJjZj42x1uX+YjYC=E9ZjmnBVeoSjKa1p1j1Q9h1Q@mail.gmail.com>
-References: <20170220180700.29836-1-schnitzeltony@googlemail.com>
-	<20170220180700.29836-9-schnitzeltony@googlemail.com>
-	<CALbNGRSktvJjZj42x1uX+YjYC=E9ZjmnBVeoSjKa1p1j1Q9h1Q@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Tue, 21 Feb 2017 09:42:53 +0100
-Message-ID: <CALbNGRQN5vrCT8C-aRV3NQUBiZ6O80fA_SyznjfMUy5rmmx8Kw@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 08/44] mpd: rework DEPENDS and unblacklist
+Subject: [PATCH V2 1/2] mpd: add pkgconfig to inherit, rework DEPENDS and unblacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,22 +58,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Feb 2017 08:42:54 -0000
+X-List-Received-Date: Tue, 21 Feb 2017 08:45:49 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Mon, Feb 20, 2017 at 11:24 PM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> On Mon, Feb 20, 2017 at 7:06 PM, Andreas M=C3=BCller
-> <schnitzeltony@googlemail.com> wrote:
->> To be honest: Have no idea why it failed detecting icu-i18n
->>
->> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> ...
->> +inherit autotools useradd systemd
-> ^ I bet it still fails. Guess pkgconfig is missing here...
->
-I have rebased rss-fixes-andmore branch and send V2 for both mpd patches
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../recipes-multimedia/musicpd/mpd_0.19.21.bb      | 40 +++++++++++++++++++---
+ 1 file changed, 35 insertions(+), 5 deletions(-)
 
-Andreas
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.21.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.21.bb
+index a2b85b8..c16f3be 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.21.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.19.21.bb
+@@ -3,7 +3,41 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ HOMEPAGE ="http://www.musicpd.org"
+ 
+-DEPENDS = "alsa-lib libsamplerate0 libsndfile1 libvorbis libogg faad2 ffmpeg curl sqlite bzip2 pulseaudio tcp-wrappers openal-soft yajl jack faad2 flac libao fluidsynth libcdio wavpack libopus mpg123 libmms libmodplug boost icu dbus expat zlib libupnp"
++inherit autotools useradd systemd pkgconfig
++
++DEPENDS += " \
++    alsa-lib \
++    libsamplerate0 \
++    libsndfile1 \
++    libvorbis \
++    libogg \
++    faad2 \
++    ffmpeg \
++    curl \
++    sqlite \
++    bzip2 \
++    pulseaudio \
++    tcp-wrappers \
++    openal-soft \
++    yajl \
++    jack \
++    faad2 \
++    flac \
++    libao \
++    fluidsynth \
++    libcdio \
++    wavpack \
++    libopus \
++    mpg123 \
++    libmms \
++    libmodplug \
++    boost \
++    icu \
++    dbus \
++    expat \
++    zlib \
++    libupnp \
++"
+ 
+ SRC_URI = " \
+     http://www.musicpd.org/download/${BPN}/0.19/${BP}.tar.xz \
+@@ -12,8 +46,6 @@ SRC_URI = " \
+ SRC_URI[md5sum] = "fc19f76b512bd471b6af5214965ff7c5"
+ SRC_URI[sha256sum] = "8305b8bc026f4b6bde28b8dd09bfdddbe5590acf36358eed4d083a396e301730"
+ 
+-inherit autotools useradd systemd
+-
+ EXTRA_OECONF = "enable_bzip2=yes"
+ EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_unitdir}/system/', '--without-systemdsystemunitdir', d)}"
+ 
+@@ -63,5 +95,3 @@ USERADD_PARAM_${PN} = " \
+     --home ${localstatedir}/lib/mpd \
+     --groups audio \
+     --user-group mpd"
+-
+-PNBLACKLIST[mpd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130612/"
+-- 
+2.9.3
+
 
