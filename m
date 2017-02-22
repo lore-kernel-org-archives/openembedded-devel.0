@@ -1,50 +1,45 @@
-Return-Path: <gordan.markus@pelagicore.com>
-Received: from mail-lf0-f47.google.com (mail-lf0-f47.google.com
-	[209.85.215.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A85D730C3
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id C5BB3730B1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 10:25:18 +0000 (UTC)
-Received: by mail-lf0-f47.google.com with SMTP id l12so3664666lfe.0
+	Wed, 22 Feb 2017 11:57:08 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id i186so56930wmf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 02:25:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=4j0DEA2EugG0bWtEV1454mUKYxP/56S2CoRkc+bHUH8=;
-	b=y61HORWovJOOf3oBMfHSNZaBn4SleCdoDIDk9elo7dXfTivLlr7q8BeXXwlrT5C8yD
-	5cicbD9kfDu46IRMc3Q2kn9KiVO1fvfDFFv7YOw6a+QpercZ4rufigA8KyacvOFZpc+J
-	9ysVM3F/RPxGK0KrZAdDXTKy/LtB8sMTfFhfPFD+g67LUSQT28rIJPXnHwQCTA/BbBPH
-	l4QtwmAgKOvr2BIXj/SerU9AaBKE/MTlG6X3JGXjtrOW3LRO5zp4grLI/2fa2uWo83MN
-	7vWxBiR/GG5kHVD6ARBVHeaLeyJ8vcxz/zNsA80Mppca9ZEGLYYVc9XLucr4odospKT4
-	uMRg==
+	Wed, 22 Feb 2017 03:57:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=To7t8vdm6TJQSmoOR5JJl8hi+CVwwcQ1pszaNpLxexg=;
+	b=gxablEDU+EiHx6BJEriBuDemwzsek8GONih6ZqaOqfW9qvfcmpYVWo5/7XQLs0cKeu
+	+n8VzxDs7VR9AVzLRhSUQivK2cvk/3fPF7n53iIF5hb+WffV2dqJIL7DNpKRw+U3Huyo
+	s49q99qjHVFHedqvjm3RT2LUnKCYEOviqly/o71d++o8eSj9k0HYWiLhNA5gqoOob3H7
+	zYKSQRwsUObo4T0VU0HI2AqF0OSDUQg7N63MlVQF1UUsIkPnqxMWPd6eqMPJQtB5bsCA
+	cNL75Tb+Qu+vfcrqNQdzLp075yA58aMwYndngkUzJX4q177xajP70Jzl05l+IDGLT7S7
+	aMcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=4j0DEA2EugG0bWtEV1454mUKYxP/56S2CoRkc+bHUH8=;
-	b=WU6FtKa8+JD4HBCESlXFtAKbDCu53e6dhV9G1aj7Y10ZkZXAIUt4vIt1guQtnvyQrL
-	rqF4FLxYmzlRjG0SBbxq7zfYnylHWak1dA9UGp8GVzmM0os/eF2phDVQ3XLzImogp7To
-	ypg2s9PATpEQ1KCzqCAwnD9DJMu79uy6E0e1xxK6ogef7q4nEwmZBL9DAc9l08bYKt3E
-	/q8U6D52bM6ZJscwEpO1hWYxdFYnSLKyUxNfTPH/0mH1UGom7REWxhjt581EBSLBfaIO
-	x8W+0SQ+46sdvHF+tvbnogKhHEqBCheFCdA891fz79NImrmdkfa72ASxsOIO/r09VFNh
-	Mq4Q==
-X-Gm-Message-State: AMke39nOvd0aiJgc/cAB1NnF7zFDtGeQTQiejyuw50AdeNFoZVoH0n2d6SGdPfgnP3RDt4vg
-X-Received: by 10.46.75.9 with SMTP id y9mr8161701lja.62.1487759118911;
-	Wed, 22 Feb 2017 02:25:18 -0800 (PST)
-Received: from gordanmarkus-XPS13.IHU.local
-	(static-212-247-53-108.cust.tele2.se. [212.247.53.108])
-	by smtp.gmail.com with ESMTPSA id r18sm281051lff.4.2017.02.22.02.25.17
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=To7t8vdm6TJQSmoOR5JJl8hi+CVwwcQ1pszaNpLxexg=;
+	b=DTeY7r2XXt+VFIgEQtZhM9fIiyPUP/RC1KgoeEoxhjXTXddyM5kqw2q4076f52JRsZ
+	RhVZUupreDw4BD+x6IRo+a5Lvd2TJKrNhSq5PXoM6xlXUsvt6hXagLlbyhB+RGsU1viu
+	BJYtk902IF/mTpWlIx1F10oTKVC+QceI87TqdGI8WiZ/067xq9cjFi2w4GnQlbvtbrCm
+	xA9I6gbRqNaaVWsKjmwWloCvgzFeKflWUTZEb910LLL1z/WCfxX7p8Lg07PDkUmPMyeJ
+	HwHfHOfFcZBqwpT0GcX3qVZsl8frVc3cb0gNiLYSfhezre4ATQVkZkYdJEMivv/CMTJ2
+	B2Tg==
+X-Gm-Message-State: AMke39n+nn0hO9Sg/UMFl+o1GEuSYOYbAqm0aEe/UIMmywA431HDKW97l9KibWFhi1vu4w==
+X-Received: by 10.28.71.133 with SMTP id m5mr2034648wmi.132.1487764629581;
+	Wed, 22 Feb 2017 03:57:09 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	l140sm2273974wmg.12.2017.02.22.03.57.08
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 22 Feb 2017 02:25:17 -0800 (PST)
-From: =?UTF-8?q?Gordan=20Marku=C5=A1?= <gordan.markus@pelagicore.com>
+	Wed, 22 Feb 2017 03:57:08 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Feb 2017 11:25:10 +0100
-Message-Id: <20170222102510.13059-2-gordan.markus@pelagicore.com>
-X-Mailer: git-send-email 2.9.3
-MIME-Version: 1.0
-Cc: =?UTF-8?q?Gordan=20Marku=C5=A1?= <gordan.markus@pelagicore.com>
-Subject: [meta-qt5][PATCH] qtwebengine: add commercial licence
+Date: Wed, 22 Feb 2017 12:57:07 +0100
+Message-Id: <20170222115707.14711-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.11.1
+Cc: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
+Subject: [PATCH] android-tools: add libcap dependency and fix build on big endian systems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,29 +52,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2017 10:25:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 22 Feb 2017 11:57:11 -0000
 
-Signed-off-by: Gordan Markuš <gordan.markus@pelagicore.com>
+* add dependency on libcap to fix:
+  android-tools/5.1.1.r37-r0/git/system/core/adb/adb.c:39:28: fatal error: sys/capability.h: No such file or directory
+   #include <sys/capability.h>
+                            ^
+* add patch from buildroot to fix build with newer glibc and on
+  bit-endian systems
+  android-tools/5.1.1.r37-r0/git/system/core/adb/usb_linux_client.c:38:25: error: initializer element is not constant
+    #define cpu_to_le32(x)  htole32(x)
+                            ^
+
+* and also disable thumb to fix:
+  http://errors.yoctoproject.org/Errors/Details/133881/
+
+* drop default apply=yes for the .patch files
+
+Signed-off-by: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-qt/qt5/qtwebengine_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../android-tools/fix-big-endian-build.patch       | 39 ++++++++++++++++++++++
+ .../android-tools/android-tools_5.1.1.r37.bb       | 23 ++++++++-----
+ 2 files changed, 53 insertions(+), 9 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/fix-big-endian-build.patch
 
-diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index 8e60d72..a4ee055 100644
---- a/recipes-qt/qt5/qtwebengine_git.bb
-+++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "QtWebEngine combines the power of Chromium and Qt"
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/fix-big-endian-build.patch b/meta-oe/recipes-devtools/android-tools/android-tools/fix-big-endian-build.patch
+new file mode 100644
+index 000000000..8deaf3a3d
+--- /dev/null
++++ b/meta-oe/recipes-devtools/android-tools/android-tools/fix-big-endian-build.patch
+@@ -0,0 +1,39 @@
++Fix build on big endian systems
++
++The usb_linux_client.c file defines cpu_to_le16/32 by using the C
++library htole16/32 function calls. However, cpu_to_le16/32 are used
++when initializing structures, i.e in a context where a function call
++is not allowed.
++
++It works fine on little endian systems because htole16/32 are defined
++by the C library as no-ops. But on big-endian systems, they are
++actually doing something, which might involve calling a function,
++causing build failures.
++
++To solve this, we simply open-code cpu_to_le16/32 in a way that allows
++them to be used when initializing structures.
++
++Signed-off-by: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
++
++Index: b/system/core/adb/usb_linux_client.c
++===================================================================
++--- a/system/core/adb/usb_linux_client.c
+++++ b/system/core/adb/usb_linux_client.c
++@@ -34,8 +34,15 @@
++ #define MAX_PACKET_SIZE_FS	64
++ #define MAX_PACKET_SIZE_HS	512
++ 
++-#define cpu_to_le16(x)  htole16(x)
++-#define cpu_to_le32(x)  htole32(x)
+++#if __BYTE_ORDER == __LITTLE_ENDIAN
+++# define cpu_to_le16(x) (x)
+++# define cpu_to_le32(x) (x)
+++#else
+++# define cpu_to_le16(x) ((((x) >> 8) & 0xffu) | (((x) & 0xffu) << 8))
+++# define cpu_to_le32(x) \
+++	((((x) & 0xff000000u) >> 24) | (((x) & 0x00ff0000u) >>  8) | \
+++	 (((x) & 0x0000ff00u) <<  8) | (((x) & 0x000000ffu) << 24))
+++#endif
++ 
++ struct usb_handle
++ {
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+index a9e7d5d82..f39a82ccc 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
++++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = " \
+     file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=8bef8e6712b1be5aa76af1ebde9d6378 \
+     file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9 \
+ "
+-DEPENDS = "libbsd libpcre openssl zlib"
++DEPENDS = "libbsd libpcre openssl zlib libcap"
  
- # Read http://blog.qt.io/blog/2016/01/13/new-agreement-with-the-kde-free-qt-foundation/
--LICENSE = "LGPL-3.0 & BSD & GPL-3.0 & The-Qt-Company-GPL-Exception-1.0"
-+LICENSE = "BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( LGPL-3.0 | The-Qt-Company-Commercial )"
- LIC_FILES_CHKSUM = " \
-     file://src/core/browser_context_qt.cpp;md5=b5193b7d68699260f3b40b201365c8d2;beginline=1;endline=38 \
-     file://src/3rdparty/chromium/LICENSE;md5=0fca02217a5d49a14dfe2d11837bb34d \
+ ANDROID_TAG = "android-5.1.1_r37"
+ ANDROID_MIRROR = "android.googlesource.com"
+@@ -23,14 +23,15 @@ SRC_URI = " \
+     git://${LIBHARDWARE_REPO};name=libhardware;protocol=https;nobranch=1;destsuffix=git/hardware/libhardware;tag=${ANDROID_TAG} \
+     git://${LIBSELINUX_REPO};name=libselinux;protocol=https;nobranch=1;destsuffix=git/external/libselinux;tag=${ANDROID_TAG} \
+     git://${BUILD_REPO};name=build;protocol=https;nobranch=1;destsuffix=git/build;tag=${ANDROID_TAG} \
+-    file://remove-selinux-android.patch;apply=yes \
+-    file://use-capability.patch;apply=yes \
+-    file://use-local-socket.patch;apply=yes \
+-    file://preserve-ownership.patch;apply=yes \
+-    file://mkbootimg-Add-dt-parameter-to-specify-DT-image.patch;apply=yes \
+-    file://remove-bionic-android.patch;apply=yes \
+-    file://define-shell-command.patch;apply=yes \
+-    file://implicit-declaration-function-strlcat-strlcopy.patch;apply=yes \
++    file://remove-selinux-android.patch \
++    file://use-capability.patch \
++    file://use-local-socket.patch \
++    file://preserve-ownership.patch \
++    file://mkbootimg-Add-dt-parameter-to-specify-DT-image.patch \
++    file://remove-bionic-android.patch \
++    file://define-shell-command.patch \
++    file://implicit-declaration-function-strlcat-strlcopy.patch \
++    file://fix-big-endian-build.patch \
+     file://android-tools-adbd.service \
+     file://.gitignore;subdir=git \
+     file://adb.mk;subdir=${BPN} \
+@@ -43,6 +44,10 @@ SRC_URI = " \
+ S = "${WORKDIR}/git"
+ B = "${WORKDIR}/${BPN}"
+ 
++# http://errors.yoctoproject.org/Errors/Details/133881/
++ARM_INSTRUCTION_SET_armv4 = "arm"
++ARM_INSTRUCTION_SET_armv5 = "arm"
++
+ inherit systemd
+ 
+ SYSTEMD_SERVICE_${PN} = "android-tools-adbd.service"
 -- 
-2.9.3
+2.11.1
 
 
