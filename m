@@ -1,44 +1,59 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 19754730BF
+Return-Path: <jaragunde@igalia.com>
+Received: from smtp4.mundo-r.com (smtp3.mundo-r.com [212.51.32.191])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D5A971DEE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 12:15:58 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id v77so152128wmv.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 04:16:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=rTw+4rdgcGFj9onL5WZmFG1nlSJm8qBOBmOGYoYvuIo=;
-	b=R1vFkV3RXiRPOVztnngAW/20BI/UvSTMAA0qkApiKqdAShHMBopNMVwXfS9wuj60ed
-	hDSR+NQTKM15uiqXs998zaoOqyWz2+/+4c5UHtPMocB8Ze8Zfcinl0dtk0NEJh2qDhDO
-	D5oGo8ceTSpwF5d2rI+FRIqAWmq+Jh2+dUxh/R5uvqICG5pOOwL3841GlqE0SkceQ/ua
-	bfTlceC4Dzkoc5fO+Yxu5wLrRxFv1onsLDW1XrdTeCqnispHO56FBCUUpwiQo665FoqF
-	iSIC0XhW3t22xGWsbVhd7EIsno8juNWCIvV2ZASeZ7v3uYjWCD8y4Hp/svkqdc/nB6oq
-	iOkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=rTw+4rdgcGFj9onL5WZmFG1nlSJm8qBOBmOGYoYvuIo=;
-	b=aAeWa8PHnIkJ5OSa3JVsZDyAwOC+COiiiKbGTqNmIfoPueHmUdGeOCLjSFgpqGqmTW
-	FKYhbTaKj8q3i7EbtWnqy0e9czRsURyty2Q8kjaRF+J9T9eTptEtnysVSprnld3owhZi
-	XvdzQAWzAdZgLWmMJCKIPyeuPikSnW9U3KCKNgkBMiMVblzLdHK0Tfivbj/gYNn/RKLf
-	UPQyo8FnFkkqqLtDQIMNBOYjz9mQkAR2WNPrAnntYOalrjxQpz/UfJqeBAMGieqtYHun
-	n2Ve0szxeKeayRdOkUyUHc2CEZlOGZM3xbfFkqktohJ1i2+hESK48kVbb4Qh4kBQ+Kwq
-	+rIQ==
-X-Gm-Message-State: AMke39n/0kXCHlfSq8vrUriM9xfGEpkDZ2SpFjr6F1mtUxY6VgnsnLVFwkL/UI0RRD7GMg==
-X-Received: by 10.28.144.66 with SMTP id s63mr2223662wmd.134.1487765759599;
-	Wed, 22 Feb 2017 04:15:59 -0800 (PST)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id y1sm1862876wme.15.2017.02.22.04.15.58
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 22 Feb 2017 04:15:58 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Wed, 22 Feb 2017 12:53:59 +0000 (UTC)
+IronPort-PHdr: =?us-ascii?q?9a23=3A/e0inh/zAQ79Pv9uRHKM819IXTAuvvDOBiVQ1KB2?=
+	=?us-ascii?q?2+McTK2v8tzYMVDF4r011RmSDNidsqwP17GempujcFRI2YyGvnEGfc4EfD4+ou?=
+	=?us-ascii?q?JSoTYdBtWYA1bwNv/gYn9yNs1DUFh44yPzahANS47xaFLIv3K98yMZFAnhOgpp?=
+	=?us-ascii?q?POT1HZPZg9iq2+yo9ZDeZwVFiCCgbb5zIxm7ogvcvdQKjIV/Lao81gHHqWZSde?=
+	=?us-ascii?q?RMwmNoK1OTnxLi6cq14ZVu7Sdete8/+sBZSan1cLg2QrJeDDQ9LmA6/9brugXZ?=
+	=?us-ascii?q?TQuO/XQTTGMbmQdVDgff7RH6WpDxsjbmtud4xSKXM9H6QawyVD+/6apgVR3mhz?=
+	=?us-ascii?q?odNzMh8G/ZlNF+gqxYrhymqBNw34HabZqJNPd9ZK7RYckXSXZDU8tXSidPApm8?=
+	=?us-ascii?q?b4wKD+cZOehXtZXyp1wVohu5GAKhGPnvxSVHhn/r2601zvouGhzc0gs6BdIBrn?=
+	=?us-ascii?q?XVp8jyOacQS++11rPHzTreb/NQxDjy9pPFchEuof6WWbJwcNDexVMzGAPCi1Wd?=
+	=?us-ascii?q?sIroNC6b2OQKtmiU9etgVeS3hm4+twF9uDmvxsA0hojJgYIa1kzE9SJhwIYvIt?=
+	=?us-ascii?q?24SlB0bsK4EJdKsCGaLYR2T8U/SG9roCY30rkLtYOhcCQX1ZgqxQTTZviDfoSS?=
+	=?us-ascii?q?/x7uVOacLDFlj3x/Yr2/nQy98U24x+35Ucm7zUhFozJektnJqnANzxvT6tWbSv?=
+	=?us-ascii?q?dl/keuxzKP1wfL5+FKO080k6vaK58nwrEujJYTsEvDETXymEX3lqCabFkr+u+t?=
+	=?us-ascii?q?6+j/Y7XmoIGTN5Nshwz6L6gigNGzDfk6PwQUW2WW/f6w2KDj8ED5WLlKi+c5kq?=
+	=?us-ascii?q?jdsJDUP8Qboau5DhdX0ok58RawFTim0MkenXYaMl1IYxOHj4fzNFHKIfD3F+2z?=
+	=?us-ascii?q?jEirkDdu3/zGJKHuAo3RLnjfl7fsZbF961ZCxwo1099f4olbBa8cL/3uRED+qc?=
+	=?us-ascii?q?XUAQInPAyq3ennDM5w1ocfWWKUHq+ZK7nesViQ5u0xJemDeooVty3jJPc4+vHh?=
+	=?us-ascii?q?k2I2lUUafamz0psdcGq4Eeh+I0WFfXrshc8MEWAWvgUkUuzqiVqCXCVUZ3apRK?=
+	=?us-ascii?q?I95io7CJ64AofGXYChmqCO3CC+HpFMfW9GEEiGEW30eIWcR/cMdCWSL9dkkjMe?=
+	=?us-ascii?q?T7ihV44h1Re0uA/40bVnKPHU9TcDuJLs0dh6/ezTlRUo+TNoCMSd1jLFc2YhmX?=
+	=?us-ascii?q?sFQTIz1q1zrUFxj1uOz6V8q/hZDsBIofRRXwE3MJTRw+B3B5b1QA2SUM2OTQOE?=
+	=?us-ascii?q?S96hCzZ5Z8g4zMIIb0s1I1S4gwKLiyijGbYairqHCbQ1/avY3nG3LMF4nSWVnJ?=
+	=?us-ascii?q?I9hkUrF5McfVatgbRyolDe?=
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: =?us-ascii?q?A2H1BgCTiK1Y/5tjdVteHgYMGQYMgyZhg?=
+	=?us-ascii?q?QmDW4p6oUmCRIIPgg0aEIV4gnxBFgEBAQEBAQEBAQEBAl8ogjMgDz0QAQEBAQE?=
+	=?us-ascii?q?BAQEBIwEBAQEBASMCDYEHDwFGNQImAnKJeQEJrnSCJotFAQsBJYELhUGKD4IAD?=
+	=?us-ascii?q?C6CXwWcEIZ0iy8CgkyOQkiSXSYLJ4EAVIcdPzWKFAEBAQ?=
+X-IPAS-Result: =?us-ascii?q?A2H1BgCTiK1Y/5tjdVteHgYMGQYMgyZhgQmDW4p6oUmCRII?=
+	=?us-ascii?q?Pgg0aEIV4gnxBFgEBAQEBAQEBAQEBAl8ogjMgDz0QAQEBAQEBAQEBIwEBAQEBA?=
+	=?us-ascii?q?SMCDYEHDwFGNQImAnKJeQEJrnSCJotFAQsBJYELhUGKD4IADC6CXwWcEIZ0iy8?=
+	=?us-ascii?q?CgkyOQkiSXSYLJ4EAVIcdPzWKFAEBAQ?=
+X-IronPort-AV: E=Sophos;i="5.35,194,1484002800"; d="scan'208";a="162902284"
+Received: from fanzine.igalia.com ([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 22 Feb 2017 13:53:58 +0100
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+	by fanzine.igalia.com with esmtps 
+	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
+	id 1cgWQf-0006ru-PE; Wed, 22 Feb 2017 13:53:57 +0100
+Received: from fanzine.local.igalia.com ([192.168.10.13]
+	helo=goomba.local.igalia.com) by mail.igalia.com with esmtps 
+	(Cipher TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim)
+	id 1cgWQd-0005Y7-57; Wed, 22 Feb 2017 13:53:55 +0100
+From: =?UTF-8?q?Jacobo=20Aragunde=20P=C3=A9rez?= <jaragunde@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Feb 2017 13:15:57 +0100
-Message-Id: <20170222121557.16805-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.11.1
-Subject: [PATCH] pidgin: add missing dependencies and unblacklist
+Date: Wed, 22 Feb 2017 13:53:49 +0100
+Message-Id: <1487768029-5984-1-git-send-email-jaragunde@igalia.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+Cc: otavio@ossystems.com.br
+Subject: [meta-browser][PATCH] chromium: disable generate_character_data for qemux86
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,33 +66,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2017 12:15:59 -0000
+X-List-Received-Date: Wed, 22 Feb 2017 12:54:02 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Chromium-wayland fails with:
+  http://errors.yoctoproject.org/Errors/Build/32356/
+
+Root cause seems to be ICU mixing host and target architectures,
+same as in: https://bugreports.qt.io/browse/QTBUG-57705
+
+Signed-off-by: Jacobo Aragunde Pérez <jaragunde@igalia.com>
 ---
- meta-oe/recipes-support/pidgin/pidgin_2.11.0.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ recipes-browser/chromium/chromium.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/pidgin/pidgin_2.11.0.bb b/meta-oe/recipes-support/pidgin/pidgin_2.11.0.bb
-index aacb30a9b..462e21c92 100644
---- a/meta-oe/recipes-support/pidgin/pidgin_2.11.0.bb
-+++ b/meta-oe/recipes-support/pidgin/pidgin_2.11.0.bb
-@@ -2,7 +2,7 @@ SUMMARY = "multi-protocol instant messaging client"
- SECTION = "x11/network"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
--DEPENDS = "python virtual/libintl intltool-native libxml2 gconf"
-+DEPENDS = "python virtual/libintl intltool-native libxml2 gconf glib-2.0-native"
+diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
+index 0e7250e..0076f3a 100644
+--- a/recipes-browser/chromium/chromium.inc
++++ b/recipes-browser/chromium/chromium.inc
+@@ -15,6 +15,7 @@ inherit gettext pythonnative
  
- inherit autotools gettext pkgconfig gconf perlnative
+ ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'arm_float_abi=hard', 'arm_float_abi=softfp', d)}"
+ GYP_DEFINES += "${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
++GYP_DEFINES_append_qemux86 = " generate_character_data=0"
  
-@@ -118,5 +118,3 @@ python populate_packages_prepend () {
-         description='Finch plugin %s',
-         prepend=True, extra_depends='')
- }
--
--PNBLACKLIST[pidgin] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130634/"
+ do_configure() {
+ 	cd ${S}
 -- 
-2.11.1
+2.7.4
 
 
