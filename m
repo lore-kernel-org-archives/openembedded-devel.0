@@ -1,44 +1,56 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f193.google.com (mail-ua0-f193.google.com
-	[209.85.217.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F23673157
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f46.google.com (mail-pg0-f46.google.com [74.125.83.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 007D473159
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 16:13:52 +0000 (UTC)
-Received: by mail-ua0-f193.google.com with SMTP id 40so632320uau.2
+	Wed, 22 Feb 2017 16:15:10 +0000 (UTC)
+Received: by mail-pg0-f46.google.com with SMTP id b129so2800229pgc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 08:13:54 -0800 (PST)
+	Wed, 22 Feb 2017 08:15:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=Z5Bma9RXFMnAB5wR4X12sxShkBYbapPRYxNEIE29gdA=;
-	b=Lr9LY0/qZRtbNFSDy4rlRftaXysXLSw5NWtwWa7yhIsGtFz9QulXwdZZUROjGq6pgK
-	dXfhW+2A3QtW9kQEY/ZZJ+sWF7WNQ8BVpxIIbqvGYI6/XLQPaDorLmOohhHcIEiSQ5cR
-	36XOBFNP3M3cBaSG+xzfh3zoFvwmqkaVLbcklEyPx8XmauqXWnbGZd2RzT1uskGc0qmP
-	I/wkip3DnV8WwFUXl5XYbLWRvvmAXOQyDAVwryleJ5UgUIWYaXlhEwYmYXlOh3ViLx4E
-	IWUIu7mNuWqAauMifyNBFR0mm+VfvDr54lCbfnOZqslKspWzKRcIhnZ94DsnQxvTseCH
-	cUbA==
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to; bh=QrRL/mC8QdrdRJyzqhrwrlnMp7tEAIJvYMvpuVNzZOw=;
+	b=uNdwqpLgWwlHvU6i24++h3tgAo0hs+SIzvLETs7uQxV0TxkczWqK+qe1RUyseMjyI8
+	mM2eHfyYQXCRDnL6SVY+aT04sA8ZCangAjxmWw1/+U4UIZd82EGaaB0jitgjkN1rDGBN
+	EkN1yXO4IWM92PN46d78ZPG2lz52gs7eGtS9EeIFsvi4lHQLF0YTx60jgqPtXxuu7Pfb
+	hSFH5KoqzqZs8qo3/7sOuMJ4P5+QzRcB5zIBNzzF7R2YkU46zrniSUgy0JbAa2YQdlI2
+	jkheH9OrrDpDJToo0vvGo9IpiOT0SGa0LlaEfqVin5mBPdzqo8CGRHgPq0st9KxscVTF
+	Fl1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=Z5Bma9RXFMnAB5wR4X12sxShkBYbapPRYxNEIE29gdA=;
-	b=orWQke22LvVTlkB9n7HgfPzM9PKROwLDHsrLn445RxlXjYO1dbRZC4/ozXC1Q/LaS0
-	unvD2SdIt93sNDRGrsuLW6aqTi00LCg9LYxzyOg0UZ5l2aRfZkubfWwK1CHPVuWyQwgl
-	eXf/6QokJSsjVwbTqL+PPNMH7muw6e04LS1wOQ002Il8E3HhBgDDDoXUM/L5Eqp6zYzU
-	2s9WfiANj8uT1dIg4wG2H834xcRhvXvCM7O7ULBXZoHt0x1WWehBXy01RqgzxahxLE9v
-	dQTWw962TahDG/G1wGDV3xTIXlkTlUQfJVVr8G3HQsk2gLWaRjo13IcakSnMBcU4dseg
-	RK7w==
-X-Gm-Message-State: AMke39lyrdObEXFn/k0OeoI8oF1GTSxuX/iFfKRw8CMvm6obf1cyDyq8A+5heHpZIBTK83fUzgDr6iUy0EF9jg==
-X-Received: by 10.176.3.143 with SMTP id 15mr7570967uau.91.1487780033751; Wed,
-	22 Feb 2017 08:13:53 -0800 (PST)
-MIME-Version: 1.0
-References: <1486653471-20252-1-git-send-email-amarnath.valluri@intel.com>
-In-Reply-To: <1486653471-20252-1-git-send-email-amarnath.valluri@intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 22 Feb 2017 16:13:42 +0000
-Message-ID: <CAMKF1spUE7=8jD7KUokv7ntUD05c4yjbxV42v8yMjC0KqqBQAw@mail.gmail.com>
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to;
+	bh=QrRL/mC8QdrdRJyzqhrwrlnMp7tEAIJvYMvpuVNzZOw=;
+	b=oJ2mxZjiuv/VzNMwsJsJmFjngQwCYScyc4NztGloHGSpJRhYz0FbJdmPtIIfXvbQM0
+	1UQ5R+iyCOohoeGYCVVmeUuBnde90JBjCTDuK59bByM/b2vmdKddfEJJ4GPacXgvxYik
+	cR5Bs+5Pb1+gxkEO65WsUEZIuwBcYVVkFxSl96Q4n0lKGpwBPCwK4E851cYehKkUtViT
+	Ji9aXYbEjZeXso1hpdbCcuXpEMAW8V6lDRuyOki6dLPYVmPxrMLUZEhen9UG+SeFWB1k
+	OI/BpDagHKRSl9NQ/NTfxEgJJFPlmp71K2und79MpnWHpWkawfxUGg197gTa5FAIyuHz
+	W/cQ==
+X-Gm-Message-State: AMke39k7S9jbiz0hvC6PvjpLhpJVszHyLNXne4+EQ8/k8FzVsUY/4DZxwLJ475IK1WD2ag==
+X-Received: by 10.99.168.76 with SMTP id i12mr42434495pgp.73.1487780111810;
+	Wed, 22 Feb 2017 08:15:11 -0800 (PST)
+Received: from [10.11.10.242] ([67.23.202.154])
+	by smtp.gmail.com with ESMTPSA id
+	c64sm4622912pfa.45.2017.02.22.08.15.11
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 22 Feb 2017 08:15:11 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
+References: <CAJTo0LZRyFFJC8nSTa=xDiAPFcOYGU5MHW04nEoPezydBz+3oA@mail.gmail.com>
+	<CALbNGRSPZw+LL3JXv4+D+k2C3DAV=5_U=44M8fcSU50V_-7KEw@mail.gmail.com>
+	<20170217180254.GA3276@jama> <20170217182816.GD8436@mentor.com>
+	<3870658c-01ec-252b-9940-a6af3fb1f529@balister.org>
+	<1487561463.17001.28.camel@linuxfoundation.org>
+	<20170220111829.GA3266@jama>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <b8c01430-ac67-1e28-9058-98ad07e91ef7@gmail.com>
+Date: Wed, 22 Feb 2017 08:15:02 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.0
+MIME-Version: 1.0
+In-Reply-To: <20170220111829.GA3266@jama>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH v2] udisks: Make use of bitbake variables for sbin, lib locations.
+Subject: Re: Splitting meta-oe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,164 +63,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2017 16:13:54 -0000
-Content-Type: text/plain; charset=UTF-8
-
-On Thu, Feb 9, 2017 at 7:21 AM Amarnath Valluri <amarnath.valluri@intel.com>
-wrote:
-
-> Took the opportunity to patch the source to accepet the udev rules
-> directory
-> from make variables.
->
-> Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
-> ---
->  ...01-Make-udev-rules-directory-configurable.patch | 91
-> ++++++++++++++++++++++
->  meta-oe/recipes-support/udisks/udisks_1.0.5.bb     |  4 +-
->  2 files changed, 94 insertions(+), 1 deletion(-)
->  create mode 100644
-> meta-oe/recipes-support/udisks/udisks/0001-Make-udev-rules-directory-configurable.patch
->
-> diff --git
-> a/meta-oe/recipes-support/udisks/udisks/0001-Make-udev-rules-directory-configurable.patch
-> b/meta-oe/recipes-support/udisks/udisks/0001-Make-udev-rules-directory-configurable.patch
-> new file mode 100644
-> index 0000000..3cc0400
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-support/udisks/udisks/0001-Make-udev-rules-directory-configurable.patch
-> @@ -0,0 +1,91 @@
-> +From 32278297170ffb49116b5789e4a0588b99d02bd0 Mon Sep 17 00:00:00 2001
-> +From: Amarnath Valluri <amarnath.valluri@intel.com>
-> +Date: Thu, 9 Feb 2017 11:02:53 +0200
-> +Subject: [PATCH] Make udev rules directory configurable.
-> +
-> +udev rules directory can be configurable via undevrulesdir variable. And
-> use
-> +libdir, sbindir for installing librares and binaries.
-> +
-> +Upstream-Status: Inappropriate[Embedded specific]
-> +
+X-List-Received-Date: Wed, 22 Feb 2017 16:15:11 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
-This patch is fine but this should be proposed for udisks upstream as well
+
+On 02/20/2017 03:18 AM, Martin Jansa wrote:
+> On Sun, Feb 19, 2017 at 07:31:03PM -0800, Richard Purdie wrote:
+>> On Fri, 2017-02-17 at 14:45 -0500, Philip Balister wrote:
+>>> And I'm with these gyus. Splitting the git repository doesn't solve
+>>> any underlying problems. The real problem from my point of view is
+>>> very few of use are actually paid to maintain the layers we maintain.
+>>>
+>>> Employers want to pay things they profit from, and that is not paying
+>>> someone to maintain "core infrastructure".
+>>>
+>>> Layer maintainers interests change over time, and you burn out
+>>> supporting people who get to do all the cool stuff with the layers
+>>> you maintain. In the end, you get all the crap and non of the glory.
+>>> Within this list, most people appreciate your work. Outside the
+>>> community, people completely underestimate the amount of work
+>>> required to keep the ecosystem running.
+>>>
+>>> Yeah, add my name to the list of cranky people.
+>> I do think this is a valid question that Ross asks and that whilst the
+>> first quick reaction is "no", its worth thinking about the pros/cons.
+>>
+>> The pros to me would be about better test time on patches and in theory
+>> more specialist knowledge. This isn't to say Martin/Joe don't do a bad
+>> job but the size of meta-oe does mean there are limits.
+> If I continue to do the same "bitbake world" builds to test as many
+> layers as possible, then the test time will be exactly the same even if
+> we split meta-oe repository into 10 smaller repositories, probably a bit
+> longer for fetching all those small repos.
+>
+>> The cons are more around finding suitable layer maintainers, which as
+>> we all know are hard to find.
+>>
+>> I'd probably suggest that:
+>>
+>> a) We need to encourage/empower more people to maintain layers
+> I think we lack people willing to contribute patches for recipes they
+> use, not people willing to merge them into corresponding repository.
+
+Correct. This does not solve the underlining issue.
+
+We do need to think what to do about black listed recipes. Suspect its a 
+separate thread.
+>
+>> b) Having better infrastructure, tools and processes that help a) would
+>>     therefore be desirable.
+Are you saying we have to make it easier for people to participate?
+
+Please Donate to OE so we can improve the infrastructure.
+
+If you split out each layer, each maintainer will have there own process 
+that works best for them.
+
+>> c) We need to be willing to separate out pieces for people to maintain
+>>     in such layers. It might not always work out but we should be
+>>     willing to try.
+so a layer per recipe would be the best in this case. This wont bring in 
+more help.
+
+>>
+>> As for the comments about core changes, I really do try hard not to
+>> make them in many ways. The ones we do make, I'd hope are for the right
+>> reasons.
+> Yes everybody agreed that RSS is good change and worth breaking unused
+> recipes.
+>
+>> No easy answers but don't shoot Ross for asking what I think is a
+>> reasonable question.
+> I wasn't trying to shoot him, but I still don't see how more
+> repositories solve the issue of unused recipes and lack of people
+> contributing to fix those still in use somewhere.
+
+There are other implications to think about after the break-up.
+
+1) What happens to meta-openembedded repo and or layer?
+2) Do we adopt the K.O model where the sub-layers are maintained 
+independently and then merge to meta-openemedded ( this could offload 
+work and improve quality).
+3) How do we sync branching? if we do #2, that is easier.
+4) Since the maintainers will have write permissions for their own 
+layers, does this mean we no longer have overall architects (a.k.a 
+Martin & Koen)
+5) How do we ensure the same level of support master currently benefits 
+from Martin's world if those responsibilities transfer to other layer 
+maintainers?
+6) How do we enforce dup recipes?
+
+If we decide to stop having a meta-openembedded layer;
+7) How long do you keep it around?
+8) Will the stable branches prior to the breakup only be in the aging 
+meta-openembedded layer and not new scheme?
+9) Do we have a meta-openembedded-classic?
+
+
 
 >
-> +Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
-> +---
-> + configure.ac            | 14 +++-----------
-> + data/Makefile.am        |  1 -
-> + src/probers/Makefile.am |  2 +-
-> + tools/Makefile.am       |  2 +-
-> + 4 files changed, 5 insertions(+), 14 deletions(-)
-> +
-> +diff --git a/configure.ac b/configure.ac
-> +index 8c4e4c2..a143397 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -227,15 +227,8 @@ if test "x$GCC" = "xyes"; then
-> +   LDFLAGS="-Wl,--as-needed $LDFLAGS"
-> + fi
-> +
-> +-if test "$prefix" = "/usr" -o "$prefix" = "/usr/local" ; then
-> +-  slashlibdir=/lib
-> +-  slashsbindir=/sbin
-> +-else
-> +-  slashlibdir=$prefix/lib
-> +-  slashsbindir=$prefix/sbin
-> +-fi
-> +-AC_SUBST(slashlibdir)
-> +-AC_SUBST(slashsbindir)
-> ++udevrulesdir=/lib/udev/udev.d
-> ++AC_SUBST(udevrulesdir)
-> +
-> + # *************
-> + # Remote Access
-> +@@ -299,8 +292,7 @@ echo "
-> +         sysconfdir:                 ${sysconfdir}
-> +         localstatedir:              ${localstatedir}
-> +         docdir:                     ${docdir}
-> +-        slashlibdir:                ${slashlibdir}
-> +-        slashsbindir:               ${slashsbindir}
-> ++        udevrulesdir:               ${udevrulesdir}
-> +         systemdsystemunitdir:       ${systemdsystemunitdir}
-> +
-> +         compiler:                   ${CC}
-> +diff --git a/data/Makefile.am b/data/Makefile.am
-> +index 411ea0f..4834960 100644
-> +--- a/data/Makefile.am
-> ++++ b/data/Makefile.am
-> +@@ -34,7 +34,6 @@ $(systemdservice_DATA): $(systemdservice_in_files)
-> Makefile
-> +       @sed -e "s|\@libexecdir\@|$(prefix)/lib/udisks|" $< > $@
-> + endif
-> +
-> +-udevrulesdir = $(slashlibdir)/udev/rules.d
-> + udevrules_DATA = 80-udisks.rules
-> +
-> + pkgconfigdir = $(datadir)/pkgconfig
-> +diff --git a/src/probers/Makefile.am b/src/probers/Makefile.am
-> +index 01c693b..6a0361a 100644
-> +--- a/src/probers/Makefile.am
-> ++++ b/src/probers/Makefile.am
-> +@@ -20,7 +20,7 @@ INCLUDES = \
-> + # TODO: ideally move most of this to udev and/or util-linux
-> + #
-> +
-> +-udevhelperdir = $(slashlibdir)/udev
-> ++udevhelperdir = $(libdir)/udev
-> + udevhelper_PROGRAMS = udisks-part-id                  \
-> +                       udisks-probe-sas-expander       \
-> +                       $(NULL)
-> +diff --git a/tools/Makefile.am b/tools/Makefile.am
-> +index 18325f7..0aaec11 100644
-> +--- a/tools/Makefile.am
-> ++++ b/tools/Makefile.am
-> +@@ -54,7 +54,7 @@ udisks_LDADD =
->      \
-> +       $(DBUS_GLIB_LIBS)                               \
-> +       $(POLKIT_DBUS_LIBS)
-> +
-> +-slashsbin_PROGRAMS = umount.udisks
-> ++sbin_PROGRAMS = umount.udisks
-> +
-> + umount_udisks_SOURCES = umount-udisks.c
-> + umount_udisks_LDADD = $(DBUS_GLIB_LIBS) $(POLKIT_DBUS_LIBS)
-> +--
-> +2.7.4
-> +
-> diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-> b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-> index eec6933..3757919 100644
-> --- a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-> +++ b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-> @@ -12,6 +12,7 @@ SRC_URI = " \
->      file://optional-depends.patch \
->      file://0001-fix-build-with-newer-glibc-versions.patch \
->      file://udisks-1.0.5-fix-service-file.patch \
-> +    file://0001-Make-udev-rules-directory-configurable.patch \
->  "
+> And I still think it's easier to send a patch to fix something instead
+> of volunteering to be maintainer of the layer with the one recipe you're
+> interested in fixing to merge your fix yourself.
+Agree
+
+- armin
 >
->  SRC_URI[udisks.md5sum] = "70d48dcfe523a74cd7c7fbbc2847fcdd"
-> @@ -22,7 +23,8 @@ inherit autotools-brokensep systemd gtk-doc
->  PACKAGECONFIG ??= ""
->  PACKAGECONFIG[parted] = "--enable-parted,--disable-parted,parted"
+> Cheers,
 >
-> -EXTRA_OECONF = "--disable-man-pages"
-> +EXTRA_OECONF = "--disable-man-pages --libdir=${base_libdir}
-> --sbindir=${base_sbindir}"
-> +EXTRA_OEMAKE = "udevrulesdir=${nonarch_base_libdir}/udev/rules.d/"
 >
->  FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
->                  ${datadir}/dbus-1/ \
-> --
-> 2.7.4
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+
 
