@@ -1,22 +1,25 @@
 Return-Path: <amarnath.valluri@intel.com>
 Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by mail.openembedded.org (Postfix) with ESMTP id ECE1F70031
+	by mail.openembedded.org (Postfix) with ESMTP id 798E3730F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 14:31:18 +0000 (UTC)
+	Wed, 22 Feb 2017 14:50:00 +0000 (UTC)
 Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga105.fm.intel.com with ESMTP; 22 Feb 2017 06:31:19 -0800
+	by fmsmga105.fm.intel.com with ESMTP; 22 Feb 2017 06:50:02 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.35,194,1484035200"; d="scan'208";a="51294802"
-Received: from avallurigigabyte.fi.intel.com ([10.237.72.170])
-	by orsmga002.jf.intel.com with ESMTP; 22 Feb 2017 06:31:18 -0800
-From: Amarnath Valluri <amarnath.valluri@intel.com>
+X-IronPort-AV: E=Sophos;i="5.35,194,1484035200"; d="scan'208";a="51301533"
+Received: from irdmzpr05.ir.intel.com (HELO [163.33.54.155]) ([163.33.54.155])
+	by orsmga002.jf.intel.com with ESMTP; 22 Feb 2017 06:50:01 -0800
+References: <1486559235-22891-1-git-send-email-amarnath.valluri@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Feb 2017 16:29:56 +0200
-Message-Id: <1487773796-11450-1-git-send-email-amarnath.valluri@intel.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1486559259-22981-1-git-send-email-amarnath.valluri@intel.com>
-References: <1486559259-22981-1-git-send-email-amarnath.valluri@intel.com>
-Subject: [PATCH v2] lvm2: Replace 'lib' with ${nonarch_base_libdir} for placing udev rules.
+From: Amarnath Valluri <amarnath.valluri@intel.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Message-ID: <b907c9eb-e101-bb02-8dc1-1166a9ecd5f8@intel.com>
+Date: Wed, 22 Feb 2017 16:50:50 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.0
+MIME-Version: 1.0
+In-Reply-To: <1486559235-22891-1-git-send-email-amarnath.valluri@intel.com>
+Subject: Re: [meta-oe] openct: Replace /lib/udev with ${nonarch_base_libdir}/udev.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,36 +32,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2017 14:31:19 -0000
+X-List-Received-Date: Wed, 22 Feb 2017 14:50:02 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
----
- meta-oe/recipes-support/lvm2/lvm2.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ping - reminder request for feedback
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index e0a126e..2bb0134 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -38,7 +38,7 @@ PACKAGECONFIG[odirect] = "--enable-o_direct,--disable-o_direct"
- PACKAGECONFIG[readline] = "--enable-readline,--disable-readline,readline"
- PACKAGECONFIG[selinux] = "--enable-selinux,--disable-selinux,libselinux"
- PACKAGECONFIG[thin-provisioning-tools] = "--with-thin=internal,--with-thin=none,,thin-provisioning-tools"
--PACKAGECONFIG[udev] = "--enable-udev_sync --enable-udev_rules --with-udev-prefix=,--disable-udev_sync --disable-udev_rules,udev"
-+PACKAGECONFIG[udev] = "--enable-udev_sync --enable-udev_rules --with-udevdir=${nonarch_base_libdir}/udev/rules.d,--disable-udev_sync --disable-udev_rules,udev"
- 
- # Unset user/group to unbreak install.
- EXTRA_OECONF = "--with-user= \
-@@ -83,7 +83,7 @@ SYSTEMD_AUTO_ENABLE = "disable"
- 
- TARGET_CC_ARCH += "${LDFLAGS}"
- 
--FILES_${PN} += "${libdir}/device-mapper/*.so ${base_libdir}/udev"
-+FILES_${PN} += "${libdir}/device-mapper/*.so ${nonarch_base_libdir}/udev"
- FILES_${PN}-scripts = " \
-     ${sbindir}/blkdeactivate \
-     ${sbindir}/fsadm \
--- 
-2.7.4
+On 08.02.2017 15:07, Amarnath Valluri wrote:
+> Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
+> ---
+>   meta-oe/recipes-support/openct/openct_0.6.20.bb | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-oe/recipes-support/openct/openct_0.6.20.bb b/meta-oe/recipes-support/openct/openct_0.6.20.bb
+> index d4ad9c1..85ca851 100644
+> --- a/meta-oe/recipes-support/openct/openct_0.6.20.bb
+> +++ b/meta-oe/recipes-support/openct/openct_0.6.20.bb
+> @@ -34,7 +34,7 @@ EXTRA_OECONF=" \
+>       --enable-pcsc \
+>       --enable-doc \
+>       --enable-api-doc \
+> -    --with-udev=/lib/udev \
+> +    --with-udev=${nonarch_base_libdir}/udev \
+>       --with-bundle=${libdir}/pcsc/drivers \
+>   "
+>   
+> @@ -42,7 +42,7 @@ inherit autotools pkgconfig
+>   
+>   FILES_${PN} += " \
+>       ${libdir}/ctapi \
+> -    /lib/udev \
+> +    ${nonarch_base_libdir}/udev \
+>       ${libdir}/openct-ifd.so \
+>       ${libdir}/pcsc \
+>       /run/openct/status \
+> @@ -62,7 +62,7 @@ do_install_append() {
+>   do_install () {
+>       rm -rf ${D}
+>       install -d ${D}/etc
+> -    install -dm 755 ${D}/lib/udev
+> +    install -dm 755 ${D}${nonarch_base_libdir}/udev
+>       # fix up hardcoded paths
+>       sed -i -e 's,/etc/,${sysconfdir}/,' -e 's,/usr/sbin/,${sbindir}/,' \
+>           ${WORKDIR}/openct.service ${WORKDIR}/openct.init
 
 
