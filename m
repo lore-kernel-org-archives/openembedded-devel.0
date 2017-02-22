@@ -1,25 +1,44 @@
-Return-Path: <amarnath.valluri@intel.com>
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F67C73145
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ua0-f193.google.com (mail-ua0-f193.google.com
+	[209.85.217.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F23673157
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 15:02:53 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga105.fm.intel.com with ESMTP; 22 Feb 2017 07:02:55 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.35,194,1484035200"; d="scan'208";a="51307356"
-Received: from irdmzpr05.ir.intel.com (HELO [163.33.54.155]) ([163.33.54.155])
-	by orsmga002.jf.intel.com with ESMTP; 22 Feb 2017 07:02:54 -0800
-To: openembedded-devel@lists.openembedded.org
-References: <1486559272-23031-1-git-send-email-amarnath.valluri@intel.com>
-From: Amarnath Valluri <amarnath.valluri@intel.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-Message-ID: <3ac9f990-0ffa-83bd-db26-46d3e8fd0dce@intel.com>
-Date: Wed, 22 Feb 2017 17:03:42 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.7.0
+	Wed, 22 Feb 2017 16:13:52 +0000 (UTC)
+Received: by mail-ua0-f193.google.com with SMTP id 40so632320uau.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Feb 2017 08:13:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=Z5Bma9RXFMnAB5wR4X12sxShkBYbapPRYxNEIE29gdA=;
+	b=Lr9LY0/qZRtbNFSDy4rlRftaXysXLSw5NWtwWa7yhIsGtFz9QulXwdZZUROjGq6pgK
+	dXfhW+2A3QtW9kQEY/ZZJ+sWF7WNQ8BVpxIIbqvGYI6/XLQPaDorLmOohhHcIEiSQ5cR
+	36XOBFNP3M3cBaSG+xzfh3zoFvwmqkaVLbcklEyPx8XmauqXWnbGZd2RzT1uskGc0qmP
+	I/wkip3DnV8WwFUXl5XYbLWRvvmAXOQyDAVwryleJ5UgUIWYaXlhEwYmYXlOh3ViLx4E
+	IWUIu7mNuWqAauMifyNBFR0mm+VfvDr54lCbfnOZqslKspWzKRcIhnZ94DsnQxvTseCH
+	cUbA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=Z5Bma9RXFMnAB5wR4X12sxShkBYbapPRYxNEIE29gdA=;
+	b=orWQke22LvVTlkB9n7HgfPzM9PKROwLDHsrLn445RxlXjYO1dbRZC4/ozXC1Q/LaS0
+	unvD2SdIt93sNDRGrsuLW6aqTi00LCg9LYxzyOg0UZ5l2aRfZkubfWwK1CHPVuWyQwgl
+	eXf/6QokJSsjVwbTqL+PPNMH7muw6e04LS1wOQ002Il8E3HhBgDDDoXUM/L5Eqp6zYzU
+	2s9WfiANj8uT1dIg4wG2H834xcRhvXvCM7O7ULBXZoHt0x1WWehBXy01RqgzxahxLE9v
+	dQTWw962TahDG/G1wGDV3xTIXlkTlUQfJVVr8G3HQsk2gLWaRjo13IcakSnMBcU4dseg
+	RK7w==
+X-Gm-Message-State: AMke39lyrdObEXFn/k0OeoI8oF1GTSxuX/iFfKRw8CMvm6obf1cyDyq8A+5heHpZIBTK83fUzgDr6iUy0EF9jg==
+X-Received: by 10.176.3.143 with SMTP id 15mr7570967uau.91.1487780033751; Wed,
+	22 Feb 2017 08:13:53 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1486559272-23031-1-git-send-email-amarnath.valluri@intel.com>
-Subject: Re: [meta-oe] xf86-input-tslib: Replace 'lib' with ${nonarch_base_libdir} for placing udev rules.
+References: <1486653471-20252-1-git-send-email-amarnath.valluri@intel.com>
+In-Reply-To: <1486653471-20252-1-git-send-email-amarnath.valluri@intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 22 Feb 2017 16:13:42 +0000
+Message-ID: <CAMKF1spUE7=8jD7KUokv7ntUD05c4yjbxV42v8yMjC0KqqBQAw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][PATCH v2] udisks: Make use of bitbake variables for sbin, lib locations.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,33 +51,164 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2017 15:02:54 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 22 Feb 2017 16:13:54 -0000
+Content-Type: text/plain; charset=UTF-8
 
-ping - reminder request for feedback
+On Thu, Feb 9, 2017 at 7:21 AM Amarnath Valluri <amarnath.valluri@intel.com>
+wrote:
 
-On 08.02.2017 15:07, Amarnath Valluri wrote:
+> Took the opportunity to patch the source to accepet the udev rules
+> directory
+> from make variables.
+>
 > Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
 > ---
->   meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
+>  ...01-Make-udev-rules-directory-configurable.patch | 91
+> ++++++++++++++++++++++
+>  meta-oe/recipes-support/udisks/udisks_1.0.5.bb     |  4 +-
+>  2 files changed, 94 insertions(+), 1 deletion(-)
+>  create mode 100644
+> meta-oe/recipes-support/udisks/udisks/0001-Make-udev-rules-directory-configurable.patch
 >
-> diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb
-> index 082c771..6a3689a 100644
-> --- a/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb
-> +++ b/meta-oe/recipes-graphics/xorg-driver/xf86-input-tslib_0.0.6.bb
-> @@ -28,8 +28,8 @@ do_configure_prepend() {
->   do_install_append() {
->       install -d ${D}/${datadir}/hal/fdi/policy/20thirdparty
->       install -m 0644 ${WORKDIR}/10-x11-input-tslib.fdi ${D}/${datadir}/hal/fdi/policy/20thirdparty
-> -    install -d ${D}/lib/udev/rules.d
-> -    install -m 0644 ${WORKDIR}/99-xf86-input-tslib.rules ${D}/lib/udev/rules.d/
-> +    install -d ${D}${nonarch_base_libdir}/udev/rules.d
-> +    install -m 0644 ${WORKDIR}/99-xf86-input-tslib.rules ${D}${nonarch_base_libdir}/udev/rules.d/
->   }
->   
-> -FILES_${PN} += "${datadir}/hal /lib/udev"
-> +FILES_${PN} += "${datadir}/hal ${nonarch_base_libdir}/udev"
+> diff --git
+> a/meta-oe/recipes-support/udisks/udisks/0001-Make-udev-rules-directory-configurable.patch
+> b/meta-oe/recipes-support/udisks/udisks/0001-Make-udev-rules-directory-configurable.patch
+> new file mode 100644
+> index 0000000..3cc0400
+> --- /dev/null
+> +++
+> b/meta-oe/recipes-support/udisks/udisks/0001-Make-udev-rules-directory-configurable.patch
+> @@ -0,0 +1,91 @@
+> +From 32278297170ffb49116b5789e4a0588b99d02bd0 Mon Sep 17 00:00:00 2001
+> +From: Amarnath Valluri <amarnath.valluri@intel.com>
+> +Date: Thu, 9 Feb 2017 11:02:53 +0200
+> +Subject: [PATCH] Make udev rules directory configurable.
+> +
+> +udev rules directory can be configurable via undevrulesdir variable. And
+> use
+> +libdir, sbindir for installing librares and binaries.
+> +
+> +Upstream-Status: Inappropriate[Embedded specific]
+> +
 
+
+This patch is fine but this should be proposed for udisks upstream as well
+
+>
+> +Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
+> +---
+> + configure.ac            | 14 +++-----------
+> + data/Makefile.am        |  1 -
+> + src/probers/Makefile.am |  2 +-
+> + tools/Makefile.am       |  2 +-
+> + 4 files changed, 5 insertions(+), 14 deletions(-)
+> +
+> +diff --git a/configure.ac b/configure.ac
+> +index 8c4e4c2..a143397 100644
+> +--- a/configure.ac
+> ++++ b/configure.ac
+> +@@ -227,15 +227,8 @@ if test "x$GCC" = "xyes"; then
+> +   LDFLAGS="-Wl,--as-needed $LDFLAGS"
+> + fi
+> +
+> +-if test "$prefix" = "/usr" -o "$prefix" = "/usr/local" ; then
+> +-  slashlibdir=/lib
+> +-  slashsbindir=/sbin
+> +-else
+> +-  slashlibdir=$prefix/lib
+> +-  slashsbindir=$prefix/sbin
+> +-fi
+> +-AC_SUBST(slashlibdir)
+> +-AC_SUBST(slashsbindir)
+> ++udevrulesdir=/lib/udev/udev.d
+> ++AC_SUBST(udevrulesdir)
+> +
+> + # *************
+> + # Remote Access
+> +@@ -299,8 +292,7 @@ echo "
+> +         sysconfdir:                 ${sysconfdir}
+> +         localstatedir:              ${localstatedir}
+> +         docdir:                     ${docdir}
+> +-        slashlibdir:                ${slashlibdir}
+> +-        slashsbindir:               ${slashsbindir}
+> ++        udevrulesdir:               ${udevrulesdir}
+> +         systemdsystemunitdir:       ${systemdsystemunitdir}
+> +
+> +         compiler:                   ${CC}
+> +diff --git a/data/Makefile.am b/data/Makefile.am
+> +index 411ea0f..4834960 100644
+> +--- a/data/Makefile.am
+> ++++ b/data/Makefile.am
+> +@@ -34,7 +34,6 @@ $(systemdservice_DATA): $(systemdservice_in_files)
+> Makefile
+> +       @sed -e "s|\@libexecdir\@|$(prefix)/lib/udisks|" $< > $@
+> + endif
+> +
+> +-udevrulesdir = $(slashlibdir)/udev/rules.d
+> + udevrules_DATA = 80-udisks.rules
+> +
+> + pkgconfigdir = $(datadir)/pkgconfig
+> +diff --git a/src/probers/Makefile.am b/src/probers/Makefile.am
+> +index 01c693b..6a0361a 100644
+> +--- a/src/probers/Makefile.am
+> ++++ b/src/probers/Makefile.am
+> +@@ -20,7 +20,7 @@ INCLUDES = \
+> + # TODO: ideally move most of this to udev and/or util-linux
+> + #
+> +
+> +-udevhelperdir = $(slashlibdir)/udev
+> ++udevhelperdir = $(libdir)/udev
+> + udevhelper_PROGRAMS = udisks-part-id                  \
+> +                       udisks-probe-sas-expander       \
+> +                       $(NULL)
+> +diff --git a/tools/Makefile.am b/tools/Makefile.am
+> +index 18325f7..0aaec11 100644
+> +--- a/tools/Makefile.am
+> ++++ b/tools/Makefile.am
+> +@@ -54,7 +54,7 @@ udisks_LDADD =
+>      \
+> +       $(DBUS_GLIB_LIBS)                               \
+> +       $(POLKIT_DBUS_LIBS)
+> +
+> +-slashsbin_PROGRAMS = umount.udisks
+> ++sbin_PROGRAMS = umount.udisks
+> +
+> + umount_udisks_SOURCES = umount-udisks.c
+> + umount_udisks_LDADD = $(DBUS_GLIB_LIBS) $(POLKIT_DBUS_LIBS)
+> +--
+> +2.7.4
+> +
+> diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
+> b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
+> index eec6933..3757919 100644
+> --- a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
+> +++ b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
+> @@ -12,6 +12,7 @@ SRC_URI = " \
+>      file://optional-depends.patch \
+>      file://0001-fix-build-with-newer-glibc-versions.patch \
+>      file://udisks-1.0.5-fix-service-file.patch \
+> +    file://0001-Make-udev-rules-directory-configurable.patch \
+>  "
+>
+>  SRC_URI[udisks.md5sum] = "70d48dcfe523a74cd7c7fbbc2847fcdd"
+> @@ -22,7 +23,8 @@ inherit autotools-brokensep systemd gtk-doc
+>  PACKAGECONFIG ??= ""
+>  PACKAGECONFIG[parted] = "--enable-parted,--disable-parted,parted"
+>
+> -EXTRA_OECONF = "--disable-man-pages"
+> +EXTRA_OECONF = "--disable-man-pages --libdir=${base_libdir}
+> --sbindir=${base_sbindir}"
+> +EXTRA_OEMAKE = "udevrulesdir=${nonarch_base_libdir}/udev/rules.d/"
+>
+>  FILES_${PN} += "${libdir}/polkit-1/extensions/*.so \
+>                  ${datadir}/dbus-1/ \
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
