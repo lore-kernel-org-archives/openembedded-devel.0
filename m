@@ -1,30 +1,49 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id E402A72FB7
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f181.google.com (mail-wr0-f181.google.com
+	[209.85.128.181])
+	by mail.openembedded.org (Postfix) with ESMTP id E256A72FB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 22:26:55 +0000 (UTC)
-Received: from svr-orw-mbx-01.mgc.mentorg.com ([147.34.90.201])
-	by relay1.mentorg.com with esmtp 
-	id 1cgfNB-0005fX-1f from Joe_MacDonald@mentor.com ;
-	Wed, 22 Feb 2017 14:26:57 -0800
-Received: from svr-orw-mbx-04.mgc.mentorg.com (147.34.90.204) by
-	svr-orw-mbx-01.mgc.mentorg.com (147.34.90.201) with Microsoft SMTP
-	Server (TLS) id 15.0.1210.3; Wed, 22 Feb 2017 14:26:54 -0800
-Received: from svr-orw-mbx-04.mgc.mentorg.com ([fe80::4967:8f7f:4a15:68a4]) by
-	SVR-ORW-MBX-04.mgc.mentorg.com ([fe80::4967:8f7f:4a15:68a4%22]) with
-	mapi id 15.00.1210.000; Wed, 22 Feb 2017 14:26:54 -0800
-From: "MacDonald, Joe" <Joe_MacDonald@mentor.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Thread-Topic: [oe] Before you ping some older patches
-Thread-Index: AQHSjVrF5aa3+w0QzEeNuxrMUqEv3Q==
-Date: Wed, 22 Feb 2017 22:26:54 +0000
-Message-ID: <2fd7334f-118c-44e2-9c17-a4e9f432d506@email.android.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
+	Wed, 22 Feb 2017 22:51:12 +0000 (UTC)
+Received: by mail-wr0-f181.google.com with SMTP id z61so11716237wrc.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Feb 2017 14:51:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=E9CNaXrqaE2s0iWXNMLhzOSyV8n6TGU9NNQg5lf3tTQ=;
+	b=HmSkfnIaZdGJLpvtPS6YrbER3NUxx+oadYE7w4bIxxK1uMWVbT+MRNBnnxAMNzLekQ
+	SKWz5miVSuPsBYW/SOrtLzo/BR7qvaFf1MNLhJ5QrjJFtmnl9ZvHRRgUPJhJucfPdHAm
+	CjxsioC27Jksek1eQklPid/U32S8KpnJEAYviUE520PjiccpTPyYEpZWk9B/Kd4VfoBX
+	LNs7horP482VdO53S/CYMV9WFGBydzVz+RJHGdTRnLvtqWvl8mL0cOKikvM6/+TU4dAj
+	Z9QbxrLsdcWcoqWXeiueir95cgtS39BYG1YoyNDi4i4HkESE0nGWSqSzAFdJzNZOsxjo
+	s6mw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=E9CNaXrqaE2s0iWXNMLhzOSyV8n6TGU9NNQg5lf3tTQ=;
+	b=PJRb1Kr+C5N8eObaz3hbCYaf1QLJa6i6tBx2O1NDpq0Zg/nDO6FJgdfAU86VqDRY5M
+	OWPf1pgnijU8ZpSbdMkWRkh7Dn5xFg5hr6vF1NMdSS1KKJH08L+/1UYruMpvX0bo/SIx
+	HVJnkcKqmFzKfDi+yIBXTs46puZLWhIwGr7CSrKeY92/r5bnHZlpGdI5tg6HPtYLm16o
+	zcvNNPn26VqYmBw0Jd6p1Z3AXZP0AXgpoha3I1Z/NhBpucOVBzGsnzhnuFWlpSVqJxnK
+	uiKBMGsWmYQA5fW33dxlROscORYLJtatEh75UDwbqakRmJWGpu2ahfhQfA+XWVC4g9Ce
+	3Fhw==
+X-Gm-Message-State: AMke39nEmUuY3SugQBncAPhwFaWSdjUq+gDn04OuUXHRVYT45Gn3eX5rF+ZovVc/okwbqQ==
+X-Received: by 10.223.129.74 with SMTP id 68mr24728334wrm.183.1487803873069;
+	Wed, 22 Feb 2017 14:51:13 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	e72sm4261818wma.16.2017.02.22.14.51.11
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 22 Feb 2017 14:51:11 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 22 Feb 2017 23:51:12 +0100
+To: "MacDonald, Joe" <Joe_MacDonald@mentor.com>
+Message-ID: <20170222225112.GI3283@jama>
+References: <2fd7334f-118c-44e2-9c17-a4e9f432d506@email.android.com>
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+In-Reply-To: <2fd7334f-118c-44e2-9c17-a4e9f432d506@email.android.com>
+User-Agent: Mutt/1.7.2 (2016-11-26)
 Cc: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: Before you ping some older patches
@@ -40,31 +59,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2017 22:26:56 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 22 Feb 2017 22:51:13 -0000
+X-Groupsio-MsgNum: 65466
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="IJFRpmOek+ZRSQoz"
+Content-Disposition: inline
 
-SXQgbWlnaHQganVzdCBiZSBtZSwgYnV0IHRoZSBsaXN0IGluIGdlbmVyYWwgaGFzIHNlZW1lZCBh
-IGJpdCBvZmYgc2luY2UgYXQgbGVhc3QgTW9uZGF5LiBJIGhhdmUgZ29vZCByZWFzb24gdG8gYmVs
-aWV2ZSBpdCBoYXMgZWF0ZW4gYXQgbGVhc3QgdHdvIG9mIG15IHBvc3RzLg0KDQotSi4NCg0KT24g
-RmViIDIyLCAyMDE3IDQ6MzMgUE0sIE1hcnRpbiBKYW5zYSA8bWFydGluLmphbnNhQGdtYWlsLmNv
-bT4gd3JvdGU6DQoxKSBNYWtlIHN1cmUgdGhleSBhcmVuJ3QgYWxyZWFkeSBpbiBtYXN0ZXIgKG9y
-IG1hc3Rlci1uZXh0KSwgY3VycmVudGx5DQp0aGVyZSBpcyBvbmx5IG9uZSBjaGFuZ2UgaW4gbWFz
-dGVyLW5leHQ6DQplYjc5NzkxMTMgbmV0Y2F0LW9wZW5ic2Q6IGZpeCBpbXBsaWNpdCBkZXBlbmRl
-bmN5IG9uIHBrZy1jb25maWcNCg0KMikgTWFrZSBzdXJlIHRoZXJlIHdlcmVuJ3Qgc29tZSBuZWdh
-dGl2ZSBmZWVkYmFjayBjb21tZW50cyBvbiBvdXIgY2hhbmdlDQoNCjMpIE1ha2Ugc3VyZSB0aGUg
-Y2hhbmdlIG1hZGUgaXQgdG8gcGF0Y2h3b3JrLCBjdXJyZW50bHkgdGhlcmUgaXMgb25seQ0Kb25l
-ICJvcGVuIiBjaGFuZ2U6DQpodHRwczovL3BhdGNod29yay5vcGVuZW1iZWRkZWQub3JnL3BhdGNo
-LzEzNzQ5OS8NCg0KQmUgYXdhcmUgdGhhdCB0aGUgY2hhbmdlcyBhcmUgdXN1YWxseSBkYWlseSBt
-YXJrZWQgYXMgYXJjaGl2ZWQsIHdoZW4NCnRoZXkgYXJlIHNvcnRlZCB0byBjb3JyZXNwb25kaW5n
-IGJ1bmRsZXMgYW5kIGluY2x1ZGVkIGluIG1hc3Rlci1uZXh0DQpicmFuY2ggZm9yIHRlc3Rpbmcs
-IGFzIGRlc2NyaWJlZCBoZXJlOg0KaHR0cDovL3d3dy5vcGVuZW1iZWRkZWQub3JnL3dpa2kvUGF0
-Y2h3b3JrI011bHRpcGxlX2xheWVyc19zaGFyaW5nX3RoZV9zYW1lX29lX3Byb2plY3Rfb25fcGF0
-Y2h3b3JrDQoNCkknbSB3cml0aW5nIHRoaXMsIGJlY2F1c2UgY3VycmVudGx5IG1hbnkgY2hhbmdl
-cyBhcmUgbWlzc2luZyBvbiBwYXRjaHdvcmssDQpiZWNhdXNlIG9mIHNvbWUgdW5rbm93biBpc3N1
-ZSB3aXRoIGl0LCBzZWU6DQpodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9waXBlcm1haWwv
-b3BlbmVtYmVkZGVkLWRldmVsLzIwMTctRmVicnVhcnkvMTExNDY3Lmh0bWwNCm9uY2UgdGhpcyBp
-c3N1ZSBpcyByZXNvbHZlZCwgcGxlYXNlIHJlLXNlbmQgbWlzc2luZyBjaGFuZ2VzLg0KDQpSZWdh
-cmRzLA0KDQo=
+--IJFRpmOek+ZRSQoz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Wed, Feb 22, 2017 at 10:26:54PM +0000, MacDonald, Joe wrote:
+> It might just be me, but the list in general has seemed a bit off since a=
+t least Monday. I have good reason to believe it has eaten at least two of =
+my posts.
+
+During OEDAM discussion I also had a feeling that both my replies to
+"Splitting meta-oe?" thread were eaten by the ML gremlins, but both
+appear at:
+http://lists.openembedded.org/pipermail/openembedded-devel/2017-February/th=
+read.html
+so that wasn't the case.
+
+> On Feb 22, 2017 4:33 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> 1) Make sure they aren't already in master (or master-next), currently
+> there is only one change in master-next:
+> eb7979113 netcat-openbsd: fix implicit dependency on pkg-config
+>=20
+> 2) Make sure there weren't some negative feedback comments on our change
+>=20
+> 3) Make sure the change made it to patchwork, currently there is only
+> one "open" change:
+> https://patchwork.openembedded.org/patch/137499/
+>=20
+> Be aware that the changes are usually daily marked as archived, when
+> they are sorted to corresponding bundles and included in master-next
+> branch for testing, as described here:
+> http://www.openembedded.org/wiki/Patchwork#Multiple_layers_sharing_the_sa=
+me_oe_project_on_patchwork
+>=20
+> I'm writing this, because currently many changes are missing on patchwork,
+> because of some unknown issue with it, see:
+> http://lists.openembedded.org/pipermail/openembedded-devel/2017-February/=
+111467.html
+> once this issue is resolved, please re-send missing changes.
+>=20
+> Regards,
+>=20
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--IJFRpmOek+ZRSQoz
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWK4V3wAKCRA3VSO3ZXaA
+HMbWAJ47DX2gCwG8+I26vP7kqtkH7oCbVwCgl2Ik6mLXcVSl7d/QnpSSNCL++ho=
+=zIFz
+-----END PGP SIGNATURE-----
+
+--IJFRpmOek+ZRSQoz--
