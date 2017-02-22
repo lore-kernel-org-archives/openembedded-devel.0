@@ -1,46 +1,47 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f41.google.com (mail-vk0-f41.google.com
-	[209.85.213.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 19139601D4;
-	Wed, 22 Feb 2017 20:58:04 +0000 (UTC)
-Received: by mail-vk0-f41.google.com with SMTP id k127so9186000vke.0;
-	Wed, 22 Feb 2017 12:58:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=RijlB1G1ku9YL2owZ6+x4/h5D30pgFBCE3jtnt3NRlA=;
-	b=hj3zlrulXLFamkIBR5UAMlx4H387wEXx01sQpuRJnMtzHsctaB4PGSHm5g06G37w7L
-	e3g7f1SyjBTJDoIF1GaYUd91vXhQFZiz2bqCdjx2N7elhKIg4XSjn+ovURc3ZRszf8FP
-	Th6PIMEomPBUEjtK+7/mSRZfCAu2dcTJyX/QhksZlPkCz34kCoY7tKR8iUjNp+yLopcF
-	rU/+gxm5bbkWgIra9ps5oM2yqfc8p8ar5KqwjeKixFjf0fmvTpfDbGpA+PgtxDFnSdAf
-	Cxnv70QUJsWHAn0ZP/eGWfDoGVOg3ndi17JELRDLNx1O6MofQkJGkFfo6MrU2OtpqPvD
-	0iLg==
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
+	by mail.openembedded.org (Postfix) with ESMTP id CB8BE71CB3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Feb 2017 21:32:53 +0000 (UTC)
+Received: by mail-wm0-f46.google.com with SMTP id v186so153106357wmd.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Feb 2017 13:32:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:subject:message-id:mime-version:content-disposition
+	:user-agent; bh=Z0LKxBrMKvf677aam3R6XSyuCYF6hdoH2WMDsYbYZBk=;
+	b=Q/gHT1GH7cO+XpmLfr8F63gqb+UCUYY0kUl68kREIIRsi0qj7eCqTP33hdEiXwj5j1
+	Lmth1eDNpgbTwMkPH8KKi8OATikZzoWFN3pWuzXwk1LJT7PRmWzVLpAbaLwIi/Gmk7Ex
+	3lN7n8ZbVNv+9xejjyITx2TdNd2bIOOQvZ4fUqm6tIlWk18GSkuQ19f5HNfsNo7qxHys
+	vlrgYKCht4vfFuO39uZwdBZjoVABIxas9O6QUUHg3ZHpefvG5c/wNeQSGeAUx4c5jBSu
+	kHFaOjC92NrH0R755uzeF1ljmK4mfIMN4SUUuPJ4o7McIWq+xDd+AjRUWIPuheFvnIl5
+	w5YA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=RijlB1G1ku9YL2owZ6+x4/h5D30pgFBCE3jtnt3NRlA=;
-	b=G6qIeqv5pjPVjdHnB4qdJ8CUzWK2jIjf6YaIhaVaZoFC4jG4eqQbkRCqLx5I2IyAYb
-	Tm9H7+ksYUlHhAh6XSqGwrz0r2/rNtdkz/9PmKQ/nc36kglFn9b2U54j5tfcXqqadKOh
-	EnArMVBzvn5I7OjlLWyMwVQrzDOC08ZyUdfSBt/hkkpJHOrOdY+SMuguIYI1rmtbHLWe
-	jhI5KaIEukljFAcnIDauTCtsqZuwFLWhfZUt3W007K0sRQDO+Z56KaSI1CcM65z70wbJ
-	nFkmJW5GXp0cDCRyX3aqCLi5cAUySKYOlhwlPrrBMl7L1jE1t97w3YXB46QqTOvR6reB
-	EADA==
-X-Gm-Message-State: AMke39nCbojCl00KNrudx1HsMCJY7SINrC/9tapi45qXg0FxWeNqbSg3GZQcWIMfqEonkcdxpsDjgMumLI6l+w==
-X-Received: by 10.31.155.75 with SMTP id d72mr16020721vke.55.1487797082934;
-	Wed, 22 Feb 2017 12:58:02 -0800 (PST)
+	h=x-gm-message-state:from:date:to:subject:message-id:mime-version
+	:content-disposition:user-agent;
+	bh=Z0LKxBrMKvf677aam3R6XSyuCYF6hdoH2WMDsYbYZBk=;
+	b=a2KHaOlEpPUmHFWbE7RWswUoUGHyp283oB7qdGZg9H6OBPyqZlk+3CdQNk+NFF/fRr
+	mDX6Z7o+JG0BlFGfu6JkcALV1IZdLnDYDyduna0KJkEsVfWoafxhycZwWx4dWmNGB73q
+	Fp7HkaAK69BLMGuAlBg5TL4VaWk5JKAn4Y2xMz3Twuvs+SCUGkevC8n+TRj9EhCpqYhg
+	228FYtMrOVRka5SowdxDxGUXuK3kV1PnQQbiyoPNBQZ5wsBqxQ48KQM2GgtNUj6zGuiR
+	ReKqiWJalYV1lo2Daz4PZ6bMH2mbc6ADHiLNgvDXonDMoEKn+Ml5wQBRsWf+ooANklbD
+	tOog==
+X-Gm-Message-State: AMke39mqV5iemNXobNpMXdUKyUd6WJ4EO1Ug6ZmVu09vTMRdJsw0DgR0kvaYK53EP3pjLw==
+X-Received: by 10.28.88.6 with SMTP id m6mr265809wmb.4.1487799174064;
+	Wed, 22 Feb 2017 13:32:54 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	m84sm3578788wmf.10.2017.02.22.13.32.53
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 22 Feb 2017 13:32:53 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 22 Feb 2017 22:32:54 +0100
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20170222213254.GH3283@jama>
 MIME-Version: 1.0
-Received: by 10.176.71.65 with HTTP; Wed, 22 Feb 2017 12:58:02 -0800 (PST)
-In-Reply-To: <20170222203552.GF3283@jama>
-References: <20170222203552.GF3283@jama>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Wed, 22 Feb 2017 21:58:02 +0100
-Message-ID: <CALbNGRTfHzxioW7iigi+CitbCHK9tDh8t+1OpjLK26GhMP8BTg@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-02-22
+User-Agent: Mutt/1.7.2 (2016-11-26)
+Subject: Before you ping some older patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,20 +54,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2017 20:58:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 22 Feb 2017 21:32:54 -0000
+X-Groupsio-MsgNum: 65461
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="NyChO5MpGs3JHJbz"
+Content-Disposition: inline
 
-On Wed, Feb 22, 2017 at 9:35 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> 2nd build today just to confirm fix for chromium-wayland on qemux86,
-> pidgin and geoclue.
->
->> I've dropped only the last unblacklist for mpd which is still failing,
->> will try it now with unblacklist, but without the version upgrade.
->
-> This worked, the qemuarm issue reported in previous log happens only
-> with 0.20.4, so I've now merged the first patch to unblacklist mpd.
-Thanks - the update was only some mechanical thing. When I touch
-recipes I check for updates...
->
-Andreas
+--NyChO5MpGs3JHJbz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
+1) Make sure they aren't already in master (or master-next), currently
+there is only one change in master-next:
+eb7979113 netcat-openbsd: fix implicit dependency on pkg-config
+
+2) Make sure there weren't some negative feedback comments on our change
+
+3) Make sure the change made it to patchwork, currently there is only
+one "open" change:
+https://patchwork.openembedded.org/patch/137499/
+
+Be aware that the changes are usually daily marked as archived, when
+they are sorted to corresponding bundles and included in master-next
+branch for testing, as described here:
+http://www.openembedded.org/wiki/Patchwork#Multiple_layers_sharing_the_same_oe_project_on_patchwork
+
+I'm writing this, because currently many changes are missing on patchwork,
+because of some unknown issue with it, see:
+http://lists.openembedded.org/pipermail/openembedded-devel/2017-February/111467.html
+once this issue is resolved, please re-send missing changes.
+
+Regards,
+
+--NyChO5MpGs3JHJbz
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWK4DhQAKCRA3VSO3ZXaA
+HE7IAJ4yqjhjyAOrw2xePCO7JuNAnPNtAgCfbAlWz58BbimeUqVAeeiJE2ZMSVQ=
+=HmJh
+-----END PGP SIGNATURE-----
+
+--NyChO5MpGs3JHJbz--
