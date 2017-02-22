@@ -1,52 +1,51 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f181.google.com (mail-wr0-f181.google.com
-	[209.85.128.181])
-	by mail.openembedded.org (Postfix) with ESMTP id E256A72FB3
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id E35AD71D90
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 22:51:12 +0000 (UTC)
-Received: by mail-wr0-f181.google.com with SMTP id z61so11716237wrc.1
+	Wed, 22 Feb 2017 23:03:03 +0000 (UTC)
+Received: by mail-wm0-f51.google.com with SMTP id v77so12732535wmv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 14:51:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=E9CNaXrqaE2s0iWXNMLhzOSyV8n6TGU9NNQg5lf3tTQ=;
-	b=HmSkfnIaZdGJLpvtPS6YrbER3NUxx+oadYE7w4bIxxK1uMWVbT+MRNBnnxAMNzLekQ
-	SKWz5miVSuPsBYW/SOrtLzo/BR7qvaFf1MNLhJ5QrjJFtmnl9ZvHRRgUPJhJucfPdHAm
-	CjxsioC27Jksek1eQklPid/U32S8KpnJEAYviUE520PjiccpTPyYEpZWk9B/Kd4VfoBX
-	LNs7horP482VdO53S/CYMV9WFGBydzVz+RJHGdTRnLvtqWvl8mL0cOKikvM6/+TU4dAj
-	Z9QbxrLsdcWcoqWXeiueir95cgtS39BYG1YoyNDi4i4HkESE0nGWSqSzAFdJzNZOsxjo
-	s6mw==
+	Wed, 22 Feb 2017 15:03:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=K2NzKAlaCmGME/jmsDd4Zp8Au7ISipFxMEGpRAdHkUM=;
+	b=Iifukrq+kWMdX/hwVC/A9guX6nqe8JblmCQYcAIEa/76P9TV8at7QyusiUFIxgbW/g
+	2dSa/OJuvuLPagJWdPF0JjeTWFY4iWYiHhVAI0Ciz3FfQintonEel/gRxxp7m6jCO0V3
+	nymKs1ywNHfWrzQjPSjcH5ixavzkNTbfjS+iVUgO9avWrE4IAiqaKe+8adTABsFaX7d8
+	k+lFAHR8jdgCh0wwhNPScJHkkWc9sJs8OjYHnjurKSraOfF6fteb6/QwaiZW5/TYtxc+
+	D/tRkrTpB9u202yyFbi1Y/Q0rC2uxGnxRS24/qzYCMWxoo3Ynj2qaMatoLxVETJlAwT0
+	JYQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=E9CNaXrqaE2s0iWXNMLhzOSyV8n6TGU9NNQg5lf3tTQ=;
-	b=PJRb1Kr+C5N8eObaz3hbCYaf1QLJa6i6tBx2O1NDpq0Zg/nDO6FJgdfAU86VqDRY5M
-	OWPf1pgnijU8ZpSbdMkWRkh7Dn5xFg5hr6vF1NMdSS1KKJH08L+/1UYruMpvX0bo/SIx
-	HVJnkcKqmFzKfDi+yIBXTs46puZLWhIwGr7CSrKeY92/r5bnHZlpGdI5tg6HPtYLm16o
-	zcvNNPn26VqYmBw0Jd6p1Z3AXZP0AXgpoha3I1Z/NhBpucOVBzGsnzhnuFWlpSVqJxnK
-	uiKBMGsWmYQA5fW33dxlROscORYLJtatEh75UDwbqakRmJWGpu2ahfhQfA+XWVC4g9Ce
-	3Fhw==
-X-Gm-Message-State: AMke39nEmUuY3SugQBncAPhwFaWSdjUq+gDn04OuUXHRVYT45Gn3eX5rF+ZovVc/okwbqQ==
-X-Received: by 10.223.129.74 with SMTP id 68mr24728334wrm.183.1487803873069;
-	Wed, 22 Feb 2017 14:51:13 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	e72sm4261818wma.16.2017.02.22.14.51.11
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 22 Feb 2017 14:51:11 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 22 Feb 2017 23:51:12 +0100
-To: "MacDonald, Joe" <Joe_MacDonald@mentor.com>
-Message-ID: <20170222225112.GI3283@jama>
-References: <2fd7334f-118c-44e2-9c17-a4e9f432d506@email.android.com>
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=K2NzKAlaCmGME/jmsDd4Zp8Au7ISipFxMEGpRAdHkUM=;
+	b=cxbN5/ZecHSqX8WolDHAp0sp8l8CTz3o84YefsxziFLNFEGmG+gFt6XXIJZbow0K3q
+	eCwYNGXUm8HqjGPYleQoSfBrLxIkzSoRrqKnZ7F/SycEzkE1xTT0/Ulj4kL8zSfNBLFr
+	bwsD7utl4uSP1PSwcOYOeQVgHwf1zFlijuB/wcWoePbIYgI4qtFIz80vOdA9p1v5YLH3
+	bnlyTjrHx3YfpEsvjlAVujYWX1ZJLTHMiz02YFJBvrK5pFNmo9zP+rBgistnz/Wu4Wu/
+	Ko1oxdf1cieLV2ExKiO+h2SUPcIq3/ysGSseC9izvJTj8aPE9bPGhRs9YmRhNtyZXG6O
+	xtzw==
+X-Gm-Message-State: AMke39m2Cpmx/RNCQC6+15x184k1iUUJTJeVDNttZOEywcJsi8dHNOhb46fkbzEUQkizpg==
+X-Received: by 10.28.37.195 with SMTP id l186mr676754wml.73.1487804583911;
+	Wed, 22 Feb 2017 15:03:03 -0800 (PST)
+Received: from PC192-168-2-116.speedport.ip
+	(p20030046E912A1041E6F65FFFE3E7F61.dip0.t-ipconnect.de.
+	[2003:46:e912:a104:1e6f:65ff:fe3e:7f61])
+	by smtp.googlemail.com with ESMTPSA id
+	q4sm3479696wrc.35.2017.02.22.15.03.03
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 22 Feb 2017 15:03:03 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 23 Feb 2017 00:02:39 +0100
+Message-Id: <20170222230250.30288-1-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.9.3
 MIME-Version: 1.0
-In-Reply-To: <2fd7334f-118c-44e2-9c17-a4e9f432d506@email.android.com>
-User-Agent: Mutt/1.7.2 (2016-11-26)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: Before you ping some older patches
+Subject: [PATCH 00/11] more rss fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,67 +58,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2017 22:51:13 -0000
-X-Groupsio-MsgNum: 65466
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="IJFRpmOek+ZRSQoz"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 22 Feb 2017 23:03:04 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---IJFRpmOek+ZRSQoz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* patchwork is in trouble atm -> use classic pull request
+* 1-3 are resend - patchwork trouble I guess/hope
+* some errors cannot be reproduced -> guesswork -> let me know in case of
+  trouble
+* (bad) habit: when touching recipes I check for updates - hope we don't face
+  further mpd-like cases
 
-On Wed, Feb 22, 2017 at 10:26:54PM +0000, MacDonald, Joe wrote:
-> It might just be me, but the list in general has seemed a bit off since a=
-t least Monday. I have good reason to believe it has eaten at least two of =
-my posts.
+The following changes since commit eb7979113cf1e8c7fb95f9cc2250ebfe7daba331:
 
-During OEDAM discussion I also had a feeling that both my replies to
-"Splitting meta-oe?" thread were eaten by the ML gremlins, but both
-appear at:
-http://lists.openembedded.org/pipermail/openembedded-devel/2017-February/th=
-read.html
-so that wasn't the case.
+  netcat-openbsd: fix implicit dependency on pkg-config (2017-02-22 21:39:16 +0100)
 
-> On Feb 22, 2017 4:33 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> 1) Make sure they aren't already in master (or master-next), currently
-> there is only one change in master-next:
-> eb7979113 netcat-openbsd: fix implicit dependency on pkg-config
->=20
-> 2) Make sure there weren't some negative feedback comments on our change
->=20
-> 3) Make sure the change made it to patchwork, currently there is only
-> one "open" change:
-> https://patchwork.openembedded.org/patch/137499/
->=20
-> Be aware that the changes are usually daily marked as archived, when
-> they are sorted to corresponding bundles and included in master-next
-> branch for testing, as described here:
-> http://www.openembedded.org/wiki/Patchwork#Multiple_layers_sharing_the_sa=
-me_oe_project_on_patchwork
->=20
-> I'm writing this, because currently many changes are missing on patchwork,
-> because of some unknown issue with it, see:
-> http://lists.openembedded.org/pipermail/openembedded-devel/2017-February/=
-111467.html
-> once this issue is resolved, please re-send missing changes.
->=20
-> Regards,
->=20
+are available in the git repository at:
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+  https://github.com/schnitzeltony/meta-openembedded.git more-rss-fixes
 
---IJFRpmOek+ZRSQoz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+for you to fetch changes up to 250c84bb4f57b8c7ac1b40d147f8f8dc795f80e4:
 
------BEGIN PGP SIGNATURE-----
+  libsdl-ttf: fix and unblacklist (2017-02-22 23:43:20 +0100)
 
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWK4V3wAKCRA3VSO3ZXaA
-HMbWAJ47DX2gCwG8+I26vP7kqtkH7oCbVwCgl2Ik6mLXcVSl7d/QnpSSNCL++ho=
-=zIFz
------END PGP SIGNATURE-----
+----------------------------------------------------------------
+Andreas Müller (11):
+      libsdl-mixer: add pkgconfig to inherit and unblacklist
+      libsdl2-mixer: add pkgconfig to inherit and unblacklist
+      gtk-engines: add glib-2.0-native to DEPENDS an unblacklist
+      gtkmathview: libxslt -> libxslt-native in DEPENDS and unblacklist
+      abiword: unblacklist - gtkmathview is back
+      fontforge: add gettext to inherit and unblacklist
+      fontforge: update 20150824 -> 20161012
+      postgresql: use gettext bbclass and aublacklist
+      postgresql: update 9.4.10 -> 9.4.11
+      libsdl2-ttf: add pkgconfig to inherit and unblacklist
+      libsdl-ttf: fix and unblacklist
 
---IJFRpmOek+ZRSQoz--
+ meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb                                   |  2 --
+ meta-gnome/recipes-gnome/gtk-engines/gtk-engines_2.20.2.bb                          |  4 +---
+ meta-oe/recipes-extended/mml-widget/gtkmathview_0.8.0.bb                            |  4 +---
+ meta-oe/recipes-graphics/fontforge/{fontforge_20150824.bb => fontforge_20161012.bb} |  8 +++-----
+ meta-oe/recipes-multimedia/libsdl-mixer/libsdl-mixer_1.2.12.bb                      |  5 +----
+ meta-oe/recipes-multimedia/libsdl-mixer/libsdl2-mixer_2.0.1.bb                      |  4 +---
+ meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.11.bb                             |  6 +++---
+ meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf_2.0.14.bb                            |  4 +---
+ meta-oe/recipes-support/postgresql/postgresql.inc                                   |  4 ++--
+ meta-oe/recipes-support/postgresql/postgresql_9.4.10.bb                             | 13 -------------
+ meta-oe/recipes-support/postgresql/postgresql_9.4.11.bb                             | 11 +++++++++++
+ 11 files changed, 24 insertions(+), 41 deletions(-)
+ rename meta-oe/recipes-graphics/fontforge/{fontforge_20150824.bb => fontforge_20161012.bb} (86%)
+ delete mode 100644 meta-oe/recipes-support/postgresql/postgresql_9.4.10.bb
+ create mode 100644 meta-oe/recipes-support/postgresql/postgresql_9.4.11.bb
+
+-- 
+2.9.3
+
+
