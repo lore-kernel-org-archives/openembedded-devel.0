@@ -1,53 +1,53 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 66EEC71D90
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 6DBF172FBB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 23:03:10 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id u63so2950784wmu.2
+	Wed, 22 Feb 2017 23:03:12 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id r18so2954053wmd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 15:03:12 -0800 (PST)
+	Wed, 22 Feb 2017 15:03:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=tng2X1PNzSMIiNV75SIkqBtxFFVXZpeZk+MkRk4IZsE=;
-	b=dzxtexmFjA5TA9STTj1Wodb+WFEzFiTn5rYK+lpdQ2zDgIN3S0Y2BYAYRjkJp2Lkeh
-	rePuEX2NXOC5QK8PmyqzTYMmYTaiDE9SPz0Wcc12tbfqm9zV7DE+C7hgosgZoeW0I/BM
-	tPMXSy5oY7P88HD5K2AxuAw1fhyRaRzin/tvgJ8yshmRpIYLJM3O1wTzwLh5O9pCuEEh
-	JUkz5U17YSiFW3rc5k8oWB2MeTytwwTuQwRN9RE3TciMmWAV0hHUaNu5zy+Guz3e9Yfo
-	31IL8/EJjXx8T2XnxDuDCHH9tjUVcZKNJbBQYasDvkNKJAq72KHGJ+VYRXgwRRglwXlD
-	5t5Q==
+	bh=wia8H/1uIqWR0hdf+PlKBHKju+Wne+C3LBwmG+gbX3Q=;
+	b=UqZFhp5ekyLsBOOwTAGguUPJRCIjbQNOq25ypxqyt22O4Yeywp+qHpVfT3tVxBv7FK
+	awpgA4LBJzxGRjZneWz5/EZnnTgQPrswOzpjLM+dbjBdv2CrEdfZG/Ygn/QrS8iB0xbN
+	/bTcxe4a0iJpaCuuXWcB3dxX5m8vcUauTwQSP++Skl2qchRy6cyImArU+1W1MkUju2cM
+	ysuXLqm7J7w/kG98QG2T37Qnn8+tGCW/Tntw9pxSbvPw8dIbYOhQADPLbquv+kh1H5eL
+	fnBWCcnrC0aI49n7u0SQAX3jNvhDCa8bGZ361xJ3R0bP8ROb0xmXAJvWF4AX+IE93tdN
+	EAWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=tng2X1PNzSMIiNV75SIkqBtxFFVXZpeZk+MkRk4IZsE=;
-	b=RvGOzKcEAdivMbPXpxutz+j+1MCnGF+rcdS61X9+0B9vmdDqJJkjS3S058oeFtNQvx
-	t2htYgtmfV/7nJXk35yVgm5LFALC3BsCMTiLipQHOVl3Gw2S2eieVn7q3tvVnlo5OIVu
-	/DPqm7hzy71DplHaZAHKSYEjJJ7gG87glLmf+3dagcNp+etm2jZrgY/kFQF5e9KhSilm
-	b/nx2vTa7mlSyWZWvfdv3h/nnj4NPd7rto8DQead6Wpvv0J1SlX4yNWS35MR5PclKI/j
-	+zBMYB145tm7uNutsxzwt7bWZpDgzKrYPkHAzcxpwUqmhHHDBZnV2oEs02VI4ofPDfDm
-	EWAA==
-X-Gm-Message-State: AMke39mB2OiFIx7XfOghroS2qSTwnU5vEQZ0+PLWzUDSW3Bvw+f7P1sd9/CAqHDggZ2WPA==
-X-Received: by 10.28.69.202 with SMTP id l71mr749004wmi.68.1487804592021;
-	Wed, 22 Feb 2017 15:03:12 -0800 (PST)
+	bh=wia8H/1uIqWR0hdf+PlKBHKju+Wne+C3LBwmG+gbX3Q=;
+	b=chHtHAGvAc+wnwa5dD4nETIpGDHu77gwRakVjB5mJAI8pXc1YaEeuCCpSb8HGZV2u7
+	pXgL7pWsLiGGqN+7T5EX2DK7pn1UQyK31M+t7dN1W9dV2cyH78s4nMORbgpBrJFFH8Od
+	JB3YjvESfWr3g+K21hDedENEQjhdsorQlpMaVepoiCbRSbbp1WxyLhRyuvduApDju/Fv
+	BSEolnnT6cvQhwmsGPXhBcw6I4Q1npvWEJwsPfrFwed5xv0vPU31mjzApLi/IqNNmfqZ
+	G+F7zL/iA8bLvpb8B6ThhvRc/Hea78pk/vWkDsXooTa0xB0uL4iVUZhOfti/v3Zi3KII
+	KLdw==
+X-Gm-Message-State: AMke39kBt6b+nASs44exs5pU7IPorzYKFNtgJ15zW1PIZadvsVEDazYEbvcYtOG3O3QA9g==
+X-Received: by 10.28.181.145 with SMTP id e139mr638292wmf.127.1487804593292;
+	Wed, 22 Feb 2017 15:03:13 -0800 (PST)
 Received: from PC192-168-2-116.speedport.ip
 	(p20030046E912A1041E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:46:e912:a104:1e6f:65ff:fe3e:7f61])
 	by smtp.googlemail.com with ESMTPSA id
-	q4sm3479696wrc.35.2017.02.22.15.03.11
+	q4sm3479696wrc.35.2017.02.22.15.03.12
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 22 Feb 2017 15:03:11 -0800 (PST)
+	Wed, 22 Feb 2017 15:03:12 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Feb 2017 00:02:49 +0100
-Message-Id: <20170222230250.30288-11-schnitzeltony@googlemail.com>
+Date: Thu, 23 Feb 2017 00:02:50 +0100
+Message-Id: <20170222230250.30288-12-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.3
 In-Reply-To: <20170222230250.30288-1-schnitzeltony@googlemail.com>
 References: <20170222230250.30288-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 10/11] libsdl2-ttf: add pkgconfig to inherit and unblacklist
+Subject: [PATCH 11/11] libsdl-ttf: fix and unblacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,34 +60,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2017 23:03:11 -0000
+X-List-Received-Date: Wed, 22 Feb 2017 23:03:12 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf_2.0.14.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.11.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf_2.0.14.bb b/meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf_2.0.14.bb
-index da74fba..f2441f9 100644
---- a/meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf_2.0.14.bb
-+++ b/meta-oe/recipes-support/libsdl-ttf/libsdl2-ttf_2.0.14.bb
-@@ -13,7 +13,7 @@ SRC_URI[sha256sum] = "34db5e20bcf64e7071fe9ae25acaa7d72bdc4f11ab3ce59acc768ab62f
+diff --git a/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.11.bb b/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.11.bb
+index 091d6ef..d8b378f 100644
+--- a/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.11.bb
++++ b/meta-oe/recipes-support/libsdl-ttf/libsdl-ttf_2.0.11.bb
+@@ -12,7 +12,9 @@ SRC_URI[sha256sum] = "724cd895ecf4da319a3ef164892b72078bd92632a5d812111261cde248
  
- S = "${WORKDIR}/SDL2_ttf-${PV}"
+ S = "${WORKDIR}/SDL_ttf-${PV}"
  
 -inherit autotools
 +inherit autotools pkgconfig
++
++LDFLAGS += "-lm"
  
  do_configure_prepend() {
-     touch ${S}/NEWS ${S}/README ${S}/AUTHORS ${S}/ChangeLog
-@@ -25,5 +25,3 @@ do_configure_prepend() {
+     # make autoreconf happy
+@@ -25,5 +27,3 @@ do_configure_prepend() {
          rm -f ${S}/acinclude/$i
      done
  }
 -
--PNBLACKLIST[libsdl2-ttf] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130656/"
+-PNBLACKLIST[libsdl-ttf] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130598/"
 -- 
 2.9.3
 
