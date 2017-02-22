@@ -1,59 +1,52 @@
-Return-Path: <jaragunde@igalia.com>
-Received: from smtp4.mundo-r.com (smtp3.mundo-r.com [212.51.32.191])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D5A971DEE
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 00C99730C8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 12:53:59 +0000 (UTC)
-IronPort-PHdr: =?us-ascii?q?9a23=3A/e0inh/zAQ79Pv9uRHKM819IXTAuvvDOBiVQ1KB2?=
-	=?us-ascii?q?2+McTK2v8tzYMVDF4r011RmSDNidsqwP17GempujcFRI2YyGvnEGfc4EfD4+ou?=
-	=?us-ascii?q?JSoTYdBtWYA1bwNv/gYn9yNs1DUFh44yPzahANS47xaFLIv3K98yMZFAnhOgpp?=
-	=?us-ascii?q?POT1HZPZg9iq2+yo9ZDeZwVFiCCgbb5zIxm7ogvcvdQKjIV/Lao81gHHqWZSde?=
-	=?us-ascii?q?RMwmNoK1OTnxLi6cq14ZVu7Sdete8/+sBZSan1cLg2QrJeDDQ9LmA6/9brugXZ?=
-	=?us-ascii?q?TQuO/XQTTGMbmQdVDgff7RH6WpDxsjbmtud4xSKXM9H6QawyVD+/6apgVR3mhz?=
-	=?us-ascii?q?odNzMh8G/ZlNF+gqxYrhymqBNw34HabZqJNPd9ZK7RYckXSXZDU8tXSidPApm8?=
-	=?us-ascii?q?b4wKD+cZOehXtZXyp1wVohu5GAKhGPnvxSVHhn/r2601zvouGhzc0gs6BdIBrn?=
-	=?us-ascii?q?XVp8jyOacQS++11rPHzTreb/NQxDjy9pPFchEuof6WWbJwcNDexVMzGAPCi1Wd?=
-	=?us-ascii?q?sIroNC6b2OQKtmiU9etgVeS3hm4+twF9uDmvxsA0hojJgYIa1kzE9SJhwIYvIt?=
-	=?us-ascii?q?24SlB0bsK4EJdKsCGaLYR2T8U/SG9roCY30rkLtYOhcCQX1ZgqxQTTZviDfoSS?=
-	=?us-ascii?q?/x7uVOacLDFlj3x/Yr2/nQy98U24x+35Ucm7zUhFozJektnJqnANzxvT6tWbSv?=
-	=?us-ascii?q?dl/keuxzKP1wfL5+FKO080k6vaK58nwrEujJYTsEvDETXymEX3lqCabFkr+u+t?=
-	=?us-ascii?q?6+j/Y7XmoIGTN5Nshwz6L6gigNGzDfk6PwQUW2WW/f6w2KDj8ED5WLlKi+c5kq?=
-	=?us-ascii?q?jdsJDUP8Qboau5DhdX0ok58RawFTim0MkenXYaMl1IYxOHj4fzNFHKIfD3F+2z?=
-	=?us-ascii?q?jEirkDdu3/zGJKHuAo3RLnjfl7fsZbF961ZCxwo1099f4olbBa8cL/3uRED+qc?=
-	=?us-ascii?q?XUAQInPAyq3ennDM5w1ocfWWKUHq+ZK7nesViQ5u0xJemDeooVty3jJPc4+vHh?=
-	=?us-ascii?q?k2I2lUUafamz0psdcGq4Eeh+I0WFfXrshc8MEWAWvgUkUuzqiVqCXCVUZ3apRK?=
-	=?us-ascii?q?I95io7CJ64AofGXYChmqCO3CC+HpFMfW9GEEiGEW30eIWcR/cMdCWSL9dkkjMe?=
-	=?us-ascii?q?T7ihV44h1Re0uA/40bVnKPHU9TcDuJLs0dh6/ezTlRUo+TNoCMSd1jLFc2YhmX?=
-	=?us-ascii?q?sFQTIz1q1zrUFxj1uOz6V8q/hZDsBIofRRXwE3MJTRw+B3B5b1QA2SUM2OTQOE?=
-	=?us-ascii?q?S96hCzZ5Z8g4zMIIb0s1I1S4gwKLiyijGbYairqHCbQ1/avY3nG3LMF4nSWVnJ?=
-	=?us-ascii?q?I9hkUrF5McfVatgbRyolDe?=
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: =?us-ascii?q?A2H1BgCTiK1Y/5tjdVteHgYMGQYMgyZhg?=
-	=?us-ascii?q?QmDW4p6oUmCRIIPgg0aEIV4gnxBFgEBAQEBAQEBAQEBAl8ogjMgDz0QAQEBAQE?=
-	=?us-ascii?q?BAQEBIwEBAQEBASMCDYEHDwFGNQImAnKJeQEJrnSCJotFAQsBJYELhUGKD4IAD?=
-	=?us-ascii?q?C6CXwWcEIZ0iy8CgkyOQkiSXSYLJ4EAVIcdPzWKFAEBAQ?=
-X-IPAS-Result: =?us-ascii?q?A2H1BgCTiK1Y/5tjdVteHgYMGQYMgyZhgQmDW4p6oUmCRII?=
-	=?us-ascii?q?Pgg0aEIV4gnxBFgEBAQEBAQEBAQEBAl8ogjMgDz0QAQEBAQEBAQEBIwEBAQEBA?=
-	=?us-ascii?q?SMCDYEHDwFGNQImAnKJeQEJrnSCJotFAQsBJYELhUGKD4IADC6CXwWcEIZ0iy8?=
-	=?us-ascii?q?CgkyOQkiSXSYLJ4EAVIcdPzWKFAEBAQ?=
-X-IronPort-AV: E=Sophos;i="5.35,194,1484002800"; d="scan'208";a="162902284"
-Received: from fanzine.igalia.com ([91.117.99.155])
-	by smtp4.mundo-r.com with ESMTP; 22 Feb 2017 13:53:58 +0100
-Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
-	by fanzine.igalia.com with esmtps 
-	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
-	id 1cgWQf-0006ru-PE; Wed, 22 Feb 2017 13:53:57 +0100
-Received: from fanzine.local.igalia.com ([192.168.10.13]
-	helo=goomba.local.igalia.com) by mail.igalia.com with esmtps 
-	(Cipher TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim)
-	id 1cgWQd-0005Y7-57; Wed, 22 Feb 2017 13:53:55 +0100
-From: =?UTF-8?q?Jacobo=20Aragunde=20P=C3=A9rez?= <jaragunde@igalia.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Feb 2017 13:53:49 +0100
-Message-Id: <1487768029-5984-1-git-send-email-jaragunde@igalia.com>
-X-Mailer: git-send-email 2.7.4
+	Wed, 22 Feb 2017 13:02:07 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id 89so275961wrr.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Feb 2017 05:02:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=ia4d8QFe8Jm+ELaGyog2+Ovmr8mz2Fv1/gYh3r4NXZ4=;
+	b=IYDZRQT0Vdlg7U/ZAyD5nv29v9HRlALMuIRKJicFaF1LM/EDYRp28NbdKL8ymuKFgX
+	+NyXEbd8rKJvK+Ye/JDpoixSJhuvUnB0iYSMAK/JZm8WzWZQXILQASar9SDEJMwziKN8
+	GudQrdW2Jwi/QuHE8s56EaRpdHXQa6wEtdOTZLiBqIb6TrFhu8K9hyjPhjxGIjZ3yLo2
+	XkAnvE/gBeOYLLkr5daOmIPiH/Mia1mwSJZ6Y8F6nxVbHgm7MNyajIRc1tZiOKSGDi3q
+	qlyOupjwy9YLH0ml/W3oXrUWbWUQAZEZ1DgP1iw/UNb91NQ3uPDy4JnSfj9mE6Y6eBdK
+	Rv0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=ia4d8QFe8Jm+ELaGyog2+Ovmr8mz2Fv1/gYh3r4NXZ4=;
+	b=HldP8F7CHdO6ETllh3Z6kcBwVVV+82RtRwRvRI4Mue7E7+wfeR2MzMyOqrgeMsF1WS
+	3abHKdciLRCMydnpiz120YqzLtksDCFqccUWxFBNnBsm6baz8pSlecF23/rzTDTZbc9u
+	Bsh6jP9bjY2EmlfWZKvdSuxTS9O/p+ZFck8dcrCOQLltEIX3a38vKiAb++7IPEHGQ0c7
+	xlbr+88ti0CixTLPDREcxibUBPMl913B34zuJ5iVIhtrstoY4pLWlSgEKBivUFvQnNk4
+	IHLM0v+ecSILzTW4CAUVL1acWzItLskqT9Z2Kpe4XGPOXrVeNA2G4jz1igKlQlrCVBnk
+	mgFg==
+X-Gm-Message-State: AMke39mLW69HzpJpcHGnYK9eggZHcflFBtKYnzt7YzdrTDBAaGqzAkNxaFhrRou49mD/mQ==
+X-Received: by 10.223.151.212 with SMTP id t20mr2103004wrb.95.1487768528713;
+	Wed, 22 Feb 2017 05:02:08 -0800 (PST)
+Received: from localhost ([217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id 36sm1689923wrz.8.2017.02.22.05.02.07
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 22 Feb 2017 05:02:07 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 22 Feb 2017 14:02:08 +0100
+To: Joe MacDonald <Joe_MacDonald@mentor.com>
+Message-ID: <20170222130208.GB3283@jama>
+References: <1487697210-29779-1-git-send-email-ray.kinsella@intel.com>
+	<20170221172236.GT8436@mentor.com>
 MIME-Version: 1.0
-Cc: otavio@ossystems.com.br
-Subject: [meta-browser][PATCH] chromium: disable generate_character_data for qemux86
+In-Reply-To: <20170221172236.GT8436@mentor.com>
+User-Agent: Mutt/1.7.2 (2016-11-26)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] [meta-networking] ddclient: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,34 +59,161 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2017 12:54:02 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 22 Feb 2017 13:02:08 -0000
+X-Groupsio-MsgNum: 65438
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="3uo+9/B/ebqu+fSQ"
+Content-Disposition: inline
 
-Chromium-wayland fails with:
-  http://errors.yoctoproject.org/Errors/Build/32356/
+--3uo+9/B/ebqu+fSQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Root cause seems to be ICU mixing host and target architectures,
-same as in: https://bugreports.qt.io/browse/QTBUG-57705
+On Tue, Feb 21, 2017 at 12:22:37PM -0500, Joe MacDonald wrote:
+> [[oe] [PATCH]  [meta-networking] ddclient: new package] On 17.02.21 (Tue =
+17:13) Ray Kinsella wrote:
+>=20
+> > Adding the package ddclient. DDClient updates Dynamic DNS servers with =
+an IP address.
+> > Recipe is based on the original OE recipe found here.
+> >=20
+> > http://cgit.openembedded.org/openembedded/tree/recipes/ddclient/ddclien=
+t_3.6.3.bb
+> >=20
+> > DDClient version has been updated to 3.8.3.
+> >=20
+> > Signed-off-by: Ray Kinsella <ray.kinsella@intel.com>
+> > ---
+> >  .../recipes-daemons/ddclient/ddclient_3.8.3.bb     | 45 ++++++++++++++=
+++++++++
+> >  .../recipes-daemons/ddclient/files/ip-up           |  4 ++
+> >  2 files changed, 49 insertions(+)
+> >  create mode 100644 meta-networking/recipes-daemons/ddclient/ddclient_3=
+=2E8.3.bb
+> >  create mode 100644 meta-networking/recipes-daemons/ddclient/files/ip-up
+> >=20
+> > diff --git a/meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb=
+ b/meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb
+> > new file mode 100644
+> > index 0000000..723eb67
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb
+> > @@ -0,0 +1,45 @@
+> > +SECTION =3D "net/misc"
+> > +DESCRIPTION =3D "Ddclient is a Perl client used to update dynamic DNS =
+entries for accounts on Dynamic DNS Network Services"
+> > +HOMEPAGE =3D "http://ddclient.sourceforge.net/"
+> > +LICENSE =3D "GPLv2"
+> > +PR =3D "r4"
+>=20
+> We don't need explicit PRs anymore.
+>=20
+> > +SRC_URI =3D "\
+> > +    ${SOURCEFORGE_MIRROR}/ddclient/ddclient-${PV}.tar.bz2 \
+> > +    file://ip-up"
+> > +
+> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D0636e73ff0215e8d672dc4c32c3=
+17bb3"
+> > +
+> > +RDEPENDS_${PN} =3D "\
+> > +    perl-module-getopt-long \
+> > +    perl-module-sys-hostname \
+> > +    perl-module-io-socket \
+> > +    perl-module-vars \
+> > +    perl-module-overload \
+> > +    perl-module-overloading \
+> > +    perl-module-config \
+> > +    perl-module-integer \
+> > +    perl-module-exporter-heavy \
+> > +    perl-module-symbol \
+> > +    perl-module-selectsaver \
+> > +    bash \
+> > +    perl \
+> > +    libio-socket-ssl-perl"
 
-Signed-off-by: Jacobo Aragunde Pérez <jaragunde@igalia.com>
----
- recipes-browser/chromium/chromium.inc | 1 +
- 1 file changed, 1 insertion(+)
+I've added it to master-next, but now I'll drop it again, because
+it creates dependency on meta-perl and meta-networking doesn't depend
+on meta-perl (at least not yet - good luck with OEDAM plan to separate
+meta-perl, meta-python, meta-networking to separate layers).
 
-diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
-index 0e7250e..0076f3a 100644
---- a/recipes-browser/chromium/chromium.inc
-+++ b/recipes-browser/chromium/chromium.inc
-@@ -15,6 +15,7 @@ inherit gettext pythonnative
- 
- ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'arm_float_abi=hard', 'arm_float_abi=softfp', d)}"
- GYP_DEFINES += "${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
-+GYP_DEFINES_append_qemux86 = " generate_character_data=0"
- 
- do_configure() {
- 	cd ${S}
--- 
-2.7.4
+ERROR: Nothing RPROVIDES 'libio-socket-ssl-perl' (but meta-oe/meta-networki=
+ng/recipes-daemons/ddclient/ddclient_3.8.3.bb RDEPENDS on or otherwise requ=
+ires it)
+
+> I haven't looked at the download, but I did briefly read the SF documenta=
+tion
+> and it seems like maybe these would be appropriate as well:
+>=20
+> do_configure[noexec] =3D "1"
+> do_compile[noexec] =3D "1"
+>=20
+> > +do_install() {
+> > +    install -d ${D}${sbindir} ${D}${sysconfdir}/ddclient ${D}${sysconf=
+dir}/init.d
+> > +    install -d ${D}${sysconfdir}/ppp/ip-up.d/ install -d ${D}${docdir}=
+/ddclient
+> > +    install -m 755 ${S}/ddclient ${D}${sbindir}
+> > +    install ${S}/sample-etc_ddclient.conf ${D}${sysconfdir}/ddclient/d=
+dclient.conf
+> > +    install -m 755 ${WORKDIR}/ip-up ${D}${sysconfdir}/ppp/ip-up.d/ddcl=
+ient
+> > +    sed -e 's|/etc/ddclient.conf|/etc/ddclient/ddclient.conf|g' ${S}/s=
+ample-etc_rc.d_init.d_ddclient > ${S}/rc_init
+> > +    install -m 755 ${S}/rc_init ${D}${sysconfdir}/init.d/ddclient
+> > +    install ${S}/README* ${D}${docdir}/ddclient
+> > +    install ${S}/COPY* ${D}${docdir}/ddclient
+> > +    install ${S}/sample* ${D}${docdir}/ddclient
+> > +}
+> > +
+> > +CONFFILES_${PN} =3D "${sysconfdir}/ddclient/ddclient.conf"
+> > +
+> > +SRC_URI[md5sum] =3D "3b426ae52d509e463b42eeb08fb89e0b"
+> > +SRC_URI[sha256sum] =3D "d40e2f1fd3f4bff386d27bbdf4b8645199b1995d27605a=
+886b8c71e44d819591"
+> > diff --git a/meta-networking/recipes-daemons/ddclient/files/ip-up b/met=
+a-networking/recipes-daemons/ddclient/files/ip-up
+> > new file mode 100644
+> > index 0000000..52a44f8
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-daemons/ddclient/files/ip-up
+> > @@ -0,0 +1,4 @@
+> > +#!/bin/sh
+> > +
+> > +logger -t ddclient $PPP_IFACE $PPP_LOCAL
+> > +ddclient -daemon=3D0 -syslog -use=3Dif -if=3D$PPP_IFACE >/dev/null 2>&1
+> > \ No newline at end of file
+>=20
+> That's odd.  :-)
+>=20
+> Anyway, I'll have a look at this in more detail when it loops through
+> master-next.
+>=20
+> --=20
+> -Joe MacDonald.
+> :wq
 
 
+
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--3uo+9/B/ebqu+fSQ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWK2LzwAKCRA3VSO3ZXaA
+HArcAJ4ykbumgkHWQz3GoQrlKg2fHnPSNgCggbL3pTDvuy1iYzneOXXL3sOZQmw=
+=eeyU
+-----END PGP SIGNATURE-----
+
+--3uo+9/B/ebqu+fSQ--
