@@ -1,46 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id BBB5C72F30
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 9DBE672FC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 23:48:22 +0000 (UTC)
-Received: by mail-wm0-f50.google.com with SMTP id v186so155761902wmd.0
+	Wed, 22 Feb 2017 23:58:20 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id n37so2484718qtb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 15:48:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=ty4NFsO3VhusBNKHdhpqzRngcXdlPuyzaO4zwQy/k9g=;
-	b=qxWejDWNsxWOyqj8jcYXQzrlxuhjIDKAjjQ710avi58QP5aLxgDAWUKDyTy5ZUN4AZ
-	JIzvpSi+DdMeHJg9NiL4s+upl9vASGTQttP1KDAaKGsI/LqW4qrCspYY6Lq1rh4wyanj
-	DPZawEDwnPWfHcyxkZmlrwaTqmYYlN/ySmoM1xL6RXUDb5Tv6gyr3MkiN4oePbYIXgaA
-	TzBqlywzzprKq+ZQ5uH7RsjfgKeuDDeR01GD3fPi2qFZgCS7ld6HcSrqBDysaa7rTnpd
-	3d01dz2CYR1I2Vw8C3E1AHRqOG0zI3U5+VVo0tffgT8xPU64q0xBKzuktGIgw7CYv6oT
-	J55g==
+	Wed, 22 Feb 2017 15:58:22 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=ty4NFsO3VhusBNKHdhpqzRngcXdlPuyzaO4zwQy/k9g=;
-	b=qpGwAX4emj87xW2K76ljzUF7p43n9UKH7fYbkkCVaAz/wYktC1Qiwx6qtduXZ5pihW
-	aO22EjoSeXXTtW6Xha7ltWkA2f2HM8XHXUQDnoIdfbumuG5U+ShK4f9TiZNGKsToKR2k
-	ZqIMWVFXlPlrP5pbnO8hXTcPZ7zKO+uVkrAKa2LqRedT7oMPPmimrb3LtrGmmtXR2KdC
-	p6rCrUKvXz+J4HpFEz42AOLODNIqEcl/HGXnOpd0bDPjVlZdmogb7k9/1uSlt5xa289I
-	MxR7dkMlJwpXFZNDaLDsz567GL7SAO2XhJzJRbszxGy2OZ5X4b+Gkbzz56nheGFwFu3j
-	0j4g==
-X-Gm-Message-State: AMke39mixLCEGme+VjJ/ZNToQNXnomAaZhwphN63uc08x/52WgECrewo4SQ/kyG9OvDeJcsvpQV9rVAk3jTd9Q==
-X-Received: by 10.28.211.205 with SMTP id k196mr820119wmg.124.1487807303333;
-	Wed, 22 Feb 2017 15:48:23 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.80.212.30 with HTTP; Wed, 22 Feb 2017 15:48:22 -0800 (PST)
-In-Reply-To: <506a5e6c-36f6-7b1f-a375-24bebb57342f@linuxfoundation.org>
-References: <20170222213254.GH3283@jama>
-	<506a5e6c-36f6-7b1f-a375-24bebb57342f@linuxfoundation.org>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 23 Feb 2017 00:48:22 +0100
-Message-ID: <CA+chaQe23zrLkeJ81iyWxx__=S2PDjGtTSGqm8x5KZOtMd5D_w@mail.gmail.com>
-To: Michael Halstead <mhalstead@linuxfoundation.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: Before you ping some older patches
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=h6sNzlQenrA+H60ycNpxrLzcpvQxCQMzOErxG49VGpE=;
+	b=Pf+sGVP5WL9ZHgJGtImP6kGG+rxgM/7peG/vdGY8fzFoTHwnbuetHBzuTQrDPFv/NG
+	8BxoOVmHzD9OQYJWe3V0t5FLExhwvQaNS20ntXexrwdOPdQVJt8XRCJ/4SfbbQfAisje
+	okyAB7RCZ+Vix9/WcHlvXuMqLjQbpKzP7rUOptbF/EM6cgVYnANy9RLhF1nAiBxlQqgv
+	YADTynKpiT5rWPvy6eiryBE81BjTQsTa33atQpJCudQzPmBPZrN9plMeK9Og8ybYVg/T
+	8zJJUKTt/jOyNZ1o79donDSrX8y2pHmMTMlDSW6wU/JSQxHRZ9a70JsJBarKTm5Sbn9z
+	JxfQ==
+X-Gm-Message-State: AMke39mDhkrF/MASDpWv7IU175Z3rGdkeWyli9HugpEFpKkAG5DYfPuOkufxB7U4DcwPlA==
+X-Received: by 10.237.62.25 with SMTP id l25mr18609573qtf.225.1487807901376;
+	Wed, 22 Feb 2017 15:58:21 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
+	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
+	e16sm1666353qkj.64.2017.02.22.15.58.20
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 22 Feb 2017 15:58:20 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 22 Feb 2017 18:58:10 -0500
+Message-Id: <1487807890-25247-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-autobahn: remove obsolete recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,65 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2017 23:48:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 22 Feb 2017 23:58:21 -0000
 
-Hi Michael,
+The autobahn recipe does not currently function and is extremely out
+of date.  The only known consumer of this was cloudeebus, which is
+also being removed.  The new version requires a large number of
+dependencies that are not currently in meta-python.  Since there are
+no known users, the recipe will be removed for now until other consumers
+are identified.
 
-thanks for quick fix.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../recipes-devtools/python/python-autobahn_0.8.6.bb     | 16 ----------------
+ 1 file changed, 16 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-autobahn_0.8.6.bb
 
-The hook now shows error about sendmail I wasn't seeing before:
+diff --git a/meta-python/recipes-devtools/python/python-autobahn_0.8.6.bb b/meta-python/recipes-devtools/python/python-autobahn_0.8.6.bb
+deleted file mode 100644
+index e64dd8f..0000000
+--- a/meta-python/recipes-devtools/python/python-autobahn_0.8.6.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-DESCRIPTION = "AutobahnPython provides a WebSocket (RFC6455, Hybi-10 to -17, Hixie-76) framework for creating WebSocket-based clients and servers. \
+-AutobahnPython also includes an implementation of WAMP (The WebSockets Application Messaging Protocol), a light-weight,  \
+-asynchronous RPC/PubSub over JSON/WebSocket protocol."
+-HOMEPAGE = "http://autobahn.ws/python"
+-
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = " file://autobahn/__init__.py;beginline=1;endline=17;md5=1fdeccf6e5b70cda64cc1345597c18e3"
+-
+-SRC_URI[md5sum] = "160429e7fb043940e79aa7f4ebbab57a"
+-SRC_URI[sha256sum] = "94ae5c6f37f9fe7c9d3f12c170fcc273afed4104a1c5508b26d6014bb9e6373e"
+-
+-PYPI_PACKAGE_EXT = "zip"
+-inherit pypi setuptools
+-
+-RDEPENDS_${PN} = "python python-pprint python-twisted-protocols python-netserver python-twisted-web"
+-
+-- 
+2.7.4
 
-OE @ ~/meta-openembedded $ git push origin master-next
-Counting objects: 78, done.
-Delta compression using up to 8 threads.
-Compressing objects: 100% (25/25), done.
-Writing objects: 100% (78/78), 7.35 KiB | 0 bytes/s, done.
-Total 78 (delta 56), reused 66 (delta 49)
-remote: No sendmail executable found.  Try setting
-multimailhook.sendmailCommand.
-To git.openembedded.org:meta-openembedded
-   eb7979113..0d27137f0  master-next -> master-next
-
-
-On Thu, Feb 23, 2017 at 12:06 AM, Michael Halstead <
-mhalstead@linuxfoundation.org> wrote:
-
-> The hooks are repaired and need testing. (Bad git/config settings.) Please
-> feel free to resubmit patches. Let me know if they do not appear in
-> patchwork.
-> I'm trying to see if I can automatically resend the missed patches and
-> mark them superseded if needed. I'll update post here if it works.
->
->
->
-> On 02/22/2017 01:32 PM, Martin Jansa wrote:
->
-> 1) Make sure they aren't already in master (or master-next), currently
-> there is only one change in master-next:
-> eb7979113 netcat-openbsd: fix implicit dependency on pkg-config
->
-> 2) Make sure there weren't some negative feedback comments on our change
->
-> 3) Make sure the change made it to patchwork, currently there is only
-> one "open" change:https://patchwork.openembedded.org/patch/137499/
->
-> Be aware that the changes are usually daily marked as archived, when
-> they are sorted to corresponding bundles and included in master-next
-> branch for testing, as described here:http://www.openembedded.org/wiki/Patchwork#Multiple_layers_sharing_the_same_oe_project_on_patchwork
->
-> I'm writing this, because currently many changes are missing on patchwork,
-> because of some unknown issue with it, see:http://lists.openembedded.org/pipermail/openembedded-devel/2017-February/111467.html
-> once this issue is resolved, please re-send missing changes.
->
-> Regards,
->
->
->
->
-> --
-> Michael Halstead
-> Linux Foundation / SysAdmin
->
->
 
