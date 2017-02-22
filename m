@@ -1,47 +1,50 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id CB8BE71CB3
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id B998571CB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 21:32:53 +0000 (UTC)
-Received: by mail-wm0-f46.google.com with SMTP id v186so153106357wmd.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 13:32:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:subject:message-id:mime-version:content-disposition
-	:user-agent; bh=Z0LKxBrMKvf677aam3R6XSyuCYF6hdoH2WMDsYbYZBk=;
-	b=Q/gHT1GH7cO+XpmLfr8F63gqb+UCUYY0kUl68kREIIRsi0qj7eCqTP33hdEiXwj5j1
-	Lmth1eDNpgbTwMkPH8KKi8OATikZzoWFN3pWuzXwk1LJT7PRmWzVLpAbaLwIi/Gmk7Ex
-	3lN7n8ZbVNv+9xejjyITx2TdNd2bIOOQvZ4fUqm6tIlWk18GSkuQ19f5HNfsNo7qxHys
-	vlrgYKCht4vfFuO39uZwdBZjoVABIxas9O6QUUHg3ZHpefvG5c/wNeQSGeAUx4c5jBSu
-	kHFaOjC92NrH0R755uzeF1ljmK4mfIMN4SUUuPJ4o7McIWq+xDd+AjRUWIPuheFvnIl5
-	w5YA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:subject:message-id:mime-version
-	:content-disposition:user-agent;
-	bh=Z0LKxBrMKvf677aam3R6XSyuCYF6hdoH2WMDsYbYZBk=;
-	b=a2KHaOlEpPUmHFWbE7RWswUoUGHyp283oB7qdGZg9H6OBPyqZlk+3CdQNk+NFF/fRr
-	mDX6Z7o+JG0BlFGfu6JkcALV1IZdLnDYDyduna0KJkEsVfWoafxhycZwWx4dWmNGB73q
-	Fp7HkaAK69BLMGuAlBg5TL4VaWk5JKAn4Y2xMz3Twuvs+SCUGkevC8n+TRj9EhCpqYhg
-	228FYtMrOVRka5SowdxDxGUXuK3kV1PnQQbiyoPNBQZ5wsBqxQ48KQM2GgtNUj6zGuiR
-	ReKqiWJalYV1lo2Daz4PZ6bMH2mbc6ADHiLNgvDXonDMoEKn+Ml5wQBRsWf+ooANklbD
-	tOog==
-X-Gm-Message-State: AMke39mqV5iemNXobNpMXdUKyUd6WJ4EO1Ug6ZmVu09vTMRdJsw0DgR0kvaYK53EP3pjLw==
-X-Received: by 10.28.88.6 with SMTP id m6mr265809wmb.4.1487799174064;
-	Wed, 22 Feb 2017 13:32:54 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	m84sm3578788wmf.10.2017.02.22.13.32.53
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 22 Feb 2017 13:32:53 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 22 Feb 2017 22:32:54 +0100
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170222213254.GH3283@jama>
+	Wed, 22 Feb 2017 21:56:19 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1487800580; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=hmU4T8W+edrDg77iB9BfCfwZyd2xPJc/rOAO6SzaFQw=;
+	b=oPjx0PTbGcfTfFLfXgC2o2z0Z8jf/EybZMm8WLMUAfd0OACKCDjhD8wmKyZ/Xmlo511SCQH0
+	yrVHT7A6/JLMGylkWyaVXONGCtA5L+1DRxqs7Q/AHEVBczwVO/3vIXWq2CEqL4i2y8d4wgyI
+	Wwc+cH+H3OcyYZEELXeijyc5umI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
+	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
+	Message-ID: Subject: To: Cc: Content-Type;
+	b=X/tNs3dwO1Y3k6mnsXrtIsmzNGcOth3OParTO3JEO7K7xG5CZPsmVVlFv8TMW957cFd36I
+	1PM498NHmjnRSij+xYYrNNjSiCYRRrtX5W2in2vJwH2WvtDK+64vKEp5ihYpUwQQLG2wX4SD
+	ltiEBHoXLEmaLpyzVvNVKNZ7L8rCY=
+Sender: derek@asterius.io
+X-Mailgun-Sending-Ip: 104.130.122.4
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Received: from mail-it0-f44.google.com (mail-it0-f44.google.com
+	[209.85.214.44])
+	by mxa.mailgun.org with ESMTP id 58ae0903.7f24fc3038f0-smtp-out-n02;
+	Wed, 22 Feb 2017 21:56:19 -0000 (UTC)
+Received: by mail-it0-f44.google.com with SMTP id d9so42472050itc.0;
+	Wed, 22 Feb 2017 13:56:19 -0800 (PST)
+X-Gm-Message-State: AMke39livi2BKZL14cBzVyv+1eeQkLoILGzXJXF/v5DSOCNw8eli+08ab5FRkpDnXCB1v9SCBiZGEQrHiDT/Ig==
+X-Received: by 10.36.94.66 with SMTP id h63mr663332itb.41.1487800578737; Wed,
+	22 Feb 2017 13:56:18 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mutt/1.7.2 (2016-11-26)
-Subject: Before you ping some older patches
+Received: by 10.107.156.85 with HTTP; Wed, 22 Feb 2017 13:56:18 -0800 (PST)
+In-Reply-To: <CADfgfobBp60s+GjqS3zRrO-z4HUhe8zFi51GPzceDFAKQVGf=Q@mail.gmail.com>
+References: <1487785536-13777-1-git-send-email-derek@asterius.io>
+	<20170222204736.GG3283@jama>
+	<CADfgfobBp60s+GjqS3zRrO-z4HUhe8zFi51GPzceDFAKQVGf=Q@mail.gmail.com>
+From: Derek Straka <derek@asterius.io>
+Date: Wed, 22 Feb 2017 16:56:18 -0500
+X-Gmail-Original-Message-ID: <CADNbA1pdESCdRAkKB2po-kZ2b26TMSQsas3u4vYFU=SKMOhVaQ@mail.gmail.com>
+Message-ID: <CADNbA1pdESCdRAkKB2po-kZ2b26TMSQsas3u4vYFU=SKMOhVaQ@mail.gmail.com>
+To: Michael Halstead <mhalstead@linuxfoundation.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-core <openembedded-core@lists.openembedded.org>, "Lamego,
+	Jose A" <jose.a.lamego@intel.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [OE-core] Patchwork not picking changes from the ML Was: [meta-python][PATCH] python-paho-mqtt: update to version 1.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,47 +57,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2017 21:32:54 -0000
-X-Groupsio-MsgNum: 65461
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="NyChO5MpGs3JHJbz"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 22 Feb 2017 21:56:20 -0000
+Content-Type: text/plain; charset=UTF-8
 
---NyChO5MpGs3JHJbz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Martin - No problem.  I'll resend the patches.
 
-1) Make sure they aren't already in master (or master-next), currently
-there is only one change in master-next:
-eb7979113 netcat-openbsd: fix implicit dependency on pkg-config
+Michael - Would it be worth waiting before I resend the change sets?  It
+looks like at least a subset of them have made it through.
 
-2) Make sure there weren't some negative feedback comments on our change
+Thanks.
 
-3) Make sure the change made it to patchwork, currently there is only
-one "open" change:
-https://patchwork.openembedded.org/patch/137499/
+-Derek
 
-Be aware that the changes are usually daily marked as archived, when
-they are sorted to corresponding bundles and included in master-next
-branch for testing, as described here:
-http://www.openembedded.org/wiki/Patchwork#Multiple_layers_sharing_the_same_oe_project_on_patchwork
+On Wed, Feb 22, 2017 at 3:55 PM, Michael Halstead <
+mhalstead@linuxfoundation.org> wrote:
 
-I'm writing this, because currently many changes are missing on patchwork,
-because of some unknown issue with it, see:
-http://lists.openembedded.org/pipermail/openembedded-devel/2017-February/111467.html
-once this issue is resolved, please re-send missing changes.
+> I've seen several issues with hooks. I was working on them yesterday and
+> will continue today.
+>
+> These are currently managed by hand but we are moving them into
+> configuration management which should help keep them working consistently.
+>
+> On Feb 22, 2017 12:47 PM, "Martin Jansa" <martin.jansa@gmail.com> wrote:
+>
+>> On Wed, Feb 22, 2017 at 12:45:36PM -0500, Derek Straka wrote:
+>> > Signed-off-by: Derek Straka <derek@asterius.io>
+>>
+>> It's not your fault Derek, but most of the patches from today and based
+>> on the pings from today also some earlier patches didn't make it into
+>> patchwork. This one is the only exception.
+>>
+>> Michael, Jose: are you aware of some issues with patchwork? Could it be
+>> caused by the default Reply-to change from yesterday (or day before
+>> during OEDAM)?
+>>
+>> I know only about issues processing merged changes:
+>> https://bugzilla.yoctoproject.org/show_bug.cgi?id=10967
+>> https://bugzilla.yoctoproject.org/show_bug.cgi?id=10759
+>>
+>> And also UI issue in patchwork that paging doesn't work, e.g.:
+>> https://patchwork.openembedded.org/bundle/jama/master-next/?
+>> submitter=&state=&q=&archive=both
+>> shows that there are 5 pages of changes (which should be in most cases
+>> marked as accepted by the hook above), but clicking on 2nd page produces
+>> link which drops the query parameters:
+>> https://patchwork.openembedded.org/bundle/jama/master-next/?page=2
+>> so it says "No patches to display"
+>>
+>> Regards,
+>>
+>> > ---
+>> >  .../python/{python-paho-mqtt_1.1.bb => python-paho-mqtt_1.2.bb}
+>>  | 4 ++--
+>> >  1 file changed, 2 insertions(+), 2 deletions(-)
+>> >  rename meta-python/recipes-devtools/python/{python-paho-mqtt_1.1.bb
+>> => python-paho-mqtt_1.2.bb} (68%)
+>> >
+>> > diff --git a/meta-python/recipes-devtools/python/python-paho-mqtt_1.1.
+>> bb b/meta-python/recipes-devtools/python/python-paho-mqtt_1.2.bb
+>> > similarity index 68%
+>> > rename from meta-python/recipes-devtools/python/python-paho-mqtt_1.1.bb
+>> > rename to meta-python/recipes-devtools/python/python-paho-mqtt_1.2.bb
+>> > index b8f5f3f..c8acfc5 100644
+>> > --- a/meta-python/recipes-devtools/python/python-paho-mqtt_1.1.bb
+>> > +++ b/meta-python/recipes-devtools/python/python-paho-mqtt_1.2.bb
+>> > @@ -11,5 +11,5 @@ RDEPENDS_${PN} = "\
+>> >                 python-threading \
+>> >  "
+>> >
+>> > -SRC_URI[md5sum] = "a6407b74eb5e5411e157be1de5c11366"
+>> > -SRC_URI[sha256sum] = "0f7a629efe6e3a2c61b59d3550aa9
+>> f2c4529b5689a65fde45e6f1ac36b9a261e"
+>> > +SRC_URI[md5sum] = "241150b3fcb920ddca4d33181f3238b1"
+>> > +SRC_URI[sha256sum] = "9100a6aa706ab699d414ec02705a2
+>> 1eb66f436184691d0bf1f2a85a6213c6c1f"
+>> > --
+>> > 2.7.4
+>> >
+>> > --
+>> > _______________________________________________
+>> > Openembedded-devel mailing list
+>> > Openembedded-devel@lists.openembedded.org
+>> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>> --
+>> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-core mailing list
+>> Openembedded-core@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-core
+>>
+>>
 
-Regards,
-
---NyChO5MpGs3JHJbz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWK4DhQAKCRA3VSO3ZXaA
-HE7IAJ4yqjhjyAOrw2xePCO7JuNAnPNtAgCfbAlWz58BbimeUqVAeeiJE2ZMSVQ=
-=HmJh
------END PGP SIGNATURE-----
-
---NyChO5MpGs3JHJbz--
