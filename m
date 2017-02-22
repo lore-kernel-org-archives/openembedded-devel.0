@@ -1,50 +1,46 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 8DFF0730DB
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 30F6E731E6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 16:44:37 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id 5so1162996pgj.0
+	Wed, 22 Feb 2017 16:50:49 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id 134so654879wmj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 08:44:39 -0800 (PST)
+	Wed, 22 Feb 2017 08:50:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=s05D1Mc67fSG/UusSjqqvWiIy0Z5QnZJ9A7W3LeYY3g=;
-	b=gXc3PXjzVVhDGxYnkN2O6I3hc9otaU4RVcPai29mYdRZdQ83JP4wgSzWJiIeVxHNpC
-	KXHSShwnqf4dd/7mEmZ0XiCGEEeL+Kp3zKZWz/Z2EesrOzQouDqapMfego2maJr9F3lq
-	mkFqInwSr7wxnHaRusB6+TReCXb+8XmFLMqhqcyPhmHn/6Xf0nyN89sz38/DaxB1YSIy
-	M9xwmpj8qmYvqgm9tM7cH7ZW0MqjU4WtkY4jrHIItHt4/VobUMU+W8ZjC4zz56Afo1Q2
-	81ugok2IRfU2aAjKHVAlZxjp1tuAT072SpT1NNwmtX8nPSYcWNBhUFzuYdsEShFUcHQ+
-	DMjQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=ySMq1th+6IMHoj2AMG0zLrFnrbOyOs9847+MvINJrNg=;
+	b=DWnXlOai1pMvzuvIVAtk3zJpF5pijniEE49HL2tPcIryyua1kStPvMEjZcg6DxWkYk
+	Y35D8Mm+gsjkvm7W2p/1ug+JgnJ4S47QufcUao1PcYXMeeAEsPWFyx7Tl86ektF0NDp3
+	rvc3CdiEdWdc44kgg/ty2SN+0ey1o5XSUrkERMwzBvpkRnRRuklOQI/mDCAGrOClKcS8
+	8ZojoMUABZRmENscDnl5F2FJLA7k9yBQJkFVgYGr30e3S+hVpawMikoALzS2paweXu3H
+	/N2lIZNpuv48mxRd8oY9qCebeKv09t8SNQVWOdaFGtrJnHKYwtoCnJwLy95dnSnnvsVi
+	BNqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=s05D1Mc67fSG/UusSjqqvWiIy0Z5QnZJ9A7W3LeYY3g=;
-	b=b9r7ZFN4qzA6O/JK8Sm9/cxMdis0BjKPJPkt5drPTctCdXRu8L/OXDGAPkk4oO7MNk
-	q5KVd0/y+JxHiQf1tY9hL8KqHGEWiPjalO0Eh5wMvf7rBxotjZXRWED2kSvnIyqS9+SB
-	VmEzWPjLwRtg9o3Q+9CFp2Vtavog/R2z2lPitk7Ay32LU4n+JL0BfrF9JXRvd0/BdSHP
-	dY/GJZqj+6ZEzkPRP2j9Ng0EAUQ1Ja8fAPSOeqWrpVW1vKr/PXhXdpk5GZrAwHDP3xf7
-	nuTJtHeI+7IG6udrntsGJPNupe9gbQPZ/OD4uMdI3EKQ3H4/5WOEerehfw1F/RG8UZi3
-	By0g==
-X-Gm-Message-State: AMke39m7x67OdPtxa1ABnd7WUIWEZcdvuXj5wP2GDax29FxwhU47OdD1cjcKenXwfl4w7Q==
-X-Received: by 10.84.233.200 with SMTP id m8mr19323386pln.92.1487781879271;
-	Wed, 22 Feb 2017 08:44:39 -0800 (PST)
-Received: from [10.11.10.242] ([67.23.202.154])
-	by smtp.gmail.com with ESMTPSA id q64sm4773170pga.0.2017.02.22.08.44.38
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 22 Feb 2017 08:44:38 -0800 (PST)
-To: chong.yi.chai@intel.com, openembedded-devel@lists.openembedded.org
-References: <1487636765-15631-1-git-send-email-chong.yi.chai@intel.com>
-	<1487636765-15631-2-git-send-email-chong.yi.chai@intel.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <d1f4a86c-605a-6bcd-f597-480c91d389fc@gmail.com>
-Date: Wed, 22 Feb 2017 08:44:22 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.7.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=ySMq1th+6IMHoj2AMG0zLrFnrbOyOs9847+MvINJrNg=;
+	b=k5DBdkz7pJAmJmoYpep42vcWb7xB3IMDUQ/IitO24aySgnu9FbgHYuS6/l4Wc0mf/q
+	oB9nfTupnXjE4nrr4B6Ih9XXjY+C6E43+HQathi/W9wkX8PyIFXuOary9SWK0ErVfDf9
+	TW7ryJTy+8T4GwHO1HrpepUIEjcqxPEYYK5yNNR/qNasOzCxtpaZu5Q76LLpBQwYQVkG
+	bHLfbyxIeo6QlhoV0j53Rs8Ev3JrgsKAY+45XxEcJzh3wBAW5SVjxucVKb8rmsO+RV3v
+	pgBnzst6/blQuuGfohhmvT60jutHb6xVkZ/jFNUawa/QOuZ1p0YHB5hrKDaAWl2QtvC7
+	7caw==
+X-Gm-Message-State: AMke39mS+NGqfMmRqPBGzVeNThAAE+W3ECcm6n1LTwASsZw7wUsnmdeupcJ/QgcJs5flciPL1CXa1rdIrt4/9A==
+X-Received: by 10.28.96.130 with SMTP id u124mr3396984wmb.81.1487782250263;
+	Wed, 22 Feb 2017 08:50:50 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1487636765-15631-2-git-send-email-chong.yi.chai@intel.com>
-Subject: Re: [meta-networking][morty][PATCH 1/3] libtdb: fix SRC_URI - http has gone
+Received: by 10.80.212.30 with HTTP; Wed, 22 Feb 2017 08:50:49 -0800 (PST)
+In-Reply-To: <eb0664e2-0745-dfa5-7c5d-8ced33e83b46@intel.com>
+References: <1486559284-23081-1-git-send-email-amarnath.valluri@intel.com>
+	<eb0664e2-0745-dfa5-7c5d-8ced33e83b46@intel.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 22 Feb 2017 17:50:49 +0100
+Message-ID: <CA+chaQfZej7_bhk33yAOcrFdEeQAF3G5uvfkTF1eGJAXTJxJhw@mail.gmail.com>
+To: Amarnath Valluri <amarnath.valluri@intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe] libgphoto: Replace 'lib' with ${nonarch_base_libdir}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,44 +53,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Feb 2017 16:44:38 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 22 Feb 2017 16:50:54 -0000
+Content-Type: text/plain; charset=UTF-8
 
+I don't see it in patchwork, please resend.
 
-On 02/20/2017 04:26 PM, chong.yi.chai@intel.com wrote:
-> From: Andreas Müller <schnitzeltony@googlemail.com>
+On Wed, Feb 22, 2017 at 4:02 PM, Amarnath Valluri <
+amarnath.valluri@intel.com> wrote:
+
+> ping - reminder request for feedback
 >
-> Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-> (cherry picked from commit 7131b825b6973e703c24101dec4628b1765723b6)
-> Signed-off-by: Chai, Chong Yi <chong.yi.chai@intel.com>
-
-all three push to akuster/morty-next on meta-oe-contrib
-
-
-thanks
-
-Armin
-
-
-> ---
->   meta-networking/recipes-support/libtdb/libtdb_1.3.10.bb | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+> On 08.02.2017 15:08, Amarnath Valluri wrote:
 >
-> diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.3.10.bb b/meta-networking/recipes-support/libtdb/libtdb_1.3.10.bb
-> index 1d65d39..7eb0d7c 100644
-> --- a/meta-networking/recipes-support/libtdb/libtdb_1.3.10.bb
-> +++ b/meta-networking/recipes-support/libtdb/libtdb_1.3.10.bb
-> @@ -5,7 +5,7 @@ LICENSE = "LGPL-3.0+ & GPL-3.0+"
->   LIC_FILES_CHKSUM = "file://tools/tdbdump.c;endline=18;md5=b59cd45aa8624578126a8c98f48018c4 \
->                       file://include/tdb.h;endline=27;md5=f5bb544641d3081821bcc1dd58310be6"
->   
-> -SRC_URI = "http://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
-> +SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
->              file://do-not-check-xsltproc-manpages.patch \
->              file://tdb-Add-configure-options-for-packages.patch \
->   "
-
+>> Make use of bitbake variable for udev ruls folder. This change makes the
+>> recipe
+>> more portable.
+>>
+>> Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
+>> ---
+>>   meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb
+>> b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb
+>> index 098da79..fa07cd3 100644
+>> --- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb
+>> +++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb
+>> @@ -23,7 +23,7 @@ SRC_URI[libgphoto2.sha256sum] =
+>> "031a262e342fae43f724afe66787947ce1fb483277dfe5a
+>>     inherit autotools pkgconfig gettext lib_package
+>>   -EXTRA_OECONF = " --with-drivers=all udevscriptdir=/lib/udev
+>> ac_cv_lib_ltdl_lt_dlcaller_register=yes"
+>> +EXTRA_OECONF = " --with-drivers=all udevscriptdir=${nonarch_base_libdir}/udev
+>> ac_cv_lib_ltdl_lt_dlcaller_register=yes"
+>>     PACKAGECONFIG ??= ""
+>>   PACKAGECONFIG[gd] = ",--without-gdlib,gd"
+>>
+>
+>
 
