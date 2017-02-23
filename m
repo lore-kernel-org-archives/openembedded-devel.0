@@ -1,51 +1,36 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id DC6FB73081
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 6484F7750A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2017 23:11:52 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id v77so411345wmv.0
+	Thu, 23 Feb 2017 23:14:53 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id n37so751937qtb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2017 15:11:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=E6xZ5/BMsYsTBtb5Inf6mgWkAFRvderQDn7m7hIOwZ0=;
-	b=TMPK6j+WvEzb21mhkf65Pta0FAWkQGgZocxU3Dp6Gdl4HQjbmKMWzk+CDo9zd0KTw0
-	5awttVBQNzlT1aH8o2JUOR7l/uwtKZnVGHEj31BfO6q6x8oDzmoFDSLFs7W89GLMjIkb
-	Np2btZTTjE0NgFU0YqQO25ALdViNXefo2DyuMzKSNQVHdyRjEoivpjIsLvp7hDxqP5eH
-	ZLYuLNtf0h/Mys/g83qBqnHD7gwlG4CBOGlogvLXpNXk/sP6hU+SBS5weVUVsM/1WG+X
-	+WhLAOQHCFbH+kriCwOA1KTp/4uiEjlR/U7vNk9XGGjYjF1NCLBSzPBIQMAAxQEpcMO5
-	M9jg==
+	Thu, 23 Feb 2017 15:14:54 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=E6xZ5/BMsYsTBtb5Inf6mgWkAFRvderQDn7m7hIOwZ0=;
-	b=Jrn92I1DZgoa/hQK+orE2Cr+n/9iuEtahLyRwK5i46mLEjA3HFLAIscvOhiVRMU88L
-	Ebxy8xfq7B20aVBSTuz+ib8mN0D7kZZkuUN/xDvZGYk1/g5Jz2ciZwVDsQnpAQdNADb/
-	Oi84G0qUIIYUtakANTGywwevugpzdQiKWpHgCU3swP4dr09mnULyp9rJ5y+URQSusjb0
-	FknT0TW6IRkbKqmS7qbEZ0MltqeYzItqMX/XaJkuhWGSg4scYF/L11bSxyiiaCSTbA8e
-	Er9jUPiyUIiyK3dEweukgMAuHhN49qKk5kumkU1YgDVPjtGnmHdAnqip3aKQx3LMaFjL
-	X8Ow==
-X-Gm-Message-State: AMke39np2K+xra5QlDUs0UuqWJLsAVxrvSFOHFV1o733QRldkDtJjNJpVbDn2t88jj8UTw==
-X-Received: by 10.28.138.147 with SMTP id m141mr42159wmd.57.1487891513107;
-	Thu, 23 Feb 2017 15:11:53 -0800 (PST)
-Received: from PC192-168-2-116.speedport.ip
-	(p20030046E9060D691E6F65FFFE3E7F61.dip0.t-ipconnect.de.
-	[2003:46:e906:d69:1e6f:65ff:fe3e:7f61])
-	by smtp.googlemail.com with ESMTPSA id
-	e74sm8273328wmd.2.2017.02.23.15.11.52
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 23 Feb 2017 15:11:52 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=slrwtFXCpzMZ8PLjzMfKw+bSS5TTxegAR4P2uKxJhl0=;
+	b=flF626DQYZKk4ImMUMXrhNGg1m5sBF+/IosuyYkqeJV6vhr3T/7JtAfuob5alwz7h2
+	JdYhhF21IyX8/FBDWdRB9CTS62WEnM6ShEDoHo/CYqw6OpInXnaLwMt+MFOYgEZn6+B1
+	rSmnZgExp6z2KW5uE2BnnXt9Kgp6t7mlCli7YthF4APat9yvurVZgGoV9b3fPJ3gvRgw
+	GrhULHAYLIU7pk8sN6pwJh+WabbSD7QGAhUyBRdQgpf08Stv5Y4FBl3iRTwGsaOMr3T/
+	aq8CR1J552sosDlj0r1wJFSP1uLee/GfKEuCHAHAu341FqkTwSLej5VCm3GbRPOOiw44
+	hHtQ==
+X-Gm-Message-State: AMke39lK/JqV3p1/Zy27F6NFXV02BpqAmsoS9T3ZI1DnG4p0KD7c8xvcZvrm9DAWhMAJKw==
+X-Received: by 10.200.4.5 with SMTP id v5mr16910599qtg.54.1487891694535;
+	Thu, 23 Feb 2017 15:14:54 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
+	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
+	w186sm3613166qkw.44.2017.02.23.15.14.53
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 23 Feb 2017 15:14:54 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Feb 2017 00:11:38 +0100
-Message-Id: <20170223231138.31516-1-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.9.3
-MIME-Version: 1.0
-Subject: [PATCH V2] abiword: fix build and unblacklist
+Date: Thu, 23 Feb 2017 18:14:42 -0500
+Message-Id: <1487891683-11071-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH 1/2] python-ldap: remove obsolete recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,52 +43,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Feb 2017 23:11:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 23 Feb 2017 23:14:53 -0000
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Another current release exists in meta-python, so
+this one can be removed.
+
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb | 21 ++++++++++++++++-----
- 1 file changed, 16 insertions(+), 5 deletions(-)
+ .../recipes-devtools/python/python-ldap/setup.cfg.patch    | 14 --------------
+ meta-python/recipes-devtools/python/python-ldap_2.3.9.bb   | 12 ------------
+ 2 files changed, 26 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-ldap/setup.cfg.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python-ldap_2.3.9.bb
 
-diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb b/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
-index d021147..48b3c10 100644
---- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
-+++ b/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
-@@ -3,9 +3,22 @@ HOMEPAGE = "http://www.abiword.org"
- SECTION = "x11/office"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=ecd3ac329fca77e2d0e412bec38e1c20"
--DEPENDS     = "perl-native wv libglade libfribidi jpeg libpng \
--               librsvg libwmf-native gtkmathview asio gtk+ evolution-data-server \
--               ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'redland rasqal', '', d)}"
-+DEPENDS  = " \
-+    perl-native \
-+    gtk+ \
-+    gtkmathview \
-+    wv \
-+    libglade \
-+    libfribidi \
-+    jpeg \
-+    libpng \
-+    librsvg \
-+    libwmf-native \
-+    asio \
-+    evolution-data-server \
-+    libxslt \
-+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'office-layer', 'redland rasqal', '', d)} \
-+"
- RDEPENDS_${PN}    = "glibc-gconv-ibm850 glibc-gconv-cp1252 \
-                glibc-gconv-iso8859-15 glibc-gconv-iso8859-1"
- RCONFLICTS_${PN} = "${PN}-embedded"
-@@ -125,5 +138,3 @@ python populate_packages_prepend () {
- }
- 
- FILES_${PN}-plugin-openxml += "${datadir}/${PN}-${SHRT_VER}/omml_xslt"
+diff --git a/meta-python/recipes-devtools/python/python-ldap/setup.cfg.patch b/meta-python/recipes-devtools/python/python-ldap/setup.cfg.patch
+deleted file mode 100644
+index a703d34..0000000
+--- a/meta-python/recipes-devtools/python/python-ldap/setup.cfg.patch
++++ /dev/null
+@@ -1,14 +0,0 @@
+---- python-ldap-2.3.9/setup.cfg.orig    2009-08-13 11:07:23.000000000 +0200
+-+++ python-ldap-2.3.9/setup.cfg 2009-08-13 11:07:37.000000000 +0200
+-@@ -1,9 +1,9 @@
+- [_ldap]
+- extra_objects = 
+- extra_compile_args = 
+--libs = ldap_r lber sasl2 ssl crypto
+-+libs = ldap_r lber ssl crypto
+- library_dirs = /opt/openldap-RE24/lib
+--include_dirs = /opt/openldap-RE24/include /usr/include/sasl
+-+include_dirs = /opt/openldap-RE24/include
 -
--PNBLACKLIST[abiword] ?= "Depends on blacklisted gtkmathview"
+- [egg_info]
+- tag_build =  
+diff --git a/meta-python/recipes-devtools/python/python-ldap_2.3.9.bb b/meta-python/recipes-devtools/python/python-ldap_2.3.9.bb
+deleted file mode 100644
+index 5a1a93f..0000000
+--- a/meta-python/recipes-devtools/python/python-ldap_2.3.9.bb
++++ /dev/null
+@@ -1,12 +0,0 @@
+-SUMMARY = "LDAP client API for Python, C wrapper module around OpenLDAP 2.x with an object-oriented API"
+-LICENSE = "Python-style"
+-LIC_FILES_CHKSUM = "file://LICENCE;md5=a41c82edffa04912007cae1d20cac555"
+-HOMEPAGE = "http://www.python-ldap.org/"
+-DEPENDS = "python openldap"
+-
+-SRC_URI = "file://setup.cfg.patch"
+-SRC_URI[md5sum] = "a9f9f16338288d118a1ae6266c993247"
+-SRC_URI[sha256sum] = "62f75b21c5ee744408c9d8b59878328b3bdf47899d30e8abf0c09b3ffb893ed4"
+-
+-PYPI_PACKAGE = "python-ldap"
+-inherit pypi setuptools
 -- 
-2.9.3
+2.7.4
 
 
