@@ -1,36 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F3D972FC3
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F97972FC3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2017 00:15:14 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id n37so2520073qtb.3
+	Thu, 23 Feb 2017 00:15:37 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id n127so2784417qkf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 16:15:15 -0800 (PST)
+	Wed, 22 Feb 2017 16:15:39 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=LE4AqVlq1FioNbsW1ADOf98PBcq/SA3ccDEsWKiEpwE=;
-	b=OxVn0vnYZ8a5j3zP+EYEhqIc4GchZ8z67p/3QVrDCSchhSUhztMRWIN38aEvcb6Dtg
-	Tz1lUjR23h/ueImYafTj6GLULHjv6cVIfYC9xccHKvg0PqSTVIl4sKkJkVL5quMPwiSa
-	EcA8CgQAPMiNkAj658OxEyaWzNNZYV8Od6AsqpFylbDn/s6pJfHzoE7mn6jcSvrnEQ5I
-	SGCoTfQFj1p9fpH86GYLAokJIwFdMgyhcDinsretjPPLo+OCmGE5Eqa7enlnBegPv4Z7
-	Y8ZL81+3oRfOjSPDdIc73Sl7Ih7k+VXw+foRCVJ/Uq5J7IuCmIy+too+eoHoOALLrBeg
-	WUqw==
-X-Gm-Message-State: AMke39kTzsoAvdXvRpG6iJymbIXc+Xr39Q2SM7UOWnTjFW/PzgdfekIZmEcMJLAM+L6p3g==
-X-Received: by 10.200.50.92 with SMTP id y28mr28592552qta.289.1487808915568;
-	Wed, 22 Feb 2017 16:15:15 -0800 (PST)
+	bh=TQYJ5MK4gaaZMhS9Mb34DubbQ2ZqEnYkXdCWFPVEX3E=;
+	b=O5yLNQqINvIaTwkvrnsjJfrHcyTk1PnsyyVtLwISnD9HSArqcXxlfBoTE3K3lZAieA
+	nRQ0pqAJwZ4mSvX0qZpPUnrTnEx7G1XM7vXm9EF++A1dDJhh5dAkJ5TGOkyzxavMoBa/
+	DtH//e2PqTm6SLOWoIIlNzpDxKvm+NpuKOviV8gZTYmWI7kdD9n+T5IMKNwYTC1dEolu
+	KS12u4As8A9zbMxXViyK2C+hydoJrBKHFMvEkJzxcna3iACdH9PfuhgYgv0F6dF71j4R
+	Dk+zaN4CARnsrErjyGrNxhk3ECtf5JmtCicGc/bF1vB5ZHsZ97yQ1T8g4TfIieZlQAn6
+	YiKw==
+X-Gm-Message-State: AMke39kKzUwlCgFqrjNh2nti8ozqdZJd6FJAFEI9AiPVxyutAcJZH68J2hrIee/jP+SOxw==
+X-Received: by 10.55.150.199 with SMTP id y190mr31663828qkd.273.1487808938802; 
+	Wed, 22 Feb 2017 16:15:38 -0800 (PST)
 Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
 	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
-	i51sm1696378qtc.67.2017.02.22.16.15.14
+	r186sm203813qke.26.2017.02.22.16.15.38
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 22 Feb 2017 16:15:15 -0800 (PST)
+	Wed, 22 Feb 2017 16:15:38 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Feb 2017 19:15:06 -0500
-Message-Id: <1487808906-26116-1-git-send-email-derek@asterius.io>
+Date: Wed, 22 Feb 2017 19:15:31 -0500
+Message-Id: <1487808931-26175-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCHv2] python-prompt-toolkit: update to version 1.0.13
+Subject: [meta-python][PATCHv2] python-cryptography: update to version 1.7.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,40 +43,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Feb 2017 00:15:14 -0000
+X-List-Received-Date: Thu, 23 Feb 2017 00:15:37 -0000
+
+Verify the license terms remain the same and update the checksum
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-prompt-toolkit.inc         | 4 ++--
- ...python-prompt-toolkit_1.0.7.bb => python-prompt-toolkit_1.0.13.bb} | 0
- ...thon3-prompt-toolkit_1.0.7.bb => python3-prompt-toolkit_1.0.13.bb} | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-prompt-toolkit_1.0.7.bb => python-prompt-toolkit_1.0.13.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_1.0.7.bb => python3-prompt-toolkit_1.0.13.bb} (100%)
+ meta-python/recipes-devtools/python/python-cryptography.inc         | 6 +++---
+ .../{python-cryptography_1.6.bb => python-cryptography_1.7.2.bb}    | 0
+ .../{python3-cryptography_1.6.bb => python3-cryptography_1.7.2.bb}  | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cryptography_1.6.bb => python-cryptography_1.7.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-cryptography_1.6.bb => python3-cryptography_1.7.2.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-prompt-toolkit.inc b/meta-python/recipes-devtools/python/python-prompt-toolkit.inc
-index 8554aea..30c2c81 100644
---- a/meta-python/recipes-devtools/python/python-prompt-toolkit.inc
-+++ b/meta-python/recipes-devtools/python/python-prompt-toolkit.inc
-@@ -2,8 +2,8 @@ SUMMARY = "Library for building powerful interactive command lines in Python"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
+diff --git a/meta-python/recipes-devtools/python/python-cryptography.inc b/meta-python/recipes-devtools/python/python-cryptography.inc
+index 50483bd..601b12b 100644
+--- a/meta-python/recipes-devtools/python/python-cryptography.inc
++++ b/meta-python/recipes-devtools/python/python-cryptography.inc
+@@ -1,6 +1,6 @@
+ SUMMARY = "Provides cryptographic recipes and primitives to python developers"
+ LICENSE = "Apache-2.0 | BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=1f375ab4f6b9a7c9eec25377c52d3aa1"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d5ede125ed08d4fd14ec44d334bdb388"
  
--SRC_URI[md5sum] = "f74cd8ac84176fac1cdb136843ccb0d6"
--SRC_URI[sha256sum] = "ef0b8188179fe7d052161ed274b43e18f5a680ff84d01462293b327e1668d2ef"
-+SRC_URI[md5sum] = "427b496d2c147bd3819bc3a7f6e0d493"
-+SRC_URI[sha256sum] = "33d68ca09f76cd73287fde7df5748ffacf26a8238dd61ee81ac50860ea7c6776"
+ DEPENDS += " \
+     ${PYTHON_PN}-cffi \
+@@ -9,8 +9,8 @@ DEPENDS += " \
+     ${PYTHON_PN}-six \
+ "
  
- PYPI_PACKAGE = "prompt_toolkit"
+-SRC_URI[md5sum] = "33ed393be75f04cd889a02a11acbab39"
+-SRC_URI[sha256sum] = "4d0d86d2c8d3fc89133c3fa0d164a688a458b6663ab6fa965c80d6c2cdaf9b3f"
++SRC_URI[md5sum] = "fade66de437392ed1ba6980768626204"
++SRC_URI[sha256sum] = "878cb68b3da3d493ffd68f36db11c29deee623671d3287c3f8d685117ffda9a9"
  
-diff --git a/meta-python/recipes-devtools/python/python-prompt-toolkit_1.0.7.bb b/meta-python/recipes-devtools/python/python-prompt-toolkit_1.0.13.bb
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-cffi \
+diff --git a/meta-python/recipes-devtools/python/python-cryptography_1.6.bb b/meta-python/recipes-devtools/python/python-cryptography_1.7.2.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-prompt-toolkit_1.0.7.bb
-rename to meta-python/recipes-devtools/python/python-prompt-toolkit_1.0.13.bb
-diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_1.0.7.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_1.0.13.bb
+rename from meta-python/recipes-devtools/python/python-cryptography_1.6.bb
+rename to meta-python/recipes-devtools/python/python-cryptography_1.7.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography_1.6.bb b/meta-python/recipes-devtools/python/python3-cryptography_1.7.2.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_1.0.7.bb
-rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_1.0.13.bb
+rename from meta-python/recipes-devtools/python/python3-cryptography_1.6.bb
+rename to meta-python/recipes-devtools/python/python3-cryptography_1.7.2.bb
 -- 
 2.7.4
 
