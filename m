@@ -1,36 +1,49 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 898BA72FD6
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id BA9A471E12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2017 00:16:49 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id x35so2529150qtc.1
+	Thu, 23 Feb 2017 00:20:46 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1487809247; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=ae4V/tHknoF0ylJ3xbP+CSOZnx7c9N4Gbhkj2wqwDPg=;
+	b=APwDVVO2/+93GGzduChdrH1k+Sr8skitr74uk0DOp1vA3pmUGgei0CGHze2EF7Jei6F9/kM3
+	wYhC3F4j6kBOTFqevNUfcsjWCPNGTXGiiHem0RNf0iarbbcTj6hm4kIa28n7nGIG2W2g+DAv
+	NLvG8yERcpsX6SdYCGpXn+ZLV0E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
+	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
+	Message-ID: Subject: To: Cc: Content-Type;
+	b=Vwil+heZAbg9C08xmMaq837OWWQuNxyt91Vfs63sjvDthLrNwEQavyUGQdmL4kg2KGVH7T
+	bamMZ2tlsa11/1ZuN3jsGudnCTUE12IknrcIDLj+knYoJaBytvgzFOxBWeN3gNvit9XTOCwA
+	YmUJauJ2dHh9gtsg9DtvbOvws2qdw=
+Sender: derek@asterius.io
+X-Mailgun-Sending-Ip: 104.130.122.4
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Received: from mail-it0-f53.google.com (mail-it0-f53.google.com
+	[209.85.214.53])
+	by mxa.mailgun.org with ESMTP id 58ae2ade.7f3f7061bc30-smtp-out-n02;
+	Thu, 23 Feb 2017 00:20:46 -0000 (UTC)
+Received: by mail-it0-f53.google.com with SMTP id y135so18866914itc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 16:16:51 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=gItDYcCmqn9Rea01toDmtx+sIcu6EOaPk5nIvMlj3dM=;
-	b=FtBN8yvX2CxxxW3szmYseT5KzGGojYLTwsj221RbIcqmscXqGgJPtm5t8/GGQM4j4c
-	qnTkl7u103H1KE5ImA7ejmduv+w+LcvyYI/1ZFpPZrCQMV4kO5jWpN9HnEkbDAgLKArC
-	Uz8mjj3qrna6gjdjbLSpjrzbGqyaoGIyTM8qbUzziy9Z2f2wPoFbz6pR0+ZwARFOqkvx
-	RKv/+PYBR1wcfni3KjCfjZADTaj62ASecqyzZbJ8a10Ri8nCP99liwIFZk1cHQYPRow3
-	ZuZaLSswVnf5U6KZ96838wToOy9ssmv5SQD6hYcZZRmaAHvpd/TirxmfqB+yFtO55isN
-	FjOA==
-X-Gm-Message-State: AMke39kLi5UTdPIt6CfdfTeKU4F/B0v1MYFuw2eZDmRx1VnjCg7+PsQ23g1blDuhPcDtlw==
-X-Received: by 10.237.62.130 with SMTP id n2mr5229882qtf.40.1487809010846;
-	Wed, 22 Feb 2017 16:16:50 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
-	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
-	r30sm1722725qtc.15.2017.02.22.16.16.50
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 22 Feb 2017 16:16:50 -0800 (PST)
+	Wed, 22 Feb 2017 16:20:46 -0800 (PST)
+X-Gm-Message-State: AMke39kFRVbKUWtZpr5tN9ZVdbxMWph5oK76HRrq1dInKQORJBHs/ASpWVHZPZHck5lix/M1jBQWZuy7Okh0GQ==
+X-Received: by 10.36.36.142 with SMTP id f136mr1480190ita.0.1487809246295;
+	Wed, 22 Feb 2017 16:20:46 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.107.156.85 with HTTP; Wed, 22 Feb 2017 16:20:45 -0800 (PST)
+In-Reply-To: <CA+chaQe23zrLkeJ81iyWxx__=S2PDjGtTSGqm8x5KZOtMd5D_w@mail.gmail.com>
+References: <20170222213254.GH3283@jama>
+	<506a5e6c-36f6-7b1f-a375-24bebb57342f@linuxfoundation.org>
+	<CA+chaQe23zrLkeJ81iyWxx__=S2PDjGtTSGqm8x5KZOtMd5D_w@mail.gmail.com>
 From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Feb 2017 19:16:43 -0500
-Message-Id: <1487809003-26350-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCHv2] python-tornado: update to version 4.4.2
+Date: Wed, 22 Feb 2017 19:20:45 -0500
+X-Gmail-Original-Message-ID: <CADNbA1p6goBBoCOYyp9jm+1tWPjomEtvmOdsHh0_fmnw3APmgA@mail.gmail.com>
+Message-ID: <CADNbA1p6goBBoCOYyp9jm+1tWPjomEtvmOdsHh0_fmnw3APmgA@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: Before you ping some older patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,64 +56,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Feb 2017 00:16:49 -0000
+X-List-Received-Date: Thu, 23 Feb 2017 00:20:47 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-tornado.inc             | 6 +++---
- .../python/{python-tornado_4.3.bb => python-tornado_4.4.2.bb}      | 0
- meta-python/recipes-devtools/python/python3-tornado_4.3.bb         | 2 --
- meta-python/recipes-devtools/python/python3-tornado_4.4.2.bb       | 7 +++++++
- 4 files changed, 10 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python-tornado_4.3.bb => python-tornado_4.4.2.bb} (100%)
- delete mode 100644 meta-python/recipes-devtools/python/python3-tornado_4.3.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-tornado_4.4.2.bb
+I resubmitted each of the patches (as V2s) that didn't make it into
+master-next.  If we miss any patches in meta-python, I will catch it with
+my nightly CI run, so there isn't a need to write a script to search for
+missing patches there.  Thanks.
 
-diff --git a/meta-python/recipes-devtools/python/python-tornado.inc b/meta-python/recipes-devtools/python/python-tornado.inc
-index 7e3ac8c..9b1cf41 100644
---- a/meta-python/recipes-devtools/python/python-tornado.inc
-+++ b/meta-python/recipes-devtools/python/python-tornado.inc
-@@ -6,11 +6,11 @@ HOMEPAGE = "http://www.tornadoweb.org/en/stable/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://setup.py;startline=2;endline=15;md5=5ab7571a79ad62d0ca7aea308bac7560"
- 
--SRC_URI[md5sum] = "d13a99dc0b60ba69f5f8ec1235e5b232"
--SRC_URI[sha256sum] = "c9c2d32593d16eedf2cec1b6a41893626a2649b40b21ca9c4cac4243bde2efbf"
-+SRC_URI[md5sum] = "b4816ea209118667ffc52ce9ff06ac85"
-+SRC_URI[sha256sum] = "2898f992f898cd41eeb8d53b6df75495f2f423b6672890aadaf196ea1448edcc"
- 
- RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-numbers ${PYTHON_PN}-email ${PYTHON_PN}-subprocess \
--                   ${PYTHON_PN}-pkgutil ${PYTHON_PN}-html ${PYTHON_PN}-json ${PYTHON_PN}-certifi"
-+                   ${PYTHON_PN}-pkgutil ${PYTHON_PN}-html ${PYTHON_PN}-json ${PYTHON_PN}-certifi ${PYTHON_PN}-threading"
- 
- RDEPENDS_${PN}-test += "${PN} ${PYTHON_PN}-unittest"
- 
-diff --git a/meta-python/recipes-devtools/python/python-tornado_4.3.bb b/meta-python/recipes-devtools/python/python-tornado_4.4.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-tornado_4.3.bb
-rename to meta-python/recipes-devtools/python/python-tornado_4.4.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-tornado_4.3.bb b/meta-python/recipes-devtools/python/python3-tornado_4.3.bb
-deleted file mode 100644
-index eecc1f0..0000000
---- a/meta-python/recipes-devtools/python/python3-tornado_4.3.bb
-+++ /dev/null
-@@ -1,2 +0,0 @@
--inherit pypi setuptools3
--require python-tornado.inc
-diff --git a/meta-python/recipes-devtools/python/python3-tornado_4.4.2.bb b/meta-python/recipes-devtools/python/python3-tornado_4.4.2.bb
-new file mode 100644
-index 0000000..77c9fb5
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-tornado_4.4.2.bb
-@@ -0,0 +1,7 @@
-+inherit pypi setuptools3
-+require python-tornado.inc
-+
-+# Requires _compression which is currently located in misc
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-misc \
-+    "
--- 
-2.7.4
+-Derek
 
+On Wed, Feb 22, 2017 at 6:48 PM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
+
+> Hi Michael,
+>
+> thanks for quick fix.
+>
+> The hook now shows error about sendmail I wasn't seeing before:
+>
+> OE @ ~/meta-openembedded $ git push origin master-next
+> Counting objects: 78, done.
+> Delta compression using up to 8 threads.
+> Compressing objects: 100% (25/25), done.
+> Writing objects: 100% (78/78), 7.35 KiB | 0 bytes/s, done.
+> Total 78 (delta 56), reused 66 (delta 49)
+> remote: No sendmail executable found.  Try setting
+> multimailhook.sendmailCommand.
+> To git.openembedded.org:meta-openembedded
+>    eb7979113..0d27137f0  master-next -> master-next
+>
+>
+> On Thu, Feb 23, 2017 at 12:06 AM, Michael Halstead <
+> mhalstead@linuxfoundation.org> wrote:
+>
+> > The hooks are repaired and need testing. (Bad git/config settings.)
+> Please
+> > feel free to resubmit patches. Let me know if they do not appear in
+> > patchwork.
+> > I'm trying to see if I can automatically resend the missed patches and
+> > mark them superseded if needed. I'll update post here if it works.
+> >
+> >
+> >
+> > On 02/22/2017 01:32 PM, Martin Jansa wrote:
+> >
+> > 1) Make sure they aren't already in master (or master-next), currently
+> > there is only one change in master-next:
+> > eb7979113 netcat-openbsd: fix implicit dependency on pkg-config
+> >
+> > 2) Make sure there weren't some negative feedback comments on our change
+> >
+> > 3) Make sure the change made it to patchwork, currently there is only
+> > one "open" change:https://patchwork.openembedded.org/patch/137499/
+> >
+> > Be aware that the changes are usually daily marked as archived, when
+> > they are sorted to corresponding bundles and included in master-next
+> > branch for testing, as described here:http://www.openembedded.
+> org/wiki/Patchwork#Multiple_layers_sharing_the_same_oe_
+> project_on_patchwork
+> >
+> > I'm writing this, because currently many changes are missing on
+> patchwork,
+> > because of some unknown issue with it, see:http://lists.openembedded.
+> org/pipermail/openembedded-devel/2017-February/111467.html
+> > once this issue is resolved, please re-send missing changes.
+> >
+> > Regards,
+> >
+> >
+> >
+> >
+> > --
+> > Michael Halstead
+> > Linux Foundation / SysAdmin
+> >
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
