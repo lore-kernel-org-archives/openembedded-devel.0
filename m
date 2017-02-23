@@ -1,53 +1,29 @@
-Return-Path: <mhalstead@linuxfoundation.org>
-Received: from mail-pg0-f52.google.com (mail-pg0-f52.google.com [74.125.83.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 969EC72FDB
+Return-Path: <ray.kinsella@intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D4ED72FDB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2017 01:58:47 +0000 (UTC)
-Received: by mail-pg0-f52.google.com with SMTP id z128so8340487pgb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Feb 2017 17:58:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linuxfoundation.org; s=google;
-	h=subject:to:references:cc:from:organization:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=gUeJsHKGXwn73ozOAN42iCx3SiBd62iTqCEhEtHhqn8=;
-	b=ReO8dXQjcW2/NIpxlT7q9xIhW3zIZAOINdSP2Ans6mniinBz0zJVbluB7NIGvhVi6p
-	2Bf56ZJsxPNJln1idd12xFcvOd5/pNvL3a09MbOGRb/PPeNP+hTp91JsI55ZxiL6UxnQ
-	u2nUw4MOboLm3pW15b1ZPME7EiuOJXlznh2YM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:cc:from:organization
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding;
-	bh=gUeJsHKGXwn73ozOAN42iCx3SiBd62iTqCEhEtHhqn8=;
-	b=H4GqHMsOwQUJnJ2KkPuKnk50IHKFE8ckM2Z50xKBDCtNRoWFFT2NuThBmGdBxjzQfW
-	6ZThKwzOLl4hcrE5LI7AsSwajMvXmBxGiq/ZZiy6vhgl4PzpGzDqeLoTef7jI6j+2FEA
-	dQENQk4LoYbRWNbWwjDH8V/3uXW9TWad3BUkKe+liVIgnRCXINk7wMoFmoFwWvAEsJpI
-	uVvrry4nHlo1i7pKft6PxM0BKtJP7joCnbm9z3b5Q6QJPT1I5RtrkKC620SKAg7jrszc
-	/deIJtP0J91PWSOysx2E/7fs9XazPrxfSMGkwtzwECwB+GAHUi24sl54BFJgoNqmSLrj
-	UVxA==
-X-Gm-Message-State: AMke39kDySRtXtL795UI1fvF8jOMJqt1uj/ygYlx1ESOpmzjIDOgNKYpzHZ/O2IN+YmjEEey
-X-Received: by 10.99.132.66 with SMTP id k63mr44154203pgd.41.1487815129146;
-	Wed, 22 Feb 2017 17:58:49 -0800 (PST)
-Received: from yct-lpt.lan ([67.23.202.154])
-	by smtp.gmail.com with ESMTPSA id h70sm392094pfe.59.2017.02.22.17.58.47
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 22 Feb 2017 17:58:48 -0800 (PST)
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <20170222213254.GH3283@jama>
-	<506a5e6c-36f6-7b1f-a375-24bebb57342f@linuxfoundation.org>
-	<CA+chaQe23zrLkeJ81iyWxx__=S2PDjGtTSGqm8x5KZOtMd5D_w@mail.gmail.com>
-	<20170223015317.GJ3283@jama>
-From: Michael Halstead <mhalstead@linuxfoundation.org>
-Organization: Linux Foundation
-Message-ID: <f0a0ba96-6f15-049a-2a46-b1ef04da9f29@linuxfoundation.org>
-Date: Wed, 22 Feb 2017 17:58:47 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.7.0
+	Thu, 23 Feb 2017 02:00:58 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	22 Feb 2017 18:00:59 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.35,197,1484035200"; d="scan'208";a="51565416"
+Received: from rkinsell-mobl.ger.corp.intel.com (HELO [10.252.30.67])
+	([10.252.30.67])
+	by orsmga002.jf.intel.com with ESMTP; 22 Feb 2017 18:00:57 -0800
+To: Martin Jansa <martin.jansa@gmail.com>,
+	Joe MacDonald <Joe_MacDonald@mentor.com>
+References: <1487697210-29779-1-git-send-email-ray.kinsella@intel.com>
+	<20170221172236.GT8436@mentor.com> <20170222130208.GB3283@jama>
+From: "Kinsella, Ray" <ray.kinsella@intel.com>
+Message-ID: <7ebb36b8-8b28-81d0-5e0f-7bdf932f35c2@intel.com>
+Date: Thu, 23 Feb 2017 02:00:56 +0000
+User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.1
 MIME-Version: 1.0
-In-Reply-To: <20170223015317.GJ3283@jama>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: Before you ping some older patches
+In-Reply-To: <20170222130208.GB3283@jama>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] [meta-networking] ddclient: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,105 +36,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Feb 2017 01:58:48 -0000
-Content-Type: text/plain; charset=windows-1252
+X-List-Received-Date: Thu, 23 Feb 2017 02:00:58 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
 Content-Transfer-Encoding: 7bit
 
+inline
 
-
-On 02/22/2017 05:53 PM, Martin Jansa wrote:
-> On Thu, Feb 23, 2017 at 12:48:22AM +0100, Martin Jansa wrote:
->> Hi Michael,
->>
->> thanks for quick fix.
->>
->> The hook now shows error about sendmail I wasn't seeing before:
->>
->> OE @ ~/meta-openembedded $ git push origin master-next
->> Counting objects: 78, done.
->> Delta compression using up to 8 threads.
->> Compressing objects: 100% (25/25), done.
->> Writing objects: 100% (78/78), 7.35 KiB | 0 bytes/s, done.
->> Total 78 (delta 56), reused 66 (delta 49)
->> remote: No sendmail executable found.  Try setting
->> multimailhook.sendmailCommand.
->> To git.openembedded.org:meta-openembedded
->>    eb7979113..0d27137f0  master-next -> master-next
-> Now it found some sendmail... 
+On 22/02/2017 13:02, Martin Jansa wrote:
+> On Tue, Feb 21, 2017 at 12:22:37PM -0500, Joe MacDonald wrote:
 >
-> OE @ ~/meta-openembedded $ git push origin master-next 
-> Counting objects: 85, done.
-> Delta compression using up to 8 threads.
-> Compressing objects: 100% (71/71), done.
-> Writing objects: 100% (85/85), 18.90 KiB | 0 bytes/s, done.
-> Total 85 (delta 47), reused 0 (delta 0)
-> remote: Sending notification emails to: openembedded-commits@lists.openembedded.org.
-> remote: 
-> remote: Exception 'CommandError' raised. Please report this as a bug to
-> remote: https://github.com/git-multimail/git-multimail/issues
-> remote: with the information below:
-> remote: 
-> remote: git-multimail version 1.2.0
-> remote: Python version 2.7.12 (default, Nov 19 2016, 06:48:10) 
-> remote: [GCC 5.4.0 20160609]
-> remote: Traceback (most recent call last):
-> remote:   File "/home/git/bin/git_multimail.py", line 3729, in main
-> remote:     run_as_post_receive_hook(environment, mailer)
-> remote:   File "/home/git/bin/git_multimail.py", line 3386, in run_as_post_receive_hook
-> remote:     push.send_emails(mailer, body_filter=environment.filter_body)
-> remote:   File "/home/git/bin/git_multimail.py", line 3332, in send_emails
-> remote:     change.recipients,
-> remote:   File "/home/git/bin/git_multimail.py", line 1883, in send
-> remote:     raise CommandError(self.command, retcode)
-> remote: CommandError: Command "/usr/sbin/sendmail -oi -t" failed with retcode 1
-> To git.openembedded.org:meta-openembedded
->    0d27137f0..57115ebc1  master-next -> master-next
-I'm adding a temporary repo to test this before having you test again
-since the issues are extensive. I'll follow up shortly.
+> I've added it to master-next, but now I'll drop it again, because
+> it creates dependency on meta-perl and meta-networking doesn't depend
+> on meta-perl (at least not yet - good luck with OEDAM plan to separate
+> meta-perl, meta-python, meta-networking to separate layers).
+
+ok then - your saying that meta-networking isn't the right home for it.
+meta-perl doesn't look right either as it is not a perl extension.
+any advice as to where it belongs?
+
 >
->> On Thu, Feb 23, 2017 at 12:06 AM, Michael Halstead <
->> mhalstead@linuxfoundation.org> wrote:
+> ERROR: Nothing RPROVIDES 'libio-socket-ssl-perl' (but meta-oe/meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb RDEPENDS on or otherwise requires it)
+
+did you get a build error?
+
+>> I haven't looked at the download, but I did briefly read the SF documentation
+>> and it seems like maybe these would be appropriate as well:
 >>
->>> The hooks are repaired and need testing. (Bad git/config settings.) Please
->>> feel free to resubmit patches. Let me know if they do not appear in
->>> patchwork.
->>> I'm trying to see if I can automatically resend the missed patches and
->>> mark them superseded if needed. I'll update post here if it works.
->>>
->>>
->>>
->>> On 02/22/2017 01:32 PM, Martin Jansa wrote:
->>>
->>> 1) Make sure they aren't already in master (or master-next), currently
->>> there is only one change in master-next:
->>> eb7979113 netcat-openbsd: fix implicit dependency on pkg-config
->>>
->>> 2) Make sure there weren't some negative feedback comments on our change
->>>
->>> 3) Make sure the change made it to patchwork, currently there is only
->>> one "open" change:https://patchwork.openembedded.org/patch/137499/
->>>
->>> Be aware that the changes are usually daily marked as archived, when
->>> they are sorted to corresponding bundles and included in master-next
->>> branch for testing, as described here:http://www.openembedded.org/wiki/Patchwork#Multiple_layers_sharing_the_same_oe_project_on_patchwork
->>>
->>> I'm writing this, because currently many changes are missing on patchwork,
->>> because of some unknown issue with it, see:http://lists.openembedded.org/pipermail/openembedded-devel/2017-February/111467.html
->>> once this issue is resolved, please re-send missing changes.
->>>
->>> Regards,
->>>
->>>
->>>
->>>
->>> --
->>> Michael Halstead
->>> Linux Foundation / SysAdmin
->>>
->>>
+>> do_configure[noexec] = "1"
+>> do_compile[noexec] = "1"
+>>
+>>> +do_install() {
+>>> +    install -d ${D}${sbindir} ${D}${sysconfdir}/ddclient ${D}${sysconfdir}/init.d
+>>> +    install -d ${D}${sysconfdir}/ppp/ip-up.d/ install -d ${D}${docdir}/ddclient
+>>> +    install -m 755 ${S}/ddclient ${D}${sbindir}
+>>> +    install ${S}/sample-etc_ddclient.conf ${D}${sysconfdir}/ddclient/ddclient.conf
+>>> +    install -m 755 ${WORKDIR}/ip-up ${D}${sysconfdir}/ppp/ip-up.d/ddclient
+>>> +    sed -e 's|/etc/ddclient.conf|/etc/ddclient/ddclient.conf|g' ${S}/sample-etc_rc.d_init.d_ddclient > ${S}/rc_init
+>>> +    install -m 755 ${S}/rc_init ${D}${sysconfdir}/init.d/ddclient
+>>> +    install ${S}/README* ${D}${docdir}/ddclient
+>>> +    install ${S}/COPY* ${D}${docdir}/ddclient
+>>> +    install ${S}/sample* ${D}${docdir}/ddclient
+>>> +}
+>>> +
+>>> +CONFFILES_${PN} = "${sysconfdir}/ddclient/ddclient.conf"
+>>> +
+>>> +SRC_URI[md5sum] = "3b426ae52d509e463b42eeb08fb89e0b"
+>>> +SRC_URI[sha256sum] = "d40e2f1fd3f4bff386d27bbdf4b8645199b1995d27605a886b8c71e44d819591"
+>>> diff --git a/meta-networking/recipes-daemons/ddclient/files/ip-up b/meta-networking/recipes-daemons/ddclient/files/ip-up
+>>> new file mode 100644
+>>> index 0000000..52a44f8
+>>> --- /dev/null
+>>> +++ b/meta-networking/recipes-daemons/ddclient/files/ip-up
+>>> @@ -0,0 +1,4 @@
+>>> +#!/bin/sh
+>>> +
+>>> +logger -t ddclient $PPP_IFACE $PPP_LOCAL
+>>> +ddclient -daemon=0 -syslog -use=if -if=$PPP_IFACE >/dev/null 2>&1
+>>> \ No newline at end of file
+>>
+>> That's odd.  :-)
 
--- 
-Michael Halstead
-Linux Foundation / SysAdmin
+I will take a look
 
+>> Anyway, I'll have a look at this in more detail when it loops through
+>> master-next.
+>>
+>> --
+>> -Joe MacDonald.
+>> :wq
+>
+>
+>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
