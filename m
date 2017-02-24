@@ -1,59 +1,36 @@
-Return-Path: <patrick.ohly@intel.com>
-Received: from mail-it0-f54.google.com (mail-it0-f54.google.com
-	[209.85.214.54])
-	by mail.openembedded.org (Postfix) with ESMTP id D74FD719DE
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 36F17730C9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Feb 2017 14:21:15 +0000 (UTC)
-Received: by mail-it0-f54.google.com with SMTP id h10so21224353ith.1
+	Fri, 24 Feb 2017 19:42:12 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id x35so3803346qtc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Feb 2017 06:21:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=message-id:subject:from:to:cc:date:in-reply-to:references
-	:organization:mime-version:content-transfer-encoding;
-	bh=50y6Q/LSfmuDcz1eAxIn4Cz7d89oBUEPf0X0+C3trXg=;
-	b=IjyEeueq3mJcbIoGzKxhMqQlvIYKTc2JukPZOXWI6PTMdG5wjM7EVafIVsNoQk39+P
-	zeq54m/uIJ68vnbrFNBtEG4w3VvShM9mPlJYpoiuKNLr52QTMnXFzDgpYkrKKkt3mmJe
-	Vx2KtFaBV+VownSSlT83DsIe7ZOoaVBuWs9VNSm6oXn6PMCMFkiA3S2JWX25uar5OSdl
-	oU7Kk01/5dj8W1SnXLdPuml4UgjCmKiYCws02FD+I+Smu6PjP9N5OtyDnwLkemxR/EeO
-	MbrWlsgtKmG/M6a04CxcpsY8seALBR3wXphSWhgQpyLyDwZCj80P5H+Eweg/TrduGyni
-	+/3w==
+	Fri, 24 Feb 2017 11:42:14 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
-	:references:organization:mime-version:content-transfer-encoding;
-	bh=50y6Q/LSfmuDcz1eAxIn4Cz7d89oBUEPf0X0+C3trXg=;
-	b=MJ4TKYgluOMUQu4cd6d3Ize/3G6pjZF9Ch72XkSAKERojdhhh3kw/VAKZC4ihXOZOI
-	NNMtZKUZrtn04JNbJFcTSj6Ij+qV8ENmop4V2Xi2AMjALU4EmUHJgDhN70MorSb5X377
-	VzgVtIS3uvYaKicmARDFtN0buoXiulLY6UtP4QjDTqOaZ2w4Wv2Nh27NZNnV4bJ9tjay
-	Dlnfn4bN6IM30lukYmNr2XRsmd1AwqAwJEIq2DIProczyVYCZZknAMvUknH+rzgzKSXE
-	6fN/624voWFjOnswBTEqeE+Du7FjDmnm1H/4T3S+idxVoUpB7Gfa24jiSWxb9pTRthKF
-	a0Dg==
-X-Gm-Message-State: AMke39m+c/aXoajfNq9htgZE+m6l+FZBTwETATFgDuwFkdHjMo0sZdd4WgKC2E18f15wKQjy
-X-Received: by 10.36.219.3 with SMTP id c3mr2698983itg.52.1487946076038;
-	Fri, 24 Feb 2017 06:21:16 -0800 (PST)
-Received: from pohly-mobl1 (ip-64-134-128-59.public.wayport.net.
-	[64.134.128.59])
-	by smtp.gmail.com with ESMTPSA id h69sm746848ith.16.2017.02.24.06.21.13
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 24 Feb 2017 06:21:14 -0800 (PST)
-Message-ID: <1487946072.10512.9.camel@intel.com>
-From: Patrick Ohly <patrick.ohly@intel.com>
-To: Jose Lamego <jose.a.lamego@linux.intel.com>
-Date: Fri, 24 Feb 2017 15:21:12 +0100
-In-Reply-To: <26abf96d-d224-0795-4870-cdd496f541de@linux.intel.com>
-References: <1487785536-13777-1-git-send-email-derek@asterius.io>
-	<20170222204736.GG3283@jama>
-	<CADfgfobBp60s+GjqS3zRrO-z4HUhe8zFi51GPzceDFAKQVGf=Q@mail.gmail.com>
-	<26abf96d-d224-0795-4870-cdd496f541de@linux.intel.com>
-Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
-X-Mailer: Evolution 3.12.9-1+b1 
-Mime-Version: 1.0
-Cc: openembedded-core <openembedded-core@lists.openembedded.org>, "Lamego,
-	Jose A" <jose.a.lamego@intel.com>,
-	openembedded-devel@lists.openembedded.org,
-	Leonardo Sandoval <leonardo.sandoval.gonzalez@intel.com>
-Subject: Re: [OE-core] Patchwork not picking changes from the ML
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=eyxR2Dr0v53Ngi1EqrE3srwaHgnLIBcRdC86gHQZ3AQ=;
+	b=ZjLY/VZkPGiqAf7SEw+vc/AH/qwqENh3QKkhBUNXwt+Mehr7I0pKeWN+Ul7Tv0QjqH
+	3CzqFIn+LhLn033StjAQTqYKl2sCFRK0IBN6In5vFaQlHftFowwwjUYdNKexDf+rqknZ
+	np7tsZSocE1bh5g5TTf4hKPS//udbhJz80pfc7PnTwiOTyugIhpGuAh7mM9+S8/vWiuq
+	3mtm28kYyBaHT1SGSmbRfArih5JPgvo9PLOKdPbE4aBlHP9ttZhwvpUO95VyktRe60+E
+	X2NVYJ2DmUkPv20aPNLQCz6r1LDm5jLXsnUL8nyXLJEG7xuCe39QeGrMwm38L8fryVOH
+	/bsw==
+X-Gm-Message-State: AMke39noHH+oV2kaZkhdsodZ8D8+gI0eVACEZ8i9feRHmeAzVZPCq+z20qiKAnGk3AYs5Q==
+X-Received: by 10.237.60.3 with SMTP id t3mr5019954qte.86.1487965333982;
+	Fri, 24 Feb 2017 11:42:13 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
+	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
+	o16sm5367266qkl.67.2017.02.24.11.42.12
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 24 Feb 2017 11:42:13 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 24 Feb 2017 14:41:41 -0500
+Message-Id: <1487965301-24934-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-ruby][PATCH] bundler: resolve build issues with RSS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,49 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2017 14:21:16 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 24 Feb 2017 19:42:14 -0000
 
-On Wed, 2017-02-22 at 15:56 -0600, Jose Lamego wrote:
-> 
-> On 02/22/2017 02:55 PM, Michael Halstead wrote:
-> > I've seen several issues with hooks. I was working on them yesterday and
-> > will continue today.
-> > 
-> > These are currently managed by hand but we are moving them into
-> > configuration management which should help keep them working consistently.
-> 
-> Michael: one syntax error in patchwork code was pulled into production
-> yesterday. This is the cause for missing patches. The error is fixed in
-> the Yocto repo now, please perform a server code update ASAP.
-> 
-> Martin: I will look at the UI issue you are describing and file a bug if
-> needed.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-ruby/recipes-devtools/ruby/bundler_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Would it perhaps make sense to reply to the original author with an
-email confirming that his patch is now in Patchwork? It should include a
-link to the patch series, too.
-
-This could have several advantages:
-      * submitters not aware of Patchwork or whether their target
-        currently uses it learn about it and then can follow the
-        progress of their patch
-      * everyone gets a confirmation that the submission made it through
-        the various mail servers and Patchwork itself
-
-It still relies on the original submitter to watch out for breakages in
-the processes, but I guess that can't be avoided with an asynchronous,
-mail-based process.
-
+diff --git a/meta-ruby/recipes-devtools/ruby/bundler_git.bb b/meta-ruby/recipes-devtools/ruby/bundler_git.bb
+index f2d8f3c..2b5cef4 100644
+--- a/meta-ruby/recipes-devtools/ruby/bundler_git.bb
++++ b/meta-ruby/recipes-devtools/ruby/bundler_git.bb
+@@ -20,6 +20,8 @@ PV = "1.9.4"
+ 
+ S = "${WORKDIR}/git"
+ 
++DEPENDS += "zlib"
++
+ SRC_URI = " \
+     git://github.com/bundler/bundler.git;branch=${BRANCH} \
+     "
+@@ -29,5 +31,3 @@ inherit ruby
+ RDEPENDS_${PN} = "git"
+ 
+ BBCLASSEXTEND = "native"
+-
+-PNBLACKLIST[bundler] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130640/"
 -- 
-Best Regards, Patrick Ohly
-
-The content of this message is my personal opinion only and although
-I am an employee of Intel, the statements I make here in no way
-represent Intel's position on the issue, nor am I authorized to speak
-on behalf of Intel on this matter.
-
-
+2.7.4
 
 
