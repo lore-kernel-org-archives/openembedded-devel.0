@@ -1,22 +1,38 @@
-Return-Path: <amarnath.valluri@intel.com>
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 96743730EC
+Return-Path: <adrian.ratiu@ni.com>
+X-Greylist: delayed 5939 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 24 Feb 2017 13:16:28 UTC
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mail.openembedded.org (Postfix) with ESMTP id ECD1471A75
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Feb 2017 08:14:16 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga105.fm.intel.com with ESMTP; 24 Feb 2017 00:14:17 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.35,200,1484035200"; d="scan'208";a="52218820"
-Received: from avallurigigabyte.fi.intel.com ([10.237.72.170])
-	by orsmga002.jf.intel.com with ESMTP; 24 Feb 2017 00:14:16 -0800
-From: Amarnath Valluri <amarnath.valluri@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Feb 2017 10:14:59 +0200
-Message-Id: <1487924099-23890-1-git-send-email-amarnath.valluri@intel.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <20170223211402.GB3038@jama>
-References: <20170223211402.GB3038@jama>
-Subject: [PATCH v2 8/9] multipath-tools: Replace 'lib' with ${nonarch_base_libdir} for placing udev rules.
+	Fri, 24 Feb 2017 13:16:28 +0000 (UTC)
+Received: from us-aus-exch2.ni.corp.natinst.com
+	(us-aus-exch2.ni.corp.natinst.com [130.164.68.12])
+	by us-aus-skprod2.natinst.com (8.16.0.17/8.16.0.17) with ESMTPS id
+	v1OBbUqu014668
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
+	Fri, 24 Feb 2017 05:37:30 -0600
+Received: from us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) by
+	us-aus-exch2.ni.corp.natinst.com (130.164.68.12) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Fri, 24 Feb 2017 05:37:29 -0600
+Received: from adi-pc-linux.natinst.com (130.164.49.7) by
+	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
+	Server
+	id 15.0.1156.6 via Frontend Transport; Fri, 24 Feb 2017 05:37:28 -0600
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 24 Feb 2017 13:35:24 +0200
+Message-ID: <20170224113524.4347-1-adrian.ratiu@ni.com>
+X-Mailer: git-send-email 2.11.1
+MIME-Version: 1.0
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2017-02-24_06:, , signatures=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	suspectscore=1
+	malwarescore=0 phishscore=0 adultscore=0 bulkscore=0 classifier=spam
+	adjust=0 reason=mlx scancount=1 engine=8.0.1-1612050000
+	definitions=main-1702240116
+Cc: ken.sharp@ni.com
+Subject: [meta-webserver][PATCH] apache-websocket: add depend on pbzip2-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,42 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2017 08:14:17 -0000
+X-List-Received-Date: Fri, 24 Feb 2017 13:16:29 -0000
+Content-Type: text/plain
 
-Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
+This fixes the build failure:
+
+ERROR: apache-websocket-0.1.1-r0 do_install_source: Failed to
+archive (...) /bin/sh: pbzip2: command not found
+
+Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
 ---
- meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
-index effd92e..a63982e 100644
---- a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
-+++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
-@@ -40,7 +40,7 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
- EXTRA_OEMAKE = 'MULTIPATH_VERSION=${PV} DESTDIR=${D} syslibdir=${base_libdir} \
-                 OPTFLAGS="${CFLAGS}" \
-                 LIB=${base_libdir} libdir=${base_libdir}/multipath \
--                unitdir=/lib/systemd/system \
-+                unitdir=${systemd_system_unitdir} \
-                 ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "SYSTEMD=216", "", d)} \
-                '
+diff --git a/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb b/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb
+index da33115aa..0beb3ed04 100644
+--- a/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb
++++ b/meta-webserver/recipes-httpd/apache-mod/apache-websocket_git.bb
+@@ -6,7 +6,7 @@ LICENSE = "Apache-2.0"
  
-@@ -59,11 +59,12 @@ FILES_${PN}-dbg += "${base_libdir}/multipath/.debug"
- # systemd and udev stuff always goes under /lib!
- #
- FILES_${PN} += "${base_libdir}/multipath \
--                /lib/systemd"
-+                ${systemd_system_unitdir} \
-+		"
+ inherit autotools-brokensep pkgconfig
  
- PACKAGES =+ "kpartx"
- FILES_kpartx = "${base_sbindir}/kpartx \
--                /usr/lib/udev/kpartx_id \
-+                ${nonarch_libdir}/udev/kpartx_id \
-                "
+-DEPENDS = "apache2 apache2-native"
++DEPENDS = "apache2 apache2-native pbzip2-native"
+ RDEPENDS_${PN} += "apache2"
  
- RDEPENDS_${PN} += "kpartx"
+ # Original (github.com/disconnect/apache-websocket) is dead since 2012, the
 -- 
-2.7.4
+2.11.1
 
 
