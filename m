@@ -1,24 +1,28 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id EA2D871995
+Return-Path: <amarnath.valluri@intel.com>
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+	by mail.openembedded.org (Postfix) with ESMTP id EAAE473115
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Feb 2017 06:48:50 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v1O6mnuw009795
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Feb 2017 22:48:49 -0800 (PST)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Thu, 23 Feb 2017 22:48:48 -0800
-From: Chen Qi <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 24 Feb 2017 14:40:42 +0800
-Message-ID: <20170224064042.19219-1-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 2.8.3
+	Fri, 24 Feb 2017 07:50:58 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga104.jf.intel.com with ESMTP; 23 Feb 2017 23:50:59 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.35,200,1484035200"; d="scan'208";a="52211114"
+Received: from irdmzpr05.ir.intel.com (HELO [163.33.54.155]) ([163.33.54.155])
+	by orsmga002.jf.intel.com with ESMTP; 23 Feb 2017 23:50:58 -0800
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <1487840743-23198-1-git-send-email-amarnath.valluri@intel.com>
+	<1487840743-23198-9-git-send-email-amarnath.valluri@intel.com>
+	<20170223211402.GB3038@jama>
+From: Amarnath Valluri <amarnath.valluri@intel.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Message-ID: <a8b32c58-9d18-baaf-3259-37a1c29a869a@intel.com>
+Date: Fri, 24 Feb 2017 09:51:50 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] collect: fix to build with glibc 2.25
+In-Reply-To: <20170223211402.GB3038@jama>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 8/9] multipath-tools: Replace 'lib' with ${nonarch_base_libdir} for placing udev rules.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,67 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Feb 2017 06:48:52 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 24 Feb 2017 07:51:05 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Fix to build with glibc 2.25 and remove from blacklist.
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- .../0001-fix-to-build-with-glibc-2.25.patch        | 24 ++++++++++++++++++++++
- .../recipes-extended/collectd/collectd_5.5.0.bb    |  3 +--
- 2 files changed, 25 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-extended/collectd/collectd/0001-fix-to-build-with-glibc-2.25.patch
 
-diff --git a/meta-oe/recipes-extended/collectd/collectd/0001-fix-to-build-with-glibc-2.25.patch b/meta-oe/recipes-extended/collectd/collectd/0001-fix-to-build-with-glibc-2.25.patch
-new file mode 100644
-index 0000000..be942e5
---- /dev/null
-+++ b/meta-oe/recipes-extended/collectd/collectd/0001-fix-to-build-with-glibc-2.25.patch
-@@ -0,0 +1,24 @@
-+Subject: fix to build with glibc 2.25
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-+---
-+ src/md.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/src/md.c b/src/md.c
-+index 3725f9a..202225b 100644
-+--- a/src/md.c
-++++ b/src/md.c
-+@@ -25,6 +25,7 @@
-+ #include "utils_ignorelist.h"
-+ 
-+ #include <sys/ioctl.h>
-++#include <sys/sysmacros.h>
-+ 
-+ #include <linux/major.h>
-+ #include <linux/raid/md_u.h>
-+-- 
-+2.8.3
-+
-diff --git a/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb b/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
-index b544b92..59732db 100644
---- a/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
-+++ b/meta-oe/recipes-extended/collectd/collectd_5.5.0.bb
-@@ -14,6 +14,7 @@ SRC_URI = "http://collectd.org/files/collectd-${PV}.tar.bz2 \
-            file://0001-conditionally-check-libvirt.patch \
-            file://0001-collectd-replace-deprecated-readdir_r-with-readdir.patch \
-            file://CVE-2016-6254.patch \
-+           file://0001-fix-to-build-with-glibc-2.25.patch \
- "
- SRC_URI[md5sum] = "c39305ef5514b44238b0d31f77e29e6a"
- SRC_URI[sha256sum] = "847684cf5c10de1dc34145078af3fcf6e0d168ba98c14f1343b1062a4b569e88"
-@@ -86,5 +87,3 @@ INITSCRIPT_PARAMS = "defaults"
- # threshold.so load.so are also provided by gegl
- # disk.so is also provided by libgphoto2-camlibs
- PRIVATE_LIBS = "threshold.so load.so disk.so"
--
--PNBLACKLIST[collectd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130654/"
--- 
-2.8.3
+On 23.02.2017 23:14, Martin Jansa wrote:
+> On Thu, Feb 23, 2017 at 11:05:42AM +0200, Amarnath Valluri wrote:
+>> Signed-off-by: Amarnath Valluri <amarnath.valluri@intel.com>
+>> ---
+>>   meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb | 7 ++++---
+>>   1 file changed, 4 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
+>> index effd92e..0cc53fb 100644
+>> --- a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
+>> +++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
+>> @@ -40,7 +40,7 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
+>>   EXTRA_OEMAKE = 'MULTIPATH_VERSION=${PV} DESTDIR=${D} syslibdir=${base_libdir} \
+>>                   OPTFLAGS="${CFLAGS}" \
+>>                   LIB=${base_libdir} libdir=${base_libdir}/multipath \
+>> -                unitdir=/lib/systemd/system \
+>> +                unitdir/=${systemd_system_unitdir} \
+> is the / before = intentional?
+No, it must be a typo, I will resubmit the patch. Thanks for reviewing.
 
+- Amarnath
 
