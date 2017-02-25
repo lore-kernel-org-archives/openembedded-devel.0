@@ -1,49 +1,31 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 591B3606CA
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id CAA0572FC1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Feb 2017 00:12:55 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1487981576; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=0gy3G2WYeBv1+OCUIqNQxygKtmTdQiw3Kpp6WSg8Igo=;
-	b=hKQW1Lg1uGiZteeNpHt528aXGG99koI+T3zjFt+r5TxO6uRPQKIsnR8Pdl6u/bh1HL24CZKZ
-	gUDfzhyXx4hW4n7lkxRX3Eunn5JOBHCAaPO+4OEIFh2TwebjlrzGLa0s5cRD7UX/wGzEVoG8
-	oZsaftMnaYtiPDQ5yY1hRKhW7ro=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
-	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
-	Message-ID: Subject: To: Cc: Content-Type;
-	b=nw6LstlWn1kzw3ChISmYdlVo739DLJxOnAdj9rbsWKr/2nouDcbP2NF8DDOw69t15SGZVx
-	GhU7g2ANNKks+I6dNRjBaGflaPRFsSHA8nwc5Ji9e/oM/6uZ9HeQV0NRyc0+Qw8DXrrph+R1
-	iUX/ErYdDfIMmAUlSwtTIUnNhNvis=
-Sender: derek@asterius.io
-X-Mailgun-Sending-Ip: 104.130.122.4
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Received: from mail-io0-f170.google.com (mail-io0-f170.google.com
-	[209.85.223.170])
-	by mxa.mailgun.org with ESMTP id 58b0cc08.7f6fec62b5b0-smtp-out-n03;
-	Sat, 25 Feb 2017 00:12:56 -0000 (UTC)
-Received: by mail-io0-f170.google.com with SMTP id g18so3975405ioe.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Feb 2017 16:12:56 -0800 (PST)
-X-Gm-Message-State: AMke39loknxoV5Aym9bLfoWv0wMykgMeCldL9QImDF5UmBVEswIhMDFfTRzx0ZsM0nmk9EeBmHWEXDUVhmVUMw==
-X-Received: by 10.107.137.213 with SMTP id t82mr4532778ioi.233.1487981576189; 
-	Fri, 24 Feb 2017 16:12:56 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.107.156.85 with HTTP; Fri, 24 Feb 2017 16:12:55 -0800 (PST)
-In-Reply-To: <CADNbA1pFnAokAtoQjxoEx-SiprKb1O2qsYQ072uvuoum1E5+zA@mail.gmail.com>
-References: <1487979579-7984-1-git-send-email-derek@asterius.io>
-	<CA+chaQfByGPt4qL3O0PmXdENAu4iOE9N8jbi8xMdOiYUSaYsQg@mail.gmail.com>
-	<CADNbA1pFnAokAtoQjxoEx-SiprKb1O2qsYQ072uvuoum1E5+zA@mail.gmail.com>
-From: Derek Straka <derek@asterius.io>
-Date: Fri, 24 Feb 2017 19:12:55 -0500
-X-Gmail-Original-Message-ID: <CADNbA1qbF5-o+E4s4_2z9bXw8PODarxQhxZGqr8rRYD0yOwY+w@mail.gmail.com>
-Message-ID: <CADNbA1qbF5-o+E4s4_2z9bXw8PODarxQhxZGqr8rRYD0yOwY+w@mail.gmail.com>
+	Sat, 25 Feb 2017 03:42:19 +0000 (UTC)
+Received: from svr-orw-fem-03.mgc.mentorg.com ([147.34.97.39])
+	by relay1.mentorg.com with esmtp 
+	id 1chTFU-0002oN-9x from Joe_MacDonald@mentor.com ;
+	Fri, 24 Feb 2017 19:42:20 -0800
+Received: from burninator (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
+	(147.34.97.39) with Microsoft SMTP Server id 14.3.224.2;
+	Fri, 24 Feb 2017 19:42:19 -0800
+Received: by burninator (Postfix, from userid 1000)	id D7F455804B4; Fri, 24
+	Feb 2017 22:42:18 -0500 (EST)
+Date: Fri, 24 Feb 2017 22:42:18 -0500
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
 To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] system-config-keyboard: fix depends to work correctly with RSS
+Message-ID: <20170225034218.GK8436@mentor.com>
+References: <f9cd7853-8802-4b7d-a16c-01d35461b7e5@email.android.com>
+MIME-Version: 1.0
+In-Reply-To: <f9cd7853-8802-4b7d-a16c-01d35461b7e5@email.android.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH v2] Samba: use built-in libtevent
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,76 +38,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Feb 2017 00:12:55 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 25 Feb 2017 03:42:20 -0000
+X-Groupsio-MsgNum: 65570
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="DNbkntcEGyiBe7B+"
+Content-Disposition: inline
 
-Using the inherit worked fine for the target, but the native failed without
-explicitly adding depends for gettext-native.
+--DNbkntcEGyiBe7B+
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 24, 2017 at 7:08 PM, Derek Straka <derek@asterius.io> wrote:
+[Re: [oe] [meta-networking][PATCH v2] Samba: use built-in libtevent] On 17.=
+02.24 (Fri 22:33) MacDonald, Joe wrote:
 
-> I'll pull it out and give it a shot.  It is probably that I just needed
-> the '+=' vs the '='; I just tried both at once
->
-> On Fri, Feb 24, 2017 at 7:03 PM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
->
->> isn't gettext-native already added by gettext inherit? Strange
->>
->> On Sat, Feb 25, 2017 at 12:39 AM, Derek Straka <derek@asterius.io> wrote:
->>
->>> Resolves build issue exposed by RSS
->>>
->>> See http://errors.yoctoproject.org/Errors/Details/132829/
->>> and http://errors.yoctoproject.org/Errors/Details/132855/
->>>
->>> Signed-off-by: Derek Straka <derek@asterius.io>
->>> ---
->>>  .../system-config-keyboard/system-config-keyboard_1.4.0.bb          |
->>> 6 +-----
->>>  1 file changed, 1 insertion(+), 5 deletions(-)
->>>
->>> diff --git a/meta-oe/recipes-support/system-config-keyboard/system-conf
->>> ig-keyboard_1.4.0.bb b/meta-oe/recipes-support/system-config-keyboard/
->>> system-config-keyboard_1.4.0.bb
->>> index f52b594..26b4412 100644
->>> --- a/meta-oe/recipes-support/system-config-keyboard/system-conf
->>> ig-keyboard_1.4.0.bb
->>> +++ b/meta-oe/recipes-support/system-config-keyboard/system-conf
->>> ig-keyboard_1.4.0.bb
->>> @@ -5,10 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69
->>> f5fce4486a80fdaf4a4263"
->>>  SRC_URI = "https://fedorahosted.org/releases/s/y/${BPN}/${BP}.tar.bz2"
->>>  SRC_URI[md5sum] = "c267db0ee7a2131ba418399dc17f9e72"
->>>  SRC_URI[sha256sum] = "218c883e4e2bfcc82bfe07e785707
->>> b5c2ece28df772f2155fd044b9bb1614284"
->>> -inherit python-dir
->>>
->>>  inherit python-dir gettext
->>> -DEPENDS = "intltool-native"
->>> +DEPENDS += "intltool-native gettext-native"
->>>
->>>  EXTRA_OEMAKE = " \
->>>      PYTHON='${STAGING_BINDIR_NATIVE}'/python-native/python \
->>> @@ -27,6 +26,3 @@ FILES_${PN} += " \
->>>     ${datadir}/* \
->>>  "
->>>  BBCLASSEXTEND = "native"
->>> -
->>> -PNBLACKLIST[system-config-keyboard] ?= "Fails to build with RSS
->>> http://errors.yoctoproject.org/Errors/Details/132829/"
->>> -PNBLACKLIST[system-config-keyboard-native] ?= "Fails to build with RSS
->>> http://errors.yoctoproject.org/Errors/Details/132855/"
->>> --
->>> 2.7.4
->>>
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->>
->>
->
+> Yeah.  If you're near a keyboard, please go ahead and revert otherwise
+> I'll get to in later on tonight.
 
+Bah.  This isn't just the revert I'd been hoping for.  Samba, as usual,
+is a pain.  My builds without gvfs are still happy, but reverting the
+patch breaks all builds, AFAICT, so I'm going to leave this alone until
+I sort out what the correct repair job looks like here.  Unless someone
+comes up with a solution before I get to it.  The weekend is rather full
+right now, I'm afraid.
+
+-J.
+
+>=20
+> On Feb 24, 2017 5:01 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Joe?
+>=20
+> On Fri, Feb 24, 2017 at 10:37 PM, Andreas M=FCller <schnitzeltony@googlem=
+ail.com<mailto:schnitzeltony@googlemail.com>> wrote:
+> On Mon, Feb 20, 2017 at 5:08 PM, Szombathelyi Gy=F6rgy <gyurco@freemail.h=
+u<mailto:gyurco@freemail.hu>> wrote:
+> > Hi,
+> >
+> > If there&#39;s no solution to resolve the conflict between the internal=
+ tevent and the external one, then maybe putting the libtevent-internal.h f=
+rom the external lib to the samba tree would be a way to go.
+> >
+> > Br,
+> > Gy=F6rgy
+> > -------- Eredeti lev=E9l --------
+> > Felad=F3: Andreas M=FCller &lt;schnitzeltony&#64;googlemail.com<http://=
+googlemail.com>&gt;
+> > D=E1tum: 2017 febru=E1r 20 12:52:18
+> > T=E1rgy: Re: [oe] [meta-networking][PATCH v2] Samba: use built-in libte=
+vent
+> > C=EDmzett: openembedded-devel&#64;lists.openembedded.org<http://lists.o=
+penembedded.org> &lt;openembedded-devel&#64;lists.openembedded.org<http://l=
+ists.openembedded.org>&gt;
+> >
+> > &gt; In last build I&#39;ve noticed only this new issue related to samb=
+a:
+> > &gt;
+> > &gt; ctdb-2.5.6: ctdb rdepends on samba, but it isn&#39;t a build depen=
+dency, missing samba in DEPENDS or PACKAGECONFIG? [build-deps]
+> > &gt;
+> > &gt; Maybe this dependency was created from samba being libldb provider=
+ in
+> > &gt; this build.
+> > &gt;
+> > &gt; gvfs and whole meta-gnome layers is still included in my world, ma=
+ybe it
+> > &gt; didn&#39;t fail because some gvfs dependency was already failing o=
+r one of
+> > &gt; samba related changes in master-next is fixing this one.
+> > &gt;
+> > Some background: During last weekend I prepared a series based on
+> > master-next unblacklisting. First target is to build a xfce-image
+> > again [1]. Last step yesterday evening should be rebasing against
+> > latest master-next and run a test build. That failed for gvfs - so I
+> > stopped sending stuff. Now I know why gvfs fails...
+> >
+> > How do we proceed with this patch?
+> >
+> > [1] https://github.com/schnitzeltony/meta-openembedded/tree/work-2017-02
+> >
+> Just notices that this patch made it into master breaking at least gvfs. =
+Revert?
+>=20
+> Andreas
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org<mailto:Openembedded-devel@lists=
+=2Eopenembedded.org>
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>=20
+>=20
+--=20
+-Joe MacDonald.
+:wq
+
+--DNbkntcEGyiBe7B+
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJYsP0aAAoJEEn8ffcsOfaWpQwIAMLjAtNc9GFlgxBQXAfT5MiY
+XLTXj5yImrsU9kcpNhaamJBcmi8Kq1EH0tolW4GVskxLHKywhacxwg+mryP79HiU
+j6NgQNQzniUy0zfE2h8uH6CNg/9YG78NYXXXO3At//hKxkvUFEJaZcDJWfyJGNFE
+St+ikkRpe1l5ndm50DR4DVG3Fwu2orYaCWOF0U737xy2P0yB6StDOcCrSwLxCTXp
+SLcOQ1ihH2GV7L2kMrVYO8WEDNYEFgdm66/fCA1Vba08j1YKE6qv4vqOvf/QBGnv
+wqYeooq+D3kVlIw0Pp2z3JV7PGKUN2nT7twNql33tq3Wbm1s/tYl554S2WlXEUo=
+=OyCL
+-----END PGP SIGNATURE-----
+
+--DNbkntcEGyiBe7B+--
