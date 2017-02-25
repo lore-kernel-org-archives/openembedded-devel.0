@@ -1,48 +1,36 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id C56B76010D
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id C38996010D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Feb 2017 00:08:48 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1487981328; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=X9XMlZbRtOUtLKLsyzZ67xc/ifeCvbUVaPNSLS05UB0=;
-	b=rfB3dez6KAtfGKMoTG0kem0vVhF6eiOQwODVlzioXt+GBXp/OqPtXyvgQPDe6axgY0G1ogqW
-	C1JB3jbeGgLH32lb/AqafqGvAkwA5rufS7TJq4NYTqHIk0nDLDnjzOdv8rer1xG3gnhcl0Xp
-	OA+X9fHmIXIY48zJNNKKf8nDc8A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
-	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
-	Message-ID: Subject: To: Cc: Content-Type;
-	b=IwTT+GuTHN0hC1FAB1834ozGmvOt5zKX1cFuF9wNIY4RaE+dYqwLnEuK4KiDLkh4QADka/
-	mIUJWhkFDKAFkky/6maWE1dQj+MuZZ99rTf93dnw2Qgo0mM69lT+bB6bXrJaTVsTq/jCcmXi
-	w1tQUf3ezGwPB0oEjoj1/3lveR5u8=
-Sender: derek@asterius.io
-X-Mailgun-Sending-Ip: 104.130.122.4
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Received: from mail-it0-f45.google.com (mail-it0-f45.google.com
-	[209.85.214.45])
-	by mxa.mailgun.org with ESMTP id 58b0cb10.7fe8805cf830-smtp-out-n03;
-	Sat, 25 Feb 2017 00:08:48 -0000 (UTC)
-Received: by mail-it0-f45.google.com with SMTP id 203so37571526ith.0
+	Sat, 25 Feb 2017 00:09:51 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id s186so4842400qkb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Feb 2017 16:08:47 -0800 (PST)
-X-Gm-Message-State: AMke39mV29glz/VpbGlBhbTCWgqtppC8rpBXKhry7yEw46jRaqh4y8VWAiRa3Eca8gNF6eV5u5wjR0/WdG6owg==
-X-Received: by 10.36.82.22 with SMTP id d22mr5431035itb.0.1487981327529; Fri,
-	24 Feb 2017 16:08:47 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.107.156.85 with HTTP; Fri, 24 Feb 2017 16:08:47 -0800 (PST)
-In-Reply-To: <CA+chaQfByGPt4qL3O0PmXdENAu4iOE9N8jbi8xMdOiYUSaYsQg@mail.gmail.com>
-References: <1487979579-7984-1-git-send-email-derek@asterius.io>
-	<CA+chaQfByGPt4qL3O0PmXdENAu4iOE9N8jbi8xMdOiYUSaYsQg@mail.gmail.com>
+	Fri, 24 Feb 2017 16:09:53 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=8Lj2pywWD5brplvtpVA6Uw87Hms/kq0e/aUHB2ATt+o=;
+	b=ULdDK3yehlyFZe7XM9HWgbbtLiSH7PNOTcDUDS+wPZDdRvMCGJ06EuXgg/NxUnqv5y
+	DsOh+gPXXQx6dIfnASRFwfAlst44pGKAcxMhNhM9D0EUpWJB3WyU51qPY6E7Vxo1CEMN
+	TtT1KrDu3Cwvtunl7BypJ5zZhFdOouxxNMQXbq6/Ej6+OS0XWTKW8FsibykPBOTI0kVe
+	YVCsVetwlETOo6ebx1AgfRB+JoVu+bI0ZQlmk6qxo42C+LPFW+vJb7uaYO83t3A6Q8lQ
+	loLYFz7oGT9IZUCctXs8YQ/eIykHBFyXmjamowQC8MWBx42LAoMhoXfFzN9TJgpl/6EU
+	0sSQ==
+X-Gm-Message-State: AMke39k5cwIyNtz0Wa2q0ld5ahmtS57ExHnZw6mS8auyRZ2jK+cAz9TiVscCNySJoROEkQ==
+X-Received: by 10.55.169.75 with SMTP id s72mr5097832qke.300.1487981392840;
+	Fri, 24 Feb 2017 16:09:52 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
+	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
+	x40sm5804095qtx.23.2017.02.24.16.09.52
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 24 Feb 2017 16:09:52 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
-Date: Fri, 24 Feb 2017 19:08:47 -0500
-X-Gmail-Original-Message-ID: <CADNbA1pFnAokAtoQjxoEx-SiprKb1O2qsYQ072uvuoum1E5+zA@mail.gmail.com>
-Message-ID: <CADNbA1pFnAokAtoQjxoEx-SiprKb1O2qsYQ072uvuoum1E5+zA@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] system-config-keyboard: fix depends to work correctly with RSS
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 24 Feb 2017 19:09:44 -0500
+Message-Id: <1487981384-16516-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-webserver][PATCH] nginx: update to version 1.11.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,70 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Feb 2017 00:08:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 25 Feb 2017 00:09:51 -0000
 
-I'll pull it out and give it a shot.  It is probably that I just needed the
-'+=' vs the '='; I just tried both at once
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../recipes-httpd/nginx/{nginx_1.11.9.bb => nginx_1.11.10.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-httpd/nginx/{nginx_1.11.9.bb => nginx_1.11.10.bb} (64%)
 
-On Fri, Feb 24, 2017 at 7:03 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.11.9.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.11.10.bb
+similarity index 64%
+rename from meta-webserver/recipes-httpd/nginx/nginx_1.11.9.bb
+rename to meta-webserver/recipes-httpd/nginx/nginx_1.11.10.bb
+index c142836..37565fc 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.11.9.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.11.10.bb
+@@ -6,5 +6,5 @@ DEFAULT_PREFERENCE = "-1"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=903753de5f86a1ee0341fd2f9491b282"
+ 
+-SRC_URI[md5sum] = "7aeca793819c2b8df134c0b1cfe98361"
+-SRC_URI[sha256sum] = "dc22b71f16b551705930544dc042f1ad1af2f9715f565187ec22c7a4b2625748"
++SRC_URI[md5sum] = "6fb10f579055d27a2240d51c7d85c190"
++SRC_URI[sha256sum] = "778b3cabb07633f754cd9dee32fc8e22582bce22bfa407be76a806abd935533d"
+-- 
+2.7.4
 
-> isn't gettext-native already added by gettext inherit? Strange
->
-> On Sat, Feb 25, 2017 at 12:39 AM, Derek Straka <derek@asterius.io> wrote:
->
->> Resolves build issue exposed by RSS
->>
->> See http://errors.yoctoproject.org/Errors/Details/132829/
->> and http://errors.yoctoproject.org/Errors/Details/132855/
->>
->> Signed-off-by: Derek Straka <derek@asterius.io>
->> ---
->>  .../system-config-keyboard/system-config-keyboard_1.4.0.bb          | 6
->> +-----
->>  1 file changed, 1 insertion(+), 5 deletions(-)
->>
->> diff --git a/meta-oe/recipes-support/system-config-keyboard/system-conf
->> ig-keyboard_1.4.0.bb b/meta-oe/recipes-support/system-config-keyboard/
->> system-config-keyboard_1.4.0.bb
->> index f52b594..26b4412 100644
->> --- a/meta-oe/recipes-support/system-config-keyboard/system-conf
->> ig-keyboard_1.4.0.bb
->> +++ b/meta-oe/recipes-support/system-config-keyboard/system-conf
->> ig-keyboard_1.4.0.bb
->> @@ -5,10 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69
->> f5fce4486a80fdaf4a4263"
->>  SRC_URI = "https://fedorahosted.org/releases/s/y/${BPN}/${BP}.tar.bz2"
->>  SRC_URI[md5sum] = "c267db0ee7a2131ba418399dc17f9e72"
->>  SRC_URI[sha256sum] = "218c883e4e2bfcc82bfe07e785707
->> b5c2ece28df772f2155fd044b9bb1614284"
->> -inherit python-dir
->>
->>  inherit python-dir gettext
->> -DEPENDS = "intltool-native"
->> +DEPENDS += "intltool-native gettext-native"
->>
->>  EXTRA_OEMAKE = " \
->>      PYTHON='${STAGING_BINDIR_NATIVE}'/python-native/python \
->> @@ -27,6 +26,3 @@ FILES_${PN} += " \
->>     ${datadir}/* \
->>  "
->>  BBCLASSEXTEND = "native"
->> -
->> -PNBLACKLIST[system-config-keyboard] ?= "Fails to build with RSS
->> http://errors.yoctoproject.org/Errors/Details/132829/"
->> -PNBLACKLIST[system-config-keyboard-native] ?= "Fails to build with RSS
->> http://errors.yoctoproject.org/Errors/Details/132855/"
->> --
->> 2.7.4
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
->
->
 
