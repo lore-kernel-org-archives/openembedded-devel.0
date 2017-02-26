@@ -1,47 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id D1B9371BEE
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id D3F9472F5B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Feb 2017 08:20:31 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id v77so29638980wmv.0
+	Sun, 26 Feb 2017 11:21:59 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id o22so6250414wro.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Feb 2017 00:20:33 -0800 (PST)
+	Sun, 26 Feb 2017 03:22:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=rdl/rO+2OW7k4p8oCadOzYO6Yzf5UV1ICvvX6HyltmQ=;
-	b=OTick8nZeZ06TFdbbAaJJnIGZvsynPKwxKxslqkvxaYASeMdZpRUpvf91iADqZfdTC
-	nXta0Gh+yM1a22Gol//+cXRnwPzAVLoWO5vJXPnLs1kUE5SwE1FBpH3Y/IPbosaAGC2I
-	9KnCSu4agUy8PJabh+ZZ5BUnU+FbAjPRwVniNgUihQg7xDLFT8GC5DuHFn80Ro2a3AKG
-	J57qzWgqiM9O4FigYsR16aODmDkgRJuX96PYBmtp2abtJf6b6fmKQVH+w79MGdKf/IIc
-	mPSMPOXvpmIhoAGOLXV3C+yfmkccAEcroU//xZTQs33CXMVYMEAZIPoCuWNC0OLBSq3a
-	JkNQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=wY8lyo0RzML7q9XywI9bHamhhL126H8+kpGCEMRpaMk=;
+	b=IL9MMh/e8Cd9JtGk1LhakS1XcmbLI8PawMrrvuPOUDR5LG+bx71kDV3XG3lK1tjn/P
+	gs7aC9D3IbATkQ/yUSbH1+jcDT0RXcrx9MnyF4846ST/fT0yONsZoFh4nH2M8ZJw6jCn
+	wQM6JEShjcRUfxcaPAFi+WexXHrEraa3AhhFr14SljLpd7K8xJUbnqysoiW4CQ2c053X
+	taSzg2KKsxQLgVItaBabtp7bUjYX8wuXab6pmQkhAySganxxY4sGkpGiE0z2urWEv5+B
+	z+peLK83iEozhQW1BiePYHfz4SgQoYh5CSepAdaB7HoVLqSNuZb3JyAU65MDiit6imUS
+	hy4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=rdl/rO+2OW7k4p8oCadOzYO6Yzf5UV1ICvvX6HyltmQ=;
-	b=SgOpXgNWZw5V4M2Fo8m3Ufz/j9OiBBYb0yH5DV4eQUM5qiBJ1+oP5rWFiBdGuj5pQT
-	qmRerYUHhji4uXWHO8hMw6JHSvEsYnz1mjhRimsr75cnl45a8YrxymyJ/YrlMCIdQV9P
-	KK+hjvpg5MtoXwvXb8er28MnhUeHMw9j5dpefZxhF5IPgCFMFqWnxC7dpt0uGLfRNL5R
-	azwN5qTFkwxmxLAsOA4BuR5r6fh6++hdek0aJOkCiHi6JC/TdG5Djv9oDfE69cy8ntQH
-	t8r1wht3Bxj2JYP/cVUjt2HpX7eDaPbY/9AxS9rUwHOyMEnu9di/QQNGgFUU7YwIDOdI
-	Dq8A==
-X-Gm-Message-State: AMke39mNfNKJOV7rnfx5ib0R52oJ77P5AZwaCTeLiGWmPISd34mo0Tknioa9wWwkAqqUYy1ArWRyxm2k8p8Efw==
-X-Received: by 10.28.211.80 with SMTP id k77mr5049629wmg.124.1488010832439;
-	Sat, 25 Feb 2017 00:20:32 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.80.145.24 with HTTP; Sat, 25 Feb 2017 00:20:31 -0800 (PST)
-In-Reply-To: <20170225034218.GK8436@mentor.com>
-References: <f9cd7853-8802-4b7d-a16c-01d35461b7e5@email.android.com>
-	<20170225034218.GK8436@mentor.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=wY8lyo0RzML7q9XywI9bHamhhL126H8+kpGCEMRpaMk=;
+	b=UUmzVG9ibDnGUitTs1y7W0Q7H2LeiVZb7s8UIn70sbTXfY7HwEZdUyallcanOUQUSB
+	jYPzr37B7Ldb8O6RnPPUETyHaPJfNM0IyqkYjduEKOASUSK5pfpaPfUa7lbY77Z0cM81
+	QJ9nD7+2VNpBXgvkbLvESdoe2AkNwQNLwG07nV5XfDrA4Gafn/K73caMmmrd8ejHxsaa
+	46j3nu3uRbO0L5Y34NHENu6RMqJ/+lvUV1MdhIxQ3vSOp2YndcVpXer3Didq1PsHRTQK
+	1fGv/s7QuJQ9Qd/rxg4l3MPs8butHhvyTQnG21EVrYi7SIweegXO+G4+oLtDqaTOgQE+
+	odpA==
+X-Gm-Message-State: AMke39ljpJwTm1aDydohWKScSQdMu8d+MZZsj2VcYwPnC9X9hs2/Ntit2/gSAkipsIlv7g==
+X-Received: by 10.223.171.229 with SMTP id s92mr10399253wrc.64.1488108120349; 
+	Sun, 26 Feb 2017 03:22:00 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	j18sm17888292wrb.33.2017.02.26.03.21.59
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 26 Feb 2017 03:21:59 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 25 Feb 2017 09:20:31 +0100
-Message-ID: <CA+chaQe4b7QR5hHMr5S-AEeFNnZLOZivYuiqyBViROFJs=oqyQ@mail.gmail.com>
-To: Joe MacDonald <Joe_MacDonald@mentor.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH v2] Samba: use built-in libtevent
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 26 Feb 2017 12:21:57 +0100
+Message-Id: <20170226112157.21081-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.11.1
+Subject: [PATCH][meta-networking] Revert "Samba: use built-in libtevent"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,111 +52,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Feb 2017 08:20:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 26 Feb 2017 11:22:00 -0000
 
-> My builds without gvfs are still happy, but reverting the
-patch breaks all builds
+http://lists.openembedded.org/pipermail/openembedded-devel/2017-February/111345.html
 
-What gets broken? When I removed this change from master-next after
-Andreas's report I haven't seen any new issue and the gvfs one was indeed
-fixed after that.
+This reverts commit cd366899ed6f0f07d643fd4e54c1ccb91540fc23.
 
-I'll include revert at least in master-next to see what it does with next
-bitbake world.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-On Sat, Feb 25, 2017 at 4:42 AM, Joe MacDonald <Joe_MacDonald@mentor.com>
-wrote:
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+index 754455eb6..0ba59c7d3 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+@@ -33,7 +33,7 @@ inherit systemd waf-samba cpan-base perlnative update-rc.d
+ # remove default added RDEPENDS on perl
+ RDEPENDS_${PN}_remove = "perl"
+ 
+-DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libldb krb5 libbsd libaio libpam"
++DEPENDS += "readline virtual/libiconv zlib popt libtalloc libtdb libtevent libldb krb5 libbsd libaio libpam"
+ DEPENDS_append_libc-musl = " libtirpc"
+ CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
+ LDFLAGS_append_libc-musl = " -ltirpc"
+@@ -74,7 +74,7 @@ SAMBA4_PDB_MODULES="pdb_tdbsam,${@bb.utils.contains('PACKAGECONFIG', 'ldap', 'pd
+ SAMBA4_AUTH_MODULES="auth_unix,auth_wbc,auth_server,auth_netlogond,auth_script,auth_samba4"
+ SAMBA4_MODULES="${SAMBA4_IDMAP_MODULES},${SAMBA4_PDB_MODULES},${SAMBA4_AUTH_MODULES}"
+ 
+-SAMBA4_LIBS="heimdal,!zlib,!popt,!talloc,!pytalloc,!pytalloc-util,tevent,!pytevent,!tdb,!pytdb,!ldb,!pyldb"
++SAMBA4_LIBS="heimdal,!zlib,!popt,!talloc,!pytalloc,!pytalloc-util,!tevent,!pytevent,!tdb,!pytdb,!ldb,!pyldb"
+ 
+ EXTRA_OECONF += "--enable-fhs \
+                  --with-piddir=/run \
+-- 
+2.11.1
 
-> [Re: [oe] [meta-networking][PATCH v2] Samba: use built-in libtevent] On
-> 17.02.24 (Fri 22:33) MacDonald, Joe wrote:
->
-> > Yeah.  If you're near a keyboard, please go ahead and revert otherwise
-> > I'll get to in later on tonight.
->
-> Bah.  This isn't just the revert I'd been hoping for.  Samba, as usual,
-> is a pain.  My builds without gvfs are still happy, but reverting the
-> patch breaks all builds, AFAICT, so I'm going to leave this alone until
-> I sort out what the correct repair job looks like here.  Unless someone
-> comes up with a solution before I get to it.  The weekend is rather full
-> right now, I'm afraid.
->
-> -J.
->
-> >
-> > On Feb 24, 2017 5:01 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> > Joe?
-> >
-> > On Fri, Feb 24, 2017 at 10:37 PM, Andreas M=C3=BCller <
-> schnitzeltony@googlemail.com<mailto:schnitzeltony@googlemail.com>> wrote:
-> > On Mon, Feb 20, 2017 at 5:08 PM, Szombathelyi Gy=C3=B6rgy <gyurco@freem=
-ail.hu
-> <mailto:gyurco@freemail.hu>> wrote:
-> > > Hi,
-> > >
-> > > If there&#39;s no solution to resolve the conflict between the
-> internal tevent and the external one, then maybe putting the
-> libtevent-internal.h from the external lib to the samba tree would be a w=
-ay
-> to go.
-> > >
-> > > Br,
-> > > Gy=C3=B6rgy
-> > > -------- Eredeti lev=C3=A9l --------
-> > > Felad=C3=B3: Andreas M=C3=BCller &lt;schnitzeltony&#64;googlemail.com=
-<
-> http://googlemail.com>&gt;
-> > > D=C3=A1tum: 2017 febru=C3=A1r 20 12:52:18
-> > > T=C3=A1rgy: Re: [oe] [meta-networking][PATCH v2] Samba: use built-in
-> libtevent
-> > > C=C3=ADmzett: openembedded-devel&#64;lists.openembedded.org<http://li=
-sts.
-> openembedded.org> &lt;openembedded-devel&#64;lists.openembedded.org<
-> http://lists.openembedded.org>&gt;
-> > >
-> > > &gt; In last build I&#39;ve noticed only this new issue related to
-> samba:
-> > > &gt;
-> > > &gt; ctdb-2.5.6: ctdb rdepends on samba, but it isn&#39;t a build
-> dependency, missing samba in DEPENDS or PACKAGECONFIG? [build-deps]
-> > > &gt;
-> > > &gt; Maybe this dependency was created from samba being libldb
-> provider in
-> > > &gt; this build.
-> > > &gt;
-> > > &gt; gvfs and whole meta-gnome layers is still included in my world,
-> maybe it
-> > > &gt; didn&#39;t fail because some gvfs dependency was already failing
-> or one of
-> > > &gt; samba related changes in master-next is fixing this one.
-> > > &gt;
-> > > Some background: During last weekend I prepared a series based on
-> > > master-next unblacklisting. First target is to build a xfce-image
-> > > again [1]. Last step yesterday evening should be rebasing against
-> > > latest master-next and run a test build. That failed for gvfs - so I
-> > > stopped sending stuff. Now I know why gvfs fails...
-> > >
-> > > How do we proceed with this patch?
-> > >
-> > > [1] https://github.com/schnitzeltony/meta-
-> openembedded/tree/work-2017-02
-> > >
-> > Just notices that this patch made it into master breaking at least gvfs=
-.
-> Revert?
-> >
-> > Andreas
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org<mailto:Openem
-> bedded-devel@lists.openembedded.org>
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> >
-> --
-> -Joe MacDonald.
-> :wq
->
 
