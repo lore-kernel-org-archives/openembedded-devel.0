@@ -1,33 +1,45 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id F0D7E71D9E
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 34CAD6093F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Feb 2017 13:29:30 +0000 (UTC)
-Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
-	by relay1.mentorg.com with esmtp 
-	id 1ciLMp-0000m3-J6 from Joe_MacDonald@mentor.com ;
-	Mon, 27 Feb 2017 05:29:31 -0800
-Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
-	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
-	Mon, 27 Feb 2017 05:29:30 -0800
-Received: by burninator (Postfix, from userid 1000)	id 5B69B5805F3; Mon, 27
-	Feb 2017 08:29:30 -0500 (EST)
-Date: Mon, 27 Feb 2017 08:29:30 -0500
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20170227132929.GM8436@mentor.com>
-References: <f9cd7853-8802-4b7d-a16c-01d35461b7e5@email.android.com>
-	<20170225034218.GK8436@mentor.com>
-	<CA+chaQe4b7QR5hHMr5S-AEeFNnZLOZivYuiqyBViROFJs=oqyQ@mail.gmail.com>
+	Mon, 27 Feb 2017 14:08:56 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id r18so13637460wmd.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Feb 2017 06:08:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=8a0ZzDf2BVn8s4vvCWUlV0rfjGOwPxJPpovHMdZtHCc=;
+	b=KfMckXUUUB1YeHnQ01LATwBw7Xy8C4drKWLuPZYcY2X6wzZZ5jWA9n9VO+0rMCSK0D
+	nC8WH8hwplp4SiZktJLfI8wg+bFSL3a8CJQMF/I00AxTwO6LakTzgZ92Mx5cmc1KxRhs
+	48X+5188996pZUhU0esmOLXAPS7AuXdkRhiUnaiDBmnhQDGpbetRzt/Pr1iCM/8NBeeR
+	HtywjOSLPyLaRyPUwpUcrXzm+qGasyQ4Cdpvt/gVj1zfBcrFBN26HfDqSUoHwygww+b7
+	7QVWej22Hu6s8cpOkcU5fr1UomvYGQY/ffdhERzfKgwZ6tcZWuz0R2WR1l5IrR1qljdk
+	Z3fg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=8a0ZzDf2BVn8s4vvCWUlV0rfjGOwPxJPpovHMdZtHCc=;
+	b=iT2eHfuSjl0gr8YqPg/fP75PfxNzveVP8B/EIXciK30iixTTC/umKKpMK9clalESHP
+	cPoKlDC6nPLKpTEDhfxoZ6QsamMY+KJb0pl09h4wvSDwmMkL5zunLOqJqmfzkoHlk0fq
+	vFdSeiREqMln2KQeclHrFHn4R8LAXLxTDPLXPZ9JTns5eCZY/sgQkMAWeWlzL/a7AwVD
+	pcgPW/6v4dePbxxbWKRlOlksp6o9SFGOMVOlpjFMABMuTTfvgT5Vixn8KNxaBQfx5FiX
+	oa+v0eZtOWzrjAsMUS0yQp3CtbzWhEnQSVQPXG+3aaNiXywUYJ/VA8nCT+j0to0ZPLf/
+	+Q3Q==
+X-Gm-Message-State: AMke39kWXhAGqVcYI2g4iSpSv1+R7SLaaU0OmjxBtr1YBqfvwKbiqKNJGcQU6RdQuYwM2z4rr+DNLg6q0cSg3g==
+X-Received: by 10.28.6.78 with SMTP id 75mr14674197wmg.81.1488204538063; Mon,
+	27 Feb 2017 06:08:58 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQe4b7QR5hHMr5S-AEeFNnZLOZivYuiqyBViROFJs=oqyQ@mail.gmail.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH v2] Samba: use built-in libtevent
+Received: by 10.80.145.24 with HTTP; Mon, 27 Feb 2017 06:08:57 -0800 (PST)
+In-Reply-To: <1487965301-24934-1-git-send-email-derek@asterius.io>
+References: <1487965301-24934-1-git-send-email-derek@asterius.io>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 27 Feb 2017 15:08:57 +0100
+Message-ID: <CA+chaQcMcm3mkYNpMnHhvVw78TXBSzRihKa3so5am+Jbwd+sKQ@mail.gmail.com>
+To: Derek Straka <derek@asterius.io>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-ruby][PATCH] bundler: resolve build issues with RSS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,164 +52,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2017 13:29:31 -0000
-X-Groupsio-MsgNum: 65582
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="WeyQLTZFbZxVv3E0"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 27 Feb 2017 14:08:57 -0000
+Content-Type: text/plain; charset=UTF-8
 
---WeyQLTZFbZxVv3E0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Still fails in bitbake world:
 
-[Re: [oe] [meta-networking][PATCH v2] Samba: use built-in libtevent] On 17.=
-02.25 (Sat 09:20) Martin Jansa wrote:
+ERROR: bundler-1.9.4-r0 do_compile: Function failed: do_compile (log
+file is located at
+/home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/bundler/1.9.4-r0/temp/log.do_compile.3462)
+ERROR: Logfile of failure stored in:
+/home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/bundler/1.9.4-r0/temp/log.do_compile.3462
+Log data follows:
+| DEBUG: Executing shell function do_compile
+| ERROR:  Loading command: build (LoadError)
+| 	cannot load such file -- zlib
+| ERROR:  While executing gem ... (NoMethodError)
+|     undefined method `invoke_with_build_args' for nil:NilClass
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_compile (log file is located at
+/home/jenkins/oe/world/shr-core/tmp-glibc/work/i586-oe-linux/bundler/1.9.4-r0/temp/log.do_compile.3462)
+NOTE: recipe bundler-1.9.4-r0: task do_compile: Failed
+ERROR: Task (/home/jenkins/oe/world/shr-core/meta-openembedded/meta-ruby/recipes-devtools/ruby/bundler_git.bb:do_compile)
+failed with exit code '1'
 
-> > My builds without gvfs are still happy, but reverting the patch
-> > breaks all builds
->=20
-> What gets broken? When I removed this change from master-next after
-> Andreas's report I haven't seen any new issue and the gvfs one was
-> indeed fixed after that.
->=20
-> I'll include revert at least in master-next to see what it does with
-> next bitbake world.
 
-The failure wasn't specifically an error, it was a ton of QA warnings
-about missing providers for libtevent.  After abandoning the previous
-build and starting fresh, as the autobuilder would, it seems okay with
-the revert, so we'll go with that approach.
+On Fri, Feb 24, 2017 at 8:41 PM, Derek Straka <derek@asterius.io> wrote:
 
--J.
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+>  meta-ruby/recipes-devtools/ruby/bundler_git.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-ruby/recipes-devtools/ruby/bundler_git.bb
+> b/meta-ruby/recipes-devtools/ruby/bundler_git.bb
+> index f2d8f3c..2b5cef4 100644
+> --- a/meta-ruby/recipes-devtools/ruby/bundler_git.bb
+> +++ b/meta-ruby/recipes-devtools/ruby/bundler_git.bb
+> @@ -20,6 +20,8 @@ PV = "1.9.4"
+>
+>  S = "${WORKDIR}/git"
+>
+> +DEPENDS += "zlib"
+> +
+>  SRC_URI = " \
+>      git://github.com/bundler/bundler.git;branch=${BRANCH} \
+>      "
+> @@ -29,5 +31,3 @@ inherit ruby
+>  RDEPENDS_${PN} = "git"
+>
+>  BBCLASSEXTEND = "native"
+> -
+> -PNBLACKLIST[bundler] ?= "Fails to build with RSS
+> http://errors.yoctoproject.org/Errors/Details/130640/"
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
->=20
-> On Sat, Feb 25, 2017 at 4:42 AM, Joe MacDonald <Joe_MacDonald@mentor.com>
-> wrote:
->=20
->     [Re: [oe] [meta-networking][PATCH v2] Samba: use built-in libtevent] =
-On
->     17.02.24 (Fri 22:33) MacDonald, Joe wrote:
->=20
->     > Yeah.  If you're near a keyboard, please go ahead and revert otherw=
-ise
->     > I'll get to in later on tonight.
->=20
->     Bah.  This isn't just the revert I'd been hoping for.  Samba, as usua=
-l,
->     is a pain.  My builds without gvfs are still happy, but reverting the
->     patch breaks all builds, AFAICT, so I'm going to leave this alone unt=
-il
->     I sort out what the correct repair job looks like here.  Unless someo=
-ne
->     comes up with a solution before I get to it.  The weekend is rather f=
-ull
->     right now, I'm afraid.
->=20
->     -J.
->   =20
->     >
->     > On Feb 24, 2017 5:01 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
->     > Joe?
->     >
->     > On Fri, Feb 24, 2017 at 10:37 PM, Andreas M=FCller <
->     schnitzeltony@googlemail.com<mailto:schnitzeltony@googlemail.com>> wr=
-ote:
->     > On Mon, Feb 20, 2017 at 5:08 PM, Szombathelyi Gy=F6rgy <gyurco@free=
-mail.hu
->     <mailto:gyurco@freemail.hu>> wrote:
->     > > Hi,
->     > >
->     > > If there&#39;s no solution to resolve the conflict between the in=
-ternal
->     tevent and the external one, then maybe putting the libtevent-interna=
-l.h
->     from the external lib to the samba tree would be a way to go.
->     > >
->     > > Br,
->     > > Gy=F6rgy
->     > > -------- Eredeti lev=E9l --------
->     > > Felad=F3: Andreas M=FCller &lt;schnitzeltony&#64;googlemail.com<h=
-ttp://
->     googlemail.com>&gt;
->     > > D=E1tum: 2017 febru=E1r 20 12:52:18
->     > > T=E1rgy: Re: [oe] [meta-networking][PATCH v2] Samba: use built-in
->     libtevent
->     > > C=EDmzett: openembedded-devel&#64;lists.openembedded.org<http://l=
-ists.
->     openembedded.org> &lt;openembedded-devel&#64;lists.openembedded.org<h=
-ttp://
->     lists.openembedded.org>&gt;
->     > >
->     > > &gt; In last build I&#39;ve noticed only this new issue related to
->     samba:
->     > > &gt;
->     > > &gt; ctdb-2.5.6: ctdb rdepends on samba, but it isn&#39;t a build
->     dependency, missing samba in DEPENDS or PACKAGECONFIG? [build-deps]
->     > > &gt;
->     > > &gt; Maybe this dependency was created from samba being libldb pr=
-ovider
->     in
->     > > &gt; this build.
->     > > &gt;
->     > > &gt; gvfs and whole meta-gnome layers is still included in my wor=
-ld,
->     maybe it
->     > > &gt; didn&#39;t fail because some gvfs dependency was already fai=
-ling
->     or one of
->     > > &gt; samba related changes in master-next is fixing this one.
->     > > &gt;
->     > > Some background: During last weekend I prepared a series based on
->     > > master-next unblacklisting. First target is to build a xfce-image
->     > > again [1]. Last step yesterday evening should be rebasing against
->     > > latest master-next and run a test build. That failed for gvfs - s=
-o I
->     > > stopped sending stuff. Now I know why gvfs fails...
->     > >
->     > > How do we proceed with this patch?
->     > >
->     > > [1] https://github.com/schnitzeltony/meta-openembedded/tree/
->     work-2017-02
->     > >
->     > Just notices that this patch made it into master breaking at least =
-gvfs.
->     Revert?
->     >
->     > Andreas
->     > --
->     > _______________________________________________
->     > Openembedded-devel mailing list
->     > Openembedded-devel@lists.openembedded.org<mailto:Openem
->     bedded-devel@lists.openembedded.org>
->     > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->     >
->     >
->     --
->     -Joe MacDonald.
->     :wq
->=20
->=20
-
---=20
--Joe MacDonald.
-:wq
-
---WeyQLTZFbZxVv3E0
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJYtCm5AAoJEEn8ffcsOfaWteoH/jRcvpNOJCzx5DP4avro+Jyk
-rk/Uk3j3K047muJvnRGgAGWYj1tMxfsCXb3CHSm3RBPWeeUCSIvSPNJ9mb0vhegI
-QqRJ2BhdOvnIj/YBlWHytUzyXsqkldRZ2oYjVdO3msXyRmRodw2vCpD6Ocf039eR
-DLdYpNNUivDxuC4hDqJMgmq4plO7S8dorybGPjTvAEsz2huYnyhafvoReHTY59n4
-iodbD8calI0jzfPZn5ATH1hfc0eIiS2R5AafrVUtwd2hpbcrtsJVCaIyX+27DCrc
-VkC3RoRY7Azeu+1EcZerp4sY+AvS1VXKvvZSIv3HcyDzDthPeq9XZFTnLyIZObk=
-=h/UI
------END PGP SIGNATURE-----
-
---WeyQLTZFbZxVv3E0--
