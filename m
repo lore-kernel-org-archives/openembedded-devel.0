@@ -1,44 +1,41 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qk0-f176.google.com (mail-qk0-f176.google.com
-	[209.85.220.176])
-	by mail.openembedded.org (Postfix) with ESMTP id D37DF72FED
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Feb 2017 11:51:05 +0000 (UTC)
-Received: by mail-qk0-f176.google.com with SMTP id n186so16814876qkb.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Feb 2017 03:51:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 69A3F71DC7;
+	Mon, 27 Feb 2017 12:29:57 +0000 (UTC)
+Received: by mail-wm0-f47.google.com with SMTP id v77so59824746wmv.1;
+	Mon, 27 Feb 2017 04:29:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=bBpvqZuTgRwIMqHdBCiJNvM80/afLbOBERXjGuildaE=;
-	b=NxI2oA8W/RT2KIw0sWl2SwCuRP3xd2opm/oayLKEidlVXXihWBbOHC41Xzi2HN0Txp
-	exCxlHoutvtsgbby6de3kLb/idkAU8gVZUPNIk5dL9Pes61FFeG2K/KLVN4UdnuBWiz+
-	FHADPkEowjiSF+ZnLu1r7GVJb0VJelneII5mCC3MVcTsycw7w24PYj0lIWBcQ1vaEZ3F
-	K5971QJSn9QP8vJZSI5DclNi60UWKfiwSRAHKxpCilm84zMg20pNt3waoGeGycknT3Dp
-	GTW/bjcSGzM+sbA4MWn1CElbPwh5n5LePpnHpezG96y4Tgr0sKJPGIna8kKmgeIufrSN
-	OWtg==
+	:cc; bh=EZQskWcrWmnYh+GP3oVmKQ6R3/eo0IB74lMmuxh9/is=;
+	b=Fcr/S+snrpS0/FkL7KqAmDJVcFhrB8IQVjNGhusTduPXuEFWkuIiRjwzRRoCwB9wMV
+	8nu7dzUcUDuB0pjwVrhb1WpVzSRG9VJgSiRLNsOWsS397EapCHJpY6QkhvFEWLuBxVUO
+	QVmi7GKEGdyq4FGzT1nNA5vQx4a+IXuM9qyoR9TT/Lou1HVOKjQ1bVE1yLCPm2R3yvE0
+	JoE9thD+sQtPjXtZ60cQm18a3cgjdi7QPLl43qO59iPej4+fyKk9kL9yf3+q7gPOJPZg
+	PPxAtQ3HV3Q/m5FqcUH4jVt5OIqCOB5IvjQ4VpfQHbux3ia6Ok1k7J6wb+uduW0jiatD
+	1CAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=bBpvqZuTgRwIMqHdBCiJNvM80/afLbOBERXjGuildaE=;
-	b=MGwfqyguPFrYXc4XMmTPxbq9ehZgvoAEMrB0FSZf6vjpbRQ71bNgv9H45+pe1nchgR
-	zLULXK1iFC1dD4mRW7yqyI3hET4hR+loCcrrDGW/gXfVTscANEfCnCiDm7ZHAuasIF9a
-	molD41Kf+rrNyOzTXALV6qi/xc9a4wPdGIqIt0HxZOIjNX3ESU+yZzglQ5PIGx6AtJWy
-	bCF24gFEoCGir3tcWmc7dUilRUGDS1WAJVcMK1Nj2b8pOoTRCs3fOEWjb92JBfdzXMre
-	MmfUaf+JcmXnTP9aH3OTYc0bIepCy2QfwqoKkwidOVHXBJfx1O4/XsXEoMouomZDkIrH
-	zwjg==
-X-Gm-Message-State: AMke39l//9apkC0krHbxWeNPo2zaklWjDoZFAyBPK90xxzhEjTK43pDXOj+A8UCC7H1KdseCVBFU8dLiQ6q1T2KV
-X-Received: by 10.237.32.230 with SMTP id 93mr14899283qtb.144.1488196266674;
-	Mon, 27 Feb 2017 03:51:06 -0800 (PST)
+	bh=EZQskWcrWmnYh+GP3oVmKQ6R3/eo0IB74lMmuxh9/is=;
+	b=pLI5Is0esslyfG7yV1XRFZxmWlsoZkpWc4MXVk6ZcWVb6jAljtE1u0BYn+2J5tKdGL
+	ZGT14mIt08C1Xxqn1uGFQWmi+u1CQLtODpu4x1pEqCNSB+5GCp9JUGoWtfuRantwVMt8
+	dsDixKuGru6iVJBOEaoDkgeEkHt9e37zann7NM15Xs7zRcq5ow5mXFNSMHAiq8eRJA9j
+	QzQgpLBeBzCkqo9CIMg4nqEsIgxozvpwsrZSBhCLtkJWY73KDBZGtBMLfzxqxXQiS8VD
+	DAOKbmUp9bZfMjikV5chEn0WkdJCuTY1ehLGC7BGbIuH6R7FeRFFHv+mwHpnpbQIerLj
+	tevA==
+X-Gm-Message-State: AMke39nggSi/6Mg779PtjzPRgvLVEzNTxqV2S8TpYs4LIoyU+/uKTPRpRWc3mtSbCG7NJOkpMbp0tX/zDqyGJA==
+X-Received: by 10.28.74.69 with SMTP id x66mr12848659wma.124.1488198598095;
+	Mon, 27 Feb 2017 04:29:58 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.140.103.233 with HTTP; Mon, 27 Feb 2017 03:50:46 -0800 (PST)
-In-Reply-To: <20170223222004.GA23285@jama>
+Received: by 10.80.145.24 with HTTP; Mon, 27 Feb 2017 04:29:57 -0800 (PST)
+In-Reply-To: <CAJTo0LZy--6KGkcfumi=_mkRpW9YryFFfAofK5T7jkuO3hik3Q@mail.gmail.com>
 References: <20170223222004.GA23285@jama>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 27 Feb 2017 11:50:46 +0000
-Message-ID: <CAJTo0LZy--6KGkcfumi=_mkRpW9YryFFfAofK5T7jkuO3hik3Q@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
+	<CAJTo0LZy--6KGkcfumi=_mkRpW9YryFFfAofK5T7jkuO3hik3Q@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 27 Feb 2017 13:29:57 +0100
+Message-ID: <CA+chaQfFmuR8ZpMgLzVMsMvqdkWjyPE6CGUJrtOO9LrSBdmibw@mail.gmail.com>
+To: "Burton, Ross" <ross.burton@intel.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
 	Patches and discussions about the oe-core layer
@@ -56,20 +53,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2017 11:51:06 -0000
+X-List-Received-Date: Mon, 27 Feb 2017 12:29:57 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On 23 February 2017 at 22:20, Martin Jansa <martin.jansa@gmail.com> wrote:
+Yes, it is reproduced only when ld-is-gold and ptest are used in
+DISTRO_FEATURES.
 
-> === common (2) ===
->     * openembedded-core/meta/recipes-extended/parted/parted_3.2.bb:
-> do_compile_ptest_base
->     * openembedded-core/meta/recipes-support/apr/apr_1.5.2.
-> bb:do_compile_ptest_base
+On Mon, Feb 27, 2017 at 12:50 PM, Burton, Ross <ross.burton@intel.com>
+wrote:
+
 >
-
-FWIW neither me nor the yocto autobuilder sees these, so I suspect they're
-ld-is-gold related.
-
-Ross
+> On 23 February 2017 at 22:20, Martin Jansa <martin.jansa@gmail.com> wrote:
+>
+>> === common (2) ===
+>>     * openembedded-core/meta/recipes-extended/parted/parted_3.2.
+>> bb:do_compile_ptest_base
+>>     * openembedded-core/meta/recipes-support/apr/apr_1.5.2.bb:do_
+>> compile_ptest_base
+>>
+>
+> FWIW neither me nor the yocto autobuilder sees these, so I suspect they're
+> ld-is-gold related.
+>
+> Ross
+>
 
