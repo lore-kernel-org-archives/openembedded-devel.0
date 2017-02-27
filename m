@@ -1,46 +1,33 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 69A3F71DC7;
-	Mon, 27 Feb 2017 12:29:57 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id v77so59824746wmv.1;
-	Mon, 27 Feb 2017 04:29:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=EZQskWcrWmnYh+GP3oVmKQ6R3/eo0IB74lMmuxh9/is=;
-	b=Fcr/S+snrpS0/FkL7KqAmDJVcFhrB8IQVjNGhusTduPXuEFWkuIiRjwzRRoCwB9wMV
-	8nu7dzUcUDuB0pjwVrhb1WpVzSRG9VJgSiRLNsOWsS397EapCHJpY6QkhvFEWLuBxVUO
-	QVmi7GKEGdyq4FGzT1nNA5vQx4a+IXuM9qyoR9TT/Lou1HVOKjQ1bVE1yLCPm2R3yvE0
-	JoE9thD+sQtPjXtZ60cQm18a3cgjdi7QPLl43qO59iPej4+fyKk9kL9yf3+q7gPOJPZg
-	PPxAtQ3HV3Q/m5FqcUH4jVt5OIqCOB5IvjQ4VpfQHbux3ia6Ok1k7J6wb+uduW0jiatD
-	1CAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=EZQskWcrWmnYh+GP3oVmKQ6R3/eo0IB74lMmuxh9/is=;
-	b=pLI5Is0esslyfG7yV1XRFZxmWlsoZkpWc4MXVk6ZcWVb6jAljtE1u0BYn+2J5tKdGL
-	ZGT14mIt08C1Xxqn1uGFQWmi+u1CQLtODpu4x1pEqCNSB+5GCp9JUGoWtfuRantwVMt8
-	dsDixKuGru6iVJBOEaoDkgeEkHt9e37zann7NM15Xs7zRcq5ow5mXFNSMHAiq8eRJA9j
-	QzQgpLBeBzCkqo9CIMg4nqEsIgxozvpwsrZSBhCLtkJWY73KDBZGtBMLfzxqxXQiS8VD
-	DAOKbmUp9bZfMjikV5chEn0WkdJCuTY1ehLGC7BGbIuH6R7FeRFFHv+mwHpnpbQIerLj
-	tevA==
-X-Gm-Message-State: AMke39nggSi/6Mg779PtjzPRgvLVEzNTxqV2S8TpYs4LIoyU+/uKTPRpRWc3mtSbCG7NJOkpMbp0tX/zDqyGJA==
-X-Received: by 10.28.74.69 with SMTP id x66mr12848659wma.124.1488198598095;
-	Mon, 27 Feb 2017 04:29:58 -0800 (PST)
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id F0D7E71D9E
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Feb 2017 13:29:30 +0000 (UTC)
+Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
+	by relay1.mentorg.com with esmtp 
+	id 1ciLMp-0000m3-J6 from Joe_MacDonald@mentor.com ;
+	Mon, 27 Feb 2017 05:29:31 -0800
+Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
+	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
+	Mon, 27 Feb 2017 05:29:30 -0800
+Received: by burninator (Postfix, from userid 1000)	id 5B69B5805F3; Mon, 27
+	Feb 2017 08:29:30 -0500 (EST)
+Date: Mon, 27 Feb 2017 08:29:30 -0500
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20170227132929.GM8436@mentor.com>
+References: <f9cd7853-8802-4b7d-a16c-01d35461b7e5@email.android.com>
+	<20170225034218.GK8436@mentor.com>
+	<CA+chaQe4b7QR5hHMr5S-AEeFNnZLOZivYuiqyBViROFJs=oqyQ@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.80.145.24 with HTTP; Mon, 27 Feb 2017 04:29:57 -0800 (PST)
-In-Reply-To: <CAJTo0LZy--6KGkcfumi=_mkRpW9YryFFfAofK5T7jkuO3hik3Q@mail.gmail.com>
-References: <20170223222004.GA23285@jama>
-	<CAJTo0LZy--6KGkcfumi=_mkRpW9YryFFfAofK5T7jkuO3hik3Q@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 27 Feb 2017 13:29:57 +0100
-Message-ID: <CA+chaQfFmuR8ZpMgLzVMsMvqdkWjyPE6CGUJrtOO9LrSBdmibw@mail.gmail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-02-23
+In-Reply-To: <CA+chaQe4b7QR5hHMr5S-AEeFNnZLOZivYuiqyBViROFJs=oqyQ@mail.gmail.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH v2] Samba: use built-in libtevent
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,28 +40,164 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Feb 2017 12:29:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 27 Feb 2017 13:29:31 -0000
+X-Groupsio-MsgNum: 65582
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="WeyQLTZFbZxVv3E0"
+Content-Disposition: inline
 
-Yes, it is reproduced only when ld-is-gold and ptest are used in
-DISTRO_FEATURES.
+--WeyQLTZFbZxVv3E0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 27, 2017 at 12:50 PM, Burton, Ross <ross.burton@intel.com>
-wrote:
+[Re: [oe] [meta-networking][PATCH v2] Samba: use built-in libtevent] On 17.=
+02.25 (Sat 09:20) Martin Jansa wrote:
 
->
-> On 23 February 2017 at 22:20, Martin Jansa <martin.jansa@gmail.com> wrote:
->
->> === common (2) ===
->>     * openembedded-core/meta/recipes-extended/parted/parted_3.2.
->> bb:do_compile_ptest_base
->>     * openembedded-core/meta/recipes-support/apr/apr_1.5.2.bb:do_
->> compile_ptest_base
->>
->
-> FWIW neither me nor the yocto autobuilder sees these, so I suspect they're
-> ld-is-gold related.
->
-> Ross
->
+> > My builds without gvfs are still happy, but reverting the patch
+> > breaks all builds
+>=20
+> What gets broken? When I removed this change from master-next after
+> Andreas's report I haven't seen any new issue and the gvfs one was
+> indeed fixed after that.
+>=20
+> I'll include revert at least in master-next to see what it does with
+> next bitbake world.
 
+The failure wasn't specifically an error, it was a ton of QA warnings
+about missing providers for libtevent.  After abandoning the previous
+build and starting fresh, as the autobuilder would, it seems okay with
+the revert, so we'll go with that approach.
+
+-J.
+
+>=20
+> On Sat, Feb 25, 2017 at 4:42 AM, Joe MacDonald <Joe_MacDonald@mentor.com>
+> wrote:
+>=20
+>     [Re: [oe] [meta-networking][PATCH v2] Samba: use built-in libtevent] =
+On
+>     17.02.24 (Fri 22:33) MacDonald, Joe wrote:
+>=20
+>     > Yeah.  If you're near a keyboard, please go ahead and revert otherw=
+ise
+>     > I'll get to in later on tonight.
+>=20
+>     Bah.  This isn't just the revert I'd been hoping for.  Samba, as usua=
+l,
+>     is a pain.  My builds without gvfs are still happy, but reverting the
+>     patch breaks all builds, AFAICT, so I'm going to leave this alone unt=
+il
+>     I sort out what the correct repair job looks like here.  Unless someo=
+ne
+>     comes up with a solution before I get to it.  The weekend is rather f=
+ull
+>     right now, I'm afraid.
+>=20
+>     -J.
+>   =20
+>     >
+>     > On Feb 24, 2017 5:01 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+>     > Joe?
+>     >
+>     > On Fri, Feb 24, 2017 at 10:37 PM, Andreas M=FCller <
+>     schnitzeltony@googlemail.com<mailto:schnitzeltony@googlemail.com>> wr=
+ote:
+>     > On Mon, Feb 20, 2017 at 5:08 PM, Szombathelyi Gy=F6rgy <gyurco@free=
+mail.hu
+>     <mailto:gyurco@freemail.hu>> wrote:
+>     > > Hi,
+>     > >
+>     > > If there&#39;s no solution to resolve the conflict between the in=
+ternal
+>     tevent and the external one, then maybe putting the libtevent-interna=
+l.h
+>     from the external lib to the samba tree would be a way to go.
+>     > >
+>     > > Br,
+>     > > Gy=F6rgy
+>     > > -------- Eredeti lev=E9l --------
+>     > > Felad=F3: Andreas M=FCller &lt;schnitzeltony&#64;googlemail.com<h=
+ttp://
+>     googlemail.com>&gt;
+>     > > D=E1tum: 2017 febru=E1r 20 12:52:18
+>     > > T=E1rgy: Re: [oe] [meta-networking][PATCH v2] Samba: use built-in
+>     libtevent
+>     > > C=EDmzett: openembedded-devel&#64;lists.openembedded.org<http://l=
+ists.
+>     openembedded.org> &lt;openembedded-devel&#64;lists.openembedded.org<h=
+ttp://
+>     lists.openembedded.org>&gt;
+>     > >
+>     > > &gt; In last build I&#39;ve noticed only this new issue related to
+>     samba:
+>     > > &gt;
+>     > > &gt; ctdb-2.5.6: ctdb rdepends on samba, but it isn&#39;t a build
+>     dependency, missing samba in DEPENDS or PACKAGECONFIG? [build-deps]
+>     > > &gt;
+>     > > &gt; Maybe this dependency was created from samba being libldb pr=
+ovider
+>     in
+>     > > &gt; this build.
+>     > > &gt;
+>     > > &gt; gvfs and whole meta-gnome layers is still included in my wor=
+ld,
+>     maybe it
+>     > > &gt; didn&#39;t fail because some gvfs dependency was already fai=
+ling
+>     or one of
+>     > > &gt; samba related changes in master-next is fixing this one.
+>     > > &gt;
+>     > > Some background: During last weekend I prepared a series based on
+>     > > master-next unblacklisting. First target is to build a xfce-image
+>     > > again [1]. Last step yesterday evening should be rebasing against
+>     > > latest master-next and run a test build. That failed for gvfs - s=
+o I
+>     > > stopped sending stuff. Now I know why gvfs fails...
+>     > >
+>     > > How do we proceed with this patch?
+>     > >
+>     > > [1] https://github.com/schnitzeltony/meta-openembedded/tree/
+>     work-2017-02
+>     > >
+>     > Just notices that this patch made it into master breaking at least =
+gvfs.
+>     Revert?
+>     >
+>     > Andreas
+>     > --
+>     > _______________________________________________
+>     > Openembedded-devel mailing list
+>     > Openembedded-devel@lists.openembedded.org<mailto:Openem
+>     bedded-devel@lists.openembedded.org>
+>     > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     >
+>     >
+>     --
+>     -Joe MacDonald.
+>     :wq
+>=20
+>=20
+
+--=20
+-Joe MacDonald.
+:wq
+
+--WeyQLTZFbZxVv3E0
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJYtCm5AAoJEEn8ffcsOfaWteoH/jRcvpNOJCzx5DP4avro+Jyk
+rk/Uk3j3K047muJvnRGgAGWYj1tMxfsCXb3CHSm3RBPWeeUCSIvSPNJ9mb0vhegI
+QqRJ2BhdOvnIj/YBlWHytUzyXsqkldRZ2oYjVdO3msXyRmRodw2vCpD6Ocf039eR
+DLdYpNNUivDxuC4hDqJMgmq4plO7S8dorybGPjTvAEsz2huYnyhafvoReHTY59n4
+iodbD8calI0jzfPZn5ATH1hfc0eIiS2R5AafrVUtwd2hpbcrtsJVCaIyX+27DCrc
+VkC3RoRY7Azeu+1EcZerp4sY+AvS1VXKvvZSIv3HcyDzDthPeq9XZFTnLyIZObk=
+=h/UI
+-----END PGP SIGNATURE-----
+
+--WeyQLTZFbZxVv3E0--
