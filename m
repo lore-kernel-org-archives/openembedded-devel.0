@@ -1,49 +1,36 @@
-Return-Path: <bruce.ashfield@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 731BD72F8B
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id AB9A572F83
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2017 17:30:58 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id n127so4492840qkf.2
+	Tue, 28 Feb 2017 18:19:17 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id n127so4793797qkf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2017 09:30:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=YmzgZt/WgX9a0n7LUSfY+3LPQx7sREKNjx7P34S3Qqk=;
-	b=sgJst+a4e+ALihzHzvFa6EOkoDVxbwSgo9QBmo67Wg3Xg9gcIhHrpnzaXY8pPe1tR2
-	9h53abadMf9Ldg8xjHsAaXnYnI1yN/pmhLXUh/WwQ66Ez5Ip3x9qgQ8U119YDONNcDxC
-	NGoYUj5r1dbvLaB/ELVsHVwtW9jFT8w/UVUv2k+/j39KpRi2szgCurcQqi8cs759NWcp
-	zPq85UIPaXQi5gKZC+JcVzeodlwp8K5cHMzVHWMF6tgwjyrHe/G9qeTLk/rmffO0gGnV
-	xDjdVDDa4jcXL/Y/KrB8OCR7uIubRzflSM80knuaSJUgQqrAU3uDunLtiFncmNfLJsFh
-	kMdw==
+	Tue, 28 Feb 2017 10:19:19 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=YmzgZt/WgX9a0n7LUSfY+3LPQx7sREKNjx7P34S3Qqk=;
-	b=mQ50oFyTdbEBDKMZW0bb2efwwl2eM6WnfwACRJPjqK3//RMGoUqAVMRyDyK2DNu4Lx
-	nPscHisevG8jPZi2cEy831Fk9va3vadlV5QVhn77yNyJume1WcSXOOGUTLjPciMtQaUW
-	8wuglCccQb/mWg8kEU4M6OUGJaPwSCWzShLsCKfpjSNMFoUCPfwW7nRT3kOqa/Awo5iJ
-	fa1w8GYiIyzM5EEQuQzxl/KQN3bo+ldjx7PAis8pTPEV8zElZWCdI52v51PR5OsCGJQS
-	5HA8q2fFTYQ0roYpnvvdrXiE1rmJyTJ+IP5Lcoh6oKuOoIYZQMB2Vy57qJikgFZOxzaM
-	h/sA==
-X-Gm-Message-State: AMke39krzozO/Tkkk76z/tDTM7nw6yu0fRcacvTcVbL5tDUaf7/0LdqPHr+bO+dggPKbJ9NrgH2sTDDsWrLuig==
-X-Received: by 10.200.35.195 with SMTP id r3mr4291956qtr.282.1488303058988;
-	Tue, 28 Feb 2017 09:30:58 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.12.132.68 with HTTP; Tue, 28 Feb 2017 09:30:58 -0800 (PST)
-In-Reply-To: <1B858668EC6A94408DCA5225FDFA85AA013F52F492@ALA-MBC.corp.ad.wrs.com>
-References: <20170227080959.27797-1-jackie.huang@windriver.com>
-	<20170227080959.27797-2-jackie.huang@windriver.com>
-	<CADkTA4OXnroiRi4Y4JGHAPf2jB4BgtAbn+fJSMoFEpN8JCY9mw@mail.gmail.com>
-	<1B858668EC6A94408DCA5225FDFA85AA013F52F492@ALA-MBC.corp.ad.wrs.com>
-From: Bruce Ashfield <bruce.ashfield@gmail.com>
-Date: Tue, 28 Feb 2017 12:30:58 -0500
-Message-ID: <CADkTA4N0z-7054x-fdoQR_fx9faRrQLyqCW8AmAVi0g0=N7vJQ@mail.gmail.com>
-To: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH 2/2] dnsmasq: disable the service by default
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=qJ+HBCk1DlzgxqhrYXRzScem19yMtmjGumCLOQQUhdU=;
+	b=sZXforCN6YRhspyd+1uC2cL6o+CTEv882srZFB1jGbxSg2GLF5QlPj3lNBx2/g+d/k
+	j9fuuyzfvBF9XZx7P98QmJkwf6tuEuAYdGHUFq1TXFwKS2HF3UOOQ3uKEzbM8E1Zt7Q5
+	LQoBh1VDGR7UO/0C9ZsFQd4V00Fy4/fq2EUPMPL6m+bZPe4K7Gpn+BcGoYP0tJgoBHJT
+	855dzi+VE2wi3XTQUQcu2ty25+szU5UTivZiwMgLD8Yd2NdJNCyNC6jKG6Usm+KyfcVC
+	7A79VPh2FW5IOiZ9aL6vPcBHqQsan6tXHxC+YNODQWHKZyTyTUs7nqWMxmDs37YsSX4m
+	mygg==
+X-Gm-Message-State: AMke39mrcde+c9XJ8/sJ4soyK9S1l6j/8R0xq7Kj+MsENBsmEVjMX/hD5SvriZW86oq6jw==
+X-Received: by 10.200.57.106 with SMTP id t39mr4794126qtb.20.1488305958221;
+	Tue, 28 Feb 2017 10:19:18 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
+	[67.85.97.224])
+	by smtp.gmail.com with ESMTPSA id 37sm1471582qto.43.2017.02.28.10.19.17
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 28 Feb 2017 10:19:17 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 28 Feb 2017 13:19:00 -0500
+Message-Id: <1488305940-13335-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-filesystems][PATCH] xfsprogs: update to version 4.10.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,134 +43,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2017 17:30:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 28 Feb 2017 18:19:18 -0000
 
-On Mon, Feb 27, 2017 at 8:12 PM, Huang, Jie (Jackie) <
-Jackie.Huang@windriver.com> wrote:
+Add a fix for the UUID linking
+Verified the license remains the same after copyright year update
 
-> It can be overridden to enable the service in the conf file of the distro
->
-> with witch only dnsmasq is used in the images.
->
->
->
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../xfsprogs/files/link_needed_libs.patch          | 45 +++++++++++++++++-----
+ .../{xfsprogs_4.8.0.bb => xfsprogs_4.10.0.bb}      |  9 ++---
+ 2 files changed, 40 insertions(+), 14 deletions(-)
+ rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_4.8.0.bb => xfsprogs_4.10.0.bb} (83%)
 
-Right .. I realized that you can turn it on, but my point was more that if
-you are only including
-dnsmasq, you wouldn't expect that you'd have to explicitly turn it on ..
-and it wasn't the
-case that you had to do that previously.
-
-Bruce
-
-
-> We can also disable the service in the distro conf file instead of in the
-> recipe
->
-> if it makes more sense.
->
->
->
-> Thanks,
->
-> Jackie
->
->
->
-> *From:* Bruce Ashfield [mailto:bruce.ashfield@gmail.com]
-> *Sent:* Monday, February 27, 2017 10:39 PM
-> *To:* Huang, Jie (Jackie)
-> *Cc:* openembedded-devel
-> *Subject:* Re: [oe] [meta-networking][PATCH 2/2] dnsmasq: disable the
-> service by default
->
->
->
->
->
->
->
-> On Mon, Feb 27, 2017 at 3:09 AM, <jackie.huang@windriver.com> wrote:
->
-> From: Jackie Huang <jackie.huang@windriver.com>
->
-> The service will fail to start/stop when dnsmasq and
-> bind (provides named) are both installed since they
-> are using the same port 53:
->
-> | dnsmasq: failed to create listening socket for port 53: Address already
-> in use
->
-> So disable the service by default, if the user really
-> want to use two dns servives, the config needs to be
-> changed to use different interfaces or ports.
->
->
->
-> But what if the user is only using dnsmasq ? (which is the case in the
-> images I use).
->
-> This would be a behaviour change that they add dnsmasq, but don't actually
-> get the
->
-> service started.
->
-> IMHO if someone is installing two packages that provide the same service,
-> they
->
-> are more aware of what is going on and can disable one (or the other) ..
-> versus
->
-> someone that adds a single package that provides a service .. and then
-> find out that
->
-> it doesn't actually start.
->
-> Bruce
->
->
->
->
-> As reference, other distro like centos/fedora also
-> disables the services by default on installation.
->
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
->  meta-networking/recipes-support/dnsmasq/dnsmasq.inc | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> index 424a06b..9c2276f 100644
-> --- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> +++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-> @@ -81,3 +81,4 @@ RPROVIDES_${PN} += "${PN}-systemd"
->  RREPLACES_${PN} += "${PN}-systemd"
->  RCONFLICTS_${PN} += "${PN}-systemd"
->  SYSTEMD_SERVICE_${PN} = "dnsmasq.service"
-> +SYSTEMD_AUTO_ENABLE ?= "disable"
-> --
-> 2.8.3
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
->
->
-> --
->
-> "Thou shalt not follow the NULL pointer, for chaos and madness await thee
-> at its end"
->
-
-
-
+diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch b/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch
+index 18b95c1..1de634e 100644
+--- a/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch
++++ b/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch
+@@ -1,7 +1,7 @@
+-Index: xfsprogs-4.8.0/libxcmd/Makefile
++Index: xfsprogs-4.10.0/libxcmd/Makefile
+ ===================================================================
+---- xfsprogs-4.8.0.orig/libxcmd/Makefile
+-+++ xfsprogs-4.8.0/libxcmd/Makefile
++--- xfsprogs-4.10.0.orig/libxcmd/Makefile
+++++ xfsprogs-4.10.0/libxcmd/Makefile
+ @@ -30,10 +30,21 @@ LCFLAGS += -DENABLE_EDITLINE
+  LTLIBS += $(LIBEDITLINE) $(LIBTERMCAP)
+  endif
+@@ -25,10 +25,10 @@ Index: xfsprogs-4.8.0/libxcmd/Makefile
+ +	$(INSTALL_LTLIB_DEV)
+  
+  -include .ltdep
+-Index: xfsprogs-4.8.0/libxfs/Makefile
++Index: xfsprogs-4.10.0/libxfs/Makefile
+ ===================================================================
+---- xfsprogs-4.8.0.orig/libxfs/Makefile
+-+++ xfsprogs-4.8.0/libxfs/Makefile
++--- xfsprogs-4.10.0.orig/libxfs/Makefile
+++++ xfsprogs-4.10.0/libxfs/Makefile
+ @@ -137,6 +137,7 @@ include $(BUILDRULES)
+  
+  install: default
+@@ -37,10 +37,10 @@ Index: xfsprogs-4.8.0/libxfs/Makefile
+  
+  install-headers: $(addsuffix -hdrs, $(PKGHFILES))
+  
+-Index: xfsprogs-4.8.0/libxlog/Makefile
++Index: xfsprogs-4.10.0/libxlog/Makefile
+ ===================================================================
+---- xfsprogs-4.8.0.orig/libxlog/Makefile
+-+++ xfsprogs-4.8.0/libxlog/Makefile
++--- xfsprogs-4.10.0.orig/libxlog/Makefile
+++++ xfsprogs-4.10.0/libxlog/Makefile
+ @@ -19,6 +19,10 @@ default: ltdepend $(LTLIBRARY)
+  
+  include $(BUILDRULES)
+@@ -53,3 +53,30 @@ Index: xfsprogs-4.8.0/libxlog/Makefile
+ +	$(INSTALL_LTLIB_DEV)
+  
+  -include .ltdep
++Index: xfsprogs-4.10.0/io/Makefile
++===================================================================
++--- xfsprogs-4.10.0.orig/io/Makefile
+++++ xfsprogs-4.10.0/io/Makefile
++@@ -13,7 +13,7 @@
++ 	getrusage.c imap.c link.c mmap.c open.c parent.c pread.c prealloc.c \
++ 	pwrite.c reflink.c seek.c shutdown.c sync.c truncate.c utimes.c
++ 
++-LLDLIBS = $(LIBXCMD) $(LIBHANDLE) $(LIBPTHREAD)
+++LLDLIBS = $(LIBXCMD) $(LIBHANDLE) $(LIBUUID) $(LIBPTHREAD)
++ LTDEPENDENCIES = $(LIBXCMD) $(LIBHANDLE)
++ LLDFLAGS = -static-libtool-libs
++ 
++Index: xfsprogs-4.10.0/quota/Makefile
++===================================================================
++--- xfsprogs-4.10.0.orig/quota/Makefile
+++++ xfsprogs-4.10.0/quotq/Makefile
++@@ -14,7 +14,7 @@
++ PCFILES = darwin.c freebsd.c irix.c linux.c
++ LSRCFILES = $(shell echo $(PCFILES) | sed -e "s/$(PKG_PLATFORM).c//g")
++ 
++-LLDLIBS = $(LIBXCMD)
+++LLDLIBS = $(LIBXCMD) $(LIBUUID)
++ LTDEPENDENCIES = $(LIBXCMD)
++ LLDFLAGS = -static
++ 
++
+diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.10.0.bb
+similarity index 83%
+rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
+rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.10.0.bb
+index b4c50a2..f7e10cd 100644
+--- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
++++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.10.0.bb
+@@ -3,18 +3,19 @@ HOMEPAGE = "http://oss.sgi.com/projects/xfs"
+ SECTION = "base"
+ LICENSE = "GPLv2 & LGPLv2.1"
+ LICENSE_libhandle = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://doc/COPYING;md5=dbdb5f4329b7e7145de650e9ecd4ac2a"
++LIC_FILES_CHKSUM = "file://doc/COPYING;md5=102f7fec3d53c7c8f0b7baf9bf9d76a8"
+ DEPENDS = "util-linux util-linux-native"
+ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
+            file://link_needed_libs.patch \
+ "
+-SRC_URI[md5sum] = "4f047bc9a28b48a95c6db0ad5ce4dbcb"
+-SRC_URI[sha256sum] = "82ce9cb3a55f4e208e8fe3471ff0aff0602b8300f3e50bdf05cc7e11549686f9"
++SRC_URI[md5sum] = "ddbb04493addf014db07a7e2b96b2804"
++SRC_URI[sha256sum] = "d8cb9ab2c686699d37914354ce3992b4aff3677093cbce06ad18bf798da8a8a7"
+ 
+ inherit autotools-brokensep
+ 
+ PACKAGES =+ "${PN}-fsck ${PN}-mkfs ${PN}-repair libhandle"
+ 
++DEPENDS += "util-linux"
+ 
+ RDEPENDS_${PN} = "${PN}-fsck ${PN}-mkfs ${PN}-repair"
+ 
+@@ -54,5 +55,3 @@ do_configure_prepend () {
+ do_install_append() {
+         oe_runmake 'DESTDIR=${D}' install install-dev
+ }
+-
+-PNBLACKLIST[xfsprogs] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130663/"
 -- 
-"Thou shalt not follow the NULL pointer, for chaos and madness await thee
-at its end"
+2.7.4
+
 
