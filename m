@@ -1,45 +1,46 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 52B0072F6E
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 5446D72F6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2017 09:23:53 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id m70so1323669wma.1
+	Tue, 28 Feb 2017 09:25:03 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id u48so831036wrc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2017 01:23:55 -0800 (PST)
+	Tue, 28 Feb 2017 01:25:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=soIm8kD1pVMG670hOsQRjSiLmRPI6HXs/w22LqY0kxA=;
-	b=UotAAoI5ftJsbUcdpiL5NHsY9KFKUo29gFN95QCN9OmOI6AApkIdM8To068Kp49/Si
-	REcLvwMqmiXXJ0tL/qSMg/7qe3L9xPry+h9/aWK2UQiBu8no2+mvf+arKd8mPcf0QbMi
-	9ha1k6y5KbQzUV1v5mCINizHbz+FEuGQbGYEXJojW4TDP5sh4tAfs3gZleMkgMryK6gj
-	k377w7m8SCwYFFg54BT7qX+UuO8vHf4P7apt6E92XB98mrzZqWwXgeIR65LT5jlzOe/A
-	j/fUQRITxIL9McsQOB5fwfFYiLpJeG07bx4ufKFIyUI2huIFjQNv0kjGkg2gQS34Awzl
-	gPWA==
+	:cc; bh=ErIuV4wKwZrldo+q7Wpzr5Vk3shznplhb+OKB9LhR5Y=;
+	b=EkcdR6inBxiHxTAVARhQONI9PPiPDhsGF/XvpFaVRyOcmRCUVFzulXRknXbcAVNnAM
+	lnNOIx3xuAA+tPpmhdpL+cftg2CZdrVQ3W0lT4yMs1s4G8CDiAYf/diMaT0pPbVAXVQa
+	5SSTE8iRIkt49kQN/BkZakhOAJCn0kIDllrB1O8dVUJ1sw7JMXDUDYwvdRh7bN+JvZvm
+	OQNI3ijqkdxQZfxKDXCS6wwLGe6Va3fCFouVi95ysAU2ONUsXWIYNGqkCuH015zAQDpH
+	OmAnXu0gabAGo6oF4yCbq5IimaKXDMwP4h8CviMqUgix7ns3V126TpStjWmJ9vRldiC/
+	55SQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=soIm8kD1pVMG670hOsQRjSiLmRPI6HXs/w22LqY0kxA=;
-	b=M5zboC7dxijyTeehhm9Gm4NtuRPzBkhRtDKbzWNi2Gd7J2LVjMJtg/E8CImuzhoLPz
-	s6vd8vCXLLJGeOqZSGu4oBAFNk7M7HfMq+pGJLGFaFYBHF6ay6WqqjLVQVZCXdmTk7ED
-	O4j/imUQJ6F+yDjxYeJx5m5XdcwMwOtj2d7kvMRhR9nZpRCO5/hxXaSJq6MTXrir5FQW
-	frniIKjY88z1IH1opGGmJ1UYsxuPcBle+/cMUONVHyijSJmUCDHttkX58yGxJ2WY0X/+
-	lXqlYW/kD6UW247O1lWh9hNaHcjtcs+MbMxLylR9BVa1KUh3T229yZ43PNApwM4rXcOS
-	XRSw==
-X-Gm-Message-State: AMke39mWYar+NAIevDU7udFdE6+FLAAjAz+BvDzcmsouW/yEFZZWh7SBfb8gZ1gEoZ1CMHg6qyn1I4x8DLKejQ==
-X-Received: by 10.28.74.69 with SMTP id x66mr1420142wma.124.1488273835053;
-	Tue, 28 Feb 2017 01:23:55 -0800 (PST)
+	bh=ErIuV4wKwZrldo+q7Wpzr5Vk3shznplhb+OKB9LhR5Y=;
+	b=Kt1svwLJEPD7YsXqO12+DYNOMsR8XXASMjMs0tWueh3wOiuornKijfS1QfbPJcjleQ
+	aBbTLwx9J/SDy1JQPDJ778lTWu2lpOW92RJPUhsQ19hK/kSxdn4wG95K7iK7vxDb4Qeg
+	flW4Y28DPoEJbfoa3qQg/DiSBonnfOcwL05L1N6Rq673fgeqEDykiqOrU4cUu/1nHZlM
+	0Rhs4yY1Huv7g6YCj82u41OiAz+qW3Oy6bfqVDliv+uVYz8dFsCywQnD0pmsaBa03JVa
+	l1lFlkh0wzzX2wV34mjffH6pY2Xwa8iHWeNqJdRjhaxO+7+k4Zy0PCYit70gh246lblV
+	wFDQ==
+X-Gm-Message-State: AMke39lGikSSRDVpAdv3TCtmBGx0UbDPsaGPZORWmgmLvJSrW9lDB0IHnoPBX04XER/4D7GhaVLBRUd4pHw0KQ==
+X-Received: by 10.223.154.149 with SMTP id a21mr1242012wrc.145.1488273904878; 
+	Tue, 28 Feb 2017 01:25:04 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.80.145.24 with HTTP; Tue, 28 Feb 2017 01:23:54 -0800 (PST)
-In-Reply-To: <1487973264-29272-1-git-send-email-derek@asterius.io>
-References: <1487973264-29272-1-git-send-email-derek@asterius.io>
+Received: by 10.80.145.24 with HTTP; Tue, 28 Feb 2017 01:25:04 -0800 (PST)
+In-Reply-To: <1487973956-9430-1-git-send-email-derek@asterius.io>
+References: <1487973956-9430-1-git-send-email-derek@asterius.io>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 28 Feb 2017 10:23:54 +0100
-Message-ID: <CA+chaQdjpaUPga2h0rN8BFdjsubgrc8M+LxQhJ0K0cQ6FXJaog@mail.gmail.com>
+Date: Tue, 28 Feb 2017 10:25:04 +0100
+Message-ID: <CA+chaQe4JwXjKwhFFG62Z3+9zrGpLfoPA+FFNqibypFQMAcrgQ@mail.gmail.com>
 To: Derek Straka <derek@asterius.io>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] syslog-ng: update inherit to work correctly with RSS
+Subject: Re: [meta-filesystems][PATCH] xfsprogs: update depends to work correctly with RSS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,53 +53,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2017 09:23:54 -0000
+X-List-Received-Date: Tue, 28 Feb 2017 09:25:04 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Now it complains about libtool version :/
+Unfortunately still fails with:
 
-http://errors.yoctoproject.org/Errors/Details/134288/
+TOPDIR/tmp-glibc/work/core2-64-oe-linux/xfsprogs/4.8.0-r0/xfsprogs-4.8.0/libxfs/.libs/libxfs.so:
+error: undefined reference to 'uuid_compare'
+TOPDIR/tmp-glibc/work/core2-64-oe-linux/xfsprogs/4.8.0-r0/xfsprogs-4.8.0/libxfs/.libs/libxfs.so:
+error: undefined reference to 'uuid_copy'
 
-On Fri, Feb 24, 2017 at 10:54 PM, Derek Straka <derek@asterius.io> wrote:
+http://errors.yoctoproject.org/Errors/Details/134287/
+
+On Fri, Feb 24, 2017 at 11:05 PM, Derek Straka <derek@asterius.io> wrote:
 
 > Resolves build issue exposed by RSS
-> http://errors.yoctoproject.org/Errors/Details/130631/
+> See http://errors.yoctoproject.org/Errors/Details/130663/
 >
 > Signed-off-by: Derek Straka <derek@asterius.io>
 > ---
->  meta-oe/recipes-support/syslog-ng/syslog-ng.inc      | 2 +-
->  meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb | 2 --
->  2 files changed, 1 insertion(+), 3 deletions(-)
+>  meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
 >
-> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> index 21d1748..0dbcc6e 100644
-> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> @@ -22,7 +22,7 @@ SRC_URI = "http://www.balabit.com/
-> downloads/files/syslog-ng/sources/${PV}/source
->             file://configure.ac-add-option-enable-thread-tls-to-manage-.patch
-> \
->  "
+> diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
+> b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
+> index b4c50a2..f527237 100644
+> --- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
+> +++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
+> @@ -15,6 +15,7 @@ inherit autotools-brokensep
 >
-> -inherit autotools systemd pkgconfig update-rc.d
-> +inherit autotools gettext systemd pkgconfig update-rc.d
+>  PACKAGES =+ "${PN}-fsck ${PN}-mkfs ${PN}-repair libhandle"
 >
->  EXTRA_OECONF = " \
->      --enable-dynamic-linking \
-> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-> b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-> index bee1e19..73609af 100644
-> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-> @@ -13,5 +13,3 @@ SRC_URI += " \
+> +DEPENDS += "util-linux"
 >
->  SRC_URI[md5sum] = "e9f401615e92e5eb27396c995c1446ba"
->  SRC_URI[sha256sum] = "7be11df31ac7d716f1f952e22b5ae8
-> e2049edd633a41b223776a853d9106f4e7"
+>  RDEPENDS_${PN} = "${PN}-fsck ${PN}-mkfs ${PN}-repair"
+>
+> @@ -54,5 +55,3 @@ do_configure_prepend () {
+>  do_install_append() {
+>          oe_runmake 'DESTDIR=${D}' install install-dev
+>  }
 > -
-> -PNBLACKLIST[syslog-ng] ?= "Fails to build with RSS
-> http://errors.yoctoproject.org/Errors/Details/130631/"
+> -PNBLACKLIST[xfsprogs] ?= "Fails to build with RSS
+> http://errors.yoctoproject.org/Errors/Details/130663/"
 > --
 > 2.7.4
 >
