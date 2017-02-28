@@ -1,54 +1,51 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id DB26C72FC1
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id 87ADF72FDA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2017 16:32:14 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id m70so3243434wma.1
+	Tue, 28 Feb 2017 16:47:12 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1488300432; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=ZD27o9tpFjJwxspvW49vzMaZbQqVteNwJA5syyb7z5s=;
+	b=RPDXQfQ3fT5fcKNuTr/tWh1FIDIEXn906T/GgHgbN7Sikcsuo6FweHyl94BxzDw+PF7VdlR6
+	EI1L6gDHWQICVLW7zbJD2ekTNvVQvuXFvLO8hD1Ai7nY3AIYcZefCnnsAz07Y26M0bBepJZW
+	6K99lt+thvcQZ5/ukU/xTuB58+I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
+	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
+	Message-ID: Subject: To: Cc: Content-Type;
+	b=TJhoaCPeIn5w4+2AH5RXUQKCM2LHRO5q2YlQnXmGmkqMBhpRs/zEmTeeBTuOf6oSJ62J+2
+	kxz9dqjCrOUkGioLLuCAVewoJL2lTVCRUgEvpOCp11V9yi3RB5T40L3J6VVqhFtccvtLyuYh
+	bDaRxKORg4TDZ0U19XukzilxWrdyk=
+Sender: derek@asterius.io
+X-Mailgun-Sending-Ip: 104.130.122.4
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Received: from mail-it0-f41.google.com (mail-it0-f41.google.com
+	[209.85.214.41])
+	by mxa.mailgun.org with ESMTP id 58b5a98f.7fa9e44a8530-smtp-out-n03;
+	Tue, 28 Feb 2017 16:47:11 -0000 (UTC)
+Received: by mail-it0-f41.google.com with SMTP id 203so13093189ith.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2017 08:32:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=d29rs1o84JSScs87fnjdBvyubJ3FF1z+Xzs8tfiTQCs=;
-	b=gxOJ00zmBsJU0aXcr4SGtwIGrWtotARGdV/Phw9549lHKGMN4ZZYy0NYPnxU9RyPxS
-	0i6B5NgD9DSFTzlQv55mXHEjKtmAP1dc5wKsIBMDns2Hy63j8iV9jk7PhfUty6mfxtj9
-	w/uINI2E8sD69jzs9wciqwN4XLc02JEEQGDHDPKxXR9+egD4v2Ji8LnITmZv50/G8LDi
-	gXBSnpWkNHG1pH07hMNLmRKeyH/IxxXAuWzXBF95GlRax9bfPlHYIc/dnV380zXy2Ndf
-	M31qujWyRrCk2dLzKxf32gPuvPkMk/j3Ph5V2N9kkchwFrjcKzJeeReNRyakiQFwVm38
-	v2Nw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=d29rs1o84JSScs87fnjdBvyubJ3FF1z+Xzs8tfiTQCs=;
-	b=ZQtoRSjk7QdhJoT5JfVDQniaoMPKgmk4qK4bF1I0jgYEw0F4ILeb+2AiGk1EDe8qrd
-	xzk6LhBeSaRj8nvhHqMAwhc1+FhtvJ8OYlp3hC8EjZhEWWHLKBQL7hfHD6ME/ciTCi4G
-	4vkLI82fJzxFFc3+/sZxenzjnpxaVK7NpdO8IcBEhP2Hpo7j4SM5GUiY5PpITLSBsEqo
-	gNi8+VJaSo0Qx0/sdD5tpmJpTGWIwEo+Pcmqxn70m+1R3aQxYVVaarXl+3FpBJMCZ1JP
-	gnG8M6503DtOBncyMnPiDmcN+kRn1zFbQb93XnIAUwmstmGCmJtYuxOxH8qwEAb9AJkj
-	MI6Q==
-X-Gm-Message-State: AMke39lWvjhmtpz4IOR5pp15YXK/MW5QFKecfKVM5lI3PdX4lK2cECDlMZ1dGNXUiceVYg==
-X-Received: by 10.28.155.9 with SMTP id d9mr18136229wme.114.1488299535434;
-	Tue, 28 Feb 2017 08:32:15 -0800 (PST)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id 39sm2981297wrv.55.2017.02.28.08.32.14
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 28 Feb 2017 08:32:14 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 28 Feb 2017 17:32:18 +0100
-To: Derek Straka <derek@asterius.io>
-Message-ID: <20170228163218.GF3275@jama>
-References: <1487973264-29272-1-git-send-email-derek@asterius.io>
-	<CA+chaQdjpaUPga2h0rN8BFdjsubgrc8M+LxQhJ0K0cQ6FXJaog@mail.gmail.com>
-	<741960ebbae947bd8fa4297e4f60cd88@XBOX02.axis.com>
-	<CADNbA1rWZhyFBGEQaeAJo19CFLkZ51KZ8ESourT+yM7H06vdZQ@mail.gmail.com>
+	Tue, 28 Feb 2017 08:47:11 -0800 (PST)
+X-Gm-Message-State: AMke39nhUk1ZDYWXFxIZBYb6hscBcYKZ8GCYHUMsIlO/3ovGVw2ImOTSUCJe7BNBYIZpukXFqjeEEncP7W4ozw==
+X-Received: by 10.36.82.22 with SMTP id d22mr4009863itb.0.1488300431154; Tue,
+	28 Feb 2017 08:47:11 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CADNbA1rWZhyFBGEQaeAJo19CFLkZ51KZ8ESourT+yM7H06vdZQ@mail.gmail.com>
-User-Agent: Mutt/1.8.0 (2017-02-23)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Subject: Re: [meta-oe][PATCH] syslog-ng: update inherit to work correctly with RSS
+Received: by 10.107.156.85 with HTTP; Tue, 28 Feb 2017 08:47:10 -0800 (PST)
+In-Reply-To: <CADNbA1o_dbB+8f_Mkrc_JUog8oJrwOfYiPJs3tYpFDbgzKyRrA@mail.gmail.com>
+References: <1487973956-9430-1-git-send-email-derek@asterius.io>
+	<CA+chaQe4JwXjKwhFFG62Z3+9zrGpLfoPA+FFNqibypFQMAcrgQ@mail.gmail.com>
+	<CADNbA1qfBGSOGoqMTL+oH+9khe90q_9PtiNn3wguJus5Kn6N0A@mail.gmail.com>
+	<CA+chaQesP+RXmj5SEkpCZdiWwZQkfLCwhQHHuiJqHcu2wRtj-w@mail.gmail.com>
+	<CADNbA1o_dbB+8f_Mkrc_JUog8oJrwOfYiPJs3tYpFDbgzKyRrA@mail.gmail.com>
+From: Derek Straka <derek@asterius.io>
+Date: Tue, 28 Feb 2017 11:47:10 -0500
+X-Gmail-Original-Message-ID: <CADNbA1qtoaviT1eh00aXFrDEQFzeKNZZQQqxLO5iyhmjiDO+qQ@mail.gmail.com>
+Message-ID: <CADNbA1qtoaviT1eh00aXFrDEQFzeKNZZQQqxLO5iyhmjiDO+qQ@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-filesystems][PATCH] xfsprogs: update depends to work correctly with RSS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,111 +58,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2017 16:32:15 -0000
-X-Groupsio-MsgNum: 65613
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="1EKig6ypoSyM7jaD"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 28 Feb 2017 16:47:13 -0000
+Content-Type: text/plain; charset=UTF-8
 
---1EKig6ypoSyM7jaD
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Excellent, I'm able to reproduce the errors now.  I'll be submitting the
+v2's shortly.
 
-On Tue, Feb 28, 2017 at 10:56:12AM -0500, Derek Straka wrote:
-> This patch can been dropped and we can use Peter's update instead.
+On Tue, Feb 28, 2017 at 10:54 AM, Derek Straka <derek@asterius.io> wrote:
 
-I've already dropped it before running next build:
-http://lists.openembedded.org/pipermail/openembedded-devel/2017-February/11=
-1613.html
+> Ah, I am not.  I will add that and check it out.  Thanks.
+>
+> On Tue, Feb 28, 2017 at 10:53 AM, Martin Jansa <martin.jansa@gmail.com>
+> wrote:
+>
+>> Are you using gold (ld-is-gold in DISTRO_FEATURES)?
+>>
+>> On Tue, Feb 28, 2017 at 4:37 PM, Derek Straka <derek@asterius.io> wrote:
+>>
+>>> I don't understand why I'm not seeing this failure with the patch and
+>>> you are.  The only difference I can think of is that I do a cleansstate
+>>> prior to rebuilding, but I would have expected the additional DEPENDS to
+>>> invalidate any cached SSTATE that may have been laying around.  Any
+>>> thoughts?
+>>>
+>>> On Tue, Feb 28, 2017 at 4:25 AM, Martin Jansa <martin.jansa@gmail.com>
+>>> wrote:
+>>>
+>>>> Unfortunately still fails with:
+>>>>
+>>>> TOPDIR/tmp-glibc/work/core2-64-oe-linux/xfsprogs/4.8.0-r0/xfsprogs-4.8.0/libxfs/.libs/libxfs.so: error: undefined reference to 'uuid_compare'
+>>>> TOPDIR/tmp-glibc/work/core2-64-oe-linux/xfsprogs/4.8.0-r0/xfsprogs-4.8.0/libxfs/.libs/libxfs.so: error: undefined reference to 'uuid_copy'
+>>>>
+>>>> http://errors.yoctoproject.org/Errors/Details/134287/
+>>>>
+>>>> On Fri, Feb 24, 2017 at 11:05 PM, Derek Straka <derek@asterius.io>
+>>>> wrote:
+>>>>
+>>>>> Resolves build issue exposed by RSS
+>>>>> See http://errors.yoctoproject.org/Errors/Details/130663/
+>>>>>
+>>>>> Signed-off-by: Derek Straka <derek@asterius.io>
+>>>>> ---
+>>>>>  meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb | 3 +--
+>>>>>  1 file changed, 1 insertion(+), 2 deletions(-)
+>>>>>
+>>>>> diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
+>>>>> b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
+>>>>> index b4c50a2..f527237 100644
+>>>>> --- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
+>>>>> +++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb
+>>>>> @@ -15,6 +15,7 @@ inherit autotools-brokensep
+>>>>>
+>>>>>  PACKAGES =+ "${PN}-fsck ${PN}-mkfs ${PN}-repair libhandle"
+>>>>>
+>>>>> +DEPENDS += "util-linux"
+>>>>>
+>>>>>  RDEPENDS_${PN} = "${PN}-fsck ${PN}-mkfs ${PN}-repair"
+>>>>>
+>>>>> @@ -54,5 +55,3 @@ do_configure_prepend () {
+>>>>>  do_install_append() {
+>>>>>          oe_runmake 'DESTDIR=${D}' install install-dev
+>>>>>  }
+>>>>> -
+>>>>> -PNBLACKLIST[xfsprogs] ?= "Fails to build with RSS
+>>>>> http://errors.yoctoproject.org/Errors/Details/130663/"
+>>>>> --
+>>>>> 2.7.4
+>>>>>
+>>>>> --
+>>>>> _______________________________________________
+>>>>> Openembedded-devel mailing list
+>>>>> Openembedded-devel@lists.openembedded.org
+>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>>>
+>>>>
+>>>>
+>>>
+>>
+>
 
-> On Tue, Feb 28, 2017 at 10:33 AM, Peter Kjellerstedt <
-> peter.kjellerstedt@axis.com> wrote:
->=20
-> > > -----Original Message-----
-> > > From: openembedded-devel-bounces@lists.openembedded.org
-> > > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf =
-Of
-> > > Martin Jansa
-> > > Sent: den 28 februari 2017 10:24
-> > > To: Derek Straka
-> > > Cc: openembedded-devel
-> > > Subject: Re: [oe] [meta-oe][PATCH] syslog-ng: update inherit to work
-> > > correctly with RSS
-> > >
-> > > Now it complains about libtool version :/
-> > >
-> > > http://errors.yoctoproject.org/Errors/Details/134288/
-> >
-> > I have a solution for this where it executes autoreconf twice
-> > to make it work. I do not really know why that is necessary, or
-> > why it changed with RSS, but at least it seems to work. syslog-ng
-> > has sub-projects with their own autotools files, and that has
-> > probably got something to do with it...
-> >
-> > I will also include an update to version 3.8.1 that I have been
-> > meaning to provide for a while now.
-> >
-> > > On Fri, Feb 24, 2017 at 10:54 PM, Derek Straka <derek@asterius.io>
-> > > wrote:
-> > >
-> > > > Resolves build issue exposed by RSS
-> > > > http://errors.yoctoproject.org/Errors/Details/130631/
-> > > >
-> > > > Signed-off-by: Derek Straka <derek@asterius.io>
-> > > > ---
-> > > >  meta-oe/recipes-support/syslog-ng/syslog-ng.inc      | 2 +-
-> > > >  meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb | 2 --
-> > > >  2 files changed, 1 insertion(+), 3 deletions(-)
-> > > >
-> > > > diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> > b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> > > > index 21d1748..0dbcc6e 100644
-> > > > --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> > > > +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> > > > @@ -22,7 +22,7 @@ SRC_URI =3D "http://www.balabit.com/
-> > downloads/files/syslog-ng/sources/${PV}/source
-> > > >             file://configure.ac-add-option-enable-thread-tls-to-man=
-age-.patch
-> > \
-> > > >  "
-> > > >
-> > > > -inherit autotools systemd pkgconfig update-rc.d
-> > > > +inherit autotools gettext systemd pkgconfig update-rc.d
-> > > >
-> > > >  EXTRA_OECONF =3D " \
-> > > >      --enable-dynamic-linking \
-> > > > diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-> > b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-> > > > index bee1e19..73609af 100644
-> > > > --- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-> > > > +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-> > > > @@ -13,5 +13,3 @@ SRC_URI +=3D " \
-> > > >
-> > > >  SRC_URI[md5sum] =3D "e9f401615e92e5eb27396c995c1446ba"
-> > > >  SRC_URI[sha256sum] =3D "7be11df31ac7d716f1f952e22b5ae8
-> > e2049edd633a41b223776a853d9106f4e7"
-> > > > -
-> > > > -PNBLACKLIST[syslog-ng] ?=3D "Fails to build with RSS
-> > http://errors.yoctoproject.org/Errors/Details/130631/"
-> > > > --
-> > > > 2.7.4
-> >
-> > //Peter
-> >
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---1EKig6ypoSyM7jaD
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWLWmEQAKCRA3VSO3ZXaA
-HEzjAJ9lfYSNSJISsdw61RxzZNRxqtjRrACeP/3rWL0CpNHiE916K/syMPlJD9A=
-=hatP
------END PGP SIGNATURE-----
-
---1EKig6ypoSyM7jaD--
