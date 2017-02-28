@@ -1,46 +1,59 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id A473F72F9D;
-	Tue, 28 Feb 2017 15:19:00 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id v77so87705400wmv.1;
-	Tue, 28 Feb 2017 07:19:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:subject:message-id:mime-version:content-disposition
-	:user-agent; bh=eq/EwgzuXGLBSlNvrj0hxCP886OB8WeY/L49epLA2BA=;
-	b=DIOAOOce5Axjnf46eWSBd/hjftSv+cWalUjtW92KgkBK5NVodxp2EgZZjgAqbR8IQo
-	JpUJfK38GQ4TqjjpyPWm620arS5S4emic4glhwpZlQa8wcrcjsrswW8errhfzWsICO+I
-	AWkWMI7acXUgOlEBeRLJu1cChLYcLXp9JsrvMLg9/RfQ3QgcfBAZWdlDR8GbW9C0Wv+t
-	YOw5WKZo9jzRkkFCJ3+rSHZ261NOh7WZGroIaE/6X11wryWUJt+ZQ44IBOJFMFy0xx0U
-	fu0DJu9wumuz3sUujqZbwIqiJOGs75aHhWzeRSuaplTe0FuG+l525VCkLmjUSuDS1ssu
-	PhFw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:subject:message-id:mime-version
-	:content-disposition:user-agent;
-	bh=eq/EwgzuXGLBSlNvrj0hxCP886OB8WeY/L49epLA2BA=;
-	b=VQ6KS1Cyv4CbHhrEs6jfqcNbAJ7vil7A+rjJZp+9U5tXVkLBXwtzB44JiAuNBdjEkq
-	eklOTxAT8wW6GsFEIBEh+tX4GvOehhhOAaaHfKwllJkfXpNgdSwFj8k6KMClC8NlFfOd
-	cRzOuwQNtLm9DOLW2/t0zrR4qx2JoidgpLFsJYrfiTU3FG396mtmvNLJqGdJ2sZUH11x
-	Yf9uwpl2zOa0Vtwyz8iCsyT2/J5w/kUrbZrgYdTTlSVpLLhn9jCTsA6g7AsWh026FtIu
-	3B4Pfdjz59LI0h+Hvptdho52tl6v9N+UVwTXkna9NUibrwRlxutjd/xtb3iWHBv4RY+L
-	zBnQ==
-X-Gm-Message-State: AMke39kOqT2DsO8vQKWmqqrIi3OyyMZpxB7Kryff+NVLM2vV4++SFORFtOSrSqbDj0Bybw==
-X-Received: by 10.28.135.82 with SMTP id j79mr18108345wmd.19.1488295141156;
-	Tue, 28 Feb 2017 07:19:01 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	p12sm2750090wrb.46.2017.02.28.07.18.59
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 28 Feb 2017 07:18:59 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 28 Feb 2017 16:19:03 +0100
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Message-ID: <20170228151903.GB3275@jama>
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E046072FA8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Feb 2017 15:33:35 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id 7F18E1808A;
+	Tue, 28 Feb 2017 16:33:36 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id lsWEKPgma-0x; Tue, 28 Feb 2017 16:33:33 +0100 (CET)
+Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
+	by bastet.se.axis.com (Postfix) with ESMTPS id 74D2118328;
+	Tue, 28 Feb 2017 16:33:33 +0100 (CET)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 242AD1A169;
+	Tue, 28 Feb 2017 16:33:33 +0100 (CET)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 1921D1A15F;
+	Tue, 28 Feb 2017 16:33:33 +0100 (CET)
+Received: from thoth.se.axis.com (unknown [10.0.2.173])
+	by boulder02.se.axis.com (Postfix) with ESMTP;
+	Tue, 28 Feb 2017 16:33:33 +0100 (CET)
+Received: from XBOX01.axis.com (xbox01.axis.com [10.0.5.15])
+	by thoth.se.axis.com (Postfix) with ESMTP id 0CD2679D;
+	Tue, 28 Feb 2017 16:33:33 +0100 (CET)
+Received: from xbox12.axis.com (10.0.5.26) by XBOX01.axis.com (10.0.5.15) with
+	Microsoft SMTP Server (TLS) id 15.0.1210.3;
+	Tue, 28 Feb 2017 16:33:33 +0100
+Received: from XBOX02.axis.com (10.0.5.16) by xbox12.axis.com (10.0.5.26) with
+	Microsoft SMTP Server (TLS) id 15.0.1210.3;
+	Tue, 28 Feb 2017 16:33:32 +0100
+Received: from XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776]) by
+	XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776%21]) with mapi id
+	15.00.1210.000; Tue, 28 Feb 2017 16:33:32 +0100
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Martin Jansa <martin.jansa@gmail.com>, Derek Straka <derek@asterius.io>
+Thread-Topic: [oe] [meta-oe][PATCH] syslog-ng: update inherit to work
+	correctly with RSS
+Thread-Index: AQHSkaRl32d5RebKn0eNtXiBlXJJcaF+i2Qw
+Date: Tue, 28 Feb 2017 15:33:32 +0000
+Message-ID: <741960ebbae947bd8fa4297e4f60cd88@XBOX02.axis.com>
+References: <1487973264-29272-1-git-send-email-derek@asterius.io>
+	<CA+chaQdjpaUPga2h0rN8BFdjsubgrc8M+LxQhJ0K0cQ6FXJaog@mail.gmail.com>
+In-Reply-To: <CA+chaQdjpaUPga2h0rN8BFdjsubgrc8M+LxQhJ0K0cQ6FXJaog@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
 MIME-Version: 1.0
-User-Agent: Mutt/1.8.0 (2017-02-23)
-Subject: State of bitbake world, Failed tasks 2017-02-28
+X-TM-AS-GCONF: 00
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] syslog-ng: update inherit to work correctly with RSS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,187 +66,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2017 15:19:01 -0000
-X-Groupsio-MsgNum: 65604
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="p4qYPpj5QlsIQJ0K"
-Content-Disposition: inline
-
---p4qYPpj5QlsIQJ0K
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 28 Feb 2017 15:33:37 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-Dropped few changes from master-next which were re-introducing the
-failures and we're back in almost clean state:
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Martin Jansa
+> Sent: den 28 februari 2017 10:24
+> To: Derek Straka
+> Cc: openembedded-devel
+> Subject: Re: [oe] [meta-oe][PATCH] syslog-ng: update inherit to work
+> correctly with RSS
+>=20
+> Now it complains about libtool version :/
+>=20
+> http://errors.yoctoproject.org/Errors/Details/134288/
 
-=3D=3D Number of issues - stats =3D=3D
-{| class=3D'wikitable'
-!|Date		     !!colspan=3D'3'|Failed tasks			    !!colspan=3D'6'|Failed depe=
-ncencies			 !!|Signatures		  !!colspan=3D'12'|QA !!Comment
-|-
-||		||qemuarm	||qemux86	||qemux86_64	||qemuarm||max||min	||qemux86||max||mi=
-n	||all 	||already-stripped	||libdir	||textrel	||build-deps	||file-rdeps	||=
-version-going-backwards	||host-user-contaminated	||installed-vs-shipped	||u=
-nknown-configure-option	||symlink-to-sysroot	||invalid-pkgconfig	||pkgname	=
-||=09
-|-
-||2017-02-28	||2	||2	||2	||N/A	||N/A	||N/A	||N/A	||N/A	||N/A	||0	||0		||0		=
-||0		||0		||0		||0		||0		||0		||0		||0		||0		||0		||=09
-|}
+I have a solution for this where it executes autoreconf twice=20
+to make it work. I do not really know why that is necessary, or=20
+why it changed with RSS, but at least it seems to work. syslog-ng=20
+has sub-projects with their own autotools files, and that has=20
+probably got something to do with it...
 
-http://www.openembedded.org/wiki/Bitbake_World_Status
+I will also include an update to version 3.8.1 that I have been=20
+meaning to provide for a while now.
 
-=3D=3D Failed tasks 2017-02-28 =3D=3D
+> On Fri, Feb 24, 2017 at 10:54 PM, Derek Straka <derek@asterius.io>
+> wrote:
+>=20
+> > Resolves build issue exposed by RSS
+> > http://errors.yoctoproject.org/Errors/Details/130631/
+> >
+> > Signed-off-by: Derek Straka <derek@asterius.io>
+> > ---
+> >  meta-oe/recipes-support/syslog-ng/syslog-ng.inc      | 2 +-
+> >  meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb | 2 --
+> >  2 files changed, 1 insertion(+), 3 deletions(-)
+> >
+> > diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/=
+recipes-support/syslog-ng/syslog-ng.inc
+> > index 21d1748..0dbcc6e 100644
+> > --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> > +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> > @@ -22,7 +22,7 @@ SRC_URI =3D "http://www.balabit.com/downloads/files/s=
+yslog-ng/sources/${PV}/source
+> >             file://configure.ac-add-option-enable-thread-tls-to-manage-=
+.patch \
+> >  "
+> >
+> > -inherit autotools systemd pkgconfig update-rc.d
+> > +inherit autotools gettext systemd pkgconfig update-rc.d
+> >
+> >  EXTRA_OECONF =3D " \
+> >      --enable-dynamic-linking \
+> > diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb b/met=
+a-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
+> > index bee1e19..73609af 100644
+> > --- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
+> > +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
+> > @@ -13,5 +13,3 @@ SRC_URI +=3D " \
+> >
+> >  SRC_URI[md5sum] =3D "e9f401615e92e5eb27396c995c1446ba"
+> >  SRC_URI[sha256sum] =3D "7be11df31ac7d716f1f952e22b5ae8e2049edd633a41b2=
+23776a853d9106f4e7"
+> > -
+> > -PNBLACKLIST[syslog-ng] ?=3D "Fails to build with RSS http://errors.yoc=
+toproject.org/Errors/Details/130631/"
+> > --
+> > 2.7.4
 
-INFO: jenkins-job.sh-1.8.18 Complete log available at http://logs.nslu2-lin=
-ux.org/buildlogs/oe/world/pyro/log.report.20170228_051635.log
-
-=3D=3D=3D common (2) =3D=3D=3D
-    * openembedded-core/meta/recipes-extended/parted/parted_3.2.bb:do_compi=
-le_ptest_base
-    * openembedded-core/meta/recipes-support/apr/apr_1.5.2.bb:do_compile_pt=
-est_base
-
-=3D=3D=3D common-x86 (0) =3D=3D=3D
-
-=3D=3D=3D qemuarm (0) =3D=3D=3D
-
-=3D=3D=3D qemux86 (0) =3D=3D=3D
-
-=3D=3D=3D qemux86_64 (0) =3D=3D=3D
-
-=3D=3D=3D Number of failed tasks (6) =3D=3D=3D
-{| class=3Dwikitable
-|-
-|| qemuarm 	|| 2	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/lo=
-g.world.qemuarm.20170228_014101.log/ || http://errors.yoctoproject.org/Erro=
-rs/Build/32985/
-|-
-|| qemux86 	|| 2	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/lo=
-g.world.qemux86.20170228_014106.log/ || http://errors.yoctoproject.org/Erro=
-rs/Build/32986/
-|-
-|| qemux86_64 	|| 2	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro=
-/log.world.qemux86-64.20170228_030450.log/ || http://errors.yoctoproject.or=
-g/Errors/Build/32998/
-|}
-
-=3D=3D=3D PNBLACKLISTs (355) =3D=3D=3D
-
-=3D=3D=3D QA issues (0) =3D=3D=3D
-{| class=3Dwikitable
-!| Count		||Issue
-|-
-||0	||already-stripped
-|-
-||0	||build-deps
-|-
-||0	||file-rdeps
-|-
-||0	||host-user-contaminated
-|-
-||0	||installed-vs-shipped
-|-
-||0	||invalid-pkgconfig
-|-
-||0	||libdir
-|-
-||0	||pkgname
-|-
-||0	||symlink-to-sysroot
-|-
-||0	||textrel
-|-
-||0	||unknown-configure-option
-|-
-||0	||version-going-backwards
-|}
+//Peter
 
 
-
-=3D=3D=3D Incorrect PACKAGE_ARCH or sstate signatures (0) =3D=3D=3D
-
-Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.signa=
-tures.20170228_030028.log/
-
-No issues detected
-
-=3D=3D Tested changes (not included in master yet) - bitbake =3D=3D
-latest upstream commit:=20
-5b364b0 fetch2/svn: change 'rsh' parameter to 'ssh'
-not included in master yet:=20
-ee30425 world-image: add extra target
-
-=3D=3D Tested changes (not included in master yet) - openembedded-core =3D=
-=3D
-latest upstream commit:=20
-65cfc8a libva: Find the correct wayland-scanner
-not included in master yet:=20
-e391f58 qemux86: Add identical qemux86copy variant for tests
-6d33fc3 sstate-sysroot-cruft.sh: Extend the whitelist
-0de471f recipes: Replace "cp -a" with "cp -R --no-dereference --preserve=3D=
-mode,links"
-f0f6112 buildhistory.bbclass: metadata-revs show repo parent
-ade2954 metadata-revs: provide more information
-c5e658a report-error: Allow to upload reports automatically
-63e44e5 flex: upgrade to 2.6.3
-edfb18a Revert "flex: upgrade to 2.6.3"
-3d6b996 Revert "flex: upgrade to 2.6.2"
-ce5cb55 qemu: fix build with glibc-2.25
-ea1f3b4 e2fsprogs: Fix build with glibc-2.25
-7f249b3 parted: fix build with glibc-2.25
-830df85 syslinux: fix build with glibc-2.25
-
-=3D=3D Tested changes (not included in master yet) - meta-openembedded =3D=
-=3D
-latest upstream commit:=20
-131255d nginx: update to version 1.11.10
-not included in master yet:=20
-4ab8e02 netcat-openbsd: fix implicit dependency on pkg-config
-a87fc99 inetutils: Move files only when src !=3D dst.
-f8b8c16 ebtables: Move files only when src !=3D dst.
-ec3b598 netcf_git: Check if src !=3D dst while moving files.
-d7dcb9f fuse: Remove unneeded RDEPENDS on util-linux-mount
-f66fb86 ell: Initial recipe for Embedded Linux Library
-29cb532 dnsmasq: add info for port setting
-0f1d882 dnsmasq: disable the service by default
-7fa9b8d zabbix: 2.4.7 -> 3.0.8
-
-=3D=3D Tested changes (not included in master yet) - meta-qt5 =3D=3D
-latest upstream commit:=20
-61c0250 qtbase-native: nativesdk-qtbase: remove patch that breaks mkspec se=
-tting for SDK
-not included in master yet:=20
-595e9cf qtbase: remove absolute binary paths from mkspec files
-
-=3D=3D Tested changes (not included in master yet) - meta-browser =3D=3D
-latest upstream commit:=20
-021a954 chromium-browser: add missing dependency on gperf-native
-not included in master yet:=20
-a9dd704 chromium: disable generate_character_data for x86
-
-=3D=3D Tested changes (not included in master yet) - meta-webos-ports =3D=3D
-latest upstream commit:=20
-7c4309b packagegroup-luneos-extended: drop qtscenegraph-adaptation
-not included in master yet:=20
-
-=3D=3D Tested changes (not included in master yet) - meta-smartphone =3D=3D
-latest upstream commit:=20
-df77c54 linux-hp-tenderloin: don't use get_kernelversion_modules function a=
-nd adapt to multiple kernel image types changes
-not included in master yet:=20
-
-
---p4qYPpj5QlsIQJ0K
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWLWU5gAKCRA3VSO3ZXaA
-HDhnAJ4uMsXKpCagrMAnl8AqzXT1HkcC+gCgtcA1KzTwImrNwXD/Ym5bq1r+ljE=
-=ArWh
------END PGP SIGNATURE-----
-
---p4qYPpj5QlsIQJ0K--
