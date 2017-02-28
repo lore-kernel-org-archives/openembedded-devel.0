@@ -1,41 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A72A72F6E;
-	Tue, 28 Feb 2017 09:19:43 +0000 (UTC)
-Received: by mail-wm0-f54.google.com with SMTP id v77so6452244wmv.0;
-	Tue, 28 Feb 2017 01:19:45 -0800 (PST)
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 70B8472F6E
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Feb 2017 09:22:34 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id v77so1316404wmv.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Feb 2017 01:22:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=TvzLB7ng4P4nwO2t1GkIUZdXgC9QG74W9aFrG9SH1A0=;
-	b=KsbXW6DhomRjEi7VQbkqNEBQ2rBSXbP7VgMsE+wSwIKNf+PNcBWd1oMWlknsT1hp1v
-	0rWGiYv9ihIvO78TD/UJEISCxvm6z5tGLTNO5a9ebANkU+CYnxTfXriIKqpYS0ld0QMc
-	nLgharNqwWHq76JNo2a2rKK7azOd8jict9WCuUsze4N+39SPoqNAI76EtITVDEWayrvv
-	+4yD+dE9VcvpX0OHmed9M4IhXfvjqcxsLtifTSc6EZT4E+fD2+2aGoGIJSDVjeIENNHf
-	dYQ9gd7sK8PczeOj9QANBVzUCG8s6Nd1DnX4ONLFvQa+cqLN01nSRvIMKn7vVIKlF9kT
-	d9rw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=I+bQbXjAi2MMAYtMSuqsguxSsbCtzFNiXgzWeQRxMw8=;
+	b=UyClrRyFwlo84t/ATMSpCFWCMf9jOjPP0+fAQvH0Ix0wl54pEeheqNTrvmDEoUxJDU
+	XlFl/t4KptKOnLLF3QO4JJSG6nkA0v9PPxe6yHg1arblKGDmIhB2FFCFpuqudGWXFCAR
+	R+VeLDW9DXPuf3bx4BQTaA1ptkcNckUUCUJEuE83K+Z0SSI06uNzHNGdNTLLCxdAbKdL
+	LkZGSdfpY4o3FsV7BhmOa+RhHrw8KaV7r1TDCKqFbGG8d+cUNbj4aK4jSVvbThmEQ5Us
+	Qgqwg3ugNG6c5+k1QqZtWp8qPDI3ZAuluUjQqbqNxs0cWsg99Wv6m38RMxa4/AV3ZV9k
+	RzUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=TvzLB7ng4P4nwO2t1GkIUZdXgC9QG74W9aFrG9SH1A0=;
-	b=CuEagGaDiNkz7szvw12TuhDdHNpUBDIUb5kgNH53btjS7lrJAZEpsVShKhlXPoCH91
-	8CjP/xEnpDR4Hpq2xKaIqiMmYa7/IAl3C93zGfSdE29jyZMuxrji6qeqwULlWVwR6n6c
-	cU1keI2arOSMtJCoX9HoXcr+0T1OjCeUKcDts2/cTQDqSsscAosqzi+AInsezDuYSvtz
-	p6D5wC2Mcj+G8dxi5ev2rPExJOpopNSjx/gorLmpTPCpsRq6xHDUeNHPUTpL7wQjA8n2
-	RJfqTVBVwJoeekj9tyB2xpxnr06leVz0hxr7OROi+kuGWqFRsn8WA4B3goW8U8YEahh7
-	NMmw==
-X-Gm-Message-State: AMke39l9lm/1tTx6wGN55qz2bXXwKf2nRZ0qMS43OsKSn0G83xx7brQRcECUkqqFZUmCRULPlGMCu8l8Ma0+3w==
-X-Received: by 10.28.211.80 with SMTP id k77mr15799477wmg.124.1488273584118;
-	Tue, 28 Feb 2017 01:19:44 -0800 (PST)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=I+bQbXjAi2MMAYtMSuqsguxSsbCtzFNiXgzWeQRxMw8=;
+	b=TJupVTH94kdhw+stPST9BNpQehEYq6KZHlsa5HrOYVLXq2amjad/ddGewOwD3fNCCy
+	mnOZDOGCKg2SHALxAF/4sbSvDFp/ZR3G3Qt9uzUFTUnFfNLuc2TPSrvoYN/0U7bac1mw
+	aihl/AuILISdLXbH5OkGB/q4a4ESKCeMD83Qu/RvEgltw4mdgIfS8x9Kj6gmqXv6DXc9
+	CalZJb+Old4ECYAyK6VZdQF3zof1dr5EBVt8MM/IalpZT+E8TE1ViqvgY3OIKlh8VpWl
+	DZKWx/Ai5c91Tn4Mfd/apqy2fwTvT2xyBnlro5zRhSGv+pEzr2HBX09+PsFaImIFPiIN
+	EDvg==
+X-Gm-Message-State: AMke39mmt6AlZkPzdKuOc2TzejNHFJNHtmhkWBbeIRA3rk5oQVUjZhbde7LT2+5amVEx6XIYBC7gdtu3KqozGQ==
+X-Received: by 10.28.211.80 with SMTP id k77mr15811906wmg.124.1488273755245;
+	Tue, 28 Feb 2017 01:22:35 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.80.145.24 with HTTP; Tue, 28 Feb 2017 01:19:43 -0800 (PST)
+Received: by 10.80.145.24 with HTTP; Tue, 28 Feb 2017 01:22:34 -0800 (PST)
+In-Reply-To: <1487975723-10180-1-git-send-email-derek@asterius.io>
+References: <1487975723-10180-1-git-send-email-derek@asterius.io>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 28 Feb 2017 10:19:43 +0100
-Message-ID: <CA+chaQcrhN=45kcVnR0Z4Y3whS5POQwBXzm+epUpx0sksxoBtg@mail.gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Tue, 28 Feb 2017 10:22:34 +0100
+Message-ID: <CA+chaQeS8Ld3S3mveAR7khLECbax-eGejUAEyL0vrPJrP8AH9w@mail.gmail.com>
+To: Derek Straka <derek@asterius.io>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: State of bitbake world, Failed tasks 2017-02-27
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] efivar: unblacklist package and those that depend on it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,187 +52,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2017 09:19:45 -0000
+X-List-Received-Date: Tue, 28 Feb 2017 09:22:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
-== Number of issues - stats ==
-{| class='wikitable'
-!|Date		     !!colspan='3'|Failed tasks			    !!colspan='6'|Failed
-depencencies			 !!|Signatures		  !!colspan='12'|QA !!Comment
-|-
-||		||qemuarm	||qemux86	||qemux86_64	||qemuarm||max||min	||qemux86||max||min	||all
-	||already-stripped	||libdir	||textrel	||build-deps	||file-rdeps	||version-going-backwards	||host-user-contaminated	||installed-vs-shipped	||unknown-configure-option	||symlink-to-sysroot	||invalid-pkgconfig	||pkgname	||
-|-
-||2017-02-27	||6	||6	||6	||N/A	||N/A	||N/A	||N/A	||N/A	||N/A	||0	||0		||0		||2		||0		||0		||200		||0		||0		||0		||0		||0		||0		||
-|}
-http://www.openembedded.org/wiki/Bitbake_World_Status
+It still doesn't build, recent log:
 
-== Failed tasks 2017-02-27 ==
+http://errors.yoctoproject.org/Errors/Details/134285/
 
-INFO: jenkins-job.sh-1.8.18 Complete log available at
-http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.report.20170227_231549.log
+probably missing pkgconfig inherit as above those undefined references to
+popt* it also shows:
 
-=== common (6) ===
-    * meta-openembedded/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.8.0.bb:do_compile
-    * meta-openembedded/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb:do_compile
-    * meta-openembedded/meta-ruby/recipes-devtools/ruby/bundler_git.bb:do_compile
-    * openembedded-core/meta/recipes-extended/parted/parted_3.2.bb:do_compile_ptest_base
-    * openembedded-core/meta/recipes-support/apr/apr_1.5.2.bb:do_compile_ptest_base
-    * virtual:native:meta-openembedded/meta-oe/recipes-extended/efivar/efivar_0.24.bb:do_compile
-
-=== common-x86 (0) ===
-
-=== qemuarm (0) ===
-
-=== qemux86 (0) ===
-
-=== qemux86_64 (0) ===
-
-=== Number of failed tasks (18) ===
-{| class=wikitable
-|-
-|| qemuarm 	|| 6	 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.world.qemuarm.20170227_040837.log/
-|| http://errors.yoctoproject.org/Errors/Build/32950/
-|-
-|| qemux86 	|| 6	 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.world.qemux86.20170227_004257.log/
-|| http://errors.yoctoproject.org/Errors/Build/32951/
-|-
-|| qemux86_64 	|| 6	 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.world.qemux86-64.20170227_132712.log/
-|| http://errors.yoctoproject.org/Errors/Build/32973/
-|}
-
-=== PNBLACKLISTs (350) ===
-
-=== QA issues (202) ===
-{| class=wikitable
-!| Count		||Issue
-|-
-||0	||already-stripped
-|-
-||0	||build-deps
-|-
-||0	||file-rdeps
-|-
-||0	||host-user-contaminated
-|-
-||0	||installed-vs-shipped
-|-
-||0	||invalid-pkgconfig
-|-
-||0	||libdir
-|-
-||0	||pkgname
-|-
-||0	||symlink-to-sysroot
-|-
-||0	||unknown-configure-option
-|-
-||200	||version-going-backwards
-|-
-||2	||textrel
-|}
+/bin/sh: 1: pkg-config: not found
+/bin/sh: 1: pkg-config: not found
 
 
+On Fri, Feb 24, 2017 at 11:35 PM, Derek Straka <derek@asterius.io> wrote:
 
-=== Incorrect PACKAGE_ARCH or sstate signatures (0) ===
-
-Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.signatures.20170227_070558.log/
-
-No issues detected
-
-
-== Tested changes (not included in master yet) - bitbake ==
-latest upstream commit:
-5b364b0 fetch2/svn: change 'rsh' parameter to 'ssh'
-not included in master yet:
-ee30425 world-image: add extra target
-
-== Tested changes (not included in master yet) - openembedded-core ==
-
-latest upstream commit:
-65cfc8a libva: Find the correct wayland-scanner
-not included in master yet:
-e391f58 qemux86: Add identical qemux86copy variant for tests
-6d33fc3 sstate-sysroot-cruft.sh: Extend the whitelist
-0de471f recipes: Replace "cp -a" with "cp -R --no-dereference
---preserve=mode,links"
-f0f6112 buildhistory.bbclass: metadata-revs show repo parent
-ade2954 metadata-revs: provide more information
-c5e658a report-error: Allow to upload reports automatically
-63e44e5 flex: upgrade to 2.6.3
-edfb18a Revert "flex: upgrade to 2.6.3"
-3d6b996 Revert "flex: upgrade to 2.6.2"
-ce5cb55 qemu: fix build with glibc-2.25
-ea1f3b4 e2fsprogs: Fix build with glibc-2.25
-7f249b3 parted: fix build with glibc-2.25
-830df85 syslinux: fix build with glibc-2.25
-
-== Tested changes (not included in master yet) - meta-openembedded ==
-
-latest upstream commit:
-05aefd1 openct: Replace /lib/udev with ${nonarch_base_libdir}/udev.
-not included in master yet:
-710ff64 netcat-openbsd: fix implicit dependency on pkg-config
-b113645 inetutils: Move files only when src != dst.
-d2f2522 ebtables: Move files only when src != dst.
-4381e64 netcf_git: Check if src != dst while moving files.
-aaf09a6 Revert "Samba: use built-in libtevent"
-4010fd9 python3-cassandra-driver: update to version 3.8.0
-9af7bac python-bcrypt: update to version 3.1.3
-0c36959 abiword: fix build and unblacklist
-18e54c0 python-ldap: remove obsolete recipe
-6798e4b python-ldap: update to version 2.4.32
-131fcc2 python-slip-dbus: update to version 0.6.1
-60efb4b python-django: update to version 1.10.5
-f8d852e python-pyalsaaudio: update to version 0.8.3
-e123e01 python-gdata: update to version 2.0.18
-4816c64 Update UPSTREAM_CHECK variables to allow for version checking
-cecf1dc collect: fix to build with glibc 2.25
-b3e385c multipath-tools: Replace 'lib' with ${nonarch_base_libdir} for
-placing udev rules.
-e989b9a apache-websocket: add depend on pbzip2-native
-0c46505 bundler: resolve build issues with RSS
-df2b829 netdata: update DEPENDS to fix RSS build error
-e16c3f6 usb-modeswitch: update inherit to work correctly with RSS
-0dbe078 syslog-ng: update inherit to work correctly with RSS
-5e1f391 xfsprogs: update depends to work correctly with RSS
-3b988b0 ipmiutil: fix depends to work correctly with RSS
-9114707 efivar: unblacklist package and those that depend on it
-fa3cd65 mosh: update inherit to work correctly with RSS
-8e73142 font-adobe-100dpi: update depends to fix builds with RSS
-b2f14ff font-adobe-utopia-100dpi: update depends to fix builds with RSS
-42d19a4 font-misc-misc: update depends to fix builds with RSS
-78c0dde font-bh-lucidatypewriter-100dpi: update depends to fix builds with RSS
-b89e109 font-bh-100dpi: update depends to fix builds with RSS
-7019a1f system-config-keyboard: fix depends to work correctly with RSS
-14ca28a nginx: update to version 1.11.10
-
-== Tested changes (not included in master yet) - meta-qt5 ==
-
-latest upstream commit:
-61c0250 qtbase-native: nativesdk-qtbase: remove patch that breaks
-mkspec setting for SDK
-not included in master yet:
-595e9cf qtbase: remove absolute binary paths from mkspec files
-
-== Tested changes (not included in master yet) - meta-browser ==
-latest upstream commit:
-021a954 chromium-browser: add missing dependency on gperf-native
-not included in master yet:
-a9dd704 chromium: disable generate_character_data for x86
-
-== Tested changes (not included in master yet) - meta-webos-ports ==
-
-latest upstream commit:
-7c4309b packagegroup-luneos-extended: drop qtscenegraph-adaptation
-not included in master yet:
-
-== Tested changes (not included in master yet) - meta-smartphone ==
-latest upstream commit:
-df77c54 linux-hp-tenderloin: don't use get_kernelversion_modules
-function and adapt to multiple kernel image types changes
-not included in master yet:
+> The package appears to build without modification
+>
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+>  meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb | 4 ----
+>  meta-oe/recipes-extended/efivar/efivar_0.24.bb         | 3 ---
+>  2 files changed, 7 deletions(-)
+>
+> diff --git a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
+> b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
+> index f2b9454..b25cfca 100644
+> --- a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
+> +++ b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
+> @@ -25,7 +25,3 @@ EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS}
+> -I${S}/src/include `pkg-config --cf
+>  do_install () {
+>      install -D -p -m0755 src/efibootmgr ${D}/${sbindir}/efibootmgr
+>  }
+> -
+> -
+> -
+> -PNBLACKLIST[efibootmgr] ?= "Depends on blacklisted efivar"
+> diff --git a/meta-oe/recipes-extended/efivar/efivar_0.24.bb
+> b/meta-oe/recipes-extended/efivar/efivar_0.24.bb
+> index 4c7793f..f641a30 100644
+> --- a/meta-oe/recipes-extended/efivar/efivar_0.24.bb
+> +++ b/meta-oe/recipes-extended/efivar/efivar_0.24.bb
+> @@ -40,6 +40,3 @@ do_install_append_class-native() {
+>  }
+>
+>  BBCLASSEXTEND = "native"
+> -
+> -
+> -PNBLACKLIST[efivar] ?= "Fails to build with RSS
+> http://errors.yoctoproject.org/Errors/Details/132821/"
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
