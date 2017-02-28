@@ -1,49 +1,51 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id CBCED72F70
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 03F2472FC4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2017 15:56:12 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1488297374; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=48cWtJqmYe2kDG68HolFr6/HbJVZr1wRYQ1z4LR/fjA=;
-	b=Ab/4VqHo/kvsn+inymHl4VzYmbtHYWvye5IxbAMHXlZU5SARVomF9I+KB93zd7jox9SnPuAn
-	+LXWTWuJi40P45ZeEQJhu+brWIi8igaBec3iEnm/Mk2Kt3XWftNY4UwrWKnKBcpqN6m4vGZt
-	J460p+Miu1qin8wroORF/GswwjM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
-	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
-	Message-ID: Subject: To: Cc: Content-Type;
-	b=VTrj2yN1EsYlz0XsIaEbaKhvtCqLduPtku5CxA7r6ALhpHe+wmuWyO8nSZqX6XSvhxbhet
-	u2khGBNkp+i12f6Sx/dNEQcPjlD0UB2SDPSEgnHYQkSC6IB/Dt0w0NDXgk44sqJkUDS9S5Bu
-	5JzD6WzhY5gOnhnAYmSo8Nn6GLXFU=
-Sender: derek@asterius.io
-X-Mailgun-Sending-Ip: 104.130.122.4
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Received: from mail-it0-f53.google.com (mail-it0-f53.google.com
-	[209.85.214.53])
-	by mxa.mailgun.org with ESMTP id 58b59d9d.7f8ed05b2af0-smtp-out-n03;
-	Tue, 28 Feb 2017 15:56:13 -0000 (UTC)
-Received: by mail-it0-f53.google.com with SMTP id y135so1859325itc.1
+	Tue, 28 Feb 2017 16:27:17 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id l37so2259656wrc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2017 07:56:13 -0800 (PST)
-X-Gm-Message-State: AMke39nsNGVGzOZnC+wRFPCQ3qEIncq3IHBUz8iPRTlSmj+OJ8GHw2IdDbeZDRpXa+BuG0TJS5t0ndsOOYwc0w==
-X-Received: by 10.36.82.22 with SMTP id d22mr3691665itb.0.1488297372697; Tue,
-	28 Feb 2017 07:56:12 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.107.156.85 with HTTP; Tue, 28 Feb 2017 07:56:12 -0800 (PST)
-In-Reply-To: <741960ebbae947bd8fa4297e4f60cd88@XBOX02.axis.com>
-References: <1487973264-29272-1-git-send-email-derek@asterius.io>
-	<CA+chaQdjpaUPga2h0rN8BFdjsubgrc8M+LxQhJ0K0cQ6FXJaog@mail.gmail.com>
-	<741960ebbae947bd8fa4297e4f60cd88@XBOX02.axis.com>
-From: Derek Straka <derek@asterius.io>
-Date: Tue, 28 Feb 2017 10:56:12 -0500
-X-Gmail-Original-Message-ID: <CADNbA1rWZhyFBGEQaeAJo19CFLkZ51KZ8ESourT+yM7H06vdZQ@mail.gmail.com>
-Message-ID: <CADNbA1rWZhyFBGEQaeAJo19CFLkZ51KZ8ESourT+yM7H06vdZQ@mail.gmail.com>
+	Tue, 28 Feb 2017 08:27:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=iId3uSSp/ePG19o8f99KFx+H+It1zfMB3CVzInhkFCI=;
+	b=RacV8OIOnb7MgzrGibpHcGxrgYZeYY8RqYfQwBaN9exm8fvu+hJujpGlZ7PtJztRz7
+	jLeXLQOB+fvO3iOt0XbC+Il/0ky3LyNtR+1eD3E2j4sfeOUaYW+udVtAo0iZ4cUBlor8
+	f6wlA3pe7bf4EEbT0dWRRb7SN7a+aydBMnZ0EvPsTZhoXwA4S1N40SQdPbffPthOpWCS
+	AA+7eakDJ5Ft+lcF9UP8cWl2wfFCehMeoWOyIpcEandMQlqyaCYlbTasvetP/K24iu5y
+	aYO2jv3e4JnO1OUbeOv+6c+N2UiolHZTGbCasQcvv+TboIQbli573PMLD/RsoXEN80OT
+	BrQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=iId3uSSp/ePG19o8f99KFx+H+It1zfMB3CVzInhkFCI=;
+	b=gecmIpY9DvwVSC8aSxVwyPMM/NdHGbZ1kEBx9i+nbrgrsvA9N3tuVNMlveBd1F0HLJ
+	9wud5JJnqgG+tMBCuLMlyQUwYoy+r5bEKRJ90JtyoWIZj/rohbCftnKdQ5wQ0KUF7CxS
+	f6uRxhMSoah4mV04mCFBd6x8znotXzm9wFrF2QOb4isFCw2fRtOVNodbwYQkFOoQ0nFo
+	g/wEgLCP4dmVGJzIJcp10IWO0qFOLyduTS1owl2BPR+2lWSf1pY+UNz/zqHLTSUNn/vF
+	tQBli/NTeS4ukzEYo0YYDLFWqrq39wzO0Bp58fTMI5xFBOrZeNVg2zQaza4AuG1+UKxR
+	DLdg==
+X-Gm-Message-State: AMke39kBbSI44aAsp5l/qTwzQc1hQceDyZ06gMa4sefEbWFz390VrM1DChTNmN8MWi0Isg==
+X-Received: by 10.223.139.83 with SMTP id v19mr2980929wra.142.1488299238417;
+	Tue, 28 Feb 2017 08:27:18 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	v18sm2973016wrc.41.2017.02.28.08.27.16
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 28 Feb 2017 08:27:16 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 28 Feb 2017 17:27:20 +0100
 To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] syslog-ng: update inherit to work correctly with RSS
+Message-ID: <20170228162720.GC3275@jama>
+References: <20170228155405.15144-1-pkj@axis.com>
+MIME-Version: 1.0
+In-Reply-To: <20170228155405.15144-1-pkj@axis.com>
+User-Agent: Mutt/1.8.0 (2017-02-23)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/2] syslog-ng: Run autoreconf twice to avoid problems with libtool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,81 +58,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2017 15:56:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 28 Feb 2017 16:27:18 -0000
+X-Groupsio-MsgNum: 65612
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="B4IIlcmfBL/1gGOG"
+Content-Disposition: inline
 
-This patch can been dropped and we can use Peter's update instead.
+--B4IIlcmfBL/1gGOG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 28, 2017 at 10:33 AM, Peter Kjellerstedt <
-peter.kjellerstedt@axis.com> wrote:
+On Tue, Feb 28, 2017 at 04:54:04PM +0100, Peter Kjellerstedt wrote:
+> syslog-ng has sub-projects with their own autotools configurations.
+> Something has been messed up after the switch to RSS and now it
+> requires autoreconf to be run twice to fully update all files.
+>=20
+> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+> ---
+>  meta-oe/recipes-support/syslog-ng/syslog-ng.inc      | 11 ++++++++++-
+>  meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb |  2 --
+>  2 files changed, 10 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/re=
+cipes-support/syslog-ng/syslog-ng.inc
+> index 21d1748..a5e1bfe 100644
+> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> @@ -22,7 +22,7 @@ SRC_URI =3D "http://www.balabit.com/downloads/files/sys=
+log-ng/sources/${PV}/source
+>             file://configure.ac-add-option-enable-thread-tls-to-manage-.p=
+atch \
+>  "
+> =20
+> -inherit autotools systemd pkgconfig update-rc.d
+> +inherit autotools gettext systemd pkgconfig update-rc.d
+> =20
+>  EXTRA_OECONF =3D " \
+>      --enable-dynamic-linking \
+> @@ -55,6 +55,15 @@ PACKAGECONFIG[json] =3D "--enable-json,--disable-json,=
+json-c,"
+>  PACKAGECONFIG[tcp-wrapper] =3D "--enable-tcp-wrapper,--disable-tcp-wrapp=
+er,tcp-wrappers,"
+>  PACKAGECONFIG[geoip] =3D "--enable-geoip,--disable-geoip,geoip,"
+> =20
+> +do_configure_prepend() {
+> +	olddir=3D$(pwd)
+> +	cd ${AUTOTOOLS_SCRIPT_PATH}
+> +
+> +	ACLOCAL=3D"$ACLOCAL" autoreconf -Wcross --verbose --install --force ${E=
+XTRA_AUTORECONF} -I ${S}/m4 ${ACLOCALEXTRAPATH} || die "extra autoreconf ex=
+ecution failed."
+> +
+> +	cd $olddir
 
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> > Martin Jansa
-> > Sent: den 28 februari 2017 10:24
-> > To: Derek Straka
-> > Cc: openembedded-devel
-> > Subject: Re: [oe] [meta-oe][PATCH] syslog-ng: update inherit to work
-> > correctly with RSS
-> >
-> > Now it complains about libtool version :/
-> >
-> > http://errors.yoctoproject.org/Errors/Details/134288/
->
-> I have a solution for this where it executes autoreconf twice
-> to make it work. I do not really know why that is necessary, or
-> why it changed with RSS, but at least it seems to work. syslog-ng
-> has sub-projects with their own autotools files, and that has
-> probably got something to do with it...
->
-> I will also include an update to version 3.8.1 that I have been
-> meaning to provide for a while now.
->
-> > On Fri, Feb 24, 2017 at 10:54 PM, Derek Straka <derek@asterius.io>
-> > wrote:
-> >
-> > > Resolves build issue exposed by RSS
-> > > http://errors.yoctoproject.org/Errors/Details/130631/
-> > >
-> > > Signed-off-by: Derek Straka <derek@asterius.io>
-> > > ---
-> > >  meta-oe/recipes-support/syslog-ng/syslog-ng.inc      | 2 +-
-> > >  meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb | 2 --
-> > >  2 files changed, 1 insertion(+), 3 deletions(-)
-> > >
-> > > diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> > > index 21d1748..0dbcc6e 100644
-> > > --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> > > +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-> > > @@ -22,7 +22,7 @@ SRC_URI = "http://www.balabit.com/
-> downloads/files/syslog-ng/sources/${PV}/source
-> > >             file://configure.ac-add-option-enable-thread-tls-to-manage-.patch
-> \
-> > >  "
-> > >
-> > > -inherit autotools systemd pkgconfig update-rc.d
-> > > +inherit autotools gettext systemd pkgconfig update-rc.d
-> > >
-> > >  EXTRA_OECONF = " \
-> > >      --enable-dynamic-linking \
-> > > diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-> b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-> > > index bee1e19..73609af 100644
-> > > --- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-> > > +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
-> > > @@ -13,5 +13,3 @@ SRC_URI += " \
-> > >
-> > >  SRC_URI[md5sum] = "e9f401615e92e5eb27396c995c1446ba"
-> > >  SRC_URI[sha256sum] = "7be11df31ac7d716f1f952e22b5ae8
-> e2049edd633a41b223776a853d9106f4e7"
-> > > -
-> > > -PNBLACKLIST[syslog-ng] ?= "Fails to build with RSS
-> http://errors.yoctoproject.org/Errors/Details/130631/"
-> > > --
-> > > 2.7.4
->
-> //Peter
->
+Please don't use tabs, all layers except oe-core are using 4 spaces for
+indentation.
 
+> +}
+> +
+>  do_install_prepend() {
+>      sed -i -e 's,@SBINDIR@,${sbindir},g' ${S}/contrib/systemd/*.service
+>      sed -i -e 's,@LOCALSTATEDIR@,${localstatedir},g' ${S}/contrib/system=
+d/*.service
+> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb b/meta-=
+oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
+> index bee1e19..73609af 100644
+> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
+> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
+> @@ -13,5 +13,3 @@ SRC_URI +=3D " \
+> =20
+>  SRC_URI[md5sum] =3D "e9f401615e92e5eb27396c995c1446ba"
+>  SRC_URI[sha256sum] =3D "7be11df31ac7d716f1f952e22b5ae8e2049edd633a41b223=
+776a853d9106f4e7"
+> -
+> -PNBLACKLIST[syslog-ng] ?=3D "Fails to build with RSS http://errors.yocto=
+project.org/Errors/Details/130631/"
+> --=20
+> 2.9.0
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--B4IIlcmfBL/1gGOG
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWLWk5wAKCRA3VSO3ZXaA
+HEX1AJ9UIigSQXaqdQaCE6blDYX6WFnqtACfXwxNxWwl4jzHhU903rVaHoJ7N18=
+=BfBo
+-----END PGP SIGNATURE-----
+
+--B4IIlcmfBL/1gGOG--
