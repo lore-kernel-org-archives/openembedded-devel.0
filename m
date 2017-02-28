@@ -1,45 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 70B8472F6E
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 52B0072F6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2017 09:22:34 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id v77so1316404wmv.0
+	Tue, 28 Feb 2017 09:23:53 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id m70so1323669wma.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2017 01:22:35 -0800 (PST)
+	Tue, 28 Feb 2017 01:23:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=I+bQbXjAi2MMAYtMSuqsguxSsbCtzFNiXgzWeQRxMw8=;
-	b=UyClrRyFwlo84t/ATMSpCFWCMf9jOjPP0+fAQvH0Ix0wl54pEeheqNTrvmDEoUxJDU
-	XlFl/t4KptKOnLLF3QO4JJSG6nkA0v9PPxe6yHg1arblKGDmIhB2FFCFpuqudGWXFCAR
-	R+VeLDW9DXPuf3bx4BQTaA1ptkcNckUUCUJEuE83K+Z0SSI06uNzHNGdNTLLCxdAbKdL
-	LkZGSdfpY4o3FsV7BhmOa+RhHrw8KaV7r1TDCKqFbGG8d+cUNbj4aK4jSVvbThmEQ5Us
-	Qgqwg3ugNG6c5+k1QqZtWp8qPDI3ZAuluUjQqbqNxs0cWsg99Wv6m38RMxa4/AV3ZV9k
-	RzUQ==
+	:cc; bh=soIm8kD1pVMG670hOsQRjSiLmRPI6HXs/w22LqY0kxA=;
+	b=UotAAoI5ftJsbUcdpiL5NHsY9KFKUo29gFN95QCN9OmOI6AApkIdM8To068Kp49/Si
+	REcLvwMqmiXXJ0tL/qSMg/7qe3L9xPry+h9/aWK2UQiBu8no2+mvf+arKd8mPcf0QbMi
+	9ha1k6y5KbQzUV1v5mCINizHbz+FEuGQbGYEXJojW4TDP5sh4tAfs3gZleMkgMryK6gj
+	k377w7m8SCwYFFg54BT7qX+UuO8vHf4P7apt6E92XB98mrzZqWwXgeIR65LT5jlzOe/A
+	j/fUQRITxIL9McsQOB5fwfFYiLpJeG07bx4ufKFIyUI2huIFjQNv0kjGkg2gQS34Awzl
+	gPWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=I+bQbXjAi2MMAYtMSuqsguxSsbCtzFNiXgzWeQRxMw8=;
-	b=TJupVTH94kdhw+stPST9BNpQehEYq6KZHlsa5HrOYVLXq2amjad/ddGewOwD3fNCCy
-	mnOZDOGCKg2SHALxAF/4sbSvDFp/ZR3G3Qt9uzUFTUnFfNLuc2TPSrvoYN/0U7bac1mw
-	aihl/AuILISdLXbH5OkGB/q4a4ESKCeMD83Qu/RvEgltw4mdgIfS8x9Kj6gmqXv6DXc9
-	CalZJb+Old4ECYAyK6VZdQF3zof1dr5EBVt8MM/IalpZT+E8TE1ViqvgY3OIKlh8VpWl
-	DZKWx/Ai5c91Tn4Mfd/apqy2fwTvT2xyBnlro5zRhSGv+pEzr2HBX09+PsFaImIFPiIN
-	EDvg==
-X-Gm-Message-State: AMke39mmt6AlZkPzdKuOc2TzejNHFJNHtmhkWBbeIRA3rk5oQVUjZhbde7LT2+5amVEx6XIYBC7gdtu3KqozGQ==
-X-Received: by 10.28.211.80 with SMTP id k77mr15811906wmg.124.1488273755245;
-	Tue, 28 Feb 2017 01:22:35 -0800 (PST)
+	bh=soIm8kD1pVMG670hOsQRjSiLmRPI6HXs/w22LqY0kxA=;
+	b=M5zboC7dxijyTeehhm9Gm4NtuRPzBkhRtDKbzWNi2Gd7J2LVjMJtg/E8CImuzhoLPz
+	s6vd8vCXLLJGeOqZSGu4oBAFNk7M7HfMq+pGJLGFaFYBHF6ay6WqqjLVQVZCXdmTk7ED
+	O4j/imUQJ6F+yDjxYeJx5m5XdcwMwOtj2d7kvMRhR9nZpRCO5/hxXaSJq6MTXrir5FQW
+	frniIKjY88z1IH1opGGmJ1UYsxuPcBle+/cMUONVHyijSJmUCDHttkX58yGxJ2WY0X/+
+	lXqlYW/kD6UW247O1lWh9hNaHcjtcs+MbMxLylR9BVa1KUh3T229yZ43PNApwM4rXcOS
+	XRSw==
+X-Gm-Message-State: AMke39mWYar+NAIevDU7udFdE6+FLAAjAz+BvDzcmsouW/yEFZZWh7SBfb8gZ1gEoZ1CMHg6qyn1I4x8DLKejQ==
+X-Received: by 10.28.74.69 with SMTP id x66mr1420142wma.124.1488273835053;
+	Tue, 28 Feb 2017 01:23:55 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.80.145.24 with HTTP; Tue, 28 Feb 2017 01:22:34 -0800 (PST)
-In-Reply-To: <1487975723-10180-1-git-send-email-derek@asterius.io>
-References: <1487975723-10180-1-git-send-email-derek@asterius.io>
+Received: by 10.80.145.24 with HTTP; Tue, 28 Feb 2017 01:23:54 -0800 (PST)
+In-Reply-To: <1487973264-29272-1-git-send-email-derek@asterius.io>
+References: <1487973264-29272-1-git-send-email-derek@asterius.io>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 28 Feb 2017 10:22:34 +0100
-Message-ID: <CA+chaQeS8Ld3S3mveAR7khLECbax-eGejUAEyL0vrPJrP8AH9w@mail.gmail.com>
+Date: Tue, 28 Feb 2017 10:23:54 +0100
+Message-ID: <CA+chaQdjpaUPga2h0rN8BFdjsubgrc8M+LxQhJ0K0cQ6FXJaog@mail.gmail.com>
 To: Derek Straka <derek@asterius.io>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] efivar: unblacklist package and those that depend on it
+Subject: Re: [meta-oe][PATCH] syslog-ng: update inherit to work correctly with RSS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,57 +52,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2017 09:22:35 -0000
+X-List-Received-Date: Tue, 28 Feb 2017 09:23:54 -0000
 Content-Type: text/plain; charset=UTF-8
 
-It still doesn't build, recent log:
+Now it complains about libtool version :/
 
-http://errors.yoctoproject.org/Errors/Details/134285/
+http://errors.yoctoproject.org/Errors/Details/134288/
 
-probably missing pkgconfig inherit as above those undefined references to
-popt* it also shows:
+On Fri, Feb 24, 2017 at 10:54 PM, Derek Straka <derek@asterius.io> wrote:
 
-/bin/sh: 1: pkg-config: not found
-/bin/sh: 1: pkg-config: not found
-
-
-On Fri, Feb 24, 2017 at 11:35 PM, Derek Straka <derek@asterius.io> wrote:
-
-> The package appears to build without modification
+> Resolves build issue exposed by RSS
+> http://errors.yoctoproject.org/Errors/Details/130631/
 >
 > Signed-off-by: Derek Straka <derek@asterius.io>
 > ---
->  meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb | 4 ----
->  meta-oe/recipes-extended/efivar/efivar_0.24.bb         | 3 ---
->  2 files changed, 7 deletions(-)
+>  meta-oe/recipes-support/syslog-ng/syslog-ng.inc      | 2 +-
+>  meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb | 2 --
+>  2 files changed, 1 insertion(+), 3 deletions(-)
 >
-> diff --git a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
-> b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
-> index f2b9454..b25cfca 100644
-> --- a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
-> +++ b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
-> @@ -25,7 +25,3 @@ EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS}
-> -I${S}/src/include `pkg-config --cf
->  do_install () {
->      install -D -p -m0755 src/efibootmgr ${D}/${sbindir}/efibootmgr
->  }
-> -
-> -
-> -
-> -PNBLACKLIST[efibootmgr] ?= "Depends on blacklisted efivar"
-> diff --git a/meta-oe/recipes-extended/efivar/efivar_0.24.bb
-> b/meta-oe/recipes-extended/efivar/efivar_0.24.bb
-> index 4c7793f..f641a30 100644
-> --- a/meta-oe/recipes-extended/efivar/efivar_0.24.bb
-> +++ b/meta-oe/recipes-extended/efivar/efivar_0.24.bb
-> @@ -40,6 +40,3 @@ do_install_append_class-native() {
->  }
+> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> index 21d1748..0dbcc6e 100644
+> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+> @@ -22,7 +22,7 @@ SRC_URI = "http://www.balabit.com/
+> downloads/files/syslog-ng/sources/${PV}/source
+>             file://configure.ac-add-option-enable-thread-tls-to-manage-.patch
+> \
+>  "
 >
->  BBCLASSEXTEND = "native"
+> -inherit autotools systemd pkgconfig update-rc.d
+> +inherit autotools gettext systemd pkgconfig update-rc.d
+>
+>  EXTRA_OECONF = " \
+>      --enable-dynamic-linking \
+> diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
+> b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
+> index bee1e19..73609af 100644
+> --- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
+> +++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.6.4.bb
+> @@ -13,5 +13,3 @@ SRC_URI += " \
+>
+>  SRC_URI[md5sum] = "e9f401615e92e5eb27396c995c1446ba"
+>  SRC_URI[sha256sum] = "7be11df31ac7d716f1f952e22b5ae8
+> e2049edd633a41b223776a853d9106f4e7"
 > -
-> -
-> -PNBLACKLIST[efivar] ?= "Fails to build with RSS
-> http://errors.yoctoproject.org/Errors/Details/132821/"
+> -PNBLACKLIST[syslog-ng] ?= "Fails to build with RSS
+> http://errors.yoctoproject.org/Errors/Details/130631/"
 > --
 > 2.7.4
 >
