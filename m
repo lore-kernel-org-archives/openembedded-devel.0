@@ -1,50 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 51E3372F8F
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id A447560068
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2017 11:38:11 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id v77so1899180wmv.0
+	Tue, 28 Feb 2017 13:35:29 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1488288929; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=avfcdn9licicLhyL7KVQJ1XuIaJreRhmKJylCqKmM3s=;
+	b=TKQuEFSdzXyA3ad2pBcJ7TV6DAJQRqgLiEcE+rX5QZGHGKUJ7Av/ahfXJL6uGWkzWW65SI4s
+	yHqn8kaT9H4jsxTmGBZdZkuQzkDgAgEFZ0lmcQV8Scw/Ingj4dWXdAbn5cKLsdtyORraVFPN
+	s1IdVvOOdXIFRfBxeiYIU+rVqDg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
+	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
+	Message-ID: Subject: To: Cc: Content-Type;
+	b=XRJrme8C15s0bpNxU84+UtzmejNQC9ixUTATlD/+OOwdjJ15ac6R+wTqMUxt7SolIPte+U
+	HsgZJ8nu0MRhKG3UhTlcTHPfPZnFRa9aS5a/musc3jM8p5y5w8j5lMVvjn42boqbWaOrqXRP
+	WaZejFKr6k/9IP1ZiiQFI8kbUnSNE=
+Sender: derek@asterius.io
+X-Mailgun-Sending-Ip: 104.130.122.4
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Received: from mail-io0-f180.google.com (mail-io0-f180.google.com
+	[209.85.223.180])
+	by mxa.mailgun.org with ESMTP id 58b57ca0.7f6dd0726cb0-smtp-out-n01;
+	Tue, 28 Feb 2017 13:35:28 -0000 (UTC)
+Received: by mail-io0-f180.google.com with SMTP id l7so9143573ioe.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2017 03:38:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=UHQ/EJ/ChunMJAltqyLmSrIUbQPQ/3RCurzbvv79WC8=;
-	b=tzA/vR8sKcZuTVPSexFJyEFfCzfSBiRDVpgFaqR7gNEz1YS0Ev28WVpjJTr/y2vkVn
-	mp/WRpE9k4ZMarN6bMGAakOMkJhaQbO0UOTTXyf7q1j1fuMTaavwjETVshb+Ft1ghQYp
-	lTZjInK+h/60dfTUA6Ae12L+g5SVSzRIZIk0mQaXGOVNGda/JH/n2e3WGjM+wKcxnAaL
-	8f5yVDbyBCDqTDZ+ynZm44g5p0KKTdg78JeKJuR0hpKU2F9QdmaWA/hZXNSblILqb0zp
-	zgq8zlKtOeVbaLGSUtny/ZZcfAzxK2wwLRTcrOLE8UvZmyLu+Q4AZybkLPOODy8fhmeS
-	K2rg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=UHQ/EJ/ChunMJAltqyLmSrIUbQPQ/3RCurzbvv79WC8=;
-	b=VcOkL3LN/Hv8kxCAmE0ThTBOmUPa0p57bdMw+YjBl8fD6cGcaEtPvhzC5rSpDqhzUh
-	Q2PY5BVFkMi0nWKkDaLwhfB5avyPeGrAcXIhWMEXYFXfpQQ5qWUwFb3xoGwe4CHhMZoO
-	I1or15a//VQ7ogtqzMMybOdOlokL1ntga7loT8TbMmg5o3ucAPpQMR3rKdp4L4ZIgfEg
-	aVHVkIhoOM3/SuR+1GIa1COgXuw4h/SCGF33S36+IApCWBOyu47Pw5lzD74F5zDzSgVy
-	rdGumcQ4JxAuSuQDiVc9zCCgJDLvRKlouHAMkFmUCXWRaynJY7rWj1/trUj6a9RiegqJ
-	XYnA==
-X-Gm-Message-State: AMke39msVqAsyOqp8bV9dLKTNgXqkSWcFJvcHXk4mPurFvLchY5xuFQwswS21tGZ323WZw==
-X-Received: by 10.28.167.68 with SMTP id q65mr2144219wme.126.1488281892588;
-	Tue, 28 Feb 2017 03:38:12 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	h75sm1938032wrh.37.2017.02.28.03.38.10
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 28 Feb 2017 03:38:10 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 28 Feb 2017 12:38:14 +0100
-To: Tom Hayward <tom@harbortronics.com>
-Message-ID: <20170228113814.GA3275@jama>
-References: <1488234393-129769-1-git-send-email-tom@harbortronics.com>
+	Tue, 28 Feb 2017 05:35:28 -0800 (PST)
+X-Gm-Message-State: AMke39mcdASwW8JD9MHLOZByLddjpzgwOSu+RhboLLX5e9MpWvLy0UbPCX73C9OCaByk5VyYfk6u7dainES9cg==
+X-Received: by 10.107.169.201 with SMTP id f70mr3052457ioj.161.1488288927826; 
+	Tue, 28 Feb 2017 05:35:27 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <1488234393-129769-1-git-send-email-tom@harbortronics.com>
-User-Agent: Mutt/1.8.0 (2017-02-23)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] usb-modeswitch and usb-modeswitch-data: update to 2.5.0 and 20170205 respectively.
+Received: by 10.107.156.85 with HTTP; Tue, 28 Feb 2017 05:35:27 -0800 (PST)
+In-Reply-To: <CA+chaQeS8Ld3S3mveAR7khLECbax-eGejUAEyL0vrPJrP8AH9w@mail.gmail.com>
+References: <1487975723-10180-1-git-send-email-derek@asterius.io>
+	<CA+chaQeS8Ld3S3mveAR7khLECbax-eGejUAEyL0vrPJrP8AH9w@mail.gmail.com>
+From: Derek Straka <derek@asterius.io>
+Date: Tue, 28 Feb 2017 08:35:27 -0500
+X-Gmail-Original-Message-ID: <CADNbA1pFu3LZ7dH2NknHnGFJrW-gHM57DreC6==JfiQsaNrF8Q@mail.gmail.com>
+Message-ID: <CADNbA1pFu3LZ7dH2NknHnGFJrW-gHM57DreC6==JfiQsaNrF8Q@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] efivar: unblacklist package and those that depend on it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,130 +55,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2017 11:38:14 -0000
-X-Groupsio-MsgNum: 65597
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="zYM0uCDKw75PZbzx"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 28 Feb 2017 13:35:29 -0000
+Content-Type: text/plain; charset=UTF-8
 
---zYM0uCDKw75PZbzx
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Ah, I see why they were building on my box and failing here; I hadn't
+updated oe-core in a while so I didn't have the latest RSS changes.  I'll
+get v2's up for these patch sets
 
-On Mon, Feb 27, 2017 at 02:26:33PM -0800, Tom Hayward wrote:
-> ---
+On Tue, Feb 28, 2017 at 4:22 AM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
 
-You cannot just remove PNBLACKLISTs without fixing the issues in the
-recipe.
+> It still doesn't build, recent log:
+>
+> http://errors.yoctoproject.org/Errors/Details/134285/
+>
+> probably missing pkgconfig inherit as above those undefined references to
+> popt* it also shows:
+>
+> /bin/sh: 1: pkg-config: not found
+> /bin/sh: 1: pkg-config: not found
+>
+>
+> On Fri, Feb 24, 2017 at 11:35 PM, Derek Straka <derek@asterius.io> wrote:
+>
+>> The package appears to build without modification
+>>
+>> Signed-off-by: Derek Straka <derek@asterius.io>
+>> ---
+>>  meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb | 4 ----
+>>  meta-oe/recipes-extended/efivar/efivar_0.24.bb         | 3 ---
+>>  2 files changed, 7 deletions(-)
+>>
+>> diff --git a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
+>> b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
+>> index f2b9454..b25cfca 100644
+>> --- a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
+>> +++ b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
+>> @@ -25,7 +25,3 @@ EXTRA_OEMAKE = "'CC=${CC}' 'CFLAGS=${CFLAGS}
+>> -I${S}/src/include `pkg-config --cf
+>>  do_install () {
+>>      install -D -p -m0755 src/efibootmgr ${D}/${sbindir}/efibootmgr
+>>  }
+>> -
+>> -
+>> -
+>> -PNBLACKLIST[efibootmgr] ?= "Depends on blacklisted efivar"
+>> diff --git a/meta-oe/recipes-extended/efivar/efivar_0.24.bb
+>> b/meta-oe/recipes-extended/efivar/efivar_0.24.bb
+>> index 4c7793f..f641a30 100644
+>> --- a/meta-oe/recipes-extended/efivar/efivar_0.24.bb
+>> +++ b/meta-oe/recipes-extended/efivar/efivar_0.24.bb
+>> @@ -40,6 +40,3 @@ do_install_append_class-native() {
+>>  }
+>>
+>>  BBCLASSEXTEND = "native"
+>> -
+>> -
+>> -PNBLACKLIST[efivar] ?= "Fails to build with RSS
+>> http://errors.yoctoproject.org/Errors/Details/132821/"
+>> --
+>> 2.7.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>
+>
 
-Luckily Derek already sent fix for this in:
-[meta-oe][PATCH] usb-modeswitch: update inherit to work correctly with RSS
-
-and I've merged it to master today, so you just need to rebase your
-change, retest it and send as PATCHv2.
-
-Regards,
-
->  ...itch-data_20140529.bb =3D> usb-modeswitch-data_20170205.bb} |   10 ++=
-+-------
->  .../{usb-modeswitch_2.2.0.bb =3D> usb-modeswitch_2.5.0.bb}     |    6 ++=
-----
->  2 files changed, 5 insertions(+), 11 deletions(-)
->  rename meta-oe/recipes-support/usb-modeswitch/{usb-modeswitch-data_20140=
-529.bb =3D> usb-modeswitch-data_20170205.bb} (50%)
->  rename meta-oe/recipes-support/usb-modeswitch/{usb-modeswitch_2.2.0.bb =
-=3D> usb-modeswitch_2.5.0.bb} (68%)
->=20
-> diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_2=
-0140529.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_201=
-70205.bb
-> similarity index 50%
-> rename from meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20=
-140529.bb
-> rename to meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_2017=
-0205.bb
-> index 434f68a..042cd38 100644
-> --- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20140529=
-=2Ebb
-> +++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20170205=
-=2Ebb
-> @@ -5,17 +5,13 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9b=
-a36caa9b7df079bae19f"
->  inherit allarch
-> =20
->  SRC_URI =3D "http://www.draisberghof.de/usb_modeswitch/${BP}.tar.bz2"
-> -SRC_URI[md5sum] =3D "dff94177781298aaf0b3c2a3c3dea6b2"
-> -SRC_URI[sha256sum] =3D "53889157937109e04dafe897c098ec94f3f44f9c0c83fc6e=
-c8417aa9a587e536"
-> +SRC_URI[md5sum] =3D "0cc107cd0c4c83df0d9400c999e21dfd"
-> +SRC_URI[sha256sum] =3D "e2dcfd9d28928d8d8f03381571a23442b3c50d48d343bc40=
-a1a07d01662738d1"
-> =20
->  do_install() {
->      oe_runmake install DESTDIR=3D${D}
->  }
-> =20
-> -RDEPENDS_${PN} =3D "usb-modeswitch (>=3D 2.2.0)"
-> +RDEPENDS_${PN} =3D "usb-modeswitch (>=3D 2.4.0)"
->  FILES_${PN} +=3D "${base_libdir}/udev/rules.d/ \
->                  ${datadir}/usb_modeswitch"
-> -
-> -PNBLACKLIST[usb-modeswitch-data] ?=3D "Runtime depends on blacklisted us=
-b-modeswitch"
-> -
-> -PNBLACKLIST[usb-modeswitch-data] ?=3D "Runtime depends on blacklisted us=
-b-modeswitch-data"
-> diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.=
-bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.5.0.bb
-> similarity index 68%
-> rename from meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.bb
-> rename to meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.5.0.bb
-> index 5211d7b..503b595 100644
-> --- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.bb
-> +++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.5.0.bb
-> @@ -5,8 +5,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba3=
-6caa9b7df079bae19f"
->  DEPENDS =3D "libusb1"
-> =20
->  SRC_URI =3D "http://www.draisberghof.de/usb_modeswitch/${BP}.tar.bz2"
-> -SRC_URI[md5sum] =3D "f323fe700edd6ea404c40934ddf32b22"
-> -SRC_URI[sha256sum] =3D "2752103de171ed5f6c8d6a6e3e73e16c9ee3e8e394dd39c5=
-991f7680eb908a3a"
-> +SRC_URI[md5sum] =3D "38ad5c9d70e06227a00361bdc2b1e568"
-> +SRC_URI[sha256sum] =3D "31c0be280d49a99ec3dc0be3325bef320d9c04b50714ef0c=
-e1e36a614d687633"
-> =20
->  EXTRA_OEMAKE =3D "TCL=3D${bindir}/tclsh"
-> =20
-> @@ -17,5 +17,3 @@ RRECOMMENDS_${PN} =3D "usb-modeswitch-data"
->  do_install() {
->      oe_runmake DESTDIR=3D${D} install
->  }
-> -
-> -PNBLACKLIST[usb-modeswitch] ?=3D "Fails to build with RSS http://errors.=
-yoctoproject.org/Errors/Details/130620/"
-> --=20
-> 1.7.10.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---zYM0uCDKw75PZbzx
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWLVhJQAKCRA3VSO3ZXaA
-HAOEAKCdIIuhMOt4+hIlHGWLxKb7Y89vzgCggj6xXib8+f1xZqfoMctAd72S2F4=
-=73pg
------END PGP SIGNATURE-----
-
---zYM0uCDKw75PZbzx--
