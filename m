@@ -1,22 +1,42 @@
-Return-Path: <Nicolas.Ferre@microchip.com>
-X-Greylist: delayed 311 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 28 Feb 2017 15:06:23 UTC
-Received: from email.microchip.com (smtpout.microchip.com [198.175.253.82])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C75772F7E
+Return-Path: <tom@harbortronics.com>
+Received: from mail-pg0-f50.google.com (mail-pg0-f50.google.com [74.125.83.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A62D72FA1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Feb 2017 15:06:23 +0000 (UTC)
-Received: from tenerife.corp.atmel.com (10.10.76.4) by
-	chn-sv-exch06.mchp-main.com (10.10.76.107) with Microsoft SMTP Server
-	id 14.3.181.6; Tue, 28 Feb 2017 08:01:10 -0700
-From: Nicolas Ferre <nicolas.ferre@microchip.com>
-To: Alexandre Belloni <alexandre.belloni@free-electrons.com>,
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 28 Feb 2017 16:01:19 +0100
-Message-ID: <20170228150119.21252-1-nicolas.ferre@microchip.com>
-X-Mailer: git-send-email 2.9.0
-MIME-Version: 1.0
-Cc: Nicolas Ferre <nicolas.ferre@microchip.com>
-Subject: [meta-oe][PATCH] devmem2: Change source URL to regain access to it
+	Tue, 28 Feb 2017 15:15:59 +0000 (UTC)
+Received: by mail-pg0-f50.google.com with SMTP id s67so6272235pgb.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Feb 2017 07:16:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=harbortronics.com; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=3g7SJFFHK0Hox4xVzaBuHJZOCE5IBEf70Rr9EdMEaiU=;
+	b=bu7XJqBt1600vG7GnD0W0pX1J9rccAr6b6xZ9s0ZVymeCaABCMaZHKoI3AN3gasr9K
+	WVlYZbVYDGqOjBPX7pzRy20ZMo5E1n/bLnfG7x4oxiFi5XjadU8pdEIAOBeybiTGDmMH
+	FdzN8eqNTwctVxftZ3Ca5FEJp5IBiGAI3rt9E=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=3g7SJFFHK0Hox4xVzaBuHJZOCE5IBEf70Rr9EdMEaiU=;
+	b=oBkdEb9MPiIfMDu+ZSPJhgYAo6vqyvIi99agz/WUEWcHS6SaBvejBR+Qud/24UbOFj
+	ORJURVQW6SVZsXdF3Y5eWnZFYHwZLklMVPcELOhh8I1hscTEITEW2c6Q+CeHLpZakrbz
+	W45AjBvBguqrn/cR573lQ1RksDq2czXqIWhaze5IYepL8r6veeALwCJ/iyx470kX5rnh
+	C8FvbGWc3os+vbbtNvgOq7oeemmKE88wOwOrN7s6ZJ3FdCHldjWmpUe0QaKGD6Fco+DT
+	LYg/drO6a4f4n90Zte678Fo42N6q0EQnewjQkxWxXfzRX0d4YrIJ8dou1a7hEvQvjhMD
+	5YJg==
+X-Gm-Message-State: AMke39ngYzliKyKyLDjixQcNLanW+p8x0WhAKwgv5rXEOLWQreDl5s17aVau2JFkLI4G9Q==
+X-Received: by 10.84.137.106 with SMTP id 97mr3124860plm.68.1488294961286;
+	Tue, 28 Feb 2017 07:16:01 -0800 (PST)
+Received: from yocto-dev.harbortronics.com (174-21-50-42.tukw.qwest.net.
+	[174.21.50.42]) by smtp.gmail.com with ESMTPSA id
+	c28sm4959561pfj.77.2017.02.28.07.15.59
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 28 Feb 2017 07:16:00 -0800 (PST)
+From: Tom Hayward <tom@harbortronics.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 28 Feb 2017 07:15:53 -0800
+Message-Id: <1488294953-44431-1-git-send-email-tom@harbortronics.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-oe][PATCHv2] usb-modeswitch and usb-modeswitch-data: update to 2.5.0 and 20170205 respectively.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,43 +49,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Feb 2017 15:06:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 28 Feb 2017 15:16:01 -0000
 
-Change URL due to connexion error on the original page.
-As the header of the new devmem2.c source file has changed, change the
-signature and the LIC_FILES_CHKSUM specificaiton.
-
-Signed-off-by: Nicolas Ferre <nicolas.ferre@microchip.com>
 ---
- meta-oe/recipes-support/devmem2/devmem2.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ ...deswitch-data_20140529.bb => usb-modeswitch-data_20170205.bb} |    6 +++---
+ .../{usb-modeswitch_2.2.0.bb => usb-modeswitch_2.5.0.bb}         |    4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-support/usb-modeswitch/{usb-modeswitch-data_20140529.bb => usb-modeswitch-data_20170205.bb} (66%)
+ rename meta-oe/recipes-support/usb-modeswitch/{usb-modeswitch_2.2.0.bb => usb-modeswitch_2.5.0.bb} (80%)
 
-diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb b/meta-oe/recipes-support/devmem2/devmem2.bb
-index e48cc9210bb3..c42eb5e0b1c5 100644
---- a/meta-oe/recipes-support/devmem2/devmem2.bb
-+++ b/meta-oe/recipes-support/devmem2/devmem2.bb
-@@ -1,9 +1,9 @@
- SUMMARY = "Simple program to read/write from/to any location in memory"
- LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://devmem2.c;endline=28;md5=dd68f2b0a5184b3db3dc25c99e0bd0cd"
-+LIC_FILES_CHKSUM = "file://devmem2.c;endline=38;md5=a9eb9f3890384519f435aedf986297cf"
- PR = "r7"
+diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20140529.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20170205.bb
+similarity index 66%
+rename from meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20140529.bb
+rename to meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20170205.bb
+index a265411..042cd38 100644
+--- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20140529.bb
++++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20170205.bb
+@@ -5,13 +5,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ inherit allarch
  
--SRC_URI = "http://www.lartmaker.nl/lartware/port/devmem2.c \
-+SRC_URI = "http://www.free-electrons.com/pub/mirror/devmem2.c \
-            file://devmem2-fixups-2.patch;apply=yes;striplevel=0"
- S = "${WORKDIR}"
+ SRC_URI = "http://www.draisberghof.de/usb_modeswitch/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "dff94177781298aaf0b3c2a3c3dea6b2"
+-SRC_URI[sha256sum] = "53889157937109e04dafe897c098ec94f3f44f9c0c83fc6ec8417aa9a587e536"
++SRC_URI[md5sum] = "0cc107cd0c4c83df0d9400c999e21dfd"
++SRC_URI[sha256sum] = "e2dcfd9d28928d8d8f03381571a23442b3c50d48d343bc40a1a07d01662738d1"
  
-@@ -18,5 +18,5 @@ do_install() {
-     install devmem2 ${D}${bindir}
+ do_install() {
+     oe_runmake install DESTDIR=${D}
  }
  
--SRC_URI[md5sum] = "be12c0132a1ae118cbf5e79d98427c1d"
--SRC_URI[sha256sum] = "ec382c90af3ef2f49695ff14a4d6521e58ac482c4e29d6c9ebca8768f699c191"
-+SRC_URI[md5sum] = "e23f236e94be4c429aa1ceac0f01544b"
-+SRC_URI[sha256sum] = "3b15515693bae1ebd14d914e46d388edfec2175829ea1576a7a0c8606ebbe639"
+-RDEPENDS_${PN} = "usb-modeswitch (>= 2.2.0)"
++RDEPENDS_${PN} = "usb-modeswitch (>= 2.4.0)"
+ FILES_${PN} += "${base_libdir}/udev/rules.d/ \
+                 ${datadir}/usb_modeswitch"
+diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.5.0.bb
+similarity index 80%
+rename from meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.bb
+rename to meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.5.0.bb
+index 0c548d8..ff439f3 100644
+--- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.2.0.bb
++++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.5.0.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ DEPENDS = "libusb1"
+ 
+ SRC_URI = "http://www.draisberghof.de/usb_modeswitch/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "f323fe700edd6ea404c40934ddf32b22"
+-SRC_URI[sha256sum] = "2752103de171ed5f6c8d6a6e3e73e16c9ee3e8e394dd39c5991f7680eb908a3a"
++SRC_URI[md5sum] = "38ad5c9d70e06227a00361bdc2b1e568"
++SRC_URI[sha256sum] = "31c0be280d49a99ec3dc0be3325bef320d9c04b50714ef0ce1e36a614d687633"
+ 
+ inherit pkgconfig
+ 
 -- 
-2.9.0
+1.7.10.4
 
 
