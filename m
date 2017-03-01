@@ -1,46 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id C9766719AF;
-	Wed,  1 Mar 2017 19:55:50 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id v186so119071695wmd.0;
-	Wed, 01 Mar 2017 11:55:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:subject:message-id:mime-version:content-disposition
-	:user-agent; bh=VgVu5UiYLzq8Pf0ND4n791qgLBaOr4mqW6qr+IDpX4E=;
-	b=Ikxy3SraLszXISsTu1erJcHSTZ+nB0HGr4EUVxaKWDKYoUfxua4o3DM353wcO1sy1W
-	Ea0fV/eh4/yaE3qogFhm2NyRTxPzCr4tMq5DQDVYFsq4hQsI/NCKEizv8zsevpWjuECG
-	XbIyA7py0jnXuO3VrsJpij4l+zwbzCshdm+Hlg+oC1IxTXXmdXY+9xaxds9/toT95Bbq
-	S0n6+CAJFxleNr7shDUstGt4lyxfkkXWCI8vquUIze5x26/Hovb6FH6iVoSF/ae+/Tf0
-	bAuJv+HDsGq4bCJZKGzeiu1anKmE9UXOfgt4VFG8lji66+u/IrpLo7qaBrIOxZkGpgex
-	368w==
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id AF36E77316
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  1 Mar 2017 21:11:42 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id s186so14059894qkb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Mar 2017 13:11:44 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:subject:message-id:mime-version
-	:content-disposition:user-agent;
-	bh=VgVu5UiYLzq8Pf0ND4n791qgLBaOr4mqW6qr+IDpX4E=;
-	b=poCfnNh4exFAFhvnJ/rHmLNVX1DyCm/QGyXbl749lDswG7Bi5OEdf7Y3/TsH54HTR6
-	SEw7o5SfXDlmaXoIvjDwdTc279s3k/imL2ibaXDEjBawcT+3CmrtuTa1alx8O3S+DvYd
-	hI496gJuC2iJWvwJ9F8BV2HG1qrhY2fuvMD8kww0H4+JQGsQPVTrZLPhVD+7vAC8Tb/R
-	Y5S66B54XtKFqmZ3yVPDaGsJUwX05mq0UlkxczCzITM0pZCw8W1DOGqdTyfYZi3I+gYC
-	9l6okylixwnwoHmSNZAni7wGxVbnOg8NuXuRWg66RdizmD869xwNsQ4TVIR/maXcH0nE
-	ZwPg==
-X-Gm-Message-State: AMke39nCrVQizsaLMepFp57LQdydiUcCxMkxKw4T1+pleERiBOl3hG/9JXEIiPM4ciJx2Q==
-X-Received: by 10.28.238.140 with SMTP id j12mr4805699wmi.35.1488398150654;
-	Wed, 01 Mar 2017 11:55:50 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	j39sm7843309wrj.45.2017.03.01.11.55.49
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 01 Mar 2017 11:55:49 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 1 Mar 2017 20:55:50 +0100
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Message-ID: <20170301195550.GE3290@jama>
-MIME-Version: 1.0
-User-Agent: Mutt/1.8.0 (2017-02-23)
-Subject: State of bitbake world, Failed tasks 2017-03-01
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Oi2AEbTl1EIhxjZxIorFKuiyKa97Tq9YPHXBS76ZiP0=;
+	b=dEStCQzaJt3AiXShpcrCwhYwKF2+zLWhfLamiuAJWkoKakbSceqzSufspce5xEJT+L
+	dPEoTb0X3ddC/6qt+0saj9WuSLOCFE+W0UlcK3nmcQcxcxVgZP2yRfJWDV2V9o/vjJpb
+	THuy1Pgidt1h/nOKwmn7Xx226OvtPcecvaEwu6Hk5Y/CcVxtpn0HEDp22NUfEOty/520
+	PXHq9COi2CV3cCOy0Bd0qwEk+QjTxWv4smpIlAd6K3n8Um6ZjKIc8gdmCdkL4WLFszkG
+	6xprtvCQ0fe+XgFjHZzfCdvZsK8lsjl3Y3bpgmVvgf3WAXwJkzZkWHAf9ZE3VqbBSJ5C
+	As0w==
+X-Gm-Message-State: AMke39nfUUYdY5QB3V5vxSjRF9d8ZFRPqp5G70R9kgCWX8Em5T0dnGXz4SCLATP26BI3gg==
+X-Received: by 10.55.109.198 with SMTP id i189mr13057394qkc.242.1488402703941; 
+	Wed, 01 Mar 2017 13:11:43 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
+	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
+	143sm3950055qki.59.2017.03.01.13.11.43
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 01 Mar 2017 13:11:43 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  1 Mar 2017 16:10:18 -0500
+Message-Id: <1488402618-27790-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-pysqlite: add initial recipe for version 2.8.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,203 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Mar 2017 19:55:56 -0000
-X-Groupsio-MsgNum: 65640
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="uCPdOCrL+PnN2Vxy"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 01 Mar 2017 21:11:45 -0000
 
---uCPdOCrL+PnN2Vxy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../recipes-devtools/python/python-pysqlite.inc        | 18 ++++++++++++++++++
+ .../recipes-devtools/python/python-pysqlite_2.8.3.bb   |  2 ++
+ 2 files changed, 20 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-pysqlite.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-pysqlite_2.8.3.bb
 
-=3D=3D Number of issues - stats =3D=3D
-{| class=3D'wikitable'
-!|Date		     !!colspan=3D'3'|Failed tasks			    !!colspan=3D'6'|Failed depe=
-ncencies			 !!|Signatures		  !!colspan=3D'12'|QA !!Comment
-|-
-||		||qemuarm	||qemux86	||qemux86_64	||qemuarm||max||min	||qemux86||max||mi=
-n	||all 	||already-stripped	||libdir	||textrel	||build-deps	||file-rdeps	||=
-version-going-backwards	||host-user-contaminated	||installed-vs-shipped	||u=
-nknown-configure-option	||symlink-to-sysroot	||invalid-pkgconfig	||pkgname	=
-||=09
-|-
-||2017-03-01	||5	||4	||4	||N/A	||N/A	||N/A	||N/A	||N/A	||N/A	||0	||0		||0		=
-||0		||0		||0		||0		||0		||0		||0		||0		||0		||0		||=09
-|}
-
-http://www.openembedded.org/wiki/Bitbake_World_Status
-
-=3D=3D Failed tasks 2017-03-01 =3D=3D
-
-INFO: jenkins-job.sh-1.8.18 Complete log available at http://logs.nslu2-lin=
-ux.org/buildlogs/oe/world/pyro/log.report.20170301_095420.log
-
-=3D=3D=3D common (4) =3D=3D=3D
-    * meta-openembedded/meta-oe/recipes-extended/efivar/efivar_0.30.bb:do_c=
-ompile
-    * meta-openembedded/meta-ruby/recipes-devtools/ruby/bundler_git.bb:do_c=
-ompile
-    * openembedded-core/meta/recipes-extended/parted/parted_3.2.bb:do_compi=
-le_ptest_base
-    * openembedded-core/meta/recipes-support/apr/apr_1.5.2.bb:do_compile_pt=
-est_base
-
-=3D=3D=3D common-x86 (0) =3D=3D=3D
-
-=3D=3D=3D qemuarm (1) =3D=3D=3D
-    * meta-openembedded/meta-oe/recipes-support/usb-modeswitch/usb-modeswit=
-ch-data_20170205.bb:do_fetch
-
-=3D=3D=3D qemux86 (0) =3D=3D=3D
-
-=3D=3D=3D qemux86_64 (0) =3D=3D=3D
-
-=3D=3D=3D Number of failed tasks (13) =3D=3D=3D
-{| class=3Dwikitable
-|-
-|| qemuarm 	|| 5	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/lo=
-g.world.qemuarm.20170301_000844.log/ || http://errors.yoctoproject.org/Erro=
-rs/Build/33017/
-|-
-|| qemux86 	|| 4	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/lo=
-g.world.qemux86.20170301_000850.log/ || http://errors.yoctoproject.org/Erro=
-rs/Build/33018/
-|-
-|| qemux86_64 	|| 4	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro=
-/log.world.qemux86-64.20170301_034223.log/ || http://errors.yoctoproject.or=
-g/Errors/Build/33025/
-|}
-
-=3D=3D=3D PNBLACKLISTs (350) =3D=3D=3D
-
-=3D=3D=3D QA issues (0) =3D=3D=3D
-{| class=3Dwikitable
-!| Count		||Issue
-|-
-||0	||already-stripped
-|-
-||0	||build-deps
-|-
-||0	||file-rdeps
-|-
-||0	||host-user-contaminated
-|-
-||0	||installed-vs-shipped
-|-
-||0	||invalid-pkgconfig
-|-
-||0	||libdir
-|-
-||0	||pkgname
-|-
-||0	||symlink-to-sysroot
-|-
-||0	||textrel
-|-
-||0	||unknown-configure-option
-|-
-||0	||version-going-backwards
-|}
+diff --git a/meta-python/recipes-devtools/python/python-pysqlite.inc b/meta-python/recipes-devtools/python/python-pysqlite.inc
+new file mode 100644
+index 0000000..8845565
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pysqlite.inc
+@@ -0,0 +1,18 @@
++DESCRIPTION = "DB-API 2.0 interface for SQLite 3.x"
++HOMEPAGE = "http://github.com/ghaering/pysqlite"
++LICENSE = "Zlib"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=28ad4f115e06c88bd737372a453369d8"
++
++SRC_URI[md5sum] = "033f17b8644577715aee55e8832ac9fc"
++SRC_URI[sha256sum] = "17d3335863e8cf8392eea71add33dab3f96d060666fe68ab7382469d307f4490"
++
++inherit pypi
++
++DEPENDS += "${PYTHON_PN}-pip"
++
++RDEPENDS_${PN}_class-target += "\
++    ${PYTHON_PN}-datetime \
++    sqlite3 \
++"
++
++FILES_${PN}-doc += "${datadir}"
+diff --git a/meta-python/recipes-devtools/python/python-pysqlite_2.8.3.bb b/meta-python/recipes-devtools/python/python-pysqlite_2.8.3.bb
+new file mode 100644
+index 0000000..95938f2
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pysqlite_2.8.3.bb
+@@ -0,0 +1,2 @@
++inherit setuptools
++require python-pysqlite.inc
+-- 
+2.7.4
 
 
-
-=3D=3D=3D Incorrect PACKAGE_ARCH or sstate signatures (0) =3D=3D=3D
-
-Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.signa=
-tures.20170301_025052.log/
-
-No issues detected
-
-=3D=3D Tested changes (not included in master yet) - bitbake =3D=3D
-latest upstream commit:=20
-5b364b0 fetch2/svn: change 'rsh' parameter to 'ssh'
-not included in master yet:=20
-ee30425 world-image: add extra target
-
-=3D=3D Tested changes (not included in master yet) - openembedded-core =3D=
-=3D
-latest upstream commit:=20
-65cfc8a libva: Find the correct wayland-scanner
-not included in master yet:=20
-e391f58 qemux86: Add identical qemux86copy variant for tests
-6d33fc3 sstate-sysroot-cruft.sh: Extend the whitelist
-0de471f recipes: Replace "cp -a" with "cp -R --no-dereference --preserve=3D=
-mode,links"
-f0f6112 buildhistory.bbclass: metadata-revs show repo parent
-ade2954 metadata-revs: provide more information
-c5e658a report-error: Allow to upload reports automatically
-63e44e5 flex: upgrade to 2.6.3
-edfb18a Revert "flex: upgrade to 2.6.3"
-3d6b996 Revert "flex: upgrade to 2.6.2"
-ce5cb55 qemu: fix build with glibc-2.25
-ea1f3b4 e2fsprogs: Fix build with glibc-2.25
-7f249b3 parted: fix build with glibc-2.25
-830df85 syslinux: fix build with glibc-2.25
-
-=3D=3D Tested changes (not included in master yet) - meta-openembedded =3D=
-=3D
-latest upstream commit:=20
-131255d nginx: update to version 1.11.10
-not included in master yet:=20
-4ab8e02 netcat-openbsd: fix implicit dependency on pkg-config
-a87fc99 inetutils: Move files only when src !=3D dst.
-f8b8c16 ebtables: Move files only when src !=3D dst.
-ec3b598 netcf_git: Check if src !=3D dst while moving files.
-d7dcb9f fuse: Remove unneeded RDEPENDS on util-linux-mount
-f66fb86 ell: Initial recipe for Embedded Linux Library
-29cb532 dnsmasq: add info for port setting
-0f1d882 dnsmasq: disable the service by default
-7fa9b8d zabbix: 2.4.7 -> 3.0.8
-769db05 devmem2: Change source URL to regain access to it
-ea14045 usb-modeswitch and usb-modeswitch-data: update to 2.5.0 and 2017020=
-5 respectively.
-36af8de syslog-ng: Run autoreconf twice to avoid problems with libtool
-7c4f312 syslog-ng: Update to 3.8.1
-54ea38d xfsprogs: update to version 4.10.0
-e851f7b efivar: unblacklist package and those that depend on it
-f9107b5 bundler: resolve build issues with RSS
-d2778df python-cmd2: update to version 0.7.0
-1faf3fb python-pyasn1: update to version 2.2.3
-9cebc38 python-pytest-runner: update to version 2.11.1
-bf4caab python-pyalsaaudio: update to version 0.8.4
-99236d8 efivar: update to 0.30 to fix readdir* issues
-
-=3D=3D Tested changes (not included in master yet) - meta-qt5 =3D=3D
-latest upstream commit:=20
-61c0250 qtbase-native: nativesdk-qtbase: remove patch that breaks mkspec se=
-tting for SDK
-not included in master yet:=20
-595e9cf qtbase: remove absolute binary paths from mkspec files
-9927aac qtbase: PACKAGECONFIG[gtk] change gtk+ -> gtk+3 in dependencies
-
-=3D=3D Tested changes (not included in master yet) - meta-browser =3D=3D
-latest upstream commit:=20
-021a954 chromium-browser: add missing dependency on gperf-native
-not included in master yet:=20
-a9dd704 chromium: disable generate_character_data for x86
-
-=3D=3D Tested changes (not included in master yet) - meta-webos-ports =3D=3D
-latest upstream commit:=20
-7c4309b packagegroup-luneos-extended: drop qtscenegraph-adaptation
-not included in master yet:=20
-
-=3D=3D Tested changes (not included in master yet) - meta-smartphone =3D=3D
-latest upstream commit:=20
-df77c54 linux-hp-tenderloin: don't use get_kernelversion_modules function a=
-nd adapt to multiple kernel image types changes
-not included in master yet:=20
-
---uCPdOCrL+PnN2Vxy
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWLcnRQAKCRA3VSO3ZXaA
-HG7OAKCw+bhD9ZF5VsHrrpUffFDbwBPlGgCeLEpDp6pai+ng939kdmHuxpU9TAw=
-=6w98
------END PGP SIGNATURE-----
-
---uCPdOCrL+PnN2Vxy--
