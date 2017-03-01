@@ -1,35 +1,50 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 60459719DC
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id EE5F8700F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Mar 2017 06:37:04 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="16088349"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 01 Mar 2017 14:37:01 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id A337E47C4EBC;
-	Wed,  1 Mar 2017 14:37:00 +0800 (CST)
-Received: from G08CNEXMBPEKD02.g08.fujitsu.local ([10.167.33.84]) by
-	G08CNEXCHPEKD02.g08.fujitsu.local ([10.167.33.83]) with mapi id
-	14.03.0319.002; Wed, 1 Mar 2017 14:37:00 +0800
-From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
-To: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: a new layer that support spdx
-Thread-Index: AdKSVZ7ToFKkqu+SRW+I9gwqtL+b5g==
-Date: Wed, 1 Mar 2017 06:36:59 +0000
-Message-ID: <1B56A49860EB2D45ADE3731B15C959FD01275BB282@G08CNEXMBPEKD02.g08.fujitsu.local>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.93]
+	Wed,  1 Mar 2017 07:47:31 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id v77so5802663wmv.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Feb 2017 23:47:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=b64YfKPRCg5mSucn+rWqQEYs42ND3fwslh/Atk3XorI=;
+	b=YqdsjnpJfXWN+ByfK0iB9O4U/aPvz2NBQ6lmBaGAf9siEiYF3MDx4lTG+n+EOZEYG8
+	oIoXML7FhZFWf+fW2djOAI46jCq/P3pUke8j43ChksLNNBzFl0sdQHcj5KcSdHkyKzVk
+	tuZzybQttWCqLthMDJlkHhJGtylcE+n9MXDPZuoxcqNa/O1TMyOu7SUCMeKK+ESNgdNh
+	u7l4xhU5TEnndI51VPb4lZhv4YUJZ1KG+Qg1UyKX62EHLvHlzA9re028A9YGztdWy02D
+	7dKTQyf9DHaROfLtfPci9LjjfLNnNyjUA4WqureCmnZjhL3dORw0/JF1kOIP7Q+i3X6Z
+	suQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=b64YfKPRCg5mSucn+rWqQEYs42ND3fwslh/Atk3XorI=;
+	b=HR0NpraBI4X4dxJ9o0EUOqwmdPi1mDQqUkKO8LE1kQPnYEWFY0sOCd70vabIx329ak
+	w4Mkf4zX7yRk/QIAfrWl+nQF1dP8abwDrTiXSOEhirXh6iGmcnX37FF1tgH5+bGFJtls
+	sCFAh0vhyYvZgc2FdjYdvZ26ISeChc63nvK4H61FG+CCXs8Pp5CVaIQQQRTAeVgJhRVQ
+	D16HE7jWJcZOKpXXcHgyPMkk1fWnfrant+7T3Yhpwi22QJ6ikwDLiFfwm9h2f40Jnw9v
+	G+9tIWtK3w9H0vqPqdzo18ZsmXZ+NroJRSJSsPgIhnavUGkgzIkxJTxLXUKhEHq2Rxsm
+	gfFQ==
+X-Gm-Message-State: AMke39mUz8nfxXQrVdDjwYOEmaNILWQvq7uUikLUEmjooEhSr9+V0h7tQH1VAwYF1bSZdw==
+X-Received: by 10.28.52.19 with SMTP id b19mr2062083wma.134.1488354452224;
+	Tue, 28 Feb 2017 23:47:32 -0800 (PST)
+Received: from localhost.localdomain
+	(ip-109-91-251-48.hsi12.unitymediagroup.de. [109.91.251.48])
+	by smtp.googlemail.com with ESMTPSA id
+	k10sm5769373wmg.10.2017.02.28.23.47.29
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 28 Feb 2017 23:47:31 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  1 Mar 2017 08:46:53 +0100
+Message-Id: <20170301074653.6802-1-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.9.3
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: A337E47C4EBC.AB59D
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
-X-Spam-Status: No
-Subject: a new layer that support spdx
+Subject: [meta-qt5][PATCH] qtbase: PACKAGECONFIG[gtk] change gtk+ -> gtk+3 in dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,20 +57,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Mar 2017 06:37:07 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 01 Mar 2017 07:47:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-SGkgYWxsDQoNCkkgaGF2ZSBzdWJtaXR0ZWQgYSBuZXcgbGF5ZXIgbmFtZWQg
-bWV0YS1zcGR4c2Nhbm5lciB0aGF0IGNhbiBiZSB1c2VkIHRvIGNyZWF0ZSBz
-cGR4IGZpbGVzIHRvIHRoZSBPcGVuRW1iZWRkZWQgbGF5ZXIgaW5kZXguDQpD
-b21wYXJlZCB0byB0aGUgc3BkeCBtb2R1bGUgaW4gb2UtY29yZSwgdGhpcyBs
-YXllciBoYXMgZmVhdHVyZXMgYXMgZm9sbG93aW5nOg0KDQogICogRWFzeSB0
-byB1c2UNCiAgICBEb3NvY3MyLW5hdGl2ZSBoYXMgYmVlbiBhZGQgaW50byB0
-aGlzIG1ldGEsIHRoZXJlIGlzIG5vIG5lZWQgdG8gaW5zdGFsbCBhbnl0aGlu
-ZyBpbiBidWlsZCBzZXJ2ZXIuDQogICogR29vZCBwZXJmb3JtYW5jZQ0KICAg
-IEl0IGhhcyBiZXR0ZXIgcGVyZm9ybWFuY2UgdGhhbiB0aGUgc3BkeCBtb2R1
-bGUgaW4gY3VycmVudCBvZS1jb3JlLCBlc3BlY2lhbGx5IGluIHJlYnVpbGRp
-bmcuDQoNCg0KQmVzdCByZWdhcmRzDQpMZWkgTWFvaHVpDQoKCg==
+| WARNING: QA Issue: qtbase-plugins rdepends on gtk+3, but it isn't a build dependency, missing gtk+3 in DEPENDS or PACKAGECONFIG? [build-deps]
+
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ recipes-qt/qt5/qtbase_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index 4e1ab72..7a6d4df 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -112,7 +112,7 @@ PACKAGECONFIG[evdev] = "-evdev,-no-evdev"
+ PACKAGECONFIG[mtdev] = "-mtdev,-no-mtdev,mtdev"
+ # depends on glib
+ PACKAGECONFIG[fontconfig] = "-fontconfig,-no-fontconfig,fontconfig"
+-PACKAGECONFIG[gtk] = "-gtk,-no-gtk,gtk+"
++PACKAGECONFIG[gtk] = "-gtk,-no-gtk,gtk+3"
+ PACKAGECONFIG[directfb] = "-directfb,-no-directfb,directfb"
+ PACKAGECONFIG[linuxfb] = "-linuxfb,-no-linuxfb"
+ PACKAGECONFIG[kms] = "-kms,-no-kms,drm virtual/egl"
+-- 
+2.9.3
+
 
