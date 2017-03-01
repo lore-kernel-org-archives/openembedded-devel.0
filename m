@@ -1,47 +1,46 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f195.google.com (mail-ua0-f195.google.com
-	[209.85.217.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C6AE4774E6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Mar 2017 22:02:57 +0000 (UTC)
-Received: by mail-ua0-f195.google.com with SMTP id f54so6818402uaa.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Mar 2017 14:02:59 -0800 (PST)
+Received: from mail-ua0-f181.google.com (mail-ua0-f181.google.com
+	[209.85.217.181])
+	by mail.openembedded.org (Postfix) with ESMTP id D63F9774D8;
+	Wed,  1 Mar 2017 23:14:04 +0000 (UTC)
+Received: by mail-ua0-f181.google.com with SMTP id q7so26095162uaf.2;
+	Wed, 01 Mar 2017 15:14:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=Be6GDlQRiJX35cA3riPnMgCv+j0VHoRhj05A3A+/A2Q=;
-	b=pz0Crrf//mLkeLEihYx1A13mcxALCXQuPYeH4zteLT+RmhGB+mk7xBxNe2xx3gPcqV
-	ArOy6cPvrBANItBGl1W3mM6hgMFhmbl35jymHZ1/3176zxNnEw/ISZ1ZmQ/V8LHQKCLR
-	shujAXuPp9KhC7RSxnYwuo0DCp1Tbuw6nPmZrq2NY4Nk7wJeCU+77ulvVkUD3fuJz9k1
-	IU6+wkk6P9Qt6NHh00G0gOs9x8TtG4ozefp9qcfmqx3Sq3uAojQHd400jXdlqTd7gmFo
-	FG0ZcrB42bmO4YzDJliMvkkjLVe+uiUrc2Jx44JL7vdWdIxbFc7ioKtNSimvstI0TbHA
-	sgtg==
+	:cc; bh=JrQ5uNc6Rdt4ybkYxOrbmThL4Gep0PfoISulOHUMIkU=;
+	b=J/Jv1kGO0u2IkJYTAQzCf2uABxTRUL//JJ1YnnZ8nBXTRP2Ou5jMth8twLqsI97bc/
+	DcaheXqYNmwgrcKtn1IFjAyFp29hTTlX962evW9hFgGaHIYd4NFZfSzDytZzk3bjJXw+
+	af3MGUvo0poJOZvVuTwKLGmhe/zGnDT6an5SN0w8a0WlTib4Yl9oNy/7cTUILSwwzu7z
+	7tVMqajcpQOnVxAqKkP8zhuSBTQBn/iAYlCW5kVTd5sHmKZS8oqyXNLbpGWDyrnmXXQp
+	Dk/VCv9rCd+uYxlCFHVXwZZfYXOP4++4cJeGQrwwH5Q5Un1wZ7G18In566K2dxmfWOjr
+	k7bQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=Be6GDlQRiJX35cA3riPnMgCv+j0VHoRhj05A3A+/A2Q=;
-	b=sSdbOxD9sUmHE3/tiTz9u0C4y5uwkKbKkQSOOJbnwZHinEYkm8XQ4YmyTRsP6ypoXS
-	/WLVJjfMqEdFnZO+ivl7UmItfa3L9OA5ae5ZqBpiV2X7oe34aZW5zOT7y+QLQNgDTQS1
-	upShdQPk9mU/ovK/5lmqKpV9xg77f12lDy6XC+6lUsDbDSaCAMzYAO2gJyGUUU6mDq+/
-	wKTYlNBQe3Vm8PI058qUlD0douA4ONz5t8uHfAsWaJU/y5EUEwlMvCeSKyJSVGgwFEU6
-	4uD9i84i6T1HfjJxxO5ZCQmMT0cODRvLhFpAytX/wexD6UFsLB672J9a/iXXI2TrjWLh
-	c4MA==
-X-Gm-Message-State: AMke39ljB8bLoIpbZXJO1WX8mFDNu0eTDYd7BE2Avab2jodI8Yipdp5TDxdX5iH/EGp7CkuWSKxqGs6kMdM+Fw==
-X-Received: by 10.31.153.71 with SMTP id b68mr1464168vke.30.1488405778497;
-	Wed, 01 Mar 2017 14:02:58 -0800 (PST)
+	bh=JrQ5uNc6Rdt4ybkYxOrbmThL4Gep0PfoISulOHUMIkU=;
+	b=s+99F4kCSFonXveMd5Pn+Qka2bX7mPSoYI872JAThyOKLaOXYAygq9sVuiECFLUZiW
+	QPhohZ7JiEGYM6vaxVR+mih3dcjQ59vwK5rafJ0EWauyocyoQ9RNYenLCnAuyLDx0jqi
+	5+kMagMz/QIGk9GW5mBZD7GI94gyEr0n4bXp2Z9WlxreEjtVB6vHF2BYaeuHDdoDEWgX
+	VM2EIIOSuF2Vx+S/YkkNFwn5UN142IytqU1SRBe1dgQtTLqlaAKiQrB7mwO5XO9xkD4U
+	Mun9BIZxbt0lv6lNZRqxw8bNMFujAVtP3CQu2FdaHrwJjfPxWp0Dvo2mDR9m9gPcT37j
+	h3dw==
+X-Gm-Message-State: AMke39km9vg20WYqPKjTLn7JEm4VGNu2xjMhPVZXZhKec5taneMS0AXSQzr5EIS5vLEdXUVjRn1oESVvp4DUHA==
+X-Received: by 10.31.3.83 with SMTP id 80mr1602850vkd.64.1488410045659; Wed,
+	01 Mar 2017 15:14:05 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.176.71.65 with HTTP; Wed, 1 Mar 2017 14:02:58 -0800 (PST)
-In-Reply-To: <20170301173049.1177-1-pkj@axis.com>
-References: <20170301173049.1177-1-pkj@axis.com>
+Received: by 10.176.71.65 with HTTP; Wed, 1 Mar 2017 15:14:05 -0800 (PST)
+In-Reply-To: <20170301195550.GE3290@jama>
+References: <20170301195550.GE3290@jama>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Wed, 1 Mar 2017 23:02:58 +0100
-Message-ID: <CALbNGRR3DKMiSBnW+=WrWJVHqUzN5FKNoDh=4Na9s1NCnE1ysg@mail.gmail.com>
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] Make use of the new bb.utils.filter() function
+Date: Thu, 2 Mar 2017 00:14:05 +0100
+Message-ID: <CALbNGRTO37A-tbDj93nuNi0vu6h3fJg7Wg6P6N8asz45e8H9bg@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-03-01
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,22 +53,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Mar 2017 22:02:57 -0000
+X-List-Received-Date: Wed, 01 Mar 2017 23:14:05 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, Mar 1, 2017 at 6:30 PM, Peter Kjellerstedt
-<peter.kjellerstedt@axis.com> wrote:
-> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+On Wed, Mar 1, 2017 at 8:55 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>     * openembedded-core/meta/recipes-extended/parted/parted_3.2.bb:do_compile_ptest_base
+Before Martin blacklists gparted for dependency :)
 
-TBH: I don't like this patch:
+1. Autobuilder error log says:
 
-* It combines things which do not share same labels by design. Naming
-package-configs with same label as distro-feature is a nice to have
-but not a design rule.
-* To me old style explains better what's going on
-* Heavy-gozilla-patches tend to cause headaches when cherry-picking to
-older release branches. And yes I know we had these patches in the
-past and nobody complained.
+| ../libparted/fs/.libs/libparted-fs-resize.so: error: undefined
+reference to 'uuid_generate'
+| collect2: error: ld returned 1 exit status
+| Makefile:1422: recipe for target 'fs-resize' failed
+| make: *** [fs-resize] Error 1
+| make: Leaving directory
+'/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/parted/3.2-r1/build/tests'
+| ERROR: Function failed: do_compile_ptest_base (log file is located
+at /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/parted/3.2-r1/temp/log.do_compile_ptest_base.7114)
+
+2. grepping in gparted's source
+[superandy@very-old-builder parted-3.2]$ grep -r uuid_generate
+configure.ac:AC_CHECK_LIB([uuid], [uuid_generate], [UUID_LIBS="-luuid"],
+<...>
+
+I think adding ossp-uuid to DEPENDS will do. My problem: all my build
+machines are busy with environments other than master so I cannot
+test. Will send out a patch during weekend. If somebody wants to send
+sooner: feel free.
 
 Andreas
 
