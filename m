@@ -1,36 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id CB72372F24
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 7266B730A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Mar 2017 14:50:10 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id u188so11152122qkc.3
+	Wed,  1 Mar 2017 15:03:32 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id s186so11277301qkb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Mar 2017 06:50:12 -0800 (PST)
+	Wed, 01 Mar 2017 07:03:34 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Sc1TB6lkkyzzm8j5VIHj+AtpaIjZVWYRIhGOVMF2whs=;
-	b=QscaXXD9S9UnkBc3QqN1QbHL1kh1NQPR7x4WUHgcIGF2Jw5NDu12v3ePCKezun4owL
-	ovgszn0cIyZUTCacbhxZdqpH7oBnGbrKXIG4wO/+UAzS+nCmDVQdfMbr080eTOEOxfDF
-	oTmv8wThM+EppcTSbbynMgp1O6KSUHkSIulJNC7uaYJGFSy/SMuRyjS/QTqIA6jDTuWQ
-	JqjxVAFODeSEt3/7DGpPnYioZnJmgIfvTyaLcYZh/iSSFHQ1+Q8gcM6JaGU7ytebOHgT
-	xKHII18utQSA+yrAwV552GF8/WDiKjJYVludSorV0aEvW5s5vLiPMUVHYJkBB85rOBei
-	OhVA==
-X-Gm-Message-State: AMke39lKBh2HrsZySoTcdhRt00kvfRzDPelxMH5K1z6dAn1Uzux0z5OmVLChRz5uKVhFQg==
-X-Received: by 10.55.18.158 with SMTP id 30mr1651281qks.123.1488379811637;
-	Wed, 01 Mar 2017 06:50:11 -0800 (PST)
+	bh=D2MYIRcqJo6e6No25AOyeAZLiA73K6h6A1PqDOWQvTk=;
+	b=gY6Zz4QmHITSjN1jJGFSKZmw4MIFitqQOV2PTqRb9n1uAGQp5to4oIDl2mh+uneuQs
+	CF5TzEsNm6JDCp5kpjhTIHgvJzOQ+Gu6rIWn/+TpS/b58s7FBJQ1D1pcqbbBoNt/sE2S
+	Mec4Zbm4qOonAi5M/tsTpqj8yXk0iNRv1ZXIFE31M7SJelIklcNETOq9J41zh2ijs25o
+	VuCujahQuPV0qHXdmyIbVlCiF2WETFI+Xvz+ZO2r03CgHkX2SUoxSDc9BjHoumSHaOEy
+	vtO0BW5uHv94Zm755A8OjYddbVvVmH8GJBEvfDaK0zDHf4fpd6O+g8szxWAf3IldcAbe
+	J5oQ==
+X-Gm-Message-State: AMke39k/QnAUna1UOp0iQl+H3fTwq9xYz/Lo/9pMflviIlxCI2r2UZkzna9nazsbMLJ03g==
+X-Received: by 10.55.79.140 with SMTP id d134mr9493978qkb.120.1488380613929;
+	Wed, 01 Mar 2017 07:03:33 -0800 (PST)
 Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
-	[67.85.97.224])
-	by smtp.gmail.com with ESMTPSA id v4sm3278274qtg.0.2017.03.01.06.50.10
+	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
+	s22sm1286786qts.10.2017.03.01.07.03.32
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 01 Mar 2017 06:50:10 -0800 (PST)
+	Wed, 01 Mar 2017 07:03:32 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Mar 2017 09:50:03 -0500
-Message-Id: <1488379803-31244-1-git-send-email-derek@asterius.io>
+Date: Wed,  1 Mar 2017 10:03:24 -0500
+Message-Id: <1488380604-16151-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pymisp: update to version 2.4.67
+Subject: [meta-python][PATCH] python-sqlalchemy: update to version 1.1.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,45 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Mar 2017 14:50:11 -0000
-
-Verify license remains and update checksum
+X-List-Received-Date: Wed, 01 Mar 2017 15:03:34 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pymisp.inc             | 8 ++++----
- .../python/{python-pymisp_2.4.65.bb => python-pymisp_2.4.67.bb}   | 0
- .../python/{python3-pymisp_2.4.65.bb => python3-pymisp_2.4.67.bb} | 0
- 3 files changed, 4 insertions(+), 4 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pymisp_2.4.65.bb => python-pymisp_2.4.67.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.65.bb => python3-pymisp_2.4.67.bb} (100%)
+ meta-python/recipes-devtools/python/python-sqlalchemy.inc            | 5 +++--
+ .../{python-sqlalchemy_1.1.5.bb => python-sqlalchemy_1.1.6.bb}       | 0
+ .../{python3-sqlalchemy_1.1.5.bb => python3-sqlalchemy_1.1.6.bb}     | 0
+ 3 files changed, 3 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-sqlalchemy_1.1.5.bb => python-sqlalchemy_1.1.6.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.1.5.bb => python3-sqlalchemy_1.1.6.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pymisp.inc b/meta-python/recipes-devtools/python/python-pymisp.inc
-index 60e7647..fe25b50 100644
---- a/meta-python/recipes-devtools/python/python-pymisp.inc
-+++ b/meta-python/recipes-devtools/python/python-pymisp.inc
-@@ -1,9 +1,9 @@
- DESCRIPTION = "Python API for MISP"
- HOMEPAGE = "https://github.com/MISP/PyMISP"
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=b56d97305d8b2066f2a160d3c8b22f76"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=2e1efdc433498cebd33ec277ad8741e5"
+diff --git a/meta-python/recipes-devtools/python/python-sqlalchemy.inc b/meta-python/recipes-devtools/python/python-sqlalchemy.inc
+index ec6433e..80816bf 100644
+--- a/meta-python/recipes-devtools/python/python-sqlalchemy.inc
++++ b/meta-python/recipes-devtools/python/python-sqlalchemy.inc
+@@ -7,12 +7,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=452f4b8adb0feba42e5be5f1fbfbf538"
+ PYPI_PACKAGE = "SQLAlchemy"
+ inherit pypi
  
--SRC_URI[md5sum] = "cc19a249418a3752379e6528813a715b"
--SRC_URI[sha256sum] = "3ab6d990e09ca404ce778ebbe6b2fd733dfbd244fe5a5ba3f86efe897a6c5c1d"
-+SRC_URI[md5sum] = "5320f41bf96cf22d13af7eb31e1d321f"
-+SRC_URI[sha256sum] = "6c7bd97f0ea9c7eb1935902f1bc6fc1ec27eba86056c5b938234a7229891d5a2"
+-SRC_URI[md5sum] = "50685d97dca4b91945ae6309d03ab8c9"
+-SRC_URI[sha256sum] = "68fb40049690e567ebda7b270176f5abf0d53d9fbd515fec4e43326f601119b6"
++SRC_URI[md5sum] = "cdd2f57967c67e174dd99342111a7db1"
++SRC_URI[sha256sum] = "815924e3218d878ddd195d2f9f5bf3d2bb39fabaddb1ea27dace6ac27d9865e4"
  
--RDEPENDS_${PN} += " ${PYTHON_PN}-requests"
-+RDEPENDS_${PN} += " ${PYTHON_PN}-requests ${PYTHON_PN}-json ${PYTHON_PN}-jsonschema"
-diff --git a/meta-python/recipes-devtools/python/python-pymisp_2.4.65.bb b/meta-python/recipes-devtools/python/python-pymisp_2.4.67.bb
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-json \
+     ${PYTHON_PN}-pickle \
++    ${PYTHON_PN}-logging \
+     ${PYTHON_PN}-netclient \
+     ${PYTHON_PN}-numbers \
+     ${PYTHON_PN}-threading \
+diff --git a/meta-python/recipes-devtools/python/python-sqlalchemy_1.1.5.bb b/meta-python/recipes-devtools/python/python-sqlalchemy_1.1.6.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pymisp_2.4.65.bb
-rename to meta-python/recipes-devtools/python/python-pymisp_2.4.67.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.65.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.67.bb
+rename from meta-python/recipes-devtools/python/python-sqlalchemy_1.1.5.bb
+rename to meta-python/recipes-devtools/python/python-sqlalchemy_1.1.6.bb
+diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.5.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.6.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.65.bb
-rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.67.bb
+rename from meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.5.bb
+rename to meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.6.bb
 -- 
 2.7.4
 
