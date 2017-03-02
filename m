@@ -1,31 +1,49 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from smtp486.redcondor.net (smtp486.redcondor.net [208.80.204.86])
-	by mail.openembedded.org (Postfix) with ESMTP id B5FDF73081
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Mar 2017 13:43:46 +0000 (UTC)
-Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by smtp486.redcondor.net ({6695537a-536a-45f9-a249-877c85428649})
-	via TCP (outbound) with ESMTPS id 20170302134344107_0486;
-	Thu, 02 Mar 2017 13:43:44 +0000
-X-RC-FROM: <rpjday@crashcourse.ca>
-Received: from [216.191.234.70] (port=41594 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1cjR17-0007EE-52; Thu, 02 Mar 2017 08:43:37 -0500
-Date: Thu, 2 Mar 2017 08:43:35 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@uk63952.mitel.com
-To: Derek Straka <derek@asterius.io>
-In-Reply-To: <CADNbA1o_PQuAMf_-zwDFwbJsxud2NjffiDa+q9Wa16sFRJ5hWQ@mail.gmail.com>
-Message-ID: <alpine.LFD.2.20.1703020842570.14789@uk63952.mitel.com>
-References: <alpine.LFD.2.20.1703020815110.14308@uk63952.mitel.com>
-	<CADNbA1o_PQuAMf_-zwDFwbJsxud2NjffiDa+q9Wa16sFRJ5hWQ@mail.gmail.com>
-User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ua0-f169.google.com (mail-ua0-f169.google.com
+	[209.85.217.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 25694775CC;
+	Thu,  2 Mar 2017 13:47:41 +0000 (UTC)
+Received: by mail-ua0-f169.google.com with SMTP id c11so27380656uaa.0;
+	Thu, 02 Mar 2017 05:47:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=x67T1WYzdg7n9LS8vVyntdS889o1QKBRw5eZZXAQkA0=;
+	b=AXGgTDDvBb5hW8J5JalgFOeejNyycEE2IIEK/1GzwhW772UNSp9KAj3LZFPUyTwPPW
+	Uj/nxBaLYLM3cI7SMaQreVGfh+Vav5Utk7jdJeYEgTgbPr6Jp5+G1l6OVtpLSQqE9M18
+	CahqGI8K0bBt6MRSJoAT7N5DdFbmVtK+LZ8o0Qn6fCDGzgTt0srQoYKAZHNBCOM1nvJi
+	LgaEDZs8LOs3cvYTpElkjQ4ABPSY1Bpmnhon1F1Dx1V/oS8RIDDI4eI17Pdo2ceOsxFc
+	pOPKaGvM+csOGhEBfSWOXuA+x07vEMFwu0ZMJ25LZoGDJsICtgJckgInGXV795u8ABeA
+	lojw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=x67T1WYzdg7n9LS8vVyntdS889o1QKBRw5eZZXAQkA0=;
+	b=Lf8pCsbDH7nrDx4XqXET0dOOOR0rYbfa2tNMcTvkdZ1YPq6kjMpfaXUJMLshLbmWsY
+	B78yU17QGZv0x33Mu7phVaNpM8rRAKGAqbk1ZyIbLXKHzoJsn33HYWlkHUEW6bH4BOzv
+	Xe3qXLShMFL1321C9CSDw4bcFKKoj4TPCBRhLISOmu6IuoRjcG0jrmN34O/93t+f1GKz
+	teChcZVOTo6bNg4w1teAeTQElU1YKAkS7O4pLxV0vlyRXGhLVEExNz4qikVSXh3wxhO7
+	YJqSM/NyemaF8vFSZS5iGJdp3HvBjnTnoYo1d5MuIkqBRf+F174rmi+qubJGCCMQTl+Z
+	dsMg==
+X-Gm-Message-State: AMke39lue+2N1HEK4oI4MEhe0+WU9fNfuOcBOMeO+atZnxH9eWPRsAXXLWglGa45UC8sue2kSsSCqU+jyQvywA==
+X-Received: by 10.176.2.146 with SMTP id 18mr6890044uah.79.1488462462398; Thu,
+	02 Mar 2017 05:47:42 -0800 (PST)
 MIME-Version: 1.0
-X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
-Cc: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: PYPI_PACKAGE for (blacklisted) python[3]-ndg-httpsclient is incorrect
+Received: by 10.176.71.65 with HTTP; Thu, 2 Mar 2017 05:47:42 -0800 (PST)
+In-Reply-To: <o98m4o$7ao$1@blaine.gmane.org>
+References: <20170301195550.GE3290@jama>
+	<CALbNGRTO37A-tbDj93nuNi0vu6h3fJg7Wg6P6N8asz45e8H9bg@mail.gmail.com>
+	<o98m4o$7ao$1@blaine.gmane.org>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 2 Mar 2017 14:47:42 +0100
+Message-ID: <CALbNGRRHbVRAqEsVchsztBKnuDF3R6nHmTk4Y05chhWCeF-xmA@mail.gmail.com>
+To: Koen Kooi <koen@dominion.thruhere.net>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-03-01
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,77 +56,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Mar 2017 13:43:46 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Thu, 02 Mar 2017 13:47:42 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Thu, 2 Mar 2017, Derek Straka wrote:
-
-> The URL https://pypi.python.org/pypi/ndg_httpsclient/0.4.2 gets a 301 and
-> redirects to https://pypi.python.org/pypi/ndg-httpsclient/0.4.2.  FWIW, the
-> recipe hasn't been blacklisted in master for a while.
-
-  ah, i never bothered going down that extra directory level to notice
-the redirection.
-
-> On Thu, Mar 2, 2017 at 8:26 AM, Robert P. J. Day <rpjday@crashcourse.ca>
-> wrote:
+On Thu, Mar 2, 2017 at 9:46 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
 >
-> >
-> >   in my wanderings, i noticed the following line in the include file
-> > recipes-devtools/python/python-ndg-httpsclient.inc:
-> >
-> >   PYPI_PACKAGE = "ndg_httpsclient"
-> >
-> > however, that appears to be incorrect -- the correct name over at
-> > pypi.python.org is, in fact, "ndg-httpsclient" (making the assignment
-> > to PYPI_PACKAGE superfluous, yes?)
-> >
-> >   https://pypi.python.org/pypi/ndg-httpsclient/0.4.2
-> >
-> > one would think that would cause problems; however, the python3
-> > version of the recipe is blacklisted for the following reason:
-> >
-> >   http://errors.yoctoproject.org/Errors/Details/130615/
-> >
-> > so one would never get the opportunity to see the build error. still,
-> > wouldn't that cause the python2 version of the recipe to fail? that
-> > one isn't blacklisted.
-> >
-> >   thoughts?
-> >
-> > rday
-> >
-> > --
-> >
-> > ========================================================================
-> > Robert P. J. Day                                 Ottawa, Ontario, CANADA
-> >                         http://crashcourse.ca
-> >
-> > Twitter:                                       http://twitter.com/rpjday
-> > LinkedIn:                               http://ca.linkedin.com/in/rpjday
-> > ========================================================================
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Util-linux is the preferred provider for libuuid (it moved from e2fsprogs to
+> util-linux a few years ago).
 >
+> regards,
+>
+Thanks - did not know that (just asked oe-layer-list). Will try that
+one next weekend...
 
--- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
-
+Andreas
 
