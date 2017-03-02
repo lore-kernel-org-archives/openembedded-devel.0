@@ -1,42 +1,39 @@
-Return-Path: <tom@harbortronics.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E19477758E
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 305 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 02 Mar 2017 23:43:03 UTC
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 74FB877636
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Mar 2017 21:01:42 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id 1so10421660pgz.2
+	Thu,  2 Mar 2017 23:43:03 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 6F22A20B64
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Mar 2017 13:01:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=harbortronics.com; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=tQGyqyL4nv+YqYX0p9jJceNFE0Qdgazvu4rS4nGJoMQ=;
-	b=aavXcvs1St9x36vYQgmoIpGtarUjKiHX0z4mvc5qg//IPtcwAZipuCZBUGciMuN564
-	AAQWUAiipaIKKV8lyTCRDNy/5TaK39llkZ8xmbsGsqZwEPmRbx3fi/NKfe1Xsp/Z9JD0
-	ms5C6TDhyNHuEIpihO4wq7uiXdq4zMqEKkcoc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=tQGyqyL4nv+YqYX0p9jJceNFE0Qdgazvu4rS4nGJoMQ=;
-	b=EizbTJWHtDwOCjkuFJwn6XrNCW8+cdg19Jp6mGdHbwkEb59Cbg0FvmrSARNXE9YLU5
-	PLpPL0NrnLdHmJrrC7Mt6aQI+SxloFyytFsF9oOrhZkmlyIhr972gLjWKkdquMi8V5ws
-	wF+Fizu95+8NcuphT3QnhRAlY/l+SaFa4q3X/acpouZ6+RM9ti6I363xnxDNXPhV1Ouk
-	Tx+VRJFFuIZR2Dpq2dcfGz5HdUpO4ibsEe7aiHS0aCR4OkHex0atQelLZi/z7coILjw8
-	5StGqxjMgkyXdxqM6I7gtnzsnVVst+9ZEGtfgwPVcMHQhDnTqx/P4xsvkcK25r5Oguc/
-	Nxuw==
-X-Gm-Message-State: AMke39lf3C3WJNGoHV9McdBZEqBR80J6etXNy03RP8rTv096SMEB7dQeAtCFNMYU0scEEA==
-X-Received: by 10.98.206.78 with SMTP id y75mr18175428pfg.108.1488488503964;
-	Thu, 02 Mar 2017 13:01:43 -0800 (PST)
-Received: from yocto-dev.harbortronics.com (174-21-50-42.tukw.qwest.net.
-	[174.21.50.42]) by smtp.gmail.com with ESMTPSA id
-	d1sm18807808pfk.20.2017.03.02.13.01.42
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 02 Mar 2017 13:01:42 -0800 (PST)
-From: Tom Hayward <tom@harbortronics.com>
+	Thu,  2 Mar 2017 23:37:59 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id xXluknYskzaz
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Mar 2017 23:37:59 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
+	[100.15.95.79])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 51F722088F
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Mar 2017 23:37:59 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 6965C1623A6; Thu,  2 Mar 2017 18:37:58 -0500 (EST)
+Date: Thu, 2 Mar 2017 18:37:58 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Mar 2017 13:01:40 -0800
-Message-Id: <1488488500-68957-1-git-send-email-tom@harbortronics.com>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-filesystems][PATCHv2] fuse-exfat: fix mount detection of mount.exfat
+Message-ID: <20170302233758.GS7350@denix.org>
+References: <20170202235401.10297-1-Martin.Jansa@gmail.com>
+	<20170202235401.10297-3-Martin.Jansa@gmail.com>
+	<CA+chaQfmX5Kvi6f+mUwK3rpRE80yF5KtYF_=-YSSqM0Gix0eyw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQfmX5Kvi6f+mUwK3rpRE80yF5KtYF_=-YSSqM0Gix0eyw@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH][meta-qt5 3/4] qtwayland: fix build without xkbcommon-evdev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,31 +46,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Mar 2017 21:01:43 -0000
+X-List-Received-Date: Thu, 02 Mar 2017 23:43:05 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-When package was switched to autotools, "DESTDIR=${D}/${base_sbindir}" was
-removed from the recipe. This left the installation target as sbindir
-(/usr/sbin/). This breaks `mount -t exfat /dev/sda1 /media/sda1`, because
-mount only searches for mount.exfat in /sbin/, /sbin/fs.d/, and /sbin/fs/.
+On Fri, Feb 03, 2017 at 01:00:16AM +0100, Martin Jansa wrote:
+> This isn't enough at least in some setups, but it's good start (it works
+> after you add -lxkbcommon in 2 incorrectly generated Makefiles) and at
+> least it documents that xkbcommon-evdev is now needed to be set in qtbase
+> PACKAGECONFIG.
 
-With sbindir = "${base_sbindir}", mount.exfat is installed at /sbin/mount.exfat
-where mount can find it.
+Can qtwayland 5.8 be built w/o "x11" in DISTRO_FEATURES?
 
-Signed-off-by: Tom Hayward <tom@harbortronics.com>
----
- meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb |    1 +
- 1 file changed, 1 insertion(+)
+I have X-less setup and obviously don't get xkbcommon-evdev in PACKAGECONFIG, 
+thus:
 
-diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
-index 639e33c..99bf2be 100644
---- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
-+++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
-@@ -18,3 +18,4 @@ SRC_URI[md5sum] = "fca71e6598f79d037a3c7c969cb5710c"
- SRC_URI[sha256sum] = "f2e06eba5a21c621aac1d6da21b12a5a324fdd1e20f9c8acd357dd463c2355d9"
- 
- S = "${WORKDIR}/${PN}-${PV}"
-+EXTRA_OECONF += "sbindir=${base_sbindir}"
+| /usr/src/debug/qtwayland/5.8.0+gitAUTOINC+0e2a950895-r0/git/src/shared/qwaylandxkb.cpp:297: error: undefined reference to 'xkb_keysym_to_utf32'
+| /usr/src/debug/qtwayland/5.8.0+gitAUTOINC+0e2a950895-r0/git/src/shared/qwaylandxkb.cpp:337: error: undefined reference to 'xkb_state_mod_name_is_active'
+| /usr/src/debug/qtwayland/5.8.0+gitAUTOINC+0e2a950895-r0/git/src/shared/qwaylandxkb.cpp:339: error: undefined reference to 'xkb_state_mod_name_is_active'
+| /usr/src/debug/qtwayland/5.8.0+gitAUTOINC+0e2a950895-r0/git/src/shared/qwaylandxkb.cpp:341: error: undefined reference to 'xkb_state_mod_name_is_active'
+| /usr/src/debug/qtwayland/5.8.0+gitAUTOINC+0e2a950895-r0/git/src/shared/qwaylandxkb.cpp:343: error: undefined reference to 'xkb_state_mod_name_is_active'
+
 -- 
-1.7.10.4
+Denys
 
+
+> On Fri, Feb 3, 2017 at 12:54 AM, Martin Jansa <martin.jansa@gmail.com>
+> wrote:
+> 
+> > * xkbcommon-evdev isn't enabled in default qtbase PACKAGECONFIG
+> > * use patch from https://bugreports.qt.io/browse/QTBUG-57767
+> >
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > ---
+> >  .../0001-fix-build-without-xkbcommon-evdev.patch   | 44
+> > ++++++++++++++++++++++
+> >  recipes-qt/qt5/qtwayland_git.bb                    |  3 ++
+> >  2 files changed, 47 insertions(+)
+> >  create mode 100644 recipes-qt/qt5/qtwayland/0001-
+> > fix-build-without-xkbcommon-evdev.patch
+> >
+> > diff --git a/recipes-qt/qt5/qtwayland/0001-fix-build-without-xkbcommon-evdev.patch
+> > b/recipes-qt/qt5/qtwayland/0001-fix-build-without-xkbcommon-evdev.patch
+> > new file mode 100644
+> > index 0000000..e1e978e
+> > --- /dev/null
+> > +++ b/recipes-qt/qt5/qtwayland/0001-fix-build-without-
+> > xkbcommon-evdev.patch
+> > @@ -0,0 +1,44 @@
+> > +From c93dbe53e8a1b2203c750a66c7efe6fc9a326903 Mon Sep 17 00:00:00 2001
+> > +From: Raphael Freudiger <raphael.freudiger@siemens.com>
+> > +Date: Thu, 22 Dec 2016 13:54:31 +0100
+> > +Subject: [PATCH] fix build without xkbcommon-evdev
+> > +
+> > +Signed-off-by: Raphael Freudiger <raphael.freudiger@siemens.com>
+> > +---
+> > + src/compositor/compositor_api/qwaylandkeyboard.cpp | 13 +++++++------
+> > + 1 file changed, 7 insertions(+), 6 deletions(-)
+> > +
+> > +diff --git a/src/compositor/compositor_api/qwaylandkeyboard.cpp
+> > b/src/compositor/compositor_api/qwaylandkeyboard.cpp
+> > +index 55381b4..5c054c6 100644
+> > +--- a/src/compositor/compositor_api/qwaylandkeyboard.cpp
+> > ++++ b/src/compositor/compositor_api/qwaylandkeyboard.cpp
+> > +@@ -338,12 +338,6 @@ void QWaylandKeyboardPrivate::createXKBState(xkb_keymap
+> > *keymap)
+> > +     xkb_state = xkb_state_new(keymap);
+> > + }
+> > +
+> > +-uint QWaylandKeyboardPrivate::toWaylandXkbV1Key(const uint
+> > nativeScanCode)
+> > +-{
+> > +-    const uint offset = 8;
+> > +-    Q_ASSERT(nativeScanCode >= offset);
+> > +-    return nativeScanCode - offset;
+> > +-}
+> > +
+> > + void QWaylandKeyboardPrivate::createXKBKeymap()
+> > + {
+> > +@@ -373,6 +367,13 @@ void QWaylandKeyboardPrivate::createXKBKeymap()
+> > + }
+> > + #endif
+> > +
+> > ++uint QWaylandKeyboardPrivate::toWaylandXkbV1Key(const uint
+> > nativeScanCode)
+> > ++{
+> > ++    const uint offset = 8;
+> > ++    Q_ASSERT(nativeScanCode >= offset);
+> > ++    return nativeScanCode - offset;
+> > ++}
+> > ++
+> > + void QWaylandKeyboardPrivate::sendRepeatInfo()
+> > + {
+> > +     Q_FOREACH (Resource *resource, resourceMap()) {
+> > +--
+> > +2.1.4
+> > +
+> > diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_
+> > git.bb
+> > index 21abd54..d42d80a 100644
+> > --- a/recipes-qt/qt5/qtwayland_git.bb
+> > +++ b/recipes-qt/qt5/qtwayland_git.bb
+> > @@ -43,4 +43,7 @@ EXTRA_QMAKEVARS_CONFIGURE += "${PACKAGECONFIG_CONFARGS}"
+> >
+> >  SRCREV = "0e2a950895805457a45abe860bc91a7cc4ba405e"
+> >
+> > +# From https://bugreports.qt.io/browse/QTBUG-57767
+> > +SRC_URI += "file://0001-fix-build-without-xkbcommon-evdev.patch"
+> > +
+> >  BBCLASSEXTEND =+ "native nativesdk"
+> > --
+> > 2.10.2
+> >
+> >
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
