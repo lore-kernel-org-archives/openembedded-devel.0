@@ -1,46 +1,49 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f169.google.com (mail-wr0-f169.google.com
-	[209.85.128.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 79D0777533
+Received: from mail-wr0-f172.google.com (mail-wr0-f172.google.com
+	[209.85.128.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 935F67760A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Mar 2017 20:43:33 +0000 (UTC)
-Received: by mail-wr0-f169.google.com with SMTP id u48so61086077wrc.0
+	Thu,  2 Mar 2017 20:48:31 +0000 (UTC)
+Received: by mail-wr0-f172.google.com with SMTP id g10so61092132wrg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Mar 2017 12:43:34 -0800 (PST)
+	Thu, 02 Mar 2017 12:48:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=2uL+BrCXZrlr6shy2w380FyHIjQ64douhBkswcwKu3I=;
-	b=IgZgxvSp9Nt+8XasWMb6smgXsq0dgxZr+xNEs9Ob4ShHQA85iRtrQO9l/wCxPeKzze
-	UvIYV3wfjAPf73bzjcbwt11AEQGLHDFSR0tyV2vvK7e5j78jUqoOybPtEQl4U5clPoEB
-	gakTINzHt8EdX3JY3xw92ngsQ7+xbzdH9npeG35zfFfWUN1maWQFFl0Z610GVugOoU+d
-	3wMe4slKoGQccdZjtOcvsDElYti871plYLhn9kzTtWbSikGJ2lU0pdaJzeZqCwmG/YQ4
-	A5jvZ8POkSGxNJaYOSDUT8INPKPcrWotMQvwrBKOtPmhNWzj+niAc1QfECIS+KggKVrj
-	zxTQ==
+	:cc; bh=pJEzq02wYzng0XVkLZErkjeXpsiIguQuO3BsXCb7FRc=;
+	b=A5wGniS4EqgM023wFtnnTzTqqr5kH30GHS+0dNWJk9+m2VCMLjkPK/Q/yZu1OJwQZF
+	AJf9Y5NKe16mKLLCQGtlfFann1SuoVZ2HCPyC+HJ/kHPZqKcjbRDlP7TqU5WeW97loaD
+	pZ+X8sw6P2rr0PqbXGbTIHc1P4kljW0CDJCwg1fMFyh06nkEPz4yskl71E8eTfUNwPOi
+	mXkPU4GOuXqR9NRC3Ogm/MnWkmg4RNCrkJL9k3GHZaQG2YoUi8HrbajRNoNpVSvyTqJF
+	yvx61Sblw7nFmgJNrRuCh2wC2UBXAVMIlWkdajnMcTHkuRF846/xnYCKmZ8xMeY82pG9
+	RakA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=2uL+BrCXZrlr6shy2w380FyHIjQ64douhBkswcwKu3I=;
-	b=JIf0aNxpvqVayZGEzUBFzVJ1J0HiaAzDUddTWUuJQORbbnUZjnmL8ulaxC3Q9XoceP
-	p2XGxrfrUc6JaC9Mn/3O1Qhgc04Ro8fB0y8Onp0fBT3wD+BxJSS/6BNdYEYn199IMTvb
-	hbh8JpyOCj/JWCEq87DmTy2J7uafJdd3mrig4giIzxORxgA9ffMs5msV8UWVxjB5KIiD
-	nImRSqqljGyEPLZszgaainLNK73n7gBNR8kiJ69pod5Ft3e6gxFUwn8PuLT/inRn996y
-	+vaDN4fdn0LC/qiS1gEBV7iD/JNMLRCR9dWaQ4/01ag53uLD40PRMIVC2mxVlpxNDAHM
-	HKsw==
-X-Gm-Message-State: AMke39l87drMmi0A9nmda21qMuuN6Ev06c8rIUb9CckWEQnno6CUmbb9UNv316g7ZDH1xcNYlmY8608apw90Ww==
-X-Received: by 10.223.136.66 with SMTP id e2mr14489111wre.14.1488487414059;
-	Thu, 02 Mar 2017 12:43:34 -0800 (PST)
+	bh=pJEzq02wYzng0XVkLZErkjeXpsiIguQuO3BsXCb7FRc=;
+	b=tTSvfWhOd2qOJYXSrLvBBeJlg4rWOzEz/ukHbrMx8LZUgpOv3REa/36cEZEU+vXtnC
+	7sAWwy6QEC0VJLyVTZLk0OjyFNgwTHeIsq6UzQBqNrbB/Z7TQV2MLQZotuGRmBLev64I
+	Z245j4fVqyv8WEEqtcj5uQ8gT3A5tQ0TuzZUFtb8d6gRo/ViacogcOFUxZBxwDylhl6i
+	JA1BGPmPfYcZtjHT6ioKO/cEr35Zt6mEkk2OLKQr8fKK5pgNW/0JVoBO2RkNn3RZMPyW
+	hLkxAZAEG2NYBmrq5GVwlAVXFcCyXjSXs6I2l0nrkhEmNFZrXouRcE7W9aMwkFFOIplq
+	r5Dg==
+X-Gm-Message-State: AMke39k2/PRL5YM69gfG0/tWNGQ10N5vJigX5ajFwK7yBxORl9eJDr/yKNDg0ogq+qclCrk2VVnMmBdUQ2WCZw==
+X-Received: by 10.223.164.212 with SMTP id h20mr4865157wrb.196.1488487712203; 
+	Thu, 02 Mar 2017 12:48:32 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.80.145.24 with HTTP; Thu, 2 Mar 2017 12:43:33 -0800 (PST)
-In-Reply-To: <1488415667-57394-1-git-send-email-tom@harbortronics.com>
-References: <1488415667-57394-1-git-send-email-tom@harbortronics.com>
+Received: by 10.80.145.24 with HTTP; Thu, 2 Mar 2017 12:48:31 -0800 (PST)
+In-Reply-To: <CALbNGRR3DKMiSBnW+=WrWJVHqUzN5FKNoDh=4Na9s1NCnE1ysg@mail.gmail.com>
+References: <20170301173049.1177-1-pkj@axis.com>
+	<CALbNGRR3DKMiSBnW+=WrWJVHqUzN5FKNoDh=4Na9s1NCnE1ysg@mail.gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 2 Mar 2017 21:43:33 +0100
-Message-ID: <CA+chaQcRFVzE_WEpC6SMvEoEr1DSztM_whCUB5-2qZYJU9jJXg@mail.gmail.com>
-To: Tom Hayward <tom@harbortronics.com>
+Date: Thu, 2 Mar 2017 21:48:31 +0100
+Message-ID: <CA+chaQemN9j4vEXqfV4gtSLKvNdsTyjWyHbsqDhGPnSSBn71kA@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-filesystems][PATCH] fuse-exfat: fix mount detection of mount.exfat
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Subject: Re: [PATCH] Make use of the new bb.utils.filter() function
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,44 +56,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Mar 2017 20:43:34 -0000
+X-List-Received-Date: Thu, 02 Mar 2017 20:48:31 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Can we pass correct installation path in configure instead of changing the
-variable itself?
+I agree with Andreas, but I'm not opposed to this so strongly.
 
-Also missing your SOB line.
+Especially as similar patch for oe-core (changing 81 files) was already
+merged. Similarly the getVar cleanup recently will also cause some
+headaches when cherry-picking. Unfortunately my "safe" (as it won't break
+the build) whitespace cleanup won't ever get merged to oe-core, because
+it's "too intrusive" :/.
 
-On Thu, Mar 2, 2017 at 1:47 AM, Tom Hayward <tom@harbortronics.com> wrote:
+Someone else with another opinion?
 
-> When package was switched to autotools, "DESTDIR=${D}/${base_sbindir}" was
-> removed from the recipe. This left the installation target as sbindir
-> (/usr/sbin/). This breaks `mount -t exfat /dev/sda1 /media/sda1`, because
-> mount only searches for mount.exfat in /sbin/, /sbin/fs.d/, and /sbin/fs/.
+On Wed, Mar 1, 2017 at 11:02 PM, Andreas M=C3=BCller <
+schnitzeltony@googlemail.com> wrote:
+
+> On Wed, Mar 1, 2017 at 6:30 PM, Peter Kjellerstedt
+> <peter.kjellerstedt@axis.com> wrote:
+> > Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 >
-> With sbindir = "${base_sbindir}", mount.exfat is installed at
-> /sbin/mount.exfat
-> where mount can find it.
-> ---
->  meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb |
-> 1 +
->  1 file changed, 1 insertion(+)
+> TBH: I don't like this patch:
 >
-> diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-
-> exfat_1.2.3.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-
-> exfat_1.2.3.bb
-> index 639e33c..0db1252 100644
-> --- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
-> +++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
-> @@ -18,3 +18,4 @@ SRC_URI[md5sum] = "fca71e6598f79d037a3c7c969cb5710c"
->  SRC_URI[sha256sum] = "f2e06eba5a21c621aac1d6da21b12a
-> 5a324fdd1e20f9c8acd357dd463c2355d9"
+> * It combines things which do not share same labels by design. Naming
+> package-configs with same label as distro-feature is a nice to have
+> but not a design rule.
+> * To me old style explains better what's going on
+> * Heavy-gozilla-patches tend to cause headaches when cherry-picking to
+> older release branches. And yes I know we had these patches in the
+> past and nobody complained.
 >
->  S = "${WORKDIR}/${PN}-${PV}"
-> +sbindir = "${base_sbindir}"
-> --
-> 1.7.10.4
->
+> Andreas
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
