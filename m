@@ -1,42 +1,30 @@
-Return-Path: <tom@harbortronics.com>
-Received: from mail-pg0-f47.google.com (mail-pg0-f47.google.com [74.125.83.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 351D273042
+Return-Path: <rpjday@crashcourse.ca>
+Received: from smtp685.redcondor.net (smtp685.redcondor.net [208.80.206.85])
+	by mail.openembedded.org (Postfix) with ESMTP id 5FBC471CBD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Mar 2017 00:47:56 +0000 (UTC)
-Received: by mail-pg0-f47.google.com with SMTP id s67so25752527pgb.3
+	Thu,  2 Mar 2017 12:32:31 +0000 (UTC)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
+	by smtp685.redcondor.net ({20c8e40f-6b6c-4c9e-abff-1640ea7bf404})
+	via TCP (outbound) with ESMTPS id 20170302123230192_0685
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Mar 2017 16:47:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=harbortronics.com; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=O+FtdhWlwvMYCE47dZ/ijuEe8HggprwIBKJrv/Tw1DE=;
-	b=hCFWDGiADcuFBdD/5jRoFTjMeMw4WtwQz/qW1XAoxSJS5tAUzkFeIfstS9PHoAPE6N
-	lkUIO7NPRn1knO2yRmhbK5tAGUlZYGpZ0soDoRp9P2kupI1hG8ACsBafiKb8yBlM6Jqr
-	eQb2AVQLROjRQaeeGj7rGFpA3z+73X6gdHGC4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=O+FtdhWlwvMYCE47dZ/ijuEe8HggprwIBKJrv/Tw1DE=;
-	b=hXdCKS9UwAz6mTvwhjOBpif9S6hWmHxQ2Zw3FGPcjWCvXCYFdMEAXUyHbyNjync4IU
-	2OGQX+3Ncxq638rmCC49R40a9YvfBiYSjVGV0diFRP2h/y4z6GXPbuxHvSIp/hnd+ZEC
-	Qz4eC3DpgVzTiPPwzA1u/53A7G4eIBAKNEQgHqU9OzGif2IWyCIGmNEKzHum4UXdZ7b1
-	2bL2Ngdxiu2St5MH/gIZHWRsTGBhYaXcUV8Nn+F1dNfAYzXKua3EPnzezF7kgkzP/qSK
-	CH1maFubnOciRbvH8EPclqwQx7JrKOEuAspfZ4lxn30JRsDk9mookrrYkx0ox8QI6eYR
-	M1ig==
-X-Gm-Message-State: AMke39mgwz3XLR/JG3SDUpgctqO3GIqSuSdIbzE3V47OTZIv1OQUipFkiK/cNnvuuFsgPQ==
-X-Received: by 10.99.108.74 with SMTP id h71mr11862798pgc.99.1488415677612;
-	Wed, 01 Mar 2017 16:47:57 -0800 (PST)
-Received: from yocto-dev.harbortronics.com (174-21-50-42.tukw.qwest.net.
-	[174.21.50.42]) by smtp.gmail.com with ESMTPSA id
-	67sm12751635pfd.120.2017.03.01.16.47.56
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 01 Mar 2017 16:47:56 -0800 (PST)
-From: Tom Hayward <tom@harbortronics.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Mar 2017 16:47:47 -0800
-Message-Id: <1488415667-57394-1-git-send-email-tom@harbortronics.com>
-X-Mailer: git-send-email 1.7.10.4
-Subject: [meta-filesystems][PATCH] fuse-exfat: fix mount detection of mount.exfat
+	Thu, 02 Mar 2017 04:32:30 -0800
+X-RC-FROM: <rpjday@crashcourse.ca>
+X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
+Received: from [216.191.234.70] (port=59523 helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
+	id 1cjPuC-0000dv-Ou for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Mar 2017 07:32:24 -0500
+Date: Thu, 2 Mar 2017 07:32:22 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@uk63952.mitel.com
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.20.1703020726520.13807@uk63952.mitel.com>
+User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
+MIME-Version: 1.0
+X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
+Subject: [PATCH] meta-python: Remove superfluous "PYPI_PACKAGE" assignments
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,29 +37,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Mar 2017 00:47:57 -0000
+X-List-Received-Date: Thu, 02 Mar 2017 12:32:32 -0000
+Content-Type: text/plain; charset=US-ASCII
 
-When package was switched to autotools, "DESTDIR=${D}/${base_sbindir}" was
-removed from the recipe. This left the installation target as sbindir
-(/usr/sbin/). This breaks `mount -t exfat /dev/sda1 /media/sda1`, because
-mount only searches for mount.exfat in /sbin/, /sbin/fs.d/, and /sbin/fs/.
 
-With sbindir = "${base_sbindir}", mount.exfat is installed at /sbin/mount.exfat
-where mount can find it.
+Given calculation of PYPI_PACKAGE value from recipe file name, a
+number of Python recipe files unnecessarily set this value, so delete
+these superfluous lines.
+
+In addition, the act of editing added a missing EOL at the end of one
+of the files.
+
+Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+
 ---
- meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb |    1 +
- 1 file changed, 1 insertion(+)
 
-diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
-index 639e33c..0db1252 100644
---- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
-+++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
-@@ -18,3 +18,4 @@ SRC_URI[md5sum] = "fca71e6598f79d037a3c7c969cb5710c"
- SRC_URI[sha256sum] = "f2e06eba5a21c621aac1d6da21b12a5a324fdd1e20f9c8acd357dd463c2355d9"
- 
- S = "${WORKDIR}/${PN}-${PV}"
-+sbindir = "${base_sbindir}"
+  i dislike extraneous content, so a quick cleaning of some
+meta-python recipes where PYPI_PACKAGE will already have the correct
+value as calculated by pypi.bbclass.
+
+diff --git a/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb b/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb
+index 6eeab7e..5cef7d9 100644
+--- a/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb
++++ b/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb
+@@ -7,8 +7,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
+ SRC_URI[md5sum] = "b7fa82034b1c0e1fb1b518ffe3bb4fc0"
+ SRC_URI[sha256sum] = "46c64c0692063fd0c9fb0216d49f7884bec9fa9760d8473db4b1e2f8162fab4a"
+
+-PYPI_PACKAGE = "pyconnman"
+-
+ inherit pypi setuptools
+
+-RDEPENDS_${PN} = "python-dbus python-pprint"
+\ No newline at end of file
++RDEPENDS_${PN} = "python-dbus python-pprint"
+diff --git a/meta-python/recipes-devtools/python/python-pycrypto.inc b/meta-python/recipes-devtools/python/python-pycrypto.inc
+index 42e31a9..fb2c17d 100644
+--- a/meta-python/recipes-devtools/python/python-pycrypto.inc
++++ b/meta-python/recipes-devtools/python/python-pycrypto.inc
+@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=35f354d199e8cb7667b059a23578e63d"
+ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
+ DEPENDS += " gmp"
+-PYPI_PACKAGE = "pycrypto"
+
+ inherit pypi autotools-brokensep
+
+diff --git a/meta-python/recipes-devtools/python/python-pyinotify.inc b/meta-python/recipes-devtools/python/python-pyinotify.inc
+index a9edb2c..0168f1a 100644
+--- a/meta-python/recipes-devtools/python/python-pyinotify.inc
++++ b/meta-python/recipes-devtools/python/python-pyinotify.inc
+@@ -7,5 +7,4 @@ RDEPENDS_${PN} += "python-threading python-io python-subprocess python-misc pyth
+ SRC_URI[md5sum] = "8e580fa1ff3971f94a6f81672b76c406"
+ SRC_URI[sha256sum] = "9c998a5d7606ca835065cdabc013ae6c66eb9ea76a00a1e3bc6e0cfe2b4f71f4"
+
+-PYPI_PACKAGE = "pyinotify"
+ inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-singledispatch_3.4.0.3.bb b/meta-python/recipes-devtools/python/python-singledispatch_3.4.0.3.bb
+index 87f46e5..44c9505 100644
+--- a/meta-python/recipes-devtools/python/python-singledispatch_3.4.0.3.bb
++++ b/meta-python/recipes-devtools/python/python-singledispatch_3.4.0.3.bb
+@@ -9,5 +9,4 @@ LIC_FILES_CHKSUM = "file://README.rst;md5=ee3cd67264adc7eb07981f3644dc17dc"
+ SRC_URI[md5sum] = "af2fc6a3d6cc5a02d0bf54d909785fcb"
+ SRC_URI[sha256sum] = "5b06af87df13818d14f08a028e42f566640aef80805c3b50c5056b086e3c2b9c"
+
+-PYPI_PACKAGE = "singledispatch"
+ inherit pypi setuptools
+diff --git a/meta-python/recipes-devtools/python/python-ujson_1.35.bb b/meta-python/recipes-devtools/python/python-ujson_1.35.bb
+index 4ef3d18..238dc92 100644
+--- a/meta-python/recipes-devtools/python/python-ujson_1.35.bb
++++ b/meta-python/recipes-devtools/python/python-ujson_1.35.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;startline=8;endline=9;md5=4f369b3c3c290b4aed
+ SRC_URI[md5sum] = "42f77b0cce686dfa4da2e68480b1dd24"
+ SRC_URI[sha256sum] = "f66073e5506e91d204ab0c614a148d5aa938bdbf104751be66f8ad7a222f5f86"
+
+-PYPI_PACKAGE = "ujson"
+ inherit pypi setuptools
+
+ RDEPENDS_${PN} += "\
+diff --git a/meta-python/recipes-devtools/python/python-yappi_0.98.bb b/meta-python/recipes-devtools/python/python-yappi_0.98.bb
+index 02ec7d0..51308c8 100644
+--- a/meta-python/recipes-devtools/python/python-yappi_0.98.bb
++++ b/meta-python/recipes-devtools/python/python-yappi_0.98.bb
+@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;md5=6b131c3041637f6a5175a43112dde05c"
+ SRC_URI[md5sum] = "dc56240575c99938a924eaeb7c0d8beb"
+ SRC_URI[sha256sum] = "5f657129e1b9b952379ffbc009357d0dcdb58c50f3bfe88ffbb992e4b27b263c"
+
+-PYPI_PACKAGE = "yappi"
+ inherit pypi setuptools
+
+ RDEPENDS_${PN} += "\
+
 -- 
-1.7.10.4
+
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
 
