@@ -1,46 +1,42 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f181.google.com (mail-ua0-f181.google.com
-	[209.85.217.181])
-	by mail.openembedded.org (Postfix) with ESMTP id D63F9774D8;
-	Wed,  1 Mar 2017 23:14:04 +0000 (UTC)
-Received: by mail-ua0-f181.google.com with SMTP id q7so26095162uaf.2;
-	Wed, 01 Mar 2017 15:14:06 -0800 (PST)
+Return-Path: <tom@harbortronics.com>
+Received: from mail-pg0-f47.google.com (mail-pg0-f47.google.com [74.125.83.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 351D273042
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Mar 2017 00:47:56 +0000 (UTC)
+Received: by mail-pg0-f47.google.com with SMTP id s67so25752527pgb.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Mar 2017 16:47:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=JrQ5uNc6Rdt4ybkYxOrbmThL4Gep0PfoISulOHUMIkU=;
-	b=J/Jv1kGO0u2IkJYTAQzCf2uABxTRUL//JJ1YnnZ8nBXTRP2Ou5jMth8twLqsI97bc/
-	DcaheXqYNmwgrcKtn1IFjAyFp29hTTlX962evW9hFgGaHIYd4NFZfSzDytZzk3bjJXw+
-	af3MGUvo0poJOZvVuTwKLGmhe/zGnDT6an5SN0w8a0WlTib4Yl9oNy/7cTUILSwwzu7z
-	7tVMqajcpQOnVxAqKkP8zhuSBTQBn/iAYlCW5kVTd5sHmKZS8oqyXNLbpGWDyrnmXXQp
-	Dk/VCv9rCd+uYxlCFHVXwZZfYXOP4++4cJeGQrwwH5Q5Un1wZ7G18In566K2dxmfWOjr
-	k7bQ==
+	d=harbortronics.com; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=O+FtdhWlwvMYCE47dZ/ijuEe8HggprwIBKJrv/Tw1DE=;
+	b=hCFWDGiADcuFBdD/5jRoFTjMeMw4WtwQz/qW1XAoxSJS5tAUzkFeIfstS9PHoAPE6N
+	lkUIO7NPRn1knO2yRmhbK5tAGUlZYGpZ0soDoRp9P2kupI1hG8ACsBafiKb8yBlM6Jqr
+	eQb2AVQLROjRQaeeGj7rGFpA3z+73X6gdHGC4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=JrQ5uNc6Rdt4ybkYxOrbmThL4Gep0PfoISulOHUMIkU=;
-	b=s+99F4kCSFonXveMd5Pn+Qka2bX7mPSoYI872JAThyOKLaOXYAygq9sVuiECFLUZiW
-	QPhohZ7JiEGYM6vaxVR+mih3dcjQ59vwK5rafJ0EWauyocyoQ9RNYenLCnAuyLDx0jqi
-	5+kMagMz/QIGk9GW5mBZD7GI94gyEr0n4bXp2Z9WlxreEjtVB6vHF2BYaeuHDdoDEWgX
-	VM2EIIOSuF2Vx+S/YkkNFwn5UN142IytqU1SRBe1dgQtTLqlaAKiQrB7mwO5XO9xkD4U
-	Mun9BIZxbt0lv6lNZRqxw8bNMFujAVtP3CQu2FdaHrwJjfPxWp0Dvo2mDR9m9gPcT37j
-	h3dw==
-X-Gm-Message-State: AMke39km9vg20WYqPKjTLn7JEm4VGNu2xjMhPVZXZhKec5taneMS0AXSQzr5EIS5vLEdXUVjRn1oESVvp4DUHA==
-X-Received: by 10.31.3.83 with SMTP id 80mr1602850vkd.64.1488410045659; Wed,
-	01 Mar 2017 15:14:05 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.176.71.65 with HTTP; Wed, 1 Mar 2017 15:14:05 -0800 (PST)
-In-Reply-To: <20170301195550.GE3290@jama>
-References: <20170301195550.GE3290@jama>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Thu, 2 Mar 2017 00:14:05 +0100
-Message-ID: <CALbNGRTO37A-tbDj93nuNi0vu6h3fJg7Wg6P6N8asz45e8H9bg@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-03-01
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=O+FtdhWlwvMYCE47dZ/ijuEe8HggprwIBKJrv/Tw1DE=;
+	b=hXdCKS9UwAz6mTvwhjOBpif9S6hWmHxQ2Zw3FGPcjWCvXCYFdMEAXUyHbyNjync4IU
+	2OGQX+3Ncxq638rmCC49R40a9YvfBiYSjVGV0diFRP2h/y4z6GXPbuxHvSIp/hnd+ZEC
+	Qz4eC3DpgVzTiPPwzA1u/53A7G4eIBAKNEQgHqU9OzGif2IWyCIGmNEKzHum4UXdZ7b1
+	2bL2Ngdxiu2St5MH/gIZHWRsTGBhYaXcUV8Nn+F1dNfAYzXKua3EPnzezF7kgkzP/qSK
+	CH1maFubnOciRbvH8EPclqwQx7JrKOEuAspfZ4lxn30JRsDk9mookrrYkx0ox8QI6eYR
+	M1ig==
+X-Gm-Message-State: AMke39mgwz3XLR/JG3SDUpgctqO3GIqSuSdIbzE3V47OTZIv1OQUipFkiK/cNnvuuFsgPQ==
+X-Received: by 10.99.108.74 with SMTP id h71mr11862798pgc.99.1488415677612;
+	Wed, 01 Mar 2017 16:47:57 -0800 (PST)
+Received: from yocto-dev.harbortronics.com (174-21-50-42.tukw.qwest.net.
+	[174.21.50.42]) by smtp.gmail.com with ESMTPSA id
+	67sm12751635pfd.120.2017.03.01.16.47.56
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 01 Mar 2017 16:47:56 -0800 (PST)
+From: Tom Hayward <tom@harbortronics.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  1 Mar 2017 16:47:47 -0800
+Message-Id: <1488415667-57394-1-git-send-email-tom@harbortronics.com>
+X-Mailer: git-send-email 1.7.10.4
+Subject: [meta-filesystems][PATCH] fuse-exfat: fix mount detection of mount.exfat
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,34 +49,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Mar 2017 23:14:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 02 Mar 2017 00:47:57 -0000
 
-On Wed, Mar 1, 2017 at 8:55 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
->     * openembedded-core/meta/recipes-extended/parted/parted_3.2.bb:do_compile_ptest_base
-Before Martin blacklists gparted for dependency :)
+When package was switched to autotools, "DESTDIR=${D}/${base_sbindir}" was
+removed from the recipe. This left the installation target as sbindir
+(/usr/sbin/). This breaks `mount -t exfat /dev/sda1 /media/sda1`, because
+mount only searches for mount.exfat in /sbin/, /sbin/fs.d/, and /sbin/fs/.
 
-1. Autobuilder error log says:
+With sbindir = "${base_sbindir}", mount.exfat is installed at /sbin/mount.exfat
+where mount can find it.
+---
+ meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb |    1 +
+ 1 file changed, 1 insertion(+)
 
-| ../libparted/fs/.libs/libparted-fs-resize.so: error: undefined
-reference to 'uuid_generate'
-| collect2: error: ld returned 1 exit status
-| Makefile:1422: recipe for target 'fs-resize' failed
-| make: *** [fs-resize] Error 1
-| make: Leaving directory
-'/home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/parted/3.2-r1/build/tests'
-| ERROR: Function failed: do_compile_ptest_base (log file is located
-at /home/jenkins/oe/world/shr-core/tmp-glibc/work/armv5te-oe-linux-gnueabi/parted/3.2-r1/temp/log.do_compile_ptest_base.7114)
+diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+index 639e33c..0db1252 100644
+--- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
++++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.2.3.bb
+@@ -18,3 +18,4 @@ SRC_URI[md5sum] = "fca71e6598f79d037a3c7c969cb5710c"
+ SRC_URI[sha256sum] = "f2e06eba5a21c621aac1d6da21b12a5a324fdd1e20f9c8acd357dd463c2355d9"
+ 
+ S = "${WORKDIR}/${PN}-${PV}"
++sbindir = "${base_sbindir}"
+-- 
+1.7.10.4
 
-2. grepping in gparted's source
-[superandy@very-old-builder parted-3.2]$ grep -r uuid_generate
-configure.ac:AC_CHECK_LIB([uuid], [uuid_generate], [UUID_LIBS="-luuid"],
-<...>
-
-I think adding ossp-uuid to DEPENDS will do. My problem: all my build
-machines are busy with environments other than master so I cannot
-test. Will send out a patch during weekend. If somebody wants to send
-sooner: feel free.
-
-Andreas
 
