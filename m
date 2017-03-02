@@ -1,49 +1,36 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f169.google.com (mail-ua0-f169.google.com
-	[209.85.217.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 25694775CC;
-	Thu,  2 Mar 2017 13:47:41 +0000 (UTC)
-Received: by mail-ua0-f169.google.com with SMTP id c11so27380656uaa.0;
-	Thu, 02 Mar 2017 05:47:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=x67T1WYzdg7n9LS8vVyntdS889o1QKBRw5eZZXAQkA0=;
-	b=AXGgTDDvBb5hW8J5JalgFOeejNyycEE2IIEK/1GzwhW772UNSp9KAj3LZFPUyTwPPW
-	Uj/nxBaLYLM3cI7SMaQreVGfh+Vav5Utk7jdJeYEgTgbPr6Jp5+G1l6OVtpLSQqE9M18
-	CahqGI8K0bBt6MRSJoAT7N5DdFbmVtK+LZ8o0Qn6fCDGzgTt0srQoYKAZHNBCOM1nvJi
-	LgaEDZs8LOs3cvYTpElkjQ4ABPSY1Bpmnhon1F1Dx1V/oS8RIDDI4eI17Pdo2ceOsxFc
-	pOPKaGvM+csOGhEBfSWOXuA+x07vEMFwu0ZMJ25LZoGDJsICtgJckgInGXV795u8ABeA
-	lojw==
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id CB7F2775CC
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Mar 2017 16:30:17 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id j127so2081870qke.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Mar 2017 08:30:19 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=x67T1WYzdg7n9LS8vVyntdS889o1QKBRw5eZZXAQkA0=;
-	b=Lf8pCsbDH7nrDx4XqXET0dOOOR0rYbfa2tNMcTvkdZ1YPq6kjMpfaXUJMLshLbmWsY
-	B78yU17QGZv0x33Mu7phVaNpM8rRAKGAqbk1ZyIbLXKHzoJsn33HYWlkHUEW6bH4BOzv
-	Xe3qXLShMFL1321C9CSDw4bcFKKoj4TPCBRhLISOmu6IuoRjcG0jrmN34O/93t+f1GKz
-	teChcZVOTo6bNg4w1teAeTQElU1YKAkS7O4pLxV0vlyRXGhLVEExNz4qikVSXh3wxhO7
-	YJqSM/NyemaF8vFSZS5iGJdp3HvBjnTnoYo1d5MuIkqBRf+F174rmi+qubJGCCMQTl+Z
-	dsMg==
-X-Gm-Message-State: AMke39lue+2N1HEK4oI4MEhe0+WU9fNfuOcBOMeO+atZnxH9eWPRsAXXLWglGa45UC8sue2kSsSCqU+jyQvywA==
-X-Received: by 10.176.2.146 with SMTP id 18mr6890044uah.79.1488462462398; Thu,
-	02 Mar 2017 05:47:42 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.176.71.65 with HTTP; Thu, 2 Mar 2017 05:47:42 -0800 (PST)
-In-Reply-To: <o98m4o$7ao$1@blaine.gmane.org>
-References: <20170301195550.GE3290@jama>
-	<CALbNGRTO37A-tbDj93nuNi0vu6h3fJg7Wg6P6N8asz45e8H9bg@mail.gmail.com>
-	<o98m4o$7ao$1@blaine.gmane.org>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Thu, 2 Mar 2017 14:47:42 +0100
-Message-ID: <CALbNGRRHbVRAqEsVchsztBKnuDF3R6nHmTk4Y05chhWCeF-xmA@mail.gmail.com>
-To: Koen Kooi <koen@dominion.thruhere.net>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-03-01
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=V/wGqDDCV5qsaghrCAHQICU9N6zVB44hnhzqwCittDo=;
+	b=FwiuPFV/junitke54y4Tu8qx2qBTsnnU5YB76NQYXHQSwd5hONkyCSzcBKBF4kGahp
+	J0jjLtfnctGeVtnkjR1Pkcld9KHLiVy79NcHnTslPhH7CzzTE/VTtlDQiRGdbMZgAh2I
+	WIRzfAEdI5BNdeX1gHgp10Re+h9ZUF7zAgzWVl206+dsq9WqgrUEQIh6uQih9QvPYbUw
+	yXqQiqDgI6bbdXFS4iYKogkacvyUFVwJ5kSdSeKa9QnjvzZ+Rv8CR8t+pMs2+GdnLc/k
+	4ox51reb5KrkCU4Mt/uEo7oQ17ft+GKw68XQY6K09xtF/Isxl/3irqcyNQGtEZsov/OL
+	98xQ==
+X-Gm-Message-State: AMke39nvQBCarz4yMinZzJMIl8rbao6tJsBwhMthSnNLrbBqY+HjW1GEPgDDL2KD5nKTqw==
+X-Received: by 10.237.37.121 with SMTP id w54mr19055076qtc.14.1488472218462;
+	Thu, 02 Mar 2017 08:30:18 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
+	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
+	q66sm5624599qkd.69.2017.03.02.08.30.17
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 02 Mar 2017 08:30:17 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  2 Mar 2017 11:24:24 -0500
+Message-Id: <1488471864-32442-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-simplejson: relocate to meta-python and add a python3 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,18 +43,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Mar 2017 13:47:42 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 02 Mar 2017 16:30:18 -0000
 
-On Thu, Mar 2, 2017 at 9:46 AM, Koen Kooi <koen@dominion.thruhere.net> wrote:
->
-> Util-linux is the preferred provider for libuuid (it moved from e2fsprogs to
-> util-linux a few years ago).
->
-> regards,
->
-Thanks - did not know that (just asked oe-layer-list). Will try that
-one next weekend...
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../recipes-devtools/python/python-simplejson.inc   | 21 ++++++---------------
+ .../python/python-simplejson_3.10.0.bb              |  2 ++
+ .../python/python3-simplejson_3.10.0.bb             |  7 +++++++
+ 3 files changed, 15 insertions(+), 15 deletions(-)
+ rename meta-oe/recipes-devtools/python/python-simplejson_3.10.0.bb => meta-python/recipes-devtools/python/python-simplejson.inc (53%)
+ create mode 100644 meta-python/recipes-devtools/python/python-simplejson_3.10.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-simplejson_3.10.0.bb
 
-Andreas
+diff --git a/meta-oe/recipes-devtools/python/python-simplejson_3.10.0.bb b/meta-python/recipes-devtools/python/python-simplejson.inc
+similarity index 53%
+rename from meta-oe/recipes-devtools/python/python-simplejson_3.10.0.bb
+rename to meta-python/recipes-devtools/python/python-simplejson.inc
+index 75ec2dc..2eed199 100644
+--- a/meta-oe/recipes-devtools/python/python-simplejson_3.10.0.bb
++++ b/meta-python/recipes-devtools/python/python-simplejson.inc
+@@ -1,26 +1,17 @@
+ SUMMARY = "Simple, fast, extensible JSON encoder/decoder for Python"
+ HOMEPAGE = "http://cheeseshop.python.org/pypi/simplejson"
+-SECTION = "devel/python"
+ 
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c6338d7abd321c0b50a2a547e441c52e"
+ 
+-SRCNAME = "simplejson"
+-
+-SRC_URI = "https://files.pythonhosted.org/packages/source/s/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+ SRC_URI[md5sum] = "426a9631d22851a7a970b1a677368b15"
+ SRC_URI[sha256sum] = "953be622e88323c6f43fad61ffd05bebe73b9fd9863a46d68b052d2aa7d71ce2"
+ 
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
+-
+-inherit setuptools
++inherit pypi
+ 
+-RDEPENDS_${PN} = "\
+-    python-core \
+-    python-re \
+-    python-io \
+-    python-netserver \
+-    python-numbers \
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-re \
++    ${PYTHON_PN}-io \
++    ${PYTHON_PN}-netserver \
++    ${PYTHON_PN}-numbers \
+ "
+-
+-
+diff --git a/meta-python/recipes-devtools/python/python-simplejson_3.10.0.bb b/meta-python/recipes-devtools/python/python-simplejson_3.10.0.bb
+new file mode 100644
+index 0000000..e33edfe
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-simplejson_3.10.0.bb
+@@ -0,0 +1,2 @@
++inherit setuptools
++require python-simplejson.inc
+diff --git a/meta-python/recipes-devtools/python/python3-simplejson_3.10.0.bb b/meta-python/recipes-devtools/python/python3-simplejson_3.10.0.bb
+new file mode 100644
+index 0000000..d44bc15
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-simplejson_3.10.0.bb
+@@ -0,0 +1,7 @@
++inherit setuptools3
++require python-simplejson.inc
++
++# Requires _pydecimal which is in misc
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-misc \
++"
+-- 
+2.7.4
+
 
