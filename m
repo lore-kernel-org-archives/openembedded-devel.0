@@ -1,39 +1,45 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 305 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 02 Mar 2017 23:43:03 UTC
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 74FB877636
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id A00FF7765F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Mar 2017 23:43:03 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 6F22A20B64
+	Fri,  3 Mar 2017 01:07:06 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id 67so3828542pfg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Mar 2017 23:37:59 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id xXluknYskzaz
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Mar 2017 23:37:59 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-95-79.washdc.fios.verizon.net
-	[100.15.95.79])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 51F722088F
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Mar 2017 23:37:59 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 6965C1623A6; Thu,  2 Mar 2017 18:37:58 -0500 (EST)
-Date: Thu, 2 Mar 2017 18:37:58 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 02 Mar 2017 17:07:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=PiPRevbn72AhUpCWiZLtu8QYi/rpezJELuv1Brwjp8A=;
+	b=d8dcWwwHWamY56AdfW9bbvb6Oat2b2eiNeBJ2yKN8FfqfcG68yUbTC7seihK2C5TCq
+	RPs+qUHyMdT6ljox8gflkisDgSobyL4Gx221kwzvooczq71TbjvKf+PdzyXSnbvwq3u+
+	8LCiVxd7G4Zt8krya9ZW1Gh1fcQK4Wvb3NvGuXJKdeQP0z9NIVuUbHEbV2PkwC2hHnpl
+	1ieFX/i5UxBbcJDVBYMQwu//F6qlSDkHjo9OzdZry4T01NeQUs2ikrUvaO2C+4WLx4WE
+	VrMgNmLLyX1uk3X7LR+BpKMzdE/mbQcztR3zPG4kcXDROT5wXFghOcxDNEZ/L3VK3wKu
+	xIVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=PiPRevbn72AhUpCWiZLtu8QYi/rpezJELuv1Brwjp8A=;
+	b=GGO2F29iwZfYJ0dEYDdbQtZ+7JFzr0f/ZWZMOreM7o/HKnFioO5ePpCVCGHKA2nEIy
+	T2aBIuDTTLFtpFdXcJkERJ4Uny5K2ys18+iyugehWzeuaCbcRFLLT05/VKnMkJYjMky+
+	9miv40hsBin6vGSWOMj/4VpynbfRSo9JOXvDYFLUr3vtEHVRO9OlUsHxf0EsDEIrC6dx
+	MTOiHAe6j5Zi5eCCUca8HwSmakqxhebPWAfawWGdljIiJfFCcEFpGPazpmeDuqeR8aex
+	fmvJ2dYHr+5nWWxKM0xTa8ZboB9vtYt6hbMxXXoyhaBCWVsvykVrd3ALdHWIwHGocdEg
+	PCNQ==
+X-Gm-Message-State: AMke39mRHPMTzyv5bSO8oSNuC/4AujkAzl/E324og2TOAd0O6TaDyBN6bftOK27FAAmILw==
+X-Received: by 10.99.67.130 with SMTP id q124mr138524pga.221.1488503228240;
+	Thu, 02 Mar 2017 17:07:08 -0800 (PST)
+Received: from e6520.cablelabs.com ([4.16.80.121])
+	by smtp.gmail.com with ESMTPSA id
+	b70sm19298055pfc.100.2017.03.02.17.07.06
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 02 Mar 2017 17:07:07 -0800 (PST)
+From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170302233758.GS7350@denix.org>
-References: <20170202235401.10297-1-Martin.Jansa@gmail.com>
-	<20170202235401.10297-3-Martin.Jansa@gmail.com>
-	<CA+chaQfmX5Kvi6f+mUwK3rpRE80yF5KtYF_=-YSSqM0Gix0eyw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CA+chaQfmX5Kvi6f+mUwK3rpRE80yF5KtYF_=-YSSqM0Gix0eyw@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH][meta-qt5 3/4] qtwayland: fix build without xkbcommon-evdev
+Date: Thu,  2 Mar 2017 17:07:01 -0800
+Message-Id: <1488503221-17569-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-oe][PATCH] libmng: fix duplicate dependency on lcms + misc cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,122 +52,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Mar 2017 23:43:05 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 03 Mar 2017 01:07:07 -0000
 
-On Fri, Feb 03, 2017 at 01:00:16AM +0100, Martin Jansa wrote:
-> This isn't enough at least in some setups, but it's good start (it works
-> after you add -lxkbcommon in 2 incorrectly generated Makefiles) and at
-> least it documents that xkbcommon-evdev is now needed to be set in qtbase
-> PACKAGECONFIG.
+The dependency on lcms is handled via the PACKAGECONFIG option, so
+doesn't need to be hardcoded in DEPENDS. Also update HOMEPAGE, add
+support for libmng-native and fix typo in PACKAGECONFIG[lcms].
 
-Can qtwayland 5.8 be built w/o "x11" in DISTRO_FEATURES?
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+---
+ meta-oe/recipes-graphics/libmng/libmng_2.0.3.bb | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-I have X-less setup and obviously don't get xkbcommon-evdev in PACKAGECONFIG, 
-thus:
-
-| /usr/src/debug/qtwayland/5.8.0+gitAUTOINC+0e2a950895-r0/git/src/shared/qwaylandxkb.cpp:297: error: undefined reference to 'xkb_keysym_to_utf32'
-| /usr/src/debug/qtwayland/5.8.0+gitAUTOINC+0e2a950895-r0/git/src/shared/qwaylandxkb.cpp:337: error: undefined reference to 'xkb_state_mod_name_is_active'
-| /usr/src/debug/qtwayland/5.8.0+gitAUTOINC+0e2a950895-r0/git/src/shared/qwaylandxkb.cpp:339: error: undefined reference to 'xkb_state_mod_name_is_active'
-| /usr/src/debug/qtwayland/5.8.0+gitAUTOINC+0e2a950895-r0/git/src/shared/qwaylandxkb.cpp:341: error: undefined reference to 'xkb_state_mod_name_is_active'
-| /usr/src/debug/qtwayland/5.8.0+gitAUTOINC+0e2a950895-r0/git/src/shared/qwaylandxkb.cpp:343: error: undefined reference to 'xkb_state_mod_name_is_active'
-
+diff --git a/meta-oe/recipes-graphics/libmng/libmng_2.0.3.bb b/meta-oe/recipes-graphics/libmng/libmng_2.0.3.bb
+index 3771840..ba928d2 100644
+--- a/meta-oe/recipes-graphics/libmng/libmng_2.0.3.bb
++++ b/meta-oe/recipes-graphics/libmng/libmng_2.0.3.bb
+@@ -2,13 +2,13 @@
+ # Released under the MIT license (see COPYING.MIT for the terms)
+ 
+ DESCRIPTION = "Development files for the Multiple-image Network Graphics library"
+-HOMEPAGE = "http://www.libmng.com/"
++HOMEPAGE = "http://www.libpng.org/pub/mng/"
+ LICENSE = "Zlib"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=32becdb8930f90eab219a8021130ec09"
+ SECTION = "devel"
+-DEPENDS = "zlib lcms"
++DEPENDS = "zlib"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${P}.tar.gz"
++SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
+ 
+ SRC_URI[md5sum] = "7e9a12ba2a99dff7e736902ea07383d4"
+ SRC_URI[sha256sum] = "cf112a1fb02f5b1c0fce5cab11ea8243852c139e669c44014125874b14b7dfaa"
+@@ -18,5 +18,6 @@ inherit autotools-brokensep pkgconfig
+ PACKAGECONFIG ??= "jpeg"
+ 
+ PACKAGECONFIG[jpeg] = "--with-jpeg,--without-jpeg,jpeg"
+-PACKAGECONFIG[lcms] = "---with-lcms2,--without-lcms2,lcms"
++PACKAGECONFIG[lcms] = "--with-lcms2,--without-lcms2,lcms"
+ 
++BBCLASSEXTEND = "native"
 -- 
-Denys
+1.9.1
 
-
-> On Fri, Feb 3, 2017 at 12:54 AM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
-> 
-> > * xkbcommon-evdev isn't enabled in default qtbase PACKAGECONFIG
-> > * use patch from https://bugreports.qt.io/browse/QTBUG-57767
-> >
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> >  .../0001-fix-build-without-xkbcommon-evdev.patch   | 44
-> > ++++++++++++++++++++++
-> >  recipes-qt/qt5/qtwayland_git.bb                    |  3 ++
-> >  2 files changed, 47 insertions(+)
-> >  create mode 100644 recipes-qt/qt5/qtwayland/0001-
-> > fix-build-without-xkbcommon-evdev.patch
-> >
-> > diff --git a/recipes-qt/qt5/qtwayland/0001-fix-build-without-xkbcommon-evdev.patch
-> > b/recipes-qt/qt5/qtwayland/0001-fix-build-without-xkbcommon-evdev.patch
-> > new file mode 100644
-> > index 0000000..e1e978e
-> > --- /dev/null
-> > +++ b/recipes-qt/qt5/qtwayland/0001-fix-build-without-
-> > xkbcommon-evdev.patch
-> > @@ -0,0 +1,44 @@
-> > +From c93dbe53e8a1b2203c750a66c7efe6fc9a326903 Mon Sep 17 00:00:00 2001
-> > +From: Raphael Freudiger <raphael.freudiger@siemens.com>
-> > +Date: Thu, 22 Dec 2016 13:54:31 +0100
-> > +Subject: [PATCH] fix build without xkbcommon-evdev
-> > +
-> > +Signed-off-by: Raphael Freudiger <raphael.freudiger@siemens.com>
-> > +---
-> > + src/compositor/compositor_api/qwaylandkeyboard.cpp | 13 +++++++------
-> > + 1 file changed, 7 insertions(+), 6 deletions(-)
-> > +
-> > +diff --git a/src/compositor/compositor_api/qwaylandkeyboard.cpp
-> > b/src/compositor/compositor_api/qwaylandkeyboard.cpp
-> > +index 55381b4..5c054c6 100644
-> > +--- a/src/compositor/compositor_api/qwaylandkeyboard.cpp
-> > ++++ b/src/compositor/compositor_api/qwaylandkeyboard.cpp
-> > +@@ -338,12 +338,6 @@ void QWaylandKeyboardPrivate::createXKBState(xkb_keymap
-> > *keymap)
-> > +     xkb_state = xkb_state_new(keymap);
-> > + }
-> > +
-> > +-uint QWaylandKeyboardPrivate::toWaylandXkbV1Key(const uint
-> > nativeScanCode)
-> > +-{
-> > +-    const uint offset = 8;
-> > +-    Q_ASSERT(nativeScanCode >= offset);
-> > +-    return nativeScanCode - offset;
-> > +-}
-> > +
-> > + void QWaylandKeyboardPrivate::createXKBKeymap()
-> > + {
-> > +@@ -373,6 +367,13 @@ void QWaylandKeyboardPrivate::createXKBKeymap()
-> > + }
-> > + #endif
-> > +
-> > ++uint QWaylandKeyboardPrivate::toWaylandXkbV1Key(const uint
-> > nativeScanCode)
-> > ++{
-> > ++    const uint offset = 8;
-> > ++    Q_ASSERT(nativeScanCode >= offset);
-> > ++    return nativeScanCode - offset;
-> > ++}
-> > ++
-> > + void QWaylandKeyboardPrivate::sendRepeatInfo()
-> > + {
-> > +     Q_FOREACH (Resource *resource, resourceMap()) {
-> > +--
-> > +2.1.4
-> > +
-> > diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_
-> > git.bb
-> > index 21abd54..d42d80a 100644
-> > --- a/recipes-qt/qt5/qtwayland_git.bb
-> > +++ b/recipes-qt/qt5/qtwayland_git.bb
-> > @@ -43,4 +43,7 @@ EXTRA_QMAKEVARS_CONFIGURE += "${PACKAGECONFIG_CONFARGS}"
-> >
-> >  SRCREV = "0e2a950895805457a45abe860bc91a7cc4ba405e"
-> >
-> > +# From https://bugreports.qt.io/browse/QTBUG-57767
-> > +SRC_URI += "file://0001-fix-build-without-xkbcommon-evdev.patch"
-> > +
-> >  BBCLASSEXTEND =+ "native nativesdk"
-> > --
-> > 2.10.2
-> >
-> >
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
