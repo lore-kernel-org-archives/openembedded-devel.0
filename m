@@ -1,47 +1,24 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id C6E0477707
+Return-Path: <joe.slater@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C46FE77713
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Mar 2017 20:34:24 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id u48so14634902wrc.1
+	Fri,  3 Mar 2017 22:22:17 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v23MMIEM024056
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Mar 2017 12:34:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=VN1+JVkXGCeiYUZiFSmqmKkwAXRUUmdiurywpqnlFwY=;
-	b=ubtTo9fNaCOWiFt8oi6i2Lpz4+jfug/F7ef6lTjcSE83S8pwgaL2QilvoS1dMKnEXA
-	ENdw2BUSPUJODkJnWdYWaoTiVeFMcnqjJ2pmsOgEt6a1tMuHImUFigKIcu2M9xd1aOLp
-	vMfDQs94d0m1E3jJYegGGXkHRRKU8i+DCBdkWBKGyAw14s4/czUcv16Fg1MQjPVIDtbx
-	c8zn02igt2J4UqIEuoMC43KTpTGxNvI+ilQu3KHd6nu1wGriudYBxaQG4W1sO9cRaoTy
-	hqbFB8hL5HjdxUHXWYFOqSRvOsjeJxFfy8f+WIUINcjKK5xwvEssrcq75jRsUSrkMJOT
-	EQXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=VN1+JVkXGCeiYUZiFSmqmKkwAXRUUmdiurywpqnlFwY=;
-	b=K5MfWxuT1R1HVUTpe3jgKN0UEPseZh+1yIasHe9zMJEwvz1YgaYPgK/kG/NBsS10Gi
-	rLbQUgUuHFvwMFsyXoHb1VSOiNQwDAFMg5lP1kPtYna+neCcZd+/660y9PtAO/RPlA4m
-	huVIW/Bv4zqi8CVCvaP7Ki0jS9uElUaEBAx5kLUnyUFvX27U2lE1BUtJVWFeUrl33WWe
-	WpIIcJj/nDPnN6Gitl21bSp1qvW3Bd61pjOvLMdDaC3CJkXujQFJGLd0IGabsRHhNeWY
-	k8hM4kfJmkoV/SJT69mN59v9R1PfN4Z6ZS86gBGG9ktoTxOk0WVW1Ldwsd3JLMTjDoko
-	I+Dw==
-X-Gm-Message-State: AMke39lNS7lsUbPRwkPO5jThzVQoNlBwK0ubR+Q7VEgU7Gb9MpzZbWs7VNUeynBQ1OQw1A==
-X-Received: by 10.223.137.2 with SMTP id s2mr4663290wrs.20.1488573265591;
-	Fri, 03 Mar 2017 12:34:25 -0800 (PST)
-Received: from Saturn.local.all ([194.191.225.83])
-	by smtp.gmail.com with ESMTPSA id
-	17sm16510119wru.16.2017.03.03.12.34.24
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 03 Mar 2017 12:34:25 -0800 (PST)
-From: Max Krummenacher <max.oss.09@gmail.com>
-X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  3 Mar 2017 21:34:09 +0100
-Message-Id: <1488573249-1869-1-git-send-email-max.krummenacher@toradex.com>
-X-Mailer: git-send-email 2.6.6
-Cc: Max Krummenacher <max.krummenacher@toradex.com>
-Subject: [meta-networking][PATCH] ptpd: add pkgconfig to inherit
+	Fri, 3 Mar 2017 14:22:18 -0800 (PST)
+Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.294.0; Fri, 3 Mar 2017 14:22:17 -0800
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 3 Mar 2017 14:22:17 -0800
+Message-ID: <1488579737-32653-1-git-send-email-jslater@windriver.com>
+X-Mailer: git-send-email 1.7.3.4
+MIME-Version: 1.0
+Subject: [oe-core][PATCH 1/1] e2fsprogs: expand @mkdir_p@ during configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,30 +31,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2017 20:34:25 -0000
+X-List-Received-Date: Fri, 03 Mar 2017 22:22:18 -0000
+Content-Type: text/plain
 
-ptpd is patched to use 'pkg-config libpcap', so inherit pkgconfig to
-have it available in RSS.
+If we do not do this, locale data will not be put
+into /usr/share/locale.
 
-Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
+Signed-off-by: Joe Slater <jslater@windriver.com>
 ---
- meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../e2fsprogs/e2fsprogs/mkdir_p.patch              |   20 ++++++++++++++++++++
+ .../recipes-devtools/e2fsprogs/e2fsprogs_1.43.4.bb |    1 +
+ 2 files changed, 21 insertions(+)
+ create mode 100644 meta/recipes-devtools/e2fsprogs/e2fsprogs/mkdir_p.patch
 
-diff --git a/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb
-index 622db5f..e136193 100644
---- a/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb
-+++ b/meta-networking/recipes-daemons/ptpd/ptpd_2.3.1.bb
-@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://README;md5=0733e1b3788ab2ebbc63bf33a020da1d"
+diff --git a/meta/recipes-devtools/e2fsprogs/e2fsprogs/mkdir_p.patch b/meta/recipes-devtools/e2fsprogs/e2fsprogs/mkdir_p.patch
+new file mode 100644
+index 0000000..b0fa4b8
+--- /dev/null
++++ b/meta/recipes-devtools/e2fsprogs/e2fsprogs/mkdir_p.patch
+@@ -0,0 +1,20 @@
++e2fsprogs: expand @mkdir_p@
++
++Add AC_SUBST to configure.ac.  @mkdir_p@ is currently
++not expanded so no locale data is written into usr/share/locale. 
++
++Upstream-Status: Pending
++
++Signed-off-by: Joe Slater <jslater@windriver.com>
++
++--- a/configure.ac
+++++ b/configure.ac
++@@ -811,6 +811,8 @@ AC_SUBST(PACKAGE)
++ AC_SUBST(VERSION)
++ 
++ AM_GNU_GETTEXT
+++dnl @MKDIR_P@ is expanded in AM_GNU_GETTEXT
+++AC_SUBST([mkdir_p],['$(MKDIR_P)'])
++ dnl
++ dnl End of configuration options
++ dnl
+diff --git a/meta/recipes-devtools/e2fsprogs/e2fsprogs_1.43.4.bb b/meta/recipes-devtools/e2fsprogs/e2fsprogs_1.43.4.bb
+index 95ebc3a..153b3a1 100644
+--- a/meta/recipes-devtools/e2fsprogs/e2fsprogs_1.43.4.bb
++++ b/meta/recipes-devtools/e2fsprogs/e2fsprogs_1.43.4.bb
+@@ -8,6 +8,7 @@ SRC_URI += "file://acinclude.m4 \
+             file://mkdir.patch \
+             file://Revert-mke2fs-enable-the-metadata_csum-and-64bit-fea.patch \
+             file://e2fsprogs-1.43-sysmacros.patch \
++            file://mkdir_p.patch \
+ "
  
- DEPENDS = "libpcap"
- 
--inherit autotools systemd
-+inherit autotools pkgconfig systemd
- 
- # return something like '1.2.3' or '1.2.3/rc1'
- #
+ SRC_URI_append_class-native = " file://e2fsprogs-fix-missing-check-for-permission-denied.patch"
 -- 
-2.6.6
+1.7.9.5
 
 
