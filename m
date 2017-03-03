@@ -1,24 +1,36 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id C46FE77713
+Return-Path: <kingcako@gmail.com>
+Received: from mail-it0-f67.google.com (mail-it0-f67.google.com
+	[209.85.214.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 050FF7767A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Mar 2017 22:22:17 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v23MMIEM024056
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri,  3 Mar 2017 23:52:04 +0000 (UTC)
+Received: by mail-it0-f67.google.com with SMTP id 68so3977403itg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 3 Mar 2017 14:22:18 -0800 (PST)
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Fri, 3 Mar 2017 14:22:17 -0800
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 3 Mar 2017 14:22:17 -0800
-Message-ID: <1488579737-32653-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
-MIME-Version: 1.0
-Subject: [oe-core][PATCH 1/1] e2fsprogs: expand @mkdir_p@ during configuration
+	Fri, 03 Mar 2017 15:52:06 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=fheNtXYTGtPx/eRTfRrkabSaWyzEtodxfQbP0NMH194=;
+	b=EVi8WedaKwAlgtDhqMcBbS0gOMujJRfkzLoNqvvd+iYO9dltsPIc8qrDhoiY2Efta7
+	AoPm5Y7XxGFrG0RDR70ATBmSJ58+y5xLspsuu292UePfy4uRm/qfytM+Wnvr6nxByzls
+	ZsjYZA7p0mdT09pr60Ix7h5t85N36hyzIPvCVb7ZuhfmWNx6jtW0Iv5K8WeMTN+R6SVu
+	bX6Qk8nbhBh3OpSeTT/ddITIa0SNkKRPC54Rug0lz6kyQCNRcIf8LyclamZVJU/u2LMu
+	evv/JFC2KOb/WI9gITCQSlxE4wxlT2XJWXScRC20lgzxMFGDA2uBfVIv2IDo+L0OKdoD
+	hHFw==
+X-Gm-Message-State: AMke39noitmIY29P2Ta5pC1HLle9ZjkgZHbLSuk0X5AEMLsS5WCUkFBFCnEv00Lm+yyYzg==
+X-Received: by 10.36.213.196 with SMTP id a187mr5690497itg.4.1488585125882;
+	Fri, 03 Mar 2017 15:52:05 -0800 (PST)
+Received: from zener.lan (50-250-129-172-static.hfc.comcastbusiness.net.
+	[50.250.129.172]) by smtp.gmail.com with ESMTPSA id
+	m100sm5220493iod.14.2017.03.03.15.52.05
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 03 Mar 2017 15:52:05 -0800 (PST)
+From: David Cako <dc@cako.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  3 Mar 2017 16:52:03 -0700
+Message-Id: <1488585123-46482-1-git-send-email-dc@cako.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] increment pyyaml setup.py version number
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,58 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2017 22:22:18 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 03 Mar 2017 23:52:06 -0000
 
-If we do not do this, locale data will not be put
-into /usr/share/locale.
+I was getting dependency issues on my target machine due to an incorrect version number in setup.py.
 
-Signed-off-by: Joe Slater <jslater@windriver.com>
 ---
- .../e2fsprogs/e2fsprogs/mkdir_p.patch              |   20 ++++++++++++++++++++
- .../recipes-devtools/e2fsprogs/e2fsprogs_1.43.4.bb |    1 +
- 2 files changed, 21 insertions(+)
- create mode 100644 meta/recipes-devtools/e2fsprogs/e2fsprogs/mkdir_p.patch
+ meta-python/recipes-devtools/python/python-pyyaml/setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta/recipes-devtools/e2fsprogs/e2fsprogs/mkdir_p.patch b/meta/recipes-devtools/e2fsprogs/e2fsprogs/mkdir_p.patch
-new file mode 100644
-index 0000000..b0fa4b8
---- /dev/null
-+++ b/meta/recipes-devtools/e2fsprogs/e2fsprogs/mkdir_p.patch
-@@ -0,0 +1,20 @@
-+e2fsprogs: expand @mkdir_p@
-+
-+Add AC_SUBST to configure.ac.  @mkdir_p@ is currently
-+not expanded so no locale data is written into usr/share/locale. 
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Joe Slater <jslater@windriver.com>
-+
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -811,6 +811,8 @@ AC_SUBST(PACKAGE)
-+ AC_SUBST(VERSION)
-+ 
-+ AM_GNU_GETTEXT
-++dnl @MKDIR_P@ is expanded in AM_GNU_GETTEXT
-++AC_SUBST([mkdir_p],['$(MKDIR_P)'])
-+ dnl
-+ dnl End of configuration options
-+ dnl
-diff --git a/meta/recipes-devtools/e2fsprogs/e2fsprogs_1.43.4.bb b/meta/recipes-devtools/e2fsprogs/e2fsprogs_1.43.4.bb
-index 95ebc3a..153b3a1 100644
---- a/meta/recipes-devtools/e2fsprogs/e2fsprogs_1.43.4.bb
-+++ b/meta/recipes-devtools/e2fsprogs/e2fsprogs_1.43.4.bb
-@@ -8,6 +8,7 @@ SRC_URI += "file://acinclude.m4 \
-             file://mkdir.patch \
-             file://Revert-mke2fs-enable-the-metadata_csum-and-64bit-fea.patch \
-             file://e2fsprogs-1.43-sysmacros.patch \
-+            file://mkdir_p.patch \
- "
- 
- SRC_URI_append_class-native = " file://e2fsprogs-fix-missing-check-for-permission-denied.patch"
+diff --git a/meta-python/recipes-devtools/python/python-pyyaml/setup.py b/meta-python/recipes-devtools/python/python-pyyaml/setup.py
+index 2ed1c94..50318d5 100644
+--- a/meta-python/recipes-devtools/python/python-pyyaml/setup.py
++++ b/meta-python/recipes-devtools/python/python-pyyaml/setup.py
+@@ -1,5 +1,5 @@
+ NAME = 'PyYAML'
+-VERSION = '3.10'
++VERSION = '3.12'
+ DESCRIPTION = "YAML parser and emitter for Python"
+ LONG_DESCRIPTION = """\
+ YAML is a data serialization format designed for human readability and
 -- 
-1.7.9.5
+2.7.4
 
 
