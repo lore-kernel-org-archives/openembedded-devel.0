@@ -1,52 +1,58 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id D922E6FFA4
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6043F71B57
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Mar 2017 09:28:39 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id n11so10604668wma.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Mar 2017 01:28:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=SOEGYUhXJT3Llr57gI4Lmu8xuSD3+wiBxpTeeZrGIo8=;
-	b=iHDebfFSyweDcVxmvjMyHxovR0EpJkp2KSsa3XJ7+2gdnGxKlGb0TsiNoBQeYMpbw/
-	Vu0pnQwQVFfpSYPtz5dU3HL9yMNMet1Ygqt5PU+r8NBr/hBqI3ADauBQOcLxuhYmcMnf
-	ZTGjgSSpK1VQAQ+5t7rEcOL+70wo6RO76zszvR2+oRLpxd197KsSR7Qd9M+SlRC5xsb7
-	9nTo/YwWi0Y9wBn47OudhHI25oCTWzM8leN1jCaQ46mc7rxqizujE00HCoqyYsHUWcPo
-	/nbpUeclInVU+eSTkZIpn/fipmBq7DBQWMAnfrn+ifhU0rwqW673kEj3uUW+n4fCcCef
-	6T3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=SOEGYUhXJT3Llr57gI4Lmu8xuSD3+wiBxpTeeZrGIo8=;
-	b=fIhH58lhEcERjwDvMvGsJg39a4KZ3Tm7eCeLvDYXi9I54tg2E0pMrds/AmmK3eZUJA
-	XlT/MoKNR51Sv9yK7QgKxBwoQIHCuv1zakNJlIDvB08udriBIX7TWcNxXg9d1S+r/idn
-	vM8PAmfK0FeT9V9xWEiBTXZByRzJ/pp6D4njUu5w1JHRyUgtCJfYvw/xMcgAv6TWvG8e
-	YxWMBNDTjcp8uAsC+nSMbhunP7+YLZ6rFw3CMddfEQfVaHYSmQtP1TD3RZwj8IztpAh1
-	8/KRZY5QEjkICUIxWH6n7yuRGVJFwKTOr5NcRDFtF04a4GrLpoNrDTfAvLCSwae4lakx
-	yuAA==
-X-Gm-Message-State: AMke39lru+MVDJIilqPMfSQjz8V064L18OiW69GndLdD9mGGRZHG5ebRqwLbyKzfhBVv6A==
-X-Received: by 10.28.183.4 with SMTP id h4mr2189508wmf.140.1488533320388;
-	Fri, 03 Mar 2017 01:28:40 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	r195sm2271832wme.25.2017.03.03.01.28.38
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 03 Mar 2017 01:28:38 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 3 Mar 2017 10:28:39 +0100
-To: Adrian Calianu <Adrian.Calianu@enea.com>
-Message-ID: <20170303092839.GA3276@jama>
-References: <1488471230-46540-1-git-send-email-adrian.calianu@enea.com>
-	<CA+chaQecKFVLcU6zXnNSUfogCNRmp08bJW1gnyvxTVoXaJ_Ezg@mail.gmail.com>
-	<A1661D2DDD942248A02617DE63569A01AC279256@SESTOEX04.enea.se>
+	Fri,  3 Mar 2017 10:01:50 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id E06EA18159;
+	Fri,  3 Mar 2017 11:01:51 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id te-g3qq19rnN; Fri,  3 Mar 2017 11:01:50 +0100 (CET)
+Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
+	by bastet.se.axis.com (Postfix) with ESMTPS id A65C81808C;
+	Fri,  3 Mar 2017 11:01:50 +0100 (CET)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 93FA71A073;
+	Fri,  3 Mar 2017 11:01:50 +0100 (CET)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 88FEB1A072;
+	Fri,  3 Mar 2017 11:01:50 +0100 (CET)
+Received: from thoth.se.axis.com (unknown [10.0.2.173])
+	by boulder02.se.axis.com (Postfix) with ESMTP;
+	Fri,  3 Mar 2017 11:01:50 +0100 (CET)
+Received: from XBOX03.axis.com (xbox03.axis.com [10.0.5.17])
+	by thoth.se.axis.com (Postfix) with ESMTP id 7D45E7A9;
+	Fri,  3 Mar 2017 11:01:50 +0100 (CET)
+Received: from XBOX02.axis.com (10.0.5.16) by XBOX03.axis.com (10.0.5.17) with
+	Microsoft SMTP Server (TLS) id 15.0.1210.3;
+	Fri, 3 Mar 2017 11:01:50 +0100
+Received: from XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776]) by
+	XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776%21]) with mapi id
+	15.00.1210.000; Fri, 3 Mar 2017 11:01:50 +0100
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Martin Jansa <martin.jansa@gmail.com>, =?utf-8?B?QW5kcmVhcyBNw7xsbGVy?=
+	<schnitzeltony@googlemail.com>
+Thread-Topic: [oe] [PATCH] Make use of the new bb.utils.filter() function
+Thread-Index: AQHSkrGqV9kUOL9SJ02Fk/ddqs1s2qGAeQUAgAF9h4CAAOlR0A==
+Date: Fri, 3 Mar 2017 10:01:50 +0000
+Message-ID: <a6cb55b05ed7466bba2ddfca90518e85@XBOX02.axis.com>
+References: <20170301173049.1177-1-pkj@axis.com>
+	<CALbNGRR3DKMiSBnW+=WrWJVHqUzN5FKNoDh=4Na9s1NCnE1ysg@mail.gmail.com>
+	<CA+chaQemN9j4vEXqfV4gtSLKvNdsTyjWyHbsqDhGPnSSBn71kA@mail.gmail.com>
+In-Reply-To: <CA+chaQemN9j4vEXqfV4gtSLKvNdsTyjWyHbsqDhGPnSSBn71kA@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
 MIME-Version: 1.0
-In-Reply-To: <A1661D2DDD942248A02617DE63569A01AC279256@SESTOEX04.enea.se>
-User-Agent: Mutt/1.8.0 (2017-02-23)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] krb5: allow to generate empty package
+X-TM-AS-GCONF: 00
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] Make use of the new bb.utils.filter() function
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,89 +65,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Mar 2017 09:28:40 -0000
-X-Groupsio-MsgNum: 65664
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="/04w6evG8XlLl3ft"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 03 Mar 2017 10:01:51 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
---/04w6evG8XlLl3ft
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
+Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
+dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mDQo+IE1hcnRp
+biBKYW5zYQ0KPiBTZW50OiBkZW4gMiBtYXJzIDIwMTcgMjE6NDkNCj4gVG86IEFuZHJlYXMgTcO8
+bGxlcg0KPiBDYzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc7IFBl
+dGVyIEtqZWxsZXJzdGVkdA0KPiBTdWJqZWN0OiBSZTogW29lXSBbUEFUQ0hdIE1ha2UgdXNlIG9m
+IHRoZSBuZXcgYmIudXRpbHMuZmlsdGVyKCkNCj4gZnVuY3Rpb24NCj4gDQo+IEkgYWdyZWUgd2l0
+aCBBbmRyZWFzLCBidXQgSSdtIG5vdCBvcHBvc2VkIHRvIHRoaXMgc28gc3Ryb25nbHkuDQo+IA0K
+PiBFc3BlY2lhbGx5IGFzIHNpbWlsYXIgcGF0Y2ggZm9yIG9lLWNvcmUgKGNoYW5naW5nIDgxIGZp
+bGVzKSB3YXMgYWxyZWFkeQ0KPiBtZXJnZWQuIFNpbWlsYXJseSB0aGUgZ2V0VmFyIGNsZWFudXAg
+cmVjZW50bHkgd2lsbCBhbHNvIGNhdXNlIHNvbWUNCj4gaGVhZGFjaGVzIHdoZW4gY2hlcnJ5LXBp
+Y2tpbmcuIFVuZm9ydHVuYXRlbHkgbXkgInNhZmUiIChhcyBpdCB3b24ndA0KPiBicmVhayB0aGUg
+YnVpbGQpIHdoaXRlc3BhY2UgY2xlYW51cCB3b24ndCBldmVyIGdldCBtZXJnZWQgdG8gb2UtY29y
+ZSwgDQo+IGJlY2F1c2UgaXQncyAidG9vIGludHJ1c2l2ZSIgOi8uDQoNCkJlaW5nIGEgYmlnIGZh
+biBvZiB3aGl0ZXNwYWNlcyBjbGVhbnVwcyBJIGNhbiB1bmRlcnN0YW5kIHlvdXIgDQpmcnVzdHJh
+dGlvbi4uLg0KDQo+IFNvbWVvbmUgZWxzZSB3aXRoIGFub3RoZXIgb3Bpbmlvbj8NCj4gDQo+IE9u
+IFdlZCwgTWFyIDEsIDIwMTcgYXQgMTE6MDIgUE0sIEFuZHJlYXMgTcO8bGxlciA8DQo+IHNjaG5p
+dHplbHRvbnlAZ29vZ2xlbWFpbC5jb20+IHdyb3RlOg0KPiANCj4gPiBPbiBXZWQsIE1hciAxLCAy
+MDE3IGF0IDY6MzAgUE0sIFBldGVyIEtqZWxsZXJzdGVkdA0KPiA+IDxwZXRlci5ramVsbGVyc3Rl
+ZHRAYXhpcy5jb20+IHdyb3RlOg0KPiA+ID4gU2lnbmVkLW9mZi1ieTogUGV0ZXIgS2plbGxlcnN0
+ZWR0IDxwZXRlci5ramVsbGVyc3RlZHRAYXhpcy5jb20+DQo+ID4NCj4gPiBUQkg6IEkgZG9uJ3Qg
+bGlrZSB0aGlzIHBhdGNoOg0KPiA+DQo+ID4gKiBJdCBjb21iaW5lcyB0aGluZ3Mgd2hpY2ggZG8g
+bm90IHNoYXJlIHNhbWUgbGFiZWxzIGJ5IGRlc2lnbi4gTmFtaW5nDQo+ID4gICBwYWNrYWdlLWNv
+bmZpZ3Mgd2l0aCBzYW1lIGxhYmVsIGFzIGRpc3Ryby1mZWF0dXJlIGlzIGEgbmljZSB0byBoYXZl
+DQo+ID4gICBidXQgbm90IGEgZGVzaWduIHJ1bGUuDQo+ID4gKiBUbyBtZSBvbGQgc3R5bGUgZXhw
+bGFpbnMgYmV0dGVyIHdoYXQncyBnb2luZyBvbg0KDQpJIGd1ZXNzIHRoYXQgaXMgYSBtYXR0ZXIg
+b2Ygbm90IGJlaW5nIHVzZWQgdG8gdGhlIG5ldyBmdW5jdGlvbi4gSSBsaWtlIA0KdGhlIGZhY3Qg
+dGhhdCBpbiBtYW55IGNhc2VzIHRoZSBQQUNLQUdFQ09ORklHIGRlZmluaXRpb24gcmVkdWNlcyB0
+byBhcyANCnNpbmdsZSBjYWxsIHRvIGJiLnV0aWxzLmZpbHRlcigpLg0KDQo+ID4gKiBIZWF2eS1n
+b3ppbGxhLXBhdGNoZXMgdGVuZCB0byBjYXVzZSBoZWFkYWNoZXMgd2hlbiBjaGVycnktcGlja2lu
+Zw0KPiA+ICAgdG8gb2xkZXIgcmVsZWFzZSBicmFuY2hlcy4gQW5kIHllcyBJIGtub3cgd2UgaGFk
+IHRoZXNlIHBhdGNoZXMgaW4gDQo+ID4gICB0aGUgcGFzdCBhbmQgbm9ib2R5IGNvbXBsYWluZWQu
+DQoNCldlbGwsIEkgY2FuIHNwbGl0IGluIGluIDkxIGluZGl2aWR1YWwgcGF0Y2hlcywgaWYgdGhh
+dCBpcyBwcmVmZXJyZWQuLi4NCg0KPiA+IEFuZHJlYXMNCg0KRm9yIHRoZSByZWNvcmQsIGhlcmUg
+aXMgdGhlIHNlZCBleHByZXNzaW9uIEkgdXNlZCB0byBzd2l0Y2ggdG8gdGhlIA0KZmlsdGVyIGZ1
+bmN0aW9uOg0KDQpzZWQgLXJpIC1lICdzL2JiLnV0aWxzLmNvbnRhaW5zXChccyooLikoW14iJ1wn
+J10qKVwxLFxzKiguKShbXiInXCcnXSopXDMsXHMqKC4pXDRcNSxccyooLilcNi9iYi51dGlscy5m
+aWx0ZXIoXDFcMlwxLCBcM1w0XDMvZycgKiovKiguKQ0KDQooSXQgdXNlcyBaU0ggc3ludGF4IHRv
+IGZpbmQgYWxsIGZpbGVzLCB3aGljaCBtZWFucyBiYXNoIHVzZXJzIHdvdWxkIA0KaGF2ZSB0byBj
+aGFuZ2UgaXQgdG8gdXNlIGZpbmQgaW5zdGVhZC4pDQoNCi8vUGV0ZXINCg0K
 
-On Fri, Mar 03, 2017 at 09:24:24AM +0000, Adrian Calianu wrote:
-> Hi Martin,
->=20
-> From: Martin Jansa [mailto:martin.jansa@gmail.com]
-> Sent: Thursday, March 02, 2017 6:53 PM
-> To: Adrian Calianu <Adrian.Calianu@enea.com>
-> Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-> Subject: Re: [oe] [meta-oe][PATCH] krb5: allow to generate empty package
->=20
-> > Since other packages may depend on krb5(${PN}).
->=20
-> Then fix these other packages.
-> [Adrian Calianu]           If you want to install krb5-dev, krb5-dbg pack=
-ages, they are dependent on krb5 but it does not exists!
-
-Good, so you know which packages to fix.
-
-Installing empty packages to rootfs never helped anyone except HW
-manufactures because we're wasting disk space and processing on useless
-empty packages.
-
-> On Thu, Mar 2, 2017 at 5:13 PM, Adrian Calianu <adrian.calianu@enea.com<m=
-ailto:adrian.calianu@enea.com>> wrote:
-> Since other packages may depend on krb5(${PN}).
->=20
-> Signed-off-by: Adrian Calianu <adrian.calianu@enea.com<mailto:adrian.cali=
-anu@enea.com>>
-> ---
->  meta-oe/recipes-connectivity/krb5/krb5_1.13.6.bb<http://krb5_1.13.6.bb> =
-| 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.13.6.bb<http://krb5=
-_1.13.6.bb> b/meta-oe/recipes-connectivity/krb5/krb5_1.13.6.bb<http://krb5_=
-1.13.6.bb>
-> index 656a02f..a0589a6 100644
-> --- a/meta-oe/recipes-connectivity/krb5/krb5_1.13.6.bb<http://krb5_1.13.6=
-=2Ebb>
-> +++ b/meta-oe/recipes-connectivity/krb5/krb5_1.13.6.bb<http://krb5_1.13.6=
-=2Ebb>
-> @@ -107,6 +107,8 @@ PACKAGES =3D+ "${PN}-admin-server \
->               libkrb5support \
->               libverto"
->=20
-> +ALLOW_EMPTY_${PN} =3D "1"
-> +
->  FILES_${PN} =3D ""
->  FILES_${PN}-doc +=3D "${datadir}/examples"
->  FILES_${PN}-dbg +=3D "${libdir}/krb5/plugins/*/.debug"
-> --
-> 1.9.1
->=20
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org<mailto:Openembedded-devel@lists=
-=2Eopenembedded.org>
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---/04w6evG8XlLl3ft
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWLk3RgAKCRA3VSO3ZXaA
-HCz6AKCvnKi5lwO6Hza4hFGwcOaeyMtFRQCfaOr7FVKGPA7P0wfJxHKMEzfCCg4=
-=EOXX
------END PGP SIGNATURE-----
-
---/04w6evG8XlLl3ft--
