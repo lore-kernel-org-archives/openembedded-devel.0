@@ -1,33 +1,33 @@
-Return-Path: <gary@mlbassoc.com>
-Received: from mail.analogue-micro.com (mail.analogue-micro.com
-	[217.144.149.242])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A43F77803
+Return-Path: <amery@hanoverdisplays.com>
+Received: from mail.hanoverdisplays.com (mail.hanoverdisplays.com [62.7.92.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 33FBE777FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  4 Mar 2017 12:28:55 +0000 (UTC)
-Received: by mail.analogue-micro.com (Postfix, from userid 999)
-	id D196068A01C; Sat,  4 Mar 2017 12:28:54 +0000 (GMT)
-X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
-	loki.analogue-micro-ltd.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.2 required=5.0 tests=ALL_TRUSTED,BAYES_00,
-	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
-Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
-	by mail.analogue-micro.com (Postfix) with ESMTP id 92E2F68A019;
-	Sat,  4 Mar 2017 12:28:50 +0000 (GMT)
-Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
-	by zeus.mlbassoc.com (Postfix) with ESMTP id 45D9767400D4;
-	Sat,  4 Mar 2017 13:28:50 +0100 (CET)
-From: Gary Thomas <gary@mlbassoc.com>
-To: openembedded-devel@lists.openembedded.org
-References: <1488363425-824-1-git-send-email-yann.peron@optimatic.fr>
-	<20170304115436.GD3025@jama>
-Message-ID: <41d7f160-1178-ed2a-d60e-7232adde20db@mlbassoc.com>
-Date: Sat, 4 Mar 2017 13:28:50 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.7.0
+	Sat,  4 Mar 2017 13:35:39 +0000 (UTC)
+X-GFI-TNEF2MIME: 1.2
+Received: from MAILDB.hanover.local ([fe80::6c2c:e4ad:bf0a:351d]) by
+	mail.hanover.local ([fe80::1440:163c:a37d:4312%11]) with mapi id
+	14.03.0319.002; Sat, 4 Mar 2017 13:35:40 +0000
+From: Alejandro Mery <amery@hanoverdisplays.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Thread-Topic: [oe] [meta-oe][PATCH] gitver: fix try/except syntax for python3
+	support
+Thread-Index: AQHSkpbLUJTTg42vW0S02nKyRjmbUw==
+Date: Sat, 4 Mar 2017 13:35:40 +0000
+Message-ID: <CF323D845261FD4F9B1E99738125033460DEF731@maildb.hanover.local>
+References: <20170301141908.166857-1-amery@hanoverdisplays.com>
+	<CF323D845261FD4F9B1E99738125033460DE2603@maildb.hanover.local>
+	<20170304115347.GC3025@jama>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: <CF323D845261FD4F9B1E99738125033460DEF731@maildb.hanover.local>
 MIME-Version: 1.0
-In-Reply-To: <20170304115436.GD3025@jama>
-Subject: Re: [meta-qt5][PATCH] Ajout de qtSerialBus dans la toolchain
+X-Originating-IP: [82.23.32.30]
+Disclaimer: hanoverdisplays.com
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "amery@geeks.cl" <amery@geeks.cl>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] gitver: fix try/except syntax for python3 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,44 +40,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Mar 2017 12:28:56 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 04 Mar 2017 13:35:41 -0000
+Content-Language: en-US
+Content-Type: multipart/mixed;
+	boundary="part__AD06059F_D508_46F6_AD78_3DF183659"
 
-On 2017-03-04 12:54, Martin Jansa wrote:
-> On Wed, Mar 01, 2017 at 11:17:05AM +0100, Yann PERON wrote:
->> ---
->
-> Please use English.
+--part__AD06059F_D508_46F6_AD78_3DF183659
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+Disclaimer: hanoverdisplays.com
 
-That's only part of what's off/missing here:
-   * No Signed-off-by
-   * No explanation of the change
-   * Improper subject [protocol]
+On 04/03/17 11:53, Martin Jansa wrote:
+> On Wed, Mar 01, 2017 at 02:22:29PM +0000, Alejandro Mery wrote:
+>> On 01/03/17 14:19, Alejandro Mery wrote:
+>>> https://www.python.org/dev/peps/pep-3110/
+>>>
+>>> It's backward compatible with 2.6+
+>>>
+>>> Signed-off-by: Alejandro Mery <amery@hanoverdisplays.com>
+>>> ---
+>>>  meta-oe/classes/gitver.bbclass | 4 ++--
+>>>  1 file changed, 2 insertions(+), 2 deletions(-)
+>>>
+>>> diff --git a/meta-oe/classes/gitver.bbclass b/meta-oe/classes/gitver.bbc=
+lass
+>>> index e7b5155ee..b677996ea 100644
+>>> --- a/meta-oe/classes/gitver.bbclass
+>>> +++ b/meta-oe/classes/gitver.bbclass
+>>> @@ -27,13 +27,13 @@ def get_git_pv(path, d, tagadjust=3DNone):
+>>>      gitdir =3D os.path.abspath(os.path.join(d.getVar("S", True), ".git"=
+))
+>>>      try:
+>>>          ver =3D gitrev_run("git describe --tags", gitdir)
+>>> -    except Exception, exc:
+>>> +    except Exception as exc:
+>>>          bb.fatal(str(exc))
+>>>
+>>>      if not ver:
+>>>          try:
+>>>              ver =3D gitrev_run("git rev-parse --short HEAD", gitdir)
+>>> -        except Exception, exc:
+>>> +        except Exception as exc:
+>>>              bb.fatal(str(exc))
+>>>
+>>>          if ver:
+>> I forgot to mention, I'm having this problem using `morty`
+> Next time, please send version applicable and tested in master branch firs=
+t, then
+> you can request backport to morty.
 
->
->>  recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb | 2 ++
->>  1 file changed, 2 insertions(+)
->>
->> diff --git a/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb b/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
->> index 1521dbf..2735135 100755
->> --- a/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
->> +++ b/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
->> @@ -83,6 +83,8 @@ RDEPENDS_${PN} += " \
->>      ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'qtsensors-qmlplugins', '', d)} \
->>      qtserialport-dev \
->>      qtserialport-mkspecs \
->> +    qtserialbus-dev \
->> +    qtserialbus-mkspecs \
->>      qtsvg-dev \
->>      qtsvg-mkspecs \
->>      qtsvg-plugins \
->> --
->> 2.1.4
+sorry about that. does it help to send (tested) patches against both?
+(master and morty) or backporting only happens after the change goes
+from master-next into master anyway?
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
 
+> I've applied this manually to master-next now.
+
+thank you
+
+
+--part__AD06059F_D508_46F6_AD78_3DF183659--
