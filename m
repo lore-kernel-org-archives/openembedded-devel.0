@@ -1,53 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id DFED97759A
+Received: from mail-wr0-f171.google.com (mail-wr0-f171.google.com
+	[209.85.128.171])
+	by mail.openembedded.org (Postfix) with ESMTP id E9253777BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  4 Mar 2017 11:53:45 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id z63so4517492wmg.2
+	Sat,  4 Mar 2017 11:54:33 +0000 (UTC)
+Received: by mail-wr0-f171.google.com with SMTP id g10so88784381wrg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Mar 2017 03:53:47 -0800 (PST)
+	Sat, 04 Mar 2017 03:54:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=Obv7k9z9F5upVIITSHgf5wE5mxoIjuH6/L0f851GCnw=;
-	b=E/mm+WgrzaHo8UV5w+/DwBRbqCqBKEAUTTHK/Sj/HWjOvO6dMIXnnGxgesY6HYWOOj
-	YdeI8FFQ+vnmQ+d07xSAlljtEHXNn6u9OCPNiDi83tzq9zqixBTjvCDspNJ+e95E1qzn
-	lUp/EaWb6+C/mvkrvOC+ZqBp0P1M2m4INEqUnIhChgigWn4vOUYVla0RIAwod4Zm9htD
-	qNZrdu9kQwqTZm8YgndkLZPWgimANAVb0Rv8DyEVKI13nnsiHrfRqsXAoSmAH7H00SnY
-	cx1kMsTUOfzElo44rG2sllhmmpkhwFxd4hAuW4OeYBG/pqtM/lNlnoMwTHokufNfKNUY
-	kDBw==
+	bh=zRxLDA0rXkaD+PMrydG2ioVe7jF75WpXII9CW+3PgBo=;
+	b=VdYe9adLxWhWjh9CnIapZepbIZEJzvv+rIfezgv3GWrh3rpmw1iqJOa0JyePmiWu0j
+	h7r27HkLUEe+JpfP5RYB0wZRXPmlwLffvWHyb/0gkI6kGB847X0GNOKCOArjzu7otVnC
+	EsShy5iIu6iKN70XL1Znzbap+/kzfWbV8gnyfO+HngyCDMj3bgzK7YGi/gPjQer55fDc
+	dk2SQObSXp0PdvUkuxqROT03FQ9v1FIVQyom47DsZkDe6bkmp+62dzrCMTxcZJnB0ibK
+	1uRbwEtboVa1PeObgAL7kIiOnDRa+MlYiLrEJfy5yplmQdixxKxIo1AIelyrviHyXX0f
+	MfmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=Obv7k9z9F5upVIITSHgf5wE5mxoIjuH6/L0f851GCnw=;
-	b=nN/N/bHCIxEnxjId5ulMHA53Y5uU35MwbC0NNjWBmN6XLhc2f6f+O3LL2ckA39lD7c
-	DYc9RPVUSdNU1+gRDsGA7bLHKu1+V4zGBMb+H2yHoqijGCtjnWqfXO24uvEifuxLwJEl
-	eBAaQVy45/YG566FzzBer3oeV3vutgi0qF6Mc67Ewjw+AijEN4HfVpg23Zv5q/NYLGZ1
-	wDVLU2ZEjqUMWVKnccE/urH+KkIuzGYPdHw3hGwz4lruZbF8vW6PCeOSRtOUuwwXnrcJ
-	9F9ihmJdfUFPjpHfqEgcCS/pLz3a1KpDIe+fUDH9pp3a8dTgcjtCVk56g5YDLx/lJe9s
-	sYmQ==
-X-Gm-Message-State: AMke39n1HVLy8mFiwDUrYoGmQ04i3dmemWwYIi1QkdERMxTegbbc50GXugVHoywi//MCKw==
-X-Received: by 10.28.21.81 with SMTP id 78mr6071128wmv.138.1488628426496;
-	Sat, 04 Mar 2017 03:53:46 -0800 (PST)
+	bh=zRxLDA0rXkaD+PMrydG2ioVe7jF75WpXII9CW+3PgBo=;
+	b=eD6iF1MVYQTDhb1yq+axii9kJzKptD9faLnS7khznsb/LitPchIyAeqnD8gQ2rCsOS
+	XY1TafK/JclOqZDAUlptuveC9Wumi70aJ2/9jlct+GCsSAMPFDCXtCjAd27VKiQ4zEis
+	gdim22mbgYFk/Jhx/SMgHIFPpXUNCbcYBBGobeog+ADcUzODm14PGTPNFSCwakNb9mMl
+	IKhpbCLvsJmVu5CUljoFd/+KyHrqmRR+8vEFrbJXOhIIkGYIQ5icE4E3ZfVpEoO2KjTu
+	cW6ad5wGzsCq9moqTmBN1ejChYHvNudEeRiwWDKUtGfkq8My+LiDrOAPQhrMldYOVXmW
+	cwvg==
+X-Gm-Message-State: AMke39mSBpzNtD+jJ4f5LzEUHF0KDfstRBRRWz6IVoyj5vMwRhSnmccx8X7Skgegmi91kg==
+X-Received: by 10.223.142.201 with SMTP id q67mr6234222wrb.182.1488628474359; 
+	Sat, 04 Mar 2017 03:54:34 -0800 (PST)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	191sm6801777wmo.21.2017.03.04.03.53.44
+	j74sm3865238wrj.21.2017.03.04.03.54.33
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sat, 04 Mar 2017 03:53:44 -0800 (PST)
+	Sat, 04 Mar 2017 03:54:33 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sat, 4 Mar 2017 12:53:47 +0100
-To: Alejandro Mery <amery@hanoverdisplays.com>
-Message-ID: <20170304115347.GC3025@jama>
-References: <20170301141908.166857-1-amery@hanoverdisplays.com>
-	<CF323D845261FD4F9B1E99738125033460DE2603@maildb.hanover.local>
+Date: Sat, 4 Mar 2017 12:54:36 +0100
+To: Yann PERON <yann.peron@optimatic.fr>
+Message-ID: <20170304115436.GD3025@jama>
+References: <1488363425-824-1-git-send-email-yann.peron@optimatic.fr>
 MIME-Version: 1.0
-In-Reply-To: <CF323D845261FD4F9B1E99738125033460DE2603@maildb.hanover.local>
+In-Reply-To: <1488363425-824-1-git-send-email-yann.peron@optimatic.fr>
 User-Agent: Mutt/1.8.0 (2017-02-23)
-Cc: "amery@geeks.cl" <amery@geeks.cl>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] gitver: fix try/except syntax for python3 support
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt5][PATCH] Ajout de qtSerialBus dans la toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,73 +58,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Mar 2017 11:53:47 -0000
-X-Groupsio-MsgNum: 65674
+X-List-Received-Date: Sat, 04 Mar 2017 11:54:34 -0000
+X-Groupsio-MsgNum: 65675
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="FsscpQKzF/jJk6ya"
+	protocol="application/pgp-signature"; boundary="EP0wieDxd4TSJjHq"
 Content-Disposition: inline
 
---FsscpQKzF/jJk6ya
+--EP0wieDxd4TSJjHq
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 01, 2017 at 02:22:29PM +0000, Alejandro Mery wrote:
-> On 01/03/17 14:19, Alejandro Mery wrote:
-> > https://www.python.org/dev/peps/pep-3110/
-> >
-> > It's backward compatible with 2.6+
-> >
-> > Signed-off-by: Alejandro Mery <amery@hanoverdisplays.com>
-> > ---
-> >  meta-oe/classes/gitver.bbclass | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/meta-oe/classes/gitver.bbclass b/meta-oe/classes/gitver.bb=
-class
-> > index e7b5155ee..b677996ea 100644
-> > --- a/meta-oe/classes/gitver.bbclass
-> > +++ b/meta-oe/classes/gitver.bbclass
-> > @@ -27,13 +27,13 @@ def get_git_pv(path, d, tagadjust=3DNone):
-> >      gitdir =3D os.path.abspath(os.path.join(d.getVar("S", True), ".git=
-"))
-> >      try:
-> >          ver =3D gitrev_run("git describe --tags", gitdir)
-> > -    except Exception, exc:
-> > +    except Exception as exc:
-> >          bb.fatal(str(exc))
-> >
-> >      if not ver:
-> >          try:
-> >              ver =3D gitrev_run("git rev-parse --short HEAD", gitdir)
-> > -        except Exception, exc:
-> > +        except Exception as exc:
-> >              bb.fatal(str(exc))
-> >
-> >          if ver:
+On Wed, Mar 01, 2017 at 11:17:05AM +0100, Yann PERON wrote:
+> ---
+
+Please use English.
+
+>  recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb | 2 ++
+>  1 file changed, 2 insertions(+)
 >=20
-> I forgot to mention, I'm having this problem using `morty`
-
-Next time, please send version applicable and tested in master branch first=
-, then
-you can request backport to morty.
-
-I've applied this manually to master-next now.
-
-Thanks
+> diff --git a/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.b=
+b b/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
+> index 1521dbf..2735135 100755
+> --- a/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
+> +++ b/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
+> @@ -83,6 +83,8 @@ RDEPENDS_${PN} +=3D " \
+>      ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'qtsensors-qmlplug=
+ins', '', d)} \
+>      qtserialport-dev \
+>      qtserialport-mkspecs \
+> +    qtserialbus-dev \
+> +    qtserialbus-mkspecs \
+>      qtsvg-dev \
+>      qtsvg-mkspecs \
+>      qtsvg-plugins \
+> --=20
+> 2.1.4
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---FsscpQKzF/jJk6ya
+--EP0wieDxd4TSJjHq
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWLqqywAKCRA3VSO3ZXaA
-HERlAJ45bmlh/QJ5r09xjvDlI8yyAMV56wCgh1kOCQVI6zsR5LXZa/h01etA2PI=
-=O1wx
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWLqq+wAKCRA3VSO3ZXaA
+HC4dAJ95dgGINDbuSQ1xrWd8onP67QXgjQCffRvzf5pu91LazXTqCtsKaG7upP4=
+=Y4+G
 -----END PGP SIGNATURE-----
 
---FsscpQKzF/jJk6ya--
+--EP0wieDxd4TSJjHq--
