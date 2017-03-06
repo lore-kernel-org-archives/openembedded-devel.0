@@ -1,46 +1,35 @@
-Return-Path: <oleksandr.kravchuk@pelagicore.com>
-Received: from mail-lf0-f49.google.com (mail-lf0-f49.google.com
-	[209.85.215.49])
-	by mail.openembedded.org (Postfix) with ESMTP id E3E11776A4
+Return-Path: <gary@mlbassoc.com>
+Received: from mail.analogue-micro.com (mail.analogue-micro.com
+	[217.144.149.242])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C6CB77696
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Mar 2017 09:23:46 +0000 (UTC)
-Received: by mail-lf0-f49.google.com with SMTP id k202so69550537lfe.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Mar 2017 01:23:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=ZriMCpWikkfdUy0Ty/nmhvpAKfiDWE2apL27CdVNvZk=;
-	b=lYdGtVPMePxXlhxpaNO5febRWPwQXe2WeSsKKk8uDA/2lN9rIimA8Yf45FSCYgj1uN
-	iicU1YSUOnIw1xqi8/hpzBSX7Bpuwhaa3d/FwP/yG865YK1vSskJEQxjtHtbz99WvTqH
-	8dlX01sxjFhkRbzqZoMfbrDtUJQw8jIQylZNfTlrMqUDj1KuZw/T0yg9F3Tod0XTcEnX
-	DKnOo3ZsdTTd82qBdskDV2AG0pyeu34kqg8bib/RyVo1TX1PFg1x1EZFAUVZLOSj/y5k
-	3fyVLL0G4FY0YqChkh8b9LQTfe4BinHMFD3sgjJxPWcRAGLcJirX3VPQTFaxJchpoZne
-	h1sg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ZriMCpWikkfdUy0Ty/nmhvpAKfiDWE2apL27CdVNvZk=;
-	b=ODucTElqkEXh7UupwPfLMfyo5qevV3LLTeiYa5elcjMN6tFYtKIhiUcQA97yjH8TVA
-	YbLLgN4GXn7KQP6tWSj8V3gjGD3QhBc8HRMvBigrFXXxjaR6zmHEcXpGWETh/gJPCMBk
-	1PXazzFa9SJU3Q5f9XKEJ40Z82sXxSu+gTMkUMvYgPlYWydfIY2Ew26QMtsWg46IvUV7
-	aoLI7JBYoBRByhy+u7FXpX1kMYJVbXJUA/eHdnVY60el8smV6Wm/meX0CQEd0XVhlAXE
-	uWk+HmAMQXj1BWBoofInVV/6at984oFdXtXSA3I/OXSnrlQXGdpbuIp19m1iiJucGS2g
-	TUSw==
-X-Gm-Message-State: AMke39n8EBQZsB4nQah1mOWgXXj0ZMDX0k+f+VGZPtXaCQe5MEo3IQ1JiEiUzAtNZOGsiAJn
-X-Received: by 10.25.25.14 with SMTP id 14mr4541391lfz.153.1488792227560;
-	Mon, 06 Mar 2017 01:23:47 -0800 (PST)
-Received: from stout.office.pelagicore.net ([83.218.80.243])
-	by smtp.gmail.com with ESMTPSA id
-	a11sm4071504lfh.37.2017.03.06.01.23.46
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 06 Mar 2017 01:23:47 -0800 (PST)
-From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+	Mon,  6 Mar 2017 10:14:02 +0000 (UTC)
+Received: by mail.analogue-micro.com (Postfix, from userid 999)
+	id 65CFB68A01C; Mon,  6 Mar 2017 10:14:03 +0000 (GMT)
+X-Spam-Checker-Version: SpamAssassin 3.3.2 (2011-06-06) on
+	loki.analogue-micro-ltd.com
+X-Spam-Level: *
+X-Spam-Status: No, score=1.2 required=5.0 tests=ALL_TRUSTED,BAYES_05,
+	DNS_FROM_AHBL_RHSBL autolearn=no version=3.3.2
+Received: from zeus.mlbassoc.com (unknown [10.8.0.2])
+	by mail.analogue-micro.com (Postfix) with ESMTP id E6BE768A019;
+	Mon,  6 Mar 2017 10:14:00 +0000 (GMT)
+Received: from [127.0.0.1] (localhost.localdomain [127.0.0.1])
+	by zeus.mlbassoc.com (Postfix) with ESMTP id 2066D674023C;
+	Mon,  6 Mar 2017 11:14:00 +0100 (CET)
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Mar 2017 10:23:45 +0100
-Message-Id: <1488792225-28104-1-git-send-email-oleksandr.kravchuk@pelagicore.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] wireshark: update to 2.2.5
+References: <1488363425-824-1-git-send-email-yann.peron@optimatic.fr>
+	<20170304115436.GD3025@jama>
+	<41d7f160-1178-ed2a-d60e-7232adde20db@mlbassoc.com>
+	<7b6bd7ea-2bb2-f1ed-435f-ddafd8725f12@optimatic.fr>
+From: Gary Thomas <gary@mlbassoc.com>
+Message-ID: <4f383f0b-7900-b593-34e1-cc04ba799d48@mlbassoc.com>
+Date: Mon, 6 Mar 2017 11:13:59 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.0
+MIME-Version: 1.0
+In-Reply-To: <7b6bd7ea-2bb2-f1ed-435f-ddafd8725f12@optimatic.fr>
+Subject: Re: [meta-qt5][PATCH] Ajout de qtSerialBus dans la toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,33 +42,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Mar 2017 09:23:47 -0000
+X-List-Received-Date: Mon, 06 Mar 2017 10:14:04 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
----
- .../wireshark/{wireshark_2.2.4.bb => wireshark_2.2.5.bb}              | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_2.2.4.bb => wireshark_2.2.5.bb} (95%)
+On 2017-03-06 07:50, Yann PERON wrote:
+> Hello,
+>
+> Thank you, It is the first time I post on this mailing List, I didn't know the requirements.
+>
+> When corrections will be applied, how send again the patch? reply to this email discussion ? or send in a new email?
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.4.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.5.bb
-similarity index 95%
-rename from meta-networking/recipes-support/wireshark/wireshark_2.2.4.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_2.2.5.bb
-index 29dfbfe..03ae3b9 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_2.2.4.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.5.bb
-@@ -10,8 +10,8 @@ SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
- 
- PE = "1"
- 
--SRC_URI[md5sum] = "6d0878ba931ea379f6e675d4cba6536b"
--SRC_URI[sha256sum] = "42a7fb35eed5a32478153e24601a284bb50148b7ba919c3e8452652f4c2a3911"
-+SRC_URI[md5sum] = "749e7ca7606ae7df5c1ca8c62f93ff31"
-+SRC_URI[sha256sum] = "75dd88d3d6336559e5b0b72077d8a772a988197d571f00029986225fef609ac8"
- 
- inherit autotools pkgconfig perlnative
- 
+Send a new patch, marked [PATCH v2], following the guidelines at
+   http://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
+
+> Le 04/03/2017 à 13:28, Gary Thomas a écrit :
+>> On 2017-03-04 12:54, Martin Jansa wrote:
+>>> On Wed, Mar 01, 2017 at 11:17:05AM +0100, Yann PERON wrote:
+>>>> ---
+>>>
+>>> Please use English.
+>>
+>> That's only part of what's off/missing here:
+>>   * No Signed-off-by
+>>   * No explanation of the change
+>>   * Improper subject [protocol]
+>>
+>>>
+>>>>  recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb | 2 ++
+>>>>  1 file changed, 2 insertions(+)
+>>>>
+>>>> diff --git a/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
+>>>> b/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
+>>>> index 1521dbf..2735135 100755
+>>>> --- a/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
+>>>> +++ b/recipes-qt/packagegroups/packagegroup-qt5-toolchain-target.bb
+>>>> @@ -83,6 +83,8 @@ RDEPENDS_${PN} += " \
+>>>>      ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'qtsensors-qmlplugins', '', d)} \
+>>>>      qtserialport-dev \
+>>>>      qtserialport-mkspecs \
+>>>> +    qtserialbus-dev \
+>>>> +    qtserialbus-mkspecs \
+>>>>      qtsvg-dev \
+>>>>      qtsvg-mkspecs \
+>>>>      qtsvg-plugins \
+>>>> --
+>>>> 2.1.4
+>>
+> **
+
+
 -- 
-2.7.4
-
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
