@@ -1,37 +1,26 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 95D157309D
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id B9DFE730D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Mar 2017 18:15:36 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id j127so28213408qke.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Mar 2017 10:15:38 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=TeqDTrqJn3bk+oChh2pvaovy5DdJ5xESOVStDDAQFh4=;
-	b=cU3ClUwv9heWPmgJ2+NkHLLOGgi0A6d+Em0dfrbgNFf/gNix0rJFTN6V/Oc0k4YzYn
-	oeT/Uqw3R3NoRU3Ryml/Z/5gNrNhyiVpPudhA9utBUKHLKIVKeYBoIJuQlf/exANecTs
-	K7skfW6+IH3e9ZAuMT/A8GtmkOPkWRc1Q+srb8IFQDG42QWae9OohA0gl8o3GjsbazJh
-	jlblei3feFMPnBS3SLp0snVQeVFXQrFbdzYmYx1fj9xSEQ/FxdVBM507s9Cn02ncYGOS
-	D/zFhnc9TLYm0go4Keys3iymrecpMohTKwbCb2pSq5bzntV+FnAwERTZXAnu4yiis2zS
-	5RoA==
-X-Gm-Message-State: AMke39lMStT94EDDqZ0A5wr6WttXIv63KjEIpz3ypjHzS+9h9u3Arcu+hFR7IJ7KJVN24g==
-X-Received: by 10.55.33.205 with SMTP id f74mr14255198qki.165.1488824138373;
-	Mon, 06 Mar 2017 10:15:38 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
-	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
-	d26sm1384231qtg.26.2017.03.06.10.15.37
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 06 Mar 2017 10:15:37 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: paul.eggleton@linux.intel.com,
-	openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Mar 2017 13:14:49 -0500
-Message-Id: <1488824089-5430-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-webserver][PATCH] Update meta-webserver README to add Derek Straka as the maintainer
+	Mon,  6 Mar 2017 19:20:17 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	06 Mar 2017 11:20:17 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.35,254,1484035200"; d="scan'208";a="941227268"
+Received: from ngocnhum-mobl11.ccr.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.255.134.221])
+	by orsmga003.jf.intel.com with ESMTP; 06 Mar 2017 11:20:15 -0800
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Derek Straka <derek@asterius.io>
+Date: Tue, 07 Mar 2017 08:20:12 +1300
+Message-ID: <1811231.W6ZfTcNILL@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+In-Reply-To: <1488824089-5430-1-git-send-email-derek@asterius.io>
+References: <1488824089-5430-1-git-send-email-derek@asterius.io>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-webserver][PATCH] Update meta-webserver README to add Derek Straka as the maintainer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,27 +33,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Mar 2017 18:15:40 -0000
+X-List-Received-Date: Mon, 06 Mar 2017 19:20:18 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-webserver/README | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Tuesday, 7 March 2017 7:14:49 AM NZDT Derek Straka wrote:
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+>  meta-webserver/README | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/meta-webserver/README b/meta-webserver/README
+> index 379b54a..7b60630 100644
+> --- a/meta-webserver/README
+> +++ b/meta-webserver/README
+> @@ -54,7 +54,7 @@ Maintenance
+>  Send patches / pull requests to openembedded-devel@lists.openembedded.org
+>  with '[meta-webserver]' in the subject.
+> 
+> -Layer maintainer: Paul Eggleton <paul.eggleton@linux.intel.com>
+> +Layer maintainer: Derek Straka <derek@asterius.io>
+> 
+> 
+>  License
 
-diff --git a/meta-webserver/README b/meta-webserver/README
-index 379b54a..7b60630 100644
---- a/meta-webserver/README
-+++ b/meta-webserver/README
-@@ -54,7 +54,7 @@ Maintenance
- Send patches / pull requests to openembedded-devel@lists.openembedded.org
- with '[meta-webserver]' in the subject.
- 
--Layer maintainer: Paul Eggleton <paul.eggleton@linux.intel.com>
-+Layer maintainer: Derek Straka <derek@asterius.io>
- 
- 
- License
+Acked-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+
+I've already updated the layer index.
+
+Cheers,
+Paul
+
 -- 
-2.7.4
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
