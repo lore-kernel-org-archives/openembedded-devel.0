@@ -1,48 +1,50 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B9137783E
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 7675D7772E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Mar 2017 13:40:44 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1488894044; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=pzl32KoIcxXudr3mTAk6+frfsdFx9YMUoNq0VgRFtwM=;
-	b=NUgh51mydgiZc4mpLKuW33rqQPwFYpGJJrxBZz22Ol5kEULLi2Bz21DhPV+fl+492ds6+fQI
-	/QoCaowbdP2wnL07RsS3EO2txZ2Zs4ETwDX7q2f7Zg5Csu1ILzkqHg3rLy1A5O6tyydlaNwM
-	7KVGW8ea4Jit6/PWYy6I6w0oysE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
-	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
-	Message-ID: Subject: To: Cc: Content-Type;
-	b=dwQzSgkAhGgPeIGklIBzLP2+AXCMJO+6D1/wUbqrgP+hVRgfeK6Il8fDKmuSOK1QJe6qli
-	AXCQVv7saZSCpgTeWeiz+mbpGsaodurd+m3tyxOv9KomHKwgF71mt6uQolWwyLuFIs2yWSaw
-	X45RlWmr0ViAhjfIU19QGcfCblwOE=
-Sender: derek@asterius.io
-X-Mailgun-Sending-Ip: 104.130.122.4
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
-	[209.85.223.178])
-	by mxa.mailgun.org with ESMTP id 58beb85c.7f7eb4364170-smtp-out-n03;
-	Tue, 07 Mar 2017 13:40:44 -0000 (UTC)
-Received: by mail-io0-f178.google.com with SMTP id g6so3500130ioj.1
+	Tue,  7 Mar 2017 13:52:20 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id u132so1105381wmg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Mar 2017 05:40:44 -0800 (PST)
-X-Gm-Message-State: AMke39mrTKCmg0eBYDpY4SCsC0bUlumOGCYR2TfPaGuugxVWXqLm8fHRUEkbGHOKJUtALRq7nMjvXRQPEtR4uw==
-X-Received: by 10.107.138.14 with SMTP id m14mr818658iod.235.1488894044047;
-	Tue, 07 Mar 2017 05:40:44 -0800 (PST)
+	Tue, 07 Mar 2017 05:52:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=NEmz81PrhSSFQ1OMJmOG/x8XIEbz9VAFUvNCWvRqmO8=;
+	b=O6VMtxfvdJxlM1q2ZhWfdyMCdt38lUq8ORVVMaPPbrL2sRq5yffRZjyxyBWUAGZQjf
+	P8jUOYADl59GlD8CNOnSaQgKVExrGp36K5oWBvlyKonCEOQ7JiR7TfhyAWPUbgx97vRI
+	waPFVFi5asv020Ih6gtUvMPGpzGg8oqZwv8CA40GvyaAqyPxR6exzhBKe3JyI9RTAX4A
+	8YZILQftgoFG6dwy+u8GjqlCrlygBnRsXuqV6Qjg/fqrz1Qy8YTemcZtEQ2T4JFjGbVA
+	q8Cdkdbz6/4qBfXcvdsdjrDkwhypNFjrEI09rrcucIPi815sU7ETUvIbX00OfkMDu30u
+	sYfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=NEmz81PrhSSFQ1OMJmOG/x8XIEbz9VAFUvNCWvRqmO8=;
+	b=MhH9ba1QBXGTqkEHXdiSHJ0Jn9TErPa2MaT3sbrmh6iiaYG6veVyrHtP1NEYd10gJT
+	5oowxj0sVYaOhN/GwJT6+zel27aNmuTHSEZxf8CnOokJm8QCOoX7fQ0Feo6Ywp0yUtzl
+	VRFLnt6RIGh1zZcH1AauVJFzQ8EYbbySX1k5ou3QUDf2ij8hrCW4OTpKGO17f72VRwfw
+	hnKJqIE+RZ/mv83nlEqJF1HOSgPoL00MWimx4fP76z9pG4O+ZNsGmC7RAP6qk9Oky/70
+	dsYuWBMMe7pW7aRMnQ9yADoycHoQsExst4KQl9+MVxuPpAD9jRUu+NQLsv9WAxIMo3uT
+	dY9w==
+X-Gm-Message-State: AMke39lj5I+ZQ5UYKFJUmwSifur7pPOrnmlr57geKTJ0B5AFjE7ToAgKc456JAyPB/kcCw==
+X-Received: by 10.28.109.214 with SMTP id b83mr960426wmi.21.1488894740676;
+	Tue, 07 Mar 2017 05:52:20 -0800 (PST)
+Received: from localhost.localdomain
+	(ip-109-91-251-48.hsi12.unitymediagroup.de. [109.91.251.48])
+	by smtp.googlemail.com with ESMTPSA id
+	b17sm617408wma.33.2017.03.07.05.52.19
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 07 Mar 2017 05:52:20 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  7 Mar 2017 14:51:48 +0100
+Message-Id: <20170307135148.28066-1-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.9.3
 MIME-Version: 1.0
-Received: by 10.107.20.149 with HTTP; Tue, 7 Mar 2017 05:40:43 -0800 (PST)
-In-Reply-To: <alpine.LFD.2.20.1703070800350.11394@uk63952.mitel.com>
-References: <alpine.LFD.2.20.1703070800350.11394@uk63952.mitel.com>
-From: Derek Straka <derek@asterius.io>
-Date: Tue, 7 Mar 2017 08:40:43 -0500
-X-Gmail-Original-Message-ID: <CADNbA1r4iok5GoZrmdNyucKHT1u16bG5WfGoh8=HTc72vrMPJw@mail.gmail.com>
-Message-ID: <CADNbA1r4iok5GoZrmdNyucKHT1u16bG5WfGoh8=HTc72vrMPJw@mail.gmail.com>
-To: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: does specifying "--with-mpm=prefork" for apache2 require ugly manual hacking?
+Subject: [meta-qt5][PATCH] qtbase-native; do not build qdbuscpp2xml and qdbusxml2cpp bootstrapped
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,87 +57,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Mar 2017 13:40:44 -0000
+X-List-Received-Date: Tue, 07 Mar 2017 13:52:20 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Since they call out the specific version of 2.4.16, I assume this is based
-on the jethro branch.  I suppose the multiprocessing module could probably
-be a PACKAGECONFIG option[1].  There are several competing multiprocessing
-modules that can be configured statically or as shared for dynamic loading
-(event[1] vs worker[2] vs prefork[3]).
+This fixes build of kde's baloo. That project converts a header file using
+QDBusMessage to xml which won't work. More details can be found at [1].
+Problems with qdbus-helpers came up with update Qt5.7->Qt.5.8 where we use
+bootstrapped qtbase-native for the first time due to qtbase's new configuration
+and for reduced build time.
 
-As far as the do_install_append goes, the installed configuration files for
-apache get built up as part of the build from a set of templates in
-./docs/conf/.  The uncommenting of the mpm line might be part of a
-PACAKGECONFIG, but the other lines appear to be specific to their use case
-rather than generally applicable to using the prefork module: for example,
-they are setting the port to 8081 from port 80 (You can also specify the
-port at configure time with --port=PORT).
+[1] http://lists.qt-project.org/pipermail/development/2017-February/028756.html
 
--Derek
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ recipes-qt/qt5/qtbase-native_git.bb                |  1 +
+ ...l.pro-do-not-build-with-bootstrapped-depe.patch | 79 ++++++++++++++++++++++
+ 2 files changed, 80 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtbase/0012-qdbuscpp2xml.pro-do-not-build-with-bootstrapped-depe.patch
 
-[1] - https://httpd.apache.org/docs/2.4/mpm.html
-[2] - https://httpd.apache.org/docs/2.4/mod/event.html
-[3] - https://httpd.apache.org/docs/2.4/mod/worker.html
-[4] - https://httpd.apache.org/docs/2.4/mod/prefork.html
+diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
+index fbaa5ee..c013029 100644
+--- a/recipes-qt/qt5/qtbase-native_git.bb
++++ b/recipes-qt/qt5/qtbase-native_git.bb
+@@ -33,6 +33,7 @@ SRC_URI += "\
+ # common for qtbase-native and nativesdk-qtbase
+ SRC_URI += " \
+     file://0011-Always-build-uic.patch \
++    file://0012-qdbuscpp2xml.pro-do-not-build-with-bootstrapped-depe.patch \
+ "
+ 
+ CLEANBROKEN = "1"
+diff --git a/recipes-qt/qt5/qtbase/0012-qdbuscpp2xml.pro-do-not-build-with-bootstrapped-depe.patch b/recipes-qt/qt5/qtbase/0012-qdbuscpp2xml.pro-do-not-build-with-bootstrapped-depe.patch
+new file mode 100644
+index 0000000..e72601c
+--- /dev/null
++++ b/recipes-qt/qt5/qtbase/0012-qdbuscpp2xml.pro-do-not-build-with-bootstrapped-depe.patch
+@@ -0,0 +1,79 @@
++From 86ae0ce931edbe0ac30cfe5f94f681f1d055fdb0 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
++Date: Mon, 6 Mar 2017 11:50:38 +0100
++Subject: [PATCH] qdbuscpp2xml.pro: do not build with bootstrapped
++ dependenciies
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Upstream-Status: Pending
++
++Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
++---
++ src/src.pro                             | 9 ++-------
++ src/tools/qdbuscpp2xml/qdbuscpp2xml.pro | 3 +--
++ src/tools/qdbusxml2cpp/qdbusxml2cpp.pro | 5 +----
++ 3 files changed, 4 insertions(+), 13 deletions(-)
++
++diff --git a/src/src.pro b/src/src.pro
++index 90d7e2b..0aaf604 100644
++--- a/src/src.pro
+++++ b/src/src.pro
++@@ -4,9 +4,6 @@ QT_FOR_CONFIG += gui-private
++ include($$OUT_PWD/corelib/qtcore-config.pri)
++ include($$OUT_PWD/gui/qtgui-config.pri)
++ 
++-force_bootstrap|!qtConfig(commandlineparser): \
++-    CONFIG += force_dbus_bootstrap
++-
++ src_qtzlib.file = $$PWD/corelib/qtzlib.pro
++ src_qtzlib.target = sub-zlib
++ 
++@@ -37,13 +34,11 @@ src_tools_bootstrap_dbus.depends = src_tools_bootstrap
++ 
++ src_tools_qdbusxml2cpp.subdir = tools/qdbusxml2cpp
++ src_tools_qdbusxml2cpp.target = sub-qdbusxml2cpp
++-force_dbus_bootstrap: src_tools_qdbusxml2cpp.depends = src_tools_bootstrap_dbus
++-else: src_tools_qdbusxml2cpp.depends = src_dbus
+++src_tools_qdbusxml2cpp.depends = src_dbus
++ 
++ src_tools_qdbuscpp2xml.subdir = tools/qdbuscpp2xml
++ src_tools_qdbuscpp2xml.target = sub-qdbuscpp2xml
++-force_bootstrap: src_tools_qdbuscpp2xml.depends = src_tools_bootstrap_dbus
++-else: src_tools_qdbuscpp2xml.depends = src_dbus
+++src_tools_qdbuscpp2xml.depends = src_dbus
++ 
++ src_winmain.subdir = $$PWD/winmain
++ src_winmain.target = sub-winmain
++diff --git a/src/tools/qdbuscpp2xml/qdbuscpp2xml.pro b/src/tools/qdbuscpp2xml/qdbuscpp2xml.pro
++index 5ac3159..74c507c 100644
++--- a/src/tools/qdbuscpp2xml/qdbuscpp2xml.pro
+++++ b/src/tools/qdbuscpp2xml/qdbuscpp2xml.pro
++@@ -1,7 +1,6 @@
++ option(host_build)
++ QT = core-private
++-force_bootstrap: QT += bootstrap_dbus-private
++-else: QT += dbus-private
+++QT += dbus-private
++ DEFINES += QT_NO_CAST_FROM_ASCII QT_NO_FOREACH
++ QMAKE_CXXFLAGS += $$QT_HOST_CFLAGS_DBUS
++ 
++diff --git a/src/tools/qdbusxml2cpp/qdbusxml2cpp.pro b/src/tools/qdbusxml2cpp/qdbusxml2cpp.pro
++index d9ee5de..e891103 100644
++--- a/src/tools/qdbusxml2cpp/qdbusxml2cpp.pro
+++++ b/src/tools/qdbusxml2cpp/qdbusxml2cpp.pro
++@@ -1,9 +1,6 @@
++ option(host_build)
++-!force_bootstrap:!qtConfig(commandlineparser): \
++-    CONFIG += force_bootstrap
++ QT = core-private
++-force_bootstrap: QT += bootstrap_dbus-private
++-else: QT += dbus-private
+++QT += dbus-private
++ DEFINES += QT_NO_CAST_FROM_ASCII QT_NO_FOREACH
++ QMAKE_CXXFLAGS += $$QT_HOST_CFLAGS_DBUS
++ 
++-- 
++2.9.3
++
+-- 
+2.9.3
 
-On Tue, Mar 7, 2017 at 8:05 AM, Robert P. J. Day <rpjday@crashcourse.ca>
-wrote:
-
->
->   just ran across the following situation in that an OE build
-> (actually, wind river linux, but that should make no difference) has a
-> bbappend file, "apache2_2.4.16.bbappend", that appears to be going to
-> a great deal of trouble to simply specify "--with-mpm=prefork":
->
-> EXTRA_OECONF += " --with-mpm=prefork "
->
-> do_install_append() {
->                 # Make a backup of the original httpd.conf file
->     cp ${D}/${sysconfdir}/${BPN}/httpd.conf ${D}/${sysconfdir}/${BPN}/
-> httpd.conf.orig
->
->     # Remove the two offending lines (to be replaced with the correct
-> ones), as well as uncommenting the mpm include directive.
->     sed -r 's_^IncludeOptional\s+/etc/apache2/conf.d/\*.conf__' <
-> ${D}/${sysconfdir}/${BPN}/httpd.conf.orig | sed -r
-> 's_^IncludeOptional\s+/etc/apache2/modules.d/\*.conf__' | sed -r
-> 's_^#Include\s+etc/apache2/extra/httpd-mpm.conf_Include
-> etc/apache2/extra/httpd-mpm.conf_' | sed -r 's_^Listen 80$_Listen
-> 80\n#Temporary use by minion\nListen 8081_' > ${D}/${sysconfdir}/${BPN}/
-> httpd.conf
->
->     # Replacing the two lines removed previously with the correct ones.
-> Loading the modules first, then configure them.
->     printf "\nIncludeOptional ${sysconfdir}/${BPN}/modules.d/*.load" >>
-> ${D}/${sysconfdir}/${BPN}/httpd.conf
->     printf "\nIncludeOptional ${sysconfdir}/${BPN}/conf.d/*.conf" >>
-> ${D}/${sysconfdir}/${BPN}/httpd.conf
-> }
->
->   i'm unclear on what is happening above, but it seems that asking for
-> a simple configuration like that should be available with something as
-> basic as adding an option, or selecting PACKAGECONFIG.
->
->   am i missing something? is all of the above really necessary to do
-> something that looks fairly straightforward?
->
-> rday
->
-> --
->
-> ========================================================================
-> Robert P. J. Day                                 Ottawa, Ontario, CANADA
->                         http://crashcourse.ca
->
-> Twitter:                                       http://twitter.com/rpjday
-> LinkedIn:                               http://ca.linkedin.com/in/rpjday
-> ========================================================================
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
