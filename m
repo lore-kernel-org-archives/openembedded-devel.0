@@ -1,47 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id A11E573109
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id A7E6D7756E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Mar 2017 07:14:09 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id 187so8406048pgb.2
+	Tue,  7 Mar 2017 07:14:10 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id j5so20183062pfb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Mar 2017 23:14:11 -0800 (PST)
+	Mon, 06 Mar 2017 23:14:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=ztD2fVkoTHcJXToxjCp6ZkWNEsEhbFiLf/Xqiw0vihs=;
-	b=UC7Ktp5X32YToioCbnCTxv6ju+BTiiazYKFlxw85zxZ/5ZoYYmqhkCsgrWJT8U49La
-	Rh0whvTf3UVhZsgaqJd+q3xa29ETPn8eqEcsyK2UuzU6/y3c1vYycZrM7h50XqudMOqW
-	urJAXFkaPAwz4V0O7MQ4WDvw2nvNapG6ChH6n64OyEBgef97bJdOBxf7w75C80l1NTWT
-	rG57bw8tkT+QfomLLdJZ2O185wGRlRCr12Qne/o8R50PvhRAGWWEyIgCcsTev/jpH/Kv
-	hMksjuj9kJLWhSbDSO9xjTX2q5DlV2MlGpuW8IoEwEDzOEE7ETcGaqP2TilX7KSDjHPL
-	XKWw==
+	bh=HFCNsBc9nja8neLrPCfdl51bdSh3KBuKatGudJxiy1Q=;
+	b=nSot7pkWv50oKDqXi5gB3Kd4GFdBhg4gijZWcdW9XDI/gD6Ar9oJtKBf2Njn6CFvPN
+	A6Zw3NERclAFROB4o9vBUYa5A4NhGFD/0J3qrKGu6ADjRIWUtkv8YwJSSrfo2Dr41MXT
+	7RsWDFzCodn0CfuEYjYrLS3Ena5MBJGdDVLPS5kYvHDZLHvGniddt0MvMfgfYNrTr0fZ
+	bRagVhNQnaPiiKQABYDavnVFr6mvg1DgGkBYZntM8VIDKa4XHjDb3v74gDke37BuJJQd
+	5Mx3Gnn7XNxl9PEgJgCYmeGEUYBgUdmq8ZLDPjxraZi1GUJnuFDowEkKCZA2cTrXx2N5
+	X7TA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=ztD2fVkoTHcJXToxjCp6ZkWNEsEhbFiLf/Xqiw0vihs=;
-	b=d54WRkfE7qvnM4iPi0PiGF4u2+4yqGydEkB4MUm/3jJDl1TJ+XzvWd80xuB5UrA0lw
-	41B5uVB8loAzyI36WGF8O8noRN5P7DpqKTfXLnak06i30yuupOcRzOGRRnFWAQ0lRGIY
-	cawvs7I/vOVJh2NMuHpMrpmuGtQza/AhFIkNK0IcIaa2PekeZvaljRuXJBaVyhJBzQFz
-	F6BHUFg/+A9a24ElT6oIfgM7QjT/IEcx7rWY40SQASt53GTff7Ez7iv6C4U5DIRllOru
-	HZuBCPt0wp/1HfZR7mntVQY25MMQFBiQB5ydGwepBfrouBTEZvBvNFfsId1pjbvi1NGx
-	sUtQ==
-X-Gm-Message-State: AMke39ly7VT4qtGKDO/yKCSjnMdGVkHyBCPTNxE+jpP3CPRRVzNEJ6JhtJHpnpHFNTvt+w==
-X-Received: by 10.99.157.2 with SMTP id i2mr9078690pgd.139.1488870851268;
-	Mon, 06 Mar 2017 23:14:11 -0800 (PST)
+	bh=HFCNsBc9nja8neLrPCfdl51bdSh3KBuKatGudJxiy1Q=;
+	b=PjV1rRB2cWpsOUSCK5M2+RGtk/65pWivOo858kxGiddpC1xjyleGjm9tacZm8+lYUl
+	t9xb7tuw/8jxJg1ievP9tCCt1v35P/VbUCxXxnVNCaFDhK4R1sCbDgzMH4BFJzGhG2wQ
+	QMJ4PbizYeOnxnU0IenRhB2cg8Le1ATrEJV9lli8UYPNJ9c/eZCYSMKWNJneLML/jn8K
+	1j4a60l2tEAyO0PqbHgsf9YB/Or9zJ76Hd6md7ZeOPEncZQlLTQUVwHy8sNocPgTUzk7
+	51M0Ian0EeEe2syr8yDSzw6NAHfYZwh1HHaLiyH57cjFTWpq8pB1laIehEThKlwV2UPC
+	wI7g==
+X-Gm-Message-State: AMke39noQI6rgGBgZT+o5DPXoD9ix32JyVCHPmt/aTzV8G7FpgrgID3efF/BZTRMUQoFmw==
+X-Received: by 10.84.197.3 with SMTP id m3mr32423366pld.89.1488870852090;
+	Mon, 06 Mar 2017 23:14:12 -0800 (PST)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	r134sm43530858pfr.83.2017.03.06.23.14.10
+	r134sm43530858pfr.83.2017.03.06.23.14.11
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 06 Mar 2017 23:14:10 -0800 (PST)
+	Mon, 06 Mar 2017 23:14:11 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Mar 2017 23:13:48 -0800
-Message-Id: <20170307071349.16444-13-raj.khem@gmail.com>
+Date: Mon,  6 Mar 2017 23:13:49 -0800
+Message-Id: <20170307071349.16444-14-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.0
 In-Reply-To: <20170307071349.16444-1-raj.khem@gmail.com>
 References: <20170307071349.16444-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 13/14] iptraf: Fix build with clang
+Subject: [meta-oe][PATCH 14/14] libtorrent, rtorrent: Update to 0.13.6+git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,117 +55,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Mar 2017 07:14:09 -0000
+X-List-Received-Date: Tue, 07 Mar 2017 07:14:10 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../iptraf/iptraf/format_string.patch              | 31 +++++++++++++++++++
- .../recipes-devtools/iptraf/iptraf/ldopts.patch    | 35 ++++++++++++++++++++++
- meta-oe/recipes-devtools/iptraf/iptraf_3.0.0.bb    |  7 +++--
- 3 files changed, 71 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/iptraf/iptraf/format_string.patch
- create mode 100644 meta-oe/recipes-devtools/iptraf/iptraf/ldopts.patch
+ .../{libtorrent_0.13.3.bb => libtorrent_0.13.6.bb}          | 13 ++++++++++---
+ .../rtorrent/{rtorrent_0.9.3.bb => rtorrent_0.9.6.bb}       | 12 +++++++++---
+ 2 files changed, 19 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-connectivity/libtorrent/{libtorrent_0.13.3.bb => libtorrent_0.13.6.bb} (60%)
+ rename meta-oe/recipes-connectivity/rtorrent/{rtorrent_0.9.3.bb => rtorrent_0.9.6.bb} (57%)
 
-diff --git a/meta-oe/recipes-devtools/iptraf/iptraf/format_string.patch b/meta-oe/recipes-devtools/iptraf/iptraf/format_string.patch
-new file mode 100644
-index 000000000..5f96f0f4c
---- /dev/null
-+++ b/meta-oe/recipes-devtools/iptraf/iptraf/format_string.patch
-@@ -0,0 +1,31 @@
-+Index: iptraf-3.0.0/src/othptab.c
-+===================================================================
-+--- iptraf-3.0.0.orig/src/othptab.c
-++++ iptraf-3.0.0/src/othptab.c
-+@@ -335,7 +335,7 @@ void printothpentry(struct othptable *ta
-+                 break;
-+             }
-+ 
-+-            sprintf(scratchpad, inet_ntoa(saddr));
-++            sprintf(scratchpad, "%s", inet_ntoa(saddr));
-+             strcat(msgstring, scratchpad);
-+             wattrset(table->othpwin, ARPATTR);
-+             break;
-+@@ -354,7 +354,7 @@ void printothpentry(struct othptable *ta
-+                 break;
-+             }
-+ 
-+-            sprintf(scratchpad, rarp_mac_addr);
-++            sprintf(scratchpad, "%s", rarp_mac_addr);
-+             strcat(msgstring, scratchpad);
-+             wattrset(table->othpwin, ARPATTR);
-+             break;
-+@@ -421,7 +421,7 @@ void printothpentry(struct othptable *ta
-+         wattrset(table->othpwin, UNKNIPATTR);
-+         protptr = getprotobynumber(entry->protocol);
-+         if (protptr != NULL) {
-+-            sprintf(protname, protptr->p_aliases[0]);
-++            sprintf(protname, "%s", protptr->p_aliases[0]);
-+         } else {
-+             sprintf(protname, "IP protocol");
-+             unknown = 1;
-diff --git a/meta-oe/recipes-devtools/iptraf/iptraf/ldopts.patch b/meta-oe/recipes-devtools/iptraf/iptraf/ldopts.patch
-new file mode 100644
-index 000000000..c84a0a0ad
---- /dev/null
-+++ b/meta-oe/recipes-devtools/iptraf/iptraf/ldopts.patch
-@@ -0,0 +1,35 @@
-+Index: iptraf-3.0.0/src/Makefile
-+===================================================================
-+--- iptraf-3.0.0.orig/src/Makefile
-++++ iptraf-3.0.0/src/Makefile
-+@@ -5,7 +5,7 @@
-+ #
-+ # Architecture determination string borrowed from the kernel makefile.
-+ #
-+-ARCH 		:= $(shell uname -m | sed -e s/i.86/i386/ -e s/sun4u/sparc64/ \
-++ARCH 		?= $(shell uname -m | sed -e s/i.86/i386/ -e s/sun4u/sparc64/ \
-+ 			-e s/arm.*/arm/ -e s/sa110/arm/)
-+ PLATFORM 	= -DPLATFORM=\"$(shell uname -s)/$(ARCH)\"
-+ VERNUMBER	:= $(shell cat version)
-+@@ -17,7 +17,7 @@ VERSION 	= -DVERSION=\"$(VERNUMBER)\"
-+ #
-+ BINDIR		= ../../iptraf-$(VERNUMBER).bin.$(ARCH)
-+ 
-+-CC		= gcc
-++CC		= $(CC)
-+ LIBS		= -L../support -ltextbox -lpanel -lncurses   # in this order!
-+ 
-+ # comment this one out to omit debug code when done.
-+@@ -31,10 +31,10 @@ PROF		= #-pg
-+ # options to be passed to the compiler.  I don't believe they need to be
-+ # modified (except for -m486 on non-Intel x86 platforms).
-+ 
-+-CFLAGS		= -Wall #-O2 #-m486
-++CFLAGS		?= -Wall #-O2 #-m486
-+ DIRS		= -DWORKDIR=\"$(WORKDIR)\" \
-+ 		  -DLOGDIR=\"$(LOGDIR)\" -DEXECDIR=\"$(TARGET)\"
-+-LDOPTS		= #-static
-++LDOPTS		?= #-static
-+ 
-+ # you may want to change this to point to your ncurses include directory
-+ # if the ncurses include files are not in the default location.
-diff --git a/meta-oe/recipes-devtools/iptraf/iptraf_3.0.0.bb b/meta-oe/recipes-devtools/iptraf/iptraf_3.0.0.bb
-index e7a406fc5..abfab02e0 100644
---- a/meta-oe/recipes-devtools/iptraf/iptraf_3.0.0.bb
-+++ b/meta-oe/recipes-devtools/iptraf/iptraf_3.0.0.bb
-@@ -12,12 +12,15 @@ DEPENDS = "ncurses"
+diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.13.3.bb b/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.13.6.bb
+similarity index 60%
+rename from meta-oe/recipes-connectivity/libtorrent/libtorrent_0.13.3.bb
+rename to meta-oe/recipes-connectivity/libtorrent/libtorrent_0.13.6.bb
+index 4af3a6a6a..7153cff6c 100644
+--- a/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.13.3.bb
++++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.13.6.bb
+@@ -6,12 +6,19 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
  
- SRC_URI = " \
-     ftp://iptraf.seul.org/pub/iptraf/iptraf-3.0.0.tar.gz \
--    file://0001-src-Fix-error-in-cross-compile.patch"
-+    file://0001-src-Fix-error-in-cross-compile.patch \
-+    file://format_string.patch \
-+    file://ldopts.patch \
-+"
- SRC_URI[md5sum] = "377371c28ee3c21a76f7024920649ea8"
- SRC_URI[sha256sum] = "9ee433d95573d612539da4b452e6cdcbca6ab6674a88bfbf6eaf12d4902b5163"
- RDEPENDS_${PN} = "ncurses"
+ DEPENDS = "libsigc++-2.0 openssl cppunit"
  
--EXTRA_OEMAKE = "-e MAKEFLAGS="
-+EXTRA_OEMAKE = "-e MAKEFLAGS= LDOPTS='${LDFLAGS}' ARCH='${TARGET_ARCH}'"
+-SRC_URI = "http://libtorrent.rakshasa.no/downloads/${BP}.tar.gz \
++SRC_URI = "git://github.com/rakshasa/libtorrent;protocol=git;branch=master \
+     file://don-t-run-code-while-configuring-package.patch \
+ "
++SRCREV = "c167c5a9e0bcf0df23ae5efd91396aae0e37eb87"
  
- do_compile() {
-     oe_runmake -C src all
+-SRC_URI[md5sum] = "e94f6c590bb02aaf4d58618f738a85f2"
+-SRC_URI[sha256sum] = "34317d6783b7f8d0805274c9467475b5432a246c0de8e28fc16e3b0b43f35677"
++PV .= "+git${SRCPV}"
++
++S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+ 
++EXTRA_OECONF = "--without-zlib"
++
++do_configure_prepend() {
++    (cd ${S}; ./autogen.sh; cd -)
++}
+diff --git a/meta-oe/recipes-connectivity/rtorrent/rtorrent_0.9.3.bb b/meta-oe/recipes-connectivity/rtorrent/rtorrent_0.9.6.bb
+similarity index 57%
+rename from meta-oe/recipes-connectivity/rtorrent/rtorrent_0.9.3.bb
+rename to meta-oe/recipes-connectivity/rtorrent/rtorrent_0.9.6.bb
+index eb0a39af5..817c24345 100644
+--- a/meta-oe/recipes-connectivity/rtorrent/rtorrent_0.9.3.bb
++++ b/meta-oe/recipes-connectivity/rtorrent/rtorrent_0.9.6.bb
+@@ -5,11 +5,17 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+ DEPENDS = "libsigc++-2.0 curl cppunit libtorrent ncurses"
+ 
+-SRC_URI = "http://libtorrent.rakshasa.no/downloads/${BP}.tar.gz \
++SRC_URI = "git://github.com/rakshasa/rtorrent;protocol=git;branch=master \
+     file://don-t-run-code-while-configuring-package.patch \
+ "
++SRCREV = "226e670decf92e7adaa845a6982aca4f164ea740"
+ 
+-SRC_URI[md5sum] = "0bf2f262faa8c8c8d3b11ce286ea2bf2"
+-SRC_URI[sha256sum] = "9e93ca41beb1afe74ad7ad8013e0d53ae3586c9b0e97263d722f721535cc7310"
++PV .= "+git${SRCPV}"
++
++S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
++
++do_configure_prepend() {
++    (cd ${S}; ./autogen.sh; cd -)
++}
 -- 
 2.12.0
 
