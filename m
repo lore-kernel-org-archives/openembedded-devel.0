@@ -1,36 +1,49 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id DD96A601F2
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
+	[209.85.217.196])
+	by mail.openembedded.org (Postfix) with ESMTP id B65C573011
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Mar 2017 13:24:47 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id v125so10787392qkh.1
+	Wed,  8 Mar 2017 16:30:34 +0000 (UTC)
+Received: by mail-ua0-f196.google.com with SMTP id u30so5371334uau.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Mar 2017 05:24:49 -0800 (PST)
+	Wed, 08 Mar 2017 08:30:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=2h3ASFMAf9OVWKS40M3F4roxAcVwT8i/V2APzaKG4hU=;
+	b=Q6uIH/Phs0aK3Y+80gKLOemxnnhsoiuYRjVPHbGd/3eHcXgrQfiBn7gOkb+/WxaUHW
+	hCP43u2ISjXZY5DkKgSnsN3qtxQzLP70KvueFVQtKkMSijRsolCHlJcZVGvxp+yGMyeZ
+	9fdDWFQqdcvM1Na7QaLJDT2ZoP0UNSHbJfwi+i3pYayp2qc3YTALcaGpGiISc0wkMI2f
+	1lHc4rueekXt+ejdCS7AqLO7HOjnMYqz2papx3MlmMBDgIEW9vVN9rhnlKxi5uvW7YVN
+	fzHQpvfyZZqcW89r3GPeStTBZ6sWPQID1g9xzbR9cPQMm1+owqfMk1TamdBQlyZR1Sxz
+	OZZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=VlaOk08bAr+S1rI9Laq/gUG5OyPh5z6zess3NXdVAJ0=;
-	b=HYGZcoEwZJmm+Pgal4R3RQ/wbVwIIMrYxPL6rPaO39hbwDvy1BtWm8HbK9lPJh7qeS
-	39lOSX6Ws898Yv1GoI5zaCB7BWQGROZQ1ESCiVU7DgSFcre1gb3LqurDPmL349tPKUc6
-	3D5bc2a5PeDjYibEL+Wmh5yT8z+3ut3DRRGirD7Z5+/gTUM2/chPlmQYTPhtaE9sKRRW
-	NcAzg37AoBl41NyZvnctnT6iuunG6i+g6Rcxju2+17oTPAUDLM443fQ7oZiBk90lLZYZ
-	oN3HW2pH8aDZ7TkyzhsMLFYxV+5gPG02v9LBke5OkADcgsfSR6grTt+MxdTVEP9FXW3u
-	+CTQ==
-X-Gm-Message-State: AMke39nlN/s2xubmaDFRHp2fAC0I7YijT8EwkzvGbnGQfUS/u2GVM5gdvBSEKszYEorbrw==
-X-Received: by 10.200.53.99 with SMTP id z32mr7864595qtb.106.1488979488731;
-	Wed, 08 Mar 2017 05:24:48 -0800 (PST)
-Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
-	[67.85.97.224])
-	by smtp.gmail.com with ESMTPSA id x2sm2063751qkc.61.2017.03.08.05.24.47
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 08 Mar 2017 05:24:48 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Mar 2017 08:24:34 -0500
-Message-Id: <1488979474-6997-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-psutil: update to version 5.2.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=2h3ASFMAf9OVWKS40M3F4roxAcVwT8i/V2APzaKG4hU=;
+	b=oa93hesA+moStw3o2fOBBaHdZL5GpA3DJ2gm3a2xCNtghQRUAChZfecSv+nECu4SeJ
+	0Y5x98B/ejoqQcXYo4Wd+NgDeWkYBYwUFPghuCPPSmbstNJGOH1tTYUJvPqswPBHPSfN
+	SPTP6PBujhgpqWijc9XBtmfBY2Q4WGNN2P36+dqSfC+PEE8bAWawb82p9sEyIGOHrrpQ
+	2GijQuaA+SOo0AUwANnFZ0nRTwEvdHd85+jLF/CivPTODBCkoJbvhzw1j0lQ/ZJWx24T
+	KLd1r2djP6BVjwqrQxFIb8/49UtB5yFEA/grsrETpasIQpewVYwrYMeu/IutGp01U5iw
+	4JTg==
+X-Gm-Message-State: AMke39mBpEGEfn9QYMoeGJgFDDMIIN2y78FVT+JTJ0m31/I3v6fUp9RNcXA6+LGb4GqLzBtupAGratbmT64STA==
+X-Received: by 10.176.90.195 with SMTP id x3mr4255162uae.165.1488990635194;
+	Wed, 08 Mar 2017 08:30:35 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.159.39.37 with HTTP; Wed, 8 Mar 2017 08:30:04 -0800 (PST)
+In-Reply-To: <VI1PR0301MB191902ED0C0BB1DB7F1F1F36E32E0@VI1PR0301MB1919.eurprd03.prod.outlook.com>
+References: <1488884894-30925-1-git-send-email-liu.ming50@gmail.com>
+	<CAMKF1spXrXsng36SwA3zvE7yO1dSfhkubRqm=Zp=R7oTnCHSzA@mail.gmail.com>
+	<VI1PR0301MB191902ED0C0BB1DB7F1F1F36E32E0@VI1PR0301MB1919.eurprd03.prod.outlook.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 8 Mar 2017 08:30:04 -0800
+Message-ID: <CAMKF1spFViNoHZuv39BFOXA6ZS-29HuZz8Pd1QtdSvQy=WvVuA@mail.gmail.com>
+To: Peter Liu <peter.x.liu@external.atlascopco.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	"liu.ming50@gmail.com" <liu.ming50@gmail.com>
+Subject: Re: [meta-oe] [PATCH] rsyslog: fixes musl libc build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,41 +56,147 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Mar 2017 13:24:48 -0000
+X-List-Received-Date: Wed, 08 Mar 2017 16:30:35 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-psutil.inc                 | 4 ++--
- .../python/{python-psutil_5.1.3.bb => python-psutil_5.2.0.bb}         | 0
- .../python/{python3-psutil_5.1.3.bb => python3-psutil_5.2.0.bb}       | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-psutil_5.1.3.bb => python-psutil_5.2.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-psutil_5.1.3.bb => python3-psutil_5.2.0.bb} (100%)
+On Wed, Mar 8, 2017 at 12:20 AM, Peter Liu
+<peter.x.liu@external.atlascopco.com> wrote:
+> From: Khem Raj <raj.khem@gmail.com>
+> Sent: Wednesday, March 8, 2017 12:54:27 AM
+> To: liu.ming50@gmail.com; openembedded-devel@lists.openembedded.org
+> Cc: Peter Liu
+> Subject: Re: [oe] [meta-oe] [PATCH] rsyslog: fixes musl libc build
+>
+>
+> On Tue, Mar 7, 2017 at 3:10 AM <liu.ming50@gmail.com> wrote:
+>>
+>> From: Ming Liu <peter.x.liu@external.atlascopco.com>
+>>
+>> - struct timeval is defined in sys/time.h with a musl libc.
+>> - GLOB_BRACE is not defined in posix and thus not implemented in musl
+>> libc.
+>>
+>> Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+>> ---
+>>  .../rsyslog/rsyslog/0001-Include-sys-time-h.patch  | 33
+>> ++++++++++++++++++++
+>>  .../rsyslog/rsyslog/0001-Undefine-GLOB_BRACE.patch | 35
+>> ++++++++++++++++++++++
+>>  meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb |  5 ++++
+>>  3 files changed, 73 insertions(+)
+>>  create mode 100644
+>> meta-oe/recipes-extended/rsyslog/rsyslog/0001-Include-sys-time-h.patch
+>>  create mode 100644
+>> meta-oe/recipes-extended/rsyslog/rsyslog/0001-Undefine-GLOB_BRACE.patch
+>>
+>> diff --git
+>> a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Include-sys-time-h.patch
+>> b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Include-sys-time-h.patch
+>> new file mode 100644
+>> index 0000000..23c0f25
+>> --- /dev/null
+>> +++
+>> b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Include-sys-time-h.patch
+>> @@ -0,0 +1,33 @@
+>> +From 3c3c21f4735eb215206273bc714c57c969926d3d Mon Sep 17 00:00:00 2001
+>> +From: Ming Liu <peter.x.liu@external.atlascopco.com>
+>> +Date: Sun, 26 Feb 2017 14:10:21 +0100
+>> +Subject: [PATCH] Include sys/time.h
+>> +
+>> +struct timeval is defined in sys/time.h with a musl libc.
+>> +
+>> +Upstream-Status: Inappropriate [musl libc specific]
+>> +
+>> +Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+>> +---
+>> + tests/msleep.c | 4 ----
+>> + 1 file changed, 4 deletions(-)
+>> +
+>> +diff --git a/tests/msleep.c b/tests/msleep.c
+>> +index 26a8206..ca818be 100644
+>> +--- a/tests/msleep.c
+>> ++++ b/tests/msleep.c
+>> +@@ -26,11 +26,7 @@
+>> + #include "config.h"
+>> + #include <stdio.h>
+>> + #include <stdlib.h>
+>> +-#if defined(__FreeBSD__)
+>> + #include <sys/time.h>
+>> +-#else
+>> +-#include <time.h>
+>> +-#endif
+>> +
+>> + int main(int argc, char *argv[])
+>> + {
+>> +--
+>> +1.9.1
+>> +
+>> diff --git
+>> a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Undefine-GLOB_BRACE.patch
+>> b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Undefine-GLOB_BRACE.patch
+>> new file mode 100644
+>> index 0000000..7903bb1
+>> --- /dev/null
+>> +++
+>> b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Undefine-GLOB_BRACE.patch
+>> @@ -0,0 +1,35 @@
+>> +From 6746e3a9615d1566bf228e9012d0841b15178810 Mon Sep 17 00:00:00 2001
+>> +From: Ming Liu <liu.ming50@gmail.com>
+>> +Date: Sun, 26 Feb 2017 13:50:33 +0100
+>> +Subject: [PATCH] Undefine GLOB_BRACE
+>> +
+>> +GLOB_BRACE is not defined in posix and thus not implemented in musl libc.
+>> +
+>> +Fixed by defining it to 0 if it is undefined.
+>> +
+>> +Upstream-Status: Inappropriate [musl libc specific]
+>> +
+>> +Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+>> +---
+>> + plugins/imfile/imfile.c | 5 +++++
+>> + 1 file changed, 5 insertions(+)
+>> +
+>> +diff --git a/plugins/imfile/imfile.c b/plugins/imfile/imfile.c
+>> +index d20471f..f9aff81 100644
+>> +--- a/plugins/imfile/imfile.c
+>> ++++ b/plugins/imfile/imfile.c
+>> +@@ -85,6 +85,11 @@ static int bLegacyCnfModGlobalsPermitted;/* are legacy
+>> module-global config para
+>> +
+>> + #define ADD_METADATA_UNSPECIFIED -1
+>> +
+>> ++/* fixes build with musl libc */
+>> ++#ifndef GLOB_BRACE
+>> ++#define GLOB_BRACE 0
+>> ++#endif
+>> ++
+>> + /* this structure is used in pure polling mode as well one of the
+>> support
+>> +  * structures for inotify.
+>> +  */
+>> +--
+>> +1.9.1
+>> +
+>> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
+>> b/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
+>> index 62126f8..d81117c 100644
+>> --- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
+>> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
+>> @@ -26,6 +26,11 @@ SRC_URI =
+>> "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
+>>             file://rsyslog-fix-ptest-not-finish.patch \
+>>  "
+>>
+>> +SRC_URI_append_libc-musl = " \
+>
+>
+> Do they have to be applied conditionally?
+> I would suggest to make it portable across All libc
+>
+> OK, attempt to say that the changes would not cause problems in glibc as
+> well, although glibc does not have the problem, will verify it and send a
+> V2.
 
-diff --git a/meta-python/recipes-devtools/python/python-psutil.inc b/meta-python/recipes-devtools/python/python-psutil.inc
-index 57bfc88..6d3ebf8 100644
---- a/meta-python/recipes-devtools/python/python-psutil.inc
-+++ b/meta-python/recipes-devtools/python/python-psutil.inc
-@@ -2,8 +2,8 @@ SUMMARY = "A cross-platform process and system utilities module for Python"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0f02e99f7f3c9a7fe8ecfc5d44c2be62"
- 
--SRC_URI[md5sum] = "3090e32d42761086ae82036cadb95ba3"
--SRC_URI[sha256sum] = "959bd58bdc8152b0a143cb3bd822d4a1b8f7230617b0e3eb2ff6e63812120f2b"
-+SRC_URI[md5sum] = "c9aa2599dcd9e5b59d71b6660d396062"
-+SRC_URI[sha256sum] = "2fc91d068faa5613c093335f0e758673ef8c722ad4bfa4aded64c13ae69089eb"
- 
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-shell \
-diff --git a/meta-python/recipes-devtools/python/python-psutil_5.1.3.bb b/meta-python/recipes-devtools/python/python-psutil_5.2.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-psutil_5.1.3.bb
-rename to meta-python/recipes-devtools/python/python-psutil_5.2.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-psutil_5.1.3.bb b/meta-python/recipes-devtools/python/python3-psutil_5.2.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-psutil_5.1.3.bb
-rename to meta-python/recipes-devtools/python/python3-psutil_5.2.0.bb
--- 
-2.7.4
-
+glibc wont have issues without patch sure. However making the patch
+apply unconditionally makes maintaining easier.
 
