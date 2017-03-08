@@ -1,49 +1,52 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
-	[209.85.217.196])
-	by mail.openembedded.org (Postfix) with ESMTP id B65C573011
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
+	[209.85.128.194])
+	by mail.openembedded.org (Postfix) with ESMTP id D520072F63
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Mar 2017 16:30:34 +0000 (UTC)
-Received: by mail-ua0-f196.google.com with SMTP id u30so5371334uau.2
+	Wed,  8 Mar 2017 23:28:33 +0000 (UTC)
+Received: by mail-wr0-f194.google.com with SMTP id l37so5941094wrc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Mar 2017 08:30:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=2h3ASFMAf9OVWKS40M3F4roxAcVwT8i/V2APzaKG4hU=;
-	b=Q6uIH/Phs0aK3Y+80gKLOemxnnhsoiuYRjVPHbGd/3eHcXgrQfiBn7gOkb+/WxaUHW
-	hCP43u2ISjXZY5DkKgSnsN3qtxQzLP70KvueFVQtKkMSijRsolCHlJcZVGvxp+yGMyeZ
-	9fdDWFQqdcvM1Na7QaLJDT2ZoP0UNSHbJfwi+i3pYayp2qc3YTALcaGpGiISc0wkMI2f
-	1lHc4rueekXt+ejdCS7AqLO7HOjnMYqz2papx3MlmMBDgIEW9vVN9rhnlKxi5uvW7YVN
-	fzHQpvfyZZqcW89r3GPeStTBZ6sWPQID1g9xzbR9cPQMm1+owqfMk1TamdBQlyZR1Sxz
-	OZZA==
+	Wed, 08 Mar 2017 15:28:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=tTnWEHSPS05vakUTD56IIUoDPTjAedjhXR0/EgoJ+Us=;
+	b=GyYFyinIVicvvY/TG65cd088zIsRR3tuXwTbCy/gVx09VeZ7IS5w6EJbpRcwI/ogrj
+	nVbSbjQ9XX+DaIRG3aF5cY+qjnN6Qku9d32TWzQHTZOHHjY19zyPHFa+2f0/0WLeaVPX
+	TK6iO2EZAODkzP6YQKuwgjtWZQjsL9TOTnPe4kWc/JjD9J+215pH8/PLDva+qNoERQWi
+	nIfFvIiURnz0z0C07l6PshYQgGeWUjbEYN344QqjHDuVe2B6e7s8JH61KubNeifrKgfF
+	lAGASOJO/uShpO2dKWvBlpO+qQwq9MSqqnElYFjigQHk2kW62WmZz5cU5rH6iCtqAeUg
+	bb9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=2h3ASFMAf9OVWKS40M3F4roxAcVwT8i/V2APzaKG4hU=;
-	b=oa93hesA+moStw3o2fOBBaHdZL5GpA3DJ2gm3a2xCNtghQRUAChZfecSv+nECu4SeJ
-	0Y5x98B/ejoqQcXYo4Wd+NgDeWkYBYwUFPghuCPPSmbstNJGOH1tTYUJvPqswPBHPSfN
-	SPTP6PBujhgpqWijc9XBtmfBY2Q4WGNN2P36+dqSfC+PEE8bAWawb82p9sEyIGOHrrpQ
-	2GijQuaA+SOo0AUwANnFZ0nRTwEvdHd85+jLF/CivPTODBCkoJbvhzw1j0lQ/ZJWx24T
-	KLd1r2djP6BVjwqrQxFIb8/49UtB5yFEA/grsrETpasIQpewVYwrYMeu/IutGp01U5iw
-	4JTg==
-X-Gm-Message-State: AMke39mBpEGEfn9QYMoeGJgFDDMIIN2y78FVT+JTJ0m31/I3v6fUp9RNcXA6+LGb4GqLzBtupAGratbmT64STA==
-X-Received: by 10.176.90.195 with SMTP id x3mr4255162uae.165.1488990635194;
-	Wed, 08 Mar 2017 08:30:35 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=tTnWEHSPS05vakUTD56IIUoDPTjAedjhXR0/EgoJ+Us=;
+	b=NGaOg6YuduMr4l8pWxxSitZ+b82h50wI5noAZ3rB63HzpHwAjGBO5CNT1DPAyzKIRC
+	akaOBKyrl6S09czHJFC+sk6I2Oa0iPhHOpbJ6KMNtaHe+kLBB3ecF1t+mXBPQHMaT636
+	mhymllrF+HM31x25SOqXi6m77DB4U0thBg6Yz5TxFLCcNGD2V2gLvRarcnA3/5aOQEu1
+	nCXNgB45+rrYFBs6yfjsokGCSCzArvPW3ZS/14Zz9iC6PlafcmklRPR2dLQoeJFLR0GP
+	5pTdWUd4GoGvGRTHP/o+2OhvSrYvotFdpTRdu89Selr2AORV2tIt7AVc+3cGJR6n6Z8r
+	9i7Q==
+X-Gm-Message-State: AMke39mr8KvqxIaESgvtYjyRZqw1F9v6Jwyo6HkbSVNqZI57K91cAGq1EEvubYyme/RnuA==
+X-Received: by 10.223.163.7 with SMTP id c7mr7584783wrb.17.1489015714233;
+	Wed, 08 Mar 2017 15:28:34 -0800 (PST)
+Received: from PC192-168-2-116.speedport.ip
+	(p20030046E91BAF561E6F65FFFE3E7F61.dip0.t-ipconnect.de.
+	[2003:46:e91b:af56:1e6f:65ff:fe3e:7f61])
+	by smtp.googlemail.com with ESMTPSA id
+	m139sm4514615wma.2.2017.03.08.15.28.33
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 08 Mar 2017 15:28:33 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  9 Mar 2017 00:28:16 +0100
+Message-Id: <20170308232816.4303-1-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.9.3
 MIME-Version: 1.0
-Received: by 10.159.39.37 with HTTP; Wed, 8 Mar 2017 08:30:04 -0800 (PST)
-In-Reply-To: <VI1PR0301MB191902ED0C0BB1DB7F1F1F36E32E0@VI1PR0301MB1919.eurprd03.prod.outlook.com>
-References: <1488884894-30925-1-git-send-email-liu.ming50@gmail.com>
-	<CAMKF1spXrXsng36SwA3zvE7yO1dSfhkubRqm=Zp=R7oTnCHSzA@mail.gmail.com>
-	<VI1PR0301MB191902ED0C0BB1DB7F1F1F36E32E0@VI1PR0301MB1919.eurprd03.prod.outlook.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 8 Mar 2017 08:30:04 -0800
-Message-ID: <CAMKF1spFViNoHZuv39BFOXA6ZS-29HuZz8Pd1QtdSvQy=WvVuA@mail.gmail.com>
-To: Peter Liu <peter.x.liu@external.atlascopco.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	"liu.ming50@gmail.com" <liu.ming50@gmail.com>
-Subject: Re: [meta-oe] [PATCH] rsyslog: fixes musl libc build
+Subject: [meta-qt5][PATCH] qtwebengine: show progress for do_compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,147 +59,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Mar 2017 16:30:35 -0000
+X-List-Received-Date: Wed, 08 Mar 2017 23:28:34 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, Mar 8, 2017 at 12:20 AM, Peter Liu
-<peter.x.liu@external.atlascopco.com> wrote:
-> From: Khem Raj <raj.khem@gmail.com>
-> Sent: Wednesday, March 8, 2017 12:54:27 AM
-> To: liu.ming50@gmail.com; openembedded-devel@lists.openembedded.org
-> Cc: Peter Liu
-> Subject: Re: [oe] [meta-oe] [PATCH] rsyslog: fixes musl libc build
->
->
-> On Tue, Mar 7, 2017 at 3:10 AM <liu.ming50@gmail.com> wrote:
->>
->> From: Ming Liu <peter.x.liu@external.atlascopco.com>
->>
->> - struct timeval is defined in sys/time.h with a musl libc.
->> - GLOB_BRACE is not defined in posix and thus not implemented in musl
->> libc.
->>
->> Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
->> ---
->>  .../rsyslog/rsyslog/0001-Include-sys-time-h.patch  | 33
->> ++++++++++++++++++++
->>  .../rsyslog/rsyslog/0001-Undefine-GLOB_BRACE.patch | 35
->> ++++++++++++++++++++++
->>  meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb |  5 ++++
->>  3 files changed, 73 insertions(+)
->>  create mode 100644
->> meta-oe/recipes-extended/rsyslog/rsyslog/0001-Include-sys-time-h.patch
->>  create mode 100644
->> meta-oe/recipes-extended/rsyslog/rsyslog/0001-Undefine-GLOB_BRACE.patch
->>
->> diff --git
->> a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Include-sys-time-h.patch
->> b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Include-sys-time-h.patch
->> new file mode 100644
->> index 0000000..23c0f25
->> --- /dev/null
->> +++
->> b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Include-sys-time-h.patch
->> @@ -0,0 +1,33 @@
->> +From 3c3c21f4735eb215206273bc714c57c969926d3d Mon Sep 17 00:00:00 2001
->> +From: Ming Liu <peter.x.liu@external.atlascopco.com>
->> +Date: Sun, 26 Feb 2017 14:10:21 +0100
->> +Subject: [PATCH] Include sys/time.h
->> +
->> +struct timeval is defined in sys/time.h with a musl libc.
->> +
->> +Upstream-Status: Inappropriate [musl libc specific]
->> +
->> +Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
->> +---
->> + tests/msleep.c | 4 ----
->> + 1 file changed, 4 deletions(-)
->> +
->> +diff --git a/tests/msleep.c b/tests/msleep.c
->> +index 26a8206..ca818be 100644
->> +--- a/tests/msleep.c
->> ++++ b/tests/msleep.c
->> +@@ -26,11 +26,7 @@
->> + #include "config.h"
->> + #include <stdio.h>
->> + #include <stdlib.h>
->> +-#if defined(__FreeBSD__)
->> + #include <sys/time.h>
->> +-#else
->> +-#include <time.h>
->> +-#endif
->> +
->> + int main(int argc, char *argv[])
->> + {
->> +--
->> +1.9.1
->> +
->> diff --git
->> a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Undefine-GLOB_BRACE.patch
->> b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Undefine-GLOB_BRACE.patch
->> new file mode 100644
->> index 0000000..7903bb1
->> --- /dev/null
->> +++
->> b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Undefine-GLOB_BRACE.patch
->> @@ -0,0 +1,35 @@
->> +From 6746e3a9615d1566bf228e9012d0841b15178810 Mon Sep 17 00:00:00 2001
->> +From: Ming Liu <liu.ming50@gmail.com>
->> +Date: Sun, 26 Feb 2017 13:50:33 +0100
->> +Subject: [PATCH] Undefine GLOB_BRACE
->> +
->> +GLOB_BRACE is not defined in posix and thus not implemented in musl libc.
->> +
->> +Fixed by defining it to 0 if it is undefined.
->> +
->> +Upstream-Status: Inappropriate [musl libc specific]
->> +
->> +Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
->> +---
->> + plugins/imfile/imfile.c | 5 +++++
->> + 1 file changed, 5 insertions(+)
->> +
->> +diff --git a/plugins/imfile/imfile.c b/plugins/imfile/imfile.c
->> +index d20471f..f9aff81 100644
->> +--- a/plugins/imfile/imfile.c
->> ++++ b/plugins/imfile/imfile.c
->> +@@ -85,6 +85,11 @@ static int bLegacyCnfModGlobalsPermitted;/* are legacy
->> module-global config para
->> +
->> + #define ADD_METADATA_UNSPECIFIED -1
->> +
->> ++/* fixes build with musl libc */
->> ++#ifndef GLOB_BRACE
->> ++#define GLOB_BRACE 0
->> ++#endif
->> ++
->> + /* this structure is used in pure polling mode as well one of the
->> support
->> +  * structures for inotify.
->> +  */
->> +--
->> +1.9.1
->> +
->> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
->> b/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
->> index 62126f8..d81117c 100644
->> --- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
->> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
->> @@ -26,6 +26,11 @@ SRC_URI =
->> "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
->>             file://rsyslog-fix-ptest-not-finish.patch \
->>  "
->>
->> +SRC_URI_append_libc-musl = " \
->
->
-> Do they have to be applied conditionally?
-> I would suggest to make it portable across All libc
->
-> OK, attempt to say that the changes would not cause problems in glibc as
-> well, although glibc does not have the problem, will verify it and send a
-> V2.
+This was stolen from meta-oe / meson.bbclass - qtwebengine uses ninja for
+build too.
 
-glibc wont have issues without patch sure. However making the patch
-apply unconditionally makes maintaining easier.
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ recipes-qt/qt5/qtwebengine_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
+index 8e60d72..b945363 100644
+--- a/recipes-qt/qt5/qtwebengine_git.bb
++++ b/recipes-qt/qt5/qtwebengine_git.bb
+@@ -87,6 +87,8 @@ do_configure() {
+         -after ${EXTRA_QMAKEVARS_POST}
+ }
+ 
++do_compile[progress] = "outof:^\[(\d+)/(\d+)\]\s+"
++
+ do_install_append() {
+     rmdir ${D}${OE_QMAKE_PATH_PLUGINS}/${BPN} ${D}${OE_QMAKE_PATH_PLUGINS} || true
+     sed -i 's@ -Wl,--start-group.*-Wl,--end-group@@g; s@-L${B}[^ ]* @ @g' ${D}${libdir}/pkgconfig/Qt5WebEngineCore.pc
+-- 
+2.9.3
+
 
