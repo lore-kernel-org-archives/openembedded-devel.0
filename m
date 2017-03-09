@@ -1,25 +1,21 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8BCA5775C1
+Return-Path: <ismo.puustinen@intel.com>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 16CBF71D79
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Mar 2017 02:13:00 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v292D0RL023791
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 8 Mar 2017 18:13:01 -0800 (PST)
-Received: from localhost (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.294.0;
-	Wed, 8 Mar 2017 18:13:00 -0800
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 9 Mar 2017 10:11:44 +0800
-Message-ID: <1489025504-3002-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-X-Originating-IP: [128.224.162.198]
-Subject: [meta-networking][PATCH] postfix: remove references to buildmachine paths in target makedefs.out
+	Thu,  9 Mar 2017 13:11:57 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	09 Mar 2017 05:11:58 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.36,268,1486454400"; d="scan'208";a="942418807"
+Received: from ipuustin-desk.fi.intel.com ([10.237.72.72])
+	by orsmga003.jf.intel.com with ESMTP; 09 Mar 2017 05:11:57 -0800
+From: Ismo Puustinen <ismo.puustinen@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  9 Mar 2017 15:07:49 +0200
+Message-Id: <20170309130749.18638-1-ismo.puustinen@intel.com>
+X-Mailer: git-send-email 2.9.3
+Subject: [meta-python][PATCH] python-pycparser: reverse depend on cpp.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,30 +28,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Mar 2017 02:13:01 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 09 Mar 2017 13:11:58 -0000
 
-Clean the buildmachine paths in makedefs.out
+Pycparser requires installed C preprocessor to work correctly. Add cpp
+to RDEPENDS.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Ismo Puustinen <ismo.puustinen@intel.com>
 ---
- meta-networking/recipes-daemons/postfix/postfix.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python-pycparser.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-index 03b7985..5bb2491 100644
---- a/meta-networking/recipes-daemons/postfix/postfix.inc
-+++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-@@ -214,7 +214,7 @@ do_install_append_class-native() {
+diff --git a/meta-python/recipes-devtools/python/python-pycparser.inc b/meta-python/recipes-devtools/python/python-pycparser.inc
+index fe8c34d..4913f42 100644
+--- a/meta-python/recipes-devtools/python/python-pycparser.inc
++++ b/meta-python/recipes-devtools/python/python-pycparser.inc
+@@ -9,4 +9,6 @@ BBCLASSEXTEND = "native nativesdk"
  
- do_install_append_class-target() {
-     # Remove references to buildmachine paths in target makedefs.out
--    sed -i -e 's:--sysroot=${STAGING_DIR_TARGET}::g' ${D}/etc/postfix/makedefs.out
-+    sed -i 's:-fdebug-prefix-map[^ ]*::g; s:--sysroot=${STAGING_DIR_TARGET}::g' ${D}/etc/postfix/makedefs.out
- }
- 
- NATIVE_INSTALL_WORKS = "1"
+ RDEPENDS_${PN}_class-target += "\
+     ${PYTHON_PN}-subprocess \
++    cpp \
++    cpp-symlinks \
+     "
 -- 
-2.7.4
+2.9.3
 
 
