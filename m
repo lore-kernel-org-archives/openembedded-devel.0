@@ -1,24 +1,24 @@
 Return-Path: <joe.slater@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9168271AE4
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 2743273094
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Mar 2017 18:53:02 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v29Ir2ZA003797
+	Thu,  9 Mar 2017 18:58:05 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v29Iw6jI020254
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Mar 2017 10:53:02 -0800 (PST)
+	Thu, 9 Mar 2017 10:58:07 -0800 (PST)
 Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Thu, 9 Mar 2017 10:53:01 -0800
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.294.0; Thu, 9 Mar 2017 10:58:06 -0800
 From: Joe Slater <jslater@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>, <jackie.huang@windriver.com>
-Date: Thu, 9 Mar 2017 10:53:01 -0800
-Message-ID: <1489085581-8468-1-git-send-email-jslater@windriver.com>
+Date: Thu, 9 Mar 2017 10:58:06 -0800
+Message-ID: <1489085886-8522-1-git-send-email-jslater@windriver.com>
 X-Mailer: git-send-email 1.7.3.4
 MIME-Version: 1.0
-Subject: [oe-core][morty][PATCH 1/1] chrony: fix build failure for arma9
+Subject: [oe-core][PATCH 1/1] chrony: fix build failure for arma9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,7 +31,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Mar 2017 18:53:02 -0000
+X-List-Received-Date: Thu, 09 Mar 2017 18:58:06 -0000
 Content-Type: text/plain
 
 Eliminate references to syscalls not available
@@ -113,7 +113,7 @@ index 0000000..d1586bb
 + 
 +   const int socket_domains[] = {
 diff --git a/meta-networking/recipes-support/chrony/chrony_2.4.bb b/meta-networking/recipes-support/chrony/chrony_2.4.bb
-index a8898dc..fbc180d 100644
+index ad81701..71431f4 100644
 --- a/meta-networking/recipes-support/chrony/chrony_2.4.bb
 +++ b/meta-networking/recipes-support/chrony/chrony_2.4.bb
 @@ -33,6 +33,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
@@ -130,7 +130,7 @@ index a8898dc..fbc180d 100644
  #     kernel to have CONFIG_SECCOMP enabled.
 -PACKAGECONFIG ??= "editline scfilter \
 +PACKAGECONFIG ??= "editline \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
  "
  PACKAGECONFIG[readline] = "--without-editline,--without-readline,readline"
  PACKAGECONFIG[editline] = ",--without-editline,libedit"
@@ -138,7 +138,7 @@ index a8898dc..fbc180d 100644
  PACKAGECONFIG[privdrop] = ",--disable-privdrop,libcap"
 -PACKAGECONFIG[scfilter] = "--enable-scfilter,--without-seccomp"
 +PACKAGECONFIG[scfilter] = "--enable-scfilter,--without-seccomp,libseccomp"
- PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+ PACKAGECONFIG[ipv6] = ",--disable-ipv6,"
  PACKAGECONFIG[nss] = "--with-nss,--without-nss,nss"
  PACKAGECONFIG[libcap] = "--with-libcap,--without-libcap,libcap"
 -- 
