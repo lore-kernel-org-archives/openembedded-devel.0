@@ -1,24 +1,45 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 2743273094
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
+	[209.85.128.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 058BD77660
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Mar 2017 18:58:05 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v29Iw6jI020254
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 10 Mar 2017 10:59:25 +0000 (UTC)
+Received: by mail-wr0-f195.google.com with SMTP id g10so11134235wrg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Mar 2017 10:58:07 -0800 (PST)
-Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Thu, 9 Mar 2017 10:58:06 -0800
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <jackie.huang@windriver.com>
-Date: Thu, 9 Mar 2017 10:58:06 -0800
-Message-ID: <1489085886-8522-1-git-send-email-jslater@windriver.com>
-X-Mailer: git-send-email 1.7.3.4
-MIME-Version: 1.0
-Subject: [oe-core][PATCH 1/1] chrony: fix build failure for arma9
+	Fri, 10 Mar 2017 02:59:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=LnMsFCso1W+0WAjqAoMVeCNIsv3ItZ+5vXsCzbGpTgY=;
+	b=RheChcXR9h3xv7Q2TAmtQS4OOoqD+Cu1eewSGsvP8L8TYQaHSvFc7OChhz0ApP9omX
+	KBYIdah11CfzKa0Syo0pjU1aOV8kiDVSwEpDZb6SGMyX/7AwPuJo2ML3U+Zb8Yji7s8R
+	QLLnRoHSgikgr/WemDFobEvN5d8DMe6Qlp72K5mfcM0ZWP0Sw+ure/s4RLoG7BdhcVnn
+	ABG7c9T0hdUcyr4OEI5N2zMsX+MMeMZAQ5Ful+hKwTe4ms4BCr2R2FuSuARQuCAzWL07
+	FClCQQ6qyGbu2hpYEq67K4omCyrRtdkp4GcHLMCkyLJBU7WWcDKFZv7R8bPWR4++ifW4
+	ThdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=LnMsFCso1W+0WAjqAoMVeCNIsv3ItZ+5vXsCzbGpTgY=;
+	b=rTENOtTfxU4PA1GgiWpPCgg39XSdCGShXNjjpQEdPtuLaCfqT+KsBoFfzlU7+AeB48
+	1WEpZ21p+YJupLpfIinvAF8P315ZXwJ6tQH5CBTdF+uZ8MrX5EPlsmAmV2lOkmTf23ec
+	yQVe7ZsgEYBsGF7E/lzhW4edyjxqYyErOu9rej9wojiURro+zDE4kghSP711ROKJazXX
+	RHPEYA1o9uXAyrlYvCDZJOObobD5+X2loMkN7z07BrXJlxvAht4OkJUoRnqqTsJY7nDH
+	K1YLbMXphrYgKT57UfkIzWM/WKkxiglnhCi6hGqI7AwEAyeSZYUJA64ZYfVotZPqW1GK
+	aYbQ==
+X-Gm-Message-State: AMke39mdzfywvDTR/zuoIP4oo5coUSo3/YDCk2Dw9fLpRktggboRUqGV835QmH8cyiFoJA==
+X-Received: by 10.223.177.218 with SMTP id r26mr17019853wra.194.1489143566645; 
+	Fri, 10 Mar 2017 02:59:26 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	x1sm12225433wrd.63.2017.03.10.02.59.25
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 10 Mar 2017 02:59:25 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 10 Mar 2017 11:59:26 +0100
+Message-Id: <20170310105926.12921-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.12.0
+Subject: [PATCH][meta-oe] vim: add native BBCLASSEXTEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,117 +52,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Mar 2017 18:58:06 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 10 Mar 2017 10:59:26 -0000
 
-Eliminate references to syscalls not available
-for ARM_EABI.  Also add a dependency on libseccomp
-which is needed for scfilter to work.
+* some recipes might use xxd
+* with stricter host binaries available in PATH:
+  http://lists.openembedded.org/pipermail/openembedded-core/2017-March/133886.html
+  we cannot use xxd from host and it's not so common to add it into
+  HOSTTOOL_NONFATAL
+* there is also smaller solution for xxd -i (which is what I need):
+  https://github.com/gregkh/xxdi
+  but after creating xxdi-native recipe for this I've discovered that
+  perl on my host as well as perlnative doesn't provide File::Slurp
+  used by this, so adding BBCLASSEXTEND here is easier solution
 
-Set PACKAGECONFIG to not enable scfilter, since
-kernel CONFIG_SECCOMP is unlikely to be set.  This
-aligns the usage of libseccomp with that of other packages.
-
-Signed-off-by: Joe Slater <jslater@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- .../recipes-support/chrony/chrony/arm_eabi.patch   |   57 ++++++++++++++++++++
- .../recipes-support/chrony/chrony_2.4.bb           |    5 +-
- 2 files changed, 60 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
+ meta-oe/recipes-support/vim/vim_8.0.0022.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
-new file mode 100644
-index 0000000..d1586bb
---- /dev/null
-+++ b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
-@@ -0,0 +1,57 @@
-+    chrony: fix build failure for arma9
-+    
-+    Eliminate references to syscalls not available
-+    for ARM_EABI.  Also add a dependency on libseccomp
-+    which is needed for scfilter to work.
-+    
-+    Set PACKAGECONFIG to not enable scfilter, since
-+    kernel CONFIG_SECCOMP is unlikely to be set.  This
-+    aligns the usage of libseccomp with that of other packages.
-+
-+    Upstream-Status: Pending
-+    
-+    Signed-off-by: Joe Slater <jslater@windriver.com>
-+
-+--- a/sys_linux.c
-++++ b/sys_linux.c
-+@@ -453,13 +453,12 @@ SYS_Linux_EnableSystemCallFilter(int lev
-+   const int syscalls[] = {
-+     /* Clock */
-+     SCMP_SYS(adjtimex), SCMP_SYS(gettimeofday), SCMP_SYS(settimeofday),
-+-    SCMP_SYS(time),
-+     /* Process */
-+-    SCMP_SYS(clone), SCMP_SYS(exit), SCMP_SYS(exit_group), SCMP_SYS(getrlimit),
-++    SCMP_SYS(clone), SCMP_SYS(exit), SCMP_SYS(exit_group),
-+     SCMP_SYS(rt_sigaction), SCMP_SYS(rt_sigreturn), SCMP_SYS(rt_sigprocmask),
-+     SCMP_SYS(set_tid_address), SCMP_SYS(sigreturn), SCMP_SYS(wait4),
-+     /* Memory */
-+-    SCMP_SYS(brk), SCMP_SYS(madvise), SCMP_SYS(mmap), SCMP_SYS(mmap2),
-++    SCMP_SYS(brk), SCMP_SYS(madvise), SCMP_SYS(mmap2),
-+     SCMP_SYS(mprotect), SCMP_SYS(mremap), SCMP_SYS(munmap), SCMP_SYS(shmdt),
-+     /* Filesystem */
-+     SCMP_SYS(access), SCMP_SYS(chmod), SCMP_SYS(chown), SCMP_SYS(chown32),
-+@@ -470,14 +469,21 @@ SYS_Linux_EnableSystemCallFilter(int lev
-+     SCMP_SYS(bind), SCMP_SYS(connect), SCMP_SYS(getsockname),
-+     SCMP_SYS(recvfrom), SCMP_SYS(recvmsg), SCMP_SYS(sendmmsg),
-+     SCMP_SYS(sendmsg), SCMP_SYS(sendto),
-+-    /* TODO: check socketcall arguments */
-+-    SCMP_SYS(socketcall),
-+     /* General I/O */
-+     SCMP_SYS(_newselect), SCMP_SYS(close), SCMP_SYS(open), SCMP_SYS(pipe),
-+-    SCMP_SYS(poll), SCMP_SYS(read), SCMP_SYS(futex), SCMP_SYS(select),
-++    SCMP_SYS(poll), SCMP_SYS(read), SCMP_SYS(futex),
-+     SCMP_SYS(set_robust_list), SCMP_SYS(write),
-+     /* Miscellaneous */
-+     SCMP_SYS(uname),
-++    /* not always available */
-++#if ! defined(__ARM_EABI__)
-++    SCMP_SYS(time),
-++    SCMP_SYS(getrlimit),
-++    SCMP_SYS(select),
-++    SCMP_SYS(mmap),
-++    /* TODO: check socketcall arguments */
-++    SCMP_SYS(socketcall),
-++#endif
-+   };
-+ 
-+   const int socket_domains[] = {
-diff --git a/meta-networking/recipes-support/chrony/chrony_2.4.bb b/meta-networking/recipes-support/chrony/chrony_2.4.bb
-index ad81701..71431f4 100644
---- a/meta-networking/recipes-support/chrony/chrony_2.4.bb
-+++ b/meta-networking/recipes-support/chrony/chrony_2.4.bb
-@@ -33,6 +33,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- SRC_URI = "https://download.tuxfamily.org/chrony/chrony-${PV}.tar.gz \
-     file://chrony.conf \
-     file://chronyd \
-+    file://arm_eabi.patch \
+diff --git a/meta-oe/recipes-support/vim/vim_8.0.0022.bb b/meta-oe/recipes-support/vim/vim_8.0.0022.bb
+index 1ccc52cd9..920391adb 100644
+--- a/meta-oe/recipes-support/vim/vim_8.0.0022.bb
++++ b/meta-oe/recipes-support/vim/vim_8.0.0022.bb
+@@ -99,12 +99,14 @@ FILES_${PN}-common = " \
+     ${datadir}/icons \
  "
- SRC_URI[md5sum] = "d0598aa8a9be8faccef9386f6fc0d5f2"
- SRC_URI[sha256sum] = "8d04e7cda2333289c2104b731d39c3c1db94816e43bae35d7ee4e7ae8af6391f"
-@@ -58,14 +59,14 @@ inherit update-rc.d systemd
- #     chrony.conf and init script.
- #   - 'scfilter' enables support for system call filtering, but requires the
- #     kernel to have CONFIG_SECCOMP enabled.
--PACKAGECONFIG ??= "editline scfilter \
-+PACKAGECONFIG ??= "editline \
-     ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)} \
- "
- PACKAGECONFIG[readline] = "--without-editline,--without-readline,readline"
- PACKAGECONFIG[editline] = ",--without-editline,libedit"
- PACKAGECONFIG[sechash] = "--without-tomcrypt,--disable-sechash,nss"
- PACKAGECONFIG[privdrop] = ",--disable-privdrop,libcap"
--PACKAGECONFIG[scfilter] = "--enable-scfilter,--without-seccomp"
-+PACKAGECONFIG[scfilter] = "--enable-scfilter,--without-seccomp,libseccomp"
- PACKAGECONFIG[ipv6] = ",--disable-ipv6,"
- PACKAGECONFIG[nss] = "--with-nss,--without-nss,nss"
- PACKAGECONFIG[libcap] = "--with-libcap,--without-libcap,libcap"
+ 
+-RDEPENDS_${PN} = "ncurses-terminfo-base"
++RDEPENDS_${BPN} = "ncurses-terminfo-base"
+ # Recommend that runtime data is installed along with vim
+-RRECOMMENDS_${PN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-common"
++RRECOMMENDS_${BPN} = "${PN}-syntax ${PN}-help ${PN}-tutor ${PN}-vimrc ${PN}-common"
+ 
+ ALTERNATIVE_${PN} = "vi vim"
+ ALTERNATIVE_TARGET = "${bindir}/${BPN}.${BPN}"
+ ALTERNATIVE_LINK_NAME[vi] = "${base_bindir}/vi"
+ ALTERNATIVE_LINK_NAME[vim] = "${bindir}/vim"
+ ALTERNATIVE_PRIORITY = "100"
++
++BBCLASSEXTEND = "native"
 -- 
-1.7.9.5
+2.12.0
 
 
