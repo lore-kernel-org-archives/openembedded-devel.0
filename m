@@ -1,24 +1,55 @@
-Return-Path: <pascal.bach@siemens.com>
-X-Greylist: delayed 1678 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 10 Mar 2017 17:58:19 UTC
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
-	by mail.openembedded.org (Postfix) with ESMTP id E5C67776F2
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bes.se.axis.com (bes.se.axis.com [195.60.68.10])
+	by mail.openembedded.org (Postfix) with ESMTP id 27555778AB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Mar 2017 17:58:19 +0000 (UTC)
-Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id v2AHUIcj001990
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
-	Fri, 10 Mar 2017 18:30:18 +0100
-Received: from dev.sbt.siemens.com ([139.16.24.178])
-	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id v2AHUIIC025355;
-	Fri, 10 Mar 2017 18:30:18 +0100
-From: Pascal Bach <pascal.bach@siemens.com>
+	Sat, 11 Mar 2017 04:59:02 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bes.se.axis.com (Postfix) with ESMTP id 596012E440
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Mar 2017 05:59:03 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at bes.se.axis.com
+Received: from bes.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bes.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id AI+6gx15RZcH
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Mar 2017 05:59:01 +0100 (CET)
+Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
+	by bes.se.axis.com (Postfix) with ESMTPS id 8D9092E459
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Mar 2017 05:59:01 +0100 (CET)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 7B48F1E072
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Mar 2017 05:59:01 +0100 (CET)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 7083E1E076
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Mar 2017 05:59:01 +0100 (CET)
+Received: from thoth.se.axis.com (unknown [10.0.2.173])
+	by boulder03.se.axis.com (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Mar 2017 05:59:01 +0100 (CET)
+Received: from saur-2.se.axis.com (saur-2.se.axis.com [10.92.3.2])
+	by thoth.se.axis.com (Postfix) with ESMTP id 64BDA747
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Mar 2017 05:59:01 +0100 (CET)
+Received: from saur-2.se.axis.com (localhost [127.0.0.1])
+	by saur-2.se.axis.com (8.14.5/8.14.5) with ESMTP id v2B4x1jA003832
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Mar 2017 05:59:01 +0100
+Received: (from pkj@localhost)
+	by saur-2.se.axis.com (8.14.5/8.14.5/Submit) id v2B4x1Xj003831
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 11 Mar 2017 05:59:01 +0100
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Mar 2017 18:30:11 +0100
-Message-Id: <1489167012-5648-1-git-send-email-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.1.4
-Cc: Pascal Bach <pascal.bach@nextrem.ch>
-Subject: [meta-python][PATCH] libcec: update to version 4.0.1 and provide package for python3 wrapper
+Date: Sat, 11 Mar 2017 05:58:54 +0100
+Message-Id: <20170311045855.3665-4-pkj@axis.com>
+X-Mailer: git-send-email 2.12.0
+In-Reply-To: <20170311045855.3665-1-pkj@axis.com>
+References: <20170311045855.3665-1-pkj@axis.com>
+X-TM-AS-GCONF: 00
+Subject: [PATCH 4/5] meson.bbclass: Support building for native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,88 +62,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Mar 2017 17:58:20 -0000
+X-List-Received-Date: Sat, 11 Mar 2017 04:59:03 -0000
 
-From: Pascal Bach <pascal.bach@nextrem.ch>
-
-Signed-off-by: Pascal Bach <pascal.bach@nextrem.ch>
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- .../libcec/files/python-install-location.patch     | 28 ++++++++++++++++++++++
- meta-oe/recipes-extended/libcec/libcec_git.bb      | 15 ++++++------
- 2 files changed, 36 insertions(+), 7 deletions(-)
- create mode 100644 meta-oe/recipes-extended/libcec/files/python-install-location.patch
+ meta-oe/classes/meson.bbclass | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/libcec/files/python-install-location.patch b/meta-oe/recipes-extended/libcec/files/python-install-location.patch
-new file mode 100644
-index 0000000..b6be78d
---- /dev/null
-+++ b/meta-oe/recipes-extended/libcec/files/python-install-location.patch
-@@ -0,0 +1,28 @@
-+From 330fa6777d51d41eefacff8e98e4250d210fde35 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Javi=20Mart=C3=ADnez?= <javi@flamingalah.net>
-+Date: Tue, 13 Dec 2016 22:31:13 +0100
-+Subject: [PATCH] Improve/fix installation of Python bindings
+diff --git a/meta-oe/classes/meson.bbclass b/meta-oe/classes/meson.bbclass
+index 8da06da7f..e3489dd12 100644
+--- a/meta-oe/classes/meson.bbclass
++++ b/meta-oe/classes/meson.bbclass
+@@ -9,9 +9,11 @@ do_configure[cleandirs] = "${B}"
+ # Where the meson.build build configuration is
+ MESON_SOURCEPATH = "${S}"
+ 
+-# These variables in the environment override the *native* tools not the cross,
+-# so they need to be unexported.
+-CC[unexport] = "1"
++# These variables in the environment override the *native* tools, not the cross.
++export CC = "${BUILD_CC}"
++export CXX = "${BUILD_CXX}"
++export LD = "${BUILD_LD}"
++export AR = "${BUILD_AR}"
+ 
+ def noprefix(var, d):
+     return d.getVar(var, True).replace(d.getVar('prefix', True) + '/', '', 1)
+@@ -37,6 +39,9 @@ MESON_TARGET_ENDIAN = "${@bb.utils.contains('TUNE_FEATURES', 'bigendian', 'big',
+ 
+ EXTRA_OEMESON += "${PACKAGECONFIG_CONFARGS}"
+ 
++MESON_CROSS_FILE = ""
++MESON_CROSS_FILE_class-target = "--cross-file ${WORKDIR}/meson.cross"
 +
-+Upstream-Status: Backport
-+
-+dist-packages is a Debian-specific directory for distribution packages (and used in derivatives such as Ubuntu). Therefore changed to site-packages.
-+---
-+ src/libcec/cmake/CheckPlatformSupport.cmake | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/libcec/cmake/CheckPlatformSupport.cmake b/src/libcec/cmake/CheckPlatformSupport.cmake
-+index fcd0ef7..7661107 100644
-+--- a/src/libcec/cmake/CheckPlatformSupport.cmake
-++++ b/src/libcec/cmake/CheckPlatformSupport.cmake
-+@@ -195,9 +195,9 @@ else()
-+               RENAME      __init__.py)
-+     else()
-+       install(TARGETS     ${SWIG_MODULE_cec_REAL_NAME}
-+-              DESTINATION lib/python${PYTHON_VERSION}/dist-packages/cec)
-++              DESTINATION lib/python${PYTHON_VERSION}/site-packages/cec)
-+       install(FILES       ${CMAKE_BINARY_DIR}/src/libcec/cec.py
-+-              DESTINATION lib/python${PYTHON_VERSION}/dist-packages/cec
-++              DESTINATION lib/python${PYTHON_VERSION}/site-packages/cec
-+               RENAME      __init__.py)
-+     endif()
-+   endif()
-diff --git a/meta-oe/recipes-extended/libcec/libcec_git.bb b/meta-oe/recipes-extended/libcec/libcec_git.bb
-index 0ce7ea1..cb65caa 100644
---- a/meta-oe/recipes-extended/libcec/libcec_git.bb
-+++ b/meta-oe/recipes-extended/libcec/libcec_git.bb
-@@ -4,23 +4,24 @@ HOMEPAGE = "http://libcec.pulse-eight.com/"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=e61fd86f9c947b430126181da2c6c715"
+ def meson_array(var, d):
+     return "', '".join(d.getVar(var, True).split()).join(("'", "'"))
  
--DEPENDS = "p8platform udev lockdev ncurses"
-+DEPENDS = "p8platform udev lockdev ncurses swig-native python3"
+@@ -75,7 +80,7 @@ EOF
+ CONFIGURE_FILES = "meson.build"
  
- DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libx11 libxrandr', '', d)}"
- DEPENDS_append_rpi = "${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', '', ' userland', d)}"
- 
--PV = "3.1.0+gitr${SRCPV}"
-+PV = "4.0.1+gitr${SRCPV}"
- 
--SRCREV = "6d68d21243aa92862592435e8396b4280ea46c3f"
--SRC_URI = "git://github.com/Pulse-Eight/libcec.git"
-+SRCREV = "2fc92b5f02dca702da92ccc5ed7b805b240ef5df"
-+SRC_URI = "git://github.com/Pulse-Eight/libcec.git \
-+           file://python-install-location.patch"
- 
- S = "${WORKDIR}/git"
- 
- inherit cmake pkgconfig
- 
--# Disable python wrapper, it doesn't have crosscompiles
--EXTRA_OECMAKE = "-DCMAKE_INSTALL_LIBDIR=${libdir} -DCMAKE_INSTALL_LIBDIR_NOARCH=${libdir} \
--                 -DSKIP_PYTHON_WRAPPER=1"
-+# Create the wrapper for python3
-+PACKAGES += "python3-${BPN}"
-+FILES_python3-${BPN} = "${libdir}/python3*"
- 
- # cec-client and xbmc need the .so present to work :(
- FILES_${PN} += "${libdir}/*.so"
+ meson_do_configure() {
+-    if ! meson ${MESONOPTS} "${MESON_SOURCEPATH}" "${B}" --cross-file ${WORKDIR}/meson.cross ${EXTRA_OEMESON}; then
++    if ! meson ${MESONOPTS} "${MESON_SOURCEPATH}" "${B}" ${MESON_CROSS_FILE} ${EXTRA_OEMESON}; then
+         cat ${B}/meson-logs/meson-log.txt
+         bbfatal_log meson failed
+     fi
 -- 
-2.1.4
+2.12.0
 
 
