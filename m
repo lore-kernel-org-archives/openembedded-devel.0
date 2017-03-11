@@ -1,45 +1,36 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 3954F779BD
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 02B2B7791E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Mar 2017 20:58:32 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id g2so9533381pge.2
+	Sat, 11 Mar 2017 22:53:07 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id n37so2438399qtb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Mar 2017 12:58:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=LsMLCB64cYy7PG/o38LLg8Z9ZaZ8R00lnMsCheTKt6U=;
-	b=h3xW+f16RJE+tixxgrgjvxrsuSSU2vo98cnTkSCvTXGWuQiBEELbLFoXBp9CU5IThB
-	awEDFqQLzqrn4NswAPNRHFpqMpX2e9GU6CW5foYScRLFDWgCSikFj0lwy4EGcTGStX8U
-	wp6ghlhrBke9uw59ELigt16SQdgbK+deqS63LBJz8Y42Xz3BvvnjhiJjpMhV8W+S7m6L
-	twJ0hpcBW3BmDA9gA857grBsaHVXqyt+sKOyenCp/uiaet+YWq2xlT2MjHhbu1E0sn20
-	EyI8P93OnVHYlg6kEJgwnBtiwTflg000i7zBkerbqExD0xeYi5MI15NUrLTZQ8LSBE7i
-	ITYA==
+	Sat, 11 Mar 2017 14:53:09 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=LsMLCB64cYy7PG/o38LLg8Z9ZaZ8R00lnMsCheTKt6U=;
-	b=hkHV0QbhM9AmLCKuqBsieY88YCy0NsIdZS2GfJUw1WPFLk0bNG+CDbHWjfX/ho5BdG
-	+VnJQUTMYyxVSjz6igdoKvC5B9zrB5XhGx/Fh+lwyvEp24YrJc79bXwBVmH7HAIJiE7G
-	lMTJBNlxLTQHhKy4y+IMkelQpvWuwlC+i+Yk6RqK8/uHS1Eb3OOyJiSCsis/vFc8vgcZ
-	zsRIcsFsrDZg4IfnxfIAvm56cjs95HvBsGbVnL84+j81LI+RbKMTVoWWbH5y4Zbf46hO
-	/g3aonvq0LPn6Xz69oPu9GMEUiDpX0Os1QAROKYiXB2rzbTnYHyehkwVNfgB7H0OWZ3E
-	V96w==
-X-Gm-Message-State: AMke39ljl9wODjE+LxUHCYX+BjPYJgSxZoglN4Qzxun/V7Oxd2p8JoeOx8ntS+jps8k/sw==
-X-Received: by 10.98.205.7 with SMTP id o7mr28700325pfg.171.1489265914196;
-	Sat, 11 Mar 2017 12:58:34 -0800 (PST)
-Received: from localhost.localdomain ([223.196.115.131])
-	by smtp.gmail.com with ESMTPSA id
-	y5sm25858639pgy.28.2017.03.11.12.58.32
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=HaMmbthFot1gky9c9h0A+EVZUxZi+qo4Wsg/uhMYtE8=;
+	b=UgRPpjaZYes6KKLftKYtcNeFLthvAiUrUPEgEWfK5oURKrmWsesTEFXY5zygvFPSs7
+	td0fk47h4I3GYHNHT4h9cMKl7+Up4GlpKfSD+K/zpXikr69dz9bTVF0QsHZ0PFsUHlkH
+	KfLxsdoXpiqQzcAdilcGXiDAVtsfHEYFFoTss1aVNrhKvvw+nmTxWXP+nZPko0Loh+Xk
+	R5VJ7Cw2c1IFHeJdXtudiy+n5bG7Hf73kCI2Ed9PdFZUAOq3v2zb3D87Et4Bn8PGS37f
+	jqGHkKV7rSPkpQy+2mPKMaKqrF6p30vrZQ53A3xkhFh+59kcgIg3ApuPkPmVTnjrDo29
+	inTA==
+X-Gm-Message-State: AMke39m2MxzMU5Rp1dqDAtSq4y+utfv+33Pn9eMVHRVJXtQx7bhqIJsh7ueLNrex2dBnpQ==
+X-Received: by 10.237.59.213 with SMTP id s21mr25629873qte.146.1489272788180; 
+	Sat, 11 Mar 2017 14:53:08 -0800 (PST)
+Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
+	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
+	j11sm9118749qta.39.2017.03.11.14.53.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 11 Mar 2017 12:58:33 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
+	Sat, 11 Mar 2017 14:53:07 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 11 Mar 2017 12:58:30 -0800
-Message-Id: <1489265910-8255-1-git-send-email-akuster808@gmail.com>
+Date: Sat, 11 Mar 2017 17:53:00 -0500
+Message-Id: <1489272780-32237-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] lvm2: fix bash depends QA issue
+Subject: [meta-python][PATCH] python-pyserial: update to version 3.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,27 +43,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Mar 2017 20:58:33 -0000
+X-List-Received-Date: Sat, 11 Mar 2017 22:53:09 -0000
 
-WARNING: lvm2-2.02.166-r0 do_package_qa: QA Issue: /etc/init.d/lvm2-monitor contained in package lvm2 requires /bin/bash, but no providers found in RDEPENDS_lvm2? [file-rdeps]
-
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-support/lvm2/lvm2.inc | 1 +
- 1 file changed, 1 insertion(+)
+ meta-python/recipes-devtools/python/python-pyserial.inc            | 7 +++++--
+ .../python/{python-pyserial_3.2.1.bb => python-pyserial_3.3.bb}    | 0
+ .../python/{python3-pyserial_3.2.1.bb => python3-pyserial_3.3.bb}  | 2 ++
+ 3 files changed, 7 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyserial_3.2.1.bb => python-pyserial_3.3.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyserial_3.2.1.bb => python3-pyserial_3.3.bb} (68%)
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index b25d775..3e79552 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -98,6 +98,7 @@ FILES_libdevmapper-dev = " \
+diff --git a/meta-python/recipes-devtools/python/python-pyserial.inc b/meta-python/recipes-devtools/python/python-pyserial.inc
+index c1c1904..2508e76 100644
+--- a/meta-python/recipes-devtools/python/python-pyserial.inc
++++ b/meta-python/recipes-devtools/python/python-pyserial.inc
+@@ -7,11 +7,14 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d476d94926db6e0008a5b3860d1f5c0d"
+ RDEPENDS_${PN} = "\
+     ${PYTHON_PN}-fcntl \
+     ${PYTHON_PN}-io \
++    ${PYTHON_PN}-logging \
++    ${PYTHON_PN}-netclient \
+     ${PYTHON_PN}-stringold \
++    ${PYTHON_PN}-threading \
  "
  
- RDEPENDS_${PN}-scripts = "${PN} (= ${EXTENDPKGV}) bash"
-+RDEPENDS_${PN} = " bash"
- RDEPENDS_libdevmapper-dev = "libdevmapper (= ${EXTENDPKGV})"
- RRECOMMENDS_${PN} = "${PN}-scripts (= ${EXTENDPKGV})"
+-SRC_URI[md5sum] = "7142a421c8b35d2dac6c47c254db023d"
+-SRC_URI[sha256sum] = "1eecfe4022240f2eab5af8d414f0504e072ee68377ba63d3b6fe6e66c26f66d1"
++RSRC_URI[md5sum] = "6afe4c2e47bcec6eb7051b8c1ce19d52"
++SRC_URI[sha256sum] = "2949cddffc2b05683065a3cd2345114b1a49b08df8cb843d69ba99dc3e19edc2"
  
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-pyserial_3.2.1.bb b/meta-python/recipes-devtools/python/python-pyserial_3.3.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pyserial_3.2.1.bb
+rename to meta-python/recipes-devtools/python/python-pyserial_3.3.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyserial_3.2.1.bb b/meta-python/recipes-devtools/python/python3-pyserial_3.3.bb
+similarity index 68%
+rename from meta-python/recipes-devtools/python/python3-pyserial_3.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-pyserial_3.3.bb
+index 17ed3f8..44c1368 100644
+--- a/meta-python/recipes-devtools/python/python3-pyserial_3.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pyserial_3.3.bb
+@@ -5,3 +5,5 @@ do_install_append() {
+     rm -f ${D}${bindir}/miniterm.py
+     rmdir ${D}${bindir}
+ }
++
++RDEPENDS_${PN} += "${PYTHON_PN}-enum ${PYTHON_PN}-selectors"
 -- 
 2.7.4
 
