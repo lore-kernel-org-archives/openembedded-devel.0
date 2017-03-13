@@ -1,45 +1,46 @@
 Return-Path: <liu.ming50@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 837E0776E9
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 498CF776AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Mar 2017 15:44:00 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id n11so10524594wma.0
+	Mon, 13 Mar 2017 15:49:08 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id u48so20639084wrc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Mar 2017 08:44:01 -0700 (PDT)
+	Mon, 13 Mar 2017 08:49:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
 	bh=jwC6jv8sWcrH1KBYXWW5IKNTkSrhohFdcpqynYeZ6qg=;
-	b=NcwbBggzBdPfN8B8zfRWXZtyL6zUbo7o4IOnrYePwxAt34hNjqkV5GrHFe9i1Ka9vE
-	1L3sDAIzXV+rPJYv48ILJeqW2SrZHxZQDgEWhqVQaf/cErjA6QlZgETlLwMs6EICYeQ/
-	aAYZVJJ5EmYxWSshWD/GRanoaSWhrTj/DfEK0kYh3liMYWIR3eyrG9dvOcTzYHgxYLwm
-	xr5LJDnYYV6HpsES/UOKt68CYHx4Dl2D9JlFkshbd6gzpmaHTBm7YZlhhWwTTOj7W2GN
-	bG+WAgsem9zcSx8zA1L1VJfkqV9+yGN6H7HgS+iRvpoxmHgMwIWgE9HKdIUz3q8Cx+T+
-	FUQQ==
+	b=UYvnB1nCa/uOLPPjRBMIEp7on5Sx+7BQgYD4g9HQ/iV8K9p0wg6Z0qYskjaTugA0XP
+	Iu6niNyhEgGY4JEDZjh8Jxr2p+kp5uxGiGkO5nwKAyU2SRV+ZhO3NDaXH86dg2zM4iji
+	b27fLTFhO8dpbrxXgybf36QrKMi3nG/Kg8jB3l0sDGlH5Lha49WhNWQdpkkY97I77Mse
+	gUoOl2PKmbnSBPXD1+Fxt4TYjRCW/RmFL6QSV1iRVWhgyn29mbX8saBOCUPOOd3bQFEy
+	u48+pVo02dnQ1oMxTbH078OyCq1Nx1cfxOEGeQcJf0OeqCH0XLIu0EKiPkV18/cXbN14
+	QgMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
 	bh=jwC6jv8sWcrH1KBYXWW5IKNTkSrhohFdcpqynYeZ6qg=;
-	b=ZdU6I0Ma1+g7UVOmWGkCmFDJZs+BxeXhab/o+wltODa6QSy9T9OmUFYV36t/Lmstmk
-	MODPhjuk9k4+SxpS/U7wwPuR/uIMZcruIfqqFVBLxpN1LGbT5DEagMtigGXaHxg9yhvz
-	JzGYYjDOO+aniDeauxDljy9SxszCMhVtDS1Sky0PWKNyLv7ycULRTMaiqonbJ3l6ZzC4
-	JYA3HXkrZo+pae5qx9b3lyBmxglinvlrq5/njnPxTUuoD4dAOX5IlcearXkSH8Wz04LV
-	lbVLhT1yMu7WatWOmfFe7aNqMZ1BypcpBv7MhD90KO18NfJY7hloDFTEoLcvs4MmqUDG
-	Eyuw==
-X-Gm-Message-State: AFeK/H2L/txHLpQDLyH+3tyn6hcXfeX6BthtfAImbYU9M/1Q4vXLwU4DT4kI0AEFF14dbw==
-X-Received: by 10.28.144.14 with SMTP id s14mr8772829wmd.22.1489419841076;
-	Mon, 13 Mar 2017 08:44:01 -0700 (PDT)
+	b=QWOXUWAmpEwvBjX6bfTQfakAvnHagEVDoYKzJVcqJUuXZxXjiqBa4mP3QqLdK7KYuR
+	7aCKQhujf238ISTCAbCTZVoOonIihm2B4KhIHQee37/9YuvrU0dhS5mzg1T4enH3H5N4
+	Sbsfb7nJEA5i9sur9/Nzwj7kip6XeztWONAtdw29q9SMwcr4unlf/khiaY1joR/1lTwo
+	pdwVAqQ+K8Rt71bFuG9bSGEftZTdGSkWNGM8H/zdhwf9dGuhO+LHsPCIrElNgrLc+MRi
+	DLaqkOxUwEIHOzDjIJW1TvmkzuwW/52EyOouiHQKoQrVPtyVk4VpisELS+57Ycsnyi9J
+	TIvg==
+X-Gm-Message-State: AMke39mdBnshIB9Z9MEjGr1kolUJPxK9Q0IUWZ09T8KGdueuLVRjxnyCrEGMK/ir6Had7g==
+X-Received: by 10.223.176.7 with SMTP id f7mr29447055wra.124.1489420149787;
+	Mon, 13 Mar 2017 08:49:09 -0700 (PDT)
 Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
-	([106.116.217.31]) by smtp.gmail.com with ESMTPSA id
-	m80sm11754337wmi.34.2017.03.13.08.43.56
+	([106.116.217.31])
+	by smtp.gmail.com with ESMTPSA id 63sm11785294wmp.9.2017.03.13.08.49.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 13 Mar 2017 08:43:59 -0700 (PDT)
+	Mon, 13 Mar 2017 08:49:08 -0700 (PDT)
 From: liu.ming50@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Mar 2017 16:43:51 +0100
-Message-Id: <1489419831-1207-1-git-send-email-liu.ming50@gmail.com>
+Date: Mon, 13 Mar 2017 16:48:58 +0100
+Message-Id: <1489420138-3440-1-git-send-email-liu.ming50@gmail.com>
 X-Mailer: git-send-email 2.7.4
 Cc: Ming Liu <peter.x.liu@external.atlascopco.com>
-Subject: [meta-oe] [meta-python] [PATCH] meta: do not prepend/append to BBCLASSEXTEND
+Subject: [meta-oe] [PATCH] meta: do not prepend/append to BBCLASSEXTEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,7 +53,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Mar 2017 15:44:01 -0000
+X-List-Received-Date: Mon, 13 Mar 2017 15:49:09 -0000
 
 From: Ming Liu <peter.x.liu@external.atlascopco.com>
 
