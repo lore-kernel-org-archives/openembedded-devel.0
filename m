@@ -1,26 +1,49 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5A94E776B1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Mar 2017 03:30:46 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v2D3Ul2U024297
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Mar 2017 20:30:48 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Sun, 12 Mar 2017 20:30:47 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 13 Mar 2017 11:29:21 +0800
-Message-ID: <20170313032921.8669-6-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.10.1
-In-Reply-To: <20170313032921.8669-1-kai.kang@windriver.com>
-References: <20170313032921.8669-1-kai.kang@windriver.com>
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f179.google.com (mail-pf0-f179.google.com
+	[209.85.192.179])
+	by mail.openembedded.org (Postfix) with ESMTP id D226160102;
+	Mon, 13 Mar 2017 07:09:26 +0000 (UTC)
+Received: by mail-pf0-f179.google.com with SMTP id j5so65925349pfb.2;
+	Mon, 13 Mar 2017 00:09:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=to:from:subject:message-id:date:user-agent:mime-version
+	:content-transfer-encoding;
+	bh=m+7dw5hKmXsp338KtR2XOfjWsndpiMW08FHL45jw1UU=;
+	b=p4MR4lR/NKojBNjR5fCNH/xg66YkeBT0Zjwt88b9J+r8wy7jvCKhORtoQC6dfdSywM
+	Lk/6AcsdF970ZiZcM3BK14CEzR7IaAorljsK1F7WnN1ie5iIbix9aZPGyNdFXlJh6K5l
+	AuGOugmCEIJSLOf948dzDcflTje87+25QiAzcWV9ESF7l4e3gW2QTtX4s9n+LDqwPQBW
+	O1F5xJh+0p/0GtOzbxSpPOEc4/BSZYxIZunwecXPNOmak11rOWKPi/9hF/QbFDklgHSe
+	5+PCsJw3dEgxuyJBcAgq9Ugl6Qfdw90xVVRbvTjYj3+HPZ5Po9RHkWvUCfLyhokJKPXp
+	Fp9Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+	:mime-version:content-transfer-encoding;
+	bh=m+7dw5hKmXsp338KtR2XOfjWsndpiMW08FHL45jw1UU=;
+	b=fFsPFx5BYz6u6dGoNbIoh9RvGWkhvV98cgT8VMVFHpBu951ufscM8o1NVGmzeZkaGk
+	7ErKxFc/cn3GLAujTyQMs/M1nyXVptOQPVZkiyF0oiMciYD/qDzm9ZX07zVUfliKS4fb
+	FMZbb7Q55y78mgqiHpvG+IMjSRr7J/WqB+5vqv7TGZImnkS2Ul8+RmoXiFyhw6PcH8VT
+	J3aJHfje40vn507ElG6j9TTUJe/JvDS8qegnAo4uxQStxaFwqzCYM4HTfTIbpluKv720
+	xgbeD334Q+sSAqUwX/mKwlLTX9kAAiwKtZHkx/VjWuqhtha50XtDoChWC+PRVGbksuer
+	fvbw==
+X-Gm-Message-State: AMke39mjG1huUaVSrzzF9J40GIoSN2u5JKH+1h2Wk1wK26NSBk8hMhJY8J9O+LP8+VvZYg==
+X-Received: by 10.84.140.36 with SMTP id 33mr45779226pls.136.1489388968079;
+	Mon, 13 Mar 2017 00:09:28 -0700 (PDT)
+Received: from [10.162.103.9] ([111.93.218.67])
+	by smtp.gmail.com with ESMTPSA id
+	m6sm31282611pfg.126.2017.03.13.00.09.26
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 13 Mar 2017 00:09:27 -0700 (PDT)
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <53aa1073-01e3-8315-cac6-ad0197a2d6c8@gmail.com>
+Date: Mon, 13 Mar 2017 00:09:25 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.0
 MIME-Version: 1.0
-Subject: [PATCH 5/5] lmsensors: update SRC_URI and S
+Subject: devshell not working after pulling latest oe-core changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,50 +56,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Mar 2017 03:30:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 13 Mar 2017 07:09:29 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Kai Kang <kai.kang@windriver.com>
+Hello,
 
-Rename source tarball in SRC_URI and update S for lmsensors.
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+I am seeing the following error with devshell after pulling in the 
+latest master ( a47e64d985a610535449730806651f5bfd75d9ec) ? Running on 
+"Ubuntu 16.04.2 LTS
 
-diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
-index dbc05a8..53af6ca 100644
---- a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
-+++ b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
- 
- DEPENDS = "sysfsutils virtual/libiconv bison-native flex-native rrdtool"
- 
--SRC_URI = "https://github.com/groeck/lm-sensors/archive/V3-4-0.tar.gz \
-+SRC_URI = "https://github.com/groeck/lm-sensors/archive/V3-4-0.tar.gz;downloadfilename=${BP}.tar.gz \
-            file://fancontrol.init \
-            file://sensord.init \
-            file://0001-lmsensors-sensors-detect-print-a-special-message-whe.patch \
-@@ -15,6 +15,8 @@ SRC_URI = "https://github.com/groeck/lm-sensors/archive/V3-4-0.tar.gz \
- SRC_URI[md5sum] = "1e9f117cbfa11be1955adc96df71eadb"
- SRC_URI[sha256sum] = "e334c1c2b06f7290e3e66bdae330a5d36054701ffd47a5dde7a06f9a7402cb4e"
- 
-+S = "${WORKDIR}/lm-sensors-${@d.getVar('PV').replace('.', '-')}"
-+
- inherit update-rc.d systemd
- 
- RDEPENDS_${PN}-dev = ""
-@@ -29,8 +31,6 @@ SYSTEMD_PACKAGES = "${PN}-sensord"
- SYSTEMD_SERVICE_${PN}-sensord = "sensord.service lm_sensors.service fancontrol.service"
- SYSTEMD_AUTO_ENABLE = "disable"
- 
--S = "${WORKDIR}/lm-sensors-3-4-0"
--
- EXTRA_OEMAKE = 'EXLDFLAGS="${LDFLAGS}" \
-         MACHINE=${TARGET_ARCH} PREFIX=${prefix} MANDIR=${mandir} \
-         LIBDIR=${libdir} \
--- 
-2.10.1
+ERROR: bind-9.10.3-P3-r0 do_devshell: No valid terminal found, unable to 
+open devshell.
+Tried the following commands:
+     tmux split-window "do_terminal"
+     tmux new-window -n "OpenEmbedded Developer Shell" "do_terminal"
+     terminology -T="OpenEmbedded Developer Shell" -e do_terminal
+     gnome-terminal -t "OpenEmbedded Developer Shell" -x do_terminal
+     mate-terminal -t "OpenEmbedded Developer Shell" -x do_terminal
+     konsole --separate --workdir . -p tabtitle="OpenEmbedded Developer 
+Shell" -e do_terminal
+     xfce4-terminal -T "OpenEmbedded Developer Shell" -e "do_terminal"
+     xterm -T "OpenEmbedded Developer Shell" -e do_terminal
+     rxvt -T "OpenEmbedded Developer Shell" -e do_terminal
+     tmux new -d -s devshell -n devshell "do_terminal"
+     screen -D -m -t "OpenEmbedded Developer Shell" -S devshell do_terminal
+ERROR: bind-9.10.3-P3-r0 do_devshell: Function failed: do_devshell
+ERROR: Logfile of failure stored in: 
+/home/akuster/oss/maint/openembedded-core/build/tmp-glibc/work/aarch64-oe-linux/bind/9.10.3-P3-r0/temp/log.do_devshell.6445
+ERROR: Task 
+(/home/akuster/oss/maint/openembedded-core/meta/recipes-connectivity/bind/bind_9.10.3-P3.bb:do_devshell) 
+failed with exit code '1'
+
+
+if I remove fa764a403da34bb0ca9fa3767a9e9dba8d685965 , devshell starts 
+working again.
+
+commit fa764a403da34bb0ca9fa3767a9e9dba8d685965
+Author: Richard Purdie <richard.purdie@linuxfoundation.org>
+Date:   Thu Mar 9 00:14:38 2017 +0000
+
+     base/bitbake.conf: Filter contents of PATH to only allow 
+whitelisted tools
+
+is there something I am missing?
+
+regards,
+
+Armin
+
 
 
