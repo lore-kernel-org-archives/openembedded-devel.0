@@ -1,26 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id F32AA776BE
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A94E776B1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Mar 2017 03:30:44 +0000 (UTC)
+	Mon, 13 Mar 2017 03:30:46 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v2D3UkLQ021088
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v2D3Ul2U024297
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Mar 2017 20:30:46 -0700
+	Sun, 12 Mar 2017 20:30:48 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Sun, 12 Mar 2017 20:30:45 -0700
+	14.3.294.0; Sun, 12 Mar 2017 20:30:47 -0700
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 13 Mar 2017 11:29:20 +0800
-Message-ID: <20170313032921.8669-5-kai.kang@windriver.com>
+Date: Mon, 13 Mar 2017 11:29:21 +0800
+Message-ID: <20170313032921.8669-6-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.10.1
 In-Reply-To: <20170313032921.8669-1-kai.kang@windriver.com>
 References: <20170313032921.8669-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 4/5] cherokee: update SRC_URI
+Subject: [PATCH 5/5] lmsensors: update SRC_URI and S
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,32 +33,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Mar 2017 03:30:45 -0000
+X-List-Received-Date: Mon, 13 Mar 2017 03:30:46 -0000
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-The mirror site of cherokee in SRC_URI is down. Use another mirror
-instead. See http://cherokee-project.com/downloads.html
+Rename source tarball in SRC_URI and update S for lmsensors.
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb b/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
-index 9d22985..ba39f97 100644
---- a/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
-+++ b/meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
-@@ -9,7 +9,7 @@ PR = "r9"
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
+index dbc05a8..53af6ca 100644
+--- a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
++++ b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
  
- DEPENDS = "libpcre openssl mysql5 ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+ DEPENDS = "sysfsutils virtual/libiconv bison-native flex-native rrdtool"
  
--SRC_URI = "http://www.cherokee-project.de/mirrors/cherokee/1.2/${PV}/cherokee-${PV}.tar.gz \
-+SRC_URI = "http://mirror.aarnet.edu.au/pub/${BPN}/1.2/${PV}/${BP}.tar.gz \
-            file://cherokee.init \
-            file://cherokee.service \
-            file://cherokee-install-configured.py-once.patch \
+-SRC_URI = "https://github.com/groeck/lm-sensors/archive/V3-4-0.tar.gz \
++SRC_URI = "https://github.com/groeck/lm-sensors/archive/V3-4-0.tar.gz;downloadfilename=${BP}.tar.gz \
+            file://fancontrol.init \
+            file://sensord.init \
+            file://0001-lmsensors-sensors-detect-print-a-special-message-whe.patch \
+@@ -15,6 +15,8 @@ SRC_URI = "https://github.com/groeck/lm-sensors/archive/V3-4-0.tar.gz \
+ SRC_URI[md5sum] = "1e9f117cbfa11be1955adc96df71eadb"
+ SRC_URI[sha256sum] = "e334c1c2b06f7290e3e66bdae330a5d36054701ffd47a5dde7a06f9a7402cb4e"
+ 
++S = "${WORKDIR}/lm-sensors-${@d.getVar('PV').replace('.', '-')}"
++
+ inherit update-rc.d systemd
+ 
+ RDEPENDS_${PN}-dev = ""
+@@ -29,8 +31,6 @@ SYSTEMD_PACKAGES = "${PN}-sensord"
+ SYSTEMD_SERVICE_${PN}-sensord = "sensord.service lm_sensors.service fancontrol.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
+ 
+-S = "${WORKDIR}/lm-sensors-3-4-0"
+-
+ EXTRA_OEMAKE = 'EXLDFLAGS="${LDFLAGS}" \
+         MACHINE=${TARGET_ARCH} PREFIX=${prefix} MANDIR=${mandir} \
+         LIBDIR=${libdir} \
 -- 
 2.10.1
 
