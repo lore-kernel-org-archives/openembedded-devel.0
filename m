@@ -1,24 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id AC68B7302E
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E77E2776AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Mar 2017 03:30:39 +0000 (UTC)
+	Mon, 13 Mar 2017 03:30:41 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v2D3Uec3020479
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v2D3UgcL021081
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Mar 2017 20:30:40 -0700 (PDT)
+	Sun, 12 Mar 2017 20:30:42 -0700
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Sun, 12 Mar 2017 20:30:39 -0700
+	14.3.294.0; Sun, 12 Mar 2017 20:30:41 -0700
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 13 Mar 2017 11:29:16 +0800
-Message-ID: <20170313032921.8669-1-kai.kang@windriver.com>
+Date: Mon, 13 Mar 2017 11:29:17 +0800
+Message-ID: <20170313032921.8669-2-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.10.1
+In-Reply-To: <20170313032921.8669-1-kai.kang@windriver.com>
+References: <20170313032921.8669-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 0/5] Update SRC_URIs
+Subject: [PATCH 1/5] fuse: update HOMEPAGE and SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,27 +33,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Mar 2017 03:30:39 -0000
+X-List-Received-Date: Mon, 13 Mar 2017 03:30:42 -0000
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-Update SRC_URIs which show qa warnings when do_fetch.
+The homepage of fuse is redirected to github. So update HOMEPAGE and
+SRC_URI.
 
-Kai Kang (5):
-  fuse: update HOMEPAGE and SRC_URI
-  curlpp: update HOMEPAGE and SRC_URI
-  libdnet: update SRC_URI
-  cherokee: update SRC_URI
-  lmsensors: update SRC_URI and S
+Correct license LGPLv2 with LGPLv2.1 at same time.
 
- meta-filesystems/recipes-support/fuse/fuse_2.9.4.bb          | 6 +++---
- meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb | 8 +++++---
- meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb       | 8 ++++----
- meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb        | 6 +++---
- meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb     | 2 +-
- 5 files changed, 16 insertions(+), 14 deletions(-)
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-filesystems/recipes-support/fuse/fuse_2.9.4.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
+diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.4.bb b/meta-filesystems/recipes-support/fuse/fuse_2.9.4.bb
+index 153fcb4..b34efa1 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse_2.9.4.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.4.bb
+@@ -4,13 +4,13 @@ DESCRIPTION = "FUSE (Filesystem in Userspace) is a simple interface for userspac
+                also aims to provide a secure method for non privileged users to \
+                create and mount their own filesystem implementations. \
+               "
+-HOMEPAGE = "http://fuse.sf.net"
++HOMEPAGE = "https://github.com/libfuse/libfuse"
+ SECTION = "libs"
+-LICENSE = "GPLv2 & LGPLv2"
++LICENSE = "GPLv2 & LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz \
++SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse_2_9_4/${BP}.tar.gz \
+            file://gold-unversioned-symbol.patch \
+            file://aarch64.patch \
+            file://0001-fuse-fix-the-return-value-of-help-option.patch \
 -- 
 2.10.1
 
