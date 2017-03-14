@@ -1,29 +1,50 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E73B719DA
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Mar 2017 08:20:36 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v2E8KaWK004705
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 14 Mar 2017 01:20:36 -0700 (PDT)
-Received: from [128.224.162.185] (128.224.162.185) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 14 Mar 2017 01:20:35 -0700
+Return-Path: <freesilicon@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id D8472776A3;
+	Tue, 14 Mar 2017 08:49:06 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id u132so13629479wmg.1;
+	Tue, 14 Mar 2017 01:49:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=e6qXO4Il7Z5q+pGOjcxBr2NHlBRlW2d1z7y9Y0G1xcc=;
+	b=Z66h5JmirNkfQRPh2FiSvwQ9a9s90SEKLRZZkRJIs57FexLM84AdCfYq2GRArUEKOI
+	w+XZADgQPgkb73PlYRqVSrUMAJECEL9kJqSVeTmCm5eYyNOan7rIAPfYwqeNLPkcyRfJ
+	kmDvI6oZq7LmaFyD6bCjTQFa+OGdDjqHLHCugLnIIVvb2SUUho11mD+Ffs6+VHKwDuWi
+	T/pjqvowKYavPrVpQtuIaUmGka9+zTPMs7t1HsYkmOySfzyFGFonbdq15VV5YCJx9K/g
+	ebcIvr+VJ3a0nn8duWPhh4I4IhT33Vbhqsm1NZvJXynp0NrZubde2nnpIfNB5Nr5+TSL
+	MamA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=e6qXO4Il7Z5q+pGOjcxBr2NHlBRlW2d1z7y9Y0G1xcc=;
+	b=HM5jV0xiXtDxN2uqQAXIx6rH9qTaQYecweexXFJJcQOM0SOLh4qmm1okpu/GMsJcsm
+	pvaml8AcbbviCTJMfgmrghhkdzVFnMYyFx7uRSACsc1/E0uupdA0q5PPk1zIl5ehl1e+
+	LCs/FODs6jW4zbr7KInffw6fjBj9AvOr/46zxWEjWFg5FbVLOeFH9sMU459i7F/wnXwr
+	FKvUejSsMPS3jacEsS7sK9mrOGvqro4Xez/7ykFpDXNp0Hr9JdiSah39D1qB1beZk0Pu
+	35Vxk9mM0VU5/npwSjRcH5wa2kI/xRyOXXAeN9LVIe1A31DRDI8blW0QQ0FS5UxI70HY
+	0mwg==
+X-Gm-Message-State: AFeK/H3iSEzdZC5LVDt4yi8pAozYzKXOD67kbZByoY9fgbW3gsiczk3KBhQVAfqJLShKUA==
+X-Received: by 10.28.141.193 with SMTP id p184mr13846568wmd.122.1489481347751; 
+	Tue, 14 Mar 2017 01:49:07 -0700 (PDT)
+Received: from crde-port-20.cahors.local ([185.47.80.46])
+	by smtp.gmail.com with ESMTPSA id
+	l45sm28220183wrc.14.2017.03.14.01.49.07
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 14 Mar 2017 01:49:07 -0700 (PDT)
+From: David Vincent <freesilicon@gmail.com>
 To: Martin Jansa <martin.jansa@gmail.com>
-References: <20170313032921.8669-1-kai.kang@windriver.com>
-	<CA+chaQc0uNJ=k8OYDPLapV9ekap2Yv9TFA_25_U3em5ZBQF8gg@mail.gmail.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <8c5b1e35-2b6a-6cc6-52cd-c51789206505@windriver.com>
-Date: Tue, 14 Mar 2017 16:19:03 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.7.0
+Date: Tue, 14 Mar 2017 09:49:01 +0100
+Message-ID: <6065347.R33Guik3lC@crde-port-20.cahors.local>
+In-Reply-To: <CA+chaQc6r4y6uHFSvAO1FRtijABFpYuxdSd2vuneArywWnGKcw@mail.gmail.com>
+References: <148914096789.20795.18204054413475576323@git.openembedded.org>
+	<20170310101608.758BB236CDD@git.openembedded.org>
+	<CA+chaQc6r4y6uHFSvAO1FRtijABFpYuxdSd2vuneArywWnGKcw@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQc0uNJ=k8OYDPLapV9ekap2Yv9TFA_25_U3em5ZBQF8gg@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 0/5] Update SRC_URIs
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	openembedded-core@lists.openembedded.org
+Subject: Re: [oe-commits] [openembedded-core] 13/29: openssl: Fix symlink creation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,62 +57,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Mar 2017 08:20:36 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 14 Mar 2017 08:49:07 -0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
 
-On 2017年03月13日 15:25, Martin Jansa wrote:
-> Github archives can be regenerated from time to time with different 
-> checksums, please use git fetcher instead.
+On samedi 11 mars 2017 21:50:23 CET Martin Jansa wrote:
+> Why not use update-alternatives for this file?
 
-OK. Thanks.
+IMO, update-alternatives should not handle configuration files. I think tha=
+t=20
+using it can =E2=80=9Csilently=E2=80=9D apply a new configuration with high=
+er priority and=20
+things will break in some odd ways. Using conflicting packages ensures that=
+ the=20
+applied configuration has been enforced at install time and the administrat=
+or=20
+knows what is doing. Again, it is just my personal taste...
 
---Kai
+>=20
+> That's what I'm using in openssl bbappend because we also use different
+> provider for this file and it worked well .. until this change.
+>=20
 
->
-> On Mon, Mar 13, 2017 at 4:29 AM, <kai.kang@windriver.com 
-> <mailto:kai.kang@windriver.com>> wrote:
->
->     From: Kai Kang <kai.kang@windriver.com
->     <mailto:kai.kang@windriver.com>>
->
->     Update SRC_URIs which show qa warnings when do_fetch.
->
->     Kai Kang (5):
->       fuse: update HOMEPAGE and SRC_URI
->       curlpp: update HOMEPAGE and SRC_URI
->       libdnet: update SRC_URI
->       cherokee: update SRC_URI
->       lmsensors: update SRC_URI and S
->
->      meta-filesystems/recipes-support/fuse/fuse_2.9.4.bb
->     <http://fuse_2.9.4.bb>   | 6 +++---
->      meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
->     <http://libdnet_1.12.bb> | 8 +++++---
->      meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
->     <http://curlpp_0.7.3.bb>  | 8 ++++----
->      meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
->     <http://lmsensors_3.4.0.bb>     | 6 +++---
->      meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
->     <http://cherokee_1.2.98.bb>  | 2 +-
->      5 files changed, 16 insertions(+), 14 deletions(-)
->
->     --
->     2.10.1
->
->     --
->     _______________________________________________
->     Openembedded-devel mailing list
->     Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
->
->
+Sorry this change broke some builds, if I am the only one to use this=20
+configuration, feel free to revert this patch.
 
+OTOH, I have also provided the same kind of patch for OpenSSH configuration=
+=20
+(not yet applied), so tell me what would be the best way to handle=20
+configuration files in Yocto, I may have missed it in the documentation.
 
--- 
-Regards,
-Neil | Kai Kang
-
+David
 
