@@ -1,31 +1,32 @@
-Return-Path: <pbarker@toganlabs.com>
-Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net
-	[217.70.183.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E5A877824
+Return-Path: <alexandre.belloni@free-electrons.com>
+X-Greylist: delayed 608 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 14 Mar 2017 17:47:12 UTC
+Received: from mail.free-electrons.com (mail.free-electrons.com [62.4.15.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 8911B778DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Mar 2017 17:09:29 +0000 (UTC)
-Received: from mfilter34-d.gandi.net (mfilter34-d.gandi.net [217.70.178.165])
-	by relay2-d.mail.gandi.net (Postfix) with ESMTP id 6D1D2C5A8A;
-	Tue, 14 Mar 2017 18:09:30 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mfilter34-d.gandi.net
-Received: from relay2-d.mail.gandi.net ([IPv6:::ffff:217.70.183.194])
-	by mfilter34-d.gandi.net (mfilter34-d.gandi.net [::ffff:10.0.15.180])
-	(amavisd-new, port 10024)
-	with ESMTP id Y87Btq2tp-NW; Tue, 14 Mar 2017 18:09:28 +0100 (CET)
-X-Originating-IP: 82.34.23.153
-Received: from host0.betafive.co.uk
-	(cpc116908-shep14-2-0-cust920.8-3.cable.virginm.net [82.34.23.153])
-	(Authenticated sender: noreply@paulbarker.me.uk)
-	by relay2-d.mail.gandi.net (Postfix) with ESMTPSA id 55EAEC5ABA;
-	Tue, 14 Mar 2017 18:09:28 +0100 (CET)
-Received: by host0.betafive.co.uk (Postfix, from userid 2525)
-	id 5FAF14032ABA; Tue, 14 Mar 2017 17:09:27 +0000 (GMT)
-From: Paul Barker <pbarker@toganlabs.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Mar 2017 17:09:17 +0000
-Message-Id: <20170314170917.18344-1-pbarker@toganlabs.com>
-X-Mailer: git-send-email 2.11.0
-Subject: [meta-oe][PATCH] vim: Update to 8.0.0427
+	Tue, 14 Mar 2017 17:47:12 +0000 (UTC)
+Received: by mail.free-electrons.com (Postfix, from userid 110)
+	id 2D7372077D; Tue, 14 Mar 2017 18:37:06 +0100 (CET)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	mail.free-electrons.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED,SHORTCIRCUIT,
+	URIBL_BLOCKED shortcircuit=ham autolearn=disabled version=3.4.0
+Received: from localhost (unknown [88.191.26.124])
+	by mail.free-electrons.com (Postfix) with ESMTPSA id EBFA420767;
+	Tue, 14 Mar 2017 18:37:05 +0100 (CET)
+Date: Tue, 14 Mar 2017 18:37:04 +0100
+From: Alexandre Belloni <alexandre.belloni@free-electrons.com>
+To: Denys Dmytriyenko <denis@denix.org>
+Message-ID: <20170314173704.paadx2itbq6anwkh@piout.net>
+References: <20170228150119.21252-1-nicolas.ferre@microchip.com>
+	<20170314161431.GJ15664@denix.org>
+MIME-Version: 1.0
+In-Reply-To: <20170314161431.GJ15664@denix.org>
+User-Agent: NeoMutt/20170113 (1.7.2)
+Cc: Nicolas Ferre <nicolas.ferre@microchip.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] devmem2: Change source URL to regain access to it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,91 +39,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Mar 2017 17:09:30 -0000
+X-List-Received-Date: Tue, 14 Mar 2017 17:47:15 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-8.0.0427 is currently used in Arch Linux so we know it has at least had
-some testing.
+On 14/03/2017 at 12:14:31 -0400, Denys Dmytriyenko wrote:
+> On Tue, Feb 28, 2017 at 04:01:19PM +0100, Nicolas Ferre wrote:
+> > Change URL due to connexion error on the original page.
+> > As the header of the new devmem2.c source file has changed, change the
+> > signature and the LIC_FILES_CHKSUM specificaiton.
+> 
+> Oh, great! So, now, everyone who has this file cached locally would have to 
+> invalidate their mirrors? Moreover, if you are building master and morty or 
+> older, you can't reuse the same source mirror as each of the builds will 
+> complain about bad checksums...
+> 
 
-Upstream has fixed the following CVEs since 8.0.0022:
-* CVE-2016-1248 in 8.0.0056
-* CVE-2017-5953 in 8.0.0322
-* CVE-2017-6349 in 8.0.0377
-* CVE-2017-6350 in 8.0.0378
-See http://www.cvedetails.com/product/14270/VIM-VIM.html?vendor_id=8218
+Please suggest another solution. The main issue is that lartmaker.nl
+doesn't reply anymore and we don't have a local copy of the previous
+devmem2.c and I don't see it on
+http://downloads.yoctoproject.org/mirror/sources/ either.
 
-Patches are updated as src/configure.in was renamed upstream.
+> -- 
+> Denys
+> 
+> 
+> > Signed-off-by: Nicolas Ferre <nicolas.ferre@microchip.com>
+> > ---
+> >  meta-oe/recipes-support/devmem2/devmem2.bb | 8 ++++----
+> >  1 file changed, 4 insertions(+), 4 deletions(-)
+> > 
+> > diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb b/meta-oe/recipes-support/devmem2/devmem2.bb
+> > index e48cc9210bb3..c42eb5e0b1c5 100644
+> > --- a/meta-oe/recipes-support/devmem2/devmem2.bb
+> > +++ b/meta-oe/recipes-support/devmem2/devmem2.bb
+> > @@ -1,9 +1,9 @@
+> >  SUMMARY = "Simple program to read/write from/to any location in memory"
+> >  LICENSE = "GPLv2+"
+> > -LIC_FILES_CHKSUM = "file://devmem2.c;endline=28;md5=dd68f2b0a5184b3db3dc25c99e0bd0cd"
+> > +LIC_FILES_CHKSUM = "file://devmem2.c;endline=38;md5=a9eb9f3890384519f435aedf986297cf"
+> >  PR = "r7"
+> >  
+> > -SRC_URI = "http://www.lartmaker.nl/lartware/port/devmem2.c \
+> > +SRC_URI = "http://www.free-electrons.com/pub/mirror/devmem2.c \
+> >             file://devmem2-fixups-2.patch;apply=yes;striplevel=0"
+> >  S = "${WORKDIR}"
+> >  
+> > @@ -18,5 +18,5 @@ do_install() {
+> >      install devmem2 ${D}${bindir}
+> >  }
+> >  
+> > -SRC_URI[md5sum] = "be12c0132a1ae118cbf5e79d98427c1d"
+> > -SRC_URI[sha256sum] = "ec382c90af3ef2f49695ff14a4d6521e58ac482c4e29d6c9ebca8768f699c191"
+> > +SRC_URI[md5sum] = "e23f236e94be4c429aa1ceac0f01544b"
+> > +SRC_URI[sha256sum] = "3b15515693bae1ebd14d914e46d388edfec2175829ea1576a7a0c8606ebbe639"
+> > -- 
+> > 2.9.0
+> > 
+> > -- 
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-Signed-off-by: Paul Barker <pbarker@toganlabs.com>
----
- meta-oe/recipes-support/vim/files/disable_acl_header_check.patch  | 6 +++---
- .../vim/files/vim-add-knob-whether-elf.h-are-checked.patch        | 8 ++++----
- .../vim/{vim-tiny_8.0.0022.bb => vim-tiny_8.0.0427.bb}            | 0
- meta-oe/recipes-support/vim/{vim_8.0.0022.bb => vim_8.0.0427.bb}  | 2 +-
- 4 files changed, 8 insertions(+), 8 deletions(-)
- rename meta-oe/recipes-support/vim/{vim-tiny_8.0.0022.bb => vim-tiny_8.0.0427.bb} (100%)
- rename meta-oe/recipes-support/vim/{vim_8.0.0022.bb => vim_8.0.0427.bb} (98%)
-
-diff --git a/meta-oe/recipes-support/vim/files/disable_acl_header_check.patch b/meta-oe/recipes-support/vim/files/disable_acl_header_check.patch
-index 8f824e78b..65e5f58c6 100644
---- a/meta-oe/recipes-support/vim/files/disable_acl_header_check.patch
-+++ b/meta-oe/recipes-support/vim/files/disable_acl_header_check.patch
-@@ -4,10 +4,10 @@ Don't check 'sys/acl.h' if acl support disabled for vim/vim-tiny.
- 
- Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
- ================================================
--diff --git a/src/configure.in b/src/configure.in
-+diff --git a/src/configure.ac b/src/configure.ac
- index fb965e5..d734064 100644
----- a/src/configure.in
--+++ b/src/configure.in
-+--- a/src/configure.ac
-++++ b/src/configure.ac
- @@ -2511,7 +2511,7 @@ AC_CHECK_HEADERS(stdarg.h stdint.h stdlib.h string.h \
-  	sys/systeminfo.h locale.h sys/stream.h termios.h \
-  	libc.h sys/statfs.h poll.h sys/poll.h pwd.h \
-diff --git a/meta-oe/recipes-support/vim/files/vim-add-knob-whether-elf.h-are-checked.patch b/meta-oe/recipes-support/vim/files/vim-add-knob-whether-elf.h-are-checked.patch
-index 693d130e4..6c620f9f2 100644
---- a/meta-oe/recipes-support/vim/files/vim-add-knob-whether-elf.h-are-checked.patch
-+++ b/meta-oe/recipes-support/vim/files/vim-add-knob-whether-elf.h-are-checked.patch
-@@ -7,13 +7,13 @@ Upstream-status: Pending
- 
- Signed-off-by: Chong Lu <Chong.Lu@windriver.com>
- ---
-- src/configure.in |    7 +++++++
-+ src/configure.ac |    7 +++++++
-  1 file changed, 7 insertions(+)
- 
--diff --git a/src/configure.in b/src/configure.in
-+diff --git a/src/configure.ac b/src/configure.ac
- index d734064..f504fa6 100644
----- a/src/configure.in
--+++ b/src/configure.in
-+--- a/src/configure.ac
-++++ b/src/configure.ac
- @@ -2483,11 +2483,18 @@ AC_TRY_COMPILE([#include <stdio.h>], [int x __attribute__((unused));],
-  	AC_MSG_RESULT(no))
-  
-diff --git a/meta-oe/recipes-support/vim/vim-tiny_8.0.0022.bb b/meta-oe/recipes-support/vim/vim-tiny_8.0.0427.bb
-similarity index 100%
-rename from meta-oe/recipes-support/vim/vim-tiny_8.0.0022.bb
-rename to meta-oe/recipes-support/vim/vim-tiny_8.0.0427.bb
-diff --git a/meta-oe/recipes-support/vim/vim_8.0.0022.bb b/meta-oe/recipes-support/vim/vim_8.0.0427.bb
-similarity index 98%
-rename from meta-oe/recipes-support/vim/vim_8.0.0022.bb
-rename to meta-oe/recipes-support/vim/vim_8.0.0427.bb
-index 920391adb..1f86fcd2f 100644
---- a/meta-oe/recipes-support/vim/vim_8.0.0022.bb
-+++ b/meta-oe/recipes-support/vim/vim_8.0.0427.bb
-@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/vim/vim.git \
-            file://disable_acl_header_check.patch;patchdir=.. \
-            file://vim-add-knob-whether-elf.h-are-checked.patch;patchdir=.. \
- "
--SRCREV = "ec68a99464055029c01082762517e97245ddae0c"
-+SRCREV = "ad4187e6fc9c8e1083a172852d958a70a689a75c"
- 
- S = "${WORKDIR}/git/src"
- 
 -- 
-2.11.0
-
+Alexandre Belloni, Free Electrons
+Embedded Linux and Kernel engineering
+http://free-electrons.com
 
