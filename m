@@ -1,33 +1,24 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id BF99477902
+Return-Path: <joe.slater@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 30F5477747
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Mar 2017 20:17:30 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id A760520BA7;
-	Tue, 14 Mar 2017 20:17:31 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id ZJreCo3y7pio; Tue, 14 Mar 2017 20:17:31 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8646B209A4;
-	Tue, 14 Mar 2017 20:17:30 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 0E0FB1623C7;
-	Tue, 14 Mar 2017 16:17:30 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Mar 2017 16:17:19 -0400
-Message-Id: <1489522639-6248-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1489510642-85850-1-git-send-email-denis@denix.org>
-References: <1489510642-85850-1-git-send-email-denis@denix.org>
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [PATCH v2] devmem2: use different filename to avoid checksum conflicts
+	Tue, 14 Mar 2017 21:25:53 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v2ELPsBl013389
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Mar 2017 14:25:54 -0700 (PDT)
+Received: from ala-jslater-lx3.wrs.com (147.11.152.42) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.294.0; Tue, 14 Mar 2017 14:25:53 -0700
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 14 Mar 2017 14:25:53 -0700
+Message-ID: <1489526753-14469-1-git-send-email-jslater@windriver.com>
+X-Mailer: git-send-email 1.7.3.4
+MIME-Version: 1.0
+Subject: [meta-networking][morty][v2][PATCH 1/1] chrony: fix build failure for arma9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,56 +31,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Mar 2017 20:17:31 -0000
+X-List-Received-Date: Tue, 14 Mar 2017 21:25:54 -0000
+Content-Type: text/plain
 
-From: Denys Dmytriyenko <denys@ti.com>
+Eliminate references to syscalls not available
+for ARM_EABI.  Also add a dependency on libseccomp
+which is needed for scfilter to work.
 
-The newly resurrected devmem2.c file besides having a new location, also
-updates its header, producing different checksums, which would conflict
-with any previously cached or mirrored instances. To avoid such conflicts,
-use a different filename in fetch(). Rename it back to original name at
-unpack() for devmem2-fixups-2.patch to succeed w/o modifications.
+Set PACKAGECONFIG to not enable scfilter, since
+kernel CONFIG_SECCOMP is unlikely to be set.  This
+aligns the usage of libseccomp with that of other packages.
 
-WARNING: devmem2-1.0-r7 do_fetch: Fetcher failure for URL: 'http://www.free-electrons.com/pub/mirror/devmem2.c'. Checksum mismatch!
-File: '/OE/master/downloads/devmem2.c' has md5 checksum be12c0132a1ae118cbf5e79d98427c1d when e23f236e94be4c429aa1ceac0f01544b was expected
-File: '/OE/master/downloads/devmem2.c' has sha256 checksum ec382c90af3ef2f49695ff14a4d6521e58ac482c4e29d6c9ebca8768f699c191 when 3b15515693bae1ebd14d914e46d388edfec2175829ea1576a7a0c8606ebbe639 was expected
-If this change is expected (e.g. you have upgraded to a new version without updating the checksums) then you can use these lines within the recipe:
-SRC_URI[md5sum] = "be12c0132a1ae118cbf5e79d98427c1d"
-SRC_URI[sha256sum] = "ec382c90af3ef2f49695ff14a4d6521e58ac482c4e29d6c9ebca8768f699c191"
-Otherwise you should retry the download and/or check with upstream to determine if the file has become corrupted or otherwise unexpectedly modified.
-
-WARNING: devmem2-1.0-r7 do_fetch: Renaming /OE/sources/devmem2.c to /OE/sources/devmem2.c_bad-checksum_be12c0132a1ae118cbf5e79d98427c1d
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Joe Slater <jslater@windriver.com>
 ---
-v2 - rename it back before patching
+ .../recipes-support/chrony/chrony/arm_eabi.patch   |   57 ++++++++++++++++++++
+ .../recipes-support/chrony/chrony_2.4.bb           |    5 +-
+ 2 files changed, 60 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
 
- meta-oe/recipes-support/devmem2/devmem2.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb b/meta-oe/recipes-support/devmem2/devmem2.bb
-index c42eb5e..c86eb2e 100644
---- a/meta-oe/recipes-support/devmem2/devmem2.bb
-+++ b/meta-oe/recipes-support/devmem2/devmem2.bb
-@@ -3,12 +3,16 @@ LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://devmem2.c;endline=38;md5=a9eb9f3890384519f435aedf986297cf"
- PR = "r7"
- 
--SRC_URI = "http://www.free-electrons.com/pub/mirror/devmem2.c \
-+SRC_URI = "http://www.free-electrons.com/pub/mirror/devmem2.c;downloadfilename=devmem2-new.c \
-            file://devmem2-fixups-2.patch;apply=yes;striplevel=0"
- S = "${WORKDIR}"
- 
- CFLAGS += "-DFORCE_STRICT_ALIGNMENT"
- 
-+python do_unpack_append() {
-+    os.rename("devmem2-new.c", "devmem2.c")
-+}
+diff --git a/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
+new file mode 100644
+index 0000000..d1586bb
+--- /dev/null
++++ b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
+@@ -0,0 +1,57 @@
++    chrony: fix build failure for arma9
++    
++    Eliminate references to syscalls not available
++    for ARM_EABI.  Also add a dependency on libseccomp
++    which is needed for scfilter to work.
++    
++    Set PACKAGECONFIG to not enable scfilter, since
++    kernel CONFIG_SECCOMP is unlikely to be set.  This
++    aligns the usage of libseccomp with that of other packages.
 +
- do_compile() {
-     ${CC} -o devmem2 devmem2.c ${CFLAGS} ${LDFLAGS}
- }
++    Upstream-Status: Pending
++    
++    Signed-off-by: Joe Slater <jslater@windriver.com>
++
++--- a/sys_linux.c
+++++ b/sys_linux.c
++@@ -453,13 +453,12 @@ SYS_Linux_EnableSystemCallFilter(int lev
++   const int syscalls[] = {
++     /* Clock */
++     SCMP_SYS(adjtimex), SCMP_SYS(gettimeofday), SCMP_SYS(settimeofday),
++-    SCMP_SYS(time),
++     /* Process */
++-    SCMP_SYS(clone), SCMP_SYS(exit), SCMP_SYS(exit_group), SCMP_SYS(getrlimit),
+++    SCMP_SYS(clone), SCMP_SYS(exit), SCMP_SYS(exit_group),
++     SCMP_SYS(rt_sigaction), SCMP_SYS(rt_sigreturn), SCMP_SYS(rt_sigprocmask),
++     SCMP_SYS(set_tid_address), SCMP_SYS(sigreturn), SCMP_SYS(wait4),
++     /* Memory */
++-    SCMP_SYS(brk), SCMP_SYS(madvise), SCMP_SYS(mmap), SCMP_SYS(mmap2),
+++    SCMP_SYS(brk), SCMP_SYS(madvise), SCMP_SYS(mmap2),
++     SCMP_SYS(mprotect), SCMP_SYS(mremap), SCMP_SYS(munmap), SCMP_SYS(shmdt),
++     /* Filesystem */
++     SCMP_SYS(access), SCMP_SYS(chmod), SCMP_SYS(chown), SCMP_SYS(chown32),
++@@ -470,14 +469,21 @@ SYS_Linux_EnableSystemCallFilter(int lev
++     SCMP_SYS(bind), SCMP_SYS(connect), SCMP_SYS(getsockname),
++     SCMP_SYS(recvfrom), SCMP_SYS(recvmsg), SCMP_SYS(sendmmsg),
++     SCMP_SYS(sendmsg), SCMP_SYS(sendto),
++-    /* TODO: check socketcall arguments */
++-    SCMP_SYS(socketcall),
++     /* General I/O */
++     SCMP_SYS(_newselect), SCMP_SYS(close), SCMP_SYS(open), SCMP_SYS(pipe),
++-    SCMP_SYS(poll), SCMP_SYS(read), SCMP_SYS(futex), SCMP_SYS(select),
+++    SCMP_SYS(poll), SCMP_SYS(read), SCMP_SYS(futex),
++     SCMP_SYS(set_robust_list), SCMP_SYS(write),
++     /* Miscellaneous */
++     SCMP_SYS(uname),
+++    /* not always available */
+++#if ! defined(__ARM_EABI__)
+++    SCMP_SYS(time),
+++    SCMP_SYS(getrlimit),
+++    SCMP_SYS(select),
+++    SCMP_SYS(mmap),
+++    /* TODO: check socketcall arguments */
+++    SCMP_SYS(socketcall),
+++#endif
++   };
++ 
++   const int socket_domains[] = {
+diff --git a/meta-networking/recipes-support/chrony/chrony_2.4.bb b/meta-networking/recipes-support/chrony/chrony_2.4.bb
+index deb2148..088708f 100644
+--- a/meta-networking/recipes-support/chrony/chrony_2.4.bb
++++ b/meta-networking/recipes-support/chrony/chrony_2.4.bb
+@@ -33,6 +33,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ SRC_URI = "https://download.tuxfamily.org/chrony/chrony-${PV}.tar.gz \
+     file://chrony.conf \
+     file://chronyd \
++    file://arm_eabi.patch \
+ "
+ SRC_URI[md5sum] = "d0598aa8a9be8faccef9386f6fc0d5f2"
+ SRC_URI[sha256sum] = "8d04e7cda2333289c2104b731d39c3c1db94816e43bae35d7ee4e7ae8af6391f"
+@@ -58,14 +59,14 @@ inherit update-rc.d systemd
+ #     chrony.conf and init script.
+ #   - 'scfilter' enables support for system call filtering, but requires the
+ #     kernel to have CONFIG_SECCOMP enabled.
+-PACKAGECONFIG ??= "editline scfilter \
++PACKAGECONFIG ??= "editline \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)} \
+ "
+ PACKAGECONFIG[readline] = "--without-editline,--without-readline,readline"
+ PACKAGECONFIG[editline] = ",--without-editline,libedit"
+ PACKAGECONFIG[sechash] = "--without-tomcrypt,--disable-sechash,nss"
+ PACKAGECONFIG[privdrop] = ",--disable-privdrop,libcap"
+-PACKAGECONFIG[scfilter] = "--enable-scfilter,--without-seccomp"
++PACKAGECONFIG[scfilter] = "--enable-scfilter,--without-seccomp,libseccomp"
+ PACKAGECONFIG[ipv6] = ",--disable-ipv6,"
+ PACKAGECONFIG[nss] = "--with-nss,--without-nss,nss"
+ PACKAGECONFIG[libcap] = "--with-libcap,--without-libcap,libcap"
 -- 
-2.7.4
+1.7.9.5
 
 
