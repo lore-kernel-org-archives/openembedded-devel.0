@@ -1,32 +1,34 @@
-Return-Path: <alexandre.belloni@free-electrons.com>
-Received: from mail.free-electrons.com (mail.free-electrons.com [62.4.15.54])
-	by mail.openembedded.org (Postfix) with ESMTP id B07B077925
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id CFA28778FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Mar 2017 18:37:31 +0000 (UTC)
-Received: by mail.free-electrons.com (Postfix, from userid 110)
-	id D93372075C; Tue, 14 Mar 2017 19:37:33 +0100 (CET)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
-	mail.free-electrons.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED,SHORTCIRCUIT,
-	URIBL_BLOCKED shortcircuit=ham autolearn=disabled version=3.4.0
-Received: from localhost (unknown [88.191.26.124])
-	by mail.free-electrons.com (Postfix) with ESMTPSA id E0E6520820;
-	Tue, 14 Mar 2017 19:33:55 +0100 (CET)
-Date: Tue, 14 Mar 2017 19:33:54 +0100
-From: Alexandre Belloni <alexandre.belloni@free-electrons.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20170314183354.izyoqlhewz55qltw@piout.net>
-References: <20170228150119.21252-1-nicolas.ferre@microchip.com>
-	<20170314161431.GJ15664@denix.org>
-	<20170314173704.paadx2itbq6anwkh@piout.net>
-	<CA+chaQeAhKqzacGGdtZ8rsTu7sd2XkLB+Ui_nYgodsZDzutp3w@mail.gmail.com>
+	Tue, 14 Mar 2017 18:43:56 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id B26B320BA7;
+	Tue, 14 Mar 2017 18:43:57 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id fBUXvgCMmu6R; Tue, 14 Mar 2017 18:43:57 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8FC43209A4;
+	Tue, 14 Mar 2017 18:43:56 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 223D01623E8; Tue, 14 Mar 2017 14:43:56 -0400 (EDT)
+Date: Tue, 14 Mar 2017 14:43:56 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: kai.kang@windriver.com
+Message-ID: <20170314184356.GK15664@denix.org>
+References: <20170313032921.8669-1-kai.kang@windriver.com>
+	<20170313032921.8669-3-kai.kang@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQeAhKqzacGGdtZ8rsTu7sd2XkLB+Ui_nYgodsZDzutp3w@mail.gmail.com>
-User-Agent: NeoMutt/20170113 (1.7.2)
-Cc: Nicolas Ferre <nicolas.ferre@microchip.com>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] devmem2: Change source URL to regain access to it
+In-Reply-To: <20170313032921.8669-3-kai.kang@windriver.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 2/5] curlpp: update HOMEPAGE and SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,104 +41,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Mar 2017 18:37:33 -0000
+X-List-Received-Date: Tue, 14 Mar 2017 18:43:57 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On 14/03/2017 at 19:13:19 +0100, Martin Jansa wrote:
-> Denys already sent patch with alternative solution.
+On Mon, Mar 13, 2017 at 11:29:18AM +0800, kai.kang@windriver.com wrote:
+> From: Kai Kang <kai.kang@windriver.com>
 > 
-> All things included in my bitbake world are also mirrored on
-> sources.openembedded.org, so here is the old version:
+> The page of curlpp hosted on googlecode doesn' work now. So update
+> SRC_URI to use repo hosted on github. Update HOMEPAGE as well.
 > 
-> http://sources.openembedded.org/devmem2.c
+> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> ---
+>  meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 > 
+> diff --git a/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb b/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
+> index c3a242a..24f2ef8 100644
+> --- a/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
+> +++ b/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
+> @@ -1,5 +1,5 @@
+>  SUMMARY = "C++ library for client-side URL transfers"
+> -HOMEPAGE = "http://code.google.com/p/curlpp/"
+> +HOMEPAGE = "http://www.curlpp.org/"
+>  SECTION = "libdevel"
+>  LICENSE = "MIT"
+>  LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
+> @@ -7,12 +7,12 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
+>  DEPENDS = "curl boost"
+>  DEPENDS_class-native = "curl-native"
+>  
+> -SRC_URI = "http://curlpp.googlecode.com/files/curlpp-${PV}.tar.gz \
+> +SRC_URI = "https://github.com/jpbarrette/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
 
-Great, thanks!
-
-> On Tue, Mar 14, 2017 at 6:37 PM, Alexandre Belloni <
-> alexandre.belloni@free-electrons.com> wrote:
-> 
-> > On 14/03/2017 at 12:14:31 -0400, Denys Dmytriyenko wrote:
-> > > On Tue, Feb 28, 2017 at 04:01:19PM +0100, Nicolas Ferre wrote:
-> > > > Change URL due to connexion error on the original page.
-> > > > As the header of the new devmem2.c source file has changed, change the
-> > > > signature and the LIC_FILES_CHKSUM specificaiton.
-> > >
-> > > Oh, great! So, now, everyone who has this file cached locally would have
-> > to
-> > > invalidate their mirrors? Moreover, if you are building master and morty
-> > or
-> > > older, you can't reuse the same source mirror as each of the builds will
-> > > complain about bad checksums...
-> > >
-> >
-> > Please suggest another solution. The main issue is that lartmaker.nl
-> > doesn't reply anymore and we don't have a local copy of the previous
-> > devmem2.c and I don't see it on
-> > http://downloads.yoctoproject.org/mirror/sources/ either.
-> >
-> > > --
-> > > Denys
-> > >
-> > >
-> > > > Signed-off-by: Nicolas Ferre <nicolas.ferre@microchip.com>
-> > > > ---
-> > > >  meta-oe/recipes-support/devmem2/devmem2.bb | 8 ++++----
-> > > >  1 file changed, 4 insertions(+), 4 deletions(-)
-> > > >
-> > > > diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb
-> > b/meta-oe/recipes-support/devmem2/devmem2.bb
-> > > > index e48cc9210bb3..c42eb5e0b1c5 100644
-> > > > --- a/meta-oe/recipes-support/devmem2/devmem2.bb
-> > > > +++ b/meta-oe/recipes-support/devmem2/devmem2.bb
-> > > > @@ -1,9 +1,9 @@
-> > > >  SUMMARY = "Simple program to read/write from/to any location in
-> > memory"
-> > > >  LICENSE = "GPLv2+"
-> > > > -LIC_FILES_CHKSUM = "file://devmem2.c;endline=28;md5=
-> > dd68f2b0a5184b3db3dc25c99e0bd0cd"
-> > > > +LIC_FILES_CHKSUM = "file://devmem2.c;endline=38;md5=
-> > a9eb9f3890384519f435aedf986297cf"
-> > > >  PR = "r7"
-> > > >
-> > > > -SRC_URI = "http://www.lartmaker.nl/lartware/port/devmem2.c \
-> > > > +SRC_URI = "http://www.free-electrons.com/pub/mirror/devmem2.c \
-> > > >             file://devmem2-fixups-2.patch;apply=yes;striplevel=0"
-> > > >  S = "${WORKDIR}"
-> > > >
-> > > > @@ -18,5 +18,5 @@ do_install() {
-> > > >      install devmem2 ${D}${bindir}
-> > > >  }
-> > > >
-> > > > -SRC_URI[md5sum] = "be12c0132a1ae118cbf5e79d98427c1d"
-> > > > -SRC_URI[sha256sum] = "ec382c90af3ef2f49695ff14a4d652
-> > 1e58ac482c4e29d6c9ebca8768f699c191"
-> > > > +SRC_URI[md5sum] = "e23f236e94be4c429aa1ceac0f01544b"
-> > > > +SRC_URI[sha256sum] = "3b15515693bae1ebd14d914e46d388
-> > edfec2175829ea1576a7a0c8606ebbe639"
-> > > > --
-> > > > 2.9.0
-> > > >
-> > > > --
-> > > > _______________________________________________
-> > > > Openembedded-devel mailing list
-> > > > Openembedded-devel@lists.openembedded.org
-> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> > --
-> > Alexandre Belloni, Free Electrons
-> > Embedded Linux and Kernel engineering
-> > http://free-electrons.com
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
+So, you are trying to use the same name for the tarball, which has different 
+checksums. Will be a problem for anyone with an old tarball cached on a 
+mirror...
 
 -- 
-Alexandre Belloni, Free Electrons
-Embedded Linux and Kernel engineering
-http://free-electrons.com
+Denys
+
+
+>      file://example21.cpp-remove-deprecated-code.patch \
+>  "
+>  
+> -SRC_URI[md5sum] = "ccc3d30d4b3b5d2cdbed635898c29485"
+> -SRC_URI[sha256sum] = "e3f9427b27c5bddf898d383d45c0d3d5397e2056ff935d9a5cdaef6a9a653bd5"
+> +SRC_URI[md5sum] = "ee05f248bf3bbf7f381d65cf2d0ee50f"
+> +SRC_URI[sha256sum] = "b72093f221a9e2d0f7ce0bd0f846587835e01607a7bb0f106ff4317a8c30a81c"
+>  
+>  inherit autotools-brokensep pkgconfig binconfig
+>  
+> -- 
+> 2.10.1
+> 
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
