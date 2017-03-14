@@ -1,49 +1,47 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 19C2D77848
+Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
+	[209.85.128.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 6053977824
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Mar 2017 18:13:18 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id u48so24962251wrc.1
+	Tue, 14 Mar 2017 18:28:18 +0000 (UTC)
+Received: by mail-wr0-f194.google.com with SMTP id u108so24956490wrb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Mar 2017 11:13:20 -0700 (PDT)
+	Tue, 14 Mar 2017 11:28:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=hreD8qzH/ncsYdeSPMb3ctsKs2GicEM7Y9+JAK62T5U=;
-	b=d6wSc4BFG4qo1wA179ysnDV8f+Trr+THq9+Gsnk9JfSSJstQYYQhE0YZ99OPeipAms
-	XQ9dzHl1CIxaK5maXYDqwzgMYvyFq9Rfgg0hhlZOW72GeXA0QiphWIImyWnaDvOrC91w
-	zWhACBd+JCXYSOUdaGklUr9FPVtzNK+g1SQfqXAnojHxAZREcVFP6MjIIjEbfcH7WsFY
-	F5k8Z7v4mgqqMaj4S4LuXCJr5v6LUUr9jYJMMaMOj8NDB8lYscZyJwAtA6G+YM5kZwH1
-	ZZYX5wGcK2RHNrpO4TswQFs5qM2Li012KIMim+w2cMUtXj/FEuPd/q67HKY3fSJoQcG0
-	mxBg==
+	:cc; bh=cyWAYV98gUgdpUmUcpei9Eq0xKVJeB9y1D+widjrzjs=;
+	b=vIVfNrOsABcVmHdyQjSfZsLVRrTDKSdDgYe2mSn06+KV3Xvz6jHIqE1bPy3oaRw9hM
+	bGzuivn0eUN2msRRmbLtwAwOr9zCvb7dfokU7ZOUzxgwxxHvVHal3N5O+5hM/jNqTsYR
+	zGTtOCW0RsAMcG75gXr6Ag/j1HyW171SbbxrUrrP2bq+5q4peYY/cZFPJB7p9PdTbu+D
+	4TQUwolE0n5HDm2ATK6kov+Ut5aFqf8q4I0EoEsKm3tmcCypaUBj2lcIVlc8o0VZejSi
+	iJLo5+2a7/697I/VTband59LIktkXIrfQLtSqlryINTXv/TQ1JlYENghpqWu+jeepbpb
+	m26w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=hreD8qzH/ncsYdeSPMb3ctsKs2GicEM7Y9+JAK62T5U=;
-	b=g7WRsbw0TQjqDgohXqGqaxH9iAfcoCJjk9CBtp0oc7/GdHNxrHU4Wts4mkGd8zCn5D
-	4OS3mu2sJGe/jwbAL20LTS7y1VzTzdqhZffQOOMDx7al23VQE8rs6wlFMPocXjUQozNR
-	3CN3/3xcm7l9n96yh4QRB69fI379eU/G3vlNYL9gWwuae159dsegVQ59VvKbZ1we+Nxh
-	ZQmPYUz7vT42KrTir/uhf94NFn0A82utFld2NWsCl22e6dw+phkYEDtI0GztBswOQbpI
-	/UZZTwGHmfLGNAyi/SAO5vdGu1sEDUJS9ryf+6ywIz9rBI/VXgMqLc3piltl+4hT40nB
-	2+sg==
-X-Gm-Message-State: AMke39m2ly9XvSRoW9z1QxykBFTDKvFYURu67VRGXROQ9af8UndvyzLYjKe/37jC+2e6PO29fWKJU0mgxAHXnA==
-X-Received: by 10.223.154.149 with SMTP id a21mr32998697wrc.145.1489515199598; 
-	Tue, 14 Mar 2017 11:13:19 -0700 (PDT)
+	bh=cyWAYV98gUgdpUmUcpei9Eq0xKVJeB9y1D+widjrzjs=;
+	b=EJhMXPQDjnbl0GHvssyuy39oySHgoMgWSB0pMmXBMScGgWbWUZ2SIn4ioXu2ACuPZd
+	rEfnsCB/hrFweoiBLHWK/rhZ774nCBsDJQ+fDa5Ju9TJxRyB1mdWLOB4g5W8SW9eOeTj
+	aAJivmmtHe2DZJM0ELLrMKy/VLoQxwPslTuAUI2atJxXQhA9ClXb+cI4HXCWF77gHqSE
+	7kL5wwItoDqyEByoluZPcXodXjFq0cWwAW5mTZVSc5XkK8VNVOoPBVN/b36gDbsN4JvO
+	sBxrYqJW6OL5t6CJRdrcYO64OuFVVuruERdaPGj6IdCt3sPabgCvetPPNeTsmqPuj/Yq
+	6ouQ==
+X-Gm-Message-State: AMke39kupnx36VJ8ZefIORtoxu79WYDvRoN7Fq6phkeSh9mtYjAhd5VwEI6AfLE4LDpv5g9Gi4yuemTe5y9SiA==
+X-Received: by 10.223.136.66 with SMTP id e2mr34810981wre.14.1489516099808;
+	Tue, 14 Mar 2017 11:28:19 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.80.145.24 with HTTP; Tue, 14 Mar 2017 11:13:19 -0700 (PDT)
-In-Reply-To: <20170314173704.paadx2itbq6anwkh@piout.net>
-References: <20170228150119.21252-1-nicolas.ferre@microchip.com>
-	<20170314161431.GJ15664@denix.org>
-	<20170314173704.paadx2itbq6anwkh@piout.net>
+Received: by 10.80.145.24 with HTTP; Tue, 14 Mar 2017 11:28:19 -0700 (PDT)
+In-Reply-To: <1489505792.23237.1.camel@pelagicore.com>
+References: <20170222102510.13059-2-gordan.markus@pelagicore.com>
+	<1489505792.23237.1.camel@pelagicore.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 14 Mar 2017 19:13:19 +0100
-Message-ID: <CA+chaQeAhKqzacGGdtZ8rsTu7sd2XkLB+Ui_nYgodsZDzutp3w@mail.gmail.com>
-To: Alexandre Belloni <alexandre.belloni@free-electrons.com>
+Date: Tue, 14 Mar 2017 19:28:19 +0100
+Message-ID: <CA+chaQfbZ7Nx6uNKACEkf-jnJfpkzm+ym50SfY=HV_WA2zibPw@mail.gmail.com>
+To: =?UTF-8?Q?Gordan_Marku=C5=A1?= <gordan.markus@pelagicore.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Nicolas Ferre <nicolas.ferre@microchip.com>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] devmem2: Change source URL to regain access to it
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qtwebengine: add commercial licence
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,90 +54,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Mar 2017 18:13:20 -0000
+X-List-Received-Date: Tue, 14 Mar 2017 18:28:20 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Denys already sent patch with alternative solution.
+It didn't make it into patchwork, please resend.
 
-All things included in my bitbake world are also mirrored on
-sources.openembedded.org, so here is the old version:
+On Tue, Mar 14, 2017 at 4:36 PM, Gordan Marku=C5=A1 <gordan.markus@pelagico=
+re.com
+> wrote:
 
-http://sources.openembedded.org/devmem2.c
-
-On Tue, Mar 14, 2017 at 6:37 PM, Alexandre Belloni <
-alexandre.belloni@free-electrons.com> wrote:
-
-> On 14/03/2017 at 12:14:31 -0400, Denys Dmytriyenko wrote:
-> > On Tue, Feb 28, 2017 at 04:01:19PM +0100, Nicolas Ferre wrote:
-> > > Change URL due to connexion error on the original page.
-> > > As the header of the new devmem2.c source file has changed, change the
-> > > signature and the LIC_FILES_CHKSUM specificaiton.
-> >
-> > Oh, great! So, now, everyone who has this file cached locally would have
-> to
-> > invalidate their mirrors? Moreover, if you are building master and morty
-> or
-> > older, you can't reuse the same source mirror as each of the builds will
-> > complain about bad checksums...
-> >
+> Bumping the topic. Has anyone had the time to review this patch?
 >
-> Please suggest another solution. The main issue is that lartmaker.nl
-> doesn't reply anymore and we don't have a local copy of the previous
-> devmem2.c and I don't see it on
-> http://downloads.yoctoproject.org/mirror/sources/ either.
->
-> > --
-> > Denys
+> On Wed, 2017-02-22 at 11:25 +0100, Gordan Marku=C5=A1 wrote:
+> > Signed-off-by: Gordan Marku=C5=A1 <gordan.markus@pelagicore.com>
+> > ---
+> >  recipes-qt/qt5/qtwebengine_git.bb | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
 > >
+> > diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-
+> > qt/qt5/qtwebengine_git.bb
+> > index 8e60d72..a4ee055 100644
+> > --- a/recipes-qt/qt5/qtwebengine_git.bb
+> > +++ b/recipes-qt/qt5/qtwebengine_git.bb
+> > @@ -1,7 +1,7 @@
+> >  SUMMARY =3D "QtWebEngine combines the power of Chromium and Qt"
 > >
-> > > Signed-off-by: Nicolas Ferre <nicolas.ferre@microchip.com>
-> > > ---
-> > >  meta-oe/recipes-support/devmem2/devmem2.bb | 8 ++++----
-> > >  1 file changed, 4 insertions(+), 4 deletions(-)
-> > >
-> > > diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb
-> b/meta-oe/recipes-support/devmem2/devmem2.bb
-> > > index e48cc9210bb3..c42eb5e0b1c5 100644
-> > > --- a/meta-oe/recipes-support/devmem2/devmem2.bb
-> > > +++ b/meta-oe/recipes-support/devmem2/devmem2.bb
-> > > @@ -1,9 +1,9 @@
-> > >  SUMMARY = "Simple program to read/write from/to any location in
-> memory"
-> > >  LICENSE = "GPLv2+"
-> > > -LIC_FILES_CHKSUM = "file://devmem2.c;endline=28;md5=
-> dd68f2b0a5184b3db3dc25c99e0bd0cd"
-> > > +LIC_FILES_CHKSUM = "file://devmem2.c;endline=38;md5=
-> a9eb9f3890384519f435aedf986297cf"
-> > >  PR = "r7"
-> > >
-> > > -SRC_URI = "http://www.lartmaker.nl/lartware/port/devmem2.c \
-> > > +SRC_URI = "http://www.free-electrons.com/pub/mirror/devmem2.c \
-> > >             file://devmem2-fixups-2.patch;apply=yes;striplevel=0"
-> > >  S = "${WORKDIR}"
-> > >
-> > > @@ -18,5 +18,5 @@ do_install() {
-> > >      install devmem2 ${D}${bindir}
-> > >  }
-> > >
-> > > -SRC_URI[md5sum] = "be12c0132a1ae118cbf5e79d98427c1d"
-> > > -SRC_URI[sha256sum] = "ec382c90af3ef2f49695ff14a4d652
-> 1e58ac482c4e29d6c9ebca8768f699c191"
-> > > +SRC_URI[md5sum] = "e23f236e94be4c429aa1ceac0f01544b"
-> > > +SRC_URI[sha256sum] = "3b15515693bae1ebd14d914e46d388
-> edfec2175829ea1576a7a0c8606ebbe639"
-> > > --
-> > > 2.9.0
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
-> --
-> Alexandre Belloni, Free Electrons
-> Embedded Linux and Kernel engineering
-> http://free-electrons.com
+> >  # Read http://blog.qt.io/blog/2016/01/13/new-agreement-with-the-kde-
+> > free-qt-foundation/
+> > -LICENSE =3D "LGPL-3.0 & BSD & GPL-3.0 & The-Qt-Company-GPL-Exception-
+> > 1.0"
+> > +LICENSE =3D "BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-
+> > Qt-Company-Commercial ) & ( LGPL-3.0 | The-Qt-Company-Commercial )"
+> >  LIC_FILES_CHKSUM =3D " \
+> >      file://src/core/browser_context_qt.cpp;md5=3Db5193b7d68699260f3b40
+> > b201365c8d2;beginline=3D1;endline=3D38 \
+> >      file://src/3rdparty/chromium/LICENSE;md5=3D0fca02217a5d49a14dfe2d1
+> > 1837bb34d \
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
