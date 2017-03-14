@@ -1,34 +1,34 @@
 Return-Path: <denis@denix.org>
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id CFA28778FE
+	by mail.openembedded.org (Postfix) with ESMTP id B08F7778FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Mar 2017 18:43:56 +0000 (UTC)
+	Tue, 14 Mar 2017 18:45:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id B26B320BA7;
-	Tue, 14 Mar 2017 18:43:57 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id C6E9C20BA7;
+	Tue, 14 Mar 2017 18:45:53 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with ESMTP id fBUXvgCMmu6R; Tue, 14 Mar 2017 18:43:57 +0000 (UTC)
+	with ESMTP id 4Y6EFjavqiE3; Tue, 14 Mar 2017 18:45:53 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
 	[100.15.85.143])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8FC43209A4;
-	Tue, 14 Mar 2017 18:43:56 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A5A53209A4;
+	Tue, 14 Mar 2017 18:45:52 +0000 (UTC)
 Received: by mail.denix.org (Postfix, from userid 1000)
-	id 223D01623E8; Tue, 14 Mar 2017 14:43:56 -0400 (EDT)
-Date: Tue, 14 Mar 2017 14:43:56 -0400
+	id 477921623E8; Tue, 14 Mar 2017 14:45:52 -0400 (EDT)
+Date: Tue, 14 Mar 2017 14:45:52 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: kai.kang@windriver.com
-Message-ID: <20170314184356.GK15664@denix.org>
+Message-ID: <20170314184552.GL15664@denix.org>
 References: <20170313032921.8669-1-kai.kang@windriver.com>
-	<20170313032921.8669-3-kai.kang@windriver.com>
+	<20170313032921.8669-2-kai.kang@windriver.com>
 MIME-Version: 1.0
-In-Reply-To: <20170313032921.8669-3-kai.kang@windriver.com>
+In-Reply-To: <20170313032921.8669-2-kai.kang@windriver.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/5] curlpp: update HOMEPAGE and SRC_URI
+Subject: Re: [PATCH 1/5] fuse: update HOMEPAGE and SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,57 +41,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Mar 2017 18:43:57 -0000
+X-List-Received-Date: Tue, 14 Mar 2017 18:45:54 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Mon, Mar 13, 2017 at 11:29:18AM +0800, kai.kang@windriver.com wrote:
+On Mon, Mar 13, 2017 at 11:29:17AM +0800, kai.kang@windriver.com wrote:
 > From: Kai Kang <kai.kang@windriver.com>
 > 
-> The page of curlpp hosted on googlecode doesn' work now. So update
-> SRC_URI to use repo hosted on github. Update HOMEPAGE as well.
+> The homepage of fuse is redirected to github. So update HOMEPAGE and
+> SRC_URI.
+> 
+> Correct license LGPLv2 with LGPLv2.1 at same time.
 > 
 > Signed-off-by: Kai Kang <kai.kang@windriver.com>
 > ---
->  meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+>  meta-filesystems/recipes-support/fuse/fuse_2.9.4.bb | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 > 
-> diff --git a/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb b/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
-> index c3a242a..24f2ef8 100644
-> --- a/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
-> +++ b/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
-> @@ -1,5 +1,5 @@
->  SUMMARY = "C++ library for client-side URL transfers"
-> -HOMEPAGE = "http://code.google.com/p/curlpp/"
-> +HOMEPAGE = "http://www.curlpp.org/"
->  SECTION = "libdevel"
->  LICENSE = "MIT"
->  LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-> @@ -7,12 +7,12 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
->  DEPENDS = "curl boost"
->  DEPENDS_class-native = "curl-native"
+> diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.4.bb b/meta-filesystems/recipes-support/fuse/fuse_2.9.4.bb
+> index 153fcb4..b34efa1 100644
+> --- a/meta-filesystems/recipes-support/fuse/fuse_2.9.4.bb
+> +++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.4.bb
+> @@ -4,13 +4,13 @@ DESCRIPTION = "FUSE (Filesystem in Userspace) is a simple interface for userspac
+>                 also aims to provide a secure method for non privileged users to \
+>                 create and mount their own filesystem implementations. \
+>                "
+> -HOMEPAGE = "http://fuse.sf.net"
+> +HOMEPAGE = "https://github.com/libfuse/libfuse"
+>  SECTION = "libs"
+> -LICENSE = "GPLv2 & LGPLv2"
+> +LICENSE = "GPLv2 & LGPLv2.1"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+>                      file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
 >  
-> -SRC_URI = "http://curlpp.googlecode.com/files/curlpp-${PV}.tar.gz \
-> +SRC_URI = "https://github.com/jpbarrette/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
+> -SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz \
+> +SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse_2_9_4/${BP}.tar.gz \
 
-So, you are trying to use the same name for the tarball, which has different 
-checksums. Will be a problem for anyone with an old tarball cached on a 
-mirror...
-
--- 
-Denys
+Can you use ${@d.getVar('PV').replace('.', '_')} in the path here ^^^^^^^^^
+Similar to what you did in lmsensors...
 
 
->      file://example21.cpp-remove-deprecated-code.patch \
->  "
->  
-> -SRC_URI[md5sum] = "ccc3d30d4b3b5d2cdbed635898c29485"
-> -SRC_URI[sha256sum] = "e3f9427b27c5bddf898d383d45c0d3d5397e2056ff935d9a5cdaef6a9a653bd5"
-> +SRC_URI[md5sum] = "ee05f248bf3bbf7f381d65cf2d0ee50f"
-> +SRC_URI[sha256sum] = "b72093f221a9e2d0f7ce0bd0f846587835e01607a7bb0f106ff4317a8c30a81c"
->  
->  inherit autotools-brokensep pkgconfig binconfig
->  
+>             file://gold-unversioned-symbol.patch \
+>             file://aarch64.patch \
+>             file://0001-fuse-fix-the-return-value-of-help-option.patch \
 > -- 
 > 2.10.1
 > 
