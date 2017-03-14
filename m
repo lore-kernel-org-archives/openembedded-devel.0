@@ -1,45 +1,29 @@
-Return-Path: <liu.ming50@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 5F01371AFC
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E73B719DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Mar 2017 02:53:28 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id u132so12684440wmg.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Mar 2017 19:53:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=jwC6jv8sWcrH1KBYXWW5IKNTkSrhohFdcpqynYeZ6qg=;
-	b=u/RX2tmay7rMo5F8jlGgsAiRx03IDZDnVJw5Zi2PXPx1feFbxEbTNqWilDqJcD089w
-	l8IKUUzAXjWdgARna2FIlWfv9INFlw+0+dNX+BPg0v+rwlzbGGwc9Od19RyVnWhoU12w
-	2sqqRXyRHE18k4HrAJbX6RYZO+BFlXDzodoXkNUbBBxeUcbyXVrJqf7jIo0XASoso+yF
-	jj9Y3K+Vkss1YrKkBzr0z8xj2701MfSNahdX+ZZXtakgexvKKDfnPa8lE+Y5F4QBoTpL
-	bJe76StknOtRXGKlC3nqC8/q8Js+Hu6Skcv8CfNiSqoceeqo9q+rb1SB125hMD7+7NfI
-	TQZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=jwC6jv8sWcrH1KBYXWW5IKNTkSrhohFdcpqynYeZ6qg=;
-	b=jkn6TkLsWFKx8xVghidL2snaqnkyBiJFd/MxjSpGmBoTXxw3o9Iwz8Rvmlxl2VyjUj
-	UHJU2F/PHi/NPWUei9CAykbLZOSG1Qpsb6bcPAWpZe8qJPwAKjqbsSXwfyUQBtuNDSVr
-	ARXUv28Va2V6D6ZDONRS2aP41u8uJ8lMeqcK0+K5Gh5GLVHAS3sD4Z+tlurt8PVavRKY
-	nw90rDqVTBiNiKaR7Wi6/cc9fxF5l0zxvVPkmGa3Q3LLWY3tVNCM/h4aBiRwN90WuHtL
-	H+Sp6mzgYnOiTQiBlUOrvfUmHyoyzv3Hutnz4VHUzcVc+Rn7mYAYPhamb6i6IFMCoRjC
-	Mh3w==
-X-Gm-Message-State: AFeK/H0XEmVHKxTXLyr4+A80fsf6jXB1x4Lh0Of12y3BZVOxbXenmpICOFAZFlRmoZaVfQ==
-X-Received: by 10.28.130.212 with SMTP id e203mr11619653wmd.104.1489460009019; 
-	Mon, 13 Mar 2017 19:53:29 -0700 (PDT)
-Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
-	([106.116.217.31]) by smtp.gmail.com with ESMTPSA id
-	e6sm27267331wrc.30.2017.03.13.19.53.26
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 13 Mar 2017 19:53:27 -0700 (PDT)
-From: liu.ming50@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Mar 2017 03:53:21 +0100
-Message-Id: <1489460001-24718-1-git-send-email-liu.ming50@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Ming Liu <peter.x.liu@external.atlascopco.com>
-Subject: [meta-oe] [PATCH] meta: do not append to BBCLASSEXTEND
+	Tue, 14 Mar 2017 08:20:36 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v2E8KaWK004705
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 14 Mar 2017 01:20:36 -0700 (PDT)
+Received: from [128.224.162.185] (128.224.162.185) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 14 Mar 2017 01:20:35 -0700
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <20170313032921.8669-1-kai.kang@windriver.com>
+	<CA+chaQc0uNJ=k8OYDPLapV9ekap2Yv9TFA_25_U3em5ZBQF8gg@mail.gmail.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <8c5b1e35-2b6a-6cc6-52cd-c51789206505@windriver.com>
+Date: Tue, 14 Mar 2017 16:19:03 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.0
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQc0uNJ=k8OYDPLapV9ekap2Yv9TFA_25_U3em5ZBQF8gg@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 0/5] Update SRC_URIs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,141 +36,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Mar 2017 02:53:29 -0000
+X-List-Received-Date: Tue, 14 Mar 2017 08:20:36 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-From: Ming Liu <peter.x.liu@external.atlascopco.com>
+On 2017年03月13日 15:25, Martin Jansa wrote:
+> Github archives can be regenerated from time to time with different 
+> checksums, please use git fetcher instead.
 
-Replace some "+=/=+" with "=" when setting BBCLASSEXTEND, they are
-redundant and inconsistent with the same setting in other recipes.
+OK. Thanks.
 
-Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
----
- meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb                  | 2 +-
- meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb      | 2 +-
- meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb               | 2 +-
- meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb                      | 2 +-
- meta-oe/recipes-devtools/log4cplus/log4cplus_1.2.0.bb                  | 2 +-
- meta-oe/recipes-extended/p7zip/p7zip_16.02.bb                          | 2 +-
- meta-oe/recipes-support/libssh2/libssh2_1.7.0.bb                       | 2 +-
- meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb                 | 2 +-
- meta-oe/recipes-support/lzip/lzip_1.16.bb                              | 2 +-
- meta-python/recipes-devtools/python/python-setuptools-scm_1.15.0.bb    | 2 +-
- meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.bb | 2 +-
- 11 files changed, 11 insertions(+), 11 deletions(-)
+--Kai
 
-diff --git a/meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb b/meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb
-index 8fe6a6f..288c586 100644
---- a/meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb
-+++ b/meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb
-@@ -12,4 +12,4 @@ SRC_URI[sha256sum] = "fdee1e69903cf409bdc6f32403a566cbc6006aa9e2a4d6f8f12b90dfd5
- 
- inherit autotools pkgconfig
- 
--BBCLASSEXTEND += "native nativesdk"
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-index f39a82c..34fddcb 100644
---- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-@@ -165,4 +165,4 @@ FILES_${PN}-fstools = "\
-     ${bindir}/mkuserimg \
- "
- 
--BBCLASSEXTEND += "native"
-+BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb b/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb
-index dff6cc1..53bbf7e 100644
---- a/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb
-+++ b/meta-oe/recipes-devtools/json-spirit/json-spirit_4.08.bb
-@@ -21,4 +21,4 @@ inherit cmake
- 
- FILES_${PN}-dev += "${datadir}/cmake/Modules/FindLibJsonSpirit.cmake"
- 
--BBCLASSEXTEND += "nativesdk"
-+BBCLASSEXTEND = "nativesdk"
-diff --git a/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb b/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
-index 3105f65..b8d1583 100644
---- a/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
-+++ b/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
-@@ -45,4 +45,4 @@ PACKAGES =+ "${@bb.utils.contains('PACKAGECONFIG', 'demos', '${PN}-demos', '', d
- FILES_${PN}-demos = "${bindir}/*"
- FILES_${PN}-dev += "${datadir}/cmake/Modules/FindLibRcf.cmake"
- 
--BBCLASSEXTEND += "nativesdk"
-+BBCLASSEXTEND = "nativesdk"
-diff --git a/meta-oe/recipes-devtools/log4cplus/log4cplus_1.2.0.bb b/meta-oe/recipes-devtools/log4cplus/log4cplus_1.2.0.bb
-index c2f5ec0..31ab9a6 100644
---- a/meta-oe/recipes-devtools/log4cplus/log4cplus_1.2.0.bb
-+++ b/meta-oe/recipes-devtools/log4cplus/log4cplus_1.2.0.bb
-@@ -12,4 +12,4 @@ SRC_URI[sha256sum] = "ad5ec3b62f2f0bdc7f06fa398bde61091fd2493e91059e17315b519742
- 
- inherit autotools pkgconfig
- 
--BBCLASSEXTEND += "native"
-+BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
-index fdd51db..67ffbc6 100644
---- a/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
-+++ b/meta-oe/recipes-extended/p7zip/p7zip_16.02.bb
-@@ -36,4 +36,4 @@ EOF
-     chmod 0755 ${D}${bindir}/7z
- }
- 
--BBCLASSEXTEND += "native"
-+BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-support/libssh2/libssh2_1.7.0.bb b/meta-oe/recipes-support/libssh2/libssh2_1.7.0.bb
-index 155d3d4..c62dab1 100644
---- a/meta-oe/recipes-support/libssh2/libssh2_1.7.0.bb
-+++ b/meta-oe/recipes-support/libssh2/libssh2_1.7.0.bb
-@@ -23,4 +23,4 @@ PACKAGECONFIG ??= "openssl"
- PACKAGECONFIG[openssl] = "--with-openssl --with-libssl-prefix=${STAGING_LIBDIR},--without-openssl,openssl"
- PACKAGECONFIG[gcrypt] = "--with-libgcrypt --with-libgcrypt-prefix=${STAGING_EXECPREFIXDIR},--without-libgcrypt,libgcrypt"
- 
--BBCLASSEXTEND += "native"
-+BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb b/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
-index 4460be2..138df9f 100644
---- a/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
-+++ b/meta-oe/recipes-support/libtinyxml/libtinyxml_2.6.2.bb
-@@ -42,4 +42,4 @@ do_install() {
-     install -m 0644 ${S}/tinyxml.h ${D}${includedir}
- }
- 
--BBCLASSEXTEND += "native"
-+BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-support/lzip/lzip_1.16.bb b/meta-oe/recipes-support/lzip/lzip_1.16.bb
-index af0b6ae..a5d9962 100644
---- a/meta-oe/recipes-support/lzip/lzip_1.16.bb
-+++ b/meta-oe/recipes-support/lzip/lzip_1.16.bb
-@@ -38,4 +38,4 @@ do_install () {
-     fi
- }
- 
--BBCLASSEXTEND += "native nativesdk"
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-setuptools-scm_1.15.0.bb b/meta-python/recipes-devtools/python/python-setuptools-scm_1.15.0.bb
-index afbc83e..08008ce 100644
---- a/meta-python/recipes-devtools/python/python-setuptools-scm_1.15.0.bb
-+++ b/meta-python/recipes-devtools/python/python-setuptools-scm_1.15.0.bb
-@@ -10,6 +10,6 @@ PYPI_PACKAGE = "setuptools_scm"
- RDEPENDS_${PN}_class-target = "python-py python-setuptools python-argparse python-debugger python-json"
- RDEPENDS_${PN}_class-native = "python-setuptools-native"
- 
--BBCLASSEXTEND =+ "native"
-+BBCLASSEXTEND = "native"
- 
- inherit pypi setuptools
-diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.bb b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.bb
-index 712c4b9..8335d08 100644
---- a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.bb
-+++ b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.bb
-@@ -24,4 +24,4 @@ inherit distutils
- RDEPENDS_${PN} += "python-stringold python-codecs python-math parted (>= 2.3)"
- RDEPENDS_${PN}_class-native = ""
- 
--BBCLASSEXTEND += "native"
-+BBCLASSEXTEND = "native"
+>
+> On Mon, Mar 13, 2017 at 4:29 AM, <kai.kang@windriver.com 
+> <mailto:kai.kang@windriver.com>> wrote:
+>
+>     From: Kai Kang <kai.kang@windriver.com
+>     <mailto:kai.kang@windriver.com>>
+>
+>     Update SRC_URIs which show qa warnings when do_fetch.
+>
+>     Kai Kang (5):
+>       fuse: update HOMEPAGE and SRC_URI
+>       curlpp: update HOMEPAGE and SRC_URI
+>       libdnet: update SRC_URI
+>       cherokee: update SRC_URI
+>       lmsensors: update SRC_URI and S
+>
+>      meta-filesystems/recipes-support/fuse/fuse_2.9.4.bb
+>     <http://fuse_2.9.4.bb>   | 6 +++---
+>      meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
+>     <http://libdnet_1.12.bb> | 8 +++++---
+>      meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
+>     <http://curlpp_0.7.3.bb>  | 8 ++++----
+>      meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
+>     <http://lmsensors_3.4.0.bb>     | 6 +++---
+>      meta-webserver/recipes-httpd/cherokee/cherokee_1.2.98.bb
+>     <http://cherokee_1.2.98.bb>  | 2 +-
+>      5 files changed, 16 insertions(+), 14 deletions(-)
+>
+>     --
+>     2.10.1
+>
+>     --
+>     _______________________________________________
+>     Openembedded-devel mailing list
+>     Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
+>
+>
+
+
 -- 
-2.7.4
+Regards,
+Neil | Kai Kang
 
 
