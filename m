@@ -1,31 +1,44 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 472B9774D9
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id F196B72F71
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Mar 2017 16:37:45 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 048BC20BAF;
-	Wed, 15 Mar 2017 16:37:47 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id co2CmwWgvESz; Wed, 15 Mar 2017 16:37:46 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id D6B1F20B0D;
-	Wed, 15 Mar 2017 16:37:45 +0000 (UTC)
-Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 9E7CB1623C7;
-	Wed, 15 Mar 2017 12:37:45 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 15 Mar 2017 16:56:18 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id b5so2877344pgg.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Mar 2017 09:56:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=8ljOlcgeLeYVIM9Ay4wGUjlHGROXFkhfOC2j9bZBRlk=;
+	b=vZXrZPyix8j5/rpB4zTtuhYoIStR0zKLJJn+A2m0+sBeT/4SX0wTVb5wNoSVGzY9w6
+	RC4D39OLHRqDTjb9emIr66VYM0/e05PgxM5E7XvIRJz2fNKq1sAjELrXUytzTrS7eFHj
+	M5hsLlWWzLu80dk341dQGXbbc1ds9FKJpeFcqPu+5exUg8+LpcJnTZqliPOVeSfyxOQq
+	WNcKtkZg8bpguUYhs63vLooMn5qkAiVuwLED68s7b7mVWszJGIoOuoW+qFSPzBLqgPJ4
+	N84T9mKJUPXyEbXe46JkQpUzaUmYDjCeJNev23dNheftQ35/TAUBm1b0D+W3FN0sKZUC
+	piWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=8ljOlcgeLeYVIM9Ay4wGUjlHGROXFkhfOC2j9bZBRlk=;
+	b=PqNpfT9E498nxQUJReCgnN7WOSuzmn3922hDRbt/Q2M+8Om9ICAs+Dq5oevg5q4g28
+	6gSCQ9HQqqiTQ4YXIpDYmnfKW7pUjRsYTxXkfQqKB2nwpZDDEdYp5Yudlte0lO6gIt/v
+	ZqbxNTX10m4u1Ax6gECx6dSt3pWg20dvD73QLAawo0yVwl79SZ1LpTXd6DJseqI/d1qc
+	VbXphXxj2Bd+KV7jYNx3w76rTNLA/luc4N2KHTgMa7/NE2ita9dLpRyl9DI/rjUvO0Ih
+	MB5WEEDNbhbzkGe/9HdN0KqRyXTd3paGS13pf2BruKflVG9qAkFy4z+i65ASH8lH7k5V
+	eydQ==
+X-Gm-Message-State: AFeK/H0su6wWo0wbatXMFqkd2ZvbYa7sjh9x5Ln2qIoVqSFX4MXirLpC6ELqUxsp/ZaZrg==
+X-Received: by 10.98.153.198 with SMTP id t67mr4905968pfk.1.1489596979704;
+	Wed, 15 Mar 2017 09:56:19 -0700 (PDT)
+Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192])
+	by smtp.gmail.com with ESMTPSA id m21sm5468743pgh.4.2017.03.15.09.56.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 15 Mar 2017 09:56:18 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Mar 2017 12:37:44 -0400
-Message-Id: <1489595864-29024-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [meta-qt5][morty][PATCH] nativesdk-qtbase: pass -no-icu for deterministic builds
+Date: Wed, 15 Mar 2017 09:56:11 -0700
+Message-Id: <20170315165611.27320-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.12.0
+Subject: [meta-xfce][PATCH] core-image-minimal-xfce: Drop ROOTFS_PKGMANAGE_BOOTSTRAP
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,36 +51,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Mar 2017 16:37:46 -0000
+X-List-Received-Date: Wed, 15 Mar 2017 16:56:19 -0000
 
-From: Denys Dmytriyenko <denys@ti.com>
+OE-Core has now dropped this var
 
-Similar to qtbase-native. Otherwise it may fail with this error,
-if icu is not yet staged:
-
-| .../git/src/corelib/codecs/qicucodec.cpp:53:26: fatal error: unicode/ucnv.h: No such file or directory
-|   #include "unicode/ucnv.h"
-|                            ^
-|  compilation terminated.
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-qt/qt5/nativesdk-qtbase_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-xfce/recipes-core/images/core-image-minimal-xfce.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-index 47e204b..6be7aa8 100644
---- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
-+++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-@@ -175,6 +175,7 @@ do_configure() {
-         -no-opengl \
-         -no-openssl \
-         -no-xcb \
-+        -no-icu \
-         -verbose \
-         -release \
-         -prefix ${OE_QMAKE_PATH_PREFIX} \
+diff --git a/meta-xfce/recipes-core/images/core-image-minimal-xfce.bb b/meta-xfce/recipes-core/images/core-image-minimal-xfce.bb
+index a683c2dd4..f5c5c26ae 100644
+--- a/meta-xfce/recipes-core/images/core-image-minimal-xfce.bb
++++ b/meta-xfce/recipes-core/images/core-image-minimal-xfce.bb
+@@ -1,7 +1,6 @@
+ DESCRIPTION = "A XFCE minimal demo image."
+ 
+ IMAGE_INSTALL = "packagegroup-core-boot \
+-    ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
+     packagegroup-core-x11 \
+     packagegroup-xfce-base \
+     kernel-modules \
 -- 
-2.7.4
+2.12.0
 
 
