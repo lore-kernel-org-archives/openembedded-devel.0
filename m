@@ -1,44 +1,45 @@
-Return-Path: <olof.johansson@axis.com>
-Received: from bes.se.axis.com (bes.se.axis.com [195.60.68.10])
-	by mail.openembedded.org (Postfix) with ESMTP id 9AA72606A8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id C6BB560043
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Mar 2017 16:19:55 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bes.se.axis.com (Postfix) with ESMTP id DFB822E621;
-	Thu, 16 Mar 2017 17:19:55 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at bes.se.axis.com
-Received: from bes.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bes.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id S55--liB9D32; Thu, 16 Mar 2017 17:19:55 +0100 (CET)
-Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
-	by bes.se.axis.com (Postfix) with ESMTPS id 005F42E61F;
-	Thu, 16 Mar 2017 17:19:55 +0100 (CET)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id E47EE1E0B5;
-	Thu, 16 Mar 2017 17:19:54 +0100 (CET)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id D95CC1E0B4;
-	Thu, 16 Mar 2017 17:19:54 +0100 (CET)
-Received: from thoth.se.axis.com (unknown [10.0.2.173])
-	by boulder03.se.axis.com (Postfix) with ESMTP;
-	Thu, 16 Mar 2017 17:19:54 +0100 (CET)
-Received: from lnxolofjn.se.axis.com (lnxolofjn.se.axis.com [10.92.17.1])
-	by thoth.se.axis.com (Postfix) with ESMTP id CD32FEBA;
-	Thu, 16 Mar 2017 17:19:54 +0100 (CET)
-Received: by lnxolofjn.se.axis.com (Postfix, from userid 20466)
-	id 4C33E9C09F; Thu, 16 Mar 2017 17:19:56 +0100 (CET)
-Date: Thu, 16 Mar 2017 17:19:56 +0100
-From: Olof Johansson <olof.johansson@axis.com>
+	Thu, 16 Mar 2017 16:40:57 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id u108so6601432wrb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Mar 2017 09:40:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=IaHUJO33qAIL3rGsreh5xBBKPxX3r8+EZZJkrzoUUOs=;
+	b=Oyn7zjwB37QyYJbM1eGZ1DZnFY/1rezr4S5PeQ/JRJakgf0Jte/6lTii4GZEuXl8kI
+	tKleLq3s+kwDPYDIpxeAPZiE1jfWoFypE1cozozOdftvuoITfI4m79L27HPR7P0NVtAF
+	Wmi9sRh3YXFv/b9GfQUb43KuI+lwgzJE7fsGRZ8ysB/VOZICmuZt2omQsF8cKW5HnlOh
+	bP8GIiz0PNEnc95ue0ZYpYkigtZzMVmSA2z+lwb7KispmJc74/ERVkBq7KL41E9fKVVL
+	hi0ESMKOBvdGcsDSpld6/DsaiXXhyPUPeCXwT/0rdGTYBL3HIzmeuNHeS17YoNoGZaqE
+	Qdfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=IaHUJO33qAIL3rGsreh5xBBKPxX3r8+EZZJkrzoUUOs=;
+	b=Uagy3nYi0aLToCn3EukpvWJi9T9xus+N2yZQaO2lf74PLlAz+CjpVTSDXeA8UkwtZx
+	gcod7FzPdGwSJBQ/sx7tHmMA52bKvFWps4cr8c8R5urvSoDN/7fv9Vn8pZidtnckIR+t
+	NDluhV/lBB1csbkYlmfR2rQFmuFYUCeeZMWkhRQ8K9rMxE9EMNWur3a1tPGM75ZYhF6t
+	yE4nRgijucuHyjzqVZRYUxTMoJP4b1iXEXWAnG/jV3GMNQKDWzKCOgbwyvpzfcCgpGGB
+	jU0zA/mvd9m3povgYFpsfR1xiEf6wBwDK0GSmE45SdBpYJspJ5bRsy69myDNeJcKbQc3
+	cn2Q==
+X-Gm-Message-State: AFeK/H32lZvLpK0R9ZL6HDNI5WTGLBZ5apK+j47EQUyv/zQsqbd0cFq+JcBLTjKoRZh+xA==
+X-Received: by 10.223.135.47 with SMTP id a44mr9758056wra.197.1489682458107;
+	Thu, 16 Mar 2017 09:40:58 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	w207sm4934336wmw.1.2017.03.16.09.40.57
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 16 Mar 2017 09:40:57 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170316161955.GM1178@axis.com>
-References: <1484904671-9257-1-git-send-email-olofjn@axis.com>
-	<20170207125411.GQ31993@axis.com>
-MIME-Version: 1.0
-In-Reply-To: <20170207125411.GQ31993@axis.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-X-TM-AS-GCONF: 00
-Subject: Re: [meta-webserver][krogoth][PATCH] apache2: always use the archive.apache.org to ensure older releases are always available
+Date: Thu, 16 Mar 2017 17:40:54 +0100
+Message-Id: <20170316164056.15895-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.12.0
+Subject: [PATCH][meta-oe 1/3] scsirastools: add dependency on groff-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,27 +52,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Mar 2017 16:19:56 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 16 Mar 2017 16:40:58 -0000
 
-> On 17-01-20 10:31 +0100, Olof Johansson wrote:
-> > From: Derek Straka <derek@asterius.io>
-> > 
-> > Signed-off-by: Derek Straka <derek@asterius.io>
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > Signed-off-by: Olof Johansson <olofjn@axis.com>
-> > ---
-> >  meta-webserver/recipes-httpd/apache2/apache2-native_2.4.23.bb | 2 +-
-> >  meta-webserver/recipes-httpd/apache2/apache2_2.4.23.bb        | 2 +-
-> >  2 files changed, 2 insertions(+), 2 deletions(-)
+* calls nroff
 
-On 17-02-07 13:54 +0100, Olof Johansson wrote:
-> Ping
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-extended/scsirastools/scsirastools_1.6.4.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Ping again? :) Both concering this patch and the corresponding
-backport for morty.
-
+diff --git a/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.4.bb b/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.4.bb
+index c64bd9269..d0c36e472 100644
+--- a/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.4.bb
++++ b/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.4.bb
+@@ -8,6 +8,8 @@ HOMEPAGE = "http://scsirastools.sourceforge.net/"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=687ea108478d26152ae46eb29d9d1545"
+ 
++DEPENDS += "groff-native"
++
+ SRC_URI = "http://prdownloads.sourceforge.net/scsirastools/scsirastools-${PV}.tar.gz"
+ SRC_URI[md5sum] = "2d775111b62e2dfc1960a722f5fda211"
+ SRC_URI[sha256sum] = "38d2c6c9b04a2c594e528927b950754f94c0522718d17c78e6589ba778339bf8"
 -- 
-olofjn
+2.12.0
+
 
