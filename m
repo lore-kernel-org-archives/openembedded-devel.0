@@ -1,44 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id F196B72F71
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D90C771A23
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Mar 2017 16:56:18 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id b5so2877344pgg.1
+	Thu, 16 Mar 2017 08:50:22 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v2G8oMQB000766
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Mar 2017 09:56:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=8ljOlcgeLeYVIM9Ay4wGUjlHGROXFkhfOC2j9bZBRlk=;
-	b=vZXrZPyix8j5/rpB4zTtuhYoIStR0zKLJJn+A2m0+sBeT/4SX0wTVb5wNoSVGzY9w6
-	RC4D39OLHRqDTjb9emIr66VYM0/e05PgxM5E7XvIRJz2fNKq1sAjELrXUytzTrS7eFHj
-	M5hsLlWWzLu80dk341dQGXbbc1ds9FKJpeFcqPu+5exUg8+LpcJnTZqliPOVeSfyxOQq
-	WNcKtkZg8bpguUYhs63vLooMn5qkAiVuwLED68s7b7mVWszJGIoOuoW+qFSPzBLqgPJ4
-	N84T9mKJUPXyEbXe46JkQpUzaUmYDjCeJNev23dNheftQ35/TAUBm1b0D+W3FN0sKZUC
-	piWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=8ljOlcgeLeYVIM9Ay4wGUjlHGROXFkhfOC2j9bZBRlk=;
-	b=PqNpfT9E498nxQUJReCgnN7WOSuzmn3922hDRbt/Q2M+8Om9ICAs+Dq5oevg5q4g28
-	6gSCQ9HQqqiTQ4YXIpDYmnfKW7pUjRsYTxXkfQqKB2nwpZDDEdYp5Yudlte0lO6gIt/v
-	ZqbxNTX10m4u1Ax6gECx6dSt3pWg20dvD73QLAawo0yVwl79SZ1LpTXd6DJseqI/d1qc
-	VbXphXxj2Bd+KV7jYNx3w76rTNLA/luc4N2KHTgMa7/NE2ita9dLpRyl9DI/rjUvO0Ih
-	MB5WEEDNbhbzkGe/9HdN0KqRyXTd3paGS13pf2BruKflVG9qAkFy4z+i65ASH8lH7k5V
-	eydQ==
-X-Gm-Message-State: AFeK/H0su6wWo0wbatXMFqkd2ZvbYa7sjh9x5Ln2qIoVqSFX4MXirLpC6ELqUxsp/ZaZrg==
-X-Received: by 10.98.153.198 with SMTP id t67mr4905968pfk.1.1489596979704;
-	Wed, 15 Mar 2017 09:56:19 -0700 (PDT)
-Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
-	[76.102.32.192])
-	by smtp.gmail.com with ESMTPSA id m21sm5468743pgh.4.2017.03.15.09.56.18
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 15 Mar 2017 09:56:18 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Mar 2017 09:56:11 -0700
-Message-Id: <20170315165611.27320-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.12.0
-Subject: [meta-xfce][PATCH] core-image-minimal-xfce: Drop ROOTFS_PKGMANAGE_BOOTSTRAP
+	Thu, 16 Mar 2017 01:50:23 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Thu, 16 Mar 2017 01:50:22 -0700
+From: Chen Qi <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 16 Mar 2017 16:40:53 +0800
+Message-ID: <20170316084053.26807-1-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.8.3
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] gperftools: fix do_compile failure for qemuppc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,28 +31,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Mar 2017 16:56:19 -0000
+X-List-Received-Date: Thu, 16 Mar 2017 08:50:24 -0000
+Content-Type: text/plain
 
-OE-Core has now dropped this var
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- meta-xfce/recipes-core/images/core-image-minimal-xfce.bb | 1 -
- 1 file changed, 1 deletion(-)
+ .../files/0001-Fix-build-failure-for-ppc.patch     | 28 ++++++++++++++++++++++
+ .../recipes-support/gperftools/gperftools_2.5.bb   |  3 ++-
+ 2 files changed, 30 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/gperftools/files/0001-Fix-build-failure-for-ppc.patch
 
-diff --git a/meta-xfce/recipes-core/images/core-image-minimal-xfce.bb b/meta-xfce/recipes-core/images/core-image-minimal-xfce.bb
-index a683c2dd4..f5c5c26ae 100644
---- a/meta-xfce/recipes-core/images/core-image-minimal-xfce.bb
-+++ b/meta-xfce/recipes-core/images/core-image-minimal-xfce.bb
-@@ -1,7 +1,6 @@
- DESCRIPTION = "A XFCE minimal demo image."
+diff --git a/meta-oe/recipes-support/gperftools/files/0001-Fix-build-failure-for-ppc.patch b/meta-oe/recipes-support/gperftools/files/0001-Fix-build-failure-for-ppc.patch
+new file mode 100644
+index 0000000..27f855d
+--- /dev/null
++++ b/meta-oe/recipes-support/gperftools/files/0001-Fix-build-failure-for-ppc.patch
+@@ -0,0 +1,28 @@
++Subject: Fix build failure for ppc
++
++Upstream-Status: Pending
++
++Fix the following build failure.
++
++  error: 'siginfo_t' does not name a type
++
++Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
++---
++ src/stacktrace_powerpc-linux-inl.h | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/src/stacktrace_powerpc-linux-inl.h b/src/stacktrace_powerpc-linux-inl.h
++index 5d16fa1..a9bf775 100644
++--- a/src/stacktrace_powerpc-linux-inl.h
+++++ b/src/stacktrace_powerpc-linux-inl.h
++@@ -44,6 +44,7 @@
++ 
++ #include <stdint.h>   // for uintptr_t
++ #include <stdlib.h>   // for NULL
+++#include <signal.h>   // for siginfo_t
++ #include <gperftools/stacktrace.h>
++ #include <base/vdso_support.h>
++ 
++-- 
++2.8.3
++
+diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.5.bb b/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
+index 2e4479c..64766c6 100644
+--- a/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
++++ b/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
+@@ -4,7 +4,8 @@ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
+ DEPENDS = "libunwind"
  
- IMAGE_INSTALL = "packagegroup-core-boot \
--    ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
-     packagegroup-core-x11 \
-     packagegroup-xfce-base \
-     kernel-modules \
+-SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/gperftools/gperftools-2.5.tar.gz/aa1eaf95dbe2c9828d0bd3a00f770f50/gperftools-2.5.tar.gz"
++SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/gperftools/gperftools-2.5.tar.gz/aa1eaf95dbe2c9828d0bd3a00f770f50/gperftools-2.5.tar.gz \
++           file://0001-Fix-build-failure-for-ppc.patch"
+ 
+ SRC_URI[md5sum] = "aa1eaf95dbe2c9828d0bd3a00f770f50"
+ SRC_URI[sha256sum] = "6fa2748f1acdf44d750253e160cf6e2e72571329b42e563b455bde09e9e85173"
 -- 
-2.12.0
+2.8.3
 
 
