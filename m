@@ -1,26 +1,54 @@
-Return-Path: <Paul.Gortmaker@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E00227769A
+Return-Path: <patrick.ohly@intel.com>
+Received: from mail-it0-f53.google.com (mail-it0-f53.google.com
+	[209.85.214.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 6BF137769E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Mar 2017 14:30:00 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v2GEU0Tj009340
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Thu, 16 Mar 2017 15:42:36 +0000 (UTC)
+Received: by mail-it0-f53.google.com with SMTP id m27so48421379iti.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Mar 2017 07:30:01 -0700
-Received: from yow-cube1.wrs.com (128.224.56.98) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 16 Mar 2017 07:30:00 -0700
-From: Paul Gortmaker <paul.gortmaker@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 16 Mar 2017 10:29:52 -0400
-Message-ID: <1489674593-21677-3-git-send-email-paul.gortmaker@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1489674593-21677-1-git-send-email-paul.gortmaker@windriver.com>
-References: <1489674593-21677-1-git-send-email-paul.gortmaker@windriver.com>
-MIME-Version: 1.0
-Subject: [PATCH 2/3] eject: use update-alternatives for manpage
+	Thu, 16 Mar 2017 08:42:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=message-id:subject:from:to:date:in-reply-to:references:organization
+	:mime-version:content-transfer-encoding;
+	bh=+8r57kwCgoYdSQLOEUSAo05nA8tFHWPcuzn4jnY+DVU=;
+	b=oxT2xmh5hs+8nHa3OC8EIYLK4xXc8r2VGA16eAD2tJmcFgtJsbqrjLlrtXCpvC71uc
+	jxHhK5HLpiMuB5tk9dZbhA6w0jDvnQFnM/bobgrpXk+WXIohW51aWM/xaCctqih8ukaM
+	HbgoQL9ATryGl5kaune9D7WJDMK08Dlybenv2/t0yzwOJixoEcWHH6qaJRkg585kTkWm
+	emnSqlCh08xQRMOBxf2XidM/fmRx/LsrLLegujVCmvAm4KPmoAvP2FyYvs6RW2Wm5mFv
+	cmDz8sfY7mlLxHfG6I1/B23Pb1pQG34qY3+3HssYDyg0BW378CMKTK0FbAZ9CO6EMota
+	7exw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+	:references:organization:mime-version:content-transfer-encoding;
+	bh=+8r57kwCgoYdSQLOEUSAo05nA8tFHWPcuzn4jnY+DVU=;
+	b=PNERHmZCuoRJLZwHmgWfdnHdtUEm0zdrM+zt61Oxk1ClmaBZr45bZ+nypBNF4t4eo5
+	ALNtNNKxZISGP9IBNrQ80bOVMsyJTp54bBniDcBPx5D72+4/hOmPVsZzynPlhryKAAeL
+	0SislN6RFNkzZ7h7LrDD4CR+7dOdARqNWzSNsNpuUSTtcfCbNQBgBt+dUtKL0juN0TM3
+	ETNkavbUs3c6aoqmiVEkmMViaIc4d7MnRDmOzkJAhHoTQ9Ua9Dmo428FIzDb3vj9N2zX
+	skAzUcQy7TyXYbk8WO1dk0iqDhF3XnB7ncUcaU/nZjwZYcOBdcAI14l/tGTmbk2wlP36
+	Yw9w==
+X-Gm-Message-State: AFeK/H0E1fMGV1FJzJKMoWiEl/7fL/m9w2P/D6B8EXFdHxaMZqf2IaU0ntlt6wNchRDjTrcJ
+X-Received: by 10.36.213.196 with SMTP id a187mr25777578itg.4.1489678957070;
+	Thu, 16 Mar 2017 08:42:37 -0700 (PDT)
+Received: from pohly-mobl1 (p5DE8DCA9.dip0.t-ipconnect.de. [93.232.220.169])
+	by smtp.gmail.com with ESMTPSA id
+	z204sm3109397iod.3.2017.03.16.08.42.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 16 Mar 2017 08:42:35 -0700 (PDT)
+Message-ID: <1489678953.6396.121.camel@intel.com>
+From: Patrick Ohly <patrick.ohly@intel.com>
+To: openembedded-devel@lists.openembedded.org, Peter Kjellerstedt
+	<peter.kjellerstedt@axis.com>
+Date: Thu, 16 Mar 2017 16:42:33 +0100
+In-Reply-To: <20170218021012.31978-8-pkj@axis.com>
+References: <20170218021012.31978-1-pkj@axis.com>
+	<20170218021012.31978-8-pkj@axis.com>
+Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
+X-Mailer: Evolution 3.12.9-1+b1 
+Mime-Version: 1.0
+Subject: Re: [meta-oe][PATCH 8/8] lvm2: Move libdevmapper to a separate package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,30 +61,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Mar 2017 14:30:01 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 16 Mar 2017 15:42:36 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-To fix:
+On Sat, 2017-02-18 at 03:10 +0100, Peter Kjellerstedt wrote:
+> This allows, e.g., cryptsetup to use libdevmapper without having to
+> pull in all of lvm2.
 
-   file /usr/share/man/man1/eject.1 conflicts between attempted installs
-   of util-linux-doc-2.29.1-r0.core2_64 and eject-doc-2.1.5-r1.core2_64
+I'm experiencing an issue where both kpartx and cryptsetup hang
+infinitely. For kpartx, I traced it down to the lack of dmsetup udev
+rules in the rootfs, the same problem as in
+https://github.com/docker/docker/issues/22025#issuecomment-243943728
 
-Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
----
- meta-oe/recipes-support/eject/eject_2.1.5.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Adding lvm2 to my image fixed it, but that defeats the purpose of this
+patch... ;-}
 
-diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bb b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-index 0440f0c37075..49a3d74f6fcd 100644
---- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
-+++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
-@@ -33,3 +33,5 @@ ALTERNATIVE_LINK_NAME[eject] = "${bindir}/eject"
- ALTERNATIVE_PRIORITY[volname] = "100"
- ALTERNATIVE_PRIORITY[eject] = "100"
- 
-+ALTERNATIVE_${PN}-doc = "eject.1"
-+ALTERNATIVE_LINK_NAME[eject.1] = "${mandir}/man1/eject.1"
+Peter, do you know which parts of lvm2 are needed for kpartx
++libdevicemapper to work correctly? My initial attempt with moving just
+the udev rules to the libdevicemapper packages was either flawed or
+incomplete.
+
 -- 
-2.7.4
+Best Regards, Patrick Ohly
+
+The content of this message is my personal opinion only and although
+I am an employee of Intel, the statements I make here in no way
+represent Intel's position on the issue, nor am I authorized to speak
+on behalf of Intel on this matter.
+
+
 
 
