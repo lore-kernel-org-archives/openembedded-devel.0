@@ -1,26 +1,26 @@
 Return-Path: <Paul.Gortmaker@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id CCAD87768A
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E00227769A
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 16 Mar 2017 14:30:00 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v2GEU2O8008389
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v2GEU0Tj009340
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Mar 2017 07:30:02 -0700 (PDT)
+	Thu, 16 Mar 2017 07:30:01 -0700
 Received: from yow-cube1.wrs.com (128.224.56.98) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 16 Mar 2017 07:30:01 -0700
+	Thu, 16 Mar 2017 07:30:00 -0700
 From: Paul Gortmaker <paul.gortmaker@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 16 Mar 2017 10:29:53 -0400
-Message-ID: <1489674593-21677-4-git-send-email-paul.gortmaker@windriver.com>
+Date: Thu, 16 Mar 2017 10:29:52 -0400
+Message-ID: <1489674593-21677-3-git-send-email-paul.gortmaker@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1489674593-21677-1-git-send-email-paul.gortmaker@windriver.com>
 References: <1489674593-21677-1-git-send-email-paul.gortmaker@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 3/3] inetutils: use update-alternatives for more manpages
+Subject: [PATCH 2/3] eject: use update-alternatives for manpage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,37 +38,24 @@ Content-Type: text/plain
 
 To fix:
 
-   file /usr/share/man/man1/dnsdomainname.1 conflicts between attempted installs
-   of inetutils-doc-1.9.4-r0.core2_64 and net-tools-doc-1.60+26-r0.core2_64
-
-   file /usr/share/man/man8/syslogd.8 conflicts between attempted installs
-   of inetutils-doc-1.9.4-r0.core2_64 and sysklogd-doc-1.5.1-r0.core2_64
-
-   file /usr/share/man/man1/logger.1 conflicts between attempted installs
-   of util-linux-doc-2.29.1-r0.core2_64 and inetutils-doc-1.9.4-r0.core2_64
+   file /usr/share/man/man1/eject.1 conflicts between attempted installs
+   of util-linux-doc-2.29.1-r0.core2_64 and eject-doc-2.1.5-r1.core2_64
 
 Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
 ---
- meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/eject/eject_2.1.5.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
-index 9a065c3f47a9..55eb137ee841 100644
---- a/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
-+++ b/meta-networking/recipes-connectivity/inetutils/inetutils_1.9.4.bb
-@@ -144,8 +144,11 @@ ALTERNATIVE_${PN}-traceroute = "traceroute"
- ALTERNATIVE_${PN}-hostname = "hostname"
- ALTERNATIVE_LINK_NAME[hostname]  = "${base_bindir}/hostname"
+diff --git a/meta-oe/recipes-support/eject/eject_2.1.5.bb b/meta-oe/recipes-support/eject/eject_2.1.5.bb
+index 0440f0c37075..49a3d74f6fcd 100644
+--- a/meta-oe/recipes-support/eject/eject_2.1.5.bb
++++ b/meta-oe/recipes-support/eject/eject_2.1.5.bb
+@@ -33,3 +33,5 @@ ALTERNATIVE_LINK_NAME[eject] = "${bindir}/eject"
+ ALTERNATIVE_PRIORITY[volname] = "100"
+ ALTERNATIVE_PRIORITY[eject] = "100"
  
--ALTERNATIVE_${PN}-doc = "hostname.1"
-+ALTERNATIVE_${PN}-doc = "hostname.1 dnsdomainname.1 logger.1 syslogd.8"
- ALTERNATIVE_LINK_NAME[hostname.1] = "${mandir}/man1/hostname.1"
-+ALTERNATIVE_LINK_NAME[dnsdomainname.1] = "${mandir}/man1/dnsdomainname.1"
-+ALTERNATIVE_LINK_NAME[logger.1] = "${mandir}/man1/logger.1"
-+ALTERNATIVE_LINK_NAME[syslogd.8] = "${mandir}/man8/syslogd.8"
- 
- ALTERNATIVE_${PN}-ifconfig = "ifconfig"
- ALTERNATIVE_LINK_NAME[ifconfig]  = "${base_sbindir}/ifconfig"
++ALTERNATIVE_${PN}-doc = "eject.1"
++ALTERNATIVE_LINK_NAME[eject.1] = "${mandir}/man1/eject.1"
 -- 
 2.7.4
 
