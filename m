@@ -1,24 +1,22 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 18C0A77952
+Return-Path: <pascal.bach@siemens.com>
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+	by mail.openembedded.org (Postfix) with ESMTP id CCA86779BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Mar 2017 03:32:30 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v2H3WUZ0007643
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 17 Mar 2017 06:04:27 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id v2H64OpG022493
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Mar 2017 20:32:31 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Thu, 16 Mar 2017 20:32:30 -0700
-From: Chen Qi <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 17 Mar 2017 11:22:58 +0800
-Message-ID: <20170317032258.6793-1-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 2.8.3
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH V2] gperftools: fix do_compile failure for qemuppc
+	Fri, 17 Mar 2017 07:04:25 +0100
+Received: from dev.sbt.siemens.com ([132.186.201.60])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id v2H64Nw6026233;
+	Fri, 17 Mar 2017 07:04:24 +0100
+From: Pascal Bach <pascal.bach@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 17 Mar 2017 07:04:19 +0100
+Message-Id: <1489730659-8336-1-git-send-email-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-webserver][PATCH] nginx: make user in nginx.conf consistent with the default value
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,69 +29,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Mar 2017 03:32:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 17 Mar 2017 06:04:28 -0000
 
-Fix the following error for qemuppc.
+It gets replaces with the real NGINX_USER anyway, but it confuses people
+that there is a different value by default. So just make it the same as the
+default NGINX_USER
 
-  error: 'siginfo_t' does not name a type
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
 ---
- .../0001-Fix-build-failure-for-ppc.patch           | 28 ++++++++++++++++++++++
- .../recipes-support/gperftools/gperftools_2.5.bb   |  3 ++-
- 2 files changed, 30 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/gperftools/gperftools/0001-Fix-build-failure-for-ppc.patch
+ meta-webserver/recipes-httpd/nginx/files/nginx.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/gperftools/gperftools/0001-Fix-build-failure-for-ppc.patch b/meta-oe/recipes-support/gperftools/gperftools/0001-Fix-build-failure-for-ppc.patch
-new file mode 100644
-index 0000000..27f855d
---- /dev/null
-+++ b/meta-oe/recipes-support/gperftools/gperftools/0001-Fix-build-failure-for-ppc.patch
-@@ -0,0 +1,28 @@
-+Subject: Fix build failure for ppc
-+
-+Upstream-Status: Pending
-+
-+Fix the following build failure.
-+
-+  error: 'siginfo_t' does not name a type
-+
-+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-+---
-+ src/stacktrace_powerpc-linux-inl.h | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/src/stacktrace_powerpc-linux-inl.h b/src/stacktrace_powerpc-linux-inl.h
-+index 5d16fa1..a9bf775 100644
-+--- a/src/stacktrace_powerpc-linux-inl.h
-++++ b/src/stacktrace_powerpc-linux-inl.h
-+@@ -44,6 +44,7 @@
-+ 
-+ #include <stdint.h>   // for uintptr_t
-+ #include <stdlib.h>   // for NULL
-++#include <signal.h>   // for siginfo_t
-+ #include <gperftools/stacktrace.h>
-+ #include <base/vdso_support.h>
-+ 
-+-- 
-+2.8.3
-+
-diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.5.bb b/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
-index 3cab423..15cfc97 100644
---- a/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
-+++ b/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
-@@ -5,7 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
- DEPENDS = "libunwind"
+diff --git a/meta-webserver/recipes-httpd/nginx/files/nginx.conf b/meta-webserver/recipes-httpd/nginx/files/nginx.conf
+index fb7e4b6..69d3a2a 100644
+--- a/meta-webserver/recipes-httpd/nginx/files/nginx.conf
++++ b/meta-webserver/recipes-httpd/nginx/files/nginx.conf
+@@ -1,5 +1,5 @@
  
- SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/gperftools/gperftools-2.5.tar.gz/aa1eaf95dbe2c9828d0bd3a00f770f50/gperftools-2.5.tar.gz \
--           file://0001-Support-Atomic-ops-on-clang.patch\
-+           file://0001-Support-Atomic-ops-on-clang.patch \
-+           file://0001-Fix-build-failure-for-ppc.patch \
-           "
+-user  www-data;
++user  www;
+ worker_processes  1;
  
- SRC_URI[md5sum] = "aa1eaf95dbe2c9828d0bd3a00f770f50"
+ error_log  /var/log/nginx/error.log;
 -- 
-2.8.3
+2.1.4
 
 
