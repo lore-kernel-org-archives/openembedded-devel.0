@@ -1,22 +1,26 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
-	by mail.openembedded.org (Postfix) with ESMTP id CCA86779BF
+Return-Path: <maxin.john@intel.com>
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 2EE7777A4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Mar 2017 06:04:27 +0000 (UTC)
-Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id v2H64OpG022493
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Mar 2017 07:04:25 +0100
-Received: from dev.sbt.siemens.com ([132.186.201.60])
-	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id v2H64Nw6026233;
-	Fri, 17 Mar 2017 07:04:24 +0100
-From: Pascal Bach <pascal.bach@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 17 Mar 2017 07:04:19 +0100
-Message-Id: <1489730659-8336-1-git-send-email-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-webserver][PATCH] nginx: make user in nginx.conf consistent with the default value
+	Fri, 17 Mar 2017 13:44:20 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by fmsmga105.fm.intel.com with ESMTP; 17 Mar 2017 06:44:16 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.36,176,1486454400"; d="scan'208";a="1109548248"
+Received: from mbabyjoh-desk.fi.intel.com (HELO
+	mbabyjoh-desk.ger.corp.intel.com) ([10.237.72.71])
+	by orsmga001.jf.intel.com with ESMTP; 17 Mar 2017 06:44:15 -0700
+Date: Fri, 17 Mar 2017 15:44:04 +0200
+From: "Maxin B. John" <maxin.john@intel.com>
+To: Dan McGregor <danismostlikely@gmail.com>
+Message-ID: <20170317134404.GA21032@mbabyjoh-desk.ger.corp.intel.com>
+References: <1489396937-21461-1-git-send-email-maxin.john@intel.com>
+	<CACS+7ZT=qTVr=mhaG97YCyPOps4mOhcSS6=g6CPs=BEpSHna9w@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CACS+7ZT=qTVr=mhaG97YCyPOps4mOhcSS6=g6CPs=BEpSHna9w@mail.gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java][PATCH] jikes: fix absolute symlink error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,29 +33,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Mar 2017 06:04:28 -0000
+X-List-Received-Date: Fri, 17 Mar 2017 13:44:21 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-It gets replaces with the real NGINX_USER anyway, but it confuses people
-that there is a different value by default. So just make it the same as the
-default NGINX_USER
+Hi Dan,
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
----
- meta-webserver/recipes-httpd/nginx/files/nginx.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Thu, Mar 16, 2017 at 10:42:43AM -0600, Dan McGregor wrote:
+> On 13 March 2017 at 03:22, Maxin B. John <maxin.john@intel.com> wrote:
+> > The following oe-core commit made asbolute symlink an error:
+> >
+> > commit 3eee8e99e114b3db8b718834ca52da8d2919b83f
+> > sstate: Make absolute symlinks an error
+> >
+> > Fix this by inheritting relative_symlinks class:
+> > ERROR: jikes-native-1.22-r0 do_populate_sysroot: sstate found an
+> > absolute path symlink
+> >
+> > Signed-off-by: Maxin B. John <maxin.john@intel.com>
+> > ---
+> >  recipes-core/jikes/jikes_1.22.bb | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/recipes-core/jikes/jikes_1.22.bb b/recipes-core/jikes/jikes_1.22.bb
+> > index 0c33118..a35cfcf 100644
+> > --- a/recipes-core/jikes/jikes_1.22.bb
+> > +++ b/recipes-core/jikes/jikes_1.22.bb
+> > @@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
+> >                     "
+> >  SRC_URI = "${SOURCEFORGE_MIRROR}/jikes/jikes-${PV}.tar.bz2"
+> >
+> > -inherit autotools update-alternatives
+> > +inherit autotools update-alternatives relative_symlinks
+> >
+> >  BBCLASSEXTEND = "native"
+> >
+> > --
+> > 2.4.0
+> >
+> 
+> This change makes the layer depend on master, not krogoth or master
+> like the README says. Should we add the relative_symlinks
+> functionality locally, or update the README?
 
-diff --git a/meta-webserver/recipes-httpd/nginx/files/nginx.conf b/meta-webserver/recipes-httpd/nginx/files/nginx.conf
-index fb7e4b6..69d3a2a 100644
---- a/meta-webserver/recipes-httpd/nginx/files/nginx.conf
-+++ b/meta-webserver/recipes-httpd/nginx/files/nginx.conf
-@@ -1,5 +1,5 @@
- 
--user  www-data;
-+user  www;
- worker_processes  1;
- 
- error_log  /var/log/nginx/error.log;
--- 
-2.1.4
+You are right. This functionality depends on the master branch. It also
+reminds me that meta-java has been particularly bad in keeping up with 
+branching of oe-core releases.
 
+I have been testing some patches to remove "meta-oe" dependency for
+"meta-java" layer (PACKAGECONFIG way). Will update README along that
+patchset. Hope that is ok.
+
+Best Regards,
+Maxin
 
