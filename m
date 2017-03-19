@@ -1,20 +1,14 @@
 Return-Path: <cshored@cshore.thecshore.com>
 Received: from s2.neomailbox.net (s2.neomailbox.net [5.148.176.60])
-	by mail.openembedded.org (Postfix) with ESMTP id 757E177722
+	by mail.openembedded.org (Postfix) with ESMTP id F1D9071CBF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Mar 2017 02:05:54 +0000 (UTC)
-Date: Fri, 17 Mar 2017 22:05:48 -0400
+	Sun, 19 Mar 2017 04:28:41 +0000 (UTC)
+Date: Sun, 19 Mar 2017 00:28:34 -0400
 From: Daniel Dickinson <cshored@cshore.thecshore.com>
-To: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <20170317220548.63e02af1@danielf.thecshore.com>
-In-Reply-To: <b4944c00-931c-e1bd-9986-e112f282f694@mlbassoc.com>
-References: <20170317195837.0b473d7f@danielf.thecshore.com>
-	<5dc25f13-e292-aa04-13d6-0e33351bf169@mlbassoc.com>
-	<20170317213219.0b0ec5a5@danielf.thecshore.com>
-	<b4944c00-931c-e1bd-9986-e112f282f694@mlbassoc.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20170319002834.17953566@danielf.thecshore.com>
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Submitted layers: build errors not seen on manual bitbake
+Subject: OpenEmbedded Layer Index autobuild errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,100 +21,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Mar 2017 02:05:56 -0000
+X-List-Received-Date: Sun, 19 Mar 2017 04:28:42 -0000
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On Sat, 18 Mar 2017 02:57:17 +0100
-Gary Thomas <gary@mlbassoc.com> wrote:
+Hi,
 
-> On 2017-03-18 02:32, Daniel Dickinson wrote:
-> > On Sat, 18 Mar 2017 02:20:36 +0100
-> > Gary Thomas <gary@mlbassoc.com> wrote:
-> >  
-> >> On 2017-03-18 00:58, Daniel Dickinson wrote:  
-> >>> Hi,
-> >>>
-> >>> I'm seeing build errors for layers I've submitted that I don't see
-> >>> with a manual bitbake.  What do I need to do solves the following:
-> >>>
-> >>> raceback (most recent call last):
-> >>>   File "/opt/workdir/bitbake/lib/bb/cookerdata.py", line 274, in
-> >>> parseBaseConfiguration bb.event.fire(bb.event.ConfigParsed(),
-> >>> self.data) File "/opt/workdir/bitbake/lib/bb/event.py", line 211,
-> >>> in fire fire_class_handlers(event, d)
-> >>>   File "/opt/workdir/bitbake/lib/bb/event.py", line 134, in
-> >>> fire_class_handlers execute_handler(name, handler, event, d)
-> >>>   File "/opt/workdir/bitbake/lib/bb/event.py", line 106, in
-> >>> execute_handler ret = handler(event)
-> >>>   File
-> >>> "/opt/workdir/git___git_openembedded_org_openembedded-core/meta/classes/base.bbclass",
-> >>> line 242, in base_eventhandler
-> >>> setup_hosttools_dir(d.expand('${TMPDIR}/hosttools'), 'HOSTTOOLS',
-> >>> d) File
-> >>> "/opt/workdir/git___git_openembedded_org_openembedded-core/meta/classes/base.bbclass",
-> >>> line 139, in setup_hosttools_dir bb.fatal("The following required
-> >>> tools (as specified by HOSTTOOLS) appear to be unavailable in
-> >>> PATH, please install them in order to proceed:\n  %s" % "
-> >>> ".join(notfound)) File "/opt/workdir/bitbake/lib/bb/__init__.py",
-> >>> line 104, in fatal raise BBHandledException()
-> >>> bb.BBHandledException
-> >>>
-> >>> During handling of the above exception, another exception
-> >>> occurred:
-> >>>
-> >>> Traceback (most recent call last):
-> >>>   File "update_layer.py", line 716, in <module>
-> >>>     main()
-> >>>   File "update_layer.py", line 216, in main
-> >>>     (tinfoil, tempdir) = recipeparse.init_parser(settings, branch,
-> >>> bitbakepath, nocheckout=options.nocheckout, logger=logger) File
-> >>> "/opt/layerindex/layerindex/recipeparse.py", line 75, in
-> >>> init_parser tinfoil = utils.setup_tinfoil(bitbakepath,
-> >>> enable_tracking) File "/opt/layerindex/layerindex/utils.py", line
-> >>> 144, in setup_tinfoil tinfoil.prepare(config_only = True) File
-> >>> "/opt/workdir/bitbake/lib/bb/tinfoil.py", line 210, in prepare
-> >>> extrafeatures) File "/opt/workdir/bitbake/lib/bb/main.py", line
-> >>> 517, in setup_bitbake server = start_server(servermodule,
-> >>> configParams, configuration, featureset) File
-> >>> "/opt/workdir/bitbake/lib/bb/main.py", line 357, in start_server
-> >>> cooker = bb.cooker.BBCooker(configuration, features) File
-> >>> "/opt/workdir/bitbake/lib/bb/cooker.py", line 195, in __init__
-> >>> self.initConfigurationData() File
-> >>> "/opt/workdir/bitbake/lib/bb/cooker.py", line 358, in
-> >>> initConfigurationData self.databuilder.parseBaseConfiguration()
-> >>> File "/opt/workdir/bitbake/lib/bb/cookerdata.py", line 299, in
-> >>> parseBaseConfiguration raise bb.BBHandledException
-> >>> bb.BBHandledException ERROR: The following required tools (as
-> >>> specified by HOSTTOOLS) appear to be unavailable in PATH, please
-> >>> install them in order to proceed: cpio chrpath gawk diffstat
-> >>> makeinfo  
-> >>
-> >> This one is pretty obvious - the OE-core metadata now checks for
-> >> a set of required tools (beyond the initial sanity check).  Your
-> >> machine (or background user that you are using for building these
-> >> layers) doesn't have access to them.  You'll need to install that
-> >> set of tools, namely:
-> >>    cpio chrpath gawk diffstat makeinfo
-> >>  
-> >
-> > This is on the autobuild hosted by at openembedded.org not
-> > something I have control over.  I was kind of hoping you would have
-> > a different answer (though didn't expect so), for some reason.
-> >  
-> 
-> Understood (although it wasn't obvious that this was autobuild
-> related) I don't have any access/control over that either, but
-> hopefully someone who does will get this fixed for you.
-> 
+Since it wasn't clear from my last posting about this issue, that the
+issued described was that the recipe parsing for the three pre-alpha
+layers I submitted recently triggered an error condition (missing
+HOSTTOOLS) which isn't something that's an issue with the layer or
+recipes (or so I'm given to understand), I'm reposing the error message
+and this request for the hosts to get the necessary packages so the
+layer index can be updated.
 
-Sorry, I wasn't clear enough; The combination of 'for
-layers I've submitted' and 'not with manual bitbake' seemed obvious to
-me, but then I'd just submitted to the layers list and been looking at
-the error, so it was in the front of my mind.
+Layers are:
+
+meta-cshored - small distro along the lines of poky-tiny but for
+read-only-rootfs and taking advantage of the following layers:
+
+meta-earlyinit - instead of initramfs run 'earlyinit' to prepare things
+for the main init and which runs from the kerne-mounted rootfs.
+
+meta-runit-init - use busybox 'runit' commands as the main init.
+
+
+The error message is:
+
+
+Traceback (most recent call last):
+  File "update_layer.py", line 716, in <module>
+    main()
+  File "update_layer.py", line 216, in main
+    (tinfoil, tempdir) = recipeparse.init_parser(settings, branch, bitbakepath, nocheckout=options.nocheckout, logger=logger)
+  File "/opt/layerindex/layerindex/recipeparse.py", line 75, in init_parser
+    tinfoil = utils.setup_tinfoil(bitbakepath, enable_tracking)
+  File "/opt/layerindex/layerindex/utils.py", line 144, in setup_tinfoil
+    tinfoil.prepare(config_only = True)
+  File "/opt/workdir/bitbake/lib/bb/tinfoil.py", line 210, in prepare
+    extrafeatures)
+  File "/opt/workdir/bitbake/lib/bb/main.py", line 517, in setup_bitbake
+    server = start_server(servermodule, configParams, configuration, featureset)
+  File "/opt/workdir/bitbake/lib/bb/main.py", line 357, in start_server
+    cooker = bb.cooker.BBCooker(configuration, features)
+  File "/opt/workdir/bitbake/lib/bb/cooker.py", line 195, in __init__
+    self.initConfigurationData()
+  File "/opt/workdir/bitbake/lib/bb/cooker.py", line 358, in initConfigurationData
+    self.databuilder.parseBaseConfiguration()
+  File "/opt/workdir/bitbake/lib/bb/cookerdata.py", line 299, in parseBaseConfiguration
+    raise bb.BBHandledException
+bb.BBHandledException
+ERROR: The following required tools (as specified by HOSTTOOLS) appear to be unavailable in PATH, please install them in order to proceed:
+  cpio chrpath gawk diffstat makeinfo
 
 Regards,
 
 Daniel
-
 
