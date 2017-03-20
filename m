@@ -1,44 +1,52 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 917D0779D5
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f182.google.com (mail-wr0-f182.google.com
+	[209.85.128.182])
+	by mail.openembedded.org (Postfix) with ESMTP id D798771A8E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Mar 2017 17:38:12 +0000 (UTC)
-Received: by mail-wm0-f44.google.com with SMTP id 196so19958719wmm.1
+	Mon, 20 Mar 2017 18:42:08 +0000 (UTC)
+Received: by mail-wr0-f182.google.com with SMTP id u48so98328184wrc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Mar 2017 10:38:14 -0700 (PDT)
+	Mon, 20 Mar 2017 11:42:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=ADG/FP+daqLANZgeoZ4FIcBVi4eeIeRhhwZ07a4ItEU=;
-	b=X6zfPniUsMKySetT2kFv/Ce5gc1p4BP1pUvGRGrZMeOYV8n69erjxD/4CQAUy26F3n
-	iOZP/UMe+HrDw0uvLZBA09UmLiCPguHqDwtXNZid4c0xmRXZEcjzL14i3mRJXeo9G/We
-	QjLv6zeX7zHzBhqlQ2r321mvsnrcQS6HbH/pRX+isha6VKCdyswP9h+c5E0abXJQwdq0
-	qaaiKIcDqjyTkE2+WFNMFU9B4HWNbscXz3rrXv1MKLDWkGsxBL7qoY0Zel5V7na+YPbD
-	YHUEyB1Wzki83FDNeHoEajDRmOW1mZnNYIRqYF/zLv9Y89C+8zfYlJjnnJYqyrTUuxnR
-	CNRQ==
+	:cc; bh=qL6fE4V5B6lzRauTxogDpY0W4RcpeeAYs/0fXIFUrU4=;
+	b=ktRYQinv7nzw7jhBoMt5RD6Hax03Q37oFL5ifnaYVCtJq08+VyvDGtfZpRrLvHf5Dx
+	4ajWAW9Ig5hbMbBYaCktk5L+0a+y37L/yQtzmrxjyOzXIkVAlgDWZhXszBvGtfirEVDf
+	rcRSg9GbArEJw2ju0ddUiIGw6Pe5OZr40DwJi/yq9NagZatvNlyjtGrYl9VCxzBJubph
+	0v3J2Gy/rlPSs6s4jlZCGw/gpIVkuxohwt1tb+ULSgeDj8R25vPYIBEIJQ54K5QPf98L
+	jLGMEcByr5Q7vYV8bdM3FiAGrvZppqe05YlVkNInzGis4+C/TUcbSbz7uwg2XjEFAz2L
+	Yr9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=ADG/FP+daqLANZgeoZ4FIcBVi4eeIeRhhwZ07a4ItEU=;
-	b=pcDDJVfwmtGOXk5FEoWpYuPfNSBuiNt8gD1uF5R/i0WZgCYAU4/3e3Na57samBAbZX
-	WTsqgwBNVnXHcjnSZrO6tXvfdq2Z5HMdurYaGPWc46f2znQ3ezNouhyYHvP2wIUdh0IH
-	HWYfnNQNnmGlY4Mp/Sl3+G8/dd7UDO0tsVK8RPuaXk2VD4olY2RqGlCLZbkFofGmrYEy
-	+krVuy6/soKHq/Gblv5pCbMhIvfkrEIOgdsXUFcYN+zXpGagODD/XGL/rN/mHwllyH/n
-	ImQXi9lsh2+vMwrhcnetDaQnVUaHKP6xSi3Uh1zNSDz1AVx4ZH5TLaWPj0rkYpZWdFbv
-	74Lw==
-X-Gm-Message-State: AFeK/H30IYifx+pwOjlcGtHhTFIeKrIfeMvbbW+7fPzsiLIBkUfcuiKgWqpEI6cuetlaw+fPbE494xq+IwAUKQ==
-X-Received: by 10.28.45.212 with SMTP id t203mr10651233wmt.37.1490031493729;
-	Mon, 20 Mar 2017 10:38:13 -0700 (PDT)
+	bh=qL6fE4V5B6lzRauTxogDpY0W4RcpeeAYs/0fXIFUrU4=;
+	b=no8B2VcVkQSthIKoVoTTj3Xu1/6OvVeBP2UBXU3moU5uaYKpO1jAmn5t5yT/kxGnKi
+	PU8hcLbP6ZDbYGXQIYWEHvg7hc9yPZlDJIGKRwUHCbczeVh8bD8hFeTPpOT8wmvjxwsC
+	4K9c6VWD6UgYXBaZojmu/fyKtHgaNwXm8l93iIcDKPJNpRId+1b+PX6+QRYop3JEDbv9
+	mlC1Zy0Vg9nSe9xJMl0j6jWeLLBCI63RtNYHw0vilPiLkAZ0AEvhec520GHqPs/6EVaU
+	JP+cmBD1jit9Ow9x4PluhJ2jW2pEgutbP6Gh4aAOnVeCKDnWpy0TQ0Eqa7sN4kQk5oHo
+	Tf+w==
+X-Gm-Message-State: AFeK/H1NKoqRS7B3tq4H/AumnZOBtHq3gGsDkZXFold7RnKg7zpLWxbd89TdZp3GLJRLU3yXecQv3sCEygEqZA==
+X-Received: by 10.223.154.149 with SMTP id a21mr26086944wrc.145.1490035329418; 
+	Mon, 20 Mar 2017 11:42:09 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.80.180.162 with HTTP; Mon, 20 Mar 2017 10:37:43 -0700 (PDT)
-In-Reply-To: <07459727-026a-2456-792f-a06dbef2a988@xevo.com>
-References: <07459727-026a-2456-792f-a06dbef2a988@xevo.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 20 Mar 2017 10:37:43 -0700
-Message-ID: <CAMKF1srJC1vitok6sf1WLggHgSRga6eHYGm7JM324nP7b51ZSA@mail.gmail.com>
-To: Martin Kelly <mkelly@xevo.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-clang] llvm-config cross-compile improvements
+Received: by 10.80.145.24 with HTTP; Mon, 20 Mar 2017 11:42:08 -0700 (PDT)
+In-Reply-To: <alpine.LFD.2.20.1703201126460.7124@uk63952.mitel.com>
+References: <alpine.LFD.2.20.1703200753460.9821@uk63952.mitel.com>
+	<CALbNGRSQiaNCD4gjkxAO0FXY5Y7ZZmo0aQ9u6TZQ4uFusR2ugQ@mail.gmail.com>
+	<CA+chaQeVXMSEXuCF7F2jRG4-TBzFWkGMWv=Gz=ksD6Z=tC4C1Q@mail.gmail.com>
+	<alpine.LFD.2.20.1703201002240.20418@uk63952.mitel.com>
+	<CA+chaQe7Rj2zH_E5gjO-BCrVUgT6DZD-Ohfp0f2n17z=bu2wgQ@mail.gmail.com>
+	<alpine.LFD.2.20.1703201126460.7124@uk63952.mitel.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 20 Mar 2017 19:42:08 +0100
+Message-ID: <CA+chaQdFkPjtUDEc4uhGWrMKi8iUW+S_Lp1W8Kxe2SVW9KEaJQ@mail.gmail.com>
+To: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: blacklisted accel-ppp (under binutils-2.27) seems to compile under binutils-2.28
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,52 +59,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Mar 2017 17:38:14 -0000
+X-List-Received-Date: Mon, 20 Mar 2017 18:42:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Sat, Mar 18, 2017 at 8:29 PM, Martin Kelly <mkelly@xevo.com> wrote:
-> Hi,
->
-> This patch series fixes a number of issues I hit when trying to use the
-> meta-clang llvm-config to cross-compile a project that uses CMake, calling
-> into llvm-config, to determine compile flags. With the series applied, the
-> cross compile successfully builds and runs. Please let me know if you have
-> any concerns or if there is something I missed, and I will fix it up.
->
-> The following changes since commit c9c74d269ba79abbc20919de96f1eb2b8a81edec:
->
->   clang/compiler-rt: Fix nativesdk builds break compiler-rt dep for clang
-> (2017-03-16 22:54:02 -0700)
->
-> are available in the git repository at:
->
->   https://github.com/surround-io/meta-clang
->
-> for you to fetch changes up to 7d294bc2548ade23b7d25761d73769e712617c51:
->
+Yes, good enough for me to include the PNBLACKLIST removal in next bitbake
+world run. thanks
 
+On Mon, Mar 20, 2017 at 4:27 PM, Robert P. J. Day <rpjday@crashcourse.ca>
+wrote:
 
-can you send a simple gh pull request please ?
-
->   clang: build for only target and host (2017-03-18 18:01:50 -0700)
+> On Mon, 20 Mar 2017, Martin Jansa wrote:
 >
-> ----------------------------------------------------------------
-> Martin Kelly (5):
->       clang: correct spacing issue
->       clang: remove commented-out code
->       clang: fix the llvm-common wrapper
->       clang: build libLLVM.so
->       clang: build for only target and host
+> > Without "_pn-binutils".
 >
->  recipes-devtools/clang/clang.inc      |  5 ++++-
+>   so i rebuilt a core-image-minimal (for mpc8315e-rdb, don't ask)
+> after setting:
 >
-> recipes-devtools/clang/clang/0004-llvm-allow-env-override-of-exe-path.patch
-> | 36 ++++++++++++++++++++++++++++++++++
->  recipes-devtools/clang/clang_git.bb      | 52
-> ++++++++++++++++++++++----------------------------
->  recipes-devtools/clang/llvm-common/llvm-config      | 41
-> +++++++++++++++++++++++++++++++--------
->  4 files changed, 96 insertions(+), 38 deletions(-)
->  create mode 100644
-> recipes-devtools/clang/clang/0004-llvm-allow-env-override-of-exe-path.patch
+>   DISTRO_FEATURES_append = " ld-is-gold"
+>
+> then rebuilt accel-ppp and it succeeded. is that considered an
+> adequate test?
+>
+> rday
+>
+> --
+>
+> ========================================================================
+> Robert P. J. Day                                 Ottawa, Ontario, CANADA
+>                         http://crashcourse.ca
+>
+> Twitter:                                       http://twitter.com/rpjday
+> LinkedIn:                               http://ca.linkedin.com/in/rpjday
+> ========================================================================
+>
+>
 
