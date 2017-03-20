@@ -1,36 +1,45 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from smtp484.redcondor.net (smtp484.redcondor.net [208.80.204.84])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E27077905
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B3D377577
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Mar 2017 19:03:08 +0000 (UTC)
-Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by smtp484.redcondor.net ({c48374e7-08df-40d9-a0de-96cc9883a037})
-	via TCP (outbound) with ESMTPS id 20170320190301850_0484;
-	Mon, 20 Mar 2017 19:03:01 +0000
-X-RC-FROM: <rpjday@crashcourse.ca>
-Received: from [174.118.92.171] (port=38456 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1cq2Zv-0000bu-Qz; Mon, 20 Mar 2017 15:02:52 -0400
-Date: Mon, 20 Mar 2017 15:02:50 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost.localdomain
-To: Martin Jansa <martin.jansa@gmail.com>
-In-Reply-To: <CA+chaQdFkPjtUDEc4uhGWrMKi8iUW+S_Lp1W8Kxe2SVW9KEaJQ@mail.gmail.com>
-Message-ID: <alpine.LFD.2.20.1703201502150.9100@localhost.localdomain>
-References: <alpine.LFD.2.20.1703200753460.9821@uk63952.mitel.com>
-	<CALbNGRSQiaNCD4gjkxAO0FXY5Y7ZZmo0aQ9u6TZQ4uFusR2ugQ@mail.gmail.com>
-	<CA+chaQeVXMSEXuCF7F2jRG4-TBzFWkGMWv=Gz=ksD6Z=tC4C1Q@mail.gmail.com>
-	<alpine.LFD.2.20.1703201002240.20418@uk63952.mitel.com>
-	<CA+chaQe7Rj2zH_E5gjO-BCrVUgT6DZD-Ohfp0f2n17z=bu2wgQ@mail.gmail.com>
-	<alpine.LFD.2.20.1703201126460.7124@uk63952.mitel.com>
-	<CA+chaQdFkPjtUDEc4uhGWrMKi8iUW+S_Lp1W8Kxe2SVW9KEaJQ@mail.gmail.com>
-User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
+	Mon, 20 Mar 2017 21:30:58 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id n11so17097368wma.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Mar 2017 14:31:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=Uk+8KBuTYPNGpUDygIiPeMQ2JpkuqgpCgtPQnvkvOxM=;
+	b=JThk5v01autd76Jy9c+AguZJfk3rKoQT3dTG5LPTux/15STNBcB2Kx5iSEtOvL0DPc
+	McPPocYuJmCbdPalVDEquzl5iBbjaa01qoGNhnhP3/zFrlD4za6v0efaEXcE6Ll0K5/H
+	YX+wg+Eta+Vic30xnErAVWw5+PUbZYxDO+BA5lp3r5BrgcxUtkhxlg0MA15dUu3qyyCS
+	dKAcURx4ePc88L+XjF/O9PS7RTCLEg136GfCMjEV0/cEWBwRWnrQSNwqqKpRRYUX2VRx
+	NR6NZcQDDP5AYqlNaDX0ATFYZ4N3iT86cS4a/34CdNGIhu9RUq/uyVizxYNMdJbTaC++
+	5gQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=Uk+8KBuTYPNGpUDygIiPeMQ2JpkuqgpCgtPQnvkvOxM=;
+	b=Hgx3KHYsVvW3c3tvGaZpL9ee5+yI17xl/015edQsNbtpqspCqbKavc1uOpgJtdZwV5
+	4q8ju3nvu3XVV/jjqzxU1khqcxzENEAX5aSOtpsvl1j1J0pRiBn19bChdZRfWeI/wxB8
+	n9KjaEZvPfdYy9ZQ0YzwTDpNNQyxc0mobKTUTcz9ajhqd35K0EWouKBmVNHybwOVX0FZ
+	516M7YeJREGnrhpsmXnqgi6M4ffesGJ+PLiyAhkhBgLCOw8UPniaFbTqrXaga776OLcf
+	K9VhwmzmCtLd14ieQN7mivCcZFgVvEytibqBI3gv7K3brqllSa4+lgMEAWB7n4/KArSE
+	0jgQ==
+X-Gm-Message-State: AFeK/H1CSdg0g8kgbr19gFv81n6sAJsc77rTipvJe73EWcdv8xE9zR/7aPilBJ8gJd76v8jZknbHbzQsIla7YQ==
+X-Received: by 10.28.224.11 with SMTP id x11mr12567693wmg.98.1490045459417;
+	Mon, 20 Mar 2017 14:30:59 -0700 (PDT)
 MIME-Version: 1.0
-X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
-Cc: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: blacklisted accel-ppp (under binutils-2.27) seems to compile under binutils-2.28
+Received: by 10.223.179.24 with HTTP; Mon, 20 Mar 2017 14:30:58 -0700 (PDT)
+In-Reply-To: <20170320053152.29352-2-raj.khem@gmail.com>
+References: <20170320053152.29352-1-raj.khem@gmail.com>
+	<20170320053152.29352-2-raj.khem@gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Mon, 20 Mar 2017 14:30:58 -0700
+Message-ID: <CAJ86T=VauVPqXpuEukNa52uxBj9XbMac8wmErsQ16iV2fVD12w@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH V2 02/16] rapidjson: Update to 1.1.0 + git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,43 +52,155 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Mar 2017 19:03:09 -0000
-Content-Type: multipart/mixed; BOUNDARY="8323328-2036954455-1490036571=:9100"
-
---8323328-2036954455-1490036571=:9100
+X-List-Received-Date: Mon, 20 Mar 2017 21:31:00 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
 
-On Mon, 20 Mar 2017, Martin Jansa wrote:
-
-> Yes, good enough for me to include the PNBLACKLIST removal in next bitbake world run. thanks
+On Sun, Mar 19, 2017 at 10:31 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> Drop backports
+> Adjust the license checksums to match the changes to file especially
 >
-> On Mon, Mar 20, 2017 at 4:27 PM, Robert P. J. Day <rpjday@crashcourse.ca> wrote:
->       On Mon, 20 Mar 2017, Martin Jansa wrote:
+> https://github.com/miloyip/rapidjson/commit/b4b1a39937fbd168ef72ea477f90f626773d56fc
 >
->       > Without "_pn-binutils".
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  .../Fix-gcc-strict-overflow-warning.patch          | 30 ----------------
+>  .../remove-march-native-from-CMAKE_CXX_FLAGS.patch | 41 +++++++++++++---------
+>  .../{rapidjson_1.0.2.bb => rapidjson_git.bb}       |  9 ++---
+>  3 files changed, 29 insertions(+), 51 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/rapidjson/rapidjson/Fix-gcc-strict-overflow-warning.patch
+>  rename meta-oe/recipes-devtools/rapidjson/{rapidjson_1.0.2.bb => rapidjson_git.bb} (73%)
 >
->         so i rebuilt a core-image-minimal (for mpc8315e-rdb, don't ask)
->       after setting:
+> diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson/Fix-gcc-strict-overflow-warning.patch b/meta-oe/recipes-devtools/rapidjson/rapidjson/Fix-gcc-strict-overflow-warning.patch
+> deleted file mode 100644
+> index 6ce3933ce..000000000
+> --- a/meta-oe/recipes-devtools/rapidjson/rapidjson/Fix-gcc-strict-overflow-warning.patch
+> +++ /dev/null
+> @@ -1,30 +0,0 @@
+> -From f5560d9557ee48fb79810180ddfd3ec386e2a7b5 Mon Sep 17 00:00:00 2001
+> -From: Milo Yip <miloyip@gmail.com>
+> -Date: Wed, 2 Mar 2016 01:01:17 +0800
+> -Subject: [PATCH] Fix gcc strict-overflow warning
+> -
+> -Fix #566 #568
+> -
+> -Upstream-Status: Backport [Partial merge of upstream commit 928caf92e]
+> -
+> -Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+> ----
+> - include/rapidjson/internal/dtoa.h | 2 +-
+> - 1 file changed, 1 insertion(+), 1 deletion(-)
+> -
+> -diff --git a/include/rapidjson/internal/dtoa.h b/include/rapidjson/internal/dtoa.h
+> -index 2d8d2e4..15571e1 100644
+> ---- a/include/rapidjson/internal/dtoa.h
+> -+++ b/include/rapidjson/internal/dtoa.h
+> -@@ -148,7 +148,7 @@ inline char* WriteExponent(int K, char* buffer) {
+> - inline char* Prettify(char* buffer, int length, int k) {
+> -     const int kk = length + k;  // 10^(kk-1) <= v < 10^kk
+> -
+> --    if (length <= kk && kk <= 21) {
+> -+    if (0 <= k && kk <= 21) {
+> -         // 1234e7 -> 12340000000
+> -         for (int i = length; i < kk; i++)
+> -             buffer[i] = '0';
+> ---
+> -1.9.1
+> -
+> diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from-CMAKE_CXX_FLAGS.patch b/meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from-CMAKE_CXX_FLAGS.patch
+> index 17164283c..cf3e16ea5 100644
+> --- a/meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from-CMAKE_CXX_FLAGS.patch
+> +++ b/meta-oe/recipes-devtools/rapidjson/rapidjson/remove-march-native-from-CMAKE_CXX_FLAGS.patch
+> @@ -12,22 +12,29 @@ Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+>   CMakeLists.txt | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
 >
->         DISTRO_FEATURES_append = " ld-is-gold"
+> -diff --git a/CMakeLists.txt b/CMakeLists.txt
+> -index 68139ba..cae7c9b 100644
+> ---- a/CMakeLists.txt
+> -+++ b/CMakeLists.txt
+> -@@ -26,9 +26,9 @@ if(RAPIDJSON_HAS_STDSTRING)
+> - endif()
+> +Index: git/CMakeLists.txt
+> +===================================================================
+> +--- git.orig/CMakeLists.txt
+> ++++ git/CMakeLists.txt
+> +@@ -51,10 +51,10 @@ endif(CCACHE_FOUND)
 >
->       then rebuilt accel-ppp and it succeeded. is that considered an
->       adequate test?
+>   if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+> --    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -Wall -Wextra")
+> -+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+> - elseif (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+> --    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -Wall -Wextra")
+> -+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+> - elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+> -     add_definitions(-D_CRT_SECURE_NO_WARNINGS=1)
+> - endif()
+> ---
+> -1.9.1
+> -
+> +     if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "powerpc" OR ${CMAKE_SYSTEM_PROCESSOR} STREQUAL "ppc64" OR ${CMAKE_SYSTEM_PROCESSOR} STREQUAL "ppc64le")
+> +-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mcpu=native")
+> ++      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+> +     else()
+> +       #FIXME: x86 is -march=native, but doesn't mean every arch is this option. To keep original project's compatibility, I leave this except POWER.
+> +-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
+> ++      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+> +     endif()
+> +     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
+> +     set(EXTRA_CXX_FLAGS -Weffc++ -Wswitch-default -Wfloat-equal -Wconversion -Wsign-conversion)
+> +@@ -84,7 +84,7 @@ elseif (CMAKE_CXX_COMPILER_ID MATCHES "C
+> +       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mcpu=native")
+> +     else()
+> +       #FIXME: x86 is -march=native, but doesn't mean every arch is this option. To keep original project's compatibility, I leave this except POWER.
+> +-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
+> ++      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+> +     endif()
+> +     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -Wno-missing-field-initializers")
+> +     set(EXTRA_CXX_FLAGS -Weffc++ -Wswitch-default -Wfloat-equal -Wconversion -Wimplicit-fallthrough -Weverything)
+> diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson_1.0.2.bb b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+> similarity index 73%
+> rename from meta-oe/recipes-devtools/rapidjson/rapidjson_1.0.2.bb
+> rename to meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+> index dd6b89698..4cded0720 100644
+> --- a/meta-oe/recipes-devtools/rapidjson/rapidjson_1.0.2.bb
+> +++ b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+> @@ -2,20 +2,21 @@ SUMMARY = "A fast JSON parser/generator for C++ with both SAX/DOM style API"
+>  HOMEPAGE = "http://rapidjson.org/"
+>  SECTION = "libs"
+>  LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = "file://license.txt;md5=cff54e417a17b4b77465198254970cd2"
+> +LIC_FILES_CHKSUM = "file://license.txt;md5=ba04aa8f65de1396a7e59d1d746c2125"
+>
+>  SRC_URI = "git://github.com/miloyip/rapidjson.git;nobranch=1 \
+>             file://remove-march-native-from-CMAKE_CXX_FLAGS.patch \
+> -           file://Fix-gcc-strict-overflow-warning.patch \
+>  "
+>
+> -SRCREV = "3d5848a7cd3367c5cb451c6493165b7745948308"
+> +SRCREV = "e5635fb27feab7f6e8d7b916aa20ad799045a641"
+> +
+> +PV = "1.1.0+git${SRCPV}"
+>
+>  S = "${WORKDIR}/git"
+>
+>  inherit cmake
+>
+> -EXTRA_OECMAKE += "-DRAPIDJSON_BUILD_DOC=OFF -DRAPIDJSON_BUILD_TESTS=OFF"
+> +EXTRA_OECMAKE += "-DRAPIDJSON_BUILD_DOC=OFF -DRAPIDJSON_BUILD_TESTS=OFF -DRAPIDJSON_BUILD_EXAMPLES=OFF"
 
-  i'll let you throw in that patch since you probably have a better
-idea of what you want the commit msg to say.
+Did you see an issue building the examples?
 
-rday
+If the examples aren't built then
+remove-march-native-from-CMAKE_CXX_FLAGS.patch can be dropped.
 
--- 
+>  # RapidJSON is a header-only C++ library, so the main package will be empty.
+>
+> --
+> 2.12.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
-
---8323328-2036954455-1490036571=:9100--
