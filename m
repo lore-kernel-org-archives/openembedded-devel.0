@@ -1,47 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E5F5B77829
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 561C471D7F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Mar 2017 05:32:07 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id g2so17977686pge.2
+	Mon, 20 Mar 2017 05:32:09 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id o126so15583004pfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Mar 2017 22:32:09 -0700 (PDT)
+	Sun, 19 Mar 2017 22:32:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=VQbtsQ4q0UxWk5PfHiqwlRP1LlNNeiNaNDopqJPrlfc=;
-	b=q0a1uhsRgxt1ZukgLnukNJKXQPeBWlJy23xfvnxrS2h2tgtyU5x+b+5gg1UPybeG3i
-	obALZwFUoLlZ51L5UpQm8C3OeK5CPhPHBt2AeiaRNY6LpsR4qLBCrJJX66wGq4ZflBnw
-	rMhIyN7f0vWBt1XyBAJkStGnFgOXmteg7Rd3CqMu/Dz3kSPRMWUTeTXo5dugNSPnxsE+
-	bMKdW1p50lZ6WSpt6CWGRYUOjefTxUlY4X1UIrqrNYWb0gfeFi7ZS7/zGCSHA6oJMFWS
-	QxTi5GES1hXtwc6Rb2Cgs68I8Gyc6jWXk5WM4Ayvt5AnJJMZYAEpU4RdO3kifbn7QpRj
-	UpPA==
+	bh=8ljOlcgeLeYVIM9Ay4wGUjlHGROXFkhfOC2j9bZBRlk=;
+	b=nUnS2aJq4xfGyC/TcrpsWR39K2Fl7HQ9RYS9msHkFfGivUUcYBJgK2wxcZJm/V5jZg
+	V4VyBVDKzbW9qNicT2Ffcn9c0bqL3F5FhB3djnU93+yG+tl5kNqcM+14hMii1r/qlfMH
+	V1X2Xa4bXtbJKEJC8WyiEADsXO5RuA0TH9tFdlM6LulFV+fBi5yHMdJ03bMXIqmxvINn
+	BYjRP1Epi3LOh+zaRfxeommWYKJgWDoVMWIZ/21XKYVpR3JKL12vcLX/tLcxnYyLDO9L
+	y/5ImFHZDu9u8r4jvGsNZns7N83anowPMhd1GtmfG+Vt+WfNzSjNLUJLwvpss9l5XXj2
+	6Qvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=VQbtsQ4q0UxWk5PfHiqwlRP1LlNNeiNaNDopqJPrlfc=;
-	b=G5++aLlQp7HgIZVniwC4WJUBTodHMFT3R+h/RJG3CGEEZEYFTNVJfYqF1rXVXDGlPT
-	lOme9q8L/YsQaEgHEllBKVHF2ZvK709S8aLoH5V+hupXo/3jOO6nw94TvUjQpEooQOa+
-	XwfSuk62vL0v5GoimXJqmngmm3uGyhUG8Q2urYHH1zOWxjnEweMZfpb/T3HTG2ceN+DK
-	QGFFvnFX4gE9+N5qWeDYhYhuN/0b/IedhA4aDgMgLs3OdGb1/aMiqb1Dk+CnUgCmVOuk
-	ptuuomPz60gE5Ixjgy4atwQstPNGo1isYIoKBXADzCxHG1c3tAkaRGmtxpMcjtz47iCa
-	RLzQ==
-X-Gm-Message-State: AFeK/H3+dAQJ2cD6zLy9nNFcAqeJczp7av6gYdcAM8EHHS9yxcUj05F/lxBy0M+/toNIIQ==
-X-Received: by 10.84.232.70 with SMTP id f6mr1062378pln.102.1489987928862;
-	Sun, 19 Mar 2017 22:32:08 -0700 (PDT)
+	bh=8ljOlcgeLeYVIM9Ay4wGUjlHGROXFkhfOC2j9bZBRlk=;
+	b=jFGC0ebNMtLtSk1zB2ZjpSgSVrJip0dMRnZK4bwn1vHLSEbPiLoEJbmmYquj3QA0Gx
+	gn2ZRdHea3vu4V569Aj+3qZmQgj+vWPu7d1YXtGl72cJaobVQp+1cOCt6WPjSkDTozXU
+	JYRr/HXQZ1JV+kLnzNccB+9kcKmXkntjX0OLDTgpO7k6NrCe04Y71uFh3SpFJ/ioH1VM
+	48TuztN5WsHebibBZ2DLiiopUqVAcUGhtkNBn8JPtRx/NNyaoHeNP0vwhz7KX6C72LmL
+	EJGNZNicug9n1RNaqTvJCxQ0y6xL75snuxAeWEB1tkJrNKMNHnW7LkR/1I4WipyExJga
+	jJmg==
+X-Gm-Message-State: AFeK/H1ftFas/RM6EWp8rw5ivGlgdL8W4PY+lMocv3YGJWLq9fUeoZpegoe22uWu0GyfNA==
+X-Received: by 10.98.194.157 with SMTP id w29mr30616314pfk.192.1489987930430; 
+	Sun, 19 Mar 2017 22:32:10 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	o189sm30203934pga.12.2017.03.19.22.32.07
+	o189sm30203934pga.12.2017.03.19.22.32.08
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 19 Mar 2017 22:32:07 -0700 (PDT)
+	Sun, 19 Mar 2017 22:32:09 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 19 Mar 2017 22:31:39 -0700
-Message-Id: <20170320053152.29352-3-raj.khem@gmail.com>
+Date: Sun, 19 Mar 2017 22:31:40 -0700
+Message-Id: <20170320053152.29352-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.0
 In-Reply-To: <20170320053152.29352-1-raj.khem@gmail.com>
 References: <20170320053152.29352-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH V2 03/16] libtorrent, rtorrent: Update to latest
+Subject: [meta-xfce][PATCH V2 04/16] core-image-minimal-xfce: Drop ROOTFS_PKGMANAGE_BOOTSTRAP
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,80 +55,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Mar 2017 05:32:08 -0000
+X-List-Received-Date: Mon, 20 Mar 2017 05:32:09 -0000
 
-libtorrent -> 0.13.6+git
-rtorrent -> 0.9.6+git
+OE-Core has now dropped this var
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{libtorrent_0.13.3.bb => libtorrent_git.bb}           | 15 +++++++++++----
- .../rtorrent/{rtorrent_0.9.3.bb => rtorrent_git.bb}       | 12 +++++++++---
- 2 files changed, 20 insertions(+), 7 deletions(-)
- rename meta-oe/recipes-connectivity/libtorrent/{libtorrent_0.13.3.bb => libtorrent_git.bb} (53%)
- rename meta-oe/recipes-connectivity/rtorrent/{rtorrent_0.9.3.bb => rtorrent_git.bb} (60%)
+ meta-xfce/recipes-core/images/core-image-minimal-xfce.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.13.3.bb b/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-similarity index 53%
-rename from meta-oe/recipes-connectivity/libtorrent/libtorrent_0.13.3.bb
-rename to meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-index 4af3a6a6a..aaebc5f1b 100644
---- a/meta-oe/recipes-connectivity/libtorrent/libtorrent_0.13.3.bb
-+++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-@@ -4,14 +4,21 @@ HOMEPAGE = "http://libtorrent.rakshasa.no/"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
+diff --git a/meta-xfce/recipes-core/images/core-image-minimal-xfce.bb b/meta-xfce/recipes-core/images/core-image-minimal-xfce.bb
+index a683c2dd4..f5c5c26ae 100644
+--- a/meta-xfce/recipes-core/images/core-image-minimal-xfce.bb
++++ b/meta-xfce/recipes-core/images/core-image-minimal-xfce.bb
+@@ -1,7 +1,6 @@
+ DESCRIPTION = "A XFCE minimal demo image."
  
--DEPENDS = "libsigc++-2.0 openssl cppunit"
-+DEPENDS = "zlib libsigc++-2.0 openssl cppunit"
- 
--SRC_URI = "http://libtorrent.rakshasa.no/downloads/${BP}.tar.gz \
-+SRC_URI = "git://github.com/rakshasa/libtorrent \
-     file://don-t-run-code-while-configuring-package.patch \
- "
-+SRCREV = "c167c5a9e0bcf0df23ae5efd91396aae0e37eb87"
- 
--SRC_URI[md5sum] = "e94f6c590bb02aaf4d58618f738a85f2"
--SRC_URI[sha256sum] = "34317d6783b7f8d0805274c9467475b5432a246c0de8e28fc16e3b0b43f35677"
-+PV = "0.13.6+git${SRCPV}"
-+
-+S = "${WORKDIR}/git"
- 
- inherit autotools pkgconfig
- 
-+EXTRA_OECONF = "--with-zlib=${STAGING_EXECPREFIXDIR}"
-+
-+do_configure_prepend() {
-+    (cd ${S}; ./autogen.sh; cd -)
-+}
-diff --git a/meta-oe/recipes-connectivity/rtorrent/rtorrent_0.9.3.bb b/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb
-similarity index 60%
-rename from meta-oe/recipes-connectivity/rtorrent/rtorrent_0.9.3.bb
-rename to meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb
-index eb0a39af5..af1c4d656 100644
---- a/meta-oe/recipes-connectivity/rtorrent/rtorrent_0.9.3.bb
-+++ b/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb
-@@ -5,11 +5,17 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
- DEPENDS = "libsigc++-2.0 curl cppunit libtorrent ncurses"
- 
--SRC_URI = "http://libtorrent.rakshasa.no/downloads/${BP}.tar.gz \
-+SRC_URI = "git://github.com/rakshasa/rtorrent \
-     file://don-t-run-code-while-configuring-package.patch \
- "
-+SRCREV = "226e670decf92e7adaa845a6982aca4f164ea740"
- 
--SRC_URI[md5sum] = "0bf2f262faa8c8c8d3b11ce286ea2bf2"
--SRC_URI[sha256sum] = "9e93ca41beb1afe74ad7ad8013e0d53ae3586c9b0e97263d722f721535cc7310"
-+PV = "0.9.6+git${SRCPV}"
-+
-+S = "${WORKDIR}/git"
- 
- inherit autotools pkgconfig
-+
-+do_configure_prepend() {
-+    (cd ${S}; ./autogen.sh; cd -)
-+}
+ IMAGE_INSTALL = "packagegroup-core-boot \
+-    ${ROOTFS_PKGMANAGE_BOOTSTRAP} \
+     packagegroup-core-x11 \
+     packagegroup-xfce-base \
+     kernel-modules \
 -- 
 2.12.0
 
