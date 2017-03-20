@@ -1,34 +1,44 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from smtp486.redcondor.net (smtp486.redcondor.net [208.80.204.86])
-	by mail.openembedded.org (Postfix) with ESMTP id 566B9779B0
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 917D0779D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Mar 2017 15:28:12 +0000 (UTC)
-Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by smtp486.redcondor.net ({6695537a-536a-45f9-a249-877c85428649})
-	via TCP (outbound) with ESMTPS id 20170320152809725_0486;
-	Mon, 20 Mar 2017 15:28:09 +0000
-X-RC-FROM: <rpjday@crashcourse.ca>
-Received: from [216.191.234.70] (port=26013 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1cpzE1-0005gE-JU; Mon, 20 Mar 2017 11:28:01 -0400
-Date: Mon, 20 Mar 2017 11:27:59 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@uk63952.mitel.com
-To: Martin Jansa <martin.jansa@gmail.com>
-In-Reply-To: <CA+chaQe7Rj2zH_E5gjO-BCrVUgT6DZD-Ohfp0f2n17z=bu2wgQ@mail.gmail.com>
-Message-ID: <alpine.LFD.2.20.1703201126460.7124@uk63952.mitel.com>
-References: <alpine.LFD.2.20.1703200753460.9821@uk63952.mitel.com>
-	<CALbNGRSQiaNCD4gjkxAO0FXY5Y7ZZmo0aQ9u6TZQ4uFusR2ugQ@mail.gmail.com>
-	<CA+chaQeVXMSEXuCF7F2jRG4-TBzFWkGMWv=Gz=ksD6Z=tC4C1Q@mail.gmail.com>
-	<alpine.LFD.2.20.1703201002240.20418@uk63952.mitel.com>
-	<CA+chaQe7Rj2zH_E5gjO-BCrVUgT6DZD-Ohfp0f2n17z=bu2wgQ@mail.gmail.com>
-User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
+	Mon, 20 Mar 2017 17:38:12 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id 196so19958719wmm.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Mar 2017 10:38:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=ADG/FP+daqLANZgeoZ4FIcBVi4eeIeRhhwZ07a4ItEU=;
+	b=X6zfPniUsMKySetT2kFv/Ce5gc1p4BP1pUvGRGrZMeOYV8n69erjxD/4CQAUy26F3n
+	iOZP/UMe+HrDw0uvLZBA09UmLiCPguHqDwtXNZid4c0xmRXZEcjzL14i3mRJXeo9G/We
+	QjLv6zeX7zHzBhqlQ2r321mvsnrcQS6HbH/pRX+isha6VKCdyswP9h+c5E0abXJQwdq0
+	qaaiKIcDqjyTkE2+WFNMFU9B4HWNbscXz3rrXv1MKLDWkGsxBL7qoY0Zel5V7na+YPbD
+	YHUEyB1Wzki83FDNeHoEajDRmOW1mZnNYIRqYF/zLv9Y89C+8zfYlJjnnJYqyrTUuxnR
+	CNRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=ADG/FP+daqLANZgeoZ4FIcBVi4eeIeRhhwZ07a4ItEU=;
+	b=pcDDJVfwmtGOXk5FEoWpYuPfNSBuiNt8gD1uF5R/i0WZgCYAU4/3e3Na57samBAbZX
+	WTsqgwBNVnXHcjnSZrO6tXvfdq2Z5HMdurYaGPWc46f2znQ3ezNouhyYHvP2wIUdh0IH
+	HWYfnNQNnmGlY4Mp/Sl3+G8/dd7UDO0tsVK8RPuaXk2VD4olY2RqGlCLZbkFofGmrYEy
+	+krVuy6/soKHq/Gblv5pCbMhIvfkrEIOgdsXUFcYN+zXpGagODD/XGL/rN/mHwllyH/n
+	ImQXi9lsh2+vMwrhcnetDaQnVUaHKP6xSi3Uh1zNSDz1AVx4ZH5TLaWPj0rkYpZWdFbv
+	74Lw==
+X-Gm-Message-State: AFeK/H30IYifx+pwOjlcGtHhTFIeKrIfeMvbbW+7fPzsiLIBkUfcuiKgWqpEI6cuetlaw+fPbE494xq+IwAUKQ==
+X-Received: by 10.28.45.212 with SMTP id t203mr10651233wmt.37.1490031493729;
+	Mon, 20 Mar 2017 10:38:13 -0700 (PDT)
 MIME-Version: 1.0
-X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
-Cc: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: blacklisted accel-ppp (under binutils-2.27) seems to compile under binutils-2.28
+Received: by 10.80.180.162 with HTTP; Mon, 20 Mar 2017 10:37:43 -0700 (PDT)
+In-Reply-To: <07459727-026a-2456-792f-a06dbef2a988@xevo.com>
+References: <07459727-026a-2456-792f-a06dbef2a988@xevo.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 20 Mar 2017 10:37:43 -0700
+Message-ID: <CAMKF1srJC1vitok6sf1WLggHgSRga6eHYGm7JM324nP7b51ZSA@mail.gmail.com>
+To: Martin Kelly <mkelly@xevo.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-clang] llvm-config cross-compile improvements
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,31 +51,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Mar 2017 15:28:14 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Mon, 20 Mar 2017 17:38:14 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, 20 Mar 2017, Martin Jansa wrote:
+On Sat, Mar 18, 2017 at 8:29 PM, Martin Kelly <mkelly@xevo.com> wrote:
+> Hi,
+>
+> This patch series fixes a number of issues I hit when trying to use the
+> meta-clang llvm-config to cross-compile a project that uses CMake, calling
+> into llvm-config, to determine compile flags. With the series applied, the
+> cross compile successfully builds and runs. Please let me know if you have
+> any concerns or if there is something I missed, and I will fix it up.
+>
+> The following changes since commit c9c74d269ba79abbc20919de96f1eb2b8a81edec:
+>
+>   clang/compiler-rt: Fix nativesdk builds break compiler-rt dep for clang
+> (2017-03-16 22:54:02 -0700)
+>
+> are available in the git repository at:
+>
+>   https://github.com/surround-io/meta-clang
+>
+> for you to fetch changes up to 7d294bc2548ade23b7d25761d73769e712617c51:
+>
 
-> Without "_pn-binutils".
 
-  so i rebuilt a core-image-minimal (for mpc8315e-rdb, don't ask)
-after setting:
+can you send a simple gh pull request please ?
 
-  DISTRO_FEATURES_append = " ld-is-gold"
-
-then rebuilt accel-ppp and it succeeded. is that considered an
-adequate test?
-
-rday
-
--- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
-
+>   clang: build for only target and host (2017-03-18 18:01:50 -0700)
+>
+> ----------------------------------------------------------------
+> Martin Kelly (5):
+>       clang: correct spacing issue
+>       clang: remove commented-out code
+>       clang: fix the llvm-common wrapper
+>       clang: build libLLVM.so
+>       clang: build for only target and host
+>
+>  recipes-devtools/clang/clang.inc      |  5 ++++-
+>
+> recipes-devtools/clang/clang/0004-llvm-allow-env-override-of-exe-path.patch
+> | 36 ++++++++++++++++++++++++++++++++++
+>  recipes-devtools/clang/clang_git.bb      | 52
+> ++++++++++++++++++++++----------------------------
+>  recipes-devtools/clang/llvm-common/llvm-config      | 41
+> +++++++++++++++++++++++++++++++--------
+>  4 files changed, 96 insertions(+), 38 deletions(-)
+>  create mode 100644
+> recipes-devtools/clang/clang/0004-llvm-allow-env-override-of-exe-path.patch
 
