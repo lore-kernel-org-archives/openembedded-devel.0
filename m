@@ -1,26 +1,45 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B991C72F3C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id B3EF371B1D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Mar 2017 05:54:00 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v2L5s0bT025267
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 21 Mar 2017 06:32:36 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id o126so20595116pfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Mar 2017 22:54:01 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Mon, 20 Mar 2017 22:54:00 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 21 Mar 2017 13:53:46 +0800
-Message-ID: <20170321055346.24665-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.10.1
-In-Reply-To: <20170321025110.3562-1-kai.kang@windriver.com>
-References: <20170321025110.3562-1-kai.kang@windriver.com>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2] gflags: correct S and update library install directory
+	Mon, 20 Mar 2017 23:32:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=bA6GdlZsZ+dmpSo6O048UMVYQfLgqxBjWvhal0y9Ivc=;
+	b=DjvFgrDl35qKOPqdi0jdVhEaTCjwPnfsXG3MJuGKaKUOs4QZQBAJLOIPSUgiZpBU+M
+	zrn8J0YVwpr8DjxRTDL2WAULIFQEzGI75SthbwVAgZNUxeRjNZvizbpC7Pz5EZ1Yp+hD
+	ekuEIyDKEQSLYUbTxrDxP5eKQysbHM+IilWmF+MP2412EI8VV97UsdicSstpaRFn8QFm
+	6DZFfh4y5ZpEgRmCY+6jU9AlD5CXDvepEKQD7hPzDMy4VGzD5m3zm1dOWr+t5FswwQJy
+	cyqqM5rBKvo/WUIQ+2MueLSdLvndx5oedCv4zVh8BB00/4lcNwrbiDtG9NmUbXwd5pRd
+	mg9Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=bA6GdlZsZ+dmpSo6O048UMVYQfLgqxBjWvhal0y9Ivc=;
+	b=TyZh5P46H0Lks5vDvMFkGfEiv1IARYw6xm0CJMIbOo+QSc0C470jIipgxU4AtW50+F
+	p7cAsvt6d803t791BvDNj3E1y/XH2QdkqtHWgTChUfQs4Y9EhCPM2C2Jyujxxt9u7b1+
+	RKrPgCX5tsYkZBVcphsrRcvRg+fVuHNa473S4Ku7f1Zy5q3oOtMkMPJ3K+3z7ZG9sUiy
+	nWkNVU+LIEPx2J+LjCAB/fN7KcVgwKeYrPg4OrSwRi5n3xg/yZdSAvAVR9ggxMA7yUjU
+	AWp3q9QZqYDntw3qXsPoOiyMCPKoP0QbSpl/xjqO7haZUpDiIH9KR5yS8bGH5zXVwJCq
+	jVMQ==
+X-Gm-Message-State: AFeK/H1hUNnE/nBsszSQ4ceOnaHatRS3r0o8XB0v0/ywVLlWapw2DMM7wsjQNoYsuSND1A==
+X-Received: by 10.99.233.17 with SMTP id i17mr36510711pgh.76.1490077957055;
+	Mon, 20 Mar 2017 23:32:37 -0700 (PDT)
+Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
+	23sm36902528pfz.127.2017.03.20.23.32.35
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 20 Mar 2017 23:32:35 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 20 Mar 2017 23:32:20 -0700
+Message-Id: <20170321063227.11565-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.12.0
+Subject: [meta-oe][PATCH 1/8] atop: Fix build with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,47 +52,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Mar 2017 05:54:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 21 Mar 2017 06:32:36 -0000
 
-From: Kai Kang <kai.kang@windriver.com>
-
-The current setting of S is not right for multilib. Remove the setting
-and use the default value.
-
-And library install directory is not right either. Pass ${libdir} to fix
-the [installed-vs-shipped] QA issue:
-
-| ERROR: gflags-2.2.0-r0 do_package: QA Issue: gflags: Files/directories
-| were installed but not shipped in any package:
-|   /usr/lib/libgflags.so
-|   /usr/lib/libgflags_nothreads.so.2.2
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/gflags/gflags_2.2.0.bb | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ .../atop/0001-include-missing-header-files.patch   | 97 ++++++++++++++++++++++
+ .../atop/{atop_2.2.3.bb => atop_git.bb}            |  1 +
+ 2 files changed, 98 insertions(+)
+ create mode 100644 meta-oe/recipes-support/atop/atop/0001-include-missing-header-files.patch
+ rename meta-oe/recipes-support/atop/{atop_2.2.3.bb => atop_git.bb} (97%)
 
-diff --git a/meta-oe/recipes-support/gflags/gflags_2.2.0.bb b/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
-index b9188c3..77617ef 100644
---- a/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
-+++ b/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
-@@ -8,13 +8,12 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
- SRC_URI = "https://github.com/gflags/gflags/archive/v${PV}.tar.gz"
- SRC_URI[md5sum] = "b99048d9ab82d8c56e876fb1456c285e"
- SRC_URI[sha256sum] = "466c36c6508a451734e4f4d76825cf9cd9b8716d2b70ef36479ae40f08271f88"
--S = "${WORKDIR}/${PN}-${PV}/"
- 
- FILES_${PN}-dev += "${libdir}/cmake"
- 
- inherit cmake
- 
--EXTRA_OECMAKE="-DBUILD_SHARED_LIBS=ON -DREGISTER_INSTALL_PREFIX=OFF"
-+EXTRA_OECMAKE="-DBUILD_SHARED_LIBS=ON -DREGISTER_INSTALL_PREFIX=OFF -DLIBRARY_INSTALL_DIR=${libdir}"
- 
- PACKAGES =+ "${PN}-bash-completion"
- FILES_${PN}-bash-completion += "${bindir}/gflags_completions.sh"
+diff --git a/meta-oe/recipes-support/atop/atop/0001-include-missing-header-files.patch b/meta-oe/recipes-support/atop/atop/0001-include-missing-header-files.patch
+new file mode 100644
+index 000000000..3708f60ba
+--- /dev/null
++++ b/meta-oe/recipes-support/atop/atop/0001-include-missing-header-files.patch
+@@ -0,0 +1,97 @@
++From 7b651793269b6b86f12c43c30b751b86def27222 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 18 Mar 2017 17:56:40 -0700
++Subject: [PATCH] include missing header files
++
++fixes build with musl
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ deviate.c     | 1 +
++ procdbase.c   | 2 +-
++ showgeneric.c | 2 +-
++ showlinux.c   | 2 +-
++ showprocs.c   | 2 +-
++ showsys.c     | 2 +-
++ 6 files changed, 6 insertions(+), 5 deletions(-)
++
++diff --git a/deviate.c b/deviate.c
++index 7cf1b49..8e615af 100644
++--- a/deviate.c
+++++ b/deviate.c
++@@ -178,6 +178,7 @@ static const char rcsid[] = "$Id: deviate.c,v 1.45 2010/10/23 14:02:03 gerlof Ex
++ #include <stdio.h>
++ #include <errno.h>
++ #include <fcntl.h>
+++#include <stdlib.h>
++ #include <unistd.h>
++ #include <limits.h>
++ #include <memory.h>
++diff --git a/procdbase.c b/procdbase.c
++index 9cab347..0487d26 100644
++--- a/procdbase.c
+++++ b/procdbase.c
++@@ -67,7 +67,7 @@ static const char rcsid[] = "$Id: procdbase.c,v 1.8 2010/04/23 12:19:35 gerlof E
++ #include <fcntl.h>
++ #include <unistd.h>
++ #include <string.h>
++-#include <malloc.h>
+++#include <stdlib.h>
++ 
++ #include "atop.h"
++ #include "photoproc.h"
++diff --git a/showgeneric.c b/showgeneric.c
++index 775afa8..3d5be0e 100644
++--- a/showgeneric.c
+++++ b/showgeneric.c
++@@ -268,7 +268,7 @@ static const char rcsid[] = "$Id: showgeneric.c,v 1.71 2010/10/25 19:08:32 gerlo
++ #include <errno.h>
++ #include <fcntl.h>
++ #include <string.h>
++-#include <termio.h>
+++#include <termios.h>
++ #include <unistd.h>
++ #include <stdarg.h>
++ #include <curses.h>
++diff --git a/showlinux.c b/showlinux.c
++index 6e60754..aba2ee6 100644
++--- a/showlinux.c
+++++ b/showlinux.c
++@@ -274,7 +274,7 @@ static const char rcsid[] = "$Id: showlinux.c,v 1.70 2010/10/23 14:04:12 gerlof
++ #include <string.h>
++ #include <errno.h>
++ #include <fcntl.h>
++-#include <termio.h>
+++#include <termios.h>
++ #include <unistd.h>
++ #include <stdarg.h>
++ #include <curses.h>
++diff --git a/showprocs.c b/showprocs.c
++index 5194524..f0169ad 100644
++--- a/showprocs.c
+++++ b/showprocs.c
++@@ -94,7 +94,7 @@ static const char rcsid[] = "$Id: showprocs.c,v 1.15 2011/09/05 11:44:16 gerlof
++ #include <string.h>
++ #include <errno.h>
++ #include <fcntl.h>
++-#include <termio.h>
+++#include <termios.h>
++ #include <unistd.h>
++ #include <stdarg.h>
++ #include <curses.h>
++diff --git a/showsys.c b/showsys.c
++index 26331be..5a05fe5 100644
++--- a/showsys.c
+++++ b/showsys.c
++@@ -80,7 +80,7 @@ static const char rcsid[] = "XXXXXX";
++ #include <string.h>
++ #include <errno.h>
++ #include <fcntl.h>
++-#include <termio.h>
+++#include <termios.h>
++ #include <unistd.h>
++ #include <stdarg.h>
++ #include <curses.h>
++-- 
++2.12.0
++
+diff --git a/meta-oe/recipes-support/atop/atop_2.2.3.bb b/meta-oe/recipes-support/atop/atop_git.bb
+similarity index 97%
+rename from meta-oe/recipes-support/atop/atop_2.2.3.bb
+rename to meta-oe/recipes-support/atop/atop_git.bb
+index a36f08dd7..1ab9e7cf9 100644
+--- a/meta-oe/recipes-support/atop/atop_2.2.3.bb
++++ b/meta-oe/recipes-support/atop/atop_git.bb
+@@ -20,6 +20,7 @@ ATOP_VER = "${@'-'.join(d.getVar('PV').rsplit('.', 1))}"
+ SRC_URI = " \
+     http://www.atoptool.nl/download/${BPN}-${ATOP_VER}.tar.gz \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'file://volatiles.atop.conf', 'file://volatiles.99_atop', d)} \
++    file://0001-include-missing-header-files.patch \
+     file://remove-bashisms.patch \
+     file://fix-permissions.patch \
+     file://sysvinit-implement-status.patch \
 -- 
-2.10.1
+2.12.0
 
 
