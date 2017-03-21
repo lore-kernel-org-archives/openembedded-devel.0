@@ -1,24 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 291DD71AB4
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B991C72F3C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Mar 2017 02:51:16 +0000 (UTC)
+	Tue, 21 Mar 2017 05:54:00 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v2L2pHEa026652
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v2L5s0bT025267
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Mar 2017 19:51:17 -0700
+	Mon, 20 Mar 2017 22:54:01 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Mon, 20 Mar 2017 19:51:16 -0700
+	14.3.294.0; Mon, 20 Mar 2017 22:54:00 -0700
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 21 Mar 2017 10:51:10 +0800
-Message-ID: <20170321025110.3562-1-kai.kang@windriver.com>
+Date: Tue, 21 Mar 2017 13:53:46 +0800
+Message-ID: <20170321055346.24665-1-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.10.1
+In-Reply-To: <20170321025110.3562-1-kai.kang@windriver.com>
+References: <20170321025110.3562-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] gflags: remove setting of S
+Subject: [meta-oe][PATCH v2] gflags: correct S and update library install directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Mar 2017 02:51:17 -0000
+X-List-Received-Date: Tue, 21 Mar 2017 05:54:04 -0000
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
@@ -39,16 +41,24 @@ From: Kai Kang <kai.kang@windriver.com>
 The current setting of S is not right for multilib. Remove the setting
 and use the default value.
 
+And library install directory is not right either. Pass ${libdir} to fix
+the [installed-vs-shipped] QA issue:
+
+| ERROR: gflags-2.2.0-r0 do_package: QA Issue: gflags: Files/directories
+| were installed but not shipped in any package:
+|   /usr/lib/libgflags.so
+|   /usr/lib/libgflags_nothreads.so.2.2
+
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-oe/recipes-support/gflags/gflags_2.2.0.bb | 1 -
- 1 file changed, 1 deletion(-)
+ meta-oe/recipes-support/gflags/gflags_2.2.0.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/meta-oe/recipes-support/gflags/gflags_2.2.0.bb b/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
-index b9188c3..61a5972 100644
+index b9188c3..77617ef 100644
 --- a/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
 +++ b/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
-@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
+@@ -8,13 +8,12 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
  SRC_URI = "https://github.com/gflags/gflags/archive/v${PV}.tar.gz"
  SRC_URI[md5sum] = "b99048d9ab82d8c56e876fb1456c285e"
  SRC_URI[sha256sum] = "466c36c6508a451734e4f4d76825cf9cd9b8716d2b70ef36479ae40f08271f88"
@@ -56,6 +66,13 @@ index b9188c3..61a5972 100644
  
  FILES_${PN}-dev += "${libdir}/cmake"
  
+ inherit cmake
+ 
+-EXTRA_OECMAKE="-DBUILD_SHARED_LIBS=ON -DREGISTER_INSTALL_PREFIX=OFF"
++EXTRA_OECMAKE="-DBUILD_SHARED_LIBS=ON -DREGISTER_INSTALL_PREFIX=OFF -DLIBRARY_INSTALL_DIR=${libdir}"
+ 
+ PACKAGES =+ "${PN}-bash-completion"
+ FILES_${PN}-bash-completion += "${bindir}/gflags_completions.sh"
 -- 
 2.10.1
 
