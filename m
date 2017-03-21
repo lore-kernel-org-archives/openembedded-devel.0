@@ -1,24 +1,24 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BD9DB6022F
+Return-Path: <Bruce.Ashfield@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0BADF719D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Mar 2017 16:35:20 +0000 (UTC)
+	Tue, 21 Mar 2017 21:02:12 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v2LGZLCD010354
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v2LL2DAo020186
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Mar 2017 09:35:21 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	Tue, 21 Mar 2017 14:02:13 -0700
+Received: from yow-bashfiel-d4.wrs.com (128.224.56.94) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Tue, 21 Mar 2017 09:35:20 -0700
-From: <kai.kang@windriver.com>
+	14.3.294.0; Tue, 21 Mar 2017 14:02:12 -0700
+From: Bruce Ashfield <bruce.ashfield@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 22 Mar 2017 00:35:11 +0800
-Message-ID: <20170321163511.19398-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.10.1
+Date: Tue, 21 Mar 2017 17:02:12 -0400
+Message-ID: <1490130132-15271-1-git-send-email-bruce.ashfield@windriver.com>
+X-Mailer: git-send-email 2.5.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] curlpp: 0.7.3 -> 0.8.1
+Subject: [meta-filesystems][PATCH] aufs-utils-native: define CC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,75 +31,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Mar 2017 16:35:21 -0000
+X-List-Received-Date: Tue, 21 Mar 2017 21:02:13 -0000
 Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
+With the new host tools path filtering, aufs-utils-native fails to build
+as follows:
 
-Upgrade curlpp from 0.7.3 to 0.8.1. The main difference between 0.7.x
-and 0.8.0 is that it replaces autotools with cmake, see
-https://github.com/jpbarrette/curlpp/releases/tag/v0.8.0
+| ERROR: oe_runmake failed
+| cc
+| -isystem/build/tmp/work/x86_64-linux/aufs-util-native/3.14+gitAUTOINC+b59a2167a1-r0/recipe-sysroot-native/usr/include
+| -O2 -pipe -O -Wall
+| -I/build/tmp/work/x86_64-linux/aufs-util-native/3.14+gitAUTOINC
++b59a2167a1-r0/git/include
+| -I/build/tmp/work/x86_64-linux/aufs-util-native/3.14+gitAUTOINC+b59a2167a1-r0/git/libau
+| -D_GNU_SOURCE -I./libau -DAUFHSM_CMD=\"/usr/bin/aufhsm\"
+| -DMOUNT_CMD=\"/bin/mount\" -DUMOUNT_CMD=\"/bin/um
+ount\"
+| -L/build/tmp/work/x86_64-linux/aufs-util-native/3.14+gitAUTOINC+b59a2167a1-r0/recipe-sysroot-native/usr/lib
+| -L/build/tmp/work/x86_64-linux/aufs-util-native/3.14+gitAUTOINC+b59a2167a1-r0/recipe-sysro
+ot-native/lib
+| -Wl,-rpath-link,/build/tmp/work/x86_64-linux/aufs-util-native/3.14+gitAUTOINC+b59a2167a1-r0/recipe-sysroot-native/usr/lib
+| -Wl,-rpath-link,/build/tmp/work/x86_64-linux/aufs-util-native/3.14+gi
+tAUTOINC+b59a2167a1-r0/recipe-sysroot-native/lib
+| -Wl,-rpath,/build/tmp/work/x86_64-linux/aufs-util-native/3.14+gitAUTOINC+b59a2167a1-r0/recipe-sysroot-native/usr/lib
+| -Wl,-rpath,/build/tmp/work/x86_64-linux
+/aufs-util-native/3.14+gitAUTOINC+b59a2167a1-r0/recipe-sysroot-native/lib
+| -Wl,-O1  c2sh.c   -o c2sh
+| make: cc: Command not found
+| <builtin>: recipe for target 'c2sh' failed
 
-The homepage of curlpp on googlecode is obsoleted, so update it and use
-soure code repo on github.
+While we could get 'cc' added to the tools whitelist, it is just as easy
+to redefine CC to be gcc, which is already passed through.
 
-Remove dependency boost which is dropped by upstream. And remove extra
-CXXFLAGS which has been fixed by upstream.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
 ---
- .../curlpp/{curlpp_0.7.3.bb => curlpp_0.8.1.bb}       | 19 ++++++-------------
- 1 file changed, 6 insertions(+), 13 deletions(-)
- rename meta-networking/recipes-support/curlpp/{curlpp_0.7.3.bb => curlpp_0.8.1.bb} (47%)
+ meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb b/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb
-similarity index 47%
-rename from meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
-rename to meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb
-index c3a242a..340f57d 100644
---- a/meta-networking/recipes-support/curlpp/curlpp_0.7.3.bb
-+++ b/meta-networking/recipes-support/curlpp/curlpp_0.8.1.bb
-@@ -1,25 +1,19 @@
- SUMMARY = "C++ library for client-side URL transfers"
--HOMEPAGE = "http://code.google.com/p/curlpp/"
-+HOMEPAGE = "http://www.curlpp.org/"
- SECTION = "libdevel"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
+diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
+index 3d59e50f4a30..7d5352eb4e76 100644
+--- a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
++++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
+@@ -41,7 +41,7 @@ do_compile () {
+ }
  
--DEPENDS = "curl boost"
-+DEPENDS = "curl"
- DEPENDS_class-native = "curl-native"
+ do_compile_class-native () {
+-    oe_runmake tools CPPFLAGS="-I${S}/include -I${S}/libau"
++    oe_runmake tools CPPFLAGS="-I${S}/include -I${S}/libau" CC="${BUILD_CC}"
+ }
  
--SRC_URI = "http://curlpp.googlecode.com/files/curlpp-${PV}.tar.gz \
--    file://example21.cpp-remove-deprecated-code.patch \
--"
-+SRC_URI = "git://github.com/jpbarrette/curlpp.git"
- 
--SRC_URI[md5sum] = "ccc3d30d4b3b5d2cdbed635898c29485"
--SRC_URI[sha256sum] = "e3f9427b27c5bddf898d383d45c0d3d5397e2056ff935d9a5cdaef6a9a653bd5"
-+SRCREV = "592552a165cc569dac7674cb7fc9de3dc829906f"
- 
--inherit autotools-brokensep pkgconfig binconfig
-+S = "${WORKDIR}/git"
- 
--EXTRA_OECONF = "--with-boost=${STAGING_DIR_HOST}${prefix}"
--# Upstream is currently working on porting the code to use std::unique_ptr instead of the
--# deprecated auto_ptr.  For now, ignore the issue.
--CXXFLAGS += "-Wno-error=deprecated-declarations"
-+inherit cmake pkgconfig binconfig
- 
- do_install_append () {
-     sed -i 's,${STAGING_DIR_TARGET},,g' ${D}${libdir}/pkgconfig/curlpp.pc
-@@ -30,7 +24,6 @@ PACKAGES =+ "libcurlpp libcurlpp-dev libcurlpp-staticdev"
- FILES_lib${BPN} = "${libdir}/lib*.so.*"
- 
- FILES_lib${BPN}-dev = "${includedir} \
--    ${libdir}/lib*.la \
-     ${libdir}/pkgconfig \
-     ${bindir}/*-config \
- "
+ do_install () {
 -- 
-2.10.1
+2.5.0
 
 
