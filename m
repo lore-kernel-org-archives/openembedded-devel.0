@@ -1,48 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id B3D7D77A91
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id D328977AB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Mar 2017 18:45:54 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id o126so28157410pfb.1
+	Wed, 22 Mar 2017 18:45:55 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id 79so23299240pgf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Mar 2017 11:45:56 -0700 (PDT)
+	Wed, 22 Mar 2017 11:45:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Y5GpKYKnkKkolvga7FWyWUC2Ebne5GQInhJjBQQ/ghk=;
-	b=O//lZb51G9Mt7hqN2sjxLMTTDXvHl2TB/L7O3Q+xuVzF0k18/wcnsmlpw41ZceusBJ
-	yhATS6WHCnzbeHKaGgvwtspaGgcs3SQcfrNpTX70qpb/94WDnvHT3xmosT0yRkq5u2hq
-	oDHiWBZQd4qb3T1MBV7W7CdrICs7LzXoAdRkUt5GTub9CvjO8OibOmZhEyK7ttBMEb36
-	hf7AEhqxPGNrvTd2sHQ/Hc1NvXISPVvZJykolNmsP5iRORpPQ/oM/7hfM18MQ7V8vLYu
-	Ftm6asHjhpwaiIb2Rknxryyv+gDXaqVyKxDNjneceS0jTmbR3Q+mf+1kFugkzO4eFHIx
-	GWMQ==
+	bh=JvCjtiGfS6WB07q7sAr5Jsz5/usFKhdy4veCKrpj0KY=;
+	b=FB0N08A9VFCHJp5P3grvKsW3TiJm1W9N4DIZeDNu64DEAFdY2kVq3g/76EyYS2m44K
+	wnJLLP4juMio/Dw+sVnEBTSL7xPNNtqnt8g21Kcu6N2bx527csBbieIrhfVt1xSlYg3X
+	zEOn0TB3OJVZ4fvYVYgYVDRim9YlQqkf6zg1yUcdLz1IDw/J8C7qGos02/KcgAZn4cR3
+	pIrWgxnu7+G7cUoXpnX+5g/edzBNRR+t0iWCiXZA8Yhj5dpjB108foBwaT2yk7icSTk0
+	b33jpyC6lFdgnfeTIO9G7UQ5FZ+5kP2B/orISIwvvIZtWYTnOmpslS8gZWlKUOnTScTf
+	n1wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=Y5GpKYKnkKkolvga7FWyWUC2Ebne5GQInhJjBQQ/ghk=;
-	b=qO80mIAb/VYQnP+xXkWj5rAVM+tw6pgf8lIJaLrxt1XeCRq9R0CqmT3QB/4vd0iivW
-	uTNyhWL9pyoQzX13saiovZw+kG92DmC8W8ls/FG2T5IqHkvBUF4cYf6Pq1eGDshFv7P2
-	2firSKnjs9r9Fn0ToIKti7pxdBSBvLs4K0iadR8XKO3oBQj6OKzixQoU+5Nbc1PsKiRH
-	U/TGkn/JAxc50agDAiU9I+0ybwgWNsQtEnvJ+SeSUb+vnW2rxlHSQ5yjWO7Gq9cbnAFG
-	zU+aQvvuvbXie+eg+ooqwqVPWgdQQm5iXXGaS4UOTHJsSRFZhAl26+3efJ+i+K1fPzTW
-	6pAw==
-X-Gm-Message-State: AFeK/H0zRS8H4akDM/7G/qFh7m/FDNlgT4w0Gc1QXAgpe3mFSuqCmez34o7oCACnfFHuMQ==
-X-Received: by 10.84.224.3 with SMTP id r3mr48432994plj.130.1490208355987;
-	Wed, 22 Mar 2017 11:45:55 -0700 (PDT)
+	bh=JvCjtiGfS6WB07q7sAr5Jsz5/usFKhdy4veCKrpj0KY=;
+	b=PQ88HZi54aJz22y1edvhD7x3FU+AZgBvelnH/72u+bGbZqj1jBEaTSg0Z42vCEJXuD
+	AGtuD3cACispEiEvgzkDr2YQVO5JW8GUebfTcOVKkD26v9zG2OlGyECxSWLkfotTSF4c
+	KZTuRlizb8D7YC0jKM7ZgwUvqomPhRw+uSB45vzVPtbMvzFfcDCJ7/13f7Jct7Lwmfsd
+	OajZF94xn5pham9YIhlNSIeGZ10Do8/EGnsZ05Xbpc+tUwQ8axtNYxBzdGcQs5Lwpp2d
+	uqc6jPJ/jelsfi6xjUhZ4YEzNB+0bwuKEiEBa7e8W9fD3PqiykJ3WJxy/eqplQEdMa+R
+	AnXQ==
+X-Gm-Message-State: AFeK/H3TSiTTVVPoe922s1XRzSvc8p/CM/exdzOsZYTOes+14Q9IFylPhWHja2agTe8gXQ==
+X-Received: by 10.98.196.221 with SMTP id h90mr47575400pfk.149.1490208357363; 
+	Wed, 22 Mar 2017 11:45:57 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192])
-	by smtp.gmail.com with ESMTPSA id z4sm5404494pge.49.2017.03.22.11.45.54
+	by smtp.gmail.com with ESMTPSA id z4sm5404494pge.49.2017.03.22.11.45.56
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 22 Mar 2017 11:45:54 -0700 (PDT)
+	Wed, 22 Mar 2017 11:45:56 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Mar 2017 11:45:32 -0700
-Message-Id: <20170322184533.6501-9-raj.khem@gmail.com>
+Date: Wed, 22 Mar 2017 11:45:33 -0700
+Message-Id: <20170322184533.6501-10-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.0
 In-Reply-To: <20170322184533.6501-1-raj.khem@gmail.com>
 References: <20170322184533.6501-1-raj.khem@gmail.com>
-Subject: [meta-python][PATCH 09/10] python-slip-dbus: Update SRC_URI to github
+Subject: [meta-multimedia][PATCH 10/10] alsa-equal: Update SRC_URI to something valid
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,26 +54,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Mar 2017 18:45:54 -0000
+X-List-Received-Date: Wed, 22 Mar 2017 18:45:56 -0000
+
+www.thedigitalmachine.net has disappeared
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-slip-dbus_0.6.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-slip-dbus_0.6.1.bb b/meta-python/recipes-devtools/python/python-slip-dbus_0.6.1.bb
-index 785cecc35..8081416ee 100644
---- a/meta-python/recipes-devtools/python/python-slip-dbus_0.6.1.bb
-+++ b/meta-python/recipes-devtools/python/python-slip-dbus_0.6.1.bb
-@@ -14,7 +14,7 @@ LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
- SRCNAME = "python-slip"
+diff --git a/meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb b/meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb
+index 637d029ba..3bed70e1a 100644
+--- a/meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb
++++ b/meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb
+@@ -1,12 +1,12 @@
+ DESCRIPTION = "A real-time adjustable equalizer plugin for ALSA"
+-HOMEPAGE = "http://www.thedigitalmachine.net/alsaequal.html"
++HOMEPAGE = "https://web.archive.org/web/20161105202833/http://thedigitalmachine.net/alsaequal.html"
+ LICENSE = "LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=243b725d71bb5df4a1e5920b344b86ad"
  
--SRC_URI = "https://fedorahosted.org/released/${SRCNAME}/${SRCNAME}-${PV}.tar.bz2"
-+SRC_URI = "https://github.com/nphilipp/${SRCNAME}/releases/download/${SRCNAME}-${PV}/${SRCNAME}-${PV}.tar.bz2"
- S = "${WORKDIR}/${SRCNAME}-${PV}"
+ DEPENDS = "alsa-lib"
  
- inherit setuptools
+ SRC_URI = " \
+-    http://www.thedigitalmachine.net/tools/alsaequal-${PV}.tar.bz2 \
++    https://launchpad.net/ubuntu/+archive/primary/+files/alsaequal_${PV}.orig.tar.bz2 \
+     file://0001-Fix-asneeded.patch \
+     file://0002-Fix-Eq-CAPS-plugin-name.patch \
+     file://0003-Fix-mixer.patch \
 -- 
 2.12.0
 
