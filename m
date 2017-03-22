@@ -1,42 +1,27 @@
-Return-Path: <fathi.boudra@linaro.org>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CE2C71AB8
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 33531606B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Mar 2017 05:36:27 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id u132so26436777wmg.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Mar 2017 22:36:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=G4UedcHMbwlTox34YlK1n9q9o2GPPq9UBriCXPXrHBM=;
-	b=HrVCzUuL8M/tD3N/aTr/Qqpr8+l2u//AHyMnoCtLeF8P6KJGMupmqPrjrgAjrP6xFU
-	zktIA00MRpahLMGaQeonL3c9bzd8p+FoKjRN0p2d/Mvw03fPfMYPAwnP4yZPyLYAE0Zy
-	NGrdp0wKizzxQgKk/DOxZPbIejdcLs+CYUtwg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=G4UedcHMbwlTox34YlK1n9q9o2GPPq9UBriCXPXrHBM=;
-	b=lDE960PRHcbQYu5GvSgKfZB9D9rwdE7dNS26DEx5Jv3qCK3Rvfo7iQOZDj4QBPEDkS
-	TPxsqEh26JY3mENzQccZJKu85cY9yQqb4JU7NRGoO+Duw5D7EjBkD9DPwlry49cAWpp3
-	/6Ph4g7bmaIBFHmqKMgjkZCpVPTSIYCfD+ouLFZET2X5yiStmoc/5VETzvPWkp+nn6jp
-	o4stYKJh4q/W+YVvd5Gd9P+hhdoA3IooZetssyqsVVBoWZh/paq0BiSATO6bqTBYwyjQ
-	x1VDPEwJSyzBJags9VIMcZQp+nu9FqqlIfPMSmUD/jyV2E8dIWqjew1Q2eDyvfvGKQON
-	W/iw==
-X-Gm-Message-State: AFeK/H3OmoKxhNyuZ8J0azeXQHIhkvJwzTHYXUKEgYTyYB1sfWOSGU6QqhAnaCv8GfLdA1Gv
-X-Received: by 10.25.18.95 with SMTP id h92mr9501456lfi.63.1490160987904;
-	Tue, 21 Mar 2017 22:36:27 -0700 (PDT)
-Received: from localhost.localdomain (a91-156-68-16.elisa-laajakaista.fi.
-	[91.156.68.16])
-	by smtp.gmail.com with ESMTPSA id a16sm110730lfk.24.2017.03.21.22.36.26
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 21 Mar 2017 22:36:26 -0700 (PDT)
-From: Fathi Boudra <fathi.boudra@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Mar 2017 07:36:28 +0200
-Message-Id: <20170322053628.26273-1-fathi.boudra@linaro.org>
-X-Mailer: git-send-email 2.11.0
-Cc: koen@dominion.thruhere.net
-Subject: [meta-oe][PATCH] fwts: upgrade to 17.03.00 release
+	Wed, 22 Mar 2017 08:18:02 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v2M8I2Pd009376
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 22 Mar 2017 01:18:02 -0700 (PDT)
+Received: from [128.224.162.185] (128.224.162.185) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 22 Mar 2017 01:18:01 -0700
+To: <openembedded-devel@lists.openembedded.org>
+References: <20170313032921.8669-1-kai.kang@windriver.com>
+	<20170313032921.8669-4-kai.kang@windriver.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <1a1d1994-a982-fa0a-667a-6bd3a8d50b79@windriver.com>
+Date: Wed, 22 Mar 2017 16:16:09 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.0
+MIME-Version: 1.0
+In-Reply-To: <20170313032921.8669-4-kai.kang@windriver.com>
+Subject: Re: [PATCH 3/5] libdnet: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,32 +34,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Mar 2017 05:36:32 -0000
+X-List-Received-Date: Wed, 22 Mar 2017 08:18:03 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Update PV and SRCREV to match 17.03.00 release
+On 2017年03月13日 11:29, kai.kang@windriver.com wrote:
+> From: Kai Kang <kai.kang@windriver.com>
+>
+> The official site libdnet.googlecode.com is redirected to github. So
+> update SRC_URI and its checksums. And update S as well.
+>
+> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> ---
+>   meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb | 8 +++++---
+>   1 file changed, 5 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb b/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
+> index 28b6c82..aff64c2 100644
+> --- a/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
+> +++ b/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
+> @@ -4,10 +4,12 @@ SECTION = "libs"
+>   LICENSE = "BSD"
+>   LIC_FILES_CHKSUM = "file://LICENSE;md5=0036c1b155f4e999f3e0a373490b5db9"
+>   
+> -SRC_URI = "http://libdnet.googlecode.com/files/libdnet-${PV}.tgz"
+> +SRC_URI = "https://github.com/dugsong/${BPN}/archive/${BP}.tar.gz"
 
-Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
----
- meta-oe/recipes-test/fwts/fwts_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Hi Martin,
 
-diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb b/meta-oe/recipes-test/fwts/fwts_git.bb
-index 6df6cfd52..4c4ae66d6 100644
---- a/meta-oe/recipes-test/fwts/fwts_git.bb
-+++ b/meta-oe/recipes-test/fwts/fwts_git.bb
-@@ -5,9 +5,9 @@ HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd34dcdb9e4db568519"
- 
--PV = "17.02.00"
-+PV = "17.03.00"
- 
--SRCREV = "b5a7b3c478f9438343ee63ad0cd93610161515c5"
-+SRCREV = "e3e9d1442b4cc70f5b30199f584cec8e25aeaad4"
- SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git \
-            file://0001-ignore-constant-logical-operand-warning-with-clang.patch \
-            "
+It is weird that the tag 'libdnet-1.12' is not contained in any branch. 
+I am afraid it could NOT use git repo for libdnet.
+
+Ref:
+https://github.com/dugsong/libdnet/commit/12fca29a6d4e99d1b923d6820887fe7b24226904
+
+
+Regards,
+Kai
+>   
+> -SRC_URI[md5sum] = "9253ef6de1b5e28e9c9a62b882e44cc9"
+> -SRC_URI[sha256sum] = "83b33039787cf99990e977cef7f18a5d5e7aaffc4505548a83d31bd3515eb026"
+> +SRC_URI[md5sum] = "d2f1b72eac2a1070959667e9e61dcf20"
+> +SRC_URI[sha256sum] = "b6360659c93fa2e3cde9e0a1fc9c07bc4111f3448c5de856e095eb98315dd424"
+> +
+> +S = "${WORKDIR}/${BPN}-${BP}"
+>   
+>   inherit autotools
+>   
+
+
 -- 
-2.11.0
+Regards,
+Neil | Kai Kang
 
 
