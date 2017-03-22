@@ -1,27 +1,60 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 33531606B2
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 8935E6FF78
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Mar 2017 08:18:02 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v2M8I2Pd009376
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 22 Mar 2017 01:18:02 -0700 (PDT)
-Received: from [128.224.162.185] (128.224.162.185) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 22 Mar 2017 01:18:01 -0700
-To: <openembedded-devel@lists.openembedded.org>
-References: <20170313032921.8669-1-kai.kang@windriver.com>
-	<20170313032921.8669-4-kai.kang@windriver.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <1a1d1994-a982-fa0a-667a-6bd3a8d50b79@windriver.com>
-Date: Wed, 22 Mar 2017 16:16:09 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.7.0
+	Wed, 22 Mar 2017 09:00:56 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id 499EE1845E;
+	Wed, 22 Mar 2017 10:00:56 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id NhHE1B4JddES; Wed, 22 Mar 2017 10:00:54 +0100 (CET)
+Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
+	by bastet.se.axis.com (Postfix) with ESMTPS id 0FB1F1843F;
+	Wed, 22 Mar 2017 10:00:53 +0100 (CET)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id B47131A084;
+	Wed, 22 Mar 2017 10:00:53 +0100 (CET)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id A93DB1A080;
+	Wed, 22 Mar 2017 10:00:53 +0100 (CET)
+Received: from thoth.se.axis.com (unknown [10.0.2.173])
+	by boulder02.se.axis.com (Postfix) with ESMTP;
+	Wed, 22 Mar 2017 10:00:53 +0100 (CET)
+Received: from XBOX03.axis.com (xbox03.axis.com [10.0.5.17])
+	by thoth.se.axis.com (Postfix) with ESMTP id 9D3E91A33;
+	Wed, 22 Mar 2017 10:00:53 +0100 (CET)
+Received: from xbox11.axis.com (10.0.5.25) by XBOX03.axis.com (10.0.5.17) with
+	Microsoft SMTP Server (TLS) id 15.0.1210.3;
+	Wed, 22 Mar 2017 10:00:53 +0100
+Received: from XBOX02.axis.com (10.0.5.16) by xbox11.axis.com (10.0.5.25) with
+	Microsoft SMTP Server (TLS) id 15.0.1210.3;
+	Wed, 22 Mar 2017 10:00:53 +0100
+Received: from XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776]) by
+	XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776%21]) with mapi id
+	15.00.1210.000; Wed, 22 Mar 2017 10:00:53 +0100
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Patrick Ohly <patrick.ohly@intel.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-oe][PATCH v2 1/2] lvm2: libdevicemapper package needs udev
+	rules and dmsetup
+Thread-Index: AQHSoYzKZ/+62XYo4E+kHWDAIzX7vqGgkCCA
+Date: Wed, 22 Mar 2017 09:00:53 +0000
+Message-ID: <f56e3caed10c45d0b0d23785506cee7c@XBOX02.axis.com>
+References: <32e1d3fa5c6441cd9f67837dd324cb6b76f5cd53.1490016683.git-series.patrick.ohly@intel.com>
+	<8a2dc0af5e5c51e71d154de8180e0b74388a9fa9.1490022750.git-series.patrick.ohly@intel.com>
+In-Reply-To: <8a2dc0af5e5c51e71d154de8180e0b74388a9fa9.1490022750.git-series.patrick.ohly@intel.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
 MIME-Version: 1.0
-In-Reply-To: <20170313032921.8669-4-kai.kang@windriver.com>
-Subject: Re: [PATCH 3/5] libdnet: update SRC_URI
+X-TM-AS-GCONF: 00
+Subject: Re: [meta-oe][PATCH v2 1/2] lvm2: libdevicemapper package needs udev rules and dmsetup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,57 +67,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Mar 2017 08:18:03 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 22 Mar 2017 09:00:58 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On 2017年03月13日 11:29, kai.kang@windriver.com wrote:
-> From: Kai Kang <kai.kang@windriver.com>
->
-> The official site libdnet.googlecode.com is redirected to github. So
-> update SRC_URI and its checksums. And update S as well.
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> -----Original Message-----
+> From: Patrick Ohly [mailto:patrick.ohly@intel.com]
+> Sent: den 20 mars 2017 16:14
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Peter Kjellerstedt; Patrick Ohly
+> Subject: [meta-oe][PATCH v2 1/2] lvm2: libdevicemapper package needs
+> udev rules and dmsetup
+>=20
+> Applications like kpartx and cryptsetup were broken by moving only
+> libdevicemapper itself into a separate package: as a result of that
+> change, lvm2 was not getting pulled into images anymore although
+> libdevicemapper depends on dmsetup and udev rules to be fully
+> functional.
+>=20
+> For example, "kpartx -as" started to hang while waiting for the udev
+> rules to trigger, which is what creates the /dev/mapper/ entries for
+> the new partitions (see also
+> https://github.com/docker/docker/issues/22025#issuecomment-243943728).
+>=20
+> Putting udev rules and dmsetup also into libdevicemapper is perhaps
+> counter-intuitive, but necessary to keep the package functioning. A
+> full lvm2 installation is guaranteed to pull them in, too, both
+> because of implicit library dependencies and (just to be sure) an
+> explicit RDEPENDS.
+>=20
+> lvm2-native doesn't have packages, so this RDEPENDS must be limited to
+> the target case.
+>=20
+> Signed-off-by: Patrick Ohly <patrick.ohly@intel.com>
 > ---
->   meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb | 8 +++++---
->   1 file changed, 5 insertions(+), 3 deletions(-)
->
-> diff --git a/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb b/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
-> index 28b6c82..aff64c2 100644
-> --- a/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
-> +++ b/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
-> @@ -4,10 +4,12 @@ SECTION = "libs"
->   LICENSE = "BSD"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=0036c1b155f4e999f3e0a373490b5db9"
->   
-> -SRC_URI = "http://libdnet.googlecode.com/files/libdnet-${PV}.tgz"
-> +SRC_URI = "https://github.com/dugsong/${BPN}/archive/${BP}.tar.gz"
+>  meta-oe/recipes-support/lvm2/lvm2.inc | 7 +++++--
+>  1 file changed, 5 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-
+> support/lvm2/lvm2.inc
+> index 3e79552..cfa74d4 100644
+> --- a/meta-oe/recipes-support/lvm2/lvm2.inc
+> +++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+> @@ -83,14 +83,17 @@ SYSTEMD_AUTO_ENABLE =3D "disable"
+>=20
+>  TARGET_CC_ARCH +=3D "${LDFLAGS}"
+>=20
+> -FILES_${PN} +=3D "${libdir}/device-mapper/*.so ${nonarch_base_libdir}/ud=
+ev"
+> +FILES_${PN} +=3D "${libdir}/device-mapper/*.so"
+>  FILES_${PN}-scripts =3D " \
+>      ${sbindir}/blkdeactivate \
+>      ${sbindir}/fsadm \
+>      ${sbindir}/lvmconf \
+>      ${sbindir}/lvmdump \
+>  "
+> -FILES_libdevmapper =3D "${libdir}/libdevmapper.so.*"
+> +# Specified explicitly for the udev rules, just in case that it does not=
+ get picked
+> +# up automatically:
+> +RDEPENDS_${PN}_append_class-target =3D " libdevmapper"
+> +FILES_libdevmapper =3D "${sbindir}/dmsetup ${libdir}/libdevmapper.so.* $=
+{nonarch_base_libdir}/udev/rules.d"
+>  FILES_libdevmapper-dev =3D " \
+>      ${libdir}/libdevmapper.so \
+>      ${libdir}/pkgconfig/devmapper.pc \
+>=20
+> base-commit: 6c584374a599f6f8d3607f20ecfc13a67ccf1da1
+> --
+> git-series 0.9.1
 
-Hi Martin,
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 
-It is weird that the tag 'libdnet-1.12' is not contained in any branch. 
-I am afraid it could NOT use git repo for libdnet.
-
-Ref:
-https://github.com/dugsong/libdnet/commit/12fca29a6d4e99d1b923d6820887fe7b24226904
-
-
-Regards,
-Kai
->   
-> -SRC_URI[md5sum] = "9253ef6de1b5e28e9c9a62b882e44cc9"
-> -SRC_URI[sha256sum] = "83b33039787cf99990e977cef7f18a5d5e7aaffc4505548a83d31bd3515eb026"
-> +SRC_URI[md5sum] = "d2f1b72eac2a1070959667e9e61dcf20"
-> +SRC_URI[sha256sum] = "b6360659c93fa2e3cde9e0a1fc9c07bc4111f3448c5de856e095eb98315dd424"
-> +
-> +S = "${WORKDIR}/${BPN}-${BP}"
->   
->   inherit autotools
->   
-
-
--- 
-Regards,
-Neil | Kai Kang
+//Peter
 
 
