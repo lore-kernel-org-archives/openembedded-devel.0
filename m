@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C1C877A57
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id E026977A57
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Mar 2017 18:45:51 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id o126so28157230pfb.1
+	Wed, 22 Mar 2017 18:45:52 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id r137so24341424pfr.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Mar 2017 11:45:53 -0700 (PDT)
+	Wed, 22 Mar 2017 11:45:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=9Nr67ZQvj8XGIySZEyhLrCy5uvPSCmKKQ2+v009ufLg=;
-	b=VyU7L5c6KB9RxmzFYzvXAxukIXlqQyuxKGtHBywQeYnx6mCG+tJorjXPMs14gsRl+i
-	nhS+2rz4gTt3TwI2gqKPsWovLxp2EQieTpUJeEOEZrhlZN9cP52cgJS71ecFGOpUO3Vu
-	4iiEjSycprqj94laUJR1ZKdcskAjkFE1KZ96bysWB1iX+VQb3cFaI98e2UAsmZBEl2/x
-	VqpMmoPR69c6ZMzNns/n7t43NMuNqULXMvYjqwJy4D4PCmcTHp/ueU8DwwFyDN3g+c84
-	SXl9RjMOPpKESUgBeNz+cim4XW+wf7enKlRNIjlsS521OGMihOsYF1f9cG2lfXukoCyT
-	/t5A==
+	bh=4d9oWS/IBNREnVlwytwPPrLJLsx1kt1/dwBHwvDUYjA=;
+	b=KzRtn238HC45hzWIvlzycJ9LW7Kn7Vfg/jQoz/DzppAjClLLgRKVDEWJwr3Wl5c9Qi
+	UICteKwy7q0YFs3ohT+pv++oQEeDsxFKuPtIjbwWs+R4wy5zqEMPL4jFyFf+iOLC9hbc
+	SDNFQxTytoCRUcG44RQDVkJrXxjKVC32BsmDUJ/t+Lvn+rXHhgNrR1ieZFTXxantMQy6
+	Gw7KoxhAMp34CpGQratX8XmSGQVtP/9egltbDA23Q/tqdPjIK+KW/eQncejQV1wGT5vn
+	DpkP30ELKTS7WL2amfCYjG4c/8ORyDvShFpQmdj54/852IboTk/mJAGD1Ngtwcgt+PnX
+	5xTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=9Nr67ZQvj8XGIySZEyhLrCy5uvPSCmKKQ2+v009ufLg=;
-	b=ZXw/2XgGE34TKwVU4Q++vjkbUFQSzGiIHiAbuLKFYtoROA9tMDe2KR0ONbRhNdSchC
-	UkIapZel9j3BFBTIEfNuuQ0ZZfkoxEBEUOiL2zyMmjfFGyfVGZUoCTaFQaAIgEIBSfeC
-	0mb2pChMz/JwktPIxn2gIkgt3Fj6b1KdCg5qUgGFT37pxo7w9vkjqmrM00JIZTDxUeT4
-	DxMeuCRneAS6ZWpAeMK57MTy1mBdwOY9QOFmnnlwQK8LKAP5rXqpzeJf4LTjWAbpX2Hr
-	GyTr+iDg64s+Uuh8MW+unr1uAE1gMh6ZhnLCg/6bfNVM4NxuAWkGIJG3OOo2Ue7jsiD3
-	O9NQ==
-X-Gm-Message-State: AFeK/H3GRRNCVLloGGoS4yvsnFUxtqL5lV5ab3+v2NJIcCOFMS2LR4PGUT+HZcFVGlBftQ==
-X-Received: by 10.99.142.67 with SMTP id k64mr39983193pge.31.1490208352866;
-	Wed, 22 Mar 2017 11:45:52 -0700 (PDT)
+	bh=4d9oWS/IBNREnVlwytwPPrLJLsx1kt1/dwBHwvDUYjA=;
+	b=ewAZuM6CUzAwvXQkjDntkXD9lQ2jqy2Nhs/nlUp9lsLBEqWs6uMUNsBRYzoL3gZGbI
+	k3y+h+vdviPbyY7Zch2xUqFlQMc2fcJwwfyYwG2ETyYWDVF2T8cigEPcXeNFJyT0kkQl
+	DIR6JCk1K8mTsfsWuQekMxzs9UmKaWcWq1QQncpecJaI+n11D3Lp5hTevqvl+KcaE6ST
+	RhOSkTblItbrALBnCgySC3mjuiFIfM0feidwYB2DwfElXdjqrw5485/zLrsuap1t4Avj
+	OqwHWWu3xXThL1Yx21DKwCNi2Kli/xPNLIh8Xzq2JEYHIoGNCSHTojin/rrhfmV5fXWc
+	KzuQ==
+X-Gm-Message-State: AFeK/H1+iPJVrlHlduPkb9S95ADiA6PxhmGUu6yzMBL4CiPgzQ26t6EaWZImMcouxwX5NQ==
+X-Received: by 10.84.171.195 with SMTP id l61mr56166811plb.84.1490208354513;
+	Wed, 22 Mar 2017 11:45:54 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192])
-	by smtp.gmail.com with ESMTPSA id z4sm5404494pge.49.2017.03.22.11.45.51
+	by smtp.gmail.com with ESMTPSA id z4sm5404494pge.49.2017.03.22.11.45.52
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 22 Mar 2017 11:45:51 -0700 (PDT)
+	Wed, 22 Mar 2017 11:45:53 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Mar 2017 11:45:30 -0700
-Message-Id: <20170322184533.6501-7-raj.khem@gmail.com>
+Date: Wed, 22 Mar 2017 11:45:31 -0700
+Message-Id: <20170322184533.6501-8-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.0
 In-Reply-To: <20170322184533.6501-1-raj.khem@gmail.com>
 References: <20170322184533.6501-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 07/10] libedit: Update to 20160618-3.1 release
+Subject: [meta-oe][PATCH V2 08/10] atop: Fix build with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,63 +55,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Mar 2017 18:45:51 -0000
-
-fix build with musl
+X-List-Received-Date: Wed, 22 Mar 2017 18:45:53 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/libedit/libedit/stdc-predef.patch  | 17 +++++++++++++++++
- ...{libedit_20160618-3.1.bb => libedit_20160903-3.1.bb} |  9 +++++----
- 2 files changed, 22 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/libedit/libedit/stdc-predef.patch
- rename meta-oe/recipes-devtools/libedit/{libedit_20160618-3.1.bb => libedit_20160903-3.1.bb} (64%)
+ .../atop/0001-include-missing-header-files.patch   | 97 ++++++++++++++++++++++
+ meta-oe/recipes-support/atop/atop_2.2.3.bb         |  1 +
+ 2 files changed, 98 insertions(+)
+ create mode 100644 meta-oe/recipes-support/atop/atop/0001-include-missing-header-files.patch
 
-diff --git a/meta-oe/recipes-devtools/libedit/libedit/stdc-predef.patch b/meta-oe/recipes-devtools/libedit/libedit/stdc-predef.patch
+diff --git a/meta-oe/recipes-support/atop/atop/0001-include-missing-header-files.patch b/meta-oe/recipes-support/atop/atop/0001-include-missing-header-files.patch
 new file mode 100644
-index 000000000..c95cdc9d2
+index 000000000..3708f60ba
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/libedit/libedit/stdc-predef.patch
-@@ -0,0 +1,17 @@
-+__STDC_ISO_10646__ is defined in stdc-predef.h
-+therefore include it to see if its there on a platform
++++ b/meta-oe/recipes-support/atop/atop/0001-include-missing-header-files.patch
+@@ -0,0 +1,97 @@
++From 7b651793269b6b86f12c43c30b751b86def27222 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 18 Mar 2017 17:56:40 -0700
++Subject: [PATCH] include missing header files
++
++fixes build with musl
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ deviate.c     | 1 +
++ procdbase.c   | 2 +-
++ showgeneric.c | 2 +-
++ showlinux.c   | 2 +-
++ showprocs.c   | 2 +-
++ showsys.c     | 2 +-
++ 6 files changed, 6 insertions(+), 5 deletions(-)
 +
-+Index: libedit-20160903-3.1/src/chartype.h
-+===================================================================
-+--- libedit-20160903-3.1.orig/src/chartype.h
-++++ libedit-20160903-3.1/src/chartype.h
-+@@ -29,6 +29,7 @@
-+ #ifndef _h_chartype_f
-+ #define _h_chartype_f
++diff --git a/deviate.c b/deviate.c
++index 7cf1b49..8e615af 100644
++--- a/deviate.c
+++++ b/deviate.c
++@@ -178,6 +178,7 @@ static const char rcsid[] = "$Id: deviate.c,v 1.45 2010/10/23 14:02:03 gerlof Ex
++ #include <stdio.h>
++ #include <errno.h>
++ #include <fcntl.h>
+++#include <stdlib.h>
++ #include <unistd.h>
++ #include <limits.h>
++ #include <memory.h>
++diff --git a/procdbase.c b/procdbase.c
++index 9cab347..0487d26 100644
++--- a/procdbase.c
+++++ b/procdbase.c
++@@ -67,7 +67,7 @@ static const char rcsid[] = "$Id: procdbase.c,v 1.8 2010/04/23 12:19:35 gerlof E
++ #include <fcntl.h>
++ #include <unistd.h>
++ #include <string.h>
++-#include <malloc.h>
+++#include <stdlib.h>
 + 
-++#include <stdc-predef.h>
-+ /* Ideally we should also test the value of the define to see if it
-+  * supports non-BMP code points without requiring UTF-16, but nothing
-+  * seems to actually advertise this properly, despite Unicode 3.1 having
-diff --git a/meta-oe/recipes-devtools/libedit/libedit_20160618-3.1.bb b/meta-oe/recipes-devtools/libedit/libedit_20160903-3.1.bb
-similarity index 64%
-rename from meta-oe/recipes-devtools/libedit/libedit_20160618-3.1.bb
-rename to meta-oe/recipes-devtools/libedit/libedit_20160903-3.1.bb
-index bda421d81..90b5a1d39 100644
---- a/meta-oe/recipes-devtools/libedit/libedit_20160618-3.1.bb
-+++ b/meta-oe/recipes-devtools/libedit/libedit_20160903-3.1.bb
-@@ -12,9 +12,10 @@ inherit autotools
- 
- # upstream site does not allow wget's User-Agent
- FETCHCMD_wget += "-U bitbake"
--SRC_URI = "http://www.thrysoee.dk/editline/${BPN}-${PV}.tar.gz"
-+SRC_URI = "http://www.thrysoee.dk/editline/${BPN}-${PV}.tar.gz \
-+           file://stdc-predef.patch \
-+          "
-+SRC_URI[md5sum] = "0467d27684c453a351fbcefebbcb16a3"
-+SRC_URI[sha256sum] = "0ccbd2e7d46097f136fcb1aaa0d5bc24e23bb73f57d25bee5a852a683eaa7567"
- 
- S = "${WORKDIR}/${BPN}-${PV}"
--
--SRC_URI[md5sum] = "b6e60f326a3fce91bea1a6fe4700af58"
--SRC_URI[sha256sum] = "b6b159c0c6ec8a7f349ea2a75d8b960efa346c462c1ac4921f1ac0de85a9f5d6"
++ #include "atop.h"
++ #include "photoproc.h"
++diff --git a/showgeneric.c b/showgeneric.c
++index 775afa8..3d5be0e 100644
++--- a/showgeneric.c
+++++ b/showgeneric.c
++@@ -268,7 +268,7 @@ static const char rcsid[] = "$Id: showgeneric.c,v 1.71 2010/10/25 19:08:32 gerlo
++ #include <errno.h>
++ #include <fcntl.h>
++ #include <string.h>
++-#include <termio.h>
+++#include <termios.h>
++ #include <unistd.h>
++ #include <stdarg.h>
++ #include <curses.h>
++diff --git a/showlinux.c b/showlinux.c
++index 6e60754..aba2ee6 100644
++--- a/showlinux.c
+++++ b/showlinux.c
++@@ -274,7 +274,7 @@ static const char rcsid[] = "$Id: showlinux.c,v 1.70 2010/10/23 14:04:12 gerlof
++ #include <string.h>
++ #include <errno.h>
++ #include <fcntl.h>
++-#include <termio.h>
+++#include <termios.h>
++ #include <unistd.h>
++ #include <stdarg.h>
++ #include <curses.h>
++diff --git a/showprocs.c b/showprocs.c
++index 5194524..f0169ad 100644
++--- a/showprocs.c
+++++ b/showprocs.c
++@@ -94,7 +94,7 @@ static const char rcsid[] = "$Id: showprocs.c,v 1.15 2011/09/05 11:44:16 gerlof
++ #include <string.h>
++ #include <errno.h>
++ #include <fcntl.h>
++-#include <termio.h>
+++#include <termios.h>
++ #include <unistd.h>
++ #include <stdarg.h>
++ #include <curses.h>
++diff --git a/showsys.c b/showsys.c
++index 26331be..5a05fe5 100644
++--- a/showsys.c
+++++ b/showsys.c
++@@ -80,7 +80,7 @@ static const char rcsid[] = "XXXXXX";
++ #include <string.h>
++ #include <errno.h>
++ #include <fcntl.h>
++-#include <termio.h>
+++#include <termios.h>
++ #include <unistd.h>
++ #include <stdarg.h>
++ #include <curses.h>
++-- 
++2.12.0
++
+diff --git a/meta-oe/recipes-support/atop/atop_2.2.3.bb b/meta-oe/recipes-support/atop/atop_2.2.3.bb
+index a36f08dd7..1ab9e7cf9 100644
+--- a/meta-oe/recipes-support/atop/atop_2.2.3.bb
++++ b/meta-oe/recipes-support/atop/atop_2.2.3.bb
+@@ -20,6 +20,7 @@ ATOP_VER = "${@'-'.join(d.getVar('PV').rsplit('.', 1))}"
+ SRC_URI = " \
+     http://www.atoptool.nl/download/${BPN}-${ATOP_VER}.tar.gz \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'file://volatiles.atop.conf', 'file://volatiles.99_atop', d)} \
++    file://0001-include-missing-header-files.patch \
+     file://remove-bashisms.patch \
+     file://fix-permissions.patch \
+     file://sysvinit-implement-status.patch \
 -- 
 2.12.0
 
