@@ -1,47 +1,31 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id D328977AB3
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B59E673002
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Mar 2017 18:45:55 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id 79so23299240pgf.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Mar 2017 11:45:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=JvCjtiGfS6WB07q7sAr5Jsz5/usFKhdy4veCKrpj0KY=;
-	b=FB0N08A9VFCHJp5P3grvKsW3TiJm1W9N4DIZeDNu64DEAFdY2kVq3g/76EyYS2m44K
-	wnJLLP4juMio/Dw+sVnEBTSL7xPNNtqnt8g21Kcu6N2bx527csBbieIrhfVt1xSlYg3X
-	zEOn0TB3OJVZ4fvYVYgYVDRim9YlQqkf6zg1yUcdLz1IDw/J8C7qGos02/KcgAZn4cR3
-	pIrWgxnu7+G7cUoXpnX+5g/edzBNRR+t0iWCiXZA8Yhj5dpjB108foBwaT2yk7icSTk0
-	b33jpyC6lFdgnfeTIO9G7UQ5FZ+5kP2B/orISIwvvIZtWYTnOmpslS8gZWlKUOnTScTf
-	n1wA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=JvCjtiGfS6WB07q7sAr5Jsz5/usFKhdy4veCKrpj0KY=;
-	b=PQ88HZi54aJz22y1edvhD7x3FU+AZgBvelnH/72u+bGbZqj1jBEaTSg0Z42vCEJXuD
-	AGtuD3cACispEiEvgzkDr2YQVO5JW8GUebfTcOVKkD26v9zG2OlGyECxSWLkfotTSF4c
-	KZTuRlizb8D7YC0jKM7ZgwUvqomPhRw+uSB45vzVPtbMvzFfcDCJ7/13f7Jct7Lwmfsd
-	OajZF94xn5pham9YIhlNSIeGZ10Do8/EGnsZ05Xbpc+tUwQ8axtNYxBzdGcQs5Lwpp2d
-	uqc6jPJ/jelsfi6xjUhZ4YEzNB+0bwuKEiEBa7e8W9fD3PqiykJ3WJxy/eqplQEdMa+R
-	AnXQ==
-X-Gm-Message-State: AFeK/H3TSiTTVVPoe922s1XRzSvc8p/CM/exdzOsZYTOes+14Q9IFylPhWHja2agTe8gXQ==
-X-Received: by 10.98.196.221 with SMTP id h90mr47575400pfk.149.1490208357363; 
-	Wed, 22 Mar 2017 11:45:57 -0700 (PDT)
-Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
-	[76.102.32.192])
-	by smtp.gmail.com with ESMTPSA id z4sm5404494pge.49.2017.03.22.11.45.56
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 22 Mar 2017 11:45:56 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Mar 2017 11:45:33 -0700
-Message-Id: <20170322184533.6501-10-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.12.0
-In-Reply-To: <20170322184533.6501-1-raj.khem@gmail.com>
-References: <20170322184533.6501-1-raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 10/10] alsa-equal: Update SRC_URI to something valid
+	Thu, 23 Mar 2017 01:47:29 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v2N1lT1h005833
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 22 Mar 2017 18:47:29 -0700 (PDT)
+Received: from [128.224.162.185] (128.224.162.185) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 22 Mar 2017 18:47:28 -0700
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <20170313032921.8669-1-kai.kang@windriver.com>
+	<20170313032921.8669-4-kai.kang@windriver.com>
+	<1a1d1994-a982-fa0a-667a-6bd3a8d50b79@windriver.com>
+	<CA+chaQdT5OFOg2weDe7ixSiz4PxGFAjtHm234Dn=HsBYZKX23g@mail.gmail.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <3eeb50de-71ca-03be-8365-5026e6396cb9@windriver.com>
+Date: Thu, 23 Mar 2017 09:45:34 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.7.0
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQdT5OFOg2weDe7ixSiz4PxGFAjtHm234Dn=HsBYZKX23g@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 3/5] libdnet: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,35 +38,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Mar 2017 18:45:56 -0000
+X-List-Received-Date: Thu, 23 Mar 2017 01:47:30 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-www.thedigitalmachine.net has disappeared
+On 2017年03月22日 18:59, Martin Jansa wrote:
+> Yes, you can use git repo, just add nobranch=1 parameter.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+OK. Thanks.
 
-diff --git a/meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb b/meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb
-index 637d029ba..3bed70e1a 100644
---- a/meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb
-+++ b/meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb
-@@ -1,12 +1,12 @@
- DESCRIPTION = "A real-time adjustable equalizer plugin for ALSA"
--HOMEPAGE = "http://www.thedigitalmachine.net/alsaequal.html"
-+HOMEPAGE = "https://web.archive.org/web/20161105202833/http://thedigitalmachine.net/alsaequal.html"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=243b725d71bb5df4a1e5920b344b86ad"
- 
- DEPENDS = "alsa-lib"
- 
- SRC_URI = " \
--    http://www.thedigitalmachine.net/tools/alsaequal-${PV}.tar.bz2 \
-+    https://launchpad.net/ubuntu/+archive/primary/+files/alsaequal_${PV}.orig.tar.bz2 \
-     file://0001-Fix-asneeded.patch \
-     file://0002-Fix-Eq-CAPS-plugin-name.patch \
-     file://0003-Fix-mixer.patch \
+--Kai
+
+>
+> On Wed, Mar 22, 2017 at 9:16 AM, Kang Kai <Kai.Kang@windriver.com 
+> <mailto:Kai.Kang@windriver.com>> wrote:
+>
+>     On 2017年03月13日 11:29, kai.kang@windriver.com
+>     <mailto:kai.kang@windriver.com> wrote:
+>
+>         From: Kai Kang <kai.kang@windriver.com
+>         <mailto:kai.kang@windriver.com>>
+>
+>         The official site libdnet.googlecode.com
+>         <http://libdnet.googlecode.com> is redirected to github. So
+>         update SRC_URI and its checksums. And update S as well.
+>
+>         Signed-off-by: Kai Kang <kai.kang@windriver.com
+>         <mailto:kai.kang@windriver.com>>
+>         ---
+>           meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
+>         <http://libdnet_1.12.bb> | 8 +++++---
+>           1 file changed, 5 insertions(+), 3 deletions(-)
+>
+>         diff --git
+>         a/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
+>         <http://libdnet_1.12.bb>
+>         b/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
+>         <http://libdnet_1.12.bb>
+>         index 28b6c82..aff64c2 100644
+>         ---
+>         a/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
+>         <http://libdnet_1.12.bb>
+>         +++
+>         b/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
+>         <http://libdnet_1.12.bb>
+>         @@ -4,10 +4,12 @@ SECTION = "libs"
+>           LICENSE = "BSD"
+>           LIC_FILES_CHKSUM =
+>         "file://LICENSE;md5=0036c1b155f4e999f3e0a373490b5db9"
+>           -SRC_URI =
+>         "http://libdnet.googlecode.com/files/libdnet-${PV}.tgz
+>         <http://libdnet.googlecode.com/files/libdnet-$%7BPV%7D.tgz>"
+>         +SRC_URI =
+>         "https://github.com/dugsong/${BPN}/archive/${BP}.tar.gz
+>         <https://github.com/dugsong/$%7BBPN%7D/archive/$%7BBP%7D.tar.gz>"
+>
+>
+>     Hi Martin,
+>
+>     It is weird that the tag 'libdnet-1.12' is not contained in any
+>     branch. I am afraid it could NOT use git repo for libdnet.
+>
+>     Ref:
+>     https://github.com/dugsong/libdnet/commit/12fca29a6d4e99d1b923d6820887fe7b24226904
+>     <https://github.com/dugsong/libdnet/commit/12fca29a6d4e99d1b923d6820887fe7b24226904>
+>
+>
+>     Regards,
+>     Kai
+>
+>           -SRC_URI[md5sum] = "9253ef6de1b5e28e9c9a62b882e44cc9"
+>         -SRC_URI[sha256sum] =
+>         "83b33039787cf99990e977cef7f18a5d5e7aaffc4505548a83d31bd3515eb026"
+>         +SRC_URI[md5sum] = "d2f1b72eac2a1070959667e9e61dcf20"
+>         +SRC_URI[sha256sum] =
+>         "b6360659c93fa2e3cde9e0a1fc9c07bc4111f3448c5de856e095eb98315dd424"
+>         +
+>         +S = "${WORKDIR}/${BPN}-${BP}"
+>             inherit autotools
+>
+>
+>
+>     -- 
+>     Regards,
+>     Neil | Kai Kang
+>
+>
+
+
 -- 
-2.12.0
+Regards,
+Neil | Kai Kang
 
 
