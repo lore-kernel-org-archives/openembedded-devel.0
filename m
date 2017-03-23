@@ -1,31 +1,24 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B59E673002
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E4DFE71AB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Mar 2017 01:47:29 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v2N1lT1h005833
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 22 Mar 2017 18:47:29 -0700 (PDT)
-Received: from [128.224.162.185] (128.224.162.185) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 22 Mar 2017 18:47:28 -0700
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <20170313032921.8669-1-kai.kang@windriver.com>
-	<20170313032921.8669-4-kai.kang@windriver.com>
-	<1a1d1994-a982-fa0a-667a-6bd3a8d50b79@windriver.com>
-	<CA+chaQdT5OFOg2weDe7ixSiz4PxGFAjtHm234Dn=HsBYZKX23g@mail.gmail.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <3eeb50de-71ca-03be-8365-5026e6396cb9@windriver.com>
-Date: Thu, 23 Mar 2017 09:45:34 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.7.0
+	Thu, 23 Mar 2017 03:05:15 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v2N35A0P031259
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Wed, 22 Mar 2017 20:05:11 -0700
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Wed, 22 Mar 2017 20:05:10 -0700
+From: <kai.kang@windriver.com>
+To: <martin.jansa@gmail.com>
+Date: Thu, 23 Mar 2017 11:04:55 +0800
+Message-ID: <20170323030455.3272-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.10.1
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQdT5OFOg2weDe7ixSiz4PxGFAjtHm234Dn=HsBYZKX23g@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 3/5] libdnet: update SRC_URI
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-networking][PATCH] libdnet: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,96 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Mar 2017 01:47:30 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 23 Mar 2017 03:05:18 -0000
+Content-Type: text/plain
 
-On 2017年03月22日 18:59, Martin Jansa wrote:
-> Yes, you can use git repo, just add nobranch=1 parameter.
+From: Kai Kang <kai.kang@windriver.com>
 
-OK. Thanks.
+The official homepage libdnet.googlecode.com has been redirected to
+github. So update SRC_URI to use git repo on github.
 
---Kai
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
->
-> On Wed, Mar 22, 2017 at 9:16 AM, Kang Kai <Kai.Kang@windriver.com 
-> <mailto:Kai.Kang@windriver.com>> wrote:
->
->     On 2017年03月13日 11:29, kai.kang@windriver.com
->     <mailto:kai.kang@windriver.com> wrote:
->
->         From: Kai Kang <kai.kang@windriver.com
->         <mailto:kai.kang@windriver.com>>
->
->         The official site libdnet.googlecode.com
->         <http://libdnet.googlecode.com> is redirected to github. So
->         update SRC_URI and its checksums. And update S as well.
->
->         Signed-off-by: Kai Kang <kai.kang@windriver.com
->         <mailto:kai.kang@windriver.com>>
->         ---
->           meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
->         <http://libdnet_1.12.bb> | 8 +++++---
->           1 file changed, 5 insertions(+), 3 deletions(-)
->
->         diff --git
->         a/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
->         <http://libdnet_1.12.bb>
->         b/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
->         <http://libdnet_1.12.bb>
->         index 28b6c82..aff64c2 100644
->         ---
->         a/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
->         <http://libdnet_1.12.bb>
->         +++
->         b/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
->         <http://libdnet_1.12.bb>
->         @@ -4,10 +4,12 @@ SECTION = "libs"
->           LICENSE = "BSD"
->           LIC_FILES_CHKSUM =
->         "file://LICENSE;md5=0036c1b155f4e999f3e0a373490b5db9"
->           -SRC_URI =
->         "http://libdnet.googlecode.com/files/libdnet-${PV}.tgz
->         <http://libdnet.googlecode.com/files/libdnet-$%7BPV%7D.tgz>"
->         +SRC_URI =
->         "https://github.com/dugsong/${BPN}/archive/${BP}.tar.gz
->         <https://github.com/dugsong/$%7BBPN%7D/archive/$%7BBP%7D.tar.gz>"
->
->
->     Hi Martin,
->
->     It is weird that the tag 'libdnet-1.12' is not contained in any
->     branch. I am afraid it could NOT use git repo for libdnet.
->
->     Ref:
->     https://github.com/dugsong/libdnet/commit/12fca29a6d4e99d1b923d6820887fe7b24226904
->     <https://github.com/dugsong/libdnet/commit/12fca29a6d4e99d1b923d6820887fe7b24226904>
->
->
->     Regards,
->     Kai
->
->           -SRC_URI[md5sum] = "9253ef6de1b5e28e9c9a62b882e44cc9"
->         -SRC_URI[sha256sum] =
->         "83b33039787cf99990e977cef7f18a5d5e7aaffc4505548a83d31bd3515eb026"
->         +SRC_URI[md5sum] = "d2f1b72eac2a1070959667e9e61dcf20"
->         +SRC_URI[sha256sum] =
->         "b6360659c93fa2e3cde9e0a1fc9c07bc4111f3448c5de856e095eb98315dd424"
->         +
->         +S = "${WORKDIR}/${BPN}-${BP}"
->             inherit autotools
->
->
->
->     -- 
->     Regards,
->     Neil | Kai Kang
->
->
-
-
+diff --git a/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb b/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
+index 28b6c82..f48b655 100644
+--- a/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
++++ b/meta-networking/recipes-connectivity/libdnet/libdnet_1.12.bb
+@@ -4,10 +4,10 @@ SECTION = "libs"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0036c1b155f4e999f3e0a373490b5db9"
+ 
+-SRC_URI = "http://libdnet.googlecode.com/files/libdnet-${PV}.tgz"
++SRC_URI = "git://github.com/dugsong/libdnet.git;nobranch=1"
++SRCREV = "12fca29a6d4e99d1b923d6820887fe7b24226904"
+ 
+-SRC_URI[md5sum] = "9253ef6de1b5e28e9c9a62b882e44cc9"
+-SRC_URI[sha256sum] = "83b33039787cf99990e977cef7f18a5d5e7aaffc4505548a83d31bd3515eb026"
++S = "${WORKDIR}/git"
+ 
+ inherit autotools
+ 
 -- 
-Regards,
-Neil | Kai Kang
+2.10.1
 
 
