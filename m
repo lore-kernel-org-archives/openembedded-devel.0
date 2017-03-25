@@ -1,47 +1,46 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D4C077BDA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Mar 2017 16:22:55 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id p189so1154774pfp.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Mar 2017 09:22:57 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 2DCA971E52;
+	Sat, 25 Mar 2017 08:08:31 +0000 (UTC)
+Received: by mail-wm0-f49.google.com with SMTP id t189so7150626wmt.1;
+	Sat, 25 Mar 2017 01:08:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=iCWeDMWMvjekWWavMqjzkafkEFBdZkB5329uwKa8Nco=;
-	b=YNdED1rdOc3rObSsx1w4Dy+MiEGGc+Wcd6qwRfIHPcQG3RIGRlyDqcvQxNVH4vwBmv
-	tPU/+9zrCBf/GRSO1JhdJo7RENN75x438qZyzugzO+fXV4PbcpSxe0Cfogg/dTXhTdR9
-	pWFEj+j0Kpw1XQYKSwZDVfwj9SWI7GTfrUCqdEtiaGi66xndyFlmvqzk91YhNDcQNpV7
-	oJWIxboE+wUriE4jCPHXY3UaWfbIE9iykVCduaZFZXV7+VaN6edmJ+K6EtvAVcv+4Am5
-	CcKemiXnHtiFSGBEHVpyc0Ifaq2NwUxyGIqQRnJEX9k/D7o3qwMqVSmBgnCb5CwmK2oW
-	USoA==
+	h=from:date:to:subject:message-id:mime-version:content-disposition
+	:user-agent; bh=rHHm5kCEudnfqAoV1IVylhchv4uKDHYap1vF+BPdZuw=;
+	b=TEZTYjw7ruzBAai9iH7OkwrhqCAXdwc9X9bkE89yUXEStqbeJSjnx13wPtVXR+gdMb
+	IKtHtF4h3MBCnBA53QD2BC5Q+ZE6AdfgIIcsnkmkkjQ6brmIR2k95BKZKkAxQgxNzbO3
+	Il1D5fdP9M4fP0sg/nlxoT82d1CigHVUOa9oMXVJSvthc76eMHwTJ45OTmnDEaorwJYn
+	6lgyqnDMXKP3J9kW0iz766RyLZgyYTlSEE5vsfbvSGmAtCQc0KU537wviJ+9AgLsnFwC
+	RFAPKC7TCoahfgpsYriw3L/NkKB6S5RXqnr/YLXiyuELGS/UeEZth0ouEtYdj5A+ETgl
+	gxEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=iCWeDMWMvjekWWavMqjzkafkEFBdZkB5329uwKa8Nco=;
-	b=BucM0+kjxZKf2J+x6y9YPaqcuyGwyRz/odCE59G3WNxQwXn7LuQWN+S+3j8jA+YhIh
-	0Mwf+Ljlr6lYjSHn9kjbby60fU/fXedHEt0I5Lg4KoOlxzkGtu2BZDJ0pvxhZdd8+Yex
-	9IFgR9qvebPtpIPEtHWf8eebY1BN34ROGPbJvnbeqU57qmhXNN9Z825alAlcsIkFLRov
-	2ten48lDk+C4hcwanD/rLk+uHigbdxB8w04N3pxznB3LO0xkn97ZX50OqCB8tt178M2B
-	sn8Kz8Qt6XCqSh3qoDxZIs9iX0xM/7EhPdYnMBfsvXWqrsi0SXvoJgFsrXITwI7I9Ir6
-	UELw==
-X-Gm-Message-State: AFeK/H0zZkQ+NbH1X2sdAjfkL3mNZnZbWpBHyZ/AzAH55nA8uiVuPn5sGFCWPTiw1GWlpg==
-X-Received: by 10.99.124.26 with SMTP id x26mr9812672pgc.81.1490372577334;
-	Fri, 24 Mar 2017 09:22:57 -0700 (PDT)
-Received: from akuster-ThinkPad-X240.mvista.com
-	([2601:202:4001:9ea0:e3df:bf0a:9f90:498e])
-	by smtp.gmail.com with ESMTPSA id
-	o189sm5652384pga.12.2017.03.24.09.22.56
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 24 Mar 2017 09:22:56 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster@mvista.com,
-	openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Mar 2017 09:22:55 -0700
-Message-Id: <1490372575-16202-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] ntp: update to 4.2.8.p10
+	h=x-gm-message-state:from:date:to:subject:message-id:mime-version
+	:content-disposition:user-agent;
+	bh=rHHm5kCEudnfqAoV1IVylhchv4uKDHYap1vF+BPdZuw=;
+	b=mp8XQ3/pXdnpgWabKLW0blnFeGGi4P7unmABKRh+XkJ+YAI8zUp+HeJrrZrrGGoo18
+	WtGUiwZbMI2GZf6UnImNgUK/hEjC3zSMjdTP9pUTHr1RBz3z4NPB8Bk3Qlo5P6aCHchu
+	6YVsWIZwsJdl5b54QIeWwx3u/fNSZw4q6EjqEytMQIylJLLfJCGZ8t0nn7QEUDViiuzA
+	RD3yeF2hwesvb4g75iC3oYMb809tDf8fxAXvLCforlZUo99oyWyNPI3VIY6+wpsYkNX2
+	46kyZ4TJMrUS1zVa3V5/PBhRCV1Te7aCt98T0YFWvO+3zyjODsYX8VLT4QkhsXaFoKRc
+	+2zw==
+X-Gm-Message-State: AFeK/H3UM1y+BajaRaonCT5dfyd/ARhnLRpR0TdBB+NWrul558JrRwDEhuoYET/L5F8uOg==
+X-Received: by 10.28.6.6 with SMTP id 6mr1099533wmg.111.1490429311999;
+	Sat, 25 Mar 2017 01:08:31 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	r17sm5952460wrc.47.2017.03.25.01.08.30
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sat, 25 Mar 2017 01:08:30 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sat, 25 Mar 2017 09:08:41 +0100
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Message-ID: <20170325080841.GD3293@jama>
+MIME-Version: 1.0
+User-Agent: Mutt/1.8.0 (2017-02-23)
+Subject: State of bitbake world, Failed tasks 2017-03-22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,74 +53,156 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Mar 2017 16:22:56 -0000
+X-List-Received-Date: Sat, 25 Mar 2017 08:08:33 -0000
+X-Groupsio-MsgNum: 65922
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="xB0nW4MQa6jZONgY"
+Content-Disposition: inline
 
-From: Armin Kuster <akuster@mvista.com>
+--xB0nW4MQa6jZONgY
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-LICENSE_FILE md5 changed do to copyright date change.
+=3D=3D Number of issues - stats =3D=3D
+{| class=3D'wikitable'
+!|Date		     !!colspan=3D'3'|Failed tasks			    !!colspan=3D'6'|Failed depe=
+ncencies			 !!|Signatures		  !!colspan=3D'12'|QA !!Comment
+|-
+||		||qemuarm	||qemux86	||qemux86_64	||qemuarm||max||min	||qemux86||max||mi=
+n	||all 	||already-stripped	||libdir	||textrel	||build-deps	||file-rdeps	||=
+version-going-backwards	||host-user-contaminated	||installed-vs-shipped	||u=
+nknown-configure-option	||symlink-to-sysroot	||invalid-pkgconfig	||pkgname	=
+||=09
+|-
+||2017-03-22	||15	||21	||20	||N/A	||N/A	||N/A	||N/A	||N/A	||N/A	||0	||0		||=
+0		||1		||0		||0		||0		||1		||0		||0		||0		||0		||0		||=09
+|}
 
-NTF's NTP Project is releasing ntp-4.2.8p10, which addresses:
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-    6 MEDIUM severity vulnerabilities (1 is about the Windows PPSAPI DLL)
-    5 LOW severity vulnerabilities (2 are in the Windows Installer)
-    4 Informational-level vulnerabilities
+=3D=3D Failed tasks 2017-03-22 =3D=3D
 
-    15 other non-security fixes and improvements
+INFO: jenkins-job.sh-1.8.19 Complete log available at http://logs.nslu2-lin=
+ux.org/buildlogs/oe/world/pyro/log.report.20170324_220429.log
 
-All of the security issues in this release are listed in VU#633849.
+=3D=3D=3D common (15) =3D=3D=3D
+    * meta-openembedded/meta-multimedia/recipes-multimedia/alsa-equal/alsa-=
+equal_0.6.bb:do_fetch
+    * meta-openembedded/meta-oe/recipes-extended/lcdproc/lcdproc_0.5.7.bb:d=
+o_compile
+    * meta-openembedded/meta-oe/recipes-extended/libexecinfo/libexecinfo_1.=
+1.bb:do_compile
+    * meta-openembedded/meta-oe/recipes-extended/libqb/libqb_0.17.2.bb:do_f=
+etch
+    * meta-openembedded/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb:do_co=
+mpile
+    * meta-openembedded/meta-oe/recipes-graphics/ttf-fonts/ttf-abyssinica_1=
+=2E500.bb:do_fetch
+    * meta-openembedded/meta-oe/recipes-graphics/ttf-fonts/ttf-liberation-s=
+ans-narrow_1.07.4.bb:do_fetch
+    * meta-openembedded/meta-oe/recipes-support/atop/atop_git.bb:do_fetch
+    * meta-openembedded/meta-oe/recipes-support/gpm/gpm_git.bb:do_install
+    * meta-openembedded/meta-oe/recipes-support/hwdata/hwdata_0.291.bb:do_f=
+etch
+    * meta-openembedded/meta-oe/recipes-support/mailcap/mailcap_2.1.46.bb:d=
+o_fetch
+    * meta-openembedded/meta-oe/recipes-support/zile/zile_2.4.11.bb:do_inst=
+all
+    * meta-openembedded/meta-python/recipes-devtools/python/python-slip-dbu=
+s_0.6.1.bb:do_fetch
+    * openembedded-core/meta/recipes-graphics/mesa/mesa_17.0.1.bb:do_config=
+ure
+    * virtual:native:meta-openembedded/meta-efl/recipes-efl/efl/efl_1.15.1.=
+bb:do_compile
 
-ntp-4.2.8p10 was released on 21 March 2017.
+=3D=3D=3D common-x86 (2) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-support/vboxguestdrivers/vboxguestd=
+rivers_5.1.14.bb:do_install
+    * openembedded-core/meta/recipes-core/ovmf/ovmf_git.bb:do_compile
 
-Sec 3389 / CVE-2017-6464 / VU#325339: NTP-01-016 NTP: Denial of Service via Malformed Config (Pentest report 01.2017)
-Sec 3388 / CVE-2017-6462 / VU#325339: NTP-01-014 NTP: Buffer Overflow in DPTS Clock (Pentest report 01.2017)
-Sec 3387 / CVE-2017-6463 / VU#325339: NTP-01-012 NTP: Authenticated DoS via Malicious Config Option (Pentest report 01.2017)
-Sec 3386: NTP-01-011 NTP: ntpq_stripquotes() returns incorrect Value (Pentest report 01.2017)
-Sec 3385: NTP-01-010 NTP: ereallocarray()/eallocarray() underused (Pentest report 01.2017)
-Sec 3384 / CVE-2017-6455 / VU#325339: NTP-01-009 NTP: Windows: Privileged execution of User Library code (Pentest report 01.2017)
-Sec 3383 / CVE-2017-6452 / VU#325339: NTP-01-008 NTP: Windows Installer: Stack Buffer Overflow from Command Line (Pentest report 01.2017)
-Sec 3382 / CVE-2017-6459 / VU#325339: NTP-01-007 NTP: Windows Installer: Data Structure terminated insufficiently (Pentest report 01.2017)
-Sec 3381: NTP-01-006 NTP: Copious amounts of Unused Code (Pentest report 01.2017)
-Sec 3380: NTP-01-005 NTP: Off-by-one in Oncore GPS Receiver (Pentest report 01.2017)
-Sec 3379 / CVE-2017-6458 / VU#325339: NTP-01-004 NTP: Potential Overflows in ctl_put() functions (Pentest report 01.2017)
-Sec 3378 / CVE-2017-6451 / VU#325339: NTP-01-003 Improper use of snprintf() in mx4200_send() (Pentest report 01.2017)
-Sec 3377 / CVE-2017-6460 / VU#325339: NTP-01-002 Buffer Overflow in ntpq when fetching reslist (Pentest report 01.2017)
-Sec 3376: NTP-01-001 Makefile does not enforce Security Flags (Pentest report 01.2017)
-Sec 3361 / CVE-2016-9042 / VU#325339: 0rigin
+=3D=3D=3D qemuarm (0) =3D=3D=3D
 
-Signed-off-by: Armin Kuster <akuster@mvista.com>
----
- .../recipes-support/ntp/{ntp_4.2.8p9.bb => ntp_4.2.8p10.bb}         | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-support/ntp/{ntp_4.2.8p9.bb => ntp_4.2.8p10.bb} (96%)
+=3D=3D=3D qemux86 (2) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-support/dstat/dstat_0.7.3.bb:do_com=
+pile
+    * virtual:native:meta-openembedded/meta-oe/recipes-support/uim/uim_1.8.=
+6.bb:do_install
 
-diff --git a/meta-networking/recipes-support/ntp/ntp_4.2.8p9.bb b/meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb
-similarity index 96%
-rename from meta-networking/recipes-support/ntp/ntp_4.2.8p9.bb
-rename to meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb
-index 58b31c5..719c60b 100644
---- a/meta-networking/recipes-support/ntp/ntp_4.2.8p9.bb
-+++ b/meta-networking/recipes-support/ntp/ntp_4.2.8p10.bb
-@@ -6,7 +6,7 @@ or satellite receiver or modem."
- HOMEPAGE = "http://support.ntp.org"
- SECTION = "net"
- LICENSE = "NTP"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=f41fedb22dffefcbfafecc85b0f79cfa"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=e877a1d567a6a58996d2b66e3e387003"
- 
- DEPENDS = "libevent"
- 
-@@ -23,8 +23,8 @@ SRC_URI = "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-${PV}.tar.g
-            file://ntpd.list \
- "
- 
--SRC_URI[md5sum] = "857452b05f5f2e033786f77ade1974ed"
--SRC_URI[sha256sum] = "b724287778e1bac625b447327c9851eedef020517a3545625e9f652a90f30b72"
-+SRC_URI[md5sum] = "745384ed0dedb3f66b33fe84d66466f9"
-+SRC_URI[sha256sum] = "ddd2366e64219b9efa0f7438e06800d0db394ac5c88e13c17b70d0dcdf99b99f"
- 
- inherit autotools update-rc.d useradd systemd pkgconfig
- 
--- 
-2.7.4
+=3D=3D=3D qemux86_64 (1) =3D=3D=3D
+    * meta-smartphone/meta-shr/recipes-shr/shr/libshr-glib_git.bb:do_compile
+
+=3D=3D=3D Number of failed tasks (56) =3D=3D=3D
+{| class=3Dwikitable
+|-
+|| qemuarm 	|| 15	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/l=
+og.world.qemuarm.20170322_025058.log/ || http://errors.yoctoproject.org/Err=
+ors/Build/34831/
+|-
+|| qemux86 	|| 21	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/l=
+og.world.qemux86.20170322_041911.log/ || http://errors.yoctoproject.org/Err=
+ors/Build/34767/
+http://errors.yoctoproject.org/Errors/Build/34768/
+http://errors.yoctoproject.org/Errors/Build/34832/
+|-
+|| qemux86_64 	|| 20	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyr=
+o/log.world.qemux86-64.20170322_221011.log/ || http://errors.yoctoproject.o=
+rg/Errors/Build/34833/
+http://errors.yoctoproject.org/Errors/Build/34834/
+http://errors.yoctoproject.org/Errors/Build/34851/
+|}
+
+=3D=3D=3D PNBLACKLISTs (350) =3D=3D=3D
+
+=3D=3D=3D QA issues (2) =3D=3D=3D
+{| class=3Dwikitable
+!| Count		||Issue
+|-
+||0	||already-stripped
+|-
+||0	||build-deps
+|-
+||0	||file-rdeps
+|-
+||0	||installed-vs-shipped
+|-
+||0	||invalid-pkgconfig
+|-
+||0	||libdir
+|-
+||0	||pkgname
+|-
+||0	||symlink-to-sysroot
+|-
+||0	||unknown-configure-option
+|-
+||0	||version-going-backwards
+|-
+||1	||host-user-contaminated
+|-
+||1	||textrel
+|}
 
 
+
+=3D=3D=3D Incorrect PACKAGE_ARCH or sstate signatures (0) =3D=3D=3D
+
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.signa=
+tures.20170322_204049.log/
+
+No issues detected
+
+
+
+--xB0nW4MQa6jZONgY
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWNYlDwAKCRA3VSO3ZXaA
+HFEYAKCT2KXv6BlZ4AVY1gP85UoByBEBVgCbBVapW1xofYoOedTHlqRP9ZkeTHk=
+=DJU4
+-----END PGP SIGNATURE-----
+
+--xB0nW4MQa6jZONgY--
