@@ -1,30 +1,28 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from smtp485.redcondor.net (smtp485.redcondor.net [208.80.204.85])
-	by mail.openembedded.org (Postfix) with ESMTP id C001577A44
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 9436E72F7B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Mar 2017 10:57:43 +0000 (UTC)
-Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by smtp485.redcondor.net ({3be039ea-4351-44b0-a8af-642c38b25916})
-	via TCP (outbound) with ESMTPS id 20170327105742961_0485
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Mar 2017 10:57:42 +0000
-X-RC-FROM: <rpjday@crashcourse.ca>
-X-RC-RCPT: <openembedded-devel@lists.openembedded.org>
-Received: from [216.191.234.70] (port=58996 helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.80) (envelope-from <rpjday@crashcourse.ca>)
-	id 1csSLB-0007JR-E6 for openembedded-devel@lists.openembedded.org;
-	Mon, 27 Mar 2017 06:57:37 -0400
-Date: Mon, 27 Mar 2017 06:57:35 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@uk63952.mitel.com
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.20.1703270655120.32464@uk63952.mitel.com>
-User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
-MIME-Version: 1.0
-X-MAG-OUTBOUND: ccj.redcondor.net@64.235.106.9/32
-Subject: [PATCH][meta-oe] polkit-group-rule.inc: Fix comment typo "polkid" -> "polkitd"
+	Mon, 27 Mar 2017 14:25:45 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by dan.rpsys.net (8.15.2/8.15.2/Debian-3) with ESMTP id v2REP5ZO014348; 
+	Mon, 27 Mar 2017 15:25:05 +0100
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id VUWPD0LKYk7a; Mon, 27 Mar 2017 15:25:05 +0100 (BST)
+Received: from hex ([192.168.3.34]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id
+	v2REP1EQ014344
+	(version=TLSv1/SSLv3 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
+	Mon, 27 Mar 2017 15:25:02 +0100
+Message-ID: <1490624701.13980.267.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Marek Vasut <marex@denx.de>, openembedded-devel@lists.openembedded.org
+Date: Mon, 27 Mar 2017 15:25:01 +0100
+In-Reply-To: <20170327142231.21807-1-marex@denx.de>
+References: <20170327142231.21807-1-marex@denx.de>
+X-Mailer: Evolution 3.18.5.2-0ubuntu3.1 
+Mime-Version: 1.0
+Subject: Re: [PATCH] u-boot: Update to 2017.03 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,35 +35,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Mar 2017 10:57:45 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Mon, 27 Mar 2017 14:25:47 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
+On Mon, 2017-03-27 at 16:22 +0200, Marek Vasut wrote:
+> Upgrade U-Boot to the latest version.
 
-Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+Wrong list and how does this compare to Ovatio's patch?
 
----
+Cheers,
 
-diff --git a/meta-oe/recipes-extended/polkit/polkit-group-rule.inc b/meta-oe/recipes-extended/polkit/polkit-group-rule.inc
-index b727d00..40e4005 100644
---- a/meta-oe/recipes-extended/polkit/polkit-group-rule.inc
-+++ b/meta-oe/recipes-extended/polkit/polkit-group-rule.inc
-@@ -1,4 +1,4 @@
--# polkit must prepare polkid group
-+# polkit must prepare polkitd group
- DEPENDS += "polkit"
-
- inherit useradd
-
-rday
-
--- 
-
-========================================================================
-Robert P. J. Day                                 Ottawa, Ontario, CANADA
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
-
+Richard
 
