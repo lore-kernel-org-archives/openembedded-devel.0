@@ -1,24 +1,45 @@
-Return-Path: <Dengke.Du@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id DADDC77A0F
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wr0-f176.google.com (mail-wr0-f176.google.com
+	[209.85.128.176])
+	by mail.openembedded.org (Postfix) with ESMTP id D42B66AC37
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Mar 2017 08:13:39 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v2S8DcmU005783
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Tue, 28 Mar 2017 18:06:46 +0000 (UTC)
+Received: by mail-wr0-f176.google.com with SMTP id l43so111865513wre.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Mar 2017 01:13:40 -0700
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 28 Mar 2017 01:13:37 -0700
-From: Dengke Du <dengke.du@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 28 Mar 2017 04:13:36 -0400
-Message-ID: <1490688816-180730-1-git-send-email-dengke.du@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Tue, 28 Mar 2017 11:06:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=ztMHNAKQ2V2m0NHXZSQ3PLtxMhHWuPKxF1z/J8aJ9CQ=;
+	b=bM0qnNVCVO64I6dMfeqzfZ4ldR4iB2rolgtutdgdJIsAX7eBoN18zGct41KtjfZPv1
+	K7FkrGvXkjCuSJAMVgNgNV68p1/dmkJTaemqkQYfcgcMTzWWaPEiNxD+4wRWZ/q+RlcN
+	fJ7J3jODEDS/1GJ8PSQ9AcZbH+2iZ8rY8UT1o++eDoV5CKwYGh5lZPx9LQyGiw1UjLKo
+	/ERvIZ/BM1G+LjUT4AaVf3iwZ9SIiJzNbuVz4U/S+uPtA0aj8b8H0g+bCXEbNEvuErsf
+	pyE4ka9T2lDKRk3uKQyBa8VdJZ9gqA8KF+IZE/hG9iLqufA2wgyC5F7LjC2MeQmzYRbC
+	D8Cg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=ztMHNAKQ2V2m0NHXZSQ3PLtxMhHWuPKxF1z/J8aJ9CQ=;
+	b=GOt2yOYye4e3Cg4Vvcee2gNKrJljmW4XrwJpPLuPegy+uTPkqKy5V2MsKZTEWWuQRS
+	YXQTLN5bgt/0lefcIkwGc+MoxNMMKFk1qfQhzuTU6F0d5zPIOabnciCUpig4ysW1+cT+
+	WRQsLzzj3GAoxSNcCX/kjjEGpqqwGj7piC4gDGCw0sQ94DZqYzn6GD+D3uscZeCkM8V9
+	jbGBtWM9A78ShgzpGr7vPbpHYDyKLMBQZMtcSFHFaPat8RqP1J4IypIeXyqbzkrGiNKS
+	04tOWnpTDFEKhhlxV1CkplkltfOZ/CBxUOfLtrwJfkpGk7Q54Tez9i5cTpIEw7/oaD+z
+	uMSg==
+X-Gm-Message-State: AFeK/H1aoFuMVix6xhp1wB6hDh5QWfo826XINGMsWnll11IaYtiZPrJ6GwXonC02igNO2ZcEJRNxrb1ceOkpmQ==
+X-Received: by 10.223.152.243 with SMTP id w106mr5438143wrb.151.1490724407450; 
+	Tue, 28 Mar 2017 11:06:47 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH][meta-oe] php: fix install failure
+Received: by 10.223.152.55 with HTTP; Tue, 28 Mar 2017 11:06:46 -0700 (PDT)
+In-Reply-To: <1490372204-4336-1-git-send-email-cody@arrc.ou.edu>
+References: <1490372204-4336-1-git-send-email-cody@arrc.ou.edu>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Tue, 28 Mar 2017 11:06:46 -0700
+Message-ID: <CAJ86T=U6Xyrh2D4xYizX6Ly7b=6gg+Wxid1VkB60_0idG=RBwg@mail.gmail.com>
+To: Cody Piersall <cody@arrc.ou.edu>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-OE] Remove do_install_append() from zsh recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,49 +52,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Mar 2017 08:13:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 28 Mar 2017 18:06:47 -0000
+Content-Type: text/plain; charset=UTF-8
 
-After switch to RSS(recipe specific sysroot), the php package failed when
-installing.
+On Fri, Mar 24, 2017 at 9:16 AM, Cody Piersall <cody@arrc.ou.edu> wrote:
+> do_install_append() removes a lot of useful functionality from the zsh shell.
 
-This is because the build system can't find the file: pear.conf, that file
-stay in "${D}/${STAGING_DIR_NATIVE}" directory before the switch, now stay
-in "${RECIPE_SYSROOT_NATIVE}" directory, so we need to place it in correct
-place.
+What exactly is this "useful functionality" ?
 
-Signed-off-by: Dengke Du <dengke.du@windriver.com>
----
- meta-oe/recipes-devtools/php/php.inc | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+Maybe it could be put in a separate package.
 
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index c4fb1d9..b4ce2e3 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -136,9 +136,9 @@ do_install_prepend_class-target() {
- 
- # fixme
- do_install_append_class-target() {
--    install -d ${D}/${sysconfdir}/
--    if [ -d ${D}/${STAGING_DIR_NATIVE}/${sysconfdir} ];then
--         mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir}/* ${D}/${sysconfdir}/
-+    install -d ${D}${sysconfdir}/
-+    if [ -d ${RECIPE_SYSROOT_NATIVE}${sysconfdir} ];then
-+         install -m 0644 ${RECIPE_SYSROOT_NATIVE}${sysconfdir}/pear.conf ${D}${sysconfdir}/
-     fi
-     rm -rf ${D}/${TMPDIR}
-     rm -rf ${D}/.registry
-@@ -146,7 +146,7 @@ do_install_append_class-target() {
-     rm -rf ${D}/.[a-z]*
-     rm -rf ${D}/var
-     rm -f  ${D}/${sysconfdir}/php-fpm.conf.default
--    sed -i 's:${STAGING_DIR_NATIVE}::g' ${D}/${sysconfdir}/pear.conf
-+    sed -i 's:${STAGING_DIR_NATIVE}::g' ${D}${sysconfdir}/pear.conf
-     install -m 0644 ${WORKDIR}/php-fpm.conf ${D}/${sysconfdir}/php-fpm.conf
-     install -d ${D}/${sysconfdir}/apache2/conf.d
-     install -m 0644 ${WORKDIR}/php-fpm-apache.conf ${D}/${sysconfdir}/apache2/conf.d/php-fpm.conf
--- 
-2.8.1
-
+> If a user requires this limited shell, they can add it in a bbappend file.
+> ---
+>  meta-oe/recipes-extended/zsh/zsh_5.0.5.bb | 4 ----
+>  1 file changed, 4 deletions(-)
+>
+> diff --git a/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb b/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
+> index 39b2d95..d5bb1b7 100644
+> --- a/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
+> +++ b/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
+> @@ -44,10 +44,6 @@ do_configure () {
+>      oe_runconf
+>  }
+>
+> -do_install_append () {
+> -    rm -fr ${D}/usr/share
+> -}
+> -
+>  pkg_postinst_${PN} () {
+>      touch $D${sysconfdir}/shells
+>      grep -q "bin/zsh" $D${sysconfdir}/shells || echo /bin/zsh >> $D${sysconfdir}/shells
+> --
+> 1.9.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
