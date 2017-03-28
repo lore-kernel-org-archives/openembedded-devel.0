@@ -1,27 +1,25 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with ESMTP id 32BBE72F5A
+Return-Path: <stefan@agner.ch>
+X-Greylist: delayed 354 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 28 Mar 2017 00:09:47 UTC
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C3C26FFCD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Mar 2017 19:02:14 +0000 (UTC)
-Received: (qmail 27672 invoked by uid 1003); 27 Mar 2017 19:02:15 -0000
-Received: from unknown (HELO ?192.168.11.142?)
-	(philip@opensdr.com@108.44.116.166)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	27 Mar 2017 19:02:15 -0000
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	"openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>, openembedded-architecture
-	<openembedded-architecture@lists.openembedded.org>,
-	Yocto Project <yocto@yoctoproject.org>
-From: Philip Balister <philip@balister.org>
-Message-ID: <d5952702-1d13-683c-408e-8237054737c5@balister.org>
-Date: Mon, 27 Mar 2017 15:02:13 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.8.0
-MIME-Version: 1.0
-Subject: OpenEmbedded Developer Meeting Oct 22 in Prague
+	Tue, 28 Mar 2017 00:09:47 +0000 (UTC)
+Received: from seahawk.toradex.int
+	(75-146-58-181-Washington.hfc.comcastbusiness.net [75.146.58.181])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id 0E8DA5C02A8;
+	Tue, 28 Mar 2017 01:53:32 +0200 (CEST)
+From: Stefan Agner <stefan@agner.ch>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 27 Mar 2017 17:03:36 -0700
+Message-Id: <1490659416-14589-1-git-send-email-stefan@agner.ch>
+X-Mailer: git-send-email 2.7.4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1490658813; bh=xMqtJQZ+zs7YEc2aIAlNDPSv8f+uQ5I3znCyZrElVgI=;
+	h=From:To:Cc:Subject:Date:Message-Id;
+	b=HcyhOhU24UUbk/t7vhqVxTrTnJ2fnYMBCCFmcDW8+fkWht/Lw67FaiG2JpcZmhdJhIwuqWmPUx70wBrh68FWZ29n0OyQvQBKbTjliD8M1xF9Bwkm3W2mk1OeIPaH4Pv6XcdMJYDnnjnnn0AIADljNSGD3BRwsSRWAJLeyncc184=
+Cc: Stefan Agner <stefan.agner@toradex.com>
+Subject: [meta-python][PATCH] python-smbus: upgrade to 3.1.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,24 +32,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Mar 2017 19:02:15 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 28 Mar 2017 00:09:49 -0000
 
-We've had some discussion for scheduling the next OEDEM around the ELCE
-in Prague. The Yocto Project Developer day is the Thursday after the
-conference (as is the kernel summit). To avoid conflicting with them the
-OpenEmbedded board proposes holding the meeting Sunday before ELCE in
-Prague.
+From: Stefan Agner <stefan.agner@toradex.com>
 
-That is Sunday Oct 22, 2017. We'll work out details closer to the event.
-If anyone has terrible issues with this date, let us know.
+Upgrade to 3.1.2 and use Yocto source mirror to follow commit f76fe46e098d
+("i2c-tools: point SRC_URI at Yocto source mirrors") in OpenEmbedded cores
+i2c-tools recipe.
 
-This meeting is for everyone with an interest in OpenEmbedded (the Yocto
-Project build system). We love hearing from people about what we are
-doing right, what we are doing wrong, and what we can do better. The
-agenda is set by the people attending, we typically setup a wiki page to
-collect ideas. So watch for announcements over the next few months.
+With the upgrade to i2c-tools 3.1.2 Python 3 support has been added. To
+support Python 3 add a common recipe for all common information and one for
+each supported Python version 2 and 3.
 
-Philip and the OpenEmbedded board.
+Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
+---
+ .../python/{python-smbus_3.1.1.bb => python-smbus.inc}            | 8 +++-----
+ meta-python/recipes-devtools/python/python-smbus_3.1.2.bb         | 2 ++
+ meta-python/recipes-devtools/python/python3-smbus_3.1.2.bb        | 2 ++
+ 3 files changed, 7 insertions(+), 5 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-smbus_3.1.1.bb => python-smbus.inc} (64%)
+ create mode 100644 meta-python/recipes-devtools/python/python-smbus_3.1.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-smbus_3.1.2.bb
+
+diff --git a/meta-python/recipes-devtools/python/python-smbus_3.1.1.bb b/meta-python/recipes-devtools/python/python-smbus.inc
+similarity index 64%
+rename from meta-python/recipes-devtools/python/python-smbus_3.1.1.bb
+rename to meta-python/recipes-devtools/python/python-smbus.inc
+index df47df6..71de976 100644
+--- a/meta-python/recipes-devtools/python/python-smbus_3.1.1.bb
++++ b/meta-python/recipes-devtools/python/python-smbus.inc
+@@ -2,15 +2,13 @@ SUMMARY = "Set of i2c tools for linux - Python module"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://smbusmodule.c;startline=1;endline=17;md5=fa24df321a520ff8e10f203425ab9fa8"
+ 
+-SRC_URI = "http://dl.lm-sensors.org/i2c-tools/releases/i2c-tools-${PV}.tar.bz2 \
++SRC_URI = "http://downloads.yoctoproject.org/mirror/sources/i2c-tools-${PV}.tar.bz2 \
+ "
+-SRC_URI[md5sum] = "0fdbff53ebd0b8d9249256d6c56480b1"
+-SRC_URI[sha256sum] = "14d4d7d60d1c12e43f2befe239c682a5c44c27682f153d4b58c1e392d2db1700"
++SRC_URI[md5sum] = "7104a1043d11a5e2c7b131614eb1b962"
++SRC_URI[sha256sum] = "db5e69f2e2a6e3aa2ecdfe6a5f490b149c504468770f58921c8c5b8a7860a441"
+ 
+ DEPENDS = "i2c-tools"
+ 
+-inherit distutils
+-
+ S = "${WORKDIR}/i2c-tools-${PV}/py-smbus/"
+ 
+ do_configure_prepend() {
+diff --git a/meta-python/recipes-devtools/python/python-smbus_3.1.2.bb b/meta-python/recipes-devtools/python/python-smbus_3.1.2.bb
+new file mode 100644
+index 0000000..1b95778
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-smbus_3.1.2.bb
+@@ -0,0 +1,2 @@
++inherit distutils
++require python-smbus.inc
+diff --git a/meta-python/recipes-devtools/python/python3-smbus_3.1.2.bb b/meta-python/recipes-devtools/python/python3-smbus_3.1.2.bb
+new file mode 100644
+index 0000000..b357bcd
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-smbus_3.1.2.bb
+@@ -0,0 +1,2 @@
++inherit distutils3
++require python-smbus.inc
+-- 
+2.7.4
+
 
