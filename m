@@ -1,45 +1,44 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-wr0-f176.google.com (mail-wr0-f176.google.com
-	[209.85.128.176])
-	by mail.openembedded.org (Postfix) with ESMTP id D42B66AC37
+Return-Path: <twoerner@gmail.com>
+Received: from mail-vk0-f44.google.com (mail-vk0-f44.google.com
+	[209.85.213.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 0CE7077A87
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Mar 2017 18:06:46 +0000 (UTC)
-Received: by mail-wr0-f176.google.com with SMTP id l43so111865513wre.1
+	Tue, 28 Mar 2017 18:10:51 +0000 (UTC)
+Received: by mail-vk0-f44.google.com with SMTP id z204so98286977vkd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Mar 2017 11:06:48 -0700 (PDT)
+	Tue, 28 Mar 2017 11:10:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=ztMHNAKQ2V2m0NHXZSQ3PLtxMhHWuPKxF1z/J8aJ9CQ=;
-	b=bM0qnNVCVO64I6dMfeqzfZ4ldR4iB2rolgtutdgdJIsAX7eBoN18zGct41KtjfZPv1
-	K7FkrGvXkjCuSJAMVgNgNV68p1/dmkJTaemqkQYfcgcMTzWWaPEiNxD+4wRWZ/q+RlcN
-	fJ7J3jODEDS/1GJ8PSQ9AcZbH+2iZ8rY8UT1o++eDoV5CKwYGh5lZPx9LQyGiw1UjLKo
-	/ERvIZ/BM1G+LjUT4AaVf3iwZ9SIiJzNbuVz4U/S+uPtA0aj8b8H0g+bCXEbNEvuErsf
-	pyE4ka9T2lDKRk3uKQyBa8VdJZ9gqA8KF+IZE/hG9iLqufA2wgyC5F7LjC2MeQmzYRbC
-	D8Cg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=zvVkXGcgrJ+Q9CPuEMvo1U8vWK5L8ITVxhoZnoD3+C0=;
+	b=AuxAmEW4Io4XAXEI6M2EpiojvcedLMY+d8jL2ol0iGY61STM0aihqf8a04hMP9XVX9
+	vv/e0U99q4ZUCQp5OMPjG7PkBs/isj607lnHdE4AoRIfRVMghTUljtgBlrqEXLNBgiBp
+	zhumbUG0UEsiG6kBplBpGn5fdkf+7TmQl4xMVgBTdd7IArkwkQVAmOFQ/POezdPmkeCB
+	IwhnykRB5uX7iJ1e5x7FT/6AR+Qm6to4qANto0B0X+KQ3Dcn3MzQBxHbjJn6/sw6GcPr
+	7SlwOPZdHiBPTwvxxpZ3wZy6z42TPYa0L2HjKKO50d+2x7aQj0OGARk5JV6aFHOTfnWH
+	qcOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=ztMHNAKQ2V2m0NHXZSQ3PLtxMhHWuPKxF1z/J8aJ9CQ=;
-	b=GOt2yOYye4e3Cg4Vvcee2gNKrJljmW4XrwJpPLuPegy+uTPkqKy5V2MsKZTEWWuQRS
-	YXQTLN5bgt/0lefcIkwGc+MoxNMMKFk1qfQhzuTU6F0d5zPIOabnciCUpig4ysW1+cT+
-	WRQsLzzj3GAoxSNcCX/kjjEGpqqwGj7piC4gDGCw0sQ94DZqYzn6GD+D3uscZeCkM8V9
-	jbGBtWM9A78ShgzpGr7vPbpHYDyKLMBQZMtcSFHFaPat8RqP1J4IypIeXyqbzkrGiNKS
-	04tOWnpTDFEKhhlxV1CkplkltfOZ/CBxUOfLtrwJfkpGk7Q54Tez9i5cTpIEw7/oaD+z
-	uMSg==
-X-Gm-Message-State: AFeK/H1aoFuMVix6xhp1wB6hDh5QWfo826XINGMsWnll11IaYtiZPrJ6GwXonC02igNO2ZcEJRNxrb1ceOkpmQ==
-X-Received: by 10.223.152.243 with SMTP id w106mr5438143wrb.151.1490724407450; 
-	Tue, 28 Mar 2017 11:06:47 -0700 (PDT)
+	:message-id:subject:to;
+	bh=zvVkXGcgrJ+Q9CPuEMvo1U8vWK5L8ITVxhoZnoD3+C0=;
+	b=mBXbOZDqH7sDlHHyHIkYlE0I6Sx2hiBqz27CuvB2ojw4AaPfbRe8cTtrZAqG667Lx/
+	WIzVTR2u3u382aJUNiPQGuSjpBWCumg3qNWg7GBpUvdrP8FtNrSslC5g+2pAtV2B3Fcx
+	zpySb7jw3ByHk4ertOwG6bpBoj90uGkKQB3Fmhg7feTlByUJHPSAvqICMSH70xNZnY8P
+	aewzxWPL2a+s6VT8O/zjSoRPa8J4kH4dhV/XLAhOyTEGvr6EC6uLmfMV6vqNhnkLARcg
+	gVsWmEmTFsteRTWzQsiKuLBuxhu2SYJlmmYYRxgf0m2z68dmpLRleC9EvYQDJAVOLHu+
+	Yx/w==
+X-Gm-Message-State: AFeK/H2pn3QbDrobARucw/AJEEQ87VBrVcaDunBA5bJShV/PGU1GXvOCxvKJG4rGJpPf60rVZE0ZllloC5HfCg==
+X-Received: by 10.176.82.238 with SMTP id w43mr5654675uaw.171.1490724651624;
+	Tue, 28 Mar 2017 11:10:51 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.223.152.55 with HTTP; Tue, 28 Mar 2017 11:06:46 -0700 (PDT)
-In-Reply-To: <1490372204-4336-1-git-send-email-cody@arrc.ou.edu>
-References: <1490372204-4336-1-git-send-email-cody@arrc.ou.edu>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Tue, 28 Mar 2017 11:06:46 -0700
-Message-ID: <CAJ86T=U6Xyrh2D4xYizX6Ly7b=6gg+Wxid1VkB60_0idG=RBwg@mail.gmail.com>
-To: Cody Piersall <cody@arrc.ou.edu>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-OE] Remove do_install_append() from zsh recipe.
+Received: by 10.103.43.65 with HTTP; Tue, 28 Mar 2017 11:10:51 -0700 (PDT)
+In-Reply-To: <CAJTo0LYsTtk9eFD=kdhdrtFUCPr-eOn5dnPxDR+hM9LRbL40ug@mail.gmail.com>
+References: <CAJTo0LYsTtk9eFD=kdhdrtFUCPr-eOn5dnPxDR+hM9LRbL40ug@mail.gmail.com>
+From: Trevor Woerner <twoerner@gmail.com>
+Date: Tue, 28 Mar 2017 14:10:51 -0400
+Message-ID: <CAHUNapRmymF0Z2s1aGhxNAusk35cj6Wg2uqYWDrZTNTMXYkYTQ@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: Meson build system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,42 +51,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Mar 2017 18:06:47 -0000
+X-List-Received-Date: Tue, 28 Mar 2017 18:10:57 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Fri, Mar 24, 2017 at 9:16 AM, Cody Piersall <cody@arrc.ou.edu> wrote:
-> do_install_append() removes a lot of useful functionality from the zsh shell.
+On Tue, Jul 26, 2016 at 9:31 AM, Burton, Ross <ross.burton@intel.com> wrote:
+> FWIW I started looking at packaging and writing a class for the Meson build
+> system (mesonbuild.com) last night.  It's not finished and needs quite a
+> lot of work, but if anyone has a need for Meson or just fancies finishing
+> it off as a project then I can share the recipes and braindump what's left
+> to do.
 
-What exactly is this "useful functionality" ?
 
-Maybe it could be put in a separate package.
-
-> If a user requires this limited shell, they can add it in a bbappend file.
-> ---
->  meta-oe/recipes-extended/zsh/zsh_5.0.5.bb | 4 ----
->  1 file changed, 4 deletions(-)
->
-> diff --git a/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb b/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
-> index 39b2d95..d5bb1b7 100644
-> --- a/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
-> +++ b/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
-> @@ -44,10 +44,6 @@ do_configure () {
->      oe_runconf
->  }
->
-> -do_install_append () {
-> -    rm -fr ${D}/usr/share
-> -}
-> -
->  pkg_postinst_${PN} () {
->      touch $D${sysconfdir}/shells
->      grep -q "bin/zsh" $D${sysconfdir}/shells || echo /bin/zsh >> $D${sysconfdir}/shells
-> --
-> 1.9.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+With the X system converting to meson, it looks like this is going to
+become rather important to have.
 
