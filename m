@@ -1,50 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 6431177B6E;
-	Wed, 29 Mar 2017 09:14:45 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id o81so3837421wmb.0;
-	Wed, 29 Mar 2017 02:14:47 -0700 (PDT)
+Received: from mail-wr0-f169.google.com (mail-wr0-f169.google.com
+	[209.85.128.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 681DA71A30
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Mar 2017 09:16:45 +0000 (UTC)
+Received: by mail-wr0-f169.google.com with SMTP id l43so6479113wre.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 29 Mar 2017 02:16:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=ltvUDJJKNtCaEJoq0TyufaJHVJ+TArUXiraiH9MRSbo=;
-	b=F4k4AmE38gnkWdfoOJaB9TVQ2uZuE7B/qkieFnGGCZccTSV5OnDEiU5cXN7ue8p9IA
-	FRYwEdQ+Rx60OVfCa2I0O2F1Q2KlfpiEuf57EbyfhVtvf4Y36+1hFYxbyWNjprinrdcS
-	rpoXkD2Xp0hS7uz3JNbKVfIvBTyYuwZ2Wyw7VzJG6Pqfea6KMx2VjPC4HkGKA+zWAPR9
-	9M8Os8CSraC6ZDLj65AhvWZnJjLet/bAot6urPO8oxpRw2qtOGcC1gb3gknTl30AEgLw
-	bRr6ciV8X4NSY3F6OwGLt+oKpjNMJAHnBLS9efx6cSUAr5edvHtL8ZJGtyTddGQwskmr
-	pNDA==
+	h=from:to:cc:subject:date:message-id;
+	bh=Mq9a3PmvGwIQHTn6yMqzDSDN+fT+IVk1RGBNcE6Oyjw=;
+	b=t1D0HFgyJmXCjcOyozKJuQB6nmhhVZBSUVjxhLlASe8znX+PvgiwACcvp3D/Qr+zDf
+	oXMoMyIgK5pSCl/4c+/qaSInsuQmyeMdylNu8q2vA9L63uoqVaVt129qxuE38GBpEmWW
+	I4PSiWEOZojLeN4ubDS9XO59LWaDGd73xwmOnKr1gsWWUlBepmVWjmErxP4oLU4f3Let
+	eciW0WNsUsKgq+8tXDh91xAw8Z4kTP/tIJ6k7XFT1ceQTcwPoEo0jyVi99ViDP+bt93z
+	DvEEqxQpaIdLgKlvJ64D8li35UmZqUJTM/s34khlyI3OStZIA4xO9xAJ7jSuEC+z8/KK
+	RQHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=ltvUDJJKNtCaEJoq0TyufaJHVJ+TArUXiraiH9MRSbo=;
-	b=NOU/yai4ZPN3gSkYBNI6aPnPhvxJb0b76+HP0LFhABoSWY5Q4JjYNigrRcz2JIDalS
-	l4L21h0rxHilzP+wAQB4k4/ZbUvjbBwBRaT8Qfi2R47n++ZIdQik7GPvUYaq087CvF+S
-	40sO82PjiHIkRwZlDuAgt1TPYV8+563GEba+fGAvmcee07q6+b/L8k2B9cOUt+HKOsl3
-	M5nTGNJS1ogAf+eXxrwWSDWUvm3KrCJSlY6i3kuP4MrErLyUkfty2B61FESg7sgwcTsd
-	5o4fNYmxhZfrCHVrtDHDqIu+kVQaAotcWpP7jTpQXS1pXatSl+MDp/pbT8KdM81RYqMD
-	PxWA==
-X-Gm-Message-State: AFeK/H1TTv7+lZS7GQfQXFvurWGmObWtKRf42ZTXbGdY8inN7EysqSnowxyqXbJaCsAoAQ==
-X-Received: by 10.28.174.203 with SMTP id x194mr304688wme.85.1490778886818;
-	Wed, 29 Mar 2017 02:14:46 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Mq9a3PmvGwIQHTn6yMqzDSDN+fT+IVk1RGBNcE6Oyjw=;
+	b=ftLpITL3KOVInIF+ESZwOR0M5Fdvl9H4D/hQjHydvtr9OnbSeeWgH3MWW0fgyOtoKo
+	V9UtwAPp6cXGwnDAU5DhaIliaJo/8qZXQUJYvgMtWoNJyyhFHoJTZdEDGfG+njYVmXEN
+	m5KdwkMKDmXxeTLIAYTj/1eyUFR5e/8LQ2y9TdHqipVXwfYOP0H7gMbajAwzlrTvjhui
+	qj/GXTzEf+7UdNzh0WcXRVmjMec3baR7P1MOT7ezebsxw+K4ABuJ1LN7WfpbO1ZEvr0q
+	FPGGGwSUFX5qe91/s4BYRdjkhdJONEw/UcRUBIC4VBI1pmFNhuf+tPE6Gp6YJtLpyNxu
+	xUvg==
+X-Gm-Message-State: AFeK/H1Mc3sMKMKnff8ELJRTUphmdXsdFUUHlndWqw7r9tIQv1g1czltPpIiLIuWBU0uOQ==
+X-Received: by 10.223.172.21 with SMTP id v21mr32015712wrc.100.1490779006438; 
+	Wed, 29 Mar 2017 02:16:46 -0700 (PDT)
 Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	n80sm8537729wrb.24.2017.03.29.02.14.45
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 29 Mar 2017 02:14:45 -0700 (PDT)
+	k128sm7294948wmf.16.2017.03.29.02.16.45
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 29 Mar 2017 02:16:45 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 29 Mar 2017 11:14:44 +0200
-To: Patrick Ohly <patrick.ohly@intel.com>
-Message-ID: <20170329091444.GB3298@jama>
-References: <20170329072316.GA3298@jama> <1490776523.6396.407.camel@intel.com>
-MIME-Version: 1.0
-In-Reply-To: <1490776523.6396.407.camel@intel.com>
-User-Agent: Mutt/1.8.0 (2017-02-23)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-03-27
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 29 Mar 2017 11:16:35 +0200
+Message-Id: <20170329091643.32180-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.12.2
+Subject: [PATCH][meta-oe 1/9] hwdata: use github instead of fedorahosted.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,79 +52,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Mar 2017 09:14:47 -0000
-X-Groupsio-MsgNum: 65948
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="i0/AhcQY5QxfSsSZ"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 29 Mar 2017 09:16:46 -0000
 
---i0/AhcQY5QxfSsSZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+* fedorahosted is retired
+  https://fedoraproject.org/wiki/Infrastructure/Fedorahosted-retirement
 
-On Wed, Mar 29, 2017 at 10:35:23AM +0200, Patrick Ohly wrote:
-> On Wed, 2017-03-29 at 09:23 +0200, Martin Jansa wrote:
-> > INFO: jenkins-job.sh-1.8.19 Complete log available at http://logs.nslu2=
--linux.org/buildlogs/oe/world/pyro/log.report.20170328_014155.log
->=20
-> That used OE-core 552bd78, if I read this right:
->=20
->         =3D=3D Tested changes (not included in master yet) - openembedded=
--core =3D=3D
->         latest upstream commit:=20
->         552bd78 wic: use kernel_dir to find systemd-efi bootloader
->=20
-> >     * openembedded-core/meta/recipes-core/ovmf/ovmf_git.bb:do_compile
->=20
-> http://errors.yoctoproject.org/Errors/Details/135202/
->=20
-> "gcc-ar: not found" - that should have been fixed by OE-core 23a12d87a6
-> "fix toolchain selection", which is included in OE-core 552bd78 and thus
-> should have been included in the build.
->=20
-> However, the error above was "Submitted on: 11/03/17 10:13", which was a
-> while ago and in particular before that fix.
->=20
-> Did ovmf really fail in the latest world build?
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../recipes-support/hwdata/{hwdata_0.291.bb => hwdata_git.bb}  | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-support/hwdata/{hwdata_0.291.bb => hwdata_git.bb} (57%)
 
-The report shows:
-http://errors.yoctoproject.org/Errors/Build/34933/
-which leads to:
-
-http://errors.yoctoproject.org/Errors/Details/138261/
-Submitted on: 27/03/17 05:31
-
-So yes it failed again, but this time with different error:
-TOPDIR/tmp-glibc/work/i586-oe-linux/ovmf/git-r0/recipe-sysroot-native/usr/b=
-in/i586-oe-linux/../../libexec/i586-oe-linux/gcc/i586-oe-linux/6.3.0/ld:
-internal error in do_layout, at ../../gold/object.cc:1821
+diff --git a/meta-oe/recipes-support/hwdata/hwdata_0.291.bb b/meta-oe/recipes-support/hwdata/hwdata_git.bb
+similarity index 57%
+rename from meta-oe/recipes-support/hwdata/hwdata_0.291.bb
+rename to meta-oe/recipes-support/hwdata/hwdata_git.bb
+index f00f73b91..50d35c682 100644
+--- a/meta-oe/recipes-support/hwdata/hwdata_0.291.bb
++++ b/meta-oe/recipes-support/hwdata/hwdata_git.bb
+@@ -1,13 +1,15 @@
+ DESCRIPTION = "Hardware identification and configuration data"
+-HOMEPAGE = "http://git.fedorahosted.org/git/hwdata.git"
++HOMEPAGE = "https://github.com/vcrhonek/hwdata"
+ SECTION = "System/Base"
+ 
+ LICENSE = "GPL-2.0+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1556547711e8246992b999edd9445a57"
+-SRC_URI = "https://git.fedorahosted.org/cgit/${BPN}.git/snapshot/${BP}.tar.gz"
+ 
+-SRC_URI[md5sum] = "90ffce584bbcb1a5e77eac8503949f71"
+-SRC_URI[sha256sum] = "e1007a96645cb3390aa9c0ed3f090a69d2302ce4d801914b6af1ab4ec85ede4e"
++PV = "0.291+git${SRCPV}"
++SRCREV = "4bfbdcf5913d6dd53336d31b8035708075e6fdfa"
++SRC_URI = "git://github.com/vcrhonek/${BPN}.git"
++
++S = "${WORKDIR}/git"
+ 
+ do_configure() {
+     ${S}/configure --datadir=${datadir} --libdir=${libdir}
+-- 
+2.12.2
 
 
->=20
-> --=20
-> Best Regards, Patrick Ohly
->=20
-> The content of this message is my personal opinion only and although
-> I am an employee of Intel, the statements I make here in no way
-> represent Intel's position on the issue, nor am I authorized to speak
-> on behalf of Intel on this matter.
->=20
->=20
->=20
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---i0/AhcQY5QxfSsSZ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWNt7AwAKCRA3VSO3ZXaA
-HI9eAJ9xiveMGZGUIPYH8hNMF0gk+/YjQQCgrnPPp/058SBXoqZwKazmfoCThvo=
-=qK0p
------END PGP SIGNATURE-----
-
---i0/AhcQY5QxfSsSZ--
