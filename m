@@ -1,55 +1,45 @@
-Return-Path: <patrick.ohly@intel.com>
-Received: from mail-it0-f43.google.com (mail-it0-f43.google.com
-	[209.85.214.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 82F5577BF3
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 0050877BD5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Mar 2017 09:38:41 +0000 (UTC)
-Received: by mail-it0-f43.google.com with SMTP id e75so86282508itd.1
+	Wed, 29 Mar 2017 09:59:01 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id u18so1426361wrc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Mar 2017 02:38:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=message-id:subject:from:to:cc:date:in-reply-to:references
-	:organization:mime-version:content-transfer-encoding;
-	bh=yFeCwD9Vfbwlu+2Uzlhm7FHxelUi1zFycCklnqXax78=;
-	b=qQcNS76EovLl2ePdu5KypTd/Z+LTmw+tCLOfoq39Fcpl1ckNNPsl0a1eyKV6gkYX15
-	b4r5yD+B1rM6KVpHIkxFxtrhinCLDrg6y1sDpv7xFpD9gMaZ4d8qkO0wy0anBR9ZwwxR
-	NQLeuSKH9xGSxgtUC4YvJaa/4ZybQL6t4AZvLgTHJGrHpGu/d8Zxih9GdumC7QRDlVOP
-	anfv0ewoLebjmZ1c4jE/fmJ2T5bZSayQGYeRU0wB021uyHxgROHlkLDiYOUzXUifoEdy
-	locmWs+y7p0pt2R34Sqzi/66DDbqCZ+5rQDT4M7oGVVVY3tt05XsMv2DgJyBQQEwGrmF
-	n5ew==
+	Wed, 29 Mar 2017 02:59:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=8AwZZXn5YCUi3y40L74DRg8vwKtHsKjXxYjymIZvKMw=;
+	b=W92y8/MF6T8+c55tnpZKqBAoDwgPD8k4N7H5m8Tw+X91CGSDLN/wbN5UaC14e3mtgL
+	AYN4Pu38TFblnaZqq4znBn9J/+XQ6eR34wHqy1wZbGlfpQ0sCZd/ZfPny+WBfHcZF8yE
+	hoT0zv1xgafCxbpw0HXk0sziOkCzzvkJFLHTgiTKfpMlqFnzrcnDswg1eplz6lmydhpq
+	TQZ9QZ9zkZ4tO1ImjfE3GtaIZQBrykgY+ftkGkqnfk06mZrsk5zgiSwjAMEw1cRW7voZ
+	j90WBVxUMY/mK9HwLGCBt6/2LDB9itIL4jlDmZHFiDx2BLA22QbeLnpj9Ws2sBMjhpcW
+	KK2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
-	:references:organization:mime-version:content-transfer-encoding;
-	bh=yFeCwD9Vfbwlu+2Uzlhm7FHxelUi1zFycCklnqXax78=;
-	b=VcYIjmM5p761DPK1wEL+MCsOzBrU9I83jwsq/VaJ+TmE8upksFdq8nP1CdMR635/xM
-	Dx24idUxurtvNbszrbUMubzy1Jb+wxh/JoZ1luT3ZuF0zMk4VPJrqw9x+O8+YgHhs88z
-	S3lNIGUmREUAReMiAvMlhWIGzEFSPj9iDxJzpoTC8pQPqczK0uim95p5qXTLFjiIxIe8
-	jJdwzwyhmjxMRHxLGtb5k0nxnPsPsigBjEiLePn5tM1LEiTSj1ocqb4HIyz+wTgbqby8
-	YVzEPAw+vpOamzTZRUTuxFkSp/lAidaZ+WHlICgG162y75V3uFuXEA9wKaJ3jj30lPX5
-	9a9w==
-X-Gm-Message-State: AFeK/H2utBeH86urMaI5EiYtSdXs2vJIXOIM9JlJj+gnsAHvXYAcC93Eauo3pd/pJEOYGUmi
-X-Received: by 10.36.33.68 with SMTP id e65mr258313ita.21.1490780322220;
-	Wed, 29 Mar 2017 02:38:42 -0700 (PDT)
-Received: from pohly-mobl1 (p5DE8D6D7.dip0.t-ipconnect.de. [93.232.214.215])
-	by smtp.gmail.com with ESMTPSA id 71sm3468546iof.29.2017.03.29.02.38.40
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=8AwZZXn5YCUi3y40L74DRg8vwKtHsKjXxYjymIZvKMw=;
+	b=q5Y5EcRCHhrPypiF9iV0sZrszvus7l9z27hzD9+k+s65iOdwGLLqoxT3i36JjNJfxi
+	vcI6l7XnW0HkA2earwm68apuPCrgl7Aub34clEDUoz3IrDi5li9N27pv29OjYiDeQjvB
+	LqpNaFNX9vS1TchbujfbprONAiXQiUXtOUO8mYZ8ndR6fIOQvGA62xRHYrjTszKpVS+s
+	h12tTImPlrgXOGrU1xWoZhf6MEZlVrx9wUq/5UV8lPGc7J0PD7tARfbQWIXLoBXqkt7Y
+	S+UAuatUkndQW8ePMKZOW80lI1lsPLoObPfCkSaVQHb9DEo0CG2INFyuQwiqxmU3zcNu
+	aeyg==
+X-Gm-Message-State: AFeK/H339V7NeWPRqV6yQFDseIg7xTzS0nPFoQQgt3T0IfBH6eg1Fpho3eNmmKWIc3Xnsw==
+X-Received: by 10.223.164.2 with SMTP id d2mr7044397wra.47.1490781542623;
+	Wed, 29 Mar 2017 02:59:02 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	k139sm7474049wmg.11.2017.03.29.02.59.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 29 Mar 2017 02:38:41 -0700 (PDT)
-Message-ID: <1490780318.6396.410.camel@intel.com>
-From: Patrick Ohly <patrick.ohly@intel.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 29 Mar 2017 11:38:38 +0200
-In-Reply-To: <20170329091444.GB3298@jama>
-References: <20170329072316.GA3298@jama>
-	<1490776523.6396.407.camel@intel.com> <20170329091444.GB3298@jama>
-Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
-X-Mailer: Evolution 3.12.9-1+b1 
-Mime-Version: 1.0
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-03-27
+	Wed, 29 Mar 2017 02:59:01 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 29 Mar 2017 11:58:55 +0200
+Message-Id: <20170329095855.9504-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.12.2
+Subject: [PATCH][meta-efl] meta-efl: blacklist efl-native and dependent recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,59 +52,180 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Mar 2017 09:38:41 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 29 Mar 2017 09:59:02 -0000
 
-On Wed, 2017-03-29 at 11:14 +0200, Martin Jansa wrote:
-> On Wed, Mar 29, 2017 at 10:35:23AM +0200, Patrick Ohly wrote:
-> > On Wed, 2017-03-29 at 09:23 +0200, Martin Jansa wrote:
-> > > INFO: jenkins-job.sh-1.8.19 Complete log available at http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.report.20170328_014155.log
-> > 
-> > That used OE-core 552bd78, if I read this right:
-> > 
-> >         == Tested changes (not included in master yet) - openembedded-core ==
-> >         latest upstream commit: 
-> >         552bd78 wic: use kernel_dir to find systemd-efi bootloader
-> > 
-> > >     * openembedded-core/meta/recipes-core/ovmf/ovmf_git.bb:do_compile
-> > 
-> > http://errors.yoctoproject.org/Errors/Details/135202/
-> > 
-> > "gcc-ar: not found" - that should have been fixed by OE-core 23a12d87a6
-> > "fix toolchain selection", which is included in OE-core 552bd78 and thus
-> > should have been included in the build.
-> > 
-> > However, the error above was "Submitted on: 11/03/17 10:13", which was a
-> > while ago and in particular before that fix.
-> > 
-> > Did ovmf really fail in the latest world build?
-> 
-> The report shows:
-> http://errors.yoctoproject.org/Errors/Build/34933/
-> which leads to:
-> 
-> http://errors.yoctoproject.org/Errors/Details/138261/
-> Submitted on: 27/03/17 05:31
+* I no longer use efl and don't plan to upgrade it to newer version
+* someone else should step-up and start maintaining meta-efl
 
-Got it. I followed the wrong link at some point.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-efl/recipes-efl/e17/exquisite-theme-illume.bb   |  6 ++++++
+ meta-efl/recipes-efl/efl/edbus_1.7.9.bb              |  8 ++++++++
+ meta-efl/recipes-efl/efl/efl.inc                     |  3 +++
+ .../recipes-efl/efl/elementary-theme-efenniht_svn.bb |  6 ++++++
+ .../efl/emotion-generic-players_1.15.0.bb            |  6 ++++++
+ meta-efl/recipes-efl/efl/epdf_svn.bb                 |  8 ++++++++
+ .../recipes-efl/efl/evas-generic-loaders_1.15.0.bb   |  6 ++++++
+ meta-efl/recipes-efl/efl/expedite_1.7.9.bb           | 20 ++++++++++++++++++++
+ meta-efl/recipes-efl/efl/expedite_git.bb             | 20 ++++++++++++++++++++
+ 9 files changed, 83 insertions(+)
 
-> So yes it failed again, but this time with different error:
-> TOPDIR/tmp-glibc/work/i586-oe-linux/ovmf/git-r0/recipe-sysroot-native/usr/bin/i586-oe-linux/../../libexec/i586-oe-linux/gcc/i586-oe-linux/6.3.0/ld:
-> internal error in do_layout, at ../../gold/object.cc:1821
-
-Hmm, internal error in gold. Not sure what to do about that :-/
-
-Can individual recipes choose to be built using the normal ld?
-
+diff --git a/meta-efl/recipes-efl/e17/exquisite-theme-illume.bb b/meta-efl/recipes-efl/e17/exquisite-theme-illume.bb
+index aad064647..f9eb4ad68 100644
+--- a/meta-efl/recipes-efl/e17/exquisite-theme-illume.bb
++++ b/meta-efl/recipes-efl/e17/exquisite-theme-illume.bb
+@@ -33,3 +33,9 @@ do_install() {
+ 
+ CONFFILES_${PN} = "${sysconfdir}/exquisite/config-illume"
+ FILES_${PN} = "${sysconfdir}/exquisite ${datadir}/exquisite/data/themes"
++
++PNBLACKLIST[exquisite-theme-illume] ?= "Depends on blacklisted edje-native"
++
++PNBLACKLIST[exquisite-theme-illume] ?= "Runtime depends on blacklisted exquisite-theme-illume"
++
++PNBLACKLIST[exquisite-theme-illume] ?= "Runtime depends on blacklisted exquisite-theme-illume-dev"
+diff --git a/meta-efl/recipes-efl/efl/edbus_1.7.9.bb b/meta-efl/recipes-efl/efl/edbus_1.7.9.bb
+index 64e77e61a..1fb716449 100644
+--- a/meta-efl/recipes-efl/efl/edbus_1.7.9.bb
++++ b/meta-efl/recipes-efl/efl/edbus_1.7.9.bb
+@@ -6,3 +6,11 @@ SRC_URI = "\
+ 
+ SRC_URI[md5sum] = "8f72da14e5664aad8c45eeeca0e3ff5f"
+ SRC_URI[sha256sum] = "c328c4cf1424629cb67c83689ccc1f95967abcb4c03dffd437e93b799ff151c1"
++
++PNBLACKLIST[edbus] ?= "Depends on blacklisted ecore"
++
++PNBLACKLIST[edbus] ?= "Depends on blacklisted eina"
++
++PNBLACKLIST[edbus] ?= "Runtime depends on blacklisted edbus"
++
++PNBLACKLIST[edbus] ?= "Runtime depends on blacklisted edbus-dev"
+diff --git a/meta-efl/recipes-efl/efl/efl.inc b/meta-efl/recipes-efl/efl/efl.inc
+index 59ae8d75a..48fd45888 100644
+--- a/meta-efl/recipes-efl/efl/efl.inc
++++ b/meta-efl/recipes-efl/efl/efl.inc
+@@ -285,3 +285,6 @@ FILES_${PN}-dev += " \
+     ${datadir}/eo/gdb \
+     ${bindir}/eldbus-codegen \
+ "
++
++PNBLACKLIST[efl] ?= "Depends on broken efl-native"
++PNBLACKLIST[efl-native] ?= "Broken: fails to build with http://errors.yoctoproject.org/Errors/Details/138240/"
+diff --git a/meta-efl/recipes-efl/efl/elementary-theme-efenniht_svn.bb b/meta-efl/recipes-efl/efl/elementary-theme-efenniht_svn.bb
+index 494e743f5..36ba9b43b 100644
+--- a/meta-efl/recipes-efl/efl/elementary-theme-efenniht_svn.bb
++++ b/meta-efl/recipes-efl/efl/elementary-theme-efenniht_svn.bb
+@@ -36,3 +36,9 @@ do_install() {
+ }
+ 
+ FILES_${PN} = "${datadir}/elementary/themes/"
++
++PNBLACKLIST[elementary-theme-efenniht] ?= "Depends on blacklisted edje-native"
++
++PNBLACKLIST[elementary-theme-efenniht] ?= "Runtime depends on blacklisted elementary-theme-efenniht"
++
++PNBLACKLIST[elementary-theme-efenniht] ?= "Runtime depends on blacklisted elementary-theme-efenniht-dev"
+diff --git a/meta-efl/recipes-efl/efl/emotion-generic-players_1.15.0.bb b/meta-efl/recipes-efl/efl/emotion-generic-players_1.15.0.bb
+index 1a184bd04..10faf0789 100644
+--- a/meta-efl/recipes-efl/efl/emotion-generic-players_1.15.0.bb
++++ b/meta-efl/recipes-efl/efl/emotion-generic-players_1.15.0.bb
+@@ -6,3 +6,9 @@ SRC_URI = "\
+ 
+ SRC_URI[md5sum] = "68627c1aabf5b7fe084299adcc0b73c1"
+ SRC_URI[sha256sum] = "10bad633480a691585b0ba470c573b14da0a010008d9d59d0792cea8c621d423"
++
++PNBLACKLIST[emotion-generic-players] ?= "Depends on blacklisted emotion"
++
++PNBLACKLIST[emotion-generic-players] ?= "Runtime depends on blacklisted emotion-generic-players"
++
++PNBLACKLIST[emotion-generic-players] ?= "Runtime depends on blacklisted emotion-generic-players-dev"
+diff --git a/meta-efl/recipes-efl/efl/epdf_svn.bb b/meta-efl/recipes-efl/efl/epdf_svn.bb
+index e32a5fdb0..b91bd5b3b 100644
+--- a/meta-efl/recipes-efl/efl/epdf_svn.bb
++++ b/meta-efl/recipes-efl/efl/epdf_svn.bb
+@@ -25,3 +25,11 @@ EXTRA_OECONF = "\
+ 
+ # Some upgrade path tweaking, as in evas
+ AUTO_LIBNAME_PKGS = ""
++
++PNBLACKLIST[epdf] ?= "Depends on blacklisted ecore"
++
++PNBLACKLIST[epdf] ?= "Depends on blacklisted evas"
++
++PNBLACKLIST[epdf] ?= "Runtime depends on blacklisted epdf-dev"
++
++PNBLACKLIST[epdf] ?= "Runtime depends on blacklisted epdf"
+diff --git a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.15.0.bb b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.15.0.bb
+index 911ce8ca4..1e2ec7fdb 100644
+--- a/meta-efl/recipes-efl/efl/evas-generic-loaders_1.15.0.bb
++++ b/meta-efl/recipes-efl/efl/evas-generic-loaders_1.15.0.bb
+@@ -6,3 +6,9 @@ SRC_URI = "\
+ 
+ SRC_URI[md5sum] = "3ca8443b8cbf177845595c5e02fbc49c"
+ SRC_URI[sha256sum] = "caa22c9ba1ae9629c16a3fe809ea927f60b8f0d80cdb7f145159b997b9ae2bcd"
++
++PNBLACKLIST[evas-generic-loaders] ?= "Depends on blacklisted eina"
++
++PNBLACKLIST[evas-generic-loaders] ?= "Runtime depends on blacklisted evas-generic-loaders"
++
++PNBLACKLIST[evas-generic-loaders] ?= "Runtime depends on blacklisted evas-generic-loaders-dev"
+diff --git a/meta-efl/recipes-efl/efl/expedite_1.7.9.bb b/meta-efl/recipes-efl/efl/expedite_1.7.9.bb
+index cee2d607b..d5594f27c 100644
+--- a/meta-efl/recipes-efl/efl/expedite_1.7.9.bb
++++ b/meta-efl/recipes-efl/efl/expedite_1.7.9.bb
+@@ -6,3 +6,23 @@ SRC_URI = "\
+ 
+ SRC_URI[md5sum] = "954fe8e40fec6a561190ff0fb75b6bdd"
+ SRC_URI[sha256sum] = "a05be096c911e0d66d4bdc497ebb935a04ad23696de9084aed9959b5172a593e"
++
++PNBLACKLIST[expedite] ?= "Depends on blacklisted eet"
++
++PNBLACKLIST[expedite] ?= "Depends on blacklisted evas"
++
++PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-loader-png"
++
++PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted expedite"
++
++PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted expedite-themes"
++
++PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-engine-gl-x11"
++
++PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-engine-software-generic"
++
++PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted expedite-dev"
++
++PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-engine-software-x11"
++
++PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-engine-fb"
+diff --git a/meta-efl/recipes-efl/efl/expedite_git.bb b/meta-efl/recipes-efl/efl/expedite_git.bb
+index 5b44cf039..b8b3b4b16 100644
+--- a/meta-efl/recipes-efl/efl/expedite_git.bb
++++ b/meta-efl/recipes-efl/efl/expedite_git.bb
+@@ -9,3 +9,23 @@ SRC_URI = "\
+     git://git.enlightenment.org/tools/${BPN}.git \
+ "
+ S = "${WORKDIR}/${SRCNAME}"
++
++PNBLACKLIST[expedite] ?= "Depends on blacklisted eet"
++
++PNBLACKLIST[expedite] ?= "Depends on blacklisted evas"
++
++PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-loader-png"
++
++PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted expedite"
++
++PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-engine-software-generic"
++
++PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-engine-fb"
++
++PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-engine-software-x11"
++
++PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted evas-engine-gl-x11"
++
++PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted expedite-dev"
++
++PNBLACKLIST[expedite] ?= "Runtime depends on blacklisted expedite-themes"
 -- 
-Best Regards, Patrick Ohly
-
-The content of this message is my personal opinion only and although
-I am an employee of Intel, the statements I make here in no way
-represent Intel's position on the issue, nor am I authorized to speak
-on behalf of Intel on this matter.
-
-
+2.12.2
 
 
